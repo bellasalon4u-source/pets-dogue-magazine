@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DOGUE Photos</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#050505;
+font-family:Georgia,serif;
+color:white;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(0,0,0,.92);
+backdrop-filter:blur(10px);
+padding:15px;
+border-bottom:1px solid rgba(216,179,90,.3);
+}
+
+.logo{
+text-align:center;
+font-size:38px;
+font-weight:bold;
+letter-spacing:3px;
+color:#d8b35a;
+}
+
+.logo small{
+display:block;
+font-size:16px;
+font-style:italic;
+color:white;
+font-weight:normal;
+}
+
+.languages{
+text-align:center;
+margin-top:8px;
+font-size:12px;
+letter-spacing:2px;
+color:#f4dfb0;
+}
+
+.hero{
+padding:30px 20px;
+text-align:center;
+background:linear-gradient(to bottom,#111,#050505);
+}
+
+.hero h1{
+font-size:42px;
+color:#d8b35a;
+}
+
+.hero p{
+margin-top:10px;
+color:#ddd;
+}
+
+.gallery{
+padding:15px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.photo{
+border-radius:22px;
+overflow:hidden;
+cursor:pointer;
+position:relative;
+}
+
+.photo img{
+width:100%;
+height:260px;
+object-fit:cover;
+display:block;
+transition:.4s;
+}
+
+.photo:active img{
+transform:scale(.96);
+}
+
+.photo-title{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+padding:12px;
+background:linear-gradient(to top,rgba(0,0,0,.9),transparent);
+font-size:14px;
+}
+
+.fullscreen{
+display:none;
+position:fixed;
+inset:0;
+background:black;
+z-index:9999;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+.fullscreen img{
+max-width:95%;
+max-height:80vh;
+border-radius:20px;
+}
+
+.close{
+margin-top:20px;
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:#d8b35a;
+font-weight:bold;
+font-size:16px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.action{
+padding:10px 18px;
+border-radius:25px;
+background:#222;
+border:1px solid #444;
+}
+
+.back{
+display:block;
+text-align:center;
+padding:30px;
+color:#d8b35a;
+text-decoration:none;
+letter-spacing:2px;
+}
+
+@media(max-width:700px){
+
+.gallery{
+grid-template-columns:1fr 1fr;
+}
+
+.photo img{
+height:220px;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<small>pets &</small>
+DOGUE
+</div>
+
+<div class="languages">
+EN | RU | UA | CZ | PL | ES | IT | DE | AR
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>PHOTO STORIES</h1>
+
+<p>
+The most beautiful animals from around the world.
+</p>
+
+</section>
+
+<section class="gallery">
+
+<div class="photo" onclick="openPhoto(this)">
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80">
+<div class="photo-title">Luxury Dog Collection</div>
+</div>
+
+<div class="photo" onclick="openPhoto(this)">
+<img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=900&q=80">
+<div class="photo-title">Cat Fashion Story</div>
+</div>
+
+<div class="photo" onclick="openPhoto(this)">
+<img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=900&q=80">
+<div class="photo-title">Model Of The Month</div>
+</div>
+
+<div class="photo" onclick="openPhoto(this)">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80">
+<div class="photo-title">Summer Luxury Pets</div>
+</div>
+
+<div class="photo" onclick="openPhoto(this)">
+<img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=900&q=80">
+<div class="photo-title">Travel With Pets</div>
+</div>
+
+<div class="photo" onclick="openPhoto(this)">
+<img src="https://images.unsplash.com/photo-1444212477490-ca407925329e?auto=format&fit=crop&w=900&q=80">
+<div class="photo-title">Bird Collection</div>
+</div>
+
+</section>
+
+<div class="fullscreen" id="viewer">
+
+<img id="viewerImg">
+
+<div class="actions">
+
+<div class="action">❤️ Like</div>
+
+<div class="action">🔗 Share</div>
+
+<div class="action">💾 Save</div>
+
+</div>
+
+<button class="close" onclick="closePhoto()">
+✕ Close
+</button>
+
+</div>
+
+<a class="back" href="magazine.html">
+← BACK TO MAGAZINE
+</a>
+
+<script>
+
+function openPhoto(el){
+
+let img = el.querySelector("img").src;
+
+document.getElementById("viewerImg").src = img;
+
+document.getElementById("viewer").style.display="flex";
+
+}
+
+function closePhoto(){
+
+document.getElementById("viewer").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
