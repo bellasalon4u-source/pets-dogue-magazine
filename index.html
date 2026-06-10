@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pets & DOGUE</title>
+<title>PUPARAZZI Magazine</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -15,225 +14,209 @@ box-sizing:border-box;
 }
 
 body{
-background:#f8f6f3;
-font-family:Georgia, serif;
-color:#111;
+min-height:100vh;
+background:#080808;
+font-family:Georgia,serif;
+color:white;
+overflow-x:hidden;
 }
 
-header{
-background:white;
-padding:20px;
-border-bottom:1px solid #ddd;
-position:sticky;
-top:0;
+.cover{
+min-height:100vh;
+position:relative;
+padding:18px;
+background:
+linear-gradient(to bottom,rgba(0,0,0,.35),rgba(0,0,0,.8)),
+url("https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1400&q=80");
+background-size:cover;
+background-position:center;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.topline{
+text-align:center;
+font-size:13px;
+letter-spacing:3px;
+text-transform:uppercase;
+color:#f4d6df;
 }
 
 .logo{
-font-size:44px;
+text-align:center;
+font-size:12vw;
+line-height:.9;
 font-weight:bold;
-text-align:center;
-letter-spacing:2px;
+letter-spacing:4px;
+color:#ff7fb0;
+text-shadow:0 0 25px rgba(255,127,176,.45);
 }
 
-.languages{
-text-align:center;
-margin-top:10px;
-font-size:14px;
-}
-
-.menu{
-margin-top:15px;
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:15px;
-font-size:14px;
-font-weight:bold;
-}
-
-.hero{
-padding:80px 20px;
-text-align:center;
-background:white;
-}
-
-.hero h1{
-font-size:52px;
-margin-bottom:15px;
-}
-
-.hero p{
-font-size:20px;
-max-width:800px;
-margin:auto;
-}
-
-.button{
+.logo span{
 display:inline-block;
-margin-top:30px;
-padding:15px 35px;
-background:black;
-color:white;
-text-decoration:none;
-border-radius:40px;
-font-weight:bold;
+animation:wave 2.2s infinite;
 }
 
-.section-title{
-text-align:center;
-font-size:36px;
-margin-top:70px;
-margin-bottom:30px;
+.logo span:nth-child(1){animation-delay:0s;}
+.logo span:nth-child(2){animation-delay:.1s;}
+.logo span:nth-child(3){animation-delay:.2s;}
+.logo span:nth-child(4){animation-delay:.3s;}
+.logo span:nth-child(5){animation-delay:.4s;}
+.logo span:nth-child(6){animation-delay:.5s;}
+.logo span:nth-child(7){animation-delay:.6s;}
+.logo span:nth-child(8){animation-delay:.7s;}
+.logo span:nth-child(9){animation-delay:.8s;}
+
+@keyframes wave{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.14);}
 }
 
-.grid{
+.cover-lines{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:1fr 1fr;
 gap:20px;
-padding:0 20px 60px;
-max-width:1400px;
-margin:auto;
+margin-top:40px;
 }
 
-.card{
-background:white;
-border-radius:20px;
-padding:25px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
+.story{
+font-size:26px;
+line-height:1.1;
+text-transform:uppercase;
+opacity:0;
+animation:fadeUp 1s forwards;
 }
 
-.card h3{
+.story small{
+display:block;
+font-size:13px;
+margin-top:8px;
+color:#ff9ac0;
+letter-spacing:1px;
+}
+
+.story:nth-child(1){animation-delay:.4s;}
+.story:nth-child(2){animation-delay:.8s;}
+.story:nth-child(3){animation-delay:1.2s;}
+.story:nth-child(4){animation-delay:1.6s;}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.bottom{
+text-align:center;
+padding-bottom:20px;
+}
+
+.cover-star{
+font-size:56px;
 margin-bottom:10px;
 }
 
-.card p{
-font-size:15px;
-line-height:1.5;
-}
-
-.featured{
-background:black;
+.name{
+font-size:50px;
 color:white;
-padding:70px 20px;
-text-align:center;
+text-transform:uppercase;
 }
 
-.featured h2{
+.subtitle{
+font-size:18px;
+color:#ffd6e4;
+margin-top:5px;
+}
+
+.open-btn{
+display:inline-block;
+margin-top:22px;
+padding:16px 34px;
+background:#ff7fb0;
+color:black;
+text-decoration:none;
+border-radius:40px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.issue{
+position:absolute;
+right:18px;
+top:90px;
+font-size:14px;
+letter-spacing:2px;
+color:#f5d5a7;
+}
+
+@media(max-width:700px){
+.logo{
+font-size:16vw;
+}
+.cover-lines{
+grid-template-columns:1fr 1fr;
+}
+.story{
+font-size:20px;
+}
+.name{
 font-size:42px;
-margin-bottom:15px;
 }
-
-footer{
-background:white;
-padding:40px;
-text-align:center;
-border-top:1px solid #ddd;
 }
-
 </style>
 </head>
 
 <body>
 
-<header>
+<main class="cover">
 
-<div class="logo">
-Pets & DOGUE
+<div>
+<div class="topline">
+THE VOGUE OF PETS — ALL ANIMALS. ALL STYLES. ALL STARS.
 </div>
 
-<div class="languages">
-EN | RU | UA | CZ | PL | ES | IT | DE | AR
+<div class="issue">
+MAY 2024
 </div>
 
-<div class="menu">
-<span>FASHION</span>
-<span>HEALTH</span>
-<span>TRAVEL</span>
-<span>INTERIOR</span>
-<span>CHARITY</span>
-<span>SPONSORS</span>
-<span>MODELS</span>
-<span>ADS</span>
+<h1 class="logo">
+<span>P</span><span>U</span><span>P</span><span>A</span><span>R</span><span>A</span><span>Z</span><span>Z</span><span>I</span>
+</h1>
+
+<div class="cover-lines">
+<div class="story">
+Fashion Has Paws
+<small>The season’s most stylish pet looks</small>
 </div>
 
-</header>
+<div class="story">
+Stars Without Limits
+<small>Dogs, cats, rabbits, birds and beyond</small>
+</div>
 
-<section class="hero">
+<div class="story">
+Luxury Living
+<small>Hotels, jewelry, gourmet treats and travel</small>
+</div>
 
-<h1>The World's Luxury Pet Magazine</h1>
+<div class="story">
+Petarazzi
+<small>The best photos from our community</small>
+</div>
+</div>
+</div>
 
-<p>
-Fashion, luxury lifestyle, travel, health,
-charity and the world's most beautiful animal models.
-</p>
+<div class="bottom">
+<div class="cover-star">👑</div>
+<div class="name">MISO</div>
+<div class="subtitle">Britain’s most stylish Pomeranian</div>
 
-<a href="#" class="button">
-Read Latest Issue
+<a class="open-btn" href="magazine.html">
+OPEN MAGAZINE →
 </a>
-
-</section>
-
-<section class="featured">
-
-<h2>Model of the Month</h2>
-
-<p>
-The most stylish animal of the month will appear here with a cover story.
-</p>
-
-</section>
-
-<h2 class="section-title">Magazine Categories</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Fashion</h3>
-<p>Luxury clothing, accessories and pet style trends.</p>
 </div>
 
-<div class="card">
-<h3>Health</h3>
-<p>Veterinary advice, nutrition and wellbeing.</p>
-</div>
-
-<div class="card">
-<h3>Travel</h3>
-<p>Pet-friendly hotels, beaches and adventures.</p>
-</div>
-
-<div class="card">
-<h3>Interior</h3>
-<p>Luxury pet furniture and beautiful homes.</p>
-</div>
-
-<div class="card">
-<h3>Charity</h3>
-<p>Animal rescue stories and charity projects.</p>
-</div>
-
-<div class="card">
-<h3>Sponsors & Gifts</h3>
-<p>Competitions, prizes and sponsor giveaways.</p>
-</div>
-
-<div class="card">
-<h3>Model of the Week</h3>
-<p>Weekly featured animal model.</p>
-</div>
-
-<div class="card">
-<h3>Advertising</h3>
-<p>Promote brands, services and products.</p>
-</div>
-
-</div>
-
-<footer>
-
-© Pets & DOGUE Magazine
-
-</footer>
+</main>
 
 </body>
 </html>
