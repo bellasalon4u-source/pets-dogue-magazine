@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PETS & DOGUE Admin</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f7f3;color:#111}
+header{background:#111;color:white;padding:25px;text-align:center}
+header h1{font-family:Georgia,serif;color:#d6aa45;font-size:42px}
+main{max-width:1000px;margin:auto;padding:25px}
+.panel{background:white;border:2px solid #111;border-radius:25px;padding:25px;margin-bottom:25px}
+.panel h2{margin-bottom:15px}
+label{display:block;margin-top:15px;font-weight:bold}
+input,textarea{width:100%;padding:14px;margin-top:8px;border:1px solid #ccc;border-radius:12px;font-size:16px}
+textarea{min-height:100px}
+button{margin-top:20px;background:#111;color:white;border:none;padding:15px 25px;border-radius:999px;font-weight:bold;font-size:16px}
+.preview{margin-top:20px;padding:20px;background:#f1eadc;border-radius:18px}
+a{color:#d6aa45}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>PETS & DOGUE Admin</h1>
+<p>Manage covers, articles and advertisements</p>
+</header>
+
+<main>
+
+<div class="panel">
+<h2>📰 Current Issue</h2>
+
+<label>Issue Title</label>
+<input id="issueTitle" value="Issue 01 — Summer 2026">
+
+<label>Magazine Description</label>
+<textarea id="issueDesc">Welcome to the world's luxury magazine for pets.</textarea>
+
+<button onclick="saveIssue()">Save Issue</button>
+</div>
+
+<div class="panel">
+<h2>🖼 Cover Image</h2>
+
+<label>Cover Image Path</label>
+<input id="coverPath" value="images/cover-01.png">
+
+<p style="margin-top:10px;color:#666">
+Upload your cover into the images folder and write the path here.
+</p>
+
+<button onclick="saveCover()">Save Cover</button>
+</div>
+
+<div class="panel">
+<h2>✍️ Add Article</h2>
+
+<label>Article Title</label>
+<input id="articleTitle" placeholder="Miso — Model of the Month">
+
+<label>Article Text</label>
+<textarea id="articleText" placeholder="Write your article here..."></textarea>
+
+<button onclick="addArticle()">Add Article</button>
+
+<div class="preview" id="articlesList">
+No articles yet.
+</div>
+</div>
+
+<div class="panel">
+<h2>💎 Add Advertisement</h2>
+
+<label>Advertiser Name</label>
+<input id="adName" placeholder="Luxury Pet Boutique">
+
+<label>Advertisement Text</label>
+<textarea id="adText" placeholder="Write advertisement text..."></textarea>
+
+<button onclick="addAd()">Add Advertisement</button>
+
+<div class="preview" id="adsList">
+No advertisements yet.
+</div>
+</div>
+
+<div class="panel">
+<h2>🔗 Back To Magazine</h2>
+<p><a href="index.html">Open PETS & DOGUE homepage</a></p>
+</div>
+
+</main>
+
+<script>
+let articles = [];
+let ads = [];
+
+function saveIssue(){
+localStorage.setItem("issueTitle", document.getElementById("issueTitle").value);
+localStorage.setItem("issueDesc", document.getElementById("issueDesc").value);
+alert("Issue saved");
+}
+
+function saveCover(){
+localStorage.setItem("coverPath", document.getElementById("coverPath").value);
+alert("Cover saved");
+}
+
+function addArticle(){
+let title = document.getElementById("articleTitle").value;
+let text = document.getElementById("articleText").value;
+
+if(!title || !text){
+alert("Please add title and text");
+return;
+}
+
+articles.push({title,text});
+renderArticles();
+
+document.getElementById("articleTitle").value = "";
+document.getElementById("articleText").value = "";
+}
+
+function renderArticles(){
+let box = document.getElementById("articlesList");
+
+box.innerHTML = articles.map(item => `
+<div style="margin-bottom:15px">
+<h3>${item.title}</h3>
+<p>${item.text}</p>
+</div>
+`).join("");
+
+localStorage.setItem("articles", JSON.stringify(articles));
+}
+
+function addAd(){
+let name = document.getElementById("adName").value;
+let text = document.getElementById("adText").value;
+
+if(!name || !text){
+alert("Please add advertiser and text");
+return;
+}
+
+ads.push({name,text});
+renderAds();
+
+document.getElementById("adName").value = "";
+document.getElementById("adText").value = "";
+}
+
+function renderAds(){
+let box = document.getElementById("adsList");
+
+box.innerHTML = ads.map(item => `
+<div style="margin-bottom:15px">
+<h3>${item.name}</h3>
+<p>${item.text}</p>
+</div>
+`).join("");
+
+localStorage.setItem("ads", JSON.stringify(ads));
+}
+
+window.onload = function(){
+let savedArticles = localStorage.getItem("articles");
+let savedAds = localStorage.getItem("ads");
+
+if(savedArticles){
+articles = JSON.parse(savedArticles);
+renderArticles();
+}
+
+if(savedAds){
+ads = JSON.parse(savedAds);
+renderAds();
+}
+}
+</script>
+
+</body>
+</html>
