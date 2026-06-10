@@ -14,7 +14,6 @@ box-sizing:border-box;
 }
 
 body{
-min-height:100vh;
 background:#030303;
 font-family:Georgia,serif;
 color:white;
@@ -24,11 +23,11 @@ overflow-x:hidden;
 .cover{
 min-height:100vh;
 position:relative;
-padding:22px;
 overflow:hidden;
+padding:18px;
 background:
-linear-gradient(to bottom,rgba(0,0,0,.15),rgba(0,0,0,.92)),
-url("https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1600&q=80");
+linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.72)),
+url("https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1800&q=100");
 background-size:cover;
 background-position:center;
 display:flex;
@@ -36,244 +35,214 @@ flex-direction:column;
 justify-content:space-between;
 }
 
-.cover::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-radial-gradient(circle at 20% 25%,rgba(255,214,120,.35),transparent 18%),
-radial-gradient(circle at 80% 30%,rgba(255,130,180,.22),transparent 20%),
-radial-gradient(circle at 50% 75%,rgba(255,255,255,.13),transparent 25%);
-pointer-events:none;
-}
-
 .cover::after{
 content:"";
 position:absolute;
 inset:0;
-background-image:
-radial-gradient(circle,rgba(255,226,150,.9) 0 1px,transparent 2px),
-radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 2px);
-background-size:90px 90px,140px 140px;
-animation:dust 10s linear infinite;
-opacity:.35;
+background:linear-gradient(to top,rgba(0,0,0,.75),transparent 45%);
 pointer-events:none;
 }
 
-@keyframes dust{
-from{transform:translateY(0);}
-to{transform:translateY(-90px);}
+.issue{
+position:absolute;
+top:20px;
+right:18px;
+z-index:3;
+font-size:12px;
+letter-spacing:2px;
+color:#fff0bd;
+text-align:right;
+text-shadow:0 2px 8px black;
 }
 
 .brand{
 position:relative;
-z-index:2;
+z-index:3;
 text-align:center;
-padding-top:10px;
-animation:intro 1.2s ease forwards;
-}
-
-@keyframes intro{
-from{opacity:0;transform:translateY(-20px);}
-to{opacity:1;transform:translateY(0);}
+padding-top:20px;
 }
 
 .small-brand{
-font-size:28px;
+font-size:24px;
 font-style:italic;
-letter-spacing:1px;
-color:white;
 text-align:left;
 max-width:1100px;
-margin:auto;
+margin:0 auto -8px;
+color:white;
+text-shadow:0 2px 8px black;
 }
 
 .logo{
 position:relative;
 display:inline-block;
-font-size:20vw;
-line-height:.75;
-letter-spacing:5px;
+font-size:24vw;
+line-height:.72;
+letter-spacing:4px;
 font-weight:bold;
-color:#d8b35a;
+color:#f4c85a;
 text-shadow:
-0 0 8px rgba(255,220,130,.5),
-0 0 30px rgba(255,180,50,.25);
-animation:breath 4s infinite ease-in-out;
+0 2px 0 #5c3b00,
+0 0 16px rgba(255,220,120,.75),
+0 0 38px rgba(255,177,30,.45);
 overflow:hidden;
+animation:logoBreath 4s infinite ease-in-out;
 }
 
 .logo::after{
 content:"";
 position:absolute;
 top:-20%;
-left:-30%;
-width:18%;
-height:140%;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),rgba(255,221,130,.85),transparent);
+left:-40%;
+width:20%;
+height:150%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,1),rgba(255,226,130,.9),transparent);
 transform:skewX(-18deg);
-animation:shine 4.5s infinite;
+animation:logoShine 4s infinite;
 }
 
-@keyframes shine{
-0%{left:-35%;}
-45%{left:-35%;}
-70%{left:115%;}
-100%{left:115%;}
+@keyframes logoShine{
+0%{left:-45%;}
+45%{left:-45%;}
+72%{left:120%;}
+100%{left:120%;}
 }
 
-@keyframes breath{
+@keyframes logoBreath{
 0%,100%{transform:scale(1);}
 50%{transform:scale(1.025);}
 }
 
 .tagline{
 margin-top:8px;
-font-size:13px;
+font-size:11px;
 letter-spacing:3px;
 text-transform:uppercase;
-color:#f4dfb0;
+color:white;
+text-shadow:0 2px 8px black;
 }
 
-.issue{
-position:absolute;
-z-index:3;
-top:25px;
-right:22px;
-font-size:13px;
-letter-spacing:2px;
-color:#f4dfb0;
-text-align:right;
-}
-
-.cover-star{
+.cover-photo-note{
 position:relative;
-z-index:2;
+z-index:3;
+max-width:420px;
+margin:auto auto 0;
+padding:18px;
+border-radius:26px;
+background:rgba(0,0,0,.6);
+border:1px solid rgba(244,200,90,.65);
+box-shadow:0 20px 55px rgba(0,0,0,.6);
 text-align:center;
-margin:20px auto;
-background:rgba(0,0,0,.45);
-border:1px solid rgba(216,179,90,.55);
-border-radius:30px;
-padding:22px;
-max-width:430px;
-box-shadow:0 15px 45px rgba(0,0,0,.45);
-backdrop-filter:blur(8px);
 }
 
 .crown{
-font-size:44px;
-animation:glow 2s infinite ease-in-out;
+font-size:38px;
+filter:drop-shadow(0 0 12px gold);
+animation:crownGlow 2.2s infinite ease-in-out;
 }
 
-@keyframes glow{
-0%,100%{filter:drop-shadow(0 0 0 rgba(255,210,100,0));}
-50%{filter:drop-shadow(0 0 16px rgba(255,210,100,1));}
+@keyframes crownGlow{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.08);}
 }
 
-.cover-star small{
+.cover-photo-note small{
 display:block;
-letter-spacing:3px;
-font-size:12px;
 margin-top:8px;
-color:#f4dfb0;
+font-size:11px;
+letter-spacing:3px;
+color:#fff0bd;
 }
 
 .name{
-font-size:54px;
+font-size:48px;
 line-height:1;
 margin-top:8px;
+color:white;
+text-shadow:0 2px 8px black;
 }
 
 .subtitle{
-font-size:16px;
+font-size:15px;
+line-height:1.4;
 margin-top:8px;
-color:#ffd8e8;
+color:#ffe1ef;
 }
 
 .open-btn{
 display:inline-block;
-margin-top:18px;
-padding:15px 34px;
-background:#d8b35a;
+margin-top:16px;
+padding:15px 32px;
+background:#f4c85a;
 color:#111;
 text-decoration:none;
 border-radius:40px;
 font-weight:bold;
 letter-spacing:1px;
-box-shadow:0 0 25px rgba(216,179,90,.45);
+box-shadow:0 0 28px rgba(244,200,90,.7);
 }
 
-.cover-content{
+.cover-lines{
 position:relative;
-z-index:2;
+z-index:3;
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:14px;
+gap:10px;
+max-width:760px;
+margin:16px auto 0;
 }
 
-.story{
-background:rgba(0,0,0,.52);
-border:1px solid rgba(255,255,255,.18);
-padding:15px;
+.line{
+padding:12px;
 border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,.35);
-animation:fadeUp 1s forwards;
-opacity:0;
+background:rgba(0,0,0,.58);
+border:1px solid rgba(255,255,255,.22);
+text-align:center;
 }
 
-.story h2{
-font-size:24px;
-line-height:1;
+.line h2{
+font-size:17px;
 text-transform:uppercase;
+color:#fff0bd;
 }
 
-.story p{
-font-size:13px;
-margin-top:8px;
-line-height:1.4;
-color:#f4dfb0;
-}
-
-.story:nth-child(1){animation-delay:.3s;}
-.story:nth-child(2){animation-delay:.55s;}
-.story:nth-child(3){animation-delay:.8s;}
-.story:nth-child(4){animation-delay:1.05s;}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(18px);}
-to{opacity:1;transform:translateY(0);}
+.line p{
+font-size:11px;
+margin-top:5px;
+color:white;
+line-height:1.35;
 }
 
 .sparkle{
 position:absolute;
 z-index:4;
-width:9px;
-height:9px;
+width:10px;
+height:10px;
 background:white;
 clip-path:polygon(50% 0%,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0% 50%,39% 38%);
-filter:drop-shadow(0 0 8px gold);
+filter:drop-shadow(0 0 10px gold);
 animation:spark 2.8s infinite;
 }
 
-.s1{top:28%;left:22%;animation-delay:.2s;}
-.s2{top:42%;right:18%;animation-delay:1s;}
-.s3{bottom:30%;left:55%;animation-delay:1.8s;}
-.s4{bottom:18%;right:28%;animation-delay:2.4s;}
+.s1{top:24%;left:18%;animation-delay:.2s;}
+.s2{top:36%;right:16%;animation-delay:1s;}
+.s3{bottom:34%;left:52%;animation-delay:1.8s;}
+.s4{bottom:20%;right:25%;animation-delay:2.4s;}
 
 @keyframes spark{
 0%,100%{opacity:0;transform:scale(.4) rotate(0deg);}
-45%{opacity:1;transform:scale(1.4) rotate(90deg);}
+45%{opacity:1;transform:scale(1.6) rotate(90deg);}
 }
 
 .swipe{
 position:relative;
-z-index:2;
+z-index:3;
 text-align:center;
-font-size:13px;
+font-size:12px;
 letter-spacing:3px;
-color:#f4dfb0;
-padding-bottom:5px;
+color:#fff0bd;
+padding:18px 0 4px;
 animation:swipeMove 1.6s infinite ease-in-out;
+text-shadow:0 2px 8px black;
 }
 
 @keyframes swipeMove{
@@ -283,32 +252,41 @@ animation:swipeMove 1.6s infinite ease-in-out;
 
 @media(max-width:700px){
 .cover{
-padding:16px;
+padding:14px;
+background-position:center;
 }
-.small-brand{
-font-size:22px;
-}
+
 .logo{
-font-size:24vw;
-letter-spacing:2px;
+font-size:25vw;
+letter-spacing:1px;
 }
+
+.small-brand{
+font-size:21px;
+}
+
 .tagline{
-font-size:10px;
+font-size:9px;
 }
-.issue{
-font-size:11px;
-}
+
 .name{
-font-size:44px;
+font-size:42px;
 }
-.story{
-padding:12px;
+
+.cover-lines{
+grid-template-columns:1fr 1fr;
 }
-.story h2{
-font-size:18px;
+
+.line{
+padding:10px;
 }
-.story p{
-font-size:11px;
+
+.line h2{
+font-size:15px;
+}
+
+.line p{
+font-size:10px;
 }
 }
 </style>
@@ -333,37 +311,39 @@ SUMMER 2026<br>ISSUE 01
 <div class="tagline">The International Luxury Animal Magazine</div>
 </section>
 
-<section class="cover-star">
+<section class="cover-photo-note">
 <div class="crown">👑</div>
 <small>MODEL OF THE MONTH</small>
 <div class="name">MISO</div>
-<div class="subtitle">and the Sphynx — the icons of summer luxury</div>
+<div class="subtitle">
+with the Sphynx and the silver cat — icons of summer luxury
+</div>
 
 <a class="open-btn" href="magazine.html">
 OPEN MAGAZINE →
 </a>
 </section>
 
-<section class="cover-content">
+<section class="cover-lines">
 
-<div class="story">
-<h2>Fashion Has Paws</h2>
-<p>The season’s most stylish pet looks.</p>
+<div class="line">
+<h2>Fashion</h2>
+<p>Diamond collars, couture looks and royal pet style.</p>
 </div>
 
-<div class="story">
-<h2>Stars Without Limits</h2>
-<p>Dogs, cats, rabbits, birds and beyond.</p>
+<div class="line">
+<h2>Travel</h2>
+<p>Santorini, Capri and luxury pet-friendly escapes.</p>
 </div>
 
-<div class="story">
-<h2>Luxury Travel</h2>
-<p>Santorini, Capri and pet-friendly villas.</p>
+<div class="line">
+<h2>Models</h2>
+<p>The most beautiful animals of the week and month.</p>
 </div>
 
-<div class="story">
-<h2>Happy & Healthy</h2>
-<p>Summer wellness, care and expert advice.</p>
+<div class="line">
+<h2>Charity</h2>
+<p>Stories of animals who need help and support.</p>
 </div>
 
 </section>
