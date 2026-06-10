@@ -4,355 +4,219 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>pets & DOGUE</title>
+<title>PETS & DOGUE</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-background:#030303;
+background:#f8f7f3;
+color:#111;
+}
+
+header{
+position:sticky;
+top:0;
+background:white;
+padding:18px;
+border-bottom:1px solid #ddd;
+z-index:100;
+}
+
+.logo{
+text-align:center;
+}
+
+.logo-small{
+font-size:22px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:72px;
 font-family:Georgia,serif;
-color:white;
-overflow-x:hidden;
+font-weight:bold;
+letter-spacing:4px;
+color:#c89b3c;
+line-height:0.9;
+}
+
+.tagline{
+text-align:center;
+margin-top:8px;
+font-size:13px;
+letter-spacing:2px;
+color:#666;
+}
+
+.hero{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
 }
 
 .cover{
-min-height:100vh;
-position:relative;
+width:100%;
+border-radius:30px;
 overflow:hidden;
-padding:18px;
-background:
-linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.72)),
-url("https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1800&q=100");
-background-size:cover;
-background-position:center;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
+box-shadow:0 10px 40px rgba(0,0,0,.15);
 }
 
-.cover::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.75),transparent 45%);
-pointer-events:none;
+.cover img{
+width:100%;
+display:block;
 }
 
 .issue{
-position:absolute;
-top:20px;
-right:18px;
-z-index:3;
-font-size:12px;
-letter-spacing:2px;
-color:#fff0bd;
-text-align:right;
-text-shadow:0 2px 8px black;
-}
-
-.brand{
-position:relative;
-z-index:3;
-text-align:center;
-padding-top:20px;
-}
-
-.small-brand{
-font-size:24px;
-font-style:italic;
-text-align:left;
-max-width:1100px;
-margin:0 auto -8px;
-color:white;
-text-shadow:0 2px 8px black;
-}
-
-.logo{
-position:relative;
-display:inline-block;
-font-size:24vw;
-line-height:.72;
-letter-spacing:4px;
-font-weight:bold;
-color:#f4c85a;
-text-shadow:
-0 2px 0 #5c3b00,
-0 0 16px rgba(255,220,120,.75),
-0 0 38px rgba(255,177,30,.45);
-overflow:hidden;
-animation:logoBreath 4s infinite ease-in-out;
-}
-
-.logo::after{
-content:"";
-position:absolute;
-top:-20%;
-left:-40%;
-width:20%;
-height:150%;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,1),rgba(255,226,130,.9),transparent);
-transform:skewX(-18deg);
-animation:logoShine 4s infinite;
-}
-
-@keyframes logoShine{
-0%{left:-45%;}
-45%{left:-45%;}
-72%{left:120%;}
-100%{left:120%;}
-}
-
-@keyframes logoBreath{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.025);}
-}
-
-.tagline{
-margin-top:8px;
-font-size:11px;
-letter-spacing:3px;
-text-transform:uppercase;
-color:white;
-text-shadow:0 2px 8px black;
-}
-
-.cover-photo-note{
-position:relative;
-z-index:3;
-max-width:420px;
-margin:auto auto 0;
-padding:18px;
-border-radius:26px;
-background:rgba(0,0,0,.6);
-border:1px solid rgba(244,200,90,.65);
-box-shadow:0 20px 55px rgba(0,0,0,.6);
+margin-top:30px;
 text-align:center;
 }
 
-.crown{
-font-size:38px;
-filter:drop-shadow(0 0 12px gold);
-animation:crownGlow 2.2s infinite ease-in-out;
-}
-
-@keyframes crownGlow{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.08);}
-}
-
-.cover-photo-note small{
-display:block;
-margin-top:8px;
-font-size:11px;
-letter-spacing:3px;
-color:#fff0bd;
-}
-
-.name{
+.issue h1{
 font-size:48px;
-line-height:1;
-margin-top:8px;
-color:white;
-text-shadow:0 2px 8px black;
+margin-bottom:10px;
 }
 
-.subtitle{
-font-size:15px;
-line-height:1.4;
-margin-top:8px;
-color:#ffe1ef;
+.issue p{
+font-size:20px;
+color:#555;
 }
 
-.open-btn{
-display:inline-block;
-margin-top:16px;
-padding:15px 32px;
-background:#f4c85a;
-color:#111;
-text-decoration:none;
-border-radius:40px;
-font-weight:bold;
-letter-spacing:1px;
-box-shadow:0 0 28px rgba(244,200,90,.7);
-}
+.sections{
+max-width:1200px;
+margin:50px auto;
+padding:0 20px;
 
-.cover-lines{
-position:relative;
-z-index:3;
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-max-width:760px;
-margin:16px auto 0;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
-.line{
-padding:12px;
-border-radius:18px;
-background:rgba(0,0,0,.58);
-border:1px solid rgba(255,255,255,.22);
-text-align:center;
-}
-
-.line h2{
-font-size:17px;
-text-transform:uppercase;
-color:#fff0bd;
-}
-
-.line p{
-font-size:11px;
-margin-top:5px;
-color:white;
-line-height:1.35;
-}
-
-.sparkle{
-position:absolute;
-z-index:4;
-width:10px;
-height:10px;
+.card{
 background:white;
-clip-path:polygon(50% 0%,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0% 50%,39% 38%);
-filter:drop-shadow(0 0 10px gold);
-animation:spark 2.8s infinite;
+padding:25px;
+border-radius:25px;
+border:2px solid #111;
+transition:.3s;
 }
 
-.s1{top:24%;left:18%;animation-delay:.2s;}
-.s2{top:36%;right:16%;animation-delay:1s;}
-.s3{bottom:34%;left:52%;animation-delay:1.8s;}
-.s4{bottom:20%;right:25%;animation-delay:2.4s;}
-
-@keyframes spark{
-0%,100%{opacity:0;transform:scale(.4) rotate(0deg);}
-45%{opacity:1;transform:scale(1.6) rotate(90deg);}
+.card:hover{
+transform:translateY(-5px);
 }
 
-.swipe{
-position:relative;
-z-index:3;
+.card h3{
+margin-bottom:12px;
+font-size:24px;
+}
+
+.card p{
+color:#666;
+line-height:1.5;
+}
+
+.admin-btn{
+position:fixed;
+bottom:30px;
+right:30px;
+background:#111;
+color:white;
+padding:15px 25px;
+border-radius:999px;
+text-decoration:none;
+font-weight:bold;
+}
+
+footer{
+margin-top:60px;
+padding:40px;
 text-align:center;
-font-size:12px;
-letter-spacing:3px;
-color:#fff0bd;
-padding:18px 0 4px;
-animation:swipeMove 1.6s infinite ease-in-out;
-text-shadow:0 2px 8px black;
+background:white;
+border-top:1px solid #ddd;
 }
 
-@keyframes swipeMove{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-8px);}
-}
-
-@media(max-width:700px){
-.cover{
-padding:14px;
-background-position:center;
-}
-
-.logo{
-font-size:25vw;
-letter-spacing:1px;
-}
-
-.small-brand{
-font-size:21px;
-}
-
-.tagline{
-font-size:9px;
-}
-
-.name{
-font-size:42px;
-}
-
-.cover-lines{
-grid-template-columns:1fr 1fr;
-}
-
-.line{
-padding:10px;
-}
-
-.line h2{
-font-size:15px;
-}
-
-.line p{
-font-size:10px;
-}
-}
 </style>
 </head>
 
 <body>
 
-<main class="cover">
+<header>
 
-<div class="sparkle s1"></div>
-<div class="sparkle s2"></div>
-<div class="sparkle s3"></div>
-<div class="sparkle s4"></div>
+<div class="logo">
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+</div>
+
+<div class="tagline">
+THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="cover">
+
+<img src="images/cover-01.png" alt="Issue 01">
+
+</div>
 
 <div class="issue">
-SUMMER 2026<br>ISSUE 01
+<h1>Issue 01 — Summer 2026</h1>
+<p>Welcome to the world's luxury magazine for pets.</p>
 </div>
 
-<section class="brand">
-<div class="small-brand">pets &</div>
-<h1 class="logo">DOGUE</h1>
-<div class="tagline">The International Luxury Animal Magazine</div>
 </section>
 
-<section class="cover-photo-note">
-<div class="crown">👑</div>
-<small>MODEL OF THE MONTH</small>
-<div class="name">MISO</div>
-<div class="subtitle">
-with the Sphynx and the silver cat — icons of summer luxury
+<section class="sections">
+
+<div class="card">
+<h3>🐶 Pet Style Guide</h3>
+<p>Luxury fashion and accessories for stylish pets.</p>
 </div>
 
-<a class="open-btn" href="magazine.html">
-OPEN MAGAZINE →
+<div class="card">
+<h3>✈️ Luxury Travel</h3>
+<p>The best pet-friendly villas, hotels and yachts.</p>
+</div>
+
+<div class="card">
+<h3>❤️ Wellness</h3>
+<p>Health, care and wellbeing for modern pets.</p>
+</div>
+
+<div class="card">
+<h3>👑 Royal Pets</h3>
+<p>Meet the most glamorous animals in the world.</p>
+</div>
+
+<div class="card">
+<h3>📸 Model Of The Month</h3>
+<p>This month: Miso and the stars of summer.</p>
+</div>
+
+<div class="card">
+<h3>🤖 AI Studio</h3>
+<p>Turn your pet into a DOGUE cover star.</p>
+</div>
+
+</section>
+
+<a href="admin.html" class="admin-btn">
+ADMIN
 </a>
-</section>
 
-<section class="cover-lines">
+<footer>
 
-<div class="line">
-<h2>Fashion</h2>
-<p>Diamond collars, couture looks and royal pet style.</p>
-</div>
+<h2>PETS & DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
 
-<div class="line">
-<h2>Travel</h2>
-<p>Santorini, Capri and luxury pet-friendly escapes.</p>
-</div>
-
-<div class="line">
-<h2>Models</h2>
-<p>The most beautiful animals of the week and month.</p>
-</div>
-
-<div class="line">
-<h2>Charity</h2>
-<p>Stories of animals who need help and support.</p>
-</div>
-
-</section>
-
-<div class="swipe">
-SWIPE TO OPEN ↑
-</div>
-
-</main>
+</footer>
 
 </body>
 </html>
