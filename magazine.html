@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DOGUE Magazine</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#050505;
+font-family:Georgia,serif;
+color:white;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:10;
+background:rgba(0,0,0,.88);
+backdrop-filter:blur(12px);
+padding:14px;
+border-bottom:1px solid rgba(216,179,90,.4);
+}
+
+.logo{
+text-align:center;
+font-size:36px;
+color:#d8b35a;
+letter-spacing:3px;
+font-weight:bold;
+}
+
+.logo span{
+font-size:16px;
+font-style:italic;
+color:white;
+display:block;
+letter-spacing:1px;
+}
+
+.languages{
+text-align:center;
+margin-top:8px;
+font-size:12px;
+letter-spacing:2px;
+color:#f4dfb0;
+}
+
+.intro{
+padding:35px 18px 20px;
+text-align:center;
+}
+
+.intro h1{
+font-size:34px;
+color:#f4dfb0;
+}
+
+.intro p{
+margin-top:10px;
+font-size:15px;
+color:#ddd;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+padding:18px;
+}
+
+.card{
+position:relative;
+min-height:210px;
+border-radius:24px;
+overflow:hidden;
+text-decoration:none;
+color:white;
+background-size:cover;
+background-position:center;
+box-shadow:0 18px 40px rgba(0,0,0,.45);
+border:1px solid rgba(216,179,90,.45);
+transition:.35s;
+}
+
+.card:active{
+transform:scale(.96);
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.78));
+}
+
+.card::after{
+content:"";
+position:absolute;
+top:-40%;
+left:-60%;
+width:35%;
+height:180%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
+transform:skewX(-20deg);
+transition:.5s;
+}
+
+.card:hover::after{
+left:120%;
+}
+
+.card-content{
+position:absolute;
+left:16px;
+right:16px;
+bottom:16px;
+z-index:2;
+}
+
+.card small{
+font-size:11px;
+letter-spacing:2px;
+color:#f4dfb0;
+}
+
+.card h2{
+font-size:25px;
+line-height:1;
+margin-top:6px;
+}
+
+.card p{
+font-size:12px;
+margin-top:8px;
+color:#eee;
+line-height:1.35;
+}
+
+.big{
+grid-column:span 2;
+min-height:260px;
+}
+
+.photos{
+background-image:url("https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?auto=format&fit=crop&w=1200&q=80");
+}
+
+.articles{
+background-image:url("https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80");
+}
+
+.models{
+background-image:url("https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=1200&q=80");
+}
+
+.contests{
+background-image:url("https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1200&q=80");
+}
+
+.help{
+background-image:url("https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=1200&q=80");
+}
+
+.ads{
+background-image:url("https://images.unsplash.com/photo-1601758177266-bc599de87707?auto=format&fit=crop&w=1200&q=80");
+}
+
+.travel{
+background-image:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80");
+}
+
+.interior{
+background-image:url("https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80");
+}
+
+.today{
+margin:20px 18px 40px;
+padding:22px;
+border-radius:24px;
+background:linear-gradient(135deg,#d8b35a,#7a551c);
+color:#111;
+}
+
+.today h2{
+font-size:28px;
+}
+
+.today p{
+margin-top:8px;
+font-size:14px;
+line-height:1.45;
+}
+
+.back{
+display:block;
+text-align:center;
+color:#f4dfb0;
+margin:25px 0;
+text-decoration:none;
+font-size:13px;
+letter-spacing:2px;
+}
+
+@media(min-width:800px){
+.grid{
+grid-template-columns:repeat(4,1fr);
+max-width:1200px;
+margin:auto;
+}
+.big{
+grid-column:span 2;
+}
+.card{
+min-height:270px;
+}
+.intro h1{
+font-size:48px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<span>pets &</span>
+DOGUE
+</div>
+
+<div class="languages">
+EN | RU | UA | CZ | PL | ES | IT | DE | AR
+</div>
+</header>
+
+<section class="intro">
+<h1>Open the Issue</h1>
+<p>Choose a page of the luxury animal magazine.</p>
+</section>
+
+<section class="grid">
+
+<a href="photos.html" class="card photos big">
+<div class="card-content">
+<small>GALLERY</small>
+<h2>Photos</h2>
+<p>All magazine photos, covers and pet editorials.</p>
+</div>
+</a>
+
+<a href="articles.html" class="card articles">
+<div class="card-content">
+<small>READ & LISTEN</small>
+<h2>Articles</h2>
+<p>Stories with audio reading for children and accessibility.</p>
+</div>
+</a>
+
+<a href="models.html" class="card models">
+<div class="card-content">
+<small>STARS</small>
+<h2>Models</h2>
+<p>Model of the week and model of the month.</p>
+</div>
+</a>
+
+<a href="contests.html" class="card contests">
+<div class="card-content">
+<small>GIFTS</small>
+<h2>Contests</h2>
+<p>Competitions, prizes and sponsor giveaways.</p>
+</div>
+</a>
+
+<a href="help.html" class="card help big">
+<div class="card-content">
+<small>CHARITY</small>
+<h2>Help</h2>
+<p>Animals and shelters who need help, donations and support.</p>
+</div>
+</a>
+
+<a href="advertising.html" class="card ads">
+<div class="card-content">
+<small>BRANDS</small>
+<h2>Advertising</h2>
+<p>Luxury pet brands, services and sponsor pages.</p>
+</div>
+</a>
+
+<a href="travel.html" class="card travel">
+<div class="card-content">
+<small>SUMMER</small>
+<h2>Travel</h2>
+<p>Dog-friendly beaches, villas and luxury trips.</p>
+</div>
+</a>
+
+<a href="interior.html" class="card interior">
+<div class="card-content">
+<small>HOME</small>
+<h2>Interior</h2>
+<p>Pet furniture, design, beds and beautiful homes.</p>
+</div>
+</a>
+
+</section>
+
+<section class="today">
+<h2>Today in DOGUE</h2>
+<p>
+New summer issue: luxury travel, animal models, charity stories,
+sponsor prizes and the most beautiful pet photos of the month.
+</p>
+</section>
+
+<a href="index.html" class="back">
+← BACK TO COVER
+</a>
+
+</body>
+</html>
