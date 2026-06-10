@@ -21,13 +21,21 @@ color:#111;
 
 header{
 background:white;
-padding:18px;
 border-bottom:1px solid #ddd;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.header-inner{
+max-width:1400px;
+margin:auto;
+padding:18px;
 text-align:center;
 }
 
 .logo-small{
-font-size:22px;
+font-size:20px;
 color:#b78a2e;
 }
 
@@ -42,32 +50,40 @@ line-height:.9;
 
 .tagline{
 margin-top:8px;
-font-size:13px;
+font-size:12px;
 letter-spacing:2px;
 color:#666;
 }
 
+nav{
+margin-top:18px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+}
+
+nav a{
+text-decoration:none;
+color:#111;
+font-weight:bold;
+font-size:15px;
+}
+
 .hero{
-max-width:1200px;
+max-width:1400px;
 margin:auto;
 padding:20px;
 }
 
 .cover-link{
 display:block;
-text-decoration:none;
 }
 
 .cover{
-width:100%;
-border-radius:30px;
 overflow:hidden;
-box-shadow:0 10px 40px rgba(0,0,0,.15);
-transition:.3s;
-}
-
-.cover:hover{
-transform:translateY(-4px);
+border-radius:35px;
+box-shadow:0 15px 50px rgba(0,0,0,.15);
 }
 
 .cover img{
@@ -75,45 +91,54 @@ width:100%;
 display:block;
 }
 
-.editor-section{
-max-width:900px;
-margin:50px auto;
+.welcome{
+max-width:1000px;
+margin:60px auto;
 padding:0 20px;
+text-align:center;
 }
 
-.editor-card{
-background:white;
-padding:30px;
-border-radius:30px;
-border:2px solid #111;
-}
-
-.editor-card h2{
+.welcome h1{
+font-size:60px;
 font-family:Georgia,serif;
-font-size:38px;
-margin-bottom:15px;
+margin-bottom:20px;
 }
 
-.editor-card p{
-font-size:18px;
+.welcome p{
+font-size:22px;
 line-height:1.8;
-color:#444;
+color:#555;
 }
 
-.sections{
-max-width:1200px;
+.featured{
+max-width:1300px;
 margin:50px auto;
 padding:0 20px;
+}
+
+.featured-title{
+font-size:48px;
+font-family:Georgia,serif;
+margin-bottom:30px;
+text-align:center;
+}
+
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:25px;
 }
 
 .card{
 background:white;
-padding:25px;
-border-radius:30px;
 border:2px solid #111;
+border-radius:30px;
+padding:25px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
 }
 
 .card h3{
@@ -122,43 +147,42 @@ margin-bottom:15px;
 }
 
 .card p{
-font-size:18px;
-line-height:1.6;
-color:#666;
+line-height:1.7;
+color:#555;
 }
 
-.issue-button{
+.read-btn{
 display:block;
-max-width:350px;
-margin:40px auto;
+max-width:320px;
+margin:50px auto;
 text-align:center;
+text-decoration:none;
 background:#111;
 color:white;
-text-decoration:none;
 padding:20px;
 border-radius:999px;
-font-size:20px;
 font-weight:bold;
+font-size:20px;
+}
+
+footer{
+margin-top:60px;
+padding:50px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
 }
 
 .admin-btn{
 position:fixed;
-right:20px;
 bottom:20px;
+right:20px;
 background:#111;
 color:white;
-text-decoration:none;
-padding:18px 30px;
+padding:16px 24px;
 border-radius:999px;
+text-decoration:none;
 font-weight:bold;
-}
-
-footer{
-margin-top:50px;
-padding:40px;
-background:white;
-text-align:center;
-border-top:1px solid #ddd;
 }
 
 </style>
@@ -168,11 +192,23 @@ border-top:1px solid #ddd;
 
 <header>
 
+<div class="header-inner">
+
 <div class="logo-small">pets &</div>
 <div class="logo-big">DOGUE</div>
 
 <div class="tagline">
 THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="issue-01.html">Latest Issue</a>
+<a href="archive.html">Archive</a>
+<a href="about.html">About</a>
+<a href="admin.html">Admin</a>
+</nav>
+
 </div>
 
 </header>
@@ -182,70 +218,72 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 <a href="issue-01.html" class="cover-link">
 
 <div class="cover">
-<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Issue 01 Cover">
+<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Issue 01">
 </div>
 
 </a>
 
 </section>
 
-<section class="editor-section">
+<section class="welcome">
 
-<div class="editor-card">
-
-<h2>Editor's Letter</h2>
+<h1>Welcome To PETS & DOGUE</h1>
 
 <p>
-Welcome to PETS & DOGUE — the international luxury animal magazine.
-Our mission is to celebrate the beauty, style and individuality of animals around the world.
+The world's luxury animal magazine.
+Celebrating extraordinary pets, beautiful photography,
+travel, wellness, fashion and inspiring stories from around the globe.
 </p>
-
-<p>
-Issue 01 introduces Miso and the Icons of Summer, beginning a new chapter in luxury pet media.
-</p>
-
-</div>
 
 </section>
 
-<section class="sections">
+<section class="featured">
+
+<h2 class="featured-title">Featured Stories</h2>
+
+<div class="grid">
 
 <div class="card">
-<h3>⭐ Miso</h3>
-<p>Model of the Month and cover star of Issue 01.</p>
-</div>
-
-<div class="card">
-<h3>✈️ Luxury Travel</h3>
-<p>Pet-friendly villas, yachts and dream destinations.</p>
+<h3>🐶 Miso</h3>
+<p>Meet the cover star of Issue 01 and discover the story behind our first luxury cover.</p>
 </div>
 
 <div class="card">
 <h3>👑 Royal Pets</h3>
-<p>The world's most glamorous animals.</p>
+<p>The most elegant and glamorous animals from around the world.</p>
+</div>
+
+<div class="card">
+<h3>✈️ Luxury Travel</h3>
+<p>Dream destinations and pet-friendly escapes for modern animal lovers.</p>
 </div>
 
 <div class="card">
 <h3>❤️ Wellness</h3>
-<p>Health, beauty and wellbeing for modern pets.</p>
+<p>Health, beauty and wellbeing for pets living their best lives.</p>
+</div>
+
 </div>
 
 </section>
 
-<a href="issue-01.html" class="issue-button">
+<a href="issue-01.html" class="read-btn">
 READ ISSUE 01
-</a>
-
-<a href="admin.html" class="admin-btn">
-ADMIN
 </a>
 
 <footer>
 
 <h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
+
+<p>
+The International Luxury Animal Magazine
+</p>
 
 </footer>
+
+<a href="admin.html" class="admin-btn">
+ADMIN
+</a>
 
 </body>
 </html>
