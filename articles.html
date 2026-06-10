@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DOGUE Articles</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#050505;
+font-family:Georgia,serif;
+color:white;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(0,0,0,.92);
+padding:15px;
+border-bottom:1px solid rgba(244,200,90,.4);
+}
+
+.logo{
+text-align:center;
+font-size:38px;
+font-weight:bold;
+letter-spacing:3px;
+color:#f4c85a;
+}
+
+.logo small{
+display:block;
+font-size:16px;
+font-style:italic;
+color:white;
+font-weight:normal;
+}
+
+.languages{
+text-align:center;
+margin-top:8px;
+font-size:12px;
+letter-spacing:2px;
+color:#fff0bd;
+}
+
+.hero{
+padding:35px 20px;
+text-align:center;
+background:linear-gradient(to bottom,#111,#050505);
+}
+
+.hero h1{
+font-size:40px;
+color:#f4c85a;
+}
+
+.hero p{
+margin-top:10px;
+color:#ddd;
+line-height:1.5;
+}
+
+.articles{
+padding:16px;
+display:grid;
+gap:18px;
+}
+
+.article{
+background:#111;
+border:1px solid rgba(244,200,90,.45);
+border-radius:26px;
+overflow:hidden;
+box-shadow:0 18px 45px rgba(0,0,0,.45);
+}
+
+.article img{
+width:100%;
+height:230px;
+object-fit:cover;
+display:block;
+}
+
+.article-content{
+padding:20px;
+}
+
+.article small{
+color:#fff0bd;
+letter-spacing:2px;
+font-size:11px;
+}
+
+.article h2{
+font-size:28px;
+margin-top:8px;
+line-height:1.05;
+}
+
+.article p{
+margin-top:12px;
+font-size:15px;
+line-height:1.55;
+color:#eee;
+}
+
+.buttons{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:18px;
+}
+
+button,.read-btn{
+border:none;
+padding:12px 18px;
+border-radius:30px;
+font-weight:bold;
+background:#f4c85a;
+color:#111;
+text-decoration:none;
+font-size:14px;
+}
+
+.stop{
+background:#222;
+color:white;
+border:1px solid #555;
+}
+
+.back{
+display:block;
+text-align:center;
+padding:30px;
+color:#f4c85a;
+text-decoration:none;
+letter-spacing:2px;
+}
+
+@media(min-width:850px){
+.articles{
+grid-template-columns:repeat(3,1fr);
+max-width:1200px;
+margin:auto;
+}
+
+.article img{
+height:260px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+<small>pets &</small>
+DOGUE
+</div>
+
+<div class="languages">
+EN | RU | UA | CZ | PL | ES | IT | DE | AR
+</div>
+</header>
+
+<section class="hero">
+<h1>ARTICLES</h1>
+<p>
+Read or listen to DOGUE stories.  
+Made for children, busy people and people who prefer audio.
+</p>
+</section>
+
+<section class="articles">
+
+<article class="article">
+<img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=1000&q=90">
+
+<div class="article-content">
+<small>FASHION</small>
+<h2>Fashion Has Paws</h2>
+<p id="article1">
+This summer, pet fashion becomes brighter, softer and more luxurious.
+Silk bows, golden collars and light summer fabrics create a new elegant look
+for dogs, cats and every stylish animal.
+</p>
+
+<div class="buttons">
+<button onclick="speakText('article1')">🔊 Listen</button>
+<button class="stop" onclick="stopSpeaking()">⏹ Stop</button>
+</div>
+</div>
+</article>
+
+<article class="article">
+<img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=90">
+
+<div class="article-content">
+<small>TRAVEL</small>
+<h2>Santorini With Pets</h2>
+<p id="article2">
+White villas, blue sea and warm evenings make Santorini a dream destination.
+For pet owners, the most important things are shade, water, calm hotels
+and safe places where animals can rest comfortably.
+</p>
+
+<div class="buttons">
+<button onclick="speakText('article2')">🔊 Listen</button>
+<button class="stop" onclick="stopSpeaking()">⏹ Stop</button>
+</div>
+</div>
+</article>
+
+<article class="article">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1000&q=90">
+
+<div class="article-content">
+<small>HEALTH</small>
+<h2>Summer Health Guide</h2>
+<p id="article3">
+Hot weather can be difficult for animals. Fresh water, cool floors,
+short walks and protection for paws are very important. A stylish pet
+must also be a healthy and happy pet.
+</p>
+
+<div class="buttons">
+<button onclick="speakText('article3')">🔊 Listen</button>
+<button class="stop" onclick="stopSpeaking()">⏹ Stop</button>
+</div>
+</div>
+</article>
+
+</section>
+
+<a class="back" href="magazine.html">
+← BACK TO MAGAZINE
+</a>
+
+<script>
+function speakText(id){
+stopSpeaking();
+
+let text = document.getElementById(id).innerText;
+let speech = new SpeechSynthesisUtterance(text);
+
+speech.lang = "en-US";
+speech.rate = 0.9;
+speech.pitch = 1;
+
+window.speechSynthesis.speak(speech);
+}
+
+function stopSpeaking(){
+window.speechSynthesis.cancel();
+}
+</script>
+
+</body>
+</html>
