@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>PETS & DOGUE</title>
 
 <style>
@@ -21,15 +20,9 @@ color:#111;
 }
 
 header{
-position:sticky;
-top:0;
 background:white;
 padding:18px;
 border-bottom:1px solid #ddd;
-z-index:100;
-}
-
-.logo{
 text-align:center;
 }
 
@@ -44,11 +37,10 @@ font-family:Georgia,serif;
 font-weight:bold;
 letter-spacing:4px;
 color:#c89b3c;
-line-height:0.9;
+line-height:.9;
 }
 
 .tagline{
-text-align:center;
 margin-top:8px;
 font-size:13px;
 letter-spacing:2px;
@@ -58,7 +50,7 @@ color:#666;
 .hero{
 max-width:1200px;
 margin:auto;
-padding:40px 20px;
+padding:20px;
 }
 
 .cover{
@@ -74,25 +66,24 @@ display:block;
 }
 
 .issue{
-margin-top:30px;
 text-align:center;
+margin-top:30px;
 }
 
 .issue h1{
-font-size:48px;
+font-size:52px;
 margin-bottom:10px;
 }
 
 .issue p{
 font-size:20px;
-color:#555;
+color:#666;
 }
 
 .sections{
 max-width:1200px;
 margin:50px auto;
 padding:0 20px;
-
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
@@ -101,85 +92,38 @@ gap:25px;
 .card{
 background:white;
 padding:25px;
-border-radius:25px;
+border-radius:30px;
 border:2px solid #111;
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
 }
 
 .card h3{
-margin-bottom:12px;
-font-size:24px;
+font-size:28px;
+margin-bottom:15px;
 }
 
 .card p{
+font-size:18px;
+line-height:1.6;
 color:#666;
-line-height:1.5;
-}
-
-.dynamic-section{
-max-width:1200px;
-margin:50px auto;
-padding:0 20px;
-}
-
-.dynamic-section h2{
-font-size:42px;
-margin-bottom:25px;
-font-family:Georgia,serif;
-}
-
-.article-card{
-background:white;
-padding:25px;
-border-radius:25px;
-border:2px solid #111;
-margin-bottom:20px;
-}
-
-.article-card h3{
-margin-bottom:15px;
-font-size:28px;
-}
-
-.article-card p{
-line-height:1.8;
-color:#444;
-}
-
-.ad-card{
-background:#f6ecd3;
-padding:25px;
-border-radius:25px;
-border:2px solid #c9a043;
-margin-bottom:20px;
-}
-
-.ad-card h3{
-margin-bottom:12px;
-color:#a17718;
 }
 
 .admin-btn{
 position:fixed;
-bottom:30px;
-right:30px;
+right:20px;
+bottom:20px;
 background:#111;
 color:white;
-padding:15px 25px;
-border-radius:999px;
 text-decoration:none;
+padding:18px 30px;
+border-radius:999px;
 font-weight:bold;
 }
 
 footer{
-margin-top:60px;
+margin-top:50px;
 padding:40px;
-text-align:center;
 background:white;
+text-align:center;
 border-top:1px solid #ddd;
 }
 
@@ -190,10 +134,8 @@ border-top:1px solid #ddd;
 
 <header>
 
-<div class="logo">
 <div class="logo-small">pets &</div>
 <div class="logo-big">DOGUE</div>
-</div>
 
 <div class="tagline">
 THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
@@ -204,12 +146,16 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 <section class="hero">
 
 <div class="cover">
-<img id="coverImage" src="images/cover-01.png" alt="Issue 01">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="PETS & DOGUE Cover">
+
 </div>
 
 <div class="issue">
-<h1 id="issueTitle">Issue 01 — Summer 2026</h1>
-<p id="issueDesc">Welcome to the world's luxury magazine for pets.</p>
+<h1>Issue 01 — Summer 2026</h1>
+<p>Welcome to the world's luxury magazine for pets.</p>
 </div>
 
 </section>
@@ -248,73 +194,16 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 
 </section>
 
-<section class="dynamic-section">
-<h2>Latest Articles</h2>
-<div id="articlesContainer"></div>
-</section>
-
-<section class="dynamic-section">
-<h2>Partners & Advertising</h2>
-<div id="adsContainer"></div>
-</section>
-
 <a href="admin.html" class="admin-btn">
 ADMIN
 </a>
 
 <footer>
+
 <h2>PETS & DOGUE</h2>
 <p>The International Luxury Animal Magazine</p>
+
 </footer>
-
-<script>
-
-const issueTitle = localStorage.getItem("issueTitle");
-const issueDesc = localStorage.getItem("issueDesc");
-const coverPath = localStorage.getItem("coverPath");
-
-if(issueTitle){
-document.getElementById("issueTitle").textContent = issueTitle;
-}
-
-if(issueDesc){
-document.getElementById("issueDesc").textContent = issueDesc;
-}
-
-if(coverPath){
-document.getElementById("coverImage").src = coverPath;
-}
-
-const articles = JSON.parse(localStorage.getItem("articles") || "[]");
-const ads = JSON.parse(localStorage.getItem("ads") || "[]");
-
-const articlesContainer = document.getElementById("articlesContainer");
-
-articles.forEach(article => {
-
-articlesContainer.innerHTML += `
-<div class="article-card">
-<h3>${article.title}</h3>
-<p>${article.text}</p>
-</div>
-`;
-
-});
-
-const adsContainer = document.getElementById("adsContainer");
-
-ads.forEach(ad => {
-
-adsContainer.innerHTML += `
-<div class="ad-card">
-<h3>${ad.name}</h3>
-<p>${ad.text}</p>
-</div>
-`;
-
-});
-
-</script>
 
 </body>
 </html>
