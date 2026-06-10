@@ -15,9 +15,9 @@ box-sizing:border-box;
 
 body{
 min-height:100vh;
-background:#f7efe3;
+background:#030303;
 font-family:Georgia,serif;
-color:#111;
+color:white;
 overflow-x:hidden;
 }
 
@@ -25,9 +25,10 @@ overflow-x:hidden;
 min-height:100vh;
 position:relative;
 padding:22px;
+overflow:hidden;
 background:
-linear-gradient(to bottom,rgba(255,255,255,.15),rgba(247,239,227,.95)),
-url("https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=80");
+linear-gradient(to bottom,rgba(0,0,0,.15),rgba(0,0,0,.92)),
+url("https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1600&q=80");
 background-size:cover;
 background-position:center;
 display:flex;
@@ -35,31 +36,95 @@ flex-direction:column;
 justify-content:space-between;
 }
 
+.cover::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at 20% 25%,rgba(255,214,120,.35),transparent 18%),
+radial-gradient(circle at 80% 30%,rgba(255,130,180,.22),transparent 20%),
+radial-gradient(circle at 50% 75%,rgba(255,255,255,.13),transparent 25%);
+pointer-events:none;
+}
+
+.cover::after{
+content:"";
+position:absolute;
+inset:0;
+background-image:
+radial-gradient(circle,rgba(255,226,150,.9) 0 1px,transparent 2px),
+radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 2px);
+background-size:90px 90px,140px 140px;
+animation:dust 10s linear infinite;
+opacity:.35;
+pointer-events:none;
+}
+
+@keyframes dust{
+from{transform:translateY(0);}
+to{transform:translateY(-90px);}
+}
+
 .brand{
+position:relative;
+z-index:2;
 text-align:center;
+padding-top:10px;
+animation:intro 1.2s ease forwards;
+}
+
+@keyframes intro{
+from{opacity:0;transform:translateY(-20px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 .small-brand{
 font-size:28px;
 font-style:italic;
 letter-spacing:1px;
-color:#f4d6a0;
-text-shadow:0 2px 8px rgba(0,0,0,.35);
+color:white;
+text-align:left;
+max-width:1100px;
+margin:auto;
 }
 
 .logo{
-font-size:19vw;
+position:relative;
+display:inline-block;
+font-size:20vw;
 line-height:.75;
 letter-spacing:5px;
 font-weight:bold;
-color:#f7d58a;
-text-shadow:0 4px 20px rgba(0,0,0,.35);
-animation:breath 3s infinite ease-in-out;
+color:#d8b35a;
+text-shadow:
+0 0 8px rgba(255,220,130,.5),
+0 0 30px rgba(255,180,50,.25);
+animation:breath 4s infinite ease-in-out;
+overflow:hidden;
+}
+
+.logo::after{
+content:"";
+position:absolute;
+top:-20%;
+left:-30%;
+width:18%;
+height:140%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),rgba(255,221,130,.85),transparent);
+transform:skewX(-18deg);
+animation:shine 4.5s infinite;
+}
+
+@keyframes shine{
+0%{left:-35%;}
+45%{left:-35%;}
+70%{left:115%;}
+100%{left:115%;}
 }
 
 @keyframes breath{
 0%,100%{transform:scale(1);}
-50%{transform:scale(1.035);}
+50%{transform:scale(1.025);}
 }
 
 .tagline{
@@ -67,78 +132,42 @@ margin-top:8px;
 font-size:13px;
 letter-spacing:3px;
 text-transform:uppercase;
-color:#fff;
-text-shadow:0 2px 8px rgba(0,0,0,.5);
+color:#f4dfb0;
 }
 
 .issue{
 position:absolute;
+z-index:3;
 top:25px;
 right:22px;
 font-size:13px;
 letter-spacing:2px;
-color:white;
-text-shadow:0 2px 8px rgba(0,0,0,.5);
-}
-
-.cover-content{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
-align-items:end;
-}
-
-.story{
-background:rgba(255,255,255,.72);
-backdrop-filter:blur(8px);
-border:1px solid rgba(255,255,255,.7);
-padding:16px;
-border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,.12);
-animation:fadeUp 1s forwards;
-opacity:0;
-}
-
-.story h2{
-font-size:25px;
-line-height:1;
-text-transform:uppercase;
-}
-
-.story p{
-font-size:14px;
-margin-top:8px;
-line-height:1.4;
-}
-
-.story:nth-child(1){animation-delay:.2s;}
-.story:nth-child(2){animation-delay:.45s;}
-.story:nth-child(3){animation-delay:.7s;}
-.story:nth-child(4){animation-delay:.95s;}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(18px);}
-to{opacity:1;transform:translateY(0);}
+color:#f4dfb0;
+text-align:right;
 }
 
 .cover-star{
+position:relative;
+z-index:2;
 text-align:center;
-margin:30px auto;
-background:rgba(255,255,255,.78);
+margin:20px auto;
+background:rgba(0,0,0,.45);
+border:1px solid rgba(216,179,90,.55);
 border-radius:30px;
 padding:22px;
-max-width:420px;
-box-shadow:0 15px 40px rgba(0,0,0,.16);
+max-width:430px;
+box-shadow:0 15px 45px rgba(0,0,0,.45);
+backdrop-filter:blur(8px);
 }
 
 .crown{
-font-size:42px;
+font-size:44px;
 animation:glow 2s infinite ease-in-out;
 }
 
 @keyframes glow{
 0%,100%{filter:drop-shadow(0 0 0 rgba(255,210,100,0));}
-50%{filter:drop-shadow(0 0 12px rgba(255,210,100,.9));}
+50%{filter:drop-shadow(0 0 16px rgba(255,210,100,1));}
 }
 
 .cover-star small{
@@ -146,10 +175,11 @@ display:block;
 letter-spacing:3px;
 font-size:12px;
 margin-top:8px;
+color:#f4dfb0;
 }
 
 .name{
-font-size:52px;
+font-size:54px;
 line-height:1;
 margin-top:8px;
 }
@@ -157,27 +187,98 @@ margin-top:8px;
 .subtitle{
 font-size:16px;
 margin-top:8px;
-color:#6b4a20;
+color:#ffd8e8;
 }
 
 .open-btn{
 display:inline-block;
 margin-top:18px;
 padding:15px 34px;
-background:#111;
-color:white;
+background:#d8b35a;
+color:#111;
 text-decoration:none;
 border-radius:40px;
 font-weight:bold;
 letter-spacing:1px;
+box-shadow:0 0 25px rgba(216,179,90,.45);
 }
 
-.footer-line{
+.cover-content{
+position:relative;
+z-index:2;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.story{
+background:rgba(0,0,0,.52);
+border:1px solid rgba(255,255,255,.18);
+padding:15px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+animation:fadeUp 1s forwards;
+opacity:0;
+}
+
+.story h2{
+font-size:24px;
+line-height:1;
+text-transform:uppercase;
+}
+
+.story p{
+font-size:13px;
+margin-top:8px;
+line-height:1.4;
+color:#f4dfb0;
+}
+
+.story:nth-child(1){animation-delay:.3s;}
+.story:nth-child(2){animation-delay:.55s;}
+.story:nth-child(3){animation-delay:.8s;}
+.story:nth-child(4){animation-delay:1.05s;}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(18px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.sparkle{
+position:absolute;
+z-index:4;
+width:9px;
+height:9px;
+background:white;
+clip-path:polygon(50% 0%,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0% 50%,39% 38%);
+filter:drop-shadow(0 0 8px gold);
+animation:spark 2.8s infinite;
+}
+
+.s1{top:28%;left:22%;animation-delay:.2s;}
+.s2{top:42%;right:18%;animation-delay:1s;}
+.s3{bottom:30%;left:55%;animation-delay:1.8s;}
+.s4{bottom:18%;right:28%;animation-delay:2.4s;}
+
+@keyframes spark{
+0%,100%{opacity:0;transform:scale(.4) rotate(0deg);}
+45%{opacity:1;transform:scale(1.4) rotate(90deg);}
+}
+
+.swipe{
+position:relative;
+z-index:2;
 text-align:center;
 font-size:13px;
 letter-spacing:3px;
-color:#6b4a20;
+color:#f4dfb0;
 padding-bottom:5px;
+animation:swipeMove 1.6s infinite ease-in-out;
+}
+
+@keyframes swipeMove{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
 }
 
 @media(max-width:700px){
@@ -188,25 +289,25 @@ padding:16px;
 font-size:22px;
 }
 .logo{
-font-size:23vw;
+font-size:24vw;
 letter-spacing:2px;
 }
-.cover-content{
-grid-template-columns:1fr 1fr;
+.tagline{
+font-size:10px;
 }
-.story{
-padding:13px;
-}
-.story h2{
-font-size:19px;
-}
-.story p{
-font-size:12px;
+.issue{
+font-size:11px;
 }
 .name{
 font-size:44px;
 }
-.issue{
+.story{
+padding:12px;
+}
+.story h2{
+font-size:18px;
+}
+.story p{
 font-size:11px;
 }
 }
@@ -216,6 +317,11 @@ font-size:11px;
 <body>
 
 <main class="cover">
+
+<div class="sparkle s1"></div>
+<div class="sparkle s2"></div>
+<div class="sparkle s3"></div>
+<div class="sparkle s4"></div>
 
 <div class="issue">
 SUMMER 2026<br>ISSUE 01
@@ -231,7 +337,7 @@ SUMMER 2026<br>ISSUE 01
 <div class="crown">👑</div>
 <small>MODEL OF THE MONTH</small>
 <div class="name">MISO</div>
-<div class="subtitle">Summer elegance from Santorini to Capri</div>
+<div class="subtitle">and the Sphynx — the icons of summer luxury</div>
 
 <a class="open-btn" href="magazine.html">
 OPEN MAGAZINE →
@@ -241,29 +347,29 @@ OPEN MAGAZINE →
 <section class="cover-content">
 
 <div class="story">
-<h2>Capri Pet Style</h2>
-<p>Silk bows, golden collars and summer looks for stylish animals.</p>
+<h2>Fashion Has Paws</h2>
+<p>The season’s most stylish pet looks.</p>
 </div>
 
 <div class="story">
-<h2>Santorini Escape</h2>
-<p>White villas, blue sea and pet-friendly luxury travel.</p>
+<h2>Stars Without Limits</h2>
+<p>Dogs, cats, rabbits, birds and beyond.</p>
 </div>
 
 <div class="story">
-<h2>Summer Health</h2>
-<p>Heat, paws, hydration and care during hot sunny days.</p>
+<h2>Luxury Travel</h2>
+<p>Santorini, Capri and pet-friendly villas.</p>
 </div>
 
 <div class="story">
-<h2>Luxury Living</h2>
-<p>Beautiful pet furniture, interiors and seaside comfort.</p>
+<h2>Happy & Healthy</h2>
+<p>Summer wellness, care and expert advice.</p>
 </div>
 
 </section>
 
-<div class="footer-line">
-SANTORINI • CAPRI • CÔTE D’AZUR • SUMMER LUXURY
+<div class="swipe">
+SWIPE TO OPEN ↑
 </div>
 
 </main>
