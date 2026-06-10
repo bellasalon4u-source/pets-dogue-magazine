@@ -120,6 +120,49 @@ color:#666;
 line-height:1.5;
 }
 
+.dynamic-section{
+max-width:1200px;
+margin:50px auto;
+padding:0 20px;
+}
+
+.dynamic-section h2{
+font-size:42px;
+margin-bottom:25px;
+font-family:Georgia,serif;
+}
+
+.article-card{
+background:white;
+padding:25px;
+border-radius:25px;
+border:2px solid #111;
+margin-bottom:20px;
+}
+
+.article-card h3{
+margin-bottom:15px;
+font-size:28px;
+}
+
+.article-card p{
+line-height:1.8;
+color:#444;
+}
+
+.ad-card{
+background:#f6ecd3;
+padding:25px;
+border-radius:25px;
+border:2px solid #c9a043;
+margin-bottom:20px;
+}
+
+.ad-card h3{
+margin-bottom:12px;
+color:#a17718;
+}
+
 .admin-btn{
 position:fixed;
 bottom:30px;
@@ -161,14 +204,12 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 <section class="hero">
 
 <div class="cover">
-
-<img src="images/cover-01.png" alt="Issue 01">
-
+<img id="coverImage" src="images/cover-01.png" alt="Issue 01">
 </div>
 
 <div class="issue">
-<h1>Issue 01 — Summer 2026</h1>
-<p>Welcome to the world's luxury magazine for pets.</p>
+<h1 id="issueTitle">Issue 01 — Summer 2026</h1>
+<p id="issueDesc">Welcome to the world's luxury magazine for pets.</p>
 </div>
 
 </section>
@@ -182,22 +223,22 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 
 <div class="card">
 <h3>✈️ Luxury Travel</h3>
-<p>The best pet-friendly villas, hotels and yachts.</p>
+<p>The best pet-friendly hotels and destinations.</p>
 </div>
 
 <div class="card">
 <h3>❤️ Wellness</h3>
-<p>Health, care and wellbeing for modern pets.</p>
+<p>Health and wellbeing for modern pets.</p>
 </div>
 
 <div class="card">
 <h3>👑 Royal Pets</h3>
-<p>Meet the most glamorous animals in the world.</p>
+<p>The most glamorous animals in the world.</p>
 </div>
 
 <div class="card">
 <h3>📸 Model Of The Month</h3>
-<p>This month: Miso and the stars of summer.</p>
+<p>Miso and the stars of summer.</p>
 </div>
 
 <div class="card">
@@ -207,16 +248,73 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 
 </section>
 
+<section class="dynamic-section">
+<h2>Latest Articles</h2>
+<div id="articlesContainer"></div>
+</section>
+
+<section class="dynamic-section">
+<h2>Partners & Advertising</h2>
+<div id="adsContainer"></div>
+</section>
+
 <a href="admin.html" class="admin-btn">
 ADMIN
 </a>
 
 <footer>
-
 <h2>PETS & DOGUE</h2>
 <p>The International Luxury Animal Magazine</p>
-
 </footer>
+
+<script>
+
+const issueTitle = localStorage.getItem("issueTitle");
+const issueDesc = localStorage.getItem("issueDesc");
+const coverPath = localStorage.getItem("coverPath");
+
+if(issueTitle){
+document.getElementById("issueTitle").textContent = issueTitle;
+}
+
+if(issueDesc){
+document.getElementById("issueDesc").textContent = issueDesc;
+}
+
+if(coverPath){
+document.getElementById("coverImage").src = coverPath;
+}
+
+const articles = JSON.parse(localStorage.getItem("articles") || "[]");
+const ads = JSON.parse(localStorage.getItem("ads") || "[]");
+
+const articlesContainer = document.getElementById("articlesContainer");
+
+articles.forEach(article => {
+
+articlesContainer.innerHTML += `
+<div class="article-card">
+<h3>${article.title}</h3>
+<p>${article.text}</p>
+</div>
+`;
+
+});
+
+const adsContainer = document.getElementById("adsContainer");
+
+ads.forEach(ad => {
+
+adsContainer.innerHTML += `
+<div class="ad-card">
+<h3>${ad.name}</h3>
+<p>${ad.text}</p>
+</div>
+`;
+
+});
+
+</script>
 
 </body>
 </html>
