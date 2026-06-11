@@ -3,22 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PETS & DOGUE Admin</title>
+<title>Admin - PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-header{background:#111;color:white;padding:25px;text-align:center}
-header h1{font-family:Georgia,serif;color:#d6aa45;font-size:42px}
-main{max-width:1000px;margin:auto;padding:25px}
-.panel{background:white;border:2px solid #111;border-radius:25px;padding:25px;margin-bottom:25px}
-.panel h2{margin-bottom:15px}
-label{display:block;margin-top:15px;font-weight:bold}
-input,textarea{width:100%;padding:14px;margin-top:8px;border:1px solid #ccc;border-radius:12px;font-size:16px}
-textarea{min-height:100px}
-button{margin-top:20px;background:#111;color:white;border:none;padding:15px 25px;border-radius:999px;font-weight:bold;font-size:16px}
-.preview{margin-top:20px;padding:20px;background:#f1eadc;border-radius:18px}
-a{color:#d6aa45}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+header{
+background:#111;
+color:white;
+padding:30px 20px;
+text-align:center;
+}
+
+header h1{
+font-family:Georgia,serif;
+font-size:46px;
+color:#d6aa45;
+}
+
+header p{
+margin-top:8px;
+color:#eee;
+}
+
+main{
+max-width:1100px;
+margin:auto;
+padding:30px 20px;
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.stat{
+background:white;
+border:2px solid #111;
+border-radius:25px;
+padding:25px;
+text-align:center;
+}
+
+.stat h2{
+font-size:36px;
+color:#c89b3c;
+}
+
+.stat p{
+color:#555;
+margin-top:8px;
+}
+
+.panel{
+background:white;
+border:2px solid #111;
+border-radius:30px;
+padding:28px;
+margin-bottom:25px;
+}
+
+.panel h2{
+font-family:Georgia,serif;
+font-size:34px;
+margin-bottom:15px;
+}
+
+label{
+display:block;
+margin-top:18px;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:14px;
+font-size:16px;
+}
+
+textarea{
+min-height:130px;
+resize:vertical;
+}
+
+button{
+margin-top:20px;
+background:#111;
+color:white;
+border:none;
+padding:16px 26px;
+border-radius:999px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.preview{
+margin-top:20px;
+padding:20px;
+background:#f1eadc;
+border-radius:20px;
+}
+
+.preview-item{
+background:white;
+border:1px solid #ddd;
+border-radius:18px;
+padding:18px;
+margin-bottom:15px;
+}
+
+.preview-item h3{
+margin-bottom:8px;
+}
+
+.preview-item p{
+color:#555;
+line-height:1.6;
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.actions a{
+display:inline-block;
+background:#111;
+color:white;
+text-decoration:none;
+padding:14px 20px;
+border-radius:999px;
+font-weight:bold;
+}
+
+.small-note{
+font-size:14px;
+color:#666;
+line-height:1.6;
+margin-top:10px;
+}
+
+footer{
+text-align:center;
+padding:35px;
+color:#666;
+}
 </style>
 </head>
 
@@ -26,162 +174,284 @@ a{color:#d6aa45}
 
 <header>
 <h1>PETS & DOGUE Admin</h1>
-<p>Manage covers, articles and advertisements</p>
+<p>Magazine management panel</p>
 </header>
 
 <main>
 
-<div class="panel">
-<h2>📰 Current Issue</h2>
+<section class="dashboard">
+
+<div class="stat">
+<h2>02</h2>
+<p>Issues</p>
+</div>
+
+<div class="stat">
+<h2>06</h2>
+<p>Categories</p>
+</div>
+
+<div class="stat">
+<h2 id="articleCount">0</h2>
+<p>Saved Articles</p>
+</div>
+
+<div class="stat">
+<h2 id="adCount">0</h2>
+<p>Advertisements</p>
+</div>
+
+</section>
+
+<section class="panel">
+
+<h2>📰 Current Issue Settings</h2>
 
 <label>Issue Title</label>
 <input id="issueTitle" value="Issue 01 — Summer 2026">
 
-<label>Magazine Description</label>
+<label>Issue Description</label>
 <textarea id="issueDesc">Welcome to the world's luxury magazine for pets.</textarea>
 
-<button onclick="saveIssue()">Save Issue</button>
-</div>
-
-<div class="panel">
-<h2>🖼 Cover Image</h2>
-
 <label>Cover Image Path</label>
-<input id="coverPath" value="images/cover-01.png">
+<input id="coverPath" value="file_00000000a9d471fda9b4629589be22a9.png">
 
-<p style="margin-top:10px;color:#666">
-Upload your cover into the images folder and write the path here.
+<p class="small-note">
+Use the exact uploaded image filename. Example: file_00000000a9d471fda9b4629589be22a9.png
 </p>
 
-<button onclick="saveCover()">Save Cover</button>
-</div>
+<button onclick="saveIssue()">Save Issue Settings</button>
 
-<div class="panel">
-<h2>✍️ Add Article</h2>
+</section>
+
+<section class="panel">
+
+<h2>✍️ Create Article</h2>
+
+<label>Article Category</label>
+<select id="articleCategory">
+<option>Cover Story</option>
+<option>Dogs</option>
+<option>Cats</option>
+<option>Birds</option>
+<option>Rabbits</option>
+<option>Horses</option>
+<option>Exotic Pets</option>
+<option>Travel</option>
+<option>Wellness</option>
+<option>Advertising</option>
+</select>
 
 <label>Article Title</label>
-<input id="articleTitle" placeholder="Miso — Model of the Month">
+<input id="articleTitle" placeholder="Miso — Model Of The Month">
 
 <label>Article Text</label>
-<textarea id="articleText" placeholder="Write your article here..."></textarea>
+<textarea id="articleText" placeholder="Write article text here..."></textarea>
 
-<button onclick="addArticle()">Add Article</button>
+<button onclick="addArticle()">Save Article</button>
 
 <div class="preview" id="articlesList">
-No articles yet.
-</div>
+No saved articles yet.
 </div>
 
-<div class="panel">
-<h2>💎 Add Advertisement</h2>
+</section>
 
-<label>Advertiser Name</label>
+<section class="panel">
+
+<h2>💎 Advertising Manager</h2>
+
+<label>Advertiser / Brand Name</label>
 <input id="adName" placeholder="Luxury Pet Boutique">
+
+<label>Advertising Type</label>
+<select id="adType">
+<option>Sponsored Article</option>
+<option>Banner Placement</option>
+<option>Cover Partner</option>
+<option>Pet Brand Feature</option>
+</select>
 
 <label>Advertisement Text</label>
 <textarea id="adText" placeholder="Write advertisement text..."></textarea>
 
-<button onclick="addAd()">Add Advertisement</button>
+<button onclick="addAd()">Save Advertisement</button>
 
 <div class="preview" id="adsList">
 No advertisements yet.
 </div>
+
+</section>
+
+<section class="panel">
+
+<h2>📚 Quick Magazine Links</h2>
+
+<div class="actions">
+<a href="index.html">Open Home</a>
+<a href="issue-01.html">Open Issue 01</a>
+<a href="issue-02.html">Open Issue 02</a>
+<a href="archive.html">Open Archive</a>
+<a href="articles.html">Open Articles</a>
+<a href="categories.html">Open Categories</a>
+<a href="advertise.html">Open Advertise</a>
+<a href="contact.html">Open Contact</a>
 </div>
 
-<div class="panel">
-<h2>🔗 Back To Magazine</h2>
-<p><a href="index.html">Open PETS & DOGUE homepage</a></p>
+</section>
+
+<section class="panel">
+
+<h2>⚖️ Legal Pages</h2>
+
+<div class="actions">
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+<a href="cookies.html">Cookies</a>
+<a href="copyright.html">Copyright</a>
 </div>
+
+</section>
 
 </main>
 
+<footer>
+PETS & DOGUE Admin Panel
+</footer>
+
 <script>
-let articles = [];
-let ads = [];
+let articles = JSON.parse(localStorage.getItem("articles") || "[]");
+let ads = JSON.parse(localStorage.getItem("ads") || "[]");
 
 function saveIssue(){
 localStorage.setItem("issueTitle", document.getElementById("issueTitle").value);
 localStorage.setItem("issueDesc", document.getElementById("issueDesc").value);
-alert("Issue saved");
-}
-
-function saveCover(){
 localStorage.setItem("coverPath", document.getElementById("coverPath").value);
-alert("Cover saved");
+alert("Issue settings saved");
 }
 
 function addArticle(){
-let title = document.getElementById("articleTitle").value;
-let text = document.getElementById("articleText").value;
+const category = document.getElementById("articleCategory").value;
+const title = document.getElementById("articleTitle").value;
+const text = document.getElementById("articleText").value;
 
 if(!title || !text){
-alert("Please add title and text");
+alert("Please add article title and text");
 return;
 }
 
-articles.push({title,text});
-renderArticles();
+articles.push({
+category:category,
+title:title,
+text:text
+});
+
+localStorage.setItem("articles", JSON.stringify(articles));
 
 document.getElementById("articleTitle").value = "";
 document.getElementById("articleText").value = "";
-}
 
-function renderArticles(){
-let box = document.getElementById("articlesList");
-
-box.innerHTML = articles.map(item => `
-<div style="margin-bottom:15px">
-<h3>${item.title}</h3>
-<p>${item.text}</p>
-</div>
-`).join("");
-
-localStorage.setItem("articles", JSON.stringify(articles));
-}
-
-function addAd(){
-let name = document.getElementById("adName").value;
-let text = document.getElementById("adText").value;
-
-if(!name || !text){
-alert("Please add advertiser and text");
-return;
-}
-
-ads.push({name,text});
-renderAds();
-
-document.getElementById("adName").value = "";
-document.getElementById("adText").value = "";
-}
-
-function renderAds(){
-let box = document.getElementById("adsList");
-
-box.innerHTML = ads.map(item => `
-<div style="margin-bottom:15px">
-<h3>${item.name}</h3>
-<p>${item.text}</p>
-</div>
-`).join("");
-
-localStorage.setItem("ads", JSON.stringify(ads));
-}
-
-window.onload = function(){
-let savedArticles = localStorage.getItem("articles");
-let savedAds = localStorage.getItem("ads");
-
-if(savedArticles){
-articles = JSON.parse(savedArticles);
 renderArticles();
 }
 
-if(savedAds){
-ads = JSON.parse(savedAds);
+function renderArticles(){
+const box = document.getElementById("articlesList");
+const count = document.getElementById("articleCount");
+
+count.textContent = articles.length;
+
+if(articles.length === 0){
+box.innerHTML = "No saved articles yet.";
+return;
+}
+
+box.innerHTML = articles.map((item,index) => `
+<div class="preview-item">
+<h3>${item.title}</h3>
+<p><strong>Category:</strong> ${item.category}</p>
+<p>${item.text}</p>
+<button onclick="deleteArticle(${index})">Delete</button>
+</div>
+`).join("");
+}
+
+function deleteArticle(index){
+articles.splice(index,1);
+localStorage.setItem("articles", JSON.stringify(articles));
+renderArticles();
+}
+
+function addAd(){
+const name = document.getElementById("adName").value;
+const type = document.getElementById("adType").value;
+const text = document.getElementById("adText").value;
+
+if(!name || !text){
+alert("Please add advertiser name and text");
+return;
+}
+
+ads.push({
+name:name,
+type:type,
+text:text
+});
+
+localStorage.setItem("ads", JSON.stringify(ads));
+
+document.getElementById("adName").value = "";
+document.getElementById("adText").value = "";
+
 renderAds();
 }
+
+function renderAds(){
+const box = document.getElementById("adsList");
+const count = document.getElementById("adCount");
+
+count.textContent = ads.length;
+
+if(ads.length === 0){
+box.innerHTML = "No advertisements yet.";
+return;
 }
+
+box.innerHTML = ads.map((item,index) => `
+<div class="preview-item">
+<h3>${item.name}</h3>
+<p><strong>Type:</strong> ${item.type}</p>
+<p>${item.text}</p>
+<button onclick="deleteAd(${index})">Delete</button>
+</div>
+`).join("");
+}
+
+function deleteAd(index){
+ads.splice(index,1);
+localStorage.setItem("ads", JSON.stringify(ads));
+renderAds();
+}
+
+function loadSavedIssue(){
+const savedTitle = localStorage.getItem("issueTitle");
+const savedDesc = localStorage.getItem("issueDesc");
+const savedCover = localStorage.getItem("coverPath");
+
+if(savedTitle){
+document.getElementById("issueTitle").value = savedTitle;
+}
+
+if(savedDesc){
+document.getElementById("issueDesc").value = savedDesc;
+}
+
+if(savedCover){
+document.getElementById("coverPath").value = savedCover;
+}
+}
+
+loadSavedIssue();
+renderArticles();
+renderAds();
 </script>
 
 </body>
