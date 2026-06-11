@@ -3,141 +3,395 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hall Of Fame - PETS & DOGUE</title>
+<title>Hall Of Fame | PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-header{background:white;padding:18px;text-align:center;border-bottom:1px solid #ddd}
-.logo-small{font-size:22px;color:#b78a2e}
-.logo-big{font-size:72px;font-family:Georgia,serif;font-weight:bold;letter-spacing:4px;color:#c89b3c;line-height:.9}
-.tagline{margin-top:8px;font-size:13px;letter-spacing:2px;color:#666}
-nav{margin-top:18px;display:flex;justify-content:center;flex-wrap:wrap;gap:18px}
-nav a{text-decoration:none;color:#111;font-weight:bold;font-size:15px}
-main{max-width:1300px;margin:auto;padding:40px 20px}
-.hero{text-align:center;margin-bottom:50px}
-.hero h1{font-family:Georgia,serif;font-size:62px;margin-bottom:15px}
-.hero p{font-size:20px;color:#555;line-height:1.8;max-width:850px;margin:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
-.pet-card{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.08)}
-.pet-photo{height:330px;background:linear-gradient(135deg,#111,#c89b3c);display:flex;align-items:center;justify-content:center;color:white;font-family:Georgia,serif;font-size:52px}
-.pet-info{padding:25px}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:15px}
-.pet-info h2{font-family:Georgia,serif;font-size:34px;margin-bottom:10px}
-.pet-info p{color:#555;line-height:1.7}
-.cta{margin-top:55px;background:#111;color:white;border-radius:40px;padding:45px 25px;text-align:center}
-.cta h2{font-family:Georgia,serif;color:#d6aa45;font-size:44px;margin-bottom:15px}
-.cta p{color:#eee;font-size:18px;line-height:1.8;max-width:850px;margin:auto}
-.cta a{display:inline-block;margin-top:25px;background:white;color:#111;text-decoration:none;padding:18px 28px;border-radius:999px;font-weight:bold}
-footer{margin-top:60px;padding:50px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:inline-block;margin-top:25px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
-@media(max-width:600px){.logo-big{font-size:54px}.hero h1{font-size:42px}}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:20px;
+text-align:center;
+}
+
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:52px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+position:relative;
+height:500px;
+overflow:hidden;
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to top,
+rgba(0,0,0,.88),
+rgba(0,0,0,.2));
+}
+
+.hero-content{
+position:absolute;
+bottom:50px;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+color:white;
+width:90%;
+}
+
+.hero-content h1{
+font-size:70px;
+font-family:Georgia,serif;
+margin-bottom:15px;
+}
+
+.hero-content p{
+font-size:22px;
+max-width:900px;
+margin:auto;
+line-height:1.7;
+}
+
+.section{
+max-width:1400px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:50px;
+}
+
+.winners{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.card img{
+width:100%;
+height:340px;
+object-fit:cover;
+}
+
+.card-content{
+padding:25px;
+}
+
+.badge{
+display:inline-block;
+background:#c89b3c;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:14px;
+}
+
+.card h3{
+font-size:34px;
+font-family:Georgia,serif;
+margin-bottom:12px;
+}
+
+.card p{
+color:#555;
+line-height:1.8;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:60px;
+}
+
+.stat{
+background:white;
+border:2px solid #111;
+border-radius:30px;
+padding:30px;
+text-align:center;
+}
+
+.stat h2{
+font-size:50px;
+font-family:Georgia,serif;
+color:#c89b3c;
+margin-bottom:10px;
+}
+
+.stat p{
+color:#666;
+}
+
+.nominate{
+background:#111;
+color:white;
+border-radius:40px;
+padding:60px 30px;
+text-align:center;
+margin-top:80px;
+}
+
+.nominate h2{
+font-size:52px;
+font-family:Georgia,serif;
+color:#d6aa45;
+margin-bottom:20px;
+}
+
+.nominate p{
+max-width:850px;
+margin:auto;
+font-size:20px;
+line-height:1.8;
+}
+
+.nominate a{
+display:inline-block;
+margin-top:30px;
+background:white;
+color:#111;
+padding:18px 30px;
+border-radius:999px;
+font-weight:bold;
+text-decoration:none;
+}
+
+footer{
+margin-top:80px;
+padding:40px;
+text-align:center;
+background:white;
+border-top:1px solid #ddd;
+}
+
+.admin{
+font-size:11px;
+letter-spacing:2px;
+color:#999;
+text-decoration:none;
+display:block;
+margin-top:20px;
+}
+
+@media(max-width:768px){
+
+.hero{
+height:420px;
+}
+
+.hero-content h1{
+font-size:48px;
+}
+
+.hero-content p{
+font-size:18px;
+}
+
+.section-title{
+font-size:40px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="logo-small">pets &</div>
 <div class="logo-big">DOGUE</div>
-<div class="tagline">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="issue-01.html">Latest Issue</a>
-<a href="archive.html">Archive</a>
-<a href="articles.html">Articles</a>
-<a href="categories.html">Categories</a>
-<a href="submit-pet.html">Submit Pet</a>
-<a href="become-cover-star.html">Cover Star</a>
-<a href="hall-of-fame.html">Hall Of Fame</a>
-<a href="media-kit.html">Media Kit</a>
-<a href="advertise.html">Advertise</a>
-<a href="contact.html">Contact</a>
-</nav>
 </header>
 
-<main>
-
 <section class="hero">
+
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1800&q=80">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
 <h1>Hall Of Fame</h1>
-<p>
-A prestigious gallery of pets featured in PETS & DOGUE issues, editorials and cover stories.
-</p>
-</section>
-
-<section class="grid">
-
-<div class="pet-card">
-<div class="pet-photo">MISO</div>
-<div class="pet-info">
-<span class="badge">ISSUE 01 COVER STAR</span>
-<h2>Miso</h2>
-<p>Category: Dog. The first official PETS & DOGUE cover star and face of the Summer 2026 issue.</p>
-</div>
-</div>
-
-<div class="pet-card">
-<div class="pet-photo">CAT</div>
-<div class="pet-info">
-<span class="badge">ISSUE 01 ICON</span>
-<h2>Royal Cat</h2>
-<p>Category: Cat. Featured in the debut issue as part of the Icons Of Summer editorial.</p>
-</div>
-</div>
-
-<div class="pet-card">
-<div class="pet-photo">BIRD</div>
-<div class="pet-info">
-<span class="badge">ISSUE 01 ICON</span>
-<h2>Golden Bird</h2>
-<p>Category: Bird. A colourful symbol of elegance, freedom and exotic beauty.</p>
-</div>
-</div>
-
-<div class="pet-card">
-<div class="pet-photo">NEXT</div>
-<div class="pet-info">
-<span class="badge">COMING SOON</span>
-<h2>Next Cover Star</h2>
-<p>Category: To be selected. Submit your pet for a chance to appear in a future DOGUE issue.</p>
-</div>
-</div>
-
-</section>
-
-<section class="cta">
-
-<h2>Your Pet Could Join The Hall Of Fame</h2>
 
 <p>
-Submit your animal for editorial consideration and future PETS & DOGUE features.
-Selected pets may appear in articles, photo stories, social media or future magazine covers.
+Celebrating the most inspiring, beautiful, courageous and unforgettable animals from around the world.
 </p>
 
-<a href="submit-pet.html">Submit Your Pet</a>
+</div>
 
 </section>
 
-</main>
+<section class="section">
+
+<h2 class="section-title">
+Legendary Pets
+</h2>
+
+<div class="winners">
+
+<div class="card">
+
+<img src="file_00000000a9d471fda9b4629589be22a9.png">
+
+<div class="card-content">
+
+<div class="badge">
+COVER STAR
+</div>
+
+<h3>Miso</h3>
+
+<p>
+The first official PETS & DOGUE cover star and one of the founding faces of the magazine.
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80">
+
+<div class="card-content">
+
+<div class="badge">
+COMMUNITY HERO
+</div>
+
+<h3>Max</h3>
+
+<p>
+Recognised for bringing people together through local community events and charity work.
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80">
+
+<div class="card-content">
+
+<div class="badge">
+INSPIRATION AWARD
+</div>
+
+<h3>Luna</h3>
+
+<p>
+An inspiring rescue story that touched thousands of readers around the world.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h2>250+</h2>
+<p>Featured Pets</p>
+</div>
+
+<div class="stat">
+<h2>40+</h2>
+<p>Cover Stars</p>
+</div>
+
+<div class="stat">
+<h2>18</h2>
+<p>Countries Represented</p>
+</div>
+
+<div class="stat">
+<h2>10K+</h2>
+<p>Community Votes</p>
+</div>
+
+</div>
+
+<div class="nominate">
+
+<h2>
+Nominate A Future Legend
+</h2>
+
+<p>
+Know a pet with an incredible story, outstanding achievements or a unique personality?
+Submit them for a chance to join the PETS & DOGUE Hall Of Fame.
+</p>
+
+<a href="submit-pet.html">
+Nominate A Pet
+</a>
+
+</div>
+
+</section>
 
 <footer>
 
 <h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
 
-<div class="footer-links">
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms</a>
-<a href="copyright.html">Copyright</a>
-<a href="cookies.html">Cookies</a>
-<a href="contact.html">Contact</a>
-<a href="advertise.html">Advertise</a>
-</div>
+<p>
+The International Luxury Animal Magazine
+</p>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a href="admin.html" class="admin">
+ADMIN
+</a>
 
 </footer>
 
