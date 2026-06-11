@@ -9,98 +9,547 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:#f8f7f3;color:#111}
 
-header{background:white;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:1000}
-.header-inner{max-width:1400px;margin:auto;padding:18px;text-align:center}
-.logo-small{font-size:20px;color:#b78a2e}
-.logo-big{font-size:72px;font-family:Georgia,serif;font-weight:bold;letter-spacing:4px;color:#c89b3c;line-height:.9}
-.tagline{margin-top:8px;font-size:12px;letter-spacing:2px;color:#666}
+header{
+background:white;
+border-bottom:1px solid #ddd;
+position:sticky;
+top:0;
+z-index:1000;
+}
 
-nav{margin-top:18px;display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
-nav a{text-decoration:none;color:#111;font-weight:bold;font-size:13px}
+.top-bar{
+height:62px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
+max-width:1400px;
+margin:auto;
+}
 
-.hero{max-width:1400px;margin:auto;padding:20px}
-.cover-link{display:block}
-.cover{overflow:hidden;border-radius:35px;box-shadow:0 15px 50px rgba(0,0,0,.15)}
-.cover img{width:100%;display:block}
+.menu-btn{
+background:none;
+border:none;
+font-size:32px;
+cursor:pointer;
+line-height:1;
+}
 
-.welcome{max-width:1000px;margin:60px auto;padding:0 20px;text-align:center}
-.welcome h1{font-size:58px;font-family:Georgia,serif;margin-bottom:20px}
-.welcome p{font-size:22px;line-height:1.8;color:#555}
+.lang{
+font-size:13px;
+letter-spacing:1px;
+color:#555;
+font-weight:bold;
+}
 
-.featured,.categories,.cta-section,.newsletter{max-width:1300px;margin:70px auto;padding:0 20px}
-.section-title{font-size:50px;font-family:Georgia,serif;margin-bottom:30px;text-align:center}
+.brand{
+text-align:center;
+line-height:.9;
+}
 
-.grid,.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.logo-small{
+font-size:15px;
+color:#b78a2e;
+}
 
-.card{background:white;border:2px solid #111;border-radius:30px;padding:25px;transition:.3s;text-decoration:none;color:#111}
-.card:hover{transform:translateY(-6px)}
-.card h3{font-size:28px;margin-bottom:15px}
-.card p{line-height:1.7;color:#555}
+.logo-big{
+font-size:42px;
+font-family:Georgia,serif;
+font-weight:bold;
+letter-spacing:3px;
+color:#c89b3c;
+}
 
-.category-card{position:relative;height:340px;border-radius:35px;overflow:hidden;border:2px solid #111;text-decoration:none;color:white;box-shadow:0 12px 35px rgba(0,0,0,.12)}
-.category-card img{width:100%;height:100%;object-fit:cover;transition:.4s}
-.category-card:hover img{transform:scale(1.06)}
-.category-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.08))}
-.category-content{position:absolute;left:25px;right:25px;bottom:25px}
-.category-content span{display:inline-block;background:#c89b3c;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:12px}
-.category-content h3{font-size:38px;font-family:Georgia,serif;margin-bottom:8px}
-.category-content p{font-size:16px;line-height:1.5;color:#eee}
+.side-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:min(420px,92%);
+height:100vh;
+background:#fff;
+z-index:3000;
+transition:.35s;
+overflow-y:auto;
+border-right:2px solid #111;
+}
 
-.read-btn{display:block;max-width:320px;margin:50px auto;text-align:center;text-decoration:none;background:#111;color:white;padding:20px;border-radius:999px;font-weight:bold;font-size:20px}
+.side-menu.open{
+left:0;
+}
 
-.cta-box{background:#111;color:white;border-radius:40px;padding:45px 25px;text-align:center}
-.cta-box h2{font-family:Georgia,serif;font-size:46px;color:#d6aa45;margin-bottom:15px}
-.cta-box p{max-width:850px;margin:auto;font-size:20px;line-height:1.8;color:#eee}
-.cta-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:30px}
-.cta-buttons a{background:white;color:#111;padding:18px 26px;border-radius:999px;text-decoration:none;font-weight:bold}
+.menu-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:22px;
+border-bottom:1px solid #ddd;
+}
 
-.newsletter-box{background:white;border:2px solid #111;border-radius:35px;padding:40px 25px;text-align:center}
-.newsletter-box h2{font-family:Georgia,serif;font-size:46px;margin-bottom:15px}
-.newsletter-box p{font-size:18px;color:#555;line-height:1.7;margin-bottom:25px}
-.newsletter-form{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.newsletter-form input{width:min(420px,100%);padding:16px;border:1px solid #ccc;border-radius:999px;font-size:16px}
-.newsletter-form button{background:#111;color:white;border:none;padding:16px 26px;border-radius:999px;font-weight:bold;font-size:16px}
+.menu-header h2{
+font-family:Georgia,serif;
+font-size:32px;
+color:#c89b3c;
+}
 
-footer{margin-top:60px;padding:50px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-footer h2{font-size:42px;font-family:Georgia,serif;margin-bottom:10px}
-.footer-text{font-size:18px;color:#555;margin-bottom:25px}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-bottom:25px}
-.footer-links a{color:#666;text-decoration:none;font-size:14px}
-.admin-small{font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+.close-btn{
+background:#111;
+color:white;
+border:none;
+font-size:22px;
+width:42px;
+height:42px;
+border-radius:50%;
+cursor:pointer;
+}
+
+.menu-list{
+padding:18px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.menu-item{
+display:flex;
+align-items:center;
+gap:14px;
+text-decoration:none;
+color:#111;
+border:2px solid #111;
+border-radius:22px;
+padding:10px;
+background:#f8f7f3;
+}
+
+.menu-item img{
+width:74px;
+height:74px;
+object-fit:cover;
+border-radius:16px;
+}
+
+.menu-item h3{
+font-family:Georgia,serif;
+font-size:22px;
+margin-bottom:4px;
+}
+
+.menu-item p{
+font-size:13px;
+color:#555;
+line-height:1.4;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+z-index:2500;
+display:none;
+}
+
+.overlay.show{
+display:block;
+}
+
+.hero{
+max-width:1400px;
+margin:auto;
+padding:20px;
+}
+
+.cover-link{
+display:block;
+}
+
+.cover{
+overflow:hidden;
+border-radius:35px;
+box-shadow:0 15px 50px rgba(0,0,0,.15);
+}
+
+.cover img{
+width:100%;
+display:block;
+}
+
+.welcome{
+max-width:1000px;
+margin:60px auto;
+padding:0 20px;
+text-align:center;
+}
+
+.welcome h1{
+font-size:58px;
+font-family:Georgia,serif;
+margin-bottom:20px;
+}
+
+.welcome p{
+font-size:22px;
+line-height:1.8;
+color:#555;
+}
+
+.featured,.rubrics,.club,.newsletter{
+max-width:1300px;
+margin:70px auto;
+padding:0 20px;
+}
+
+.section-title{
+font-size:50px;
+font-family:Georgia,serif;
+margin-bottom:30px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+border:2px solid #111;
+border-radius:30px;
+padding:25px;
+transition:.3s;
+text-decoration:none;
+color:#111;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card h3{
+font-size:28px;
+margin-bottom:15px;
+}
+
+.card p{
+line-height:1.7;
+color:#555;
+}
+
+.rubric-carousel{
+display:flex;
+gap:22px;
+overflow-x:auto;
+padding:20px 5px 30px;
+scroll-snap-type:x mandatory;
+}
+
+.rubric-carousel::-webkit-scrollbar{
+display:none;
+}
+
+.rubric-card{
+min-width:260px;
+height:360px;
+position:relative;
+border-radius:36px;
+overflow:hidden;
+scroll-snap-align:center;
+border:2px solid #111;
+text-decoration:none;
+color:white;
+box-shadow:0 12px 35px rgba(0,0,0,.15);
+transition:.3s;
+}
+
+.rubric-card:nth-child(2),
+.rubric-card:nth-child(5),
+.rubric-card:nth-child(8){
+transform:scale(1.08);
+}
+
+.rubric-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.rubric-card::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.05));
+}
+
+.rubric-content{
+position:absolute;
+left:22px;
+right:22px;
+bottom:22px;
+z-index:2;
+}
+
+.rubric-content span{
+display:inline-block;
+background:#c89b3c;
+padding:7px 12px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.rubric-content h3{
+font-family:Georgia,serif;
+font-size:34px;
+margin-bottom:8px;
+}
+
+.rubric-content p{
+font-size:15px;
+line-height:1.5;
+color:#eee;
+}
+
+.read-btn{
+display:block;
+max-width:320px;
+margin:50px auto;
+text-align:center;
+text-decoration:none;
+background:#111;
+color:white;
+padding:20px;
+border-radius:999px;
+font-weight:bold;
+font-size:20px;
+}
+
+.club-box{
+background:#111;
+color:white;
+border-radius:40px;
+padding:45px 25px;
+text-align:center;
+}
+
+.club-box h2{
+font-family:Georgia,serif;
+font-size:46px;
+color:#d6aa45;
+margin-bottom:15px;
+}
+
+.club-box p{
+max-width:850px;
+margin:auto;
+font-size:20px;
+line-height:1.8;
+color:#eee;
+}
+
+.club-benefits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px;
+margin-top:30px;
+}
+
+.benefit{
+background:white;
+color:#111;
+border-radius:24px;
+padding:20px;
+font-weight:bold;
+}
+
+.cta-buttons{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:18px;
+margin-top:30px;
+}
+
+.cta-buttons a{
+background:white;
+color:#111;
+padding:18px 26px;
+border-radius:999px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.newsletter-box{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+padding:40px 25px;
+text-align:center;
+}
+
+.newsletter-box h2{
+font-family:Georgia,serif;
+font-size:46px;
+margin-bottom:15px;
+}
+
+.newsletter-box p{
+font-size:18px;
+color:#555;
+line-height:1.7;
+margin-bottom:25px;
+}
+
+.newsletter-form{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.newsletter-form input{
+width:min(420px,100%);
+padding:16px;
+border:1px solid #ccc;
+border-radius:999px;
+font-size:16px;
+}
+
+.newsletter-form button{
+background:#111;
+color:white;
+border:none;
+padding:16px 26px;
+border-radius:999px;
+font-weight:bold;
+font-size:16px;
+}
+
+footer{
+margin-top:60px;
+padding:50px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+footer h2{
+font-size:42px;
+font-family:Georgia,serif;
+margin-bottom:10px;
+}
+
+.footer-text{
+font-size:18px;
+color:#555;
+margin-bottom:25px;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:16px;
+margin-bottom:25px;
+}
+
+.footer-links a{
+color:#666;
+text-decoration:none;
+font-size:14px;
+}
+
+.admin-small{
+font-size:11px;
+color:#999;
+text-decoration:none;
+letter-spacing:2px;
+text-transform:uppercase;
+}
 
 @media(max-width:600px){
-.logo-big{font-size:54px}
+.logo-big{font-size:34px}
 .welcome h1,.section-title{font-size:40px}
 .welcome p{font-size:18px}
-.category-card{height:290px}
+.rubric-card{min-width:240px;height:330px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="header-inner">
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
+<aside class="side-menu" id="sideMenu">
+
+<div class="menu-header">
+<h2>Contents</h2>
+<button class="close-btn" onclick="closeMenu()">×</button>
+</div>
+
+<div class="menu-list">
+
+<a href="photos.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=300&q=80">
+<div><h3>Photos</h3><p>Galleries, portraits and editorials.</p></div>
+</a>
+
+<a href="articles.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80">
+<div><h3>Articles</h3><p>Stories, interviews and guides.</p></div>
+</a>
+
+<a href="contests.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80">
+<div><h3>Contests & Prizes</h3><p>Photo contests and giveaways.</p></div>
+</a>
+
+<a href="pets-in-need.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=300&q=80">
+<div><h3>Pets In Need</h3><p>Help, rescue and adoption stories.</p></div>
+</a>
+
+<a href="volunteer-network.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=300&q=80">
+<div><h3>Volunteer Network</h3><p>People helping animals.</p></div>
+</a>
+
+<a href="become-cover-star.html" class="menu-item">
+<img src="file_00000000a9d471fda9b4629589be22a9.png">
+<div><h3>Cover Stars</h3><p>Models, covers and future stars.</p></div>
+</a>
+
+<a href="local-community.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80">
+<div><h3>Local Pet Community</h3><p>Posts, comments and hearts near you.</p></div>
+</a>
+
+<a href="hall-of-fame.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=300&q=80">
+<div><h3>Hall Of Fame</h3><p>Featured pets and icons.</p></div>
+</a>
+
+<a href="media-kit.html" class="menu-item">
+<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80">
+<div><h3>Advertising</h3><p>Media kit and partnerships.</p></div>
+</a>
+
+</div>
+</aside>
+
+<header>
+<div class="top-bar">
+
+<button class="menu-btn" onclick="openMenu()">☰</button>
+
+<a href="index.html" style="text-decoration:none;">
+<div class="brand">
 <div class="logo-small">pets &</div>
 <div class="logo-big">DOGUE</div>
+</div>
+</a>
 
-<div class="tagline">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="issue-01.html">Latest Issue</a>
-<a href="archive.html">Archive</a>
-<a href="articles.html">Articles</a>
-<a href="categories.html">Rubrics</a>
-<a href="local-community.html">Local Community</a>
-<a href="submit-pet.html">Submit Pet</a>
-<a href="become-cover-star.html">Cover Star</a>
-<a href="hall-of-fame.html">Hall Of Fame</a>
-<a href="media-kit.html">Media Kit</a>
-<a href="advertise.html">Advertise</a>
-<a href="contact.html">Contact</a>
-</nav>
+<div class="lang">EN · RU · UA</div>
 
 </div>
 </header>
@@ -152,106 +601,73 @@ The luxury animal magazine for style, stories, community, rescue, wellness, trav
 
 <a href="issue-01.html" class="read-btn">READ ISSUE 01</a>
 
-<section class="categories">
+<section class="rubrics">
 
 <h2 class="section-title">Magazine Rubrics</h2>
 
-<div class="category-grid">
+<div class="rubric-carousel">
 
-<a href="photos.html" class="category-card">
-<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80" alt="Photos">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>PHOTO EDITORIALS</span>
-<h3>Photos</h3>
-<p>Beautiful pet photography, portraits, galleries and visual stories.</p>
-</div>
+<a href="photos.html" class="rubric-card">
+<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80">
+<div class="rubric-content"><span>PHOTO</span><h3>Photos</h3><p>Visual stories and editorial galleries.</p></div>
 </a>
 
-<a href="articles.html" class="category-card">
-<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80" alt="Articles">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>MAGAZINE</span>
-<h3>Articles</h3>
-<p>Stories, interviews, advice and luxury animal lifestyle features.</p>
-</div>
+<a href="articles.html" class="rubric-card">
+<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80">
+<div class="rubric-content"><span>MAGAZINE</span><h3>Articles</h3><p>Stories, interviews and useful guides.</p></div>
 </a>
 
-<a href="contests.html" class="category-card">
-<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80" alt="Contests">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>WIN PRIZES</span>
-<h3>Contests</h3>
-<p>Photo contests, pet of the month, giveaways and community awards.</p>
-</div>
+<a href="contests.html" class="rubric-card">
+<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80">
+<div class="rubric-content"><span>PRIZES</span><h3>Contests</h3><p>Photo contests, awards and giveaways.</p></div>
 </a>
 
-<a href="pets-in-need.html" class="category-card">
-<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Pets In Need">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>HELP</span>
-<h3>Pets In Need</h3>
-<p>Stories of animals who need support, adoption, care or attention.</p>
-</div>
+<a href="pets-in-need.html" class="rubric-card">
+<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80">
+<div class="rubric-content"><span>HELP</span><h3>Pets In Need</h3><p>Animals who need care, help or adoption.</p></div>
 </a>
 
-<a href="volunteer-network.html" class="category-card">
-<img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=80" alt="Volunteer Network">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>COMMUNITY</span>
-<h3>Volunteers</h3>
-<p>Local help, shelters, rescue support and people making a difference.</p>
-</div>
+<a href="volunteer-network.html" class="rubric-card">
+<img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=80">
+<div class="rubric-content"><span>COMMUNITY</span><h3>Volunteers</h3><p>People helping animals around the world.</p></div>
 </a>
 
-<a href="become-cover-star.html" class="category-card">
-<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Cover Stars">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>MODELS</span>
-<h3>Cover Stars</h3>
-<p>Pets selected for DOGUE covers, campaigns and luxury editorials.</p>
-</div>
+<a href="become-cover-star.html" class="rubric-card">
+<img src="file_00000000a9d471fda9b4629589be22a9.png">
+<div class="rubric-content"><span>MODELS</span><h3>Cover Stars</h3><p>Future magazine stars and editorials.</p></div>
 </a>
 
-<a href="local-community.html" class="category-card">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Local Community">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>LOCAL</span>
-<h3>Pet Community</h3>
-<p>Search your region, read local posts, comment and give hearts.</p>
-</div>
+<a href="local-community.html" class="rubric-card">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80">
+<div class="rubric-content"><span>LOCAL</span><h3>Community</h3><p>Search your region, post and comment.</p></div>
 </a>
 
-<a href="advertise.html" class="category-card">
-<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80" alt="Partners">
-<div class="category-overlay"></div>
-<div class="category-content">
-<span>BRANDS</span>
-<h3>Partners</h3>
-<p>Advertising, shopping links, partner offers and future member discounts.</p>
-</div>
+<a href="advertise.html" class="rubric-card">
+<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80">
+<div class="rubric-content"><span>PARTNERS</span><h3>Advertising</h3><p>Brands, shopping links and partnerships.</p></div>
 </a>
 
 </div>
 
 </section>
 
-<section class="cta-section">
+<section class="club">
 
-<div class="cta-box">
+<div class="club-box">
 
 <h2>Join PETS & DOGUE CLUB</h2>
 
 <p>
-More than a magazine. Get future member discounts from partners, early access to contests,
-premium stories, cover star opportunities and support animals in need.
+More than a magazine. Unlock member discounts, VIP rewards, premium stories,
+cover star priority and support animals in need.
 </p>
+
+<div class="club-benefits">
+<div class="benefit">Partner discounts</div>
+<div class="benefit">Member card / QR</div>
+<div class="benefit">Cover Star priority</div>
+<div class="benefit">Contests & giveaways</div>
+</div>
 
 <div class="cta-buttons">
 <a href="submit-pet.html">Submit Your Pet</a>
@@ -301,6 +717,18 @@ Receive future issues, cover star announcements, contests, local updates and lux
 <a href="admin.html" class="admin-small">Admin</a>
 
 </footer>
+
+<script>
+function openMenu(){
+document.getElementById("sideMenu").classList.add("open");
+document.getElementById("overlay").classList.add("show");
+}
+
+function closeMenu(){
+document.getElementById("sideMenu").classList.remove("open");
+document.getElementById("overlay").classList.remove("show");
+}
+</script>
 
 </body>
 </html>
