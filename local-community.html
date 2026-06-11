@@ -3,297 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Local Pet Community - PETS & DOGUE</title>
+<title>Local Pet Community | PETS & DOGUE</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f7f3;color:#111}
+header{background:white;padding:18px;text-align:center;border-bottom:1px solid #ddd}
+.logo-small{font-size:22px;color:#b78a2e}
+.logo-big{font-size:64px;font-family:Georgia,serif;font-weight:bold;letter-spacing:4px;color:#c89b3c;line-height:.9}
+.tagline{margin-top:8px;font-size:12px;letter-spacing:2px;color:#666}
+main{max-width:1150px;margin:auto;padding:30px 18px}
+.hero{text-align:center;margin-bottom:30px}
+.hero h1{font-family:Georgia,serif;font-size:52px;margin-bottom:12px}
+.hero p{font-size:18px;line-height:1.7;color:#555;max-width:850px;margin:auto}
 
-body{
-background:#f8f7f3;
-color:#111;
-}
+.search-box,.new-post,.post{background:white;border:2px solid #111;border-radius:32px;padding:24px;margin-bottom:25px}
+.search-row{display:grid;grid-template-columns:2fr 1fr;gap:15px}
+label{display:block;font-weight:bold;margin:15px 0 8px}
+input,select,textarea{width:100%;padding:14px;border:1px solid #ccc;border-radius:14px;font-size:16px}
+textarea{min-height:120px;resize:vertical}
+button{background:#111;color:white;border:none;padding:14px 22px;border-radius:999px;font-weight:bold;font-size:15px;cursor:pointer}
+.gold-btn{background:#c89b3c}
 
-header{
-background:white;
-padding:18px;
-text-align:center;
-border-bottom:1px solid #ddd;
-}
+.filters{display:flex;gap:10px;overflow-x:auto;padding:10px 0;margin-bottom:25px}
+.filter{white-space:nowrap;background:white;border:2px solid #111;border-radius:999px;padding:10px 16px;font-weight:bold;font-size:14px;cursor:pointer}
+.filter.active{background:#111;color:white}
 
-.logo-small{
-font-size:22px;
-color:#b78a2e;
-}
+.new-post{background:#111;color:white}
+.new-post h2{font-family:Georgia,serif;font-size:34px;color:#d6aa45;margin-bottom:15px}
+.new-post input,.new-post textarea,.new-post select{margin-bottom:12px}
 
-.logo-big{
-font-size:68px;
-font-family:Georgia,serif;
-font-weight:bold;
-letter-spacing:4px;
-color:#c89b3c;
-line-height:.9;
-}
+.feed-title{font-family:Georgia,serif;font-size:36px;margin:30px 0 18px}
+.post-image{width:100%;height:260px;object-fit:cover;border-radius:24px;margin-bottom:18px}
+.badge{display:inline-block;background:#c89b3c;color:white;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:10px}
+.post h3{font-size:26px;margin-bottom:8px}
+.meta{color:#777;font-size:14px;margin-bottom:12px}
+.post p{line-height:1.7;color:#444}
+.actions{display:flex;gap:18px;margin-top:15px;font-weight:bold;color:#555}
+.heart{cursor:pointer;user-select:none}
+.comments{margin-top:18px;padding-top:15px;border-top:1px solid #ddd}
+.comment{background:#f8f7f3;border-radius:18px;padding:14px;margin-bottom:10px}
+.comment strong{display:block;margin-bottom:5px}
+.comment-heart{font-size:14px;margin-top:8px;cursor:pointer;color:#555}
+.comment-form{display:flex;gap:10px;margin-top:12px}
+.comment-form input{flex:1}
 
-.tagline{
-margin-top:8px;
-font-size:12px;
-letter-spacing:2px;
-color:#666;
-}
+.community-note{background:#111;color:white;border-radius:36px;padding:35px 25px;text-align:center;margin:45px 0}
+.community-note h2{font-family:Georgia,serif;color:#d6aa45;font-size:38px;margin-bottom:12px}
+.community-note p{line-height:1.8;color:#eee;max-width:850px;margin:auto}
 
-main{
-max-width:1100px;
-margin:auto;
-padding:30px 18px;
-}
-
-.hero{
-text-align:center;
-margin-bottom:30px;
-}
-
-.hero h1{
-font-family:Georgia,serif;
-font-size:48px;
-margin-bottom:12px;
-}
-
-.hero p{
-font-size:18px;
-line-height:1.7;
-color:#555;
-}
-
-.search-box{
-background:white;
-border:2px solid #111;
-border-radius:30px;
-padding:24px;
-margin-bottom:25px;
-}
-
-label{
-display:block;
-font-weight:bold;
-margin-top:15px;
-margin-bottom:8px;
-}
-
-input,select,textarea{
-width:100%;
-padding:14px;
-border:1px solid #ccc;
-border-radius:14px;
-font-size:16px;
-}
-
-.search-row{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:15px;
-}
-
-.filters{
-display:flex;
-gap:10px;
-overflow-x:auto;
-padding:10px 0;
-margin-bottom:25px;
-}
-
-.filter{
-white-space:nowrap;
-background:white;
-border:2px solid #111;
-border-radius:999px;
-padding:10px 16px;
-font-weight:bold;
-font-size:14px;
-}
-
-.filter.active{
-background:#111;
-color:white;
-}
-
-.new-post{
-background:#111;
-color:white;
-border-radius:30px;
-padding:24px;
-margin-bottom:30px;
-}
-
-.new-post h2{
-font-family:Georgia,serif;
-font-size:32px;
-color:#d6aa45;
-margin-bottom:15px;
-}
-
-.new-post input,
-.new-post textarea,
-.new-post select{
-margin-bottom:12px;
-}
-
-button{
-background:#c89b3c;
-color:white;
-border:none;
-padding:14px 22px;
-border-radius:999px;
-font-weight:bold;
-font-size:15px;
-cursor:pointer;
-}
-
-.feed-title{
-font-family:Georgia,serif;
-font-size:36px;
-margin:30px 0 18px;
-}
-
-.post{
-background:white;
-border:2px solid #111;
-border-radius:30px;
-padding:22px;
-margin-bottom:22px;
-}
-
-.post-top{
-display:flex;
-justify-content:space-between;
-gap:12px;
-align-items:flex-start;
-margin-bottom:10px;
-}
-
-.badge{
-display:inline-block;
-background:#c89b3c;
-color:white;
-padding:7px 12px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.post h3{
-font-size:24px;
-margin-bottom:8px;
-}
-
-.meta{
-color:#777;
-font-size:14px;
-margin-bottom:12px;
-}
-
-.post p{
-line-height:1.7;
-color:#444;
-}
-
-.actions{
-display:flex;
-gap:18px;
-margin-top:15px;
-font-weight:bold;
-color:#555;
-}
-
-.heart{
-cursor:pointer;
-user-select:none;
-}
-
-.comments{
-margin-top:18px;
-padding-top:15px;
-border-top:1px solid #ddd;
-}
-
-.comment{
-background:#f8f7f3;
-border-radius:18px;
-padding:14px;
-margin-bottom:10px;
-}
-
-.comment strong{
-display:block;
-margin-bottom:5px;
-}
-
-.comment-heart{
-font-size:14px;
-margin-top:8px;
-cursor:pointer;
-color:#555;
-}
-
-.comment-form{
-display:flex;
-gap:10px;
-margin-top:12px;
-}
-
-.comment-form input{
-flex:1;
-}
-
-footer{
-margin-top:60px;
-padding:45px 20px;
-background:white;
-text-align:center;
-border-top:1px solid #ddd;
-}
-
-.footer-links{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:14px;
-margin-top:20px;
-}
-
-.footer-links a{
-text-decoration:none;
-color:#666;
-font-size:14px;
-}
-
-.admin-small{
-display:inline-block;
-margin-top:22px;
-font-size:11px;
-color:#999;
-text-decoration:none;
-letter-spacing:2px;
-text-transform:uppercase;
-}
+footer{margin-top:60px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:20px}
+.footer-links a{text-decoration:none;color:#666;font-size:14px}
+.admin-small{display:inline-block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
 
 @media(max-width:700px){
-.logo-big{
-font-size:48px;
-}
-
-.search-row{
-grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:38px;
-}
+.logo-big{font-size:46px}
+.search-row{grid-template-columns:1fr}
+.hero h1{font-size:38px}
+.post-image{height:220px}
+.comment-form{flex-direction:column}
 }
 </style>
 </head>
@@ -311,49 +80,40 @@ font-size:38px;
 <section class="hero">
 <h1>Local Pet Community</h1>
 <p>
-Find recommendations, help requests, local events, lost pets, volunteers and pet-friendly places near you.
+Search your region, read local pet recommendations, ask questions, share help requests, comment and give hearts.
 </p>
 </section>
 
 <section class="search-box">
-
 <div class="search-row">
-
 <div>
-<label>Location</label>
-<input id="locationInput" type="text" placeholder="City, area or postcode" value="Bournemouth">
+<label>City, region or postcode</label>
+<input id="locationInput" type="text" placeholder="London, Bournemouth, SW1A, Prague..." value="Bournemouth">
 </div>
-
 <div>
 <label>Radius</label>
 <select id="radiusInput">
-<option>5 miles</option>
-<option selected>10 miles</option>
-<option>25 miles</option>
-<option>50 miles</option>
+<option>5 km</option>
+<option selected>10 km</option>
+<option>25 km</option>
+<option>50 km</option>
 </select>
 </div>
-
 </div>
-
-<button onclick="updateLocation()" style="margin-top:18px;">
-Search This Area
-</button>
-
+<button onclick="updateLocation()" class="gold-btn" style="margin-top:18px;">Search This Area</button>
 </section>
 
 <section class="filters">
-<div class="filter active">All</div>
-<div class="filter">Recommendations</div>
-<div class="filter">Help</div>
-<div class="filter">Lost & Found</div>
-<div class="filter">Events</div>
-<div class="filter">Photos</div>
-<div class="filter">Volunteers</div>
+<div class="filter active" onclick="setFilter(this,'All')">All</div>
+<div class="filter" onclick="setFilter(this,'Recommendation')">Recommendations</div>
+<div class="filter" onclick="setFilter(this,'Help')">Help</div>
+<div class="filter" onclick="setFilter(this,'Lost & Found')">Lost & Found</div>
+<div class="filter" onclick="setFilter(this,'Event')">Events</div>
+<div class="filter" onclick="setFilter(this,'Photo')">Photos</div>
+<div class="filter" onclick="setFilter(this,'Volunteers')">Volunteers</div>
 </section>
 
 <section class="new-post">
-
 <h2>Add Local Post</h2>
 
 <select id="postType">
@@ -366,116 +126,140 @@ Search This Area
 </select>
 
 <input id="postTitle" type="text" placeholder="Post title">
-
+<input id="postImage" type="text" placeholder="Optional image URL">
 <textarea id="postText" placeholder="Write something useful for pet owners in your area..."></textarea>
 
-<button onclick="addPost()">Publish Post</button>
-
+<button onclick="addPost()" class="gold-btn">Publish Post</button>
 </section>
 
-<h2 class="feed-title" id="feedTitle">
-Bournemouth — within 10 miles
-</h2>
+<h2 class="feed-title" id="feedTitle">Bournemouth — within 10 km</h2>
 
 <section id="feed">
 
-<div class="post">
-<div class="post-top">
-<div>
+<div class="post" data-type="Recommendation">
+<img class="post-image" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80" alt="Cafe">
 <span class="badge">RECOMMENDATION</span>
 <h3>Best dog-friendly café in Bournemouth?</h3>
-<div class="meta">📍 Bournemouth · 1.8 miles away · Posted by Sarah</div>
-</div>
-</div>
-
-<p>
-Looking for a cosy dog-friendly café near the beach. Any good recommendations?
-</p>
+<div class="meta">📍 Bournemouth · 1.8 km away · Posted by Sarah · 2 hours ago</div>
+<p>Looking for a cosy dog-friendly café near the beach. Any good recommendations?</p>
 
 <div class="actions">
 <span class="heart" onclick="likePost(this)">❤️ <span>37</span></span>
-<span>💬 2 comments</span>
+<span>💬 <span class="comment-count">2</span> comments</span>
 </div>
 
 <div class="comments">
-
 <div class="comment">
 <strong>Emma</strong>
 Southbourne Beach Café is lovely and very friendly with dogs.
 <div class="comment-heart" onclick="likeComment(this)">❤️ <span>5</span></div>
 </div>
-
 <div class="comment">
 <strong>James</strong>
-Try the cafés near Poole Harbour, many of them allow dogs outside.
+Try the cafés near Poole Harbour, many allow dogs outside.
 <div class="comment-heart" onclick="likeComment(this)">❤️ <span>3</span></div>
 </div>
-
 <div class="comment-form">
 <input type="text" placeholder="Write a comment...">
 <button onclick="addComment(this)">Send</button>
 </div>
-
 </div>
 </div>
 
-<div class="post">
+<div class="post" data-type="Help">
+<img class="post-image" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Animal help">
 <span class="badge">HELP</span>
 <h3>Volunteer needed for animal shelter weekend</h3>
-<div class="meta">📍 Bournemouth · 4 miles away · Posted by PETS & DOGUE</div>
-
-<p>
-A local animal shelter is looking for volunteers this weekend to help with walking, cleaning and social media photos.
-</p>
+<div class="meta">📍 Bournemouth · 4 km away · Posted by PETS & DOGUE · Today</div>
+<p>A local shelter is looking for volunteers this weekend to help with walking, cleaning and social media photos.</p>
 
 <div class="actions">
 <span class="heart" onclick="likePost(this)">❤️ <span>24</span></span>
-<span>💬 1 comment</span>
+<span>💬 <span class="comment-count">1</span> comments</span>
 </div>
 
 <div class="comments">
-
 <div class="comment">
 <strong>Olivia</strong>
 I can help on Sunday afternoon.
 <div class="comment-heart" onclick="likeComment(this)">❤️ <span>7</span></div>
 </div>
-
 <div class="comment-form">
 <input type="text" placeholder="Write a comment...">
 <button onclick="addComment(this)">Send</button>
 </div>
+</div>
+</div>
 
+<div class="post" data-type="Lost & Found">
+<img class="post-image" src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80" alt="Lost cat">
+<span class="badge">LOST & FOUND</span>
+<h3>Lost cat seen near the park</h3>
+<div class="meta">📍 Bournemouth · 3 km away · Posted by Anna · Yesterday</div>
+<p>A small grey cat was seen near the park entrance. Please comment if this may be your pet.</p>
+
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>18</span></span>
+<span>💬 <span class="comment-count">0</span> comments</span>
+</div>
+
+<div class="comments">
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
 </div>
 </div>
 
 </section>
 
+<section class="community-note">
+<h2>How This Rubric Works</h2>
+<p>
+Local Pet Community is a simple magazine-style community: choose your location, select radius, read local posts, add useful recommendations, comment and support helpful comments with hearts.
+</p>
+</section>
+
 </main>
 
 <footer>
-
 <h2>PETS & DOGUE</h2>
 <p>The International Luxury Animal Magazine</p>
 
 <div class="footer-links">
 <a href="index.html">Home</a>
 <a href="articles.html">Articles</a>
-<a href="categories.html">Categories</a>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms</a>
+<a href="photos.html">Photos</a>
+<a href="pets-in-need.html">Pets In Need</a>
+<a href="volunteer-network.html">Volunteers</a>
+<a href="privacy.html">Privacy</a>
 <a href="contact.html">Contact</a>
 </div>
 
 <a href="admin.html" class="admin-small">Admin</a>
-
 </footer>
 
 <script>
+let currentFilter = "All";
+
 function updateLocation(){
 const location = document.getElementById("locationInput").value || "Your Area";
 const radius = document.getElementById("radiusInput").value;
 document.getElementById("feedTitle").textContent = location + " — within " + radius;
+}
+
+function setFilter(element,type){
+currentFilter = type;
+document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+element.classList.add("active");
+
+document.querySelectorAll(".post").forEach(post => {
+if(type === "All" || post.dataset.type === type){
+post.style.display = "block";
+}else{
+post.style.display = "none";
+}
+});
 }
 
 function likePost(element){
@@ -492,10 +276,9 @@ function addComment(button){
 const input = button.previousElementSibling;
 const text = input.value.trim();
 
-if(!text){
-return;
-}
+if(!text){return;}
 
+const commentsBox = button.closest(".comments");
 const comment = document.createElement("div");
 comment.className = "comment";
 comment.innerHTML = `
@@ -504,7 +287,11 @@ ${text}
 <div class="comment-heart" onclick="likeComment(this)">❤️ <span>0</span></div>
 `;
 
-button.parentElement.parentElement.insertBefore(comment, button.parentElement);
+commentsBox.insertBefore(comment, button.parentElement);
+
+const count = button.closest(".post").querySelector(".comment-count");
+count.textContent = Number(count.textContent) + 1;
+
 input.value = "";
 }
 
@@ -512,6 +299,7 @@ function addPost(){
 const type = document.getElementById("postType").value;
 const title = document.getElementById("postTitle").value.trim();
 const text = document.getElementById("postText").value.trim();
+const image = document.getElementById("postImage").value.trim();
 const location = document.getElementById("locationInput").value || "Your Area";
 
 if(!title || !text){
@@ -521,15 +309,19 @@ return;
 
 const post = document.createElement("div");
 post.className = "post";
+post.dataset.type = type;
+
+const imageHtml = image ? `<img class="post-image" src="${image}" alt="Local post">` : "";
 
 post.innerHTML = `
+${imageHtml}
 <span class="badge">${type.toUpperCase()}</span>
 <h3>${title}</h3>
-<div class="meta">📍 ${location} · Posted by You</div>
+<div class="meta">📍 ${location} · Posted by You · Just now</div>
 <p>${text}</p>
 <div class="actions">
 <span class="heart" onclick="likePost(this)">❤️ <span>0</span></span>
-<span>💬 comments</span>
+<span>💬 <span class="comment-count">0</span> comments</span>
 </div>
 <div class="comments">
 <div class="comment-form">
@@ -543,6 +335,11 @@ document.getElementById("feed").prepend(post);
 
 document.getElementById("postTitle").value = "";
 document.getElementById("postText").value = "";
+document.getElementById("postImage").value = "";
+
+if(currentFilter !== "All" && currentFilter !== type){
+post.style.display = "none";
+}
 }
 </script>
 
