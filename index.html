@@ -59,14 +59,14 @@ margin-top:18px;
 display:flex;
 justify-content:center;
 flex-wrap:wrap;
-gap:18px;
+gap:16px;
 }
 
 nav a{
 text-decoration:none;
 color:#111;
 font-weight:bold;
-font-size:15px;
+font-size:14px;
 }
 
 .hero{
@@ -109,14 +109,17 @@ line-height:1.8;
 color:#555;
 }
 
-.featured{
+.featured,
+.categories,
+.cta-section,
+.newsletter{
 max-width:1300px;
-margin:50px auto;
+margin:70px auto;
 padding:0 20px;
 }
 
-.featured-title{
-font-size:48px;
+.section-title{
+font-size:50px;
 font-family:Georgia,serif;
 margin-bottom:30px;
 text-align:center;
@@ -134,6 +137,8 @@ border:2px solid #111;
 border-radius:30px;
 padding:25px;
 transition:.3s;
+text-decoration:none;
+color:#111;
 }
 
 .card:hover{
@@ -150,6 +155,69 @@ line-height:1.7;
 color:#555;
 }
 
+.category-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+.category-card{
+position:relative;
+height:330px;
+border-radius:35px;
+overflow:hidden;
+border:2px solid #111;
+text-decoration:none;
+color:white;
+box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+.category-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.4s;
+}
+
+.category-card:hover img{
+transform:scale(1.06);
+}
+
+.category-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.05));
+}
+
+.category-content{
+position:absolute;
+left:25px;
+right:25px;
+bottom:25px;
+}
+
+.category-content span{
+display:inline-block;
+background:#c89b3c;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.category-content h3{
+font-size:40px;
+font-family:Georgia,serif;
+margin-bottom:8px;
+}
+
+.category-content p{
+font-size:16px;
+line-height:1.5;
+color:#eee;
+}
+
 .read-btn{
 display:block;
 max-width:320px;
@@ -162,6 +230,92 @@ padding:20px;
 border-radius:999px;
 font-weight:bold;
 font-size:20px;
+}
+
+.cta-box{
+background:#111;
+color:white;
+border-radius:40px;
+padding:45px 25px;
+text-align:center;
+}
+
+.cta-box h2{
+font-family:Georgia,serif;
+font-size:46px;
+color:#d6aa45;
+margin-bottom:15px;
+}
+
+.cta-box p{
+max-width:850px;
+margin:auto;
+font-size:20px;
+line-height:1.8;
+color:#eee;
+}
+
+.cta-buttons{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:18px;
+margin-top:30px;
+}
+
+.cta-buttons a{
+background:white;
+color:#111;
+padding:18px 26px;
+border-radius:999px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.newsletter-box{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+padding:40px 25px;
+text-align:center;
+}
+
+.newsletter-box h2{
+font-family:Georgia,serif;
+font-size:46px;
+margin-bottom:15px;
+}
+
+.newsletter-box p{
+font-size:18px;
+color:#555;
+line-height:1.7;
+margin-bottom:25px;
+}
+
+.newsletter-form{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.newsletter-form input{
+width:min(420px,100%);
+padding:16px;
+border:1px solid #ccc;
+border-radius:999px;
+font-size:16px;
+}
+
+.newsletter-form button{
+background:#111;
+color:white;
+border:none;
+padding:16px 26px;
+border-radius:999px;
+font-weight:bold;
+font-size:16px;
 }
 
 footer{
@@ -205,6 +359,25 @@ text-decoration:none;
 letter-spacing:2px;
 text-transform:uppercase;
 }
+
+@media(max-width:600px){
+.logo-big{
+font-size:54px;
+}
+
+.welcome h1,
+.section-title{
+font-size:40px;
+}
+
+.welcome p{
+font-size:18px;
+}
+
+.category-card{
+height:280px;
+}
+}
 </style>
 </head>
 
@@ -226,6 +399,8 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 <a href="archive.html">Archive</a>
 <a href="articles.html">Articles</a>
 <a href="categories.html">Categories</a>
+<a href="submit-pet.html">Submit Pet</a>
+<a href="become-cover-star.html">Cover Star</a>
 <a href="about.html">About</a>
 <a href="advertise.html">Advertise</a>
 <a href="contact.html">Contact</a>
@@ -256,29 +431,29 @@ travel, wellness, fashion and inspiring stories from around the globe.
 
 <section class="featured">
 
-<h2 class="featured-title">Featured Stories</h2>
+<h2 class="section-title">Featured Stories</h2>
 
 <div class="grid">
 
-<div class="card">
+<a href="issue-01.html" class="card">
 <h3>🐶 Miso</h3>
 <p>Meet the cover star of Issue 01 and discover the story behind our first luxury cover.</p>
-</div>
+</a>
 
-<div class="card">
+<a href="issue-01.html" class="card">
 <h3>👑 Royal Pets</h3>
 <p>The most elegant and glamorous animals from around the world.</p>
-</div>
+</a>
 
-<div class="card">
+<a href="issue-01.html" class="card">
 <h3>✈️ Luxury Travel</h3>
 <p>Dream destinations and pet-friendly escapes for modern animal lovers.</p>
-</div>
+</a>
 
-<div class="card">
+<a href="issue-01.html" class="card">
 <h3>❤️ Wellness</h3>
 <p>Health, beauty and wellbeing for pets living their best lives.</p>
-</div>
+</a>
 
 </div>
 
@@ -287,6 +462,115 @@ travel, wellness, fashion and inspiring stories from around the globe.
 <a href="issue-01.html" class="read-btn">
 READ ISSUE 01
 </a>
+
+<section class="categories">
+
+<h2 class="section-title">Explore Categories</h2>
+
+<div class="category-grid">
+
+<a href="categories.html" class="category-card">
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Dogs">
+<div class="category-overlay"></div>
+<div class="category-content">
+<span>DOGUE</span>
+<h3>Dogs</h3>
+<p>Fashion, care, travel and luxury dog lifestyle.</p>
+</div>
+</a>
+
+<a href="categories.html" class="category-card">
+<img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1200&q=80" alt="Cats">
+<div class="category-overlay"></div>
+<div class="category-content">
+<span>FELINE STYLE</span>
+<h3>Cats</h3>
+<p>Royal cats, interiors, beauty and feline elegance.</p>
+</div>
+</a>
+
+<a href="categories.html" class="category-card">
+<img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=1200&q=80" alt="Birds">
+<div class="category-overlay"></div>
+<div class="category-content">
+<span>EXOTIC BEAUTY</span>
+<h3>Birds</h3>
+<p>Colourful companions and extraordinary stories.</p>
+</div>
+</a>
+
+<a href="categories.html" class="category-card">
+<img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1200&q=80" alt="Rabbits">
+<div class="category-overlay"></div>
+<div class="category-content">
+<span>SOFT LUXURY</span>
+<h3>Rabbits</h3>
+<p>Gentle stories, care and soft luxury moments.</p>
+</div>
+</a>
+
+<a href="categories.html" class="category-card">
+<img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1200&q=80" alt="Horses">
+<div class="category-overlay"></div>
+<div class="category-content">
+<span>EQUESTRIAN</span>
+<h3>Horses</h3>
+<p>Grace, countryside elegance and equestrian culture.</p>
+</div>
+</a>
+
+<a href="categories.html" class="category-card">
+<img src="https://images.unsplash.com/photo-1520315342629-6ea920342047?auto=format&fit=crop&w=1200&q=80" alt="Exotic Pets">
+<div class="category-overlay"></div>
+<div class="category-content">
+<span>RARE</span>
+<h3>Exotic Pets</h3>
+<p>Unusual companions and rare animal stories.</p>
+</div>
+</a>
+
+</div>
+
+</section>
+
+<section class="cta-section">
+
+<div class="cta-box">
+
+<h2>Your Pet Could Be Next</h2>
+
+<p>
+Submit your animal for a chance to appear in PETS & DOGUE,
+or apply for a future luxury magazine cover feature.
+</p>
+
+<div class="cta-buttons">
+<a href="submit-pet.html">Submit Your Pet</a>
+<a href="become-cover-star.html">Become A Cover Star</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="newsletter">
+
+<div class="newsletter-box">
+
+<h2>Join The PETS & DOGUE Community</h2>
+
+<p>
+Receive future issues, cover star announcements, editorial updates and luxury pet stories.
+</p>
+
+<div class="newsletter-form">
+<input type="email" placeholder="Email address">
+<button>Subscribe</button>
+</div>
+
+</div>
+
+</section>
 
 <footer>
 
