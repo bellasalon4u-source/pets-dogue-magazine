@@ -3,278 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DOGUE Photos</title>
+<title>Photos | PETS & DOGUE</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-background:#050505;
-font-family:Georgia,serif;
-color:white;
-}
-
-header{
-position:sticky;
-top:0;
-z-index:100;
-background:rgba(0,0,0,.92);
-backdrop-filter:blur(10px);
-padding:15px;
-border-bottom:1px solid rgba(216,179,90,.3);
-}
-
-.logo{
-text-align:center;
-font-size:38px;
-font-weight:bold;
-letter-spacing:3px;
-color:#d8b35a;
-}
-
-.logo small{
-display:block;
-font-size:16px;
-font-style:italic;
-color:white;
-font-weight:normal;
-}
-
-.languages{
-text-align:center;
-margin-top:8px;
-font-size:12px;
-letter-spacing:2px;
-color:#f4dfb0;
-}
-
-.hero{
-padding:30px 20px;
-text-align:center;
-background:linear-gradient(to bottom,#111,#050505);
-}
-
-.hero h1{
-font-size:42px;
-color:#d8b35a;
-}
-
-.hero p{
-margin-top:10px;
-color:#ddd;
-}
-
-.gallery{
-padding:15px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
-
-.photo{
-border-radius:22px;
-overflow:hidden;
-cursor:pointer;
-position:relative;
-}
-
-.photo img{
-width:100%;
-height:260px;
-object-fit:cover;
-display:block;
-transition:.4s;
-}
-
-.photo:active img{
-transform:scale(.96);
-}
-
-.photo-title{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-padding:12px;
-background:linear-gradient(to top,rgba(0,0,0,.9),transparent);
-font-size:14px;
-}
-
-.fullscreen{
-display:none;
-position:fixed;
-inset:0;
-background:black;
-z-index:9999;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-}
-
-.fullscreen img{
-max-width:95%;
-max-height:80vh;
-border-radius:20px;
-}
-
-.close{
-margin-top:20px;
-padding:12px 28px;
-border:none;
-border-radius:30px;
-background:#d8b35a;
-font-weight:bold;
-font-size:16px;
-}
-
-.actions{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
-.action{
-padding:10px 18px;
-border-radius:25px;
-background:#222;
-border:1px solid #444;
-}
-
-.back{
-display:block;
-text-align:center;
-padding:30px;
-color:#d8b35a;
-text-decoration:none;
-letter-spacing:2px;
-}
-
-@media(max-width:700px){
-
-.gallery{
-grid-template-columns:1fr 1fr;
-}
-
-.photo img{
-height:220px;
-}
-
-.hero h1{
-font-size:34px;
-}
-
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f7f3;color:#111}
+header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
+.logo-small{font-size:18px;color:#b78a2e}
+.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
+.hero{height:560px;position:relative;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.18))}
+.hero-content{position:absolute;bottom:55px;left:50%;transform:translateX(-50%);text-align:center;color:white;width:90%}
+.hero-content h1{font-size:74px;font-family:Georgia,serif;margin-bottom:15px}
+.hero-content p{font-size:22px;line-height:1.8;max-width:900px;margin:auto}
+.section{max-width:1400px;margin:auto;padding:70px 20px}
+.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:50px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.photo-card{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
+.photo-card img{width:100%;height:380px;object-fit:cover}
+.photo-content{padding:22px}
+.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:12px}
+.photo-content h3{font-size:30px;font-family:Georgia,serif;margin-bottom:10px}
+.photo-content p{color:#555;line-height:1.7;margin-bottom:14px}
+.meta{display:flex;justify-content:space-between;align-items:center;color:#777;font-size:14px}
+.heart{cursor:pointer;font-weight:bold;color:#111}
+.feature{background:#111;color:white;border-radius:40px;padding:60px 30px;text-align:center;margin-top:80px}
+.feature h2{font-size:52px;font-family:Georgia,serif;color:#d6aa45;margin-bottom:20px}
+.feature p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
+.feature a{display:inline-block;margin-top:30px;background:white;color:#111;padding:18px 30px;border-radius:999px;font-weight:bold;text-decoration:none}
+footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
+.footer-links a{text-decoration:none;color:#666;font-size:14px}
+.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+@media(max-width:768px){.hero{height:430px}.hero-content h1{font-size:48px}.hero-content p{font-size:18px}.section-title{font-size:40px}.photo-card img{height:320px}}
 </style>
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">
-<small>pets &</small>
-DOGUE
-</div>
-
-<div class="languages">
-EN | RU | UA | CZ | PL | ES | IT | DE | AR
-</div>
-
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
 </header>
 
 <section class="hero">
+<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1800&q=80" alt="Photos">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1>Photos</h1>
+<p>
+Editorial galleries, cover portraits, community submissions and unforgettable animal photography.
+</p>
+</div>
+</section>
 
-<h1>PHOTO STORIES</h1>
+<section class="section">
+
+<h2 class="section-title">Photo Gallery</h2>
+
+<div class="gallery">
+
+<div class="photo-card">
+<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Miso">
+<div class="photo-content">
+<span class="badge">COVER PHOTO</span>
+<h3>Miso For Issue 01</h3>
+<p>The first PETS & DOGUE cover portrait and the beginning of our luxury animal magazine story.</p>
+<div class="meta">
+<span>📸 Editorial</span>
+<span class="heart" onclick="likePhoto(this)">❤️ <span>128</span></span>
+</div>
+</div>
+</div>
+
+<div class="photo-card">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Dogs">
+<div class="photo-content">
+<span class="badge">COMMUNITY</span>
+<h3>Golden Walk</h3>
+<p>A beautiful community moment celebrating friendship, movement and animal joy.</p>
+<div class="meta">
+<span>📍 Local</span>
+<span class="heart" onclick="likePhoto(this)">❤️ <span>96</span></span>
+</div>
+</div>
+</div>
+
+<div class="photo-card">
+<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80" alt="Cat">
+<div class="photo-content">
+<span class="badge">PORTRAIT</span>
+<h3>Soft Elegance</h3>
+<p>A quiet portrait full of character, grace and feline beauty.</p>
+<div class="meta">
+<span>📸 Portrait</span>
+<span class="heart" onclick="likePhoto(this)">❤️ <span>74</span></span>
+</div>
+</div>
+</div>
+
+<div class="photo-card">
+<img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=1200&q=80" alt="Bird">
+<div class="photo-content">
+<span class="badge">EXOTIC</span>
+<h3>Colour & Freedom</h3>
+<p>A vibrant animal portrait selected for its colour, light and editorial atmosphere.</p>
+<div class="meta">
+<span>🌿 Exotic</span>
+<span class="heart" onclick="likePhoto(this)">❤️ <span>82</span></span>
+</div>
+</div>
+</div>
+
+<div class="photo-card">
+<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80" alt="Dog">
+<div class="photo-content">
+<span class="badge">MODEL</span>
+<h3>Little Star</h3>
+<p>A stylish pet portrait with cover-star potential and charming personality.</p>
+<div class="meta">
+<span>👑 Model</span>
+<span class="heart" onclick="likePhoto(this)">❤️ <span>112</span></span>
+</div>
+</div>
+</div>
+
+<div class="photo-card">
+<img src="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=1200&q=80" alt="Dog portrait">
+<div class="photo-content">
+<span class="badge">HALL OF FAME</span>
+<h3>Forever Icon</h3>
+<p>Photography that captures loyalty, soul and the deep bond between animals and people.</p>
+<div class="meta">
+<span>🏆 Fame</span>
+<span class="heart" onclick="likePhoto(this)">❤️ <span>143</span></span>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="feature">
+
+<h2>Submit Your Best Photo</h2>
 
 <p>
-The most beautiful animals from around the world.
+PETS & DOGUE welcomes beautiful pet photography, rescue stories, fashion portraits and unforgettable animal moments for future features.
 </p>
 
-</section>
+<a href="submit-pet.html">Submit Photo</a>
 
-<section class="gallery">
-
-<div class="photo" onclick="openPhoto(this)">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80">
-<div class="photo-title">Luxury Dog Collection</div>
-</div>
-
-<div class="photo" onclick="openPhoto(this)">
-<img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=900&q=80">
-<div class="photo-title">Cat Fashion Story</div>
-</div>
-
-<div class="photo" onclick="openPhoto(this)">
-<img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=900&q=80">
-<div class="photo-title">Model Of The Month</div>
-</div>
-
-<div class="photo" onclick="openPhoto(this)">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80">
-<div class="photo-title">Summer Luxury Pets</div>
-</div>
-
-<div class="photo" onclick="openPhoto(this)">
-<img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=900&q=80">
-<div class="photo-title">Travel With Pets</div>
-</div>
-
-<div class="photo" onclick="openPhoto(this)">
-<img src="https://images.unsplash.com/photo-1444212477490-ca407925329e?auto=format&fit=crop&w=900&q=80">
-<div class="photo-title">Bird Collection</div>
 </div>
 
 </section>
 
-<div class="fullscreen" id="viewer">
+<footer>
 
-<img id="viewerImg">
+<h2>PETS & DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
 
-<div class="actions">
-
-<div class="action">❤️ Like</div>
-
-<div class="action">🔗 Share</div>
-
-<div class="action">💾 Save</div>
-
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="articles.html">Articles</a>
+<a href="cover-stars.html">Cover Stars</a>
+<a href="hall-of-fame.html">Hall Of Fame</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
 </div>
 
-<button class="close" onclick="closePhoto()">
-✕ Close
-</button>
+<a href="admin.html" class="admin-small">Admin</a>
 
-</div>
-
-<a class="back" href="magazine.html">
-← BACK TO MAGAZINE
-</a>
+</footer>
 
 <script>
-
-function openPhoto(el){
-
-let img = el.querySelector("img").src;
-
-document.getElementById("viewerImg").src = img;
-
-document.getElementById("viewer").style.display="flex";
-
+function likePhoto(element){
+const count = element.querySelector("span");
+count.textContent = Number(count.textContent) + 1;
 }
-
-function closePhoto(){
-
-document.getElementById("viewer").style.display="none";
-
-}
-
 </script>
 
 </body>
