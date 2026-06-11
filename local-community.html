@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Pet Community - PETS & DOGUE</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+header{
+background:white;
+padding:18px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+.logo-small{
+font-size:22px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:68px;
+font-family:Georgia,serif;
+font-weight:bold;
+letter-spacing:4px;
+color:#c89b3c;
+line-height:.9;
+}
+
+.tagline{
+margin-top:8px;
+font-size:12px;
+letter-spacing:2px;
+color:#666;
+}
+
+main{
+max-width:1100px;
+margin:auto;
+padding:30px 18px;
+}
+
+.hero{
+text-align:center;
+margin-bottom:30px;
+}
+
+.hero h1{
+font-family:Georgia,serif;
+font-size:48px;
+margin-bottom:12px;
+}
+
+.hero p{
+font-size:18px;
+line-height:1.7;
+color:#555;
+}
+
+.search-box{
+background:white;
+border:2px solid #111;
+border-radius:30px;
+padding:24px;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin-top:15px;
+margin-bottom:8px;
+}
+
+input,select,textarea{
+width:100%;
+padding:14px;
+border:1px solid #ccc;
+border-radius:14px;
+font-size:16px;
+}
+
+.search-row{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:15px;
+}
+
+.filters{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:10px 0;
+margin-bottom:25px;
+}
+
+.filter{
+white-space:nowrap;
+background:white;
+border:2px solid #111;
+border-radius:999px;
+padding:10px 16px;
+font-weight:bold;
+font-size:14px;
+}
+
+.filter.active{
+background:#111;
+color:white;
+}
+
+.new-post{
+background:#111;
+color:white;
+border-radius:30px;
+padding:24px;
+margin-bottom:30px;
+}
+
+.new-post h2{
+font-family:Georgia,serif;
+font-size:32px;
+color:#d6aa45;
+margin-bottom:15px;
+}
+
+.new-post input,
+.new-post textarea,
+.new-post select{
+margin-bottom:12px;
+}
+
+button{
+background:#c89b3c;
+color:white;
+border:none;
+padding:14px 22px;
+border-radius:999px;
+font-weight:bold;
+font-size:15px;
+cursor:pointer;
+}
+
+.feed-title{
+font-family:Georgia,serif;
+font-size:36px;
+margin:30px 0 18px;
+}
+
+.post{
+background:white;
+border:2px solid #111;
+border-radius:30px;
+padding:22px;
+margin-bottom:22px;
+}
+
+.post-top{
+display:flex;
+justify-content:space-between;
+gap:12px;
+align-items:flex-start;
+margin-bottom:10px;
+}
+
+.badge{
+display:inline-block;
+background:#c89b3c;
+color:white;
+padding:7px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.post h3{
+font-size:24px;
+margin-bottom:8px;
+}
+
+.meta{
+color:#777;
+font-size:14px;
+margin-bottom:12px;
+}
+
+.post p{
+line-height:1.7;
+color:#444;
+}
+
+.actions{
+display:flex;
+gap:18px;
+margin-top:15px;
+font-weight:bold;
+color:#555;
+}
+
+.heart{
+cursor:pointer;
+user-select:none;
+}
+
+.comments{
+margin-top:18px;
+padding-top:15px;
+border-top:1px solid #ddd;
+}
+
+.comment{
+background:#f8f7f3;
+border-radius:18px;
+padding:14px;
+margin-bottom:10px;
+}
+
+.comment strong{
+display:block;
+margin-bottom:5px;
+}
+
+.comment-heart{
+font-size:14px;
+margin-top:8px;
+cursor:pointer;
+color:#555;
+}
+
+.comment-form{
+display:flex;
+gap:10px;
+margin-top:12px;
+}
+
+.comment-form input{
+flex:1;
+}
+
+footer{
+margin-top:60px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:14px;
+margin-top:20px;
+}
+
+.footer-links a{
+text-decoration:none;
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:inline-block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+text-decoration:none;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+@media(max-width:700px){
+.logo-big{
+font-size:48px;
+}
+
+.search-row{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:38px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+<div class="tagline">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div>
+</header>
+
+<main>
+
+<section class="hero">
+<h1>Local Pet Community</h1>
+<p>
+Find recommendations, help requests, local events, lost pets, volunteers and pet-friendly places near you.
+</p>
+</section>
+
+<section class="search-box">
+
+<div class="search-row">
+
+<div>
+<label>Location</label>
+<input id="locationInput" type="text" placeholder="City, area or postcode" value="Bournemouth">
+</div>
+
+<div>
+<label>Radius</label>
+<select id="radiusInput">
+<option>5 miles</option>
+<option selected>10 miles</option>
+<option>25 miles</option>
+<option>50 miles</option>
+</select>
+</div>
+
+</div>
+
+<button onclick="updateLocation()" style="margin-top:18px;">
+Search This Area
+</button>
+
+</section>
+
+<section class="filters">
+<div class="filter active">All</div>
+<div class="filter">Recommendations</div>
+<div class="filter">Help</div>
+<div class="filter">Lost & Found</div>
+<div class="filter">Events</div>
+<div class="filter">Photos</div>
+<div class="filter">Volunteers</div>
+</section>
+
+<section class="new-post">
+
+<h2>Add Local Post</h2>
+
+<select id="postType">
+<option>Recommendation</option>
+<option>Help</option>
+<option>Lost & Found</option>
+<option>Event</option>
+<option>Photo</option>
+<option>Volunteers</option>
+</select>
+
+<input id="postTitle" type="text" placeholder="Post title">
+
+<textarea id="postText" placeholder="Write something useful for pet owners in your area..."></textarea>
+
+<button onclick="addPost()">Publish Post</button>
+
+</section>
+
+<h2 class="feed-title" id="feedTitle">
+Bournemouth — within 10 miles
+</h2>
+
+<section id="feed">
+
+<div class="post">
+<div class="post-top">
+<div>
+<span class="badge">RECOMMENDATION</span>
+<h3>Best dog-friendly café in Bournemouth?</h3>
+<div class="meta">📍 Bournemouth · 1.8 miles away · Posted by Sarah</div>
+</div>
+</div>
+
+<p>
+Looking for a cosy dog-friendly café near the beach. Any good recommendations?
+</p>
+
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>37</span></span>
+<span>💬 2 comments</span>
+</div>
+
+<div class="comments">
+
+<div class="comment">
+<strong>Emma</strong>
+Southbourne Beach Café is lovely and very friendly with dogs.
+<div class="comment-heart" onclick="likeComment(this)">❤️ <span>5</span></div>
+</div>
+
+<div class="comment">
+<strong>James</strong>
+Try the cafés near Poole Harbour, many of them allow dogs outside.
+<div class="comment-heart" onclick="likeComment(this)">❤️ <span>3</span></div>
+</div>
+
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+
+</div>
+</div>
+
+<div class="post">
+<span class="badge">HELP</span>
+<h3>Volunteer needed for animal shelter weekend</h3>
+<div class="meta">📍 Bournemouth · 4 miles away · Posted by PETS & DOGUE</div>
+
+<p>
+A local animal shelter is looking for volunteers this weekend to help with walking, cleaning and social media photos.
+</p>
+
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>24</span></span>
+<span>💬 1 comment</span>
+</div>
+
+<div class="comments">
+
+<div class="comment">
+<strong>Olivia</strong>
+I can help on Sunday afternoon.
+<div class="comment-heart" onclick="likeComment(this)">❤️ <span>7</span></div>
+</div>
+
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+
+</div>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<h2>PETS & DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="articles.html">Articles</a>
+<a href="categories.html">Categories</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<a href="admin.html" class="admin-small">Admin</a>
+
+</footer>
+
+<script>
+function updateLocation(){
+const location = document.getElementById("locationInput").value || "Your Area";
+const radius = document.getElementById("radiusInput").value;
+document.getElementById("feedTitle").textContent = location + " — within " + radius;
+}
+
+function likePost(element){
+const count = element.querySelector("span");
+count.textContent = Number(count.textContent) + 1;
+}
+
+function likeComment(element){
+const count = element.querySelector("span");
+count.textContent = Number(count.textContent) + 1;
+}
+
+function addComment(button){
+const input = button.previousElementSibling;
+const text = input.value.trim();
+
+if(!text){
+return;
+}
+
+const comment = document.createElement("div");
+comment.className = "comment";
+comment.innerHTML = `
+<strong>You</strong>
+${text}
+<div class="comment-heart" onclick="likeComment(this)">❤️ <span>0</span></div>
+`;
+
+button.parentElement.parentElement.insertBefore(comment, button.parentElement);
+input.value = "";
+}
+
+function addPost(){
+const type = document.getElementById("postType").value;
+const title = document.getElementById("postTitle").value.trim();
+const text = document.getElementById("postText").value.trim();
+const location = document.getElementById("locationInput").value || "Your Area";
+
+if(!title || !text){
+alert("Please add title and text");
+return;
+}
+
+const post = document.createElement("div");
+post.className = "post";
+
+post.innerHTML = `
+<span class="badge">${type.toUpperCase()}</span>
+<h3>${title}</h3>
+<div class="meta">📍 ${location} · Posted by You</div>
+<p>${text}</p>
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>0</span></span>
+<span>💬 comments</span>
+</div>
+<div class="comments">
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+`;
+
+document.getElementById("feed").prepend(post);
+
+document.getElementById("postTitle").value = "";
+document.getElementById("postText").value = "";
+}
+</script>
+
+</body>
+</html>
