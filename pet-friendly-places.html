@@ -8,57 +8,62 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:#f8f7f3;color:#111}
-header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
+header{background:white;border-bottom:1px solid #ddd;padding:18px;text-align:center;position:sticky;top:0;z-index:1000}
 .logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
-
-.hero{height:560px;position:relative;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.18))}
-.hero-content{position:absolute;bottom:55px;left:50%;transform:translateX(-50%);text-align:center;color:white;width:90%}
-.hero-content h1{font-size:70px;font-family:Georgia,serif;margin-bottom:15px}
-.hero-content p{font-size:22px;line-height:1.8;max-width:900px;margin:auto}
-
-.section{max-width:1400px;margin:auto;padding:70px 20px}
-.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:45px}
-
-.search-box{background:white;border:2px solid #111;border-radius:38px;padding:32px;margin-bottom:50px}
-.search-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-input,select{padding:16px;border:1px solid #ccc;border-radius:999px;font-size:16px;width:100%}
-button{background:#111;color:white;border:none;padding:16px 24px;border-radius:999px;font-weight:bold;cursor:pointer}
-
-.filters{display:flex;gap:10px;overflow-x:auto;margin-bottom:35px}
+.logo-big{font-size:50px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
+.hero{background:#111;color:white;text-align:center;padding:80px 20px;border-bottom:4px solid #c89b3c}
+.hero h1{font-family:Georgia,serif;font-size:62px;color:#d6aa45;margin-bottom:18px}
+.hero p{font-size:20px;line-height:1.8;max-width:900px;margin:auto}
+main{max-width:1350px;margin:auto;padding:50px 18px}
+.search-panel{background:white;border:2px solid #111;border-radius:38px;padding:28px;margin-bottom:35px}
+.search-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:14px}
+input,select{width:100%;padding:15px;border:1px solid #ccc;border-radius:999px;font-size:16px}
+button{background:#111;color:white;border:none;padding:15px 22px;border-radius:999px;font-weight:bold;cursor:pointer}
+.gold{background:#c89b3c}
+.filters{display:flex;gap:10px;overflow-x:auto;margin-bottom:30px}
 .filter{white-space:nowrap;background:white;border:2px solid #111;border-radius:999px;padding:11px 18px;font-weight:bold;cursor:pointer}
 .filter.active{background:#111;color:white}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:30px}
-.place-card{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.place-card img{width:100%;height:300px;object-fit:cover}
-.place-content{padding:25px}
+.layout{display:grid;grid-template-columns:1.6fr .9fr;gap:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
+.place{background:white;border:2px solid #111;border-radius:34px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
+.place img{width:100%;height:270px;object-fit:cover}
+.content{padding:24px}
 .badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:12px}
-.place-content h3{font-family:Georgia,serif;font-size:32px;margin-bottom:10px}
-.meta{color:#777;font-size:14px;margin-bottom:12px}
-.place-content p{color:#555;line-height:1.8;margin-bottom:18px}
-.actions{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;background:#111;color:white;text-decoration:none;padding:14px 20px;border-radius:999px;font-weight:bold;font-size:14px}
+.recommended{background:#111;color:white}
+.content h3{font-family:Georgia,serif;font-size:31px;margin-bottom:10px}
+.meta{color:#777;font-size:14px;margin-bottom:12px;line-height:1.6}
+.stars{color:#c89b3c;font-size:18px;margin-bottom:12px}
+.content p{color:#555;line-height:1.8;margin-bottom:18px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;background:#111;color:white;text-decoration:none;padding:13px 18px;border-radius:999px;font-weight:bold;font-size:14px}
 .btn.gold{background:#c89b3c}
-
-.club{background:#111;color:white;border-radius:40px;padding:55px 30px;text-align:center;margin-top:70px}
+.like{cursor:pointer;font-weight:bold}
+.map-box{background:#111;color:white;border-radius:34px;padding:26px;position:sticky;top:95px}
+.map-box h2{font-family:Georgia,serif;font-size:36px;color:#d6aa45;margin-bottom:15px}
+.fake-map{height:360px;background:linear-gradient(135deg,#2b2b2b,#c89b3c);border-radius:26px;position:relative;overflow:hidden;margin-bottom:20px}
+.pin{position:absolute;background:white;color:#111;border:2px solid #111;border-radius:999px;padding:8px 11px;font-weight:bold;font-size:13px}
+.pin.one{top:20%;left:25%}
+.pin.two{top:45%;left:55%}
+.pin.three{top:65%;left:35%}
+.pin.four{top:30%;left:70%}
+.map-box p{color:#eee;line-height:1.7}
+.review{background:white;color:#111;border-radius:22px;padding:18px;margin-top:18px}
+.review h3{font-size:18px;margin-bottom:8px}
+.review p{font-size:14px;color:#555;line-height:1.6}
+.club{background:#111;color:white;border-radius:40px;padding:50px 25px;text-align:center;margin-top:70px}
 .club h2{font-family:Georgia,serif;font-size:46px;color:#d6aa45;margin-bottom:18px}
-.club p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
-.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:35px}
-.benefit{background:white;color:#111;border-radius:25px;padding:24px;font-weight:bold}
-
+.club p{font-size:19px;line-height:1.8;max-width:850px;margin:auto}
+.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:32px}
+.benefit{background:white;color:#111;border-radius:24px;padding:22px;font-weight:bold}
 footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
 .footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
 .footer-links a{text-decoration:none;color:#666;font-size:14px}
 .admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
-
-@media(max-width:768px){
-.hero{height:430px}
-.hero-content h1{font-size:44px}
-.hero-content p{font-size:18px}
-.section-title{font-size:38px}
+@media(max-width:950px){
+.search-grid,.layout{grid-template-columns:1fr}
+.map-box{position:static}
+.hero h1{font-size:42px}
+.logo-big{font-size:40px}
 }
 </style>
 </head>
@@ -71,47 +76,39 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 </header>
 
 <section class="hero">
-<img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1800&q=80" alt="Pet Friendly Places">
-<div class="hero-overlay"></div>
-<div class="hero-content">
 <h1>Pet Friendly Places</h1>
 <p>
-Discover cafés, hotels, beaches, parks, restaurants and luxury places where pets are truly welcome.
+A luxury guide to pet-friendly cafés, hotels, beaches, parks, restaurants, groomers, vets and places worth visiting with your companion.
 </p>
-</div>
 </section>
 
-<section class="section">
+<main>
 
-<h2 class="section-title">Find Places Near You</h2>
-
-<div class="search-box">
+<section class="search-panel">
 <div class="search-grid">
-<input id="locationInput" type="text" placeholder="City, postcode or region" value="Bournemouth">
-
+<input id="locationInput" type="text" placeholder="City, country or postcode" value="Bournemouth">
 <select id="categoryInput">
-<option>All Places</option>
-<option>Cafés</option>
-<option>Hotels</option>
-<option>Restaurants</option>
-<option>Beaches</option>
-<option>Parks</option>
-<option>Groomers</option>
+<option>All Categories</option>
+<option>Café</option>
+<option>Hotel</option>
+<option>Restaurant</option>
+<option>Beach</option>
+<option>Park</option>
+<option>Grooming</option>
 <option>Veterinary</option>
+<option>Shop</option>
 </select>
-
 <select id="radiusInput">
 <option>5 km</option>
 <option selected>10 km</option>
 <option>25 km</option>
 <option>50 km</option>
 </select>
-
-<button onclick="searchPlaces()">Search</button>
+<button onclick="searchPlaces()" class="gold">Search</button>
 </div>
-</div>
+</section>
 
-<div class="filters">
+<section class="filters">
 <div class="filter active" onclick="filterPlaces(this,'All')">All</div>
 <div class="filter" onclick="filterPlaces(this,'Café')">Cafés</div>
 <div class="filter" onclick="filterPlaces(this,'Hotel')">Hotels</div>
@@ -119,97 +116,131 @@ Discover cafés, hotels, beaches, parks, restaurants and luxury places where pet
 <div class="filter" onclick="filterPlaces(this,'Beach')">Beaches</div>
 <div class="filter" onclick="filterPlaces(this,'Park')">Parks</div>
 <div class="filter" onclick="filterPlaces(this,'Grooming')">Groomers</div>
-</div>
+<div class="filter" onclick="filterPlaces(this,'Veterinary')">Vets</div>
+</section>
 
-<div class="grid" id="placesGrid">
+<div class="layout">
 
-<div class="place-card" data-type="Café">
+<section class="grid" id="placesGrid">
+
+<div class="place" data-type="Café">
 <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80">
-<div class="place-content">
-<span class="badge">CAFÉ</span>
+<div class="content">
+<span class="badge recommended">DOGUE RECOMMENDED</span>
 <h3>Beachside Dog Café</h3>
-<div class="meta">📍 Bournemouth · 1.4 km away · ⭐ 4.9</div>
-<p>Cosy café with outdoor seating, water bowls and pet-friendly staff near the beach.</p>
+<div class="meta">📍 Bournemouth · 1.4 km away · Café</div>
+<div class="stars">★★★★★ 4.9</div>
+<p>Cosy café with outdoor seating, water bowls, dog treats and a relaxed seaside atmosphere.</p>
 <div class="actions">
-<a href="#" class="btn gold">View Place</a>
-<a href="local-community.html" class="btn">Comments</a>
+<a href="local-community.html" class="btn gold">Reviews</a>
+<span class="btn like" onclick="likePlace(this)">❤️ <span>42</span></span>
 </div>
 </div>
 </div>
 
-<div class="place-card" data-type="Hotel">
+<div class="place" data-type="Hotel">
 <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
-<div class="place-content">
-<span class="badge">HOTEL</span>
-<h3>Luxury Pet-Friendly Hotel</h3>
-<div class="meta">📍 London · Member offer · ⭐ 5.0</div>
-<p>Elegant stay with pet welcome packs, premium rooms and special services for pets.</p>
+<div class="content">
+<span class="badge">CLUB OFFER</span>
+<h3>Luxury Pet Hotel</h3>
+<div class="meta">📍 London · Member discount · Hotel</div>
+<div class="stars">★★★★★ 5.0</div>
+<p>Premium rooms, pet welcome packs, luxury bedding and services for travelling with pets.</p>
 <div class="actions">
-<a href="#" class="btn gold">Book Stay</a>
-<a href="partners.html" class="btn">Member Offer</a>
+<a href="partners.html" class="btn gold">Book Offer</a>
+<span class="btn like" onclick="likePlace(this)">❤️ <span>86</span></span>
 </div>
 </div>
 </div>
 
-<div class="place-card" data-type="Beach">
+<div class="place" data-type="Beach">
 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80">
-<div class="place-content">
-<span class="badge">BEACH</span>
-<h3>Pet Friendly Beach Walk</h3>
-<div class="meta">📍 Dorset · 7 km away · ⭐ 4.8</div>
-<p>Beautiful coastal route for walks, photos and relaxed pet-friendly days out.</p>
+<div class="content">
+<span class="badge recommended">DOGUE RECOMMENDED</span>
+<h3>Dorset Pet Beach Walk</h3>
+<div class="meta">📍 Dorset · 7 km away · Beach</div>
+<div class="stars">★★★★☆ 4.8</div>
+<p>Beautiful coastal route for walks, photos, fresh air and relaxed pet-friendly days.</p>
 <div class="actions">
-<a href="#" class="btn gold">Explore</a>
-<a href="photos.html" class="btn">Photo Spots</a>
+<a href="photos.html" class="btn gold">Photo Spots</a>
+<span class="btn like" onclick="likePlace(this)">❤️ <span>64</span></span>
 </div>
 </div>
 </div>
 
-<div class="place-card" data-type="Park">
+<div class="place" data-type="Park">
 <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80">
-<div class="place-content">
-<span class="badge">PARK</span>
+<div class="content">
+<span class="badge">LOCAL FAVOURITE</span>
 <h3>Royal Green Park</h3>
-<div class="meta">📍 Bournemouth · 3 km away · ⭐ 4.7</div>
-<p>Open green space for walks, play, community meetups and calm afternoon moments.</p>
+<div class="meta">📍 Bournemouth · 3 km away · Park</div>
+<div class="stars">★★★★☆ 4.7</div>
+<p>Open green space for walks, community meetups and calm afternoon moments.</p>
 <div class="actions">
-<a href="#" class="btn gold">View Park</a>
-<a href="local-community.html" class="btn">Meet Locals</a>
+<a href="local-community.html" class="btn gold">Meet Locals</a>
+<span class="btn like" onclick="likePlace(this)">❤️ <span>51</span></span>
 </div>
 </div>
 </div>
 
-<div class="place-card" data-type="Restaurant">
+<div class="place" data-type="Restaurant">
 <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80">
-<div class="place-content">
-<span class="badge">RESTAURANT</span>
+<div class="content">
+<span class="badge">TERRACE</span>
 <h3>Pet Welcome Terrace</h3>
-<div class="meta">📍 London · Terrace seating · ⭐ 4.6</div>
+<div class="meta">📍 London · Outdoor dining · Restaurant</div>
+<div class="stars">★★★★☆ 4.6</div>
 <p>Stylish outdoor dining area where well-behaved pets are welcome with owners.</p>
 <div class="actions">
-<a href="#" class="btn gold">Reserve</a>
-<a href="partners.html" class="btn">Club Discount</a>
+<a href="partners.html" class="btn gold">Club Discount</a>
+<span class="btn like" onclick="likePlace(this)">❤️ <span>39</span></span>
 </div>
 </div>
 </div>
 
-<div class="place-card" data-type="Grooming">
+<div class="place" data-type="Grooming">
 <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80">
-<div class="place-content">
-<span class="badge">GROOMING</span>
-<h3>Premium Grooming Studio</h3>
-<div class="meta">📍 Bournemouth · Partner offer · ⭐ 4.9</div>
-<p>Luxury grooming, coat care and beauty services for pets before travel or photoshoots.</p>
+<div class="content">
+<span class="badge">PREMIUM</span>
+<h3>Luxury Grooming Studio</h3>
+<div class="meta">📍 Bournemouth · Partner offer · Grooming</div>
+<div class="stars">★★★★★ 4.9</div>
+<p>Premium grooming, coat care and beauty services before travel or photoshoots.</p>
 <div class="actions">
-<a href="#" class="btn gold">Book Service</a>
-<a href="club.html" class="btn">Club Benefits</a>
+<a href="club.html" class="btn gold">Member Benefit</a>
+<span class="btn like" onclick="likePlace(this)">❤️ <span>72</span></span>
 </div>
 </div>
 </div>
 
+</section>
+
+<aside class="map-box">
+<h2>Map Preview</h2>
+<div class="fake-map">
+<div class="pin one">☕ Café</div>
+<div class="pin two">🏨 Hotel</div>
+<div class="pin three">🏖 Beach</div>
+<div class="pin four">✂️ Groomer</div>
+</div>
+<p>
+Future version: interactive map with real locations, directions, reviews, booking links and PETS & DOGUE Club discounts.
+</p>
+
+<div class="review">
+<h3>Latest Review</h3>
+<p><strong>Sarah:</strong> Beachside Dog Café was lovely. Staff brought water for my dog and the terrace was calm.</p>
 </div>
 
-<div class="club">
+<div class="review">
+<h3>Club Benefit</h3>
+<p>Members will unlock partner discounts and QR card verification at selected places.</p>
+</div>
+</aside>
+
+</div>
+
+<section class="club">
 <h2>PETS & DOGUE Club Benefits</h2>
 <p>
 Members will unlock selected discounts and special offers from pet-friendly hotels,
@@ -224,9 +255,9 @@ cafés, groomers, travel partners and premium local services.
 <div class="benefit">Local Recommendations</div>
 <div class="benefit">Member QR Card</div>
 </div>
-</div>
-
 </section>
+
+</main>
 
 <footer>
 <h2>PETS & DOGUE</h2>
@@ -238,7 +269,7 @@ cafés, groomers, travel partners and premium local services.
 <a href="pet-travel.html">Pet Travel</a>
 <a href="wellness.html">Wellness</a>
 <a href="partners.html">Partners</a>
-<a href="privacy.html">Privacy</a>
+<a href="club.html">Club</a>
 <a href="contact.html">Contact</a>
 </div>
 
@@ -250,19 +281,20 @@ function filterPlaces(element,type){
 document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
 element.classList.add("active");
 
-document.querySelectorAll(".place-card").forEach(card => {
-if(type === "All" || card.dataset.type === type){
-card.style.display = "block";
-}else{
-card.style.display = "none";
-}
+document.querySelectorAll(".place").forEach(card => {
+card.style.display = type === "All" || card.dataset.type === type ? "block" : "none";
 });
 }
 
 function searchPlaces(){
 const location = document.getElementById("locationInput").value || "your area";
 const radius = document.getElementById("radiusInput").value;
-alert("Showing pet friendly places near " + location + " within " + radius);
+alert("Showing PETS & DOGUE friendly places near " + location + " within " + radius);
+}
+
+function likePlace(element){
+const count = element.querySelector("span");
+count.textContent = Number(count.textContent) + 1;
 }
 </script>
 
