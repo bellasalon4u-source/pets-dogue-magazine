@@ -8,82 +8,286 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:#f8f7f3;color:#111}
-header{background:white;padding:18px;text-align:center;border-bottom:1px solid #ddd}
-.logo-small{font-size:20px;color:#b78a2e}
-.logo-big{font-size:58px;font-family:Georgia,serif;color:#c89b3c;font-weight:bold;letter-spacing:3px}
-.tagline{font-size:12px;letter-spacing:2px;color:#666}
-main{max-width:900px;margin:auto;padding:25px}
-.cover img{width:100%;border-radius:30px;box-shadow:0 10px 40px rgba(0,0,0,.15)}
-.issue-title{text-align:center;margin:35px 0}
-.issue-title h1{font-size:46px}
-.issue-title p{font-size:18px;color:#666;margin-top:10px}
-.article{background:white;border:2px solid #111;border-radius:30px;padding:28px;margin-bottom:30px}
-.article h2{font-family:Georgia,serif;font-size:34px;margin-bottom:15px}
-.article p{font-size:18px;line-height:1.8;color:#444;margin-bottom:15px}
-.gold{color:#b78a2e;font-weight:bold}
-.back{display:inline-block;margin:20px 0;background:#111;color:white;text-decoration:none;padding:15px 25px;border-radius:999px;font-weight:bold}
-footer{text-align:center;padding:40px;background:white;border-top:1px solid #ddd}
+a{text-decoration:none;color:inherit}
+
+header{background:white;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:1000}
+.top{height:66px;display:flex;align-items:center;justify-content:space-between;max-width:1400px;margin:auto;padding:0 18px}
+.logo{text-align:center;line-height:.9}
+.logo-small{font-size:15px;color:#b78a2e}
+.logo-big{font-size:42px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:3px}
+.back{background:#111;color:white;padding:12px 18px;border-radius:999px;font-weight:bold;font-size:14px}
+.issue-label{font-size:13px;font-weight:bold;color:#555}
+
+.hero{max-width:1500px;margin:auto;padding:24px 18px}
+.cover{position:relative;border-radius:40px;overflow:hidden;box-shadow:0 25px 75px rgba(0,0,0,.22)}
+.cover img{width:100%;display:block}
+.cover-text{position:absolute;left:40px;right:40px;bottom:40px;color:white;text-shadow:0 4px 20px rgba(0,0,0,.7)}
+.cover-text span{display:inline-block;background:#c89b3c;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:15px}
+.cover-text h1{font-family:Georgia,serif;font-size:72px;margin-bottom:12px}
+.cover-text p{font-size:22px;line-height:1.6;max-width:850px}
+
+.issue-intro{max-width:1000px;margin:70px auto;text-align:center;padding:0 22px}
+.kicker{letter-spacing:3px;color:#b78a2e;font-size:13px;font-weight:bold;margin-bottom:18px}
+.issue-intro h2{font-family:Georgia,serif;font-size:58px;margin-bottom:20px}
+.issue-intro p{font-size:21px;line-height:1.8;color:#555}
+
+.toc{max-width:1200px;margin:70px auto;padding:0 20px}
+.toc h2{font-family:Georgia,serif;font-size:46px;text-align:center;margin-bottom:35px}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.toc-card{background:white;border:2px solid #111;border-radius:28px;padding:22px;text-align:center}
+.toc-card span{color:#c89b3c;font-weight:bold;font-size:13px}
+.toc-card h3{font-family:Georgia,serif;font-size:28px;margin-top:8px}
+
+.page{max-width:1200px;margin:90px auto;padding:0 20px}
+.editorial{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center;background:white;border:2px solid #111;border-radius:42px;overflow:hidden;box-shadow:0 16px 45px rgba(0,0,0,.08)}
+.editorial.reverse{direction:rtl}
+.editorial.reverse .text{direction:ltr}
+.editorial img{width:100%;height:620px;object-fit:cover}
+.text{padding:38px}
+.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:16px}
+.text h2{font-family:Georgia,serif;font-size:50px;margin-bottom:18px}
+.text p{font-size:18px;line-height:1.9;color:#444;margin-bottom:16px}
+.quote{font-family:Georgia,serif;font-size:28px;color:#b78a2e;margin:24px 0;line-height:1.5}
+
+.full-page{max-width:1400px;margin:90px auto;padding:0 20px}
+.full-card{position:relative;border-radius:44px;overflow:hidden;min-height:650px;display:flex;align-items:flex-end;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.full-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.full-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.05))}
+.full-content{position:relative;z-index:2;color:white;padding:45px;max-width:850px}
+.full-content h2{font-family:Georgia,serif;font-size:64px;margin-bottom:18px}
+.full-content p{font-size:21px;line-height:1.8;color:#eee}
+
+.buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;background:#111;color:white;padding:15px 22px;border-radius:999px;font-weight:bold}
+.btn.gold{background:#c89b3c}
+
+.shop-strip{max-width:1200px;margin:90px auto;padding:0 20px}
+.shop-box{background:#111;color:white;border-radius:42px;padding:50px 30px;text-align:center}
+.shop-box h2{font-family:Georgia,serif;font-size:50px;color:#d6aa45;margin-bottom:18px}
+.shop-box p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:35px}
+.shop-item{background:white;color:#111;border-radius:25px;padding:22px;font-weight:bold}
+
+.final{max-width:1000px;margin:90px auto;text-align:center;padding:0 22px}
+.final h2{font-family:Georgia,serif;font-size:56px;margin-bottom:18px}
+.final p{font-size:21px;line-height:1.8;color:#555;margin-bottom:25px}
+
+footer{margin-top:70px;padding:55px 20px;background:#050505;color:white;text-align:center}
+footer h2{font-family:Georgia,serif;font-size:46px;margin-bottom:10px}
+footer p{color:#ddd}
+.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:22px}
+.footer-links a{color:#ccc;font-size:14px}
+.admin-small{display:block;margin-top:25px;color:#777;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+
+@media(max-width:850px){
+.logo-big{font-size:34px}
+.back{font-size:12px;padding:10px 14px}
+.issue-label{display:none}
+.cover-text{position:static;background:#111;padding:28px;text-shadow:none}
+.cover-text h1{font-size:44px}
+.cover-text p{font-size:18px}
+.issue-intro h2{font-size:40px}
+.editorial,.editorial.reverse{grid-template-columns:1fr;direction:ltr}
+.editorial img{height:420px}
+.text h2{font-size:38px}
+.full-card{min-height:520px}
+.full-content{padding:30px}
+.full-content h2{font-size:42px}
+}
 </style>
 </head>
 
 <body>
 
 <header>
+<div class="top">
+<a href="index.html" class="back">← Home</a>
+
+<a href="index.html" class="logo">
 <div class="logo-small">pets &</div>
 <div class="logo-big">DOGUE</div>
-<div class="tagline">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div>
+</a>
+
+<div class="issue-label">ISSUE 01</div>
+</div>
 </header>
 
-<main>
-
-<a href="index.html" class="back">← Back to Home</a>
-
-<section class="cover">
+<section class="hero">
+<div class="cover">
 <img src="file_00000000a9d471fda9b4629589be22a9.png" alt="PETS & DOGUE Issue 01">
+<div class="cover-text">
+<span>SUMMER 2026</span>
+<h1>Issue 01</h1>
+<p>The debut luxury animal issue starring Miso, cover stars, summer style, travel, wellness and the beginning of PETS & DOGUE.</p>
+</div>
+</div>
 </section>
 
-<section class="issue-title">
-<h1>Issue 01 — Summer 2026</h1>
-<p>The luxury summer issue starring Miso and the icons of summer.</p>
+<section class="issue-intro">
+<div class="kicker">THE DEBUT ISSUE</div>
+<h2>A New Luxury Magazine For Animal Lovers</h2>
+<p>
+PETS & DOGUE begins with one idea: animals deserve beauty, storytelling, culture, visibility and a place in the luxury magazine world.
+</p>
 </section>
 
-<section class="article">
-<h2>Editor’s Letter</h2>
-<p><span class="gold">Welcome to PETS & DOGUE</span>, the international luxury animal magazine created for those who believe animals deserve beauty, style, love and a place in culture.</p>
-<p>This first issue celebrates summer, elegance and the unique personalities of pets around the world.</p>
-<p>From Santorini-inspired fashion to wellness, travel and royal pet stories, DOGUE begins with one clear mission: to turn every animal into a star.</p>
+<section class="toc">
+<h2>Inside This Issue</h2>
+<div class="toc-grid">
+<div class="toc-card"><span>01</span><h3>Editor’s Letter</h3></div>
+<div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div>
+<div class="toc-card"><span>03</span><h3>Icons Of Summer</h3></div>
+<div class="toc-card"><span>04</span><h3>Pet Fashion</h3></div>
+<div class="toc-card"><span>05</span><h3>Travel & Wellness</h3></div>
+<div class="toc-card"><span>06</span><h3>Community</h3></div>
+</div>
 </section>
 
-<section class="article">
-<h2>Miso — Model Of The Month</h2>
-<p>Miso is the face of our first issue: soft, glamorous, playful and unforgettable.</p>
-<p>With her pink bow, pearl details and royal presence, Miso represents the new era of pet fashion — where animals are not accessories, but personalities with their own story.</p>
-<p>This summer, Miso is not just a pet. She is the star of DOGUE.</p>
+<section class="page">
+<div class="editorial">
+<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Miso">
+<div class="text">
+<span class="badge">EDITOR’S LETTER</span>
+<h2>Welcome To PETS & DOGUE</h2>
+<p>
+This magazine was created for people who see animals not as accessories, but as personalities with stories, beauty and emotional power.
+</p>
+<p>
+Our first issue celebrates summer, elegance, rescue, community and the idea that every animal can become unforgettable.
+</p>
+<div class="quote">“A luxury magazine for every extraordinary pet.”</div>
+<p>
+From cover stars to local communities, PETS & DOGUE is more than a magazine. It is a growing world for animal lovers.
+</p>
+</div>
+</div>
 </section>
 
-<section class="article">
-<h2>The Icons Of Summer</h2>
-<p>Dogs, cats, sphynx beauties, rabbits and birds come together in our first cover to show that PETS & DOGUE is not only for dogs.</p>
-<p>It is a magazine for every animal with character, elegance and charm.</p>
+<section class="full-page">
+<div class="full-card">
+<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Miso Cover Star">
+<div class="full-content">
+<span class="badge">COVER STORY</span>
+<h2>Miso: The First Cover Star</h2>
+<p>
+Miso is the face of Issue 01 — soft, glamorous, playful and unforgettable. She represents the beginning of PETS & DOGUE: beauty, charm and personality.
+</p>
+<div class="buttons">
+<a href="cover-stars.html" class="btn gold">View Cover Stars</a>
+<a href="become-cover-star.html" class="btn">Become A Cover Star</a>
+</div>
+</div>
+</div>
 </section>
 
-<section class="article">
-<h2>Luxury Travel</h2>
-<p>This issue is inspired by Santorini, Capri and the Côte d’Azur — places where summer, sea and luxury meet.</p>
-<p>Future DOGUE issues will explore pet-friendly hotels, villas, yachts and destinations for stylish owners and their beloved companions.</p>
+<section class="page">
+<div class="editorial reverse">
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Pet Fashion">
+<div class="text">
+<span class="badge">PET FASHION</span>
+<h2>Summer Style</h2>
+<p>
+Pet fashion is no longer just cute. It is becoming editorial, expressive and part of a larger lifestyle culture.
+</p>
+<p>
+Issue 01 introduces a world of bows, collars, carriers, soft textures and luxury-inspired details.
+</p>
+<div class="buttons">
+<a href="pet-fashion.html" class="btn gold">Explore Fashion</a>
+<a href="partners.html" class="btn">Shop Partners</a>
+</div>
+</div>
+</div>
 </section>
 
-<section class="article">
-<h2>AI Studio</h2>
-<p>Our exclusive AI Studio will allow readers to turn their own pets into DOGUE cover stars.</p>
-<p>Upload a photo, choose a style, and create a luxury magazine moment for your animal.</p>
+<section class="page">
+<div class="editorial">
+<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Pet Travel">
+<div class="text">
+<span class="badge">TRAVEL</span>
+<h2>Pet-Friendly Summer</h2>
+<p>
+Inspired by Santorini, Capri and the Côte d’Azur, this issue imagines a future where travel with pets is elegant, easy and beautifully designed.
+</p>
+<p>
+Future PETS & DOGUE issues will explore hotels, cafés, beaches, villas and destinations where pets are truly welcome.
+</p>
+<div class="buttons">
+<a href="pet-travel.html" class="btn gold">Travel Guide</a>
+<a href="pet-friendly-places.html" class="btn">Friendly Places</a>
+</div>
+</div>
+</div>
 </section>
 
-</main>
+<section class="page">
+<div class="editorial reverse">
+<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Pets In Need">
+<div class="text">
+<span class="badge">PETS IN NEED</span>
+<h2>Beauty With Purpose</h2>
+<p>
+PETS & DOGUE is not only about style. It is also about visibility for animals who need help, adoption, care and community support.
+</p>
+<p>
+The future of this magazine includes rescue stories, volunteer networks and local posts that can make a real difference.
+</p>
+<div class="buttons">
+<a href="pets-in-need.html" class="btn gold">Help Animals</a>
+<a href="volunteer-network.html" class="btn">Volunteer</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="shop-strip">
+<div class="shop-box">
+<h2>Shop The Issue</h2>
+<p>
+Future PETS & DOGUE issues will include partner shopping links, member discounts and luxury recommendations for products and services.
+</p>
+
+<div class="shop-grid">
+<div class="shop-item">Luxury Collars</div>
+<div class="shop-item">Pet Fashion</div>
+<div class="shop-item">Travel Accessories</div>
+<div class="shop-item">Grooming Offers</div>
+<div class="shop-item">Pet-Friendly Hotels</div>
+<div class="shop-item">Member Discounts</div>
+</div>
+
+<br><br>
+<a href="partners.html" class="btn gold">View Partner Offers</a>
+</div>
+</section>
+
+<section class="final">
+<h2>Continue The Issue</h2>
+<p>
+Discover photos, articles, contests, local community posts, club benefits and future PETS & DOGUE cover stars.
+</p>
+<div class="buttons" style="justify-content:center;">
+<a href="photos.html" class="btn gold">Photos</a>
+<a href="articles.html" class="btn">Articles</a>
+<a href="contests.html" class="btn">Contests</a>
+<a href="club.html" class="btn">Join Club</a>
+</div>
+</section>
 
 <footer>
 <h2>PETS & DOGUE</h2>
 <p>The International Luxury Animal Magazine</p>
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="archive.html">Archive</a>
+<a href="issue-02.html">Issue 02</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<a href="admin.html" class="admin-small">Admin</a>
 </footer>
 
 </body>
