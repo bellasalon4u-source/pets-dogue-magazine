@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Cover Studio | PETS & DOGUE</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f7f3;color:#111}
+header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
+.logo-small{font-size:18px;color:#b78a2e}
+.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
+.hero{background:#111;color:white;text-align:center;padding:90px 20px;border-bottom:4px solid #c89b3c}
+.hero h1{font-size:66px;font-family:Georgia,serif;color:#d6aa45;margin-bottom:18px}
+.hero p{font-size:21px;line-height:1.8;max-width:900px;margin:auto}
+.section{max-width:1300px;margin:auto;padding:70px 20px}
+.studio{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.panel{background:white;border:2px solid #111;border-radius:38px;padding:30px;box-shadow:0 12px 35px rgba(0,0,0,.08)}
+.panel h2{font-family:Georgia,serif;font-size:38px;margin-bottom:18px}
+label{display:block;font-weight:bold;margin:18px 0 8px}
+input,select,textarea{width:100%;padding:15px;border:1px solid #ccc;border-radius:16px;font-size:16px}
+textarea{min-height:100px;resize:vertical}
+button{background:#111;color:white;border:none;padding:16px 26px;border-radius:999px;font-weight:bold;cursor:pointer;margin-top:20px}
+.gold{background:#c89b3c}
+.cover-preview{background:#111;border-radius:35px;min-height:620px;position:relative;overflow:hidden;color:white;display:flex;align-items:center;justify-content:center;text-align:center}
+.cover-bg{position:absolute;inset:0;background:linear-gradient(135deg,#111,#c89b3c)}
+.cover-preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.15))}
+.cover-text{position:relative;z-index:2;padding:30px}
+.cover-small{font-size:22px;color:#d6aa45}
+.cover-title{font-family:Georgia,serif;font-size:70px;letter-spacing:4px;color:#d6aa45;line-height:.9}
+.cover-subtitle{font-size:18px;margin-top:18px;line-height:1.6}
+.cover-pet{font-family:Georgia,serif;font-size:42px;margin-top:35px}
+.styles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:20px}
+.style-card{background:#f8f7f3;border:2px solid #111;border-radius:22px;padding:18px;text-align:center;font-weight:bold;cursor:pointer}
+.style-card.active{background:#111;color:white}
+.note{background:#111;color:white;border-radius:38px;padding:45px 25px;text-align:center;margin-top:70px}
+.note h2{font-family:Georgia,serif;font-size:44px;color:#d6aa45;margin-bottom:16px}
+.note p{font-size:19px;line-height:1.8;max-width:850px;margin:auto}
+footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
+.footer-links a{text-decoration:none;color:#666;font-size:14px}
+.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+@media(max-width:850px){.studio{grid-template-columns:1fr}.hero h1{font-size:44px}.cover-preview{min-height:520px}.cover-title{font-size:54px}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+</header>
+
+<section class="hero">
+<h1>AI Cover Studio</h1>
+<p>
+Create a luxury PETS & DOGUE magazine cover concept for your pet. Upload a photo, choose a style and preview your future cover star moment.
+</p>
+</section>
+
+<section class="section">
+
+<div class="studio">
+
+<div class="panel">
+
+<h2>Create Your Cover</h2>
+
+<label>Pet Name</label>
+<input id="petName" type="text" placeholder="Miso" value="Miso">
+
+<label>Upload Pet Photo</label>
+<input id="petPhoto" type="file" accept="image/*" onchange="previewPhoto(event)">
+
+<label>Cover Style</label>
+<select id="coverStyle" onchange="updateCover()">
+<option>Golden Luxury</option>
+<option>Royal Portrait</option>
+<option>Vogue Inspired</option>
+<option>Santorini Summer</option>
+<option>Winter Glamour</option>
+<option>Christmas Edition</option>
+<option>Flower Editorial</option>
+<option>Galaxy Dream</option>
+</select>
+
+<label>Cover Line</label>
+<textarea id="coverLine" oninput="updateCover()">The next PETS & DOGUE cover star</textarea>
+
+<button class="gold" onclick="updateCover()">Generate Preview</button>
+<button onclick="alert('Later this will connect to real AI image generation and member accounts.')">Create AI Cover</button>
+
+<div class="styles">
+<div class="style-card active" onclick="quickStyle(this,'Golden Luxury')">Golden Luxury</div>
+<div class="style-card" onclick="quickStyle(this,'Royal Portrait')">Royal</div>
+<div class="style-card" onclick="quickStyle(this,'Santorini Summer')">Santorini</div>
+<div class="style-card" onclick="quickStyle(this,'Christmas Edition')">Christmas</div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Cover Preview</h2>
+
+<div class="cover-preview" id="coverPreview">
+<div class="cover-bg"></div>
+<div class="cover-overlay"></div>
+<div class="cover-text">
+<div class="cover-small">pets &</div>
+<div class="cover-title">DOGUE</div>
+<div class="cover-subtitle" id="styleText">GOLDEN LUXURY EDITION</div>
+<div class="cover-pet" id="coverPet">Miso</div>
+<div class="cover-subtitle" id="coverSubtitle">The next PETS & DOGUE cover star</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="note">
+
+<h2>Future Premium Feature</h2>
+
+<p>
+In the full version, PETS & DOGUE Club members will be able to generate AI covers,
+save them in their account, enter cover star contests and share their magazine-style pet portraits.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+<h2>PETS & DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="cover-stars.html">Cover Stars</a>
+<a href="become-cover-star.html">Become Cover Star</a>
+<a href="club.html">Club</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<a href="admin.html" class="admin-small">Admin</a>
+</footer>
+
+<script>
+function updateCover(){
+const petName = document.getElementById("petName").value || "Your Pet";
+const style = document.getElementById("coverStyle").value;
+const line = document.getElementById("coverLine").value || "The next PETS & DOGUE cover star";
+
+document.getElementById("coverPet").textContent = petName;
+document.getElementById("styleText").textContent = style.toUpperCase();
+document.getElementById("coverSubtitle").textContent = line;
+}
+
+function previewPhoto(event){
+const file = event.target.files[0];
+if(!file){return;}
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+let oldImg = document.querySelector(".cover-preview img");
+if(oldImg){oldImg.remove();}
+
+const img = document.createElement("img");
+img.src = e.target.result;
+document.getElementById("coverPreview").prepend(img);
+};
+
+reader.readAsDataURL(file);
+}
+
+function quickStyle(element,style){
+document.querySelectorAll(".style-card").forEach(card => card.classList.remove("active"));
+element.classList.add("active");
+document.getElementById("coverStyle").value = style;
+updateCover();
+}
+
+updateCover();
+</script>
+
+</body>
+</html>
