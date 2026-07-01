@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Feed | PETS & DOGUE</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f7f3;color:#111}
+header{background:white;border-bottom:1px solid #ddd;padding:18px;text-align:center;position:sticky;top:0;z-index:1000}
+.logo-small{font-size:18px;color:#b78a2e}
+.logo-big{font-size:50px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
+.hero{background:#111;color:white;text-align:center;padding:75px 20px;border-bottom:4px solid #c89b3c}
+.hero h1{font-family:Georgia,serif;font-size:62px;color:#d6aa45;margin-bottom:18px}
+.hero p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
+main{max-width:1200px;margin:auto;padding:40px 18px}
+.top-actions{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:28px}
+.search-box,.post-box,.trending{background:white;border:2px solid #111;border-radius:32px;padding:24px}
+input,textarea{width:100%;padding:14px;border:1px solid #ccc;border-radius:14px;font-size:16px}
+textarea{min-height:100px;resize:vertical;margin-top:12px}
+button{background:#111;color:white;border:none;padding:14px 22px;border-radius:999px;font-weight:bold;cursor:pointer;margin-top:14px}
+.gold{background:#c89b3c}
+.filters{display:flex;gap:10px;overflow-x:auto;margin:25px 0}
+.filter{white-space:nowrap;background:white;border:2px solid #111;border-radius:999px;padding:10px 16px;font-weight:bold;cursor:pointer}
+.filter.active{background:#111;color:white}
+.feed-layout{display:grid;grid-template-columns:2fr 1fr;gap:28px}
+.feed{display:flex;flex-direction:column;gap:26px}
+.post{background:white;border:2px solid #111;border-radius:36px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
+.post-header{display:flex;align-items:center;gap:14px;padding:18px}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#111,#c89b3c);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-family:Georgia,serif}
+.user h3{font-size:18px;margin-bottom:4px}
+.user p{font-size:13px;color:#777}
+.badge{display:inline-block;background:#c89b3c;color:white;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:bold;margin-left:auto}
+.post img{width:100%;height:520px;object-fit:cover}
+.post-content{padding:20px}
+.caption{font-size:17px;line-height:1.7;color:#444;margin-bottom:12px}
+.tags{color:#b78a2e;font-weight:bold;margin-bottom:14px;line-height:1.6}
+.actions{display:flex;gap:18px;font-weight:bold;color:#555;margin-bottom:14px}
+.heart,.comment-toggle{cursor:pointer}
+.comments{border-top:1px solid #ddd;padding-top:14px}
+.comment{background:#f8f7f3;border-radius:18px;padding:12px;margin-bottom:10px}
+.comment strong{display:block;margin-bottom:4px}
+.comment-form{display:flex;gap:10px;margin-top:10px}
+.comment-form input{flex:1}
+.side-title{font-family:Georgia,serif;font-size:28px;margin-bottom:18px}
+.trend-item{background:#f8f7f3;border-radius:22px;padding:16px;margin-bottom:14px}
+.trend-item h3{font-size:18px;margin-bottom:6px}
+.trend-item p{font-size:14px;color:#555;line-height:1.5}
+.submit-note{background:#111;color:white;border-radius:32px;padding:28px;margin-top:24px;text-align:center}
+.submit-note h2{font-family:Georgia,serif;color:#d6aa45;font-size:32px;margin-bottom:10px}
+.submit-note p{color:#eee;line-height:1.7}
+footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
+.footer-links a{text-decoration:none;color:#666;font-size:14px}
+.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+
+@media(max-width:900px){
+.top-actions,.feed-layout{grid-template-columns:1fr}
+.hero h1{font-size:42px}
+.post img{height:420px}
+.logo-big{font-size:40px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+</header>
+
+<section class="hero">
+<h1>PETS & DOGUE Social</h1>
+<p>
+A luxury social feed for pet photos, cover star moments, community highlights, comments, hearts and future magazine features.
+</p>
+</section>
+
+<main>
+
+<div class="top-actions">
+
+<section class="post-box">
+<h2 style="font-family:Georgia,serif;font-size:32px;margin-bottom:15px;">Create Post</h2>
+<input id="postImage" type="text" placeholder="Image URL">
+<textarea id="postText" placeholder="Write a caption for your pet..."></textarea>
+<input id="postTags" type="text" placeholder="#coverstar #petfashion #dogue">
+<button class="gold" onclick="createPost()">Publish</button>
+</section>
+
+<section class="search-box">
+<h2 style="font-family:Georgia,serif;font-size:32px;margin-bottom:15px;">Search</h2>
+<input id="searchInput" type="text" placeholder="Search pets, tags, places..." oninput="searchPosts()">
+<button onclick="searchPosts()">Search Feed</button>
+</section>
+
+</div>
+
+<div class="filters">
+<div class="filter active" onclick="setFilter(this,'All')">All</div>
+<div class="filter" onclick="setFilter(this,'Cover Star')">Cover Stars</div>
+<div class="filter" onclick="setFilter(this,'Club')">Club Members</div>
+<div class="filter" onclick="setFilter(this,'Fashion')">Pet Fashion</div>
+<div class="filter" onclick="setFilter(this,'Rescue')">Rescue</div>
+<div class="filter" onclick="setFilter(this,'Local')">Local</div>
+</div>
+
+<div class="feed-layout">
+
+<section class="feed" id="feed">
+
+<div class="post" data-type="Cover Star" data-search="miso cover star dogue luxury">
+<div class="post-header">
+<div class="avatar">M</div>
+<div class="user">
+<h3>Miso</h3>
+<p>Cover Star · PETS & DOGUE Issue 01</p>
+</div>
+<span class="badge">COVER STAR</span>
+</div>
+<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Miso">
+<div class="post-content">
+<div class="caption">The first PETS & DOGUE cover star. Luxury, softness and a little pink bow moment.</div>
+<div class="tags">#coverstar #dogue #issue01</div>
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>328</span></span>
+<span class="comment-toggle">💬 <span class="comment-count">2</span> comments</span>
+<span>📍 PETS & DOGUE</span>
+</div>
+<div class="comments">
+<div class="comment"><strong>Emma</strong> This looks like a real magazine cover!</div>
+<div class="comment"><strong>Sarah</strong> Miso is iconic.</div>
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="post" data-type="Fashion" data-search="pet fashion luxury style collar">
+<div class="post-header">
+<div class="avatar">F</div>
+<div class="user">
+<h3>Pet Fashion Desk</h3>
+<p>Editorial · Style</p>
+</div>
+<span class="badge">FASHION</span>
+</div>
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Pet fashion">
+<div class="post-content">
+<div class="caption">Luxury pet fashion is becoming part of modern lifestyle culture.</div>
+<div class="tags">#petfashion #style #luxury</div>
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>186</span></span>
+<span class="comment-toggle">💬 <span class="comment-count">1</span> comments</span>
+<span>📍 London</span>
+</div>
+<div class="comments">
+<div class="comment"><strong>DOGUE Editor</strong> Future partner shopping links will appear here.</div>
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="post" data-type="Rescue" data-search="rescue pets in need adoption help">
+<div class="post-header">
+<div class="avatar">R</div>
+<div class="user">
+<h3>Rescue Story</h3>
+<p>Pets In Need · Community</p>
+</div>
+<span class="badge">RESCUE</span>
+</div>
+<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Rescue">
+<div class="post-content">
+<div class="caption">Visibility can help animals find homes, support and love.</div>
+<div class="tags">#petsinneed #rescue #adoption</div>
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>241</span></span>
+<span class="comment-toggle">💬 <span class="comment-count">1</span> comments</span>
+<span>📍 Bournemouth</span>
+</div>
+<div class="comments">
+<div class="comment"><strong>Olivia</strong> I want to help this weekend.</div>
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<aside>
+
+<div class="trending">
+<h2 class="side-title">Trending This Week</h2>
+
+<div class="trend-item">
+<h3>👑 Cover Star Voting</h3>
+<p>Top photos may appear in future PETS & DOGUE issues.</p>
+</div>
+
+<div class="trend-item">
+<h3>🏆 Contest Entries</h3>
+<p>Best pet photo and rescue story contests are open.</p>
+</div>
+
+<div class="trend-item">
+<h3>📍 Local Posts</h3>
+<p>Pet owners are sharing recommendations near them.</p>
+</div>
+
+<div class="trend-item">
+<h3>🛍 Partner Offers</h3>
+<p>Club discounts will connect to partner products and services.</p>
+</div>
+
+</div>
+
+<div class="submit-note">
+<h2>Get Featured</h2>
+<p>
+The best posts may be selected for Photos, Contests, Hall Of Fame or a future PETS & DOGUE issue.
+</p>
+<br>
+<a href="submit-pet.html" style="background:white;color:#111;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:bold;">Submit Pet</a>
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+<footer>
+<h2>PETS & DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="photos.html">Photos</a>
+<a href="contests.html">Contests</a>
+<a href="local-community.html">Local Community</a>
+<a href="club.html">Club</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<a href="admin.html" class="admin-small">Admin</a>
+</footer>
+
+<script>
+let currentFilter = "All";
+
+function likePost(element){
+const count = element.querySelector("span");
+count.textContent = Number(count.textContent) + 1;
+}
+
+function addComment(button){
+const input = button.previousElementSibling;
+const text = input.value.trim();
+if(!text){return;}
+
+const comments = button.closest(".comments");
+const comment = document.createElement("div");
+comment.className = "comment";
+comment.innerHTML = "<strong>You</strong> " + text;
+
+comments.insertBefore(comment, button.parentElement);
+
+const count = button.closest(".post").querySelector(".comment-count");
+count.textContent = Number(count.textContent) + 1;
+
+input.value = "";
+}
+
+function setFilter(element,type){
+currentFilter = type;
+document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+element.classList.add("active");
+filterPosts();
+}
+
+function searchPosts(){
+filterPosts();
+}
+
+function filterPosts(){
+const query = document.getElementById("searchInput").value.toLowerCase();
+
+document.querySelectorAll(".post").forEach(post => {
+const type = post.dataset.type;
+const search = post.dataset.search.toLowerCase();
+const text = post.innerText.toLowerCase();
+
+const matchesType = currentFilter === "All" || type === currentFilter;
+const matchesSearch = !query || search.includes(query) || text.includes(query);
+
+post.style.display = matchesType && matchesSearch ? "block" : "none";
+});
+}
+
+function createPost(){
+const image = document.getElementById("postImage").value.trim();
+const text = document.getElementById("postText").value.trim();
+const tags = document.getElementById("postTags").value.trim();
+
+if(!text){
+alert("Please write a caption.");
+return;
+}
+
+const post = document.createElement("div");
+post.className = "post";
+post.dataset.type = "Local";
+post.dataset.search = text + " " + tags;
+
+post.innerHTML = `
+<div class="post-header">
+<div class="avatar">Y</div>
+<div class="user">
+<h3>You</h3>
+<p>Community Post · Just now</p>
+</div>
+<span class="badge">LOCAL</span>
+</div>
+${image ? `<img src="${image}" alt="Your post">` : ""}
+<div class="post-content">
+<div class="caption">${text}</div>
+<div class="tags">${tags}</div>
+<div class="actions">
+<span class="heart" onclick="likePost(this)">❤️ <span>0</span></span>
+<span class="comment-toggle">💬 <span class="comment-count">0</span> comments</span>
+<span>📍 Community</span>
+</div>
+<div class="comments">
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+`;
+
+document.getElementById("feed").prepend(post);
+
+document.getElementById("postImage").value = "";
+document.getElementById("postText").value = "";
+document.getElementById("postTags").value = "";
+}
+</script>
+
+</body>
+</html>
