@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events | PETS & DOGUE</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f7f3;color:#111}
+a{text-decoration:none;color:inherit}
+header{background:white;border-bottom:1px solid #ddd;padding:18px;text-align:center;position:sticky;top:0;z-index:1000}
+.logo-small{font-size:18px;color:#b78a2e}
+.logo-big{font-size:50px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
+.hero{height:540px;position:relative;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.12))}
+.hero-content{position:absolute;bottom:55px;left:50%;transform:translateX(-50%);text-align:center;color:white;width:90%}
+.hero-content h1{font-size:72px;font-family:Georgia,serif;margin-bottom:16px}
+.hero-content p{font-size:22px;line-height:1.8;max-width:900px;margin:auto}
+.section{max-width:1400px;margin:auto;padding:70px 20px}
+.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:18px}
+.gold-line{width:90px;height:3px;background:#c89b3c;margin:0 auto 45px}
+.search-box{background:white;border:2px solid #111;border-radius:38px;padding:30px;margin-bottom:35px}
+.search-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:14px}
+input,select{width:100%;padding:15px;border:1px solid #ccc;border-radius:999px;font-size:16px}
+button{background:#111;color:white;border:none;padding:15px 22px;border-radius:999px;font-weight:bold;cursor:pointer}
+.gold{background:#c89b3c}
+.filters{display:flex;gap:10px;overflow-x:auto;margin-bottom:35px}
+.filter{white-space:nowrap;background:white;border:2px solid #111;border-radius:999px;padding:11px 18px;font-weight:bold;cursor:pointer}
+.filter.active{background:#111;color:white}
+.featured{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;background:white;border:2px solid #111;border-radius:42px;overflow:hidden;box-shadow:0 16px 45px rgba(0,0,0,.08);margin-bottom:60px}
+.featured img{width:100%;height:560px;object-fit:cover}
+.featured-text{padding:38px}
+.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:14px}
+.featured-text h2{font-family:Georgia,serif;font-size:48px;margin-bottom:16px}
+.featured-text p{font-size:18px;line-height:1.85;color:#555;margin-bottom:16px}
+.btn{display:inline-block;background:#111;color:white;padding:14px 20px;border-radius:999px;font-weight:bold;font-size:14px}
+.btn.gold{background:#c89b3c}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:28px}
+.event{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
+.event img{width:100%;height:280px;object-fit:cover}
+.event-content{padding:25px}
+.event-content h3{font-family:Georgia,serif;font-size:32px;margin-bottom:10px}
+.meta{font-size:14px;color:#777;line-height:1.6;margin-bottom:12px}
+.event-content p{color:#555;line-height:1.8;margin-bottom:18px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.like{cursor:pointer}
+.calendar{background:#111;color:white;border-radius:44px;padding:55px 30px;margin-top:80px}
+.calendar h2{font-family:Georgia,serif;font-size:50px;color:#d6aa45;text-align:center;margin-bottom:30px}
+.calendar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.calendar-item{background:white;color:#111;border-radius:24px;padding:22px}
+.calendar-item h3{font-size:22px;margin-bottom:8px}
+.calendar-item p{color:#555;line-height:1.6}
+.club{background:linear-gradient(135deg,#111,#2b2417);color:white;border-radius:44px;padding:55px 30px;text-align:center;border:3px solid #c89b3c;margin-top:80px}
+.club h2{font-family:Georgia,serif;font-size:50px;color:#d6aa45;margin-bottom:18px}
+.club p{font-size:20px;line-height:1.8;max-width:850px;margin:auto;color:#eee}
+.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:35px}
+.benefit{background:white;color:#111;border-radius:24px;padding:22px;font-weight:bold}
+footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
+.footer-links a{text-decoration:none;color:#666;font-size:14px}
+.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+@media(max-width:900px){
+.hero{height:430px}
+.hero-content h1{font-size:46px}
+.hero-content p{font-size:18px}
+.search-grid,.featured{grid-template-columns:1fr}
+.featured img{height:360px}
+.featured-text h2{font-size:38px}
+.section-title{font-size:40px}
+.logo-big{font-size:40px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+</header>
+
+<section class="hero">
+<img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1800&q=80" alt="PETS DOGUE Events">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1>Events</h1>
+<p>
+A luxury events hub for cover star shows, photoshoots, charity walks, community meetups, brand launches and PETS & DOGUE experiences.
+</p>
+</div>
+</section>
+
+<section class="section">
+
+<h2 class="section-title">PETS & DOGUE Events Hub</h2>
+<div class="gold-line"></div>
+
+<div class="search-box">
+<div class="search-grid">
+<input id="locationInput" type="text" placeholder="City, country or postcode" value="London">
+<select id="eventType">
+<option>All Events</option>
+<option>Cover Star</option>
+<option>Photoshoot</option>
+<option>Charity</option>
+<option>Community</option>
+<option>Workshop</option>
+<option>Brand Launch</option>
+</select>
+<select id="monthInput">
+<option>Any Month</option>
+<option>January</option>
+<option>February</option>
+<option>March</option>
+<option>April</option>
+<option>May</option>
+<option>June</option>
+<option>July</option>
+<option>August</option>
+<option>September</option>
+<option>October</option>
+<option>November</option>
+<option>December</option>
+</select>
+<button onclick="searchEvents()" class="gold">Search</button>
+</div>
+</div>
+
+<div class="filters">
+<div class="filter active" onclick="filterEvents(this,'All')">All</div>
+<div class="filter" onclick="filterEvents(this,'Cover Star')">Cover Star</div>
+<div class="filter" onclick="filterEvents(this,'Photoshoot')">Photoshoots</div>
+<div class="filter" onclick="filterEvents(this,'Charity')">Charity Walks</div>
+<div class="filter" onclick="filterEvents(this,'Community')">Community</div>
+<div class="filter" onclick="filterEvents(this,'Workshop')">Workshops</div>
+<div class="filter" onclick="filterEvents(this,'Brand Launch')">Brand Launches</div>
+</div>
+
+<div class="featured">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1400&q=80" alt="Featured event">
+<div class="featured-text">
+<span class="badge">FEATURED EVENT</span>
+<h2>PETS & DOGUE Cover Star Weekend</h2>
+<p>
+A future luxury weekend for pet portraits, community voting, partner gifts, fashion moments and future DOGUE cover candidates.
+</p>
+<p>
+This event connects Cover Stars, Photos, Contests, Club members and the Local Pet Community into one magazine experience.
+</p>
+<a href="cover-stars.html" class="btn gold">View Cover Stars</a>
+</div>
+</div>
+
+<div class="grid" id="eventsGrid">
+
+<div class="event" data-type="Cover Star">
+<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Cover Star">
+<div class="event-content">
+<span class="badge">COVER STAR</span>
+<h3>Cover Star Casting Day</h3>
+<div class="meta">📍 London · 12 July · 11:00 AM</div>
+<p>Submit your pet for future DOGUE cover features, model moments and editorial portraits.</p>
+<div class="actions">
+<a href="become-cover-star.html" class="btn gold">Apply</a>
+<span class="btn like" onclick="likeEvent(this)">❤️ <span>128</span></span>
+</div>
+</div>
+</div>
+
+<div class="event" data-type="Photoshoot">
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Photoshoot">
+<div class="event-content">
+<span class="badge">PHOTOSHOOT</span>
+<h3>Luxury Pet Portrait Day</h3>
+<div class="meta">📍 Bournemouth · 20 July · 2:00 PM</div>
+<p>Editorial-style portraits for pets, future Photos features and social feed highlights.</p>
+<div class="actions">
+<a href="photos.html" class="btn gold">View Photos</a>
+<span class="btn like" onclick="likeEvent(this)">❤️ <span>92</span></span>
+</div>
+</div>
+</div>
+
+<div class="event" data-type="Charity">
+<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Charity walk">
+<div class="event-content">
+<span class="badge">CHARITY</span>
+<h3>Pets In Need Charity Walk</h3>
+<div class="meta">📍 Dorset · 3 August · 10:00 AM</div>
+<p>A community walk to support animals in need, shelters and rescue visibility.</p>
+<div class="actions">
+<a href="pets-in-need.html" class="btn gold">Support</a>
+<span class="btn like" onclick="likeEvent(this)">❤️ <span>156</span></span>
+</div>
+</div>
+</div>
+
+<div class="event" data-type="Community">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Community meetup">
+<div class="event-content">
+<span class="badge">COMMUNITY</span>
+<h3>Local Pet Community Meetup</h3>
+<div class="meta">📍 Bournemouth · 18 August · 4:00 PM</div>
+<p>Meet local pet owners, exchange recommendations and discover pet-friendly places.</p>
+<div class="actions">
+<a href="local-community.html" class="btn gold">Open Community</a>
+<span class="btn like" onclick="likeEvent(this)">❤️ <span>74</span></span>
+</div>
+</div>
+</div>
+
+<div class="event" data-type="Workshop">
+<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80" alt="Workshop">
+<div class="event-content">
+<span class="badge">WORKSHOP</span>
+<h3>Wellness & Grooming Workshop</h3>
+<div class="meta">📍 London · 5 September · 1:00 PM</div>
+<p>Learn grooming, coat care, wellness routines and travel preparation from partners.</p>
+<div class="actions">
+<a href="wellness.html" class="btn gold">Wellness</a>
+<span class="btn like" onclick="likeEvent(this)">❤️ <span>68</span></span>
+</div>
+</div>
+</div>
+
+<div class="event" data-type="Brand Launch">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" alt="Brand launch">
+<div class="event-content">
+<span class="badge">BRAND LAUNCH</span>
+<h3>Partner Fashion Launch</h3>
+<div class="meta">📍 Paris · 22 September · 6:00 PM</div>
+<p>A future luxury partner event for pet fashion, club discounts and editorial content.</p>
+<div class="actions">
+<a href="partners.html" class="btn gold">Partners</a>
+<span class="btn like" onclick="likeEvent(this)">❤️ <span>103</span></span>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="calendar">
+<h2>Upcoming Calendar</h2>
+
+<div class="calendar-grid">
+<div class="calendar-item"><h3>July</h3><p>Cover Star Casting · Luxury Pet Portrait Day</p></div>
+<div class="calendar-item"><h3>August</h3><p>Charity Walk · Local Pet Community Meetup</p></div>
+<div class="calendar-item"><h3>September</h3><p>Wellness Workshop · Partner Fashion Launch</p></div>
+<div class="calendar-item"><h3>December</h3><p>Christmas Cover Edition · Gift Guide Event</p></div>
+</div>
+</div>
+
+<div class="club">
+<h2>Events For Club Members</h2>
+<p>
+PETS & DOGUE Club members will get early access, VIP tickets, partner gifts, priority cover star casting and exclusive event invitations.
+</p>
+
+<div class="benefits">
+<div class="benefit">VIP Event Access</div>
+<div class="benefit">Cover Star Priority</div>
+<div class="benefit">Partner Gifts</div>
+<div class="benefit">Member QR Check-In</div>
+<div class="benefit">Exclusive Workshops</div>
+<div class="benefit">Charity Invitations</div>
+</div>
+
+<br><br>
+<a href="club.html" class="btn gold">Join The Club</a>
+</div>
+
+</section>
+
+<footer>
+<h2>PETS & DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="social.html">Social</a>
+<a href="local-community.html">Local Community</a>
+<a href="contests.html">Contests</a>
+<a href="club.html">Club</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<a href="admin.html" class="admin-small">Admin</a>
+</footer>
+
+<script>
+function filterEvents(element,type){
+document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+element.classList.add("active");
+
+document.querySelectorAll(".event").forEach(card => {
+card.style.display = type === "All" || card.dataset.type === type ? "block" : "none";
+});
+}
+
+function searchEvents(){
+const location = document.getElementById("locationInput").value || "your area";
+const type = document.getElementById("eventType").value;
+alert("Showing PETS & DOGUE events near " + location + " · " + type);
+}
+
+function likeEvent(element){
+const count = element.querySelector("span");
+count.textContent = Number(count.textContent) + 1;
+}
+</script>
+
+</body>
+</html>
