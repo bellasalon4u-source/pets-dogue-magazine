@@ -10,28 +10,9 @@
 body{background:#f8f7f3;color:#111}
 a{text-decoration:none;color:inherit}
 
-header{
-background:white;
-border-bottom:1px solid #ddd;
-padding:18px;
-text-align:center;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.logo-small{
-font-size:18px;
-color:#b78a2e;
-}
-
-.logo-big{
-font-size:50px;
-font-family:Georgia,serif;
-font-weight:bold;
-color:#c89b3c;
-letter-spacing:4px;
-}
+header{background:white;border-bottom:1px solid #ddd;padding:18px;text-align:center;position:sticky;top:0;z-index:1000}
+.logo-small{font-size:18px;color:#b78a2e}
+.logo-big{font-size:50px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
 
 .hero{
 background:linear-gradient(135deg,#fff5fb,#f8f7f3,#ecfff0);
@@ -39,88 +20,36 @@ text-align:center;
 padding:85px 20px;
 border-bottom:4px solid #c89b3c;
 }
+.hero h1{font-family:Georgia,serif;font-size:64px;color:#c89b3c;margin-bottom:18px}
+.hero p{font-size:20px;line-height:1.8;max-width:900px;margin:auto;color:#444}
 
-.hero h1{
-font-family:Georgia,serif;
-font-size:64px;
-color:#c89b3c;
-margin-bottom:18px;
-}
+main{max-width:1400px;margin:auto;padding:60px 20px}
+.section-title{font-size:50px;font-family:Georgia,serif;text-align:center;margin-bottom:18px}
+.gold-line{width:90px;height:3px;background:#c89b3c;margin:0 auto 45px}
 
-.hero p{
-font-size:20px;
-line-height:1.8;
-max-width:900px;
-margin:auto;
-color:#444;
-}
-
-main{
-max-width:1400px;
-margin:auto;
-padding:60px 20px;
-}
-
-.section-title{
-font-size:50px;
-font-family:Georgia,serif;
-text-align:center;
-margin-bottom:18px;
-}
-
-.gold-line{
-width:90px;
-height:3px;
-background:#c89b3c;
-margin:0 auto 45px;
-}
-
-.notice{
+.luxury-intro{
 background:white;
 border:2px solid #111;
-border-radius:36px;
-padding:28px;
+border-radius:42px;
+padding:38px;
 text-align:center;
 margin-bottom:45px;
-box-shadow:0 12px 35px rgba(0,0,0,.06);
+box-shadow:0 14px 40px rgba(0,0,0,.07);
 }
-
-.notice h2{
-font-family:Georgia,serif;
-font-size:36px;
-margin-bottom:12px;
-}
-
-.notice p{
-color:#555;
-line-height:1.8;
-font-size:18px;
-max-width:900px;
-margin:auto;
-}
+.luxury-intro h2{font-family:Georgia,serif;font-size:42px;margin-bottom:14px}
+.luxury-intro p{color:#555;line-height:1.8;font-size:18px;max-width:950px;margin:auto}
 
 .member-gate{
 background:white;
 border:3px solid #c89b3c;
-border-radius:40px;
+border-radius:42px;
 padding:34px;
 text-align:center;
 margin-bottom:45px;
+box-shadow:0 0 26px rgba(200,155,60,.16);
 }
-
-.member-gate h2{
-font-family:Georgia,serif;
-font-size:42px;
-margin-bottom:12px;
-}
-
-.member-gate p{
-font-size:18px;
-line-height:1.8;
-color:#555;
-max-width:850px;
-margin:auto;
-}
+.member-gate h2{font-family:Georgia,serif;font-size:42px;margin-bottom:12px}
+.member-gate p{font-size:18px;line-height:1.8;color:#555;max-width:850px;margin:auto}
 
 button,.btn{
 background:#111;
@@ -133,21 +62,26 @@ cursor:pointer;
 display:inline-block;
 margin:6px;
 }
+.gold{background:#c89b3c}
+.green{background:#65e51f;box-shadow:0 0 18px rgba(101,229,31,.55)}
+.light{background:white;color:#111;border:1px solid #111}
 
-.gold{
-background:#c89b3c;
+.category-showcase{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+margin-bottom:45px;
 }
-
-.green{
-background:#65e51f;
-box-shadow:0 0 18px rgba(101,229,31,.55);
-}
-
-.light{
+.category-card{
 background:white;
-color:#111;
-border:1px solid #111;
+border:2px solid #111;
+border-radius:30px;
+padding:24px;
+box-shadow:0 12px 35px rgba(0,0,0,.07);
 }
+.category-card .icon{font-size:38px;margin-bottom:12px}
+.category-card h3{font-family:Georgia,serif;font-size:28px;margin-bottom:10px}
+.category-card p{color:#555;line-height:1.7}
 
 .search-box{
 background:white;
@@ -156,13 +90,11 @@ border-radius:36px;
 padding:28px;
 margin-bottom:35px;
 }
-
 .search-grid{
 display:grid;
 grid-template-columns:2fr 1fr 1fr 1fr;
 gap:14px;
 }
-
 input,select,textarea{
 width:100%;
 padding:15px;
@@ -171,11 +103,7 @@ border-radius:16px;
 font-size:16px;
 margin-bottom:14px;
 }
-
-textarea{
-min-height:110px;
-resize:vertical;
-}
+textarea{min-height:110px;resize:vertical}
 
 .filters{
 display:flex;
@@ -183,7 +111,6 @@ gap:10px;
 overflow-x:auto;
 margin-bottom:35px;
 }
-
 .filter{
 white-space:nowrap;
 background:white;
@@ -193,45 +120,20 @@ padding:11px 18px;
 font-weight:bold;
 cursor:pointer;
 }
-
-.filter.active{
-background:#111;
-color:white;
-}
+.filter.active{background:#111;color:white}
 
 .publish-box{
-background:#111;
+background:linear-gradient(135deg,#111,#2b2417);
 color:white;
-border-radius:40px;
+border-radius:42px;
 padding:35px;
 margin-bottom:55px;
+border:3px solid #c89b3c;
 }
-
-.publish-box h2{
-font-family:Georgia,serif;
-font-size:40px;
-color:#d6aa45;
-margin-bottom:18px;
-}
-
-.form-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-}
-
-.agree{
-display:flex;
-align-items:center;
-gap:10px;
-margin:8px 0 14px;
-color:#eee;
-}
-
-.agree input{
-width:auto;
-margin:0;
-}
+.publish-box h2{font-family:Georgia,serif;font-size:40px;color:#d6aa45;margin-bottom:18px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.agree{display:flex;align-items:center;gap:10px;margin:8px 0 14px;color:#eee}
+.agree input{width:auto;margin:0}
 
 .preview{
 margin-top:20px;
@@ -241,39 +143,22 @@ border-radius:28px;
 padding:20px;
 display:none;
 }
-
-.preview img{
-width:100%;
-max-height:360px;
-object-fit:cover;
-border-radius:22px;
-margin-bottom:15px;
-}
+.preview img{width:100%;max-height:360px;object-fit:cover;border-radius:22px;margin-bottom:15px}
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
 gap:28px;
 }
-
 .listing{
 background:white;
 border:2px solid #111;
-border-radius:35px;
+border-radius:36px;
 overflow:hidden;
 box-shadow:0 12px 35px rgba(0,0,0,.08);
 }
-
-.listing img{
-width:100%;
-height:330px;
-object-fit:cover;
-}
-
-.listing-content{
-padding:24px;
-}
-
+.listing img{width:100%;height:330px;object-fit:cover}
+.listing-content{padding:24px}
 .badge{
 display:inline-block;
 background:#c89b3c;
@@ -284,58 +169,16 @@ font-size:12px;
 font-weight:bold;
 margin-bottom:14px;
 }
+.listing h3{font-family:Georgia,serif;font-size:32px;margin-bottom:8px}
+.meta{font-size:14px;color:#777;margin-bottom:12px;line-height:1.6}
+.listing p{color:#555;line-height:1.8;margin-bottom:16px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 
-.listing h3{
-font-family:Georgia,serif;
-font-size:32px;
-margin-bottom:8px;
-}
-
-.meta{
-font-size:14px;
-color:#777;
-margin-bottom:12px;
-line-height:1.6;
-}
-
-.listing p{
-color:#555;
-line-height:1.8;
-margin-bottom:16px;
-}
-
-.actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-bottom:14px;
-}
-
-.comments{
-border-top:1px solid #ddd;
-padding-top:14px;
-}
-
-.comment{
-background:#f8f7f3;
-border-radius:18px;
-padding:12px;
-margin-bottom:10px;
-}
-
-.comment strong{
-display:block;
-margin-bottom:4px;
-}
-
-.comment-form{
-display:flex;
-gap:10px;
-}
-
-.comment-form input{
-margin-bottom:0;
-}
+.comments{border-top:1px solid #ddd;padding-top:14px}
+.comment{background:#f8f7f3;border-radius:18px;padding:12px;margin-bottom:10px}
+.comment strong{display:block;margin-bottom:4px}
+.comment-form{display:flex;gap:10px}
+.comment-form input{margin-bottom:0}
 
 .rules{
 background:white;
@@ -344,71 +187,20 @@ border-radius:36px;
 padding:32px;
 margin-top:60px;
 }
+.rules h2{font-family:Georgia,serif;font-size:38px;margin-bottom:18px}
+.rules li{color:#555;line-height:1.8;margin-left:22px}
 
-.rules h2{
-font-family:Georgia,serif;
-font-size:38px;
-margin-bottom:18px;
-}
-
-.rules li{
-color:#555;
-line-height:1.8;
-margin-left:22px;
-}
-
-footer{
-margin-top:70px;
-padding:45px 20px;
-background:white;
-text-align:center;
-border-top:1px solid #ddd;
-}
-
-.footer-links{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:15px;
-margin-top:20px;
-}
-
-.footer-links a{
-text-decoration:none;
-color:#666;
-font-size:14px;
-}
-
-.admin-small{
-display:block;
-margin-top:22px;
-font-size:11px;
-color:#999;
-text-decoration:none;
-letter-spacing:2px;
-text-transform:uppercase;
-}
+footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
+.footer-links a{text-decoration:none;color:#666;font-size:14px}
+.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
 
 @media(max-width:900px){
-.search-grid{
-grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:42px;
-}
-
-.section-title{
-font-size:38px;
-}
-
-.logo-big{
-font-size:40px;
-}
-
-.comment-form{
-flex-direction:column;
-}
+.search-grid{grid-template-columns:1fr}
+.hero h1{font-size:42px}
+.section-title{font-size:38px}
+.logo-big{font-size:40px}
+.comment-form{flex-direction:column}
 }
 </style>
 </head>
@@ -423,27 +215,34 @@ flex-direction:column;
 <section class="hero">
 <h1>Pet Marketplace</h1>
 <p>
-A members-only PETS & DOGUE marketplace for responsible pet listings, adoption stories, breeding notices, accessories and trusted pet services.
+A luxury members marketplace for responsible pet listings, adoption stories, breeding notices, accessories and trusted pet services.
 </p>
 </section>
 
 <main>
 
-<section class="notice">
-<h2>Elegant Listings For Pet Lovers</h2>
+<section class="luxury-intro">
+<h2>Not A Marketplace. A Curated Pet World.</h2>
 <p>
-Everyone can browse, like and comment. Only PETS & DOGUE Club members can publish listings.
+Browse elegant listings from the PETS & DOGUE community. Everyone can explore, like and comment. Only Club members can publish.
 </p>
 </section>
 
 <section class="member-gate">
 <h2>Members Can Publish</h2>
 <p>
-Join PETS & DOGUE Club to publish one listing, add photos, write a short story and connect with interested readers.
+Join PETS & DOGUE Club to publish listings, add photos, share stories and connect with interested readers.
 </p>
 <br>
 <a href="club.html" class="btn green">💚 Join Club</a>
 <button class="gold" onclick="activateMember()">Demo: I Am A Member</button>
+</section>
+
+<section class="category-showcase">
+<div class="category-card"><div class="icon">🏡</div><h3>Find A Home</h3><p>Responsible rehoming posts for pets who need a loving future.</p></div>
+<div class="category-card"><div class="icon">🐾</div><h3>Puppies & Kittens</h3><p>Careful listings where local law allows responsible publishing.</p></div>
+<div class="category-card"><div class="icon">💕</div><h3>Breeding</h3><p>Welfare-first notices with honesty, health and responsibility.</p></div>
+<div class="category-card"><div class="icon">🛍️</div><h3>Accessories & Services</h3><p>Grooming, styling, photography, hotels, products and trusted services.</p></div>
 </section>
 
 <section class="search-box">
@@ -529,9 +328,7 @@ I agree that this listing follows local laws and PETS & DOGUE rules.
 <span class="badge">FIND A HOME</span>
 <h3>Gentle Dog Looking For A Loving Home</h3>
 <div class="meta">📍 Bournemouth · Dog · Small Breed · Posted by Anna</div>
-<p>
-A gentle little dog looking for a calm and loving home. Ideal for someone who understands small companion animals.
-</p>
+<p>A gentle little dog looking for a calm and loving home. Ideal for someone who understands small companion animals.</p>
 <div class="actions">
 <button onclick="likeListing(this)">❤️ <span>42</span></button>
 <button onclick="alert('Contact: anna@example.com')">Contact Owner</button>
@@ -552,9 +349,7 @@ A gentle little dog looking for a calm and loving home. Ideal for someone who un
 <span class="badge">PUPPIES & KITTENS</span>
 <h3>Beautiful British Shorthair Kittens</h3>
 <div class="meta">📍 London · Cat · British Shorthair · Posted by Sofia</div>
-<p>
-Elegant kittens raised in a family home. Viewings by appointment. Responsible homes only.
-</p>
+<p>Elegant kittens raised in a family home. Viewings by appointment. Responsible homes only.</p>
 <div class="actions">
 <button onclick="likeListing(this)">❤️ <span>67</span></button>
 <button onclick="alert('Contact: sofia@example.com')">Contact Owner</button>
@@ -574,9 +369,7 @@ Elegant kittens raised in a family home. Viewings by appointment. Responsible ho
 <span class="badge">BREEDING</span>
 <h3>Responsible Breeding Notice</h3>
 <div class="meta">📍 Dorset · Dog · Pomeranian · Posted by PETS & DOGUE Member</div>
-<p>
-A member notice for responsible breeding interest. Health, temperament and welfare come first.
-</p>
+<p>A member notice for responsible breeding interest. Health, temperament and welfare come first.</p>
 <div class="actions">
 <button onclick="likeListing(this)">❤️ <span>31</span></button>
 <button onclick="alert('Contact: member@example.com')">Contact Owner</button>
@@ -596,9 +389,7 @@ A member notice for responsible breeding interest. Health, temperament and welfa
 <span class="badge">ACCESSORIES & SERVICES</span>
 <h3>Luxury Grooming & Styling Service</h3>
 <div class="meta">📍 Online / London · Grooming · Styling · Posted by Studio</div>
-<p>
-Premium pet grooming, styling and pre-photoshoot preparation for DOGUE-ready pets.
-</p>
+<p>Premium pet grooming, styling and pre-photoshoot preparation for DOGUE-ready pets.</p>
 <div class="actions">
 <button onclick="likeListing(this)">❤️ <span>84</span></button>
 <button onclick="alert('Contact: grooming@example.com')">Contact Seller</button>
@@ -622,7 +413,7 @@ Premium pet grooming, styling and pre-photoshoot preparation for DOGUE-ready pet
 <li>All listings must follow the laws of the country where the animal or service is located.</li>
 <li>Animal welfare comes first. Unsafe, misleading or irresponsible listings can be removed.</li>
 <li>Listings should include clear photos, honest information and contact details.</li>
-<li>Future version: listings can expire after 30 days unless renewed by the member.</li>
+<li>Listings can expire after 30 days unless renewed by the member.</li>
 <li>Future version: payments, verification and moderation will connect to the real platform.</li>
 </ul>
 </section>
