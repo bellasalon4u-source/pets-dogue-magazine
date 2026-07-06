@@ -8,16 +8,123 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:#f8f7f3;color:#111}
-header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
-.logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
+a{text-decoration:none;color:inherit}
 
-.hero{background:#111;color:white;text-align:center;padding:90px 20px;border-bottom:4px solid #c89b3c}
-.hero h1{font-size:68px;font-family:Georgia,serif;color:#d6aa45;margin-bottom:18px}
-.hero p{font-size:21px;line-height:1.8;max-width:900px;margin:auto}
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:18px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
 
-.section{max-width:1400px;margin:auto;padding:70px 20px}
-.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:45px}
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:50px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+background:linear-gradient(135deg,#fff5fb,#f8f7f3,#ecfff0);
+text-align:center;
+padding:90px 20px;
+border-bottom:4px solid #c89b3c;
+position:relative;
+overflow:hidden;
+}
+
+.hero:before{
+content:"";
+position:absolute;
+inset:-40%;
+background:radial-gradient(circle,rgba(255,122,200,.25),transparent 35%),
+radial-gradient(circle at 80% 20%,rgba(101,229,31,.2),transparent 30%),
+radial-gradient(circle at 20% 80%,rgba(105,216,255,.25),transparent 30%);
+animation:softMove 12s ease infinite alternate;
+}
+
+@keyframes softMove{
+0%{transform:translateX(-20px) translateY(0)}
+100%{transform:translateX(20px) translateY(20px)}
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-size:68px;
+font-family:Georgia,serif;
+color:#c89b3c;
+margin-bottom:18px;
+}
+
+.hero p{
+font-size:21px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+color:#444;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:14px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+.btn{
+display:inline-block;
+background:#111;
+color:white;
+padding:16px 24px;
+border-radius:999px;
+text-decoration:none;
+font-weight:bold;
+border:none;
+cursor:pointer;
+}
+
+.btn.gold{
+background:#c89b3c;
+}
+
+.btn.green{
+background:#65e51f;
+box-shadow:0 0 18px rgba(101,229,31,.55);
+}
+
+.section{
+max-width:1400px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:18px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 45px;
+}
 
 .intro{
 background:white;
@@ -26,52 +133,53 @@ border-radius:40px;
 padding:45px 30px;
 text-align:center;
 margin-bottom:60px;
-}
-.intro h2{font-family:Georgia,serif;font-size:46px;margin-bottom:18px}
-.intro p{font-size:19px;color:#555;line-height:1.8;max-width:900px;margin:auto}
-
-.benefits{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-margin-bottom:70px;
+box-shadow:0 12px 35px rgba(0,0,0,.06);
 }
 
-.benefit{
-background:white;
-border:2px solid #111;
-border-radius:32px;
-padding:28px;
-box-shadow:0 12px 35px rgba(0,0,0,.08);
+.intro h2{
+font-family:Georgia,serif;
+font-size:46px;
+margin-bottom:18px;
 }
 
-.benefit .icon{font-size:38px;margin-bottom:15px}
-.benefit h3{font-family:Georgia,serif;font-size:30px;margin-bottom:12px}
-.benefit p{color:#555;line-height:1.8}
+.intro p{
+font-size:19px;
+color:#555;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+}
 
 .pricing{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
 gap:30px;
+margin-bottom:75px;
 }
 
 .plan{
 background:white;
 border:2px solid #111;
 border-radius:35px;
-padding:30px;
-position:relative;
+padding:32px;
 box-shadow:0 12px 35px rgba(0,0,0,.08);
+position:relative;
+overflow:hidden;
 }
 
-.plan.vip{
-background:#111;
-color:white;
+.plan.featured{
+border:3px solid #65e51f;
+box-shadow:0 0 30px rgba(101,229,31,.25),0 12px 35px rgba(0,0,0,.08);
 }
 
-.plan.vip p,
-.plan.vip li{
-color:#eee;
+.plan:before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:8px;
+background:linear-gradient(90deg,#ff7ac8,#c89b3c,#65e51f,#69d8ff);
 }
 
 .badge{
@@ -92,10 +200,10 @@ margin-bottom:12px;
 }
 
 .price{
-font-size:36px;
+font-size:40px;
 font-weight:bold;
 color:#c89b3c;
-margin-bottom:18px;
+margin-bottom:12px;
 }
 
 .plan p{
@@ -115,24 +223,78 @@ line-height:1.8;
 margin-bottom:6px;
 }
 
-.btn{
-display:inline-block;
-background:#111;
-color:white;
-padding:16px 24px;
-border-radius:999px;
-text-decoration:none;
+.benefits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-bottom:70px;
+}
+
+.benefit{
+background:white;
+border:2px solid #111;
+border-radius:32px;
+padding:28px;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.benefit .icon{
+font-size:38px;
+margin-bottom:15px;
+}
+
+.benefit h3{
+font-family:Georgia,serif;
+font-size:30px;
+margin-bottom:12px;
+}
+
+.benefit p{
+color:#555;
+line-height:1.8;
+}
+
+.cover-competition{
+background:white;
+border:3px solid #c89b3c;
+border-radius:44px;
+padding:50px 30px;
+text-align:center;
+margin-top:70px;
+box-shadow:0 16px 45px rgba(0,0,0,.08);
+}
+
+.cover-competition h2{
+font-family:Georgia,serif;
+font-size:50px;
+margin-bottom:18px;
+}
+
+.cover-competition p{
+font-size:20px;
+line-height:1.8;
+color:#555;
+max-width:900px;
+margin:auto;
+}
+
+.competition-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-top:35px;
+}
+
+.competition-item{
+background:#f8f7f3;
+border-radius:24px;
+padding:22px;
 font-weight:bold;
 }
 
-.plan.vip .btn{
-background:white;
-color:#111;
-}
-
 .member-card{
-background:linear-gradient(135deg,#111,#c89b3c);
-color:white;
+background:linear-gradient(135deg,#fff,#fff7dc,#f0fff3);
+border:2px solid #111;
 border-radius:40px;
 padding:50px 30px;
 margin-top:80px;
@@ -142,19 +304,26 @@ text-align:center;
 .member-card h2{
 font-family:Georgia,serif;
 font-size:48px;
-color:white;
+color:#c89b3c;
 margin-bottom:20px;
 }
 
+.member-card p{
+font-size:18px;
+color:#555;
+line-height:1.8;
+}
+
 .card-preview{
-max-width:420px;
+max-width:430px;
 margin:35px auto 0;
 background:white;
 color:#111;
+border:2px solid #111;
 border-radius:28px;
 padding:28px;
 text-align:left;
-box-shadow:0 20px 50px rgba(0,0,0,.25);
+box-shadow:0 20px 50px rgba(0,0,0,.12);
 }
 
 .card-preview h3{
@@ -175,59 +344,82 @@ border:10px solid #111;
 margin-top:20px;
 }
 
-.impact{
+.marketplace{
 background:#111;
 color:white;
-border-radius:40px;
+border-radius:44px;
 padding:55px 30px;
 text-align:center;
 margin-top:80px;
 }
 
-.impact h2{
+.marketplace h2{
 font-family:Georgia,serif;
-font-size:46px;
+font-size:48px;
 color:#d6aa45;
 margin-bottom:18px;
 }
 
-.impact p{
+.marketplace p{
 font-size:20px;
 line-height:1.8;
 max-width:850px;
 margin:auto;
+color:#eee;
 }
 
-.stats{
+.marketplace-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
 margin-top:35px;
 }
 
-.stat{
+.marketplace-item{
 background:white;
 color:#111;
-border-radius:25px;
-padding:25px;
+border-radius:24px;
+padding:22px;
+font-weight:bold;
 }
 
-.stat h3{
-font-family:Georgia,serif;
-font-size:40px;
-color:#c89b3c;
-margin-bottom:8px;
+footer{
+margin-top:70px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
 }
 
-footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.footer-links a{
+text-decoration:none;
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+text-decoration:none;
+letter-spacing:2px;
+text-transform:uppercase;
+}
 
 @media(max-width:768px){
 .hero h1{font-size:44px}
 .section-title{font-size:38px}
-.intro h2,.member-card h2,.impact h2{font-size:36px}
+.intro h2,.member-card h2,.marketplace h2,.cover-competition h2{font-size:36px}
+.logo-big{font-size:40px}
 }
 </style>
 </head>
@@ -240,113 +432,127 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 </header>
 
 <section class="hero">
+<div class="hero-content">
 <h1>PETS & DOGUE Club</h1>
 <p>
-More than a magazine. A luxury membership for people who truly love their pets — with discounts, rewards, premium content and impact.
+A luxury membership for pet lovers who want more than reading — enter cover competitions, publish your pet, unlock partner offers and become part of the PETS & DOGUE world.
 </p>
+
+<div class="hero-buttons">
+<a href="#pricing" class="btn green">💚 JOIN NOW</a>
+<a href="members-gallery.html" class="btn gold">Enter Cover Competition</a>
+</div>
+</div>
 </section>
 
 <section class="section">
 
 <div class="intro">
-<h2>Join The Club</h2>
+<h2>Make Your Pet Part Of The Magazine</h2>
 <p>
-Unlock exclusive benefits for you and your pet: partner discounts, VIP contests, early magazine access, cover star priority, premium stories and a membership card designed for real-world offers.
+PETS & DOGUE Club gives members access to the next issue gallery, cover star voting, member-only publishing, partner discounts and future marketplace features.
 </p>
 </div>
 
-<h2 class="section-title">Member Benefits</h2>
+<h2 class="section-title" id="pricing">Membership Options</h2>
+<div class="gold-line"></div>
+
+<div class="pricing">
+
+<div class="plan featured">
+<span class="badge">MONTHLY</span>
+<h3>Club Monthly</h3>
+<div class="price">£5</div>
+<p>Perfect for entering your pet into the next issue competition.</p>
+<ul>
+<li>Upload one pet photo</li>
+<li>Join next cover competition</li>
+<li>Access Members Gallery</li>
+<li>Comment and vote</li>
+<li>Partner offers</li>
+<li>Marketplace publishing access</li>
+</ul>
+<a href="members-gallery.html" class="btn green">Join Monthly</a>
+</div>
+
+<div class="plan">
+<span class="badge">BEST VALUE</span>
+<h3>Club Yearly</h3>
+<div class="price">£25</div>
+<p>Best for members who want to join seasonal issues all year.</p>
+<ul>
+<li>All monthly benefits</li>
+<li>Enter seasonal competitions</li>
+<li>Early issue access</li>
+<li>Future video/photo features</li>
+<li>Member-only posts</li>
+<li>Better yearly value</li>
+</ul>
+<a href="members-gallery.html" class="btn green">Join Yearly</a>
+</div>
+
+</div>
+
+<h2 class="section-title">Why Join?</h2>
+<div class="gold-line"></div>
 
 <div class="benefits">
 
 <div class="benefit">
-<div class="icon">🛍️</div>
-<h3>Partner Discounts</h3>
-<p>Save on pet fashion, grooming, hotels, wellness, photography, cafés and selected services from PETS & DOGUE partners.</p>
-</div>
-
-<div class="benefit">
-<div class="icon">🎟️</div>
-<h3>Member Card / QR</h3>
-<p>Use your digital member card to unlock offers, confirm membership and access partner benefits.</p>
-</div>
-
-<div class="benefit">
 <div class="icon">👑</div>
-<h3>Cover Star Priority</h3>
-<p>Club members get priority consideration for selected cover star opportunities, editorials and community features.</p>
+<h3>Cover Competition</h3>
+<p>Upload your pet and compete for the next PETS & DOGUE cover feature.</p>
 </div>
 
 <div class="benefit">
-<div class="icon">🏆</div>
-<h3>Exclusive Contests</h3>
-<p>Access member-only contests, giveaways, photo challenges and seasonal PETS & DOGUE prizes.</p>
+<div class="icon">📸</div>
+<h3>Photo & Video</h3>
+<p>Members can share pet photos and future video content for magazine features.</p>
 </div>
 
 <div class="benefit">
 <div class="icon">📖</div>
-<h3>Premium Articles</h3>
-<p>Read exclusive luxury pet guides, wellness features, travel stories and editorial content.</p>
+<h3>Pet Stories</h3>
+<p>Add a short story about your pet and let readers discover their personality.</p>
 </div>
 
 <div class="benefit">
 <div class="icon">❤️</div>
-<h3>Support Animals</h3>
-<p>A future part of membership can support Pets In Need, rescue visibility and animal welfare initiatives.</p>
+<h3>Votes & Comments</h3>
+<p>Collect hearts from the community and compete fairly in the Members Gallery.</p>
+</div>
+
+<div class="benefit">
+<div class="icon">🛍️</div>
+<h3>Partner Offers</h3>
+<p>Unlock future discounts from groomers, hotels, cafés, fashion brands and services.</p>
+</div>
+
+<div class="benefit">
+<div class="icon">🏡</div>
+<h3>Pet Marketplace</h3>
+<p>Members can publish responsible pet listings, adoption posts, accessories and services.</p>
 </div>
 
 </div>
 
-<h2 class="section-title">Membership Options</h2>
+<div class="cover-competition">
+<h2>What Can Your Pet Win?</h2>
+<p>
+The most loved pet can appear on the PETS & DOGUE homepage and become the main hero of the next issue. Five finalists receive a special page with photos and short stories.
+</p>
 
-<div class="pricing">
-
-<div class="plan">
-<span class="badge">STARTER</span>
-<h3>Free Reader</h3>
-<div class="price">£0</div>
-<p>For readers who want to follow PETS & DOGUE and join the community.</p>
-<ul>
-<li>Read selected articles</li>
-<li>Join newsletter</li>
-<li>View public contests</li>
-<li>Submit local community posts</li>
-</ul>
-<a href="newsletter.html" class="btn">Join Free</a>
+<div class="competition-grid">
+<div class="competition-item">👑 Magazine Cover</div>
+<div class="competition-item">📖 Full Story</div>
+<div class="competition-item">🎥 Video Feature</div>
+<div class="competition-item">🌍 Worldwide Visibility</div>
+<div class="competition-item">🏆 Top 5 Finalist Page</div>
+<div class="competition-item">❤️ Community Voting</div>
 </div>
 
-<div class="plan vip">
-<span class="badge">MOST POPULAR</span>
-<h3>Club Member</h3>
-<div class="price">£4.99/mo</div>
-<p>For pet lovers who want real benefits, exclusive content and partner rewards.</p>
-<ul>
-<li>Member discounts</li>
-<li>Digital member card</li>
-<li>Premium articles</li>
-<li>Early contest access</li>
-<li>Cover Star priority</li>
-<li>Partner offers</li>
-</ul>
-<a href="#" class="btn">Become A Member</a>
-</div>
-
-<div class="plan">
-<span class="badge">VIP</span>
-<h3>Founders Club</h3>
-<div class="price">£99/year</div>
-<p>For early supporters who want to be part of the PETS & DOGUE legacy.</p>
-<ul>
-<li>Founder badge</li>
-<li>Name on Founders Wall</li>
-<li>VIP partner offers</li>
-<li>Priority editorial consideration</li>
-<li>Exclusive giveaways</li>
-<li>Early access to new features</li>
-</ul>
-<a href="#" class="btn">Join Founders</a>
-</div>
-
+<br><br>
+<a href="members-gallery.html" class="btn green">Enter Your Pet</a>
 </div>
 
 <div class="member-card">
@@ -354,33 +560,34 @@ Unlock exclusive benefits for you and your pet: partner discounts, VIP contests,
 <h2>Your PETS & DOGUE Member Card</h2>
 
 <p>
-A future digital card for partner discounts, premium access and club identity.
+A future digital member card for club access, partner discounts, competition entry and premium membership identity.
 </p>
 
 <div class="card-preview">
 <h3>PETS & DOGUE CLUB</h3>
 <p><strong>Member:</strong> Your Name</p>
 <p><strong>Status:</strong> Club Member</p>
-<p><strong>Benefits:</strong> Partner Discounts · Premium Access · Cover Star Priority</p>
+<p><strong>Access:</strong> Gallery · Cover Competition · Marketplace · Partner Offers</p>
 <div class="qr"></div>
 </div>
 
 </div>
 
-<div class="impact">
+<div class="marketplace">
 
-<h2>Membership With Purpose</h2>
+<h2>Member Publishing Access</h2>
 
 <p>
-PETS & DOGUE Club is designed to combine luxury magazine culture with animal welfare,
-community support and real benefits for pet owners.
+Only club members will be able to publish selected listings and posts inside the PETS & DOGUE ecosystem.
 </p>
 
-<div class="stats">
-<div class="stat"><h3>£</h3><p>Future rescue support</p></div>
-<div class="stat"><h3>QR</h3><p>Member card benefits</p></div>
-<div class="stat"><h3>VIP</h3><p>Exclusive contests</p></div>
-<div class="stat"><h3>❤️</h3><p>Animals in need visibility</p></div>
+<div class="marketplace-grid">
+<div class="marketplace-item">🏡 Find a Home</div>
+<div class="marketplace-item">🐾 Puppies & Kittens</div>
+<div class="marketplace-item">💕 Breeding</div>
+<div class="marketplace-item">🛍 Accessories</div>
+<div class="marketplace-item">✂️ Grooming Services</div>
+<div class="marketplace-item">📸 Pet Photography</div>
 </div>
 
 </div>
@@ -393,6 +600,7 @@ community support and real benefits for pet owners.
 
 <div class="footer-links">
 <a href="index.html">Home</a>
+<a href="members-gallery.html">Members Gallery</a>
 <a href="partners.html">Partners</a>
 <a href="contests.html">Contests</a>
 <a href="pets-in-need.html">Pets In Need</a>
