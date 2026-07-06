@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Marketplace | PETS & DOGUE</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f8f7f3;color:#111}
+a{text-decoration:none;color:inherit}
+
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:18px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:50px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+background:linear-gradient(135deg,#fff5fb,#f8f7f3,#ecfff0);
+text-align:center;
+padding:85px 20px;
+border-bottom:4px solid #c89b3c;
+}
+
+.hero h1{
+font-family:Georgia,serif;
+font-size:64px;
+color:#c89b3c;
+margin-bottom:18px;
+}
+
+.hero p{
+font-size:20px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+color:#444;
+}
+
+main{
+max-width:1400px;
+margin:auto;
+padding:60px 20px;
+}
+
+.section-title{
+font-size:50px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:18px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 45px;
+}
+
+.notice{
+background:white;
+border:2px solid #111;
+border-radius:36px;
+padding:28px;
+text-align:center;
+margin-bottom:45px;
+box-shadow:0 12px 35px rgba(0,0,0,.06);
+}
+
+.notice h2{
+font-family:Georgia,serif;
+font-size:36px;
+margin-bottom:12px;
+}
+
+.notice p{
+color:#555;
+line-height:1.8;
+font-size:18px;
+max-width:900px;
+margin:auto;
+}
+
+.member-gate{
+background:white;
+border:3px solid #c89b3c;
+border-radius:40px;
+padding:34px;
+text-align:center;
+margin-bottom:45px;
+}
+
+.member-gate h2{
+font-family:Georgia,serif;
+font-size:42px;
+margin-bottom:12px;
+}
+
+.member-gate p{
+font-size:18px;
+line-height:1.8;
+color:#555;
+max-width:850px;
+margin:auto;
+}
+
+button,.btn{
+background:#111;
+color:white;
+border:none;
+padding:15px 22px;
+border-radius:999px;
+font-weight:bold;
+cursor:pointer;
+display:inline-block;
+margin:6px;
+}
+
+.gold{
+background:#c89b3c;
+}
+
+.green{
+background:#65e51f;
+box-shadow:0 0 18px rgba(101,229,31,.55);
+}
+
+.light{
+background:white;
+color:#111;
+border:1px solid #111;
+}
+
+.search-box{
+background:white;
+border:2px solid #111;
+border-radius:36px;
+padding:28px;
+margin-bottom:35px;
+}
+
+.search-grid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+gap:14px;
+}
+
+input,select,textarea{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:16px;
+font-size:16px;
+margin-bottom:14px;
+}
+
+textarea{
+min-height:110px;
+resize:vertical;
+}
+
+.filters{
+display:flex;
+gap:10px;
+overflow-x:auto;
+margin-bottom:35px;
+}
+
+.filter{
+white-space:nowrap;
+background:white;
+border:2px solid #111;
+border-radius:999px;
+padding:11px 18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.filter.active{
+background:#111;
+color:white;
+}
+
+.publish-box{
+background:#111;
+color:white;
+border-radius:40px;
+padding:35px;
+margin-bottom:55px;
+}
+
+.publish-box h2{
+font-family:Georgia,serif;
+font-size:40px;
+color:#d6aa45;
+margin-bottom:18px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.agree{
+display:flex;
+align-items:center;
+gap:10px;
+margin:8px 0 14px;
+color:#eee;
+}
+
+.agree input{
+width:auto;
+margin:0;
+}
+
+.preview{
+margin-top:20px;
+background:white;
+color:#111;
+border-radius:28px;
+padding:20px;
+display:none;
+}
+
+.preview img{
+width:100%;
+max-height:360px;
+object-fit:cover;
+border-radius:22px;
+margin-bottom:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+gap:28px;
+}
+
+.listing{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.listing img{
+width:100%;
+height:330px;
+object-fit:cover;
+}
+
+.listing-content{
+padding:24px;
+}
+
+.badge{
+display:inline-block;
+background:#c89b3c;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:14px;
+}
+
+.listing h3{
+font-family:Georgia,serif;
+font-size:32px;
+margin-bottom:8px;
+}
+
+.meta{
+font-size:14px;
+color:#777;
+margin-bottom:12px;
+line-height:1.6;
+}
+
+.listing p{
+color:#555;
+line-height:1.8;
+margin-bottom:16px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:14px;
+}
+
+.comments{
+border-top:1px solid #ddd;
+padding-top:14px;
+}
+
+.comment{
+background:#f8f7f3;
+border-radius:18px;
+padding:12px;
+margin-bottom:10px;
+}
+
+.comment strong{
+display:block;
+margin-bottom:4px;
+}
+
+.comment-form{
+display:flex;
+gap:10px;
+}
+
+.comment-form input{
+margin-bottom:0;
+}
+
+.rules{
+background:white;
+border:2px solid #111;
+border-radius:36px;
+padding:32px;
+margin-top:60px;
+}
+
+.rules h2{
+font-family:Georgia,serif;
+font-size:38px;
+margin-bottom:18px;
+}
+
+.rules li{
+color:#555;
+line-height:1.8;
+margin-left:22px;
+}
+
+footer{
+margin-top:70px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.footer-links a{
+text-decoration:none;
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+text-decoration:none;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+@media(max-width:900px){
+.search-grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.section-title{
+font-size:38px;
+}
+
+.logo-big{
+font-size:40px;
+}
+
+.comment-form{
+flex-direction:column;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+</header>
+
+<section class="hero">
+<h1>Pet Marketplace</h1>
+<p>
+A members-only PETS & DOGUE marketplace for responsible pet listings, adoption stories, breeding notices, accessories and trusted pet services.
+</p>
+</section>
+
+<main>
+
+<section class="notice">
+<h2>Elegant Listings For Pet Lovers</h2>
+<p>
+Everyone can browse, like and comment. Only PETS & DOGUE Club members can publish listings.
+</p>
+</section>
+
+<section class="member-gate">
+<h2>Members Can Publish</h2>
+<p>
+Join PETS & DOGUE Club to publish one listing, add photos, write a short story and connect with interested readers.
+</p>
+<br>
+<a href="club.html" class="btn green">💚 Join Club</a>
+<button class="gold" onclick="activateMember()">Demo: I Am A Member</button>
+</section>
+
+<section class="search-box">
+<div class="search-grid">
+<input id="searchInput" type="text" placeholder="Search pets, breed, city or service..." oninput="searchListings()">
+
+<select id="categorySearch" onchange="searchListings()">
+<option>All Categories</option>
+<option>Find a Home</option>
+<option>Puppies & Kittens</option>
+<option>Breeding</option>
+<option>Accessories & Services</option>
+</select>
+
+<select id="locationSearch" onchange="searchListings()">
+<option>All Locations</option>
+<option>London</option>
+<option>Bournemouth</option>
+<option>Dorset</option>
+<option>Manchester</option>
+<option>Online</option>
+</select>
+
+<button class="gold" onclick="searchListings()">Search</button>
+</div>
+</section>
+
+<section class="filters">
+<div class="filter active" onclick="filterCategory(this,'All')">All</div>
+<div class="filter" onclick="filterCategory(this,'Find a Home')">Find a Home</div>
+<div class="filter" onclick="filterCategory(this,'Puppies & Kittens')">Puppies & Kittens</div>
+<div class="filter" onclick="filterCategory(this,'Breeding')">Breeding</div>
+<div class="filter" onclick="filterCategory(this,'Accessories & Services')">Accessories & Services</div>
+</section>
+
+<section class="publish-box">
+<h2>Publish A Listing</h2>
+
+<div class="form-grid">
+<select id="listingCategory">
+<option>Find a Home</option>
+<option>Puppies & Kittens</option>
+<option>Breeding</option>
+<option>Accessories & Services</option>
+</select>
+
+<input id="listingTitle" type="text" placeholder="Listing title">
+<input id="petName" type="text" placeholder="Pet name / service name">
+<input id="animalType" type="text" placeholder="Animal type">
+<input id="breed" type="text" placeholder="Breed / product type">
+<input id="location" type="text" placeholder="Location">
+<input id="ownerName" type="text" placeholder="Owner / seller name">
+<input id="contact" type="text" placeholder="Contact email or phone">
+</div>
+
+<input id="photoInput" type="file" accept="image/*" onchange="previewPhoto(event)">
+<textarea id="story" placeholder="Write a short description, story, details or conditions..."></textarea>
+
+<label class="agree">
+<input id="agreeRules" type="checkbox">
+I agree that this listing follows local laws and PETS & DOGUE rules.
+</label>
+
+<button class="gold" onclick="publishListing()">Publish Listing</button>
+<button class="light" onclick="deletePhoto()">Delete Photo</button>
+<button class="light" onclick="replacePhoto()">Upload Another Photo</button>
+
+<div class="preview" id="preview">
+<img id="previewImg" src="">
+<h3 id="previewTitle"></h3>
+<p id="previewText"></p>
+</div>
+</section>
+
+<h2 class="section-title">Marketplace Listings</h2>
+<div class="gold-line"></div>
+
+<section class="grid" id="marketplaceGrid">
+
+<div class="listing" data-category="Find a Home" data-location="Bournemouth" data-search="find a home pomeranian dog bournemouth">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80">
+<div class="listing-content">
+<span class="badge">FIND A HOME</span>
+<h3>Gentle Dog Looking For A Loving Home</h3>
+<div class="meta">📍 Bournemouth · Dog · Small Breed · Posted by Anna</div>
+<p>
+A gentle little dog looking for a calm and loving home. Ideal for someone who understands small companion animals.
+</p>
+<div class="actions">
+<button onclick="likeListing(this)">❤️ <span>42</span></button>
+<button onclick="alert('Contact: anna@example.com')">Contact Owner</button>
+</div>
+<div class="comments">
+<div class="comment"><strong>Emma</strong> Such a beautiful dog. I hope he finds the perfect home.</div>
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="listing" data-category="Puppies & Kittens" data-location="London" data-search="puppies kittens british shorthair london">
+<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80">
+<div class="listing-content">
+<span class="badge">PUPPIES & KITTENS</span>
+<h3>Beautiful British Shorthair Kittens</h3>
+<div class="meta">📍 London · Cat · British Shorthair · Posted by Sofia</div>
+<p>
+Elegant kittens raised in a family home. Viewings by appointment. Responsible homes only.
+</p>
+<div class="actions">
+<button onclick="likeListing(this)">❤️ <span>67</span></button>
+<button onclick="alert('Contact: sofia@example.com')">Contact Owner</button>
+</div>
+<div class="comments">
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="listing" data-category="Breeding" data-location="Dorset" data-search="breeding pomeranian dorset">
+<img src="file_00000000a9d471fda9b4629589be22a9.png">
+<div class="listing-content">
+<span class="badge">BREEDING</span>
+<h3>Responsible Breeding Notice</h3>
+<div class="meta">📍 Dorset · Dog · Pomeranian · Posted by PETS & DOGUE Member</div>
+<p>
+A member notice for responsible breeding interest. Health, temperament and welfare come first.
+</p>
+<div class="actions">
+<button onclick="likeListing(this)">❤️ <span>31</span></button>
+<button onclick="alert('Contact: member@example.com')">Contact Owner</button>
+</div>
+<div class="comments">
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="listing" data-category="Accessories & Services" data-location="Online" data-search="accessories services grooming pet fashion online">
+<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80">
+<div class="listing-content">
+<span class="badge">ACCESSORIES & SERVICES</span>
+<h3>Luxury Grooming & Styling Service</h3>
+<div class="meta">📍 Online / London · Grooming · Styling · Posted by Studio</div>
+<p>
+Premium pet grooming, styling and pre-photoshoot preparation for DOGUE-ready pets.
+</p>
+<div class="actions">
+<button onclick="likeListing(this)">❤️ <span>84</span></button>
+<button onclick="alert('Contact: grooming@example.com')">Contact Seller</button>
+</div>
+<div class="comments">
+<div class="comment"><strong>Mia</strong> Perfect before a cover star photoshoot.</div>
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+
+<section class="rules">
+<h2>Marketplace Rules</h2>
+<ul>
+<li>Only PETS & DOGUE Club members can publish listings.</li>
+<li>All listings must follow the laws of the country where the animal or service is located.</li>
+<li>Animal welfare comes first. Unsafe, misleading or irresponsible listings can be removed.</li>
+<li>Listings should include clear photos, honest information and contact details.</li>
+<li>Future version: listings can expire after 30 days unless renewed by the member.</li>
+<li>Future version: payments, verification and moderation will connect to the real platform.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>
+<h2>PETS & DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
+
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="club.html">Club</a>
+<a href="members-gallery.html">Members Gallery</a>
+<a href="pet-friendly-places.html">Places</a>
+<a href="partners.html">Partners</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</div>
+
+<a href="admin.html" class="admin-small">Admin</a>
+</footer>
+
+<script>
+let uploadedPhoto = "";
+let isMember = false;
+let activeCategory = "All";
+
+function activateMember(){
+isMember = true;
+alert("Demo member mode activated. You can now publish a marketplace listing.");
+window.scrollTo({top:document.querySelector(".publish-box").offsetTop - 80,behavior:"smooth"});
+}
+
+function previewPhoto(event){
+const file = event.target.files[0];
+if(!file){return;}
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+uploadedPhoto = e.target.result;
+document.getElementById("preview").style.display = "block";
+document.getElementById("previewImg").src = uploadedPhoto;
+updatePreviewText();
+};
+
+reader.readAsDataURL(file);
+}
+
+function updatePreviewText(){
+const title = document.getElementById("listingTitle").value || "Your Listing";
+const category = document.getElementById("listingCategory").value || "Category";
+const story = document.getElementById("story").value || "Description will appear here.";
+document.getElementById("previewTitle").textContent = title + " · " + category;
+document.getElementById("previewText").textContent = story;
+}
+
+function publishListing(){
+if(!isMember){
+alert("Please join PETS & DOGUE Club first.");
+return;
+}
+
+if(!document.getElementById("agreeRules").checked){
+alert("Please agree with the marketplace rules before publishing.");
+return;
+}
+
+if(!uploadedPhoto){
+alert("Please upload one photo first.");
+return;
+}
+
+const category = document.getElementById("listingCategory").value;
+const title = document.getElementById("listingTitle").value || "New Marketplace Listing";
+const petName = document.getElementById("petName").value || "Pet / Service";
+const animal = document.getElementById("animalType").value || "Animal";
+const breed = document.getElementById("breed").value || "Breed / Type";
+const location = document.getElementById("location").value || "Location";
+const owner = document.getElementById("ownerName").value || "Member";
+const contact = document.getElementById("contact").value || "No contact added";
+const story = document.getElementById("story").value || "A PETS & DOGUE member listing.";
+
+const listing = document.createElement("div");
+listing.className = "listing";
+listing.dataset.category = category;
+listing.dataset.location = location;
+listing.dataset.search = (title + " " + petName + " " + animal + " " + breed + " " + location + " " + owner).toLowerCase();
+
+listing.innerHTML = `
+<img src="${uploadedPhoto}">
+<div class="listing-content">
+<span class="badge">${category.toUpperCase()}</span>
+<h3>${title}</h3>
+<div class="meta">📍 ${location} · ${animal} · ${breed} · Posted by ${owner}</div>
+<p>${story}</p>
+<div class="actions">
+<button onclick="likeListing(this)">❤️ <span>0</span></button>
+<button onclick="alert('Contact: ${contact}')">Contact Owner</button>
+<button onclick="removeListing(this)">Delete Listing</button>
+</div>
+<div class="comments">
+<div class="comment-form">
+<input type="text" placeholder="Write a comment...">
+<button onclick="addComment(this)">Send</button>
+</div>
+</div>
+</div>
+`;
+
+document.getElementById("marketplaceGrid").prepend(listing);
+alert("Your listing has been published.");
+clearForm();
+searchListings();
+}
+
+function clearForm(){
+uploadedPhoto = "";
+document.getElementById("photoInput").value = "";
+document.getElementById("preview").style.display = "none";
+document.getElementById("listingTitle").value = "";
+document.getElementById("petName").value = "";
+document.getElementById("animalType").value = "";
+document.getElementById("breed").value = "";
+document.getElementById("location").value = "";
+document.getElementById("ownerName").value = "";
+document.getElementById("contact").value = "";
+document.getElementById("story").value = "";
+document.getElementById("agreeRules").checked = false;
+}
+
+function deletePhoto(){
+uploadedPhoto = "";
+document.getElementById("photoInput").value = "";
+document.getElementById("preview").style.display = "none";
+}
+
+function replacePhoto(){
+document.getElementById("photoInput").click();
+}
+
+function removeListing(button){
+button.closest(".listing").remove();
+}
+
+function likeListing(button){
+const span = button.querySelector("span");
+span.textContent = Number(span.textContent) + 1;
+}
+
+function addComment(button){
+const input = button.previousElementSibling;
+const text = input.value.trim();
+if(!text){return;}
+
+const comment = document.createElement("div");
+comment.className = "comment";
+comment.innerHTML = "<strong>You</strong> " + text;
+
+button.closest(".comments").insertBefore(comment, button.parentElement);
+input.value = "";
+}
+
+function filterCategory(element,category){
+activeCategory = category;
+document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+element.classList.add("active");
+searchListings();
+}
+
+function searchListings(){
+const query = document.getElementById("searchInput").value.toLowerCase();
+const categorySearch = document.getElementById("categorySearch").value;
+const locationSearch = document.getElementById("locationSearch").value;
+
+document.querySelectorAll(".listing").forEach(card => {
+const category = card.dataset.category;
+const location = card.dataset.location;
+const search = card.dataset.search + " " + card.innerText.toLowerCase();
+
+const matchesActive = activeCategory === "All" || category === activeCategory;
+const matchesCategory = categorySearch === "All Categories" || category === categorySearch;
+const matchesLocation = locationSearch === "All Locations" || location.includes(locationSearch);
+const matchesQuery = !query || search.includes(query);
+
+card.style.display = matchesActive && matchesCategory && matchesLocation && matchesQuery ? "block" : "none";
+});
+}
+
+document.querySelectorAll("#listingTitle,#listingCategory,#story").forEach(input => {
+input.addEventListener("input",updatePreviewText);
+});
+</script>
+
+</body>
+</html>
