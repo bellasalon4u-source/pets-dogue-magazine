@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin - PETS & DOGUE</title>
+<title>Editorial CMS | PETS & DOGUE</title>
 
 <style>
 *{
@@ -14,444 +14,2334 @@ font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-background:#f8f7f3;
+background:#f4f2ed;
 color:#111;
 }
 
-header{
-background:#111;
-color:white;
-padding:30px 20px;
-text-align:center;
-}
-
-header h1{
-font-family:Georgia,serif;
-font-size:46px;
-color:#d6aa45;
-}
-
-header p{
-margin-top:8px;
-color:#eee;
-}
-
-main{
-max-width:1100px;
-margin:auto;
-padding:30px 20px;
-}
-
-.dashboard{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-margin-bottom:30px;
-}
-
-.stat{
-background:white;
-border:2px solid #111;
-border-radius:25px;
-padding:25px;
-text-align:center;
-}
-
-.stat h2{
-font-size:36px;
-color:#c89b3c;
-}
-
-.stat p{
-color:#555;
-margin-top:8px;
-}
-
-.panel{
-background:white;
-border:2px solid #111;
-border-radius:30px;
-padding:28px;
-margin-bottom:25px;
-}
-
-.panel h2{
-font-family:Georgia,serif;
-font-size:34px;
-margin-bottom:15px;
-}
-
-label{
-display:block;
-margin-top:18px;
-margin-bottom:8px;
-font-weight:bold;
-}
-
+button,
 input,
-textarea,
-select{
-width:100%;
-padding:15px;
-border:1px solid #ccc;
-border-radius:14px;
-font-size:16px;
-}
-
+select,
 textarea{
-min-height:130px;
-resize:vertical;
+font:inherit;
 }
 
 button{
-margin-top:20px;
-background:#111;
-color:white;
-border:none;
-padding:16px 26px;
-border-radius:999px;
-font-size:16px;
-font-weight:bold;
 cursor:pointer;
 }
 
-.preview{
-margin-top:20px;
-padding:20px;
-background:#f1eadc;
-border-radius:20px;
-}
-
-.preview-item{
-background:white;
-border:1px solid #ddd;
-border-radius:18px;
-padding:18px;
-margin-bottom:15px;
-}
-
-.preview-item h3{
-margin-bottom:8px;
-}
-
-.preview-item p{
-color:#555;
-line-height:1.6;
-}
-
-.actions{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-}
-
-.actions a{
-display:inline-block;
-background:#111;
-color:white;
+a{
+color:inherit;
 text-decoration:none;
-padding:14px 20px;
-border-radius:999px;
-font-weight:bold;
 }
 
-.small-note{
-font-size:14px;
-color:#666;
-line-height:1.6;
+.admin-shell{
+display:grid;
+grid-template-columns:290px 1fr;
+min-height:100vh;
+}
+
+.sidebar{
+background:#fff;
+border-right:1px solid #ddd;
+padding:24px 18px;
+position:sticky;
+top:0;
+height:100vh;
+overflow-y:auto;
+}
+
+.brand{
+text-align:center;
+padding-bottom:24px;
+border-bottom:1px solid #ddd;
+margin-bottom:24px;
+}
+
+.logo-small{
+font-size:16px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:38px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:3px;
+}
+
+.admin-label{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#777;
 margin-top:10px;
 }
 
-footer{
+.nav{
+display:flex;
+flex-direction:column;
+gap:9px;
+}
+
+.nav-button{
+width:100%;
+border:1px solid transparent;
+background:transparent;
+padding:13px 15px;
+border-radius:16px;
+text-align:left;
+font-weight:bold;
+color:#444;
+}
+
+.nav-button:hover{
+background:#f5f2eb;
+}
+
+.nav-button.active{
+background:#111;
+color:#fff;
+}
+
+.sidebar-footer{
+margin-top:28px;
+padding-top:20px;
+border-top:1px solid #ddd;
+display:grid;
+gap:10px;
+}
+
+.sidebar-footer a,
+.sidebar-footer button{
+border:none;
+background:#f5f2eb;
+padding:12px;
+border-radius:14px;
 text-align:center;
-padding:35px;
+font-weight:bold;
+}
+
+.main{
+min-width:0;
+}
+
+.topbar{
+background:#fff;
+border-bottom:1px solid #ddd;
+padding:18px 28px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.topbar h1{
+font-family:Georgia,serif;
+font-size:30px;
+}
+
+.topbar-actions{
+display:flex;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.status-pill{
+background:#ecfff0;
+border:1px solid #65e51f;
+padding:9px 14px;
+border-radius:999px;
+font-weight:bold;
+font-size:13px;
+}
+
+.btn{
+border:none;
+padding:13px 18px;
+border-radius:999px;
+font-weight:bold;
+display:inline-block;
+}
+
+.btn.black{
+background:#111;
+color:#fff;
+}
+
+.btn.gold{
+background:#c89b3c;
+color:#fff;
+}
+
+.btn.green{
+background:#65e51f;
+color:#fff;
+box-shadow:0 0 16px rgba(101,229,31,.35);
+}
+
+.btn.light{
+background:#fff;
+color:#111;
+border:1px solid #111;
+}
+
+.btn.danger{
+background:#b83232;
+color:#fff;
+}
+
+.content{
+padding:32px;
+}
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+.page-header{
+display:flex;
+justify-content:space-between;
+gap:20px;
+align-items:flex-start;
+margin-bottom:26px;
+}
+
+.page-header h2{
+font-family:Georgia,serif;
+font-size:42px;
+margin-bottom:8px;
+}
+
+.page-header p{
 color:#666;
+line-height:1.7;
+max-width:780px;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+gap:18px;
+margin-bottom:28px;
+}
+
+.stat-card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:24px;
+padding:22px;
+box-shadow:0 10px 28px rgba(0,0,0,.05);
+}
+
+.stat-card strong{
+display:block;
+font-family:Georgia,serif;
+font-size:38px;
+color:#c89b3c;
+margin-bottom:6px;
+}
+
+.panel{
+background:#fff;
+border:1px solid #ddd;
+border-radius:28px;
+padding:24px;
+box-shadow:0 10px 28px rgba(0,0,0,.05);
+margin-bottom:24px;
+}
+
+.panel h3{
+font-family:Georgia,serif;
+font-size:28px;
+margin-bottom:18px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+border:1px solid #ccc;
+border-radius:15px;
+padding:14px;
+background:#fff;
+margin-bottom:14px;
+}
+
+textarea{
+min-height:120px;
+resize:vertical;
+}
+
+.checkbox-row{
+display:flex;
+gap:10px;
+align-items:flex-start;
+margin:4px 0 15px;
+color:#555;
+}
+
+.checkbox-row input{
+width:auto;
+margin:3px 0 0;
+}
+
+.toolbar{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:8px;
+}
+
+.table-wrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:780px;
+}
+
+th,
+td{
+padding:14px;
+border-bottom:1px solid #e5e5e5;
+text-align:left;
+vertical-align:top;
+}
+
+th{
+font-size:12px;
+letter-spacing:1px;
+text-transform:uppercase;
+color:#777;
+}
+
+.row-actions{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+}
+
+.small-btn{
+border:none;
+padding:8px 11px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+.small-btn.edit{
+background:#eee7d7;
+}
+
+.small-btn.publish{
+background:#ecfff0;
+}
+
+.small-btn.delete{
+background:#ffeaea;
+color:#9f2424;
+}
+
+.badge{
+display:inline-block;
+padding:7px 11px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+background:#f1ede3;
+}
+
+.badge.published{
+background:#ecfff0;
+color:#22723a;
+}
+
+.badge.draft{
+background:#fff3d7;
+color:#8b6514;
+}
+
+.badge.review{
+background:#eaf1ff;
+color:#28579c;
+}
+
+.card-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
+}
+
+.content-card{
+border:1px solid #ddd;
+border-radius:22px;
+overflow:hidden;
+background:#fff;
+}
+
+.content-card img{
+width:100%;
+height:180px;
+object-fit:cover;
+display:block;
+}
+
+.content-card-body{
+padding:18px;
+}
+
+.content-card h4{
+font-family:Georgia,serif;
+font-size:24px;
+margin:8px 0;
+}
+
+.content-card p{
+color:#666;
+line-height:1.6;
+}
+
+.activity-list{
+display:grid;
+gap:12px;
+}
+
+.activity{
+background:#faf8f3;
+border-radius:16px;
+padding:14px 16px;
+}
+
+.activity strong{
+display:block;
+margin-bottom:4px;
+}
+
+.two-column{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+
+.notice{
+background:#fff8df;
+border:1px solid #e2c264;
+border-radius:18px;
+padding:16px;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+.empty{
+padding:28px;
+border:2px dashed #ccc;
+border-radius:20px;
+text-align:center;
+color:#777;
+}
+
+.preview-box{
+background:#faf8f3;
+border:1px solid #ddd;
+border-radius:20px;
+padding:20px;
+margin-top:18px;
+}
+
+.preview-box img{
+width:100%;
+max-height:300px;
+object-fit:cover;
+border-radius:16px;
+margin-bottom:14px;
+display:none;
+}
+
+.success{
+display:none;
+background:#ecfff0;
+border:1px solid #65e51f;
+border-radius:16px;
+padding:15px;
+margin-top:15px;
+font-weight:bold;
+}
+
+.login-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.72);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:9999;
+}
+
+.login-card{
+width:min(460px,100%);
+background:#fff;
+border-radius:30px;
+padding:34px;
+text-align:center;
+}
+
+.login-card h2{
+font-family:Georgia,serif;
+font-size:38px;
+margin-bottom:12px;
+}
+
+.login-card p{
+color:#666;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+@media(max-width:980px){
+.admin-shell{
+grid-template-columns:1fr;
+}
+
+.sidebar{
+position:relative;
+height:auto;
+border-right:none;
+border-bottom:1px solid #ddd;
+}
+
+.nav{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+}
+
+.topbar{
+position:relative;
+}
+
+.two-column{
+grid-template-columns:1fr;
+}
+}
+
+@media(max-width:650px){
+.content{
+padding:20px 14px;
+}
+
+.topbar{
+padding:16px;
+align-items:flex-start;
+flex-direction:column;
+}
+
+.page-header{
+flex-direction:column;
+}
+
+.page-header h2{
+font-size:34px;
+}
+
+.nav{
+grid-template-columns:1fr;
+}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>PETS & DOGUE Admin</h1>
-<p>Magazine management panel</p>
+<div class="login-overlay" id="loginOverlay">
+<div class="login-card">
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+<h2>Editorial Access</h2>
+<p>This is the demo CMS login. Replace it with secure authentication before publishing the real website.</p>
+
+<input id="adminEmail" type="email" placeholder="Admin email">
+<input id="adminPassword" type="password" placeholder="Password">
+
+<button class="btn green" onclick="loginAdmin()">Enter Editorial CMS</button>
+<a href="index.html" class="btn light">Back To Magazine</a>
+</div>
+</div>
+
+<div class="admin-shell">
+
+<aside class="sidebar">
+
+<div class="brand">
+<div class="logo-small">pets &</div>
+<div class="logo-big">DOGUE</div>
+<div class="admin-label">Editorial CMS</div>
+</div>
+
+<nav class="nav">
+<button class="nav-button active" onclick="openPage('dashboard',this)">Dashboard</button>
+<button class="nav-button" onclick="openPage('issues',this)">Issues</button>
+<button class="nav-button" onclick="openPage('articles',this)">Articles</button>
+<button class="nav-button" onclick="openPage('photos',this)">Photos</button>
+<button class="nav-button" onclick="openPage('coverStars',this)">Cover Stars</button>
+<button class="nav-button" onclick="openPage('contests',this)">Contests</button>
+<button class="nav-button" onclick="openPage('gallery',this)">Members Gallery</button>
+<button class="nav-button" onclick="openPage('marketplace',this)">Marketplace</button>
+<button class="nav-button" onclick="openPage('partners',this)">Partners</button>
+<button class="nav-button" onclick="openPage('ads',this)">Advertisements</button>
+<button class="nav-button" onclick="openPage('community',this)">Community</button>
+<button class="nav-button" onclick="openPage('places',this)">Pet Friendly Places</button>
+<button class="nav-button" onclick="openPage('comments',this)">Comments</button>
+<button class="nav-button" onclick="openPage('users',this)">Users</button>
+<button class="nav-button" onclick="openPage('settings',this)">Settings</button>
+</nav>
+
+<div class="sidebar-footer">
+<a href="index.html">Open Magazine</a>
+<button onclick="exportData()">Export CMS Data</button>
+<button onclick="logoutAdmin()">Log Out</button>
+</div>
+
+</aside>
+
+<div class="main">
+
+<header class="topbar">
+<div>
+<h1 id="topbarTitle">Dashboard</h1>
+</div>
+
+<div class="topbar-actions">
+<span class="status-pill">Demo CMS · Local Storage</span>
+<button class="btn black" onclick="saveAll()">Save All</button>
+</div>
 </header>
 
-<main>
+<main class="content">
 
-<section class="dashboard">
+<section class="page active" id="dashboard">
 
-<div class="stat">
-<h2>02</h2>
-<p>Issues</p>
+<div class="page-header">
+<div>
+<h2>Editorial Dashboard</h2>
+<p>Manage magazine issues, articles, photography, competitions, users and commercial content.</p>
+</div>
 </div>
 
-<div class="stat">
-<h2>06</h2>
-<p>Categories</p>
+<div class="notice">
+This version stores information only in this browser using localStorage. It is useful for designing and testing the workflow, but it is not yet a secure live CMS.
 </div>
 
-<div class="stat">
-<h2 id="articleCount">0</h2>
-<p>Saved Articles</p>
+<div class="stats-grid">
+<div class="stat-card"><strong id="statIssues">0</strong>Issues</div>
+<div class="stat-card"><strong id="statArticles">0</strong>Articles</div>
+<div class="stat-card"><strong id="statPhotos">0</strong>Photos</div>
+<div class="stat-card"><strong id="statContests">0</strong>Contests</div>
+<div class="stat-card"><strong id="statPartners">0</strong>Partners</div>
+<div class="stat-card"><strong id="statUsers">0</strong>Users</div>
 </div>
 
-<div class="stat">
-<h2 id="adCount">0</h2>
-<p>Advertisements</p>
+<div class="two-column">
+
+<div class="panel">
+<h3>Quick Create</h3>
+
+<div class="toolbar">
+<button class="btn gold" onclick="goToPage('issues')">New Issue</button>
+<button class="btn black" onclick="goToPage('articles')">New Article</button>
+<button class="btn green" onclick="goToPage('photos')">Upload Photo</button>
+<button class="btn light" onclick="goToPage('contests')">New Contest</button>
+</div>
+</div>
+
+<div class="panel">
+<h3>Recent Activity</h3>
+<div class="activity-list" id="activityList">
+<div class="activity">
+<strong>CMS created</strong>
+Your editorial dashboard is ready.
+</div>
+</div>
+</div>
+
 </div>
 
 </section>
 
-<section class="panel">
+<section class="page" id="issues">
 
-<h2>📰 Current Issue Settings</h2>
+<div class="page-header">
+<div>
+<h2>Magazine Issues</h2>
+<p>Create a new issue, upload a cover, choose its season and control publication status.</p>
+</div>
+</div>
 
-<label>Issue Title</label>
-<input id="issueTitle" value="Issue 01 — Summer 2026">
+<div class="panel">
+<h3>Create New Issue</h3>
 
-<label>Issue Description</label>
-<textarea id="issueDesc">Welcome to the world's luxury magazine for pets.</textarea>
+<div class="form-grid">
+<input id="issueTitle" type="text" placeholder="Issue title, e.g. Issue 02">
+<input id="issueSeason" type="text" placeholder="Season, e.g. Autumn 2026">
+<input id="issueSlug" type="text" placeholder="File name, e.g. issue-02.html">
 
-<label>Cover Image Path</label>
-<input id="coverPath" value="file_00000000a9d471fda9b4629589be22a9.png">
+<select id="issueStatus">
+<option>Draft</option>
+<option>Review</option>
+<option>Published</option>
+</select>
 
-<p class="small-note">
-Use the exact uploaded image filename. Example: file_00000000a9d471fda9b4629589be22a9.png
+<input id="issueDate" type="date">
+<input id="issueCover" type="file" accept="image/*" onchange="previewImage(event,'issuePreview')">
+</div>
+
+<textarea id="issueDescription" placeholder="Short description of this issue..."></textarea>
+
+<div class="preview-box">
+<img id="issuePreview" alt="Issue cover preview">
+</div>
+
+<button class="btn green" onclick="createIssue()">Create Issue</button>
+</div>
+
+<div class="panel">
+<h3>All Issues</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Season</th>
+<th>Status</th>
+<th>Publish Date</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="issuesTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="articles">
+
+<div class="page-header">
+<div>
+<h2>Articles</h2>
+<p>Create stories, interviews, guides and editorial features for any magazine rubric.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Create Article</h3>
+
+<div class="form-grid">
+<input id="articleTitle" type="text" placeholder="Article title">
+<input id="articleAuthor" type="text" placeholder="Author">
+
+<select id="articleCategory">
+<option>Articles</option>
+<option>Cover Story</option>
+<option>Pet Fashion</option>
+<option>Wellness</option>
+<option>Travel</option>
+<option>Pets In Need</option>
+<option>Community</option>
+<option>Interviews</option>
+</select>
+
+<select id="articleStatus">
+<option>Draft</option>
+<option>Review</option>
+<option>Published</option>
+</select>
+
+<input id="articleSlug" type="text" placeholder="File name, e.g. miso-story.html">
+<input id="articleImage" type="file" accept="image/*" onchange="previewImage(event,'articlePreview')">
+</div>
+
+<textarea id="articleExcerpt" placeholder="Short excerpt..."></textarea>
+<textarea id="articleBody" placeholder="Full article content..."></textarea>
+
+<div class="preview-box">
+<img id="articlePreview" alt="Article image preview">
+</div>
+
+<button class="btn green" onclick="createArticle()">Save Article</button>
+</div>
+
+<div class="panel">
+<h3>Article Library</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Category</th>
+<th>Author</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="articlesTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="photos">
+
+<div class="page-header">
+<div>
+<h2>Photo Library</h2>
+<p>Upload editorial photos, galleries, campaign images and cover material.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Upload Photo</h3>
+
+<div class="form-grid">
+<input id="photoTitle" type="text" placeholder="Photo title">
+<input id="photoPhotographer" type="text" placeholder="Photographer">
+<input id="photoCategory" type="text" placeholder="Category">
+<input id="photoFile" type="file" accept="image/*" onchange="previewImage(event,'photoPreview')">
+</div>
+
+<textarea id="photoCaption" placeholder="Caption or photo description..."></textarea>
+
+<div class="preview-box">
+<img id="photoPreview" alt="Photo preview">
+</div>
+
+<button class="btn green" onclick="createPhoto()">Add To Library</button>
+</div>
+
+<div class="panel">
+<h3>Photo Library</h3>
+<div class="card-grid" id="photosGrid"></div>
+</div>
+
+</section>
+
+<section class="page" id="coverStars">
+
+<div class="page-header">
+<div>
+<h2>Cover Stars</h2>
+<p>Add featured pets, assign them to issues and prepare cover-star stories.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Add Cover Star</h3>
+
+<div class="form-grid">
+<input id="coverPetName" type="text" placeholder="Pet name">
+<input id="coverAnimal" type="text" placeholder="Animal">
+<input id="coverBreed" type="text" placeholder="Breed">
+<input id="coverOwner" type="text" placeholder="Owner name">
+<input id="coverIssue" type="text" placeholder="Issue">
+<input id="coverPhoto" type="file" accept="image/*" onchange="previewImage(event,'coverPreview')">
+</div>
+
+<textarea id="coverStory" placeholder="Cover star story..."></textarea>
+
+<div class="preview-box">
+<img id="coverPreview" alt="Cover star preview">
+</div>
+
+<button class="btn green" onclick="createCoverStar()">Add Cover Star</button>
+</div>
+
+<div class="panel">
+<h3>Cover Star Library</h3>
+<div class="card-grid" id="coverStarsGrid"></div>
+</div>
+
+</section>
+
+<section class="page" id="contests">
+
+<div class="page-header">
+<div>
+<h2>Contests</h2>
+<p>Create seasonal competitions, define voting dates and announce winners.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Create Contest</h3>
+
+<div class="form-grid">
+<input id="contestTitle" type="text" placeholder="Contest title">
+<input id="contestPrize" type="text" placeholder="Prize">
+<input id="contestStart" type="date">
+<input id="contestEnd" type="date">
+
+<select id="contestStatus">
+<option>Draft</option>
+<option>Open</option>
+<option>Voting Closed</option>
+<option>Completed</option>
+</select>
+
+<input id="contestWinner" type="text" placeholder="Winner, optional">
+</div>
+
+<textarea id="contestRules" placeholder="Competition rules..."></textarea>
+
+<button class="btn green" onclick="createContest()">Create Contest</button>
+</div>
+
+<div class="panel">
+<h3>Contest List</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Prize</th>
+<th>Status</th>
+<th>Dates</th>
+<th>Winner</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="contestsTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="gallery">
+
+<div class="page-header">
+<div>
+<h2>Members Gallery</h2>
+<p>Review member entries, remove suspicious submissions and select finalists.</p>
+</div>
+</div>
+
+<div class="panel">
+<div class="toolbar">
+<button class="btn black" onclick="loadMemberEntries()">Refresh Entries</button>
+<button class="btn gold" onclick="selectTopFive()">Select Top 5</button>
+</div>
+</div>
+
+<div class="panel">
+<div class="card-grid" id="galleryAdminGrid"></div>
+</div>
+
+</section>
+
+<section class="page" id="marketplace">
+
+<div class="page-header">
+<div>
+<h2>Marketplace Moderation</h2>
+<p>Review, approve or remove marketplace listings submitted by members.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Add Marketplace Listing</h3>
+
+<div class="form-grid">
+<input id="marketTitle" type="text" placeholder="Listing title">
+<input id="marketCategory" type="text" placeholder="Category">
+<input id="marketLocation" type="text" placeholder="Location">
+<input id="marketOwner" type="text" placeholder="Owner">
+</div>
+
+<textarea id="marketDescription" placeholder="Listing description..."></textarea>
+
+<button class="btn green" onclick="createMarketplaceItem()">Create Listing</button>
+</div>
+
+<div class="panel">
+<h3>Marketplace Listings</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Category</th>
+<th>Location</th>
+<th>Owner</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="marketTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="partners">
+
+<div class="page-header">
+<div>
+<h2>Partners</h2>
+<p>Add partner businesses, discount codes and sponsored directory placements.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Add Partner</h3>
+
+<div class="form-grid">
+<input id="partnerName" type="text" placeholder="Partner name">
+<input id="partnerCategory" type="text" placeholder="Category">
+<input id="partnerLocation" type="text" placeholder="Location">
+<input id="partnerDiscount" type="text" placeholder="Discount">
+<input id="partnerCode" type="text" placeholder="Promo code">
+<input id="partnerWebsite" type="url" placeholder="Website">
+</div>
+
+<textarea id="partnerDescription" placeholder="Partner description..."></textarea>
+
+<button class="btn green" onclick="createPartner()">Add Partner</button>
+</div>
+
+<div class="panel">
+<h3>Partner Directory</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Category</th>
+<th>Location</th>
+<th>Discount</th>
+<th>Code</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="partnersTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="ads">
+
+<div class="page-header">
+<div>
+<h2>Advertisements</h2>
+<p>Create sponsored banners and commercial placements for issues or the website.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Create Advertisement</h3>
+
+<div class="form-grid">
+<input id="adBrand" type="text" placeholder="Brand name">
+<input id="adTitle" type="text" placeholder="Campaign title">
+<input id="adLink" type="url" placeholder="Destination link">
+<input id="adPosition" type="text" placeholder="Placement, e.g. Homepage">
+
+<select id="adStatus">
+<option>Draft</option>
+<option>Active</option>
+<option>Paused</option>
+</select>
+
+<input id="adEnd" type="date">
+</div>
+
+<textarea id="adText" placeholder="Advertisement text..."></textarea>
+
+<button class="btn green" onclick="createAd()">Create Advertisement</button>
+</div>
+
+<div class="panel">
+<h3>Advertisement List</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Brand</th>
+<th>Campaign</th>
+<th>Position</th>
+<th>Status</th>
+<th>End Date</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="adsTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="community">
+
+<div class="page-header">
+<div>
+<h2>Community Moderation</h2>
+<p>Review local posts, help requests, lost-and-found notices and public reports.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Add Community Post</h3>
+
+<div class="form-grid">
+<input id="communityTitle" type="text" placeholder="Post title">
+<input id="communityLocation" type="text" placeholder="Location">
+<input id="communityAuthor" type="text" placeholder="Author">
+<input id="communityType" type="text" placeholder="Post type">
+</div>
+
+<textarea id="communityText" placeholder="Post content..."></textarea>
+
+<button class="btn green" onclick="createCommunityPost()">Add Post</button>
+</div>
+
+<div class="panel">
+<h3>Community Posts</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Location</th>
+<th>Type</th>
+<th>Author</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="communityTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="places">
+
+<div class="page-header">
+<div>
+<h2>Pet Friendly Places</h2>
+<p>Add cafés, hotels, beaches, parks and businesses that welcome animals.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Add Place</h3>
+
+<div class="form-grid">
+<input id="placeName" type="text" placeholder="Place name">
+<input id="placeCategory" type="text" placeholder="Category">
+<input id="placeLocation" type="text" placeholder="Location">
+<input id="placeWebsite" type="url" placeholder="Website">
+</div>
+
+<textarea id="placeDescription" placeholder="Place description..."></textarea>
+
+<button class="btn green" onclick="createPlace()">Add Place</button>
+</div>
+
+<div class="panel">
+<h3>Place Directory</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Category</th>
+<th>Location</th>
+<th>Website</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="placesTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="comments">
+
+<div class="page-header">
+<div>
+<h2>Comment Moderation</h2>
+<p>Review public comments and remove inappropriate or suspicious content.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Add Demo Comment</h3>
+
+<input id="commentAuthor" type="text" placeholder="Author">
+<input id="commentPage" type="text" placeholder="Page">
+<textarea id="commentText" placeholder="Comment..."></textarea>
+
+<button class="btn green" onclick="createComment()">Add Comment</button>
+</div>
+
+<div class="panel">
+<h3>Comments</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Author</th>
+<th>Page</th>
+<th>Comment</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="commentsTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="users">
+
+<div class="page-header">
+<div>
+<h2>Users & Members</h2>
+<p>Review registered readers, Club membership and user access.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>Add User</h3>
+
+<div class="form-grid">
+<input id="userName" type="text" placeholder="Name">
+<input id="userEmail" type="email" placeholder="Email">
+
+<select id="userStatus">
+<option>Free Reader</option>
+<option>Club Monthly</option>
+<option>Club Yearly</option>
+<option>Admin</option>
+</select>
+</div>
+
+<button class="btn green" onclick="createUser()">Add User</button>
+</div>
+
+<div class="panel">
+<h3>User List</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Status</th>
+<th>Joined</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="usersTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+<section class="page" id="settings">
+
+<div class="page-header">
+<div>
+<h2>Magazine Settings</h2>
+<p>Control global magazine details, featured issue and publication preferences.</p>
+</div>
+</div>
+
+<div class="panel">
+<h3>General Settings</h3>
+
+<input id="settingTitle" type="text" placeholder="Magazine title">
+<input id="settingTagline" type="text" placeholder="Tagline">
+<input id="settingFeaturedIssue" type="text" placeholder="Featured issue">
+<input id="settingContact" type="email" placeholder="Contact email">
+
+<textarea id="settingHomepageMessage" placeholder="Homepage announcement..."></textarea>
+
+<label class="checkbox-row">
+<input id="settingComments" type="checkbox">
+<span>Allow public comments</span>
+</label>
+
+<label class="checkbox-row">
+<input id="settingMarketplace" type="checkbox">
+<span>Allow Marketplace publishing</span>
+</label>
+
+<button class="btn green" onclick="saveSettings()">Save Settings</button>
+
+<div class="success" id="settingsSuccess">Settings saved.</div>
+</div>
+
+<div class="panel">
+<h3>Danger Zone</h3>
+<p style="color:#666;line-height:1.7;margin-bottom:15px;">
+This removes all demo CMS content stored in this browser.
 </p>
 
-<button onclick="saveIssue()">Save Issue Settings</button>
-
-</section>
-
-<section class="panel">
-
-<h2>✍️ Create Article</h2>
-
-<label>Article Category</label>
-<select id="articleCategory">
-<option>Cover Story</option>
-<option>Dogs</option>
-<option>Cats</option>
-<option>Birds</option>
-<option>Rabbits</option>
-<option>Horses</option>
-<option>Exotic Pets</option>
-<option>Travel</option>
-<option>Wellness</option>
-<option>Advertising</option>
-</select>
-
-<label>Article Title</label>
-<input id="articleTitle" placeholder="Miso — Model Of The Month">
-
-<label>Article Text</label>
-<textarea id="articleText" placeholder="Write article text here..."></textarea>
-
-<button onclick="addArticle()">Save Article</button>
-
-<div class="preview" id="articlesList">
-No saved articles yet.
-</div>
-
-</section>
-
-<section class="panel">
-
-<h2>💎 Advertising Manager</h2>
-
-<label>Advertiser / Brand Name</label>
-<input id="adName" placeholder="Luxury Pet Boutique">
-
-<label>Advertising Type</label>
-<select id="adType">
-<option>Sponsored Article</option>
-<option>Banner Placement</option>
-<option>Cover Partner</option>
-<option>Pet Brand Feature</option>
-</select>
-
-<label>Advertisement Text</label>
-<textarea id="adText" placeholder="Write advertisement text..."></textarea>
-
-<button onclick="addAd()">Save Advertisement</button>
-
-<div class="preview" id="adsList">
-No advertisements yet.
-</div>
-
-</section>
-
-<section class="panel">
-
-<h2>📚 Quick Magazine Links</h2>
-
-<div class="actions">
-<a href="index.html">Open Home</a>
-<a href="issue-01.html">Open Issue 01</a>
-<a href="issue-02.html">Open Issue 02</a>
-<a href="archive.html">Open Archive</a>
-<a href="articles.html">Open Articles</a>
-<a href="categories.html">Open Categories</a>
-<a href="advertise.html">Open Advertise</a>
-<a href="contact.html">Open Contact</a>
-</div>
-
-</section>
-
-<section class="panel">
-
-<h2>⚖️ Legal Pages</h2>
-
-<div class="actions">
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-<a href="cookies.html">Cookies</a>
-<a href="copyright.html">Copyright</a>
+<button class="btn danger" onclick="resetCMS()">Reset Demo CMS</button>
 </div>
 
 </section>
 
 </main>
 
-<footer>
-PETS & DOGUE Admin Panel
-</footer>
+</div>
+</div>
 
 <script>
-let articles = JSON.parse(localStorage.getItem("articles") || "[]");
-let ads = JSON.parse(localStorage.getItem("ads") || "[]");
+const CMS_KEY = "pets_dogue_cms_v1";
 
-function saveIssue(){
-localStorage.setItem("issueTitle", document.getElementById("issueTitle").value);
-localStorage.setItem("issueDesc", document.getElementById("issueDesc").value);
-localStorage.setItem("coverPath", document.getElementById("coverPath").value);
-alert("Issue settings saved");
+let cms = {
+issues:[],
+articles:[],
+photos:[],
+coverStars:[],
+contests:[],
+marketplace:[],
+partners:[],
+ads:[],
+community:[],
+places:[],
+comments:[],
+users:[],
+activity:[],
+settings:{
+title:"PETS & DOGUE",
+tagline:"The International Luxury Animal Magazine",
+featuredIssue:"Issue 01",
+contact:"contact@petsdogue.com",
+homepageMessage:"",
+allowComments:true,
+allowMarketplace:true
+}
+};
+
+let imageCache = {};
+
+function loadCMS(){
+const saved = localStorage.getItem(CMS_KEY);
+
+if(saved){
+try{
+cms = JSON.parse(saved);
+}catch(error){
+console.error("Unable to load CMS data",error);
+}
 }
 
-function addArticle(){
-const category = document.getElementById("articleCategory").value;
-const title = document.getElementById("articleTitle").value;
-const text = document.getElementById("articleText").value;
+ensureCollections();
+renderAll();
+}
 
-if(!title || !text){
-alert("Please add article title and text");
+function ensureCollections(){
+[
+"issues",
+"articles",
+"photos",
+"coverStars",
+"contests",
+"marketplace",
+"partners",
+"ads",
+"community",
+"places",
+"comments",
+"users",
+"activity"
+].forEach(key => {
+if(!Array.isArray(cms[key])){
+cms[key] = [];
+}
+});
+
+if(!cms.settings){
+cms.settings = {};
+}
+}
+
+function saveAll(showMessage = true){
+localStorage.setItem(CMS_KEY,JSON.stringify(cms));
+
+if(showMessage){
+alert("CMS data saved in this browser.");
+}
+
+renderStats();
+}
+
+function loginAdmin(){
+const email = document.getElementById("adminEmail").value.trim();
+const password = document.getElementById("adminPassword").value.trim();
+
+if(!email || !password){
+alert("Enter an email and password.");
 return;
 }
 
-articles.push({
-category:category,
-title:title,
-text:text
+sessionStorage.setItem("pd_admin_logged_in","true");
+document.getElementById("loginOverlay").style.display = "none";
+}
+
+function logoutAdmin(){
+sessionStorage.removeItem("pd_admin_logged_in");
+location.reload();
+}
+
+function checkAdminLogin(){
+if(sessionStorage.getItem("pd_admin_logged_in") === "true"){
+document.getElementById("loginOverlay").style.display = "none";
+}
+}
+
+function openPage(pageId,button){
+document.querySelectorAll(".page").forEach(page => {
+page.classList.remove("active");
 });
 
-localStorage.setItem("articles", JSON.stringify(articles));
+document.getElementById(pageId).classList.add("active");
 
-document.getElementById("articleTitle").value = "";
-document.getElementById("articleText").value = "";
+document.querySelectorAll(".nav-button").forEach(navButton => {
+navButton.classList.remove("active");
+});
 
-renderArticles();
+if(button){
+button.classList.add("active");
+}
+
+document.getElementById("topbarTitle").textContent =
+document.getElementById(pageId).querySelector("h2").textContent;
+
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function goToPage(pageId){
+const button = [...document.querySelectorAll(".nav-button")]
+.find(item => item.getAttribute("onclick").includes("'" + pageId + "'"));
+
+openPage(pageId,button);
+}
+
+function getValue(id){
+return document.getElementById(id).value.trim();
+}
+
+function clearFields(ids){
+ids.forEach(id => {
+const element = document.getElementById(id);
+
+if(element.type === "checkbox"){
+element.checked = false;
+}else{
+element.value = "";
+}
+});
+}
+
+function statusBadge(status){
+const className =
+status === "Published" || status === "Active" || status === "Open"
+? "published"
+: status === "Review"
+? "review"
+: "draft";
+
+return `<span class="badge ${className}">${escapeHTML(status || "Draft")}</span>`;
+}
+
+function escapeHTML(value){
+return String(value || "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
+
+function previewImage(event,previewId){
+const file = event.target.files[0];
+
+if(!file){
+return;
+}
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+imageCache[previewId] = e.target.result;
+
+const preview = document.getElementById(previewId);
+preview.src = e.target.result;
+preview.style.display = "block";
+};
+
+reader.readAsDataURL(file);
+}
+
+function addActivity(title,text){
+cms.activity.unshift({
+title,
+text,
+date:new Date().toLocaleString()
+});
+
+cms.activity = cms.activity.slice(0,20);
+}
+
+function renderActivity(){
+const list = document.getElementById("activityList");
+
+if(cms.activity.length === 0){
+list.innerHTML = `
+<div class="activity">
+<strong>No recent activity</strong>
+New editorial actions will appear here.
+</div>
+`;
+return;
+}
+
+list.innerHTML = cms.activity.map(item => `
+<div class="activity">
+<strong>${escapeHTML(item.title)}</strong>
+${escapeHTML(item.text)}
+<br>
+<small>${escapeHTML(item.date)}</small>
+</div>
+`).join("");
+}
+
+function createIssue(){
+const title = getValue("issueTitle");
+
+if(!title){
+alert("Add an issue title.");
+return;
+}
+
+cms.issues.unshift({
+id:Date.now(),
+title,
+season:getValue("issueSeason"),
+slug:getValue("issueSlug"),
+status:document.getElementById("issueStatus").value,
+date:document.getElementById("issueDate").value,
+description:getValue("issueDescription"),
+cover:imageCache.issuePreview || ""
+});
+
+addActivity("Issue created",title);
+
+clearFields([
+"issueTitle",
+"issueSeason",
+"issueSlug",
+"issueDate",
+"issueDescription",
+"issueCover"
+]);
+
+document.getElementById("issuePreview").style.display = "none";
+imageCache.issuePreview = "";
+
+saveAll(false);
+renderAll();
+}
+
+function createArticle(){
+const title = getValue("articleTitle");
+
+if(!title){
+alert("Add an article title.");
+return;
+}
+
+cms.articles.unshift({
+id:Date.now(),
+title,
+author:getValue("articleAuthor"),
+category:document.getElementById("articleCategory").value,
+status:document.getElementById("articleStatus").value,
+slug:getValue("articleSlug"),
+excerpt:getValue("articleExcerpt"),
+body:getValue("articleBody"),
+image:imageCache.articlePreview || ""
+});
+
+addActivity("Article saved",title);
+
+clearFields([
+"articleTitle",
+"articleAuthor",
+"articleSlug",
+"articleExcerpt",
+"articleBody",
+"articleImage"
+]);
+
+document.getElementById("articlePreview").style.display = "none";
+imageCache.articlePreview = "";
+
+saveAll(false);
+renderAll();
+}
+
+function createPhoto(){
+const title = getValue("photoTitle");
+
+if(!title){
+alert("Add a photo title.");
+return;
+}
+
+cms.photos.unshift({
+id:Date.now(),
+title,
+photographer:getValue("photoPhotographer"),
+category:getValue("photoCategory"),
+caption:getValue("photoCaption"),
+image:imageCache.photoPreview || ""
+});
+
+addActivity("Photo uploaded",title);
+
+clearFields([
+"photoTitle",
+"photoPhotographer",
+"photoCategory",
+"photoCaption",
+"photoFile"
+]);
+
+document.getElementById("photoPreview").style.display = "none";
+imageCache.photoPreview = "";
+
+saveAll(false);
+renderAll();
+}
+
+function createCoverStar(){
+const name = getValue("coverPetName");
+
+if(!name){
+alert("Add the pet name.");
+return;
+}
+
+cms.coverStars.unshift({
+id:Date.now(),
+name,
+animal:getValue("coverAnimal"),
+breed:getValue("coverBreed"),
+owner:getValue("coverOwner"),
+issue:getValue("coverIssue"),
+story:getValue("coverStory"),
+image:imageCache.coverPreview || ""
+});
+
+addActivity("Cover star added",name);
+
+clearFields([
+"coverPetName",
+"coverAnimal",
+"coverBreed",
+"coverOwner",
+"coverIssue",
+"coverStory",
+"coverPhoto"
+]);
+
+document.getElementById("coverPreview").style.display = "none";
+imageCache.coverPreview = "";
+
+saveAll(false);
+renderAll();
+}
+
+function createContest(){
+const title = getValue("contestTitle");
+
+if(!title){
+alert("Add a contest title.");
+return;
+}
+
+cms.contests.unshift({
+id:Date.now(),
+title,
+prize:getValue("contestPrize"),
+start:document.getElementById("contestStart").value,
+end:document.getElementById("contestEnd").value,
+status:document.getElementById("contestStatus").value,
+winner:getValue("contestWinner"),
+rules:getValue("contestRules")
+});
+
+addActivity("Contest created",title);
+
+clearFields([
+"contestTitle",
+"contestPrize",
+"contestStart",
+"contestEnd",
+"contestWinner",
+"contestRules"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function createMarketplaceItem(){
+const title = getValue("marketTitle");
+
+if(!title){
+alert("Add a listing title.");
+return;
+}
+
+cms.marketplace.unshift({
+id:Date.now(),
+title,
+category:getValue("marketCategory"),
+location:getValue("marketLocation"),
+owner:getValue("marketOwner"),
+description:getValue("marketDescription"),
+status:"Review"
+});
+
+addActivity("Marketplace listing added",title);
+
+clearFields([
+"marketTitle",
+"marketCategory",
+"marketLocation",
+"marketOwner",
+"marketDescription"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function createPartner(){
+const name = getValue("partnerName");
+
+if(!name){
+alert("Add a partner name.");
+return;
+}
+
+cms.partners.unshift({
+id:Date.now(),
+name,
+category:getValue("partnerCategory"),
+location:getValue("partnerLocation"),
+discount:getValue("partnerDiscount"),
+code:getValue("partnerCode"),
+website:getValue("partnerWebsite"),
+description:getValue("partnerDescription")
+});
+
+addActivity("Partner added",name);
+
+clearFields([
+"partnerName",
+"partnerCategory",
+"partnerLocation",
+"partnerDiscount",
+"partnerCode",
+"partnerWebsite",
+"partnerDescription"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function createAd(){
+const brand = getValue("adBrand");
+
+if(!brand){
+alert("Add the brand name.");
+return;
+}
+
+cms.ads.unshift({
+id:Date.now(),
+brand,
+title:getValue("adTitle"),
+link:getValue("adLink"),
+position:getValue("adPosition"),
+status:document.getElementById("adStatus").value,
+end:document.getElementById("adEnd").value,
+text:getValue("adText")
+});
+
+addActivity("Advertisement created",brand);
+
+clearFields([
+"adBrand",
+"adTitle",
+"adLink",
+"adPosition",
+"adEnd",
+"adText"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function createCommunityPost(){
+const title = getValue("communityTitle");
+
+if(!title){
+alert("Add the post title.");
+return;
+}
+
+cms.community.unshift({
+id:Date.now(),
+title,
+location:getValue("communityLocation"),
+author:getValue("communityAuthor"),
+type:getValue("communityType"),
+text:getValue("communityText"),
+status:"Review"
+});
+
+addActivity("Community post added",title);
+
+clearFields([
+"communityTitle",
+"communityLocation",
+"communityAuthor",
+"communityType",
+"communityText"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function createPlace(){
+const name = getValue("placeName");
+
+if(!name){
+alert("Add the place name.");
+return;
+}
+
+cms.places.unshift({
+id:Date.now(),
+name,
+category:getValue("placeCategory"),
+location:getValue("placeLocation"),
+website:getValue("placeWebsite"),
+description:getValue("placeDescription")
+});
+
+addActivity("Pet friendly place added",name);
+
+clearFields([
+"placeName",
+"placeCategory",
+"placeLocation",
+"placeWebsite",
+"placeDescription"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function createComment(){
+const text = getValue("commentText");
+
+if(!text){
+alert("Add a comment.");
+return;
+}
+
+cms.comments.unshift({
+id:Date.now(),
+author:getValue("commentAuthor") || "Guest",
+page:getValue("commentPage"),
+text,
+status:"Review"
+});
+
+addActivity("Comment added","New comment from " + (getValue("commentAuthor") || "Guest"));
+
+clearFields([
+"commentAuthor",
+"commentPage",
+"commentText"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function createUser(){
+const name = getValue("userName");
+const email = getValue("userEmail");
+
+if(!name || !email){
+alert("Add a name and email.");
+return;
+}
+
+cms.users.unshift({
+id:Date.now(),
+name,
+email,
+status:document.getElementById("userStatus").value,
+joined:new Date().toLocaleDateString()
+});
+
+addActivity("User added",name);
+
+clearFields([
+"userName",
+"userEmail"
+]);
+
+saveAll(false);
+renderAll();
+}
+
+function updateItemStatus(collection,id,status){
+const item = cms[collection].find(entry => entry.id === id);
+
+if(item){
+item.status = status;
+addActivity("Status updated",(item.title || item.name || item.brand) + " → " + status);
+saveAll(false);
+renderAll();
+}
+}
+
+function deleteItem(collection,id){
+if(!confirm("Delete this item?")){
+return;
+}
+
+cms[collection] = cms[collection].filter(item => item.id !== id);
+
+addActivity("Item deleted",collection);
+
+saveAll(false);
+renderAll();
+}
+
+function renderIssues(){
+document.getElementById("issuesTable").innerHTML =
+cms.issues.map(item => `
+<tr>
+<td>${escapeHTML(item.title)}</td>
+<td>${escapeHTML(item.season)}</td>
+<td>${statusBadge(item.status)}</td>
+<td>${escapeHTML(item.date)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn publish" onclick="updateItemStatus('issues',${item.id},'Published')">Publish</button>
+<button class="small-btn edit" onclick="updateItemStatus('issues',${item.id},'Draft')">Draft</button>
+<button class="small-btn delete" onclick="deleteItem('issues',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
 }
 
 function renderArticles(){
-const box = document.getElementById("articlesList");
-const count = document.getElementById("articleCount");
+document.getElementById("articlesTable").innerHTML =
+cms.articles.map(item => `
+<tr>
+<td>${escapeHTML(item.title)}</td>
+<td>${escapeHTML(item.category)}</td>
+<td>${escapeHTML(item.author)}</td>
+<td>${statusBadge(item.status)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn publish" onclick="updateItemStatus('articles',${item.id},'Published')">Publish</button>
+<button class="small-btn edit" onclick="updateItemStatus('articles',${item.id},'Review')">Review</button>
+<button class="small-btn delete" onclick="deleteItem('articles',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
+}
 
-count.textContent = articles.length;
+function renderPhotos(){
+const grid = document.getElementById("photosGrid");
 
-if(articles.length === 0){
-box.innerHTML = "No saved articles yet.";
+if(cms.photos.length === 0){
+grid.innerHTML = `<div class="empty">No photos uploaded yet.</div>`;
 return;
 }
 
-box.innerHTML = articles.map((item,index) => `
-<div class="preview-item">
-<h3>${item.title}</h3>
-<p><strong>Category:</strong> ${item.category}</p>
-<p>${item.text}</p>
-<button onclick="deleteArticle(${index})">Delete</button>
+grid.innerHTML = cms.photos.map(item => `
+<div class="content-card">
+${item.image ? `<img src="${item.image}" alt="${escapeHTML(item.title)}">` : ""}
+<div class="content-card-body">
+<span class="badge">${escapeHTML(item.category || "PHOTO")}</span>
+<h4>${escapeHTML(item.title)}</h4>
+<p>${escapeHTML(item.caption)}</p>
+<br>
+<button class="small-btn delete" onclick="deleteItem('photos',${item.id})">Delete</button>
+</div>
 </div>
 `).join("");
 }
 
-function deleteArticle(index){
-articles.splice(index,1);
-localStorage.setItem("articles", JSON.stringify(articles));
-renderArticles();
-}
+function renderCoverStars(){
+const grid = document.getElementById("coverStarsGrid");
 
-function addAd(){
-const name = document.getElementById("adName").value;
-const type = document.getElementById("adType").value;
-const text = document.getElementById("adText").value;
-
-if(!name || !text){
-alert("Please add advertiser name and text");
+if(cms.coverStars.length === 0){
+grid.innerHTML = `<div class="empty">No cover stars added yet.</div>`;
 return;
 }
 
-ads.push({
-name:name,
-type:type,
-text:text
-});
+grid.innerHTML = cms.coverStars.map(item => `
+<div class="content-card">
+${item.image ? `<img src="${item.image}" alt="${escapeHTML(item.name)}">` : ""}
+<div class="content-card-body">
+<span class="badge">${escapeHTML(item.issue || "COVER STAR")}</span>
+<h4>${escapeHTML(item.name)}</h4>
+<p>${escapeHTML(item.animal)} · ${escapeHTML(item.breed)}</p>
+<p>${escapeHTML(item.story)}</p>
+<br>
+<button class="small-btn delete" onclick="deleteItem('coverStars',${item.id})">Delete</button>
+</div>
+</div>
+`).join("");
+}
 
-localStorage.setItem("ads", JSON.stringify(ads));
+function renderContests(){
+document.getElementById("contestsTable").innerHTML =
+cms.contests.map(item => `
+<tr>
+<td>${escapeHTML(item.title)}</td>
+<td>${escapeHTML(item.prize)}</td>
+<td>${statusBadge(item.status)}</td>
+<td>${escapeHTML(item.start)} – ${escapeHTML(item.end)}</td>
+<td>${escapeHTML(item.winner)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn publish" onclick="updateItemStatus('contests',${item.id},'Open')">Open</button>
+<button class="small-btn edit" onclick="updateItemStatus('contests',${item.id},'Completed')">Complete</button>
+<button class="small-btn delete" onclick="deleteItem('contests',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
+}
 
-document.getElementById("adName").value = "";
-document.getElementById("adText").value = "";
+function renderMarketplace(){
+document.getElementById("marketTable").innerHTML =
+cms.marketplace.map(item => `
+<tr>
+<td>${escapeHTML(item.title)}</td>
+<td>${escapeHTML(item.category)}</td>
+<td>${escapeHTML(item.location)}</td>
+<td>${escapeHTML(item.owner)}</td>
+<td>${statusBadge(item.status)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn publish" onclick="updateItemStatus('marketplace',${item.id},'Published')">Approve</button>
+<button class="small-btn edit" onclick="updateItemStatus('marketplace',${item.id},'Review')">Review</button>
+<button class="small-btn delete" onclick="deleteItem('marketplace',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
+}
 
-renderAds();
+function renderPartners(){
+document.getElementById("partnersTable").innerHTML =
+cms.partners.map(item => `
+<tr>
+<td>${escapeHTML(item.name)}</td>
+<td>${escapeHTML(item.category)}</td>
+<td>${escapeHTML(item.location)}</td>
+<td>${escapeHTML(item.discount)}</td>
+<td>${escapeHTML(item.code)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn delete" onclick="deleteItem('partners',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
 }
 
 function renderAds(){
-const box = document.getElementById("adsList");
-const count = document.getElementById("adCount");
-
-count.textContent = ads.length;
-
-if(ads.length === 0){
-box.innerHTML = "No advertisements yet.";
-return;
+document.getElementById("adsTable").innerHTML =
+cms.ads.map(item => `
+<tr>
+<td>${escapeHTML(item.brand)}</td>
+<td>${escapeHTML(item.title)}</td>
+<td>${escapeHTML(item.position)}</td>
+<td>${statusBadge(item.status)}</td>
+<td>${escapeHTML(item.end)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn publish" onclick="updateItemStatus('ads',${item.id},'Active')">Activate</button>
+<button class="small-btn edit" onclick="updateItemStatus('ads',${item.id},'Paused')">Pause</button>
+<button class="small-btn delete" onclick="deleteItem('ads',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
 }
 
-box.innerHTML = ads.map((item,index) => `
-<div class="preview-item">
-<h3>${item.name}</h3>
-<p><strong>Type:</strong> ${item.type}</p>
-<p>${item.text}</p>
-<button onclick="deleteAd(${index})">Delete</button>
+function renderCommunity(){
+document.getElementById("communityTable").innerHTML =
+cms.community.map(item => `
+<tr>
+<td>${escapeHTML(item.title)}</td>
+<td>${escapeHTML(item.location)}</td>
+<td>${escapeHTML(item.type)}</td>
+<td>${escapeHTML(item.author)}</td>
+<td>${statusBadge(item.status)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn publish" onclick="updateItemStatus('community',${item.id},'Published')">Approve</button>
+<button class="small-btn delete" onclick="deleteItem('community',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
+}
+
+function renderPlaces(){
+document.getElementById("placesTable").innerHTML =
+cms.places.map(item => `
+<tr>
+<td>${escapeHTML(item.name)}</td>
+<td>${escapeHTML(item.category)}</td>
+<td>${escapeHTML(item.location)}</td>
+<td>${escapeHTML(item.website)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn delete" onclick="deleteItem('places',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
+}
+
+function renderComments(){
+document.getElementById("commentsTable").innerHTML =
+cms.comments.map(item => `
+<tr>
+<td>${escapeHTML(item.author)}</td>
+<td>${escapeHTML(item.page)}</td>
+<td>${escapeHTML(item.text)}</td>
+<td>${statusBadge(item.status)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn publish" onclick="updateItemStatus('comments',${item.id},'Published')">Approve</button>
+<button class="small-btn delete" onclick="deleteItem('comments',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
+}
+
+function renderUsers(){
+document.getElementById("usersTable").innerHTML =
+cms.users.map(item => `
+<tr>
+<td>${escapeHTML(item.name)}</td>
+<td>${escapeHTML(item.email)}</td>
+<td>${escapeHTML(item.status)}</td>
+<td>${escapeHTML(item.joined)}</td>
+<td>
+<div class="row-actions">
+<button class="small-btn delete" onclick="deleteItem('users',${item.id})">Delete</button>
+</div>
+</td>
+</tr>
+`).join("");
+}
+
+function renderGalleryAdmin(){
+const grid = document.getElementById("galleryAdminGrid");
+
+const demoEntries = [
+{
+name:"Miso",
+likes:328,
+status:"Leading",
+image:"file_00000000a9d471fda9b4629589be22a9.png"
+},
+{
+name:"Max",
+likes:214,
+status:"Approved",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80"
+},
+{
+name:"Luna",
+likes:176,
+status:"Approved",
+image:"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80"
+}
+];
+
+grid.innerHTML = demoEntries.map(entry => `
+<div class="content-card">
+<img src="${entry.image}" alt="${escapeHTML(entry.name)}">
+<div class="content-card-body">
+<span class="badge">${escapeHTML(entry.status)}</span>
+<h4>${escapeHTML(entry.name)}</h4>
+<p>${entry.likes} hearts</p>
+<div class="toolbar">
+<button class="small-btn publish">Approve</button>
+<button class="small-btn edit">Finalist</button>
+<button class="small-btn delete">Remove</button>
+</div>
+</div>
 </div>
 `).join("");
 }
 
-function deleteAd(index){
-ads.splice(index,1);
-localStorage.setItem("ads", JSON.stringify(ads));
-renderAds();
+function loadMemberEntries(){
+renderGalleryAdmin();
+alert("Member entries refreshed in demo mode.");
 }
 
-function loadSavedIssue(){
-const savedTitle = localStorage.getItem("issueTitle");
-const savedDesc = localStorage.getItem("issueDesc");
-const savedCover = localStorage.getItem("coverPath");
-
-if(savedTitle){
-document.getElementById("issueTitle").value = savedTitle;
+function selectTopFive(){
+alert("Top 5 selected in demo mode based on current likes.");
 }
 
-if(savedDesc){
-document.getElementById("issueDesc").value = savedDesc;
+function saveSettings(){
+cms.settings = {
+title:getValue("settingTitle"),
+tagline:getValue("settingTagline"),
+featuredIssue:getValue("settingFeaturedIssue"),
+contact:getValue("settingContact"),
+homepageMessage:getValue("settingHomepageMessage"),
+allowComments:document.getElementById("settingComments").checked,
+allowMarketplace:document.getElementById("settingMarketplace").checked
+};
+
+addActivity("Settings updated","Magazine settings were saved.");
+
+saveAll(false);
+
+const success = document.getElementById("settingsSuccess");
+success.style.display = "block";
+
+setTimeout(() => {
+success.style.display = "none";
+},2500);
 }
 
-if(savedCover){
-document.getElementById("coverPath").value = savedCover;
-}
+function renderSettings(){
+document.getElementById("settingTitle").value = cms.settings.title || "";
+document.getElementById("settingTagline").value = cms.settings.tagline || "";
+document.getElementById("settingFeaturedIssue").value = cms.settings.featuredIssue || "";
+document.getElementById("settingContact").value = cms.settings.contact || "";
+document.getElementById("settingHomepageMessage").value = cms.settings.homepageMessage || "";
+document.getElementById("settingComments").checked = cms.settings.allowComments !== false;
+document.getElementById("settingMarketplace").checked = cms.settings.allowMarketplace !== false;
 }
 
-loadSavedIssue();
+function renderStats(){
+document.getElementById("statIssues").textContent = cms.issues.length;
+document.getElementById("statArticles").textContent = cms.articles.length;
+document.getElementById("statPhotos").textContent = cms.photos.length;
+document.getElementById("statContests").textContent = cms.contests.length;
+document.getElementById("statPartners").textContent = cms.partners.length;
+document.getElementById("statUsers").textContent = cms.users.length;
+}
+
+function renderAll(){
+renderStats();
+renderActivity();
+renderIssues();
 renderArticles();
+renderPhotos();
+renderCoverStars();
+renderContests();
+renderMarketplace();
+renderPartners();
 renderAds();
+renderCommunity();
+renderPlaces();
+renderComments();
+renderUsers();
+renderGalleryAdmin();
+renderSettings();
+}
+
+function exportData(){
+const blob = new Blob(
+[JSON.stringify(cms,null,2)],
+{type:"application/json"}
+);
+
+const url = URL.createObjectURL(blob);
+const link = document.createElement("a");
+
+link.href = url;
+link.download = "pets-dogue-cms-data.json";
+link.click();
+
+URL.revokeObjectURL(url);
+}
+
+function resetCMS(){
+if(!confirm("Delete all demo CMS data stored in this browser?")){
+return;
+}
+
+localStorage.removeItem(CMS_KEY);
+location.reload();
+}
+
+checkAdminLogin();
+loadCMS();
 </script>
 
 </body>
