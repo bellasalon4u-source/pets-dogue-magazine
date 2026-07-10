@@ -8,42 +8,394 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:#f8f7f3;color:#111}
-header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
+a{text-decoration:none;color:inherit}
+
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:20px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
 .logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
-.hero{height:560px;position:relative;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.18))}
-.hero-content{position:absolute;bottom:55px;left:50%;transform:translateX(-50%);text-align:center;color:white;width:90%}
-.hero-content h1{font-size:74px;font-family:Georgia,serif;margin-bottom:15px}
-.hero-content p{font-size:22px;line-height:1.8;max-width:900px;margin:auto}
-.section{max-width:1400px;margin:auto;padding:70px 20px}
-.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:50px}
-.featured-article{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;background:white;border:2px solid #111;border-radius:40px;overflow:hidden;margin-bottom:55px}
-.featured-article img{width:100%;height:100%;min-height:520px;object-fit:cover}
-.featured-content{padding:35px}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:14px}
-.featured-content h2{font-size:50px;font-family:Georgia,serif;margin-bottom:18px}
-.featured-content p{color:#555;line-height:1.8;font-size:18px;margin-bottom:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:30px}
-.article-card{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.article-card img{width:100%;height:300px;object-fit:cover}
-.article-content{padding:24px}
-.article-content h3{font-size:32px;font-family:Georgia,serif;margin-bottom:12px}
-.article-content p{color:#555;line-height:1.8;margin-bottom:15px}
-.meta{font-size:14px;color:#777;margin-bottom:12px}
-.btn{display:inline-block;background:#111;color:white;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:bold}
-.categories{display:flex;gap:12px;overflow-x:auto;padding-bottom:20px;margin-bottom:40px}
-.categories span{white-space:nowrap;background:white;border:2px solid #111;border-radius:999px;padding:12px 18px;font-weight:bold}
-.categories span.active{background:#111;color:white}
-.editor-note{background:#111;color:white;border-radius:40px;padding:55px 30px;text-align:center;margin-top:70px}
-.editor-note h2{font-size:48px;font-family:Georgia,serif;color:#d6aa45;margin-bottom:20px}
-.editor-note p{font-size:20px;line-height:1.8;max-width:900px;margin:auto}
-footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
-@media(max-width:800px){.hero{height:430px}.hero-content h1{font-size:48px}.hero-content p{font-size:18px}.section-title{font-size:40px}.featured-article{grid-template-columns:1fr}.featured-article img{min-height:340px}.featured-content h2{font-size:38px}}
+.logo-big{
+font-size:52px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+height:560px;
+position:relative;
+overflow:hidden;
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.18));
+}
+
+.hero-content{
+position:absolute;
+bottom:55px;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+color:white;
+width:90%;
+}
+
+.hero-content h1{
+font-size:74px;
+font-family:Georgia,serif;
+margin-bottom:15px;
+}
+
+.hero-content p{
+font-size:22px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+}
+
+.section{
+max-width:1400px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:18px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 45px;
+}
+
+.categories{
+display:flex;
+gap:12px;
+overflow-x:auto;
+padding-bottom:20px;
+margin-bottom:40px;
+}
+
+.category-button{
+white-space:nowrap;
+background:white;
+border:2px solid #111;
+border-radius:999px;
+padding:12px 18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.category-button.active{
+background:#111;
+color:white;
+}
+
+.search-panel{
+background:white;
+border:2px solid #111;
+border-radius:32px;
+padding:22px;
+margin-bottom:38px;
+display:grid;
+grid-template-columns:1fr auto;
+gap:12px;
+}
+
+.search-panel input{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:999px;
+font-size:16px;
+}
+
+.search-panel button{
+border:none;
+background:#c89b3c;
+color:white;
+padding:14px 24px;
+border-radius:999px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.featured-article{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:30px;
+background:white;
+border:2px solid #111;
+border-radius:40px;
+overflow:hidden;
+margin-bottom:55px;
+box-shadow:0 14px 40px rgba(0,0,0,.08);
+}
+
+.featured-article img{
+width:100%;
+height:100%;
+min-height:520px;
+object-fit:cover;
+}
+
+.featured-content{
+padding:35px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.badge{
+display:inline-block;
+width:max-content;
+background:#c89b3c;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:14px;
+}
+
+.featured-content h2{
+font-size:50px;
+font-family:Georgia,serif;
+margin-bottom:18px;
+}
+
+.featured-content p{
+color:#555;
+line-height:1.8;
+font-size:18px;
+margin-bottom:20px;
+}
+
+.meta{
+font-size:14px;
+color:#777;
+margin-bottom:14px;
+}
+
+.btn{
+display:inline-block;
+width:max-content;
+background:#111;
+color:white;
+padding:14px 20px;
+border-radius:999px;
+font-weight:bold;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+gap:30px;
+}
+
+.article-card{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+display:flex;
+flex-direction:column;
+}
+
+.article-card img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.article-content{
+padding:24px;
+display:flex;
+flex-direction:column;
+height:100%;
+}
+
+.article-content h3{
+font-size:32px;
+font-family:Georgia,serif;
+margin-bottom:12px;
+}
+
+.article-content p{
+color:#555;
+line-height:1.8;
+margin-bottom:15px;
+}
+
+.article-content .btn{
+margin-top:auto;
+}
+
+.empty-state{
+display:none;
+background:white;
+border:2px dashed #aaa;
+border-radius:30px;
+padding:42px;
+text-align:center;
+color:#666;
+}
+
+.empty-state h3{
+font-family:Georgia,serif;
+font-size:32px;
+margin-bottom:10px;
+}
+
+.editor-note{
+background:#111;
+color:white;
+border-radius:40px;
+padding:55px 30px;
+text-align:center;
+margin-top:70px;
+}
+
+.editor-note h2{
+font-size:48px;
+font-family:Georgia,serif;
+color:#d6aa45;
+margin-bottom:20px;
+}
+
+.editor-note p{
+font-size:20px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+}
+
+footer{
+margin-top:70px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.footer-links a{
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.article-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.74);
+z-index:5000;
+display:none;
+padding:25px;
+overflow-y:auto;
+}
+
+.article-modal.open{
+display:block;
+}
+
+.modal-card{
+max-width:950px;
+margin:30px auto;
+background:white;
+border-radius:34px;
+overflow:hidden;
+position:relative;
+}
+
+.modal-card img{
+width:100%;
+max-height:480px;
+object-fit:cover;
+display:block;
+}
+
+.modal-content{
+padding:35px;
+}
+
+.modal-content h2{
+font-family:Georgia,serif;
+font-size:48px;
+margin-bottom:14px;
+}
+
+.modal-body{
+color:#444;
+font-size:18px;
+line-height:1.9;
+white-space:pre-wrap;
+}
+
+.close-modal{
+position:absolute;
+top:18px;
+right:18px;
+width:44px;
+height:44px;
+border:none;
+border-radius:50%;
+background:#111;
+color:white;
+font-size:24px;
+cursor:pointer;
+}
+
+@media(max-width:800px){
+.hero{height:430px}
+.hero-content h1{font-size:48px}
+.hero-content p{font-size:18px}
+.section-title{font-size:40px}
+.featured-article{grid-template-columns:1fr}
+.featured-article img{min-height:340px}
+.featured-content h2{font-size:38px}
+.search-panel{grid-template-columns:1fr}
+.modal-content h2{font-size:36px}
+.logo-big{font-size:40px}
+}
 </style>
 </head>
 
@@ -55,8 +407,9 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 </header>
 
 <section class="hero">
-<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1800&q=80" alt="Articles">
+<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1800&q=80" alt="PETS & DOGUE Articles">
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
 <h1>Articles</h1>
 <p>
@@ -68,114 +421,42 @@ Editorial stories, interviews, guides and luxury animal lifestyle features from 
 <section class="section">
 
 <h2 class="section-title">Latest Articles</h2>
+<div class="gold-line"></div>
 
-<div class="categories">
-<span class="active">All</span>
-<span>Pet Fashion</span>
-<span>Wellness</span>
-<span>Travel</span>
-<span>Rescue Stories</span>
-<span>Interviews</span>
-<span>Pet Friendly Places</span>
-<span>Luxury Lifestyle</span>
-</div>
-
-<div class="featured-article">
-
-<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Miso">
-
-<div class="featured-content">
-<span class="badge">COVER STORY</span>
-<h2>Miso: The First DOGUE Cover Star</h2>
-<p>
-Our first issue begins with Miso — a small star with a luxury presence, soft elegance and unforgettable charm.
-</p>
-<p>
-This cover story introduces the spirit of PETS & DOGUE: beauty, personality, storytelling and love for animals.
-</p>
-<a href="issue-01.html" class="btn">Read Cover Story</a>
+<div class="search-panel">
+<input
+id="articleSearch"
+type="text"
+placeholder="Search by article, category or author..."
+oninput="renderArticles()">
+<button onclick="renderArticles()">Search</button>
 </div>
 
+<div class="categories" id="categoryButtons">
+<button class="category-button active" onclick="setCategory('All',this)">All</button>
+<button class="category-button" onclick="setCategory('Cover Story',this)">Cover Story</button>
+<button class="category-button" onclick="setCategory('Pet Fashion',this)">Pet Fashion</button>
+<button class="category-button" onclick="setCategory('Wellness',this)">Wellness</button>
+<button class="category-button" onclick="setCategory('Travel',this)">Travel</button>
+<button class="category-button" onclick="setCategory('Pets In Need',this)">Pets In Need</button>
+<button class="category-button" onclick="setCategory('Community',this)">Community</button>
+<button class="category-button" onclick="setCategory('Interviews',this)">Interviews</button>
 </div>
 
-<div class="grid">
+<div id="featuredContainer"></div>
 
-<div class="article-card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Fashion">
-<div class="article-content">
-<span class="badge">PET FASHION</span>
-<h3>Luxury Looks For Modern Pets</h3>
-<div class="meta">By PETS & DOGUE Editors · 4 min read</div>
-<p>From elegant accessories to seasonal style, pet fashion is becoming part of modern luxury lifestyle.</p>
-<a href="pet-fashion.html" class="btn">Read More</a>
-</div>
-</div>
+<div class="grid" id="articleGrid"></div>
 
-<div class="article-card">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Travel">
-<div class="article-content">
-<span class="badge">TRAVEL</span>
-<h3>The Rise Of Pet-Friendly Travel</h3>
-<div class="meta">Travel Desk · 5 min read</div>
-<p>Hotels, beaches, villas and cafés are becoming more welcoming to pets around the world.</p>
-<a href="pet-travel.html" class="btn">Read More</a>
-</div>
-</div>
-
-<div class="article-card">
-<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80" alt="Wellness">
-<div class="article-content">
-<span class="badge">WELLNESS</span>
-<h3>Daily Rituals For Happier Pets</h3>
-<div class="meta">Wellness · 3 min read</div>
-<p>Care, grooming, nutrition and calm routines create a better life for pets and their people.</p>
-<a href="wellness.html" class="btn">Read More</a>
-</div>
-</div>
-
-<div class="article-card">
-<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Rescue">
-<div class="article-content">
-<span class="badge">RESCUE STORY</span>
-<h3>Why Rescue Stories Matter</h3>
-<div class="meta">Community · 4 min read</div>
-<p>Visibility can change an animal's life. Stories help shelters, volunteers and future adopters connect.</p>
-<a href="pets-in-need.html" class="btn">Read More</a>
-</div>
-</div>
-
-<div class="article-card">
-<img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1200&q=80" alt="Volunteers">
-<div class="article-content">
-<span class="badge">VOLUNTEERS</span>
-<h3>The People Helping Animals</h3>
-<div class="meta">Volunteer Network · 6 min read</div>
-<p>From transport to photography, volunteers make rescue work more visible, beautiful and effective.</p>
-<a href="volunteer-network.html" class="btn">Read More</a>
-</div>
-</div>
-
-<div class="article-card">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Community">
-<div class="article-content">
-<span class="badge">LOCAL COMMUNITY</span>
-<h3>What Pet Owners Recommend Near You</h3>
-<div class="meta">Local · 3 min read</div>
-<p>Local posts, comments and hearts can help pet owners find trusted places, services and advice.</p>
-<a href="local-community.html" class="btn">Read More</a>
-</div>
-</div>
-
+<div class="empty-state" id="emptyState">
+<h3>No articles found</h3>
+<p>Try another category or search term.</p>
 </div>
 
 <div class="editor-note">
-
 <h2>Editorial Direction</h2>
-
 <p>
 PETS & DOGUE articles are created to feel like a luxury magazine: visual, useful, emotional and connected to real pet life — not just ordinary blog posts.
 </p>
-
 </div>
 
 </section>
@@ -190,12 +471,295 @@ PETS & DOGUE articles are created to feel like a luxury magazine: visual, useful
 <a href="pet-fashion.html">Pet Fashion</a>
 <a href="pet-travel.html">Pet Travel</a>
 <a href="wellness.html">Wellness</a>
+<a href="account.html">Account</a>
 <a href="privacy.html">Privacy</a>
 <a href="contact.html">Contact</a>
 </div>
 
 <a href="admin.html" class="admin-small">Admin</a>
 </footer>
+
+<div class="article-modal" id="articleModal" onclick="closeArticleFromOverlay(event)">
+<div class="modal-card">
+<button class="close-modal" onclick="closeArticle()">×</button>
+<img id="modalImage" alt="Article image">
+
+<div class="modal-content">
+<span class="badge" id="modalCategory"></span>
+<h2 id="modalTitle"></h2>
+<div class="meta" id="modalMeta"></div>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
+</div>
+
+<script>
+const CMS_KEY = "pets_dogue_cms_v1";
+let activeCategory = "All";
+let publicArticles = [];
+
+const fallbackArticles = [
+{
+id:"fallback-cover",
+title:"Miso: The First DOGUE Cover Star",
+author:"PETS & DOGUE Editors",
+category:"Cover Story",
+status:"Published",
+slug:"issue-01.html",
+excerpt:"Our first issue begins with Miso — a small star with a luxury presence, soft elegance and unforgettable charm.",
+body:"This cover story introduces the spirit of PETS & DOGUE: beauty, personality, storytelling and love for animals.",
+image:"file_00000000a9d471fda9b4629589be22a9.png"
+},
+{
+id:"fallback-fashion",
+title:"Luxury Looks For Modern Pets",
+author:"PETS & DOGUE Editors",
+category:"Pet Fashion",
+status:"Published",
+slug:"pet-fashion.html",
+excerpt:"From elegant accessories to seasonal style, pet fashion is becoming part of modern luxury lifestyle.",
+body:"PETS & DOGUE explores refined accessories, seasonal collections and modern style for animals.",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
+},
+{
+id:"fallback-travel",
+title:"The Rise Of Pet-Friendly Travel",
+author:"Travel Desk",
+category:"Travel",
+status:"Published",
+slug:"pet-travel.html",
+excerpt:"Hotels, beaches, villas and cafés are becoming more welcoming to pets around the world.",
+body:"Pet-friendly travel is changing. More hotels, destinations and restaurants now welcome animals with comfort and care.",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+},
+{
+id:"fallback-wellness",
+title:"Daily Rituals For Happier Pets",
+author:"Wellness Desk",
+category:"Wellness",
+status:"Published",
+slug:"wellness.html",
+excerpt:"Care, grooming, nutrition and calm routines create a better life for pets and their people.",
+body:"Small daily routines can improve comfort, confidence and wellbeing for both pets and owners.",
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80"
+},
+{
+id:"fallback-rescue",
+title:"Why Rescue Stories Matter",
+author:"Community Desk",
+category:"Pets In Need",
+status:"Published",
+slug:"pets-in-need.html",
+excerpt:"Visibility can change an animal's life. Stories help shelters, volunteers and future adopters connect.",
+body:"Responsible storytelling can bring attention, support and new homes to animals in need.",
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80"
+},
+{
+id:"fallback-community",
+title:"What Pet Owners Recommend Near You",
+author:"Local Community",
+category:"Community",
+status:"Published",
+slug:"local-community.html",
+excerpt:"Local posts, comments and hearts can help pet owners find trusted places, services and advice.",
+body:"Local recommendations can make everyday pet life easier, safer and more connected.",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80"
+}
+];
+
+function escapeHTML(value){
+return String(value || "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
+
+function loadArticles(){
+let cmsArticles = [];
+
+try{
+const savedCMS = JSON.parse(localStorage.getItem(CMS_KEY) || "{}");
+
+if(Array.isArray(savedCMS.articles)){
+cmsArticles = savedCMS.articles.filter(article => article.status === "Published");
+}
+}catch(error){
+console.error("Unable to read CMS articles",error);
+}
+
+publicArticles = [...cmsArticles,...fallbackArticles];
+renderArticles();
+}
+
+function setCategory(category,button){
+activeCategory = category;
+
+document.querySelectorAll(".category-button").forEach(item => {
+item.classList.remove("active");
+});
+
+button.classList.add("active");
+renderArticles();
+}
+
+function getFilteredArticles(){
+const query = document.getElementById("articleSearch").value.toLowerCase().trim();
+
+return publicArticles.filter(article => {
+const matchesCategory =
+activeCategory === "All" ||
+article.category === activeCategory;
+
+const searchableText = [
+article.title,
+article.author,
+article.category,
+article.excerpt,
+article.body
+].join(" ").toLowerCase();
+
+const matchesSearch =
+!query ||
+searchableText.includes(query);
+
+return matchesCategory && matchesSearch;
+});
+}
+
+function renderArticles(){
+const filtered = getFilteredArticles();
+const featuredContainer = document.getElementById("featuredContainer");
+const articleGrid = document.getElementById("articleGrid");
+const emptyState = document.getElementById("emptyState");
+
+featuredContainer.innerHTML = "";
+articleGrid.innerHTML = "";
+
+if(filtered.length === 0){
+emptyState.style.display = "block";
+return;
+}
+
+emptyState.style.display = "none";
+
+const featured = filtered[0];
+featuredContainer.innerHTML = createFeaturedArticle(featured);
+
+filtered.slice(1).forEach(article => {
+articleGrid.insertAdjacentHTML("beforeend",createArticleCard(article));
+});
+}
+
+function createFeaturedArticle(article){
+const image = article.image ||
+"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1400&q=80";
+
+return `
+<article class="featured-article">
+<img src="${image}" alt="${escapeHTML(article.title)}">
+
+<div class="featured-content">
+<span class="badge">${escapeHTML(article.category || "ARTICLE")}</span>
+<h2>${escapeHTML(article.title)}</h2>
+
+<div class="meta">
+By ${escapeHTML(article.author || "PETS & DOGUE Editors")}
+</div>
+
+<p>${escapeHTML(article.excerpt || "Discover the latest story from PETS & DOGUE.")}</p>
+
+<button class="btn" onclick="openArticle('${String(article.id)}')">
+Read Article
+</button>
+</div>
+</article>
+`;
+}
+
+function createArticleCard(article){
+const image = article.image ||
+"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80";
+
+return `
+<article class="article-card">
+<img src="${image}" alt="${escapeHTML(article.title)}">
+
+<div class="article-content">
+<span class="badge">${escapeHTML(article.category || "ARTICLE")}</span>
+<h3>${escapeHTML(article.title)}</h3>
+
+<div class="meta">
+By ${escapeHTML(article.author || "PETS & DOGUE Editors")}
+</div>
+
+<p>${escapeHTML(article.excerpt || "Read the latest PETS & DOGUE editorial story.")}</p>
+
+<button class="btn" onclick="openArticle('${String(article.id)}')">
+Read More
+</button>
+</div>
+</article>
+`;
+}
+
+function openArticle(id){
+const article = publicArticles.find(item => String(item.id) === String(id));
+
+if(!article){
+return;
+}
+
+document.getElementById("modalTitle").textContent = article.title || "Article";
+document.getElementById("modalCategory").textContent = article.category || "ARTICLE";
+
+document.getElementById("modalMeta").textContent =
+"By " + (article.author || "PETS & DOGUE Editors");
+
+document.getElementById("modalBody").textContent =
+article.body ||
+article.excerpt ||
+"Full article content will appear here.";
+
+const image = document.getElementById("modalImage");
+
+if(article.image){
+image.src = article.image;
+image.style.display = "block";
+}else{
+image.style.display = "none";
+}
+
+document.getElementById("articleModal").classList.add("open");
+document.body.style.overflow = "hidden";
+}
+
+function closeArticle(){
+document.getElementById("articleModal").classList.remove("open");
+document.body.style.overflow = "";
+}
+
+function closeArticleFromOverlay(event){
+if(event.target.id === "articleModal"){
+closeArticle();
+}
+}
+
+document.addEventListener("keydown",event => {
+if(event.key === "Escape"){
+closeArticle();
+}
+});
+
+window.addEventListener("storage",event => {
+if(event.key === CMS_KEY){
+loadArticles();
+}
+});
+
+loadArticles();
+</script>
 
 </body>
 </html>
