@@ -6,41 +6,561 @@
 <title>Partners & Discounts | PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
-.logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
-.hero{background:#111;color:white;text-align:center;padding:90px 20px;border-bottom:4px solid #c89b3c}
-.hero h1{font-size:66px;font-family:Georgia,serif;color:#d6aa45;margin-bottom:18px}
-.hero p{font-size:21px;line-height:1.8;max-width:900px;margin:auto}
-.section{max-width:1400px;margin:auto;padding:70px 20px}
-.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:45px}
-.club-box{background:white;border:2px solid #111;border-radius:40px;padding:40px;text-align:center;margin-bottom:60px}
-.club-box h2{font-family:Georgia,serif;font-size:46px;margin-bottom:18px}
-.club-box p{font-size:19px;color:#555;line-height:1.8;max-width:850px;margin:auto}
-.club-benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:30px}
-.benefit{background:#111;color:white;border-radius:25px;padding:22px;font-weight:bold}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:30px}
-.card{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.card img{width:100%;height:290px;object-fit:cover}
-.card-content{padding:25px}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:12px}
-.card h3{font-family:Georgia,serif;font-size:32px;margin-bottom:10px}
-.meta{color:#777;font-size:14px;margin-bottom:12px}
-.card p{color:#555;line-height:1.8;margin-bottom:18px}
-.discount{font-size:28px;font-weight:bold;color:#c89b3c;margin-bottom:18px}
-.actions{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;background:#111;color:white;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:bold}
-.btn.gold{background:#c89b3c}
-.note{background:#111;color:white;border-radius:40px;padding:55px 30px;text-align:center;margin-top:70px}
-.note h2{font-family:Georgia,serif;font-size:46px;color:#d6aa45;margin-bottom:20px}
-.note p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
-footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
-@media(max-width:768px){.hero h1{font-size:44px}.section-title{font-size:38px}.club-box h2{font-size:36px}}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:18px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:50px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+background:linear-gradient(135deg,#fff5fb,#f8f7f3,#ecfff0);
+text-align:center;
+padding:90px 20px;
+border-bottom:4px solid #c89b3c;
+position:relative;
+overflow:hidden;
+}
+
+.hero:before{
+content:"";
+position:absolute;
+inset:-40%;
+background:
+radial-gradient(circle,rgba(255,122,200,.22),transparent 35%),
+radial-gradient(circle at 80% 20%,rgba(101,229,31,.17),transparent 30%),
+radial-gradient(circle at 20% 80%,rgba(105,216,255,.22),transparent 30%);
+animation:heroGlow 12s ease infinite alternate;
+}
+
+@keyframes heroGlow{
+0%{transform:translateX(-20px) translateY(0)}
+100%{transform:translateX(20px) translateY(20px)}
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-size:68px;
+font-family:Georgia,serif;
+color:#c89b3c;
+margin-bottom:18px;
+}
+
+.hero p{
+font-size:21px;
+line-height:1.8;
+max-width:920px;
+margin:auto;
+color:#444;
+}
+
+.hero-actions{
+display:flex;
+justify-content:center;
+gap:14px;
+flex-wrap:wrap;
+margin-top:30px;
+}
+
+button,
+.btn{
+display:inline-block;
+border:none;
+cursor:pointer;
+padding:15px 24px;
+border-radius:999px;
+font-weight:bold;
+margin:5px;
+}
+
+.black{
+background:#111;
+color:white;
+}
+
+.gold{
+background:#c89b3c;
+color:white;
+}
+
+.green{
+background:#65e51f;
+color:white;
+box-shadow:0 0 18px rgba(101,229,31,.45);
+}
+
+.light{
+background:white;
+color:#111;
+border:2px solid #111;
+}
+
+main{
+max-width:1450px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:16px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 45px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:20px;
+margin-bottom:65px;
+}
+
+.stat{
+background:white;
+border:2px solid #111;
+border-radius:28px;
+padding:28px;
+text-align:center;
+box-shadow:0 12px 35px rgba(0,0,0,.07);
+}
+
+.stat strong{
+display:block;
+font-size:42px;
+font-family:Georgia,serif;
+color:#c89b3c;
+margin-bottom:8px;
+}
+
+.club-banner{
+background:white;
+border:3px solid #c89b3c;
+border-radius:42px;
+padding:45px 30px;
+text-align:center;
+margin-bottom:60px;
+box-shadow:0 0 30px rgba(200,155,60,.14);
+}
+
+.club-banner h2{
+font-family:Georgia,serif;
+font-size:46px;
+margin-bottom:16px;
+}
+
+.club-banner p{
+font-size:19px;
+line-height:1.8;
+color:#555;
+max-width:900px;
+margin:auto;
+}
+
+.club-benefits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-top:30px;
+}
+
+.club-benefit{
+background:#f8f7f3;
+border-radius:24px;
+padding:22px;
+font-weight:bold;
+}
+
+.search-panel{
+background:white;
+border:2px solid #111;
+border-radius:36px;
+padding:28px;
+margin-bottom:35px;
+}
+
+.search-grid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr auto;
+gap:14px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:16px;
+font-size:16px;
+margin-bottom:14px;
+}
+
+textarea{
+min-height:120px;
+resize:vertical;
+}
+
+.filters{
+display:flex;
+gap:10px;
+overflow-x:auto;
+margin-bottom:40px;
+padding-bottom:4px;
+}
+
+.filter{
+white-space:nowrap;
+background:white;
+border:2px solid #111;
+border-radius:999px;
+padding:11px 18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.filter.active{
+background:#111;
+color:white;
+}
+
+.partner-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+gap:28px;
+}
+
+.partner-card{
+background:white;
+border:2px solid #111;
+border-radius:36px;
+overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+transition:.25s;
+}
+
+.partner-card:hover{
+transform:translateY(-5px);
+}
+
+.partner-image{
+position:relative;
+}
+
+.partner-image img{
+width:100%;
+height:290px;
+object-fit:cover;
+display:block;
+}
+
+.logo-mark{
+position:absolute;
+left:20px;
+bottom:-28px;
+width:68px;
+height:68px;
+background:white;
+border:3px solid #c89b3c;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Georgia,serif;
+font-size:26px;
+font-weight:bold;
+color:#c89b3c;
+box-shadow:0 8px 22px rgba(0,0,0,.15);
+}
+
+.partner-content{
+padding:45px 24px 24px;
+}
+
+.badge-row{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:13px;
+}
+
+.badge{
+display:inline-block;
+background:#c89b3c;
+color:white;
+padding:8px 13px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+}
+
+.member-only{
+background:#65e51f;
+}
+
+.partner-card h3{
+font-family:Georgia,serif;
+font-size:32px;
+margin-bottom:8px;
+}
+
+.meta{
+font-size:14px;
+color:#777;
+line-height:1.6;
+margin-bottom:12px;
+}
+
+.rating{
+margin-bottom:12px;
+font-weight:bold;
+color:#b78a2e;
+}
+
+.partner-card p{
+color:#555;
+line-height:1.8;
+margin-bottom:16px;
+}
+
+.discount{
+font-size:28px;
+font-weight:bold;
+color:#c89b3c;
+margin-bottom:16px;
+}
+
+.promo-box{
+background:#f8f7f3;
+border:1px dashed #c89b3c;
+border-radius:18px;
+padding:14px;
+margin-bottom:16px;
+}
+
+.promo-code{
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.save-btn.saved{
+background:#65e51f;
+}
+
+.empty-state{
+display:none;
+background:white;
+border:2px dashed #999;
+border-radius:30px;
+padding:40px;
+text-align:center;
+color:#666;
+margin-top:25px;
+}
+
+.saved-section{
+margin-top:75px;
+}
+
+.saved-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
+}
+
+.saved-item{
+background:white;
+border:2px solid #111;
+border-radius:26px;
+padding:22px;
+}
+
+.saved-item h3{
+font-family:Georgia,serif;
+font-size:26px;
+margin-bottom:8px;
+}
+
+.apply-section{
+background:linear-gradient(135deg,#fff,#fff7dc,#f0fff3);
+border:3px solid #c89b3c;
+border-radius:44px;
+padding:50px 30px;
+margin-top:80px;
+}
+
+.apply-section h2{
+font-family:Georgia,serif;
+font-size:48px;
+text-align:center;
+margin-bottom:16px;
+}
+
+.apply-section>p{
+text-align:center;
+font-size:19px;
+line-height:1.8;
+color:#555;
+max-width:900px;
+margin:0 auto 32px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:15px;
+}
+
+.checkbox{
+display:flex;
+gap:10px;
+align-items:flex-start;
+color:#555;
+margin:5px 0 15px;
+}
+
+.checkbox input{
+width:auto;
+margin:3px 0 0;
+}
+
+.success-message{
+display:none;
+background:#ecfff0;
+border:2px solid #65e51f;
+border-radius:22px;
+padding:20px;
+margin-top:20px;
+font-weight:bold;
+text-align:center;
+}
+
+.partner-note{
+background:#111;
+color:white;
+border-radius:42px;
+padding:50px 30px;
+text-align:center;
+margin-top:70px;
+}
+
+.partner-note h2{
+font-family:Georgia,serif;
+font-size:46px;
+color:#d6aa45;
+margin-bottom:16px;
+}
+
+.partner-note p{
+font-size:19px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+color:#eee;
+}
+
+footer{
+margin-top:75px;
+padding:48px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:16px;
+margin-top:20px;
+}
+
+.footer-links a{
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+@media(max-width:900px){
+.search-grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:44px;
+}
+
+.section-title{
+font-size:38px;
+}
+
+.logo-big{
+font-size:40px;
+}
+
+.apply-section h2,
+.club-banner h2,
+.partner-note h2{
+font-size:36px;
+}
+}
 </style>
 </head>
 
@@ -52,151 +572,486 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 </header>
 
 <section class="hero">
+<div class="hero-content">
+
 <h1>Partners & Discounts</h1>
+
 <p>
-Exclusive offers, shopping links and partner benefits for PETS & DOGUE readers and future club members.
+Discover curated pet brands, hotels, groomers, cafés, photographers, clinics and lifestyle partners selected for the PETS & DOGUE community.
 </p>
+
+<div class="hero-actions">
+<a href="#directory" class="btn green">Explore Partners</a>
+<a href="#apply" class="btn gold">Become A Partner</a>
+<a href="club.html" class="btn black">Join The Club</a>
+</div>
+
+</div>
 </section>
 
-<section class="section">
+<main>
 
-<div class="club-box">
+<section class="stats">
 
-<h2>PETS & DOGUE CLUB Benefits</h2>
+<div class="stat">
+<strong>150+</strong>
+Partners Worldwide
+</div>
+
+<div class="stat">
+<strong>25%</strong>
+Member Savings
+</div>
+
+<div class="stat">
+<strong>12</strong>
+Partner Categories
+</div>
+
+<div class="stat">
+<strong>30+</strong>
+Cities
+</div>
+
+</section>
+
+<section class="club-banner">
+
+<h2>PETS & DOGUE Club Benefits</h2>
 
 <p>
-Members will unlock special discounts from selected partners: pet boutiques, groomers,
-hotels, photographers, wellness services, cafés, clinics and lifestyle brands.
+Club members unlock selected partner discounts, private promo codes, priority offers and future digital member-card benefits.
 </p>
 
 <div class="club-benefits">
-<div class="benefit">Member discounts</div>
-<div class="benefit">QR member card</div>
-<div class="benefit">Partner promo codes</div>
-<div class="benefit">Priority offers</div>
+<div class="club-benefit">💚 Member-only discounts</div>
+<div class="club-benefit">🎟 Digital QR member card</div>
+<div class="club-benefit">🎁 Private promo codes</div>
+<div class="club-benefit">👑 Priority partner offers</div>
 </div>
 
+<br>
+
+<a href="club.html" class="btn green">Join PETS & DOGUE Club</a>
+
+</section>
+
+<section id="directory">
+
+<h2 class="section-title">Partner Directory</h2>
+<div class="gold-line"></div>
+
+<section class="search-panel">
+
+<div class="search-grid">
+
+<input
+id="searchInput"
+type="text"
+placeholder="Search brand, service, city or category..."
+oninput="searchPartners()">
+
+<select id="categorySearch" onchange="searchPartners()">
+<option>All Categories</option>
+<option>Pet Fashion</option>
+<option>Grooming</option>
+<option>Hotels</option>
+<option>Photography</option>
+<option>Wellness</option>
+<option>Pet Friendly</option>
+</select>
+
+<select id="locationSearch" onchange="searchPartners()">
+<option>All Locations</option>
+<option>London</option>
+<option>Bournemouth</option>
+<option>UK & Europe</option>
+<option>Online</option>
+</select>
+
+<button class="gold" onclick="searchPartners()">Search</button>
+
 </div>
 
-<h2 class="section-title">Featured Partner Offers</h2>
+</section>
 
-<div class="grid">
+<div class="filters">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Pet fashion">
-<div class="card-content">
+<button class="filter active" onclick="filterCategory(this,'All')">All</button>
+<button class="filter" onclick="filterCategory(this,'Pet Fashion')">Pet Fashion</button>
+<button class="filter" onclick="filterCategory(this,'Grooming')">Grooming</button>
+<button class="filter" onclick="filterCategory(this,'Hotels')">Hotels</button>
+<button class="filter" onclick="filterCategory(this,'Photography')">Photography</button>
+<button class="filter" onclick="filterCategory(this,'Wellness')">Wellness</button>
+<button class="filter" onclick="filterCategory(this,'Pet Friendly')">Pet Friendly</button>
+
+</div>
+
+<section class="partner-grid" id="partnerGrid">
+
+<article
+class="partner-card"
+data-name="Luxury Pet Boutique"
+data-category="Pet Fashion"
+data-location="Online"
+data-search="luxury pet boutique fashion accessories collars bows carriers online">
+
+<div class="partner-image">
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Luxury Pet Boutique">
+<div class="logo-mark">LP</div>
+</div>
+
+<div class="partner-content">
+
+<div class="badge-row">
 <span class="badge">PET FASHION</span>
+<span class="badge member-only">MEMBERS ONLY</span>
+</div>
+
 <h3>Luxury Pet Boutique</h3>
-<div class="meta">Online store · Accessories & fashion</div>
-<p>Designer collars, bows, carriers and seasonal fashion for stylish pets.</p>
+
+<div class="meta">Online · Accessories & fashion</div>
+
+<div class="rating">★★★★★ 4.9</div>
+
+<p>
+Designer collars, bows, carriers and seasonal fashion for stylish pets.
+</p>
+
 <div class="discount">10% OFF</div>
+
+<div class="promo-box">
+Club code: <span class="promo-code">DOGUE10</span>
+</div>
+
 <div class="actions">
 <a href="#" class="btn gold">Shop Now</a>
-<a href="pet-fashion.html" class="btn">View Fashion</a>
-</div>
-</div>
+<a href="pet-fashion.html" class="btn black">View Fashion</a>
+<button class="btn light save-btn" onclick="savePartner(this)">♡ Save</button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80" alt="Grooming">
-<div class="card-content">
+</div>
+</article>
+
+<article
+class="partner-card"
+data-name="Premium Grooming Studio"
+data-category="Grooming"
+data-location="London"
+data-search="premium grooming studio london spa coat care">
+
+<div class="partner-image">
+<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80" alt="Premium Grooming Studio">
+<div class="logo-mark">PG</div>
+</div>
+
+<div class="partner-content">
+
+<div class="badge-row">
 <span class="badge">GROOMING</span>
+<span class="badge member-only">MEMBERS ONLY</span>
+</div>
+
 <h3>Premium Grooming Studio</h3>
+
 <div class="meta">London · Grooming & spa</div>
-<p>Luxury grooming, coat care and beauty rituals from trusted professionals.</p>
+
+<div class="rating">★★★★★ 4.8</div>
+
+<p>
+Luxury grooming, coat care and beauty rituals from experienced professionals.
+</p>
+
 <div class="discount">15% OFF</div>
+
+<div class="promo-box">
+Club code: <span class="promo-code">DOGUESPA15</span>
+</div>
+
 <div class="actions">
 <a href="#" class="btn gold">Book Service</a>
-<a href="wellness.html" class="btn">Wellness</a>
-</div>
-</div>
+<a href="wellness.html" class="btn black">Wellness</a>
+<button class="btn light save-btn" onclick="savePartner(this)">♡ Save</button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" alt="Hotel">
-<div class="card-content">
-<span class="badge">TRAVEL</span>
+</div>
+</article>
+
+<article
+class="partner-card"
+data-name="Pet Friendly Hotel"
+data-category="Hotels"
+data-location="UK & Europe"
+data-search="pet friendly hotel uk europe travel stays">
+
+<div class="partner-image">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" alt="Pet Friendly Hotel">
+<div class="logo-mark">PH</div>
+</div>
+
+<div class="partner-content">
+
+<div class="badge-row">
+<span class="badge">HOTELS</span>
+<span class="badge member-only">MEMBERS ONLY</span>
+</div>
+
 <h3>Pet-Friendly Hotel</h3>
+
 <div class="meta">UK & Europe · Travel partner</div>
-<p>Stylish stays, pet welcome packs and premium travel experiences.</p>
+
+<div class="rating">★★★★★ 4.9</div>
+
+<p>
+Elegant stays, pet welcome packs and premium travel experiences.
+</p>
+
 <div class="discount">12% OFF</div>
+
+<div class="promo-box">
+Club code: <span class="promo-code">STAYDOGUE12</span>
+</div>
+
 <div class="actions">
 <a href="#" class="btn gold">Book Stay</a>
-<a href="pet-travel.html" class="btn">Travel</a>
-</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80" alt="Vet wellness">
-<div class="card-content">
-<span class="badge">WELLNESS</span>
-<h3>Pet Wellness Partner</h3>
-<div class="meta">Clinics & wellness services</div>
-<p>Selected wellness providers, health checks and care services for pets.</p>
-<div class="discount">Member offer</div>
-<div class="actions">
-<a href="#" class="btn gold">View Offer</a>
-<a href="wellness.html" class="btn">Wellness</a>
-</div>
-</div>
+<a href="pet-travel.html" class="btn black">Travel</a>
+<button class="btn light save-btn" onclick="savePartner(this)">♡ Save</button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Photography">
-<div class="card-content">
+</div>
+</article>
+
+<article
+class="partner-card"
+data-name="Pet Portrait Studio"
+data-category="Photography"
+data-location="London"
+data-search="pet portrait studio photography london editorial cover shoot">
+
+<div class="partner-image">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Pet Portrait Studio">
+<div class="logo-mark">PS</div>
+</div>
+
+<div class="partner-content">
+
+<div class="badge-row">
 <span class="badge">PHOTOGRAPHY</span>
+<span class="badge member-only">MEMBERS ONLY</span>
+</div>
+
 <h3>Pet Portrait Studio</h3>
-<div class="meta">Editorial portraits · Cover-style shoots</div>
-<p>Luxury pet photography for portraits, social media and cover star applications.</p>
+
+<div class="meta">London · Editorial pet portraits</div>
+
+<div class="rating">★★★★★ 5.0</div>
+
+<p>
+Luxury pet photography for portraits, social media and cover applications.
+</p>
+
 <div class="discount">20% OFF</div>
+
+<div class="promo-box">
+Club code: <span class="promo-code">COVERSTAR20</span>
+</div>
+
 <div class="actions">
 <a href="#" class="btn gold">Book Shoot</a>
-<a href="photos.html" class="btn">Photos</a>
-</div>
-</div>
+<a href="photos.html" class="btn black">Photos</a>
+<button class="btn light save-btn" onclick="savePartner(this)">♡ Save</button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80" alt="Cafe">
-<div class="card-content">
+</div>
+</article>
+
+<article
+class="partner-card"
+data-name="Pet Wellness Partner"
+data-category="Wellness"
+data-location="Bournemouth"
+data-search="pet wellness partner clinic health care bournemouth">
+
+<div class="partner-image">
+<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80" alt="Pet Wellness Partner">
+<div class="logo-mark">PW</div>
+</div>
+
+<div class="partner-content">
+
+<div class="badge-row">
+<span class="badge">WELLNESS</span>
+</div>
+
+<h3>Pet Wellness Partner</h3>
+
+<div class="meta">Bournemouth · Wellness services</div>
+
+<div class="rating">★★★★☆ 4.7</div>
+
+<p>
+Selected health checks, consultations and everyday care services.
+</p>
+
+<div class="discount">Member Offer</div>
+
+<div class="promo-box">
+Show your PETS & DOGUE member card.
+</div>
+
+<div class="actions">
+<a href="#" class="btn gold">View Offer</a>
+<a href="wellness.html" class="btn black">Wellness</a>
+<button class="btn light save-btn" onclick="savePartner(this)">♡ Save</button>
+</div>
+
+</div>
+</article>
+
+<article
+class="partner-card"
+data-name="Dog Friendly Cafe"
+data-category="Pet Friendly"
+data-location="Bournemouth"
+data-search="dog friendly cafe bournemouth food coffee treat">
+
+<div class="partner-image">
+<img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80" alt="Dog Friendly Cafe">
+<div class="logo-mark">DC</div>
+</div>
+
+<div class="partner-content">
+
+<div class="badge-row">
 <span class="badge">PET FRIENDLY</span>
+</div>
+
 <h3>Dog-Friendly Café</h3>
-<div class="meta">Local places · Food & coffee</div>
-<p>Pet-friendly cafés and local places where animals are welcome.</p>
-<div class="discount">Free treat</div>
+
+<div class="meta">Bournemouth · Food & coffee</div>
+
+<div class="rating">★★★★★ 4.8</div>
+
+<p>
+A welcoming local café with water bowls, pet seating and complimentary treats.
+</p>
+
+<div class="discount">Free Treat</div>
+
+<div class="promo-box">
+Show your digital member card.
+</div>
+
 <div class="actions">
 <a href="#" class="btn gold">Visit Place</a>
-<a href="pet-friendly-places.html" class="btn">Places</a>
+<a href="pet-friendly-places.html" class="btn black">Places</a>
+<button class="btn light save-btn" onclick="savePartner(this)">♡ Save</button>
 </div>
+
+</div>
+</article>
+
+</section>
+
+<div class="empty-state" id="emptyState">
+<h3>No partners found</h3>
+<p>Try another category, location or search term.</p>
+</div>
+
+</section>
+
+<section class="saved-section">
+
+<h2 class="section-title">Saved Partners</h2>
+<div class="gold-line"></div>
+
+<div class="saved-list" id="savedList">
+<div class="saved-item" id="savedPlaceholder">
+<h3>Your favourites will appear here</h3>
+<p>Tap “Save” on any partner card.</p>
 </div>
 </div>
 
-</div>
+</section>
 
-<div class="note">
+<section class="apply-section" id="apply">
 
 <h2>Become A PETS & DOGUE Partner</h2>
 
 <p>
-Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can join PETS & DOGUE as advertising or discount partners.
+Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can apply for advertising, directory placement and member-discount partnerships.
 </p>
 
-<div class="actions" style="justify-content:center;margin-top:28px;">
-<a href="media-kit.html" class="btn gold">View Media Kit</a>
-<a href="contact.html" class="btn">Contact Us</a>
+<div class="form-grid">
+
+<input id="businessName" type="text" placeholder="Business name">
+
+<input id="contactName" type="text" placeholder="Contact name">
+
+<input id="businessEmail" type="email" placeholder="Business email">
+
+<input id="businessWebsite" type="url" placeholder="Website or social link">
+
+<select id="businessCategory">
+<option value="">Choose category</option>
+<option>Pet Fashion</option>
+<option>Grooming</option>
+<option>Hotels</option>
+<option>Photography</option>
+<option>Wellness</option>
+<option>Pet Friendly</option>
+<option>Other</option>
+</select>
+
+<input id="businessLocation" type="text" placeholder="City / country">
+
 </div>
 
+<textarea id="businessMessage" placeholder="Tell us about your business and the offer you would like to provide..."></textarea>
+
+<label class="checkbox">
+<input id="businessAgree" type="checkbox">
+<span>I confirm that the information is accurate and I agree to be contacted about a PETS & DOGUE partnership.</span>
+</label>
+
+<button class="green" onclick="submitPartnerApplication()">Submit Application</button>
+
+<a href="media-kit.html" class="btn gold">View Media Kit</a>
+
+<div class="success-message" id="successMessage">
+Your partnership application has been received in demo mode.
 </div>
 
 </section>
 
+<section class="partner-note">
+
+<h2>Luxury Visibility With Purpose</h2>
+
+<p>
+PETS & DOGUE connects premium animal lifestyle brands with a community that values design, care, travel, wellness and responsible pet ownership.
+</p>
+
+<br>
+
+<a href="advertise.html" class="btn gold">Advertise With Us</a>
+<a href="contact.html" class="btn light">Contact PETS & DOGUE</a>
+
+</section>
+
+</main>
+
 <footer>
+
 <h2>PETS & DOGUE</h2>
+
 <p>The International Luxury Animal Magazine</p>
 
 <div class="footer-links">
 <a href="index.html">Home</a>
+<a href="club.html">Club</a>
+<a href="account.html">Account</a>
+<a href="pet-marketplace.html">Marketplace</a>
 <a href="advertise.html">Advertise</a>
 <a href="media-kit.html">Media Kit</a>
 <a href="privacy.html">Privacy</a>
@@ -205,7 +1060,189 @@ Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can 
 </div>
 
 <a href="admin.html" class="admin-small">Admin</a>
+
 </footer>
+
+<script>
+let activeCategory = "All";
+let savedPartners = JSON.parse(localStorage.getItem("pd_saved_partners") || "[]");
+
+function filterCategory(button,category){
+activeCategory = category;
+
+document.querySelectorAll(".filter").forEach(item => {
+item.classList.remove("active");
+});
+
+button.classList.add("active");
+searchPartners();
+}
+
+function searchPartners(){
+const query = document.getElementById("searchInput").value.toLowerCase().trim();
+const categorySearch = document.getElementById("categorySearch").value;
+const locationSearch = document.getElementById("locationSearch").value;
+
+let visibleCount = 0;
+
+document.querySelectorAll(".partner-card").forEach(card => {
+const name = card.dataset.name;
+const category = card.dataset.category;
+const location = card.dataset.location;
+const searchText = (card.dataset.search + " " + card.innerText).toLowerCase();
+
+const matchesActive =
+activeCategory === "All" ||
+category === activeCategory;
+
+const matchesCategory =
+categorySearch === "All Categories" ||
+category === categorySearch;
+
+const matchesLocation =
+locationSearch === "All Locations" ||
+location.includes(locationSearch);
+
+const matchesQuery =
+query === "" ||
+searchText.includes(query);
+
+const visible =
+matchesActive &&
+matchesCategory &&
+matchesLocation &&
+matchesQuery;
+
+card.style.display = visible ? "block" : "none";
+
+if(visible){
+visibleCount++;
+}
+});
+
+document.getElementById("emptyState").style.display =
+visibleCount === 0 ? "block" : "none";
+}
+
+function savePartner(button){
+const card = button.closest(".partner-card");
+const name = card.dataset.name;
+const category = card.dataset.category;
+const location = card.dataset.location;
+
+const existingIndex = savedPartners.findIndex(item => item.name === name);
+
+if(existingIndex >= 0){
+savedPartners.splice(existingIndex,1);
+button.classList.remove("saved");
+button.textContent = "♡ Save";
+}else{
+savedPartners.push({name,category,location});
+button.classList.add("saved");
+button.textContent = "♥ Saved";
+}
+
+localStorage.setItem("pd_saved_partners",JSON.stringify(savedPartners));
+renderSavedPartners();
+}
+
+function renderSavedPartners(){
+const savedList = document.getElementById("savedList");
+savedList.innerHTML = "";
+
+if(savedPartners.length === 0){
+savedList.innerHTML = `
+<div class="saved-item">
+<h3>Your favourites will appear here</h3>
+<p>Tap “Save” on any partner card.</p>
+</div>
+`;
+}else{
+savedPartners.forEach(item => {
+const savedItem = document.createElement("div");
+savedItem.className = "saved-item";
+
+savedItem.innerHTML = `
+<h3>${item.name}</h3>
+<p>${item.category} · ${item.location}</p>
+<button class="btn black" onclick="removeSavedPartner('${item.name.replace(/'/g,"\\'")}')">Remove</button>
+`;
+
+savedList.appendChild(savedItem);
+});
+}
+
+document.querySelectorAll(".partner-card").forEach(card => {
+const button = card.querySelector(".save-btn");
+
+if(savedPartners.some(item => item.name === card.dataset.name)){
+button.classList.add("saved");
+button.textContent = "♥ Saved";
+}
+});
+}
+
+function removeSavedPartner(name){
+savedPartners = savedPartners.filter(item => item.name !== name);
+
+localStorage.setItem("pd_saved_partners",JSON.stringify(savedPartners));
+
+renderSavedPartners();
+}
+
+function submitPartnerApplication(){
+const businessName = document.getElementById("businessName").value.trim();
+const contactName = document.getElementById("contactName").value.trim();
+const businessEmail = document.getElementById("businessEmail").value.trim();
+const category = document.getElementById("businessCategory").value;
+const agree = document.getElementById("businessAgree").checked;
+
+if(!businessName || !contactName || !businessEmail || !category){
+alert("Please complete the required business details.");
+return;
+}
+
+if(!agree){
+alert("Please confirm that the information is accurate.");
+return;
+}
+
+const application = {
+businessName,
+contactName,
+businessEmail,
+website:document.getElementById("businessWebsite").value.trim(),
+category,
+location:document.getElementById("businessLocation").value.trim(),
+message:document.getElementById("businessMessage").value.trim(),
+submittedAt:new Date().toISOString()
+};
+
+const applications =
+JSON.parse(localStorage.getItem("pd_partner_applications") || "[]");
+
+applications.push(application);
+
+localStorage.setItem(
+"pd_partner_applications",
+JSON.stringify(applications)
+);
+
+document.getElementById("successMessage").style.display = "block";
+
+document.getElementById("businessName").value = "";
+document.getElementById("contactName").value = "";
+document.getElementById("businessEmail").value = "";
+document.getElementById("businessWebsite").value = "";
+document.getElementById("businessCategory").value = "";
+document.getElementById("businessLocation").value = "";
+document.getElementById("businessMessage").value = "";
+document.getElementById("businessAgree").checked = false;
+}
+
+renderSavedPartners();
+searchPartners();
+</script>
 
 </body>
 </html>
