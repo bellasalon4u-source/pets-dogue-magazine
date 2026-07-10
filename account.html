@@ -3,12 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Account | PETS & DOGUE</title>
+
+<title>My Account | PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-a{text-decoration:none;color:inherit}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
 
 header{
 background:white;
@@ -29,296 +44,254 @@ color:#b78a2e;
 font-size:50px;
 font-family:Georgia,serif;
 font-weight:bold;
-color:#c89b3c;
 letter-spacing:4px;
+color:#c89b3c;
 }
 
 .hero{
-background:linear-gradient(135deg,#fff5fb,#f8f7f3,#ecfff0);
+padding:90px 20px;
 text-align:center;
-padding:85px 20px;
+background:
+linear-gradient(135deg,#fff5fb,#f8f7f3,#eefcef);
 border-bottom:4px solid #c89b3c;
 }
 
 .hero h1{
 font-family:Georgia,serif;
-font-size:64px;
+font-size:66px;
 color:#c89b3c;
 margin-bottom:18px;
 }
 
 .hero p{
-font-size:20px;
-line-height:1.8;
 max-width:900px;
 margin:auto;
-color:#444;
+font-size:20px;
+line-height:1.8;
+color:#555;
 }
 
 main{
-max-width:1400px;
+max-width:1450px;
 margin:auto;
-padding:60px 20px;
+padding:70px 20px;
 }
 
 .section-title{
-font-size:50px;
+font-size:52px;
 font-family:Georgia,serif;
 text-align:center;
-margin-bottom:18px;
+margin-bottom:16px;
 }
 
 .gold-line{
 width:90px;
 height:3px;
 background:#c89b3c;
-margin:0 auto 45px;
+margin:0 auto 50px;
 }
 
-.account-grid{
+.account-layout{
 display:grid;
-grid-template-columns:1fr 1.2fr;
-gap:30px;
+grid-template-columns:420px 1fr;
+gap:35px;
 align-items:start;
+}
+
+.card{
+background:white;
+border:2px solid #111;
+border-radius:36px;
+padding:30px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.avatar{
+width:150px;
+height:150px;
+border-radius:50%;
+border:5px solid #c89b3c;
+object-fit:cover;
+display:block;
+margin:auto;
+background:#eee;
+}
+
+.profile-name{
+font-family:Georgia,serif;
+font-size:42px;
+text-align:center;
+margin-top:20px;
+}
+
+.member-badge{
+display:inline-block;
+margin:15px auto;
+padding:10px 18px;
+border-radius:999px;
+background:#65e51f;
+color:white;
+font-weight:bold;
+box-shadow:0 0 18px rgba(101,229,31,.4);
+}
+
+.center{
+text-align:center;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+margin-top:25px;
+}
+
+.stat{
+background:#fafafa;
+border-radius:20px;
+padding:20px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+.stat strong{
+display:block;
+font-size:30px;
+font-family:Georgia,serif;
+color:#c89b3c;
+margin-bottom:6px;
+}
+
+.member-card{
+margin-top:30px;
+background:#111;
+color:white;
+border-radius:30px;
+padding:25px;
+border:3px solid #c89b3c;
+}
+
+.member-card h2{
+font-family:Georgia,serif;
+font-size:32px;
+color:#d6aa45;
+margin-bottom:15px;
+}
+
+.qr{
+width:110px;
+height:110px;
+background:
+linear-gradient(90deg,#111 10px,transparent 10px),
+linear-gradient(#111 10px,transparent 10px);
+background-size:22px 22px;
+background-color:white;
+border:10px solid white;
+margin-top:18px;
+}
+
+.dashboard{
+display:grid;
+gap:28px;
 }
 
 .panel{
 background:white;
 border:2px solid #111;
 border-radius:36px;
-padding:30px;
-box-shadow:0 12px 35px rgba(0,0,0,.08);
+padding:28px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
 }
 
 .panel h2{
 font-family:Georgia,serif;
 font-size:38px;
-margin-bottom:18px;
-}
-
-.tabs{
-display:flex;
-gap:10px;
 margin-bottom:20px;
-flex-wrap:wrap;
 }
 
-.tab{
-background:white;
-border:2px solid #111;
-padding:12px 18px;
-border-radius:999px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.tab.active{
-background:#111;
-color:white;
-}
-
-input,select,textarea{
+input,
+textarea,
+select{
 width:100%;
 padding:15px;
 border:1px solid #ccc;
 border-radius:16px;
+margin-bottom:15px;
 font-size:16px;
-margin-bottom:14px;
 }
 
 textarea{
-min-height:100px;
+min-height:110px;
 resize:vertical;
 }
 
-button,.btn{
-background:#111;
-color:white;
+button,
+.btn{
+display:inline-block;
 border:none;
-padding:15px 22px;
+cursor:pointer;
+padding:15px 24px;
 border-radius:999px;
 font-weight:bold;
-cursor:pointer;
-display:inline-block;
-margin:6px 6px 6px 0;
-}
-
-.gold{
-background:#c89b3c;
+margin:5px;
 }
 
 .green{
 background:#65e51f;
-box-shadow:0 0 18px rgba(101,229,31,.55);
-}
-
-.light{
-background:white;
-color:#111;
-border:1px solid #111;
-}
-
-.profile-card{
-background:linear-gradient(135deg,#fff,#fff7dc,#f0fff3);
-border:2px solid #111;
-border-radius:36px;
-padding:30px;
-box-shadow:0 12px 35px rgba(0,0,0,.08);
-}
-
-.avatar{
-width:125px;
-height:125px;
-border-radius:50%;
-border:4px solid #c89b3c;
-object-fit:cover;
-display:block;
-margin:0 auto 18px;
-background:#f8f7f3;
-}
-
-.profile-card h2{
-font-family:Georgia,serif;
-font-size:40px;
-text-align:center;
-margin-bottom:8px;
-}
-
-.status{
-display:block;
-width:max-content;
-margin:0 auto 18px;
-background:#65e51f;
 color:white;
-padding:9px 16px;
-border-radius:999px;
-font-weight:bold;
 box-shadow:0 0 18px rgba(101,229,31,.45);
 }
 
-.profile-info{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:14px;
-margin-top:24px;
-}
-
-.info-box{
-background:white;
-border:1px solid #ddd;
-border-radius:22px;
-padding:18px;
-text-align:center;
-}
-
-.info-box strong{
-display:block;
-font-family:Georgia,serif;
-font-size:28px;
-color:#c89b3c;
-margin-bottom:6px;
-}
-
-.member-card{
-background:#111;
-color:white;
-border-radius:32px;
-padding:28px;
-margin-top:30px;
-border:3px solid #c89b3c;
-}
-
-.member-card h3{
-font-family:Georgia,serif;
-font-size:32px;
-color:#d6aa45;
-margin-bottom:12px;
-}
-
-.qr{
-width:105px;
-height:105px;
-background:
-linear-gradient(90deg,#111 10px,transparent 10px),
-linear-gradient(#111 10px,transparent 10px);
-background-size:21px 21px;
-border:10px solid white;
-background-color:white;
-margin-top:18px;
-}
-
-.dashboard{
-margin-top:60px;
-}
-
-.dashboard-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:26px;
-}
-
-.dash-card{
-background:white;
-border:2px solid #111;
-border-radius:32px;
-overflow:hidden;
-box-shadow:0 12px 35px rgba(0,0,0,.08);
-}
-
-.dash-card img{
-width:100%;
-height:240px;
-object-fit:cover;
-}
-
-.dash-content{
-padding:24px;
-}
-
-.badge{
-display:inline-block;
+.gold{
 background:#c89b3c;
 color:white;
-padding:8px 14px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
-margin-bottom:14px;
 }
 
-.dash-content h3{
+.black{
+background:#111;
+color:white;
+}
+
+.pet-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:18px;
+margin-top:25px;
+}
+
+.pet-card{
+border:2px solid #111;
+border-radius:28px;
+padding:20px;
+background:#fafafa;
+}
+
+.pet-card h3{
 font-family:Georgia,serif;
-font-size:30px;
+font-size:28px;
 margin-bottom:10px;
 }
 
-.dash-content p{
-color:#555;
-line-height:1.8;
-margin-bottom:16px;
-}
-
-.quick-links{
+.quick-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:18px;
-margin-top:35px;
+margin-top:25px;
 }
 
 .quick-link{
 background:white;
 border:2px solid #111;
-border-radius:26px;
-padding:22px;
-font-weight:bold;
+border-radius:24px;
+padding:24px;
 text-align:center;
-box-shadow:0 12px 35px rgba(0,0,0,.06);
+font-weight:bold;
 }
 
 footer{
-margin-top:70px;
-padding:45px 20px;
+margin-top:80px;
 background:white;
+padding:45px;
 text-align:center;
 border-top:1px solid #ddd;
 }
@@ -327,12 +300,11 @@ border-top:1px solid #ddd;
 display:flex;
 justify-content:center;
 flex-wrap:wrap;
-gap:15px;
-margin-top:20px;
+gap:18px;
+margin-top:18px;
 }
 
 .footer-links a{
-text-decoration:none;
 color:#666;
 font-size:14px;
 }
@@ -342,216 +314,442 @@ display:block;
 margin-top:22px;
 font-size:11px;
 color:#999;
-text-decoration:none;
 letter-spacing:2px;
 text-transform:uppercase;
 }
 
-@media(max-width:900px){
-.account-grid{
+@media(max-width:950px){
+
+.account-layout{
 grid-template-columns:1fr;
 }
+
 .hero h1{
-font-size:42px;
+font-size:44px;
 }
+
 .section-title{
 font-size:38px;
 }
+
 .logo-big{
 font-size:40px;
 }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <div class="logo-small">pets &</div>
+
 <div class="logo-big">DOGUE</div>
+
 </header>
 
 <section class="hero">
+
 <h1>My Account</h1>
+
 <p>
-Sign in, create your PETS & DOGUE profile, manage your pets, gallery entries, marketplace listings and member card.
+
+Manage your PETS & DOGUE profile, pets, marketplace listings,
+gallery entries and Club membership.
+
 </p>
+
 </section>
 
 <main>
 
-<section class="account-grid">
+<div class="account-layout"> <div class="card">
 
-<div class="panel">
+<img
+id="avatar"
+class="avatar"
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80">
 
-<h2>Member Access</h2>
+<h2
+class="profile-name"
+id="profileName">
+Guest Member
+</h2>
 
-<div class="tabs">
-<button class="tab active" onclick="showTab('signin',this)">Sign In</button>
-<button class="tab" onclick="showTab('register',this)">Create Account</button>
-</div>
+<div class="center">
 
-<div id="signinBox">
-<input id="signinEmail" type="email" placeholder="Email address">
-<input id="signinPassword" type="password" placeholder="Password">
-<button class="green" onclick="signIn()">Sign In</button>
-<a href="club.html" class="btn gold">Upgrade To Club</a>
-</div>
-
-<div id="registerBox" style="display:none;">
-<input id="registerName" type="text" placeholder="Your name">
-<input id="registerEmail" type="email" placeholder="Email address">
-<input id="registerPassword" type="password" placeholder="Password">
-<input id="registerPet" type="text" placeholder="Pet name">
-<select id="registerStatus">
-<option>Free Reader</option>
-<option>Club Member</option>
-</select>
-<button class="green" onclick="createAccount()">Create Account</button>
-</div>
+<span
+class="member-badge"
+id="memberStatus">
+Free Reader
+</span>
 
 </div>
 
-<div class="profile-card">
+<input
+id="avatarUpload"
+type="file"
+accept="image/*"
+onchange="changeAvatar(event)">
 
-<img id="avatar" class="avatar" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80">
+<div class="stats">
 
-<h2 id="profileName">Guest Member</h2>
-<span class="status" id="profileStatus">Free Reader</span>
+<div class="stat">
+<strong id="likesValue">328</strong>
+Hearts
+</div>
 
-<input id="avatarUpload" type="file" accept="image/*" onchange="changeAvatar(event)">
+<div class="stat">
+<strong id="postsValue">4</strong>
+Posts
+</div>
 
-<div class="profile-info">
-<div class="info-box"><strong id="likesCount">328</strong>Hearts</div>
-<div class="info-box"><strong id="postsCount">3</strong>Posts</div>
-<div class="info-box"><strong id="petsCount">1</strong>Pets</div>
-<div class="info-box"><strong id="rankCount">#4</strong>Rank</div>
+<div class="stat">
+<strong id="petsValue">1</strong>
+Pets
+</div>
+
+<div class="stat">
+<strong id="listingValue">2</strong>
+Listings
+</div>
+
 </div>
 
 <div class="member-card">
-<h3>PETS & DOGUE MEMBER CARD</h3>
-<p><strong>Name:</strong> <span id="cardName">Guest Member</span></p>
-<p><strong>Status:</strong> <span id="cardStatus">Free Reader</span></p>
-<p><strong>Access:</strong> Gallery · Marketplace · Club Benefits</p>
+
+<h2>PETS & DOGUE CLUB</h2>
+
+<p>
+<strong>Name:</strong>
+<span id="cardName">
+Guest Member
+</span>
+</p>
+
+<p>
+<strong>Status:</strong>
+<span id="cardStatus">
+Free Reader
+</span>
+</p>
+
+<p>
+<strong>Member ID:</strong>
+PD-000001
+</p>
+
+<p>
+Gallery • Marketplace • Community • Club
+</p>
+
 <div class="qr"></div>
-</div>
 
-</div>
-
-</section>
-
-<section class="dashboard">
-
-<h2 class="section-title">My Dashboard</h2>
-<div class="gold-line"></div>
-
-<div class="dashboard-grid">
-
-<div class="dash-card">
-<img src="file_00000000a9d471fda9b4629589be22a9.png">
-<div class="dash-content">
-<span class="badge">MY PET</span>
-<h3 id="petCardName">Miso</h3>
-<p>Manage your pet profile, story, photos and future DOGUE features.</p>
-<a href="members-gallery.html" class="btn gold">Open Gallery</a>
-</div>
-</div>
-
-<div class="dash-card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80">
-<div class="dash-content">
-<span class="badge">GALLERY</span>
-<h3>My Cover Entry</h3>
-<p>Track hearts, comments and your position in the next issue competition.</p>
-<a href="members-gallery.html" class="btn gold">View Entry</a>
-</div>
-</div>
-
-<div class="dash-card">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80">
-<div class="dash-content">
-<span class="badge">MARKETPLACE</span>
-<h3>My Listings</h3>
-<p>Manage responsible listings, adoption posts, services and accessories.</p>
-<a href="pet-marketplace.html" class="btn gold">Open Marketplace</a>
-</div>
 </div>
 
 </div>
 
-<div class="quick-links">
-<a href="club.html" class="quick-link">💚 Upgrade Membership</a>
-<a href="members-gallery.html" class="quick-link">👑 Enter Cover Competition</a>
-<a href="pet-marketplace.html" class="quick-link">🛍 Publish Marketplace Listing</a>
-<a href="local-community.html" class="quick-link">📍 Local Community</a>
-<a href="contests.html" class="quick-link">🏆 Contests</a>
-<a href="wellness.html" class="quick-link">🩺 Wellness</a>
+<div class="dashboard">
+
+<div class="panel">
+
+<h2>Account</h2>
+
+<input
+id="userName"
+type="text"
+placeholder="Your Name">
+
+<input
+id="petName"
+type="text"
+placeholder="Pet Name">
+
+<select id="membership">
+
+<option>Free Reader</option>
+<option>Club Monthly</option>
+<option>Club Yearly</option>
+
+</select>
+
+<button
+class="green"
+onclick="saveProfile()">
+Save Profile
+</button>
+
+<button
+class="gold"
+onclick="loadProfile()">
+Load Profile
+</button>
+
+<button
+class="black"
+onclick="logout()">
+Log Out
+</button>
+
 </div>
 
-</section>
+<div class="panel">
 
-</main>
+<h2>My Pets</h2>
 
-<footer>
+<input
+id="newPetName"
+placeholder="Pet Name">
+
+<input
+id="newBreed"
+placeholder="Breed">
+
+<textarea
+id="newStory"
+placeholder="Short Story">
+</textarea>
+
+<button
+class="green"
+onclick="addPet()">
+Add Pet
+</button>
+
+<div
+class="pet-list"
+id="petList">
+
+<div class="pet-card">
+
+<h3>Miso</h3>
+
+<p>
+Pomeranian
+</p>
+
+<p>
+First PETS & DOGUE cover star.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Quick Access</h2>
+
+<div class="quick-grid">
+
+<a
+href="members-gallery.html"
+class="quick-link">
+👑
+<br><br>
+Members Gallery
+</a>
+
+<a
+href="pet-marketplace.html"
+class="quick-link">
+🛍
+<br><br>
+Marketplace
+</a>
+
+<a
+href="club.html"
+class="quick-link">
+💚
+<br><br>
+Club
+</a>
+
+<a
+href="local-community.html"
+class="quick-link">
+📍
+<br><br>
+Community
+</a>
+
+<a
+href="contests.html"
+class="quick-link">
+🏆
+<br><br>
+Contests
+</a>
+
+<a
+href="wellness.html"
+class="quick-link">
+🩺
+<br><br>
+Wellness
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main> <footer>
+
 <h2>PETS & DOGUE</h2>
+
 <p>The International Luxury Animal Magazine</p>
 
 <div class="footer-links">
+
 <a href="index.html">Home</a>
+
 <a href="club.html">Club</a>
-<a href="members-gallery.html">Members Gallery</a>
+
+<a href="members-gallery.html">Gallery</a>
+
 <a href="pet-marketplace.html">Marketplace</a>
+
 <a href="privacy.html">Privacy</a>
+
 <a href="contact.html">Contact</a>
+
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a
+href="admin.html"
+class="admin-small">
+Admin
+</a>
+
 </footer>
 
 <script>
-function showTab(tab,button){
-document.querySelectorAll(".tab").forEach(item => item.classList.remove("active"));
-button.classList.add("active");
 
-document.getElementById("signinBox").style.display = tab === "signin" ? "block" : "none";
-document.getElementById("registerBox").style.display = tab === "register" ? "block" : "none";
+loadProfile();
+
+function saveProfile(){
+
+const data={
+
+name:document.getElementById("userName").value,
+
+pet:document.getElementById("petName").value,
+
+status:document.getElementById("membership").value,
+
+avatar:document.getElementById("avatar").src
+
+};
+
+localStorage.setItem("pd_profile",JSON.stringify(data));
+
+document.getElementById("profileName").textContent=data.name||"Guest Member";
+document.getElementById("cardName").textContent=data.name||"Guest Member";
+
+document.getElementById("memberStatus").textContent=data.status;
+document.getElementById("cardStatus").textContent=data.status;
+
+alert("Profile saved.");
+
 }
 
-function signIn(){
-const email = document.getElementById("signinEmail").value || "member@petsdogue.com";
-document.getElementById("profileName").textContent = email.split("@")[0];
-document.getElementById("cardName").textContent = email.split("@")[0];
-document.getElementById("profileStatus").textContent = "Club Member";
-document.getElementById("cardStatus").textContent = "Club Member";
-alert("Signed in demo mode.");
+function loadProfile(){
+
+const saved=localStorage.getItem("pd_profile");
+
+if(!saved)return;
+
+const data=JSON.parse(saved);
+
+document.getElementById("userName").value=data.name||"";
+document.getElementById("petName").value=data.pet||"";
+document.getElementById("membership").value=data.status||"Free Reader";
+
+document.getElementById("profileName").textContent=data.name||"Guest Member";
+document.getElementById("cardName").textContent=data.name||"Guest Member";
+
+document.getElementById("memberStatus").textContent=data.status||"Free Reader";
+document.getElementById("cardStatus").textContent=data.status||"Free Reader";
+
+if(data.avatar){
+document.getElementById("avatar").src=data.avatar;
 }
 
-function createAccount(){
-const name = document.getElementById("registerName").value || "New Member";
-const pet = document.getElementById("registerPet").value || "Your Pet";
-const status = document.getElementById("registerStatus").value;
+}
 
-document.getElementById("profileName").textContent = name;
-document.getElementById("cardName").textContent = name;
-document.getElementById("profileStatus").textContent = status;
-document.getElementById("cardStatus").textContent = status;
-document.getElementById("petCardName").textContent = pet;
+function logout(){
 
-alert("Account created in demo mode.");
+localStorage.removeItem("pd_profile");
+
+location.reload();
+
 }
 
 function changeAvatar(event){
-const file = event.target.files[0];
-if(!file){return;}
 
-const reader = new FileReader();
+const file=event.target.files[0];
 
-reader.onload = function(e){
-document.getElementById("avatar").src = e.target.result;
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById("avatar").src=e.target.result;
+
 };
 
 reader.readAsDataURL(file);
+
 }
+
+function addPet(){
+
+const name=document.getElementById("newPetName").value;
+
+const breed=document.getElementById("newBreed").value;
+
+const story=document.getElementById("newStory").value;
+
+if(name==="")return;
+
+const card=document.createElement("div");
+
+card.className="pet-card";
+
+card.innerHTML=`
+
+<h3>${name}</h3>
+
+<p>${breed}</p>
+
+<p>${story}</p>
+
+`;
+
+document.getElementById("petList").appendChild(card);
+
+document.getElementById("petsValue").textContent=
+
+Number(document.getElementById("petsValue").textContent)+1;
+
+document.getElementById("newPetName").value="";
+document.getElementById("newBreed").value="";
+document.getElementById("newStory").value="";
+
+}
+
 </script>
 
 </body>
