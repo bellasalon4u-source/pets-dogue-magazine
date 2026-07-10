@@ -6,37 +6,445 @@
 <title>Photos | PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
-.logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
-.hero{height:560px;position:relative;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.18))}
-.hero-content{position:absolute;bottom:55px;left:50%;transform:translateX(-50%);text-align:center;color:white;width:90%}
-.hero-content h1{font-size:74px;font-family:Georgia,serif;margin-bottom:15px}
-.hero-content p{font-size:22px;line-height:1.8;max-width:900px;margin:auto}
-.section{max-width:1400px;margin:auto;padding:70px 20px}
-.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:50px}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
-.photo-card{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.photo-card img{width:100%;height:380px;object-fit:cover}
-.photo-content{padding:22px}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:12px}
-.photo-content h3{font-size:30px;font-family:Georgia,serif;margin-bottom:10px}
-.photo-content p{color:#555;line-height:1.7;margin-bottom:14px}
-.meta{display:flex;justify-content:space-between;align-items:center;color:#777;font-size:14px}
-.heart{cursor:pointer;font-weight:bold;color:#111}
-.feature{background:#111;color:white;border-radius:40px;padding:60px 30px;text-align:center;margin-top:80px}
-.feature h2{font-size:52px;font-family:Georgia,serif;color:#d6aa45;margin-bottom:20px}
-.feature p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
-.feature a{display:inline-block;margin-top:30px;background:white;color:#111;padding:18px 30px;border-radius:999px;font-weight:bold;text-decoration:none}
-footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
-@media(max-width:768px){.hero{height:430px}.hero-content h1{font-size:48px}.hero-content p{font-size:18px}.section-title{font-size:40px}.photo-card img{height:320px}}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+select{
+font:inherit;
+}
+
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:20px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:52px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+height:560px;
+position:relative;
+overflow:hidden;
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.18));
+}
+
+.hero-content{
+position:absolute;
+bottom:55px;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+color:white;
+width:90%;
+}
+
+.hero-content h1{
+font-size:74px;
+font-family:Georgia,serif;
+margin-bottom:15px;
+}
+
+.hero-content p{
+font-size:22px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+}
+
+.section{
+max-width:1400px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:18px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 45px;
+}
+
+.search-panel{
+background:white;
+border:2px solid #111;
+border-radius:32px;
+padding:22px;
+margin-bottom:30px;
+display:grid;
+grid-template-columns:2fr 1fr auto;
+gap:12px;
+}
+
+.search-panel input,
+.search-panel select{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:999px;
+font-size:16px;
+}
+
+.search-panel button{
+border:none;
+background:#c89b3c;
+color:white;
+padding:14px 24px;
+border-radius:999px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.categories{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:18px;
+margin-bottom:35px;
+}
+
+.category-button{
+white-space:nowrap;
+background:white;
+border:2px solid #111;
+border-radius:999px;
+padding:11px 18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.category-button.active{
+background:#111;
+color:white;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.photo-card{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+transition:.25s;
+}
+
+.photo-card:hover{
+transform:translateY(-5px);
+}
+
+.photo-image{
+position:relative;
+cursor:pointer;
+overflow:hidden;
+}
+
+.photo-image img{
+width:100%;
+height:380px;
+object-fit:cover;
+display:block;
+transition:.35s;
+}
+
+.photo-card:hover .photo-image img{
+transform:scale(1.03);
+}
+
+.zoom-label{
+position:absolute;
+right:16px;
+bottom:16px;
+background:rgba(0,0,0,.72);
+color:white;
+padding:9px 13px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+}
+
+.photo-content{
+padding:22px;
+}
+
+.badge{
+display:inline-block;
+background:#c89b3c;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.photo-content h3{
+font-size:30px;
+font-family:Georgia,serif;
+margin-bottom:10px;
+}
+
+.photo-content p{
+color:#555;
+line-height:1.7;
+margin-bottom:14px;
+}
+
+.meta{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:14px;
+color:#777;
+font-size:14px;
+}
+
+.heart{
+cursor:pointer;
+font-weight:bold;
+color:#111;
+border:none;
+background:transparent;
+padding:0;
+}
+
+.heart.liked{
+color:#d52c59;
+}
+
+.empty-state{
+display:none;
+background:white;
+border:2px dashed #aaa;
+border-radius:30px;
+padding:42px;
+text-align:center;
+color:#666;
+}
+
+.empty-state h3{
+font-family:Georgia,serif;
+font-size:32px;
+margin-bottom:10px;
+}
+
+.feature{
+background:#111;
+color:white;
+border-radius:40px;
+padding:60px 30px;
+text-align:center;
+margin-top:80px;
+}
+
+.feature h2{
+font-size:52px;
+font-family:Georgia,serif;
+color:#d6aa45;
+margin-bottom:20px;
+}
+
+.feature p{
+font-size:20px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+}
+
+.feature a{
+display:inline-block;
+margin-top:30px;
+background:white;
+color:#111;
+padding:18px 30px;
+border-radius:999px;
+font-weight:bold;
+}
+
+footer{
+margin-top:70px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.footer-links a{
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.88);
+z-index:5000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:25px;
+}
+
+.lightbox.open{
+display:flex;
+}
+
+.lightbox-card{
+width:min(1050px,100%);
+max-height:92vh;
+background:white;
+border-radius:32px;
+overflow:auto;
+position:relative;
+}
+
+.lightbox-card img{
+width:100%;
+max-height:70vh;
+object-fit:contain;
+background:#111;
+display:block;
+}
+
+.lightbox-content{
+padding:28px;
+}
+
+.lightbox-content h2{
+font-family:Georgia,serif;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.lightbox-content p{
+color:#555;
+font-size:17px;
+line-height:1.8;
+}
+
+.lightbox-close{
+position:absolute;
+right:18px;
+top:18px;
+width:46px;
+height:46px;
+border:none;
+border-radius:50%;
+background:#111;
+color:white;
+font-size:24px;
+cursor:pointer;
+z-index:2;
+}
+
+@media(max-width:768px){
+
+.hero{
+height:430px;
+}
+
+.hero-content h1{
+font-size:48px;
+}
+
+.hero-content p{
+font-size:18px;
+}
+
+.section-title{
+font-size:40px;
+}
+
+.photo-image img{
+height:320px;
+}
+
+.search-panel{
+grid-template-columns:1fr;
+}
+
+.logo-big{
+font-size:40px;
+}
+
+.lightbox-content h2{
+font-size:34px;
+}
+
+.feature h2{
+font-size:40px;
+}
+
+}
 </style>
 </head>
 
@@ -48,100 +456,95 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 </header>
 
 <section class="hero">
-<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1800&q=80" alt="Photos">
+
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1800&q=80"
+alt="PETS & DOGUE Photos">
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
+
 <h1>Photos</h1>
+
 <p>
 Editorial galleries, cover portraits, community submissions and unforgettable animal photography.
 </p>
+
 </div>
+
 </section>
 
 <section class="section">
 
 <h2 class="section-title">Photo Gallery</h2>
+<div class="gold-line"></div>
 
-<div class="gallery">
+<div class="search-panel">
 
-<div class="photo-card">
-<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Miso">
-<div class="photo-content">
-<span class="badge">COVER PHOTO</span>
-<h3>Miso For Issue 01</h3>
-<p>The first PETS & DOGUE cover portrait and the beginning of our luxury animal magazine story.</p>
-<div class="meta">
-<span>📸 Editorial</span>
-<span class="heart" onclick="likePhoto(this)">❤️ <span>128</span></span>
-</div>
-</div>
-</div>
+<input
+id="photoSearch"
+type="text"
+placeholder="Search by title, photographer, category or caption..."
+oninput="renderPhotos()">
 
-<div class="photo-card">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Dogs">
-<div class="photo-content">
-<span class="badge">COMMUNITY</span>
-<h3>Golden Walk</h3>
-<p>A beautiful community moment celebrating friendship, movement and animal joy.</p>
-<div class="meta">
-<span>📍 Local</span>
-<span class="heart" onclick="likePhoto(this)">❤️ <span>96</span></span>
-</div>
-</div>
+<select id="categorySearch" onchange="renderPhotos()">
+<option value="All">All Categories</option>
+<option value="Cover Photo">Cover Photo</option>
+<option value="Editorial">Editorial</option>
+<option value="Portrait">Portrait</option>
+<option value="Community">Community</option>
+<option value="Fashion">Fashion</option>
+<option value="Travel">Travel</option>
+<option value="Rescue">Rescue</option>
+<option value="Exotic">Exotic</option>
+</select>
+
+<button onclick="renderPhotos()">Search</button>
+
 </div>
 
-<div class="photo-card">
-<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80" alt="Cat">
-<div class="photo-content">
-<span class="badge">PORTRAIT</span>
-<h3>Soft Elegance</h3>
-<p>A quiet portrait full of character, grace and feline beauty.</p>
-<div class="meta">
-<span>📸 Portrait</span>
-<span class="heart" onclick="likePhoto(this)">❤️ <span>74</span></span>
-</div>
-</div>
+<div class="categories">
+
+<button class="category-button active" onclick="setCategory('All',this)">
+All
+</button>
+
+<button class="category-button" onclick="setCategory('Cover Photo',this)">
+Cover Photos
+</button>
+
+<button class="category-button" onclick="setCategory('Editorial',this)">
+Editorial
+</button>
+
+<button class="category-button" onclick="setCategory('Portrait',this)">
+Portraits
+</button>
+
+<button class="category-button" onclick="setCategory('Community',this)">
+Community
+</button>
+
+<button class="category-button" onclick="setCategory('Fashion',this)">
+Fashion
+</button>
+
+<button class="category-button" onclick="setCategory('Travel',this)">
+Travel
+</button>
+
+<button class="category-button" onclick="setCategory('Rescue',this)">
+Rescue
+</button>
+
 </div>
 
-<div class="photo-card">
-<img src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=1200&q=80" alt="Bird">
-<div class="photo-content">
-<span class="badge">EXOTIC</span>
-<h3>Colour & Freedom</h3>
-<p>A vibrant animal portrait selected for its colour, light and editorial atmosphere.</p>
-<div class="meta">
-<span>🌿 Exotic</span>
-<span class="heart" onclick="likePhoto(this)">❤️ <span>82</span></span>
-</div>
-</div>
-</div>
+<div class="gallery" id="photoGallery"></div>
 
-<div class="photo-card">
-<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80" alt="Dog">
-<div class="photo-content">
-<span class="badge">MODEL</span>
-<h3>Little Star</h3>
-<p>A stylish pet portrait with cover-star potential and charming personality.</p>
-<div class="meta">
-<span>👑 Model</span>
-<span class="heart" onclick="likePhoto(this)">❤️ <span>112</span></span>
-</div>
-</div>
-</div>
-
-<div class="photo-card">
-<img src="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=1200&q=80" alt="Dog portrait">
-<div class="photo-content">
-<span class="badge">HALL OF FAME</span>
-<h3>Forever Icon</h3>
-<p>Photography that captures loyalty, soul and the deep bond between animals and people.</p>
-<div class="meta">
-<span>🏆 Fame</span>
-<span class="heart" onclick="likePhoto(this)">❤️ <span>143</span></span>
-</div>
-</div>
-</div>
-
+<div class="empty-state" id="emptyState">
+<h3>No photographs found</h3>
+<p>Try another category or search term.</p>
 </div>
 
 <div class="feature">
@@ -152,7 +555,9 @@ Editorial galleries, cover portraits, community submissions and unforgettable an
 PETS & DOGUE welcomes beautiful pet photography, rescue stories, fashion portraits and unforgettable animal moments for future features.
 </p>
 
-<a href="submit-pet.html">Submit Photo</a>
+<a href="submit-pet.html">
+Submit Photo
+</a>
 
 </div>
 
@@ -161,26 +566,425 @@ PETS & DOGUE welcomes beautiful pet photography, rescue stories, fashion portrai
 <footer>
 
 <h2>PETS & DOGUE</h2>
+
 <p>The International Luxury Animal Magazine</p>
 
 <div class="footer-links">
 <a href="index.html">Home</a>
 <a href="articles.html">Articles</a>
 <a href="cover-stars.html">Cover Stars</a>
+<a href="members-gallery.html">Members Gallery</a>
 <a href="hall-of-fame.html">Hall Of Fame</a>
+<a href="account.html">Account</a>
 <a href="privacy.html">Privacy</a>
 <a href="contact.html">Contact</a>
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a href="admin.html" class="admin-small">
+Admin
+</a>
 
 </footer>
 
+<div class="lightbox" id="lightbox" onclick="closeLightboxFromOverlay(event)">
+
+<div class="lightbox-card">
+
+<button class="lightbox-close" onclick="closeLightbox()">
+×
+</button>
+
+<img id="lightboxImage" alt="Selected photograph">
+
+<div class="lightbox-content">
+
+<span class="badge" id="lightboxCategory"></span>
+
+<h2 id="lightboxTitle"></h2>
+
+<p id="lightboxMeta"></p>
+
+<br>
+
+<p id="lightboxCaption"></p>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
-function likePhoto(element){
-const count = element.querySelector("span");
-count.textContent = Number(count.textContent) + 1;
+const CMS_KEY = "pets_dogue_cms_v1";
+const LIKES_KEY = "pets_dogue_photo_likes";
+const LIKED_KEY = "pets_dogue_photo_liked";
+
+let activeCategory = "All";
+let publicPhotos = [];
+let photoLikes = JSON.parse(localStorage.getItem(LIKES_KEY) || "{}");
+let likedPhotos = JSON.parse(localStorage.getItem(LIKED_KEY) || "{}");
+
+const fallbackPhotos = [
+{
+id:"fallback-miso",
+title:"Miso For Issue 01",
+photographer:"PETS & DOGUE Editorial",
+category:"Cover Photo",
+caption:"The first PETS & DOGUE cover portrait and the beginning of our luxury animal magazine story.",
+image:"file_00000000a9d471fda9b4629589be22a9.png",
+likes:128
+},
+{
+id:"fallback-golden",
+title:"Golden Walk",
+photographer:"Community",
+category:"Community",
+caption:"A beautiful community moment celebrating friendship, movement and animal joy.",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
+likes:96
+},
+{
+id:"fallback-cat",
+title:"Soft Elegance",
+photographer:"Portrait Studio",
+category:"Portrait",
+caption:"A quiet portrait full of character, grace and feline beauty.",
+image:"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1200&q=80",
+likes:74
+},
+{
+id:"fallback-bird",
+title:"Colour & Freedom",
+photographer:"Nature Desk",
+category:"Exotic",
+caption:"A vibrant animal portrait selected for its colour, light and editorial atmosphere.",
+image:"https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=1200&q=80",
+likes:82
+},
+{
+id:"fallback-star",
+title:"Little Star",
+photographer:"PETS & DOGUE Studio",
+category:"Editorial",
+caption:"A stylish pet portrait with cover-star potential and charming personality.",
+image:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80",
+likes:112
+},
+{
+id:"fallback-icon",
+title:"Forever Icon",
+photographer:"Hall Of Fame",
+category:"Portrait",
+caption:"Photography that captures loyalty, soul and the deep bond between animals and people.",
+image:"https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=1200&q=80",
+likes:143
 }
+];
+
+function escapeHTML(value){
+return String(value || "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
+
+function loadPhotos(){
+
+let cmsPhotos = [];
+
+try{
+
+const cms = JSON.parse(localStorage.getItem(CMS_KEY) || "{}");
+
+if(Array.isArray(cms.photos)){
+
+cmsPhotos = cms.photos
+.filter(photo => photo.image)
+.map(photo => ({
+...photo,
+category:photo.category || "Editorial",
+photographer:photo.photographer || "PETS & DOGUE Editorial",
+likes:0
+}));
+
+}
+
+}catch(error){
+
+console.error("Unable to read CMS photo library.",error);
+
+}
+
+publicPhotos = [...cmsPhotos,...fallbackPhotos];
+
+renderPhotos();
+
+}
+
+function setCategory(category,button){
+
+activeCategory = category;
+
+document.querySelectorAll(".category-button").forEach(item => {
+item.classList.remove("active");
+});
+
+button.classList.add("active");
+
+document.getElementById("categorySearch").value =
+category === "All" ? "All" : category;
+
+renderPhotos();
+
+}
+
+function getFilteredPhotos(){
+
+const query =
+document.getElementById("photoSearch").value
+.toLowerCase()
+.trim();
+
+const selectedCategory =
+document.getElementById("categorySearch").value;
+
+return publicPhotos.filter(photo => {
+
+const category = photo.category || "Editorial";
+
+const matchesActive =
+activeCategory === "All" ||
+category === activeCategory;
+
+const matchesSelect =
+selectedCategory === "All" ||
+category === selectedCategory;
+
+const searchableText = [
+photo.title,
+photo.photographer,
+photo.category,
+photo.caption
+].join(" ").toLowerCase();
+
+const matchesSearch =
+!query ||
+searchableText.includes(query);
+
+return matchesActive && matchesSelect && matchesSearch;
+
+});
+
+}
+
+function renderPhotos(){
+
+const gallery = document.getElementById("photoGallery");
+const emptyState = document.getElementById("emptyState");
+
+const photos = getFilteredPhotos();
+
+gallery.innerHTML = "";
+
+if(photos.length === 0){
+
+emptyState.style.display = "block";
+return;
+
+}
+
+emptyState.style.display = "none";
+
+photos.forEach(photo => {
+
+gallery.insertAdjacentHTML(
+"beforeend",
+createPhotoCard(photo)
+);
+
+});
+
+}
+
+function createPhotoCard(photo){
+
+const id = String(photo.id);
+
+const initialLikes =
+photoLikes[id] !== undefined
+? photoLikes[id]
+: Number(photo.likes || 0);
+
+const liked = Boolean(likedPhotos[id]);
+
+const image =
+photo.image ||
+"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80";
+
+return `
+<article class="photo-card">
+
+<div class="photo-image" onclick="openLightbox('${escapeHTML(id)}')">
+
+<img
+src="${image}"
+alt="${escapeHTML(photo.title || "PETS & DOGUE Photograph")}">
+
+<span class="zoom-label">
+View Photo
+</span>
+
+</div>
+
+<div class="photo-content">
+
+<span class="badge">
+${escapeHTML(photo.category || "PHOTO")}
+</span>
+
+<h3>
+${escapeHTML(photo.title || "Untitled Photograph")}
+</h3>
+
+<p>
+${escapeHTML(photo.caption || "Editorial photography from PETS & DOGUE.")}
+</p>
+
+<div class="meta">
+
+<span>
+📸 ${escapeHTML(photo.photographer || "PETS & DOGUE")}
+</span>
+
+<button
+class="heart ${liked ? "liked" : ""}"
+onclick="likePhoto('${escapeHTML(id)}',this)">
+❤️ <span>${initialLikes}</span>
+</button>
+
+</div>
+
+</div>
+
+</article>
+`;
+
+}
+
+function likePhoto(id,button){
+
+const photo = publicPhotos.find(item => String(item.id) === String(id));
+
+if(!photo){
+return;
+}
+
+const currentLikes =
+photoLikes[id] !== undefined
+? Number(photoLikes[id])
+: Number(photo.likes || 0);
+
+if(likedPhotos[id]){
+
+photoLikes[id] = Math.max(0,currentLikes - 1);
+likedPhotos[id] = false;
+
+button.classList.remove("liked");
+
+}else{
+
+photoLikes[id] = currentLikes + 1;
+likedPhotos[id] = true;
+
+button.classList.add("liked");
+
+}
+
+button.querySelector("span").textContent = photoLikes[id];
+
+localStorage.setItem(
+LIKES_KEY,
+JSON.stringify(photoLikes)
+);
+
+localStorage.setItem(
+LIKED_KEY,
+JSON.stringify(likedPhotos)
+);
+
+}
+
+function openLightbox(id){
+
+const photo =
+publicPhotos.find(item => String(item.id) === String(id));
+
+if(!photo){
+return;
+}
+
+document.getElementById("lightboxImage").src = photo.image;
+document.getElementById("lightboxTitle").textContent =
+photo.title || "PETS & DOGUE Photo";
+
+document.getElementById("lightboxCategory").textContent =
+photo.category || "PHOTO";
+
+document.getElementById("lightboxMeta").textContent =
+"Photographer: " +
+(photo.photographer || "PETS & DOGUE Editorial");
+
+document.getElementById("lightboxCaption").textContent =
+photo.caption || "";
+
+document.getElementById("lightbox").classList.add("open");
+document.body.style.overflow = "hidden";
+
+}
+
+function closeLightbox(){
+
+document.getElementById("lightbox").classList.remove("open");
+document.body.style.overflow = "";
+
+}
+
+function closeLightboxFromOverlay(event){
+
+if(event.target.id === "lightbox"){
+closeLightbox();
+}
+
+}
+
+document.addEventListener("keydown",event => {
+
+if(event.key === "Escape"){
+closeLightbox();
+}
+
+});
+
+window.addEventListener("storage",event => {
+
+if(event.key === CMS_KEY){
+loadPhotos();
+}
+
+if(event.key === LIKES_KEY){
+
+photoLikes =
+JSON.parse(localStorage.getItem(LIKES_KEY) || "{}");
+
+renderPhotos();
+
+}
+
+});
+
+loadPhotos();
 </script>
 
 </body>
