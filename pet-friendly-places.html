@@ -6,64 +6,645 @@
 <title>Pet Friendly Places | PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-header{background:white;border-bottom:1px solid #ddd;padding:18px;text-align:center;position:sticky;top:0;z-index:1000}
-.logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:50px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
-.hero{background:#111;color:white;text-align:center;padding:80px 20px;border-bottom:4px solid #c89b3c}
-.hero h1{font-family:Georgia,serif;font-size:62px;color:#d6aa45;margin-bottom:18px}
-.hero p{font-size:20px;line-height:1.8;max-width:900px;margin:auto}
-main{max-width:1350px;margin:auto;padding:50px 18px}
-.search-panel{background:white;border:2px solid #111;border-radius:38px;padding:28px;margin-bottom:35px}
-.search-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:14px}
-input,select{width:100%;padding:15px;border:1px solid #ccc;border-radius:999px;font-size:16px}
-button{background:#111;color:white;border:none;padding:15px 22px;border-radius:999px;font-weight:bold;cursor:pointer}
-.gold{background:#c89b3c}
-.filters{display:flex;gap:10px;overflow-x:auto;margin-bottom:30px}
-.filter{white-space:nowrap;background:white;border:2px solid #111;border-radius:999px;padding:11px 18px;font-weight:bold;cursor:pointer}
-.filter.active{background:#111;color:white}
-.layout{display:grid;grid-template-columns:1.6fr .9fr;gap:30px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px}
-.place{background:white;border:2px solid #111;border-radius:34px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.place img{width:100%;height:270px;object-fit:cover}
-.content{padding:24px}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:12px}
-.recommended{background:#111;color:white}
-.content h3{font-family:Georgia,serif;font-size:31px;margin-bottom:10px}
-.meta{color:#777;font-size:14px;margin-bottom:12px;line-height:1.6}
-.stars{color:#c89b3c;font-size:18px;margin-bottom:12px}
-.content p{color:#555;line-height:1.8;margin-bottom:18px}
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-block;background:#111;color:white;text-decoration:none;padding:13px 18px;border-radius:999px;font-weight:bold;font-size:14px}
-.btn.gold{background:#c89b3c}
-.like{cursor:pointer;font-weight:bold}
-.map-box{background:#111;color:white;border-radius:34px;padding:26px;position:sticky;top:95px}
-.map-box h2{font-family:Georgia,serif;font-size:36px;color:#d6aa45;margin-bottom:15px}
-.fake-map{height:360px;background:linear-gradient(135deg,#2b2b2b,#c89b3c);border-radius:26px;position:relative;overflow:hidden;margin-bottom:20px}
-.pin{position:absolute;background:white;color:#111;border:2px solid #111;border-radius:999px;padding:8px 11px;font-weight:bold;font-size:13px}
-.pin.one{top:20%;left:25%}
-.pin.two{top:45%;left:55%}
-.pin.three{top:65%;left:35%}
-.pin.four{top:30%;left:70%}
-.map-box p{color:#eee;line-height:1.7}
-.review{background:white;color:#111;border-radius:22px;padding:18px;margin-top:18px}
-.review h3{font-size:18px;margin-bottom:8px}
-.review p{font-size:14px;color:#555;line-height:1.6}
-.club{background:#111;color:white;border-radius:40px;padding:50px 25px;text-align:center;margin-top:70px}
-.club h2{font-family:Georgia,serif;font-size:46px;color:#d6aa45;margin-bottom:18px}
-.club p{font-size:19px;line-height:1.8;max-width:850px;margin:auto}
-.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:32px}
-.benefit{background:white;color:#111;border-radius:24px;padding:22px;font-weight:bold}
-footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+select{
+font:inherit;
+}
+
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:18px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:50px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+background:
+linear-gradient(135deg,#fff5fb,#f8f7f3,#ecfff0);
+text-align:center;
+padding:90px 20px;
+border-bottom:4px solid #c89b3c;
+position:relative;
+overflow:hidden;
+}
+
+.hero:before{
+content:"";
+position:absolute;
+inset:-40%;
+background:
+radial-gradient(circle,rgba(255,122,200,.22),transparent 35%),
+radial-gradient(circle at 80% 20%,rgba(101,229,31,.17),transparent 30%),
+radial-gradient(circle at 20% 80%,rgba(105,216,255,.22),transparent 30%);
+animation:heroGlow 12s ease infinite alternate;
+}
+
+@keyframes heroGlow{
+0%{transform:translateX(-20px) translateY(0)}
+100%{transform:translateX(20px) translateY(20px)}
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-family:Georgia,serif;
+font-size:66px;
+color:#c89b3c;
+margin-bottom:18px;
+}
+
+.hero p{
+font-size:20px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+color:#444;
+}
+
+.hero-actions{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin-top:28px;
+}
+
+.btn,
+button{
+display:inline-block;
+border:none;
+cursor:pointer;
+padding:14px 21px;
+border-radius:999px;
+font-weight:bold;
+}
+
+.btn.black,
+.black{
+background:#111;
+color:white;
+}
+
+.btn.gold,
+.gold{
+background:#c89b3c;
+color:white;
+}
+
+.btn.green,
+.green{
+background:#65e51f;
+color:white;
+box-shadow:0 0 18px rgba(101,229,31,.45);
+}
+
+.btn.light,
+.light{
+background:white;
+color:#111;
+border:1px solid #111;
+}
+
+main{
+max-width:1450px;
+margin:auto;
+padding:65px 20px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:18px;
+margin-bottom:55px;
+}
+
+.stat{
+background:white;
+border:2px solid #111;
+border-radius:28px;
+padding:25px;
+text-align:center;
+box-shadow:0 12px 35px rgba(0,0,0,.07);
+}
+
+.stat strong{
+display:block;
+font-family:Georgia,serif;
+font-size:40px;
+color:#c89b3c;
+margin-bottom:7px;
+}
+
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:18px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 42px;
+}
+
+.search-panel{
+background:white;
+border:2px solid #111;
+border-radius:36px;
+padding:28px;
+margin-bottom:34px;
+}
+
+.search-grid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr auto;
+gap:14px;
+}
+
+input,
+select{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:999px;
+font-size:16px;
+}
+
+.filters{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:7px;
+margin-bottom:36px;
+}
+
+.filter{
+white-space:nowrap;
+background:white;
+border:2px solid #111;
+border-radius:999px;
+padding:11px 18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.filter.active{
+background:#111;
+color:white;
+}
+
+.layout{
+display:grid;
+grid-template-columns:1.7fr .8fr;
+gap:30px;
+align-items:start;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:26px;
+}
+
+.place-card{
+background:white;
+border:2px solid #111;
+border-radius:34px;
+overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+transition:.25s;
+display:flex;
+flex-direction:column;
+}
+
+.place-card:hover{
+transform:translateY(-5px);
+}
+
+.place-image{
+position:relative;
+}
+
+.place-image img{
+width:100%;
+height:280px;
+object-fit:cover;
+display:block;
+}
+
+.place-label{
+position:absolute;
+top:17px;
+left:17px;
+background:#111;
+color:white;
+padding:8px 13px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+}
+
+.cms-label{
+position:absolute;
+top:17px;
+right:17px;
+background:#65e51f;
+color:white;
+padding:8px 13px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+}
+
+.place-content{
+padding:24px;
+display:flex;
+flex-direction:column;
+height:100%;
+}
+
+.badge{
+display:inline-block;
+width:max-content;
+background:#c89b3c;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.place-content h3{
+font-family:Georgia,serif;
+font-size:31px;
+margin-bottom:10px;
+}
+
+.meta{
+color:#777;
+font-size:14px;
+line-height:1.6;
+margin-bottom:12px;
+}
+
+.stars{
+color:#c89b3c;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.place-content p{
+color:#555;
+line-height:1.8;
+margin-bottom:18px;
+}
+
+.actions{
+display:flex;
+gap:9px;
+flex-wrap:wrap;
+margin-top:auto;
+}
+
+.save-btn.saved,
+.like-btn.liked{
+background:#65e51f;
+color:white;
+border-color:#65e51f;
+}
+
+.empty-state{
+display:none;
+background:white;
+border:2px dashed #aaa;
+border-radius:30px;
+padding:42px;
+text-align:center;
+color:#666;
+}
+
+.empty-state h3{
+font-family:Georgia,serif;
+font-size:31px;
+margin-bottom:10px;
+}
+
+.map-box{
+background:#111;
+color:white;
+border-radius:34px;
+padding:26px;
+position:sticky;
+top:95px;
+}
+
+.map-box h2{
+font-family:Georgia,serif;
+font-size:36px;
+color:#d6aa45;
+margin-bottom:15px;
+}
+
+.fake-map{
+height:390px;
+background:
+linear-gradient(135deg,#2b2b2b,#8a7138,#c89b3c);
+border-radius:26px;
+position:relative;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.fake-map:before{
+content:"";
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+background-size:35px 35px;
+}
+
+.map-pin{
+position:absolute;
+background:white;
+color:#111;
+border:2px solid #111;
+border-radius:999px;
+padding:8px 11px;
+font-weight:bold;
+font-size:12px;
+z-index:2;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+.map-box p{
+color:#eee;
+line-height:1.7;
+}
+
+.map-summary{
+background:white;
+color:#111;
+border-radius:22px;
+padding:18px;
+margin-top:18px;
+}
+
+.map-summary h3{
+font-size:18px;
+margin-bottom:8px;
+}
+
+.map-summary p{
+font-size:14px;
+color:#555;
+line-height:1.6;
+}
+
+.saved-section{
+margin-top:75px;
+}
+
+.saved-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:18px;
+}
+
+.saved-item{
+background:white;
+border:2px solid #111;
+border-radius:26px;
+padding:22px;
+}
+
+.saved-item h3{
+font-family:Georgia,serif;
+font-size:26px;
+margin-bottom:8px;
+}
+
+.saved-item p{
+color:#666;
+line-height:1.6;
+margin-bottom:13px;
+}
+
+.club{
+background:#111;
+color:white;
+border-radius:40px;
+padding:52px 28px;
+text-align:center;
+margin-top:75px;
+}
+
+.club h2{
+font-family:Georgia,serif;
+font-size:46px;
+color:#d6aa45;
+margin-bottom:18px;
+}
+
+.club p{
+font-size:19px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+}
+
+.benefits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+gap:18px;
+margin-top:32px;
+}
+
+.benefit{
+background:white;
+color:#111;
+border-radius:24px;
+padding:22px;
+font-weight:bold;
+}
+
+footer{
+margin-top:70px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.footer-links a{
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.place-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.76);
+z-index:5000;
+display:none;
+padding:25px;
+overflow-y:auto;
+}
+
+.place-modal.open{
+display:block;
+}
+
+.modal-card{
+max-width:850px;
+margin:35px auto;
+background:white;
+border-radius:34px;
+overflow:hidden;
+position:relative;
+}
+
+.modal-card img{
+width:100%;
+height:400px;
+object-fit:cover;
+display:block;
+}
+
+.modal-content{
+padding:32px;
+}
+
+.modal-content h2{
+font-family:Georgia,serif;
+font-size:43px;
+margin-bottom:12px;
+}
+
+.modal-content p{
+color:#555;
+font-size:17px;
+line-height:1.9;
+white-space:pre-wrap;
+}
+
+.modal-close{
+position:absolute;
+top:18px;
+right:18px;
+width:46px;
+height:46px;
+border:none;
+border-radius:50%;
+background:#111;
+color:white;
+font-size:24px;
+cursor:pointer;
+z-index:2;
+}
+
 @media(max-width:950px){
-.search-grid,.layout{grid-template-columns:1fr}
-.map-box{position:static}
-.hero h1{font-size:42px}
-.logo-big{font-size:40px}
+
+.search-grid,
+.layout{
+grid-template-columns:1fr;
+}
+
+.map-box{
+position:static;
+}
+
+.hero h1{
+font-size:44px;
+}
+
+.logo-big{
+font-size:40px;
+}
+
+.section-title{
+font-size:38px;
+}
+
+.club h2{
+font-size:38px;
+}
+
+}
+
+@media(max-width:600px){
+
+.place-image img{
+height:240px;
+}
+
+.modal-card img{
+height:270px;
+}
+
+.modal-content h2{
+font-size:34px;
+}
+
 }
 </style>
 </head>
@@ -76,191 +657,219 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 </header>
 
 <section class="hero">
+
+<div class="hero-content">
+
 <h1>Pet Friendly Places</h1>
+
 <p>
-A luxury guide to pet-friendly cafés, hotels, beaches, parks, restaurants, groomers, vets and places worth visiting with your companion.
+A luxury guide to pet-friendly cafés, hotels, beaches, parks, restaurants, groomers, clinics and places worth visiting with your companion.
 </p>
+
+<div class="hero-actions">
+<a href="#directory" class="btn green">Explore Places</a>
+<a href="local-community.html" class="btn gold">Local Community</a>
+<a href="club.html" class="btn black">Join The Club</a>
+</div>
+
+</div>
+
 </section>
 
 <main>
 
-<section class="search-panel">
-<div class="search-grid">
-<input id="locationInput" type="text" placeholder="City, country or postcode" value="Bournemouth">
-<select id="categoryInput">
-<option>All Categories</option>
-<option>Café</option>
-<option>Hotel</option>
-<option>Restaurant</option>
-<option>Beach</option>
-<option>Park</option>
-<option>Grooming</option>
-<option>Veterinary</option>
-<option>Shop</option>
-</select>
-<select id="radiusInput">
-<option>5 km</option>
-<option selected>10 km</option>
-<option>25 km</option>
-<option>50 km</option>
-</select>
-<button onclick="searchPlaces()" class="gold">Search</button>
+<section class="stats">
+
+<div class="stat">
+<strong id="placeCount">0</strong>
+Places
 </div>
+
+<div class="stat">
+<strong id="categoryCount">0</strong>
+Categories
+</div>
+
+<div class="stat">
+<strong id="locationCount">0</strong>
+Locations
+</div>
+
+<div class="stat">
+<strong id="savedCount">0</strong>
+Saved
+</div>
+
 </section>
 
-<section class="filters">
-<div class="filter active" onclick="filterPlaces(this,'All')">All</div>
-<div class="filter" onclick="filterPlaces(this,'Café')">Cafés</div>
-<div class="filter" onclick="filterPlaces(this,'Hotel')">Hotels</div>
-<div class="filter" onclick="filterPlaces(this,'Restaurant')">Restaurants</div>
-<div class="filter" onclick="filterPlaces(this,'Beach')">Beaches</div>
-<div class="filter" onclick="filterPlaces(this,'Park')">Parks</div>
-<div class="filter" onclick="filterPlaces(this,'Grooming')">Groomers</div>
-<div class="filter" onclick="filterPlaces(this,'Veterinary')">Vets</div>
+<section id="directory">
+
+<h2 class="section-title">Find Pet Friendly Places</h2>
+<div class="gold-line"></div>
+
+<section class="search-panel">
+
+<div class="search-grid">
+
+<input
+id="searchInput"
+type="text"
+placeholder="Search by place, city, category or description..."
+oninput="renderPlaces()">
+
+<select
+id="categoryInput"
+onchange="renderPlaces()">
+
+<option value="All">
+All Categories
+</option>
+
+</select>
+
+<select
+id="locationInput"
+onchange="renderPlaces()">
+
+<option value="All">
+All Locations
+</option>
+
+</select>
+
+<button
+class="gold"
+onclick="renderPlaces()">
+
+Search
+
+</button>
+
+</div>
+
 </section>
+
+<div
+class="filters"
+id="categoryFilters">
+
+<button
+class="filter active"
+onclick="setCategory(this,'All')">
+
+All
+
+</button>
+
+</div>
 
 <div class="layout">
 
-<section class="grid" id="placesGrid">
+<section>
 
-<div class="place" data-type="Café">
-<img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80">
-<div class="content">
-<span class="badge recommended">DOGUE RECOMMENDED</span>
-<h3>Beachside Dog Café</h3>
-<div class="meta">📍 Bournemouth · 1.4 km away · Café</div>
-<div class="stars">★★★★★ 4.9</div>
-<p>Cosy café with outdoor seating, water bowls, dog treats and a relaxed seaside atmosphere.</p>
-<div class="actions">
-<a href="local-community.html" class="btn gold">Reviews</a>
-<span class="btn like" onclick="likePlace(this)">❤️ <span>42</span></span>
-</div>
-</div>
+<div
+class="grid"
+id="placesGrid">
 </div>
 
-<div class="place" data-type="Hotel">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
-<div class="content">
-<span class="badge">CLUB OFFER</span>
-<h3>Luxury Pet Hotel</h3>
-<div class="meta">📍 London · Member discount · Hotel</div>
-<div class="stars">★★★★★ 5.0</div>
-<p>Premium rooms, pet welcome packs, luxury bedding and services for travelling with pets.</p>
-<div class="actions">
-<a href="partners.html" class="btn gold">Book Offer</a>
-<span class="btn like" onclick="likePlace(this)">❤️ <span>86</span></span>
-</div>
-</div>
-</div>
+<div
+class="empty-state"
+id="emptyState">
 
-<div class="place" data-type="Beach">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80">
-<div class="content">
-<span class="badge recommended">DOGUE RECOMMENDED</span>
-<h3>Dorset Pet Beach Walk</h3>
-<div class="meta">📍 Dorset · 7 km away · Beach</div>
-<div class="stars">★★★★☆ 4.8</div>
-<p>Beautiful coastal route for walks, photos, fresh air and relaxed pet-friendly days.</p>
-<div class="actions">
-<a href="photos.html" class="btn gold">Photo Spots</a>
-<span class="btn like" onclick="likePlace(this)">❤️ <span>64</span></span>
-</div>
-</div>
-</div>
+<h3>No places found</h3>
 
-<div class="place" data-type="Park">
-<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80">
-<div class="content">
-<span class="badge">LOCAL FAVOURITE</span>
-<h3>Royal Green Park</h3>
-<div class="meta">📍 Bournemouth · 3 km away · Park</div>
-<div class="stars">★★★★☆ 4.7</div>
-<p>Open green space for walks, community meetups and calm afternoon moments.</p>
-<div class="actions">
-<a href="local-community.html" class="btn gold">Meet Locals</a>
-<span class="btn like" onclick="likePlace(this)">❤️ <span>51</span></span>
-</div>
-</div>
-</div>
+<p>
+Try another search term, category or location.
+</p>
 
-<div class="place" data-type="Restaurant">
-<img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80">
-<div class="content">
-<span class="badge">TERRACE</span>
-<h3>Pet Welcome Terrace</h3>
-<div class="meta">📍 London · Outdoor dining · Restaurant</div>
-<div class="stars">★★★★☆ 4.6</div>
-<p>Stylish outdoor dining area where well-behaved pets are welcome with owners.</p>
-<div class="actions">
-<a href="partners.html" class="btn gold">Club Discount</a>
-<span class="btn like" onclick="likePlace(this)">❤️ <span>39</span></span>
-</div>
-</div>
-</div>
-
-<div class="place" data-type="Grooming">
-<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80">
-<div class="content">
-<span class="badge">PREMIUM</span>
-<h3>Luxury Grooming Studio</h3>
-<div class="meta">📍 Bournemouth · Partner offer · Grooming</div>
-<div class="stars">★★★★★ 4.9</div>
-<p>Premium grooming, coat care and beauty services before travel or photoshoots.</p>
-<div class="actions">
-<a href="club.html" class="btn gold">Member Benefit</a>
-<span class="btn like" onclick="likePlace(this)">❤️ <span>72</span></span>
-</div>
-</div>
 </div>
 
 </section>
 
 <aside class="map-box">
+
 <h2>Map Preview</h2>
-<div class="fake-map">
-<div class="pin one">☕ Café</div>
-<div class="pin two">🏨 Hotel</div>
-<div class="pin three">🏖 Beach</div>
-<div class="pin four">✂️ Groomer</div>
+
+<div
+class="fake-map"
+id="fakeMap">
 </div>
+
 <p>
-Future version: interactive map with real locations, directions, reviews, booking links and PETS & DOGUE Club discounts.
+Select a map pin or open a place card to view more details. The future live version can connect to Google Maps or another map provider.
 </p>
 
-<div class="review">
-<h3>Latest Review</h3>
-<p><strong>Sarah:</strong> Beachside Dog Café was lovely. Staff brought water for my dog and the terrace was calm.</p>
+<div class="map-summary">
+
+<h3 id="mapSummaryTitle">
+Places Near You
+</h3>
+
+<p id="mapSummaryText">
+Search the directory to discover pet-friendly places.
+</p>
+
 </div>
 
-<div class="review">
+<div class="map-summary">
+
 <h3>Club Benefit</h3>
-<p>Members will unlock partner discounts and QR card verification at selected places.</p>
+
+<p>
+Members can unlock selected partner discounts and QR-card verification at participating places.
+</p>
+
 </div>
+
 </aside>
 
 </div>
 
+</section>
+
+<section class="saved-section">
+
+<h2 class="section-title">Saved Places</h2>
+<div class="gold-line"></div>
+
+<div
+class="saved-list"
+id="savedList">
+</div>
+
+</section>
+
 <section class="club">
+
 <h2>PETS & DOGUE Club Benefits</h2>
+
 <p>
-Members will unlock selected discounts and special offers from pet-friendly hotels,
-cafés, groomers, travel partners and premium local services.
+Members can unlock selected discounts and special offers from hotels, cafés, groomers, travel partners and premium local services.
 </p>
 
 <div class="benefits">
-<div class="benefit">Hotel Discounts</div>
-<div class="benefit">Café Offers</div>
-<div class="benefit">Grooming Benefits</div>
-<div class="benefit">Partner Bookings</div>
-<div class="benefit">Local Recommendations</div>
-<div class="benefit">Member QR Card</div>
+<div class="benefit">🏨 Hotel Discounts</div>
+<div class="benefit">☕ Café Offers</div>
+<div class="benefit">✂️ Grooming Benefits</div>
+<div class="benefit">🎟 Partner Bookings</div>
+<div class="benefit">📍 Local Recommendations</div>
+<div class="benefit">💚 Member QR Card</div>
 </div>
+
+<br><br>
+
+<a href="club.html" class="btn gold">
+Explore Club Benefits
+</a>
+
 </section>
 
 </main>
 
 <footer>
+
 <h2>PETS & DOGUE</h2>
+
 <p>The International Luxury Animal Magazine</p>
 
 <div class="footer-links">
@@ -270,32 +879,1238 @@ cafés, groomers, travel partners and premium local services.
 <a href="wellness.html">Wellness</a>
 <a href="partners.html">Partners</a>
 <a href="club.html">Club</a>
+<a href="account.html">Account</a>
 <a href="contact.html">Contact</a>
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a href="admin.html" class="admin-small">
+Admin
+</a>
+
 </footer>
 
+<div
+class="place-modal"
+id="placeModal"
+onclick="closePlaceFromOverlay(event)">
+
+<div class="modal-card">
+
+<button
+class="modal-close"
+onclick="closePlace()">
+
+×
+
+</button>
+
+<img
+id="modalImage"
+alt="Pet friendly place">
+
+<div class="modal-content">
+
+<span
+class="badge"
+id="modalCategory">
+</span>
+
+<h2
+id="modalTitle">
+</h2>
+
+<div
+class="meta"
+id="modalMeta">
+</div>
+
+<div
+class="stars"
+id="modalRating">
+</div>
+
+<p
+id="modalDescription">
+</p>
+
+<br>
+
+<a
+id="modalWebsite"
+href="#"
+target="_blank"
+rel="noopener noreferrer"
+class="btn gold">
+
+Visit Website
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
-function filterPlaces(element,type){
-document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
-element.classList.add("active");
+const CMS_KEY = "pets_dogue_cms_v1";
+const SAVED_KEY = "pets_dogue_saved_places";
+const LIKES_KEY = "pets_dogue_place_likes";
+const LIKED_KEY = "pets_dogue_place_liked";
 
-document.querySelectorAll(".place").forEach(card => {
-card.style.display = type === "All" || card.dataset.type === type ? "block" : "none";
+let activeCategory = "All";
+let publicPlaces = [];
+
+let savedPlaces =
+JSON.parse(
+localStorage.getItem(SAVED_KEY) || "[]"
+);
+
+let placeLikes =
+JSON.parse(
+localStorage.getItem(LIKES_KEY) || "{}"
+);
+
+let likedPlaces =
+JSON.parse(
+localStorage.getItem(LIKED_KEY) || "{}"
+);
+
+const fallbackPlaces = [
+
+{
+id:"fallback-cafe",
+name:"Beachside Dog Café",
+category:"Café",
+location:"Bournemouth",
+website:"",
+description:"Cosy café with outdoor seating, water bowls, dog treats and a relaxed seaside atmosphere.",
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
+rating:"★★★★★ 4.9",
+likes:42,
+recommended:true
+},
+
+{
+id:"fallback-hotel",
+name:"Luxury Pet Hotel",
+category:"Hotel",
+location:"London",
+website:"",
+description:"Premium rooms, pet welcome packs, luxury bedding and services for travelling with pets.",
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+rating:"★★★★★ 5.0",
+likes:86,
+recommended:true
+},
+
+{
+id:"fallback-beach",
+name:"Dorset Pet Beach Walk",
+category:"Beach",
+location:"Dorset",
+website:"",
+description:"Beautiful coastal route for walks, photos, fresh air and relaxed pet-friendly days.",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+rating:"★★★★☆ 4.8",
+likes:64,
+recommended:true
+},
+
+{
+id:"fallback-park",
+name:"Royal Green Park",
+category:"Park",
+location:"Bournemouth",
+website:"",
+description:"Open green space for walks, community meetups and calm afternoon moments.",
+image:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+rating:"★★★★☆ 4.7",
+likes:51,
+recommended:false
+},
+
+{
+id:"fallback-restaurant",
+name:"Pet Welcome Terrace",
+category:"Restaurant",
+location:"London",
+website:"",
+description:"Stylish outdoor dining area where well-behaved pets are welcome with owners.",
+image:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+rating:"★★★★☆ 4.6",
+likes:39,
+recommended:false
+},
+
+{
+id:"fallback-grooming",
+name:"Luxury Grooming Studio",
+category:"Grooming",
+location:"Bournemouth",
+website:"",
+description:"Premium grooming, coat care and beauty services before travel or photoshoots.",
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80",
+rating:"★★★★★ 4.9",
+likes:72,
+recommended:true
+}
+
+];
+
+function escapeHTML(value){
+
+return String(value || "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+function loadPlaces(){
+
+let cmsPlaces = [];
+
+try{
+
+const cms =
+JSON.parse(
+localStorage.getItem(CMS_KEY) || "{}"
+);
+
+if(
+Array.isArray(cms.places)
+){
+
+cmsPlaces =
+cms.places.map(place => ({
+
+...place,
+
+id:
+place.id ||
+"cms-" + Date.now() + Math.random(),
+
+name:
+place.name ||
+"Pet Friendly Place",
+
+category:
+place.category ||
+"Pet Friendly",
+
+location:
+place.location ||
+"Location",
+
+website:
+place.website ||
+"",
+
+description:
+place.description ||
+"Selected PETS & DOGUE pet-friendly place.",
+
+image:
+place.image ||
+selectPlaceImage(
+place.category,
+place.name
+),
+
+rating:
+place.rating ||
+"★★★★★ Selected Place",
+
+likes:
+Number(place.likes || 0),
+
+recommended:
+place.recommended !== false,
+
+fromCMS:true
+
+}));
+
+}
+
+}catch(error){
+
+console.error(
+"Unable to read CMS places.",
+error
+);
+
+}
+
+const cmsNames =
+new Set(
+cmsPlaces.map(place =>
+String(place.name).toLowerCase()
+)
+);
+
+const remainingFallbacks =
+fallbackPlaces.filter(place =>
+!cmsNames.has(
+String(place.name).toLowerCase()
+)
+);
+
+publicPlaces = [
+...cmsPlaces,
+...remainingFallbacks
+];
+
+buildFilters();
+updateStatistics();
+renderPlaces();
+renderSavedPlaces();
+
+}
+
+function selectPlaceImage(category,name){
+
+const text =
+(
+String(category || "") +
+" " +
+String(name || "")
+).toLowerCase();
+
+if(
+text.includes("hotel")
+){
+
+return "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+if(
+text.includes("beach")
+){
+
+return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+if(
+text.includes("park")
+){
+
+return "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+if(
+text.includes("restaurant")
+){
+
+return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+if(
+text.includes("groom")
+){
+
+return "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+if(
+text.includes("vet") ||
+text.includes("clinic") ||
+text.includes("wellness")
+){
+
+return "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+return "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+function buildFilters(){
+
+const categories =
+[
+...new Set(
+publicPlaces
+.map(place => place.category)
+.filter(Boolean)
+)
+].sort();
+
+const locations =
+[
+...new Set(
+publicPlaces
+.map(place => place.location)
+.filter(Boolean)
+)
+].sort();
+
+const categorySelect =
+document.getElementById(
+"categoryInput"
+);
+
+const locationSelect =
+document.getElementById(
+"locationInput"
+);
+
+const filters =
+document.getElementById(
+"categoryFilters"
+);
+
+categorySelect.innerHTML =
+`<option value="All">All Categories</option>`;
+
+locationSelect.innerHTML =
+`<option value="All">All Locations</option>`;
+
+filters.innerHTML = `
+<button
+class="filter active"
+onclick="setCategory(this,'All')">
+All
+</button>
+`;
+
+categories.forEach(category => {
+
+categorySelect.insertAdjacentHTML(
+"beforeend",
+`
+<option value="${escapeHTML(category)}">
+${escapeHTML(category)}
+</option>
+`
+);
+
+filters.insertAdjacentHTML(
+"beforeend",
+`
+<button
+class="filter"
+onclick="setCategory(this,'${escapeHTML(category).replaceAll("'","\\'")}')">
+${escapeHTML(category)}
+</button>
+`
+);
+
 });
+
+locations.forEach(location => {
+
+locationSelect.insertAdjacentHTML(
+"beforeend",
+`
+<option value="${escapeHTML(location)}">
+${escapeHTML(location)}
+</option>
+`
+);
+
+});
+
 }
 
-function searchPlaces(){
-const location = document.getElementById("locationInput").value || "your area";
-const radius = document.getElementById("radiusInput").value;
-alert("Showing PETS & DOGUE friendly places near " + location + " within " + radius);
+function updateStatistics(){
+
+const categories =
+new Set(
+publicPlaces
+.map(place => place.category)
+.filter(Boolean)
+);
+
+const locations =
+new Set(
+publicPlaces
+.map(place => place.location)
+.filter(Boolean)
+);
+
+document.getElementById(
+"placeCount"
+).textContent =
+publicPlaces.length;
+
+document.getElementById(
+"categoryCount"
+).textContent =
+categories.size;
+
+document.getElementById(
+"locationCount"
+).textContent =
+locations.size;
+
+document.getElementById(
+"savedCount"
+).textContent =
+savedPlaces.length;
+
 }
 
-function likePlace(element){
-const count = element.querySelector("span");
-count.textContent = Number(count.textContent) + 1;
+function setCategory(button,category){
+
+activeCategory = category;
+
+document
+.querySelectorAll(".filter")
+.forEach(item => {
+
+item.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+document.getElementById(
+"categoryInput"
+).value =
+category === "All"
+? "All"
+: category;
+
+renderPlaces();
+
 }
+
+function getFilteredPlaces(){
+
+const query =
+document
+.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
+
+const selectedCategory =
+document
+.getElementById("categoryInput")
+.value;
+
+const selectedLocation =
+document
+.getElementById("locationInput")
+.value;
+
+return publicPlaces.filter(place => {
+
+const matchesActive =
+activeCategory === "All" ||
+place.category === activeCategory;
+
+const matchesCategory =
+selectedCategory === "All" ||
+place.category === selectedCategory;
+
+const matchesLocation =
+selectedLocation === "All" ||
+place.location === selectedLocation;
+
+const searchableText = [
+
+place.name,
+place.category,
+place.location,
+place.description,
+place.rating
+
+]
+.join(" ")
+.toLowerCase();
+
+const matchesQuery =
+!query ||
+searchableText.includes(query);
+
+return (
+matchesActive &&
+matchesCategory &&
+matchesLocation &&
+matchesQuery
+);
+
+});
+
+}
+
+function renderPlaces(){
+
+const grid =
+document.getElementById(
+"placesGrid"
+);
+
+const emptyState =
+document.getElementById(
+"emptyState"
+);
+
+const places =
+getFilteredPlaces();
+
+grid.innerHTML = "";
+
+if(
+places.length === 0
+){
+
+emptyState.style.display =
+"block";
+
+renderMap([]);
+
+return;
+
+}
+
+emptyState.style.display =
+"none";
+
+places.forEach(place => {
+
+grid.insertAdjacentHTML(
+"beforeend",
+createPlaceCard(place)
+);
+
+});
+
+renderMap(places);
+
+}
+
+function createPlaceCard(place){
+
+const id =
+String(place.id);
+
+const saved =
+savedPlaces.some(item =>
+String(item.id) === id
+);
+
+const liked =
+Boolean(likedPlaces[id]);
+
+const likes =
+placeLikes[id] !== undefined
+? Number(placeLikes[id])
+: Number(place.likes || 0);
+
+const websiteButton =
+place.website
+? `
+<a
+href="${escapeHTML(place.website)}"
+target="_blank"
+rel="noopener noreferrer"
+class="btn gold">
+Visit Website
+</a>
+`
+: `
+<button
+class="btn gold"
+onclick="openPlace('${escapeHTML(id)}')">
+View Details
+</button>
+`;
+
+return `
+<article class="place-card">
+
+<div class="place-image">
+
+<img
+src="${escapeHTML(place.image)}"
+alt="${escapeHTML(place.name)}">
+
+<span class="place-label">
+${escapeHTML(place.category)}
+</span>
+
+${place.fromCMS ? `
+<span class="cms-label">
+NEW PLACE
+</span>
+` : ""}
+
+</div>
+
+<div class="place-content">
+
+${place.recommended ? `
+<span class="badge">
+DOGUE RECOMMENDED
+</span>
+` : ""}
+
+<h3>
+${escapeHTML(place.name)}
+</h3>
+
+<div class="meta">
+📍 ${escapeHTML(place.location)}
+·
+${escapeHTML(place.category)}
+</div>
+
+<div class="stars">
+${escapeHTML(place.rating)}
+</div>
+
+<p>
+${escapeHTML(place.description)}
+</p>
+
+<div class="actions">
+
+${websiteButton}
+
+<button
+class="btn light save-btn ${saved ? "saved" : ""}"
+onclick="toggleSavedPlace('${escapeHTML(id)}',this)">
+
+${saved ? "♥ Saved" : "♡ Save"}
+
+</button>
+
+<button
+class="btn light like-btn ${liked ? "liked" : ""}"
+onclick="likePlace('${escapeHTML(id)}',this)">
+
+❤️ <span>${likes}</span>
+
+</button>
+
+</div>
+
+</div>
+
+</article>
+`;
+
+}
+
+function renderMap(places){
+
+const map =
+document.getElementById(
+"fakeMap"
+);
+
+map.innerHTML = "";
+
+if(
+places.length === 0
+){
+
+document.getElementById(
+"mapSummaryTitle"
+).textContent =
+"No Places Found";
+
+document.getElementById(
+"mapSummaryText"
+).textContent =
+"Try another category, location or search term.";
+
+return;
+
+}
+
+places
+.slice(0,8)
+.forEach((place,index) => {
+
+const positions = [
+{top:"15%",left:"18%"},
+{top:"30%",left:"58%"},
+{top:"56%",left:"28%"},
+{top:"68%",left:"66%"},
+{top:"42%",left:"40%"},
+{top:"22%",left:"73%"},
+{top:"75%",left:"15%"},
+{top:"54%",left:"75%"}
+];
+
+const position =
+positions[index % positions.length];
+
+map.insertAdjacentHTML(
+"beforeend",
+`
+<button
+class="map-pin"
+style="top:${position.top};left:${position.left};"
+onclick="openPlace('${escapeHTML(String(place.id))}')">
+
+${categoryIcon(place.category)}
+${escapeHTML(place.name)}
+
+</button>
+`
+);
+
+});
+
+document.getElementById(
+"mapSummaryTitle"
+).textContent =
+places.length +
+(
+places.length === 1
+? " Place Found"
+: " Places Found"
+);
+
+document.getElementById(
+"mapSummaryText"
+).textContent =
+"Showing " +
+places
+.slice(0,3)
+.map(place => place.name)
+.join(", ") +
+(
+places.length > 3
+? " and more."
+: "."
+);
+
+}
+
+function categoryIcon(category){
+
+const text =
+String(category || "")
+.toLowerCase();
+
+if(text.includes("café") || text.includes("cafe")){
+return "☕";
+}
+
+if(text.includes("hotel")){
+return "🏨";
+}
+
+if(text.includes("beach")){
+return "🏖";
+}
+
+if(text.includes("park")){
+return "🌳";
+}
+
+if(text.includes("groom")){
+return "✂️";
+}
+
+if(text.includes("vet")){
+return "🩺";
+}
+
+if(text.includes("restaurant")){
+return "🍽";
+}
+
+return "📍";
+
+}
+
+function toggleSavedPlace(id,button){
+
+const place =
+publicPlaces.find(item =>
+String(item.id) === String(id)
+);
+
+if(!place){
+return;
+}
+
+const existingIndex =
+savedPlaces.findIndex(item =>
+String(item.id) === String(id)
+);
+
+if(
+existingIndex >= 0
+){
+
+savedPlaces.splice(
+existingIndex,
+1
+);
+
+button.classList.remove(
+"saved"
+);
+
+button.textContent =
+"♡ Save";
+
+}else{
+
+savedPlaces.push({
+
+id:String(place.id),
+name:place.name,
+category:place.category,
+location:place.location,
+website:place.website || ""
+
+});
+
+button.classList.add(
+"saved"
+);
+
+button.textContent =
+"♥ Saved";
+
+}
+
+localStorage.setItem(
+SAVED_KEY,
+JSON.stringify(savedPlaces)
+);
+
+renderSavedPlaces();
+updateStatistics();
+
+}
+
+function renderSavedPlaces(){
+
+const savedList =
+document.getElementById(
+"savedList"
+);
+
+savedList.innerHTML = "";
+
+if(
+savedPlaces.length === 0
+){
+
+savedList.innerHTML = `
+<div class="saved-item">
+
+<h3>
+Your saved places will appear here
+</h3>
+
+<p>
+Tap “Save” on any place card.
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+savedPlaces.forEach(item => {
+
+savedList.insertAdjacentHTML(
+"beforeend",
+`
+<div class="saved-item">
+
+<h3>
+${escapeHTML(item.name)}
+</h3>
+
+<p>
+${escapeHTML(item.category)}
+·
+${escapeHTML(item.location)}
+</p>
+
+${item.website ? `
+<a
+href="${escapeHTML(item.website)}"
+target="_blank"
+rel="noopener noreferrer"
+class="btn gold">
+Visit
+</a>
+` : ""}
+
+<button
+class="btn black"
+onclick="removeSavedPlace('${escapeHTML(String(item.id))}')">
+
+Remove
+
+</button>
+
+</div>
+`
+);
+
+});
+
+}
+
+function removeSavedPlace(id){
+
+savedPlaces =
+savedPlaces.filter(item =>
+String(item.id) !== String(id)
+);
+
+localStorage.setItem(
+SAVED_KEY,
+JSON.stringify(savedPlaces)
+);
+
+renderSavedPlaces();
+renderPlaces();
+updateStatistics();
+
+}
+
+function likePlace(id,button){
+
+const place =
+publicPlaces.find(item =>
+String(item.id) === String(id)
+);
+
+if(!place){
+return;
+}
+
+const currentLikes =
+placeLikes[id] !== undefined
+? Number(placeLikes[id])
+: Number(place.likes || 0);
+
+if(
+likedPlaces[id]
+){
+
+placeLikes[id] =
+Math.max(
+0,
+currentLikes - 1
+);
+
+likedPlaces[id] =
+false;
+
+button.classList.remove(
+"liked"
+);
+
+}else{
+
+placeLikes[id] =
+currentLikes + 1;
+
+likedPlaces[id] =
+true;
+
+button.classList.add(
+"liked"
+);
+
+}
+
+button
+.querySelector("span")
+.textContent =
+placeLikes[id];
+
+localStorage.setItem(
+LIKES_KEY,
+JSON.stringify(placeLikes)
+);
+
+localStorage.setItem(
+LIKED_KEY,
+JSON.stringify(likedPlaces)
+);
+
+}
+
+function openPlace(id){
+
+const place =
+publicPlaces.find(item =>
+String(item.id) === String(id)
+);
+
+if(!place){
+return;
+}
+
+document.getElementById(
+"modalImage"
+).src =
+place.image;
+
+document.getElementById(
+"modalTitle"
+).textContent =
+place.name;
+
+document.getElementById(
+"modalCategory"
+).textContent =
+place.category;
+
+document.getElementById(
+"modalMeta"
+).textContent =
+place.location +
+" · " +
+place.category;
+
+document.getElementById(
+"modalRating"
+).textContent =
+place.rating;
+
+document.getElementById(
+"modalDescription"
+).textContent =
+place.description;
+
+const website =
+document.getElementById(
+"modalWebsite"
+);
+
+if(
+place.website
+){
+
+website.href =
+place.website;
+
+website.style.display =
+"inline-block";
+
+}else{
+
+website.style.display =
+"none";
+
+}
+
+document.getElementById(
+"placeModal"
+).classList.add(
+"open"
+);
+
+document.body.style.overflow =
+"hidden";
+
+}
+
+function closePlace(){
+
+document.getElementById(
+"placeModal"
+).classList.remove(
+"open"
+);
+
+document.body.style.overflow =
+"";
+
+}
+
+function closePlaceFromOverlay(event){
+
+if(
+event.target.id === "placeModal"
+){
+
+closePlace();
+
+}
+
+}
+
+document.addEventListener(
+"keydown",
+event => {
+
+if(
+event.key === "Escape"
+){
+
+closePlace();
+
+}
+
+}
+);
+
+window.addEventListener(
+"storage",
+event => {
+
+if(
+event.key === CMS_KEY
+){
+
+loadPlaces();
+
+}
+
+if(
+event.key === SAVED_KEY
+){
+
+savedPlaces =
+JSON.parse(
+localStorage.getItem(SAVED_KEY) ||
+"[]"
+);
+
+renderSavedPlaces();
+renderPlaces();
+updateStatistics();
+
+}
+
+if(
+event.key === LIKES_KEY
+){
+
+placeLikes =
+JSON.parse(
+localStorage.getItem(LIKES_KEY) ||
+"{}"
+);
+
+renderPlaces();
+
+}
+
+}
+);
+
+loadPlaces();
 </script>
 
 </body>
