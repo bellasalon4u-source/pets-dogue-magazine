@@ -6,155 +6,797 @@
 <title>Contests & Prizes | PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-header{background:white;border-bottom:1px solid #ddd;padding:20px;text-align:center}
-.logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:52px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
-.hero{height:560px;position:relative;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.18))}
-.hero-content{position:absolute;bottom:55px;left:50%;transform:translateX(-50%);text-align:center;color:white;width:90%}
-.hero-content h1{font-size:70px;font-family:Georgia,serif;margin-bottom:15px}
-.hero-content p{font-size:22px;line-height:1.8;max-width:900px;margin:auto}
-.section{max-width:1400px;margin:auto;padding:70px 20px}
-.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:50px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:30px}
-.card{background:white;border:2px solid #111;border-radius:35px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.card img{width:100%;height:320px;object-fit:cover}
-.card-content{padding:25px}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:12px}
-.card h3{font-size:32px;font-family:Georgia,serif;margin-bottom:12px}
-.meta{color:#777;font-size:14px;margin-bottom:12px}
-.card p{color:#555;line-height:1.8;margin-bottom:18px}
-.actions{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;background:#111;color:white;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:bold;border:none;cursor:pointer}
-.gold{background:#c89b3c}
-.vote{margin-top:15px;font-weight:bold;cursor:pointer}
-.prize-box{background:#111;color:white;border-radius:40px;padding:60px 30px;text-align:center;margin-top:80px}
-.prize-box h2{font-size:52px;font-family:Georgia,serif;color:#d6aa45;margin-bottom:20px}
-.prize-box p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
-.prizes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:35px}
-.prize{background:white;color:#111;padding:25px;border-radius:25px;font-weight:bold}
-.rules{background:white;border:2px solid #111;border-radius:35px;padding:35px;margin-top:60px}
-.rules h2{font-size:42px;font-family:Georgia,serif;margin-bottom:20px}
-.rules ul{margin-left:22px}
-.rules li{color:#555;line-height:1.8;margin-bottom:8px}
-footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
-@media(max-width:768px){.hero{height:430px}.hero-content h1{font-size:46px}.hero-content p{font-size:18px}.section-title{font-size:40px}}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+select{
+font:inherit;
+}
+
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:20px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:52px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
+
+.hero{
+height:560px;
+position:relative;
+overflow:hidden;
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.18));
+}
+
+.hero-content{
+position:absolute;
+bottom:55px;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+color:white;
+width:90%;
+}
+
+.hero-content h1{
+font-size:70px;
+font-family:Georgia,serif;
+margin-bottom:15px;
+}
+
+.hero-content p{
+font-size:22px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+}
+
+.section{
+max-width:1400px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:18px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 45px;
+}
+
+.intro-box{
+background:white;
+border:2px solid #111;
+border-radius:40px;
+padding:38px 30px;
+text-align:center;
+margin-bottom:45px;
+box-shadow:0 14px 40px rgba(0,0,0,.07);
+}
+
+.intro-box h2{
+font-family:Georgia,serif;
+font-size:42px;
+margin-bottom:14px;
+}
+
+.intro-box p{
+font-size:18px;
+line-height:1.8;
+color:#555;
+max-width:900px;
+margin:auto;
+}
+
+.contest-toolbar{
+background:white;
+border:2px solid #111;
+border-radius:34px;
+padding:24px;
+display:grid;
+grid-template-columns:2fr 1fr auto;
+gap:14px;
+margin-bottom:28px;
+}
+
+.contest-toolbar input,
+.contest-toolbar select{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:999px;
+font-size:16px;
+}
+
+.search-button{
+border:none;
+background:#c89b3c;
+color:white;
+padding:14px 24px;
+border-radius:999px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.filters{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:16px;
+margin-bottom:35px;
+}
+
+.filter-button{
+white-space:nowrap;
+background:white;
+border:2px solid #111;
+border-radius:999px;
+padding:11px 18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.filter-button.active{
+background:#111;
+color:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+overflow:hidden;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+display:flex;
+flex-direction:column;
+transition:.25s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card-image{
+position:relative;
+}
+
+.card-image img{
+width:100%;
+height:320px;
+object-fit:cover;
+display:block;
+}
+
+.status-label{
+position:absolute;
+top:18px;
+right:18px;
+padding:9px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+color:white;
+background:#111;
+}
+
+.status-label.open{
+background:#65e51f;
+box-shadow:0 0 16px rgba(101,229,31,.45);
+}
+
+.status-label.upcoming{
+background:#69a8ff;
+}
+
+.status-label.completed{
+background:#777;
+}
+
+.card-content{
+padding:25px;
+display:flex;
+flex-direction:column;
+height:100%;
+}
+
+.badge{
+display:inline-block;
+width:max-content;
+background:#c89b3c;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.card h3{
+font-size:32px;
+font-family:Georgia,serif;
+margin-bottom:12px;
+}
+
+.meta{
+color:#777;
+font-size:14px;
+line-height:1.7;
+margin-bottom:12px;
+}
+
+.card p{
+color:#555;
+line-height:1.8;
+margin-bottom:18px;
+}
+
+.prize-line{
+background:#fff8df;
+border:1px solid #e0c468;
+border-radius:18px;
+padding:14px;
+font-weight:bold;
+margin-bottom:16px;
+}
+
+.winner-line{
+background:#ecfff0;
+border:1px solid #65e51f;
+border-radius:18px;
+padding:14px;
+font-weight:bold;
+margin-bottom:16px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:auto;
+}
+
+.btn{
+display:inline-block;
+background:#111;
+color:white;
+padding:14px 20px;
+border-radius:999px;
+font-weight:bold;
+border:none;
+cursor:pointer;
+}
+
+.btn.gold{
+background:#c89b3c;
+}
+
+.btn.green{
+background:#65e51f;
+box-shadow:0 0 16px rgba(101,229,31,.4);
+}
+
+.btn.light{
+background:white;
+color:#111;
+border:1px solid #111;
+}
+
+.vote{
+margin-top:18px;
+font-weight:bold;
+cursor:pointer;
+border:none;
+background:transparent;
+text-align:left;
+font-size:16px;
+}
+
+.vote.voted{
+color:#d52c59;
+}
+
+.empty-message{
+display:none;
+background:white;
+border:2px dashed #aaa;
+border-radius:30px;
+padding:42px;
+text-align:center;
+color:#666;
+}
+
+.empty-message h2{
+font-family:Georgia,serif;
+font-size:32px;
+margin-bottom:10px;
+}
+
+.prize-box{
+background:#111;
+color:white;
+border-radius:40px;
+padding:60px 30px;
+text-align:center;
+margin-top:80px;
+}
+
+.prize-box h2{
+font-size:52px;
+font-family:Georgia,serif;
+color:#d6aa45;
+margin-bottom:20px;
+}
+
+.prize-box p{
+font-size:20px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+}
+
+.prizes{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:35px;
+}
+
+.prize{
+background:white;
+color:#111;
+padding:25px;
+border-radius:25px;
+font-weight:bold;
+}
+
+.rules{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+padding:35px;
+margin-top:60px;
+}
+
+.rules h2{
+font-size:42px;
+font-family:Georgia,serif;
+margin-bottom:20px;
+}
+
+.rules ul{
+margin-left:22px;
+}
+
+.rules li{
+color:#555;
+line-height:1.8;
+margin-bottom:8px;
+}
+
+footer{
+margin-top:70px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.footer-links a{
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.contest-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.76);
+z-index:5000;
+display:none;
+padding:25px;
+overflow-y:auto;
+}
+
+.contest-modal.open{
+display:block;
+}
+
+.modal-card{
+max-width:850px;
+margin:35px auto;
+background:white;
+border-radius:34px;
+overflow:hidden;
+position:relative;
+}
+
+.modal-card img{
+width:100%;
+height:390px;
+object-fit:cover;
+display:block;
+}
+
+.modal-content{
+padding:32px;
+}
+
+.modal-content h2{
+font-family:Georgia,serif;
+font-size:44px;
+margin-bottom:12px;
+}
+
+.modal-content p{
+color:#555;
+font-size:17px;
+line-height:1.9;
+white-space:pre-wrap;
+}
+
+.modal-close{
+position:absolute;
+top:18px;
+right:18px;
+width:46px;
+height:46px;
+border:none;
+border-radius:50%;
+background:#111;
+color:white;
+font-size:24px;
+cursor:pointer;
+z-index:2;
+}
+
+@media(max-width:768px){
+
+.hero{
+height:430px;
+}
+
+.hero-content h1{
+font-size:46px;
+}
+
+.hero-content p{
+font-size:18px;
+}
+
+.section-title{
+font-size:40px;
+}
+
+.contest-toolbar{
+grid-template-columns:1fr;
+}
+
+.logo-big{
+font-size:40px;
+}
+
+.prize-box h2{
+font-size:40px;
+}
+
+.modal-card img{
+height:280px;
+}
+
+.modal-content h2{
+font-size:34px;
+}
+
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
+
+<div class="logo-small">
+pets &
+</div>
+
+<div class="logo-big">
+DOGUE
+</div>
+
 </header>
 
 <section class="hero">
-<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1800&q=80" alt="Contests">
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1800&q=80"
+alt="PETS & DOGUE Contests">
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
-<h1>Contests & Prizes</h1>
+
+<h1>
+Contests & Prizes
+</h1>
+
 <p>
 Photo contests, cover star challenges, community votes and monthly prizes for unforgettable pets.
 </p>
+
 </div>
+
 </section>
 
 <section class="section">
 
-<h2 class="section-title">Current Contests</h2>
+<div class="intro-box">
 
-<div class="grid">
+<h2>
+Make Your Pet The Next Star
+</h2>
 
-<div class="card">
-<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Cover star contest">
-<div class="card-content">
-<span class="badge">COVER STAR</span>
-<h3>Next DOGUE Cover Star</h3>
-<div class="meta">Monthly selection · Community choice</div>
 <p>
-Submit your pet for a chance to appear in a future PETS & DOGUE cover feature.
+Discover current PETS & DOGUE competitions, submit your pet, support community favourites and follow winners selected for future magazine features.
 </p>
-<div class="actions">
-<a href="become-cover-star.html" class="btn gold">Apply Now</a>
-<a href="cover-stars.html" class="btn">View Stars</a>
-</div>
-<div class="vote" onclick="vote(this)">❤️ <span>245</span> votes</div>
-</div>
+
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Photo contest">
-<div class="card-content">
-<span class="badge">PHOTO CONTEST</span>
-<h3>Best Pet Photo</h3>
-<div class="meta">Open now · Winner featured in Photos</div>
-<p>
-Send your most beautiful, funny or emotional pet photo for a chance to be featured.
-</p>
-<div class="actions">
-<a href="submit-pet.html" class="btn gold">Submit Photo</a>
-<a href="photos.html" class="btn">Gallery</a>
-</div>
-<div class="vote" onclick="vote(this)">❤️ <span>189</span> votes</div>
-</div>
+<h2 class="section-title">
+Current Competitions
+</h2>
+
+<div class="gold-line"></div>
+
+<div class="contest-toolbar">
+
+<input
+id="contestSearch"
+type="text"
+placeholder="Search by competition, prize, winner or status..."
+oninput="renderContests()">
+
+<select
+id="contestStatusFilter"
+onchange="renderContests()">
+
+<option value="All">
+All Competitions
+</option>
+
+<option value="Open">
+Open
+</option>
+
+<option value="Draft">
+Upcoming
+</option>
+
+<option value="Voting Closed">
+Voting Closed
+</option>
+
+<option value="Completed">
+Completed
+</option>
+
+</select>
+
+<button
+class="search-button"
+onclick="renderContests()">
+
+Search
+
+</button>
+
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Rescue story contest">
-<div class="card-content">
-<span class="badge">RESCUE STORY</span>
-<h3>Most Inspiring Rescue Story</h3>
-<div class="meta">Pets In Need · Editorial feature</div>
+<div class="filters">
+
+<button
+class="filter-button active"
+onclick="setStatusFilter('All',this)">
+
+All
+
+</button>
+
+<button
+class="filter-button"
+onclick="setStatusFilter('Open',this)">
+
+Open Now
+
+</button>
+
+<button
+class="filter-button"
+onclick="setStatusFilter('Draft',this)">
+
+Upcoming
+
+</button>
+
+<button
+class="filter-button"
+onclick="setStatusFilter('Voting Closed',this)">
+
+Voting Closed
+
+</button>
+
+<button
+class="filter-button"
+onclick="setStatusFilter('Completed',this)">
+
+Completed
+
+</button>
+
+</div>
+
+<div
+class="grid"
+id="contestGrid">
+</div>
+
+<div
+class="empty-message"
+id="emptyMessage">
+
+<h2>
+No competitions found
+</h2>
+
 <p>
-Tell us a rescue or adoption story that deserves attention, love and visibility.
+Try another status or search term.
 </p>
-<div class="actions">
-<a href="pets-in-need.html" class="btn gold">Read Stories</a>
-<a href="contact.html" class="btn">Submit Story</a>
-</div>
-<div class="vote" onclick="vote(this)">❤️ <span>132</span> votes</div>
-</div>
-</div>
 
 </div>
 
 <div class="prize-box">
 
-<h2>Monthly PETS & DOGUE Prizes</h2>
+<h2>
+Monthly PETS & DOGUE Prizes
+</h2>
 
 <p>
-Future contests may include partner gifts, pet fashion accessories, grooming vouchers,
-hotel discounts, photography sessions and premium magazine features.
+Competitions may include partner gifts, pet fashion accessories, grooming vouchers, hotel discounts, photography sessions and premium magazine features.
 </p>
 
 <div class="prizes">
-<div class="prize">Cover Star Feature</div>
-<div class="prize">Pet Fashion Gifts</div>
-<div class="prize">Grooming Voucher</div>
-<div class="prize">Partner Discounts</div>
-<div class="prize">Photo Feature</div>
-<div class="prize">Hall Of Fame Place</div>
+
+<div class="prize">
+👑 Cover Star Feature
+</div>
+
+<div class="prize">
+🎁 Pet Fashion Gifts
+</div>
+
+<div class="prize">
+✂️ Grooming Voucher
+</div>
+
+<div class="prize">
+🏨 Partner Discounts
+</div>
+
+<div class="prize">
+📸 Photo Feature
+</div>
+
+<div class="prize">
+🏆 Hall Of Fame Place
+</div>
+
 </div>
 
 </div>
 
 <div class="rules">
 
-<h2>How It Works</h2>
+<h2>
+How It Works
+</h2>
 
 <ul>
-<li>Submit your pet through the application pages.</li>
-<li>Selected entries may appear in PETS & DOGUE contests.</li>
-<li>Readers can support favourites with hearts and votes.</li>
-<li>Winners may be featured in the magazine, Photos, Hall Of Fame or future covers.</li>
-<li>Participation does not guarantee publication or prizes.</li>
+
+<li>
+Submit your pet through the relevant competition or application page.
+</li>
+
+<li>
+Selected entries may appear in PETS & DOGUE competitions and public voting.
+</li>
+
+<li>
+Readers can support favourites with hearts and votes.
+</li>
+
+<li>
+Winners may be featured in the magazine, Photos, Hall Of Fame or future covers.
+</li>
+
+<li>
+PETS & DOGUE may remove suspicious, abusive or manipulated voting activity.
+</li>
+
+<li>
+Participation does not guarantee publication, selection or a physical prize.
+</li>
+
 </ul>
 
 </div>
@@ -162,26 +804,837 @@ hotel discounts, photography sessions and premium magazine features.
 </section>
 
 <footer>
-<h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
+
+<h2>
+PETS & DOGUE
+</h2>
+
+<p>
+The International Luxury Animal Magazine
+</p>
 
 <div class="footer-links">
-<a href="index.html">Home</a>
-<a href="photos.html">Photos</a>
-<a href="cover-stars.html">Cover Stars</a>
-<a href="hall-of-fame.html">Hall Of Fame</a>
-<a href="privacy.html">Privacy</a>
-<a href="contact.html">Contact</a>
+
+<a href="index.html">
+Home
+</a>
+
+<a href="photos.html">
+Photos
+</a>
+
+<a href="members-gallery.html">
+Members Gallery
+</a>
+
+<a href="cover-stars.html">
+Cover Stars
+</a>
+
+<a href="hall-of-fame.html">
+Hall Of Fame
+</a>
+
+<a href="account.html">
+Account
+</a>
+
+<a href="privacy.html">
+Privacy
+</a>
+
+<a href="contact.html">
+Contact
+</a>
+
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a
+href="admin.html"
+class="admin-small">
+
+Admin
+
+</a>
+
 </footer>
 
+<div
+class="contest-modal"
+id="contestModal"
+onclick="closeContestFromOverlay(event)">
+
+<div class="modal-card">
+
+<button
+class="modal-close"
+onclick="closeContest()">
+
+×
+
+</button>
+
+<img
+id="modalImage"
+alt="Competition image">
+
+<div class="modal-content">
+
+<span
+class="badge"
+id="modalStatus">
+</span>
+
+<h2
+id="modalTitle">
+</h2>
+
+<div
+class="meta"
+id="modalMeta">
+</div>
+
+<div
+class="prize-line"
+id="modalPrize">
+</div>
+
+<div
+class="winner-line"
+id="modalWinner"
+style="display:none;">
+</div>
+
+<p
+id="modalRules">
+</p>
+
+<br>
+
+<a
+href="members-gallery.html"
+class="btn green"
+id="modalJoinButton">
+
+Join Competition
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
-function vote(element){
-const count = element.querySelector("span");
-count.textContent = Number(count.textContent) + 1;
+const CMS_KEY = "pets_dogue_cms_v1";
+const VOTES_KEY = "pets_dogue_contest_votes";
+const VOTED_KEY = "pets_dogue_contest_voted";
+
+let publicContests = [];
+let activeStatus = "All";
+
+let contestVotes =
+JSON.parse(
+localStorage.getItem(VOTES_KEY) || "{}"
+);
+
+let votedContests =
+JSON.parse(
+localStorage.getItem(VOTED_KEY) || "{}"
+);
+
+const fallbackContests = [
+
+{
+id:"fallback-cover-star",
+title:"Next DOGUE Cover Star",
+prize:"Future PETS & DOGUE cover feature",
+start:"2026-07-01",
+end:"2026-07-31",
+status:"Open",
+winner:"",
+rules:"Submit one beautiful pet photo, add the pet's name, breed and short story. The community can vote, and selected finalists may appear in the next issue.",
+votes:245,
+image:"file_00000000a9d471fda9b4629589be22a9.png",
+joinLink:"members-gallery.html"
+},
+
+{
+id:"fallback-best-photo",
+title:"Best Pet Photo",
+prize:"Featured placement in the PETS & DOGUE Photos gallery",
+start:"2026-07-05",
+end:"2026-08-05",
+status:"Open",
+winner:"",
+rules:"Send your most beautiful, funny or emotional pet photograph. Clear, original and responsible submissions only.",
+votes:189,
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
+joinLink:"submit-pet.html"
+},
+
+{
+id:"fallback-rescue",
+title:"Most Inspiring Rescue Story",
+prize:"Editorial feature in Pets In Need",
+start:"2026-08-01",
+end:"2026-08-31",
+status:"Draft",
+winner:"",
+rules:"Tell us a rescue or adoption story that deserves visibility, care and community support.",
+votes:132,
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80",
+joinLink:"contact.html"
 }
+
+];
+
+function escapeHTML(value){
+
+return String(value || "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+function loadContests(){
+
+let cmsContests = [];
+
+try{
+
+const cms =
+JSON.parse(
+localStorage.getItem(CMS_KEY) || "{}"
+);
+
+if(
+Array.isArray(cms.contests)
+){
+
+cmsContests =
+cms.contests
+.filter(contest =>
+contest.status !== "Draft" ||
+contest.start
+)
+.map(contest => ({
+
+...contest,
+
+image:
+contest.image ||
+selectContestImage(
+contest.title,
+contest.status
+),
+
+votes:
+Number(contest.votes || 0),
+
+joinLink:
+contest.joinLink ||
+"members-gallery.html"
+
+}));
+
+}
+
+}catch(error){
+
+console.error(
+"Unable to read CMS contests.",
+error
+);
+
+}
+
+publicContests = [
+...cmsContests,
+...fallbackContests
+];
+
+renderContests();
+
+}
+
+function selectContestImage(title,status){
+
+const text =
+String(title || "")
+.toLowerCase();
+
+if(
+text.includes("rescue") ||
+text.includes("adoption")
+){
+
+return "https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+if(
+text.includes("photo") ||
+text.includes("portrait")
+){
+
+return "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+if(
+text.includes("fashion")
+){
+
+return "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+return "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80";
+
+}
+
+function setStatusFilter(status,button){
+
+activeStatus = status;
+
+document
+.querySelectorAll(".filter-button")
+.forEach(item => {
+
+item.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+document.getElementById(
+"contestStatusFilter"
+).value = status;
+
+renderContests();
+
+}
+
+function getFilteredContests(){
+
+const query =
+document
+.getElementById("contestSearch")
+.value
+.toLowerCase()
+.trim();
+
+const selectedStatus =
+document
+.getElementById("contestStatusFilter")
+.value;
+
+return publicContests.filter(contest => {
+
+const status =
+contest.status || "Draft";
+
+const matchesActive =
+activeStatus === "All" ||
+status === activeStatus;
+
+const matchesSelect =
+selectedStatus === "All" ||
+status === selectedStatus;
+
+const searchableText = [
+
+contest.title,
+contest.prize,
+contest.status,
+contest.winner,
+contest.rules
+
+]
+.join(" ")
+.toLowerCase();
+
+const matchesSearch =
+!query ||
+searchableText.includes(query);
+
+return (
+matchesActive &&
+matchesSelect &&
+matchesSearch
+);
+
+});
+
+}
+
+function renderContests(){
+
+const grid =
+document.getElementById("contestGrid");
+
+const emptyMessage =
+document.getElementById("emptyMessage");
+
+const contests =
+getFilteredContests();
+
+grid.innerHTML = "";
+
+if(
+contests.length === 0
+){
+
+emptyMessage.style.display =
+"block";
+
+return;
+
+}
+
+emptyMessage.style.display =
+"none";
+
+contests.forEach(contest => {
+
+grid.insertAdjacentHTML(
+"beforeend",
+createContestCard(contest)
+);
+
+});
+
+}
+
+function createContestCard(contest){
+
+const id =
+String(contest.id);
+
+const initialVotes =
+contestVotes[id] !== undefined
+? contestVotes[id]
+: Number(contest.votes || 0);
+
+const voted =
+Boolean(votedContests[id]);
+
+const status =
+contest.status || "Draft";
+
+const statusClass =
+status === "Open"
+? "open"
+: status === "Completed"
+? "completed"
+: "upcoming";
+
+const image =
+contest.image ||
+selectContestImage(
+contest.title,
+contest.status
+);
+
+const dateText =
+formatContestDates(
+contest.start,
+contest.end
+);
+
+const winnerBlock =
+contest.winner
+? `
+<div class="winner-line">
+🏆 Winner: ${escapeHTML(contest.winner)}
+</div>
+`
+: "";
+
+const joinButton =
+status === "Open"
+? `
+<a
+href="${escapeHTML(contest.joinLink || "members-gallery.html")}"
+class="btn green">
+Join Now
+</a>
+`
+: "";
+
+return `
+<article class="card">
+
+<div class="card-image">
+
+<img
+src="${image}"
+alt="${escapeHTML(contest.title || "PETS & DOGUE Contest")}">
+
+<span class="status-label ${statusClass}">
+${escapeHTML(status)}
+</span>
+
+</div>
+
+<div class="card-content">
+
+<span class="badge">
+PETS & DOGUE CONTEST
+</span>
+
+<h3>
+${escapeHTML(contest.title || "Untitled Contest")}
+</h3>
+
+<div class="meta">
+${escapeHTML(dateText)}
+</div>
+
+<p>
+${escapeHTML(
+contest.rules ||
+"Competition details will be announced soon."
+)}
+</p>
+
+<div class="prize-line">
+🎁 Prize:
+${escapeHTML(
+contest.prize ||
+"PETS & DOGUE feature"
+)}
+</div>
+
+${winnerBlock}
+
+<div class="actions">
+
+${joinButton}
+
+<button
+class="btn gold"
+onclick="openContest('${escapeHTML(id)}')">
+
+View Details
+
+</button>
+
+</div>
+
+<button
+class="vote ${voted ? "voted" : ""}"
+onclick="voteContest('${escapeHTML(id)}',this)">
+
+❤️ <span>${initialVotes}</span> votes
+
+</button>
+
+</div>
+
+</article>
+`;
+
+}
+
+function formatContestDates(start,end){
+
+if(
+!start &&
+!end
+){
+
+return "Dates to be announced";
+
+}
+
+if(
+start &&
+end
+){
+
+return (
+formatDate(start) +
+" – " +
+formatDate(end)
+);
+
+}
+
+if(start){
+
+return "Starts " + formatDate(start);
+
+}
+
+return "Ends " + formatDate(end);
+
+}
+
+function formatDate(value){
+
+if(!value){
+return "";
+}
+
+const date =
+new Date(value);
+
+if(
+Number.isNaN(
+date.getTime()
+)
+){
+
+return value;
+
+}
+
+return date.toLocaleDateString(
+"en-GB",
+{
+day:"numeric",
+month:"short",
+year:"numeric"
+}
+);
+
+}
+
+function voteContest(id,button){
+
+const contest =
+publicContests.find(item =>
+String(item.id) === String(id)
+);
+
+if(!contest){
+return;
+}
+
+const currentVotes =
+contestVotes[id] !== undefined
+? Number(contestVotes[id])
+: Number(contest.votes || 0);
+
+if(
+votedContests[id]
+){
+
+contestVotes[id] =
+Math.max(
+0,
+currentVotes - 1
+);
+
+votedContests[id] =
+false;
+
+button.classList.remove("voted");
+
+}else{
+
+contestVotes[id] =
+currentVotes + 1;
+
+votedContests[id] =
+true;
+
+button.classList.add("voted");
+
+}
+
+button
+.querySelector("span")
+.textContent =
+contestVotes[id];
+
+localStorage.setItem(
+VOTES_KEY,
+JSON.stringify(contestVotes)
+);
+
+localStorage.setItem(
+VOTED_KEY,
+JSON.stringify(votedContests)
+);
+
+}
+
+function openContest(id){
+
+const contest =
+publicContests.find(item =>
+String(item.id) === String(id)
+);
+
+if(!contest){
+return;
+}
+
+document
+.getElementById("modalImage")
+.src =
+contest.image ||
+selectContestImage(
+contest.title,
+contest.status
+);
+
+document
+.getElementById("modalTitle")
+.textContent =
+contest.title ||
+"PETS & DOGUE Contest";
+
+document
+.getElementById("modalStatus")
+.textContent =
+contest.status ||
+"Contest";
+
+document
+.getElementById("modalMeta")
+.textContent =
+formatContestDates(
+contest.start,
+contest.end
+);
+
+document
+.getElementById("modalPrize")
+.textContent =
+"Prize: " +
+(
+contest.prize ||
+"PETS & DOGUE feature"
+);
+
+document
+.getElementById("modalRules")
+.textContent =
+contest.rules ||
+"Competition details will be announced soon.";
+
+const winner =
+document.getElementById(
+"modalWinner"
+);
+
+if(
+contest.winner
+){
+
+winner.style.display =
+"block";
+
+winner.textContent =
+"Winner: " +
+contest.winner;
+
+}else{
+
+winner.style.display =
+"none";
+
+}
+
+const joinButton =
+document.getElementById(
+"modalJoinButton"
+);
+
+joinButton.href =
+contest.joinLink ||
+"members-gallery.html";
+
+joinButton.style.display =
+contest.status === "Open"
+? "inline-block"
+: "none";
+
+document
+.getElementById("contestModal")
+.classList.add("open");
+
+document.body.style.overflow =
+"hidden";
+
+}
+
+function closeContest(){
+
+document
+.getElementById("contestModal")
+.classList.remove("open");
+
+document.body.style.overflow =
+"";
+
+}
+
+function closeContestFromOverlay(event){
+
+if(
+event.target.id === "contestModal"
+){
+
+closeContest();
+
+}
+
+}
+
+document.addEventListener(
+"keydown",
+event => {
+
+if(
+event.key === "Escape"
+){
+
+closeContest();
+
+}
+
+}
+);
+
+window.addEventListener(
+"storage",
+event => {
+
+if(
+event.key === CMS_KEY
+){
+
+loadContests();
+
+}
+
+if(
+event.key === VOTES_KEY
+){
+
+contestVotes =
+JSON.parse(
+localStorage.getItem(VOTES_KEY) ||
+"{}"
+);
+
+renderContests();
+
+}
+
+}
+);
+
+loadContests();
 </script>
 
 </body>
