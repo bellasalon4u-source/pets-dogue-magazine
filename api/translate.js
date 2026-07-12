@@ -1,3 +1,28 @@
+"use strict";
+
+/*
+=========================================================
+PETS & DOGUE — SERVER TRANSLATION API
+Vercel Serverless Function
+
+Endpoint:
+POST /api/translate
+
+Request:
+{
+  "texts": ["Text one", "Text two"],
+  "targetLanguage": "ru",
+  "sourceLanguage": "en"
+}
+
+Response:
+{
+  "translations": ["Перевод один", "Перевод два"],
+  "targetLanguage": "ru"
+}
+=========================================================
+*/
+
 const SUPPORTED_LANGUAGES = new Set([
   "en",
   "ru",
@@ -11,60 +36,53 @@ const SUPPORTED_LANGUAGES = new Set([
   "hi"
 ]);
 
+const LANGUAGE_NAMES = {
+  en: "English",
+  ru: "Russian",
+  uk: "Ukrainian",
+  cs: "Czech",
+  pl: "Polish",
+  es: "Spanish",
+  it: "Italian",
+  de: "German",
+  ar: "Arabic",
+  hi: "Hindi"
+};
+
 const MAX_ITEMS = 100;
 const MAX_TEXT_LENGTH = 5000;
 const MAX_TOTAL_LENGTH = 30000;
 
+const OPENAI_API_URL =
+  "https://api.openai.com/v1/responses";
+
+/*
+You may set OPENAI_MODEL in Vercel.
+
+If it is not set, the function uses gpt-4o-mini.
+*/
+
+const DEFAULT_MODEL = "gpt-4o-mini";
+
+/*
+These names should remain in their original form.
+
+You can add official business names, product names,
+promo codes or other protected names later.
+*/
+
+const PROTECTED_NAMES = [
+  "PETS & DOGUE",
+  "PETS &amp; DOGUE",
+  "DOGUE Trust",
+  "DOGUE Verified",
+  "DOGUE",
+  "Miso"
+];
+
+/* =========================================================
+RESPONSE HELPERS
+========================================================= */
+
 function sendJson(response, status, data) {
-  response.status(status).json(data);
-}
-
-function validateTexts(texts) {
-  if (!Array.isArray(texts)) {
-    return "The texts field must be an array.";
-  }
-
-  if (texts.length === 0) {
-    return "No text was provided.";
-  }
-
-  if (texts.length > MAX_ITEMS) {
-    return `A maximum of ${MAX_ITEMS} text items is allowed.`;
-  }
-
-  let totalLength = 0;
-
-  for (const text of texts) {
-    if (typeof text !== "string") {
-      return "Every translation item must be text.";
-    }
-
-    if (text.length > MAX_TEXT_LENGTH) {
-      return `One text item exceeds ${MAX_TEXT_LENGTH} characters.`;
-    }
-
-    totalLength += text.length;
-  }
-
-  if (totalLength > MAX_TOTAL_LENGTH) {
-    return `The request exceeds ${MAX_TOTAL_LENGTH} characters.`;
-  }
-
-  return "";
-}
-
-function protectOriginalNames(text) {
-  const replacements = [];
-  let protectedText = text;
-
-  const protectedNames = [
-    "PETS & DOGUE",
-    "PETS &amp; DOGUE",
-    "DOGUE Trust",
-    "DOGUE Verified",
-    "DOGUE",
-    "Miso"
-  ];
-
-  protectedNames.forEach((name, index) => {
-    if (!
+  response.status(status).json(data
