@@ -2,1362 +2,3173 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="PETS & DOGUE — The International Luxury Animal Magazine">
+
 <title>PETS & DOGUE</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-a{text-decoration:none;color:inherit}
+:root{
+--black:#070707;
+--white:#ffffff;
+--cream:#f6f2e9;
+--gold:#c89b3c;
+--gold-light:#efd38c;
+--green:#65e51f;
+--pink:#ff65b3;
+--purple:#9e73ff;
+--blue:#6ddcff;
+--orange:#ff9c43;
+--border:#d8d3c8;
+}
 
-.vip-bar{
-height:42px;
-display:flex;
-align-items:center;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:var(--cream);
+color:#111;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
+}
+
+body.menu-open{
 overflow:hidden;
-color:white;
-font-weight:bold;
-letter-spacing:.8px;
-font-size:14px;
-position:relative;
-z-index:2000;
-background:linear-gradient(90deg,#ff7ac8,#b57cff,#69d8ff,#f4c45f,#ff7ac8);
-background-size:400% 400%;
-animation:vipGlow 8s ease infinite;
-box-shadow:0 2px 18px rgba(255,122,200,.35);
 }
 
-.vip-bar::before,
-.vip-bar::after{
-content:"✨";
-position:absolute;
-top:7px;
-font-size:18px;
-animation:sparkle 1.8s infinite alternate;
-z-index:2;
+a{
+color:inherit;
+text-decoration:none;
 }
 
-.vip-bar::before{left:12px}
-.vip-bar::after{right:12px}
-
-.vip-track{
-display:flex;
-gap:28px;
-white-space:nowrap;
-animation:vipMove 24s linear infinite;
-padding-left:100%;
-align-items:center;
+button,
+input,
+select{
+font:inherit;
 }
 
-.vip-tap{
-background:#65e51f;
-color:white;
-padding:7px 16px;
-border-radius:999px;
-box-shadow:0 0 16px rgba(101,229,31,.9);
-text-shadow:0 1px 2px rgba(0,0,0,.25);
-animation:tapPulse 1.6s infinite;
-}
-
-@keyframes vipMove{
-0%{transform:translateX(0)}
-100%{transform:translateX(-100%)}
-}
-
-@keyframes vipGlow{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-
-@keyframes tapPulse{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.08)}
-}
-
-@keyframes sparkle{
-0%{opacity:.4;transform:scale(.8) rotate(0deg)}
-100%{opacity:1;transform:scale(1.2) rotate(18deg)}
-}
-
-header{
-background:white;
-border-bottom:1px solid #ddd;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.top-bar{
-min-height:66px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:14px;
-padding:10px 18px;
-max-width:1500px;
-margin:auto;
-}
-
-.menu-btn{
-background:none;
-border:none;
-font-size:34px;
+button{
 cursor:pointer;
 }
 
-.lang{
-font-size:13px;
-letter-spacing:1px;
-color:#555;
-font-weight:bold;
-text-align:right;
+/* =========================
+   TOP ACCOUNT BAR
+========================= */
+
+.account-bar{
+height:54px;
+background:var(--black);
+color:white;
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+border-bottom:1px solid #333;
+position:relative;
+z-index:1900;
+}
+
+.account-side{
+display:flex;
+align-items:center;
+gap:10px;
+padding:0 18px;
+}
+
+.account-side.right{
+justify-content:flex-end;
 }
 
 .account-link{
-display:inline-block;
-margin-right:14px;
-color:#49bd12;
+background:white;
+color:#111;
+padding:10px 22px;
+font-size:14px;
 font-weight:bold;
+letter-spacing:.7px;
+transition:.2s;
 }
 
-.brand{text-align:center;line-height:.9}
-.logo-small{font-size:15px;color:#b78a2e}
-.logo-big{
-font-size:42px;
+.account-link:hover{
+background:var(--gold);
+color:white;
+}
+
+.account-link.club{
+background:var(--green);
+color:#111;
+box-shadow:0 0 18px rgba(101,229,31,.38);
+}
+
+.account-edition{
 font-family:Georgia,serif;
-font-weight:bold;
-letter-spacing:3px;
-color:#c89b3c;
+font-size:14px;
+letter-spacing:2px;
+color:#ccc;
 }
 
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.45);
-z-index:2500;
+/* =========================
+   MAIN HEADER
+========================= */
+
+.site-header{
+background:var(--black);
+color:white;
+position:sticky;
+top:0;
+z-index:1800;
+border-bottom:1px solid #2b2b2b;
+}
+
+.header-main{
+height:116px;
+display:grid;
+grid-template-columns:90px 1fr 90px;
+align-items:center;
+max-width:1550px;
+margin:auto;
+padding:0 18px;
+}
+
+.icon-button{
+width:52px;
+height:52px;
+background:transparent;
+border:1px solid transparent;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:31px;
+border-radius:50%;
+transition:.2s;
+}
+
+.icon-button:hover{
+border-color:#666;
+background:#181818;
+}
+
+.menu-lines{
+width:30px;
+display:grid;
+gap:6px;
+}
+
+.menu-lines span{
+height:2px;
+background:white;
+border-radius:999px;
+display:block;
+}
+
+.brand{
+text-align:center;
+line-height:.86;
+}
+
+.brand-small{
+font-family:Georgia,serif;
+font-size:15px;
+letter-spacing:1px;
+color:var(--gold-light);
+}
+
+.brand-big{
+font-family:Georgia,serif;
+font-size:62px;
+font-weight:normal;
+letter-spacing:4px;
+}
+
+.desktop-categories{
+background:var(--black);
+border-top:1px solid #2a2a2a;
+border-bottom:1px solid #353535;
+display:flex;
+align-items:center;
+gap:32px;
+overflow-x:auto;
+padding:17px 26px;
+scrollbar-width:none;
+}
+
+.desktop-categories::-webkit-scrollbar{
 display:none;
 }
 
-.overlay.show{display:block}
+.desktop-categories a{
+white-space:nowrap;
+font-weight:bold;
+font-size:15px;
+letter-spacing:.7px;
+transition:.2s;
+}
+
+.desktop-categories a:hover{
+color:var(--gold-light);
+}
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.68);
+display:none;
+z-index:2500;
+}
+
+.menu-overlay.show{
+display:block;
+}
 
 .side-menu{
 position:fixed;
 top:0;
 left:-100%;
-width:min(420px,92%);
+width:min(430px,94%);
 height:100vh;
-background:#fff;
-z-index:3000;
-transition:.35s;
+background:white;
+z-index:2600;
 overflow-y:auto;
+transition:.38s ease;
 border-right:2px solid #111;
 }
 
-.side-menu.open{left:0}
+.side-menu.open{
+left:0;
+}
 
-.menu-header{
+.side-menu-header{
+background:#111;
+color:white;
+padding:25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:22px;
+position:sticky;
+top:0;
+z-index:2;
+}
+
+.side-menu-header h2{
+font-family:Georgia,serif;
+font-size:33px;
+font-weight:normal;
+}
+
+.close-menu{
+width:43px;
+height:43px;
+border:none;
+border-radius:50%;
+background:white;
+font-size:24px;
+}
+
+.menu-account{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:18px;
 border-bottom:1px solid #ddd;
 }
 
-.menu-header h2{
-font-family:Georgia,serif;
-font-size:34px;
-color:#c89b3c;
+.menu-account a{
+padding:13px;
+text-align:center;
+border:2px solid #111;
+font-weight:bold;
+border-radius:999px;
 }
 
-.close-btn{
-background:#111;
-color:white;
-border:none;
-font-size:22px;
-width:42px;
-height:42px;
-border-radius:50%;
-cursor:pointer;
+.menu-account a:last-child{
+background:var(--green);
+border-color:var(--green);
 }
 
-.menu-list{
+.menu-items{
 padding:18px;
-display:flex;
-flex-direction:column;
-gap:14px;
+display:grid;
+gap:12px;
 }
 
 .menu-item{
-display:flex;
-align-items:center;
+display:grid;
+grid-template-columns:82px 1fr;
 gap:14px;
+align-items:center;
 border:2px solid #111;
-border-radius:22px;
-padding:10px;
-background:#f8f7f3;
+border-radius:20px;
+overflow:hidden;
+background:#faf8f3;
 }
 
 .menu-item img{
-width:74px;
-height:74px;
+width:82px;
+height:82px;
 object-fit:cover;
-border-radius:16px;
 }
 
 .menu-item h3{
 font-family:Georgia,serif;
-font-size:22px;
+font-size:21px;
 margin-bottom:4px;
 }
 
 .menu-item p{
-font-size:13px;
-color:#555;
-line-height:1.4;
+font-size:12px;
+line-height:1.5;
+color:#666;
+padding-right:8px;
 }
 
-.hero{
+/* =========================
+   COVER STAR CTA
+========================= */
+
+.cover-star-strip{
+background:white;
+border-bottom:4px solid #111;
+padding:24px 18px;
+}
+
+.cover-star-inner{
 max-width:1500px;
 margin:auto;
-padding:24px 18px 10px;
-}
-
-.cover{
-position:relative;
-overflow:hidden;
-border-radius:36px;
-box-shadow:0 25px 70px rgba(0,0,0,.18);
-background:#eee;
-}
-
-.cover img{
-width:100%;
-display:block;
-min-height:320px;
-object-fit:cover;
-}
-
-.issue-overlay{
-position:absolute;
-left:0;
-right:0;
-bottom:0;
-padding:80px 32px 30px;
-background:linear-gradient(to top,rgba(0,0,0,.72),transparent);
-color:white;
-pointer-events:none;
-}
-
-.issue-overlay span{
-display:inline-block;
-background:#c89b3c;
-padding:8px 14px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.issue-overlay h2{
-font-family:Georgia,serif;
-font-size:36px;
-margin-bottom:6px;
-}
-
-.issue-overlay p{
-font-size:15px;
-color:#eee;
-}
-
-.intro{
-max-width:1050px;
-margin:70px auto;
-padding:0 22px;
-text-align:center;
-}
-
-.kicker{
-letter-spacing:3px;
-color:#b78a2e;
-font-size:13px;
-font-weight:bold;
-margin-bottom:18px;
-}
-
-.intro h1{
-font-size:66px;
-font-family:Georgia,serif;
-line-height:1;
-margin-bottom:24px;
-}
-
-.intro p{
-font-size:22px;
-line-height:1.8;
-color:#555;
-}
-
-.section{
-max-width:1400px;
-margin:80px auto;
-padding:0 20px;
-}
-
-.section-title{
-font-size:54px;
-font-family:Georgia,serif;
-text-align:center;
-margin-bottom:38px;
-}
-
-.gold-line{
-width:90px;
-height:3px;
-background:#c89b3c;
-margin:0 auto 45px;
-}
-
-.editorial-grid{
 display:grid;
-grid-template-columns:1.3fr .7fr;
-gap:28px;
+grid-template-columns:minmax(0,1.3fr) minmax(290px,.7fr);
+gap:20px;
+align-items:stretch;
 }
 
-.big-story,
-.small-story{
-background:white;
-border:2px solid #111;
-border-radius:36px;
-overflow:hidden;
-box-shadow:0 16px 40px rgba(0,0,0,.08);
-}
-
-.big-story img{
-width:100%;
-height:520px;
-object-fit:cover;
-}
-
-.small-story img{
-width:100%;
-height:250px;
-object-fit:cover;
-}
-
-.story-content{padding:28px}
-
-.badge{
-display:inline-block;
-background:#c89b3c;
-color:white;
-padding:8px 14px;
-border-radius:999px;
-font-size:12px;
-font-weight:bold;
-margin-bottom:14px;
-}
-
-.story-content h2,
-.story-content h3{
-font-family:Georgia,serif;
-margin-bottom:12px;
-}
-
-.story-content h2{font-size:46px}
-.story-content h3{font-size:30px}
-
-.story-content p{
-color:#555;
-line-height:1.8;
-margin-bottom:18px;
-}
-
-.btn{
-display:inline-block;
-background:#111;
-color:white;
-padding:15px 22px;
-border-radius:999px;
-font-weight:bold;
-}
-
-.btn.gold{background:#c89b3c}
-
-.rubric-carousel{
-display:flex;
-gap:24px;
-overflow-x:auto;
-padding:30px 8px 45px;
-scroll-snap-type:x mandatory;
-}
-
-.rubric-carousel::-webkit-scrollbar{display:none}
-
-.rubric-card{
-flex:0 0 310px;
-height:470px;
+.cover-preview{
 position:relative;
-border-radius:42px;
+min-height:410px;
+border-radius:0;
 overflow:hidden;
-border:3px solid #111;
-scroll-snap-align:center;
-color:white;
-box-shadow:0 20px 55px rgba(0,0,0,.18);
-transition:.35s;
+background:#111;
 }
 
-.rubric-card:nth-child(2),
-.rubric-card:nth-child(5),
-.rubric-card:nth-child(8){
-transform:scale(1.07);
-}
-
-.rubric-card img{
+.cover-preview img{
 width:100%;
 height:100%;
+position:absolute;
+inset:0;
 object-fit:cover;
 }
 
-.rubric-card:after{
+.cover-preview:after{
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.08));
+background:
+linear-gradient(to top,rgba(0,0,0,.68),rgba(0,0,0,.04) 55%);
 }
 
-.rubric-content{
+.cover-copy{
 position:absolute;
-left:25px;
-right:25px;
+left:30px;
+right:30px;
 bottom:28px;
+z-index:2;
+color:white;
+}
+
+.cover-copy span{
+display:inline-block;
+font-size:12px;
+letter-spacing:2px;
+font-weight:bold;
+background:#111;
+padding:8px 12px;
+margin-bottom:13px;
+}
+
+.cover-copy h1{
+font-family:Georgia,serif;
+font-weight:normal;
+font-size:50px;
+line-height:1;
+margin-bottom:12px;
+max-width:750px;
+}
+
+.cover-copy p{
+line-height:1.6;
+max-width:700px;
+}
+
+.star-entry{
+position:relative;
+min-height:410px;
+background:
+radial-gradient(circle at 25% 20%,rgba(255,255,255,.6),transparent 25%),
+linear-gradient(145deg,var(--pink),var(--purple),var(--blue));
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#111;
+isolation:isolate;
+}
+
+.star-entry:before{
+content:"";
+position:absolute;
+inset:-25%;
+background:
+repeating-conic-gradient(
+from 0deg,
+rgba(255,255,255,.28) 0deg 9deg,
+transparent 9deg 22deg
+);
+animation:rotateGlow 18s linear infinite;
+z-index:-2;
+}
+
+.star-entry:after{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(255,255,255,.12);
+z-index:-1;
+}
+
+@keyframes rotateGlow{
+to{
+transform:rotate(360deg);
+}
+}
+
+.tap-arrow{
+position:absolute;
+top:22px;
+left:50%;
+transform:translateX(-50%);
+font-size:13px;
+font-weight:bold;
+letter-spacing:2px;
+animation:arrowBounce 1.4s infinite;
+}
+
+.tap-arrow:after{
+content:"↓";
+display:block;
+font-size:35px;
+text-align:center;
+margin-top:3px;
+}
+
+@keyframes arrowBounce{
+0%,100%{
+transform:translate(-50%,0);
+}
+
+50%{
+transform:translate(-50%,8px);
+}
+}
+
+.star-shape{
+width:290px;
+aspect-ratio:1;
+background:#fff443;
+clip-path:polygon(
+50% 0%,
+61% 30%,
+92% 18%,
+72% 45%,
+100% 56%,
+68% 62%,
+78% 94%,
+53% 72%,
+33% 100%,
+34% 67%,
+0% 72%,
+28% 51%,
+4% 34%,
+37% 35%
+);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:50px;
+transform:rotate(-5deg);
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+animation:starFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes starFloat{
+0%,100%{
+transform:rotate(-5deg) translateY(0) scale(1);
+}
+
+50%{
+transform:rotate(-2deg) translateY(-10px) scale(1.035);
+}
+}
+
+.star-text{
+transform:rotate(4deg);
+}
+
+.star-text small{
+display:block;
+font-weight:bold;
+font-size:11px;
+letter-spacing:2px;
+margin-bottom:8px;
+}
+
+.star-text strong{
+display:block;
+font-family:Georgia,serif;
+font-size:30px;
+line-height:.98;
+}
+
+.star-text em{
+display:block;
+font-style:normal;
+font-weight:bold;
+margin-top:13px;
+font-size:13px;
+}
+
+/* =========================
+   STORY BUBBLES
+========================= */
+
+.story-section{
+background:#fff;
+padding:30px 12px 26px;
+border-bottom:1px solid #ddd;
+}
+
+.story-scroll{
+max-width:1500px;
+margin:auto;
+display:flex;
+gap:19px;
+overflow-x:auto;
+padding:6px;
+scrollbar-width:none;
+}
+
+.story-scroll::-webkit-scrollbar{
+display:none;
+}
+
+.story-item{
+flex:0 0 102px;
+text-align:center;
+}
+
+.story-ring{
+width:88px;
+height:88px;
+border-radius:50%;
+padding:4px;
+margin:auto;
+background:
+linear-gradient(135deg,var(--pink),var(--gold),var(--green),var(--blue));
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+transition:.2s;
+}
+
+.story-item:hover .story-ring{
+transform:scale(1.07);
+}
+
+.story-ring img{
+width:100%;
+height:100%;
+border-radius:50%;
+object-fit:cover;
+border:4px solid white;
+}
+
+.story-item span{
+display:block;
+margin-top:9px;
+font-size:12px;
+font-weight:bold;
+line-height:1.2;
+}
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+.section{
+max-width:1500px;
+margin:auto;
+padding:70px 20px;
+}
+
+.section-heading{
+display:flex;
+align-items:end;
+justify-content:space-between;
+gap:20px;
+border-bottom:4px solid #111;
+padding-bottom:14px;
+margin-bottom:26px;
+}
+
+.section-heading h2{
+font-family:Georgia,serif;
+font-size:50px;
+font-weight:normal;
+line-height:.95;
+}
+
+.section-heading a{
+font-size:13px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+/* =========================
+   EDITORIAL MOSAIC
+========================= */
+
+.editorial-mosaic{
+display:grid;
+grid-template-columns:1.5fr .75fr .75fr;
+grid-template-rows:350px 350px;
+gap:6px;
+background:#111;
+border:6px solid #111;
+}
+
+.mosaic-card{
+position:relative;
+overflow:hidden;
+color:white;
+background:#222;
+}
+
+.mosaic-card.large{
+grid-row:1 / 3;
+}
+
+.mosaic-card.wide{
+grid-column:2 / 4;
+}
+
+.mosaic-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.6s;
+}
+
+.mosaic-card:hover img{
+transform:scale(1.055);
+}
+
+.mosaic-card:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.83),transparent 66%);
+}
+
+.mosaic-copy{
+position:absolute;
+left:22px;
+right:22px;
+bottom:22px;
 z-index:2;
 }
 
-.rubric-content span{
+.mosaic-copy span{
 display:inline-block;
-background:#c89b3c;
-padding:8px 14px;
-border-radius:999px;
-font-size:12px;
+background:#111;
+padding:7px 10px;
+font-size:11px;
 font-weight:bold;
-margin-bottom:14px;
-}
-
-.rubric-content h3{
-font-family:Georgia,serif;
-font-size:44px;
+letter-spacing:1px;
 margin-bottom:10px;
 }
 
-.rubric-content p{
-font-size:16px;
-line-height:1.55;
-color:#eee;
+.mosaic-copy h3{
+font-family:Georgia,serif;
+font-size:31px;
+line-height:1.05;
+font-weight:normal;
 }
 
-.trending-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:26px;
+.mosaic-card.large .mosaic-copy h3{
+font-size:50px;
 }
 
-.trend-card{
+/* =========================
+   ARTICLE AUDIO CONTROLS
+========================= */
+
+.voice-toolbar{
+background:#111;
+color:white;
+padding:24px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+flex-wrap:wrap;
+margin-bottom:25px;
+}
+
+.voice-info h3{
+font-family:Georgia,serif;
+font-size:26px;
+font-weight:normal;
+margin-bottom:4px;
+}
+
+.voice-info p{
+font-size:13px;
+color:#bbb;
+}
+
+.voice-controls{
+display:flex;
+align-items:center;
+gap:9px;
+flex-wrap:wrap;
+}
+
+.voice-controls select,
+.voice-controls button{
+border:none;
+border-radius:999px;
+padding:11px 15px;
+font-weight:bold;
+}
+
+.voice-controls select{
 background:white;
-border:2px solid #111;
-border-radius:32px;
-overflow:hidden;
+color:#111;
 }
 
-.trend-card img{
-width:100%;
-height:250px;
+.voice-controls button{
+background:var(--gold);
+color:white;
+}
+
+/* =========================
+   ARTICLE LIST
+========================= */
+
+.article-list{
+background:#050505;
+color:white;
+padding:28px;
+}
+
+.article-list-feature{
+border-bottom:1px solid #333;
+padding-bottom:24px;
+margin-bottom:8px;
+}
+
+.article-list-feature span{
+font-size:12px;
+letter-spacing:2px;
+font-weight:bold;
+color:var(--gold-light);
+}
+
+.article-list-feature h3{
+font-family:Georgia,serif;
+font-size:51px;
+font-weight:normal;
+line-height:1.02;
+margin-top:11px;
+max-width:1000px;
+}
+
+.article-row{
+display:grid;
+grid-template-columns:160px minmax(0,1fr) auto;
+gap:24px;
+align-items:center;
+border-bottom:1px solid #333;
+padding:18px 0;
+}
+
+.article-row img{
+width:160px;
+height:125px;
 object-fit:cover;
 }
 
-.trend-card div{padding:22px}
+.article-text span{
+font-size:11px;
+font-weight:bold;
+letter-spacing:1px;
+color:var(--gold-light);
+}
 
-.trend-card h3{
+.article-text h3{
 font-family:Georgia,serif;
+font-weight:normal;
 font-size:28px;
-margin-bottom:10px;
+line-height:1.13;
+margin:6px 0;
 }
 
-.trend-card p{
-color:#555;
-line-height:1.7;
+.article-text p{
+font-size:14px;
+line-height:1.6;
+color:#bbb;
 }
 
-.community{
+.listen-button{
+width:48px;
+height:48px;
+border:1px solid #777;
+border-radius:50%;
+background:transparent;
+color:white;
+font-size:19px;
+transition:.2s;
+}
+
+.listen-button:hover{
+background:var(--green);
+color:#111;
+border-color:var(--green);
+}
+
+.listen-button.speaking{
+background:var(--green);
+color:#111;
+border-color:var(--green);
+}
+
+/* =========================
+   PHOTO WALL
+========================= */
+
+.photo-wall{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+grid-auto-rows:220px;
+gap:5px;
+background:#111;
+border:5px solid #111;
+}
+
+.photo-tile{
+position:relative;
+overflow:hidden;
+background:#222;
+}
+
+.photo-tile.tall{
+grid-row:span 2;
+}
+
+.photo-tile.wide{
+grid-column:span 2;
+}
+
+.photo-tile img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.5s;
+}
+
+.photo-tile:hover img{
+transform:scale(1.06);
+}
+
+.photo-tile:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.65),transparent 55%);
+}
+
+.photo-label{
+position:absolute;
+left:15px;
+bottom:14px;
+right:15px;
+z-index:2;
+color:white;
+}
+
+.photo-label span{
+background:#111;
+padding:6px 9px;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.photo-label h3{
+font-family:Georgia,serif;
+font-size:24px;
+font-weight:normal;
+margin-top:8px;
+}
+
+/* =========================
+   CATEGORY BANNERS
+========================= */
+
+.category-banners{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+}
+
+.category-banner{
+height:520px;
+position:relative;
+overflow:hidden;
 background:#111;
 color:white;
-border-radius:46px;
-padding:55px 28px;
-text-align:center;
 }
 
-.community h2{
+.category-banner img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.6s;
+}
+
+.category-banner:hover img{
+transform:scale(1.05);
+}
+
+.category-banner:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,.05) 60%);
+}
+
+.category-banner-copy{
+position:absolute;
+left:25px;
+right:25px;
+bottom:25px;
+z-index:2;
+}
+
+.category-banner-copy span{
+font-size:11px;
+letter-spacing:2px;
+font-weight:bold;
+}
+
+.category-banner-copy h3{
 font-family:Georgia,serif;
-font-size:52px;
-color:#d6aa45;
-margin-bottom:18px;
+font-size:43px;
+line-height:1;
+font-weight:normal;
+margin:8px 0;
 }
 
-.community p{
-font-size:20px;
-line-height:1.8;
-max-width:850px;
+.category-banner-copy p{
+color:#ddd;
+line-height:1.55;
+}
+
+/* =========================
+   USEFUL SERVICES
+========================= */
+
+.useful-section{
+background:#111;
+color:white;
+padding:70px 20px;
+}
+
+.useful-inner{
+max-width:1500px;
 margin:auto;
 }
 
-.community-preview{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:18px;
-margin-top:35px;
+.useful-inner h2{
+font-family:Georgia,serif;
+font-size:52px;
+font-weight:normal;
+text-align:center;
+color:var(--gold-light);
+margin-bottom:13px;
 }
 
-.community-card{
+.useful-intro{
+text-align:center;
+color:#ccc;
+max-width:800px;
+margin:0 auto 35px;
+line-height:1.7;
+}
+
+.useful-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:14px;
+}
+
+.useful-card{
 background:white;
 color:#111;
-border-radius:26px;
-padding:22px;
-text-align:left;
+min-height:190px;
+padding:24px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+transition:.25s;
 }
 
-.community-card h3{
-font-size:22px;
-margin-bottom:10px;
+.useful-card:hover{
+transform:translateY(-6px);
+background:#fff9e8;
 }
 
-.community-card p{
-font-size:15px;
-color:#555;
-line-height:1.6;
+.useful-card .icon{
+font-size:39px;
+}
+
+.useful-card h3{
+font-family:Georgia,serif;
+font-size:27px;
+margin:12px 0 7px;
+}
+
+.useful-card p{
+color:#666;
+line-height:1.55;
+font-size:14px;
+}
+
+/* =========================
+   CLUB
+========================= */
+
+.club-section{
+max-width:1500px;
+margin:70px auto;
+padding:0 20px;
 }
 
 .club-box{
-background:linear-gradient(135deg,#111,#2b2417);
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at 80% 20%,rgba(101,229,31,.22),transparent 25%),
+linear-gradient(135deg,#111,#271d10);
 color:white;
-border-radius:46px;
-padding:60px 28px;
-text-align:center;
-border:3px solid #c89b3c;
+padding:60px 35px;
+border:3px solid var(--gold);
 }
 
 .club-box h2{
 font-family:Georgia,serif;
-font-size:56px;
-color:#d6aa45;
-margin-bottom:18px;
+font-weight:normal;
+font-size:57px;
+color:var(--gold-light);
+max-width:800px;
 }
 
-.club-box p{
-max-width:900px;
-margin:auto;
-font-size:20px;
+.club-box>p{
+font-size:18px;
 line-height:1.8;
-color:#eee;
+color:#ddd;
+max-width:850px;
+margin:18px 0 30px;
 }
 
 .club-benefits{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:18px;
-margin-top:35px;
+grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+gap:10px;
+margin-bottom:30px;
 }
 
-.benefit{
+.club-benefit{
 background:white;
 color:#111;
-border-radius:26px;
-padding:22px;
+padding:18px;
 font-weight:bold;
-}
-
-.newsletter-box{
-background:white;
-border:2px solid #111;
-border-radius:40px;
-padding:45px 25px;
 text-align:center;
 }
 
-.newsletter-box h2{
-font-family:Georgia,serif;
-font-size:48px;
-margin-bottom:15px;
+.club-button{
+display:inline-block;
+background:var(--green);
+color:#111;
+padding:16px 25px;
+border-radius:999px;
+font-weight:bold;
+box-shadow:0 0 20px rgba(101,229,31,.45);
 }
 
-.newsletter-box p{
-font-size:18px;
-color:#555;
+/* =========================
+   NEWSLETTER
+========================= */
+
+.newsletter{
+max-width:1500px;
+margin:0 auto 70px;
+padding:0 20px;
+}
+
+.newsletter-inner{
+background:white;
+border:3px solid #111;
+padding:42px 25px;
+text-align:center;
+}
+
+.newsletter-inner h2{
+font-family:Georgia,serif;
+font-size:45px;
+font-weight:normal;
+margin-bottom:10px;
+}
+
+.newsletter-inner p{
+color:#666;
 line-height:1.7;
-margin-bottom:25px;
+margin-bottom:22px;
 }
 
 .newsletter-form{
 display:flex;
 justify-content:center;
-gap:12px;
+gap:10px;
 flex-wrap:wrap;
 }
 
 .newsletter-form input{
 width:min(420px,100%);
-padding:16px;
-border:1px solid #ccc;
+border:1px solid #aaa;
 border-radius:999px;
-font-size:16px;
+padding:15px 18px;
 }
 
 .newsletter-form button{
+border:none;
+border-radius:999px;
 background:#111;
 color:white;
-border:none;
-padding:16px 26px;
-border-radius:999px;
+padding:15px 24px;
 font-weight:bold;
-font-size:16px;
-cursor:pointer;
 }
 
+/* =========================
+   SEARCH MODAL
+========================= */
+
+.search-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.94);
+z-index:3000;
+display:none;
+padding:25px;
+}
+
+.search-overlay.open{
+display:block;
+}
+
+.search-modal{
+max-width:800px;
+margin:90px auto;
+color:white;
+}
+
+.search-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:35px;
+}
+
+.search-top h2{
+font-family:Georgia,serif;
+font-size:45px;
+font-weight:normal;
+}
+
+.search-top button{
+width:48px;
+height:48px;
+border:none;
+border-radius:50%;
+font-size:25px;
+}
+
+.search-field{
+display:flex;
+border-bottom:2px solid white;
+}
+
+.search-field input{
+flex:1;
+background:transparent;
+border:none;
+outline:none;
+padding:20px 5px;
+font-family:Georgia,serif;
+font-size:32px;
+color:white;
+}
+
+.search-field button{
+background:transparent;
+border:none;
+color:white;
+font-size:27px;
+padding:10px;
+}
+
+.search-suggestions{
+margin-top:30px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.search-suggestions a{
+border:1px solid #777;
+border-radius:999px;
+padding:10px 15px;
+font-size:13px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
 footer{
-margin-top:70px;
-padding:55px 20px;
 background:#050505;
 color:white;
+padding:60px 20px;
 text-align:center;
 }
 
-footer h2{
-font-size:46px;
+.footer-brand{
 font-family:Georgia,serif;
-margin-bottom:12px;
+font-size:52px;
+letter-spacing:3px;
 }
 
-.footer-text{
-font-size:18px;
-color:#ddd;
-margin-bottom:28px;
+.footer-subtitle{
+color:#aaa;
+margin:10px 0 30px;
 }
 
 .footer-links{
 display:flex;
 justify-content:center;
+gap:17px;
 flex-wrap:wrap;
-gap:18px;
 margin-bottom:28px;
 }
 
 .footer-links a{
 color:#ccc;
-font-size:14px;
+font-size:13px;
 }
 
-.admin-small{
-font-size:11px;
-color:#777;
+.footer-social{
+display:flex;
+justify-content:center;
+gap:12px;
+margin-bottom:25px;
+}
+
+.footer-social a{
+width:42px;
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
+border:1px solid #555;
+border-radius:50%;
+}
+
+.admin-link{
+font-size:10px;
 letter-spacing:2px;
+color:#666;
 text-transform:uppercase;
 }
 
-@media(max-width:800px){
-.vip-bar{height:38px;font-size:12px}
-.vip-track{gap:20px;animation-duration:18s}
-.logo-big{font-size:34px}
-.lang{font-size:11px}
-.account-link{display:block;margin:0 0 4px}
-.intro h1{font-size:44px}
-.intro p{font-size:18px}
-.section-title{font-size:40px}
-.editorial-grid{grid-template-columns:1fr}
-.big-story img{height:360px}
-.rubric-card{flex:0 0 275px;height:410px}
-.rubric-content h3{font-size:38px}
-.community h2,.club-box h2{font-size:40px}
-.issue-overlay{padding:65px 20px 22px}
-.issue-overlay h2{font-size:26px}
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1050px){
+.cover-star-inner{
+grid-template-columns:1fr;
+}
+
+.star-entry{
+min-height:350px;
+}
+
+.editorial-mosaic{
+grid-template-columns:1fr 1fr;
+grid-template-rows:430px 300px 300px;
+}
+
+.mosaic-card.large{
+grid-column:1 / 3;
+grid-row:auto;
+}
+
+.mosaic-card.wide{
+grid-column:auto;
+}
+
+.photo-wall{
+grid-template-columns:repeat(3,1fr);
+}
+
+.category-banners{
+grid-template-columns:1fr 1fr;
+}
+
+.category-banner:last-child{
+grid-column:1 / 3;
+}
+}
+
+@media(max-width:760px){
+.account-bar{
+grid-template-columns:1fr 1fr;
+height:48px;
+}
+
+.account-edition{
+display:none;
+}
+
+.account-side{
+padding:0 10px;
+}
+
+.account-link{
+padding:9px 15px;
+font-size:12px;
+}
+
+.header-main{
+height:87px;
+grid-template-columns:58px 1fr 58px;
+padding:0 8px;
+}
+
+.brand-big{
+font-size:40px;
+letter-spacing:2px;
+}
+
+.brand-small{
+font-size:11px;
+}
+
+.icon-button{
+width:45px;
+height:45px;
+font-size:26px;
+}
+
+.desktop-categories{
+padding:14px 15px;
+gap:23px;
+}
+
+.desktop-categories a{
+font-size:13px;
+}
+
+.cover-star-strip{
+padding:12px 0;
+}
+
+.cover-preview{
+min-height:500px;
+border-radius:0;
+}
+
+.cover-copy{
+left:20px;
+right:20px;
+bottom:22px;
+}
+
+.cover-copy h1{
+font-size:42px;
+}
+
+.star-entry{
+min-height:330px;
+}
+
+.star-shape{
+width:255px;
+}
+
+.star-text strong{
+font-size:26px;
+}
+
+.story-item{
+flex-basis:89px;
+}
+
+.story-ring{
+width:77px;
+height:77px;
+}
+
+.section{
+padding:50px 10px;
+}
+
+.section-heading{
+align-items:flex-start;
+}
+
+.section-heading h2{
+font-size:39px;
+}
+
+.editorial-mosaic{
+display:grid;
+grid-template-columns:1fr 1fr;
+grid-template-rows:470px 260px 260px;
+gap:3px;
+border-width:3px;
+}
+
+.mosaic-card.large{
+grid-column:1 / 3;
+}
+
+.mosaic-copy{
+left:14px;
+right:14px;
+bottom:14px;
+}
+
+.mosaic-copy h3{
+font-size:23px;
+}
+
+.mosaic-card.large .mosaic-copy h3{
+font-size:39px;
+}
+
+.voice-toolbar{
+padding:18px;
+}
+
+.article-list{
+padding:18px;
+}
+
+.article-list-feature h3{
+font-size:39px;
+}
+
+.article-row{
+grid-template-columns:106px 1fr;
+gap:15px;
+}
+
+.article-row img{
+width:106px;
+height:110px;
+}
+
+.article-row .listen-button{
+grid-column:2;
+width:100%;
+height:39px;
+border-radius:999px;
+}
+
+.article-text h3{
+font-size:23px;
+}
+
+.article-text p{
+display:none;
+}
+
+.photo-wall{
+grid-template-columns:repeat(2,1fr);
+grid-auto-rows:190px;
+gap:3px;
+border-width:3px;
+}
+
+.photo-tile.wide{
+grid-column:span 2;
+}
+
+.category-banners{
+grid-template-columns:1fr;
+}
+
+.category-banner,
+.category-banner:last-child{
+grid-column:auto;
+height:500px;
+}
+
+.category-banner-copy h3{
+font-size:39px;
+}
+
+.useful-section{
+padding:55px 12px;
+}
+
+.useful-inner h2{
+font-size:41px;
+}
+
+.club-section{
+padding:0 10px;
+margin:50px auto;
+}
+
+.club-box{
+padding:42px 22px;
+}
+
+.club-box h2{
+font-size:43px;
+}
+
+.newsletter{
+padding:0 10px;
+}
+
+.newsletter-inner h2{
+font-size:37px;
+}
+
+.footer-brand{
+font-size:43px;
+}
+}
+
+@media(max-width:430px){
+.brand-big{
+font-size:35px;
+}
+
+.cover-preview{
+min-height:520px;
+}
+
+.cover-copy h1{
+font-size:37px;
+}
+
+.star-shape{
+width:235px;
+}
+
+.story-scroll{
+gap:12px;
+}
+
+.story-item{
+flex-basis:82px;
+}
+
+.story-ring{
+width:71px;
+height:71px;
+}
+
+.editorial-mosaic{
+grid-template-rows:440px 220px 220px;
+}
+
+.mosaic-copy h3{
+font-size:20px;
+}
+
+.mosaic-card.large .mosaic-copy h3{
+font-size:34px;
+}
+
+.photo-wall{
+grid-auto-rows:175px;
+}
 }
 </style>
 </head>
 
 <body>
 
-<a href="members-gallery.html" class="vip-bar">
-<div class="vip-track">
-<span>🐾 IS YOUR PET THE NEXT COVER STAR?</span>
-<span>👑 TAP HERE TO ENTER</span>
-<span>📸 WIN A PROFESSIONAL MAGAZINE FEATURE</span>
-<span>❤️ GET VOTES FROM THE COMMUNITY</span>
-<span>🌍 BE FEATURED IN PETS & DOGUE</span>
-<span class="vip-tap">💚 TAP HERE</span>
-<span>🐾 IS YOUR PET THE NEXT COVER STAR?</span>
-<span>👑 TAP HERE TO ENTER</span>
-<span>📸 WIN A PROFESSIONAL MAGAZINE FEATURE</span>
-<span>❤️ GET VOTES FROM THE COMMUNITY</span>
-<span>🌍 BE FEATURED IN PETS & DOGUE</span>
-<span class="vip-tap">💚 TAP HERE</span>
-</div>
+<!-- ACCOUNT BAR -->
+
+<div class="account-bar">
+
+<div class="account-side">
+<a href="account.html" class="account-link">
+SIGN IN
 </a>
+</div>
 
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="account-edition">
+THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
+</div>
 
-<aside class="side-menu" id="sideMenu">
+<div class="account-side right">
+<a href="club.html" class="account-link club">
+JOIN CLUB
+</a>
+</div>
 
-<div class="menu-header">
+</div>
+
+<!-- SIDE MENU -->
+
+<div
+class="menu-overlay"
+id="menuOverlay"
+onclick="closeMenu()">
+</div>
+
+<aside
+class="side-menu"
+id="sideMenu">
+
+<div class="side-menu-header">
+
 <h2>Contents</h2>
-<button class="close-btn" onclick="closeMenu()">×</button>
+
+<button
+class="close-menu"
+onclick="closeMenu()">
+×
+</button>
+
 </div>
 
-<div class="menu-list">
+<div class="menu-account">
 
-<a href="account.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80">
-<div>
-<h3>My Account</h3>
-<p>Profile, pets, member card and activity.</p>
-</div>
+<a href="account.html">
+Sign In
 </a>
 
-<a href="photos.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=300&q=80">
-<div>
-<h3>Photos</h3>
-<p>Galleries, portraits and editorials.</p>
+<a href="club.html">
+Join Club
+</a>
+
 </div>
+
+<div class="menu-items">
+
+<a href="issue-01.html" class="menu-item">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Latest issue">
+
+<div>
+<h3>Latest Issue</h3>
+<p>Open the newest PETS & DOGUE digital magazine.</p>
+</div>
+
 </a>
 
 <a href="articles.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80">
+
+<img
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
+alt="Articles">
+
 <div>
 <h3>Articles</h3>
-<p>Stories, interviews and guides.</p>
+<p>Stories, interviews, advice and editorial features.</p>
 </div>
+
 </a>
 
-<a href="contests.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80">
+<a href="photos.html" class="menu-item">
+
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
+alt="Photos">
+
 <div>
-<h3>Contests</h3>
-<p>Prizes, votes and monthly awards.</p>
+<h3>Photos</h3>
+<p>Portraits, editorials and community photography.</p>
 </div>
+
 </a>
 
 <a href="members-gallery.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+alt="Cover stars">
+
 <div>
-<h3>Members Gallery</h3>
-<p>Upload, vote and compete for the next cover star.</p>
+<h3>Cover Star</h3>
+<p>Enter your pet and compete for the next cover.</p>
 </div>
+
 </a>
 
-<a href="pet-marketplace.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80">
+<a href="pet-fashion.html" class="menu-item">
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
+alt="Fashion">
+
 <div>
-<h3>Marketplace</h3>
-<p>Find a Home, Accessories & Services.</p>
+<h3>Pet Fashion</h3>
+<p>Luxury style, accessories and editorial looks.</p>
 </div>
+
+</a>
+
+<a href="pet-travel.html" class="menu-item">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
+alt="Travel">
+
+<div>
+<h3>Travel</h3>
+<p>Hotels, beaches, destinations and travel advice.</p>
+</div>
+
+</a>
+
+<a href="pet-friendly-places.html" class="menu-item">
+
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
+alt="Pet friendly places">
+
+<div>
+<h3>Pet Friendly Places</h3>
+<p>Search useful places, routes, phone numbers and reviews.</p>
+</div>
+
 </a>
 
 <a href="pets-in-need.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=300&q=80">
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
+alt="Pets in need">
+
 <div>
 <h3>Pets In Need</h3>
-<p>Help, rescue and adoption stories.</p>
+<p>Rescue stories, adoption and community support.</p>
 </div>
+
 </a>
 
-<a href="volunteer-network.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=300&q=80">
-<div>
-<h3>Volunteer Network</h3>
-<p>People helping animals.</p>
-</div>
-</a>
+<a href="contests.html" class="menu-item">
 
-<a href="cover-stars.html" class="menu-item">
-<img src="file_00000000a9d471fda9b4629589be22a9.png">
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
+alt="Contests">
+
 <div>
-<h3>Cover Stars</h3>
-<p>Models, covers and future stars.</p>
+<h3>Contests</h3>
+<p>Competitions, community votes and prizes.</p>
 </div>
+
 </a>
 
 <a href="local-community.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80">
-<div>
-<h3>Local Community</h3>
-<p>Posts, comments and hearts near you.</p>
-</div>
-</a>
-
-<a href="partners.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=80">
-<div>
-<h3>Partners</h3>
-<p>Member discounts and luxury partner offers.</p>
-</div>
-</a>
-
-<a href="club.html" class="menu-item">
-<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80">
-<div>
-<h3>PETS & DOGUE Club</h3>
-<p>Discounts, QR card and VIP rewards.</p>
-</div>
-</a>
-
-</div>
-</aside>
-
-<header>
-<div class="top-bar">
-
-<button class="menu-btn" onclick="openMenu()">☰</button>
-
-<a href="index.html">
-<div class="brand">
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
-</div>
-</a>
-
-<div class="lang">
-<a href="account.html" class="account-link">👤 Account</a>
-EN · RU · UA
-</div>
-
-</div>
-</header>
-
-<section class="hero">
-
-<a href="issue-01.html" class="cover-link" id="mainIssueLink">
-
-<div class="cover">
 
 <img
-id="mainIssueCover"
-src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="Issue 01">
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+alt="Community">
 
-<div class="issue-overlay">
-<span id="mainIssueSeason">LATEST ISSUE</span>
-<h2 id="mainIssueOverlayTitle">Issue 01</h2>
-<p id="mainIssueOverlayDescription">Discover the debut PETS & DOGUE issue.</p>
+<div>
+<h3>Local Community</h3>
+<p>Local recommendations, lost pets and useful posts.</p>
 </div>
 
-</div>
 </a>
 
-</section>
+</div>
 
-<section class="intro">
+</aside>
 
-<div class="kicker">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div>
+<!-- SEARCH MODAL -->
 
-<h1>Style. Stories. Community. Rescue. Luxury Pet Life.</h1>
+<div
+class="search-overlay"
+id="searchOverlay">
 
-<p id="homepageMessage">
-PETS & DOGUE is a luxury online magazine for animal lovers — featuring beautiful photography, cover stars, pet fashion, wellness, travel, local community, contests and animals in need.
+<div class="search-modal">
+
+<div class="search-top">
+
+<h2>Search PETS & DOGUE</h2>
+
+<button onclick="closeSearch()">
+×
+</button>
+
+</div>
+
+<div class="search-field">
+
+<input
+id="siteSearchInput"
+type="search"
+placeholder="Search articles, places, pets...">
+
+<button onclick="runSiteSearch()">
+⌕
+</button>
+
+</div>
+
+<div class="search-suggestions">
+
+<a href="articles.html">Articles</a>
+<a href="photos.html">Photos</a>
+<a href="members-gallery.html">Cover Stars</a>
+<a href="pet-friendly-places.html">Places</a>
+<a href="pet-travel.html">Travel</a>
+<a href="pets-in-need.html">Rescue</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- HEADER -->
+
+<header class="site-header">
+
+<div class="header-main">
+
+<button
+class="icon-button"
+onclick="openMenu()"
+aria-label="Open menu">
+
+<span class="menu-lines">
+<span></span>
+<span></span>
+<span></span>
+</span>
+
+</button>
+
+<a href="index.html" class="brand">
+
+<div class="brand-small">
+pets &
+</div>
+
+<div class="brand-big">
+DOGUE
+</div>
+
+</a>
+
+<button
+class="icon-button"
+onclick="openSearch()"
+aria-label="Search">
+⌕
+</button>
+
+</div>
+
+<nav class="desktop-categories">
+
+<a href="issue-01.html">MAGAZINE</a>
+<a href="articles.html">ARTICLES</a>
+<a href="photos.html">PHOTOS</a>
+<a href="members-gallery.html">COVER STARS</a>
+<a href="pet-fashion.html">FASHION</a>
+<a href="wellness.html">WELLNESS</a>
+<a href="pet-travel.html">TRAVEL</a>
+<a href="pet-friendly-places.html">PLACES</a>
+<a href="pets-in-need.html">RESCUE</a>
+<a href="contests.html">CONTESTS</a>
+<a href="local-community.html">COMMUNITY</a>
+<a href="partners.html">PARTNERS</a>
+
+</nav>
+
+</header>
+
+<!-- COVER AND STAR -->
+
+<section class="cover-star-strip">
+
+<div class="cover-star-inner">
+
+<a
+href="issue-01.html"
+class="cover-preview">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Latest PETS & DOGUE issue">
+
+<div class="cover-copy">
+
+<span>LATEST ISSUE</span>
+
+<h1>
+Miso: The First PETS & DOGUE Cover Star
+</h1>
+
+<p>
+Open Issue 01 and discover our first luxury animal editorial.
 </p>
 
+</div>
+
+</a>
+
+<a
+href="members-gallery.html"
+class="star-entry">
+
+<div class="tap-arrow">
+TAP THE STAR
+</div>
+
+<div class="star-shape">
+
+<div class="star-text">
+
+<small>MY PET IS</small>
+
+<strong>
+THE NEXT<br>
+COVER STAR
+</strong>
+
+<em>
+TAP TO ENTER →
+</em>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
 </section>
+
+<!-- STORIES -->
+
+<section class="story-section">
+
+<div class="story-scroll">
+
+<a href="issue-01.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Issue 01">
+</div>
+
+<span>Issue 01</span>
+
+</a>
+
+<a href="members-gallery.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80"
+alt="Cover Stars">
+</div>
+
+<span>Cover Stars</span>
+
+</a>
+
+<a href="pet-fashion.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80"
+alt="Fashion">
+</div>
+
+<span>Fashion</span>
+
+</a>
+
+<a href="pet-travel.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80"
+alt="Travel">
+</div>
+
+<span>Travel</span>
+
+</a>
+
+<a href="wellness.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80"
+alt="Wellness">
+</div>
+
+<span>Wellness</span>
+
+</a>
+
+<a href="photos.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=300&q=80"
+alt="Photos">
+</div>
+
+<span>Photos</span>
+
+</a>
+
+<a href="pets-in-need.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=300&q=80"
+alt="Rescue">
+</div>
+
+<span>Rescue</span>
+
+</a>
+
+<a href="pet-friendly-places.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=300&q=80"
+alt="Places">
+</div>
+
+<span>Places</span>
+
+</a>
+
+<a href="contests.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80"
+alt="Contests">
+</div>
+
+<span>Contests</span>
+
+</a>
+
+<a href="partners.html" class="story-item">
+
+<div class="story-ring">
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=80"
+alt="Partners">
+</div>
+
+<span>Offers</span>
+
+</a>
+
+</div>
+
+</section>
+
+<!-- EDITORIAL MOSAIC -->
 
 <section class="section">
 
-<h2 class="section-title">Latest From PETS & DOGUE</h2>
-<div class="gold-line"></div>
+<div class="section-heading">
 
-<div class="editorial-grid">
+<h2>Inside PETS & DOGUE</h2>
 
-<a href="issue-01.html" class="big-story" id="latestIssueStory">
-
-<img
-id="latestIssueImage"
-src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="Latest PETS & DOGUE Issue">
-
-<div class="story-content">
-
-<span class="badge" id="latestIssueBadge">LATEST ISSUE</span>
-
-<h2 id="latestIssueTitle">
-Miso: The First PETS & DOGUE Cover Star
-</h2>
-
-<p id="latestIssueDescription">
-The debut issue begins with Miso, the first face of our luxury animal magazine.
-</p>
-
-<span class="btn gold" id="latestIssueButton">
-Read Issue 01
-</span>
-
-</div>
+<a href="articles.html">
+VIEW ALL STORIES →
 </a>
 
-<div>
+</div>
 
-<a href="members-gallery.html" class="small-story">
+<div class="editorial-mosaic">
+
+<a href="issue-01.html" class="mosaic-card large">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Miso">
+
+<div class="mosaic-copy">
+
+<span>COVER STORY</span>
+
+<h3>
+The Beginning of a New Luxury Animal Magazine
+</h3>
+
+</div>
+
+</a>
+
+<a href="pet-fashion.html" class="mosaic-card">
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1000&q=80"
+alt="Pet fashion">
+
+<div class="mosaic-copy">
+
+<span>FASHION</span>
+
+<h3>
+The New Rules of Pet Style
+</h3>
+
+</div>
+
+</a>
+
+<a href="pet-travel.html" class="mosaic-card">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
+alt="Travel">
+
+<div class="mosaic-copy">
+
+<span>TRAVEL</span>
+
+<h3>
+Beautiful Escapes With Your Pet
+</h3>
+
+</div>
+
+</a>
+
+<a href="pets-in-need.html" class="mosaic-card wide">
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1400&q=80"
+alt="Rescue stories">
+
+<div class="mosaic-copy">
+
+<span>RESCUE</span>
+
+<h3>
+Stories That Can Change an Animal’s Life
+</h3>
+
+</div>
+
+</a>
+
+</div>
+
+</section>
+
+<!-- LISTEN AND ARTICLES -->
+
+<section class="section">
+
+<div class="section-heading">
+
+<h2>Today’s Stories</h2>
+
+<a href="articles.html">
+READ ALL →
+</a>
+
+</div>
+
+<div class="voice-toolbar">
+
+<div class="voice-info">
+
+<h3>Listen To PETS & DOGUE</h3>
+
+<p>
+Choose a voice and tap the speaker beside any story.
+</p>
+
+</div>
+
+<div class="voice-controls">
+
+<select id="voiceGender">
+
+<option value="female">
+Female Speaker
+</option>
+
+<option value="male">
+Male Speaker
+</option>
+
+</select>
+
+<select id="voiceSpeed">
+
+<option value="0.85">
+0.85×
+</option>
+
+<option value="1" selected>
+1×
+</option>
+
+<option value="1.2">
+1.2×
+</option>
+
+<option value="1.4">
+1.4×
+</option>
+
+</select>
+
+<button onclick="stopNarration()">
+■ Stop
+</button>
+
+</div>
+
+</div>
+
+<div class="article-list">
+
+<div class="article-list-feature">
+
+<span>EDITOR’S SELECTION</span>
+
+<h3>
+Style, Care, Travel and the Stories Animals Deserve
+</h3>
+
+</div>
+
+<article
+class="article-row"
+data-speech="How to prepare your pet for a professional magazine photoshoot. Simple grooming, lighting and comfort can transform a beautiful portrait into an unforgettable editorial image.">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80"
+alt="Pet photography">
+
+<a href="articles.html" class="article-text">
+
+<span>PHOTOGRAPHY</span>
+
+<h3>
+How To Prepare Your Pet for a Magazine Photoshoot
+</h3>
+
+<p>
+Grooming, lighting, comfort and simple techniques for a beautiful editorial portrait.
+</p>
+
+</a>
+
+<button
+class="listen-button"
+onclick="listenToArticle(this)"
+aria-label="Listen to article">
+🔊
+</button>
+
+</article>
+
+<article
+class="article-row"
+data-speech="The rise of luxury pet friendly travel. Hotels, villas and destinations are creating new services for guests who travel with animal companions.">
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80"
+alt="Pet friendly hotel">
+
+<a href="pet-travel.html" class="article-text">
+
+<span>TRAVEL</span>
+
+<h3>
+The Rise of Luxury Pet-Friendly Travel
+</h3>
+
+<p>
+Inside the hotels and destinations designing better experiences for pets.
+</p>
+
+</a>
+
+<button
+class="listen-button"
+onclick="listenToArticle(this)"
+aria-label="Listen to article">
+🔊
+</button>
+
+</article>
+
+<article
+class="article-row"
+data-speech="Why pet friendly places need community verification. Real visitors can report changed policies, inaccurate information and places that no longer welcome animals.">
+
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=80"
+alt="Pet friendly café">
+
+<a href="pet-friendly-places.html" class="article-text">
+
+<span>USEFUL GUIDE</span>
+
+<h3>
+How DOGUE Trust Protects Pet-Friendly Recommendations
+</h3>
+
+<p>
+Community reports and verification help keep local information useful and accurate.
+</p>
+
+</a>
+
+<button
+class="listen-button"
+onclick="listenToArticle(this)"
+aria-label="Listen to article">
+🔊
+</button>
+
+</article>
+
+<article
+class="article-row"
+data-speech="The people helping animals behind the scenes. Volunteers provide transport, photography, fostering, fundraising and practical support for rescue organisations.">
+
+<img
+src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=700&q=80"
+alt="Volunteers">
+
+<a href="volunteer-network.html" class="article-text">
+
+<span>COMMUNITY</span>
+
+<h3>
+The People Helping Animals Behind the Scenes
+</h3>
+
+<p>
+Meet the volunteers creating change through practical help, visibility and care.
+</p>
+
+</a>
+
+<button
+class="listen-button"
+onclick="listenToArticle(this)"
+aria-label="Listen to article">
+🔊
+</button>
+
+</article>
+
+</div>
+
+</section>
+
+<!-- PHOTO WALL -->
+
+<section class="section">
+
+<div class="section-heading">
+
+<h2>Visual Stories</h2>
+
+<a href="photos.html">
+OPEN PHOTO GALLERY →
+</a>
+
+</div>
+
+<div class="photo-wall">
+
+<a href="photos.html" class="photo-tile tall">
+
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=80"
+alt="Dogs">
+
+<div class="photo-label">
+<span>COMMUNITY</span>
+<h3>Beautiful Lives Together</h3>
+</div>
+
+</a>
+
+<a href="members-gallery.html" class="photo-tile wide">
 
 <img
 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
-alt="Next Cover Star">
+alt="Dog portrait">
 
-<div class="story-content">
-<span class="badge">MEMBERS</span>
-<h3>Next Cover Star</h3>
-<p>Vote for the next PETS & DOGUE cover star.</p>
+<div class="photo-label">
+<span>COVER STAR</span>
+<h3>Could Your Pet Be Next?</h3>
 </div>
 
 </a>
 
-<br>
-
-<a href="pets-in-need.html" class="small-story">
+<a href="photos.html" class="photo-tile">
 
 <img
-src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80"
-alt="Pets In Need">
+src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=700&q=80"
+alt="Cat">
 
-<div class="story-content">
-<span class="badge">HELP</span>
-<h3>Pets In Need</h3>
-<p>Stories that deserve attention and care.</p>
+<div class="photo-label">
+<span>PORTRAIT</span>
+<h3>Soft Elegance</h3>
 </div>
 
 </a>
 
+<a href="wellness.html" class="photo-tile">
+
+<img
+src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=80"
+alt="Pet wellness">
+
+<div class="photo-label">
+<span>WELLNESS</span>
+<h3>Care Rituals</h3>
 </div>
 
-</div>
-</section>
-
-<section class="section">
-
-<h2 class="section-title">Explore The Magazine</h2>
-<div class="gold-line"></div>
-
-<div class="rubric-carousel">
-
-<a href="photos.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>PHOTO</span>
-<h3>Photos</h3>
-<p>Editorial galleries and portraits.</p>
-</div>
 </a>
 
-<a href="articles.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>MAGAZINE</span>
-<h3>Articles</h3>
-<p>Stories, guides and interviews.</p>
+<a href="pets-in-need.html" class="photo-tile wide">
+
+<img
+src="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=1200&q=80"
+alt="Rescue dog">
+
+<div class="photo-label">
+<span>RESCUE</span>
+<h3>A Story Worth Sharing</h3>
 </div>
+
 </a>
 
-<a href="members-gallery.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>MEMBERS</span>
-<h3>Gallery</h3>
-<p>Upload, vote and become the next star.</p>
+<a href="photos.html" class="photo-tile">
+
+<img
+src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=700&q=80"
+alt="Bird">
+
+<div class="photo-label">
+<span>EXOTIC</span>
+<h3>Colour and Freedom</h3>
 </div>
+
 </a>
 
-<a href="pet-marketplace.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>MARKET</span>
-<h3>Marketplace</h3>
-<p>Find a Home, Accessories & Services.</p>
-</div>
-</a>
+<a href="pet-travel.html" class="photo-tile tall">
 
-<a href="contests.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>PRIZES</span>
-<h3>Contests</h3>
-<p>Votes, awards and giveaways.</p>
-</div>
-</a>
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+alt="Beach">
 
-<a href="local-community.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>LOCAL</span>
-<h3>Community</h3>
-<p>Search your region and post.</p>
-</div>
-</a>
-
-<a href="pet-fashion.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>STYLE</span>
-<h3>Fashion</h3>
-<p>Luxury looks and shopping links.</p>
-</div>
-</a>
-
-<a href="pet-travel.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
+<div class="photo-label">
 <span>TRAVEL</span>
-<h3>Travel</h3>
-<p>Pet-friendly escapes and hotels.</p>
+<h3>Summer by the Sea</h3>
 </div>
+
 </a>
 
-<a href="wellness.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>CARE</span>
-<h3>Wellness</h3>
-<p>Health, grooming and calm living.</p>
+<a href="local-community.html" class="photo-tile">
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=700&q=80"
+alt="Community dogs">
+
+<div class="photo-label">
+<span>LOCAL</span>
+<h3>Meet Near You</h3>
 </div>
+
 </a>
 
-<a href="partners.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
-<span>PARTNERS</span>
-<h3>Offers</h3>
-<p>Luxury partners and Club discounts.</p>
-</div>
-</a>
+<a href="partners.html" class="photo-tile">
 
-<a href="club.html" class="rubric-card">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
-<div class="rubric-content">
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80"
+alt="Hotel">
+
+<div class="photo-label">
 <span>CLUB</span>
-<h3>Club</h3>
-<p>Discounts, QR card and rewards.</p>
+<h3>Partner Benefits</h3>
 </div>
+
 </a>
 
 </div>
+
 </section>
+
+<!-- CATEGORY FEATURES -->
 
 <section class="section">
 
-<h2 class="section-title">Trending Now</h2>
-<div class="gold-line"></div>
+<div class="section-heading">
 
-<div class="trending-grid">
+<h2>Explore The Magazine</h2>
 
-<a href="members-gallery.html" class="trend-card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80">
-<div>
-<h3>Next Cover Star</h3>
-<p>Vote for your favourite pet in the Members Gallery.</p>
-</div>
-</a>
-
-<a href="pet-marketplace.html" class="trend-card">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80">
-<div>
-<h3>Pet Marketplace</h3>
-<p>Find a Home, Accessories, Services and member listings.</p>
-</div>
-</a>
-
-<a href="pet-friendly-places.html" class="trend-card">
-<img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80">
-<div>
-<h3>Pet Friendly Places</h3>
-<p>Cafés, hotels and parks that welcome pets.</p>
-</div>
+<a href="categories.html">
+ALL RUBRICS →
 </a>
 
 </div>
-</section>
 
-<section class="section">
+<div class="category-banners">
 
-<div class="community">
+<a href="pet-fashion.html" class="category-banner">
 
-<h2>Local Pet Community</h2>
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1000&q=80"
+alt="Pet fashion">
+
+<div class="category-banner-copy">
+
+<span>PETS & DOGUE</span>
+
+<h3>Fashion</h3>
 
 <p>
-Choose your city or postcode, set a radius, read local posts, comment and give hearts to helpful recommendations.
+Editorial looks, accessories, styling and luxury shopping.
 </p>
 
-<div class="community-preview">
-
-<div class="community-card">
-<h3>📍 Bournemouth</h3>
-<p>Best dog-friendly café near the beach? ❤️ 37 · 💬 2</p>
 </div>
 
-<div class="community-card">
-<h3>❤️ Help Needed</h3>
-<p>Volunteer support requested this weekend. ❤️ 24 · 💬 1</p>
+</a>
+
+<a href="pet-travel.html" class="category-banner">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80"
+alt="Pet travel">
+
+<div class="category-banner-copy">
+
+<span>WORLD OF DOGUE</span>
+
+<h3>Travel</h3>
+
+<p>
+Pet-friendly escapes, hotels, beaches and memorable journeys.
+</p>
+
 </div>
 
-<div class="community-card">
-<h3>🐾 Lost & Found</h3>
-<p>Local pet sighting near the park. ❤️ 18 · 💬 0</p>
-</div>
+</a>
+
+<a href="pets-in-need.html" class="category-banner">
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1000&q=80"
+alt="Pets in need">
+
+<div class="category-banner-copy">
+
+<span>WITH PURPOSE</span>
+
+<h3>Rescue</h3>
+
+<p>
+Visibility, adoption, community help and stories that matter.
+</p>
 
 </div>
 
-<br><br>
-
-<a href="local-community.html" class="btn gold">
-Open Local Community
 </a>
 
 </div>
+
 </section>
 
-<section class="section">
+<!-- USEFUL SERVICES -->
+
+<section class="useful-section">
+
+<div class="useful-inner">
+
+<h2>Beautiful and Useful</h2>
+
+<p class="useful-intro">
+PETS & DOGUE combines luxury editorial content with practical services for people who live, travel and care for animals.
+</p>
+
+<div class="useful-grid">
+
+<a href="pet-friendly-places.html" class="useful-card">
+
+<div class="icon">📍</div>
+
+<div>
+<h3>Find Places</h3>
+<p>
+Search nearby pet-friendly cafés, hotels, beaches, parks, vets and groomers.
+</p>
+</div>
+
+</a>
+
+<a href="pet-marketplace.html" class="useful-card">
+
+<div class="icon">🛍️</div>
+
+<div>
+<h3>Marketplace</h3>
+<p>
+Browse community listings, services, accessories and responsible rehoming posts.
+</p>
+</div>
+
+</a>
+
+<a href="local-community.html" class="useful-card">
+
+<div class="icon">💬</div>
+
+<div>
+<h3>Local Community</h3>
+<p>
+Ask questions, share recommendations and discover useful information nearby.
+</p>
+</div>
+
+</a>
+
+<a href="pets-in-need.html" class="useful-card">
+
+<div class="icon">❤️</div>
+
+<div>
+<h3>Help Animals</h3>
+<p>
+Support rescue cases, volunteers, adoption stories and animals needing visibility.
+</p>
+</div>
+
+</a>
+
+<a href="members-gallery.html" class="useful-card">
+
+<div class="icon">👑</div>
+
+<div>
+<h3>Become A Star</h3>
+<p>
+Upload your pet, collect community support and compete for the next cover.
+</p>
+</div>
+
+</a>
+
+<a href="partners.html" class="useful-card">
+
+<div class="icon">🎁</div>
+
+<div>
+<h3>Club Benefits</h3>
+<p>
+Discover partner discounts, offers, hotels, cafés and premium pet services.
+</p>
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CLUB -->
+
+<section class="club-section">
 
 <div class="club-box">
 
-<h2>Join PETS & DOGUE CLUB</h2>
+<h2>
+Join the PETS & DOGUE World
+</h2>
 
 <p>
-More than a magazine. Unlock partner discounts, member QR card, premium articles, exclusive contests, cover star priority and support animals in need.
+Become part of the Club for cover-star competitions, partner benefits, exclusive content, member identity and future premium experiences.
 </p>
 
 <div class="club-benefits">
-<div class="benefit">Partner discounts</div>
-<div class="benefit">Member card / QR</div>
-<div class="benefit">Cover Star priority</div>
-<div class="benefit">Premium articles</div>
-<div class="benefit">Contests & giveaways</div>
-<div class="benefit">Animals in need support</div>
+
+<div class="club-benefit">
+Cover Star Entry
 </div>
 
-<br><br>
+<div class="club-benefit">
+Partner Discounts
+</div>
 
-<a href="club.html" class="btn gold">Explore Club</a>
-<a href="pet-marketplace.html" class="btn gold">Open Marketplace</a>
-<a href="account.html" class="btn gold">My Account</a>
+<div class="club-benefit">
+Member QR Card
+</div>
+
+<div class="club-benefit">
+Premium Stories
+</div>
+
+<div class="club-benefit">
+Contests & Prizes
+</div>
+
+<div class="club-benefit">
+Community Access
+</div>
 
 </div>
+
+<a href="club.html" class="club-button">
+JOIN PETS & DOGUE CLUB →
+</a>
+
+</div>
+
 </section>
 
-<section class="section">
+<!-- NEWSLETTER -->
 
-<div class="newsletter-box">
+<section class="newsletter">
 
-<h2>Join The PETS & DOGUE Community</h2>
+<div class="newsletter-inner">
+
+<h2>
+Your Front-Row Seat to the Animal World
+</h2>
 
 <p>
-Receive future issues, cover star announcements, contests, local updates and luxury pet stories.
+Receive new issues, cover-star announcements, visual stories, travel ideas and community updates.
 </p>
 
 <div class="newsletter-form">
-<input type="email" placeholder="Email address">
-<button type="button" onclick="subscribeNewsletter()">Subscribe</button>
+
+<input
+id="newsletterEmail"
+type="email"
+placeholder="Your email address">
+
+<button onclick="subscribeNewsletter()">
+SUBSCRIBE
+</button>
+
 </div>
 
 </div>
+
 </section>
+
+<!-- FOOTER -->
 
 <footer>
 
-<h2>PETS & DOGUE</h2>
+<div class="footer-brand">
+PETS & DOGUE
+</div>
 
-<p class="footer-text">
+<p class="footer-subtitle">
 The International Luxury Animal Magazine
 </p>
 
 <div class="footer-links">
-<a href="account.html">Account</a>
-<a href="club.html">Club</a>
+
+<a href="index.html">Home</a>
+<a href="issue-01.html">Latest Issue</a>
 <a href="articles.html">Articles</a>
-<a href="members-gallery.html">Members Gallery</a>
-<a href="pet-marketplace.html">Marketplace</a>
+<a href="photos.html">Photos</a>
+<a href="members-gallery.html">Cover Stars</a>
+<a href="pet-friendly-places.html">Places</a>
+<a href="club.html">Club</a>
 <a href="partners.html">Partners</a>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms</a>
-<a href="copyright.html">Copyright</a>
-<a href="cookies.html">Cookies</a>
-<a href="contact.html">Contact</a>
 <a href="advertise.html">Advertise</a>
-<a href="faq.html">FAQ</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<div class="footer-social">
+
+<a href="#" aria-label="Instagram">
+◎
+</a>
+
+<a href="#" aria-label="TikTok">
+♪ 
+</a>
+
+<a href="#" aria-label="YouTube">
+▶
+</a>
+
+<a href="#" aria-label="Pinterest">
+P
+</a>
+
+</div>
+
+<a href="admin.html" class="admin-link">
+Admin
+</a>
 
 </footer>
 
 <script>
-const CMS_KEY = "pets_dogue_cms_v1";
-
-const fallbackIssue = {
-id:"fallback-issue-01",
-title:"Issue 01",
-season:"DEBUT ISSUE",
-slug:"issue-01.html",
-status:"Published",
-date:"2026-07-01",
-description:"The debut issue begins with Miso, the first face of our luxury animal magazine.",
-cover:"file_00000000a9d471fda9b4629589be22a9.png"
-};
+let activeSpeechButton = null;
 
 function openMenu(){
-document.getElementById("sideMenu").classList.add("open");
-document.getElementById("overlay").classList.add("show");
-document.body.style.overflow = "hidden";
+document
+.getElementById("sideMenu")
+.classList.add("open");
+
+document
+.getElementById("menuOverlay")
+.classList.add("show");
+
+document.body.classList.add("menu-open");
 }
 
 function closeMenu(){
-document.getElementById("sideMenu").classList.remove("open");
-document.getElementById("overlay").classList.remove("show");
-document.body.style.overflow = "";
+document
+.getElementById("sideMenu")
+.classList.remove("open");
+
+document
+.getElementById("menuOverlay")
+.classList.remove("show");
+
+document.body.classList.remove("menu-open");
 }
 
-function getCMS(){
-try{
-return JSON.parse(localStorage.getItem(CMS_KEY) || "{}");
-}catch(error){
-console.error("Unable to read PETS & DOGUE CMS data.",error);
-return {};
-}
-}
+function openSearch(){
+document
+.getElementById("searchOverlay")
+.classList.add("open");
 
-function getPublishedIssues(){
-const cms = getCMS();
+document.body.classList.add("menu-open");
 
-if(!Array.isArray(cms.issues)){
-return [];
+setTimeout(() => {
+document
+.getElementById("siteSearchInput")
+.focus();
+},100);
 }
 
-return cms.issues
-.filter(issue => issue.status === "Published")
-.sort((a,b) => {
-const dateA = a.date ? new Date(a.date).getTime() : Number(a.id) || 0;
-const dateB = b.date ? new Date(b.date).getTime() : Number(b.id) || 0;
+function closeSearch(){
+document
+.getElementById("searchOverlay")
+.classList.remove("open");
 
-return dateB - dateA;
+document.body.classList.remove("menu-open");
+}
+
+function runSiteSearch(){
+const query = document
+.getElementById("siteSearchInput")
+.value
+.trim()
+.toLowerCase();
+
+if(!query){
+return;
+}
+
+const routes = [
+{
+terms:["place","places","cafe","hotel","park","beach","vet","groomer"],
+url:"pet-friendly-places.html"
+},
+{
+terms:["cover","star","competition","pet model"],
+url:"members-gallery.html"
+},
+{
+terms:["photo","photos","gallery","portrait"],
+url:"photos.html"
+},
+{
+terms:["travel","holiday","hotel"],
+url:"pet-travel.html"
+},
+{
+terms:["rescue","adoption","help","need"],
+url:"pets-in-need.html"
+},
+{
+terms:["fashion","style","accessories"],
+url:"pet-fashion.html"
+},
+{
+terms:["club","discount","member"],
+url:"club.html"
+},
+{
+terms:["article","story","interview"],
+url:"articles.html"
+}
+];
+
+const route = routes.find(item =>
+item.terms.some(term => query.includes(term))
+);
+
+window.location.href = route
+? route.url
+: "articles.html";
+}
+
+function getAvailableVoices(){
+return window.speechSynthesis
+? window.speechSynthesis.getVoices()
+: [];
+}
+
+function chooseVoice(gender){
+const voices = getAvailableVoices();
+
+const englishVoices = voices.filter(voice =>
+voice.lang &&
+voice.lang.toLowerCase().startsWith("en")
+);
+
+const femaleNames = [
+"samantha",
+"victoria",
+"karen",
+"moira",
+"tessa",
+"serena",
+"susan",
+"zira",
+"aria",
+"jenny",
+"sonia",
+"libby"
+];
+
+const maleNames = [
+"daniel",
+"alex",
+"fred",
+"george",
+"arthur",
+"david",
+"mark",
+"guy",
+"ryan",
+"liam"
+];
+
+const names = gender === "male"
+? maleNames
+: femaleNames;
+
+return (
+englishVoices.find(voice =>
+names.some(name =>
+voice.name.toLowerCase().includes(name)
+)
+) ||
+englishVoices[0] ||
+voices[0] ||
+null
+);
+}
+
+function listenToArticle(button){
+if(!window.speechSynthesis){
+alert("Article narration is not supported by this browser.");
+return;
+}
+
+const article = button.closest(".article-row");
+const text = article.dataset.speech || "";
+
+if(!text){
+return;
+}
+
+window.speechSynthesis.cancel();
+
+document
+.querySelectorAll(".listen-button")
+.forEach(item => {
+item.classList.remove("speaking");
+item.textContent = "🔊";
 });
+
+const utterance = new SpeechSynthesisUtterance(text);
+
+const gender = document
+.getElementById("voiceGender")
+.value;
+
+const speed = Number(
+document
+.getElementById("voiceSpeed")
+.value
+);
+
+const voice = chooseVoice(gender);
+
+if(voice){
+utterance.voice = voice;
 }
 
-function getLatestPublishedIssue(){
-const publishedIssues = getPublishedIssues();
-return publishedIssues[0] || fallbackIssue;
+utterance.rate = speed;
+utterance.pitch = gender === "female" ? 1.05 : .92;
+utterance.volume = 1;
+
+button.classList.add("speaking");
+button.textContent = "■";
+activeSpeechButton = button;
+
+utterance.onend = () => {
+button.classList.remove("speaking");
+button.textContent = "🔊";
+activeSpeechButton = null;
+};
+
+utterance.onerror = () => {
+button.classList.remove("speaking");
+button.textContent = "🔊";
+activeSpeechButton = null;
+};
+
+window.speechSynthesis.speak(utterance);
 }
 
-function safeIssueLink(issue){
-const slug = String(issue.slug || "").trim();
-
-if(!slug){
-return "issue-01.html";
+function stopNarration(){
+if(window.speechSynthesis){
+window.speechSynthesis.cancel();
 }
 
-if(
-slug.startsWith("http://") ||
-slug.startsWith("https://") ||
-slug.endsWith(".html")
-){
-return slug;
-}
-
-return slug + ".html";
-}
-
-function updateHomepageFromCMS(){
-const cms = getCMS();
-const issue = getLatestPublishedIssue();
-
-const issueTitle = issue.title || "Latest Issue";
-const issueSeason = issue.season || "LATEST ISSUE";
-const issueDescription =
-issue.description ||
-"Discover the latest PETS & DOGUE magazine issue.";
-
-const issueCover =
-issue.cover ||
-fallbackIssue.cover;
-
-const issueLink = safeIssueLink(issue);
-
-document.getElementById("mainIssueLink").href = issueLink;
-document.getElementById("mainIssueCover").src = issueCover;
-document.getElementById("mainIssueCover").alt = issueTitle;
-
-document.getElementById("mainIssueSeason").textContent =
-String(issueSeason).toUpperCase();
-
-document.getElementById("mainIssueOverlayTitle").textContent =
-issueTitle;
-
-document.getElementById("mainIssueOverlayDescription").textContent =
-issueDescription;
-
-document.getElementById("latestIssueStory").href = issueLink;
-document.getElementById("latestIssueImage").src = issueCover;
-document.getElementById("latestIssueImage").alt = issueTitle;
-
-document.getElementById("latestIssueBadge").textContent =
-String(issueSeason).toUpperCase();
-
-document.getElementById("latestIssueTitle").textContent =
-issueTitle;
-
-document.getElementById("latestIssueDescription").textContent =
-issueDescription;
-
-document.getElementById("latestIssueButton").textContent =
-"Read " + issueTitle;
-
-if(
-cms.settings &&
-cms.settings.homepageMessage
-){
-document.getElementById("homepageMessage").textContent =
-cms.settings.homepageMessage;
-}
-
-if(
-cms.settings &&
-cms.settings.title
-){
-document.title = cms.settings.title;
+if(activeSpeechButton){
+activeSpeechButton.classList.remove("speaking");
+activeSpeechButton.textContent = "🔊";
+activeSpeechButton = null;
 }
 }
 
 function subscribeNewsletter(){
-const input = document.querySelector(".newsletter-form input");
-const email = input.value.trim();
+const email = document
+.getElementById("newsletterEmail")
+.value
+.trim();
 
 if(!email || !email.includes("@")){
 alert("Please enter a valid email address.");
 return;
 }
 
-const subscribers =
-JSON.parse(localStorage.getItem("pd_newsletter_subscribers") || "[]");
+const subscribers = JSON.parse(
+localStorage.getItem("pets_dogue_newsletter") || "[]"
+);
 
 if(!subscribers.includes(email)){
 subscribers.push(email);
 
 localStorage.setItem(
-"pd_newsletter_subscribers",
+"pets_dogue_newsletter",
 JSON.stringify(subscribers)
 );
 }
 
-input.value = "";
-alert("Thank you for joining the PETS & DOGUE community.");
+document
+.getElementById("newsletterEmail")
+.value = "";
+
+alert("Welcome to the PETS & DOGUE community.");
 }
 
-window.addEventListener("storage",event => {
-if(event.key === CMS_KEY){
-updateHomepageFromCMS();
+document.addEventListener("keydown",event => {
+if(event.key === "Escape"){
+closeMenu();
+closeSearch();
+stopNarration();
 }
 });
 
-updateHomepageFromCMS();
+document
+.getElementById("siteSearchInput")
+.addEventListener("keydown",event => {
+if(event.key === "Enter"){
+runSiteSearch();
+}
+});
+
+if(window.speechSynthesis){
+window.speechSynthesis.onvoiceschanged = () => {
+getAvailableVoices();
+};
+}
 </script>
 
 </body>
