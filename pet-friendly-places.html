@@ -9,13 +9,11 @@
 <link
 rel="stylesheet"
 href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
 crossorigin=""
 >
 
 <script
 src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin="">
 </script>
 
@@ -100,8 +98,13 @@ animation:heroGlow 12s ease infinite alternate;
 }
 
 @keyframes heroGlow{
-0%{transform:translateX(-20px) translateY(0)}
-100%{transform:translateX(20px) translateY(20px)}
+0%{
+transform:translateX(-20px) translateY(0);
+}
+
+100%{
+transform:translateX(20px) translateY(20px);
+}
 }
 
 .hero-content{
@@ -162,6 +165,11 @@ box-shadow:0 0 18px rgba(101,229,31,.45);
 background:white;
 color:#111;
 border:1px solid #111;
+}
+
+.btn.danger{
+background:#b83232;
+color:white;
 }
 
 .btn:disabled{
@@ -313,10 +321,25 @@ border-radius:50%;
 display:inline-block;
 }
 
-.source-dot.internet{background:#69a8ff}
-.source-dot.cms{background:#c89b3c}
-.source-dot.community{background:#b57cff}
-.source-dot.verified{background:#65e51f}
+.source-dot.internet{
+background:#69a8ff;
+}
+
+.source-dot.cms{
+background:#c89b3c;
+}
+
+.source-dot.community{
+background:#b57cff;
+}
+
+.source-dot.verified{
+background:#65e51f;
+}
+
+.source-dot.review{
+background:#e09b38;
+}
 
 .filters{
 display:flex;
@@ -387,6 +410,10 @@ flex-direction:column;
 transform:translateY(-5px);
 }
 
+.place-card.under-review{
+border-color:#e09b38;
+}
+
 .place-image{
 height:245px;
 position:relative;
@@ -450,6 +477,18 @@ background:#65e51f;
 box-shadow:0 0 14px rgba(101,229,31,.45);
 }
 
+.review-badge{
+position:absolute;
+top:16px;
+right:16px;
+padding:8px 12px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+color:white;
+background:#e09b38;
+}
+
 .place-content{
 padding:23px;
 display:flex;
@@ -487,6 +526,47 @@ font-weight:bold;
 color:#b78a2e;
 }
 
+.trust-box{
+background:#f8f7f3;
+border-radius:18px;
+padding:14px;
+margin-bottom:14px;
+}
+
+.trust-row{
+display:flex;
+justify-content:space-between;
+gap:12px;
+align-items:center;
+font-size:14px;
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.trust-row:last-child{
+margin-bottom:0;
+}
+
+.trust-score{
+font-family:Georgia,serif;
+font-size:22px;
+color:#c89b3c;
+}
+
+.trust-bar{
+height:8px;
+background:#ddd;
+border-radius:999px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.trust-fill{
+height:100%;
+background:linear-gradient(90deg,#b83232,#e09b38,#65e51f);
+border-radius:999px;
+}
+
 .pet-policy{
 background:#f8f7f3;
 border-radius:16px;
@@ -494,6 +574,11 @@ padding:12px;
 font-size:14px;
 line-height:1.6;
 margin-bottom:14px;
+}
+
+.pet-policy.disputed{
+background:#fff3d7;
+border:1px solid #e09b38;
 }
 
 .place-content p{
@@ -519,6 +604,13 @@ font-size:13px;
 background:#65e51f;
 color:white;
 border-color:#65e51f;
+}
+
+.report-btn.reported{
+background:#eee;
+color:#777;
+border-color:#aaa;
+cursor:not-allowed;
 }
 
 .empty-state{
@@ -741,7 +833,7 @@ letter-spacing:2px;
 text-transform:uppercase;
 }
 
-.place-modal{
+.modal-overlay{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.78);
@@ -751,7 +843,7 @@ padding:24px;
 overflow-y:auto;
 }
 
-.place-modal.open{
+.modal-overlay.open{
 display:block;
 }
 
@@ -762,6 +854,10 @@ background:white;
 border-radius:34px;
 overflow:hidden;
 position:relative;
+}
+
+.modal-card.small{
+max-width:650px;
 }
 
 .modal-hero{
@@ -815,6 +911,42 @@ color:white;
 font-size:24px;
 cursor:pointer;
 z-index:3;
+}
+
+.report-options{
+display:grid;
+gap:10px;
+margin:20px 0;
+}
+
+.report-option{
+display:flex;
+gap:12px;
+align-items:flex-start;
+background:#f8f7f3;
+border:1px solid #ddd;
+border-radius:18px;
+padding:14px;
+cursor:pointer;
+}
+
+.report-option input{
+width:auto;
+margin-top:4px;
+}
+
+.report-option span{
+line-height:1.6;
+}
+
+.report-notice{
+background:#fff8df;
+border:1px solid #e2c264;
+border-radius:18px;
+padding:15px;
+color:#555;
+line-height:1.7;
+margin-bottom:18px;
 }
 
 .leaflet-popup-content-wrapper{
@@ -893,12 +1025,13 @@ height:410px;
 </header>
 
 <section class="hero">
+
 <div class="hero-content">
 
 <h1>Pet Friendly Places</h1>
 
 <p>
-Search real pet-friendly places near any city or postcode, explore them on the map and help the PETS & DOGUE community discover new locations.
+Search real places near any city or postcode, explore them on the map, submit new locations and help protect the accuracy of the PETS & DOGUE directory.
 </p>
 
 <div class="hero-actions">
@@ -908,6 +1041,7 @@ Search real pet-friendly places near any city or postcode, explore them on the m
 </div>
 
 </div>
+
 </section>
 
 <main>
@@ -926,12 +1060,17 @@ Internet Places
 
 <div class="stat">
 <strong id="verifiedCount">0</strong>
-Verified
+DOGUE Verified
 </div>
 
 <div class="stat">
 <strong id="savedCount">0</strong>
 Saved
+</div>
+
+<div class="stat">
+<strong id="reviewCount">0</strong>
+Under Review
 </div>
 
 </section>
@@ -987,7 +1126,7 @@ onclick="useMyLocation()">
 </div>
 
 <p class="search-help">
-Search results are collected from OpenStreetMap. “Pet friendly” information may not be available for every place, so always confirm the pet policy directly with the venue.
+Internet results come from OpenStreetMap. Pet-policy information may be incomplete, so always confirm directly with a venue before visiting.
 </p>
 
 <div class="search-status" id="searchStatus"></div>
@@ -995,10 +1134,32 @@ Search results are collected from OpenStreetMap. “Pet friendly” information 
 </section>
 
 <div class="source-legend">
-<span class="source-pill"><span class="source-dot internet"></span>Internet result</span>
-<span class="source-pill"><span class="source-dot cms"></span>PETS & DOGUE CMS</span>
-<span class="source-pill"><span class="source-dot community"></span>Community submitted</span>
-<span class="source-pill"><span class="source-dot verified"></span>DOGUE verified</span>
+
+<span class="source-pill">
+<span class="source-dot internet"></span>
+Internet result
+</span>
+
+<span class="source-pill">
+<span class="source-dot cms"></span>
+PETS & DOGUE CMS
+</span>
+
+<span class="source-pill">
+<span class="source-dot community"></span>
+Community submitted
+</span>
+
+<span class="source-pill">
+<span class="source-dot verified"></span>
+DOGUE Verified
+</span>
+
+<span class="source-pill">
+<span class="source-dot review"></span>
+Under Review
+</span>
+
 </div>
 
 <div class="filters" id="categoryFilters">
@@ -1028,6 +1189,7 @@ Search results are collected from OpenStreetMap. “Pet friendly” information 
 
 <select id="sortSelect" onchange="renderPlaces()">
 <option value="distance">Nearest first</option>
+<option value="trust">Highest trust score</option>
 <option value="name">Name A–Z</option>
 <option value="source">DOGUE places first</option>
 </select>
@@ -1050,8 +1212,15 @@ Search results are collected from OpenStreetMap. “Pet friendly” information 
 <div id="placesMap"></div>
 
 <div class="map-info">
-<strong id="mapInfoTitle">Search for a location</strong>
-<p id="mapInfoText">Real map markers will appear here.</p>
+
+<strong id="mapInfoTitle">
+Search for a location
+</strong>
+
+<p id="mapInfoText">
+Real map markers will appear here.
+</p>
+
 </div>
 
 </aside>
@@ -1074,7 +1243,7 @@ Search results are collected from OpenStreetMap. “Pet friendly” information 
 <h2>Add A Pet-Friendly Place</h2>
 
 <p>
-Know a café, hotel, park, beach, groomer or another place that welcomes pets? Submit it for editorial review. It will not become public until approved.
+Know a café, hotel, park, beach, groomer or another location that welcomes pets? Submit it for editorial review. It will not become public until approved.
 </p>
 
 <div class="form-grid">
@@ -1114,11 +1283,13 @@ placeholder="Tell us why this place is pet friendly and what visitors should kno
 </textarea>
 
 <label class="checkbox">
+
 <input id="submitAgreement" type="checkbox">
 
 <span>
 I confirm that the information is accurate. I understand that the submission will be reviewed before publication.
 </span>
+
 </label>
 
 <button class="btn green" onclick="submitCommunityPlace()">
@@ -1148,7 +1319,9 @@ Club members can unlock selected offers from pet-friendly hotels, cafés, groome
 
 <br><br>
 
-<a href="club.html" class="btn gold">Explore Club Benefits</a>
+<a href="club.html" class="btn gold">
+Explore Club Benefits
+</a>
 
 </section>
 
@@ -1171,11 +1344,16 @@ Club members can unlock selected offers from pet-friendly hotels, cafés, groome
 <a href="contact.html">Contact</a>
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a href="admin.html" class="admin-small">
+Admin
+</a>
 
 </footer>
 
-<div class="place-modal" id="placeModal" onclick="closeModalFromOverlay(event)">
+<div
+class="modal-overlay"
+id="placeModal"
+onclick="closeModalFromOverlay(event,'placeModal')">
 
 <div class="modal-card">
 
@@ -1190,6 +1368,19 @@ Club members can unlock selected offers from pet-friendly hotels, cafés, groome
 <h2 id="modalName"></h2>
 
 <div class="place-meta" id="modalMeta"></div>
+
+<div class="trust-box">
+
+<div class="trust-row">
+<span>DOGUE Trust Score</span>
+<span class="trust-score" id="modalTrustScore">0/100</span>
+</div>
+
+<div class="trust-bar">
+<div class="trust-fill" id="modalTrustFill"></div>
+</div>
+
+</div>
 
 <div class="pet-policy" id="modalPetPolicy"></div>
 
@@ -1217,7 +1408,98 @@ class="btn black">
 Directions
 </a>
 
+<button
+id="modalReportButton"
+class="btn danger"
+onclick="openReportFromPlaceModal()">
+🚩 Report Problem
+</button>
+
 </div>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="modal-overlay"
+id="reportModal"
+onclick="closeModalFromOverlay(event,'reportModal')">
+
+<div class="modal-card small">
+
+<button class="modal-close" onclick="closeReportModal()">×</button>
+
+<div class="modal-content">
+
+<h2>Report A Problem</h2>
+
+<p id="reportPlaceName">
+Tell us what has changed about this place.
+</p>
+
+<div class="report-notice">
+One report can be submitted from this browser for each place. Reports are reviewed through the DOGUE Trust Center.
+</div>
+
+<div class="report-options">
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="No longer pet friendly">
+<span>❌ No longer pet friendly</span>
+</label>
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="Staff refused pets">
+<span>🚫 Staff refused pets</span>
+</label>
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="Closed permanently">
+<span>🏪 Closed permanently</span>
+</label>
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="Wrong address">
+<span>📍 Wrong address</span>
+</label>
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="Wrong phone number">
+<span>☎️ Wrong telephone number</span>
+</label>
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="Website unavailable">
+<span>🌐 Website unavailable</span>
+</label>
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="Unsafe">
+<span>⚠️ Unsafe place or conditions</span>
+</label>
+
+<label class="report-option">
+<input type="radio" name="reportReason" value="Other">
+<span>✍️ Other problem</span>
+</label>
+
+</div>
+
+<textarea
+id="reportDetails"
+placeholder="Add useful details, optional...">
+</textarea>
+
+<br>
+
+<button class="btn danger" onclick="submitPlaceReport()">
+Submit Report
+</button>
+
+<div class="form-message" id="reportMessage"></div>
 
 </div>
 
@@ -1232,8 +1514,15 @@ const LIKES_KEY = "pets_dogue_live_place_likes";
 const LIKED_KEY = "pets_dogue_live_place_liked";
 const SUBMISSIONS_KEY = "pets_dogue_place_submissions";
 
-const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
-const OVERPASS_URL = "https://overpass-api.de/api/interpreter";
+const REPORTS_KEY = "pets_dogue_place_reports";
+const REPORTED_KEY = "pets_dogue_places_reported_by_user";
+const MODERATION_KEY = "pets_dogue_place_moderation";
+
+const NOMINATIM_URL =
+"https://nominatim.openstreetmap.org/search";
+
+const OVERPASS_URL =
+"https://overpass-api.de/api/interpreter";
 
 let map;
 let markersLayer;
@@ -1248,264 +1537,502 @@ let cmsPlaces = [];
 let communityPlaces = [];
 let visiblePlaces = [];
 
-let savedPlaces = readStorageArray(SAVED_KEY);
-let placeLikes = readStorageObject(LIKES_KEY);
-let likedPlaces = readStorageObject(LIKED_KEY);
+let selectedPlaceId = null;
+let selectedReportPlaceId = null;
+
+let savedPlaces =
+readStorageArray(SAVED_KEY);
+
+let placeLikes =
+readStorageObject(LIKES_KEY);
+
+let likedPlaces =
+readStorageObject(LIKED_KEY);
+
+let placeReports =
+readStorageArray(REPORTS_KEY);
+
+let reportedByUser =
+readStorageObject(REPORTED_KEY);
+
+let placeModeration =
+readStorageObject(MODERATION_KEY);
 
 const categoryDefinitions = {
+
 Cafe:{
 label:"Café",
 icon:"☕",
 image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80"
 },
+
 Restaurant:{
 label:"Restaurant",
 icon:"🍽️",
 image:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
 },
+
 Hotel:{
 label:"Hotel",
 icon:"🏨",
 image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
 },
+
 Park:{
 label:"Park",
 icon:"🌳",
 image:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
 },
+
 Beach:{
 label:"Beach",
 icon:"🏖️",
 image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
 },
+
 Veterinary:{
 label:"Veterinary",
 icon:"🩺",
 image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80"
 },
+
 Grooming:{
 label:"Grooming",
 icon:"✂️",
 image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80"
 },
+
 "Pet Shop":{
 label:"Pet Shop",
 icon:"🛍️",
 image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
 },
+
 Other:{
 label:"Pet Friendly",
 icon:"🐾",
 image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80"
 }
+
 };
 
 function readStorageArray(key){
+
 try{
-const value = JSON.parse(localStorage.getItem(key) || "[]");
-return Array.isArray(value) ? value : [];
+
+const value =
+JSON.parse(
+localStorage.getItem(key) || "[]"
+);
+
+return Array.isArray(value)
+? value
+: [];
+
 }catch(error){
+
 return [];
+
 }
+
 }
 
 function readStorageObject(key){
+
 try{
-const value = JSON.parse(localStorage.getItem(key) || "{}");
-return value && typeof value === "object" && !Array.isArray(value)
+
+const value =
+JSON.parse(
+localStorage.getItem(key) || "{}"
+);
+
+return (
+value &&
+typeof value === "object" &&
+!Array.isArray(value)
+)
 ? value
 : {};
+
 }catch(error){
+
 return {};
+
 }
+
 }
 
 function escapeHTML(value){
+
 return String(value || "")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 }
 
 function safeURL(value){
-const url = String(value || "").trim();
+
+const url =
+String(value || "").trim();
 
 if(!url){
 return "";
 }
 
 try{
-const parsed = new URL(url,window.location.href);
 
-if(parsed.protocol === "http:" || parsed.protocol === "https:"){
+const parsed =
+new URL(
+url,
+window.location.href
+);
+
+if(
+parsed.protocol === "http:" ||
+parsed.protocol === "https:"
+){
 return parsed.href;
 }
+
 }catch(error){
+
 return "";
+
 }
 
 return "";
+
 }
 
 function initMap(){
-map = L.map("placesMap",{
+
+map =
+L.map(
+"placesMap",
+{
 zoomControl:true
-}).setView([50.7192,-1.8808],11);
+}
+).setView(
+[50.7192,-1.8808],
+11
+);
 
 L.tileLayer(
 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 {
 maxZoom:19,
-attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'
+attribution:
+'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'
 }
 ).addTo(map);
 
-markersLayer = L.layerGroup().addTo(map);
+markersLayer =
+L.layerGroup().addTo(map);
+
 }
 
 function loadLocalPlaces(){
+
 cmsPlaces = [];
 communityPlaces = [];
 
 try{
-const cms = JSON.parse(localStorage.getItem(CMS_KEY) || "{}");
 
-if(Array.isArray(cms.places)){
-cmsPlaces = cms.places.map(place => normalizeLocalPlace(place,"cms"));
-}
-}catch(error){
-console.error("Unable to read CMS places.",error);
-}
+const cms =
+JSON.parse(
+localStorage.getItem(CMS_KEY) || "{}"
+);
 
-const submissions = readStorageArray(SUBMISSIONS_KEY);
+if(
+Array.isArray(cms.places)
+){
 
-communityPlaces = submissions
-.filter(place =>
-place.status === "Approved" ||
-place.status === "DOGUE Verified"
+cmsPlaces =
+cms.places
+.map(place =>
+normalizeLocalPlace(
+place,
+place.source || "cms"
 )
-.map(place => normalizeLocalPlace(place,"community"));
+);
 
+}
+
+}catch(error){
+
+console.error(
+"Unable to read CMS places.",
+error
+);
+
+}
+
+const submissions =
+readStorageArray(SUBMISSIONS_KEY);
+
+communityPlaces =
+submissions
+.filter(place =>
+[
+"Approved",
+"DOGUE Verified",
+"Admin Restored"
+].includes(place.status)
+)
+.map(place =>
+normalizeLocalPlace(
+place,
+"community"
+)
+);
+
+recalculateModeration();
 renderPlaces();
+
 }
 
 function normalizeLocalPlace(place,source){
-const category = normalizeCategory(
+
+const category =
+normalizeCategory(
 place.category ||
 place.type ||
 "Other"
 );
 
-const latitude = toNumber(
+const latitude =
+toNumber(
 place.latitude ??
 place.lat
 );
 
-const longitude = toNumber(
+const longitude =
+toNumber(
 place.longitude ??
 place.lon
 );
 
-return {
-id:String(place.id || `${source}-${Date.now()}-${Math.random()}`),
-name:place.name || place.businessName || "Pet Friendly Place",
-category,
-location:place.location || place.address || "",
-address:place.address || place.location || "",
-website:safeURL(place.website),
-phone:place.phone || "",
-description:place.description || "Selected PETS & DOGUE pet-friendly place.",
-petPolicy:place.petPolicy || "Contact the venue to confirm its current pet policy.",
-latitude,
-longitude,
-image:place.image || categoryDefinitions[category]?.image || categoryDefinitions.Other.image,
-source,
-verified:
+const verified =
 place.status === "DOGUE Verified" ||
-place.verified === true,
+place.verified === true;
+
+return {
+
+id:String(
+place.id ||
+`${source}-${Date.now()}-${Math.random()}`
+),
+
+name:
+place.name ||
+place.businessName ||
+"Pet Friendly Place",
+
+category,
+
+location:
+place.location ||
+place.address ||
+"",
+
+address:
+place.address ||
+place.location ||
+"",
+
+website:
+safeURL(place.website),
+
+phone:
+place.phone ||
+"",
+
+description:
+place.description ||
+"Selected PETS & DOGUE pet-friendly place.",
+
+petPolicy:
+place.petPolicy ||
+"Contact the venue to confirm its current pet policy.",
+
+latitude,
+
+longitude,
+
+image:
+place.image ||
+categoryDefinitions[category]?.image ||
+categoryDefinitions.Other.image,
+
+source,
+
+verified,
+
 distance:null,
+
+likes:Number(place.likes || 0),
+
 tags:{}
+
 };
+
 }
 
 function normalizeCategory(value){
-const text = String(value || "").toLowerCase();
 
-if(text.includes("café") || text.includes("cafe") || text.includes("coffee")){
+const text =
+String(value || "")
+.toLowerCase();
+
+if(
+text.includes("café") ||
+text.includes("cafe") ||
+text.includes("coffee")
+){
 return "Cafe";
 }
 
-if(text.includes("restaurant") || text.includes("food")){
+if(
+text.includes("restaurant") ||
+text.includes("food") ||
+text.includes("pub") ||
+text.includes("bar")
+){
 return "Restaurant";
 }
 
-if(text.includes("hotel") || text.includes("guest_house") || text.includes("hostel")){
+if(
+text.includes("hotel") ||
+text.includes("guest_house") ||
+text.includes("hostel")
+){
 return "Hotel";
 }
 
-if(text.includes("beach")){
+if(
+text.includes("beach")
+){
 return "Beach";
 }
 
-if(text.includes("park") || text.includes("dog park")){
+if(
+text.includes("park")
+){
 return "Park";
 }
 
-if(text.includes("vet") || text.includes("clinic")){
+if(
+text.includes("vet") ||
+text.includes("clinic")
+){
 return "Veterinary";
 }
 
-if(text.includes("groom")){
+if(
+text.includes("groom")
+){
 return "Grooming";
 }
 
-if(text.includes("pet shop") || text.includes("pet_shop")){
+if(
+text.includes("pet shop") ||
+text.includes("pet_shop")
+){
 return "Pet Shop";
 }
 
 return "Other";
+
 }
 
 function toNumber(value){
-const number = Number(value);
-return Number.isFinite(number) ? number : null;
+
+if(
+value === null ||
+value === undefined ||
+value === ""
+){
+return null;
+}
+
+const number =
+Number(value);
+
+return Number.isFinite(number)
+? number
+: null;
+
 }
 
 function setStatus(message,type){
-const status = document.getElementById("searchStatus");
 
-status.textContent = message;
-status.className = `search-status show ${type}`;
+const status =
+document.getElementById(
+"searchStatus"
+);
+
+status.textContent =
+message;
+
+status.className =
+`search-status show ${type}`;
+
 }
 
-function clearStatus(){
-const status = document.getElementById("searchStatus");
-status.textContent = "";
-status.className = "search-status";
+function toggleSearchButtons(disabled){
+
+document.getElementById(
+"searchButton"
+).disabled =
+disabled;
+
+document.getElementById(
+"locationButton"
+).disabled =
+disabled;
+
 }
 
 async function searchByText(){
-const query = document.getElementById("locationSearch").value.trim();
+
+const query =
+document.getElementById(
+"locationSearch"
+).value.trim();
 
 if(!query){
-setStatus("Enter a city, country or postcode first.","error");
+
+setStatus(
+"Enter a city, country or postcode first.",
+"error"
+);
+
 return;
+
 }
 
 toggleSearchButtons(true);
-setStatus("Finding the location…","loading");
+
+setStatus(
+"Finding the location…",
+"loading"
+);
 
 try{
-const params = new URLSearchParams({
+
+const params =
+new URLSearchParams({
 q:query,
 format:"jsonv2",
 limit:"1",
 addressdetails:"1"
 });
 
-const response = await fetch(
+const response =
+await fetch(
 `${NOMINATIM_URL}?${params.toString()}`,
 {
 headers:{
@@ -1516,26 +2043,44 @@ headers:{
 );
 
 if(!response.ok){
-throw new Error("Location search failed.");
+
+throw new Error(
+"Location search failed."
+);
+
 }
 
-const results = await response.json();
+const results =
+await response.json();
 
-if(!Array.isArray(results) || results.length === 0){
-throw new Error("Location not found. Try a city with a country or a complete postcode.");
+if(
+!Array.isArray(results) ||
+results.length === 0
+){
+
+throw new Error(
+"Location not found. Try a city with a country or a complete postcode."
+);
+
 }
 
-const result = results[0];
+const result =
+results[0];
 
 currentCentre = {
 lat:Number(result.lat),
 lon:Number(result.lon)
 };
 
-currentSearchLabel = result.display_name || query;
+currentSearchLabel =
+result.display_name ||
+query;
 
 map.setView(
-[currentCentre.lat,currentCentre.lon],
+[
+currentCentre.lat,
+currentCentre.lon
+],
 13
 );
 
@@ -1551,39 +2096,67 @@ currentCentre.lon
 );
 
 }catch(error){
+
 console.error(error);
+
 setStatus(
-error.message || "Unable to search this location.",
+error.message ||
+"Unable to search this location.",
 "error"
 );
+
 }finally{
+
 toggleSearchButtons(false);
+
 }
+
 }
 
 function useMyLocation(){
-if(!navigator.geolocation){
-setStatus("Geolocation is not supported by this browser.","error");
+
+if(
+!navigator.geolocation
+){
+
+setStatus(
+"Geolocation is not supported by this browser.",
+"error"
+);
+
 return;
+
 }
 
 toggleSearchButtons(true);
-setStatus("Waiting for location permission…","loading");
+
+setStatus(
+"Waiting for location permission…",
+"loading"
+);
 
 navigator.geolocation.getCurrentPosition(
+
 async position => {
+
 currentCentre = {
 lat:position.coords.latitude,
 lon:position.coords.longitude
 };
 
-currentSearchLabel = "Your current location";
+currentSearchLabel =
+"Your current location";
 
-document.getElementById("locationSearch").value =
+document.getElementById(
+"locationSearch"
+).value =
 "Current location";
 
 map.setView(
-[currentCentre.lat,currentCentre.lon],
+[
+currentCentre.lat,
+currentCentre.lon
+],
 14
 );
 
@@ -1594,21 +2167,32 @@ currentCentre.lon,
 );
 
 try{
+
 await fetchNearbyPlaces(
 currentCentre.lat,
 currentCentre.lon
 );
+
 }catch(error){
+
 console.error(error);
+
 setStatus(
-error.message || "Unable to load nearby places.",
+error.message ||
+"Unable to load nearby places.",
 "error"
 );
+
 }finally{
+
 toggleSearchButtons(false);
+
 }
+
 },
+
 error => {
+
 toggleSearchButtons(false);
 
 const messages = {
@@ -1618,29 +2202,31 @@ const messages = {
 };
 
 setStatus(
-messages[error.code] || "Unable to use your current location.",
+messages[error.code] ||
+"Unable to use your current location.",
 "error"
 );
+
 },
+
 {
 enableHighAccuracy:true,
 timeout:15000,
 maximumAge:300000
 }
-);
-}
 
-function toggleSearchButtons(disabled){
-document.getElementById("searchButton").disabled = disabled;
-document.getElementById("locationButton").disabled = disabled;
+);
+
 }
 
 function setUserMarker(lat,lon,label){
+
 if(userMarker){
 map.removeLayer(userMarker);
 }
 
-userMarker = L.circleMarker(
+userMarker =
+L.circleMarker(
 [lat,lon],
 {
 radius:9,
@@ -1654,34 +2240,44 @@ fillOpacity:1
 userMarker.bindPopup(
 `<strong>${escapeHTML(label)}</strong>`
 );
+
 }
 
 async function fetchNearbyPlaces(lat,lon){
-const radius = Number(
-document.getElementById("radiusSearch").value
+
+const radius =
+Number(
+document.getElementById(
+"radiusSearch"
+).value
 );
 
 const selectedCategory =
-document.getElementById("categorySearch").value;
+document.getElementById(
+"categorySearch"
+).value;
 
 setStatus(
 "Searching OpenStreetMap for nearby places…",
 "loading"
 );
 
-const query = buildOverpassQuery(
+const query =
+buildOverpassQuery(
 lat,
 lon,
 radius,
 selectedCategory
 );
 
-const response = await fetch(
+const response =
+await fetch(
 OVERPASS_URL,
 {
 method:"POST",
 headers:{
-"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
+"Content-Type":
+"application/x-www-form-urlencoded;charset=UTF-8"
 },
 body:new URLSearchParams({
 data:query
@@ -1690,18 +2286,24 @@ data:query
 );
 
 if(!response.ok){
+
 throw new Error(
 "The public map service is busy. Please try again shortly."
 );
+
 }
 
-const data = await response.json();
+const data =
+await response.json();
 
-internetPlaces = convertOverpassElements(
+internetPlaces =
+convertOverpassElements(
 data.elements || [],
 lat,
 lon
 );
+
+recalculateModeration();
 
 setStatus(
 `${internetPlaces.length} internet places found near ${currentSearchLabel}.`,
@@ -1709,12 +2311,21 @@ setStatus(
 );
 
 renderPlaces();
+
 }
 
-function buildOverpassQuery(lat,lon,radius,category){
-const selectors = getOverpassSelectors(category);
+function buildOverpassQuery(
+lat,
+lon,
+radius,
+category
+){
 
-const queryParts = selectors.map(selector => `
+const selectors =
+getOverpassSelectors(category);
+
+const queryParts =
+selectors.map(selector => `
 nwr(around:${radius},${lat},${lon})${selector};
 `).join("");
 
@@ -1725,58 +2336,86 @@ ${queryParts}
 );
 out center tags;
 `;
+
 }
 
 function getOverpassSelectors(category){
+
 const selectorMap = {
+
 Cafe:[
 '["amenity"="cafe"]'
 ],
+
 Restaurant:[
 '["amenity"="restaurant"]',
 '["amenity"="pub"]',
 '["amenity"="bar"]'
 ],
+
 Hotel:[
 '["tourism"="hotel"]',
 '["tourism"="guest_house"]',
 '["tourism"="hostel"]'
 ],
+
 Park:[
 '["leisure"="park"]',
 '["leisure"="dog_park"]',
 '["leisure"="nature_reserve"]'
 ],
+
 Beach:[
 '["natural"="beach"]',
 '["leisure"="beach_resort"]'
 ],
+
 Veterinary:[
 '["amenity"="veterinary"]'
 ],
+
 Grooming:[
 '["shop"="pet_grooming"]',
 '["craft"="pet_grooming"]',
 '["service:animal"="grooming"]'
 ],
+
 "Pet Shop":[
 '["shop"="pet"]'
 ]
+
 };
 
-if(category !== "All" && selectorMap[category]){
+if(
+category !== "All" &&
+selectorMap[category]
+){
+
 return selectorMap[category];
+
 }
 
-return Object.values(selectorMap).flat();
+return Object
+.values(selectorMap)
+.flat();
+
 }
 
-function convertOverpassElements(elements,centreLat,centreLon){
-const seen = new Set();
+function convertOverpassElements(
+elements,
+centreLat,
+centreLon
+){
+
+const seen =
+new Set();
 
 return elements
+
 .map(element => {
-const tags = element.tags || {};
+
+const tags =
+element.tags || {};
 
 const latitude =
 element.lat ??
@@ -1793,14 +2432,16 @@ if(
 return null;
 }
 
-const category = detectOSMCategory(tags);
+const category =
+detectOSMCategory(tags);
 
 const name =
 tags.name ||
 tags["name:en"] ||
 `${categoryDefinitions[category]?.label || "Pet Friendly"} Place`;
 
-const key = `${name.toLowerCase()}-${Number(latitude).toFixed(5)}-${Number(longitude).toFixed(5)}`;
+const key =
+`${name.toLowerCase()}-${Number(latitude).toFixed(5)}-${Number(longitude).toFixed(5)}`;
 
 if(seen.has(key)){
 return null;
@@ -1812,82 +2453,141 @@ const dogTag =
 tags.dog ||
 tags.dogs ||
 tags["dog:access"] ||
-tags["pets"];
+tags.pets;
 
-const petPolicy = describePetPolicy(
+const petPolicy =
+describePetPolicy(
 dogTag,
 tags
 );
 
-const address = buildAddress(tags);
+const address =
+buildAddress(tags);
 
 return {
-id:`osm-${element.type}-${element.id}`,
+
+id:
+`osm-${element.type}-${element.id}`,
+
 name,
+
 category,
-location:address || currentSearchLabel,
+
+location:
+address ||
+currentSearchLabel,
+
 address,
-website:safeURL(
+
+website:
+safeURL(
 tags.website ||
 tags["contact:website"] ||
 tags.url
 ),
+
 phone:
 tags.phone ||
 tags["contact:phone"] ||
 "",
-description:buildOSMDescription(tags,category),
+
+description:
+buildOSMDescription(
+tags,
+category
+),
+
 petPolicy,
-latitude:Number(latitude),
-longitude:Number(longitude),
-image:categoryDefinitions[category]?.image || categoryDefinitions.Other.image,
+
+latitude:
+Number(latitude),
+
+longitude:
+Number(longitude),
+
+image:
+categoryDefinitions[category]?.image ||
+categoryDefinitions.Other.image,
+
 source:"internet",
+
 verified:false,
-distance:haversineDistance(
+
+distance:
+haversineDistance(
 centreLat,
 centreLon,
 Number(latitude),
 Number(longitude)
 ),
+
+likes:0,
+
 tags
+
 };
+
 })
+
 .filter(Boolean)
+
 .sort((a,b) =>
 (a.distance ?? Infinity) -
 (b.distance ?? Infinity)
 )
+
 .slice(0,80);
+
 }
 
 function detectOSMCategory(tags){
-if(tags.amenity === "cafe"){
+
+if(
+tags.amenity === "cafe"
+){
 return "Cafe";
 }
 
 if(
-["restaurant","pub","bar"].includes(tags.amenity)
+[
+"restaurant",
+"pub",
+"bar"
+].includes(tags.amenity)
 ){
 return "Restaurant";
 }
 
 if(
-["hotel","guest_house","hostel"].includes(tags.tourism)
+[
+"hotel",
+"guest_house",
+"hostel"
+].includes(tags.tourism)
 ){
 return "Hotel";
 }
 
-if(tags.natural === "beach" || tags.leisure === "beach_resort"){
+if(
+tags.natural === "beach" ||
+tags.leisure === "beach_resort"
+){
 return "Beach";
 }
 
 if(
-["park","dog_park","nature_reserve"].includes(tags.leisure)
+[
+"park",
+"dog_park",
+"nature_reserve"
+].includes(tags.leisure)
 ){
 return "Park";
 }
 
-if(tags.amenity === "veterinary"){
+if(
+tags.amenity === "veterinary"
+){
 return "Veterinary";
 }
 
@@ -1899,36 +2599,70 @@ tags["service:animal"] === "grooming"
 return "Grooming";
 }
 
-if(tags.shop === "pet"){
+if(
+tags.shop === "pet"
+){
 return "Pet Shop";
 }
 
 return "Other";
+
 }
 
-function describePetPolicy(dogTag,tags){
-const value = String(dogTag || "").toLowerCase();
+function describePetPolicy(
+dogTag,
+tags
+){
 
-if(["yes","designated","permissive"].includes(value)){
+const value =
+String(dogTag || "")
+.toLowerCase();
+
+if(
+[
+"yes",
+"designated",
+"permissive"
+].includes(value)
+){
+
 return "🐾 OpenStreetMap indicates that dogs or pets are welcome.";
+
 }
 
-if(["leashed","on_leash"].includes(value)){
+if(
+[
+"leashed",
+"on_leash"
+].includes(value)
+){
+
 return "🦮 Dogs appear to be allowed on a lead.";
+
 }
 
-if(["no"].includes(value)){
+if(
+value === "no"
+){
+
 return "🚫 OpenStreetMap indicates that dogs may not be allowed.";
+
 }
 
-if(tags.leisure === "dog_park"){
+if(
+tags.leisure === "dog_park"
+){
+
 return "🐕 Dedicated dog park.";
+
 }
 
 return "ℹ️ Pet policy is not confirmed. Contact the venue before visiting.";
+
 }
 
 function buildAddress(tags){
+
 return [
 tags["addr:housenumber"],
 tags["addr:street"],
@@ -1938,9 +2672,14 @@ tags["addr:postcode"]
 ]
 .filter(Boolean)
 .join(", ");
+
 }
 
-function buildOSMDescription(tags,category){
+function buildOSMDescription(
+tags,
+category
+){
+
 const parts = [];
 
 if(tags.description){
@@ -1948,34 +2687,61 @@ parts.push(tags.description);
 }
 
 if(tags.cuisine){
+
 parts.push(
-`Cuisine: ${String(tags.cuisine).replaceAll("; ",", ").replaceAll(";",", ")}.`
+`Cuisine: ${String(tags.cuisine).replaceAll(";",", ")}.`
 );
+
 }
 
-if(tags.outdoor_seating === "yes"){
-parts.push("Outdoor seating available.");
+if(
+tags.outdoor_seating === "yes"
+){
+
+parts.push(
+"Outdoor seating available."
+);
+
 }
 
 if(tags.opening_hours){
-parts.push(`Opening hours: ${tags.opening_hours}.`);
+
+parts.push(
+`Opening hours: ${tags.opening_hours}.`
+);
+
 }
 
 if(parts.length === 0){
+
 parts.push(
 `${categoryDefinitions[category]?.label || "Pet-friendly"} location found through OpenStreetMap.`
 );
+
 }
 
 return parts.join(" ");
+
 }
 
-function haversineDistance(lat1,lon1,lat2,lon2){
-const earthRadius = 6371;
-const toRadians = degrees => degrees * Math.PI / 180;
+function haversineDistance(
+lat1,
+lon1,
+lat2,
+lon2
+){
 
-const dLat = toRadians(lat2-lat1);
-const dLon = toRadians(lon2-lon1);
+const earthRadius = 6371;
+
+const toRadians =
+degrees =>
+degrees * Math.PI / 180;
+
+const dLat =
+toRadians(lat2-lat1);
+
+const dLon =
+toRadians(lon2-lon1);
 
 const a =
 Math.sin(dLat/2) ** 2 +
@@ -1983,50 +2749,81 @@ Math.cos(toRadians(lat1)) *
 Math.cos(toRadians(lat2)) *
 Math.sin(dLon/2) ** 2;
 
-return earthRadius * 2 * Math.atan2(
+return earthRadius *
+2 *
+Math.atan2(
 Math.sqrt(a),
 Math.sqrt(1-a)
 );
+
 }
 
-function setCategory(category,button){
-activeCategory = category;
+function setCategory(
+category,
+button
+){
 
-document.querySelectorAll(".filter").forEach(item => {
-item.classList.remove("active");
+activeCategory =
+category;
+
+document
+.querySelectorAll(".filter")
+.forEach(item => {
+
+item.classList.remove(
+"active"
+);
+
 });
 
-button.classList.add("active");
+button.classList.add(
+"active"
+);
 
-document.getElementById("categorySearch").value =
-category === "All" ? "All" : category;
+document.getElementById(
+"categorySearch"
+).value =
+category === "All"
+? "All"
+: category;
 
 if(currentCentre){
+
 fetchNearbyPlaces(
 currentCentre.lat,
 currentCentre.lon
 ).catch(error => {
+
 console.error(error);
+
 setStatus(
 "The category could not be refreshed. Existing results are still available.",
 "error"
 );
+
 });
+
 }else{
+
 renderPlaces();
+
 }
+
 }
 
 function getAllPlaces(){
+
 const merged = [
 ...cmsPlaces,
 ...communityPlaces,
 ...internetPlaces
 ];
 
-const unique = new Map();
+const unique =
+new Map();
 
 merged.forEach(place => {
+
 const key =
 place.id ||
 `${place.name}-${place.latitude}-${place.longitude}`;
@@ -2034,79 +2831,349 @@ place.id ||
 if(!unique.has(key)){
 unique.set(key,place);
 }
+
 });
 
-return [...unique.values()];
+return [
+...unique.values()
+];
+
+}
+
+function findPlace(placeId){
+
+return getAllPlaces().find(place =>
+String(place.id) ===
+String(placeId)
+);
+
+}
+
+function getModeration(placeId){
+
+return (
+placeModeration[
+String(placeId)
+] ||
+{
+placeId:String(placeId),
+reportCount:0,
+moderationStatus:"Active",
+verified:false,
+adminOverride:false
+}
+);
+
+}
+
+function recalculateModeration(){
+
+const reportGroups = {};
+
+placeReports.forEach(report => {
+
+const placeId =
+String(
+report.placeId || ""
+);
+
+if(!placeId){
+return;
+}
+
+if(!reportGroups[placeId]){
+reportGroups[placeId] = [];
+}
+
+reportGroups[placeId].push(
+report
+);
+
+});
+
+Object.entries(
+reportGroups
+).forEach(
+([placeId,reports]) => {
+
+const existing =
+placeModeration[placeId] ||
+{};
+
+if(
+existing.adminOverride === true
+){
+
+return;
+
+}
+
+const place =
+findPlace(placeId);
+
+const verified =
+existing.verified === true ||
+place?.verified === true;
+
+const reviewThreshold =
+verified
+? 5
+: 3;
+
+const hideThreshold =
+verified
+? 8
+: 5;
+
+const reportCount =
+reports.length;
+
+let status =
+verified
+? "DOGUE Verified"
+: "Active";
+
+if(
+reportCount >=
+hideThreshold
+){
+
+status =
+"Auto Hidden";
+
+}else if(
+reportCount >=
+reviewThreshold
+){
+
+status =
+"Under Review";
+
+}
+
+placeModeration[placeId] = {
+
+...existing,
+
+placeId,
+
+placeName:
+place?.name ||
+existing.placeName ||
+reports[0]?.placeName ||
+"Reported Place",
+
+verified,
+
+reportCount,
+
+moderationStatus:status,
+
+lastReportAt:
+reports
+.map(report => report.createdAt)
+.filter(Boolean)
+.sort()
+.reverse()[0] ||
+"",
+
+autoHiddenAt:
+status === "Auto Hidden"
+? existing.autoHiddenAt ||
+new Date().toISOString()
+: "",
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+});
+
+localStorage.setItem(
+MODERATION_KEY,
+JSON.stringify(placeModeration)
+);
+
+}
+
+function calculateTrustScore(place){
+
+const moderation =
+getModeration(place.id);
+
+let score = 72;
+
+if(
+place.source === "cms"
+){
+score += 7;
+}
+
+if(
+place.source === "community"
+){
+score += 3;
+}
+
+if(
+place.verified ||
+moderation.verified
+){
+score += 21;
+}
+
+if(
+place.petPolicy &&
+!place.petPolicy
+.toLowerCase()
+.includes("not confirmed")
+){
+score += 4;
+}
+
+score -=
+Number(
+moderation.reportCount || 0
+) * 8;
+
+if(
+moderation.moderationStatus ===
+"Under Review"
+){
+score -= 10;
+}
+
+if(
+[
+"Auto Hidden",
+"Removed",
+"Not Pet Friendly"
+].includes(
+moderation.moderationStatus
+)
+){
+score = 0;
+}
+
+return Math.max(
+0,
+Math.min(
+100,
+score
+)
+);
+
+}
+
+function isPlacePublic(place){
+
+const moderation =
+getModeration(place.id);
+
+return ![
+"Auto Hidden",
+"Removed",
+"Not Pet Friendly"
+].includes(
+moderation.moderationStatus
+);
+
 }
 
 function getFilteredPlaces(){
-const searchText =
-document.getElementById("locationSearch").value
-.toLowerCase()
-.trim();
 
 const selectedCategory =
-document.getElementById("categorySearch").value;
+document.getElementById(
+"categorySearch"
+).value;
 
-let places = getAllPlaces().filter(place => {
+let places =
+getAllPlaces()
+.filter(isPlacePublic)
+.filter(place => {
+
 const categoryMatch =
 activeCategory === "All" ||
-place.category === activeCategory;
+place.category ===
+activeCategory;
 
 const selectMatch =
 selectedCategory === "All" ||
-place.category === selectedCategory;
+place.category ===
+selectedCategory;
 
-const searchable = [
-place.name,
-place.category,
-place.location,
-place.address,
-place.description,
-place.petPolicy
-]
-.join(" ")
-.toLowerCase();
+return (
+categoryMatch &&
+selectMatch
+);
 
-const textMatch =
-!searchText ||
-searchText === "current location" ||
-searchable.includes(searchText) ||
-place.source === "internet";
-
-return categoryMatch && selectMatch && textMatch;
 });
 
 if(currentCentre){
-places = places.map(place => {
+
+places =
+places.map(place => {
+
 if(
 Number.isFinite(place.latitude) &&
 Number.isFinite(place.longitude)
 ){
+
 return {
+
 ...place,
-distance:haversineDistance(
+
+distance:
+haversineDistance(
 currentCentre.lat,
 currentCentre.lon,
 place.latitude,
 place.longitude
 )
+
 };
+
 }
 
 return place;
+
 });
+
 }
 
 const sortValue =
-document.getElementById("sortSelect").value;
+document.getElementById(
+"sortSelect"
+).value;
 
 places.sort((a,b) => {
-if(sortValue === "name"){
-return a.name.localeCompare(b.name);
+
+if(
+sortValue === "name"
+){
+
+return a.name.localeCompare(
+b.name
+);
+
 }
 
-if(sortValue === "source"){
+if(
+sortValue === "trust"
+){
+
+return (
+calculateTrustScore(b) -
+calculateTrustScore(a)
+);
+
+}
+
+if(
+sortValue === "source"
+){
+
 const order = {
 cms:0,
 community:1,
@@ -2117,42 +3184,71 @@ return (
 (order[a.source] ?? 9) -
 (order[b.source] ?? 9)
 );
+
 }
 
 return (
 (a.distance ?? Infinity) -
 (b.distance ?? Infinity)
 );
+
 });
 
 return places;
+
 }
 
 function renderPlaces(){
-visiblePlaces = getFilteredPlaces();
 
-const grid = document.getElementById("placesGrid");
-const emptyState = document.getElementById("emptyState");
+recalculateModeration();
+
+visiblePlaces =
+getFilteredPlaces();
+
+const grid =
+document.getElementById(
+"placesGrid"
+);
+
+const emptyState =
+document.getElementById(
+"emptyState"
+);
 
 grid.innerHTML = "";
 
-if(visiblePlaces.length === 0){
-emptyState.style.display = "block";
+if(
+visiblePlaces.length === 0
+){
+
+emptyState.style.display =
+"block";
+
 }else{
-emptyState.style.display = "none";
+
+emptyState.style.display =
+"none";
 
 visiblePlaces.forEach(place => {
+
 grid.insertAdjacentHTML(
 "beforeend",
 createPlaceCard(place)
 );
+
 });
+
 }
 
-document.getElementById("resultsTitle").textContent =
-currentSearchLabel || "PETS & DOGUE Places";
+document.getElementById(
+"resultsTitle"
+).textContent =
+currentSearchLabel ||
+"PETS & DOGUE Places";
 
-document.getElementById("resultsSubtitle").textContent =
+document.getElementById(
+"resultsSubtitle"
+).textContent =
 visiblePlaces.length === 1
 ? "1 place shown"
 : `${visiblePlaces.length} places shown`;
@@ -2160,16 +3256,34 @@ visiblePlaces.length === 1
 updateStatistics();
 renderMapMarkers();
 renderSavedPlaces();
+
 }
 
 function createPlaceCard(place){
-const id = String(place.id);
 
-const saved = savedPlaces.some(item =>
+const id =
+String(place.id);
+
+const moderation =
+getModeration(id);
+
+const trustScore =
+calculateTrustScore(place);
+
+const saved =
+savedPlaces.some(item =>
 String(item.id) === id
 );
 
-const liked = Boolean(likedPlaces[id]);
+const liked =
+Boolean(
+likedPlaces[id]
+);
+
+const alreadyReported =
+Boolean(
+reportedByUser[id]
+);
 
 const likes =
 placeLikes[id] !== undefined
@@ -2180,9 +3294,19 @@ const categoryInfo =
 categoryDefinitions[place.category] ||
 categoryDefinitions.Other;
 
-const imageHTML = place.image
-? `<img src="${escapeHTML(place.image)}" alt="${escapeHTML(place.name)}" onerror="this.parentElement.innerHTML='<div class=&quot;place-image-fallback&quot;>${categoryInfo.icon}</div>'">`
-: `<div class="place-image-fallback">${categoryInfo.icon}</div>`;
+const imageHTML =
+place.image
+? `
+<img
+src="${escapeHTML(place.image)}"
+alt="${escapeHTML(place.name)}"
+onerror="this.parentElement.innerHTML='<div class=&quot;place-image-fallback&quot;>${categoryInfo.icon}</div>'">
+`
+: `
+<div class="place-image-fallback">
+${categoryInfo.icon}
+</div>
+`;
 
 const sourceLabel =
 place.source === "cms"
@@ -2191,13 +3315,17 @@ place.source === "cms"
 ? "COMMUNITY"
 : "INTERNET";
 
+const underReview =
+moderation.moderationStatus ===
+"Under Review";
+
 const distanceText =
 Number.isFinite(place.distance)
 ? `<span class="distance">${formatDistance(place.distance)}</span>`
 : "";
 
 return `
-<article class="place-card">
+<article class="place-card ${underReview ? "under-review" : ""}">
 
 <div class="place-image">
 
@@ -2207,9 +3335,13 @@ ${imageHTML}
 ${sourceLabel}
 </span>
 
-${place.verified ? `
+${place.verified || moderation.verified ? `
 <span class="verified-badge">
 ✓ DOGUE VERIFIED
+</span>
+` : underReview ? `
+<span class="review-badge">
+⚠ UNDER REVIEW
 </span>
 ` : ""}
 
@@ -2218,32 +3350,92 @@ ${place.verified ? `
 <div class="place-content">
 
 <span class="category-badge">
-${escapeHTML(categoryInfo.icon)} ${escapeHTML(categoryInfo.label)}
+${escapeHTML(categoryInfo.icon)}
+${escapeHTML(categoryInfo.label)}
 </span>
 
-<h3>${escapeHTML(place.name)}</h3>
+<h3>
+${escapeHTML(place.name)}
+</h3>
 
 <div class="place-meta">
-📍 ${escapeHTML(place.address || place.location || "Location unavailable")}
+
+📍
+${escapeHTML(
+place.address ||
+place.location ||
+"Location unavailable"
+)}
+
 <br>
+
 ${distanceText}
+
 </div>
 
-<div class="pet-policy">
-${escapeHTML(place.petPolicy || "Pet policy not confirmed.")}
+<div class="trust-box">
+
+<div class="trust-row">
+
+<span>
+${getTrustLabel(
+trustScore,
+moderation
+)}
+</span>
+
+<span class="trust-score">
+${trustScore}/100
+</span>
+
+</div>
+
+<div class="trust-bar">
+
+<div
+class="trust-fill"
+style="width:${trustScore}%">
+</div>
+
+</div>
+
+${moderation.reportCount > 0 ? `
+<div class="trust-row" style="margin-top:10px;">
+<span>Community reports</span>
+<span>${moderation.reportCount}</span>
+</div>
+` : ""}
+
+</div>
+
+<div class="pet-policy ${underReview ? "disputed" : ""}">
+
+${underReview
+? "⚠️ Pet policy disputed. This place is currently under community review."
+: escapeHTML(
+place.petPolicy ||
+"Pet policy not confirmed."
+)}
+
 </div>
 
 <p>
-${escapeHTML(place.description || "Pet-friendly place information.")}
+${escapeHTML(
+place.description ||
+"Pet-friendly place information."
+)}
 </p>
 
 <div class="place-actions">
 
-<button class="btn gold" onclick="openPlaceModal('${escapeHTML(id)}')">
+<button
+class="btn gold"
+onclick="openPlaceModal('${escapeHTML(id)}')">
 Details
 </button>
 
-${Number.isFinite(place.latitude) && Number.isFinite(place.longitude) ? `
+${Number.isFinite(place.latitude) &&
+Number.isFinite(place.longitude) ? `
 <a
 class="btn black"
 href="https://www.openstreetmap.org/directions?to=${place.latitude}%2C${place.longitude}"
@@ -2265,44 +3457,118 @@ onclick="togglePlaceLike('${escapeHTML(id)}',this)">
 ❤️ <span>${likes}</span>
 </button>
 
+<button
+class="btn light report-btn ${alreadyReported ? "reported" : ""}"
+onclick="openReportModal('${escapeHTML(id)}')"
+${alreadyReported ? "disabled" : ""}>
+${alreadyReported ? "✓ Reported" : "🚩 Report"}
+</button>
+
 </div>
 
 </div>
 
 </article>
 `;
+
+}
+
+function getTrustLabel(
+score,
+moderation
+){
+
+if(
+moderation.moderationStatus ===
+"Under Review"
+){
+return "🟠 Under Review";
+}
+
+if(
+moderation.verified
+){
+return "🟢 DOGUE Verified";
+}
+
+if(score >= 88){
+return "🟢 Community Favourite";
+}
+
+if(score >= 65){
+return "🟡 New / Unverified Place";
+}
+
+return "🟠 Limited Trust Data";
+
 }
 
 function formatDistance(distance){
+
 if(distance < 1){
+
 return `${Math.round(distance*1000)} m away`;
+
 }
 
 return `${distance.toFixed(1)} km away`;
+
 }
 
 function updateStatistics(){
-const allPlaces = getAllPlaces();
 
-document.getElementById("resultCount").textContent =
+const allPublicPlaces =
+getAllPlaces()
+.filter(isPlacePublic);
+
+document.getElementById(
+"resultCount"
+).textContent =
 visiblePlaces.length;
 
-document.getElementById("internetCount").textContent =
-internetPlaces.length;
+document.getElementById(
+"internetCount"
+).textContent =
+internetPlaces
+.filter(isPlacePublic)
+.length;
 
-document.getElementById("verifiedCount").textContent =
-allPlaces.filter(place => place.verified).length;
+document.getElementById(
+"verifiedCount"
+).textContent =
+allPublicPlaces
+.filter(place =>
+place.verified ||
+getModeration(place.id).verified
+)
+.length;
 
-document.getElementById("savedCount").textContent =
+document.getElementById(
+"savedCount"
+).textContent =
 savedPlaces.length;
+
+document.getElementById(
+"reviewCount"
+).textContent =
+allPublicPlaces
+.filter(place =>
+getModeration(place.id)
+.moderationStatus ===
+"Under Review"
+)
+.length;
+
 }
 
 function renderMapMarkers(){
+
 markersLayer.clearLayers();
 
 const bounds = [];
 
 visiblePlaces.forEach(place => {
+
 if(
 !Number.isFinite(place.latitude) ||
 !Number.isFinite(place.longitude)
@@ -2314,7 +3580,8 @@ const categoryInfo =
 categoryDefinitions[place.category] ||
 categoryDefinitions.Other;
 
-const marker = L.marker([
+const marker =
+L.marker([
 place.latitude,
 place.longitude
 ]);
@@ -2322,9 +3589,13 @@ place.longitude
 marker.bindPopup(`
 <strong>${escapeHTML(place.name)}</strong>
 <br>
-${escapeHTML(categoryInfo.icon)} ${escapeHTML(categoryInfo.label)}
+${escapeHTML(categoryInfo.icon)}
+${escapeHTML(categoryInfo.label)}
 <br>
-${place.distance !== null && Number.isFinite(place.distance)
+Trust Score:
+${calculateTrustScore(place)}/100
+<br>
+${Number.isFinite(place.distance)
 ? escapeHTML(formatDistance(place.distance))
 : ""}
 <br><br>
@@ -2333,67 +3604,125 @@ View details
 </button>
 `);
 
-marker.addTo(markersLayer);
-bounds.push([place.latitude,place.longitude]);
+marker.addTo(
+markersLayer
+);
+
+bounds.push([
+place.latitude,
+place.longitude
+]);
+
 });
 
 if(currentCentre){
+
 bounds.push([
 currentCentre.lat,
 currentCentre.lon
 ]);
+
 }
 
 if(bounds.length > 1){
-map.fitBounds(bounds,{
+
+map.fitBounds(
+bounds,
+{
 padding:[35,35],
 maxZoom:15
-});
-}else if(bounds.length === 1){
-map.setView(bounds[0],14);
+}
+);
+
+}else if(
+bounds.length === 1
+){
+
+map.setView(
+bounds[0],
+14
+);
+
 }
 
-document.getElementById("mapInfoTitle").textContent =
+document.getElementById(
+"mapInfoTitle"
+).textContent =
 visiblePlaces.length === 1
 ? "1 place on the map"
 : `${visiblePlaces.length} places on the map`;
 
-document.getElementById("mapInfoText").textContent =
+document.getElementById(
+"mapInfoText"
+).textContent =
 currentSearchLabel
 ? `Results near ${currentSearchLabel}.`
 : "Search a location to load nearby internet results.";
+
 }
 
-function toggleSavedPlace(id,button){
-const place = getAllPlaces().find(item =>
-String(item.id) === String(id)
-);
+function toggleSavedPlace(
+id,
+button
+){
+
+const place =
+findPlace(id);
 
 if(!place){
 return;
 }
 
-const index = savedPlaces.findIndex(item =>
-String(item.id) === String(id)
+const index =
+savedPlaces.findIndex(item =>
+String(item.id) ===
+String(id)
 );
 
 if(index >= 0){
-savedPlaces.splice(index,1);
-button.classList.remove("saved");
-button.textContent = "♡ Save";
+
+savedPlaces.splice(
+index,
+1
+);
+
+button.classList.remove(
+"saved"
+);
+
+button.textContent =
+"♡ Save";
+
 }else{
+
 savedPlaces.push({
+
 id:String(place.id),
+
 name:place.name,
+
 category:place.category,
-location:place.location || place.address || "",
+
+location:
+place.location ||
+place.address ||
+"",
+
 latitude:place.latitude,
+
 longitude:place.longitude,
+
 source:place.source
+
 });
 
-button.classList.add("saved");
-button.textContent = "♥ Saved";
+button.classList.add(
+"saved"
+);
+
+button.textContent =
+"♥ Saved";
+
 }
 
 localStorage.setItem(
@@ -2403,39 +3732,62 @@ JSON.stringify(savedPlaces)
 
 renderSavedPlaces();
 updateStatistics();
+
 }
 
 function renderSavedPlaces(){
-const savedList = document.getElementById("savedList");
+
+const savedList =
+document.getElementById(
+"savedList"
+);
 
 savedList.innerHTML = "";
 
-if(savedPlaces.length === 0){
+if(
+savedPlaces.length === 0
+){
+
 savedList.innerHTML = `
 <div class="saved-item">
-<h3>Your saved places will appear here</h3>
-<p>Use the Save button on any place card.</p>
+
+<h3>
+Your saved places will appear here
+</h3>
+
+<p>
+Use the Save button on any place card.
+</p>
+
 </div>
 `;
 
 return;
+
 }
 
 savedPlaces.forEach(item => {
+
 savedList.insertAdjacentHTML(
 "beforeend",
 `
 <div class="saved-item">
 
-<h3>${escapeHTML(item.name)}</h3>
+<h3>
+${escapeHTML(item.name)}
+</h3>
 
 <p>
 ${escapeHTML(item.category)}
 ·
-${escapeHTML(item.location || "Saved location")}
+${escapeHTML(
+item.location ||
+"Saved location"
+)}
 </p>
 
-${Number.isFinite(item.latitude) && Number.isFinite(item.longitude) ? `
+${Number.isFinite(item.latitude) &&
+Number.isFinite(item.longitude) ? `
 <a
 class="btn gold"
 href="https://www.openstreetmap.org/directions?to=${item.latitude}%2C${item.longitude}"
@@ -2454,12 +3806,17 @@ Remove
 </div>
 `
 );
+
 });
+
 }
 
 function removeSavedPlace(id){
-savedPlaces = savedPlaces.filter(item =>
-String(item.id) !== String(id)
+
+savedPlaces =
+savedPlaces.filter(item =>
+String(item.id) !==
+String(id)
 );
 
 localStorage.setItem(
@@ -2468,12 +3825,16 @@ JSON.stringify(savedPlaces)
 );
 
 renderPlaces();
+
 }
 
-function togglePlaceLike(id,button){
-const place = getAllPlaces().find(item =>
-String(item.id) === String(id)
-);
+function togglePlaceLike(
+id,
+button
+){
+
+const place =
+findPlace(id);
 
 if(!place){
 return;
@@ -2485,16 +3846,37 @@ placeLikes[id] !== undefined
 : Number(place.likes || 0);
 
 if(likedPlaces[id]){
-placeLikes[id] = Math.max(0,current-1);
-likedPlaces[id] = false;
-button.classList.remove("liked");
+
+placeLikes[id] =
+Math.max(
+0,
+current-1
+);
+
+likedPlaces[id] =
+false;
+
+button.classList.remove(
+"liked"
+);
+
 }else{
-placeLikes[id] = current+1;
-likedPlaces[id] = true;
-button.classList.add("liked");
+
+placeLikes[id] =
+current+1;
+
+likedPlaces[id] =
+true;
+
+button.classList.add(
+"liked"
+);
+
 }
 
-button.querySelector("span").textContent =
+button.querySelector(
+"span"
+).textContent =
 placeLikes[id];
 
 localStorage.setItem(
@@ -2506,135 +3888,556 @@ localStorage.setItem(
 LIKED_KEY,
 JSON.stringify(likedPlaces)
 );
+
 }
 
 function openPlaceModal(id){
-const place = getAllPlaces().find(item =>
-String(item.id) === String(id)
-);
+
+const place =
+findPlace(id);
 
 if(!place){
 return;
 }
+
+selectedPlaceId =
+String(id);
 
 const categoryInfo =
 categoryDefinitions[place.category] ||
 categoryDefinitions.Other;
 
 const modalHero =
-document.getElementById("modalHero");
+document.getElementById(
+"modalHero"
+);
 
 if(place.image){
+
 modalHero.innerHTML = `
 <img
 src="${escapeHTML(place.image)}"
 alt="${escapeHTML(place.name)}"
 onerror="this.parentElement.innerHTML='<div class=&quot;modal-fallback&quot;>${categoryInfo.icon}</div>'">
 `;
+
 }else{
+
 modalHero.innerHTML =
 `<div class="modal-fallback">${categoryInfo.icon}</div>`;
+
 }
 
-document.getElementById("modalCategory").textContent =
+document.getElementById(
+"modalCategory"
+).textContent =
 `${categoryInfo.icon} ${categoryInfo.label}`;
 
-document.getElementById("modalName").textContent =
+document.getElementById(
+"modalName"
+).textContent =
 place.name;
 
-document.getElementById("modalMeta").textContent =
+document.getElementById(
+"modalMeta"
+).textContent =
 [
-place.address || place.location,
+place.address ||
+place.location,
+
 Number.isFinite(place.distance)
 ? formatDistance(place.distance)
 : "",
+
 place.phone
-].filter(Boolean).join(" · ");
 
-document.getElementById("modalPetPolicy").textContent =
-place.petPolicy || "Pet policy is not confirmed.";
+]
+.filter(Boolean)
+.join(" · ");
 
-document.getElementById("modalDescription").textContent =
+const trustScore =
+calculateTrustScore(place);
+
+document.getElementById(
+"modalTrustScore"
+).textContent =
+`${trustScore}/100`;
+
+document.getElementById(
+"modalTrustFill"
+).style.width =
+`${trustScore}%`;
+
+const moderation =
+getModeration(place.id);
+
+document.getElementById(
+"modalPetPolicy"
+).textContent =
+moderation.moderationStatus ===
+"Under Review"
+? "⚠️ This pet policy is currently disputed and under review."
+: place.petPolicy ||
+"Pet policy is not confirmed.";
+
+document.getElementById(
+"modalDescription"
+).textContent =
 place.description || "";
 
 const website =
-document.getElementById("modalWebsite");
+document.getElementById(
+"modalWebsite"
+);
 
 if(place.website){
-website.href = place.website;
-website.style.display = "inline-block";
+
+website.href =
+place.website;
+
+website.style.display =
+"inline-block";
+
 }else{
-website.style.display = "none";
+
+website.style.display =
+"none";
+
 }
 
 const directions =
-document.getElementById("modalDirections");
+document.getElementById(
+"modalDirections"
+);
 
 if(
 Number.isFinite(place.latitude) &&
 Number.isFinite(place.longitude)
 ){
+
 directions.href =
 `https://www.openstreetmap.org/directions?to=${place.latitude}%2C${place.longitude}`;
 
-directions.style.display = "inline-block";
+directions.style.display =
+"inline-block";
+
 }else{
-directions.style.display = "none";
+
+directions.style.display =
+"none";
+
 }
 
-document.getElementById("placeModal").classList.add("open");
-document.body.classList.add("modal-open");
+const reportButton =
+document.getElementById(
+"modalReportButton"
+);
+
+if(
+reportedByUser[String(id)]
+){
+
+reportButton.disabled =
+true;
+
+reportButton.textContent =
+"✓ Reported";
+
+}else{
+
+reportButton.disabled =
+false;
+
+reportButton.textContent =
+"🚩 Report Problem";
+
+}
+
+openModal(
+"placeModal"
+);
+
 }
 
 function closePlaceModal(){
-document.getElementById("placeModal").classList.remove("open");
-document.body.classList.remove("modal-open");
+
+closeModal(
+"placeModal"
+);
+
 }
 
-function closeModalFromOverlay(event){
-if(event.target.id === "placeModal"){
-closePlaceModal();
+function openReportFromPlaceModal(){
+
+if(!selectedPlaceId){
+return;
 }
+
+closePlaceModal();
+
+openReportModal(
+selectedPlaceId
+);
+
+}
+
+function openReportModal(id){
+
+const place =
+findPlace(id);
+
+if(!place){
+return;
+}
+
+if(
+reportedByUser[
+String(id)
+]
+){
+
+alert(
+"You have already reported this place from this browser."
+);
+
+return;
+
+}
+
+selectedReportPlaceId =
+String(id);
+
+document.getElementById(
+"reportPlaceName"
+).textContent =
+`Reporting: ${place.name}`;
+
+document
+.querySelectorAll(
+'input[name="reportReason"]'
+)
+.forEach(input => {
+
+input.checked =
+false;
+
+});
+
+document.getElementById(
+"reportDetails"
+).value = "";
+
+document.getElementById(
+"reportMessage"
+).className =
+"form-message";
+
+document.getElementById(
+"reportMessage"
+).textContent =
+"";
+
+openModal(
+"reportModal"
+);
+
+}
+
+function closeReportModal(){
+
+closeModal(
+"reportModal"
+);
+
+selectedReportPlaceId =
+null;
+
+}
+
+function submitPlaceReport(){
+
+if(!selectedReportPlaceId){
+return;
+}
+
+const place =
+findPlace(
+selectedReportPlaceId
+);
+
+if(!place){
+return;
+}
+
+const selectedReason =
+document.querySelector(
+'input[name="reportReason"]:checked'
+);
+
+if(!selectedReason){
+
+showReportMessage(
+"Choose a reason for the report.",
+"error"
+);
+
+return;
+
+}
+
+if(
+reportedByUser[
+selectedReportPlaceId
+]
+){
+
+showReportMessage(
+"You have already reported this place.",
+"error"
+);
+
+return;
+
+}
+
+const report = {
+
+id:
+`report-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+
+placeId:
+String(place.id),
+
+placeName:
+place.name,
+
+reason:
+selectedReason.value,
+
+details:
+document.getElementById(
+"reportDetails"
+).value.trim(),
+
+source:
+place.source,
+
+location:
+place.location ||
+place.address ||
+"",
+
+latitude:
+place.latitude,
+
+longitude:
+place.longitude,
+
+createdAt:
+new Date().toISOString()
+
+};
+
+placeReports.push(
+report
+);
+
+reportedByUser[
+String(place.id)
+] = {
+reported:true,
+reportId:report.id,
+createdAt:report.createdAt
+};
+
+localStorage.setItem(
+REPORTS_KEY,
+JSON.stringify(placeReports)
+);
+
+localStorage.setItem(
+REPORTED_KEY,
+JSON.stringify(reportedByUser)
+);
+
+recalculateModeration();
+
+const moderation =
+getModeration(place.id);
+
+if(
+moderation.moderationStatus ===
+"Auto Hidden"
+){
+
+showReportMessage(
+"Thank you. This place has reached the community report threshold and is now temporarily hidden pending administrator review.",
+"success"
+);
+
+}else if(
+moderation.moderationStatus ===
+"Under Review"
+){
+
+showReportMessage(
+"Thank you. This place is now marked Under Review while its pet policy is checked.",
+"success"
+);
+
+}else{
+
+showReportMessage(
+"Thank you. Your report has been saved for DOGUE Trust moderation.",
+"success"
+);
+
+}
+
+setTimeout(() => {
+
+closeReportModal();
+renderPlaces();
+
+},1800);
+
+}
+
+function showReportMessage(
+message,
+type
+){
+
+const element =
+document.getElementById(
+"reportMessage"
+);
+
+element.textContent =
+message;
+
+element.className =
+`form-message ${type}`;
+
+}
+
+function openModal(id){
+
+document.getElementById(
+id
+).classList.add(
+"open"
+);
+
+document.body.classList.add(
+"modal-open"
+);
+
+}
+
+function closeModal(id){
+
+document.getElementById(
+id
+).classList.remove(
+"open"
+);
+
+const anotherOpen =
+document.querySelector(
+".modal-overlay.open"
+);
+
+if(!anotherOpen){
+
+document.body.classList.remove(
+"modal-open"
+);
+
+}
+
+}
+
+function closeModalFromOverlay(
+event,
+id
+){
+
+if(
+event.target.id === id
+){
+
+closeModal(id);
+
+}
+
 }
 
 async function submitCommunityPlace(){
+
 const name =
-document.getElementById("submitPlaceName").value.trim();
+document.getElementById(
+"submitPlaceName"
+).value.trim();
 
 const category =
-document.getElementById("submitPlaceCategory").value;
+document.getElementById(
+"submitPlaceCategory"
+).value;
 
 const address =
-document.getElementById("submitPlaceAddress").value.trim();
+document.getElementById(
+"submitPlaceAddress"
+).value.trim();
 
 const email =
-document.getElementById("submitEmail").value.trim();
+document.getElementById(
+"submitEmail"
+).value.trim();
 
 const agreement =
-document.getElementById("submitAgreement").checked;
+document.getElementById(
+"submitAgreement"
+).checked;
 
-if(!name || !category || !address || !email){
+if(
+!name ||
+!category ||
+!address ||
+!email
+){
+
 showSubmissionMessage(
 "Complete the place name, category, address and email.",
 "error"
 );
+
 return;
+
 }
 
-if(!email.includes("@")){
+if(
+!email.includes("@")
+){
+
 showSubmissionMessage(
 "Enter a valid email address.",
 "error"
 );
+
 return;
+
 }
 
 if(!agreement){
+
 showSubmissionMessage(
 "Confirm that the submitted information is accurate.",
 "error"
 );
+
 return;
+
 }
 
 let coordinates = {
@@ -2643,43 +4446,90 @@ longitude:null
 };
 
 try{
-coordinates = await geocodeSubmittedAddress(address);
+
+coordinates =
+await geocodeSubmittedAddress(
+address
+);
+
 }catch(error){
+
 console.warn(
 "Submitted address could not be geocoded.",
 error
 );
+
 }
 
 const submission = {
-id:`submission-${Date.now()}`,
+
+id:
+`submission-${Date.now()}`,
+
 name,
+
 category,
+
 address,
+
 location:address,
-website:safeURL(
-document.getElementById("submitPlaceWebsite").value
+
+website:
+safeURL(
+document.getElementById(
+"submitPlaceWebsite"
+).value
 ),
+
 phone:
-document.getElementById("submitPlacePhone").value.trim(),
+document.getElementById(
+"submitPlacePhone"
+).value.trim(),
+
 petPolicy:
-document.getElementById("submitPlacePetPolicy").value.trim() ||
+document.getElementById(
+"submitPlacePetPolicy"
+).value.trim() ||
 "Pet policy supplied by a community member.",
+
 description:
-document.getElementById("submitDescription").value.trim(),
+document.getElementById(
+"submitDescription"
+).value.trim(),
+
 submittedBy:
-document.getElementById("submitName").value.trim() ||
+document.getElementById(
+"submitName"
+).value.trim() ||
 "Community member",
+
 email,
-latitude:coordinates.latitude,
-longitude:coordinates.longitude,
+
+latitude:
+coordinates.latitude,
+
+longitude:
+coordinates.longitude,
+
 source:"community",
+
 status:"Pending Review",
-submittedAt:new Date().toISOString()
+
+verified:false,
+
+submittedAt:
+new Date().toISOString()
+
 };
 
-const submissions = readStorageArray(SUBMISSIONS_KEY);
-submissions.unshift(submission);
+const submissions =
+readStorageArray(
+SUBMISSIONS_KEY
+);
+
+submissions.unshift(
+submission
+);
 
 localStorage.setItem(
 SUBMISSIONS_KEY,
@@ -2692,16 +4542,22 @@ showSubmissionMessage(
 "Thank you. The place has been saved as Pending Review and is ready for administrator moderation.",
 "success"
 );
+
 }
 
-async function geocodeSubmittedAddress(address){
-const params = new URLSearchParams({
+async function geocodeSubmittedAddress(
+address
+){
+
+const params =
+new URLSearchParams({
 q:address,
 format:"jsonv2",
 limit:"1"
 });
 
-const response = await fetch(
+const response =
+await fetch(
 `${NOMINATIM_URL}?${params.toString()}`,
 {
 headers:{
@@ -2712,25 +4568,37 @@ headers:{
 );
 
 if(!response.ok){
-throw new Error("Address lookup failed.");
+
+throw new Error(
+"Address lookup failed."
+);
+
 }
 
-const results = await response.json();
+const results =
+await response.json();
 
-if(!Array.isArray(results) || results.length === 0){
+if(
+!Array.isArray(results) ||
+results.length === 0
+){
+
 return {
 latitude:null,
 longitude:null
 };
+
 }
 
 return {
 latitude:Number(results[0].lat),
 longitude:Number(results[0].lon)
 };
+
 }
 
 function clearSubmissionForm(){
+
 [
 "submitPlaceName",
 "submitPlaceAddress",
@@ -2741,45 +4609,126 @@ function clearSubmissionForm(){
 "submitEmail",
 "submitDescription"
 ].forEach(id => {
-document.getElementById(id).value = "";
+
+document.getElementById(
+id
+).value = "";
+
 });
 
-document.getElementById("submitPlaceCategory").value = "";
-document.getElementById("submitAgreement").checked = false;
+document.getElementById(
+"submitPlaceCategory"
+).value = "";
+
+document.getElementById(
+"submitAgreement"
+).checked =
+false;
+
 }
 
-function showSubmissionMessage(message,type){
+function showSubmissionMessage(
+message,
+type
+){
+
 const element =
-document.getElementById("submissionMessage");
+document.getElementById(
+"submissionMessage"
+);
 
-element.textContent = message;
-element.className = `form-message ${type}`;
+element.textContent =
+message;
+
+element.className =
+`form-message ${type}`;
+
 }
 
-document.addEventListener("keydown",event => {
-if(event.key === "Escape"){
+document.addEventListener(
+"keydown",
+event => {
+
+if(
+event.key === "Escape"
+){
+
 closePlaceModal();
-}
-});
+closeReportModal();
 
-window.addEventListener("storage",event => {
+}
+
+}
+);
+
+window.addEventListener(
+"storage",
+event => {
+
 if(
 event.key === CMS_KEY ||
 event.key === SUBMISSIONS_KEY
 ){
+
 loadLocalPlaces();
+
 }
 
-if(event.key === SAVED_KEY){
-savedPlaces = readStorageArray(SAVED_KEY);
+if(
+event.key === SAVED_KEY
+){
+
+savedPlaces =
+readStorageArray(
+SAVED_KEY
+);
+
 renderPlaces();
+
 }
 
-if(event.key === LIKES_KEY){
-placeLikes = readStorageObject(LIKES_KEY);
+if(
+event.key === LIKES_KEY
+){
+
+placeLikes =
+readStorageObject(
+LIKES_KEY
+);
+
 renderPlaces();
+
 }
-});
+
+if(
+event.key === REPORTS_KEY
+){
+
+placeReports =
+readStorageArray(
+REPORTS_KEY
+);
+
+recalculateModeration();
+renderPlaces();
+
+}
+
+if(
+event.key === MODERATION_KEY
+){
+
+placeModeration =
+readStorageObject(
+MODERATION_KEY
+);
+
+renderPlaces();
+
+}
+
+}
+);
 
 initMap();
 loadLocalPlaces();
