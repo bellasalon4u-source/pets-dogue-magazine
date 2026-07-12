@@ -1,7 +1,14 @@
 (function () {
 "use strict";
 
+/* =========================================================
+   PETS & DOGUE — GLOBAL LANGUAGE SYSTEM
+   The original language of the website is English.
+========================================================= */
+
 const PD_LANGUAGE_KEY = "pets_dogue_language";
+const PD_GOOGLE_COOKIE = "googtrans";
+const PD_SOURCE_LANGUAGE = "en";
 
 const PD_LANGUAGES = [
 {
@@ -10,7 +17,8 @@ googleCode:"en",
 label:"English",
 short:"EN",
 flag:"🇬🇧",
-direction:"ltr"
+direction:"ltr",
+speech:"en-GB"
 },
 {
 code:"ru",
@@ -18,7 +26,8 @@ googleCode:"ru",
 label:"Русский",
 short:"RU",
 flag:"🇷🇺",
-direction:"ltr"
+direction:"ltr",
+speech:"ru-RU"
 },
 {
 code:"uk",
@@ -26,7 +35,8 @@ googleCode:"uk",
 label:"Українська",
 short:"UA",
 flag:"🇺🇦",
-direction:"ltr"
+direction:"ltr",
+speech:"uk-UA"
 },
 {
 code:"cs",
@@ -34,7 +44,8 @@ googleCode:"cs",
 label:"Čeština",
 short:"CZ",
 flag:"🇨🇿",
-direction:"ltr"
+direction:"ltr",
+speech:"cs-CZ"
 },
 {
 code:"pl",
@@ -42,7 +53,8 @@ googleCode:"pl",
 label:"Polski",
 short:"PL",
 flag:"🇵🇱",
-direction:"ltr"
+direction:"ltr",
+speech:"pl-PL"
 },
 {
 code:"es",
@@ -50,7 +62,8 @@ googleCode:"es",
 label:"Español",
 short:"ES",
 flag:"🇪🇸",
-direction:"ltr"
+direction:"ltr",
+speech:"es-ES"
 },
 {
 code:"it",
@@ -58,7 +71,8 @@ googleCode:"it",
 label:"Italiano",
 short:"IT",
 flag:"🇮🇹",
-direction:"ltr"
+direction:"ltr",
+speech:"it-IT"
 },
 {
 code:"de",
@@ -66,7 +80,8 @@ googleCode:"de",
 label:"Deutsch",
 short:"DE",
 flag:"🇩🇪",
-direction:"ltr"
+direction:"ltr",
+speech:"de-DE"
 },
 {
 code:"ar",
@@ -74,7 +89,8 @@ googleCode:"ar",
 label:"العربية",
 short:"AR",
 flag:"🇸🇦",
-direction:"rtl"
+direction:"rtl",
+speech:"ar-SA"
 },
 {
 code:"hi",
@@ -82,107 +98,243 @@ googleCode:"hi",
 label:"हिन्दी",
 short:"HI",
 flag:"🇮🇳",
-direction:"ltr"
+direction:"ltr",
+speech:"hi-IN"
 }
 ];
 
 let selectedLanguage =
-localStorage.getItem(PD_LANGUAGE_KEY) ||
+readStoredLanguage() ||
 detectBrowserLanguage();
+
+let googleApplyAttempts = 0;
+let googleChromeObserver = null;
+let contentObserver = null;
+
+/* =========================================================
+   LANGUAGE HELPERS
+========================================================= */
+
+function readStoredLanguage() {
+try {
+const storedLanguage =
+localStorage.getItem(PD_LANGUAGE_KEY);
+
+const exists =
+PD_LANGUAGES.some(language =>
+language.code === storedLanguage
+);
+
+return exists
+? storedLanguage
+: "";
+} catch(error) {
+console.warn(
+"PETS & DOGUE: unable to read saved language.",
+error
+);
+
+return "";
+}
+}
+
+function storeLanguage(languageCode) {
+try {
+localStorage.setItem(
+PD_LANGUAGE_KEY,
+languageCode
+);
+} catch(error) {
+console.warn(
+"PETS & DOGUE: unable to save language.",
+error
+);
+}
+}
 
 function detectBrowserLanguage() {
 const browserLanguage =
 String(
 navigator.language ||
 navigator.userLanguage ||
-"en"
+PD_SOURCE_LANGUAGE
 )
 .toLowerCase();
 
-const exactMatch =
+const match =
 PD_LANGUAGES.find(language =>
 browserLanguage === language.code ||
-browserLanguage.startsWith(language.code + "-")
+browserLanguage.startsWith(
+language.code + "-"
+)
 );
 
-return exactMatch
-? exactMatch.code
-: "en";
+return match
+? match.code
+: PD_SOURCE_LANGUAGE;
 }
 
-function getLanguage(code) {
+function getLanguage(languageCode) {
 return (
 PD_LANGUAGES.find(language =>
-language.code === code
+language.code === languageCode
 ) ||
 PD_LANGUAGES[0]
 );
 }
 
-function setCookie(name,value,days) {
+/* =========================================================
+   COOKIE MANAGEMENT
+========================================================= */
+
+function getCurrentDomain() {
+const hostname =
+window.location.hostname;
+
+if(
+!hostname ||
+hostname === "localhost" ||
+hostname === "127.0.0.1" ||
+hostname.includes(":")
+) {
+return "";
+}
+
+return hostname;
+}
+
+function writeCookie(
+name,
+value,
+days,
+domain
+) {
 const expires =
 new Date(
 Date.now() +
 days * 24 * 60 * 60 * 1000
 ).toUTCString();
 
-document.cookie =
+let cookie =
 `${name}=${value};expires=${expires};path=/;SameSite=Lax`;
+
+if(domain) {
+cookie += `;domain=${domain}`;
 }
 
-function deleteCookie(name) {
-document.cookie =
-`${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+document.cookie = cookie;
 }
 
-function prepareBrandProtection() {
-const protectedTexts = [
-"PETS & DOGUE",
-"DOGUE",
-"Miso",
-"PETS & DOGUE Club",
-"DOGUE Verified",
-"DOGUE Trust"
-];
+function removeCookie(
+name,
+domain
+) {
+let cookie =
+`${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`;
 
-const walker =
-document.createTreeWalker(
-document.body,
-NodeFilter.SHOW_ELEMENT
+if(domain) {
+cookie += `;domain=${domain}`;
+}
+
+document.cookie = cookie;
+}
+
+function clearGoogleLanguageCookie() {
+const domain =
+getCurrentDomain();
+
+removeCookie(
+PD_GOOGLE_COOKIE,
+""
 );
 
-const elements = [];
+if(domain) {
+removeCookie(
+PD_GOOGLE_COOKIE,
+domain
+);
 
-while(walker.nextNode()) {
-elements.push(walker.currentNode);
+removeCookie(
+PD_GOOGLE_COOKIE,
+"." + domain
+);
 }
 
-elements.forEach(element => {
-if(
-element.children.length === 0 &&
-protectedTexts.some(text =>
-element.textContent &&
-element.textContent.includes(text)
-)
+try {
+localStorage.removeItem(
+PD_GOOGLE_COOKIE
+);
+} catch(error) {
+console.warn(error);
+}
+}
+
+function setGoogleLanguageCookie(
+languageCode
 ) {
-element.setAttribute("translate","no");
-element.classList.add("notranslate");
-}
-});
-
-document
-.querySelectorAll(
-".brand,.brand-small,.brand-big,.logo-small,.logo-big,.footer-brand"
-)
-.forEach(element => {
-element.setAttribute("translate","no");
-element.classList.add("notranslate");
-});
-}
-
-function applyDirection(languageCode) {
 const language =
 getLanguage(languageCode);
+
+if(language.code === PD_SOURCE_LANGUAGE) {
+clearGoogleLanguageCookie();
+return;
+}
+
+const translationValue =
+`/${PD_SOURCE_LANGUAGE}/${language.googleCode}`;
+
+const domain =
+getCurrentDomain();
+
+writeCookie(
+PD_GOOGLE_COOKIE,
+translationValue,
+365,
+""
+);
+
+if(domain) {
+writeCookie(
+PD_GOOGLE_COOKIE,
+translationValue,
+365,
+domain
+);
+
+writeCookie(
+PD_GOOGLE_COOKIE,
+translationValue,
+365,
+"." + domain
+);
+}
+
+try {
+localStorage.setItem(
+PD_GOOGLE_COOKIE,
+translationValue
+);
+} catch(error) {
+console.warn(error);
+}
+}
+
+/*
+The cookie is prepared immediately, before the page translation
+interface is initialised.
+*/
+
+setGoogleLanguageCookie(
+selectedLanguage
+);
+
+/* =========================================================
+   DOCUMENT LANGUAGE AND RTL
+========================================================= */
+
+function applyDocumentLanguage() {
+const language =
+getLanguage(selectedLanguage);
 
 document.documentElement.lang =
 language.code;
@@ -190,11 +342,136 @@ language.code;
 document.documentElement.dir =
 language.direction;
 
+if(document.body) {
 document.body.classList.toggle(
 "pd-rtl",
 language.direction === "rtl"
 );
 }
+}
+
+/* =========================================================
+   BRAND AND ORIGINAL NAME PROTECTION
+========================================================= */
+
+function protectElement(element) {
+if(!element) {
+return;
+}
+
+element.classList.add(
+"notranslate"
+);
+
+element.setAttribute(
+"translate",
+"no"
+);
+}
+
+function protectBrandElements(root = document) {
+if(!root.querySelectorAll) {
+return;
+}
+
+/*
+These selectors should contain only actual logos or official
+names that must remain in their original form.
+*/
+
+root
+.querySelectorAll(
+[
+".brand",
+".brand-small",
+".brand-big",
+".logo-small",
+".logo-big",
+".footer-brand",
+"[data-pd-brand]",
+"[data-no-translate]",
+'[translate="no"]'
+].join(",")
+)
+.forEach(protectElement);
+
+/*
+Protect only elements whose complete text is exactly a brand.
+Do not protect a full headline merely because it includes DOGUE.
+*/
+
+const exactProtectedTexts = [
+"PETS & DOGUE",
+"DOGUE",
+"pets &"
+];
+
+root
+.querySelectorAll("*")
+.forEach(element => {
+if(element.children.length !== 0) {
+return;
+}
+
+const text =
+String(
+element.textContent ||
+""
+)
+.trim();
+
+if(
+exactProtectedTexts.includes(text)
+) {
+protectElement(element);
+}
+});
+}
+
+/* =========================================================
+   PLACEHOLDERS, TITLES AND ACCESSIBILITY TEXT
+========================================================= */
+
+function markTranslatableAttributes(root = document) {
+if(!root.querySelectorAll) {
+return;
+}
+
+/*
+Google normally translates visible text.
+These attributes are kept available for the translation engine
+and future manual translation systems.
+*/
+
+root
+.querySelectorAll(
+[
+"input[placeholder]",
+"textarea[placeholder]",
+"[title]",
+"[aria-label]",
+"img[alt]"
+].join(",")
+)
+.forEach(element => {
+if(
+element.matches(
+'[translate="no"], .notranslate, [data-no-translate]'
+)
+) {
+return;
+}
+
+element.setAttribute(
+"data-pd-translatable",
+"true"
+);
+});
+}
+
+/* =========================================================
+   GLOBAL STYLES
+========================================================= */
 
 function createStyles() {
 if(
@@ -216,45 +493,52 @@ style.textContent = `
 position:fixed;
 right:18px;
 bottom:18px;
-z-index:9998;
+z-index:999998;
 display:flex;
 align-items:center;
-gap:8px;
-min-width:82px;
-height:50px;
-padding:0 16px;
-border:2px solid #111;
+justify-content:center;
+gap:9px;
+min-width:108px;
+height:56px;
+padding:0 19px;
+border:3px solid #111;
 border-radius:999px;
 background:#fff;
 color:#111;
 font-family:Arial,Helvetica,sans-serif;
-font-size:13px;
-font-weight:800;
+font-size:16px;
+font-weight:900;
 letter-spacing:.5px;
 cursor:pointer;
-box-shadow:0 12px 35px rgba(0,0,0,.18);
-transition:transform .2s ease,box-shadow .2s ease;
+box-shadow:0 14px 38px rgba(0,0,0,.28);
+transition:
+transform .2s ease,
+box-shadow .2s ease,
+background .2s ease;
 }
 
 #pd-language-button:hover{
 transform:translateY(-3px);
-box-shadow:0 16px 40px rgba(0,0,0,.22);
+box-shadow:0 18px 44px rgba(0,0,0,.34);
+background:#fff8df;
 }
 
 #pd-language-button .pd-language-globe{
-font-size:19px;
+font-size:24px;
+line-height:1;
 }
 
 #pd-language-overlay{
 position:fixed;
 inset:0;
-z-index:9999;
+z-index:999999;
 display:none;
 align-items:center;
 justify-content:center;
-padding:20px;
-background:rgba(0,0,0,.76);
-backdrop-filter:blur(7px);
+padding:18px;
+background:rgba(0,0,0,.78);
+backdrop-filter:blur(8px);
+-webkit-backdrop-filter:blur(8px);
 }
 
 #pd-language-overlay.pd-open{
@@ -262,13 +546,13 @@ display:flex;
 }
 
 #pd-language-modal{
-width:min(660px,100%);
+width:min(680px,100%);
 max-height:88vh;
 overflow-y:auto;
 background:#f8f7f3;
 border:3px solid #111;
 border-radius:34px;
-box-shadow:0 30px 90px rgba(0,0,0,.38);
+box-shadow:0 30px 90px rgba(0,0,0,.44);
 }
 
 .pd-language-header{
@@ -286,24 +570,24 @@ z-index:2;
 
 .pd-language-header h2{
 font-family:Georgia,serif;
-font-size:31px;
+font-size:32px;
 font-weight:normal;
 margin:0;
 }
 
 .pd-language-close{
-width:43px;
-height:43px;
+width:44px;
+height:44px;
 border:none;
 border-radius:50%;
 background:#fff;
 color:#111;
-font-size:24px;
+font-size:25px;
 cursor:pointer;
 }
 
 .pd-language-intro{
-padding:23px 24px 8px;
+padding:23px 24px 7px;
 color:#555;
 font-size:15px;
 line-height:1.65;
@@ -320,7 +604,7 @@ padding:18px 24px 26px;
 display:flex;
 align-items:center;
 gap:13px;
-min-height:70px;
+min-height:72px;
 padding:14px 16px;
 border:2px solid #111;
 border-radius:20px;
@@ -328,7 +612,9 @@ background:#fff;
 color:#111;
 text-align:left;
 cursor:pointer;
-transition:transform .2s ease,background .2s ease;
+transition:
+transform .2s ease,
+background .2s ease;
 }
 
 .pd-language-option:hover{
@@ -342,13 +628,13 @@ border-color:#111;
 }
 
 .pd-language-flag{
-font-size:27px;
+font-size:28px;
 }
 
 .pd-language-name{
 display:block;
 font-size:16px;
-font-weight:800;
+font-weight:900;
 }
 
 .pd-language-code{
@@ -359,10 +645,12 @@ color:#666;
 letter-spacing:1px;
 }
 
+/* Hide the Google translation controls and top banner. */
+
 #google_translate_element{
 position:fixed!important;
-left:-10000px!important;
-top:-10000px!important;
+left:-99999px!important;
+top:-99999px!important;
 width:1px!important;
 height:1px!important;
 overflow:hidden!important;
@@ -371,12 +659,29 @@ pointer-events:none!important;
 }
 
 .goog-te-banner-frame,
-.goog-te-banner-frame.skiptranslate{
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+.goog-te-balloon-frame,
+.goog-te-menu-frame,
+.goog-tooltip,
+.goog-tooltip:hover{
 display:none!important;
+visibility:hidden!important;
+height:0!important;
+max-height:0!important;
 }
 
+body > .skiptranslate{
+display:none!important;
+visibility:hidden!important;
+height:0!important;
+max-height:0!important;
+}
+
+html,
 body{
 top:0!important;
+margin-top:0!important;
 }
 
 body.pd-rtl #pd-language-button{
@@ -386,9 +691,17 @@ left:18px;
 
 body.pd-rtl .pd-language-option{
 text-align:right;
+direction:rtl;
 }
 
 body.pd-rtl .pd-language-header{
+direction:rtl;
+}
+
+body.pd-rtl input,
+body.pd-rtl textarea,
+body.pd-rtl select{
+text-align:right;
 direction:rtl;
 }
 
@@ -396,8 +709,10 @@ direction:rtl;
 #pd-language-button{
 right:12px;
 bottom:12px;
-height:47px;
-padding:0 14px;
+height:56px;
+min-width:112px;
+padding:0 17px;
+font-size:16px;
 }
 
 body.pd-rtl #pd-language-button{
@@ -424,8 +739,152 @@ padding:19px 18px 5px;
 }
 `;
 
-document.head.appendChild(style);
+document.head.appendChild(
+style
+);
 }
+
+/* =========================================================
+   REMOVE GOOGLE BANNER AND PAGE OFFSET
+========================================================= */
+
+function removeGoogleInterface() {
+document
+.querySelectorAll(
+[
+".goog-te-banner-frame",
+"iframe.goog-te-banner-frame",
+".goog-te-balloon-frame",
+".goog-te-menu-frame",
+".goog-tooltip",
+"body > .skiptranslate"
+].join(",")
+)
+.forEach(element => {
+if(
+element.id ===
+"google_translate_element"
+) {
+return;
+}
+
+element.style.setProperty(
+"display",
+"none",
+"important"
+);
+
+element.style.setProperty(
+"visibility",
+"hidden",
+"important"
+);
+
+element.style.setProperty(
+"height",
+"0",
+"important"
+);
+});
+
+document.documentElement.style.setProperty(
+"top",
+"0",
+"important"
+);
+
+document.documentElement.style.setProperty(
+"margin-top",
+"0",
+"important"
+);
+
+if(document.body) {
+document.body.style.setProperty(
+"top",
+"0",
+"important"
+);
+
+document.body.style.setProperty(
+"margin-top",
+"0",
+"important"
+);
+}
+}
+
+function observeGoogleInterface() {
+if(googleChromeObserver) {
+return;
+}
+
+googleChromeObserver =
+new MutationObserver(() => {
+removeGoogleInterface();
+});
+
+googleChromeObserver.observe(
+document.documentElement,
+{
+childList:true,
+subtree:true,
+attributes:true,
+attributeFilter:[
+"style",
+"class"
+]
+}
+);
+}
+
+/* =========================================================
+   DYNAMIC CMS CONTENT OBSERVER
+========================================================= */
+
+function processDynamicContent(node) {
+if(
+!node ||
+node.nodeType !== Node.ELEMENT_NODE
+) {
+return;
+}
+
+protectBrandElements(node);
+markTranslatableAttributes(node);
+}
+
+function observeDynamicContent() {
+if(
+contentObserver ||
+!document.body
+) {
+return;
+}
+
+contentObserver =
+new MutationObserver(mutations => {
+mutations.forEach(mutation => {
+mutation.addedNodes.forEach(node => {
+processDynamicContent(node);
+});
+});
+
+removeGoogleInterface();
+});
+
+contentObserver.observe(
+document.body,
+{
+childList:true,
+subtree:true
+}
+);
+}
+
+/* =========================================================
+   GOOGLE TRANSLATE CONTAINER
+========================================================= */
 
 function createGoogleContainer() {
 if(
@@ -442,8 +901,22 @@ document.createElement("div");
 container.id =
 "google_translate_element";
 
-document.body.appendChild(container);
+container.className =
+"notranslate";
+
+container.setAttribute(
+"translate",
+"no"
+);
+
+document.body.appendChild(
+container
+);
 }
+
+/* =========================================================
+   LANGUAGE SELECTOR
+========================================================= */
 
 function createLanguageInterface() {
 if(
@@ -466,6 +939,14 @@ button.id =
 button.type =
 "button";
 
+button.className =
+"notranslate";
+
+button.setAttribute(
+"translate",
+"no"
+);
+
 button.setAttribute(
 "aria-label",
 "Choose language"
@@ -481,6 +962,14 @@ document.createElement("div");
 
 overlay.id =
 "pd-language-overlay";
+
+overlay.className =
+"notranslate";
+
+overlay.setAttribute(
+"translate",
+"no"
+);
 
 overlay.innerHTML = `
 <div
@@ -505,7 +994,7 @@ aria-label="Close language menu">
 </div>
 
 <p class="pd-language-intro">
-Select a language for PETS & DOGUE. Your choice will be remembered on this device.
+Choose a language for PETS & DOGUE. Your selection will remain active across every page until you choose another language.
 </p>
 
 <div id="pd-language-grid"></div>
@@ -513,8 +1002,13 @@ Select a language for PETS & DOGUE. Your choice will be remembered on this devic
 </div>
 `;
 
-document.body.appendChild(button);
-document.body.appendChild(overlay);
+document.body.appendChild(
+button
+);
+
+document.body.appendChild(
+overlay
+);
 
 const grid =
 overlay.querySelector(
@@ -531,12 +1025,17 @@ option.type =
 option.className =
 "pd-language-option";
 
-if(language.code === selectedLanguage) {
-option.classList.add("pd-active");
-}
-
 option.dataset.language =
 language.code;
+
+if(
+language.code ===
+selectedLanguage
+) {
+option.classList.add(
+"pd-active"
+);
+}
 
 option.innerHTML = `
 <span class="pd-language-flag">${language.flag}</span>
@@ -550,11 +1049,15 @@ option.innerHTML = `
 option.addEventListener(
 "click",
 () => {
-changeLanguage(language.code);
+changeLanguage(
+language.code
+);
 }
 );
 
-grid.appendChild(option);
+grid.appendChild(
+option
+);
 });
 
 button.addEventListener(
@@ -574,50 +1077,18 @@ closeLanguageMenu
 overlay.addEventListener(
 "click",
 event => {
-if(
-event.target === overlay
-) {
+if(event.target === overlay) {
 closeLanguageMenu();
 }
-}
-);
+});
 
 document.addEventListener(
 "keydown",
 event => {
-if(
-event.key === "Escape"
-) {
+if(event.key === "Escape") {
 closeLanguageMenu();
 }
-}
-);
-}
-
-function openLanguageMenu() {
-document
-.getElementById(
-"pd-language-overlay"
-)
-?.classList.add(
-"pd-open"
-);
-
-document.body.style.overflow =
-"hidden";
-}
-
-function closeLanguageMenu() {
-document
-.getElementById(
-"pd-language-overlay"
-)
-?.classList.remove(
-"pd-open"
-);
-
-document.body.style.overflow =
-"";
+});
 }
 
 function updateLanguageInterface() {
@@ -647,6 +1118,46 @@ selectedLanguage
 });
 }
 
+function openLanguageMenu() {
+const overlay =
+document.getElementById(
+"pd-language-overlay"
+);
+
+if(!overlay) {
+return;
+}
+
+overlay.classList.add(
+"pd-open"
+);
+
+document.body.style.overflow =
+"hidden";
+}
+
+function closeLanguageMenu() {
+const overlay =
+document.getElementById(
+"pd-language-overlay"
+);
+
+if(!overlay) {
+return;
+}
+
+overlay.classList.remove(
+"pd-open"
+);
+
+document.body.style.overflow =
+"";
+}
+
+/* =========================================================
+   CHANGE LANGUAGE
+========================================================= */
+
 function changeLanguage(languageCode) {
 const language =
 getLanguage(languageCode);
@@ -654,54 +1165,38 @@ getLanguage(languageCode);
 selectedLanguage =
 language.code;
 
-localStorage.setItem(
-PD_LANGUAGE_KEY,
-language.code
+storeLanguage(
+selectedLanguage
 );
 
-applyDirection(
-language.code
+setGoogleLanguageCookie(
+selectedLanguage
 );
 
+applyDocumentLanguage();
 updateLanguageInterface();
 closeLanguageMenu();
 
-if(language.code === "en") {
-deleteCookie("googtrans");
-deleteCookie("googtrans");
-
 try {
-localStorage.removeItem(
-"googtrans"
+sessionStorage.setItem(
+"pd_language_last_change",
+selectedLanguage
 );
 } catch(error) {
 console.warn(error);
 }
 
-window.location.reload();
-return;
-}
-
-const translationValue =
-`/en/${language.googleCode}`;
-
-setCookie(
-"googtrans",
-translationValue,
-365
-);
-
-try {
-localStorage.setItem(
-"googtrans",
-translationValue
-);
-} catch(error) {
-console.warn(error);
-}
+/*
+Reloading ensures Google translates the full document,
+including advertisements and CMS-generated content.
+*/
 
 window.location.reload();
 }
+
+/* =========================================================
+   GOOGLE TRANSLATE INITIALISATION
+========================================================= */
 
 function initializeGoogleTranslation() {
 window.googleTranslateElementInit =
@@ -715,25 +1210,29 @@ return;
 
 new window.google.translate.TranslateElement(
 {
-pageLanguage:"en",
+pageLanguage:PD_SOURCE_LANGUAGE,
+
 includedLanguages:
 PD_LANGUAGES
 .filter(language =>
-language.code !== "en"
+language.code !== PD_SOURCE_LANGUAGE
 )
 .map(language =>
 language.googleCode
 )
 .join(","),
+
 autoDisplay:false,
 multilanguagePage:true
 },
 "google_translate_element"
 );
 
+googleApplyAttempts = 0;
+
 setTimeout(
 applySavedGoogleLanguage,
-600
+300
 );
 };
 
@@ -767,12 +1266,17 @@ console.warn(
 );
 };
 
-document.head.appendChild(script);
+document.head.appendChild(
+script
+);
 }
 
 function applySavedGoogleLanguage() {
+removeGoogleInterface();
+
 if(
-selectedLanguage === "en"
+selectedLanguage ===
+PD_SOURCE_LANGUAGE
 ) {
 return;
 }
@@ -786,10 +1290,15 @@ document.querySelector(
 );
 
 if(!select) {
+googleApplyAttempts++;
+
+if(googleApplyAttempts < 30) {
 setTimeout(
 applySavedGoogleLanguage,
-700
+350
 );
+}
+
 return;
 }
 
@@ -809,15 +1318,139 @@ bubbles:true
 )
 );
 }
+
+setTimeout(
+removeGoogleInterface,
+50
+);
+
+setTimeout(
+removeGoogleInterface,
+250
+);
+
+setTimeout(
+removeGoogleInterface,
+700
+);
+
+setTimeout(
+removeGoogleInterface,
+1500
+);
 }
 
+/* =========================================================
+   RESTORE LANGUAGE AFTER NAVIGATION
+========================================================= */
+
+function restoreLanguageAfterNavigation() {
+const storedLanguage =
+readStoredLanguage();
+
+if(storedLanguage) {
+selectedLanguage =
+storedLanguage;
+}
+
+setGoogleLanguageCookie(
+selectedLanguage
+);
+
+applyDocumentLanguage();
+updateLanguageInterface();
+protectBrandElements();
+markTranslatableAttributes();
+
+googleApplyAttempts = 0;
+
+if(
+selectedLanguage !==
+PD_SOURCE_LANGUAGE
+) {
+setTimeout(
+applySavedGoogleLanguage,
+100
+);
+
+setTimeout(
+applySavedGoogleLanguage,
+450
+);
+
+setTimeout(
+applySavedGoogleLanguage,
+1000
+);
+
+setTimeout(
+applySavedGoogleLanguage,
+1800
+);
+}
+
+removeGoogleInterface();
+}
+
+window.addEventListener(
+"pageshow",
+event => {
+restoreLanguageAfterNavigation();
+
+if(event.persisted) {
+setTimeout(
+restoreLanguageAfterNavigation,
+200
+);
+}
+}
+);
+
+window.addEventListener(
+"popstate",
+() => {
+setTimeout(
+restoreLanguageAfterNavigation,
+100
+);
+}
+);
+
+document.addEventListener(
+"visibilitychange",
+() => {
+if(
+document.visibilityState ===
+"visible"
+) {
+restoreLanguageAfterNavigation();
+}
+}
+);
+
+/* =========================================================
+   INITIALISE SYSTEM
+========================================================= */
+
 function initializeTranslationSystem() {
+selectedLanguage =
+readStoredLanguage() ||
+selectedLanguage;
+
+setGoogleLanguageCookie(
+selectedLanguage
+);
+
 createStyles();
+applyDocumentLanguage();
+protectBrandElements();
+markTranslatableAttributes();
 createGoogleContainer();
-prepareBrandProtection();
-applyDirection(selectedLanguage);
 createLanguageInterface();
 updateLanguageInterface();
+observeGoogleInterface();
+observeDynamicContent();
+removeGoogleInterface();
 initializeGoogleTranslation();
 }
 
@@ -833,16 +1466,38 @@ initializeTranslationSystem
 initializeTranslationSystem();
 }
 
+/* =========================================================
+   PUBLIC API
+========================================================= */
+
 window.PetsDogueLanguage = {
 languages:PD_LANGUAGES,
+
 getCurrentLanguage:function () {
 return getLanguage(
 selectedLanguage
 );
 },
+
+getSpeechLanguage:function () {
+return getLanguage(
+selectedLanguage
+).speech;
+},
+
 changeLanguage:changeLanguage,
+
+setLanguage:changeLanguage,
+
 open:openLanguageMenu,
-close:closeLanguageMenu
+
+close:closeLanguageMenu,
+
+restore:restoreLanguageAfterNavigation,
+
+protect:function (element) {
+protectElement(element);
+}
 };
 
 })();
