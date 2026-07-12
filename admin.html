@@ -104,6 +104,21 @@ background:#111;
 color:#fff;
 }
 
+.nav-button.trust{
+border:1px solid #65e51f;
+}
+
+.nav-count{
+float:right;
+min-width:24px;
+padding:3px 7px;
+border-radius:999px;
+background:#b83232;
+color:white;
+font-size:11px;
+text-align:center;
+}
+
 .sidebar-footer{
 margin-top:28px;
 padding-top:20px;
@@ -224,12 +239,12 @@ margin-bottom:8px;
 .page-header p{
 color:#666;
 line-height:1.7;
-max-width:780px;
+max-width:800px;
 }
 
 .stats-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:18px;
 margin-bottom:28px;
 }
@@ -248,6 +263,10 @@ font-family:Georgia,serif;
 font-size:38px;
 color:#c89b3c;
 margin-bottom:6px;
+}
+
+.stat-card.alert strong{
+color:#b83232;
 }
 
 .panel{
@@ -314,7 +333,7 @@ overflow-x:auto;
 table{
 width:100%;
 border-collapse:collapse;
-min-width:780px;
+min-width:850px;
 }
 
 th,
@@ -352,11 +371,32 @@ background:#eee7d7;
 
 .small-btn.publish{
 background:#ecfff0;
+color:#22723a;
+}
+
+.small-btn.review{
+background:#eaf1ff;
+color:#28579c;
+}
+
+.small-btn.warning{
+background:#fff3d7;
+color:#8b6514;
 }
 
 .small-btn.delete{
 background:#ffeaea;
 color:#9f2424;
+}
+
+.small-btn.verify{
+background:#65e51f;
+color:white;
+}
+
+.small-btn.black{
+background:#111;
+color:white;
 }
 
 .badge{
@@ -381,6 +421,21 @@ color:#8b6514;
 .badge.review{
 background:#eaf1ff;
 color:#28579c;
+}
+
+.badge.danger{
+background:#ffeaea;
+color:#9f2424;
+}
+
+.badge.verified{
+background:#65e51f;
+color:white;
+}
+
+.badge.hidden{
+background:#111;
+color:white;
 }
 
 .card-grid{
@@ -449,6 +504,16 @@ line-height:1.7;
 margin-bottom:20px;
 }
 
+.notice.danger{
+background:#ffeaea;
+border-color:#d86a6a;
+}
+
+.notice.success{
+background:#ecfff0;
+border-color:#65e51f;
+}
+
 .empty{
 padding:28px;
 border:2px dashed #ccc;
@@ -474,7 +539,7 @@ margin-bottom:14px;
 display:none;
 }
 
-.success{
+.success-message{
 display:none;
 background:#ecfff0;
 border:1px solid #65e51f;
@@ -482,6 +547,51 @@ border-radius:16px;
 padding:15px;
 margin-top:15px;
 font-weight:bold;
+}
+
+.trust-tabs{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:22px;
+}
+
+.trust-tab{
+border:2px solid #111;
+background:white;
+padding:10px 16px;
+border-radius:999px;
+font-weight:bold;
+}
+
+.trust-tab.active{
+background:#111;
+color:white;
+}
+
+.trust-section{
+display:none;
+}
+
+.trust-section.active{
+display:block;
+}
+
+.report-reason{
+display:inline-block;
+background:#ffeaea;
+color:#9f2424;
+padding:6px 10px;
+border-radius:12px;
+font-size:12px;
+font-weight:bold;
+margin:2px 4px 2px 0;
+}
+
+.trust-score{
+font-size:20px;
+font-weight:bold;
+color:#c89b3c;
 }
 
 .login-overlay{
@@ -570,18 +680,31 @@ grid-template-columns:1fr;
 <body>
 
 <div class="login-overlay" id="loginOverlay">
+
 <div class="login-card">
+
 <div class="logo-small">pets &</div>
 <div class="logo-big">DOGUE</div>
+
 <h2>Editorial Access</h2>
-<p>This is the demo CMS login. Replace it with secure authentication before publishing the real website.</p>
+
+<p>
+This is the demo CMS login. Replace it with secure authentication before publishing the real website.
+</p>
 
 <input id="adminEmail" type="email" placeholder="Admin email">
 <input id="adminPassword" type="password" placeholder="Password">
 
-<button class="btn green" onclick="loginAdmin()">Enter Editorial CMS</button>
-<a href="index.html" class="btn light">Back To Magazine</a>
+<button class="btn green" onclick="loginAdmin()">
+Enter Editorial CMS
+</button>
+
+<a href="index.html" class="btn light">
+Back To Magazine
+</a>
+
 </div>
+
 </div>
 
 <div class="admin-shell">
@@ -595,6 +718,7 @@ grid-template-columns:1fr;
 </div>
 
 <nav class="nav">
+
 <button class="nav-button active" onclick="openPage('dashboard',this)">Dashboard</button>
 <button class="nav-button" onclick="openPage('issues',this)">Issues</button>
 <button class="nav-button" onclick="openPage('articles',this)">Articles</button>
@@ -607,13 +731,21 @@ grid-template-columns:1fr;
 <button class="nav-button" onclick="openPage('ads',this)">Advertisements</button>
 <button class="nav-button" onclick="openPage('community',this)">Community</button>
 <button class="nav-button" onclick="openPage('places',this)">Pet Friendly Places</button>
+
+<button class="nav-button trust" onclick="openPage('trustCenter',this)">
+DOGUE Trust Center
+<span class="nav-count" id="trustNavCount">0</span>
+</button>
+
 <button class="nav-button" onclick="openPage('comments',this)">Comments</button>
 <button class="nav-button" onclick="openPage('users',this)">Users</button>
 <button class="nav-button" onclick="openPage('settings',this)">Settings</button>
+
 </nav>
 
 <div class="sidebar-footer">
 <a href="index.html">Open Magazine</a>
+<a href="pet-friendly-places.html">Open Places</a>
 <button onclick="exportData()">Export CMS Data</button>
 <button onclick="logoutAdmin()">Log Out</button>
 </div>
@@ -623,6 +755,7 @@ grid-template-columns:1fr;
 <div class="main">
 
 <header class="topbar">
+
 <div>
 <h1 id="topbarTitle">Dashboard</h1>
 </div>
@@ -631,6 +764,7 @@ grid-template-columns:1fr;
 <span class="status-pill">Demo CMS · Local Storage</span>
 <button class="btn black" onclick="saveAll()">Save All</button>
 </div>
+
 </header>
 
 <main class="content">
@@ -640,26 +774,41 @@ grid-template-columns:1fr;
 <div class="page-header">
 <div>
 <h2>Editorial Dashboard</h2>
-<p>Manage magazine issues, articles, photography, competitions, users and commercial content.</p>
+<p>
+Manage magazine content, competitions, businesses, community submissions and DOGUE Trust moderation.
+</p>
 </div>
 </div>
 
 <div class="notice">
-This version stores information only in this browser using localStorage. It is useful for designing and testing the workflow, but it is not yet a secure live CMS.
+This version stores information only in this browser using localStorage. A real live version will require secure accounts, a database and a server.
 </div>
 
 <div class="stats-grid">
+
 <div class="stat-card"><strong id="statIssues">0</strong>Issues</div>
 <div class="stat-card"><strong id="statArticles">0</strong>Articles</div>
 <div class="stat-card"><strong id="statPhotos">0</strong>Photos</div>
 <div class="stat-card"><strong id="statContests">0</strong>Contests</div>
 <div class="stat-card"><strong id="statPartners">0</strong>Partners</div>
 <div class="stat-card"><strong id="statUsers">0</strong>Users</div>
+
+<div class="stat-card alert">
+<strong id="statPendingPlaces">0</strong>
+Pending Places
+</div>
+
+<div class="stat-card alert">
+<strong id="statReportedPlaces">0</strong>
+Reported Places
+</div>
+
 </div>
 
 <div class="two-column">
 
 <div class="panel">
+
 <h3>Quick Create</h3>
 
 <div class="toolbar">
@@ -667,17 +816,24 @@ This version stores information only in this browser using localStorage. It is u
 <button class="btn black" onclick="goToPage('articles')">New Article</button>
 <button class="btn green" onclick="goToPage('photos')">Upload Photo</button>
 <button class="btn light" onclick="goToPage('contests')">New Contest</button>
+<button class="btn danger" onclick="goToPage('trustCenter')">Trust Center</button>
 </div>
+
 </div>
 
 <div class="panel">
+
 <h3>Recent Activity</h3>
+
 <div class="activity-list" id="activityList">
+
 <div class="activity">
 <strong>CMS created</strong>
 Your editorial dashboard is ready.
 </div>
+
 </div>
+
 </div>
 
 </div>
@@ -689,17 +845,19 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Magazine Issues</h2>
-<p>Create a new issue, upload a cover, choose its season and control publication status.</p>
+<p>Create a new issue, upload a cover and control publication status.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Create New Issue</h3>
 
 <div class="form-grid">
-<input id="issueTitle" type="text" placeholder="Issue title, e.g. Issue 02">
-<input id="issueSeason" type="text" placeholder="Season, e.g. Autumn 2026">
-<input id="issueSlug" type="text" placeholder="File name, e.g. issue-02.html">
+
+<input id="issueTitle" type="text" placeholder="Issue title">
+<input id="issueSeason" type="text" placeholder="Season">
+<input id="issueSlug" type="text" placeholder="File name">
 
 <select id="issueStatus">
 <option>Draft</option>
@@ -708,34 +866,49 @@ Your editorial dashboard is ready.
 </select>
 
 <input id="issueDate" type="date">
-<input id="issueCover" type="file" accept="image/*" onchange="previewImage(event,'issuePreview')">
+
+<input
+id="issueCover"
+type="file"
+accept="image/*"
+onchange="previewImage(event,'issuePreview')">
+
 </div>
 
-<textarea id="issueDescription" placeholder="Short description of this issue..."></textarea>
+<textarea id="issueDescription" placeholder="Issue description"></textarea>
 
 <div class="preview-box">
-<img id="issuePreview" alt="Issue cover preview">
+<img id="issuePreview" alt="Issue preview">
 </div>
 
 <button class="btn green" onclick="createIssue()">Create Issue</button>
+
 </div>
 
 <div class="panel">
+
 <h3>All Issues</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Title</th>
 <th>Season</th>
 <th>Status</th>
-<th>Publish Date</th>
+<th>Date</th>
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="issuesTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -745,14 +918,16 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Articles</h2>
-<p>Create stories, interviews, guides and editorial features for any magazine rubric.</p>
+<p>Create stories, interviews and editorial features.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Create Article</h3>
 
 <div class="form-grid">
+
 <input id="articleTitle" type="text" placeholder="Article title">
 <input id="articleAuthor" type="text" placeholder="Author">
 
@@ -773,24 +948,35 @@ Your editorial dashboard is ready.
 <option>Published</option>
 </select>
 
-<input id="articleSlug" type="text" placeholder="File name, e.g. miso-story.html">
-<input id="articleImage" type="file" accept="image/*" onchange="previewImage(event,'articlePreview')">
+<input id="articleSlug" type="text" placeholder="File name">
+
+<input
+id="articleImage"
+type="file"
+accept="image/*"
+onchange="previewImage(event,'articlePreview')">
+
 </div>
 
-<textarea id="articleExcerpt" placeholder="Short excerpt..."></textarea>
-<textarea id="articleBody" placeholder="Full article content..."></textarea>
+<textarea id="articleExcerpt" placeholder="Short excerpt"></textarea>
+<textarea id="articleBody" placeholder="Full article content"></textarea>
 
 <div class="preview-box">
-<img id="articlePreview" alt="Article image preview">
+<img id="articlePreview" alt="Article preview">
 </div>
 
 <button class="btn green" onclick="createArticle()">Save Article</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Article Library</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Title</th>
@@ -800,9 +986,13 @@ Your editorial dashboard is ready.
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="articlesTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -812,27 +1002,36 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Photo Library</h2>
-<p>Upload editorial photos, galleries, campaign images and cover material.</p>
+<p>Upload editorial photography and cover material.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Upload Photo</h3>
 
 <div class="form-grid">
+
 <input id="photoTitle" type="text" placeholder="Photo title">
 <input id="photoPhotographer" type="text" placeholder="Photographer">
 <input id="photoCategory" type="text" placeholder="Category">
-<input id="photoFile" type="file" accept="image/*" onchange="previewImage(event,'photoPreview')">
+
+<input
+id="photoFile"
+type="file"
+accept="image/*"
+onchange="previewImage(event,'photoPreview')">
+
 </div>
 
-<textarea id="photoCaption" placeholder="Caption or photo description..."></textarea>
+<textarea id="photoCaption" placeholder="Photo caption"></textarea>
 
 <div class="preview-box">
 <img id="photoPreview" alt="Photo preview">
 </div>
 
 <button class="btn green" onclick="createPhoto()">Add To Library</button>
+
 </div>
 
 <div class="panel">
@@ -847,29 +1046,38 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Cover Stars</h2>
-<p>Add featured pets, assign them to issues and prepare cover-star stories.</p>
+<p>Add featured pets and prepare cover stories.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Add Cover Star</h3>
 
 <div class="form-grid">
+
 <input id="coverPetName" type="text" placeholder="Pet name">
 <input id="coverAnimal" type="text" placeholder="Animal">
 <input id="coverBreed" type="text" placeholder="Breed">
-<input id="coverOwner" type="text" placeholder="Owner name">
+<input id="coverOwner" type="text" placeholder="Owner">
 <input id="coverIssue" type="text" placeholder="Issue">
-<input id="coverPhoto" type="file" accept="image/*" onchange="previewImage(event,'coverPreview')">
+
+<input
+id="coverPhoto"
+type="file"
+accept="image/*"
+onchange="previewImage(event,'coverPreview')">
+
 </div>
 
-<textarea id="coverStory" placeholder="Cover star story..."></textarea>
+<textarea id="coverStory" placeholder="Cover star story"></textarea>
 
 <div class="preview-box">
 <img id="coverPreview" alt="Cover star preview">
 </div>
 
 <button class="btn green" onclick="createCoverStar()">Add Cover Star</button>
+
 </div>
 
 <div class="panel">
@@ -884,14 +1092,16 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Contests</h2>
-<p>Create seasonal competitions, define voting dates and announce winners.</p>
+<p>Create competitions, dates, prizes and winners.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Create Contest</h3>
 
 <div class="form-grid">
+
 <input id="contestTitle" type="text" placeholder="Contest title">
 <input id="contestPrize" type="text" placeholder="Prize">
 <input id="contestStart" type="date">
@@ -904,18 +1114,24 @@ Your editorial dashboard is ready.
 <option>Completed</option>
 </select>
 
-<input id="contestWinner" type="text" placeholder="Winner, optional">
+<input id="contestWinner" type="text" placeholder="Winner">
+
 </div>
 
-<textarea id="contestRules" placeholder="Competition rules..."></textarea>
+<textarea id="contestRules" placeholder="Competition rules"></textarea>
 
 <button class="btn green" onclick="createContest()">Create Contest</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Contest List</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Title</th>
@@ -926,9 +1142,13 @@ Your editorial dashboard is ready.
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="contestsTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -938,15 +1158,17 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Members Gallery</h2>
-<p>Review member entries, remove suspicious submissions and select finalists.</p>
+<p>Review entries and select finalists.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <div class="toolbar">
 <button class="btn black" onclick="loadMemberEntries()">Refresh Entries</button>
 <button class="btn gold" onclick="selectTopFive()">Select Top 5</button>
 </div>
+
 </div>
 
 <div class="panel">
@@ -960,29 +1182,37 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Marketplace Moderation</h2>
-<p>Review, approve or remove marketplace listings submitted by members.</p>
+<p>Review marketplace listings.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Add Marketplace Listing</h3>
 
 <div class="form-grid">
+
 <input id="marketTitle" type="text" placeholder="Listing title">
 <input id="marketCategory" type="text" placeholder="Category">
 <input id="marketLocation" type="text" placeholder="Location">
 <input id="marketOwner" type="text" placeholder="Owner">
+
 </div>
 
-<textarea id="marketDescription" placeholder="Listing description..."></textarea>
+<textarea id="marketDescription" placeholder="Listing description"></textarea>
 
 <button class="btn green" onclick="createMarketplaceItem()">Create Listing</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Marketplace Listings</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Title</th>
@@ -993,9 +1223,13 @@ Your editorial dashboard is ready.
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="marketTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -1005,31 +1239,39 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Partners</h2>
-<p>Add partner businesses, discount codes and sponsored directory placements.</p>
+<p>Add partners, offers and promotional codes.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Add Partner</h3>
 
 <div class="form-grid">
+
 <input id="partnerName" type="text" placeholder="Partner name">
 <input id="partnerCategory" type="text" placeholder="Category">
 <input id="partnerLocation" type="text" placeholder="Location">
 <input id="partnerDiscount" type="text" placeholder="Discount">
 <input id="partnerCode" type="text" placeholder="Promo code">
 <input id="partnerWebsite" type="url" placeholder="Website">
+
 </div>
 
-<textarea id="partnerDescription" placeholder="Partner description..."></textarea>
+<textarea id="partnerDescription" placeholder="Partner description"></textarea>
 
 <button class="btn green" onclick="createPartner()">Add Partner</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Partner Directory</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Name</th>
@@ -1040,9 +1282,13 @@ Your editorial dashboard is ready.
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="partnersTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -1052,18 +1298,20 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Advertisements</h2>
-<p>Create sponsored banners and commercial placements for issues or the website.</p>
+<p>Create sponsored placements.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Create Advertisement</h3>
 
 <div class="form-grid">
-<input id="adBrand" type="text" placeholder="Brand name">
+
+<input id="adBrand" type="text" placeholder="Brand">
 <input id="adTitle" type="text" placeholder="Campaign title">
 <input id="adLink" type="url" placeholder="Destination link">
-<input id="adPosition" type="text" placeholder="Placement, e.g. Homepage">
+<input id="adPosition" type="text" placeholder="Placement">
 
 <select id="adStatus">
 <option>Draft</option>
@@ -1072,30 +1320,40 @@ Your editorial dashboard is ready.
 </select>
 
 <input id="adEnd" type="date">
+
 </div>
 
-<textarea id="adText" placeholder="Advertisement text..."></textarea>
+<textarea id="adText" placeholder="Advertisement text"></textarea>
 
 <button class="btn green" onclick="createAd()">Create Advertisement</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Advertisement List</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Brand</th>
 <th>Campaign</th>
 <th>Position</th>
 <th>Status</th>
-<th>End Date</th>
+<th>End</th>
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="adsTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -1105,29 +1363,37 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Community Moderation</h2>
-<p>Review local posts, help requests, lost-and-found notices and public reports.</p>
+<p>Review local posts and help requests.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Add Community Post</h3>
 
 <div class="form-grid">
+
 <input id="communityTitle" type="text" placeholder="Post title">
 <input id="communityLocation" type="text" placeholder="Location">
 <input id="communityAuthor" type="text" placeholder="Author">
 <input id="communityType" type="text" placeholder="Post type">
+
 </div>
 
-<textarea id="communityText" placeholder="Post content..."></textarea>
+<textarea id="communityText" placeholder="Post content"></textarea>
 
 <button class="btn green" onclick="createCommunityPost()">Add Post</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Community Posts</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Title</th>
@@ -1138,9 +1404,13 @@ Your editorial dashboard is ready.
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="communityTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -1150,41 +1420,262 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Pet Friendly Places</h2>
-<p>Add cafés, hotels, beaches, parks and businesses that welcome animals.</p>
+<p>Add places manually to the PETS & DOGUE directory.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Add Place</h3>
 
 <div class="form-grid">
+
 <input id="placeName" type="text" placeholder="Place name">
 <input id="placeCategory" type="text" placeholder="Category">
 <input id="placeLocation" type="text" placeholder="Location">
+<input id="placeAddress" type="text" placeholder="Full address">
 <input id="placeWebsite" type="url" placeholder="Website">
+<input id="placePhone" type="text" placeholder="Telephone">
+<input id="placeLatitude" type="number" step="any" placeholder="Latitude">
+<input id="placeLongitude" type="number" step="any" placeholder="Longitude">
+
 </div>
 
-<textarea id="placeDescription" placeholder="Place description..."></textarea>
+<input id="placePetPolicy" type="text" placeholder="Pet policy">
+
+<textarea id="placeDescription" placeholder="Place description"></textarea>
+
+<label class="checkbox-row">
+<input id="placeVerified" type="checkbox">
+<span>Mark as DOGUE Verified</span>
+</label>
 
 <button class="btn green" onclick="createPlace()">Add Place</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Place Directory</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Name</th>
 <th>Category</th>
 <th>Location</th>
-<th>Website</th>
+<th>Status</th>
+<th>Reports</th>
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="placesTable"></tbody>
+
 </table>
+
 </div>
+
+</div>
+
+</section>
+
+<section class="page" id="trustCenter">
+
+<div class="page-header">
+
+<div>
+<h2>DOGUE Trust Center</h2>
+
+<p>
+Moderate community submissions, complaints, automatically hidden places, DOGUE verification and pet-policy disputes.
+</p>
+</div>
+
+<button class="btn black" onclick="refreshTrustCenter()">
+Refresh Trust Data
+</button>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card alert">
+<strong id="trustPendingCount">0</strong>
+Pending Submissions
+</div>
+
+<div class="stat-card alert">
+<strong id="trustReportsCount">0</strong>
+Reports
+</div>
+
+<div class="stat-card alert">
+<strong id="trustReviewCount">0</strong>
+Under Review
+</div>
+
+<div class="stat-card alert">
+<strong id="trustHiddenCount">0</strong>
+Auto Hidden
+</div>
+
+<div class="stat-card">
+<strong id="trustVerifiedCount">0</strong>
+DOGUE Verified
+</div>
+
+</div>
+
+<div class="notice danger">
+Ordinary places are marked Under Review after 3 reports and Auto Hidden after 5. DOGUE Verified places use higher thresholds: 5 reports for review and 8 for automatic hiding.
+</div>
+
+<div class="trust-tabs">
+
+<button class="trust-tab active" onclick="openTrustTab('pendingTrust',this)">
+Pending Submissions
+</button>
+
+<button class="trust-tab" onclick="openTrustTab('reportedTrust',this)">
+Reported Places
+</button>
+
+<button class="trust-tab" onclick="openTrustTab('hiddenTrust',this)">
+Auto Hidden
+</button>
+
+<button class="trust-tab" onclick="openTrustTab('verifiedTrust',this)">
+DOGUE Verified
+</button>
+
+</div>
+
+<div class="trust-section active" id="pendingTrust">
+
+<div class="panel">
+
+<h3>Pending Place Submissions</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Place</th>
+<th>Category</th>
+<th>Address</th>
+<th>Pet Policy</th>
+<th>Submitted By</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="pendingSubmissionsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="trust-section" id="reportedTrust">
+
+<div class="panel">
+
+<h3>Reported & Under Review Places</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Place</th>
+<th>Source</th>
+<th>Reports</th>
+<th>Reasons</th>
+<th>Status</th>
+<th>Trust Score</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="reportedPlacesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="trust-section" id="hiddenTrust">
+
+<div class="panel">
+
+<h3>Automatically Hidden Places</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Place</th>
+<th>Reports</th>
+<th>Hidden At</th>
+<th>Reason</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="hiddenPlacesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="trust-section" id="verifiedTrust">
+
+<div class="panel">
+
+<h3>DOGUE Verified Places</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Place</th>
+<th>Category</th>
+<th>Location</th>
+<th>Reports</th>
+<th>Trust Score</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="verifiedPlacesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
 </div>
 
 </section>
@@ -1194,24 +1685,31 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Comment Moderation</h2>
-<p>Review public comments and remove inappropriate or suspicious content.</p>
+<p>Review public comments.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Add Demo Comment</h3>
 
 <input id="commentAuthor" type="text" placeholder="Author">
 <input id="commentPage" type="text" placeholder="Page">
-<textarea id="commentText" placeholder="Comment..."></textarea>
+
+<textarea id="commentText" placeholder="Comment"></textarea>
 
 <button class="btn green" onclick="createComment()">Add Comment</button>
+
 </div>
 
 <div class="panel">
+
 <h3>Comments</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Author</th>
@@ -1221,9 +1719,13 @@ Your editorial dashboard is ready.
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="commentsTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -1233,14 +1735,16 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Users & Members</h2>
-<p>Review registered readers, Club membership and user access.</p>
+<p>Review registered readers and Club members.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>Add User</h3>
 
 <div class="form-grid">
+
 <input id="userName" type="text" placeholder="Name">
 <input id="userEmail" type="email" placeholder="Email">
 
@@ -1248,17 +1752,24 @@ Your editorial dashboard is ready.
 <option>Free Reader</option>
 <option>Club Monthly</option>
 <option>Club Yearly</option>
+<option>DOGUE Inspector</option>
 <option>Admin</option>
 </select>
+
 </div>
 
 <button class="btn green" onclick="createUser()">Add User</button>
+
 </div>
 
 <div class="panel">
+
 <h3>User List</h3>
+
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Name</th>
@@ -1268,9 +1779,13 @@ Your editorial dashboard is ready.
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="usersTable"></tbody>
+
 </table>
+
 </div>
+
 </div>
 
 </section>
@@ -1280,11 +1795,12 @@ Your editorial dashboard is ready.
 <div class="page-header">
 <div>
 <h2>Magazine Settings</h2>
-<p>Control global magazine details, featured issue and publication preferences.</p>
+<p>Control global magazine details.</p>
 </div>
 </div>
 
 <div class="panel">
+
 <h3>General Settings</h3>
 
 <input id="settingTitle" type="text" placeholder="Magazine title">
@@ -1292,7 +1808,7 @@ Your editorial dashboard is ready.
 <input id="settingFeaturedIssue" type="text" placeholder="Featured issue">
 <input id="settingContact" type="email" placeholder="Contact email">
 
-<textarea id="settingHomepageMessage" placeholder="Homepage announcement..."></textarea>
+<textarea id="settingHomepageMessage" placeholder="Homepage announcement"></textarea>
 
 <label class="checkbox-row">
 <input id="settingComments" type="checkbox">
@@ -1306,16 +1822,24 @@ Your editorial dashboard is ready.
 
 <button class="btn green" onclick="saveSettings()">Save Settings</button>
 
-<div class="success" id="settingsSuccess">Settings saved.</div>
+<div class="success-message" id="settingsSuccess">
+Settings saved.
+</div>
+
 </div>
 
 <div class="panel">
+
 <h3>Danger Zone</h3>
+
 <p style="color:#666;line-height:1.7;margin-bottom:15px;">
-This removes all demo CMS content stored in this browser.
+This removes all demo CMS and DOGUE Trust data stored in this browser.
 </p>
 
-<button class="btn danger" onclick="resetCMS()">Reset Demo CMS</button>
+<button class="btn danger" onclick="resetCMS()">
+Reset Demo CMS
+</button>
+
 </div>
 
 </section>
@@ -1327,6 +1851,9 @@ This removes all demo CMS content stored in this browser.
 
 <script>
 const CMS_KEY = "pets_dogue_cms_v1";
+const SUBMISSIONS_KEY = "pets_dogue_place_submissions";
+const REPORTS_KEY = "pets_dogue_place_reports";
+const MODERATION_KEY = "pets_dogue_place_moderation";
 
 let cms = {
 issues:[],
@@ -1354,6 +1881,30 @@ allowMarketplace:true
 };
 
 let imageCache = {};
+let placeSubmissions = [];
+let placeReports = [];
+let placeModeration = {};
+
+function readArray(key){
+try{
+const value = JSON.parse(localStorage.getItem(key) || "[]");
+return Array.isArray(value) ? value : [];
+}catch(error){
+return [];
+}
+}
+
+function readObject(key){
+try{
+const value = JSON.parse(localStorage.getItem(key) || "{}");
+
+return value && typeof value === "object" && !Array.isArray(value)
+? value
+: {};
+}catch(error){
+return {};
+}
+}
 
 function loadCMS(){
 const saved = localStorage.getItem(CMS_KEY);
@@ -1362,11 +1913,12 @@ if(saved){
 try{
 cms = JSON.parse(saved);
 }catch(error){
-console.error("Unable to load CMS data",error);
+console.error("Unable to load CMS data.",error);
 }
 }
 
 ensureCollections();
+loadTrustData();
 renderAll();
 }
 
@@ -1396,14 +1948,45 @@ cms.settings = {};
 }
 }
 
+function loadTrustData(){
+placeSubmissions = readArray(SUBMISSIONS_KEY);
+placeReports = readArray(REPORTS_KEY);
+placeModeration = readObject(MODERATION_KEY);
+
+recalculateModeration();
+}
+
+function saveTrustData(){
+localStorage.setItem(
+SUBMISSIONS_KEY,
+JSON.stringify(placeSubmissions)
+);
+
+localStorage.setItem(
+REPORTS_KEY,
+JSON.stringify(placeReports)
+);
+
+localStorage.setItem(
+MODERATION_KEY,
+JSON.stringify(placeModeration)
+);
+}
+
 function saveAll(showMessage = true){
-localStorage.setItem(CMS_KEY,JSON.stringify(cms));
+localStorage.setItem(
+CMS_KEY,
+JSON.stringify(cms)
+);
+
+saveTrustData();
 
 if(showMessage){
-alert("CMS data saved in this browser.");
+alert("CMS and DOGUE Trust data saved.");
 }
 
 renderStats();
+renderTrustCenter();
 }
 
 function loginAdmin(){
@@ -1415,7 +1998,11 @@ alert("Enter an email and password.");
 return;
 }
 
-sessionStorage.setItem("pd_admin_logged_in","true");
+sessionStorage.setItem(
+"pd_admin_logged_in",
+"true"
+);
+
 document.getElementById("loginOverlay").style.display = "none";
 }
 
@@ -1425,7 +2012,9 @@ location.reload();
 }
 
 function checkAdminLogin(){
-if(sessionStorage.getItem("pd_admin_logged_in") === "true"){
+if(
+sessionStorage.getItem("pd_admin_logged_in") === "true"
+){
 document.getElementById("loginOverlay").style.display = "none";
 }
 }
@@ -1448,14 +2037,38 @@ button.classList.add("active");
 document.getElementById("topbarTitle").textContent =
 document.getElementById(pageId).querySelector("h2").textContent;
 
-window.scrollTo({top:0,behavior:"smooth"});
+if(pageId === "trustCenter"){
+refreshTrustCenter();
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 }
 
 function goToPage(pageId){
-const button = [...document.querySelectorAll(".nav-button")]
-.find(item => item.getAttribute("onclick").includes("'" + pageId + "'"));
+const button =
+[...document.querySelectorAll(".nav-button")]
+.find(item =>
+item.getAttribute("onclick")?.includes("'" + pageId + "'")
+);
 
 openPage(pageId,button);
+}
+
+function openTrustTab(sectionId,button){
+document.querySelectorAll(".trust-section").forEach(section => {
+section.classList.remove("active");
+});
+
+document.getElementById(sectionId).classList.add("active");
+
+document.querySelectorAll(".trust-tab").forEach(tab => {
+tab.classList.remove("active");
+});
+
+button.classList.add("active");
 }
 
 function getValue(id){
@@ -1466,6 +2079,10 @@ function clearFields(ids){
 ids.forEach(id => {
 const element = document.getElementById(id);
 
+if(!element){
+return;
+}
+
 if(element.type === "checkbox"){
 element.checked = false;
 }else{
@@ -1475,14 +2092,41 @@ element.value = "";
 }
 
 function statusBadge(status){
-const className =
-status === "Published" || status === "Active" || status === "Open"
-? "published"
-: status === "Review"
-? "review"
-: "draft";
+const normalized = String(status || "Draft");
 
-return `<span class="badge ${className}">${escapeHTML(status || "Draft")}</span>`;
+let className = "draft";
+
+if(
+["Published","Active","Open","Approved"].includes(normalized)
+){
+className = "published";
+}
+
+if(
+["Review","Pending Review","Under Review"].includes(normalized)
+){
+className = "review";
+}
+
+if(
+["Rejected","Removed","Not Pet Friendly"].includes(normalized)
+){
+className = "danger";
+}
+
+if(normalized === "DOGUE Verified"){
+className = "verified";
+}
+
+if(normalized === "Auto Hidden"){
+className = "hidden";
+}
+
+return `
+<span class="badge ${className}">
+${escapeHTML(normalized)}
+</span>
+`;
 }
 
 function escapeHTML(value){
@@ -1507,6 +2151,7 @@ reader.onload = function(e){
 imageCache[previewId] = e.target.result;
 
 const preview = document.getElementById(previewId);
+
 preview.src = e.target.result;
 preview.style.display = "block";
 };
@@ -1521,7 +2166,7 @@ text,
 date:new Date().toLocaleString()
 });
 
-cms.activity = cms.activity.slice(0,20);
+cms.activity = cms.activity.slice(0,30);
 }
 
 function renderActivity(){
@@ -1534,6 +2179,7 @@ list.innerHTML = `
 New editorial actions will appear here.
 </div>
 `;
+
 return;
 }
 
@@ -1869,14 +2515,39 @@ alert("Add the place name.");
 return;
 }
 
-cms.places.unshift({
-id:Date.now(),
+const place = {
+id:"cms-place-" + Date.now(),
 name,
 category:getValue("placeCategory"),
 location:getValue("placeLocation"),
+address:getValue("placeAddress"),
 website:getValue("placeWebsite"),
-description:getValue("placeDescription")
-});
+phone:getValue("placePhone"),
+latitude:numberOrNull(getValue("placeLatitude")),
+longitude:numberOrNull(getValue("placeLongitude")),
+petPolicy:getValue("placePetPolicy"),
+description:getValue("placeDescription"),
+verified:document.getElementById("placeVerified").checked,
+status:document.getElementById("placeVerified").checked
+? "DOGUE Verified"
+: "Approved",
+source:"cms",
+createdAt:new Date().toISOString()
+};
+
+cms.places.unshift(place);
+
+if(place.verified){
+placeModeration[place.id] = {
+placeId:place.id,
+placeName:place.name,
+verified:true,
+reportCount:0,
+moderationStatus:"DOGUE Verified",
+adminOverride:true,
+updatedAt:new Date().toISOString()
+};
+}
 
 addActivity("Pet friendly place added",name);
 
@@ -1884,12 +2555,26 @@ clearFields([
 "placeName",
 "placeCategory",
 "placeLocation",
+"placeAddress",
 "placeWebsite",
-"placeDescription"
+"placePhone",
+"placeLatitude",
+"placeLongitude",
+"placePetPolicy",
+"placeDescription",
+"placeVerified"
 ]);
 
 saveAll(false);
 renderAll();
+}
+
+function numberOrNull(value){
+const number = Number(value);
+
+return Number.isFinite(number)
+? number
+: null;
 }
 
 function createComment(){
@@ -1908,7 +2593,11 @@ text,
 status:"Review"
 });
 
-addActivity("Comment added","New comment from " + (getValue("commentAuthor") || "Guest"));
+addActivity(
+"Comment added",
+"New comment from " +
+(getValue("commentAuthor") || "Guest")
+);
 
 clearFields([
 "commentAuthor",
@@ -1949,11 +2638,20 @@ renderAll();
 }
 
 function updateItemStatus(collection,id,status){
-const item = cms[collection].find(entry => entry.id === id);
+const item = cms[collection].find(entry =>
+String(entry.id) === String(id)
+);
 
 if(item){
 item.status = status;
-addActivity("Status updated",(item.title || item.name || item.brand) + " → " + status);
+
+addActivity(
+"Status updated",
+(item.title || item.name || item.brand) +
+" → " +
+status
+);
+
 saveAll(false);
 renderAll();
 }
@@ -1964,7 +2662,9 @@ if(!confirm("Delete this item?")){
 return;
 }
 
-cms[collection] = cms[collection].filter(item => item.id !== id);
+cms[collection] = cms[collection].filter(item =>
+String(item.id) !== String(id)
+);
 
 addActivity("Item deleted",collection);
 
@@ -1982,9 +2682,9 @@ cms.issues.map(item => `
 <td>${escapeHTML(item.date)}</td>
 <td>
 <div class="row-actions">
-<button class="small-btn publish" onclick="updateItemStatus('issues',${item.id},'Published')">Publish</button>
-<button class="small-btn edit" onclick="updateItemStatus('issues',${item.id},'Draft')">Draft</button>
-<button class="small-btn delete" onclick="deleteItem('issues',${item.id})">Delete</button>
+<button class="small-btn publish" onclick="updateItemStatus('issues','${escapeHTML(item.id)}','Published')">Publish</button>
+<button class="small-btn edit" onclick="updateItemStatus('issues','${escapeHTML(item.id)}','Draft')">Draft</button>
+<button class="small-btn delete" onclick="deleteItem('issues','${escapeHTML(item.id)}')">Delete</button>
 </div>
 </td>
 </tr>
@@ -2001,9 +2701,9 @@ cms.articles.map(item => `
 <td>${statusBadge(item.status)}</td>
 <td>
 <div class="row-actions">
-<button class="small-btn publish" onclick="updateItemStatus('articles',${item.id},'Published')">Publish</button>
-<button class="small-btn edit" onclick="updateItemStatus('articles',${item.id},'Review')">Review</button>
-<button class="small-btn delete" onclick="deleteItem('articles',${item.id})">Delete</button>
+<button class="small-btn publish" onclick="updateItemStatus('articles','${escapeHTML(item.id)}','Published')">Publish</button>
+<button class="small-btn edit" onclick="updateItemStatus('articles','${escapeHTML(item.id)}','Review')">Review</button>
+<button class="small-btn delete" onclick="deleteItem('articles','${escapeHTML(item.id)}')">Delete</button>
 </div>
 </td>
 </tr>
@@ -2020,13 +2720,29 @@ return;
 
 grid.innerHTML = cms.photos.map(item => `
 <div class="content-card">
-${item.image ? `<img src="${item.image}" alt="${escapeHTML(item.title)}">` : ""}
+
+${item.image
+? `<img src="${item.image}" alt="${escapeHTML(item.title)}">`
+: ""}
+
 <div class="content-card-body">
-<span class="badge">${escapeHTML(item.category || "PHOTO")}</span>
+
+<span class="badge">
+${escapeHTML(item.category || "PHOTO")}
+</span>
+
 <h4>${escapeHTML(item.title)}</h4>
+
 <p>${escapeHTML(item.caption)}</p>
+
 <br>
-<button class="small-btn delete" onclick="deleteItem('photos',${item.id})">Delete</button>
+
+<button
+class="small-btn delete"
+onclick="deleteItem('photos','${escapeHTML(item.id)}')">
+Delete
+</button>
+
 </div>
 </div>
 `).join("");
@@ -2042,14 +2758,35 @@ return;
 
 grid.innerHTML = cms.coverStars.map(item => `
 <div class="content-card">
-${item.image ? `<img src="${item.image}" alt="${escapeHTML(item.name)}">` : ""}
+
+${item.image
+? `<img src="${item.image}" alt="${escapeHTML(item.name)}">`
+: ""}
+
 <div class="content-card-body">
-<span class="badge">${escapeHTML(item.issue || "COVER STAR")}</span>
+
+<span class="badge">
+${escapeHTML(item.issue || "COVER STAR")}
+</span>
+
 <h4>${escapeHTML(item.name)}</h4>
-<p>${escapeHTML(item.animal)} · ${escapeHTML(item.breed)}</p>
+
+<p>
+${escapeHTML(item.animal)}
+·
+${escapeHTML(item.breed)}
+</p>
+
 <p>${escapeHTML(item.story)}</p>
+
 <br>
-<button class="small-btn delete" onclick="deleteItem('coverStars',${item.id})">Delete</button>
+
+<button
+class="small-btn delete"
+onclick="deleteItem('coverStars','${escapeHTML(item.id)}')">
+Delete
+</button>
+
 </div>
 </div>
 `).join("");
@@ -2066,9 +2803,9 @@ cms.contests.map(item => `
 <td>${escapeHTML(item.winner)}</td>
 <td>
 <div class="row-actions">
-<button class="small-btn publish" onclick="updateItemStatus('contests',${item.id},'Open')">Open</button>
-<button class="small-btn edit" onclick="updateItemStatus('contests',${item.id},'Completed')">Complete</button>
-<button class="small-btn delete" onclick="deleteItem('contests',${item.id})">Delete</button>
+<button class="small-btn publish" onclick="updateItemStatus('contests','${escapeHTML(item.id)}','Open')">Open</button>
+<button class="small-btn edit" onclick="updateItemStatus('contests','${escapeHTML(item.id)}','Completed')">Complete</button>
+<button class="small-btn delete" onclick="deleteItem('contests','${escapeHTML(item.id)}')">Delete</button>
 </div>
 </td>
 </tr>
@@ -2086,9 +2823,9 @@ cms.marketplace.map(item => `
 <td>${statusBadge(item.status)}</td>
 <td>
 <div class="row-actions">
-<button class="small-btn publish" onclick="updateItemStatus('marketplace',${item.id},'Published')">Approve</button>
-<button class="small-btn edit" onclick="updateItemStatus('marketplace',${item.id},'Review')">Review</button>
-<button class="small-btn delete" onclick="deleteItem('marketplace',${item.id})">Delete</button>
+<button class="small-btn publish" onclick="updateItemStatus('marketplace','${escapeHTML(item.id)}','Published')">Approve</button>
+<button class="small-btn edit" onclick="updateItemStatus('marketplace','${escapeHTML(item.id)}','Review')">Review</button>
+<button class="small-btn delete" onclick="deleteItem('marketplace','${escapeHTML(item.id)}')">Delete</button>
 </div>
 </td>
 </tr>
@@ -2105,9 +2842,9 @@ cms.partners.map(item => `
 <td>${escapeHTML(item.discount)}</td>
 <td>${escapeHTML(item.code)}</td>
 <td>
-<div class="row-actions">
-<button class="small-btn delete" onclick="deleteItem('partners',${item.id})">Delete</button>
-</div>
+<button class="small-btn delete" onclick="deleteItem('partners','${escapeHTML(item.id)}')">
+Delete
+</button>
 </td>
 </tr>
 `).join("");
@@ -2124,9 +2861,9 @@ cms.ads.map(item => `
 <td>${escapeHTML(item.end)}</td>
 <td>
 <div class="row-actions">
-<button class="small-btn publish" onclick="updateItemStatus('ads',${item.id},'Active')">Activate</button>
-<button class="small-btn edit" onclick="updateItemStatus('ads',${item.id},'Paused')">Pause</button>
-<button class="small-btn delete" onclick="deleteItem('ads',${item.id})">Delete</button>
+<button class="small-btn publish" onclick="updateItemStatus('ads','${escapeHTML(item.id)}','Active')">Activate</button>
+<button class="small-btn edit" onclick="updateItemStatus('ads','${escapeHTML(item.id)}','Paused')">Pause</button>
+<button class="small-btn delete" onclick="deleteItem('ads','${escapeHTML(item.id)}')">Delete</button>
 </div>
 </td>
 </tr>
@@ -2144,8 +2881,8 @@ cms.community.map(item => `
 <td>${statusBadge(item.status)}</td>
 <td>
 <div class="row-actions">
-<button class="small-btn publish" onclick="updateItemStatus('community',${item.id},'Published')">Approve</button>
-<button class="small-btn delete" onclick="deleteItem('community',${item.id})">Delete</button>
+<button class="small-btn publish" onclick="updateItemStatus('community','${escapeHTML(item.id)}','Published')">Approve</button>
+<button class="small-btn delete" onclick="deleteItem('community','${escapeHTML(item.id)}')">Delete</button>
 </div>
 </td>
 </tr>
@@ -2153,20 +2890,125 @@ cms.community.map(item => `
 }
 
 function renderPlaces(){
-document.getElementById("placesTable").innerHTML =
-cms.places.map(item => `
+const table = document.getElementById("placesTable");
+
+if(cms.places.length === 0){
+table.innerHTML = `
 <tr>
-<td>${escapeHTML(item.name)}</td>
-<td>${escapeHTML(item.category)}</td>
-<td>${escapeHTML(item.location)}</td>
-<td>${escapeHTML(item.website)}</td>
-<td>
-<div class="row-actions">
-<button class="small-btn delete" onclick="deleteItem('places',${item.id})">Delete</button>
-</div>
+<td colspan="6">
+<div class="empty">No CMS places added yet.</div>
 </td>
 </tr>
-`).join("");
+`;
+
+return;
+}
+
+table.innerHTML = cms.places.map(item => {
+const moderation = getModeration(item.id);
+
+return `
+<tr>
+
+<td>${escapeHTML(item.name)}</td>
+
+<td>${escapeHTML(item.category)}</td>
+
+<td>
+${escapeHTML(item.location || item.address)}
+</td>
+
+<td>
+${statusBadge(
+moderation.moderationStatus ||
+item.status ||
+(item.verified ? "DOGUE Verified" : "Approved")
+)}
+</td>
+
+<td>${moderation.reportCount || 0}</td>
+
+<td>
+
+<div class="row-actions">
+
+<button
+class="small-btn verify"
+onclick="verifyCMSPlace('${escapeHTML(item.id)}')">
+Verify
+</button>
+
+<button
+class="small-btn warning"
+onclick="openPlaceInTrustCenter('${escapeHTML(item.id)}')">
+Trust
+</button>
+
+<button
+class="small-btn delete"
+onclick="deleteCMSPlace('${escapeHTML(item.id)}')">
+Delete
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+}).join("");
+}
+
+function deleteCMSPlace(id){
+if(!confirm("Delete this place from the CMS?")){
+return;
+}
+
+cms.places = cms.places.filter(place =>
+String(place.id) !== String(id)
+);
+
+delete placeModeration[String(id)];
+
+placeReports = placeReports.filter(report =>
+String(report.placeId) !== String(id)
+);
+
+addActivity("Place deleted",id);
+
+saveAll(false);
+renderAll();
+}
+
+function verifyCMSPlace(id){
+const place = cms.places.find(item =>
+String(item.id) === String(id)
+);
+
+if(!place){
+return;
+}
+
+place.verified = true;
+place.status = "DOGUE Verified";
+
+placeModeration[String(id)] = {
+...getModeration(id),
+placeId:String(id),
+placeName:place.name,
+verified:true,
+moderationStatus:"DOGUE Verified",
+adminOverride:true,
+updatedAt:new Date().toISOString()
+};
+
+addActivity(
+"DOGUE Verified",
+place.name
+);
+
+saveAll(false);
+renderAll();
 }
 
 function renderComments(){
@@ -2179,8 +3021,8 @@ cms.comments.map(item => `
 <td>${statusBadge(item.status)}</td>
 <td>
 <div class="row-actions">
-<button class="small-btn publish" onclick="updateItemStatus('comments',${item.id},'Published')">Approve</button>
-<button class="small-btn delete" onclick="deleteItem('comments',${item.id})">Delete</button>
+<button class="small-btn publish" onclick="updateItemStatus('comments','${escapeHTML(item.id)}','Published')">Approve</button>
+<button class="small-btn delete" onclick="deleteItem('comments','${escapeHTML(item.id)}')">Delete</button>
 </div>
 </td>
 </tr>
@@ -2196,9 +3038,9 @@ cms.users.map(item => `
 <td>${escapeHTML(item.status)}</td>
 <td>${escapeHTML(item.joined)}</td>
 <td>
-<div class="row-actions">
-<button class="small-btn delete" onclick="deleteItem('users',${item.id})">Delete</button>
-</div>
+<button class="small-btn delete" onclick="deleteItem('users','${escapeHTML(item.id)}')">
+Delete
+</button>
 </td>
 </tr>
 `).join("");
@@ -2230,17 +3072,21 @@ image:"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&
 
 grid.innerHTML = demoEntries.map(entry => `
 <div class="content-card">
+
 <img src="${entry.image}" alt="${escapeHTML(entry.name)}">
+
 <div class="content-card-body">
-<span class="badge">${escapeHTML(entry.status)}</span>
+
+<span class="badge">
+${escapeHTML(entry.status)}
+</span>
+
 <h4>${escapeHTML(entry.name)}</h4>
+
 <p>${entry.likes} hearts</p>
-<div class="toolbar">
-<button class="small-btn publish">Approve</button>
-<button class="small-btn edit">Finalist</button>
-<button class="small-btn delete">Remove</button>
+
 </div>
-</div>
+
 </div>
 `).join("");
 }
@@ -2251,7 +3097,955 @@ alert("Member entries refreshed in demo mode.");
 }
 
 function selectTopFive(){
-alert("Top 5 selected in demo mode based on current likes.");
+alert("Top 5 selected in demo mode.");
+}
+
+function refreshTrustCenter(){
+loadTrustData();
+renderTrustCenter();
+renderStats();
+}
+
+function recalculateModeration(){
+const reportGroups = {};
+
+placeReports.forEach(report => {
+const placeId = String(report.placeId || "");
+
+if(!placeId){
+return;
+}
+
+if(!reportGroups[placeId]){
+reportGroups[placeId] = [];
+}
+
+reportGroups[placeId].push(report);
+});
+
+Object.entries(reportGroups).forEach(([placeId,reports]) => {
+const existing = placeModeration[placeId] || {};
+
+if(existing.adminOverride === true){
+return;
+}
+
+const place = findPlaceAnywhere(placeId);
+
+const verified =
+existing.verified === true ||
+place?.verified === true ||
+place?.status === "DOGUE Verified";
+
+const reviewThreshold = verified ? 5 : 3;
+const hideThreshold = verified ? 8 : 5;
+const reportCount = reports.length;
+
+let moderationStatus =
+existing.moderationStatus ||
+(verified ? "DOGUE Verified" : "Active");
+
+if(reportCount >= hideThreshold){
+moderationStatus = "Auto Hidden";
+}else if(reportCount >= reviewThreshold){
+moderationStatus = "Under Review";
+}else if(verified){
+moderationStatus = "DOGUE Verified";
+}else{
+moderationStatus = "Active";
+}
+
+placeModeration[placeId] = {
+...existing,
+placeId,
+placeName:
+existing.placeName ||
+place?.name ||
+reports[0]?.placeName ||
+"Reported Place",
+verified,
+reportCount,
+moderationStatus,
+lastReportAt:
+reports
+.map(report => report.createdAt)
+.filter(Boolean)
+.sort()
+.reverse()[0] || "",
+autoHiddenAt:
+moderationStatus === "Auto Hidden"
+? existing.autoHiddenAt || new Date().toISOString()
+: "",
+updatedAt:new Date().toISOString()
+};
+});
+
+Object.keys(placeModeration).forEach(placeId => {
+const reports = reportGroups[placeId] || [];
+
+if(
+reports.length === 0 &&
+placeModeration[placeId].adminOverride !== true
+){
+placeModeration[placeId].reportCount = 0;
+
+if(placeModeration[placeId].verified){
+placeModeration[placeId].moderationStatus =
+"DOGUE Verified";
+}else{
+placeModeration[placeId].moderationStatus =
+"Active";
+}
+}
+});
+
+saveTrustData();
+}
+
+function findPlaceAnywhere(placeId){
+const id = String(placeId);
+
+const cmsPlace = cms.places.find(place =>
+String(place.id) === id
+);
+
+if(cmsPlace){
+return cmsPlace;
+}
+
+const submission = placeSubmissions.find(place =>
+String(place.id) === id
+);
+
+if(submission){
+return submission;
+}
+
+const report = placeReports.find(item =>
+String(item.placeId) === id
+);
+
+if(report){
+return {
+id,
+name:report.placeName,
+source:report.source
+};
+}
+
+return null;
+}
+
+function getModeration(placeId){
+return placeModeration[String(placeId)] || {
+placeId:String(placeId),
+reportCount:0,
+moderationStatus:"Active",
+verified:false,
+adminOverride:false
+};
+}
+
+function calculateTrustScore(placeId){
+const moderation = getModeration(placeId);
+
+let score = 75;
+
+if(moderation.verified){
+score += 20;
+}
+
+score -= Number(moderation.reportCount || 0) * 8;
+
+if(moderation.moderationStatus === "Under Review"){
+score -= 10;
+}
+
+if(
+["Auto Hidden","Removed","Not Pet Friendly"]
+.includes(moderation.moderationStatus)
+){
+score = 0;
+}
+
+return Math.max(
+0,
+Math.min(100,score)
+);
+}
+
+function renderTrustCenter(){
+recalculateModeration();
+
+const pending = placeSubmissions.filter(item =>
+item.status === "Pending Review" ||
+!item.status
+);
+
+const reportGroups = groupReports();
+
+const reportedIds = Object.keys(reportGroups);
+
+const underReview = reportedIds.filter(placeId => {
+const status = getModeration(placeId).moderationStatus;
+
+return status === "Under Review" ||
+status === "Auto Hidden";
+});
+
+const hidden = Object.keys(placeModeration).filter(placeId =>
+placeModeration[placeId].moderationStatus === "Auto Hidden"
+);
+
+const verified = getVerifiedPlaces();
+
+document.getElementById("trustPendingCount").textContent =
+pending.length;
+
+document.getElementById("trustReportsCount").textContent =
+placeReports.length;
+
+document.getElementById("trustReviewCount").textContent =
+underReview.filter(placeId =>
+getModeration(placeId).moderationStatus === "Under Review"
+).length;
+
+document.getElementById("trustHiddenCount").textContent =
+hidden.length;
+
+document.getElementById("trustVerifiedCount").textContent =
+verified.length;
+
+document.getElementById("trustNavCount").textContent =
+pending.length +
+underReview.length;
+
+renderPendingSubmissions(pending);
+renderReportedPlaces(reportGroups);
+renderHiddenPlaces(hidden,reportGroups);
+renderVerifiedPlaces(verified);
+}
+
+function groupReports(){
+const groups = {};
+
+placeReports.forEach(report => {
+const placeId = String(report.placeId || "");
+
+if(!groups[placeId]){
+groups[placeId] = [];
+}
+
+groups[placeId].push(report);
+});
+
+return groups;
+}
+
+function renderPendingSubmissions(pending){
+const table =
+document.getElementById("pendingSubmissionsTable");
+
+if(pending.length === 0){
+table.innerHTML = `
+<tr>
+<td colspan="6">
+<div class="empty">No pending submissions.</div>
+</td>
+</tr>
+`;
+
+return;
+}
+
+table.innerHTML = pending.map(item => `
+<tr>
+
+<td>
+<strong>${escapeHTML(item.name)}</strong>
+<br>
+<small>${escapeHTML(item.website || "")}</small>
+</td>
+
+<td>${escapeHTML(item.category)}</td>
+
+<td>
+${escapeHTML(item.address || item.location)}
+<br>
+<small>
+${escapeHTML(item.latitude)}
+${item.latitude && item.longitude ? " · " : ""}
+${escapeHTML(item.longitude)}
+</small>
+</td>
+
+<td>${escapeHTML(item.petPolicy)}</td>
+
+<td>
+${escapeHTML(item.submittedBy)}
+<br>
+<small>${escapeHTML(item.email)}</small>
+</td>
+
+<td>
+
+<div class="row-actions">
+
+<button
+class="small-btn publish"
+onclick="approveSubmission('${escapeHTML(item.id)}',false)">
+Approve
+</button>
+
+<button
+class="small-btn verify"
+onclick="approveSubmission('${escapeHTML(item.id)}',true)">
+DOGUE Verify
+</button>
+
+<button
+class="small-btn delete"
+onclick="rejectSubmission('${escapeHTML(item.id)}')">
+Reject
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`).join("");
+}
+
+function approveSubmission(id,verified){
+const submission = placeSubmissions.find(item =>
+String(item.id) === String(id)
+);
+
+if(!submission){
+return;
+}
+
+submission.status =
+verified
+? "DOGUE Verified"
+: "Approved";
+
+submission.approvedAt =
+new Date().toISOString();
+
+submission.verified =
+verified;
+
+const exists = cms.places.some(place =>
+String(place.id) === String(submission.id)
+);
+
+if(!exists){
+cms.places.unshift({
+...submission,
+source:"community",
+status:submission.status,
+verified
+});
+}
+
+placeModeration[String(id)] = {
+...getModeration(id),
+placeId:String(id),
+placeName:submission.name,
+verified,
+reportCount:0,
+moderationStatus:
+verified
+? "DOGUE Verified"
+: "Active",
+adminOverride:true,
+updatedAt:new Date().toISOString()
+};
+
+addActivity(
+verified
+? "Place DOGUE Verified"
+: "Place approved",
+submission.name
+);
+
+saveAll(false);
+renderAll();
+}
+
+function rejectSubmission(id){
+if(!confirm("Reject this place submission?")){
+return;
+}
+
+const submission = placeSubmissions.find(item =>
+String(item.id) === String(id)
+);
+
+if(!submission){
+return;
+}
+
+submission.status = "Rejected";
+submission.reviewedAt = new Date().toISOString();
+
+addActivity(
+"Place submission rejected",
+submission.name
+);
+
+saveAll(false);
+renderAll();
+}
+
+function renderReportedPlaces(reportGroups){
+const table =
+document.getElementById("reportedPlacesTable");
+
+const rows = Object.entries(reportGroups)
+.filter(([placeId]) => {
+const status = getModeration(placeId).moderationStatus;
+
+return status !== "Removed";
+})
+.sort((a,b) =>
+b[1].length - a[1].length
+);
+
+if(rows.length === 0){
+table.innerHTML = `
+<tr>
+<td colspan="7">
+<div class="empty">No reported places.</div>
+</td>
+</tr>
+`;
+
+return;
+}
+
+table.innerHTML = rows.map(([placeId,reports]) => {
+const moderation = getModeration(placeId);
+const place = findPlaceAnywhere(placeId);
+
+const reasons = [
+...new Set(
+reports.map(report => report.reason || "Other")
+)
+];
+
+return `
+<tr>
+
+<td>
+<strong>
+${escapeHTML(
+place?.name ||
+moderation.placeName ||
+reports[0]?.placeName
+)}
+</strong>
+</td>
+
+<td>
+${escapeHTML(
+place?.source ||
+reports[0]?.source ||
+"Unknown"
+)}
+</td>
+
+<td>
+<strong>${reports.length}</strong>
+</td>
+
+<td>
+${reasons.map(reason => `
+<span class="report-reason">
+${escapeHTML(reason)}
+</span>
+`).join("")}
+</td>
+
+<td>
+${statusBadge(moderation.moderationStatus)}
+</td>
+
+<td>
+<span class="trust-score">
+${calculateTrustScore(placeId)}/100
+</span>
+</td>
+
+<td>
+
+<div class="row-actions">
+
+<button
+class="small-btn publish"
+onclick="restorePlace('${escapeHTML(placeId)}')">
+Restore
+</button>
+
+<button
+class="small-btn warning"
+onclick="keepPlaceHidden('${escapeHTML(placeId)}')">
+Keep Hidden
+</button>
+
+<button
+class="small-btn delete"
+onclick="markNotPetFriendly('${escapeHTML(placeId)}')">
+Not Pet Friendly
+</button>
+
+<button
+class="small-btn edit"
+onclick="resetPlaceReports('${escapeHTML(placeId)}')">
+Reset Reports
+</button>
+
+<button
+class="small-btn verify"
+onclick="verifyReportedPlace('${escapeHTML(placeId)}')">
+Verify
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+}).join("");
+}
+
+function renderHiddenPlaces(hiddenIds,reportGroups){
+const table =
+document.getElementById("hiddenPlacesTable");
+
+if(hiddenIds.length === 0){
+table.innerHTML = `
+<tr>
+<td colspan="5">
+<div class="empty">No automatically hidden places.</div>
+</td>
+</tr>
+`;
+
+return;
+}
+
+table.innerHTML = hiddenIds.map(placeId => {
+const moderation = getModeration(placeId);
+const place = findPlaceAnywhere(placeId);
+const reports = reportGroups[placeId] || [];
+
+const latestReason =
+reports
+.slice()
+.sort((a,b) =>
+String(b.createdAt).localeCompare(String(a.createdAt))
+)[0]?.reason || "Multiple reports";
+
+return `
+<tr>
+
+<td>
+${escapeHTML(
+place?.name ||
+moderation.placeName ||
+"Hidden Place"
+)}
+</td>
+
+<td>${moderation.reportCount || reports.length}</td>
+
+<td>${formatDateTime(moderation.autoHiddenAt)}</td>
+
+<td>${escapeHTML(latestReason)}</td>
+
+<td>
+
+<div class="row-actions">
+
+<button
+class="small-btn publish"
+onclick="restorePlace('${escapeHTML(placeId)}')">
+Restore
+</button>
+
+<button
+class="small-btn edit"
+onclick="resetPlaceReports('${escapeHTML(placeId)}')">
+Reset Reports
+</button>
+
+<button
+class="small-btn delete"
+onclick="markNotPetFriendly('${escapeHTML(placeId)}')">
+Remove
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+}).join("");
+}
+
+function getVerifiedPlaces(){
+const found = new Map();
+
+cms.places.forEach(place => {
+const moderation = getModeration(place.id);
+
+if(
+place.verified === true ||
+place.status === "DOGUE Verified" ||
+moderation.verified === true
+){
+found.set(String(place.id),place);
+}
+});
+
+placeSubmissions.forEach(place => {
+if(
+place.status === "DOGUE Verified" ||
+place.verified === true
+){
+found.set(String(place.id),place);
+}
+});
+
+return [...found.values()];
+}
+
+function renderVerifiedPlaces(verified){
+const table =
+document.getElementById("verifiedPlacesTable");
+
+if(verified.length === 0){
+table.innerHTML = `
+<tr>
+<td colspan="6">
+<div class="empty">No DOGUE Verified places.</div>
+</td>
+</tr>
+`;
+
+return;
+}
+
+table.innerHTML = verified.map(place => {
+const moderation = getModeration(place.id);
+
+return `
+<tr>
+
+<td>${escapeHTML(place.name)}</td>
+
+<td>${escapeHTML(place.category)}</td>
+
+<td>${escapeHTML(place.location || place.address)}</td>
+
+<td>${moderation.reportCount || 0}</td>
+
+<td>
+<span class="trust-score">
+${calculateTrustScore(place.id)}/100
+</span>
+</td>
+
+<td>
+
+<div class="row-actions">
+
+<button
+class="small-btn edit"
+onclick="removeVerification('${escapeHTML(place.id)}')">
+Remove Verification
+</button>
+
+<button
+class="small-btn warning"
+onclick="openPlaceInTrustCenter('${escapeHTML(place.id)}')">
+View Reports
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+}).join("");
+}
+
+function restorePlace(placeId){
+const place = findPlaceAnywhere(placeId);
+
+placeModeration[String(placeId)] = {
+...getModeration(placeId),
+placeId:String(placeId),
+placeName:
+place?.name ||
+getModeration(placeId).placeName,
+moderationStatus:"Admin Restored",
+adminOverride:true,
+autoHiddenAt:"",
+restoredAt:new Date().toISOString(),
+updatedAt:new Date().toISOString()
+};
+
+updatePlaceStatusAnywhere(
+placeId,
+"Admin Restored",
+false
+);
+
+addActivity(
+"Place restored",
+place?.name || placeId
+);
+
+saveAll(false);
+renderAll();
+}
+
+function keepPlaceHidden(placeId){
+const place = findPlaceAnywhere(placeId);
+
+placeModeration[String(placeId)] = {
+...getModeration(placeId),
+placeId:String(placeId),
+placeName:
+place?.name ||
+getModeration(placeId).placeName,
+moderationStatus:"Auto Hidden",
+adminOverride:true,
+autoHiddenAt:
+getModeration(placeId).autoHiddenAt ||
+new Date().toISOString(),
+updatedAt:new Date().toISOString()
+};
+
+updatePlaceStatusAnywhere(
+placeId,
+"Auto Hidden",
+false
+);
+
+addActivity(
+"Place kept hidden",
+place?.name || placeId
+);
+
+saveAll(false);
+renderAll();
+}
+
+function markNotPetFriendly(placeId){
+if(
+!confirm(
+"Mark this place as Not Pet Friendly and remove it from recommendations?"
+)
+){
+return;
+}
+
+const place = findPlaceAnywhere(placeId);
+
+placeModeration[String(placeId)] = {
+...getModeration(placeId),
+placeId:String(placeId),
+placeName:
+place?.name ||
+getModeration(placeId).placeName,
+moderationStatus:"Removed",
+adminOverride:true,
+removedAt:new Date().toISOString(),
+updatedAt:new Date().toISOString()
+};
+
+updatePlaceStatusAnywhere(
+placeId,
+"Removed",
+false
+);
+
+addActivity(
+"Place marked Not Pet Friendly",
+place?.name || placeId
+);
+
+saveAll(false);
+renderAll();
+}
+
+function resetPlaceReports(placeId){
+if(!confirm("Reset all reports for this place?")){
+return;
+}
+
+placeReports = placeReports.filter(report =>
+String(report.placeId) !== String(placeId)
+);
+
+const place = findPlaceAnywhere(placeId);
+const existing = getModeration(placeId);
+
+placeModeration[String(placeId)] = {
+...existing,
+placeId:String(placeId),
+placeName:
+place?.name ||
+existing.placeName,
+reportCount:0,
+moderationStatus:
+existing.verified
+? "DOGUE Verified"
+: "Admin Restored",
+adminOverride:true,
+autoHiddenAt:"",
+updatedAt:new Date().toISOString()
+};
+
+updatePlaceStatusAnywhere(
+placeId,
+existing.verified
+? "DOGUE Verified"
+: "Admin Restored",
+existing.verified
+);
+
+addActivity(
+"Place reports reset",
+place?.name || placeId
+);
+
+saveAll(false);
+renderAll();
+}
+
+function verifyReportedPlace(placeId){
+const place = findPlaceAnywhere(placeId);
+
+placeModeration[String(placeId)] = {
+...getModeration(placeId),
+placeId:String(placeId),
+placeName:
+place?.name ||
+getModeration(placeId).placeName,
+verified:true,
+moderationStatus:"DOGUE Verified",
+adminOverride:true,
+autoHiddenAt:"",
+verifiedAt:new Date().toISOString(),
+updatedAt:new Date().toISOString()
+};
+
+updatePlaceStatusAnywhere(
+placeId,
+"DOGUE Verified",
+true
+);
+
+addActivity(
+"Reported place DOGUE Verified",
+place?.name || placeId
+);
+
+saveAll(false);
+renderAll();
+}
+
+function removeVerification(placeId){
+const place = findPlaceAnywhere(placeId);
+
+placeModeration[String(placeId)] = {
+...getModeration(placeId),
+placeId:String(placeId),
+placeName:
+place?.name ||
+getModeration(placeId).placeName,
+verified:false,
+moderationStatus:"Active",
+adminOverride:true,
+updatedAt:new Date().toISOString()
+};
+
+updatePlaceStatusAnywhere(
+placeId,
+"Approved",
+false
+);
+
+addActivity(
+"DOGUE verification removed",
+place?.name || placeId
+);
+
+saveAll(false);
+renderAll();
+}
+
+function updatePlaceStatusAnywhere(placeId,status,verified){
+const cmsPlace = cms.places.find(place =>
+String(place.id) === String(placeId)
+);
+
+if(cmsPlace){
+cmsPlace.status = status;
+cmsPlace.verified = verified;
+}
+
+const submission = placeSubmissions.find(place =>
+String(place.id) === String(placeId)
+);
+
+if(submission){
+submission.status = status;
+submission.verified = verified;
+}
+}
+
+function openPlaceInTrustCenter(placeId){
+goToPage("trustCenter");
+
+setTimeout(() => {
+const moderation = getModeration(placeId);
+
+if(moderation.moderationStatus === "Auto Hidden"){
+openTrustTab(
+"hiddenTrust",
+document.querySelectorAll(".trust-tab")[2]
+);
+}else{
+openTrustTab(
+"reportedTrust",
+document.querySelectorAll(".trust-tab")[1]
+);
+}
+},100);
+}
+
+function formatDateTime(value){
+if(!value){
+return "";
+}
+
+const date = new Date(value);
+
+if(Number.isNaN(date.getTime())){
+return value;
+}
+
+return date.toLocaleString();
 }
 
 function saveSettings(){
@@ -2261,15 +4055,22 @@ tagline:getValue("settingTagline"),
 featuredIssue:getValue("settingFeaturedIssue"),
 contact:getValue("settingContact"),
 homepageMessage:getValue("settingHomepageMessage"),
-allowComments:document.getElementById("settingComments").checked,
-allowMarketplace:document.getElementById("settingMarketplace").checked
+allowComments:
+document.getElementById("settingComments").checked,
+allowMarketplace:
+document.getElementById("settingMarketplace").checked
 };
 
-addActivity("Settings updated","Magazine settings were saved.");
+addActivity(
+"Settings updated",
+"Magazine settings were saved."
+);
 
 saveAll(false);
 
-const success = document.getElementById("settingsSuccess");
+const success =
+document.getElementById("settingsSuccess");
+
 success.style.display = "block";
 
 setTimeout(() => {
@@ -2278,22 +4079,65 @@ success.style.display = "none";
 }
 
 function renderSettings(){
-document.getElementById("settingTitle").value = cms.settings.title || "";
-document.getElementById("settingTagline").value = cms.settings.tagline || "";
-document.getElementById("settingFeaturedIssue").value = cms.settings.featuredIssue || "";
-document.getElementById("settingContact").value = cms.settings.contact || "";
-document.getElementById("settingHomepageMessage").value = cms.settings.homepageMessage || "";
-document.getElementById("settingComments").checked = cms.settings.allowComments !== false;
-document.getElementById("settingMarketplace").checked = cms.settings.allowMarketplace !== false;
+document.getElementById("settingTitle").value =
+cms.settings.title || "";
+
+document.getElementById("settingTagline").value =
+cms.settings.tagline || "";
+
+document.getElementById("settingFeaturedIssue").value =
+cms.settings.featuredIssue || "";
+
+document.getElementById("settingContact").value =
+cms.settings.contact || "";
+
+document.getElementById("settingHomepageMessage").value =
+cms.settings.homepageMessage || "";
+
+document.getElementById("settingComments").checked =
+cms.settings.allowComments !== false;
+
+document.getElementById("settingMarketplace").checked =
+cms.settings.allowMarketplace !== false;
 }
 
 function renderStats(){
-document.getElementById("statIssues").textContent = cms.issues.length;
-document.getElementById("statArticles").textContent = cms.articles.length;
-document.getElementById("statPhotos").textContent = cms.photos.length;
-document.getElementById("statContests").textContent = cms.contests.length;
-document.getElementById("statPartners").textContent = cms.partners.length;
-document.getElementById("statUsers").textContent = cms.users.length;
+const pending =
+placeSubmissions.filter(item =>
+item.status === "Pending Review" ||
+!item.status
+).length;
+
+const reportedPlaceCount =
+new Set(
+placeReports.map(report =>
+String(report.placeId)
+)
+).size;
+
+document.getElementById("statIssues").textContent =
+cms.issues.length;
+
+document.getElementById("statArticles").textContent =
+cms.articles.length;
+
+document.getElementById("statPhotos").textContent =
+cms.photos.length;
+
+document.getElementById("statContests").textContent =
+cms.contests.length;
+
+document.getElementById("statPartners").textContent =
+cms.partners.length;
+
+document.getElementById("statUsers").textContent =
+cms.users.length;
+
+document.getElementById("statPendingPlaces").textContent =
+pending;
+
+document.getElementById("statReportedPlaces").textContent =
+reportedPlaceCount;
 }
 
 function renderAll(){
@@ -2313,11 +4157,20 @@ renderComments();
 renderUsers();
 renderGalleryAdmin();
 renderSettings();
+renderTrustCenter();
 }
 
 function exportData(){
+const completeExport = {
+cms,
+placeSubmissions,
+placeReports,
+placeModeration,
+exportedAt:new Date().toISOString()
+};
+
 const blob = new Blob(
-[JSON.stringify(cms,null,2)],
+[JSON.stringify(completeExport,null,2)],
 {type:"application/json"}
 );
 
@@ -2325,20 +4178,41 @@ const url = URL.createObjectURL(blob);
 const link = document.createElement("a");
 
 link.href = url;
-link.download = "pets-dogue-cms-data.json";
+link.download = "pets-dogue-complete-data.json";
 link.click();
 
 URL.revokeObjectURL(url);
 }
 
 function resetCMS(){
-if(!confirm("Delete all demo CMS data stored in this browser?")){
+if(
+!confirm(
+"Delete all CMS and DOGUE Trust data stored in this browser?"
+)
+){
 return;
 }
 
 localStorage.removeItem(CMS_KEY);
+localStorage.removeItem(SUBMISSIONS_KEY);
+localStorage.removeItem(REPORTS_KEY);
+localStorage.removeItem(MODERATION_KEY);
+
 location.reload();
 }
+
+window.addEventListener("storage",event => {
+if(
+[
+CMS_KEY,
+SUBMISSIONS_KEY,
+REPORTS_KEY,
+MODERATION_KEY
+].includes(event.key)
+){
+loadCMS();
+}
+});
 
 checkAdminLogin();
 loadCMS();
