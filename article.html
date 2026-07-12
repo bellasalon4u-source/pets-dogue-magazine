@@ -1,0 +1,2541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="Read and listen to PETS & DOGUE editorial stories.">
+
+<title>Article | PETS & DOGUE</title>
+
+<style>
+:root{
+--black:#070707;
+--white:#ffffff;
+--cream:#f6f2e9;
+--gold:#c89b3c;
+--gold-light:#efd38c;
+--green:#65e51f;
+--pink:#ff65b3;
+--purple:#9e73ff;
+--blue:#69d8ff;
+--grey:#6d6d6d;
+--border:#d8d3c8;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:var(--cream);
+color:#111;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
+}
+
+body.menu-open{
+overflow:hidden;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+select{
+font:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+/* =========================
+   ACCOUNT BAR
+========================= */
+
+.account-bar{
+height:52px;
+background:var(--black);
+color:white;
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+border-bottom:1px solid #333;
+}
+
+.account-side{
+display:flex;
+align-items:center;
+padding:0 18px;
+}
+
+.account-side.right{
+justify-content:flex-end;
+}
+
+.account-link{
+background:white;
+color:#111;
+padding:10px 22px;
+font-size:14px;
+font-weight:bold;
+letter-spacing:.6px;
+}
+
+.account-link.club{
+background:var(--green);
+box-shadow:0 0 18px rgba(101,229,31,.35);
+}
+
+.account-center{
+font-family:Georgia,serif;
+font-size:13px;
+letter-spacing:2px;
+color:#ccc;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header{
+background:var(--black);
+color:white;
+position:sticky;
+top:0;
+z-index:1700;
+border-bottom:1px solid #333;
+}
+
+.header-main{
+height:108px;
+max-width:1550px;
+margin:auto;
+padding:0 18px;
+display:grid;
+grid-template-columns:80px 1fr 80px;
+align-items:center;
+}
+
+.icon-button{
+width:50px;
+height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
+border:none;
+background:transparent;
+color:white;
+font-size:30px;
+border-radius:50%;
+}
+
+.menu-lines{
+width:30px;
+display:grid;
+gap:6px;
+}
+
+.menu-lines span{
+display:block;
+height:2px;
+background:white;
+border-radius:999px;
+}
+
+.brand{
+text-align:center;
+line-height:.88;
+}
+
+.brand-small{
+font-family:Georgia,serif;
+font-size:14px;
+color:var(--gold-light);
+}
+
+.brand-big{
+font-family:Georgia,serif;
+font-size:58px;
+font-weight:normal;
+letter-spacing:4px;
+}
+
+.category-nav{
+display:flex;
+gap:30px;
+overflow-x:auto;
+padding:16px 24px;
+border-top:1px solid #292929;
+scrollbar-width:none;
+}
+
+.category-nav::-webkit-scrollbar{
+display:none;
+}
+
+.category-nav a{
+white-space:nowrap;
+font-size:14px;
+font-weight:bold;
+letter-spacing:.7px;
+}
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+display:none;
+z-index:2500;
+}
+
+.menu-overlay.show{
+display:block;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:min(430px,94%);
+height:100vh;
+background:white;
+z-index:2600;
+overflow-y:auto;
+transition:.35s;
+border-right:2px solid #111;
+}
+
+.side-menu.open{
+left:0;
+}
+
+.side-menu-header{
+background:#111;
+color:white;
+padding:24px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+z-index:3;
+}
+
+.side-menu-header h2{
+font-family:Georgia,serif;
+font-size:32px;
+font-weight:normal;
+}
+
+.side-menu-header button{
+width:43px;
+height:43px;
+border:none;
+background:white;
+border-radius:50%;
+font-size:24px;
+}
+
+.menu-list{
+padding:18px;
+display:grid;
+gap:12px;
+}
+
+.menu-item{
+display:grid;
+grid-template-columns:82px 1fr;
+align-items:center;
+gap:14px;
+border:2px solid #111;
+background:#faf8f3;
+border-radius:21px;
+overflow:hidden;
+}
+
+.menu-item img{
+width:82px;
+height:82px;
+object-fit:cover;
+}
+
+.menu-item h3{
+font-family:Georgia,serif;
+font-size:21px;
+margin-bottom:4px;
+}
+
+.menu-item p{
+font-size:12px;
+line-height:1.45;
+color:#666;
+padding-right:9px;
+}
+
+/* =========================
+   ARTICLE HERO
+========================= */
+
+.article-hero{
+background:#111;
+color:white;
+}
+
+.hero-image{
+height:690px;
+position:relative;
+overflow:hidden;
+}
+
+.hero-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.hero-image:after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,.05) 62%);
+}
+
+.hero-copy{
+position:absolute;
+left:50%;
+bottom:55px;
+transform:translateX(-50%);
+width:min(1200px,90%);
+z-index:2;
+text-align:center;
+}
+
+.article-category{
+display:inline-block;
+background:white;
+color:#111;
+padding:9px 15px;
+font-size:12px;
+font-weight:bold;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+.hero-copy h1{
+font-family:Georgia,serif;
+font-size:74px;
+font-weight:normal;
+line-height:.98;
+max-width:1100px;
+margin:auto;
+}
+
+.hero-copy p{
+max-width:850px;
+margin:22px auto 0;
+font-family:Georgia,serif;
+font-size:23px;
+line-height:1.55;
+color:#eee;
+}
+
+.article-meta{
+display:flex;
+justify-content:center;
+gap:14px;
+flex-wrap:wrap;
+margin-top:24px;
+font-size:13px;
+color:#ccc;
+}
+
+/* =========================
+   ARTICLE LAYOUT
+========================= */
+
+.article-shell{
+max-width:1450px;
+margin:auto;
+padding:55px 20px 90px;
+display:grid;
+grid-template-columns:minmax(0,1fr) 320px;
+gap:55px;
+align-items:start;
+}
+
+.article-main{
+min-width:0;
+}
+
+.article-sidebar{
+position:sticky;
+top:210px;
+}
+
+/* =========================
+   AUDIO PLAYER
+========================= */
+
+.audio-player{
+background:#111;
+color:white;
+padding:25px;
+margin-bottom:38px;
+border:3px solid var(--gold);
+}
+
+.audio-top{
+display:flex;
+justify-content:space-between;
+gap:20px;
+align-items:flex-start;
+margin-bottom:20px;
+}
+
+.audio-title h2{
+font-family:Georgia,serif;
+font-size:30px;
+font-weight:normal;
+color:var(--gold-light);
+margin-bottom:6px;
+}
+
+.audio-title p{
+color:#bbb;
+font-size:14px;
+line-height:1.6;
+}
+
+.audio-progress{
+height:8px;
+background:#444;
+border-radius:999px;
+overflow:hidden;
+margin-bottom:17px;
+}
+
+.audio-progress-bar{
+height:100%;
+width:0;
+background:linear-gradient(90deg,var(--gold),var(--green));
+border-radius:999px;
+transition:.2s;
+}
+
+.audio-controls{
+display:flex;
+align-items:center;
+gap:9px;
+flex-wrap:wrap;
+}
+
+.audio-controls button,
+.audio-controls select{
+border:none;
+border-radius:999px;
+padding:12px 16px;
+font-weight:bold;
+}
+
+.audio-controls button{
+background:var(--gold);
+color:white;
+}
+
+.audio-controls button.primary{
+background:var(--green);
+color:#111;
+}
+
+.audio-controls select{
+background:white;
+color:#111;
+}
+
+.audio-status{
+margin-top:14px;
+font-size:13px;
+color:#bbb;
+}
+
+.speaker-preview{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.speaker-icon{
+width:52px;
+height:52px;
+border-radius:50%;
+background:
+linear-gradient(135deg,var(--pink),var(--purple),var(--blue));
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+}
+
+/* =========================
+   ARTICLE CONTENT
+========================= */
+
+.article-content{
+background:white;
+padding:48px;
+border:1px solid var(--border);
+}
+
+.article-content .lead{
+font-family:Georgia,serif;
+font-size:28px;
+line-height:1.55;
+color:#222;
+margin-bottom:34px;
+}
+
+.article-content h2{
+font-family:Georgia,serif;
+font-size:43px;
+font-weight:normal;
+line-height:1.08;
+margin:48px 0 18px;
+}
+
+.article-content h3{
+font-family:Georgia,serif;
+font-size:31px;
+font-weight:normal;
+margin:38px 0 15px;
+}
+
+.article-content p{
+font-family:Georgia,serif;
+font-size:21px;
+line-height:1.85;
+margin-bottom:25px;
+color:#282828;
+}
+
+.article-content blockquote{
+border-left:5px solid var(--gold);
+padding:12px 0 12px 28px;
+margin:42px 0;
+font-family:Georgia,serif;
+font-size:34px;
+line-height:1.35;
+font-style:italic;
+}
+
+.article-content figure{
+margin:45px -48px;
+}
+
+.article-content figure img{
+width:100%;
+max-height:800px;
+object-fit:cover;
+display:block;
+}
+
+.article-content figcaption{
+padding:12px 48px 0;
+font-size:12px;
+color:#777;
+line-height:1.5;
+}
+
+.article-content ul{
+margin:20px 0 30px 28px;
+}
+
+.article-content li{
+font-family:Georgia,serif;
+font-size:20px;
+line-height:1.75;
+margin-bottom:10px;
+}
+
+.reading-paragraph{
+transition:.25s;
+border-radius:10px;
+}
+
+.reading-paragraph.active-reading{
+background:#fff6c8;
+box-shadow:0 0 0 8px #fff6c8;
+}
+
+/* =========================
+   ARTICLE TOOLS
+========================= */
+
+.article-tools{
+display:flex;
+justify-content:space-between;
+gap:15px;
+flex-wrap:wrap;
+border-top:1px solid #ddd;
+padding-top:28px;
+margin-top:42px;
+}
+
+.tool-group{
+display:flex;
+gap:9px;
+flex-wrap:wrap;
+}
+
+.tool-button{
+border:2px solid #111;
+background:white;
+padding:12px 17px;
+border-radius:999px;
+font-weight:bold;
+}
+
+.tool-button.saved{
+background:var(--green);
+border-color:var(--green);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar-card{
+background:#111;
+color:white;
+padding:24px;
+margin-bottom:22px;
+}
+
+.sidebar-card h3{
+font-family:Georgia,serif;
+font-size:29px;
+font-weight:normal;
+color:var(--gold-light);
+margin-bottom:17px;
+}
+
+.sidebar-card p{
+font-size:14px;
+line-height:1.65;
+color:#ccc;
+}
+
+.author-card{
+background:white;
+border:2px solid #111;
+padding:24px;
+margin-bottom:22px;
+text-align:center;
+}
+
+.author-avatar{
+width:105px;
+height:105px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid var(--gold);
+margin-bottom:15px;
+}
+
+.author-card h3{
+font-family:Georgia,serif;
+font-size:27px;
+font-weight:normal;
+margin-bottom:6px;
+}
+
+.author-card p{
+font-size:14px;
+line-height:1.65;
+color:#666;
+}
+
+.related-mini{
+display:grid;
+gap:16px;
+}
+
+.related-mini a{
+display:grid;
+grid-template-columns:90px 1fr;
+gap:12px;
+align-items:center;
+}
+
+.related-mini img{
+width:90px;
+height:82px;
+object-fit:cover;
+}
+
+.related-mini span{
+font-size:11px;
+font-weight:bold;
+color:var(--gold-light);
+letter-spacing:1px;
+}
+
+.related-mini h4{
+font-family:Georgia,serif;
+font-size:18px;
+font-weight:normal;
+line-height:1.2;
+margin-top:4px;
+}
+
+/* =========================
+   VISUAL GALLERY
+========================= */
+
+.visual-section{
+max-width:1450px;
+margin:auto;
+padding:0 20px 80px;
+}
+
+.section-heading{
+display:flex;
+justify-content:space-between;
+align-items:end;
+gap:20px;
+border-bottom:4px solid #111;
+padding-bottom:14px;
+margin-bottom:26px;
+}
+
+.section-heading h2{
+font-family:Georgia,serif;
+font-size:48px;
+font-weight:normal;
+}
+
+.section-heading a{
+font-size:13px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.visual-grid{
+display:grid;
+grid-template-columns:1.3fr .7fr .7fr;
+grid-template-rows:330px 330px;
+gap:5px;
+background:#111;
+border:5px solid #111;
+}
+
+.visual-card{
+position:relative;
+overflow:hidden;
+color:white;
+}
+
+.visual-card.large{
+grid-row:1 / 3;
+}
+
+.visual-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.6s;
+}
+
+.visual-card:hover img{
+transform:scale(1.05);
+}
+
+.visual-card:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.72),transparent 60%);
+}
+
+.visual-copy{
+position:absolute;
+left:19px;
+right:19px;
+bottom:18px;
+z-index:2;
+}
+
+.visual-copy span{
+display:inline-block;
+background:#111;
+padding:6px 9px;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.visual-copy h3{
+font-family:Georgia,serif;
+font-size:27px;
+font-weight:normal;
+margin-top:8px;
+}
+
+.visual-card.large .visual-copy h3{
+font-size:43px;
+}
+
+/* =========================
+   MORE STORIES
+========================= */
+
+.more-stories{
+background:#111;
+color:white;
+padding:75px 20px;
+}
+
+.more-inner{
+max-width:1450px;
+margin:auto;
+}
+
+.more-inner>h2{
+font-family:Georgia,serif;
+font-size:52px;
+font-weight:normal;
+color:var(--gold-light);
+margin-bottom:30px;
+}
+
+.more-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.more-card{
+background:white;
+color:#111;
+}
+
+.more-card img{
+width:100%;
+height:290px;
+object-fit:cover;
+display:block;
+}
+
+.more-card-content{
+padding:22px;
+}
+
+.more-card-content span{
+font-size:11px;
+font-weight:bold;
+letter-spacing:1px;
+color:#8a651d;
+}
+
+.more-card-content h3{
+font-family:Georgia,serif;
+font-size:29px;
+font-weight:normal;
+line-height:1.12;
+margin:8px 0 11px;
+}
+
+.more-card-content p{
+font-size:14px;
+line-height:1.65;
+color:#666;
+}
+
+/* =========================
+   NEWSLETTER
+========================= */
+
+.newsletter{
+max-width:1450px;
+margin:70px auto;
+padding:0 20px;
+}
+
+.newsletter-inner{
+background:white;
+border:3px solid #111;
+padding:44px 25px;
+text-align:center;
+}
+
+.newsletter-inner h2{
+font-family:Georgia,serif;
+font-size:44px;
+font-weight:normal;
+margin-bottom:10px;
+}
+
+.newsletter-inner p{
+color:#666;
+line-height:1.7;
+margin-bottom:22px;
+}
+
+.newsletter-form{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.newsletter-form input{
+width:min(420px,100%);
+padding:15px 18px;
+border:1px solid #aaa;
+border-radius:999px;
+}
+
+.newsletter-form button{
+border:none;
+background:#111;
+color:white;
+padding:15px 24px;
+border-radius:999px;
+font-weight:bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+background:#050505;
+color:white;
+text-align:center;
+padding:60px 20px;
+}
+
+.footer-brand{
+font-family:Georgia,serif;
+font-size:51px;
+letter-spacing:3px;
+}
+
+.footer-subtitle{
+color:#aaa;
+margin:10px 0 28px;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+gap:17px;
+flex-wrap:wrap;
+margin-bottom:28px;
+}
+
+.footer-links a{
+font-size:13px;
+color:#ccc;
+}
+
+.admin-link{
+font-size:10px;
+letter-spacing:2px;
+color:#666;
+text-transform:uppercase;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1050px){
+.hero-image{
+height:600px;
+}
+
+.hero-copy h1{
+font-size:61px;
+}
+
+.article-shell{
+grid-template-columns:1fr;
+}
+
+.article-sidebar{
+position:static;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.visual-grid{
+grid-template-columns:1fr 1fr;
+grid-template-rows:430px 280px 280px;
+}
+
+.visual-card.large{
+grid-column:1 / 3;
+grid-row:auto;
+}
+
+.more-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.more-card:last-child{
+grid-column:1 / 3;
+}
+}
+
+@media(max-width:760px){
+.account-bar{
+grid-template-columns:1fr 1fr;
+height:48px;
+}
+
+.account-center{
+display:none;
+}
+
+.account-side{
+padding:0 10px;
+}
+
+.account-link{
+padding:9px 15px;
+font-size:12px;
+}
+
+.header-main{
+height:87px;
+grid-template-columns:55px 1fr 55px;
+padding:0 8px;
+}
+
+.brand-big{
+font-size:39px;
+letter-spacing:2px;
+}
+
+.brand-small{
+font-size:11px;
+}
+
+.category-nav{
+padding:14px 15px;
+gap:22px;
+}
+
+.hero-image{
+height:610px;
+}
+
+.hero-copy{
+bottom:35px;
+}
+
+.hero-copy h1{
+font-size:47px;
+}
+
+.hero-copy p{
+font-size:19px;
+}
+
+.article-shell{
+padding:32px 10px 60px;
+}
+
+.audio-top{
+flex-direction:column;
+}
+
+.article-content{
+padding:27px 20px;
+}
+
+.article-content .lead{
+font-size:24px;
+}
+
+.article-content h2{
+font-size:35px;
+}
+
+.article-content h3{
+font-size:28px;
+}
+
+.article-content p{
+font-size:19px;
+line-height:1.75;
+}
+
+.article-content blockquote{
+font-size:28px;
+padding-left:20px;
+}
+
+.article-content figure{
+margin:35px -20px;
+}
+
+.article-content figcaption{
+padding:11px 20px 0;
+}
+
+.article-sidebar{
+grid-template-columns:1fr;
+}
+
+.visual-section{
+padding:0 10px 55px;
+}
+
+.section-heading h2{
+font-size:38px;
+}
+
+.visual-grid{
+grid-template-columns:1fr 1fr;
+grid-template-rows:420px 240px 240px;
+gap:3px;
+border-width:3px;
+}
+
+.visual-card.large{
+grid-column:1 / 3;
+}
+
+.visual-copy h3{
+font-size:22px;
+}
+
+.visual-card.large .visual-copy h3{
+font-size:36px;
+}
+
+.more-stories{
+padding:55px 10px;
+}
+
+.more-inner>h2{
+font-size:41px;
+}
+
+.more-grid{
+grid-template-columns:1fr;
+}
+
+.more-card:last-child{
+grid-column:auto;
+}
+
+.newsletter{
+padding:0 10px;
+margin:50px auto;
+}
+
+.newsletter-inner h2{
+font-size:36px;
+}
+}
+
+@media(max-width:430px){
+.brand-big{
+font-size:34px;
+}
+
+.hero-image{
+height:650px;
+}
+
+.hero-copy h1{
+font-size:42px;
+}
+
+.article-meta{
+font-size:12px;
+}
+
+.audio-controls{
+align-items:stretch;
+}
+
+.audio-controls button,
+.audio-controls select{
+flex:1;
+}
+
+.article-content p{
+font-size:18px;
+}
+
+.visual-grid{
+grid-template-rows:410px 215px 215px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ACCOUNT BAR -->
+
+<div class="account-bar">
+
+<div class="account-side">
+<a href="account.html" class="account-link">
+SIGN IN
+</a>
+</div>
+
+<div class="account-center">
+THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
+</div>
+
+<div class="account-side right">
+<a href="club.html" class="account-link club">
+JOIN CLUB
+</a>
+</div>
+
+</div>
+
+<!-- SIDE MENU -->
+
+<div
+class="menu-overlay"
+id="menuOverlay"
+onclick="closeMenu()">
+</div>
+
+<aside class="side-menu" id="sideMenu">
+
+<div class="side-menu-header">
+<h2>Contents</h2>
+
+<button onclick="closeMenu()">
+×
+</button>
+</div>
+
+<div class="menu-list">
+
+<a href="index.html" class="menu-item">
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Home">
+
+<div>
+<h3>Home</h3>
+<p>Return to the PETS & DOGUE homepage.</p>
+</div>
+</a>
+
+<a href="articles.html" class="menu-item">
+<img
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=400&q=80"
+alt="Articles">
+
+<div>
+<h3>Articles</h3>
+<p>Stories, interviews and useful editorial guides.</p>
+</div>
+</a>
+
+<a href="photos.html" class="menu-item">
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=400&q=80"
+alt="Photos">
+
+<div>
+<h3>Photos</h3>
+<p>Portraits, galleries and visual stories.</p>
+</div>
+</a>
+
+<a href="members-gallery.html" class="menu-item">
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=400&q=80"
+alt="Cover star">
+
+<div>
+<h3>Cover Star</h3>
+<p>Enter your pet into the next cover competition.</p>
+</div>
+</a>
+
+<a href="pet-travel.html" class="menu-item">
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80"
+alt="Travel">
+
+<div>
+<h3>Travel</h3>
+<p>Destinations, hotels and pet-friendly journeys.</p>
+</div>
+</a>
+
+<a href="pet-friendly-places.html" class="menu-item">
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=400&q=80"
+alt="Places">
+
+<div>
+<h3>Pet Friendly Places</h3>
+<p>Search useful venues, directions and local services.</p>
+</div>
+</a>
+
+<a href="pets-in-need.html" class="menu-item">
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=400&q=80"
+alt="Rescue">
+
+<div>
+<h3>Pets In Need</h3>
+<p>Rescue, adoption and stories that need visibility.</p>
+</div>
+</a>
+
+</div>
+
+</aside>
+
+<!-- HEADER -->
+
+<header class="site-header">
+
+<div class="header-main">
+
+<button
+class="icon-button"
+onclick="openMenu()"
+aria-label="Open menu">
+
+<span class="menu-lines">
+<span></span>
+<span></span>
+<span></span>
+</span>
+
+</button>
+
+<a href="index.html" class="brand">
+
+<div class="brand-small">
+pets &
+</div>
+
+<div class="brand-big">
+DOGUE
+</div>
+
+</a>
+
+<a
+href="articles.html"
+class="icon-button"
+aria-label="Search articles">
+⌕
+</a>
+
+</div>
+
+<nav class="category-nav">
+
+<a href="issue-01.html">MAGAZINE</a>
+<a href="articles.html">ARTICLES</a>
+<a href="photos.html">PHOTOS</a>
+<a href="members-gallery.html">COVER STARS</a>
+<a href="pet-fashion.html">FASHION</a>
+<a href="wellness.html">WELLNESS</a>
+<a href="pet-travel.html">TRAVEL</a>
+<a href="pet-friendly-places.html">PLACES</a>
+<a href="pets-in-need.html">RESCUE</a>
+<a href="contests.html">CONTESTS</a>
+
+</nav>
+
+</header>
+
+<!-- ARTICLE HERO -->
+
+<section class="article-hero">
+
+<div class="hero-image">
+
+<img
+id="articleHeroImage"
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1800&q=85"
+alt="Pet editorial portrait">
+
+<div class="hero-copy">
+
+<span
+class="article-category"
+id="articleCategory">
+COVER STAR
+</span>
+
+<h1 id="articleTitle">
+How To Prepare Your Pet for a Professional Magazine Photoshoot
+</h1>
+
+<p id="articleSubtitle">
+Comfort, grooming, lighting and the simple details that transform a beautiful pet portrait into an editorial image.
+</p>
+
+<div class="article-meta">
+
+<span id="articleAuthor">
+By PETS & DOGUE Editors
+</span>
+
+<span>•</span>
+
+<span id="articleDate">
+12 July 2026
+</span>
+
+<span>•</span>
+
+<span id="readingTime">
+7 min read
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ARTICLE -->
+
+<main class="article-shell">
+
+<div class="article-main">
+
+<section class="audio-player">
+
+<div class="audio-top">
+
+<div class="audio-title">
+
+<h2>Listen To This Article</h2>
+
+<p>
+Choose a female or male speaker, change the speed and listen while reading.
+</p>
+
+</div>
+
+<div class="speaker-preview">
+
+<div class="speaker-icon" id="speakerIcon">
+👩
+</div>
+
+<div>
+<strong id="speakerName">Female Speaker</strong>
+<br>
+<small id="speakerLanguage">English narration</small>
+</div>
+
+</div>
+
+</div>
+
+<div class="audio-progress">
+<div
+class="audio-progress-bar"
+id="audioProgressBar">
+</div>
+</div>
+
+<div class="audio-controls">
+
+<select
+id="voiceGender"
+onchange="updateSpeakerPreview()">
+
+<option value="female">
+Female Speaker
+</option>
+
+<option value="male">
+Male Speaker
+</option>
+
+</select>
+
+<select id="voiceSpeed">
+
+<option value="0.75">
+0.75×
+</option>
+
+<option value="0.9">
+0.9×
+</option>
+
+<option value="1" selected>
+1×
+</option>
+
+<option value="1.15">
+1.15×
+</option>
+
+<option value="1.3">
+1.3×
+</option>
+
+<option value="1.5">
+1.5×
+</option>
+
+</select>
+
+<button
+class="primary"
+id="playButton"
+onclick="startNarration()">
+▶ Play
+</button>
+
+<button onclick="pauseNarration()">
+⏸ Pause
+</button>
+
+<button onclick="resumeNarration()">
+▷ Resume
+</button>
+
+<button onclick="stopNarration()">
+■ Stop
+</button>
+
+<button onclick="restartNarration()">
+↺ Start Again
+</button>
+
+</div>
+
+<div
+class="audio-status"
+id="audioStatus">
+Ready to play.
+</div>
+
+</section>
+
+<article
+class="article-content"
+id="articleContent">
+
+<p class="lead reading-paragraph">
+A successful animal photoshoot does not begin when the camera is switched on. It begins with trust, preparation and an environment where the pet feels calm, safe and curious.
+</p>
+
+<p class="reading-paragraph">
+The best editorial photographs reveal personality. A perfectly brushed coat may look beautiful, but the image becomes memorable when the animal’s expression, movement and character feel genuine.
+</p>
+
+<h2>Comfort Comes Before Styling</h2>
+
+<p class="reading-paragraph">
+Before choosing accessories, locations or lighting, think about the pet’s normal routine. A tired, hungry or overstimulated animal will rarely enjoy being photographed. Schedule the session at a time when your pet is usually relaxed and alert.
+</p>
+
+<p class="reading-paragraph">
+Bring familiar items: a favourite blanket, a small toy, water and appropriate treats. These objects are not always visible in the final photograph, but they help create a sense of safety.
+</p>
+
+<blockquote>
+The most luxurious image is still built on something simple: an animal that feels secure.
+</blockquote>
+
+<figure>
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1600&q=85"
+alt="Dogs walking outdoors">
+
+<figcaption>
+Natural movement often creates more expressive photographs than a perfectly fixed pose.
+</figcaption>
+
+</figure>
+
+<h2>Prepare the Coat, Eyes and Small Details</h2>
+
+<p class="reading-paragraph">
+A grooming appointment can be useful, but it should not happen immediately before the photoshoot if grooming makes the pet nervous. Leave enough time for the coat to settle naturally and for the animal to return to a familiar routine.
+</p>
+
+<p class="reading-paragraph">
+Check the eyes, paws and area around the mouth before the session begins. Small details become very visible in a high-resolution editorial image.
+</p>
+
+<h3>A simple preparation list</h3>
+
+<ul>
+<li class="reading-paragraph">Brush the coat gently and remove visible tangles.</li>
+<li class="reading-paragraph">Clean around the eyes using a pet-safe method.</li>
+<li class="reading-paragraph">Check the collar, lead and accessories for damage.</li>
+<li class="reading-paragraph">Bring water and rewards suitable for the animal.</li>
+<li class="reading-paragraph">Avoid unfamiliar products immediately before the session.</li>
+</ul>
+
+<figure>
+
+<img
+src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=1600&q=85"
+alt="Cat portrait">
+
+<figcaption>
+Close portraits depend on clean details, soft light and a calm expression.
+</figcaption>
+
+</figure>
+
+<h2>Choose Styling That Supports the Animal</h2>
+
+<p class="reading-paragraph">
+Pet fashion should never restrict movement, breathing or normal body language. Lightweight accessories usually photograph better than large pieces that distract from the animal’s face.
+</p>
+
+<p class="reading-paragraph">
+Think about colour contrast. A pale coat may stand out beautifully against rich black, emerald or burgundy. Darker coats can look striking beside cream, pale blue, gold or soft pink.
+</p>
+
+<h2>Use Light to Create Mood</h2>
+
+<p class="reading-paragraph">
+Soft window light is one of the easiest ways to create a luxury portrait. Position the pet near the light, but avoid forcing them to look directly toward a bright window.
+</p>
+
+<p class="reading-paragraph">
+Outdoor sessions work well during the early morning or shortly before sunset. Midday sunlight can create hard shadows around the eyes and make the animal uncomfortable.
+</p>
+
+<blockquote>
+Good lighting should reveal texture, expression and colour without making the pet feel trapped beneath equipment.
+</blockquote>
+
+<figure>
+
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1600&q=85"
+alt="Dog portrait outdoors">
+
+<figcaption>
+Soft natural light helps retain detail in the coat and creates a calmer atmosphere.
+</figcaption>
+
+</figure>
+
+<h2>Let Personality Lead the Session</h2>
+
+<p class="reading-paragraph">
+Not every pet needs to sit still. Some of the strongest photographs come from walking, stretching, looking toward a sound or interacting naturally with their owner.
+</p>
+
+<p class="reading-paragraph">
+An experienced photographer watches for those brief moments when the animal forgets the camera. That is often when the real portrait appears.
+</p>
+
+<h2>The Final Result</h2>
+
+<p class="reading-paragraph">
+A professional pet editorial should feel beautiful without losing honesty. The styling, background and lighting create the visual world, but the animal remains the centre of the story.
+</p>
+
+<p class="reading-paragraph">
+Prepare carefully, remain patient and allow enough time. The photograph that looks effortless is usually the result of thoughtful planning and respect for the pet.
+</p>
+
+<div class="article-tools">
+
+<div class="tool-group">
+
+<button
+class="tool-button"
+id="saveArticleButton"
+onclick="toggleSaveArticle()">
+♡ Save Article
+</button>
+
+<button
+class="tool-button"
+onclick="copyArticleLink()">
+🔗 Copy Link
+</button>
+
+<button
+class="tool-button"
+onclick="shareArticle()">
+↗ Share
+</button>
+
+</div>
+
+<div class="tool-group">
+
+<a
+href="articles.html"
+class="tool-button">
+All Articles
+</a>
+
+<a
+href="members-gallery.html"
+class="tool-button">
+Enter Cover Star
+</a>
+
+</div>
+
+</div>
+
+</article>
+
+</div>
+
+<aside class="article-sidebar">
+
+<div class="author-card">
+
+<img
+class="author-avatar"
+src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80"
+alt="Editorial author">
+
+<h3>PETS & DOGUE Editors</h3>
+
+<p>
+The editorial team covers animal fashion, photography, travel, wellness, community and responsible luxury pet life.
+</p>
+
+</div>
+
+<div class="sidebar-card">
+
+<h3>Article Details</h3>
+
+<p>
+<strong>Category:</strong> Cover Star
+</p>
+
+<br>
+
+<p>
+<strong>Reading time:</strong> 7 minutes
+</p>
+
+<br>
+
+<p>
+<strong>Audio:</strong> Female and male browser voices
+</p>
+
+<br>
+
+<p>
+<strong>Issue:</strong> PETS & DOGUE Issue 01
+</p>
+
+</div>
+
+<div class="sidebar-card">
+
+<h3>Related Stories</h3>
+
+<div class="related-mini">
+
+<a href="pet-fashion.html">
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
+alt="Pet fashion">
+
+<div>
+<span>FASHION</span>
+<h4>Luxury Looks for Modern Pets</h4>
+</div>
+
+</a>
+
+<a href="pet-travel.html">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
+alt="Pet travel">
+
+<div>
+<span>TRAVEL</span>
+<h4>Beautiful Escapes With Your Pet</h4>
+</div>
+
+</a>
+
+<a href="pet-friendly-places.html">
+
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
+alt="Pet friendly café">
+
+<div>
+<span>PLACES</span>
+<h4>Find Pet-Friendly Places Near You</h4>
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+</main>
+
+<!-- VISUAL STORY -->
+
+<section class="visual-section">
+
+<div class="section-heading">
+
+<h2>More From This Story</h2>
+
+<a href="photos.html">
+OPEN GALLERY →
+</a>
+
+</div>
+
+<div class="visual-grid">
+
+<a href="photos.html" class="visual-card large">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=85"
+alt="Dog portrait">
+
+<div class="visual-copy">
+<span>PORTRAIT</span>
+<h3>The Face of a Future Cover Star</h3>
+</div>
+
+</a>
+
+<a href="wellness.html" class="visual-card">
+
+<img
+src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=85"
+alt="Grooming">
+
+<div class="visual-copy">
+<span>GROOMING</span>
+<h3>Preparation Rituals</h3>
+</div>
+
+</a>
+
+<a href="pet-fashion.html" class="visual-card">
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=800&q=85"
+alt="Fashion dog">
+
+<div class="visual-copy">
+<span>STYLE</span>
+<h3>Editorial Accessories</h3>
+</div>
+
+</a>
+
+<a href="members-gallery.html" class="visual-card">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Miso cover star">
+
+<div class="visual-copy">
+<span>COVER STAR</span>
+<h3>Enter the Next Issue</h3>
+</div>
+
+</a>
+
+<a href="pet-travel.html" class="visual-card">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=85"
+alt="Travel">
+
+<div class="visual-copy">
+<span>LOCATION</span>
+<h3>Choosing a Beautiful Setting</h3>
+</div>
+
+</a>
+
+</div>
+
+</section>
+
+<!-- MORE STORIES -->
+
+<section class="more-stories">
+
+<div class="more-inner">
+
+<h2>Continue Reading</h2>
+
+<div class="more-grid">
+
+<a href="pet-travel.html" class="more-card">
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=85"
+alt="Pet friendly hotel">
+
+<div class="more-card-content">
+
+<span>TRAVEL</span>
+
+<h3>The Rise of Luxury Pet-Friendly Hotels</h3>
+
+<p>
+How modern hotels are redesigning the guest experience for animals and their people.
+</p>
+
+</div>
+
+</a>
+
+<a href="pets-in-need.html" class="more-card">
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1000&q=85"
+alt="Rescue animal">
+
+<div class="more-card-content">
+
+<span>RESCUE</span>
+
+<h3>Why Visibility Can Change an Animal’s Life</h3>
+
+<p>
+Editorial stories can help rescue groups connect animals with support and future homes.
+</p>
+
+</div>
+
+</a>
+
+<a href="pet-friendly-places.html" class="more-card">
+
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1000&q=85"
+alt="Pet friendly café">
+
+<div class="more-card-content">
+
+<span>USEFUL GUIDE</span>
+
+<h3>How DOGUE Trust Checks Pet-Friendly Places</h3>
+
+<p>
+Community reports, verification and moderation help keep recommendations accurate.
+</p>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- NEWSLETTER -->
+
+<section class="newsletter">
+
+<div class="newsletter-inner">
+
+<h2>Receive New PETS & DOGUE Stories</h2>
+
+<p>
+Get new issues, cover-star news, visual editorials and useful animal lifestyle guides.
+</p>
+
+<div class="newsletter-form">
+
+<input
+id="newsletterEmail"
+type="email"
+placeholder="Your email address">
+
+<button onclick="subscribeNewsletter()">
+SUBSCRIBE
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-brand">
+PETS & DOGUE
+</div>
+
+<p class="footer-subtitle">
+The International Luxury Animal Magazine
+</p>
+
+<div class="footer-links">
+
+<a href="index.html">Home</a>
+<a href="issue-01.html">Latest Issue</a>
+<a href="articles.html">Articles</a>
+<a href="photos.html">Photos</a>
+<a href="members-gallery.html">Cover Stars</a>
+<a href="pet-friendly-places.html">Places</a>
+<a href="club.html">Club</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+
+</div>
+
+<a href="admin.html" class="admin-link">
+Admin
+</a>
+
+</footer>
+
+<script>
+const SAVED_ARTICLES_KEY =
+"pets_dogue_saved_articles";
+
+const ARTICLE_ID =
+"professional-pet-photoshoot";
+
+let narration = {
+paragraphs:[],
+currentIndex:0,
+currentUtterance:null,
+active:false,
+paused:false
+};
+
+function openMenu(){
+document
+.getElementById("sideMenu")
+.classList.add("open");
+
+document
+.getElementById("menuOverlay")
+.classList.add("show");
+
+document.body.classList.add("menu-open");
+}
+
+function closeMenu(){
+document
+.getElementById("sideMenu")
+.classList.remove("open");
+
+document
+.getElementById("menuOverlay")
+.classList.remove("show");
+
+document.body.classList.remove("menu-open");
+}
+
+function getNarrationParagraphs(){
+return [
+...document.querySelectorAll(
+".reading-paragraph"
+)
+];
+}
+
+function getAvailableVoices(){
+if(!window.speechSynthesis){
+return [];
+}
+
+return window.speechSynthesis.getVoices();
+}
+
+function chooseVoice(gender){
+const voices = getAvailableVoices();
+
+const englishVoices =
+voices.filter(voice =>
+voice.lang &&
+voice.lang.toLowerCase().startsWith("en")
+);
+
+const femaleNames = [
+"samantha",
+"victoria",
+"karen",
+"moira",
+"tessa",
+"serena",
+"susan",
+"zira",
+"aria",
+"jenny",
+"sonia",
+"libby",
+"ava",
+"emma"
+];
+
+const maleNames = [
+"daniel",
+"alex",
+"fred",
+"george",
+"arthur",
+"david",
+"mark",
+"guy",
+"ryan",
+"liam",
+"oliver",
+"thomas"
+];
+
+const names =
+gender === "male"
+? maleNames
+: femaleNames;
+
+return (
+englishVoices.find(voice =>
+names.some(name =>
+voice.name.toLowerCase().includes(name)
+)
+) ||
+englishVoices[0] ||
+voices[0] ||
+null
+);
+}
+
+function updateSpeakerPreview(){
+const gender =
+document.getElementById("voiceGender").value;
+
+document.getElementById("speakerIcon").textContent =
+gender === "male"
+? "👨"
+: "👩";
+
+document.getElementById("speakerName").textContent =
+gender === "male"
+? "Male Speaker"
+: "Female Speaker";
+}
+
+function startNarration(){
+if(!window.speechSynthesis){
+alert("Voice narration is not supported by this browser.");
+return;
+}
+
+stopNarration(false);
+
+narration.paragraphs =
+getNarrationParagraphs();
+
+narration.currentIndex = 0;
+narration.active = true;
+narration.paused = false;
+
+document.getElementById("audioStatus").textContent =
+"Starting article narration…";
+
+document.getElementById("playButton").textContent =
+"■ Playing";
+
+speakCurrentParagraph();
+}
+
+function speakCurrentParagraph(){
+if(
+!narration.active ||
+narration.currentIndex >= narration.paragraphs.length
+){
+finishNarration();
+return;
+}
+
+clearReadingHighlight();
+
+const paragraph =
+narration.paragraphs[narration.currentIndex];
+
+paragraph.classList.add("active-reading");
+
+paragraph.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+const utterance =
+new SpeechSynthesisUtterance(
+paragraph.textContent.trim()
+);
+
+const gender =
+document.getElementById("voiceGender").value;
+
+const speed =
+Number(
+document.getElementById("voiceSpeed").value
+);
+
+const voice =
+chooseVoice(gender);
+
+if(voice){
+utterance.voice = voice;
+}
+
+utterance.rate = speed;
+utterance.pitch =
+gender === "female"
+? 1.04
+: .92;
+
+utterance.volume = 1;
+
+utterance.onstart = () => {
+document.getElementById("audioStatus").textContent =
+`Reading section ${narration.currentIndex + 1} of ${narration.paragraphs.length}`;
+};
+
+utterance.onend = () => {
+if(!narration.active){
+return;
+}
+
+narration.currentIndex += 1;
+updateAudioProgress();
+speakCurrentParagraph();
+};
+
+utterance.onerror = () => {
+finishNarration();
+};
+
+narration.currentUtterance =
+utterance;
+
+window.speechSynthesis.speak(utterance);
+
+updateAudioProgress();
+}
+
+function pauseNarration(){
+if(
+!window.speechSynthesis ||
+!narration.active
+){
+return;
+}
+
+window.speechSynthesis.pause();
+
+narration.paused = true;
+
+document.getElementById("audioStatus").textContent =
+"Narration paused.";
+}
+
+function resumeNarration(){
+if(
+!window.speechSynthesis ||
+!narration.active
+){
+return;
+}
+
+window.speechSynthesis.resume();
+
+narration.paused = false;
+
+document.getElementById("audioStatus").textContent =
+"Continuing narration…";
+}
+
+function restartNarration(){
+startNarration();
+}
+
+function stopNarration(resetProgress = true){
+if(window.speechSynthesis){
+window.speechSynthesis.cancel();
+}
+
+narration.active = false;
+narration.paused = false;
+narration.currentUtterance = null;
+narration.currentIndex = 0;
+
+clearReadingHighlight();
+
+document.getElementById("playButton").textContent =
+"▶ Play";
+
+document.getElementById("audioStatus").textContent =
+"Ready to play.";
+
+if(resetProgress){
+document.getElementById("audioProgressBar").style.width =
+"0%";
+}
+}
+
+function finishNarration(){
+narration.active = false;
+narration.paused = false;
+
+clearReadingHighlight();
+
+document.getElementById("playButton").textContent =
+"▶ Play";
+
+document.getElementById("audioStatus").textContent =
+"Article narration complete.";
+
+document.getElementById("audioProgressBar").style.width =
+"100%";
+}
+
+function clearReadingHighlight(){
+document
+.querySelectorAll(".reading-paragraph")
+.forEach(paragraph => {
+paragraph.classList.remove("active-reading");
+});
+}
+
+function updateAudioProgress(){
+const total =
+narration.paragraphs.length || 1;
+
+const progress =
+Math.min(
+100,
+(narration.currentIndex / total) * 100
+);
+
+document.getElementById("audioProgressBar").style.width =
+`${progress}%`;
+}
+
+function getSavedArticles(){
+try{
+const saved =
+JSON.parse(
+localStorage.getItem(SAVED_ARTICLES_KEY) || "[]"
+);
+
+return Array.isArray(saved)
+? saved
+: [];
+
+}catch(error){
+return [];
+}
+}
+
+function toggleSaveArticle(){
+let savedArticles =
+getSavedArticles();
+
+const exists =
+savedArticles.some(article =>
+article.id === ARTICLE_ID
+);
+
+if(exists){
+savedArticles =
+savedArticles.filter(article =>
+article.id !== ARTICLE_ID
+);
+}else{
+savedArticles.push({
+id:ARTICLE_ID,
+title:document.getElementById("articleTitle").textContent.trim(),
+url:window.location.pathname || "article.html",
+savedAt:new Date().toISOString()
+});
+}
+
+localStorage.setItem(
+SAVED_ARTICLES_KEY,
+JSON.stringify(savedArticles)
+);
+
+renderSavedArticleButton();
+}
+
+function renderSavedArticleButton(){
+const saved =
+getSavedArticles()
+.some(article =>
+article.id === ARTICLE_ID
+);
+
+const button =
+document.getElementById("saveArticleButton");
+
+button.classList.toggle("saved",saved);
+
+button.textContent =
+saved
+? "♥ Saved"
+: "♡ Save Article";
+}
+
+async function copyArticleLink(){
+try{
+await navigator.clipboard.writeText(
+window.location.href
+);
+
+alert("Article link copied.");
+}catch(error){
+alert("Unable to copy the link on this device.");
+}
+}
+
+async function shareArticle(){
+const shareData = {
+title:document.getElementById("articleTitle").textContent.trim(),
+text:document.getElementById("articleSubtitle").textContent.trim(),
+url:window.location.href
+};
+
+if(navigator.share){
+try{
+await navigator.share(shareData);
+}catch(error){
+return;
+}
+}else{
+copyArticleLink();
+}
+}
+
+function subscribeNewsletter(){
+const email =
+document.getElementById("newsletterEmail")
+.value
+.trim();
+
+if(
+!email ||
+!email.includes("@")
+){
+alert("Please enter a valid email address.");
+return;
+}
+
+let subscribers = [];
+
+try{
+subscribers =
+JSON.parse(
+localStorage.getItem("pets_dogue_newsletter") || "[]"
+);
+
+if(!Array.isArray(subscribers)){
+subscribers = [];
+}
+}catch(error){
+subscribers = [];
+}
+
+if(!subscribers.includes(email)){
+subscribers.push(email);
+}
+
+localStorage.setItem(
+"pets_dogue_newsletter",
+JSON.stringify(subscribers)
+);
+
+document.getElementById("newsletterEmail").value = "";
+
+alert("Welcome to the PETS & DOGUE community.");
+}
+
+document.addEventListener("keydown",event => {
+if(event.key === "Escape"){
+closeMenu();
+stopNarration();
+}
+});
+
+window.addEventListener("beforeunload",() => {
+if(window.speechSynthesis){
+window.speechSynthesis.cancel();
+}
+});
+
+if(window.speechSynthesis){
+window.speechSynthesis.onvoiceschanged = () => {
+getAvailableVoices();
+};
+}
+
+updateSpeakerPreview();
+renderSavedArticleButton();
+</script>
+
+</body>
+</html>
