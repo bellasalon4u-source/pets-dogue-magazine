@@ -1,16 +1,12 @@
 (function () {
 "use strict";
 
-/* PETS & DOGUE — GLOBAL MULTILINGUAL SYSTEM */
+const LANGUAGE_KEY = "pets_dogue_language";
+const CACHE_KEY = "pets_dogue_translation_cache_v7";
+const SOURCE_LANGUAGE = "en";
+const API_ENDPOINT = "/api/translate";
 
-const PD_LANGUAGE_KEY = "pets_dogue_language";
-const PD_CACHE_KEY = "pets_dogue_translation_cache_v6";
-const PD_SOURCE_LANGUAGE = "en";
-const PD_API_ENDPOINT = "/api/translate";
-const PD_BATCH_SIZE = 40;
-const PD_BATCH_CHAR_LIMIT = 18000;
-
-const PD_LANGUAGES = [
+const LANGUAGES = [
   { code:"en", label:"English", short:"EN", flag:"🇬🇧", direction:"ltr", speech:"en-GB" },
   { code:"ru", label:"Русский", short:"RU", flag:"🇷🇺", direction:"ltr", speech:"ru-RU" },
   { code:"uk", label:"Українська", short:"UA", flag:"🇺🇦", direction:"ltr", speech:"uk-UA" },
@@ -23,7 +19,7 @@ const PD_LANGUAGES = [
   { code:"hi", label:"हिन्दी", short:"HI", flag:"🇮🇳", direction:"ltr", speech:"hi-IN" }
 ];
 
-const PD_UI = {
+const UI = {
   en:{ choose:"Choose Your Language", intro:"Choose a language for PETS & DOGUE. It will remain active across every page.", close:"Close language menu", translating:"Translating…", error:"Translation is temporarily unavailable." },
   ru:{ choose:"Выберите язык", intro:"Выберите язык PETS & DOGUE. Он останется активным на всех страницах.", close:"Закрыть выбор языка", translating:"Переводим…", error:"Перевод временно недоступен." },
   uk:{ choose:"Оберіть мову", intro:"Оберіть мову PETS & DOGUE. Вона залишатиметься активною на всіх сторінках.", close:"Закрити вибір мови", translating:"Перекладаємо…", error:"Переклад тимчасово недоступний." },
@@ -36,37 +32,37 @@ const PD_UI = {
   hi:{ choose:"अपनी भाषा चुनें", intro:"PETS & DOGUE के लिए भाषा चुनें। यह सभी पृष्ठों पर सक्रिय रहेगी।", close:"भाषा मेनू बंद करें", translating:"अनुवाद हो रहा है…", error:"अनुवाद अस्थायी रूप से उपलब्ध नहीं है।" }
 };
 
-const PD_EXCLUDED_TAGS = new Set([
+const EXCLUDED_TAGS = new Set([
   "SCRIPT","STYLE","NOSCRIPT","CODE","PRE","SVG","PATH","IFRAME","CANVAS","VIDEO","AUDIO"
 ]);
 
-const PD_TRANSLATABLE_ATTRIBUTES = ["placeholder","title","aria-label","alt"];
-const PD_PROTECTED_EXACT = new Set([
+const ATTRIBUTES = ["placeholder","title","aria-label","alt"];
+const PROTECTED_TEXT = new Set([
   "PETS & DOGUE","PETS &amp; DOGUE","DOGUE","pets &","Miso","DOGUE Trust","DOGUE Verified"
 ]);
 
-let selectedLanguage = readStoredLanguage() || detectBrowserLanguage();
+let selectedLanguage = readStoredLanguage() || SOURCE_LANGUAGE;
 let cache = readCache();
 let observer = null;
-let mutationTimer = null;
-let translationRunning = false;
-let requestVersion = 0;
+let timer = null;
+let running = false;
+let requestId = 0;
 
 const originalTextNodes = new WeakMap();
 const originalAttributes = new WeakMap();
 
 function getLanguage(code) {
-  return PD_LANGUAGES.find(item => item.code === code) || PD_LANGUAGES[0];
+  return LANGUAGES.find(item => item.code === code) || LANGUAGES[0];
 }
 
 function getUI() {
-  return PD_UI[selectedLanguage] || PD_UI.en;
+  return UI[selectedLanguage] || UI.en;
 }
 
 function readStoredLanguage() {
   try {
-    const value = localStorage.getItem(PD_LANGUAGE_KEY);
-    return PD_LANGUAGES.some(item => item.code === value) ? value : "";
+    const value = localStorage.getItem(LANGUAGE_KEY);
+    return LANGUAGES.some(item => item.code === value) ? value : "";
   } catch (error) {
     return "";
   }
@@ -74,16 +70,10 @@ function readStoredLanguage() {
 
 function storeLanguage(code) {
   try {
-    localStorage.setItem(PD_LANGUAGE_KEY, code);
+    localStorage.setItem(LANGUAGE_KEY, code);
   } catch (error) {
-    console.warn("PETS & DOGUE: unable to save language.", error);
+    console.warn("Unable to save language.", error);
   }
-}
-
-function detectBrowserLanguage() {
-  const value = String(navigator.language || navigator.userLanguage || "en").toLowerCase();
-  const found = PD_LANGUAGES.find(item => value === item.code || value.startsWith(item.code + "-"));
-  return found ? found.code : "en";
 }
 
 function normalizeText(value) {
@@ -101,41 +91,14 @@ function hasLetters(value) {
 function shouldTranslate(value) {
   const text = normalizeText(value);
   if (!text || text.length < 2 || !hasLetters(text)) return false;
-  if (PD_PROTECTED_EXACT.has(text)) return false;
+  if (PROTECTED_TEXT.has(text)) return false;
   if (/^(https?:\/\/|mailto:|tel:|javascript:)/i.test(text)) return false;
   return true;
 }
 
-function removeCookie(name, domain) {
-  let cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax`;
-  if (domain) cookie += `;domain=${domain}`;
-  document.cookie = cookie;
-}
-
-function removeOldGoogleTranslate() {
-  const host = window.location.hostname;
-  removeCookie("googtrans", "");
-  if (host && host !== "localhost" && host !== "127.0.0.1") {
-    removeCookie("googtrans", host);
-    removeCookie("googtrans", "." + host);
-  }
-
-  try {
-    localStorage.removeItem("googtrans");
-    sessionStorage.removeItem("googtrans");
-  } catch (error) {}
-
-  document.querySelectorAll(
-    "#google_translate_element,.goog-te-banner-frame,iframe.goog-te-banner-frame,.goog-te-balloon-frame,.goog-te-menu-frame,body>.skiptranslate"
-  ).forEach(element => element.remove());
-
-  document.documentElement.style.setProperty("top", "0", "important");
-  if (document.body) document.body.style.setProperty("top", "0", "important");
-}
-
 function readCache() {
   try {
-    const parsed = JSON.parse(localStorage.getItem(PD_CACHE_KEY) || "{}");
+    const parsed = JSON.parse(localStorage.getItem(CACHE_KEY) || "{}");
     return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
   } catch (error) {
     return {};
@@ -144,15 +107,9 @@ function readCache() {
 
 function saveCache() {
   try {
-    for (const languageCode of Object.keys(cache)) {
-      const entries = Object.entries(cache[languageCode] || {});
-      if (entries.length > 2000) {
-        cache[languageCode] = Object.fromEntries(entries.slice(-1500));
-      }
-    }
-    localStorage.setItem(PD_CACHE_KEY, JSON.stringify(cache));
+    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
   } catch (error) {
-    console.warn("PETS & DOGUE: unable to save translation cache.", error);
+    console.warn("Unable to save translation cache.", error);
   }
 }
 
@@ -179,9 +136,7 @@ function applyDocumentLanguage() {
   const language = getLanguage(selectedLanguage);
   document.documentElement.lang = language.code;
   document.documentElement.dir = language.direction;
-  if (document.body) {
-    document.body.classList.toggle("pd-rtl", language.direction === "rtl");
-  }
+  document.body?.classList.toggle("pd-rtl", language.direction === "rtl");
 }
 
 function protectElement(element) {
@@ -192,21 +147,21 @@ function protectElement(element) {
 }
 
 function protectBrandElements(root = document) {
-  if (!root || !root.querySelectorAll) return;
+  if (!root?.querySelectorAll) return;
 
   root.querySelectorAll(
     ".brand,.brand-small,.brand-big,.logo-small,.logo-big,.footer-brand,[data-pd-brand],.notranslate,[translate='no'],[data-pd-no-translate]"
   ).forEach(protectElement);
 
   root.querySelectorAll("*").forEach(element => {
-    if (element.children.length !== 0) return;
-    if (PD_PROTECTED_EXACT.has(normalizeText(element.textContent))) protectElement(element);
+    if (element.children.length === 0 && PROTECTED_TEXT.has(normalizeText(element.textContent))) {
+      protectElement(element);
+    }
   });
 }
 
 function isProtectedElement(element) {
-  if (!element) return true;
-  if (PD_EXCLUDED_TAGS.has(element.tagName)) return true;
+  if (!element || EXCLUDED_TAGS.has(element.tagName)) return true;
   return Boolean(element.closest(
     "script,style,noscript,code,pre,svg,iframe,canvas,#pd-language-button,#pd-language-overlay,#pd-translation-status,.notranslate,[translate='no'],[data-pd-no-translate],[data-pd-brand]"
   ));
@@ -300,7 +255,7 @@ function collectItems(root = document.body) {
   elements.forEach(element => {
     if (isProtectedElement(element)) return;
 
-    PD_TRANSLATABLE_ATTRIBUTES.forEach(name => {
+    ATTRIBUTES.forEach(name => {
       if (!element.hasAttribute(name)) return;
       rememberAttribute(element, name);
       const original = originalAttributes.get(element)?.[name] || "";
@@ -308,17 +263,6 @@ function collectItems(root = document.body) {
         items.push({ type:"attribute", element, name, original, requestText:normalizeText(original) });
       }
     });
-
-    if (
-      element.tagName === "INPUT" &&
-      ["button","submit","reset"].includes(String(element.type || "").toLowerCase())
-    ) {
-      rememberAttribute(element, "value");
-      const original = originalAttributes.get(element)?.value || "";
-      if (shouldTranslate(original)) {
-        items.push({ type:"attribute", element, name:"value", original, requestText:normalizeText(original) });
-      }
-    }
   });
 
   rememberMetadata();
@@ -328,35 +272,23 @@ function collectItems(root = document.body) {
     items.push({ type:"title", original:originalTitle, requestText:normalizeText(originalTitle) });
   }
 
-  document.querySelectorAll(
-    'meta[name="description"],meta[property="og:title"],meta[property="og:description"],meta[name="twitter:title"],meta[name="twitter:description"]'
-  ).forEach(meta => {
-    const original = meta.dataset.pdOriginalContent || "";
-    if (shouldTranslate(original)) {
-      items.push({ type:"meta", element:meta, original, requestText:normalizeText(original) });
-    }
-  });
-
   return items;
 }
 
 function createBatches(texts) {
   const batches = [];
   let current = [];
-  let chars = 0;
+  let characters = 0;
 
   texts.forEach(text => {
-    if (
-      current.length >= PD_BATCH_SIZE ||
-      (current.length > 0 && chars + text.length > PD_BATCH_CHAR_LIMIT)
-    ) {
+    if (current.length >= 40 || (current.length > 0 && characters + text.length > 18000)) {
       batches.push(current);
       current = [];
-      chars = 0;
+      characters = 0;
     }
 
     current.push(text);
-    chars += text.length;
+    characters += text.length;
   });
 
   if (current.length) batches.push(current);
@@ -364,11 +296,11 @@ function createBatches(texts) {
 }
 
 async function requestBatch(texts, targetLanguage) {
-  const response = await fetch(PD_API_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      sourceLanguage: PD_SOURCE_LANGUAGE,
+  const response = await fetch(API_ENDPOINT, {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({
+      sourceLanguage:SOURCE_LANGUAGE,
       targetLanguage,
       texts
     })
@@ -433,8 +365,6 @@ function applyItem(item, translated) {
     item.element.setAttribute(item.name, translated);
   } else if (item.type === "title") {
     document.title = translated;
-  } else if (item.type === "meta") {
-    item.element.setAttribute("content", translated);
   }
 }
 
@@ -444,57 +374,26 @@ function createStyles() {
   const style = document.createElement("style");
   style.id = "pd-language-styles";
   style.textContent = `
-#pd-language-button{
-position:fixed;right:16px;bottom:16px;z-index:2147483000;
-display:flex;align-items:center;justify-content:center;gap:9px;
-min-width:102px;height:54px;padding:0 17px;border:3px solid #111;
-border-radius:999px;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;
-font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 14px 38px rgba(0,0,0,.28)
-}
-#pd-language-overlay{
-position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;
-justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)
-}
+#pd-language-button{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;justify-content:center;gap:9px;min-width:102px;height:54px;padding:0 17px;border:3px solid #111;border-radius:999px;background:#fff;color:#111;font:900 15px Arial,sans-serif;cursor:pointer;box-shadow:0 14px 38px rgba(0,0,0,.28)}
+#pd-language-overlay{position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}
 #pd-language-overlay.pd-open{display:flex}
-#pd-language-modal{
-width:min(680px,100%);max-height:88vh;overflow-y:auto;background:#f8f7f3;
-border:3px solid #111;border-radius:34px;box-shadow:0 30px 90px rgba(0,0,0,.44)
-}
-.pd-language-header{
-position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;
-gap:20px;padding:24px;background:#111;color:#fff
-}
-.pd-language-header h2{margin:0;font-family:Georgia,serif;font-size:32px;font-weight:normal}
+#pd-language-modal{width:min(680px,100%);max-height:88vh;overflow-y:auto;background:#f8f7f3;border:3px solid #111;border-radius:34px;box-shadow:0 30px 90px rgba(0,0,0,.44)}
+.pd-language-header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px;background:#111;color:#fff}
+.pd-language-header h2{margin:0;font:normal 32px Georgia,serif}
 .pd-language-close{width:44px;height:44px;border:none;border-radius:50%;background:#fff;font-size:25px}
 .pd-language-intro{padding:23px 24px 7px;color:#555;font-size:15px;line-height:1.65}
 #pd-language-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;padding:18px 24px 26px}
-.pd-language-option{
-display:flex;align-items:center;gap:13px;min-height:72px;padding:14px 16px;
-border:2px solid #111;border-radius:20px;background:#fff;color:#111;text-align:left;cursor:pointer
-}
+.pd-language-option{display:flex;align-items:center;gap:13px;min-height:72px;padding:14px 16px;border:2px solid #111;border-radius:20px;background:#fff;color:#111;text-align:left;cursor:pointer}
 .pd-language-option.pd-active{background:#65e51f}
-.pd-language-flag{font-size:28px}
-.pd-language-name{display:block;font-size:16px;font-weight:900}
-.pd-language-code{display:block;margin-top:3px;font-size:11px;color:#666;letter-spacing:1px}
-#pd-translation-status{
-position:fixed;left:50%;bottom:24px;z-index:2147482999;display:flex;align-items:center;gap:10px;
-padding:12px 18px;border:2px solid #111;border-radius:999px;background:#111;color:#fff;
-font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;opacity:0;visibility:hidden;
-transform:translate(-50%,15px);transition:.2s
-}
+.pd-language-flag{font-size:28px}.pd-language-name{display:block;font-size:16px;font-weight:900}.pd-language-code{display:block;margin-top:3px;font-size:11px;color:#666;letter-spacing:1px}
+#pd-translation-status{position:fixed;left:50%;bottom:24px;z-index:2147482999;display:flex;align-items:center;gap:10px;padding:12px 18px;border:2px solid #111;border-radius:999px;background:#111;color:#fff;font:700 13px Arial,sans-serif;opacity:0;visibility:hidden;transform:translate(-50%,15px);transition:.2s}
 #pd-translation-status.pd-visible{opacity:1;visibility:visible;transform:translate(-50%,0)}
 .pd-status-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.35);border-top-color:#65e51f;border-radius:50%;animation:pdSpin .8s linear infinite}
 @keyframes pdSpin{to{transform:rotate(360deg)}}
 body.pd-rtl #pd-language-button{right:auto;left:16px}
 body.pd-rtl .pd-language-option,body.pd-rtl input,body.pd-rtl textarea,body.pd-rtl select{text-align:right;direction:rtl}
-@media(max-width:600px){
-#pd-language-button{right:12px;bottom:12px;height:52px}
-body.pd-rtl #pd-language-button{right:auto;left:12px}
-#pd-language-grid{grid-template-columns:1fr;padding:15px}
-.pd-language-header{padding:19px}
-.pd-language-header h2{font-size:26px}
-#pd-translation-status{bottom:76px;max-width:calc(100% - 28px)}
-}`;
+@media(max-width:600px){#pd-language-button{right:12px;bottom:12px;height:52px}body.pd-rtl #pd-language-button{right:auto;left:12px}#pd-language-grid{grid-template-columns:1fr;padding:15px}.pd-language-header{padding:19px}.pd-language-header h2{font-size:26px}#pd-translation-status{bottom:76px;max-width:calc(100% - 28px)}}
+`;
   document.head.appendChild(style);
 }
 
@@ -504,39 +403,26 @@ function createInterface() {
   const button = document.createElement("button");
   button.id = "pd-language-button";
   button.type = "button";
-  button.className = "notranslate";
-  button.setAttribute("translate", "no");
-  button.setAttribute("data-pd-no-translate", "true");
-  button.innerHTML = `
-    <span class="pd-language-globe">🌐</span>
-    <span id="pd-language-current"></span>
-  `;
+  protectElement(button);
+  button.innerHTML = `<span class="pd-language-globe">🌐</span><span id="pd-language-current"></span>`;
 
   const overlay = document.createElement("div");
   overlay.id = "pd-language-overlay";
-  overlay.className = "notranslate";
-  overlay.setAttribute("translate", "no");
-  overlay.setAttribute("data-pd-no-translate", "true");
+  protectElement(overlay);
   overlay.innerHTML = `
-    <div id="pd-language-modal" role="dialog" aria-modal="true" aria-labelledby="pd-language-title">
-      <div class="pd-language-header">
-        <h2 id="pd-language-title"></h2>
-        <button type="button" class="pd-language-close">×</button>
-      </div>
-      <p class="pd-language-intro"></p>
-      <div id="pd-language-grid"></div>
-    </div>
-  `;
+<div id="pd-language-modal" role="dialog" aria-modal="true" aria-labelledby="pd-language-title">
+  <div class="pd-language-header">
+    <h2 id="pd-language-title"></h2>
+    <button type="button" class="pd-language-close">×</button>
+  </div>
+  <p class="pd-language-intro"></p>
+  <div id="pd-language-grid"></div>
+</div>`;
 
   const status = document.createElement("div");
   status.id = "pd-translation-status";
-  status.className = "notranslate";
-  status.setAttribute("translate", "no");
-  status.setAttribute("data-pd-no-translate", "true");
-  status.innerHTML = `
-    <span class="pd-status-spinner"></span>
-    <span class="pd-status-text"></span>
-  `;
+  protectElement(status);
+  status.innerHTML = `<span class="pd-status-spinner"></span><span class="pd-status-text"></span>`;
 
   document.body.appendChild(button);
   document.body.appendChild(overlay);
@@ -544,18 +430,14 @@ function createInterface() {
 
   const grid = overlay.querySelector("#pd-language-grid");
 
-  PD_LANGUAGES.forEach(language => {
+  LANGUAGES.forEach(language => {
     const option = document.createElement("button");
     option.type = "button";
     option.className = "pd-language-option";
     option.dataset.language = language.code;
     option.innerHTML = `
-      <span class="pd-language-flag">${language.flag}</span>
-      <span>
-        <span class="pd-language-name">${language.label}</span>
-        <span class="pd-language-code">${language.short}</span>
-      </span>
-    `;
+<span class="pd-language-flag">${language.flag}</span>
+<span><span class="pd-language-name">${language.label}</span><span class="pd-language-code">${language.short}</span></span>`;
     option.addEventListener("click", () => changeLanguage(language.code));
     grid.appendChild(option);
   });
@@ -564,10 +446,6 @@ function createInterface() {
   overlay.querySelector(".pd-language-close").addEventListener("click", closeLanguageMenu);
   overlay.addEventListener("click", event => {
     if (event.target === overlay) closeLanguageMenu();
-  });
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeLanguageMenu();
   });
 
   updateInterface();
@@ -608,18 +486,18 @@ function hideStatus() {
 
 function openLanguageMenu() {
   document.getElementById("pd-language-overlay")?.classList.add("pd-open");
-  if (document.body) document.body.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
 }
 
 function closeLanguageMenu() {
   document.getElementById("pd-language-overlay")?.classList.remove("pd-open");
-  if (document.body) document.body.style.overflow = "";
+  document.body.style.overflow = "";
 }
 
 async function translatePage(root = document.body) {
-  if (!root || translationRunning) return;
+  if (!root || running) return;
 
-  const version = ++requestVersion;
+  const currentRequest = ++requestId;
   const language = getLanguage(selectedLanguage);
 
   applyDocumentLanguage();
@@ -627,15 +505,15 @@ async function translatePage(root = document.body) {
   protectBrandElements(root);
   rememberMetadata();
 
-  if (language.code === PD_SOURCE_LANGUAGE) {
-    translationRunning = true;
+  if (language.code === SOURCE_LANGUAGE) {
+    running = true;
     restoreOriginalContent(root);
-    translationRunning = false;
+    running = false;
     hideStatus();
     return;
   }
 
-  translationRunning = true;
+  running = true;
   showStatus(getUI().translating);
 
   try {
@@ -647,7 +525,7 @@ async function translatePage(root = document.body) {
       language.code
     );
 
-    if (version !== requestVersion || language.code !== selectedLanguage) return;
+    if (currentRequest !== requestId || language.code !== selectedLanguage) return;
 
     items.forEach(item => {
       const translated = translations.get(item.requestText);
@@ -659,7 +537,7 @@ async function translatePage(root = document.body) {
     setTimeout(hideStatus, 4500);
     return;
   } finally {
-    translationRunning = false;
+    running = false;
   }
 
   setTimeout(hideStatus, 250);
@@ -668,10 +546,10 @@ async function translatePage(root = document.body) {
 async function changeLanguage(code) {
   const language = getLanguage(code);
 
-  requestVersion++;
-  translationRunning = true;
+  requestId++;
+  running = true;
   restoreOriginalContent(document.body);
-  translationRunning = false;
+  running = false;
 
   selectedLanguage = language.code;
   storeLanguage(selectedLanguage);
@@ -686,7 +564,7 @@ function observeContent() {
   if (observer || !document.body) return;
 
   observer = new MutationObserver(mutations => {
-    if (translationRunning) return;
+    if (running) return;
 
     let added = false;
 
@@ -701,9 +579,9 @@ function observeContent() {
       });
     });
 
-    if (added && selectedLanguage !== PD_SOURCE_LANGUAGE) {
-      clearTimeout(mutationTimer);
-      mutationTimer = setTimeout(() => translatePage(document.body), 350);
+    if (added && selectedLanguage !== SOURCE_LANGUAGE) {
+      clearTimeout(timer);
+      timer = setTimeout(() => translatePage(document.body), 350);
     }
   });
 
@@ -712,13 +590,12 @@ function observeContent() {
 
 function restoreAfterNavigation() {
   const stored = readStoredLanguage();
-  if (stored) selectedLanguage = stored;
+  selectedLanguage = stored || SOURCE_LANGUAGE;
 
-  removeOldGoogleTranslate();
   applyDocumentLanguage();
   updateInterface();
 
-  if (selectedLanguage === PD_SOURCE_LANGUAGE) {
+  if (selectedLanguage === SOURCE_LANGUAGE) {
     restoreOriginalContent(document.body);
   } else {
     setTimeout(() => translatePage(document.body), 100);
@@ -726,9 +603,7 @@ function restoreAfterNavigation() {
 }
 
 async function initialize() {
-  selectedLanguage = readStoredLanguage() || selectedLanguage;
-
-  removeOldGoogleTranslate();
+  selectedLanguage = readStoredLanguage() || SOURCE_LANGUAGE;
   createStyles();
   createInterface();
   protectBrandElements();
@@ -736,23 +611,15 @@ async function initialize() {
   applyDocumentLanguage();
   updateInterface();
   observeContent();
-
   await translatePage(document.body);
 }
 
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeLanguageMenu();
+});
+
 window.addEventListener("pageshow", restoreAfterNavigation);
 window.addEventListener("popstate", () => setTimeout(restoreAfterNavigation, 100));
-
-window.addEventListener("storage", event => {
-  if (
-    event.key === PD_LANGUAGE_KEY &&
-    event.newValue &&
-    event.newValue !== selectedLanguage
-  ) {
-    selectedLanguage = event.newValue;
-    restoreAfterNavigation();
-  }
-});
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initialize);
@@ -761,7 +628,7 @@ if (document.readyState === "loading") {
 }
 
 window.PetsDogueLanguage = {
-  languages: PD_LANGUAGES,
+  languages: LANGUAGES,
   getCurrentLanguage: () => getLanguage(selectedLanguage),
   getSpeechLanguage: () => getLanguage(selectedLanguage).speech,
   changeLanguage,
@@ -769,14 +636,7 @@ window.PetsDogueLanguage = {
   translatePage,
   restore: restoreAfterNavigation,
   open: openLanguageMenu,
-  close: closeLanguageMenu,
-  protect: protectElement,
-  clearCache() {
-    cache = {};
-    try {
-      localStorage.removeItem(PD_CACHE_KEY);
-    } catch (error) {}
-  }
+  close: closeLanguageMenu
 };
 
 })();
