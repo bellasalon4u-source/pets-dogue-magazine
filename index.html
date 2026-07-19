@@ -1299,44 +1299,43 @@ gap:16px;
 .language-switcher{
 display:flex;
 align-items:center;
-gap:6px;
 }
 
-.language-option{
-border:1px solid #555;
+.language-select{
 background:#161616;
 color:white;
-min-width:38px;
-height:32px;
-padding:0 9px;
+border:1px solid #555;
 border-radius:999px;
+height:34px;
+padding:0 34px 0 13px;
 font-size:11px;
 font-weight:bold;
-letter-spacing:.8px;
-transition:.2s;
+letter-spacing:.5px;
+outline:none;
+cursor:pointer;
+max-width:190px;
 }
 
-.language-option:hover,
-.language-option.active{
-background:var(--gold);
+.language-select:hover,
+.language-select:focus{
 border-color:var(--gold);
-color:white;
 }
 
 @media(max-width:760px){
 .account-center{
 justify-content:center;
+gap:6px;
 }
 
 .language-switcher{
-gap:4px;
+max-width:132px;
 }
 
-.language-option{
-min-width:34px;
+.language-select{
+width:132px;
 height:30px;
-padding:0 7px;
 font-size:10px;
+padding-left:10px;
 }
 }
 
@@ -1651,7 +1650,33 @@ grid-auto-rows:175px;
 <body>
 <div class="account-bar">
 <div class="account-side"><a class="account-link" data-i18n="common.account.signIn" href="account.html">SIGN IN</a></div>
-<div class="account-center"><div class="account-edition" data-i18n="common.account.edition">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div><div aria-label="Language selector" class="language-switcher"><button aria-pressed="false" class="language-option" data-language-option="en" type="button">EN</button><button aria-pressed="false" class="language-option" data-language-option="ru" type="button">RU</button><button aria-pressed="false" class="language-option" data-language-option="uk" type="button">UA</button></div></div>
+<div class="account-center"><div class="account-edition" data-i18n="common.account.edition">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div><div aria-label="Language selector" class="language-switcher">
+<select id="languageSelect" class="language-select" aria-label="Choose language">
+<option value="en">EN — English</option>
+<option value="uk">UA — Українська</option>
+<option value="ru">RU — Русский</option>
+<option value="fr">FR — Français</option>
+<option value="de">DE — Deutsch</option>
+<option value="es">ES — Español</option>
+<option value="it">IT — Italiano</option>
+<option value="pt">PT — Português</option>
+<option value="nl">NL — Nederlands</option>
+<option value="pl">PL — Polski</option>
+<option value="cs">CZ — Čeština</option>
+<option value="sk">SK — Slovenčina</option>
+<option value="hu">HU — Magyar</option>
+<option value="ro">RO — Română</option>
+<option value="bg">BG — Български</option>
+<option value="el">GR — Ελληνικά</option>
+<option value="sv">SE — Svenska</option>
+<option value="da">DK — Dansk</option>
+<option value="no">NO — Norsk</option>
+<option value="fi">FI — Suomi</option>
+<option value="tr">TR — Türkçe</option>
+<option value="ar">AR — العربية</option>
+<option value="hi">HI — हिन्दी</option>
+</select>
+</div></div>
 <div class="account-side right"><a class="account-link club" data-i18n="common.account.joinClub" href="club.html">JOIN CLUB</a></div>
 </div>
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
