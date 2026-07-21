@@ -1,835 +1,97 @@
-(function () {
+(function(){
 "use strict";
-
-const LANGUAGE_KEY = "pets_dogue_language";
-const CACHE_KEY = "pets_dogue_translation_cache_v8";
-const SOURCE_LANGUAGE = "en";
-const API_ENDPOINT = "/api/translate";
-
-const LANGUAGES = [
-  { code: "en", label: "English", short: "EN", dir: "ltr", speech: "en-GB" },
-  { code: "ru", label: "Русский", short: "RU", dir: "ltr", speech: "ru-RU" },
-  { code: "uk", label: "Українська", short: "UA", dir: "ltr", speech: "uk-UA" },
-  { code: "cs", label: "Čeština", short: "CZ", dir: "ltr", speech: "cs-CZ" },
-  { code: "pl", label: "Polski", short: "PL", dir: "ltr", speech: "pl-PL" },
-  { code: "es", label: "Español", short: "ES", dir: "ltr", speech: "es-ES" },
-  { code: "it", label: "Italiano", short: "IT", dir: "ltr", speech: "it-IT" },
-  { code: "de", label: "Deutsch", short: "DE", dir: "ltr", speech: "de-DE" },
-  { code: "ar", label: "العربية", short: "AR", dir: "rtl", speech: "ar-SA" },
-  { code: "hi", label: "हिन्दी", short: "HI", dir: "ltr", speech: "hi-IN" }
+const KEY="pets_dogue_language";
+const CACHE_KEY="pets_dogue_translation_cache_v12";
+const SOURCE="en";
+const API="/api/translate";
+const LANGUAGES=[
+{code:"en",label:"English",short:"EN",dir:"ltr",speech:"en-GB"},
+{code:"uk",label:"Українська",short:"UA",dir:"ltr",speech:"uk-UA"},
+{code:"ru",label:"Русский",short:"RU",dir:"ltr",speech:"ru-RU"},
+{code:"fr",label:"Français",short:"FR",dir:"ltr",speech:"fr-FR"},
+{code:"de",label:"Deutsch",short:"DE",dir:"ltr",speech:"de-DE"},
+{code:"es",label:"Español",short:"ES",dir:"ltr",speech:"es-ES"},
+{code:"it",label:"Italiano",short:"IT",dir:"ltr",speech:"it-IT"},
+{code:"pt",label:"Português",short:"PT",dir:"ltr",speech:"pt-PT"},
+{code:"nl",label:"Nederlands",short:"NL",dir:"ltr",speech:"nl-NL"},
+{code:"pl",label:"Polski",short:"PL",dir:"ltr",speech:"pl-PL"},
+{code:"cs",label:"Čeština",short:"CZ",dir:"ltr",speech:"cs-CZ"},
+{code:"sk",label:"Slovenčina",short:"SK",dir:"ltr",speech:"sk-SK"},
+{code:"hu",label:"Magyar",short:"HU",dir:"ltr",speech:"hu-HU"},
+{code:"ro",label:"Română",short:"RO",dir:"ltr",speech:"ro-RO"},
+{code:"bg",label:"Български",short:"BG",dir:"ltr",speech:"bg-BG"},
+{code:"el",label:"Ελληνικά",short:"GR",dir:"ltr",speech:"el-GR"},
+{code:"sv",label:"Svenska",short:"SE",dir:"ltr",speech:"sv-SE"},
+{code:"da",label:"Dansk",short:"DK",dir:"ltr",speech:"da-DK"},
+{code:"no",label:"Norsk",short:"NO",dir:"ltr",speech:"nb-NO"},
+{code:"fi",label:"Suomi",short:"FI",dir:"ltr",speech:"fi-FI"},
+{code:"tr",label:"Türkçe",short:"TR",dir:"ltr",speech:"tr-TR"},
+{code:"ar",label:"العربية",short:"AR",dir:"rtl",speech:"ar-SA"},
+{code:"hi",label:"हिन्दी",short:"HI",dir:"ltr",speech:"hi-IN"}
 ];
-
-const UI = {
-  en: ["Choose Your Language", "Your choice will remain active across every page.", "Translating...", "Translation is temporarily unavailable."],
-  ru: ["Выберите язык", "Ваш выбор сохранится на всех страницах.", "Переводим...", "Перевод временно недоступен."],
-  uk: ["Оберіть мову", "Ваш вибір збережеться на всіх сторінках.", "Перекладаємо...", "Переклад тимчасово недоступний."],
-  cs: ["Vyberte jazyk", "Vaše volba zůstane aktivní na všech stránkách.", "Překládáme...", "Překlad je dočasně nedostupný."],
-  pl: ["Wybierz język", "Twój wybór pozostanie aktywny na wszystkich stronach.", "Tłumaczenie...", "Tłumaczenie jest chwilowo niedostępne."],
-  es: ["Elige tu idioma", "Tu elección permanecerá activa en todas las páginas.", "Traduciendo...", "La traducción no está disponible temporalmente."],
-  it: ["Scegli la lingua", "La scelta resterà attiva in tutte le pagine.", "Traduzione...", "La traduzione non è momentaneamente disponibile."],
-  de: ["Sprache auswählen", "Ihre Auswahl bleibt auf allen Seiten aktiv.", "Übersetzung...", "Die Übersetzung ist vorübergehend nicht verfügbar."],
-  ar: ["اختر لغتك", "سيظل اختيارك مفعلاً في جميع الصفحات.", "جارٍ الترجمة...", "الترجمة غير متاحة مؤقتًا."],
-  hi: ["अपनी भाषा चुनें", "आपकी पसंद सभी पृष्ठों पर सक्रिय रहेगी।", "अनुवाद हो रहा है...", "अनुवाद अस्थायी रूप से उपलब्ध नहीं है।"]
-};
-
-const EXCLUDED = "script,style,noscript,code,pre,svg,iframe,canvas,video,audio";
-const ATTRIBUTES = ["placeholder", "title", "aria-label", "alt"];
-const PROTECTED = new Set([
-  "PETS & DOGUE",
-  "DOGUE",
-  "Miso",
-  "DOGUE Trust",
-  "DOGUE Verified"
-]);
-
-let selectedLanguage = readSavedLanguage() || SOURCE_LANGUAGE;
-let translationRunning = false;
-let requestVersion = 0;
-let observer = null;
-let mutationTimer = null;
-let cache = readCache();
-
-const originalText = new WeakMap();
-const originalAttrs = new WeakMap();
-
-function languageByCode(code) {
-  return LANGUAGES.find(function (item) {
-    return item.code === code;
-  }) || LANGUAGES[0];
-}
-
-function uiText() {
-  return UI[selectedLanguage] || UI.en;
-}
-
-function readSavedLanguage() {
-  try {
-    const value = localStorage.getItem(LANGUAGE_KEY);
-    return LANGUAGES.some(function (item) {
-      return item.code === value;
-    }) ? value : "";
-  } catch (error) {
-    return "";
-  }
-}
-
-function saveLanguage(code) {
-  try {
-    localStorage.setItem(LANGUAGE_KEY, code);
-  } catch (error) {
-    console.warn("Unable to save language.", error);
-  }
-}
-
-function readCache() {
-  try {
-    const value = JSON.parse(localStorage.getItem(CACHE_KEY) || "{}");
-    return value && typeof value === "object" && !Array.isArray(value) ? value : {};
-  } catch (error) {
-    return {};
-  }
-}
-
-function saveCache() {
-  try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
-  } catch (error) {
-    console.warn("Unable to save translation cache.", error);
-  }
-}
-
-function hashText(text) {
-  let hash = 2166136261;
-  for (let i = 0; i < text.length; i += 1) {
-    hash ^= text.charCodeAt(i);
-    hash = Math.imul(hash, 16777619);
-  }
-  return String((hash >>> 0).toString(36)) + "_" + String(text.length);
-}
-
-function cachedTranslation(languageCode, text) {
-  const item = cache[languageCode] && cache[languageCode][hashText(text)];
-  return item && item.original === text ? item.translation : "";
-}
-
-function rememberTranslation(languageCode, original, translation) {
-  if (!cache[languageCode]) {
-    cache[languageCode] = {};
-  }
-
-  cache[languageCode][hashText(original)] = {
-    original: original,
-    translation: translation
-  };
-}
-
-function normalize(value) {
-  return String(value || "").replace(/\s+/g, " ").trim();
-}
-
-function containsLetters(value) {
-  try {
-    return /\p{L}/u.test(String(value || ""));
-  } catch (error) {
-    return /[A-Za-zА-Яа-яЁёІіЇїЄє]/.test(String(value || ""));
-  }
-}
-
-function shouldTranslate(value) {
-  const text = normalize(value);
-
-  if (!text || text.length < 2 || !containsLetters(text)) {
-    return false;
-  }
-
-  if (PROTECTED.has(text)) {
-    return false;
-  }
-
-  if (/^(https?:\/\/|mailto:|tel:|javascript:)/i.test(text)) {
-    return false;
-  }
-
-  return true;
-}
-
-function protect(element) {
-  if (!element) {
-    return;
-  }
-
-  element.classList.add("notranslate");
-  element.setAttribute("translate", "no");
-  element.setAttribute("data-pd-no-translate", "true");
-}
-
-function protectBrands(root) {
-  if (!root || !root.querySelectorAll) {
-    return;
-  }
-
-  root.querySelectorAll(
-    ".brand,.brand-small,.brand-big,.logo-small,.logo-big,.footer-brand,[data-pd-brand],[translate='no'],.notranslate,[data-pd-no-translate]"
-  ).forEach(protect);
-
-  root.querySelectorAll("*").forEach(function (element) {
-    if (element.children.length === 0 && PROTECTED.has(normalize(element.textContent))) {
-      protect(element);
-    }
-  });
-}
-
-function isProtected(element) {
-  if (!element) {
-    return true;
-  }
-
-  if (element.matches(EXCLUDED)) {
-    return true;
-  }
-
-  return Boolean(element.closest(
-    EXCLUDED + ",#pd-language-button,#pd-language-overlay,#pd-translation-status,[translate='no'],.notranslate,[data-pd-no-translate],[data-pd-brand]"
-  ));
-}
-
-function rememberTextNode(node) {
-  if (!originalText.has(node)) {
-    originalText.set(node, node.nodeValue);
-  }
-}
-
-function rememberAttribute(element, name) {
-  let values = originalAttrs.get(element);
-
-  if (!values) {
-    values = {};
-    originalAttrs.set(element, values);
-  }
-
-  if (values[name] === undefined) {
-    values[name] = element.getAttribute(name) || "";
-  }
-}
-
-function rememberMetadata() {
-  if (document.documentElement.dataset.pdOriginalTitle === undefined) {
-    document.documentElement.dataset.pdOriginalTitle = document.title || "";
-  }
-}
-
-function restoreEnglish(root) {
-  if (!root) {
-    return;
-  }
-
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-
-    if (originalText.has(node)) {
-      node.nodeValue = originalText.get(node);
-    }
-  }
-
-  const elements = [];
-
-  if (root.nodeType === Node.ELEMENT_NODE) {
-    elements.push(root);
-  }
-
-  if (root.querySelectorAll) {
-    elements.push.apply(elements, root.querySelectorAll("*"));
-  }
-
-  elements.forEach(function (element) {
-    const values = originalAttrs.get(element);
-
-    if (!values) {
-      return;
-    }
-
-    Object.keys(values).forEach(function (name) {
-      element.setAttribute(name, values[name]);
-    });
-  });
-
-  if (document.documentElement.dataset.pdOriginalTitle !== undefined) {
-    document.title = document.documentElement.dataset.pdOriginalTitle;
-  }
-}
-
-function collectItems(root) {
-  const items = [];
-
-  if (!root) {
-    return items;
-  }
-
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode: function (node) {
-      const parent = node.parentElement;
-
-      if (!parent || isProtected(parent)) {
-        return NodeFilter.FILTER_REJECT;
-      }
-
-      rememberTextNode(node);
-
-      return shouldTranslate(originalText.get(node))
-        ? NodeFilter.FILTER_ACCEPT
-        : NodeFilter.FILTER_REJECT;
-    }
-  });
-
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-    const original = originalText.get(node) || "";
-
-    items.push({
-      type: "text",
-      node: node,
-      original: original,
-      requestText: normalize(original)
-    });
-  }
-
-  const elements = [];
-
-  if (root.nodeType === Node.ELEMENT_NODE) {
-    elements.push(root);
-  }
-
-  if (root.querySelectorAll) {
-    elements.push.apply(elements, root.querySelectorAll("*"));
-  }
-
-  elements.forEach(function (element) {
-    if (isProtected(element)) {
-      return;
-    }
-
-    ATTRIBUTES.forEach(function (name) {
-      if (!element.hasAttribute(name)) {
-        return;
-      }
-
-      rememberAttribute(element, name);
-
-      const original = (originalAttrs.get(element) || {})[name] || "";
-
-      if (shouldTranslate(original)) {
-        items.push({
-          type: "attribute",
-          element: element,
-          name: name,
-          original: original,
-          requestText: normalize(original)
-        });
-      }
-    });
-  });
-
-  rememberMetadata();
-
-  const title = document.documentElement.dataset.pdOriginalTitle || "";
-
-  if (shouldTranslate(title)) {
-    items.push({
-      type: "title",
-      original: title,
-      requestText: normalize(title)
-    });
-  }
-
-  return items;
-}
-
-function makeBatches(texts) {
-  const batches = [];
-  let current = [];
-  let characters = 0;
-
-  texts.forEach(function (text) {
-    if (current.length >= 40 || (current.length > 0 && characters + text.length > 18000)) {
-      batches.push(current);
-      current = [];
-      characters = 0;
-    }
-
-    current.push(text);
-    characters += text.length;
-  });
-
-  if (current.length) {
-    batches.push(current);
-  }
-
-  return batches;
-}
-
-async function requestBatch(texts, targetLanguage) {
-  const response = await fetch(API_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      sourceLanguage: SOURCE_LANGUAGE,
-      targetLanguage: targetLanguage,
-      texts: texts
-    })
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data && data.error ? data.error : "Translation request failed.");
-  }
-
-  if (!Array.isArray(data.translations) || data.translations.length !== texts.length) {
-    throw new Error("Invalid translation response.");
-  }
-
-  return data.translations;
-}
-
-async function translationsFor(texts, targetLanguage) {
-  const unique = Array.from(new Set(texts));
-  const result = new Map();
-  const missing = [];
-
-  unique.forEach(function (text) {
-    const cached = cachedTranslation(targetLanguage, text);
-
-    if (cached) {
-      result.set(text, cached);
-    } else {
-      missing.push(text);
-    }
-  });
-
-  for (const batch of makeBatches(missing)) {
-    const translated = await requestBatch(batch, targetLanguage);
-
-    batch.forEach(function (original, index) {
-      const translation = String(translated[index] || original);
-
-      result.set(original, translation);
-      rememberTranslation(targetLanguage, original, translation);
-    });
-
-    saveCache();
-  }
-
-  return result;
-}
-
-function preserveWhitespace(original, translated) {
-  const leading = (original.match(/^\s*/) || [""])[0];
-  const trailing = (original.match(/\s*$/) || [""])[0];
-
-  return leading + translated + trailing;
-}
-
-function applyItem(item, translated) {
-  if (typeof translated !== "string" || !translated.trim()) {
-    return;
-  }
-
-  if (item.type === "text") {
-    item.node.nodeValue = preserveWhitespace(item.original, translated);
-  } else if (item.type === "attribute") {
-    item.element.setAttribute(item.name, translated);
-  } else if (item.type === "title") {
-    document.title = translated;
-  }
-}
-
-function applyDirection() {
-  const language = languageByCode(selectedLanguage);
-
-  document.documentElement.lang = language.code;
-  document.documentElement.dir = language.dir;
-
-  if (document.body) {
-    document.body.classList.toggle("pd-rtl", language.dir === "rtl");
-  }
-}
-
-function createStyles() {
-  if (document.getElementById("pd-language-styles")) {
-    return;
-  }
-
-  const style = document.createElement("style");
-
-  style.id = "pd-language-styles";
-  style.textContent = [
-    "#pd-language-button{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;gap:8px;height:52px;padding:0 17px;border:3px solid #111;border-radius:999px;background:#fff;color:#111;font:900 15px Arial,sans-serif;box-shadow:0 14px 38px rgba(0,0,0,.28);cursor:pointer}",
-    "#pd-language-overlay{position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78)}",
-    "#pd-language-overlay.pd-open{display:flex}",
-    "#pd-language-modal{width:min(680px,100%);max-height:88vh;overflow:auto;background:#f8f7f3;border:3px solid #111;border-radius:30px}",
-    ".pd-language-header{display:flex;align-items:center;justify-content:space-between;padding:22px;background:#111;color:#fff}",
-    ".pd-language-header h2{margin:0;font:normal 30px Georgia,serif}",
-    ".pd-language-close{width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:24px}",
-    ".pd-language-intro{padding:20px 22px 5px;color:#555;line-height:1.6}",
-    "#pd-language-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px 22px 24px}",
-    ".pd-language-option{display:flex;align-items:center;justify-content:space-between;min-height:62px;padding:13px 15px;border:2px solid #111;border-radius:18px;background:#fff;font-weight:800;cursor:pointer}",
-    ".pd-language-option.pd-active{background:#65e51f}",
-    ".pd-language-code{font-size:11px;color:#666;letter-spacing:1px}",
-    "#pd-translation-status{position:fixed;left:50%;bottom:22px;z-index:2147482999;padding:11px 16px;border-radius:999px;background:#111;color:#fff;font:700 13px Arial,sans-serif;opacity:0;visibility:hidden;transform:translate(-50%,12px);transition:.2s}",
-    "#pd-translation-status.pd-visible{opacity:1;visibility:visible;transform:translate(-50%,0)}",
-    "body.pd-rtl #pd-language-button{right:auto;left:16px}",
-    "@media(max-width:600px){#pd-language-grid{grid-template-columns:1fr;padding:14px}#pd-language-button{right:12px;bottom:12px}body.pd-rtl #pd-language-button{right:auto;left:12px}#pd-translation-status{bottom:74px}}"
-  ].join("");
-
-  document.head.appendChild(style);
-}
-
-function makeElement(tagName, className, text) {
-  const element = document.createElement(tagName);
-
-  if (className) {
-    element.className = className;
-  }
-
-  if (text !== undefined) {
-    element.textContent = text;
-  }
-
-  return element;
-}
-
-function createInterface() {
-  if (document.getElementById("pd-language-button")) {
-    return;
-  }
-
-  const button = makeElement("button", "", "");
-  button.id = "pd-language-button";
-  button.type = "button";
-  protect(button);
-
-  const globe = makeElement("span", "pd-language-globe", "\uD83C\uDF10");
-  const current = makeElement("span", "", "");
-  current.id = "pd-language-current";
-
-  button.appendChild(globe);
-  button.appendChild(current);
-
-  const overlay = makeElement("div", "", "");
-  overlay.id = "pd-language-overlay";
-  protect(overlay);
-
-  const modal = makeElement("div", "", "");
-  modal.id = "pd-language-modal";
-
-  const header = makeElement("div", "pd-language-header", "");
-  const title = makeElement("h2", "", "");
-  title.id = "pd-language-title";
-
-  const close = makeElement("button", "pd-language-close", "\u00D7");
-  close.type = "button";
-
-  header.appendChild(title);
-  header.appendChild(close);
-
-  const intro = makeElement("p", "pd-language-intro", "");
-  const grid = makeElement("div", "", "");
-  grid.id = "pd-language-grid";
-
-  modal.appendChild(header);
-  modal.appendChild(intro);
-  modal.appendChild(grid);
-  overlay.appendChild(modal);
-
-  const status = makeElement("div", "", "");
-  status.id = "pd-translation-status";
-  protect(status);
-
-  LANGUAGES.forEach(function (language) {
-    const option = makeElement("button", "pd-language-option", "");
-    option.type = "button";
-    option.dataset.language = language.code;
-
-    const name = makeElement("span", "pd-language-name", language.label);
-    const code = makeElement("span", "pd-language-code", language.short);
-
-    option.appendChild(name);
-    option.appendChild(code);
-
-    option.addEventListener("click", function () {
-      changeLanguage(language.code);
-    });
-
-    grid.appendChild(option);
-  });
-
-  button.addEventListener("click", openLanguageMenu);
-  close.addEventListener("click", closeLanguageMenu);
-
-  overlay.addEventListener("click", function (event) {
-    if (event.target === overlay) {
-      closeLanguageMenu();
-    }
-  });
-
-  document.body.appendChild(button);
-  document.body.appendChild(overlay);
-  document.body.appendChild(status);
-
-  updateInterface();
-}
-
-function updateInterface() {
-  const language = languageByCode(selectedLanguage);
-  const text = uiText();
-
-  const current = document.getElementById("pd-language-current");
-  const title = document.getElementById("pd-language-title");
-  const intro = document.querySelector("#pd-language-overlay .pd-language-intro");
-  const close = document.querySelector("#pd-language-overlay .pd-language-close");
-
-  if (current) {
-    current.textContent = language.short;
-  }
-
-  if (title) {
-    title.textContent = text[0];
-  }
-
-  if (intro) {
-    intro.textContent = text[1];
-  }
-
-  if (close) {
-    close.setAttribute("aria-label", text[0]);
-  }
-
-  document.querySelectorAll(".pd-language-option").forEach(function (option) {
-    option.classList.toggle("pd-active", option.dataset.language === selectedLanguage);
-  });
-}
-
-function openLanguageMenu() {
-  const overlay = document.getElementById("pd-language-overlay");
-
-  if (overlay) {
-    overlay.classList.add("pd-open");
-  }
-
-  document.body.style.overflow = "hidden";
-}
-
-function closeLanguageMenu() {
-  const overlay = document.getElementById("pd-language-overlay");
-
-  if (overlay) {
-    overlay.classList.remove("pd-open");
-  }
-
-  document.body.style.overflow = "";
-}
-
-function showStatus(message) {
-  const status = document.getElementById("pd-translation-status");
-
-  if (!status) {
-    return;
-  }
-
-  status.textContent = message;
-  status.classList.add("pd-visible");
-}
-
-function hideStatus() {
-  const status = document.getElementById("pd-translation-status");
-
-  if (status) {
-    status.classList.remove("pd-visible");
-  }
-}
-
-async function translatePage(root) {
-  const translationRoot = root || document.body;
-
-  if (!translationRoot || translationRunning) {
-    return;
-  }
-
-  const version = ++requestVersion;
-  const language = languageByCode(selectedLanguage);
-
-  applyDirection();
-  updateInterface();
-  protectBrands(translationRoot);
-  rememberMetadata();
-
-  if (language.code === SOURCE_LANGUAGE) {
-    translationRunning = true;
-    restoreEnglish(translationRoot);
-    translationRunning = false;
-    hideStatus();
-    return;
-  }
-
-  translationRunning = true;
-  showStatus(uiText()[2]);
-
-  try {
-    const items = collectItems(translationRoot);
-
-    if (!items.length) {
-      return;
-    }
-
-    const translated = await translationsFor(
-      items.map(function (item) {
-        return item.requestText;
-      }),
-      language.code
-    );
-
-    if (version !== requestVersion || language.code !== selectedLanguage) {
-      return;
-    }
-
-    items.forEach(function (item) {
-      const value = translated.get(item.requestText);
-
-      if (value) {
-        applyItem(item, value);
-      }
-    });
-  } catch (error) {
-    console.error("PETS & DOGUE translation error:", error);
-    showStatus(uiText()[3]);
-    setTimeout(hideStatus, 4000);
-    return;
-  } finally {
-    translationRunning = false;
-  }
-
-  setTimeout(hideStatus, 200);
-}
-
-async function changeLanguage(code) {
-  const language = languageByCode(code);
-
-  requestVersion += 1;
-  translationRunning = true;
-  restoreEnglish(document.body);
-  translationRunning = false;
-
-  selectedLanguage = language.code;
-  saveLanguage(selectedLanguage);
-
-  applyDirection();
-  updateInterface();
-  closeLanguageMenu();
-
-  await translatePage(document.body);
-}
-
-function observeContent() {
-  if (observer || !document.body) {
-    return;
-  }
-
-  observer = new MutationObserver(function (mutations) {
-    if (translationRunning) {
-      return;
-    }
-
-    let addedContent = false;
-
-    mutations.forEach(function (mutation) {
-      mutation.addedNodes.forEach(function (node) {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          protectBrands(node);
-          addedContent = true;
-        } else if (node.nodeType === Node.TEXT_NODE && shouldTranslate(node.nodeValue)) {
-          addedContent = true;
-        }
-      });
-    });
-
-    if (addedContent && selectedLanguage !== SOURCE_LANGUAGE) {
-      clearTimeout(mutationTimer);
-      mutationTimer = setTimeout(function () {
-        translatePage(document.body);
-      }, 300);
-    }
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-}
-
-function restoreAfterNavigation() {
-  selectedLanguage = readSavedLanguage() || SOURCE_LANGUAGE;
-
-  applyDirection();
-  updateInterface();
-
-  if (selectedLanguage === SOURCE_LANGUAGE) {
-    restoreEnglish(document.body);
-  } else {
-    setTimeout(function () {
-      translatePage(document.body);
-    }, 80);
-  }
-}
-
-async function initialize() {
-  selectedLanguage = readSavedLanguage() || SOURCE_LANGUAGE;
-
-  createStyles();
-  createInterface();
-  protectBrands(document);
-  rememberMetadata();
-  applyDirection();
-  updateInterface();
-  observeContent();
-
-  await translatePage(document.body);
-}
-
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    closeLanguageMenu();
-  }
-});
-
-window.addEventListener("pageshow", restoreAfterNavigation);
-window.addEventListener("popstate", function () {
-  setTimeout(restoreAfterNavigation, 80);
-});
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initialize);
-} else {
-  initialize();
-}
-
-window.PetsDogueLanguage = {
-  languages: LANGUAGES,
-  getCurrentLanguage: function () {
-    return languageByCode(selectedLanguage);
-  },
-  getSpeechLanguage: function () {
-    return languageByCode(selectedLanguage).speech;
-  },
-  changeLanguage: changeLanguage,
-  setLanguage: changeLanguage,
-  translatePage: translatePage,
-  restore: restoreAfterNavigation,
-  open: openLanguageMenu,
-  close: closeLanguageMenu
-};
-
+const UI={
+en:["Choose language","Your language stays active on every page.","Translating…","Translation is temporarily unavailable."],
+uk:["Оберіть мову","Обрана мова діятиме на всіх сторінках.","Перекладаємо…","Переклад тимчасово недоступний."],
+ru:["Выберите язык","Выбранный язык будет действовать на всех страницах.","Переводим…","Перевод временно недоступен."],
+fr:["Choisissez la langue","Votre langue restera active sur toutes les pages.","Traduction…","La traduction est temporairement indisponible."],
+de:["Sprache auswählen","Ihre Sprache bleibt auf allen Seiten aktiv.","Übersetzung…","Die Übersetzung ist vorübergehend nicht verfügbar."],
+es:["Elige el idioma","Tu idioma seguirá activo en todas las páginas.","Traduciendo…","La traducción no está disponible temporalmente."],
+it:["Scegli la lingua","La lingua scelta resterà attiva in tutte le pagine.","Traduzione…","La traduzione non è momentaneamente disponibile."],
+pt:["Escolha o idioma","O idioma escolhido permanecerá ativo em todas as páginas.","A traduzir…","A tradução está temporariamente indisponível."],
+nl:["Kies een taal","De gekozen taal blijft op elke pagina actief.","Vertalen…","Vertaling is tijdelijk niet beschikbaar."],
+pl:["Wybierz język","Wybrany język pozostanie aktywny na każdej stronie.","Tłumaczenie…","Tłumaczenie jest chwilowo niedostępne."],
+cs:["Vyberte jazyk","Vybraný jazyk zůstane aktivní na všech stránkách.","Překládáme…","Překlad je dočasně nedostupný."],
+sk:["Vyberte jazyk","Vybraný jazyk zostane aktívny na všetkých stránkach.","Prekladáme…","Preklad je dočasne nedostupný."],
+hu:["Válasszon nyelvet","A kiválasztott nyelv minden oldalon aktív marad.","Fordítás…","A fordítás átmenetileg nem érhető el."],
+ro:["Alegeți limba","Limba aleasă va rămâne activă pe toate paginile.","Se traduce…","Traducerea este indisponibilă temporar."],
+bg:["Изберете език","Избраният език ще остане активен на всички страници.","Превеждаме…","Преводът временно не е наличен."],
+el:["Επιλέξτε γλώσσα","Η επιλεγμένη γλώσσα θα παραμένει ενεργή σε όλες τις σελίδες.","Μετάφραση…","Η μετάφραση δεν είναι προσωρινά διαθέσιμη."],
+sv:["Välj språk","Det valda språket förblir aktivt på alla sidor.","Översätter…","Översättning är tillfälligt otillgänglig."],
+da:["Vælg sprog","Det valgte sprog forbliver aktivt på alle sider.","Oversætter…","Oversættelse er midlertidigt utilgængelig."],
+no:["Velg språk","Det valgte språket forblir aktivt på alle sider.","Oversetter…","Oversettelse er midlertidig utilgjengelig."],
+fi:["Valitse kieli","Valittu kieli pysyy käytössä kaikilla sivuilla.","Käännetään…","Käännös ei ole tilapäisesti käytettävissä."],
+tr:["Dil seçin","Seçilen dil tüm sayfalarda etkin kalacaktır.","Çevriliyor…","Çeviri geçici olarak kullanılamıyor."],
+ar:["اختر اللغة","ستظل اللغة المختارة مفعلة في جميع الصفحات.","جارٍ الترجمة…","الترجمة غير متاحة مؤقتًا."],
+hi:["भाषा चुनें","चुनी हुई भाषा हर पेज पर सक्रिय रहेगी।","अनुवाद हो रहा है…","अनुवाद अस्थायी रूप से उपलब्ध नहीं है।"]};
+const EXCLUDED="script,style,noscript,code,pre,svg,iframe,canvas,video,audio";
+const ATTRS=["placeholder","title","aria-label","alt"];
+const PROTECTED=new Set(["PETS & DOGUE","DOGUE","PETS &amp; DOGUE","Miso","DOGUE Trust","DOGUE Verified"]);
+let language=readLanguage()||SOURCE, busy=false, version=0, observer=null, timer=null, cache=readCache();
+const originals=new WeakMap(), attrs=new WeakMap();
+function lang(code){return LANGUAGES.find(x=>x.code===code)||LANGUAGES[0]}
+function readLanguage(){try{const x=localStorage.getItem(KEY);return LANGUAGES.some(y=>y.code===x)?x:""}catch(e){return""}}
+function saveLanguage(x){try{localStorage.setItem(KEY,x)}catch(e){}}
+function readCache(){try{const x=JSON.parse(localStorage.getItem(CACHE_KEY)||"{}");return x&&typeof x==="object"&&!Array.isArray(x)?x:{}}catch(e){return{}}}
+function saveCache(){try{localStorage.setItem(CACHE_KEY,JSON.stringify(cache))}catch(e){}}
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0).toString(36)+"_"+s.length}
+function normal(s){return String(s||"").replace(/\s+/g," ").trim()}
+function letters(s){try{return /\p{L}/u.test(s)}catch(e){return /[A-Za-zА-Яа-яЁёІіЇїЄє]/.test(s)}}
+function should(s){s=normal(s);return !!(s&&s.length>1&&letters(s)&&!PROTECTED.has(s)&&!/^(https?:\/\/|mailto:|tel:|javascript:)/i.test(s))}
+function protectedEl(el){return !el||el.matches(EXCLUDED)||!!el.closest(EXCLUDED+",#pd-language-button,#pd-language-overlay,#pd-status,[translate='no'],.notranslate,[data-pd-no-translate],[data-pd-brand]")}
+function protectBrands(root){if(!root||!root.querySelectorAll)return;root.querySelectorAll(".brand,.brand-small,.brand-big,.logo,.logo-small,.logo-big,.footer-brand,[data-pd-brand],[translate='no'],.notranslate").forEach(el=>{el.classList.add("notranslate");el.setAttribute("translate","no")});root.querySelectorAll("*").forEach(el=>{if(!el.children.length&&PROTECTED.has(normal(el.textContent))){el.classList.add("notranslate");el.setAttribute("translate","no")}})}
+function rememberNode(n){if(!originals.has(n))originals.set(n,n.nodeValue)}
+function rememberAttr(el,n){let a=attrs.get(el);if(!a){a={};attrs.set(el,a)}if(a[n]===undefined)a[n]=el.getAttribute(n)||""}
+function rememberTitle(){if(document.documentElement.dataset.pdOriginalTitle===undefined)document.documentElement.dataset.pdOriginalTitle=document.title||""}
+function restore(root){if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(w.nextNode()){const n=w.currentNode;if(originals.has(n))n.nodeValue=originals.get(n)}const els=[];if(root.nodeType===1)els.push(root);if(root.querySelectorAll)els.push(...root.querySelectorAll("*"));els.forEach(el=>{const a=attrs.get(el);if(a)Object.keys(a).forEach(k=>el.setAttribute(k,a[k]))});if(document.documentElement.dataset.pdOriginalTitle!==undefined)document.title=document.documentElement.dataset.pdOriginalTitle}
+function collect(root){const items=[];const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;if(!p||protectedEl(p))return NodeFilter.FILTER_REJECT;rememberNode(n);return should(originals.get(n))?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});while(w.nextNode()){const n=w.currentNode,o=originals.get(n)||"";items.push({type:"text",node:n,original:o,request:normal(o)})}const els=[];if(root.nodeType===1)els.push(root);if(root.querySelectorAll)els.push(...root.querySelectorAll("*"));els.forEach(el=>{if(protectedEl(el))return;ATTRS.forEach(name=>{if(!el.hasAttribute(name))return;rememberAttr(el,name);const o=(attrs.get(el)||{})[name]||"";if(should(o))items.push({type:"attr",el,name,original:o,request:normal(o)})})});rememberTitle();const t=document.documentElement.dataset.pdOriginalTitle||"";if(should(t))items.push({type:"title",original:t,request:normal(t)});return items}
+function cached(code,text){const x=cache[code]&&cache[code][hash(text)];return x&&x.original===text?x.translation:""}
+function batches(xs){const out=[];let b=[],n=0;xs.forEach(x=>{if(b.length>=40||(b.length&&n+x.length>18000)){out.push(b);b=[];n=0}b.push(x);n+=x.length});if(b.length)out.push(b);return out}
+async function request(texts,target){const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({sourceLanguage:SOURCE,targetLanguage:target,texts})});let d={};try{d=await r.json()}catch(e){}if(!r.ok)throw new Error(d.error||"Translation request failed");if(!Array.isArray(d.translations)||d.translations.length!==texts.length)throw new Error("Invalid translation response");return d.translations}
+async function getTranslations(texts,target){const unique=[...new Set(texts)],result=new Map(),missing=[];unique.forEach(t=>{const c=cached(target,t);c?result.set(t,c):missing.push(t)});for(const b of batches(missing)){const tr=await request(b,target);b.forEach((o,i)=>{const v=String(tr[i]||o);result.set(o,v);cache[target]=cache[target]||{};cache[target][hash(o)]={original:o,translation:v}});saveCache()}return result}
+function apply(item,value){if(typeof value!=="string"||!value.trim())return;if(item.type==="text"){const l=(item.original.match(/^\s*/)||[""])[0],r=(item.original.match(/\s*$/)||[""])[0];item.node.nodeValue=l+value+r}else if(item.type==="attr")item.el.setAttribute(item.name,value);else document.title=value}
+function direction(){const l=lang(language);document.documentElement.lang=l.code;document.documentElement.dir=l.dir;if(document.body)document.body.classList.toggle("pd-rtl",l.dir==="rtl")}
+function styles(){if(document.getElementById("pd-language-styles"))return;const s=document.createElement("style");s.id="pd-language-styles";s.textContent=`.languages{display:none!important}#pd-language-button{position:fixed;right:14px;bottom:14px;z-index:2147483000;height:52px;padding:0 17px;border:3px solid #111;border-radius:999px;background:#65e51f;color:#111;font:900 15px Arial,sans-serif;box-shadow:0 14px 38px rgba(0,0,0,.28)}#pd-language-overlay{position:fixed;inset:0;z-index:2147483001;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.78)}#pd-language-overlay.open{display:flex}#pd-language-modal{width:min(720px,100%);max-height:88vh;overflow:auto;background:#f8f7f3;border:3px solid #111;border-radius:30px}.pd-head{display:flex;justify-content:space-between;align-items:center;padding:20px;background:#111;color:#fff}.pd-head h2{font:normal 30px Georgia,serif}.pd-close{width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:24px}.pd-intro{padding:18px 20px 4px;color:#555}.pd-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:15px 20px 22px}.pd-option{display:flex;justify-content:space-between;align-items:center;min-height:58px;padding:12px 14px;border:2px solid #111;border-radius:17px;background:#fff;font-weight:800}.pd-option.active{background:#65e51f}.pd-code{font-size:11px;color:#666}#pd-status{position:fixed;left:50%;bottom:20px;z-index:2147482999;padding:11px 16px;border-radius:999px;background:#111;color:#fff;font:700 13px Arial,sans-serif;opacity:0;visibility:hidden;transform:translate(-50%,10px);transition:.2s}#pd-status.show{opacity:1;visibility:visible;transform:translate(-50%,0)}body.pd-rtl #pd-language-button{right:auto;left:14px}@media(max-width:600px){.pd-grid{grid-template-columns:1fr;padding:12px}#pd-status{bottom:76px}}`;document.head.appendChild(s)}
+function protect(el){el.classList.add("notranslate");el.setAttribute("translate","no");el.setAttribute("data-pd-no-translate","true")}
+function interfaceUI(){if(document.getElementById("pd-language-button"))return;const b=document.createElement("button");b.id="pd-language-button";b.type="button";protect(b);const overlay=document.createElement("div");overlay.id="pd-language-overlay";protect(overlay);const modal=document.createElement("div");modal.id="pd-language-modal";const head=document.createElement("div");head.className="pd-head";const h=document.createElement("h2");h.id="pd-title";const close=document.createElement("button");close.className="pd-close";close.type="button";close.textContent="×";head.append(h,close);const intro=document.createElement("p");intro.className="pd-intro";intro.id="pd-intro";const grid=document.createElement("div");grid.className="pd-grid";LANGUAGES.forEach(l=>{const o=document.createElement("button");o.type="button";o.className="pd-option";o.dataset.language=l.code;o.innerHTML=`<span>${l.label}</span><span class="pd-code">${l.short}</span>`;o.onclick=()=>changeLanguage(l.code);grid.appendChild(o)});modal.append(head,intro,grid);overlay.appendChild(modal);const status=document.createElement("div");status.id="pd-status";protect(status);b.onclick=()=>{overlay.classList.add("open");document.body.style.overflow="hidden"};close.onclick=closeMenu;overlay.onclick=e=>{if(e.target===overlay)closeMenu()};document.body.append(b,overlay,status);updateUI()}
+function closeMenu(){const o=document.getElementById("pd-language-overlay");if(o)o.classList.remove("open");document.body.style.overflow=""}
+function updateUI(){const l=lang(language),u=UI[language]||UI.en,b=document.getElementById("pd-language-button");if(b)b.textContent="🌐 "+l.short;const h=document.getElementById("pd-title"),i=document.getElementById("pd-intro");if(h)h.textContent=u[0];if(i)i.textContent=u[1];document.querySelectorAll(".pd-option").forEach(x=>x.classList.toggle("active",x.dataset.language===language))}
+function show(msg){const s=document.getElementById("pd-status");if(s){s.textContent=msg;s.classList.add("show")}}
+function hide(){const s=document.getElementById("pd-status");if(s)s.classList.remove("show")}
+async function translate(root=document.body){if(!root||busy)return;const my=++version,l=lang(language);direction();updateUI();protectBrands(root);rememberTitle();if(l.code===SOURCE){busy=true;restore(root);busy=false;hide();return}busy=true;show((UI[language]||UI.en)[2]);try{const items=collect(root);if(!items.length)return;const map=await getTranslations(items.map(x=>x.request),l.code);if(my!==version||l.code!==language)return;items.forEach(x=>apply(x,map.get(x.request)))}catch(e){console.error("PETS & DOGUE translation error",e);show((UI[language]||UI.en)[3]);setTimeout(hide,4000);return}finally{busy=false}setTimeout(hide,200)}
+async function changeLanguage(code){version++;busy=true;restore(document.body);busy=false;language=lang(code).code;saveLanguage(language);direction();updateUI();closeMenu();await translate(document.body)}
+function observe(){if(observer||!document.body)return;observer=new MutationObserver(ms=>{if(busy)return;let added=false;ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){protectBrands(n);added=true}else if(n.nodeType===3&&should(n.nodeValue))added=true}));if(added&&language!==SOURCE){clearTimeout(timer);timer=setTimeout(()=>translate(document.body),350)}});observer.observe(document.body,{childList:true,subtree:true})}
+function restoreNavigation(){language=readLanguage()||SOURCE;direction();updateUI();if(language===SOURCE)restore(document.body);else setTimeout(()=>translate(document.body),80)}
+async function init(){language=readLanguage()||SOURCE;styles();interfaceUI();protectBrands(document);rememberTitle();direction();updateUI();observe();await translate(document.body)}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});window.addEventListener("pageshow",restoreNavigation);window.addEventListener("popstate",()=>setTimeout(restoreNavigation,80));if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+window.PetsDogueLanguage={languages:LANGUAGES,getCurrentLanguage:()=>lang(language),getSpeechLanguage:()=>lang(language).speech,changeLanguage,setLanguage:changeLanguage,translatePage:translate,restore:restoreNavigation,open:()=>document.getElementById("pd-language-overlay")?.classList.add("open"),close:closeMenu,translate:(key,fallback)=>fallback||key};
 })();
