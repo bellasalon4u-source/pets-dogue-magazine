@@ -1,710 +1,1244 @@
 window.PetsDogueTranslations = window.PetsDogueTranslations || {};
-
 window.PetsDogueTranslations.home = {
-  en: {
-    hero: {
-      issueLabel: "LATEST ISSUE",
-      title: "Miso: The First PETS & DOGUE Cover Star",
-      description:
-        "Open Issue 01 and enter the visual world of PETS & DOGUE.",
-      tapStar: "TAP THE STAR",
-      myPetIs: "MY PET IS",
-      nextCoverStar: "THE NEXT\nCOVER STAR",
-      enter: "TAP TO ENTER →"
+  "en": {
+    "hero": {
+      "issueLabel": "LATEST ISSUE",
+      "title": "Miso: The First PETS & DOGUE Cover Star",
+      "description": "Open Issue 01 and enter the visual world of PETS & DOGUE.",
+      "tapStar": "TAP THE STAR",
+      "myPetIs": "MY PET IS",
+      "nextCoverStar": "THE NEXT\nCOVER STAR",
+      "enter": "TAP TO ENTER →"
     },
-
-    stories: {
-      issue: "Issue 01",
-      coverStars: "Cover Stars",
-      articles: "Articles",
-      fashion: "Fashion",
-      travel: "Travel",
-      wellness: "Wellness",
-      photos: "Photos",
-      rescue: "Rescue",
-      places: "Places",
-      contests: "Contests",
-      offers: "Offers",
-      market: "Market"
+    "stories": {
+      "issue": "Issue 01",
+      "coverStars": "Cover Stars",
+      "articles": "Articles",
+      "fashion": "Fashion",
+      "travel": "Travel",
+      "wellness": "Wellness",
+      "photos": "Photos",
+      "rescue": "Rescue",
+      "places": "Places",
+      "contests": "Contests",
+      "offers": "Offers",
+      "market": "Market"
     },
-
-    editorial: {
-      heading: "Inside PETS & DOGUE",
-      viewAll: "VIEW ALL STORIES →",
-
-      coverLabel: "COVER STORY",
-      coverTitle: "The Beginning of a New Luxury Animal Magazine",
-
-      fashionLabel: "FASHION",
-      fashionTitle: "The New Rules of Pet Style",
-
-      travelLabel: "TRAVEL",
-      travelTitle: "Beautiful Escapes With Your Pet",
-
-      rescueLabel: "RESCUE",
-      rescueTitle: "Stories That Can Change an Animal’s Life"
+    "editorial": {
+      "heading": "Inside PETS & DOGUE",
+      "viewAll": "VIEW ALL STORIES →",
+      "coverLabel": "COVER STORY",
+      "coverTitle": "The Beginning of a New Luxury Animal Magazine",
+      "fashionLabel": "FASHION",
+      "fashionTitle": "The New Rules of Pet Style",
+      "travelLabel": "TRAVEL",
+      "travelTitle": "Beautiful Escapes With Your Pet",
+      "rescueLabel": "RESCUE",
+      "rescueTitle": "Stories That Can Change an Animal’s Life"
     },
-
-    todayStories: {
-      heading: "Today’s Stories",
-      readAll: "READ ALL →",
-
-      listenTitle: "Listen To PETS & DOGUE",
-      listenDescription:
-        "Choose a voice and tap the speaker beside a story.",
-
-      femaleSpeaker: "Female Speaker",
-      maleSpeaker: "Male Speaker",
-      stop: "■ Stop",
-
-      editorSelection: "EDITOR’S SELECTION",
-      editorTitle:
-        "Style, Care, Travel and the Stories Animals Deserve",
-
-      photographyLabel: "PHOTOGRAPHY",
-      photographyTitle:
-        "How To Prepare Your Pet for a Magazine Photoshoot",
-      photographyDescription:
-        "Grooming, light, comfort and simple techniques for an editorial portrait.",
-
-      travelLabel: "TRAVEL",
-      travelTitle: "The Rise of Luxury Pet-Friendly Travel",
-      travelDescription:
-        "Inside the hotels and destinations creating better experiences for pets.",
-
-      guideLabel: "USEFUL GUIDE",
-      guideTitle:
-        "How DOGUE Trust Protects Pet-Friendly Recommendations",
-      guideDescription:
-        "Community reports and verification help keep information useful and accurate.",
-
-      communityLabel: "COMMUNITY",
-      communityTitle:
-        "The People Helping Animals Behind the Scenes",
-      communityDescription:
-        "Meet the volunteers creating change through practical help and visibility."
+    "todayStories": {
+      "heading": "Today’s Stories",
+      "readAll": "READ ALL →",
+      "listenTitle": "Listen To PETS & DOGUE",
+      "listenDescription": "Choose a voice and tap the speaker beside a story.",
+      "femaleSpeaker": "Female Speaker",
+      "maleSpeaker": "Male Speaker",
+      "stop": "■ Stop",
+      "editorSelection": "EDITOR’S SELECTION",
+      "editorTitle": "Style, Care, Travel and the Stories Animals Deserve",
+      "photographyLabel": "PHOTOGRAPHY",
+      "photographyTitle": "How To Prepare Your Pet for a Magazine Photoshoot",
+      "photographyDescription": "Grooming, light, comfort and simple techniques for an editorial portrait.",
+      "travelLabel": "TRAVEL",
+      "travelTitle": "The Rise of Luxury Pet-Friendly Travel",
+      "travelDescription": "Inside the hotels and destinations creating better experiences for pets.",
+      "guideLabel": "USEFUL GUIDE",
+      "guideTitle": "How DOGUE Trust Protects Pet-Friendly Recommendations",
+      "guideDescription": "Community reports and verification help keep information useful and accurate.",
+      "communityLabel": "COMMUNITY",
+      "communityTitle": "The People Helping Animals Behind the Scenes",
+      "communityDescription": "Meet the volunteers creating change through practical help and visibility."
     },
-
-    visualStories: {
-      heading: "Visual Stories",
-      openGallery: "OPEN PHOTO GALLERY →",
-
-      communityLabel: "COMMUNITY",
-      communityTitle: "Beautiful Lives Together",
-
-      coverLabel: "COVER STAR",
-      coverTitle: "Could Your Pet Be Next?",
-
-      portraitLabel: "PORTRAIT",
-      portraitTitle: "Soft Elegance",
-
-      wellnessLabel: "WELLNESS",
-      wellnessTitle: "Care Rituals",
-
-      rescueLabel: "RESCUE",
-      rescueTitle: "A Story Worth Sharing",
-
-      exoticLabel: "EXOTIC",
-      exoticTitle: "Colour and Freedom",
-
-      travelLabel: "TRAVEL",
-      travelTitle: "Summer by the Sea",
-
-      localLabel: "LOCAL",
-      localTitle: "Meet Near You",
-
-      clubLabel: "CLUB",
-      clubTitle: "Partner Benefits"
+    "visualStories": {
+      "heading": "Visual Stories",
+      "openGallery": "OPEN PHOTO GALLERY →",
+      "communityLabel": "COMMUNITY",
+      "communityTitle": "Beautiful Lives Together",
+      "coverLabel": "COVER STAR",
+      "coverTitle": "Could Your Pet Be Next?",
+      "portraitLabel": "PORTRAIT",
+      "portraitTitle": "Soft Elegance",
+      "wellnessLabel": "WELLNESS",
+      "wellnessTitle": "Care Rituals",
+      "rescueLabel": "RESCUE",
+      "rescueTitle": "A Story Worth Sharing",
+      "exoticLabel": "EXOTIC",
+      "exoticTitle": "Colour and Freedom",
+      "travelLabel": "TRAVEL",
+      "travelTitle": "Summer by the Sea",
+      "localLabel": "LOCAL",
+      "localTitle": "Meet Near You",
+      "clubLabel": "CLUB",
+      "clubTitle": "Partner Benefits"
     },
-
-    rubrics: {
-      heading: "Explore Every Rubric",
-      allRubrics: "ALL RUBRICS →",
-
-      photosEyebrow: "VISUAL DOGUE",
-      photosTitle: "Photos",
-      photosDescription:
-        "Portraits, editorials and unforgettable moments.",
-
-      articlesEyebrow: "READ & LISTEN",
-      articlesTitle: "Articles",
-      articlesDescription:
-        "Stories, interviews and useful editorial guides.",
-
-      fashionEyebrow: "LUXURY STYLE",
-      fashionTitle: "Fashion",
-      fashionDescription:
-        "Accessories, style, shopping and editorial looks.",
-
-      travelEyebrow: "WORLD OF DOGUE",
-      travelTitle: "Travel",
-      travelDescription:
-        "Hotels, beaches and unforgettable journeys.",
-
-      wellnessEyebrow: "CARE",
-      wellnessTitle: "Wellness",
-      wellnessDescription:
-        "Health, grooming and calm everyday routines.",
-
-      rescueEyebrow: "WITH PURPOSE",
-      rescueTitle: "Rescue",
-      rescueDescription:
-        "Adoption, visibility and stories that matter.",
-
-      placesEyebrow: "NEAR YOU",
-      placesTitle: "Places",
-      placesDescription:
-        "Find cafés, hotels, parks, beaches and services.",
-
-      contestsEyebrow: "WIN & SHINE",
-      contestsTitle: "Contests",
-      contestsDescription:
-        "Votes, prizes, challenges and cover competitions.",
-
-      coverStarsEyebrow: "NEXT ISSUE",
-      coverStarsTitle: "Cover Stars",
-      coverStarsDescription:
-        "Enter your pet and become part of the magazine.",
-
-      communityEyebrow: "LOCAL",
-      communityTitle: "Community",
-      communityDescription:
-        "Posts, recommendations and support near you.",
-
-      marketplaceEyebrow: "MEMBERS",
-      marketplaceTitle: "Marketplace",
-      marketplaceDescription:
-        "Listings, accessories, services and rehoming.",
-
-      partnersEyebrow: "CLUB BENEFITS",
-      partnersTitle: "Partners",
-      partnersDescription:
-        "Discounts, offers and selected premium services."
+    "rubrics": {
+      "heading": "Explore Every Rubric",
+      "allRubrics": "ALL RUBRICS →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Photos",
+      "photosDescription": "Portraits, editorials and unforgettable moments.",
+      "articlesEyebrow": "READ & LISTEN",
+      "articlesTitle": "Articles",
+      "articlesDescription": "Stories, interviews and useful editorial guides.",
+      "fashionEyebrow": "LUXURY STYLE",
+      "fashionTitle": "Fashion",
+      "fashionDescription": "Accessories, style, shopping and editorial looks.",
+      "travelEyebrow": "WORLD OF DOGUE",
+      "travelTitle": "Travel",
+      "travelDescription": "Hotels, beaches and unforgettable journeys.",
+      "wellnessEyebrow": "CARE",
+      "wellnessTitle": "Wellness",
+      "wellnessDescription": "Health, grooming and calm everyday routines.",
+      "rescueEyebrow": "WITH PURPOSE",
+      "rescueTitle": "Rescue",
+      "rescueDescription": "Adoption, visibility and stories that matter.",
+      "placesEyebrow": "NEAR YOU",
+      "placesTitle": "Places",
+      "placesDescription": "Find cafés, hotels, parks, beaches and services.",
+      "contestsEyebrow": "WIN & SHINE",
+      "contestsTitle": "Contests",
+      "contestsDescription": "Votes, prizes, challenges and cover competitions.",
+      "coverStarsEyebrow": "NEXT ISSUE",
+      "coverStarsTitle": "Cover Stars",
+      "coverStarsDescription": "Enter your pet and become part of the magazine.",
+      "communityEyebrow": "LOCAL",
+      "communityTitle": "Community",
+      "communityDescription": "Posts, recommendations and support near you.",
+      "marketplaceEyebrow": "MEMBERS",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Listings, accessories, services and rehoming.",
+      "partnersEyebrow": "CLUB BENEFITS",
+      "partnersTitle": "Partners",
+      "partnersDescription": "Discounts, offers and selected premium services."
     },
-
-    useful: {
-      heading: "Beautiful and Useful",
-      intro:
-        "PETS & DOGUE combines luxury editorial content with practical services for people who live, travel and care for animals.",
-
-      placesTitle: "Find Places",
-      placesDescription:
-        "Search pet-friendly cafés, hotels, beaches, parks, vets and groomers.",
-
-      marketplaceTitle: "Marketplace",
-      marketplaceDescription:
-        "Browse listings, services, accessories and responsible rehoming posts.",
-
-      communityTitle: "Local Community",
-      communityDescription:
-        "Ask questions, share recommendations and discover information nearby.",
-
-      helpTitle: "Help Animals",
-      helpDescription:
-        "Support rescue cases, adoption stories and animals needing visibility.",
-
-      starTitle: "Become A Star",
-      starDescription:
-        "Upload your pet and compete for the next PETS & DOGUE cover.",
-
-      clubTitle: "Club Benefits",
-      clubDescription:
-        "Discover discounts, hotels, cafés and premium pet services."
+    "useful": {
+      "heading": "Beautiful and Useful",
+      "intro": "PETS & DOGUE combines luxury editorial content with practical services for people who live, travel and care for animals.",
+      "placesTitle": "Find Places",
+      "placesDescription": "Search pet-friendly cafés, hotels, beaches, parks, vets and groomers.",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Browse listings, services, accessories and responsible rehoming posts.",
+      "communityTitle": "Local Community",
+      "communityDescription": "Ask questions, share recommendations and discover information nearby.",
+      "helpTitle": "Help Animals",
+      "helpDescription": "Support rescue cases, adoption stories and animals needing visibility.",
+      "starTitle": "Become A Star",
+      "starDescription": "Upload your pet and compete for the next PETS & DOGUE cover.",
+      "clubTitle": "Club Benefits",
+      "clubDescription": "Discover discounts, hotels, cafés and premium pet services."
     },
-
-    club: {
-      heading: "Join the PETS & DOGUE World",
-      description:
-        "Become part of the Club for cover-star competitions, partner benefits, exclusive content, member identity and future premium experiences.",
-
-      coverEntry: "Cover Star Entry",
-      discounts: "Partner Discounts",
-      qrCard: "Member QR Card",
-      premiumStories: "Premium Stories",
-      contests: "Contests & Prizes",
-      community: "Community Access",
-
-      button: "JOIN PETS & DOGUE CLUB →"
+    "club": {
+      "heading": "Join the PETS & DOGUE World",
+      "description": "Become part of the Club for cover-star competitions, partner benefits, exclusive content, member identity and future premium experiences.",
+      "coverEntry": "Cover Star Entry",
+      "discounts": "Partner Discounts",
+      "qrCard": "Member QR Card",
+      "premiumStories": "Premium Stories",
+      "contests": "Contests & Prizes",
+      "community": "Community Access",
+      "button": "JOIN PETS & DOGUE CLUB →"
     },
-
-    newsletter: {
-      heading: "Your Front-Row Seat to the Animal World",
-      description:
-        "Receive new issues, cover-star announcements, visual stories, travel ideas and community updates.",
-      placeholder: "Your email address",
-      button: "SUBSCRIBE"
+    "newsletter": {
+      "heading": "Your Front-Row Seat to the Animal World",
+      "description": "Receive new issues, cover-star announcements, visual stories, travel ideas and community updates.",
+      "placeholder": "Your email address",
+      "button": "SUBSCRIBE"
     }
   },
 
-  ru: {
-    hero: {
-      issueLabel: "ПОСЛЕДНИЙ ВЫПУСК",
-      title: "Мисо: первая звезда обложки PETS & DOGUE",
-      description:
-        "Откройте выпуск №1 и погрузитесь в визуальный мир PETS & DOGUE.",
-      tapStar: "НАЖМИТЕ НА ЗВЕЗДУ",
-      myPetIs: "МОЙ ПИТОМЕЦ —",
-      nextCoverStar: "СЛЕДУЮЩАЯ\nЗВЕЗДА ОБЛОЖКИ",
-      enter: "ПРИНЯТЬ УЧАСТИЕ →"
+  "ru": {
+    "hero": {
+      "issueLabel": "ПОСЛЕДНИЙ ВЫПУСК",
+      "title": "Мисо: первая звезда обложки PETS & DOGUE",
+      "description": "Откройте выпуск №1 и погрузитесь в визуальный мир PETS & DOGUE.",
+      "tapStar": "НАЖМИТЕ НА ЗВЕЗДУ",
+      "myPetIs": "МОЙ ПИТОМЕЦ —",
+      "nextCoverStar": "СЛЕДУЮЩАЯ\nЗВЕЗДА ОБЛОЖКИ",
+      "enter": "ПРИНЯТЬ УЧАСТИЕ →"
     },
-
-    stories: {
-      issue: "Выпуск 01",
-      coverStars: "Звёзды обложки",
-      articles: "Статьи",
-      fashion: "Мода",
-      travel: "Путешествия",
-      wellness: "Здоровье",
-      photos: "Фото",
-      rescue: "Помощь",
-      places: "Места",
-      contests: "Конкурсы",
-      offers: "Предложения",
-      market: "Маркет"
+    "stories": {
+      "issue": "Выпуск 01",
+      "coverStars": "Звёзды обложки",
+      "articles": "Статьи",
+      "fashion": "Мода",
+      "travel": "Путешествия",
+      "wellness": "Здоровье",
+      "photos": "Фото",
+      "rescue": "Помощь",
+      "places": "Места",
+      "contests": "Конкурсы",
+      "offers": "Предложения",
+      "market": "Маркет"
     },
-
-    editorial: {
-      heading: "Внутри PETS & DOGUE",
-      viewAll: "СМОТРЕТЬ ВСЕ ИСТОРИИ →",
-
-      coverLabel: "ИСТОРИЯ С ОБЛОЖКИ",
-      coverTitle: "Начало нового люксового журнала о животных",
-
-      fashionLabel: "МОДА",
-      fashionTitle: "Новые правила стиля для питомцев",
-
-      travelLabel: "ПУТЕШЕСТВИЯ",
-      travelTitle: "Красивые путешествия вместе с питомцем",
-
-      rescueLabel: "ПОМОЩЬ",
-      rescueTitle: "Истории, способные изменить жизнь животного"
+    "editorial": {
+      "heading": "Внутри PETS & DOGUE",
+      "viewAll": "СМОТРЕТЬ ВСЕ ИСТОРИИ →",
+      "coverLabel": "ИСТОРИЯ С ОБЛОЖКИ",
+      "coverTitle": "Начало нового люксового журнала о животных",
+      "fashionLabel": "МОДА",
+      "fashionTitle": "Новые правила стиля для питомцев",
+      "travelLabel": "ПУТЕШЕСТВИЯ",
+      "travelTitle": "Красивые путешествия вместе с питомцем",
+      "rescueLabel": "ПОМОЩЬ",
+      "rescueTitle": "Истории, способные изменить жизнь животного"
     },
-
-    todayStories: {
-      heading: "Сегодняшние истории",
-      readAll: "ЧИТАТЬ ВСЕ →",
-
-      listenTitle: "Слушайте PETS & DOGUE",
-      listenDescription:
-        "Выберите голос и нажмите на динамик возле истории.",
-
-      femaleSpeaker: "Женский голос",
-      maleSpeaker: "Мужской голос",
-      stop: "■ Стоп",
-
-      editorSelection: "ВЫБОР РЕДАКЦИИ",
-      editorTitle:
-        "Стиль, забота, путешествия и истории, которых заслуживают животные",
-
-      photographyLabel: "ФОТОГРАФИЯ",
-      photographyTitle:
-        "Как подготовить питомца к журнальной фотосессии",
-      photographyDescription:
-        "Груминг, свет, комфорт и простые приёмы для редакционного портрета.",
-
-      travelLabel: "ПУТЕШЕСТВИЯ",
-      travelTitle:
-        "Расцвет роскошных путешествий с питомцами",
-      travelDescription:
-        "Отели и направления, создающие лучшие условия для животных.",
-
-      guideLabel: "ПОЛЕЗНЫЙ ГИД",
-      guideTitle:
-        "Как DOGUE Trust проверяет рекомендации pet-friendly мест",
-      guideDescription:
-        "Отзывы сообщества и проверка помогают сохранять информацию точной.",
-
-      communityLabel: "СООБЩЕСТВО",
-      communityTitle:
-        "Люди, которые помогают животным за кулисами",
-      communityDescription:
-        "Познакомьтесь с волонтёрами, создающими перемены практической помощью."
+    "todayStories": {
+      "heading": "Сегодняшние истории",
+      "readAll": "ЧИТАТЬ ВСЕ →",
+      "listenTitle": "Слушайте PETS & DOGUE",
+      "listenDescription": "Выберите голос и нажмите на динамик возле истории.",
+      "femaleSpeaker": "Женский голос",
+      "maleSpeaker": "Мужской голос",
+      "stop": "■ Стоп",
+      "editorSelection": "ВЫБОР РЕДАКЦИИ",
+      "editorTitle": "Стиль, забота, путешествия и истории, которых заслуживают животные",
+      "photographyLabel": "ФОТОГРАФИЯ",
+      "photographyTitle": "Как подготовить питомца к журнальной фотосессии",
+      "photographyDescription": "Груминг, свет, комфорт и простые приёмы для редакционного портрета.",
+      "travelLabel": "ПУТЕШЕСТВИЯ",
+      "travelTitle": "Расцвет роскошных путешествий с питомцами",
+      "travelDescription": "Отели и направления, создающие лучшие условия для животных.",
+      "guideLabel": "ПОЛЕЗНЫЙ ГИД",
+      "guideTitle": "Как DOGUE Trust проверяет рекомендации pet-friendly мест",
+      "guideDescription": "Отзывы сообщества и проверка помогают сохранять информацию точной.",
+      "communityLabel": "СООБЩЕСТВО",
+      "communityTitle": "Люди, которые помогают животным за кулисами",
+      "communityDescription": "Познакомьтесь с волонтёрами, создающими перемены практической помощью."
     },
-
-    visualStories: {
-      heading: "Визуальные истории",
-      openGallery: "ОТКРЫТЬ ФОТОГАЛЕРЕЮ →",
-
-      communityLabel: "СООБЩЕСТВО",
-      communityTitle: "Прекрасная жизнь вместе",
-
-      coverLabel: "ЗВЕЗДА ОБЛОЖКИ",
-      coverTitle: "Может ли ваш питомец стать следующим?",
-
-      portraitLabel: "ПОРТРЕТ",
-      portraitTitle: "Нежная элегантность",
-
-      wellnessLabel: "ЗДОРОВЬЕ",
-      wellnessTitle: "Ритуалы заботы",
-
-      rescueLabel: "ПОМОЩЬ",
-      rescueTitle: "История, которой стоит поделиться",
-
-      exoticLabel: "ЭКЗОТИКА",
-      exoticTitle: "Цвет и свобода",
-
-      travelLabel: "ПУТЕШЕСТВИЯ",
-      travelTitle: "Лето у моря",
-
-      localLabel: "РЯДОМ",
-      localTitle: "Встречайтесь поблизости",
-
-      clubLabel: "КЛУБ",
-      clubTitle: "Преимущества партнёров"
+    "visualStories": {
+      "heading": "Визуальные истории",
+      "openGallery": "ОТКРЫТЬ ФОТОГАЛЕРЕЮ →",
+      "communityLabel": "СООБЩЕСТВО",
+      "communityTitle": "Прекрасная жизнь вместе",
+      "coverLabel": "ЗВЕЗДА ОБЛОЖКИ",
+      "coverTitle": "Может ли ваш питомец стать следующим?",
+      "portraitLabel": "ПОРТРЕТ",
+      "portraitTitle": "Нежная элегантность",
+      "wellnessLabel": "ЗДОРОВЬЕ",
+      "wellnessTitle": "Ритуалы заботы",
+      "rescueLabel": "ПОМОЩЬ",
+      "rescueTitle": "История, которой стоит поделиться",
+      "exoticLabel": "ЭКЗОТИКА",
+      "exoticTitle": "Цвет и свобода",
+      "travelLabel": "ПУТЕШЕСТВИЯ",
+      "travelTitle": "Лето у моря",
+      "localLabel": "РЯДОМ",
+      "localTitle": "Встречайтесь поблизости",
+      "clubLabel": "КЛУБ",
+      "clubTitle": "Преимущества партнёров"
     },
-
-    rubrics: {
-      heading: "Откройте все рубрики",
-      allRubrics: "ВСЕ РУБРИКИ →",
-
-      photosEyebrow: "VISUAL DOGUE",
-      photosTitle: "Фотографии",
-      photosDescription:
-        "Портреты, съёмки и незабываемые моменты.",
-
-      articlesEyebrow: "ЧИТАЙТЕ И СЛУШАЙТЕ",
-      articlesTitle: "Статьи",
-      articlesDescription:
-        "Истории, интервью и полезные редакционные материалы.",
-
-      fashionEyebrow: "РОСКОШНЫЙ СТИЛЬ",
-      fashionTitle: "Мода",
-      fashionDescription:
-        "Аксессуары, стиль, покупки и редакционные образы.",
-
-      travelEyebrow: "МИР DOGUE",
-      travelTitle: "Путешествия",
-      travelDescription:
-        "Отели, пляжи и незабываемые поездки.",
-
-      wellnessEyebrow: "ЗАБОТА",
-      wellnessTitle: "Здоровье",
-      wellnessDescription:
-        "Здоровье, груминг и спокойные повседневные ритуалы.",
-
-      rescueEyebrow: "СО СМЫСЛОМ",
-      rescueTitle: "Помощь",
-      rescueDescription:
-        "Усыновление, внимание и истории, которые важны.",
-
-      placesEyebrow: "РЯДОМ С ВАМИ",
-      placesTitle: "Места",
-      placesDescription:
-        "Находите кафе, отели, парки, пляжи и сервисы.",
-
-      contestsEyebrow: "ПОБЕЖДАЙТЕ",
-      contestsTitle: "Конкурсы",
-      contestsDescription:
-        "Голосования, призы, задания и конкурсы обложки.",
-
-      coverStarsEyebrow: "СЛЕДУЮЩИЙ ВЫПУСК",
-      coverStarsTitle: "Звёзды обложки",
-      coverStarsDescription:
-        "Добавьте питомца и станьте частью журнала.",
-
-      communityEyebrow: "ЛОКАЛЬНО",
-      communityTitle: "Сообщество",
-      communityDescription:
-        "Публикации, рекомендации и поддержка поблизости.",
-
-      marketplaceEyebrow: "ДЛЯ УЧАСТНИКОВ",
-      marketplaceTitle: "Маркетплейс",
-      marketplaceDescription:
-        "Объявления, аксессуары, услуги и ответственное пристройство.",
-
-      partnersEyebrow: "ПРЕИМУЩЕСТВА КЛУБА",
-      partnersTitle: "Партнёры",
-      partnersDescription:
-        "Скидки, предложения и избранные премиальные услуги."
+    "rubrics": {
+      "heading": "Откройте все рубрики",
+      "allRubrics": "ВСЕ РУБРИКИ →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Фотографии",
+      "photosDescription": "Портреты, съёмки и незабываемые моменты.",
+      "articlesEyebrow": "ЧИТАЙТЕ И СЛУШАЙТЕ",
+      "articlesTitle": "Статьи",
+      "articlesDescription": "Истории, интервью и полезные редакционные материалы.",
+      "fashionEyebrow": "РОСКОШНЫЙ СТИЛЬ",
+      "fashionTitle": "Мода",
+      "fashionDescription": "Аксессуары, стиль, покупки и редакционные образы.",
+      "travelEyebrow": "МИР DOGUE",
+      "travelTitle": "Путешествия",
+      "travelDescription": "Отели, пляжи и незабываемые поездки.",
+      "wellnessEyebrow": "ЗАБОТА",
+      "wellnessTitle": "Здоровье",
+      "wellnessDescription": "Здоровье, груминг и спокойные повседневные ритуалы.",
+      "rescueEyebrow": "СО СМЫСЛОМ",
+      "rescueTitle": "Помощь",
+      "rescueDescription": "Усыновление, внимание и истории, которые важны.",
+      "placesEyebrow": "РЯДОМ С ВАМИ",
+      "placesTitle": "Места",
+      "placesDescription": "Находите кафе, отели, парки, пляжи и сервисы.",
+      "contestsEyebrow": "ПОБЕЖДАЙТЕ",
+      "contestsTitle": "Конкурсы",
+      "contestsDescription": "Голосования, призы, задания и конкурсы обложки.",
+      "coverStarsEyebrow": "СЛЕДУЮЩИЙ ВЫПУСК",
+      "coverStarsTitle": "Звёзды обложки",
+      "coverStarsDescription": "Добавьте питомца и станьте частью журнала.",
+      "communityEyebrow": "ЛОКАЛЬНО",
+      "communityTitle": "Сообщество",
+      "communityDescription": "Публикации, рекомендации и поддержка поблизости.",
+      "marketplaceEyebrow": "ДЛЯ УЧАСТНИКОВ",
+      "marketplaceTitle": "Маркетплейс",
+      "marketplaceDescription": "Объявления, аксессуары, услуги и ответственное пристройство.",
+      "partnersEyebrow": "ПРЕИМУЩЕСТВА КЛУБА",
+      "partnersTitle": "Партнёры",
+      "partnersDescription": "Скидки, предложения и избранные премиальные услуги."
     },
-
-    useful: {
-      heading: "Красиво и полезно",
-      intro:
-        "PETS & DOGUE объединяет люксовый редакционный контент с практическими сервисами для людей, которые живут, путешествуют и заботятся о животных.",
-
-      placesTitle: "Найти места",
-      placesDescription:
-        "Ищите кафе, отели, пляжи, парки, ветеринаров и грумеров.",
-
-      marketplaceTitle: "Маркетплейс",
-      marketplaceDescription:
-        "Смотрите объявления, услуги, аксессуары и ответственное пристройство.",
-
-      communityTitle: "Местное сообщество",
-      communityDescription:
-        "Задавайте вопросы, делитесь рекомендациями и узнавайте новое рядом.",
-
-      helpTitle: "Помочь животным",
-      helpDescription:
-        "Поддерживайте спасение, усыновление и животных, которым нужна огласка.",
-
-      starTitle: "Стать звездой",
-      starDescription:
-        "Загрузите фото питомца и участвуйте в конкурсе за следующую обложку.",
-
-      clubTitle: "Преимущества клуба",
-      clubDescription:
-        "Получайте скидки в отелях, кафе и премиальных сервисах."
+    "useful": {
+      "heading": "Красиво и полезно",
+      "intro": "PETS & DOGUE объединяет люксовый редакционный контент с практическими сервисами для людей, которые живут, путешествуют и заботятся о животных.",
+      "placesTitle": "Найти места",
+      "placesDescription": "Ищите кафе, отели, пляжи, парки, ветеринаров и грумеров.",
+      "marketplaceTitle": "Маркетплейс",
+      "marketplaceDescription": "Смотрите объявления, услуги, аксессуары и ответственное пристройство.",
+      "communityTitle": "Местное сообщество",
+      "communityDescription": "Задавайте вопросы, делитесь рекомендациями и узнавайте новое рядом.",
+      "helpTitle": "Помочь животным",
+      "helpDescription": "Поддерживайте спасение, усыновление и животных, которым нужна огласка.",
+      "starTitle": "Стать звездой",
+      "starDescription": "Загрузите фото питомца и участвуйте в конкурсе за следующую обложку.",
+      "clubTitle": "Преимущества клуба",
+      "clubDescription": "Получайте скидки в отелях, кафе и премиальных сервисах."
     },
-
-    club: {
-      heading: "Присоединяйтесь к миру PETS & DOGUE",
-      description:
-        "Станьте участником клуба и получите доступ к конкурсам обложки, предложениям партнёров, эксклюзивным материалам и будущим премиальным возможностям.",
-
-      coverEntry: "Участие в конкурсе обложки",
-      discounts: "Скидки партнёров",
-      qrCard: "QR-карта участника",
-      premiumStories: "Премиальные истории",
-      contests: "Конкурсы и призы",
-      community: "Доступ к сообществу",
-
-      button: "ВСТУПИТЬ В КЛУБ PETS & DOGUE →"
+    "club": {
+      "heading": "Присоединяйтесь к миру PETS & DOGUE",
+      "description": "Станьте участником клуба и получите доступ к конкурсам обложки, предложениям партнёров, эксклюзивным материалам и будущим премиальным возможностям.",
+      "coverEntry": "Участие в конкурсе обложки",
+      "discounts": "Скидки партнёров",
+      "qrCard": "QR-карта участника",
+      "premiumStories": "Премиальные истории",
+      "contests": "Конкурсы и призы",
+      "community": "Доступ к сообществу",
+      "button": "ВСТУПИТЬ В КЛУБ PETS & DOGUE →"
     },
-
-    newsletter: {
-      heading: "Ваше место в первом ряду мира животных",
-      description:
-        "Получайте новые выпуски, объявления звёзд обложки, визуальные истории, идеи путешествий и новости сообщества.",
-      placeholder: "Ваш адрес электронной почты",
-      button: "ПОДПИСАТЬСЯ"
+    "newsletter": {
+      "heading": "Ваше место в первом ряду мира животных",
+      "description": "Получайте новые выпуски, объявления звёзд обложки, визуальные истории, идеи путешествий и новости сообщества.",
+      "placeholder": "Ваш адрес электронной почты",
+      "button": "ПОДПИСАТЬСЯ"
+    }
+  },  "uk": {
+    "hero": {
+      "issueLabel": "ОСТАННІЙ ВИПУСК",
+      "title": "Місо: перша зірка обкладинки PETS & DOGUE",
+      "description": "Відкрийте випуск №1 і пориньте у візуальний світ PETS & DOGUE.",
+      "tapStar": "НАТИСНІТЬ НА ЗІРКУ",
+      "myPetIs": "МІЙ УЛЮБЛЕНЕЦЬ —",
+      "nextCoverStar": "НАСТУПНА\nЗІРКА ОБКЛАДИНКИ",
+      "enter": "ВЗЯТИ УЧАСТЬ →"
+    },
+    "stories": {
+      "issue": "Випуск 01",
+      "coverStars": "Зірки обкладинки",
+      "articles": "Статті",
+      "fashion": "Мода",
+      "travel": "Подорожі",
+      "wellness": "Здоров’я",
+      "photos": "Фото",
+      "rescue": "Допомога",
+      "places": "Місця",
+      "contests": "Конкурси",
+      "offers": "Пропозиції",
+      "market": "Маркет"
+    },
+    "editorial": {
+      "heading": "Усередині PETS & DOGUE",
+      "viewAll": "ПЕРЕГЛЯНУТИ ВСІ ІСТОРІЇ →",
+      "coverLabel": "ІСТОРІЯ З ОБКЛАДИНКИ",
+      "coverTitle": "Початок нового люксового журналу про тварин",
+      "fashionLabel": "МОДА",
+      "fashionTitle": "Нові правила стилю для улюбленців",
+      "travelLabel": "ПОДОРОЖІ",
+      "travelTitle": "Прекрасні подорожі разом з улюбленцем",
+      "rescueLabel": "ДОПОМОГА",
+      "rescueTitle": "Історії, здатні змінити життя тварини"
+    },
+    "todayStories": {
+      "heading": "Сьогоднішні історії",
+      "readAll": "ЧИТАТИ ВСІ →",
+      "listenTitle": "Слухайте PETS & DOGUE",
+      "listenDescription": "Оберіть голос і натисніть на динамік біля історії.",
+      "femaleSpeaker": "Жіночий голос",
+      "maleSpeaker": "Чоловічий голос",
+      "stop": "■ Стоп",
+      "editorSelection": "ВИБІР РЕДАКЦІЇ",
+      "editorTitle": "Стиль, турбота, подорожі та історії, яких заслуговують тварини",
+      "photographyLabel": "ФОТОГРАФІЯ",
+      "photographyTitle": "Як підготувати улюбленця до журнальної фотосесії",
+      "photographyDescription": "Грумінг, світло, комфорт і прості прийоми для редакційного портрета.",
+      "travelLabel": "ПОДОРОЖІ",
+      "travelTitle": "Розквіт розкішних подорожей з улюбленцями",
+      "travelDescription": "Готелі та напрямки, що створюють кращі умови для тварин.",
+      "guideLabel": "КОРИСНИЙ ГІД",
+      "guideTitle": "Як DOGUE Trust перевіряє рекомендації pet-friendly місць",
+      "guideDescription": "Відгуки спільноти та перевірка допомагають зберігати інформацію точною.",
+      "communityLabel": "СПІЛЬНОТА",
+      "communityTitle": "Люди, які допомагають тваринам за лаштунками",
+      "communityDescription": "Познайомтеся з волонтерами, які створюють зміни практичною допомогою."
+    },
+    "visualStories": {
+      "heading": "Візуальні історії",
+      "openGallery": "ВІДКРИТИ ФОТОГАЛЕРЕЮ →",
+      "communityLabel": "СПІЛЬНОТА",
+      "communityTitle": "Прекрасне життя разом",
+      "coverLabel": "ЗІРКА ОБКЛАДИНКИ",
+      "coverTitle": "Чи може ваш улюбленець стати наступним?",
+      "portraitLabel": "ПОРТРЕТ",
+      "portraitTitle": "Ніжна елегантність",
+      "wellnessLabel": "ЗДОРОВ’Я",
+      "wellnessTitle": "Ритуали турботи",
+      "rescueLabel": "ДОПОМОГА",
+      "rescueTitle": "Історія, якою варто поділитися",
+      "exoticLabel": "ЕКЗОТИКА",
+      "exoticTitle": "Колір і свобода",
+      "travelLabel": "ПОДОРОЖІ",
+      "travelTitle": "Літо біля моря",
+      "localLabel": "ПОРУЧ",
+      "localTitle": "Зустрічайтеся поблизу",
+      "clubLabel": "КЛУБ",
+      "clubTitle": "Переваги партнерів"
+    },
+    "rubrics": {
+      "heading": "Відкрийте всі рубрики",
+      "allRubrics": "УСІ РУБРИКИ →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Фотографії",
+      "photosDescription": "Портрети, зйомки та незабутні моменти.",
+      "articlesEyebrow": "ЧИТАЙТЕ ТА СЛУХАЙТЕ",
+      "articlesTitle": "Статті",
+      "articlesDescription": "Історії, інтерв’ю та корисні редакційні матеріали.",
+      "fashionEyebrow": "РОЗКІШНИЙ СТИЛЬ",
+      "fashionTitle": "Мода",
+      "fashionDescription": "Аксесуари, стиль, покупки та редакційні образи.",
+      "travelEyebrow": "СВІТ DOGUE",
+      "travelTitle": "Подорожі",
+      "travelDescription": "Готелі, пляжі та незабутні мандрівки.",
+      "wellnessEyebrow": "ТУРБОТА",
+      "wellnessTitle": "Здоров’я",
+      "wellnessDescription": "Здоров’я, грумінг і спокійні щоденні ритуали.",
+      "rescueEyebrow": "ЗІ ЗМІСТОМ",
+      "rescueTitle": "Допомога",
+      "rescueDescription": "Усиновлення, увага та історії, що мають значення.",
+      "placesEyebrow": "ПОРУЧ ІЗ ВАМИ",
+      "placesTitle": "Місця",
+      "placesDescription": "Знаходьте кафе, готелі, парки, пляжі та сервіси.",
+      "contestsEyebrow": "ПЕРЕМАГАЙТЕ",
+      "contestsTitle": "Конкурси",
+      "contestsDescription": "Голосування, призи, завдання та конкурси обкладинки.",
+      "coverStarsEyebrow": "НАСТУПНИЙ ВИПУСК",
+      "coverStarsTitle": "Зірки обкладинки",
+      "coverStarsDescription": "Додайте улюбленця та станьте частиною журналу.",
+      "communityEyebrow": "ЛОКАЛЬНО",
+      "communityTitle": "Спільнота",
+      "communityDescription": "Дописи, рекомендації та підтримка поблизу.",
+      "marketplaceEyebrow": "ДЛЯ УЧАСНИКІВ",
+      "marketplaceTitle": "Маркетплейс",
+      "marketplaceDescription": "Оголошення, аксесуари, послуги та відповідальне прилаштування.",
+      "partnersEyebrow": "ПЕРЕВАГИ КЛУБУ",
+      "partnersTitle": "Партнери",
+      "partnersDescription": "Знижки, пропозиції та обрані преміальні послуги."
+    },
+    "useful": {
+      "heading": "Красиво та корисно",
+      "intro": "PETS & DOGUE поєднує люксовий редакційний контент із практичними сервісами для людей, які живуть, подорожують і піклуються про тварин.",
+      "placesTitle": "Знайти місця",
+      "placesDescription": "Шукайте кафе, готелі, пляжі, парки, ветеринарів і грумерів.",
+      "marketplaceTitle": "Маркетплейс",
+      "marketplaceDescription": "Переглядайте оголошення, послуги, аксесуари та відповідальне прилаштування.",
+      "communityTitle": "Місцева спільнота",
+      "communityDescription": "Ставте запитання, діліться рекомендаціями та знаходьте інформацію поруч.",
+      "helpTitle": "Допомогти тваринам",
+      "helpDescription": "Підтримуйте порятунок, усиновлення та тварин, яким потрібен розголос.",
+      "starTitle": "Стати зіркою",
+      "starDescription": "Завантажте фото улюбленця та змагайтеся за наступну обкладинку.",
+      "clubTitle": "Переваги клубу",
+      "clubDescription": "Отримуйте знижки в готелях, кафе та преміальних сервісах."
+    },
+    "club": {
+      "heading": "Приєднуйтеся до світу PETS & DOGUE",
+      "description": "Станьте учасником клубу та отримайте доступ до конкурсів обкладинки, пропозицій партнерів, ексклюзивних матеріалів і майбутніх преміальних можливостей.",
+      "coverEntry": "Участь у конкурсі обкладинки",
+      "discounts": "Знижки партнерів",
+      "qrCard": "QR-картка учасника",
+      "premiumStories": "Преміальні історії",
+      "contests": "Конкурси та призи",
+      "community": "Доступ до спільноти",
+      "button": "ПРИЄДНАТИСЯ ДО КЛУБУ PETS & DOGUE →"
+    },
+    "newsletter": {
+      "heading": "Ваше місце в першому ряду світу тварин",
+      "description": "Отримуйте нові випуски, оголошення зірок обкладинки, візуальні історії, ідеї подорожей і новини спільноти.",
+      "placeholder": "Ваша електронна адреса",
+      "button": "ПІДПИСАТИСЯ"
     }
   },
 
-  uk: {
-    hero: {
-      issueLabel: "ОСТАННІЙ ВИПУСК",
-      title: "Місо: перша зірка обкладинки PETS & DOGUE",
-      description:
-        "Відкрийте випуск №1 і пориньте у візуальний світ PETS & DOGUE.",
-      tapStar: "НАТИСНІТЬ НА ЗІРКУ",
-      myPetIs: "МІЙ УЛЮБЛЕНЕЦЬ —",
-      nextCoverStar: "НАСТУПНА\nЗІРКА ОБКЛАДИНКИ",
-      enter: "ВЗЯТИ УЧАСТЬ →"
+  "fr": {
+    "hero": {
+      "issueLabel": "DERNIER NUMÉRO",
+      "title": "Miso : la première star de couverture de PETS & DOGUE",
+      "description": "Ouvrez le numéro 01 et entrez dans l’univers visuel de PETS & DOGUE.",
+      "tapStar": "TOUCHEZ L’ÉTOILE",
+      "myPetIs": "MON ANIMAL EST",
+      "nextCoverStar": "LA PROCHAINE\nSTAR DE COUVERTURE",
+      "enter": "PARTICIPER →"
     },
-
-    stories: {
-      issue: "Випуск 01",
-      coverStars: "Зірки обкладинки",
-      articles: "Статті",
-      fashion: "Мода",
-      travel: "Подорожі",
-      wellness: "Здоров’я",
-      photos: "Фото",
-      rescue: "Допомога",
-      places: "Місця",
-      contests: "Конкурси",
-      offers: "Пропозиції",
-      market: "Маркет"
+    "stories": {
+      "issue": "Numéro 01",
+      "coverStars": "Stars de couverture",
+      "articles": "Articles",
+      "fashion": "Mode",
+      "travel": "Voyages",
+      "wellness": "Bien-être",
+      "photos": "Photos",
+      "rescue": "Sauvetage",
+      "places": "Lieux",
+      "contests": "Concours",
+      "offers": "Offres",
+      "market": "Marché"
     },
-
-    editorial: {
-      heading: "Усередині PETS & DOGUE",
-      viewAll: "ПЕРЕГЛЯНУТИ ВСІ ІСТОРІЇ →",
-
-      coverLabel: "ІСТОРІЯ З ОБКЛАДИНКИ",
-      coverTitle: "Початок нового люксового журналу про тварин",
-
-      fashionLabel: "МОДА",
-      fashionTitle: "Нові правила стилю для улюбленців",
-
-      travelLabel: "ПОДОРОЖІ",
-      travelTitle: "Прекрасні подорожі разом з улюбленцем",
-
-      rescueLabel: "ДОПОМОГА",
-      rescueTitle: "Історії, здатні змінити життя тварини"
+    "editorial": {
+      "heading": "Dans PETS & DOGUE",
+      "viewAll": "VOIR TOUTES LES HISTOIRES →",
+      "coverLabel": "HISTOIRE DE COUVERTURE",
+      "coverTitle": "Le début d’un nouveau magazine animalier de luxe",
+      "fashionLabel": "MODE",
+      "fashionTitle": "Les nouvelles règles du style animalier",
+      "travelLabel": "VOYAGES",
+      "travelTitle": "De magnifiques escapades avec votre animal",
+      "rescueLabel": "SAUVETAGE",
+      "rescueTitle": "Des histoires qui peuvent changer la vie d’un animal"
     },
-
-    todayStories: {
-      heading: "Сьогоднішні історії",
-      readAll: "ЧИТАТИ ВСІ →",
-
-      listenTitle: "Слухайте PETS & DOGUE",
-      listenDescription:
-        "Оберіть голос і натисніть на динамік біля історії.",
-
-      femaleSpeaker: "Жіночий голос",
-      maleSpeaker: "Чоловічий голос",
-      stop: "■ Стоп",
-
-      editorSelection: "ВИБІР РЕДАКЦІЇ",
-      editorTitle:
-        "Стиль, турбота, подорожі та історії, яких заслуговують тварини",
-
-      photographyLabel: "ФОТОГРАФІЯ",
-      photographyTitle:
-        "Як підготувати улюбленця до журнальної фотосесії",
-      photographyDescription:
-        "Грумінг, світло, комфорт і прості прийоми для редакційного портрета.",
-
-      travelLabel: "ПОДОРОЖІ",
-      travelTitle:
-        "Розквіт розкішних подорожей з улюбленцями",
-      travelDescription:
-        "Готелі та напрямки, що створюють кращі умови для тварин.",
-
-      guideLabel: "КОРИСНИЙ ГІД",
-      guideTitle:
-        "Як DOGUE Trust перевіряє рекомендації pet-friendly місць",
-      guideDescription:
-        "Відгуки спільноти та перевірка допомагають зберігати інформацію точною.",
-
-      communityLabel: "СПІЛЬНОТА",
-      communityTitle:
-        "Люди, які допомагають тваринам за лаштунками",
-      communityDescription:
-        "Познайомтеся з волонтерами, які створюють зміни практичною допомогою."
+    "todayStories": {
+      "heading": "Les histoires du jour",
+      "readAll": "TOUT LIRE →",
+      "listenTitle": "Écoutez PETS & DOGUE",
+      "listenDescription": "Choisissez une voix et touchez le haut-parleur à côté d’une histoire.",
+      "femaleSpeaker": "Voix féminine",
+      "maleSpeaker": "Voix masculine",
+      "stop": "■ Arrêter",
+      "editorSelection": "SÉLECTION DE LA RÉDACTION",
+      "editorTitle": "Style, soins, voyages et les histoires que les animaux méritent",
+      "photographyLabel": "PHOTOGRAPHIE",
+      "photographyTitle": "Comment préparer votre animal pour une séance photo de magazine",
+      "photographyDescription": "Toilettage, lumière, confort et techniques simples pour un portrait éditorial.",
+      "travelLabel": "VOYAGES",
+      "travelTitle": "L’essor des voyages de luxe avec les animaux",
+      "travelDescription": "Dans les hôtels et destinations qui créent de meilleures expériences pour les animaux.",
+      "guideLabel": "GUIDE PRATIQUE",
+      "guideTitle": "Comment DOGUE Trust protège les recommandations pet-friendly",
+      "guideDescription": "Les signalements de la communauté et la vérification rendent les informations utiles et fiables.",
+      "communityLabel": "COMMUNAUTÉ",
+      "communityTitle": "Les personnes qui aident les animaux en coulisses",
+      "communityDescription": "Rencontrez les bénévoles qui font bouger les choses par une aide concrète et de la visibilité."
     },
-
-    visualStories: {
-      heading: "Візуальні історії",
-      openGallery: "ВІДКРИТИ ФОТОГАЛЕРЕЮ →",
-
-      communityLabel: "СПІЛЬНОТА",
-      communityTitle: "Прекрасне життя разом",
-
-      coverLabel: "ЗІРКА ОБКЛАДИНКИ",
-      coverTitle: "Чи може ваш улюбленець стати наступним?",
-
-      portraitLabel: "ПОРТРЕТ",
-      portraitTitle: "Ніжна елегантність",
-
-      wellnessLabel: "ЗДОРОВ’Я",
-      wellnessTitle: "Ритуали турботи",
-
-      rescueLabel: "ДОПОМОГА",
-      rescueTitle: "Історія, якою варто поділитися",
-
-      exoticLabel: "ЕКЗОТИКА",
-      exoticTitle: "Колір і свобода",
-
-      travelLabel: "ПОДОРОЖІ",
-      travelTitle: "Літо біля моря",
-
-      localLabel: "ПОРУЧ",
-      localTitle: "Зустрічайтеся поблизу",
-
-      clubLabel: "КЛУБ",
-      clubTitle: "Переваги партнерів"
+    "visualStories": {
+      "heading": "Histoires visuelles",
+      "openGallery": "OUVRIR LA GALERIE PHOTO →",
+      "communityLabel": "COMMUNAUTÉ",
+      "communityTitle": "De belles vies ensemble",
+      "coverLabel": "STAR DE COUVERTURE",
+      "coverTitle": "Votre animal pourrait-il être le prochain ?",
+      "portraitLabel": "PORTRAIT",
+      "portraitTitle": "Élégance douce",
+      "wellnessLabel": "BIEN-ÊTRE",
+      "wellnessTitle": "Rituels de soin",
+      "rescueLabel": "SAUVETAGE",
+      "rescueTitle": "Une histoire à partager",
+      "exoticLabel": "EXOTIQUE",
+      "exoticTitle": "Couleur et liberté",
+      "travelLabel": "VOYAGES",
+      "travelTitle": "L’été au bord de la mer",
+      "localLabel": "LOCAL",
+      "localTitle": "Rencontrez-vous près de chez vous",
+      "clubLabel": "CLUB",
+      "clubTitle": "Avantages partenaires"
     },
-
-    rubrics: {
-      heading: "Відкрийте всі рубрики",
-      allRubrics: "УСІ РУБРИКИ →",
-
-      photosEyebrow: "VISUAL DOGUE",
-      photosTitle: "Фотографії",
-      photosDescription:
-        "Портрети, зйомки та незабутні моменти.",
-
-      articlesEyebrow: "ЧИТАЙТЕ ТА СЛУХАЙТЕ",
-      articlesTitle: "Статті",
-      articlesDescription:
-        "Історії, інтерв’ю та корисні редакційні матеріали.",
-
-      fashionEyebrow: "РОЗКІШНИЙ СТИЛЬ",
-      fashionTitle: "Мода",
-      fashionDescription:
-        "Аксесуари, стиль, покупки та редакційні образи.",
-
-      travelEyebrow: "СВІТ DOGUE",
-      travelTitle: "Подорожі",
-      travelDescription:
-        "Готелі, пляжі та незабутні мандрівки.",
-
-      wellnessEyebrow: "ТУРБОТА",
-      wellnessTitle: "Здоров’я",
-      wellnessDescription:
-        "Здоров’я, грумінг і спокійні щоденні ритуали.",
-
-      rescueEyebrow: "ЗІ ЗМІСТОМ",
-      rescueTitle: "Допомога",
-      rescueDescription:
-        "Усиновлення, увага та історії, що мають значення.",
-
-      placesEyebrow: "ПОРУЧ ІЗ ВАМИ",
-      placesTitle: "Місця",
-      placesDescription:
-        "Знаходьте кафе, готелі, парки, пляжі та сервіси.",
-
-      contestsEyebrow: "ПЕРЕМАГАЙТЕ",
-      contestsTitle: "Конкурси",
-      contestsDescription:
-        "Голосування, призи, завдання та конкурси обкладинки.",
-
-      coverStarsEyebrow: "НАСТУПНИЙ ВИПУСК",
-      coverStarsTitle: "Зірки обкладинки",
-      coverStarsDescription:
-        "Додайте улюбленця та станьте частиною журналу.",
-
-      communityEyebrow: "ЛОКАЛЬНО",
-      communityTitle: "Спільнота",
-      communityDescription:
-        "Дописи, рекомендації та підтримка поблизу.",
-
-      marketplaceEyebrow: "ДЛЯ УЧАСНИКІВ",
-      marketplaceTitle: "Маркетплейс",
-      marketplaceDescription:
-        "Оголошення, аксесуари, послуги та відповідальне прилаштування.",
-
-      partnersEyebrow: "ПЕРЕВАГИ КЛУБУ",
-      partnersTitle: "Партнери",
-      partnersDescription:
-        "Знижки, пропозиції та обрані преміальні послуги."
+    "rubrics": {
+      "heading": "Explorez toutes les rubriques",
+      "allRubrics": "TOUTES LES RUBRIQUES →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Photos",
+      "photosDescription": "Portraits, éditoriaux et moments inoubliables.",
+      "articlesEyebrow": "LIRE ET ÉCOUTER",
+      "articlesTitle": "Articles",
+      "articlesDescription": "Histoires, interviews et guides éditoriaux utiles.",
+      "fashionEyebrow": "STYLE DE LUXE",
+      "fashionTitle": "Mode",
+      "fashionDescription": "Accessoires, style, shopping et looks éditoriaux.",
+      "travelEyebrow": "MONDE DE DOGUE",
+      "travelTitle": "Voyages",
+      "travelDescription": "Hôtels, plages et voyages inoubliables.",
+      "wellnessEyebrow": "SOINS",
+      "wellnessTitle": "Bien-être",
+      "wellnessDescription": "Santé, toilettage et routines quotidiennes apaisantes.",
+      "rescueEyebrow": "AVEC DU SENS",
+      "rescueTitle": "Sauvetage",
+      "rescueDescription": "Adoption, visibilité et histoires qui comptent.",
+      "placesEyebrow": "PRÈS DE VOUS",
+      "placesTitle": "Lieux",
+      "placesDescription": "Trouvez cafés, hôtels, parcs, plages et services.",
+      "contestsEyebrow": "GAGNEZ ET BRILLEZ",
+      "contestsTitle": "Concours",
+      "contestsDescription": "Votes, prix, défis et concours de couverture.",
+      "coverStarsEyebrow": "PROCHAIN NUMÉRO",
+      "coverStarsTitle": "Stars de couverture",
+      "coverStarsDescription": "Inscrivez votre animal et entrez dans le magazine.",
+      "communityEyebrow": "LOCAL",
+      "communityTitle": "Communauté",
+      "communityDescription": "Publications, recommandations et soutien près de chez vous.",
+      "marketplaceEyebrow": "MEMBRES",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Annonces, accessoires, services et placements responsables.",
+      "partnersEyebrow": "AVANTAGES DU CLUB",
+      "partnersTitle": "Partenaires",
+      "partnersDescription": "Réductions, offres et services premium sélectionnés."
     },
-
-    useful: {
-      heading: "Красиво та корисно",
-      intro:
-        "PETS & DOGUE поєднує люксовий редакційний контент із практичними сервісами для людей, які живуть, подорожують і піклуються про тварин.",
-
-      placesTitle: "Знайти місця",
-      placesDescription:
-        "Шукайте кафе, готелі, пляжі, парки, ветеринарів і грумерів.",
-
-      marketplaceTitle: "Маркетплейс",
-      marketplaceDescription:
-        "Переглядайте оголошення, послуги, аксесуари та відповідальне прилаштування.",
-
-      communityTitle: "Місцева спільнота",
-      communityDescription:
-        "Ставте запитання, діліться рекомендаціями та знаходьте інформацію поруч.",
-
-      helpTitle: "Допомогти тваринам",
-      helpDescription:
-        "Підтримуйте порятунок, усиновлення та тварин, яким потрібен розголос.",
-
-      starTitle: "Стати зіркою",
-      starDescription:
-        "Завантажте фото улюбленця та змагайтеся за наступну обкладинку.",
-
-      clubTitle: "Переваги клубу",
-      clubDescription:
-        "Отримуйте знижки в готелях, кафе та преміальних сервісах."
+    "useful": {
+      "heading": "Beau et utile",
+      "intro": "PETS & DOGUE associe un contenu éditorial de luxe à des services pratiques pour celles et ceux qui vivent, voyagent et prennent soin des animaux.",
+      "placesTitle": "Trouver des lieux",
+      "placesDescription": "Recherchez cafés, hôtels, plages, parcs, vétérinaires et toiletteurs pet-friendly.",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Parcourez les annonces, services, accessoires et publications de placement responsable.",
+      "communityTitle": "Communauté locale",
+      "communityDescription": "Posez des questions, partagez des recommandations et découvrez ce qui se trouve près de vous.",
+      "helpTitle": "Aider les animaux",
+      "helpDescription": "Soutenez les sauvetages, les adoptions et les animaux qui ont besoin de visibilité.",
+      "starTitle": "Devenir une star",
+      "starDescription": "Ajoutez votre animal et tentez de faire la prochaine couverture de PETS & DOGUE.",
+      "clubTitle": "Avantages du club",
+      "clubDescription": "Découvrez des réductions dans des hôtels, cafés et services premium pour animaux."
     },
-
-    club: {
-      heading: "Приєднуйтеся до світу PETS & DOGUE",
-      description:
-        "Станьте учасником клубу та отримайте доступ до конкурсів обкладинки, пропозицій партнерів, ексклюзивних матеріалів і майбутніх преміальних можливостей.",
-
-      coverEntry: "Участь у конкурсі обкладинки",
-      discounts: "Знижки партнерів",
-      qrCard: "QR-картка учасника",
-      premiumStories: "Преміальні історії",
-      contests: "Конкурси та призи",
-      community: "Доступ до спільноти",
-
-      button: "ПРИЄДНАТИСЯ ДО КЛУБУ PETS & DOGUE →"
+    "club": {
+      "heading": "Rejoignez l’univers PETS & DOGUE",
+      "description": "Rejoignez le Club pour les concours de couverture, les avantages partenaires, les contenus exclusifs, l’identité membre et de futures expériences premium.",
+      "coverEntry": "Participation au concours de couverture",
+      "discounts": "Réductions partenaires",
+      "qrCard": "Carte QR de membre",
+      "premiumStories": "Histoires premium",
+      "contests": "Concours et prix",
+      "community": "Accès à la communauté",
+      "button": "REJOINDRE LE CLUB PETS & DOGUE →"
     },
+    "newsletter": {
+      "heading": "Votre place au premier rang du monde animal",
+      "description": "Recevez les nouveaux numéros, les annonces de stars de couverture, les histoires visuelles, les idées de voyage et les actualités de la communauté.",
+      "placeholder": "Votre adresse e-mail",
+      "button": "S’ABONNER"
+    }
+  },  "de": {
+    "hero": {
+      "issueLabel": "NEUESTE AUSGABE",
+      "title": "Miso: Der erste PETS & DOGUE Coverstar",
+      "description": "Öffnen Sie Ausgabe 01 und entdecken Sie die visuelle Welt von PETS & DOGUE.",
+      "tapStar": "DEN STERN ANTIPPEN",
+      "myPetIs": "MEIN TIER IST",
+      "nextCoverStar": "DER NÄCHSTE\nCOVERSTAR",
+      "enter": "JETZT TEILNEHMEN →"
+    },
+    "stories": {
+      "issue": "Ausgabe 01",
+      "coverStars": "Coverstars",
+      "articles": "Artikel",
+      "fashion": "Mode",
+      "travel": "Reisen",
+      "wellness": "Wohlbefinden",
+      "photos": "Fotos",
+      "rescue": "Rettung",
+      "places": "Orte",
+      "contests": "Wettbewerbe",
+      "offers": "Angebote",
+      "market": "Markt"
+    },
+    "editorial": {
+      "heading": "In PETS & DOGUE",
+      "viewAll": "ALLE GESCHICHTEN ANSEHEN →",
+      "coverLabel": "COVERSTORY",
+      "coverTitle": "Der Beginn eines neuen Luxusmagazins für Tiere",
+      "fashionLabel": "MODE",
+      "fashionTitle": "Die neuen Regeln des Haustierstils",
+      "travelLabel": "REISEN",
+      "travelTitle": "Wunderschöne Reisen mit Ihrem Tier",
+      "rescueLabel": "RETTUNG",
+      "rescueTitle": "Geschichten, die das Leben eines Tieres verändern können"
+    },
+    "todayStories": {
+      "heading": "Heutige Geschichten",
+      "readAll": "ALLE LESEN →",
+      "listenTitle": "PETS & DOGUE anhören",
+      "listenDescription": "Wählen Sie eine Stimme und tippen Sie neben einer Geschichte auf den Lautsprecher.",
+      "femaleSpeaker": "Weibliche Stimme",
+      "maleSpeaker": "Männliche Stimme",
+      "stop": "■ Stopp",
+      "editorSelection": "AUSWAHL DER REDAKTION",
+      "editorTitle": "Stil, Pflege, Reisen und die Geschichten, die Tiere verdienen",
+      "photographyLabel": "FOTOGRAFIE",
+      "photographyTitle": "So bereiten Sie Ihr Tier auf ein Magazin-Fotoshooting vor",
+      "photographyDescription": "Pflege, Licht, Komfort und einfache Techniken für ein redaktionelles Porträt.",
+      "travelLabel": "REISEN",
+      "travelTitle": "Der Aufstieg luxuriöser Reisen mit Haustieren",
+      "travelDescription": "Ein Blick in Hotels und Reiseziele, die bessere Erlebnisse für Tiere schaffen.",
+      "guideLabel": "NÜTZLICHER RATGEBER",
+      "guideTitle": "Wie DOGUE Trust tierfreundliche Empfehlungen schützt",
+      "guideDescription": "Meldungen der Community und Überprüfungen helfen, Informationen nützlich und zuverlässig zu halten.",
+      "communityLabel": "COMMUNITY",
+      "communityTitle": "Die Menschen, die Tieren hinter den Kulissen helfen",
+      "communityDescription": "Lernen Sie Freiwillige kennen, die mit praktischer Hilfe und Sichtbarkeit Veränderungen schaffen."
+    },
+    "visualStories": {
+      "heading": "Visuelle Geschichten",
+      "openGallery": "FOTOGALERIE ÖFFNEN →",
+      "communityLabel": "COMMUNITY",
+      "communityTitle": "Ein schönes gemeinsames Leben",
+      "coverLabel": "COVERSTAR",
+      "coverTitle": "Könnte Ihr Tier das nächste sein?",
+      "portraitLabel": "PORTRÄT",
+      "portraitTitle": "Sanfte Eleganz",
+      "wellnessLabel": "WOHLBEFINDEN",
+      "wellnessTitle": "Pflegerituale",
+      "rescueLabel": "RETTUNG",
+      "rescueTitle": "Eine Geschichte, die geteilt werden sollte",
+      "exoticLabel": "EXOTISCH",
+      "exoticTitle": "Farbe und Freiheit",
+      "travelLabel": "REISEN",
+      "travelTitle": "Sommer am Meer",
+      "localLabel": "LOKAL",
+      "localTitle": "Treffen in Ihrer Nähe",
+      "clubLabel": "CLUB",
+      "clubTitle": "Partnervorteile"
+    },
+    "rubrics": {
+      "heading": "Alle Rubriken entdecken",
+      "allRubrics": "ALLE RUBRIKEN →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Fotos",
+      "photosDescription": "Porträts, Editorials und unvergessliche Momente.",
+      "articlesEyebrow": "LESEN & HÖREN",
+      "articlesTitle": "Artikel",
+      "articlesDescription": "Geschichten, Interviews und hilfreiche redaktionelle Ratgeber.",
+      "fashionEyebrow": "LUXUSSTIL",
+      "fashionTitle": "Mode",
+      "fashionDescription": "Accessoires, Stil, Shopping und redaktionelle Looks.",
+      "travelEyebrow": "DIE WELT VON DOGUE",
+      "travelTitle": "Reisen",
+      "travelDescription": "Hotels, Strände und unvergessliche Reisen.",
+      "wellnessEyebrow": "PFLEGE",
+      "wellnessTitle": "Wohlbefinden",
+      "wellnessDescription": "Gesundheit, Pflege und ruhige Alltagsroutinen.",
+      "rescueEyebrow": "MIT SINN",
+      "rescueTitle": "Rettung",
+      "rescueDescription": "Adoption, Sichtbarkeit und Geschichten, die zählen.",
+      "placesEyebrow": "IN IHRER NÄHE",
+      "placesTitle": "Orte",
+      "placesDescription": "Finden Sie Cafés, Hotels, Parks, Strände und Dienstleistungen.",
+      "contestsEyebrow": "GEWINNEN & GLÄNZEN",
+      "contestsTitle": "Wettbewerbe",
+      "contestsDescription": "Abstimmungen, Preise, Challenges und Cover-Wettbewerbe.",
+      "coverStarsEyebrow": "NÄCHSTE AUSGABE",
+      "coverStarsTitle": "Coverstars",
+      "coverStarsDescription": "Melden Sie Ihr Tier an und werden Sie Teil des Magazins.",
+      "communityEyebrow": "LOKAL",
+      "communityTitle": "Community",
+      "communityDescription": "Beiträge, Empfehlungen und Unterstützung in Ihrer Nähe.",
+      "marketplaceEyebrow": "MITGLIEDER",
+      "marketplaceTitle": "Marktplatz",
+      "marketplaceDescription": "Anzeigen, Accessoires, Dienstleistungen und verantwortungsvolle Vermittlung.",
+      "partnersEyebrow": "CLUBVORTEILE",
+      "partnersTitle": "Partner",
+      "partnersDescription": "Rabatte, Angebote und ausgewählte Premium-Dienstleistungen."
+    },
+    "useful": {
+      "heading": "Schön und nützlich",
+      "intro": "PETS & DOGUE verbindet luxuriöse redaktionelle Inhalte mit praktischen Services für Menschen, die mit Tieren leben, reisen und sich um sie kümmern.",
+      "placesTitle": "Orte finden",
+      "placesDescription": "Suchen Sie tierfreundliche Cafés, Hotels, Strände, Parks, Tierärzte und Groomer.",
+      "marketplaceTitle": "Marktplatz",
+      "marketplaceDescription": "Entdecken Sie Anzeigen, Dienstleistungen, Accessoires und verantwortungsvolle Vermittlungsbeiträge.",
+      "communityTitle": "Lokale Community",
+      "communityDescription": "Stellen Sie Fragen, teilen Sie Empfehlungen und entdecken Sie Informationen in Ihrer Nähe.",
+      "helpTitle": "Tieren helfen",
+      "helpDescription": "Unterstützen Sie Rettungsfälle, Adoptionen und Tiere, die Sichtbarkeit brauchen.",
+      "starTitle": "Zum Star werden",
+      "starDescription": "Laden Sie Ihr Tier hoch und treten Sie um das nächste PETS & DOGUE Cover an.",
+      "clubTitle": "Clubvorteile",
+      "clubDescription": "Entdecken Sie Rabatte bei Hotels, Cafés und Premium-Services für Tiere."
+    },
+    "club": {
+      "heading": "Werden Sie Teil der PETS & DOGUE Welt",
+      "description": "Werden Sie Clubmitglied und erhalten Sie Zugang zu Cover-Wettbewerben, Partnervorteilen, exklusiven Inhalten, einer Mitgliederidentität und zukünftigen Premium-Erlebnissen.",
+      "coverEntry": "Teilnahme am Cover-Wettbewerb",
+      "discounts": "Partnerrabatte",
+      "qrCard": "QR-Mitgliedskarte",
+      "premiumStories": "Premium-Geschichten",
+      "contests": "Wettbewerbe und Preise",
+      "community": "Community-Zugang",
+      "button": "PETS & DOGUE CLUB BEITRETEN →"
+    },
+    "newsletter": {
+      "heading": "Ihr Platz in der ersten Reihe der Tierwelt",
+      "description": "Erhalten Sie neue Ausgaben, Coverstar-Ankündigungen, visuelle Geschichten, Reiseideen und Community-News.",
+      "placeholder": "Ihre E-Mail-Adresse",
+      "button": "ABONNIEREN"
+    }
+  },
 
-    newsletter: {
-      heading: "Ваше місце в першому ряду світу тварин",
-      description:
-        "Отримуйте нові випуски, оголошення зірок обкладинки, візуальні історії, ідеї подорожей і новини спільноти.",
-      placeholder: "Ваша електронна адреса",
-      button: "ПІДПИСАТИСЯ"
+  "es": {
+    "hero": {
+      "issueLabel": "ÚLTIMO NÚMERO",
+      "title": "Miso: la primera estrella de portada de PETS & DOGUE",
+      "description": "Abre el número 01 y entra en el universo visual de PETS & DOGUE.",
+      "tapStar": "TOCA LA ESTRELLA",
+      "myPetIs": "MI MASCOTA ES",
+      "nextCoverStar": "LA PRÓXIMA\nESTRELLA DE PORTADA",
+      "enter": "PARTICIPAR →"
+    },
+    "stories": {
+      "issue": "Número 01",
+      "coverStars": "Estrellas de portada",
+      "articles": "Artículos",
+      "fashion": "Moda",
+      "travel": "Viajes",
+      "wellness": "Bienestar",
+      "photos": "Fotos",
+      "rescue": "Rescate",
+      "places": "Lugares",
+      "contests": "Concursos",
+      "offers": "Ofertas",
+      "market": "Mercado"
+    },
+    "editorial": {
+      "heading": "Dentro de PETS & DOGUE",
+      "viewAll": "VER TODAS LAS HISTORIAS →",
+      "coverLabel": "HISTORIA DE PORTADA",
+      "coverTitle": "El comienzo de una nueva revista de lujo sobre animales",
+      "fashionLabel": "MODA",
+      "fashionTitle": "Las nuevas reglas del estilo para mascotas",
+      "travelLabel": "VIAJES",
+      "travelTitle": "Hermosas escapadas con tu mascota",
+      "rescueLabel": "RESCATE",
+      "rescueTitle": "Historias que pueden cambiar la vida de un animal"
+    },
+    "todayStories": {
+      "heading": "Historias de hoy",
+      "readAll": "LEER TODO →",
+      "listenTitle": "Escucha PETS & DOGUE",
+      "listenDescription": "Elige una voz y toca el altavoz junto a una historia.",
+      "femaleSpeaker": "Voz femenina",
+      "maleSpeaker": "Voz masculina",
+      "stop": "■ Detener",
+      "editorSelection": "SELECCIÓN DE LA REDACCIÓN",
+      "editorTitle": "Estilo, cuidados, viajes y las historias que los animales merecen",
+      "photographyLabel": "FOTOGRAFÍA",
+      "photographyTitle": "Cómo preparar a tu mascota para una sesión fotográfica de revista",
+      "photographyDescription": "Aseo, luz, comodidad y técnicas sencillas para un retrato editorial.",
+      "travelLabel": "VIAJES",
+      "travelTitle": "El auge de los viajes de lujo con mascotas",
+      "travelDescription": "Dentro de los hoteles y destinos que crean mejores experiencias para los animales.",
+      "guideLabel": "GUÍA ÚTIL",
+      "guideTitle": "Cómo DOGUE Trust protege las recomendaciones pet-friendly",
+      "guideDescription": "Los reportes de la comunidad y la verificación ayudan a mantener la información útil y precisa.",
+      "communityLabel": "COMUNIDAD",
+      "communityTitle": "Las personas que ayudan a los animales entre bastidores",
+      "communityDescription": "Conoce a los voluntarios que crean cambios mediante ayuda práctica y visibilidad."
+    },
+    "visualStories": {
+      "heading": "Historias visuales",
+      "openGallery": "ABRIR GALERÍA DE FOTOS →",
+      "communityLabel": "COMUNIDAD",
+      "communityTitle": "Vidas hermosas juntos",
+      "coverLabel": "ESTRELLA DE PORTADA",
+      "coverTitle": "¿Podría tu mascota ser la próxima?",
+      "portraitLabel": "RETRATO",
+      "portraitTitle": "Elegancia suave",
+      "wellnessLabel": "BIENESTAR",
+      "wellnessTitle": "Rituales de cuidado",
+      "rescueLabel": "RESCATE",
+      "rescueTitle": "Una historia que merece ser compartida",
+      "exoticLabel": "EXÓTICO",
+      "exoticTitle": "Color y libertad",
+      "travelLabel": "VIAJES",
+      "travelTitle": "Verano junto al mar",
+      "localLabel": "LOCAL",
+      "localTitle": "Encuentros cerca de ti",
+      "clubLabel": "CLUB",
+      "clubTitle": "Beneficios de socios"
+    },
+    "rubrics": {
+      "heading": "Explora todas las secciones",
+      "allRubrics": "TODAS LAS SECCIONES →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Fotos",
+      "photosDescription": "Retratos, editoriales y momentos inolvidables.",
+      "articlesEyebrow": "LEE Y ESCUCHA",
+      "articlesTitle": "Artículos",
+      "articlesDescription": "Historias, entrevistas y guías editoriales útiles.",
+      "fashionEyebrow": "ESTILO DE LUJO",
+      "fashionTitle": "Moda",
+      "fashionDescription": "Accesorios, estilo, compras y looks editoriales.",
+      "travelEyebrow": "MUNDO DOGUE",
+      "travelTitle": "Viajes",
+      "travelDescription": "Hoteles, playas y viajes inolvidables.",
+      "wellnessEyebrow": "CUIDADOS",
+      "wellnessTitle": "Bienestar",
+      "wellnessDescription": "Salud, aseo y rutinas diarias tranquilas.",
+      "rescueEyebrow": "CON PROPÓSITO",
+      "rescueTitle": "Rescate",
+      "rescueDescription": "Adopción, visibilidad e historias que importan.",
+      "placesEyebrow": "CERCA DE TI",
+      "placesTitle": "Lugares",
+      "placesDescription": "Encuentra cafés, hoteles, parques, playas y servicios.",
+      "contestsEyebrow": "GANA Y BRILLA",
+      "contestsTitle": "Concursos",
+      "contestsDescription": "Votaciones, premios, retos y concursos de portada.",
+      "coverStarsEyebrow": "PRÓXIMO NÚMERO",
+      "coverStarsTitle": "Estrellas de portada",
+      "coverStarsDescription": "Inscribe a tu mascota y forma parte de la revista.",
+      "communityEyebrow": "LOCAL",
+      "communityTitle": "Comunidad",
+      "communityDescription": "Publicaciones, recomendaciones y apoyo cerca de ti.",
+      "marketplaceEyebrow": "MIEMBROS",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Anuncios, accesorios, servicios y adopciones responsables.",
+      "partnersEyebrow": "BENEFICIOS DEL CLUB",
+      "partnersTitle": "Socios",
+      "partnersDescription": "Descuentos, ofertas y servicios premium seleccionados."
+    },
+    "useful": {
+      "heading": "Bonito y útil",
+      "intro": "PETS & DOGUE combina contenido editorial de lujo con servicios prácticos para personas que viven, viajan y cuidan de los animales.",
+      "placesTitle": "Encontrar lugares",
+      "placesDescription": "Busca cafés, hoteles, playas, parques, veterinarios y peluquerías pet-friendly.",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Consulta anuncios, servicios, accesorios y publicaciones responsables de adopción.",
+      "communityTitle": "Comunidad local",
+      "communityDescription": "Haz preguntas, comparte recomendaciones y descubre información cercana.",
+      "helpTitle": "Ayudar a los animales",
+      "helpDescription": "Apoya rescates, adopciones y animales que necesitan visibilidad.",
+      "starTitle": "Convertirse en estrella",
+      "starDescription": "Sube a tu mascota y compite por la próxima portada de PETS & DOGUE.",
+      "clubTitle": "Beneficios del club",
+      "clubDescription": "Descubre descuentos en hoteles, cafés y servicios premium para mascotas."
+    },
+    "club": {
+      "heading": "Únete al mundo de PETS & DOGUE",
+      "description": "Forma parte del Club para acceder a concursos de portada, beneficios de socios, contenido exclusivo, identidad de miembro y futuras experiencias premium.",
+      "coverEntry": "Participación en el concurso de portada",
+      "discounts": "Descuentos de socios",
+      "qrCard": "Tarjeta QR de miembro",
+      "premiumStories": "Historias premium",
+      "contests": "Concursos y premios",
+      "community": "Acceso a la comunidad",
+      "button": "UNIRSE AL CLUB PETS & DOGUE →"
+    },
+    "newsletter": {
+      "heading": "Tu asiento en primera fila del mundo animal",
+      "description": "Recibe nuevos números, anuncios de estrellas de portada, historias visuales, ideas de viaje y novedades de la comunidad.",
+      "placeholder": "Tu correo electrónico",
+      "button": "SUSCRIBIRSE"
+    }
+  },  "it": {
+    "hero": {
+      "issueLabel": "ULTIMO NUMERO",
+      "title": "Miso: la prima star di copertina di PETS & DOGUE",
+      "description": "Apri il numero 01 ed entra nel mondo visivo di PETS & DOGUE.",
+      "tapStar": "TOCCA LA STELLA",
+      "myPetIs": "IL MIO ANIMALE È",
+      "nextCoverStar": "LA PROSSIMA\nSTAR DI COPERTINA",
+      "enter": "PARTECIPA →"
+    },
+    "stories": {
+      "issue": "Numero 01",
+      "coverStars": "Star di copertina",
+      "articles": "Articoli",
+      "fashion": "Moda",
+      "travel": "Viaggi",
+      "wellness": "Benessere",
+      "photos": "Foto",
+      "rescue": "Salvataggio",
+      "places": "Luoghi",
+      "contests": "Concorsi",
+      "offers": "Offerte",
+      "market": "Mercato"
+    },
+    "editorial": {
+      "heading": "Dentro PETS & DOGUE",
+      "viewAll": "VEDI TUTTE LE STORIE →",
+      "coverLabel": "STORIA DI COPERTINA",
+      "coverTitle": "L’inizio di una nuova rivista di lusso dedicata agli animali",
+      "fashionLabel": "MODA",
+      "fashionTitle": "Le nuove regole dello stile per animali",
+      "travelLabel": "VIAGGI",
+      "travelTitle": "Splendide fughe con il tuo animale",
+      "rescueLabel": "SALVATAGGIO",
+      "rescueTitle": "Storie che possono cambiare la vita di un animale"
+    },
+    "todayStories": {
+      "heading": "Le storie di oggi",
+      "readAll": "LEGGI TUTTO →",
+      "listenTitle": "Ascolta PETS & DOGUE",
+      "listenDescription": "Scegli una voce e tocca l’altoparlante accanto a una storia.",
+      "femaleSpeaker": "Voce femminile",
+      "maleSpeaker": "Voce maschile",
+      "stop": "■ Stop",
+      "editorSelection": "SELEZIONE DELLA REDAZIONE",
+      "editorTitle": "Stile, cura, viaggi e le storie che gli animali meritano",
+      "photographyLabel": "FOTOGRAFIA",
+      "photographyTitle": "Come preparare il tuo animale per un servizio fotografico da rivista",
+      "photographyDescription": "Toelettatura, luce, comfort e tecniche semplici per un ritratto editoriale.",
+      "travelLabel": "VIAGGI",
+      "travelTitle": "La crescita dei viaggi di lusso pet-friendly",
+      "travelDescription": "Dentro hotel e destinazioni che creano esperienze migliori per gli animali.",
+      "guideLabel": "GUIDA UTILE",
+      "guideTitle": "Come DOGUE Trust protegge le raccomandazioni pet-friendly",
+      "guideDescription": "Segnalazioni della community e verifiche aiutano a mantenere le informazioni utili e precise.",
+      "communityLabel": "COMUNITÀ",
+      "communityTitle": "Le persone che aiutano gli animali dietro le quinte",
+      "communityDescription": "Scopri i volontari che creano cambiamento attraverso aiuto concreto e visibilità."
+    },
+    "visualStories": {
+      "heading": "Storie visive",
+      "openGallery": "APRI LA GALLERIA FOTOGRAFICA →",
+      "communityLabel": "COMUNITÀ",
+      "communityTitle": "Vite bellissime insieme",
+      "coverLabel": "STAR DI COPERTINA",
+      "coverTitle": "Il tuo animale potrebbe essere il prossimo?",
+      "portraitLabel": "RITRATTO",
+      "portraitTitle": "Eleganza delicata",
+      "wellnessLabel": "BENESSERE",
+      "wellnessTitle": "Rituali di cura",
+      "rescueLabel": "SALVATAGGIO",
+      "rescueTitle": "Una storia che merita di essere condivisa",
+      "exoticLabel": "ESOTICO",
+      "exoticTitle": "Colore e libertà",
+      "travelLabel": "VIAGGI",
+      "travelTitle": "Estate sul mare",
+      "localLabel": "LOCALE",
+      "localTitle": "Incontri vicino a te",
+      "clubLabel": "CLUB",
+      "clubTitle": "Vantaggi dei partner"
+    },
+    "rubrics": {
+      "heading": "Esplora tutte le rubriche",
+      "allRubrics": "TUTTE LE RUBRICHE →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Foto",
+      "photosDescription": "Ritratti, editoriali e momenti indimenticabili.",
+      "articlesEyebrow": "LEGGI E ASCOLTA",
+      "articlesTitle": "Articoli",
+      "articlesDescription": "Storie, interviste e guide editoriali utili.",
+      "fashionEyebrow": "STILE DI LUSSO",
+      "fashionTitle": "Moda",
+      "fashionDescription": "Accessori, stile, shopping e look editoriali.",
+      "travelEyebrow": "MONDO DOGUE",
+      "travelTitle": "Viaggi",
+      "travelDescription": "Hotel, spiagge e viaggi indimenticabili.",
+      "wellnessEyebrow": "CURA",
+      "wellnessTitle": "Benessere",
+      "wellnessDescription": "Salute, toelettatura e tranquille routine quotidiane.",
+      "rescueEyebrow": "CON UNO SCOPO",
+      "rescueTitle": "Salvataggio",
+      "rescueDescription": "Adozione, visibilità e storie che contano.",
+      "placesEyebrow": "VICINO A TE",
+      "placesTitle": "Luoghi",
+      "placesDescription": "Trova caffè, hotel, parchi, spiagge e servizi.",
+      "contestsEyebrow": "VINCI E BRILLA",
+      "contestsTitle": "Concorsi",
+      "contestsDescription": "Votazioni, premi, sfide e concorsi di copertina.",
+      "coverStarsEyebrow": "PROSSIMO NUMERO",
+      "coverStarsTitle": "Star di copertina",
+      "coverStarsDescription": "Iscrivi il tuo animale e diventa parte della rivista.",
+      "communityEyebrow": "LOCALE",
+      "communityTitle": "Comunità",
+      "communityDescription": "Post, consigli e supporto vicino a te.",
+      "marketplaceEyebrow": "MEMBRI",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Annunci, accessori, servizi e adozioni responsabili.",
+      "partnersEyebrow": "VANTAGGI DEL CLUB",
+      "partnersTitle": "Partner",
+      "partnersDescription": "Sconti, offerte e servizi premium selezionati."
+    },
+    "useful": {
+      "heading": "Bello e utile",
+      "intro": "PETS & DOGUE unisce contenuti editoriali di lusso a servizi pratici per chi vive, viaggia e si prende cura degli animali.",
+      "placesTitle": "Trova luoghi",
+      "placesDescription": "Cerca caffè, hotel, spiagge, parchi, veterinari e toelettatori pet-friendly.",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Sfoglia annunci, servizi, accessori e post di adozione responsabile.",
+      "communityTitle": "Comunità locale",
+      "communityDescription": "Fai domande, condividi consigli e scopri informazioni vicino a te.",
+      "helpTitle": "Aiuta gli animali",
+      "helpDescription": "Sostieni salvataggi, adozioni e animali che hanno bisogno di visibilità.",
+      "starTitle": "Diventa una star",
+      "starDescription": "Carica il tuo animale e partecipa per la prossima copertina di PETS & DOGUE.",
+      "clubTitle": "Vantaggi del club",
+      "clubDescription": "Scopri sconti in hotel, caffè e servizi premium per animali."
+    },
+    "club": {
+      "heading": "Entra nel mondo PETS & DOGUE",
+      "description": "Entra nel Club per accedere ai concorsi di copertina, ai vantaggi dei partner, ai contenuti esclusivi, all’identità membro e alle future esperienze premium.",
+      "coverEntry": "Partecipazione al concorso di copertina",
+      "discounts": "Sconti dei partner",
+      "qrCard": "Tessera QR del membro",
+      "premiumStories": "Storie premium",
+      "contests": "Concorsi e premi",
+      "community": "Accesso alla community",
+      "button": "UNISCITI AL CLUB PETS & DOGUE →"
+    },
+    "newsletter": {
+      "heading": "Il tuo posto in prima fila nel mondo animale",
+      "description": "Ricevi nuovi numeri, annunci delle star di copertina, storie visive, idee di viaggio e aggiornamenti della community.",
+      "placeholder": "Il tuo indirizzo e-mail",
+      "button": "ISCRIVITI"
+    }
+  },
+
+  "pt": {
+    "hero": {
+      "issueLabel": "ÚLTIMA EDIÇÃO",
+      "title": "Miso: a primeira estrela de capa da PETS & DOGUE",
+      "description": "Abra a edição 01 e entre no universo visual da PETS & DOGUE.",
+      "tapStar": "TOQUE NA ESTRELA",
+      "myPetIs": "O MEU ANIMAL É",
+      "nextCoverStar": "A PRÓXIMA\nESTRELA DE CAPA",
+      "enter": "PARTICIPAR →"
+    },
+    "stories": {
+      "issue": "Edição 01",
+      "coverStars": "Estrelas de capa",
+      "articles": "Artigos",
+      "fashion": "Moda",
+      "travel": "Viagens",
+      "wellness": "Bem-estar",
+      "photos": "Fotografias",
+      "rescue": "Resgate",
+      "places": "Locais",
+      "contests": "Concursos",
+      "offers": "Ofertas",
+      "market": "Mercado"
+    },
+    "editorial": {
+      "heading": "Dentro da PETS & DOGUE",
+      "viewAll": "VER TODAS AS HISTÓRIAS →",
+      "coverLabel": "HISTÓRIA DE CAPA",
+      "coverTitle": "O início de uma nova revista de luxo sobre animais",
+      "fashionLabel": "MODA",
+      "fashionTitle": "As novas regras do estilo animal",
+      "travelLabel": "VIAGENS",
+      "travelTitle": "Belas escapadelas com o seu animal",
+      "rescueLabel": "RESGATE",
+      "rescueTitle": "Histórias que podem mudar a vida de um animal"
+    },
+    "todayStories": {
+      "heading": "Histórias de hoje",
+      "readAll": "LER TODAS →",
+      "listenTitle": "Ouça PETS & DOGUE",
+      "listenDescription": "Escolha uma voz e toque no altifalante junto a uma história.",
+      "femaleSpeaker": "Voz feminina",
+      "maleSpeaker": "Voz masculina",
+      "stop": "■ Parar",
+      "editorSelection": "SELEÇÃO EDITORIAL",
+      "editorTitle": "Estilo, cuidados, viagens e as histórias que os animais merecem",
+      "photographyLabel": "FOTOGRAFIA",
+      "photographyTitle": "Como preparar o seu animal para uma sessão fotográfica de revista",
+      "photographyDescription": "Cuidados, luz, conforto e técnicas simples para um retrato editorial.",
+      "travelLabel": "VIAGENS",
+      "travelTitle": "A ascensão das viagens de luxo com animais",
+      "travelDescription": "Dentro dos hotéis e destinos que criam melhores experiências para os animais.",
+      "guideLabel": "GUIA ÚTIL",
+      "guideTitle": "Como o DOGUE Trust protege as recomendações pet-friendly",
+      "guideDescription": "Relatórios da comunidade e verificação ajudam a manter as informações úteis e precisas.",
+      "communityLabel": "COMUNIDADE",
+      "communityTitle": "As pessoas que ajudam os animais nos bastidores",
+      "communityDescription": "Conheça os voluntários que criam mudança através de ajuda prática e visibilidade."
+    },
+    "visualStories": {
+      "heading": "Histórias visuais",
+      "openGallery": "ABRIR GALERIA DE FOTOS →",
+      "communityLabel": "COMUNIDADE",
+      "communityTitle": "Vidas bonitas em conjunto",
+      "coverLabel": "ESTRELA DE CAPA",
+      "coverTitle": "O seu animal poderá ser o próximo?",
+      "portraitLabel": "RETRATO",
+      "portraitTitle": "Elegância suave",
+      "wellnessLabel": "BEM-ESTAR",
+      "wellnessTitle": "Rituais de cuidado",
+      "rescueLabel": "RESGATE",
+      "rescueTitle": "Uma história que merece ser partilhada",
+      "exoticLabel": "EXÓTICO",
+      "exoticTitle": "Cor e liberdade",
+      "travelLabel": "VIAGENS",
+      "travelTitle": "Verão junto ao mar",
+      "localLabel": "LOCAL",
+      "localTitle": "Encontros perto de si",
+      "clubLabel": "CLUBE",
+      "clubTitle": "Benefícios dos parceiros"
+    },
+    "rubrics": {
+      "heading": "Explore todas as rubricas",
+      "allRubrics": "TODAS AS RUBRICAS →",
+      "photosEyebrow": "VISUAL DOGUE",
+      "photosTitle": "Fotografias",
+      "photosDescription": "Retratos, editoriais e momentos inesquecíveis.",
+      "articlesEyebrow": "LER E OUVIR",
+      "articlesTitle": "Artigos",
+      "articlesDescription": "Histórias, entrevistas e guias editoriais úteis.",
+      "fashionEyebrow": "ESTILO DE LUXO",
+      "fashionTitle": "Moda",
+      "fashionDescription": "Acessórios, estilo, compras e looks editoriais.",
+      "travelEyebrow": "MUNDO DOGUE",
+      "travelTitle": "Viagens",
+      "travelDescription": "Hotéis, praias e viagens inesquecíveis.",
+      "wellnessEyebrow": "CUIDADOS",
+      "wellnessTitle": "Bem-estar",
+      "wellnessDescription": "Saúde, grooming e rotinas diárias tranquilas.",
+      "rescueEyebrow": "COM PROPÓSITO",
+      "rescueTitle": "Resgate",
+      "rescueDescription": "Adoção, visibilidade e histórias importantes.",
+      "placesEyebrow": "PERTO DE SI",
+      "placesTitle": "Locais",
+      "placesDescription": "Encontre cafés, hotéis, parques, praias e serviços.",
+      "contestsEyebrow": "GANHE E BRILHE",
+      "contestsTitle": "Concursos",
+      "contestsDescription": "Votações, prémios, desafios e concursos de capa.",
+      "coverStarsEyebrow": "PRÓXIMA EDIÇÃO",
+      "coverStarsTitle": "Estrelas de capa",
+      "coverStarsDescription": "Inscreva o seu animal e faça parte da revista.",
+      "communityEyebrow": "LOCAL",
+      "communityTitle": "Comunidade",
+      "communityDescription": "Publicações, recomendações e apoio perto de si.",
+      "marketplaceEyebrow": "MEMBROS",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Anúncios, acessórios, serviços e adoção responsável.",
+      "partnersEyebrow": "BENEFÍCIOS DO CLUBE",
+      "partnersTitle": "Parceiros",
+      "partnersDescription": "Descontos, ofertas e serviços premium selecionados."
+    },
+    "useful": {
+      "heading": "Bonito e útil",
+      "intro": "PETS & DOGUE combina conteúdo editorial de luxo com serviços práticos para pessoas que vivem, viajam e cuidam de animais.",
+      "placesTitle": "Encontrar locais",
+      "placesDescription": "Pesquise cafés, hotéis, praias, parques, veterinários e groomers pet-friendly.",
+      "marketplaceTitle": "Marketplace",
+      "marketplaceDescription": "Consulte anúncios, serviços, acessórios e publicações de adoção responsável.",
+      "communityTitle": "Comunidade local",
+      "communityDescription": "Faça perguntas, partilhe recomendações e descubra informações perto de si.",
+      "helpTitle": "Ajudar os animais",
+      "helpDescription": "Apoie casos de resgate, adoção e animais que precisam de visibilidade.",
+      "starTitle": "Torne-se uma estrela",
+      "starDescription": "Carregue a fotografia do seu animal e concorra à próxima capa da PETS & DOGUE.",
+      "clubTitle": "Benefícios do clube",
+      "clubDescription": "Descubra descontos em hotéis, cafés e serviços premium para animais."
+    },
+    "club": {
+      "heading": "Entre no mundo PETS & DOGUE",
+      "description": "Junte-se ao Clube para participar em concursos de capa, receber benefícios de parceiros, conteúdo exclusivo, identidade de membro e futuras experiências premium.",
+      "coverEntry": "Participação no concurso de capa",
+      "discounts": "Descontos de parceiros",
+      "qrCard": "Cartão QR de membro",
+      "premiumStories": "Histórias premium",
+      "contests": "Concursos e prémios",
+      "community": "Acesso à comunidade",
+      "button": "ADERIR AO CLUBE PETS & DOGUE →"
+    },
+    "newsletter": {
+      "heading": "O seu lugar na primeira fila do mundo animal",
+      "description": "Receba novas edições, anúncios de estrelas de capa, histórias visuais, ideias de viagem e atualizações da comunidade.",
+      "placeholder": "O seu endereço de e-mail",
+      "button": "SUBSCREVER"
     }
   }
 };
