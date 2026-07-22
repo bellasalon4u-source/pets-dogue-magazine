@@ -1,5 +1,33 @@
+const SUPPORTED_LANGUAGES = {
+  en: "English",
+  uk: "Ukrainian",
+  ru: "Russian",
+  fr: "French",
+  de: "German",
+  es: "Spanish",
+  it: "Italian",
+  pt: "Portuguese",
+  nl: "Dutch",
+  pl: "Polish",
+  cs: "Czech",
+  sk: "Slovak",
+  hu: "Hungarian",
+  ro: "Romanian",
+  bg: "Bulgarian",
+  el: "Greek",
+  sv: "Swedish",
+  da: "Danish",
+  no: "Norwegian",
+  fi: "Finnish",
+  tr: "Turkish",
+  ar: "Arabic",
+  hi: "Hindi"
+};
+
 export default async function handler(request, response) {
   if (request.method !== "POST") {
+    response.setHeader("Allow", "POST");
+
     return response.status(405).json({
       error: "Method not allowed"
     });
@@ -28,12 +56,26 @@ export default async function handler(request, response) {
     ).trim();
 
     const texts = Array.isArray(body.texts)
-      ? body.texts.map((text) => String(text))
+      ? body.texts.map(function (text) {
+          return String(text);
+        })
       : [];
 
-    if (!targetLanguage) {
+    if (!SUPPORTED_LANGUAGES[sourceLanguage]) {
       return response.status(400).json({
-        error: "Target language is required"
+        error: "Unsupported source language"
+      });
+    }
+
+    if (!SUPPORTED_LANGUAGES[targetLanguage]) {
+      return response.status(400).json({
+        error: "Unsupported target language"
+      });
+    }
+
+    if (targetLanguage === sourceLanguage) {
+      return response.status(200).json({
+        translations: texts
       });
     }
 
@@ -49,37 +91,24 @@ export default async function handler(request, response) {
       });
     }
 
-    const languageNames = {
-      en: "English",
-      uk: "Ukrainian",
-      ru: "Russian",
-      fr: "French",
-      de: "German",
-      es: "Spanish",
-      it: "Italian",
-      pt: "Portuguese",
-      nl: "Dutch",
-      pl: "Polish",
-      cs: "Czech",
-      sk: "Slovak",
-      hu: "Hungarian",
-      ro: "Romanian",
-      bg: "Bulgarian",
-      el: "Greek",
-      sv: "Swedish",
-      da: "Danish",
-      no: "Norwegian",
-      fi: "Finnish",
-      tr: "Turkish",
-      ar: "Arabic",
-      hi: "Hindi"
-    };
+    const totalCharacters = texts.reduce(
+      function (total, text) {
+        return total + text.length;
+      },
+      0
+    );
+
+    if (totalCharacters > 15000) {
+      return response.status(400).json({
+        error: "Translation request is too large"
+      });
+    }
 
     const sourceName =
-      languageNames[sourceLanguage] || sourceLanguage;
+      SUPPORTED_LANGUAGES[sourceLanguage];
 
     const targetName =
-      languageNames[targetLanguage] || targetLanguage;
+      SUPPORTED_LANGUAGES[targetLanguage];
 
     const openAIResponse = await fetch(
       "https://api.openai.com/v1/responses",
@@ -91,13 +120,17 @@ export default async function handler(request, response) {
         },
         body: JSON.stringify({
           model: "gpt-4.1-mini",
+
           instructions:
             `Translate website interface text from ${sourceName} to ${targetName}. ` +
-            "Return only valid JSON. Preserve PETS & DOGUE, DOGUE, Miso, URLs, email addresses, emoji, numbers and placeholders. " +
-            "Keep the same order and return exactly one translation for every input string.",
+            "Return only valid JSON matching the required schema. " +
+            "Preserve PETS & DOGUE, DOGUE, Miso, DOGUE Trust, DOGUE Verified, URLs, email addresses, emoji, numbers, HTML entities and placeholders. " +
+            "Do not add explanations. Keep the original order. Return exactly one translation for every input string.",
+
           input: JSON.stringify({
             texts
           }),
+
           text: {
             format: {
               type: "json_schema",
@@ -132,8 +165,11 @@ export default async function handler(request, response) {
 
       return response.status(openAIResponse.status).json({
         error:
-          result?.error?.message ||
-          "Translation service failed"
+          result &&
+          result.error &&
+          result.error.message
+            ? result.error.message
+            : "Translation service failed"
       });
     }
 
@@ -144,20 +180,20 @@ export default async function handler(request, response) {
     }
 
     if (!outputText && Array.isArray(result.output)) {
-      for (const outputItem of result.output) {
+      result.output.forEach(function (outputItem) {
         if (!Array.isArray(outputItem.content)) {
-          continue;
+          return;
         }
 
-        for (const contentItem of outputItem.content) {
+        outputItem.content.forEach(function (contentItem) {
           if (
             contentItem.type === "output_text" &&
             typeof contentItem.text === "string"
           ) {
             outputText += contentItem.text;
           }
-        }
-      }
+        });
+      });
     }
 
     if (!outputText) {
@@ -166,7 +202,20 @@ export default async function handler(request, response) {
       });
     }
 
-    const parsed = JSON.parse(outputText);
+    let parsed;
+
+    try {
+      parsed = JSON.parse(outputText);
+    } catch (error) {
+      console.error(
+        "Invalid OpenAI JSON:",
+        outputText
+      );
+
+      return response.status(502).json({
+        error: "Translation service returned invalid JSON"
+      });
+    }
 
     if (!Array.isArray(parsed.translations)) {
       return response.status(502).json({
@@ -189,7 +238,10 @@ export default async function handler(request, response) {
       translations: parsed.translations
     });
   } catch (error) {
-    console.error("Translation endpoint error:", error);
+    console.error(
+      "Translation endpoint error:",
+      error
+    );
 
     return response.status(500).json({
       error:
@@ -199,4 +251,3 @@ export default async function handler(request, response) {
     });
   }
 }
-      
