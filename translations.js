@@ -2,7 +2,7 @@
   "use strict";
 
   const LANGUAGE_KEY = "pets_dogue_language";
-  const CACHE_KEY = "pets_dogue_translation_cache_v14";
+  const CACHE_KEY = "pets_dogue_translation_cache_v16";
   const SOURCE_LANGUAGE = "en";
   const API_ENDPOINT = "/api/translate";
 
@@ -33,98 +33,29 @@
   ];
 
   const STATUS_TEXT = {
-    en: {
-      translating: "Translating...",
-      unavailable: "Translation is temporarily unavailable."
-    },
-    uk: {
-      translating: "Перекладаємо...",
-      unavailable: "Переклад тимчасово недоступний."
-    },
-    ru: {
-      translating: "Переводим...",
-      unavailable: "Перевод временно недоступен."
-    },
-    fr: {
-      translating: "Traduction...",
-      unavailable: "La traduction est temporairement indisponible."
-    },
-    de: {
-      translating: "Übersetzung...",
-      unavailable: "Die Übersetzung ist vorübergehend nicht verfügbar."
-    },
-    es: {
-      translating: "Traduciendo...",
-      unavailable: "La traducción no está disponible temporalmente."
-    },
-    it: {
-      translating: "Traduzione...",
-      unavailable: "La traduzione non è momentaneamente disponibile."
-    },
-    pt: {
-      translating: "A traduzir...",
-      unavailable: "A tradução está temporariamente indisponível."
-    },
-    nl: {
-      translating: "Vertalen...",
-      unavailable: "De vertaling is tijdelijk niet beschikbaar."
-    },
-    pl: {
-      translating: "Tłumaczenie...",
-      unavailable: "Tłumaczenie jest chwilowo niedostępne."
-    },
-    cs: {
-      translating: "Překládáme...",
-      unavailable: "Překlad je dočasně nedostupný."
-    },
-    sk: {
-      translating: "Prekladáme...",
-      unavailable: "Preklad je dočasne nedostupný."
-    },
-    hu: {
-      translating: "Fordítás...",
-      unavailable: "A fordítás átmenetileg nem érhető el."
-    },
-    ro: {
-      translating: "Se traduce...",
-      unavailable: "Traducerea este temporar indisponibilă."
-    },
-    bg: {
-      translating: "Превеждаме...",
-      unavailable: "Преводът временно не е достъпен."
-    },
-    el: {
-      translating: "Μετάφραση...",
-      unavailable: "Η μετάφραση δεν είναι προσωρινά διαθέσιμη."
-    },
-    sv: {
-      translating: "Översätter...",
-      unavailable: "Översättningen är tillfälligt otillgänglig."
-    },
-    da: {
-      translating: "Oversætter...",
-      unavailable: "Oversættelsen er midlertidigt utilgængelig."
-    },
-    no: {
-      translating: "Oversetter...",
-      unavailable: "Oversettelsen er midlertidig utilgjengelig."
-    },
-    fi: {
-      translating: "Käännetään...",
-      unavailable: "Käännös ei ole tilapäisesti käytettävissä."
-    },
-    tr: {
-      translating: "Çevriliyor...",
-      unavailable: "Çeviri geçici olarak kullanılamıyor."
-    },
-    ar: {
-      translating: "جارٍ الترجمة...",
-      unavailable: "الترجمة غير متاحة مؤقتًا."
-    },
-    hi: {
-      translating: "अनुवाद हो रहा है...",
-      unavailable: "अनुवाद अस्थायी रूप से उपलब्ध नहीं है।"
-    }
+    en: ["Translating...", "Translation is temporarily unavailable."],
+    uk: ["Перекладаємо...", "Переклад тимчасово недоступний."],
+    ru: ["Переводим...", "Перевод временно недоступен."],
+    fr: ["Traduction...", "La traduction est temporairement indisponible."],
+    de: ["Übersetzung...", "Die Übersetzung ist vorübergehend nicht verfügbar."],
+    es: ["Traduciendo...", "La traducción no está disponible temporalmente."],
+    it: ["Traduzione...", "La traduzione non è momentaneamente disponibile."],
+    pt: ["A traduzir...", "A tradução está temporariamente indisponível."],
+    nl: ["Vertalen...", "De vertaling is tijdelijk niet beschikbaar."],
+    pl: ["Tłumaczenie...", "Tłumaczenie jest chwilowo niedostępne."],
+    cs: ["Překládáme...", "Překlad je dočasně nedostupný."],
+    sk: ["Prekladáme...", "Preklad je dočasne nedostupný."],
+    hu: ["Fordítás...", "A fordítás átmenetileg nem érhető el."],
+    ro: ["Se traduce...", "Traducerea este temporar indisponibilă."],
+    bg: ["Превеждаме...", "Преводът временно не е достъпен."],
+    el: ["Μετάφραση...", "Η μετάφραση δεν είναι προσωρινά διαθέσιμη."],
+    sv: ["Översätter...", "Översättningen är tillfälligt otillgänglig."],
+    da: ["Oversætter...", "Oversættelsen er midlertidigt utilgængelig."],
+    no: ["Oversetter...", "Oversettelsen er midlertidig utilgjengelig."],
+    fi: ["Käännetään...", "Käännös ei ole tilapäisesti käytettävissä."],
+    tr: ["Çevriliyor...", "Çeviri geçici olarak kullanılamıyor."],
+    ar: ["جارٍ الترجمة...", "الترجمة غير متاحة مؤقتًا."],
+    hi: ["अनुवाद हो रहा है...", "अनुवाद अस्थायी रूप से उपलब्ध नहीं है।"]
   };
 
   const EXCLUDED_SELECTOR = [
@@ -145,7 +76,7 @@
     "#pd-translation-status"
   ].join(",");
 
-  const TRANSLATABLE_ATTRIBUTES = [
+  const ATTRIBUTES = [
     "placeholder",
     "title",
     "aria-label",
@@ -164,7 +95,9 @@
   const originalTextNodes = new WeakMap();
   const originalAttributes = new WeakMap();
 
-  let selectedLanguage = readSavedLanguage() || SOURCE_LANGUAGE;
+  let selectedLanguage =
+    readSavedLanguage() || SOURCE_LANGUAGE;
+
   let cache = readCache();
   let translationRunning = false;
   let requestVersion = 0;
@@ -172,16 +105,15 @@
   let observerTimer = null;
 
   function getLanguage(code) {
-    return (
-      LANGUAGES.find(function (language) {
-        return language.code === code;
-      }) || LANGUAGES[0]
-    );
+    return LANGUAGES.find(function (language) {
+      return language.code === code;
+    }) || LANGUAGES[0];
   }
 
   function readSavedLanguage() {
     try {
-      const value = localStorage.getItem(LANGUAGE_KEY);
+      const value =
+        localStorage.getItem(LANGUAGE_KEY);
 
       return LANGUAGES.some(function (language) {
         return language.code === value;
@@ -195,9 +127,15 @@
 
   function saveLanguage(code) {
     try {
-      localStorage.setItem(LANGUAGE_KEY, code);
+      localStorage.setItem(
+        LANGUAGE_KEY,
+        code
+      );
     } catch (error) {
-      console.warn("Unable to save selected language.", error);
+      console.warn(
+        "Unable to save selected language.",
+        error
+      );
     }
   }
 
@@ -207,15 +145,13 @@
         localStorage.getItem(CACHE_KEY) || "{}"
       );
 
-      if (
+      return (
         stored &&
         typeof stored === "object" &&
         !Array.isArray(stored)
-      ) {
-        return stored;
-      }
-
-      return {};
+      )
+        ? stored
+        : {};
     } catch (error) {
       return {};
     }
@@ -228,35 +164,52 @@
         JSON.stringify(cache)
       );
     } catch (error) {
-      console.warn("Unable to save translation cache.", error);
+      console.warn(
+        "Unable to save translation cache.",
+        error
+      );
     }
   }
 
   function hashText(text) {
     let hash = 2166136261;
 
-    for (let index = 0; index < text.length; index += 1) {
+    for (
+      let index = 0;
+      index < text.length;
+      index += 1
+    ) {
       hash ^= text.charCodeAt(index);
       hash = Math.imul(hash, 16777619);
     }
 
-    return `${(hash >>> 0).toString(36)}_${text.length}`;
+    return (
+      (hash >>> 0).toString(36) +
+      "_" +
+      text.length
+    );
   }
 
-  function getCachedTranslation(languageCode, text) {
-    const languageCache = cache[languageCode];
+  function getCachedTranslation(
+    languageCode,
+    text
+  ) {
+    const languageCache =
+      cache[languageCode];
 
     if (!languageCache) {
       return "";
     }
 
-    const item = languageCache[hashText(text)];
+    const item =
+      languageCache[hashText(text)];
 
-    if (!item || item.original !== text) {
-      return "";
-    }
-
-    return item.translation || "";
+    return (
+      item &&
+      item.original === text
+    )
+      ? item.translation || ""
+      : "";
   }
 
   function storeTranslation(
@@ -269,8 +222,8 @@
     }
 
     cache[languageCode][hashText(original)] = {
-      original,
-      translation
+      original: original,
+      translation: translation
     };
   }
 
@@ -282,7 +235,9 @@
 
   function containsLetters(value) {
     try {
-      return /\p{L}/u.test(String(value || ""));
+      return /\p{L}/u.test(
+        String(value || "")
+      );
     } catch (error) {
       return /[A-Za-zА-Яа-яЁёІіЇїЄє]/.test(
         String(value || "")
@@ -291,17 +246,20 @@
   }
 
   function shouldTranslate(value) {
-    const text = normalizeText(value);
+    const text =
+      normalizeText(value);
 
-    if (!text || text.length < 2) {
+    if (
+      !text ||
+      text.length < 2 ||
+      !containsLetters(text)
+    ) {
       return false;
     }
 
-    if (!containsLetters(text)) {
-      return false;
-    }
-
-    if (PROTECTED_TEXTS.has(text)) {
+    if (
+      PROTECTED_TEXTS.has(text)
+    ) {
       return false;
     }
 
@@ -317,17 +275,22 @@
   }
 
   function isProtectedElement(element) {
-    if (!element || !element.closest) {
-      return true;
-    }
-
-    return Boolean(
-      element.closest(EXCLUDED_SELECTOR)
+    return (
+      !element ||
+      !element.closest ||
+      Boolean(
+        element.closest(
+          EXCLUDED_SELECTOR
+        )
+      )
     );
   }
 
   function protectBrandElements(root) {
-    if (!root || !root.querySelectorAll) {
+    if (
+      !root ||
+      !root.querySelectorAll
+    ) {
       return;
     }
 
@@ -347,8 +310,15 @@
         ].join(",")
       )
       .forEach(function (element) {
-        element.classList.add("notranslate");
-        element.setAttribute("translate", "no");
+        element.classList.add(
+          "notranslate"
+        );
+
+        element.setAttribute(
+          "translate",
+          "no"
+        );
+
         element.setAttribute(
           "data-pd-brand",
           "true"
@@ -374,6 +344,7 @@
 
     if (!attributes) {
       attributes = {};
+
       originalAttributes.set(
         element,
         attributes
@@ -414,7 +385,8 @@
       );
 
     while (walker.nextNode()) {
-      const node = walker.currentNode;
+      const node =
+        walker.currentNode;
 
       if (originalTextNodes.has(node)) {
         node.nodeValue =
@@ -504,15 +476,16 @@
       );
 
     while (walker.nextNode()) {
-      const node = walker.currentNode;
+      const node =
+        walker.currentNode;
 
       const original =
         originalTextNodes.get(node) || "";
 
       items.push({
         type: "text",
-        node,
-        original,
+        node: node,
+        original: original,
         requestText:
           normalizeText(original)
       });
@@ -539,7 +512,7 @@
         return;
       }
 
-      TRANSLATABLE_ATTRIBUTES.forEach(
+      ATTRIBUTES.forEach(
         function (attributeName) {
           if (
             !element.hasAttribute(
@@ -569,9 +542,9 @@
 
           items.push({
             type: "attribute",
-            element,
-            attributeName,
-            original,
+            element: element,
+            attributeName: attributeName,
+            original: original,
             requestText:
               normalizeText(original)
           });
@@ -604,7 +577,8 @@
 
     texts.forEach(function (text) {
       const nextCharacters =
-        currentCharacters + text.length;
+        currentCharacters +
+        text.length;
 
       if (
         currentBatch.length >= 30 ||
@@ -637,15 +611,21 @@
       API_ENDPOINT,
       {
         method: "POST",
+
         headers: {
           "Content-Type":
             "application/json"
         },
+
         body: JSON.stringify({
           sourceLanguage:
             SOURCE_LANGUAGE,
-          targetLanguage,
-          texts
+
+          targetLanguage:
+            targetLanguage,
+
+          texts:
+            texts
         })
       }
     );
@@ -663,7 +643,11 @@
     if (!response.ok) {
       throw new Error(
         data.error ||
-          `Translation request failed with status ${response.status}.`
+          (
+            "Translation request failed with status " +
+            response.status +
+            "."
+          )
       );
     }
 
@@ -687,9 +671,13 @@
     targetLanguage
   ) {
     const uniqueTexts =
-      Array.from(new Set(texts));
+      Array.from(
+        new Set(texts)
+      );
 
-    const result = new Map();
+    const result =
+      new Map();
+
     const missingTexts = [];
 
     uniqueTexts.forEach(function (text) {
@@ -700,7 +688,10 @@
         );
 
       if (cached) {
-        result.set(text, cached);
+        result.set(
+          text,
+          cached
+        );
       } else {
         missingTexts.push(text);
       }
@@ -936,15 +927,14 @@
   }
 
   function syncLanguageSelectors() {
-    const selectors =
-      document.querySelectorAll(
+    document
+      .querySelectorAll(
         "#languageSelect, [data-pd-language-select]"
-      );
-
-    selectors.forEach(function (selector) {
-      selector.value =
-        selectedLanguage;
-    });
+      )
+      .forEach(function (selector) {
+        selector.value =
+          selectedLanguage;
+      });
   }
 
   async function translatePage(root) {
@@ -966,9 +956,11 @@
 
     applyDocumentDirection();
     syncLanguageSelectors();
+
     protectBrandElements(
       translationRoot
     );
+
     rememberDocumentTitle();
 
     if (
@@ -982,6 +974,7 @@
       );
 
       translationRunning = false;
+
       hideStatus();
 
       return;
@@ -990,7 +983,7 @@
     translationRunning = true;
 
     showStatus(
-      getStatusText().translating
+      getStatusText()[0]
     );
 
     try {
@@ -1043,7 +1036,7 @@
       );
 
       showStatus(
-        getStatusText().unavailable
+        getStatusText()[1]
       );
 
       window.setTimeout(
@@ -1084,34 +1077,34 @@
   }
 
   function bindLanguageSelectors() {
-    const selectors =
-      document.querySelectorAll(
+    document
+      .querySelectorAll(
         "#languageSelect, [data-pd-language-select]"
-      );
-
-    selectors.forEach(function (selector) {
-      if (
-        selector.dataset
-          .pdLanguageBound === "true"
-      ) {
-        return;
-      }
-
-      selector.dataset
-        .pdLanguageBound = "true";
-
-      selector.value =
-        selectedLanguage;
-
-      selector.addEventListener(
-        "change",
-        function () {
-          changeLanguage(
-            selector.value
-          );
+      )
+      .forEach(function (selector) {
+        if (
+          selector.dataset
+            .pdLanguageBound === "true"
+        ) {
+          return;
         }
-      );
-    });
+
+        selector.dataset
+          .pdLanguageBound =
+          "true";
+
+        selector.value =
+          selectedLanguage;
+
+        selector.addEventListener(
+          "change",
+          function () {
+            changeLanguage(
+              selector.value
+            );
+          }
+        );
+      });
   }
 
   function observeDynamicContent() {
@@ -1129,7 +1122,8 @@
             return;
           }
 
-          let hasNewContent = false;
+          let hasNewContent =
+            false;
 
           mutations.forEach(
             function (mutation) {
@@ -1143,7 +1137,8 @@
                       node
                     );
 
-                    hasNewContent = true;
+                    hasNewContent =
+                      true;
                   }
 
                   if (
@@ -1153,7 +1148,8 @@
                       node.nodeValue
                     )
                   ) {
-                    hasNewContent = true;
+                    hasNewContent =
+                      true;
                   }
                 }
               );
