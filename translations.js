@@ -2,7 +2,7 @@
   "use strict";
 
   const LANGUAGE_KEY = "pets_dogue_language";
-  const CACHE_KEY = "pets_dogue_translation_cache_v12";
+  const CACHE_KEY = "pets_dogue_translation_cache_v13";
   const SOURCE_LANGUAGE = "en";
   const API_ENDPOINT = "/api/translate";
 
@@ -299,7 +299,9 @@
     "DOGUE Verified"
   ]);
 
-  let selectedLanguage = readSavedLanguage() || SOURCE_LANGUAGE;
+  let selectedLanguage =
+    readSavedLanguage() || SOURCE_LANGUAGE;
+
   let translationRunning = false;
   let currentRequestVersion = 0;
   let mutationObserver = null;
@@ -319,7 +321,8 @@
 
   function readSavedLanguage() {
     try {
-      const value = localStorage.getItem(LANGUAGE_KEY);
+      const value =
+        localStorage.getItem(LANGUAGE_KEY);
 
       return LANGUAGES.some(function (language) {
         return language.code === value;
@@ -333,9 +336,15 @@
 
   function saveLanguage(code) {
     try {
-      localStorage.setItem(LANGUAGE_KEY, code);
+      localStorage.setItem(
+        LANGUAGE_KEY,
+        code
+      );
     } catch (error) {
-      console.warn("Unable to save selected language.", error);
+      console.warn(
+        "Unable to save selected language.",
+        error
+      );
     }
   }
 
@@ -357,16 +366,26 @@
 
   function saveCache() {
     try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify(cache)
+      );
     } catch (error) {
-      console.warn("Unable to save translation cache.", error);
+      console.warn(
+        "Unable to save translation cache.",
+        error
+      );
     }
   }
 
   function createHash(text) {
     let hash = 2166136261;
 
-    for (let index = 0; index < text.length; index += 1) {
+    for (
+      let index = 0;
+      index < text.length;
+      index += 1
+    ) {
       hash ^= text.charCodeAt(index);
       hash = Math.imul(hash, 16777619);
     }
@@ -374,23 +393,35 @@
     return `${(hash >>> 0).toString(36)}_${text.length}`;
   }
 
-  function getCachedTranslation(languageCode, text) {
-    const languageCache = cache[languageCode];
+  function getCachedTranslation(
+    languageCode,
+    text
+  ) {
+    const languageCache =
+      cache[languageCode];
 
     if (!languageCache) {
       return "";
     }
 
-    const item = languageCache[createHash(text)];
+    const item =
+      languageCache[createHash(text)];
 
-    if (!item || item.original !== text) {
+    if (
+      !item ||
+      item.original !== text
+    ) {
       return "";
     }
 
     return item.translation || "";
   }
 
-  function storeTranslation(languageCode, original, translation) {
+  function storeTranslation(
+    languageCode,
+    original,
+    translation
+  ) {
     if (!cache[languageCode]) {
       cache[languageCode] = {};
     }
@@ -409,7 +440,9 @@
 
   function containsLetters(value) {
     try {
-      return /\p{L}/u.test(String(value || ""));
+      return /\p{L}/u.test(
+        String(value || "")
+      );
     } catch (error) {
       return /[A-Za-zА-Яа-яЁёІіЇїЄє]/.test(
         String(value || "")
@@ -420,7 +453,10 @@
   function shouldTranslate(value) {
     const text = normalizeText(value);
 
-    if (!text || text.length < 2) {
+    if (
+      !text ||
+      text.length < 2
+    ) {
       return false;
     }
 
@@ -441,14 +477,14 @@
     }
 
     return true;
-  }
-
-  function isProtectedElement(element) {
+  }   function isProtectedElement(element) {
     if (!element || !element.closest) {
       return true;
     }
 
-    return Boolean(element.closest(EXCLUDED_SELECTOR));
+    return Boolean(
+      element.closest(EXCLUDED_SELECTOR)
+    );
   }
 
   function protectBrandElements(root) {
@@ -473,37 +509,59 @@
       )
       .forEach(function (element) {
         element.classList.add("notranslate");
-        element.setAttribute("translate", "no");
-        element.setAttribute("data-pd-brand", "true");
+        element.setAttribute(
+          "translate",
+          "no"
+        );
+        element.setAttribute(
+          "data-pd-brand",
+          "true"
+        );
       });
   }
 
   function rememberTextNode(node) {
     if (!originalTextNodes.has(node)) {
-      originalTextNodes.set(node, node.nodeValue || "");
+      originalTextNodes.set(
+        node,
+        node.nodeValue || ""
+      );
     }
   }
 
-  function rememberAttribute(element, attributeName) {
-    let storedAttributes = originalAttributes.get(element);
+  function rememberAttribute(
+    element,
+    attributeName
+  ) {
+    let storedAttributes =
+      originalAttributes.get(element);
 
     if (!storedAttributes) {
       storedAttributes = {};
-      originalAttributes.set(element, storedAttributes);
+      originalAttributes.set(
+        element,
+        storedAttributes
+      );
     }
 
-    if (storedAttributes[attributeName] === undefined) {
+    if (
+      storedAttributes[attributeName] ===
+      undefined
+    ) {
       storedAttributes[attributeName] =
-        element.getAttribute(attributeName) || "";
+        element.getAttribute(
+          attributeName
+        ) || "";
     }
   }
 
   function rememberDocumentTitle() {
     if (
-      document.documentElement.dataset.pdOriginalTitle ===
-      undefined
+      document.documentElement.dataset
+        .pdOriginalTitle === undefined
     ) {
-      document.documentElement.dataset.pdOriginalTitle =
+      document.documentElement.dataset
+        .pdOriginalTitle =
         document.title || "";
     }
   }
@@ -513,144 +571,205 @@
       return;
     }
 
-    const textWalker = document.createTreeWalker(
-      root,
-      NodeFilter.SHOW_TEXT
-    );
+    const textWalker =
+      document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT
+      );
 
     while (textWalker.nextNode()) {
-      const node = textWalker.currentNode;
+      const node =
+        textWalker.currentNode;
 
       if (originalTextNodes.has(node)) {
-        node.nodeValue = originalTextNodes.get(node);
+        node.nodeValue =
+          originalTextNodes.get(node);
       }
     }
 
     const elements = [];
 
-    if (root.nodeType === Node.ELEMENT_NODE) {
+    if (
+      root.nodeType ===
+      Node.ELEMENT_NODE
+    ) {
       elements.push(root);
     }
 
     if (root.querySelectorAll) {
-      elements.push.apply(elements, root.querySelectorAll("*"));
+      elements.push.apply(
+        elements,
+        root.querySelectorAll("*")
+      );
     }
 
-    elements.forEach(function (element) {
-      const attributes = originalAttributes.get(element);
+    elements.forEach(
+      function (element) {
+        const attributes =
+          originalAttributes.get(
+            element
+          );
 
-      if (!attributes) {
-        return;
-      }
+        if (!attributes) {
+          return;
+        }
 
-      Object.keys(attributes).forEach(function (attributeName) {
-        element.setAttribute(
-          attributeName,
-          attributes[attributeName]
+        Object.keys(attributes).forEach(
+          function (attributeName) {
+            element.setAttribute(
+              attributeName,
+              attributes[attributeName]
+            );
+          }
         );
-      });
-    });
+      }
+    );
 
     if (
-      document.documentElement.dataset.pdOriginalTitle !==
-      undefined
+      document.documentElement.dataset
+        .pdOriginalTitle !== undefined
     ) {
       document.title =
-        document.documentElement.dataset.pdOriginalTitle;
+        document.documentElement.dataset
+          .pdOriginalTitle;
     }
-  }   function collectTranslationItems(root) {
+  }
+
+  function collectTranslationItems(root) {
     const items = [];
 
     if (!root) {
       return items;
     }
 
-    const textWalker = document.createTreeWalker(
-      root,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: function (node) {
-          const parent = node.parentElement;
+    const textWalker =
+      document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: function (node) {
+            const parent =
+              node.parentElement;
 
-          if (!parent || isProtectedElement(parent)) {
-            return NodeFilter.FILTER_REJECT;
+            if (
+              !parent ||
+              isProtectedElement(parent)
+            ) {
+              return NodeFilter
+                .FILTER_REJECT;
+            }
+
+            rememberTextNode(node);
+
+            const original =
+              originalTextNodes.get(
+                node
+              ) || "";
+
+            return shouldTranslate(original)
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_REJECT;
           }
-
-          rememberTextNode(node);
-
-          const original = originalTextNodes.get(node) || "";
-
-          return shouldTranslate(original)
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_REJECT;
         }
-      }
-    );
+      );
 
     while (textWalker.nextNode()) {
-      const node = textWalker.currentNode;
-      const original = originalTextNodes.get(node) || "";
+      const node =
+        textWalker.currentNode;
+
+      const original =
+        originalTextNodes.get(node) || "";
 
       items.push({
         type: "text",
         node,
         original,
-        requestText: normalizeText(original)
+        requestText:
+          normalizeText(original)
       });
     }
 
     const elements = [];
 
-    if (root.nodeType === Node.ELEMENT_NODE) {
+    if (
+      root.nodeType ===
+      Node.ELEMENT_NODE
+    ) {
       elements.push(root);
     }
 
     if (root.querySelectorAll) {
-      elements.push.apply(elements, root.querySelectorAll("*"));
+      elements.push.apply(
+        elements,
+        root.querySelectorAll("*")
+      );
     }
 
-    elements.forEach(function (element) {
-      if (isProtectedElement(element)) {
-        return;
+    elements.forEach(
+      function (element) {
+        if (
+          isProtectedElement(element)
+        ) {
+          return;
+        }
+
+        TRANSLATABLE_ATTRIBUTES.forEach(
+          function (attributeName) {
+            if (
+              !element.hasAttribute(
+                attributeName
+              )
+            ) {
+              return;
+            }
+
+            rememberAttribute(
+              element,
+              attributeName
+            );
+
+            const attributes =
+              originalAttributes.get(
+                element
+              ) || {};
+
+            const original =
+              attributes[attributeName] ||
+              "";
+
+            if (
+              !shouldTranslate(original)
+            ) {
+              return;
+            }
+
+            items.push({
+              type: "attribute",
+              element,
+              attributeName,
+              original,
+              requestText:
+                normalizeText(original)
+            });
+          }
+        );
       }
-
-      TRANSLATABLE_ATTRIBUTES.forEach(function (attributeName) {
-        if (!element.hasAttribute(attributeName)) {
-          return;
-        }
-
-        rememberAttribute(element, attributeName);
-
-        const attributes =
-          originalAttributes.get(element) || {};
-
-        const original =
-          attributes[attributeName] || "";
-
-        if (!shouldTranslate(original)) {
-          return;
-        }
-
-        items.push({
-          type: "attribute",
-          element,
-          attributeName,
-          original,
-          requestText: normalizeText(original)
-        });
-      });
-    });
+    );
 
     rememberDocumentTitle();
 
     const originalTitle =
-      document.documentElement.dataset.pdOriginalTitle || "";
+      document.documentElement.dataset
+        .pdOriginalTitle || "";
 
-    if (shouldTranslate(originalTitle)) {
+    if (
+      shouldTranslate(originalTitle)
+    ) {
       items.push({
         type: "title",
         original: originalTitle,
-        requestText: normalizeText(originalTitle)
+        requestText:
+          normalizeText(originalTitle)
       });
     }
 
@@ -664,12 +783,15 @@
 
     texts.forEach(function (text) {
       const nextCharacters =
-        currentCharacters + text.length;
+        currentCharacters +
+        text.length;
 
       if (
         currentBatch.length >= 35 ||
-        (currentBatch.length > 0 &&
-          nextCharacters > 12000)
+        (
+          currentBatch.length > 0 &&
+          nextCharacters > 12000
+        )
       ) {
         batches.push(currentBatch);
         currentBatch = [];
@@ -691,17 +813,22 @@
     texts,
     targetLanguage
   ) {
-    const response = await fetch(API_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        sourceLanguage: SOURCE_LANGUAGE,
-        targetLanguage,
-        texts
-      })
-    });
+    const response = await fetch(
+      API_ENDPOINT,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+        body: JSON.stringify({
+          sourceLanguage:
+            SOURCE_LANGUAGE,
+          targetLanguage,
+          texts
+        })
+      }
+    );
 
     let data = {};
 
@@ -716,13 +843,16 @@
     if (!response.ok) {
       throw new Error(
         data.error ||
-          `Translation request failed: ${response.status}`
+        `Translation request failed: ${response.status}`
       );
     }
 
     if (
-      !Array.isArray(data.translations) ||
-      data.translations.length !== texts.length
+      !Array.isArray(
+        data.translations
+      ) ||
+      data.translations.length !==
+        texts.length
     ) {
       throw new Error(
         "Translation server returned an incorrect number of translations."
@@ -736,44 +866,61 @@
     texts,
     targetLanguage
   ) {
-    const uniqueTexts = Array.from(new Set(texts));
+    const uniqueTexts =
+      Array.from(new Set(texts));
+
     const result = new Map();
     const missingTexts = [];
 
-    uniqueTexts.forEach(function (text) {
-      const cachedTranslation = getCachedTranslation(
-        targetLanguage,
-        text
-      );
+    uniqueTexts.forEach(
+      function (text) {
+        const cachedTranslation =
+          getCachedTranslation(
+            targetLanguage,
+            text
+          );
 
-      if (cachedTranslation) {
-        result.set(text, cachedTranslation);
-      } else {
-        missingTexts.push(text);
+        if (cachedTranslation) {
+          result.set(
+            text,
+            cachedTranslation
+          );
+        } else {
+          missingTexts.push(text);
+        }
       }
-    });
+    );
 
-    const batches = createBatches(missingTexts);
+    const batches =
+      createBatches(missingTexts);
 
     for (const batch of batches) {
-      const translations = await requestTranslations(
-        batch,
-        targetLanguage
+      const translations =
+        await requestTranslations(
+          batch,
+          targetLanguage
+        );
+
+      batch.forEach(
+        function (original, index) {
+          const translated =
+            String(
+              translations[index] ||
+              original
+            );
+
+          result.set(
+            original,
+            translated
+          );
+
+          storeTranslation(
+            targetLanguage,
+            original,
+            translated
+          );
+        }
       );
-
-      batch.forEach(function (original, index) {
-        const translated = String(
-          translations[index] || original
-        );
-
-        result.set(original, translated);
-
-        storeTranslation(
-          targetLanguage,
-          original,
-          translated
-        );
-      });
 
       saveCache();
     }
@@ -786,12 +933,22 @@
     translated
   ) {
     const leading =
-      (original.match(/^\s*/) || [""])[0];
+      (
+        original.match(/^\s*/) ||
+        [""]
+      )[0];
 
     const trailing =
-      (original.match(/\s*$/) || [""])[0];
+      (
+        original.match(/\s*$/) ||
+        [""]
+      )[0];
 
-    return leading + translated + trailing;
+    return (
+      leading +
+      translated +
+      trailing
+    );
   }
 
   function applyTranslationItem(
@@ -806,15 +963,18 @@
     }
 
     if (item.type === "text") {
-      item.node.nodeValue = preserveWhitespace(
-        item.original,
-        translated
-      );
+      item.node.nodeValue =
+        preserveWhitespace(
+          item.original,
+          translated
+        );
 
       return;
     }
 
-    if (item.type === "attribute") {
+    if (
+      item.type === "attribute"
+    ) {
       item.element.setAttribute(
         item.attributeName,
         translated
@@ -826,13 +986,15 @@
     if (item.type === "title") {
       document.title = translated;
     }
-  }
+  }   function applyDocumentDirection() {
+    const language =
+      getLanguage(selectedLanguage);
 
-  function applyDocumentDirection() {
-    const language = getLanguage(selectedLanguage);
+    document.documentElement.lang =
+      language.code;
 
-    document.documentElement.lang = language.code;
-    document.documentElement.dir = language.dir;
+    document.documentElement.dir =
+      language.dir;
 
     if (document.body) {
       document.body.classList.toggle(
@@ -858,9 +1020,12 @@
       return;
     }
 
-    const style = document.createElement("style");
+    const style =
+      document.createElement("style");
 
-    style.id = "pd-translation-status-style";
+    style.id =
+      "pd-translation-status-style";
+
     style.textContent = `
       #pd-translation-status {
         position: fixed;
@@ -904,53 +1069,72 @@
 
     document.head.appendChild(style);
 
-    const status = document.createElement("div");
+    const status =
+      document.createElement("div");
 
-    status.id = "pd-translation-status";
+    status.id =
+      "pd-translation-status";
+
     status.setAttribute(
       "data-pd-no-translate",
       "true"
     );
-    status.setAttribute("translate", "no");
+
+    status.setAttribute(
+      "translate",
+      "no"
+    );
 
     document.body.appendChild(status);
   }
 
   function showStatus(message) {
-    const status = document.getElementById(
-      "pd-translation-status"
-    );
+    const status =
+      document.getElementById(
+        "pd-translation-status"
+      );
 
     if (!status) {
       return;
     }
 
     status.textContent = message;
-    status.classList.add("pd-visible");
+
+    status.classList.add(
+      "pd-visible"
+    );
   }
 
   function hideStatus() {
-    const status = document.getElementById(
-      "pd-translation-status"
-    );
+    const status =
+      document.getElementById(
+        "pd-translation-status"
+      );
 
     if (status) {
-      status.classList.remove("pd-visible");
+      status.classList.remove(
+        "pd-visible"
+      );
     }
   }
 
   function syncLanguageSelectors() {
-    const selectors = document.querySelectorAll(
-      "#languageSelect, [data-pd-language-select]"
-    );
+    const selectors =
+      document.querySelectorAll(
+        "#languageSelect, [data-pd-language-select]"
+      );
 
-    selectors.forEach(function (selector) {
-      if (
-        selector.value !== selectedLanguage
-      ) {
-        selector.value = selectedLanguage;
+    selectors.forEach(
+      function (selector) {
+        if (
+          selector.value !==
+          selectedLanguage
+        ) {
+          selector.value =
+            selectedLanguage;
+        }
       }
-    });
+    );
   }
 
   async function translatePage(root) {
@@ -972,10 +1156,15 @@
 
     applyDocumentDirection();
     syncLanguageSelectors();
-    protectBrandElements(translationRoot);
+    protectBrandElements(
+      translationRoot
+    );
     rememberDocumentTitle();
 
-    if (language.code === SOURCE_LANGUAGE) {
+    if (
+      language.code ===
+      SOURCE_LANGUAGE
+    ) {
       translationRunning = true;
 
       restoreOriginalContent(
@@ -1007,9 +1196,11 @@
 
       const translationMap =
         await getTranslations(
-          items.map(function (item) {
-            return item.requestText;
-          }),
+          items.map(
+            function (item) {
+              return item.requestText;
+            }
+          ),
           language.code
         );
 
@@ -1022,19 +1213,21 @@
         return;
       }
 
-      items.forEach(function (item) {
-        const translated =
-          translationMap.get(
-            item.requestText
-          );
+      items.forEach(
+        function (item) {
+          const translated =
+            translationMap.get(
+              item.requestText
+            );
 
-        if (translated) {
-          applyTranslationItem(
-            item,
-            translated
-          );
+          if (translated) {
+            applyTranslationItem(
+              item,
+              translated
+            );
+          }
         }
-      });
+      );
 
       hideStatus();
     } catch (error) {
@@ -1057,7 +1250,8 @@
   }
 
   async function changeLanguage(code) {
-    const language = getLanguage(code);
+    const language =
+      getLanguage(code);
 
     currentRequestVersion += 1;
 
@@ -1069,9 +1263,13 @@
 
     translationRunning = false;
 
-    selectedLanguage = language.code;
+    selectedLanguage =
+      language.code;
 
-    saveLanguage(selectedLanguage);
+    saveLanguage(
+      selectedLanguage
+    );
+
     applyDocumentDirection();
     syncLanguageSelectors();
 
@@ -1081,32 +1279,38 @@
   }
 
   function bindLanguageSelectors() {
-    const selectors = document.querySelectorAll(
-      "#languageSelect, [data-pd-language-select]"
-    );
-
-    selectors.forEach(function (selector) {
-      if (
-        selector.dataset.pdLanguageBound ===
-        "true"
-      ) {
-        return;
-      }
-
-      selector.dataset.pdLanguageBound =
-        "true";
-
-      selector.value = selectedLanguage;
-
-      selector.addEventListener(
-        "change",
-        function () {
-          changeLanguage(
-            selector.value
-          );
-        }
+    const selectors =
+      document.querySelectorAll(
+        "#languageSelect, [data-pd-language-select]"
       );
-    });
+
+    selectors.forEach(
+      function (selector) {
+        if (
+          selector.dataset
+            .pdLanguageBound ===
+          "true"
+        ) {
+          return;
+        }
+
+        selector.dataset
+          .pdLanguageBound =
+          "true";
+
+        selector.value =
+          selectedLanguage;
+
+        selector.addEventListener(
+          "change",
+          function () {
+            changeLanguage(
+              selector.value
+            );
+          }
+        );
+      }
+    );
   }
 
   function observeDynamicContent() {
@@ -1124,7 +1328,8 @@
             return;
           }
 
-          let hasNewContent = false;
+          let hasNewContent =
+            false;
 
           mutations.forEach(
             function (mutation) {
@@ -1134,8 +1339,12 @@
                     node.nodeType ===
                     Node.ELEMENT_NODE
                   ) {
-                    protectBrandElements(node);
-                    hasNewContent = true;
+                    protectBrandElements(
+                      node
+                    );
+
+                    hasNewContent =
+                      true;
                   }
 
                   if (
@@ -1145,7 +1354,8 @@
                       node.nodeValue
                     )
                   ) {
-                    hasNewContent = true;
+                    hasNewContent =
+                      true;
                   }
                 }
               );
@@ -1163,14 +1373,15 @@
               mutationTimer
             );
 
-            mutationTimer = setTimeout(
-              function () {
-                translatePage(
-                  document.body
-                );
-              },
-              350
-            );
+            mutationTimer =
+              setTimeout(
+                function () {
+                  translatePage(
+                    document.body
+                  );
+                },
+                350
+              );
           }
         }
       );
@@ -1182,9 +1393,7 @@
         subtree: true
       }
     );
-  }
-
-  function restoreSavedLanguage() {
+  }   function restoreSavedLanguage() {
     selectedLanguage =
       readSavedLanguage() ||
       SOURCE_LANGUAGE;
@@ -1200,14 +1409,19 @@
         document.body
       );
 
+      hideStatus();
+
       return;
     }
 
-    setTimeout(function () {
-      translatePage(
-        document.body
-      );
-    }, 100);
+    setTimeout(
+      function () {
+        translatePage(
+          document.body
+        );
+      },
+      100
+    );
   }
 
   async function initializeTranslations() {
@@ -1247,7 +1461,8 @@
     "storage",
     function (event) {
       if (
-        event.key === LANGUAGE_KEY
+        event.key ===
+        LANGUAGE_KEY
       ) {
         restoreSavedLanguage();
       }
@@ -1283,14 +1498,16 @@
         ).speech;
       },
 
-    changeLanguage,
+    changeLanguage:
+      changeLanguage,
 
     setLanguage:
       changeLanguage,
 
-    translatePage,
+    translatePage:
+      translatePage,
 
     restore:
       restoreSavedLanguage
   };
-})();
+})(); 
