@@ -13,11 +13,24 @@ window.PetsDogueTranslations.articles = {
       cover: "Become A Cover Star"
     },
 
+    stories: {
+      coverStars: "Cover Stars",
+      fashion: "Fashion",
+      travel: "Travel",
+      wellness: "Wellness",
+      rescue: "Rescue",
+      places: "Places",
+      volunteers: "Volunteers",
+      community: "Community"
+    },
+
     search: {
       placeholder:
         "Search stories, categories or topics...",
       button: "Search",
+      allCategories: "All Categories",
       all: "All",
+      coverStar: "Cover Star",
       coverStars: "Cover Stars",
       fashion: "Fashion",
       travel: "Travel",
@@ -37,412 +50,6 @@ window.PetsDogueTranslations.articles = {
       emptyTitle: "No matching stories",
       emptyDescription:
         "Try another search word or select a different category."
-    },
-
-    newsletter: {
-      title: "Receive New PETS & DOGUE Stories",
-      description:
-        "Get new issues, narrated articles, visual editorials and useful animal lifestyle guides.",
-      placeholder: "Your email address",
-      button: "SUBSCRIBE"
-    }
-  },
-
-  uk: {
-    hero: {
-      kicker: "РЕДАКЦІЯ PETS & DOGUE",
-      title:
-        "Історії, які варто бачити, читати й слухати",
-      description:
-        "Відкрийте для себе візуальну журналістику, розкішний стиль життя з тваринами, корисні гіди, подорожі, здоров’я, моду, інтерв’ю та історії порятунку.",
-      explore: "Переглянути історії",
-      listen: "Слухати статтю",
-      cover: "Стати зіркою обкладинки"
-    },
-
-    search: {
-      placeholder:
-        "Шукати історії, категорії або теми...",
-      button: "Пошук",
-      all: "Усі",
-      coverStars: "Зірки обкладинки",
-      fashion: "Мода",
-      travel: "Подорожі",
-      wellness: "Здоров’я",
-      rescue: "Допомога",
-      community: "Спільнота",
-      places: "Місця"
-    },
-
-    sections: {
-      editor: "Вибір редакції",
-      editorDescription:
-        "Історії, зображення та корисні гіди, обрані редакцією PETS & DOGUE.",
-      latest: "Останні історії",
-      visual: "Візуальна журналістика",
-      gallery: "ВІДКРИТИ ФОТОГАЛЕРЕЮ →",
-      emptyTitle: "Історій не знайдено",
-      emptyDescription:
-        "Спробуйте інше слово або оберіть іншу категорію."
-    },
-
-    newsletter: {
-      title:
-        "Отримуйте нові історії PETS & DOGUE",
-      description:
-        "Нові випуски, озвучені статті, візуальні матеріали та корисні гіди.",
-      placeholder: "Ваша електронна адреса",
-      button: "ПІДПИСАТИСЯ"
-    }
-  },
-
-  ru: {
-    hero: {
-      kicker: "РЕДАКЦИЯ PETS & DOGUE",
-      title:
-        "Истории, которые стоит видеть, читать и слушать",
-      description:
-        "Откройте визуальную журналистику, роскошный образ жизни с животными, полезные гиды, путешествия, здоровье, моду, интервью и истории спасения.",
-      explore: "Смотреть истории",
-      listen: "Слушать статью",
-      cover: "Стать звездой обложки"
-    },
-
-    search: {
-      placeholder:
-        "Искать истории, категории или темы...",
-      button: "Поиск",
-      all: "Все",
-      coverStars: "Звёзды обложки",
-      fashion: "Мода",
-      travel: "Путешествия",
-      wellness: "Здоровье",
-      rescue: "Помощь",
-      community: "Сообщество",
-      places: "Места"
-    },
-
-    sections: {
-      editor: "Выбор редакции",
-      editorDescription:
-        "Истории, изображения и полезные гиды, выбранные редакцией PETS & DOGUE.",
-      latest: "Последние истории",
-      visual: "Визуальная журналистика",
-      gallery: "ОТКРЫТЬ ФОТОГАЛЕРЕЮ →",
-      emptyTitle: "Истории не найдены",
-      emptyDescription:
-        "Попробуйте другое слово или выберите другую категорию."
-    },
-
-    newsletter: {
-      title:
-        "Получайте новые истории PETS & DOGUE",
-      description:
-        "Новые выпуски, озвученные статьи, визуальные материалы и полезные гиды.",
-      placeholder:
-        "Ваш адрес электронной почты",
-      button: "ПОДПИСАТЬСЯ"
-    }
-  },
-
-  es: {
-    hero: {
-      kicker: "EDITORIAL PETS & DOGUE",
-      title:
-        "Historias que vale la pena ver, leer y escuchar",
-      description:
-        "Descubre periodismo visual, estilo de vida animal de lujo, guías útiles, viajes, bienestar, moda, entrevistas e historias de rescate.",
-      explore: "Explorar historias",
-      listen: "Escuchar un artículo",
-      cover:
-        "Convertirse en estrella de portada"
-    },
-
-    search: {
-      placeholder:
-        "Buscar historias, categorías o temas...",
-      button: "Buscar",
-      all: "Todas",
-      coverStars: "Estrellas de portada",
-      fashion: "Moda",
-      travel: "Viajes",
-      wellness: "Bienestar",
-      rescue: "Rescate",
-      community: "Comunidad",
-      places: "Lugares"
-    },
-
-    sections: {
-      editor: "Selección de la redacción",
-      editorDescription:
-        "Historias, imágenes y guías útiles seleccionadas por PETS & DOGUE.",
-      latest: "Últimas historias",
-      visual: "Periodismo visual",
-      gallery: "ABRIR GALERÍA DE FOTOS →",
-      emptyTitle:
-        "No hay historias coincidentes",
-      emptyDescription:
-        "Prueba otra palabra o selecciona otra categoría."
-    },
-
-    newsletter: {
-      title:
-        "Recibe nuevas historias de PETS & DOGUE",
-      description:
-        "Nuevos números, artículos narrados, editoriales visuales y guías útiles.",
-      placeholder: "Tu correo electrónico",
-      button: "SUSCRIBIRSE"
-    }
-  }
-};
-
-(function () {
-  "use strict";
-
-  function addText(selector, key) {
-    const element =
-      document.querySelector(selector);
-
-    if (element) {
-      element.setAttribute("data-i18n", key);
-    }
-  }
-
-  function addPlaceholder(selector, key) {
-    const element =
-      document.querySelector(selector);
-
-    if (element) {
-      element.setAttribute(
-        "data-i18n-placeholder",
-        key
-      );
-    }
-  }
-
-  function addMany(selector, keys) {
-    document
-      .querySelectorAll(selector)
-      .forEach((element, index) => {
-        if (keys[index]) {
-          element.setAttribute(
-            "data-i18n",
-            keys[index]
-          );
-        }
-      });
-  }
-
-  function prepareArticlesPage() {
-    addText(
-      ".account-side:first-child .account-link",
-      "common.account.signIn"
-    );
-
-    addText(
-      ".account-center",
-      "common.account.edition"
-    );
-
-    addText(
-      ".account-side.right .account-link",
-      "common.account.joinClub"
-    );
-
-    addText(
-      ".side-menu-header h2",
-      "common.menu.contents"
-    );
-
-    addMany(".category-nav a", [
-      "common.navigation.magazine",
-      "common.navigation.articles",
-      "common.navigation.photos",
-      "common.navigation.coverStars",
-      "common.navigation.fashion",
-      "common.navigation.wellness",
-      "common.navigation.travel",
-      "common.navigation.places",
-      "common.navigation.rescue",
-      "common.navigation.contests",
-      "common.navigation.community"
-    ]);
-
-    addText(
-      ".hero-kicker",
-      "articles.hero.kicker"
-    );
-
-    addText(
-      ".hero h1",
-      "articles.hero.title"
-    );
-
-    addText(
-      ".hero p",
-      "articles.hero.description"
-    );
-
-    addMany(".hero-actions .btn", [
-      "articles.hero.explore",
-      "articles.hero.listen",
-      "articles.hero.cover"
-    ]);
-
-    addPlaceholder(
-      "#articleSearch",
-      "articles.search.placeholder"
-    );
-
-    addText(
-      ".search-box button",
-      "articles.search.button"
-    );
-
-    addMany(".filters .filter", [
-      "articles.search.all",
-      "articles.search.coverStars",
-      "articles.search.fashion",
-      "articles.search.travel",
-      "articles.search.wellness",
-      "articles.search.rescue",
-      "articles.search.community",
-      "articles.search.places"
-    ]);
-
-    const sectionHeadings =
-      document.querySelectorAll(
-        ".section-heading"
-      );
-
-    if (sectionHeadings[0]) {
-      const title =
-        sectionHeadings[0]
-          .querySelector("h2");
-
-      const description =
-        sectionHeadings[0]
-          .querySelector("p");
-
-      if (title) {
-        title.setAttribute(
-          "data-i18n",
-          "articles.sections.editor"
-        );
-      }
-
-      if (description) {
-        description.setAttribute(
-          "data-i18n",
-          "articles.sections.editorDescription"
-        );
-      }
-    }
-
-    if (sectionHeadings[1]) {
-      const title =
-        sectionHeadings[1]
-          .querySelector("h2");
-
-      if (title) {
-        title.setAttribute(
-          "data-i18n",
-          "articles.sections.latest"
-        );
-      }
-    }
-
-    addText(
-      ".visual-title h2",
-      "articles.sections.visual"
-    );
-
-    addText(
-      ".visual-title a",
-      "articles.sections.gallery"
-    );
-
-    addText(
-      "#emptyState h3",
-      "articles.sections.emptyTitle"
-    );
-
-    addText(
-      "#emptyState p",
-      "articles.sections.emptyDescription"
-    );
-
-    addText(
-      ".newsletter-inner h2",
-      "articles.newsletter.title"
-    );
-
-    addText(
-      ".newsletter-inner p",
-      "articles.newsletter.description"
-    );
-
-    addPlaceholder(
-      "#newsletterEmail",
-      "articles.newsletter.placeholder"
-    );
-
-    addText(
-      ".newsletter-form button",
-      "articles.newsletter.button"
-    );
-
-    addText(
-      ".footer-subtitle",
-      "common.footer.subtitle"
-    );
-
-    addMany(".footer-links a", [
-      "common.footer.home",
-      "common.footer.latestIssue",
-      "common.footer.articles",
-      "common.footer.photos",
-      "common.footer.coverStars",
-      "common.footer.places",
-      "common.footer.club",
-      "common.footer.partners",
-      "common.footer.contact",
-      "common.footer.privacy",
-      "common.footer.terms"
-    ]);
-
-    addText(
-      ".admin-link",
-      "common.footer.admin"
-    );
-  }
-
-  if (
-    document.readyState === "loading"
-  ) {
-    document.addEventListener(
-      "DOMContentLoaded",
-      prepareArticlesPage,
-      { once: true }
-    );
-  } else {
-    prepareArticlesPage();
-  }
-})();
-/* COMPLETE ARTICLES PAGE TRANSLATIONS */
-
-Object.assign(
-  window.PetsDogueTranslations.articles.en,
-  {
-    stories: {
-      coverStars: "Cover Stars",
-      fashion: "Fashion",
-      travel: "Travel",
-      wellness: "Wellness",
-      rescue: "Rescue",
-      places: "Places",
-      volunteers: "Volunteers",
-      community: "Community"
     },
 
     results: {
@@ -538,124 +145,29 @@ Object.assign(
       myPet: "MY PET IS",
       title: "THE NEXT\nCOVER STAR",
       enter: "TAP TO ENTER →"
+    },
+
+    newsletter: {
+      title: "Receive New PETS & DOGUE Stories",
+      description:
+        "Get new issues, narrated articles, visual editorials and useful animal lifestyle guides.",
+      placeholder: "Your email address",
+      button: "SUBSCRIBE"
     }
-  }
-);
+  },
 
-Object.assign(
-  window.PetsDogueTranslations.articles.ru,
-  {
-    stories: {
-      coverStars: "Звёзды обложки",
-      fashion: "Мода",
-      travel: "Путешествия",
-      wellness: "Здоровье",
-      rescue: "Помощь",
-      places: "Места",
-      volunteers: "Волонтёры",
-      community: "Сообщество"
+  uk: {
+    hero: {
+      kicker: "РЕДАКЦІЯ PETS & DOGUE",
+      title:
+        "Історії, які варто бачити, читати й слухати",
+      description:
+        "Відкрийте для себе візуальну журналістику, розкішний стиль життя з тваринами, корисні гіди, подорожі, здоров’я, моду, інтерв’ю та історії порятунку.",
+      explore: "Переглянути історії",
+      listen: "Слухати статтю",
+      cover: "Стати зіркою обкладинки"
     },
 
-    results: {
-      one: "Доступна одна редакционная история.",
-      many: "Доступно историй: {count}."
-    },
-
-    featured: {
-      mainLabel: "ЗВЕЗДА ОБЛОЖКИ · СЛУШАТЬ",
-      mainTitle:
-        "Как подготовить питомца к профессиональной журнальной фотосессии",
-      mainDescription:
-        "Комфорт, груминг, свет и детали, превращающие красивый портрет в редакционный снимок.",
-
-      travelLabel: "ПУТЕШЕСТВИЯ · СЛУШАТЬ",
-      travelTitle:
-        "Расцвет роскошных отелей для путешествий с питомцами",
-
-      rescueLabel: "ПОМОЩЬ · СЛУШАТЬ",
-      rescueTitle:
-        "Почему внимание может изменить жизнь животного"
-    },
-
-    cards: {
-      audio: "🔊 АУДИО",
-      readListen: "ЧИТАТЬ И СЛУШАТЬ",
-
-      photoshootCategory: "ЗВЕЗДА ОБЛОЖКИ",
-      photoshootTitle:
-        "Как подготовить питомца к профессиональной журнальной фотосессии",
-      photoshootDescription:
-        "Простые приёмы груминга, освещения и создания комфорта для красивого редакционного портрета.",
-
-      fashionCategory: "МОДА",
-      fashionTitle:
-        "Новые правила роскошного стиля для питомцев",
-      fashionDescription:
-        "Современная мода для животных становится легче, выразительнее и комфортнее.",
-
-      travelCategory: "ПУТЕШЕСТВИЯ",
-      travelTitle:
-        "Расцвет роскошных отелей для путешествий с питомцами",
-      travelDescription:
-        "Отели меняют впечатления гостей, путешествующих вместе с животными.",
-
-      wellnessCategory: "ЗДОРОВЬЕ",
-      wellnessTitle:
-        "Ежедневные ритуалы для спокойного и счастливого питомца",
-      wellnessDescription:
-        "Небольшие привычки помогают укрепить спокойствие, уверенность и отношения с животным.",
-
-      rescueCategory: "ПОМОЩЬ",
-      rescueTitle:
-        "Почему внимание может изменить жизнь животного",
-      rescueDescription:
-        "Фотография и честная история помогают животным найти поддержку и будущий дом.",
-
-      placesCategory: "МЕСТА",
-      placesTitle:
-        "Как DOGUE Trust проверяет рекомендации pet-friendly мест",
-      placesDescription:
-        "Отзывы сообщества, проверка и модерация помогают сохранять информацию полезной.",
-
-      volunteersCategory: "СООБЩЕСТВО",
-      volunteersTitle:
-        "Люди, которые помогают животным за кулисами",
-      volunteersDescription:
-        "Волонтёры помогают с перевозкой, передержкой, фотографиями, сборами и практической поддержкой.",
-
-      communityCategory: "МЕСТНОЕ СООБЩЕСТВО",
-      communityTitle:
-        "Что владельцы питомцев рекомендуют рядом с вами",
-      communityDescription:
-        "Местные жители знают проверенные маршруты, кафе, услуги и полезную поддержку."
-    },
-
-    visualCards: {
-      coverLabel: "ЗВЕЗДА ОБЛОЖКИ",
-      coverTitle: "Лицо будущего выпуска",
-      travelLabel: "ПУТЕШЕСТВИЯ",
-      travelTitle: "Красивые путешествия с питомцем",
-      fashionLabel: "МОДА",
-      fashionTitle: "Редакционный стиль",
-      rescueLabel: "ПОМОЩЬ",
-      rescueTitle: "Жизнь, которую стоит увидеть",
-      wellnessLabel: "ЗДОРОВЬЕ",
-      wellnessTitle: "Ежедневная забота",
-      localLabel: "РЯДОМ",
-      localTitle: "Вместе рядом с вами"
-    },
-
-    cover: {
-      myPet: "МОЙ ПИТОМЕЦ —",
-      title: "СЛЕДУЮЩАЯ\nЗВЕЗДА ОБЛОЖКИ",
-      enter: "ПРИНЯТЬ УЧАСТИЕ →"
-    }
-  }
-);
-
-Object.assign(
-  window.PetsDogueTranslations.articles.uk,
-  {
     stories: {
       coverStars: "Зірки обкладинки",
       fashion: "Мода",
@@ -667,9 +179,37 @@ Object.assign(
       community: "Спільнота"
     },
 
+    search: {
+      placeholder:
+        "Шукати історії, категорії або теми...",
+      button: "Пошук",
+      allCategories: "Усі категорії",
+      all: "Усі",
+      coverStar: "Зірка обкладинки",
+      coverStars: "Зірки обкладинки",
+      fashion: "Мода",
+      travel: "Подорожі",
+      wellness: "Здоров’я",
+      rescue: "Допомога",
+      community: "Спільнота",
+      places: "Місця"
+    },
+
+    sections: {
+      editor: "Вибір редакції",
+      editorDescription:
+        "Історії, зображення та корисні гіди, обрані редакцією PETS & DOGUE.",
+      latest: "Останні історії",
+      visual: "Візуальна журналістика",
+      gallery: "ВІДКРИТИ ФОТОГАЛЕРЕЮ →",
+      emptyTitle: "Історій не знайдено",
+      emptyDescription:
+        "Спробуйте інше слово або оберіть іншу категорію."
+    },
+
     results: {
       one: "Доступна одна редакційна історія.",
-      many: "Доступно історій: {count}."
+      many: "Доступно редакційних історій: {count}."
     },
 
     featured: {
@@ -760,13 +300,188 @@ Object.assign(
       myPet: "МІЙ УЛЮБЛЕНЕЦЬ —",
       title: "НАСТУПНА\nЗІРКА ОБКЛАДИНКИ",
       enter: "ВЗЯТИ УЧАСТЬ →"
-    }
-  }
-);
+    },
 
-Object.assign(
-  window.PetsDogueTranslations.articles.es,
-  {
+    newsletter: {
+      title:
+        "Отримуйте нові історії PETS & DOGUE",
+      description:
+        "Отримуйте нові випуски, озвучені статті, візуальні матеріали та корисні гіди.",
+      placeholder: "Ваша електронна адреса",
+      button: "ПІДПИСАТИСЯ"
+    }
+  },
+
+  ru: {
+    hero: {
+      kicker: "РЕДАКЦИЯ PETS & DOGUE",
+      title:
+        "Истории, которые стоит видеть, читать и слушать",
+      description:
+        "Откройте визуальную журналистику, роскошный образ жизни с животными, полезные гиды, путешествия, здоровье, моду, интервью и истории спасения.",
+      explore: "Смотреть истории",
+      listen: "Слушать статью",
+      cover: "Стать звездой обложки"
+    },
+
+    stories: {
+      coverStars: "Звёзды обложки",
+      fashion: "Мода",
+      travel: "Путешествия",
+      wellness: "Здоровье",
+      rescue: "Помощь",
+      places: "Места",
+      volunteers: "Волонтёры",
+      community: "Сообщество"
+    },
+
+    search: {
+      placeholder:
+        "Искать истории, категории или темы...",
+      button: "Поиск",
+      allCategories: "Все категории",
+      all: "Все",
+      coverStar: "Звезда обложки",
+      coverStars: "Звёзды обложки",
+      fashion: "Мода",
+      travel: "Путешествия",
+      wellness: "Здоровье",
+      rescue: "Помощь",
+      community: "Сообщество",
+      places: "Места"
+    },
+
+    sections: {
+      editor: "Выбор редакции",
+      editorDescription:
+        "Истории, изображения и полезные гиды, выбранные редакцией PETS & DOGUE.",
+      latest: "Последние истории",
+      visual: "Визуальная журналистика",
+      gallery: "ОТКРЫТЬ ФОТОГАЛЕРЕЮ →",
+      emptyTitle: "Истории не найдены",
+      emptyDescription:
+        "Попробуйте другое слово или выберите другую категорию."
+    },
+
+    results: {
+      one: "Доступна одна редакционная история.",
+      many: "Доступно редакционных историй: {count}."
+    },
+
+    featured: {
+      mainLabel: "ЗВЕЗДА ОБЛОЖКИ · СЛУШАТЬ",
+      mainTitle:
+        "Как подготовить питомца к профессиональной журнальной фотосессии",
+      mainDescription:
+        "Комфорт, груминг, свет и детали, превращающие красивый портрет в редакционный снимок.",
+
+      travelLabel: "ПУТЕШЕСТВИЯ · СЛУШАТЬ",
+      travelTitle:
+        "Расцвет роскошных отелей для путешествий с питомцами",
+
+      rescueLabel: "ПОМОЩЬ · СЛУШАТЬ",
+      rescueTitle:
+        "Почему внимание может изменить жизнь животного"
+    },
+
+    cards: {
+      audio: "🔊 АУДИО",
+      readListen: "ЧИТАТЬ И СЛУШАТЬ",
+
+      photoshootCategory: "ЗВЕЗДА ОБЛОЖКИ",
+      photoshootTitle:
+        "Как подготовить питомца к профессиональной журнальной фотосессии",
+      photoshootDescription:
+        "Простые приёмы груминга, освещения и создания комфорта для красивого редакционного портрета.",
+
+      fashionCategory: "МОДА",
+      fashionTitle:
+        "Новые правила роскошного стиля для питомцев",
+      fashionDescription:
+        "Современная мода для животных становится легче, выразительнее и комфортнее.",
+
+      travelCategory: "ПУТЕШЕСТВИЯ",
+      travelTitle:
+        "Расцвет роскошных отелей для путешествий с питомцами",
+      travelDescription:
+        "Отели меняют впечатления гостей, путешествующих вместе с животными.",
+
+      wellnessCategory: "ЗДОРОВЬЕ",
+      wellnessTitle:
+        "Ежедневные ритуалы для спокойного и счастливого питомца",
+      wellnessDescription:
+        "Небольшие привычки помогают укрепить спокойствие, уверенность и отношения с животным.",
+
+      rescueCategory: "ПОМОЩЬ",
+      rescueTitle:
+        "Почему внимание может изменить жизнь животного",
+      rescueDescription:
+        "Фотография и честная история помогают животным найти поддержку и будущий дом.",
+
+      placesCategory: "МЕСТА",
+      placesTitle:
+        "Как DOGUE Trust проверяет рекомендации pet-friendly мест",
+      placesDescription:
+        "Отзывы сообщества, проверка и модерация помогают сохранять информацию полезной.",
+
+      volunteersCategory: "СООБЩЕСТВО",
+      volunteersTitle:
+        "Люди, которые помогают животным за кулисами",
+      volunteersDescription:
+        "Волонтёры помогают с перевозкой, передержкой, фотографиями, сборами и практической поддержкой.",
+
+      communityCategory: "МЕСТНОЕ СООБЩЕСТВО",
+      communityTitle:
+        "Что владельцы питомцев рекомендуют рядом с вами",
+      communityDescription:
+        "Местные жители знают проверенные маршруты, кафе, услуги и полезную поддержку."
+    },
+
+    visualCards: {
+      coverLabel: "ЗВЕЗДА ОБЛОЖКИ",
+      coverTitle: "Лицо будущего выпуска",
+      travelLabel: "ПУТЕШЕСТВИЯ",
+      travelTitle: "Красивые путешествия с питомцем",
+      fashionLabel: "МОДА",
+      fashionTitle: "Редакционный стиль",
+      rescueLabel: "ПОМОЩЬ",
+      rescueTitle: "Жизнь, которую стоит увидеть",
+      wellnessLabel: "ЗДОРОВЬЕ",
+      wellnessTitle: "Ежедневная забота",
+      localLabel: "РЯДОМ",
+      localTitle: "Вместе рядом с вами"
+    },
+
+    cover: {
+      myPet: "МОЙ ПИТОМЕЦ —",
+      title: "СЛЕДУЮЩАЯ\nЗВЕЗДА ОБЛОЖКИ",
+      enter: "ПРИНЯТЬ УЧАСТИЕ →"
+    },
+
+    newsletter: {
+      title:
+        "Получайте новые истории PETS & DOGUE",
+      description:
+        "Получайте новые выпуски, озвученные статьи, визуальные материалы и полезные гиды.",
+      placeholder:
+        "Ваш адрес электронной почты",
+      button: "ПОДПИСАТЬСЯ"
+    }
+  },
+
+  es: {
+    hero: {
+      kicker: "EDITORIAL PETS & DOGUE",
+      title:
+        "Historias que vale la pena ver, leer y escuchar",
+      description:
+        "Descubre periodismo visual, estilo de vida animal de lujo, guías útiles, viajes, bienestar, moda, entrevistas e historias de rescate.",
+      explore: "Explorar historias",
+      listen: "Escuchar un artículo",
+      cover:
+        "Convertirse en estrella de portada"
+    },
+
     stories: {
       coverStars: "Estrellas de portada",
       fashion: "Moda",
@@ -778,13 +493,44 @@ Object.assign(
       community: "Comunidad"
     },
 
+    search: {
+      placeholder:
+        "Buscar historias, categorías o temas...",
+      button: "Buscar",
+      allCategories: "Todas las categorías",
+      all: "Todas",
+      coverStar: "Estrella de portada",
+      coverStars: "Estrellas de portada",
+      fashion: "Moda",
+      travel: "Viajes",
+      wellness: "Bienestar",
+      rescue: "Rescate",
+      community: "Comunidad",
+      places: "Lugares"
+    },
+
+    sections: {
+      editor: "Selección de la redacción",
+      editorDescription:
+        "Historias, imágenes y guías útiles seleccionadas por PETS & DOGUE.",
+      latest: "Últimas historias",
+      visual: "Periodismo visual",
+      gallery: "ABRIR GALERÍA DE FOTOS →",
+      emptyTitle:
+        "No hay historias coincidentes",
+      emptyDescription:
+        "Prueba otra palabra o selecciona otra categoría."
+    },
+
     results: {
       one: "Hay una historia editorial disponible.",
-      many: "Hay {count} historias editoriales disponibles."
+      many:
+        "Hay {count} historias editoriales disponibles."
     },
 
     featured: {
-      mainLabel: "ESTRELLA DE PORTADA · ESCUCHAR",
+      mainLabel:
+        "ESTRELLA DE PORTADA · ESCUCHAR",
       mainTitle:
         "Cómo preparar a tu mascota para una sesión fotográfica profesional",
       mainDescription:
@@ -803,7 +549,8 @@ Object.assign(
       audio: "🔊 AUDIO",
       readListen: "LEER Y ESCUCHAR",
 
-      photoshootCategory: "ESTRELLA DE PORTADA",
+      photoshootCategory:
+        "ESTRELLA DE PORTADA",
       photoshootTitle:
         "Cómo preparar a tu mascota para una sesión fotográfica profesional",
       photoshootDescription:
@@ -856,11 +603,13 @@ Object.assign(
       coverLabel: "ESTRELLA DE PORTADA",
       coverTitle: "El rostro de un futuro número",
       travelLabel: "VIAJES",
-      travelTitle: "Hermosas escapadas con tu mascota",
+      travelTitle:
+        "Hermosas escapadas con tu mascota",
       fashionLabel: "MODA",
       fashionTitle: "Estilo editorial",
       rescueLabel: "RESCATE",
-      rescueTitle: "Una vida que merece ser vista",
+      rescueTitle:
+        "Una vida que merece ser vista",
       wellnessLabel: "BIENESTAR",
       wellnessTitle: "Cuidados diarios",
       localLabel: "LOCAL",
@@ -869,92 +618,319 @@ Object.assign(
 
     cover: {
       myPet: "MI MASCOTA ES",
-      title: "LA PRÓXIMA\nESTRELLA DE PORTADA",
+      title:
+        "LA PRÓXIMA\nESTRELLA DE PORTADA",
       enter: "PARTICIPAR →"
+    },
+
+    newsletter: {
+      title:
+        "Recibe nuevas historias de PETS & DOGUE",
+      description:
+        "Recibe nuevos números, artículos narrados, editoriales visuales y guías útiles.",
+      placeholder: "Tu correo electrónico",
+      button: "SUSCRIBIRSE"
     }
   }
-);
+};
 
 (function () {
   "use strict";
 
-  function setKey(element, key) {
+  function setTextKey(selector, key) {
+    const element =
+      document.querySelector(selector);
+
     if (element) {
       element.setAttribute("data-i18n", key);
     }
   }
 
-  function prepareCompleteArticlesTranslations() {
-    const storyLabels =
-      document.querySelectorAll(".story-item span");
+  function setPlaceholderKey(selector, key) {
+    const element =
+      document.querySelector(selector);
 
-    const storyKeys = [
-      "coverStars",
-      "fashion",
-      "travel",
-      "wellness",
-      "rescue",
-      "places",
-      "volunteers",
-      "community"
-    ];
+    if (element) {
+      element.setAttribute(
+        "data-i18n-placeholder",
+        key
+      );
+    }
+  }
 
-    storyLabels.forEach((element, index) => {
-      if (storyKeys[index]) {
-        setKey(
-          element,
-          `articles.stories.${storyKeys[index]}`
+  function setKeys(selector, keys) {
+    document
+      .querySelectorAll(selector)
+      .forEach((element, index) => {
+        if (keys[index]) {
+          element.setAttribute(
+            "data-i18n",
+            keys[index]
+          );
+        }
+      });
+  }
+
+  function prepareTopArea() {
+    setTextKey(
+      ".account-side:first-child .account-link",
+      "common.account.signIn"
+    );
+
+    setTextKey(
+      ".account-center",
+      "common.account.edition"
+    );
+
+    setTextKey(
+      ".account-side.right .account-link",
+      "common.account.joinClub"
+    );
+
+    setTextKey(
+      ".side-menu-header h2",
+      "common.menu.contents"
+    );
+
+    setKeys(".category-nav a", [
+      "common.navigation.magazine",
+      "common.navigation.articles",
+      "common.navigation.photos",
+      "common.navigation.coverStars",
+      "common.navigation.fashion",
+      "common.navigation.wellness",
+      "common.navigation.travel",
+      "common.navigation.places",
+      "common.navigation.rescue",
+      "common.navigation.contests",
+      "common.navigation.community"
+    ]);
+  }
+
+  function prepareHero() {
+    setTextKey(
+      ".hero-kicker",
+      "articles.hero.kicker"
+    );
+
+    setTextKey(
+      ".hero h1",
+      "articles.hero.title"
+    );
+
+    setTextKey(
+      ".hero p",
+      "articles.hero.description"
+    );
+
+    setKeys(".hero-actions .btn", [
+      "articles.hero.explore",
+      "articles.hero.listen",
+      "articles.hero.cover"
+    ]);
+  }
+
+  function prepareStoryLabels() {
+    setKeys(".story-item span", [
+      "articles.stories.coverStars",
+      "articles.stories.fashion",
+      "articles.stories.travel",
+      "articles.stories.wellness",
+      "articles.stories.rescue",
+      "articles.stories.places",
+      "articles.stories.volunteers",
+      "articles.stories.community"
+    ]);
+  }
+
+  function prepareSearchAndFilters() {
+    setPlaceholderKey(
+      "#articleSearch",
+      "articles.search.placeholder"
+    );
+
+    setTextKey(
+      ".search-box button",
+      "articles.search.button"
+    );
+
+    setKeys(
+      "#articleCategoryFilter option",
+      [
+        "articles.search.allCategories",
+        "articles.search.coverStar",
+        "articles.search.fashion",
+        "articles.search.travel",
+        "articles.search.wellness",
+        "articles.search.rescue",
+        "articles.search.community",
+        "articles.search.places"
+      ]
+    );
+
+    setKeys(".filters .filter", [
+      "articles.search.all",
+      "articles.search.coverStars",
+      "articles.search.fashion",
+      "articles.search.travel",
+      "articles.search.wellness",
+      "articles.search.rescue",
+      "articles.search.community",
+      "articles.search.places"
+    ]);
+  }
+
+  function prepareSectionHeadings() {
+    const headings =
+      document.querySelectorAll(
+        ".section-heading"
+      );
+
+    if (headings[0]) {
+      const title =
+        headings[0].querySelector("h2");
+
+      const description =
+        headings[0].querySelector("p");
+
+      if (title) {
+        title.setAttribute(
+          "data-i18n",
+          "articles.sections.editor"
         );
       }
-    });
 
-    const featuredCards =
+      if (description) {
+        description.setAttribute(
+          "data-i18n",
+          "articles.sections.editorDescription"
+        );
+      }
+    }
+
+    if (headings[1]) {
+      const title =
+        headings[1].querySelector("h2");
+
+      if (title) {
+        title.setAttribute(
+          "data-i18n",
+          "articles.sections.latest"
+        );
+      }
+    }
+
+    setTextKey(
+      "#emptyState h3",
+      "articles.sections.emptyTitle"
+    );
+
+    setTextKey(
+      "#emptyState p",
+      "articles.sections.emptyDescription"
+    );
+  }
+
+  function prepareFeaturedStories() {
+    const featured =
       document.querySelectorAll(
         ".featured-main, .featured-small"
       );
 
-    if (featuredCards[0]) {
-      setKey(
-        featuredCards[0].querySelector(".featured-copy span"),
-        "articles.featured.mainLabel"
-      );
+    if (featured[0]) {
+      const copy =
+        featured[0].querySelector(
+          ".featured-copy"
+        );
 
-      setKey(
-        featuredCards[0].querySelector(".featured-copy h2"),
-        "articles.featured.mainTitle"
-      );
+      if (copy) {
+        const label =
+          copy.querySelector("span");
 
-      setKey(
-        featuredCards[0].querySelector(".featured-copy p"),
-        "articles.featured.mainDescription"
-      );
+        const title =
+          copy.querySelector("h2");
+
+        const description =
+          copy.querySelector("p");
+
+        if (label) {
+          label.setAttribute(
+            "data-i18n",
+            "articles.featured.mainLabel"
+          );
+        }
+
+        if (title) {
+          title.setAttribute(
+            "data-i18n",
+            "articles.featured.mainTitle"
+          );
+        }
+
+        if (description) {
+          description.setAttribute(
+            "data-i18n",
+            "articles.featured.mainDescription"
+          );
+        }
+      }
     }
 
-    if (featuredCards[1]) {
-      setKey(
-        featuredCards[1].querySelector(".featured-copy span"),
-        "articles.featured.travelLabel"
-      );
+    if (featured[1]) {
+      const label =
+        featured[1].querySelector(
+          ".featured-copy span"
+        );
 
-      setKey(
-        featuredCards[1].querySelector(".featured-copy h2"),
-        "articles.featured.travelTitle"
-      );
+      const title =
+        featured[1].querySelector(
+          ".featured-copy h2"
+        );
+
+      if (label) {
+        label.setAttribute(
+          "data-i18n",
+          "articles.featured.travelLabel"
+        );
+      }
+
+      if (title) {
+        title.setAttribute(
+          "data-i18n",
+          "articles.featured.travelTitle"
+        );
+      }
     }
 
-    if (featuredCards[2]) {
-      setKey(
-        featuredCards[2].querySelector(".featured-copy span"),
-        "articles.featured.rescueLabel"
-      );
+    if (featured[2]) {
+      const label =
+        featured[2].querySelector(
+          ".featured-copy span"
+        );
 
-      setKey(
-        featuredCards[2].querySelector(".featured-copy h2"),
-        "articles.featured.rescueTitle"
-      );
+      const title =
+        featured[2].querySelector(
+          ".featured-copy h2"
+        );
+
+      if (label) {
+        label.setAttribute(
+          "data-i18n",
+          "articles.featured.rescueLabel"
+        );
+      }
+
+      if (title) {
+        title.setAttribute(
+          "data-i18n",
+          "articles.featured.rescueTitle"
+        );
+      }
     }
+  }
 
-    const cardKeys = [
+  function prepareArticleCards() {
+    const cardNames = [
       "photoshoot",
       "fashion",
       "travel",
@@ -968,36 +944,80 @@ Object.assign(
     document
       .querySelectorAll(".article-card")
       .forEach((card, index) => {
-        const key = cardKeys[index];
-        if (!key) return;
+        const name = cardNames[index];
 
-        setKey(
-          card.querySelector(".audio-badge"),
-          "articles.cards.audio"
-        );
+        if (!name) return;
 
-        setKey(
-          card.querySelector(".article-category"),
-          `articles.cards.${key}Category`
-        );
+        const audio =
+          card.querySelector(".audio-badge");
 
-        setKey(
-          card.querySelector(".article-content h3"),
-          `articles.cards.${key}Title`
-        );
+        const category =
+          card.querySelector(
+            ".article-category"
+          );
 
-        setKey(
-          card.querySelector(".article-content > p"),
-          `articles.cards.${key}Description`
-        );
+        const title =
+          card.querySelector(
+            ".article-content h3"
+          );
 
-        setKey(
-          card.querySelector(".read-button"),
-          "articles.cards.readListen"
-        );
+        const description =
+          card.querySelector(
+            ".article-content > p"
+          );
+
+        const button =
+          card.querySelector(".read-button");
+
+        if (audio) {
+          audio.setAttribute(
+            "data-i18n",
+            "articles.cards.audio"
+          );
+        }
+
+        if (category) {
+          category.setAttribute(
+            "data-i18n",
+            `articles.cards.${name}Category`
+          );
+        }
+
+        if (title) {
+          title.setAttribute(
+            "data-i18n",
+            `articles.cards.${name}Title`
+          );
+        }
+
+        if (description) {
+          description.setAttribute(
+            "data-i18n",
+            `articles.cards.${name}Description`
+          );
+        }
+
+        if (button) {
+          button.setAttribute(
+            "data-i18n",
+            "articles.cards.readListen"
+          );
+        }
       });
+  }
 
-    const visualKeys = [
+  function prepareVisualStories() {
+    setTextKey(
+      ".visual-title h2",
+      "articles.sections.visual"
+    );
+
+    setTextKey(
+      ".visual-title a",
+      "articles.sections.gallery"
+    );
+
+    const visualNames = [
       "cover",
       "travel",
       "fashion",
@@ -1009,107 +1029,213 @@ Object.assign(
     document
       .querySelectorAll(".visual-card")
       .forEach((card, index) => {
-        const key = visualKeys[index];
-        if (!key) return;
+        const name =
+          visualNames[index];
 
-        setKey(
-          card.querySelector(".visual-copy span"),
-          `articles.visualCards.${key}Label`
-        );
+        if (!name) return;
 
-        setKey(
-          card.querySelector(".visual-copy h3"),
-          `articles.visualCards.${key}Title`
-        );
+        const label =
+          card.querySelector(
+            ".visual-copy span"
+          );
+
+        const title =
+          card.querySelector(
+            ".visual-copy h3"
+          );
+
+        if (label) {
+          label.setAttribute(
+            "data-i18n",
+            `articles.visualCards.${name}Label`
+          );
+        }
+
+        if (title) {
+          title.setAttribute(
+            "data-i18n",
+            `articles.visualCards.${name}Title`
+          );
+        }
       });
+  }
 
-    setKey(
-      document.querySelector(".star span"),
+  function prepareCoverStar() {
+    setTextKey(
+      ".star span",
       "articles.cover.myPet"
     );
 
-    setKey(
-      document.querySelector(".star strong"),
+    setTextKey(
+      ".star strong",
       "articles.cover.title"
     );
 
-    setKey(
-      document.querySelector(".star em"),
+    setTextKey(
+      ".star em",
       "articles.cover.enter"
     );
   }
 
-  function updateTranslatedResults() {
-    const cards =
-      Array.from(
-        document.querySelectorAll(".article-card")
-      );
+  function prepareNewsletter() {
+    setTextKey(
+      ".newsletter-inner h2",
+      "articles.newsletter.title"
+    );
 
-    const visibleCount =
-      cards.filter((card) => {
-        return card.style.display !== "none";
-      }).length;
+    setTextKey(
+      ".newsletter-inner p",
+      "articles.newsletter.description"
+    );
 
-    const language =
+    setPlaceholderKey(
+      "#newsletterEmail",
+      "articles.newsletter.placeholder"
+    );
+
+    setTextKey(
+      ".newsletter-form button",
+      "articles.newsletter.button"
+    );
+  }
+
+  function prepareFooter() {
+    setTextKey(
+      ".footer-subtitle",
+      "common.footer.subtitle"
+    );
+
+    setKeys(".footer-links a", [
+      "common.footer.home",
+      "common.footer.latestIssue",
+      "common.footer.articles",
+      "common.footer.photos",
+      "common.footer.coverStars",
+      "common.footer.places",
+      "common.footer.club",
+      "common.footer.partners",
+      "common.footer.contact",
+      "common.footer.privacy",
+      "common.footer.terms"
+    ]);
+
+    setTextKey(
+      ".admin-link",
+      "common.footer.admin"
+    );
+  }
+
+  function getCurrentPageTranslations() {
+    const currentLanguage =
       window.PetsDogueLanguage &&
-      window.PetsDogueLanguage.getCurrentLanguage
-        ? window.PetsDogueLanguage.getCurrentLanguage()
+      typeof window.PetsDogueLanguage
+        .getCurrentLanguage === "function"
+        ? window.PetsDogueLanguage
+            .getCurrentLanguage()
         : { code: "en" };
 
+    return (
+      window.PetsDogueTranslations
+        .articles[currentLanguage.code] ||
+      window.PetsDogueTranslations
+        .articles.en
+    );
+  }
+
+  function updateResultsText() {
+    const resultsElement =
+      document.getElementById(
+        "resultsText"
+      );
+
+    if (!resultsElement) return;
+
+    const visibleCards =
+      Array.from(
+        document.querySelectorAll(
+          ".article-card"
+        )
+      ).filter((card) => {
+        return card.style.display !== "none";
+      });
+
+    const count =
+      visibleCards.length;
+
     const translations =
-      window.PetsDogueTranslations.articles[
-        language.code
-      ] ||
-      window.PetsDogueTranslations.articles.en;
+      getCurrentPageTranslations();
 
-    const resultsText =
-      document.getElementById("resultsText");
-
-    if (!resultsText) return;
-
-    if (visibleCount === 1) {
-      resultsText.textContent =
+    if (count === 1) {
+      resultsElement.textContent =
         translations.results.one;
     } else {
-      resultsText.textContent =
+      resultsElement.textContent =
         translations.results.many.replace(
           "{count}",
-          visibleCount
+          String(count)
         );
     }
   }
 
-  const originalFilterArticles =
-    window.filterArticles;
+  function wrapArticleFilter() {
+    const originalFilter =
+      window.filterArticles;
 
-  if (typeof originalFilterArticles === "function") {
-    window.filterArticles = function () {
-      originalFilterArticles();
-      updateTranslatedResults();
-    };
+    if (
+      typeof originalFilter !== "function" ||
+      originalFilter
+        .__petsDogueWrapped
+    ) {
+      return;
+    }
+
+    function translatedFilter() {
+      originalFilter();
+      updateResultsText();
+    }
+
+    translatedFilter
+      .__petsDogueWrapped = true;
+
+    window.filterArticles =
+      translatedFilter;
+  }
+
+  function prepareArticlesPage() {
+    prepareTopArea();
+    prepareHero();
+    prepareStoryLabels();
+    prepareSearchAndFilters();
+    prepareSectionHeadings();
+    prepareFeaturedStories();
+    prepareArticleCards();
+    prepareVisualStories();
+    prepareCoverStar();
+    prepareNewsletter();
+    prepareFooter();
+    wrapArticleFilter();
+    updateResultsText();
   }
 
   window.addEventListener(
     "petsdogue:languagechange",
     function () {
-      setTimeout(
-        updateTranslatedResults,
+      window.setTimeout(
+        updateResultsText,
         0
       );
     }
   );
 
-  if (document.readyState === "loading") {
+  if (
+    document.readyState === "loading"
+  ) {
     document.addEventListener(
       "DOMContentLoaded",
-      function () {
-        prepareCompleteArticlesTranslations();
-        updateTranslatedResults();
-      },
+      prepareArticlesPage,
       { once: true }
     );
   } else {
-    prepareCompleteArticlesTranslations();
-    updateTranslatedResults();
+    prepareArticlesPage();
   }
 })();
