@@ -85,7 +85,24 @@ window.PetsDogueTranslations.membersGallery = {
       member: "CLUB MEMBER",
       updateWinner: "Update Winner",
       comment: "Write a comment...",
-      send: "Send"
+      send: "Send",
+
+      misoMeta:
+        "Owner: PETS & DOGUE · Animal: Dog · Breed: Pomeranian",
+      misoDescription:
+        "A glamorous little star with a pink bow and the confidence of a real cover icon.",
+      misoComment:
+        "This should be on the homepage!",
+
+      maxMeta:
+        "Owner: Sarah · Animal: Dog · Breed: Golden Retriever",
+      maxDescription:
+        "Max loves beach walks, soft mornings and meeting other pets in the local community.",
+
+      lunaMeta:
+        "Owner: Anna · Animal: Cat · Breed: British Shorthair",
+      lunaDescription:
+        "Luna is calm, elegant and always chooses the most beautiful place in the room."
     },
 
     finalists: {
@@ -167,7 +184,7 @@ window.PetsDogueTranslations.membersGallery = {
 
     winner: {
       badge: "ФОТО ТИЖНЯ",
-      title: "Місо — кандидат на роль головного героя",
+      title: "Місо — кандидатка на роль головної героїні",
       description:
         "Улюбленець, який зараз лідирує, з’явиться на головній сторінці PETS & DOGUE і буде розглянутий для головної історії наступного випуску.",
       homepage: "На головну сторінку",
@@ -179,7 +196,24 @@ window.PetsDogueTranslations.membersGallery = {
       member: "УЧАСНИК КЛУБУ",
       updateWinner: "Оновити переможця",
       comment: "Написати коментар...",
-      send: "Надіслати"
+      send: "Надіслати",
+
+      misoMeta:
+        "Власник: PETS & DOGUE · Тварина: собака · Порода: померанський шпіц",
+      misoDescription:
+        "Гламурна маленька зірка з рожевим бантом і впевненістю справжньої ікони обкладинки.",
+      misoComment:
+        "Вона повинна бути на головній сторінці!",
+
+      maxMeta:
+        "Власниця: Сара · Тварина: собака · Порода: золотистий ретривер",
+      maxDescription:
+        "Макс любить прогулянки пляжем, спокійні ранки та знайомства з іншими улюбленцями.",
+
+      lunaMeta:
+        "Власниця: Анна · Тварина: кішка · Порода: британська короткошерста",
+      lunaDescription:
+        "Луна спокійна, елегантна й завжди обирає найкрасивіше місце в кімнаті."
     },
 
     finalists: {
@@ -261,7 +295,7 @@ window.PetsDogueTranslations.membersGallery = {
 
     winner: {
       badge: "ФОТО НЕДЕЛИ",
-      title: "Мисо — кандидат на роль главного героя",
+      title: "Мисо — кандидатка на роль главной героини",
       description:
         "Питомец, который сейчас лидирует, появится на главной странице PETS & DOGUE и будет рассмотрен для главной истории следующего выпуска.",
       homepage: "На главную страницу",
@@ -273,7 +307,24 @@ window.PetsDogueTranslations.membersGallery = {
       member: "УЧАСТНИК КЛУБА",
       updateWinner: "Обновить победителя",
       comment: "Написать комментарий...",
-      send: "Отправить"
+      send: "Отправить",
+
+      misoMeta:
+        "Владелец: PETS & DOGUE · Животное: собака · Порода: померанский шпиц",
+      misoDescription:
+        "Гламурная маленькая звезда с розовым бантом и уверенностью настоящей иконы обложки.",
+      misoComment:
+        "Она должна быть на главной странице!",
+
+      maxMeta:
+        "Владелица: Сара · Животное: собака · Порода: золотистый ретривер",
+      maxDescription:
+        "Макс любит прогулки по пляжу, спокойные утра и встречи с другими питомцами.",
+
+      lunaMeta:
+        "Владелица: Анна · Животное: кошка · Порода: британская короткошёрстная",
+      lunaDescription:
+        "Луна спокойная, элегантная и всегда выбирает самое красивое место в комнате."
     },
 
     finalists: {
@@ -367,7 +418,24 @@ window.PetsDogueTranslations.membersGallery = {
       member: "MIEMBRO DEL CLUB",
       updateWinner: "Actualizar ganadora",
       comment: "Escribe un comentario...",
-      send: "Enviar"
+      send: "Enviar",
+
+      misoMeta:
+        "Propietario: PETS & DOGUE · Animal: perro · Raza: pomerania",
+      misoDescription:
+        "Una pequeña estrella glamurosa con un lazo rosa y la confianza de un verdadero icono de portada.",
+      misoComment:
+        "¡Debería aparecer en la página principal!",
+
+      maxMeta:
+        "Propietaria: Sarah · Animal: perro · Raza: golden retriever",
+      maxDescription:
+        "A Max le encantan los paseos por la playa, las mañanas tranquilas y conocer a otras mascotas.",
+
+      lunaMeta:
+        "Propietaria: Anna · Animal: gata · Raza: británica de pelo corto",
+      lunaDescription:
+        "Luna es tranquila, elegante y siempre elige el lugar más bonito de la habitación."
     },
 
     finalists: {
@@ -419,25 +487,25 @@ window.PetsDogueTranslations.membersGallery = {
       });
   }
 
-  function createTextSpan(
+  function createTranslatedText(
     parent,
     className,
-    translationKey
+    key
   ) {
     if (!parent) {
       return;
     }
 
-    let span =
+    let label =
       parent.querySelector(
         "." + className
       );
 
-    if (!span) {
-      span =
+    if (!label) {
+      label =
         document.createElement("span");
 
-      span.className =
+      label.className =
         className;
 
       Array.from(
@@ -451,16 +519,16 @@ window.PetsDogueTranslations.membersGallery = {
         }
       });
 
-      parent.appendChild(span);
+      parent.appendChild(label);
     }
 
-    span.setAttribute(
+    label.setAttribute(
       "data-i18n",
-      translationKey
+      key
     );
   }
 
-  function preparePage() {
+  function prepareHero() {
     setText(
       ".hero h1",
       "membersGallery.hero.title"
@@ -470,7 +538,9 @@ window.PetsDogueTranslations.membersGallery = {
       ".hero p",
       "membersGallery.hero.description"
     );
+  }
 
+  function prepareFlow() {
     setText(
       ".flow h2",
       "membersGallery.flow.title"
@@ -491,13 +561,15 @@ window.PetsDogueTranslations.membersGallery = {
           return;
         }
 
-        createTextSpan(
+        createTranslatedText(
           step,
           "step-label",
           stepKeys[index]
         );
       });
+  }
 
+  function prepareSubscription() {
     setText(
       ".subscription h2",
       "membersGallery.subscription.title"
@@ -537,7 +609,9 @@ window.PetsDogueTranslations.membersGallery = {
       ".plan:nth-child(2) button",
       "membersGallery.subscription.yearlyButton"
     );
+  }
 
+  function prepareRules() {
     setText(
       ".rules-box h2",
       "membersGallery.rules.title"
@@ -551,7 +625,9 @@ window.PetsDogueTranslations.membersGallery = {
       "membersGallery.rules.five",
       "membersGallery.rules.six"
     ]);
+  }
 
+  function prepareUpload() {
     setText(
       ".upload-box h2",
       "membersGallery.upload.title"
@@ -582,7 +658,7 @@ window.PetsDogueTranslations.membersGallery = {
       "membersGallery.upload.story"
     );
 
-    createTextSpan(
+    createTranslatedText(
       document.querySelector(".agree"),
       "agree-label",
       "membersGallery.upload.agree"
@@ -593,7 +669,9 @@ window.PetsDogueTranslations.membersGallery = {
       "membersGallery.upload.delete",
       "membersGallery.upload.replace"
     ]);
+  }
 
+  function prepareCasting() {
     setText(
       ".notice h2",
       "membersGallery.casting.title"
@@ -603,7 +681,9 @@ window.PetsDogueTranslations.membersGallery = {
       ".notice p",
       "membersGallery.casting.description"
     );
+  }
 
+  function prepareWinner() {
     setText(
       ".winner .badge",
       "membersGallery.winner.badge"
@@ -626,62 +706,132 @@ window.PetsDogueTranslations.membersGallery = {
         "membersGallery.winner.issue"
       ]
     );
+  }
 
+  function prepareGallery() {
     setText(
       ".section-title",
       "membersGallery.gallery.title"
     );
 
-    document
-      .querySelectorAll(".card")
-      .forEach((card) => {
-        const badge =
-          card.querySelector(".badge");
+    const cards =
+      document.querySelectorAll(
+        ".card"
+      );
 
-        const updateButton =
-          card.querySelector(
-            ".actions button:not(.like-btn)"
-          );
+    cards.forEach((card) => {
+      const badge =
+        card.querySelector(".badge");
 
-        const commentInput =
-          card.querySelector(
-            ".comment-form input"
-          );
+      const updateButton =
+        card.querySelector(
+          ".actions button:not(.like-btn)"
+        );
 
-        const sendButton =
-          card.querySelector(
-            ".comment-form button"
-          );
+      const commentInput =
+        card.querySelector(
+          ".comment-form input"
+        );
 
-        if (badge) {
-          badge.setAttribute(
-            "data-i18n",
-            "membersGallery.gallery.member"
-          );
-        }
+      const sendButton =
+        card.querySelector(
+          ".comment-form button"
+        );
 
-        if (updateButton) {
-          updateButton.setAttribute(
-            "data-i18n",
-            "membersGallery.gallery.updateWinner"
-          );
-        }
+      if (badge) {
+        badge.setAttribute(
+          "data-i18n",
+          "membersGallery.gallery.member"
+        );
+      }
 
-        if (commentInput) {
-          commentInput.setAttribute(
-            "data-i18n-placeholder",
-            "membersGallery.gallery.comment"
-          );
-        }
+      if (updateButton) {
+        updateButton.setAttribute(
+          "data-i18n",
+          "membersGallery.gallery.updateWinner"
+        );
+      }
 
-        if (sendButton) {
-          sendButton.setAttribute(
-            "data-i18n",
-            "membersGallery.gallery.send"
-          );
-        }
-      });
+      if (commentInput) {
+        commentInput.setAttribute(
+          "data-i18n-placeholder",
+          "membersGallery.gallery.comment"
+        );
+      }
 
+      if (sendButton) {
+        sendButton.setAttribute(
+          "data-i18n",
+          "membersGallery.gallery.send"
+        );
+      }
+    });
+
+    if (cards[0]) {
+      setCardTranslations(
+        cards[0],
+        "miso"
+      );
+    }
+
+    if (cards[1]) {
+      setCardTranslations(
+        cards[1],
+        "max"
+      );
+    }
+
+    if (cards[2]) {
+      setCardTranslations(
+        cards[2],
+        "luna"
+      );
+    }
+
+    const firstComment =
+      cards[0]
+        ? cards[0].querySelector(
+            ".comment"
+          )
+        : null;
+
+    if (firstComment) {
+      createTranslatedText(
+        firstComment,
+        "comment-text",
+        "membersGallery.gallery.misoComment"
+      );
+    }
+  }
+
+  function setCardTranslations(
+    card,
+    name
+  ) {
+    const meta =
+      card.querySelector(".meta");
+
+    const description =
+      card.querySelector(
+        ".card-content > p"
+      );
+
+    if (meta) {
+      meta.setAttribute(
+        "data-i18n",
+        `membersGallery.gallery.${name}Meta`
+      );
+    }
+
+    if (description) {
+      description.setAttribute(
+        "data-i18n",
+        `membersGallery.gallery.${name}Description`
+      );
+    }
+  }
+
+  function prepareFinalists() {
     setText(
       ".top-five h2",
       "membersGallery.finalists.title"
@@ -696,7 +846,9 @@ window.PetsDogueTranslations.membersGallery = {
       ".top-five button",
       "membersGallery.finalists.button"
     );
+  }
 
+  function prepareFooter() {
     setText(
       "footer p",
       "common.footer.subtitle"
@@ -718,7 +870,7 @@ window.PetsDogueTranslations.membersGallery = {
     );
   }
 
-  function updatePageTitle() {
+  function getCurrentDictionary() {
     const language =
       window.PetsDogueLanguage &&
       typeof window.PetsDogueLanguage
@@ -728,13 +880,19 @@ window.PetsDogueTranslations.membersGallery = {
             .getCurrentLanguage()
         : { code: "en" };
 
-    const dictionary =
+    return (
       window.PetsDogueTranslations
         .membersGallery[
           language.code
         ] ||
       window.PetsDogueTranslations
-        .membersGallery.en;
+        .membersGallery.en
+    );
+  }
+
+  function updatePageTitle() {
+    const dictionary =
+      getCurrentDictionary();
 
     if (
       dictionary &&
@@ -744,6 +902,20 @@ window.PetsDogueTranslations.membersGallery = {
       document.title =
         dictionary.meta.title;
     }
+  }
+
+  function preparePage() {
+    prepareHero();
+    prepareFlow();
+    prepareSubscription();
+    prepareRules();
+    prepareUpload();
+    prepareCasting();
+    prepareWinner();
+    prepareGallery();
+    prepareFinalists();
+    prepareFooter();
+    updatePageTitle();
   }
 
   window.addEventListener(
@@ -761,14 +933,10 @@ window.PetsDogueTranslations.membersGallery = {
   ) {
     document.addEventListener(
       "DOMContentLoaded",
-      function () {
-        preparePage();
-        updatePageTitle();
-      },
+      preparePage,
       { once: true }
     );
   } else {
     preparePage();
-    updatePageTitle();
   }
 })();
