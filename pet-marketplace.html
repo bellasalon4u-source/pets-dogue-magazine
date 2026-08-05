@@ -610,7 +610,278 @@ input.addEventListener("input",updatePreviewText);
 </script>
 
 
-<!-- PETS & DOGUE UNIFIED 23-LANGUAGE SYSTEM -->
-<script src="translations.js"></script>
+<!-- PETS & DOGUE FREE LOCAL LANGUAGE SYSTEM -->
+
+<script>
+(function () {
+  const textKeys = {
+    "Pet Marketplace":
+      "marketplace.page.heroTitle",
+
+    "A luxury members marketplace for responsible pet listings, adoption stories, breeding notices, accessories and trusted pet services.":
+      "marketplace.page.heroDescription",
+
+    "Not A Marketplace. A Curated Pet World.":
+      "marketplace.page.introTitle",
+
+    "Browse elegant listings from the PETS & DOGUE community. Everyone can explore, like and comment. Only Club members can publish.":
+      "marketplace.page.introDescription",
+
+    "Members Can Publish":
+      "marketplace.page.membersTitle",
+
+    "Join PETS & DOGUE Club to publish listings, add photos, share stories and connect with interested readers.":
+      "marketplace.page.membersDescription",
+
+    "💚 Join Club":
+      "marketplace.page.joinClub",
+
+    "Demo: I Am A Member":
+      "marketplace.page.demoMember",
+
+    "Find A Home":
+      "marketplace.page.findHome",
+
+    "Responsible rehoming posts for pets who need a loving future.":
+      "marketplace.page.findHomeDescription",
+
+    "Puppies & Kittens":
+      "marketplace.page.puppiesKittens",
+
+    "Careful listings where local law allows responsible publishing.":
+      "marketplace.page.puppiesKittensDescription",
+
+    "Breeding":
+      "marketplace.page.breeding",
+
+    "Welfare-first notices with honesty, health and responsibility.":
+      "marketplace.page.breedingDescription",
+
+    "Accessories & Services":
+      "marketplace.page.accessoriesServices",
+
+    "Grooming, styling, photography, hotels, products and trusted services.":
+      "marketplace.page.accessoriesServicesDescription",
+
+    "All Categories":
+      "marketplace.page.allCategories",
+
+    "All Locations":
+      "marketplace.page.allLocations",
+
+    "Search":
+      "marketplace.page.search",
+
+    "All":
+      "marketplace.page.all",
+
+    "Publish A Listing":
+      "marketplace.page.publishTitle",
+
+    "I agree that this listing follows local laws and PETS & DOGUE rules.":
+      "marketplace.page.agreement",
+
+    "Publish Listing":
+      "marketplace.page.publishListing",
+
+    "Delete Photo":
+      "marketplace.page.deletePhoto",
+
+    "Upload Another Photo":
+      "marketplace.page.uploadAnotherPhoto",
+
+    "Marketplace Listings":
+      "marketplace.page.listingsTitle",
+
+    "Contact Owner":
+      "marketplace.page.contactOwner",
+
+    "Contact Seller":
+      "marketplace.page.contactSeller",
+
+    "Delete Listing":
+      "marketplace.page.deleteListing",
+
+    "Send":
+      "marketplace.page.send",
+
+    "Marketplace Rules":
+      "marketplace.page.rulesTitle",
+
+    "Only PETS & DOGUE Club members can publish listings.":
+      "marketplace.page.ruleOne",
+
+    "All listings must follow the laws of the country where the animal or service is located.":
+      "marketplace.page.ruleTwo",
+
+    "Animal welfare comes first. Unsafe, misleading or irresponsible listings can be removed.":
+      "marketplace.page.ruleThree",
+
+    "Listings should include clear photos, honest information and contact details.":
+      "marketplace.page.ruleFour",
+
+    "Listings can expire after 30 days unless renewed by the member.":
+      "marketplace.page.ruleFive",
+
+    "Future version: payments, verification and moderation will connect to the real platform.":
+      "marketplace.page.ruleSix",
+
+    "The International Luxury Animal Magazine":
+      "marketplace.page.footerDescription",
+
+    "Home":
+      "marketplace.page.home",
+
+    "Club":
+      "marketplace.page.club",
+
+    "Members Gallery":
+      "marketplace.page.membersGallery",
+
+    "Places":
+      "marketplace.page.places",
+
+    "Partners":
+      "marketplace.page.partners",
+
+    "Privacy":
+      "marketplace.page.privacy",
+
+    "Contact":
+      "marketplace.page.contactFooter",
+
+    "Admin":
+      "marketplace.page.admin",
+
+    "Gentle Dog Looking For A Loving Home":
+      "marketplace.page.listingOneTitle",
+
+    "A gentle little dog looking for a calm and loving home. Ideal for someone who understands small companion animals.":
+      "marketplace.page.listingOneDescription",
+
+    "Beautiful British Shorthair Kittens":
+      "marketplace.page.listingTwoTitle",
+
+    "Elegant kittens raised in a family home. Viewings by appointment. Responsible homes only.":
+      "marketplace.page.listingTwoDescription",
+
+    "Responsible Breeding Notice":
+      "marketplace.page.listingThreeTitle",
+
+    "A member notice for responsible breeding interest. Health, temperament and welfare come first.":
+      "marketplace.page.listingThreeDescription",
+
+    "Luxury Grooming & Styling Service":
+      "marketplace.page.listingFourTitle",
+
+    "Premium pet grooming, styling and pre-photoshoot preparation for DOGUE-ready pets.":
+      "marketplace.page.listingFourDescription"
+  };
+
+  const placeholderKeys = {
+    "Search pets, breed, city or service...":
+      "marketplace.page.searchPlaceholder",
+
+    "Listing title":
+      "marketplace.page.listingTitle",
+
+    "Pet name / service name":
+      "marketplace.page.petName",
+
+    "Animal type":
+      "marketplace.page.animalType",
+
+    "Breed / product type":
+      "marketplace.page.breedType",
+
+    "Location":
+      "marketplace.page.location",
+
+    "Owner / seller name":
+      "marketplace.page.ownerName",
+
+    "Contact email or phone":
+      "marketplace.page.contact",
+
+    "Write a short description, story, details or conditions...":
+      "marketplace.page.story",
+
+    "Write a comment...":
+      "marketplace.page.commentPlaceholder"
+  };
+
+  function markMarketplaceTranslations(root = document) {
+    root
+      .querySelectorAll(
+        "h1, h2, h3, h4, p, span, a, button, div, li, option, label"
+      )
+      .forEach((element) => {
+        if (element.children.length > 0) {
+          return;
+        }
+
+        const text = element.textContent
+          .replace(/\s+/g, " ")
+          .trim();
+
+        const key = textKeys[text];
+
+        if (key) {
+          element.setAttribute(
+            "data-i18n",
+            key
+          );
+        }
+      });
+
+    root
+      .querySelectorAll(
+        "input[placeholder], textarea[placeholder]"
+      )
+      .forEach((element) => {
+        const placeholder =
+          element.getAttribute(
+            "placeholder"
+          );
+
+        const key =
+          placeholderKeys[placeholder];
+
+        if (key) {
+          element.setAttribute(
+            "data-i18n-placeholder",
+            key
+          );
+        }
+      });
+  }
+
+  markMarketplaceTranslations();
+
+  const observer =
+    new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) {
+            markMarketplaceTranslations(node);
+          }
+        });
+      });
+    });
+
+  observer.observe(
+    document.body,
+    {
+      childList: true,
+      subtree: true
+    }
+  );
+})();
+</script>
+
+<script src="/i18n/common.js?v=2"></script>
+<script src="/i18n/marketplace.js?v=1"></script>
+<script src="/i18n/engine.js?v=2"></script>
+
 </body>
 </html>
