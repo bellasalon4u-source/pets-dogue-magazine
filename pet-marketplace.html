@@ -614,6 +614,54 @@ input.addEventListener("input",updatePreviewText);
 
 <script>
 (function () {
+  const categoryValues = [
+    "All Categories",
+    "Find a Home",
+    "Puppies & Kittens",
+    "Breeding",
+    "Accessories & Services"
+  ];
+
+  const locationValues = [
+    "All Locations",
+    "London",
+    "Bournemouth",
+    "Dorset",
+    "Manchester",
+    "Online"
+  ];
+
+  document
+    .querySelectorAll("#categorySearch option")
+    .forEach((option, index) => {
+      if (categoryValues[index]) {
+        option.value = categoryValues[index];
+      }
+    });
+
+  document
+    .querySelectorAll("#listingCategory option")
+    .forEach((option, index) => {
+      const listingValues = [
+        "Find a Home",
+        "Puppies & Kittens",
+        "Breeding",
+        "Accessories & Services"
+      ];
+
+      if (listingValues[index]) {
+        option.value = listingValues[index];
+      }
+    });
+
+  document
+    .querySelectorAll("#locationSearch option")
+    .forEach((option, index) => {
+      if (locationValues[index]) {
+        option.value = locationValues[index];
+      }
+    });
+
   const textKeys = {
     "Pet Marketplace":
       "marketplace.page.heroTitle",
@@ -642,10 +690,19 @@ input.addEventListener("input",updatePreviewText);
     "Find A Home":
       "marketplace.page.findHome",
 
+    "Find a Home":
+      "marketplace.page.findHome",
+
+    "FIND A HOME":
+      "marketplace.page.findHome",
+
     "Responsible rehoming posts for pets who need a loving future.":
       "marketplace.page.findHomeDescription",
 
     "Puppies & Kittens":
+      "marketplace.page.puppiesKittens",
+
+    "PUPPIES & KITTENS":
       "marketplace.page.puppiesKittens",
 
     "Careful listings where local law allows responsible publishing.":
@@ -654,10 +711,16 @@ input.addEventListener("input",updatePreviewText);
     "Breeding":
       "marketplace.page.breeding",
 
+    "BREEDING":
+      "marketplace.page.breeding",
+
     "Welfare-first notices with honesty, health and responsibility.":
       "marketplace.page.breedingDescription",
 
     "Accessories & Services":
+      "marketplace.page.accessoriesServices",
+
+    "ACCESSORIES & SERVICES":
       "marketplace.page.accessoriesServices",
 
     "Grooming, styling, photography, hotels, products and trusted services.":
@@ -811,49 +874,79 @@ input.addEventListener("input",updatePreviewText);
   };
 
   function markMarketplaceTranslations(root = document) {
-    root
-      .querySelectorAll(
+    const elements = [];
+
+    if (
+      root.nodeType === 1 &&
+      root.matches(
         "h1, h2, h3, h4, p, span, a, button, div, li, option, label"
       )
-      .forEach((element) => {
-        if (element.children.length > 0) {
-          return;
-        }
+    ) {
+      elements.push(root);
+    }
 
-        const text = element.textContent
-          .replace(/\s+/g, " ")
-          .trim();
+    if (root.querySelectorAll) {
+      elements.push(
+        ...root.querySelectorAll(
+          "h1, h2, h3, h4, p, span, a, button, div, li, option, label"
+        )
+      );
+    }
 
-        const key = textKeys[text];
+    elements.forEach((element) => {
+      if (element.children.length > 0) {
+        return;
+      }
 
-        if (key) {
-          element.setAttribute(
-            "data-i18n",
-            key
-          );
-        }
-      });
+      const text = element.textContent
+        .replace(/\s+/g, " ")
+        .trim();
 
-    root
-      .querySelectorAll(
+      const key = textKeys[text];
+
+      if (key) {
+        element.setAttribute(
+          "data-i18n",
+          key
+        );
+      }
+    });
+
+    const placeholderElements = [];
+
+    if (
+      root.nodeType === 1 &&
+      root.matches(
         "input[placeholder], textarea[placeholder]"
       )
-      .forEach((element) => {
-        const placeholder =
-          element.getAttribute(
-            "placeholder"
-          );
+    ) {
+      placeholderElements.push(root);
+    }
 
-        const key =
-          placeholderKeys[placeholder];
+    if (root.querySelectorAll) {
+      placeholderElements.push(
+        ...root.querySelectorAll(
+          "input[placeholder], textarea[placeholder]"
+        )
+      );
+    }
 
-        if (key) {
-          element.setAttribute(
-            "data-i18n-placeholder",
-            key
-          );
-        }
-      });
+    placeholderElements.forEach((element) => {
+      const placeholder =
+        element.getAttribute(
+          "placeholder"
+        );
+
+      const key =
+        placeholderKeys[placeholder];
+
+      if (key) {
+        element.setAttribute(
+          "data-i18n-placeholder",
+          key
+        );
+      }
+    });
   }
 
   markMarketplaceTranslations();
