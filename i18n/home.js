@@ -1242,3 +1242,35 @@ window.PetsDogueTranslations.home = {
     }
   }
 };
+const petsDogueHomeLanguages = [
+  "en",
+  "uk",
+  "ru",
+  "fr",
+  "de",
+  "es",
+  "it",
+  "pt",
+  "nl",
+  "pl",
+  "cs",
+  "sk",
+  "hu",
+  "ro",
+  "bg",
+  "el",
+  "sv",
+  "da",
+  "no",
+  "fi",
+  "tr",
+  "ar",
+  "hi"
+];
+
+petsDogueHomeLanguages.forEach((languageCode) => {
+  if (!window.PetsDogueTranslations.home[languageCode]) {
+    window.PetsDogueTranslations.home[languageCode] =
+      window.PetsDogueTranslations.home.en;
+  }
+});
