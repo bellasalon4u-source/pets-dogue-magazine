@@ -1951,8 +1951,50 @@ loadPartners();
 
 
 <!-- PETS & DOGUE FREE LOCAL LANGUAGE SYSTEM -->
+
+<script>
+(function () {
+  const translationMap = {
+    "PARTNER PORTAL": "partners.page.eyebrow",
+    "Join PETS & DOGUE Partners": "partners.page.heading",
+    "Connect your pet-friendly business with the PETS & DOGUE community and offer exclusive benefits to members.": "partners.page.description",
+    "Add Your Business": "partners.page.addBusiness",
+    "Member Discounts": "partners.page.memberDiscounts",
+    "No partners yet": "partners.page.emptyTitle",
+    "New partner businesses and exclusive member offers will appear here.": "partners.page.emptyDescription",
+    "Why become a partner?": "partners.page.benefitsTitle",
+    "Reach pet owners around the world": "partners.page.benefitOne",
+    "Promote exclusive member discounts": "partners.page.benefitTwo",
+    "Build trust through PETS & DOGUE": "partners.page.benefitThree",
+    "Become part of a premium animal community": "partners.page.benefitFour",
+    "JOIN AS PARTNER": "partners.page.button"
+  };
+
+  document.querySelectorAll(
+    "h1, h2, h3, h4, p, span, a, button, div"
+  ).forEach((element) => {
+    if (element.children.length > 0) {
+      return;
+    }
+
+    const text = element.textContent
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const translationKey = translationMap[text];
+
+    if (translationKey) {
+      element.setAttribute(
+        "data-i18n",
+        translationKey
+      );
+    }
+  });
+})();
+</script>
+
 <script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/partners.js?v=1"></script>
+<script src="/i18n/partners.js?v=2"></script>
 <script src="/i18n/engine.js?v=2"></script>
 
 </body>
