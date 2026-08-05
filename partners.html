@@ -1954,47 +1954,259 @@ loadPartners();
 
 <script>
 (function () {
-  const translationMap = {
-    "PARTNER PORTAL": "partners.page.eyebrow",
-    "Join PETS & DOGUE Partners": "partners.page.heading",
-    "Connect your pet-friendly business with the PETS & DOGUE community and offer exclusive benefits to members.": "partners.page.description",
-    "Add Your Business": "partners.page.addBusiness",
-    "Member Discounts": "partners.page.memberDiscounts",
-    "No partners yet": "partners.page.emptyTitle",
-    "New partner businesses and exclusive member offers will appear here.": "partners.page.emptyDescription",
-    "Why become a partner?": "partners.page.benefitsTitle",
-    "Reach pet owners around the world": "partners.page.benefitOne",
-    "Promote exclusive member discounts": "partners.page.benefitTwo",
-    "Build trust through PETS & DOGUE": "partners.page.benefitThree",
-    "Become part of a premium animal community": "partners.page.benefitFour",
-    "JOIN AS PARTNER": "partners.page.button"
+  const textKeys = {
+    "Partners & Discounts": "partners.page.heroTitle",
+
+    "Discover curated pet brands, hotels, groomers, cafés, photographers, clinics and lifestyle partners selected for the PETS & DOGUE community.":
+      "partners.page.heroDescription",
+
+    "Explore Partners":
+      "partners.page.explorePartners",
+
+    "Become A Partner":
+      "partners.page.becomePartner",
+
+    "Join The Club":
+      "partners.page.joinClub",
+
+    "Partners":
+      "partners.page.partners",
+
+    "Member Offers":
+      "partners.page.memberOffers",
+
+    "Categories":
+      "partners.page.categories",
+
+    "Locations":
+      "partners.page.locations",
+
+    "PETS & DOGUE Club Benefits":
+      "partners.page.clubTitle",
+
+    "Club members unlock selected partner discounts, private promotional codes, priority offers and future digital member-card benefits.":
+      "partners.page.clubDescription",
+
+    "💚 Member-only discounts":
+      "partners.page.memberDiscounts",
+
+    "🎟 Digital QR member card":
+      "partners.page.digitalCard",
+
+    "🎁 Private promotional codes":
+      "partners.page.promotionalCodes",
+
+    "👑 Priority partner offers":
+      "partners.page.priorityOffers",
+
+    "Join PETS & DOGUE Club":
+      "partners.page.joinDogueClub",
+
+    "Partner Directory":
+      "partners.page.directoryTitle",
+
+    "All Categories":
+      "partners.page.allCategories",
+
+    "All Locations":
+      "partners.page.allLocations",
+
+    "Search":
+      "partners.page.search",
+
+    "All":
+      "partners.page.all",
+
+    "No partners found":
+      "partners.page.noPartnersTitle",
+
+    "Try another category, location or search term.":
+      "partners.page.noPartnersDescription",
+
+    "Saved Partners":
+      "partners.page.savedPartners",
+
+    "Your favourites will appear here":
+      "partners.page.savedEmptyTitle",
+
+    "Tap “Save” on any partner card.":
+      "partners.page.savedEmptyDescription",
+
+    "Become A PETS & DOGUE Partner":
+      "partners.page.applyTitle",
+
+    "Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can apply for advertising, directory placement and member-discount partnerships.":
+      "partners.page.applyDescription",
+
+    "I confirm that the information is accurate and I agree to be contacted about a PETS & DOGUE partnership.":
+      "partners.page.agreement",
+
+    "Submit Application":
+      "partners.page.submitApplication",
+
+    "View Media Kit":
+      "partners.page.viewMediaKit",
+
+    "Your partnership application has been received in demo mode.":
+      "partners.page.successMessage",
+
+    "Luxury Visibility With Purpose":
+      "partners.page.visibilityTitle",
+
+    "PETS & DOGUE connects premium animal lifestyle brands with a community that values design, care, travel, wellness and responsible pet ownership.":
+      "partners.page.visibilityDescription",
+
+    "Advertise With Us":
+      "partners.page.advertise",
+
+    "Contact PETS & DOGUE":
+      "partners.page.contact",
+
+    "The International Luxury Animal Magazine":
+      "partners.page.footerDescription",
+
+    "Admin":
+      "partners.page.admin",
+
+    "Visit Website":
+      "partners.page.visitWebsite",
+
+    "Contact Partner":
+      "partners.page.contactPartner",
+
+    "MEMBERS ONLY":
+      "partners.page.membersOnly",
+
+    "NEW PARTNER":
+      "partners.page.newPartner",
+
+    "♡ Save":
+      "partners.page.save",
+
+    "♥ Saved":
+      "partners.page.saved",
+
+    "Visit":
+      "partners.page.visit",
+
+    "Remove":
+      "partners.page.remove",
+
+    "Club code:":
+      "partners.page.clubCode",
+
+    "Show your PETS & DOGUE member card.":
+      "partners.page.showCard"
   };
 
-  document.querySelectorAll(
-    "h1, h2, h3, h4, p, span, a, button, div"
-  ).forEach((element) => {
-    if (element.children.length > 0) {
-      return;
-    }
+  const placeholderKeys = {
+    "Search brand, service, city or category...":
+      "partners.page.searchPlaceholder",
 
-    const text = element.textContent
-      .replace(/\s+/g, " ")
-      .trim();
+    "Business name":
+      "partners.page.businessName",
 
-    const translationKey = translationMap[text];
+    "Contact name":
+      "partners.page.contactName",
 
-    if (translationKey) {
-      element.setAttribute(
+    "Business email":
+      "partners.page.businessEmail",
+
+    "Website or social link":
+      "partners.page.website",
+
+    "City / country":
+      "partners.page.businessLocation",
+
+    "Tell us about your business and the offer you would like to provide...":
+      "partners.page.businessMessage"
+  };
+
+  function markTranslations(root = document) {
+    root
+      .querySelectorAll(
+        "h1, h2, h3, h4, p, span, a, button, div, option"
+      )
+      .forEach((element) => {
+        if (element.children.length > 0) {
+          return;
+        }
+
+        const text = element.textContent
+          .replace(/\s+/g, " ")
+          .trim();
+
+        const key = textKeys[text];
+
+        if (key) {
+          element.setAttribute(
+            "data-i18n",
+            key
+          );
+        }
+      });
+
+    root
+      .querySelectorAll(
+        "input[placeholder], textarea[placeholder]"
+      )
+      .forEach((element) => {
+        const placeholder =
+          element.getAttribute(
+            "placeholder"
+          );
+
+        const key =
+          placeholderKeys[placeholder];
+
+        if (key) {
+          element.setAttribute(
+            "data-i18n-placeholder",
+            key
+          );
+        }
+      });
+
+    const categoryOption =
+      document.querySelector(
+        '#businessCategory option[value=""]'
+      );
+
+    if (categoryOption) {
+      categoryOption.setAttribute(
         "data-i18n",
-        translationKey
+        "partners.page.chooseCategory"
       );
     }
-  });
+  }
+
+  markTranslations();
+
+  const observer =
+    new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (
+            node.nodeType === 1
+          ) {
+            markTranslations(node);
+          }
+        });
+      });
+    });
+
+  observer.observe(
+    document.body,
+    {
+      childList: true,
+      subtree: true
+    }
+  );
 })();
 </script>
 
 <script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/partners.js?v=2"></script>
+<script src="/i18n/partners.js?v=3"></script>
 <script src="/i18n/engine.js?v=2"></script>
 
 </body>
