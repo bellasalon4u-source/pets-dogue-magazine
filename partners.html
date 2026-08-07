@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partners & Discounts | PETS & DOGUE</title>
+
+<title data-i18n="partners.meta.title">
+Partners & Discounts | PETS & DOGUE
+</title>
+
+<meta
+name="description"
+content="Discover PETS & DOGUE partners, member discounts and premium pet lifestyle offers."
+data-i18n-attr="content:partners.meta.description"
+>
 
 <style>
 *{
@@ -569,6 +578,40 @@ letter-spacing:2px;
 text-transform:uppercase;
 }
 
+html[dir="rtl"] body{
+text-align:right;
+}
+
+html[dir="rtl"] .hero,
+html[dir="rtl"] .stat,
+html[dir="rtl"] .club-banner,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .apply-section>p,
+html[dir="rtl"] .apply-section h2,
+html[dir="rtl"] .partner-note,
+html[dir="rtl"] footer{
+text-align:center;
+}
+
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .buttons,
+html[dir="rtl"] .actions,
+html[dir="rtl"] .filters,
+html[dir="rtl"] .footer-links{
+direction:rtl;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select{
+text-align:right;
+}
+
+html[dir="rtl"] .logo-mark{
+left:auto;
+right:20px;
+}
+
 @media(max-width:900px){
 
 .search-grid{
@@ -600,24 +643,52 @@ font-size:36px;
 <body>
 
 <header>
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
+
+<div class="logo-small" translate="no" data-pd-brand="true">
+pets &
+</div>
+
+<div class="logo-big" translate="no" data-pd-brand="true">
+DOGUE
+</div>
+
 </header>
 
 <section class="hero">
 
 <div class="hero-content">
 
-<h1>Partners & Discounts</h1>
+<h1 data-i18n="partners.hero.title">
+Partners & Discounts
+</h1>
 
-<p>
+<p data-i18n="partners.hero.description">
 Discover curated pet brands, hotels, groomers, cafés, photographers, clinics and lifestyle partners selected for the PETS & DOGUE community.
 </p>
 
 <div class="hero-actions">
-<a href="#directory" class="btn green">Explore Partners</a>
-<a href="#apply" class="btn gold">Become A Partner</a>
-<a href="club.html" class="btn black">Join The Club</a>
+
+<a
+href="#directory"
+class="btn green"
+data-i18n="partners.hero.explore">
+Explore Partners
+</a>
+
+<a
+href="#apply"
+class="btn gold"
+data-i18n="partners.hero.become">
+Become A Partner
+</a>
+
+<a
+href="club.html"
+class="btn black"
+data-i18n="partners.hero.club">
+Join The Club
+</a>
+
 </div>
 
 </div>
@@ -630,44 +701,59 @@ Discover curated pet brands, hotels, groomers, cafés, photographers, clinics an
 
 <div class="stat">
 <strong id="partnerCount">0</strong>
-Partners
+<span data-i18n="partners.stats.partners">Partners</span>
 </div>
 
 <div class="stat">
 <strong id="discountCount">0</strong>
-Member Offers
+<span data-i18n="partners.stats.offers">Member Offers</span>
 </div>
 
 <div class="stat">
 <strong id="categoryCount">0</strong>
-Categories
+<span data-i18n="partners.stats.categories">Categories</span>
 </div>
 
 <div class="stat">
 <strong id="locationCount">0</strong>
-Locations
+<span data-i18n="partners.stats.locations">Locations</span>
 </div>
 
 </section>
 
 <section class="club-banner">
 
-<h2>PETS & DOGUE Club Benefits</h2>
+<h2 data-i18n="partners.club.title">
+PETS & DOGUE Club Benefits
+</h2>
 
-<p>
+<p data-i18n="partners.club.description">
 Club members unlock selected partner discounts, private promotional codes, priority offers and future digital member-card benefits.
 </p>
 
 <div class="club-benefits">
-<div class="club-benefit">💚 Member-only discounts</div>
-<div class="club-benefit">🎟 Digital QR member card</div>
-<div class="club-benefit">🎁 Private promotional codes</div>
-<div class="club-benefit">👑 Priority partner offers</div>
+
+<div class="club-benefit" data-i18n="partners.club.discount">
+💚 Member-only discounts
+</div>
+
+<div class="club-benefit" data-i18n="partners.club.card">
+🎟 Digital QR member card
+</div>
+
+<div class="club-benefit" data-i18n="partners.club.codes">
+🎁 Private promotional codes
+</div>
+
+<div class="club-benefit" data-i18n="partners.club.priority">
+👑 Priority partner offers
+</div>
+
 </div>
 
 <br>
 
-<a href="club.html" class="btn green">
+<a href="club.html" class="btn green" data-i18n="partners.club.button">
 Join PETS & DOGUE Club
 </a>
 
@@ -675,7 +761,10 @@ Join PETS & DOGUE Club
 
 <section id="directory">
 
-<h2 class="section-title">Partner Directory</h2>
+<h2 class="section-title" data-i18n="partners.directory.title">
+Partner Directory
+</h2>
+
 <div class="gold-line"></div>
 
 <section class="search-panel">
@@ -686,64 +775,41 @@ Join PETS & DOGUE Club
 id="searchInput"
 type="text"
 placeholder="Search brand, service, city or category..."
+data-i18n-placeholder="partners.directory.searchPlaceholder"
 oninput="renderPartners()">
 
 <select
 id="categorySearch"
 onchange="renderPartners()">
-
-<option value="All">
-All Categories
-</option>
-
 </select>
 
 <select
 id="locationSearch"
 onchange="renderPartners()">
-
-<option value="All">
-All Locations
-</option>
-
 </select>
 
 <button
 class="gold"
-onclick="renderPartners()">
-
+onclick="renderPartners()"
+data-i18n="partners.directory.searchButton">
 Search
-
 </button>
 
 </div>
 
 </section>
 
-<div class="filters" id="categoryFilters">
+<div class="filters" id="categoryFilters"></div>
 
-<button
-class="filter active"
-onclick="filterCategory(this,'All')">
+<section class="partner-grid" id="partnerGrid"></section>
 
-All
+<div class="empty-state" id="emptyState">
 
-</button>
+<h3 data-i18n="partners.directory.emptyTitle">
+No partners found
+</h3>
 
-</div>
-
-<section
-class="partner-grid"
-id="partnerGrid">
-</section>
-
-<div
-class="empty-state"
-id="emptyState">
-
-<h3>No partners found</h3>
-
-<p>
+<p data-i18n="partners.directory.emptyDescription">
 Try another category, location or search term.
 </p>
 
@@ -753,23 +819,23 @@ Try another category, location or search term.
 
 <section class="saved-section">
 
-<h2 class="section-title">Saved Partners</h2>
+<h2 class="section-title" data-i18n="partners.saved.title">
+Saved Partners
+</h2>
+
 <div class="gold-line"></div>
 
-<div
-class="saved-list"
-id="savedList">
-</div>
+<div class="saved-list" id="savedList"></div>
 
 </section>
 
-<section
-class="apply-section"
-id="apply">
+<section class="apply-section" id="apply">
 
-<h2>Become A PETS & DOGUE Partner</h2>
+<h2 data-i18n="partners.apply.title">
+Become A PETS & DOGUE Partner
+</h2>
 
-<p>
+<p data-i18n="partners.apply.description">
 Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can apply for advertising, directory placement and member-discount partnerships.
 </p>
 
@@ -778,53 +844,91 @@ Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can 
 <input
 id="businessName"
 type="text"
-placeholder="Business name">
+placeholder="Business name"
+data-i18n-placeholder="partners.apply.businessName">
 
 <input
 id="contactName"
 type="text"
-placeholder="Contact name">
+placeholder="Contact name"
+data-i18n-placeholder="partners.apply.contactName">
 
 <input
 id="businessEmail"
 type="email"
-placeholder="Business email">
+placeholder="Business email"
+data-i18n-placeholder="partners.apply.email">
 
 <input
 id="businessWebsite"
 type="url"
-placeholder="Website or social link">
+placeholder="Website or social link"
+data-i18n-placeholder="partners.apply.website">
 
 <select id="businessCategory">
 
-<option value="">
+<option value="" data-i18n="partners.apply.chooseCategory">
 Choose category
 </option>
 
-<option>Pet Fashion</option>
-<option>Grooming</option>
-<option>Hotels</option>
-<option>Photography</option>
-<option>Wellness</option>
-<option>Pet Friendly</option>
-<option>Travel</option>
-<option>Veterinary</option>
-<option>Training</option>
-<option>Insurance</option>
-<option>Other</option>
+<option value="Pet Fashion" data-i18n="partners.categories.petFashion">
+Pet Fashion
+</option>
+
+<option value="Grooming" data-i18n="partners.categories.grooming">
+Grooming
+</option>
+
+<option value="Hotels" data-i18n="partners.categories.hotels">
+Hotels
+</option>
+
+<option value="Photography" data-i18n="partners.categories.photography">
+Photography
+</option>
+
+<option value="Wellness" data-i18n="partners.categories.wellness">
+Wellness
+</option>
+
+<option value="Pet Friendly" data-i18n="partners.categories.petFriendly">
+Pet Friendly
+</option>
+
+<option value="Travel" data-i18n="partners.categories.travel">
+Travel
+</option>
+
+<option value="Veterinary" data-i18n="partners.categories.veterinary">
+Veterinary
+</option>
+
+<option value="Training" data-i18n="partners.categories.training">
+Training
+</option>
+
+<option value="Insurance" data-i18n="partners.categories.insurance">
+Insurance
+</option>
+
+<option value="Other" data-i18n="partners.categories.other">
+Other
+</option>
 
 </select>
 
 <input
 id="businessLocation"
 type="text"
-placeholder="City / country">
+placeholder="City / country"
+data-i18n-placeholder="partners.apply.location">
 
 </div>
 
 <textarea
 id="businessMessage"
-placeholder="Tell us about your business and the offer you would like to provide...">
+placeholder="Tell us about your business and the offer you would like to provide..."
+data-i18n-placeholder="partners.apply.message">
 </textarea>
 
 <label class="checkbox">
@@ -833,7 +937,7 @@ placeholder="Tell us about your business and the offer you would like to provide
 id="businessAgree"
 type="checkbox">
 
-<span>
+<span data-i18n="partners.apply.agreement">
 I confirm that the information is accurate and I agree to be contacted about a PETS & DOGUE partnership.
 </span>
 
@@ -841,7 +945,8 @@ I confirm that the information is accurate and I agree to be contacted about a P
 
 <button
 class="green"
-onclick="submitPartnerApplication()">
+onclick="submitPartnerApplication()"
+data-i18n="partners.apply.submit">
 
 Submit Application
 
@@ -849,7 +954,8 @@ Submit Application
 
 <a
 href="media-kit.html"
-class="btn gold">
+class="btn gold"
+data-i18n="partners.apply.mediaKit">
 
 View Media Kit
 
@@ -857,7 +963,8 @@ View Media Kit
 
 <div
 class="success-message"
-id="successMessage">
+id="successMessage"
+data-i18n="partners.apply.success">
 
 Your partnership application has been received in demo mode.
 
@@ -867,20 +974,32 @@ Your partnership application has been received in demo mode.
 
 <section class="partner-note">
 
-<h2>Luxury Visibility With Purpose</h2>
+<h2 data-i18n="partners.note.title">
+Luxury Visibility With Purpose
+</h2>
 
-<p>
+<p data-i18n="partners.note.description">
 PETS & DOGUE connects premium animal lifestyle brands with a community that values design, care, travel, wellness and responsible pet ownership.
 </p>
 
 <br>
 
-<a href="advertise.html" class="btn gold">
+<a
+href="advertise.html"
+class="btn gold"
+data-i18n="partners.note.advertise">
+
 Advertise With Us
+
 </a>
 
-<a href="contact.html" class="btn light">
+<a
+href="contact.html"
+class="btn light"
+data-i18n="partners.note.contact">
+
 Contact PETS & DOGUE
+
 </a>
 
 </section>
@@ -889,27 +1008,32 @@ Contact PETS & DOGUE
 
 <footer>
 
-<h2>PETS & DOGUE</h2>
+<h2 translate="no" data-pd-brand="true">
+PETS & DOGUE
+</h2>
 
-<p>
+<p data-i18n="common.footer.subtitle">
 The International Luxury Animal Magazine
 </p>
 
 <div class="footer-links">
-<a href="index.html">Home</a>
-<a href="club.html">Club</a>
-<a href="account.html">Account</a>
-<a href="pet-marketplace.html">Marketplace</a>
-<a href="advertise.html">Advertise</a>
-<a href="media-kit.html">Media Kit</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-<a href="contact.html">Contact</a>
+
+<a href="index.html" data-i18n="partners.footer.home">Home</a>
+<a href="club.html" data-i18n="partners.footer.club">Club</a>
+<a href="account.html" data-i18n="partners.footer.account">Account</a>
+<a href="pet-marketplace.html" data-i18n="partners.footer.marketplace">Marketplace</a>
+<a href="advertise.html" data-i18n="partners.footer.advertise">Advertise</a>
+<a href="media-kit.html" data-i18n="partners.footer.mediaKit">Media Kit</a>
+<a href="privacy.html" data-i18n="partners.footer.privacy">Privacy</a>
+<a href="terms.html" data-i18n="partners.footer.terms">Terms</a>
+<a href="contact.html" data-i18n="partners.footer.contact">Contact</a>
+
 </div>
 
 <a
 href="admin.html"
-class="admin-small">
+class="admin-small"
+data-i18n="common.footer.admin">
 
 Admin
 
@@ -917,17 +1041,101 @@ Admin
 
 </footer>
 
+<script src="i18n/common.js"></script>
+<script src="i18n/partners.js"></script>
+<script src="i18n/engine.js"></script>
+
 <script>
 const CMS_KEY = "pets_dogue_cms_v1";
 const SAVED_KEY = "pd_saved_partners";
 const APPLICATIONS_KEY = "pd_partner_applications";
+const LANGUAGE_KEY = "pets_dogue_language";
 
 let activeCategory = "All";
 let publicPartners = [];
+
 let savedPartners =
 JSON.parse(
 localStorage.getItem(SAVED_KEY) || "[]"
 );
+
+function currentLanguage(){
+
+const language =
+localStorage.getItem(LANGUAGE_KEY) || "en";
+
+return (
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.partners &&
+window.PetsDogueTranslations.partners[language]
+)
+? language
+: "en";
+
+}
+
+function pageTranslation(path,fallback=""){
+
+const translations =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.partners;
+
+if(!translations){
+return fallback;
+}
+
+const language = currentLanguage();
+
+const read = source => {
+
+return path
+.split(".")
+.reduce(
+(value,key) =>
+value &&
+Object.prototype.hasOwnProperty.call(value,key)
+? value[key]
+: undefined,
+source
+);
+
+};
+
+return (
+read(translations[language]) ??
+read(translations.en) ??
+fallback
+);
+
+}
+
+function categoryLabel(category){
+
+const map = {
+"Pet Fashion":"petFashion",
+"Grooming":"grooming",
+"Hotels":"hotels",
+"Photography":"photography",
+"Wellness":"wellness",
+"Pet Friendly":"petFriendly",
+"Travel":"travel",
+"Veterinary":"veterinary",
+"Training":"training",
+"Insurance":"insurance",
+"Other":"other",
+"Partner":"partner"
+};
+
+const key = map[category];
+
+return key
+? pageTranslation(
+"categories." + key,
+category
+)
+: category;
+
+}
 
 const fallbackPartners = [
 
@@ -939,7 +1147,7 @@ location:"Online",
 discount:"10% OFF",
 code:"DOGUE10",
 website:"",
-description:"Designer collars, bows, carriers and seasonal fashion for stylish pets.",
+descriptionKey:"fallback.fashion.description",
 image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80",
 rating:"★★★★★ 4.9",
 memberOnly:true
@@ -953,7 +1161,7 @@ location:"London",
 discount:"15% OFF",
 code:"DOGUESPA15",
 website:"",
-description:"Luxury grooming, coat care and beauty rituals from experienced professionals.",
+descriptionKey:"fallback.grooming.description",
 image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80",
 rating:"★★★★★ 4.8",
 memberOnly:true
@@ -967,7 +1175,7 @@ location:"UK & Europe",
 discount:"12% OFF",
 code:"STAYDOGUE12",
 website:"",
-description:"Elegant stays, pet welcome packs and premium travel experiences.",
+descriptionKey:"fallback.hotel.description",
 image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
 rating:"★★★★★ 4.9",
 memberOnly:true
@@ -981,7 +1189,7 @@ location:"London",
 discount:"20% OFF",
 code:"COVERSTAR20",
 website:"",
-description:"Luxury pet photography for portraits, social media and cover applications.",
+descriptionKey:"fallback.photo.description",
 image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
 rating:"★★★★★ 5.0",
 memberOnly:true
@@ -992,10 +1200,10 @@ id:"fallback-wellness",
 name:"Pet Wellness Partner",
 category:"Wellness",
 location:"Bournemouth",
-discount:"Member Offer",
+discountKey:"dynamic.memberOffer",
 code:"",
 website:"",
-description:"Selected health checks, consultations and everyday pet-care services.",
+descriptionKey:"fallback.wellness.description",
 image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80",
 rating:"★★★★☆ 4.7",
 memberOnly:false
@@ -1006,10 +1214,10 @@ id:"fallback-cafe",
 name:"Dog-Friendly Café",
 category:"Pet Friendly",
 location:"Bournemouth",
-discount:"Free Treat",
+discountKey:"dynamic.freeTreat",
 code:"",
 website:"",
-description:"A welcoming local café with water bowls, pet seating and complimentary treats.",
+descriptionKey:"fallback.cafe.description",
 image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
 rating:"★★★★★ 4.8",
 memberOnly:false
@@ -1039,9 +1247,7 @@ JSON.parse(
 localStorage.getItem(CMS_KEY) || "{}"
 );
 
-if(
-Array.isArray(cms.partners)
-){
+if(Array.isArray(cms.partners)){
 
 cmsPartners =
 cms.partners.map(partner => ({
@@ -1058,23 +1264,30 @@ partner.category ||
 
 location:
 partner.location ||
-"Worldwide",
+pageTranslation(
+"dynamic.worldwide",
+"Worldwide"
+),
 
 discount:
 partner.discount ||
-"Member Offer",
+pageTranslation(
+"dynamic.memberOffer",
+"Member Offer"
+),
 
 code:
-partner.code ||
-"",
+partner.code || "",
 
 website:
-partner.website ||
-"",
+partner.website || "",
 
 description:
 partner.description ||
-"Selected PETS & DOGUE partner.",
+pageTranslation(
+"dynamic.selectedPartner",
+"Selected PETS & DOGUE partner."
+),
 
 image:
 partner.image ||
@@ -1085,7 +1298,11 @@ partner.name
 
 rating:
 partner.rating ||
-"★★★★★ Selected Partner",
+"★★★★★ " +
+pageTranslation(
+"dynamic.selected",
+"Selected Partner"
+),
 
 memberOnly:
 Boolean(
@@ -1143,9 +1360,7 @@ String(category || "") +
 String(name || "")
 ).toLowerCase();
 
-if(
-text.includes("groom")
-){
+if(text.includes("groom")){
 
 return "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80";
 
@@ -1160,9 +1375,7 @@ return "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format
 
 }
 
-if(
-text.includes("photo")
-){
+if(text.includes("photo")){
 
 return "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80";
 
@@ -1205,7 +1418,9 @@ return "PD";
 }
 
 if(words.length === 1){
-return words[0].slice(0,2).toUpperCase();
+return words[0]
+.slice(0,2)
+.toUpperCase();
 }
 
 return (
@@ -1236,68 +1451,117 @@ publicPartners
 ].sort();
 
 const categorySearch =
-document.getElementById(
-"categorySearch"
-);
+document.getElementById("categorySearch");
 
 const locationSearch =
-document.getElementById(
-"locationSearch"
-);
+document.getElementById("locationSearch");
 
 const filters =
-document.getElementById(
-"categoryFilters"
+document.getElementById("categoryFilters");
+
+categorySearch.innerHTML = "";
+
+const allCategories =
+document.createElement("option");
+
+allCategories.value = "All";
+allCategories.textContent =
+pageTranslation(
+"directory.allCategories",
+"All Categories"
 );
 
-categorySearch.innerHTML =
-`<option value="All">All Categories</option>`;
+categorySearch.appendChild(
+allCategories
+);
 
-locationSearch.innerHTML =
-`<option value="All">All Locations</option>`;
+locationSearch.innerHTML = "";
 
-filters.innerHTML = `
-<button
-class="filter active"
-onclick="filterCategory(this,'All')">
-All
-</button>
-`;
+const allLocations =
+document.createElement("option");
+
+allLocations.value = "All";
+allLocations.textContent =
+pageTranslation(
+"directory.allLocations",
+"All Locations"
+);
+
+locationSearch.appendChild(
+allLocations
+);
+
+filters.innerHTML = "";
+
+const allButton =
+document.createElement("button");
+
+allButton.className =
+"filter" +
+(
+activeCategory === "All"
+? " active"
+: ""
+);
+
+allButton.textContent =
+pageTranslation(
+"directory.all",
+"All"
+);
+
+allButton.onclick = () =>
+filterCategory(
+allButton,
+"All"
+);
+
+filters.appendChild(allButton);
 
 categories.forEach(category => {
 
-categorySearch.insertAdjacentHTML(
-"beforeend",
-`
-<option value="${escapeHTML(category)}">
-${escapeHTML(category)}
-</option>
-`
+const option =
+document.createElement("option");
+
+option.value = category;
+option.textContent =
+categoryLabel(category);
+
+categorySearch.appendChild(option);
+
+const button =
+document.createElement("button");
+
+button.className =
+"filter" +
+(
+activeCategory === category
+? " active"
+: ""
 );
 
-filters.insertAdjacentHTML(
-"beforeend",
-`
-<button
-class="filter"
-onclick="filterCategory(this,'${escapeHTML(category).replaceAll("'","\\'")}')">
-${escapeHTML(category)}
-</button>
-`
+button.textContent =
+categoryLabel(category);
+
+button.onclick = () =>
+filterCategory(
+button,
+category
 );
+
+filters.appendChild(button);
 
 });
 
 locations.forEach(location => {
 
-locationSearch.insertAdjacentHTML(
-"beforeend",
-`
-<option value="${escapeHTML(location)}">
-${escapeHTML(location)}
-</option>
-`
-);
+const option =
+document.createElement("option");
+
+option.value = location;
+option.textContent = location;
+
+locationSearch.appendChild(option);
 
 });
 
@@ -1322,6 +1586,7 @@ publicPartners
 const offers =
 publicPartners.filter(partner =>
 partner.discount ||
+partner.discountKey ||
 partner.code
 ).length;
 
@@ -1354,9 +1619,7 @@ activeCategory = category;
 document
 .querySelectorAll(".filter")
 .forEach(item => {
-
 item.classList.remove("active");
-
 });
 
 button.classList.add("active");
@@ -1411,6 +1674,12 @@ partner.name,
 partner.category,
 partner.location,
 partner.description,
+partner.descriptionKey
+? pageTranslation(
+partner.descriptionKey,
+""
+)
+: "",
 partner.discount,
 partner.code
 
@@ -1436,23 +1705,17 @@ matchesQuery
 function renderPartners(){
 
 const grid =
-document.getElementById(
-"partnerGrid"
-);
+document.getElementById("partnerGrid");
 
 const emptyState =
-document.getElementById(
-"emptyState"
-);
+document.getElementById("emptyState");
 
 const partners =
 getFilteredPartners();
 
 grid.innerHTML = "";
 
-if(
-partners.length === 0
-){
+if(partners.length === 0){
 
 emptyState.style.display =
 "block";
@@ -1486,7 +1749,9 @@ String(item.id) === id
 );
 
 const website =
-String(partner.website || "").trim();
+String(
+partner.website || ""
+).trim();
 
 const websiteButton =
 website
@@ -1496,28 +1761,68 @@ href="${escapeHTML(website)}"
 target="_blank"
 rel="noopener noreferrer"
 class="btn gold">
-Visit Website
+${escapeHTML(
+pageTranslation(
+"dynamic.visitWebsite",
+"Visit Website"
+)
+)}
 </a>
 `
 : `
 <a
 href="contact.html"
 class="btn gold">
-Contact Partner
+${escapeHTML(
+pageTranslation(
+"dynamic.contactPartner",
+"Contact Partner"
+)
+)}
 </a>
 `;
 
 const promoText =
 partner.code
 ? `
-Club code:
+${escapeHTML(
+pageTranslation(
+"dynamic.clubCode",
+"Club code:"
+)
+)}
 <span class="promo-code">
 ${escapeHTML(partner.code)}
 </span>
 `
-: `
-Show your PETS & DOGUE member card.
-`;
+: escapeHTML(
+pageTranslation(
+"dynamic.showCard",
+"Show your PETS & DOGUE member card."
+)
+);
+
+const description =
+partner.descriptionKey
+? pageTranslation(
+partner.descriptionKey,
+""
+)
+: partner.description;
+
+const discount =
+partner.discountKey
+? pageTranslation(
+partner.discountKey,
+""
+)
+: (
+partner.discount ||
+pageTranslation(
+"dynamic.partnerOffer",
+"Partner Offer"
+)
+);
 
 return `
 <article class="partner-card">
@@ -1540,19 +1845,31 @@ ${escapeHTML(getInitials(partner.name))}
 
 <span class="badge">
 ${escapeHTML(
-String(partner.category || "Partner").toUpperCase()
+categoryLabel(
+partner.category || "Partner"
+).toUpperCase()
 )}
 </span>
 
 ${partner.memberOnly ? `
 <span class="badge member-only">
-MEMBERS ONLY
+${escapeHTML(
+pageTranslation(
+"dynamic.membersOnly",
+"MEMBERS ONLY"
+)
+)}
 </span>
 ` : ""}
 
 ${partner.fromCMS ? `
 <span class="badge cms-badge">
-NEW PARTNER
+${escapeHTML(
+pageTranslation(
+"dynamic.newPartner",
+"NEW PARTNER"
+)
+)}
 </span>
 ` : ""}
 
@@ -1571,11 +1888,11 @@ ${escapeHTML(partner.rating)}
 </div>
 
 <p>
-${escapeHTML(partner.description)}
+${escapeHTML(description)}
 </p>
 
 <div class="discount">
-${escapeHTML(partner.discount || "Partner Offer")}
+${escapeHTML(discount)}
 </div>
 
 <div class="promo-box">
@@ -1590,7 +1907,17 @@ ${websiteButton}
 class="btn light save-btn ${saved ? "saved" : ""}"
 onclick="toggleSavedPartner('${escapeHTML(id)}',this)">
 
-${saved ? "♥ Saved" : "♡ Save"}
+${escapeHTML(
+saved
+? pageTranslation(
+"dynamic.saved",
+"♥ Saved"
+)
+: pageTranslation(
+"dynamic.save",
+"♡ Save"
+)
+)}
 
 </button>
 
@@ -1619,9 +1946,7 @@ savedPartners.findIndex(item =>
 String(item.id) === String(id)
 );
 
-if(
-existingIndex >= 0
-){
+if(existingIndex >= 0){
 
 savedPartners.splice(
 existingIndex,
@@ -1633,7 +1958,10 @@ button.classList.remove(
 );
 
 button.textContent =
-"♡ Save";
+pageTranslation(
+"dynamic.save",
+"♡ Save"
+);
 
 }else{
 
@@ -1652,7 +1980,10 @@ button.classList.add(
 );
 
 button.textContent =
-"♥ Saved";
+pageTranslation(
+"dynamic.saved",
+"♥ Saved"
+);
 
 }
 
@@ -1674,19 +2005,27 @@ document.getElementById(
 
 savedList.innerHTML = "";
 
-if(
-savedPartners.length === 0
-){
+if(savedPartners.length === 0){
 
 savedList.innerHTML = `
 <div class="saved-item">
 
 <h3>
-Your favourites will appear here
+${escapeHTML(
+pageTranslation(
+"saved.emptyTitle",
+"Your favourites will appear here"
+)
+)}
 </h3>
 
 <p>
-Tap “Save” on any partner card.
+${escapeHTML(
+pageTranslation(
+"saved.emptyDescription",
+"Tap “Save” on any partner card."
+)
+)}
 </p>
 
 </div>
@@ -1708,7 +2047,9 @@ ${escapeHTML(item.name)}
 </h3>
 
 <p>
-${escapeHTML(item.category)}
+${escapeHTML(
+categoryLabel(item.category)
+)}
 ·
 ${escapeHTML(item.location)}
 </p>
@@ -1719,7 +2060,12 @@ href="${escapeHTML(item.website)}"
 target="_blank"
 rel="noopener noreferrer"
 class="btn gold">
-Visit
+${escapeHTML(
+pageTranslation(
+"dynamic.visit",
+"Visit"
+)
+)}
 </a>
 ` : ""}
 
@@ -1727,7 +2073,12 @@ Visit
 class="btn black"
 onclick="removeSavedPartner('${escapeHTML(String(item.id))}')">
 
-Remove
+${escapeHTML(
+pageTranslation(
+"dynamic.remove",
+"Remove"
+)
+)}
 
 </button>
 
@@ -1794,19 +2145,23 @@ if(
 ){
 
 alert(
+pageTranslation(
+"alerts.required",
 "Please complete the required business details."
+)
 );
 
 return;
 
 }
 
-if(
-!businessEmail.includes("@")
-){
+if(!businessEmail.includes("@")){
 
 alert(
+pageTranslation(
+"alerts.email",
 "Please enter a valid business email."
+)
 );
 
 return;
@@ -1816,7 +2171,10 @@ return;
 if(!agree){
 
 alert(
+pageTranslation(
+"alerts.agreement",
 "Please confirm that the information is accurate."
+)
 );
 
 return;
@@ -1890,9 +2248,7 @@ document.getElementById(
 "businessMessage"
 ].forEach(id => {
 
-document.getElementById(
-id
-).value = "";
+document.getElementById(id).value = "";
 
 });
 
@@ -1919,17 +2275,11 @@ window.addEventListener(
 "storage",
 event => {
 
-if(
-event.key === CMS_KEY
-){
-
+if(event.key === CMS_KEY){
 loadPartners();
-
 }
 
-if(
-event.key === SAVED_KEY
-){
+if(event.key === SAVED_KEY){
 
 savedPartners =
 JSON.parse(
@@ -1946,268 +2296,19 @@ renderPartners();
 }
 );
 
+window.addEventListener(
+"languagechange",
+() => {
+
+buildFilters();
+renderPartners();
+renderSavedPartners();
+
+}
+);
+
 loadPartners();
 </script>
-
-
-<!-- PETS & DOGUE FREE LOCAL LANGUAGE SYSTEM -->
-
-<script>
-(function () {
-  const textKeys = {
-    "Partners & Discounts": "partners.page.heroTitle",
-
-    "Discover curated pet brands, hotels, groomers, cafés, photographers, clinics and lifestyle partners selected for the PETS & DOGUE community.":
-      "partners.page.heroDescription",
-
-    "Explore Partners":
-      "partners.page.explorePartners",
-
-    "Become A Partner":
-      "partners.page.becomePartner",
-
-    "Join The Club":
-      "partners.page.joinClub",
-
-    "Partners":
-      "partners.page.partners",
-
-    "Member Offers":
-      "partners.page.memberOffers",
-
-    "Categories":
-      "partners.page.categories",
-
-    "Locations":
-      "partners.page.locations",
-
-    "PETS & DOGUE Club Benefits":
-      "partners.page.clubTitle",
-
-    "Club members unlock selected partner discounts, private promotional codes, priority offers and future digital member-card benefits.":
-      "partners.page.clubDescription",
-
-    "💚 Member-only discounts":
-      "partners.page.memberDiscounts",
-
-    "🎟 Digital QR member card":
-      "partners.page.digitalCard",
-
-    "🎁 Private promotional codes":
-      "partners.page.promotionalCodes",
-
-    "👑 Priority partner offers":
-      "partners.page.priorityOffers",
-
-    "Join PETS & DOGUE Club":
-      "partners.page.joinDogueClub",
-
-    "Partner Directory":
-      "partners.page.directoryTitle",
-
-    "All Categories":
-      "partners.page.allCategories",
-
-    "All Locations":
-      "partners.page.allLocations",
-
-    "Search":
-      "partners.page.search",
-
-    "All":
-      "partners.page.all",
-
-    "No partners found":
-      "partners.page.noPartnersTitle",
-
-    "Try another category, location or search term.":
-      "partners.page.noPartnersDescription",
-
-    "Saved Partners":
-      "partners.page.savedPartners",
-
-    "Your favourites will appear here":
-      "partners.page.savedEmptyTitle",
-
-    "Tap “Save” on any partner card.":
-      "partners.page.savedEmptyDescription",
-
-    "Become A PETS & DOGUE Partner":
-      "partners.page.applyTitle",
-
-    "Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can apply for advertising, directory placement and member-discount partnerships.":
-      "partners.page.applyDescription",
-
-    "I confirm that the information is accurate and I agree to be contacted about a PETS & DOGUE partnership.":
-      "partners.page.agreement",
-
-    "Submit Application":
-      "partners.page.submitApplication",
-
-    "View Media Kit":
-      "partners.page.viewMediaKit",
-
-    "Your partnership application has been received in demo mode.":
-      "partners.page.successMessage",
-
-    "Luxury Visibility With Purpose":
-      "partners.page.visibilityTitle",
-
-    "PETS & DOGUE connects premium animal lifestyle brands with a community that values design, care, travel, wellness and responsible pet ownership.":
-      "partners.page.visibilityDescription",
-
-    "Advertise With Us":
-      "partners.page.advertise",
-
-    "Contact PETS & DOGUE":
-      "partners.page.contact",
-
-    "The International Luxury Animal Magazine":
-      "partners.page.footerDescription",
-
-    "Admin":
-      "partners.page.admin",
-
-    "Visit Website":
-      "partners.page.visitWebsite",
-
-    "Contact Partner":
-      "partners.page.contactPartner",
-
-    "MEMBERS ONLY":
-      "partners.page.membersOnly",
-
-    "NEW PARTNER":
-      "partners.page.newPartner",
-
-    "♡ Save":
-      "partners.page.save",
-
-    "♥ Saved":
-      "partners.page.saved",
-
-    "Visit":
-      "partners.page.visit",
-
-    "Remove":
-      "partners.page.remove",
-
-    "Club code:":
-      "partners.page.clubCode",
-
-    "Show your PETS & DOGUE member card.":
-      "partners.page.showCard"
-  };
-
-  const placeholderKeys = {
-    "Search brand, service, city or category...":
-      "partners.page.searchPlaceholder",
-
-    "Business name":
-      "partners.page.businessName",
-
-    "Contact name":
-      "partners.page.contactName",
-
-    "Business email":
-      "partners.page.businessEmail",
-
-    "Website or social link":
-      "partners.page.website",
-
-    "City / country":
-      "partners.page.businessLocation",
-
-    "Tell us about your business and the offer you would like to provide...":
-      "partners.page.businessMessage"
-  };
-
-  function markTranslations(root = document) {
-    root
-      .querySelectorAll(
-        "h1, h2, h3, h4, p, span, a, button, div, option"
-      )
-      .forEach((element) => {
-        if (element.children.length > 0) {
-          return;
-        }
-
-        const text = element.textContent
-          .replace(/\s+/g, " ")
-          .trim();
-
-        const key = textKeys[text];
-
-        if (key) {
-          element.setAttribute(
-            "data-i18n",
-            key
-          );
-        }
-      });
-
-    root
-      .querySelectorAll(
-        "input[placeholder], textarea[placeholder]"
-      )
-      .forEach((element) => {
-        const placeholder =
-          element.getAttribute(
-            "placeholder"
-          );
-
-        const key =
-          placeholderKeys[placeholder];
-
-        if (key) {
-          element.setAttribute(
-            "data-i18n-placeholder",
-            key
-          );
-        }
-      });
-
-    const categoryOption =
-      document.querySelector(
-        '#businessCategory option[value=""]'
-      );
-
-    if (categoryOption) {
-      categoryOption.setAttribute(
-        "data-i18n",
-        "partners.page.chooseCategory"
-      );
-    }
-  }
-
-  markTranslations();
-
-  const observer =
-    new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (
-            node.nodeType === 1
-          ) {
-            markTranslations(node);
-          }
-        });
-      });
-    });
-
-  observer.observe(
-    document.body,
-    {
-      childList: true,
-      subtree: true
-    }
-  );
-})();
-</script>
-
-<script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/partners.js?v=3"></script>
-<script src="/i18n/engine.js?v=2"></script>
 
 </body>
 </html>
