@@ -140,7 +140,8 @@ window.PetsDogueTranslations.articles = {
       coverLabel: "COVER STAR",
       coverTitle: "The Face of a Future Issue",
       travelLabel: "TRAVEL",
-      travelTitle: "Beautiful Escapes With Your Pet",
+      travelTitle:
+        "Beautiful Escapes With Your Pet",
       fashionLabel: "FASHION",
       fashionTitle: "Editorial Style",
       rescueLabel: "RESCUE",
@@ -474,8 +475,7 @@ window.PetsDogueTranslations.articles = {
       wellnessEditors: "Редакция здоровья",
       rescueDesk: "Редакция помощи",
       localDesk: "Местная редакция",
-      communityEditors:
-        "Редакция сообщества",
+      communityEditors: "Редакция сообщества",
       localCommunity: "Местное сообщество",
       minute: "{count} мин"
     },
@@ -645,16 +645,13 @@ window.PetsDogueTranslations.articles = {
     },
 
     cardMeta: {
-      byEditors:
-        "Rédaction PETS & DOGUE",
+      byEditors: "Rédaction PETS & DOGUE",
       fashionDesk: "Rédaction Mode",
       travelDesk: "Rédaction Voyages",
-      wellnessEditors:
-        "Rédaction Bien-être",
+      wellnessEditors: "Rédaction Bien-être",
       rescueDesk: "Rédaction Sauvetage",
       localDesk: "Rédaction locale",
-      communityEditors:
-        "Rédaction Communauté",
+      communityEditors: "Rédaction Communauté",
       localCommunity: "Communauté locale",
       minute: "{count} min"
     },
@@ -823,8 +820,7 @@ window.PetsDogueTranslations.articles = {
     },
 
     cardMeta: {
-      byEditors:
-        "PETS & DOGUE Redaktion",
+      byEditors: "PETS & DOGUE Redaktion",
       fashionDesk: "Moderedaktion",
       travelDesk: "Reiseredaktion",
       wellnessEditors:
@@ -871,9 +867,7 @@ window.PetsDogueTranslations.articles = {
       placeholder: "Ihre E-Mail-Adresse",
       button: "ABONNIEREN"
     }
-  },
-
-  es: {
+  },  es: {
     hero: {
       kicker: "EDITORIAL PETS & DOGUE",
       title:
@@ -1057,7 +1051,9 @@ window.PetsDogueTranslations.articles = {
         "Tu correo electrónico",
       button: "SUSCRIBIRSE"
     }
-  },  it: {
+  },
+
+  it: {
     hero: {
       kicker: "EDITORIALE PETS & DOGUE",
       title:
@@ -1102,14 +1098,16 @@ window.PetsDogueTranslations.articles = {
         "Storie, immagini e guide utili selezionate dalla redazione di PETS & DOGUE.",
       latest: "Ultime storie",
       visual: "Giornalismo visivo",
-      gallery: "APRI LA GALLERIA FOTOGRAFICA →",
+      gallery:
+        "APRI LA GALLERIA FOTOGRAFICA →",
       emptyTitle: "Nessuna storia trovata",
       emptyDescription:
         "Prova un'altra parola oppure seleziona un'altra categoria."
     },
 
     results: {
-      one: "È disponibile una storia editoriale.",
+      one:
+        "È disponibile una storia editoriale.",
       many:
         "Sono disponibili {count} storie editoriali."
     },
@@ -1283,7 +1281,8 @@ window.PetsDogueTranslations.articles = {
         "Histórias, imagens e guias úteis selecionados pela redação da PETS & DOGUE.",
       latest: "Últimas histórias",
       visual: "Jornalismo visual",
-      gallery: "ABRIR GALERIA DE FOTOS →",
+      gallery:
+        "ABRIR GALERIA DE FOTOS →",
       emptyTitle:
         "Nenhuma história encontrada",
       emptyDescription:
@@ -1463,7 +1462,8 @@ window.PetsDogueTranslations.articles = {
         "Verhalen, beelden en handige gidsen geselecteerd door de PETS & DOGUE-redactie.",
       latest: "Nieuwste verhalen",
       visual: "Visuele journalistiek",
-      gallery: "FOTOGALERIJ OPENEN →",
+      gallery:
+        "FOTOGALERIJ OPENEN →",
       emptyTitle: "Geen verhalen gevonden",
       emptyDescription:
         "Probeer een ander zoekwoord of kies een andere categorie."
@@ -1477,15 +1477,18 @@ window.PetsDogueTranslations.articles = {
     },
 
     featured: {
-      mainLabel: "COVERSTER · LUISTEREN",
+      mainLabel:
+        "COVERSTER · LUISTEREN",
       mainTitle:
         "Zo bereid je je huisdier voor op een professionele magazinefotoshoot",
       mainDescription:
         "Comfort, verzorging, licht en details die een mooi portret veranderen in een redactioneel beeld.",
-      travelLabel: "REIZEN · LUISTEREN",
+      travelLabel:
+        "REIZEN · LUISTEREN",
       travelTitle:
         "De opkomst van luxe huisdiervriendelijke hotels",
-      rescueLabel: "REDDING · LUISTEREN",
+      rescueLabel:
+        "REDDING · LUISTEREN",
       rescueTitle:
         "Waarom zichtbaarheid het leven van een dier kan veranderen"
     },
@@ -1662,10 +1665,12 @@ window.PetsDogueTranslations.articles = {
         "Jak przygotować pupila do profesjonalnej sesji zdjęciowej do magazynu",
       mainDescription:
         "Komfort, pielęgnacja, światło i detale, które zmieniają piękny portret w zdjęcie redakcyjne.",
-      travelLabel: "PODRÓŻE · SŁUCHAJ",
+      travelLabel:
+        "PODRÓŻE · SŁUCHAJ",
       travelTitle:
         "Rozwój luksusowych hoteli przyjaznych zwierzętom",
-      rescueLabel: "POMOC · SŁUCHAJ",
+      rescueLabel:
+        "POMOC · SŁUCHAJ",
       rescueTitle:
         "Dlaczego widoczność może zmienić życie zwierzęcia"
     },
@@ -1746,15 +1751,18 @@ window.PetsDogueTranslations.articles = {
       coverLabel: "GWIAZDA OKŁADKI",
       coverTitle: "Twarz przyszłego numeru",
       travelLabel: "PODRÓŻE",
-      travelTitle: "Piękne wyjazdy z pupilem",
+      travelTitle:
+        "Piękne wyjazdy z pupilem",
       fashionLabel: "MODA",
       fashionTitle: "Styl redakcyjny",
       rescueLabel: "POMOC",
-      rescueTitle: "Życie warte zobaczenia",
+      rescueTitle:
+        "Życie warte zobaczenia",
       wellnessLabel: "ZDROWIE",
       wellnessTitle: "Codzienna opieka",
       localLabel: "LOKALNIE",
-      localTitle: "Razem blisko Ciebie"
+      localTitle:
+        "Razem blisko Ciebie"
     },
 
     cover: {
@@ -1819,7 +1827,8 @@ window.PetsDogueTranslations.articles = {
         "Příběhy, obrázky a užitečné průvodce vybrané redakcí PETS & DOGUE.",
       latest: "Nejnovější příběhy",
       visual: "Vizuální žurnalistika",
-      gallery: "OTEVŘÍT FOTOGALERII →",
+      gallery:
+        "OTEVŘÍT FOTOGALERII →",
       emptyTitle:
         "Žádné odpovídající příběhy",
       emptyDescription:
@@ -1906,9 +1915,11 @@ window.PetsDogueTranslations.articles = {
     },
 
     cardMeta: {
-      byEditors: "Redakce PETS & DOGUE",
+      byEditors:
+        "Redakce PETS & DOGUE",
       fashionDesk: "Redakce módy",
-      travelDesk: "Redakce cestování",
+      travelDesk:
+        "Redakce cestování",
       wellnessEditors:
         "Redakce zdraví",
       rescueDesk: "Redakce záchrany",
@@ -1921,7 +1932,8 @@ window.PetsDogueTranslations.articles = {
 
     visualCards: {
       coverLabel: "HVĚZDA OBÁLKY",
-      coverTitle: "Tvář budoucího vydání",
+      coverTitle:
+        "Tvář budoucího vydání",
       travelLabel: "CESTOVÁNÍ",
       travelTitle:
         "Krásné výlety s vaším mazlíčkem",
@@ -2000,7 +2012,8 @@ window.PetsDogueTranslations.articles = {
         "Príbehy, obrázky a užitočné príručky vybrané redakciou PETS & DOGUE.",
       latest: "Najnovšie príbehy",
       visual: "Vizuálna žurnalistika",
-      gallery: "OTVORIŤ FOTOGALÉRIU →",
+      gallery:
+        "OTVORIŤ FOTOGALÉRIU →",
       emptyTitle:
         "Žiadne zodpovedajúce príbehy",
       emptyDescription:
@@ -2090,7 +2103,8 @@ window.PetsDogueTranslations.articles = {
       byEditors:
         "Redakcia PETS & DOGUE",
       fashionDesk: "Redakcia módy",
-      travelDesk: "Redakcia cestovania",
+      travelDesk:
+        "Redakcia cestovania",
       wellnessEditors:
         "Redakcia zdravia",
       rescueDesk: "Redakcia záchrany",
@@ -2102,8 +2116,10 @@ window.PetsDogueTranslations.articles = {
     },
 
     visualCards: {
-      coverLabel: "HVIEZDA OBÁLKY",
-      coverTitle: "Tvár budúceho vydania",
+      coverLabel:
+        "HVIEZDA OBÁLKY",
+      coverTitle:
+        "Tvár budúceho vydania",
       travelLabel: "CESTOVANIE",
       travelTitle:
         "Krásne výlety s vaším miláčikom",
@@ -2181,8 +2197,10 @@ window.PetsDogueTranslations.articles = {
         "A PETS & DOGUE szerkesztősége által kiválasztott történetek, képek és hasznos útmutatók.",
       latest: "Legújabb történetek",
       visual: "Vizuális újságírás",
-      gallery: "FOTÓGALÉRIA MEGNYITÁSA →",
-      emptyTitle: "Nincs megfelelő történet",
+      gallery:
+        "FOTÓGALÉRIA MEGNYITÁSA →",
+      emptyTitle:
+        "Nincs megfelelő történet",
       emptyDescription:
         "Próbáljon másik keresőszót vagy válasszon másik kategóriát."
     },
@@ -2201,19 +2219,23 @@ window.PetsDogueTranslations.articles = {
         "Hogyan készítse fel kedvencét egy professzionális magazinfotózásra",
       mainDescription:
         "Kényelem, ápolás, fény és részletek, amelyek egy szép portrét szerkesztőségi képpé alakítanak.",
-      travelLabel: "UTAZÁS · HALLGATÁS",
+      travelLabel:
+        "UTAZÁS · HALLGATÁS",
       travelTitle:
         "A luxus állatbarát szállodák térnyerése",
-      rescueLabel: "MENTÉS · HALLGATÁS",
+      rescueLabel:
+        "MENTÉS · HALLGATÁS",
       rescueTitle:
         "Miért változtathatja meg a láthatóság egy állat életét"
     },
 
     cards: {
       audio: "🔊 HANG",
-      readListen: "OLVASÁS ÉS HALLGATÁS",
+      readListen:
+        "OLVASÁS ÉS HALLGATÁS",
 
-      photoshootCategory: "CÍMLAPSZTÁR",
+      photoshootCategory:
+        "CÍMLAPSZTÁR",
       photoshootTitle:
         "Hogyan készítse fel kedvencét egy professzionális magazinfotózásra",
       photoshootDescription:
@@ -2249,7 +2271,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "A közösségi jelentések, az ellenőrzés és a moderálás segítik a helyi információk megbízhatóságát.",
 
-      volunteersCategory: "KÖZÖSSÉG",
+      volunteersCategory:
+        "KÖZÖSSÉG",
       volunteersTitle:
         "Az emberek, akik a háttérben segítik az állatokat",
       volunteersDescription:
@@ -2266,15 +2289,20 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "PETS & DOGUE szerkesztőség",
-      fashionDesk: "Divatszerkesztőség",
-      travelDesk: "Utazási szerkesztőség",
+      fashionDesk:
+        "Divatszerkesztőség",
+      travelDesk:
+        "Utazási szerkesztőség",
       wellnessEditors:
         "Jólléti szerkesztőség",
-      rescueDesk: "Mentési szerkesztőség",
-      localDesk: "Helyi szerkesztőség",
+      rescueDesk:
+        "Mentési szerkesztőség",
+      localDesk:
+        "Helyi szerkesztőség",
       communityEditors:
         "Közösségi szerkesztőség",
-      localCommunity: "Helyi közösség",
+      localCommunity:
+        "Helyi közösség",
       minute: "{count} perc"
     },
 
@@ -2286,7 +2314,8 @@ window.PetsDogueTranslations.articles = {
       travelTitle:
         "Gyönyörű utazások kedvencével",
       fashionLabel: "DIVAT",
-      fashionTitle: "Szerkesztőségi stílus",
+      fashionTitle:
+        "Szerkesztőségi stílus",
       rescueLabel: "MENTÉS",
       rescueTitle:
         "Egy élet, amelyet érdemes látni",
@@ -2360,8 +2389,10 @@ window.PetsDogueTranslations.articles = {
         "Povești, imagini și ghiduri utile selectate de redacția PETS & DOGUE.",
       latest: "Ultimele povești",
       visual: "Jurnalism vizual",
-      gallery: "DESCHIDE GALERIA FOTO →",
-      emptyTitle: "Nicio poveste găsită",
+      gallery:
+        "DESCHIDE GALERIA FOTO →",
+      emptyTitle:
+        "Nicio poveste găsită",
       emptyDescription:
         "Încearcă alt cuvânt sau selectează o altă categorie."
     },
@@ -2392,7 +2423,8 @@ window.PetsDogueTranslations.articles = {
 
     cards: {
       audio: "🔊 AUDIO",
-      readListen: "CITEȘTE ȘI ASCULTĂ",
+      readListen:
+        "CITEȘTE ȘI ASCULTĂ",
 
       photoshootCategory:
         "VEDETĂ DE COPERTĂ",
@@ -2413,7 +2445,8 @@ window.PetsDogueTranslations.articles = {
       travelDescription:
         "Hotelurile regândesc experiența oaspeților care călătoresc cu animale.",
 
-      wellnessCategory: "BUNĂSTARE",
+      wellnessCategory:
+        "BUNĂSTARE",
       wellnessTitle:
         "Ritualuri zilnice pentru un animal mai calm și mai fericit",
       wellnessDescription:
@@ -2431,7 +2464,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "Raportările comunității, verificarea și moderarea ajută la menținerea informațiilor locale utile.",
 
-      volunteersCategory: "COMUNITATE",
+      volunteersCategory:
+        "COMUNITATE",
       volunteersTitle:
         "Oamenii care ajută animalele din culise",
       volunteersDescription:
@@ -2448,12 +2482,16 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "Redacția PETS & DOGUE",
-      fashionDesk: "Redacția Modă",
-      travelDesk: "Redacția Călătorii",
+      fashionDesk:
+        "Redacția Modă",
+      travelDesk:
+        "Redacția Călătorii",
       wellnessEditors:
         "Redacția Bunăstare",
-      rescueDesk: "Redacția Salvare",
-      localDesk: "Redacția locală",
+      rescueDesk:
+        "Redacția Salvare",
+      localDesk:
+        "Redacția locală",
       communityEditors:
         "Redacția Comunitate",
       localCommunity:
@@ -2474,15 +2512,18 @@ window.PetsDogueTranslations.articles = {
       rescueLabel: "SALVARE",
       rescueTitle:
         "O viață care merită văzută",
-      wellnessLabel: "BUNĂSTARE",
-      wellnessTitle: "Îngrijire zilnică",
+      wellnessLabel:
+        "BUNĂSTARE",
+      wellnessTitle:
+        "Îngrijire zilnică",
       localLabel: "LOCAL",
       localTitle:
         "Împreună aproape de tine"
     },
 
     cover: {
-      myPet: "ANIMALUL MEU ESTE",
+      myPet:
+        "ANIMALUL MEU ESTE",
       title:
         "URMĂTOAREA<br>VEDETĂ DE COPERTĂ",
       enter: "PARTICIPĂ →"
@@ -2506,13 +2547,16 @@ window.PetsDogueTranslations.articles = {
         "Истории, които си струва да видите, прочетете и чуете",
       description:
         "Открийте визуална журналистика, луксозен начин на живот с животни, полезни ръководства, пътувания, здраве, мода, интервюта и истории за спасяване. Всяка пълна статия включва аудио разказ.",
-      explore: "Разгледайте историите",
+      explore:
+        "Разгледайте историите",
       listen: "Слушайте статия",
-      cover: "Станете звезда на корицата"
+      cover:
+        "Станете звезда на корицата"
     },
 
     stories: {
-      coverStars: "Звезди на корицата",
+      coverStars:
+        "Звезди на корицата",
       fashion: "Мода",
       travel: "Пътувания",
       wellness: "Здраве",
@@ -2526,10 +2570,13 @@ window.PetsDogueTranslations.articles = {
       placeholder:
         "Търсете истории, категории или теми...",
       button: "Търсене",
-      allCategories: "Всички категории",
+      allCategories:
+        "Всички категории",
       all: "Всички",
-      coverStar: "Звезда на корицата",
-      coverStars: "Звезди на корицата",
+      coverStar:
+        "Звезда на корицата",
+      coverStars:
+        "Звезди на корицата",
       fashion: "Мода",
       travel: "Пътувания",
       wellness: "Здраве",
@@ -2539,12 +2586,15 @@ window.PetsDogueTranslations.articles = {
     },
 
     sections: {
-      editor: "Избор на редакцията",
+      editor:
+        "Избор на редакцията",
       editorDescription:
         "Истории, изображения и полезни ръководства, избрани от редакцията на PETS & DOGUE.",
       latest: "Последни истории",
-      visual: "Визуална журналистика",
-      gallery: "ОТВОРИ ФОТОГАЛЕРИЯТА →",
+      visual:
+        "Визуална журналистика",
+      gallery:
+        "ОТВОРИ ФОТОГАЛЕРИЯТА →",
       emptyTitle:
         "Няма намерени истории",
       emptyDescription:
@@ -2577,7 +2627,8 @@ window.PetsDogueTranslations.articles = {
 
     cards: {
       audio: "🔊 АУДИО",
-      readListen: "ЧЕТИ И СЛУШАЙ",
+      readListen:
+        "ЧЕТИ И СЛУШАЙ",
 
       photoshootCategory:
         "ЗВЕЗДА НА КОРИЦАТА",
@@ -2592,7 +2643,8 @@ window.PetsDogueTranslations.articles = {
       fashionDescription:
         "Съвременната мода за животни става по-лека, по-изразителна и по-удобна.",
 
-      travelCategory: "ПЪТУВАНИЯ",
+      travelCategory:
+        "ПЪТУВАНИЯ",
       travelTitle:
         "Възходът на луксозните хотели, подходящи за домашни любимци",
       travelDescription:
@@ -2604,7 +2656,8 @@ window.PetsDogueTranslations.articles = {
       wellnessDescription:
         "Малките рутини могат да подкрепят комфорта, увереността и по-силната връзка с животното.",
 
-      rescueCategory: "СПАСЯВАНЕ",
+      rescueCategory:
+        "СПАСЯВАНЕ",
       rescueTitle:
         "Защо видимостта може да промени живота на едно животно",
       rescueDescription:
@@ -2616,7 +2669,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "Сигналите от общността, проверката и модерацията помагат местната информация да остане полезна.",
 
-      volunteersCategory: "ОБЩНОСТ",
+      volunteersCategory:
+        "ОБЩНОСТ",
       volunteersTitle:
         "Хората, които помагат на животните зад кулисите",
       volunteersDescription:
@@ -2633,38 +2687,48 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "Редакция PETS & DOGUE",
-      fashionDesk: "Редакция Мода",
-      travelDesk: "Редакция Пътувания",
+      fashionDesk:
+        "Редакция Мода",
+      travelDesk:
+        "Редакция Пътувания",
       wellnessEditors:
         "Редакция Здраве",
-      rescueDesk: "Редакция Спасяване",
-      localDesk: "Местна редакция",
+      rescueDesk:
+        "Редакция Спасяване",
+      localDesk:
+        "Местна редакция",
       communityEditors:
         "Редакция Общност",
-      localCommunity: "Местна общност",
+      localCommunity:
+        "Местна общност",
       minute: "{count} мин"
     },
 
     visualCards: {
       coverLabel:
         "ЗВЕЗДА НА КОРИЦАТА",
-      coverTitle: "Лицето на бъдещ брой",
+      coverTitle:
+        "Лицето на бъдещ брой",
       travelLabel: "ПЪТУВАНИЯ",
       travelTitle:
         "Красиви пътувания с вашия любимец",
       fashionLabel: "МОДА",
-      fashionTitle: "Редакционен стил",
+      fashionTitle:
+        "Редакционен стил",
       rescueLabel: "СПАСЯВАНЕ",
       rescueTitle:
         "Живот, който заслужава да бъде видян",
       wellnessLabel: "ЗДРАВЕ",
-      wellnessTitle: "Ежедневна грижа",
+      wellnessTitle:
+        "Ежедневна грижа",
       localLabel: "МЕСТНО",
-      localTitle: "Заедно близо до вас"
+      localTitle:
+        "Заедно близо до вас"
     },
 
     cover: {
-      myPet: "МОЯТ ЛЮБИМЕЦ Е",
+      myPet:
+        "МОЯТ ЛЮБИМЕЦ Е",
       title:
         "СЛЕДВАЩАТА<br>ЗВЕЗДА НА КОРИЦАТА",
       enter: "УЧАСТВАЙ →"
@@ -2683,18 +2747,23 @@ window.PetsDogueTranslations.articles = {
 
   el: {
     hero: {
-      kicker: "ΣΥΝΤΑΞΗ PETS & DOGUE",
+      kicker:
+        "ΣΥΝΤΑΞΗ PETS & DOGUE",
       title:
         "Ιστορίες που αξίζει να δείτε, να διαβάσετε και να ακούσετε",
       description:
         "Ανακαλύψτε οπτική δημοσιογραφία, πολυτελή ζωή με ζώα, χρήσιμους οδηγούς, ταξίδια, ευεξία, μόδα, συνεντεύξεις και ιστορίες διάσωσης. Κάθε πλήρες άρθρο περιλαμβάνει ηχητική αφήγηση.",
-      explore: "Εξερευνήστε τις ιστορίες",
-      listen: "Ακούστε ένα άρθρο",
-      cover: "Γίνετε αστέρι εξωφύλλου"
+      explore:
+        "Εξερευνήστε τις ιστορίες",
+      listen:
+        "Ακούστε ένα άρθρο",
+      cover:
+        "Γίνετε αστέρι εξωφύλλου"
     },
 
     stories: {
-      coverStars: "Αστέρια εξωφύλλου",
+      coverStars:
+        "Αστέρια εξωφύλλου",
       fashion: "Μόδα",
       travel: "Ταξίδια",
       wellness: "Ευεξία",
@@ -2708,10 +2777,13 @@ window.PetsDogueTranslations.articles = {
       placeholder:
         "Αναζήτηση ιστοριών, κατηγοριών ή θεμάτων...",
       button: "Αναζήτηση",
-      allCategories: "Όλες οι κατηγορίες",
+      allCategories:
+        "Όλες οι κατηγορίες",
       all: "Όλα",
-      coverStar: "Αστέρι εξωφύλλου",
-      coverStars: "Αστέρια εξωφύλλου",
+      coverStar:
+        "Αστέρι εξωφύλλου",
+      coverStars:
+        "Αστέρια εξωφύλλου",
       fashion: "Μόδα",
       travel: "Ταξίδια",
       wellness: "Ευεξία",
@@ -2721,11 +2793,14 @@ window.PetsDogueTranslations.articles = {
     },
 
     sections: {
-      editor: "Επιλογή σύνταξης",
+      editor:
+        "Επιλογή σύνταξης",
       editorDescription:
         "Ιστορίες, εικόνες και χρήσιμοι οδηγοί που επιλέχθηκαν από τη συντακτική ομάδα του PETS & DOGUE.",
-      latest: "Τελευταίες ιστορίες",
-      visual: "Οπτική δημοσιογραφία",
+      latest:
+        "Τελευταίες ιστορίες",
+      visual:
+        "Οπτική δημοσιογραφία",
       gallery:
         "ΑΝΟΙΓΜΑ ΣΥΛΛΟΓΗΣ ΦΩΤΟΓΡΑΦΙΩΝ →",
       emptyTitle:
@@ -2760,7 +2835,8 @@ window.PetsDogueTranslations.articles = {
 
     cards: {
       audio: "🔊 ΗΧΟΣ",
-      readListen: "ΔΙΑΒΑΣΤΕ ΚΑΙ ΑΚΟΥΣΤΕ",
+      readListen:
+        "ΔΙΑΒΑΣΤΕ ΚΑΙ ΑΚΟΥΣΤΕ",
 
       photoshootCategory:
         "ΑΣΤΕΡΙ ΕΞΩΦΥΛΛΟΥ",
@@ -2799,7 +2875,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "Οι αναφορές της κοινότητας, η επαλήθευση και ο έλεγχος βοηθούν τις τοπικές πληροφορίες να παραμένουν χρήσιμες.",
 
-      volunteersCategory: "ΚΟΙΝΟΤΗΤΑ",
+      volunteersCategory:
+        "ΚΟΙΝΟΤΗΤΑ",
       volunteersTitle:
         "Οι άνθρωποι που βοηθούν τα ζώα πίσω από τα παρασκήνια",
       volunteersDescription:
@@ -2816,15 +2893,20 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "Σύνταξη PETS & DOGUE",
-      fashionDesk: "Σύνταξη Μόδας",
-      travelDesk: "Σύνταξη Ταξιδιών",
+      fashionDesk:
+        "Σύνταξη Μόδας",
+      travelDesk:
+        "Σύνταξη Ταξιδιών",
       wellnessEditors:
         "Σύνταξη Ευεξίας",
-      rescueDesk: "Σύνταξη Διάσωσης",
-      localDesk: "Τοπική σύνταξη",
+      rescueDesk:
+        "Σύνταξη Διάσωσης",
+      localDesk:
+        "Τοπική σύνταξη",
       communityEditors:
         "Σύνταξη Κοινότητας",
-      localCommunity: "Τοπική κοινότητα",
+      localCommunity:
+        "Τοπική κοινότητα",
       minute: "{count} λεπ."
     },
 
@@ -2837,7 +2919,8 @@ window.PetsDogueTranslations.articles = {
       travelTitle:
         "Όμορφες αποδράσεις με το κατοικίδιό σας",
       fashionLabel: "ΜΟΔΑ",
-      fashionTitle: "Συντακτικό στυλ",
+      fashionTitle:
+        "Συντακτικό στυλ",
       rescueLabel: "ΔΙΑΣΩΣΗ",
       rescueTitle:
         "Μια ζωή που αξίζει να τη δεις",
@@ -2845,7 +2928,8 @@ window.PetsDogueTranslations.articles = {
       wellnessTitle:
         "Καθημερινή φροντίδα",
       localLabel: "ΤΟΠΙΚΑ",
-      localTitle: "Μαζί κοντά σας"
+      localTitle:
+        "Μαζί κοντά σας"
     },
 
     cover: {
@@ -2869,18 +2953,23 @@ window.PetsDogueTranslations.articles = {
 
   sv: {
     hero: {
-      kicker: "PETS & DOGUE REDAKTION",
+      kicker:
+        "PETS & DOGUE REDAKTION",
       title:
         "Berättelser värda att se, läsa och lyssna på",
       description:
         "Upptäck visuell journalistik, lyxig djurlivsstil, användbara guider, resor, välmående, mode, intervjuer och räddningsberättelser. Varje fullständig artikel innehåller uppläsning.",
-      explore: "Utforska berättelser",
-      listen: "Lyssna på en artikel",
-      cover: "Bli omslagsstjärna"
+      explore:
+        "Utforska berättelser",
+      listen:
+        "Lyssna på en artikel",
+      cover:
+        "Bli omslagsstjärna"
     },
 
     stories: {
-      coverStars: "Omslagsstjärnor",
+      coverStars:
+        "Omslagsstjärnor",
       fashion: "Mode",
       travel: "Resor",
       wellness: "Välmående",
@@ -2894,10 +2983,13 @@ window.PetsDogueTranslations.articles = {
       placeholder:
         "Sök berättelser, kategorier eller ämnen...",
       button: "Sök",
-      allCategories: "Alla kategorier",
+      allCategories:
+        "Alla kategorier",
       all: "Alla",
-      coverStar: "Omslagsstjärna",
-      coverStars: "Omslagsstjärnor",
+      coverStar:
+        "Omslagsstjärna",
+      coverStars:
+        "Omslagsstjärnor",
       fashion: "Mode",
       travel: "Resor",
       wellness: "Välmående",
@@ -2907,12 +2999,16 @@ window.PetsDogueTranslations.articles = {
     },
 
     sections: {
-      editor: "Redaktionens val",
+      editor:
+        "Redaktionens val",
       editorDescription:
         "Berättelser, bilder och användbara guider utvalda av PETS & DOGUE-redaktionen.",
-      latest: "Senaste berättelserna",
-      visual: "Visuell journalistik",
-      gallery: "ÖPPNA FOTOGALLERIET →",
+      latest:
+        "Senaste berättelserna",
+      visual:
+        "Visuell journalistik",
+      gallery:
+        "ÖPPNA FOTOGALLERIET →",
       emptyTitle:
         "Inga matchande berättelser",
       emptyDescription:
@@ -2933,17 +3029,20 @@ window.PetsDogueTranslations.articles = {
         "Så förbereder du ditt husdjur för en professionell magasinfotografering",
       mainDescription:
         "Komfort, pälsvård, ljus och detaljer som förvandlar ett vackert porträtt till en redaktionell bild.",
-      travelLabel: "RESOR · LYSSNA",
+      travelLabel:
+        "RESOR · LYSSNA",
       travelTitle:
         "Framväxten av lyxiga djurvänliga hotell",
-      rescueLabel: "RÄDDNING · LYSSNA",
+      rescueLabel:
+        "RÄDDNING · LYSSNA",
       rescueTitle:
         "Varför synlighet kan förändra ett djurs liv"
     },
 
     cards: {
       audio: "🔊 LJUD",
-      readListen: "LÄS OCH LYSSNA",
+      readListen:
+        "LÄS OCH LYSSNA",
 
       photoshootCategory:
         "OMSLAGSSTJÄRNA",
@@ -2964,7 +3063,8 @@ window.PetsDogueTranslations.articles = {
       travelDescription:
         "Hotell förändrar upplevelsen för gäster som reser med djur.",
 
-      wellnessCategory: "VÄLMÅENDE",
+      wellnessCategory:
+        "VÄLMÅENDE",
       wellnessTitle:
         "Dagliga ritualer för ett lugnare och lyckligare husdjur",
       wellnessDescription:
@@ -2982,7 +3082,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "Rapporter från communityn, verifiering och moderering hjälper till att hålla lokal information användbar.",
 
-      volunteersCategory: "COMMUNITY",
+      volunteersCategory:
+        "COMMUNITY",
       volunteersTitle:
         "Människorna som hjälper djur bakom kulisserna",
       volunteersDescription:
@@ -2999,37 +3100,49 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "PETS & DOGUE-redaktionen",
-      fashionDesk: "Moderaktionen",
-      travelDesk: "Reseredaktionen",
+      fashionDesk:
+        "Moderedaktionen",
+      travelDesk:
+        "Reseredaktionen",
       wellnessEditors:
         "Välmåenderedaktionen",
-      rescueDesk: "Räddningsredaktionen",
-      localDesk: "Lokala redaktionen",
+      rescueDesk:
+        "Räddningsredaktionen",
+      localDesk:
+        "Lokala redaktionen",
       communityEditors:
         "Communityredaktionen",
-      localCommunity: "Lokal community",
+      localCommunity:
+        "Lokal community",
       minute: "{count} min"
     },
 
     visualCards: {
-      coverLabel: "OMSLAGSSTJÄRNA",
+      coverLabel:
+        "OMSLAGSSTJÄRNA",
       coverTitle:
         "Ansiktet för ett framtida nummer",
       travelLabel: "RESOR",
       travelTitle:
         "Vackra resor med ditt husdjur",
       fashionLabel: "MODE",
-      fashionTitle: "Redaktionell stil",
+      fashionTitle:
+        "Redaktionell stil",
       rescueLabel: "RÄDDNING",
-      rescueTitle: "Ett liv värt att se",
-      wellnessLabel: "VÄLMÅENDE",
-      wellnessTitle: "Daglig omsorg",
+      rescueTitle:
+        "Ett liv värt att se",
+      wellnessLabel:
+        "VÄLMÅENDE",
+      wellnessTitle:
+        "Daglig omsorg",
       localLabel: "LOKALT",
-      localTitle: "Tillsammans nära dig"
+      localTitle:
+        "Tillsammans nära dig"
     },
 
     cover: {
-      myPet: "MITT HUSDJUR ÄR",
+      myPet:
+        "MITT HUSDJUR ÄR",
       title:
         "NÄSTA<br>OMSLAGSSTJÄRNA",
       enter: "DELTA →"
@@ -3040,25 +3153,31 @@ window.PetsDogueTranslations.articles = {
         "Få nya PETS & DOGUE-berättelser",
       description:
         "Få nya nummer, upplästa artiklar, visuella editorial och användbara guider om livet med djur.",
-      placeholder: "Din e-postadress",
+      placeholder:
+        "Din e-postadress",
       button: "PRENUMERERA"
     }
   },
 
   da: {
     hero: {
-      kicker: "PETS & DOGUE REDAKTION",
+      kicker:
+        "PETS & DOGUE REDAKTION",
       title:
         "Historier værd at se, læse og lytte til",
       description:
         "Oplev visuel journalistik, luksuriøs dyrelivsstil, nyttige guider, rejser, velvære, mode, interviews og redningshistorier. Hver fulde artikel indeholder oplæsning.",
-      explore: "Udforsk historier",
-      listen: "Lyt til en artikel",
-      cover: "Bliv forsidestjerne"
+      explore:
+        "Udforsk historier",
+      listen:
+        "Lyt til en artikel",
+      cover:
+        "Bliv forsidestjerne"
     },
 
     stories: {
-      coverStars: "Forsidestjerner",
+      coverStars:
+        "Forsidestjerner",
       fashion: "Mode",
       travel: "Rejser",
       wellness: "Velvære",
@@ -3072,10 +3191,13 @@ window.PetsDogueTranslations.articles = {
       placeholder:
         "Søg historier, kategorier eller emner...",
       button: "Søg",
-      allCategories: "Alle kategorier",
+      allCategories:
+        "Alle kategorier",
       all: "Alle",
-      coverStar: "Forsidestjerne",
-      coverStars: "Forsidestjerner",
+      coverStar:
+        "Forsidestjerne",
+      coverStars:
+        "Forsidestjerner",
       fashion: "Mode",
       travel: "Rejser",
       wellness: "Velvære",
@@ -3085,12 +3207,15 @@ window.PetsDogueTranslations.articles = {
     },
 
     sections: {
-      editor: "Redaktionens valg",
+      editor:
+        "Redaktionens valg",
       editorDescription:
         "Historier, billeder og nyttige guider udvalgt af PETS & DOGUE-redaktionen.",
       latest: "Seneste historier",
-      visual: "Visuel journalistik",
-      gallery: "ÅBN FOTOGALLERI →",
+      visual:
+        "Visuel journalistik",
+      gallery:
+        "ÅBN FOTOGALLERI →",
       emptyTitle:
         "Ingen matchende historier",
       emptyDescription:
@@ -3111,10 +3236,12 @@ window.PetsDogueTranslations.articles = {
         "Sådan forbereder du dit kæledyr til en professionel magasinfotografering",
       mainDescription:
         "Komfort, pleje, lys og detaljer, der forvandler et smukt portræt til et redaktionelt billede.",
-      travelLabel: "REJSER · LYT",
+      travelLabel:
+        "REJSER · LYT",
       travelTitle:
         "Fremkomsten af luksuriøse kæledyrsvenlige hoteller",
-      rescueLabel: "REDNING · LYT",
+      rescueLabel:
+        "REDNING · LYT",
       rescueTitle:
         "Hvorfor synlighed kan ændre et dyrs liv"
     },
@@ -3142,7 +3269,8 @@ window.PetsDogueTranslations.articles = {
       travelDescription:
         "Hoteller gentænker oplevelsen for gæster, der rejser med dyr.",
 
-      wellnessCategory: "VELVÆRE",
+      wellnessCategory:
+        "VELVÆRE",
       wellnessTitle:
         "Daglige ritualer for et roligere og gladere kæledyr",
       wellnessDescription:
@@ -3160,7 +3288,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "Rapporter fra fællesskabet, verificering og moderering hjælper med at holde lokal information nyttig.",
 
-      volunteersCategory: "FÆLLESSKAB",
+      volunteersCategory:
+        "FÆLLESSKAB",
       volunteersTitle:
         "Menneskene, der hjælper dyr bag kulisserne",
       volunteersDescription:
@@ -3177,12 +3306,16 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "PETS & DOGUE-redaktionen",
-      fashionDesk: "Moderedaktionen",
-      travelDesk: "Rejseredaktionen",
+      fashionDesk:
+        "Moderedaktionen",
+      travelDesk:
+        "Rejseredaktionen",
       wellnessEditors:
         "Velværeredaktionen",
-      rescueDesk: "Redningsredaktionen",
-      localDesk: "Lokalredaktionen",
+      rescueDesk:
+        "Redningsredaktionen",
+      localDesk:
+        "Lokalredaktionen",
       communityEditors:
         "Fællesskabsredaktionen",
       localCommunity:
@@ -3191,25 +3324,30 @@ window.PetsDogueTranslations.articles = {
     },
 
     visualCards: {
-      coverLabel: "FORSIDESTJERNE",
+      coverLabel:
+        "FORSIDESTJERNE",
       coverTitle:
         "Ansigtet på et fremtidigt nummer",
       travelLabel: "REJSER",
       travelTitle:
         "Smukke ture med dit kæledyr",
       fashionLabel: "MODE",
-      fashionTitle: "Redaktionel stil",
+      fashionTitle:
+        "Redaktionel stil",
       rescueLabel: "REDNING",
       rescueTitle:
         "Et liv, der fortjener at blive set",
       wellnessLabel: "VELVÆRE",
-      wellnessTitle: "Daglig pleje",
+      wellnessTitle:
+        "Daglig pleje",
       localLabel: "LOKALT",
-      localTitle: "Sammen tæt på dig"
+      localTitle:
+        "Sammen tæt på dig"
     },
 
     cover: {
-      myPet: "MIT KÆLEDYR ER",
+      myPet:
+        "MIT KÆLEDYR ER",
       title:
         "DEN NÆSTE<br>FORSIDESTJERNE",
       enter: "DELTAG →"
@@ -3220,23 +3358,31 @@ window.PetsDogueTranslations.articles = {
         "Få nye PETS & DOGUE-historier",
       description:
         "Få nye udgaver, oplæste artikler, visuelle editorials og nyttige guider om livet med dyr.",
-      placeholder: "Din e-mailadresse",
+      placeholder:
+        "Din e-mailadresse",
       button: "TILMELD"
     }
-  },  no: {
+  },
+
+  no: {
     hero: {
-      kicker: "PETS & DOGUE REDAKSJON",
+      kicker:
+        "PETS & DOGUE REDAKSJON",
       title:
         "Historier verdt å se, lese og lytte til",
       description:
         "Oppdag visuell journalistikk, luksuriøs dyrelivsstil, nyttige guider, reiser, velvære, mote, intervjuer og redningshistorier. Hver fullstendige artikkel inneholder opplesning.",
-      explore: "Utforsk historier",
-      listen: "Lytt til en artikkel",
-      cover: "Bli forsidestjerne"
+      explore:
+        "Utforsk historier",
+      listen:
+        "Lytt til en artikkel",
+      cover:
+        "Bli forsidestjerne"
     },
 
     stories: {
-      coverStars: "Forsidestjerner",
+      coverStars:
+        "Forsidestjerner",
       fashion: "Mote",
       travel: "Reiser",
       wellness: "Velvære",
@@ -3250,10 +3396,13 @@ window.PetsDogueTranslations.articles = {
       placeholder:
         "Søk etter historier, kategorier eller temaer...",
       button: "Søk",
-      allCategories: "Alle kategorier",
+      allCategories:
+        "Alle kategorier",
       all: "Alle",
-      coverStar: "Forsidestjerne",
-      coverStars: "Forsidestjerner",
+      coverStar:
+        "Forsidestjerne",
+      coverStars:
+        "Forsidestjerner",
       fashion: "Mote",
       travel: "Reiser",
       wellness: "Velvære",
@@ -3263,12 +3412,15 @@ window.PetsDogueTranslations.articles = {
     },
 
     sections: {
-      editor: "Redaksjonens utvalg",
+      editor:
+        "Redaksjonens utvalg",
       editorDescription:
         "Historier, bilder og nyttige guider valgt av PETS & DOGUE-redaksjonen.",
       latest: "Siste historier",
-      visual: "Visuell journalistikk",
-      gallery: "ÅPNE FOTOGALLERI →",
+      visual:
+        "Visuell journalistikk",
+      gallery:
+        "ÅPNE FOTOGALLERI →",
       emptyTitle:
         "Ingen samsvarende historier",
       emptyDescription:
@@ -3289,10 +3441,12 @@ window.PetsDogueTranslations.articles = {
         "Slik forbereder du kjæledyret ditt til en profesjonell magasinfotografering",
       mainDescription:
         "Komfort, stell, lys og detaljer som forvandler et vakkert portrett til et redaksjonelt bilde.",
-      travelLabel: "REISER · LYTT",
+      travelLabel:
+        "REISER · LYTT",
       travelTitle:
         "Fremveksten av luksuriøse kjæledyrvennlige hoteller",
-      rescueLabel: "REDNING · LYTT",
+      rescueLabel:
+        "REDNING · LYTT",
       rescueTitle:
         "Hvorfor synlighet kan forandre livet til et dyr"
     },
@@ -3320,7 +3474,8 @@ window.PetsDogueTranslations.articles = {
       travelDescription:
         "Hoteller tenker nytt om opplevelsen for gjester som reiser med dyr.",
 
-      wellnessCategory: "VELVÆRE",
+      wellnessCategory:
+        "VELVÆRE",
       wellnessTitle:
         "Daglige ritualer for et roligere og lykkeligere kjæledyr",
       wellnessDescription:
@@ -3338,7 +3493,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "Rapporter fra fellesskapet, verifisering og moderering bidrar til å holde lokal informasjon nyttig.",
 
-      volunteersCategory: "FELLESSKAP",
+      volunteersCategory:
+        "FELLESSKAP",
       volunteersTitle:
         "Menneskene som hjelper dyr bak kulissene",
       volunteersDescription:
@@ -3355,12 +3511,16 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "PETS & DOGUE-redaksjonen",
-      fashionDesk: "Moteredaksjonen",
-      travelDesk: "Reiseredaksjonen",
+      fashionDesk:
+        "Moteredaksjonen",
+      travelDesk:
+        "Reiseredaksjonen",
       wellnessEditors:
         "Velværeredaksjonen",
-      rescueDesk: "Redningsredaksjonen",
-      localDesk: "Lokalredaksjonen",
+      rescueDesk:
+        "Redningsredaksjonen",
+      localDesk:
+        "Lokalredaksjonen",
       communityEditors:
         "Fellesskapsredaksjonen",
       localCommunity:
@@ -3369,25 +3529,30 @@ window.PetsDogueTranslations.articles = {
     },
 
     visualCards: {
-      coverLabel: "FORSIDESTJERNE",
+      coverLabel:
+        "FORSIDESTJERNE",
       coverTitle:
         "Ansiktet til et fremtidig nummer",
       travelLabel: "REISER",
       travelTitle:
         "Vakre turer med kjæledyret ditt",
       fashionLabel: "MOTE",
-      fashionTitle: "Redaksjonell stil",
+      fashionTitle:
+        "Redaksjonell stil",
       rescueLabel: "REDNING",
-      rescueTitle: "Et liv verdt å se",
+      rescueTitle:
+        "Et liv verdt å se",
       wellnessLabel: "VELVÆRE",
-      wellnessTitle: "Daglig omsorg",
+      wellnessTitle:
+        "Daglig omsorg",
       localLabel: "LOKALT",
       localTitle:
         "Sammen i nærheten av deg"
     },
 
     cover: {
-      myPet: "MITT KJÆLEDYR ER",
+      myPet:
+        "MITT KJÆLEDYR ER",
       title:
         "DEN NESTE<br>FORSIDESTJERNEN",
       enter: "DELTA →"
@@ -3398,21 +3563,26 @@ window.PetsDogueTranslations.articles = {
         "Få nye PETS & DOGUE-historier",
       description:
         "Få nye utgaver, oppleste artikler, visuelle editorials og nyttige guider om livet med dyr.",
-      placeholder: "E-postadressen din",
+      placeholder:
+        "E-postadressen din",
       button: "ABONNER"
     }
   },
 
   fi: {
     hero: {
-      kicker: "PETS & DOGUE TOIMITUS",
+      kicker:
+        "PETS & DOGUE TOIMITUS",
       title:
         "Tarinoita, jotka kannattaa nähdä, lukea ja kuunnella",
       description:
         "Tutustu visuaaliseen journalismiin, ylelliseen eläinelämäntyyliin, hyödyllisiin oppaisiin, matkailuun, hyvinvointiin, muotiin, haastatteluihin ja pelastustarinoihin. Jokainen kokonainen artikkeli sisältää äänikerronnan.",
-      explore: "Tutustu tarinoihin",
-      listen: "Kuuntele artikkeli",
-      cover: "Ryhdy kansitähdeksi"
+      explore:
+        "Tutustu tarinoihin",
+      listen:
+        "Kuuntele artikkeli",
+      cover:
+        "Ryhdy kansitähdeksi"
     },
 
     stories: {
@@ -3422,7 +3592,8 @@ window.PetsDogueTranslations.articles = {
       wellness: "Hyvinvointi",
       rescue: "Pelastus",
       places: "Paikat",
-      volunteers: "Vapaaehtoiset",
+      volunteers:
+        "Vapaaehtoiset",
       community: "Yhteisö"
     },
 
@@ -3430,7 +3601,8 @@ window.PetsDogueTranslations.articles = {
       placeholder:
         "Hae tarinoita, kategorioita tai aiheita...",
       button: "Hae",
-      allCategories: "Kaikki kategoriat",
+      allCategories:
+        "Kaikki kategoriat",
       all: "Kaikki",
       coverStar: "Kansitähti",
       coverStars: "Kansitähdet",
@@ -3443,13 +3615,18 @@ window.PetsDogueTranslations.articles = {
     },
 
     sections: {
-      editor: "Toimituksen valinta",
+      editor:
+        "Toimituksen valinta",
       editorDescription:
         "PETS & DOGUE -toimituksen valitsemat tarinat, kuvat ja hyödylliset oppaat.",
-      latest: "Uusimmat tarinat",
-      visual: "Visuaalinen journalismi",
-      gallery: "AVAA KUVAGALLERIA →",
-      emptyTitle: "Tarinoita ei löytynyt",
+      latest:
+        "Uusimmat tarinat",
+      visual:
+        "Visuaalinen journalismi",
+      gallery:
+        "AVAA KUVAGALLERIA →",
+      emptyTitle:
+        "Tarinoita ei löytynyt",
       emptyDescription:
         "Kokeile toista hakusanaa tai valitse toinen kategoria."
     },
@@ -3468,19 +3645,23 @@ window.PetsDogueTranslations.articles = {
         "Näin valmistelet lemmikkisi ammattimaiseen lehtikuvaukseen",
       mainDescription:
         "Mukavuus, hoito, valo ja yksityiskohdat muuttavat kauniin muotokuvan toimitukselliseksi kuvaksi.",
-      travelLabel: "MATKAILU · KUUNTELE",
+      travelLabel:
+        "MATKAILU · KUUNTELE",
       travelTitle:
         "Ylellisten lemmikkiystävällisten hotellien nousu",
-      rescueLabel: "PELASTUS · KUUNTELE",
+      rescueLabel:
+        "PELASTUS · KUUNTELE",
       rescueTitle:
         "Miksi näkyvyys voi muuttaa eläimen elämän"
     },
 
     cards: {
       audio: "🔊 ÄÄNI",
-      readListen: "LUE JA KUUNTELE",
+      readListen:
+        "LUE JA KUUNTELE",
 
-      photoshootCategory: "KANSITÄHTI",
+      photoshootCategory:
+        "KANSITÄHTI",
       photoshootTitle:
         "Näin valmistelet lemmikkisi ammattimaiseen lehtikuvaukseen",
       photoshootDescription:
@@ -3498,7 +3679,8 @@ window.PetsDogueTranslations.articles = {
       travelDescription:
         "Hotellit uudistavat eläinten kanssa matkustavien vieraiden kokemusta.",
 
-      wellnessCategory: "HYVINVOINTI",
+      wellnessCategory:
+        "HYVINVOINTI",
       wellnessTitle:
         "Päivittäisiä rituaaleja rauhallisemmalle ja onnellisemmalle lemmikille",
       wellnessDescription:
@@ -3516,7 +3698,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "Yhteisön ilmoitukset, varmennus ja moderointi auttavat pitämään paikalliset tiedot hyödyllisinä.",
 
-      volunteersCategory: "YHTEISÖ",
+      volunteersCategory:
+        "YHTEISÖ",
       volunteersTitle:
         "Ihmiset, jotka auttavat eläimiä kulissien takana",
       volunteersDescription:
@@ -3533,12 +3716,16 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "PETS & DOGUE -toimitus",
-      fashionDesk: "Muotitoimitus",
-      travelDesk: "Matkailutoimitus",
+      fashionDesk:
+        "Muotitoimitus",
+      travelDesk:
+        "Matkailutoimitus",
       wellnessEditors:
         "Hyvinvointitoimitus",
-      rescueDesk: "Pelastustoimitus",
-      localDesk: "Paikallistoimitus",
+      rescueDesk:
+        "Pelastustoimitus",
+      localDesk:
+        "Paikallistoimitus",
       communityEditors:
         "Yhteisötoimitus",
       localCommunity:
@@ -3548,19 +3735,25 @@ window.PetsDogueTranslations.articles = {
 
     visualCards: {
       coverLabel: "KANSITÄHTI",
-      coverTitle: "Tulevan numeron kasvot",
+      coverTitle:
+        "Tulevan numeron kasvot",
       travelLabel: "MATKAILU",
       travelTitle:
         "Kauniita matkoja lemmikkisi kanssa",
       fashionLabel: "MUOTI",
-      fashionTitle: "Toimituksellinen tyyli",
+      fashionTitle:
+        "Toimituksellinen tyyli",
       rescueLabel: "PELASTUS",
       rescueTitle:
         "Elämä, joka ansaitsee tulla nähdyksi",
-      wellnessLabel: "HYVINVOINTI",
-      wellnessTitle: "Päivittäinen hoito",
-      localLabel: "PAIKALLINEN",
-      localTitle: "Yhdessä lähelläsi"
+      wellnessLabel:
+        "HYVINVOINTI",
+      wellnessTitle:
+        "Päivittäinen hoito",
+      localLabel:
+        "PAIKALLINEN",
+      localTitle:
+        "Yhdessä lähelläsi"
     },
 
     cover: {
@@ -3575,12 +3768,11 @@ window.PetsDogueTranslations.articles = {
         "Tilaa uudet PETS & DOGUE -tarinat",
       description:
         "Saat uudet numerot, äänitetyt artikkelit, visuaaliset toimitukselliset sisällöt ja hyödylliset oppaat.",
-      placeholder: "Sähköpostiosoitteesi",
+      placeholder:
+        "Sähköpostiosoitteesi",
       button: "TILAA"
     }
-  },
-
-  tr: {
+  },  tr: {
     hero: {
       kicker: "PETS & DOGUE EDİTÖR",
       title:
@@ -3634,7 +3826,8 @@ window.PetsDogueTranslations.articles = {
     },
 
     results: {
-      one: "Bir editoryal hikâye mevcut.",
+      one:
+        "Bir editoryal hikâye mevcut.",
       many:
         "{count} editoryal hikâye mevcut."
     },
@@ -3646,10 +3839,12 @@ window.PetsDogueTranslations.articles = {
         "Evcil hayvanınızı profesyonel bir dergi çekimine nasıl hazırlarsınız",
       mainDescription:
         "Konfor, bakım, ışık ve güzel bir portreyi editoryal görüntüye dönüştüren ayrıntılar.",
-      travelLabel: "SEYAHAT · DİNLE",
+      travelLabel:
+        "SEYAHAT · DİNLE",
       travelTitle:
         "Lüks evcil hayvan dostu otellerin yükselişi",
-      rescueLabel: "KURTARMA · DİNLE",
+      rescueLabel:
+        "KURTARMA · DİNLE",
       rescueTitle:
         "Görünürlük bir hayvanın hayatını neden değiştirebilir"
     },
@@ -3712,15 +3907,20 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "PETS & DOGUE editörleri",
-      fashionDesk: "Moda editörleri",
-      travelDesk: "Seyahat editörleri",
+      fashionDesk:
+        "Moda editörleri",
+      travelDesk:
+        "Seyahat editörleri",
       wellnessEditors:
         "Sağlık editörleri",
-      rescueDesk: "Kurtarma editörleri",
-      localDesk: "Yerel editörler",
+      rescueDesk:
+        "Kurtarma editörleri",
+      localDesk:
+        "Yerel editörler",
       communityEditors:
         "Topluluk editörleri",
-      localCommunity: "Yerel topluluk",
+      localCommunity:
+        "Yerel topluluk",
       minute: "{count} dk"
     },
 
@@ -3755,7 +3955,8 @@ window.PetsDogueTranslations.articles = {
         "Yeni PETS & DOGUE hikâyelerini alın",
       description:
         "Yeni sayıları, sesli makaleleri, görsel editoryalleri ve faydalı hayvan yaşam rehberlerini alın.",
-      placeholder: "E-posta adresiniz",
+      placeholder:
+        "E-posta adresiniz",
       button: "ABONE OL"
     }
   },
@@ -3806,36 +4007,43 @@ window.PetsDogueTranslations.articles = {
       latest: "أحدث القصص",
       visual: "الصحافة البصرية",
       gallery: "افتح معرض الصور ←",
-      emptyTitle: "لا توجد قصص مطابقة",
+      emptyTitle:
+        "لا توجد قصص مطابقة",
       emptyDescription:
         "جرّب كلمة أخرى أو اختر فئة مختلفة."
     },
 
     results: {
-      one: "تتوفر قصة تحريرية واحدة.",
+      one:
+        "تتوفر قصة تحريرية واحدة.",
       many:
         "تتوفر {count} قصص تحريرية."
     },
 
     featured: {
-      mainLabel: "نجم الغلاف · استمع",
+      mainLabel:
+        "نجم الغلاف · استمع",
       mainTitle:
         "كيفية تجهيز حيوانك الأليف لجلسة تصوير احترافية لمجلة",
       mainDescription:
         "الراحة والعناية والإضاءة والتفاصيل التي تحول صورة جميلة إلى لقطة تحريرية.",
-      travelLabel: "السفر · استمع",
+      travelLabel:
+        "السفر · استمع",
       travelTitle:
         "صعود الفنادق الفاخرة الصديقة للحيوانات الأليفة",
-      rescueLabel: "الإنقاذ · استمع",
+      rescueLabel:
+        "الإنقاذ · استمع",
       rescueTitle:
         "لماذا يمكن للظهور أن يغيّر حياة حيوان"
     },
 
     cards: {
       audio: "🔊 صوت",
-      readListen: "اقرأ واستمع",
+      readListen:
+        "اقرأ واستمع",
 
-      photoshootCategory: "نجم الغلاف",
+      photoshootCategory:
+        "نجم الغلاف",
       photoshootTitle:
         "كيفية تجهيز حيوانك الأليف لجلسة تصوير احترافية لمجلة",
       photoshootDescription:
@@ -3871,7 +4079,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "تساعد بلاغات المجتمع والتحقق والإشراف في الحفاظ على فائدة المعلومات المحلية.",
 
-      volunteersCategory: "المجتمع",
+      volunteersCategory:
+        "المجتمع",
       volunteersTitle:
         "الأشخاص الذين يساعدون الحيوانات خلف الكواليس",
       volunteersDescription:
@@ -3886,36 +4095,49 @@ window.PetsDogueTranslations.articles = {
     },
 
     cardMeta: {
-      byEditors: "تحرير PETS & DOGUE",
-      fashionDesk: "تحرير الموضة",
-      travelDesk: "تحرير السفر",
-      wellnessEditors: "تحرير العافية",
-      rescueDesk: "تحرير الإنقاذ",
-      localDesk: "التحرير المحلي",
+      byEditors:
+        "تحرير PETS & DOGUE",
+      fashionDesk:
+        "تحرير الموضة",
+      travelDesk:
+        "تحرير السفر",
+      wellnessEditors:
+        "تحرير العافية",
+      rescueDesk:
+        "تحرير الإنقاذ",
+      localDesk:
+        "التحرير المحلي",
       communityEditors:
         "تحرير المجتمع",
-      localCommunity: "المجتمع المحلي",
+      localCommunity:
+        "المجتمع المحلي",
       minute: "{count} د"
     },
 
     visualCards: {
       coverLabel: "نجم الغلاف",
-      coverTitle: "وجه عدد مستقبلي",
+      coverTitle:
+        "وجه عدد مستقبلي",
       travelLabel: "السفر",
       travelTitle:
         "رحلات جميلة مع حيوانك الأليف",
       fashionLabel: "الموضة",
-      fashionTitle: "أسلوب تحريري",
+      fashionTitle:
+        "أسلوب تحريري",
       rescueLabel: "الإنقاذ",
-      rescueTitle: "حياة تستحق أن تُرى",
+      rescueTitle:
+        "حياة تستحق أن تُرى",
       wellnessLabel: "العافية",
-      wellnessTitle: "رعاية يومية",
+      wellnessTitle:
+        "رعاية يومية",
       localLabel: "محلي",
-      localTitle: "معًا بالقرب منك"
+      localTitle:
+        "معًا بالقرب منك"
     },
 
     cover: {
-      myPet: "حيواني الأليف هو",
+      myPet:
+        "حيواني الأليف هو",
       title:
         "نجم الغلاف<br>القادم",
       enter: "شارك ←"
@@ -3926,14 +4148,16 @@ window.PetsDogueTranslations.articles = {
         "احصل على قصص PETS & DOGUE الجديدة",
       description:
         "احصل على أعداد جديدة ومقالات مسموعة ومواد تحريرية بصرية وأدلة مفيدة حول أسلوب الحياة مع الحيوانات.",
-      placeholder: "بريدك الإلكتروني",
+      placeholder:
+        "بريدك الإلكتروني",
       button: "اشترك"
     }
   },
 
   hi: {
     hero: {
-      kicker: "PETS & DOGUE संपादकीय",
+      kicker:
+        "PETS & DOGUE संपादकीय",
       title:
         "देखने, पढ़ने और सुनने लायक कहानियाँ",
       description:
@@ -3958,7 +4182,8 @@ window.PetsDogueTranslations.articles = {
       placeholder:
         "कहानियाँ, श्रेणियाँ या विषय खोजें...",
       button: "खोजें",
-      allCategories: "सभी श्रेणियाँ",
+      allCategories:
+        "सभी श्रेणियाँ",
       all: "सभी",
       coverStar: "कवर स्टार",
       coverStars: "कवर स्टार्स",
@@ -3975,9 +4200,12 @@ window.PetsDogueTranslations.articles = {
       editorDescription:
         "PETS & DOGUE संपादकीय टीम द्वारा चुनी गई कहानियाँ, तस्वीरें और उपयोगी गाइड।",
       latest: "नवीनतम कहानियाँ",
-      visual: "विज़ुअल पत्रकारिता",
-      gallery: "फोटो गैलरी खोलें →",
-      emptyTitle: "कोई कहानी नहीं मिली",
+      visual:
+        "विज़ुअल पत्रकारिता",
+      gallery:
+        "फोटो गैलरी खोलें →",
+      emptyTitle:
+        "कोई कहानी नहीं मिली",
       emptyDescription:
         "दूसरा शब्द आज़माएँ या दूसरी श्रेणी चुनें।"
     },
@@ -3990,24 +4218,29 @@ window.PetsDogueTranslations.articles = {
     },
 
     featured: {
-      mainLabel: "कवर स्टार · सुनें",
+      mainLabel:
+        "कवर स्टार · सुनें",
       mainTitle:
         "अपने पालतू जानवर को प्रोफेशनल मैगज़ीन फोटोशूट के लिए कैसे तैयार करें",
       mainDescription:
         "आराम, ग्रूमिंग, रोशनी और वे विवरण जो एक सुंदर पोर्ट्रेट को संपादकीय छवि में बदलते हैं।",
-      travelLabel: "यात्रा · सुनें",
+      travelLabel:
+        "यात्रा · सुनें",
       travelTitle:
         "लक्ज़री पेट-फ्रेंडली होटलों का बढ़ता चलन",
-      rescueLabel: "बचाव · सुनें",
+      rescueLabel:
+        "बचाव · सुनें",
       rescueTitle:
         "दिखाई देना किसी जानवर की ज़िंदगी क्यों बदल सकता है"
     },
 
     cards: {
       audio: "🔊 ऑडियो",
-      readListen: "पढ़ें और सुनें",
+      readListen:
+        "पढ़ें और सुनें",
 
-      photoshootCategory: "कवर स्टार",
+      photoshootCategory:
+        "कवर स्टार",
       photoshootTitle:
         "अपने पालतू जानवर को प्रोफेशनल मैगज़ीन फोटोशूट के लिए कैसे तैयार करें",
       photoshootDescription:
@@ -4043,7 +4276,8 @@ window.PetsDogueTranslations.articles = {
       placesDescription:
         "समुदाय की रिपोर्ट, सत्यापन और मॉडरेशन स्थानीय जानकारी को उपयोगी बनाए रखने में मदद करते हैं।",
 
-      volunteersCategory: "समुदाय",
+      volunteersCategory:
+        "समुदाय",
       volunteersTitle:
         "वे लोग जो पर्दे के पीछे जानवरों की मदद करते हैं",
       volunteersDescription:
@@ -4060,15 +4294,20 @@ window.PetsDogueTranslations.articles = {
     cardMeta: {
       byEditors:
         "PETS & DOGUE संपादकीय टीम",
-      fashionDesk: "फैशन संपादकीय",
-      travelDesk: "यात्रा संपादकीय",
+      fashionDesk:
+        "फैशन संपादकीय",
+      travelDesk:
+        "यात्रा संपादकीय",
       wellnessEditors:
         "वेलनेस संपादकीय",
-      rescueDesk: "बचाव संपादकीय",
-      localDesk: "स्थानीय संपादकीय",
+      rescueDesk:
+        "बचाव संपादकीय",
+      localDesk:
+        "स्थानीय संपादकीय",
       communityEditors:
         "समुदाय संपादकीय",
-      localCommunity: "स्थानीय समुदाय",
+      localCommunity:
+        "स्थानीय समुदाय",
       minute: "{count} मिनट"
     },
 
@@ -4080,7 +4319,8 @@ window.PetsDogueTranslations.articles = {
       travelTitle:
         "अपने पालतू जानवर के साथ खूबसूरत यात्राएँ",
       fashionLabel: "फैशन",
-      fashionTitle: "संपादकीय शैली",
+      fashionTitle:
+        "संपादकीय शैली",
       rescueLabel: "बचाव",
       rescueTitle:
         "एक ज़िंदगी जिसे देखा जाना चाहिए",
@@ -4093,7 +4333,8 @@ window.PetsDogueTranslations.articles = {
     },
 
     cover: {
-      myPet: "मेरा पालतू जानवर है",
+      myPet:
+        "मेरा पालतू जानवर है",
       title:
         "अगला<br>कवर स्टार",
       enter: "भाग लें →"
@@ -4104,7 +4345,8 @@ window.PetsDogueTranslations.articles = {
         "नई PETS & DOGUE कहानियाँ पाएँ",
       description:
         "नए अंक, सुनाए गए लेख, विज़ुअल संपादकीय और उपयोगी पेट लाइफ़स्टाइल गाइड पाएँ।",
-      placeholder: "आपका ईमेल पता",
+      placeholder:
+        "आपका ईमेल पता",
       button: "सदस्यता लें"
     }
   }
@@ -4146,9 +4388,14 @@ window.PetsDogueTranslations.articles = {
     4
   ];
 
-  function setTextKey(selector, key) {
+  function setTextKey(
+    selector,
+    key
+  ) {
     const element =
-      document.querySelector(selector);
+      document.querySelector(
+        selector
+      );
 
     if (!element) {
       return;
@@ -4160,9 +4407,14 @@ window.PetsDogueTranslations.articles = {
     );
   }
 
-  function setHtmlKey(selector, key) {
+  function setHtmlKey(
+    selector,
+    key
+  ) {
     const element =
-      document.querySelector(selector);
+      document.querySelector(
+        selector
+      );
 
     if (!element) {
       return;
@@ -4179,7 +4431,9 @@ window.PetsDogueTranslations.articles = {
     key
   ) {
     const element =
-      document.querySelector(selector);
+      document.querySelector(
+        selector
+      );
 
     if (!element) {
       return;
@@ -4191,33 +4445,41 @@ window.PetsDogueTranslations.articles = {
     );
   }
 
-  function setKeys(selector, keys) {
+  function setKeys(
+    selector,
+    keys
+  ) {
     document
       .querySelectorAll(selector)
-      .forEach((element, index) => {
-        if (!keys[index]) {
-          return;
-        }
+      .forEach(
+        (element, index) => {
+          if (!keys[index]) {
+            return;
+          }
 
-        element.setAttribute(
-          "data-i18n",
-          keys[index]
-        );
-      });
+          element.setAttribute(
+            "data-i18n",
+            keys[index]
+          );
+        }
+      );
   }
 
   function getLanguageCode() {
     if (
       window.PetsDogueLanguage &&
-      typeof window.PetsDogueLanguage
-        .getCurrentLanguage === "function"
+      typeof window
+        .PetsDogueLanguage
+        .getCurrentLanguage ===
+        "function"
     ) {
       const language =
         window.PetsDogueLanguage
           .getCurrentLanguage();
 
       if (
-        typeof language === "string"
+        typeof language ===
+        "string"
       ) {
         return language;
       }
@@ -4238,12 +4500,15 @@ window.PetsDogueTranslations.articles = {
   }
 
   function getTranslations() {
-    const code = getLanguageCode();
+    const code =
+      getLanguageCode();
 
     return (
-      window.PetsDogueTranslations
+      window
+        .PetsDogueTranslations
         .articles[code] ||
-      window.PetsDogueTranslations
+      window
+        .PetsDogueTranslations
         .articles.en
     );
   }
@@ -4269,19 +4534,22 @@ window.PetsDogueTranslations.articles = {
       "common.menu.contents"
     );
 
-    setKeys(".category-nav a", [
-      "common.navigation.magazine",
-      "common.navigation.articles",
-      "common.navigation.photos",
-      "common.navigation.coverStars",
-      "common.navigation.fashion",
-      "common.navigation.wellness",
-      "common.navigation.travel",
-      "common.navigation.places",
-      "common.navigation.rescue",
-      "common.navigation.contests",
-      "common.navigation.community"
-    ]);
+    setKeys(
+      ".category-nav a",
+      [
+        "common.navigation.magazine",
+        "common.navigation.articles",
+        "common.navigation.photos",
+        "common.navigation.coverStars",
+        "common.navigation.fashion",
+        "common.navigation.wellness",
+        "common.navigation.travel",
+        "common.navigation.places",
+        "common.navigation.rescue",
+        "common.navigation.contests",
+        "common.navigation.community"
+      ]
+    );
   }
 
   function prepareHero() {
@@ -4374,10 +4642,12 @@ window.PetsDogueTranslations.articles = {
 
     if (headings[0]) {
       const title =
-        headings[0].querySelector("h2");
+        headings[0]
+          .querySelector("h2");
 
       const description =
-        headings[0].querySelector("p");
+        headings[0]
+          .querySelector("p");
 
       if (title) {
         title.setAttribute(
@@ -4396,7 +4666,8 @@ window.PetsDogueTranslations.articles = {
 
     if (headings[1]) {
       const title =
-        headings[1].querySelector("h2");
+        headings[1]
+          .querySelector("h2");
 
       if (title) {
         title.setAttribute(
@@ -4425,19 +4696,26 @@ window.PetsDogueTranslations.articles = {
 
     if (featured[0]) {
       const copy =
-        featured[0].querySelector(
-          ".featured-copy"
-        );
+        featured[0]
+          .querySelector(
+            ".featured-copy"
+          );
 
       if (copy) {
         const label =
-          copy.querySelector("span");
+          copy.querySelector(
+            "span"
+          );
 
         const title =
-          copy.querySelector("h2");
+          copy.querySelector(
+            "h2"
+          );
 
         const description =
-          copy.querySelector("p");
+          copy.querySelector(
+            "p"
+          );
 
         if (label) {
           label.setAttribute(
@@ -4464,14 +4742,16 @@ window.PetsDogueTranslations.articles = {
 
     if (featured[1]) {
       const label =
-        featured[1].querySelector(
-          ".featured-copy span"
-        );
+        featured[1]
+          .querySelector(
+            ".featured-copy span"
+          );
 
       const title =
-        featured[1].querySelector(
-          ".featured-copy h2"
-        );
+        featured[1]
+          .querySelector(
+            ".featured-copy h2"
+          );
 
       if (label) {
         label.setAttribute(
@@ -4490,14 +4770,16 @@ window.PetsDogueTranslations.articles = {
 
     if (featured[2]) {
       const label =
-        featured[2].querySelector(
-          ".featured-copy span"
-        );
+        featured[2]
+          .querySelector(
+            ".featured-copy span"
+          );
 
       const title =
-        featured[2].querySelector(
-          ".featured-copy h2"
-        );
+        featured[2]
+          .querySelector(
+            ".featured-copy h2"
+          );
 
       if (label) {
         label.setAttribute(
@@ -4520,74 +4802,76 @@ window.PetsDogueTranslations.articles = {
       .querySelectorAll(
         ".article-card"
       )
-      .forEach((card, index) => {
-        const name =
-          CARD_NAMES[index];
+      .forEach(
+        (card, index) => {
+          const name =
+            CARD_NAMES[index];
 
-        if (!name) {
-          return;
+          if (!name) {
+            return;
+          }
+
+          const audio =
+            card.querySelector(
+              ".audio-badge"
+            );
+
+          const category =
+            card.querySelector(
+              ".article-category"
+            );
+
+          const title =
+            card.querySelector(
+              ".article-content h3"
+            );
+
+          const description =
+            card.querySelector(
+              ".article-content > p"
+            );
+
+          const button =
+            card.querySelector(
+              ".read-button"
+            );
+
+          if (audio) {
+            audio.setAttribute(
+              "data-i18n",
+              "articles.cards.audio"
+            );
+          }
+
+          if (category) {
+            category.setAttribute(
+              "data-i18n",
+              `articles.cards.${name}Category`
+            );
+          }
+
+          if (title) {
+            title.setAttribute(
+              "data-i18n",
+              `articles.cards.${name}Title`
+            );
+          }
+
+          if (description) {
+            description.setAttribute(
+              "data-i18n",
+              `articles.cards.${name}Description`
+            );
+          }
+
+          if (button) {
+            button.setAttribute(
+              "data-i18n",
+              "articles.cards.readListen"
+            );
+          }
         }
-
-        const audio =
-          card.querySelector(
-            ".audio-badge"
-          );
-
-        const category =
-          card.querySelector(
-            ".article-category"
-          );
-
-        const title =
-          card.querySelector(
-            ".article-content h3"
-          );
-
-        const description =
-          card.querySelector(
-            ".article-content > p"
-          );
-
-        const button =
-          card.querySelector(
-            ".read-button"
-          );
-
-        if (audio) {
-          audio.setAttribute(
-            "data-i18n",
-            "articles.cards.audio"
-          );
-        }
-
-        if (category) {
-          category.setAttribute(
-            "data-i18n",
-            `articles.cards.${name}Category`
-          );
-        }
-
-        if (title) {
-          title.setAttribute(
-            "data-i18n",
-            `articles.cards.${name}Title`
-          );
-        }
-
-        if (description) {
-          description.setAttribute(
-            "data-i18n",
-            `articles.cards.${name}Description`
-          );
-        }
-
-        if (button) {
-          button.setAttribute(
-            "data-i18n",
-            "articles.cards.readListen"
-          );
-        }
-      });
+      );
   }
 
   function prepareVisualStories() {
@@ -4614,38 +4898,40 @@ window.PetsDogueTranslations.articles = {
       .querySelectorAll(
         ".visual-card"
       )
-      .forEach((card, index) => {
-        const name =
-          visualNames[index];
+      .forEach(
+        (card, index) => {
+          const name =
+            visualNames[index];
 
-        if (!name) {
-          return;
+          if (!name) {
+            return;
+          }
+
+          const label =
+            card.querySelector(
+              ".visual-copy span"
+            );
+
+          const title =
+            card.querySelector(
+              ".visual-copy h3"
+            );
+
+          if (label) {
+            label.setAttribute(
+              "data-i18n",
+              `articles.visualCards.${name}Label`
+            );
+          }
+
+          if (title) {
+            title.setAttribute(
+              "data-i18n",
+              `articles.visualCards.${name}Title`
+            );
+          }
         }
-
-        const label =
-          card.querySelector(
-            ".visual-copy span"
-          );
-
-        const title =
-          card.querySelector(
-            ".visual-copy h3"
-          );
-
-        if (label) {
-          label.setAttribute(
-            "data-i18n",
-            `articles.visualCards.${name}Label`
-          );
-        }
-
-        if (title) {
-          title.setAttribute(
-            "data-i18n",
-            `articles.visualCards.${name}Title`
-          );
-        }
-      });
+      );
   }
 
   function prepareCoverStar() {
@@ -4735,12 +5021,15 @@ window.PetsDogueTranslations.articles = {
       );
 
     const count =
-      cards.filter((card) => {
-        return (
-          card.style.display !== "none" &&
-          !card.hidden
-        );
-      }).length;
+      cards.filter(
+        (card) => {
+          return (
+            card.style.display !==
+              "none" &&
+            !card.hidden
+          );
+        }
+      ).length;
 
     const translations =
       getTranslations();
@@ -4752,21 +5041,25 @@ window.PetsDogueTranslations.articles = {
     if (count === 1) {
       element.textContent =
         translations.results.one;
+
       return;
     }
 
     element.textContent =
-      translations.results.many.replace(
-        "{count}",
-        String(count)
-      );
+      translations.results.many
+        .replace(
+          "{count}",
+          String(count)
+        );
   }
 
   function updateCardMeta() {
     const translations =
       getTranslations();
 
-    if (!translations.cardMeta) {
+    if (
+      !translations.cardMeta
+    ) {
       return;
     }
 
@@ -4774,41 +5067,45 @@ window.PetsDogueTranslations.articles = {
       .querySelectorAll(
         ".article-card"
       )
-      .forEach((card, index) => {
-        const meta =
-          card.querySelector(
-            ".article-meta"
-          );
-
-        const roleKey =
-          CARD_META_KEYS[index];
-
-        const minutes =
-          CARD_MINUTES[index];
-
-        if (
-          !meta ||
-          !roleKey ||
-          !minutes
-        ) {
-          return;
-        }
-
-        const role =
-          translations.cardMeta[
-            roleKey
-          ];
-
-        const time =
-          translations.cardMeta.minute
-            .replace(
-              "{count}",
-              String(minutes)
+      .forEach(
+        (card, index) => {
+          const meta =
+            card.querySelector(
+              ".article-meta"
             );
 
-        meta.textContent =
-          `${role} • ${time}`;
-      });
+          const roleKey =
+            CARD_META_KEYS[index];
+
+          const minutes =
+            CARD_MINUTES[index];
+
+          if (
+            !meta ||
+            !roleKey ||
+            !minutes
+          ) {
+            return;
+          }
+
+          const role =
+            translations.cardMeta[
+              roleKey
+            ];
+
+          const time =
+            translations
+              .cardMeta
+              .minute
+              .replace(
+                "{count}",
+                String(minutes)
+              );
+
+          meta.textContent =
+            `${role} • ${time}`;
+        }
+      );
   }
 
   function updateMetadata() {
@@ -4816,19 +5113,23 @@ window.PetsDogueTranslations.articles = {
       getTranslations();
 
     const common =
-      window.PetsDogueTranslations
+      window
+        .PetsDogueTranslations
         .common || {};
 
     const code =
       getLanguageCode();
 
     const commonLanguage =
-      common[code] || common.en;
+      common[code] ||
+      common.en;
 
     if (
       commonLanguage &&
       commonLanguage.navigation &&
-      commonLanguage.navigation.articles
+      commonLanguage
+        .navigation
+        .articles
     ) {
       document.title =
         `${commonLanguage.navigation.articles} | PETS & DOGUE`;
@@ -4845,11 +5146,15 @@ window.PetsDogueTranslations.articles = {
     if (
       description &&
       translations.hero &&
-      translations.hero.description
+      translations
+        .hero
+        .description
     ) {
       description.setAttribute(
         "content",
-        translations.hero.description
+        translations
+          .hero
+          .description
       );
     }
   }
@@ -4865,8 +5170,10 @@ window.PetsDogueTranslations.articles = {
       window.filterArticles;
 
     if (
-      typeof original !== "function" ||
-      original.__petsDogueWrapped
+      typeof original !==
+        "function" ||
+      original
+        .__petsDogueWrapped
     ) {
       return;
     }
@@ -4883,7 +5190,8 @@ window.PetsDogueTranslations.articles = {
       return result;
     }
 
-    wrappedFilter.__petsDogueWrapped =
+    wrappedFilter
+      .__petsDogueWrapped =
       true;
 
     window.filterArticles =
@@ -4906,11 +5214,13 @@ window.PetsDogueTranslations.articles = {
 
     if (
       window.PetsDogueLanguage &&
-      typeof window.PetsDogueLanguage
+      typeof window
+        .PetsDogueLanguage
         .applyTranslations ===
         "function"
     ) {
-      window.PetsDogueLanguage
+      window
+        .PetsDogueLanguage
         .applyTranslations();
     }
 
@@ -4938,7 +5248,8 @@ window.PetsDogueTranslations.articles = {
   );
 
   if (
-    document.readyState === "loading"
+    document.readyState ===
+    "loading"
   ) {
     document.addEventListener(
       "DOMContentLoaded",
