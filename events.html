@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Events | PETS & DOGUE</title>
+
+<title data-i18n="events.meta.title">Events | PETS & DOGUE</title>
+
+<meta
+name="description"
+content="Discover PETS & DOGUE events including cover star casting, photoshoots, charity walks, community meetups, workshops and brand launches."
+data-i18n-attr="content:events.meta.description"
+>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
@@ -61,6 +68,19 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 .footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
 .footer-links a{text-decoration:none;color:#666;font-size:14px}
 .admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+
+html[dir="rtl"] body{text-align:right}
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .calendar h2,
+html[dir="rtl"] .club,
+html[dir="rtl"] footer{text-align:center}
+html[dir="rtl"] .filters,
+html[dir="rtl"] .actions,
+html[dir="rtl"] .footer-links{direction:rtl}
+html[dir="rtl"] input,
+html[dir="rtl"] select{text-align:right}
+
 @media(max-width:900px){
 .hero{height:430px}
 .hero-content h1{font-size:46px}
@@ -77,243 +97,601 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 <body>
 
 <header>
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
+<div class="logo-small" translate="no" data-pd-brand="true">pets &</div>
+<div class="logo-big" translate="no" data-pd-brand="true">DOGUE</div>
 </header>
 
 <section class="hero">
-<img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1800&q=80" alt="PETS DOGUE Events">
+
+<img
+src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1800&q=80"
+alt="PETS & DOGUE Events"
+data-i18n-attr="alt:events.hero.alt">
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
-<h1>Events</h1>
-<p>
+
+<h1 data-i18n="events.hero.title">Events</h1>
+
+<p data-i18n="events.hero.description">
 A luxury events hub for cover star shows, photoshoots, charity walks, community meetups, brand launches and PETS & DOGUE experiences.
 </p>
+
 </div>
+
 </section>
 
 <section class="section">
 
-<h2 class="section-title">PETS & DOGUE Events Hub</h2>
+<h2 class="section-title" data-i18n="events.hub.title">
+PETS & DOGUE Events Hub
+</h2>
+
 <div class="gold-line"></div>
 
 <div class="search-box">
+
 <div class="search-grid">
-<input id="locationInput" type="text" placeholder="City, country or postcode" value="London">
+
+<input
+id="locationInput"
+type="text"
+placeholder="City, country or postcode"
+value="London"
+data-i18n-placeholder="events.search.locationPlaceholder">
+
 <select id="eventType">
-<option>All Events</option>
-<option>Cover Star</option>
-<option>Photoshoot</option>
-<option>Charity</option>
-<option>Community</option>
-<option>Workshop</option>
-<option>Brand Launch</option>
+
+<option value="All" data-i18n="events.types.allEvents">All Events</option>
+<option value="Cover Star" data-i18n="events.types.coverStar">Cover Star</option>
+<option value="Photoshoot" data-i18n="events.types.photoshoot">Photoshoot</option>
+<option value="Charity" data-i18n="events.types.charity">Charity</option>
+<option value="Community" data-i18n="events.types.community">Community</option>
+<option value="Workshop" data-i18n="events.types.workshop">Workshop</option>
+<option value="Brand Launch" data-i18n="events.types.brandLaunch">Brand Launch</option>
+
 </select>
+
 <select id="monthInput">
-<option>Any Month</option>
-<option>January</option>
-<option>February</option>
-<option>March</option>
-<option>April</option>
-<option>May</option>
-<option>June</option>
-<option>July</option>
-<option>August</option>
-<option>September</option>
-<option>October</option>
-<option>November</option>
-<option>December</option>
+
+<option value="Any" data-i18n="events.months.any">Any Month</option>
+<option value="January" data-i18n="events.months.january">January</option>
+<option value="February" data-i18n="events.months.february">February</option>
+<option value="March" data-i18n="events.months.march">March</option>
+<option value="April" data-i18n="events.months.april">April</option>
+<option value="May" data-i18n="events.months.may">May</option>
+<option value="June" data-i18n="events.months.june">June</option>
+<option value="July" data-i18n="events.months.july">July</option>
+<option value="August" data-i18n="events.months.august">August</option>
+<option value="September" data-i18n="events.months.september">September</option>
+<option value="October" data-i18n="events.months.october">October</option>
+<option value="November" data-i18n="events.months.november">November</option>
+<option value="December" data-i18n="events.months.december">December</option>
+
 </select>
-<button onclick="searchEvents()" class="gold">Search</button>
+
+<button
+onclick="searchEvents()"
+class="gold"
+data-i18n="events.search.button">
+Search
+</button>
+
 </div>
+
 </div>
 
 <div class="filters">
-<div class="filter active" onclick="filterEvents(this,'All')">All</div>
-<div class="filter" onclick="filterEvents(this,'Cover Star')">Cover Star</div>
-<div class="filter" onclick="filterEvents(this,'Photoshoot')">Photoshoots</div>
-<div class="filter" onclick="filterEvents(this,'Charity')">Charity Walks</div>
-<div class="filter" onclick="filterEvents(this,'Community')">Community</div>
-<div class="filter" onclick="filterEvents(this,'Workshop')">Workshops</div>
-<div class="filter" onclick="filterEvents(this,'Brand Launch')">Brand Launches</div>
+
+<div class="filter active" onclick="filterEvents(this,'All')" data-i18n="events.filters.all">All</div>
+<div class="filter" onclick="filterEvents(this,'Cover Star')" data-i18n="events.filters.coverStar">Cover Star</div>
+<div class="filter" onclick="filterEvents(this,'Photoshoot')" data-i18n="events.filters.photoshoots">Photoshoots</div>
+<div class="filter" onclick="filterEvents(this,'Charity')" data-i18n="events.filters.charity">Charity Walks</div>
+<div class="filter" onclick="filterEvents(this,'Community')" data-i18n="events.filters.community">Community</div>
+<div class="filter" onclick="filterEvents(this,'Workshop')" data-i18n="events.filters.workshops">Workshops</div>
+<div class="filter" onclick="filterEvents(this,'Brand Launch')" data-i18n="events.filters.brandLaunches">Brand Launches</div>
+
 </div>
 
 <div class="featured">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1400&q=80" alt="Featured event">
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1400&q=80"
+alt="Featured event"
+data-i18n-attr="alt:events.featured.alt">
+
 <div class="featured-text">
-<span class="badge">FEATURED EVENT</span>
-<h2>PETS & DOGUE Cover Star Weekend</h2>
-<p>
+
+<span class="badge" data-i18n="events.featured.badge">
+FEATURED EVENT
+</span>
+
+<h2 data-i18n="events.featured.title">
+PETS & DOGUE Cover Star Weekend
+</h2>
+
+<p data-i18n="events.featured.descriptionOne">
 A future luxury weekend for pet portraits, community voting, partner gifts, fashion moments and future DOGUE cover candidates.
 </p>
-<p>
+
+<p data-i18n="events.featured.descriptionTwo">
 This event connects Cover Stars, Photos, Contests, Club members and the Local Pet Community into one magazine experience.
 </p>
-<a href="cover-stars.html" class="btn gold">View Cover Stars</a>
+
+<a
+href="cover-stars.html"
+class="btn gold"
+data-i18n="events.featured.button">
+View Cover Stars
+</a>
+
 </div>
+
 </div>
 
 <div class="grid" id="eventsGrid">
 
 <div class="event" data-type="Cover Star">
-<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Cover Star">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Cover Star"
+data-i18n-attr="alt:events.cards.cover.alt">
+
 <div class="event-content">
-<span class="badge">COVER STAR</span>
-<h3>Cover Star Casting Day</h3>
-<div class="meta">📍 London · 12 July · 11:00 AM</div>
-<p>Submit your pet for future DOGUE cover features, model moments and editorial portraits.</p>
+
+<span class="badge" data-i18n="events.cards.cover.badge">COVER STAR</span>
+
+<h3 data-i18n="events.cards.cover.title">
+Cover Star Casting Day
+</h3>
+
+<div class="meta" data-i18n="events.cards.cover.meta">
+📍 London · 12 July · 11:00 AM
+</div>
+
+<p data-i18n="events.cards.cover.description">
+Submit your pet for future DOGUE cover features, model moments and editorial portraits.
+</p>
+
 <div class="actions">
-<a href="become-cover-star.html" class="btn gold">Apply</a>
-<span class="btn like" onclick="likeEvent(this)">❤️ <span>128</span></span>
+
+<a
+href="become-cover-star.html"
+class="btn gold"
+data-i18n="events.cards.cover.button">
+Apply
+</a>
+
+<span class="btn like" onclick="likeEvent(this)">
+❤️ <span>128</span>
+</span>
+
 </div>
+
 </div>
+
 </div>
 
 <div class="event" data-type="Photoshoot">
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Photoshoot">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
+alt="Photoshoot"
+data-i18n-attr="alt:events.cards.photoshoot.alt">
+
 <div class="event-content">
-<span class="badge">PHOTOSHOOT</span>
-<h3>Luxury Pet Portrait Day</h3>
-<div class="meta">📍 Bournemouth · 20 July · 2:00 PM</div>
-<p>Editorial-style portraits for pets, future Photos features and social feed highlights.</p>
+
+<span class="badge" data-i18n="events.cards.photoshoot.badge">PHOTOSHOOT</span>
+
+<h3 data-i18n="events.cards.photoshoot.title">
+Luxury Pet Portrait Day
+</h3>
+
+<div class="meta" data-i18n="events.cards.photoshoot.meta">
+📍 Bournemouth · 20 July · 2:00 PM
+</div>
+
+<p data-i18n="events.cards.photoshoot.description">
+Editorial-style portraits for pets, future Photos features and social feed highlights.
+</p>
+
 <div class="actions">
-<a href="photos.html" class="btn gold">View Photos</a>
-<span class="btn like" onclick="likeEvent(this)">❤️ <span>92</span></span>
+
+<a href="photos.html" class="btn gold" data-i18n="events.cards.photoshoot.button">
+View Photos
+</a>
+
+<span class="btn like" onclick="likeEvent(this)">
+❤️ <span>92</span>
+</span>
+
 </div>
+
 </div>
+
 </div>
 
 <div class="event" data-type="Charity">
-<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Charity walk">
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80"
+alt="Charity walk"
+data-i18n-attr="alt:events.cards.charity.alt">
+
 <div class="event-content">
-<span class="badge">CHARITY</span>
-<h3>Pets In Need Charity Walk</h3>
-<div class="meta">📍 Dorset · 3 August · 10:00 AM</div>
-<p>A community walk to support animals in need, shelters and rescue visibility.</p>
+
+<span class="badge" data-i18n="events.cards.charity.badge">CHARITY</span>
+
+<h3 data-i18n="events.cards.charity.title">
+Pets In Need Charity Walk
+</h3>
+
+<div class="meta" data-i18n="events.cards.charity.meta">
+📍 Dorset · 3 August · 10:00 AM
+</div>
+
+<p data-i18n="events.cards.charity.description">
+A community walk to support animals in need, shelters and rescue visibility.
+</p>
+
 <div class="actions">
-<a href="pets-in-need.html" class="btn gold">Support</a>
-<span class="btn like" onclick="likeEvent(this)">❤️ <span>156</span></span>
+
+<a href="pets-in-need.html" class="btn gold" data-i18n="events.cards.charity.button">
+Support
+</a>
+
+<span class="btn like" onclick="likeEvent(this)">
+❤️ <span>156</span>
+</span>
+
 </div>
+
 </div>
+
 </div>
 
 <div class="event" data-type="Community">
-<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80" alt="Community meetup">
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80"
+alt="Community meetup"
+data-i18n-attr="alt:events.cards.community.alt">
+
 <div class="event-content">
-<span class="badge">COMMUNITY</span>
-<h3>Local Pet Community Meetup</h3>
-<div class="meta">📍 Bournemouth · 18 August · 4:00 PM</div>
-<p>Meet local pet owners, exchange recommendations and discover pet-friendly places.</p>
+
+<span class="badge" data-i18n="events.cards.community.badge">COMMUNITY</span>
+
+<h3 data-i18n="events.cards.community.title">
+Local Pet Community Meetup
+</h3>
+
+<div class="meta" data-i18n="events.cards.community.meta">
+📍 Bournemouth · 18 August · 4:00 PM
+</div>
+
+<p data-i18n="events.cards.community.description">
+Meet local pet owners, exchange recommendations and discover pet-friendly places.
+</p>
+
 <div class="actions">
-<a href="local-community.html" class="btn gold">Open Community</a>
-<span class="btn like" onclick="likeEvent(this)">❤️ <span>74</span></span>
+
+<a href="local-community.html" class="btn gold" data-i18n="events.cards.community.button">
+Open Community
+</a>
+
+<span class="btn like" onclick="likeEvent(this)">
+❤️ <span>74</span>
+</span>
+
 </div>
+
 </div>
+
 </div>
 
 <div class="event" data-type="Workshop">
-<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80" alt="Workshop">
+
+<img
+src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80"
+alt="Workshop"
+data-i18n-attr="alt:events.cards.workshop.alt">
+
 <div class="event-content">
-<span class="badge">WORKSHOP</span>
-<h3>Wellness & Grooming Workshop</h3>
-<div class="meta">📍 London · 5 September · 1:00 PM</div>
-<p>Learn grooming, coat care, wellness routines and travel preparation from partners.</p>
+
+<span class="badge" data-i18n="events.cards.workshop.badge">WORKSHOP</span>
+
+<h3 data-i18n="events.cards.workshop.title">
+Wellness & Grooming Workshop
+</h3>
+
+<div class="meta" data-i18n="events.cards.workshop.meta">
+📍 London · 5 September · 1:00 PM
+</div>
+
+<p data-i18n="events.cards.workshop.description">
+Learn grooming, coat care, wellness routines and travel preparation from partners.
+</p>
+
 <div class="actions">
-<a href="wellness.html" class="btn gold">Wellness</a>
-<span class="btn like" onclick="likeEvent(this)">❤️ <span>68</span></span>
+
+<a href="wellness.html" class="btn gold" data-i18n="events.cards.workshop.button">
+Wellness
+</a>
+
+<span class="btn like" onclick="likeEvent(this)">
+❤️ <span>68</span>
+</span>
+
 </div>
+
 </div>
+
 </div>
 
 <div class="event" data-type="Brand Launch">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" alt="Brand launch">
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+alt="Brand launch"
+data-i18n-attr="alt:events.cards.brand.alt">
+
 <div class="event-content">
-<span class="badge">BRAND LAUNCH</span>
-<h3>Partner Fashion Launch</h3>
-<div class="meta">📍 Paris · 22 September · 6:00 PM</div>
-<p>A future luxury partner event for pet fashion, club discounts and editorial content.</p>
+
+<span class="badge" data-i18n="events.cards.brand.badge">BRAND LAUNCH</span>
+
+<h3 data-i18n="events.cards.brand.title">
+Partner Fashion Launch
+</h3>
+
+<div class="meta" data-i18n="events.cards.brand.meta">
+📍 Paris · 22 September · 6:00 PM
+</div>
+
+<p data-i18n="events.cards.brand.description">
+A future luxury partner event for pet fashion, club discounts and editorial content.
+</p>
+
 <div class="actions">
-<a href="partners.html" class="btn gold">Partners</a>
-<span class="btn like" onclick="likeEvent(this)">❤️ <span>103</span></span>
+
+<a href="partners.html" class="btn gold" data-i18n="events.cards.brand.button">
+Partners
+</a>
+
+<span class="btn like" onclick="likeEvent(this)">
+❤️ <span>103</span>
+</span>
+
 </div>
+
 </div>
+
 </div>
 
 </div>
 
 <div class="calendar">
-<h2>Upcoming Calendar</h2>
+
+<h2 data-i18n="events.calendar.title">
+Upcoming Calendar
+</h2>
 
 <div class="calendar-grid">
-<div class="calendar-item"><h3>July</h3><p>Cover Star Casting · Luxury Pet Portrait Day</p></div>
-<div class="calendar-item"><h3>August</h3><p>Charity Walk · Local Pet Community Meetup</p></div>
-<div class="calendar-item"><h3>September</h3><p>Wellness Workshop · Partner Fashion Launch</p></div>
-<div class="calendar-item"><h3>December</h3><p>Christmas Cover Edition · Gift Guide Event</p></div>
+
+<div class="calendar-item">
+<h3 data-i18n="events.months.july">July</h3>
+<p data-i18n="events.calendar.july">Cover Star Casting · Luxury Pet Portrait Day</p>
 </div>
+
+<div class="calendar-item">
+<h3 data-i18n="events.months.august">August</h3>
+<p data-i18n="events.calendar.august">Charity Walk · Local Pet Community Meetup</p>
+</div>
+
+<div class="calendar-item">
+<h3 data-i18n="events.months.september">September</h3>
+<p data-i18n="events.calendar.september">Wellness Workshop · Partner Fashion Launch</p>
+</div>
+
+<div class="calendar-item">
+<h3 data-i18n="events.months.december">December</h3>
+<p data-i18n="events.calendar.december">Christmas Cover Edition · Gift Guide Event</p>
+</div>
+
+</div>
+
 </div>
 
 <div class="club">
-<h2>Events For Club Members</h2>
-<p>
+
+<h2 data-i18n="events.club.title">
+Events For Club Members
+</h2>
+
+<p data-i18n="events.club.description">
 PETS & DOGUE Club members will get early access, VIP tickets, partner gifts, priority cover star casting and exclusive event invitations.
 </p>
 
 <div class="benefits">
-<div class="benefit">VIP Event Access</div>
-<div class="benefit">Cover Star Priority</div>
-<div class="benefit">Partner Gifts</div>
-<div class="benefit">Member QR Check-In</div>
-<div class="benefit">Exclusive Workshops</div>
-<div class="benefit">Charity Invitations</div>
+
+<div class="benefit" data-i18n="events.club.vip">VIP Event Access</div>
+<div class="benefit" data-i18n="events.club.priority">Cover Star Priority</div>
+<div class="benefit" data-i18n="events.club.gifts">Partner Gifts</div>
+<div class="benefit" data-i18n="events.club.qr">Member QR Check-In</div>
+<div class="benefit" data-i18n="events.club.workshops">Exclusive Workshops</div>
+<div class="benefit" data-i18n="events.club.charity">Charity Invitations</div>
+
 </div>
 
 <br><br>
-<a href="club.html" class="btn gold">Join The Club</a>
+
+<a href="club.html" class="btn gold" data-i18n="events.club.button">
+Join The Club
+</a>
+
 </div>
 
 </section>
 
 <footer>
-<h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
+
+<h2 translate="no" data-pd-brand="true">
+PETS & DOGUE
+</h2>
+
+<p data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
 
 <div class="footer-links">
-<a href="index.html">Home</a>
-<a href="social.html">Social</a>
-<a href="local-community.html">Local Community</a>
-<a href="contests.html">Contests</a>
-<a href="club.html">Club</a>
-<a href="privacy.html">Privacy</a>
-<a href="contact.html">Contact</a>
+
+<a href="index.html" data-i18n="events.footer.home">Home</a>
+<a href="social.html" data-i18n="events.footer.social">Social</a>
+<a href="local-community.html" data-i18n="events.footer.community">Local Community</a>
+<a href="contests.html" data-i18n="events.footer.contests">Contests</a>
+<a href="club.html" data-i18n="events.footer.club">Club</a>
+<a href="privacy.html" data-i18n="events.footer.privacy">Privacy</a>
+<a href="contact.html" data-i18n="events.footer.contact">Contact</a>
+
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a href="admin.html" class="admin-small" data-i18n="common.footer.admin">
+Admin
+</a>
+
 </footer>
 
+<script src="i18n/common.js"></script>
+<script src="i18n/events.js"></script>
+<script src="i18n/engine.js"></script>
+
 <script>
+const LANGUAGE_KEY = "pets_dogue_language";
+
+function currentLanguage(){
+
+const language =
+localStorage.getItem(LANGUAGE_KEY) || "en";
+
+const translations =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.events;
+
+return translations && translations[language]
+? language
+: "en";
+
+}
+
+function t(path,fallback=""){
+
+const translations =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.events;
+
+if(!translations){
+return fallback;
+}
+
+function read(source){
+
+return path
+.split(".")
+.reduce(
+(value,key) =>
+value &&
+Object.prototype.hasOwnProperty.call(value,key)
+? value[key]
+: undefined,
+source
+);
+
+}
+
+const language =
+currentLanguage();
+
+return (
+read(translations[language]) ??
+read(translations.en) ??
+fallback
+);
+
+}
+
+function typeLabel(type){
+
+const map = {
+"All":"allEvents",
+"Cover Star":"coverStar",
+"Photoshoot":"photoshoot",
+"Charity":"charity",
+"Community":"community",
+"Workshop":"workshop",
+"Brand Launch":"brandLaunch"
+};
+
+return map[type]
+? t("types." + map[type],type)
+: type;
+
+}
+
 function filterEvents(element,type){
-document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+
+document
+.querySelectorAll(".filter")
+.forEach(item =>
+item.classList.remove("active")
+);
+
 element.classList.add("active");
 
-document.querySelectorAll(".event").forEach(card => {
-card.style.display = type === "All" || card.dataset.type === type ? "block" : "none";
+document
+.querySelectorAll(".event")
+.forEach(card => {
+
+card.style.display =
+type === "All" ||
+card.dataset.type === type
+? "block"
+: "none";
+
 });
+
 }
 
 function searchEvents(){
-const location = document.getElementById("locationInput").value || "your area";
-const type = document.getElementById("eventType").value;
-alert("Showing PETS & DOGUE events near " + location + " · " + type);
+
+const location =
+document.getElementById("locationInput").value.trim() ||
+t("search.yourArea","your area");
+
+const type =
+document.getElementById("eventType").value;
+
+alert(
+t(
+"search.alert",
+"Showing PETS & DOGUE events near {location} · {type}"
+)
+.replace("{location}",location)
+.replace("{type}",typeLabel(type))
+);
+
 }
 
 function likeEvent(element){
-const count = element.querySelector("span");
-count.textContent = Number(count.textContent) + 1;
+
+const count =
+element.querySelector("span");
+
+count.textContent =
+Number(count.textContent) + 1;
+
 }
 </script>
 
-
-<!-- PETS & DOGUE UNIFIED 23-LANGUAGE SYSTEM -->
-<script src="translations.js"></script>
 </body>
 </html>
