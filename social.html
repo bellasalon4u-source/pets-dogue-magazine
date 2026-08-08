@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Social Feed | PETS & DOGUE</title>
+
+<title data-i18n="social.meta.title">
+Social Feed | PETS & DOGUE
+</title>
+
+<meta
+name="description"
+content="Discover the PETS & DOGUE social feed with pet photos, Cover Star moments, rescue stories, fashion, community posts, comments and hearts."
+data-i18n-attr="content:social.meta.description"
+>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
@@ -36,7 +45,7 @@ button{background:#111;color:white;border:none;padding:14px 22px;border-radius:9
 .post-content{padding:20px}
 .caption{font-size:17px;line-height:1.7;color:#444;margin-bottom:12px}
 .tags{color:#b78a2e;font-weight:bold;margin-bottom:14px;line-height:1.6}
-.actions{display:flex;gap:18px;font-weight:bold;color:#555;margin-bottom:14px}
+.actions{display:flex;gap:18px;font-weight:bold;color:#555;margin-bottom:14px;flex-wrap:wrap}
 .heart,.comment-toggle{cursor:pointer}
 .comments{border-top:1px solid #ddd;padding-top:14px}
 .comment{background:#f8f7f3;border-radius:18px;padding:12px;margin-bottom:10px}
@@ -55,6 +64,18 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 .footer-links a{text-decoration:none;color:#666;font-size:14px}
 .admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
 
+html[dir="rtl"] body{text-align:right}
+html[dir="rtl"] .hero,
+html[dir="rtl"] .submit-note,
+html[dir="rtl"] footer{text-align:center}
+html[dir="rtl"] .filters,
+html[dir="rtl"] .actions,
+html[dir="rtl"] .comment-form,
+html[dir="rtl"] .footer-links{direction:rtl}
+html[dir="rtl"] input,
+html[dir="rtl"] textarea{text-align:right}
+html[dir="rtl"] .badge{margin-left:0;margin-right:auto}
+
 @media(max-width:900px){
 .top-actions,.feed-layout{grid-template-columns:1fr}
 .hero h1{font-size:42px}
@@ -67,15 +88,20 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 <body>
 
 <header>
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
+<div class="logo-small" translate="no" data-pd-brand="true">pets &</div>
+<div class="logo-big" translate="no" data-pd-brand="true">DOGUE</div>
 </header>
 
 <section class="hero">
-<h1>PETS & DOGUE Social</h1>
-<p>
+
+<h1 data-i18n="social.hero.title">
+PETS & DOGUE Social
+</h1>
+
+<p data-i18n="social.hero.description">
 A luxury social feed for pet photos, cover star moments, community highlights, comments, hearts and future magazine features.
 </p>
+
 </section>
 
 <main>
@@ -83,117 +109,337 @@ A luxury social feed for pet photos, cover star moments, community highlights, c
 <div class="top-actions">
 
 <section class="post-box">
-<h2 style="font-family:Georgia,serif;font-size:32px;margin-bottom:15px;">Create Post</h2>
-<input id="postImage" type="text" placeholder="Image URL">
-<textarea id="postText" placeholder="Write a caption for your pet..."></textarea>
-<input id="postTags" type="text" placeholder="#coverstar #petfashion #dogue">
-<button class="gold" onclick="createPost()">Publish</button>
+
+<h2
+style="font-family:Georgia,serif;font-size:32px;margin-bottom:15px;"
+data-i18n="social.create.title">
+Create Post
+</h2>
+
+<input
+id="postImage"
+type="text"
+placeholder="Image URL"
+data-i18n-placeholder="social.create.imagePlaceholder">
+
+<textarea
+id="postText"
+placeholder="Write a caption for your pet..."
+data-i18n-placeholder="social.create.captionPlaceholder"></textarea>
+
+<input
+id="postTags"
+type="text"
+placeholder="#coverstar #petfashion #dogue"
+data-i18n-placeholder="social.create.tagsPlaceholder">
+
+<button
+class="gold"
+onclick="createPost()"
+data-i18n="social.create.publish">
+Publish
+</button>
+
 </section>
 
 <section class="search-box">
-<h2 style="font-family:Georgia,serif;font-size:32px;margin-bottom:15px;">Search</h2>
-<input id="searchInput" type="text" placeholder="Search pets, tags, places..." oninput="searchPosts()">
-<button onclick="searchPosts()">Search Feed</button>
+
+<h2
+style="font-family:Georgia,serif;font-size:32px;margin-bottom:15px;"
+data-i18n="social.search.title">
+Search
+</h2>
+
+<input
+id="searchInput"
+type="text"
+placeholder="Search pets, tags, places..."
+data-i18n-placeholder="social.search.placeholder"
+oninput="searchPosts()">
+
+<button
+onclick="searchPosts()"
+data-i18n="social.search.button">
+Search Feed
+</button>
+
 </section>
 
 </div>
 
 <div class="filters">
-<div class="filter active" onclick="setFilter(this,'All')">All</div>
-<div class="filter" onclick="setFilter(this,'Cover Star')">Cover Stars</div>
-<div class="filter" onclick="setFilter(this,'Club')">Club Members</div>
-<div class="filter" onclick="setFilter(this,'Fashion')">Pet Fashion</div>
-<div class="filter" onclick="setFilter(this,'Rescue')">Rescue</div>
-<div class="filter" onclick="setFilter(this,'Local')">Local</div>
+
+<div class="filter active" onclick="setFilter(this,'All')" data-i18n="social.filters.all">All</div>
+<div class="filter" onclick="setFilter(this,'Cover Star')" data-i18n="social.filters.coverStars">Cover Stars</div>
+<div class="filter" onclick="setFilter(this,'Club')" data-i18n="social.filters.club">Club Members</div>
+<div class="filter" onclick="setFilter(this,'Fashion')" data-i18n="social.filters.fashion">Pet Fashion</div>
+<div class="filter" onclick="setFilter(this,'Rescue')" data-i18n="social.filters.rescue">Rescue</div>
+<div class="filter" onclick="setFilter(this,'Local')" data-i18n="social.filters.local">Local</div>
+
 </div>
 
 <div class="feed-layout">
 
 <section class="feed" id="feed">
 
-<div class="post" data-type="Cover Star" data-search="miso cover star dogue luxury">
+<div
+class="post"
+data-type="Cover Star"
+data-search="miso cover star dogue luxury">
+
 <div class="post-header">
+
 <div class="avatar">M</div>
+
 <div class="user">
 <h3>Miso</h3>
-<p>Cover Star · PETS & DOGUE Issue 01</p>
+<p data-i18n="social.posts.miso.role">Cover Star · PETS & DOGUE Issue 01</p>
 </div>
-<span class="badge">COVER STAR</span>
+
+<span class="badge" data-i18n="social.posts.miso.badge">
+COVER STAR
+</span>
+
 </div>
-<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Miso">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Miso"
+data-i18n-attr="alt:social.posts.miso.alt">
+
 <div class="post-content">
-<div class="caption">The first PETS & DOGUE cover star. Luxury, softness and a little pink bow moment.</div>
+
+<div class="caption" data-i18n="social.posts.miso.caption">
+The first PETS & DOGUE cover star. Luxury, softness and a little pink bow moment.
+</div>
+
 <div class="tags">#coverstar #dogue #issue01</div>
+
 <div class="actions">
-<span class="heart" onclick="likePost(this)">❤️ <span>328</span></span>
-<span class="comment-toggle">💬 <span class="comment-count">2</span> comments</span>
+
+<span class="heart" onclick="likePost(this)">
+❤️ <span>328</span>
+</span>
+
+<span class="comment-toggle">
+💬 <span class="comment-count">2</span>
+<span data-i18n="social.dynamic.comments">comments</span>
+</span>
+
 <span>📍 PETS & DOGUE</span>
-</div>
-<div class="comments">
-<div class="comment"><strong>Emma</strong> This looks like a real magazine cover!</div>
-<div class="comment"><strong>Sarah</strong> Miso is iconic.</div>
-<div class="comment-form">
-<input type="text" placeholder="Write a comment...">
-<button onclick="addComment(this)">Send</button>
-</div>
-</div>
-</div>
+
 </div>
 
-<div class="post" data-type="Fashion" data-search="pet fashion luxury style collar">
+<div class="comments">
+
+<div class="comment">
+<strong>Emma</strong>
+<span data-i18n="social.posts.miso.commentOne">
+This looks like a real magazine cover!
+</span>
+</div>
+
+<div class="comment">
+<strong>Sarah</strong>
+<span data-i18n="social.posts.miso.commentTwo">
+Miso is iconic.
+</span>
+</div>
+
+<div class="comment-form">
+
+<input
+type="text"
+placeholder="Write a comment..."
+data-i18n-placeholder="social.dynamic.commentPlaceholder">
+
+<button
+onclick="addComment(this)"
+data-i18n="social.dynamic.send">
+Send
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="post"
+data-type="Fashion"
+data-search="pet fashion luxury style collar">
+
 <div class="post-header">
+
 <div class="avatar">F</div>
+
 <div class="user">
-<h3>Pet Fashion Desk</h3>
-<p>Editorial · Style</p>
-</div>
-<span class="badge">FASHION</span>
-</div>
-<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80" alt="Pet fashion">
-<div class="post-content">
-<div class="caption">Luxury pet fashion is becoming part of modern lifestyle culture.</div>
-<div class="tags">#petfashion #style #luxury</div>
-<div class="actions">
-<span class="heart" onclick="likePost(this)">❤️ <span>186</span></span>
-<span class="comment-toggle">💬 <span class="comment-count">1</span> comments</span>
-<span>📍 London</span>
-</div>
-<div class="comments">
-<div class="comment"><strong>DOGUE Editor</strong> Future partner shopping links will appear here.</div>
-<div class="comment-form">
-<input type="text" placeholder="Write a comment...">
-<button onclick="addComment(this)">Send</button>
-</div>
-</div>
-</div>
+
+<h3 data-i18n="social.posts.fashion.name">
+Pet Fashion Desk
+</h3>
+
+<p data-i18n="social.posts.fashion.role">
+Editorial · Style
+</p>
+
 </div>
 
-<div class="post" data-type="Rescue" data-search="rescue pets in need adoption help">
-<div class="post-header">
-<div class="avatar">R</div>
-<div class="user">
-<h3>Rescue Story</h3>
-<p>Pets In Need · Community</p>
+<span class="badge" data-i18n="social.posts.fashion.badge">
+FASHION
+</span>
+
 </div>
-<span class="badge">RESCUE</span>
-</div>
-<img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80" alt="Rescue">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
+alt="Pet fashion"
+data-i18n-attr="alt:social.posts.fashion.alt">
+
 <div class="post-content">
-<div class="caption">Visibility can help animals find homes, support and love.</div>
-<div class="tags">#petsinneed #rescue #adoption</div>
+
+<div class="caption" data-i18n="social.posts.fashion.caption">
+Luxury pet fashion is becoming part of modern lifestyle culture.
+</div>
+
+<div class="tags">#petfashion #style #luxury</div>
+
 <div class="actions">
-<span class="heart" onclick="likePost(this)">❤️ <span>241</span></span>
-<span class="comment-toggle">💬 <span class="comment-count">1</span> comments</span>
-<span>📍 Bournemouth</span>
+
+<span class="heart" onclick="likePost(this)">
+❤️ <span>186</span>
+</span>
+
+<span class="comment-toggle">
+💬 <span class="comment-count">1</span>
+<span data-i18n="social.dynamic.comments">comments</span>
+</span>
+
+<span>📍 London</span>
+
 </div>
+
 <div class="comments">
-<div class="comment"><strong>Olivia</strong> I want to help this weekend.</div>
+
+<div class="comment">
+
+<strong translate="no" data-pd-brand="true">
+DOGUE Editor
+</strong>
+
+<span data-i18n="social.posts.fashion.comment">
+Future partner shopping links will appear here.
+</span>
+
+</div>
+
 <div class="comment-form">
-<input type="text" placeholder="Write a comment...">
-<button onclick="addComment(this)">Send</button>
+
+<input
+type="text"
+placeholder="Write a comment..."
+data-i18n-placeholder="social.dynamic.commentPlaceholder">
+
+<button
+onclick="addComment(this)"
+data-i18n="social.dynamic.send">
+Send
+</button>
+
 </div>
+
 </div>
+
 </div>
+
+</div>
+
+<div
+class="post"
+data-type="Rescue"
+data-search="rescue pets in need adoption help">
+
+<div class="post-header">
+
+<div class="avatar">R</div>
+
+<div class="user">
+
+<h3 data-i18n="social.posts.rescue.name">
+Rescue Story
+</h3>
+
+<p data-i18n="social.posts.rescue.role">
+Pets In Need · Community
+</p>
+
+</div>
+
+<span class="badge" data-i18n="social.posts.rescue.badge">
+RESCUE
+</span>
+
+</div>
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80"
+alt="Rescue"
+data-i18n-attr="alt:social.posts.rescue.alt">
+
+<div class="post-content">
+
+<div class="caption" data-i18n="social.posts.rescue.caption">
+Visibility can help animals find homes, support and love.
+</div>
+
+<div class="tags">#petsinneed #rescue #adoption</div>
+
+<div class="actions">
+
+<span class="heart" onclick="likePost(this)">
+❤️ <span>241</span>
+</span>
+
+<span class="comment-toggle">
+💬 <span class="comment-count">1</span>
+<span data-i18n="social.dynamic.comments">comments</span>
+</span>
+
+<span>📍 Bournemouth</span>
+
+</div>
+
+<div class="comments">
+
+<div class="comment">
+<strong>Olivia</strong>
+<span data-i18n="social.posts.rescue.comment">
+I want to help this weekend.
+</span>
+</div>
+
+<div class="comment-form">
+
+<input
+type="text"
+placeholder="Write a comment..."
+data-i18n-placeholder="social.dynamic.commentPlaceholder">
+
+<button
+onclick="addComment(this)"
+data-i18n="social.dynamic.send">
+Send
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </section>
@@ -201,37 +447,80 @@ A luxury social feed for pet photos, cover star moments, community highlights, c
 <aside>
 
 <div class="trending">
-<h2 class="side-title">Trending This Week</h2>
+
+<h2 class="side-title" data-i18n="social.trending.title">
+Trending This Week
+</h2>
 
 <div class="trend-item">
-<h3>👑 Cover Star Voting</h3>
-<p>Top photos may appear in future PETS & DOGUE issues.</p>
+
+<h3 data-i18n="social.trending.coverTitle">
+👑 Cover Star Voting
+</h3>
+
+<p data-i18n="social.trending.coverText">
+Top photos may appear in future PETS & DOGUE issues.
+</p>
+
 </div>
 
 <div class="trend-item">
-<h3>🏆 Contest Entries</h3>
-<p>Best pet photo and rescue story contests are open.</p>
+
+<h3 data-i18n="social.trending.contestTitle">
+🏆 Contest Entries
+</h3>
+
+<p data-i18n="social.trending.contestText">
+Best pet photo and rescue story contests are open.
+</p>
+
 </div>
 
 <div class="trend-item">
-<h3>📍 Local Posts</h3>
-<p>Pet owners are sharing recommendations near them.</p>
+
+<h3 data-i18n="social.trending.localTitle">
+📍 Local Posts
+</h3>
+
+<p data-i18n="social.trending.localText">
+Pet owners are sharing recommendations near them.
+</p>
+
 </div>
 
 <div class="trend-item">
-<h3>🛍 Partner Offers</h3>
-<p>Club discounts will connect to partner products and services.</p>
+
+<h3 data-i18n="social.trending.partnerTitle">
+🛍 Partner Offers
+</h3>
+
+<p data-i18n="social.trending.partnerText">
+Club discounts will connect to partner products and services.
+</p>
+
 </div>
 
 </div>
 
 <div class="submit-note">
-<h2>Get Featured</h2>
-<p>
+
+<h2 data-i18n="social.featured.title">
+Get Featured
+</h2>
+
+<p data-i18n="social.featured.description">
 The best posts may be selected for Photos, Contests, Hall Of Fame or a future PETS & DOGUE issue.
 </p>
+
 <br>
-<a href="submit-pet.html" style="background:white;color:#111;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:bold;">Submit Pet</a>
+
+<a
+href="submit-pet.html"
+style="background:white;color:#111;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:bold;"
+data-i18n="social.featured.button">
+Submit Pet
+</a>
+
 </div>
 
 </aside>
@@ -241,53 +530,183 @@ The best posts may be selected for Photos, Contests, Hall Of Fame or a future PE
 </main>
 
 <footer>
-<h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
+
+<h2 translate="no" data-pd-brand="true">
+PETS & DOGUE
+</h2>
+
+<p data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
 
 <div class="footer-links">
-<a href="index.html">Home</a>
-<a href="photos.html">Photos</a>
-<a href="contests.html">Contests</a>
-<a href="local-community.html">Local Community</a>
-<a href="club.html">Club</a>
-<a href="privacy.html">Privacy</a>
-<a href="contact.html">Contact</a>
+
+<a href="index.html" data-i18n="social.footer.home">Home</a>
+<a href="photos.html" data-i18n="social.footer.photos">Photos</a>
+<a href="contests.html" data-i18n="social.footer.contests">Contests</a>
+<a href="local-community.html" data-i18n="social.footer.community">Local Community</a>
+<a href="club.html" data-i18n="social.footer.club">Club</a>
+<a href="privacy.html" data-i18n="social.footer.privacy">Privacy</a>
+<a href="contact.html" data-i18n="social.footer.contact">Contact</a>
+
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a
+href="admin.html"
+class="admin-small"
+data-i18n="common.footer.admin">
+Admin
+</a>
+
 </footer>
 
+<script src="i18n/common.js"></script>
+<script src="i18n/social.js"></script>
+<script src="i18n/engine.js"></script>
+
 <script>
+const LANGUAGE_KEY = "pets_dogue_language";
+
 let currentFilter = "All";
 
+function currentLanguage(){
+
+const language =
+localStorage.getItem(LANGUAGE_KEY) || "en";
+
+const translations =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.social;
+
+return translations && translations[language]
+? language
+: "en";
+
+}
+
+function t(path,fallback=""){
+
+const translations =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.social;
+
+if(!translations){
+return fallback;
+}
+
+function read(source){
+
+return path
+.split(".")
+.reduce(
+(value,key) =>
+value &&
+Object.prototype.hasOwnProperty.call(value,key)
+? value[key]
+: undefined,
+source
+);
+
+}
+
+const language =
+currentLanguage();
+
+return (
+read(translations[language]) ??
+read(translations.en) ??
+fallback
+);
+
+}
+
+function escapeHTML(value){
+
+return String(value || "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
 function likePost(element){
-const count = element.querySelector("span");
-count.textContent = Number(count.textContent) + 1;
+
+const count =
+element.querySelector("span");
+
+count.textContent =
+Number(count.textContent) + 1;
+
 }
 
 function addComment(button){
-const input = button.previousElementSibling;
-const text = input.value.trim();
-if(!text){return;}
 
-const comments = button.closest(".comments");
-const comment = document.createElement("div");
-comment.className = "comment";
-comment.innerHTML = "<strong>You</strong> " + text;
+const input =
+button.previousElementSibling;
 
-comments.insertBefore(comment, button.parentElement);
+const text =
+input.value.trim();
 
-const count = button.closest(".post").querySelector(".comment-count");
-count.textContent = Number(count.textContent) + 1;
+if(!text){
+return;
+}
+
+const comments =
+button.closest(".comments");
+
+const comment =
+document.createElement("div");
+
+comment.className =
+"comment";
+
+const strong =
+document.createElement("strong");
+
+strong.textContent =
+t("dynamic.you","You");
+
+const textNode =
+document.createTextNode(
+" " + text
+);
+
+comment.appendChild(strong);
+comment.appendChild(textNode);
+
+comments.insertBefore(
+comment,
+button.parentElement
+);
+
+const count =
+button
+.closest(".post")
+.querySelector(".comment-count");
+
+count.textContent =
+Number(count.textContent) + 1;
 
 input.value = "";
+
 }
 
 function setFilter(element,type){
+
 currentFilter = type;
-document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+
+document
+.querySelectorAll(".filter")
+.forEach(item =>
+item.classList.remove("active")
+);
+
 element.classList.add("active");
+
 filterPosts();
+
 }
 
 function searchPosts(){
@@ -295,72 +714,328 @@ filterPosts();
 }
 
 function filterPosts(){
-const query = document.getElementById("searchInput").value.toLowerCase();
 
-document.querySelectorAll(".post").forEach(post => {
-const type = post.dataset.type;
-const search = post.dataset.search.toLowerCase();
-const text = post.innerText.toLowerCase();
+const query =
+document
+.getElementById("searchInput")
+.value
+.toLowerCase();
 
-const matchesType = currentFilter === "All" || type === currentFilter;
-const matchesSearch = !query || search.includes(query) || text.includes(query);
+document
+.querySelectorAll(".post")
+.forEach(post => {
 
-post.style.display = matchesType && matchesSearch ? "block" : "none";
+const type =
+post.dataset.type;
+
+const search =
+(post.dataset.search || "")
+.toLowerCase();
+
+const text =
+post.innerText
+.toLowerCase();
+
+const matchesType =
+currentFilter === "All" ||
+type === currentFilter;
+
+const matchesSearch =
+!query ||
+search.includes(query) ||
+text.includes(query);
+
+post.style.display =
+matchesType &&
+matchesSearch
+? "block"
+: "none";
+
 });
+
 }
 
 function createPost(){
-const image = document.getElementById("postImage").value.trim();
-const text = document.getElementById("postText").value.trim();
-const tags = document.getElementById("postTags").value.trim();
+
+const image =
+document
+.getElementById("postImage")
+.value
+.trim();
+
+const text =
+document
+.getElementById("postText")
+.value
+.trim();
+
+const tags =
+document
+.getElementById("postTags")
+.value
+.trim();
 
 if(!text){
-alert("Please write a caption.");
+
+alert(
+t(
+"alerts.caption",
+"Please write a caption."
+)
+);
+
 return;
+
 }
 
-const post = document.createElement("div");
-post.className = "post";
-post.dataset.type = "Local";
-post.dataset.search = text + " " + tags;
+const post =
+document.createElement("div");
+
+post.className =
+"post user-post";
+
+post.dataset.type =
+"Local";
+
+post.dataset.search =
+text + " " + tags;
+
+const imageHtml =
+image
+? `
+<img
+src="${escapeHTML(image)}"
+alt="${escapeHTML(
+t(
+"dynamic.yourPostAlt",
+"Your post"
+)
+)}">
+`
+: "";
 
 post.innerHTML = `
+
 <div class="post-header">
+
 <div class="avatar">Y</div>
+
 <div class="user">
-<h3>You</h3>
-<p>Community Post · Just now</p>
+
+<h3 class="dynamic-you">
+${escapeHTML(
+t("dynamic.you","You")
+)}
+</h3>
+
+<p class="dynamic-post-meta">
+${escapeHTML(
+t(
+"dynamic.communityPost",
+"Community Post"
+)
+)}
+ ·
+${escapeHTML(
+t(
+"dynamic.justNow",
+"Just now"
+)
+)}
+</p>
+
 </div>
-<span class="badge">LOCAL</span>
+
+<span class="badge dynamic-local">
+${escapeHTML(
+t(
+"dynamic.local",
+"LOCAL"
+)
+)}
+</span>
+
 </div>
-${image ? `<img src="${image}" alt="Your post">` : ""}
+
+${imageHtml}
+
 <div class="post-content">
-<div class="caption">${text}</div>
-<div class="tags">${tags}</div>
+
+<div class="caption">
+${escapeHTML(text)}
+</div>
+
+<div class="tags">
+${escapeHTML(tags)}
+</div>
+
 <div class="actions">
-<span class="heart" onclick="likePost(this)">❤️ <span>0</span></span>
-<span class="comment-toggle">💬 <span class="comment-count">0</span> comments</span>
-<span>📍 Community</span>
+
+<span
+class="heart"
+onclick="likePost(this)">
+❤️ <span>0</span>
+</span>
+
+<span class="comment-toggle">
+💬 <span class="comment-count">0</span>
+<span class="dynamic-comments">
+${escapeHTML(
+t(
+"dynamic.comments",
+"comments"
+)
+)}
+</span>
+</span>
+
+<span class="dynamic-location">
+📍 ${escapeHTML(
+t(
+"dynamic.community",
+"Community"
+)
+)}
+</span>
+
 </div>
+
 <div class="comments">
+
 <div class="comment-form">
-<input type="text" placeholder="Write a comment...">
-<button onclick="addComment(this)">Send</button>
+
+<input
+type="text"
+placeholder="${escapeHTML(
+t(
+"dynamic.commentPlaceholder",
+"Write a comment..."
+)
+)}">
+
+<button onclick="addComment(this)">
+${escapeHTML(
+t(
+"dynamic.send",
+"Send"
+)
+)}
+</button>
+
 </div>
+
 </div>
+
 </div>
 `;
 
-document.getElementById("feed").prepend(post);
+document
+.getElementById("feed")
+.prepend(post);
 
 document.getElementById("postImage").value = "";
 document.getElementById("postText").value = "";
 document.getElementById("postTags").value = "";
+
+filterPosts();
+
 }
+
+function refreshDynamicLanguage(){
+
+document
+.querySelectorAll(".user-post")
+.forEach(post => {
+
+const user =
+post.querySelector(".dynamic-you");
+
+const meta =
+post.querySelector(".dynamic-post-meta");
+
+const badge =
+post.querySelector(".dynamic-local");
+
+const comments =
+post.querySelector(".dynamic-comments");
+
+const location =
+post.querySelector(".dynamic-location");
+
+const input =
+post.querySelector(".comment-form input");
+
+const button =
+post.querySelector(".comment-form button");
+
+if(user){
+user.textContent =
+t("dynamic.you","You");
+}
+
+if(meta){
+meta.textContent =
+t(
+"dynamic.communityPost",
+"Community Post"
+) +
+" · " +
+t(
+"dynamic.justNow",
+"Just now"
+);
+}
+
+if(badge){
+badge.textContent =
+t(
+"dynamic.local",
+"LOCAL"
+);
+}
+
+if(comments){
+comments.textContent =
+t(
+"dynamic.comments",
+"comments"
+);
+}
+
+if(location){
+location.textContent =
+"📍 " +
+t(
+"dynamic.community",
+"Community"
+);
+}
+
+if(input){
+input.placeholder =
+t(
+"dynamic.commentPlaceholder",
+"Write a comment..."
+);
+}
+
+if(button){
+button.textContent =
+t(
+"dynamic.send",
+"Send"
+);
+}
+
+});
+
+}
+
+window.addEventListener(
+"languagechange",
+refreshDynamicLanguage
+);
 </script>
 
-
-<!-- PETS & DOGUE UNIFIED 23-LANGUAGE SYSTEM -->
-<script src="translations.js"></script>
 </body>
 </html>
