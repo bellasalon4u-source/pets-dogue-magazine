@@ -1,1336 +1,798 @@
 window.PetsDogueTranslations =
-  window.PetsDogueTranslations || {};
+window.PetsDogueTranslations || {};
+
+window.PetsDogueTranslations.petFriendly = {
+
+en:{
+meta:{
+title:"Pet Friendly Places | PETS & DOGUE",
+description:"Search pet-friendly cafés, hotels, parks, beaches, veterinary clinics, groomers and other places with the PETS & DOGUE directory."
+},
+hero:{
+title:"Pet Friendly Places",
+description:"Search real places near any city or postcode, explore them on the map, submit new locations and help protect the accuracy of the PETS & DOGUE directory.",
+search:"Search Places",
+add:"Add A Place",
+club:"Join The Club"
+},
+stats:{
+results:"Results",
+internet:"Internet Places",
+verified:"DOGUE Verified",
+saved:"Saved",
+review:"Under Review"
+},
+directory:{title:"Find Places Near You"},
+search:{
+locationPlaceholder:"City, country or postcode — e.g. Bournemouth BH2",
+button:"Search",
+myLocation:"📍 Use My Location",
+help:"Internet results come from OpenStreetMap. Pet-policy information may be incomplete, so always confirm directly with a venue before visiting."
+},
+categories:{
+all:"All Categories",
+cafes:"Cafés",
+restaurants:"Restaurants",
+hotels:"Hotels",
+parksDogParks:"Parks & Dog Parks",
+parks:"Parks",
+beaches:"Beaches",
+vetsFull:"Veterinary Clinics",
+vets:"Vets",
+groomers:"Groomers",
+petShops:"Pet Shops"
+},
+categoryLabels:{
+Cafe:"Café",
+Restaurant:"Restaurant",
+Hotel:"Hotel",
+Park:"Park",
+Beach:"Beach",
+Veterinary:"Veterinary",
+Grooming:"Grooming",
+PetShop:"Pet Shop",
+Other:"Other"
+},
+sources:{
+internet:"Internet result",
+community:"Community submitted",
+verified:"DOGUE Verified",
+review:"Under Review",
+internetShort:"INTERNET",
+communityShort:"COMMUNITY"
+},
+filters:{all:"All"},
+results:{
+defaultTitle:"PETS & DOGUE Places",
+defaultSubtitle:"Search a location or use your current position.",
+one:"1 place shown",
+many:"{count} places shown"
+},
+sort:{
+distance:"Nearest first",
+trust:"Highest trust score",
+name:"Name A–Z",
+source:"DOGUE places first"
+},
+empty:{
+title:"No places found",
+description:"Try a larger radius, another category or a different location."
+},
+map:{
+title:"Live Map",
+searchTitle:"Search for a location",
+searchText:"Real map markers will appear here.",
+one:"1 place on the map",
+many:"{count} places on the map",
+near:"Results near {location}.",
+noSearch:"Search a location to load nearby internet results."
+},
+saved:{
+title:"Saved Places",
+emptyTitle:"Your saved places will appear here",
+emptyText:"Use the Save button on any place card.",
+location:"Saved location"
+},
+submit:{
+title:"Add A Pet-Friendly Place",
+description:"Know a café, hotel, park, beach, groomer or another location that welcomes pets? Submit it for editorial review. It will not become public until approved.",
+placeName:"Place name",
+chooseCategory:"Choose category",
+address:"Full address or postcode",
+website:"Website or social link",
+phone:"Telephone, optional",
+policy:"Pet policy — e.g. dogs welcome on terrace",
+name:"Your name",
+email:"Your email",
+details:"Tell us why this place is pet friendly and what visitors should know...",
+agreement:"I confirm that the information is accurate. I understand that the submission will be reviewed before publication.",
+button:"Submit For Review"
+},
+club:{
+title:"PETS & DOGUE Club Benefits",
+description:"Club members can unlock selected offers from pet-friendly hotels, cafés, groomers, travel partners and trusted local businesses.",
+hotel:"🏨 Hotel Discounts",
+cafe:"☕ Café Offers",
+grooming:"✂️ Grooming Benefits",
+bookings:"🎟 Partner Bookings",
+local:"📍 Local Recommendations",
+qr:"💚 Member QR Card",
+button:"Explore Club Benefits"
+},
+footer:{
+home:"Home",
+community:"Local Community",
+travel:"Pet Travel",
+wellness:"Wellness",
+partners:"Partners",
+club:"Club",
+account:"Account",
+contact:"Contact"
+},
+messages:{
+enterLocation:"Enter a city, country or postcode first.",
+findingLocation:"Finding the location…",
+locationFailed:"Location search failed.",
+notFound:"Location not found. Try a city with a country or a complete postcode.",
+unableSearch:"Unable to search this location.",
+geoUnsupported:"Geolocation is not supported by this browser.",
+waitingPermission:"Waiting for location permission…",
+currentLocation:"Your current location",
+currentLocationShort:"Current location",
+yourLocation:"Your location",
+unableNearby:"Unable to load nearby places.",
+permissionDenied:"Location permission was denied.",
+locationUnknown:"Your location could not be determined.",
+locationTimeout:"The location request timed out.",
+unableCurrent:"Unable to use your current location.",
+searchingOSM:"Searching OpenStreetMap for nearby places…",
+mapBusy:"The public map service is busy. Please try again shortly.",
+internetFound:"{count} internet places found near {location}.",
+categoryRefresh:"The category could not be refreshed. Existing results are still available."
+},
+policy:{
+welcome:"🐾 OpenStreetMap indicates that dogs or pets are welcome.",
+lead:"🦮 Dogs appear to be allowed on a lead.",
+no:"🚫 OpenStreetMap indicates that dogs may not be allowed.",
+dogPark:"🐕 Dedicated dog park.",
+unconfirmed:"ℹ️ Pet policy is not confirmed. Contact the venue before visiting."
+},
+dynamic:{
+defaultPlaceName:"Pet Friendly Place",
+localDescription:"Selected PETS & DOGUE pet-friendly place.",
+confirmPolicy:"Contact the venue to confirm its current pet policy.",
+genericPlace:"{category} Place",
+cuisine:"Cuisine: {value}.",
+outdoor:"Outdoor seating available.",
+hours:"Opening hours: {value}.",
+osmPlace:"{category} location found through OpenStreetMap.",
+reportedPlace:"Reported Place",
+verifiedBadge:"✓ DOGUE VERIFIED",
+reviewBadge:"⚠ UNDER REVIEW",
+locationUnavailable:"Location unavailable",
+communityReports:"Community reports",
+disputed:"⚠️ Pet policy disputed. This place is currently under community review.",
+policyUnknown:"Pet policy not confirmed.",
+placeInfo:"Pet-friendly place information.",
+details:"Details",
+directions:"Directions",
+saved:"♥ Saved",
+save:"♡ Save",
+reported:"✓ Reported",
+report:"🚩 Report",
+trustScore:"DOGUE Trust Score",
+website:"Visit Website",
+reportProblem:"🚩 Report Problem",
+close:"Close",
+modalDisputed:"⚠️ This pet policy is currently disputed and under review.",
+metresAway:"{value} m away",
+kmAway:"{value} km away",
+remove:"Remove"
+},
+trust:{
+review:"🟠 Under Review",
+verified:"🟢 DOGUE Verified",
+favourite:"🟢 Community Favourite",
+new:"🟡 New / Unverified Place",
+limited:"🟠 Limited Trust Data"
+},
+report:{
+title:"Report A Problem",
+description:"Tell us what has changed about this place.",
+notice:"One report can be submitted from this browser for each place. Reports are reviewed through the DOGUE Trust Center.",
+notFriendly:"❌ No longer pet friendly",
+refused:"🚫 Staff refused pets",
+closed:"🏪 Closed permanently",
+address:"📍 Wrong address",
+phone:"☎️ Wrong telephone number",
+website:"🌐 Website unavailable",
+unsafe:"⚠️ Unsafe place or conditions",
+other:"✍️ Other problem",
+details:"Add useful details, optional...",
+button:"Submit Report",
+already:"You have already reported this place from this browser.",
+reporting:"Reporting: {name}",
+choose:"Choose a reason for the report.",
+alreadyShort:"You have already reported this place.",
+hidden:"Thank you. This place has reached the community report threshold and is now temporarily hidden pending administrator review.",
+underReview:"Thank you. This place is now marked Under Review while its pet policy is checked.",
+saved:"Thank you. Your report has been saved for DOGUE Trust moderation."
+},
+submitMessages:{
+required:"Complete the place name, category, address and email.",
+email:"Enter a valid email address.",
+agreement:"Confirm that the submitted information is accurate.",
+communityPolicy:"Pet policy supplied by a community member.",
+communityMember:"Community member",
+success:"Thank you. The place has been saved as Pending Review and is ready for administrator moderation.",
+lookupFailed:"Address lookup failed."
+}
+},
+
+uk:{
+meta:{title:"Місця з тваринами | PETS & DOGUE",description:"Шукайте pet-friendly кафе, готелі, парки, пляжі, ветеринарні клініки, грумерів та інші місця в каталозі PETS & DOGUE."},
+hero:{title:"Pet-Friendly місця",description:"Шукайте реальні місця біля будь-якого міста чи поштового індексу, переглядайте їх на карті, додавайте нові локації та допомагайте підтримувати точність каталогу PETS & DOGUE.",search:"Шукати місця",add:"Додати місце",club:"Приєднатися до Club"},
+stats:{results:"Результати",internet:"Місця з інтернету",verified:"Перевірено DOGUE",saved:"Збережено",review:"На перевірці"},
+directory:{title:"Знайти місця поруч"},
+search:{locationPlaceholder:"Місто, країна або поштовий індекс — напр. Bournemouth BH2",button:"Пошук",myLocation:"📍 Використати мою локацію",help:"Результати з інтернету надходять з OpenStreetMap. Інформація про правила щодо тварин може бути неповною, тому перед візитом завжди уточнюйте її безпосередньо у закладу."},
+categories:{all:"Усі категорії",cafes:"Кафе",restaurants:"Ресторани",hotels:"Готелі",parksDogParks:"Парки та парки для собак",parks:"Парки",beaches:"Пляжі",vetsFull:"Ветеринарні клініки",vets:"Ветеринари",groomers:"Грумери",petShops:"Зоомагазини"},
+categoryLabels:{Cafe:"Кафе",Restaurant:"Ресторан",Hotel:"Готель",Park:"Парк",Beach:"Пляж",Veterinary:"Ветеринарна клініка",Grooming:"Грумінг",PetShop:"Зоомагазин",Other:"Інше"},
+sources:{internet:"Результат з інтернету",community:"Додано спільнотою",verified:"Перевірено DOGUE",review:"На перевірці",internetShort:"ІНТЕРНЕТ",communityShort:"СПІЛЬНОТА"},
+filters:{all:"Усі"},
+results:{defaultTitle:"Місця PETS & DOGUE",defaultSubtitle:"Знайдіть локацію або використайте своє поточне місцезнаходження.",one:"Показано 1 місце",many:"Показано місць: {count}"},
+sort:{distance:"Спочатку найближчі",trust:"Найвищий Trust Score",name:"Назва А–Я",source:"Спочатку місця DOGUE"},
+empty:{title:"Місць не знайдено",description:"Спробуйте збільшити радіус, вибрати іншу категорію або локацію."},
+map:{title:"Жива карта",searchTitle:"Знайдіть локацію",searchText:"Тут з’являться реальні маркери карти.",one:"1 місце на карті",many:"Місць на карті: {count}",near:"Результати поблизу {location}.",noSearch:"Знайдіть локацію, щоб завантажити місця з інтернету поблизу."},
+saved:{title:"Збережені місця",emptyTitle:"Ваші збережені місця з’являться тут",emptyText:"Натисніть «Зберегти» на будь-якій картці місця.",location:"Збережена локація"},
+submit:{title:"Додати Pet-Friendly місце",description:"Знаєте кафе, готель, парк, пляж, грумера чи інше місце, де раді тваринам? Надішліть його на редакційну перевірку. Воно не стане публічним до схвалення.",placeName:"Назва місця",chooseCategory:"Оберіть категорію",address:"Повна адреса або поштовий індекс",website:"Сайт або посилання на соцмережі",phone:"Телефон, необов’язково",policy:"Правила щодо тварин — напр. собаки дозволені на терасі",name:"Ваше ім’я",email:"Ваш email",details:"Розкажіть, чому це місце дружнє до тварин і що варто знати відвідувачам...",agreement:"Я підтверджую точність інформації та розумію, що заявка буде перевірена перед публікацією.",button:"Надіслати на перевірку"},
+club:{title:"Переваги PETS & DOGUE Club",description:"Учасники Club можуть отримувати спеціальні пропозиції від pet-friendly готелів, кафе, грумерів, travel-партнерів і перевірених локальних бізнесів.",hotel:"🏨 Знижки в готелях",cafe:"☕ Пропозиції кафе",grooming:"✂️ Переваги грумінгу",bookings:"🎟 Бронювання партнерів",local:"📍 Локальні рекомендації",qr:"💚 QR-картка учасника",button:"Переглянути переваги Club"},
+footer:{home:"Головна",community:"Локальна спільнота",travel:"Подорожі з тваринами",wellness:"Wellness",partners:"Партнери",club:"Club",account:"Акаунт",contact:"Контакти"},
+messages:{enterLocation:"Спочатку введіть місто, країну або поштовий індекс.",findingLocation:"Шукаємо локацію…",locationFailed:"Не вдалося виконати пошук локації.",notFound:"Локацію не знайдено. Спробуйте вказати місто з країною або повний поштовий індекс.",unableSearch:"Не вдалося знайти цю локацію.",geoUnsupported:"Цей браузер не підтримує геолокацію.",waitingPermission:"Очікуємо дозвіл на доступ до локації…",currentLocation:"Ваше поточне місцезнаходження",currentLocationShort:"Поточна локація",yourLocation:"Ваша локація",unableNearby:"Не вдалося завантажити місця поблизу.",permissionDenied:"Доступ до геолокації заборонено.",locationUnknown:"Не вдалося визначити ваше місцезнаходження.",locationTimeout:"Час очікування геолокації вичерпано.",unableCurrent:"Не вдалося використати поточну локацію.",searchingOSM:"Шукаємо місця поблизу в OpenStreetMap…",mapBusy:"Публічний сервіс карт зараз перевантажений. Спробуйте трохи пізніше.",internetFound:"Знайдено місць з інтернету: {count} поблизу {location}.",categoryRefresh:"Не вдалося оновити категорію. Поточні результати залишаються доступними."},
+policy:{welcome:"🐾 OpenStreetMap вказує, що собаки або інші тварини дозволені.",lead:"🦮 Схоже, собаки дозволені на повідку.",no:"🚫 OpenStreetMap вказує, що собак можуть не дозволяти.",dogPark:"🐕 Спеціальний парк для собак.",unconfirmed:"ℹ️ Правила щодо тварин не підтверджені. Уточніть їх у закладу перед візитом."},
+dynamic:{defaultPlaceName:"Pet-Friendly місце",localDescription:"Вибране pet-friendly місце PETS & DOGUE.",confirmPolicy:"Зв’яжіться із закладом, щоб підтвердити актуальні правила щодо тварин.",genericPlace:"{category}: місце",cuisine:"Кухня: {value}.",outdoor:"Є місця на відкритому повітрі.",hours:"Години роботи: {value}.",osmPlace:"Локація категорії «{category}», знайдена через OpenStreetMap.",reportedPlace:"Місце зі скаргою",verifiedBadge:"✓ ПЕРЕВІРЕНО DOGUE",reviewBadge:"⚠ НА ПЕРЕВІРЦІ",locationUnavailable:"Локація недоступна",communityReports:"Скарги спільноти",disputed:"⚠️ Правила щодо тварин оскаржуються. Місце перебуває на перевірці спільнотою.",policyUnknown:"Правила щодо тварин не підтверджені.",placeInfo:"Інформація про pet-friendly місце.",details:"Деталі",directions:"Маршрут",saved:"♥ Збережено",save:"♡ Зберегти",reported:"✓ Відправлено",report:"🚩 Повідомити",trustScore:"DOGUE Trust Score",website:"Відвідати сайт",reportProblem:"🚩 Повідомити про проблему",close:"Закрити",modalDisputed:"⚠️ Правила щодо тварин наразі оскаржуються та перевіряються.",metresAway:"{value} м",kmAway:"{value} км",remove:"Видалити"},
+trust:{review:"🟠 На перевірці",verified:"🟢 Перевірено DOGUE",favourite:"🟢 Улюблене місце спільноти",new:"🟡 Нове / неперевірене місце",limited:"🟠 Недостатньо даних довіри"},
+report:{title:"Повідомити про проблему",description:"Розкажіть, що змінилося в цьому місці.",notice:"З цього браузера можна надіслати одну скаргу на кожне місце. Скарги перевіряються через DOGUE Trust Center.",notFriendly:"❌ Більше не pet-friendly",refused:"🚫 Персонал відмовив у вході з твариною",closed:"🏪 Закрито назавжди",address:"📍 Неправильна адреса",phone:"☎️ Неправильний номер телефону",website:"🌐 Сайт недоступний",unsafe:"⚠️ Небезпечне місце або умови",other:"✍️ Інша проблема",details:"Додайте корисні деталі, необов’язково...",button:"Надіслати скаргу",already:"Ви вже повідомляли про це місце з цього браузера.",reporting:"Скарга на: {name}",choose:"Оберіть причину скарги.",alreadyShort:"Ви вже повідомляли про це місце.",hidden:"Дякуємо. Місце досягло порогу скарг спільноти та тимчасово приховане до перевірки адміністратором.",underReview:"Дякуємо. Місце позначено як «На перевірці», доки перевіряються правила щодо тварин.",saved:"Дякуємо. Вашу скаргу збережено для модерації DOGUE Trust."},
+submitMessages:{required:"Заповніть назву місця, категорію, адресу та email.",email:"Введіть дійсну email-адресу.",agreement:"Підтвердьте точність наданої інформації.",communityPolicy:"Правила щодо тварин надані учасником спільноти.",communityMember:"Учасник спільноти",success:"Дякуємо. Місце збережено зі статусом Pending Review та готове до модерації адміністратором.",lookupFailed:"Не вдалося знайти адресу."}
+},
+
+ru:{
+meta:{title:"Места с животными | PETS & DOGUE",description:"Ищите pet-friendly кафе, отели, парки, пляжи, ветеринарные клиники, грумеров и другие места в каталоге PETS & DOGUE."},
+hero:{title:"Pet-Friendly места",description:"Ищите реальные места рядом с любым городом или почтовым индексом, смотрите их на карте, добавляйте новые локации и помогайте поддерживать точность каталога PETS & DOGUE.",search:"Искать места",add:"Добавить место",club:"Вступить в Club"},
+stats:{results:"Результаты",internet:"Места из интернета",verified:"Проверено DOGUE",saved:"Сохранено",review:"На проверке"},
+directory:{title:"Найти места рядом"},
+search:{locationPlaceholder:"Город, страна или почтовый индекс — напр. Bournemouth BH2",button:"Поиск",myLocation:"📍 Использовать мою локацию",help:"Результаты из интернета поступают из OpenStreetMap. Информация о правилах для животных может быть неполной, поэтому перед визитом всегда уточняйте её непосредственно у заведения."},
+categories:{all:"Все категории",cafes:"Кафе",restaurants:"Рестораны",hotels:"Отели",parksDogParks:"Парки и парки для собак",parks:"Парки",beaches:"Пляжи",vetsFull:"Ветеринарные клиники",vets:"Ветеринары",groomers:"Грумеры",petShops:"Зоомагазины"},
+categoryLabels:{Cafe:"Кафе",Restaurant:"Ресторан",Hotel:"Отель",Park:"Парк",Beach:"Пляж",Veterinary:"Ветеринарная клиника",Grooming:"Груминг",PetShop:"Зоомагазин",Other:"Другое"},
+sources:{internet:"Результат из интернета",community:"Добавлено сообществом",verified:"Проверено DOGUE",review:"На проверке",internetShort:"ИНТЕРНЕТ",communityShort:"СООБЩЕСТВО"},
+filters:{all:"Все"},
+results:{defaultTitle:"Места PETS & DOGUE",defaultSubtitle:"Найдите локацию или используйте своё текущее местоположение.",one:"Показано 1 место",many:"Показано мест: {count}"},
+sort:{distance:"Сначала ближайшие",trust:"Самый высокий Trust Score",name:"Название А–Я",source:"Сначала места DOGUE"},
+empty:{title:"Места не найдены",description:"Попробуйте увеличить радиус, выбрать другую категорию или локацию."},
+map:{title:"Живая карта",searchTitle:"Найдите локацию",searchText:"Здесь появятся реальные маркеры карты.",one:"1 место на карте",many:"Мест на карте: {count}",near:"Результаты рядом с {location}.",noSearch:"Найдите локацию, чтобы загрузить ближайшие результаты из интернета."},
+saved:{title:"Сохранённые места",emptyTitle:"Ваши сохранённые места появятся здесь",emptyText:"Нажмите «Сохранить» на карточке любого места.",location:"Сохранённая локация"},
+submit:{title:"Добавить Pet-Friendly место",description:"Знаете кафе, отель, парк, пляж, грумера или другое место, где рады животным? Отправьте его на редакционную проверку. Оно не станет публичным до одобрения.",placeName:"Название места",chooseCategory:"Выберите категорию",address:"Полный адрес или почтовый индекс",website:"Сайт или ссылка на соцсети",phone:"Телефон, необязательно",policy:"Правила для животных — напр. собаки разрешены на террасе",name:"Ваше имя",email:"Ваш email",details:"Расскажите, почему это место дружелюбно к животным и что нужно знать посетителям...",agreement:"Я подтверждаю точность информации и понимаю, что заявка будет проверена перед публикацией.",button:"Отправить на проверку"},
+club:{title:"Преимущества PETS & DOGUE Club",description:"Участники Club могут получать специальные предложения от pet-friendly отелей, кафе, грумеров, travel-партнёров и проверенных локальных бизнесов.",hotel:"🏨 Скидки в отелях",cafe:"☕ Предложения кафе",grooming:"✂️ Преимущества груминга",bookings:"🎟 Бронирования партнёров",local:"📍 Локальные рекомендации",qr:"💚 QR-карта участника",button:"Посмотреть преимущества Club"},
+footer:{home:"Главная",community:"Локальное сообщество",travel:"Путешествия с питомцами",wellness:"Wellness",partners:"Партнёры",club:"Club",account:"Аккаунт",contact:"Контакты"},
+messages:{enterLocation:"Сначала введите город, страну или почтовый индекс.",findingLocation:"Ищем локацию…",locationFailed:"Не удалось выполнить поиск локации.",notFound:"Локация не найдена. Попробуйте указать город со страной или полный почтовый индекс.",unableSearch:"Не удалось найти эту локацию.",geoUnsupported:"Этот браузер не поддерживает геолокацию.",waitingPermission:"Ожидаем разрешение на доступ к локации…",currentLocation:"Ваше текущее местоположение",currentLocationShort:"Текущая локация",yourLocation:"Ваша локация",unableNearby:"Не удалось загрузить места поблизости.",permissionDenied:"Доступ к геолокации запрещён.",locationUnknown:"Не удалось определить ваше местоположение.",locationTimeout:"Время ожидания геолокации истекло.",unableCurrent:"Не удалось использовать текущую локацию.",searchingOSM:"Ищем места рядом в OpenStreetMap…",mapBusy:"Публичный сервис карт сейчас занят. Попробуйте немного позже.",internetFound:"Найдено мест из интернета: {count} рядом с {location}.",categoryRefresh:"Не удалось обновить категорию. Текущие результаты остаются доступными."},
+policy:{welcome:"🐾 OpenStreetMap указывает, что собаки или другие животные разрешены.",lead:"🦮 Похоже, собаки разрешены на поводке.",no:"🚫 OpenStreetMap указывает, что собак могут не разрешать.",dogPark:"🐕 Специальный парк для собак.",unconfirmed:"ℹ️ Правила для животных не подтверждены. Уточните их у заведения перед визитом."},
+dynamic:{defaultPlaceName:"Pet-Friendly место",localDescription:"Выбранное pet-friendly место PETS & DOGUE.",confirmPolicy:"Свяжитесь с заведением, чтобы подтвердить актуальные правила для животных.",genericPlace:"{category}: место",cuisine:"Кухня: {value}.",outdoor:"Есть места на открытом воздухе.",hours:"Часы работы: {value}.",osmPlace:"Локация категории «{category}», найденная через OpenStreetMap.",reportedPlace:"Место с жалобой",verifiedBadge:"✓ ПРОВЕРЕНО DOGUE",reviewBadge:"⚠ НА ПРОВЕРКЕ",locationUnavailable:"Локация недоступна",communityReports:"Жалобы сообщества",disputed:"⚠️ Правила для животных оспариваются. Место сейчас находится на проверке сообщества.",policyUnknown:"Правила для животных не подтверждены.",placeInfo:"Информация о pet-friendly месте.",details:"Подробнее",directions:"Маршрут",saved:"♥ Сохранено",save:"♡ Сохранить",reported:"✓ Отправлено",report:"🚩 Пожаловаться",trustScore:"DOGUE Trust Score",website:"Открыть сайт",reportProblem:"🚩 Сообщить о проблеме",close:"Закрыть",modalDisputed:"⚠️ Правила для животных сейчас оспариваются и проверяются.",metresAway:"{value} м",kmAway:"{value} км",remove:"Удалить"},
+trust:{review:"🟠 На проверке",verified:"🟢 Проверено DOGUE",favourite:"🟢 Любимое место сообщества",new:"🟡 Новое / непроверенное место",limited:"🟠 Недостаточно данных доверия"},
+report:{title:"Сообщить о проблеме",description:"Расскажите, что изменилось в этом месте.",notice:"Из этого браузера можно отправить одну жалобу на каждое место. Жалобы проверяются через DOGUE Trust Center.",notFriendly:"❌ Больше не pet-friendly",refused:"🚫 Персонал отказал во входе с животным",closed:"🏪 Закрыто навсегда",address:"📍 Неверный адрес",phone:"☎️ Неверный номер телефона",website:"🌐 Сайт недоступен",unsafe:"⚠️ Опасное место или условия",other:"✍️ Другая проблема",details:"Добавьте полезные детали, необязательно...",button:"Отправить жалобу",already:"Вы уже сообщали об этом месте из этого браузера.",reporting:"Жалоба на: {name}",choose:"Выберите причину жалобы.",alreadyShort:"Вы уже сообщали об этом месте.",hidden:"Спасибо. Место достигло порога жалоб сообщества и временно скрыто до проверки администратором.",underReview:"Спасибо. Место теперь отмечено как «На проверке», пока проверяются правила для животных.",saved:"Спасибо. Ваша жалоба сохранена для модерации DOGUE Trust."},
+submitMessages:{required:"Заполните название места, категорию, адрес и email.",email:"Введите действительный email.",agreement:"Подтвердите точность отправляемой информации.",communityPolicy:"Правила для животных предоставлены участником сообщества.",communityMember:"Участник сообщества",success:"Спасибо. Место сохранено со статусом Pending Review и готово к модерации администратором.",lookupFailed:"Не удалось найти адрес."}
+},
+
+fr:{
+meta:{title:"Lieux pet-friendly | PETS & DOGUE",description:"Recherchez des cafés, hôtels, parcs, plages, cliniques vétérinaires, toiletteurs et autres lieux pet-friendly avec PETS & DOGUE."},
+hero:{title:"Lieux Pet-Friendly",description:"Recherchez de vrais lieux près de n’importe quelle ville ou code postal, explorez-les sur la carte, proposez de nouvelles adresses et contribuez à la fiabilité du répertoire PETS & DOGUE.",search:"Rechercher des lieux",add:"Ajouter un lieu",club:"Rejoindre le Club"},
+stats:{results:"Résultats",internet:"Lieux Internet",verified:"Vérifié DOGUE",saved:"Enregistrés",review:"En vérification"},
+directory:{title:"Trouver des lieux près de vous"},
+search:{locationPlaceholder:"Ville, pays ou code postal — ex. Bournemouth BH2",button:"Rechercher",myLocation:"📍 Utiliser ma position",help:"Les résultats Internet proviennent d’OpenStreetMap. Les règles concernant les animaux peuvent être incomplètes : confirmez toujours directement auprès du lieu avant votre visite."},
+categories:{all:"Toutes les catégories",cafes:"Cafés",restaurants:"Restaurants",hotels:"Hôtels",parksDogParks:"Parcs & parcs canins",parks:"Parcs",beaches:"Plages",vetsFull:"Cliniques vétérinaires",vets:"Vétérinaires",groomers:"Toiletteurs",petShops:"Animaleries"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurant",Hotel:"Hôtel",Park:"Parc",Beach:"Plage",Veterinary:"Vétérinaire",Grooming:"Toilettage",PetShop:"Animalerie",Other:"Autre"},
+sources:{internet:"Résultat Internet",community:"Proposé par la communauté",verified:"Vérifié DOGUE",review:"En vérification",internetShort:"INTERNET",communityShort:"COMMUNAUTÉ"},
+filters:{all:"Tous"},
+results:{defaultTitle:"Lieux PETS & DOGUE",defaultSubtitle:"Recherchez un lieu ou utilisez votre position actuelle.",one:"1 lieu affiché",many:"{count} lieux affichés"},
+sort:{distance:"Les plus proches",trust:"Meilleur score de confiance",name:"Nom A–Z",source:"Lieux DOGUE en premier"},
+empty:{title:"Aucun lieu trouvé",description:"Essayez un rayon plus large, une autre catégorie ou un autre lieu."},
+map:{title:"Carte en direct",searchTitle:"Rechercher un lieu",searchText:"Les marqueurs réels apparaîtront ici.",one:"1 lieu sur la carte",many:"{count} lieux sur la carte",near:"Résultats près de {location}.",noSearch:"Recherchez un lieu pour charger les résultats Internet à proximité."},
+saved:{title:"Lieux enregistrés",emptyTitle:"Vos lieux enregistrés apparaîtront ici",emptyText:"Utilisez le bouton Enregistrer sur une fiche.",location:"Lieu enregistré"},
+submit:{title:"Ajouter un lieu Pet-Friendly",description:"Vous connaissez un café, hôtel, parc, plage, toiletteur ou autre lieu accueillant les animaux ? Proposez-le à la rédaction. Il ne sera public qu’après validation.",placeName:"Nom du lieu",chooseCategory:"Choisir une catégorie",address:"Adresse complète ou code postal",website:"Site ou lien social",phone:"Téléphone, facultatif",policy:"Politique animaux — ex. chiens acceptés en terrasse",name:"Votre nom",email:"Votre email",details:"Expliquez pourquoi ce lieu est pet-friendly et ce que les visiteurs doivent savoir...",agreement:"Je confirme que les informations sont exactes et comprends que la proposition sera vérifiée avant publication.",button:"Envoyer pour vérification"},
+club:{title:"Avantages PETS & DOGUE Club",description:"Les membres du Club peuvent accéder à certaines offres d’hôtels, cafés, toiletteurs, partenaires voyage et commerces locaux de confiance.",hotel:"🏨 Réductions hôtels",cafe:"☕ Offres cafés",grooming:"✂️ Avantages toilettage",bookings:"🎟 Réservations partenaires",local:"📍 Recommandations locales",qr:"💚 Carte QR membre",button:"Découvrir les avantages du Club"},
+footer:{home:"Accueil",community:"Communauté locale",travel:"Voyage avec animaux",wellness:"Bien-être",partners:"Partenaires",club:"Club",account:"Compte",contact:"Contact"},
+messages:{enterLocation:"Entrez d’abord une ville, un pays ou un code postal.",findingLocation:"Recherche du lieu…",locationFailed:"La recherche du lieu a échoué.",notFound:"Lieu introuvable. Essayez une ville avec son pays ou un code postal complet.",unableSearch:"Impossible de rechercher ce lieu.",geoUnsupported:"La géolocalisation n’est pas prise en charge par ce navigateur.",waitingPermission:"En attente de l’autorisation de localisation…",currentLocation:"Votre position actuelle",currentLocationShort:"Position actuelle",yourLocation:"Votre position",unableNearby:"Impossible de charger les lieux à proximité.",permissionDenied:"L’autorisation de localisation a été refusée.",locationUnknown:"Votre position n’a pas pu être déterminée.",locationTimeout:"La demande de localisation a expiré.",unableCurrent:"Impossible d’utiliser votre position actuelle.",searchingOSM:"Recherche de lieux proches sur OpenStreetMap…",mapBusy:"Le service public de cartographie est occupé. Réessayez dans quelques instants.",internetFound:"{count} lieux Internet trouvés près de {location}.",categoryRefresh:"La catégorie n’a pas pu être actualisée. Les résultats existants restent disponibles."},
+policy:{welcome:"🐾 OpenStreetMap indique que les chiens ou animaux sont acceptés.",lead:"🦮 Les chiens semblent être autorisés en laisse.",no:"🚫 OpenStreetMap indique que les chiens peuvent être interdits.",dogPark:"🐕 Parc spécialement dédié aux chiens.",unconfirmed:"ℹ️ La politique animaux n’est pas confirmée. Contactez le lieu avant votre visite."},
+dynamic:{defaultPlaceName:"Lieu Pet-Friendly",localDescription:"Lieu pet-friendly sélectionné par PETS & DOGUE.",confirmPolicy:"Contactez le lieu pour confirmer sa politique animaux actuelle.",genericPlace:"Lieu {category}",cuisine:"Cuisine : {value}.",outdoor:"Places extérieures disponibles.",hours:"Horaires : {value}.",osmPlace:"Lieu de catégorie « {category} » trouvé via OpenStreetMap.",reportedPlace:"Lieu signalé",verifiedBadge:"✓ VÉRIFIÉ DOGUE",reviewBadge:"⚠ EN VÉRIFICATION",locationUnavailable:"Localisation indisponible",communityReports:"Signalements de la communauté",disputed:"⚠️ La politique animaux est contestée. Ce lieu est actuellement examiné par la communauté.",policyUnknown:"Politique animaux non confirmée.",placeInfo:"Informations sur le lieu pet-friendly.",details:"Détails",directions:"Itinéraire",saved:"♥ Enregistré",save:"♡ Enregistrer",reported:"✓ Signalé",report:"🚩 Signaler",trustScore:"DOGUE Trust Score",website:"Visiter le site",reportProblem:"🚩 Signaler un problème",close:"Fermer",modalDisputed:"⚠️ Cette politique animaux est actuellement contestée et en vérification.",metresAway:"à {value} m",kmAway:"à {value} km",remove:"Supprimer"},
+trust:{review:"🟠 En vérification",verified:"🟢 Vérifié DOGUE",favourite:"🟢 Favori de la communauté",new:"🟡 Nouveau / non vérifié",limited:"🟠 Données de confiance limitées"},
+report:{title:"Signaler un problème",description:"Dites-nous ce qui a changé concernant ce lieu.",notice:"Un signalement peut être envoyé depuis ce navigateur pour chaque lieu. Les signalements sont examinés via le DOGUE Trust Center.",notFriendly:"❌ N’accepte plus les animaux",refused:"🚫 Le personnel a refusé les animaux",closed:"🏪 Fermé définitivement",address:"📍 Mauvaise adresse",phone:"☎️ Mauvais numéro de téléphone",website:"🌐 Site indisponible",unsafe:"⚠️ Lieu ou conditions dangereuses",other:"✍️ Autre problème",details:"Ajoutez des détails utiles, facultatif...",button:"Envoyer le signalement",already:"Vous avez déjà signalé ce lieu depuis ce navigateur.",reporting:"Signalement : {name}",choose:"Choisissez un motif.",alreadyShort:"Vous avez déjà signalé ce lieu.",hidden:"Merci. Ce lieu a atteint le seuil de signalements et est temporairement masqué en attendant l’examen d’un administrateur.",underReview:"Merci. Ce lieu est désormais marqué En vérification pendant le contrôle de sa politique animaux.",saved:"Merci. Votre signalement a été enregistré pour la modération DOGUE Trust."},
+submitMessages:{required:"Complétez le nom du lieu, la catégorie, l’adresse et l’email.",email:"Entrez une adresse email valide.",agreement:"Confirmez l’exactitude des informations fournies.",communityPolicy:"Politique animaux fournie par un membre de la communauté.",communityMember:"Membre de la communauté",success:"Merci. Le lieu a été enregistré comme Pending Review et est prêt pour la modération administrateur.",lookupFailed:"La recherche d’adresse a échoué."}
+},
+
+de:{
+meta:{title:"Tierfreundliche Orte | PETS & DOGUE",description:"Finden Sie tierfreundliche Cafés, Hotels, Parks, Strände, Tierkliniken, Groomer und weitere Orte im PETS & DOGUE Verzeichnis."},
+hero:{title:"Tierfreundliche Orte",description:"Suchen Sie reale Orte in der Nähe jeder Stadt oder Postleitzahl, erkunden Sie sie auf der Karte, schlagen Sie neue Orte vor und helfen Sie, das PETS & DOGUE Verzeichnis aktuell zu halten.",search:"Orte suchen",add:"Ort hinzufügen",club:"Club beitreten"},
+stats:{results:"Ergebnisse",internet:"Internet-Orte",verified:"DOGUE verifiziert",saved:"Gespeichert",review:"In Prüfung"},
+directory:{title:"Orte in Ihrer Nähe finden"},
+search:{locationPlaceholder:"Stadt, Land oder Postleitzahl — z. B. Bournemouth BH2",button:"Suchen",myLocation:"📍 Meinen Standort verwenden",help:"Internet-Ergebnisse stammen aus OpenStreetMap. Angaben zur Tierregelung können unvollständig sein. Bitte bestätigen Sie diese vor einem Besuch direkt beim Anbieter."},
+categories:{all:"Alle Kategorien",cafes:"Cafés",restaurants:"Restaurants",hotels:"Hotels",parksDogParks:"Parks & Hundeparks",parks:"Parks",beaches:"Strände",vetsFull:"Tierkliniken",vets:"Tierärzte",groomers:"Groomer",petShops:"Tiergeschäfte"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurant",Hotel:"Hotel",Park:"Park",Beach:"Strand",Veterinary:"Tierarzt",Grooming:"Grooming",PetShop:"Tiergeschäft",Other:"Sonstiges"},
+sources:{internet:"Internet-Ergebnis",community:"Von der Community eingereicht",verified:"DOGUE verifiziert",review:"In Prüfung",internetShort:"INTERNET",communityShort:"COMMUNITY"},
+filters:{all:"Alle"},
+results:{defaultTitle:"PETS & DOGUE Orte",defaultSubtitle:"Suchen Sie einen Ort oder verwenden Sie Ihren aktuellen Standort.",one:"1 Ort angezeigt",many:"{count} Orte angezeigt"},
+sort:{distance:"Nächste zuerst",trust:"Höchster Trust Score",name:"Name A–Z",source:"DOGUE-Orte zuerst"},
+empty:{title:"Keine Orte gefunden",description:"Versuchen Sie einen größeren Radius, eine andere Kategorie oder einen anderen Ort."},
+map:{title:"Live-Karte",searchTitle:"Ort suchen",searchText:"Echte Kartenmarker erscheinen hier.",one:"1 Ort auf der Karte",many:"{count} Orte auf der Karte",near:"Ergebnisse nahe {location}.",noSearch:"Suchen Sie einen Ort, um Internet-Ergebnisse in der Nähe zu laden."},
+saved:{title:"Gespeicherte Orte",emptyTitle:"Ihre gespeicherten Orte erscheinen hier",emptyText:"Nutzen Sie die Speichern-Schaltfläche auf einer Ortskarte.",location:"Gespeicherter Ort"},
+submit:{title:"Tierfreundlichen Ort hinzufügen",description:"Kennen Sie ein Café, Hotel, einen Park, Strand, Groomer oder einen anderen tierfreundlichen Ort? Senden Sie ihn zur redaktionellen Prüfung. Er wird erst nach Freigabe veröffentlicht.",placeName:"Name des Ortes",chooseCategory:"Kategorie wählen",address:"Vollständige Adresse oder Postleitzahl",website:"Website oder Social-Link",phone:"Telefon, optional",policy:"Tierregelung — z. B. Hunde auf Terrasse willkommen",name:"Ihr Name",email:"Ihre E-Mail",details:"Erklären Sie, warum dieser Ort tierfreundlich ist und was Besucher wissen sollten...",agreement:"Ich bestätige, dass die Angaben korrekt sind und verstehe, dass die Einreichung vor Veröffentlichung geprüft wird.",button:"Zur Prüfung senden"},
+club:{title:"PETS & DOGUE Club-Vorteile",description:"Club-Mitglieder erhalten ausgewählte Angebote von tierfreundlichen Hotels, Cafés, Groomern, Reisepartnern und vertrauenswürdigen lokalen Unternehmen.",hotel:"🏨 Hotelrabatte",cafe:"☕ Café-Angebote",grooming:"✂️ Grooming-Vorteile",bookings:"🎟 Partnerbuchungen",local:"📍 Lokale Empfehlungen",qr:"💚 Mitglieder-QR-Karte",button:"Club-Vorteile entdecken"},
+footer:{home:"Startseite",community:"Lokale Community",travel:"Reisen mit Haustieren",wellness:"Wellness",partners:"Partner",club:"Club",account:"Konto",contact:"Kontakt"},
+messages:{enterLocation:"Geben Sie zuerst eine Stadt, ein Land oder eine Postleitzahl ein.",findingLocation:"Standort wird gesucht…",locationFailed:"Standortsuche fehlgeschlagen.",notFound:"Ort nicht gefunden. Versuchen Sie eine Stadt mit Land oder eine vollständige Postleitzahl.",unableSearch:"Dieser Ort konnte nicht gesucht werden.",geoUnsupported:"Geolocation wird von diesem Browser nicht unterstützt.",waitingPermission:"Warte auf Standortfreigabe…",currentLocation:"Ihr aktueller Standort",currentLocationShort:"Aktueller Standort",yourLocation:"Ihr Standort",unableNearby:"Orte in der Nähe konnten nicht geladen werden.",permissionDenied:"Standortfreigabe wurde verweigert.",locationUnknown:"Ihr Standort konnte nicht bestimmt werden.",locationTimeout:"Die Standortanfrage ist abgelaufen.",unableCurrent:"Ihr aktueller Standort kann nicht verwendet werden.",searchingOSM:"OpenStreetMap wird nach Orten in der Nähe durchsucht…",mapBusy:"Der öffentliche Kartendienst ist derzeit ausgelastet. Bitte versuchen Sie es später erneut.",internetFound:"{count} Internet-Orte nahe {location} gefunden.",categoryRefresh:"Die Kategorie konnte nicht aktualisiert werden. Bestehende Ergebnisse bleiben verfügbar."},
+policy:{welcome:"🐾 OpenStreetMap zeigt an, dass Hunde oder Haustiere willkommen sind.",lead:"🦮 Hunde scheinen an der Leine erlaubt zu sein.",no:"🚫 OpenStreetMap zeigt an, dass Hunde möglicherweise nicht erlaubt sind.",dogPark:"🐕 Spezieller Hundepark.",unconfirmed:"ℹ️ Die Tierregelung ist nicht bestätigt. Kontaktieren Sie den Ort vor Ihrem Besuch."},
+dynamic:{defaultPlaceName:"Tierfreundlicher Ort",localDescription:"Ausgewählter tierfreundlicher PETS & DOGUE Ort.",confirmPolicy:"Kontaktieren Sie den Anbieter, um die aktuelle Tierregelung zu bestätigen.",genericPlace:"{category}-Ort",cuisine:"Küche: {value}.",outdoor:"Außensitzplätze verfügbar.",hours:"Öffnungszeiten: {value}.",osmPlace:"{category}-Ort über OpenStreetMap gefunden.",reportedPlace:"Gemeldeter Ort",verifiedBadge:"✓ DOGUE VERIFIZIERT",reviewBadge:"⚠ IN PRÜFUNG",locationUnavailable:"Standort nicht verfügbar",communityReports:"Community-Meldungen",disputed:"⚠️ Die Tierregelung wird angezweifelt. Dieser Ort wird derzeit von der Community geprüft.",policyUnknown:"Tierregelung nicht bestätigt.",placeInfo:"Informationen zum tierfreundlichen Ort.",details:"Details",directions:"Route",saved:"♥ Gespeichert",save:"♡ Speichern",reported:"✓ Gemeldet",report:"🚩 Melden",trustScore:"DOGUE Trust Score",website:"Website besuchen",reportProblem:"🚩 Problem melden",close:"Schließen",modalDisputed:"⚠️ Diese Tierregelung ist derzeit umstritten und wird geprüft.",metresAway:"{value} m entfernt",kmAway:"{value} km entfernt",remove:"Entfernen"},
+trust:{review:"🟠 In Prüfung",verified:"🟢 DOGUE verifiziert",favourite:"🟢 Community-Favorit",new:"🟡 Neu / nicht verifiziert",limited:"🟠 Begrenzte Vertrauensdaten"},
+report:{title:"Problem melden",description:"Teilen Sie uns mit, was sich an diesem Ort geändert hat.",notice:"Pro Ort kann von diesem Browser eine Meldung gesendet werden. Meldungen werden über das DOGUE Trust Center geprüft.",notFriendly:"❌ Nicht mehr tierfreundlich",refused:"🚫 Personal hat Tiere abgelehnt",closed:"🏪 Dauerhaft geschlossen",address:"📍 Falsche Adresse",phone:"☎️ Falsche Telefonnummer",website:"🌐 Website nicht erreichbar",unsafe:"⚠️ Unsicherer Ort oder Bedingungen",other:"✍️ Anderes Problem",details:"Nützliche Details hinzufügen, optional...",button:"Meldung senden",already:"Sie haben diesen Ort bereits von diesem Browser gemeldet.",reporting:"Meldung für: {name}",choose:"Wählen Sie einen Grund für die Meldung.",alreadyShort:"Sie haben diesen Ort bereits gemeldet.",hidden:"Danke. Dieser Ort hat den Community-Meldeschwellenwert erreicht und wurde bis zur Administratorprüfung vorübergehend ausgeblendet.",underReview:"Danke. Dieser Ort ist nun als In Prüfung markiert, während die Tierregelung geprüft wird.",saved:"Danke. Ihre Meldung wurde für die DOGUE Trust Moderation gespeichert."},
+submitMessages:{required:"Füllen Sie Ortsname, Kategorie, Adresse und E-Mail aus.",email:"Geben Sie eine gültige E-Mail-Adresse ein.",agreement:"Bestätigen Sie, dass die Angaben korrekt sind.",communityPolicy:"Tierregelung von einem Community-Mitglied bereitgestellt.",communityMember:"Community-Mitglied",success:"Danke. Der Ort wurde als Pending Review gespeichert und kann nun vom Administrator moderiert werden.",lookupFailed:"Adresssuche fehlgeschlagen."}
+},es:{
+meta:{title:"Lugares pet-friendly | PETS & DOGUE",description:"Busca cafés, hoteles, parques, playas, clínicas veterinarias, peluquerías y otros lugares pet-friendly con PETS & DOGUE."},
+hero:{title:"Lugares Pet-Friendly",description:"Busca lugares reales cerca de cualquier ciudad o código postal, explóralos en el mapa, añade nuevas ubicaciones y ayuda a mantener preciso el directorio de PETS & DOGUE.",search:"Buscar lugares",add:"Añadir un lugar",club:"Unirse al Club"},
+stats:{results:"Resultados",internet:"Lugares de Internet",verified:"Verificado por DOGUE",saved:"Guardados",review:"En revisión"},
+directory:{title:"Encuentra lugares cerca de ti"},
+search:{locationPlaceholder:"Ciudad, país o código postal — ej. Bournemouth BH2",button:"Buscar",myLocation:"📍 Usar mi ubicación",help:"Los resultados de Internet proceden de OpenStreetMap. La información sobre mascotas puede estar incompleta, así que confirma siempre directamente con el establecimiento antes de visitarlo."},
+categories:{all:"Todas las categorías",cafes:"Cafés",restaurants:"Restaurantes",hotels:"Hoteles",parksDogParks:"Parques y parques para perros",parks:"Parques",beaches:"Playas",vetsFull:"Clínicas veterinarias",vets:"Veterinarios",groomers:"Peluquerías",petShops:"Tiendas para mascotas"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurante",Hotel:"Hotel",Park:"Parque",Beach:"Playa",Veterinary:"Veterinario",Grooming:"Peluquería",PetShop:"Tienda para mascotas",Other:"Otro"},
+sources:{internet:"Resultado de Internet",community:"Enviado por la comunidad",verified:"Verificado por DOGUE",review:"En revisión",internetShort:"INTERNET",communityShort:"COMUNIDAD"},
+filters:{all:"Todos"},
+results:{defaultTitle:"Lugares PETS & DOGUE",defaultSubtitle:"Busca una ubicación o utiliza tu posición actual.",one:"1 lugar mostrado",many:"{count} lugares mostrados"},
+sort:{distance:"Más cercanos primero",trust:"Mayor Trust Score",name:"Nombre A–Z",source:"Lugares DOGUE primero"},
+empty:{title:"No se encontraron lugares",description:"Prueba un radio mayor, otra categoría o una ubicación diferente."},
+map:{title:"Mapa en vivo",searchTitle:"Busca una ubicación",searchText:"Los marcadores reales aparecerán aquí.",one:"1 lugar en el mapa",many:"{count} lugares en el mapa",near:"Resultados cerca de {location}.",noSearch:"Busca una ubicación para cargar resultados de Internet cercanos."},
+saved:{title:"Lugares guardados",emptyTitle:"Tus lugares guardados aparecerán aquí",emptyText:"Utiliza el botón Guardar en cualquier tarjeta.",location:"Ubicación guardada"},
+submit:{title:"Añadir un lugar Pet-Friendly",description:"¿Conoces un café, hotel, parque, playa, peluquería u otro lugar que admita mascotas? Envíalo para revisión editorial. No será público hasta ser aprobado.",placeName:"Nombre del lugar",chooseCategory:"Elegir categoría",address:"Dirección completa o código postal",website:"Web o enlace social",phone:"Teléfono, opcional",policy:"Política de mascotas — ej. perros permitidos en terraza",name:"Tu nombre",email:"Tu email",details:"Cuéntanos por qué este lugar admite mascotas y qué deberían saber los visitantes...",agreement:"Confirmo que la información es correcta y entiendo que será revisada antes de publicarse.",button:"Enviar para revisión"},
+club:{title:"Beneficios de PETS & DOGUE Club",description:"Los miembros del Club pueden acceder a ofertas seleccionadas de hoteles pet-friendly, cafés, peluquerías, socios de viaje y negocios locales de confianza.",hotel:"🏨 Descuentos en hoteles",cafe:"☕ Ofertas de cafés",grooming:"✂️ Beneficios de peluquería",bookings:"🎟 Reservas de socios",local:"📍 Recomendaciones locales",qr:"💚 Tarjeta QR de miembro",button:"Explorar beneficios del Club"},
+footer:{home:"Inicio",community:"Comunidad local",travel:"Viajes con mascotas",wellness:"Bienestar",partners:"Socios",club:"Club",account:"Cuenta",contact:"Contacto"},
+messages:{enterLocation:"Introduce primero una ciudad, país o código postal.",findingLocation:"Buscando la ubicación…",locationFailed:"La búsqueda de ubicación falló.",notFound:"Ubicación no encontrada. Prueba con una ciudad y país o un código postal completo.",unableSearch:"No se puede buscar esta ubicación.",geoUnsupported:"Este navegador no admite geolocalización.",waitingPermission:"Esperando permiso de ubicación…",currentLocation:"Tu ubicación actual",currentLocationShort:"Ubicación actual",yourLocation:"Tu ubicación",unableNearby:"No se pudieron cargar lugares cercanos.",permissionDenied:"El permiso de ubicación fue rechazado.",locationUnknown:"No se pudo determinar tu ubicación.",locationTimeout:"La solicitud de ubicación agotó el tiempo.",unableCurrent:"No se puede usar tu ubicación actual.",searchingOSM:"Buscando lugares cercanos en OpenStreetMap…",mapBusy:"El servicio público de mapas está ocupado. Inténtalo de nuevo en breve.",internetFound:"Se encontraron {count} lugares de Internet cerca de {location}.",categoryRefresh:"No se pudo actualizar la categoría. Los resultados existentes siguen disponibles."},
+policy:{welcome:"🐾 OpenStreetMap indica que se admiten perros o mascotas.",lead:"🦮 Parece que se permiten perros con correa.",no:"🚫 OpenStreetMap indica que quizá no se admiten perros.",dogPark:"🐕 Parque específico para perros.",unconfirmed:"ℹ️ La política de mascotas no está confirmada. Contacta con el establecimiento antes de visitarlo."},
+dynamic:{defaultPlaceName:"Lugar Pet-Friendly",localDescription:"Lugar pet-friendly seleccionado por PETS & DOGUE.",confirmPolicy:"Contacta con el establecimiento para confirmar su política de mascotas actual.",genericPlace:"Lugar de {category}",cuisine:"Cocina: {value}.",outdoor:"Hay asientos exteriores.",hours:"Horario: {value}.",osmPlace:"Ubicación de {category} encontrada mediante OpenStreetMap.",reportedPlace:"Lugar reportado",verifiedBadge:"✓ VERIFICADO DOGUE",reviewBadge:"⚠ EN REVISIÓN",locationUnavailable:"Ubicación no disponible",communityReports:"Reportes de la comunidad",disputed:"⚠️ La política de mascotas está cuestionada. Este lugar está siendo revisado por la comunidad.",policyUnknown:"Política de mascotas no confirmada.",placeInfo:"Información del lugar pet-friendly.",details:"Detalles",directions:"Cómo llegar",saved:"♥ Guardado",save:"♡ Guardar",reported:"✓ Reportado",report:"🚩 Reportar",trustScore:"DOGUE Trust Score",website:"Visitar web",reportProblem:"🚩 Reportar problema",close:"Cerrar",modalDisputed:"⚠️ Esta política de mascotas está cuestionada y en revisión.",metresAway:"a {value} m",kmAway:"a {value} km",remove:"Eliminar"},
+trust:{review:"🟠 En revisión",verified:"🟢 Verificado DOGUE",favourite:"🟢 Favorito de la comunidad",new:"🟡 Nuevo / no verificado",limited:"🟠 Datos de confianza limitados"},
+report:{title:"Reportar un problema",description:"Cuéntanos qué ha cambiado en este lugar.",notice:"Se puede enviar un reporte desde este navegador por cada lugar. Los reportes se revisan mediante DOGUE Trust Center.",notFriendly:"❌ Ya no admite mascotas",refused:"🚫 El personal rechazó mascotas",closed:"🏪 Cerrado permanentemente",address:"📍 Dirección incorrecta",phone:"☎️ Teléfono incorrecto",website:"🌐 Web no disponible",unsafe:"⚠️ Lugar o condiciones inseguras",other:"✍️ Otro problema",details:"Añade detalles útiles, opcional...",button:"Enviar reporte",already:"Ya has reportado este lugar desde este navegador.",reporting:"Reportando: {name}",choose:"Elige un motivo para el reporte.",alreadyShort:"Ya has reportado este lugar.",hidden:"Gracias. Este lugar ha alcanzado el límite de reportes de la comunidad y está oculto temporalmente hasta revisión administrativa.",underReview:"Gracias. Este lugar está ahora marcado En revisión mientras se comprueba su política de mascotas.",saved:"Gracias. Tu reporte se ha guardado para moderación DOGUE Trust."},
+submitMessages:{required:"Completa nombre del lugar, categoría, dirección y email.",email:"Introduce un email válido.",agreement:"Confirma que la información enviada es correcta.",communityPolicy:"Política de mascotas proporcionada por un miembro de la comunidad.",communityMember:"Miembro de la comunidad",success:"Gracias. El lugar se ha guardado como Pending Review y está listo para moderación administrativa.",lookupFailed:"Falló la búsqueda de la dirección."}
+},
+
+it:{
+meta:{title:"Luoghi pet-friendly | PETS & DOGUE",description:"Cerca café, hotel, parchi, spiagge, cliniche veterinarie, groomer e altri luoghi pet-friendly con PETS & DOGUE."},
+hero:{title:"Luoghi Pet-Friendly",description:"Cerca luoghi reali vicino a qualsiasi città o CAP, esplorali sulla mappa, segnala nuove location e aiuta a mantenere accurata la directory PETS & DOGUE.",search:"Cerca luoghi",add:"Aggiungi un luogo",club:"Unisciti al Club"},
+stats:{results:"Risultati",internet:"Luoghi Internet",verified:"Verificato DOGUE",saved:"Salvati",review:"In revisione"},
+directory:{title:"Trova luoghi vicino a te"},
+search:{locationPlaceholder:"Città, paese o CAP — es. Bournemouth BH2",button:"Cerca",myLocation:"📍 Usa la mia posizione",help:"I risultati Internet provengono da OpenStreetMap. Le informazioni sulle policy per animali possono essere incomplete: verifica sempre direttamente con la struttura prima di visitarla."},
+categories:{all:"Tutte le categorie",cafes:"Café",restaurants:"Ristoranti",hotels:"Hotel",parksDogParks:"Parchi & parchi per cani",parks:"Parchi",beaches:"Spiagge",vetsFull:"Cliniche veterinarie",vets:"Veterinari",groomers:"Groomer",petShops:"Negozi per animali"},
+categoryLabels:{Cafe:"Café",Restaurant:"Ristorante",Hotel:"Hotel",Park:"Parco",Beach:"Spiaggia",Veterinary:"Veterinario",Grooming:"Grooming",PetShop:"Negozio per animali",Other:"Altro"},
+sources:{internet:"Risultato Internet",community:"Inviato dalla community",verified:"Verificato DOGUE",review:"In revisione",internetShort:"INTERNET",communityShort:"COMMUNITY"},
+filters:{all:"Tutti"},
+results:{defaultTitle:"Luoghi PETS & DOGUE",defaultSubtitle:"Cerca una località o usa la tua posizione attuale.",one:"1 luogo mostrato",many:"{count} luoghi mostrati"},
+sort:{distance:"Più vicini prima",trust:"Trust Score più alto",name:"Nome A–Z",source:"Luoghi DOGUE prima"},
+empty:{title:"Nessun luogo trovato",description:"Prova un raggio maggiore, un'altra categoria o una località diversa."},
+map:{title:"Mappa live",searchTitle:"Cerca una località",searchText:"I marker reali appariranno qui.",one:"1 luogo sulla mappa",many:"{count} luoghi sulla mappa",near:"Risultati vicino a {location}.",noSearch:"Cerca una località per caricare risultati Internet nelle vicinanze."},
+saved:{title:"Luoghi salvati",emptyTitle:"I luoghi salvati appariranno qui",emptyText:"Usa il pulsante Salva su qualsiasi scheda.",location:"Località salvata"},
+submit:{title:"Aggiungi un luogo Pet-Friendly",description:"Conosci un café, hotel, parco, spiaggia, groomer o altro luogo che accoglie animali? Invialo alla revisione editoriale. Non sarà pubblico fino all'approvazione.",placeName:"Nome del luogo",chooseCategory:"Scegli categoria",address:"Indirizzo completo o CAP",website:"Sito o link social",phone:"Telefono, facoltativo",policy:"Policy animali — es. cani ammessi in terrazza",name:"Il tuo nome",email:"La tua email",details:"Spiegaci perché questo luogo è pet-friendly e cosa dovrebbero sapere i visitatori...",agreement:"Confermo che le informazioni sono accurate e comprendo che saranno verificate prima della pubblicazione.",button:"Invia per revisione"},
+club:{title:"Vantaggi PETS & DOGUE Club",description:"I membri Club possono accedere a offerte selezionate di hotel pet-friendly, café, groomer, partner di viaggio e attività locali affidabili.",hotel:"🏨 Sconti hotel",cafe:"☕ Offerte café",grooming:"✂️ Vantaggi grooming",bookings:"🎟 Prenotazioni partner",local:"📍 Consigli locali",qr:"💚 Member QR Card",button:"Scopri i vantaggi Club"},
+footer:{home:"Home",community:"Community locale",travel:"Viaggi con animali",wellness:"Wellness",partners:"Partner",club:"Club",account:"Account",contact:"Contatti"},
+messages:{enterLocation:"Inserisci prima una città, un paese o un CAP.",findingLocation:"Ricerca della località…",locationFailed:"Ricerca della località non riuscita.",notFound:"Località non trovata. Prova con città e paese o un CAP completo.",unableSearch:"Impossibile cercare questa località.",geoUnsupported:"La geolocalizzazione non è supportata da questo browser.",waitingPermission:"In attesa del permesso di localizzazione…",currentLocation:"La tua posizione attuale",currentLocationShort:"Posizione attuale",yourLocation:"La tua posizione",unableNearby:"Impossibile caricare i luoghi vicini.",permissionDenied:"Il permesso di localizzazione è stato negato.",locationUnknown:"Non è stato possibile determinare la tua posizione.",locationTimeout:"La richiesta di posizione è scaduta.",unableCurrent:"Impossibile utilizzare la tua posizione attuale.",searchingOSM:"Ricerca di luoghi vicini su OpenStreetMap…",mapBusy:"Il servizio pubblico di mappe è occupato. Riprova tra poco.",internetFound:"Trovati {count} luoghi Internet vicino a {location}.",categoryRefresh:"La categoria non può essere aggiornata. I risultati esistenti restano disponibili."},
+policy:{welcome:"🐾 OpenStreetMap indica che cani o animali sono benvenuti.",lead:"🦮 I cani sembrano ammessi al guinzaglio.",no:"🚫 OpenStreetMap indica che i cani potrebbero non essere ammessi.",dogPark:"🐕 Parco dedicato ai cani.",unconfirmed:"ℹ️ La policy per animali non è confermata. Contatta la struttura prima di visitarla."},
+dynamic:{defaultPlaceName:"Luogo Pet-Friendly",localDescription:"Luogo pet-friendly selezionato da PETS & DOGUE.",confirmPolicy:"Contatta la struttura per confermare la policy animali attuale.",genericPlace:"Luogo {category}",cuisine:"Cucina: {value}.",outdoor:"Posti all'aperto disponibili.",hours:"Orari: {value}.",osmPlace:"Luogo {category} trovato tramite OpenStreetMap.",reportedPlace:"Luogo segnalato",verifiedBadge:"✓ VERIFICATO DOGUE",reviewBadge:"⚠ IN REVISIONE",locationUnavailable:"Località non disponibile",communityReports:"Segnalazioni della community",disputed:"⚠️ La policy animali è contestata. Il luogo è attualmente sotto revisione della community.",policyUnknown:"Policy animali non confermata.",placeInfo:"Informazioni sul luogo pet-friendly.",details:"Dettagli",directions:"Indicazioni",saved:"♥ Salvato",save:"♡ Salva",reported:"✓ Segnalato",report:"🚩 Segnala",trustScore:"DOGUE Trust Score",website:"Visita sito",reportProblem:"🚩 Segnala problema",close:"Chiudi",modalDisputed:"⚠️ Questa policy animali è attualmente contestata e in revisione.",metresAway:"a {value} m",kmAway:"a {value} km",remove:"Rimuovi"},
+trust:{review:"🟠 In revisione",verified:"🟢 Verificato DOGUE",favourite:"🟢 Preferito dalla community",new:"🟡 Nuovo / non verificato",limited:"🟠 Dati di fiducia limitati"},
+report:{title:"Segnala un problema",description:"Dicci cosa è cambiato in questo luogo.",notice:"Da questo browser è possibile inviare una segnalazione per ogni luogo. Le segnalazioni vengono esaminate tramite DOGUE Trust Center.",notFriendly:"❌ Non è più pet-friendly",refused:"🚫 Lo staff ha rifiutato gli animali",closed:"🏪 Chiuso definitivamente",address:"📍 Indirizzo errato",phone:"☎️ Numero di telefono errato",website:"🌐 Sito non disponibile",unsafe:"⚠️ Luogo o condizioni non sicure",other:"✍️ Altro problema",details:"Aggiungi dettagli utili, facoltativo...",button:"Invia segnalazione",already:"Hai già segnalato questo luogo da questo browser.",reporting:"Segnalazione: {name}",choose:"Scegli un motivo per la segnalazione.",alreadyShort:"Hai già segnalato questo luogo.",hidden:"Grazie. Il luogo ha raggiunto la soglia di segnalazioni della community ed è temporaneamente nascosto in attesa della revisione amministratore.",underReview:"Grazie. Il luogo è ora contrassegnato In revisione mentre viene verificata la policy animali.",saved:"Grazie. La segnalazione è stata salvata per la moderazione DOGUE Trust."},
+submitMessages:{required:"Completa nome del luogo, categoria, indirizzo ed email.",email:"Inserisci un indirizzo email valido.",agreement:"Conferma che le informazioni inviate siano accurate.",communityPolicy:"Policy animali fornita da un membro della community.",communityMember:"Membro della community",success:"Grazie. Il luogo è stato salvato come Pending Review ed è pronto per la moderazione amministratore.",lookupFailed:"Ricerca indirizzo non riuscita."}
+},
+
+pt:{
+meta:{title:"Locais pet-friendly | PETS & DOGUE",description:"Pesquise cafés, hotéis, parques, praias, clínicas veterinárias, groomers e outros locais pet-friendly com PETS & DOGUE."},
+hero:{title:"Locais Pet-Friendly",description:"Pesquise locais reais perto de qualquer cidade ou código postal, explore-os no mapa, envie novas localizações e ajude a manter o diretório PETS & DOGUE preciso.",search:"Pesquisar locais",add:"Adicionar local",club:"Juntar-se ao Club"},
+stats:{results:"Resultados",internet:"Locais da Internet",verified:"Verificado DOGUE",saved:"Guardados",review:"Em revisão"},
+directory:{title:"Encontre locais perto de si"},
+search:{locationPlaceholder:"Cidade, país ou código postal — ex. Bournemouth BH2",button:"Pesquisar",myLocation:"📍 Usar a minha localização",help:"Os resultados da Internet vêm do OpenStreetMap. As informações sobre políticas para animais podem estar incompletas, por isso confirme sempre diretamente com o local antes de visitar."},
+categories:{all:"Todas as categorias",cafes:"Cafés",restaurants:"Restaurantes",hotels:"Hotéis",parksDogParks:"Parques & parques para cães",parks:"Parques",beaches:"Praias",vetsFull:"Clínicas veterinárias",vets:"Veterinários",groomers:"Groomers",petShops:"Lojas de animais"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurante",Hotel:"Hotel",Park:"Parque",Beach:"Praia",Veterinary:"Veterinário",Grooming:"Grooming",PetShop:"Loja de animais",Other:"Outro"},
+sources:{internet:"Resultado da Internet",community:"Enviado pela comunidade",verified:"Verificado DOGUE",review:"Em revisão",internetShort:"INTERNET",communityShort:"COMUNIDADE"},
+filters:{all:"Todos"},
+results:{defaultTitle:"Locais PETS & DOGUE",defaultSubtitle:"Pesquise uma localização ou use a sua posição atual.",one:"1 local apresentado",many:"{count} locais apresentados"},
+sort:{distance:"Mais próximos primeiro",trust:"Maior Trust Score",name:"Nome A–Z",source:"Locais DOGUE primeiro"},
+empty:{title:"Nenhum local encontrado",description:"Tente um raio maior, outra categoria ou uma localização diferente."},
+map:{title:"Mapa em direto",searchTitle:"Pesquisar uma localização",searchText:"Os marcadores reais aparecerão aqui.",one:"1 local no mapa",many:"{count} locais no mapa",near:"Resultados perto de {location}.",noSearch:"Pesquise uma localização para carregar resultados próximos da Internet."},
+saved:{title:"Locais guardados",emptyTitle:"Os seus locais guardados aparecerão aqui",emptyText:"Use o botão Guardar em qualquer cartão.",location:"Localização guardada"},
+submit:{title:"Adicionar um local Pet-Friendly",description:"Conhece um café, hotel, parque, praia, groomer ou outro local que aceita animais? Envie-o para revisão editorial. Não ficará público até ser aprovado.",placeName:"Nome do local",chooseCategory:"Escolher categoria",address:"Morada completa ou código postal",website:"Site ou ligação social",phone:"Telefone, opcional",policy:"Política para animais — ex. cães permitidos no terraço",name:"O seu nome",email:"O seu email",details:"Diga-nos por que este local é pet-friendly e o que os visitantes devem saber...",agreement:"Confirmo que as informações estão corretas e compreendo que serão revistas antes da publicação.",button:"Enviar para revisão"},
+club:{title:"Benefícios PETS & DOGUE Club",description:"Os membros do Club podem desbloquear ofertas selecionadas de hotéis pet-friendly, cafés, groomers, parceiros de viagem e negócios locais de confiança.",hotel:"🏨 Descontos em hotéis",cafe:"☕ Ofertas de cafés",grooming:"✂️ Benefícios grooming",bookings:"🎟 Reservas de parceiros",local:"📍 Recomendações locais",qr:"💚 Cartão QR de membro",button:"Explorar benefícios Club"},
+footer:{home:"Início",community:"Comunidade local",travel:"Viagens com animais",wellness:"Wellness",partners:"Parceiros",club:"Club",account:"Conta",contact:"Contacto"},
+messages:{enterLocation:"Introduza primeiro uma cidade, país ou código postal.",findingLocation:"A procurar a localização…",locationFailed:"A pesquisa da localização falhou.",notFound:"Localização não encontrada. Experimente uma cidade com país ou um código postal completo.",unableSearch:"Não foi possível pesquisar esta localização.",geoUnsupported:"Este navegador não suporta geolocalização.",waitingPermission:"A aguardar permissão de localização…",currentLocation:"A sua localização atual",currentLocationShort:"Localização atual",yourLocation:"A sua localização",unableNearby:"Não foi possível carregar locais próximos.",permissionDenied:"A permissão de localização foi recusada.",locationUnknown:"Não foi possível determinar a sua localização.",locationTimeout:"O pedido de localização expirou.",unableCurrent:"Não foi possível utilizar a sua localização atual.",searchingOSM:"A pesquisar locais próximos no OpenStreetMap…",mapBusy:"O serviço público de mapas está ocupado. Tente novamente em breve.",internetFound:"Foram encontrados {count} locais da Internet perto de {location}.",categoryRefresh:"Não foi possível atualizar a categoria. Os resultados existentes continuam disponíveis."},
+policy:{welcome:"🐾 O OpenStreetMap indica que cães ou animais são bem-vindos.",lead:"🦮 Os cães parecem ser permitidos com trela.",no:"🚫 O OpenStreetMap indica que os cães podem não ser permitidos.",dogPark:"🐕 Parque dedicado a cães.",unconfirmed:"ℹ️ A política para animais não está confirmada. Contacte o local antes de visitar."},
+dynamic:{defaultPlaceName:"Local Pet-Friendly",localDescription:"Local pet-friendly selecionado pela PETS & DOGUE.",confirmPolicy:"Contacte o local para confirmar a política atual para animais.",genericPlace:"Local de {category}",cuisine:"Cozinha: {value}.",outdoor:"Lugares ao ar livre disponíveis.",hours:"Horário: {value}.",osmPlace:"Local de {category} encontrado através do OpenStreetMap.",reportedPlace:"Local reportado",verifiedBadge:"✓ VERIFICADO DOGUE",reviewBadge:"⚠ EM REVISÃO",locationUnavailable:"Localização indisponível",communityReports:"Relatórios da comunidade",disputed:"⚠️ A política para animais está a ser contestada. Este local está atualmente em revisão pela comunidade.",policyUnknown:"Política para animais não confirmada.",placeInfo:"Informações do local pet-friendly.",details:"Detalhes",directions:"Direções",saved:"♥ Guardado",save:"♡ Guardar",reported:"✓ Reportado",report:"🚩 Reportar",trustScore:"DOGUE Trust Score",website:"Visitar site",reportProblem:"🚩 Reportar problema",close:"Fechar",modalDisputed:"⚠️ Esta política para animais está atualmente contestada e em revisão.",metresAway:"a {value} m",kmAway:"a {value} km",remove:"Remover"},
+trust:{review:"🟠 Em revisão",verified:"🟢 Verificado DOGUE",favourite:"🟢 Favorito da comunidade",new:"🟡 Novo / não verificado",limited:"🟠 Dados de confiança limitados"},
+report:{title:"Reportar um problema",description:"Diga-nos o que mudou neste local.",notice:"Pode ser enviado um relatório deste navegador por cada local. Os relatórios são revistos através do DOGUE Trust Center.",notFriendly:"❌ Já não aceita animais",refused:"🚫 Funcionários recusaram animais",closed:"🏪 Fechado permanentemente",address:"📍 Morada errada",phone:"☎️ Número de telefone errado",website:"🌐 Site indisponível",unsafe:"⚠️ Local ou condições inseguras",other:"✍️ Outro problema",details:"Adicione detalhes úteis, opcional...",button:"Enviar relatório",already:"Já reportou este local neste navegador.",reporting:"A reportar: {name}",choose:"Escolha um motivo para o relatório.",alreadyShort:"Já reportou este local.",hidden:"Obrigado. Este local atingiu o limite de relatórios da comunidade e está temporariamente oculto até revisão do administrador.",underReview:"Obrigado. Este local está agora marcado Em revisão enquanto a política para animais é verificada.",saved:"Obrigado. O seu relatório foi guardado para moderação DOGUE Trust."},
+submitMessages:{required:"Preencha o nome do local, categoria, morada e email.",email:"Introduza um endereço de email válido.",agreement:"Confirme que as informações enviadas estão corretas.",communityPolicy:"Política para animais fornecida por um membro da comunidade.",communityMember:"Membro da comunidade",success:"Obrigado. O local foi guardado como Pending Review e está pronto para moderação do administrador.",lookupFailed:"A pesquisa da morada falhou."}
+},
+
+nl:{
+meta:{title:"Huisdiervriendelijke plaatsen | PETS & DOGUE",description:"Zoek huisdiervriendelijke cafés, hotels, parken, stranden, dierenklinieken, groomers en andere plaatsen met PETS & DOGUE."},
+hero:{title:"Huisdiervriendelijke Plaatsen",description:"Zoek echte plaatsen bij elke stad of postcode, bekijk ze op de kaart, voeg nieuwe locaties toe en help de PETS & DOGUE-directory betrouwbaar te houden.",search:"Plaatsen zoeken",add:"Plaats toevoegen",club:"Word lid van Club"},
+stats:{results:"Resultaten",internet:"Internetplaatsen",verified:"DOGUE geverifieerd",saved:"Opgeslagen",review:"In beoordeling"},
+directory:{title:"Vind plaatsen bij u in de buurt"},
+search:{locationPlaceholder:"Stad, land of postcode — bv. Bournemouth BH2",button:"Zoeken",myLocation:"📍 Mijn locatie gebruiken",help:"Internetresultaten komen van OpenStreetMap. Informatie over huisdierenbeleid kan onvolledig zijn, dus bevestig dit altijd rechtstreeks bij de locatie voordat u gaat."},
+categories:{all:"Alle categorieën",cafes:"Cafés",restaurants:"Restaurants",hotels:"Hotels",parksDogParks:"Parken & hondenparken",parks:"Parken",beaches:"Stranden",vetsFull:"Dierenklinieken",vets:"Dierenartsen",groomers:"Groomers",petShops:"Dierenwinkels"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurant",Hotel:"Hotel",Park:"Park",Beach:"Strand",Veterinary:"Dierenarts",Grooming:"Grooming",PetShop:"Dierenwinkel",Other:"Overig"},
+sources:{internet:"Internetresultaat",community:"Ingediend door community",verified:"DOGUE geverifieerd",review:"In beoordeling",internetShort:"INTERNET",communityShort:"COMMUNITY"},
+filters:{all:"Alles"},
+results:{defaultTitle:"PETS & DOGUE Plaatsen",defaultSubtitle:"Zoek een locatie of gebruik uw huidige positie.",one:"1 plaats weergegeven",many:"{count} plaatsen weergegeven"},
+sort:{distance:"Dichtstbij eerst",trust:"Hoogste Trust Score",name:"Naam A–Z",source:"DOGUE-plaatsen eerst"},
+empty:{title:"Geen plaatsen gevonden",description:"Probeer een grotere straal, andere categorie of andere locatie."},
+map:{title:"Live kaart",searchTitle:"Zoek een locatie",searchText:"Echte kaartmarkeringen verschijnen hier.",one:"1 plaats op de kaart",many:"{count} plaatsen op de kaart",near:"Resultaten bij {location}.",noSearch:"Zoek een locatie om nabijgelegen internetresultaten te laden."},
+saved:{title:"Opgeslagen plaatsen",emptyTitle:"Uw opgeslagen plaatsen verschijnen hier",emptyText:"Gebruik de knop Opslaan op een plaatskaart.",location:"Opgeslagen locatie"},
+submit:{title:"Huisdiervriendelijke plaats toevoegen",description:"Kent u een café, hotel, park, strand, groomer of andere locatie waar huisdieren welkom zijn? Dien deze in voor redactionele beoordeling. De locatie wordt pas openbaar na goedkeuring.",placeName:"Naam van de plaats",chooseCategory:"Categorie kiezen",address:"Volledig adres of postcode",website:"Website of sociale link",phone:"Telefoon, optioneel",policy:"Huisdierenbeleid — bv. honden welkom op terras",name:"Uw naam",email:"Uw e-mail",details:"Vertel waarom deze plaats huisdiervriendelijk is en wat bezoekers moeten weten...",agreement:"Ik bevestig dat de informatie correct is en begrijp dat de inzending voor publicatie wordt beoordeeld.",button:"Ter beoordeling indienen"},
+club:{title:"PETS & DOGUE Club-voordelen",description:"Clubleden kunnen geselecteerde aanbiedingen krijgen van huisdiervriendelijke hotels, cafés, groomers, reispartners en betrouwbare lokale bedrijven.",hotel:"🏨 Hotelkortingen",cafe:"☕ Café-aanbiedingen",grooming:"✂️ Groomingvoordelen",bookings:"🎟 Partnerboekingen",local:"📍 Lokale aanbevelingen",qr:"💚 QR-kaart voor leden",button:"Club-voordelen bekijken"},
+footer:{home:"Home",community:"Lokale community",travel:"Reizen met huisdieren",wellness:"Wellness",partners:"Partners",club:"Club",account:"Account",contact:"Contact"},
+messages:{enterLocation:"Voer eerst een stad, land of postcode in.",findingLocation:"Locatie zoeken…",locationFailed:"Locatie zoeken mislukt.",notFound:"Locatie niet gevonden. Probeer een stad met land of een volledige postcode.",unableSearch:"Deze locatie kan niet worden gezocht.",geoUnsupported:"Geolocatie wordt niet ondersteund door deze browser.",waitingPermission:"Wachten op locatietoestemming…",currentLocation:"Uw huidige locatie",currentLocationShort:"Huidige locatie",yourLocation:"Uw locatie",unableNearby:"Nabijgelegen plaatsen konden niet worden geladen.",permissionDenied:"Locatietoestemming is geweigerd.",locationUnknown:"Uw locatie kon niet worden bepaald.",locationTimeout:"Het locatieverzoek duurde te lang.",unableCurrent:"Uw huidige locatie kan niet worden gebruikt.",searchingOSM:"OpenStreetMap wordt doorzocht naar plaatsen in de buurt…",mapBusy:"De openbare kaartservice is bezet. Probeer het binnenkort opnieuw.",internetFound:"{count} internetplaatsen gevonden bij {location}.",categoryRefresh:"De categorie kon niet worden vernieuwd. Bestaande resultaten blijven beschikbaar."},
+policy:{welcome:"🐾 OpenStreetMap geeft aan dat honden of huisdieren welkom zijn.",lead:"🦮 Honden lijken aangelijnd toegestaan te zijn.",no:"🚫 OpenStreetMap geeft aan dat honden mogelijk niet zijn toegestaan.",dogPark:"🐕 Speciaal hondenpark.",unconfirmed:"ℹ️ Het huisdierenbeleid is niet bevestigd. Neem contact op met de locatie voordat u gaat."},
+dynamic:{defaultPlaceName:"Huisdiervriendelijke plaats",localDescription:"Geselecteerde huisdiervriendelijke PETS & DOGUE-plaats.",confirmPolicy:"Neem contact op met de locatie om het actuele huisdierenbeleid te bevestigen.",genericPlace:"{category}-locatie",cuisine:"Keuken: {value}.",outdoor:"Buitenzitplaatsen beschikbaar.",hours:"Openingstijden: {value}.",osmPlace:"{category}-locatie gevonden via OpenStreetMap.",reportedPlace:"Gemelde plaats",verifiedBadge:"✓ DOGUE GEVERIFIEERD",reviewBadge:"⚠ IN BEOORDELING",locationUnavailable:"Locatie niet beschikbaar",communityReports:"Communitymeldingen",disputed:"⚠️ Het huisdierenbeleid wordt betwist. Deze plaats wordt momenteel door de community beoordeeld.",policyUnknown:"Huisdierenbeleid niet bevestigd.",placeInfo:"Informatie over huisdiervriendelijke plaats.",details:"Details",directions:"Route",saved:"♥ Opgeslagen",save:"♡ Opslaan",reported:"✓ Gemeld",report:"🚩 Melden",trustScore:"DOGUE Trust Score",website:"Website bezoeken",reportProblem:"🚩 Probleem melden",close:"Sluiten",modalDisputed:"⚠️ Dit huisdierenbeleid wordt momenteel betwist en beoordeeld.",metresAway:"{value} m verder",kmAway:"{value} km verder",remove:"Verwijderen"},
+trust:{review:"🟠 In beoordeling",verified:"🟢 DOGUE geverifieerd",favourite:"🟢 Communityfavoriet",new:"🟡 Nieuw / niet geverifieerd",limited:"🟠 Beperkte vertrouwensgegevens"},
+report:{title:"Probleem melden",description:"Vertel ons wat er aan deze plaats is veranderd.",notice:"Per plaats kan vanuit deze browser één melding worden verzonden. Meldingen worden beoordeeld via het DOGUE Trust Center.",notFriendly:"❌ Niet meer huisdiervriendelijk",refused:"🚫 Personeel weigerde huisdieren",closed:"🏪 Permanent gesloten",address:"📍 Verkeerd adres",phone:"☎️ Verkeerd telefoonnummer",website:"🌐 Website niet beschikbaar",unsafe:"⚠️ Onveilige plaats of omstandigheden",other:"✍️ Ander probleem",details:"Voeg nuttige details toe, optioneel...",button:"Melding verzenden",already:"U hebt deze plaats al gemeld vanuit deze browser.",reporting:"Melding voor: {name}",choose:"Kies een reden voor de melding.",alreadyShort:"U hebt deze plaats al gemeld.",hidden:"Bedankt. Deze plaats heeft de communitydrempel voor meldingen bereikt en is tijdelijk verborgen tot beoordeling door een beheerder.",underReview:"Bedankt. Deze plaats is nu gemarkeerd als In beoordeling terwijl het huisdierenbeleid wordt gecontroleerd.",saved:"Bedankt. Uw melding is opgeslagen voor DOGUE Trust-moderatie."},
+submitMessages:{required:"Vul plaatsnaam, categorie, adres en e-mail in.",email:"Voer een geldig e-mailadres in.",agreement:"Bevestig dat de ingediende informatie correct is.",communityPolicy:"Huisdierenbeleid aangeleverd door een communitylid.",communityMember:"Communitylid",success:"Bedankt. De plaats is opgeslagen als Pending Review en klaar voor beheerdersmoderatie.",lookupFailed:"Adres zoeken mislukt."}
+},
+
+pl:{
+meta:{title:"Miejsca przyjazne zwierzętom | PETS & DOGUE",description:"Wyszukuj przyjazne zwierzętom kawiarnie, hotele, parki, plaże, kliniki weterynaryjne, groomerów i inne miejsca z PETS & DOGUE."},
+hero:{title:"Miejsca Przyjazne Zwierzętom",description:"Wyszukuj prawdziwe miejsca w pobliżu dowolnego miasta lub kodu pocztowego, oglądaj je na mapie, dodawaj nowe lokalizacje i pomagaj dbać o dokładność katalogu PETS & DOGUE.",search:"Szukaj miejsc",add:"Dodaj miejsce",club:"Dołącz do Club"},
+stats:{results:"Wyniki",internet:"Miejsca z Internetu",verified:"Zweryfikowane DOGUE",saved:"Zapisane",review:"W trakcie weryfikacji"},
+directory:{title:"Znajdź miejsca w pobliżu"},
+search:{locationPlaceholder:"Miasto, kraj lub kod pocztowy — np. Bournemouth BH2",button:"Szukaj",myLocation:"📍 Użyj mojej lokalizacji",help:"Wyniki internetowe pochodzą z OpenStreetMap. Informacje o zasadach dotyczących zwierząt mogą być niepełne, dlatego przed wizytą zawsze potwierdź je bezpośrednio w obiekcie."},
+categories:{all:"Wszystkie kategorie",cafes:"Kawiarnie",restaurants:"Restauracje",hotels:"Hotele",parksDogParks:"Parki i parki dla psów",parks:"Parki",beaches:"Plaże",vetsFull:"Kliniki weterynaryjne",vets:"Weterynarze",groomers:"Groomerzy",petShops:"Sklepy zoologiczne"},
+categoryLabels:{Cafe:"Kawiarnia",Restaurant:"Restauracja",Hotel:"Hotel",Park:"Park",Beach:"Plaża",Veterinary:"Weterynarz",Grooming:"Grooming",PetShop:"Sklep zoologiczny",Other:"Inne"},
+sources:{internet:"Wynik internetowy",community:"Dodane przez społeczność",verified:"Zweryfikowane DOGUE",review:"W trakcie weryfikacji",internetShort:"INTERNET",communityShort:"SPOŁECZNOŚĆ"},
+filters:{all:"Wszystkie"},
+results:{defaultTitle:"Miejsca PETS & DOGUE",defaultSubtitle:"Wyszukaj lokalizację lub użyj swojej bieżącej pozycji.",one:"Wyświetlono 1 miejsce",many:"Wyświetlono miejsc: {count}"},
+sort:{distance:"Najbliższe najpierw",trust:"Najwyższy Trust Score",name:"Nazwa A–Z",source:"Najpierw miejsca DOGUE"},
+empty:{title:"Nie znaleziono miejsc",description:"Spróbuj większego promienia, innej kategorii lub lokalizacji."},
+map:{title:"Mapa na żywo",searchTitle:"Wyszukaj lokalizację",searchText:"Tutaj pojawią się prawdziwe znaczniki mapy.",one:"1 miejsce na mapie",many:"Miejsc na mapie: {count}",near:"Wyniki w pobliżu {location}.",noSearch:"Wyszukaj lokalizację, aby załadować pobliskie wyniki internetowe."},
+saved:{title:"Zapisane miejsca",emptyTitle:"Twoje zapisane miejsca pojawią się tutaj",emptyText:"Użyj przycisku Zapisz na dowolnej karcie miejsca.",location:"Zapisana lokalizacja"},
+submit:{title:"Dodaj miejsce przyjazne zwierzętom",description:"Znasz kawiarnię, hotel, park, plażę, groomera lub inne miejsce przyjazne zwierzętom? Prześlij je do weryfikacji redakcyjnej. Nie będzie publiczne do czasu zatwierdzenia.",placeName:"Nazwa miejsca",chooseCategory:"Wybierz kategorię",address:"Pełny adres lub kod pocztowy",website:"Strona lub link społecznościowy",phone:"Telefon, opcjonalnie",policy:"Zasady dla zwierząt — np. psy dozwolone na tarasie",name:"Twoje imię",email:"Twój email",details:"Powiedz nam, dlaczego to miejsce jest przyjazne zwierzętom i co powinni wiedzieć odwiedzający...",agreement:"Potwierdzam poprawność informacji i rozumiem, że zgłoszenie zostanie sprawdzone przed publikacją.",button:"Wyślij do weryfikacji"},
+club:{title:"Korzyści PETS & DOGUE Club",description:"Członkowie Club mogą otrzymywać wybrane oferty hoteli przyjaznych zwierzętom, kawiarni, groomerów, partnerów podróżniczych i zaufanych lokalnych firm.",hotel:"🏨 Zniżki hotelowe",cafe:"☕ Oferty kawiarni",grooming:"✂️ Korzyści groomingowe",bookings:"🎟 Rezerwacje partnerów",local:"📍 Lokalne rekomendacje",qr:"💚 Karta QR członka",button:"Poznaj korzyści Club"},
+footer:{home:"Strona główna",community:"Lokalna społeczność",travel:"Podróże ze zwierzętami",wellness:"Wellness",partners:"Partnerzy",club:"Club",account:"Konto",contact:"Kontakt"},
+messages:{enterLocation:"Najpierw wpisz miasto, kraj lub kod pocztowy.",findingLocation:"Wyszukiwanie lokalizacji…",locationFailed:"Wyszukiwanie lokalizacji nie powiodło się.",notFound:"Nie znaleziono lokalizacji. Spróbuj miasta z krajem lub pełnego kodu pocztowego.",unableSearch:"Nie można wyszukać tej lokalizacji.",geoUnsupported:"Ta przeglądarka nie obsługuje geolokalizacji.",waitingPermission:"Oczekiwanie na zgodę na lokalizację…",currentLocation:"Twoja bieżąca lokalizacja",currentLocationShort:"Bieżąca lokalizacja",yourLocation:"Twoja lokalizacja",unableNearby:"Nie udało się załadować pobliskich miejsc.",permissionDenied:"Odmówiono dostępu do lokalizacji.",locationUnknown:"Nie udało się określić Twojej lokalizacji.",locationTimeout:"Upłynął czas żądania lokalizacji.",unableCurrent:"Nie można użyć bieżącej lokalizacji.",searchingOSM:"Wyszukiwanie pobliskich miejsc w OpenStreetMap…",mapBusy:"Publiczna usługa map jest zajęta. Spróbuj ponownie za chwilę.",internetFound:"Znaleziono {count} miejsc internetowych w pobliżu {location}.",categoryRefresh:"Nie udało się odświeżyć kategorii. Istniejące wyniki są nadal dostępne."},
+policy:{welcome:"🐾 OpenStreetMap wskazuje, że psy lub zwierzęta są mile widziane.",lead:"🦮 Psy prawdopodobnie są dozwolone na smyczy.",no:"🚫 OpenStreetMap wskazuje, że psy mogą nie być dozwolone.",dogPark:"🐕 Specjalny park dla psów.",unconfirmed:"ℹ️ Zasady dotyczące zwierząt nie są potwierdzone. Skontaktuj się z miejscem przed wizytą."},
+dynamic:{defaultPlaceName:"Miejsce przyjazne zwierzętom",localDescription:"Wybrane miejsce przyjazne zwierzętom PETS & DOGUE.",confirmPolicy:"Skontaktuj się z obiektem, aby potwierdzić aktualne zasady dotyczące zwierząt.",genericPlace:"Miejsce: {category}",cuisine:"Kuchnia: {value}.",outdoor:"Dostępne miejsca na zewnątrz.",hours:"Godziny otwarcia: {value}.",osmPlace:"Miejsce kategorii {category} znalezione przez OpenStreetMap.",reportedPlace:"Zgłoszone miejsce",verifiedBadge:"✓ ZWERYFIKOWANE DOGUE",reviewBadge:"⚠ W WERYFIKACJI",locationUnavailable:"Lokalizacja niedostępna",communityReports:"Zgłoszenia społeczności",disputed:"⚠️ Zasady dotyczące zwierząt są kwestionowane. To miejsce jest obecnie weryfikowane przez społeczność.",policyUnknown:"Zasady dotyczące zwierząt niepotwierdzone.",placeInfo:"Informacje o miejscu przyjaznym zwierzętom.",details:"Szczegóły",directions:"Trasa",saved:"♥ Zapisano",save:"♡ Zapisz",reported:"✓ Zgłoszono",report:"🚩 Zgłoś",trustScore:"DOGUE Trust Score",website:"Odwiedź stronę",reportProblem:"🚩 Zgłoś problem",close:"Zamknij",modalDisputed:"⚠️ Te zasady dotyczące zwierząt są obecnie kwestionowane i weryfikowane.",metresAway:"{value} m stąd",kmAway:"{value} km stąd",remove:"Usuń"},
+trust:{review:"🟠 W weryfikacji",verified:"🟢 Zweryfikowane DOGUE",favourite:"🟢 Ulubione miejsce społeczności",new:"🟡 Nowe / niezweryfikowane",limited:"🟠 Ograniczone dane zaufania"},
+report:{title:"Zgłoś problem",description:"Powiedz nam, co zmieniło się w tym miejscu.",notice:"Z tej przeglądarki można wysłać jedno zgłoszenie na każde miejsce. Zgłoszenia są weryfikowane przez DOGUE Trust Center.",notFriendly:"❌ Już nie jest przyjazne zwierzętom",refused:"🚫 Personel odmówił przyjęcia zwierząt",closed:"🏪 Zamknięte na stałe",address:"📍 Błędny adres",phone:"☎️ Błędny numer telefonu",website:"🌐 Strona niedostępna",unsafe:"⚠️ Niebezpieczne miejsce lub warunki",other:"✍️ Inny problem",details:"Dodaj przydatne szczegóły, opcjonalnie...",button:"Wyślij zgłoszenie",already:"To miejsce zostało już przez Ciebie zgłoszone z tej przeglądarki.",reporting:"Zgłoszenie: {name}",choose:"Wybierz powód zgłoszenia.",alreadyShort:"To miejsce zostało już przez Ciebie zgłoszone.",hidden:"Dziękujemy. Miejsce osiągnęło próg zgłoszeń społeczności i zostało tymczasowo ukryte do czasu weryfikacji administratora.",underReview:"Dziękujemy. Miejsce jest teraz oznaczone jako W weryfikacji podczas sprawdzania zasad dla zwierząt.",saved:"Dziękujemy. Zgłoszenie zostało zapisane do moderacji DOGUE Trust."},
+submitMessages:{required:"Uzupełnij nazwę miejsca, kategorię, adres i email.",email:"Wprowadź poprawny adres email.",agreement:"Potwierdź poprawność przesłanych informacji.",communityPolicy:"Zasady dotyczące zwierząt podane przez członka społeczności.",communityMember:"Członek społeczności",success:"Dziękujemy. Miejsce zostało zapisane jako Pending Review i jest gotowe do moderacji administratora.",lookupFailed:"Wyszukiwanie adresu nie powiodło się."}
+},
+
+cs:{
+meta:{title:"Místa přátelská ke zvířatům | PETS & DOGUE",description:"Vyhledávejte pet-friendly kavárny, hotely, parky, pláže, veterinární kliniky, groomery a další místa pomocí PETS & DOGUE."},
+hero:{title:"Pet-Friendly místa",description:"Vyhledávejte skutečná místa poblíž jakéhokoli města nebo PSČ, prohlížejte je na mapě, přidávejte nové lokality a pomáhejte udržovat adresář PETS & DOGUE přesný.",search:"Hledat místa",add:"Přidat místo",club:"Přidat se do Club"},
+stats:{results:"Výsledky",internet:"Internetová místa",verified:"Ověřeno DOGUE",saved:"Uloženo",review:"V kontrole"},
+directory:{title:"Najděte místa ve svém okolí"},
+search:{locationPlaceholder:"Město, země nebo PSČ — např. Bournemouth BH2",button:"Hledat",myLocation:"📍 Použít moji polohu",help:"Internetové výsledky pocházejí z OpenStreetMap. Informace o pravidlech pro zvířata mohou být neúplné, proto je před návštěvou vždy ověřte přímo u provozovatele."},
+categories:{all:"Všechny kategorie",cafes:"Kavárny",restaurants:"Restaurace",hotels:"Hotely",parksDogParks:"Parky a psí parky",parks:"Parky",beaches:"Pláže",vetsFull:"Veterinární kliniky",vets:"Veterináři",groomers:"Grooming",petShops:"Chovatelské potřeby"},
+categoryLabels:{Cafe:"Kavárna",Restaurant:"Restaurace",Hotel:"Hotel",Park:"Park",Beach:"Pláž",Veterinary:"Veterinář",Grooming:"Grooming",PetShop:"Chovatelské potřeby",Other:"Jiné"},
+sources:{internet:"Internetový výsledek",community:"Přidáno komunitou",verified:"Ověřeno DOGUE",review:"V kontrole",internetShort:"INTERNET",communityShort:"KOMUNITA"},
+filters:{all:"Vše"},
+results:{defaultTitle:"Místa PETS & DOGUE",defaultSubtitle:"Vyhledejte lokalitu nebo použijte svou aktuální polohu.",one:"Zobrazeno 1 místo",many:"Zobrazeno míst: {count}"},
+sort:{distance:"Nejbližší první",trust:"Nejvyšší Trust Score",name:"Název A–Z",source:"Nejprve místa DOGUE"},
+empty:{title:"Nebyla nalezena žádná místa",description:"Zkuste větší rádius, jinou kategorii nebo jinou lokalitu."},
+map:{title:"Živá mapa",searchTitle:"Vyhledejte lokalitu",searchText:"Zde se zobrazí skutečné značky na mapě.",one:"1 místo na mapě",many:"Míst na mapě: {count}",near:"Výsledky poblíž {location}.",noSearch:"Vyhledejte lokalitu pro načtení okolních internetových výsledků."},
+saved:{title:"Uložená místa",emptyTitle:"Vaše uložená místa se zobrazí zde",emptyText:"Použijte tlačítko Uložit na kartě místa.",location:"Uložená lokalita"},
+submit:{title:"Přidat Pet-Friendly místo",description:"Znáte kavárnu, hotel, park, pláž, groomera nebo jiné místo, kde jsou zvířata vítána? Odešlete ho k redakční kontrole. Veřejné bude až po schválení.",placeName:"Název místa",chooseCategory:"Vyberte kategorii",address:"Úplná adresa nebo PSČ",website:"Web nebo odkaz na sociální síť",phone:"Telefon, nepovinné",policy:"Pravidla pro zvířata — např. psi vítáni na terase",name:"Vaše jméno",email:"Váš email",details:"Řekněte nám, proč je toto místo pet-friendly a co by návštěvníci měli vědět...",agreement:"Potvrzuji, že informace jsou správné, a chápu, že budou před zveřejněním zkontrolovány.",button:"Odeslat ke kontrole"},
+club:{title:"Výhody PETS & DOGUE Club",description:"Členové Club mohou získat vybrané nabídky od pet-friendly hotelů, kaváren, groomerů, cestovních partnerů a důvěryhodných místních firem.",hotel:"🏨 Hotelové slevy",cafe:"☕ Nabídky kaváren",grooming:"✂️ Grooming výhody",bookings:"🎟 Partnerské rezervace",local:"📍 Místní doporučení",qr:"💚 QR karta člena",button:"Prozkoumat výhody Club"},
+footer:{home:"Domů",community:"Místní komunita",travel:"Cestování se zvířaty",wellness:"Wellness",partners:"Partneři",club:"Club",account:"Účet",contact:"Kontakt"},
+messages:{enterLocation:"Nejprve zadejte město, zemi nebo PSČ.",findingLocation:"Vyhledávání lokality…",locationFailed:"Vyhledávání lokality selhalo.",notFound:"Lokalita nebyla nalezena. Zkuste město se zemí nebo úplné PSČ.",unableSearch:"Tuto lokalitu nelze vyhledat.",geoUnsupported:"Tento prohlížeč nepodporuje geolokaci.",waitingPermission:"Čekáme na povolení polohy…",currentLocation:"Vaše aktuální poloha",currentLocationShort:"Aktuální poloha",yourLocation:"Vaše poloha",unableNearby:"Nelze načíst okolní místa.",permissionDenied:"Přístup k poloze byl zamítnut.",locationUnknown:"Vaši polohu se nepodařilo určit.",locationTimeout:"Požadavek na polohu vypršel.",unableCurrent:"Nelze použít vaši aktuální polohu.",searchingOSM:"Vyhledávání okolních míst v OpenStreetMap…",mapBusy:"Veřejná mapová služba je zaneprázdněná. Zkuste to prosím později.",internetFound:"Nalezeno {count} internetových míst poblíž {location}.",categoryRefresh:"Kategorie se nepodařila obnovit. Stávající výsledky zůstávají dostupné."},
+policy:{welcome:"🐾 OpenStreetMap uvádí, že psi nebo domácí zvířata jsou vítáni.",lead:"🦮 Psi jsou zřejmě povoleni na vodítku.",no:"🚫 OpenStreetMap uvádí, že psi nemusí být povoleni.",dogPark:"🐕 Vyhrazený psí park.",unconfirmed:"ℹ️ Pravidla pro zvířata nejsou potvrzena. Před návštěvou kontaktujte provozovatele."},
+dynamic:{defaultPlaceName:"Pet-Friendly místo",localDescription:"Vybrané pet-friendly místo PETS & DOGUE.",confirmPolicy:"Kontaktujte provozovatele a potvrďte aktuální pravidla pro zvířata.",genericPlace:"Místo: {category}",cuisine:"Kuchyně: {value}.",outdoor:"K dispozici je venkovní posezení.",hours:"Otevírací doba: {value}.",osmPlace:"Místo kategorie {category} nalezené přes OpenStreetMap.",reportedPlace:"Nahlášené místo",verifiedBadge:"✓ OVĚŘENO DOGUE",reviewBadge:"⚠ V KONTROLE",locationUnavailable:"Lokalita není dostupná",communityReports:"Hlášení komunity",disputed:"⚠️ Pravidla pro zvířata jsou zpochybněna. Toto místo je nyní kontrolováno komunitou.",policyUnknown:"Pravidla pro zvířata nejsou potvrzena.",placeInfo:"Informace o pet-friendly místě.",details:"Detaily",directions:"Trasa",saved:"♥ Uloženo",save:"♡ Uložit",reported:"✓ Nahlášeno",report:"🚩 Nahlásit",trustScore:"DOGUE Trust Score",website:"Navštívit web",reportProblem:"🚩 Nahlásit problém",close:"Zavřít",modalDisputed:"⚠️ Tato pravidla pro zvířata jsou aktuálně zpochybněna a kontrolována.",metresAway:"{value} m daleko",kmAway:"{value} km daleko",remove:"Odstranit"},
+trust:{review:"🟠 V kontrole",verified:"🟢 Ověřeno DOGUE",favourite:"🟢 Oblíbené komunitou",new:"🟡 Nové / neověřené místo",limited:"🟠 Omezená data důvěry"},
+report:{title:"Nahlásit problém",description:"Řekněte nám, co se na tomto místě změnilo.",notice:"Z tohoto prohlížeče lze odeslat jedno hlášení pro každé místo. Hlášení se kontrolují prostřednictvím DOGUE Trust Center.",notFriendly:"❌ Už není pet-friendly",refused:"🚫 Personál odmítl zvířata",closed:"🏪 Trvale zavřeno",address:"📍 Špatná adresa",phone:"☎️ Špatné telefonní číslo",website:"🌐 Web nedostupný",unsafe:"⚠️ Nebezpečné místo nebo podmínky",other:"✍️ Jiný problém",details:"Přidejte užitečné detaily, nepovinné...",button:"Odeslat hlášení",already:"Toto místo jste již z tohoto prohlížeče nahlásili.",reporting:"Hlášení: {name}",choose:"Vyberte důvod hlášení.",alreadyShort:"Toto místo jste již nahlásili.",hidden:"Děkujeme. Toto místo dosáhlo limitu komunitních hlášení a je dočasně skryto do kontroly administrátorem.",underReview:"Děkujeme. Toto místo je nyní označeno V kontrole, zatímco se ověřují pravidla pro zvířata.",saved:"Děkujeme. Vaše hlášení bylo uloženo pro moderaci DOGUE Trust."},
+submitMessages:{required:"Vyplňte název místa, kategorii, adresu a email.",email:"Zadejte platnou emailovou adresu.",agreement:"Potvrďte správnost odesílaných informací.",communityPolicy:"Pravidla pro zvířata poskytl člen komunity.",communityMember:"Člen komunity",success:"Děkujeme. Místo bylo uloženo jako Pending Review a je připraveno k moderaci administrátorem.",lookupFailed:"Vyhledání adresy selhalo."}
+},
+
+sk:{
+meta:{title:"Miesta priateľské k zvieratám | PETS & DOGUE",description:"Vyhľadávajte pet-friendly kaviarne, hotely, parky, pláže, veterinárne kliniky, groomerov a ďalšie miesta cez PETS & DOGUE."},
+hero:{title:"Pet-Friendly miesta",description:"Vyhľadávajte skutočné miesta pri akomkoľvek meste alebo PSČ, prezerajte ich na mape, pridávajte nové lokality a pomáhajte udržiavať adresár PETS & DOGUE presný.",search:"Hľadať miesta",add:"Pridať miesto",club:"Pridať sa do Club"},
+stats:{results:"Výsledky",internet:"Internetové miesta",verified:"Overené DOGUE",saved:"Uložené",review:"V kontrole"},
+directory:{title:"Nájdite miesta vo svojom okolí"},
+search:{locationPlaceholder:"Mesto, krajina alebo PSČ — napr. Bournemouth BH2",button:"Hľadať",myLocation:"📍 Použiť moju polohu",help:"Internetové výsledky pochádzajú z OpenStreetMap. Informácie o pravidlách pre zvieratá môžu byť neúplné, preto ich pred návštevou vždy overte priamo u prevádzky."},
+categories:{all:"Všetky kategórie",cafes:"Kaviarne",restaurants:"Reštaurácie",hotels:"Hotely",parksDogParks:"Parky a psie parky",parks:"Parky",beaches:"Pláže",vetsFull:"Veterinárne kliniky",vets:"Veterinári",groomers:"Groomeri",petShops:"Chovateľské potreby"},
+categoryLabels:{Cafe:"Kaviareň",Restaurant:"Reštaurácia",Hotel:"Hotel",Park:"Park",Beach:"Pláž",Veterinary:"Veterinár",Grooming:"Grooming",PetShop:"Chovateľské potreby",Other:"Iné"},
+sources:{internet:"Internetový výsledok",community:"Pridané komunitou",verified:"Overené DOGUE",review:"V kontrole",internetShort:"INTERNET",communityShort:"KOMUNITA"},
+filters:{all:"Všetky"},
+results:{defaultTitle:"Miesta PETS & DOGUE",defaultSubtitle:"Vyhľadajte lokalitu alebo použite svoju aktuálnu polohu.",one:"Zobrazené 1 miesto",many:"Zobrazených miest: {count}"},
+sort:{distance:"Najbližšie prvé",trust:"Najvyššie Trust Score",name:"Názov A–Z",source:"Najprv miesta DOGUE"},
+empty:{title:"Nenašli sa žiadne miesta",description:"Skúste väčší rádius, inú kategóriu alebo lokalitu."},
+map:{title:"Živá mapa",searchTitle:"Vyhľadajte lokalitu",searchText:"Tu sa zobrazia skutočné značky mapy.",one:"1 miesto na mape",many:"Miest na mape: {count}",near:"Výsledky pri {location}.",noSearch:"Vyhľadajte lokalitu na načítanie okolitých internetových výsledkov."},
+saved:{title:"Uložené miesta",emptyTitle:"Vaše uložené miesta sa zobrazia tu",emptyText:"Použite tlačidlo Uložiť na karte miesta.",location:"Uložená lokalita"},
+submit:{title:"Pridať Pet-Friendly miesto",description:"Poznáte kaviareň, hotel, park, pláž, groomera alebo iné miesto, kde vítajú zvieratá? Pošlite ho na redakčnú kontrolu. Verejné bude až po schválení.",placeName:"Názov miesta",chooseCategory:"Vyberte kategóriu",address:"Úplná adresa alebo PSČ",website:"Web alebo sociálny odkaz",phone:"Telefón, nepovinné",policy:"Pravidlá pre zvieratá — napr. psy vítané na terase",name:"Vaše meno",email:"Váš email",details:"Povedzte nám, prečo je toto miesto pet-friendly a čo by návštevníci mali vedieť...",agreement:"Potvrdzujem, že informácie sú správne, a rozumiem, že pred zverejnením budú skontrolované.",button:"Odoslať na kontrolu"},
+club:{title:"Výhody PETS & DOGUE Club",description:"Členovia Club môžu získať vybrané ponuky od pet-friendly hotelov, kaviarní, groomerov, cestovných partnerov a dôveryhodných miestnych firiem.",hotel:"🏨 Hotelové zľavy",cafe:"☕ Ponuky kaviarní",grooming:"✂️ Grooming výhody",bookings:"🎟 Partnerské rezervácie",local:"📍 Miestne odporúčania",qr:"💚 QR karta člena",button:"Preskúmať výhody Club"},
+footer:{home:"Domov",community:"Miestna komunita",travel:"Cestovanie so zvieratami",wellness:"Wellness",partners:"Partneri",club:"Club",account:"Účet",contact:"Kontakt"},
+messages:{enterLocation:"Najprv zadajte mesto, krajinu alebo PSČ.",findingLocation:"Vyhľadávanie lokality…",locationFailed:"Vyhľadávanie lokality zlyhalo.",notFound:"Lokalita sa nenašla. Skúste mesto s krajinou alebo úplné PSČ.",unableSearch:"Túto lokalitu nemožno vyhľadať.",geoUnsupported:"Tento prehliadač nepodporuje geolokáciu.",waitingPermission:"Čaká sa na povolenie polohy…",currentLocation:"Vaša aktuálna poloha",currentLocationShort:"Aktuálna poloha",yourLocation:"Vaša poloha",unableNearby:"Nepodarilo sa načítať okolité miesta.",permissionDenied:"Prístup k polohe bol zamietnutý.",locationUnknown:"Vašu polohu sa nepodarilo určiť.",locationTimeout:"Požiadavka na polohu vypršala.",unableCurrent:"Vašu aktuálnu polohu nemožno použiť.",searchingOSM:"Vyhľadávanie okolitých miest v OpenStreetMap…",mapBusy:"Verejná mapová služba je zaneprázdnená. Skúste to znova o chvíľu.",internetFound:"Nájdených {count} internetových miest pri {location}.",categoryRefresh:"Kategóriu sa nepodarilo obnoviť. Existujúce výsledky zostávajú dostupné."},
+policy:{welcome:"🐾 OpenStreetMap uvádza, že psy alebo domáce zvieratá sú vítané.",lead:"🦮 Psy sú zrejme povolené na vôdzke.",no:"🚫 OpenStreetMap uvádza, že psy nemusia byť povolené.",dogPark:"🐕 Vyhradený psí park.",unconfirmed:"ℹ️ Pravidlá pre zvieratá nie sú potvrdené. Pred návštevou kontaktujte prevádzku."},
+dynamic:{defaultPlaceName:"Pet-Friendly miesto",localDescription:"Vybrané pet-friendly miesto PETS & DOGUE.",confirmPolicy:"Kontaktujte prevádzku a potvrďte aktuálne pravidlá pre zvieratá.",genericPlace:"Miesto: {category}",cuisine:"Kuchyňa: {value}.",outdoor:"K dispozícii je vonkajšie sedenie.",hours:"Otváracie hodiny: {value}.",osmPlace:"Miesto kategórie {category} nájdené cez OpenStreetMap.",reportedPlace:"Nahlásené miesto",verifiedBadge:"✓ OVERENÉ DOGUE",reviewBadge:"⚠ V KONTROLE",locationUnavailable:"Lokalita nie je dostupná",communityReports:"Hlásenia komunity",disputed:"⚠️ Pravidlá pre zvieratá sú spochybnené. Toto miesto je momentálne kontrolované komunitou.",policyUnknown:"Pravidlá pre zvieratá nie sú potvrdené.",placeInfo:"Informácie o pet-friendly mieste.",details:"Detaily",directions:"Trasa",saved:"♥ Uložené",save:"♡ Uložiť",reported:"✓ Nahlásené",report:"🚩 Nahlásiť",trustScore:"DOGUE Trust Score",website:"Navštíviť web",reportProblem:"🚩 Nahlásiť problém",close:"Zavrieť",modalDisputed:"⚠️ Tieto pravidlá pre zvieratá sú momentálne spochybnené a kontrolujú sa.",metresAway:"{value} m ďaleko",kmAway:"{value} km ďaleko",remove:"Odstrániť"},
+trust:{review:"🟠 V kontrole",verified:"🟢 Overené DOGUE",favourite:"🟢 Obľúbené komunitou",new:"🟡 Nové / neoverené miesto",limited:"🟠 Obmedzené údaje dôvery"},
+report:{title:"Nahlásiť problém",description:"Povedzte nám, čo sa na tomto mieste zmenilo.",notice:"Z tohto prehliadača možno odoslať jedno hlásenie na každé miesto. Hlásenia sa kontrolujú cez DOGUE Trust Center.",notFriendly:"❌ Už nie je pet-friendly",refused:"🚫 Personál odmietol zvieratá",closed:"🏪 Trvalo zatvorené",address:"📍 Nesprávna adresa",phone:"☎️ Nesprávne telefónne číslo",website:"🌐 Web nedostupný",unsafe:"⚠️ Nebezpečné miesto alebo podmienky",other:"✍️ Iný problém",details:"Pridajte užitočné detaily, nepovinné...",button:"Odoslať hlásenie",already:"Toto miesto ste už z tohto prehliadača nahlásili.",reporting:"Hlásenie: {name}",choose:"Vyberte dôvod hlásenia.",alreadyShort:"Toto miesto ste už nahlásili.",hidden:"Ďakujeme. Miesto dosiahlo limit komunitných hlásení a je dočasne skryté do kontroly administrátorom.",underReview:"Ďakujeme. Miesto je teraz označené V kontrole, kým sa overujú pravidlá pre zvieratá.",saved:"Ďakujeme. Vaše hlásenie bolo uložené na moderáciu DOGUE Trust."},
+submitMessages:{required:"Vyplňte názov miesta, kategóriu, adresu a email.",email:"Zadajte platnú emailovú adresu.",agreement:"Potvrďte správnosť odoslaných informácií.",communityPolicy:"Pravidlá pre zvieratá poskytol člen komunity.",communityMember:"Člen komunity",success:"Ďakujeme. Miesto bolo uložené ako Pending Review a je pripravené na moderáciu administrátorom.",lookupFailed:"Vyhľadanie adresy zlyhalo."}
+},
+
+hu:{
+meta:{title:"Állatbarát helyek | PETS & DOGUE",description:"Keressen állatbarát kávézókat, hoteleket, parkokat, strandokat, állatorvosokat, groomereket és más helyeket a PETS & DOGUE segítségével."},
+hero:{title:"Állatbarát Helyek",description:"Keressen valódi helyeket bármely város vagy irányítószám közelében, fedezze fel őket a térképen, küldjön be új helyeket és segítsen pontosan tartani a PETS & DOGUE címtárát.",search:"Helyek keresése",add:"Hely hozzáadása",club:"Csatlakozás a Clubhoz"},
+stats:{results:"Találatok",internet:"Internetes helyek",verified:"DOGUE ellenőrzött",saved:"Mentve",review:"Ellenőrzés alatt"},
+directory:{title:"Helyek keresése a közelben"},
+search:{locationPlaceholder:"Város, ország vagy irányítószám — pl. Bournemouth BH2",button:"Keresés",myLocation:"📍 Saját helyzet használata",help:"Az internetes találatok az OpenStreetMapből származnak. Az állatszabályzat hiányos lehet, ezért látogatás előtt mindig erősítse meg közvetlenül a helyszínnel."},
+categories:{all:"Minden kategória",cafes:"Kávézók",restaurants:"Éttermek",hotels:"Hotelek",parksDogParks:"Parkok és kutyaparkok",parks:"Parkok",beaches:"Strandok",vetsFull:"Állatorvosi klinikák",vets:"Állatorvosok",groomers:"Groomerek",petShops:"Állatboltok"},
+categoryLabels:{Cafe:"Kávézó",Restaurant:"Étterem",Hotel:"Hotel",Park:"Park",Beach:"Strand",Veterinary:"Állatorvos",Grooming:"Grooming",PetShop:"Állatbolt",Other:"Egyéb"},
+sources:{internet:"Internetes találat",community:"Közösség által beküldve",verified:"DOGUE ellenőrzött",review:"Ellenőrzés alatt",internetShort:"INTERNET",communityShort:"KÖZÖSSÉG"},
+filters:{all:"Mind"},
+results:{defaultTitle:"PETS & DOGUE helyek",defaultSubtitle:"Keressen helyet vagy használja aktuális pozícióját.",one:"1 hely látható",many:"{count} hely látható"},
+sort:{distance:"Legközelebbi először",trust:"Legmagasabb Trust Score",name:"Név A–Z",source:"DOGUE-helyek először"},
+empty:{title:"Nem található hely",description:"Próbáljon nagyobb sugarat, másik kategóriát vagy helyet."},
+map:{title:"Élő térkép",searchTitle:"Hely keresése",searchText:"A valódi térképes jelölők itt jelennek meg.",one:"1 hely a térképen",many:"{count} hely a térképen",near:"Találatok {location} közelében.",noSearch:"Keressen helyet a közeli internetes találatok betöltéséhez."},
+saved:{title:"Mentett helyek",emptyTitle:"Mentett helyei itt jelennek meg",emptyText:"Használja a Mentés gombot bármely helykártyán.",location:"Mentett hely"},
+submit:{title:"Állatbarát hely hozzáadása",description:"Ismer olyan kávézót, hotelt, parkot, strandot, groomert vagy más helyet, ahol szívesen látják az állatokat? Küldje be szerkesztőségi ellenőrzésre. Csak jóváhagyás után lesz nyilvános.",placeName:"Hely neve",chooseCategory:"Kategória választása",address:"Teljes cím vagy irányítószám",website:"Weboldal vagy közösségi link",phone:"Telefon, opcionális",policy:"Állatszabályzat — pl. kutyák a teraszon engedélyezettek",name:"Az Ön neve",email:"Az Ön emailje",details:"Írja le, miért állatbarát ez a hely és mit érdemes tudni a látogatóknak...",agreement:"Megerősítem, hogy az információ pontos, és tudomásul veszem, hogy publikálás előtt ellenőrzik.",button:"Beküldés ellenőrzésre"},
+club:{title:"PETS & DOGUE Club előnyök",description:"A Club tagjai válogatott ajánlatokat kaphatnak állatbarát hotelektől, kávézóktól, groomerektől, utazási partnerektől és megbízható helyi vállalkozásoktól.",hotel:"🏨 Hotelkedvezmények",cafe:"☕ Kávézóajánlatok",grooming:"✂️ Grooming előnyök",bookings:"🎟 Partnerfoglalások",local:"📍 Helyi ajánlások",qr:"💚 Tagi QR-kártya",button:"Club előnyök megtekintése"},
+footer:{home:"Kezdőlap",community:"Helyi közösség",travel:"Utazás állatokkal",wellness:"Wellness",partners:"Partnerek",club:"Club",account:"Fiók",contact:"Kapcsolat"},
+messages:{enterLocation:"Először adjon meg várost, országot vagy irányítószámot.",findingLocation:"Hely keresése…",locationFailed:"A helykeresés sikertelen.",notFound:"A hely nem található. Próbáljon várost országgal vagy teljes irányítószámot.",unableSearch:"Ez a hely nem kereshető.",geoUnsupported:"A böngésző nem támogatja a helymeghatározást.",waitingPermission:"Várakozás helyengedélyre…",currentLocation:"Az Ön aktuális helye",currentLocationShort:"Aktuális hely",yourLocation:"Az Ön helye",unableNearby:"A közeli helyek nem tölthetők be.",permissionDenied:"A helyengedély megtagadva.",locationUnknown:"Az Ön helye nem határozható meg.",locationTimeout:"A helylekérés időtúllépést ért el.",unableCurrent:"Az aktuális hely nem használható.",searchingOSM:"Közeli helyek keresése az OpenStreetMapen…",mapBusy:"A nyilvános térképszolgáltatás foglalt. Próbálja újra rövidesen.",internetFound:"{count} internetes hely található {location} közelében.",categoryRefresh:"A kategória nem frissíthető. A meglévő találatok továbbra is elérhetők."},
+policy:{welcome:"🐾 Az OpenStreetMap szerint kutyák vagy háziállatok engedélyezettek.",lead:"🦮 A kutyák valószínűleg pórázon engedélyezettek.",no:"🚫 Az OpenStreetMap szerint a kutyák lehet, hogy nem engedélyezettek.",dogPark:"🐕 Külön kutyapark.",unconfirmed:"ℹ️ Az állatszabályzat nincs megerősítve. Látogatás előtt lépjen kapcsolatba a hellyel."},
+dynamic:{defaultPlaceName:"Állatbarát hely",localDescription:"Válogatott PETS & DOGUE állatbarát hely.",confirmPolicy:"Lépjen kapcsolatba a hellyel az aktuális állatszabályzat megerősítéséhez.",genericPlace:"{category} hely",cuisine:"Konyha: {value}.",outdoor:"Kültéri ülőhelyek elérhetők.",hours:"Nyitvatartás: {value}.",osmPlace:"{category} hely az OpenStreetMap segítségével találva.",reportedPlace:"Jelentett hely",verifiedBadge:"✓ DOGUE ELLENŐRZÖTT",reviewBadge:"⚠ ELLENŐRZÉS ALATT",locationUnavailable:"Hely nem elérhető",communityReports:"Közösségi jelentések",disputed:"⚠️ Az állatszabályzat vitatott. A hely jelenleg közösségi ellenőrzés alatt áll.",policyUnknown:"Állatszabályzat nincs megerősítve.",placeInfo:"Információ az állatbarát helyről.",details:"Részletek",directions:"Útvonal",saved:"♥ Mentve",save:"♡ Mentés",reported:"✓ Jelentve",report:"🚩 Jelentés",trustScore:"DOGUE Trust Score",website:"Weboldal",reportProblem:"🚩 Probléma jelentése",close:"Bezárás",modalDisputed:"⚠️ Ez az állatszabályzat jelenleg vitatott és ellenőrzés alatt áll.",metresAway:"{value} m-re",kmAway:"{value} km-re",remove:"Eltávolítás"},
+trust:{review:"🟠 Ellenőrzés alatt",verified:"🟢 DOGUE ellenőrzött",favourite:"🟢 Közösségi kedvenc",new:"🟡 Új / nem ellenőrzött hely",limited:"🟠 Korlátozott bizalmi adatok"},
+report:{title:"Probléma jelentése",description:"Mondja el, mi változott ezen a helyen.",notice:"Ebből a böngészőből helyenként egy jelentés küldhető. A jelentéseket a DOGUE Trust Center vizsgálja.",notFriendly:"❌ Már nem állatbarát",refused:"🚫 A személyzet elutasította az állatokat",closed:"🏪 Végleg bezárt",address:"📍 Hibás cím",phone:"☎️ Hibás telefonszám",website:"🌐 Weboldal nem elérhető",unsafe:"⚠️ Nem biztonságos hely vagy körülmények",other:"✍️ Egyéb probléma",details:"Hasznos részletek, opcionális...",button:"Jelentés küldése",already:"Ezt a helyet már jelentette ebből a böngészőből.",reporting:"Jelentés: {name}",choose:"Válassza ki a jelentés okát.",alreadyShort:"Ezt a helyet már jelentette.",hidden:"Köszönjük. A hely elérte a közösségi jelentési küszöböt, ezért ideiglenesen rejtve van adminisztrátori ellenőrzésig.",underReview:"Köszönjük. A hely most Ellenőrzés alatt jelölést kapott, amíg ellenőrzik az állatszabályzatát.",saved:"Köszönjük. Jelentését elmentettük DOGUE Trust moderációra."},
+submitMessages:{required:"Töltse ki a hely nevét, kategóriáját, címét és emailjét.",email:"Adjon meg érvényes email-címet.",agreement:"Erősítse meg a beküldött információ pontosságát.",communityPolicy:"Az állatszabályzatot egy közösségi tag adta meg.",communityMember:"Közösségi tag",success:"Köszönjük. A hely Pending Review státusszal mentésre került, és készen áll az adminisztrátori moderációra.",lookupFailed:"A címkeresés sikertelen."}
+},
+
+ro:{
+meta:{title:"Locuri pet-friendly | PETS & DOGUE",description:"Caută cafenele, hoteluri, parcuri, plaje, clinici veterinare, groomeri și alte locuri pet-friendly cu PETS & DOGUE."},
+hero:{title:"Locuri Pet-Friendly",description:"Caută locuri reale lângă orice oraș sau cod poștal, explorează-le pe hartă, adaugă locații noi și ajută la păstrarea corectă a directorului PETS & DOGUE.",search:"Caută locuri",add:"Adaugă un loc",club:"Intră în Club"},
+stats:{results:"Rezultate",internet:"Locuri de pe Internet",verified:"Verificat DOGUE",saved:"Salvate",review:"În verificare"},
+directory:{title:"Găsește locuri în apropiere"},
+search:{locationPlaceholder:"Oraș, țară sau cod poștal — ex. Bournemouth BH2",button:"Caută",myLocation:"📍 Folosește locația mea",help:"Rezultatele de pe Internet provin din OpenStreetMap. Informațiile despre politica privind animalele pot fi incomplete, așa că verifică întotdeauna direct cu locația înainte de vizită."},
+categories:{all:"Toate categoriile",cafes:"Cafenele",restaurants:"Restaurante",hotels:"Hoteluri",parksDogParks:"Parcuri și parcuri pentru câini",parks:"Parcuri",beaches:"Plaje",vetsFull:"Clinici veterinare",vets:"Veterinari",groomers:"Groomeri",petShops:"Magazine pentru animale"},
+categoryLabels:{Cafe:"Cafenea",Restaurant:"Restaurant",Hotel:"Hotel",Park:"Parc",Beach:"Plajă",Veterinary:"Veterinar",Grooming:"Grooming",PetShop:"Magazin pentru animale",Other:"Altul"},
+sources:{internet:"Rezultat Internet",community:"Trimis de comunitate",verified:"Verificat DOGUE",review:"În verificare",internetShort:"INTERNET",communityShort:"COMUNITATE"},
+filters:{all:"Toate"},
+results:{defaultTitle:"Locuri PETS & DOGUE",defaultSubtitle:"Caută o locație sau folosește poziția actuală.",one:"1 loc afișat",many:"{count} locuri afișate"},
+sort:{distance:"Cele mai apropiate",trust:"Cel mai mare Trust Score",name:"Nume A–Z",source:"Locurile DOGUE primele"},
+empty:{title:"Nu s-au găsit locuri",description:"Încearcă o rază mai mare, altă categorie sau locație."},
+map:{title:"Hartă live",searchTitle:"Caută o locație",searchText:"Marcajele reale vor apărea aici.",one:"1 loc pe hartă",many:"{count} locuri pe hartă",near:"Rezultate lângă {location}.",noSearch:"Caută o locație pentru a încărca rezultatele Internet din apropiere."},
+saved:{title:"Locuri salvate",emptyTitle:"Locurile salvate vor apărea aici",emptyText:"Folosește butonul Salvare de pe orice card.",location:"Locație salvată"},
+submit:{title:"Adaugă un loc Pet-Friendly",description:"Știi o cafenea, un hotel, parc, plajă, groomer sau alt loc care acceptă animale? Trimite-l pentru verificare editorială. Nu va fi public până la aprobare.",placeName:"Numele locului",chooseCategory:"Alege categoria",address:"Adresa completă sau cod poștal",website:"Website sau link social",phone:"Telefon, opțional",policy:"Politica pentru animale — ex. câinii sunt acceptați pe terasă",name:"Numele tău",email:"Emailul tău",details:"Spune-ne de ce acest loc este pet-friendly și ce ar trebui să știe vizitatorii...",agreement:"Confirm că informațiile sunt corecte și înțeleg că trimiterea va fi verificată înainte de publicare.",button:"Trimite pentru verificare"},
+club:{title:"Beneficii PETS & DOGUE Club",description:"Membrii Club pot primi oferte selectate de la hoteluri pet-friendly, cafenele, groomeri, parteneri de călătorie și afaceri locale de încredere.",hotel:"🏨 Reduceri la hotel",cafe:"☕ Oferte cafenele",grooming:"✂️ Beneficii grooming",bookings:"🎟 Rezervări parteneri",local:"📍 Recomandări locale",qr:"💚 Card QR de membru",button:"Explorează beneficiile Club"},
+footer:{home:"Acasă",community:"Comunitate locală",travel:"Călătorii cu animale",wellness:"Wellness",partners:"Parteneri",club:"Club",account:"Cont",contact:"Contact"},
+messages:{enterLocation:"Introdu mai întâi un oraș, o țară sau un cod poștal.",findingLocation:"Se caută locația…",locationFailed:"Căutarea locației a eșuat.",notFound:"Locația nu a fost găsită. Încearcă un oraș cu țara sau un cod poștal complet.",unableSearch:"Această locație nu poate fi căutată.",geoUnsupported:"Geolocația nu este suportată de acest browser.",waitingPermission:"Se așteaptă permisiunea pentru locație…",currentLocation:"Locația ta actuală",currentLocationShort:"Locația actuală",yourLocation:"Locația ta",unableNearby:"Nu s-au putut încărca locurile apropiate.",permissionDenied:"Permisiunea pentru locație a fost refuzată.",locationUnknown:"Locația ta nu a putut fi determinată.",locationTimeout:"Cererea pentru locație a expirat.",unableCurrent:"Locația actuală nu poate fi utilizată.",searchingOSM:"Se caută locuri apropiate pe OpenStreetMap…",mapBusy:"Serviciul public de hărți este ocupat. Încearcă din nou în scurt timp.",internetFound:"S-au găsit {count} locuri de pe Internet lângă {location}.",categoryRefresh:"Categoria nu a putut fi reîmprospătată. Rezultatele existente rămân disponibile."},
+policy:{welcome:"🐾 OpenStreetMap indică faptul că sunt acceptați câini sau animale.",lead:"🦮 Câinii par să fie permiși în lesă.",no:"🚫 OpenStreetMap indică faptul că este posibil ca accesul câinilor să nu fie permis.",dogPark:"🐕 Parc dedicat câinilor.",unconfirmed:"ℹ️ Politica pentru animale nu este confirmată. Contactează locația înainte de vizită."},
+dynamic:{defaultPlaceName:"Loc Pet-Friendly",localDescription:"Loc pet-friendly selectat de PETS & DOGUE.",confirmPolicy:"Contactează locația pentru a confirma politica actuală privind animalele.",genericPlace:"Loc {category}",cuisine:"Bucătărie: {value}.",outdoor:"Sunt disponibile locuri în aer liber.",hours:"Program: {value}.",osmPlace:"Loc din categoria {category} găsit prin OpenStreetMap.",reportedPlace:"Loc raportat",verifiedBadge:"✓ VERIFICAT DOGUE",reviewBadge:"⚠ ÎN VERIFICARE",locationUnavailable:"Locație indisponibilă",communityReports:"Rapoarte ale comunității",disputed:"⚠️ Politica pentru animale este contestată. Acest loc este verificat de comunitate.",policyUnknown:"Politică pentru animale neconfirmată.",placeInfo:"Informații despre locul pet-friendly.",details:"Detalii",directions:"Indicații",saved:"♥ Salvat",save:"♡ Salvează",reported:"✓ Raportat",report:"🚩 Raportează",trustScore:"DOGUE Trust Score",website:"Vizitează site-ul",reportProblem:"🚩 Raportează problemă",close:"Închide",modalDisputed:"⚠️ Această politică pentru animale este în prezent contestată și în verificare.",metresAway:"la {value} m",kmAway:"la {value} km",remove:"Elimină"},
+trust:{review:"🟠 În verificare",verified:"🟢 Verificat DOGUE",favourite:"🟢 Favoritul comunității",new:"🟡 Loc nou / neverificat",limited:"🟠 Date de încredere limitate"},
+report:{title:"Raportează o problemă",description:"Spune-ne ce s-a schimbat la acest loc.",notice:"Poate fi trimis un raport din acest browser pentru fiecare loc. Rapoartele sunt verificate prin DOGUE Trust Center.",notFriendly:"❌ Nu mai este pet-friendly",refused:"🚫 Personalul a refuzat animalele",closed:"🏪 Închis permanent",address:"📍 Adresă greșită",phone:"☎️ Număr de telefon greșit",website:"🌐 Website indisponibil",unsafe:"⚠️ Loc sau condiții nesigure",other:"✍️ Altă problemă",details:"Adaugă detalii utile, opțional...",button:"Trimite raportul",already:"Ai raportat deja acest loc din acest browser.",reporting:"Raportare: {name}",choose:"Alege un motiv pentru raport.",alreadyShort:"Ai raportat deja acest loc.",hidden:"Mulțumim. Acest loc a atins pragul de raportări al comunității și este ascuns temporar până la verificarea administratorului.",underReview:"Mulțumim. Acest loc este acum marcat În verificare cât timp este verificată politica pentru animale.",saved:"Mulțumim. Raportul tău a fost salvat pentru moderarea DOGUE Trust."},
+submitMessages:{required:"Completează numele locului, categoria, adresa și emailul.",email:"Introdu o adresă de email validă.",agreement:"Confirmă că informațiile trimise sunt corecte.",communityPolicy:"Politică pentru animale furnizată de un membru al comunității.",communityMember:"Membru al comunității",success:"Mulțumim. Locul a fost salvat ca Pending Review și este pregătit pentru moderarea administratorului.",lookupFailed:"Căutarea adresei a eșuat."}
+},
+
+bg:{
+meta:{title:"Места, подходящи за домашни любимци | PETS & DOGUE",description:"Търсете pet-friendly кафенета, хотели, паркове, плажове, ветеринарни клиники, грумъри и други места с PETS & DOGUE."},
+hero:{title:"Pet-Friendly места",description:"Търсете реални места близо до всеки град или пощенски код, разглеждайте ги на картата, добавяйте нови локации и помагайте каталогът PETS & DOGUE да остане точен.",search:"Търси места",add:"Добави място",club:"Присъедини се към Club"},
+stats:{results:"Резултати",internet:"Места от интернет",verified:"Проверено от DOGUE",saved:"Запазени",review:"В проверка"},
+directory:{title:"Намерете места близо до вас"},
+search:{locationPlaceholder:"Град, държава или пощенски код — напр. Bournemouth BH2",button:"Търси",myLocation:"📍 Използвай моята локация",help:"Резултатите от интернет идват от OpenStreetMap. Информацията за правилата за животни може да е непълна, затова винаги я потвърждавайте директно с обекта преди посещение."},
+categories:{all:"Всички категории",cafes:"Кафенета",restaurants:"Ресторанти",hotels:"Хотели",parksDogParks:"Паркове и паркове за кучета",parks:"Паркове",beaches:"Плажове",vetsFull:"Ветеринарни клиники",vets:"Ветеринари",groomers:"Грумъри",petShops:"Зоомагазини"},
+categoryLabels:{Cafe:"Кафене",Restaurant:"Ресторант",Hotel:"Хотел",Park:"Парк",Beach:"Плаж",Veterinary:"Ветеринар",Grooming:"Груминг",PetShop:"Зоомагазин",Other:"Друго"},
+sources:{internet:"Резултат от интернет",community:"Добавено от общността",verified:"Проверено от DOGUE",review:"В проверка",internetShort:"ИНТЕРНЕТ",communityShort:"ОБЩНОСТ"},
+filters:{all:"Всички"},
+results:{defaultTitle:"Места PETS & DOGUE",defaultSubtitle:"Потърсете локация или използвайте текущото си местоположение.",one:"Показано е 1 място",many:"Показани места: {count}"},
+sort:{distance:"Най-близките първо",trust:"Най-висок Trust Score",name:"Име А–Я",source:"Първо местата DOGUE"},
+empty:{title:"Не са намерени места",description:"Опитайте по-голям радиус, друга категория или локация."},
+map:{title:"Карта на живо",searchTitle:"Потърсете локация",searchText:"Тук ще се появят реални маркери.",one:"1 място на картата",many:"Места на картата: {count}",near:"Резултати близо до {location}.",noSearch:"Потърсете локация, за да заредите близки интернет резултати."},
+saved:{title:"Запазени места",emptyTitle:"Вашите запазени места ще се появят тук",emptyText:"Използвайте бутона Запази на карта на място.",location:"Запазена локация"},
+submit:{title:"Добави Pet-Friendly място",description:"Знаете кафене, хотел, парк, плаж, грумър или друго място, където животните са добре дошли? Изпратете го за редакционна проверка. Няма да стане публично преди одобрение.",placeName:"Име на мястото",chooseCategory:"Изберете категория",address:"Пълен адрес или пощенски код",website:"Сайт или социален линк",phone:"Телефон, по избор",policy:"Правила за животни — напр. кучета са добре дошли на терасата",name:"Вашето име",email:"Вашият email",details:"Разкажете защо това място е pet-friendly и какво трябва да знаят посетителите...",agreement:"Потвърждавам, че информацията е точна и разбирам, че ще бъде проверена преди публикуване.",button:"Изпрати за проверка"},
+club:{title:"Предимства на PETS & DOGUE Club",description:"Членовете на Club могат да получават избрани оферти от pet-friendly хотели, кафенета, грумъри, travel партньори и доверени местни бизнеси.",hotel:"🏨 Отстъпки в хотели",cafe:"☕ Оферти от кафенета",grooming:"✂️ Груминг предимства",bookings:"🎟 Партньорски резервации",local:"📍 Местни препоръки",qr:"💚 QR карта за членове",button:"Разгледай предимствата на Club"},
+footer:{home:"Начало",community:"Местна общност",travel:"Пътуване с животни",wellness:"Wellness",partners:"Партньори",club:"Club",account:"Акаунт",contact:"Контакт"},
+messages:{enterLocation:"Първо въведете град, държава или пощенски код.",findingLocation:"Търсим локацията…",locationFailed:"Търсенето на локация не бе успешно.",notFound:"Локацията не е намерена. Опитайте град с държава или пълен пощенски код.",unableSearch:"Тази локация не може да бъде намерена.",geoUnsupported:"Този браузър не поддържа геолокация.",waitingPermission:"Изчакване на разрешение за местоположение…",currentLocation:"Вашето текущо местоположение",currentLocationShort:"Текуща локация",yourLocation:"Вашата локация",unableNearby:"Не могат да се заредят близки места.",permissionDenied:"Разрешението за местоположение е отказано.",locationUnknown:"Вашето местоположение не може да бъде определено.",locationTimeout:"Заявката за местоположение изтече.",unableCurrent:"Текущото ви местоположение не може да бъде използвано.",searchingOSM:"Търсим близки места в OpenStreetMap…",mapBusy:"Публичната карта е заета. Опитайте отново след малко.",internetFound:"Намерени са {count} интернет места близо до {location}.",categoryRefresh:"Категорията не може да бъде обновена. Съществуващите резултати остават достъпни."},
+policy:{welcome:"🐾 OpenStreetMap показва, че кучета или домашни любимци са добре дошли.",lead:"🦮 Изглежда кучетата са позволени на повод.",no:"🚫 OpenStreetMap показва, че кучетата може да не са позволени.",dogPark:"🐕 Специален парк за кучета.",unconfirmed:"ℹ️ Правилата за животни не са потвърдени. Свържете се с обекта преди посещение."},
+dynamic:{defaultPlaceName:"Pet-Friendly място",localDescription:"Избрано pet-friendly място от PETS & DOGUE.",confirmPolicy:"Свържете се с обекта, за да потвърдите актуалните правила за животни.",genericPlace:"Място: {category}",cuisine:"Кухня: {value}.",outdoor:"Има места на открито.",hours:"Работно време: {value}.",osmPlace:"Място от категория {category}, намерено чрез OpenStreetMap.",reportedPlace:"Докладвано място",verifiedBadge:"✓ ПРОВЕРЕНО DOGUE",reviewBadge:"⚠ В ПРОВЕРКА",locationUnavailable:"Локацията не е достъпна",communityReports:"Сигнали от общността",disputed:"⚠️ Правилата за животни са оспорени. Мястото в момента се проверява от общността.",policyUnknown:"Правилата за животни не са потвърдени.",placeInfo:"Информация за pet-friendly мястото.",details:"Детайли",directions:"Маршрут",saved:"♥ Запазено",save:"♡ Запази",reported:"✓ Докладвано",report:"🚩 Докладвай",trustScore:"DOGUE Trust Score",website:"Посети сайта",reportProblem:"🚩 Докладвай проблем",close:"Затвори",modalDisputed:"⚠️ Тези правила за животни в момента са оспорени и се проверяват.",metresAway:"на {value} м",kmAway:"на {value} км",remove:"Премахни"},
+trust:{review:"🟠 В проверка",verified:"🟢 Проверено DOGUE",favourite:"🟢 Любимо на общността",new:"🟡 Ново / непроверено място",limited:"🟠 Ограничени данни за доверие"},
+report:{title:"Докладвай проблем",description:"Кажете ни какво се е променило в това място.",notice:"От този браузър може да бъде изпратен един сигнал за всяко място. Сигналите се проверяват чрез DOGUE Trust Center.",notFriendly:"❌ Вече не е pet-friendly",refused:"🚫 Персоналът отказа животни",closed:"🏪 Затворено окончателно",address:"📍 Грешен адрес",phone:"☎️ Грешен телефонен номер",website:"🌐 Сайтът не работи",unsafe:"⚠️ Опасно място или условия",other:"✍️ Друг проблем",details:"Добавете полезни детайли, по избор...",button:"Изпрати сигнал",already:"Вече сте докладвали това място от този браузър.",reporting:"Докладване: {name}",choose:"Изберете причина за сигнала.",alreadyShort:"Вече сте докладвали това място.",hidden:"Благодарим. Мястото достигна прага за сигнали от общността и временно е скрито до проверка от администратор.",underReview:"Благодарим. Мястото вече е отбелязано В проверка, докато се проверяват правилата за животни.",saved:"Благодарим. Сигналът ви е запазен за модерация от DOGUE Trust."},
+submitMessages:{required:"Попълнете името на мястото, категорията, адреса и email.",email:"Въведете валиден email адрес.",agreement:"Потвърдете, че изпратената информация е точна.",communityPolicy:"Правила за животни, предоставени от член на общността.",communityMember:"Член на общността",success:"Благодарим. Мястото е запазено като Pending Review и е готово за модерация от администратор.",lookupFailed:"Търсенето на адрес не бе успешно."}
+},
+
+el:{
+meta:{title:"Pet-Friendly μέρη | PETS & DOGUE",description:"Αναζητήστε pet-friendly cafés, hotels, parks, beaches, veterinary clinics, groomers και άλλα μέρη με το PETS & DOGUE."},
+hero:{title:"Pet-Friendly Μέρη",description:"Αναζητήστε πραγματικά μέρη κοντά σε οποιαδήποτε πόλη ή ταχυδρομικό κώδικα, δείτε τα στον χάρτη, υποβάλετε νέες τοποθεσίες και βοηθήστε στη διατήρηση της ακρίβειας του PETS & DOGUE directory.",search:"Αναζήτηση μερών",add:"Προσθήκη μέρους",club:"Γίνετε μέλος του Club"},
+stats:{results:"Αποτελέσματα",internet:"Μέρη από Internet",verified:"DOGUE Verified",saved:"Αποθηκευμένα",review:"Υπό Έλεγχο"},
+directory:{title:"Βρείτε μέρη κοντά σας"},
+search:{locationPlaceholder:"Πόλη, χώρα ή ταχυδρομικός κώδικας — π.χ. Bournemouth BH2",button:"Αναζήτηση",myLocation:"📍 Χρήση της τοποθεσίας μου",help:"Τα αποτελέσματα Internet προέρχονται από το OpenStreetMap. Οι πληροφορίες για pet policy μπορεί να είναι ελλιπείς, επομένως επιβεβαιώστε πάντα απευθείας με το κατάστημα πριν την επίσκεψη."},
+categories:{all:"Όλες οι κατηγορίες",cafes:"Cafés",restaurants:"Εστιατόρια",hotels:"Hotels",parksDogParks:"Πάρκα & dog parks",parks:"Πάρκα",beaches:"Παραλίες",vetsFull:"Κτηνιατρικές κλινικές",vets:"Κτηνίατροι",groomers:"Groomers",petShops:"Pet Shops"},
+categoryLabels:{Cafe:"Café",Restaurant:"Εστιατόριο",Hotel:"Hotel",Park:"Πάρκο",Beach:"Παραλία",Veterinary:"Κτηνίατρος",Grooming:"Grooming",PetShop:"Pet Shop",Other:"Άλλο"},
+sources:{internet:"Internet result",community:"Υποβλήθηκε από community",verified:"DOGUE Verified",review:"Υπό Έλεγχο",internetShort:"INTERNET",communityShort:"COMMUNITY"},
+filters:{all:"Όλα"},
+results:{defaultTitle:"PETS & DOGUE Places",defaultSubtitle:"Αναζητήστε μια τοποθεσία ή χρησιμοποιήστε την τρέχουσα θέση σας.",one:"Εμφανίζεται 1 μέρος",many:"Εμφανίζονται {count} μέρη"},
+sort:{distance:"Πλησιέστερα πρώτα",trust:"Υψηλότερο Trust Score",name:"Όνομα A–Z",source:"DOGUE places πρώτα"},
+empty:{title:"Δεν βρέθηκαν μέρη",description:"Δοκιμάστε μεγαλύτερη ακτίνα, άλλη κατηγορία ή διαφορετική τοποθεσία."},
+map:{title:"Live Map",searchTitle:"Αναζητήστε τοποθεσία",searchText:"Τα πραγματικά markers θα εμφανιστούν εδώ.",one:"1 μέρος στον χάρτη",many:"{count} μέρη στον χάρτη",near:"Αποτελέσματα κοντά σε {location}.",noSearch:"Αναζητήστε τοποθεσία για να φορτώσετε κοντινά Internet results."},
+saved:{title:"Αποθηκευμένα Μέρη",emptyTitle:"Τα αποθηκευμένα μέρη σας θα εμφανιστούν εδώ",emptyText:"Χρησιμοποιήστε το κουμπί Αποθήκευση σε οποιαδήποτε κάρτα.",location:"Αποθηκευμένη τοποθεσία"},
+submit:{title:"Προσθήκη Pet-Friendly μέρους",description:"Γνωρίζετε café, hotel, park, beach, groomer ή άλλη τοποθεσία που δέχεται ζώα; Υποβάλετέ την για editorial review. Δεν θα γίνει δημόσια μέχρι να εγκριθεί.",placeName:"Όνομα μέρους",chooseCategory:"Επιλέξτε κατηγορία",address:"Πλήρης διεύθυνση ή ταχυδρομικός κώδικας",website:"Website ή social link",phone:"Τηλέφωνο, προαιρετικό",policy:"Pet policy — π.χ. dogs welcome on terrace",name:"Το όνομά σας",email:"Το email σας",details:"Πείτε μας γιατί αυτό το μέρος είναι pet-friendly και τι πρέπει να γνωρίζουν οι επισκέπτες...",agreement:"Επιβεβαιώνω ότι οι πληροφορίες είναι ακριβείς και κατανοώ ότι η υποβολή θα ελεγχθεί πριν τη δημοσίευση.",button:"Υποβολή για Έλεγχο"},
+club:{title:"PETS & DOGUE Club Benefits",description:"Τα μέλη του Club μπορούν να ξεκλειδώσουν επιλεγμένες προσφορές από pet-friendly hotels, cafés, groomers, travel partners και αξιόπιστες τοπικές επιχειρήσεις.",hotel:"🏨 Hotel Discounts",cafe:"☕ Café Offers",grooming:"✂️ Grooming Benefits",bookings:"🎟 Partner Bookings",local:"📍 Local Recommendations",qr:"💚 Member QR Card",button:"Εξερευνήστε τα Club Benefits"},
+footer:{home:"Αρχική",community:"Τοπική Κοινότητα",travel:"Pet Travel",wellness:"Wellness",partners:"Συνεργάτες",club:"Club",account:"Λογαριασμός",contact:"Επικοινωνία"},
+messages:{enterLocation:"Εισαγάγετε πρώτα πόλη, χώρα ή ταχυδρομικό κώδικα.",findingLocation:"Εύρεση τοποθεσίας…",locationFailed:"Η αναζήτηση τοποθεσίας απέτυχε.",notFound:"Η τοποθεσία δεν βρέθηκε. Δοκιμάστε πόλη με χώρα ή πλήρη ταχυδρομικό κώδικα.",unableSearch:"Δεν είναι δυνατή η αναζήτηση αυτής της τοποθεσίας.",geoUnsupported:"Το geolocation δεν υποστηρίζεται από αυτόν τον browser.",waitingPermission:"Αναμονή για άδεια τοποθεσίας…",currentLocation:"Η τρέχουσα τοποθεσία σας",currentLocationShort:"Τρέχουσα τοποθεσία",yourLocation:"Η τοποθεσία σας",unableNearby:"Δεν ήταν δυνατή η φόρτωση κοντινών μερών.",permissionDenied:"Η άδεια τοποθεσίας απορρίφθηκε.",locationUnknown:"Δεν ήταν δυνατός ο προσδιορισμός της τοποθεσίας σας.",locationTimeout:"Το αίτημα τοποθεσίας έληξε.",unableCurrent:"Δεν είναι δυνατή η χρήση της τρέχουσας τοποθεσίας σας.",searchingOSM:"Αναζήτηση κοντινών μερών στο OpenStreetMap…",mapBusy:"Η δημόσια υπηρεσία χάρτη είναι απασχολημένη. Δοκιμάστε ξανά σύντομα.",internetFound:"Βρέθηκαν {count} Internet places κοντά σε {location}.",categoryRefresh:"Η κατηγορία δεν μπόρεσε να ανανεωθεί. Τα υπάρχοντα αποτελέσματα παραμένουν διαθέσιμα."},
+policy:{welcome:"🐾 Το OpenStreetMap δείχνει ότι dogs ή pets είναι welcome.",lead:"🦮 Οι σκύλοι φαίνεται να επιτρέπονται με λουρί.",no:"🚫 Το OpenStreetMap δείχνει ότι οι σκύλοι ίσως δεν επιτρέπονται.",dogPark:"🐕 Ειδικό dog park.",unconfirmed:"ℹ️ Η pet policy δεν έχει επιβεβαιωθεί. Επικοινωνήστε με το μέρος πριν την επίσκεψη."},
+dynamic:{defaultPlaceName:"Pet-Friendly Place",localDescription:"Επιλεγμένο PETS & DOGUE pet-friendly place.",confirmPolicy:"Επικοινωνήστε με το μέρος για να επιβεβαιώσετε την τρέχουσα pet policy.",genericPlace:"{category} Place",cuisine:"Κουζίνα: {value}.",outdoor:"Διαθέσιμο outdoor seating.",hours:"Ώρες λειτουργίας: {value}.",osmPlace:"{category} location που βρέθηκε μέσω OpenStreetMap.",reportedPlace:"Reported Place",verifiedBadge:"✓ DOGUE VERIFIED",reviewBadge:"⚠ ΥΠΟ ΕΛΕΓΧΟ",locationUnavailable:"Τοποθεσία μη διαθέσιμη",communityReports:"Community reports",disputed:"⚠️ Η pet policy αμφισβητείται. Το μέρος βρίσκεται υπό community review.",policyUnknown:"Pet policy μη επιβεβαιωμένη.",placeInfo:"Πληροφορίες pet-friendly μέρους.",details:"Λεπτομέρειες",directions:"Οδηγίες",saved:"♥ Αποθηκεύτηκε",save:"♡ Αποθήκευση",reported:"✓ Αναφέρθηκε",report:"🚩 Αναφορά",trustScore:"DOGUE Trust Score",website:"Επίσκεψη Website",reportProblem:"🚩 Αναφορά Προβλήματος",close:"Κλείσιμο",modalDisputed:"⚠️ Αυτή η pet policy αμφισβητείται και βρίσκεται υπό έλεγχο.",metresAway:"{value} m μακριά",kmAway:"{value} km μακριά",remove:"Αφαίρεση"},
+trust:{review:"🟠 Υπό Έλεγχο",verified:"🟢 DOGUE Verified",favourite:"🟢 Αγαπημένο της Community",new:"🟡 Νέο / Μη Επαληθευμένο",limited:"🟠 Περιορισμένα Trust Data"},
+report:{title:"Αναφορά Προβλήματος",description:"Πείτε μας τι άλλαξε σε αυτό το μέρος.",notice:"Μία αναφορά μπορεί να υποβληθεί από αυτόν τον browser για κάθε μέρος. Οι αναφορές ελέγχονται μέσω DOGUE Trust Center.",notFriendly:"❌ Δεν είναι πλέον pet-friendly",refused:"🚫 Το προσωπικό αρνήθηκε pets",closed:"🏪 Έκλεισε μόνιμα",address:"📍 Λάθος διεύθυνση",phone:"☎️ Λάθος τηλέφωνο",website:"🌐 Website μη διαθέσιμο",unsafe:"⚠️ Μη ασφαλές μέρος ή συνθήκες",other:"✍️ Άλλο πρόβλημα",details:"Προσθέστε χρήσιμες λεπτομέρειες, προαιρετικό...",button:"Υποβολή Αναφοράς",already:"Έχετε ήδη αναφέρει αυτό το μέρος από αυτόν τον browser.",reporting:"Αναφορά: {name}",choose:"Επιλέξτε λόγο αναφοράς.",alreadyShort:"Έχετε ήδη αναφέρει αυτό το μέρος.",hidden:"Ευχαριστούμε. Το μέρος έφτασε το όριο community reports και είναι προσωρινά κρυμμένο μέχρι admin review.",underReview:"Ευχαριστούμε. Το μέρος σημειώθηκε Υπό Έλεγχο όσο ελέγχεται η pet policy.",saved:"Ευχαριστούμε. Η αναφορά σας αποθηκεύτηκε για DOGUE Trust moderation."},
+submitMessages:{required:"Συμπληρώστε όνομα μέρους, κατηγορία, διεύθυνση και email.",email:"Εισαγάγετε έγκυρο email.",agreement:"Επιβεβαιώστε ότι οι πληροφορίες είναι ακριβείς.",communityPolicy:"Pet policy που δόθηκε από μέλος της community.",communityMember:"Μέλος community",success:"Ευχαριστούμε. Το μέρος αποθηκεύτηκε ως Pending Review και είναι έτοιμο για admin moderation.",lookupFailed:"Η αναζήτηση διεύθυνσης απέτυχε."}
+},sv:{
+meta:{title:"Djurvänliga platser | PETS & DOGUE",description:"Sök djurvänliga caféer, hotell, parker, stränder, veterinärkliniker, groomers och andra platser med PETS & DOGUE."},
+hero:{title:"Djurvänliga Platser",description:"Sök riktiga platser nära valfri stad eller postnummer, utforska dem på kartan, skicka in nya platser och hjälp till att hålla PETS & DOGUE-katalogen korrekt.",search:"Sök platser",add:"Lägg till plats",club:"Gå med i Club"},
+stats:{results:"Resultat",internet:"Internetplatser",verified:"DOGUE-verifierad",saved:"Sparade",review:"Under granskning"},
+directory:{title:"Hitta platser nära dig"},
+search:{locationPlaceholder:"Stad, land eller postnummer — t.ex. Bournemouth BH2",button:"Sök",myLocation:"📍 Använd min plats",help:"Internetresultat kommer från OpenStreetMap. Information om djurpolicy kan vara ofullständig, så bekräfta alltid direkt med platsen före besök."},
+categories:{all:"Alla kategorier",cafes:"Caféer",restaurants:"Restauranger",hotels:"Hotell",parksDogParks:"Parker & hundparker",parks:"Parker",beaches:"Stränder",vetsFull:"Veterinärkliniker",vets:"Veterinärer",groomers:"Groomers",petShops:"Djuraffärer"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurang",Hotel:"Hotell",Park:"Park",Beach:"Strand",Veterinary:"Veterinär",Grooming:"Grooming",PetShop:"Djuraffär",Other:"Annat"},
+sources:{internet:"Internetresultat",community:"Inskickat av communityn",verified:"DOGUE-verifierad",review:"Under granskning",internetShort:"INTERNET",communityShort:"COMMUNITY"},
+filters:{all:"Alla"},
+results:{defaultTitle:"PETS & DOGUE Platser",defaultSubtitle:"Sök en plats eller använd din nuvarande position.",one:"1 plats visas",many:"{count} platser visas"},
+sort:{distance:"Närmast först",trust:"Högst Trust Score",name:"Namn A–Ö",source:"DOGUE-platser först"},
+empty:{title:"Inga platser hittades",description:"Prova en större radie, annan kategori eller plats."},
+map:{title:"Livekarta",searchTitle:"Sök en plats",searchText:"Riktiga kartmarkörer visas här.",one:"1 plats på kartan",many:"{count} platser på kartan",near:"Resultat nära {location}.",noSearch:"Sök en plats för att ladda närliggande internetresultat."},
+saved:{title:"Sparade platser",emptyTitle:"Dina sparade platser visas här",emptyText:"Använd knappen Spara på valfritt platskort.",location:"Sparad plats"},
+submit:{title:"Lägg till en djurvänlig plats",description:"Känner du till ett café, hotell, park, strand, groomer eller annan plats som välkomnar djur? Skicka in den för redaktionell granskning. Den blir inte offentlig förrän den godkänts.",placeName:"Platsens namn",chooseCategory:"Välj kategori",address:"Fullständig adress eller postnummer",website:"Webbplats eller social länk",phone:"Telefon, valfritt",policy:"Djurpolicy — t.ex. hundar välkomna på terrassen",name:"Ditt namn",email:"Din e-post",details:"Berätta varför platsen är djurvänlig och vad besökare bör veta...",agreement:"Jag bekräftar att informationen är korrekt och förstår att den granskas före publicering.",button:"Skicka för granskning"},
+club:{title:"PETS & DOGUE Club-förmåner",description:"Club-medlemmar kan få utvalda erbjudanden från djurvänliga hotell, caféer, groomers, resepartners och pålitliga lokala företag.",hotel:"🏨 Hotellrabatter",cafe:"☕ Caféerbjudanden",grooming:"✂️ Groomingförmåner",bookings:"🎟 Partnerbokningar",local:"📍 Lokala rekommendationer",qr:"💚 Medlems-QR-kort",button:"Utforska Club-förmåner"},
+footer:{home:"Hem",community:"Lokal community",travel:"Resa med husdjur",wellness:"Wellness",partners:"Partners",club:"Club",account:"Konto",contact:"Kontakt"},
+messages:{enterLocation:"Ange först en stad, ett land eller postnummer.",findingLocation:"Söker platsen…",locationFailed:"Platssökningen misslyckades.",notFound:"Platsen hittades inte. Prova en stad med land eller ett komplett postnummer.",unableSearch:"Det går inte att söka denna plats.",geoUnsupported:"Geolokalisering stöds inte av denna webbläsare.",waitingPermission:"Väntar på platsbehörighet…",currentLocation:"Din nuvarande plats",currentLocationShort:"Nuvarande plats",yourLocation:"Din plats",unableNearby:"Närliggande platser kunde inte laddas.",permissionDenied:"Platsbehörigheten nekades.",locationUnknown:"Din plats kunde inte fastställas.",locationTimeout:"Platsbegäran tog för lång tid.",unableCurrent:"Din nuvarande plats kan inte användas.",searchingOSM:"Söker närliggande platser på OpenStreetMap…",mapBusy:"Den offentliga karttjänsten är upptagen. Försök igen snart.",internetFound:"{count} internetplatser hittades nära {location}.",categoryRefresh:"Kategorin kunde inte uppdateras. Befintliga resultat finns kvar."},
+policy:{welcome:"🐾 OpenStreetMap visar att hundar eller husdjur är välkomna.",lead:"🦮 Hundar verkar vara tillåtna i koppel.",no:"🚫 OpenStreetMap visar att hundar kanske inte är tillåtna.",dogPark:"🐕 Särskild hundpark.",unconfirmed:"ℹ️ Djurpolicyn är inte bekräftad. Kontakta platsen före besök."},
+dynamic:{defaultPlaceName:"Djurvänlig plats",localDescription:"Utvald djurvänlig PETS & DOGUE-plats.",confirmPolicy:"Kontakta platsen för att bekräfta aktuell djurpolicy.",genericPlace:"{category}-plats",cuisine:"Kök: {value}.",outdoor:"Uteservering finns.",hours:"Öppettider: {value}.",osmPlace:"{category}-plats hittad via OpenStreetMap.",reportedPlace:"Rapporterad plats",verifiedBadge:"✓ DOGUE-VERIFIERAD",reviewBadge:"⚠ UNDER GRANSKNING",locationUnavailable:"Plats ej tillgänglig",communityReports:"Communityrapporter",disputed:"⚠️ Djurpolicyn ifrågasätts. Platsen granskas för närvarande av communityn.",policyUnknown:"Djurpolicy ej bekräftad.",placeInfo:"Information om djurvänlig plats.",details:"Detaljer",directions:"Vägbeskrivning",saved:"♥ Sparad",save:"♡ Spara",reported:"✓ Rapporterad",report:"🚩 Rapportera",trustScore:"DOGUE Trust Score",website:"Besök webbplats",reportProblem:"🚩 Rapportera problem",close:"Stäng",modalDisputed:"⚠️ Denna djurpolicy ifrågasätts för närvarande och granskas.",metresAway:"{value} m bort",kmAway:"{value} km bort",remove:"Ta bort"},
+trust:{review:"🟠 Under granskning",verified:"🟢 DOGUE-verifierad",favourite:"🟢 Communityfavorit",new:"🟡 Ny / ej verifierad plats",limited:"🟠 Begränsad trust-data"},
+report:{title:"Rapportera ett problem",description:"Berätta vad som har förändrats på denna plats.",notice:"En rapport kan skickas från denna webbläsare per plats. Rapporter granskas genom DOGUE Trust Center.",notFriendly:"❌ Inte längre djurvänlig",refused:"🚫 Personalen vägrade husdjur",closed:"🏪 Permanent stängd",address:"📍 Fel adress",phone:"☎️ Fel telefonnummer",website:"🌐 Webbplats ej tillgänglig",unsafe:"⚠️ Osäker plats eller förhållanden",other:"✍️ Annat problem",details:"Lägg till användbara detaljer, valfritt...",button:"Skicka rapport",already:"Du har redan rapporterat denna plats från denna webbläsare.",reporting:"Rapporterar: {name}",choose:"Välj en anledning till rapporten.",alreadyShort:"Du har redan rapporterat denna plats.",hidden:"Tack. Platsen har nått communityns rapportgräns och är tillfälligt dold i väntan på administratörsgranskning.",underReview:"Tack. Platsen är nu markerad Under granskning medan djurpolicyn kontrolleras.",saved:"Tack. Din rapport har sparats för DOGUE Trust-moderering."},
+submitMessages:{required:"Fyll i platsnamn, kategori, adress och e-post.",email:"Ange en giltig e-postadress.",agreement:"Bekräfta att den inskickade informationen är korrekt.",communityPolicy:"Djurpolicy angiven av en communitymedlem.",communityMember:"Communitymedlem",success:"Tack. Platsen har sparats som Pending Review och är redo för administratörsmoderering.",lookupFailed:"Adressökningen misslyckades."}
+},
+
+da:{
+meta:{title:"Kæledyrsvenlige steder | PETS & DOGUE",description:"Søg efter kæledyrsvenlige caféer, hoteller, parker, strande, dyreklinikker, groomere og andre steder med PETS & DOGUE."},
+hero:{title:"Kæledyrsvenlige Steder",description:"Søg efter rigtige steder nær enhver by eller postnummer, udforsk dem på kortet, indsend nye steder og hjælp med at holde PETS & DOGUE-directory præcis.",search:"Søg steder",add:"Tilføj et sted",club:"Bliv medlem af Club"},
+stats:{results:"Resultater",internet:"Internetsteder",verified:"DOGUE-verificeret",saved:"Gemte",review:"Under gennemgang"},
+directory:{title:"Find steder nær dig"},
+search:{locationPlaceholder:"By, land eller postnummer — f.eks. Bournemouth BH2",button:"Søg",myLocation:"📍 Brug min placering",help:"Internetresultater kommer fra OpenStreetMap. Oplysninger om kæledyrspolitik kan være ufuldstændige, så bekræft altid direkte med stedet før et besøg."},
+categories:{all:"Alle kategorier",cafes:"Caféer",restaurants:"Restauranter",hotels:"Hoteller",parksDogParks:"Parker & hundeparker",parks:"Parker",beaches:"Strande",vetsFull:"Dyreklinikker",vets:"Dyrlæger",groomers:"Groomere",petShops:"Dyrebutikker"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurant",Hotel:"Hotel",Park:"Park",Beach:"Strand",Veterinary:"Dyrlæge",Grooming:"Grooming",PetShop:"Dyrebutik",Other:"Andet"},
+sources:{internet:"Internetresultat",community:"Indsendt af community",verified:"DOGUE-verificeret",review:"Under gennemgang",internetShort:"INTERNET",communityShort:"COMMUNITY"},
+filters:{all:"Alle"},
+results:{defaultTitle:"PETS & DOGUE Steder",defaultSubtitle:"Søg en placering eller brug din aktuelle position.",one:"1 sted vist",many:"{count} steder vist"},
+sort:{distance:"Nærmeste først",trust:"Højeste Trust Score",name:"Navn A–Å",source:"DOGUE-steder først"},
+empty:{title:"Ingen steder fundet",description:"Prøv en større radius, en anden kategori eller placering."},
+map:{title:"Livekort",searchTitle:"Søg efter en placering",searchText:"Rigtige kortmarkører vises her.",one:"1 sted på kortet",many:"{count} steder på kortet",near:"Resultater nær {location}.",noSearch:"Søg efter en placering for at hente nærliggende internetresultater."},
+saved:{title:"Gemte steder",emptyTitle:"Dine gemte steder vises her",emptyText:"Brug Gem-knappen på et stedkort.",location:"Gemt placering"},
+submit:{title:"Tilføj et kæledyrsvenligt sted",description:"Kender du en café, et hotel, en park, strand, groomer eller et andet sted, som byder kæledyr velkommen? Indsend det til redaktionel gennemgang. Det bliver ikke offentligt før godkendelse.",placeName:"Stedets navn",chooseCategory:"Vælg kategori",address:"Fuld adresse eller postnummer",website:"Website eller socialt link",phone:"Telefon, valgfrit",policy:"Kæledyrspolitik — f.eks. hunde velkomne på terrassen",name:"Dit navn",email:"Din email",details:"Fortæl os, hvorfor stedet er kæledyrsvenligt, og hvad besøgende bør vide...",agreement:"Jeg bekræfter, at oplysningerne er korrekte, og forstår at indsendelsen gennemgås før offentliggørelse.",button:"Indsend til gennemgang"},
+club:{title:"PETS & DOGUE Club-fordele",description:"Club-medlemmer kan få udvalgte tilbud fra kæledyrsvenlige hoteller, caféer, groomere, rejsepartnere og pålidelige lokale virksomheder.",hotel:"🏨 Hotelrabatter",cafe:"☕ Cafétilbud",grooming:"✂️ Groomingfordele",bookings:"🎟 Partnerbookinger",local:"📍 Lokale anbefalinger",qr:"💚 Medlems-QR-kort",button:"Se Club-fordele"},
+footer:{home:"Forside",community:"Lokalt fællesskab",travel:"Rejser med kæledyr",wellness:"Wellness",partners:"Partnere",club:"Club",account:"Konto",contact:"Kontakt"},
+messages:{enterLocation:"Indtast først en by, et land eller et postnummer.",findingLocation:"Finder placeringen…",locationFailed:"Søgningen efter placeringen mislykkedes.",notFound:"Placeringen blev ikke fundet. Prøv en by med land eller et komplet postnummer.",unableSearch:"Denne placering kan ikke søges.",geoUnsupported:"Geolokation understøttes ikke af denne browser.",waitingPermission:"Venter på tilladelse til placering…",currentLocation:"Din aktuelle placering",currentLocationShort:"Aktuel placering",yourLocation:"Din placering",unableNearby:"Nærliggende steder kunne ikke indlæses.",permissionDenied:"Tilladelse til placering blev afvist.",locationUnknown:"Din placering kunne ikke bestemmes.",locationTimeout:"Anmodningen om placering udløb.",unableCurrent:"Din aktuelle placering kan ikke bruges.",searchingOSM:"Søger efter nærliggende steder på OpenStreetMap…",mapBusy:"Den offentlige korttjeneste er optaget. Prøv igen om lidt.",internetFound:"{count} internetsteder fundet nær {location}.",categoryRefresh:"Kategorien kunne ikke opdateres. Eksisterende resultater er stadig tilgængelige."},
+policy:{welcome:"🐾 OpenStreetMap viser, at hunde eller kæledyr er velkomne.",lead:"🦮 Hunde ser ud til at være tilladt i snor.",no:"🚫 OpenStreetMap viser, at hunde muligvis ikke er tilladt.",dogPark:"🐕 Dedikeret hundepark.",unconfirmed:"ℹ️ Kæledyrspolitikken er ikke bekræftet. Kontakt stedet før besøget."},
+dynamic:{defaultPlaceName:"Kæledyrsvenligt sted",localDescription:"Udvalgt PETS & DOGUE kæledyrsvenligt sted.",confirmPolicy:"Kontakt stedet for at bekræfte den aktuelle kæledyrspolitik.",genericPlace:"{category}-sted",cuisine:"Køkken: {value}.",outdoor:"Udendørs siddepladser tilgængelige.",hours:"Åbningstider: {value}.",osmPlace:"{category}-sted fundet via OpenStreetMap.",reportedPlace:"Rapporteret sted",verifiedBadge:"✓ DOGUE-VERIFICERET",reviewBadge:"⚠ UNDER GENNEMGANG",locationUnavailable:"Placering utilgængelig",communityReports:"Communityrapporter",disputed:"⚠️ Kæledyrspolitikken er bestridt. Stedet er under communitygennemgang.",policyUnknown:"Kæledyrspolitik ikke bekræftet.",placeInfo:"Information om kæledyrsvenligt sted.",details:"Detaljer",directions:"Rute",saved:"♥ Gemt",save:"♡ Gem",reported:"✓ Rapporteret",report:"🚩 Rapportér",trustScore:"DOGUE Trust Score",website:"Besøg website",reportProblem:"🚩 Rapportér problem",close:"Luk",modalDisputed:"⚠️ Denne kæledyrspolitik er i øjeblikket bestridt og under gennemgang.",metresAway:"{value} m væk",kmAway:"{value} km væk",remove:"Fjern"},
+trust:{review:"🟠 Under gennemgang",verified:"🟢 DOGUE-verificeret",favourite:"🟢 Communityfavorit",new:"🟡 Nyt / ikke verificeret sted",limited:"🟠 Begrænsede trust-data"},
+report:{title:"Rapportér et problem",description:"Fortæl os, hvad der har ændret sig ved dette sted.",notice:"Der kan indsendes én rapport fra denne browser pr. sted. Rapporter gennemgås via DOGUE Trust Center.",notFriendly:"❌ Ikke længere kæledyrsvenligt",refused:"🚫 Personalet afviste kæledyr",closed:"🏪 Permanent lukket",address:"📍 Forkert adresse",phone:"☎️ Forkert telefonnummer",website:"🌐 Website utilgængeligt",unsafe:"⚠️ Usikkert sted eller forhold",other:"✍️ Andet problem",details:"Tilføj nyttige detaljer, valgfrit...",button:"Indsend rapport",already:"Du har allerede rapporteret dette sted fra denne browser.",reporting:"Rapporterer: {name}",choose:"Vælg en årsag til rapporten.",alreadyShort:"Du har allerede rapporteret dette sted.",hidden:"Tak. Stedet har nået communityens rapportgrænse og er midlertidigt skjult, indtil en administrator gennemgår det.",underReview:"Tak. Stedet er nu markeret Under gennemgang, mens kæledyrspolitikken kontrolleres.",saved:"Tak. Din rapport er gemt til DOGUE Trust-moderation."},
+submitMessages:{required:"Udfyld stedets navn, kategori, adresse og email.",email:"Indtast en gyldig emailadresse.",agreement:"Bekræft, at de indsendte oplysninger er korrekte.",communityPolicy:"Kæledyrspolitik leveret af et communitymedlem.",communityMember:"Communitymedlem",success:"Tak. Stedet er gemt som Pending Review og klar til administratormoderation.",lookupFailed:"Adresseopslag mislykkedes."}
+},
+
+no:{
+meta:{title:"Dyrevennlige steder | PETS & DOGUE",description:"Søk etter dyrevennlige kafeer, hoteller, parker, strender, veterinærklinikker, groomere og andre steder med PETS & DOGUE."},
+hero:{title:"Dyrevennlige Steder",description:"Søk etter virkelige steder nær hvilken som helst by eller postnummer, utforsk dem på kartet, send inn nye steder og hjelp med å holde PETS & DOGUE-katalogen nøyaktig.",search:"Søk steder",add:"Legg til et sted",club:"Bli med i Club"},
+stats:{results:"Resultater",internet:"Internettsteder",verified:"DOGUE-verifisert",saved:"Lagret",review:"Under vurdering"},
+directory:{title:"Finn steder nær deg"},
+search:{locationPlaceholder:"By, land eller postnummer — f.eks. Bournemouth BH2",button:"Søk",myLocation:"📍 Bruk min posisjon",help:"Internettresultater kommer fra OpenStreetMap. Informasjon om dyrepolicy kan være ufullstendig, så bekreft alltid direkte med stedet før besøk."},
+categories:{all:"Alle kategorier",cafes:"Kafeer",restaurants:"Restauranter",hotels:"Hoteller",parksDogParks:"Parker & hundeparker",parks:"Parker",beaches:"Strender",vetsFull:"Veterinærklinikker",vets:"Veterinærer",groomers:"Groomere",petShops:"Dyrebutikker"},
+categoryLabels:{Cafe:"Kafé",Restaurant:"Restaurant",Hotel:"Hotell",Park:"Park",Beach:"Strand",Veterinary:"Veterinær",Grooming:"Grooming",PetShop:"Dyrebutikk",Other:"Annet"},
+sources:{internet:"Internettresultat",community:"Sendt inn av community",verified:"DOGUE-verifisert",review:"Under vurdering",internetShort:"INTERNETT",communityShort:"COMMUNITY"},
+filters:{all:"Alle"},
+results:{defaultTitle:"PETS & DOGUE Steder",defaultSubtitle:"Søk etter et sted eller bruk din nåværende posisjon.",one:"1 sted vises",many:"{count} steder vises"},
+sort:{distance:"Nærmest først",trust:"Høyest Trust Score",name:"Navn A–Å",source:"DOGUE-steder først"},
+empty:{title:"Ingen steder funnet",description:"Prøv en større radius, annen kategori eller annet sted."},
+map:{title:"Livekart",searchTitle:"Søk etter et sted",searchText:"Virkelige kartmarkører vises her.",one:"1 sted på kartet",many:"{count} steder på kartet",near:"Resultater nær {location}.",noSearch:"Søk etter et sted for å laste inn nærliggende internettresultater."},
+saved:{title:"Lagrede steder",emptyTitle:"Dine lagrede steder vises her",emptyText:"Bruk Lagre-knappen på et stedkort.",location:"Lagret sted"},
+submit:{title:"Legg til et dyrevennlig sted",description:"Kjenner du en kafé, et hotell, en park, strand, groomer eller et annet sted som ønsker dyr velkommen? Send det inn for redaksjonell vurdering. Det blir ikke offentlig før godkjenning.",placeName:"Navn på stedet",chooseCategory:"Velg kategori",address:"Full adresse eller postnummer",website:"Nettsted eller sosial lenke",phone:"Telefon, valgfritt",policy:"Dyrepolicy — f.eks. hunder velkommen på terrassen",name:"Ditt navn",email:"Din e-post",details:"Fortell hvorfor stedet er dyrevennlig og hva besøkende bør vite...",agreement:"Jeg bekrefter at informasjonen er korrekt og forstår at innsendingen blir vurdert før publisering.",button:"Send til vurdering"},
+club:{title:"PETS & DOGUE Club-fordeler",description:"Club-medlemmer kan få utvalgte tilbud fra dyrevennlige hoteller, kafeer, groomere, reisepartnere og pålitelige lokale bedrifter.",hotel:"🏨 Hotellrabatter",cafe:"☕ Kafétilbud",grooming:"✂️ Groomingfordeler",bookings:"🎟 Partnerbookinger",local:"📍 Lokale anbefalinger",qr:"💚 Medlems-QR-kort",button:"Se Club-fordeler"},
+footer:{home:"Hjem",community:"Lokalt samfunn",travel:"Reise med kjæledyr",wellness:"Wellness",partners:"Partnere",club:"Club",account:"Konto",contact:"Kontakt"},
+messages:{enterLocation:"Skriv inn en by, et land eller postnummer først.",findingLocation:"Finner stedet…",locationFailed:"Stedsøket mislyktes.",notFound:"Stedet ble ikke funnet. Prøv en by med land eller et komplett postnummer.",unableSearch:"Dette stedet kan ikke søkes.",geoUnsupported:"Geolokasjon støttes ikke av denne nettleseren.",waitingPermission:"Venter på tillatelse til posisjon…",currentLocation:"Din nåværende posisjon",currentLocationShort:"Nåværende posisjon",yourLocation:"Din posisjon",unableNearby:"Nærliggende steder kunne ikke lastes.",permissionDenied:"Tillatelse til posisjon ble avslått.",locationUnknown:"Posisjonen din kunne ikke bestemmes.",locationTimeout:"Posisjonsforespørselen tok for lang tid.",unableCurrent:"Din nåværende posisjon kan ikke brukes.",searchingOSM:"Søker etter steder i nærheten på OpenStreetMap…",mapBusy:"Den offentlige karttjenesten er opptatt. Prøv igjen snart.",internetFound:"{count} internettsteder funnet nær {location}.",categoryRefresh:"Kategorien kunne ikke oppdateres. Eksisterende resultater er fortsatt tilgjengelige."},
+policy:{welcome:"🐾 OpenStreetMap viser at hunder eller kjæledyr er velkomne.",lead:"🦮 Hunder ser ut til å være tillatt i bånd.",no:"🚫 OpenStreetMap viser at hunder kanskje ikke er tillatt.",dogPark:"🐕 Egen hundepark.",unconfirmed:"ℹ️ Dyrepolicyen er ikke bekreftet. Kontakt stedet før besøk."},
+dynamic:{defaultPlaceName:"Dyrevennlig sted",localDescription:"Utvalgt PETS & DOGUE dyrevennlig sted.",confirmPolicy:"Kontakt stedet for å bekrefte gjeldende dyrepolicy.",genericPlace:"{category}-sted",cuisine:"Kjøkken: {value}.",outdoor:"Uteservering tilgjengelig.",hours:"Åpningstider: {value}.",osmPlace:"{category}-sted funnet via OpenStreetMap.",reportedPlace:"Rapportert sted",verifiedBadge:"✓ DOGUE-VERIFISERT",reviewBadge:"⚠ UNDER VURDERING",locationUnavailable:"Sted ikke tilgjengelig",communityReports:"Communityrapporter",disputed:"⚠️ Dyrepolicyen bestrides. Stedet er nå under communityvurdering.",policyUnknown:"Dyrepolicy ikke bekreftet.",placeInfo:"Informasjon om dyrevennlig sted.",details:"Detaljer",directions:"Veibeskrivelse",saved:"♥ Lagret",save:"♡ Lagre",reported:"✓ Rapportert",report:"🚩 Rapporter",trustScore:"DOGUE Trust Score",website:"Besøk nettsted",reportProblem:"🚩 Rapporter problem",close:"Lukk",modalDisputed:"⚠️ Denne dyrepolicyen bestrides nå og er under vurdering.",metresAway:"{value} m unna",kmAway:"{value} km unna",remove:"Fjern"},
+trust:{review:"🟠 Under vurdering",verified:"🟢 DOGUE-verifisert",favourite:"🟢 Communityfavoritt",new:"🟡 Nytt / ikke verifisert sted",limited:"🟠 Begrensede trust-data"},
+report:{title:"Rapporter et problem",description:"Fortell oss hva som har endret seg ved dette stedet.",notice:"Én rapport kan sendes fra denne nettleseren per sted. Rapporter vurderes gjennom DOGUE Trust Center.",notFriendly:"❌ Ikke lenger dyrevennlig",refused:"🚫 Personalet nektet kjæledyr",closed:"🏪 Permanent stengt",address:"📍 Feil adresse",phone:"☎️ Feil telefonnummer",website:"🌐 Nettsted utilgjengelig",unsafe:"⚠️ Utrygt sted eller forhold",other:"✍️ Annet problem",details:"Legg til nyttige detaljer, valgfritt...",button:"Send rapport",already:"Du har allerede rapportert dette stedet fra denne nettleseren.",reporting:"Rapporterer: {name}",choose:"Velg en grunn for rapporten.",alreadyShort:"Du har allerede rapportert dette stedet.",hidden:"Takk. Stedet har nådd communityens rapportgrense og er midlertidig skjult i påvente av administratorvurdering.",underReview:"Takk. Stedet er nå merket Under vurdering mens dyrepolicyen kontrolleres.",saved:"Takk. Rapporten din er lagret for DOGUE Trust-moderering."},
+submitMessages:{required:"Fyll ut stedets navn, kategori, adresse og e-post.",email:"Skriv inn en gyldig e-postadresse.",agreement:"Bekreft at den innsendte informasjonen er korrekt.",communityPolicy:"Dyrepolicy levert av et communitymedlem.",communityMember:"Communitymedlem",success:"Takk. Stedet er lagret som Pending Review og klart for administratormoderering.",lookupFailed:"Adresseoppslaget mislyktes."}
+},
+
+fi:{
+meta:{title:"Lemmikkiystävälliset paikat | PETS & DOGUE",description:"Etsi lemmikkiystävällisiä kahviloita, hotelleja, puistoja, rantoja, eläinklinikoita, groomereita ja muita paikkoja PETS & DOGUE -hakemistosta."},
+hero:{title:"Lemmikkiystävälliset Paikat",description:"Etsi oikeita paikkoja minkä tahansa kaupungin tai postinumeron läheltä, tutki niitä kartalla, lähetä uusia paikkoja ja auta pitämään PETS & DOGUE -hakemisto ajan tasalla.",search:"Etsi paikkoja",add:"Lisää paikka",club:"Liity Clubiin"},
+stats:{results:"Tulokset",internet:"Internet-paikat",verified:"DOGUE-varmennettu",saved:"Tallennetut",review:"Tarkistettavana"},
+directory:{title:"Löydä paikkoja läheltäsi"},
+search:{locationPlaceholder:"Kaupunki, maa tai postinumero — esim. Bournemouth BH2",button:"Hae",myLocation:"📍 Käytä sijaintiani",help:"Internet-tulokset tulevat OpenStreetMapista. Lemmikkisääntöjen tiedot voivat olla puutteellisia, joten varmista ne aina suoraan kohteesta ennen käyntiä."},
+categories:{all:"Kaikki kategoriat",cafes:"Kahvilat",restaurants:"Ravintolat",hotels:"Hotellit",parksDogParks:"Puistot & koirapuistot",parks:"Puistot",beaches:"Rannat",vetsFull:"Eläinklinikat",vets:"Eläinlääkärit",groomers:"Groomerit",petShops:"Eläinkaupat"},
+categoryLabels:{Cafe:"Kahvila",Restaurant:"Ravintola",Hotel:"Hotelli",Park:"Puisto",Beach:"Ranta",Veterinary:"Eläinlääkäri",Grooming:"Grooming",PetShop:"Eläinkauppa",Other:"Muu"},
+sources:{internet:"Internet-tulos",community:"Yhteisön lähettämä",verified:"DOGUE-varmennettu",review:"Tarkistettavana",internetShort:"INTERNET",communityShort:"YHTEISÖ"},
+filters:{all:"Kaikki"},
+results:{defaultTitle:"PETS & DOGUE Paikat",defaultSubtitle:"Etsi sijainti tai käytä nykyistä sijaintiasi.",one:"1 paikka näytetään",many:"{count} paikkaa näytetään"},
+sort:{distance:"Lähimmät ensin",trust:"Korkein Trust Score",name:"Nimi A–Ö",source:"DOGUE-paikat ensin"},
+empty:{title:"Paikkoja ei löytynyt",description:"Kokeile suurempaa sädettä, muuta kategoriaa tai sijaintia."},
+map:{title:"Live-kartta",searchTitle:"Etsi sijainti",searchText:"Oikeat karttamerkit näkyvät täällä.",one:"1 paikka kartalla",many:"{count} paikkaa kartalla",near:"Tulokset lähellä kohdetta {location}.",noSearch:"Etsi sijainti ladataksesi läheiset internet-tulokset."},
+saved:{title:"Tallennetut paikat",emptyTitle:"Tallennetut paikkasi näkyvät täällä",emptyText:"Käytä Tallenna-painiketta paikkakortissa.",location:"Tallennettu sijainti"},
+submit:{title:"Lisää lemmikkiystävällinen paikka",description:"Tiedätkö kahvilan, hotellin, puiston, rannan, groomerin tai muun paikan, johon lemmikit ovat tervetulleita? Lähetä se toimitukselliseen tarkistukseen. Se julkaistaan vasta hyväksynnän jälkeen.",placeName:"Paikan nimi",chooseCategory:"Valitse kategoria",address:"Koko osoite tai postinumero",website:"Verkkosivusto tai some-linkki",phone:"Puhelin, valinnainen",policy:"Lemmikkisääntö — esim. koirat tervetulleita terassille",name:"Nimesi",email:"Sähköpostisi",details:"Kerro, miksi paikka on lemmikkiystävällinen ja mitä kävijöiden tulisi tietää...",agreement:"Vahvistan tietojen olevan oikein ja ymmärrän, että lähetys tarkistetaan ennen julkaisua.",button:"Lähetä tarkistukseen"},
+club:{title:"PETS & DOGUE Club -edut",description:"Club-jäsenet voivat saada valikoituja tarjouksia lemmikkiystävällisiltä hotelleilta, kahviloilta, groomereilta, matkakumppaneilta ja luotettavilta paikallisilta yrityksiltä.",hotel:"🏨 Hotellialennukset",cafe:"☕ Kahvilatarjoukset",grooming:"✂️ Grooming-edut",bookings:"🎟 Kumppanivaraukset",local:"📍 Paikalliset suositukset",qr:"💚 Jäsenen QR-kortti",button:"Tutustu Club-etuihin"},
+footer:{home:"Etusivu",community:"Paikallinen yhteisö",travel:"Matkailu lemmikin kanssa",wellness:"Wellness",partners:"Kumppanit",club:"Club",account:"Tili",contact:"Yhteystiedot"},
+messages:{enterLocation:"Anna ensin kaupunki, maa tai postinumero.",findingLocation:"Etsitään sijaintia…",locationFailed:"Sijainnin haku epäonnistui.",notFound:"Sijaintia ei löytynyt. Kokeile kaupunkia maan kanssa tai täydellistä postinumeroa.",unableSearch:"Tätä sijaintia ei voida hakea.",geoUnsupported:"Selain ei tue geolokaatiota.",waitingPermission:"Odotetaan sijaintilupaa…",currentLocation:"Nykyinen sijaintisi",currentLocationShort:"Nykyinen sijainti",yourLocation:"Sijaintisi",unableNearby:"Läheisiä paikkoja ei voitu ladata.",permissionDenied:"Sijaintilupa evättiin.",locationUnknown:"Sijaintiasi ei voitu määrittää.",locationTimeout:"Sijaintipyyntö aikakatkaistiin.",unableCurrent:"Nykyistä sijaintiasi ei voida käyttää.",searchingOSM:"Etsitään läheisiä paikkoja OpenStreetMapista…",mapBusy:"Julkinen karttapalvelu on varattu. Yritä pian uudelleen.",internetFound:"{count} internet-paikkaa löytyi läheltä kohdetta {location}.",categoryRefresh:"Kategoriaa ei voitu päivittää. Nykyiset tulokset ovat edelleen saatavilla."},
+policy:{welcome:"🐾 OpenStreetMap osoittaa, että koirat tai lemmikit ovat tervetulleita.",lead:"🦮 Koirat näyttävät olevan sallittuja hihnassa.",no:"🚫 OpenStreetMap osoittaa, että koiria ei ehkä sallita.",dogPark:"🐕 Erillinen koirapuisto.",unconfirmed:"ℹ️ Lemmikkisääntöä ei ole vahvistettu. Ota yhteyttä kohteeseen ennen käyntiä."},
+dynamic:{defaultPlaceName:"Lemmikkiystävällinen paikka",localDescription:"Valittu PETS & DOGUE lemmikkiystävällinen paikka.",confirmPolicy:"Ota yhteyttä paikkaan vahvistaaksesi nykyisen lemmikkisäännön.",genericPlace:"{category}-paikka",cuisine:"Keittiö: {value}.",outdoor:"Ulkopaikkoja saatavilla.",hours:"Aukioloajat: {value}.",osmPlace:"{category}-paikka löytyi OpenStreetMapin kautta.",reportedPlace:"Raportoitu paikka",verifiedBadge:"✓ DOGUE-VARMENNETTU",reviewBadge:"⚠ TARKISTETTAVANA",locationUnavailable:"Sijainti ei saatavilla",communityReports:"Yhteisön raportit",disputed:"⚠️ Lemmikkisääntöä kiistetään. Paikka on yhteisön tarkistettavana.",policyUnknown:"Lemmikkisääntöä ei vahvistettu.",placeInfo:"Tietoa lemmikkiystävällisestä paikasta.",details:"Tiedot",directions:"Reittiohjeet",saved:"♥ Tallennettu",save:"♡ Tallenna",reported:"✓ Raportoitu",report:"🚩 Raportoi",trustScore:"DOGUE Trust Score",website:"Vieraile sivustolla",reportProblem:"🚩 Raportoi ongelma",close:"Sulje",modalDisputed:"⚠️ Tätä lemmikkisääntöä kiistetään parhaillaan ja sitä tarkistetaan.",metresAway:"{value} m päässä",kmAway:"{value} km päässä",remove:"Poista"},
+trust:{review:"🟠 Tarkistettavana",verified:"🟢 DOGUE-varmennettu",favourite:"🟢 Yhteisön suosikki",new:"🟡 Uusi / vahvistamaton paikka",limited:"🟠 Rajalliset luottamustiedot"},
+report:{title:"Raportoi ongelma",description:"Kerro, mikä tässä paikassa on muuttunut.",notice:"Tästä selaimesta voidaan lähettää yksi raportti paikkaa kohden. Raportit tarkistetaan DOGUE Trust Centerissä.",notFriendly:"❌ Ei enää lemmikkiystävällinen",refused:"🚫 Henkilökunta kieltäytyi lemmikeistä",closed:"🏪 Suljettu pysyvästi",address:"📍 Väärä osoite",phone:"☎️ Väärä puhelinnumero",website:"🌐 Sivusto ei saatavilla",unsafe:"⚠️ Turvaton paikka tai olosuhteet",other:"✍️ Muu ongelma",details:"Lisää hyödyllisiä tietoja, valinnainen...",button:"Lähetä raportti",already:"Olet jo raportoinut tämän paikan tästä selaimesta.",reporting:"Raportoidaan: {name}",choose:"Valitse raportin syy.",alreadyShort:"Olet jo raportoinut tämän paikan.",hidden:"Kiitos. Paikka on saavuttanut yhteisön raporttirajan ja on tilapäisesti piilotettu ylläpitäjän tarkistukseen asti.",underReview:"Kiitos. Paikka on nyt merkitty Tarkistettavana, kun lemmikkisääntöä tarkistetaan.",saved:"Kiitos. Raporttisi on tallennettu DOGUE Trust -moderointiin."},
+submitMessages:{required:"Täytä paikan nimi, kategoria, osoite ja sähköposti.",email:"Anna kelvollinen sähköpostiosoite.",agreement:"Vahvista lähetettyjen tietojen oikeellisuus.",communityPolicy:"Yhteisön jäsenen toimittama lemmikkisääntö.",communityMember:"Yhteisön jäsen",success:"Kiitos. Paikka on tallennettu Pending Review -tilaan ja valmis ylläpitäjän moderointiin.",lookupFailed:"Osoitehaku epäonnistui."}
+},
+
+tr:{
+meta:{title:"Evcil hayvan dostu yerler | PETS & DOGUE",description:"PETS & DOGUE ile pet-friendly kafeler, oteller, parklar, plajlar, veteriner klinikleri, groomerlar ve diğer yerleri arayın."},
+hero:{title:"Evcil Hayvan Dostu Yerler",description:"Herhangi bir şehir veya posta kodu yakınındaki gerçek yerleri arayın, haritada keşfedin, yeni konumlar gönderin ve PETS & DOGUE dizininin doğruluğunu korumaya yardımcı olun.",search:"Yerleri Ara",add:"Yer Ekle",club:"Club'a Katıl"},
+stats:{results:"Sonuçlar",internet:"İnternet Yerleri",verified:"DOGUE Onaylı",saved:"Kaydedilen",review:"İncelemede"},
+directory:{title:"Yakınınızdaki Yerleri Bulun"},
+search:{locationPlaceholder:"Şehir, ülke veya posta kodu — örn. Bournemouth BH2",button:"Ara",myLocation:"📍 Konumumu Kullan",help:"İnternet sonuçları OpenStreetMap'ten gelir. Evcil hayvan politikası bilgileri eksik olabilir; ziyaret etmeden önce her zaman doğrudan işletmeyle doğrulayın."},
+categories:{all:"Tüm Kategoriler",cafes:"Kafeler",restaurants:"Restoranlar",hotels:"Oteller",parksDogParks:"Parklar & Köpek Parkları",parks:"Parklar",beaches:"Plajlar",vetsFull:"Veteriner Klinikleri",vets:"Veterinerler",groomers:"Groomerlar",petShops:"Evcil Hayvan Mağazaları"},
+categoryLabels:{Cafe:"Kafe",Restaurant:"Restoran",Hotel:"Otel",Park:"Park",Beach:"Plaj",Veterinary:"Veteriner",Grooming:"Grooming",PetShop:"Evcil Hayvan Mağazası",Other:"Diğer"},
+sources:{internet:"İnternet sonucu",community:"Topluluk tarafından gönderildi",verified:"DOGUE Onaylı",review:"İncelemede",internetShort:"İNTERNET",communityShort:"TOPLULUK"},
+filters:{all:"Tümü"},
+results:{defaultTitle:"PETS & DOGUE Yerleri",defaultSubtitle:"Bir konum arayın veya mevcut konumunuzu kullanın.",one:"1 yer gösteriliyor",many:"{count} yer gösteriliyor"},
+sort:{distance:"En yakın önce",trust:"En yüksek Trust Score",name:"Ad A–Z",source:"Önce DOGUE yerleri"},
+empty:{title:"Yer bulunamadı",description:"Daha geniş bir yarıçap, başka kategori veya konum deneyin."},
+map:{title:"Canlı Harita",searchTitle:"Bir konum arayın",searchText:"Gerçek harita işaretleri burada görünecek.",one:"Haritada 1 yer",many:"Haritada {count} yer",near:"{location} yakınındaki sonuçlar.",noSearch:"Yakındaki internet sonuçlarını yüklemek için konum arayın."},
+saved:{title:"Kaydedilen Yerler",emptyTitle:"Kaydettiğiniz yerler burada görünecek",emptyText:"Herhangi bir yer kartındaki Kaydet düğmesini kullanın.",location:"Kaydedilen konum"},
+submit:{title:"Evcil Hayvan Dostu Yer Ekle",description:"Evcil hayvanları kabul eden bir kafe, otel, park, plaj, groomer veya başka bir yer biliyor musunuz? Editoryal inceleme için gönderin. Onaylanana kadar herkese açık olmaz.",placeName:"Yer adı",chooseCategory:"Kategori seç",address:"Tam adres veya posta kodu",website:"Web sitesi veya sosyal bağlantı",phone:"Telefon, isteğe bağlı",policy:"Evcil hayvan politikası — örn. terasta köpekler kabul edilir",name:"Adınız",email:"E-postanız",details:"Bu yerin neden evcil hayvan dostu olduğunu ve ziyaretçilerin neleri bilmesi gerektiğini anlatın...",agreement:"Bilgilerin doğru olduğunu onaylıyor ve yayınlanmadan önce inceleneceğini anlıyorum.",button:"İncelemeye Gönder"},
+club:{title:"PETS & DOGUE Club Avantajları",description:"Club üyeleri pet-friendly oteller, kafeler, groomerlar, seyahat ortakları ve güvenilir yerel işletmelerden seçili tekliflere erişebilir.",hotel:"🏨 Otel İndirimleri",cafe:"☕ Kafe Teklifleri",grooming:"✂️ Grooming Avantajları",bookings:"🎟 Partner Rezervasyonları",local:"📍 Yerel Öneriler",qr:"💚 Üye QR Kartı",button:"Club Avantajlarını Keşfet"},
+footer:{home:"Ana Sayfa",community:"Yerel Topluluk",travel:"Evcil Hayvan Seyahati",wellness:"Wellness",partners:"Partnerler",club:"Club",account:"Hesap",contact:"İletişim"},
+messages:{enterLocation:"Önce bir şehir, ülke veya posta kodu girin.",findingLocation:"Konum bulunuyor…",locationFailed:"Konum araması başarısız oldu.",notFound:"Konum bulunamadı. Ülkeyle birlikte şehir veya tam posta kodu deneyin.",unableSearch:"Bu konum aranamadı.",geoUnsupported:"Bu tarayıcı geolocation desteklemiyor.",waitingPermission:"Konum izni bekleniyor…",currentLocation:"Mevcut konumunuz",currentLocationShort:"Mevcut konum",yourLocation:"Konumunuz",unableNearby:"Yakındaki yerler yüklenemedi.",permissionDenied:"Konum izni reddedildi.",locationUnknown:"Konumunuz belirlenemedi.",locationTimeout:"Konum isteği zaman aşımına uğradı.",unableCurrent:"Mevcut konumunuz kullanılamadı.",searchingOSM:"OpenStreetMap'te yakın yerler aranıyor…",mapBusy:"Genel harita hizmeti meşgul. Lütfen kısa süre sonra tekrar deneyin.",internetFound:"{location} yakınında {count} internet yeri bulundu.",categoryRefresh:"Kategori yenilenemedi. Mevcut sonuçlar kullanılabilir durumda."},
+policy:{welcome:"🐾 OpenStreetMap köpeklerin veya evcil hayvanların kabul edildiğini gösteriyor.",lead:"🦮 Köpeklerin tasmalı olarak izinli olduğu görünüyor.",no:"🚫 OpenStreetMap köpeklerin kabul edilmeyebileceğini gösteriyor.",dogPark:"🐕 Özel köpek parkı.",unconfirmed:"ℹ️ Evcil hayvan politikası doğrulanmadı. Ziyaret etmeden önce işletmeyle iletişime geçin."},
+dynamic:{defaultPlaceName:"Evcil Hayvan Dostu Yer",localDescription:"Seçilmiş PETS & DOGUE evcil hayvan dostu yeri.",confirmPolicy:"Güncel evcil hayvan politikasını doğrulamak için işletmeyle iletişime geçin.",genericPlace:"{category} Yeri",cuisine:"Mutfak: {value}.",outdoor:"Açık hava oturma alanı mevcut.",hours:"Çalışma saatleri: {value}.",osmPlace:"OpenStreetMap üzerinden bulunan {category} yeri.",reportedPlace:"Raporlanan Yer",verifiedBadge:"✓ DOGUE ONAYLI",reviewBadge:"⚠ İNCELEMEDE",locationUnavailable:"Konum mevcut değil",communityReports:"Topluluk raporları",disputed:"⚠️ Evcil hayvan politikası tartışmalı. Bu yer topluluk incelemesinde.",policyUnknown:"Evcil hayvan politikası doğrulanmadı.",placeInfo:"Evcil hayvan dostu yer bilgisi.",details:"Detaylar",directions:"Yol Tarifi",saved:"♥ Kaydedildi",save:"♡ Kaydet",reported:"✓ Raporlandı",report:"🚩 Raporla",trustScore:"DOGUE Trust Score",website:"Web Sitesini Ziyaret Et",reportProblem:"🚩 Sorun Bildir",close:"Kapat",modalDisputed:"⚠️ Bu evcil hayvan politikası şu anda tartışmalı ve inceleniyor.",metresAway:"{value} m uzakta",kmAway:"{value} km uzakta",remove:"Kaldır"},
+trust:{review:"🟠 İncelemede",verified:"🟢 DOGUE Onaylı",favourite:"🟢 Topluluk Favorisi",new:"🟡 Yeni / Doğrulanmamış Yer",limited:"🟠 Sınırlı Güven Verisi"},
+report:{title:"Sorun Bildir",description:"Bu yerle ilgili neyin değiştiğini bize anlatın.",notice:"Her yer için bu tarayıcıdan bir rapor gönderilebilir. Raporlar DOGUE Trust Center üzerinden incelenir.",notFriendly:"❌ Artık evcil hayvan dostu değil",refused:"🚫 Personel evcil hayvanları reddetti",closed:"🏪 Kalıcı olarak kapandı",address:"📍 Yanlış adres",phone:"☎️ Yanlış telefon numarası",website:"🌐 Web sitesi kullanılamıyor",unsafe:"⚠️ Güvensiz yer veya koşullar",other:"✍️ Diğer sorun",details:"Yararlı detaylar ekleyin, isteğe bağlı...",button:"Rapor Gönder",already:"Bu yeri bu tarayıcıdan zaten raporladınız.",reporting:"Raporlanan: {name}",choose:"Rapor için bir neden seçin.",alreadyShort:"Bu yeri zaten raporladınız.",hidden:"Teşekkürler. Bu yer topluluk rapor sınırına ulaştı ve yönetici incelemesine kadar geçici olarak gizlendi.",underReview:"Teşekkürler. Evcil hayvan politikası kontrol edilirken bu yer artık İncelemede olarak işaretlendi.",saved:"Teşekkürler. Raporunuz DOGUE Trust moderasyonu için kaydedildi."},
+submitMessages:{required:"Yer adı, kategori, adres ve e-posta alanlarını doldurun.",email:"Geçerli bir e-posta adresi girin.",agreement:"Gönderilen bilgilerin doğru olduğunu onaylayın.",communityPolicy:"Topluluk üyesi tarafından sağlanan evcil hayvan politikası.",communityMember:"Topluluk üyesi",success:"Teşekkürler. Yer Pending Review olarak kaydedildi ve yönetici moderasyonu için hazır.",lookupFailed:"Adres araması başarısız oldu."}
+},ar:{
+meta:{title:"أماكن صديقة للحيوانات | PETS & DOGUE",description:"ابحث عن المقاهي والفنادق والحدائق والشواطئ والعيادات البيطرية وخدمات العناية وغيرها من الأماكن الصديقة للحيوانات عبر PETS & DOGUE."},
+hero:{title:"أماكن صديقة للحيوانات",description:"ابحث عن أماكن حقيقية بالقرب من أي مدينة أو رمز بريدي، واستكشفها على الخريطة، وأرسل مواقع جديدة وساعد في الحفاظ على دقة دليل PETS & DOGUE.",search:"البحث عن أماكن",add:"إضافة مكان",club:"الانضمام إلى Club"},
+stats:{results:"النتائج",internet:"أماكن من الإنترنت",verified:"موثّق من DOGUE",saved:"المحفوظة",review:"قيد المراجعة"},
+directory:{title:"ابحث عن أماكن بالقرب منك"},
+search:{locationPlaceholder:"المدينة أو الدولة أو الرمز البريدي — مثال Bournemouth BH2",button:"بحث",myLocation:"📍 استخدام موقعي",help:"نتائج الإنترنت تأتي من OpenStreetMap. قد تكون معلومات سياسة الحيوانات غير مكتملة، لذلك تأكد دائمًا مباشرة من المكان قبل الزيارة."},
+categories:{all:"جميع الفئات",cafes:"المقاهي",restaurants:"المطاعم",hotels:"الفنادق",parksDogParks:"الحدائق وحدائق الكلاب",parks:"الحدائق",beaches:"الشواطئ",vetsFull:"العيادات البيطرية",vets:"الأطباء البيطريون",groomers:"العناية بالحيوانات",petShops:"متاجر الحيوانات"},
+categoryLabels:{Cafe:"مقهى",Restaurant:"مطعم",Hotel:"فندق",Park:"حديقة",Beach:"شاطئ",Veterinary:"طبيب بيطري",Grooming:"العناية",PetShop:"متجر حيوانات",Other:"أخرى"},
+sources:{internet:"نتيجة من الإنترنت",community:"أرسلها المجتمع",verified:"موثّق من DOGUE",review:"قيد المراجعة",internetShort:"الإنترنت",communityShort:"المجتمع"},
+filters:{all:"الكل"},
+results:{defaultTitle:"أماكن PETS & DOGUE",defaultSubtitle:"ابحث عن موقع أو استخدم موقعك الحالي.",one:"تم عرض مكان واحد",many:"تم عرض {count} أماكن"},
+sort:{distance:"الأقرب أولاً",trust:"أعلى Trust Score",name:"الاسم أ–ي",source:"أماكن DOGUE أولاً"},
+empty:{title:"لم يتم العثور على أماكن",description:"جرّب نطاقًا أكبر أو فئة أخرى أو موقعًا مختلفًا."},
+map:{title:"الخريطة المباشرة",searchTitle:"ابحث عن موقع",searchText:"ستظهر علامات الخريطة الحقيقية هنا.",one:"مكان واحد على الخريطة",many:"{count} أماكن على الخريطة",near:"نتائج بالقرب من {location}.",noSearch:"ابحث عن موقع لتحميل نتائج الإنترنت القريبة."},
+saved:{title:"الأماكن المحفوظة",emptyTitle:"ستظهر الأماكن التي تحفظها هنا",emptyText:"استخدم زر الحفظ في بطاقة أي مكان.",location:"موقع محفوظ"},
+submit:{title:"إضافة مكان صديق للحيوانات",description:"هل تعرف مقهى أو فندقًا أو حديقة أو شاطئًا أو خدمة عناية أو مكانًا آخر يرحب بالحيوانات؟ أرسله للمراجعة التحريرية. لن يظهر للعامة قبل الموافقة.",placeName:"اسم المكان",chooseCategory:"اختر الفئة",address:"العنوان الكامل أو الرمز البريدي",website:"الموقع أو رابط اجتماعي",phone:"الهاتف، اختياري",policy:"سياسة الحيوانات — مثال: يسمح بالكلاب في التراس",name:"اسمك",email:"بريدك الإلكتروني",details:"أخبرنا لماذا هذا المكان صديق للحيوانات وما الذي يجب أن يعرفه الزوار...",agreement:"أؤكد أن المعلومات دقيقة وأفهم أن الطلب سيخضع للمراجعة قبل النشر.",button:"إرسال للمراجعة"},
+club:{title:"مزايا PETS & DOGUE Club",description:"يمكن لأعضاء Club الحصول على عروض مختارة من الفنادق والمقاهي وخدمات العناية وشركاء السفر والشركات المحلية الموثوقة.",hotel:"🏨 خصومات الفنادق",cafe:"☕ عروض المقاهي",grooming:"✂️ مزايا العناية",bookings:"🎟 حجوزات الشركاء",local:"📍 توصيات محلية",qr:"💚 بطاقة QR للعضو",button:"استكشاف مزايا Club"},
+footer:{home:"الرئيسية",community:"المجتمع المحلي",travel:"السفر مع الحيوانات",wellness:"العافية",partners:"الشركاء",club:"Club",account:"الحساب",contact:"اتصل بنا"},
+messages:{enterLocation:"أدخل مدينة أو دولة أو رمزًا بريديًا أولاً.",findingLocation:"جارٍ العثور على الموقع…",locationFailed:"فشل البحث عن الموقع.",notFound:"لم يتم العثور على الموقع. جرّب مدينة مع الدولة أو رمزًا بريديًا كاملاً.",unableSearch:"تعذر البحث عن هذا الموقع.",geoUnsupported:"المتصفح لا يدعم تحديد الموقع.",waitingPermission:"في انتظار إذن الموقع…",currentLocation:"موقعك الحالي",currentLocationShort:"الموقع الحالي",yourLocation:"موقعك",unableNearby:"تعذر تحميل الأماكن القريبة.",permissionDenied:"تم رفض إذن الموقع.",locationUnknown:"تعذر تحديد موقعك.",locationTimeout:"انتهت مهلة طلب الموقع.",unableCurrent:"تعذر استخدام موقعك الحالي.",searchingOSM:"جارٍ البحث في OpenStreetMap عن أماكن قريبة…",mapBusy:"خدمة الخرائط العامة مشغولة حاليًا. حاول مرة أخرى بعد قليل.",internetFound:"تم العثور على {count} أماكن من الإنترنت بالقرب من {location}.",categoryRefresh:"تعذر تحديث الفئة. النتائج الحالية ما زالت متاحة."},
+policy:{welcome:"🐾 يشير OpenStreetMap إلى أن الكلاب أو الحيوانات مرحب بها.",lead:"🦮 يبدو أن الكلاب مسموحة إذا كانت مربوطة.",no:"🚫 يشير OpenStreetMap إلى أن الكلاب قد لا تكون مسموحة.",dogPark:"🐕 حديقة مخصصة للكلاب.",unconfirmed:"ℹ️ سياسة الحيوانات غير مؤكدة. تواصل مع المكان قبل الزيارة."},
+dynamic:{defaultPlaceName:"مكان صديق للحيوانات",localDescription:"مكان مختار من PETS & DOGUE وصديق للحيوانات.",confirmPolicy:"تواصل مع المكان لتأكيد سياسة الحيوانات الحالية.",genericPlace:"مكان {category}",cuisine:"المطبخ: {value}.",outdoor:"توجد جلسات خارجية.",hours:"ساعات العمل: {value}.",osmPlace:"تم العثور على مكان من فئة {category} عبر OpenStreetMap.",reportedPlace:"مكان تم الإبلاغ عنه",verifiedBadge:"✓ موثّق من DOGUE",reviewBadge:"⚠ قيد المراجعة",locationUnavailable:"الموقع غير متاح",communityReports:"بلاغات المجتمع",disputed:"⚠️ سياسة الحيوانات محل خلاف. المكان قيد مراجعة المجتمع حاليًا.",policyUnknown:"سياسة الحيوانات غير مؤكدة.",placeInfo:"معلومات عن المكان الصديق للحيوانات.",details:"التفاصيل",directions:"الاتجاهات",saved:"♥ محفوظ",save:"♡ حفظ",reported:"✓ تم الإبلاغ",report:"🚩 إبلاغ",trustScore:"DOGUE Trust Score",website:"زيارة الموقع",reportProblem:"🚩 الإبلاغ عن مشكلة",close:"إغلاق",modalDisputed:"⚠️ سياسة الحيوانات هذه محل خلاف وهي قيد المراجعة حاليًا.",metresAway:"على بعد {value} م",kmAway:"على بعد {value} كم",remove:"إزالة"},
+trust:{review:"🟠 قيد المراجعة",verified:"🟢 موثّق من DOGUE",favourite:"🟢 مفضل لدى المجتمع",new:"🟡 مكان جديد / غير موثّق",limited:"🟠 بيانات ثقة محدودة"},
+report:{title:"الإبلاغ عن مشكلة",description:"أخبرنا بما تغير في هذا المكان.",notice:"يمكن إرسال بلاغ واحد من هذا المتصفح لكل مكان. تتم مراجعة البلاغات عبر DOGUE Trust Center.",notFriendly:"❌ لم يعد صديقًا للحيوانات",refused:"🚫 الموظفون رفضوا الحيوانات",closed:"🏪 مغلق نهائيًا",address:"📍 عنوان خاطئ",phone:"☎️ رقم هاتف خاطئ",website:"🌐 الموقع غير متاح",unsafe:"⚠️ مكان أو ظروف غير آمنة",other:"✍️ مشكلة أخرى",details:"أضف تفاصيل مفيدة، اختياري...",button:"إرسال البلاغ",already:"لقد أبلغت بالفعل عن هذا المكان من هذا المتصفح.",reporting:"الإبلاغ عن: {name}",choose:"اختر سبب البلاغ.",alreadyShort:"لقد أبلغت بالفعل عن هذا المكان.",hidden:"شكرًا. وصل هذا المكان إلى حد بلاغات المجتمع وتم إخفاؤه مؤقتًا في انتظار مراجعة المسؤول.",underReview:"شكرًا. تم وضع المكان الآن قيد المراجعة أثناء التحقق من سياسة الحيوانات.",saved:"شكرًا. تم حفظ بلاغك لمراجعة DOGUE Trust."},
+submitMessages:{required:"أكمل اسم المكان والفئة والعنوان والبريد الإلكتروني.",email:"أدخل بريدًا إلكترونيًا صالحًا.",agreement:"أكد أن المعلومات المرسلة دقيقة.",communityPolicy:"سياسة الحيوانات مقدمة من عضو في المجتمع.",communityMember:"عضو في المجتمع",success:"شكرًا. تم حفظ المكان بحالة Pending Review وهو جاهز لمراجعة المسؤول.",lookupFailed:"فشل البحث عن العنوان."}
+},
+
+hi:{
+meta:{title:"Pet-Friendly Places | PETS & DOGUE",description:"PETS & DOGUE directory के साथ pet-friendly cafés, hotels, parks, beaches, veterinary clinics, groomers और अन्य जगहें खोजें।"},
+hero:{title:"Pet-Friendly Places",description:"किसी भी शहर या postcode के पास वास्तविक जगहें खोजें, map पर देखें, नई locations submit करें और PETS & DOGUE directory को सही रखने में मदद करें।",search:"Places खोजें",add:"Place जोड़ें",club:"Club Join करें"},
+stats:{results:"Results",internet:"Internet Places",verified:"DOGUE Verified",saved:"Saved",review:"Under Review"},
+directory:{title:"अपने पास Places खोजें"},
+search:{locationPlaceholder:"City, country या postcode — जैसे Bournemouth BH2",button:"खोजें",myLocation:"📍 मेरी Location इस्तेमाल करें",help:"Internet results OpenStreetMap से आते हैं। Pet-policy जानकारी अधूरी हो सकती है, इसलिए visit करने से पहले venue से सीधे confirm करें।"},
+categories:{all:"सभी Categories",cafes:"Cafés",restaurants:"Restaurants",hotels:"Hotels",parksDogParks:"Parks & Dog Parks",parks:"Parks",beaches:"Beaches",vetsFull:"Veterinary Clinics",vets:"Vets",groomers:"Groomers",petShops:"Pet Shops"},
+categoryLabels:{Cafe:"Café",Restaurant:"Restaurant",Hotel:"Hotel",Park:"Park",Beach:"Beach",Veterinary:"Veterinary",Grooming:"Grooming",PetShop:"Pet Shop",Other:"Other"},
+sources:{internet:"Internet result",community:"Community submitted",verified:"DOGUE Verified",review:"Under Review",internetShort:"INTERNET",communityShort:"COMMUNITY"},
+filters:{all:"सभी"},
+results:{defaultTitle:"PETS & DOGUE Places",defaultSubtitle:"Location खोजें या अपनी current position इस्तेमाल करें।",one:"1 place दिखाया गया",many:"{count} places दिखाए गए"},
+sort:{distance:"Nearest first",trust:"Highest Trust Score",name:"Name A–Z",source:"DOGUE places first"},
+empty:{title:"कोई place नहीं मिला",description:"बड़ा radius, दूसरी category या अलग location आज़माएँ।"},
+map:{title:"Live Map",searchTitle:"Location खोजें",searchText:"Real map markers यहाँ दिखेंगे।",one:"Map पर 1 place",many:"Map पर {count} places",near:"{location} के पास results।",noSearch:"Nearby internet results load करने के लिए location खोजें।"},
+saved:{title:"Saved Places",emptyTitle:"आपके saved places यहाँ दिखेंगे",emptyText:"किसी भी place card पर Save button इस्तेमाल करें।",location:"Saved location"},
+submit:{title:"Pet-Friendly Place जोड़ें",description:"क्या आप किसी café, hotel, park, beach, groomer या ऐसी जगह को जानते हैं जहाँ pets welcome हैं? Editorial review के लिए submit करें। Approval तक यह public नहीं होगा।",placeName:"Place name",chooseCategory:"Category चुनें",address:"Full address या postcode",website:"Website या social link",phone:"Telephone, optional",policy:"Pet policy — जैसे dogs terrace पर welcome हैं",name:"आपका नाम",email:"आपका email",details:"बताएँ कि यह place pet-friendly क्यों है और visitors को क्या जानना चाहिए...",agreement:"मैं confirm करता/करती हूँ कि जानकारी सही है और समझता/समझती हूँ कि publication से पहले review होगा।",button:"Review के लिए Submit करें"},
+club:{title:"PETS & DOGUE Club Benefits",description:"Club members pet-friendly hotels, cafés, groomers, travel partners और trusted local businesses से selected offers unlock कर सकते हैं।",hotel:"🏨 Hotel Discounts",cafe:"☕ Café Offers",grooming:"✂️ Grooming Benefits",bookings:"🎟 Partner Bookings",local:"📍 Local Recommendations",qr:"💚 Member QR Card",button:"Club Benefits देखें"},
+footer:{home:"होम",community:"लोकल कम्युनिटी",travel:"Pet Travel",wellness:"Wellness",partners:"Partners",club:"Club",account:"Account",contact:"संपर्क"},
+messages:{enterLocation:"पहले city, country या postcode दर्ज करें।",findingLocation:"Location खोजी जा रही है…",locationFailed:"Location search fail हो गई।",notFound:"Location नहीं मिली। Country के साथ city या पूरा postcode आज़माएँ।",unableSearch:"इस location को search नहीं किया जा सका।",geoUnsupported:"यह browser geolocation support नहीं करता।",waitingPermission:"Location permission का इंतज़ार…",currentLocation:"आपकी current location",currentLocationShort:"Current location",yourLocation:"आपकी location",unableNearby:"Nearby places load नहीं हो सके।",permissionDenied:"Location permission deny कर दी गई।",locationUnknown:"आपकी location determine नहीं हो सकी।",locationTimeout:"Location request timeout हो गई।",unableCurrent:"आपकी current location इस्तेमाल नहीं की जा सकी।",searchingOSM:"OpenStreetMap पर nearby places खोजे जा रहे हैं…",mapBusy:"Public map service busy है। थोड़ी देर बाद फिर कोशिश करें।",internetFound:"{location} के पास {count} internet places मिले।",categoryRefresh:"Category refresh नहीं हो सकी। Existing results उपलब्ध हैं।"},
+policy:{welcome:"🐾 OpenStreetMap बताता है कि dogs या pets welcome हैं।",lead:"🦮 Dogs lead पर allowed लगते हैं।",no:"🚫 OpenStreetMap बताता है कि dogs शायद allowed नहीं हैं।",dogPark:"🐕 Dedicated dog park।",unconfirmed:"ℹ️ Pet policy confirm नहीं है। Visit करने से पहले venue से contact करें।"},
+dynamic:{defaultPlaceName:"Pet-Friendly Place",localDescription:"Selected PETS & DOGUE pet-friendly place।",confirmPolicy:"Current pet policy confirm करने के लिए venue से contact करें।",genericPlace:"{category} Place",cuisine:"Cuisine: {value}.",outdoor:"Outdoor seating available।",hours:"Opening hours: {value}.",osmPlace:"OpenStreetMap के जरिए मिला {category} location।",reportedPlace:"Reported Place",verifiedBadge:"✓ DOGUE VERIFIED",reviewBadge:"⚠ UNDER REVIEW",locationUnavailable:"Location unavailable",communityReports:"Community reports",disputed:"⚠️ Pet policy disputed है। यह place अभी community review में है।",policyUnknown:"Pet policy confirm नहीं है।",placeInfo:"Pet-friendly place information।",details:"Details",directions:"Directions",saved:"♥ Saved",save:"♡ Save",reported:"✓ Reported",report:"🚩 Report",trustScore:"DOGUE Trust Score",website:"Website देखें",reportProblem:"🚩 Problem Report करें",close:"Close",modalDisputed:"⚠️ यह pet policy अभी disputed और under review है।",metresAway:"{value} m दूर",kmAway:"{value} km दूर",remove:"Remove"},
+trust:{review:"🟠 Under Review",verified:"🟢 DOGUE Verified",favourite:"🟢 Community Favourite",new:"🟡 New / Unverified Place",limited:"🟠 Limited Trust Data"},
+report:{title:"Problem Report करें",description:"हमें बताएँ कि इस place के बारे में क्या बदल गया है।",notice:"इस browser से हर place के लिए एक report भेजी जा सकती है। Reports DOGUE Trust Center के जरिए review होती हैं।",notFriendly:"❌ अब pet-friendly नहीं",refused:"🚫 Staff ने pets को मना किया",closed:"🏪 Permanently closed",address:"📍 Wrong address",phone:"☎️ Wrong telephone number",website:"🌐 Website unavailable",unsafe:"⚠️ Unsafe place या conditions",other:"✍️ Other problem",details:"Useful details जोड़ें, optional...",button:"Report Submit करें",already:"आप इस browser से यह place पहले report कर चुके हैं।",reporting:"Reporting: {name}",choose:"Report के लिए reason चुनें।",alreadyShort:"आप यह place पहले report कर चुके हैं।",hidden:"धन्यवाद। इस place ने community report threshold पूरा कर लिया है और administrator review तक temporarily hidden है।",underReview:"धन्यवाद। Pet policy check होने तक यह place अब Under Review marked है।",saved:"धन्यवाद। आपकी report DOGUE Trust moderation के लिए save हो गई है।"},
+submitMessages:{required:"Place name, category, address और email पूरा करें।",email:"Valid email address दर्ज करें।",agreement:"Confirm करें कि submitted information सही है।",communityPolicy:"Community member द्वारा दी गई pet policy।",communityMember:"Community member",success:"धन्यवाद। Place Pending Review के रूप में save हो गया है और administrator moderation के लिए तैयार है।",lookupFailed:"Address lookup fail हो गया।"}
+}
 
-window.PetsDogueTranslations.petFriendlyPlaces = {
-  en: {
-    meta: {
-      title: "Pet Friendly Places | PETS & DOGUE"
-    },
-
-    hero: {
-      title: "Pet Friendly Places",
-      description:
-        "Search real places near any city or postcode, explore them on the map, submit new locations and help protect the accuracy of the PETS & DOGUE directory.",
-      search: "Search Places",
-      add: "Add A Place",
-      club: "Join The Club"
-    },
-
-    stats: {
-      results: "Results",
-      internet: "Internet Places",
-      verified: "DOGUE Verified",
-      saved: "Saved",
-      review: "Under Review"
-    },
-
-    directory: {
-      title: "Find Places Near You",
-      locationPlaceholder:
-        "City, country or postcode — e.g. Bournemouth BH2",
-      search: "Search",
-      location: "📍 Use My Location",
-      help:
-        "Internet results come from OpenStreetMap. Pet-policy information may be incomplete, so always confirm directly with a venue before visiting."
-    },
-
-    categories: {
-      allCategories: "All Categories",
-      all: "All",
-      cafes: "Cafés",
-      restaurants: "Restaurants",
-      hotels: "Hotels",
-      parksDogParks: "Parks & Dog Parks",
-      parks: "Parks",
-      beaches: "Beaches",
-      veterinaryClinics: "Veterinary Clinics",
-      vets: "Vets",
-      groomers: "Groomers",
-      petShops: "Pet Shops"
-    },
-
-    legend: {
-      internet: "Internet result",
-      cms: "PETS & DOGUE CMS",
-      community: "Community submitted",
-      verified: "DOGUE Verified",
-      review: "Under Review"
-    },
-
-    results: {
-      title: "PETS & DOGUE Places",
-      subtitle:
-        "Search a location or use your current position.",
-      nearest: "Nearest first",
-      trust: "Highest trust score",
-      name: "Name A–Z",
-      dogue: "DOGUE places first",
-      emptyTitle: "No places found",
-      emptyText:
-        "Try a larger radius, another category or a different location."
-    },
-
-    map: {
-      title: "Live Map",
-      searchTitle: "Search for a location",
-      searchText:
-        "Real map markers will appear here."
-    },
-
-    saved: {
-      title: "Saved Places"
-    },
-
-    add: {
-      title: "Add A Pet-Friendly Place",
-      description:
-        "Know a café, hotel, park, beach, groomer or another location that welcomes pets? Submit it for editorial review. It will not become public until approved.",
-
-      placeName: "Place name",
-      chooseCategory: "Choose category",
-      address: "Full address or postcode",
-      website: "Website or social link",
-      phone: "Telephone, optional",
-      policy:
-        "Pet policy — e.g. dogs welcome on terrace",
-      yourName: "Your name",
-      email: "Your email",
-      details:
-        "Tell us why this place is pet friendly and what visitors should know...",
-
-      agreement:
-        "I confirm that the information is accurate. I understand that the submission will be reviewed before publication.",
-
-      submit: "Submit For Review"
-    },
-
-    club: {
-      title: "PETS & DOGUE Club Benefits",
-      description:
-        "Club members can unlock selected offers from pet-friendly hotels, cafés, groomers, travel partners and trusted local businesses.",
-
-      hotels: "🏨 Hotel Discounts",
-      cafes: "☕ Café Offers",
-      grooming: "✂️ Grooming Benefits",
-      bookings: "🎟 Partner Bookings",
-      local: "📍 Local Recommendations",
-      qr: "💚 Member QR Card",
-
-      button: "Explore Club Benefits"
-    },
-
-    modal: {
-      trust: "DOGUE Trust Score",
-      website: "Visit Website",
-      directions: "Directions",
-      report: "🚩 Report Problem"
-    },
-
-    report: {
-      title: "Report A Problem",
-      description:
-        "Tell us what has changed about this place.",
-      notice:
-        "One report can be submitted from this browser for each place. Reports are reviewed through the DOGUE Trust Center.",
-
-      notFriendly:
-        "❌ No longer pet friendly",
-      refused:
-        "🚫 Staff refused pets",
-      closed:
-        "🏪 Closed permanently",
-      address:
-        "📍 Wrong address",
-      phone:
-        "☎️ Wrong telephone number",
-      website:
-        "🌐 Website unavailable",
-      unsafe:
-        "⚠️ Unsafe place or conditions",
-      other:
-        "✍️ Other problem",
-
-      details:
-        "Add useful details, optional...",
-      submit: "Submit Report"
-    },
-
-    footer: {
-      home: "Home",
-      community: "Local Community",
-      travel: "Pet Travel",
-      wellness: "Wellness",
-      partners: "Partners",
-      club: "Club",
-      account: "Account",
-      contact: "Contact",
-      admin: "Admin"
-    }
-  },
-
-  uk: {
-    meta: {
-      title:
-        "Місця для відпочинку з тваринами | PETS & DOGUE"
-    },
-
-    hero: {
-      title:
-        "Місця для відпочинку з тваринами",
-      description:
-        "Шукайте реальні місця біля будь-якого міста або поштового індексу, переглядайте їх на карті, додавайте нові локації та допомагайте підтримувати точність каталогу PETS & DOGUE.",
-      search: "Шукати місця",
-      add: "Додати місце",
-      club: "Приєднатися до клубу"
-    },
-
-    stats: {
-      results: "Результати",
-      internet: "Місця з інтернету",
-      verified: "Перевірено DOGUE",
-      saved: "Збережені",
-      review: "На перевірці"
-    },
-
-    directory: {
-      title: "Знайдіть місця поруч",
-      locationPlaceholder:
-        "Місто, країна або поштовий індекс — наприклад Bournemouth BH2",
-      search: "Пошук",
-      location:
-        "📍 Використати моє місцезнаходження",
-      help:
-        "Результати з інтернету надходять з OpenStreetMap. Інформація про правила для тварин може бути неповною, тому перед відвідуванням завжди уточнюйте її безпосередньо в закладі."
-    },
-
-    categories: {
-      allCategories: "Усі категорії",
-      all: "Усі",
-      cafes: "Кафе",
-      restaurants: "Ресторани",
-      hotels: "Готелі",
-      parksDogParks:
-        "Парки та майданчики для собак",
-      parks: "Парки",
-      beaches: "Пляжі",
-      veterinaryClinics:
-        "Ветеринарні клініки",
-      vets: "Ветеринари",
-      groomers: "Грумери",
-      petShops: "Зоомагазини"
-    },
-
-    legend: {
-      internet: "Результат з інтернету",
-      cms: "CMS PETS & DOGUE",
-      community: "Додано спільнотою",
-      verified: "Перевірено DOGUE",
-      review: "На перевірці"
-    },
-
-    results: {
-      title: "Місця PETS & DOGUE",
-      subtitle:
-        "Введіть місце або використайте вашу поточну позицію.",
-      nearest: "Спочатку найближчі",
-      trust: "Найвищий рівень довіри",
-      name: "Назва А–Я",
-      dogue:
-        "Спочатку місця DOGUE",
-      emptyTitle: "Місць не знайдено",
-      emptyText:
-        "Спробуйте збільшити радіус, обрати іншу категорію або вказати інше місце."
-    },
-
-    map: {
-      title: "Карта",
-      searchTitle: "Знайдіть місце",
-      searchText:
-        "Тут з’являться реальні позначки на карті."
-    },
-
-    saved: {
-      title: "Збережені місця"
-    },
-
-    add: {
-      title:
-        "Додати місце для відвідування з тваринами",
-      description:
-        "Знаєте кафе, готель, парк, пляж, грумінг-салон або інше місце, де раді тваринам? Надішліть його на редакційну перевірку. Воно не стане публічним до затвердження.",
-
-      placeName: "Назва місця",
-      chooseCategory: "Оберіть категорію",
-      address:
-        "Повна адреса або поштовий індекс",
-      website:
-        "Сайт або посилання на соцмережу",
-      phone: "Телефон, необов’язково",
-      policy:
-        "Правила для тварин — наприклад, собакам можна на терасу",
-      yourName: "Ваше ім’я",
-      email: "Ваш email",
-      details:
-        "Розкажіть, чому це місце підходить для тварин і що потрібно знати відвідувачам...",
-
-      agreement:
-        "Я підтверджую точність інформації та розумію, що заявка буде перевірена перед публікацією.",
-
-      submit: "Надіслати на перевірку"
-    },
-
-    club: {
-      title:
-        "Переваги PETS & DOGUE Club",
-      description:
-        "Учасники клубу зможуть отримувати спеціальні пропозиції від pet-friendly готелів, кафе, грумерів, туристичних партнерів і перевірених місцевих компаній.",
-
-      hotels: "🏨 Знижки в готелях",
-      cafes: "☕ Пропозиції кафе",
-      grooming: "✂️ Переваги грумінгу",
-      bookings: "🎟 Бронювання партнерів",
-      local: "📍 Місцеві рекомендації",
-      qr: "💚 Клубна QR-картка",
-
-      button: "Переглянути переваги клубу"
-    },
-
-    modal: {
-      trust: "Рівень довіри DOGUE",
-      website: "Відкрити сайт",
-      directions: "Маршрут",
-      report: "🚩 Повідомити про проблему"
-    },
-
-    report: {
-      title: "Повідомити про проблему",
-      description:
-        "Розкажіть, що змінилося в цьому місці.",
-      notice:
-        "З цього браузера можна надіслати одну скаргу на кожне місце. Скарги перевіряє DOGUE Trust Center.",
-
-      notFriendly:
-        "❌ Більше не приймають тварин",
-      refused:
-        "🚫 Персонал відмовив у вході з твариною",
-      closed:
-        "🏪 Заклад закрито назавжди",
-      address:
-        "📍 Неправильна адреса",
-      phone:
-        "☎️ Неправильний номер телефону",
-      website:
-        "🌐 Сайт недоступний",
-      unsafe:
-        "⚠️ Небезпечне місце або умови",
-      other:
-        "✍️ Інша проблема",
-
-      details:
-        "Додайте корисні подробиці, необов’язково...",
-      submit: "Надіслати скаргу"
-    },
-
-    footer: {
-      home: "Головна",
-      community: "Місцева спільнота",
-      travel: "Подорожі",
-      wellness: "Здоров’я",
-      partners: "Партнери",
-      club: "Клуб",
-      account: "Профіль",
-      contact: "Контакти",
-      admin: "Адміністратор"
-    }
-  },
-
-  ru: {
-    meta: {
-      title:
-        "Места для посещения с питомцами | PETS & DOGUE"
-    },
-
-    hero: {
-      title:
-        "Места для посещения с питомцами",
-      description:
-        "Ищите реальные места рядом с любым городом или почтовым индексом, смотрите их на карте, добавляйте новые локации и помогайте поддерживать точность каталога PETS & DOGUE.",
-      search: "Искать места",
-      add: "Добавить место",
-      club: "Вступить в клуб"
-    },
-
-    stats: {
-      results: "Результаты",
-      internet: "Места из интернета",
-      verified: "Проверено DOGUE",
-      saved: "Сохранённые",
-      review: "На проверке"
-    },
-
-    directory: {
-      title: "Найдите места рядом",
-      locationPlaceholder:
-        "Город, страна или почтовый индекс — например Bournemouth BH2",
-      search: "Поиск",
-      location:
-        "📍 Использовать моё местоположение",
-      help:
-        "Результаты из интернета поступают из OpenStreetMap. Информация о правилах для животных может быть неполной, поэтому перед посещением всегда уточняйте её непосредственно у заведения."
-    },
-
-    categories: {
-      allCategories: "Все категории",
-      all: "Все",
-      cafes: "Кафе",
-      restaurants: "Рестораны",
-      hotels: "Отели",
-      parksDogParks:
-        "Парки и площадки для собак",
-      parks: "Парки",
-      beaches: "Пляжи",
-      veterinaryClinics:
-        "Ветеринарные клиники",
-      vets: "Ветеринары",
-      groomers: "Грумеры",
-      petShops: "Зоомагазины"
-    },
-
-    legend: {
-      internet: "Результат из интернета",
-      cms: "CMS PETS & DOGUE",
-      community: "Добавлено сообществом",
-      verified: "Проверено DOGUE",
-      review: "На проверке"
-    },
-
-    results: {
-      title: "Места PETS & DOGUE",
-      subtitle:
-        "Введите место или используйте своё текущее местоположение.",
-      nearest: "Сначала ближайшие",
-      trust: "Самый высокий уровень доверия",
-      name: "Название А–Я",
-      dogue:
-        "Сначала места DOGUE",
-      emptyTitle: "Места не найдены",
-      emptyText:
-        "Попробуйте увеличить радиус, выбрать другую категорию или указать другое место."
-    },
-
-    map: {
-      title: "Карта",
-      searchTitle: "Найдите место",
-      searchText:
-        "Здесь появятся реальные отметки на карте."
-    },
-
-    saved: {
-      title: "Сохранённые места"
-    },
-
-    add: {
-      title:
-        "Добавить место для посещения с питомцами",
-      description:
-        "Знаете кафе, отель, парк, пляж, груминг-салон или другое место, где рады животным? Отправьте его на редакционную проверку. Оно не станет публичным до одобрения.",
-
-      placeName: "Название места",
-      chooseCategory: "Выберите категорию",
-      address:
-        "Полный адрес или почтовый индекс",
-      website:
-        "Сайт или ссылка на соцсеть",
-      phone: "Телефон, необязательно",
-      policy:
-        "Правила для животных — например, собакам можно на террасу",
-      yourName: "Ваше имя",
-      email: "Ваш email",
-      details:
-        "Расскажите, почему это место подходит для животных и что следует знать посетителям...",
-
-      agreement:
-        "Я подтверждаю точность информации и понимаю, что заявка будет проверена перед публикацией.",
-
-      submit: "Отправить на проверку"
-    },
-
-    club: {
-      title:
-        "Преимущества PETS & DOGUE Club",
-      description:
-        "Участники клуба смогут получать специальные предложения от pet-friendly отелей, кафе, грумеров, туристических партнёров и проверенных местных компаний.",
-
-      hotels: "🏨 Скидки в отелях",
-      cafes: "☕ Предложения кафе",
-      grooming: "✂️ Преимущества груминга",
-      bookings: "🎟 Бронирования партнёров",
-      local: "📍 Местные рекомендации",
-      qr: "💚 Клубная QR-карта",
-
-      button: "Смотреть преимущества клуба"
-    },
-
-    modal: {
-      trust: "Уровень доверия DOGUE",
-      website: "Открыть сайт",
-      directions: "Маршрут",
-      report: "🚩 Сообщить о проблеме"
-    },
-
-    report: {
-      title: "Сообщить о проблеме",
-      description:
-        "Расскажите, что изменилось в этом месте.",
-      notice:
-        "Из этого браузера можно отправить одну жалобу на каждое место. Жалобы проверяет DOGUE Trust Center.",
-
-      notFriendly:
-        "❌ Больше не принимают животных",
-      refused:
-        "🚫 Персонал отказал во входе с животным",
-      closed:
-        "🏪 Заведение закрыто навсегда",
-      address:
-        "📍 Неправильный адрес",
-      phone:
-        "☎️ Неправильный номер телефона",
-      website:
-        "🌐 Сайт недоступен",
-      unsafe:
-        "⚠️ Опасное место или условия",
-      other:
-        "✍️ Другая проблема",
-
-      details:
-        "Добавьте полезные подробности, необязательно...",
-      submit: "Отправить жалобу"
-    },
-
-    footer: {
-      home: "Главная",
-      community: "Местное сообщество",
-      travel: "Путешествия",
-      wellness: "Здоровье и уход",
-      partners: "Партнёры",
-      club: "Клуб",
-      account: "Профиль",
-      contact: "Контакты",
-      admin: "Администратор"
-    }
-  },
-
-  es: {
-    meta: {
-      title:
-        "Lugares para visitar con mascotas | PETS & DOGUE"
-    },
-
-    hero: {
-      title:
-        "Lugares para visitar con mascotas",
-      description:
-        "Busca lugares reales cerca de cualquier ciudad o código postal, explóralos en el mapa, añade nuevas ubicaciones y ayuda a proteger la precisión del directorio PETS & DOGUE.",
-      search: "Buscar lugares",
-      add: "Añadir un lugar",
-      club: "Únete al club"
-    },
-
-    stats: {
-      results: "Resultados",
-      internet: "Lugares de internet",
-      verified: "Verificado por DOGUE",
-      saved: "Guardados",
-      review: "En revisión"
-    },
-
-    directory: {
-      title: "Encuentra lugares cercanos",
-      locationPlaceholder:
-        "Ciudad, país o código postal — por ejemplo Bournemouth BH2",
-      search: "Buscar",
-      location:
-        "📍 Usar mi ubicación",
-      help:
-        "Los resultados de internet proceden de OpenStreetMap. La información sobre mascotas puede estar incompleta, por lo que debes confirmarla directamente con el establecimiento antes de visitarlo."
-    },
-
-    categories: {
-      allCategories:
-        "Todas las categorías",
-      all: "Todos",
-      cafes: "Cafeterías",
-      restaurants: "Restaurantes",
-      hotels: "Hoteles",
-      parksDogParks:
-        "Parques y parques para perros",
-      parks: "Parques",
-      beaches: "Playas",
-      veterinaryClinics:
-        "Clínicas veterinarias",
-      vets: "Veterinarios",
-      groomers:
-        "Peluquerías para mascotas",
-      petShops: "Tiendas de mascotas"
-    },
-
-    legend: {
-      internet: "Resultado de internet",
-      cms: "CMS PETS & DOGUE",
-      community:
-        "Enviado por la comunidad",
-      verified:
-        "Verificado por DOGUE",
-      review: "En revisión"
-    },
-
-    results: {
-      title: "Lugares PETS & DOGUE",
-      subtitle:
-        "Busca una ubicación o usa tu posición actual.",
-      nearest: "Más cercanos primero",
-      trust:
-        "Mayor puntuación de confianza",
-      name: "Nombre A–Z",
-      dogue:
-        "Lugares DOGUE primero",
-      emptyTitle:
-        "No se encontraron lugares",
-      emptyText:
-        "Prueba un radio mayor, otra categoría o una ubicación diferente."
-    },
-
-    map: {
-      title: "Mapa",
-      searchTitle:
-        "Busca una ubicación",
-      searchText:
-        "Aquí aparecerán marcadores reales."
-    },
-
-    saved: {
-      title: "Lugares guardados"
-    },
-
-    add: {
-      title:
-        "Añadir un lugar pet-friendly",
-      description:
-        "¿Conoces una cafetería, hotel, parque, playa, peluquería u otro lugar que acepte mascotas? Envíalo para revisión editorial. No será público hasta que sea aprobado.",
-
-      placeName: "Nombre del lugar",
-      chooseCategory:
-        "Elegir categoría",
-      address:
-        "Dirección completa o código postal",
-      website:
-        "Sitio web o enlace social",
-      phone:
-        "Teléfono, opcional",
-      policy:
-        "Política de mascotas — por ejemplo, perros permitidos en la terraza",
-      yourName: "Tu nombre",
-      email: "Tu email",
-      details:
-        "Cuéntanos por qué este lugar acepta mascotas y qué deberían saber los visitantes...",
-
-      agreement:
-        "Confirmo que la información es correcta y entiendo que será revisada antes de publicarse.",
-
-      submit: "Enviar para revisión"
-    },
-
-    club: {
-      title:
-        "Beneficios de PETS & DOGUE Club",
-      description:
-        "Los miembros podrán acceder a ofertas seleccionadas de hoteles pet-friendly, cafeterías, peluquerías, socios de viaje y negocios locales de confianza.",
-
-      hotels:
-        "🏨 Descuentos en hoteles",
-      cafes:
-        "☕ Ofertas de cafeterías",
-      grooming:
-        "✂️ Beneficios de peluquería",
-      bookings:
-        "🎟 Reservas de socios",
-      local:
-        "📍 Recomendaciones locales",
-      qr:
-        "💚 Tarjeta QR de miembro",
-
-      button:
-        "Explorar beneficios del club"
-    },
-
-    modal: {
-      trust:
-        "Puntuación de confianza DOGUE",
-      website: "Visitar sitio web",
-      directions: "Cómo llegar",
-      report:
-        "🚩 Informar de un problema"
-    },
-
-    report: {
-      title:
-        "Informar de un problema",
-      description:
-        "Cuéntanos qué ha cambiado en este lugar.",
-      notice:
-        "Desde este navegador se puede enviar un informe por lugar. Los informes son revisados por DOGUE Trust Center.",
-
-      notFriendly:
-        "❌ Ya no acepta mascotas",
-      refused:
-        "🚫 El personal rechazó a la mascota",
-      closed:
-        "🏪 Cerrado permanentemente",
-      address:
-        "📍 Dirección incorrecta",
-      phone:
-        "☎️ Número de teléfono incorrecto",
-      website:
-        "🌐 Sitio web no disponible",
-      unsafe:
-        "⚠️ Lugar o condiciones inseguras",
-      other:
-        "✍️ Otro problema",
-
-      details:
-        "Añade detalles útiles, opcional...",
-      submit: "Enviar informe"
-    },
-
-    footer: {
-      home: "Inicio",
-      community: "Comunidad local",
-      travel: "Viajes",
-      wellness: "Bienestar",
-      partners: "Socios",
-      club: "Club",
-      account: "Cuenta",
-      contact: "Contacto",
-      admin: "Administración"
-    }
-  }
 };
-
-(function () {
-  "use strict";
-
-  const TEXT_KEYS = {
-    "Pet Friendly Places":
-      "petFriendlyPlaces.hero.title",
-
-    "Search real places near any city or postcode, explore them on the map, submit new locations and help protect the accuracy of the PETS & DOGUE directory.":
-      "petFriendlyPlaces.hero.description",
-
-    "Search Places":
-      "petFriendlyPlaces.hero.search",
-
-    "Add A Place":
-      "petFriendlyPlaces.hero.add",
-
-    "Join The Club":
-      "petFriendlyPlaces.hero.club",
-
-    "Results":
-      "petFriendlyPlaces.stats.results",
-
-    "Internet Places":
-      "petFriendlyPlaces.stats.internet",
-
-    "DOGUE Verified":
-      "petFriendlyPlaces.stats.verified",
-
-    "Saved":
-      "petFriendlyPlaces.stats.saved",
-
-    "Under Review":
-      "petFriendlyPlaces.stats.review",
-
-    "Find Places Near You":
-      "petFriendlyPlaces.directory.title",
-
-    "Search":
-      "petFriendlyPlaces.directory.search",
-
-    "📍 Use My Location":
-      "petFriendlyPlaces.directory.location",
-
-    "Internet results come from OpenStreetMap. Pet-policy information may be incomplete, so always confirm directly with a venue before visiting.":
-      "petFriendlyPlaces.directory.help",
-
-    "Internet result":
-      "petFriendlyPlaces.legend.internet",
-
-    "PETS & DOGUE CMS":
-      "petFriendlyPlaces.legend.cms",
-
-    "Community submitted":
-      "petFriendlyPlaces.legend.community",
-
-    "PETS & DOGUE Places":
-      "petFriendlyPlaces.results.title",
-
-    "Search a location or use your current position.":
-      "petFriendlyPlaces.results.subtitle",
-
-    "No places found":
-      "petFriendlyPlaces.results.emptyTitle",
-
-    "Try a larger radius, another category or a different location.":
-      "petFriendlyPlaces.results.emptyText",
-
-    "Live Map":
-      "petFriendlyPlaces.map.title",
-
-    "Search for a location":
-      "petFriendlyPlaces.map.searchTitle",
-
-    "Real map markers will appear here.":
-      "petFriendlyPlaces.map.searchText",
-
-    "Saved Places":
-      "petFriendlyPlaces.saved.title",
-
-    "Add A Pet-Friendly Place":
-      "petFriendlyPlaces.add.title",
-
-    "Know a café, hotel, park, beach, groomer or another location that welcomes pets? Submit it for editorial review. It will not become public until approved.":
-      "petFriendlyPlaces.add.description",
-
-    "Submit For Review":
-      "petFriendlyPlaces.add.submit",
-
-    "PETS & DOGUE Club Benefits":
-      "petFriendlyPlaces.club.title",
-
-    "Club members can unlock selected offers from pet-friendly hotels, cafés, groomers, travel partners and trusted local businesses.":
-      "petFriendlyPlaces.club.description",
-
-    "🏨 Hotel Discounts":
-      "petFriendlyPlaces.club.hotels",
-
-    "☕ Café Offers":
-      "petFriendlyPlaces.club.cafes",
-
-    "✂️ Grooming Benefits":
-      "petFriendlyPlaces.club.grooming",
-
-    "🎟 Partner Bookings":
-      "petFriendlyPlaces.club.bookings",
-
-    "📍 Local Recommendations":
-      "petFriendlyPlaces.club.local",
-
-    "💚 Member QR Card":
-      "petFriendlyPlaces.club.qr",
-
-    "Explore Club Benefits":
-      "petFriendlyPlaces.club.button",
-
-    "DOGUE Trust Score":
-      "petFriendlyPlaces.modal.trust",
-
-    "Visit Website":
-      "petFriendlyPlaces.modal.website",
-
-    "Directions":
-      "petFriendlyPlaces.modal.directions",
-
-    "🚩 Report Problem":
-      "petFriendlyPlaces.modal.report",
-
-    "Report A Problem":
-      "petFriendlyPlaces.report.title",
-
-    "Tell us what has changed about this place.":
-      "petFriendlyPlaces.report.description",
-
-    "One report can be submitted from this browser for each place. Reports are reviewed through the DOGUE Trust Center.":
-      "petFriendlyPlaces.report.notice",
-
-    "❌ No longer pet friendly":
-      "petFriendlyPlaces.report.notFriendly",
-
-    "🚫 Staff refused pets":
-      "petFriendlyPlaces.report.refused",
-
-    "🏪 Closed permanently":
-      "petFriendlyPlaces.report.closed",
-
-    "📍 Wrong address":
-      "petFriendlyPlaces.report.address",
-
-    "☎️ Wrong telephone number":
-      "petFriendlyPlaces.report.phone",
-
-    "🌐 Website unavailable":
-      "petFriendlyPlaces.report.website",
-
-    "⚠️ Unsafe place or conditions":
-      "petFriendlyPlaces.report.unsafe",
-
-    "✍️ Other problem":
-      "petFriendlyPlaces.report.other",
-
-    "Submit Report":
-      "petFriendlyPlaces.report.submit"
-  };
-
-  function setText(selector, key) {
-    const element =
-      document.querySelector(selector);
-
-    if (element) {
-      element.setAttribute(
-        "data-i18n",
-        key
-      );
-    }
-  }
-
-  function setPlaceholder(selector, key) {
-    const element =
-      document.querySelector(selector);
-
-    if (element) {
-      element.setAttribute(
-        "data-i18n-placeholder",
-        key
-      );
-    }
-  }
-
-  function setMany(selector, keys) {
-    document
-      .querySelectorAll(selector)
-      .forEach((element, index) => {
-        if (keys[index]) {
-          element.setAttribute(
-            "data-i18n",
-            keys[index]
-          );
-        }
-      });
-  }
-
-  function getLanguageCode() {
-    if (
-      window.PetsDogueLanguage &&
-      typeof window.PetsDogueLanguage
-        .getCurrentLanguage ===
-        "function"
-    ) {
-      return window.PetsDogueLanguage
-        .getCurrentLanguage().code;
-    }
-
-    const urlLanguage =
-      new URLSearchParams(
-        window.location.search
-      ).get("lang");
-
-    if (urlLanguage) {
-      return urlLanguage;
-    }
-
-    return (
-      localStorage.getItem(
-        "pets_dogue_language"
-      ) || "en"
-    );
-  }
-
-  function getDictionary() {
-    const code =
-      getLanguageCode();
-
-    return (
-      window.PetsDogueTranslations
-        .petFriendlyPlaces[code] ||
-      window.PetsDogueTranslations
-        .petFriendlyPlaces.en
-    );
-  }
-
-  function translateExactText() {
-    const walker =
-      document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT
-      );
-
-    const nodes = [];
-
-    while (walker.nextNode()) {
-      nodes.push(walker.currentNode);
-    }
-
-    nodes.forEach((node) => {
-      const original =
-        node.textContent.trim();
-
-      const key =
-        TEXT_KEYS[original];
-
-      if (!key) {
-        return;
-      }
-
-      const parent =
-        node.parentElement;
-
-      if (!parent) {
-        return;
-      }
-
-      parent.setAttribute(
-        "data-i18n",
-        key
-      );
-    });
-  }
-
-  function prepareStaticPage() {
-    translateExactText();
-
-    setPlaceholder(
-      "#locationSearch",
-      "petFriendlyPlaces.directory.locationPlaceholder"
-    );
-
-    setMany(
-      "#categorySearch option",
-      [
-        "petFriendlyPlaces.categories.allCategories",
-        "petFriendlyPlaces.categories.cafes",
-        "petFriendlyPlaces.categories.restaurants",
-        "petFriendlyPlaces.categories.hotels",
-        "petFriendlyPlaces.categories.parksDogParks",
-        "petFriendlyPlaces.categories.beaches",
-        "petFriendlyPlaces.categories.veterinaryClinics",
-        "petFriendlyPlaces.categories.groomers",
-        "petFriendlyPlaces.categories.petShops"
-      ]
-    );
-
-    setMany(
-      "#categoryFilters .filter",
-      [
-        "petFriendlyPlaces.categories.all",
-        "petFriendlyPlaces.categories.cafes",
-        "petFriendlyPlaces.categories.restaurants",
-        "petFriendlyPlaces.categories.hotels",
-        "petFriendlyPlaces.categories.parks",
-        "petFriendlyPlaces.categories.beaches",
-        "petFriendlyPlaces.categories.vets",
-        "petFriendlyPlaces.categories.groomers",
-        "petFriendlyPlaces.categories.petShops"
-      ]
-    );
-
-    setMany(
-      "#sortSelect option",
-      [
-        "petFriendlyPlaces.results.nearest",
-        "petFriendlyPlaces.results.trust",
-        "petFriendlyPlaces.results.name",
-        "petFriendlyPlaces.results.dogue"
-      ]
-    );
-
-    setPlaceholder(
-      "#submitPlaceName",
-      "petFriendlyPlaces.add.placeName"
-    );
-
-    setText(
-      "#submitPlaceCategory option:first-child",
-      "petFriendlyPlaces.add.chooseCategory"
-    );
-
-    setPlaceholder(
-      "#submitPlaceAddress",
-      "petFriendlyPlaces.add.address"
-    );
-
-    setPlaceholder(
-      "#submitPlaceWebsite",
-      "petFriendlyPlaces.add.website"
-    );
-
-    setPlaceholder(
-      "#submitPlacePhone",
-      "petFriendlyPlaces.add.phone"
-    );
-
-    setPlaceholder(
-      "#submitPlacePetPolicy",
-      "petFriendlyPlaces.add.policy"
-    );
-
-    setPlaceholder(
-      "#submitName",
-      "petFriendlyPlaces.add.yourName"
-    );
-
-    setPlaceholder(
-      "#submitEmail",
-      "petFriendlyPlaces.add.email"
-    );
-
-    setPlaceholder(
-      "#submitDescription",
-      "petFriendlyPlaces.add.details"
-    );
-
-    setText(
-      ".checkbox span",
-      "petFriendlyPlaces.add.agreement"
-    );
-
-    setPlaceholder(
-      "#reportDetails",
-      "petFriendlyPlaces.report.details"
-    );
-
-    setMany(
-      ".footer-links a",
-      [
-        "petFriendlyPlaces.footer.home",
-        "petFriendlyPlaces.footer.community",
-        "petFriendlyPlaces.footer.travel",
-        "petFriendlyPlaces.footer.wellness",
-        "petFriendlyPlaces.footer.partners",
-        "petFriendlyPlaces.footer.club",
-        "petFriendlyPlaces.footer.account",
-        "petFriendlyPlaces.footer.contact"
-      ]
-    );
-
-    setText(
-      ".admin-small",
-      "petFriendlyPlaces.footer.admin"
-    );
-
-    setText(
-      "footer p",
-      "common.footer.subtitle"
-    );
-  }
-
-  function translateDynamicText() {
-    const dictionary =
-      getDictionary();
-
-    document.title =
-      dictionary.meta.title;
-
-    const replacements = {
-      "Details":
-        getLanguageCode() === "ru"
-          ? "Подробнее"
-          : getLanguageCode() === "uk"
-          ? "Детальніше"
-          : getLanguageCode() === "es"
-          ? "Detalles"
-          : "Details",
-
-      "♡ Save":
-        getLanguageCode() === "ru"
-          ? "♡ Сохранить"
-          : getLanguageCode() === "uk"
-          ? "♡ Зберегти"
-          : getLanguageCode() === "es"
-          ? "♡ Guardar"
-          : "♡ Save",
-
-      "♥ Saved":
-        getLanguageCode() === "ru"
-          ? "♥ Сохранено"
-          : getLanguageCode() === "uk"
-          ? "♥ Збережено"
-          : getLanguageCode() === "es"
-          ? "♥ Guardado"
-          : "♥ Saved",
-
-      "🚩 Report":
-        getLanguageCode() === "ru"
-          ? "🚩 Жалоба"
-          : getLanguageCode() === "uk"
-          ? "🚩 Скарга"
-          : getLanguageCode() === "es"
-          ? "🚩 Informar"
-          : "🚩 Report",
-
-      "✓ Reported":
-        getLanguageCode() === "ru"
-          ? "✓ Отправлено"
-          : getLanguageCode() === "uk"
-          ? "✓ Надіслано"
-          : getLanguageCode() === "es"
-          ? "✓ Enviado"
-          : "✓ Reported",
-
-      "Remove":
-        getLanguageCode() === "ru"
-          ? "Удалить"
-          : getLanguageCode() === "uk"
-          ? "Видалити"
-          : getLanguageCode() === "es"
-          ? "Eliminar"
-          : "Remove"
-    };
-
-    document
-      .querySelectorAll(
-        ".place-actions button, .place-actions a, .saved-item button, .saved-item a"
-      )
-      .forEach((element) => {
-        const value =
-          element.textContent.trim();
-
-        if (replacements[value]) {
-          element.textContent =
-            replacements[value];
-        }
-
-        if (
-          value === "Directions"
-        ) {
-          element.textContent =
-            dictionary.modal.directions;
-        }
-      });
-
-    const subtitle =
-      document.getElementById(
-        "resultsSubtitle"
-      );
-
-    if (subtitle) {
-      const match =
-        subtitle.textContent.match(
-          /^(\d+) places? shown$/
-        );
-
-      if (match) {
-        const count =
-          Number(match[1]);
-
-        if (
-          getLanguageCode() === "ru"
-        ) {
-          subtitle.textContent =
-            `${count} мест показано`;
-        } else if (
-          getLanguageCode() === "uk"
-        ) {
-          subtitle.textContent =
-            `Показано місць: ${count}`;
-        } else if (
-          getLanguageCode() === "es"
-        ) {
-          subtitle.textContent =
-            `${count} lugares mostrados`;
-        }
-      }
-    }
-
-    const mapTitle =
-      document.getElementById(
-        "mapInfoTitle"
-      );
-
-    if (mapTitle) {
-      const match =
-        mapTitle.textContent.match(
-          /^(\d+) places? on the map$/
-        );
-
-      if (match) {
-        const count =
-          Number(match[1]);
-
-        if (
-          getLanguageCode() === "ru"
-        ) {
-          mapTitle.textContent =
-            `${count} мест на карте`;
-        } else if (
-          getLanguageCode() === "uk"
-        ) {
-          mapTitle.textContent =
-            `Місць на карті: ${count}`;
-        } else if (
-          getLanguageCode() === "es"
-        ) {
-          mapTitle.textContent =
-            `${count} lugares en el mapa`;
-        }
-      }
-    }
-  }
-
-  let observerTimer = null;
-
-  function scheduleDynamicTranslation() {
-    window.clearTimeout(
-      observerTimer
-    );
-
-    observerTimer =
-      window.setTimeout(
-        translateDynamicText,
-        30
-      );
-  }
-
-  function preparePage() {
-    prepareStaticPage();
-    translateDynamicText();
-
-    const observer =
-      new MutationObserver(
-        scheduleDynamicTranslation
-      );
-
-    observer.observe(
-      document.body,
-      {
-        childList: true,
-        subtree: true,
-        characterData: true
-      }
-    );
-  }
-
-  window.addEventListener(
-    "petsdogue:languagechange",
-    function () {
-      window.setTimeout(
-        function () {
-          translateDynamicText();
-        },
-        0
-      );
-    }
-  );
-
-  if (
-    document.readyState === "loading"
-  ) {
-    document.addEventListener(
-      "DOMContentLoaded",
-      preparePage,
-      {
-        once: true
-      }
-    );
-  } else {
-    preparePage();
-  }
-})();
