@@ -3,29 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Submit Your Pet - PETS & DOGUE</title>
+
+<title data-i18n="submitPet.meta.title">
+Submit Your Pet - PETS & DOGUE
+</title>
+
+<meta
+name="description"
+content="Submit your pet to PETS & DOGUE for a chance to be featured in the international animal magazine."
+data-i18n-attr="content:submitPet.meta.description"
+>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-header{background:white;padding:18px;text-align:center;border-bottom:1px solid #ddd}
-.logo-small{font-size:22px;color:#b78a2e}
-.logo-big{font-size:72px;font-family:Georgia,serif;font-weight:bold;letter-spacing:4px;color:#c89b3c}
-.tagline{font-size:13px;letter-spacing:2px;color:#666}
-main{max-width:1000px;margin:auto;padding:40px 20px}
-.hero{text-align:center;margin-bottom:40px}
-.hero h1{font-size:60px;font-family:Georgia,serif}
-.hero p{font-size:20px;color:#555;margin-top:15px}
-.form-box{background:white;border:2px solid #111;border-radius:35px;padding:35px}
-label{display:block;margin-top:18px;margin-bottom:8px;font-weight:bold}
-input,textarea,select{
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+header{
+background:white;
+padding:18px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+.logo-small{
+font-size:22px;
+color:#b78a2e;
+}
+
+.logo-big{
+font-size:72px;
+font-family:Georgia,serif;
+font-weight:bold;
+letter-spacing:4px;
+color:#c89b3c;
+}
+
+.tagline{
+font-size:13px;
+letter-spacing:2px;
+color:#666;
+}
+
+main{
+max-width:1000px;
+margin:auto;
+padding:40px 20px;
+}
+
+.hero{
+text-align:center;
+margin-bottom:40px;
+}
+
+.hero h1{
+font-size:60px;
+font-family:Georgia,serif;
+}
+
+.hero p{
+font-size:20px;
+color:#555;
+margin-top:15px;
+}
+
+.form-box{
+background:white;
+border:2px solid #111;
+border-radius:35px;
+padding:35px;
+}
+
+label{
+display:block;
+margin-top:18px;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input,
+textarea,
+select{
 width:100%;
 padding:15px;
 border:1px solid #ccc;
 border-radius:14px;
 font-size:16px;
 }
-textarea{min-height:160px}
+
+textarea{
+min-height:160px;
+}
+
 button{
 margin-top:25px;
 background:#111;
@@ -36,6 +108,7 @@ border-radius:999px;
 font-weight:bold;
 cursor:pointer;
 }
+
 footer{
 margin-top:60px;
 padding:40px;
@@ -43,66 +116,220 @@ background:white;
 text-align:center;
 border-top:1px solid #ddd;
 }
+
+html[dir="rtl"] body{
+text-align:right;
+}
+
+html[dir="rtl"] header,
+html[dir="rtl"] .hero,
+html[dir="rtl"] footer{
+text-align:center;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select{
+text-align:right;
+}
+
+@media(max-width:768px){
+
+.logo-big{
+font-size:52px;
+}
+
+.hero h1{
+font-size:44px;
+}
+
+.form-box{
+padding:25px;
+}
+
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
-<div class="tagline">THE INTERNATIONAL LUXURY ANIMAL MAGAZINE</div>
+
+<div
+class="logo-small"
+translate="no"
+data-pd-brand="true">
+pets &
+</div>
+
+<div
+class="logo-big"
+translate="no"
+data-pd-brand="true">
+DOGUE
+</div>
+
+<div
+class="tagline"
+data-i18n="submitPet.header.tagline">
+THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
+</div>
+
 </header>
 
 <main>
 
 <div class="hero">
-<h1>Submit Your Pet</h1>
-<p>
+
+<h1 data-i18n="submitPet.hero.title">
+Submit Your Pet
+</h1>
+
+<p data-i18n="submitPet.hero.description">
 Give your pet a chance to be featured in PETS & DOGUE.
 </p>
+
 </div>
 
 <div class="form-box">
 
-<label>Your Name</label>
-<input type="text">
+<label
+for="ownerName"
+data-i18n="submitPet.form.ownerName">
+Your Name
+</label>
 
-<label>Email</label>
-<input type="email">
+<input
+id="ownerName"
+type="text"
+placeholder="Full Name"
+data-i18n-placeholder="submitPet.form.ownerNamePlaceholder"
+>
 
-<label>Pet Name</label>
-<input type="text">
+<label
+for="email"
+data-i18n="submitPet.form.email">
+Email
+</label>
 
-<label>Category</label>
-<select>
-<option>Dog</option>
-<option>Cat</option>
-<option>Bird</option>
-<option>Rabbit</option>
-<option>Horse</option>
-<option>Exotic Pet</option>
+<input
+id="email"
+type="email"
+placeholder="your@email.com"
+data-i18n-placeholder="submitPet.form.emailPlaceholder"
+>
+
+<label
+for="petName"
+data-i18n="submitPet.form.petName">
+Pet Name
+</label>
+
+<input
+id="petName"
+type="text"
+placeholder="Pet Name"
+data-i18n-placeholder="submitPet.form.petNamePlaceholder"
+>
+
+<label
+for="category"
+data-i18n="submitPet.form.category">
+Category
+</label>
+
+<select id="category">
+
+<option
+value="dog"
+data-i18n="submitPet.form.categories.dog">
+Dog
+</option>
+
+<option
+value="cat"
+data-i18n="submitPet.form.categories.cat">
+Cat
+</option>
+
+<option
+value="bird"
+data-i18n="submitPet.form.categories.bird">
+Bird
+</option>
+
+<option
+value="rabbit"
+data-i18n="submitPet.form.categories.rabbit">
+Rabbit
+</option>
+
+<option
+value="horse"
+data-i18n="submitPet.form.categories.horse">
+Horse
+</option>
+
+<option
+value="exotic"
+data-i18n="submitPet.form.categories.exotic">
+Exotic Pet
+</option>
+
 </select>
 
-<label>Pet Story</label>
-<textarea></textarea>
+<label
+for="story"
+data-i18n="submitPet.form.story">
+Pet Story
+</label>
 
-<label>Photo Link</label>
-<input type="text" placeholder="Paste image URL">
+<textarea
+id="story"
+placeholder="Tell us about your pet..."
+data-i18n-placeholder="submitPet.form.storyPlaceholder"
+></textarea>
 
-<button>Submit Application</button>
+<label
+for="photoLink"
+data-i18n="submitPet.form.photo">
+Photo Link
+</label>
+
+<input
+id="photoLink"
+type="text"
+placeholder="Paste image URL"
+data-i18n-placeholder="submitPet.form.photoPlaceholder"
+>
+
+<button
+type="button"
+data-i18n="submitPet.form.button">
+Submit Application
+</button>
 
 </div>
 
 </main>
 
 <footer>
-<h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
+
+<h2
+translate="no"
+data-pd-brand="true">
+PETS & DOGUE
+</h2>
+
+<p data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
+
 </footer>
 
+<script src="i18n/common.js"></script>
+<script src="i18n/submit-pet.js"></script>
+<script src="i18n/engine.js"></script>
 
-<!-- PETS & DOGUE UNIFIED 23-LANGUAGE SYSTEM -->
-<script src="translations.js"></script>
 </body>
 </html>
