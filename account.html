@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My Account | PETS & DOGUE</title>
+<title data-i18n="account.meta.title">
+My Account | PETS & DOGUE
+</title>
+
+<meta
+name="description"
+content="Manage your PETS & DOGUE profile, pets, marketplace activity, gallery entries and Club membership."
+data-i18n-attr="content:account.meta.description"
+>
 
 <style>
 
@@ -318,6 +326,30 @@ letter-spacing:2px;
 text-transform:uppercase;
 }
 
+html[dir="rtl"] body{
+text-align:right;
+}
+
+html[dir="rtl"] header,
+html[dir="rtl"] .hero,
+html[dir="rtl"] footer,
+html[dir="rtl"] .profile-name,
+html[dir="rtl"] .center,
+html[dir="rtl"] .stat,
+html[dir="rtl"] .quick-link{
+text-align:center;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select{
+text-align:right;
+}
+
+html[dir="rtl"] .footer-links{
+direction:rtl;
+}
+
 @media(max-width:950px){
 
 .account-layout{
@@ -346,37 +378,53 @@ font-size:40px;
 
 <header>
 
-<div class="logo-small">pets &</div>
+<div
+class="logo-small"
+translate="no"
+data-pd-brand="true">
+pets &
+</div>
 
-<div class="logo-big">DOGUE</div>
+<div
+class="logo-big"
+translate="no"
+data-pd-brand="true">
+DOGUE
+</div>
 
 </header>
 
 <section class="hero">
 
-<h1>My Account</h1>
+<h1 data-i18n="account.hero.title">
+My Account
+</h1>
 
-<p>
-
+<p data-i18n="account.hero.description">
 Manage your PETS & DOGUE profile, pets, marketplace listings,
 gallery entries and Club membership.
-
 </p>
 
 </section>
 
 <main>
 
-<div class="account-layout"> <div class="card">
+<div class="account-layout">
+
+<div class="card">
 
 <img
 id="avatar"
 class="avatar"
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80">
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80"
+alt="Account profile picture"
+data-i18n-attr="alt:account.profile.avatarAlt"
+>
 
 <h2
 class="profile-name"
-id="profileName">
+id="profileName"
+data-i18n="account.profile.guest">
 Guest Member
 </h2>
 
@@ -394,60 +442,117 @@ Free Reader
 id="avatarUpload"
 type="file"
 accept="image/*"
-onchange="changeAvatar(event)">
+aria-label="Upload profile picture"
+data-i18n-attr="aria-label:account.profile.uploadAvatar"
+onchange="changeAvatar(event)"
+>
 
 <div class="stats">
 
 <div class="stat">
-<strong id="likesValue">328</strong>
+
+<strong id="likesValue">
+328
+</strong>
+
+<span data-i18n="account.stats.hearts">
 Hearts
+</span>
+
 </div>
 
 <div class="stat">
-<strong id="postsValue">4</strong>
+
+<strong id="postsValue">
+4
+</strong>
+
+<span data-i18n="account.stats.posts">
 Posts
+</span>
+
 </div>
 
 <div class="stat">
-<strong id="petsValue">1</strong>
+
+<strong id="petsValue">
+1
+</strong>
+
+<span data-i18n="account.stats.pets">
 Pets
+</span>
+
 </div>
 
 <div class="stat">
-<strong id="listingValue">2</strong>
+
+<strong id="listingValue">
+2
+</strong>
+
+<span data-i18n="account.stats.listings">
 Listings
+</span>
+
 </div>
 
 </div>
 
 <div class="member-card">
 
-<h2>PETS & DOGUE CLUB</h2>
+<h2
+translate="no"
+data-pd-brand="true">
+PETS & DOGUE CLUB
+</h2>
 
 <p>
-<strong>Name:</strong>
+
+<strong data-i18n="account.memberCard.name">
+Name:
+</strong>
+
 <span id="cardName">
 Guest Member
 </span>
+
 </p>
 
 <p>
-<strong>Status:</strong>
+
+<strong data-i18n="account.memberCard.status">
+Status:
+</strong>
+
 <span id="cardStatus">
 Free Reader
 </span>
+
 </p>
 
 <p>
-<strong>Member ID:</strong>
+
+<strong data-i18n="account.memberCard.memberId">
+Member ID:
+</strong>
+
+<span translate="no">
 PD-000001
+</span>
+
 </p>
 
-<p>
+<p data-i18n="account.memberCard.features">
 Gallery • Marketplace • Community • Club
 </p>
 
-<div class="qr"></div>
+<div
+class="qr"
+role="img"
+aria-label="Member QR code"
+data-i18n-attr="aria-label:account.memberCard.qrAlt">
+</div>
 
 </div>
 
@@ -457,41 +562,67 @@ Gallery • Marketplace • Community • Club
 
 <div class="panel">
 
-<h2>Account</h2>
+<h2 data-i18n="account.account.title">
+Account
+</h2>
 
 <input
 id="userName"
 type="text"
-placeholder="Your Name">
+placeholder="Your Name"
+data-i18n-placeholder="account.account.namePlaceholder"
+>
 
 <input
 id="petName"
 type="text"
-placeholder="Pet Name">
+placeholder="Pet Name"
+data-i18n-placeholder="account.account.petPlaceholder"
+>
 
 <select id="membership">
 
-<option>Free Reader</option>
-<option>Club Monthly</option>
-<option>Club Yearly</option>
+<option
+value="Free Reader"
+data-i18n="account.membership.free">
+Free Reader
+</option>
+
+<option
+value="Club Monthly"
+data-i18n="account.membership.monthly">
+Club Monthly
+</option>
+
+<option
+value="Club Yearly"
+data-i18n="account.membership.yearly">
+Club Yearly
+</option>
 
 </select>
 
 <button
+type="button"
 class="green"
-onclick="saveProfile()">
+onclick="saveProfile()"
+data-i18n="account.account.save">
 Save Profile
 </button>
 
 <button
+type="button"
 class="gold"
-onclick="loadProfile()">
+onclick="loadProfile()"
+data-i18n="account.account.load">
 Load Profile
 </button>
 
 <button
+type="button"
 class="black"
-onclick="logout()">
+onclick="logout()"
+data-i18n="account.account.logout">
 Log Out
 </button>
 
@@ -499,24 +630,35 @@ Log Out
 
 <div class="panel">
 
-<h2>My Pets</h2>
+<h2 data-i18n="account.pets.title">
+My Pets
+</h2>
 
 <input
 id="newPetName"
-placeholder="Pet Name">
+type="text"
+placeholder="Pet Name"
+data-i18n-placeholder="account.pets.namePlaceholder"
+>
 
 <input
 id="newBreed"
-placeholder="Breed">
+type="text"
+placeholder="Breed"
+data-i18n-placeholder="account.pets.breedPlaceholder"
+>
 
 <textarea
 id="newStory"
-placeholder="Short Story">
+placeholder="Short Story"
+data-i18n-placeholder="account.pets.storyPlaceholder">
 </textarea>
 
 <button
+type="button"
 class="green"
-onclick="addPet()">
+onclick="addPet()"
+data-i18n="account.pets.add">
 Add Pet
 </button>
 
@@ -526,13 +668,15 @@ id="petList">
 
 <div class="pet-card">
 
-<h3>Miso</h3>
+<h3 translate="no">
+Miso
+</h3>
 
-<p>
+<p data-i18n="account.pets.misoBreed">
 Pomeranian
 </p>
 
-<p>
+<p data-i18n="account.pets.misoStory">
 First PETS & DOGUE cover star.
 </p>
 
@@ -544,7 +688,9 @@ First PETS & DOGUE cover star.
 
 <div class="panel">
 
-<h2>Quick Access</h2>
+<h2 data-i18n="account.quick.title">
+Quick Access
+</h2>
 
 <div class="quick-grid">
 
@@ -553,7 +699,9 @@ href="members-gallery.html"
 class="quick-link">
 👑
 <br><br>
+<span data-i18n="account.quick.members">
 Members Gallery
+</span>
 </a>
 
 <a
@@ -561,7 +709,9 @@ href="pet-marketplace.html"
 class="quick-link">
 🛍
 <br><br>
+<span data-i18n="account.quick.marketplace">
 Marketplace
+</span>
 </a>
 
 <a
@@ -569,7 +719,9 @@ href="club.html"
 class="quick-link">
 💚
 <br><br>
+<span data-i18n="account.quick.club">
 Club
+</span>
 </a>
 
 <a
@@ -577,7 +729,9 @@ href="local-community.html"
 class="quick-link">
 📍
 <br><br>
+<span data-i18n="account.quick.community">
 Community
+</span>
 </a>
 
 <a
@@ -585,7 +739,9 @@ href="contests.html"
 class="quick-link">
 🏆
 <br><br>
+<span data-i18n="account.quick.contests">
 Contests
+</span>
 </a>
 
 <a
@@ -593,7 +749,9 @@ href="wellness.html"
 class="quick-link">
 🩺
 <br><br>
+<span data-i18n="account.quick.wellness">
 Wellness
+</span>
 </a>
 
 </div>
@@ -604,109 +762,346 @@ Wellness
 
 </div>
 
-</main> <footer>
+</main>
 
-<h2>PETS & DOGUE</h2>
+<footer>
 
-<p>The International Luxury Animal Magazine</p>
+<h2
+translate="no"
+data-pd-brand="true">
+PETS & DOGUE
+</h2>
+
+<p data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
 
 <div class="footer-links">
 
-<a href="index.html">Home</a>
+<a
+href="index.html"
+data-i18n="account.footer.home">
+Home
+</a>
 
-<a href="club.html">Club</a>
+<a
+href="club.html"
+data-i18n="account.footer.club">
+Club
+</a>
 
-<a href="members-gallery.html">Gallery</a>
+<a
+href="members-gallery.html"
+data-i18n="account.footer.gallery">
+Gallery
+</a>
 
-<a href="pet-marketplace.html">Marketplace</a>
+<a
+href="pet-marketplace.html"
+data-i18n="account.footer.marketplace">
+Marketplace
+</a>
 
-<a href="privacy.html">Privacy</a>
+<a
+href="privacy.html"
+data-i18n="account.footer.privacy">
+Privacy
+</a>
 
-<a href="contact.html">Contact</a>
+<a
+href="contact.html"
+data-i18n="account.footer.contact">
+Contact
+</a>
 
 </div>
 
 <a
 href="admin.html"
-class="admin-small">
+class="admin-small"
+data-i18n="common.footer.admin">
 Admin
 </a>
 
 </footer>
 
+<script src="/i18n/common.js?v=2"></script>
+<script src="/i18n/account.js?v=2"></script>
+<script src="/i18n/engine.js?v=3"></script>
+
 <script>
 
-loadProfile();
+const PROFILE_KEY = "pd_profile";
+
+function getAccountLanguage(){
+
+return (
+localStorage.getItem(
+"pets_dogue_language"
+) || "en"
+);
+
+}
+
+function getAccountBundle(){
+
+const root =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.account;
+
+if(!root){
+return null;
+}
+
+return (
+root[getAccountLanguage()] ||
+root.en
+);
+
+}
+
+function accountT(path,fallback){
+
+const bundle =
+getAccountBundle();
+
+if(!bundle){
+return fallback;
+}
+
+let value = bundle;
+
+path.split(".").forEach(key => {
+
+if(
+value &&
+Object.prototype.hasOwnProperty.call(
+value,
+key
+)
+){
+value = value[key];
+}else{
+value = undefined;
+}
+
+});
+
+return typeof value === "string"
+? value
+: fallback;
+
+}
+
+function translateMembership(status){
+
+const map = {
+"Free Reader":"membership.free",
+"Club Monthly":"membership.monthly",
+"Club Yearly":"membership.yearly"
+};
+
+return accountT(
+map[status] || "",
+status || accountT(
+"membership.free",
+"Free Reader"
+)
+);
+
+}
+
+function getSavedProfile(){
+
+const saved =
+localStorage.getItem(PROFILE_KEY);
+
+if(!saved){
+return null;
+}
+
+try{
+
+return JSON.parse(saved);
+
+}catch(error){
+
+console.error(
+"Unable to read account profile.",
+error
+);
+
+return null;
+
+}
+
+}
+
+function refreshProfileDisplay(){
+
+const data =
+getSavedProfile();
+
+const guest =
+accountT(
+"profile.guest",
+"Guest Member"
+);
+
+const status =
+data && data.status
+? data.status
+: "Free Reader";
+
+const name =
+data && data.name
+? data.name
+: guest;
+
+document
+.getElementById("profileName")
+.textContent = name;
+
+document
+.getElementById("cardName")
+.textContent = name;
+
+document
+.getElementById("memberStatus")
+.textContent =
+translateMembership(status);
+
+document
+.getElementById("cardStatus")
+.textContent =
+translateMembership(status);
+
+}
 
 function saveProfile(){
 
-const data={
+const data = {
 
-name:document.getElementById("userName").value,
+name:
+document
+.getElementById("userName")
+.value
+.trim(),
 
-pet:document.getElementById("petName").value,
+pet:
+document
+.getElementById("petName")
+.value
+.trim(),
 
-status:document.getElementById("membership").value,
+status:
+document
+.getElementById("membership")
+.value,
 
-avatar:document.getElementById("avatar").src
+avatar:
+document
+.getElementById("avatar")
+.src
 
 };
 
-localStorage.setItem("pd_profile",JSON.stringify(data));
+localStorage.setItem(
+PROFILE_KEY,
+JSON.stringify(data)
+);
 
-document.getElementById("profileName").textContent=data.name||"Guest Member";
-document.getElementById("cardName").textContent=data.name||"Guest Member";
+refreshProfileDisplay();
 
-document.getElementById("memberStatus").textContent=data.status;
-document.getElementById("cardStatus").textContent=data.status;
-
-alert("Profile saved.");
+alert(
+accountT(
+"messages.saved",
+"Profile saved."
+)
+);
 
 }
 
 function loadProfile(){
 
-const saved=localStorage.getItem("pd_profile");
+const data =
+getSavedProfile();
 
-if(!saved)return;
+if(!data){
 
-const data=JSON.parse(saved);
+refreshProfileDisplay();
+return;
 
-document.getElementById("userName").value=data.name||"";
-document.getElementById("petName").value=data.pet||"";
-document.getElementById("membership").value=data.status||"Free Reader";
+}
 
-document.getElementById("profileName").textContent=data.name||"Guest Member";
-document.getElementById("cardName").textContent=data.name||"Guest Member";
+document
+.getElementById("userName")
+.value =
+data.name || "";
 
-document.getElementById("memberStatus").textContent=data.status||"Free Reader";
-document.getElementById("cardStatus").textContent=data.status||"Free Reader";
+document
+.getElementById("petName")
+.value =
+data.pet || "";
+
+document
+.getElementById("membership")
+.value =
+data.status || "Free Reader";
 
 if(data.avatar){
-document.getElementById("avatar").src=data.avatar;
+
+document
+.getElementById("avatar")
+.src = data.avatar;
+
 }
+
+refreshProfileDisplay();
 
 }
 
 function logout(){
 
-localStorage.removeItem("pd_profile");
+localStorage.removeItem(
+PROFILE_KEY
+);
 
-location.reload();
+document
+.getElementById("userName")
+.value = "";
+
+document
+.getElementById("petName")
+.value = "";
+
+document
+.getElementById("membership")
+.value = "Free Reader";
+
+refreshProfileDisplay();
 
 }
 
 function changeAvatar(event){
 
-const file=event.target.files[0];
+const file =
+event.target.files[0];
 
-if(!file)return;
+if(!file){
+return;
+}
 
-const reader=new FileReader();
+const reader =
+new FileReader();
 
-reader.onload=function(e){
+reader.onload =
+function(e){
 
-document.getElementById("avatar").src=e.target.result;
+document
+.getElementById("avatar")
+.src =
+e.target.result;
 
 };
 
@@ -716,47 +1111,102 @@ reader.readAsDataURL(file);
 
 function addPet(){
 
-const name=document.getElementById("newPetName").value;
+const name =
+document
+.getElementById("newPetName")
+.value
+.trim();
 
-const breed=document.getElementById("newBreed").value;
+const breed =
+document
+.getElementById("newBreed")
+.value
+.trim();
 
-const story=document.getElementById("newStory").value;
+const story =
+document
+.getElementById("newStory")
+.value
+.trim();
 
-if(name==="")return;
+if(name === ""){
+return;
+}
 
-const card=document.createElement("div");
+const card =
+document.createElement("div");
 
-card.className="pet-card";
+card.className =
+"pet-card";
 
-card.innerHTML=`
+const title =
+document.createElement("h3");
 
-<h3>${name}</h3>
+title.textContent = name;
 
-<p>${breed}</p>
+const breedText =
+document.createElement("p");
 
-<p>${story}</p>
+breedText.textContent =
+breed ||
+accountT(
+"pets.unknownBreed",
+"Breed not specified"
+);
 
-`;
+const storyText =
+document.createElement("p");
 
-document.getElementById("petList").appendChild(card);
+storyText.textContent =
+story ||
+accountT(
+"pets.noStory",
+"No story added yet."
+);
 
-document.getElementById("petsValue").textContent=
+card.appendChild(title);
+card.appendChild(breedText);
+card.appendChild(storyText);
 
-Number(document.getElementById("petsValue").textContent)+1;
+document
+.getElementById("petList")
+.appendChild(card);
 
-document.getElementById("newPetName").value="";
-document.getElementById("newBreed").value="";
-document.getElementById("newStory").value="";
+document
+.getElementById("petsValue")
+.textContent =
+Number(
+document
+.getElementById("petsValue")
+.textContent
+) + 1;
+
+document
+.getElementById("newPetName")
+.value = "";
+
+document
+.getElementById("newBreed")
+.value = "";
+
+document
+.getElementById("newStory")
+.value = "";
 
 }
 
+window.addEventListener(
+"languagechange",
+() => {
+
+refreshProfileDisplay();
+
+}
+);
+
+loadProfile();
+
 </script>
-
-
-<!-- PETS & DOGUE FREE LOCAL LANGUAGE SYSTEM -->
-<script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/account.js?v=1"></script>
-<script src="/i18n/engine.js?v=3"></script>
 
 </body>
 </html>
