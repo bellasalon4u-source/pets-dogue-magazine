@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contests & Prizes | PETS & DOGUE</title>
+
+<title data-i18n="contests.meta.title">
+Contests & Prizes | PETS & DOGUE
+</title>
+
+<meta
+name="description"
+content="Discover PETS & DOGUE pet contests, community voting, prizes, cover star challenges and competition winners."
+data-i18n-attr="content:contests.meta.description"
+>
 
 <style>
 *{
@@ -237,6 +246,7 @@ background:#111;
 .status-label.open{
 background:#65e51f;
 box-shadow:0 0 16px rgba(101,229,31,.45);
+color:#111;
 }
 
 .status-label.upcoming{
@@ -327,6 +337,7 @@ background:#c89b3c;
 
 .btn.green{
 background:#65e51f;
+color:#111;
 box-shadow:0 0 16px rgba(101,229,31,.4);
 }
 
@@ -520,6 +531,50 @@ cursor:pointer;
 z-index:2;
 }
 
+html[dir="rtl"] body{
+text-align:right;
+}
+
+html[dir="rtl"] header,
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .intro-box,
+html[dir="rtl"] .empty-message,
+html[dir="rtl"] .prize-box,
+html[dir="rtl"] footer{
+text-align:center;
+}
+
+html[dir="rtl"] .filters,
+html[dir="rtl"] .footer-links,
+html[dir="rtl"] .actions{
+direction:rtl;
+}
+
+html[dir="rtl"] .status-label{
+right:auto;
+left:18px;
+}
+
+html[dir="rtl"] .vote{
+text-align:right;
+}
+
+html[dir="rtl"] .modal-close{
+right:auto;
+left:18px;
+}
+
+html[dir="rtl"] .rules ul{
+margin-left:0;
+margin-right:22px;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] select{
+text-align:right;
+}
+
 @media(max-width:768px){
 
 .hero{
@@ -566,11 +621,17 @@ font-size:34px;
 
 <header>
 
-<div class="logo-small">
+<div
+class="logo-small"
+translate="no"
+data-pd-brand="true">
 pets &
 </div>
 
-<div class="logo-big">
+<div
+class="logo-big"
+translate="no"
+data-pd-brand="true">
 DOGUE
 </div>
 
@@ -580,17 +641,19 @@ DOGUE
 
 <img
 src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1800&q=80"
-alt="PETS & DOGUE Contests">
+alt="PETS & DOGUE Contests"
+data-i18n-attr="alt:contests.images.hero"
+>
 
 <div class="hero-overlay"></div>
 
 <div class="hero-content">
 
-<h1>
+<h1 data-i18n="contests.hero.title">
 Contests & Prizes
 </h1>
 
-<p>
+<p data-i18n="contests.hero.description">
 Photo contests, cover star challenges, community votes and monthly prizes for unforgettable pets.
 </p>
 
@@ -602,17 +665,19 @@ Photo contests, cover star challenges, community votes and monthly prizes for un
 
 <div class="intro-box">
 
-<h2>
+<h2 data-i18n="contests.intro.title">
 Make Your Pet The Next Star
 </h2>
 
-<p>
+<p data-i18n="contests.intro.description">
 Discover current PETS & DOGUE competitions, submit your pet, support community favourites and follow winners selected for future magazine features.
 </p>
 
 </div>
 
-<h2 class="section-title">
+<h2
+class="section-title"
+data-i18n="contests.current.title">
 Current Competitions
 </h2>
 
@@ -624,40 +689,52 @@ Current Competitions
 id="contestSearch"
 type="text"
 placeholder="Search by competition, prize, winner or status..."
-oninput="renderContests()">
+data-i18n-placeholder="contests.search.placeholder"
+oninput="renderContests()"
+>
 
 <select
 id="contestStatusFilter"
-onchange="renderContests()">
+onchange="selectStatusFromDropdown()">
 
-<option value="All">
+<option
+value="All"
+data-i18n="contests.status.allCompetitions">
 All Competitions
 </option>
 
-<option value="Open">
+<option
+value="Open"
+data-i18n="contests.status.open">
 Open
 </option>
 
-<option value="Draft">
+<option
+value="Draft"
+data-i18n="contests.status.upcoming">
 Upcoming
 </option>
 
-<option value="Voting Closed">
+<option
+value="Voting Closed"
+data-i18n="contests.status.votingClosed">
 Voting Closed
 </option>
 
-<option value="Completed">
+<option
+value="Completed"
+data-i18n="contests.status.completed">
 Completed
 </option>
 
 </select>
 
 <button
+type="button"
 class="search-button"
-onclick="renderContests()">
-
+onclick="renderContests()"
+data-i18n="contests.search.button">
 Search
-
 </button>
 
 </div>
@@ -666,42 +743,42 @@ Search
 
 <button
 class="filter-button active"
-onclick="setStatusFilter('All',this)">
-
+data-status="All"
+onclick="setStatusFilter('All',this)"
+data-i18n="contests.filters.all">
 All
-
 </button>
 
 <button
 class="filter-button"
-onclick="setStatusFilter('Open',this)">
-
+data-status="Open"
+onclick="setStatusFilter('Open',this)"
+data-i18n="contests.filters.open">
 Open Now
-
 </button>
 
 <button
 class="filter-button"
-onclick="setStatusFilter('Draft',this)">
-
+data-status="Draft"
+onclick="setStatusFilter('Draft',this)"
+data-i18n="contests.filters.upcoming">
 Upcoming
-
 </button>
 
 <button
 class="filter-button"
-onclick="setStatusFilter('Voting Closed',this)">
-
+data-status="Voting Closed"
+onclick="setStatusFilter('Voting Closed',this)"
+data-i18n="contests.filters.votingClosed">
 Voting Closed
-
 </button>
 
 <button
 class="filter-button"
-onclick="setStatusFilter('Completed',this)">
-
+data-status="Completed"
+onclick="setStatusFilter('Completed',this)"
+data-i18n="contests.filters.completed">
 Completed
-
 </button>
 
 </div>
@@ -715,11 +792,11 @@ id="contestGrid">
 class="empty-message"
 id="emptyMessage">
 
-<h2>
+<h2 data-i18n="contests.empty.title">
 No competitions found
 </h2>
 
-<p>
+<p data-i18n="contests.empty.description">
 Try another status or search term.
 </p>
 
@@ -727,37 +804,49 @@ Try another status or search term.
 
 <div class="prize-box">
 
-<h2>
+<h2 data-i18n="contests.prizes.title">
 Monthly PETS & DOGUE Prizes
 </h2>
 
-<p>
+<p data-i18n="contests.prizes.description">
 Competitions may include partner gifts, pet fashion accessories, grooming vouchers, hotel discounts, photography sessions and premium magazine features.
 </p>
 
 <div class="prizes">
 
-<div class="prize">
+<div
+class="prize"
+data-i18n="contests.prizes.cover">
 👑 Cover Star Feature
 </div>
 
-<div class="prize">
+<div
+class="prize"
+data-i18n="contests.prizes.fashion">
 🎁 Pet Fashion Gifts
 </div>
 
-<div class="prize">
+<div
+class="prize"
+data-i18n="contests.prizes.grooming">
 ✂️ Grooming Voucher
 </div>
 
-<div class="prize">
+<div
+class="prize"
+data-i18n="contests.prizes.partner">
 🏨 Partner Discounts
 </div>
 
-<div class="prize">
+<div
+class="prize"
+data-i18n="contests.prizes.photo">
 📸 Photo Feature
 </div>
 
-<div class="prize">
+<div
+class="prize"
+data-i18n="contests.prizes.hall">
 🏆 Hall Of Fame Place
 </div>
 
@@ -767,33 +856,33 @@ Competitions may include partner gifts, pet fashion accessories, grooming vouche
 
 <div class="rules">
 
-<h2>
+<h2 data-i18n="contests.rules.title">
 How It Works
 </h2>
 
 <ul>
 
-<li>
+<li data-i18n="contests.rules.one">
 Submit your pet through the relevant competition or application page.
 </li>
 
-<li>
+<li data-i18n="contests.rules.two">
 Selected entries may appear in PETS & DOGUE competitions and public voting.
 </li>
 
-<li>
+<li data-i18n="contests.rules.three">
 Readers can support favourites with hearts and votes.
 </li>
 
-<li>
+<li data-i18n="contests.rules.four">
 Winners may be featured in the magazine, Photos, Hall Of Fame or future covers.
 </li>
 
-<li>
+<li data-i18n="contests.rules.five">
 PETS & DOGUE may remove suspicious, abusive or manipulated voting activity.
 </li>
 
-<li>
+<li data-i18n="contests.rules.six">
 Participation does not guarantee publication, selection or a physical prize.
 </li>
 
@@ -805,45 +894,47 @@ Participation does not guarantee publication, selection or a physical prize.
 
 <footer>
 
-<h2>
+<h2
+translate="no"
+data-pd-brand="true">
 PETS & DOGUE
 </h2>
 
-<p>
+<p data-i18n="common.footer.subtitle">
 The International Luxury Animal Magazine
 </p>
 
 <div class="footer-links">
 
-<a href="index.html">
+<a href="index.html" data-i18n="contests.footer.home">
 Home
 </a>
 
-<a href="photos.html">
+<a href="photos.html" data-i18n="contests.footer.photos">
 Photos
 </a>
 
-<a href="members-gallery.html">
+<a href="members-gallery.html" data-i18n="contests.footer.members">
 Members Gallery
 </a>
 
-<a href="cover-stars.html">
+<a href="cover-stars.html" data-i18n="contests.footer.coverStars">
 Cover Stars
 </a>
 
-<a href="hall-of-fame.html">
+<a href="hall-of-fame.html" data-i18n="contests.footer.hall">
 Hall Of Fame
 </a>
 
-<a href="account.html">
+<a href="account.html" data-i18n="contests.footer.account">
 Account
 </a>
 
-<a href="privacy.html">
+<a href="privacy.html" data-i18n="contests.footer.privacy">
 Privacy
 </a>
 
-<a href="contact.html">
+<a href="contact.html" data-i18n="contests.footer.contact">
 Contact
 </a>
 
@@ -851,10 +942,9 @@ Contact
 
 <a
 href="admin.html"
-class="admin-small">
-
+class="admin-small"
+data-i18n="common.footer.admin">
 Admin
-
 </a>
 
 </footer>
@@ -867,16 +957,19 @@ onclick="closeContestFromOverlay(event)">
 <div class="modal-card">
 
 <button
+type="button"
 class="modal-close"
-onclick="closeContest()">
-
+onclick="closeContest()"
+aria-label="Close"
+data-i18n-attr="aria-label:contests.modal.close">
 ×
-
 </button>
 
 <img
 id="modalImage"
-alt="Competition image">
+alt="Competition image"
+data-i18n-attr="alt:contests.modal.imageAlt"
+>
 
 <div class="modal-content">
 
@@ -885,9 +978,7 @@ class="badge"
 id="modalStatus">
 </span>
 
-<h2
-id="modalTitle">
-</h2>
+<h2 id="modalTitle"></h2>
 
 <div
 class="meta"
@@ -905,19 +996,16 @@ id="modalWinner"
 style="display:none;">
 </div>
 
-<p
-id="modalRules">
-</p>
+<p id="modalRules"></p>
 
 <br>
 
 <a
 href="members-gallery.html"
 class="btn green"
-id="modalJoinButton">
-
+id="modalJoinButton"
+data-i18n="contests.dynamic.joinCompetition">
 Join Competition
-
 </a>
 
 </div>
@@ -926,6 +1014,10 @@ Join Competition
 
 </div>
 
+<script src="/i18n/common.js?v=2"></script>
+<script src="/i18n/contests.js?v=2"></script>
+<script src="/i18n/engine.js?v=3"></script>
+
 <script>
 const CMS_KEY = "pets_dogue_cms_v1";
 const VOTES_KEY = "pets_dogue_contest_votes";
@@ -933,6 +1025,7 @@ const VOTED_KEY = "pets_dogue_contest_voted";
 
 let publicContests = [];
 let activeStatus = "All";
+let currentContestId = null;
 
 let contestVotes =
 JSON.parse(
@@ -948,13 +1041,13 @@ const fallbackContests = [
 
 {
 id:"fallback-cover-star",
-title:"Next DOGUE Cover Star",
-prize:"Future PETS & DOGUE cover feature",
+titleKey:"fallback.cover.title",
+prizeKey:"fallback.cover.prize",
 start:"2026-07-01",
 end:"2026-07-31",
 status:"Open",
 winner:"",
-rules:"Submit one beautiful pet photo, add the pet's name, breed and short story. The community can vote, and selected finalists may appear in the next issue.",
+rulesKey:"fallback.cover.rules",
 votes:245,
 image:"file_00000000a9d471fda9b4629589be22a9.png",
 joinLink:"members-gallery.html"
@@ -962,13 +1055,13 @@ joinLink:"members-gallery.html"
 
 {
 id:"fallback-best-photo",
-title:"Best Pet Photo",
-prize:"Featured placement in the PETS & DOGUE Photos gallery",
+titleKey:"fallback.photo.title",
+prizeKey:"fallback.photo.prize",
 start:"2026-07-05",
 end:"2026-08-05",
 status:"Open",
 winner:"",
-rules:"Send your most beautiful, funny or emotional pet photograph. Clear, original and responsible submissions only.",
+rulesKey:"fallback.photo.rules",
 votes:189,
 image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
 joinLink:"submit-pet.html"
@@ -976,19 +1069,105 @@ joinLink:"submit-pet.html"
 
 {
 id:"fallback-rescue",
-title:"Most Inspiring Rescue Story",
-prize:"Editorial feature in Pets In Need",
+titleKey:"fallback.rescue.title",
+prizeKey:"fallback.rescue.prize",
 start:"2026-08-01",
 end:"2026-08-31",
 status:"Draft",
 winner:"",
-rules:"Tell us a rescue or adoption story that deserves visibility, care and community support.",
+rulesKey:"fallback.rescue.rules",
 votes:132,
 image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80",
 joinLink:"contact.html"
 }
 
 ];
+
+const contestLocaleMap = {
+en:"en-GB",
+uk:"uk-UA",
+ru:"ru-RU",
+fr:"fr-FR",
+de:"de-DE",
+es:"es-ES",
+it:"it-IT",
+pt:"pt-PT",
+nl:"nl-NL",
+pl:"pl-PL",
+cs:"cs-CZ",
+sk:"sk-SK",
+hu:"hu-HU",
+ro:"ro-RO",
+bg:"bg-BG",
+el:"el-GR",
+sv:"sv-SE",
+da:"da-DK",
+no:"nb-NO",
+fi:"fi-FI",
+tr:"tr-TR",
+ar:"ar",
+hi:"hi-IN"
+};
+
+function getContestLanguage(){
+
+return (
+localStorage.getItem(
+"pets_dogue_language"
+) || "en"
+);
+
+}
+
+function getContestBundle(){
+
+const root =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.contests;
+
+if(!root){
+return null;
+}
+
+return (
+root[getContestLanguage()] ||
+root.en
+);
+
+}
+
+function contestT(path,fallback){
+
+const bundle =
+getContestBundle();
+
+if(!bundle){
+return fallback;
+}
+
+let value = bundle;
+
+path.split(".").forEach(key => {
+
+if(
+value &&
+Object.prototype.hasOwnProperty.call(
+value,
+key
+)
+){
+value = value[key];
+}else{
+value = undefined;
+}
+
+});
+
+return typeof value === "string"
+? value
+: fallback;
+
+}
 
 function escapeHTML(value){
 
@@ -998,6 +1177,88 @@ return String(value || "")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
+}
+
+function translateStatus(status){
+
+const map = {
+"Open":"status.open",
+"Draft":"status.upcoming",
+"Voting Closed":"status.votingClosed",
+"Completed":"status.completed"
+};
+
+return contestT(
+map[status] || "",
+status || contestT(
+"dynamic.contest",
+"Contest"
+)
+);
+
+}
+
+function getContestTitle(contest){
+
+if(contest.titleKey){
+
+return contestT(
+contest.titleKey,
+contest.title || ""
+);
+
+}
+
+return (
+contest.title ||
+contestT(
+"dynamic.untitled",
+"Untitled Contest"
+)
+);
+
+}
+
+function getContestPrize(contest){
+
+if(contest.prizeKey){
+
+return contestT(
+contest.prizeKey,
+contest.prize || ""
+);
+
+}
+
+return (
+contest.prize ||
+contestT(
+"dynamic.defaultPrize",
+"PETS & DOGUE feature"
+)
+);
+
+}
+
+function getContestRules(contest){
+
+if(contest.rulesKey){
+
+return contestT(
+contest.rulesKey,
+contest.rules || ""
+);
+
+}
+
+return (
+contest.rules ||
+contestT(
+"dynamic.detailsSoon",
+"Competition details will be announced soon."
+)
+);
 
 }
 
@@ -1105,16 +1366,40 @@ activeStatus = status;
 document
 .querySelectorAll(".filter-button")
 .forEach(item => {
-
 item.classList.remove("active");
-
 });
 
+if(button){
 button.classList.add("active");
+}
 
-document.getElementById(
-"contestStatusFilter"
-).value = status;
+document
+.getElementById("contestStatusFilter")
+.value = status;
+
+renderContests();
+
+}
+
+function selectStatusFromDropdown(){
+
+const status =
+document
+.getElementById("contestStatusFilter")
+.value;
+
+activeStatus = status;
+
+document
+.querySelectorAll(".filter-button")
+.forEach(item => {
+
+item.classList.toggle(
+"active",
+item.dataset.status === status
+);
+
+});
 
 renderContests();
 
@@ -1149,11 +1434,11 @@ status === selectedStatus;
 
 const searchableText = [
 
-contest.title,
-contest.prize,
-contest.status,
+getContestTitle(contest),
+getContestPrize(contest),
+translateStatus(status),
 contest.winner,
-contest.rules
+getContestRules(contest)
 
 ]
 .join(" ")
@@ -1247,11 +1532,26 @@ contest.start,
 contest.end
 );
 
+const title =
+getContestTitle(contest);
+
+const rules =
+getContestRules(contest);
+
+const prize =
+getContestPrize(contest);
+
 const winnerBlock =
 contest.winner
 ? `
 <div class="winner-line">
-🏆 Winner: ${escapeHTML(contest.winner)}
+🏆 ${escapeHTML(
+contestT(
+"dynamic.winner",
+"Winner"
+)
+)}:
+${escapeHTML(contest.winner)}
 </div>
 `
 : "";
@@ -1262,7 +1562,12 @@ status === "Open"
 <a
 href="${escapeHTML(contest.joinLink || "members-gallery.html")}"
 class="btn green">
-Join Now
+${escapeHTML(
+contestT(
+"dynamic.joinNow",
+"Join Now"
+)
+)}
 </a>
 `
 : "";
@@ -1273,11 +1578,13 @@ return `
 <div class="card-image">
 
 <img
-src="${image}"
-alt="${escapeHTML(contest.title || "PETS & DOGUE Contest")}">
+src="${escapeHTML(image)}"
+alt="${escapeHTML(title)}">
 
 <span class="status-label ${statusClass}">
-${escapeHTML(status)}
+${escapeHTML(
+translateStatus(status)
+)}
 </span>
 
 </div>
@@ -1285,11 +1592,16 @@ ${escapeHTML(status)}
 <div class="card-content">
 
 <span class="badge">
-PETS & DOGUE CONTEST
+${escapeHTML(
+contestT(
+"dynamic.contestBadge",
+"PETS & DOGUE CONTEST"
+)
+)}
 </span>
 
 <h3>
-${escapeHTML(contest.title || "Untitled Contest")}
+${escapeHTML(title)}
 </h3>
 
 <div class="meta">
@@ -1297,18 +1609,17 @@ ${escapeHTML(dateText)}
 </div>
 
 <p>
-${escapeHTML(
-contest.rules ||
-"Competition details will be announced soon."
-)}
+${escapeHTML(rules)}
 </p>
 
 <div class="prize-line">
-🎁 Prize:
-${escapeHTML(
-contest.prize ||
-"PETS & DOGUE feature"
-)}
+🎁 ${escapeHTML(
+contestT(
+"dynamic.prize",
+"Prize"
+)
+)}:
+${escapeHTML(prize)}
 </div>
 
 ${winnerBlock}
@@ -1318,20 +1629,31 @@ ${winnerBlock}
 ${joinButton}
 
 <button
+type="button"
 class="btn gold"
 onclick="openContest('${escapeHTML(id)}')">
-
-View Details
-
+${escapeHTML(
+contestT(
+"dynamic.viewDetails",
+"View Details"
+)
+)}
 </button>
 
 </div>
 
 <button
+type="button"
 class="vote ${voted ? "voted" : ""}"
 onclick="voteContest('${escapeHTML(id)}',this)">
 
-❤️ <span>${initialVotes}</span> votes
+❤️ <span>${initialVotes}</span>
+${escapeHTML(
+contestT(
+"dynamic.votes",
+"votes"
+)
+)}
 
 </button>
 
@@ -1349,7 +1671,10 @@ if(
 !end
 ){
 
-return "Dates to be announced";
+return contestT(
+"dates.toBeAnnounced",
+"Dates to be announced"
+);
 
 }
 
@@ -1368,11 +1693,25 @@ formatDate(end)
 
 if(start){
 
-return "Starts " + formatDate(start);
+return (
+contestT(
+"dates.starts",
+"Starts"
+) +
+" " +
+formatDate(start)
+);
 
 }
 
-return "Ends " + formatDate(end);
+return (
+contestT(
+"dates.ends",
+"Ends"
+) +
+" " +
+formatDate(end)
+);
 
 }
 
@@ -1382,8 +1721,19 @@ if(!value){
 return "";
 }
 
+const parts =
+String(value).split("-");
+
+if(parts.length !== 3){
+return value;
+}
+
 const date =
-new Date(value);
+new Date(
+Number(parts[0]),
+Number(parts[1]) - 1,
+Number(parts[2])
+);
 
 if(
 Number.isNaN(
@@ -1395,8 +1745,11 @@ return value;
 
 }
 
+const lang =
+getContestLanguage();
+
 return date.toLocaleDateString(
-"en-GB",
+contestLocaleMap[lang] || "en-GB",
 {
 day:"numeric",
 month:"short",
@@ -1477,6 +1830,11 @@ if(!contest){
 return;
 }
 
+currentContestId = id;
+
+const title =
+getContestTitle(contest);
+
 document
 .getElementById("modalImage")
 .src =
@@ -1487,16 +1845,19 @@ contest.status
 );
 
 document
+.getElementById("modalImage")
+.alt = title;
+
+document
 .getElementById("modalTitle")
-.textContent =
-contest.title ||
-"PETS & DOGUE Contest";
+.textContent = title;
 
 document
 .getElementById("modalStatus")
 .textContent =
-contest.status ||
-"Contest";
+translateStatus(
+contest.status || "Draft"
+);
 
 document
 .getElementById("modalMeta")
@@ -1509,17 +1870,17 @@ contest.end
 document
 .getElementById("modalPrize")
 .textContent =
-"Prize: " +
-(
-contest.prize ||
-"PETS & DOGUE feature"
-);
+contestT(
+"dynamic.prize",
+"Prize"
+) +
+": " +
+getContestPrize(contest);
 
 document
 .getElementById("modalRules")
 .textContent =
-contest.rules ||
-"Competition details will be announced soon.";
+getContestRules(contest);
 
 const winner =
 document.getElementById(
@@ -1534,7 +1895,11 @@ winner.style.display =
 "block";
 
 winner.textContent =
-"Winner: " +
+contestT(
+"dynamic.winner",
+"Winner"
+) +
+": " +
 contest.winner;
 
 }else{
@@ -1552,6 +1917,12 @@ document.getElementById(
 joinButton.href =
 contest.joinLink ||
 "members-gallery.html";
+
+joinButton.textContent =
+contestT(
+"dynamic.joinCompetition",
+"Join Competition"
+);
 
 joinButton.style.display =
 contest.status === "Open"
@@ -1575,6 +1946,8 @@ document
 
 document.body.style.overflow =
 "";
+
+currentContestId = null;
 
 }
 
@@ -1634,14 +2007,30 @@ renderContests();
 }
 );
 
+window.addEventListener(
+"languagechange",
+() => {
+
+renderContests();
+
+if(
+currentContestId &&
+document
+.getElementById("contestModal")
+.classList.contains("open")
+){
+
+openContest(
+currentContestId
+);
+
+}
+
+}
+);
+
 loadContests();
 </script>
-
-
-<!-- PETS & DOGUE FREE LOCAL LANGUAGE SYSTEM -->
-<script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/contests.js?v=1"></script>
-<script src="/i18n/engine.js?v=3"></script>
 
 </body>
 </html>
