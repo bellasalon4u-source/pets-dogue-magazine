@@ -3,12 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pet Travel | PETS & DOGUE</title>
+
+<title data-i18n="petTravel.meta.title">Pet Travel | PETS & DOGUE</title>
+
+<meta
+name="description"
+content="Luxury pet travel guides, pet-friendly hotels, beaches, flights, documents, road trips and elegant adventures with PETS & DOGUE."
+data-i18n-attr="content:petTravel.meta.description"
+>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-a{text-decoration:none;color:inherit}
+
+body{
+background:#f8f7f3;
+color:#111;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
 
 header{
 background:white;
@@ -406,7 +421,32 @@ letter-spacing:2px;
 text-transform:uppercase;
 }
 
+html[dir="rtl"] body{
+text-align:right;
+}
+
+html[dir="rtl"] header,
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .guide,
+html[dir="rtl"] .club,
+html[dir="rtl"] footer{
+text-align:center;
+}
+
+html[dir="rtl"] .filters,
+html[dir="rtl"] .actions,
+html[dir="rtl"] .footer-links{
+direction:rtl;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] select{
+text-align:right;
+}
+
 @media(max-width:900px){
+
 .hero{
 height:430px;
 }
@@ -442,6 +482,7 @@ font-size:40px;
 .logo-big{
 font-size:40px;
 }
+
 }
 </style>
 </head>
@@ -449,283 +490,883 @@ font-size:40px;
 <body>
 
 <header>
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
+
+<div
+class="logo-small"
+translate="no"
+data-pd-brand="true">
+pets &
+</div>
+
+<div
+class="logo-big"
+translate="no"
+data-pd-brand="true">
+DOGUE
+</div>
+
 </header>
 
 <section class="hero">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80" alt="Pet Travel">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80"
+alt="Pet Travel"
+data-i18n-attr="alt:petTravel.images.hero">
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
-<h1>Pet Travel</h1>
-<p>
+
+<h1 data-i18n="petTravel.hero.title">
+Pet Travel
+</h1>
+
+<p data-i18n="petTravel.hero.description">
 Luxury escapes, pet-friendly hotels, travel guides, documents, beaches and elegant adventures with your companion.
 </p>
+
 </div>
+
 </section>
 
 <section class="section">
 
-<h2 class="section-title">Luxury Pet Travel Guide</h2>
+<h2
+class="section-title"
+data-i18n="petTravel.page.title">
+Luxury Pet Travel Guide
+</h2>
+
 <div class="gold-line"></div>
 
 <div class="search-box">
+
 <div class="search-grid">
 
-<input id="destinationInput" type="text" placeholder="Destination, city or country" value="Italy">
+<input
+id="destinationInput"
+type="text"
+placeholder="Destination, city or country"
+value="Italy"
+data-i18n-placeholder="petTravel.search.destination">
 
 <select id="travelType">
-<option>All Travel</option>
-<option>Hotels</option>
-<option>Flights</option>
-<option>Beaches</option>
-<option>Road Trips</option>
-<option>Documents</option>
-<option>Luxury Escapes</option>
+
+<option value="All Travel" data-i18n="petTravel.types.all">
+All Travel
+</option>
+
+<option value="Hotels" data-i18n="petTravel.types.hotels">
+Hotels
+</option>
+
+<option value="Flights" data-i18n="petTravel.types.flights">
+Flights
+</option>
+
+<option value="Beaches" data-i18n="petTravel.types.beaches">
+Beaches
+</option>
+
+<option value="Road Trips" data-i18n="petTravel.types.roadTrips">
+Road Trips
+</option>
+
+<option value="Documents" data-i18n="petTravel.types.documents">
+Documents
+</option>
+
+<option value="Luxury Escapes" data-i18n="petTravel.types.luxuryEscapes">
+Luxury Escapes
+</option>
+
 </select>
 
 <select id="petType">
-<option>All Pets</option>
-<option>Dogs</option>
-<option>Cats</option>
-<option>Small Pets</option>
-<option>Exotic Pets</option>
+
+<option value="All Pets" data-i18n="petTravel.pets.all">
+All Pets
+</option>
+
+<option value="Dogs" data-i18n="petTravel.pets.dogs">
+Dogs
+</option>
+
+<option value="Cats" data-i18n="petTravel.pets.cats">
+Cats
+</option>
+
+<option value="Small Pets" data-i18n="petTravel.pets.small">
+Small Pets
+</option>
+
+<option value="Exotic Pets" data-i18n="petTravel.pets.exotic">
+Exotic Pets
+</option>
+
 </select>
 
-<button onclick="searchTravel()" class="gold">Search</button>
+<button
+onclick="searchTravel()"
+class="gold"
+data-i18n="petTravel.search.button">
+Search
+</button>
 
 </div>
+
 </div>
 
 <div class="filters">
-<div class="filter active" onclick="filterCards(this,'All')">All</div>
-<div class="filter" onclick="filterCards(this,'Hotels')">Hotels</div>
-<div class="filter" onclick="filterCards(this,'Flights')">Flights</div>
-<div class="filter" onclick="filterCards(this,'Beaches')">Beaches</div>
-<div class="filter" onclick="filterCards(this,'Road Trips')">Road Trips</div>
-<div class="filter" onclick="filterCards(this,'Documents')">Documents</div>
+
+<div
+class="filter active"
+onclick="filterCards(this,'All')"
+data-i18n="petTravel.filters.all">
+All
+</div>
+
+<div
+class="filter"
+onclick="filterCards(this,'Hotels')"
+data-i18n="petTravel.types.hotels">
+Hotels
+</div>
+
+<div
+class="filter"
+onclick="filterCards(this,'Flights')"
+data-i18n="petTravel.types.flights">
+Flights
+</div>
+
+<div
+class="filter"
+onclick="filterCards(this,'Beaches')"
+data-i18n="petTravel.types.beaches">
+Beaches
+</div>
+
+<div
+class="filter"
+onclick="filterCards(this,'Road Trips')"
+data-i18n="petTravel.types.roadTrips">
+Road Trips
+</div>
+
+<div
+class="filter"
+onclick="filterCards(this,'Documents')"
+data-i18n="petTravel.types.documents">
+Documents
+</div>
+
 </div>
 
 <div class="editorial">
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80" alt="Luxury travel">
+
+<img
+src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80"
+alt="Luxury travel"
+data-i18n-attr="alt:petTravel.images.editorial">
+
 <div class="editorial-text">
-<span class="badge">EDITOR'S PICK</span>
-<h2>The New Era Of Pet-Friendly Travel</h2>
-<p>
+
+<span
+class="badge"
+data-i18n="petTravel.editorial.badge">
+EDITOR'S PICK
+</span>
+
+<h2 data-i18n="petTravel.editorial.title">
+The New Era Of Pet-Friendly Travel
+</h2>
+
+<p data-i18n="petTravel.editorial.descriptionOne">
 Travelling with pets is becoming part of modern luxury lifestyle. Hotels, cafés, villas and beaches are learning that animals are family, not luggage.
 </p>
-<p>
+
+<p data-i18n="petTravel.editorial.descriptionTwo">
 PETS & DOGUE Travel brings together beautiful destinations, practical checklists, premium stays and future partner offers for club members.
 </p>
-<a href="pet-friendly-places.html" class="btn gold">Explore Places</a>
-</div>
+
+<a
+href="pet-friendly-places.html"
+class="btn gold"
+data-i18n="petTravel.editorial.button">
+Explore Places
+</a>
+
 </div>
 
-<div class="grid" id="travelGrid">
+</div>
 
-<div class="card" data-type="Hotels">
-<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" alt="Hotel">
+<div
+class="grid"
+id="travelGrid">
+
+<div
+class="card"
+data-type="Hotels">
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+alt="Hotel"
+data-i18n-attr="alt:petTravel.images.hotel">
+
 <div class="card-content">
-<span class="badge">HOTELS</span>
-<h3>Luxury Pet-Friendly Hotels</h3>
-<div class="meta">Europe · Boutique stays · Club benefits</div>
-<div class="stars">★★★★★ 5.0</div>
-<p>
+
+<span class="badge" data-i18n="petTravel.cards.hotels.badge">
+HOTELS
+</span>
+
+<h3 data-i18n="petTravel.cards.hotels.title">
+Luxury Pet-Friendly Hotels
+</h3>
+
+<div class="meta" data-i18n="petTravel.cards.hotels.meta">
+Europe · Boutique stays · Club benefits
+</div>
+
+<div class="stars">
+★★★★★ 5.0
+</div>
+
+<p data-i18n="petTravel.cards.hotels.description">
 Elegant hotels with pet welcome packs, outdoor spaces, premium rooms and thoughtful services.
 </p>
+
 <div class="actions">
-<a href="pet-friendly-places.html" class="btn gold">View Hotels</a>
-<a href="partners.html" class="btn">Partner Offers</a>
-</div>
-</div>
+
+<a
+href="pet-friendly-places.html"
+class="btn gold"
+data-i18n="petTravel.cards.hotels.buttonOne">
+View Hotels
+</a>
+
+<a
+href="partners.html"
+class="btn"
+data-i18n="petTravel.cards.hotels.buttonTwo">
+Partner Offers
+</a>
+
 </div>
 
-<div class="card" data-type="Beaches">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Beach">
+</div>
+
+</div>
+
+<div
+class="card"
+data-type="Beaches">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+alt="Beach"
+data-i18n-attr="alt:petTravel.images.beach">
+
 <div class="card-content">
-<span class="badge">BEACHES</span>
-<h3>Pet-Friendly Beaches</h3>
-<div class="meta">Dorset · Italy · Greece · Spain</div>
-<div class="stars">★★★★☆ 4.8</div>
-<p>
+
+<span class="badge" data-i18n="petTravel.cards.beaches.badge">
+BEACHES
+</span>
+
+<h3 data-i18n="petTravel.cards.beaches.title">
+Pet-Friendly Beaches
+</h3>
+
+<div class="meta">
+Dorset · Italy · Greece · Spain
+</div>
+
+<div class="stars">
+★★★★☆ 4.8
+</div>
+
+<p data-i18n="petTravel.cards.beaches.description">
 Coastal escapes, walking routes and relaxed seaside days for pets and their people.
 </p>
+
 <div class="actions">
-<a href="pet-friendly-places.html" class="btn gold">Find Beaches</a>
-<a href="photos.html" class="btn">Photo Spots</a>
-</div>
-</div>
+
+<a
+href="pet-friendly-places.html"
+class="btn gold"
+data-i18n="petTravel.cards.beaches.buttonOne">
+Find Beaches
+</a>
+
+<a
+href="photos.html"
+class="btn"
+data-i18n="petTravel.cards.beaches.buttonTwo">
+Photo Spots
+</a>
+
 </div>
 
-<div class="card" data-type="Flights">
-<img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" alt="Flights">
+</div>
+
+</div>
+
+<div
+class="card"
+data-type="Flights">
+
+<img
+src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80"
+alt="Flights"
+data-i18n-attr="alt:petTravel.images.flights">
+
 <div class="card-content">
-<span class="badge">FLIGHTS</span>
-<h3>Flying With Pets</h3>
-<div class="meta">Airlines · cabin rules · documents</div>
-<div class="stars">GUIDE</div>
-<p>
+
+<span class="badge" data-i18n="petTravel.cards.flights.badge">
+FLIGHTS
+</span>
+
+<h3 data-i18n="petTravel.cards.flights.title">
+Flying With Pets
+</h3>
+
+<div class="meta" data-i18n="petTravel.cards.flights.meta">
+Airlines · cabin rules · documents
+</div>
+
+<div class="stars" data-i18n="petTravel.cards.flights.guide">
+GUIDE
+</div>
+
+<p data-i18n="petTravel.cards.flights.description">
 A future guide for airline rules, carrier sizes, cabin travel, cargo policies and preparation.
 </p>
+
 <div class="actions">
-<a href="articles.html" class="btn gold">Read Guide</a>
-<a href="wellness.html" class="btn">Travel Wellness</a>
-</div>
-</div>
+
+<a
+href="articles.html"
+class="btn gold"
+data-i18n="petTravel.cards.flights.buttonOne">
+Read Guide
+</a>
+
+<a
+href="wellness.html"
+class="btn"
+data-i18n="petTravel.cards.flights.buttonTwo">
+Travel Wellness
+</a>
+
 </div>
 
-<div class="card" data-type="Road Trips">
-<img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80" alt="Road trip">
+</div>
+
+</div>
+
+<div
+class="card"
+data-type="Road Trips">
+
+<img
+src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80"
+alt="Road trip"
+data-i18n-attr="alt:petTravel.images.roadTrip">
+
 <div class="card-content">
-<span class="badge">ROAD TRIPS</span>
-<h3>Road Trips With Pets</h3>
-<div class="meta">Safety · comfort · routes</div>
-<div class="stars">★★★★★ 4.9</div>
-<p>
+
+<span class="badge" data-i18n="petTravel.cards.roadTrips.badge">
+ROAD TRIPS
+</span>
+
+<h3 data-i18n="petTravel.cards.roadTrips.title">
+Road Trips With Pets
+</h3>
+
+<div class="meta" data-i18n="petTravel.cards.roadTrips.meta">
+Safety · comfort · routes
+</div>
+
+<div class="stars">
+★★★★★ 4.9
+</div>
+
+<p data-i18n="petTravel.cards.roadTrips.description">
 Planning, stops, water, comfort, safe carriers and beautiful routes for travelling by car.
 </p>
+
 <div class="actions">
-<a href="articles.html" class="btn gold">Read Tips</a>
-<a href="local-community.html" class="btn">Ask Locals</a>
-</div>
-</div>
+
+<a
+href="articles.html"
+class="btn gold"
+data-i18n="petTravel.cards.roadTrips.buttonOne">
+Read Tips
+</a>
+
+<a
+href="local-community.html"
+class="btn"
+data-i18n="petTravel.cards.roadTrips.buttonTwo">
+Ask Locals
+</a>
+
 </div>
 
-<div class="card" data-type="Documents">
-<img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80" alt="Documents">
+</div>
+
+</div>
+
+<div
+class="card"
+data-type="Documents">
+
+<img
+src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80"
+alt="Documents"
+data-i18n-attr="alt:petTravel.images.documents">
+
 <div class="card-content">
-<span class="badge">DOCUMENTS</span>
-<h3>Travel Documents</h3>
-<div class="meta">Passports · vaccines · borders</div>
-<div class="stars">CHECKLIST</div>
-<p>
+
+<span class="badge" data-i18n="petTravel.cards.documents.badge">
+DOCUMENTS
+</span>
+
+<h3 data-i18n="petTravel.cards.documents.title">
+Travel Documents
+</h3>
+
+<div class="meta" data-i18n="petTravel.cards.documents.meta">
+Passports · vaccines · borders
+</div>
+
+<div class="stars" data-i18n="petTravel.cards.documents.checklist">
+CHECKLIST
+</div>
+
+<p data-i18n="petTravel.cards.documents.description">
 A practical section for future guides about pet passports, vaccines, microchips and border requirements.
 </p>
+
 <div class="actions">
-<a href="articles.html" class="btn gold">Checklist</a>
-<a href="contact.html" class="btn">Ask Editor</a>
-</div>
-</div>
+
+<a
+href="articles.html"
+class="btn gold"
+data-i18n="petTravel.cards.documents.buttonOne">
+Checklist
+</a>
+
+<a
+href="contact.html"
+class="btn"
+data-i18n="petTravel.cards.documents.buttonTwo">
+Ask Editor
+</a>
+
 </div>
 
-<div class="card" data-type="Hotels">
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Villas">
+</div>
+
+</div>
+
+<div
+class="card"
+data-type="Hotels">
+
+<img
+src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+alt="Villas"
+data-i18n-attr="alt:petTravel.images.villas">
+
 <div class="card-content">
-<span class="badge">LUXURY ESCAPE</span>
-<h3>Villas & Country Houses</h3>
-<div class="meta">Private stays · gardens · quiet travel</div>
-<div class="stars">★★★★★ 5.0</div>
-<p>
+
+<span class="badge" data-i18n="petTravel.cards.villas.badge">
+LUXURY ESCAPE
+</span>
+
+<h3 data-i18n="petTravel.cards.villas.title">
+Villas & Country Houses
+</h3>
+
+<div class="meta" data-i18n="petTravel.cards.villas.meta">
+Private stays · gardens · quiet travel
+</div>
+
+<div class="stars">
+★★★★★ 5.0
+</div>
+
+<p data-i18n="petTravel.cards.villas.description">
 Private stays for pets who need space, calm and a more elegant travel experience.
 </p>
+
 <div class="actions">
-<a href="partners.html" class="btn gold">View Offers</a>
-<a href="club.html" class="btn">Club Benefits</a>
+
+<a
+href="partners.html"
+class="btn gold"
+data-i18n="petTravel.cards.villas.buttonOne">
+View Offers
+</a>
+
+<a
+href="club.html"
+class="btn"
+data-i18n="petTravel.cards.villas.buttonTwo">
+Club Benefits
+</a>
+
 </div>
+
 </div>
+
 </div>
 
 </div>
 
 <div class="guide">
 
-<h2>PETS & DOGUE Travel Desk</h2>
+<h2 data-i18n="petTravel.desk.title">
+PETS & DOGUE Travel Desk
+</h2>
 
-<p>
-Future club members will access pet-friendly hotel discounts, travel partner offers,
-destination guides, checklists, grooming before trips and selected premium services.
+<p data-i18n="petTravel.desk.description">
+Future club members will access pet-friendly hotel discounts, travel partner offers, destination guides, checklists, grooming before trips and selected premium services.
 </p>
 
 <div class="guide-grid">
-<div class="guide-item">Pet-Friendly Hotels</div>
-<div class="guide-item">Airline Guides</div>
-<div class="guide-item">Travel Documents</div>
-<div class="guide-item">Beach Rules</div>
-<div class="guide-item">Road Trip Tips</div>
-<div class="guide-item">Partner Discounts</div>
+
+<div class="guide-item" data-i18n="petTravel.desk.hotel">
+Pet-Friendly Hotels
+</div>
+
+<div class="guide-item" data-i18n="petTravel.desk.airline">
+Airline Guides
+</div>
+
+<div class="guide-item" data-i18n="petTravel.desk.documents">
+Travel Documents
+</div>
+
+<div class="guide-item" data-i18n="petTravel.desk.beach">
+Beach Rules
+</div>
+
+<div class="guide-item" data-i18n="petTravel.desk.road">
+Road Trip Tips
+</div>
+
+<div class="guide-item" data-i18n="petTravel.desk.partner">
+Partner Discounts
+</div>
+
 </div>
 
 </div>
 
 <div class="checklist">
 
-<h2>Before You Travel</h2>
+<h2 data-i18n="petTravel.checklist.title">
+Before You Travel
+</h2>
 
 <ul>
-<li>Check pet passport, microchip and vaccination requirements before booking.</li>
-<li>Confirm airline or transport rules directly with the provider.</li>
-<li>Ask hotels about size limits, fees, pet beds and allowed areas.</li>
-<li>Prepare food, water, medication, familiar blanket and comfort items.</li>
-<li>Plan rest stops and pet-friendly places along the route.</li>
-<li>Save local vet contacts near your destination.</li>
+
+<li data-i18n="petTravel.checklist.one">
+Check pet passport, microchip and vaccination requirements before booking.
+</li>
+
+<li data-i18n="petTravel.checklist.two">
+Confirm airline or transport rules directly with the provider.
+</li>
+
+<li data-i18n="petTravel.checklist.three">
+Ask hotels about size limits, fees, pet beds and allowed areas.
+</li>
+
+<li data-i18n="petTravel.checklist.four">
+Prepare food, water, medication, familiar blanket and comfort items.
+</li>
+
+<li data-i18n="petTravel.checklist.five">
+Plan rest stops and pet-friendly places along the route.
+</li>
+
+<li data-i18n="petTravel.checklist.six">
+Save local vet contacts near your destination.
+</li>
+
 </ul>
 
 </div>
 
 <div class="club">
 
-<h2>Travel Benefits For Club Members</h2>
+<h2 data-i18n="petTravel.club.title">
+Travel Benefits For Club Members
+</h2>
 
-<p>
-PETS & DOGUE Club will connect readers with partner discounts, premium guides,
-booking opportunities and curated travel recommendations for pets and owners.
+<p data-i18n="petTravel.club.description">
+PETS & DOGUE Club will connect readers with partner discounts, premium guides, booking opportunities and curated travel recommendations for pets and owners.
 </p>
 
 <div class="benefits">
-<div class="benefit">Hotel Discounts</div>
-<div class="benefit">Travel Accessories</div>
-<div class="benefit">Pet Taxi Partners</div>
-<div class="benefit">Grooming Before Trips</div>
-<div class="benefit">Destination Guides</div>
-<div class="benefit">Member QR Card</div>
+
+<div class="benefit" data-i18n="petTravel.club.hotel">
+Hotel Discounts
+</div>
+
+<div class="benefit" data-i18n="petTravel.club.accessories">
+Travel Accessories
+</div>
+
+<div class="benefit" data-i18n="petTravel.club.taxi">
+Pet Taxi Partners
+</div>
+
+<div class="benefit" data-i18n="petTravel.club.grooming">
+Grooming Before Trips
+</div>
+
+<div class="benefit" data-i18n="petTravel.club.guides">
+Destination Guides
+</div>
+
+<div class="benefit" data-i18n="petTravel.club.qr">
+Member QR Card
+</div>
+
 </div>
 
 <br><br>
-<a href="club.html" class="btn gold">Join The Club</a>
+
+<a
+href="club.html"
+class="btn gold"
+data-i18n="petTravel.club.button">
+Join The Club
+</a>
 
 </div>
 
 </section>
 
 <footer>
-<h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
+
+<h2
+translate="no"
+data-pd-brand="true">
+PETS & DOGUE
+</h2>
+
+<p data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
 
 <div class="footer-links">
-<a href="index.html">Home</a>
-<a href="pet-friendly-places.html">Places</a>
-<a href="partners.html">Partners</a>
-<a href="wellness.html">Wellness</a>
-<a href="articles.html">Articles</a>
-<a href="privacy.html">Privacy</a>
-<a href="contact.html">Contact</a>
+
+<a href="index.html" data-i18n="petTravel.footer.home">
+Home
+</a>
+
+<a href="pet-friendly-places.html" data-i18n="petTravel.footer.places">
+Places
+</a>
+
+<a href="partners.html" data-i18n="petTravel.footer.partners">
+Partners
+</a>
+
+<a href="wellness.html" data-i18n="petTravel.footer.wellness">
+Wellness
+</a>
+
+<a href="articles.html" data-i18n="petTravel.footer.articles">
+Articles
+</a>
+
+<a href="privacy.html" data-i18n="petTravel.footer.privacy">
+Privacy
+</a>
+
+<a href="contact.html" data-i18n="petTravel.footer.contact">
+Contact
+</a>
+
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a
+href="admin.html"
+class="admin-small"
+data-i18n="common.footer.admin">
+Admin
+</a>
+
 </footer>
 
-<script>
-function filterCards(element,type){
-document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
-element.classList.add("active");
+<script src="i18n/common.js"></script>
+<script src="i18n/pet-travel.js"></script>
+<script src="i18n/engine.js"></script>
 
-document.querySelectorAll(".card").forEach(card => {
-card.style.display = type === "All" || card.dataset.type === type ? "block" : "none";
+<script>
+function getPetTravelLanguage(){
+
+return (
+localStorage.getItem(
+"pets_dogue_language"
+) || "en"
+);
+
+}
+
+function getPetTravelText(
+path,
+fallback
+){
+
+const bundle =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.petTravel;
+
+if(!bundle){
+return fallback;
+}
+
+const language =
+getPetTravelLanguage();
+
+const source =
+bundle[language] ||
+bundle.en;
+
+let value =
+source;
+
+path
+.split(".")
+.forEach(key => {
+
+if(
+value &&
+Object.prototype.hasOwnProperty.call(
+value,
+key
+)
+){
+
+value =
+value[key];
+
+}else{
+
+value =
+undefined;
+
+}
+
 });
+
+return typeof value === "string"
+? value
+: fallback;
+
+}
+
+function getTravelTypeLabel(value){
+
+const map = {
+"All Travel":"types.all",
+"Hotels":"types.hotels",
+"Flights":"types.flights",
+"Beaches":"types.beaches",
+"Road Trips":"types.roadTrips",
+"Documents":"types.documents",
+"Luxury Escapes":"types.luxuryEscapes"
+};
+
+return getPetTravelText(
+map[value] || "",
+value
+);
+
+}
+
+function filterCards(
+element,
+type
+){
+
+document
+.querySelectorAll(
+".filter"
+)
+.forEach(item => {
+
+item.classList.remove(
+"active"
+);
+
+});
+
+element.classList.add(
+"active"
+);
+
+document
+.querySelectorAll(
+".card"
+)
+.forEach(card => {
+
+card.style.display =
+type === "All" ||
+card.dataset.type === type
+? "block"
+: "none";
+
+});
+
 }
 
 function searchTravel(){
-const destination = document.getElementById("destinationInput").value || "your destination";
-const type = document.getElementById("travelType").value;
-alert("Showing PETS & DOGUE travel ideas for " + destination + " · " + type);
+
+const destination =
+document
+.getElementById(
+"destinationInput"
+).value
+.trim() ||
+getPetTravelText(
+"search.defaultDestination",
+"your destination"
+);
+
+const type =
+document
+.getElementById(
+"travelType"
+).value;
+
+const message =
+getPetTravelText(
+"search.alert",
+"Showing PETS & DOGUE travel ideas for {destination} · {type}"
+)
+.replaceAll(
+"{destination}",
+destination
+)
+.replaceAll(
+"{type}",
+getTravelTypeLabel(type)
+);
+
+alert(message);
+
 }
 </script>
-
-
-<!-- PETS & DOGUE FREE LOCAL LANGUAGE SYSTEM -->
-<script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/pet-travel.js?v=1"></script>
-<script src="/i18n/engine.js?v=3"></script>
 
 </body>
 </html>
