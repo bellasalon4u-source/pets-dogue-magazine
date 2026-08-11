@@ -1,861 +1,538 @@
 window.PetsDogueTranslations =
-  window.PetsDogueTranslations || {};
+window.PetsDogueTranslations || {};
 
 window.PetsDogueTranslations.wellness = {
-  en: {
-    meta: {
-      title: "Wellness | PETS & DOGUE"
-    },
-
-    hero: {
-      title: "Wellness",
-      description:
-        "A luxury wellness center for pet health, nutrition, grooming, behaviour, first aid and everyday care."
-    },
-
-    center: {
-      title: "PETS & DOGUE Wellness Center"
-    },
-
-    notice: {
-      title: "Editorial Health Note",
-      description:
-        "PETS & DOGUE Wellness is for lifestyle and general information only. It does not replace veterinary advice. For medical concerns, always contact a qualified veterinarian."
-    },
-
-    cards: {
-      veterinaryBadge: "VETERINARY",
-      veterinaryTitle: "Vet Check-Ups",
-      veterinaryDescription:
-        "Regular check-ups help notice health changes early and keep your pet comfortable.",
-      veterinaryButton: "Find Vets",
-
-      nutritionBadge: "NUTRITION",
-      nutritionTitle: "Food & Balance",
-      nutritionDescription:
-        "Nutrition, hydration and daily feeding habits are the foundation of pet wellness.",
-      nutritionButton: "Read Guides",
-
-      behaviourBadge: "BEHAVIOUR",
-      behaviourTitle: "Calm Living",
-      behaviourDescription:
-        "Routine, gentle attention and safe spaces help pets feel confident and secure.",
-      behaviourButton: "Ask Community",
-
-      groomingBadge: "GROOMING",
-      groomingTitle: "Coat & Beauty",
-      groomingDescription:
-        "Grooming is not just style. It supports comfort, skin health and confidence.",
-      groomingButton: "Partner Offers",
-
-      dentalBadge: "DENTAL CARE",
-      dentalTitle: "Teeth & Breath",
-      dentalDescription:
-        "Dental care supports appetite, comfort and long-term wellbeing for many pets.",
-      dentalButton: "Dental Guide",
-
-      fitnessBadge: "FITNESS",
-      fitnessTitle: "Movement & Play",
-      fitnessDescription:
-        "Exercise, enrichment and play help pets stay active, happy and mentally stimulated.",
-      fitnessButton: "Active Travel"
-    },
-
-    firstAid: {
-      badge: "FIRST AID",
-      title: "Emergency Awareness",
-      descriptionOne:
-        "Every pet owner should know basic warning signs: breathing problems, collapse, severe bleeding, poisoning, repeated vomiting, seizures or sudden inability to walk.",
-      descriptionTwo:
-        "In an emergency, do not wait for online advice. Contact a veterinarian, emergency clinic or animal poison helpline immediately.",
-      button: "Find Local Help"
-    },
-
-    checklist: {
-      title: "Wellness Checklist",
-      vaccination:
-        "Keep vaccination and microchip information up to date.",
-      checks:
-        "Book regular vet checks and dental checks.",
-      monitor:
-        "Monitor appetite, drinking, behaviour, breathing and energy.",
-      grooming:
-        "Use safe grooming, skin and coat care routines.",
-      emergency:
-        "Keep emergency clinic details saved on your phone.",
-      firstAid:
-        "Prepare a small first aid kit for travel and home.",
-      medicines:
-        "Ask professionals before using supplements, medicines or natural remedies."
-    },
-
-    urgent: {
-      title: "When To Seek Urgent Help",
-      description:
-        "Seek urgent veterinary help for breathing difficulty, suspected poisoning, collapse, severe pain, bleeding, seizures, heatstroke, trauma, swollen abdomen, repeated vomiting or any sudden serious change.",
-      button: "Search Vets Near You"
-    },
-
-    club: {
-      title: "Wellness Benefits For Club Members",
-      description:
-        "PETS & DOGUE Club will connect members with wellness partners, grooming offers, care guides, pet spa benefits and premium recommendations.",
-
-      grooming: "Grooming Discounts",
-      spa: "Pet Spa Offers",
-      guides: "Wellness Guides",
-      nutrition: "Nutrition Partners",
-      vets: "Vet Partner Benefits",
-      qr: "Member QR Card",
-
-      button: "Join The Club"
-    },
-
-    footer: {
-      home: "Home",
-      articles: "Articles",
-      places: "Places",
-      partners: "Partners",
-      club: "Club",
-      privacy: "Privacy",
-      contact: "Contact",
-      admin: "Admin"
-    }
-  },
-
-  uk: {
-    meta: {
-      title: "Здоров’я та догляд | PETS & DOGUE"
-    },
-
-    hero: {
-      title: "Здоров’я та догляд",
-      description:
-        "Центр турботи про здоров’я, харчування, грумінг, поведінку, першу допомогу та щоденний догляд за улюбленцями."
-    },
-
-    center: {
-      title: "Центр здоров’я PETS & DOGUE"
-    },
-
-    notice: {
-      title: "Редакційне застереження про здоров’я",
-      description:
-        "Матеріали PETS & DOGUE Wellness призначені лише для загальної та інформаційної підтримки. Вони не замінюють консультацію ветеринара. З медичних питань завжди звертайтеся до кваліфікованого ветеринарного лікаря."
-    },
-
-    cards: {
-      veterinaryBadge: "ВЕТЕРИНАРІЯ",
-      veterinaryTitle: "Ветеринарні огляди",
-      veterinaryDescription:
-        "Регулярні огляди допомагають вчасно помітити зміни у здоров’ї та підтримувати комфорт улюбленця.",
-      veterinaryButton: "Знайти ветеринара",
-
-      nutritionBadge: "ХАРЧУВАННЯ",
-      nutritionTitle: "Харчування та баланс",
-      nutritionDescription:
-        "Правильне харчування, вода та щоденний режим годування є основою здоров’я улюбленця.",
-      nutritionButton: "Читати поради",
-
-      behaviourBadge: "ПОВЕДІНКА",
-      behaviourTitle: "Спокійне життя",
-      behaviourDescription:
-        "Режим, лагідна увага та безпечний простір допомагають тваринам почуватися впевнено.",
-      behaviourButton: "Запитати спільноту",
-
-      groomingBadge: "ГРУМІНГ",
-      groomingTitle: "Шерсть і краса",
-      groomingDescription:
-        "Грумінг — це не лише стиль. Він підтримує комфорт, здоров’я шкіри та впевненість улюбленця.",
-      groomingButton: "Пропозиції партнерів",
-
-      dentalBadge: "ДОГЛЯД ЗА ЗУБАМИ",
-      dentalTitle: "Зуби та свіже дихання",
-      dentalDescription:
-        "Догляд за зубами підтримує апетит, комфорт і довготривале здоров’я багатьох тварин.",
-      dentalButton: "Поради щодо зубів",
-
-      fitnessBadge: "АКТИВНІСТЬ",
-      fitnessTitle: "Рух та ігри",
-      fitnessDescription:
-        "Фізична активність, ігри та розвиток допомагають улюбленцям залишатися здоровими й щасливими.",
-      fitnessButton: "Активні подорожі"
-    },
-
-    firstAid: {
-      badge: "ПЕРША ДОПОМОГА",
-      title: "Ознаки невідкладного стану",
-      descriptionOne:
-        "Кожен власник повинен знати основні тривожні ознаки: проблеми з диханням, втрата свідомості, сильна кровотеча, отруєння, повторне блювання, судоми або раптова неможливість ходити.",
-      descriptionTwo:
-        "У невідкладній ситуації не чекайте поради в інтернеті. Негайно зверніться до ветеринара, цілодобової клініки або служби допомоги при отруєннях тварин.",
-      button: "Знайти допомогу поруч"
-    },
-
-    checklist: {
-      title: "Перелік турботи про здоров’я",
-      vaccination:
-        "Підтримуйте актуальність інформації про вакцинацію та мікрочип.",
-      checks:
-        "Регулярно проходьте ветеринарні та стоматологічні огляди.",
-      monitor:
-        "Стежте за апетитом, питтям, поведінкою, диханням та енергією.",
-      grooming:
-        "Використовуйте безпечний догляд за шерстю та шкірою.",
-      emergency:
-        "Збережіть у телефоні контакти цілодобової ветеринарної клініки.",
-      firstAid:
-        "Підготуйте невелику аптечку для дому та подорожей.",
-      medicines:
-        "Перед застосуванням добавок, ліків або натуральних засобів радьтеся з фахівцями."
-    },
-
-    urgent: {
-      title: "Коли потрібна термінова допомога",
-      description:
-        "Терміново зверніться до ветеринара при утрудненому диханні, підозрі на отруєння, втраті свідомості, сильному болю, кровотечі, судомах, тепловому ударі, травмі, здутті живота, повторному блюванні або будь-якій раптовій серйозній зміні стану.",
-      button: "Знайти ветеринара поруч"
-    },
-
-    club: {
-      title: "Переваги здоров’я для учасників клубу",
-      description:
-        "PETS & DOGUE Club об’єднуватиме учасників із партнерами у сфері здоров’я, грумінгу, догляду, спа-послуг та преміальних рекомендацій.",
-
-      grooming: "Знижки на грумінг",
-      spa: "Пропозиції pet spa",
-      guides: "Поради щодо здоров’я",
-      nutrition: "Партнери з харчування",
-      vets: "Переваги ветеринарних партнерів",
-      qr: "Клубна QR-картка",
-
-      button: "Приєднатися до клубу"
-    },
-
-    footer: {
-      home: "Головна",
-      articles: "Статті",
-      places: "Місця",
-      partners: "Партнери",
-      club: "Клуб",
-      privacy: "Конфіденційність",
-      contact: "Контакти",
-      admin: "Адміністратор"
-    }
-  },
-
-  ru: {
-    meta: {
-      title: "Здоровье и уход | PETS & DOGUE"
-    },
-
-    hero: {
-      title: "Здоровье и уход",
-      description:
-        "Центр заботы о здоровье, питании, груминге, поведении, первой помощи и ежедневном уходе за питомцами."
-    },
-
-    center: {
-      title: "Центр здоровья PETS & DOGUE"
-    },
-
-    notice: {
-      title: "Редакционное предупреждение о здоровье",
-      description:
-        "Материалы PETS & DOGUE Wellness предназначены только для общей информации и рекомендаций по образу жизни. Они не заменяют консультацию ветеринара. По медицинским вопросам всегда обращайтесь к квалифицированному ветеринарному врачу."
-    },
-
-    cards: {
-      veterinaryBadge: "ВЕТЕРИНАРИЯ",
-      veterinaryTitle: "Ветеринарные осмотры",
-      veterinaryDescription:
-        "Регулярные осмотры помогают вовремя заметить изменения в здоровье и поддерживать комфорт питомца.",
-      veterinaryButton: "Найти ветеринара",
-
-      nutritionBadge: "ПИТАНИЕ",
-      nutritionTitle: "Питание и баланс",
-      nutritionDescription:
-        "Правильное питание, вода и ежедневный режим кормления являются основой здоровья питомца.",
-      nutritionButton: "Читать советы",
-
-      behaviourBadge: "ПОВЕДЕНИЕ",
-      behaviourTitle: "Спокойная жизнь",
-      behaviourDescription:
-        "Режим, бережное внимание и безопасное пространство помогают животным чувствовать себя уверенно.",
-      behaviourButton: "Спросить сообщество",
-
-      groomingBadge: "ГРУМИНГ",
-      groomingTitle: "Шерсть и красота",
-      groomingDescription:
-        "Груминг — это не только стиль. Он поддерживает комфорт, здоровье кожи и уверенность питомца.",
-      groomingButton: "Предложения партнёров",
-
-      dentalBadge: "УХОД ЗА ЗУБАМИ",
-      dentalTitle: "Зубы и свежее дыхание",
-      dentalDescription:
-        "Уход за зубами поддерживает аппетит, комфорт и долгосрочное здоровье многих питомцев.",
-      dentalButton: "Советы по уходу за зубами",
-
-      fitnessBadge: "АКТИВНОСТЬ",
-      fitnessTitle: "Движение и игры",
-      fitnessDescription:
-        "Физическая активность, развивающие занятия и игры помогают питомцам оставаться здоровыми и счастливыми.",
-      fitnessButton: "Активные путешествия"
-    },
-
-    firstAid: {
-      badge: "ПЕРВАЯ ПОМОЩЬ",
-      title: "Признаки экстренного состояния",
-      descriptionOne:
-        "Каждый владелец должен знать основные тревожные признаки: проблемы с дыханием, потеря сознания, сильное кровотечение, отравление, повторная рвота, судороги или внезапная невозможность ходить.",
-      descriptionTwo:
-        "В экстренной ситуации не ждите совета в интернете. Немедленно свяжитесь с ветеринаром, круглосуточной клиникой или службой помощи при отравлениях животных.",
-      button: "Найти помощь рядом"
-    },
-
-    checklist: {
-      title: "Памятка по здоровью",
-      vaccination:
-        "Поддерживайте актуальность информации о вакцинации и микрочипе.",
-      checks:
-        "Регулярно проходите ветеринарные осмотры и проверку зубов.",
-      monitor:
-        "Следите за аппетитом, питьём, поведением, дыханием и уровнем энергии.",
-      grooming:
-        "Используйте безопасные процедуры ухода за кожей и шерстью.",
-      emergency:
-        "Сохраните в телефоне контакты круглосуточной ветеринарной клиники.",
-      firstAid:
-        "Подготовьте небольшую аптечку для дома и путешествий.",
-      medicines:
-        "Перед применением добавок, лекарств или натуральных средств советуйтесь со специалистами."
-    },
-
-    urgent: {
-      title: "Когда нужна срочная помощь",
-      description:
-        "Срочно обращайтесь к ветеринару при затруднённом дыхании, подозрении на отравление, потере сознания, сильной боли, кровотечении, судорогах, тепловом ударе, травме, вздутии живота, повторной рвоте или любом внезапном серьёзном изменении состояния.",
-      button: "Найти ветеринара рядом"
-    },
-
-    club: {
-      title: "Преимущества для здоровья участников клуба",
-      description:
-        "PETS & DOGUE Club будет связывать участников с партнёрами в сфере здоровья, груминга, ухода, pet spa и премиальных рекомендаций.",
-
-      grooming: "Скидки на груминг",
-      spa: "Предложения pet spa",
-      guides: "Советы по здоровью",
-      nutrition: "Партнёры по питанию",
-      vets: "Преимущества ветеринарных партнёров",
-      qr: "Клубная QR-карта",
-
-      button: "Вступить в клуб"
-    },
-
-    footer: {
-      home: "Главная",
-      articles: "Статьи",
-      places: "Места",
-      partners: "Партнёры",
-      club: "Клуб",
-      privacy: "Конфиденциальность",
-      contact: "Контакты",
-      admin: "Администратор"
-    }
-  },
-
-  es: {
-    meta: {
-      title: "Salud y bienestar | PETS & DOGUE"
-    },
-
-    hero: {
-      title: "Salud y bienestar",
-      description:
-        "Un centro de bienestar para la salud, nutrición, peluquería, comportamiento, primeros auxilios y cuidado diario de las mascotas."
-    },
-
-    center: {
-      title: "Centro de bienestar PETS & DOGUE"
-    },
-
-    notice: {
-      title: "Aviso editorial de salud",
-      description:
-        "PETS & DOGUE Wellness ofrece únicamente información general y sobre estilo de vida. No sustituye el consejo veterinario. Para cualquier problema médico, consulta siempre con un veterinario cualificado."
-    },
-
-    cards: {
-      veterinaryBadge: "VETERINARIA",
-      veterinaryTitle: "Revisiones veterinarias",
-      veterinaryDescription:
-        "Las revisiones periódicas ayudan a detectar cambios de salud y a mantener cómoda a tu mascota.",
-      veterinaryButton: "Buscar veterinarios",
-
-      nutritionBadge: "NUTRICIÓN",
-      nutritionTitle: "Alimentación y equilibrio",
-      nutritionDescription:
-        "La nutrición, la hidratación y los hábitos diarios de alimentación son la base del bienestar animal.",
-      nutritionButton: "Leer guías",
-
-      behaviourBadge: "COMPORTAMIENTO",
-      behaviourTitle: "Vida tranquila",
-      behaviourDescription:
-        "La rutina, la atención amable y los espacios seguros ayudan a las mascotas a sentirse confiadas.",
-      behaviourButton: "Preguntar a la comunidad",
-
-      groomingBadge: "PELUQUERÍA",
-      groomingTitle: "Pelaje y belleza",
-      groomingDescription:
-        "La peluquería no es solo estilo. También favorece la comodidad y la salud de la piel.",
-      groomingButton: "Ofertas de socios",
-
-      dentalBadge: "CUIDADO DENTAL",
-      dentalTitle: "Dientes y aliento",
-      dentalDescription:
-        "El cuidado dental favorece el apetito, la comodidad y el bienestar a largo plazo.",
-      dentalButton: "Guía dental",
-
-      fitnessBadge: "ACTIVIDAD",
-      fitnessTitle: "Movimiento y juego",
-      fitnessDescription:
-        "El ejercicio, el enriquecimiento y el juego ayudan a las mascotas a mantenerse activas y felices.",
-      fitnessButton: "Viajes activos"
-    },
-
-    firstAid: {
-      badge: "PRIMEROS AUXILIOS",
-      title: "Señales de emergencia",
-      descriptionOne:
-        "Todo propietario debe conocer las señales de alarma: dificultad para respirar, desmayo, hemorragia grave, intoxicación, vómitos repetidos, convulsiones o incapacidad repentina para caminar.",
-      descriptionTwo:
-        "En una emergencia, no esperes consejos de internet. Contacta inmediatamente con un veterinario, una clínica de urgencias o una línea de ayuda para intoxicaciones animales.",
-      button: "Buscar ayuda cercana"
-    },
-
-    checklist: {
-      title: "Lista de bienestar",
-      vaccination:
-        "Mantén actualizada la información de vacunas y microchip.",
-      checks:
-        "Programa revisiones veterinarias y dentales periódicas.",
-      monitor:
-        "Observa el apetito, la bebida, el comportamiento, la respiración y la energía.",
-      grooming:
-        "Utiliza rutinas seguras para el cuidado de la piel y el pelaje.",
-      emergency:
-        "Guarda en tu teléfono los datos de una clínica veterinaria de urgencias.",
-      firstAid:
-        "Prepara un pequeño botiquín para el hogar y los viajes.",
-      medicines:
-        "Consulta con profesionales antes de usar suplementos, medicamentos o remedios naturales."
-    },
-
-    urgent: {
-      title: "Cuándo buscar ayuda urgente",
-      description:
-        "Busca ayuda veterinaria urgente ante dificultad para respirar, posible intoxicación, desmayo, dolor intenso, hemorragia, convulsiones, golpe de calor, traumatismo, abdomen hinchado, vómitos repetidos o cualquier cambio grave y repentino.",
-      button: "Buscar veterinarios cercanos"
-    },
-
-    club: {
-      title: "Beneficios de bienestar para miembros",
-      description:
-        "PETS & DOGUE Club conectará a sus miembros con socios de bienestar, ofertas de peluquería, guías de cuidado, beneficios de spa y recomendaciones premium.",
-
-      grooming: "Descuentos en peluquería",
-      spa: "Ofertas de spa",
-      guides: "Guías de bienestar",
-      nutrition: "Socios de nutrición",
-      vets: "Beneficios veterinarios",
-      qr: "Tarjeta QR de miembro",
-
-      button: "Únete al club"
-    },
-
-    footer: {
-      home: "Inicio",
-      articles: "Artículos",
-      places: "Lugares",
-      partners: "Socios",
-      club: "Club",
-      privacy: "Privacidad",
-      contact: "Contacto",
-      admin: "Administración"
-    }
-  }
+
+en:{
+meta:{
+title:"Wellness | PETS & DOGUE",
+description:"Pet wellness, nutrition, grooming, behaviour, first aid, veterinary awareness and everyday care from PETS & DOGUE."
+},
+hero:{
+title:"Wellness",
+description:"A luxury wellness center for pet health, nutrition, grooming, behaviour, first aid and everyday care."
+},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{
+title:"Editorial Health Note",
+description:"PETS & DOGUE Wellness is for lifestyle and general information only. It does not replace veterinary advice. For medical concerns, always contact a qualified veterinarian."
+},
+cards:{
+vet:{badge:"VETERINARY",title:"Vet Check-Ups",description:"Regular check-ups help notice health changes early and keep your pet comfortable.",button:"Find Vets"},
+nutrition:{badge:"NUTRITION",title:"Food & Balance",description:"Nutrition, hydration and daily feeding habits are the foundation of pet wellness.",button:"Read Guides"},
+behaviour:{badge:"BEHAVIOUR",title:"Calm Living",description:"Routine, gentle attention and safe spaces help pets feel confident and secure.",button:"Ask Community"},
+grooming:{badge:"GROOMING",title:"Coat & Beauty",description:"Grooming is not just style. It supports comfort, skin health and confidence.",button:"Partner Offers"},
+dental:{badge:"DENTAL CARE",title:"Teeth & Breath",description:"Dental care supports appetite, comfort and long-term wellbeing for many pets.",button:"Dental Guide"},
+fitness:{badge:"FITNESS",title:"Movement & Play",description:"Exercise, enrichment and play help pets stay active, happy and mentally stimulated.",button:"Active Travel"}
+},
+firstAid:{
+badge:"FIRST AID",
+title:"Emergency Awareness",
+descriptionOne:"Every pet owner should know basic warning signs: breathing problems, collapse, severe bleeding, poisoning, repeated vomiting, seizures or sudden inability to walk.",
+descriptionTwo:"In an emergency, do not wait for online advice. Contact a veterinarian, emergency clinic or animal poison helpline immediately.",
+button:"Find Local Help"
+},
+checklist:{
+title:"Wellness Checklist",
+one:"Keep vaccination and microchip information up to date.",
+two:"Book regular vet checks and dental checks.",
+three:"Monitor appetite, drinking, behaviour, breathing and energy.",
+four:"Use safe grooming, skin and coat care routines.",
+five:"Keep emergency clinic details saved on your phone.",
+six:"Prepare a small first aid kit for travel and home.",
+seven:"Ask professionals before using supplements, medicines or natural remedies."
+},
+emergency:{
+title:"When To Seek Urgent Help",
+description:"Seek urgent veterinary help for breathing difficulty, suspected poisoning, collapse, severe pain, bleeding, seizures, heatstroke, trauma, swollen abdomen, repeated vomiting or any sudden serious change.",
+button:"Search Vets Near You"
+},
+club:{
+title:"Wellness Benefits For Club Members",
+description:"PETS & DOGUE Club will connect members with wellness partners, grooming offers, care guides, pet spa benefits and premium recommendations.",
+grooming:"Grooming Discounts",
+spa:"Pet Spa Offers",
+guides:"Wellness Guides",
+nutrition:"Nutrition Partners",
+vet:"Vet Partner Benefits",
+qr:"Member QR Card",
+button:"Join The Club"
+},
+footer:{
+home:"Home",
+articles:"Articles",
+places:"Places",
+partners:"Partners",
+club:"Club",
+privacy:"Privacy",
+contact:"Contact"
+},
+images:{
+hero:"Pet Wellness",
+veterinary:"Veterinary check-up",
+nutrition:"Pet nutrition",
+behaviour:"Pet behaviour",
+grooming:"Pet grooming",
+dental:"Pet dental care",
+fitness:"Pet fitness",
+firstAid:"Pet first aid"
+}
+},
+
+uk:{
+meta:{title:"Здоров’я та догляд | PETS & DOGUE",description:"Здоров’я тварин, харчування, грумінг, поведінка, перша допомога, ветеринарна обізнаність і щоденний догляд від PETS & DOGUE."},
+hero:{title:"Wellness",description:"Luxury-центр здоров’я тварин, харчування, грумінгу, поведінки, першої допомоги та щоденного догляду."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Медична примітка редакції",description:"PETS & DOGUE Wellness надає лише lifestyle та загальну інформацію. Він не замінює консультацію ветеринара. У разі проблем зі здоров’ям завжди звертайтеся до кваліфікованого ветеринарного лікаря."},
+cards:{
+vet:{badge:"ВЕТЕРИНАРІЯ",title:"Регулярні огляди",description:"Регулярні ветеринарні огляди допомагають рано помітити зміни у здоров’ї та підтримувати комфорт вашого улюбленця.",button:"Знайти ветеринарів"},
+nutrition:{badge:"ХАРЧУВАННЯ",title:"Їжа та баланс",description:"Правильне харчування, вода та щоденні звички годування є основою добробуту тварини.",button:"Читати гіди"},
+behaviour:{badge:"ПОВЕДІНКА",title:"Спокійне життя",description:"Режим, м’яка увага та безпечний простір допомагають тваринам почуватися впевнено й захищено.",button:"Запитати спільноту"},
+grooming:{badge:"ГРУМІНГ",title:"Шерсть і краса",description:"Грумінг — це не лише стиль. Він підтримує комфорт, здоров’я шкіри та впевненість тварини.",button:"Пропозиції партнерів"},
+dental:{badge:"ДОГЛЯД ЗА ЗУБАМИ",title:"Зуби та дихання",description:"Догляд за зубами підтримує апетит, комфорт і довготривале здоров’я багатьох тварин.",button:"Гід по зубах"},
+fitness:{badge:"ФІТНЕС",title:"Рух та ігри",description:"Фізична активність, enrichment та ігри допомагають тваринам залишатися активними, щасливими й ментально залученими.",button:"Активні подорожі"}
+},
+firstAid:{badge:"ПЕРША ДОПОМОГА",title:"Ознаки невідкладного стану",descriptionOne:"Кожен власник тварини має знати основні тривожні ознаки: проблеми з диханням, колапс, сильну кровотечу, отруєння, повторне блювання, судоми або раптову нездатність ходити.",descriptionTwo:"У невідкладній ситуації не чекайте онлайн-порад. Негайно звертайтеся до ветеринара, emergency clinic або служби допомоги при отруєннях тварин.",button:"Знайти допомогу поруч"},
+checklist:{title:"Wellness-чеклист",one:"Підтримуйте дані про вакцинацію та мікрочип актуальними.",two:"Регулярно записуйтеся на ветеринарні та стоматологічні огляди.",three:"Слідкуйте за апетитом, питтям, поведінкою, диханням та рівнем енергії.",four:"Використовуйте безпечний догляд за шерстю, шкірою та грумінг.",five:"Збережіть у телефоні контакти emergency veterinary clinic.",six:"Підготуйте невелику аптечку першої допомоги для дому та подорожей.",seven:"Перед використанням добавок, ліків або натуральних засобів радьтеся з фахівцем."},
+emergency:{title:"Коли потрібна термінова допомога",description:"Терміново звертайтеся до ветеринара при утрудненому диханні, підозрі на отруєння, колапсі, сильному болю, кровотечі, судомах, тепловому ударі, травмі, здутті живота, повторному блюванні або будь-якій раптовій серйозній зміні.",button:"Знайти ветеринара поруч"},
+club:{title:"Wellness-переваги для учасників Club",description:"PETS & DOGUE Club об’єднає учасників із wellness-партнерами, пропозиціями грумінгу, гідами догляду, pet spa та premium-рекомендаціями.",grooming:"Знижки на грумінг",spa:"Пропозиції Pet Spa",guides:"Wellness-гіди",nutrition:"Партнери з харчування",vet:"Ветеринарні переваги",qr:"QR-картка учасника",button:"Приєднатися до Club"},
+footer:{home:"Головна",articles:"Статті",places:"Місця",partners:"Партнери",club:"Club",privacy:"Конфіденційність",contact:"Контакти"},
+images:{hero:"Wellness для тварин",veterinary:"Ветеринарний огляд",nutrition:"Харчування тварин",behaviour:"Поведінка тварини",grooming:"Грумінг",dental:"Догляд за зубами",fitness:"Фізична активність",firstAid:"Перша допомога тварині"}
+},
+
+ru:{
+meta:{title:"Здоровье и уход | PETS & DOGUE",description:"Здоровье питомцев, питание, груминг, поведение, первая помощь, ветеринарная осведомлённость и ежедневный уход от PETS & DOGUE."},
+hero:{title:"Wellness",description:"Luxury-центр здоровья питомцев, питания, груминга, поведения, первой помощи и ежедневного ухода."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Медицинское примечание редакции",description:"PETS & DOGUE Wellness предоставляет только lifestyle и общую информацию. Он не заменяет консультацию ветеринара. При любых медицинских проблемах всегда обращайтесь к квалифицированному ветеринарному врачу."},
+cards:{
+vet:{badge:"ВЕТЕРИНАРИЯ",title:"Регулярные осмотры",description:"Регулярные осмотры помогают вовремя заметить изменения в здоровье и поддерживать комфорт питомца.",button:"Найти ветеринаров"},
+nutrition:{badge:"ПИТАНИЕ",title:"Питание и баланс",description:"Правильное питание, вода и ежедневные привычки кормления — основа хорошего самочувствия питомца.",button:"Читать гиды"},
+behaviour:{badge:"ПОВЕДЕНИЕ",title:"Спокойная жизнь",description:"Режим, мягкое внимание и безопасное пространство помогают питомцам чувствовать уверенность и защищённость.",button:"Спросить сообщество"},
+grooming:{badge:"ГРУМИНГ",title:"Шерсть и красота",description:"Груминг — это не только стиль. Он поддерживает комфорт, здоровье кожи и уверенность питомца.",button:"Предложения партнёров"},
+dental:{badge:"УХОД ЗА ЗУБАМИ",title:"Зубы и дыхание",description:"Уход за зубами поддерживает аппетит, комфорт и долгосрочное здоровье многих питомцев.",button:"Гид по зубам"},
+fitness:{badge:"ФИТНЕС",title:"Движение и игры",description:"Физическая активность, enrichment и игры помогают питомцам оставаться активными, счастливыми и ментально вовлечёнными.",button:"Активные путешествия"}
+},
+firstAid:{badge:"ПЕРВАЯ ПОМОЩЬ",title:"Признаки экстренного состояния",descriptionOne:"Каждый владелец питомца должен знать основные тревожные признаки: проблемы с дыханием, коллапс, сильное кровотечение, отравление, многократную рвоту, судороги или внезапную неспособность ходить.",descriptionTwo:"В экстренной ситуации не ждите советов из интернета. Немедленно обращайтесь к ветеринару, в emergency clinic или службу помощи при отравлениях животных.",button:"Найти помощь рядом"},
+checklist:{title:"Wellness-чеклист",one:"Поддерживайте данные о вакцинации и микрочипе актуальными.",two:"Регулярно проходите ветеринарные и стоматологические осмотры.",three:"Следите за аппетитом, питьём, поведением, дыханием и уровнем энергии.",four:"Используйте безопасные процедуры ухода за кожей, шерстью и грумингом.",five:"Сохраните в телефоне контакты emergency veterinary clinic.",six:"Подготовьте небольшую аптечку первой помощи для дома и поездок.",seven:"Перед использованием добавок, лекарств или натуральных средств консультируйтесь со специалистом."},
+emergency:{title:"Когда нужна срочная помощь",description:"Срочно обращайтесь к ветеринару при затруднённом дыхании, подозрении на отравление, коллапсе, сильной боли, кровотечении, судорогах, тепловом ударе, травме, вздутом животе, многократной рвоте или любом внезапном серьёзном изменении.",button:"Найти ветеринара рядом"},
+club:{title:"Wellness-преимущества для участников Club",description:"PETS & DOGUE Club свяжет участников с wellness-партнёрами, предложениями груминга, гидами по уходу, pet spa и premium-рекомендациями.",grooming:"Скидки на груминг",spa:"Предложения Pet Spa",guides:"Wellness-гиды",nutrition:"Партнёры по питанию",vet:"Ветеринарные преимущества",qr:"QR-карта участника",button:"Вступить в Club"},
+footer:{home:"Главная",articles:"Статьи",places:"Места",partners:"Партнёры",club:"Club",privacy:"Конфиденциальность",contact:"Контакты"},
+images:{hero:"Wellness для питомцев",veterinary:"Ветеринарный осмотр",nutrition:"Питание питомца",behaviour:"Поведение питомца",grooming:"Груминг питомца",dental:"Уход за зубами",fitness:"Активность питомца",firstAid:"Первая помощь питомцу"}
+},
+
+fr:{
+meta:{title:"Bien-être | PETS & DOGUE",description:"Bien-être animal, nutrition, toilettage, comportement, premiers secours, prévention vétérinaire et soins quotidiens avec PETS & DOGUE."},
+hero:{title:"Bien-être",description:"Un centre luxury consacré à la santé, la nutrition, au toilettage, au comportement, aux premiers secours et aux soins quotidiens."},
+page:{title:"Centre Bien-être PETS & DOGUE"},
+notice:{title:"Note santé de la rédaction",description:"PETS & DOGUE Wellness fournit uniquement des informations lifestyle et générales. Il ne remplace pas un avis vétérinaire. Pour toute préoccupation médicale, contactez toujours un vétérinaire qualifié."},
+cards:{
+vet:{badge:"VÉTÉRINAIRE",title:"Contrôles vétérinaires",description:"Des contrôles réguliers permettent de repérer tôt les changements de santé et de préserver le confort de votre animal.",button:"Trouver des vétérinaires"},
+nutrition:{badge:"NUTRITION",title:"Alimentation & équilibre",description:"Nutrition, hydratation et habitudes alimentaires quotidiennes sont la base du bien-être animal.",button:"Lire les guides"},
+behaviour:{badge:"COMPORTEMENT",title:"Vie calme",description:"Routine, attention douce et espaces sûrs aident les animaux à se sentir confiants et en sécurité.",button:"Demander à la communauté"},
+grooming:{badge:"TOILETTAGE",title:"Pelage & beauté",description:"Le toilettage ne concerne pas seulement le style. Il favorise le confort, la santé de la peau et la confiance.",button:"Offres partenaires"},
+dental:{badge:"SOINS DENTAIRES",title:"Dents & haleine",description:"Les soins dentaires favorisent l’appétit, le confort et le bien-être à long terme.",button:"Guide dentaire"},
+fitness:{badge:"ACTIVITÉ",title:"Mouvement & jeu",description:"L’exercice, l’enrichissement et le jeu aident les animaux à rester actifs, heureux et stimulés.",button:"Voyages actifs"}
+},
+firstAid:{badge:"PREMIERS SECOURS",title:"Reconnaître une urgence",descriptionOne:"Chaque propriétaire devrait connaître les principaux signes d’alerte : difficultés respiratoires, effondrement, saignement important, intoxication, vomissements répétés, convulsions ou incapacité soudaine à marcher.",descriptionTwo:"En urgence, n’attendez pas un conseil en ligne. Contactez immédiatement un vétérinaire, une clinique d’urgence ou un service spécialisé en intoxications animales.",button:"Trouver de l’aide locale"},
+checklist:{title:"Checklist Bien-être",one:"Gardez à jour les informations de vaccination et de puce électronique.",two:"Planifiez des contrôles vétérinaires et dentaires réguliers.",three:"Surveillez l’appétit, l’hydratation, le comportement, la respiration et l’énergie.",four:"Adoptez des routines sûres de toilettage et de soin de la peau et du pelage.",five:"Enregistrez les coordonnées d’une clinique vétérinaire d’urgence dans votre téléphone.",six:"Préparez une petite trousse de premiers secours pour la maison et les voyages.",seven:"Demandez conseil à un professionnel avant d’utiliser compléments, médicaments ou remèdes naturels."},
+emergency:{title:"Quand demander une aide urgente",description:"Consultez en urgence pour difficulté respiratoire, suspicion d’intoxication, effondrement, douleur intense, saignement, convulsions, coup de chaleur, traumatisme, abdomen gonflé, vomissements répétés ou changement grave soudain.",button:"Trouver des vétérinaires près de vous"},
+club:{title:"Avantages Bien-être pour les membres Club",description:"PETS & DOGUE Club mettra les membres en relation avec des partenaires wellness, des offres de toilettage, des guides de soins, des avantages pet spa et des recommandations premium.",grooming:"Réductions toilettage",spa:"Offres Pet Spa",guides:"Guides Bien-être",nutrition:"Partenaires nutrition",vet:"Avantages vétérinaires",qr:"Carte QR membre",button:"Rejoindre le Club"},
+footer:{home:"Accueil",articles:"Articles",places:"Lieux",partners:"Partenaires",club:"Club",privacy:"Confidentialité",contact:"Contact"},
+images:{hero:"Bien-être animal",veterinary:"Contrôle vétérinaire",nutrition:"Nutrition animale",behaviour:"Comportement animal",grooming:"Toilettage",dental:"Soins dentaires",fitness:"Activité animale",firstAid:"Premiers secours"}
+},
+
+de:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Tiergesundheit, Ernährung, Grooming, Verhalten, Erste Hilfe, veterinärmedizinische Aufmerksamkeit und tägliche Pflege von PETS & DOGUE."},
+hero:{title:"Wellness",description:"Ein Luxury-Wellnesscenter für Tiergesundheit, Ernährung, Grooming, Verhalten, Erste Hilfe und tägliche Pflege."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Gesundheitshinweis der Redaktion",description:"PETS & DOGUE Wellness bietet ausschließlich allgemeine Lifestyle-Informationen. Es ersetzt keine tierärztliche Beratung. Bei medizinischen Fragen wenden Sie sich immer an einen qualifizierten Tierarzt."},
+cards:{
+vet:{badge:"TIERMEDIZIN",title:"Tierärztliche Kontrollen",description:"Regelmäßige Untersuchungen helfen, gesundheitliche Veränderungen früh zu erkennen und das Wohlbefinden Ihres Tieres zu erhalten.",button:"Tierärzte finden"},
+nutrition:{badge:"ERNÄHRUNG",title:"Futter & Balance",description:"Ernährung, Flüssigkeitsversorgung und tägliche Fütterungsgewohnheiten bilden die Grundlage des Wohlbefindens.",button:"Guides lesen"},
+behaviour:{badge:"VERHALTEN",title:"Ruhiges Leben",description:"Routine, sanfte Aufmerksamkeit und sichere Rückzugsorte helfen Tieren, sich sicher und selbstbewusst zu fühlen.",button:"Community fragen"},
+grooming:{badge:"GROOMING",title:"Fell & Schönheit",description:"Grooming ist mehr als Stil. Es unterstützt Komfort, Hautgesundheit und Wohlbefinden.",button:"Partnerangebote"},
+dental:{badge:"ZAHNPFLEGE",title:"Zähne & Atem",description:"Zahnpflege unterstützt Appetit, Komfort und langfristiges Wohlbefinden vieler Tiere.",button:"Zahnpflege-Guide"},
+fitness:{badge:"FITNESS",title:"Bewegung & Spiel",description:"Bewegung, Beschäftigung und Spiel helfen Tieren, aktiv, glücklich und mental gefordert zu bleiben.",button:"Aktive Reisen"}
+},
+firstAid:{badge:"ERSTE HILFE",title:"Notfälle erkennen",descriptionOne:"Jeder Tierhalter sollte wichtige Warnzeichen kennen: Atemprobleme, Kollaps, starke Blutungen, Vergiftung, wiederholtes Erbrechen, Krampfanfälle oder plötzliche Gehunfähigkeit.",descriptionTwo:"Warten Sie im Notfall nicht auf Online-Ratschläge. Kontaktieren Sie sofort einen Tierarzt, eine Notfallklinik oder eine Tiergiftberatung.",button:"Lokale Hilfe finden"},
+checklist:{title:"Wellness-Checkliste",one:"Halten Sie Impf- und Mikrochipdaten aktuell.",two:"Planen Sie regelmäßige tierärztliche und zahnmedizinische Kontrollen.",three:"Beobachten Sie Appetit, Trinken, Verhalten, Atmung und Energie.",four:"Verwenden Sie sichere Grooming-, Haut- und Fellpflegeroutinen.",five:"Speichern Sie die Kontaktdaten einer tierärztlichen Notfallklinik im Telefon.",six:"Bereiten Sie eine kleine Erste-Hilfe-Ausrüstung für Zuhause und Reisen vor.",seven:"Fragen Sie Fachleute, bevor Sie Ergänzungsmittel, Medikamente oder natürliche Mittel verwenden."},
+emergency:{title:"Wann dringend Hilfe nötig ist",description:"Suchen Sie sofort tierärztliche Hilfe bei Atemnot, Vergiftungsverdacht, Kollaps, starken Schmerzen, Blutungen, Krampfanfällen, Hitzschlag, Trauma, aufgeblähtem Bauch, wiederholtem Erbrechen oder jeder plötzlichen schweren Veränderung.",button:"Tierärzte in Ihrer Nähe suchen"},
+club:{title:"Wellness-Vorteile für Club-Mitglieder",description:"PETS & DOGUE Club verbindet Mitglieder mit Wellness-Partnern, Grooming-Angeboten, Pflege-Guides, Pet-Spa-Vorteilen und Premium-Empfehlungen.",grooming:"Grooming-Rabatte",spa:"Pet-Spa-Angebote",guides:"Wellness-Guides",nutrition:"Ernährungspartner",vet:"Tierarzt-Partner-Vorteile",qr:"Mitglieder-QR-Karte",button:"Club beitreten"},
+footer:{home:"Startseite",articles:"Artikel",places:"Orte",partners:"Partner",club:"Club",privacy:"Datenschutz",contact:"Kontakt"},
+images:{hero:"Tier-Wellness",veterinary:"Tierärztliche Untersuchung",nutrition:"Tierernährung",behaviour:"Tierverhalten",grooming:"Tierpflege",dental:"Zahnpflege",fitness:"Tierfitness",firstAid:"Erste Hilfe"}
+},es:{
+meta:{title:"Bienestar | PETS & DOGUE",description:"Bienestar animal, nutrición, grooming, comportamiento, primeros auxilios, prevención veterinaria y cuidado diario con PETS & DOGUE."},
+hero:{title:"Bienestar",description:"Un centro luxury para la salud, nutrición, grooming, comportamiento, primeros auxilios y cuidado diario de mascotas."},
+page:{title:"Centro de Bienestar PETS & DOGUE"},
+notice:{title:"Nota de salud editorial",description:"PETS & DOGUE Wellness ofrece solo información general y de lifestyle. No sustituye el consejo veterinario. Para cualquier problema médico, contacta siempre con un veterinario cualificado."},
+cards:{
+vet:{badge:"VETERINARIA",title:"Revisiones veterinarias",description:"Las revisiones regulares ayudan a detectar cambios de salud pronto y mantener cómoda a tu mascota.",button:"Buscar veterinarios"},
+nutrition:{badge:"NUTRICIÓN",title:"Alimentación & equilibrio",description:"La nutrición, hidratación y hábitos diarios de alimentación son la base del bienestar.",button:"Leer guías"},
+behaviour:{badge:"COMPORTAMIENTO",title:"Vida tranquila",description:"Rutina, atención suave y espacios seguros ayudan a las mascotas a sentirse confiadas y protegidas.",button:"Preguntar a la comunidad"},
+grooming:{badge:"GROOMING",title:"Pelaje & belleza",description:"El grooming no es solo estilo. Favorece el confort, la salud de la piel y la confianza.",button:"Ofertas de socios"},
+dental:{badge:"CUIDADO DENTAL",title:"Dientes & aliento",description:"El cuidado dental favorece el apetito, el confort y el bienestar a largo plazo.",button:"Guía dental"},
+fitness:{badge:"FITNESS",title:"Movimiento & juego",description:"El ejercicio, enriquecimiento y juego ayudan a mantener a las mascotas activas, felices y estimuladas.",button:"Viajes activos"}
+},
+firstAid:{badge:"PRIMEROS AUXILIOS",title:"Reconocer una emergencia",descriptionOne:"Todo propietario debería conocer señales básicas de alarma: problemas respiratorios, colapso, sangrado intenso, intoxicación, vómitos repetidos, convulsiones o incapacidad repentina para caminar.",descriptionTwo:"En una emergencia no esperes consejos online. Contacta inmediatamente con un veterinario, clínica de urgencias o servicio de toxicología animal.",button:"Buscar ayuda local"},
+checklist:{title:"Checklist de bienestar",one:"Mantén actualizada la información de vacunación y microchip.",two:"Reserva revisiones veterinarias y dentales regulares.",three:"Controla apetito, consumo de agua, comportamiento, respiración y energía.",four:"Utiliza rutinas seguras de grooming y cuidado de piel y pelaje.",five:"Guarda en tu teléfono los datos de una clínica veterinaria de urgencias.",six:"Prepara un pequeño botiquín de primeros auxilios para casa y viajes.",seven:"Consulta a profesionales antes de utilizar suplementos, medicamentos o remedios naturales."},
+emergency:{title:"Cuándo buscar ayuda urgente",description:"Busca atención veterinaria urgente por dificultad respiratoria, posible intoxicación, colapso, dolor intenso, sangrado, convulsiones, golpe de calor, trauma, abdomen hinchado, vómitos repetidos o cualquier cambio grave repentino.",button:"Buscar veterinarios cerca"},
+club:{title:"Beneficios Wellness para miembros Club",description:"PETS & DOGUE Club conectará a los miembros con socios wellness, ofertas de grooming, guías de cuidado, beneficios de pet spa y recomendaciones premium.",grooming:"Descuentos de grooming",spa:"Ofertas Pet Spa",guides:"Guías Wellness",nutrition:"Socios de nutrición",vet:"Beneficios veterinarios",qr:"Tarjeta QR de miembro",button:"Unirse al Club"},
+footer:{home:"Inicio",articles:"Artículos",places:"Lugares",partners:"Socios",club:"Club",privacy:"Privacidad",contact:"Contacto"},
+images:{hero:"Bienestar animal",veterinary:"Revisión veterinaria",nutrition:"Nutrición de mascotas",behaviour:"Comportamiento animal",grooming:"Grooming de mascotas",dental:"Cuidado dental",fitness:"Actividad de mascotas",firstAid:"Primeros auxilios"}
+},
+
+it:{
+meta:{title:"Benessere | PETS & DOGUE",description:"Benessere animale, nutrizione, grooming, comportamento, primo soccorso, prevenzione veterinaria e cura quotidiana con PETS & DOGUE."},
+hero:{title:"Benessere",description:"Un centro luxury per salute, nutrizione, grooming, comportamento, primo soccorso e cura quotidiana degli animali."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Nota sanitaria editoriale",description:"PETS & DOGUE Wellness offre solo informazioni generali e lifestyle. Non sostituisce il parere veterinario. Per problemi medici contatta sempre un veterinario qualificato."},
+cards:{
+vet:{badge:"VETERINARIA",title:"Controlli veterinari",description:"Controlli regolari aiutano a notare presto i cambiamenti di salute e a mantenere il tuo animale confortevole.",button:"Trova veterinari"},
+nutrition:{badge:"NUTRIZIONE",title:"Cibo & equilibrio",description:"Nutrizione, idratazione e abitudini alimentari quotidiane sono la base del benessere animale.",button:"Leggi le guide"},
+behaviour:{badge:"COMPORTAMENTO",title:"Vita tranquilla",description:"Routine, attenzione gentile e spazi sicuri aiutano gli animali a sentirsi sicuri e fiduciosi.",button:"Chiedi alla community"},
+grooming:{badge:"GROOMING",title:"Mantello & bellezza",description:"Il grooming non è solo stile. Supporta comfort, salute della pelle e sicurezza.",button:"Offerte partner"},
+dental:{badge:"CURA DENTALE",title:"Denti & alito",description:"La cura dentale favorisce appetito, comfort e benessere a lungo termine.",button:"Guida dentale"},
+fitness:{badge:"FITNESS",title:"Movimento & gioco",description:"Esercizio, arricchimento e gioco aiutano gli animali a restare attivi, felici e mentalmente stimolati.",button:"Viaggi attivi"}
+},
+firstAid:{badge:"PRIMO SOCCORSO",title:"Riconoscere un’emergenza",descriptionOne:"Ogni proprietario dovrebbe conoscere i principali segnali di allarme: problemi respiratori, collasso, forte sanguinamento, avvelenamento, vomito ripetuto, convulsioni o improvvisa incapacità di camminare.",descriptionTwo:"In emergenza non aspettare consigli online. Contatta subito un veterinario, una clinica d’emergenza o un centro antiveleni animali.",button:"Trova aiuto locale"},
+checklist:{title:"Checklist Benessere",one:"Mantieni aggiornate le informazioni su vaccinazioni e microchip.",two:"Prenota controlli veterinari e dentali regolari.",three:"Monitora appetito, consumo di acqua, comportamento, respirazione ed energia.",four:"Segui routine sicure per grooming, pelle e mantello.",five:"Salva sul telefono i contatti di una clinica veterinaria d’emergenza.",six:"Prepara un piccolo kit di primo soccorso per casa e viaggio.",seven:"Consulta un professionista prima di usare integratori, medicinali o rimedi naturali."},
+emergency:{title:"Quando cercare aiuto urgente",description:"Richiedi assistenza veterinaria urgente in caso di difficoltà respiratorie, sospetto avvelenamento, collasso, dolore intenso, sanguinamento, convulsioni, colpo di calore, trauma, addome gonfio, vomito ripetuto o qualsiasi grave cambiamento improvviso.",button:"Trova veterinari vicino a te"},
+club:{title:"Vantaggi Wellness per membri Club",description:"PETS & DOGUE Club collegherà i membri con partner wellness, offerte grooming, guide di cura, vantaggi pet spa e raccomandazioni premium.",grooming:"Sconti grooming",spa:"Offerte Pet Spa",guides:"Guide Wellness",nutrition:"Partner nutrizione",vet:"Vantaggi veterinari",qr:"Member QR Card",button:"Unisciti al Club"},
+footer:{home:"Home",articles:"Articoli",places:"Luoghi",partners:"Partner",club:"Club",privacy:"Privacy",contact:"Contatti"},
+images:{hero:"Benessere animale",veterinary:"Controllo veterinario",nutrition:"Nutrizione animale",behaviour:"Comportamento animale",grooming:"Grooming",dental:"Cura dentale",fitness:"Fitness animale",firstAid:"Primo soccorso"}
+},
+
+pt:{
+meta:{title:"Bem-estar | PETS & DOGUE",description:"Bem-estar animal, nutrição, grooming, comportamento, primeiros socorros, atenção veterinária e cuidados diários com PETS & DOGUE."},
+hero:{title:"Bem-estar",description:"Um centro luxury para saúde, nutrição, grooming, comportamento, primeiros socorros e cuidados diários dos animais."},
+page:{title:"Centro de Bem-estar PETS & DOGUE"},
+notice:{title:"Nota editorial de saúde",description:"PETS & DOGUE Wellness fornece apenas informação geral e de lifestyle. Não substitui aconselhamento veterinário. Para preocupações médicas, contacte sempre um veterinário qualificado."},
+cards:{
+vet:{badge:"VETERINÁRIA",title:"Consultas veterinárias",description:"Consultas regulares ajudam a identificar alterações de saúde cedo e a manter o animal confortável.",button:"Encontrar veterinários"},
+nutrition:{badge:"NUTRIÇÃO",title:"Alimentação & equilíbrio",description:"Nutrição, hidratação e hábitos alimentares diários são a base do bem-estar animal.",button:"Ler guias"},
+behaviour:{badge:"COMPORTAMENTO",title:"Vida tranquila",description:"Rotina, atenção gentil e espaços seguros ajudam os animais a sentirem-se confiantes e protegidos.",button:"Perguntar à comunidade"},
+grooming:{badge:"GROOMING",title:"Pelo & beleza",description:"Grooming não é apenas estilo. Apoia conforto, saúde da pele e confiança.",button:"Ofertas de parceiros"},
+dental:{badge:"CUIDADOS DENTÁRIOS",title:"Dentes & hálito",description:"Os cuidados dentários apoiam apetite, conforto e bem-estar a longo prazo.",button:"Guia dental"},
+fitness:{badge:"FITNESS",title:"Movimento & brincadeira",description:"Exercício, enriquecimento e brincadeira ajudam os animais a manterem-se ativos, felizes e estimulados.",button:"Viagens ativas"}
+},
+firstAid:{badge:"PRIMEIROS SOCORROS",title:"Reconhecer uma emergência",descriptionOne:"Todos os donos devem conhecer sinais básicos de alerta: dificuldade respiratória, colapso, sangramento intenso, intoxicação, vómitos repetidos, convulsões ou incapacidade súbita de andar.",descriptionTwo:"Numa emergência, não espere por conselhos online. Contacte imediatamente um veterinário, clínica de urgência ou serviço de toxicologia animal.",button:"Encontrar ajuda local"},
+checklist:{title:"Checklist de Bem-estar",one:"Mantenha atualizadas as informações de vacinação e microchip.",two:"Marque consultas veterinárias e dentárias regulares.",three:"Observe apetite, ingestão de água, comportamento, respiração e energia.",four:"Utilize rotinas seguras de grooming e cuidados de pele e pelo.",five:"Guarde no telefone os contactos de uma clínica veterinária de urgência.",six:"Prepare um pequeno kit de primeiros socorros para casa e viagens.",seven:"Consulte profissionais antes de usar suplementos, medicamentos ou remédios naturais."},
+emergency:{title:"Quando procurar ajuda urgente",description:"Procure ajuda veterinária urgente em caso de dificuldade respiratória, suspeita de intoxicação, colapso, dor intensa, sangramento, convulsões, golpe de calor, trauma, abdómen inchado, vómitos repetidos ou qualquer alteração grave súbita.",button:"Encontrar veterinários perto"},
+club:{title:"Benefícios Wellness para membros Club",description:"PETS & DOGUE Club ligará membros a parceiros wellness, ofertas grooming, guias de cuidados, benefícios pet spa e recomendações premium.",grooming:"Descontos grooming",spa:"Ofertas Pet Spa",guides:"Guias Wellness",nutrition:"Parceiros de nutrição",vet:"Benefícios veterinários",qr:"Cartão QR de membro",button:"Juntar-se ao Club"},
+footer:{home:"Início",articles:"Artigos",places:"Locais",partners:"Parceiros",club:"Club",privacy:"Privacidade",contact:"Contacto"},
+images:{hero:"Bem-estar animal",veterinary:"Consulta veterinária",nutrition:"Nutrição animal",behaviour:"Comportamento animal",grooming:"Grooming",dental:"Cuidados dentários",fitness:"Fitness animal",firstAid:"Primeiros socorros"}
+},
+
+nl:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Welzijn van huisdieren, voeding, grooming, gedrag, eerste hulp, veterinaire aandacht en dagelijkse verzorging van PETS & DOGUE."},
+hero:{title:"Wellness",description:"Een luxury wellnesscentrum voor gezondheid, voeding, grooming, gedrag, eerste hulp en dagelijkse verzorging van huisdieren."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Gezondheidsmelding van de redactie",description:"PETS & DOGUE Wellness biedt uitsluitend algemene lifestyle-informatie. Het vervangt geen veterinair advies. Neem bij medische zorgen altijd contact op met een gekwalificeerde dierenarts."},
+cards:{
+vet:{badge:"DIERGENEESKUNDE",title:"Dierenartscontroles",description:"Regelmatige controles helpen gezondheidsveranderingen vroeg op te merken en uw huisdier comfortabel te houden.",button:"Dierenartsen zoeken"},
+nutrition:{badge:"VOEDING",title:"Voeding & balans",description:"Voeding, hydratatie en dagelijkse eetgewoonten vormen de basis van het welzijn van huisdieren.",button:"Gidsen lezen"},
+behaviour:{badge:"GEDRAG",title:"Rustig leven",description:"Routine, zachte aandacht en veilige ruimtes helpen huisdieren zich zeker en veilig te voelen.",button:"Community vragen"},
+grooming:{badge:"GROOMING",title:"Vacht & schoonheid",description:"Grooming is niet alleen stijl. Het ondersteunt comfort, huidgezondheid en zelfvertrouwen.",button:"Partneraanbiedingen"},
+dental:{badge:"GEBITSVERZORGING",title:"Tanden & adem",description:"Gebitsverzorging ondersteunt eetlust, comfort en langdurig welzijn.",button:"Gebitsgids"},
+fitness:{badge:"FITNESS",title:"Beweging & spel",description:"Beweging, verrijking en spel helpen huisdieren actief, gelukkig en mentaal gestimuleerd te blijven.",button:"Actief reizen"}
+},
+firstAid:{badge:"EERSTE HULP",title:"Een noodgeval herkennen",descriptionOne:"Elke eigenaar moet waarschuwingssignalen kennen: ademhalingsproblemen, instorten, ernstige bloeding, vergiftiging, herhaald braken, aanvallen of plotseling niet kunnen lopen.",descriptionTwo:"Wacht bij een noodgeval niet op online advies. Neem onmiddellijk contact op met een dierenarts, spoedkliniek of dierengifcentrum.",button:"Lokale hulp vinden"},
+checklist:{title:"Wellness-checklist",one:"Houd vaccinatie- en microchipgegevens actueel.",two:"Plan regelmatige dierenarts- en gebitscontroles.",three:"Let op eetlust, drinken, gedrag, ademhaling en energie.",four:"Gebruik veilige routines voor grooming, huid- en vachtverzorging.",five:"Bewaar de gegevens van een veterinaire spoedkliniek in uw telefoon.",six:"Maak een kleine EHBO-kit voor thuis en op reis.",seven:"Vraag professioneel advies voordat u supplementen, medicijnen of natuurlijke remedies gebruikt."},
+emergency:{title:"Wanneer dringend hulp nodig is",description:"Zoek direct veterinaire hulp bij ademhalingsproblemen, vermoeden van vergiftiging, instorten, ernstige pijn, bloeding, aanvallen, hitteberoerte, trauma, opgezwollen buik, herhaald braken of elke plotselinge ernstige verandering.",button:"Dierenartsen in de buurt zoeken"},
+club:{title:"Wellness-voordelen voor Clubleden",description:"PETS & DOGUE Club verbindt leden met wellnesspartners, groomingaanbiedingen, verzorgingsgidsen, pet spa-voordelen en premium aanbevelingen.",grooming:"Groomingkortingen",spa:"Pet Spa-aanbiedingen",guides:"Wellness-gidsen",nutrition:"Voedingspartners",vet:"Dierenartsvoordelen",qr:"QR-kaart voor leden",button:"Word lid van Club"},
+footer:{home:"Home",articles:"Artikelen",places:"Plaatsen",partners:"Partners",club:"Club",privacy:"Privacy",contact:"Contact"},
+images:{hero:"Welzijn van huisdieren",veterinary:"Dierenartscontrole",nutrition:"Voeding voor huisdieren",behaviour:"Gedrag van huisdieren",grooming:"Grooming",dental:"Gebitsverzorging",fitness:"Fitness van huisdieren",firstAid:"Eerste hulp"}
+},
+
+pl:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Zdrowie zwierząt, żywienie, grooming, zachowanie, pierwsza pomoc, świadomość weterynaryjna i codzienna opieka z PETS & DOGUE."},
+hero:{title:"Wellness",description:"Luxury centrum zdrowia, żywienia, groomingu, zachowania, pierwszej pomocy i codziennej opieki nad zwierzętami."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Nota zdrowotna redakcji",description:"PETS & DOGUE Wellness dostarcza wyłącznie ogólnych informacji lifestyle. Nie zastępuje porady weterynaryjnej. W przypadku problemów zdrowotnych zawsze skontaktuj się z wykwalifikowanym weterynarzem."},
+cards:{
+vet:{badge:"WETERYNARIA",title:"Kontrole weterynaryjne",description:"Regularne kontrole pomagają wcześnie zauważyć zmiany zdrowotne i zapewnić zwierzęciu komfort.",button:"Znajdź weterynarzy"},
+nutrition:{badge:"ŻYWIENIE",title:"Jedzenie & równowaga",description:"Żywienie, nawodnienie i codzienne nawyki żywieniowe są podstawą dobrostanu zwierzęcia.",button:"Czytaj przewodniki"},
+behaviour:{badge:"ZACHOWANIE",title:"Spokojne życie",description:"Rutyna, łagodna uwaga i bezpieczne miejsca pomagają zwierzętom czuć się pewnie i bezpiecznie.",button:"Zapytaj społeczność"},
+grooming:{badge:"GROOMING",title:"Sierść & uroda",description:"Grooming to nie tylko styl. Wspiera komfort, zdrowie skóry i dobre samopoczucie.",button:"Oferty partnerów"},
+dental:{badge:"PIELĘGNACJA ZĘBÓW",title:"Zęby & oddech",description:"Higiena jamy ustnej wspiera apetyt, komfort i długotrwałe zdrowie wielu zwierząt.",button:"Przewodnik dentystyczny"},
+fitness:{badge:"FITNESS",title:"Ruch & zabawa",description:"Ruch, enrichment i zabawa pomagają zwierzętom być aktywnymi, szczęśliwymi i stymulowanymi.",button:"Aktywne podróże"}
+},
+firstAid:{badge:"PIERWSZA POMOC",title:"Rozpoznawanie nagłego przypadku",descriptionOne:"Każdy opiekun powinien znać podstawowe sygnały alarmowe: problemy z oddychaniem, omdlenie, silne krwawienie, zatrucie, powtarzające się wymioty, drgawki lub nagła niemożność chodzenia.",descriptionTwo:"W nagłym przypadku nie czekaj na poradę online. Natychmiast skontaktuj się z weterynarzem, kliniką całodobową lub ośrodkiem toksykologicznym dla zwierząt.",button:"Znajdź pomoc lokalną"},
+checklist:{title:"Wellness checklista",one:"Aktualizuj informacje o szczepieniach i mikrochipie.",two:"Umawiaj regularne kontrole weterynaryjne i dentystyczne.",three:"Obserwuj apetyt, picie, zachowanie, oddychanie i energię.",four:"Stosuj bezpieczne rutyny groomingu oraz pielęgnacji skóry i sierści.",five:"Zapisz w telefonie dane kliniki weterynaryjnej 24h.",six:"Przygotuj małą apteczkę pierwszej pomocy do domu i podróży.",seven:"Skonsultuj się ze specjalistą przed użyciem suplementów, leków lub naturalnych środków."},
+emergency:{title:"Kiedy szukać pilnej pomocy",description:"Pilnie skontaktuj się z weterynarzem w przypadku problemów z oddychaniem, podejrzenia zatrucia, omdlenia, silnego bólu, krwawienia, drgawek, udaru cieplnego, urazu, wzdętego brzucha, powtarzających się wymiotów lub nagłej poważnej zmiany.",button:"Znajdź weterynarzy w pobliżu"},
+club:{title:"Korzyści Wellness dla członków Club",description:"PETS & DOGUE Club połączy członków z partnerami wellness, ofertami groomingu, przewodnikami opieki, korzyściami pet spa i rekomendacjami premium.",grooming:"Zniżki grooming",spa:"Oferty Pet Spa",guides:"Przewodniki Wellness",nutrition:"Partnerzy żywieniowi",vet:"Korzyści weterynaryjne",qr:"Karta QR członka",button:"Dołącz do Club"},
+footer:{home:"Strona główna",articles:"Artykuły",places:"Miejsca",partners:"Partnerzy",club:"Club",privacy:"Prywatność",contact:"Kontakt"},
+images:{hero:"Wellness zwierząt",veterinary:"Kontrola weterynaryjna",nutrition:"Żywienie zwierząt",behaviour:"Zachowanie zwierząt",grooming:"Grooming",dental:"Pielęgnacja zębów",fitness:"Aktywność zwierząt",firstAid:"Pierwsza pomoc"}
+},
+
+cs:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Zdraví zvířat, výživa, grooming, chování, první pomoc, veterinární povědomí a každodenní péče od PETS & DOGUE."},
+hero:{title:"Wellness",description:"Luxury centrum zdraví zvířat, výživy, groomingu, chování, první pomoci a každodenní péče."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Zdravotní poznámka redakce",description:"PETS & DOGUE Wellness poskytuje pouze obecné lifestyle informace. Nenahrazuje veterinární radu. Při zdravotních potížích vždy kontaktujte kvalifikovaného veterináře."},
+cards:{
+vet:{badge:"VETERINÁRNÍ PÉČE",title:"Veterinární kontroly",description:"Pravidelné kontroly pomáhají včas zaznamenat změny zdravotního stavu a udržet zvíře v pohodlí.",button:"Najít veterináře"},
+nutrition:{badge:"VÝŽIVA",title:"Jídlo & rovnováha",description:"Výživa, hydratace a každodenní stravovací návyky jsou základem zdraví zvířete.",button:"Číst průvodce"},
+behaviour:{badge:"CHOVÁNÍ",title:"Klidný život",description:"Rutina, jemná pozornost a bezpečná místa pomáhají zvířatům cítit se sebejistě a bezpečně.",button:"Zeptat se komunity"},
+grooming:{badge:"GROOMING",title:"Srst & krása",description:"Grooming není jen styl. Podporuje pohodlí, zdraví pokožky a dobrý pocit.",button:"Partnerské nabídky"},
+dental:{badge:"PÉČE O ZUBY",title:"Zuby & dech",description:"Péče o zuby podporuje chuť k jídlu, pohodlí a dlouhodobé zdraví mnoha zvířat.",button:"Dentální průvodce"},
+fitness:{badge:"FITNESS",title:"Pohyb & hra",description:"Cvičení, obohacení a hra pomáhají zvířatům zůstat aktivní, šťastná a mentálně stimulovaná.",button:"Aktivní cestování"}
+},
+firstAid:{badge:"PRVNÍ POMOC",title:"Rozpoznání nouze",descriptionOne:"Každý majitel by měl znát hlavní varovné příznaky: potíže s dýcháním, kolaps, silné krvácení, otravu, opakované zvracení, záchvaty nebo náhlou neschopnost chodit.",descriptionTwo:"V nouzi nečekejte na online rady. Okamžitě kontaktujte veterináře, pohotovostní kliniku nebo toxikologickou linku pro zvířata.",button:"Najít místní pomoc"},
+checklist:{title:"Wellness checklist",one:"Udržujte informace o očkování a mikročipu aktuální.",two:"Objednávejte pravidelné veterinární a dentální kontroly.",three:"Sledujte chuť k jídlu, pití, chování, dýchání a energii.",four:"Používejte bezpečné rutiny groomingu a péče o kůži a srst.",five:"Uložte si do telefonu kontakt na veterinární pohotovost.",six:"Připravte malou lékárničku první pomoci domů i na cesty.",seven:"Před použitím doplňků, léků nebo přírodních prostředků se poraďte s odborníkem."},
+emergency:{title:"Kdy vyhledat urgentní pomoc",description:"Urgentně vyhledejte veterináře při potížích s dýcháním, podezření na otravu, kolapsu, silné bolesti, krvácení, záchvatech, úpalu, traumatu, nafouklém břiše, opakovaném zvracení nebo jiné náhlé závažné změně.",button:"Najít veterináře poblíž"},
+club:{title:"Wellness výhody pro členy Club",description:"PETS & DOGUE Club propojí členy s wellness partnery, grooming nabídkami, průvodci péčí, pet spa výhodami a prémiovými doporučeními.",grooming:"Grooming slevy",spa:"Pet Spa nabídky",guides:"Wellness průvodci",nutrition:"Partneři výživy",vet:"Veterinární výhody",qr:"QR karta člena",button:"Přidat se do Club"},
+footer:{home:"Domů",articles:"Články",places:"Místa",partners:"Partneři",club:"Club",privacy:"Soukromí",contact:"Kontakt"},
+images:{hero:"Wellness zvířat",veterinary:"Veterinární kontrola",nutrition:"Výživa zvířat",behaviour:"Chování zvířat",grooming:"Grooming",dental:"Péče o zuby",fitness:"Fitness zvířat",firstAid:"První pomoc"}
+},
+
+sk:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Zdravie zvierat, výživa, grooming, správanie, prvá pomoc, veterinárne povedomie a každodenná starostlivosť od PETS & DOGUE."},
+hero:{title:"Wellness",description:"Luxury centrum zdravia zvierat, výživy, groomingu, správania, prvej pomoci a každodennej starostlivosti."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Zdravotná poznámka redakcie",description:"PETS & DOGUE Wellness poskytuje len všeobecné lifestyle informácie. Nenahrádza veterinárnu radu. Pri zdravotných problémoch vždy kontaktujte kvalifikovaného veterinára."},
+cards:{
+vet:{badge:"VETERINÁRNA STAROSTLIVOSŤ",title:"Veterinárne kontroly",description:"Pravidelné kontroly pomáhajú včas rozpoznať zdravotné zmeny a udržať zviera v pohodlí.",button:"Nájsť veterinárov"},
+nutrition:{badge:"VÝŽIVA",title:"Jedlo & rovnováha",description:"Výživa, hydratácia a každodenné stravovacie návyky sú základom zdravia zvieraťa.",button:"Čítať príručky"},
+behaviour:{badge:"SPRÁVANIE",title:"Pokojný život",description:"Rutina, jemná pozornosť a bezpečné priestory pomáhajú zvieratám cítiť sa sebavedomo a bezpečne.",button:"Opýtať sa komunity"},
+grooming:{badge:"GROOMING",title:"Srsť & krása",description:"Grooming nie je len štýl. Podporuje pohodlie, zdravie pokožky a dobrý pocit.",button:"Partnerské ponuky"},
+dental:{badge:"STAROSTLIVOSŤ O ZUBY",title:"Zuby & dych",description:"Starostlivosť o zuby podporuje chuť do jedla, pohodlie a dlhodobé zdravie.",button:"Dentálny sprievodca"},
+fitness:{badge:"FITNESS",title:"Pohyb & hra",description:"Pohyb, enrichment a hra pomáhajú zvieratám zostať aktívne, šťastné a mentálne stimulované.",button:"Aktívne cestovanie"}
+},
+firstAid:{badge:"PRVÁ POMOC",title:"Rozpoznanie núdze",descriptionOne:"Každý majiteľ by mal poznať základné varovné príznaky: problémy s dýchaním, kolaps, silné krvácanie, otravu, opakované vracanie, záchvaty alebo náhlu neschopnosť chodiť.",descriptionTwo:"V núdzi nečakajte na online rady. Okamžite kontaktujte veterinára, pohotovostnú kliniku alebo toxikologickú linku pre zvieratá.",button:"Nájsť miestnu pomoc"},
+checklist:{title:"Wellness checklist",one:"Udržujte údaje o očkovaní a mikročipe aktuálne.",two:"Objednávajte pravidelné veterinárne a dentálne kontroly.",three:"Sledujte chuť do jedla, pitie, správanie, dýchanie a energiu.",four:"Používajte bezpečné rutiny groomingu a starostlivosti o kožu a srsť.",five:"Uložte si kontakt na veterinárnu pohotovosť do telefónu.",six:"Pripravte malú lekárničku prvej pomoci domov aj na cesty.",seven:"Pred použitím doplnkov, liekov alebo prírodných prostriedkov sa poraďte s odborníkom."},
+emergency:{title:"Kedy vyhľadať urgentnú pomoc",description:"Urgentne vyhľadajte veterinára pri problémoch s dýchaním, podozrení na otravu, kolapse, silnej bolesti, krvácaní, záchvatoch, úpale, traume, nafúknutom bruchu, opakovanom vracaní alebo inej náhlej závažnej zmene.",button:"Nájsť veterinárov v okolí"},
+club:{title:"Wellness výhody pre členov Club",description:"PETS & DOGUE Club spojí členov s wellness partnermi, grooming ponukami, sprievodcami starostlivosťou, pet spa výhodami a premium odporúčaniami.",grooming:"Grooming zľavy",spa:"Pet Spa ponuky",guides:"Wellness sprievodcovia",nutrition:"Partneri výživy",vet:"Veterinárne výhody",qr:"QR karta člena",button:"Pridať sa do Club"},
+footer:{home:"Domov",articles:"Články",places:"Miesta",partners:"Partneri",club:"Club",privacy:"Súkromie",contact:"Kontakt"},
+images:{hero:"Wellness zvierat",veterinary:"Veterinárna kontrola",nutrition:"Výživa zvierat",behaviour:"Správanie zvierat",grooming:"Grooming",dental:"Starostlivosť o zuby",fitness:"Fitness zvierat",firstAid:"Prvá pomoc"}
+},
+
+hu:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Állategészség, táplálkozás, grooming, viselkedés, elsősegély, állatorvosi tudatosság és mindennapi gondozás a PETS & DOGUE-tól."},
+hero:{title:"Wellness",description:"Luxury wellnessközpont állategészséghez, táplálkozáshoz, groominghoz, viselkedéshez, elsősegélyhez és mindennapi gondozáshoz."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Szerkesztői egészségügyi megjegyzés",description:"A PETS & DOGUE Wellness kizárólag általános lifestyle információkat nyújt. Nem helyettesíti az állatorvosi tanácsot. Egészségügyi probléma esetén mindig forduljon képzett állatorvoshoz."},
+cards:{
+vet:{badge:"ÁLLATORVOS",title:"Állatorvosi ellenőrzések",description:"A rendszeres vizsgálatok segítenek korán észrevenni az egészségügyi változásokat és fenntartani az állat komfortját.",button:"Állatorvos keresése"},
+nutrition:{badge:"TÁPLÁLKOZÁS",title:"Étel & egyensúly",description:"A megfelelő táplálkozás, hidratáció és napi etetési szokások az állati wellness alapjai.",button:"Útmutatók olvasása"},
+behaviour:{badge:"VISELKEDÉS",title:"Nyugodt élet",description:"A rutin, gyengéd figyelem és biztonságos terek segítenek az állatoknak magabiztosnak és biztonságban érezni magukat.",button:"Közösség kérdezése"},
+grooming:{badge:"GROOMING",title:"Szőrzet & szépség",description:"A grooming nem csak stílus. Támogatja a komfortot, a bőr egészségét és a jó közérzetet.",button:"Partnerajánlatok"},
+dental:{badge:"FOGÁPOLÁS",title:"Fogak & lehelet",description:"A fogápolás támogatja az étvágyat, a komfortot és a hosszú távú jóllétet.",button:"Fogápolási útmutató"},
+fitness:{badge:"FITNESS",title:"Mozgás & játék",description:"A mozgás, enrichment és játék segít aktívnak, boldognak és mentálisan stimuláltnak maradni.",button:"Aktív utazás"}
+},
+firstAid:{badge:"ELSŐSEGÉLY",title:"Vészhelyzet felismerése",descriptionOne:"Minden gazdinak ismernie kell a fő figyelmeztető jeleket: légzési nehézség, összeesés, erős vérzés, mérgezés, ismételt hányás, rohamok vagy hirtelen járásképtelenség.",descriptionTwo:"Vészhelyzetben ne várjon online tanácsra. Azonnal forduljon állatorvoshoz, sürgősségi klinikához vagy állatmérgezési segélyvonalhoz.",button:"Helyi segítség keresése"},
+checklist:{title:"Wellness checklista",one:"Tartsa naprakészen az oltási és mikrochipadatokat.",two:"Foglaljon rendszeres állatorvosi és fogászati ellenőrzést.",three:"Figyelje az étvágyat, ivást, viselkedést, légzést és energiaszintet.",four:"Használjon biztonságos grooming-, bőr- és szőrápolási rutint.",five:"Mentse el telefonjába egy sürgősségi állatorvosi klinika elérhetőségét.",six:"Készítsen kis elsősegélykészletet otthonra és utazáshoz.",seven:"Kiegészítők, gyógyszerek vagy természetes szerek használata előtt kérjen szakmai tanácsot."},
+emergency:{title:"Mikor szükséges sürgős segítség",description:"Kérjen sürgős állatorvosi segítséget légzési nehézség, mérgezés gyanúja, összeesés, erős fájdalom, vérzés, rohamok, hőguta, trauma, puffadt has, ismételt hányás vagy bármilyen hirtelen súlyos változás esetén.",button:"Közeli állatorvosok keresése"},
+club:{title:"Wellness előnyök Club tagoknak",description:"A PETS & DOGUE Club wellness partnerekkel, grooming ajánlatokkal, gondozási útmutatókkal, pet spa előnyökkel és premium ajánlásokkal kapcsolja össze a tagokat.",grooming:"Grooming kedvezmények",spa:"Pet Spa ajánlatok",guides:"Wellness útmutatók",nutrition:"Táplálkozási partnerek",vet:"Állatorvosi előnyök",qr:"Tagi QR-kártya",button:"Csatlakozás a Clubhoz"},
+footer:{home:"Kezdőlap",articles:"Cikkek",places:"Helyek",partners:"Partnerek",club:"Club",privacy:"Adatvédelem",contact:"Kapcsolat"},
+images:{hero:"Állati wellness",veterinary:"Állatorvosi vizsgálat",nutrition:"Állati táplálkozás",behaviour:"Állati viselkedés",grooming:"Grooming",dental:"Fogápolás",fitness:"Állati fitness",firstAid:"Elsősegély"}
+},ro:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Sănătatea animalelor, nutriție, grooming, comportament, prim ajutor, prevenție veterinară și îngrijire zilnică de la PETS & DOGUE."},
+hero:{title:"Wellness",description:"Un centru luxury pentru sănătatea animalelor, nutriție, grooming, comportament, prim ajutor și îngrijire zilnică."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Notă editorială de sănătate",description:"PETS & DOGUE Wellness oferă doar informații generale și de lifestyle. Nu înlocuiește sfatul veterinar. Pentru probleme medicale, contactați întotdeauna un medic veterinar calificat."},
+cards:{
+vet:{badge:"VETERINAR",title:"Controale veterinare",description:"Controalele regulate ajută la observarea timpurie a schimbărilor de sănătate și la menținerea confortului animalului.",button:"Găsește veterinari"},
+nutrition:{badge:"NUTRIȚIE",title:"Hrană & echilibru",description:"Nutriția, hidratarea și obiceiurile zilnice de hrănire sunt baza stării de bine.",button:"Citește ghiduri"},
+behaviour:{badge:"COMPORTAMENT",title:"Viață liniștită",description:"Rutina, atenția blândă și spațiile sigure ajută animalele să se simtă încrezătoare și protejate.",button:"Întreabă comunitatea"},
+grooming:{badge:"GROOMING",title:"Blană & frumusețe",description:"Groomingul nu este doar stil. Susține confortul, sănătatea pielii și starea de bine.",button:"Oferte parteneri"},
+dental:{badge:"ÎNGRIJIRE DENTARĂ",title:"Dinți & respirație",description:"Îngrijirea dentară susține pofta de mâncare, confortul și bunăstarea pe termen lung.",button:"Ghid dentar"},
+fitness:{badge:"FITNESS",title:"Mișcare & joacă",description:"Exercițiul, enrichmentul și joaca ajută animalele să rămână active, fericite și stimulate mental.",button:"Călătorii active"}
+},
+firstAid:{badge:"PRIM AJUTOR",title:"Recunoașterea unei urgențe",descriptionOne:"Fiecare proprietar trebuie să cunoască semnele de alarmă: dificultăți de respirație, colaps, sângerare severă, otrăvire, vărsături repetate, convulsii sau incapacitatea bruscă de a merge.",descriptionTwo:"Într-o urgență nu așteptați sfaturi online. Contactați imediat un veterinar, o clinică de urgență sau un serviciu de toxicologie veterinară.",button:"Găsește ajutor local"},
+checklist:{title:"Checklist Wellness",one:"Păstrați actualizate informațiile despre vaccinare și microcip.",two:"Programați controale veterinare și dentare regulate.",three:"Monitorizați apetitul, consumul de apă, comportamentul, respirația și energia.",four:"Folosiți rutine sigure de grooming și îngrijire a pielii și blănii.",five:"Salvați în telefon datele unei clinici veterinare de urgență.",six:"Pregătiți o mică trusă de prim ajutor pentru casă și călătorii.",seven:"Cereți sfatul profesioniștilor înainte de suplimente, medicamente sau remedii naturale."},
+emergency:{title:"Când este nevoie de ajutor urgent",description:"Solicitați urgent ajutor veterinar pentru dificultăți de respirație, suspiciune de otrăvire, colaps, durere severă, sângerare, convulsii, insolație, traumă, abdomen umflat, vărsături repetate sau orice schimbare gravă bruscă.",button:"Găsește veterinari în apropiere"},
+club:{title:"Beneficii Wellness pentru membrii Club",description:"PETS & DOGUE Club va conecta membrii cu parteneri wellness, oferte de grooming, ghiduri de îngrijire, beneficii pet spa și recomandări premium.",grooming:"Reduceri grooming",spa:"Oferte Pet Spa",guides:"Ghiduri Wellness",nutrition:"Parteneri nutriție",vet:"Beneficii veterinare",qr:"Card QR de membru",button:"Intră în Club"},
+footer:{home:"Acasă",articles:"Articole",places:"Locuri",partners:"Parteneri",club:"Club",privacy:"Confidențialitate",contact:"Contact"},
+images:{hero:"Wellness pentru animale",veterinary:"Control veterinar",nutrition:"Nutriție animală",behaviour:"Comportament animal",grooming:"Grooming",dental:"Îngrijire dentară",fitness:"Fitness pentru animale",firstAid:"Prim ajutor"}
+},
+
+bg:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Здраве на животните, хранене, grooming, поведение, първа помощ, ветеринарна информираност и ежедневна грижа от PETS & DOGUE."},
+hero:{title:"Wellness",description:"Luxury център за здраве, хранене, grooming, поведение, първа помощ и ежедневна грижа за животните."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Здравна бележка от редакцията",description:"PETS & DOGUE Wellness предоставя само обща lifestyle информация. Не замества ветеринарен съвет. При медицински проблем винаги се обръщайте към квалифициран ветеринарен лекар."},
+cards:{
+vet:{badge:"ВЕТЕРИНАРИЯ",title:"Ветеринарни прегледи",description:"Редовните прегледи помагат рано да се открият промени в здравето и да се запази комфортът на животното.",button:"Намери ветеринари"},
+nutrition:{badge:"ХРАНЕНЕ",title:"Храна & баланс",description:"Храненето, хидратацията и ежедневните навици са основата на доброто състояние.",button:"Прочети гидове"},
+behaviour:{badge:"ПОВЕДЕНИЕ",title:"Спокоен живот",description:"Рутината, нежното внимание и сигурните пространства помагат на животните да се чувстват уверени и защитени.",button:"Попитай общността"},
+grooming:{badge:"GROOMING",title:"Козина & красота",description:"Grooming не е само стил. Той подкрепя комфорта, здравето на кожата и увереността.",button:"Партньорски оферти"},
+dental:{badge:"ГРИЖА ЗА ЗЪБИТЕ",title:"Зъби & дъх",description:"Грижата за зъбите подпомага апетита, комфорта и дългосрочното благосъстояние.",button:"Гид за зъбите"},
+fitness:{badge:"FITNESS",title:"Движение & игра",description:"Упражненията, enrichment и играта помагат на животните да бъдат активни, щастливи и стимулирани.",button:"Активно пътуване"}
+},
+firstAid:{badge:"ПЪРВА ПОМОЩ",title:"Разпознаване на спешност",descriptionOne:"Всеки собственик трябва да знае основните тревожни признаци: проблеми с дишането, колапс, силно кървене, отравяне, повтарящо се повръщане, гърчове или внезапна невъзможност за ходене.",descriptionTwo:"При спешност не чакайте онлайн съвет. Незабавно се свържете с ветеринар, emergency clinic или токсикологична линия за животни.",button:"Намери помощ наблизо"},
+checklist:{title:"Wellness checklist",one:"Поддържайте информацията за ваксини и микрочип актуална.",two:"Правете редовни ветеринарни и стоматологични прегледи.",three:"Следете апетита, пиенето, поведението, дишането и енергията.",four:"Използвайте безопасни рутини за grooming, кожа и козина.",five:"Запазете в телефона контактите на ветеринарна emergency clinic.",six:"Подгответе малка аптечка за първа помощ за дома и пътуване.",seven:"Питайте специалист преди използване на добавки, лекарства или природни средства."},
+emergency:{title:"Кога да потърсите спешна помощ",description:"Потърсете незабавна ветеринарна помощ при затруднено дишане, подозрение за отравяне, колапс, силна болка, кървене, гърчове, топлинен удар, травма, подут корем, повтарящо се повръщане или друга внезапна сериозна промяна.",button:"Намери ветеринари наблизо"},
+club:{title:"Wellness предимства за членове на Club",description:"PETS & DOGUE Club ще свърже членовете с wellness партньори, grooming оферти, гидове за грижа, pet spa ползи и premium препоръки.",grooming:"Grooming отстъпки",spa:"Pet Spa оферти",guides:"Wellness гидове",nutrition:"Партньори за хранене",vet:"Ветеринарни предимства",qr:"QR карта за член",button:"Присъедини се към Club"},
+footer:{home:"Начало",articles:"Статии",places:"Места",partners:"Партньори",club:"Club",privacy:"Поверителност",contact:"Контакт"},
+images:{hero:"Wellness за животни",veterinary:"Ветеринарен преглед",nutrition:"Хранене на животни",behaviour:"Поведение на животно",grooming:"Grooming",dental:"Грижа за зъбите",fitness:"Активност на животно",firstAid:"Първа помощ"}
+},
+
+el:{
+meta:{title:"Ευεξία | PETS & DOGUE",description:"Υγεία κατοικιδίων, διατροφή, grooming, συμπεριφορά, πρώτες βοήθειες, κτηνιατρική ενημέρωση και καθημερινή φροντίδα από το PETS & DOGUE."},
+hero:{title:"Ευεξία",description:"Ένα luxury wellness center για υγεία, διατροφή, grooming, συμπεριφορά, πρώτες βοήθειες και καθημερινή φροντίδα κατοικιδίων."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Ιατρική σημείωση της σύνταξης",description:"Το PETS & DOGUE Wellness παρέχει μόνο γενικές και lifestyle πληροφορίες. Δεν αντικαθιστά την κτηνιατρική συμβουλή. Για ιατρικά θέματα επικοινωνείτε πάντα με εξειδικευμένο κτηνίατρο."},
+cards:{
+vet:{badge:"ΚΤΗΝΙΑΤΡΙΚΗ",title:"Κτηνιατρικοί έλεγχοι",description:"Οι τακτικοί έλεγχοι βοηθούν να εντοπίζονται νωρίς αλλαγές στην υγεία και να διατηρείται η άνεση του κατοικιδίου.",button:"Βρείτε κτηνιάτρους"},
+nutrition:{badge:"ΔΙΑΤΡΟΦΗ",title:"Τροφή & ισορροπία",description:"Η σωστή διατροφή, ενυδάτωση και καθημερινές συνήθειες σίτισης είναι η βάση της ευεξίας.",button:"Διαβάστε οδηγούς"},
+behaviour:{badge:"ΣΥΜΠΕΡΙΦΟΡΑ",title:"Ήρεμη ζωή",description:"Η ρουτίνα, η ήπια προσοχή και οι ασφαλείς χώροι βοηθούν τα pets να νιώθουν σίγουρα και ασφαλή.",button:"Ρωτήστε την κοινότητα"},
+grooming:{badge:"GROOMING",title:"Τρίχωμα & ομορφιά",description:"Το grooming δεν είναι μόνο στιλ. Υποστηρίζει την άνεση, την υγεία του δέρματος και την αυτοπεποίθηση.",button:"Partner Offers"},
+dental:{badge:"ΟΔΟΝΤΙΚΗ ΦΡΟΝΤΙΔΑ",title:"Δόντια & αναπνοή",description:"Η οδοντική φροντίδα υποστηρίζει την όρεξη, την άνεση και τη μακροχρόνια ευεξία.",button:"Dental Guide"},
+fitness:{badge:"FITNESS",title:"Κίνηση & παιχνίδι",description:"Η άσκηση, το enrichment και το παιχνίδι βοηθούν τα pets να παραμένουν ενεργά, χαρούμενα και νοητικά δραστήρια.",button:"Active Travel"}
+},
+firstAid:{badge:"ΠΡΩΤΕΣ ΒΟΗΘΕΙΕΣ",title:"Αναγνώριση επείγοντος",descriptionOne:"Κάθε ιδιοκτήτης πρέπει να γνωρίζει βασικά προειδοποιητικά σημάδια: δυσκολία στην αναπνοή, κατάρρευση, σοβαρή αιμορραγία, δηλητηρίαση, επαναλαμβανόμενος εμετός, σπασμοί ή ξαφνική αδυναμία βάδισης.",descriptionTwo:"Σε επείγον περιστατικό μην περιμένετε online advice. Επικοινωνήστε άμεσα με κτηνίατρο, emergency clinic ή γραμμή δηλητηριάσεων ζώων.",button:"Βρείτε τοπική βοήθεια"},
+checklist:{title:"Wellness Checklist",one:"Διατηρείτε ενημερωμένα τα στοιχεία εμβολιασμού και microchip.",two:"Κλείνετε τακτικούς κτηνιατρικούς και οδοντιατρικούς ελέγχους.",three:"Παρακολουθείτε όρεξη, νερό, συμπεριφορά, αναπνοή και ενέργεια.",four:"Χρησιμοποιείτε ασφαλείς ρουτίνες grooming και φροντίδας δέρματος και τριχώματος.",five:"Αποθηκεύστε στο τηλέφωνο στοιχεία emergency veterinary clinic.",six:"Ετοιμάστε ένα μικρό first aid kit για σπίτι και ταξίδι.",seven:"Ρωτήστε επαγγελματία πριν χρησιμοποιήσετε supplements, medicines ή natural remedies."},
+emergency:{title:"Πότε χρειάζεται επείγουσα βοήθεια",description:"Ζητήστε άμεση κτηνιατρική βοήθεια για δυσκολία στην αναπνοή, πιθανή δηλητηρίαση, κατάρρευση, έντονο πόνο, αιμορραγία, σπασμούς, θερμοπληξία, τραύμα, πρησμένη κοιλιά, επαναλαμβανόμενο εμετό ή οποιαδήποτε ξαφνική σοβαρή αλλαγή.",button:"Βρείτε κτηνιάτρους κοντά σας"},
+club:{title:"Wellness Benefits για Club Members",description:"Το PETS & DOGUE Club θα συνδέει τα μέλη με wellness partners, grooming offers, care guides, pet spa benefits και premium recommendations.",grooming:"Grooming Discounts",spa:"Pet Spa Offers",guides:"Wellness Guides",nutrition:"Nutrition Partners",vet:"Vet Partner Benefits",qr:"Member QR Card",button:"Join The Club"},
+footer:{home:"Αρχική",articles:"Άρθρα",places:"Μέρη",partners:"Partners",club:"Club",privacy:"Privacy",contact:"Επικοινωνία"},
+images:{hero:"Pet Wellness",veterinary:"Κτηνιατρικός έλεγχος",nutrition:"Διατροφή κατοικιδίου",behaviour:"Συμπεριφορά κατοικιδίου",grooming:"Grooming",dental:"Οδοντική φροντίδα",fitness:"Pet fitness",firstAid:"Πρώτες βοήθειες"}
+},
+
+sv:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Djurhälsa, kost, grooming, beteende, första hjälpen, veterinär kunskap och vardaglig vård från PETS & DOGUE."},
+hero:{title:"Wellness",description:"Ett luxury wellnesscenter för djurhälsa, kost, grooming, beteende, första hjälpen och vardaglig vård."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Redaktionell hälsonotis",description:"PETS & DOGUE Wellness ger endast allmän lifestyle-information. Det ersätter inte veterinär rådgivning. Vid medicinska problem ska du alltid kontakta en kvalificerad veterinär."},
+cards:{
+vet:{badge:"VETERINÄR",title:"Veterinärkontroller",description:"Regelbundna kontroller hjälper till att upptäcka häls förändringar tidigt och hålla ditt djur bekvämt.",button:"Hitta veterinärer"},
+nutrition:{badge:"NÄRING",title:"Mat & balans",description:"Näring, vätska och dagliga matvanor är grunden för djurets välbefinnande.",button:"Läs guider"},
+behaviour:{badge:"BETEENDE",title:"Ett lugnt liv",description:"Rutiner, varsam uppmärksamhet och trygga platser hjälper djur att känna sig säkra och självsäkra.",button:"Fråga communityn"},
+grooming:{badge:"GROOMING",title:"Päls & skönhet",description:"Grooming handlar inte bara om stil. Det stödjer komfort, hudhälsa och välbefinnande.",button:"Partnererbjudanden"},
+dental:{badge:"TANDVÅRD",title:"Tänder & andedräkt",description:"Tandvård stödjer aptit, komfort och långsiktigt välbefinnande.",button:"Tandvårdsguide"},
+fitness:{badge:"FITNESS",title:"Rörelse & lek",description:"Motion, enrichment och lek hjälper djur att förbli aktiva, glada och mentalt stimulerade.",button:"Aktiva resor"}
+},
+firstAid:{badge:"FÖRSTA HJÄLPEN",title:"Känn igen en nödsituation",descriptionOne:"Varje djurägare bör känna till viktiga varningssignaler: andningsproblem, kollaps, kraftig blödning, förgiftning, upprepade kräkningar, kramper eller plötslig oförmåga att gå.",descriptionTwo:"Vid en nödsituation, vänta inte på råd online. Kontakta genast en veterinär, akutmottagning eller giftlinje för djur.",button:"Hitta lokal hjälp"},
+checklist:{title:"Wellness-checklista",one:"Håll vaccinations- och mikrochipuppgifter uppdaterade.",two:"Boka regelbundna veterinär- och tandkontroller.",three:"Följ aptit, drickande, beteende, andning och energi.",four:"Använd säkra rutiner för grooming och hud- och pälsvård.",five:"Spara kontaktuppgifter till en veterinär akutmottagning i telefonen.",six:"Förbered ett litet första hjälpen-kit för hem och resa.",seven:"Fråga professionella innan du använder kosttillskott, läkemedel eller naturmedel."},
+emergency:{title:"När du ska söka akut hjälp",description:"Sök akut veterinärhjälp vid andningssvårigheter, misstänkt förgiftning, kollaps, svår smärta, blödning, kramper, värmeslag, trauma, svullen buk, upprepade kräkningar eller annan plötslig allvarlig förändring.",button:"Hitta veterinärer nära dig"},
+club:{title:"Wellness-förmåner för Club-medlemmar",description:"PETS & DOGUE Club kopplar samman medlemmar med wellnesspartners, groomingerbjudanden, vårdguider, pet spa-förmåner och premiumrekommendationer.",grooming:"Groomingrabatter",spa:"Pet Spa-erbjudanden",guides:"Wellness-guider",nutrition:"Näringspartners",vet:"Veterinärförmåner",qr:"Medlems-QR-kort",button:"Gå med i Club"},
+footer:{home:"Hem",articles:"Artiklar",places:"Platser",partners:"Partners",club:"Club",privacy:"Integritet",contact:"Kontakt"},
+images:{hero:"Djurwellness",veterinary:"Veterinärkontroll",nutrition:"Djurnäring",behaviour:"Djurbeteende",grooming:"Grooming",dental:"Tandvård",fitness:"Djurfitness",firstAid:"Första hjälpen"}
+},
+
+da:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Kæledyrssundhed, ernæring, grooming, adfærd, førstehjælp, veterinær opmærksomhed og daglig pleje fra PETS & DOGUE."},
+hero:{title:"Wellness",description:"Et luxury wellnesscenter for kæledyrssundhed, ernæring, grooming, adfærd, førstehjælp og daglig pleje."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Redaktionel sundhedsnote",description:"PETS & DOGUE Wellness giver kun generel lifestyle-information. Det erstatter ikke veterinær rådgivning. Ved medicinske bekymringer skal du altid kontakte en kvalificeret dyrlæge."},
+cards:{
+vet:{badge:"DYRLÆGE",title:"Dyrlægekontroller",description:"Regelmæssige kontroller hjælper med tidligt at opdage helbredsændringer og holde dit kæledyr komfortabelt.",button:"Find dyrlæger"},
+nutrition:{badge:"ERNÆRING",title:"Mad & balance",description:"Ernæring, væske og daglige fodringsvaner er grundlaget for kæledyrets velvære.",button:"Læs guider"},
+behaviour:{badge:"ADFÆRD",title:"Roligt liv",description:"Rutine, blid opmærksomhed og sikre områder hjælper kæledyr med at føle sig trygge og sikre.",button:"Spørg community"},
+grooming:{badge:"GROOMING",title:"Pels & skønhed",description:"Grooming handler ikke kun om stil. Det støtter komfort, hudens sundhed og velvære.",button:"Partnertilbud"},
+dental:{badge:"TANDPLEJE",title:"Tænder & ånde",description:"Tandpleje støtter appetit, komfort og langsigtet velvære.",button:"Tandguide"},
+fitness:{badge:"FITNESS",title:"Bevægelse & leg",description:"Motion, enrichment og leg hjælper kæledyr med at forblive aktive, glade og mentalt stimulerede.",button:"Aktive rejser"}
+},
+firstAid:{badge:"FØRSTEHJÆLP",title:"Genkend en nødsituation",descriptionOne:"Enhver ejer bør kende de vigtigste advarselstegn: vejrtrækningsproblemer, kollaps, kraftig blødning, forgiftning, gentagen opkastning, kramper eller pludselig manglende evne til at gå.",descriptionTwo:"Ved en nødsituation skal du ikke vente på online råd. Kontakt straks en dyrlæge, akutklinik eller giftlinje for dyr.",button:"Find lokal hjælp"},
+checklist:{title:"Wellness-checkliste",one:"Hold vaccination og mikrochipoplysninger opdaterede.",two:"Book regelmæssige dyrlæge- og tandkontroller.",three:"Hold øje med appetit, væskeindtag, adfærd, vejrtrækning og energi.",four:"Brug sikre rutiner til grooming samt hud- og pelspleje.",five:"Gem kontaktoplysninger til en veterinær akutklinik på telefonen.",six:"Forbered et lille førstehjælpskit til hjemmet og rejser.",seven:"Spørg fagfolk før brug af kosttilskud, medicin eller naturmidler."},
+emergency:{title:"Hvornår du skal søge akut hjælp",description:"Søg akut dyrlægehjælp ved vejrtrækningsbesvær, mistænkt forgiftning, kollaps, stærke smerter, blødning, kramper, hedeslag, traume, hævet mave, gentagen opkastning eller enhver pludselig alvorlig ændring.",button:"Find dyrlæger i nærheden"},
+club:{title:"Wellness-fordele for Club-medlemmer",description:"PETS & DOGUE Club forbinder medlemmer med wellnesspartnere, groomingtilbud, plejeguider, pet spa-fordele og premiumanbefalinger.",grooming:"Groomingrabatter",spa:"Pet Spa-tilbud",guides:"Wellness-guider",nutrition:"Ernæringspartnere",vet:"Dyrlægefordele",qr:"Medlems-QR-kort",button:"Bliv medlem af Club"},
+footer:{home:"Forside",articles:"Artikler",places:"Steder",partners:"Partnere",club:"Club",privacy:"Privatliv",contact:"Kontakt"},
+images:{hero:"Kæledyrswellness",veterinary:"Dyrlægekontrol",nutrition:"Kæledyrsernæring",behaviour:"Kæledyrsadfærd",grooming:"Grooming",dental:"Tandpleje",fitness:"Kæledyrsfitness",firstAid:"Førstehjælp"}
+},no:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Kjæledyrhelse, ernæring, grooming, atferd, førstehjelp, veterinær bevissthet og daglig omsorg fra PETS & DOGUE."},
+hero:{title:"Wellness",description:"Et luxury wellnessenter for kjæledyrhelse, ernæring, grooming, atferd, førstehjelp og daglig omsorg."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Redaksjonell helsenotis",description:"PETS & DOGUE Wellness gir kun generell lifestyle-informasjon. Det erstatter ikke veterinærråd. Ved medisinske bekymringer skal du alltid kontakte en kvalifisert veterinær."},
+cards:{
+vet:{badge:"VETERINÆR",title:"Veterinærkontroller",description:"Regelmessige kontroller hjelper med å oppdage helseendringer tidlig og holde kjæledyret komfortabelt.",button:"Finn veterinærer"},
+nutrition:{badge:"ERNÆRING",title:"Mat & balanse",description:"Ernæring, væske og daglige fôringsvaner er grunnlaget for kjæledyrets velvære.",button:"Les guider"},
+behaviour:{badge:"ATFERD",title:"Rolig liv",description:"Rutiner, mild oppmerksomhet og trygge områder hjelper kjæledyr å føle seg sikre og selvsikre.",button:"Spør community"},
+grooming:{badge:"GROOMING",title:"Pels & skjønnhet",description:"Grooming handler ikke bare om stil. Det støtter komfort, hudhelse og velvære.",button:"Partnertilbud"},
+dental:{badge:"TANNPLEIE",title:"Tenner & ånde",description:"Tannpleie støtter appetitt, komfort og langsiktig velvære.",button:"Tannguide"},
+fitness:{badge:"FITNESS",title:"Bevegelse & lek",description:"Mosjon, enrichment og lek hjelper kjæledyr å holde seg aktive, glade og mentalt stimulert.",button:"Aktive reiser"}
+},
+firstAid:{badge:"FØRSTEHJELP",title:"Gjenkjenn en nødsituasjon",descriptionOne:"Alle eiere bør kjenne viktige varselsignaler: pustevansker, kollaps, kraftig blødning, forgiftning, gjentatt oppkast, anfall eller plutselig manglende evne til å gå.",descriptionTwo:"Ved en nødsituasjon bør du ikke vente på råd online. Kontakt veterinær, akuttklinikk eller giftlinje for dyr umiddelbart.",button:"Finn lokal hjelp"},
+checklist:{title:"Wellness-sjekkliste",one:"Hold vaksinasjons- og mikrochipinformasjon oppdatert.",two:"Bestill regelmessige veterinær- og tannkontroller.",three:"Følg med på appetitt, drikking, atferd, pust og energi.",four:"Bruk trygge rutiner for grooming og hud- og pelspleie.",five:"Lagre kontaktinformasjon til en veterinær akuttklinikk på telefonen.",six:"Forbered et lite førstehjelpssett for hjem og reise.",seven:"Spør fagfolk før du bruker kosttilskudd, medisiner eller naturmidler."},
+emergency:{title:"Når du bør søke akutt hjelp",description:"Søk akutt veterinærhjelp ved pustevansker, mistanke om forgiftning, kollaps, sterke smerter, blødning, anfall, heteslag, traume, oppblåst mage, gjentatt oppkast eller enhver plutselig alvorlig endring.",button:"Finn veterinærer i nærheten"},
+club:{title:"Wellness-fordeler for Club-medlemmer",description:"PETS & DOGUE Club kobler medlemmer til wellnesspartnere, groomingtilbud, pleieguider, pet spa-fordeler og premiumanbefalinger.",grooming:"Groomingrabatter",spa:"Pet Spa-tilbud",guides:"Wellness-guider",nutrition:"Ernæringspartnere",vet:"Veterinærfordeler",qr:"Medlems-QR-kort",button:"Bli med i Club"},
+footer:{home:"Hjem",articles:"Artikler",places:"Steder",partners:"Partnere",club:"Club",privacy:"Personvern",contact:"Kontakt"},
+images:{hero:"Kjæledyrwellness",veterinary:"Veterinærkontroll",nutrition:"Kjæledyrernæring",behaviour:"Kjæledyratferd",grooming:"Grooming",dental:"Tannpleie",fitness:"Kjæledyrfitness",firstAid:"Førstehjelp"}
+},
+
+fi:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Lemmikkien hyvinvointi, ravitsemus, grooming, käyttäytyminen, ensiapu, eläinlääkärin huomio ja päivittäinen hoito PETS & DOGUE:lta."},
+hero:{title:"Wellness",description:"Luxury wellnesskeskus lemmikkien terveydelle, ravitsemukselle, groomingille, käyttäytymiselle, ensiavulle ja päivittäiselle hoidolle."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Toimituksen terveyshuomautus",description:"PETS & DOGUE Wellness tarjoaa vain yleistä lifestyle-tietoa. Se ei korvaa eläinlääkärin neuvoja. Lääketieteellisissä huolissa ota aina yhteyttä pätevään eläinlääkäriin."},
+cards:{
+vet:{badge:"ELÄINLÄÄKÄRI",title:"Eläinlääkärintarkastukset",description:"Säännölliset tarkastukset auttavat huomaamaan terveysmuutokset varhain ja pitämään lemmikin hyvässä kunnossa.",button:"Etsi eläinlääkäreitä"},
+nutrition:{badge:"RAVITSEMUS",title:"Ruoka & tasapaino",description:"Ravitsemus, nesteytys ja päivittäiset ruokintatavat ovat lemmikin hyvinvoinnin perusta.",button:"Lue oppaita"},
+behaviour:{badge:"KÄYTTÄYTYMINEN",title:"Rauhallinen elämä",description:"Rutiinit, lempeä huomio ja turvalliset tilat auttavat lemmikkejä tuntemaan olonsa varmaksi ja turvalliseksi.",button:"Kysy yhteisöltä"},
+grooming:{badge:"GROOMING",title:"Turkki & kauneus",description:"Grooming ei ole vain tyyliä. Se tukee mukavuutta, ihon terveyttä ja hyvinvointia.",button:"Kumppanitarjoukset"},
+dental:{badge:"HAMMASHOITO",title:"Hampaat & hengitys",description:"Hammashoito tukee ruokahalua, mukavuutta ja pitkäaikaista hyvinvointia.",button:"Hammasopas"},
+fitness:{badge:"FITNESS",title:"Liike & leikki",description:"Liikunta, enrichment ja leikki auttavat lemmikkejä pysymään aktiivisina, onnellisina ja henkisesti virkeinä.",button:"Aktiivinen matkailu"}
+},
+firstAid:{badge:"ENSIAPU",title:"Hätätilanteen tunnistaminen",descriptionOne:"Jokaisen omistajan tulisi tuntea tärkeät varoitusmerkit: hengitysvaikeus, romahtaminen, voimakas verenvuoto, myrkytys, toistuva oksentelu, kohtaukset tai äkillinen kävelykyvyttömyys.",descriptionTwo:"Hätätilanteessa älä odota online-neuvoja. Ota heti yhteyttä eläinlääkäriin, päivystysklinikkaan tai eläinmyrkytysten neuvontaan.",button:"Etsi paikallista apua"},
+checklist:{title:"Wellness-checklist",one:"Pidä rokotus- ja mikrosirutiedot ajan tasalla.",two:"Varaa säännölliset eläinlääkärin ja hammashoidon tarkastukset.",three:"Seuraa ruokahalua, juomista, käyttäytymistä, hengitystä ja energiaa.",four:"Käytä turvallisia grooming-, iho- ja turkinhoitorutiineja.",five:"Tallenna päivystävän eläinklinikan yhteystiedot puhelimeesi.",six:"Valmistele pieni ensiapupakkaus kotiin ja matkalle.",seven:"Kysy ammattilaiselta ennen lisäravinteiden, lääkkeiden tai luonnonhoitojen käyttöä."},
+emergency:{title:"Milloin hakea kiireellistä apua",description:"Hakeudu kiireellisesti eläinlääkäriin hengitysvaikeuksien, epäillyn myrkytyksen, romahtamisen, voimakkaan kivun, verenvuodon, kohtausten, lämpöhalvauksen, trauman, turvonneen vatsan, toistuvan oksentelun tai muun äkillisen vakavan muutoksen vuoksi.",button:"Etsi eläinlääkäreitä läheltä"},
+club:{title:"Wellness-edut Club-jäsenille",description:"PETS & DOGUE Club yhdistää jäsenet wellnesskumppaneihin, groomingtarjouksiin, hoito-oppaisiin, pet spa -etuihin ja premium-suosituksiin.",grooming:"Grooming-alennukset",spa:"Pet Spa -tarjoukset",guides:"Wellness-oppaat",nutrition:"Ravitsemuskumppanit",vet:"Eläinlääkärikumppanien edut",qr:"Jäsenen QR-kortti",button:"Liity Clubiin"},
+footer:{home:"Etusivu",articles:"Artikkelit",places:"Paikat",partners:"Kumppanit",club:"Club",privacy:"Tietosuoja",contact:"Yhteystiedot"},
+images:{hero:"Lemmikin wellness",veterinary:"Eläinlääkärintarkastus",nutrition:"Lemmikin ravitsemus",behaviour:"Lemmikin käyttäytyminen",grooming:"Grooming",dental:"Hammashoito",fitness:"Lemmikin fitness",firstAid:"Ensiapu"}
+},
+
+tr:{
+meta:{title:"Wellness | PETS & DOGUE",description:"Evcil hayvan sağlığı, beslenme, grooming, davranış, ilk yardım, veteriner farkındalığı ve günlük bakım PETS & DOGUE ile."},
+hero:{title:"Wellness",description:"Evcil hayvan sağlığı, beslenme, grooming, davranış, ilk yardım ve günlük bakım için luxury wellness merkezi."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Editoryal Sağlık Notu",description:"PETS & DOGUE Wellness yalnızca genel lifestyle bilgileri sunar. Veteriner tavsiyesinin yerine geçmez. Tıbbi endişelerde her zaman nitelikli bir veterinerle iletişime geçin."},
+cards:{
+vet:{badge:"VETERİNER",title:"Veteriner Kontrolleri",description:"Düzenli kontroller sağlık değişikliklerini erken fark etmeye ve evcil hayvanınızın rahatlığını korumaya yardımcı olur.",button:"Veteriner Bul"},
+nutrition:{badge:"BESLENME",title:"Yemek & Denge",description:"Beslenme, su tüketimi ve günlük besleme alışkanlıkları evcil hayvan wellnessının temelidir.",button:"Rehberleri Oku"},
+behaviour:{badge:"DAVRANIŞ",title:"Sakin Yaşam",description:"Rutin, nazik ilgi ve güvenli alanlar evcil hayvanların kendilerini güvende ve rahat hissetmelerine yardımcı olur.",button:"Topluluğa Sor"},
+grooming:{badge:"GROOMING",title:"Tüy & Güzellik",description:"Grooming sadece stil değildir. Konforu, cilt sağlığını ve iyi hissetmeyi destekler.",button:"Partner Teklifleri"},
+dental:{badge:"DİŞ BAKIMI",title:"Dişler & Nefes",description:"Diş bakımı iştahı, konforu ve uzun vadeli sağlığı destekler.",button:"Diş Rehberi"},
+fitness:{badge:"FITNESS",title:"Hareket & Oyun",description:"Egzersiz, enrichment ve oyun evcil hayvanların aktif, mutlu ve zihinsel olarak uyarılmış kalmasına yardımcı olur.",button:"Aktif Seyahat"}
+},
+firstAid:{badge:"İLK YARDIM",title:"Acil Durumu Tanıma",descriptionOne:"Her hayvan sahibi temel uyarı işaretlerini bilmelidir: solunum sorunu, bayılma, ciddi kanama, zehirlenme, tekrarlayan kusma, nöbet veya aniden yürüyememe.",descriptionTwo:"Acil durumda online tavsiye beklemeyin. Hemen veteriner, acil klinik veya hayvan zehir danışma hattıyla iletişime geçin.",button:"Yakındaki Yardımı Bul"},
+checklist:{title:"Wellness Checklist",one:"Aşı ve mikroçip bilgilerini güncel tutun.",two:"Düzenli veteriner ve diş kontrolleri yaptırın.",three:"İştah, su tüketimi, davranış, nefes ve enerji seviyesini takip edin.",four:"Güvenli grooming, cilt ve tüy bakım rutinleri kullanın.",five:"Acil veteriner kliniğinin bilgilerini telefonunuza kaydedin.",six:"Ev ve seyahat için küçük bir ilk yardım seti hazırlayın.",seven:"Takviye, ilaç veya doğal ürün kullanmadan önce uzmana danışın."},
+emergency:{title:"Ne Zaman Acil Yardım Alınmalı",description:"Solunum güçlüğü, zehirlenme şüphesi, bayılma, şiddetli ağrı, kanama, nöbet, sıcak çarpması, travma, şişmiş karın, tekrarlayan kusma veya ani ciddi bir değişiklikte acil veteriner yardımı alın.",button:"Yakındaki Veterinerleri Ara"},
+club:{title:"Club Üyeleri İçin Wellness Avantajları",description:"PETS & DOGUE Club üyeleri wellness partnerleri, grooming teklifleri, bakım rehberleri, pet spa avantajları ve premium önerilerle buluşturacak.",grooming:"Grooming İndirimleri",spa:"Pet Spa Teklifleri",guides:"Wellness Rehberleri",nutrition:"Beslenme Partnerleri",vet:"Veteriner Partner Avantajları",qr:"Üye QR Kartı",button:"Club'a Katıl"},
+footer:{home:"Ana Sayfa",articles:"Makaleler",places:"Yerler",partners:"Partnerler",club:"Club",privacy:"Gizlilik",contact:"İletişim"},
+images:{hero:"Evcil hayvan wellness",veterinary:"Veteriner kontrolü",nutrition:"Evcil hayvan beslenmesi",behaviour:"Evcil hayvan davranışı",grooming:"Grooming",dental:"Diş bakımı",fitness:"Evcil hayvan fitness",firstAid:"İlk yardım"}
+},
+
+ar:{
+meta:{title:"العافية | PETS & DOGUE",description:"صحة الحيوانات، التغذية، grooming، السلوك، الإسعافات الأولية، الوعي البيطري والرعاية اليومية من PETS & DOGUE."},
+hero:{title:"العافية",description:"مركز luxury لصحة الحيوانات والتغذية وgrooming والسلوك والإسعافات الأولية والرعاية اليومية."},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"ملاحظة صحية من التحرير",description:"يقدم PETS & DOGUE Wellness معلومات عامة وlifestyle فقط. ولا يحل محل الاستشارة البيطرية. عند وجود مشكلة طبية تواصل دائمًا مع طبيب بيطري مؤهل."},
+cards:{
+vet:{badge:"الطب البيطري",title:"الفحوص البيطرية",description:"تساعد الفحوص المنتظمة على اكتشاف التغيرات الصحية مبكرًا والحفاظ على راحة الحيوان.",button:"البحث عن أطباء بيطريين"},
+nutrition:{badge:"التغذية",title:"الغذاء & التوازن",description:"التغذية والترطيب وعادات الطعام اليومية هي أساس صحة الحيوان وراحته.",button:"قراءة الأدلة"},
+behaviour:{badge:"السلوك",title:"حياة هادئة",description:"الروتين والاهتمام اللطيف والمساحات الآمنة تساعد الحيوانات على الشعور بالثقة والأمان.",button:"اسأل المجتمع"},
+grooming:{badge:"GROOMING",title:"الفرو & الجمال",description:"Grooming ليس مجرد أسلوب. فهو يدعم الراحة وصحة الجلد والشعور الجيد.",button:"عروض الشركاء"},
+dental:{badge:"العناية بالأسنان",title:"الأسنان & رائحة الفم",description:"العناية بالأسنان تدعم الشهية والراحة والصحة على المدى الطويل.",button:"دليل الأسنان"},
+fitness:{badge:"اللياقة",title:"الحركة & اللعب",description:"التمرين والإثراء واللعب تساعد الحيوانات على البقاء نشطة وسعيدة ومحفزة ذهنيًا.",button:"سفر نشط"}
+},
+firstAid:{badge:"الإسعافات الأولية",title:"التعرف على حالة طارئة",descriptionOne:"يجب أن يعرف كل مالك أهم علامات التحذير: صعوبة التنفس، الانهيار، النزيف الشديد، التسمم، القيء المتكرر، النوبات أو عدم القدرة المفاجئة على المشي.",descriptionTwo:"في حالة الطوارئ لا تنتظر نصيحة عبر الإنترنت. تواصل فورًا مع طبيب بيطري أو عيادة طوارئ أو خط متخصص بتسمم الحيوانات.",button:"العثور على مساعدة قريبة"},
+checklist:{title:"قائمة Wellness",one:"حافظ على تحديث بيانات اللقاحات والـ microchip.",two:"احجز فحوصًا بيطرية وفحوص أسنان منتظمة.",three:"راقب الشهية والشرب والسلوك والتنفس والطاقة.",four:"استخدم روتينًا آمنًا لـ grooming والعناية بالجلد والفرو.",five:"احفظ بيانات عيادة بيطرية للطوارئ في هاتفك.",six:"جهز حقيبة إسعافات أولية صغيرة للمنزل والسفر.",seven:"استشر المختصين قبل استخدام المكملات أو الأدوية أو العلاجات الطبيعية."},
+emergency:{title:"متى تطلب مساعدة عاجلة",description:"اطلب مساعدة بيطرية عاجلة عند صعوبة التنفس أو الاشتباه بالتسمم أو الانهيار أو الألم الشديد أو النزيف أو النوبات أو ضربة الحرارة أو الإصابة أو انتفاخ البطن أو القيء المتكرر أو أي تغير خطير مفاجئ.",button:"ابحث عن أطباء بيطريين قريبين"},
+club:{title:"مزايا Wellness لأعضاء Club",description:"سيربط PETS & DOGUE Club الأعضاء بشركاء wellness وعروض grooming وأدلة الرعاية ومزايا pet spa وتوصيات premium.",grooming:"خصومات Grooming",spa:"عروض Pet Spa",guides:"أدلة Wellness",nutrition:"شركاء التغذية",vet:"مزايا شركاء بيطريين",qr:"بطاقة QR للعضو",button:"الانضمام إلى Club"},
+footer:{home:"الرئيسية",articles:"المقالات",places:"الأماكن",partners:"الشركاء",club:"Club",privacy:"الخصوصية",contact:"اتصل بنا"},
+images:{hero:"عافية الحيوانات",veterinary:"فحص بيطري",nutrition:"تغذية الحيوانات",behaviour:"سلوك الحيوانات",grooming:"Grooming",dental:"العناية بالأسنان",fitness:"لياقة الحيوانات",firstAid:"الإسعافات الأولية"}
+},
+
+hi:{
+meta:{title:"Wellness | PETS & DOGUE",description:"PETS & DOGUE से pet health, nutrition, grooming, behaviour, first aid, veterinary awareness और everyday care।"},
+hero:{title:"Wellness",description:"Pet health, nutrition, grooming, behaviour, first aid और everyday care के लिए एक luxury wellness center।"},
+page:{title:"PETS & DOGUE Wellness Center"},
+notice:{title:"Editorial Health Note",description:"PETS & DOGUE Wellness केवल general lifestyle information के लिए है। यह veterinary advice की जगह नहीं लेता। Medical concern होने पर हमेशा qualified veterinarian से संपर्क करें।"},
+cards:{
+vet:{badge:"VETERINARY",title:"Vet Check-Ups",description:"Regular check-ups health changes को जल्दी पहचानने और pet को comfortable रखने में मदद करते हैं।",button:"Vets खोजें"},
+nutrition:{badge:"NUTRITION",title:"Food & Balance",description:"Nutrition, hydration और daily feeding habits pet wellness की foundation हैं।",button:"Guides पढ़ें"},
+behaviour:{badge:"BEHAVIOUR",title:"Calm Living",description:"Routine, gentle attention और safe spaces pets को confident और secure महसूस करने में मदद करते हैं।",button:"Community से पूछें"},
+grooming:{badge:"GROOMING",title:"Coat & Beauty",description:"Grooming सिर्फ style नहीं है। यह comfort, skin health और confidence को support करता है।",button:"Partner Offers"},
+dental:{badge:"DENTAL CARE",title:"Teeth & Breath",description:"Dental care appetite, comfort और long-term wellbeing को support करता है।",button:"Dental Guide"},
+fitness:{badge:"FITNESS",title:"Movement & Play",description:"Exercise, enrichment और play pets को active, happy और mentally stimulated रहने में मदद करते हैं।",button:"Active Travel"}
+},
+firstAid:{badge:"FIRST AID",title:"Emergency Awareness",descriptionOne:"हर pet owner को warning signs पता होने चाहिए: breathing problems, collapse, severe bleeding, poisoning, repeated vomiting, seizures या अचानक चल न पाना।",descriptionTwo:"Emergency में online advice का इंतज़ार न करें। तुरंत veterinarian, emergency clinic या animal poison helpline से संपर्क करें।",button:"Local Help खोजें"},
+checklist:{title:"Wellness Checklist",one:"Vaccination और microchip information updated रखें।",two:"Regular vet और dental checks book करें।",three:"Appetite, drinking, behaviour, breathing और energy monitor करें।",four:"Safe grooming, skin और coat care routines अपनाएँ।",five:"Emergency veterinary clinic की details phone में save रखें।",six:"Home और travel के लिए छोटा first aid kit तैयार करें।",seven:"Supplements, medicines या natural remedies उपयोग करने से पहले professional से पूछें।"},
+emergency:{title:"Urgent Help कब लें",description:"Breathing difficulty, suspected poisoning, collapse, severe pain, bleeding, seizures, heatstroke, trauma, swollen abdomen, repeated vomiting या किसी भी अचानक गंभीर बदलाव पर तुरंत veterinary help लें।",button:"Nearby Vets खोजें"},
+club:{title:"Club Members के लिए Wellness Benefits",description:"PETS & DOGUE Club members को wellness partners, grooming offers, care guides, pet spa benefits और premium recommendations से जोड़ेगा।",grooming:"Grooming Discounts",spa:"Pet Spa Offers",guides:"Wellness Guides",nutrition:"Nutrition Partners",vet:"Vet Partner Benefits",qr:"Member QR Card",button:"Club Join करें"},
+footer:{home:"होम",articles:"Articles",places:"Places",partners:"Partners",club:"Club",privacy:"Privacy",contact:"संपर्क"},
+images:{hero:"Pet Wellness",veterinary:"Veterinary check-up",nutrition:"Pet nutrition",behaviour:"Pet behaviour",grooming:"Pet grooming",dental:"Pet dental care",fitness:"Pet fitness",firstAid:"Pet first aid"}
+}
+
 };
-
-(function () {
-  "use strict";
-
-  function setText(selector, key) {
-    const element =
-      document.querySelector(selector);
-
-    if (element) {
-      element.setAttribute(
-        "data-i18n",
-        key
-      );
-    }
-  }
-
-  function setMany(selector, keys) {
-    document
-      .querySelectorAll(selector)
-      .forEach((element, index) => {
-        if (keys[index]) {
-          element.setAttribute(
-            "data-i18n",
-            keys[index]
-          );
-        }
-      });
-  }
-
-  function getCurrentLanguageCode() {
-    if (
-      window.PetsDogueLanguage &&
-      typeof window.PetsDogueLanguage
-        .getCurrentLanguage === "function"
-    ) {
-      return window.PetsDogueLanguage
-        .getCurrentLanguage().code;
-    }
-
-    return "en";
-  }
-
-  function getDictionary() {
-    const code =
-      getCurrentLanguageCode();
-
-    return (
-      window.PetsDogueTranslations
-        .wellness[code] ||
-      window.PetsDogueTranslations
-        .wellness.en
-    );
-  }
-
-  function prepareHero() {
-    setText(
-      ".hero-content h1",
-      "wellness.hero.title"
-    );
-
-    setText(
-      ".hero-content p",
-      "wellness.hero.description"
-    );
-
-    setText(
-      ".section-title",
-      "wellness.center.title"
-    );
-  }
-
-  function prepareNotice() {
-    setText(
-      ".notice h2",
-      "wellness.notice.title"
-    );
-
-    setText(
-      ".notice p",
-      "wellness.notice.description"
-    );
-  }
-
-  function prepareCards() {
-    const cards =
-      document.querySelectorAll(
-        ".grid .card"
-      );
-
-    const cardKeys = [
-      {
-        badge:
-          "wellness.cards.veterinaryBadge",
-        title:
-          "wellness.cards.veterinaryTitle",
-        description:
-          "wellness.cards.veterinaryDescription",
-        button:
-          "wellness.cards.veterinaryButton"
-      },
-
-      {
-        badge:
-          "wellness.cards.nutritionBadge",
-        title:
-          "wellness.cards.nutritionTitle",
-        description:
-          "wellness.cards.nutritionDescription",
-        button:
-          "wellness.cards.nutritionButton"
-      },
-
-      {
-        badge:
-          "wellness.cards.behaviourBadge",
-        title:
-          "wellness.cards.behaviourTitle",
-        description:
-          "wellness.cards.behaviourDescription",
-        button:
-          "wellness.cards.behaviourButton"
-      },
-
-      {
-        badge:
-          "wellness.cards.groomingBadge",
-        title:
-          "wellness.cards.groomingTitle",
-        description:
-          "wellness.cards.groomingDescription",
-        button:
-          "wellness.cards.groomingButton"
-      },
-
-      {
-        badge:
-          "wellness.cards.dentalBadge",
-        title:
-          "wellness.cards.dentalTitle",
-        description:
-          "wellness.cards.dentalDescription",
-        button:
-          "wellness.cards.dentalButton"
-      },
-
-      {
-        badge:
-          "wellness.cards.fitnessBadge",
-        title:
-          "wellness.cards.fitnessTitle",
-        description:
-          "wellness.cards.fitnessDescription",
-        button:
-          "wellness.cards.fitnessButton"
-      }
-    ];
-
-    cards.forEach((card, index) => {
-      const keys =
-        cardKeys[index];
-
-      if (!keys) {
-        return;
-      }
-
-      const badge =
-        card.querySelector(".badge");
-
-      const title =
-        card.querySelector("h3");
-
-      const description =
-        card.querySelector("p");
-
-      const button =
-        card.querySelector(".btn");
-
-      if (badge) {
-        badge.setAttribute(
-          "data-i18n",
-          keys.badge
-        );
-      }
-
-      if (title) {
-        title.setAttribute(
-          "data-i18n",
-          keys.title
-        );
-      }
-
-      if (description) {
-        description.setAttribute(
-          "data-i18n",
-          keys.description
-        );
-      }
-
-      if (button) {
-        button.setAttribute(
-          "data-i18n",
-          keys.button
-        );
-      }
-    });
-  }
-
-  function prepareFirstAid() {
-    setText(
-      ".feature .badge",
-      "wellness.firstAid.badge"
-    );
-
-    setText(
-      ".feature-text h2",
-      "wellness.firstAid.title"
-    );
-
-    setMany(
-      ".feature-text p",
-      [
-        "wellness.firstAid.descriptionOne",
-        "wellness.firstAid.descriptionTwo"
-      ]
-    );
-
-    setText(
-      ".feature-text .btn",
-      "wellness.firstAid.button"
-    );
-  }
-
-  function prepareChecklist() {
-    setText(
-      ".checklist h2",
-      "wellness.checklist.title"
-    );
-
-    setMany(
-      ".checklist li",
-      [
-        "wellness.checklist.vaccination",
-        "wellness.checklist.checks",
-        "wellness.checklist.monitor",
-        "wellness.checklist.grooming",
-        "wellness.checklist.emergency",
-        "wellness.checklist.firstAid",
-        "wellness.checklist.medicines"
-      ]
-    );
-  }
-
-  function prepareUrgentHelp() {
-    setText(
-      ".emergency h2",
-      "wellness.urgent.title"
-    );
-
-    setText(
-      ".emergency p",
-      "wellness.urgent.description"
-    );
-
-    setText(
-      ".emergency .btn",
-      "wellness.urgent.button"
-    );
-  }
-
-  function prepareClub() {
-    setText(
-      ".club h2",
-      "wellness.club.title"
-    );
-
-    setText(
-      ".club > p",
-      "wellness.club.description"
-    );
-
-    setMany(
-      ".benefits .benefit",
-      [
-        "wellness.club.grooming",
-        "wellness.club.spa",
-        "wellness.club.guides",
-        "wellness.club.nutrition",
-        "wellness.club.vets",
-        "wellness.club.qr"
-      ]
-    );
-
-    setText(
-      ".club > .btn",
-      "wellness.club.button"
-    );
-  }
-
-  function prepareFooter() {
-    setText(
-      "footer p",
-      "common.footer.subtitle"
-    );
-
-    setMany(
-      ".footer-links a",
-      [
-        "wellness.footer.home",
-        "wellness.footer.articles",
-        "wellness.footer.places",
-        "wellness.footer.partners",
-        "wellness.footer.club",
-        "wellness.footer.privacy",
-        "wellness.footer.contact"
-      ]
-    );
-
-    setText(
-      ".admin-small",
-      "wellness.footer.admin"
-    );
-  }
-
-  function updatePageTitle() {
-    const dictionary =
-      getDictionary();
-
-    if (
-      dictionary &&
-      dictionary.meta &&
-      dictionary.meta.title
-    ) {
-      document.title =
-        dictionary.meta.title;
-    }
-  }
-
-  function preparePage() {
-    prepareHero();
-    prepareNotice();
-    prepareCards();
-    prepareFirstAid();
-    prepareChecklist();
-    prepareUrgentHelp();
-    prepareClub();
-    prepareFooter();
-    updatePageTitle();
-  }
-
-  window.addEventListener(
-    "petsdogue:languagechange",
-    function () {
-      window.setTimeout(
-        updatePageTitle,
-        0
-      );
-    }
-  );
-
-  if (
-    document.readyState === "loading"
-  ) {
-    document.addEventListener(
-      "DOMContentLoaded",
-      preparePage,
-      {
-        once: true
-      }
-    );
-  } else {
-    preparePage();
-  }
-})();
