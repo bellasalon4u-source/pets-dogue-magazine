@@ -3,79 +3,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Studio | PETS & DOGUE</title>
+
+<title data-i18n="aiStudio.meta.title">
+AI Studio | PETS & DOGUE
+</title>
+
+<meta
+name="description"
+content="Create PETS & DOGUE cover concepts, fashion editorials, royal portraits and imaginative pet photoshoots in AI Studio."
+data-i18n-attr="content:aiStudio.meta.description"
+>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-a{text-decoration:none;color:inherit}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
 
-header{background:white;border-bottom:1px solid #ddd;padding:18px;text-align:center;position:sticky;top:0;z-index:1000}
-.logo-small{font-size:18px;color:#b78a2e}
-.logo-big{font-size:50px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:4px}
+body{
+background:#f8f7f3;
+color:#111;
+}
 
-.hero{background:#111;color:white;text-align:center;padding:90px 20px;border-bottom:4px solid #c89b3c}
-.hero h1{font-family:Georgia,serif;font-size:70px;color:#d6aa45;margin-bottom:18px}
-.hero p{font-size:21px;line-height:1.8;max-width:900px;margin:auto}
+a{
+text-decoration:none;
+color:inherit;
+}
 
-.section{max-width:1400px;margin:auto;padding:70px 20px}
-.section-title{font-size:52px;font-family:Georgia,serif;text-align:center;margin-bottom:18px}
-.gold-line{width:90px;height:3px;background:#c89b3c;margin:0 auto 45px}
+header{
+background:white;
+border-bottom:1px solid #ddd;
+padding:18px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
 
-.studio{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
-.panel{background:white;border:2px solid #111;border-radius:38px;padding:30px;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.panel h2{font-family:Georgia,serif;font-size:38px;margin-bottom:18px}
-label{display:block;font-weight:bold;margin:18px 0 8px}
-input,select,textarea{width:100%;padding:15px;border:1px solid #ccc;border-radius:16px;font-size:16px}
-textarea{min-height:100px;resize:vertical}
-button{background:#111;color:white;border:none;padding:16px 26px;border-radius:999px;font-weight:bold;cursor:pointer;margin-top:20px}
-.gold{background:#c89b3c}
+.logo-small{
+font-size:18px;
+color:#b78a2e;
+}
 
-.preview{background:#111;border-radius:35px;min-height:650px;position:relative;overflow:hidden;color:white;display:flex;align-items:center;justify-content:center;text-align:center}
-.preview-bg{position:absolute;inset:0;background:linear-gradient(135deg,#111,#c89b3c)}
-.preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75}
-.preview-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.12))}
-.preview-text{position:relative;z-index:2;padding:32px}
-.preview-small{font-size:22px;color:#d6aa45}
-.preview-title{font-family:Georgia,serif;font-size:72px;letter-spacing:4px;color:#d6aa45;line-height:.9}
-.preview-style{font-size:18px;margin-top:18px;line-height:1.6}
-.preview-pet{font-family:Georgia,serif;font-size:44px;margin-top:35px}
-.preview-line{font-size:18px;margin-top:15px;line-height:1.6}
+.logo-big{
+font-size:50px;
+font-family:Georgia,serif;
+font-weight:bold;
+color:#c89b3c;
+letter-spacing:4px;
+}
 
-.styles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:20px}
-.style-card{background:#f8f7f3;border:2px solid #111;border-radius:22px;padding:18px;text-align:center;font-weight:bold;cursor:pointer}
-.style-card.active{background:#111;color:white}
+.hero{
+background:#111;
+color:white;
+text-align:center;
+padding:90px 20px;
+border-bottom:4px solid #c89b3c;
+}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;margin-top:45px}
-.feature{background:white;border:2px solid #111;border-radius:34px;padding:28px;box-shadow:0 12px 35px rgba(0,0,0,.08)}
-.feature h3{font-family:Georgia,serif;font-size:30px;margin-bottom:12px}
-.feature p{color:#555;line-height:1.8}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:14px}
+.hero h1{
+font-family:Georgia,serif;
+font-size:70px;
+color:#d6aa45;
+margin-bottom:18px;
+}
 
-.gallery{background:#111;color:white;border-radius:44px;padding:55px 30px;text-align:center;margin-top:80px}
-.gallery h2{font-family:Georgia,serif;font-size:50px;color:#d6aa45;margin-bottom:18px}
-.gallery p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:35px}
-.gallery-card{background:white;color:#111;border-radius:25px;padding:24px;font-weight:bold}
+.hero p{
+font-size:21px;
+line-height:1.8;
+max-width:900px;
+margin:auto;
+}
 
-.club{background:linear-gradient(135deg,#111,#2b2417);color:white;border-radius:44px;padding:55px 30px;text-align:center;border:3px solid #c89b3c;margin-top:80px}
-.club h2{font-family:Georgia,serif;font-size:50px;color:#d6aa45;margin-bottom:18px}
-.club p{font-size:20px;line-height:1.8;max-width:850px;margin:auto;color:#eee}
-.club-benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:35px}
-.benefit{background:white;color:#111;border-radius:24px;padding:22px;font-weight:bold}
+.section{
+max-width:1400px;
+margin:auto;
+padding:70px 20px;
+}
 
-footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;border-top:1px solid #ddd}
-.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin-top:20px}
-.footer-links a{text-decoration:none;color:#666;font-size:14px}
-.admin-small{display:block;margin-top:22px;font-size:11px;color:#999;text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+.section-title{
+font-size:52px;
+font-family:Georgia,serif;
+text-align:center;
+margin-bottom:18px;
+}
+
+.gold-line{
+width:90px;
+height:3px;
+background:#c89b3c;
+margin:0 auto 45px;
+}
+
+.studio{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+align-items:start;
+}
+
+.panel{
+background:white;
+border:2px solid #111;
+border-radius:38px;
+padding:30px;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.panel h2{
+font-family:Georgia,serif;
+font-size:38px;
+margin-bottom:18px;
+}
+
+label{
+display:block;
+font-weight:bold;
+margin:18px 0 8px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:15px;
+border:1px solid #ccc;
+border-radius:16px;
+font-size:16px;
+}
+
+textarea{
+min-height:100px;
+resize:vertical;
+}
+
+button{
+background:#111;
+color:white;
+border:none;
+padding:16px 26px;
+border-radius:999px;
+font-weight:bold;
+cursor:pointer;
+margin-top:20px;
+}
+
+.gold{
+background:#c89b3c;
+}
+
+.preview{
+background:#111;
+border-radius:35px;
+min-height:650px;
+position:relative;
+overflow:hidden;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.preview-bg{
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,#111,#c89b3c);
+}
+
+.preview img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:.75;
+}
+
+.preview-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.12));
+}
+
+.preview-text{
+position:relative;
+z-index:2;
+padding:32px;
+}
+
+.preview-small{
+font-size:22px;
+color:#d6aa45;
+}
+
+.preview-title{
+font-family:Georgia,serif;
+font-size:72px;
+letter-spacing:4px;
+color:#d6aa45;
+line-height:.9;
+}
+
+.preview-style{
+font-size:18px;
+margin-top:18px;
+line-height:1.6;
+}
+
+.preview-pet{
+font-family:Georgia,serif;
+font-size:44px;
+margin-top:35px;
+}
+
+.preview-line{
+font-size:18px;
+margin-top:15px;
+line-height:1.6;
+}
+
+.styles{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:14px;
+margin-top:20px;
+}
+
+.style-card{
+background:#f8f7f3;
+border:2px solid #111;
+border-radius:22px;
+padding:18px;
+text-align:center;
+font-weight:bold;
+cursor:pointer;
+}
+
+.style-card.active{
+background:#111;
+color:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:26px;
+margin-top:45px;
+}
+
+.feature{
+background:white;
+border:2px solid #111;
+border-radius:34px;
+padding:28px;
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.feature h3{
+font-family:Georgia,serif;
+font-size:30px;
+margin-bottom:12px;
+}
+
+.feature p{
+color:#555;
+line-height:1.8;
+}
+
+.badge{
+display:inline-block;
+background:#c89b3c;
+color:white;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:bold;
+margin-bottom:14px;
+}
+
+.gallery{
+background:#111;
+color:white;
+border-radius:44px;
+padding:55px 30px;
+text-align:center;
+margin-top:80px;
+}
+
+.gallery h2{
+font-family:Georgia,serif;
+font-size:50px;
+color:#d6aa45;
+margin-bottom:18px;
+}
+
+.gallery p{
+font-size:20px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-top:35px;
+}
+
+.gallery-card{
+background:white;
+color:#111;
+border-radius:25px;
+padding:24px;
+font-weight:bold;
+}
+
+.club{
+background:linear-gradient(135deg,#111,#2b2417);
+color:white;
+border-radius:44px;
+padding:55px 30px;
+text-align:center;
+border:3px solid #c89b3c;
+margin-top:80px;
+}
+
+.club h2{
+font-family:Georgia,serif;
+font-size:50px;
+color:#d6aa45;
+margin-bottom:18px;
+}
+
+.club p{
+font-size:20px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+color:#eee;
+}
+
+.club-benefits{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-top:35px;
+}
+
+.benefit{
+background:white;
+color:#111;
+border-radius:24px;
+padding:22px;
+font-weight:bold;
+}
+
+footer{
+margin-top:70px;
+padding:45px 20px;
+background:white;
+text-align:center;
+border-top:1px solid #ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.footer-links a{
+text-decoration:none;
+color:#666;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+margin-top:22px;
+font-size:11px;
+color:#999;
+text-decoration:none;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+html[dir="rtl"] body{
+text-align:right;
+}
+
+html[dir="rtl"] header,
+html[dir="rtl"] .hero,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .preview,
+html[dir="rtl"] .style-card,
+html[dir="rtl"] .gallery,
+html[dir="rtl"] .club,
+html[dir="rtl"] footer{
+text-align:center;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] select,
+html[dir="rtl"] textarea{
+text-align:right;
+}
+
+html[dir="rtl"] .footer-links{
+direction:rtl;
+}
 
 @media(max-width:900px){
-.studio{grid-template-columns:1fr}
-.hero h1{font-size:44px}
-.section-title{font-size:40px}
-.preview{min-height:520px}
-.preview-title{font-size:54px}
-.logo-big{font-size:40px}
+
+.studio{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:44px;
+}
+
+.section-title{
+font-size:40px;
+}
+
+.preview{
+min-height:520px;
+}
+
+.preview-title{
+font-size:54px;
+}
+
+.logo-big{
+font-size:40px;
+}
+
 }
 </style>
 </head>
@@ -83,77 +452,286 @@ footer{margin-top:70px;padding:45px 20px;background:white;text-align:center;bord
 <body>
 
 <header>
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
+
+<div
+class="logo-small"
+translate="no"
+data-pd-brand="true">
+pets &
+</div>
+
+<div
+class="logo-big"
+translate="no"
+data-pd-brand="true">
+DOGUE
+</div>
+
 </header>
 
 <section class="hero">
-<h1>AI Studio</h1>
-<p>
+
+<h1 data-i18n="aiStudio.hero.title">
+AI Studio
+</h1>
+
+<p data-i18n="aiStudio.hero.description">
 Create luxury PETS & DOGUE cover concepts, fashion editorials, royal portraits and dream photoshoots for your pet.
 </p>
+
 </section>
 
 <section class="section">
 
-<h2 class="section-title">Create Your Magazine Moment</h2>
+<h2
+class="section-title"
+data-i18n="aiStudio.create.title">
+Create Your Magazine Moment
+</h2>
+
 <div class="gold-line"></div>
 
 <div class="studio">
 
 <div class="panel">
-<h2>AI Cover Generator</h2>
 
-<label>Pet Name</label>
-<input id="petName" type="text" placeholder="Miso" value="Miso" oninput="updatePreview()">
+<h2 data-i18n="aiStudio.generator.title">
+AI Cover Generator
+</h2>
 
-<label>Upload Pet Photo</label>
-<input id="petPhoto" type="file" accept="image/*" onchange="previewPhoto(event)">
+<label
+for="petName"
+data-i18n="aiStudio.generator.petName">
+Pet Name
+</label>
 
-<label>AI Experience</label>
-<select id="experience" onchange="updatePreview()">
-<option>Luxury DOGUE Cover</option>
-<option>Royal Portrait</option>
-<option>Vogue Editorial</option>
-<option>Fashion Week</option>
-<option>Santorini Summer</option>
-<option>Winter Glamour</option>
-<option>Christmas Edition</option>
-<option>Halloween Edition</option>
-<option>Galaxy Dream</option>
-<option>Floral Fantasy</option>
+<input
+id="petName"
+type="text"
+placeholder="Miso"
+value="Miso"
+oninput="updatePreview()"
+>
+
+<label
+for="petPhoto"
+data-i18n="aiStudio.generator.upload">
+Upload Pet Photo
+</label>
+
+<input
+id="petPhoto"
+type="file"
+accept="image/*"
+aria-label="Upload Pet Photo"
+data-i18n-attr="aria-label:aiStudio.generator.upload"
+onchange="previewPhoto(event)"
+>
+
+<label
+for="experience"
+data-i18n="aiStudio.generator.experience">
+AI Experience
+</label>
+
+<select
+id="experience"
+onchange="updatePreview()">
+
+<option
+value="Luxury DOGUE Cover"
+data-i18n="aiStudio.styles.luxury">
+Luxury DOGUE Cover
+</option>
+
+<option
+value="Royal Portrait"
+data-i18n="aiStudio.styles.royal">
+Royal Portrait
+</option>
+
+<option
+value="Vogue Editorial"
+data-i18n="aiStudio.styles.editorial">
+Fashion Editorial
+</option>
+
+<option
+value="Fashion Week"
+data-i18n="aiStudio.styles.fashionWeek">
+Fashion Week
+</option>
+
+<option
+value="Santorini Summer"
+data-i18n="aiStudio.styles.santorini">
+Santorini Summer
+</option>
+
+<option
+value="Winter Glamour"
+data-i18n="aiStudio.styles.winter">
+Winter Glamour
+</option>
+
+<option
+value="Christmas Edition"
+data-i18n="aiStudio.styles.christmas">
+Christmas Edition
+</option>
+
+<option
+value="Halloween Edition"
+data-i18n="aiStudio.styles.halloween">
+Halloween Edition
+</option>
+
+<option
+value="Galaxy Dream"
+data-i18n="aiStudio.styles.galaxy">
+Galaxy Dream
+</option>
+
+<option
+value="Floral Fantasy"
+data-i18n="aiStudio.styles.floral">
+Floral Fantasy
+</option>
+
 </select>
 
-<label>Cover Line</label>
-<textarea id="coverLine" oninput="updatePreview()">The next PETS & DOGUE cover star</textarea>
+<label
+for="coverLine"
+data-i18n="aiStudio.generator.coverLine">
+Cover Line
+</label>
 
-<button class="gold" onclick="updatePreview()">Generate Preview</button>
-<button onclick="alert('Future version: this will connect to real AI image generation, member accounts and saved galleries.')">Create AI Image</button>
+<textarea
+id="coverLine"
+oninput="markCoverLineEdited();updatePreview()">
+</textarea>
+
+<button
+type="button"
+class="gold"
+onclick="updatePreview()"
+data-i18n="aiStudio.generator.previewButton">
+Generate Preview
+</button>
+
+<button
+type="button"
+onclick="showFutureMessage()"
+data-i18n="aiStudio.generator.createButton">
+Create AI Image
+</button>
 
 <div class="styles">
-<div class="style-card active" onclick="quickStyle(this,'Luxury DOGUE Cover')">DOGUE Cover</div>
-<div class="style-card" onclick="quickStyle(this,'Royal Portrait')">Royal</div>
-<div class="style-card" onclick="quickStyle(this,'Fashion Week')">Fashion</div>
-<div class="style-card" onclick="quickStyle(this,'Santorini Summer')">Santorini</div>
-<div class="style-card" onclick="quickStyle(this,'Christmas Edition')">Christmas</div>
-<div class="style-card" onclick="quickStyle(this,'Galaxy Dream')">Galaxy</div>
+
+<div
+class="style-card active"
+data-style="Luxury DOGUE Cover"
+onclick="quickStyle(this,'Luxury DOGUE Cover')"
+data-i18n="aiStudio.quick.cover">
+DOGUE Cover
 </div>
+
+<div
+class="style-card"
+data-style="Royal Portrait"
+onclick="quickStyle(this,'Royal Portrait')"
+data-i18n="aiStudio.quick.royal">
+Royal
+</div>
+
+<div
+class="style-card"
+data-style="Fashion Week"
+onclick="quickStyle(this,'Fashion Week')"
+data-i18n="aiStudio.quick.fashion">
+Fashion
+</div>
+
+<div
+class="style-card"
+data-style="Santorini Summer"
+onclick="quickStyle(this,'Santorini Summer')"
+data-i18n="aiStudio.quick.santorini">
+Santorini
+</div>
+
+<div
+class="style-card"
+data-style="Christmas Edition"
+onclick="quickStyle(this,'Christmas Edition')"
+data-i18n="aiStudio.quick.christmas">
+Christmas
+</div>
+
+<div
+class="style-card"
+data-style="Galaxy Dream"
+onclick="quickStyle(this,'Galaxy Dream')"
+data-i18n="aiStudio.quick.galaxy">
+Galaxy
+</div>
+
+</div>
+
 </div>
 
 <div class="panel">
-<h2>Live Preview</h2>
 
-<div class="preview" id="preview">
+<h2 data-i18n="aiStudio.preview.title">
+Live Preview
+</h2>
+
+<div
+class="preview"
+id="preview">
+
 <div class="preview-bg"></div>
+
 <div class="preview-overlay"></div>
+
 <div class="preview-text">
-<div class="preview-small">pets &</div>
-<div class="preview-title">DOGUE</div>
-<div class="preview-style" id="styleText">LUXURY DOGUE COVER</div>
-<div class="preview-pet" id="previewPet">Miso</div>
-<div class="preview-line" id="previewLine">The next PETS & DOGUE cover star</div>
+
+<div
+class="preview-small"
+translate="no"
+data-pd-brand="true">
+pets &
 </div>
+
+<div
+class="preview-title"
+translate="no"
+data-pd-brand="true">
+DOGUE
 </div>
+
+<div
+class="preview-style"
+id="styleText">
+LUXURY DOGUE COVER
+</div>
+
+<div
+class="preview-pet"
+id="previewPet">
+Miso
+</div>
+
+<div
+class="preview-line"
+id="previewLine">
+The next PETS & DOGUE cover star
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -161,134 +739,565 @@ Create luxury PETS & DOGUE cover concepts, fashion editorials, royal portraits a
 <div class="grid">
 
 <div class="feature">
-<span class="badge">COVER</span>
-<h3>AI Cover Generator</h3>
-<p>Create a PETS & DOGUE-style cover concept for your pet with magazine title, cover line and premium look.</p>
+
+<span
+class="badge"
+data-i18n="aiStudio.features.cover.badge">
+COVER
+</span>
+
+<h3 data-i18n="aiStudio.features.cover.title">
+AI Cover Generator
+</h3>
+
+<p data-i18n="aiStudio.features.cover.description">
+Create a PETS & DOGUE-style cover concept for your pet with magazine title, cover line and premium look.
+</p>
+
 </div>
 
 <div class="feature">
-<span class="badge">FASHION</span>
-<h3>AI Fashion Stylist</h3>
-<p>Try future fashion concepts: bows, collars, coats, luxury accessories and editorial styling.</p>
+
+<span
+class="badge"
+data-i18n="aiStudio.features.fashion.badge">
+FASHION
+</span>
+
+<h3 data-i18n="aiStudio.features.fashion.title">
+AI Fashion Stylist
+</h3>
+
+<p data-i18n="aiStudio.features.fashion.description">
+Try future fashion concepts: bows, collars, coats, luxury accessories and editorial styling.
+</p>
+
 </div>
 
 <div class="feature">
-<span class="badge">BACKGROUNDS</span>
-<h3>Dream Locations</h3>
-<p>Imagine your pet in Paris, Santorini, a royal palace, winter snow, a yacht or golden studio.</p>
+
+<span
+class="badge"
+data-i18n="aiStudio.features.locations.badge">
+BACKGROUNDS
+</span>
+
+<h3 data-i18n="aiStudio.features.locations.title">
+Dream Locations
+</h3>
+
+<p data-i18n="aiStudio.features.locations.description">
+Imagine your pet in Paris, Santorini, a royal palace, winter snow, a yacht or golden studio.
+</p>
+
 </div>
 
 <div class="feature">
-<span class="badge">CONTESTS</span>
-<h3>Become A Cover Star</h3>
-<p>Future AI covers can be saved, shared and submitted to PETS & DOGUE cover star contests.</p>
+
+<span
+class="badge"
+data-i18n="aiStudio.features.contests.badge">
+CONTESTS
+</span>
+
+<h3 data-i18n="aiStudio.features.contests.title">
+Become A Cover Star
+</h3>
+
+<p data-i18n="aiStudio.features.contests.description">
+Future AI covers can be saved, shared and submitted to PETS & DOGUE cover star contests.
+</p>
+
 </div>
 
 </div>
 
 <div class="gallery">
 
-<h2>Your Future AI Gallery</h2>
+<h2 data-i18n="aiStudio.gallery.title">
+Your Future AI Gallery
+</h2>
 
-<p>
+<p data-i18n="aiStudio.gallery.description">
 In the full version, members will save their AI photoshoots, create multiple magazine covers,
 enter contests and build a premium pet profile.
 </p>
 
 <div class="gallery-grid">
-<div class="gallery-card">Royal Portraits</div>
-<div class="gallery-card">DOGUE Covers</div>
-<div class="gallery-card">Fashion Editorials</div>
-<div class="gallery-card">Holiday Editions</div>
-<div class="gallery-card">Travel Shoots</div>
-<div class="gallery-card">Saved Gallery</div>
+
+<div
+class="gallery-card"
+data-i18n="aiStudio.gallery.royal">
+Royal Portraits
+</div>
+
+<div
+class="gallery-card"
+data-i18n="aiStudio.gallery.covers">
+DOGUE Covers
+</div>
+
+<div
+class="gallery-card"
+data-i18n="aiStudio.gallery.fashion">
+Fashion Editorials
+</div>
+
+<div
+class="gallery-card"
+data-i18n="aiStudio.gallery.holiday">
+Holiday Editions
+</div>
+
+<div
+class="gallery-card"
+data-i18n="aiStudio.gallery.travel">
+Travel Shoots
+</div>
+
+<div
+class="gallery-card"
+data-i18n="aiStudio.gallery.saved">
+Saved Gallery
+</div>
+
 </div>
 
 </div>
 
 <div class="club">
 
-<h2>AI Studio For Club Members</h2>
+<h2 data-i18n="aiStudio.club.title">
+AI Studio For Club Members
+</h2>
 
-<p>
+<p data-i18n="aiStudio.club.description">
 PETS & DOGUE Club members will unlock premium styles, saved galleries, contest entries,
 cover star priority and exclusive AI editorial experiences.
 </p>
 
 <div class="club-benefits">
-<div class="benefit">Premium AI Styles</div>
-<div class="benefit">Saved Gallery</div>
-<div class="benefit">Cover Star Submission</div>
-<div class="benefit">Contest Entry</div>
-<div class="benefit">Member Badge</div>
-<div class="benefit">Partner Offers</div>
+
+<div
+class="benefit"
+data-i18n="aiStudio.club.styles">
+Premium AI Styles
+</div>
+
+<div
+class="benefit"
+data-i18n="aiStudio.club.gallery">
+Saved Gallery
+</div>
+
+<div
+class="benefit"
+data-i18n="aiStudio.club.cover">
+Cover Star Submission
+</div>
+
+<div
+class="benefit"
+data-i18n="aiStudio.club.contest">
+Contest Entry
+</div>
+
+<div
+class="benefit"
+data-i18n="aiStudio.club.badge">
+Member Badge
+</div>
+
+<div
+class="benefit"
+data-i18n="aiStudio.club.offers">
+Partner Offers
+</div>
+
 </div>
 
 <br><br>
-<a href="club.html" style="display:inline-block;background:#c89b3c;color:white;padding:15px 24px;border-radius:999px;font-weight:bold;">Join The Club</a>
+
+<a
+href="club.html"
+style="display:inline-block;background:#c89b3c;color:white;padding:15px 24px;border-radius:999px;font-weight:bold;"
+data-i18n="aiStudio.club.join">
+Join The Club
+</a>
 
 </div>
 
 </section>
 
 <footer>
-<h2>PETS & DOGUE</h2>
-<p>The International Luxury Animal Magazine</p>
+
+<h2
+translate="no"
+data-pd-brand="true">
+PETS & DOGUE
+</h2>
+
+<p data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
 
 <div class="footer-links">
-<a href="index.html">Home</a>
-<a href="cover-studio.html">Cover Studio</a>
-<a href="cover-stars.html">Cover Stars</a>
-<a href="contests.html">Contests</a>
-<a href="club.html">Club</a>
-<a href="privacy.html">Privacy</a>
-<a href="contact.html">Contact</a>
+
+<a
+href="index.html"
+data-i18n="aiStudio.footer.home">
+Home
+</a>
+
+<a
+href="cover-studio.html"
+data-i18n="aiStudio.footer.coverStudio">
+Cover Studio
+</a>
+
+<a
+href="cover-stars.html"
+data-i18n="aiStudio.footer.coverStars">
+Cover Stars
+</a>
+
+<a
+href="contests.html"
+data-i18n="aiStudio.footer.contests">
+Contests
+</a>
+
+<a
+href="club.html"
+data-i18n="aiStudio.footer.club">
+Club
+</a>
+
+<a
+href="privacy.html"
+data-i18n="aiStudio.footer.privacy">
+Privacy
+</a>
+
+<a
+href="contact.html"
+data-i18n="aiStudio.footer.contact">
+Contact
+</a>
+
 </div>
 
-<a href="admin.html" class="admin-small">Admin</a>
+<a
+href="admin.html"
+class="admin-small"
+data-i18n="common.footer.admin">
+Admin
+</a>
+
 </footer>
 
-<script>
-function updatePreview(){
-const petName = document.getElementById("petName").value || "Your Pet";
-const style = document.getElementById("experience").value;
-const line = document.getElementById("coverLine").value || "The next PETS & DOGUE cover star";
+<script src="/i18n/common.js?v=2"></script>
+<script src="/i18n/ai-studio.js?v=1"></script>
+<script src="/i18n/engine.js?v=3"></script>
 
-document.getElementById("previewPet").textContent = petName;
-document.getElementById("styleText").textContent = style.toUpperCase();
-document.getElementById("previewLine").textContent = line;
+<script>
+
+let coverLineEdited = false;
+
+function getAIStudioLanguage(){
+
+return (
+localStorage.getItem(
+"pets_dogue_language"
+) || "en"
+);
+
+}
+
+function getAIStudioBundle(){
+
+const root =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.aiStudio;
+
+if(!root){
+return null;
+}
+
+return (
+root[getAIStudioLanguage()] ||
+root.en
+);
+
+}
+
+function aiStudioT(path,fallback){
+
+const bundle =
+getAIStudioBundle();
+
+if(!bundle){
+return fallback;
+}
+
+let value = bundle;
+
+path.split(".").forEach(key => {
+
+if(
+value &&
+Object.prototype.hasOwnProperty.call(
+value,
+key
+)
+){
+
+value = value[key];
+
+}else{
+
+value = undefined;
+
+}
+
+});
+
+return typeof value === "string"
+? value
+: fallback;
+
+}
+
+function styleTranslationKey(style){
+
+const map = {
+
+"Luxury DOGUE Cover":
+"styles.luxury",
+
+"Royal Portrait":
+"styles.royal",
+
+"Vogue Editorial":
+"styles.editorial",
+
+"Fashion Week":
+"styles.fashionWeek",
+
+"Santorini Summer":
+"styles.santorini",
+
+"Winter Glamour":
+"styles.winter",
+
+"Christmas Edition":
+"styles.christmas",
+
+"Halloween Edition":
+"styles.halloween",
+
+"Galaxy Dream":
+"styles.galaxy",
+
+"Floral Fantasy":
+"styles.floral"
+
+};
+
+return map[style] || "";
+
+}
+
+function getTranslatedStyle(style){
+
+const key =
+styleTranslationKey(style);
+
+return key
+? aiStudioT(key,style)
+: style;
+
+}
+
+function markCoverLineEdited(){
+
+coverLineEdited = true;
+
+}
+
+function setDefaultCoverLine(){
+
+const textarea =
+document.getElementById(
+"coverLine"
+);
+
+textarea.value =
+aiStudioT(
+"preview.defaultLine",
+"The next PETS & DOGUE cover star"
+);
+
+}
+
+function updatePreview(){
+
+const petName =
+document
+.getElementById("petName")
+.value
+.trim() ||
+aiStudioT(
+"preview.yourPet",
+"Your Pet"
+);
+
+const style =
+document
+.getElementById("experience")
+.value;
+
+const line =
+document
+.getElementById("coverLine")
+.value
+.trim() ||
+aiStudioT(
+"preview.defaultLine",
+"The next PETS & DOGUE cover star"
+);
+
+document
+.getElementById("previewPet")
+.textContent =
+petName;
+
+document
+.getElementById("styleText")
+.textContent =
+getTranslatedStyle(style)
+.toUpperCase();
+
+document
+.getElementById("previewLine")
+.textContent =
+line;
+
 }
 
 function previewPhoto(event){
-const file = event.target.files[0];
-if(!file){return;}
 
-const reader = new FileReader();
+const file =
+event.target.files[0];
 
-reader.onload = function(e){
-let oldImg = document.querySelector(".preview img");
-if(oldImg){oldImg.remove();}
+if(!file){
+return;
+}
 
-const img = document.createElement("img");
-img.src = e.target.result;
-document.getElementById("preview").prepend(img);
+const reader =
+new FileReader();
+
+reader.onload =
+function(e){
+
+const oldImg =
+document
+.querySelector(".preview img");
+
+if(oldImg){
+oldImg.remove();
+}
+
+const img =
+document.createElement("img");
+
+img.src =
+e.target.result;
+
+img.alt =
+aiStudioT(
+"preview.uploadedAlt",
+"Uploaded pet photo"
+);
+
+document
+.getElementById("preview")
+.prepend(img);
+
 };
 
 reader.readAsDataURL(file);
+
 }
 
 function quickStyle(element,style){
-document.querySelectorAll(".style-card").forEach(card => card.classList.remove("active"));
-element.classList.add("active");
-document.getElementById("experience").value = style;
+
+document
+.querySelectorAll(".style-card")
+.forEach(card => {
+
+card.classList.remove(
+"active"
+);
+
+});
+
+element.classList.add(
+"active"
+);
+
+document
+.getElementById("experience")
+.value =
+style;
+
 updatePreview();
+
+}
+
+function showFutureMessage(){
+
+alert(
+aiStudioT(
+"messages.future",
+"Future version: this will connect to real AI image generation, member accounts and saved galleries."
+)
+);
+
+}
+
+window.addEventListener(
+"languagechange",
+() => {
+
+if(!coverLineEdited){
+setDefaultCoverLine();
 }
 
 updatePreview();
+
+const previewImage =
+document.querySelector(
+".preview img"
+);
+
+if(previewImage){
+
+previewImage.alt =
+aiStudioT(
+"preview.uploadedAlt",
+"Uploaded pet photo"
+);
+
+}
+
+}
+);
+
+setDefaultCoverLine();
+updatePreview();
+
 </script>
 
-
-<!-- PETS & DOGUE UNIFIED 23-LANGUAGE SYSTEM -->
-<script src="translations.js"></script>
 </body>
 </html>
