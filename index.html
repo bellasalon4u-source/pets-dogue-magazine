@@ -6,6 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="PETS &amp; DOGUE — The International Luxury Animal Magazine" name="description"/>
 <title>PETS &amp; DOGUE</title>
+
 <style>
 :root{
 --black:#070707;
@@ -402,7 +403,7 @@ max-width:750px;
 color:#eee;
 }
 
-/* COVER STAR — APPROVED */
+/* COVER STAR */
 
 .cover-star-card{
 position:relative;
@@ -415,15 +416,20 @@ justify-content:center;
 isolation:isolate;
 }
 
-/* MAGAZINE COVER GRID */
+/* 7 MAGAZINE COVERS - NO EMPTY CELLS */
 
 .cover-star-mosaic{
 position:absolute;
 inset:0;
 z-index:0;
 display:grid;
-grid-template-columns:1.18fr .78fr 1.16fr .88fr;
-grid-template-rows:1fr .82fr 1fr;
+grid-template-columns:1.15fr .85fr 1.05fr;
+grid-template-rows:1.08fr .92fr 1fr 1fr;
+grid-template-areas:
+"a b c"
+"a d c"
+"e d f"
+"e g f";
 gap:4px;
 padding:4px;
 background:#fff;
@@ -432,27 +438,24 @@ background:#fff;
 .cover-star-cell{
 position:relative;
 overflow:hidden;
-background:#f6f2e9;
+background:#eee;
 }
+
+.cover-star-cell:nth-child(1){grid-area:a;}
+.cover-star-cell:nth-child(2){grid-area:b;}
+.cover-star-cell:nth-child(3){grid-area:c;}
+.cover-star-cell:nth-child(4){grid-area:d;}
+.cover-star-cell:nth-child(5){grid-area:e;}
+.cover-star-cell:nth-child(6){grid-area:f;}
+.cover-star-cell:nth-child(7){grid-area:g;}
 
 .cover-star-cell img{
 width:100%;
 height:100%;
 object-fit:cover;
 display:block;
+filter:saturate(1.05) contrast(1.03);
 will-change:transform;
-}
-
-.cover-star-cell:nth-child(1){
-grid-row:span 2;
-}
-
-.cover-star-cell:nth-child(3){
-grid-column:span 2;
-}
-
-.cover-star-cell:nth-child(5){
-grid-column:span 2;
 }
 
 .cover-star-cell:nth-child(odd) img{
@@ -463,51 +466,24 @@ animation:coverZoomA 9s ease-in-out infinite;
 animation:coverZoomB 11s ease-in-out infinite;
 }
 
-.cover-star-cell:nth-child(2) img{
-animation-delay:-2s;
-}
-
-.cover-star-cell:nth-child(3) img{
-animation-delay:-5s;
-}
-
-.cover-star-cell:nth-child(4) img{
-animation-delay:-7s;
-}
-
-.cover-star-cell:nth-child(5) img{
-animation-delay:-3s;
-}
-
-.cover-star-cell:nth-child(6) img{
-animation-delay:-8s;
-}
-
-.cover-star-cell:nth-child(7) img{
-animation-delay:-4s;
-}
+.cover-star-cell:nth-child(2) img{animation-delay:-2s;}
+.cover-star-cell:nth-child(3) img{animation-delay:-4s;}
+.cover-star-cell:nth-child(4) img{animation-delay:-6s;}
+.cover-star-cell:nth-child(5) img{animation-delay:-3s;}
+.cover-star-cell:nth-child(6) img{animation-delay:-7s;}
+.cover-star-cell:nth-child(7) img{animation-delay:-5s;}
 
 @keyframes coverZoomA{
-0%,100%{
-transform:scale(1);
-}
-
-50%{
-transform:scale(1.085);
-}
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.085);}
 }
 
 @keyframes coverZoomB{
-0%,100%{
-transform:scale(1.075);
+0%,100%{transform:scale(1.075);}
+50%{transform:scale(1);}
 }
 
-50%{
-transform:scale(1);
-}
-}
-
-/* central star layer */
+/* CENTRAL STAR */
 
 .cover-star-focus{
 position:relative;
@@ -522,10 +498,27 @@ pointer-events:none;
 
 .star-shape{
 position:relative;
-width:min(385px,78%);
+width:min(395px,80%);
 aspect-ratio:1;
-background:#fff12f;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:68px;
+}
 
+/* rotating rays only */
+
+.star-orbit{
+position:absolute;
+inset:0;
+transform-origin:center;
+animation:starSpin 18s linear infinite;
+}
+
+.star-burst{
+position:absolute;
+inset:0;
+background:#fff12f;
 clip-path:polygon(
 50% 0%,
 61% 30%,
@@ -543,78 +536,72 @@ clip-path:polygon(
 37% 35%
 );
 
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:68px;
-
 filter:
-drop-shadow(0 8px 16px rgba(0,0,0,.20))
-drop-shadow(0 0 7px rgba(255,208,39,.9));
+drop-shadow(0 10px 18px rgba(0,0,0,.18))
+drop-shadow(0 0 10px rgba(255,216,62,.95));
 
-animation:starBreath 5s ease-in-out infinite;
+animation:starMorph 4.6s ease-in-out infinite;
+transform-origin:center;
 }
 
-/* moving gold shimmer around star perimeter */
+/* gold moving shimmer */
 
-.star-shape:before{
+.star-burst:before{
 content:"";
 position:absolute;
 inset:-5px;
 clip-path:inherit;
-
 background:conic-gradient(
 from 0deg,
-transparent 0deg 34deg,
-#fff9cf 43deg,
-#ffd75d 51deg,
-#ffffff 56deg,
-#d79c17 64deg,
-transparent 75deg 360deg
+transparent 0deg 24deg,
+#fffbe0 28deg,
+#ffd34d 34deg,
+#ffffff 40deg,
+#c58a12 46deg,
+transparent 57deg 360deg
 );
-
-z-index:-2;
-animation:starGoldRun 5.5s linear infinite;
-filter:
-blur(.3px)
-drop-shadow(0 0 5px rgba(255,207,42,.95));
-}
-
-.star-shape:after{
-content:"";
-position:absolute;
-inset:3px;
-background:#fff12f;
-clip-path:inherit;
+animation:goldRun 3s linear infinite;
+filter:drop-shadow(0 0 7px rgba(255,207,54,.95));
 z-index:-1;
 }
 
-@keyframes starGoldRun{
-to{
-transform:rotate(360deg);
-}
+@keyframes starSpin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
 }
 
-@keyframes starBreath{
+@keyframes goldRun{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+/* rays alternately become wider/taller */
+
+@keyframes starMorph{
 0%,100%{
-transform:scale(1);
+transform:scale(1,1);
+}
+
+25%{
+transform:scale(1.07,.96);
 }
 
 50%{
-transform:scale(1.035);
+transform:scale(.96,1.08);
+}
+
+75%{
+transform:scale(1.05,.98);
 }
 }
 
-/* STAR TEXT */
+/* TEXT DOES NOT ROTATE */
 
 .star-text{
 position:relative;
-z-index:3;
+z-index:4;
 width:100%;
 text-align:center;
-transform-origin:center;
-animation:starTextZoom 7s ease-in-out infinite;
 }
 
 .star-text small{
@@ -648,56 +635,36 @@ font-family:Georgia,serif;
 font-size:28px;
 font-weight:bold;
 line-height:1;
-margin-top:7px;
-}
-
-@keyframes starTextZoom{
-0%,20%,100%{
-transform:scale(1);
-}
-
-45%,60%{
-transform:scale(1.18);
-}
-
-75%{
-transform:scale(1.03);
-}
+margin-top:8px;
 }
 
 @media(max-width:760px){
 
 .cover-star-card,
 .cover-star-focus{
-min-height:540px;
+min-height:560px;
 }
 
 .cover-star-mosaic{
-grid-template-columns:1fr .82fr 1.1fr;
-grid-template-rows:1fr .8fr 1fr 1fr;
+grid-template-columns:1fr 1fr;
+grid-template-rows:160px 150px 150px 145px 145px;
+grid-template-areas:
+"a b"
+"a c"
+"d c"
+"e f"
+"g f";
 gap:3px;
 padding:3px;
 }
 
-.cover-star-cell:nth-child(1){
-grid-row:span 2;
-}
-
-.cover-star-cell:nth-child(3){
-grid-column:span 1;
-}
-
-.cover-star-cell:nth-child(5){
-grid-column:span 2;
-}
-
 .star-shape{
-width:min(315px,82vw);
-padding:54px;
+width:min(320px,84vw);
+padding:56px;
 }
 
 .star-text strong{
-font-size:28px;
+font-size:29px;
 }
 
 .star-prize{
@@ -709,20 +676,20 @@ font-size:24px;
 
 .cover-star-card,
 .cover-star-focus{
-min-height:515px;
+min-height:520px;
 }
 
 .star-shape{
-width:min(295px,83vw);
+width:min(300px,85vw);
 padding:50px;
-}
-
-.star-text strong{
-font-size:26px;
 }
 
 .star-text small{
 font-size:10px;
+}
+
+.star-text strong{
+font-size:26px;
 }
 
 .star-text em{
@@ -737,9 +704,9 @@ font-size:22px;
 @media(prefers-reduced-motion:reduce){
 
 .cover-star-cell img,
-.star-shape,
-.star-shape:before,
-.star-text{
+.star-orbit,
+.star-burst,
+.star-burst:before{
 animation:none !important;
 }
 
@@ -1547,6 +1514,7 @@ text-align:right;
 }
 
 @media(max-width:760px){
+
 .account-center{
 justify-content:center;
 gap:6px;
@@ -1567,16 +1535,17 @@ padding-left:10px;
 /* RESPONSIVE */
 
 @media(max-width:1100px){
+
 .hero-grid{
 grid-template-columns:1fr;
 }
 
 .cover-star-card{
-min-height:540px;
+min-height:560px;
 }
 
 .cover-star-focus{
-min-height:540px;
+min-height:560px;
 }
 
 .editorial-mosaic{
@@ -1603,6 +1572,7 @@ grid-template-columns:repeat(3,1fr);
 }
 
 @media(max-width:760px){
+
 .account-bar{
 grid-template-columns:1fr 1fr;
 min-height:48px;
@@ -1812,6 +1782,7 @@ font-size:43px;
 }
 
 @media(max-width:430px){
+
 .brand-big{
 font-size:35px;
 }
@@ -1853,22 +1824,30 @@ font-size:34px;
 grid-auto-rows:175px;
 }
 }
+
 </style>
 </head>
+
 <body>
 
 <div class="account-bar">
+
 <div class="account-side">
-<a class="account-link" data-i18n="common.account.signIn" href="account.html">SIGN IN</a>
+<a class="account-link" data-i18n="common.account.signIn" href="account.html">
+SIGN IN
+</a>
 </div>
 
 <div class="account-center">
+
 <div class="account-edition" data-i18n="common.account.edition">
 THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 </div>
 
 <div aria-label="Language selector" class="language-switcher">
+
 <select id="languageSelect" class="language-select" aria-label="Choose language">
+
 <option value="en">EN — English</option>
 <option value="uk">UA — Українська</option>
 <option value="ru">RU — Русский</option>
@@ -1892,26 +1871,46 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 <option value="tr">TR — Türkçe</option>
 <option value="ar">AR — العربية</option>
 <option value="hi">HI — हिन्दी</option>
+
 </select>
+
 </div>
 </div>
 
 <div class="account-side right">
-<a class="account-link club" data-i18n="common.account.joinClub" href="club.html">JOIN CLUB</a>
+<a class="account-link club" data-i18n="common.account.joinClub" href="club.html">
+JOIN CLUB
+</a>
 </div>
+
 </div>
 
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
 <aside class="side-menu" id="sideMenu">
+
 <div class="side-menu-header">
-<h2 data-i18n="common.menu.contents">Contents</h2>
-<button class="close-menu" onclick="closeMenu()">×</button>
+
+<h2 data-i18n="common.menu.contents">
+Contents
+</h2>
+
+<button class="close-menu" onclick="closeMenu()">
+×
+</button>
+
 </div>
 
 <div class="menu-account">
-<a data-i18n="common.menu.signIn" href="account.html">Sign In</a>
-<a data-i18n="common.menu.joinClub" href="club.html">Join Club</a>
+
+<a data-i18n="common.menu.signIn" href="account.html">
+Sign In
+</a>
+
+<a data-i18n="common.menu.joinClub" href="club.html">
+Join Club
+</a>
+
 </div>
 
 <div class="menu-items">
@@ -2008,18 +2007,37 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 </aside>
 
 <div class="search-overlay" id="searchOverlay">
+
 <div class="search-modal">
+
 <div class="search-top">
-<h2 data-i18n="common.search.title">Search PETS &amp; DOGUE</h2>
-<button onclick="closeSearch()">×</button>
+
+<h2 data-i18n="common.search.title">
+Search PETS &amp; DOGUE
+</h2>
+
+<button onclick="closeSearch()">
+×
+</button>
+
 </div>
 
 <div class="search-field">
-<input data-i18n-placeholder="common.search.placeholder" id="siteSearchInput" placeholder="Search articles, places, pets..." type="search"/>
-<button onclick="runSiteSearch()">⌕</button>
+
+<input
+data-i18n-placeholder="common.search.placeholder"
+id="siteSearchInput"
+placeholder="Search articles, places, pets..."
+type="search"/>
+
+<button onclick="runSiteSearch()">
+⌕
+</button>
+
 </div>
 
 <div class="search-suggestions">
+
 <a data-i18n="common.search.articles" href="articles.html">Articles</a>
 <a data-i18n="common.search.photos" href="photos.html">Photos</a>
 <a data-i18n="common.search.coverStars" href="members-gallery.html">Cover Stars</a>
@@ -2027,30 +2045,41 @@ THE INTERNATIONAL LUXURY ANIMAL MAGAZINE
 <a data-i18n="common.search.travel" href="pet-travel.html">Travel</a>
 <a data-i18n="common.search.rescue" href="pets-in-need.html">Rescue</a>
 <a data-i18n="common.search.marketplace" href="pet-marketplace.html">Marketplace</a>
+
 </div>
 </div>
 </div>
 
 <header class="site-header">
+
 <div class="header-main">
 
 <button
 aria-label="Open menu"
 class="icon-button"
 onclick="openMenu()">
+
 <span class="menu-lines">
 <span></span>
 <span></span>
 <span></span>
 </span>
+
 </button>
 
 <a
 class="brand notranslate"
 href="index.html"
 translate="no">
-<div class="brand-small">pets &amp;</div>
-<div class="brand-big">DOGUE</div>
+
+<div class="brand-small">
+pets &amp;
+</div>
+
+<div class="brand-big">
+DOGUE
+</div>
+
 </a>
 
 <button
@@ -2093,7 +2122,9 @@ src="file_00000000a9d471fda9b4629589be22a9.png"/>
 
 <div class="cover-copy">
 
-<span data-i18n="home.hero.issueLabel">LATEST ISSUE</span>
+<span data-i18n="home.hero.issueLabel">
+LATEST ISSUE
+</span>
 
 <h1 data-i18n="home.hero.title">
 Miso: The First PETS &amp; DOGUE Cover Star
@@ -2109,8 +2140,7 @@ Open Issue 01 and enter the visual world of PETS &amp; DOGUE.
 <a
 class="cover-star-card"
 href="members-gallery.html"
-aria-label="Become the next PETS &amp; DOGUE cover star"
->
+aria-label="Become the next PETS &amp; DOGUE cover star">
 
 <div class="cover-star-mosaic" aria-hidden="true">
 
@@ -2148,6 +2178,10 @@ aria-label="Become the next PETS &amp; DOGUE cover star"
 
 <div class="star-shape">
 
+<div class="star-orbit">
+<div class="star-burst"></div>
+</div>
+
 <div class="star-text">
 
 <small data-i18n="home.hero.myPetIs">
@@ -2178,9 +2212,7 @@ PRIZE
 </a>
 
 </div>
-</section>
-
-<section class="story-section">
+</section> <section class="story-section">
 
 <div class="story-scroll">
 
@@ -2269,7 +2301,9 @@ PRIZE
 </a>
 
 </div>
-</section> <section class="section">
+</section>
+
+<section class="section">
 
 <div class="section-heading">
 
@@ -2291,7 +2325,9 @@ VIEW ALL STORIES →
 
 <div class="mosaic-copy">
 
-<span data-i18n="home.editorial.coverLabel">COVER STORY</span>
+<span data-i18n="home.editorial.coverLabel">
+COVER STORY
+</span>
 
 <h3 data-i18n="home.editorial.coverTitle">
 The Beginning of a New Luxury Animal Magazine
@@ -2306,7 +2342,9 @@ The Beginning of a New Luxury Animal Magazine
 
 <div class="mosaic-copy">
 
-<span data-i18n="common.navigation.fashion">FASHION</span>
+<span data-i18n="common.navigation.fashion">
+FASHION
+</span>
 
 <h3 data-i18n="home.editorial.fashionTitle">
 The New Rules of Pet Style
@@ -2321,7 +2359,9 @@ The New Rules of Pet Style
 
 <div class="mosaic-copy">
 
-<span data-i18n="common.navigation.travel">TRAVEL</span>
+<span data-i18n="common.navigation.travel">
+TRAVEL
+</span>
 
 <h3 data-i18n="home.editorial.travelTitle">
 Beautiful Escapes With Your Pet
@@ -2336,7 +2376,9 @@ Beautiful Escapes With Your Pet
 
 <div class="mosaic-copy">
 
-<span data-i18n="common.navigation.rescue">RESCUE</span>
+<span data-i18n="common.navigation.rescue">
+RESCUE
+</span>
 
 <h3 data-i18n="home.editorial.rescueTitle">
 Stories That Can Change an Animal’s Life
@@ -2352,7 +2394,9 @@ Stories That Can Change an Animal’s Life
 
 <div class="section-heading">
 
-<h2 data-i18n="home.todayStories.heading">Today’s Stories</h2>
+<h2 data-i18n="home.todayStories.heading">
+Today’s Stories
+</h2>
 
 <a data-i18n="home.todayStories.readAll" href="articles.html">
 READ ALL →
@@ -2426,7 +2470,9 @@ data-speech="How to prepare your pet for a professional magazine photoshoot. Gro
 
 <a class="article-text" href="article.html?story=photoshoot">
 
-<span data-i18n="home.todayStories.photographyLabel">PHOTOGRAPHY</span>
+<span data-i18n="home.todayStories.photographyLabel">
+PHOTOGRAPHY
+</span>
 
 <h3 data-i18n="home.todayStories.photographyTitle">
 How To Prepare Your Pet for a Magazine Photoshoot
@@ -2452,7 +2498,9 @@ data-speech="The rise of luxury pet friendly travel. Hotels, villas and destinat
 
 <a class="article-text" href="article.html?story=travel">
 
-<span data-i18n="common.navigation.travel">TRAVEL</span>
+<span data-i18n="common.navigation.travel">
+TRAVEL
+</span>
 
 <h3 data-i18n="home.todayStories.travelTitle">
 The Rise of Luxury Pet-Friendly Travel
@@ -2478,7 +2526,9 @@ data-speech="Why pet friendly places need community verification. Visitors can r
 
 <a class="article-text" href="article.html?story=places">
 
-<span data-i18n="home.todayStories.guideLabel">USEFUL GUIDE</span>
+<span data-i18n="home.todayStories.guideLabel">
+USEFUL GUIDE
+</span>
 
 <h3 data-i18n="home.todayStories.guideTitle">
 How DOGUE Trust Protects Pet-Friendly Recommendations
@@ -2504,7 +2554,9 @@ data-speech="The people helping animals behind the scenes. Volunteers provide tr
 
 <a class="article-text" href="article.html?story=volunteers">
 
-<span data-i18n="common.navigation.community">COMMUNITY</span>
+<span data-i18n="common.navigation.community">
+COMMUNITY
+</span>
 
 <h3 data-i18n="home.todayStories.communityTitle">
 The People Helping Animals Behind the Scenes
@@ -2529,7 +2581,9 @@ Meet the volunteers creating change through practical help and visibility.
 
 <div class="section-heading">
 
-<h2 data-i18n="home.visualStories.heading">Visual Stories</h2>
+<h2 data-i18n="home.visualStories.heading">
+Visual Stories
+</h2>
 
 <a data-i18n="home.visualStories.openGallery" href="photos.html">
 OPEN PHOTO GALLERY →
@@ -2545,7 +2599,9 @@ OPEN PHOTO GALLERY →
 
 <div class="photo-label">
 
-<span data-i18n="common.navigation.community">COMMUNITY</span>
+<span data-i18n="common.navigation.community">
+COMMUNITY
+</span>
 
 <h3 data-i18n="home.visualStories.communityTitle">
 Beautiful Lives Together
@@ -2577,7 +2633,9 @@ Could Your Pet Be Next?
 
 <div class="photo-label">
 
-<span data-i18n="home.visualStories.portraitLabel">PORTRAIT</span>
+<span data-i18n="home.visualStories.portraitLabel">
+PORTRAIT
+</span>
 
 <h3 data-i18n="home.visualStories.portraitTitle">
 Soft Elegance
@@ -2592,7 +2650,9 @@ Soft Elegance
 
 <div class="photo-label">
 
-<span data-i18n="common.navigation.wellness">WELLNESS</span>
+<span data-i18n="common.navigation.wellness">
+WELLNESS
+</span>
 
 <h3 data-i18n="home.visualStories.wellnessTitle">
 Care Rituals
@@ -2607,7 +2667,9 @@ Care Rituals
 
 <div class="photo-label">
 
-<span data-i18n="common.navigation.rescue">RESCUE</span>
+<span data-i18n="common.navigation.rescue">
+RESCUE
+</span>
 
 <h3 data-i18n="home.visualStories.rescueTitle">
 A Story Worth Sharing
@@ -2622,7 +2684,9 @@ A Story Worth Sharing
 
 <div class="photo-label">
 
-<span data-i18n="home.visualStories.exoticLabel">EXOTIC</span>
+<span data-i18n="home.visualStories.exoticLabel">
+EXOTIC
+</span>
 
 <h3 data-i18n="home.visualStories.exoticTitle">
 Colour and Freedom
@@ -2637,7 +2701,9 @@ Colour and Freedom
 
 <div class="photo-label">
 
-<span data-i18n="common.navigation.travel">TRAVEL</span>
+<span data-i18n="common.navigation.travel">
+TRAVEL
+</span>
 
 <h3 data-i18n="home.visualStories.travelTitle">
 Summer by the Sea
@@ -2652,7 +2718,9 @@ Summer by the Sea
 
 <div class="photo-label">
 
-<span data-i18n="home.visualStories.localLabel">LOCAL</span>
+<span data-i18n="home.visualStories.localLabel">
+LOCAL
+</span>
 
 <h3 data-i18n="home.visualStories.localTitle">
 Meet Near You
@@ -2667,7 +2735,9 @@ Meet Near You
 
 <div class="photo-label">
 
-<span data-i18n="home.visualStories.clubLabel">CLUB</span>
+<span data-i18n="home.visualStories.clubLabel">
+CLUB
+</span>
 
 <h3 data-i18n="home.visualStories.clubTitle">
 Partner Benefits
@@ -2677,12 +2747,18 @@ Partner Benefits
 </a>
 
 </div>
-</section>
+</section> <section class="section">
 
-<section class="section">
 <div class="section-heading">
-<h2 data-i18n="home.rubrics.heading">Explore Every Rubric</h2>
-<a data-i18n="home.rubrics.allRubrics" href="categories.html">ALL RUBRICS →</a>
+
+<h2 data-i18n="home.rubrics.heading">
+Explore Every Rubric
+</h2>
+
+<a data-i18n="home.rubrics.allRubrics" href="categories.html">
+ALL RUBRICS →
+</a>
+
 </div>
 
 <div class="visual-categories">
@@ -2796,10 +2872,15 @@ Partner Benefits
 </a>
 
 </div>
-</section> <section class="useful-section">
+</section>
+
+<section class="useful-section">
+
 <div class="useful-inner">
 
-<h2 data-i18n="home.useful.heading">Beautiful and Useful</h2>
+<h2 data-i18n="home.useful.heading">
+Beautiful and Useful
+</h2>
 
 <p class="useful-intro" data-i18n="home.useful.intro">
 PETS &amp; DOGUE combines luxury editorial content with practical services for people who live, travel and care for animals.
@@ -2860,6 +2941,7 @@ PETS &amp; DOGUE combines luxury editorial content with practical services for p
 </section>
 
 <section class="club-section">
+
 <div class="club-box">
 
 <h2 data-i18n="home.club.heading">
@@ -2871,12 +2953,31 @@ Become part of the Club for cover-star competitions, partner benefits, exclusive
 </p>
 
 <div class="club-benefits">
-<div class="club-benefit" data-i18n="home.club.coverEntry">Cover Star Entry</div>
-<div class="club-benefit" data-i18n="home.club.discounts">Partner Discounts</div>
-<div class="club-benefit" data-i18n="home.club.qrCard">Member QR Card</div>
-<div class="club-benefit" data-i18n="home.club.premiumStories">Premium Stories</div>
-<div class="club-benefit" data-i18n="home.club.contests">Contests &amp; Prizes</div>
-<div class="club-benefit" data-i18n="home.club.community">Community Access</div>
+
+<div class="club-benefit" data-i18n="home.club.coverEntry">
+Cover Star Entry
+</div>
+
+<div class="club-benefit" data-i18n="home.club.discounts">
+Partner Discounts
+</div>
+
+<div class="club-benefit" data-i18n="home.club.qrCard">
+Member QR Card
+</div>
+
+<div class="club-benefit" data-i18n="home.club.premiumStories">
+Premium Stories
+</div>
+
+<div class="club-benefit" data-i18n="home.club.contests">
+Contests &amp; Prizes
+</div>
+
+<div class="club-benefit" data-i18n="home.club.community">
+Community Access
+</div>
+
 </div>
 
 <a class="club-button" data-i18n="home.club.button" href="club.html">
@@ -2887,6 +2988,7 @@ JOIN PETS &amp; DOGUE CLUB →
 </section>
 
 <section class="newsletter">
+
 <div class="newsletter-inner">
 
 <h2 data-i18n="home.newsletter.heading">
@@ -2942,10 +3044,12 @@ The International Luxury Animal Magazine
 </div>
 
 <div class="footer-social">
+
 <a aria-label="Instagram" href="#">◎</a>
 <a aria-label="TikTok" href="#">♪</a>
 <a aria-label="YouTube" href="#">▶</a>
 <a aria-label="Pinterest" href="#">P</a>
+
 </div>
 
 <a class="admin-link" data-i18n="common.footer.admin" href="admin.html">
@@ -2955,11 +3059,14 @@ Admin
 </footer>
 
 <script>
+
 function getHomeLanguage(){
+
 if(
 window.PetsDogueLanguage &&
 window.PetsDogueLanguage.getCurrentLanguage
 ){
+
 const current =
 window.PetsDogueLanguage.getCurrentLanguage();
 
@@ -2970,15 +3077,18 @@ return current;
 if(current && current.code){
 return current.code;
 }
+
 }
 
 return (
 localStorage.getItem("pets_dogue_language") ||
 "en"
 );
+
 }
 
 function homeT(path,fallback){
+
 const root =
 window.PetsDogueTranslations &&
 window.PetsDogueTranslations.home;
@@ -2998,105 +3108,144 @@ return fallback;
 let value = bundle;
 
 path.split(".").forEach(key => {
+
 if(
 value &&
 Object.prototype.hasOwnProperty.call(value,key)
 ){
+
 value = value[key];
+
 }else{
+
 value = undefined;
+
 }
+
 });
 
 return typeof value === "string"
 ? value
 : fallback;
+
 }
 
 let activeSpeechButton = null;
 
 function openMenu(){
+
 document.getElementById("sideMenu").classList.add("open");
 document.getElementById("menuOverlay").classList.add("show");
 document.body.classList.add("menu-open");
+
 }
 
 function closeMenu(){
+
 document.getElementById("sideMenu").classList.remove("open");
 document.getElementById("menuOverlay").classList.remove("show");
 document.body.classList.remove("menu-open");
+
 }
 
 function openSearch(){
+
 document.getElementById("searchOverlay").classList.add("open");
 document.body.classList.add("menu-open");
 
 setTimeout(() => {
+
 document.getElementById("siteSearchInput").focus();
+
 },100);
+
 }
 
 function closeSearch(){
+
 document.getElementById("searchOverlay").classList.remove("open");
 document.body.classList.remove("menu-open");
+
 }
 
 function runSiteSearch(){
-const query = document.getElementById("siteSearchInput").value.trim().toLowerCase();
+
+const query =
+document
+.getElementById("siteSearchInput")
+.value
+.trim()
+.toLowerCase();
 
 if(!query){
 return;
 }
 
 const routes = [
+
 {
 terms:["place","places","cafe","hotel","park","beach","vet","groomer"],
 url:"pet-friendly-places.html"
 },
+
 {
 terms:["cover","star","competition","pet model"],
 url:"members-gallery.html"
 },
+
 {
 terms:["photo","photos","gallery","portrait"],
 url:"photos.html"
 },
+
 {
 terms:["travel","holiday","hotel"],
 url:"pet-travel.html"
 },
+
 {
 terms:["rescue","adoption","help","need"],
 url:"pets-in-need.html"
 },
+
 {
 terms:["fashion","style","accessories"],
 url:"pet-fashion.html"
 },
+
 {
 terms:["club","discount","member"],
 url:"club.html"
 },
+
 {
 terms:["market","marketplace","listing","service"],
 url:"pet-marketplace.html"
 },
+
 {
 terms:["article","story","interview"],
 url:"articles.html"
 }
+
 ];
 
-const route = routes.find(item =>
-item.terms.some(term => query.includes(term))
+const route =
+routes.find(item =>
+item.terms.some(term =>
+query.includes(term)
+)
 );
 
-window.location.href = route
+window.location.href =
+route
 ? route.url
 : "articles.html";
+
 }
 
 function getNarrationLanguage(){
+
 const language =
 window.PetsDogueLanguage &&
 window.PetsDogueLanguage.getCurrentLanguage
@@ -3107,10 +3256,13 @@ if(
 window.PetsDogueLanguage &&
 window.PetsDogueLanguage.getSpeechLanguage
 ){
+
 return window.PetsDogueLanguage.getSpeechLanguage();
+
 }
 
 const languageMap = {
+
 en:"en-GB",
 uk:"uk-UA",
 ru:"ru-RU",
@@ -3134,6 +3286,7 @@ fi:"fi-FI",
 tr:"tr-TR",
 ar:"ar-SA",
 hi:"hi-IN"
+
 };
 
 const languageCode =
@@ -3142,25 +3295,33 @@ typeof language === "string"
 : language?.code;
 
 return languageMap[languageCode] || "en-GB";
+
 }
 
 function getAvailableVoices(){
+
 return window.speechSynthesis
 ? window.speechSynthesis.getVoices()
 : [];
+
 }
 
 function chooseVoice(gender,languageCode){
-const voices = getAvailableVoices();
+
+const voices =
+getAvailableVoices();
 
 const languagePrefix =
 String(languageCode || "en")
 .toLowerCase()
 .split("-")[0];
 
-const languageVoices = voices.filter(voice =>
+const languageVoices =
+voices.filter(voice =>
 voice.lang &&
-voice.lang.toLowerCase().startsWith(languagePrefix)
+voice.lang
+.toLowerCase()
+.startsWith(languagePrefix)
 );
 
 const femaleNames = [
@@ -3203,29 +3364,38 @@ gender === "male"
 return (
 languageVoices.find(voice =>
 names.some(name =>
-voice.name.toLowerCase().includes(name)
+voice.name
+.toLowerCase()
+.includes(name)
 )
 ) ||
 languageVoices[0] ||
 voices[0] ||
 null
 );
+
 }
 
 function listenToArticle(button){
+
 if(!window.speechSynthesis){
+
 alert(
 homeT(
 "messages.narrationUnsupported",
 "Article narration is not supported by this browser."
 )
 );
+
 return;
+
 }
 
 if(activeSpeechButton === button){
+
 stopNarration();
 return;
+
 }
 
 stopNarration();
@@ -3277,6 +3447,7 @@ utterance.voice = voice;
 }
 
 utterance.rate = speed;
+
 utterance.pitch =
 gender === "female"
 ? 1.05
@@ -3286,36 +3457,47 @@ utterance.volume = 1;
 
 button.classList.add("speaking");
 button.textContent = "■";
+
 activeSpeechButton = button;
 
 utterance.onend = () => {
+
 button.classList.remove("speaking");
 button.textContent = "🔊";
 activeSpeechButton = null;
+
 };
 
 utterance.onerror = () => {
+
 button.classList.remove("speaking");
 button.textContent = "🔊";
 activeSpeechButton = null;
+
 };
 
 window.speechSynthesis.speak(utterance);
+
 }
 
 function stopNarration(){
+
 if(window.speechSynthesis){
 window.speechSynthesis.cancel();
 }
 
 if(activeSpeechButton){
+
 activeSpeechButton.classList.remove("speaking");
 activeSpeechButton.textContent = "🔊";
 activeSpeechButton = null;
+
 }
+
 }
 
 function subscribeNewsletter(){
+
 const email =
 document
 .getElementById("newsletterEmail")
@@ -3326,18 +3508,22 @@ if(
 !email ||
 !email.includes("@")
 ){
+
 alert(
 homeT(
 "messages.invalidEmail",
 "Please enter a valid email address."
 )
 );
+
 return;
+
 }
 
 let subscribers = [];
 
 try{
+
 subscribers =
 JSON.parse(
 localStorage.getItem("pets_dogue_newsletter") || "[]"
@@ -3346,8 +3532,11 @@ localStorage.getItem("pets_dogue_newsletter") || "[]"
 if(!Array.isArray(subscribers)){
 subscribers = [];
 }
+
 }catch(error){
+
 subscribers = [];
+
 }
 
 if(!subscribers.includes(email)){
@@ -3369,16 +3558,21 @@ homeT(
 "Welcome to the PETS & DOGUE community."
 )
 );
+
 }
 
 document.addEventListener(
 "keydown",
 event => {
+
 if(event.key === "Escape"){
+
 closeMenu();
 closeSearch();
 stopNarration();
+
 }
+
 }
 );
 
@@ -3387,28 +3581,38 @@ document
 .addEventListener(
 "keydown",
 event => {
+
 if(event.key === "Enter"){
 runSiteSearch();
 }
+
 }
 );
 
 window.addEventListener(
 "beforeunload",
 () => {
+
 stopNarration();
+
 }
 );
 
 if(window.speechSynthesis){
+
 window.speechSynthesis.onvoiceschanged =
 () => {
+
 getAvailableVoices();
+
 };
+
 }
+
 </script>
 
 <!-- PETS & DOGUE UNIFIED 23-LANGUAGE SYSTEM -->
+
 <script src="/i18n/common.js?v=2"></script>
 <script src="/i18n/home.js?v=3"></script>
 <script src="/i18n/engine.js?v=3"></script>
