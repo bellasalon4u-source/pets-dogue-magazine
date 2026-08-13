@@ -402,12 +402,12 @@ max-width:750px;
 color:#eee;
 }
 
+/* COVER STAR — APPROVED */
+
 .cover-star-card{
 position:relative;
 min-height:630px;
-background:
-radial-gradient(circle at 20% 15%,rgba(255,255,255,.55),transparent 23%),
-linear-gradient(145deg,var(--pink),var(--purple),var(--blue));
+background:#fff;
 overflow:hidden;
 display:flex;
 align-items:center;
@@ -415,67 +415,117 @@ justify-content:center;
 isolation:isolate;
 }
 
-.cover-star-card:before{
-content:"";
-position:absolute;
-inset:-25%;
-background:
-repeating-conic-gradient(
-from 0deg,
-rgba(255,255,255,.3) 0deg 8deg,
-transparent 8deg 22deg
-);
-animation:rotateGlow 18s linear infinite;
-z-index:-2;
-}
+/* MAGAZINE COVER GRID */
 
-.cover-star-card:after{
-content:"";
+.cover-star-mosaic{
 position:absolute;
 inset:0;
-background:rgba(255,255,255,.08);
-z-index:-1;
+z-index:0;
+display:grid;
+grid-template-columns:1.18fr .78fr 1.16fr .88fr;
+grid-template-rows:1fr .82fr 1fr;
+gap:4px;
+padding:4px;
+background:#fff;
 }
 
-@keyframes rotateGlow{
-to{
-transform:rotate(360deg);
-}
-}
-
-.tap-arrow{
-position:absolute;
-top:30px;
-left:50%;
-transform:translateX(-50%);
-font-size:12px;
-font-weight:bold;
-letter-spacing:2px;
-animation:arrowBounce 1.4s infinite;
+.cover-star-cell{
+position:relative;
+overflow:hidden;
+background:#f6f2e9;
 }
 
-.tap-arrow:after{
-content:"↓";
+.cover-star-cell img{
+width:100%;
+height:100%;
+object-fit:cover;
 display:block;
-font-size:38px;
-text-align:center;
-margin-top:4px;
+will-change:transform;
 }
 
-@keyframes arrowBounce{
+.cover-star-cell:nth-child(1){
+grid-row:span 2;
+}
+
+.cover-star-cell:nth-child(3){
+grid-column:span 2;
+}
+
+.cover-star-cell:nth-child(5){
+grid-column:span 2;
+}
+
+.cover-star-cell:nth-child(odd) img{
+animation:coverZoomA 9s ease-in-out infinite;
+}
+
+.cover-star-cell:nth-child(even) img{
+animation:coverZoomB 11s ease-in-out infinite;
+}
+
+.cover-star-cell:nth-child(2) img{
+animation-delay:-2s;
+}
+
+.cover-star-cell:nth-child(3) img{
+animation-delay:-5s;
+}
+
+.cover-star-cell:nth-child(4) img{
+animation-delay:-7s;
+}
+
+.cover-star-cell:nth-child(5) img{
+animation-delay:-3s;
+}
+
+.cover-star-cell:nth-child(6) img{
+animation-delay:-8s;
+}
+
+.cover-star-cell:nth-child(7) img{
+animation-delay:-4s;
+}
+
+@keyframes coverZoomA{
 0%,100%{
-transform:translate(-50%,0);
+transform:scale(1);
 }
 
 50%{
-transform:translate(-50%,9px);
+transform:scale(1.085);
 }
 }
 
+@keyframes coverZoomB{
+0%,100%{
+transform:scale(1.075);
+}
+
+50%{
+transform:scale(1);
+}
+}
+
+/* central star layer */
+
+.cover-star-focus{
+position:relative;
+z-index:5;
+width:100%;
+min-height:630px;
+display:flex;
+align-items:center;
+justify-content:center;
+pointer-events:none;
+}
+
 .star-shape{
-width:min(360px,82%);
+position:relative;
+width:min(385px,78%);
 aspect-ratio:1;
-background:#fff443;
+background:#fff12f;
+
 clip-path:polygon(
 50% 0%,
 61% 30%,
@@ -492,51 +542,207 @@ clip-path:polygon(
 4% 34%,
 37% 35%
 );
+
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:70px;
-transform:rotate(-5deg);
-filter:drop-shadow(0 22px 30px rgba(0,0,0,.24));
-animation:starFloat 2.8s ease-in-out infinite;
+padding:68px;
+
+filter:
+drop-shadow(0 8px 16px rgba(0,0,0,.20))
+drop-shadow(0 0 7px rgba(255,208,39,.9));
+
+animation:starBreath 5s ease-in-out infinite;
 }
 
-@keyframes starFloat{
+/* moving gold shimmer around star perimeter */
+
+.star-shape:before{
+content:"";
+position:absolute;
+inset:-5px;
+clip-path:inherit;
+
+background:conic-gradient(
+from 0deg,
+transparent 0deg 34deg,
+#fff9cf 43deg,
+#ffd75d 51deg,
+#ffffff 56deg,
+#d79c17 64deg,
+transparent 75deg 360deg
+);
+
+z-index:-2;
+animation:starGoldRun 5.5s linear infinite;
+filter:
+blur(.3px)
+drop-shadow(0 0 5px rgba(255,207,42,.95));
+}
+
+.star-shape:after{
+content:"";
+position:absolute;
+inset:3px;
+background:#fff12f;
+clip-path:inherit;
+z-index:-1;
+}
+
+@keyframes starGoldRun{
+to{
+transform:rotate(360deg);
+}
+}
+
+@keyframes starBreath{
 0%,100%{
-transform:rotate(-5deg) translateY(0) scale(1);
+transform:scale(1);
 }
 
 50%{
-transform:rotate(-2deg) translateY(-11px) scale(1.035);
+transform:scale(1.035);
 }
 }
 
+/* STAR TEXT */
+
 .star-text{
-transform:rotate(4deg);
+position:relative;
+z-index:3;
+width:100%;
+text-align:center;
+transform-origin:center;
+animation:starTextZoom 7s ease-in-out infinite;
 }
 
 .star-text small{
 display:block;
-font-weight:bold;
 font-size:11px;
-letter-spacing:2px;
+font-weight:800;
+letter-spacing:1.8px;
 margin-bottom:10px;
 }
 
 .star-text strong{
 display:block;
 font-family:Georgia,serif;
-font-size:35px;
-line-height:.95;
+font-size:34px;
+line-height:.94;
+font-weight:bold;
 }
 
 .star-text em{
 display:block;
 font-style:normal;
+font-weight:800;
+font-size:12px;
+line-height:1.25;
+margin-top:14px;
+}
+
+.star-prize{
+display:block;
+font-family:Georgia,serif;
+font-size:28px;
 font-weight:bold;
-margin-top:15px;
-font-size:13px;
+line-height:1;
+margin-top:7px;
+}
+
+@keyframes starTextZoom{
+0%,20%,100%{
+transform:scale(1);
+}
+
+45%,60%{
+transform:scale(1.18);
+}
+
+75%{
+transform:scale(1.03);
+}
+}
+
+@media(max-width:760px){
+
+.cover-star-card,
+.cover-star-focus{
+min-height:540px;
+}
+
+.cover-star-mosaic{
+grid-template-columns:1fr .82fr 1.1fr;
+grid-template-rows:1fr .8fr 1fr 1fr;
+gap:3px;
+padding:3px;
+}
+
+.cover-star-cell:nth-child(1){
+grid-row:span 2;
+}
+
+.cover-star-cell:nth-child(3){
+grid-column:span 1;
+}
+
+.cover-star-cell:nth-child(5){
+grid-column:span 2;
+}
+
+.star-shape{
+width:min(315px,82vw);
+padding:54px;
+}
+
+.star-text strong{
+font-size:28px;
+}
+
+.star-prize{
+font-size:24px;
+}
+}
+
+@media(max-width:430px){
+
+.cover-star-card,
+.cover-star-focus{
+min-height:515px;
+}
+
+.star-shape{
+width:min(295px,83vw);
+padding:50px;
+}
+
+.star-text strong{
+font-size:26px;
+}
+
+.star-text small{
+font-size:10px;
+}
+
+.star-text em{
+font-size:11px;
+}
+
+.star-prize{
+font-size:22px;
+}
+}
+
+@media(prefers-reduced-motion:reduce){
+
+.cover-star-cell img,
+.star-shape,
+.star-shape:before,
+.star-text{
+animation:none !important;
+}
+
 }
 
 /* INSTAGRAM STORIES */
@@ -835,9 +1041,7 @@ transition:.2s;
 background:var(--green);
 color:#111;
 border-color:var(--green);
-}
-
-/* PHOTO WALL */
+} /* PHOTO WALL */
 
 .photo-wall{
 display:grid;
@@ -1368,7 +1572,11 @@ grid-template-columns:1fr;
 }
 
 .cover-star-card{
-min-height:440px;
+min-height:540px;
+}
+
+.cover-star-focus{
+min-height:540px;
 }
 
 .editorial-mosaic{
@@ -1464,19 +1672,6 @@ font-size:42px;
 
 .cover-copy p{
 font-size:17px;
-}
-
-.cover-star-card{
-min-height:380px;
-}
-
-.star-shape{
-width:270px;
-padding:55px;
-}
-
-.star-text strong{
-font-size:28px;
 }
 
 .story-item{
@@ -1627,11 +1822,6 @@ min-height:590px;
 
 .cover-copy h1{
 font-size:37px;
-}
-
-.star-shape{
-width:240px;
-padding:48px;
 }
 
 .story-scroll{
@@ -1916,25 +2106,73 @@ Open Issue 01 and enter the visual world of PETS &amp; DOGUE.
 </div>
 </a>
 
-<a class="cover-star-card" href="members-gallery.html">
+<a
+class="cover-star-card"
+href="members-gallery.html"
+aria-label="Become the next PETS &amp; DOGUE cover star"
+>
 
-<div class="tap-arrow" data-i18n="home.hero.tapStar">
-TAP THE STAR
+<div class="cover-star-mosaic" aria-hidden="true">
+
+<div class="cover-star-cell">
+<img src="cover-star/cover-golf-bulldog.png" alt=""/>
 </div>
 
+<div class="cover-star-cell">
+<img src="cover-star/cover-surf-parrot.png" alt=""/>
+</div>
+
+<div class="cover-star-cell">
+<img src="cover-star/cover-horse-salon.png" alt=""/>
+</div>
+
+<div class="cover-star-cell">
+<img src="cover-star/cover-turtle-spa.png" alt=""/>
+</div>
+
+<div class="cover-star-cell">
+<img src="cover-star/cover-capri-sphynx.png" alt=""/>
+</div>
+
+<div class="cover-star-cell">
+<img src="cover-star/cover-gym-cat.png" alt=""/>
+</div>
+
+<div class="cover-star-cell">
+<img src="cover-star/cover-miso-luxury.png" alt=""/>
+</div>
+
+</div>
+
+<div class="cover-star-focus">
+
 <div class="star-shape">
+
 <div class="star-text">
 
-<small data-i18n="home.hero.myPetIs">MY PET IS</small>
+<small data-i18n="home.hero.myPetIs">
+MY PET IS —
+</small>
 
 <strong data-i18n="home.hero.nextCoverStar">
 THE NEXT<br/>
 COVER STAR
 </strong>
 
-<em data-i18n="home.hero.enter">TAP TO ENTER →</em>
+<em data-i18n="home.hero.enter">
+TAP TO ENTER
+</em>
+
+<span
+class="star-prize"
+data-i18n="home.hero.prize">
+PRIZE
+</span>
 
 </div>
+
+</div>
+
 </div>
 
 </a>
@@ -2031,9 +2269,7 @@ COVER STAR
 </a>
 
 </div>
-</section>
-
-<section class="section">
+</section> <section class="section">
 
 <div class="section-heading">
 
@@ -2560,9 +2796,7 @@ Partner Benefits
 </a>
 
 </div>
-</section>
-
-<section class="useful-section">
+</section> <section class="useful-section">
 <div class="useful-inner">
 
 <h2 data-i18n="home.useful.heading">Beautiful and Useful</h2>
