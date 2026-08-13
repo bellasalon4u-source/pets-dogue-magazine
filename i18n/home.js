@@ -9,7 +9,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TAP THE STAR",
       myPetIs: "MY PET IS",
       nextCoverStar: "THE NEXT\nCOVER STAR",
-      enter: "TAP TO ENTER →"
+      enter: "TAP TO ENTER →",
+      prize: "PRIZE"
     },
     stories: {
       issue: "Issue 01",
@@ -160,7 +161,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "НАЖМИТЕ НА ЗВЕЗДУ",
       myPetIs: "МОЙ ПИТОМЕЦ —",
       nextCoverStar: "СЛЕДУЮЩАЯ\nЗВЕЗДА ОБЛОЖКИ",
-      enter: "ПРИНЯТЬ УЧАСТИЕ →"
+      enter: "ПРИНЯТЬ УЧАСТИЕ →",
+      prize: "ПРИЗ"
     },
     stories: {
       issue: "Выпуск 01",
@@ -311,7 +313,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "НАТИСНІТЬ НА ЗІРКУ",
       myPetIs: "МІЙ УЛЮБЛЕНЕЦЬ —",
       nextCoverStar: "НАСТУПНА\nЗІРКА ОБКЛАДИНКИ",
-      enter: "ВЗЯТИ УЧАСТЬ →"
+      enter: "ВЗЯТИ УЧАСТЬ →",
+      prize: "ПРИЗ"
     },
     stories: {
       issue: "Випуск 01",
@@ -462,7 +465,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TOUCHEZ L’ÉTOILE",
       myPetIs: "MON ANIMAL EST",
       nextCoverStar: "LA PROCHAINE\nSTAR DE COUVERTURE",
-      enter: "PARTICIPER →"
+      enter: "PARTICIPER →",
+      prize: "PRIX"
     },
     stories: {
       issue: "Numéro 01",
@@ -613,7 +617,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "DEN STERN ANTIPPEN",
       myPetIs: "MEIN TIER IST",
       nextCoverStar: "DER NÄCHSTE\nCOVERSTAR",
-      enter: "JETZT TEILNEHMEN →"
+      enter: "JETZT TEILNEHMEN →",
+      prize: "PREIS"
     },
     stories: {
       issue: "Ausgabe 01",
@@ -754,9 +759,7 @@ window.PetsDogueTranslations.home = {
       invalidEmail: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
       newsletterSuccess: "Willkommen in der PETS & DOGUE Gemeinschaft."
     }
-  },
-
-  es: {
+  },  es: {
     hero: {
       issueLabel: "ÚLTIMO NÚMERO",
       title: "Miso: la primera estrella de portada de PETS & DOGUE",
@@ -764,7 +767,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TOCA LA ESTRELLA",
       myPetIs: "MI MASCOTA ES",
       nextCoverStar: "LA PRÓXIMA\nESTRELLA DE PORTADA",
-      enter: "PARTICIPAR →"
+      enter: "PARTICIPAR →",
+      prize: "PREMIO"
     },
     stories: {
       issue: "Número 01",
@@ -915,7 +919,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TOCCA LA STELLA",
       myPetIs: "IL MIO ANIMALE È",
       nextCoverStar: "LA PROSSIMA\nSTAR DI COPERTINA",
-      enter: "PARTECIPA →"
+      enter: "PARTECIPA →",
+      prize: "PREMIO"
     },
     stories: {
       issue: "Numero 01",
@@ -1066,7 +1071,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TOQUE NA ESTRELA",
       myPetIs: "O MEU ANIMAL É",
       nextCoverStar: "A PRÓXIMA\nESTRELA DE CAPA",
-      enter: "PARTICIPAR →"
+      enter: "PARTICIPAR →",
+      prize: "PRÉMIO"
     },
     stories: {
       issue: "Edição 01",
@@ -1207,7 +1213,9 @@ window.PetsDogueTranslations.home = {
       invalidEmail: "Introduza um endereço de e-mail válido.",
       newsletterSuccess: "Bem-vindo à comunidade PETS & DOGUE."
     }
-  },  nl: {
+  },
+
+  nl: {
     hero: {
       issueLabel: "NIEUWSTE EDITIE",
       title: "Miso: de eerste coverster van PETS & DOGUE",
@@ -1215,7 +1223,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TIK OP DE STER",
       myPetIs: "MIJN HUISDIER IS",
       nextCoverStar: "DE VOLGENDE\nCOVERSTER",
-      enter: "DOE MEE →"
+      enter: "DOE MEE →",
+      prize: "PRIJS"
     },
     stories: {
       issue: "Editie 01",
@@ -1366,7 +1375,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "DOTKNIJ GWIAZDY",
       myPetIs: "MÓJ PUPIL TO",
       nextCoverStar: "NASTĘPNA\nGWIAZDA OKŁADKI",
-      enter: "WEŹ UDZIAŁ →"
+      enter: "WEŹ UDZIAŁ →",
+      prize: "NAGRODA"
     },
     stories: {
       issue: "Wydanie 01",
@@ -1507,9 +1517,7 @@ window.PetsDogueTranslations.home = {
       invalidEmail: "Wprowadź prawidłowy adres e-mail.",
       newsletterSuccess: "Witamy w społeczności PETS & DOGUE."
     }
-  },
-
-  cs: {
+  },  cs: {
     hero: {
       issueLabel: "NEJNOVĚJŠÍ VYDÁNÍ",
       title: "Miso: první hvězda obálky PETS & DOGUE",
@@ -1517,7 +1525,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "KLEPNĚTE NA HVĚZDU",
       myPetIs: "MŮJ MAZLÍČEK JE",
       nextCoverStar: "DALŠÍ\nHVĚZDA OBÁLKY",
-      enter: "ZÚČASTNIT SE →"
+      enter: "ZÚČASTNIT SE →",
+      prize: "CENA"
     },
     stories: {
       issue: "Vydání 01",
@@ -1668,7 +1677,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "KLEPNITE NA HVIEZDU",
       myPetIs: "MÔJ MILÁČIK JE",
       nextCoverStar: "ĎALŠIA\nHVIEZDA OBÁLKY",
-      enter: "ZAPOJIŤ SA →"
+      enter: "ZAPOJIŤ SA →",
+      prize: "CENA"
     },
     stories: {
       issue: "Vydanie 01",
@@ -1819,7 +1829,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "ÉRINTSE MEG A CSILLAGOT",
       myPetIs: "A KEDVENCEM",
       nextCoverStar: "A KÖVETKEZŐ\nCÍMLAPSZTÁR",
-      enter: "NEVEZÉS →"
+      enter: "NEVEZÉS →",
+      prize: "DÍJ"
     },
     stories: {
       issue: "01. szám",
@@ -1970,7 +1981,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "APĂSAȚI STEAUA",
       myPetIs: "ANIMALUL MEU ESTE",
       nextCoverStar: "URMĂTOAREA\nVEDETĂ DE COPERTĂ",
-      enter: "ÎNSCRIE-TE →"
+      enter: "ÎNSCRIE-TE →",
+      prize: "PREMIU"
     },
     stories: {
       issue: "Numărul 01",
@@ -2121,7 +2133,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "НАТИСНЕТЕ ЗВЕЗДАТА",
       myPetIs: "МОЯТ ЛЮБИМЕЦ Е",
       nextCoverStar: "СЛЕДВАЩАТА\nЗВЕЗДА НА КОРИЦАТА",
-      enter: "УЧАСТВАЙТЕ →"
+      enter: "УЧАСТВАЙТЕ →",
+      prize: "НАГРАДА"
     },
     stories: {
       issue: "Брой 01",
@@ -2272,7 +2285,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "ΠΑΤΗΣΤΕ ΤΟ ΑΣΤΕΡΙ",
       myPetIs: "ΤΟ ΚΑΤΟΙΚΙΔΙΟ ΜΟΥ ΕΙΝΑΙ",
       nextCoverStar: "ΤΟ ΕΠΟΜΕΝΟ\nΑΣΤΕΡΙ ΕΞΩΦΥΛΛΟΥ",
-      enter: "ΛΑΒΕΤΕ ΜΕΡΟΣ →"
+      enter: "ΛΑΒΕΤΕ ΜΕΡΟΣ →",
+      prize: "ΒΡΑΒΕΙΟ"
     },
     stories: {
       issue: "Τεύχος 01",
@@ -2413,9 +2427,7 @@ window.PetsDogueTranslations.home = {
       invalidEmail: "Εισαγάγετε μια έγκυρη διεύθυνση email.",
       newsletterSuccess: "Καλώς ήρθατε στην κοινότητα PETS & DOGUE."
     }
-  },
-
-  sv: {
+  },  sv: {
     hero: {
       issueLabel: "SENASTE NUMRET",
       title: "Miso: PETS & DOGUE:s första omslagsstjärna",
@@ -2423,7 +2435,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TRYCK PÅ STJÄRNAN",
       myPetIs: "MITT HUSDJUR ÄR",
       nextCoverStar: "NÄSTA\nOMSLAGSSTJÄRNA",
-      enter: "DELTA →"
+      enter: "DELTA →",
+      prize: "PRIS"
     },
     stories: {
       issue: "Nummer 01",
@@ -2574,7 +2587,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TRYK PÅ STJERNEN",
       myPetIs: "MIT KÆLEDYR ER",
       nextCoverStar: "DEN NÆSTE\nFORSIDESTJERNE",
-      enter: "DELTAG →"
+      enter: "DELTAG →",
+      prize: "PRÆMIE"
     },
     stories: {
       issue: "Nummer 01",
@@ -2725,7 +2739,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "TRYKK PÅ STJERNEN",
       myPetIs: "KJÆLEDYRET MITT ER",
       nextCoverStar: "DEN NESTE\nFORSIDESTJERNEN",
-      enter: "DELTA →"
+      enter: "DELTA →",
+      prize: "PREMIE"
     },
     stories: {
       issue: "Utgave 01",
@@ -2876,7 +2891,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "NAPAUTA TÄHTEÄ",
       myPetIs: "LEMMIKKINI ON",
       nextCoverStar: "SEURAAVA\nKANSITÄHTI",
-      enter: "OSALLISTU →"
+      enter: "OSALLISTU →",
+      prize: "PALKINTO"
     },
     stories: {
       issue: "Numero 01",
@@ -3027,7 +3043,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "YILDIZA DOKUNUN",
       myPetIs: "EVCİL HAYVANIM",
       nextCoverStar: "BİR SONRAKİ\nKAPAK YILDIZI",
-      enter: "KATIL →"
+      enter: "KATIL →",
+      prize: "ÖDÜL"
     },
     stories: {
       issue: "Sayı 01",
@@ -3178,7 +3195,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "اضغط على النجمة",
       myPetIs: "حيواني الأليف هو",
       nextCoverStar: "نجم الغلاف\nالقادم",
-      enter: "شارك الآن ←"
+      enter: "شارك الآن ←",
+      prize: "الجائزة"
     },
     stories: {
       issue: "الإصدار 01",
@@ -3329,7 +3347,8 @@ window.PetsDogueTranslations.home = {
       tapStar: "सितारे पर टैप करें",
       myPetIs: "मेरा पालतू है",
       nextCoverStar: "अगला\nकवर स्टार",
-      enter: "भाग लें →"
+      enter: "भाग लें →",
+      prize: "पुरस्कार"
     },
     stories: {
       issue: "अंक 01",
