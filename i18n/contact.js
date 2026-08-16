@@ -40,6 +40,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Email:",
       description:
         "For advertising, collaborations, cover features and editorial opportunities, please contact our team."
+    },
+    messages: {
+      required: "Please complete your name, email and message.",
+      success: "Thank you. Your message is ready to be sent."
     }
   },
 
@@ -80,6 +84,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Email:",
       description:
         "Щодо реклами, співпраці, публікацій на обкладинці та редакційних можливостей звертайтеся до нашої команди."
+    },
+    messages: {
+      required: "Будь ласка, заповніть ім’я, електронну пошту та повідомлення.",
+      success: "Дякуємо. Ваше повідомлення готове до надсилання."
     }
   },
 
@@ -120,6 +128,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Email:",
       description:
         "По вопросам рекламы, сотрудничества, публикаций на обложке и редакционных возможностей свяжитесь с нашей командой."
+    },
+    messages: {
+      required: "Пожалуйста, заполните имя, электронную почту и сообщение.",
+      success: "Спасибо. Ваше сообщение готово к отправке."
     }
   },
 
@@ -160,6 +172,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-mail :",
       description:
         "Pour la publicité, les collaborations, les couvertures et les opportunités éditoriales, veuillez contacter notre équipe."
+    },
+    messages: {
+      required: "Veuillez renseigner votre nom, votre e-mail et votre message.",
+      success: "Merci. Votre message est prêt à être envoyé."
     }
   },
 
@@ -200,8 +216,14 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-Mail:",
       description:
         "Für Werbung, Kooperationen, Coverbeiträge und redaktionelle Möglichkeiten kontaktieren Sie bitte unser Team."
+    },
+    messages: {
+      required: "Bitte geben Sie Ihren Namen, Ihre E-Mail-Adresse und Ihre Nachricht ein.",
+      success: "Vielen Dank. Ihre Nachricht ist zum Senden bereit."
     }
-  },  es: {
+  },
+
+  es: {
     meta: {
       title: "Contacto — PETS & DOGUE",
       description:
@@ -238,8 +260,12 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Correo:",
       description:
         "Para publicidad, colaboraciones, apariciones en portada y oportunidades editoriales, contacta con nuestro equipo."
+    },
+    messages: {
+      required: "Completa tu nombre, correo electrónico y mensaje.",
+      success: "Gracias. Tu mensaje está listo para enviarse."
     }
-  },
+  }   ,
 
   it: {
     meta: {
@@ -278,6 +304,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Email:",
       description:
         "Per pubblicità, collaborazioni, apparizioni in copertina e opportunità editoriali, contatta il nostro team."
+    },
+    messages: {
+      required: "Completa nome, email e messaggio.",
+      success: "Grazie. Il tuo messaggio è pronto per essere inviato."
     }
   },
 
@@ -318,6 +348,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Email:",
       description:
         "Para publicidade, colaborações, participações na capa e oportunidades editoriais, contacte a nossa equipa."
+    },
+    messages: {
+      required: "Preencha o seu nome, email e mensagem.",
+      success: "Obrigado. A sua mensagem está pronta para ser enviada."
     }
   },
 
@@ -358,6 +392,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-mail:",
       description:
         "Neem voor advertenties, samenwerkingen, coverfeatures en redactionele mogelijkheden contact op met ons team."
+    },
+    messages: {
+      required: "Vul uw naam, e-mailadres en bericht in.",
+      success: "Bedankt. Uw bericht is klaar om te worden verzonden."
     }
   },
 
@@ -398,6 +436,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-mail:",
       description:
         "W sprawie reklamy, współpracy, występów na okładce i możliwości redakcyjnych skontaktuj się z naszym zespołem."
+    },
+    messages: {
+      required: "Uzupełnij imię, adres e-mail i wiadomość.",
+      success: "Dziękujemy. Twoja wiadomość jest gotowa do wysłania."
     }
   },
 
@@ -438,6 +480,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-mail:",
       description:
         "Pro reklamu, spolupráce, možnosti na obálce a redakční příležitosti kontaktujte náš tým."
+    },
+    messages: {
+      required: "Vyplňte své jméno, e-mail a zprávu.",
+      success: "Děkujeme. Vaše zpráva je připravena k odeslání."
     }
   },
 
@@ -478,8 +524,14 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-mail:",
       description:
         "Pre reklamu, spolupráce, možnosti na obálke a redakčné príležitosti kontaktujte náš tím."
+    },
+    messages: {
+      required: "Vyplňte svoje meno, e-mail a správu.",
+      success: "Ďakujeme. Vaša správa je pripravená na odoslanie."
     }
-  },  hu: {
+  }    ,
+
+  hu: {
     meta: {
       title: "Kapcsolat — PETS & DOGUE",
       description:
@@ -516,6 +568,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-mail:",
       description:
         "Hirdetés, együttműködés, címlapmegjelenés és szerkesztőségi lehetőségek ügyében lépjen kapcsolatba csapatunkkal."
+    },
+    messages: {
+      required: "Töltse ki a nevét, e-mail-címét és az üzenetet.",
+      success: "Köszönjük. Üzenete készen áll az elküldésre."
     }
   },
 
@@ -556,6 +612,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Email:",
       description:
         "Pentru publicitate, colaborări, apariții pe copertă și oportunități editoriale, contactează echipa noastră."
+    },
+    messages: {
+      required: "Completează numele, adresa de email și mesajul.",
+      success: "Mulțumim. Mesajul tău este gata de trimis."
     }
   },
 
@@ -596,6 +656,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Email:",
       description:
         "За реклама, сътрудничества, участия на корицата и редакционни възможности се свържете с нашия екип."
+    },
+    messages: {
+      required: "Моля, попълнете името, имейла и съобщението си.",
+      success: "Благодарим. Вашето съобщение е готово за изпращане."
     }
   },
 
@@ -603,7 +667,7 @@ window.PetsDogueTranslations.contact = {
     meta: {
       title: "Επικοινωνία — PETS & DOGUE",
       description:
-        "Επικοινωνήστε με το PETS & DOGUE για διαφήμιση, συνεργασίες, editorial προτάσεις και γενικές ερωτήσεις."
+        "Επικοινωνήστε με το PETS & DOGUE για διαφήμιση, συνεργασίες, συντακτικές προτάσεις και γενικές ερωτήσεις."
     },
     nav: {
       home: "Αρχική",
@@ -618,12 +682,12 @@ window.PetsDogueTranslations.contact = {
     hero: {
       title: "Επικοινωνήστε μαζί μας",
       description:
-        "Ερωτήματα διαφήμισης, συνεργασίες μέσων, editorial υποβολές, αιτήσεις για αστέρι εξωφύλλου και γενικές ερωτήσεις."
+        "Ερωτήματα διαφήμισης, συνεργασίες μέσων, συντακτικές υποβολές, αιτήσεις για αστέρι εξωφύλλου και γενικές ερωτήσεις."
     },
     form: {
       nameLabel: "Ονοματεπώνυμο",
       namePlaceholder: "Το όνομά σας",
-      emailLabel: "Διεύθυνση email",
+      emailLabel: "Διεύθυνση ηλεκτρονικού ταχυδρομείου",
       emailPlaceholder: "your@email.com",
       companyLabel: "Εταιρεία (προαιρετικό)",
       companyPlaceholder: "Όνομα εταιρείας",
@@ -633,9 +697,13 @@ window.PetsDogueTranslations.contact = {
     },
     info: {
       title: "Συντακτική Ομάδα PETS & DOGUE",
-      emailLabel: "Email:",
+      emailLabel: "Ηλεκτρονικό ταχυδρομείο:",
       description:
-        "Για διαφήμιση, συνεργασίες, εμφανίσεις στο εξώφυλλο και editorial ευκαιρίες, επικοινωνήστε με την ομάδα μας."
+        "Για διαφήμιση, συνεργασίες, εμφανίσεις στο εξώφυλλο και συντακτικές ευκαιρίες, επικοινωνήστε με την ομάδα μας."
+    },
+    messages: {
+      required: "Συμπληρώστε το όνομα, το ηλεκτρονικό ταχυδρομείο και το μήνυμά σας.",
+      success: "Ευχαριστούμε. Το μήνυμά σας είναι έτοιμο για αποστολή."
     }
   },
 
@@ -676,6 +744,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-post:",
       description:
         "För annonsering, samarbeten, omslagsmöjligheter och redaktionella möjligheter, kontakta vårt team."
+    },
+    messages: {
+      required: "Fyll i ditt namn, din e-postadress och ditt meddelande.",
+      success: "Tack. Ditt meddelande är redo att skickas."
     }
   },
 
@@ -716,8 +788,12 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-mail:",
       description:
         "Kontakt vores team for annoncering, samarbejde, forsideindhold og redaktionelle muligheder."
+    },
+    messages: {
+      required: "Udfyld dit navn, din e-mailadresse og din besked.",
+      success: "Tak. Din besked er klar til at blive sendt."
     }
-  },
+  }   ,
 
   no: {
     meta: {
@@ -756,6 +832,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-post:",
       description:
         "For annonsering, samarbeid, forsideinnhold og redaksjonelle muligheter, kontakt teamet vårt."
+    },
+    messages: {
+      required: "Fyll ut navn, e-postadresse og melding.",
+      success: "Takk. Meldingen din er klar til å sendes."
     }
   },
 
@@ -796,8 +876,14 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "Sähköposti:",
       description:
         "Mainontaa, yhteistyötä, kansijuttuja ja toimituksellisia mahdollisuuksia varten ota yhteyttä tiimiimme."
+    },
+    messages: {
+      required: "Täytä nimesi, sähköpostiosoitteesi ja viestisi.",
+      success: "Kiitos. Viestisi on valmis lähetettäväksi."
     }
-  },  tr: {
+  },
+
+  tr: {
     meta: {
       title: "İletişim — PETS & DOGUE",
       description:
@@ -834,6 +920,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "E-posta:",
       description:
         "Reklam, iş birlikleri, kapak özellikleri ve editoryal fırsatlar için ekibimizle iletişime geçin."
+    },
+    messages: {
+      required: "Adınızı, e-posta adresinizi ve mesajınızı doldurun.",
+      success: "Teşekkürler. Mesajınız gönderilmeye hazır."
     }
   },
 
@@ -874,6 +964,10 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "البريد الإلكتروني:",
       description:
         "للإعلان والتعاون وفرص الظهور على الغلاف والفرص التحريرية، يرجى التواصل مع فريقنا."
+    },
+    messages: {
+      required: "يرجى إدخال الاسم والبريد الإلكتروني والرسالة.",
+      success: "شكرًا لك. رسالتك جاهزة للإرسال."
     }
   },
 
@@ -914,6 +1008,11 @@ window.PetsDogueTranslations.contact = {
       emailLabel: "ईमेल:",
       description:
         "विज्ञापन, सहयोग, कवर फीचर और संपादकीय अवसरों के लिए हमारी टीम से संपर्क करें।"
+    },
+    messages: {
+      required: "कृपया अपना नाम, ईमेल और संदेश भरें।",
+      success: "धन्यवाद। आपका संदेश भेजने के लिए तैयार है।"
     }
   }
+
 };
