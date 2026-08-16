@@ -276,7 +276,9 @@ window.PetsDogueTranslations.advertise = {
         "Für Werbung, Kooperationen und Partnerschaften mit Luxusmarken kontaktieren Sie das Redaktionsteam von PETS & DOGUE.",
       emailLabel: "E-Mail:"
     }
-  },  es: {
+  },
+
+  es: {
     meta: {
       title: "Publicidad — PETS & DOGUE",
       description:
@@ -329,7 +331,7 @@ window.PetsDogueTranslations.advertise = {
         "Para publicidad, colaboraciones y asociaciones con marcas de lujo, contacta con el equipo editorial de PETS & DOGUE.",
       emailLabel: "Correo:"
     }
-  },
+  }   ,
 
   it: {
     meta: {
@@ -659,7 +661,9 @@ window.PetsDogueTranslations.advertise = {
         "Pre reklamu, spoluprácu a partnerstvá s luxusnými značkami kontaktujte redakciu PETS & DOGUE.",
       emailLabel: "E-mail:"
     }
-  },  hu: {
+  }   ,
+
+  hu: {
     meta: {
       title: "Hirdetés — PETS & DOGUE",
       description:
@@ -840,7 +844,7 @@ window.PetsDogueTranslations.advertise = {
     hero: {
       title: "Διαφημιστείτε Με Το DOGUE",
       description:
-        "Προσεγγίστε ιδιοκτήτες πολυτελών κατοικίδιων, φιλόζωους, εκτροφείς, groomers, boutiques, κτηνιατρικά brands, ξενοδοχεία και lifestyle επιχειρήσεις σε όλο τον κόσμο."
+        "Προσεγγίστε ιδιοκτήτες πολυτελών κατοικίδιων, φιλόζωους, εκτροφείς, επαγγελματίες περιποίησης, μπουτίκ, κτηνιατρικές μάρκες, ξενοδοχεία και επιχειρήσεις τρόπου ζωής σε όλο τον κόσμο."
     },
     grid: {
       ariaLabel: "Ευκαιρίες διαφήμισης"
@@ -849,33 +853,33 @@ window.PetsDogueTranslations.advertise = {
       article: {
         title: "Χορηγούμενο άρθρο",
         description:
-          "Ένα πλήρες editorial άρθρο για το brand, το προϊόν, το ξενοδοχείο, το salon ή την υπηρεσία σας.",
+          "Ένα πλήρες άρθρο συντακτικού ύφους για τη μάρκα, το προϊόν, το ξενοδοχείο, το σαλόνι ή την υπηρεσία σας.",
         price: "Από £150"
       },
       banner: {
-        title: "Τοποθέτηση banner",
+        title: "Τοποθέτηση διαφημιστικού πλαισίου",
         description:
-          "Premium οπτική διαφήμιση στις σελίδες του PETS & DOGUE.",
+          "Πολυτελής οπτική διαφήμιση στις σελίδες του PETS & DOGUE.",
         price: "Από £75"
       },
       cover: {
         title: "Συνεργάτης εξωφύλλου",
         description:
-          "Αποκλειστική τοποθέτηση brand συνδεδεμένη με τεύχος DOGUE ή ιστορία εξωφύλλου.",
+          "Αποκλειστική προβολή μάρκας συνδεδεμένη με τεύχος DOGUE ή ιστορία εξωφύλλου.",
         price: "Από £300"
       },
       feature: {
-        title: "Παρουσίαση brand",
+        title: "Παρουσίαση μάρκας",
         description:
-          "Ιδανικό για πολυτελή pet shops, groomers, αξεσουάρ, μάρκες τροφών και ξενοδοχεία.",
+          "Ιδανικό για πολυτελή καταστήματα κατοικίδιων, επαγγελματίες περιποίησης, αξεσουάρ, μάρκες τροφών και ξενοδοχεία.",
         price: "Από £120"
       }
     },
     cta: {
       title: "Αιτήματα Συνεργασίας",
       description:
-        "Για διαφήμιση, συνεργασίες και partnerships με luxury brands, επικοινωνήστε με τη συντακτική ομάδα του PETS & DOGUE.",
-      emailLabel: "Email:"
+        "Για διαφήμιση, συνεργασίες και συμπράξεις με πολυτελείς μάρκες, επικοινωνήστε με τη συντακτική ομάδα του PETS & DOGUE.",
+      emailLabel: "Ηλεκτρονικό ταχυδρομείο:"
     }
   },
 
@@ -987,7 +991,7 @@ window.PetsDogueTranslations.advertise = {
         "Kontakt PETS & DOGUE-redaktionen for annoncering, samarbejde og partnerskaber med luksusbrands.",
       emailLabel: "E-mail:"
     }
-  },
+  }   ,
 
   no: {
     meta: {
@@ -1097,7 +1101,9 @@ window.PetsDogueTranslations.advertise = {
         "Mainontaa, yhteistyötä ja luksusbrändikumppanuuksia varten ota yhteyttä PETS & DOGUE -toimitukseen.",
       emailLabel: "Sähköposti:"
     }
-  },  tr: {
+  },
+
+  tr: {
     meta: {
       title: "Reklam — PETS & DOGUE",
       description:
@@ -1261,4 +1267,5 @@ window.PetsDogueTranslations.advertise = {
       emailLabel: "ईमेल:"
     }
   }
+
 };
