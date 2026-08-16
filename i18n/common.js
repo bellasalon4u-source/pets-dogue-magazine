@@ -2849,4 +2849,32 @@ window.PetsDogueTranslations.common = {
         "समुदाय की लिस्टिंग, सेवाएँ और एक्सेसरीज़।"
     }
   }
+}; const PD_HOME_MENU={
+en:["Home","Return to the PETS & DOGUE homepage."],
+uk:["Головна","Повернутися на головну сторінку PETS & DOGUE."],
+ru:["Главная","Вернуться на главную страницу PETS & DOGUE."],
+fr:["Accueil","Retourner à la page d’accueil de PETS & DOGUE."],
+de:["Startseite","Zur PETS & DOGUE Startseite zurückkehren."],
+es:["Inicio","Volver a la página principal de PETS & DOGUE."],
+it:["Home","Torna alla pagina principale di PETS & DOGUE."],
+pt:["Início","Voltar à página inicial da PETS & DOGUE."],
+nl:["Home","Ga terug naar de PETS & DOGUE-homepage."],
+pl:["Strona główna","Wróć na stronę główną PETS & DOGUE."],
+cs:["Domů","Zpět na domovskou stránku PETS & DOGUE."],
+sk:["Domov","Späť na domovskú stránku PETS & DOGUE."],
+hu:["Kezdőlap","Vissza a PETS & DOGUE kezdőlapjára."],
+ro:["Acasă","Revino la pagina principală PETS & DOGUE."],
+bg:["Начало","Върнете се към началната страница на PETS & DOGUE."],
+el:["Αρχική","Επιστροφή στην αρχική σελίδα του PETS & DOGUE."],
+sv:["Hem","Gå tillbaka till PETS & DOGUE-startsidan."],
+da:["Forside","Gå tilbage til PETS & DOGUE-forsiden."],
+no:["Hjem","Gå tilbake til PETS & DOGUE-forsiden."],
+fi:["Etusivu","Palaa PETS & DOGUE -etusivulle."],
+tr:["Ana sayfa","PETS & DOGUE ana sayfasına dönün."],
+ar:["الرئيسية","العودة إلى الصفحة الرئيسية لـ PETS & DOGUE."],
+hi:["होम","PETS & DOGUE होमपेज पर वापस जाएँ।"]
 };
+Object.entries(PD_HOME_MENU).forEach(([lang,text])=>{
+const menu=window.PetsDogueTranslations.common?.[lang]?.menu;
+if(menu){menu.home=text[0];menu.homeDescription=text[1]}
+});
