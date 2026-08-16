@@ -32,7 +32,7 @@ window.PetsDogueTranslations.archive = {
         "The debut issue featuring Miso and luxury animal stories from around the world."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>ISSUE 02",
+      cover: "PETS & DOGUE — ISSUE 02",
       badge: "COMING SOON",
       title: "Issue 02 — Autumn 2026",
       description:
@@ -77,7 +77,7 @@ window.PetsDogueTranslations.archive = {
         "Дебютний випуск із Miso та люксовими історіями про тварин з усього світу."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>ВИПУСК 02",
+      cover: "PETS & DOGUE — ВИПУСК 02",
       badge: "НЕЗАБАРОМ",
       title: "Випуск 02 — Осінь 2026",
       description:
@@ -122,7 +122,7 @@ window.PetsDogueTranslations.archive = {
         "Дебютный выпуск с Miso и люксовыми историями о животных со всего мира."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>ВЫПУСК 02",
+      cover: "PETS & DOGUE — ВЫПУСК 02",
       badge: "СКОРО",
       title: "Выпуск 02 — Осень 2026",
       description:
@@ -167,7 +167,7 @@ window.PetsDogueTranslations.archive = {
         "Le premier numéro avec Miso et des histoires animales haut de gamme venues du monde entier."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>NUMÉRO 02",
+      cover: "PETS & DOGUE — NUMÉRO 02",
       badge: "BIENTÔT",
       title: "Numéro 02 — Automne 2026",
       description:
@@ -212,7 +212,7 @@ window.PetsDogueTranslations.archive = {
         "Die Debütausgabe mit Miso und luxuriösen Tiergeschichten aus aller Welt."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>AUSGABE 02",
+      cover: "PETS & DOGUE — AUSGABE 02",
       badge: "DEMNÄCHST",
       title: "Ausgabe 02 — Herbst 2026",
       description:
@@ -226,7 +226,9 @@ window.PetsDogueTranslations.archive = {
       contact: "Kontakt",
       advertise: "Werbung"
     }
-  },  es: {
+  },
+
+  es: {
     meta: {
       title: "Archivo — PETS & DOGUE",
       description: "Explora las ediciones actuales y futuras de PETS & DOGUE."
@@ -255,7 +257,7 @@ window.PetsDogueTranslations.archive = {
         "El número de debut con Miso e historias de lujo sobre animales de todo el mundo."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>NÚMERO 02",
+      cover: "PETS & DOGUE — NÚMERO 02",
       badge: "PRÓXIMAMENTE",
       title: "Número 02 — Otoño 2026",
       description:
@@ -269,7 +271,7 @@ window.PetsDogueTranslations.archive = {
       contact: "Contacto",
       advertise: "Publicidad"
     }
-  },
+  }   ,
 
   it: {
     meta: {
@@ -300,7 +302,7 @@ window.PetsDogueTranslations.archive = {
         "Il numero di debutto con Miso e storie luxury sugli animali da tutto il mondo."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>NUMERO 02",
+      cover: "PETS & DOGUE — NUMERO 02",
       badge: "IN ARRIVO",
       title: "Numero 02 — Autunno 2026",
       description:
@@ -345,7 +347,7 @@ window.PetsDogueTranslations.archive = {
         "A edição de estreia com Miso e histórias de luxo sobre animais de todo o mundo."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>EDIÇÃO 02",
+      cover: "PETS & DOGUE — EDIÇÃO 02",
       badge: "EM BREVE",
       title: "Edição 02 — Outono 2026",
       description:
@@ -390,7 +392,7 @@ window.PetsDogueTranslations.archive = {
         "De debuuteditie met Miso en luxe dierenverhalen uit de hele wereld."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>EDITIE 02",
+      cover: "PETS & DOGUE — EDITIE 02",
       badge: "BINNENKORT",
       title: "Editie 02 — Herfst 2026",
       description:
@@ -435,7 +437,7 @@ window.PetsDogueTranslations.archive = {
         "Debiutanckie wydanie z Miso i luksusowymi historiami o zwierzętach z całego świata."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>WYDANIE 02",
+      cover: "PETS & DOGUE — WYDANIE 02",
       badge: "JUŻ WKRÓTCE",
       title: "Wydanie 02 — Jesień 2026",
       description:
@@ -480,7 +482,7 @@ window.PetsDogueTranslations.archive = {
         "První vydání s Miso a luxusními příběhy o zvířatech z celého světa."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>VYDÁNÍ 02",
+      cover: "PETS & DOGUE — VYDÁNÍ 02",
       badge: "JIŽ BRZY",
       title: "Vydání 02 — Podzim 2026",
       description:
@@ -525,7 +527,7 @@ window.PetsDogueTranslations.archive = {
         "Prvé vydanie s Miso a luxusnými príbehmi o zvieratách z celého sveta."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>VYDANIE 02",
+      cover: "PETS & DOGUE — VYDANIE 02",
       badge: "UŽ ČOSKORO",
       title: "Vydanie 02 — Jeseň 2026",
       description:
@@ -539,7 +541,9 @@ window.PetsDogueTranslations.archive = {
       contact: "Kontakt",
       advertise: "Reklama"
     }
-  },  hu: {
+  }   ,
+
+  hu: {
     meta: {
       title: "Archívum — PETS & DOGUE",
       description: "Fedezze fel a PETS & DOGUE jelenlegi és jövőbeli kiadásait."
@@ -568,7 +572,7 @@ window.PetsDogueTranslations.archive = {
         "A bemutatkozó kiadás Miso főszereplésével és luxus állattörténetekkel a világ minden tájáról."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>02. KIADÁS",
+      cover: "PETS & DOGUE — 02. KIADÁS",
       badge: "HAMAROSAN",
       title: "02. kiadás — 2026 ősz",
       description:
@@ -613,7 +617,7 @@ window.PetsDogueTranslations.archive = {
         "Ediția de debut cu Miso și povești de lux despre animale din întreaga lume."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>EDIȚIA 02",
+      cover: "PETS & DOGUE — EDIȚIA 02",
       badge: "ÎN CURÂND",
       title: "Ediția 02 — Toamna 2026",
       description:
@@ -658,7 +662,7 @@ window.PetsDogueTranslations.archive = {
         "Дебютният брой с Miso и луксозни истории за животни от целия свят."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>БРОЙ 02",
+      cover: "PETS & DOGUE — БРОЙ 02",
       badge: "ОЧАКВАЙТЕ СКОРО",
       title: "Брой 02 — Есен 2026",
       description:
@@ -703,7 +707,7 @@ window.PetsDogueTranslations.archive = {
         "Το πρώτο τεύχος με τη Miso και πολυτελείς ιστορίες ζώων από όλο τον κόσμο."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>ΤΕΥΧΟΣ 02",
+      cover: "PETS & DOGUE — ΤΕΥΧΟΣ 02",
       badge: "ΣΥΝΤΟΜΑ",
       title: "Τεύχος 02 — Φθινόπωρο 2026",
       description:
@@ -748,7 +752,7 @@ window.PetsDogueTranslations.archive = {
         "Debututgåvan med Miso och lyxiga djurberättelser från hela världen."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>UTGÅVA 02",
+      cover: "PETS & DOGUE — UTGÅVA 02",
       badge: "KOMMER SNART",
       title: "Utgåva 02 — Hösten 2026",
       description:
@@ -793,7 +797,7 @@ window.PetsDogueTranslations.archive = {
         "Debutudgaven med Miso og luksuriøse dyrehistorier fra hele verden."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>UDGAVE 02",
+      cover: "PETS & DOGUE — UDGAVE 02",
       badge: "KOMMER SNART",
       title: "Udgave 02 — Efterår 2026",
       description:
@@ -807,7 +811,9 @@ window.PetsDogueTranslations.archive = {
       contact: "Kontakt",
       advertise: "Annoncer"
     }
-  },  no: {
+  }   ,
+
+  no: {
     meta: {
       title: "Arkiv — PETS & DOGUE",
       description: "Utforsk nåværende og kommende utgaver av PETS & DOGUE."
@@ -836,7 +842,7 @@ window.PetsDogueTranslations.archive = {
         "Debututgaven med Miso og luksuriøse dyrehistorier fra hele verden."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>UTGAVE 02",
+      cover: "PETS & DOGUE — UTGAVE 02",
       badge: "KOMMER SNART",
       title: "Utgave 02 — Høsten 2026",
       description:
@@ -881,7 +887,7 @@ window.PetsDogueTranslations.archive = {
         "Ensimmäinen numero, jossa Miso ja ylellisiä eläintarinoita eri puolilta maailmaa."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>NUMERO 02",
+      cover: "PETS & DOGUE — NUMERO 02",
       badge: "TULOSSA PIAN",
       title: "Numero 02 — Syksy 2026",
       description:
@@ -926,7 +932,7 @@ window.PetsDogueTranslations.archive = {
         "Miso'nun yer aldığı ilk sayı ve dünyanın dört bir yanından lüks hayvan hikâyeleri."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>SAYI 02",
+      cover: "PETS & DOGUE — SAYI 02",
       badge: "YAKINDA",
       title: "Sayı 02 — Sonbahar 2026",
       description:
@@ -971,7 +977,7 @@ window.PetsDogueTranslations.archive = {
         "العدد الأول مع Miso وقصص فاخرة عن الحيوانات من جميع أنحاء العالم."
     },
     issue02: {
-      cover: "PETS & DOGUE<br>العدد 02",
+      cover: "PETS & DOGUE — العدد 02",
       badge: "قريبًا",
       title: "العدد 02 — خريف 2026",
       description:
@@ -1016,7 +1022,7 @@ window.PetsDogueTranslations.archive = {
         "Miso के साथ पहला अंक और दुनिया भर से लक्ज़री पशु कहानियाँ।"
     },
     issue02: {
-      cover: "PETS & DOGUE<br>अंक 02",
+      cover: "PETS & DOGUE — अंक 02",
       badge: "जल्द आ रहा है",
       title: "अंक 02 — शरद 2026",
       description:
@@ -1031,4 +1037,5 @@ window.PetsDogueTranslations.archive = {
       advertise: "विज्ञापन"
     }
   }
+
 };
