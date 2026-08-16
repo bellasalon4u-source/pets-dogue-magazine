@@ -345,7 +345,9 @@ window.PetsDogueTranslations.copyright = {
       contact: "Kontakt",
       advertise: "Werbung"
     }
-  },  es: {
+  },
+
+  es: {
     meta: {
       title: "Política de derechos de autor — PETS & DOGUE",
       description:
@@ -412,7 +414,7 @@ window.PetsDogueTranslations.copyright = {
       contact: "Contacto",
       advertise: "Publicidad"
     }
-  },
+  }   ,
 
   it: {
     meta: {
@@ -826,7 +828,9 @@ window.PetsDogueTranslations.copyright = {
       contact: "Kontakt",
       advertise: "Reklama"
     }
-  },  hu: {
+  }   ,
+
+  hu: {
     meta: {
       title: "Szerzői jogi irányelvek — PETS & DOGUE",
       description:
@@ -1057,7 +1061,7 @@ window.PetsDogueTranslations.copyright = {
     ownership: {
       title: "Ιδιοκτησία περιεχομένου",
       description:
-        "Εκτός αν αναφέρεται διαφορετικά, όλα τα άρθρα, οι διατάξεις του περιοδικού, το branding, τα γραφικά, τα λογότυπα, τα κείμενα και το πρωτότυπο περιεχόμενο που δημοσιεύεται στο PETS & DOGUE προστατεύονται από τη νομοθεσία περί πνευματικής ιδιοκτησίας."
+        "Εκτός αν αναφέρεται διαφορετικά, όλα τα άρθρα, οι διατάξεις του περιοδικού, τα στοιχεία της εμπορικής ταυτότητας, τα γραφικά, τα λογότυπα, τα κείμενα και το πρωτότυπο περιεχόμενο που δημοσιεύεται στο PETS & DOGUE προστατεύονται από τη νομοθεσία περί πνευματικής ιδιοκτησίας."
     },
     images: {
       title: "Εικόνες και φωτογραφία",
@@ -1067,7 +1071,7 @@ window.PetsDogueTranslations.copyright = {
       item1: "κατέχουν την εικόνα ή έχουν άδεια να τη χρησιμοποιήσουν.",
       item2: "η εικόνα δεν παραβιάζει δικαιώματα τρίτων.",
       item3:
-        "το PETS & DOGUE μπορεί να προβάλλει την εικόνα ως μέρος του editorial περιεχομένου."
+        "το PETS & DOGUE μπορεί να προβάλλει την εικόνα ως μέρος του συντακτικού περιεχομένου."
     },
     reuse: {
       title: "Επαναχρησιμοποίηση περιεχομένου",
@@ -1238,7 +1242,9 @@ window.PetsDogueTranslations.copyright = {
       contact: "Kontakt",
       advertise: "Annoncer"
     }
-  },  no: {
+  }   ,
+
+  no: {
     meta: {
       title: "Opphavsrettspolicy — PETS & DOGUE",
       description:
@@ -1582,4 +1588,5 @@ window.PetsDogueTranslations.copyright = {
       advertise: "विज्ञापन"
     }
   }
+
 };
