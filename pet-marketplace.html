@@ -10,14 +10,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
---ink:#090909;
---paper:#f4f0e6;
+--ink:#0b0b0b;
+--paper:#f5f2ea;
 --white:#fff;
 --gold:#c99d36;
---gold-light:#e3c36e;
---gold-dark:#9f741c;
---muted:#74706a;
---line:#d5d0c5;
+--gold-light:#f1d477;
+--muted:#707070;
+--line:#d9d5cb;
+--green:#5b982c;
 --serif:Georgia,"Times New Roman",serif;
 --sans:Arial,Helvetica,sans-serif
 }
@@ -27,8 +27,7 @@ html{scroll-behavior:smooth}
 body{
 background:var(--paper);
 color:var(--ink);
-font-family:var(--sans);
-overflow-x:hidden
+font-family:var(--sans)
 }
 
 button,input,select,textarea{font:inherit}
@@ -37,444 +36,420 @@ a{color:inherit;text-decoration:none}
 img{display:block;width:100%}
 
 
-/* =========================================================
-   HEADER — SAME VISUAL SYSTEM AS FINISHED DOGUE SECTIONS
-========================================================= */
+/* =========================
+   GLOBAL DOGUE HEADER
+========================= */
 
 .site-header{
 position:sticky;
 top:0;
-z-index:1200;
+z-index:1000;
 background:#050505;
 color:#fff;
-border-bottom:1px solid #222
+border-bottom:1px solid #272727
 }
 
 .header-main{
-height:160px;
+height:128px;
 display:grid;
-grid-template-columns:72px 1fr 72px;
+grid-template-columns:64px 1fr 64px;
 align-items:center;
-padding:0 26px
+padding:0 22px
 }
 
 .brand{
 text-align:center;
-line-height:1;
-display:block
+line-height:1
 }
 
 .brand-small{
 font-family:var(--serif);
 font-size:15px;
 letter-spacing:3px;
-color:#d1a84d;
-text-transform:none;
+color:#cda751;
 margin-bottom:5px
 }
 
 .brand-big{
 font-family:var(--serif);
-font-size:56px;
+font-size:53px;
 font-weight:400;
 letter-spacing:5px;
 color:#fff
 }
 
-.icon-button{
+.icon-btn{
 border:0;
-background:transparent;
+background:none;
 color:#fff;
 display:flex;
 align-items:center;
 justify-content:center
 }
 
-.menu-button{
-width:58px;
-height:58px;
+.menu-lines{
+width:38px;
+height:27px;
+display:flex;
 flex-direction:column;
-gap:8px
+justify-content:space-between
 }
 
-.menu-button span{
+.menu-lines span{
 display:block;
-width:44px;
 height:3px;
+width:100%;
 background:#fff;
-border-radius:5px
+border-radius:10px
 }
 
-.home-button{
-width:58px;
-height:58px
-}
-
-.home-button svg{
-width:42px;
-height:42px;
-stroke:#fff;
-stroke-width:2.4;
-fill:none
+.home-svg{
+width:35px;
+height:35px
 }
 
 .nav-strip{
+height:58px;
 display:flex;
-gap:37px;
 align-items:center;
+gap:34px;
 overflow-x:auto;
 scrollbar-width:none;
-border-top:1px solid #242424;
-padding:17px 27px 15px;
-white-space:nowrap;
-font-size:15px;
+border-top:1px solid #262626;
+padding:0 26px;
 font-weight:900;
-letter-spacing:.5px;
+font-size:14px;
+letter-spacing:.8px;
+white-space:nowrap;
 text-transform:uppercase
 }
 
 .nav-strip::-webkit-scrollbar{display:none}
 
 .nav-strip a{
-position:relative;
-padding-bottom:3px
+height:58px;
+display:flex;
+align-items:center;
+position:relative
 }
 
 .nav-strip a.active{
-color:var(--gold-light)
+color:#d7b45b
 }
 
 .nav-strip a.active:after{
 content:"";
 position:absolute;
-height:3px;
 left:0;
 right:0;
-bottom:-14px;
-background:linear-gradient(
-90deg,
-var(--gold-dark),
-var(--gold-light),
-var(--gold)
-)
+bottom:3px;
+height:2px;
+background:linear-gradient(90deg,#8d6716,#f3d77a,#9f761c)
 }
 
 
-/* =========================================================
-   SIDE MENU
-========================================================= */
-
-.menu-backdrop{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.68);
-z-index:1998;
-opacity:0;
-visibility:hidden;
-transition:.25s
-}
-
-.menu-backdrop.open{
-opacity:1;
-visibility:visible
-}
-
-.side-menu{
-position:fixed;
-left:0;
-top:0;
-bottom:0;
-width:min(360px,88vw);
-background:#090909;
-color:#fff;
-z-index:1999;
-transform:translateX(-105%);
-transition:.3s ease;
-padding:28px 26px;
-overflow:auto
-}
-
-.side-menu.open{
-transform:translateX(0)
-}
-
-.side-menu-head{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding-bottom:24px;
-border-bottom:1px solid #2b2b2b
-}
-
-.side-menu-brand{
-font-family:var(--serif);
-font-size:30px;
-letter-spacing:2px;
-color:var(--gold-light)
-}
-
-.side-close{
-width:44px;
-height:44px;
-border:1px solid #444;
-background:none;
-color:#fff;
-font-size:28px
-}
-
-.side-links{
-display:flex;
-flex-direction:column;
-padding-top:18px
-}
-
-.side-links a{
-padding:17px 0;
-border-bottom:1px solid #252525;
-font-weight:800;
-font-size:16px
-}
-
-.side-links a.active{
-color:var(--gold-light)
-}
-
-
-/* =========================================================
-   MARKETPLACE TOP
-========================================================= */
+/* =========================
+   PAGE
+========================= */
 
 .market-shell{
-max-width:1260px;
-margin:0 auto;
-padding:30px 24px 75px
+max-width:1240px;
+margin:auto;
+padding:25px 26px 90px
 }
 
-.market-top{
-border-top:5px solid #111;
-padding-top:21px
-}
-
-.market-heading-row{
-display:flex;
-align-items:flex-end;
-justify-content:space-between;
-gap:20px
+.market-intro{
+display:grid;
+grid-template-columns:1fr auto;
+gap:18px;
+align-items:end;
+margin-bottom:12px
 }
 
 .eyebrow{
 color:var(--gold);
-font-size:13px;
+font-size:12px;
 font-weight:900;
-letter-spacing:4px;
-text-transform:uppercase
+letter-spacing:3px;
+text-transform:uppercase;
+margin-bottom:6px
 }
 
 .market-title{
 font-family:var(--serif);
-font-size:62px;
-line-height:.95;
+font-size:58px;
 font-weight:400;
-margin-top:8px
+line-height:.95
 }
 
 .saved-link{
 border:0;
 background:none;
-font-size:17px;
+font-size:16px;
 font-weight:800;
 white-space:nowrap;
-padding-bottom:6px
-}
-
-.saved-link:hover{
-color:var(--gold-dark)
+padding-bottom:4px
 }
 
 
-/* =========================================================
-   LOCATION + SEARCH COMPACT TOOLBAR
-========================================================= */
+/* =========================
+   LOCATION SUMMARY
+========================= */
 
-.market-tools{
-margin-top:20px
-}
-
-.location-toolbar{
+.location-summary{
 display:flex;
 align-items:center;
-justify-content:space-between;
-gap:14px;
-margin-bottom:10px
-}
-
-.location-left{
-display:flex;
-align-items:center;
-gap:9px;
+gap:10px;
+margin-bottom:10px;
 min-width:0
 }
 
 .location-pin{
-font-size:20px
+font-size:20px;
+flex:none
 }
 
 .location-main{
 border:0;
 background:none;
 font-weight:900;
-font-size:17px;
-max-width:540px;
-white-space:nowrap;
+font-size:16px;
+min-width:0;
+max-width:72%;
 overflow:hidden;
 text-overflow:ellipsis;
+white-space:nowrap;
 text-align:left
 }
 
 .location-distance{
-color:var(--muted);
+font-size:15px;
+color:#777;
 white-space:nowrap
 }
 
-.location-change{
-border:0;
-background:none;
-text-decoration:underline;
-font-size:14px
-}
-
-.search-bar{
-height:62px;
+.location-edit{
+margin-left:auto;
+border:1px solid #b6b1a7;
+width:32px;
+height:32px;
+border-radius:50%;
 background:#fff;
-border:1px solid #cfcac0;
-display:grid;
-grid-template-columns:55px 1fr 58px;
-align-items:center
-}
-
-.search-symbol{
+font-size:17px;
 display:flex;
 align-items:center;
 justify-content:center
 }
 
-.search-symbol svg{
-width:28px;
-height:28px;
-stroke:#111;
-stroke-width:2;
-fill:none
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-wrap{
+position:relative
+}
+
+.search-bar{
+height:58px;
+background:#fff;
+border:1px solid #d2cec4;
+display:grid;
+grid-template-columns:48px 1fr 52px;
+align-items:center;
+padding:4px 5px 4px 7px
+}
+
+.search-symbol{
+font-size:28px;
+text-align:center
 }
 
 .search-bar input{
 border:0;
 outline:0;
-background:transparent;
+font-size:16px;
 width:100%;
 min-width:0;
-font-size:17px
+background:transparent
 }
 
 .filter-toggle{
-border:0;
-width:48px;
 height:48px;
-justify-self:center;
-background:#0a0a0a;
+width:48px;
+border:0;
+background:#0c0c0c;
+color:#fff;
 display:flex;
+flex-direction:column;
 align-items:center;
 justify-content:center;
-flex-direction:column;
 gap:5px
 }
 
 .filter-toggle span{
-display:block;
 width:23px;
 height:2px;
 background:#fff
 }
 
 
-/* =========================================================
+/* =========================
    LOCATION PANEL
-========================================================= */
+========================= */
 
 .location-panel{
 display:none;
-background:#fff;
-border:1px solid var(--line);
-border-top:0;
-padding:17px;
-position:relative;
-z-index:50
+margin-top:8px;
+background:#faf9f5;
+border:1px solid #839d63;
+padding:15px;
+box-shadow:0 9px 24px rgba(0,0,0,.08)
 }
 
-.location-panel.open{display:block}
-
-.location-top{
-display:grid;
-grid-template-columns:1fr auto;
-gap:10px
+.location-panel.open{
+display:block
 }
 
-.location-input{
-height:48px;
-width:100%;
-border:1px solid #ccc;
-padding:0 14px;
-outline:0;
-background:#fff
+.location-panel-head{
+display:flex;
+align-items:center;
+gap:9px;
+margin-bottom:13px
 }
 
-.near-btn{
-height:48px;
-border:0;
-background:#111;
+.location-panel-icon{
+width:35px;
+height:35px;
+border-radius:50%;
+background:#5b982c;
 color:#fff;
-padding:0 18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+flex:none
+}
+
+.location-panel-current{
 font-weight:900;
+font-size:15px;
+min-width:0;
+overflow:hidden;
+text-overflow:ellipsis;
 white-space:nowrap
 }
 
+.location-panel-distance{
+color:#5b982c;
+font-size:14px;
+white-space:nowrap
+}
+
+.location-panel-actions{
+margin-left:auto;
+display:flex;
+gap:7px;
+align-items:center
+}
+
+.location-done{
+border:0;
+background:#5b982c;
+color:#fff;
+height:32px;
+padding:0 12px;
+border-radius:20px;
+font-size:13px;
+font-weight:900;
+display:flex;
+align-items:center;
+gap:5px
+}
+
+.location-close{
+width:32px;
+height:32px;
+border-radius:50%;
+border:1px solid #aaa;
+background:#fff;
+font-size:20px;
+line-height:1
+}
+
+.location-label{
+display:block;
+font-size:13px;
+font-weight:900;
+margin-bottom:7px
+}
+
+.location-input-wrap{
+position:relative
+}
+
+.location-input{
+border:1px solid #c7c3ba;
+height:48px;
+padding:0 13px;
+outline:0;
+width:100%;
+background:#fff
+}
+
 .location-results{
-display:none;
+background:#fff;
 border:1px solid #ddd;
 border-top:0;
-max-height:250px;
+display:none;
+max-height:240px;
 overflow:auto
 }
 
-.location-results.show{display:block}
+.location-results.show{
+display:block
+}
 
 .location-option{
-display:block;
 width:100%;
+text-align:left;
+background:#fff;
 border:0;
 border-bottom:1px solid #eee;
-background:#fff;
 padding:12px 13px;
-text-align:left;
 font-size:14px
 }
 
-.location-option:last-child{border-bottom:0}
+.location-option:last-child{
+border-bottom:0
+}
+
+.near-btn{
+width:100%;
+height:49px;
+border:0;
+background:#0b0b0b;
+color:#fff;
+font-weight:900;
+margin-top:10px
+}
 
 .radius-box{
 display:none;
-margin-top:17px;
-border-top:1px solid #ddd;
-padding-top:15px
+margin-top:14px;
+padding-top:14px;
+border-top:1px solid #ddd
 }
 
-.radius-box.show{display:block}
+.radius-box.show{
+display:block
+}
 
 .radius-row{
 display:flex;
 justify-content:space-between;
-align-items:center;
-font-size:14px;
 font-weight:900;
+font-size:14px;
 margin-bottom:11px
 }
 
@@ -484,35 +459,92 @@ accent-color:#111
 }
 
 
-/* =========================================================
-   ACTION + QUICK FILTERS
-========================================================= */
+/* =========================
+   PREMIUM POST BUTTON
+========================= */
 
-.market-action-row{
+.market-post-main{
+width:100%;
+min-height:54px;
+border:1px solid #a97d1c;
+background:
+linear-gradient(
+100deg,
+#9f7316 0%,
+#c99d36 22%,
+#f1d477 50%,
+#c99d36 77%,
+#a87917 100%
+);
+color:#111;
+font-weight:900;
+font-size:15px;
+letter-spacing:.3px;
 display:flex;
 align-items:center;
+justify-content:center;
 gap:9px;
-margin-top:12px
+margin-top:10px;
+box-shadow:0 8px 19px rgba(174,130,31,.18)
 }
+
+.market-post-main:hover{
+filter:brightness(1.03)
+}
+
+.post-plus{
+font-size:25px;
+font-weight:400;
+line-height:1
+}
+
+
+/* floating post */
+
+.floating-post{
+position:fixed;
+right:16px;
+bottom:18px;
+z-index:1200;
+height:49px;
+padding:0 18px;
+border:1px solid #b1862d;
+background:#090909;
+color:#fff;
+font-weight:900;
+font-size:13px;
+letter-spacing:.4px;
+box-shadow:0 8px 24px rgba(0,0,0,.25);
+display:flex;
+align-items:center;
+gap:8px
+}
+
+.floating-post strong{
+color:#d8ad48
+}
+
+
+/* =========================
+   QUICK FILTERS
+========================= */
 
 .quick-row{
 display:flex;
-align-items:center;
 gap:8px;
 overflow-x:auto;
 scrollbar-width:none;
-flex:1
+padding:10px 0 2px
 }
 
 .quick-row::-webkit-scrollbar{display:none}
 
 .quick{
 flex:none;
-height:48px;
-padding:0 20px;
-border-radius:999px;
-border:1px solid #cfcac0;
+border:1px solid #cfcbc2;
 background:#fff;
+padding:11px 18px;
+border-radius:999px;
 font-weight:900;
 font-size:14px;
 white-space:nowrap
@@ -525,126 +557,49 @@ border-color:#111
 }
 
 
-/* =========================================================
-   PREMIUM POST BUTTON
-========================================================= */
-
-.market-post-main{
-flex:none;
-height:48px;
-padding:0 21px;
-border:1px solid #9e7621;
-background:
-linear-gradient(
-100deg,
-#8e6517 0%,
-#c99d36 28%,
-#efd47c 50%,
-#c99d36 72%,
-#9d721d 100%
-);
-color:#090909;
-font-size:14px;
-font-weight:900;
-letter-spacing:.4px;
-white-space:nowrap;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:7px;
-box-shadow:0 5px 14px rgba(120,86,15,.18)
-}
-
-.market-post-main:hover{
-filter:brightness(1.04)
-}
-
-.post-plus{
-font-size:21px;
-font-weight:400
-}
-
-
-/* floating premium button */
-
-.floating-post{
-position:fixed;
-right:18px;
-top:231px;
-z-index:1080;
-display:flex;
-align-items:center;
-gap:7px;
-border:1px solid #d0a84a;
-background:#090909;
-color:#fff;
-padding:13px 17px;
-font-size:13px;
-font-weight:900;
-letter-spacing:.3px;
-box-shadow:0 8px 26px rgba(0,0,0,.24);
-opacity:0;
-pointer-events:none;
-transform:translateY(-8px);
-transition:.22s
-}
-
-.floating-post strong{
-color:var(--gold-light)
-}
-
-.floating-post.show{
-opacity:1;
-pointer-events:auto;
-transform:translateY(0)
-}
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
+/* =========================
+   HEADINGS
+========================= */
 
 .section-head{
 display:flex;
 align-items:flex-end;
 justify-content:space-between;
-gap:15px;
-margin:38px 0 16px
+margin:31px 0 13px
 }
 
 .section-title{
 font-family:var(--serif);
-font-size:47px;
 font-weight:400;
+font-size:43px;
 line-height:1
 }
 
 .view-all{
 border:0;
 background:none;
-font-size:16px;
-text-decoration:underline
+text-decoration:underline;
+font-size:15px
 }
 
 
-/* =========================================================
-   BROWSE EDITORIAL GRID
-========================================================= */
+/* =========================
+   BROWSE — PHOTO FIRST
+========================= */
 
 .browse-grid{
 display:grid;
-grid-template-columns:1.18fr .82fr .82fr;
-grid-template-rows:310px 255px;
-gap:7px
+grid-template-columns:1.15fr .85fr .85fr;
+grid-template-rows:280px 240px;
+gap:6px
 }
 
 .browse-card{
 position:relative;
 overflow:hidden;
-border:0;
 background:#ddd;
-text-align:left;
-min-height:0
+border:0;
+text-align:left
 }
 
 .browse-card:first-child{
@@ -652,14 +607,18 @@ grid-row:1/3
 }
 
 .browse-card:nth-child(4){
-grid-column:2/4
+grid-column:2/3
+}
+
+.browse-card:nth-child(5){
+grid-column:3/4
 }
 
 .browse-card img{
 width:100%;
 height:100%;
 object-fit:cover;
-transition:transform .45s ease
+transition:.35s
 }
 
 .browse-card:hover img{
@@ -669,59 +628,50 @@ transform:scale(1.025)
 .browse-shade{
 position:absolute;
 inset:0;
-background:
-linear-gradient(
-180deg,
-rgba(0,0,0,.02) 20%,
-rgba(0,0,0,.15) 48%,
-rgba(0,0,0,.84) 100%
-)
+background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.83))
 }
 
 .browse-copy{
 position:absolute;
-left:19px;
-right:16px;
-bottom:17px;
+left:17px;
+right:14px;
+bottom:15px;
 color:#fff
 }
 
 .browse-copy small{
-display:block;
-color:#e6be5d;
-font-size:11px;
 font-weight:900;
-letter-spacing:2.8px;
-margin-bottom:5px
+letter-spacing:2px;
+color:#e2bd63;
+font-size:11px
 }
 
 .browse-copy h3{
 font-family:var(--serif);
-font-size:34px;
-line-height:1;
-font-weight:400
+font-size:31px;
+font-weight:400;
+margin-top:4px
 }
 
 
-/* =========================================================
+/* =========================
    LISTINGS
-========================================================= */
+========================= */
 
 .listings-head{
-margin-top:48px
+margin-top:43px
 }
 
 .listing-count{
-font-size:15px;
-color:var(--muted);
-white-space:nowrap
+color:#777;
+font-size:15px
 }
 
 .listings{
 display:grid;
 grid-template-columns:repeat(2,minmax(0,1fr));
-gap:36px 13px;
-margin-top:17px
+gap:29px 10px;
+margin-top:15px
 }
 
 .listing-card{
@@ -729,8 +679,8 @@ min-width:0
 }
 
 .listing-photo{
+height:500px;
 position:relative;
-height:510px;
 overflow:hidden;
 background:#ddd;
 cursor:pointer
@@ -739,43 +689,27 @@ cursor:pointer
 .listing-photo:after{
 content:"";
 position:absolute;
-left:0;
-right:0;
-bottom:0;
-height:44%;
-background:linear-gradient(
-180deg,
-transparent,
-rgba(0,0,0,.43)
-);
+inset:48% 0 0;
+background:linear-gradient(transparent,rgba(0,0,0,.62));
 pointer-events:none
 }
 
 .listing-photo img{
-width:100%;
 height:100%;
-object-fit:cover;
-transition:.4s
-}
-
-.listing-photo:hover img{
-transform:scale(1.018)
+object-fit:cover
 }
 
 .heart{
 position:absolute;
-z-index:3;
-right:14px;
-top:14px;
-width:48px;
-height:48px;
+right:12px;
+top:12px;
+z-index:4;
+width:46px;
+height:46px;
 border-radius:50%;
 border:0;
-background:rgba(255,255,255,.94);
-font-size:25px;
-display:flex;
-align-items:center;
-justify-content:center
+background:rgba(255,255,255,.96);
+font-size:24px
 }
 
 .heart.saved{
@@ -785,138 +719,118 @@ color:#fff
 
 .price{
 position:absolute;
-z-index:3;
-left:14px;
-bottom:14px;
+z-index:4;
+left:12px;
+bottom:12px;
 background:#fff;
-color:#111;
+padding:8px 12px;
 border-radius:999px;
-padding:9px 14px;
-font-size:14px;
+font-size:13px;
 font-weight:900
 }
 
 .tag{
 position:absolute;
-z-index:3;
-right:14px;
-bottom:18px;
-color:#e4bc5e;
+z-index:4;
+right:12px;
+bottom:17px;
+color:#e4bd5d;
+font-size:10px;
 font-weight:900;
-letter-spacing:2.1px;
-font-size:11px;
+letter-spacing:1.7px;
 text-transform:uppercase
 }
 
 .listing-copy{
-padding:13px 5px 0
-}
-
-.listing-topline{
-display:flex;
-align-items:flex-start;
-justify-content:space-between;
-gap:10px
+padding:10px 4px 0
 }
 
 .listing-name{
 font-family:var(--serif);
-font-size:31px;
-line-height:1.02;
-font-weight:400
+font-size:29px;
+font-weight:400;
+line-height:1;
+margin-bottom:7px
 }
 
 .listing-meta{
 font-size:14px;
-color:#6e6b66;
-line-height:1.5;
-margin-top:3px
+color:#6d6d6d;
+line-height:1.45
 }
 
 .contact-small{
-width:100%;
-height:48px;
-margin-top:11px;
-border:1px solid #111;
+border:0;
 background:#111;
 color:#fff;
-font-size:14px;
-font-weight:900;
-text-transform:uppercase;
-letter-spacing:.4px
-}
-
-.contact-small:hover{
-background:var(--gold);
-border-color:var(--gold);
-color:#111
+width:100%;
+margin-top:10px;
+height:45px;
+font-weight:900
 }
 
 
-/* =========================================================
-   PUBLISH EDITORIAL STRIP
-========================================================= */
+/* =========================
+   BOTTOM CTA
+========================= */
 
 .publish-strip{
-margin-top:58px;
-border:1px solid #111;
-background:#090909;
+margin-top:51px;
+background:#080808;
 color:#fff;
-display:grid;
-grid-template-columns:1fr auto;
-align-items:center;
-gap:30px;
-padding:30px
+padding:28px
 }
 
 .publish-strip small{
-color:var(--gold-light);
-font-size:11px;
+color:#d0a43b;
 font-weight:900;
 letter-spacing:3px
 }
 
 .publish-strip h2{
 font-family:var(--serif);
-font-size:38px;
+font-size:40px;
 font-weight:400;
 line-height:1.05;
 margin-top:8px
 }
 
 .publish-main-btn{
-min-width:205px;
-height:52px;
-border:1px solid var(--gold);
+width:100%;
+border:1px solid #a77b17;
 background:
 linear-gradient(
 100deg,
-#9c721e,
-#d1a43b,
-#e5c66d,
-#c99d36
+#a17012,
+#d0a33d,
+#f1d477,
+#c99b34,
+#a17012
 );
 color:#111;
 font-weight:900;
-padding:0 22px
+padding:17px 22px;
+margin-top:22px
 }
 
 
-/* =========================================================
+/* =========================
    MODALS
-========================================================= */
+========================= */
 
 .modal{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.75);
-z-index:2200;
+background:rgba(0,0,0,.72);
+z-index:2000;
 display:none;
 align-items:flex-end;
 justify-content:center
 }
 
-.modal.open{display:flex}
+.modal.open{
+display:flex
+}
 
 .modal-sheet{
 width:min(760px,100%);
@@ -929,12 +843,12 @@ padding:22px
 .modal-close{
 display:block;
 margin-left:auto;
-width:44px;
-height:44px;
 border:0;
 background:#111;
 color:#fff;
-font-size:25px
+width:44px;
+height:44px;
+font-size:24px
 }
 
 .detail-image{
@@ -944,18 +858,17 @@ margin-top:10px
 }
 
 .detail-tag{
-color:var(--gold-dark);
-font-size:12px;
-font-weight:900;
+color:var(--gold);
 letter-spacing:2px;
+font-weight:900;
+font-size:12px;
 margin-top:18px
 }
 
 .detail-title{
 font-family:var(--serif);
-font-size:45px;
-font-weight:400;
-margin:6px 0 10px
+font-size:44px;
+margin:7px 0 10px
 }
 
 .detail-meta{
@@ -972,41 +885,36 @@ margin:18px 0
 .contact-box{
 background:#111;
 color:#fff;
-padding:19px;
+padding:18px;
 margin-top:15px
 }
 
-.contact-box small{
-color:var(--gold-light);
-font-weight:900;
-letter-spacing:2px
-}
+.contact-box small{color:#ccc}
 
 .contact-value{
 font-size:18px;
 font-weight:800;
-margin-top:8px;
+margin-top:6px;
 word-break:break-word
 }
 
 
-/* =========================================================
+/* =========================
    PUBLISH FORM
-========================================================= */
+========================= */
 
 .publish-form h2{
 font-family:var(--serif);
-font-size:43px;
-font-weight:400;
+font-size:42px;
 margin:7px 0
 }
 
 .fee-note{
-border-left:5px solid var(--gold);
-background:#f5f0e3;
-padding:14px;
+background:#f3e8c2;
+border:1px solid #d5b45d;
+padding:13px;
 font-weight:900;
-margin:13px 0 18px
+margin:12px 0 18px
 }
 
 .form-grid{
@@ -1041,16 +949,8 @@ border:1px dashed #999!important
 
 .form-submit{
 width:100%;
-border:1px solid #9f7723;
-background:
-linear-gradient(
-100deg,
-#9c721e,
-#d1a43b,
-#e5c66d,
-#c99d36
-);
-color:#111;
+border:1px solid #aa7e1e;
+background:linear-gradient(100deg,#a47515,#e1bd5e,#a97a17);
 font-weight:900;
 padding:17px;
 margin-top:15px
@@ -1064,16 +964,16 @@ margin-top:10px
 }
 
 
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media(max-width:720px){
 
 .header-main{
-height:158px;
-grid-template-columns:56px 1fr 56px;
-padding:0 17px
+height:128px;
+grid-template-columns:52px 1fr 52px;
+padding:0 20px
 }
 
 .brand-small{
@@ -1081,45 +981,37 @@ font-size:14px
 }
 
 .brand-big{
-font-size:51px;
+font-size:50px;
 letter-spacing:4px
 }
 
-.menu-button{
-width:52px;
-height:52px
+.menu-lines{
+width:36px;
+height:25px
 }
 
-.menu-button span{
-width:41px
-}
-
-.home-button svg{
-width:39px;
-height:39px
+.home-svg{
+width:34px;
+height:34px
 }
 
 .nav-strip{
+height:58px;
 gap:31px;
-padding:16px 26px 14px;
-font-size:14px
+padding:0 21px;
+font-size:13px
 }
 
-.nav-strip a.active:after{
-bottom:-13px
+.nav-strip a{
+height:58px
 }
 
 .market-shell{
-padding:20px 14px 58px
+padding:20px 12px 65px
 }
 
-.market-top{
-border-top:4px solid #111;
-padding-top:18px
-}
-
-.market-heading-row{
-align-items:flex-end
+.market-intro{
+margin-bottom:10px
 }
 
 .market-title{
@@ -1127,99 +1019,48 @@ font-size:49px
 }
 
 .eyebrow{
-font-size:11px;
-letter-spacing:3px
+font-size:11px
 }
 
 .saved-link{
 font-size:15px
 }
 
-.market-tools{
-margin-top:16px
-}
-
-.location-toolbar{
-margin-bottom:9px
-}
-
 .location-main{
-font-size:15px;
-max-width:235px
-}
-
-.location-distance{
-font-size:14px
-}
-
-.location-change{
-display:none
-}
-
-.search-bar{
-height:57px;
-grid-template-columns:49px 1fr 53px
-}
-
-.search-bar input{
+max-width:66%;
 font-size:15px
 }
 
+.search-bar{
+height:56px
+}
+
 .filter-toggle{
-width:45px;
-height:45px
-}
-
-.location-top{
-grid-template-columns:1fr
-}
-
-.near-btn{
-width:100%
-}
-
-.market-action-row{
-display:block;
-margin-top:10px
+height:46px;
+width:46px
 }
 
 .market-post-main{
-width:100%;
-height:48px;
-margin-bottom:9px;
-font-size:14px
+height:52px;
+margin-top:9px
 }
 
 .quick-row{
-margin-right:-14px
-}
-
-.quick{
-height:47px;
-padding:0 19px;
-font-size:14px
-}
-
-.floating-post{
-top:auto;
-right:13px;
-bottom:20px;
-padding:12px 15px;
-font-size:12px
+margin-right:-12px
 }
 
 .section-head{
-margin-top:31px
+margin-top:29px
 }
 
 .section-title{
-font-size:40px
+font-size:39px
 }
 
 .browse-grid{
-grid-template-columns:1.16fr .84fr;
-grid-template-rows:285px 210px 205px;
-gap:5px
+grid-template-columns:1.15fr .85fr;
+grid-template-rows:280px 205px 185px 185px;
+gap:4px
 }
 
 .browse-card:first-child{
@@ -1230,85 +1071,47 @@ grid-row:1/3
 grid-column:1/3
 }
 
+.browse-card:nth-child(5){
+grid-column:1/3
+}
+
 .browse-copy{
-left:14px;
-bottom:13px
+left:12px;
+bottom:12px
 }
 
 .browse-copy h3{
-font-size:26px
-}
-
-.browse-copy small{
-font-size:10px
-}
-
-.listings-head{
-margin-top:42px
+font-size:25px
 }
 
 .listings{
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:31px 8px;
-margin-top:14px
+gap:27px 7px
 }
 
 .listing-photo{
-height:335px
-}
-
-.heart{
-width:43px;
-height:43px;
-font-size:22px;
-right:10px;
-top:10px
-}
-
-.price{
-left:10px;
-bottom:11px;
-padding:8px 11px;
-font-size:12px
-}
-
-.tag{
-right:10px;
-bottom:15px;
-font-size:9px;
-letter-spacing:1.4px
-}
-
-.listing-copy{
-padding:10px 3px 0
+height:330px
 }
 
 .listing-name{
-font-size:25px
+font-size:24px
 }
 
 .listing-meta{
 font-size:13px
 }
 
-.contact-small{
-height:45px;
-font-size:12px
+.heart{
+width:43px;
+height:43px;
+font-size:23px
 }
 
 .publish-strip{
-grid-template-columns:1fr;
-gap:20px;
-padding:24px 20px;
-margin-top:48px
+padding:24px 18px
 }
 
 .publish-strip h2{
-font-size:34px
-}
-
-.publish-main-btn{
-width:100%
+font-size:35px
 }
 
 .form-grid{
@@ -1325,65 +1128,30 @@ font-size:37px
 
 }
 
-
-@media(max-width:420px){
-
-.header-main{
-height:150px
-}
+@media(max-width:410px){
 
 .brand-big{
 font-size:46px
 }
 
-.nav-strip{
-font-size:13px;
-gap:29px
-}
-
 .market-title{
-font-size:45px
-}
-
-.market-heading-row{
-gap:8px
-}
-
-.location-main{
-max-width:205px
+font-size:44px
 }
 
 .listing-photo{
-height:300px
+height:290px
 }
 
 .browse-grid{
-grid-template-rows:260px 190px 190px
+grid-template-rows:255px 185px 170px 170px
 }
 
+.location-panel-head{
+flex-wrap:wrap
 }
 
-
-/* =========================================================
-   SMALL PHONE
-========================================================= */
-
-@media(max-width:360px){
-
-.brand-big{
-font-size:41px
-}
-
-.market-title{
-font-size:41px
-}
-
-.listing-photo{
-height:270px
-}
-
-.listing-name{
-font-size:22px
+.location-panel-actions{
+margin-left:0
 }
 
 }
@@ -1393,71 +1161,21 @@ font-size:22px
 <body>
 
 
-<!-- =======================================================
-     SIDE MENU
-======================================================= -->
-
-<div
-class="menu-backdrop"
-id="menuBackdrop"
-onclick="closeMenu()">
-</div>
-
-<aside
-class="side-menu"
-id="sideMenu">
-
-<div class="side-menu-head">
-
-<div class="side-menu-brand notranslate" translate="no">
-PETS &amp; DOGUE
-</div>
-
-<button
-class="side-close"
-type="button"
-onclick="closeMenu()"
-aria-label="Close menu">
-×
-</button>
-
-</div>
-
-<nav class="side-links">
-
-<a href="index.html">Главная</a>
-<a href="magazine.html">Журнал</a>
-<a href="articles.html">Статьи</a>
-<a href="photos.html">Фото</a>
-<a href="cover-stars.html">Звёзды обложки</a>
-<a href="contests.html">Конкурсы</a>
-<a href="local-community.html">Сообщество</a>
-<a class="active" href="pet-marketplace.html">Маркетплейс</a>
-<a href="about.html">О нас</a>
-<a href="contact.html">Контакты</a>
-
-</nav>
-
-</aside>
-
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
-
 <header class="site-header">
 
 <div class="header-main">
 
 <button
-class="icon-button menu-button"
+class="icon-btn"
 type="button"
-onclick="openMenu()"
-aria-label="Open menu">
+onclick="history.back()"
+aria-label="Back">
 
+<span class="menu-lines">
 <span></span>
 <span></span>
 <span></span>
+</span>
 
 </button>
 
@@ -1479,15 +1197,19 @@ DOGUE
 
 
 <a
-class="icon-button home-button"
+class="icon-btn"
 href="index.html"
 aria-label="Home">
 
-<svg viewBox="0 0 24 24" aria-hidden="true">
+<svg
+class="home-svg"
+viewBox="0 0 48 48"
+fill="none"
+stroke="currentColor"
+stroke-width="4">
 
-<path d="M3 10.8 12 3l9 7.8"></path>
-<path d="M5.2 9.7V21h13.6V9.7"></path>
-<path d="M9.5 21v-6.3h5V21"></path>
+<path d="M6 22L24 7l18 15v20H6V22Z"></path>
+<path d="M18 42V27h12v15"></path>
 
 </svg>
 
@@ -1511,40 +1233,15 @@ aria-label="Home">
 </header>
 
 
-<!-- =======================================================
-     FLOATING POST
-======================================================= -->
-
-<button
-class="floating-post"
-id="floatingPost"
-type="button"
-onclick="openPublish()">
-
-<span>＋</span>
-<span>POST</span>
-<strong>£1</strong>
-
-</button>
-
-
-<!-- =======================================================
-     PAGE
-======================================================= -->
 
 <main class="market-shell">
 
 
-<section class="market-top" id="marketTop">
-
-
-<div class="market-heading-row">
+<div class="market-intro">
 
 <div>
 
-<div
-class="eyebrow notranslate"
-translate="no">
+<div class="eyebrow notranslate" translate="no">
 PETS &amp; DOGUE
 </div>
 
@@ -1554,28 +1251,20 @@ Marketplace
 
 </div>
 
-
 <button
 class="saved-link"
 type="button"
 onclick="showSavedOnly()">
 
-♡
-<span id="savedText">
-Saved
-</span>
+♡ <span id="savedText">Saved</span>
 
 </button>
 
 </div>
 
 
-<div class="market-tools">
 
-
-<div class="location-toolbar">
-
-<div class="location-left">
+<div class="location-summary">
 
 <span class="location-pin">
 📍
@@ -1585,7 +1274,7 @@ Saved
 id="currentLocationLabel"
 class="location-main"
 type="button"
-onclick="toggleLocationPanel()">
+onclick="openLocationPanel()">
 Anywhere
 </button>
 
@@ -1594,30 +1283,24 @@ id="distanceLabel"
 class="location-distance">
 </span>
 
-</div>
-
-
 <button
-class="location-change"
+class="location-edit"
 type="button"
-onclick="toggleLocationPanel()">
-Change location
+onclick="openLocationPanel()"
+aria-label="Change location">
+⌄
 </button>
 
 </div>
 
 
+
+<div class="search-wrap">
+
 <div class="search-bar">
 
 <div class="search-symbol">
-
-<svg viewBox="0 0 24 24">
-
-<circle cx="11" cy="11" r="6.6"></circle>
-<path d="m16 16 5 5"></path>
-
-</svg>
-
+⌕
 </div>
 
 <input
@@ -1627,12 +1310,11 @@ placeholder="Search pets, breeds or services..."
 autocomplete="off"
 oninput="applyFilters()">
 
-
 <button
 class="filter-toggle"
 type="button"
-onclick="toggleLocationPanel()"
-aria-label="Location and distance filters">
+onclick="openLocationPanel()"
+aria-label="Location filters">
 
 <span></span>
 <span></span>
@@ -1643,13 +1325,59 @@ aria-label="Location and distance filters">
 </div>
 
 
+
 <div
 class="location-panel"
 id="locationPanel">
 
-<div class="location-top">
 
-<div>
+<div class="location-panel-head">
+
+<div class="location-panel-icon">
+●
+</div>
+
+<div
+class="location-panel-current"
+id="locationPanelCurrent">
+Anywhere
+</div>
+
+<div
+class="location-panel-distance"
+id="locationPanelDistance">
+</div>
+
+<div class="location-panel-actions">
+
+<button
+class="location-done"
+type="button"
+onclick="closeLocationPanel()">
+✓ Done
+</button>
+
+<button
+class="location-close"
+type="button"
+onclick="closeLocationPanel()"
+aria-label="Close">
+×
+</button>
+
+</div>
+
+</div>
+
+
+<label
+class="location-label"
+for="locationInput">
+Change location
+</label>
+
+
+<div class="location-input-wrap">
 
 <input
 class="location-input"
@@ -1673,8 +1401,6 @@ type="button"
 onclick="useMyLocation()">
 ◎ Near me
 </button>
-
-</div>
 
 
 <div
@@ -1706,13 +1432,12 @@ oninput="updateRadius()">
 
 </div>
 
+</div>
 
-<div class="market-action-row">
 
 
 <button
 class="market-post-main"
-id="mainPostButton"
 type="button"
 onclick="openPublish()">
 
@@ -1729,6 +1454,7 @@ POST LISTING
 </span>
 
 </button>
+
 
 
 <div class="quick-row">
@@ -1763,16 +1489,7 @@ Services
 
 </div>
 
-</div>
 
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     BROWSE
-======================================================= -->
 
 <div class="section-head">
 
@@ -1788,6 +1505,7 @@ View all
 </button>
 
 </div>
+
 
 
 <section class="browse-grid">
@@ -1806,17 +1524,14 @@ alt="Dogs">
 
 <span class="browse-copy">
 
-<small>
-DOGUE
-</small>
+<small>DOGUE</small>
 
-<h3>
-Dogs
-</h3>
+<h3>Dogs</h3>
 
 </span>
 
 </button>
+
 
 
 <button
@@ -1832,17 +1547,14 @@ alt="Cats">
 
 <span class="browse-copy">
 
-<small>
-FELINE
-</small>
+<small>FELINE</small>
 
-<h3>
-Cats
-</h3>
+<h3>Cats</h3>
 
 </span>
 
 </button>
+
 
 
 <button
@@ -1858,17 +1570,14 @@ alt="Puppies">
 
 <span class="browse-copy">
 
-<small>
-YOUNG PETS
-</small>
+<small>YOUNG PETS</small>
 
-<h3>
-Puppies
-</h3>
+<h3>Puppies</h3>
 
 </span>
 
 </button>
+
 
 
 <button
@@ -1884,13 +1593,32 @@ alt="Find a home">
 
 <span class="browse-copy">
 
-<small>
-RESPONSIBLE
-</small>
+<small>RESPONSIBLE</small>
 
-<h3>
-Find a home
-</h3>
+<h3>Free / Rehome</h3>
+
+</span>
+
+</button>
+
+
+
+<button
+class="browse-card"
+type="button"
+onclick="setBrowse('services')">
+
+<img
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1000&q=85"
+alt="Services">
+
+<span class="browse-shade"></span>
+
+<span class="browse-copy">
+
+<small>SERVICES</small>
+
+<h3>Services</h3>
 
 </span>
 
@@ -1899,9 +1627,6 @@ Find a home
 </section>
 
 
-<!-- =======================================================
-     LISTINGS
-======================================================= -->
 
 <div class="section-head listings-head">
 
@@ -1925,12 +1650,11 @@ id="listingCount">
 </div>
 
 
+
 <section
 class="listings"
 id="listingGrid">
 
-
-<!-- MILO -->
 
 <article
 class="listing-card"
@@ -1992,7 +1716,6 @@ View &amp; contact
 </article>
 
 
-<!-- LUNA -->
 
 <article
 class="listing-card"
@@ -2054,7 +1777,6 @@ View &amp; contact
 </article>
 
 
-<!-- TEDDY -->
 
 <article
 class="listing-card"
@@ -2116,7 +1838,6 @@ View &amp; contact
 </article>
 
 
-<!-- GROOMING -->
 
 <article
 class="listing-card"
@@ -2178,7 +1899,6 @@ View &amp; contact
 </article>
 
 
-<!-- RABBIT -->
 
 <article
 class="listing-card"
@@ -2240,7 +1960,6 @@ View &amp; contact
 </article>
 
 
-<!-- PHOTO -->
 
 <article
 class="listing-card"
@@ -2304,13 +2023,8 @@ View &amp; contact
 </section>
 
 
-<!-- =======================================================
-     BOTTOM CTA
-======================================================= -->
 
 <section class="publish-strip">
-
-<div>
 
 <small>
 SELL · REHOME · SERVICES
@@ -2319,8 +2033,6 @@ SELL · REHOME · SERVICES
 <h2>
 Have something to share?
 </h2>
-
-</div>
 
 <button
 class="publish-main-btn"
@@ -2331,13 +2043,26 @@ onclick="openPublish()">
 
 </section>
 
-
 </main>
 
 
-<!-- =======================================================
-     DETAILS MODAL
-======================================================= -->
+
+<button
+class="floating-post"
+type="button"
+onclick="openPublish()">
+
+<span>＋</span>
+
+<span>POST</span>
+
+<strong>£1</strong>
+
+</button>
+
+
+
+<!-- DETAILS MODAL -->
 
 <div
 class="modal"
@@ -2396,9 +2121,8 @@ id="detailContact">
 </div>
 
 
-<!-- =======================================================
-     PUBLISH MODAL
-======================================================= -->
+
+<!-- PUBLISH MODAL -->
 
 <div
 class="modal"
@@ -2429,77 +2153,44 @@ Publishing fee: £1 per listing
 <div class="form-grid">
 
 <select id="newType">
-
-<option value="sale">
-For sale
-</option>
-
-<option value="free">
-Free / Rehome
-</option>
-
-<option value="service">
-Service
-</option>
-
+<option value="sale">For sale</option>
+<option value="free">Free / Rehome</option>
+<option value="service">Service</option>
 </select>
-
 
 <select id="newAnimal">
-
-<option value="dogs">
-Dog
-</option>
-
-<option value="cats">
-Cat
-</option>
-
-<option value="puppies">
-Puppy / Kitten
-</option>
-
-<option value="other">
-Other animal
-</option>
-
-<option value="services">
-Service
-</option>
-
+<option value="dogs">Dog</option>
+<option value="cats">Cat</option>
+<option value="puppies">Puppy / Kitten</option>
+<option value="other">Other animal</option>
+<option value="services">Service</option>
 </select>
-
 
 <input
 id="newTitle"
 type="text"
 placeholder="Pet / service name">
 
-
 <input
 id="newBreed"
 type="text"
 placeholder="Breed / service type">
-
 
 <input
 id="newLocation"
 type="text"
 placeholder="City / location">
 
-
 <input
 id="newPrice"
 type="text"
 placeholder="Price, FREE or FROM £...">
-
 
 <input
 id="newContact"
 class="form-full"
 type="text"
 placeholder="Phone, WhatsApp or email">
-
 
 <input
 id="newPhoto"
@@ -2509,12 +2200,10 @@ accept="image/*">
 
 </div>
 
-
 <textarea
 id="newDescription"
 placeholder="Description...">
 </textarea>
-
 
 <button
 class="form-submit"
@@ -2523,9 +2212,8 @@ onclick="createLocalListing()">
 Continue · £1
 </button>
 
-
 <p class="tiny-note">
-The £1 payment checkout will be connected to the payment backend. This interface prepares the Marketplace listing before checkout.
+The £1 checkout will be connected to the payment backend.
 </p>
 
 </div>
@@ -2533,9 +2221,9 @@ The £1 payment checkout will be connected to the payment backend. This interfac
 </div>
 
 
+
 <script src="/i18n/common.js?v=2"></script>
 <script src="/i18n/marketplace.js?v=3"></script>
-
 
 <script>
 
@@ -2546,44 +2234,6 @@ let myPosition=null;
 let selectedPosition=null;
 let locationTimer=null;
 
-
-/* =========================================================
-   SIDE MENU
-========================================================= */
-
-function openMenu(){
-
-document
-.getElementById("sideMenu")
-.classList.add("open");
-
-document
-.getElementById("menuBackdrop")
-.classList.add("open");
-
-document.body.style.overflow="hidden";
-
-}
-
-
-function closeMenu(){
-
-document
-.getElementById("sideMenu")
-.classList.remove("open");
-
-document
-.getElementById("menuBackdrop")
-.classList.remove("open");
-
-document.body.style.overflow="";
-
-}
-
-
-/* =========================================================
-   DETAILS DATA
-========================================================= */
 
 const DETAILS={
 
@@ -2644,15 +2294,20 @@ image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&
 };
 
 
-/* =========================================================
-   LOCATION
-========================================================= */
-
-function toggleLocationPanel(){
+function openLocationPanel(){
 
 document
 .getElementById("locationPanel")
-.classList.toggle("open");
+.classList.add("open");
+
+}
+
+
+function closeLocationPanel(){
+
+document
+.getElementById("locationPanel")
+.classList.remove("open");
 
 }
 
@@ -2681,6 +2336,7 @@ if(q.length<2){
 
 box.classList.remove("show");
 box.innerHTML="";
+
 return;
 
 }
@@ -2697,14 +2353,11 @@ const url=
 encodeURIComponent(q);
 
 const response=
-await fetch(
-url,
-{
+await fetch(url,{
 headers:{
 "Accept":"application/json"
 }
-}
-);
+});
 
 const results=
 await response.json();
@@ -2764,7 +2417,16 @@ document
 button.dataset.name;
 
 document
+.getElementById("locationPanelCurrent")
+.textContent=
+button.dataset.name;
+
+document
 .getElementById("distanceLabel")
+.textContent="";
+
+document
+.getElementById("locationPanelDistance")
 .textContent="";
 
 document
@@ -2774,10 +2436,6 @@ document
 document
 .getElementById("locationResults")
 .classList.remove("show");
-
-document
-.getElementById("locationPanel")
-.classList.remove("open");
 
 applyFilters();
 
@@ -2789,6 +2447,7 @@ function useMyLocation(){
 if(!navigator.geolocation){
 
 alert("Geolocation is not available on this device.");
+
 return;
 
 }
@@ -2820,14 +2479,11 @@ const url=
 `https://nominatim.openstreetmap.org/reverse?format=json&lat=${myPosition.lat}&lon=${myPosition.lng}&zoom=10`;
 
 const response=
-await fetch(
-url,
-{
+await fetch(url,{
 headers:{
 "Accept":"application/json"
 }
-}
-);
+});
 
 const result=
 await response.json();
@@ -2842,19 +2498,24 @@ address.village||
 address.county||
 "Near me";
 
-label.textContent=
+const text=
 "Near me · "+place;
+
+label.textContent=text;
+
+document
+.getElementById("locationPanelCurrent")
+.textContent=text;
 
 }catch(error){
 
-label.textContent=
-"Near me";
-
-}
+label.textContent="Near me";
 
 document
-.getElementById("locationPanel")
-.classList.remove("open");
+.getElementById("locationPanelCurrent")
+.textContent="Near me";
+
+}
 
 updateRadius();
 
@@ -2864,9 +2525,7 @@ updateRadius();
 
 label.textContent="Anywhere";
 
-alert(
-"Please allow location access to use Near me."
-);
+alert("Please allow location access to use Near me.");
 
 },
 
@@ -2898,17 +2557,17 @@ document
 .textContent=
 "· "+value+" km";
 
+document
+.getElementById("locationPanelDistance")
+.textContent=
+value+" km";
+
 applyFilters();
 
 }
 
 
-function distanceKm(
-lat1,
-lng1,
-lat2,
-lng2
-){
+function distanceKm(lat1,lng1,lat2,lng2){
 
 const R=6371;
 
@@ -2919,13 +2578,9 @@ const dLng=
 (lng2-lng1)*Math.PI/180;
 
 const a=
-
 Math.sin(dLat/2)**2+
-
 Math.cos(lat1*Math.PI/180)*
-
 Math.cos(lat2*Math.PI/180)*
-
 Math.sin(dLng/2)**2;
 
 return R*
@@ -2938,14 +2593,7 @@ Math.sqrt(1-a)
 }
 
 
-/* =========================================================
-   FILTERING
-========================================================= */
-
-function setQuickFilter(
-button,
-type
-){
+function setQuickFilter(button,type){
 
 activeFilter=type;
 savedOnly=false;
@@ -2956,9 +2604,7 @@ document
 btn.classList.remove("active")
 );
 
-button
-.classList
-.add("active");
+button.classList.add("active");
 
 applyFilters();
 
@@ -2990,141 +2636,18 @@ applyFilters();
 document
 .querySelector(".listings-head")
 .scrollIntoView({
-behavior:"smooth",
-block:"start"
+behavior:"smooth"
 });
 
 }
 
-
-function applyFilters(){
-
-const query=
-document
-.getElementById("mainSearch")
-.value
-.toLowerCase()
-.trim();
-
-const cards=[
-...document.querySelectorAll(".listing-card")
-];
-
-const saved=getSaved();
-
-const radius=
-Number(
-document
-.getElementById("radiusSlider")
-.value
-);
-
-let visible=0;
-
-cards.forEach(card=>{
-
-const text=
-(
-(card.dataset.search||"")
-+
-" "
-+
-card.innerText
-)
-.toLowerCase();
-
-let ok=
-!query||
-text.includes(query);
-
-if(activeFilter!=="all"){
-
-ok=
-ok&&
-card.dataset.type===activeFilter;
-
-}
-
-if(browseFilter!=="all"){
-
-if(browseFilter==="rehome"){
-
-ok=
-ok&&
-card.dataset.type==="free";
-
-}else{
-
-ok=
-ok&&
-card.dataset.animal===browseFilter;
-
-}
-
-}
-
-if(savedOnly){
-
-ok=
-ok&&
-saved.includes(card.dataset.id);
-
-}
-
-if(myPosition){
-
-const lat=Number(card.dataset.lat);
-const lng=Number(card.dataset.lng);
-
-if(
-Number.isFinite(lat)&&
-Number.isFinite(lng)
-){
-
-ok=
-ok&&
-distanceKm(
-myPosition.lat,
-myPosition.lng,
-lat,
-lng
-)<=radius;
-
-}
-
-}
-
-card.style.display=
-ok
-?
-"block"
-:
-"none";
-
-if(ok)visible++;
-
-});
-
-document
-.getElementById("listingCount")
-.textContent=
-visible+" listings";
-
-}
-
-
-/* =========================================================
-   SAVED
-========================================================= */
 
 function getSaved(){
 
 try{
 
 return JSON.parse(
-localStorage.getItem("dogue_market_saved")
-||
-"[]"
+localStorage.getItem("dogue_market_saved")||"[]"
 );
 
 }catch(e){
@@ -3136,11 +2659,7 @@ return[];
 }
 
 
-function toggleSaved(
-event,
-id,
-button
-){
+function toggleSaved(event,id,button){
 
 event.stopPropagation();
 
@@ -3203,7 +2722,6 @@ button.textContent="♡";
 document
 .getElementById("savedText")
 .textContent=
-
 saved.length
 ?
 `Saved ${saved.length}`
@@ -3213,9 +2731,132 @@ saved.length
 }
 
 
-/* =========================================================
-   DETAILS
-========================================================= */
+function applyFilters(){
+
+const query=
+document
+.getElementById("mainSearch")
+.value
+.toLowerCase()
+.trim();
+
+const cards=[
+...document.querySelectorAll(".listing-card")
+];
+
+const saved=getSaved();
+
+const radius=
+Number(
+document.getElementById("radiusSlider").value
+);
+
+let visible=0;
+
+cards.forEach(card=>{
+
+const text=
+(
+(card.dataset.search||"")+
+" "+
+card.innerText
+)
+.toLowerCase();
+
+let ok=
+!query||
+text.includes(query);
+
+
+if(activeFilter!=="all"){
+
+ok=
+ok&&
+card.dataset.type===activeFilter;
+
+}
+
+
+if(browseFilter!=="all"){
+
+if(browseFilter==="rehome"){
+
+ok=
+ok&&
+card.dataset.type==="free";
+
+}else if(browseFilter==="services"){
+
+ok=
+ok&&
+card.dataset.type==="service";
+
+}else{
+
+ok=
+ok&&
+card.dataset.animal===browseFilter;
+
+}
+
+}
+
+
+if(savedOnly){
+
+ok=
+ok&&
+saved.includes(card.dataset.id);
+
+}
+
+
+if(myPosition){
+
+const lat=
+Number(card.dataset.lat);
+
+const lng=
+Number(card.dataset.lng);
+
+if(
+Number.isFinite(lat)&&
+Number.isFinite(lng)
+){
+
+ok=
+ok&&
+distanceKm(
+myPosition.lat,
+myPosition.lng,
+lat,
+lng
+)<=radius;
+
+}
+
+}
+
+
+card.style.display=
+ok
+?
+"block"
+:
+"none";
+
+if(ok)visible++;
+
+});
+
+
+document
+.getElementById("listingCount")
+.textContent=
+visible+" listings";
+
+}
+
 
 function openDetails(id){
 
@@ -3223,29 +2864,12 @@ const data=DETAILS[id];
 
 if(!data)return;
 
-document
-.getElementById("detailImage")
-.src=data.image;
-
-document
-.getElementById("detailTag")
-.textContent=data.tag;
-
-document
-.getElementById("detailTitle")
-.textContent=data.title;
-
-document
-.getElementById("detailMeta")
-.textContent=data.meta;
-
-document
-.getElementById("detailDescription")
-.textContent=data.description;
-
-document
-.getElementById("detailContact")
-.textContent=data.contact;
+document.getElementById("detailImage").src=data.image;
+document.getElementById("detailTag").textContent=data.tag;
+document.getElementById("detailTitle").textContent=data.title;
+document.getElementById("detailMeta").textContent=data.meta;
+document.getElementById("detailDescription").textContent=data.description;
+document.getElementById("detailContact").textContent=data.contact;
 
 document
 .getElementById("detailsModal")
@@ -3255,10 +2879,6 @@ document.body.style.overflow="hidden";
 
 }
 
-
-/* =========================================================
-   PUBLISH
-========================================================= */
 
 function openPublish(){
 
@@ -3282,10 +2902,7 @@ document.body.style.overflow="";
 }
 
 
-function closeOnBackdrop(
-event,
-id
-){
+function closeOnBackdrop(event,id){
 
 if(event.target.id===id){
 
@@ -3296,45 +2913,23 @@ closeModal(id);
 }
 
 
-/* =========================================================
-   CREATE LOCAL LISTING
-========================================================= */
-
 function createLocalListing(){
 
 const title=
-document
-.getElementById("newTitle")
-.value
-.trim();
+document.getElementById("newTitle").value.trim();
 
 const location=
-document
-.getElementById("newLocation")
-.value
-.trim();
+document.getElementById("newLocation").value.trim();
 
 const contact=
-document
-.getElementById("newContact")
-.value
-.trim();
+document.getElementById("newContact").value.trim();
 
 const photo=
-document
-.getElementById("newPhoto")
-.files[0];
+document.getElementById("newPhoto").files[0];
 
-if(
-!title||
-!location||
-!contact||
-!photo
-){
+if(!title||!location||!contact||!photo){
 
-alert(
-"Please add name, location, contact and a photo."
-);
+alert("Please add name, location, contact and a photo.");
 
 return;
 
@@ -3342,44 +2937,29 @@ return;
 
 const reader=new FileReader();
 
-reader.onload=
-function(event){
+reader.onload=function(event){
 
 const type=
-document
-.getElementById("newType")
-.value;
+document.getElementById("newType").value;
 
 const animal=
-document
-.getElementById("newAnimal")
-.value;
+document.getElementById("newAnimal").value;
 
 const breed=
-document
-.getElementById("newBreed")
-.value
-.trim();
+document.getElementById("newBreed").value.trim();
 
 const price=
-document
-.getElementById("newPrice")
-.value
-.trim()
+document.getElementById("newPrice").value.trim()
 ||
 "CONTACT";
 
 const description=
-document
-.getElementById("newDescription")
-.value
-.trim();
+document.getElementById("newDescription").value.trim();
 
 const id=
 "local-"+Date.now();
 
 const typeLabel=
-
 type==="sale"
 ?
 "FOR SALE"
@@ -3423,9 +3003,7 @@ image:event.target.result
 const article=
 document.createElement("article");
 
-article.className=
-"listing-card";
-
+article.className="listing-card";
 article.dataset.id=id;
 article.dataset.type=type;
 article.dataset.animal=animal;
@@ -3443,7 +3021,7 @@ onclick="openDetails('${id}')">
 
 <img
 src="${event.target.result}"
-alt="${escapeHTML(title)}">
+alt="">
 
 <button
 class="heart"
@@ -3487,6 +3065,7 @@ View &amp; contact
 
 `;
 
+
 document
 .getElementById("listingGrid")
 .prepend(article);
@@ -3506,10 +3085,6 @@ reader.readAsDataURL(photo);
 }
 
 
-/* =========================================================
-   SECURITY
-========================================================= */
-
 function escapeHTML(value){
 
 return String(value||"")
@@ -3523,71 +3098,25 @@ return String(value||"")
 }
 
 
-/* =========================================================
-   FLOATING POST BUTTON
-========================================================= */
-
-function updateFloatingPost(){
-
-const mainButton=
-document.getElementById("mainPostButton");
-
-const floating=
-document.getElementById("floatingPost");
-
-if(!mainButton||!floating)return;
-
-const rect=
-mainButton.getBoundingClientRect();
-
-if(rect.bottom<0){
-
-floating.classList.add("show");
-
-}else{
-
-floating.classList.remove("show");
-
-}
-
-}
-
-window.addEventListener(
-"scroll",
-updateFloatingPost,
-{passive:true}
-);
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
 document.addEventListener(
 "keydown",
 event=>{
 
 if(event.key==="Escape"){
 
+closeLocationPanel();
 closeModal("detailsModal");
 closeModal("publishModal");
-closeMenu();
 
 }
 
 });
 
 
-/* =========================================================
-   INIT
-========================================================= */
-
 updateSavedButtons();
 applyFilters();
-updateFloatingPost();
 
 </script>
-
 
 <script src="/i18n/engine.js?v=3"></script>
 
