@@ -10,13 +10,14 @@
 *{box-sizing:border-box;margin:0;padding:0}
 
 :root{
---ink:#0b0b0b;
---paper:#f5f2ea;
+--ink:#090909;
+--paper:#f4f0e6;
 --white:#fff;
 --gold:#c99d36;
---green:#58e71a;
---muted:#707070;
---line:#d9d5cb;
+--gold-light:#e3c36e;
+--gold-dark:#9f741c;
+--muted:#74706a;
+--line:#d5d0c5;
 --serif:Georgia,"Times New Roman",serif;
 --sans:Arial,Helvetica,sans-serif
 }
@@ -26,7 +27,8 @@ html{scroll-behavior:smooth}
 body{
 background:var(--paper);
 color:var(--ink);
-font-family:var(--sans)
+font-family:var(--sans);
+overflow-x:hidden
 }
 
 button,input,select,textarea{font:inherit}
@@ -35,116 +37,245 @@ a{color:inherit;text-decoration:none}
 img{display:block;width:100%}
 
 
-/* HEADER */
+/* =========================================================
+   HEADER — SAME VISUAL SYSTEM AS FINISHED DOGUE SECTIONS
+========================================================= */
 
 .site-header{
 position:sticky;
 top:0;
-z-index:1000;
+z-index:1200;
 background:#050505;
 color:#fff;
-border-bottom:1px solid #292929
+border-bottom:1px solid #222
 }
 
 .header-main{
-height:150px;
+height:160px;
 display:grid;
-grid-template-columns:70px 1fr 70px;
+grid-template-columns:72px 1fr 72px;
 align-items:center;
-padding:0 20px
+padding:0 26px
 }
 
 .brand{
 text-align:center;
-line-height:1
+line-height:1;
+display:block
 }
 
 .brand-small{
 font-family:var(--serif);
 font-size:15px;
 letter-spacing:3px;
-text-transform:uppercase;
-color:#d3aa51;
+color:#d1a84d;
+text-transform:none;
 margin-bottom:5px
 }
 
 .brand-big{
 font-family:var(--serif);
-font-size:55px;
+font-size:56px;
+font-weight:400;
 letter-spacing:5px;
 color:#fff
 }
 
-.icon-btn{
+.icon-button{
 border:0;
-background:none;
+background:transparent;
 color:#fff;
-font-size:40px;
-line-height:1
-}
-
-.menu-icon{
-font-size:41px;
-font-weight:200
-}
-
-.home-icon{
-font-size:33px;
 display:flex;
 align-items:center;
 justify-content:center
 }
 
+.menu-button{
+width:58px;
+height:58px;
+flex-direction:column;
+gap:8px
+}
+
+.menu-button span{
+display:block;
+width:44px;
+height:3px;
+background:#fff;
+border-radius:5px
+}
+
+.home-button{
+width:58px;
+height:58px
+}
+
+.home-button svg{
+width:42px;
+height:42px;
+stroke:#fff;
+stroke-width:2.4;
+fill:none
+}
+
 .nav-strip{
 display:flex;
-gap:36px;
+gap:37px;
+align-items:center;
 overflow-x:auto;
 scrollbar-width:none;
-border-top:1px solid #282828;
-padding:17px 26px;
-font-weight:800;
-letter-spacing:1px;
+border-top:1px solid #242424;
+padding:17px 27px 15px;
 white-space:nowrap;
+font-size:15px;
+font-weight:900;
+letter-spacing:.5px;
 text-transform:uppercase
 }
 
 .nav-strip::-webkit-scrollbar{display:none}
 
+.nav-strip a{
+position:relative;
+padding-bottom:3px
+}
+
 .nav-strip a.active{
-color:var(--gold)
+color:var(--gold-light)
+}
+
+.nav-strip a.active:after{
+content:"";
+position:absolute;
+height:3px;
+left:0;
+right:0;
+bottom:-14px;
+background:linear-gradient(
+90deg,
+var(--gold-dark),
+var(--gold-light),
+var(--gold)
+)
 }
 
 
-/* PAGE */
+/* =========================================================
+   SIDE MENU
+========================================================= */
+
+.menu-backdrop{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.68);
+z-index:1998;
+opacity:0;
+visibility:hidden;
+transition:.25s
+}
+
+.menu-backdrop.open{
+opacity:1;
+visibility:visible
+}
+
+.side-menu{
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+width:min(360px,88vw);
+background:#090909;
+color:#fff;
+z-index:1999;
+transform:translateX(-105%);
+transition:.3s ease;
+padding:28px 26px;
+overflow:auto
+}
+
+.side-menu.open{
+transform:translateX(0)
+}
+
+.side-menu-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding-bottom:24px;
+border-bottom:1px solid #2b2b2b
+}
+
+.side-menu-brand{
+font-family:var(--serif);
+font-size:30px;
+letter-spacing:2px;
+color:var(--gold-light)
+}
+
+.side-close{
+width:44px;
+height:44px;
+border:1px solid #444;
+background:none;
+color:#fff;
+font-size:28px
+}
+
+.side-links{
+display:flex;
+flex-direction:column;
+padding-top:18px
+}
+
+.side-links a{
+padding:17px 0;
+border-bottom:1px solid #252525;
+font-weight:800;
+font-size:16px
+}
+
+.side-links a.active{
+color:var(--gold-light)
+}
+
+
+/* =========================================================
+   MARKETPLACE TOP
+========================================================= */
 
 .market-shell{
-max-width:1240px;
-margin:auto;
-padding:27px 26px 80px
+max-width:1260px;
+margin:0 auto;
+padding:30px 24px 75px
 }
 
-.market-intro{
-display:grid;
-grid-template-columns:1fr auto;
-gap:20px;
-align-items:end;
-margin-bottom:16px
+.market-top{
+border-top:5px solid #111;
+padding-top:21px
+}
+
+.market-heading-row{
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:20px
 }
 
 .eyebrow{
 color:var(--gold);
 font-size:13px;
 font-weight:900;
-letter-spacing:3px;
-text-transform:uppercase;
-margin-bottom:8px
+letter-spacing:4px;
+text-transform:uppercase
 }
 
 .market-title{
 font-family:var(--serif);
 font-size:62px;
+line-height:.95;
 font-weight:400;
-line-height:.92
+margin-top:8px
 }
 
 .saved-link{
@@ -153,28 +284,47 @@ background:none;
 font-size:17px;
 font-weight:800;
 white-space:nowrap;
-padding-bottom:5px
+padding-bottom:6px
+}
+
+.saved-link:hover{
+color:var(--gold-dark)
 }
 
 
-/* LOCATION LINE */
+/* =========================================================
+   LOCATION + SEARCH COMPACT TOOLBAR
+========================================================= */
 
-.location-line{
+.market-tools{
+margin-top:20px
+}
+
+.location-toolbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:14px;
+margin-bottom:10px
+}
+
+.location-left{
 display:flex;
 align-items:center;
 gap:9px;
-font-size:16px;
-margin-bottom:11px;
 min-width:0
 }
 
+.location-pin{
+font-size:20px
+}
+
 .location-main{
-font-weight:800;
 border:0;
 background:none;
-padding:0;
-color:#111;
-max-width:74%;
+font-weight:900;
+font-size:17px;
+max-width:540px;
 white-space:nowrap;
 overflow:hidden;
 text-overflow:ellipsis;
@@ -182,133 +332,150 @@ text-align:left
 }
 
 .location-distance{
-color:#777;
+color:var(--muted);
 white-space:nowrap
 }
 
-
-/* SEARCH */
-
-.search-wrap{
-position:relative
+.location-change{
+border:0;
+background:none;
+text-decoration:underline;
+font-size:14px
 }
 
 .search-bar{
-height:58px;
+height:62px;
 background:#fff;
-border:1px solid #d6d2c8;
+border:1px solid #cfcac0;
 display:grid;
-grid-template-columns:44px 1fr 49px;
-align-items:center;
-padding:4px 5px 4px 8px
+grid-template-columns:55px 1fr 58px;
+align-items:center
 }
 
 .search-symbol{
-font-size:25px;
-text-align:center
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.search-symbol svg{
+width:28px;
+height:28px;
+stroke:#111;
+stroke-width:2;
+fill:none
 }
 
 .search-bar input{
 border:0;
 outline:0;
-font-size:16px;
+background:transparent;
 width:100%;
 min-width:0;
-background:transparent
+font-size:17px
 }
 
 .filter-toggle{
-height:48px;
-width:48px;
 border:0;
-background:#0d0d0d;
-color:#fff;
-font-size:22px
+width:48px;
+height:48px;
+justify-self:center;
+background:#0a0a0a;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:5px
+}
+
+.filter-toggle span{
+display:block;
+width:23px;
+height:2px;
+background:#fff
 }
 
 
-/* LOCATION PANEL */
+/* =========================================================
+   LOCATION PANEL
+========================================================= */
 
 .location-panel{
 display:none;
 background:#fff;
 border:1px solid var(--line);
 border-top:0;
-padding:16px;
+padding:17px;
 position:relative;
-z-index:30
+z-index:50
 }
 
-.location-panel.open{
-display:block
-}
+.location-panel.open{display:block}
 
 .location-top{
 display:grid;
 grid-template-columns:1fr auto;
-gap:8px
+gap:10px
 }
 
 .location-input{
-border:1px solid #ccc;
 height:48px;
-padding:0 13px;
+width:100%;
+border:1px solid #ccc;
+padding:0 14px;
 outline:0;
-width:100%
+background:#fff
 }
 
 .near-btn{
+height:48px;
 border:0;
 background:#111;
 color:#fff;
-padding:0 15px;
+padding:0 18px;
 font-weight:900;
 white-space:nowrap
 }
 
 .location-results{
-background:#fff;
+display:none;
 border:1px solid #ddd;
 border-top:0;
-display:none;
-max-height:260px;
+max-height:250px;
 overflow:auto
 }
 
-.location-results.show{
-display:block
-}
+.location-results.show{display:block}
 
 .location-option{
+display:block;
 width:100%;
-text-align:left;
-background:#fff;
 border:0;
 border-bottom:1px solid #eee;
+background:#fff;
 padding:12px 13px;
+text-align:left;
 font-size:14px
 }
 
-.location-option:last-child{
-border-bottom:0
-}
+.location-option:last-child{border-bottom:0}
 
 .radius-box{
 display:none;
-margin-top:15px;
-padding-top:14px;
-border-top:1px solid #ddd
+margin-top:17px;
+border-top:1px solid #ddd;
+padding-top:15px
 }
 
-.radius-box.show{
-display:block
-}
+.radius-box.show{display:block}
 
 .radius-row{
 display:flex;
 justify-content:space-between;
-font-weight:800;
-margin-bottom:10px
+align-items:center;
+font-size:14px;
+font-weight:900;
+margin-bottom:11px
 }
 
 #radiusSlider{
@@ -317,60 +484,36 @@ accent-color:#111
 }
 
 
-/* POST BUTTON */
+/* =========================================================
+   ACTION + QUICK FILTERS
+========================================================= */
 
-.market-post-main{
-width:100%;
-height:54px;
-border:0;
-background:var(--green);
-color:#080808;
-font-weight:900;
-font-size:16px;
-letter-spacing:.2px;
+.market-action-row{
 display:flex;
 align-items:center;
-justify-content:center;
-gap:8px;
-margin-top:11px;
-position:sticky;
-top:219px;
-z-index:950;
-box-shadow:0 8px 18px rgba(0,0,0,.12)
+gap:9px;
+margin-top:12px
 }
-
-.market-post-main:active{
-transform:scale(.99)
-}
-
-.post-plus{
-font-size:25px;
-line-height:1;
-font-weight:400
-}
-
-
-/* FILTERS */
 
 .quick-row{
 display:flex;
+align-items:center;
 gap:8px;
 overflow-x:auto;
 scrollbar-width:none;
-padding:11px 0 4px
+flex:1
 }
 
-.quick-row::-webkit-scrollbar{
-display:none
-}
+.quick-row::-webkit-scrollbar{display:none}
 
 .quick{
 flex:none;
-border:1px solid #d1cec6;
-background:#fff;
-padding:11px 18px;
+height:48px;
+padding:0 20px;
 border-radius:999px;
-font-weight:800;
+border:1px solid #cfcac0;
+background:#fff;
+font-weight:900;
 font-size:14px;
 white-space:nowrap
 }
@@ -382,42 +525,126 @@ border-color:#111
 }
 
 
-/* BROWSE */
+/* =========================================================
+   PREMIUM POST BUTTON
+========================================================= */
+
+.market-post-main{
+flex:none;
+height:48px;
+padding:0 21px;
+border:1px solid #9e7621;
+background:
+linear-gradient(
+100deg,
+#8e6517 0%,
+#c99d36 28%,
+#efd47c 50%,
+#c99d36 72%,
+#9d721d 100%
+);
+color:#090909;
+font-size:14px;
+font-weight:900;
+letter-spacing:.4px;
+white-space:nowrap;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:7px;
+box-shadow:0 5px 14px rgba(120,86,15,.18)
+}
+
+.market-post-main:hover{
+filter:brightness(1.04)
+}
+
+.post-plus{
+font-size:21px;
+font-weight:400
+}
+
+
+/* floating premium button */
+
+.floating-post{
+position:fixed;
+right:18px;
+top:231px;
+z-index:1080;
+display:flex;
+align-items:center;
+gap:7px;
+border:1px solid #d0a84a;
+background:#090909;
+color:#fff;
+padding:13px 17px;
+font-size:13px;
+font-weight:900;
+letter-spacing:.3px;
+box-shadow:0 8px 26px rgba(0,0,0,.24);
+opacity:0;
+pointer-events:none;
+transform:translateY(-8px);
+transition:.22s
+}
+
+.floating-post strong{
+color:var(--gold-light)
+}
+
+.floating-post.show{
+opacity:1;
+pointer-events:auto;
+transform:translateY(0)
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 .section-head{
 display:flex;
 align-items:flex-end;
 justify-content:space-between;
-margin:31px 0 13px
+gap:15px;
+margin:38px 0 16px
 }
 
 .section-title{
 font-family:var(--serif);
+font-size:47px;
 font-weight:400;
-font-size:43px;
 line-height:1
 }
 
 .view-all{
 border:0;
 background:none;
-text-decoration:underline;
-font-size:15px
+font-size:16px;
+text-decoration:underline
 }
+
+
+/* =========================================================
+   BROWSE EDITORIAL GRID
+========================================================= */
 
 .browse-grid{
 display:grid;
-grid-template-columns:1.15fr .85fr .85fr;
-grid-template-rows:280px 240px;
-gap:6px
+grid-template-columns:1.18fr .82fr .82fr;
+grid-template-rows:310px 255px;
+gap:7px
 }
 
 .browse-card{
 position:relative;
 overflow:hidden;
-background:#ddd;
 border:0;
-text-align:left
+background:#ddd;
+text-align:left;
+min-height:0
 }
 
 .browse-card:first-child{
@@ -432,7 +659,7 @@ grid-column:2/4
 width:100%;
 height:100%;
 object-fit:cover;
-transition:.35s
+transition:transform .45s ease
 }
 
 .browse-card:hover img{
@@ -442,48 +669,59 @@ transform:scale(1.025)
 .browse-shade{
 position:absolute;
 inset:0;
-background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.82))
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,.02) 20%,
+rgba(0,0,0,.15) 48%,
+rgba(0,0,0,.84) 100%
+)
 }
 
 .browse-copy{
 position:absolute;
-left:17px;
-right:14px;
-bottom:15px;
+left:19px;
+right:16px;
+bottom:17px;
 color:#fff
 }
 
 .browse-copy small{
+display:block;
+color:#e6be5d;
+font-size:11px;
 font-weight:900;
-letter-spacing:2px;
-color:#e2bd63;
-font-size:11px
+letter-spacing:2.8px;
+margin-bottom:5px
 }
 
 .browse-copy h3{
 font-family:var(--serif);
-font-size:32px;
-font-weight:400;
-margin-top:4px
+font-size:34px;
+line-height:1;
+font-weight:400
 }
 
 
-/* LISTINGS */
+/* =========================================================
+   LISTINGS
+========================================================= */
 
 .listings-head{
-margin-top:45px
+margin-top:48px
 }
 
 .listing-count{
-color:#777;
-font-size:15px
+font-size:15px;
+color:var(--muted);
+white-space:nowrap
 }
 
 .listings{
 display:grid;
 grid-template-columns:repeat(2,minmax(0,1fr));
-gap:31px 10px;
-margin-top:15px
+gap:36px 13px;
+margin-top:17px
 }
 
 .listing-card{
@@ -491,28 +729,53 @@ min-width:0
 }
 
 .listing-photo{
-height:500px;
 position:relative;
+height:510px;
 overflow:hidden;
 background:#ddd;
 cursor:pointer
 }
 
+.listing-photo:after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+height:44%;
+background:linear-gradient(
+180deg,
+transparent,
+rgba(0,0,0,.43)
+);
+pointer-events:none
+}
+
 .listing-photo img{
+width:100%;
 height:100%;
-object-fit:cover
+object-fit:cover;
+transition:.4s
+}
+
+.listing-photo:hover img{
+transform:scale(1.018)
 }
 
 .heart{
 position:absolute;
-right:12px;
-top:12px;
+z-index:3;
+right:14px;
+top:14px;
 width:48px;
 height:48px;
 border-radius:50%;
 border:0;
-background:rgba(255,255,255,.95);
-font-size:25px
+background:rgba(255,255,255,.94);
+font-size:25px;
+display:flex;
+align-items:center;
+justify-content:center
 }
 
 .heart.saved{
@@ -522,106 +785,138 @@ color:#fff
 
 .price{
 position:absolute;
-left:12px;
-bottom:12px;
+z-index:3;
+left:14px;
+bottom:14px;
 background:#fff;
-padding:8px 12px;
+color:#111;
 border-radius:999px;
+padding:9px 14px;
 font-size:14px;
 font-weight:900
 }
 
 .tag{
 position:absolute;
-right:12px;
-bottom:15px;
-color:#fff;
-font-size:10px;
+z-index:3;
+right:14px;
+bottom:18px;
+color:#e4bc5e;
 font-weight:900;
-letter-spacing:1.7px;
-text-transform:uppercase;
-text-shadow:0 1px 4px #000
+letter-spacing:2.1px;
+font-size:11px;
+text-transform:uppercase
 }
 
 .listing-copy{
-padding:11px 2px 0
+padding:13px 5px 0
+}
+
+.listing-topline{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:10px
 }
 
 .listing-name{
 font-family:var(--serif);
-font-size:29px;
-font-weight:400;
-line-height:1;
-margin-bottom:7px
+font-size:31px;
+line-height:1.02;
+font-weight:400
 }
 
 .listing-meta{
 font-size:14px;
-color:#6f6f6f;
-line-height:1.45
+color:#6e6b66;
+line-height:1.5;
+margin-top:3px
 }
 
 .contact-small{
-border:0;
+width:100%;
+height:48px;
+margin-top:11px;
+border:1px solid #111;
 background:#111;
 color:#fff;
-width:100%;
-margin-top:10px;
-height:45px;
-font-weight:900
+font-size:14px;
+font-weight:900;
+text-transform:uppercase;
+letter-spacing:.4px
+}
+
+.contact-small:hover{
+background:var(--gold);
+border-color:var(--gold);
+color:#111
 }
 
 
-/* BOTTOM PUBLISH */
+/* =========================================================
+   PUBLISH EDITORIAL STRIP
+========================================================= */
 
 .publish-strip{
-margin-top:52px;
-background:#0a0a0a;
+margin-top:58px;
+border:1px solid #111;
+background:#090909;
 color:#fff;
 display:grid;
 grid-template-columns:1fr auto;
 align-items:center;
-gap:20px;
-padding:25px
+gap:30px;
+padding:30px
 }
 
 .publish-strip small{
-color:var(--gold);
-font-weight:800;
+color:var(--gold-light);
+font-size:11px;
+font-weight:900;
 letter-spacing:3px
 }
 
 .publish-strip h2{
 font-family:var(--serif);
-font-size:33px;
+font-size:38px;
 font-weight:400;
-margin-top:7px
+line-height:1.05;
+margin-top:8px
 }
 
 .publish-main-btn{
-border:0;
-background:var(--green);
+min-width:205px;
+height:52px;
+border:1px solid var(--gold);
+background:
+linear-gradient(
+100deg,
+#9c721e,
+#d1a43b,
+#e5c66d,
+#c99d36
+);
 color:#111;
 font-weight:900;
-padding:16px 22px
+padding:0 22px
 }
 
 
-/* MODALS */
+/* =========================================================
+   MODALS
+========================================================= */
 
 .modal{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.72);
-z-index:2000;
+background:rgba(0,0,0,.75);
+z-index:2200;
 display:none;
 align-items:flex-end;
 justify-content:center
 }
 
-.modal.open{
-display:flex
-}
+.modal.open{display:flex}
 
 .modal-sheet{
 width:min(760px,100%);
@@ -634,12 +929,12 @@ padding:22px
 .modal-close{
 display:block;
 margin-left:auto;
+width:44px;
+height:44px;
 border:0;
 background:#111;
 color:#fff;
-width:44px;
-height:44px;
-font-size:24px
+font-size:25px
 }
 
 .detail-image{
@@ -649,17 +944,18 @@ margin-top:10px
 }
 
 .detail-tag{
-color:var(--gold);
-letter-spacing:2px;
-font-weight:900;
+color:var(--gold-dark);
 font-size:12px;
+font-weight:900;
+letter-spacing:2px;
 margin-top:18px
 }
 
 .detail-title{
 font-family:var(--serif);
-font-size:44px;
-margin:7px 0 10px
+font-size:45px;
+font-weight:400;
+margin:6px 0 10px
 }
 
 .detail-meta{
@@ -676,35 +972,41 @@ margin:18px 0
 .contact-box{
 background:#111;
 color:#fff;
-padding:18px;
+padding:19px;
 margin-top:15px
 }
 
 .contact-box small{
-color:#ccc
+color:var(--gold-light);
+font-weight:900;
+letter-spacing:2px
 }
 
 .contact-value{
 font-size:18px;
 font-weight:800;
-margin-top:6px;
+margin-top:8px;
 word-break:break-word
 }
 
 
-/* FORM */
+/* =========================================================
+   PUBLISH FORM
+========================================================= */
 
 .publish-form h2{
 font-family:var(--serif);
-font-size:42px;
+font-size:43px;
+font-weight:400;
 margin:7px 0
 }
 
 .fee-note{
-background:#ddffcf;
-padding:13px;
+border-left:5px solid var(--gold);
+background:#f5f0e3;
+padding:14px;
 font-weight:900;
-margin:12px 0 18px
+margin:13px 0 18px
 }
 
 .form-grid{
@@ -739,8 +1041,16 @@ border:1px dashed #999!important
 
 .form-submit{
 width:100%;
-border:0;
-background:var(--green);
+border:1px solid #9f7723;
+background:
+linear-gradient(
+100deg,
+#9c721e,
+#d1a43b,
+#e5c66d,
+#c99d36
+);
+color:#111;
 font-weight:900;
 padding:17px;
 margin-top:15px
@@ -754,89 +1064,162 @@ margin-top:10px
 }
 
 
-/* MOBILE */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:720px){
 
 .header-main{
-height:150px;
-grid-template-columns:50px 1fr 50px;
-padding:0 18px
+height:158px;
+grid-template-columns:56px 1fr 56px;
+padding:0 17px
 }
 
-.brand-big{
-font-size:52px
-}
-
-.nav-strip{
-gap:30px;
-padding:16px 20px;
+.brand-small{
 font-size:14px
 }
 
-.market-shell{
-padding:22px 12px 60px
+.brand-big{
+font-size:51px;
+letter-spacing:4px
 }
 
-.market-intro{
-margin-bottom:12px
+.menu-button{
+width:52px;
+height:52px
+}
+
+.menu-button span{
+width:41px
+}
+
+.home-button svg{
+width:39px;
+height:39px
+}
+
+.nav-strip{
+gap:31px;
+padding:16px 26px 14px;
+font-size:14px
+}
+
+.nav-strip a.active:after{
+bottom:-13px
+}
+
+.market-shell{
+padding:20px 14px 58px
+}
+
+.market-top{
+border-top:4px solid #111;
+padding-top:18px
+}
+
+.market-heading-row{
+align-items:flex-end
 }
 
 .market-title{
-font-size:50px
+font-size:49px
 }
 
 .eyebrow{
 font-size:11px;
-margin-bottom:6px
+letter-spacing:3px
 }
 
 .saved-link{
 font-size:15px
 }
 
-.location-line{
-font-size:15px;
+.market-tools{
+margin-top:16px
+}
+
+.location-toolbar{
 margin-bottom:9px
 }
 
 .location-main{
-max-width:68%
+font-size:15px;
+max-width:235px
+}
+
+.location-distance{
+font-size:14px
+}
+
+.location-change{
+display:none
 }
 
 .search-bar{
-height:56px;
-grid-template-columns:42px 1fr 47px
+height:57px;
+grid-template-columns:49px 1fr 53px
+}
+
+.search-bar input{
+font-size:15px
 }
 
 .filter-toggle{
-height:46px;
-width:46px
+width:45px;
+height:45px
+}
+
+.location-top{
+grid-template-columns:1fr
+}
+
+.near-btn{
+width:100%
+}
+
+.market-action-row{
+display:block;
+margin-top:10px
 }
 
 .market-post-main{
-height:52px;
-top:215px;
-margin-top:9px
+width:100%;
+height:48px;
+margin-bottom:9px;
+font-size:14px
 }
 
 .quick-row{
-margin-right:-12px;
-padding-top:10px
+margin-right:-14px
+}
+
+.quick{
+height:47px;
+padding:0 19px;
+font-size:14px
+}
+
+.floating-post{
+top:auto;
+right:13px;
+bottom:20px;
+padding:12px 15px;
+font-size:12px
 }
 
 .section-head{
-margin-top:29px
+margin-top:31px
 }
 
 .section-title{
-font-size:39px
+font-size:40px
 }
 
 .browse-grid{
-grid-template-columns:1.15fr .85fr;
-grid-template-rows:280px 205px 205px;
-gap:4px
+grid-template-columns:1.16fr .84fr;
+grid-template-rows:285px 210px 205px;
+gap:5px
 }
 
 .browse-card:first-child{
@@ -848,43 +1231,84 @@ grid-column:1/3
 }
 
 .browse-copy{
-left:12px;
-bottom:12px
+left:14px;
+bottom:13px
 }
 
 .browse-copy h3{
-font-size:25px
+font-size:26px
+}
+
+.browse-copy small{
+font-size:10px
+}
+
+.listings-head{
+margin-top:42px
 }
 
 .listings{
-gap:27px 7px
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:31px 8px;
+margin-top:14px
 }
 
 .listing-photo{
-height:330px
+height:335px
+}
+
+.heart{
+width:43px;
+height:43px;
+font-size:22px;
+right:10px;
+top:10px
+}
+
+.price{
+left:10px;
+bottom:11px;
+padding:8px 11px;
+font-size:12px
+}
+
+.tag{
+right:10px;
+bottom:15px;
+font-size:9px;
+letter-spacing:1.4px
+}
+
+.listing-copy{
+padding:10px 3px 0
 }
 
 .listing-name{
-font-size:24px
+font-size:25px
 }
 
 .listing-meta{
 font-size:13px
 }
 
-.heart{
-width:43px;
-height:43px;
-font-size:23px
-}
-
-.price{
+.contact-small{
+height:45px;
 font-size:12px
 }
 
 .publish-strip{
 grid-template-columns:1fr;
-padding:23px 18px
+gap:20px;
+padding:24px 20px;
+margin-top:48px
+}
+
+.publish-strip h2{
+font-size:34px
+}
+
+.publish-main-btn{
+width:100%
 }
 
 .form-grid{
@@ -901,26 +1325,65 @@ font-size:37px
 
 }
 
-@media(max-width:410px){
+
+@media(max-width:420px){
+
+.header-main{
+height:150px
+}
 
 .brand-big{
 font-size:46px
+}
+
+.nav-strip{
+font-size:13px;
+gap:29px
 }
 
 .market-title{
 font-size:45px
 }
 
-.market-post-main{
-top:209px
+.market-heading-row{
+gap:8px
+}
+
+.location-main{
+max-width:205px
 }
 
 .listing-photo{
-height:290px
+height:300px
 }
 
 .browse-grid{
-grid-template-rows:255px 185px 185px
+grid-template-rows:260px 190px 190px
+}
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media(max-width:360px){
+
+.brand-big{
+font-size:41px
+}
+
+.market-title{
+font-size:41px
+}
+
+.listing-photo{
+height:270px
+}
+
+.listing-name{
+font-size:22px
 }
 
 }
@@ -929,17 +1392,75 @@ grid-template-rows:255px 185px 185px
 
 <body>
 
+
+<!-- =======================================================
+     SIDE MENU
+======================================================= -->
+
+<div
+class="menu-backdrop"
+id="menuBackdrop"
+onclick="closeMenu()">
+</div>
+
+<aside
+class="side-menu"
+id="sideMenu">
+
+<div class="side-menu-head">
+
+<div class="side-menu-brand notranslate" translate="no">
+PETS &amp; DOGUE
+</div>
+
+<button
+class="side-close"
+type="button"
+onclick="closeMenu()"
+aria-label="Close menu">
+×
+</button>
+
+</div>
+
+<nav class="side-links">
+
+<a href="index.html">Главная</a>
+<a href="magazine.html">Журнал</a>
+<a href="articles.html">Статьи</a>
+<a href="photos.html">Фото</a>
+<a href="cover-stars.html">Звёзды обложки</a>
+<a href="contests.html">Конкурсы</a>
+<a href="local-community.html">Сообщество</a>
+<a class="active" href="pet-marketplace.html">Маркетплейс</a>
+<a href="about.html">О нас</a>
+<a href="contact.html">Контакты</a>
+
+</nav>
+
+</aside>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
 <header class="site-header">
 
 <div class="header-main">
 
 <button
-class="icon-btn menu-icon"
+class="icon-button menu-button"
 type="button"
-onclick="history.back()"
-aria-label="Back">
-‹
+onclick="openMenu()"
+aria-label="Open menu">
+
+<span></span>
+<span></span>
+<span></span>
+
 </button>
+
 
 <a
 class="brand notranslate"
@@ -956,14 +1477,24 @@ DOGUE
 
 </a>
 
+
 <a
-class="icon-btn home-icon"
+class="icon-button home-button"
 href="index.html"
 aria-label="Home">
-⌂
+
+<svg viewBox="0 0 24 24" aria-hidden="true">
+
+<path d="M3 10.8 12 3l9 7.8"></path>
+<path d="M5.2 9.7V21h13.6V9.7"></path>
+<path d="M9.5 21v-6.3h5V21"></path>
+
+</svg>
+
 </a>
 
 </div>
+
 
 <nav class="nav-strip">
 
@@ -980,9 +1511,34 @@ aria-label="Home">
 </header>
 
 
+<!-- =======================================================
+     FLOATING POST
+======================================================= -->
+
+<button
+class="floating-post"
+id="floatingPost"
+type="button"
+onclick="openPublish()">
+
+<span>＋</span>
+<span>POST</span>
+<strong>£1</strong>
+
+</button>
+
+
+<!-- =======================================================
+     PAGE
+======================================================= -->
+
 <main class="market-shell">
 
-<div class="market-intro">
+
+<section class="market-top" id="marketTop">
+
+
+<div class="market-heading-row">
 
 <div>
 
@@ -998,19 +1554,32 @@ Marketplace
 
 </div>
 
+
 <button
 class="saved-link"
 type="button"
 onclick="showSavedOnly()">
-♡ <span id="savedText">Saved</span>
+
+♡
+<span id="savedText">
+Saved
+</span>
+
 </button>
 
 </div>
 
 
-<div class="location-line">
+<div class="market-tools">
 
-<span>📍</span>
+
+<div class="location-toolbar">
+
+<div class="location-left">
+
+<span class="location-pin">
+📍
+</span>
 
 <button
 id="currentLocationLabel"
@@ -1028,12 +1597,27 @@ class="location-distance">
 </div>
 
 
-<div class="search-wrap">
+<button
+class="location-change"
+type="button"
+onclick="toggleLocationPanel()">
+Change location
+</button>
+
+</div>
+
 
 <div class="search-bar">
 
 <div class="search-symbol">
-⌕
+
+<svg viewBox="0 0 24 24">
+
+<circle cx="11" cy="11" r="6.6"></circle>
+<path d="m16 16 5 5"></path>
+
+</svg>
+
 </div>
 
 <input
@@ -1043,12 +1627,17 @@ placeholder="Search pets, breeds or services..."
 autocomplete="off"
 oninput="applyFilters()">
 
+
 <button
 class="filter-toggle"
 type="button"
 onclick="toggleLocationPanel()"
-aria-label="Location filters">
-☰
+aria-label="Location and distance filters">
+
+<span></span>
+<span></span>
+<span></span>
+
 </button>
 
 </div>
@@ -1066,7 +1655,7 @@ id="locationPanel">
 class="location-input"
 id="locationInput"
 type="text"
-placeholder="City, region or country..."
+placeholder="Search any city, region or country..."
 autocomplete="off"
 oninput="queueLocationSearch()">
 
@@ -1076,6 +1665,7 @@ id="locationResults">
 </div>
 
 </div>
+
 
 <button
 class="near-btn"
@@ -1116,11 +1706,13 @@ oninput="updateRadius()">
 
 </div>
 
-</div>
+
+<div class="market-action-row">
 
 
 <button
 class="market-post-main"
+id="mainPostButton"
 type="button"
 onclick="openPublish()">
 
@@ -1171,6 +1763,16 @@ Services
 
 </div>
 
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     BROWSE
+======================================================= -->
 
 <div class="section-head">
 
@@ -1189,6 +1791,7 @@ View all
 
 
 <section class="browse-grid">
+
 
 <button
 class="browse-card"
@@ -1296,6 +1899,10 @@ Find a home
 </section>
 
 
+<!-- =======================================================
+     LISTINGS
+======================================================= -->
+
 <div class="section-head listings-head">
 
 <div>
@@ -1322,6 +1929,8 @@ id="listingCount">
 class="listings"
 id="listingGrid">
 
+
+<!-- MILO -->
 
 <article
 class="listing-card"
@@ -1383,6 +1992,8 @@ View &amp; contact
 </article>
 
 
+<!-- LUNA -->
+
 <article
 class="listing-card"
 data-id="cat-01"
@@ -1443,6 +2054,8 @@ View &amp; contact
 </article>
 
 
+<!-- TEDDY -->
+
 <article
 class="listing-card"
 data-id="puppy-01"
@@ -1500,7 +2113,12 @@ View &amp; contact
 
 </div>
 
-</article> <article
+</article>
+
+
+<!-- GROOMING -->
+
+<article
 class="listing-card"
 data-id="groom-01"
 data-type="service"
@@ -1559,6 +2177,8 @@ View &amp; contact
 
 </article>
 
+
+<!-- RABBIT -->
 
 <article
 class="listing-card"
@@ -1619,6 +2239,8 @@ View &amp; contact
 
 </article>
 
+
+<!-- PHOTO -->
 
 <article
 class="listing-card"
@@ -1682,6 +2304,10 @@ View &amp; contact
 </section>
 
 
+<!-- =======================================================
+     BOTTOM CTA
+======================================================= -->
+
 <section class="publish-strip">
 
 <div>
@@ -1705,10 +2331,13 @@ onclick="openPublish()">
 
 </section>
 
+
 </main>
 
 
-<!-- DETAILS -->
+<!-- =======================================================
+     DETAILS MODAL
+======================================================= -->
 
 <div
 class="modal"
@@ -1767,7 +2396,9 @@ id="detailContact">
 </div>
 
 
-<!-- PUBLISH -->
+<!-- =======================================================
+     PUBLISH MODAL
+======================================================= -->
 
 <div
 class="modal"
@@ -1844,26 +2475,31 @@ id="newTitle"
 type="text"
 placeholder="Pet / service name">
 
+
 <input
 id="newBreed"
 type="text"
 placeholder="Breed / service type">
+
 
 <input
 id="newLocation"
 type="text"
 placeholder="City / location">
 
+
 <input
 id="newPrice"
 type="text"
 placeholder="Price, FREE or FROM £...">
+
 
 <input
 id="newContact"
 class="form-full"
 type="text"
 placeholder="Phone, WhatsApp or email">
+
 
 <input
 id="newPhoto"
@@ -1873,10 +2509,12 @@ accept="image/*">
 
 </div>
 
+
 <textarea
 id="newDescription"
 placeholder="Description...">
 </textarea>
+
 
 <button
 class="form-submit"
@@ -1884,6 +2522,7 @@ type="button"
 onclick="createLocalListing()">
 Continue · £1
 </button>
+
 
 <p class="tiny-note">
 The £1 payment checkout will be connected to the payment backend. This interface prepares the Marketplace listing before checkout.
@@ -1897,6 +2536,7 @@ The £1 payment checkout will be connected to the payment backend. This interfac
 <script src="/i18n/common.js?v=2"></script>
 <script src="/i18n/marketplace.js?v=3"></script>
 
+
 <script>
 
 let activeFilter="all";
@@ -1906,6 +2546,44 @@ let myPosition=null;
 let selectedPosition=null;
 let locationTimer=null;
 
+
+/* =========================================================
+   SIDE MENU
+========================================================= */
+
+function openMenu(){
+
+document
+.getElementById("sideMenu")
+.classList.add("open");
+
+document
+.getElementById("menuBackdrop")
+.classList.add("open");
+
+document.body.style.overflow="hidden";
+
+}
+
+
+function closeMenu(){
+
+document
+.getElementById("sideMenu")
+.classList.remove("open");
+
+document
+.getElementById("menuBackdrop")
+.classList.remove("open");
+
+document.body.style.overflow="";
+
+}
+
+
+/* =========================================================
+   DETAILS DATA
+========================================================= */
 
 const DETAILS={
 
@@ -1966,6 +2644,10 @@ image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&
 };
 
 
+/* =========================================================
+   LOCATION
+========================================================= */
+
 function toggleLocationPanel(){
 
 document
@@ -1999,7 +2681,6 @@ if(q.length<2){
 
 box.classList.remove("show");
 box.innerHTML="";
-
 return;
 
 }
@@ -2016,11 +2697,14 @@ const url=
 encodeURIComponent(q);
 
 const response=
-await fetch(url,{
+await fetch(
+url,
+{
 headers:{
 "Accept":"application/json"
 }
-});
+}
+);
 
 const results=
 await response.json();
@@ -2104,18 +2788,13 @@ function useMyLocation(){
 
 if(!navigator.geolocation){
 
-alert(
-"Geolocation is not available on this device."
-);
-
+alert("Geolocation is not available on this device.");
 return;
 
 }
 
 const label=
-document.getElementById(
-"currentLocationLabel"
-);
+document.getElementById("currentLocationLabel");
 
 label.textContent=
 "Finding your location…";
@@ -2125,17 +2804,11 @@ navigator.geolocation.getCurrentPosition(
 async position=>{
 
 myPosition={
-
-lat:
-position.coords.latitude,
-
-lng:
-position.coords.longitude
-
+lat:position.coords.latitude,
+lng:position.coords.longitude
 };
 
-selectedPosition=
-myPosition;
+selectedPosition=myPosition;
 
 document
 .getElementById("radiusBox")
@@ -2147,11 +2820,14 @@ const url=
 `https://nominatim.openstreetmap.org/reverse?format=json&lat=${myPosition.lat}&lon=${myPosition.lng}&zoom=10`;
 
 const response=
-await fetch(url,{
+await fetch(
+url,
+{
 headers:{
 "Accept":"application/json"
 }
-});
+}
+);
 
 const result=
 await response.json();
@@ -2186,8 +2862,7 @@ updateRadius();
 
 ()=>{
 
-label.textContent=
-"Anywhere";
+label.textContent="Anywhere";
 
 alert(
 "Please allow location access to use Near me."
@@ -2238,24 +2913,18 @@ lng2
 const R=6371;
 
 const dLat=
-(lat2-lat1)*
-Math.PI/180;
+(lat2-lat1)*Math.PI/180;
 
 const dLng=
-(lng2-lng1)*
-Math.PI/180;
+(lng2-lng1)*Math.PI/180;
 
 const a=
 
 Math.sin(dLat/2)**2+
 
-Math.cos(
-lat1*Math.PI/180
-)*
+Math.cos(lat1*Math.PI/180)*
 
-Math.cos(
-lat2*Math.PI/180
-)*
+Math.cos(lat2*Math.PI/180)*
 
 Math.sin(dLng/2)**2;
 
@@ -2269,6 +2938,10 @@ Math.sqrt(1-a)
 }
 
 
+/* =========================================================
+   FILTERING
+========================================================= */
+
 function setQuickFilter(
 button,
 type
@@ -2278,9 +2951,7 @@ activeFilter=type;
 savedOnly=false;
 
 document
-.querySelectorAll(
-".quick[data-filter]"
-)
+.querySelectorAll(".quick[data-filter]")
 .forEach(btn=>
 btn.classList.remove("active")
 );
@@ -2312,136 +2983,16 @@ block:"start"
 
 function showSavedOnly(){
 
-savedOnly=
-!savedOnly;
+savedOnly=!savedOnly;
 
 applyFilters();
 
 document
 .querySelector(".listings-head")
 .scrollIntoView({
-behavior:"smooth"
+behavior:"smooth",
+block:"start"
 });
-
-}
-
-
-function getSaved(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem(
-"dogue_market_saved"
-)||"[]"
-);
-
-}catch(e){
-
-return[];
-
-}
-
-}
-
-
-function toggleSaved(
-event,
-id,
-button
-){
-
-event.stopPropagation();
-
-let saved=
-getSaved();
-
-if(saved.includes(id)){
-
-saved=
-saved.filter(
-item=>item!==id
-);
-
-button
-.classList
-.remove("saved");
-
-button.textContent=
-"♡";
-
-}else{
-
-saved.push(id);
-
-button
-.classList
-.add("saved");
-
-button.textContent=
-"♥";
-
-}
-
-localStorage.setItem(
-"dogue_market_saved",
-JSON.stringify(saved)
-);
-
-updateSavedButtons();
-
-}
-
-
-function updateSavedButtons(){
-
-const saved=
-getSaved();
-
-document
-.querySelectorAll(".listing-card")
-.forEach(card=>{
-
-const button=
-card.querySelector(".heart");
-
-if(!button)return;
-
-if(
-saved.includes(
-card.dataset.id
-)
-){
-
-button
-.classList
-.add("saved");
-
-button.textContent=
-"♥";
-
-}else{
-
-button
-.classList
-.remove("saved");
-
-button.textContent=
-"♡";
-
-}
-
-});
-
-document
-.getElementById("savedText")
-.textContent=
-
-saved.length
-?
-`Saved ${saved.length}`
-:
-"Saved";
 
 }
 
@@ -2456,12 +3007,10 @@ document
 .trim();
 
 const cards=[
-...document
-.querySelectorAll(".listing-card")
+...document.querySelectorAll(".listing-card")
 ];
 
-const saved=
-getSaved();
+const saved=getSaved();
 
 const radius=
 Number(
@@ -2476,8 +3025,10 @@ cards.forEach(card=>{
 
 const text=
 (
-card.dataset.search+
-" "+
+(card.dataset.search||"")
++
+" "
++
 card.innerText
 )
 .toLowerCase();
@@ -2486,36 +3037,27 @@ let ok=
 !query||
 text.includes(query);
 
-if(
-activeFilter!=="all"
-){
+if(activeFilter!=="all"){
 
 ok=
 ok&&
-card.dataset.type===
-activeFilter;
+card.dataset.type===activeFilter;
 
 }
 
-if(
-browseFilter!=="all"
-){
+if(browseFilter!=="all"){
 
-if(
-browseFilter==="rehome"
-){
+if(browseFilter==="rehome"){
 
 ok=
 ok&&
-card.dataset.type===
-"free";
+card.dataset.type==="free";
 
 }else{
 
 ok=
 ok&&
-card.dataset.animal===
-browseFilter;
+card.dataset.animal===browseFilter;
 
 }
 
@@ -2525,23 +3067,14 @@ if(savedOnly){
 
 ok=
 ok&&
-saved.includes(
-card.dataset.id
-);
+saved.includes(card.dataset.id);
 
 }
 
 if(myPosition){
 
-const lat=
-Number(
-card.dataset.lat
-);
-
-const lng=
-Number(
-card.dataset.lng
-);
+const lat=Number(card.dataset.lat);
+const lng=Number(card.dataset.lng);
 
 if(
 Number.isFinite(lat)&&
@@ -2550,7 +3083,6 @@ Number.isFinite(lng)
 
 ok=
 ok&&
-
 distanceKm(
 myPosition.lat,
 myPosition.lng,
@@ -2581,52 +3113,152 @@ visible+" listings";
 }
 
 
+/* =========================================================
+   SAVED
+========================================================= */
+
+function getSaved(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem("dogue_market_saved")
+||
+"[]"
+);
+
+}catch(e){
+
+return[];
+
+}
+
+}
+
+
+function toggleSaved(
+event,
+id,
+button
+){
+
+event.stopPropagation();
+
+let saved=getSaved();
+
+if(saved.includes(id)){
+
+saved=
+saved.filter(item=>item!==id);
+
+button.classList.remove("saved");
+button.textContent="♡";
+
+}else{
+
+saved.push(id);
+
+button.classList.add("saved");
+button.textContent="♥";
+
+}
+
+localStorage.setItem(
+"dogue_market_saved",
+JSON.stringify(saved)
+);
+
+updateSavedButtons();
+
+}
+
+
+function updateSavedButtons(){
+
+const saved=getSaved();
+
+document
+.querySelectorAll(".listing-card")
+.forEach(card=>{
+
+const button=
+card.querySelector(".heart");
+
+if(!button)return;
+
+if(saved.includes(card.dataset.id)){
+
+button.classList.add("saved");
+button.textContent="♥";
+
+}else{
+
+button.classList.remove("saved");
+button.textContent="♡";
+
+}
+
+});
+
+document
+.getElementById("savedText")
+.textContent=
+
+saved.length
+?
+`Saved ${saved.length}`
+:
+"Saved";
+
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
 function openDetails(id){
 
-const data=
-DETAILS[id];
+const data=DETAILS[id];
 
 if(!data)return;
 
 document
 .getElementById("detailImage")
-.src=
-data.image;
+.src=data.image;
 
 document
 .getElementById("detailTag")
-.textContent=
-data.tag;
+.textContent=data.tag;
 
 document
 .getElementById("detailTitle")
-.textContent=
-data.title;
+.textContent=data.title;
 
 document
 .getElementById("detailMeta")
-.textContent=
-data.meta;
+.textContent=data.meta;
 
 document
 .getElementById("detailDescription")
-.textContent=
-data.description;
+.textContent=data.description;
 
 document
 .getElementById("detailContact")
-.textContent=
-data.contact;
+.textContent=data.contact;
 
 document
 .getElementById("detailsModal")
 .classList.add("open");
 
-document.body.style.overflow=
-"hidden";
+document.body.style.overflow="hidden";
 
 }
 
+
+/* =========================================================
+   PUBLISH
+========================================================= */
 
 function openPublish(){
 
@@ -2634,8 +3266,7 @@ document
 .getElementById("publishModal")
 .classList.add("open");
 
-document.body.style.overflow=
-"hidden";
+document.body.style.overflow="hidden";
 
 }
 
@@ -2646,8 +3277,7 @@ document
 .getElementById(id)
 .classList.remove("open");
 
-document.body.style.overflow=
-"";
+document.body.style.overflow="";
 
 }
 
@@ -2657,9 +3287,7 @@ event,
 id
 ){
 
-if(
-event.target.id===id
-){
+if(event.target.id===id){
 
 closeModal(id);
 
@@ -2667,6 +3295,10 @@ closeModal(id);
 
 }
 
+
+/* =========================================================
+   CREATE LOCAL LISTING
+========================================================= */
 
 function createLocalListing(){
 
@@ -2708,8 +3340,7 @@ return;
 
 }
 
-const reader=
-new FileReader();
+const reader=new FileReader();
 
 reader.onload=
 function(event){
@@ -2764,8 +3395,7 @@ DETAILS[id]={
 
 title,
 
-tag:
-typeLabel,
+tag:typeLabel,
 
 meta:
 (
@@ -2785,28 +3415,20 @@ description||
 
 contact,
 
-image:
-event.target.result
+image:event.target.result
 
 };
 
 
 const article=
-document.createElement(
-"article"
-);
+document.createElement("article");
 
 article.className=
 "listing-card";
 
-article.dataset.id=
-id;
-
-article.dataset.type=
-type;
-
-article.dataset.animal=
-animal;
+article.dataset.id=id;
+article.dataset.type=type;
+article.dataset.animal=animal;
 
 article.dataset.search=
 `${title} ${breed} ${location} ${type} ${animal}`
@@ -2821,7 +3443,7 @@ onclick="openDetails('${id}')">
 
 <img
 src="${event.target.result}"
-alt="">
+alt="${escapeHTML(title)}">
 
 <button
 class="heart"
@@ -2865,14 +3487,11 @@ View &amp; contact
 
 `;
 
-
 document
 .getElementById("listingGrid")
 .prepend(article);
 
-closeModal(
-"publishModal"
-);
+closeModal("publishModal");
 
 applyFilters();
 
@@ -2887,65 +3506,88 @@ reader.readAsDataURL(photo);
 }
 
 
+/* =========================================================
+   SECURITY
+========================================================= */
+
 function escapeHTML(value){
 
-return String(
-value||""
-)
+return String(value||"")
 
-.replaceAll(
-"&",
-"&amp;"
-)
-
-.replaceAll(
-"<",
-"&lt;"
-)
-
-.replaceAll(
-">",
-"&gt;"
-)
-
-.replaceAll(
-'"',
-"&quot;"
-)
-
-.replaceAll(
-"'",
-"&#039;"
-);
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
+
+/* =========================================================
+   FLOATING POST BUTTON
+========================================================= */
+
+function updateFloatingPost(){
+
+const mainButton=
+document.getElementById("mainPostButton");
+
+const floating=
+document.getElementById("floatingPost");
+
+if(!mainButton||!floating)return;
+
+const rect=
+mainButton.getBoundingClientRect();
+
+if(rect.bottom<0){
+
+floating.classList.add("show");
+
+}else{
+
+floating.classList.remove("show");
+
+}
+
+}
+
+window.addEventListener(
+"scroll",
+updateFloatingPost,
+{passive:true}
+);
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
 
 document.addEventListener(
 "keydown",
 event=>{
 
-if(
-event.key==="Escape"
-){
+if(event.key==="Escape"){
 
-closeModal(
-"detailsModal"
-);
-
-closeModal(
-"publishModal"
-);
+closeModal("detailsModal");
+closeModal("publishModal");
+closeMenu();
 
 }
 
 });
 
 
+/* =========================================================
+   INIT
+========================================================= */
+
 updateSavedButtons();
 applyFilters();
+updateFloatingPost();
 
 </script>
+
 
 <script src="/i18n/engine.js?v=3"></script>
 
