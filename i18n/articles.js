@@ -187,7 +187,7 @@ localTitle:"Together Near You"
 
 coverStar:{
 myPetIs:"MY PET IS",
-next:"THE NEXT<br>COVER STAR",
+next:"THE NEXT COVER STAR",
 enter:"TAP TO ENTER →"
 },
 
@@ -203,7 +203,7 @@ narrationUnsupported:"Voice narration is not supported by this browser.",
 invalidEmail:"Please enter a valid email address.",
 newsletterSuccess:"Welcome to the PETS & DOGUE community."
 }
-}, ru:{
+},ru:{
 meta:{
 title:"Статьи | PETS & DOGUE",
 description:"Редакционные истории PETS & DOGUE: интервью, полезные гиды, путешествия, мода, здоровье и помощь животным."
@@ -366,23 +366,29 @@ description:"Попробуйте другое слово или выберит�
 visual:{
 heading:"Визуальная журналистика",
 openGallery:"ОТКРЫТЬ ФОТОГАЛЕРЕЮ →",
+
 coverLabel:"ЗВЕЗДА ОБЛОЖКИ",
 coverTitle:"Лицо будущего выпуска",
+
 travelLabel:"ПУТЕШЕСТВИЯ",
 travelTitle:"Красивые путешествия с питомцем",
+
 fashionLabel:"МОДА",
 fashionTitle:"Редакционный стиль",
+
 rescueLabel:"СПАСЕНИЕ",
 rescueTitle:"Жизнь, которую стоит увидеть",
+
 wellnessLabel:"ЗДОРОВЬЕ",
 wellnessTitle:"Ежедневный уход",
+
 localLabel:"РЯДОМ",
 localTitle:"Вместе рядом с вами"
 },
 
 coverStar:{
 myPetIs:"МОЙ ПИТОМЕЦ —",
-next:"СЛЕДУЮЩАЯ<br>ЗВЕЗДА ОБЛОЖКИ",
+next:"СЛЕДУЮЩАЯ ЗВЕЗДА ОБЛОЖКИ",
 enter:"НАЖМИТЕ, ЧТОБЫ УЧАСТВОВАТЬ →"
 },
 
@@ -398,10 +404,7 @@ narrationUnsupported:"Этот браузер не поддерживает го
 invalidEmail:"Введите корректный email.",
 newsletterSuccess:"Добро пожаловать в сообщество PETS & DOGUE."
 }
-},
-
-
-uk:{
+},uk:{
 meta:{
 title:"Статті | PETS & DOGUE",
 description:"Редакційні історії PETS & DOGUE: інтерв’ю, корисні гіди, подорожі, мода, здоров’я та допомога тваринам."
@@ -564,23 +567,29 @@ description:"Спробуйте інше слово або виберіть ін
 visual:{
 heading:"Візуальна журналістика",
 openGallery:"ВІДКРИТИ ФОТОГАЛЕРЕЮ →",
+
 coverLabel:"ЗІРКА ОБКЛАДИНКИ",
 coverTitle:"Обличчя майбутнього випуску",
+
 travelLabel:"ПОДОРОЖІ",
 travelTitle:"Красиві подорожі з улюбленцем",
+
 fashionLabel:"МОДА",
 fashionTitle:"Редакційний стиль",
+
 rescueLabel:"ПОРЯТУНОК",
 rescueTitle:"Життя, яке варто побачити",
+
 wellnessLabel:"ЗДОРОВ’Я",
 wellnessTitle:"Щоденний догляд",
+
 localLabel:"ПОРУЧ",
 localTitle:"Разом поруч із вами"
 },
 
 coverStar:{
 myPetIs:"МІЙ УЛЮБЛЕНЕЦЬ —",
-next:"НАСТУПНА<br>ЗІРКА ОБКЛАДИНКИ",
+next:"НАСТУПНА ЗІРКА ОБКЛАДИНКИ",
 enter:"НАТИСНІТЬ, ЩОБ ВЗЯТИ УЧАСТЬ →"
 },
 
@@ -596,16 +605,37 @@ narrationUnsupported:"Цей браузер не підтримує голосо
 invalidEmail:"Введіть коректний email.",
 newsletterSuccess:"Ласкаво просимо до спільноти PETS & DOGUE."
 }
-},};
+}};
 
 (function(){
 
 const A=window.PetsDogueTranslations.articles;
-if(!A||!A.en)return;
+
+if(!A||!A.en){
+return;
+}
 
 const supported=[
-"fr","de","es","it","pt","nl","pl","cs","sk","hu",
-"ro","bg","el","sv","da","no","fi","tr","ar","hi"
+"fr",
+"de",
+"es",
+"it",
+"pt",
+"nl",
+"pl",
+"cs",
+"sk",
+"hu",
+"ro",
+"bg",
+"el",
+"sv",
+"da",
+"no",
+"fi",
+"tr",
+"ar",
+"hi"
 ];
 
 function clone(value){
