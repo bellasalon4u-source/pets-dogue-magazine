@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="PETS & DOGUE Marketplace">
-<title>Marketplace — PETS & DOGUE</title>
+
+<meta
+id="pageDescription"
+name="description"
+content="Explore responsible pet listings, services and community stories in the PETS & DOGUE marketplace."
+data-i18n-attr="content:marketplace.meta.description">
+
+<title data-i18n="marketplace.meta.title">
+Pet Marketplace | PETS & DOGUE
+</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -499,7 +507,9 @@ line-height:1
 }
 
 
-/* floating post */
+/* =========================
+   FLOATING POST
+========================= */
 
 .floating-post{
 position:fixed;
@@ -584,7 +594,7 @@ font-size:15px
 
 
 /* =========================
-   BROWSE — PHOTO FIRST
+   BROWSE
 ========================= */
 
 .browse-grid{
@@ -889,7 +899,9 @@ padding:18px;
 margin-top:15px
 }
 
-.contact-box small{color:#ccc}
+.contact-box small{
+color:#ccc
+}
 
 .contact-value{
 font-size:18px;
@@ -961,6 +973,47 @@ font-size:12px;
 color:#777;
 line-height:1.5;
 margin-top:10px
+}
+
+
+/* =========================
+   RTL
+========================= */
+
+html[dir="rtl"] .location-main,
+html[dir="rtl"] .location-option,
+html[dir="rtl"] .browse-card{
+text-align:right
+}
+
+html[dir="rtl"] .location-edit{
+margin-left:0;
+margin-right:auto
+}
+
+html[dir="rtl"] .location-panel-actions{
+margin-left:0;
+margin-right:auto
+}
+
+html[dir="rtl"] .heart{
+right:auto;
+left:12px
+}
+
+html[dir="rtl"] .price{
+left:auto;
+right:12px
+}
+
+html[dir="rtl"] .tag{
+right:auto;
+left:12px
+}
+
+html[dir="rtl"] .floating-post{
+right:auto;
+left:16px
 }
 
 
@@ -1220,13 +1273,84 @@ stroke-width="4">
 
 <nav class="nav-strip">
 
-<a href="magazine.html">ЖУРНАЛ</a>
-<a href="articles.html">СТАТЬИ</a>
-<a href="photos.html">ФОТО</a>
-<a href="cover-stars.html">ЗВЁЗДЫ ОБЛОЖКИ</a>
-<a href="contests.html">КОНКУРСЫ</a>
-<a href="local-community.html">СООБЩЕСТВО</a>
-<a class="active" href="pet-marketplace.html">МАРКЕТПЛЕЙС</a>
+<a
+href="issue-01.html"
+data-i18n="common.navigation.magazine">
+MAGAZINE
+</a>
+
+<a
+href="articles.html"
+data-i18n="common.navigation.articles">
+ARTICLES
+</a>
+
+<a
+href="photos.html"
+data-i18n="common.navigation.photos">
+PHOTOS
+</a>
+
+<a
+href="members-gallery.html"
+data-i18n="common.navigation.coverStars">
+COVER STARS
+</a>
+
+<a
+href="pet-fashion.html"
+data-i18n="common.navigation.fashion">
+FASHION
+</a>
+
+<a
+href="wellness.html"
+data-i18n="common.navigation.wellness">
+WELLNESS
+</a>
+
+<a
+href="pet-travel.html"
+data-i18n="common.navigation.travel">
+TRAVEL
+</a>
+
+<a
+href="pet-friendly-places.html"
+data-i18n="common.navigation.places">
+PLACES
+</a>
+
+<a
+href="pets-in-need.html"
+data-i18n="common.navigation.rescue">
+RESCUE
+</a>
+
+<a
+href="contests.html"
+data-i18n="common.navigation.contests">
+CONTESTS
+</a>
+
+<a
+href="local-community.html"
+data-i18n="common.navigation.community">
+COMMUNITY
+</a>
+
+<a
+class="active"
+href="pet-marketplace.html"
+data-i18n="common.navigation.marketplace">
+MARKETPLACE
+</a>
+
+<a
+href="partners.html"
+data-i18n="common.navigation.partners">
+PARTNERS
+</a>
 
 </nav>
 
@@ -1241,15 +1365,20 @@ stroke-width="4">
 
 <div>
 
-<div class="eyebrow notranslate" translate="no">
+<div
+class="eyebrow notranslate"
+translate="no">
 PETS &amp; DOGUE
 </div>
 
-<h1 class="market-title">
-Marketplace
+<h1
+class="market-title"
+data-i18n="marketplace.page.heroTitle">
+Pet Marketplace
 </h1>
 
 </div>
+
 
 <button
 class="saved-link"
@@ -1297,6 +1426,7 @@ aria-label="Change location">
 
 <div class="search-wrap">
 
+
 <div class="search-bar">
 
 <div class="search-symbol">
@@ -1306,7 +1436,8 @@ aria-label="Change location">
 <input
 id="mainSearch"
 type="search"
-placeholder="Search pets, breeds or services..."
+placeholder="Search pets, breed, city or service..."
+data-i18n-attr="placeholder:marketplace.page.searchPlaceholder"
 autocomplete="off"
 oninput="applyFilters()">
 
@@ -1347,6 +1478,7 @@ Anywhere
 class="location-panel-distance"
 id="locationPanelDistance">
 </div>
+
 
 <div class="location-panel-actions">
 
@@ -1445,8 +1577,8 @@ onclick="openPublish()">
 ＋
 </span>
 
-<span>
-POST LISTING
+<span data-i18n="marketplace.page.publishTitle">
+Publish A Listing
 </span>
 
 <span>
@@ -1462,7 +1594,8 @@ POST LISTING
 <button
 class="quick active"
 data-filter="all"
-onclick="setQuickFilter(this,'all')">
+onclick="setQuickFilter(this,'all')"
+data-i18n="marketplace.page.all">
 All
 </button>
 
@@ -1483,8 +1616,9 @@ Free / Rehome
 <button
 class="quick"
 data-filter="service"
-onclick="setQuickFilter(this,'service')">
-Services
+onclick="setQuickFilter(this,'service')"
+data-i18n="marketplace.page.accessoriesServices">
+Accessories &amp; Services
 </button>
 
 </div>
@@ -1524,9 +1658,13 @@ alt="Dogs">
 
 <span class="browse-copy">
 
-<small>DOGUE</small>
+<small class="notranslate" translate="no">
+DOGUE
+</small>
 
-<h3>Dogs</h3>
+<h3 data-i18n="marketplace.page.dog">
+Dog
+</h3>
 
 </span>
 
@@ -1547,9 +1685,13 @@ alt="Cats">
 
 <span class="browse-copy">
 
-<small>FELINE</small>
+<small class="notranslate" translate="no">
+FELINE
+</small>
 
-<h3>Cats</h3>
+<h3 data-i18n="marketplace.page.cat">
+Cat
+</h3>
 
 </span>
 
@@ -1572,7 +1714,9 @@ alt="Puppies">
 
 <small>YOUNG PETS</small>
 
-<h3>Puppies</h3>
+<h3 data-i18n="marketplace.page.puppiesKittens">
+Puppies &amp; Kittens
+</h3>
 
 </span>
 
@@ -1595,7 +1739,9 @@ alt="Find a home">
 
 <small>RESPONSIBLE</small>
 
-<h3>Free / Rehome</h3>
+<h3 data-i18n="marketplace.page.findHome">
+Find A Home
+</h3>
 
 </span>
 
@@ -1618,7 +1764,9 @@ alt="Services">
 
 <small>SERVICES</small>
 
-<h3>Services</h3>
+<h3 data-i18n="marketplace.page.accessoriesServices">
+Accessories &amp; Services
+</h3>
 
 </span>
 
@@ -1636,8 +1784,10 @@ alt="Services">
 DISCOVER
 </div>
 
-<h2 class="section-title">
-Latest listings
+<h2
+class="section-title"
+data-i18n="marketplace.page.listingsTitle">
+Marketplace Listings
 </h2>
 
 </div>
@@ -1690,6 +1840,7 @@ FOR SALE
 
 </div>
 
+
 <div class="listing-copy">
 
 <h3 class="listing-name">
@@ -1707,8 +1858,9 @@ Pomeranian · 2 years
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('miso-01')">
-View &amp; contact
+onclick="openDetails('miso-01')"
+data-i18n="marketplace.page.contactOwner">
+Contact Owner
 </button>
 
 </div>
@@ -1751,6 +1903,7 @@ REHOME
 
 </div>
 
+
 <div class="listing-copy">
 
 <h3 class="listing-name">
@@ -1768,8 +1921,9 @@ British Shorthair · Female
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('cat-01')">
-View &amp; contact
+onclick="openDetails('cat-01')"
+data-i18n="marketplace.page.contactOwner">
+Contact Owner
 </button>
 
 </div>
@@ -1812,6 +1966,7 @@ FOR SALE
 
 </div>
 
+
 <div class="listing-copy">
 
 <h3 class="listing-name">
@@ -1829,8 +1984,9 @@ Cockapoo · 12 weeks
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('puppy-01')">
-View &amp; contact
+onclick="openDetails('puppy-01')"
+data-i18n="marketplace.page.contactOwner">
+Contact Owner
 </button>
 
 </div>
@@ -1873,6 +2029,7 @@ SERVICE
 
 </div>
 
+
 <div class="listing-copy">
 
 <h3 class="listing-name">
@@ -1890,8 +2047,9 @@ Grooming &amp; styling
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('groom-01')">
-View &amp; contact
+onclick="openDetails('groom-01')"
+data-i18n="marketplace.page.contactSeller">
+Contact Seller
 </button>
 
 </div>
@@ -1934,6 +2092,7 @@ REHOME
 
 </div>
 
+
 <div class="listing-copy">
 
 <h3 class="listing-name">
@@ -1951,8 +2110,9 @@ Rabbit · 1 year
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('rabbit-01')">
-View &amp; contact
+onclick="openDetails('rabbit-01')"
+data-i18n="marketplace.page.contactOwner">
+Contact Owner
 </button>
 
 </div>
@@ -1995,6 +2155,7 @@ SERVICE
 
 </div>
 
+
 <div class="listing-copy">
 
 <h3 class="listing-name">
@@ -2012,8 +2173,9 @@ Photography
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('photo-01')">
-View &amp; contact
+onclick="openDetails('photo-01')"
+data-i18n="marketplace.page.contactSeller">
+Contact Seller
 </button>
 
 </div>
@@ -2030,15 +2192,17 @@ View &amp; contact
 SELL · REHOME · SERVICES
 </small>
 
-<h2>
-Have something to share?
+<h2 data-i18n="marketplace.page.membersTitle">
+Members Can Publish
 </h2>
 
 <button
 class="publish-main-btn"
 type="button"
 onclick="openPublish()">
-＋ Post listing · £1
+
+＋ <span data-i18n="marketplace.page.publishTitle">Publish A Listing</span> · £1
+
 </button>
 
 </section>
@@ -2105,8 +2269,8 @@ id="detailDescription">
 
 <div class="contact-box">
 
-<small>
-CONTACT
+<small data-i18n="marketplace.page.contactLabel">
+Contact
 </small>
 
 <div
@@ -2138,59 +2302,108 @@ onclick="closeModal('publishModal')">
 ×
 </button>
 
-<div class="eyebrow">
+<div
+class="eyebrow notranslate"
+translate="no">
 PETS &amp; DOGUE MARKETPLACE
 </div>
 
-<h2>
-Post a listing
+<h2 data-i18n="marketplace.page.publishTitle">
+Publish A Listing
 </h2>
 
 <div class="fee-note">
 Publishing fee: £1 per listing
 </div>
 
+
 <div class="form-grid">
 
 <select id="newType">
-<option value="sale">For sale</option>
-<option value="free">Free / Rehome</option>
-<option value="service">Service</option>
+
+<option value="sale">
+For sale
+</option>
+
+<option value="free">
+Free / Rehome
+</option>
+
+<option value="service"
+data-i18n="marketplace.page.accessoriesServices">
+Accessories &amp; Services
+</option>
+
 </select>
 
+
 <select id="newAnimal">
-<option value="dogs">Dog</option>
-<option value="cats">Cat</option>
-<option value="puppies">Puppy / Kitten</option>
-<option value="other">Other animal</option>
-<option value="services">Service</option>
+
+<option
+value="dogs"
+data-i18n="marketplace.page.dog">
+Dog
+</option>
+
+<option
+value="cats"
+data-i18n="marketplace.page.cat">
+Cat
+</option>
+
+<option
+value="puppies"
+data-i18n="marketplace.page.puppiesKittens">
+Puppies &amp; Kittens
+</option>
+
+<option value="other">
+Other animal
+</option>
+
+<option
+value="services"
+data-i18n="marketplace.page.accessoriesServices">
+Accessories &amp; Services
+</option>
+
 </select>
+
 
 <input
 id="newTitle"
 type="text"
-placeholder="Pet / service name">
+placeholder="Pet name / service name"
+data-i18n-attr="placeholder:marketplace.page.petName">
+
 
 <input
 id="newBreed"
 type="text"
-placeholder="Breed / service type">
+placeholder="Breed / product type"
+data-i18n-attr="placeholder:marketplace.page.breedType">
+
 
 <input
 id="newLocation"
 type="text"
-placeholder="City / location">
+placeholder="Location"
+data-i18n-attr="placeholder:marketplace.page.location">
+
 
 <input
 id="newPrice"
 type="text"
 placeholder="Price, FREE or FROM £...">
 
+
 <input
 id="newContact"
 class="form-full"
 type="text"
-placeholder="Phone, WhatsApp or email">
+placeholder="Contact email or phone"
+data-i18n-attr="placeholder:marketplace.page.contact">
+
 
 <input
 id="newPhoto"
@@ -2200,17 +2413,26 @@ accept="image/*">
 
 </div>
 
+
 <textarea
 id="newDescription"
-placeholder="Description...">
-</textarea>
+placeholder="Write a short description, story, details or conditions..."
+data-i18n-attr="placeholder:marketplace.page.story"></textarea>
+
 
 <button
 class="form-submit"
 type="button"
 onclick="createLocalListing()">
-Continue · £1
+
+<span data-i18n="marketplace.page.publishListing">
+Publish Listing
+</span>
+
+· £1
+
 </button>
+
 
 <p class="tiny-note">
 The £1 checkout will be connected to the payment backend.
@@ -2223,7 +2445,7 @@ The £1 checkout will be connected to the payment backend.
 
 
 <script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/marketplace.js?v=3"></script>
+<script src="/i18n/marketplace.js?v=4"></script>
 
 <script>
 
@@ -3073,6 +3295,14 @@ document
 closeModal("publishModal");
 
 applyFilters();
+
+if(
+typeof window.PetsDogueMarketplaceApplyLanguage==="function"
+){
+
+window.PetsDogueMarketplaceApplyLanguage();
+
+}
 
 alert(
 "Listing preview created. £1 checkout connection is the next backend step."
