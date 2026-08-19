@@ -2318,10 +2318,37 @@ window.PetsDogueTranslations.marketplace = {
 
 
 /* =========================================================
-   PETS & DOGUE MARKETPLACE — CURRENT UI LANGUAGE BRIDGE
+   PETS & DOGUE MARKETPLACE — UNIFIED LANGUAGE BRIDGE
+   Uses the same 23-language marketplace dictionary as engine.js.
 ========================================================= */
 
 (function () {
+
+  const MARKET =
+    window.PetsDogueTranslations &&
+    window.PetsDogueTranslations.marketplace
+      ? window.PetsDogueTranslations.marketplace
+      : {};
+
+  const NORMALIZE = {
+    ua: "uk",
+    "uk-ua": "uk",
+    "uk-uk": "uk",
+    "en-gb": "en",
+    "en-us": "en",
+    cz: "cs",
+    "cs-cz": "cs",
+    gr: "el",
+    "el-gr": "el",
+    "pt-pt": "pt",
+    "pt-br": "pt",
+    "nb-no": "no"
+  };
+
+
+  /* =========================================================
+     CURRENT MARKETPLACE UI — ALL 23 LANGUAGES
+  ========================================================= */
 
   const UI = {
 
@@ -2335,6 +2362,7 @@ window.PetsDogueTranslations.marketplace = {
       nearMe: "Near me",
       distanceFromMe: "Distance from me",
       postListing: "POST LISTING",
+      listingShort: "LISTING",
       forSale: "For sale",
       freeRehome: "Free / Rehome",
       services: "Services",
@@ -2346,6 +2374,7 @@ window.PetsDogueTranslations.marketplace = {
       discover: "DISCOVER",
       latestListings: "Latest listings",
       listingWord: "listings",
+      oneListing: "listing",
       viewContact: "View & contact",
       sellRehomeServices: "SELL · REHOME · SERVICES",
       share: "Have something to share?",
@@ -2362,6 +2391,7 @@ window.PetsDogueTranslations.marketplace = {
       free: "FREE",
       rehome: "REHOME",
       from: "FROM",
+      sale: "SALE",
       searching: "Searching…",
       noPlaces: "No places found",
       unavailable: "Location search unavailable",
@@ -2369,7 +2399,13 @@ window.PetsDogueTranslations.marketplace = {
       geoUnavailable: "Geolocation is not available on this device.",
       allowLocation: "Please allow location access to use Near me.",
       required: "Please add name, location, contact and a photo.",
-      previewCreated: "Listing preview created. £1 checkout connection is the next backend step."
+      previewCreated: "Listing preview created. £1 checkout connection is the next backend step.",
+      male: "Male",
+      female: "Female",
+      year: "year",
+      years: "years",
+      groomingStyling: "Grooming & styling",
+      serviceDescription: "Premium grooming and styling service for pets."
     },
 
     uk: {
@@ -2378,12 +2414,13 @@ window.PetsDogueTranslations.marketplace = {
       anywhere: "Будь-де",
       done: "Готово",
       changeLocation: "Змінити місце",
-      locationPlaceholder: "Знайти будь-яке місто, регіон або країну...",
+      locationPlaceholder: "Знайти місто, регіон або країну...",
       nearMe: "Поруч зі мною",
       distanceFromMe: "Відстань від мене",
       postListing: "ДОДАТИ ОГОЛОШЕННЯ",
+      listingShort: "ОГОЛОШЕННЯ",
       forSale: "Продаж",
-      freeRehome: "Безкоштовно / Новий дім",
+      freeRehome: "Безкоштовно / Шукає дім",
       services: "Послуги",
       browse: "Категорії",
       viewAll: "Переглянути все",
@@ -2393,7 +2430,8 @@ window.PetsDogueTranslations.marketplace = {
       discover: "ДИВИТИСЯ",
       latestListings: "Нові оголошення",
       listingWord: "оголошень",
-      viewContact: "Дивитися та зв’язатися",
+      oneListing: "оголошення",
+      viewContact: "Переглянути та зв’язатися",
       sellRehomeServices: "ПРОДАЖ · ПРИЛАШТУВАННЯ · ПОСЛУГИ",
       share: "Хочете щось запропонувати?",
       publishingFee: "Вартість публікації: £1 за оголошення",
@@ -2409,6 +2447,7 @@ window.PetsDogueTranslations.marketplace = {
       free: "БЕЗКОШТОВНО",
       rehome: "ШУКАЄ ДІМ",
       from: "ВІД",
+      sale: "ПРОДАЖ",
       searching: "Пошук…",
       noPlaces: "Місць не знайдено",
       unavailable: "Пошук місця недоступний",
@@ -2416,7 +2455,13 @@ window.PetsDogueTranslations.marketplace = {
       geoUnavailable: "Геолокація недоступна на цьому пристрої.",
       allowLocation: "Дозвольте доступ до геолокації.",
       required: "Додайте назву, місце, контакт і фотографію.",
-      previewCreated: "Попередній перегляд створено. Наступний крок — підключення оплати £1."
+      previewCreated: "Попередній перегляд створено. Наступний крок — підключення оплати £1.",
+      male: "Самець",
+      female: "Самка",
+      year: "рік",
+      years: "роки",
+      groomingStyling: "Грумінг і стайлінг",
+      serviceDescription: "Преміальний грумінг і стайлінг для домашніх тварин."
     },
 
     ru: {
@@ -2425,10 +2470,11 @@ window.PetsDogueTranslations.marketplace = {
       anywhere: "Везде",
       done: "Готово",
       changeLocation: "Изменить локацию",
-      locationPlaceholder: "Найти любой город, регион или страну...",
+      locationPlaceholder: "Найти город, регион или страну...",
       nearMe: "Рядом со мной",
       distanceFromMe: "Расстояние от меня",
       postListing: "ДОБАВИТЬ ОБЪЯВЛЕНИЕ",
+      listingShort: "ОБЪЯВЛЕНИЕ",
       forSale: "Продажа",
       freeRehome: "Бесплатно / Ищет дом",
       services: "Услуги",
@@ -2440,6 +2486,7 @@ window.PetsDogueTranslations.marketplace = {
       discover: "СМОТРЕТЬ",
       latestListings: "Новые объявления",
       listingWord: "объявлений",
+      oneListing: "объявление",
       viewContact: "Смотреть и связаться",
       sellRehomeServices: "ПРОДАЖА · ПРИСТРОЙСТВО · УСЛУГИ",
       share: "Хотите что-то предложить?",
@@ -2456,6 +2503,7 @@ window.PetsDogueTranslations.marketplace = {
       free: "БЕСПЛАТНО",
       rehome: "ИЩЕТ ДОМ",
       from: "ОТ",
+      sale: "ПРОДАЖА",
       searching: "Поиск…",
       noPlaces: "Места не найдены",
       unavailable: "Поиск локации недоступен",
@@ -2463,34 +2511,1154 @@ window.PetsDogueTranslations.marketplace = {
       geoUnavailable: "Геолокация недоступна на этом устройстве.",
       allowLocation: "Разрешите доступ к геолокации.",
       required: "Добавьте название, локацию, контакт и фотографию.",
-      previewCreated: "Предпросмотр объявления создан. Следующий шаг — подключение оплаты £1."
+      previewCreated: "Предпросмотр объявления создан. Следующий шаг — подключение оплаты £1.",
+      male: "Самец",
+      female: "Самка",
+      year: "год",
+      years: "года",
+      groomingStyling: "Груминг и стайлинг",
+      serviceDescription: "Премиальный груминг и стайлинг для домашних животных."
+    },
+
+    fr: {
+      marketplace: "Marché",
+      saved: "Favoris",
+      anywhere: "Partout",
+      done: "Terminé",
+      changeLocation: "Changer de lieu",
+      locationPlaceholder: "Rechercher une ville, région ou pays...",
+      nearMe: "Près de moi",
+      distanceFromMe: "Distance de moi",
+      postListing: "PUBLIER UNE ANNONCE",
+      listingShort: "ANNONCE",
+      forSale: "À vendre",
+      freeRehome: "Gratuit / Adoption",
+      services: "Services",
+      browse: "Explorer",
+      viewAll: "Tout voir",
+      dogs: "Chiens",
+      cats: "Chats",
+      puppies: "Chiots",
+      discover: "DÉCOUVRIR",
+      latestListings: "Dernières annonces",
+      listingWord: "annonces",
+      oneListing: "annonce",
+      viewContact: "Voir et contacter",
+      sellRehomeServices: "VENTE · ADOPTION · SERVICES",
+      share: "Quelque chose à proposer ?",
+      publishingFee: "Publication : £1 par annonce",
+      service: "Service",
+      puppyKitten: "Chiot / chaton",
+      otherAnimal: "Autre animal",
+      cityLocation: "Ville / lieu",
+      pricePlaceholder: "Prix, GRATUIT ou À PARTIR DE £...",
+      phonePlaceholder: "Téléphone, WhatsApp ou e-mail",
+      description: "Description...",
+      continue: "Continuer · £1",
+      checkout: "Le paiement de £1 sera connecté au système de paiement.",
+      free: "GRATUIT",
+      rehome: "ADOPTION",
+      from: "À PARTIR DE",
+      sale: "VENTE",
+      searching: "Recherche…",
+      noPlaces: "Aucun lieu trouvé",
+      unavailable: "Recherche de lieu indisponible",
+      findingLocation: "Recherche de votre position…",
+      geoUnavailable: "La géolocalisation n’est pas disponible.",
+      allowLocation: "Autorisez l’accès à votre position.",
+      required: "Ajoutez un nom, un lieu, un contact et une photo.",
+      previewCreated: "Aperçu créé. La prochaine étape est le paiement de £1.",
+      male: "Mâle",
+      female: "Femelle",
+      year: "an",
+      years: "ans",
+      groomingStyling: "Toilettage et stylisme",
+      serviceDescription: "Service premium de toilettage et de stylisme pour animaux."
+    },
+
+    de: {
+      marketplace: "Marktplatz",
+      saved: "Gespeichert",
+      anywhere: "Überall",
+      done: "Fertig",
+      changeLocation: "Ort ändern",
+      locationPlaceholder: "Stadt, Region oder Land suchen...",
+      nearMe: "In meiner Nähe",
+      distanceFromMe: "Entfernung von mir",
+      postListing: "ANZEIGE AUFGEBEN",
+      listingShort: "ANZEIGE",
+      forSale: "Zu verkaufen",
+      freeRehome: "Kostenlos / Neues Zuhause",
+      services: "Dienstleistungen",
+      browse: "Entdecken",
+      viewAll: "Alle anzeigen",
+      dogs: "Hunde",
+      cats: "Katzen",
+      puppies: "Welpen",
+      discover: "ENTDECKEN",
+      latestListings: "Neueste Anzeigen",
+      listingWord: "Anzeigen",
+      oneListing: "Anzeige",
+      viewContact: "Ansehen & kontaktieren",
+      sellRehomeServices: "VERKAUF · VERMITTLUNG · SERVICES",
+      share: "Etwas anzubieten?",
+      publishingFee: "Veröffentlichung: £1 pro Anzeige",
+      service: "Dienstleistung",
+      puppyKitten: "Welpe / Kätzchen",
+      otherAnimal: "Anderes Tier",
+      cityLocation: "Stadt / Ort",
+      pricePlaceholder: "Preis, KOSTENLOS oder AB £...",
+      phonePlaceholder: "Telefon, WhatsApp oder E-Mail",
+      description: "Beschreibung...",
+      continue: "Weiter · £1",
+      checkout: "Die £1-Zahlung wird mit dem Zahlungssystem verbunden.",
+      free: "KOSTENLOS",
+      rehome: "NEUES ZUHAUSE",
+      from: "AB",
+      sale: "VERKAUF",
+      searching: "Suche…",
+      noPlaces: "Keine Orte gefunden",
+      unavailable: "Ortssuche nicht verfügbar",
+      findingLocation: "Standort wird ermittelt…",
+      geoUnavailable: "Geolokalisierung ist nicht verfügbar.",
+      allowLocation: "Bitte Standortzugriff erlauben.",
+      required: "Bitte Name, Ort, Kontakt und Foto hinzufügen.",
+      previewCreated: "Vorschau erstellt. Als Nächstes folgt die £1-Zahlung.",
+      male: "Männlich",
+      female: "Weiblich",
+      year: "Jahr",
+      years: "Jahre",
+      groomingStyling: "Fellpflege & Styling",
+      serviceDescription: "Premium-Fellpflege und Styling für Haustiere."
+    },
+
+    es: {
+      marketplace: "Mercado",
+      saved: "Guardados",
+      anywhere: "Cualquier lugar",
+      done: "Listo",
+      changeLocation: "Cambiar ubicación",
+      locationPlaceholder: "Buscar ciudad, región o país...",
+      nearMe: "Cerca de mí",
+      distanceFromMe: "Distancia desde mí",
+      postListing: "PUBLICAR ANUNCIO",
+      listingShort: "ANUNCIO",
+      forSale: "En venta",
+      freeRehome: "Gratis / Adopción",
+      services: "Servicios",
+      browse: "Explorar",
+      viewAll: "Ver todo",
+      dogs: "Perros",
+      cats: "Gatos",
+      puppies: "Cachorros",
+      discover: "DESCUBRIR",
+      latestListings: "Últimos anuncios",
+      listingWord: "anuncios",
+      oneListing: "anuncio",
+      viewContact: "Ver y contactar",
+      sellRehomeServices: "VENTA · ADOPCIÓN · SERVICIOS",
+      share: "¿Tienes algo que ofrecer?",
+      publishingFee: "Publicación: £1 por anuncio",
+      service: "Servicio",
+      puppyKitten: "Cachorro / gatito",
+      otherAnimal: "Otro animal",
+      cityLocation: "Ciudad / ubicación",
+      pricePlaceholder: "Precio, GRATIS o DESDE £...",
+      phonePlaceholder: "Teléfono, WhatsApp o email",
+      description: "Descripción...",
+      continue: "Continuar · £1",
+      checkout: "El pago de £1 se conectará al sistema de pagos.",
+      free: "GRATIS",
+      rehome: "ADOPCIÓN",
+      from: "DESDE",
+      sale: "VENTA",
+      searching: "Buscando…",
+      noPlaces: "No se encontraron lugares",
+      unavailable: "Búsqueda de ubicación no disponible",
+      findingLocation: "Buscando tu ubicación…",
+      geoUnavailable: "La geolocalización no está disponible.",
+      allowLocation: "Permite el acceso a tu ubicación.",
+      required: "Añade nombre, ubicación, contacto y una foto.",
+      previewCreated: "Vista previa creada. El siguiente paso es conectar el pago de £1.",
+      male: "Macho",
+      female: "Hembra",
+      year: "año",
+      years: "años",
+      groomingStyling: "Peluquería y estilismo",
+      serviceDescription: "Servicio premium de peluquería y estilismo para mascotas."
+    },
+
+    it: {
+      marketplace: "Mercato",
+      saved: "Salvati",
+      anywhere: "Ovunque",
+      done: "Fatto",
+      changeLocation: "Cambia località",
+      locationPlaceholder: "Cerca città, regione o paese...",
+      nearMe: "Vicino a me",
+      distanceFromMe: "Distanza da me",
+      postListing: "PUBBLICA ANNUNCIO",
+      listingShort: "ANNUNCIO",
+      forSale: "In vendita",
+      freeRehome: "Gratis / Adozione",
+      services: "Servizi",
+      browse: "Esplora",
+      viewAll: "Vedi tutto",
+      dogs: "Cani",
+      cats: "Gatti",
+      puppies: "Cuccioli",
+      discover: "SCOPRI",
+      latestListings: "Ultimi annunci",
+      listingWord: "annunci",
+      oneListing: "annuncio",
+      viewContact: "Vedi e contatta",
+      sellRehomeServices: "VENDITA · ADOZIONE · SERVIZI",
+      share: "Hai qualcosa da proporre?",
+      publishingFee: "Pubblicazione: £1 per annuncio",
+      service: "Servizio",
+      puppyKitten: "Cucciolo / gattino",
+      otherAnimal: "Altro animale",
+      cityLocation: "Città / località",
+      pricePlaceholder: "Prezzo, GRATIS o DA £...",
+      phonePlaceholder: "Telefono, WhatsApp o email",
+      description: "Descrizione...",
+      continue: "Continua · £1",
+      checkout: "Il pagamento di £1 sarà collegato al sistema di pagamento.",
+      free: "GRATIS",
+      rehome: "ADOZIONE",
+      from: "DA",
+      sale: "VENDITA",
+      searching: "Ricerca…",
+      noPlaces: "Nessun luogo trovato",
+      unavailable: "Ricerca località non disponibile",
+      findingLocation: "Ricerca della tua posizione…",
+      geoUnavailable: "La geolocalizzazione non è disponibile.",
+      allowLocation: "Consenti l’accesso alla posizione.",
+      required: "Aggiungi nome, località, contatto e una foto.",
+      previewCreated: "Anteprima creata. Il prossimo passo è collegare il pagamento di £1.",
+      male: "Maschio",
+      female: "Femmina",
+      year: "anno",
+      years: "anni",
+      groomingStyling: "Toelettatura e styling",
+      serviceDescription: "Servizio premium di toelettatura e styling per animali."
+    },
+
+    pt: {
+      marketplace: "Mercado",
+      saved: "Guardados",
+      anywhere: "Qualquer lugar",
+      done: "Concluído",
+      changeLocation: "Alterar localização",
+      locationPlaceholder: "Pesquisar cidade, região ou país...",
+      nearMe: "Perto de mim",
+      distanceFromMe: "Distância de mim",
+      postListing: "PUBLICAR ANÚNCIO",
+      listingShort: "ANÚNCIO",
+      forSale: "À venda",
+      freeRehome: "Grátis / Adoção",
+      services: "Serviços",
+      browse: "Explorar",
+      viewAll: "Ver tudo",
+      dogs: "Cães",
+      cats: "Gatos",
+      puppies: "Cachorros",
+      discover: "DESCOBRIR",
+      latestListings: "Últimos anúncios",
+      listingWord: "anúncios",
+      oneListing: "anúncio",
+      viewContact: "Ver e contactar",
+      sellRehomeServices: "VENDA · ADOÇÃO · SERVIÇOS",
+      share: "Tem algo para oferecer?",
+      publishingFee: "Publicação: £1 por anúncio",
+      service: "Serviço",
+      puppyKitten: "Cachorro / gatinho",
+      otherAnimal: "Outro animal",
+      cityLocation: "Cidade / localização",
+      pricePlaceholder: "Preço, GRÁTIS ou DESDE £...",
+      phonePlaceholder: "Telefone, WhatsApp ou email",
+      description: "Descrição...",
+      continue: "Continuar · £1",
+      checkout: "O pagamento de £1 será ligado ao sistema de pagamentos.",
+      free: "GRÁTIS",
+      rehome: "ADOÇÃO",
+      from: "DESDE",
+      sale: "VENDA",
+      searching: "A pesquisar…",
+      noPlaces: "Nenhum local encontrado",
+      unavailable: "Pesquisa de localização indisponível",
+      findingLocation: "A localizar…",
+      geoUnavailable: "A geolocalização não está disponível.",
+      allowLocation: "Permita o acesso à localização.",
+      required: "Adicione nome, localização, contacto e fotografia.",
+      previewCreated: "Pré-visualização criada. O próximo passo é ligar o pagamento de £1.",
+      male: "Macho",
+      female: "Fêmea",
+      year: "ano",
+      years: "anos",
+      groomingStyling: "Cuidados e estilo",
+      serviceDescription: "Serviço premium de cuidados e estilo para animais."
+    },
+
+    nl: {
+      marketplace: "Marktplaats",
+      saved: "Opgeslagen",
+      anywhere: "Overal",
+      done: "Klaar",
+      changeLocation: "Locatie wijzigen",
+      locationPlaceholder: "Zoek stad, regio of land...",
+      nearMe: "Bij mij in de buurt",
+      distanceFromMe: "Afstand vanaf mij",
+      postListing: "ADVERTENTIE PLAATSEN",
+      listingShort: "ADVERTENTIE",
+      forSale: "Te koop",
+      freeRehome: "Gratis / Herplaatsing",
+      services: "Diensten",
+      browse: "Ontdekken",
+      viewAll: "Alles bekijken",
+      dogs: "Honden",
+      cats: "Katten",
+      puppies: "Puppy's",
+      discover: "ONTDEKKEN",
+      latestListings: "Nieuwste advertenties",
+      listingWord: "advertenties",
+      oneListing: "advertentie",
+      viewContact: "Bekijken & contact",
+      sellRehomeServices: "VERKOOP · HERPLAATSING · DIENSTEN",
+      share: "Iets aan te bieden?",
+      publishingFee: "Publicatie: £1 per advertentie",
+      service: "Dienst",
+      puppyKitten: "Puppy / kitten",
+      otherAnimal: "Ander dier",
+      cityLocation: "Stad / locatie",
+      pricePlaceholder: "Prijs, GRATIS of VANAF £...",
+      phonePlaceholder: "Telefoon, WhatsApp of e-mail",
+      description: "Beschrijving...",
+      continue: "Doorgaan · £1",
+      checkout: "De betaling van £1 wordt gekoppeld aan het betaalsysteem.",
+      free: "GRATIS",
+      rehome: "HERPLAATSING",
+      from: "VANAF",
+      sale: "TE KOOP",
+      searching: "Zoeken…",
+      noPlaces: "Geen locaties gevonden",
+      unavailable: "Locatie zoeken niet beschikbaar",
+      findingLocation: "Uw locatie wordt bepaald…",
+      geoUnavailable: "Geolocatie is niet beschikbaar.",
+      allowLocation: "Sta toegang tot uw locatie toe.",
+      required: "Voeg naam, locatie, contact en foto toe.",
+      previewCreated: "Voorbeeld gemaakt. De volgende stap is de £1-betaling.",
+      male: "Mannelijk",
+      female: "Vrouwelijk",
+      year: "jaar",
+      years: "jaar",
+      groomingStyling: "Verzorging & styling",
+      serviceDescription: "Premium verzorging en styling voor huisdieren."
+    },
+
+    pl: {
+      marketplace: "Targ",
+      saved: "Zapisane",
+      anywhere: "Wszędzie",
+      done: "Gotowe",
+      changeLocation: "Zmień lokalizację",
+      locationPlaceholder: "Szukaj miasta, regionu lub kraju...",
+      nearMe: "W pobliżu",
+      distanceFromMe: "Odległość ode mnie",
+      postListing: "DODAJ OGŁOSZENIE",
+      listingShort: "OGŁOSZENIE",
+      forSale: "Na sprzedaż",
+      freeRehome: "Za darmo / Nowy dom",
+      services: "Usługi",
+      browse: "Przeglądaj",
+      viewAll: "Zobacz wszystko",
+      dogs: "Psy",
+      cats: "Koty",
+      puppies: "Szczenięta",
+      discover: "ODKRYWAJ",
+      latestListings: "Najnowsze ogłoszenia",
+      listingWord: "ogłoszeń",
+      oneListing: "ogłoszenie",
+      viewContact: "Zobacz i skontaktuj się",
+      sellRehomeServices: "SPRZEDAŻ · NOWY DOM · USŁUGI",
+      share: "Masz coś do zaoferowania?",
+      publishingFee: "Publikacja: £1 za ogłoszenie",
+      service: "Usługa",
+      puppyKitten: "Szczeniak / kocię",
+      otherAnimal: "Inne zwierzę",
+      cityLocation: "Miasto / lokalizacja",
+      pricePlaceholder: "Cena, ZA DARMO lub OD £...",
+      phonePlaceholder: "Telefon, WhatsApp lub email",
+      description: "Opis...",
+      continue: "Kontynuuj · £1",
+      checkout: "Płatność £1 zostanie połączona z systemem płatności.",
+      free: "ZA DARMO",
+      rehome: "SZUKA DOMU",
+      from: "OD",
+      sale: "SPRZEDAŻ",
+      searching: "Wyszukiwanie…",
+      noPlaces: "Nie znaleziono miejsc",
+      unavailable: "Wyszukiwanie lokalizacji niedostępne",
+      findingLocation: "Ustalamy Twoją lokalizację…",
+      geoUnavailable: "Geolokalizacja jest niedostępna.",
+      allowLocation: "Zezwól na dostęp do lokalizacji.",
+      required: "Dodaj nazwę, lokalizację, kontakt i zdjęcie.",
+      previewCreated: "Podgląd utworzony. Następny krok to płatność £1.",
+      male: "Samiec",
+      female: "Samica",
+      year: "rok",
+      years: "lata",
+      groomingStyling: "Pielęgnacja i stylizacja",
+      serviceDescription: "Premium pielęgnacja i stylizacja dla zwierząt."
+    },
+
+    cs: {
+      marketplace: "Tržiště",
+      saved: "Uložené",
+      anywhere: "Kdekoli",
+      done: "Hotovo",
+      changeLocation: "Změnit místo",
+      locationPlaceholder: "Hledat město, region nebo zemi...",
+      nearMe: "V mém okolí",
+      distanceFromMe: "Vzdálenost ode mě",
+      postListing: "PŘIDAT INZERÁT",
+      listingShort: "INZERÁT",
+      forSale: "Na prodej",
+      freeRehome: "Zdarma / Nový domov",
+      services: "Služby",
+      browse: "Procházet",
+      viewAll: "Zobrazit vše",
+      dogs: "Psi",
+      cats: "Kočky",
+      puppies: "Štěňata",
+      discover: "OBJEVOVAT",
+      latestListings: "Nejnovější inzeráty",
+      listingWord: "inzerátů",
+      oneListing: "inzerát",
+      viewContact: "Zobrazit a kontaktovat",
+      sellRehomeServices: "PRODEJ · NOVÝ DOMOV · SLUŽBY",
+      share: "Máte něco k nabídnutí?",
+      publishingFee: "Publikace: £1 za inzerát",
+      service: "Služba",
+      puppyKitten: "Štěně / kotě",
+      otherAnimal: "Jiné zvíře",
+      cityLocation: "Město / místo",
+      pricePlaceholder: "Cena, ZDARMA nebo OD £...",
+      phonePlaceholder: "Telefon, WhatsApp nebo email",
+      description: "Popis...",
+      continue: "Pokračovat · £1",
+      checkout: "Platba £1 bude připojena k platebnímu systému.",
+      free: "ZDARMA",
+      rehome: "HLEDÁ DOMOV",
+      from: "OD",
+      sale: "PRODEJ",
+      searching: "Hledání…",
+      noPlaces: "Žádná místa nenalezena",
+      unavailable: "Vyhledávání místa není dostupné",
+      findingLocation: "Zjišťujeme vaši polohu…",
+      geoUnavailable: "Geolokace není na tomto zařízení dostupná.",
+      allowLocation: "Povolte přístup k poloze.",
+      required: "Přidejte název, místo, kontakt a fotografii.",
+      previewCreated: "Náhled byl vytvořen. Dalším krokem je platba £1.",
+      male: "Samec",
+      female: "Samice",
+      year: "rok",
+      years: "roky",
+      groomingStyling: "Péče o srst a styling",
+      serviceDescription: "Prémiová péče o srst a styling pro domácí mazlíčky."
+    },
+
+    sk: {
+      marketplace: "Trhovisko",
+      saved: "Uložené",
+      anywhere: "Kdekoľvek",
+      done: "Hotovo",
+      changeLocation: "Zmeniť miesto",
+      locationPlaceholder: "Hľadať mesto, región alebo krajinu...",
+      nearMe: "V mojom okolí",
+      distanceFromMe: "Vzdialenosť odo mňa",
+      postListing: "PRIDAŤ INZERÁT",
+      listingShort: "INZERÁT",
+      forSale: "Na predaj",
+      freeRehome: "Zadarmo / Nový domov",
+      services: "Služby",
+      browse: "Prehliadať",
+      viewAll: "Zobraziť všetko",
+      dogs: "Psy",
+      cats: "Mačky",
+      puppies: "Šteniatka",
+      discover: "OBJAVOVAŤ",
+      latestListings: "Najnovšie inzeráty",
+      listingWord: "inzerátov",
+      oneListing: "inzerát",
+      viewContact: "Zobraziť a kontaktovať",
+      sellRehomeServices: "PREDAJ · NOVÝ DOMOV · SLUŽBY",
+      share: "Máte čo ponúknuť?",
+      publishingFee: "Publikácia: £1 za inzerát",
+      service: "Služba",
+      puppyKitten: "Šteniatko / mačiatko",
+      otherAnimal: "Iné zviera",
+      cityLocation: "Mesto / miesto",
+      pricePlaceholder: "Cena, ZADARMO alebo OD £...",
+      phonePlaceholder: "Telefón, WhatsApp alebo email",
+      description: "Opis...",
+      continue: "Pokračovať · £1",
+      checkout: "Platba £1 bude pripojená k platobnému systému.",
+      free: "ZADARMO",
+      rehome: "HĽADÁ DOMOV",
+      from: "OD",
+      sale: "PREDAJ",
+      searching: "Hľadanie…",
+      noPlaces: "Nenašli sa žiadne miesta",
+      unavailable: "Vyhľadávanie miesta nie je dostupné",
+      findingLocation: "Zisťujeme vašu polohu…",
+      geoUnavailable: "Geolokácia nie je dostupná.",
+      allowLocation: "Povoľte prístup k polohe.",
+      required: "Pridajte názov, miesto, kontakt a fotografiu.",
+      previewCreated: "Náhľad bol vytvorený. Ďalším krokom je platba £1.",
+      male: "Samec",
+      female: "Samica",
+      year: "rok",
+      years: "roky",
+      groomingStyling: "Starostlivosť o srsť a styling",
+      serviceDescription: "Prémiová starostlivosť o srsť a styling pre domáce zvieratá."
+    },
+
+    hu: {
+      marketplace: "Piactér",
+      saved: "Mentett",
+      anywhere: "Bárhol",
+      done: "Kész",
+      changeLocation: "Hely módosítása",
+      locationPlaceholder: "Város, régió vagy ország keresése...",
+      nearMe: "A közelemben",
+      distanceFromMe: "Távolság tőlem",
+      postListing: "HIRDETÉS FELADÁSA",
+      listingShort: "HIRDETÉS",
+      forSale: "Eladó",
+      freeRehome: "Ingyenes / Új otthon",
+      services: "Szolgáltatások",
+      browse: "Böngészés",
+      viewAll: "Összes megtekintése",
+      dogs: "Kutyák",
+      cats: "Macskák",
+      puppies: "Kölykök",
+      discover: "FELFEDEZÉS",
+      latestListings: "Legújabb hirdetések",
+      listingWord: "hirdetés",
+      oneListing: "hirdetés",
+      viewContact: "Megtekintés és kapcsolat",
+      sellRehomeServices: "ELADÁS · ÚJ OTTHON · SZOLGÁLTATÁSOK",
+      share: "Van mit megosztania?",
+      publishingFee: "Közzététel: £1 hirdetésenként",
+      service: "Szolgáltatás",
+      puppyKitten: "Kölyök / kiscica",
+      otherAnimal: "Más állat",
+      cityLocation: "Város / hely",
+      pricePlaceholder: "Ár, INGYENES vagy £...-TÓL",
+      phonePlaceholder: "Telefon, WhatsApp vagy email",
+      description: "Leírás...",
+      continue: "Folytatás · £1",
+      checkout: "Az £1 fizetés a fizetési rendszerhez lesz kapcsolva.",
+      free: "INGYENES",
+      rehome: "ÚJ OTTHONT KERES",
+      from: "ETTŐL",
+      sale: "ELADÓ",
+      searching: "Keresés…",
+      noPlaces: "Nincs találat",
+      unavailable: "A helykeresés nem érhető el",
+      findingLocation: "Helyzet meghatározása…",
+      geoUnavailable: "A helymeghatározás nem érhető el.",
+      allowLocation: "Engedélyezze a helyhozzáférést.",
+      required: "Adjon meg nevet, helyet, elérhetőséget és fotót.",
+      previewCreated: "Az előnézet elkészült. A következő lépés az £1 fizetés.",
+      male: "Hím",
+      female: "Nőstény",
+      year: "év",
+      years: "év",
+      groomingStyling: "Ápolás és styling",
+      serviceDescription: "Prémium ápolási és styling szolgáltatás háziállatoknak."
+    },
+
+    ro: {
+      marketplace: "Piață",
+      saved: "Salvate",
+      anywhere: "Oriunde",
+      done: "Gata",
+      changeLocation: "Schimbă locația",
+      locationPlaceholder: "Caută oraș, regiune sau țară...",
+      nearMe: "Lângă mine",
+      distanceFromMe: "Distanță față de mine",
+      postListing: "PUBLICĂ ANUNȚ",
+      listingShort: "ANUNȚ",
+      forSale: "De vânzare",
+      freeRehome: "Gratuit / Adopție",
+      services: "Servicii",
+      browse: "Explorează",
+      viewAll: "Vezi tot",
+      dogs: "Câini",
+      cats: "Pisici",
+      puppies: "Căței",
+      discover: "DESCOPERĂ",
+      latestListings: "Cele mai noi anunțuri",
+      listingWord: "anunțuri",
+      oneListing: "anunț",
+      viewContact: "Vezi și contactează",
+      sellRehomeServices: "VÂNZARE · ADOPȚIE · SERVICII",
+      share: "Ai ceva de oferit?",
+      publishingFee: "Publicare: £1 per anunț",
+      service: "Serviciu",
+      puppyKitten: "Cățel / pisoi",
+      otherAnimal: "Alt animal",
+      cityLocation: "Oraș / locație",
+      pricePlaceholder: "Preț, GRATUIT sau DE LA £...",
+      phonePlaceholder: "Telefon, WhatsApp sau email",
+      description: "Descriere...",
+      continue: "Continuă · £1",
+      checkout: "Plata de £1 va fi conectată la sistemul de plăți.",
+      free: "GRATUIT",
+      rehome: "ADOPȚIE",
+      from: "DE LA",
+      sale: "VÂNZARE",
+      searching: "Se caută…",
+      noPlaces: "Nu au fost găsite locații",
+      unavailable: "Căutarea locației nu este disponibilă",
+      findingLocation: "Se determină locația…",
+      geoUnavailable: "Geolocalizarea nu este disponibilă.",
+      allowLocation: "Permite accesul la locație.",
+      required: "Adaugă nume, locație, contact și fotografie.",
+      previewCreated: "Previzualizarea a fost creată. Următorul pas este plata de £1.",
+      male: "Mascul",
+      female: "Femelă",
+      year: "an",
+      years: "ani",
+      groomingStyling: "Îngrijire și stilizare",
+      serviceDescription: "Serviciu premium de îngrijire și stilizare pentru animale."
+    },
+
+    bg: {
+      marketplace: "Пазар",
+      saved: "Запазени",
+      anywhere: "Навсякъде",
+      done: "Готово",
+      changeLocation: "Промяна на мястото",
+      locationPlaceholder: "Търсене на град, регион или държава...",
+      nearMe: "Близо до мен",
+      distanceFromMe: "Разстояние от мен",
+      postListing: "ДОБАВИ ОБЯВА",
+      listingShort: "ОБЯВА",
+      forSale: "Продажба",
+      freeRehome: "Безплатно / Нов дом",
+      services: "Услуги",
+      browse: "Разгледай",
+      viewAll: "Виж всички",
+      dogs: "Кучета",
+      cats: "Котки",
+      puppies: "Кученца",
+      discover: "ОТКРИЙ",
+      latestListings: "Нови обяви",
+      listingWord: "обяви",
+      oneListing: "обява",
+      viewContact: "Виж и се свържи",
+      sellRehomeServices: "ПРОДАЖБА · НОВ ДОМ · УСЛУГИ",
+      share: "Имате нещо за споделяне?",
+      publishingFee: "Публикуване: £1 за обява",
+      service: "Услуга",
+      puppyKitten: "Кученце / котенце",
+      otherAnimal: "Друго животно",
+      cityLocation: "Град / място",
+      pricePlaceholder: "Цена, БЕЗПЛАТНО или ОТ £...",
+      phonePlaceholder: "Телефон, WhatsApp или email",
+      description: "Описание...",
+      continue: "Продължи · £1",
+      checkout: "Плащането от £1 ще бъде свързано с платежната система.",
+      free: "БЕЗПЛАТНО",
+      rehome: "ТЪРСИ ДОМ",
+      from: "ОТ",
+      sale: "ПРОДАЖБА",
+      searching: "Търсене…",
+      noPlaces: "Няма намерени места",
+      unavailable: "Търсенето на място не е достъпно",
+      findingLocation: "Определяме местоположението…",
+      geoUnavailable: "Геолокацията не е достъпна.",
+      allowLocation: "Разрешете достъп до местоположението.",
+      required: "Добавете име, място, контакт и снимка.",
+      previewCreated: "Прегледът е създаден. Следващата стъпка е плащането от £1.",
+      male: "Мъжки",
+      female: "Женски",
+      year: "година",
+      years: "години",
+      groomingStyling: "Груминг и стилизиране",
+      serviceDescription: "Премиум груминг и стилизиране за домашни любимци."
+    },
+
+    el: {
+      marketplace: "Αγορά",
+      saved: "Αποθηκευμένα",
+      anywhere: "Οπουδήποτε",
+      done: "Έτοιμο",
+      changeLocation: "Αλλαγή τοποθεσίας",
+      locationPlaceholder: "Αναζήτηση πόλης, περιοχής ή χώρας...",
+      nearMe: "Κοντά μου",
+      distanceFromMe: "Απόσταση από εμένα",
+      postListing: "ΔΗΜΟΣΙΕΥΣΗ ΑΓΓΕΛΙΑΣ",
+      listingShort: "ΑΓΓΕΛΙΑ",
+      forSale: "Προς πώληση",
+      freeRehome: "Δωρεάν / Υιοθεσία",
+      services: "Υπηρεσίες",
+      browse: "Περιήγηση",
+      viewAll: "Προβολή όλων",
+      dogs: "Σκύλοι",
+      cats: "Γάτες",
+      puppies: "Κουτάβια",
+      discover: "ΑΝΑΚΑΛΥΨΤΕ",
+      latestListings: "Νέες αγγελίες",
+      listingWord: "αγγελίες",
+      oneListing: "αγγελία",
+      viewContact: "Προβολή και επικοινωνία",
+      sellRehomeServices: "ΠΩΛΗΣΗ · ΥΙΟΘΕΣΙΑ · ΥΠΗΡΕΣΙΕΣ",
+      share: "Έχετε κάτι να προσφέρετε;",
+      publishingFee: "Δημοσίευση: £1 ανά αγγελία",
+      service: "Υπηρεσία",
+      puppyKitten: "Κουτάβι / γατάκι",
+      otherAnimal: "Άλλο ζώο",
+      cityLocation: "Πόλη / τοποθεσία",
+      pricePlaceholder: "Τιμή, ΔΩΡΕΑΝ ή ΑΠΟ £...",
+      phonePlaceholder: "Τηλέφωνο, WhatsApp ή email",
+      description: "Περιγραφή...",
+      continue: "Συνέχεια · £1",
+      checkout: "Η πληρωμή £1 θα συνδεθεί με το σύστημα πληρωμών.",
+      free: "ΔΩΡΕΑΝ",
+      rehome: "ΥΙΟΘΕΣΙΑ",
+      from: "ΑΠΟ",
+      sale: "ΠΩΛΗΣΗ",
+      searching: "Αναζήτηση…",
+      noPlaces: "Δεν βρέθηκαν τοποθεσίες",
+      unavailable: "Η αναζήτηση τοποθεσίας δεν είναι διαθέσιμη",
+      findingLocation: "Εντοπίζουμε την τοποθεσία σας…",
+      geoUnavailable: "Η γεωεντόπιση δεν είναι διαθέσιμη.",
+      allowLocation: "Επιτρέψτε την πρόσβαση στην τοποθεσία.",
+      required: "Προσθέστε όνομα, τοποθεσία, στοιχεία επικοινωνίας και φωτογραφία.",
+      previewCreated: "Η προεπισκόπηση δημιουργήθηκε. Επόμενο βήμα είναι η πληρωμή £1.",
+      male: "Αρσενικό",
+      female: "Θηλυκό",
+      year: "έτος",
+      years: "έτη",
+      groomingStyling: "Περιποίηση και styling",
+      serviceDescription: "Premium υπηρεσία περιποίησης και styling για κατοικίδια."
+    },
+
+    sv: {
+      marketplace: "Marknad",
+      saved: "Sparade",
+      anywhere: "Överallt",
+      done: "Klar",
+      changeLocation: "Ändra plats",
+      locationPlaceholder: "Sök stad, region eller land...",
+      nearMe: "Nära mig",
+      distanceFromMe: "Avstånd från mig",
+      postListing: "PUBLICERA ANNONS",
+      listingShort: "ANNONS",
+      forSale: "Till salu",
+      freeRehome: "Gratis / Nytt hem",
+      services: "Tjänster",
+      browse: "Utforska",
+      viewAll: "Visa alla",
+      dogs: "Hundar",
+      cats: "Katter",
+      puppies: "Valpar",
+      discover: "UPPTÄCK",
+      latestListings: "Senaste annonserna",
+      listingWord: "annonser",
+      oneListing: "annons",
+      viewContact: "Visa & kontakta",
+      sellRehomeServices: "SÄLJ · NYTT HEM · TJÄNSTER",
+      share: "Har du något att erbjuda?",
+      publishingFee: "Publicering: £1 per annons",
+      service: "Tjänst",
+      puppyKitten: "Valp / kattunge",
+      otherAnimal: "Annat djur",
+      cityLocation: "Stad / plats",
+      pricePlaceholder: "Pris, GRATIS eller FRÅN £...",
+      phonePlaceholder: "Telefon, WhatsApp eller e-post",
+      description: "Beskrivning...",
+      continue: "Fortsätt · £1",
+      checkout: "Betalningen på £1 kopplas till betalsystemet.",
+      free: "GRATIS",
+      rehome: "SÖKER HEM",
+      from: "FRÅN",
+      sale: "TILL SALU",
+      searching: "Söker…",
+      noPlaces: "Inga platser hittades",
+      unavailable: "Platssökning är inte tillgänglig",
+      findingLocation: "Hämtar din plats…",
+      geoUnavailable: "Geolokalisering är inte tillgänglig.",
+      allowLocation: "Tillåt åtkomst till din plats.",
+      required: "Lägg till namn, plats, kontakt och foto.",
+      previewCreated: "Förhandsvisning skapad. Nästa steg är betalningen på £1.",
+      male: "Hane",
+      female: "Hona",
+      year: "år",
+      years: "år",
+      groomingStyling: "Pälsvård & styling",
+      serviceDescription: "Premium pälsvård och styling för husdjur."
+    },
+
+    da: {
+      marketplace: "Marked",
+      saved: "Gemte",
+      anywhere: "Overalt",
+      done: "Færdig",
+      changeLocation: "Skift placering",
+      locationPlaceholder: "Søg by, region eller land...",
+      nearMe: "I nærheden",
+      distanceFromMe: "Afstand fra mig",
+      postListing: "PUBLICER ANNONCE",
+      listingShort: "ANNONCE",
+      forSale: "Til salg",
+      freeRehome: "Gratis / Nyt hjem",
+      services: "Tjenester",
+      browse: "Udforsk",
+      viewAll: "Se alle",
+      dogs: "Hunde",
+      cats: "Katte",
+      puppies: "Hvalpe",
+      discover: "OPDAG",
+      latestListings: "Nyeste annoncer",
+      listingWord: "annoncer",
+      oneListing: "annonce",
+      viewContact: "Se & kontakt",
+      sellRehomeServices: "SALG · NYT HJEM · TJENESTER",
+      share: "Har du noget at tilbyde?",
+      publishingFee: "Publicering: £1 pr. annonce",
+      service: "Tjeneste",
+      puppyKitten: "Hvalp / killing",
+      otherAnimal: "Andet dyr",
+      cityLocation: "By / sted",
+      pricePlaceholder: "Pris, GRATIS eller FRA £...",
+      phonePlaceholder: "Telefon, WhatsApp eller e-mail",
+      description: "Beskrivelse...",
+      continue: "Fortsæt · £1",
+      checkout: "Betalingen på £1 forbindes til betalingssystemet.",
+      free: "GRATIS",
+      rehome: "SØGER HJEM",
+      from: "FRA",
+      sale: "TIL SALG",
+      searching: "Søger…",
+      noPlaces: "Ingen steder fundet",
+      unavailable: "Stedsøgning er ikke tilgængelig",
+      findingLocation: "Finder din placering…",
+      geoUnavailable: "Geolokation er ikke tilgængelig.",
+      allowLocation: "Tillad adgang til din placering.",
+      required: "Tilføj navn, sted, kontakt og foto.",
+      previewCreated: "Forhåndsvisning oprettet. Næste trin er betalingen på £1.",
+      male: "Han",
+      female: "Hun",
+      year: "år",
+      years: "år",
+      groomingStyling: "Pelspleje & styling",
+      serviceDescription: "Premium pelspleje og styling til kæledyr."
+    },
+
+    no: {
+      marketplace: "Markedsplass",
+      saved: "Lagret",
+      anywhere: "Overalt",
+      done: "Ferdig",
+      changeLocation: "Endre sted",
+      locationPlaceholder: "Søk by, region eller land...",
+      nearMe: "I nærheten",
+      distanceFromMe: "Avstand fra meg",
+      postListing: "PUBLISER ANNONSE",
+      listingShort: "ANNONSE",
+      forSale: "Til salgs",
+      freeRehome: "Gratis / Nytt hjem",
+      services: "Tjenester",
+      browse: "Utforsk",
+      viewAll: "Se alle",
+      dogs: "Hunder",
+      cats: "Katter",
+      puppies: "Valper",
+      discover: "OPPDAG",
+      latestListings: "Nyeste annonser",
+      listingWord: "annonser",
+      oneListing: "annonse",
+      viewContact: "Se & kontakt",
+      sellRehomeServices: "SALG · NYTT HJEM · TJENESTER",
+      share: "Har du noe å tilby?",
+      publishingFee: "Publisering: £1 per annonse",
+      service: "Tjeneste",
+      puppyKitten: "Valp / kattunge",
+      otherAnimal: "Annet dyr",
+      cityLocation: "By / sted",
+      pricePlaceholder: "Pris, GRATIS eller FRA £...",
+      phonePlaceholder: "Telefon, WhatsApp eller e-post",
+      description: "Beskrivelse...",
+      continue: "Fortsett · £1",
+      checkout: "Betalingen på £1 kobles til betalingssystemet.",
+      free: "GRATIS",
+      rehome: "SØKER HJEM",
+      from: "FRA",
+      sale: "TIL SALGS",
+      searching: "Søker…",
+      noPlaces: "Ingen steder funnet",
+      unavailable: "Stedsøk er ikke tilgjengelig",
+      findingLocation: "Finner posisjonen din…",
+      geoUnavailable: "Geolokasjon er ikke tilgjengelig.",
+      allowLocation: "Tillat tilgang til posisjonen.",
+      required: "Legg til navn, sted, kontakt og bilde.",
+      previewCreated: "Forhåndsvisning opprettet. Neste steg er betalingen på £1.",
+      male: "Hann",
+      female: "Hunn",
+      year: "år",
+      years: "år",
+      groomingStyling: "Pelsstell & styling",
+      serviceDescription: "Premium pelsstell og styling for kjæledyr."
+    },
+
+    fi: {
+      marketplace: "Markkinapaikka",
+      saved: "Tallennetut",
+      anywhere: "Missä tahansa",
+      done: "Valmis",
+      changeLocation: "Vaihda sijainti",
+      locationPlaceholder: "Hae kaupunkia, aluetta tai maata...",
+      nearMe: "Lähellä minua",
+      distanceFromMe: "Etäisyys minusta",
+      postListing: "JULKAISE ILMOITUS",
+      listingShort: "ILMOITUS",
+      forSale: "Myydään",
+      freeRehome: "Ilmainen / Uusi koti",
+      services: "Palvelut",
+      browse: "Selaa",
+      viewAll: "Näytä kaikki",
+      dogs: "Koirat",
+      cats: "Kissat",
+      puppies: "Pennut",
+      discover: "TUTUSTU",
+      latestListings: "Uusimmat ilmoitukset",
+      listingWord: "ilmoitusta",
+      oneListing: "ilmoitus",
+      viewContact: "Näytä & ota yhteyttä",
+      sellRehomeServices: "MYY · UUSI KOTI · PALVELUT",
+      share: "Onko sinulla jotain tarjottavaa?",
+      publishingFee: "Julkaisu: £1 per ilmoitus",
+      service: "Palvelu",
+      puppyKitten: "Pentu / kissanpentu",
+      otherAnimal: "Muu eläin",
+      cityLocation: "Kaupunki / sijainti",
+      pricePlaceholder: "Hinta, ILMAINEN tai ALKAEN £...",
+      phonePlaceholder: "Puhelin, WhatsApp tai sähköposti",
+      description: "Kuvaus...",
+      continue: "Jatka · £1",
+      checkout: "£1-maksu yhdistetään maksujärjestelmään.",
+      free: "ILMAINEN",
+      rehome: "ETSII KOTIA",
+      from: "ALKAEN",
+      sale: "MYYDÄÄN",
+      searching: "Haetaan…",
+      noPlaces: "Paikkoja ei löytynyt",
+      unavailable: "Sijaintihaku ei ole käytettävissä",
+      findingLocation: "Sijaintiasi haetaan…",
+      geoUnavailable: "Paikannus ei ole käytettävissä.",
+      allowLocation: "Salli sijainnin käyttö.",
+      required: "Lisää nimi, sijainti, yhteystieto ja kuva.",
+      previewCreated: "Esikatselu luotu. Seuraava vaihe on £1-maksu.",
+      male: "Uros",
+      female: "Naaras",
+      year: "vuosi",
+      years: "vuotta",
+      groomingStyling: "Turkinhoito & styling",
+      serviceDescription: "Premium-turkinhoito ja styling lemmikeille."
+    },
+
+    tr: {
+      marketplace: "Pazar",
+      saved: "Kaydedilenler",
+      anywhere: "Her yer",
+      done: "Tamam",
+      changeLocation: "Konumu değiştir",
+      locationPlaceholder: "Şehir, bölge veya ülke ara...",
+      nearMe: "Yakınımda",
+      distanceFromMe: "Bana uzaklığı",
+      postListing: "İLAN YAYIMLA",
+      listingShort: "İLAN",
+      forSale: "Satılık",
+      freeRehome: "Ücretsiz / Sahiplendirme",
+      services: "Hizmetler",
+      browse: "Keşfet",
+      viewAll: "Tümünü gör",
+      dogs: "Köpekler",
+      cats: "Kediler",
+      puppies: "Yavrular",
+      discover: "KEŞFET",
+      latestListings: "Yeni ilanlar",
+      listingWord: "ilan",
+      oneListing: "ilan",
+      viewContact: "Görüntüle ve iletişim kur",
+      sellRehomeServices: "SATIŞ · SAHİPLENDİRME · HİZMETLER",
+      share: "Paylaşacak bir şeyiniz mi var?",
+      publishingFee: "Yayın ücreti: ilan başına £1",
+      service: "Hizmet",
+      puppyKitten: "Yavru köpek / kedi",
+      otherAnimal: "Diğer hayvan",
+      cityLocation: "Şehir / konum",
+      pricePlaceholder: "Fiyat, ÜCRETSİZ veya £...’DAN",
+      phonePlaceholder: "Telefon, WhatsApp veya email",
+      description: "Açıklama...",
+      continue: "Devam · £1",
+      checkout: "£1 ödeme, ödeme sistemine bağlanacaktır.",
+      free: "ÜCRETSİZ",
+      rehome: "YUVA ARIYOR",
+      from: "BAŞLANGIÇ",
+      sale: "SATILIK",
+      searching: "Aranıyor…",
+      noPlaces: "Konum bulunamadı",
+      unavailable: "Konum araması kullanılamıyor",
+      findingLocation: "Konumunuz bulunuyor…",
+      geoUnavailable: "Konum özelliği bu cihazda kullanılamıyor.",
+      allowLocation: "Konum erişimine izin verin.",
+      required: "Ad, konum, iletişim bilgisi ve fotoğraf ekleyin.",
+      previewCreated: "İlan önizlemesi oluşturuldu. Sonraki adım £1 ödeme bağlantısı.",
+      male: "Erkek",
+      female: "Dişi",
+      year: "yaşında",
+      years: "yaşında",
+      groomingStyling: "Bakım ve stil",
+      serviceDescription: "Evcil hayvanlar için premium bakım ve stil hizmeti."
+    },
+
+    ar: {
+      marketplace: "السوق",
+      saved: "المحفوظات",
+      anywhere: "أي مكان",
+      done: "تم",
+      changeLocation: "تغيير الموقع",
+      locationPlaceholder: "ابحث عن مدينة أو منطقة أو دولة...",
+      nearMe: "بالقرب مني",
+      distanceFromMe: "المسافة مني",
+      postListing: "نشر إعلان",
+      listingShort: "إعلان",
+      forSale: "للبيع",
+      freeRehome: "مجاني / تبنّي",
+      services: "الخدمات",
+      browse: "تصفح",
+      viewAll: "عرض الكل",
+      dogs: "كلاب",
+      cats: "قطط",
+      puppies: "جراء",
+      discover: "اكتشف",
+      latestListings: "أحدث الإعلانات",
+      listingWord: "إعلانات",
+      oneListing: "إعلان",
+      viewContact: "عرض والتواصل",
+      sellRehomeServices: "بيع · تبنّي · خدمات",
+      share: "هل لديك شيء لتقدمه؟",
+      publishingFee: "رسوم النشر: £1 لكل إعلان",
+      service: "خدمة",
+      puppyKitten: "جرو / قطة صغيرة",
+      otherAnimal: "حيوان آخر",
+      cityLocation: "المدينة / الموقع",
+      pricePlaceholder: "السعر، مجاني أو من £...",
+      phonePlaceholder: "الهاتف أو WhatsApp أو البريد الإلكتروني",
+      description: "الوصف...",
+      continue: "متابعة · £1",
+      checkout: "سيتم ربط دفع £1 بنظام الدفع.",
+      free: "مجاني",
+      rehome: "يبحث عن منزل",
+      from: "من",
+      sale: "للبيع",
+      searching: "جارٍ البحث…",
+      noPlaces: "لم يتم العثور على أماكن",
+      unavailable: "البحث عن الموقع غير متاح",
+      findingLocation: "جارٍ تحديد موقعك…",
+      geoUnavailable: "تحديد الموقع غير متاح على هذا الجهاز.",
+      allowLocation: "يرجى السماح بالوصول إلى الموقع.",
+      required: "أضف الاسم والموقع وبيانات الاتصال والصورة.",
+      previewCreated: "تم إنشاء معاينة الإعلان. الخطوة التالية هي ربط دفع £1.",
+      male: "ذكر",
+      female: "أنثى",
+      year: "سنة",
+      years: "سنوات",
+      groomingStyling: "العناية والتنسيق",
+      serviceDescription: "خدمة فاخرة للعناية بالحيوانات الأليفة وتنسيقها."
+    },
+
+    hi: {
+      marketplace: "बाज़ार",
+      saved: "सहेजे गए",
+      anywhere: "कहीं भी",
+      done: "पूरा",
+      changeLocation: "स्थान बदलें",
+      locationPlaceholder: "शहर, क्षेत्र या देश खोजें...",
+      nearMe: "मेरे पास",
+      distanceFromMe: "मुझसे दूरी",
+      postListing: "विज्ञापन प्रकाशित करें",
+      listingShort: "विज्ञापन",
+      forSale: "बिक्री के लिए",
+      freeRehome: "मुफ़्त / नया घर",
+      services: "सेवाएँ",
+      browse: "देखें",
+      viewAll: "सभी देखें",
+      dogs: "कुत्ते",
+      cats: "बिल्लियाँ",
+      puppies: "पिल्ले",
+      discover: "खोजें",
+      latestListings: "नए विज्ञापन",
+      listingWord: "विज्ञापन",
+      oneListing: "विज्ञापन",
+      viewContact: "देखें और संपर्क करें",
+      sellRehomeServices: "बिक्री · नया घर · सेवाएँ",
+      share: "कुछ साझा करना चाहते हैं?",
+      publishingFee: "प्रकाशन शुल्क: प्रति विज्ञापन £1",
+      service: "सेवा",
+      puppyKitten: "पिल्ला / बिल्ली का बच्चा",
+      otherAnimal: "अन्य जानवर",
+      cityLocation: "शहर / स्थान",
+      pricePlaceholder: "कीमत, मुफ़्त या £... से",
+      phonePlaceholder: "फोन, WhatsApp या ईमेल",
+      description: "विवरण...",
+      continue: "जारी रखें · £1",
+      checkout: "£1 भुगतान को भुगतान प्रणाली से जोड़ा जाएगा।",
+      free: "मुफ़्त",
+      rehome: "घर खोज रहा है",
+      from: "से",
+      sale: "बिक्री",
+      searching: "खोज जारी है…",
+      noPlaces: "कोई स्थान नहीं मिला",
+      unavailable: "स्थान खोज उपलब्ध नहीं है",
+      findingLocation: "आपका स्थान खोजा जा रहा है…",
+      geoUnavailable: "इस डिवाइस पर जियोलोकेशन उपलब्ध नहीं है।",
+      allowLocation: "स्थान की अनुमति दें।",
+      required: "नाम, स्थान, संपर्क और फोटो जोड़ें।",
+      previewCreated: "विज्ञापन पूर्वावलोकन बन गया। अगला चरण £1 भुगतान है।",
+      male: "नर",
+      female: "मादा",
+      year: "वर्ष",
+      years: "वर्ष",
+      groomingStyling: "ग्रूमिंग और स्टाइलिंग",
+      serviceDescription: "पालतू जानवरों के लिए प्रीमियम ग्रूमिंग और स्टाइलिंग सेवा।"
     }
 
   };
 
 
-  const NORMALIZE = {
-    ua: "uk",
-    "uk-ua": "uk",
-    "en-gb": "en",
-    "en-us": "en",
-    cz: "cs",
-    gr: "el"
-  };
-
+  /* =========================================================
+     LANGUAGE
+  ========================================================= */
 
   function normalizeLanguage(value) {
 
     let lang = String(value || "")
       .trim()
       .toLowerCase()
-      .replace("_", "-");
+      .replace(/_/g, "-");
 
     if (NORMALIZE[lang]) {
-      return NORMALIZE[lang];
+      lang = NORMALIZE[lang];
     }
 
-    if (UI[lang]) {
+    if (MARKET[lang]) {
       return lang;
     }
 
@@ -2500,31 +3668,71 @@ window.PetsDogueTranslations.marketplace = {
       return NORMALIZE[short];
     }
 
-    return UI[short] ? short : "en";
+    if (MARKET[short]) {
+      return short;
+    }
+
+    return "en";
   }
 
 
   function getLanguage() {
 
+    if (
+      window.PetsDogueLanguage &&
+      typeof window.PetsDogueLanguage.getCurrentLanguage === "function"
+    ) {
+
+      try {
+
+        const current =
+          window.PetsDogueLanguage.getCurrentLanguage();
+
+        if (typeof current === "string") {
+          return normalizeLanguage(current);
+        }
+
+        if (current && current.code) {
+          return normalizeLanguage(current.code);
+        }
+
+      } catch (e) {}
+
+    }
+
+
     const htmlLang =
       document.documentElement.getAttribute("lang");
 
-    if (htmlLang && htmlLang !== "en") {
-      return normalizeLanguage(htmlLang);
+    if (htmlLang) {
+
+      const normalized =
+        normalizeLanguage(htmlLang);
+
+      if (
+        normalized !== "en" ||
+        String(htmlLang).toLowerCase().startsWith("en")
+      ) {
+        return normalized;
+      }
+
     }
 
+
     const keys = [
-      "petsDogueLanguage",
       "pets_dogue_language",
+      "petsDogueLanguage",
       "dogue_language",
       "selectedLanguage",
       "language",
       "lang"
     ];
 
+
     for (const key of keys) {
 
-      const value = localStorage.getItem(key);
+      const value =
+        localStorage.getItem(key);
 
       if (value) {
         return normalizeLanguage(value);
@@ -2532,99 +3740,267 @@ window.PetsDogueTranslations.marketplace = {
 
     }
 
-    return normalizeLanguage(htmlLang || "en");
+
+    return "en";
   }
 
 
   function getPack() {
 
-    const lang = getLanguage();
+    const lang =
+      getLanguage();
+
+    const page =
+      MARKET[lang] &&
+      MARKET[lang].page
+        ? MARKET[lang].page
+        : MARKET.en.page;
 
     return {
       lang,
+      page,
       ui: {
         ...UI.en,
         ...(UI[lang] || {})
-      },
-      old:
-        window.PetsDogueTranslations &&
-        window.PetsDogueTranslations.marketplace &&
-        window.PetsDogueTranslations.marketplace[lang] &&
-        window.PetsDogueTranslations.marketplace[lang].page
-          ? window.PetsDogueTranslations.marketplace[lang].page
-          : {}
+      }
     };
-
   }
 
 
-  function text(selector, value) {
+  /* =========================================================
+     HELPERS
+  ========================================================= */
 
-    const element = document.querySelector(selector);
+  function setText(selector, value, root) {
 
-    if (element && value != null) {
+    const scope =
+      root || document;
+
+    const element =
+      scope.querySelector(selector);
+
+    if (
+      element &&
+      value != null &&
+      element.textContent !== String(value)
+    ) {
       element.textContent = value;
     }
-
   }
 
 
-  function placeholder(selector, value) {
+  function setPlaceholder(selector, value, root) {
 
-    const element = document.querySelector(selector);
+    const scope =
+      root || document;
 
-    if (element && value != null) {
+    const element =
+      scope.querySelector(selector);
+
+    if (
+      element &&
+      value != null &&
+      element.placeholder !== String(value)
+    ) {
       element.placeholder = value;
     }
-
   }
 
+
+  function allText(selector, value, root) {
+
+    const scope =
+      root || document;
+
+    scope
+      .querySelectorAll(selector)
+      .forEach(element => {
+
+        if (
+          value != null &&
+          element.textContent !== String(value)
+        ) {
+          element.textContent = value;
+        }
+
+      });
+  }
+
+
+  function replaceExactText(root, replacements) {
+
+    if (!root) return;
+
+    const walker =
+      document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT
+      );
+
+    const nodes = [];
+
+    while (walker.nextNode()) {
+      nodes.push(walker.currentNode);
+    }
+
+
+    nodes.forEach(node => {
+
+      const raw =
+        node.nodeValue;
+
+      if (!raw || !raw.trim()) return;
+
+      const trimmed =
+        raw.trim();
+
+      if (
+        Object.prototype.hasOwnProperty.call(
+          replacements,
+          trimmed
+        )
+      ) {
+
+        const leading =
+          raw.match(/^\s*/)?.[0] || "";
+
+        const trailing =
+          raw.match(/\s*$/)?.[0] || "";
+
+        node.nodeValue =
+          leading +
+          replacements[trimmed] +
+          trailing;
+      }
+
+    });
+  }
+
+
+  function replaceAgeAndGender(root, ui) {
+
+    if (!root) return;
+
+    const walker =
+      document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT
+      );
+
+    const nodes = [];
+
+    while (walker.nextNode()) {
+      nodes.push(walker.currentNode);
+    }
+
+
+    nodes.forEach(node => {
+
+      let text =
+        node.nodeValue;
+
+      if (!text) return;
+
+
+      text =
+        text.replace(
+          /\bFemale\b/g,
+          ui.female
+        );
+
+      text =
+        text.replace(
+          /\bMale\b/g,
+          ui.male
+        );
+
+
+      text =
+        text.replace(
+          /\b1 year\b/g,
+          "1 " + ui.year
+        );
+
+
+      text =
+        text.replace(
+          /\b(\d+)\s+years\b/g,
+          function (_, number) {
+            return number + " " + ui.years;
+          }
+        );
+
+
+      if (node.nodeValue !== text) {
+        node.nodeValue = text;
+      }
+
+    });
+  }
+
+
+  /* =========================================================
+     LOCATION
+  ========================================================= */
 
   function translateCurrentLocation(ui) {
 
-    [
+    const elements = [
       document.getElementById("currentLocationLabel"),
       document.getElementById("locationPanelCurrent")
-    ]
-    .filter(Boolean)
-    .forEach(element => {
+    ].filter(Boolean);
+
+
+    elements.forEach(element => {
 
       const current =
         element.textContent.trim();
 
+
+      const anywhereValues =
+        Object.values(UI)
+          .map(pack => pack.anywhere)
+          .filter(Boolean);
+
+
       if (
         current === "Anywhere" ||
-        current === UI.en.anywhere ||
-        Object.values(UI)
-          .some(pack => pack.anywhere === current)
+        anywhereValues.includes(current)
       ) {
 
-        element.textContent = ui.anywhere;
-        return;
+        element.textContent =
+          ui.anywhere;
 
+        return;
       }
+
+
+      const findingValues =
+        Object.values(UI)
+          .map(pack => pack.findingLocation)
+          .filter(Boolean);
 
 
       if (
         current === "Finding your location…" ||
-        Object.values(UI)
-          .some(pack => pack.findingLocation === current)
+        findingValues.includes(current)
       ) {
 
         element.textContent =
           ui.findingLocation;
 
         return;
-
       }
 
 
-      const nearPrefixes = [
-        "Near me",
-        ...Object.values(UI)
+      const nearPrefixes =
+        Object.values(UI)
           .map(pack => pack.nearMe)
-          .filter(Boolean)
-      ];
+          .filter(Boolean);
+
+
+      nearPrefixes.push("Near me");
+
 
       for (const prefix of nearPrefixes) {
 
@@ -2633,26 +4009,90 @@ window.PetsDogueTranslations.marketplace = {
           element.textContent =
             ui.nearMe;
 
-          break;
-
+          return;
         }
 
-        if (current.startsWith(prefix + " · ")) {
+
+        if (
+          current.startsWith(
+            prefix + " · "
+          )
+        ) {
 
           element.textContent =
             ui.nearMe +
-            current.slice(prefix.length);
+            current.slice(
+              prefix.length
+            );
 
-          break;
-
+          return;
         }
 
       }
 
     });
-
   }
 
+
+  function translateSearchMessages(ui, root) {
+
+    const scope =
+      root || document;
+
+    scope
+      .querySelectorAll(".location-option")
+      .forEach(option => {
+
+        const value =
+          option.textContent.trim();
+
+
+        const searching =
+          Object.values(UI)
+            .map(pack => pack.searching);
+
+        const noPlaces =
+          Object.values(UI)
+            .map(pack => pack.noPlaces);
+
+        const unavailable =
+          Object.values(UI)
+            .map(pack => pack.unavailable);
+
+
+        if (
+          value === "Searching…" ||
+          searching.includes(value)
+        ) {
+          option.textContent =
+            ui.searching;
+        }
+
+
+        if (
+          value === "No places found" ||
+          noPlaces.includes(value)
+        ) {
+          option.textContent =
+            ui.noPlaces;
+        }
+
+
+        if (
+          value === "Location search unavailable" ||
+          unavailable.includes(value)
+        ) {
+          option.textContent =
+            ui.unavailable;
+        }
+
+      });
+  }
+
+
+  /* =========================================================
+     COUNTS
+  ========================================================= */
 
   function translateListingCount(ui) {
 
@@ -2661,72 +4101,63 @@ window.PetsDogueTranslations.marketplace = {
 
     if (!count) return;
 
+
     const match =
       count.textContent.match(/\d+/);
 
     if (!match) return;
 
+
+    const number =
+      Number(match[0]);
+
+
     count.textContent =
-      match[0] + " " + ui.listingWord;
-
+      number +
+      " " +
+      (
+        number === 1
+          ? ui.oneListing
+          : ui.listingWord
+      );
   }
 
 
-  function translateSearchMessages(ui) {
+  /* =========================================================
+     CARDS
+  ========================================================= */
 
-    document
-      .querySelectorAll(".location-option")
-      .forEach(option => {
+  function translateListingCards(ui, page, root) {
 
-        const value =
-          option.textContent.trim();
-
-        if (
-          value === "Searching…" ||
-          value === UI.en.searching
-        ) {
-          option.textContent = ui.searching;
-        }
-
-        if (
-          value === "No places found" ||
-          value === UI.en.noPlaces
-        ) {
-          option.textContent = ui.noPlaces;
-        }
-
-        if (
-          value === "Location search unavailable" ||
-          value === UI.en.unavailable
-        ) {
-          option.textContent = ui.unavailable;
-        }
-
-      });
-
-  }
+    const scope =
+      root || document;
 
 
-  function translateListingCards(ui) {
-
-    document
+    scope
       .querySelectorAll(".listing-card")
       .forEach(card => {
 
         const type =
-          card.dataset.type;
+          String(
+            card.dataset.type || ""
+          ).toLowerCase();
+
 
         const tag =
           card.querySelector(".tag");
+
 
         if (tag) {
 
           if (type === "sale") {
             tag.textContent =
-              ui.forSale.toUpperCase();
+              ui.sale.toUpperCase();
           }
 
-          if (type === "free") {
+          if (
+            type === "free" ||
+            type === "rehome"
+          ) {
             tag.textContent =
               ui.rehome.toUpperCase();
           }
@@ -2740,7 +4171,9 @@ window.PetsDogueTranslations.marketplace = {
 
 
         const contact =
-          card.querySelector(".contact-small");
+          card.querySelector(
+            ".contact-small"
+          );
 
         if (contact) {
           contact.textContent =
@@ -2756,44 +4189,285 @@ window.PetsDogueTranslations.marketplace = {
           const current =
             price.textContent.trim();
 
+
+          const allFree =
+            Object.values(UI)
+              .map(pack => pack.free);
+
+
           if (
             current === "FREE" ||
-            current === UI.en.free
+            allFree.includes(current)
           ) {
 
             price.textContent =
               ui.free;
-
           }
 
-          if (
-            /^FROM\s/i.test(current)
-          ) {
+
+          const fromPattern =
+            /^(FROM|ОТ|ВІД|AB|DESDE|DA|VANAF|OD|ETTŐL|DE LA|ΑΠΟ|FRÅN|FRA|ALKAEN|BAŞLANGIÇ|من|से)\s+/i;
+
+
+          if (fromPattern.test(current)) {
 
             price.textContent =
               current.replace(
-                /^FROM/i,
-                ui.from
+                fromPattern,
+                ui.from + " "
               );
-
           }
+
+        }
+
+
+        const cardText =
+          card.textContent || "";
+
+
+        if (
+          /DOGUE Grooming/i.test(cardText) ||
+          /Premium grooming and styling service for pets\./i.test(cardText)
+        ) {
+
+          const descriptionCandidates = [
+            ".listing-description",
+            ".card-description",
+            ".description",
+            "p"
+          ];
+
+
+          descriptionCandidates
+            .forEach(selector => {
+
+              card
+                .querySelectorAll(selector)
+                .forEach(element => {
+
+                  if (
+                    /Premium grooming and styling service for pets\./i.test(
+                      element.textContent
+                    )
+                  ) {
+
+                    element.textContent =
+                      ui.serviceDescription;
+                  }
+
+                });
+
+            });
 
         }
 
       });
 
+
+    replaceAgeAndGender(
+      scope,
+      ui
+    );
   }
 
 
-  function translatePublishForm(ui, old) {
+  /* =========================================================
+     DETAIL / MODAL / DYNAMIC CONTENT
+  ========================================================= */
 
-    text(
+  function translateDynamicText(root) {
+
+    const {
+      ui,
+      page
+    } = getPack();
+
+
+    const replacements = {
+
+      "Marketplace":
+        ui.marketplace,
+
+      "Saved":
+        ui.saved,
+
+      "Anywhere":
+        ui.anywhere,
+
+      "Done":
+        ui.done,
+
+      "Change location":
+        ui.changeLocation,
+
+      "Near me":
+        ui.nearMe,
+
+      "Distance from me":
+        ui.distanceFromMe,
+
+      "POST LISTING":
+        ui.postListing,
+
+      "LISTING":
+        ui.listingShort,
+
+      "For sale":
+        ui.forSale,
+
+      "Free / Rehome":
+        ui.freeRehome,
+
+      "Services":
+        ui.services,
+
+      "Browse":
+        ui.browse,
+
+      "View all":
+        ui.viewAll,
+
+      "Dogs":
+        ui.dogs,
+
+      "Cats":
+        ui.cats,
+
+      "Puppies":
+        ui.puppies,
+
+      "DISCOVER":
+        ui.discover,
+
+      "Latest listings":
+        ui.latestListings,
+
+      "View & contact":
+        ui.viewContact,
+
+      "SELL · REHOME · SERVICES":
+        ui.sellRehomeServices,
+
+      "Have something to share?":
+        ui.share,
+
+      "Publishing fee: £1 per listing":
+        ui.publishingFee,
+
+      "Service":
+        ui.service,
+
+      "SERVICE":
+        ui.service.toUpperCase(),
+
+      "SALE":
+        ui.sale.toUpperCase(),
+
+      "REHOME":
+        ui.rehome.toUpperCase(),
+
+      "FREE":
+        ui.free,
+
+      "Puppy / Kitten":
+        ui.puppyKitten,
+
+      "Other animal":
+        ui.otherAnimal,
+
+      "Description...":
+        ui.description,
+
+      "Continue · £1":
+        ui.continue,
+
+      "Grooming":
+        page.grooming || ui.groomingStyling,
+
+      "Styling":
+        page.styling || ui.groomingStyling,
+
+      "Grooming & styling":
+        ui.groomingStyling,
+
+      "Premium grooming and styling service for pets.":
+        ui.serviceDescription,
+
+      "Contact":
+        page.contactLabel ||
+        page.contact ||
+        "Contact",
+
+      "Contact Owner":
+        page.contactOwner,
+
+      "Contact Seller":
+        page.contactSeller,
+
+      "Delete Listing":
+        page.deleteListing,
+
+      "Posted by":
+        page.postedBy,
+
+      "Member":
+        page.memberShort,
+
+      "PETS & DOGUE Member":
+        page.member,
+
+      "Dog":
+        page.dog,
+
+      "Cat":
+        page.cat,
+
+      "Small Breed":
+        page.smallBreed
+
+    };
+
+
+    replaceExactText(
+      root || document.body,
+      replacements
+    );
+
+
+    replaceAgeAndGender(
+      root || document.body,
+      ui
+    );
+
+
+    translateListingCards(
+      ui,
+      page,
+      root || document
+    );
+
+
+    translateSearchMessages(
+      ui,
+      root || document
+    );
+  }
+
+
+  /* =========================================================
+     PUBLISH FORM
+  ========================================================= */
+
+  function translatePublishForm(ui, page) {
+
+    setText(
       "#publishModal .publish-form h2",
-      old.publishTitle ||
+      page.publishTitle ||
       ui.postListing
     );
 
-    text(
+
+    setText(
       "#publishModal .fee-note",
       ui.publishingFee
     );
@@ -2803,6 +4477,7 @@ window.PetsDogueTranslations.marketplace = {
       document.querySelectorAll(
         "#newType option"
       );
+
 
     if (typeOptions[0]) {
       typeOptions[0].textContent =
@@ -2825,14 +4500,15 @@ window.PetsDogueTranslations.marketplace = {
         "#newAnimal option"
       );
 
+
     if (animalOptions[0]) {
       animalOptions[0].textContent =
-        old.dog || ui.dogs;
+        page.dog || ui.dogs;
     }
 
     if (animalOptions[1]) {
       animalOptions[1].textContent =
-        old.cat || ui.cats;
+        page.cat || ui.cats;
     }
 
     if (animalOptions[2]) {
@@ -2851,154 +4527,184 @@ window.PetsDogueTranslations.marketplace = {
     }
 
 
-    placeholder(
+    setPlaceholder(
       "#newTitle",
-      old.petName ||
+      page.petName ||
       "Pet / service"
     );
 
-    placeholder(
+
+    setPlaceholder(
       "#newBreed",
-      old.breedType ||
+      page.breedType ||
       "Breed / service type"
     );
 
-    placeholder(
+
+    setPlaceholder(
       "#newLocation",
       ui.cityLocation
     );
 
-    placeholder(
+
+    setPlaceholder(
       "#newPrice",
       ui.pricePlaceholder
     );
 
-    placeholder(
+
+    setPlaceholder(
       "#newContact",
       ui.phonePlaceholder
     );
 
-    placeholder(
+
+    setPlaceholder(
       "#newDescription",
       ui.description
     );
 
 
-    text(
+    setText(
       "#publishModal .form-submit",
       ui.continue
     );
 
-    text(
+
+    setText(
       "#publishModal .tiny-note",
       ui.checkout
     );
-
   }
 
 
+  /* =========================================================
+     STATIC MARKETPLACE
+  ========================================================= */
+
   function translateStatic() {
 
-    const { lang, ui, old } =
-      getPack();
+    const {
+      lang,
+      ui,
+      page
+    } = getPack();
 
 
-    document.documentElement.dir =
+    document.documentElement.setAttribute(
+      "dir",
       lang === "ar"
         ? "rtl"
-        : "ltr";
+        : "ltr"
+    );
 
 
-    text(
+    setText(
       ".market-title",
       ui.marketplace
     );
 
 
     const saved =
-      document.getElementById("savedText");
+      document.getElementById(
+        "savedText"
+      );
+
 
     if (saved) {
 
       let count = 0;
 
+
       try {
 
-        count =
+        const data =
           JSON.parse(
             localStorage.getItem(
               "dogue_market_saved"
             ) || "[]"
-          ).length;
+          );
+
+        count =
+          Array.isArray(data)
+            ? data.length
+            : 0;
 
       } catch (e) {}
+
 
       saved.textContent =
         count
           ? ui.saved + " " + count
           : ui.saved;
-
     }
 
 
     translateCurrentLocation(ui);
 
 
-    text(
+    setText(
       ".location-done",
       "✓ " + ui.done
     );
 
-    text(
+
+    setText(
       ".location-label",
       ui.changeLocation
     );
 
-    placeholder(
+
+    setPlaceholder(
       "#locationInput",
       ui.locationPlaceholder
     );
 
-    text(
+
+    setText(
       ".near-btn",
       "◎ " + ui.nearMe
     );
 
-    text(
+
+    setText(
       ".radius-row span:first-child",
       ui.distanceFromMe
     );
 
 
-    placeholder(
+    setPlaceholder(
       "#mainSearch",
-      old.searchPlaceholder ||
-      UI.en.searchPlaceholder
+      page.searchPlaceholder ||
+      UI.en.locationPlaceholder
     );
 
 
-    text(
+    setText(
       ".market-post-main span:nth-child(2)",
       ui.postListing
     );
 
 
-    text(
+    setText(
       '.quick[data-filter="all"]',
-      old.all || ui.all
+      page.all || ui.all
     );
 
-    text(
+
+    setText(
       '.quick[data-filter="sale"]',
       ui.forSale
     );
 
-    text(
+
+    setText(
       '.quick[data-filter="free"]',
       ui.freeRehome
     );
 
-    text(
+
+    setText(
       '.quick[data-filter="service"]',
       ui.services
     );
@@ -3009,10 +4715,12 @@ window.PetsDogueTranslations.marketplace = {
         ".section-title"
       );
 
+
     if (titles[0]) {
       titles[0].textContent =
         ui.browse;
     }
+
 
     if (titles[1]) {
       titles[1].textContent =
@@ -3020,7 +4728,7 @@ window.PetsDogueTranslations.marketplace = {
     }
 
 
-    text(
+    setText(
       ".view-all",
       ui.viewAll
     );
@@ -3040,18 +4748,23 @@ window.PetsDogueTranslations.marketplace = {
       .forEach(card => {
 
         const onclick =
-          card.getAttribute("onclick") ||
-          "";
+          card.getAttribute(
+            "onclick"
+          ) || "";
+
 
         const match =
           onclick.match(
             /setBrowse\('([^']+)'\)/
           );
 
+
         if (!match) return;
+
 
         const title =
           card.querySelector("h3");
+
 
         if (
           title &&
@@ -3060,33 +4773,40 @@ window.PetsDogueTranslations.marketplace = {
 
           title.textContent =
             browseNames[match[1]];
-
         }
 
       });
 
 
-    text(
+    setText(
       ".listings-head .eyebrow",
       ui.discover
     );
 
 
     translateListingCount(ui);
-    translateListingCards(ui);
 
 
-    text(
+    translateListingCards(
+      ui,
+      page,
+      document
+    );
+
+
+    setText(
       ".publish-strip small",
       ui.sellRehomeServices
     );
 
-    text(
+
+    setText(
       ".publish-strip h2",
       ui.share
     );
 
-    text(
+
+    setText(
       ".publish-main-btn",
       "＋ " +
       ui.postListing +
@@ -3099,36 +4819,78 @@ window.PetsDogueTranslations.marketplace = {
         ".floating-post span:nth-child(2)"
       );
 
+
     if (floating) {
 
       floating.textContent =
-        ui.postListing
-          .replace(
-            /^(POST|PUBLISH|PUBLICAR|PUBLIER|PUBBLICA|PUBLICER|PUBLICERA|PUBLISER|DODAJ|DODAĆ|ДОБАВИТЬ|ДОДАТИ|ДОБАВИ|PŘIDAT|PRIDAŤ|HIRDETÉS|PUBLICĂ|ΔΗΜΟΣΙΕΥΣΗ|İLAN|نشر|विज्ञापन)\s*/i,
-            ""
-          )
-          .trim() ||
-        ui.postListing;
-
+        ui.listingShort;
     }
 
 
-    text(
+    setText(
       ".contact-box small",
-      old.contactLabel ||
+      page.contactLabel ||
+      page.contact ||
       "Contact"
     );
 
 
     translatePublishForm(
       ui,
-      old
+      page
     );
 
-    translateSearchMessages(ui);
 
+    translateSearchMessages(
+      ui,
+      document
+    );
+
+
+    translateDynamicText(
+      document.body
+    );
+
+
+    if (
+      MARKET[lang] &&
+      MARKET[lang].meta
+    ) {
+
+      const meta =
+        MARKET[lang].meta;
+
+
+      if (meta.title) {
+        document.title =
+          meta.title;
+      }
+
+
+      const description =
+        document.querySelector(
+          'meta[name="description"]'
+        );
+
+
+      if (
+        description &&
+        meta.description
+      ) {
+
+        description.setAttribute(
+          "content",
+          meta.description
+        );
+      }
+
+    }
   }
 
+
+  /* =========================================================
+     ALERT TRANSLATION
+  ========================================================= */
 
   const originalAlert =
     window.alert.bind(window);
@@ -3137,10 +4899,13 @@ window.PetsDogueTranslations.marketplace = {
   window.alert =
     function (message) {
 
-      const { ui } =
-        getPack();
+      const {
+        ui
+      } = getPack();
+
 
       const map = {
+
         "Geolocation is not available on this device.":
           ui.geoUnavailable,
 
@@ -3151,15 +4916,24 @@ window.PetsDogueTranslations.marketplace = {
           ui.required,
 
         "Listing preview created. £1 checkout connection is the next backend step.":
-          ui.previewCreated
+          ui.previewCreated,
+
+        "The £1 checkout will be connected to the payment backend.":
+          ui.checkout
+
       };
 
-      originalAlert(
-        map[message] || message
-      );
 
+      originalAlert(
+        map[message] ||
+        message
+      );
     };
 
+
+  /* =========================================================
+     SCHEDULING
+  ========================================================= */
 
   let scheduled = false;
 
@@ -3168,7 +4942,9 @@ window.PetsDogueTranslations.marketplace = {
 
     if (scheduled) return;
 
+
     scheduled = true;
+
 
     requestAnimationFrame(() => {
 
@@ -3177,9 +4953,12 @@ window.PetsDogueTranslations.marketplace = {
       translateStatic();
 
     });
-
   }
 
+
+  /* =========================================================
+     START
+  ========================================================= */
 
   if (
     document.readyState ===
@@ -3188,19 +4967,37 @@ window.PetsDogueTranslations.marketplace = {
 
     document.addEventListener(
       "DOMContentLoaded",
-      scheduleTranslate
+      scheduleTranslate,
+      { once: true }
     );
 
   } else {
 
     scheduleTranslate();
-
   }
 
 
+  /* =========================================================
+     LANGUAGE CHANGE
+  ========================================================= */
+
   const htmlObserver =
     new MutationObserver(
-      scheduleTranslate
+      mutations => {
+
+        const changed =
+          mutations.some(
+            mutation =>
+              mutation.type ===
+              "attributes"
+          );
+
+
+        if (changed) {
+          scheduleTranslate();
+        }
+
+      }
     );
 
 
@@ -3216,53 +5013,121 @@ window.PetsDogueTranslations.marketplace = {
   );
 
 
-  const bodyObserverStart =
-    () => {
+  /* =========================================================
+     DYNAMIC MODALS / LISTINGS
+     Translate only newly inserted content.
+     No endless body re-render loop.
+  ========================================================= */
 
-      if (!document.body) return;
+  function startBodyObserver() {
 
-      const observer =
-        new MutationObserver(
-          mutations => {
+    if (!document.body) return;
 
-            const relevant =
-              mutations.some(
-                mutation =>
-                  mutation.type ===
-                    "childList"
-              );
 
-            if (relevant) {
-              scheduleTranslate();
-            }
+    const observer =
+      new MutationObserver(
+        mutations => {
 
-          }
-        );
+          mutations.forEach(
+            mutation => {
 
-      observer.observe(
-        document.body,
-        {
-          childList: true,
-          subtree: true
+              mutation.addedNodes
+                .forEach(node => {
+
+                  if (
+                    node.nodeType !==
+                    Node.ELEMENT_NODE
+                  ) {
+                    return;
+                  }
+
+
+                  requestAnimationFrame(
+                    () => {
+
+                      translateDynamicText(
+                        node
+                      );
+
+                      const {
+                        ui,
+                        page
+                      } = getPack();
+
+
+                      translateListingCards(
+                        ui,
+                        page,
+                        node
+                      );
+
+                      translateSearchMessages(
+                        ui,
+                        node
+                      );
+
+                    }
+                  );
+
+                });
+
+            });
+
         }
       );
 
-    };
+
+    observer.observe(
+      document.body,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+  }
 
 
   if (document.body) {
 
-    bodyObserverStart();
+    startBodyObserver();
 
   } else {
 
     document.addEventListener(
       "DOMContentLoaded",
-      bodyObserverStart,
+      startBodyObserver,
       { once: true }
     );
-
   }
+
+
+  /* =========================================================
+     SAME-TAB LANGUAGE SWITCH
+  ========================================================= */
+
+  document.addEventListener(
+    "change",
+    event => {
+
+      if (
+        event.target &&
+        event.target.id ===
+        "languageSelect"
+      ) {
+
+        setTimeout(
+          scheduleTranslate,
+          0
+        );
+
+        setTimeout(
+          scheduleTranslate,
+          80
+        );
+      }
+
+    }
+  );
 
 
   window.addEventListener(
@@ -3271,29 +5136,9 @@ window.PetsDogueTranslations.marketplace = {
   );
 
 
-  let previousLanguage =
-    getLanguage();
-
-
-  setInterval(() => {
-
-    const currentLanguage =
-      getLanguage();
-
-    if (
-      currentLanguage !==
-      previousLanguage
-    ) {
-
-      previousLanguage =
-        currentLanguage;
-
-      scheduleTranslate();
-
-    }
-
-  }, 500);
-
+  /* =========================================================
+     PUBLIC HOOK
+  ========================================================= */
 
   window.PetsDogueMarketplaceApplyLanguage =
     scheduleTranslate;
