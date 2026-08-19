@@ -1,56 +1,1386 @@
-.account-note{display:grid;grid-template-columns:1.05fr .95fr;margin-top:8px;background:#111;color:#fff;min-height:390px}.account-note-image{position:relative}.account-note-image img{position:absolute;inset:0;height:100%;object-fit:cover}.account-note-copy{padding:42px;display:flex;flex-direction:column;justify-content:center}.account-note-copy>span{font-size:10px;font-weight:bold;letter-spacing:2.3px;color:var(--gold-light);margin-bottom:10px}.account-note h2{font:normal 42px/.98 Georgia,serif;color:var(--gold-light);margin-bottom:12px}.account-note p{font-size:13px;line-height:1.65;color:#ccc}.account-note .btn{margin-top:16px}
-footer{background:#050505;color:#fff;text-align:center;padding:60px 20px;border-top:1px solid #292929}.footer-brand{font:normal 51px Georgia,serif;letter-spacing:3px}.footer-subtitle{color:#aaa;margin:10px 0 28px}.footer-links{display:flex;justify-content:center;gap:17px;flex-wrap:wrap;margin-bottom:28px}.footer-links a{font-size:13px;color:#ccc}.admin-small{font-size:10px;letter-spacing:2px;color:#666;text-transform:uppercase}
-html[dir="rtl"] .side-menu{left:auto;right:-100%;border-right:0;border-left:2px solid #111}html[dir="rtl"] .side-menu.open{right:0;left:auto}html[dir="rtl"] .menu-item p{padding-right:0;padding-left:9px}html[dir="rtl"] input,html[dir="rtl"] textarea,html[dir="rtl"] select{text-align:right}
-@media(max-width:1000px){.account-layout{grid-template-columns:1fr}.profile-card{position:static}.account-note{grid-template-columns:1fr}.account-note-image{min-height:410px}.quick-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:760px){.header-main{height:87px;grid-template-columns:55px 1fr 55px;padding:0 8px}.brand-big{font-size:39px;letter-spacing:2px}.brand-small{font-size:11px}.category-nav{padding:14px 15px;gap:22px}.category-nav a{font-size:12px}.hero{height:410px}.hero h1{font-size:46px}.hero p{font-size:15px}.hero-content{bottom:26px}main{padding:10px 10px 45px}.section-head{align-items:flex-start;flex-direction:column;margin-top:30px}.section-head h2{font-size:39px}.profile-card,.panel{padding:22px 16px}.profile-name{font-size:33px}.pet-list{grid-template-columns:1fr}.quick-grid{grid-template-columns:1fr 1fr}.account-note-copy{padding:31px 20px}.account-note h2{font-size:37px}.account-note-image{min-height:350px}.footer-brand{font-size:39px}}
-@media(max-width:430px){.brand-big{font-size:34px}.hero{height:390px}.quick-grid{grid-template-columns:1fr 1fr}}
-@media(prefers-reduced-motion:reduce){.metallic{animation:none}.quick-link{transition:none}}
-</style></head><body>
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div><aside class="side-menu" id="sideMenu"><div class="side-menu-header"><h2 data-i18n="common.menu.contents">Contents</h2><button type="button" onclick="closeMenu()" aria-label="Close menu">×</button></div><div class="menu-account"><a href="account.html" data-i18n="common.menu.signIn">Sign In</a><a href="club.html" data-i18n="common.menu.joinClub">Join Club</a></div><div class="menu-language"><span class="notranslate" translate="no">LANGUAGE</span><select id="languageSelect"><option value="en">EN — English</option><option value="uk">UA — Українська</option><option value="ru">RU — Русский</option><option value="fr">FR — Français</option><option value="de">DE — Deutsch</option><option value="es">ES — Español</option><option value="it">IT — Italiano</option><option value="pt">PT — Português</option><option value="nl">NL — Nederlands</option><option value="pl">PL — Polski</option><option value="cs">CZ — Čeština</option><option value="sk">SK — Slovenčina</option><option value="hu">HU — Magyar</option><option value="ro">RO — Română</option><option value="bg">BG — Български</option><option value="el">GR — Ελληνικά</option><option value="sv">SE — Svenska</option><option value="da">DK — Dansk</option><option value="no">NO — Norsk</option><option value="fi">FI — Suomi</option><option value="tr">TR — Türkçe</option><option value="ar">AR — العربية</option><option value="hi">HI — हिन्दी</option></select></div><div class="menu-list">
-<a class="menu-item" href="index.html"><img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Home"><div><h3 data-i18n="common.menu.home">Home</h3><p data-i18n="common.menu.homeDescription">Return to the PETS & DOGUE homepage.</p></div></a>
-<a class="menu-item" href="members-gallery.html"><img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80" alt="Cover Stars"><div><h3 data-i18n="common.menu.coverStar">Cover Star</h3><p data-i18n="common.menu.coverStarDescription">Enter your pet into the next cover competition.</p></div></a>
-<a class="menu-item" href="contests.html"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80" alt="Contests"><div><h3 data-i18n="common.menu.contests">Contests</h3><p data-i18n="common.menu.contestsDescription">Enter competitions and vote for standout pets.</p></div></a>
-<a class="menu-item" href="local-community.html"><img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80" alt="Community"><div><h3 data-i18n="common.menu.community">Community</h3><p data-i18n="common.menu.communityDescription">Local stories, recommendations and pet people.</p></div></a>
-<a class="menu-item" href="pet-marketplace.html"><img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80" alt="Marketplace"><div><h3 data-i18n="common.menu.marketplace">Marketplace</h3><p data-i18n="common.menu.marketplaceDescription">Shop, sell and discover pet-focused listings.</p></div></a>
-<a class="menu-item" href="club.html"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Club"><div><h3 data-i18n="common.menu.club">Club</h3><p data-i18n="common.menu.clubDescription">Membership, benefits and premium access.</p></div></a>
-<a class="menu-item" href="partners.html"><img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80" alt="Partners"><div><h3 data-i18n="common.menu.partners">Partners</h3><p data-i18n="common.menu.partnersDescription">Discover selected brands and member offers.</p></div></a>
-</div><div class="menu-bottom"><div><a href="contact.html" data-i18n="common.footer.contact">Contact</a><a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a><a href="terms.html" data-i18n="common.footer.terms">Terms</a><a href="admin.html" data-i18n="common.footer.admin">Admin</a></div></div></aside>  .account-note{display:grid;grid-template-columns:1.05fr .95fr;margin-top:8px;background:#111;color:#fff;min-height:390px}.account-note-image{position:relative}.account-note-image img{position:absolute;inset:0;height:100%;object-fit:cover}.account-note-copy{padding:42px;display:flex;flex-direction:column;justify-content:center}.account-note-copy>span{font-size:10px;font-weight:bold;letter-spacing:2.3px;color:var(--gold-light);margin-bottom:10px}.account-note h2{font:normal 42px/.98 Georgia,serif;color:var(--gold-light);margin-bottom:12px}.account-note p{font-size:13px;line-height:1.65;color:#ccc}.account-note .btn{margin-top:16px}
-footer{background:#050505;color:#fff;text-align:center;padding:60px 20px;border-top:1px solid #292929}.footer-brand{font:normal 51px Georgia,serif;letter-spacing:3px}.footer-subtitle{color:#aaa;margin:10px 0 28px}.footer-links{display:flex;justify-content:center;gap:17px;flex-wrap:wrap;margin-bottom:28px}.footer-links a{font-size:13px;color:#ccc}.admin-small{font-size:10px;letter-spacing:2px;color:#666;text-transform:uppercase}
-html[dir="rtl"] .side-menu{left:auto;right:-100%;border-right:0;border-left:2px solid #111}html[dir="rtl"] .side-menu.open{right:0;left:auto}html[dir="rtl"] .menu-item p{padding-right:0;padding-left:9px}html[dir="rtl"] input,html[dir="rtl"] textarea,html[dir="rtl"] select{text-align:right}
-@media(max-width:1000px){.account-layout{grid-template-columns:1fr}.profile-card{position:static}.account-note{grid-template-columns:1fr}.account-note-image{min-height:410px}.quick-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:760px){.header-main{height:87px;grid-template-columns:55px 1fr 55px;padding:0 8px}.brand-big{font-size:39px;letter-spacing:2px}.brand-small{font-size:11px}.category-nav{padding:14px 15px;gap:22px}.category-nav a{font-size:12px}.hero{height:410px}.hero h1{font-size:46px}.hero p{font-size:15px}.hero-content{bottom:26px}main{padding:10px 10px 45px}.section-head{align-items:flex-start;flex-direction:column;margin-top:30px}.section-head h2{font-size:39px}.profile-card,.panel{padding:22px 16px}.profile-name{font-size:33px}.pet-list{grid-template-columns:1fr}.quick-grid{grid-template-columns:1fr 1fr}.account-note-copy{padding:31px 20px}.account-note h2{font-size:37px}.account-note-image{min-height:350px}.footer-brand{font-size:39px}}
-@media(max-width:430px){.brand-big{font-size:34px}.hero{height:390px}.quick-grid{grid-template-columns:1fr 1fr}}
-@media(prefers-reduced-motion:reduce){.metallic{animation:none}.quick-link{transition:none}}
-</style></head><body>
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div><aside class="side-menu" id="sideMenu"><div class="side-menu-header"><h2 data-i18n="common.menu.contents">Contents</h2><button type="button" onclick="closeMenu()" aria-label="Close menu">×</button></div><div class="menu-account"><a href="account.html" data-i18n="common.menu.signIn">Sign In</a><a href="club.html" data-i18n="common.menu.joinClub">Join Club</a></div><div class="menu-language"><span class="notranslate" translate="no">LANGUAGE</span><select id="languageSelect"><option value="en">EN — English</option><option value="uk">UA — Українська</option><option value="ru">RU — Русский</option><option value="fr">FR — Français</option><option value="de">DE — Deutsch</option><option value="es">ES — Español</option><option value="it">IT — Italiano</option><option value="pt">PT — Português</option><option value="nl">NL — Nederlands</option><option value="pl">PL — Polski</option><option value="cs">CZ — Čeština</option><option value="sk">SK — Slovenčina</option><option value="hu">HU — Magyar</option><option value="ro">RO — Română</option><option value="bg">BG — Български</option><option value="el">GR — Ελληνικά</option><option value="sv">SE — Svenska</option><option value="da">DK — Dansk</option><option value="no">NO — Norsk</option><option value="fi">FI — Suomi</option><option value="tr">TR — Türkçe</option><option value="ar">AR — العربية</option><option value="hi">HI — हिन्दी</option></select></div><div class="menu-list">
-<a class="menu-item" href="index.html"><img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Home"><div><h3 data-i18n="common.menu.home">Home</h3><p data-i18n="common.menu.homeDescription">Return to the PETS & DOGUE homepage.</p></div></a>
-<a class="menu-item" href="members-gallery.html"><img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80" alt="Cover Stars"><div><h3 data-i18n="common.menu.coverStar">Cover Star</h3><p data-i18n="common.menu.coverStarDescription">Enter your pet into the next cover competition.</p></div></a>
-<a class="menu-item" href="contests.html"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80" alt="Contests"><div><h3 data-i18n="common.menu.contests">Contests</h3><p data-i18n="common.menu.contestsDescription">Enter competitions and vote for standout pets.</p></div></a>
-<a class="menu-item" href="local-community.html"><img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80" alt="Community"><div><h3 data-i18n="common.menu.community">Community</h3><p data-i18n="common.menu.communityDescription">Local stories, recommendations and pet people.</p></div></a>
-<a class="menu-item" href="pet-marketplace.html"><img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80" alt="Marketplace"><div><h3 data-i18n="common.menu.marketplace">Marketplace</h3><p data-i18n="common.menu.marketplaceDescription">Shop, sell and discover pet-focused listings.</p></div></a>
-<a class="menu-item" href="club.html"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Club"><div><h3 data-i18n="common.menu.club">Club</h3><p data-i18n="common.menu.clubDescription">Membership, benefits and premium access.</p></div></a>
-<a class="menu-item" href="partners.html"><img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80" alt="Partners"><div><h3 data-i18n="common.menu.partners">Partners</h3><p data-i18n="common.menu.partnersDescription">Discover selected brands and member offers.</p></div></a>
-</div><div class="menu-bottom"><div><a href="contact.html" data-i18n="common.footer.contact">Contact</a><a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a><a href="terms.html" data-i18n="common.footer.terms">Terms</a><a href="admin.html" data-i18n="common.footer.admin">Admin</a></div></div></aside>  <header class="site-header"><div class="header-main"><button class="icon-button" type="button" onclick="openMenu()" aria-label="Open menu"><span class="menu-lines"><span></span><span></span><span></span></span></button><a class="brand notranslate" href="index.html" translate="no"><div class="brand-small metallic">PETS &amp;</div><div class="brand-big metallic">DOGUE</div></a><a class="icon-button home-icon" href="index.html" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21H3Z"></path><path d="M9 21v-7h6v7"></path></svg></a></div><nav class="category-nav"><a data-i18n="common.navigation.magazine" href="issue-01.html">MAGAZINE</a><a data-i18n="common.navigation.articles" href="articles.html">ARTICLES</a><a data-i18n="common.navigation.photos" href="photos.html">PHOTOS</a><a data-i18n="common.navigation.coverStars" href="members-gallery.html">COVER STARS</a><a data-i18n="common.navigation.fashion" href="pet-fashion.html">FASHION</a><a data-i18n="common.navigation.wellness" href="wellness.html">WELLNESS</a><a data-i18n="common.navigation.travel" href="pet-travel.html">TRAVEL</a><a data-i18n="common.navigation.places" href="pet-friendly-places.html">PLACES</a><a data-i18n="common.navigation.rescue" href="pets-in-need.html">RESCUE</a><a data-i18n="common.navigation.contests" href="contests.html">CONTESTS</a><a data-i18n="common.navigation.community" href="local-community.html">COMMUNITY</a><a data-i18n="common.navigation.marketplace" href="pet-marketplace.html">MARKETPLACE</a><a data-i18n="common.navigation.partners" href="partners.html">PARTNERS</a></nav></header>
-<section class="hero"><img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1800&q=85" alt="Account profile" data-i18n-attr="alt:account.profile.avatarAlt"><div class="hero-content"><span class="hero-kicker notranslate" translate="no">PETS &amp; DOGUE · ACCOUNT</span><h1 data-i18n="account.hero.title">My Account</h1><p data-i18n="account.hero.description">Manage your PETS & DOGUE profile, pets, marketplace listings, gallery entries and Club membership.</p></div></section>
-<main><div class="section-head"><h2 data-i18n="account.hero.title">My Account</h2><span class="notranslate" translate="no">PETS &amp; DOGUE MEMBER</span></div><div class="account-layout">
-<aside class="profile-card"><img id="avatar" class="avatar" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80" alt="Account profile picture" data-i18n-attr="alt:account.profile.avatarAlt"><h2 class="profile-name" id="profileName" data-i18n="account.profile.guest">Guest Member</h2><div class="center"><span class="member-badge" id="memberStatus">Free Reader</span></div><div class="upload-wrap"><input id="avatarUpload" type="file" accept="image/*" aria-label="Upload profile picture" data-i18n-attr="aria-label:account.profile.uploadAvatar" onchange="changeAvatar(event)"></div><div class="stats"><div class="stat"><strong id="likesValue">328</strong><span data-i18n="account.stats.hearts">Hearts</span></div><div class="stat"><strong id="postsValue">4</strong><span data-i18n="account.stats.posts">Posts</span></div><div class="stat"><strong id="petsValue">1</strong><span data-i18n="account.stats.pets">Pets</span></div><div class="stat"><strong id="listingValue">2</strong><span data-i18n="account.stats.listings">Listings</span></div></div><div class="member-card"><h2 class="notranslate" translate="no">PETS &amp; DOGUE CLUB</h2><p><strong data-i18n="account.memberCard.name">Name:</strong> <span id="cardName">Guest Member</span></p><p><strong data-i18n="account.memberCard.status">Status:</strong> <span id="cardStatus">Free Reader</span></p><p><strong data-i18n="account.memberCard.memberId">Member ID:</strong> <span class="notranslate" translate="no">PD-000001</span></p><p data-i18n="account.memberCard.features">Gallery • Marketplace • Community • Club</p><div class="qr" role="img" aria-label="Member QR code" data-i18n-attr="aria-label:account.memberCard.qrAlt"></div></div></aside>
-<section class="dashboard"><div class="panel"><h2 data-i18n="account.account.title">Account</h2><input id="userName" type="text" placeholder="Your Name" data-i18n-placeholder="account.account.namePlaceholder"><input id="petName" type="text" placeholder="Pet Name" data-i18n-placeholder="account.account.petPlaceholder"><select id="membership"><option value="Free Reader" data-i18n="account.membership.free">Free Reader</option><option value="Club Monthly" data-i18n="account.membership.monthly">Club Monthly</option><option value="Club Yearly" data-i18n="account.membership.yearly">Club Yearly</option></select><button type="button" class="action green" onclick="saveProfile()" data-i18n="account.account.save">Save Profile</button><button type="button" class="action gold" onclick="loadProfile()" data-i18n="account.account.load">Load Profile</button><button type="button" class="action black" onclick="logout()" data-i18n="account.account.logout">Log Out</button></div>
-<div class="panel"><h2 data-i18n="account.pets.title">My Pets</h2><input id="newPetName" type="text" placeholder="Pet Name" data-i18n-placeholder="account.pets.namePlaceholder"><input id="newBreed" type="text" placeholder="Breed" data-i18n-placeholder="account.pets.breedPlaceholder"><textarea id="newStory" placeholder="Short Story" data-i18n-placeholder="account.pets.storyPlaceholder"></textarea><button type="button" class="action green" onclick="addPet()" data-i18n="account.pets.add">Add Pet</button><div class="pet-list" id="petList"><div class="pet-card"><h3 class="notranslate" translate="no">Miso</h3><p data-i18n="account.pets.misoBreed">Pomeranian</p><p data-i18n="account.pets.misoStory">First PETS & DOGUE cover star.</p></div></div></div>
-<div class="panel"><h2 data-i18n="account.quick.title">Quick Access</h2><div class="quick-grid"><a href="members-gallery.html" class="quick-link"><span class="quick-icon">👑</span><span data-i18n="account.quick.members">Members Gallery</span></a><a href="pet-marketplace.html" class="quick-link"><span class="quick-icon">🛍</span><span data-i18n="account.quick.marketplace">Marketplace</span></a><a href="club.html" class="quick-link"><span class="quick-icon">💚</span><span data-i18n="account.quick.club">Club</span></a><a href="local-community.html" class="quick-link"><span class="quick-icon">📍</span><span data-i18n="account.quick.community">Community</span></a><a href="contests.html" class="quick-link"><span class="quick-icon">🏆</span><span data-i18n="account.quick.contests">Contests</span></a><a href="wellness.html" class="quick-link"><span class="quick-icon">🩺</span><span data-i18n="account.quick.wellness">Wellness</span></a></div></div></section>
-</div>  <section class="account-note"><div class="account-note-image"><img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1300&q=85" alt="PETS & DOGUE member account"></div><div class="account-note-copy"><span class="notranslate" translate="no">PETS &amp; DOGUE CLUB</span><h2 data-i18n="account.quick.club">Club</h2><p data-i18n="account.hero.description">Manage your PETS & DOGUE profile, pets, marketplace listings, gallery entries and Club membership.</p><a href="club.html" class="btn green" data-i18n="account.footer.club">Club</a></div></section></main>
-<footer><div class="footer-brand metallic notranslate" translate="no">PETS &amp; DOGUE</div><p class="footer-subtitle" data-i18n="common.footer.subtitle">The International Luxury Animal Magazine</p><div class="footer-links"><a href="index.html" data-i18n="common.footer.home">Home</a><a href="issue-01.html" data-i18n="common.footer.latestIssue">Latest Issue</a><a href="articles.html" data-i18n="common.footer.articles">Articles</a><a href="photos.html" data-i18n="common.footer.photos">Photos</a><a href="members-gallery.html" data-i18n="common.footer.coverStars">Cover Stars</a><a href="pet-marketplace.html" data-i18n="account.footer.marketplace">Marketplace</a><a href="local-community.html" data-i18n="common.navigation.community">Community</a><a href="club.html" data-i18n="common.footer.club">Club</a><a href="partners.html" data-i18n="common.footer.partners">Partners</a><a href="contact.html" data-i18n="common.footer.contact">Contact</a><a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a><a href="terms.html" data-i18n="common.footer.terms">Terms</a></div><a href="admin.html" class="admin-small" data-i18n="common.footer.admin">Admin</a></footer>
-<script src="/i18n/common.js?v=2"></script><script src="/i18n/account.js?v=2"></script><script src="/i18n/engine.js?v=3"></script><script>
-const PROFILE_KEY="pd_profile",LANGUAGE_KEY="pets_dogue_language",$=id=>document.getElementById(id),sideMenu=$("sideMenu"),menuOverlay=$("menuOverlay"),languageSelect=$("languageSelect"),profileName=$("profileName"),cardName=$("cardName"),memberStatus=$("memberStatus"),cardStatus=$("cardStatus"),userName=$("userName"),petName=$("petName"),membership=$("membership"),avatar=$("avatar"),petList=$("petList"),petsValue=$("petsValue"),newPetName=$("newPetName"),newBreed=$("newBreed"),newStory=$("newStory");
-function openMenu(){sideMenu.classList.add("open");menuOverlay.classList.add("show");document.body.classList.add("menu-open")}function closeMenu(){sideMenu.classList.remove("open");menuOverlay.classList.remove("show");document.body.classList.remove("menu-open")}
-function getAccountLanguage(){if(window.PetsDogueLanguage&&typeof window.PetsDogueLanguage.getCurrentLanguage==="function"){const v=window.PetsDogueLanguage.getCurrentLanguage();if(typeof v==="string")return v;if(v&&v.code)return v.code}return localStorage.getItem(LANGUAGE_KEY)||languageSelect?.value||"en"}function getAccountBundle(){const root=window.PetsDogueTranslations?.account;if(!root)return null;return root[getAccountLanguage()]||root.en}function accountT(path,fallback=""){const bundle=getAccountBundle();if(!bundle)return fallback;let value=bundle;path.split(".").forEach(key=>{value=value&&Object.prototype.hasOwnProperty.call(value,key)?value[key]:undefined});return typeof value==="string"?value:fallback}
-function translateMembership(status){const map={"Free Reader":"membership.free","Club Monthly":"membership.monthly","Club Yearly":"membership.yearly"};return accountT(map[status]||"",status||accountT("membership.free","Free Reader"))}
-function getSavedProfile(){const saved=localStorage.getItem(PROFILE_KEY);if(!saved)return null;try{return JSON.parse(saved)}catch(error){console.error("Unable to read account profile.",error);return null}}
-function refreshProfileDisplay(){const data=getSavedProfile(),guest=accountT("profile.guest","Guest Member"),status=data?.status||"Free Reader",name=data?.name||guest;profileName.textContent=name;cardName.textContent=name;memberStatus.textContent=translateMembership(status);cardStatus.textContent=translateMembership(status)}
-function saveProfile(){const data={name:userName.value.trim(),pet:petName.value.trim(),status:membership.value,avatar:avatar.src};localStorage.setItem(PROFILE_KEY,JSON.stringify(data));refreshProfileDisplay();alert(accountT("messages.saved","Profile saved."))}
-function loadProfile(){const data=getSavedProfile();if(!data){refreshProfileDisplay();return}userName.value=data.name||"";petName.value=data.pet||"";membership.value=data.status||"Free Reader";if(data.avatar)avatar.src=data.avatar;refreshProfileDisplay()}
-function logout(){localStorage.removeItem(PROFILE_KEY);userName.value="";petName.value="";membership.value="Free Reader";refreshProfileDisplay()}
-function changeAvatar(event){const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{avatar.src=e.target.result};reader.readAsDataURL(file)}
-function addPet(){const name=newPetName.value.trim(),breed=newBreed.value.trim(),story=newStory.value.trim();if(!name)return;const card=document.createElement("div"),title=document.createElement("h3"),breedText=document.createElement("p"),storyText=document.createElement("p");card.className="pet-card";title.textContent=name;breedText.textContent=breed||accountT("pets.unknownBreed","Breed not specified");storyText.textContent=story||accountT("pets.noStory","No story added yet.");card.append(title,breedText,storyText);petList.appendChild(card);petsValue.textContent=Number(petsValue.textContent)+1;newPetName.value="";newBreed.value="";newStory.value=""}
-function refreshDynamicLanguage(){refreshProfileDisplay()}
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});window.addEventListener("languagechange",()=>setTimeout(refreshDynamicLanguage,0));window.addEventListener("petsdogue:languagechange",()=>setTimeout(refreshDynamicLanguage,0));document.addEventListener("DOMContentLoaded",()=>{loadProfile();languageSelect?.addEventListener("change",()=>setTimeout(refreshDynamicLanguage,50))});
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sign in to PETS & DOGUE">
+<title>Sign In — PETS & DOGUE</title>
+
+<style>
+:root{
+--black:#070707;
+--white:#fff;
+--cream:#f6f2e9;
+--cream2:#ece7dc;
+--green:#65e51f;
+--gold:#d8ad45;
+--gold-light:#f1d783;
+--border:#d8d3c8;
+--gold-metal:linear-gradient(110deg,#6f4b0c 0%,#b9841e 18%,#f4db83 38%,#fff3bb 48%,#d4a536 59%,#8b5e12 78%,#e8c568 100%);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--cream);color:#111;overflow-x:hidden}
+body.locked{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+
+.metallic{
+background:var(--gold-metal);
+background-size:220% 100%;
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+animation:goldShift 10s ease-in-out infinite;
+}
+@keyframes goldShift{
+0%,72%{background-position:100% 50%}
+100%{background-position:-80% 50%}
+}
+
+/* HEADER */
+.site-header{
+background:#070707;
+color:#fff;
+position:sticky;
+top:0;
+z-index:1800;
+border-bottom:1px solid #2c2c2c;
+}
+
+.header-main{
+height:92px;
+display:grid;
+grid-template-columns:66px 1fr 66px;
+align-items:center;
+max-width:1500px;
+margin:auto;
+padding:0 12px;
+}
+
+.icon-button{
+width:48px;
+height:48px;
+border:1px solid transparent;
+border-radius:50%;
+background:transparent;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.icon-button:hover{
+border-color:#555;
+background:#151515;
+}
+
+.menu-lines{
+width:28px;
+display:grid;
+gap:6px;
+}
+
+.menu-lines span{
+height:2px;
+background:#fff;
+border-radius:999px;
+}
+
+.brand{
+text-align:center;
+line-height:.84;
+}
+
+.brand-small{
+font:700 12px Georgia,serif;
+letter-spacing:1.8px;
+}
+
+.brand-big{
+font:normal 46px Georgia,serif;
+letter-spacing:3px;
+}
+
+.home-icon svg{
+width:27px;
+height:27px;
+fill:none;
+stroke:#fff;
+stroke-width:1.6;
+}
+
+.category-nav{
+background:#070707;
+border-top:1px solid #252525;
+display:flex;
+justify-content:center;
+gap:26px;
+overflow-x:auto;
+scrollbar-width:none;
+padding:14px 18px;
+color:#fff;
+}
+
+.category-nav::-webkit-scrollbar{display:none}
+
+.category-nav a{
+white-space:nowrap;
+font-size:12px;
+font-weight:bold;
+letter-spacing:.7px;
+}
+
+/* SIDE MENU */
+.menu-overlay{
+position:fixed;
+inset:0;
+z-index:2500;
+background:rgba(0,0,0,.76);
+backdrop-filter:blur(3px);
+display:none;
+}
+
+.menu-overlay.show{display:block}
+
+.side-menu{
+position:fixed;
+left:-100%;
+top:0;
+width:min(455px,94%);
+height:100vh;
+z-index:2600;
+background:#fff;
+overflow-y:auto;
+transition:.35s ease;
+border-right:1px solid #222;
+}
+
+.side-menu.open{left:0}
+
+.side-menu-header{
+position:sticky;
+top:0;
+z-index:3;
+background:#0b0b0b;
+color:#fff;
+padding:24px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.side-menu-header h2{
+font:normal 34px Georgia,serif;
+}
+
+.close-menu{
+width:43px;
+height:43px;
+border:1px solid #555;
+border-radius:50%;
+background:#111;
+color:#fff;
+font-size:23px;
+}
+
+.menu-account{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:18px;
+border-bottom:1px solid #ddd;
+}
+
+.menu-account a{
+padding:13px;
+text-align:center;
+border:1.5px solid #111;
+font-weight:bold;
+border-radius:999px;
+}
+
+.menu-account a:last-child{
+background:var(--green);
+border-color:var(--green);
+}
+
+.menu-language{
+padding:0 18px 18px;
+border-bottom:1px solid #ddd;
+}
+
+.menu-language span{
+display:block;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1.5px;
+color:#777;
+margin-bottom:8px;
+}
+
+.menu-language select{
+width:100%;
+height:44px;
+border:1.5px solid #111;
+background:#faf8f3;
+border-radius:999px;
+padding:0 15px;
+font-weight:bold;
+}
+
+.menu-list{
+padding:18px;
+display:grid;
+gap:11px;
+}
+
+.menu-item{
+display:grid;
+grid-template-columns:78px 1fr;
+gap:14px;
+align-items:center;
+border:1.5px solid #171717;
+border-radius:18px;
+overflow:hidden;
+background:#faf8f3;
+}
+
+.menu-item img{
+width:78px;
+height:78px;
+object-fit:cover;
+}
+
+.menu-item h3{
+font:normal 20px Georgia,serif;
+margin-bottom:3px;
+}
+
+.menu-item p{
+font-size:11px;
+line-height:1.4;
+color:#666;
+padding-right:8px;
+}
+
+.menu-bottom{
+padding:18px;
+background:#f4f0e7;
+border-top:1px solid #ddd;
+}
+
+.menu-bottom div{
+display:flex;
+flex-wrap:wrap;
+gap:12px 18px;
+}
+
+.menu-bottom a{
+font-size:12px;
+font-weight:bold;
+color:#666;
+}
+
+/* SIGN IN */
+.auth-shell{
+min-height:calc(100vh - 140px);
+display:grid;
+grid-template-columns:minmax(0,1.05fr) minmax(390px,.95fr);
+background:#fff;
+}
+
+.auth-visual{
+position:relative;
+min-height:720px;
+overflow:hidden;
+background:#111;
+}
+
+.auth-visual img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.auth-visual:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.05) 65%);
+}
+
+.auth-visual-copy{
+position:absolute;
+z-index:2;
+left:42px;
+right:42px;
+bottom:42px;
+color:#fff;
+}
+
+.auth-visual-copy small{
+display:block;
+font-size:11px;
+font-weight:bold;
+letter-spacing:2px;
+color:var(--gold-light);
+margin-bottom:13px;
+}
+
+.auth-visual-copy h1{
+font:normal 56px/.96 Georgia,serif;
+max-width:650px;
+}
+
+.auth-visual-copy p{
+font:normal 18px/1.55 Georgia,serif;
+color:#eee;
+max-width:600px;
+margin-top:16px;
+}
+
+.auth-panel{
+display:flex;
+align-items:center;
+justify-content:center;
+padding:55px 26px;
+background:var(--cream);
+}
+
+.auth-card{
+width:min(460px,100%);
+}
+
+.auth-logo{
+text-align:center;
+margin-bottom:34px;
+}
+
+.auth-logo-small{
+font:700 12px Georgia,serif;
+letter-spacing:2px;
+}
+
+.auth-logo-big{
+font:normal 54px Georgia,serif;
+letter-spacing:4px;
+line-height:.9;
+}
+
+.auth-title{
+font:normal 39px/1.03 Georgia,serif;
+text-align:center;
+}
+
+.auth-copy{
+text-align:center;
+font-size:14px;
+line-height:1.6;
+color:#666;
+margin:13px auto 27px;
+max-width:390px;
+}
+
+.auth-label{
+display:block;
+font-size:11px;
+font-weight:bold;
+letter-spacing:1px;
+margin-bottom:8px;
+text-transform:uppercase;
+}
+
+.auth-input{
+width:100%;
+height:54px;
+border:1.5px solid #111;
+background:#fff;
+padding:0 16px;
+outline:none;
+border-radius:0;
+}
+
+.auth-input:focus{
+border-color:var(--gold);
+box-shadow:0 0 0 3px rgba(216,173,69,.12);
+}
+
+.continue-btn{
+width:100%;
+height:54px;
+border:0;
+background:#070707;
+color:#fff;
+font-weight:bold;
+margin-top:11px;
+transition:.2s;
+}
+
+.continue-btn:hover{background:#2a2a2a}
+.continue-btn:active{transform:scale(.99)}
+
+.divider{
+display:flex;
+align-items:center;
+gap:13px;
+margin:24px 0;
+font-size:11px;
+font-weight:bold;
+color:#777;
+letter-spacing:1px;
+}
+
+.divider:before,
+.divider:after{
+content:"";
+height:1px;
+background:#ccc;
+flex:1;
+}
+
+.social-stack{
+display:grid;
+gap:10px;
+}
+
+.social-btn{
+height:52px;
+width:100%;
+border:1.5px solid #111;
+background:#fff;
+display:grid;
+grid-template-columns:44px 1fr 44px;
+align-items:center;
+font-weight:bold;
+}
+
+.social-btn:hover{
+background:#f0ede6;
+}
+
+.social-icon{
+font-size:20px;
+text-align:center;
+}
+
+.auth-benefits{
+border-top:1px solid #ccc;
+margin-top:28px;
+padding-top:24px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.auth-benefit{
+background:#fff;
+padding:13px;
+font-size:12px;
+line-height:1.4;
+font-weight:bold;
+border:1px solid #ddd;
+}
+
+.auth-legal{
+font-size:10px;
+line-height:1.55;
+color:#777;
+text-align:center;
+margin-top:22px;
+}
+
+.auth-legal a{
+text-decoration:underline;
+}
+
+/* DASHBOARD */
+.dashboard-shell{
+display:none;
+max-width:1280px;
+margin:auto;
+padding:42px 18px 70px;
+}
+
+.dashboard-shell.show{display:block}
+
+.dashboard-top{
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:20px;
+border-bottom:3px solid #111;
+padding-bottom:16px;
+margin-bottom:24px;
+}
+
+.dashboard-top h1{
+font:normal 48px Georgia,serif;
+}
+
+.dashboard-top p{
+font-size:12px;
+font-weight:bold;
+letter-spacing:1px;
+color:#777;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:320px 1fr;
+gap:18px;
+}
+
+.profile-card,
+.dashboard-card{
+background:#fff;
+border:1px solid #d3cec4;
+padding:24px;
+}
+
+.profile-card{
+text-align:center;
+}
+
+.profile-avatar{
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+margin:0 auto 18px;
+border:4px solid #fff;
+box-shadow:0 0 0 1px #222;
+}
+
+.profile-card h2{
+font:normal 31px Georgia,serif;
+}
+
+.member-status{
+display:inline-block;
+margin-top:9px;
+padding:7px 12px;
+background:#111;
+color:#fff;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+}
+
+.profile-actions{
+display:grid;
+gap:9px;
+margin-top:22px;
+}
+
+.profile-actions a,
+.profile-actions button{
+border:1.5px solid #111;
+background:#fff;
+padding:12px;
+font-weight:bold;
+}
+
+.profile-actions a:first-child{
+background:var(--green);
+border-color:var(--green);
+}
+
+.dashboard-content{
+display:grid;
+gap:18px;
+}
+
+.dashboard-card h2{
+font:normal 30px Georgia,serif;
+margin-bottom:17px;
+}
+
+.quick-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+}
+
+.quick-link{
+min-height:112px;
+border:1px solid #ddd;
+background:#faf8f3;
+padding:16px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+font-weight:bold;
+}
+
+.quick-link span:first-child{
+font-size:29px;
+}
+
+.account-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+padding:13px 0;
+border-bottom:1px solid #ddd;
+font-size:13px;
+}
+
+.logout-btn{
+border:0;
+background:#111;
+color:#fff;
+font-weight:bold;
+padding:13px 18px;
+margin-top:18px;
+}
+
+/* FOOTER */
+footer{
+background:#050505;
+color:#fff;
+text-align:center;
+padding:55px 20px;
+}
+
+.footer-brand{
+font:normal 48px Georgia,serif;
+letter-spacing:3px;
+}
+
+.footer-subtitle{
+color:#aaa;
+margin:9px 0 27px;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:14px 18px;
+}
+
+.footer-links a{
+font-size:12px;
+color:#ccc;
+}
+
+html[dir="rtl"] .side-menu{
+left:auto;
+right:-100%;
+border-right:0;
+border-left:1px solid #222;
+}
+
+html[dir="rtl"] .side-menu.open{
+right:0;
+left:auto;
+}
+
+html[dir="rtl"] .auth-input{
+text-align:right;
+}
+
+@media(max-width:900px){
+.auth-shell{grid-template-columns:1fr}
+.auth-visual{min-height:390px}
+.dashboard-grid{grid-template-columns:1fr}
+.profile-card{text-align:center}
+}
+
+@media(max-width:620px){
+.header-main{
+height:87px;
+grid-template-columns:55px 1fr 55px;
+padding:0 7px;
+}
+.brand-big{font-size:36px}
+.brand-small{font-size:10px}
+.category-nav{
+justify-content:flex-start;
+gap:22px;
+padding:13px 14px;
+}
+.auth-visual{min-height:330px}
+.auth-visual-copy{
+left:20px;
+right:20px;
+bottom:24px;
+}
+.auth-visual-copy h1{font-size:39px}
+.auth-visual-copy p{font-size:15px}
+.auth-panel{padding:38px 16px}
+.auth-logo-big{font-size:44px}
+.auth-title{font-size:34px}
+.auth-benefits{grid-template-columns:1fr 1fr}
+.dashboard-shell{padding:30px 10px 50px}
+.dashboard-top{
+align-items:flex-start;
+flex-direction:column;
+}
+.dashboard-top h1{font-size:39px}
+.quick-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:390px){
+.auth-benefits{grid-template-columns:1fr}
+.quick-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+.metallic{animation:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<aside class="side-menu" id="sideMenu">
+
+<div class="side-menu-header">
+<h2 data-i18n="common.menu.contents">Contents</h2>
+<button class="close-menu" type="button" onclick="closeMenu()" aria-label="Close menu">×</button>
+</div>
+
+<div class="menu-account">
+<a href="account.html" data-i18n="common.menu.signIn">Sign In</a>
+<a href="club.html" data-i18n="common.menu.joinClub">Join Club</a>
+</div>
+
+<div class="menu-language">
+<span>LANGUAGE</span>
+
+<select id="languageSelect">
+<option value="en">EN — English</option>
+<option value="uk">UA — Українська</option>
+<option value="ru">RU — Русский</option>
+<option value="fr">FR — Français</option>
+<option value="de">DE — Deutsch</option>
+<option value="es">ES — Español</option>
+<option value="it">IT — Italiano</option>
+<option value="pt">PT — Português</option>
+<option value="nl">NL — Nederlands</option>
+<option value="pl">PL — Polski</option>
+<option value="cs">CZ — Čeština</option>
+<option value="sk">SK — Slovenčina</option>
+<option value="hu">HU — Magyar</option>
+<option value="ro">RO — Română</option>
+<option value="bg">BG — Български</option>
+<option value="el">GR — Ελληνικά</option>
+<option value="sv">SE — Svenska</option>
+<option value="da">DK — Dansk</option>
+<option value="no">NO — Norsk</option>
+<option value="fi">FI — Suomi</option>
+<option value="tr">TR — Türkçe</option>
+<option value="ar">AR — العربية</option>
+<option value="hi">HI — हिन्दी</option>
+</select>
+</div> <div class="menu-list">
+
+<a class="menu-item" href="index.html">
+<img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Home">
+<div>
+<h3 data-i18n="common.menu.home">Home</h3>
+<p data-i18n="common.menu.homeDescription">Return to the PETS & DOGUE homepage.</p>
+</div>
+</a>
+
+<a class="menu-item" href="members-gallery.html">
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80" alt="Cover Stars">
+<div>
+<h3 data-i18n="common.menu.coverStar">Cover Star</h3>
+<p data-i18n="common.menu.coverStarDescription">Enter your pet into the next cover competition.</p>
+</div>
+</a>
+
+<a class="menu-item" href="contests.html">
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80" alt="Contests">
+<div>
+<h3 data-i18n="common.menu.contests">Contests</h3>
+<p data-i18n="common.menu.contestsDescription">Enter competitions and vote for standout pets.</p>
+</div>
+</a>
+
+<a class="menu-item" href="local-community.html">
+<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80" alt="Community">
+<div>
+<h3 data-i18n="common.menu.community">Community</h3>
+<p data-i18n="common.menu.communityDescription">Local stories, recommendations and pet people.</p>
+</div>
+</a>
+
+<a class="menu-item" href="pet-marketplace.html">
+<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80" alt="Marketplace">
+<div>
+<h3 data-i18n="common.menu.marketplace">Marketplace</h3>
+<p data-i18n="common.menu.marketplaceDescription">Shop, sell and discover pet-focused listings.</p>
+</div>
+</a>
+
+<a class="menu-item" href="club.html">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Club">
+<div>
+<h3 data-i18n="common.menu.club">Club</h3>
+<p data-i18n="common.menu.clubDescription">Membership, benefits and premium access.</p>
+</div>
+</a>
+
+</div>
+
+<div class="menu-bottom">
+<div>
+<a href="contact.html" data-i18n="common.footer.contact">Contact</a>
+<a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a>
+<a href="terms.html" data-i18n="common.footer.terms">Terms</a>
+</div>
+</div>
+
+</aside>
+
+<header class="site-header">
+
+<div class="header-main">
+
+<button class="icon-button" type="button" onclick="openMenu()" aria-label="Open menu">
+<span class="menu-lines">
+<span></span>
+<span></span>
+<span></span>
+</span>
+</button>
+
+<a class="brand notranslate" href="index.html" translate="no">
+<div class="brand-small metallic">PETS &amp;</div>
+<div class="brand-big metallic">DOGUE</div>
+</a>
+
+<a class="icon-button home-icon" href="index.html" aria-label="Home">
+<svg viewBox="0 0 24 24">
+<path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
+<path d="M9 21v-7h6v7"></path>
+</svg>
+</a>
+
+</div>
+
+<nav class="category-nav">
+<a data-i18n="common.navigation.magazine" href="issue-01.html">MAGAZINE</a>
+<a data-i18n="common.navigation.articles" href="articles.html">ARTICLES</a>
+<a data-i18n="common.navigation.photos" href="photos.html">PHOTOS</a>
+<a data-i18n="common.navigation.coverStars" href="members-gallery.html">COVER STARS</a>
+<a data-i18n="common.navigation.fashion" href="pet-fashion.html">FASHION</a>
+<a data-i18n="common.navigation.wellness" href="wellness.html">WELLNESS</a>
+<a data-i18n="common.navigation.travel" href="pet-travel.html">TRAVEL</a>
+<a data-i18n="common.navigation.places" href="pet-friendly-places.html">PLACES</a>
+<a data-i18n="common.navigation.rescue" href="pets-in-need.html">RESCUE</a>
+<a data-i18n="common.navigation.contests" href="contests.html">CONTESTS</a>
+<a data-i18n="common.navigation.community" href="local-community.html">COMMUNITY</a>
+<a data-i18n="common.navigation.marketplace" href="pet-marketplace.html">MARKETPLACE</a>
+</nav>
+
+</header>
+
+<section class="auth-shell" id="authShell">
+
+<div class="auth-visual">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1700&q=88"
+alt="PETS & DOGUE"
+>
+
+<div class="auth-visual-copy">
+<small class="notranslate" translate="no">PETS &amp; DOGUE · MEMBERS</small>
+<h1 id="visualTitle">Welcome to the world of PETS &amp; DOGUE.</h1>
+<p id="visualText">Save favourites, enter competitions, publish marketplace listings and keep your pet’s world in one place.</p>
+</div>
+
+</div>
+
+<div class="auth-panel">
+
+<div class="auth-card">
+
+<div class="auth-logo notranslate" translate="no">
+<div class="auth-logo-small metallic">PETS &amp;</div>
+<div class="auth-logo-big metallic">DOGUE</div>
+</div>
+
+<h1 class="auth-title" id="authTitle">Sign in or create an account</h1>
+
+<p class="auth-copy" id="authCopy">
+Enter your email to continue. New members can create an account in seconds.
+</p>
+
+<form id="emailForm">
+
+<label class="auth-label" for="emailInput" id="emailLabel">Email address</label>
+
+<input
+class="auth-input"
+id="emailInput"
+type="email"
+autocomplete="email"
+placeholder="you@example.com"
+required
+>
+
+<button class="continue-btn" id="continueButton" type="submit">
+CONTINUE WITH EMAIL
+</button>
+
+</form>
+
+<div class="divider" id="orText">OR</div>
+
+<div class="social-stack">
+
+<button class="social-btn" type="button" onclick="socialSignIn('Google')">
+<span class="social-icon">G</span>
+<span id="googleText">Continue with Google</span>
+<span>→</span>
+</button>
+
+<button class="social-btn" type="button" onclick="socialSignIn('Apple')">
+<span class="social-icon">●</span>
+<span id="appleText">Continue with Apple</span>
+<span>→</span>
+</button>
+
+<button class="social-btn" type="button" onclick="socialSignIn('Facebook')">
+<span class="social-icon">f</span>
+<span id="facebookText">Continue with Facebook</span>
+<span>→</span>
+</button>
+
+</div>
+
+<div class="auth-benefits">
+
+<div class="auth-benefit" id="benefit1">♡ Save favourites</div>
+<div class="auth-benefit" id="benefit2">👑 Enter competitions</div>
+<div class="auth-benefit" id="benefit3">🛍 Publish listings</div>
+<div class="auth-benefit" id="benefit4">✦ Access Club benefits</div>
+
+</div>
+
+<p class="auth-legal" id="legalText">
+By continuing, you agree to the PETS & DOGUE
+<a href="terms.html">Terms</a> and
+<a href="privacy.html">Privacy Policy</a>.
+</p>
+
+</div>
+</div>
+
+</section>
+
+<main class="dashboard-shell" id="dashboardShell">
+
+<div class="dashboard-top">
+<div>
+<h1 id="dashboardTitle">My Account</h1>
+<p class="notranslate" translate="no">PETS &amp; DOGUE MEMBER</p>
+</div>
+</div>
+
+<div class="dashboard-grid">
+
+<aside class="profile-card">
+
+<img
+class="profile-avatar"
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+alt="Profile"
+>
+
+<h2 id="profileName">Member</h2>
+
+<span class="member-status" id="memberStatus">FREE MEMBER</span>
+
+<div class="profile-actions">
+<a href="club.html" id="upgradeText">Join PETS & DOGUE Club</a>
+<a href="members-gallery.html" id="coverText">Enter Cover Star</a>
+<a href="pet-marketplace.html" id="marketText">Open Marketplace</a>
+</div>
+
+</aside>
+
+<section class="dashboard-content">
+
+<div class="dashboard-card">
+<h2 id="accountDetailsTitle">Account</h2>
+
+<div class="account-row">
+<span id="emailRowLabel">Email</span>
+<strong id="accountEmail">—</strong>
+</div>
+
+<div class="account-row">
+<span id="membershipRowLabel">Membership</span>
+<strong id="accountMembership">Free Member</strong>
+</div>
+
+<div class="account-row">
+<span id="languageRowLabel">Language</span>
+<strong id="accountLanguage">EN</strong>
+</div>
+
+<button class="logout-btn" id="logoutButton" type="button" onclick="logoutAccount()">
+LOG OUT
+</button>
+</div>
+
+<div class="dashboard-card">
+<h2 id="quickTitle">Quick Access</h2>
+
+<div class="quick-grid">
+
+<a class="quick-link" href="members-gallery.html">
+<span>👑</span>
+<span id="quickCover">Cover Star</span>
+</a>
+
+<a class="quick-link" href="pet-marketplace.html">
+<span>🛍</span>
+<span id="quickMarket">Marketplace</span>
+</a>
+
+<a class="quick-link" href="contests.html">
+<span>🏆</span>
+<span id="quickContests">Contests</span>
+</a>
+
+<a class="quick-link" href="pet-friendly-places.html">
+<span>📍</span>
+<span id="quickPlaces">Pet-Friendly Places</span>
+</a>
+
+<a class="quick-link" href="partners.html">
+<span>🎁</span>
+<span id="quickOffers">Member Offers</span>
+</a>
+
+<a class="quick-link" href="club.html">
+<span>✦</span>
+<span id="quickClub">Club</span>
+</a>
+
+</div>
+</div>
+
+</section>
+</div>
+
+</main> <footer>
+
+<div class="footer-brand metallic notranslate" translate="no">
+PETS &amp; DOGUE
+</div>
+
+<p class="footer-subtitle" data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
+
+<div class="footer-links">
+<a href="index.html" data-i18n="common.footer.home">Home</a>
+<a href="issue-01.html" data-i18n="common.footer.latestIssue">Latest Issue</a>
+<a href="articles.html" data-i18n="common.footer.articles">Articles</a>
+<a href="photos.html" data-i18n="common.footer.photos">Photos</a>
+<a href="members-gallery.html" data-i18n="common.footer.coverStars">Cover Stars</a>
+<a href="pet-marketplace.html">Marketplace</a>
+<a href="club.html" data-i18n="common.footer.club">Club</a>
+<a href="partners.html" data-i18n="common.footer.partners">Partners</a>
+<a href="contact.html" data-i18n="common.footer.contact">Contact</a>
+<a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a>
+<a href="terms.html" data-i18n="common.footer.terms">Terms</a>
+</div>
+
+</footer>
+
+<script>
+const ACCOUNT_SESSION_KEY="pets_dogue_account_session";
+const LANGUAGE_KEY="pets_dogue_language";
+
+const ACCOUNT_TEXT={
+en:{
+visualTitle:"Welcome to the world of PETS & DOGUE.",
+visualText:"Save favourites, enter competitions, publish marketplace listings and keep your pet’s world in one place.",
+title:"Sign in or create an account",
+copy:"Enter your email to continue. New members can create an account in seconds.",
+email:"Email address",
+continue:"CONTINUE WITH EMAIL",
+or:"OR",
+google:"Continue with Google",
+apple:"Continue with Apple",
+facebook:"Continue with Facebook",
+b1:"♡ Save favourites",
+b2:"👑 Enter competitions",
+b3:"🛍 Publish listings",
+b4:"✦ Access Club benefits",
+legal:"By continuing, you agree to the PETS & DOGUE Terms and Privacy Policy.",
+account:"My Account",details:"Account",membership:"Membership",language:"Language",free:"Free Member",
+upgrade:"Join PETS & DOGUE Club",cover:"Enter Cover Star",market:"Open Marketplace",quick:"Quick Access",
+contests:"Contests",places:"Pet-Friendly Places",offers:"Member Offers",club:"Club",logout:"LOG OUT",
+social:"Social sign-in will be connected when secure authentication is enabled."
+},
+uk:{
+visualTitle:"Ласкаво просимо у світ PETS & DOGUE.",
+visualText:"Зберігайте обране, беріть участь у конкурсах, публікуйте оголошення та керуйте світом свого улюбленця в одному місці.",
+title:"Увійти або створити акаунт",copy:"Введіть email, щоб продовжити. Новий акаунт можна створити за кілька секунд.",
+email:"Email адреса",continue:"ПРОДОВЖИТИ З EMAIL",or:"АБО",google:"Продовжити з Google",apple:"Продовжити з Apple",facebook:"Продовжити з Facebook",
+b1:"♡ Зберігати обране",b2:"👑 Брати участь у конкурсах",b3:"🛍 Публікувати оголошення",b4:"✦ Отримувати переваги Club",
+legal:"Продовжуючи, ви погоджуєтесь з Умовами та Політикою конфіденційності PETS & DOGUE.",
+account:"Мій акаунт",details:"Акаунт",membership:"Підписка",language:"Мова",free:"Безкоштовний учасник",
+upgrade:"Вступити до PETS & DOGUE Club",cover:"Стати зіркою обкладинки",market:"Відкрити Marketplace",quick:"Швидкий доступ",
+contests:"Конкурси",places:"Pet-Friendly місця",offers:"Пропозиції для учасників",club:"Club",logout:"ВИЙТИ",
+social:"Вхід через соцмережі буде підключено разом із захищеною авторизацією."
+},
+ru:{
+visualTitle:"Добро пожаловать в мир PETS & DOGUE.",
+visualText:"Сохраняйте избранное, участвуйте в конкурсах, публикуйте объявления и управляйте миром своего питомца в одном месте.",
+title:"Войти или создать аккаунт",copy:"Введите email, чтобы продолжить. Новый аккаунт можно создать за несколько секунд.",
+email:"Email адрес",continue:"ПРОДОЛЖИТЬ С EMAIL",or:"ИЛИ",google:"Продолжить с Google",apple:"Продолжить с Apple",facebook:"Продолжить с Facebook",
+b1:"♡ Сохранять избранное",b2:"👑 Участвовать в конкурсах",b3:"🛍 Публиковать объявления",b4:"✦ Получать преимущества Club",
+legal:"Продолжая, вы соглашаетесь с Условиями и Политикой конфиденциальности PETS & DOGUE.",
+account:"Мой аккаунт",details:"Аккаунт",membership:"Подписка",language:"Язык",free:"Бесплатный участник",
+upgrade:"Вступить в PETS & DOGUE Club",cover:"Стать звездой обложки",market:"Открыть Marketplace",quick:"Быстрый доступ",
+contests:"Конкурсы",places:"Pet-Friendly места",offers:"Предложения для участников",club:"Club",logout:"ВЫЙТИ",
+social:"Вход через соцсети будет подключён вместе с защищённой авторизацией."
+},
+fr:{
+visualTitle:"Bienvenue dans l’univers PETS & DOGUE.",visualText:"Enregistrez vos favoris, participez aux concours et publiez sur Marketplace.",
+title:"Se connecter ou créer un compte",copy:"Saisissez votre e-mail pour continuer.",email:"Adresse e-mail",continue:"CONTINUER AVEC L’E-MAIL",or:"OU",
+google:"Continuer avec Google",apple:"Continuer avec Apple",facebook:"Continuer avec Facebook",b1:"♡ Enregistrer les favoris",b2:"👑 Participer aux concours",b3:"🛍 Publier des annonces",b4:"✦ Avantages Club",
+legal:"En continuant, vous acceptez les Conditions et la Politique de confidentialité de PETS & DOGUE.",account:"Mon compte",details:"Compte",membership:"Abonnement",language:"Langue",free:"Membre gratuit",
+upgrade:"Rejoindre PETS & DOGUE Club",cover:"Participer à Cover Star",market:"Ouvrir Marketplace",quick:"Accès rapide",contests:"Concours",places:"Lieux pet-friendly",offers:"Offres membres",club:"Club",logout:"SE DÉCONNECTER",social:"La connexion sociale sera disponible avec l’authentification sécurisée."
+},
+de:{
+visualTitle:"Willkommen in der Welt von PETS & DOGUE.",visualText:"Favoriten speichern, Wettbewerbe entdecken und Anzeigen im Marketplace veröffentlichen.",
+title:"Anmelden oder Konto erstellen",copy:"E-Mail eingeben, um fortzufahren.",email:"E-Mail-Adresse",continue:"MIT E-MAIL FORTFAHREN",or:"ODER",
+google:"Mit Google fortfahren",apple:"Mit Apple fortfahren",facebook:"Mit Facebook fortfahren",b1:"♡ Favoriten speichern",b2:"👑 An Wettbewerben teilnehmen",b3:"🛍 Anzeigen veröffentlichen",b4:"✦ Club-Vorteile",
+legal:"Mit dem Fortfahren akzeptieren Sie die Bedingungen und Datenschutzrichtlinie von PETS & DOGUE.",account:"Mein Konto",details:"Konto",membership:"Mitgliedschaft",language:"Sprache",free:"Kostenloses Mitglied",
+upgrade:"PETS & DOGUE Club beitreten",cover:"Cover Star teilnehmen",market:"Marketplace öffnen",quick:"Schnellzugriff",contests:"Wettbewerbe",places:"Tierfreundliche Orte",offers:"Mitgliederangebote",club:"Club",logout:"ABMELDEN",social:"Social Login wird mit sicherer Authentifizierung verbunden."
+},
+es:{
+visualTitle:"Bienvenido al mundo de PETS & DOGUE.",visualText:"Guarda favoritos, participa en concursos y publica anuncios en Marketplace.",
+title:"Inicia sesión o crea una cuenta",copy:"Introduce tu correo electrónico para continuar.",email:"Correo electrónico",continue:"CONTINUAR CON EMAIL",or:"O",
+google:"Continuar con Google",apple:"Continuar con Apple",facebook:"Continuar con Facebook",b1:"♡ Guardar favoritos",b2:"👑 Participar en concursos",b3:"🛍 Publicar anuncios",b4:"✦ Beneficios del Club",
+legal:"Al continuar, aceptas los Términos y la Política de privacidad de PETS & DOGUE.",account:"Mi cuenta",details:"Cuenta",membership:"Membresía",language:"Idioma",free:"Miembro gratuito",
+upgrade:"Unirse a PETS & DOGUE Club",cover:"Participar en Cover Star",market:"Abrir Marketplace",quick:"Acceso rápido",contests:"Concursos",places:"Lugares pet-friendly",offers:"Ofertas para miembros",club:"Club",logout:"CERRAR SESIÓN",social:"El acceso social estará disponible con autenticación segura."
+},
+it:{
+visualTitle:"Benvenuto nel mondo PETS & DOGUE.",visualText:"Salva i preferiti, partecipa ai concorsi e pubblica annunci nel Marketplace.",title:"Accedi o crea un account",copy:"Inserisci la tua email per continuare.",email:"Indirizzo email",continue:"CONTINUA CON EMAIL",or:"OPPURE",google:"Continua con Google",apple:"Continua con Apple",facebook:"Continua con Facebook",b1:"♡ Salva preferiti",b2:"👑 Partecipa ai concorsi",b3:"🛍 Pubblica annunci",b4:"✦ Vantaggi Club",legal:"Continuando accetti Termini e Privacy di PETS & DOGUE.",account:"Il mio account",details:"Account",membership:"Abbonamento",language:"Lingua",free:"Membro gratuito",upgrade:"Unisciti al PETS & DOGUE Club",cover:"Partecipa a Cover Star",market:"Apri Marketplace",quick:"Accesso rapido",contests:"Concorsi",places:"Luoghi pet-friendly",offers:"Offerte membri",club:"Club",logout:"ESCI",social:"L'accesso social sarà disponibile con autenticazione sicura."
+},
+pt:{
+visualTitle:"Bem-vindo ao mundo PETS & DOGUE.",visualText:"Guarde favoritos, participe em concursos e publique anúncios no Marketplace.",title:"Entrar ou criar uma conta",copy:"Introduza o seu email para continuar.",email:"Endereço de email",continue:"CONTINUAR COM EMAIL",or:"OU",google:"Continuar com Google",apple:"Continuar com Apple",facebook:"Continuar com Facebook",b1:"♡ Guardar favoritos",b2:"👑 Participar em concursos",b3:"🛍 Publicar anúncios",b4:"✦ Benefícios Club",legal:"Ao continuar, aceita os Termos e a Política de Privacidade da PETS & DOGUE.",account:"A minha conta",details:"Conta",membership:"Adesão",language:"Idioma",free:"Membro gratuito",upgrade:"Aderir ao PETS & DOGUE Club",cover:"Participar no Cover Star",market:"Abrir Marketplace",quick:"Acesso rápido",contests:"Concursos",places:"Locais pet-friendly",offers:"Ofertas para membros",club:"Club",logout:"SAIR",social:"O login social será ligado com autenticação segura."
+},
+nl:{
+visualTitle:"Welkom in de wereld van PETS & DOGUE.",visualText:"Bewaar favorieten, doe mee aan wedstrijden en plaats advertenties.",title:"Inloggen of account maken",copy:"Vul je e-mailadres in om verder te gaan.",email:"E-mailadres",continue:"DOORGAAN MET E-MAIL",or:"OF",google:"Doorgaan met Google",apple:"Doorgaan met Apple",facebook:"Doorgaan met Facebook",b1:"♡ Favorieten bewaren",b2:"👑 Meedoen aan wedstrijden",b3:"🛍 Advertenties plaatsen",b4:"✦ Clubvoordelen",legal:"Door verder te gaan ga je akkoord met de voorwaarden en privacy van PETS & DOGUE.",account:"Mijn account",details:"Account",membership:"Lidmaatschap",language:"Taal",free:"Gratis lid",upgrade:"Word lid van PETS & DOGUE Club",cover:"Doe mee aan Cover Star",market:"Open Marketplace",quick:"Snelle toegang",contests:"Wedstrijden",places:"Huisdiervriendelijke plekken",offers:"Ledenaanbiedingen",club:"Club",logout:"UITLOGGEN",social:"Social login wordt gekoppeld aan beveiligde authenticatie."
+},
+pl:{
+visualTitle:"Witamy w świecie PETS & DOGUE.",visualText:"Zapisuj ulubione, bierz udział w konkursach i publikuj ogłoszenia.",title:"Zaloguj się lub utwórz konto",copy:"Wpisz adres e-mail, aby kontynuować.",email:"Adres e-mail",continue:"KONTYNUUJ Z E-MAILEM",or:"LUB",google:"Kontynuuj z Google",apple:"Kontynuuj z Apple",facebook:"Kontynuuj z Facebook",b1:"♡ Zapisuj ulubione",b2:"👑 Bierz udział w konkursach",b3:"🛍 Publikuj ogłoszenia",b4:"✦ Korzyści Club",legal:"Kontynuując, akceptujesz Regulamin i Politykę prywatności PETS & DOGUE.",account:"Moje konto",details:"Konto",membership:"Członkostwo",language:"Język",free:"Darmowy członek",upgrade:"Dołącz do PETS & DOGUE Club",cover:"Weź udział w Cover Star",market:"Otwórz Marketplace",quick:"Szybki dostęp",contests:"Konkursy",places:"Miejsca pet-friendly",offers:"Oferty członkowskie",club:"Club",logout:"WYLOGUJ",social:"Logowanie społecznościowe będzie dostępne z bezpiecznym uwierzytelnianiem."
+},
+cs:{
+visualTitle:"Vítejte ve světě PETS & DOGUE.",visualText:"Ukládejte oblíbené, soutěžte a zveřejňujte nabídky.",title:"Přihlásit se nebo vytvořit účet",copy:"Zadejte e-mail a pokračujte.",email:"E-mailová adresa",continue:"POKRAČOVAT E-MAILEM",or:"NEBO",google:"Pokračovat přes Google",apple:"Pokračovat přes Apple",facebook:"Pokračovat přes Facebook",b1:"♡ Ukládat oblíbené",b2:"👑 Účastnit se soutěží",b3:"🛍 Publikovat nabídky",b4:"✦ Výhody Club",legal:"Pokračováním souhlasíte s podmínkami a ochranou soukromí PETS & DOGUE.",account:"Můj účet",details:"Účet",membership:"Členství",language:"Jazyk",free:"Bezplatný člen",upgrade:"Připojit se k PETS & DOGUE Club",cover:"Vstoupit do Cover Star",market:"Otevřít Marketplace",quick:"Rychlý přístup",contests:"Soutěže",places:"Pet-friendly místa",offers:"Členské nabídky",club:"Club",logout:"ODHLÁSIT",social:"Sociální přihlášení bude připojeno k bezpečnému ověřování."
+},
+sk:{
+visualTitle:"Vitajte vo svete PETS & DOGUE.",visualText:"Ukladajte obľúbené, súťažte a zverejňujte ponuky.",title:"Prihlásiť sa alebo vytvoriť účet",copy:"Zadajte e-mail a pokračujte.",email:"E-mailová adresa",continue:"POKRAČOVAŤ E-MAILOM",or:"ALEBO",google:"Pokračovať cez Google",apple:"Pokračovať cez Apple",facebook:"Pokračovať cez Facebook",b1:"♡ Ukladať obľúbené",b2:"👑 Súťažiť",b3:"🛍 Publikovať ponuky",b4:"✦ Výhody Club",legal:"Pokračovaním súhlasíte s podmienkami a ochranou súkromia PETS & DOGUE.",account:"Môj účet",details:"Účet",membership:"Členstvo",language:"Jazyk",free:"Bezplatný člen",upgrade:"Pridať sa do PETS & DOGUE Club",cover:"Vstúpiť do Cover Star",market:"Otvoriť Marketplace",quick:"Rýchly prístup",contests:"Súťaže",places:"Pet-friendly miesta",offers:"Členské ponuky",club:"Club",logout:"ODHLÁSIŤ",social:"Sociálne prihlásenie bude dostupné s bezpečným overením."
+},
+hu:{
+visualTitle:"Üdvözlünk a PETS & DOGUE világában.",visualText:"Ments kedvenceket, vegyél részt versenyeken és tegyél közzé hirdetéseket.",title:"Bejelentkezés vagy fiók létrehozása",copy:"Add meg az e-mail címed a folytatáshoz.",email:"E-mail cím",continue:"FOLYTATÁS E-MAILLEL",or:"VAGY",google:"Folytatás Google-lel",apple:"Folytatás Apple-lel",facebook:"Folytatás Facebookkal",b1:"♡ Kedvencek mentése",b2:"👑 Versenyek",b3:"🛍 Hirdetések",b4:"✦ Club előnyök",legal:"A folytatással elfogadod a PETS & DOGUE feltételeit és adatvédelmét.",account:"Fiókom",details:"Fiók",membership:"Tagság",language:"Nyelv",free:"Ingyenes tag",upgrade:"Csatlakozás a PETS & DOGUE Clubhoz",cover:"Cover Star nevezés",market:"Marketplace megnyitása",quick:"Gyors elérés",contests:"Versenyek",places:"Állatbarát helyek",offers:"Tagi ajánlatok",club:"Club",logout:"KIJELENTKEZÉS",social:"A közösségi bejelentkezés biztonságos hitelesítéssel lesz elérhető."
+},
+ro:{
+visualTitle:"Bine ai venit în lumea PETS & DOGUE.",visualText:"Salvează favorite, participă la concursuri și publică anunțuri.",title:"Conectează-te sau creează un cont",copy:"Introdu adresa de email pentru a continua.",email:"Adresă de email",continue:"CONTINUĂ CU EMAIL",or:"SAU",google:"Continuă cu Google",apple:"Continuă cu Apple",facebook:"Continuă cu Facebook",b1:"♡ Salvează favorite",b2:"👑 Participă la concursuri",b3:"🛍 Publică anunțuri",b4:"✦ Beneficii Club",legal:"Continuând, accepți Termenii și Politica de confidențialitate PETS & DOGUE.",account:"Contul meu",details:"Cont",membership:"Abonament",language:"Limbă",free:"Membru gratuit",upgrade:"Intră în PETS & DOGUE Club",cover:"Participă la Cover Star",market:"Deschide Marketplace",quick:"Acces rapid",contests:"Concursuri",places:"Locuri pet-friendly",offers:"Oferte pentru membri",club:"Club",logout:"DECONECTARE",social:"Autentificarea socială va fi conectată prin autentificare securizată."
+},
+bg:{
+visualTitle:"Добре дошли в света на PETS & DOGUE.",visualText:"Запазвайте любими, участвайте в конкурси и публикувайте обяви.",title:"Влезте или създайте профил",copy:"Въведете имейл, за да продължите.",email:"Имейл адрес",continue:"ПРОДЪЛЖИ С ИМЕЙЛ",or:"ИЛИ",google:"Продължи с Google",apple:"Продължи с Apple",facebook:"Продължи с Facebook",b1:"♡ Запазване на любими",b2:"👑 Участие в конкурси",b3:"🛍 Публикуване на обяви",b4:"✦ Предимства на Club",legal:"Продължавайки, приемате условията и политиката за поверителност на PETS & DOGUE.",account:"Моят профил",details:"Профил",membership:"Членство",language:"Език",free:"Безплатен член",upgrade:"Присъедини се към PETS & DOGUE Club",cover:"Участвай в Cover Star",market:"Отвори Marketplace",quick:"Бърз достъп",contests:"Конкурси",places:"Pet-friendly места",offers:"Оферти за членове",club:"Club",logout:"ИЗХОД",social:"Социалният вход ще бъде свързан със защитена автентикация."
+},
+el:{
+visualTitle:"Καλώς ήρθατε στον κόσμο του PETS & DOGUE.",visualText:"Αποθηκεύστε αγαπημένα, πάρτε μέρος σε διαγωνισμούς και δημοσιεύστε αγγελίες.",title:"Σύνδεση ή δημιουργία λογαριασμού",copy:"Εισάγετε email για να συνεχίσετε.",email:"Διεύθυνση email",continue:"ΣΥΝΕΧΕΙΑ ΜΕ EMAIL",or:"Ή",google:"Συνέχεια με Google",apple:"Συνέχεια με Apple",facebook:"Συνέχεια με Facebook",b1:"♡ Αγαπημένα",b2:"👑 Διαγωνισμοί",b3:"🛍 Αγγελίες",b4:"✦ Προνόμια Club",legal:"Συνεχίζοντας αποδέχεστε τους Όρους και την Πολιτική Απορρήτου PETS & DOGUE.",account:"Ο λογαριασμός μου",details:"Λογαριασμός",membership:"Συνδρομή",language:"Γλώσσα",free:"Δωρεάν μέλος",upgrade:"Εγγραφή στο PETS & DOGUE Club",cover:"Συμμετοχή στο Cover Star",market:"Άνοιγμα Marketplace",quick:"Γρήγορη πρόσβαση",contests:"Διαγωνισμοί",places:"Pet-friendly μέρη",offers:"Προσφορές μελών",club:"Club",logout:"ΑΠΟΣΥΝΔΕΣΗ",social:"Η κοινωνική σύνδεση θα ενεργοποιηθεί με ασφαλή ταυτοποίηση."
+},
+sv:{
+visualTitle:"Välkommen till PETS & DOGUE-världen.",visualText:"Spara favoriter, delta i tävlingar och publicera annonser.",title:"Logga in eller skapa konto",copy:"Ange din e-postadress för att fortsätta.",email:"E-postadress",continue:"FORTSÄTT MED E-POST",or:"ELLER",google:"Fortsätt med Google",apple:"Fortsätt med Apple",facebook:"Fortsätt med Facebook",b1:"♡ Spara favoriter",b2:"👑 Delta i tävlingar",b3:"🛍 Publicera annonser",b4:"✦ Club-förmåner",legal:"Genom att fortsätta accepterar du PETS & DOGUE villkor och integritetspolicy.",account:"Mitt konto",details:"Konto",membership:"Medlemskap",language:"Språk",free:"Gratis medlem",upgrade:"Gå med i PETS & DOGUE Club",cover:"Delta i Cover Star",market:"Öppna Marketplace",quick:"Snabbåtkomst",contests:"Tävlingar",places:"Djurvänliga platser",offers:"Medlemserbjudanden",club:"Club",logout:"LOGGA UT",social:"Social inloggning kopplas till säker autentisering."
+},da:{
+visualTitle:"Velkommen til PETS & DOGUE-universet.",visualText:"Gem favoritter, deltag i konkurrencer og opret annoncer.",title:"Log ind eller opret konto",copy:"Indtast din e-mail for at fortsætte.",email:"E-mailadresse",continue:"FORTSÆT MED E-MAIL",or:"ELLER",google:"Fortsæt med Google",apple:"Fortsæt med Apple",facebook:"Fortsæt med Facebook",b1:"♡ Gem favoritter",b2:"👑 Deltag i konkurrencer",b3:"🛍 Opret annoncer",b4:"✦ Club-fordele",legal:"Ved at fortsætte accepterer du PETS & DOGUE vilkår og privatlivspolitik.",account:"Min konto",details:"Konto",membership:"Medlemskab",language:"Sprog",free:"Gratis medlem",upgrade:"Bliv medlem af PETS & DOGUE Club",cover:"Deltag i Cover Star",market:"Åbn Marketplace",quick:"Hurtig adgang",contests:"Konkurrencer",places:"Kæledyrsvenlige steder",offers:"Medlemstilbud",club:"Club",logout:"LOG UD",social:"Social login forbindes med sikker godkendelse."
+},
+no:{
+visualTitle:"Velkommen til PETS & DOGUE-verdenen.",visualText:"Lagre favoritter, delta i konkurranser og publiser annonser.",title:"Logg inn eller opprett konto",copy:"Skriv inn e-postadressen din for å fortsette.",email:"E-postadresse",continue:"FORTSETT MED E-POST",or:"ELLER",google:"Fortsett med Google",apple:"Fortsett med Apple",facebook:"Fortsett med Facebook",b1:"♡ Lagre favoritter",b2:"👑 Delta i konkurranser",b3:"🛍 Publiser annonser",b4:"✦ Club-fordeler",legal:"Ved å fortsette godtar du PETS & DOGUE vilkår og personvern.",account:"Min konto",details:"Konto",membership:"Medlemskap",language:"Språk",free:"Gratis medlem",upgrade:"Bli med i PETS & DOGUE Club",cover:"Delta i Cover Star",market:"Åpne Marketplace",quick:"Hurtigtilgang",contests:"Konkurranser",places:"Dyrevennlige steder",offers:"Medlemstilbud",club:"Club",logout:"LOGG UT",social:"Sosial innlogging kobles til sikker autentisering."
+},
+fi:{
+visualTitle:"Tervetuloa PETS & DOGUE -maailmaan.",visualText:"Tallenna suosikkeja, osallistu kilpailuihin ja julkaise ilmoituksia.",title:"Kirjaudu tai luo tili",copy:"Anna sähköpostiosoitteesi jatkaaksesi.",email:"Sähköpostiosoite",continue:"JATKA SÄHKÖPOSTILLA",or:"TAI",google:"Jatka Googlella",apple:"Jatka Applella",facebook:"Jatka Facebookilla",b1:"♡ Tallenna suosikit",b2:"👑 Osallistu kilpailuihin",b3:"🛍 Julkaise ilmoituksia",b4:"✦ Club-edut",legal:"Jatkamalla hyväksyt PETS & DOGUE ehdot ja tietosuojakäytännön.",account:"Oma tili",details:"Tili",membership:"Jäsenyys",language:"Kieli",free:"Ilmainen jäsen",upgrade:"Liity PETS & DOGUE Clubiin",cover:"Osallistu Cover Stariin",market:"Avaa Marketplace",quick:"Pikavalinnat",contests:"Kilpailut",places:"Lemmikkiystävälliset paikat",offers:"Jäsentarjoukset",club:"Club",logout:"KIRJAUDU ULOS",social:"Sosiaalinen kirjautuminen yhdistetään turvalliseen tunnistautumiseen."
+},
+tr:{
+visualTitle:"PETS & DOGUE dünyasına hoş geldiniz.",visualText:"Favorileri kaydedin, yarışmalara katılın ve Marketplace ilanları yayınlayın.",title:"Giriş yapın veya hesap oluşturun",copy:"Devam etmek için e-posta adresinizi girin.",email:"E-posta adresi",continue:"E-POSTA İLE DEVAM ET",or:"VEYA",google:"Google ile devam et",apple:"Apple ile devam et",facebook:"Facebook ile devam et",b1:"♡ Favorileri kaydet",b2:"👑 Yarışmalara katıl",b3:"🛍 İlan yayınla",b4:"✦ Club avantajları",legal:"Devam ederek PETS & DOGUE Koşullarını ve Gizlilik Politikasını kabul edersiniz.",account:"Hesabım",details:"Hesap",membership:"Üyelik",language:"Dil",free:"Ücretsiz üye",upgrade:"PETS & DOGUE Club'a katıl",cover:"Cover Star'a katıl",market:"Marketplace'i aç",quick:"Hızlı erişim",contests:"Yarışmalar",places:"Evcil hayvan dostu yerler",offers:"Üye teklifleri",club:"Club",logout:"ÇIKIŞ YAP",social:"Sosyal giriş güvenli kimlik doğrulamayla bağlanacaktır."
+},
+ar:{
+visualTitle:"مرحبًا بك في عالم PETS & DOGUE.",visualText:"احفظ المفضلة وشارك في المسابقات وانشر الإعلانات في Marketplace.",title:"تسجيل الدخول أو إنشاء حساب",copy:"أدخل بريدك الإلكتروني للمتابعة.",email:"البريد الإلكتروني",continue:"المتابعة بالبريد الإلكتروني",or:"أو",google:"المتابعة باستخدام Google",apple:"المتابعة باستخدام Apple",facebook:"المتابعة باستخدام Facebook",b1:"♡ حفظ المفضلة",b2:"👑 المشاركة في المسابقات",b3:"🛍 نشر الإعلانات",b4:"✦ مزايا Club",legal:"بالمتابعة فإنك توافق على شروط وسياسة خصوصية PETS & DOGUE.",account:"حسابي",details:"الحساب",membership:"العضوية",language:"اللغة",free:"عضو مجاني",upgrade:"الانضمام إلى PETS & DOGUE Club",cover:"المشاركة في Cover Star",market:"فتح Marketplace",quick:"وصول سريع",contests:"المسابقات",places:"أماكن صديقة للحيوانات",offers:"عروض الأعضاء",club:"Club",logout:"تسجيل الخروج",social:"سيتم ربط تسجيل الدخول الاجتماعي بالمصادقة الآمنة."
+},
+hi:{
+visualTitle:"PETS & DOGUE की दुनिया में आपका स्वागत है।",visualText:"पसंदीदा सहेजें, प्रतियोगिताओं में भाग लें और Marketplace पर लिस्टिंग प्रकाशित करें।",title:"साइन इन करें या खाता बनाएँ",copy:"जारी रखने के लिए अपना ईमेल दर्ज करें।",email:"ईमेल पता",continue:"ईमेल से जारी रखें",or:"या",google:"Google से जारी रखें",apple:"Apple से जारी रखें",facebook:"Facebook से जारी रखें",b1:"♡ पसंदीदा सहेजें",b2:"👑 प्रतियोगिताओं में भाग लें",b3:"🛍 लिस्टिंग प्रकाशित करें",b4:"✦ Club लाभ",legal:"जारी रखकर आप PETS & DOGUE की शर्तों और गोपनीयता नीति से सहमत होते हैं।",account:"मेरा खाता",details:"खाता",membership:"सदस्यता",language:"भाषा",free:"निःशुल्क सदस्य",upgrade:"PETS & DOGUE Club से जुड़ें",cover:"Cover Star में भाग लें",market:"Marketplace खोलें",quick:"त्वरित पहुँच",contests:"प्रतियोगिताएँ",places:"Pet-Friendly स्थान",offers:"सदस्य ऑफ़र",club:"Club",logout:"लॉग आउट",social:"सोशल साइन-इन सुरक्षित प्रमाणीकरण के साथ जोड़ा जाएगा।"
+}
+};
+
+function currentLanguage(){
+return localStorage.getItem(LANGUAGE_KEY)||"en";
+}
+
+function textBundle(){
+return ACCOUNT_TEXT[currentLanguage()]||ACCOUNT_TEXT.en;
+}
+
+function setText(id,value){
+const node=document.getElementById(id);
+if(node)node.textContent=value;
+}
+
+function applyAccountLanguage(){
+const lang=currentLanguage();
+const t=textBundle();
+
+document.documentElement.lang=lang;
+document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+setText("visualTitle",t.visualTitle);
+setText("visualText",t.visualText);
+setText("authTitle",t.title);
+setText("authCopy",t.copy);
+setText("emailLabel",t.email);
+setText("continueButton",t.continue);
+setText("orText",t.or);
+setText("googleText",t.google);
+setText("appleText",t.apple);
+setText("facebookText",t.facebook);
+setText("benefit1",t.b1);
+setText("benefit2",t.b2);
+setText("benefit3",t.b3);
+setText("benefit4",t.b4);
+setText("legalText",t.legal);
+
+setText("dashboardTitle",t.account);
+setText("accountDetailsTitle",t.details);
+setText("membershipRowLabel",t.membership);
+setText("languageRowLabel",t.language);
+setText("upgradeText",t.upgrade);
+setText("coverText",t.cover);
+setText("marketText",t.market);
+setText("quickTitle",t.quick);
+setText("quickCover",t.cover);
+setText("quickMarket","Marketplace");
+setText("quickContests",t.contests);
+setText("quickPlaces",t.places);
+setText("quickOffers",t.offers);
+setText("quickClub",t.club);
+setText("logoutButton",t.logout);
+
+const select=document.getElementById("languageSelect");
+if(select)select.value=lang;
+
+const langDisplay=document.getElementById("accountLanguage");
+if(langDisplay)langDisplay.textContent=lang.toUpperCase();
+}
+
+function openMenu(){
+document.getElementById("sideMenu").classList.add("open");
+document.getElementById("menuOverlay").classList.add("show");
+document.body.classList.add("locked");
+}
+
+function closeMenu(){
+document.getElementById("sideMenu").classList.remove("open");
+document.getElementById("menuOverlay").classList.remove("show");
+document.body.classList.remove("locked");
+}
+
+function readSession(){
+try{
+const value=JSON.parse(localStorage.getItem(ACCOUNT_SESSION_KEY)||"null");
+return value&&value.email?value:null;
+}catch(e){
+return null;
+}
+}
+
+function showAccountState(){
+const session=readSession();
+const auth=document.getElementById("authShell");
+const dashboard=document.getElementById("dashboardShell");
+
+if(session){
+auth.style.display="none";
+dashboard.classList.add("show");
+
+document.getElementById("accountEmail").textContent=session.email;
+document.getElementById("profileName").textContent=session.name||session.email.split("@")[0]||"Member";
+document.getElementById("accountMembership").textContent=textBundle().free;
+document.getElementById("memberStatus").textContent=textBundle().free.toUpperCase();
+}else{
+auth.style.display="grid";
+dashboard.classList.remove("show");
+}
+}
+
+document.getElementById("emailForm").addEventListener("submit",function(event){
+event.preventDefault();
+
+const input=document.getElementById("emailInput");
+const email=input.value.trim();
+
+if(!email||!email.includes("@")){
+input.focus();
+return;
+}
+
+const session={
+email:email,
+name:email.split("@")[0],
+createdAt:new Date().toISOString()
+};
+
+localStorage.setItem(ACCOUNT_SESSION_KEY,JSON.stringify(session));
+showAccountState();
+window.scrollTo({top:0,behavior:"smooth"});
+});
+
+function socialSignIn(provider){
+alert(textBundle().social);
+}
+
+function logoutAccount(){
+localStorage.removeItem(ACCOUNT_SESSION_KEY);
+document.getElementById("emailInput").value="";
+showAccountState();
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.getElementById("languageSelect").addEventListener("change",function(){
+localStorage.setItem(LANGUAGE_KEY,this.value);
+applyAccountLanguage();
+
+window.dispatchEvent(new Event("petsdogue:languagechange"));
+setTimeout(()=>window.location.reload(),50);
+});
+
+document.addEventListener("keydown",function(event){
+if(event.key==="Escape")closeMenu();
+});
+
+document.addEventListener("DOMContentLoaded",function(){
+applyAccountLanguage();
+showAccountState();
+});
+</script>
+
+<script src="/i18n/common.js?v=2"></script>
+<script src="/i18n/engine.js?v=3"></script>
+
+</body>
+</html>
