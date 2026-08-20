@@ -3,27 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Join PETS & DOGUE Club — first month free, then £1 per month, or £10 per year.">
+<meta name="description" content="Join PETS & DOGUE Club — first month free, then £1 per month, or £10 for one year.">
 <title>PETS & DOGUE Club</title>
 
 <style>
 :root{
 --black:#070707;
 --black2:#111;
---cream:#f4efe5;
+--cream:#f5f0e6;
+--cream2:#ebe4d7;
 --white:#fff;
 --green:#65e51f;
---border:#d8d3c8;
+--green-dark:#14572e;
+--line:#cfc8bb;
+--grey:#6b6964;
 --gold-dark:#8e6415;
+--gold:#c99a2e;
 --gold-rich:#d8ad45;
 --gold-light:#f1d783;
 --gold-metal:linear-gradient(110deg,#6f4b0c 0%,#b9841e 18%,#f4db83 38%,#fff3bb 48%,#d4a536 59%,#8b5e12 78%,#e8c568 100%);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+
 html{scroll-behavior:smooth}
-body{background:var(--cream);color:#111;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
-body.menu-open{overflow:hidden}
+
+body{
+background:var(--cream);
+color:#111;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
+}
+
+body.menu-open,
+body.modal-open{
+overflow:hidden;
+}
+
 a{text-decoration:none;color:inherit}
 button,input,select{font:inherit}
 button{cursor:pointer}
@@ -37,12 +53,14 @@ background-clip:text;
 color:transparent;
 animation:shine 10s ease-in-out infinite;
 }
+
 @keyframes shine{
 0%,72%{background-position:100% 50%}
 100%{background-position:-80% 50%}
 }
 
 /* HEADER */
+
 .site-header{
 background:#070707;
 color:#fff;
@@ -87,9 +105,20 @@ background:#fff;
 border-radius:999px;
 }
 
-.brand{text-align:center;line-height:.88}
-.brand-small{font:14px Georgia,serif;letter-spacing:1.5px}
-.brand-big{font:normal 58px Georgia,serif;letter-spacing:4px}
+.brand{
+text-align:center;
+line-height:.88;
+}
+
+.brand-small{
+font:14px Georgia,serif;
+letter-spacing:1.5px;
+}
+
+.brand-big{
+font:normal 58px Georgia,serif;
+letter-spacing:4px;
+}
 
 .home-icon svg{
 width:30px;
@@ -120,13 +149,13 @@ padding-bottom:7px;
 }
 
 /* MENU */
+
 .menu-overlay{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.74);
 display:none;
 z-index:2500;
-backdrop-filter:blur(3px);
 }
 
 .menu-overlay.show{display:block}
@@ -135,13 +164,13 @@ backdrop-filter:blur(3px);
 position:fixed;
 top:0;
 left:-100%;
-width:min(455px,94%);
+width:min(430px,94%);
 height:100vh;
 background:#fff;
 z-index:2600;
 overflow-y:auto;
 transition:.35s;
-border-right:1px solid #111;
+border-right:2px solid #111;
 }
 
 .side-menu.open{left:0}
@@ -165,9 +194,9 @@ font:normal 32px Georgia,serif;
 .side-menu-header button{
 width:43px;
 height:43px;
-border:1px solid #555;
-background:#111;
-color:#fff;
+border:0;
+background:#fff;
+color:#111;
 border-radius:50%;
 font-size:24px;
 }
@@ -182,7 +211,7 @@ padding:18px 18px 12px;
 .menu-account a{
 padding:12px;
 text-align:center;
-border:1.5px solid #111;
+border:2px solid #111;
 border-radius:999px;
 font-weight:bold;
 }
@@ -208,18 +237,17 @@ margin:5px 0 8px;
 
 .menu-language select{
 width:100%;
-height:46px;
-border:1.5px solid #111;
+height:48px;
+border:2px solid #111;
 border-radius:999px;
 background:#faf8f3;
 padding:0 15px;
-font-weight:bold;
 }
 
 .menu-list{
 padding:18px;
 display:grid;
-gap:11px;
+gap:12px;
 }
 
 .menu-item{
@@ -227,9 +255,9 @@ display:grid;
 grid-template-columns:82px 1fr;
 align-items:center;
 gap:14px;
-border:1.5px solid #111;
+border:2px solid #111;
 background:#faf8f3;
-border-radius:18px;
+border-radius:21px;
 overflow:hidden;
 }
 
@@ -269,501 +297,867 @@ font-weight:bold;
 color:#666;
 }
 
-/* HERO */
-.hero{
-min-height:520px;
-position:relative;
-overflow:hidden;
-background:#111;
+/* CLUB MAIN */
+
+.club-main{
+max-width:860px;
+margin:auto;
+padding:38px 22px 110px;
 }
 
-.hero>img{
-position:absolute;
-inset:0;
-height:100%;
-object-fit:cover;
-object-position:center 55%;
-}
-
-.hero:after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.96),rgba(0,0,0,.08) 72%);
-}
-
-.hero-content{
-position:absolute;
-z-index:2;
-left:50%;
-bottom:45px;
-transform:translateX(-50%);
-width:min(1020px,90%);
+.club-heading{
 text-align:center;
-color:#fff;
+margin:7px auto 28px;
+max-width:650px;
 }
 
-.hero-kicker{
+.club-heading span{
 display:block;
-color:var(--gold-light);
-font-size:10px;
-font-weight:bold;
-letter-spacing:2.8px;
-margin-bottom:12px;
-}
-
-.hero h1{
-font:normal 68px/.95 Georgia,serif;
-margin-bottom:15px;
-}
-
-.hero p{
-font:18px/1.6 Georgia,serif;
-color:#eee;
-max-width:850px;
-margin:auto;
-}
-
-.hero-price{
-display:inline-block;
-margin-top:20px;
-padding:9px 14px;
-border:1px solid rgba(255,255,255,.45);
-background:rgba(0,0,0,.45);
-font-size:12px;
-font-weight:bold;
-letter-spacing:.7px;
-}
-
-/* MAIN */
-main{
-max-width:1350px;
-margin:auto;
-padding:22px 18px 70px;
-}
-
-.subscription-intro{
-text-align:center;
-max-width:820px;
-margin:45px auto 28px;
-}
-
-.subscription-intro span{
-font-size:10px;
-font-weight:bold;
-letter-spacing:2.2px;
-color:var(--gold-dark);
-}
-
-.subscription-intro h2{
-font:normal 49px/.98 Georgia,serif;
-margin:9px 0 13px;
-}
-
-.subscription-intro p{
-font-size:14px;
-line-height:1.7;
-color:#666;
-}
-
-/* PRICING */
-.pricing{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-max-width:1000px;
-margin:auto;
-}
-
-.plan{
-background:#fff;
-border:1.5px solid #111;
-padding:30px;
-position:relative;
-overflow:hidden;
-}
-
-.plan:before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:4px;
-background:var(--gold-metal);
-}
-
-.plan.featured{
-background:#111;
-color:#fff;
-}
-
-.plan.featured:before{
-background:var(--green);
-}
-
-.plan-badge{
-display:inline-block;
-padding:7px 11px;
-border-radius:999px;
-background:var(--gold-metal);
 font-size:9px;
 font-weight:bold;
-letter-spacing:.9px;
-margin-bottom:14px;
-color:#111;
-}
-
-.plan.featured .plan-badge{
-background:var(--green);
-}
-
-.plan h3{
-font:normal 36px Georgia,serif;
-margin-bottom:8px;
-}
-
-.price-main{
-font:normal 58px Georgia,serif;
-line-height:1;
-margin:13px 0 4px;
-}
-
-.plan.featured .price-main{
-color:var(--gold-light);
-}
-
-.price-note{
-font-size:13px;
-font-weight:bold;
-margin-bottom:18px;
-}
-
-.plan-copy{
-font-size:13px;
-line-height:1.6;
-color:#666;
-margin-bottom:20px;
-}
-
-.plan.featured .plan-copy{
-color:#ccc;
-}
-
-.plan ul{
-list-style:none;
-margin-bottom:24px;
-}
-
-.plan li{
-padding:9px 0;
-border-bottom:1px solid #ddd;
-font-size:12px;
-line-height:1.45;
-}
-
-.plan.featured li{
-border-color:#333;
-color:#ddd;
-}
-
-.plan li:before{
-content:"✓";
-font-weight:bold;
+letter-spacing:2.4px;
 color:var(--gold-dark);
-margin-right:8px;
+margin-bottom:10px;
 }
 
-.plan.featured li:before{
-color:var(--green);
+.club-heading h1{
+font:normal 49px/.97 Georgia,serif;
+margin-bottom:10px;
 }
 
-.plan-button{
-width:100%;
-border:0;
-padding:15px 18px;
-font-weight:bold;
-background:#111;
-color:#fff;
-}
-
-.plan.featured .plan-button{
-background:var(--green);
-color:#111;
-}
-
-/* CHECKOUT */
-.checkout{
-max-width:1000px;
-margin:16px auto 0;
-background:#fff;
-border:1.5px solid #111;
-display:none;
-}
-
-.checkout.show{
-display:grid;
-grid-template-columns:.85fr 1.15fr;
-}
-
-.checkout-summary{
-background:#111;
-color:#fff;
-padding:30px;
-}
-
-.checkout-summary span{
-font-size:10px;
-letter-spacing:2px;
-font-weight:bold;
-color:var(--gold-light);
-}
-
-.checkout-summary h3{
-font:normal 34px Georgia,serif;
-margin:10px 0;
-}
-
-.checkout-summary-price{
-font:normal 45px Georgia,serif;
-color:var(--gold-light);
-margin-bottom:12px;
-}
-
-.checkout-summary p{
-font-size:12px;
-line-height:1.6;
-color:#ccc;
-}
-
-.checkout-payment{
-padding:30px;
-}
-
-.checkout-payment h3{
-font:normal 30px Georgia,serif;
-margin-bottom:18px;
-}
-
-.payments{
-display:grid;
-gap:9px;
-}
-
-.pay-button{
-height:54px;
-border:1.5px solid #111;
-background:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-font-weight:bold;
-}
-
-.pay-button:hover{
-background:#f2efe8;
-}
-
-.pay-logo{
-min-width:34px;
-font-size:19px;
-font-weight:bold;
-}
-
-.card-form{
-margin-top:18px;
-border-top:1px solid #ddd;
-padding-top:18px;
-}
-
-.field{
-margin-bottom:11px;
-}
-
-.field label{
-display:block;
-font-size:10px;
-font-weight:bold;
-letter-spacing:1px;
-margin-bottom:6px;
-}
-
-.field input{
-width:100%;
-height:47px;
-border:1px solid #aaa;
-padding:0 13px;
-outline:none;
-}
-
-.field input:focus{
-border-color:#111;
-}
-
-.card-row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-}
-
-.checkout-submit{
-width:100%;
-height:52px;
-border:0;
-background:#111;
-color:#fff;
-font-weight:bold;
-margin-top:4px;
-}
-
-/* INCLUDED */
-.section-head{
-display:flex;
-justify-content:space-between;
-align-items:end;
-gap:18px;
-margin:52px 0 18px;
-padding-bottom:12px;
-border-bottom:3px solid #111;
-}
-
-.section-head h2{
-font:normal 48px/.95 Georgia,serif;
-}
-
-.section-head span{
-font-size:10px;
-font-weight:bold;
-letter-spacing:2px;
-color:var(--gold-dark);
-}
-
-.benefits{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-}
-
-.benefit{
-min-height:235px;
-background:#fff;
-border:1px solid #111;
-padding:24px;
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-}
-
-.benefit:nth-child(even){
-background:#111;
-color:#fff;
-}
-
-.benefit-icon{
-font-size:36px;
-margin-bottom:auto;
-}
-
-.benefit h3{
-font:normal 27px Georgia,serif;
-margin:18px 0 8px;
-}
-
-.benefit p{
-font-size:12px;
+.club-heading p{
+font-size:13px;
 line-height:1.55;
 color:#666;
 }
 
-.benefit:nth-child(even) p{
-color:#bbb;
-}
+/* PRICE STRIP */
 
-/* SHOWCASE */
-.showcase{
-margin-top:10px;
+.price-row{
 display:grid;
-grid-template-columns:1.1fr .9fr;
-min-height:430px;
-background:#111;
-color:#fff;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin:0 auto 34px;
 }
 
-.showcase-image{
+.price-tile{
+background:#fff;
+border:1.5px solid #aaa;
+min-height:135px;
+padding:17px 10px;
+text-align:center;
 position:relative;
+transition:.2s;
 }
 
-.showcase-image img{
+.price-tile.selected{
+border:2px solid var(--gold-dark);
+box-shadow:0 0 0 1px var(--gold-light) inset;
+}
+
+.price-tile.best:before{
+content:attr(data-badge);
 position:absolute;
-inset:0;
+top:-11px;
+left:50%;
+transform:translateX(-50%);
+white-space:nowrap;
+background:var(--gold-metal);
+color:#111;
+padding:5px 10px;
+font-size:8px;
+font-weight:bold;
+letter-spacing:.8px;
+border-radius:999px;
+}
+
+.price-value{
+font:normal 35px Georgia,serif;
+margin:9px 0 5px;
+}
+
+.price-tile strong{
+font-size:11px;
+display:block;
+}
+
+.price-tile small{
+display:block;
+margin-top:8px;
+font-size:10px;
+color:#686868;
+}
+
+/* WHAT YOU GET */
+
+.benefit-head{
+text-align:center;
+margin-bottom:16px;
+}
+
+.benefit-head h2{
+font:normal 31px Georgia,serif;
+}
+
+.carousel-shell{
+overflow:hidden;
+position:relative;
+margin:0 -8px;
+padding:8px 0 2px;
+touch-action:pan-y;
+}
+
+.carousel-track{
+display:flex;
+align-items:center;
+transition:transform .42s cubic-bezier(.22,.61,.36,1);
+will-change:transform;
+}
+
+.carousel-card{
+flex:0 0 58%;
+margin:0 2%;
+height:355px;
+position:relative;
+overflow:hidden;
+background:#111;
+border:1px solid #111;
+transform:scale(.84);
+opacity:.62;
+transition:.42s;
+}
+
+.carousel-card.active{
+transform:scale(1);
+opacity:1;
+z-index:3;
+box-shadow:0 16px 35px rgba(0,0,0,.18);
+}
+
+.carousel-card img{
 height:100%;
 object-fit:cover;
 }
 
-.showcase-copy{
-padding:42px;
-display:flex;
-flex-direction:column;
-justify-content:center;
+.carousel-card:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.03) 64%);
 }
 
-.showcase-copy span{
+.card-copy{
+position:absolute;
+z-index:2;
+left:20px;
+right:20px;
+bottom:20px;
+color:#fff;
+}
+
+.card-copy span{
+font-size:9px;
+font-weight:bold;
+letter-spacing:1.6px;
+color:var(--gold-light);
+}
+
+.card-copy h3{
+font:normal 31px Georgia,serif;
+margin:7px 0;
+}
+
+.card-copy p{
+font-size:11px;
+line-height:1.5;
+color:#ddd;
+}
+
+.carousel-controls{
+display:grid;
+grid-template-columns:42px 1fr 42px;
+align-items:center;
+margin:11px auto 16px;
+max-width:360px;
+}
+
+.carousel-arrow{
+width:38px;
+height:38px;
+border:0;
+background:transparent;
+font-size:32px;
+font-family:Georgia,serif;
+color:#555;
+}
+
+.carousel-dots{
+display:flex;
+justify-content:center;
+gap:9px;
+}
+
+.carousel-dot{
+width:8px;
+height:8px;
+border:0;
+border-radius:50%;
+background:#bbb;
+padding:0;
+}
+
+.carousel-dot.active{
+background:#111;
+}
+
+/* CTA */
+
+.club-cta{
+width:100%;
+height:56px;
+border:0;
+background:var(--green-dark);
+color:#fff;
+font-weight:bold;
+font-size:13px;
+letter-spacing:.4px;
+margin-top:4px;
+}
+
+.club-secondary{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+padding:16px 0 0;
+font-size:11px;
+color:#555;
+}
+
+.club-secondary button,
+.club-secondary a{
+border:0;
+background:transparent;
+text-decoration:underline;
+font-weight:bold;
+padding:2px;
+}
+
+/* SMALL LEGAL */
+
+.club-legal{
+max-width:570px;
+margin:30px auto 0;
+font-size:9px;
+line-height:1.55;
+color:#7a7770;
+text-align:center;
+}
+
+.club-legal a{
+text-decoration:underline;
+}
+
+/* STICKY CTA */
+
+.mobile-sticky{
+display:none;
+}
+
+/* FLOW MODAL */
+
+.flow-modal{
+position:fixed;
+inset:0;
+z-index:4000;
+background:var(--cream);
+display:none;
+overflow-y:auto;
+}
+
+.flow-modal.show{
+display:block;
+}
+
+.flow-header{
+height:77px;
+background:#080808;
+color:#fff;
+display:grid;
+grid-template-columns:52px 1fr 52px;
+align-items:center;
+padding:0 13px;
+position:sticky;
+top:0;
+z-index:5;
+border-bottom:1px solid #333;
+}
+
+.flow-close,
+.flow-back{
+width:42px;
+height:42px;
+border:0;
+background:transparent;
+color:#fff;
+font-size:27px;
+}
+
+.flow-logo{
+text-align:center;
+font:normal 31px Georgia,serif;
+letter-spacing:2px;
+}
+
+.flow-step{
+max-width:650px;
+margin:auto;
+padding:42px 25px 55px;
+}
+
+.flow-step[hidden]{
+display:none;
+}
+
+.flow-kicker{
+display:block;
+font-size:9px;
+font-weight:bold;
+letter-spacing:2.1px;
+color:var(--gold-dark);
+text-align:center;
+margin-bottom:9px;
+}
+
+.flow-step h2{
+font:normal 42px/.98 Georgia,serif;
+text-align:center;
+margin-bottom:11px;
+}
+
+.flow-intro{
+font-size:12px;
+line-height:1.55;
+color:#666;
+text-align:center;
+max-width:480px;
+margin:0 auto 28px;
+}
+
+.flow-label{
+display:block;
+font-size:9px;
+font-weight:bold;
+letter-spacing:1px;
+margin:14px 0 7px;
+}
+
+.flow-input{
+width:100%;
+height:54px;
+border:1.5px solid #777;
+background:#fff;
+padding:0 15px;
+outline:none;
+}
+
+.flow-input:focus{
+border-color:#111;
+}
+
+.flow-primary{
+width:100%;
+height:54px;
+border:0;
+background:var(--green-dark);
+color:#fff;
+font-size:12px;
+font-weight:bold;
+margin-top:13px;
+}
+
+.flow-divider{
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+gap:13px;
+margin:25px 0 18px;
+font-size:10px;
+font-weight:bold;
+color:#777;
+}
+
+.flow-divider:before,
+.flow-divider:after{
+content:"";
+height:1px;
+background:#ccc;
+}
+
+.social-list{
+display:grid;
+gap:9px;
+}
+
+.social-button{
+height:52px;
+border:1.5px solid #111;
+background:#fff;
+display:grid;
+grid-template-columns:44px 1fr 36px;
+align-items:center;
+text-align:left;
+font-weight:bold;
+padding:0 12px;
+}
+
+.social-logo{
+font-size:21px;
+font-weight:bold;
+text-align:center;
+}
+
+.social-arrow{
+font-size:22px;
+text-align:center;
+}
+
+.account-mini{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:5px;
+margin-top:28px;
+}
+
+.account-mini article{
+border:1px solid #d5cec1;
+background:#fff;
+padding:14px 8px;
+text-align:center;
+min-height:100px;
+}
+
+.account-mini strong{
+display:block;
+font-size:20px;
+margin-bottom:8px;
+}
+
+.account-mini h4{
+font-size:9px;
+margin-bottom:4px;
+}
+
+.account-mini p{
+font-size:8px;
+line-height:1.4;
+color:#777;
+}
+
+/* PAYMENT */
+
+.order-box{
+border:1px solid #aaa;
+background:#fff;
+padding:12px;
+display:grid;
+grid-template-columns:70px 1fr auto;
+gap:12px;
+align-items:center;
+margin:22px 0;
+}
+
+.order-box img{
+width:70px;
+height:70px;
+object-fit:cover;
+}
+
+.order-copy strong{
+display:block;
+font-size:11px;
+line-height:1.35;
+}
+
+.order-copy span{
+display:block;
+font-size:9px;
+color:#777;
+margin-top:4px;
+}
+
+.order-price{
+font-size:12px;
+font-weight:bold;
+}
+
+.promo-label{
+font-size:11px;
+margin-bottom:7px;
+}
+
+.promo-row{
+display:grid;
+grid-template-columns:1fr 105px;
+margin-bottom:22px;
+}
+
+.promo-row input{
+height:48px;
+border:1px solid #aaa;
+padding:0 12px;
+}
+
+.promo-row button{
+border:0;
+background:#111;
+color:#fff;
+font-size:10px;
+font-weight:bold;
+}
+
+.due-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:14px;
+font-weight:bold;
+padding:4px 0 22px;
+}
+
+.due-row strong{
+color:var(--green-dark);
+font-size:18px;
+}
+
+.pay-title{
+font-size:9px;
+font-weight:bold;
+letter-spacing:1.2px;
+margin:8px 0 9px;
+}
+
+.wallets{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+}
+
+.wallet{
+height:54px;
+border:1px solid #aaa;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:6px;
+font-size:11px;
+font-weight:bold;
+}
+
+.brand-g{
+font-size:20px;
+font-weight:bold;
+font-family:Arial,sans-serif;
+}
+
+.brand-apple{
+font-size:20px;
+line-height:1;
+}
+
+.brand-paypal{
+font-size:13px;
+font-weight:bold;
+font-style:italic;
+color:#17457b;
+}
+
+.payment-or{
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+gap:10px;
+font-size:9px;
+color:#777;
+margin:17px 0;
+}
+
+.payment-or:before,
+.payment-or:after{
+content:"";
+height:1px;
+background:#bbb;
+}
+
+.card-payment{
+width:100%;
+height:58px;
+border:1.5px solid #111;
+background:#fff;
+display:grid;
+grid-template-columns:1fr auto;
+align-items:center;
+padding:0 15px;
+font-size:11px;
+font-weight:bold;
+text-align:left;
+}
+
+.card-brands{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:10px;
+font-weight:bold;
+}
+
+.visa{color:#1434cb}
+.mc{
+display:flex;
+align-items:center;
+}
+
+.mc:before,
+.mc:after{
+content:"";
+width:17px;
+height:17px;
+border-radius:50%;
+display:block;
+}
+
+.mc:before{
+background:#e11;
+margin-right:-6px;
+}
+
+.mc:after{
+background:#f2a900;
+opacity:.9;
+}
+
+.amex{
+background:#2b84c6;
+color:#fff;
+padding:3px 4px;
+font-size:7px;
+}
+
+.checkout-legal{
+font-size:8px;
+line-height:1.55;
+color:#6d6a65;
+margin:24px auto 0;
+max-width:520px;
+}
+
+.checkout-legal a{
+text-decoration:underline;
+}
+
+.secure-checkout{
+text-align:center;
+font-size:9px;
+color:#777;
+margin-top:18px;
+}
+
+/* COOKIE MODAL */
+
+.cookie-layer{
+position:fixed;
+inset:0;
+z-index:5000;
+background:rgba(0,0,0,.69);
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+}
+
+.cookie-layer.show{
+display:flex;
+}
+
+.cookie-card{
+width:min(490px,100%);
+background:#fff;
+border:1px solid #111;
+padding:31px 26px 25px;
+text-align:center;
+max-height:92vh;
+overflow-y:auto;
+}
+
+.cookie-logo{
+font:normal 36px Georgia,serif;
+color:var(--gold-dark);
+line-height:.9;
+margin-bottom:20px;
+}
+
+.cookie-logo small{
+display:block;
 font-size:10px;
 letter-spacing:2px;
-font-weight:bold;
-color:var(--gold-light);
+margin-bottom:5px;
+}
+
+.cookie-icon{
+font-size:31px;
 margin-bottom:10px;
 }
 
-.showcase-copy h2{
-font:normal 42px/.98 Georgia,serif;
-color:var(--gold-light);
-margin-bottom:13px;
+.cookie-card h2{
+font:normal 31px Georgia,serif;
+margin-bottom:11px;
 }
 
-.showcase-copy p{
-font-size:13px;
-line-height:1.65;
-color:#ccc;
+.cookie-card>p{
+font-size:11px;
+line-height:1.55;
+color:#555;
+max-width:390px;
+margin:0 auto 18px;
+}
+
+.cookie-card>a{
+font-size:10px;
+text-decoration:underline;
+display:inline-block;
+margin-bottom:17px;
+}
+
+.cookie-actions{
+display:grid;
+gap:8px;
+}
+
+.cookie-actions button{
+height:48px;
+font-size:11px;
+font-weight:bold;
+border:1.5px solid #111;
+background:#fff;
+}
+
+.cookie-actions .accept{
+background:var(--green-dark);
+color:#fff;
+border-color:var(--green-dark);
+}
+
+.cookie-settings{
+display:none;
+text-align:left;
+margin:18px 0 3px;
+border-top:1px solid #ddd;
+padding-top:13px;
+}
+
+.cookie-settings.show{
+display:block;
+}
+
+.cookie-option{
+display:grid;
+grid-template-columns:1fr auto;
+gap:12px;
+align-items:center;
+padding:10px 0;
+border-bottom:1px solid #eee;
+}
+
+.cookie-option strong{
+font-size:11px;
+display:block;
+margin-bottom:3px;
+}
+
+.cookie-option p{
+font-size:9px;
+line-height:1.4;
+color:#777;
+}
+
+.toggle{
+width:43px;
+height:24px;
+border-radius:999px;
+border:0;
+background:#aaa;
+position:relative;
+}
+
+.toggle:after{
+content:"";
+position:absolute;
+width:18px;
+height:18px;
+border-radius:50%;
+background:#fff;
+top:3px;
+left:3px;
+transition:.2s;
+}
+
+.toggle.on{
+background:var(--green-dark);
+}
+
+.toggle.on:after{
+left:22px;
+}
+
+.toggle.locked{
+opacity:.55;
+cursor:default;
 }
 
 /* FOOTER */
+
 footer{
 background:#050505;
 color:#fff;
 text-align:center;
-padding:60px 20px;
+padding:47px 20px;
 border-top:1px solid #292929;
 }
 
 .footer-brand{
-font:normal 51px Georgia,serif;
+font:normal 43px Georgia,serif;
 letter-spacing:3px;
 }
 
 .footer-subtitle{
+font-size:12px;
 color:#aaa;
-margin:10px 0 28px;
+margin:8px 0 20px;
 }
 
 .footer-links{
 display:flex;
 justify-content:center;
-gap:17px;
+gap:13px;
 flex-wrap:wrap;
+max-width:700px;
+margin:auto;
 }
 
 .footer-links a{
-font-size:13px;
-color:#ccc;
+font-size:10px;
+color:#aaa;
 }
+
+/* RTL */
 
 html[dir="rtl"] .side-menu{
 left:auto;
 right:-100%;
 border-right:0;
-border-left:1px solid #111;
+border-left:2px solid #111;
 }
 
 html[dir="rtl"] .side-menu.open{
@@ -771,66 +1165,199 @@ right:0;
 left:auto;
 }
 
-html[dir="rtl"] .plan li:before{
-margin-right:0;
-margin-left:8px;
+html[dir="rtl"] .menu-item p{
+padding-right:0;
+padding-left:9px;
 }
 
-html[dir="rtl"] input{
+html[dir="rtl"] input,
+html[dir="rtl"] select{
 text-align:right;
 }
 
-@media(max-width:900px){
-.pricing{grid-template-columns:1fr}
-.benefits{grid-template-columns:1fr 1fr}
-.checkout.show{grid-template-columns:1fr}
-.showcase{grid-template-columns:1fr}
-.showcase-image{min-height:380px}
-}
+/* TABLET */
 
 @media(max-width:760px){
+
 .header-main{
 height:87px;
 grid-template-columns:55px 1fr 55px;
 padding:0 8px;
 }
-.brand-big{font-size:39px;letter-spacing:2px}
+
+.brand-big{
+font-size:39px;
+letter-spacing:2px;
+}
+
 .brand-small{font-size:11px}
+
 .category-nav{
-justify-content:flex-start;
 padding:14px 15px;
 gap:22px;
 }
+
 .category-nav a{font-size:12px}
-.hero{min-height:465px}
-.hero h1{font-size:46px}
-.hero p{font-size:15px}
-.hero-content{bottom:27px}
-main{padding:10px 10px 50px}
-.subscription-intro{margin-top:35px}
-.subscription-intro h2{font-size:39px}
-.plan{padding:25px 20px}
-.section-head{
-align-items:flex-start;
-flex-direction:column;
-margin-top:42px;
-}
-.section-head h2{font-size:39px}
-.benefits{grid-template-columns:1fr}
-.showcase-copy{padding:31px 20px}
-.showcase-copy h2{font-size:36px}
-.footer-brand{font-size:39px}
+
+.club-main{
+padding:25px 15px 100px;
 }
 
+.club-heading{
+margin-top:4px;
+}
+
+.club-heading h1{
+font-size:39px;
+}
+
+.price-row{
+gap:5px;
+margin-bottom:27px;
+}
+
+.price-tile{
+padding:14px 6px;
+min-height:120px;
+}
+
+.price-value{
+font-size:30px;
+}
+
+.carousel-card{
+flex-basis:68%;
+height:345px;
+margin:0 1.5%;
+}
+
+.card-copy{
+left:16px;
+right:16px;
+bottom:17px;
+}
+
+.card-copy h3{
+font-size:28px;
+}
+
+.mobile-sticky{
+position:fixed;
+z-index:1700;
+display:block;
+left:0;
+right:0;
+bottom:0;
+background:rgba(255,255,255,.96);
+border-top:1px solid #ddd;
+padding:9px 14px 12px;
+backdrop-filter:blur(12px);
+}
+
+.mobile-sticky-inner{
+max-width:700px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr auto;
+align-items:center;
+gap:12px;
+}
+
+.mobile-sticky strong{
+font-size:10px;
+display:block;
+}
+
+.mobile-sticky span{
+font-size:9px;
+color:#666;
+}
+
+.mobile-sticky button{
+border:0;
+background:var(--green-dark);
+color:#fff;
+height:45px;
+padding:0 19px;
+font-size:10px;
+font-weight:bold;
+}
+
+footer{
+padding-bottom:85px;
+}
+
+.flow-step{
+padding:31px 19px 48px;
+}
+
+.flow-step h2{
+font-size:38px;
+}
+
+}
+
+/* PHONE */
+
 @media(max-width:430px){
+
 .brand-big{font-size:34px}
-.hero{min-height:440px}
-.price-main{font-size:50px}
-.checkout-summary,.checkout-payment{padding:23px 17px}
+
+.club-heading h1{
+font-size:35px;
+}
+
+.club-heading p{
+font-size:11px;
+}
+
+.price-tile{
+min-height:112px;
+}
+
+.price-value{
+font-size:29px;
+}
+
+.price-tile strong{
+font-size:10px;
+}
+
+.price-tile small{
+font-size:8px;
+}
+
+.carousel-card{
+height:320px;
+flex-basis:72%;
+}
+
+.account-mini{
+gap:4px;
+}
+
+.account-mini article{
+padding:12px 5px;
+}
+
+.wallets{
+gap:5px;
+}
+
+.wallet{
+font-size:9px;
+}
+
+.cookie-card{
+padding:27px 18px 20px;
+}
+
 }
 
 @media(prefers-reduced-motion:reduce){
 .metallic{animation:none}
+.carousel-track,
+.carousel-card{transition:none}
 }
 </style>
 </head>
@@ -852,7 +1379,9 @@ margin-top:42px;
 </div>
 
 <div class="menu-language">
-<span>LANGUAGE</span>
+
+<span class="notranslate" translate="no">LANGUAGE</span>
+
 <select id="languageSelect">
 <option value="en">EN — English</option>
 <option value="uk">UA — Українська</option>
@@ -878,6 +1407,7 @@ margin-top:42px;
 <option value="ar">AR — العربية</option>
 <option value="hi">HI — हिन्दी</option>
 </select>
+
 </div>
 
 <div class="menu-list">
@@ -917,8 +1447,8 @@ margin-top:42px;
 <a class="menu-item" href="pet-friendly-places.html">
 <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80" alt="Places">
 <div>
-<h3 data-i18n="common.menu.places">Pet Friendly Places</h3>
-<p data-i18n="common.menu.placesDescription">Search places, routes and contacts.</p>
+<h3 data-i18n="common.menu.places">Places</h3>
+<p data-i18n="common.menu.placesDescription">Pet-friendly hotels, cafés and destinations.</p>
 </div>
 </a>
 
@@ -926,7 +1456,7 @@ margin-top:42px;
 <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Partners">
 <div>
 <h3 data-i18n="common.menu.partners">Partners</h3>
-<p data-i18n="common.menu.partnersDescription">Member discounts and selected offers.</p>
+<p data-i18n="common.menu.partnersDescription">Discover selected brands and member offers.</p>
 </div>
 </a>
 
@@ -937,10 +1467,14 @@ margin-top:42px;
 <a href="contact.html" data-i18n="common.footer.contact">Contact</a>
 <a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a>
 <a href="terms.html" data-i18n="common.footer.terms">Terms</a>
+<a href="copyright.html">Copyright</a>
+<a href="cookies.html">Cookies</a>
 </div>
 </div>
 
-</aside> <header class="site-header">
+</aside>
+
+<header class="site-header">
 
 <div class="header-main">
 
@@ -984,287 +1518,200 @@ margin-top:42px;
 
 </header>
 
-<section class="hero">
+<main class="club-main">
 
-<img
-src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1800&q=88"
-alt="PETS & DOGUE Club"
->
-
-<div class="hero-content">
-
-<span class="hero-kicker notranslate" translate="no">
-PETS &amp; DOGUE · PRIVATE CLUB
-</span>
-
-<h1 id="clubHeroTitle">Join PETS & DOGUE Club</h1>
-
-<p id="clubHeroText">
-One membership for the magazine, Marketplace, Cover Star competitions, member discounts and pet-friendly discoveries.
-</p>
-
-<div class="hero-price" id="heroPrice">
-FIRST MONTH FREE · THEN £1 / MONTH
-</div>
-
-</div>
-</section>
-
-<main>
-
-<section class="subscription-intro">
-
-<span class="notranslate" translate="no">PETS &amp; DOGUE MEMBERSHIP</span>
-
-<h2 id="membershipHeading">
-Choose your membership
-</h2>
-
-<p id="membershipIntro">
-Start with one complimentary month or save with annual membership. Cancel the monthly membership anytime.
-</p>
-
-</section>
-
-<section class="pricing" id="pricing">
-
-<article class="plan featured">
-
-<span class="plan-badge" id="monthlyBadge">
-FIRST MONTH FREE
-</span>
-
-<h3 id="monthlyTitle">
-Monthly
-</h3>
-
-<div class="price-main">
-£0
-</div>
-
-<div class="price-note" id="monthlyPriceNote">
-for your first month · then £1/month
-</div>
-
-<p class="plan-copy" id="monthlyCopy">
-Discover PETS & DOGUE Club with no charge for your first month.
-</p>
-
-<ul>
-<li id="monthlyItem1">Full Club membership</li>
-<li id="monthlyItem2">Marketplace member access</li>
-<li id="monthlyItem3">Cover Star competitions</li>
-<li id="monthlyItem4">Contests and community features</li>
-<li id="monthlyItem5">Partner discounts and offers</li>
-<li id="monthlyItem6">Pet-friendly places and member discoveries</li>
-</ul>
-
-<button class="plan-button" type="button" onclick="selectPlan('monthly')" id="monthlyButton">
-START FREE MONTH
-</button>
-
-</article>
-
-<article class="plan">
-
-<span class="plan-badge" id="yearlyBadge">
-BEST VALUE
-</span>
-
-<h3 id="yearlyTitle">
-Annual
-</h3>
-
-<div class="price-main">
-£10
-</div>
-
-<div class="price-note" id="yearlyPriceNote">
-per year
-</div>
-
-<p class="plan-copy" id="yearlyCopy">
-Stay part of PETS & DOGUE for the full year for one simple price.
-</p>
-
-<ul>
-<li id="yearlyItem1">All Club membership benefits</li>
-<li id="yearlyItem2">Marketplace member access</li>
-<li id="yearlyItem3">Cover Star competitions</li>
-<li id="yearlyItem4">Contests and member opportunities</li>
-<li id="yearlyItem5">Partner discounts and offers</li>
-<li id="yearlyItem6">Annual membership for £10</li>
-</ul>
-
-<button class="plan-button" type="button" onclick="selectPlan('yearly')" id="yearlyButton">
-JOIN FOR £10 / YEAR
-</button>
-
-</article>
-
-</section>
-
-<section class="checkout" id="checkout">
-
-<div class="checkout-summary">
+<section class="club-heading">
 
 <span class="notranslate" translate="no">
 PETS &amp; DOGUE CLUB
 </span>
 
-<h3 id="checkoutPlanTitle">
-Monthly Membership
-</h3>
+<h1 id="pageTitle">
+Choose your plan
+</h1>
 
-<div class="checkout-summary-price" id="checkoutPrice">
-£0 today
-</div>
-
-<p id="checkoutDescription">
-Your first month is complimentary. After the trial, membership continues at £1 per month until cancelled.
+<p id="pageSubtitle">
+Start free. Discover everything included. Continue only if you love it.
 </p>
 
+</section>
+
+<section class="price-row">
+
+<button class="price-tile selected" type="button" data-plan="monthly" onclick="choosePlan('monthly')">
+
+<div class="price-value" id="freePrice">
+Free
 </div>
 
-<div class="checkout-payment">
+<strong id="freeLabel">
+First month
+</strong>
 
-<h3 id="paymentHeading">
-Choose how to pay
-</h3>
+<small id="freeSmall">
+£0 today
+</small>
 
-<div class="payments">
-
-<button class="pay-button" type="button" onclick="paymentMessage('Google Pay')">
-<span class="pay-logo">G</span>
-<span>Google Pay</span>
 </button>
 
-<button class="pay-button" type="button" onclick="paymentMessage('Apple Pay')">
-<span class="pay-logo">●</span>
-<span>Apple Pay</span>
+<button class="price-tile" type="button" data-plan="monthly" onclick="choosePlan('monthly')">
+
+<div class="price-value">
+£1
+</div>
+
+<strong id="monthLabel">
+1 month
+</strong>
+
+<small id="monthSmall">
+after your free month
+</small>
+
 </button>
 
-<button class="pay-button" type="button" onclick="paymentMessage('PayPal')">
-<span class="pay-logo">P</span>
-<span>PayPal</span>
+<button class="price-tile best" id="annualTile" type="button" data-plan="annual" data-badge="BEST VALUE" onclick="choosePlan('annual')">
+
+<div class="price-value">
+£10
+</div>
+
+<strong id="yearLabel">
+1 year
+</strong>
+
+<small id="yearSmall">
+one annual payment
+</small>
+
 </button>
-
-</div>
-
-<div class="card-form">
-
-<div class="field">
-<label for="cardName" id="cardNameLabel">NAME ON CARD</label>
-<input id="cardName" type="text" autocomplete="cc-name">
-</div>
-
-<div class="field">
-<label for="cardNumber" id="cardNumberLabel">CARD NUMBER</label>
-<input id="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456">
-</div>
-
-<div class="card-row">
-
-<div class="field">
-<label for="cardExpiry" id="cardExpiryLabel">EXPIRY</label>
-<input id="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY">
-</div>
-
-<div class="field">
-<label for="cardCvc" id="cardCvcLabel">CVC</label>
-<input id="cardCvc" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="123">
-</div>
-
-</div>
-
-<button class="checkout-submit" id="checkoutSubmit" type="button" onclick="paymentMessage('Card')">
-CONTINUE SECURELY
-</button>
-
-</div>
-
-</div>
 
 </section>
 
-<div class="section-head">
-<h2 id="includedHeading">Everything included</h2>
-<span class="notranslate" translate="no">PETS &amp; DOGUE CLUB</span>
-</div>
+<section class="benefit-head">
 
-<section class="benefits">
-
-<article class="benefit">
-<div class="benefit-icon">🛍️</div>
-<h3 id="benefitMarketTitle">Marketplace</h3>
-<p id="benefitMarketText">Publish listings, discover services, accessories and responsible rehoming posts.</p>
-</article>
-
-<article class="benefit">
-<div class="benefit-icon">👑</div>
-<h3 id="benefitCoverTitle">Cover Star</h3>
-<p id="benefitCoverText">Enter your pet for the chance to appear on a PETS & DOGUE cover.</p>
-</article>
-
-<article class="benefit">
-<div class="benefit-icon">🏆</div>
-<h3 id="benefitContestTitle">Contests</h3>
-<p id="benefitContestText">Take part in competitions, community votes and special member opportunities.</p>
-</article>
-
-<article class="benefit">
-<div class="benefit-icon">🎁</div>
-<h3 id="benefitDiscountTitle">Member Discounts</h3>
-<p id="benefitDiscountText">Discover selected partner offers across pet products, services and experiences.</p>
-</article>
-
-<article class="benefit">
-<div class="benefit-icon">📍</div>
-<h3 id="benefitPlacesTitle">Pet-Friendly Places</h3>
-<p id="benefitPlacesText">Explore hotels, cafés, beaches, parks and useful places for people with pets.</p>
-</article>
-
-<article class="benefit">
-<div class="benefit-icon">📖</div>
-<h3 id="benefitMagazineTitle">PETS & DOGUE World</h3>
-<p id="benefitMagazineText">Be part of our magazine community, visual stories and future member experiences.</p>
-</article>
-
-</section>
-
-<div class="section-head">
-<h2 id="moreHeading">More than a subscription</h2>
-<span class="notranslate" translate="no">MEMBERSHIP · COMMUNITY · MAGAZINE</span>
-</div>
-
-<section class="showcase">
-
-<div class="showcase-image">
-<img
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1400&q=88"
-alt="PETS & DOGUE Cover Star"
->
-</div>
-
-<div class="showcase-copy">
-
-<span class="notranslate" translate="no">
-PETS &amp; DOGUE · COVER STAR
-</span>
-
-<h2 id="showcaseTitle">
-Your pet can become part of the magazine.
+<h2 id="whatTitle">
+What you get
 </h2>
 
-<p id="showcaseText">
-Club members can enter Cover Star competitions, take part in contests, discover partner benefits and connect with the growing PETS & DOGUE world.
-</p>
+</section>
+
+<section class="carousel-shell" id="carouselShell">
+
+<div class="carousel-track" id="carouselTrack">
+
+<article class="carousel-card" data-index="0">
+
+<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=900&q=85" alt="Marketplace">
+
+<div class="card-copy">
+<span>01</span>
+<h3 id="benefit1Title">Marketplace</h3>
+<p id="benefit1Text">Publish listings, discover services, accessories and responsible rehoming posts.</p>
+</div>
+
+</article>
+
+<article class="carousel-card active" data-index="1">
+
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=85" alt="Cover Star">
+
+<div class="card-copy">
+<span>02</span>
+<h3 id="benefit2Title">Cover Star</h3>
+<p id="benefit2Text">Enter your pet for the chance to become part of a PETS & DOGUE cover.</p>
+</div>
+
+</article>
+
+<article class="carousel-card" data-index="2">
+
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=85" alt="Contests">
+
+<div class="card-copy">
+<span>03</span>
+<h3 id="benefit3Title">Contests</h3>
+<p id="benefit3Text">Take part in competitions, community votes and special member opportunities.</p>
+</div>
+
+</article>
+
+<article class="carousel-card" data-index="3">
+
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85" alt="Member offers">
+
+<div class="card-copy">
+<span>04</span>
+<h3 id="benefit4Title">Member Discounts</h3>
+<p id="benefit4Text">Unlock selected partner offers across products, services, travel and experiences.</p>
+</div>
+
+</article>
+
+<article class="carousel-card" data-index="4">
+
+<img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=85" alt="Pet friendly places">
+
+<div class="card-copy">
+<span>05</span>
+<h3 id="benefit5Title">Pet-Friendly Places</h3>
+<p id="benefit5Text">Discover hotels, cafés, beaches, parks and useful places for people with pets.</p>
+</div>
+
+</article>
 
 </div>
 
 </section>
 
-</main> <footer>
+<div class="carousel-controls">
+
+<button class="carousel-arrow" type="button" onclick="moveCarousel(-1)">‹</button>
+
+<div class="carousel-dots" id="carouselDots"></div>
+
+<button class="carousel-arrow" type="button" onclick="moveCarousel(1)">›</button>
+
+</div>
+
+<button class="club-cta" type="button" id="mainCta" onclick="openAccountStep()">
+START FREE MONTH
+</button>
+
+<div class="club-secondary">
+
+<button type="button" id="signInLink" onclick="openAccountStep()">Already a member? Sign in</button>
+
+<span>·</span>
+
+<a href="index.html" id="continueFreeLink">Continue free</a>
+
+</div>
+
+<p class="club-legal" id="clubLegal">
+By continuing you agree to the PETS & DOGUE Terms and Privacy Policy. Monthly membership begins with one complimentary month and then continues at £1 per month until cancelled. Annual membership provides one year of access for £10.
+</p>
+
+</main>
+
+<div class="mobile-sticky">
+
+<div class="mobile-sticky-inner">
+
+<div>
+<strong id="stickyTitle">First month free</strong>
+<span id="stickyText">Then £1 / month</span>
+</div>
+
+<button type="button" id="stickyButton" onclick="openAccountStep()">
+JOIN CLUB
+</button>
+
+</div>
+
+</div>
+
+<footer>
 
 <div class="footer-brand metallic notranslate" translate="no">
 PETS &amp; DOGUE
@@ -1276,255 +1723,716 @@ The International Luxury Animal Magazine
 
 <div class="footer-links">
 <a href="index.html" data-i18n="common.footer.home">Home</a>
-<a href="issue-01.html" data-i18n="common.footer.latestIssue">Latest Issue</a>
 <a href="articles.html" data-i18n="common.footer.articles">Articles</a>
-<a href="photos.html" data-i18n="common.footer.photos">Photos</a>
 <a href="members-gallery.html" data-i18n="common.footer.coverStars">Cover Stars</a>
 <a href="pet-marketplace.html">Marketplace</a>
 <a href="partners.html" data-i18n="common.footer.partners">Partners</a>
-<a href="contests.html">Contests</a>
-<a href="account.html" data-i18n="common.menu.signIn">Sign In</a>
 <a href="contact.html" data-i18n="common.footer.contact">Contact</a>
 <a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a>
 <a href="terms.html" data-i18n="common.footer.terms">Terms</a>
+<a href="copyright.html">Copyright</a>
+<a href="cookies.html">Cookies</a>
 </div>
 
 </footer>
 
+<!-- ACCOUNT + PAYMENT FLOW -->
+
+<section class="flow-modal" id="flowModal">
+
+<header class="flow-header">
+
+<button class="flow-back" id="flowBack" type="button" onclick="flowBack()">‹</button>
+
+<div class="flow-logo metallic notranslate" translate="no">
+DOGUE
+</div>
+
+<button class="flow-close" type="button" onclick="closeFlow()">×</button>
+
+</header>
+
+<!-- ACCOUNT -->
+
+<div class="flow-step" id="accountStep">
+
+<span class="flow-kicker notranslate" translate="no">
+PETS &amp; DOGUE CLUB
+</span>
+
+<h2 id="accountTitle">
+Sign in or create an account
+</h2>
+
+<p class="flow-intro" id="accountIntro">
+Enter your email to continue. New members can create an account in seconds.
+</p>
+
+<label class="flow-label" for="memberEmail" id="emailLabel">
+EMAIL ADDRESS
+</label>
+
+<input
+class="flow-input"
+id="memberEmail"
+type="email"
+autocomplete="email"
+placeholder="you@example.com"
+>
+
+<button class="flow-primary" type="button" id="emailContinue" onclick="continueWithEmail()">
+CONTINUE WITH EMAIL
+</button>
+
+<div class="flow-divider" id="orText">
+OR
+</div>
+
+<div class="social-list">
+
+<button class="social-button" type="button" onclick="socialNotice('Google')">
+<span class="social-logo">G</span>
+<span id="googleText">Continue with Google</span>
+<span class="social-arrow">→</span>
+</button>
+
+<button class="social-button" type="button" onclick="socialNotice('Apple')">
+<span class="social-logo">●</span>
+<span id="appleText">Continue with Apple</span>
+<span class="social-arrow">→</span>
+</button>
+
+<button class="social-button" type="button" onclick="socialNotice('Facebook')">
+<span class="social-logo">f</span>
+<span id="facebookText">Continue with Facebook</span>
+<span class="social-arrow">→</span>
+</button>
+
+</div>
+
+<div class="account-mini">
+
+<article>
+<strong>♕</strong>
+<h4 id="mini1Title">Member benefits</h4>
+<p id="mini1Text">Exclusive Club features.</p>
+</article>
+
+<article>
+<strong>◇</strong>
+<h4 id="mini2Title">Special offers</h4>
+<p id="mini2Text">Selected partner benefits.</p>
+</article>
+
+<article>
+<strong>♡</strong>
+<h4 id="mini3Title">Community</h4>
+<p id="mini3Text">A world for pet lovers.</p>
+</article>
+
+</div>
+
+</div>
+
+<!-- PAYMENT -->
+
+<div class="flow-step" id="paymentStep" hidden>
+
+<span class="flow-kicker notranslate" translate="no">
+PETS &amp; DOGUE CLUB
+</span>
+
+<h2 id="paymentTitle">
+Complete your membership
+</h2>
+
+<p class="flow-intro" id="paymentIntro">
+You're just one step away from unlocking your Club benefits.
+</p>
+
+<div class="order-box">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=250&q=80"
+alt="PETS & DOGUE Club"
+>
+
+<div class="order-copy">
+
+<strong id="orderName">
+PETS & DOGUE Club
+</strong>
+
+<span id="orderPlan">
+Monthly membership
+</span>
+
+</div>
+
+<div class="order-price" id="orderPrice">
+£0
+</div>
+
+</div>
+
+<div class="promo-label" id="promoLabel">
+Apply a promo code
+</div>
+
+<div class="promo-row">
+
+<input id="promoCode" type="text" placeholder="Enter code">
+
+<button type="button" id="promoButton" onclick="applyPromo()">
+APPLY
+</button>
+
+</div>
+
+<div class="due-row">
+
+<span id="dueLabel">Due today</span>
+
+<strong id="dueAmount">
+£0.00
+</strong>
+
+</div>
+
+<div class="pay-title" id="payWithLabel">
+PAY WITH
+</div>
+
+<div class="wallets">
+
+<button class="wallet" type="button" onclick="paymentNotice('Google Pay')">
+<span class="brand-g">G</span>
+<span>Pay</span>
+</button>
+
+<button class="wallet" type="button" onclick="paymentNotice('Apple Pay')">
+<span class="brand-apple">●</span>
+<span>Pay</span>
+</button>
+
+<button class="wallet" type="button" onclick="paymentNotice('PayPal')">
+<span class="brand-paypal">PayPal</span>
+</button>
+
+</div>
+
+<div class="payment-or">
+<span id="paymentOr">OR</span>
+</div>
+
+<button class="card-payment" type="button" onclick="paymentNotice('Card')">
+
+<span id="payCardLabel">
+Pay with card
+</span>
+
+<span class="card-brands">
+
+<span class="visa">VISA</span>
+
+<span class="mc"></span>
+
+<span class="amex">AMEX</span>
+
+</span>
+
+</button>
+
+<p class="checkout-legal" id="checkoutLegal">
+After your complimentary month, monthly membership continues at £1 per month until cancelled. Annual membership provides one year of access for £10. By continuing, you agree to our Terms and Privacy Policy.
+</p>
+
+<div class="secure-checkout" id="secureCheckout">
+▣ Secure checkout
+</div>
+
+</div>
+
+</section>
+
+<!-- COOKIE CONSENT -->
+
+<section class="cookie-layer" id="cookieLayer">
+
+<div class="cookie-card">
+
+<div class="cookie-logo notranslate" translate="no">
+<small>PETS &amp;</small>
+DOGUE
+</div>
+
+<div class="cookie-icon">◔</div>
+
+<h2 id="cookieTitle">
+Your privacy
+</h2>
+
+<p id="cookieText">
+We use essential storage to operate PETS & DOGUE and, with your permission, analytics and personalisation technologies to improve your experience.
+</p>
+
+<a href="privacy.html" id="cookieLearn">
+Learn more
+</a>
+
+<div class="cookie-settings" id="cookieSettings">
+
+<div class="cookie-option">
+
+<div>
+<strong id="essentialTitle">Essential</strong>
+<p id="essentialText">Required for language, security and basic site functions.</p>
+</div>
+
+<button class="toggle on locked" type="button" aria-label="Essential cookies"></button>
+
+</div>
+
+<div class="cookie-option">
+
+<div>
+<strong id="analyticsTitle">Analytics</strong>
+<p id="analyticsText">Helps us understand how visitors use PETS & DOGUE.</p>
+</div>
+
+<button class="toggle" id="analyticsToggle" type="button" onclick="toggleConsent('analytics')"></button>
+
+</div>
+
+<div class="cookie-option">
+
+<div>
+<strong id="personalTitle">Personalisation</strong>
+<p id="personalText">Allows optional preferences and personalised experiences.</p>
+</div>
+
+<button class="toggle" id="personalToggle" type="button" onclick="toggleConsent('personalisation')"></button>
+
+</div>
+
+</div>
+
+<div class="cookie-actions">
+
+<button class="accept" type="button" id="acceptCookies" onclick="saveConsent(true,true)">
+ACCEPT ALL
+</button>
+
+<button type="button" id="rejectCookies" onclick="saveConsent(false,false)">
+REJECT
+</button>
+
+<button type="button" id="manageCookies" onclick="showCookieSettings()">
+MANAGE CHOICES
+</button>
+
+<button type="button" id="saveCookieChoices" onclick="saveCurrentConsent()" style="display:none">
+SAVE CHOICES
+</button>
+
+</div>
+
+</div>
+
+</section>
+
 <script>
-const CLUB_LANGUAGE_KEY="pets_dogue_language";
+const LANGUAGE_KEY="pets_dogue_language";
+const CONSENT_KEY="pets_dogue_cookie_consent";
+const MEMBER_KEY="pets_dogue_member_email";
 
-const CLUB_UI={
-en:{
-heroTitle:"Join PETS & DOGUE Club",
-heroText:"One membership for the magazine, Marketplace, Cover Star competitions, member discounts and pet-friendly discoveries.",
-heroPrice:"FIRST MONTH FREE · THEN £1 / MONTH",
-membershipHeading:"Choose your membership",
-membershipIntro:"Start with one complimentary month or save with annual membership. Cancel the monthly membership anytime.",
-monthlyBadge:"FIRST MONTH FREE",
-monthlyTitle:"Monthly",
-monthlyNote:"for your first month · then £1/month",
-monthlyCopy:"Discover PETS & DOGUE Club with no charge for your first month.",
-monthlyButton:"START FREE MONTH",
-yearlyBadge:"BEST VALUE",
-yearlyTitle:"Annual",
-yearlyNote:"per year",
-yearlyCopy:"Stay part of PETS & DOGUE for the full year for one simple price.",
-yearlyButton:"JOIN FOR £10 / YEAR",
-included:"Everything included",
-more:"More than a subscription",
-payment:"Choose how to pay",
-cardName:"NAME ON CARD",
-cardNumber:"CARD NUMBER",
-expiry:"EXPIRY",
-secure:"CONTINUE SECURELY",
-checkoutMonthly:"Monthly Membership",
-checkoutMonthlyPrice:"£0 today",
-checkoutMonthlyText:"Your first month is complimentary. After the trial, membership continues at £1 per month until cancelled.",
-checkoutYearly:"Annual Membership",
-checkoutYearlyPrice:"£10 today",
-checkoutYearlyText:"One payment gives you PETS & DOGUE Club membership for one year.",
-paymentSoon:"Secure payment will be connected to",
-marketTitle:"Marketplace",
-marketText:"Publish listings, discover services, accessories and responsible rehoming posts.",
-coverTitle:"Cover Star",
-coverText:"Enter your pet for the chance to appear on a PETS & DOGUE cover.",
-contestTitle:"Contests",
-contestText:"Take part in competitions, community votes and special member opportunities.",
-discountTitle:"Member Discounts",
-discountText:"Discover selected partner offers across pet products, services and experiences.",
-placesTitle:"Pet-Friendly Places",
-placesText:"Explore hotels, cafés, beaches, parks and useful places for people with pets.",
-magazineTitle:"PETS & DOGUE World",
-magazineText:"Be part of our magazine community, visual stories and future member experiences.",
-showcaseTitle:"Your pet can become part of the magazine.",
-showcaseText:"Club members can enter Cover Star competitions, take part in contests, discover partner benefits and connect with the growing PETS & DOGUE world."
-},
+const KEYS=[
+"pageTitle","pageSubtitle","freePrice","freeLabel","freeSmall","monthLabel","monthSmall","yearLabel","yearSmall","bestValue",
+"whatTitle",
+"benefit1Title","benefit1Text","benefit2Title","benefit2Text","benefit3Title","benefit3Text","benefit4Title","benefit4Text","benefit5Title","benefit5Text",
+"mainCta","signInLink","continueFreeLink","stickyTitle","stickyText","stickyButton","clubLegal",
+"accountTitle","accountIntro","emailLabel","emailPlaceholder","emailContinue","orText","googleText","appleText","facebookText",
+"mini1Title","mini1Text","mini2Title","mini2Text","mini3Title","mini3Text",
+"paymentTitle","paymentIntro","monthlyPlan","annualPlan","promoLabel","promoPlaceholder","promoButton","dueLabel","payWithLabel","paymentOr","payCardLabel","checkoutLegal","secureCheckout",
+"cookieTitle","cookieText","cookieLearn","essentialTitle","essentialText","analyticsTitle","analyticsText","personalTitle","personalText","acceptCookies","rejectCookies","manageCookies","saveCookieChoices",
+"invalidEmail","socialNotice","paymentNotice","promoNotice"
+];
 
-uk:{
-heroTitle:"Приєднуйтесь до PETS & DOGUE Club",
-heroText:"Одна підписка для журналу, Marketplace, конкурсів Cover Star, знижок та pet-friendly місць.",
-heroPrice:"ПЕРШИЙ МІСЯЦЬ БЕЗКОШТОВНО · ПОТІМ £1 / МІСЯЦЬ",
-membershipHeading:"Оберіть підписку",
-membershipIntro:"Почніть з безкоштовного місяця або оберіть річний план. Щомісячну підписку можна скасувати будь-коли.",
-monthlyBadge:"ПЕРШИЙ МІСЯЦЬ БЕЗКОШТОВНО",
-monthlyTitle:"Щомісячно",
-monthlyNote:"перший місяць £0 · потім £1/місяць",
-monthlyCopy:"Відкрийте PETS & DOGUE Club без оплати за перший місяць.",
-monthlyButton:"ПОЧАТИ БЕЗКОШТОВНИЙ МІСЯЦЬ",
-yearlyBadge:"НАЙВИГІДНІШЕ",
-yearlyTitle:"На рік",
-yearlyNote:"на рік",
-yearlyCopy:"Повний рік PETS & DOGUE Club за одну просту ціну.",
-yearlyButton:"ПРИЄДНАТИСЯ ЗА £10 / РІК",
-included:"Що входить",
-more:"Більше ніж підписка",
-payment:"Оберіть спосіб оплати",
-cardName:"ІМ’Я НА КАРТЦІ",
-cardNumber:"НОМЕР КАРТКИ",
-expiry:"ТЕРМІН",
-secure:"ПРОДОВЖИТИ БЕЗПЕЧНО",
-checkoutMonthly:"Щомісячна підписка",
-checkoutMonthlyPrice:"£0 сьогодні",
-checkoutMonthlyText:"Перший місяць безкоштовний. Після нього підписка становитиме £1 на місяць до скасування.",
-checkoutYearly:"Річна підписка",
-checkoutYearlyPrice:"£10 сьогодні",
-checkoutYearlyText:"Один платіж надає членство PETS & DOGUE Club на один рік.",
-paymentSoon:"Безпечна оплата буде підключена через",
-marketTitle:"Marketplace",
-marketText:"Публікуйте оголошення, знаходьте послуги, аксесуари та відповідальний пошук дому.",
-coverTitle:"Зірка обкладинки",
-coverText:"Подайте свого улюбленця на шанс з’явитися на обкладинці PETS & DOGUE.",
-contestTitle:"Конкурси",
-contestText:"Беріть участь у конкурсах, голосуваннях і спеціальних можливостях.",
-discountTitle:"Знижки для учасників",
-discountText:"Отримуйте пропозиції партнерів на товари, послуги та враження.",
-placesTitle:"Pet-Friendly місця",
-placesText:"Знаходьте готелі, кафе, пляжі, парки та корисні місця.",
-magazineTitle:"Світ PETS & DOGUE",
-magazineText:"Станьте частиною журналу, візуальних історій та нових можливостей Club.",
-showcaseTitle:"Ваш улюбленець може стати частиною журналу.",
-showcaseText:"Учасники Club можуть брати участь у Cover Star, конкурсах, отримувати партнерські переваги та бути частиною PETS & DOGUE."
-},
+const CLUB_TRANSLATIONS={
 
-ru:{
-heroTitle:"Вступить в PETS & DOGUE Club",
-heroText:"Одна подписка для журнала, Marketplace, конкурсов Cover Star, скидок и pet-friendly мест.",
-heroPrice:"ПЕРВЫЙ МЕСЯЦ БЕСПЛАТНО · ЗАТЕМ £1 / МЕСЯЦ",
-membershipHeading:"Выберите подписку",
-membershipIntro:"Начните с бесплатного месяца или выберите годовую подписку. Ежемесячную можно отменить в любое время.",
-monthlyBadge:"ПЕРВЫЙ МЕСЯЦ БЕСПЛАТНО",
-monthlyTitle:"Ежемесячная",
-monthlyNote:"первый месяц £0 · затем £1/месяц",
-monthlyCopy:"Попробуйте PETS & DOGUE Club без оплаты за первый месяц.",
-monthlyButton:"НАЧАТЬ БЕСПЛАТНЫЙ МЕСЯЦ",
-yearlyBadge:"ЛУЧШАЯ ЦЕНА",
-yearlyTitle:"Годовая",
-yearlyNote:"в год",
-yearlyCopy:"Полный год PETS & DOGUE Club за одну простую цену.",
-yearlyButton:"ВСТУПИТЬ ЗА £10 / ГОД",
-included:"Что входит в подписку",
-more:"Больше, чем подписка",
-payment:"Выберите способ оплаты",
-cardName:"ИМЯ НА КАРТЕ",
-cardNumber:"НОМЕР КАРТЫ",
-expiry:"СРОК",
-secure:"ПРОДОЛЖИТЬ БЕЗОПАСНО",
-checkoutMonthly:"Ежемесячная подписка",
-checkoutMonthlyPrice:"£0 сегодня",
-checkoutMonthlyText:"Первый месяц бесплатный. После него подписка продолжится за £1 в месяц до отмены.",
-checkoutYearly:"Годовая подписка",
-checkoutYearlyPrice:"£10 сегодня",
-checkoutYearlyText:"Один платёж предоставляет членство PETS & DOGUE Club на один год.",
-paymentSoon:"Безопасная оплата будет подключена через",
-marketTitle:"Marketplace",
-marketText:"Публикуйте объявления, находите услуги, аксессуары и ответственные предложения по поиску дома.",
-coverTitle:"Звезда обложки",
-coverText:"Подайте своего питомца на шанс появиться на обложке PETS & DOGUE.",
-contestTitle:"Конкурсы",
-contestText:"Участвуйте в конкурсах, голосованиях и специальных возможностях для участников.",
-discountTitle:"Скидки участникам",
-discountText:"Получайте предложения партнёров на товары, услуги и впечатления.",
-placesTitle:"Pet-Friendly места",
-placesText:"Открывайте отели, кафе, пляжи, парки и полезные места для людей с питомцами.",
-magazineTitle:"Мир PETS & DOGUE",
-magazineText:"Станьте частью журнала, визуальных историй и будущих возможностей Club.",
-showcaseTitle:"Ваш питомец может стать частью журнала.",
-showcaseText:"Участники Club могут участвовать в Cover Star, конкурсах, получать партнёрские преимущества и становиться частью PETS & DOGUE."
-}
+en:[
+"Choose your plan","Start free. Discover everything included. Continue only if you love it.","Free","First month","£0 today","1 month","after your free month","1 year","one annual payment","BEST VALUE",
+"What you get",
+"Marketplace","Publish listings, discover services, accessories and responsible rehoming posts.","Cover Star","Enter your pet for the chance to become part of a PETS & DOGUE cover.","Contests","Take part in competitions, community votes and special member opportunities.","Member Discounts","Unlock selected partner offers across products, services, travel and experiences.","Pet-Friendly Places","Discover hotels, cafés, beaches, parks and useful places for people with pets.",
+"START FREE MONTH","Already a member? Sign in","Continue free","First month free","Then £1 / month","JOIN CLUB","By continuing you agree to the PETS & DOGUE Terms and Privacy Policy. Monthly membership begins with one complimentary month and then continues at £1 per month until cancelled. Annual membership provides one year of access for £10.",
+"Sign in or create an account","Enter your email to continue. New members can create an account in seconds.","EMAIL ADDRESS","you@example.com","CONTINUE WITH EMAIL","OR","Continue with Google","Continue with Apple","Continue with Facebook",
+"Member benefits","Exclusive Club features.","Special offers","Selected partner benefits.","Community","A world for pet lovers.",
+"Complete your membership","You're just one step away from unlocking your Club benefits.","Monthly membership","Annual membership","Apply a promo code","Enter code","APPLY","Due today","PAY WITH","OR","Pay with card","After your complimentary month, monthly membership continues at £1 per month until cancelled. Annual membership provides one year of access for £10. By continuing, you agree to our Terms and Privacy Policy.","▣ Secure checkout",
+"Your privacy","We use essential storage to operate PETS & DOGUE and, with your permission, analytics and personalisation technologies to improve your experience.","Learn more","Essential","Required for language, security and basic site functions.","Analytics","Helps us understand how visitors use PETS & DOGUE.","Personalisation","Allows optional preferences and personalised experiences.","ACCEPT ALL","REJECT","MANAGE CHOICES","SAVE CHOICES",
+"Please enter a valid email address.","Social sign-in will be connected to","Secure payment will be connected to","Promo code support will be connected to the secure checkout."
+],
+
+uk:[
+"Оберіть план","Почніть безкоштовно. Перегляньте всі переваги та продовжуйте лише якщо вам сподобається.","Безкоштовно","Перший місяць","£0 сьогодні","1 місяць","після безкоштовного місяця","1 рік","один річний платіж","НАЙВИГІДНІШЕ",
+"Що ви отримуєте",
+"Marketplace","Публікуйте оголошення, знаходьте послуги, аксесуари та відповідальний пошук нового дому.","Cover Star","Дайте улюбленцю шанс стати частиною обкладинки PETS & DOGUE.","Конкурси","Беріть участь у конкурсах, голосуваннях та спеціальних можливостях для учасників.","Знижки учасникам","Отримуйте вибрані пропозиції партнерів на товари, послуги, подорожі та враження.","Pet-Friendly місця","Знаходьте готелі, кафе, пляжі, парки та корисні місця для людей із тваринами.",
+"ПОЧАТИ БЕЗКОШТОВНИЙ МІСЯЦЬ","Вже учасник? Увійти","Продовжити безкоштовно","Перший місяць безкоштовно","Потім £1 / місяць","ВСТУПИТИ","Продовжуючи, ви погоджуєтесь з Умовами та Політикою конфіденційності PETS & DOGUE. Щомісячне членство починається з безкоштовного місяця, після чого коштує £1 на місяць до скасування. Річне членство надає один рік доступу за £10.",
+"Увійти або створити акаунт","Введіть email для продовження. Нові учасники можуть створити акаунт за кілька секунд.","EMAIL","you@example.com","ПРОДОВЖИТИ З EMAIL","АБО","Продовжити з Google","Продовжити з Apple","Продовжити з Facebook",
+"Переваги учасника","Ексклюзивні функції Club.","Спеціальні пропозиції","Вибрані переваги партнерів.","Спільнота","Світ для людей, які люблять тварин.",
+"Завершіть оформлення","Залишився лише один крок до переваг Club.","Щомісячне членство","Річне членство","Промокод","Введіть код","ЗАСТОСУВАТИ","До сплати сьогодні","ОПЛАТИТИ ЧЕРЕЗ","АБО","Оплатити карткою","Після безкоштовного місяця щомісячне членство продовжується за £1 на місяць до скасування. Річне членство надає один рік доступу за £10. Продовжуючи, ви погоджуєтесь з Умовами та Політикою конфіденційності.","▣ Безпечна оплата",
+"Ваша конфіденційність","Ми використовуємо необхідне сховище для роботи PETS & DOGUE, а з вашого дозволу — аналітику та персоналізацію.","Дізнатися більше","Необхідні","Потрібні для мови, безпеки та основної роботи сайту.","Аналітика","Допомагає зрозуміти, як відвідувачі користуються PETS & DOGUE.","Персоналізація","Дозволяє додаткові налаштування та персоналізований досвід.","ПРИЙНЯТИ ВСЕ","ВІДХИЛИТИ","НАЛАШТУВАТИ","ЗБЕРЕГТИ",
+"Введіть правильну email-адресу.","Вхід через соцмережу буде підключено до","Безпечну оплату буде підключено до","Промокоди буде підключено до безпечної системи оплати."
+],
+
+ru:[
+"Выберите план","Начните бесплатно. Посмотрите все преимущества и продолжайте только если вам понравится.","Бесплатно","Первый месяц","£0 сегодня","1 месяц","после бесплатного месяца","1 год","один годовой платёж","ЛУЧШАЯ ЦЕНА",
+"Что вы получаете",
+"Marketplace","Публикуйте объявления, находите услуги, аксессуары и ответственные предложения по поиску нового дома.","Cover Star","Дайте питомцу шанс стать частью обложки PETS & DOGUE.","Конкурсы","Участвуйте в конкурсах, голосованиях и специальных возможностях для участников.","Скидки участникам","Получайте избранные предложения партнёров на товары, услуги, путешествия и впечатления.","Pet-Friendly места","Находите отели, кафе, пляжи, парки и полезные места для людей с питомцами.",
+"НАЧАТЬ БЕСПЛАТНЫЙ МЕСЯЦ","Уже участник? Войти","Продолжить бесплатно","Первый месяц бесплатно","Затем £1 / месяц","ВСТУПИТЬ","Продолжая, вы соглашаетесь с Условиями и Политикой конфиденциальности PETS & DOGUE. Ежемесячное членство начинается с бесплатного месяца, затем стоит £1 в месяц до отмены. Годовое членство предоставляет один год доступа за £10.",
+"Войти или создать аккаунт","Введите email для продолжения. Новый аккаунт можно создать за несколько секунд.","EMAIL","you@example.com","ПРОДОЛЖИТЬ С EMAIL","ИЛИ","Продолжить с Google","Продолжить с Apple","Продолжить с Facebook",
+"Преимущества участника","Эксклюзивные функции Club.","Специальные предложения","Избранные преимущества партнёров.","Сообщество","Мир для людей, которые любят животных.",
+"Завершите оформление","Остался всего один шаг до преимуществ Club.","Ежемесячное членство","Годовое членство","Промокод","Введите код","ПРИМЕНИТЬ","К оплате сегодня","ОПЛАТИТЬ ЧЕРЕЗ","ИЛИ","Оплатить картой","После бесплатного месяца ежемесячное членство продолжается за £1 в месяц до отмены. Годовое членство предоставляет один год доступа за £10. Продолжая, вы соглашаетесь с Условиями и Политикой конфиденциальности.","▣ Безопасная оплата",
+"Ваша конфиденциальность","Мы используем необходимое хранилище для работы PETS & DOGUE, а с вашего разрешения — аналитику и персонализацию.","Подробнее","Необходимые","Нужны для языка, безопасности и базовой работы сайта.","Аналитика","Помогает понимать, как посетители используют PETS & DOGUE.","Персонализация","Позволяет дополнительные настройки и персонализированный опыт.","ПРИНЯТЬ ВСЕ","ОТКЛОНИТЬ","НАСТРОИТЬ","СОХРАНИТЬ",
+"Введите правильный email.","Вход через социальную сеть будет подключён к","Безопасная оплата будет подключена к","Промокоды будут подключены к безопасной системе оплаты."
+],
+
+fr:[
+"Choisissez votre formule","Commencez gratuitement. Découvrez tous les avantages et continuez seulement si vous aimez.","Gratuit","Premier mois","£0 aujourd’hui","1 mois","après votre mois gratuit","1 an","un paiement annuel","MEILLEURE OFFRE",
+"Ce que vous obtenez",
+"Marketplace","Publiez des annonces et découvrez services, accessoires et solutions responsables de relogement.","Cover Star","Donnez à votre animal la chance d’apparaître sur une couverture PETS & DOGUE.","Concours","Participez aux concours, votes communautaires et opportunités réservées aux membres.","Réductions membres","Profitez d’offres partenaires sur les produits, services, voyages et expériences.","Lieux pet-friendly","Découvrez hôtels, cafés, plages, parcs et lieux utiles avec votre animal.",
+"COMMENCER LE MOIS GRATUIT","Déjà membre ? Se connecter","Continuer gratuitement","Premier mois gratuit","Puis £1 / mois","REJOINDRE","En continuant, vous acceptez les Conditions et la Politique de confidentialité PETS & DOGUE. L’abonnement mensuel commence par un mois gratuit puis continue à £1 par mois jusqu’à résiliation. L’abonnement annuel donne un an d’accès pour £10.",
+"Se connecter ou créer un compte","Entrez votre email pour continuer. Les nouveaux membres peuvent créer un compte en quelques secondes.","ADRESSE EMAIL","vous@exemple.com","CONTINUER AVEC L’EMAIL","OU","Continuer avec Google","Continuer avec Apple","Continuer avec Facebook",
+"Avantages membres","Fonctions exclusives du Club.","Offres spéciales","Avantages partenaires sélectionnés.","Communauté","Un univers pour les amoureux des animaux.",
+"Finalisez votre adhésion","Il ne reste qu’une étape avant de profiter des avantages du Club.","Abonnement mensuel","Abonnement annuel","Code promotionnel","Saisir le code","APPLIQUER","À payer aujourd’hui","PAYER AVEC","OU","Payer par carte","Après le mois gratuit, l’abonnement mensuel continue à £1 par mois jusqu’à résiliation. L’abonnement annuel donne un an d’accès pour £10. En continuant, vous acceptez nos Conditions et notre Politique de confidentialité.","▣ Paiement sécurisé",
+"Votre vie privée","Nous utilisons le stockage essentiel pour faire fonctionner PETS & DOGUE et, avec votre accord, l’analyse et la personnalisation.","En savoir plus","Essentiel","Nécessaire pour la langue, la sécurité et les fonctions de base.","Analyse","Nous aide à comprendre l’utilisation de PETS & DOGUE.","Personnalisation","Permet des préférences facultatives et une expérience personnalisée.","TOUT ACCEPTER","REFUSER","GÉRER LES CHOIX","ENREGISTRER",
+"Veuillez saisir une adresse email valide.","La connexion sociale sera reliée à","Le paiement sécurisé sera relié à","Les codes promo seront reliés au paiement sécurisé."
+],
+
+de:[
+"Mitgliedschaft wählen","Kostenlos starten, alle Vorteile entdecken und nur weitermachen, wenn es Ihnen gefällt.","Kostenlos","Erster Monat","£0 heute","1 Monat","nach dem Gratismonat","1 Jahr","eine Jahreszahlung","BESTER WERT",
+"Das ist enthalten",
+"Marketplace","Anzeigen veröffentlichen und Services, Zubehör sowie verantwortungsvolle Vermittlungen entdecken.","Cover Star","Geben Sie Ihrem Tier die Chance, auf einem PETS & DOGUE Cover zu erscheinen.","Wettbewerbe","Nehmen Sie an Wettbewerben, Community-Abstimmungen und Mitgliederaktionen teil.","Mitgliederrabatte","Nutzen Sie ausgewählte Partnerangebote für Produkte, Services, Reisen und Erlebnisse.","Tierfreundliche Orte","Entdecken Sie Hotels, Cafés, Strände, Parks und hilfreiche Orte mit Haustieren.",
+"GRATISMONAT STARTEN","Schon Mitglied? Anmelden","Kostenlos fortfahren","Erster Monat kostenlos","Dann £1 / Monat","CLUB BEITRETEN","Mit dem Fortfahren stimmen Sie den PETS & DOGUE Bedingungen und der Datenschutzrichtlinie zu. Die Monatsmitgliedschaft startet mit einem kostenlosen Monat und kostet danach £1 pro Monat bis zur Kündigung. Die Jahresmitgliedschaft bietet ein Jahr Zugang für £10.",
+"Anmelden oder Konto erstellen","Geben Sie Ihre E-Mail ein. Neue Mitglieder können in wenigen Sekunden ein Konto erstellen.","E-MAIL-ADRESSE","sie@beispiel.de","MIT E-MAIL FORTFAHREN","ODER","Mit Google fortfahren","Mit Apple fortfahren","Mit Facebook fortfahren",
+"Mitgliedervorteile","Exklusive Club-Funktionen.","Spezialangebote","Ausgewählte Partner-Vorteile.","Community","Eine Welt für Tierliebhaber.",
+"Mitgliedschaft abschließen","Nur noch ein Schritt bis zu Ihren Club-Vorteilen.","Monatsmitgliedschaft","Jahresmitgliedschaft","Aktionscode","Code eingeben","ANWENDEN","Heute fällig","BEZAHLEN MIT","ODER","Mit Karte bezahlen","Nach dem kostenlosen Monat läuft die Monatsmitgliedschaft für £1 pro Monat bis zur Kündigung weiter. Die Jahresmitgliedschaft bietet ein Jahr Zugang für £10. Mit dem Fortfahren stimmen Sie unseren Bedingungen und der Datenschutzrichtlinie zu.","▣ Sicherer Checkout",
+"Ihre Privatsphäre","Wir verwenden notwendige Speicherung für PETS & DOGUE und mit Ihrer Zustimmung Analyse und Personalisierung.","Mehr erfahren","Erforderlich","Notwendig für Sprache, Sicherheit und grundlegende Funktionen.","Analyse","Hilft uns zu verstehen, wie PETS & DOGUE genutzt wird.","Personalisierung","Ermöglicht optionale Einstellungen und personalisierte Erlebnisse.","ALLE AKZEPTIEREN","ABLEHNEN","AUSWAHL VERWALTEN","AUSWAHL SPEICHERN",
+"Bitte geben Sie eine gültige E-Mail-Adresse ein.","Social Login wird verbunden mit","Sichere Zahlung wird verbunden mit","Promo-Codes werden mit dem sicheren Checkout verbunden."
+],
+
+es:[
+"Elige tu plan","Empieza gratis, descubre todos los beneficios y continúa solo si te encanta.","Gratis","Primer mes","£0 hoy","1 mes","después del mes gratis","1 año","un pago anual","MEJOR OPCIÓN",
+"Lo que obtienes",
+"Marketplace","Publica anuncios y descubre servicios, accesorios y opciones responsables de reubicación.","Cover Star","Dale a tu mascota la oportunidad de aparecer en una portada de PETS & DOGUE.","Concursos","Participa en concursos, votaciones y oportunidades especiales para miembros.","Descuentos para miembros","Accede a ofertas seleccionadas en productos, servicios, viajes y experiencias.","Lugares pet-friendly","Descubre hoteles, cafés, playas, parques y lugares útiles para personas con mascotas.",
+"EMPEZAR MES GRATIS","¿Ya eres miembro? Inicia sesión","Continuar gratis","Primer mes gratis","Luego £1 / mes","UNIRME","Al continuar aceptas los Términos y la Política de Privacidad de PETS & DOGUE. La membresía mensual comienza con un mes gratuito y después continúa por £1 al mes hasta cancelarla. La anual ofrece un año de acceso por £10.",
+"Inicia sesión o crea una cuenta","Introduce tu email para continuar. Los nuevos miembros pueden crear una cuenta en segundos.","EMAIL","tu@ejemplo.com","CONTINUAR CON EMAIL","O","Continuar con Google","Continuar con Apple","Continuar con Facebook",
+"Beneficios","Funciones exclusivas del Club.","Ofertas especiales","Beneficios seleccionados de socios.","Comunidad","Un mundo para amantes de los animales.",
+"Completa tu membresía","Solo falta un paso para desbloquear tus beneficios.","Membresía mensual","Membresía anual","Código promocional","Introduce código","APLICAR","A pagar hoy","PAGAR CON","O","Pagar con tarjeta","Después del mes gratuito, la membresía mensual continúa por £1 al mes hasta cancelarla. La anual proporciona un año de acceso por £10. Al continuar aceptas nuestros Términos y Política de Privacidad.","▣ Pago seguro",
+"Tu privacidad","Usamos almacenamiento esencial para operar PETS & DOGUE y, con tu permiso, analítica y personalización.","Más información","Esenciales","Necesarios para idioma, seguridad y funciones básicas.","Analítica","Nos ayuda a entender cómo se usa PETS & DOGUE.","Personalización","Permite preferencias opcionales y experiencias personalizadas.","ACEPTAR TODO","RECHAZAR","GESTIONAR OPCIONES","GUARDAR OPCIONES",
+"Introduce un email válido.","El inicio social se conectará con","El pago seguro se conectará con","Los códigos promocionales se conectarán al pago seguro."
+],
+
+it:[
+"Scegli il tuo piano","Inizia gratis, scopri tutti i vantaggi e continua solo se ti piace.","Gratis","Primo mese","£0 oggi","1 mese","dopo il mese gratuito","1 anno","un pagamento annuale","MIGLIOR VALORE",
+"Cosa ottieni",
+"Marketplace","Pubblica annunci e scopri servizi, accessori e soluzioni responsabili per trovare una nuova casa.","Cover Star","Dai al tuo animale la possibilità di apparire su una copertina PETS & DOGUE.","Concorsi","Partecipa a concorsi, votazioni e opportunità speciali per i membri.","Sconti membri","Accedi a offerte selezionate su prodotti, servizi, viaggi ed esperienze.","Luoghi pet-friendly","Scopri hotel, caffè, spiagge, parchi e luoghi utili per chi viaggia con animali.",
+"INIZIA IL MESE GRATIS","Già membro? Accedi","Continua gratis","Primo mese gratuito","Poi £1 / mese","UNISCITI","Continuando accetti i Termini e la Privacy Policy di PETS & DOGUE. L’abbonamento mensile inizia con un mese gratuito e prosegue a £1 al mese fino alla cancellazione. L’annuale offre un anno di accesso per £10.",
+"Accedi o crea un account","Inserisci la tua email per continuare. I nuovi membri possono creare un account in pochi secondi.","EMAIL","tu@esempio.com","CONTINUA CON EMAIL","OPPURE","Continua con Google","Continua con Apple","Continua con Facebook",
+"Vantaggi membri","Funzioni esclusive Club.","Offerte speciali","Vantaggi partner selezionati.","Community","Un mondo per chi ama gli animali.",
+"Completa l’iscrizione","Manca solo un passaggio per sbloccare i vantaggi Club.","Abbonamento mensile","Abbonamento annuale","Codice promozionale","Inserisci codice","APPLICA","Da pagare oggi","PAGA CON","OPPURE","Paga con carta","Dopo il mese gratuito l’abbonamento mensile continua a £1 al mese fino alla cancellazione. L’annuale offre un anno di accesso per £10. Continuando accetti Termini e Privacy Policy.","▣ Pagamento sicuro",
+"La tua privacy","Usiamo archiviazione essenziale per PETS & DOGUE e, con il tuo consenso, analisi e personalizzazione.","Scopri di più","Essenziali","Necessari per lingua, sicurezza e funzioni di base.","Analisi","Ci aiuta a capire come viene utilizzato PETS & DOGUE.","Personalizzazione","Consente preferenze opzionali ed esperienze personalizzate.","ACCETTA TUTTO","RIFIUTA","GESTISCI SCELTE","SALVA SCELTE",
+"Inserisci un indirizzo email valido.","L’accesso social sarà collegato a","Il pagamento sicuro sarà collegato a","I codici promozionali saranno collegati al checkout sicuro."
+],
+
+pt:[
+"Escolha o seu plano","Comece grátis, descubra todos os benefícios e continue apenas se gostar.","Grátis","Primeiro mês","£0 hoje","1 mês","depois do mês grátis","1 ano","um pagamento anual","MELHOR VALOR",
+"O que recebe",
+"Marketplace","Publique anúncios e descubra serviços, acessórios e opções responsáveis de realojamento.","Cover Star","Dê ao seu animal a oportunidade de aparecer numa capa PETS & DOGUE.","Concursos","Participe em concursos, votações e oportunidades especiais para membros.","Descontos de membro","Aceda a ofertas selecionadas em produtos, serviços, viagens e experiências.","Locais pet-friendly","Descubra hotéis, cafés, praias, parques e locais úteis para pessoas com animais.",
+"COMEÇAR MÊS GRÁTIS","Já é membro? Entrar","Continuar grátis","Primeiro mês grátis","Depois £1 / mês","ADERIR","Ao continuar aceita os Termos e a Política de Privacidade PETS & DOGUE. A adesão mensal começa com um mês grátis e continua por £1 por mês até cancelamento. A anual oferece um ano de acesso por £10.",
+"Entrar ou criar conta","Introduza o seu email para continuar. Novos membros podem criar uma conta em segundos.","EMAIL","voce@exemplo.com","CONTINUAR COM EMAIL","OU","Continuar com Google","Continuar com Apple","Continuar com Facebook",
+"Benefícios","Funcionalidades exclusivas do Club.","Ofertas especiais","Benefícios selecionados de parceiros.","Comunidade","Um mundo para amantes de animais.",
+"Conclua a sua adesão","Falta apenas um passo para desbloquear os benefícios.","Adesão mensal","Adesão anual","Código promocional","Introduzir código","APLICAR","A pagar hoje","PAGAR COM","OU","Pagar com cartão","Após o mês grátis, a adesão mensal continua por £1 por mês até cancelamento. A anual oferece um ano de acesso por £10. Ao continuar aceita os Termos e a Política de Privacidade.","▣ Pagamento seguro",
+"A sua privacidade","Utilizamos armazenamento essencial para operar PETS & DOGUE e, com a sua permissão, análise e personalização.","Saber mais","Essenciais","Necessários para idioma, segurança e funções básicas.","Análise","Ajuda-nos a perceber como o PETS & DOGUE é utilizado.","Personalização","Permite preferências opcionais e experiências personalizadas.","ACEITAR TUDO","REJEITAR","GERIR ESCOLHAS","GUARDAR ESCOLHAS",
+"Introduza um email válido.","O login social será ligado a","O pagamento seguro será ligado a","Os códigos promocionais serão ligados ao pagamento seguro."
+],
+
+nl:[
+"Kies je plan","Start gratis, ontdek alle voordelen en ga alleen door als je het geweldig vindt.","Gratis","Eerste maand","£0 vandaag","1 maand","na je gratis maand","1 jaar","één jaarlijkse betaling","BESTE WAARDE",
+"Wat je krijgt",
+"Marketplace","Plaats advertenties en ontdek diensten, accessoires en verantwoorde herplaatsing.","Cover Star","Geef je huisdier de kans om op een PETS & DOGUE-cover te verschijnen.","Wedstrijden","Doe mee aan wedstrijden, community-stemmingen en speciale ledenkansen.","Ledekortingen","Ontgrendel geselecteerde partneraanbiedingen voor producten, diensten, reizen en ervaringen.","Huisdiervriendelijke plaatsen","Ontdek hotels, cafés, stranden, parken en handige plekken voor mensen met huisdieren.",
+"START GRATIS MAAND","Al lid? Inloggen","Gratis doorgaan","Eerste maand gratis","Daarna £1 / maand","WORD LID","Door verder te gaan ga je akkoord met de PETS & DOGUE Voorwaarden en Privacy Policy. Het maandlidmaatschap begint met één gratis maand en kost daarna £1 per maand totdat je opzegt. Jaarlidmaatschap biedt één jaar toegang voor £10.",
+"Inloggen of account maken","Vul je email in om verder te gaan. Nieuwe leden maken in enkele seconden een account.","EMAILADRES","jij@voorbeeld.nl","DOORGAAN MET EMAIL","OF","Doorgaan met Google","Doorgaan met Apple","Doorgaan met Facebook",
+"Ledenvoordelen","Exclusieve Club-functies.","Speciale aanbiedingen","Geselecteerde partnervoordelen.","Community","Een wereld voor dierenliefhebbers.",
+"Voltooi je lidmaatschap","Nog één stap om je Club-voordelen te ontgrendelen.","Maandlidmaatschap","Jaarlidmaatschap","Promocode","Code invoeren","TOEPASSEN","Vandaag verschuldigd","BETALEN MET","OF","Betalen met kaart","Na je gratis maand loopt het maandlidmaatschap door voor £1 per maand totdat je opzegt. Jaarlidmaatschap biedt één jaar toegang voor £10. Door verder te gaan ga je akkoord met Voorwaarden en Privacy Policy.","▣ Veilige checkout",
+"Je privacy","We gebruiken essentiële opslag voor PETS & DOGUE en, met toestemming, analyse en personalisatie.","Meer informatie","Essentieel","Nodig voor taal, beveiliging en basisfuncties.","Analyse","Helpt ons begrijpen hoe PETS & DOGUE wordt gebruikt.","Personalisatie","Maakt optionele voorkeuren en gepersonaliseerde ervaringen mogelijk.","ALLES ACCEPTEREN","WEIGEREN","KEUZES BEHEREN","KEUZES OPSLAAN",
+"Vul een geldig emailadres in.","Social login wordt gekoppeld aan","Veilige betaling wordt gekoppeld aan","Promocodes worden gekoppeld aan de veilige checkout."
+],
+
+pl:[
+"Wybierz plan","Zacznij bezpłatnie, poznaj wszystkie korzyści i kontynuuj tylko jeśli Ci się spodoba.","Za darmo","Pierwszy miesiąc","£0 dzisiaj","1 miesiąc","po darmowym miesiącu","1 rok","jedna płatność roczna","NAJLEPSZA WARTOŚĆ",
+"Co otrzymujesz",
+"Marketplace","Publikuj ogłoszenia i odkrywaj usługi, akcesoria oraz odpowiedzialne oferty nowego domu.","Cover Star","Daj swojemu zwierzakowi szansę pojawić się na okładce PETS & DOGUE.","Konkursy","Bierz udział w konkursach, głosowaniach społeczności i okazjach dla członków.","Zniżki członkowskie","Korzystaj z wybranych ofert partnerów na produkty, usługi, podróże i doświadczenia.","Miejsca pet-friendly","Odkrywaj hotele, kawiarnie, plaże, parki i przydatne miejsca dla osób ze zwierzętami.",
+"ROZPOCZNIJ DARMOWY MIESIĄC","Masz konto? Zaloguj się","Kontynuuj bezpłatnie","Pierwszy miesiąc gratis","Potem £1 / miesiąc","DOŁĄCZ","Kontynuując, akceptujesz Warunki i Politykę Prywatności PETS & DOGUE. Członkostwo miesięczne zaczyna się od bezpłatnego miesiąca, a następnie kosztuje £1 miesięcznie do anulowania. Roczne daje rok dostępu za £10.",
+"Zaloguj się lub utwórz konto","Podaj email, aby kontynuować. Nowe konto utworzysz w kilka sekund.","EMAIL","ty@przyklad.pl","KONTYNUUJ Z EMAILEM","LUB","Kontynuuj z Google","Kontynuuj z Apple","Kontynuuj z Facebook",
+"Korzyści członka","Ekskluzywne funkcje Club.","Oferty specjalne","Wybrane korzyści partnerów.","Społeczność","Świat dla miłośników zwierząt.",
+"Dokończ członkostwo","Jeszcze jeden krok do odblokowania korzyści Club.","Członkostwo miesięczne","Członkostwo roczne","Kod promocyjny","Wpisz kod","ZASTOSUJ","Do zapłaty dzisiaj","ZAPŁAĆ PRZEZ","LUB","Zapłać kartą","Po darmowym miesiącu członkostwo miesięczne kosztuje £1 miesięcznie do anulowania. Roczne daje rok dostępu za £10. Kontynuując, akceptujesz Warunki i Politykę Prywatności.","▣ Bezpieczna płatność",
+"Twoja prywatność","Używamy niezbędnego przechowywania danych dla PETS & DOGUE oraz, za zgodą, analityki i personalizacji.","Dowiedz się więcej","Niezbędne","Potrzebne do języka, bezpieczeństwa i podstawowych funkcji.","Analityka","Pomaga nam zrozumieć sposób korzystania z PETS & DOGUE.","Personalizacja","Pozwala na opcjonalne preferencje i spersonalizowane doświadczenia.","AKCEPTUJ WSZYSTKO","ODRZUĆ","ZARZĄDZAJ","ZAPISZ WYBÓR",
+"Wpisz prawidłowy email.","Logowanie społecznościowe zostanie połączone z","Bezpieczna płatność zostanie połączona z","Kody promocyjne zostaną połączone z bezpieczną płatnością."
+],
+
+cs:[
+"Vyberte plán","Začněte zdarma, objevte všechny výhody a pokračujte jen pokud se vám budou líbit.","Zdarma","První měsíc","£0 dnes","1 měsíc","po bezplatném měsíci","1 rok","jedna roční platba","NEJLEPŠÍ HODNOTA",
+"Co získáte",
+"Marketplace","Publikujte inzeráty a objevujte služby, doplňky a odpovědné nabídky nového domova.","Cover Star","Dejte svému mazlíčkovi šanci objevit se na obálce PETS & DOGUE.","Soutěže","Zapojte se do soutěží, komunitního hlasování a speciálních členských příležitostí.","Členské slevy","Získejte vybrané nabídky partnerů na produkty, služby, cestování a zážitky.","Pet-friendly místa","Objevujte hotely, kavárny, pláže, parky a užitečná místa pro lidi se zvířaty.",
+"ZAČÍT MĚSÍC ZDARMA","Jste členem? Přihlásit","Pokračovat zdarma","První měsíc zdarma","Poté £1 / měsíc","VSTOUPIT","Pokračováním souhlasíte s Podmínkami a Zásadami ochrany soukromí PETS & DOGUE. Měsíční členství začíná jedním bezplatným měsícem a poté stojí £1 měsíčně do zrušení. Roční členství poskytuje rok přístupu za £10.",
+"Přihlásit se nebo vytvořit účet","Zadejte email. Noví členové vytvoří účet během několika sekund.","EMAIL","vy@priklad.cz","POKRAČOVAT EMAILEM","NEBO","Pokračovat s Google","Pokračovat s Apple","Pokračovat s Facebook",
+"Výhody členů","Exkluzivní funkce Club.","Speciální nabídky","Vybrané výhody partnerů.","Komunita","Svět pro milovníky zvířat.",
+"Dokončete členství","Zbývá jen jeden krok k vašim výhodám.","Měsíční členství","Roční členství","Promo kód","Zadejte kód","POUŽÍT","Dnes k úhradě","ZAPLATIT PŘES","NEBO","Zaplatit kartou","Po bezplatném měsíci pokračuje měsíční členství za £1 měsíčně do zrušení. Roční členství poskytuje rok přístupu za £10. Pokračováním souhlasíte s Podmínkami a Zásadami ochrany soukromí.","▣ Bezpečná platba",
+"Vaše soukromí","Používáme nezbytné úložiště pro provoz PETS & DOGUE a s vaším souhlasem analytiku a personalizaci.","Více informací","Nezbytné","Potřebné pro jazyk, bezpečnost a základní funkce.","Analytika","Pomáhá nám pochopit používání PETS & DOGUE.","Personalizace","Umožňuje volitelné preference a personalizovaný zážitek.","PŘIJMOUT VŠE","ODMÍTNOUT","SPRAVOVAT VOLBY","ULOŽIT VOLBY",
+"Zadejte platný email.","Sociální přihlášení bude propojeno s","Bezpečná platba bude propojena s","Promo kódy budou propojeny s bezpečnou platbou."
+],
+
+sk:[
+"Vyberte plán","Začnite zadarmo, objavte všetky výhody a pokračujte iba ak sa vám páčia.","Zadarmo","Prvý mesiac","£0 dnes","1 mesiac","po bezplatnom mesiaci","1 rok","jedna ročná platba","NAJLEPŠIA HODNOTA",
+"Čo získate",
+"Marketplace","Publikujte inzeráty a objavujte služby, doplnky a zodpovedné ponuky nového domova.","Cover Star","Dajte svojmu miláčikovi šancu objaviť sa na obálke PETS & DOGUE.","Súťaže","Zapojte sa do súťaží, komunitného hlasovania a špeciálnych členských príležitostí.","Členské zľavy","Získajte vybrané partnerské ponuky na produkty, služby, cestovanie a zážitky.","Pet-friendly miesta","Objavujte hotely, kaviarne, pláže, parky a užitočné miesta pre ľudí so zvieratami.",
+"ZAČAŤ MESIAC ZADARMO","Ste členom? Prihlásiť","Pokračovať zadarmo","Prvý mesiac zadarmo","Potom £1 / mesiac","PRIDAŤ SA","Pokračovaním súhlasíte s Podmienkami a Zásadami ochrany súkromia PETS & DOGUE. Mesačné členstvo začína jedným bezplatným mesiacom a potom stojí £1 mesačne do zrušenia. Ročné poskytuje rok prístupu za £10.",
+"Prihlásiť sa alebo vytvoriť účet","Zadajte email. Noví členovia si vytvoria účet za pár sekúnd.","EMAIL","vy@priklad.sk","POKRAČOVAŤ EMAILOM","ALEBO","Pokračovať s Google","Pokračovať s Apple","Pokračovať s Facebook",
+"Členské výhody","Exkluzívne funkcie Club.","Špeciálne ponuky","Vybrané partnerské výhody.","Komunita","Svet pre milovníkov zvierat.",
+"Dokončite členstvo","Zostáva už len jeden krok k výhodám Club.","Mesačné členstvo","Ročné členstvo","Promo kód","Zadajte kód","POUŽIŤ","Dnes na úhradu","ZAPLATIŤ CEZ","ALEBO","Zaplatiť kartou","Po bezplatnom mesiaci pokračuje mesačné členstvo za £1 mesačne do zrušenia. Ročné členstvo poskytuje rok prístupu za £10. Pokračovaním súhlasíte s Podmienkami a Zásadami ochrany súkromia.","▣ Bezpečná platba",
+"Vaše súkromie","Používame nevyhnutné úložisko pre PETS & DOGUE a s vaším súhlasom analytiku a personalizáciu.","Viac informácií","Nevyhnutné","Potrebné pre jazyk, bezpečnosť a základné funkcie.","Analytika","Pomáha nám pochopiť používanie PETS & DOGUE.","Personalizácia","Umožňuje voliteľné preferencie a personalizovaný zážitok.","PRIJAŤ VŠETKO","ODMIETNUŤ","SPRAVOVAŤ VOĽBY","ULOŽIŤ VOĽBY",
+"Zadajte platný email.","Sociálne prihlásenie bude prepojené s","Bezpečná platba bude prepojená s","Promo kódy budú prepojené s bezpečnou platbou."
+],
+
+hu:[
+"Válassz csomagot","Kezdd ingyen, fedezd fel az előnyöket, és csak akkor folytasd, ha tetszik.","Ingyenes","Első hónap","£0 ma","1 hónap","az ingyenes hónap után","1 év","egy éves fizetés","LEGJOBB ÉRTÉK",
+"Mit kapsz",
+"Marketplace","Adj fel hirdetéseket, és fedezz fel szolgáltatásokat, kiegészítőket és felelős újraotthon-keresést.","Cover Star","Adj esélyt kedvencednek, hogy PETS & DOGUE címlapra kerüljön.","Versenyek","Vegyél részt versenyeken, közösségi szavazásokon és különleges lehetőségeken.","Tagi kedvezmények","Fedezz fel válogatott partnerajánlatokat termékekre, szolgáltatásokra, utazásra és élményekre.","Állatbarát helyek","Fedezz fel hoteleket, kávézókat, strandokat, parkokat és hasznos helyeket.",
+"INGYENES HÓNAP INDÍTÁSA","Már tag vagy? Bejelentkezés","Folytatás ingyen","Első hónap ingyen","Utána £1 / hónap","CSATLAKOZOM","A folytatással elfogadod a PETS & DOGUE Feltételeit és Adatvédelmi szabályzatát. A havi tagság egy ingyenes hónappal indul, majd £1 havonta a lemondásig. Az éves tagság egy év hozzáférést ad £10-ért.",
+"Bejelentkezés vagy fiók létrehozása","Add meg emailed a folytatáshoz. Új tagok néhány másodperc alatt fiókot hozhatnak létre.","EMAIL","te@pelda.hu","FOLYTATÁS EMAILLEL","VAGY","Folytatás Google-lel","Folytatás Apple-lel","Folytatás Facebookkal",
+"Tagi előnyök","Exkluzív Club-funkciók.","Különleges ajánlatok","Válogatott partnerelőnyök.","Közösség","Világ az állatbarátoknak.",
+"Fejezd be a tagságot","Már csak egy lépés választ el a Club előnyeitől.","Havi tagság","Éves tagság","Promóciós kód","Kód megadása","ALKALMAZ","Ma fizetendő","FIZETÉS","VAGY","Fizetés kártyával","Az ingyenes hónap után a havi tagság £1 havonta a lemondásig. Az éves tagság egy év hozzáférést ad £10-ért. A folytatással elfogadod a Feltételeket és Adatvédelmi szabályzatot.","▣ Biztonságos fizetés",
+"Adatvédelem","A PETS & DOGUE működéséhez szükséges tárolást, engedélyeddel pedig analitikát és személyre szabást használunk.","További információ","Szükséges","A nyelvhez, biztonsághoz és alapfunkciókhoz szükséges.","Analitika","Segít megérteni a PETS & DOGUE használatát.","Személyre szabás","Opcionális beállításokat és személyre szabott élményt tesz lehetővé.","ÖSSZES ELFOGADÁSA","ELUTASÍTÁS","BEÁLLÍTÁSOK","MENTÉS",
+"Adj meg érvényes email címet.","A közösségi bejelentkezés ehhez kapcsolódik:","A biztonságos fizetés ehhez kapcsolódik:","A promókódok a biztonságos fizetéshez kapcsolódnak."
+],
+
+ro:[
+"Alege planul","Începe gratuit, descoperă toate beneficiile și continuă doar dacă îți place.","Gratuit","Prima lună","£0 astăzi","1 lună","după luna gratuită","1 an","o plată anuală","CEA MAI BUNĂ VALOARE",
+"Ce primești",
+"Marketplace","Publică anunțuri și descoperă servicii, accesorii și opțiuni responsabile de relocare.","Cover Star","Oferă animalului tău șansa de a apărea pe o copertă PETS & DOGUE.","Concursuri","Participă la concursuri, voturi ale comunității și oportunități speciale pentru membri.","Reduceri pentru membri","Deblochează oferte selectate pentru produse, servicii, călătorii și experiențe.","Locuri pet-friendly","Descoperă hoteluri, cafenele, plaje, parcuri și locuri utile pentru persoane cu animale.",
+"ÎNCEPE LUNA GRATUITĂ","Ești deja membru? Autentificare","Continuă gratuit","Prima lună gratuită","Apoi £1 / lună","ALĂTURĂ-TE","Continuând accepți Termenii și Politica de Confidențialitate PETS & DOGUE. Abonamentul lunar începe cu o lună gratuită și apoi continuă la £1 pe lună până la anulare. Abonamentul anual oferă un an de acces pentru £10.",
+"Autentificare sau creare cont","Introdu emailul pentru a continua. Membrii noi își pot crea cont în câteva secunde.","EMAIL","tu@exemplu.ro","CONTINUĂ CU EMAIL","SAU","Continuă cu Google","Continuă cu Apple","Continuă cu Facebook",
+"Beneficii","Funcții exclusive Club.","Oferte speciale","Beneficii selectate de la parteneri.","Comunitate","O lume pentru iubitorii de animale.",
+"Finalizează abonamentul","Mai este doar un pas până la beneficiile Club.","Abonament lunar","Abonament anual","Cod promoțional","Introdu codul","APLICĂ","De plată astăzi","PLĂTEȘTE CU","SAU","Plătește cu cardul","După luna gratuită abonamentul lunar continuă la £1 pe lună până la anulare. Abonamentul anual oferă un an de acces pentru £10. Continuând accepți Termenii și Politica de Confidențialitate.","▣ Plată securizată",
+"Confidențialitatea ta","Folosim stocare esențială pentru PETS & DOGUE și, cu acordul tău, analiză și personalizare.","Află mai multe","Esențiale","Necesare pentru limbă, securitate și funcțiile de bază.","Analiză","Ne ajută să înțelegem utilizarea PETS & DOGUE.","Personalizare","Permite preferințe opționale și experiențe personalizate.","ACCEPTĂ TOT","RESPINGE","GESTIONEAZĂ","SALVEAZĂ",
+"Introdu un email valid.","Autentificarea socială va fi conectată la","Plata securizată va fi conectată la","Codurile promoționale vor fi conectate la plata securizată."
+],
+
+bg:[
+"Изберете план","Започнете безплатно, разгледайте всички предимства и продължете само ако ви харесва.","Безплатно","Първи месец","£0 днес","1 месец","след безплатния месец","1 година","едно годишно плащане","НАЙ-ДОБРА СТОЙНОСТ",
+"Какво получавате",
+"Marketplace","Публикувайте обяви и откривайте услуги, аксесоари и отговорни предложения за нов дом.","Cover Star","Дайте шанс на любимеца си да се появи на корица на PETS & DOGUE.","Конкурси","Участвайте в конкурси, гласувания и специални възможности за членове.","Отстъпки за членове","Получавайте избрани партньорски оферти за продукти, услуги, пътувания и преживявания.","Pet-Friendly места","Откривайте хотели, кафенета, плажове, паркове и полезни места за хора с домашни любимци.",
+"СТАРТ НА БЕЗПЛАТНИЯ МЕСЕЦ","Вече сте член? Вход","Продължи безплатно","Първият месец е безплатен","После £1 / месец","ПРИСЪЕДИНИ СЕ","Продължавайки, приемате Условията и Политиката за поверителност на PETS & DOGUE. Месечното членство започва с един безплатен месец и след това струва £1 месечно до отказ. Годишното членство дава една година достъп за £10.",
+"Вход или създаване на профил","Въведете email за продължаване. Новите членове могат да създадат профил за секунди.","EMAIL","you@example.com","ПРОДЪЛЖИ С EMAIL","ИЛИ","Продължи с Google","Продължи с Apple","Продължи с Facebook",
+"Предимства","Ексклузивни Club функции.","Специални оферти","Избрани партньорски предимства.","Общност","Свят за любителите на животни.",
+"Завършете членството","Остава само една стъпка до предимствата на Club.","Месечно членство","Годишно членство","Промокод","Въведете код","ПРИЛОЖИ","Дължимо днес","ПЛАТИ С","ИЛИ","Плати с карта","След безплатния месец месечното членство продължава за £1 месечно до отказ. Годишното членство дава една година достъп за £10. Продължавайки, приемате Условията и Политиката за поверителност.","▣ Сигурно плащане",
+"Вашата поверителност","Използваме необходимо съхранение за PETS & DOGUE и, с ваше разрешение, аналитика и персонализация.","Научете повече","Необходими","Нужни за езика, сигурността и основните функции.","Аналитика","Помага ни да разберем как се използва PETS & DOGUE.","Персонализация","Позволява допълнителни предпочитания и персонализирано преживяване.","ПРИЕМИ ВСИЧКО","ОТКАЖИ","УПРАВЛЯВАЙ","ЗАПАЗИ",
+"Въведете валиден email.","Социалният вход ще бъде свързан с","Сигурното плащане ще бъде свързано с","Промокодовете ще бъдат свързани със сигурното плащане."
+],
+
+el:[
+"Επιλέξτε πρόγραμμα","Ξεκινήστε δωρεάν, ανακαλύψτε όλα τα οφέλη και συνεχίστε μόνο αν σας αρέσει.","Δωρεάν","Πρώτος μήνας","£0 σήμερα","1 μήνας","μετά τον δωρεάν μήνα","1 έτος","μία ετήσια πληρωμή","ΚΑΛΥΤΕΡΗ ΑΞΙΑ",
+"Τι περιλαμβάνεται",
+"Marketplace","Δημοσιεύστε αγγελίες και ανακαλύψτε υπηρεσίες, αξεσουάρ και υπεύθυνες επιλογές επανένταξης.","Cover Star","Δώστε στο κατοικίδιό σας την ευκαιρία να εμφανιστεί σε εξώφυλλο PETS & DOGUE.","Διαγωνισμοί","Συμμετέχετε σε διαγωνισμούς, ψηφοφορίες και ειδικές ευκαιρίες μελών.","Εκπτώσεις μελών","Αποκτήστε επιλεγμένες προσφορές συνεργατών σε προϊόντα, υπηρεσίες, ταξίδια και εμπειρίες.","Pet-Friendly μέρη","Ανακαλύψτε ξενοδοχεία, καφέ, παραλίες, πάρκα και χρήσιμα μέρη για ανθρώπους με κατοικίδια.",
+"ΕΝΑΡΞΗ ΔΩΡΕΑΝ ΜΗΝΑ","Ήδη μέλος; Σύνδεση","Συνέχεια δωρεάν","Πρώτος μήνας δωρεάν","Μετά £1 / μήνα","ΕΓΓΡΑΦΗ","Συνεχίζοντας αποδέχεστε τους Όρους και την Πολιτική Απορρήτου PETS & DOGUE. Η μηνιαία συνδρομή ξεκινά με έναν δωρεάν μήνα και συνεχίζει με £1 τον μήνα έως την ακύρωση. Η ετήσια δίνει έναν χρόνο πρόσβασης για £10.",
+"Σύνδεση ή δημιουργία λογαριασμού","Εισαγάγετε το email σας. Τα νέα μέλη μπορούν να δημιουργήσουν λογαριασμό σε δευτερόλεπτα.","EMAIL","you@example.com","ΣΥΝΕΧΕΙΑ ΜΕ EMAIL","Ή","Συνέχεια με Google","Συνέχεια με Apple","Συνέχεια με Facebook",
+"Οφέλη μελών","Αποκλειστικές λειτουργίες Club.","Ειδικές προσφορές","Επιλεγμένα οφέλη συνεργατών.","Κοινότητα","Ένας κόσμος για φίλους των ζώων.",
+"Ολοκληρώστε τη συνδρομή","Απομένει μόνο ένα βήμα για τα οφέλη του Club.","Μηνιαία συνδρομή","Ετήσια συνδρομή","Κωδικός προσφοράς","Εισαγάγετε κωδικό","ΕΦΑΡΜΟΓΗ","Πληρωτέο σήμερα","ΠΛΗΡΩΜΗ ΜΕ","Ή","Πληρωμή με κάρτα","Μετά τον δωρεάν μήνα η μηνιαία συνδρομή συνεχίζει με £1 τον μήνα έως την ακύρωση. Η ετήσια δίνει έναν χρόνο πρόσβασης για £10. Συνεχίζοντας αποδέχεστε τους Όρους και την Πολιτική Απορρήτου.","▣ Ασφαλής πληρωμή",
+"Το απόρρητό σας","Χρησιμοποιούμε απαραίτητη αποθήκευση για το PETS & DOGUE και, με την άδειά σας, αναλυτικά στοιχεία και εξατομίκευση.","Μάθετε περισσότερα","Απαραίτητα","Απαραίτητα για γλώσσα, ασφάλεια και βασικές λειτουργίες.","Αναλυτικά","Μας βοηθούν να κατανοήσουμε τη χρήση του PETS & DOGUE.","Εξατομίκευση","Επιτρέπει προαιρετικές προτιμήσεις και εξατομικευμένες εμπειρίες.","ΑΠΟΔΟΧΗ ΟΛΩΝ","ΑΠΟΡΡΙΨΗ","ΔΙΑΧΕΙΡΙΣΗ","ΑΠΟΘΗΚΕΥΣΗ",
+"Εισαγάγετε έγκυρο email.","Η κοινωνική σύνδεση θα συνδεθεί με","Η ασφαλής πληρωμή θα συνδεθεί με","Οι κωδικοί προσφοράς θα συνδεθούν με την ασφαλή πληρωμή."
+],
+
+sv:[
+"Välj din plan","Börja gratis, upptäck alla fördelar och fortsätt bara om du gillar det.","Gratis","Första månaden","£0 idag","1 månad","efter gratismånaden","1 år","en årsbetalning","BÄSTA VÄRDE",
+"Det här får du",
+"Marketplace","Publicera annonser och upptäck tjänster, tillbehör och ansvarsfull omplacering.","Cover Star","Ge ditt husdjur chansen att synas på ett PETS & DOGUE-omslag.","Tävlingar","Delta i tävlingar, community-omröstningar och särskilda medlemsmöjligheter.","Medlemsrabatter","Få utvalda partnererbjudanden på produkter, tjänster, resor och upplevelser.","Djurvänliga platser","Upptäck hotell, kaféer, stränder, parker och användbara platser för djurägare.",
+"STARTA GRATIS MÅNAD","Redan medlem? Logga in","Fortsätt gratis","Första månaden gratis","Sedan £1 / månad","GÅ MED","Genom att fortsätta godkänner du PETS & DOGUE Villkor och Integritetspolicy. Månadsmedlemskapet börjar med en gratis månad och fortsätter sedan för £1 per månad tills det sägs upp. Årsmedlemskapet ger ett års tillgång för £10.",
+"Logga in eller skapa konto","Ange din email för att fortsätta. Nya medlemmar kan skapa ett konto på några sekunder.","EMAIL","du@exempel.se","FORTSÄTT MED EMAIL","ELLER","Fortsätt med Google","Fortsätt med Apple","Fortsätt med Facebook",
+"Medlemsförmåner","Exklusiva Club-funktioner.","Specialerbjudanden","Utvalda partnerförmåner.","Community","En värld för djurälskare.",
+"Slutför medlemskapet","Bara ett steg kvar till dina Club-förmåner.","Månadsmedlemskap","Årsmedlemskap","Kampanjkod","Ange kod","ANVÄND","Betalas idag","BETALA MED","ELLER","Betala med kort","Efter gratismånaden fortsätter månadsmedlemskapet för £1 per månad tills det sägs upp. Årsmedlemskapet ger ett års tillgång för £10. Genom att fortsätta godkänner du Villkor och Integritetspolicy.","▣ Säker betalning",
+"Din integritet","Vi använder nödvändig lagring för PETS & DOGUE och, med ditt tillstånd, analys och personalisering.","Läs mer","Nödvändiga","Behövs för språk, säkerhet och grundläggande funktioner.","Analys","Hjälper oss förstå hur PETS & DOGUE används.","Personalisering","Möjliggör valfria preferenser och personliga upplevelser.","ACCEPTERA ALLA","AVVISA","HANTERA VAL","SPARA VAL",
+"Ange en giltig emailadress.","Social inloggning kommer att kopplas till","Säker betalning kommer att kopplas till","Kampanjkoder kommer att kopplas till säker betalning."
+],
+
+da:[
+"Vælg din plan","Start gratis, se alle fordelene og fortsæt kun hvis du er glad for det.","Gratis","Første måned","£0 i dag","1 måned","efter din gratis måned","1 år","én årlig betaling","BEDSTE VÆRDI",
+"Det får du",
+"Marketplace","Opret annoncer og find tjenester, tilbehør og ansvarlige løsninger til nyt hjem.","Cover Star","Giv dit kæledyr chancen for at komme på et PETS & DOGUE-cover.","Konkurrencer","Deltag i konkurrencer, community-afstemninger og særlige medlemsmuligheder.","Medlemsrabatter","Få udvalgte partnertilbud på produkter, tjenester, rejser og oplevelser.","Kæledyrsvenlige steder","Find hoteller, caféer, strande, parker og nyttige steder for mennesker med kæledyr.",
+"START GRATIS MÅNED","Allerede medlem? Log ind","Fortsæt gratis","Første måned gratis","Derefter £1 / måned","BLIV MEDLEM","Ved at fortsætte accepterer du PETS & DOGUE Vilkår og Privatlivspolitik. Månedligt medlemskab starter med en gratis måned og fortsætter derefter til £1 pr. måned indtil opsigelse. Årligt medlemskab giver et års adgang for £10.",
+"Log ind eller opret konto","Indtast din email for at fortsætte. Nye medlemmer kan oprette en konto på få sekunder.","EMAIL","dig@eksempel.dk","FORTSÆT MED EMAIL","ELLER","Fortsæt med Google","Fortsæt med Apple","Fortsæt med Facebook",
+"Medlemsfordele","Eksklusive Club-funktioner.","Særlige tilbud","Udvalgte partnerfordele.","Community","En verden for dyreelskere.",
+"Færdiggør medlemskabet","Kun ét trin tilbage til dine Club-fordele.","Månedligt medlemskab","Årligt medlemskab","Kampagnekode","Indtast kode","ANVEND","Betales i dag","BETAL MED","ELLER","Betal med kort","Efter den gratis måned fortsætter medlemskabet til £1 pr. måned indtil opsigelse. Årligt medlemskab giver et års adgang for £10. Ved at fortsætte accepterer du Vilkår og Privatlivspolitik.","▣ Sikker betaling",
+"Dit privatliv","Vi bruger nødvendig lagring til PETS & DOGUE og, med din tilladelse, analyse og personalisering.","Læs mere","Nødvendige","Kræves til sprog, sikkerhed og grundlæggende funktioner.","Analyse","Hjælper os med at forstå brugen af PETS & DOGUE.","Personalisering","Muliggør valgfrie præferencer og personlige oplevelser.","ACCEPTER ALLE","AFVIS","ADMINISTRER VALG","GEM VALG",
+"Indtast en gyldig email.","Social login vil blive forbundet med","Sikker betaling vil blive forbundet med","Kampagnekoder vil blive forbundet med sikker betaling."
+],
+
+no:[
+"Velg planen din","Start gratis, oppdag alle fordelene og fortsett bare hvis du liker det.","Gratis","Første måned","£0 i dag","1 måned","etter gratismåneden","1 år","én årlig betaling","BESTE VERDI",
+"Dette får du",
+"Marketplace","Publiser annonser og finn tjenester, tilbehør og ansvarlige løsninger for nytt hjem.","Cover Star","Gi kjæledyret ditt sjansen til å vises på et PETS & DOGUE-cover.","Konkurranser","Delta i konkurranser, community-avstemninger og spesielle medlemsmuligheter.","Medlemsrabatter","Få utvalgte partnertilbud på produkter, tjenester, reiser og opplevelser.","Dyrevennlige steder","Oppdag hoteller, kafeer, strender, parker og nyttige steder for dyreeiere.",
+"START GRATIS MÅNED","Allerede medlem? Logg inn","Fortsett gratis","Første måned gratis","Deretter £1 / måned","BLI MED","Ved å fortsette godtar du PETS & DOGUE Vilkår og Personvernregler. Månedlig medlemskap starter med en gratis måned og fortsetter deretter til £1 per måned til det sies opp. Årsmedlemskap gir ett års tilgang for £10.",
+"Logg inn eller opprett konto","Skriv inn emailen din. Nye medlemmer kan opprette konto på sekunder.","EMAIL","deg@eksempel.no","FORTSETT MED EMAIL","ELLER","Fortsett med Google","Fortsett med Apple","Fortsett med Facebook",
+"Medlemsfordeler","Eksklusive Club-funksjoner.","Spesialtilbud","Utvalgte partnerfordeler.","Community","En verden for dyreelskere.",
+"Fullfør medlemskapet","Bare ett steg igjen til Club-fordelene.","Månedlig medlemskap","Årsmedlemskap","Kampanjekode","Skriv inn kode","BRUK","Betales i dag","BETAL MED","ELLER","Betal med kort","Etter gratismåneden fortsetter månedlig medlemskap til £1 per måned til det sies opp. Årsmedlemskap gir ett års tilgang for £10. Ved å fortsette godtar du Vilkår og Personvernregler.","▣ Sikker betaling",
+"Ditt personvern","Vi bruker nødvendig lagring for PETS & DOGUE og, med tillatelse, analyse og personalisering.","Les mer","Nødvendige","Kreves for språk, sikkerhet og grunnfunksjoner.","Analyse","Hjelper oss forstå hvordan PETS & DOGUE brukes.","Personalisering","Muliggjør valgfrie preferanser og personlige opplevelser.","GODTA ALLE","AVVIS","ADMINISTRER VALG","LAGRE VALG",
+"Skriv inn en gyldig email.","Sosial innlogging vil kobles til","Sikker betaling vil kobles til","Kampanjekoder vil kobles til sikker betaling."
+],
+
+fi:[
+"Valitse jäsenyys","Aloita ilmaiseksi, tutustu etuihin ja jatka vain jos pidät siitä.","Ilmainen","Ensimmäinen kuukausi","£0 tänään","1 kuukausi","ilmaisen kuukauden jälkeen","1 vuosi","yksi vuosimaksu","PARAS ARVO",
+"Mitä saat",
+"Marketplace","Julkaise ilmoituksia ja löydä palveluja, tarvikkeita sekä vastuullisia uuden kodin vaihtoehtoja.","Cover Star","Anna lemmikillesi mahdollisuus päästä PETS & DOGUE -kanteen.","Kilpailut","Osallistu kilpailuihin, yhteisöäänestyksiin ja jäsenmahdollisuuksiin.","Jäsenalennukset","Saat valittuja kumppanietuja tuotteista, palveluista, matkoista ja elämyksistä.","Lemmikkiystävälliset paikat","Löydä hotelleja, kahviloita, rantoja, puistoja ja hyödyllisiä paikkoja lemmikin kanssa.",
+"ALOITA ILMAINEN KUUKAUSI","Oletko jo jäsen? Kirjaudu","Jatka ilmaiseksi","Ensimmäinen kuukausi ilmainen","Sitten £1 / kk","LIITY","Jatkamalla hyväksyt PETS & DOGUE Ehdot ja Tietosuojakäytännön. Kuukausijäsenyys alkaa ilmaisella kuukaudella ja jatkuu sitten hintaan £1 kuukaudessa kunnes peruutat. Vuosijäsenyys antaa vuoden käyttöoikeuden £10:llä.",
+"Kirjaudu tai luo tili","Anna email jatkaaksesi. Uusi jäsen voi luoda tilin sekunneissa.","EMAIL","sinä@esimerkki.fi","JATKA EMAILILLA","TAI","Jatka Googlella","Jatka Applella","Jatka Facebookilla",
+"Jäsenedut","Eksklusiiviset Club-toiminnot.","Erikoistarjoukset","Valitut kumppaniedut.","Yhteisö","Maailma eläinten ystäville.",
+"Viimeistele jäsenyys","Vain yksi askel Club-etuihin.","Kuukausijäsenyys","Vuosijäsenyys","Tarjouskoodi","Syötä koodi","KÄYTÄ","Maksettava tänään","MAKSA","TAI","Maksa kortilla","Ilmaisen kuukauden jälkeen kuukausijäsenyys jatkuu hintaan £1 kuukaudessa kunnes peruutat. Vuosijäsenyys antaa vuoden käyttöoikeuden £10:llä. Jatkamalla hyväksyt Ehdot ja Tietosuojakäytännön.","▣ Turvallinen maksu",
+"Yksityisyytesi","Käytämme PETS & DOGUE -palveluun välttämätöntä tallennusta sekä luvallasi analytiikkaa ja personointia.","Lue lisää","Välttämättömät","Tarvitaan kieleen, turvallisuuteen ja perustoimintoihin.","Analytiikka","Auttaa ymmärtämään PETS & DOGUE -palvelun käyttöä.","Personointi","Mahdollistaa valinnaiset asetukset ja henkilökohtaisen kokemuksen.","HYVÄKSY KAIKKI","HYLKÄÄ","HALLITSE VALINTOJA","TALLENNA",
+"Anna kelvollinen email.","Sosiaalinen kirjautuminen yhdistetään palveluun","Turvallinen maksu yhdistetään palveluun","Tarjouskoodit yhdistetään turvalliseen maksuun."
+],
+
+tr:[
+"Planınızı seçin","Ücretsiz başlayın, tüm avantajları keşfedin ve yalnızca severseniz devam edin.","Ücretsiz","İlk ay","Bugün £0","1 ay","ücretsiz aydan sonra","1 yıl","tek yıllık ödeme","EN İYİ DEĞER",
+"Neler dahil",
+"Marketplace","İlan yayınlayın; hizmetleri, aksesuarları ve sorumlu yeni yuva seçeneklerini keşfedin.","Cover Star","Evcil hayvanınıza PETS & DOGUE kapağında yer alma şansı verin.","Yarışmalar","Yarışmalara, topluluk oylamalarına ve özel üye fırsatlarına katılın.","Üye indirimleri","Ürün, hizmet, seyahat ve deneyimlerde seçili ortak tekliflerini açın.","Evcil hayvan dostu yerler","Otelleri, kafeleri, plajları, parkları ve evcil hayvan sahipleri için faydalı yerleri keşfedin.",
+"ÜCRETSİZ AYI BAŞLAT","Zaten üye misiniz? Giriş yapın","Ücretsiz devam et","İlk ay ücretsiz","Sonra £1 / ay","KATIL","Devam ederek PETS & DOGUE Şartlarını ve Gizlilik Politikasını kabul edersiniz. Aylık üyelik bir ücretsiz ay ile başlar ve iptal edilene kadar aylık £1 olarak devam eder. Yıllık üyelik £10 karşılığında bir yıl erişim sağlar.",
+"Giriş yapın veya hesap oluşturun","Devam etmek için email adresinizi girin. Yeni üyeler saniyeler içinde hesap oluşturabilir.","EMAIL","siz@ornek.com","EMAIL İLE DEVAM","VEYA","Google ile devam","Apple ile devam","Facebook ile devam",
+"Üye avantajları","Özel Club özellikleri.","Özel teklifler","Seçili ortak avantajları.","Topluluk","Hayvan severler için bir dünya.",
+"Üyeliğinizi tamamlayın","Club avantajlarına yalnızca bir adım kaldı.","Aylık üyelik","Yıllık üyelik","Promosyon kodu","Kodu girin","UYGULA","Bugün ödenecek","ÖDEME","VEYA","Kartla öde","Ücretsiz aydan sonra aylık üyelik iptal edilene kadar £1/ay olarak devam eder. Yıllık üyelik £10 karşılığında bir yıl erişim sağlar. Devam ederek Şartları ve Gizlilik Politikasını kabul edersiniz.","▣ Güvenli ödeme",
+"Gizliliğiniz","PETS & DOGUE için gerekli depolamayı, izninizle analiz ve kişiselleştirmeyi kullanıyoruz.","Daha fazla bilgi","Gerekli","Dil, güvenlik ve temel işlevler için gereklidir.","Analiz","PETS & DOGUE kullanımını anlamamıza yardımcı olur.","Kişiselleştirme","İsteğe bağlı tercihler ve kişiselleştirilmiş deneyim sağlar.","TÜMÜNÜ KABUL ET","REDDET","SEÇENEKLERİ YÖNET","KAYDET",
+"Geçerli bir email girin.","Sosyal giriş şuna bağlanacak:","Güvenli ödeme şuna bağlanacak:","Promosyon kodları güvenli ödemeye bağlanacak."
+],
+
+ar:[
+"اختر خطتك","ابدأ مجانًا، اكتشف جميع المزايا واستمر فقط إذا أحببت التجربة.","مجاني","الشهر الأول","£0 اليوم","شهر واحد","بعد الشهر المجاني","سنة واحدة","دفعة سنوية واحدة","أفضل قيمة",
+"ما الذي تحصل عليه",
+"Marketplace","انشر الإعلانات واكتشف الخدمات والإكسسوارات وخيارات إيجاد منزل جديد بصورة مسؤولة.","Cover Star","امنح حيوانك فرصة للظهور على غلاف PETS & DOGUE.","المسابقات","شارك في المسابقات وتصويت المجتمع والفرص الخاصة للأعضاء.","خصومات الأعضاء","استفد من عروض شركاء مختارة على المنتجات والخدمات والسفر والتجارب.","أماكن صديقة للحيوانات","اكتشف الفنادق والمقاهي والشواطئ والحدائق والأماكن المفيدة لأصحاب الحيوانات.",
+"ابدأ الشهر المجاني","عضو بالفعل؟ تسجيل الدخول","المتابعة مجانًا","الشهر الأول مجاني","ثم £1 / شهر","انضم إلى النادي","بالمتابعة فإنك توافق على شروط PETS & DOGUE وسياسة الخصوصية. تبدأ العضوية الشهرية بشهر مجاني ثم تستمر مقابل £1 شهريًا حتى الإلغاء. تمنح العضوية السنوية سنة من الوصول مقابل £10.",
+"تسجيل الدخول أو إنشاء حساب","أدخل بريدك الإلكتروني للمتابعة. يمكن للأعضاء الجدد إنشاء حساب خلال ثوانٍ.","البريد الإلكتروني","you@example.com","المتابعة بالبريد الإلكتروني","أو","المتابعة عبر Google","المتابعة عبر Apple","المتابعة عبر Facebook",
+"مزايا الأعضاء","ميزات Club حصرية.","عروض خاصة","مزايا مختارة من الشركاء.","المجتمع","عالم لمحبي الحيوانات.",
+"أكمل عضويتك","بقيت خطوة واحدة فقط لفتح مزايا Club.","عضوية شهرية","عضوية سنوية","رمز ترويجي","أدخل الرمز","تطبيق","المستحق اليوم","الدفع بواسطة","أو","الدفع بالبطاقة","بعد الشهر المجاني تستمر العضوية الشهرية مقابل £1 شهريًا حتى الإلغاء. تمنح العضوية السنوية سنة وصول مقابل £10. بالمتابعة توافق على الشروط وسياسة الخصوصية.","▣ دفع آمن",
+"خصوصيتك","نستخدم التخزين الضروري لتشغيل PETS & DOGUE، ومع موافقتك نستخدم التحليلات والتخصيص.","معرفة المزيد","ضروري","مطلوب للغة والأمان والوظائف الأساسية.","التحليلات","يساعدنا على فهم كيفية استخدام PETS & DOGUE.","التخصيص","يسمح بتفضيلات اختيارية وتجارب مخصصة.","قبول الكل","رفض","إدارة الخيارات","حفظ الخيارات",
+"يرجى إدخال بريد إلكتروني صالح.","سيتم ربط تسجيل الدخول الاجتماعي مع","سيتم ربط الدفع الآمن مع","سيتم ربط الرموز الترويجية بالدفع الآمن."
+],
+
+hi:[
+"अपना प्लान चुनें","मुफ़्त शुरू करें, सभी लाभ देखें और तभी जारी रखें जब आपको पसंद आए.","मुफ़्त","पहला महीना","आज £0","1 महीना","मुफ़्त महीने के बाद","1 साल","एक वार्षिक भुगतान","सबसे अच्छा मूल्य",
+"आपको क्या मिलेगा",
+"Marketplace","लिस्टिंग प्रकाशित करें और सेवाएँ, एक्सेसरीज़ तथा ज़िम्मेदार नए घर के विकल्प खोजें.","Cover Star","अपने पालतू को PETS & DOGUE कवर पर आने का मौका दें.","प्रतियोगिताएँ","प्रतियोगिताओं, कम्युनिटी वोट और विशेष सदस्य अवसरों में भाग लें.","सदस्य छूट","उत्पादों, सेवाओं, यात्रा और अनुभवों पर चुने हुए पार्टनर ऑफ़र पाएँ.","Pet-Friendly स्थान","होटल, कैफ़े, समुद्र तट, पार्क और पालतू लोगों के लिए उपयोगी स्थान खोजें.",
+"मुफ़्त महीना शुरू करें","पहले से सदस्य हैं? साइन इन करें","मुफ़्त जारी रखें","पहला महीना मुफ़्त","फिर £1 / महीना","क्लब में शामिल हों","जारी रखकर आप PETS & DOGUE की शर्तों और गोपनीयता नीति से सहमत होते हैं। मासिक सदस्यता एक मुफ़्त महीने से शुरू होती है और रद्द करने तक £1 प्रति माह चलती है। वार्षिक सदस्यता £10 में एक साल का एक्सेस देती है.",
+"साइन इन करें या अकाउंट बनाएँ","जारी रखने के लिए email दर्ज करें। नए सदस्य कुछ ही सेकंड में अकाउंट बना सकते हैं.","EMAIL","you@example.com","EMAIL से जारी रखें","या","Google से जारी रखें","Apple से जारी रखें","Facebook से जारी रखें",
+"सदस्य लाभ","विशेष Club सुविधाएँ.","विशेष ऑफ़र","चुने हुए पार्टनर लाभ.","कम्युनिटी","जानवरों से प्यार करने वालों की दुनिया.",
+"अपनी सदस्यता पूरी करें","Club लाभ पाने से बस एक कदम दूर हैं.","मासिक सदस्यता","वार्षिक सदस्यता","प्रोमो कोड","कोड दर्ज करें","लागू करें","आज देय","भुगतान करें","या","कार्ड से भुगतान","मुफ़्त महीने के बाद मासिक सदस्यता रद्द करने तक £1 प्रति माह चलती है। वार्षिक सदस्यता £10 में एक वर्ष का एक्सेस देती है। जारी रखकर आप शर्तों और गोपनीयता नीति से सहमत होते हैं.","▣ सुरक्षित भुगतान",
+"आपकी गोपनीयता","PETS & DOGUE चलाने के लिए आवश्यक स्टोरेज और आपकी अनुमति से एनालिटिक्स तथा पर्सनलाइज़ेशन का उपयोग करते हैं.","और जानें","आवश्यक","भाषा, सुरक्षा और मूल साइट कार्यों के लिए आवश्यक.","एनालिटिक्स","हमें समझने में मदद करता है कि PETS & DOGUE कैसे उपयोग होता है.","पर्सनलाइज़ेशन","वैकल्पिक पसंद और व्यक्तिगत अनुभव की अनुमति देता है.","सभी स्वीकार करें","अस्वीकार करें","विकल्प प्रबंधित करें","विकल्प सहेजें",
+"कृपया सही email दर्ज करें.","सोशल साइन-इन इससे जोड़ा जाएगा:","सुरक्षित भुगतान इससे जोड़ा जाएगा:","प्रोमो कोड सुरक्षित भुगतान से जोड़े जाएँगे."
+]
+
 };
 
-const CLUB_FALLBACK={
-fr:["Rejoindre PETS & DOGUE Club","Choisissez votre abonnement","Premier mois gratuit · puis £1/mois","Annuel","Tout est inclus","Choisissez votre mode de paiement"],
-de:["PETS & DOGUE Club beitreten","Mitgliedschaft wählen","Erster Monat kostenlos · danach £1/Monat","Jährlich","Alles inklusive","Zahlungsart wählen"],
-es:["Únete a PETS & DOGUE Club","Elige tu membresía","Primer mes gratis · después £1/mes","Anual","Todo incluido","Elige cómo pagar"],
-it:["Unisciti a PETS & DOGUE Club","Scegli l’abbonamento","Primo mese gratis · poi £1/mese","Annuale","Tutto incluso","Scegli come pagare"],
-pt:["Junte-se ao PETS & DOGUE Club","Escolha a adesão","Primeiro mês grátis · depois £1/mês","Anual","Tudo incluído","Escolha como pagar"],
-nl:["Word lid van PETS & DOGUE Club","Kies je lidmaatschap","Eerste maand gratis · daarna £1/maand","Jaarlijks","Alles inbegrepen","Kies betaalmethode"],
-pl:["Dołącz do PETS & DOGUE Club","Wybierz członkostwo","Pierwszy miesiąc gratis · potem £1/miesiąc","Rocznie","Wszystko w cenie","Wybierz płatność"],
-cs:["Připojte se k PETS & DOGUE Club","Vyberte členství","První měsíc zdarma · poté £1/měsíc","Roční","Vše zahrnuto","Vyberte platbu"],
-sk:["Pridajte sa do PETS & DOGUE Club","Vyberte členstvo","Prvý mesiac zdarma · potom £1/mesiac","Ročné","Všetko zahrnuté","Vyberte platbu"],
-hu:["Csatlakozz a PETS & DOGUE Clubhoz","Válassz tagságot","Első hónap ingyen · majd £1/hó","Éves","Minden benne van","Fizetési mód"],
-ro:["Intră în PETS & DOGUE Club","Alege abonamentul","Prima lună gratuită · apoi £1/lună","Anual","Totul inclus","Alege plata"],
-bg:["Присъедини се към PETS & DOGUE Club","Изберете членство","Първият месец безплатно · после £1/месец","Годишно","Всичко е включено","Изберете плащане"],
-el:["Γίνετε μέλος του PETS & DOGUE Club","Επιλέξτε συνδρομή","Πρώτος μήνας δωρεάν · μετά £1/μήνα","Ετήσια","Όλα περιλαμβάνονται","Επιλέξτε πληρωμή"],
-sv:["Gå med i PETS & DOGUE Club","Välj medlemskap","Första månaden gratis · sedan £1/månad","Årligen","Allt ingår","Välj betalning"],
-da:["Bliv medlem af PETS & DOGUE Club","Vælg medlemskab","Første måned gratis · derefter £1/måned","Årligt","Alt inkluderet","Vælg betaling"],
-no:["Bli med i PETS & DOGUE Club","Velg medlemskap","Første måned gratis · deretter £1/måned","Årlig","Alt inkludert","Velg betaling"],
-fi:["Liity PETS & DOGUE Clubiin","Valitse jäsenyys","Ensimmäinen kuukausi ilmainen · sitten £1/kk","Vuosittain","Kaikki sisältyy","Valitse maksutapa"],
-tr:["PETS & DOGUE Club'a katılın","Üyeliğinizi seçin","İlk ay ücretsiz · sonra £1/ay","Yıllık","Her şey dahil","Ödeme yöntemini seçin"],
-ar:["انضم إلى PETS & DOGUE Club","اختر عضويتك","الشهر الأول مجانًا · ثم £1 شهريًا","سنوي","كل المزايا مشمولة","اختر طريقة الدفع"],
-hi:["PETS & DOGUE Club से जुड़ें","अपनी सदस्यता चुनें","पहला महीना मुफ़्त · फिर £1/माह","वार्षिक","सब कुछ शामिल","भुगतान का तरीका चुनें"]
-};function getClubLanguage(){
-return localStorage.getItem(CLUB_LANGUAGE_KEY)||"en";
+/* SUPPORTED BUT CLOSE LANGUAGE VARIANTS */
+
+CLUB_TRANSLATIONS.no=CLUB_TRANSLATIONS.no;
+CLUB_TRANSLATIONS.fi=CLUB_TRANSLATIONS.fi;
+CLUB_TRANSLATIONS.tr=CLUB_TRANSLATIONS.tr;
+CLUB_TRANSLATIONS.ar=CLUB_TRANSLATIONS.ar;
+CLUB_TRANSLATIONS.hi=CLUB_TRANSLATIONS.hi;
+
+/* remaining locales */
+
+CLUB_TRANSLATIONS.sv=CLUB_TRANSLATIONS.sv;
+CLUB_TRANSLATIONS.da=CLUB_TRANSLATIONS.da;
+
+/* generic complete translations for remaining supported languages */
+
+const EXTRA_COMPLETE={
+
+"ro":CLUB_TRANSLATIONS.ro,
+"bg":CLUB_TRANSLATIONS.bg,
+"el":CLUB_TRANSLATIONS.el,
+"hu":CLUB_TRANSLATIONS.hu,
+"sk":CLUB_TRANSLATIONS.sk,
+"cs":CLUB_TRANSLATIONS.cs,
+"pl":CLUB_TRANSLATIONS.pl,
+"nl":CLUB_TRANSLATIONS.nl,
+"pt":CLUB_TRANSLATIONS.pt,
+"it":CLUB_TRANSLATIONS.it,
+"es":CLUB_TRANSLATIONS.es,
+"de":CLUB_TRANSLATIONS.de,
+"fr":CLUB_TRANSLATIONS.fr
+
+};
+
+/* FUNCTIONS */
+
+function getLanguage(){
+const saved=localStorage.getItem(LANGUAGE_KEY)||"en";
+return CLUB_TRANSLATIONS[saved]?saved:"en";
 }
 
-function setText(id,value){
+function dictionary(){
+const values=CLUB_TRANSLATIONS[getLanguage()]||CLUB_TRANSLATIONS.en;
+const obj={};
+KEYS.forEach((key,index)=>{
+obj[key]=values[index]??CLUB_TRANSLATIONS.en[index]??"";
+});
+return obj;
+}
+
+function text(id,value){
 const node=document.getElementById(id);
 if(node&&typeof value==="string")node.textContent=value;
 }
 
-function applyClubLanguage(){
-const lang=getClubLanguage();
-const base=CLUB_UI[lang]||CLUB_UI.en;
+function applyLanguage(){
+
+const lang=getLanguage();
+const t=dictionary();
 
 document.documentElement.lang=lang;
 document.documentElement.dir=lang==="ar"?"rtl":"ltr";
 
-if(CLUB_UI[lang]){
-setText("clubHeroTitle",base.heroTitle);
-setText("clubHeroText",base.heroText);
-setText("heroPrice",base.heroPrice);
-setText("membershipHeading",base.membershipHeading);
-setText("membershipIntro",base.membershipIntro);
-setText("monthlyBadge",base.monthlyBadge);
-setText("monthlyTitle",base.monthlyTitle);
-setText("monthlyPriceNote",base.monthlyNote);
-setText("monthlyCopy",base.monthlyCopy);
-setText("monthlyButton",base.monthlyButton);
-setText("yearlyBadge",base.yearlyBadge);
-setText("yearlyTitle",base.yearlyTitle);
-setText("yearlyPriceNote",base.yearlyNote);
-setText("yearlyCopy",base.yearlyCopy);
-setText("yearlyButton",base.yearlyButton);
-setText("includedHeading",base.included);
-setText("moreHeading",base.more);
-setText("paymentHeading",base.payment);
-setText("cardNameLabel",base.cardName);
-setText("cardNumberLabel",base.cardNumber);
-setText("cardExpiryLabel",base.expiry);
-setText("checkoutSubmit",base.secure);
-setText("benefitMarketTitle",base.marketTitle);
-setText("benefitMarketText",base.marketText);
-setText("benefitCoverTitle",base.coverTitle);
-setText("benefitCoverText",base.coverText);
-setText("benefitContestTitle",base.contestTitle);
-setText("benefitContestText",base.contestText);
-setText("benefitDiscountTitle",base.discountTitle);
-setText("benefitDiscountText",base.discountText);
-setText("benefitPlacesTitle",base.placesTitle);
-setText("benefitPlacesText",base.placesText);
-setText("benefitMagazineTitle",base.magazineTitle);
-setText("benefitMagazineText",base.magazineText);
-setText("showcaseTitle",base.showcaseTitle);
-setText("showcaseText",base.showcaseText);
-}else{
-const short=CLUB_FALLBACK[lang];
+[
+"pageTitle","pageSubtitle","freePrice","freeLabel","freeSmall",
+"monthLabel","monthSmall","yearLabel","yearSmall","whatTitle",
+"benefit1Title","benefit1Text","benefit2Title","benefit2Text",
+"benefit3Title","benefit3Text","benefit4Title","benefit4Text",
+"benefit5Title","benefit5Text","mainCta","signInLink",
+"continueFreeLink","stickyTitle","stickyText","stickyButton","clubLegal",
+"accountTitle","accountIntro","emailLabel","emailContinue","orText",
+"googleText","appleText","facebookText","mini1Title","mini1Text",
+"mini2Title","mini2Text","mini3Title","mini3Text",
+"paymentTitle","paymentIntro","promoLabel","promoButton","dueLabel",
+"payWithLabel","paymentOr","payCardLabel","checkoutLegal","secureCheckout",
+"cookieTitle","cookieText","cookieLearn","essentialTitle","essentialText",
+"analyticsTitle","analyticsText","personalTitle","personalText",
+"acceptCookies","rejectCookies","manageCookies","saveCookieChoices"
+].forEach(id=>text(id,t[id]));
 
-if(short){
-setText("clubHeroTitle",short[0]);
-setText("membershipHeading",short[1]);
-setText("heroPrice",short[2].toUpperCase());
-setText("monthlyPriceNote",short[2]);
-setText("yearlyTitle",short[3]);
-setText("includedHeading",short[4]);
-setText("paymentHeading",short[5]);
-}
-}
+const email=document.getElementById("memberEmail");
+if(email)email.placeholder=t.emailPlaceholder;
+
+const promo=document.getElementById("promoCode");
+if(promo)promo.placeholder=t.promoPlaceholder;
+
+const annualTile=document.getElementById("annualTile");
+if(annualTile)annualTile.dataset.badge=t.bestValue;
+
+updateSelectedPlan();
 
 const select=document.getElementById("languageSelect");
 if(select)select.value=lang;
 }
+
+/* MENU */
 
 function openMenu(){
 document.getElementById("sideMenu").classList.add("open");
@@ -1538,54 +2446,352 @@ document.getElementById("menuOverlay").classList.remove("show");
 document.body.classList.remove("menu-open");
 }
 
+/* PLAN */
+
 let selectedPlan="monthly";
 
-function selectPlan(plan){
+function choosePlan(plan){
+
 selectedPlan=plan;
 
-const checkout=document.getElementById("checkout");
-const t=CLUB_UI[getClubLanguage()]||CLUB_UI.en;
+document.querySelectorAll(".price-tile").forEach(tile=>{
+tile.classList.toggle(
+"selected",
+plan==="monthly"
+?tile.dataset.plan==="monthly"
+:tile.dataset.plan==="annual"
+);
+});
 
-checkout.classList.add("show");
+updateSelectedPlan();
+}
 
-if(plan==="monthly"){
-setText("checkoutPlanTitle",t.checkoutMonthly);
-setText("checkoutPrice",t.checkoutMonthlyPrice);
-setText("checkoutDescription",t.checkoutMonthlyText);
+function updateSelectedPlan(){
+
+const t=dictionary();
+
+if(selectedPlan==="annual"){
+
+text("mainCta",t.yearLabel==="1 year"?"JOIN FOR £10 / YEAR":t.mainCta.replace(/FREE|GRATIS|БЕСПЛАТНЫЙ|БЕЗКОШТОВНИЙ|ILMAINEN|ÜCRETSİZ|ΔΩΡΕΑΝ|GRATUIT|GRATIS/gi,"£10"));
+
+text("stickyTitle","£10 · "+t.yearLabel);
+text("stickyText",t.yearSmall);
+
 }else{
-setText("checkoutPlanTitle",t.checkoutYearly);
-setText("checkoutPrice",t.checkoutYearlyPrice);
-setText("checkoutDescription",t.checkoutYearlyText);
+
+text("mainCta",t.mainCta);
+text("stickyTitle",t.stickyTitle);
+text("stickyText",t.stickyText);
+
 }
 
-setTimeout(()=>{
-checkout.scrollIntoView({behavior:"smooth",block:"center"});
-},50);
 }
 
-function paymentMessage(provider){
-const t=CLUB_UI[getClubLanguage()]||CLUB_UI.en;
-alert(t.paymentSoon+" "+provider+".");
+/* CAROUSEL */
+
+let activeSlide=1;
+const totalSlides=5;
+
+function buildDots(){
+
+const dots=document.getElementById("carouselDots");
+dots.innerHTML="";
+
+for(let i=0;i<totalSlides;i++){
+
+const button=document.createElement("button");
+button.type="button";
+button.className="carousel-dot"+(i===activeSlide?" active":"");
+button.onclick=()=>setSlide(i);
+
+dots.appendChild(button);
+
 }
+
+}
+
+function updateCarousel(){
+
+const shell=document.getElementById("carouselShell");
+const track=document.getElementById("carouselTrack");
+const cards=[...document.querySelectorAll(".carousel-card")];
+
+if(!shell||!track||!cards.length)return;
+
+cards.forEach((card,index)=>{
+card.classList.toggle("active",index===activeSlide);
+});
+
+const card=cards[activeSlide];
+const shellWidth=shell.clientWidth;
+const cardCenter=card.offsetLeft+(card.offsetWidth/2);
+const translate=(shellWidth/2)-cardCenter;
+
+track.style.transform=`translateX(${translate}px)`;
+
+buildDots();
+}
+
+function setSlide(index){
+
+activeSlide=Math.max(0,Math.min(totalSlides-1,index));
+updateCarousel();
+
+}
+
+function moveCarousel(direction){
+
+let next=activeSlide+direction;
+
+if(next<0)next=totalSlides-1;
+if(next>=totalSlides)next=0;
+
+setSlide(next);
+}
+
+let swipeStartX=0;
+
+document.getElementById("carouselShell").addEventListener("touchstart",event=>{
+swipeStartX=event.changedTouches[0].clientX;
+},{passive:true});
+
+document.getElementById("carouselShell").addEventListener("touchend",event=>{
+
+const end=event.changedTouches[0].clientX;
+const difference=end-swipeStartX;
+
+if(Math.abs(difference)>45){
+moveCarousel(difference<0?1:-1);
+}
+
+},{passive:true});
+
+/* FLOW */
+
+function openAccountStep(){
+
+closeMenu();
+
+document.getElementById("flowModal").classList.add("show");
+document.getElementById("accountStep").hidden=false;
+document.getElementById("paymentStep").hidden=true;
+
+document.body.classList.add("modal-open");
+
+window.scrollTo(0,0);
+}
+
+function closeFlow(){
+
+document.getElementById("flowModal").classList.remove("show");
+document.body.classList.remove("modal-open");
+
+}
+
+function flowBack(){
+
+const payment=document.getElementById("paymentStep");
+
+if(!payment.hidden){
+
+payment.hidden=true;
+document.getElementById("accountStep").hidden=false;
+document.getElementById("flowModal").scrollTop=0;
+
+}else{
+
+closeFlow();
+
+}
+
+}
+
+function continueWithEmail(){
+
+const email=document.getElementById("memberEmail").value.trim();
+const t=dictionary();
+
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+alert(t.invalidEmail);
+return;
+}
+
+localStorage.setItem(MEMBER_KEY,email);
+
+document.getElementById("accountStep").hidden=true;
+document.getElementById("paymentStep").hidden=false;
+
+updatePaymentSummary();
+
+document.getElementById("flowModal").scrollTop=0;
+}
+
+function socialNotice(provider){
+
+const t=dictionary();
+alert(t.socialNotice+" "+provider+".");
+
+}
+
+function updatePaymentSummary(){
+
+const t=dictionary();
+
+if(selectedPlan==="annual"){
+
+text("orderPlan",t.annualPlan);
+text("orderPrice","£10");
+text("dueAmount","£10.00");
+
+}else{
+
+text("orderPlan",t.monthlyPlan);
+text("orderPrice","£0");
+text("dueAmount","£0.00");
+
+}
+
+}
+
+function paymentNotice(provider){
+
+const t=dictionary();
+alert(t.paymentNotice+" "+provider+".");
+
+}
+
+function applyPromo(){
+
+const t=dictionary();
+alert(t.promoNotice);
+
+}
+
+/* COOKIE */
+
+let temporaryConsent={
+analytics:false,
+personalisation:false
+};
+
+function showCookieSettings(){
+
+document.getElementById("cookieSettings").classList.add("show");
+document.getElementById("saveCookieChoices").style.display="block";
+document.getElementById("manageCookies").style.display="none";
+
+}
+
+function toggleConsent(type){
+
+temporaryConsent[type]=!temporaryConsent[type];
+
+const id=
+type==="analytics"
+?"analyticsToggle"
+:"personalToggle";
+
+document.getElementById(id).classList.toggle(
+"on",
+temporaryConsent[type]
+);
+
+}
+
+function saveConsent(analytics,personalisation){
+
+const value={
+essential:true,
+analytics:Boolean(analytics),
+personalisation:Boolean(personalisation),
+updatedAt:new Date().toISOString()
+};
+
+localStorage.setItem(
+CONSENT_KEY,
+JSON.stringify(value)
+);
+
+document.getElementById("cookieLayer").classList.remove("show");
+
+}
+
+function saveCurrentConsent(){
+
+saveConsent(
+temporaryConsent.analytics,
+temporaryConsent.personalisation
+);
+
+}
+
+function openCookieConsentIfNeeded(){
+
+let exists=false;
+
+try{
+exists=Boolean(localStorage.getItem(CONSENT_KEY));
+}catch(error){}
+
+if(!exists){
+document.getElementById("cookieLayer").classList.add("show");
+}
+
+}
+
+/* LANGUAGE */
 
 document.getElementById("languageSelect").addEventListener("change",function(){
-localStorage.setItem(CLUB_LANGUAGE_KEY,this.value);
-applyClubLanguage();
-window.dispatchEvent(new Event("petsdogue:languagechange"));
-setTimeout(()=>window.location.reload(),50);
+
+localStorage.setItem(LANGUAGE_KEY,this.value);
+
+applyLanguage();
+
+window.dispatchEvent(
+new Event("petsdogue:languagechange")
+);
+
+});
+
+/* EVENTS */
+
+window.addEventListener("resize",()=>{
+requestAnimationFrame(updateCarousel);
 });
 
 document.addEventListener("keydown",event=>{
-if(event.key==="Escape")closeMenu();
+
+if(event.key==="Escape"){
+
+if(document.getElementById("flowModal").classList.contains("show")){
+closeFlow();
+}else{
+closeMenu();
+}
+
+}
+
 });
 
 document.addEventListener("DOMContentLoaded",()=>{
-applyClubLanguage();
+
+applyLanguage();
+buildDots();
+
+setTimeout(updateCarousel,80);
+
+const savedEmail=localStorage.getItem(MEMBER_KEY);
+
+if(savedEmail){
+document.getElementById("memberEmail").value=savedEmail;
+}
+
+openCookieConsentIfNeeded();
+
 });
 </script>
 
 <script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/club.js?v=2"></script>
 <script src="/i18n/engine.js?v=3"></script>
 
 </body>
