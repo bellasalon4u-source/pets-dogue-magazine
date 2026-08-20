@@ -2,103 +2,97 @@
 
 /*
   PETS & DOGUE CLUB
-  Stripe Checkout Session creator
+  Stripe Checkout Session Creator
 
   Plans:
-  - free   = 30-day complimentary trial, then £1/month
-  - monthly = £1/month
-  - annual  = £10/year
 
-  Stripe Checkout automatically offers supported payment methods
-  such as:
-  - Apple Pay
-  - Google Pay
-  - credit/debit cards
+  free
+  - 30 day complimentary trial
+  - then £1 / month
+  - payment method is collected during checkout
 
-  depending on the customer's device, browser, country,
-  Stripe account settings and domain verification.
+  monthly
+  - £1 / month
 
-  Required Vercel environment variable:
+  annual
+  - £10 / year
+
+
+  REQUIRED VERCEL ENVIRONMENT VARIABLES
+
   STRIPE_SECRET_KEY
+  STRIPE_PRICE_MONTHLY
+  STRIPE_PRICE_ANNUAL
 
   Recommended:
+
   PUBLIC_SITE_URL=https://your-domain.com
+
+
+  IMPORTANT
+
+  Apple Pay and Google Pay are displayed automatically
+  by Stripe Checkout when they are available for the
+  customer's device, browser, country and Stripe account.
+
+  We use Stripe's "card" payment method because Stripe
+  wallets are presented through the card payment method
+  when eligible.
 */
 
-const STRIPE_API_URL =
-  "https://api.stripe.com/v1/checkout/sessions";
+
+const STRIPE_API_BASE =
+  "https://api.stripe.com/v1";
 
 
-const PLANS = {
-
-  free: {
-    id: "free",
-    name: "PETS & DOGUE Club — Complimentary Trial",
-    description:
-      "30-day complimentary trial, then £1 per month until cancelled.",
-    amount: 100,
-    currency: "gbp",
-    interval: "month",
-    intervalCount: 1,
-    trialDays: 30
-  },
-
-  monthly: {
-    id: "monthly",
-    name: "PETS & DOGUE Club — Monthly Membership",
-    description:
-      "PETS & DOGUE Club monthly membership.",
-    amount: 100,
-    currency: "gbp",
-    interval: "month",
-    intervalCount: 1,
-    trialDays: 0
-  },
-
-  annual: {
-    id: "annual",
-    name: "PETS & DOGUE Club — Annual Membership",
-    description:
-      "PETS & DOGUE Club annual membership.",
-    amount: 1000,
-    currency: "gbp",
-    interval: "year",
-    intervalCount: 1,
-    trialDays: 0
-  }
-
-};
+const VALID_PLANS =
+  new Set([
+    "free",
+    "monthly",
+    "annual"
+  ]);
 
 
-const STRIPE_LOCALES = new Set([
-  "auto",
-  "bg",
-  "cs",
-  "da",
-  "de",
-  "el",
-  "en",
-  "es",
-  "fi",
-  "fr",
-  "hu",
-  "it",
-  "ja",
-  "nb",
-  "nl",
-  "pl",
-  "pt",
-  "ro",
-  "ru",
-  "sk",
-  "sv",
-  "tr"
-]);
+const VALID_LANGUAGES =
+  new Set([
+    "en",
+    "ru",
+    "uk",
+    "fr",
+    "de",
+    "es",
+    "it",
+    "pt",
+    "nl",
+    "pl",
+    "cs",
+    "sk",
+    "hu",
+    "ro",
+    "bg",
+    "el",
+    "sv",
+    "da",
+    "no",
+    "fi",
+    "tr",
+    "ar",
+    "hi"
+  ]);
 
 
-function sendJson(res, status, payload) {
+/* =========================================================
+   RESPONSE
+========================================================= */
 
-  res.statusCode = status;
+function sendJson(
+  res,
+  status,
+  payload
+) {
+
+  res.statusCode =
+    status;
 
   res.setHeader(
     "Content-Type",
@@ -110,144 +104,69 @@ function sendJson(res, status, payload) {
     "no-store, max-age=0"
   );
 
+  res.setHeader(
+    "Pragma",
+    "no-cache"
+  );
+
   res.end(
-    JSON.stringify(payload)
+    JSON.stringify(
+      payload
+    )
   );
 
 }
 
 
-function cleanString(value, maxLength = 250) {
+/* =========================================================
+   CLEAN INPUT
+========================================================= */
 
-  if (typeof value !== "string") {
+function cleanString(
+  value,
+  maxLength = 500
+) {
+
+  if (
+    typeof value !== "string"
+  ) {
+
     return "";
+
   }
 
   return value
     .trim()
-    .slice(0, maxLength);
+    .slice(
+      0,
+      maxLength
+    );
 
 }
 
 
-function validEmail(value) {
-
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-    String(value || "").trim()
-  );
-
-}
-
-
-function getRequestOrigin(req) {
-
-  const configured =
-    cleanString(
-      process.env.PUBLIC_SITE_URL || "",
-      500
-    );
-
-  if (configured) {
-
-    return configured.replace(
-      /\/+$/,
-      ""
-    );
-
-  }
-
-  const forwardedProto =
-    cleanString(
-      req.headers["x-forwarded-proto"] || "",
-      20
-    );
-
-  const protocol =
-    forwardedProto === "http"
-      ? "http"
-      : "https";
-
-  const forwardedHost =
-    cleanString(
-      req.headers["x-forwarded-host"] || "",
-      300
-    );
-
-  const regularHost =
-    cleanString(
-      req.headers.host || "",
-      300
-    );
-
-  const host =
-    forwardedHost ||
-    regularHost;
-
-  if (!host) {
-    return "";
-  }
-
-  return `${protocol}://${host}`;
-
-}
-
-
-function getStripeLocale(language) {
-
-  const normalized =
-    cleanString(
-      language || "",
-      10
-    )
-      .toLowerCase()
-      .split("-")[0];
-
-  if (normalized === "no") {
-    return "nb";
-  }
-
-  if (
-    normalized === "uk" ||
-    normalized === "ar" ||
-    normalized === "hi"
-  ) {
-
-    return "auto";
-
-  }
-
-  return STRIPE_LOCALES.has(normalized)
-    ? normalized
-    : "auto";
-
-}
-
-
-function append(
-  params,
-  key,
+function validEmail(
   value
 ) {
 
-  if (
-    value === undefined ||
-    value === null ||
-    value === ""
-  ) {
-
-    return;
-
-  }
-
-  params.append(
-    key,
-    String(value)
-  );
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(
+      String(
+        value || ""
+      )
+      .trim()
+    );
 
 }
 
 
-async function readRequestBody(req) {
+/* =========================================================
+   REQUEST BODY
+========================================================= */
+
+async function readRequestBody(
+  req
+) {
 
   if (
     req.body &&
@@ -257,6 +176,7 @@ async function readRequestBody(req) {
     return req.body;
 
   }
+
 
   if (
     typeof req.body === "string" &&
@@ -277,28 +197,65 @@ async function readRequestBody(req) {
 
   }
 
+
   const chunks = [];
 
-  for await (const chunk of req) {
-    chunks.push(chunk);
+
+  for await (
+    const chunk of req
+  ) {
+
+    chunks.push(
+
+      Buffer.isBuffer(
+        chunk
+      )
+
+        ? chunk
+
+        : Buffer.from(
+            chunk
+          )
+
+    );
+
   }
 
-  if (!chunks.length) {
+
+  if (
+    !chunks.length
+  ) {
+
     return {};
+
   }
+
 
   const raw =
     Buffer
-      .concat(chunks)
-      .toString("utf8");
+      .concat(
+        chunks
+      )
+      .toString(
+        "utf8"
+      )
+      .trim();
 
-  if (!raw.trim()) {
+
+  if (
+    !raw
+  ) {
+
     return {};
+
   }
+
 
   try {
 
-    return JSON.parse(raw);
+    return JSON.parse(
+      raw
+    );
 
   } catch (error) {
 
@@ -309,62 +266,475 @@ async function readRequestBody(req) {
 }
 
 
-module.exports = async function handler(
+/* =========================================================
+   SITE URL
+========================================================= */
+
+function getOrigin(
+  req
+) {
+
+  const configured =
+    cleanString(
+      process.env.PUBLIC_SITE_URL || "",
+      500
+    );
+
+
+  if (
+    configured
+  ) {
+
+    return configured
+      .replace(
+        /\/+$/,
+        ""
+      );
+
+  }
+
+
+  const forwardedProto =
+    cleanString(
+      req.headers["x-forwarded-proto"] || "",
+      20
+    );
+
+
+  const protocol =
+
+    forwardedProto === "http"
+
+      ? "http"
+
+      : "https";
+
+
+  const forwardedHost =
+    cleanString(
+      req.headers["x-forwarded-host"] || "",
+      300
+    );
+
+
+  const regularHost =
+    cleanString(
+      req.headers.host || "",
+      300
+    );
+
+
+  const host =
+    forwardedHost ||
+    regularHost;
+
+
+  if (
+    !host
+  ) {
+
+    return "";
+
+  }
+
+
+  return `${protocol}://${host}`;
+
+}
+
+
+/* =========================================================
+   STRIPE
+========================================================= */
+
+async function stripePost(
+  path,
+  params,
+  secretKey
+) {
+
+  const response =
+    await fetch(
+      `${STRIPE_API_BASE}${path}`,
+      {
+
+        method:
+          "POST",
+
+        headers: {
+
+          Authorization:
+            `Bearer ${secretKey}`,
+
+          "Content-Type":
+            "application/x-www-form-urlencoded"
+
+        },
+
+        body:
+          params.toString()
+
+      }
+    );
+
+
+  let data = null;
+
+
+  try {
+
+    data =
+      await response.json();
+
+  } catch (error) {
+
+    data = null;
+
+  }
+
+
+  if (
+    !response.ok
+  ) {
+
+    const message =
+
+      data &&
+      data.error &&
+      data.error.message
+
+        ? data.error.message
+
+        : "Stripe request failed.";
+
+
+    const error =
+      new Error(
+        message
+      );
+
+
+    error.status =
+      response.status;
+
+
+    throw error;
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =========================================================
+   PLAN CONFIG
+========================================================= */
+
+function getPlanConfig(
+  plan
+) {
+
+  const monthlyPrice =
+    cleanString(
+      process.env.STRIPE_PRICE_MONTHLY || "",
+      300
+    );
+
+
+  const annualPrice =
+    cleanString(
+      process.env.STRIPE_PRICE_ANNUAL || "",
+      300
+    );
+
+
+  if (
+    plan === "free"
+  ) {
+
+    return {
+
+      priceId:
+        monthlyPrice,
+
+      trialDays:
+        30
+
+    };
+
+  }
+
+
+  if (
+    plan === "monthly"
+  ) {
+
+    return {
+
+      priceId:
+        monthlyPrice,
+
+      trialDays:
+        0
+
+    };
+
+  }
+
+
+  if (
+    plan === "annual"
+  ) {
+
+    return {
+
+      priceId:
+        annualPrice,
+
+      trialDays:
+        0
+
+    };
+
+  }
+
+
+  return {
+
+    priceId:
+      "",
+
+    trialDays:
+      0
+
+  };
+
+}
+
+
+/* =========================================================
+   STRIPE LANGUAGE
+========================================================= */
+
+function stripeLocale(
+  language
+) {
+
+  /*
+    Stripe supports many locales.
+
+    Some PETS & DOGUE codes need small normalization.
+  */
+
+  const map = {
+
+    en:
+      "en",
+
+    ru:
+      "ru",
+
+    uk:
+      "auto",
+
+    fr:
+      "fr",
+
+    de:
+      "de",
+
+    es:
+      "es",
+
+    it:
+      "it",
+
+    pt:
+      "pt-BR",
+
+    nl:
+      "nl",
+
+    pl:
+      "pl",
+
+    cs:
+      "cs",
+
+    sk:
+      "auto",
+
+    hu:
+      "hu",
+
+    ro:
+      "ro",
+
+    bg:
+      "bg",
+
+    el:
+      "el",
+
+    sv:
+      "sv",
+
+    da:
+      "da",
+
+    no:
+      "nb",
+
+    fi:
+      "fi",
+
+    tr:
+      "tr",
+
+    ar:
+      "auto",
+
+    hi:
+      "auto"
+
+  };
+
+
+  return map[language] ||
+    "auto";
+
+}
+
+
+/* =========================================================
+   METADATA
+========================================================= */
+
+function appendMetadata(
+  params,
+  prefix,
+  metadata
+) {
+
+  Object.entries(
+    metadata
+  )
+  .forEach(
+    ([key,value]) => {
+
+      if (
+        value === "" ||
+        value === null ||
+        value === undefined
+      ) {
+
+        return;
+
+      }
+
+
+      params.append(
+        `${prefix}[${key}]`,
+        String(
+          value
+        )
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   HANDLER
+========================================================= */
+
+module.exports =
+async function handler(
   req,
   res
 ) {
 
-  if (req.method !== "POST") {
+  if (
+    req.method !== "POST"
+  ) {
 
     res.setHeader(
       "Allow",
       "POST"
     );
 
+
     return sendJson(
       res,
       405,
       {
-        ok: false,
-        error: "Method not allowed."
+
+        ok:
+          false,
+
+        error:
+          "Method not allowed."
+
       }
     );
 
   }
 
 
-  const stripeSecretKey =
+  /* -------------------------------------------------------
+     STRIPE SECRET KEY
+  ------------------------------------------------------- */
+
+  const secretKey =
     cleanString(
       process.env.STRIPE_SECRET_KEY || "",
       300
     );
 
 
-  if (!stripeSecretKey) {
+  if (
+    !secretKey
+  ) {
 
     console.error(
-      "PETS & DOGUE: STRIPE_SECRET_KEY is not configured."
+      "PETS & DOGUE: STRIPE_SECRET_KEY is missing."
     );
+
 
     return sendJson(
       res,
       500,
       {
-        ok: false,
+
+        ok:
+          false,
+
         error:
-          "Payment service is not configured yet."
+          "Stripe Checkout is not configured."
+
       }
     );
 
   }
 
 
-  let body;
+  /* -------------------------------------------------------
+     BODY
+  ------------------------------------------------------- */
+
+  let body = {};
+
 
   try {
 
     body =
-      await readRequestBody(req);
+      await readRequestBody(
+        req
+      );
 
   } catch (error) {
 
@@ -372,59 +742,89 @@ module.exports = async function handler(
       res,
       400,
       {
-        ok: false,
-        error: "Invalid request."
+
+        ok:
+          false,
+
+        error:
+          "Invalid request."
+
       }
     );
 
   }
 
 
-  const planId =
+  /* -------------------------------------------------------
+     PLAN
+  ------------------------------------------------------- */
+
+  const plan =
     cleanString(
       body.plan || "",
       30
-    );
+    )
+    .toLowerCase();
 
 
-  const plan =
-    PLANS[planId];
-
-
-  if (!plan) {
+  if (
+    !VALID_PLANS.has(
+      plan
+    )
+  ) {
 
     return sendJson(
       res,
       400,
       {
-        ok: false,
-        error: "Invalid membership plan."
+
+        ok:
+          false,
+
+        error:
+          "Invalid membership plan."
+
       }
     );
 
   }
 
 
-  const email =
-    cleanString(
-      body.email || "",
-      254
+  const planConfig =
+    getPlanConfig(
+      plan
     );
 
 
-  if (!validEmail(email)) {
+  if (
+    !planConfig.priceId
+  ) {
+
+    console.error(
+      `PETS & DOGUE: Stripe price is missing for plan "${plan}".`
+    );
+
 
     return sendJson(
       res,
-      400,
+      500,
       {
-        ok: false,
-        error: "A valid email address is required."
+
+        ok:
+          false,
+
+        error:
+          "This membership plan is not configured yet."
+
       }
     );
 
   }
 
+
+  /* -------------------------------------------------------
+     MEMBER
+  ------------------------------------------------------- */
 
   const firstName =
     cleanString(
@@ -433,13 +833,114 @@ module.exports = async function handler(
     );
 
 
+  const email =
+    cleanString(
+      body.email || "",
+      254
+    )
+    .toLowerCase();
+
+
   const country =
     cleanString(
       body.country || "",
       10
     )
-      .toUpperCase();
+    .toUpperCase();
 
+
+  if (
+    !firstName
+  ) {
+
+    return sendJson(
+      res,
+      400,
+      {
+
+        ok:
+          false,
+
+        error:
+          "First name is required."
+
+      }
+    );
+
+  }
+
+
+  if (
+    !validEmail(
+      email
+    )
+  ) {
+
+    return sendJson(
+      res,
+      400,
+      {
+
+        ok:
+          false,
+
+        error:
+          "A valid email address is required."
+
+      }
+    );
+
+  }
+
+
+  if (
+    !country
+  ) {
+
+    return sendJson(
+      res,
+      400,
+      {
+
+        ok:
+          false,
+
+        error:
+          "Country is required."
+
+      }
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     LANGUAGE
+  ------------------------------------------------------- */
+
+  let language =
+    cleanString(
+      body.language || "en",
+      10
+    )
+    .toLowerCase();
+
+
+  if (
+    !VALID_LANGUAGES.has(
+      language
+    )
+  ) {
+
+    language =
+      "en";
+
+  }
+
+
+  /* -------------------------------------------------------
+     OPTIONAL PET DATA
+  ------------------------------------------------------- */
 
   const petName =
     cleanString(
@@ -455,398 +956,320 @@ module.exports = async function handler(
     );
 
 
-  const breed =
+  const petBreed =
     cleanString(
       body.breed || "",
       150
     );
 
 
-  const breedId =
+  const petBreedId =
     cleanString(
       body.breedId || "",
       150
     );
 
 
-  const language =
-    cleanString(
-      body.language || "en",
-      10
-    )
-      .toLowerCase();
-
+  /* -------------------------------------------------------
+     ORIGIN
+  ------------------------------------------------------- */
 
   const origin =
-    getRequestOrigin(req);
+    getOrigin(
+      req
+    );
 
 
-  if (!origin) {
+  if (
+    !origin
+  ) {
 
     return sendJson(
       res,
       500,
       {
-        ok: false,
+
+        ok:
+          false,
+
         error:
           "Unable to determine the website address."
+
       }
     );
 
   }
 
 
-  const successUrl =
-    `${origin}/club.html` +
-    `?membership=success` +
-    `&plan=${encodeURIComponent(plan.id)}` +
-    `&session_id={CHECKOUT_SESSION_ID}`;
+  /* -------------------------------------------------------
+     METADATA
 
+     We copy metadata to BOTH:
 
-  const cancelUrl =
-    `${origin}/club.html` +
-    `?membership=cancelled` +
-    `&plan=${encodeURIComponent(plan.id)}`;
+     Checkout Session
+     +
+     Stripe Subscription
 
+     This allows our secure verification endpoint
+     to recover membership information reliably.
+  ------------------------------------------------------- */
 
-  const params =
-    new URLSearchParams();
+  const metadata = {
 
+    membership_plan:
+      plan,
 
-  append(
-    params,
-    "mode",
-    "subscription"
-  );
+    member_first_name:
+      firstName,
 
+    member_email:
+      email,
 
-  append(
-    params,
-    "success_url",
-    successUrl
-  );
+    country:
+      country,
 
+    language:
+      language,
 
-  append(
-    params,
-    "cancel_url",
-    cancelUrl
-  );
+    pet_name:
+      petName,
 
+    pet_type:
+      petType,
 
-  append(
-    params,
-    "customer_email",
-    email
-  );
+    pet_breed:
+      petBreed,
 
+    pet_breed_id:
+      petBreedId,
 
-  append(
-    params,
-    "client_reference_id",
-    `club_${plan.id}_${Date.now()}`
-  );
+    source:
+      "pets_dogue_club"
 
+  };
 
-  append(
-    params,
-    "locale",
-    getStripeLocale(language)
-  );
 
-
-  append(
-    params,
-    "allow_promotion_codes",
-    "true"
-  );
-
-
-  append(
-    params,
-    "billing_address_collection",
-    "auto"
-  );
-
-
-  /*
-    Stripe "card" payment method includes eligible wallets
-    such as Apple Pay and Google Pay inside Stripe Checkout.
-  */
-
-  append(
-    params,
-    "payment_method_types[0]",
-    "card"
-  );
-
-
-  /*
-    Subscription price.
-  */
-
-  append(
-    params,
-    "line_items[0][quantity]",
-    "1"
-  );
-
-
-  append(
-    params,
-    "line_items[0][price_data][currency]",
-    plan.currency
-  );
-
-
-  append(
-    params,
-    "line_items[0][price_data][unit_amount]",
-    plan.amount
-  );
-
-
-  append(
-    params,
-    "line_items[0][price_data][recurring][interval]",
-    plan.interval
-  );
-
-
-  append(
-    params,
-    "line_items[0][price_data][recurring][interval_count]",
-    plan.intervalCount
-  );
-
-
-  append(
-    params,
-    "line_items[0][price_data][product_data][name]",
-    plan.name
-  );
-
-
-  append(
-    params,
-    "line_items[0][price_data][product_data][description]",
-    plan.description
-  );
-
-
-  /*
-    The free plan is not a fake £0 subscription.
-
-    Stripe creates the real £1/month subscription,
-    stores a valid payment method and starts charging only
-    after the complimentary 30-day trial.
-  */
-
-  if (plan.trialDays > 0) {
-
-    append(
-      params,
-      "subscription_data[trial_period_days]",
-      plan.trialDays
-    );
-
-  }
-
-
-  /*
-    Metadata is useful later for:
-    - webhook verification
-    - account creation
-    - membership records
-    - receipts
-    - customer support
-  */
-
-  append(
-    params,
-    "metadata[brand]",
-    "PETS & DOGUE"
-  );
-
-
-  append(
-    params,
-    "metadata[membership_plan]",
-    plan.id
-  );
-
-
-  append(
-    params,
-    "metadata[member_email]",
-    email
-  );
-
-
-  append(
-    params,
-    "metadata[member_first_name]",
-    firstName
-  );
-
-
-  append(
-    params,
-    "metadata[country]",
-    country
-  );
-
-
-  append(
-    params,
-    "metadata[language]",
-    language
-  );
-
-
-  append(
-    params,
-    "metadata[pet_name]",
-    petName
-  );
-
-
-  append(
-    params,
-    "metadata[pet_type]",
-    petType
-  );
-
-
-  append(
-    params,
-    "metadata[pet_breed]",
-    breed
-  );
-
-
-  append(
-    params,
-    "metadata[pet_breed_id]",
-    breedId
-  );
-
-
-  append(
-    params,
-    "subscription_data[metadata][membership_plan]",
-    plan.id
-  );
-
-
-  append(
-    params,
-    "subscription_data[metadata][member_email]",
-    email
-  );
-
-
-  append(
-    params,
-    "subscription_data[metadata][language]",
-    language
-  );
-
-
-  append(
-    params,
-    "subscription_data[metadata][pet_name]",
-    petName
-  );
-
-
-  append(
-    params,
-    "subscription_data[metadata][pet_type]",
-    petType
-  );
-
-
-  append(
-    params,
-    "subscription_data[metadata][pet_breed_id]",
-    breedId
-  );
-
+  /* -------------------------------------------------------
+     CREATE CHECKOUT
+  ------------------------------------------------------- */
 
   try {
 
-    const stripeResponse =
-      await fetch(
-        STRIPE_API_URL,
-        {
-          method: "POST",
-
-          headers: {
-
-            Authorization:
-              `Bearer ${stripeSecretKey}`,
-
-            "Content-Type":
-              "application/x-www-form-urlencoded"
-
-          },
-
-          body:
-            params.toString()
-
-        }
-      );
+    const params =
+      new URLSearchParams();
 
 
-    const stripeData =
-      await stripeResponse.json();
+    /*
+      Subscription Checkout.
+    */
 
+    params.append(
+      "mode",
+      "subscription"
+    );
+
+
+    /*
+      Stripe card payment method.
+
+      Apple Pay / Google Pay can appear automatically
+      when available and configured.
+    */
+
+    params.append(
+      "payment_method_types[]",
+      "card"
+    );
+
+
+    /*
+      For a trial we still want Stripe Checkout
+      to collect a payment method.
+
+      That allows automatic conversion from:
+      30 free days → £1/month.
+    */
+
+    params.append(
+      "payment_method_collection",
+      "always"
+    );
+
+
+    /*
+      Customer email is already known from
+      the PETS & DOGUE questionnaire.
+    */
+
+    params.append(
+      "customer_email",
+      email
+    );
+
+
+    /*
+      One subscription product.
+    */
+
+    params.append(
+      "line_items[0][price]",
+      planConfig.priceId
+    );
+
+
+    params.append(
+      "line_items[0][quantity]",
+      "1"
+    );
+
+
+    /*
+      Stripe Checkout language.
+    */
+
+    params.append(
+      "locale",
+      stripeLocale(
+        language
+      )
+    );
+
+
+    /*
+      Billing address can be collected when Stripe
+      needs it for the payment method.
+    */
+
+    params.append(
+      "billing_address_collection",
+      "auto"
+    );
+
+
+    /*
+      Promotion codes can be enabled later from
+      Stripe without rebuilding the checkout UI.
+    */
+
+    params.append(
+      "allow_promotion_codes",
+      "true"
+    );
+
+
+    /*
+      Success URL.
+
+      Stripe replaces:
+      {CHECKOUT_SESSION_ID}
+
+      with the real secure Checkout Session ID.
+    */
+
+    params.append(
+      "success_url",
+      `${origin}/club.html?membership=success&plan=${encodeURIComponent(plan)}&session_id={CHECKOUT_SESSION_ID}`
+    );
+
+
+    /*
+      Cancel URL.
+
+      The customer returns to Club and can retry.
+    */
+
+    params.append(
+      "cancel_url",
+      `${origin}/club.html?membership=cancelled&plan=${encodeURIComponent(plan)}`
+    );
+
+
+    /*
+      Checkout Session metadata.
+    */
+
+    appendMetadata(
+      params,
+      "metadata",
+      metadata
+    );
+
+
+    /*
+      Subscription metadata.
+
+      This stays attached to the Stripe subscription
+      for later verification and billing management.
+    */
+
+    appendMetadata(
+      params,
+      "subscription_data[metadata]",
+      metadata
+    );
+
+
+    /*
+      Complimentary first month.
+    */
 
     if (
-      !stripeResponse.ok ||
-      !stripeData ||
-      !stripeData.id ||
-      !stripeData.url
+      planConfig.trialDays > 0
     ) {
 
-      console.error(
-        "PETS & DOGUE Stripe Checkout error:",
-        stripeData
-      );
-
-
-      return sendJson(
-        res,
-        stripeResponse.status || 500,
-        {
-          ok: false,
-          error:
-            stripeData &&
-            stripeData.error &&
-            stripeData.error.message
-              ? stripeData.error.message
-              : "Unable to create payment session."
-        }
+      params.append(
+        "subscription_data[trial_period_days]",
+        String(
+          planConfig.trialDays
+        )
       );
 
     }
 
 
+    const checkout =
+      await stripePost(
+        "/checkout/sessions",
+        params,
+        secretKey
+      );
+
+
+    if (
+      !checkout ||
+      !checkout.id ||
+      !checkout.url
+    ) {
+
+      throw new Error(
+        "Stripe did not return a valid Checkout Session."
+      );
+
+    }
+
+
+    /*
+      Return only what the browser needs.
+
+      No Stripe secret information is exposed.
+    */
+
     return sendJson(
       res,
       200,
       {
-        ok: true,
+
+        ok:
+          true,
 
         sessionId:
-          stripeData.id,
+          checkout.id,
 
         checkoutUrl:
-          stripeData.url,
+          checkout.url,
 
         plan:
-          plan.id
+          plan
 
       }
     );
@@ -855,18 +1278,46 @@ module.exports = async function handler(
   } catch (error) {
 
     console.error(
-      "PETS & DOGUE payment server error:",
+      "PETS & DOGUE Stripe Checkout error:",
       error
     );
 
 
+    let status =
+      500;
+
+
+    if (
+      Number(
+        error.status
+      ) === 400
+    ) {
+
+      status =
+        400;
+
+    }
+
+
     return sendJson(
       res,
-      500,
+      status,
       {
-        ok: false,
+
+        ok:
+          false,
+
         error:
-          "Unable to connect to the payment service."
+          status === 400
+
+            ? cleanString(
+                error.message ||
+                "Stripe rejected the Checkout request.",
+                300
+              )
+
+            : "Unable to create the secure payment session."
+
       }
     );
 
