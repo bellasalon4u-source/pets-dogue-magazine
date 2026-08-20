@@ -7,11 +7,11 @@
 <title>PETS & DOGUE</title>
 
 <style>
-:root{--black:#070707;--black2:#111;--white:#fff;--cream:#f6f2e9;--cream2:#eee8dc;--green:#65e51f;--border:#d8d3c8;--gold-deep:#6f4b0c;--gold-dark:#8e6415;--gold:#c99a2e;--gold-rich:#d8ad45;--gold-light:#f1d783;--gold-highlight:#fff2b6;--gold-metal:linear-gradient(110deg,#6f4b0c 0%,#b9841e 18%,#f4db83 38%,#fff3bb 48%,#d4a536 59%,#8b5e12 78%,#e8c568 100%)}
+:root{--black:#070707;--black2:#111;--white:#fff;--cream:#f6f2e9;--cream2:#eee8dc;--green:#65e51f;--green-dark:#14572e;--border:#d8d3c8;--gold-deep:#6f4b0c;--gold-dark:#8e6415;--gold:#c99a2e;--gold-rich:#d8ad45;--gold-light:#f1d783;--gold-highlight:#fff2b6;--gold-metal:linear-gradient(110deg,#6f4b0c 0%,#b9841e 18%,#f4db83 38%,#fff3bb 48%,#d4a536 59%,#8b5e12 78%,#e8c568 100%)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--cream);color:#111;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
-body.menu-open{overflow:hidden}
+body.menu-open,body.onboarding-open{overflow:hidden}
 a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
 button{cursor:pointer}
@@ -25,13 +25,11 @@ img{display:block;max-width:100%}
 .icon-button{width:52px;height:52px;background:transparent;border:1px solid transparent;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:.22s}
 .icon-button:hover{border-color:#5b5b5b;background:#151515}
 .icon-button:active{transform:scale(.95)}
-
 .menu-trigger{position:relative}
 .menu-trigger .menu-lines{margin-left:9px}
 .menu-lang-mark{position:absolute;left:1px;top:1px;width:21px;height:21px;border:1.4px solid #fff;border-radius:50%;background:#070707;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:11px;line-height:1;font-weight:bold;z-index:2}
 .menu-lines{width:30px;display:grid;gap:6px}
 .menu-lines span{height:2px;background:#fff;border-radius:999px}
-
 .brand{text-align:center;line-height:.85}
 .brand-small{font-family:Georgia,serif;font-size:16px;letter-spacing:1.8px;font-weight:bold}
 .brand-big{font-family:Georgia,serif;font-size:62px;font-weight:normal;letter-spacing:4px}
@@ -43,6 +41,8 @@ img{display:block;max-width:100%}
 .desktop-categories a:hover{color:var(--gold-light)}
 .desktop-categories a.active{color:var(--gold-light)}
 .desktop-categories a.active:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold-metal);box-shadow:0 0 8px rgba(216,173,69,.35)}
+
+/* FIRST VISIT — LANGUAGE */
 
 .language-welcome{position:fixed;inset:0;z-index:6000;background:rgba(0,0,0,.86);display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(6px)}
 .language-welcome.show{display:flex}
@@ -64,24 +64,73 @@ img{display:block;max-width:100%}
 .language-continue:not(:disabled):active{transform:scale(.99)}
 .language-welcome-note{text-align:center;color:#777;font-size:11px;line-height:1.5;margin-top:14px}
 
+/* PRIVACY / COOKIES */
+
+.consent-layer{position:fixed;inset:0;z-index:5900;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(5px)}
+.consent-layer.show{display:flex}
+.consent-card{width:min(540px,100%);max-height:93vh;overflow-y:auto;background:#f8f6f0;border:1px solid #111;box-shadow:0 30px 90px rgba(0,0,0,.46)}
+.consent-brand{background:#080808;text-align:center;padding:22px 18px 20px;border-bottom:1px solid #333}
+.consent-brand-small{font:700 11px Georgia,serif;letter-spacing:2px}
+.consent-brand-big{font:normal 38px Georgia,serif;letter-spacing:3px}
+.consent-body{padding:26px 24px}
+.consent-body h2{font:normal 34px/.98 Georgia,serif;margin-bottom:13px}
+.consent-body>p{font:13px/1.65 Georgia,serif;color:#444;margin-bottom:14px}
+.consent-policy-link{display:inline-block;text-decoration:underline;font:14px Georgia,serif;margin:4px 0 18px}
+.consent-actions{display:grid;gap:9px}
+.consent-actions button{height:51px;border:1.5px solid #111;background:#111;color:#fff;font-size:11px;font-weight:bold;letter-spacing:.5px}
+.consent-actions .consent-accept{background:var(--green-dark);border-color:var(--green-dark)}
+.consent-settings{display:none;margin:18px 0 2px;border-top:1px solid #ccc}
+.consent-settings.show{display:block}
+.consent-option{display:grid;grid-template-columns:1fr auto;gap:13px;align-items:center;padding:13px 0;border-bottom:1px solid #ddd}
+.consent-option strong{font-size:12px;display:block;margin-bottom:4px}
+.consent-option p{font-size:10px;line-height:1.45;color:#777}
+.consent-toggle{width:45px;height:25px;border:0;border-radius:999px;background:#aaa;position:relative}
+.consent-toggle:after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:.2s}
+.consent-toggle.on{background:var(--green-dark)}
+.consent-toggle.on:after{left:23px}
+.consent-toggle.locked{opacity:.55;cursor:default}
+
+/* ENTRY CHOICE AFTER CONSENT */
+
+.entry-layer{position:fixed;inset:0;z-index:5800;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(5px)}
+.entry-layer.show{display:flex}
+.entry-card{width:min(540px,100%);max-height:93vh;overflow:auto;background:var(--cream);border:1px solid #111;box-shadow:0 30px 90px rgba(0,0,0,.46)}
+.entry-visual{height:250px;position:relative;overflow:hidden;background:#111}
+.entry-visual img{width:100%;height:100%;object-fit:cover}
+.entry-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.93),rgba(0,0,0,.03) 65%)}
+.entry-visual-copy{position:absolute;z-index:2;left:23px;right:23px;bottom:20px;color:#fff}
+.entry-visual-copy span{font-size:9px;font-weight:bold;letter-spacing:2px;color:var(--gold-light)}
+.entry-visual-copy h2{font:normal 36px/.98 Georgia,serif;margin-top:7px}
+.entry-body{padding:24px}
+.entry-body>p{text-align:center;font-size:12px;line-height:1.6;color:#666;max-width:410px;margin:0 auto 20px}
+.entry-price{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:20px}
+.entry-price div{background:#fff;border:1px solid #bbb;padding:11px 5px;text-align:center}
+.entry-price strong{display:block;font:normal 25px Georgia,serif}
+.entry-price span{display:block;font-size:8px;color:#777;margin-top:4px}
+.entry-actions{display:grid;gap:9px}
+.entry-actions a{min-height:51px;display:flex;align-items:center;justify-content:center;border:1.5px solid #111;font-size:11px;font-weight:bold}
+.entry-actions .join{background:var(--green-dark);border-color:var(--green-dark);color:#fff}
+.entry-actions .signin{background:#111;color:#fff}
+.entry-actions .continue{background:#fff}
+.entry-small{text-align:center;color:#888;font-size:9px;line-height:1.5;margin-top:14px}
+
+/* MENU */
+
 .menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.76);display:none;z-index:2500;backdrop-filter:blur(3px)}
 .menu-overlay.show{display:block}
 .side-menu{position:fixed;top:0;left:-100%;width:min(455px,94%);height:100vh;background:#fff;z-index:2600;overflow-y:auto;transition:.38s ease;border-right:1px solid #222}
 .side-menu.open{left:0}
 .side-menu-header{background:#0b0b0b;color:#fff;padding:24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:3;border-bottom:1px solid #313131}
 .side-menu-header h2{font-family:Georgia,serif;font-size:34px;font-weight:normal}
-.close-menu{width:43px;height:43px;border:1px solid #555;border-radius:50%;background:#111;color:#fff;font-size:23px}
-
+.close-menu{width:43px;height:43px;border:0;border-radius:50%;background:#fff;color:#111;font-size:23px}
 .menu-account{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:18px;border-bottom:1px solid #ddd}
 .menu-account a{padding:13px;text-align:center;border:1.5px solid #111;font-weight:bold;border-radius:999px;transition:.2s}
 .menu-account a:active{transform:scale(.98)}
 .menu-account a:last-child{background:var(--green);border-color:var(--green);box-shadow:0 0 17px rgba(101,229,31,.25)}
-
 .menu-language{padding:0 18px 18px;border-bottom:1px solid #ddd}
 .menu-language-label{display:block;font-size:10px;font-weight:bold;letter-spacing:1.5px;color:#777;margin-bottom:8px;text-transform:uppercase}
 .language-select{width:100%;height:44px;border:1.5px solid #111;background:#faf8f3;color:#111;border-radius:999px;padding:0 15px;font-weight:bold;outline:none}
 .language-select:focus{border-color:var(--gold-rich);box-shadow:0 0 0 3px rgba(216,173,69,.12)}
-
 .menu-items{padding:18px;display:grid;gap:11px}
 .menu-item{display:grid;grid-template-columns:82px 1fr;gap:14px;align-items:center;border:1.5px solid #171717;border-radius:18px;overflow:hidden;background:#faf8f3;transition:.2s}
 .menu-item:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.07)}
@@ -89,10 +138,11 @@ img{display:block;max-width:100%}
 .menu-item img{width:82px;height:82px;object-fit:cover}
 .menu-item h3{font-family:Georgia,serif;font-size:21px;margin-bottom:4px}
 .menu-item p{font-size:12px;line-height:1.45;color:#666;padding-right:8px}
-
 .menu-bottom{padding:18px;border-top:1px solid #ddd;background:#f4f0e7}
 .menu-bottom-links{display:flex;flex-wrap:wrap;gap:12px 18px}
 .menu-bottom-links a{font-size:12px;color:#666;font-weight:bold}
+
+/* SEARCH */
 
 .search-overlay{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:3000;display:none;padding:25px}
 .search-overlay.open{display:block}
@@ -106,6 +156,8 @@ img{display:block;max-width:100%}
 .search-suggestions{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap}
 .search-suggestions a{border:1px solid #666;border-radius:999px;padding:10px 15px;font-size:13px}
 .search-suggestions a:hover{border-color:var(--gold-rich);color:var(--gold-light)}
+
+/* HERO */
 
 .hero{background:#fff;padding:18px;border-bottom:1px solid #ccc}
 .hero-grid{max-width:1550px;margin:auto;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr);gap:14px}
@@ -151,12 +203,13 @@ img{display:block;max-width:100%}
 .star-text small{display:block;font-size:11px;font-weight:800;letter-spacing:1.8px;margin-bottom:10px}
 .star-text strong{display:block;font-family:Georgia,serif;font-size:34px;line-height:.94;font-weight:bold}
 .star-text em{display:block;font-style:normal;font-weight:800;font-size:12px;line-height:1.25;margin-top:14px}
-.star-prize{display:block;font-family:Georgia,serif;font-size:28px;font-weight:bold;line-height:1;margin-top:8px} .story-section{background:#fff;padding:28px 12px 24px;border-bottom:1px solid #ddd}
+.star-prize{display:block;font-family:Georgia,serif;font-size:28px;font-weight:bold;line-height:1;margin-top:8px}
+
+.story-section{background:#fff;padding:28px 12px 24px;border-bottom:1px solid #ddd}
 .story-scroll{max-width:1500px;margin:auto;display:flex;gap:18px;overflow-x:auto;padding:6px;scrollbar-width:none}
 .story-scroll::-webkit-scrollbar{display:none}
 .story-item{flex:0 0 101px;text-align:center}
 .story-ring{width:88px;height:88px;border-radius:50%;padding:3px;margin:auto;background:var(--gold-metal);box-shadow:0 6px 18px rgba(120,80,10,.16);transition:.22s}
-.story-ring:after{content:"";position:absolute}
 .story-item:hover .story-ring{transform:scale(1.055)}
 .story-item:active .story-ring{transform:scale(.98)}
 .story-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid #fff}
@@ -276,6 +329,7 @@ html[dir="rtl"] .cover-copy,
 html[dir="rtl"] .mosaic-copy,
 html[dir="rtl"] .visual-category-copy,
 html[dir="rtl"] .photo-label{text-align:right}
+html[dir="rtl"] .language-choice{text-align:right}
 
 @media(max-width:1100px){
 .hero-grid{grid-template-columns:1fr}
@@ -337,6 +391,8 @@ html[dir="rtl"] .photo-label{text-align:right}
 .search-modal{margin-top:45px}
 .search-top h2{font-size:36px}
 .search-field input{font-size:25px}
+.entry-visual{height:225px}
+.entry-visual-copy h2{font-size:32px}
 }
 
 @media(max-width:430px){
@@ -365,6 +421,10 @@ html[dir="rtl"] .photo-label{text-align:right}
 .language-welcome-title{font-size:32px}
 .language-welcome-grid{grid-template-columns:1fr}
 .language-choice{min-height:43px;padding:9px 14px}
+.consent-body{padding:23px 18px}
+.consent-body h2{font-size:31px}
+.entry-body{padding:20px 16px}
+.entry-price strong{font-size:22px}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -375,52 +435,202 @@ html[dir="rtl"] .photo-label{text-align:right}
 
 <body>
 
+<!-- LANGUAGE FIRST -->
+
 <div class="language-welcome" id="languageWelcome" role="dialog" aria-modal="true" aria-labelledby="languageWelcomeTitle">
-  <div class="language-welcome-card">
-    <div class="language-welcome-top">
-      <div class="language-welcome-logo-small metallic-text notranslate" translate="no">PETS &amp;</div>
-      <div class="language-welcome-logo-big metallic-text notranslate" translate="no">DOGUE</div>
-    </div>
+<div class="language-welcome-card">
 
-    <div class="language-welcome-body">
-      <h2 class="language-welcome-title" id="languageWelcomeTitle">Choose your language</h2>
-      <p class="language-welcome-subtitle">Welcome to PETS &amp; DOGUE. Choose your language to enter the magazine.</p>
+<div class="language-welcome-top">
+<div class="language-welcome-logo-small metallic-text notranslate" translate="no">PETS &amp;</div>
+<div class="language-welcome-logo-big metallic-text notranslate" translate="no">DOGUE</div>
+</div>
 
-      <div class="language-welcome-grid" id="welcomeLanguageGrid">
-        <button class="language-choice" type="button" data-lang="en">EN — English</button>
-        <button class="language-choice" type="button" data-lang="uk">UA — Українська</button>
-        <button class="language-choice" type="button" data-lang="ru">RU — Русский</button>
-        <button class="language-choice" type="button" data-lang="fr">FR — Français</button>
-        <button class="language-choice" type="button" data-lang="de">DE — Deutsch</button>
-        <button class="language-choice" type="button" data-lang="es">ES — Español</button>
-        <button class="language-choice" type="button" data-lang="it">IT — Italiano</button>
-        <button class="language-choice" type="button" data-lang="pt">PT — Português</button>
-        <button class="language-choice" type="button" data-lang="nl">NL — Nederlands</button>
-        <button class="language-choice" type="button" data-lang="pl">PL — Polski</button>
-        <button class="language-choice" type="button" data-lang="cs">CZ — Čeština</button>
-        <button class="language-choice" type="button" data-lang="sk">SK — Slovenčina</button>
-        <button class="language-choice" type="button" data-lang="hu">HU — Magyar</button>
-        <button class="language-choice" type="button" data-lang="ro">RO — Română</button>
-        <button class="language-choice" type="button" data-lang="bg">BG — Български</button>
-        <button class="language-choice" type="button" data-lang="el">GR — Ελληνικά</button>
-        <button class="language-choice" type="button" data-lang="sv">SE — Svenska</button>
-        <button class="language-choice" type="button" data-lang="da">DK — Dansk</button>
-        <button class="language-choice" type="button" data-lang="no">NO — Norsk</button>
-        <button class="language-choice" type="button" data-lang="fi">FI — Suomi</button>
-        <button class="language-choice" type="button" data-lang="tr">TR — Türkçe</button>
-        <button class="language-choice" type="button" data-lang="ar">AR — العربية</button>
-        <button class="language-choice" type="button" data-lang="hi">HI — हिन्दी</button>
-      </div>
+<div class="language-welcome-body">
 
-      <button class="language-continue" id="languageContinue" type="button" disabled>CONTINUE</button>
-      <p class="language-welcome-note">You can change your language anytime from the menu.</p>
-    </div>
-  </div>
+<h2 class="language-welcome-title" id="languageWelcomeTitle">Choose your language</h2>
+
+<p class="language-welcome-subtitle" id="languageWelcomeSubtitle">
+Welcome to PETS &amp; DOGUE. Choose your language to enter the magazine.
+</p>
+
+<div class="language-welcome-grid" id="welcomeLanguageGrid">
+<button class="language-choice" type="button" data-lang="en">EN — English</button>
+<button class="language-choice" type="button" data-lang="uk">UA — Українська</button>
+<button class="language-choice" type="button" data-lang="ru">RU — Русский</button>
+<button class="language-choice" type="button" data-lang="fr">FR — Français</button>
+<button class="language-choice" type="button" data-lang="de">DE — Deutsch</button>
+<button class="language-choice" type="button" data-lang="es">ES — Español</button>
+<button class="language-choice" type="button" data-lang="it">IT — Italiano</button>
+<button class="language-choice" type="button" data-lang="pt">PT — Português</button>
+<button class="language-choice" type="button" data-lang="nl">NL — Nederlands</button>
+<button class="language-choice" type="button" data-lang="pl">PL — Polski</button>
+<button class="language-choice" type="button" data-lang="cs">CZ — Čeština</button>
+<button class="language-choice" type="button" data-lang="sk">SK — Slovenčina</button>
+<button class="language-choice" type="button" data-lang="hu">HU — Magyar</button>
+<button class="language-choice" type="button" data-lang="ro">RO — Română</button>
+<button class="language-choice" type="button" data-lang="bg">BG — Български</button>
+<button class="language-choice" type="button" data-lang="el">GR — Ελληνικά</button>
+<button class="language-choice" type="button" data-lang="sv">SE — Svenska</button>
+<button class="language-choice" type="button" data-lang="da">DK — Dansk</button>
+<button class="language-choice" type="button" data-lang="no">NO — Norsk</button>
+<button class="language-choice" type="button" data-lang="fi">FI — Suomi</button>
+<button class="language-choice" type="button" data-lang="tr">TR — Türkçe</button>
+<button class="language-choice" type="button" data-lang="ar">AR — العربية</button>
+<button class="language-choice" type="button" data-lang="hi">HI — हिन्दी</button>
+</div>
+
+<button class="language-continue" id="languageContinue" type="button" disabled>CONTINUE</button>
+
+<p class="language-welcome-note" id="languageWelcomeNote">
+You can change your language anytime from the menu.
+</p>
+
+</div>
+</div>
+</div>
+
+<!-- PRIVACY SECOND -->
+
+<div class="consent-layer" id="consentLayer" role="dialog" aria-modal="true">
+
+<div class="consent-card">
+
+<div class="consent-brand notranslate" translate="no">
+<div class="consent-brand-small metallic-text">PETS &amp;</div>
+<div class="consent-brand-big metallic-text">DOGUE</div>
+</div>
+
+<div class="consent-body">
+
+<h2 id="consentTitle">Your front-row seat</h2>
+
+<p id="consentText">
+PETS & DOGUE uses essential technology to operate the magazine. With your permission, analytics and personalisation help us improve stories, recommendations and your experience.
+</p>
+
+<a class="consent-policy-link" href="privacy.html" id="consentPolicyLink">
+Privacy Policy
+</a>
+
+<div class="consent-settings" id="consentSettings">
+
+<div class="consent-option">
+<div>
+<strong id="essentialTitle">Essential</strong>
+<p id="essentialText">Required for language, security and basic site functions.</p>
+</div>
+<button class="consent-toggle on locked" type="button" aria-label="Essential"></button>
+</div>
+
+<div class="consent-option">
+<div>
+<strong id="analyticsTitle">Analytics</strong>
+<p id="analyticsText">Helps us understand how visitors use PETS & DOGUE.</p>
+</div>
+<button class="consent-toggle" id="analyticsToggle" type="button" onclick="toggleConsent('analytics')"></button>
+</div>
+
+<div class="consent-option">
+<div>
+<strong id="personalTitle">Personalisation</strong>
+<p id="personalText">Allows optional preferences and personalised experiences.</p>
+</div>
+<button class="consent-toggle" id="personalToggle" type="button" onclick="toggleConsent('personalisation')"></button>
+</div>
+
+</div>
+
+<div class="consent-actions">
+
+<button class="consent-accept" id="acceptAllButton" type="button" onclick="saveConsent(true,true)">
+I AGREE
+</button>
+
+<button id="rejectButton" type="button" onclick="saveConsent(false,false)">
+REJECT
+</button>
+
+<button id="choicesButton" type="button" onclick="showConsentSettings()">
+YOUR PRIVACY CHOICES
+</button>
+
+<button id="saveChoicesButton" type="button" onclick="saveCurrentConsent()" style="display:none">
+SAVE CHOICES
+</button>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ENTRY THIRD -->
+
+<div class="entry-layer" id="entryLayer" role="dialog" aria-modal="true">
+
+<div class="entry-card">
+
+<div class="entry-visual">
+<img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1000&q=85" alt="PETS & DOGUE">
+<div class="entry-visual-copy">
+<span class="notranslate" translate="no">PETS &amp; DOGUE · PRIVATE CLUB</span>
+<h2 id="entryTitle">Welcome to PETS & DOGUE</h2>
+</div>
+</div>
+
+<div class="entry-body">
+
+<p id="entryText">
+Read freely, sign in to save your world, or join the Club for competitions, Marketplace access and member benefits.
+</p>
+
+<div class="entry-price">
+
+<div>
+<strong id="entryFree">Free</strong>
+<span id="entryFreeLabel">First month</span>
+</div>
+
+<div>
+<strong>£1</strong>
+<span id="entryMonthLabel">1 month</span>
+</div>
+
+<div>
+<strong>£10</strong>
+<span id="entryYearLabel">1 year</span>
+</div>
+
+</div>
+
+<div class="entry-actions">
+
+<a class="join" href="club.html" id="entryJoin" onclick="completeEntryChoice()">
+JOIN CLUB
+</a>
+
+<a class="signin" href="account.html" id="entrySignIn" onclick="completeEntryChoice()">
+SIGN IN
+</a>
+
+<a class="continue" href="#" id="entryContinue" onclick="continueWithoutAccount(event)">
+CONTINUE FREE
+</a>
+
+</div>
+
+<p class="entry-small" id="entrySmall">
+You can join or sign in anytime from the menu.
+</p>
+
+</div>
+</div>
 </div>
 
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
 <aside class="side-menu" id="sideMenu">
+
 <div class="side-menu-header">
 <h2 data-i18n="common.menu.contents">Contents</h2>
 <button class="close-menu" type="button" onclick="closeMenu()" aria-label="Close menu">×</button>
@@ -433,6 +643,7 @@ html[dir="rtl"] .photo-label{text-align:right}
 
 <div class="menu-language">
 <span class="menu-language-label">Language</span>
+
 <select id="languageSelect" class="language-select" aria-label="Choose language">
 <option value="en">EN — English</option>
 <option value="uk">UA — Українська</option>
@@ -461,31 +672,111 @@ html[dir="rtl"] .photo-label{text-align:right}
 </div>
 
 <div class="menu-items">
-<a class="menu-item" href="issue-01.html"><img alt="Latest issue" src="file_00000000a9d471fda9b4629589be22a9.png"><div><h3 data-i18n="common.menu.latestIssue">Latest Issue</h3><p data-i18n="common.menu.latestIssueDescription">Open the newest PETS & DOGUE digital magazine.</p></div></a>
 
-<a class="menu-item" href="articles.html"><img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.articles">Articles</h3><p data-i18n="common.menu.articlesDescription">Read and listen to editorial stories.</p></div></a>
+<a class="menu-item" href="issue-01.html">
+<img alt="Latest issue" src="file_00000000a9d471fda9b4629589be22a9.png">
+<div>
+<h3 data-i18n="common.menu.latestIssue">Latest Issue</h3>
+<p data-i18n="common.menu.latestIssueDescription">Open the newest PETS & DOGUE digital magazine.</p>
+</div>
+</a>
 
-<a class="menu-item" href="photos.html"><img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.photos">Photos</h3><p data-i18n="common.menu.photosDescription">Portraits, galleries and visual stories.</p></div></a>
+<a class="menu-item" href="articles.html">
+<img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.articles">Articles</h3>
+<p data-i18n="common.menu.articlesDescription">Read and listen to editorial stories.</p>
+</div>
+</a>
 
-<a class="menu-item" href="members-gallery.html"><img alt="Cover Stars" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.coverStar">Cover Star</h3><p data-i18n="common.menu.coverStarDescription">Enter your pet and compete for the next cover.</p></div></a>
+<a class="menu-item" href="photos.html">
+<img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.photos">Photos</h3>
+<p data-i18n="common.menu.photosDescription">Portraits, galleries and visual stories.</p>
+</div>
+</a>
 
-<a class="menu-item" href="pet-fashion.html"><img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.fashion">Pet Fashion</h3><p data-i18n="common.menu.fashionDescription">Luxury style, accessories and editorial looks.</p></div></a>
+<a class="menu-item" href="members-gallery.html">
+<img alt="Cover Stars" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.coverStar">Cover Star</h3>
+<p data-i18n="common.menu.coverStarDescription">Enter your pet and compete for the next cover.</p>
+</div>
+</a>
 
-<a class="menu-item" href="wellness.html"><img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.navigation.wellness">Wellness</h3><p>Health, grooming and everyday care.</p></div></a>
+<a class="menu-item" href="pet-fashion.html">
+<img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.fashion">Pet Fashion</h3>
+<p data-i18n="common.menu.fashionDescription">Luxury style, accessories and editorial looks.</p>
+</div>
+</a>
 
-<a class="menu-item" href="pet-travel.html"><img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.travel">Travel</h3><p data-i18n="common.menu.travelDescription">Hotels, beaches and pet-friendly journeys.</p></div></a>
+<a class="menu-item" href="wellness.html">
+<img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.navigation.wellness">Wellness</h3>
+<p>Health, grooming and everyday care.</p>
+</div>
+</a>
 
-<a class="menu-item" href="pet-friendly-places.html"><img alt="Places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.places">Pet Friendly Places</h3><p data-i18n="common.menu.placesDescription">Search real places, maps, routes and contacts.</p></div></a>
+<a class="menu-item" href="pet-travel.html">
+<img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.travel">Travel</h3>
+<p data-i18n="common.menu.travelDescription">Hotels, beaches and pet-friendly journeys.</p>
+</div>
+</a>
 
-<a class="menu-item" href="pets-in-need.html"><img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.rescue">Pets In Need</h3><p data-i18n="common.menu.rescueDescription">Rescue, adoption and community support.</p></div></a>
+<a class="menu-item" href="pet-friendly-places.html">
+<img alt="Places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.places">Pet Friendly Places</h3>
+<p data-i18n="common.menu.placesDescription">Search real places, maps, routes and contacts.</p>
+</div>
+</a>
 
-<a class="menu-item" href="contests.html"><img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.contests">Contests</h3><p data-i18n="common.menu.contestsDescription">Competitions, votes and prizes.</p></div></a>
+<a class="menu-item" href="pets-in-need.html">
+<img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.rescue">Pets In Need</h3>
+<p data-i18n="common.menu.rescueDescription">Rescue, adoption and community support.</p>
+</div>
+</a>
 
-<a class="menu-item" href="local-community.html"><img alt="Community" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.community">Local Community</h3><p data-i18n="common.menu.communityDescription">Local recommendations, posts and support.</p></div></a>
+<a class="menu-item" href="contests.html">
+<img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.contests">Contests</h3>
+<p data-i18n="common.menu.contestsDescription">Competitions, votes and prizes.</p>
+</div>
+</a>
 
-<a class="menu-item" href="pet-marketplace.html"><img alt="Marketplace" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.menu.marketplace">Marketplace</h3><p data-i18n="common.menu.marketplaceDescription">Community listings, services and accessories.</p></div></a>
+<a class="menu-item" href="local-community.html">
+<img alt="Community" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.community">Local Community</h3>
+<p data-i18n="common.menu.communityDescription">Local recommendations, posts and support.</p>
+</div>
+</a>
 
-<a class="menu-item" href="partners.html"><img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"><div><h3 data-i18n="common.navigation.partners">Partners</h3><p>Premium partners, offers and member benefits.</p></div></a>
+<a class="menu-item" href="pet-marketplace.html">
+<img alt="Marketplace" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.menu.marketplace">Marketplace</h3>
+<p data-i18n="common.menu.marketplaceDescription">Community listings, services and accessories.</p>
+</div>
+</a>
+
+<a class="menu-item" href="partners.html">
+<img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80">
+<div>
+<h3 data-i18n="common.navigation.partners">Partners</h3>
+<p>Premium partners, offers and member benefits.</p>
+</div>
+</a>
+
 </div>
 
 <div class="menu-bottom">
@@ -493,21 +784,28 @@ html[dir="rtl"] .photo-label{text-align:right}
 <a href="contact.html" data-i18n="common.footer.contact">Contact</a>
 <a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a>
 <a href="terms.html" data-i18n="common.footer.terms">Terms</a>
+<a href="copyright.html">Copyright</a>
+<a href="cookies.html">Cookies</a>
 <a href="admin.html" data-i18n="common.footer.admin">Admin</a>
 </div>
 </div>
+
 </aside>
 
 <div class="search-overlay" id="searchOverlay">
+
 <div class="search-modal">
+
 <div class="search-top">
 <h2 data-i18n="common.search.title">Search PETS & DOGUE</h2>
 <button type="button" onclick="closeSearch()">×</button>
 </div>
+
 <div class="search-field">
 <input data-i18n-placeholder="common.search.placeholder" id="siteSearchInput" placeholder="Search articles, places, pets..." type="search">
 <button type="button" onclick="runSiteSearch()">⌕</button>
 </div>
+
 <div class="search-suggestions">
 <a data-i18n="common.search.articles" href="articles.html">Articles</a>
 <a data-i18n="common.search.photos" href="photos.html">Photos</a>
@@ -517,13 +815,21 @@ html[dir="rtl"] .photo-label{text-align:right}
 <a data-i18n="common.search.rescue" href="pets-in-need.html">Rescue</a>
 <a data-i18n="common.search.marketplace" href="pet-marketplace.html">Marketplace</a>
 </div>
+
 </div>
-</div>  <header class="site-header">
+</div>
+
+<header class="site-header">
+
 <div class="header-main">
 
 <button aria-label="Open menu and language settings" class="icon-button menu-trigger" type="button" onclick="openMenu()">
 <span class="menu-lang-mark" aria-hidden="true">文</span>
-<span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+<span class="menu-lines" aria-hidden="true">
+<span></span>
+<span></span>
+<span></span>
+</span>
 </button>
 
 <a class="brand notranslate" href="index.html" translate="no">
@@ -532,6 +838,7 @@ html[dir="rtl"] .photo-label{text-align:right}
 </a>
 
 <button aria-label="Search" class="icon-button search-icon" type="button" onclick="openSearch()">⌕</button>
+
 </div>
 
 <nav class="desktop-categories">
@@ -549,21 +856,27 @@ html[dir="rtl"] .photo-label{text-align:right}
 <a data-i18n="common.navigation.marketplace" href="pet-marketplace.html">MARKETPLACE</a>
 <a data-i18n="common.navigation.partners" href="partners.html">PARTNERS</a>
 </nav>
+
 </header>
 
 <section class="hero">
+
 <div class="hero-grid">
 
 <a class="latest-cover" href="issue-01.html">
+
 <img alt="Latest PETS & DOGUE issue" src="file_00000000a9d471fda9b4629589be22a9.png">
+
 <div class="cover-copy">
 <span data-i18n="home.hero.issueLabel">LATEST ISSUE</span>
 <h1 data-i18n="home.hero.title">Miso: The First PETS & DOGUE Cover Star</h1>
 <p data-i18n="home.hero.description">Open Issue 01 and enter the visual world of PETS & DOGUE.</p>
 </div>
+
 </a>
 
 <a class="cover-star-card" href="members-gallery.html" aria-label="Become the next PETS & DOGUE cover star">
+
 <div class="cover-star-mosaic" aria-hidden="true">
 <div class="cover-star-cell"><img src="cover-star/cover-golf-bulldog.png" alt=""></div>
 <div class="cover-star-cell"><img src="cover-star/cover-surf-parrot.png" alt=""></div>
@@ -576,57 +889,101 @@ html[dir="rtl"] .photo-label{text-align:right}
 
 <div class="cover-star-focus">
 <div class="star-shape">
-<div class="star-orbit"><div class="star-burst"></div></div>
+<div class="star-orbit">
+<div class="star-burst"></div>
+</div>
+
 <div class="star-text">
 <small data-i18n="home.hero.myPetIs">MY PET IS —</small>
 <strong data-i18n="home.hero.nextCoverStar">THE NEXT<br>COVER STAR</strong>
 <em data-i18n="home.hero.enter">TAP TO ENTER</em>
 <span class="star-prize" data-i18n="home.hero.prize">PRIZE</span>
 </div>
+
 </div>
 </div>
+
 </a>
 
 </div>
 </section>
 
 <section class="story-section">
+
 <div class="story-scroll">
 
-<a class="story-item" href="issue-01.html"><div class="story-ring"><img alt="Issue 01" src="file_00000000a9d471fda9b4629589be22a9.png"></div><span data-i18n="home.stories.issue">Issue 01</span></a>
+<a class="story-item" href="issue-01.html">
+<div class="story-ring"><img alt="Issue 01" src="file_00000000a9d471fda9b4629589be22a9.png"></div>
+<span data-i18n="home.stories.issue">Issue 01</span>
+</a>
 
-<a class="story-item" href="members-gallery.html"><div class="story-ring"><img alt="Cover Stars" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.coverStars">Cover Stars</span></a>
+<a class="story-item" href="members-gallery.html">
+<div class="story-ring"><img alt="Cover Stars" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.coverStars">Cover Stars</span>
+</a>
 
-<a class="story-item" href="articles.html"><div class="story-ring"><img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.articles">Articles</span></a>
+<a class="story-item" href="articles.html">
+<div class="story-ring"><img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.articles">Articles</span>
+</a>
 
-<a class="story-item" href="pet-fashion.html"><div class="story-ring"><img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.fashion">Fashion</span></a>
+<a class="story-item" href="pet-fashion.html">
+<div class="story-ring"><img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.fashion">Fashion</span>
+</a>
 
-<a class="story-item" href="pet-travel.html"><div class="story-ring"><img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.travel">Travel</span></a>
+<a class="story-item" href="pet-travel.html">
+<div class="story-ring"><img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.travel">Travel</span>
+</a>
 
-<a class="story-item" href="wellness.html"><div class="story-ring"><img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.wellness">Wellness</span></a>
+<a class="story-item" href="wellness.html">
+<div class="story-ring"><img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.wellness">Wellness</span>
+</a>
 
-<a class="story-item" href="photos.html"><div class="story-ring"><img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.photos">Photos</span></a>
+<a class="story-item" href="photos.html">
+<div class="story-ring"><img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.photos">Photos</span>
+</a>
 
-<a class="story-item" href="pets-in-need.html"><div class="story-ring"><img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.rescue">Rescue</span></a>
+<a class="story-item" href="pets-in-need.html">
+<div class="story-ring"><img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.rescue">Rescue</span>
+</a>
 
-<a class="story-item" href="pet-friendly-places.html"><div class="story-ring"><img alt="Places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.places">Places</span></a>
+<a class="story-item" href="pet-friendly-places.html">
+<div class="story-ring"><img alt="Places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.places">Places</span>
+</a>
 
-<a class="story-item" href="contests.html"><div class="story-ring"><img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.contests">Contests</span></a>
+<a class="story-item" href="contests.html">
+<div class="story-ring"><img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.contests">Contests</span>
+</a>
 
-<a class="story-item" href="partners.html"><div class="story-ring"><img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.offers">Offers</span></a>
+<a class="story-item" href="partners.html">
+<div class="story-ring"><img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.offers">Offers</span>
+</a>
 
-<a class="story-item" href="pet-marketplace.html"><div class="story-ring"><img alt="Marketplace" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80"></div><span data-i18n="home.stories.market">Market</span></a>
+<a class="story-item" href="pet-marketplace.html">
+<div class="story-ring"><img alt="Marketplace" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80"></div>
+<span data-i18n="home.stories.market">Market</span>
+</a>
 
 </div>
 </section>
 
 <section class="section">
+
 <div class="section-heading">
 <h2 data-i18n="home.editorial.heading">Inside PETS & DOGUE</h2>
 <a data-i18n="home.editorial.viewAll" href="articles.html">VIEW ALL STORIES →</a>
 </div>
 
 <div class="editorial-mosaic">
+
 <a class="mosaic-card large" href="issue-01.html">
 <img alt="Miso" src="file_00000000a9d471fda9b4629589be22a9.png">
 <div class="mosaic-copy">
@@ -658,22 +1015,26 @@ html[dir="rtl"] .photo-label{text-align:right}
 <h3 data-i18n="home.editorial.rescueTitle">Stories That Can Change an Animal’s Life</h3>
 </div>
 </a>
+
 </div>
 </section>
 
 <section class="section">
+
 <div class="section-heading">
 <h2 data-i18n="home.todayStories.heading">Today’s Stories</h2>
 <a data-i18n="home.todayStories.readAll" href="articles.html">READ ALL →</a>
 </div>
 
 <div class="voice-settings">
+
 <div>
 <h3 data-i18n="home.todayStories.listenTitle">Listen To PETS & DOGUE</h3>
 <p data-i18n="home.todayStories.listenDescription">Choose a voice and tap the speaker beside a story.</p>
 </div>
 
 <div class="voice-controls">
+
 <select id="voiceGender">
 <option data-i18n="home.todayStories.femaleSpeaker" value="female">Female Speaker</option>
 <option data-i18n="home.todayStories.maleSpeaker" value="male">Male Speaker</option>
@@ -687,10 +1048,12 @@ html[dir="rtl"] .photo-label{text-align:right}
 </select>
 
 <button data-i18n="home.todayStories.stop" type="button" onclick="stopNarration()">■ Stop</button>
+
 </div>
 </div>
 
 <div class="article-list">
+
 <div class="article-list-feature">
 <span data-i18n="home.todayStories.editorSelection">EDITOR’S SELECTION</span>
 <h3 data-i18n="home.todayStories.editorTitle">Style, Care, Travel and the Stories Animals Deserve</h3>
@@ -735,8 +1098,12 @@ html[dir="rtl"] .photo-label{text-align:right}
 </a>
 <button aria-label="Listen to story" class="listen-button" type="button" onclick="listenToArticle(this)">🔊</button>
 </article>
+
 </div>
-</section>  <section class="section">
+</section>
+
+<section class="section">
+
 <div class="section-heading">
 <h2 data-i18n="home.visualStories.heading">Visual Stories</h2>
 <a data-i18n="home.visualStories.openGallery" href="photos.html">OPEN PHOTO GALLERY →</a>
@@ -820,6 +1187,7 @@ html[dir="rtl"] .photo-label{text-align:right}
 </section>
 
 <section class="section">
+
 <div class="section-heading">
 <h2 data-i18n="home.rubrics.heading">Explore Every Rubric</h2>
 <a data-i18n="home.rubrics.allRubrics" href="categories.html">ALL RUBRICS →</a>
@@ -939,9 +1307,14 @@ html[dir="rtl"] .photo-label{text-align:right}
 </section>
 
 <section class="useful-section">
+
 <div class="useful-inner">
+
 <h2 data-i18n="home.useful.heading">Beautiful and Useful</h2>
-<p class="useful-intro" data-i18n="home.useful.intro">PETS & DOGUE combines luxury editorial content with practical services for people who live, travel and care for animals.</p>
+
+<p class="useful-intro" data-i18n="home.useful.intro">
+PETS & DOGUE combines luxury editorial content with practical services for people who live, travel and care for animals.
+</p>
 
 <div class="useful-grid">
 
@@ -998,9 +1371,14 @@ html[dir="rtl"] .photo-label{text-align:right}
 </section>
 
 <section class="club-section">
+
 <div class="club-box">
+
 <h2 data-i18n="home.club.heading">Join the PETS & DOGUE World</h2>
-<p data-i18n="home.club.description">Become part of the Club for cover-star competitions, partner benefits, exclusive content, member identity and future premium experiences.</p>
+
+<p data-i18n="home.club.description">
+Become part of the Club for cover-star competitions, partner benefits, exclusive content, member identity and future premium experiences.
+</p>
 
 <div class="club-benefits">
 <div class="club-benefit" data-i18n="home.club.coverEntry">Cover Star Entry</div>
@@ -1011,25 +1389,42 @@ html[dir="rtl"] .photo-label{text-align:right}
 <div class="club-benefit" data-i18n="home.club.community">Community Access</div>
 </div>
 
-<a class="club-button" data-i18n="home.club.button" href="club.html">JOIN PETS & DOGUE CLUB →</a>
+<a class="club-button" data-i18n="home.club.button" href="club.html">
+JOIN PETS & DOGUE CLUB →
+</a>
+
 </div>
 </section>
 
 <section class="newsletter">
+
 <div class="newsletter-inner">
-<h2 data-i18n="home.newsletter.heading">Your Front-Row Seat to the Animal World</h2>
-<p data-i18n="home.newsletter.description">Receive new issues, cover-star announcements, visual stories, travel ideas and community updates.</p>
+
+<h2 data-i18n="home.newsletter.heading">
+Your Front-Row Seat to the Animal World
+</h2>
+
+<p data-i18n="home.newsletter.description">
+Receive new issues, cover-star announcements, visual stories, travel ideas and community updates.
+</p>
 
 <div class="newsletter-form">
 <input data-i18n-placeholder="home.newsletter.placeholder" id="newsletterEmail" placeholder="Your email address" type="email">
 <button data-i18n="home.newsletter.button" type="button" onclick="subscribeNewsletter()">SUBSCRIBE</button>
 </div>
+
 </div>
 </section>
 
 <footer>
-<div class="footer-brand metallic-text notranslate" translate="no">PETS &amp; DOGUE</div>
-<p class="footer-subtitle" data-i18n="common.footer.subtitle">The International Luxury Animal Magazine</p>
+
+<div class="footer-brand metallic-text notranslate" translate="no">
+PETS &amp; DOGUE
+</div>
+
+<p class="footer-subtitle" data-i18n="common.footer.subtitle">
+The International Luxury Animal Magazine
+</p>
 
 <div class="footer-links">
 <a data-i18n="common.footer.home" href="index.html">Home</a>
@@ -1045,6 +1440,8 @@ html[dir="rtl"] .photo-label{text-align:right}
 <a data-i18n="common.footer.contact" href="contact.html">Contact</a>
 <a data-i18n="common.footer.privacy" href="privacy.html">Privacy</a>
 <a data-i18n="common.footer.terms" href="terms.html">Terms</a>
+<a href="copyright.html">Copyright</a>
+<a href="cookies.html">Cookies</a>
 </div>
 
 <div class="footer-social">
@@ -1054,57 +1451,1066 @@ html[dir="rtl"] .photo-label{text-align:right}
 <a aria-label="Pinterest" href="#">P</a>
 </div>
 
-<a class="admin-link" data-i18n="common.footer.admin" href="admin.html">Admin</a>
-</footer>  <script>
-function getHomeLanguage(){
-if(window.PetsDogueLanguage&&window.PetsDogueLanguage.getCurrentLanguage){
-const current=window.PetsDogueLanguage.getCurrentLanguage();
-if(typeof current==="string")return current;
-if(current&&current.code)return current.code
+<a class="admin-link" data-i18n="common.footer.admin" href="admin.html">
+Admin
+</a>
+
+</footer>
+
+<script>
+const HOME_LANGUAGE_KEY="pets_dogue_language";
+const HOME_CONSENT_KEY="pets_dogue_cookie_consent";
+const HOME_ENTRY_KEY="pets_dogue_entry_choice_done";
+
+const HOME_SUPPORTED=[
+"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
+"hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+];
+
+const ONBOARDING_TRANSLATIONS={
+
+en:[
+"Choose your language",
+"Welcome to PETS & DOGUE. Choose your language to enter the magazine.",
+"CONTINUE",
+"You can change your language anytime from the menu.",
+"Your front-row seat",
+"PETS & DOGUE uses essential technology to operate the magazine. With your permission, analytics and personalisation help us improve stories, recommendations and your experience.",
+"Privacy Policy",
+"Essential",
+"Required for language, security and basic site functions.",
+"Analytics",
+"Helps us understand how visitors use PETS & DOGUE.",
+"Personalisation",
+"Allows optional preferences and personalised experiences.",
+"I AGREE",
+"REJECT",
+"YOUR PRIVACY CHOICES",
+"SAVE CHOICES",
+"Welcome to PETS & DOGUE",
+"Read freely, sign in to save your world, or join the Club for competitions, Marketplace access and member benefits.",
+"Free",
+"First month",
+"1 month",
+"1 year",
+"JOIN CLUB",
+"SIGN IN",
+"CONTINUE FREE",
+"You can join or sign in anytime from the menu."
+],
+
+uk:[
+"Оберіть мову",
+"Ласкаво просимо до PETS & DOGUE. Оберіть мову, щоб відкрити журнал.",
+"ПРОДОВЖИТИ",
+"Мову можна змінити будь-коли в меню.",
+"Ваше місце в першому ряду",
+"PETS & DOGUE використовує необхідні технології для роботи журналу. З вашого дозволу аналітика та персоналізація допомагають нам покращувати історії, рекомендації та ваш досвід.",
+"Політика конфіденційності",
+"Необхідні",
+"Потрібні для мови, безпеки та основної роботи сайту.",
+"Аналітика",
+"Допомагає нам зрозуміти, як відвідувачі користуються PETS & DOGUE.",
+"Персоналізація",
+"Дозволяє додаткові налаштування та персоналізований досвід.",
+"ПОГОДЖУЮСЯ",
+"ВІДХИЛИТИ",
+"НАЛАШТУВАННЯ КОНФІДЕНЦІЙНОСТІ",
+"ЗБЕРЕГТИ",
+"Ласкаво просимо до PETS & DOGUE",
+"Читайте безкоштовно, увійдіть, щоб зберігати улюблене, або приєднуйтесь до Club для конкурсів, Marketplace та переваг учасника.",
+"Безкоштовно",
+"Перший місяць",
+"1 місяць",
+"1 рік",
+"ВСТУПИТИ ДО CLUB",
+"УВІЙТИ",
+"ПРОДОВЖИТИ БЕЗКОШТОВНО",
+"Вступити або увійти можна будь-коли через меню."
+],
+
+ru:[
+"Выберите язык",
+"Добро пожаловать в PETS & DOGUE. Выберите язык, чтобы открыть журнал.",
+"ПРОДОЛЖИТЬ",
+"Язык можно изменить в любое время через меню.",
+"Ваше место в первом ряду",
+"PETS & DOGUE использует необходимые технологии для работы журнала. С вашего разрешения аналитика и персонализация помогают нам улучшать истории, рекомендации и ваш опыт.",
+"Политика конфиденциальности",
+"Необходимые",
+"Нужны для языка, безопасности и базовой работы сайта.",
+"Аналитика",
+"Помогает нам понимать, как посетители используют PETS & DOGUE.",
+"Персонализация",
+"Позволяет дополнительные настройки и персонализированный опыт.",
+"Я СОГЛАСЕН",
+"ОТКЛОНИТЬ",
+"НАСТРОЙКИ КОНФИДЕНЦИАЛЬНОСТИ",
+"СОХРАНИТЬ",
+"Добро пожаловать в PETS & DOGUE",
+"Читайте бесплатно, войдите, чтобы сохранять любимое, или вступайте в Club для конкурсов, Marketplace и преимуществ участника.",
+"Бесплатно",
+"Первый месяц",
+"1 месяц",
+"1 год",
+"ВСТУПИТЬ В CLUB",
+"ВОЙТИ",
+"ПРОДОЛЖИТЬ БЕСПЛАТНО",
+"Вступить или войти можно в любое время через меню."
+],
+
+fr:[
+"Choisissez votre langue",
+"Bienvenue chez PETS & DOGUE. Choisissez votre langue pour entrer dans le magazine.",
+"CONTINUER",
+"Vous pouvez changer de langue à tout moment dans le menu.",
+"Votre place au premier rang",
+"PETS & DOGUE utilise des technologies essentielles au fonctionnement du magazine. Avec votre accord, l’analyse et la personnalisation nous aident à améliorer les histoires, recommandations et votre expérience.",
+"Politique de confidentialité",
+"Essentiel",
+"Nécessaire pour la langue, la sécurité et les fonctions de base.",
+"Analyse",
+"Nous aide à comprendre comment les visiteurs utilisent PETS & DOGUE.",
+"Personnalisation",
+"Permet des préférences facultatives et une expérience personnalisée.",
+"J’ACCEPTE",
+"REFUSER",
+"VOS CHOIX DE CONFIDENTIALITÉ",
+"ENREGISTRER",
+"Bienvenue chez PETS & DOGUE",
+"Lisez librement, connectez-vous pour enregistrer vos favoris ou rejoignez le Club pour les concours, Marketplace et avantages membres.",
+"Gratuit",
+"Premier mois",
+"1 mois",
+"1 an",
+"REJOINDRE LE CLUB",
+"SE CONNECTER",
+"CONTINUER GRATUITEMENT",
+"Vous pouvez rejoindre le Club ou vous connecter à tout moment depuis le menu."
+],
+
+de:[
+"Sprache auswählen",
+"Willkommen bei PETS & DOGUE. Wählen Sie Ihre Sprache, um das Magazin zu öffnen.",
+"WEITER",
+"Sie können die Sprache jederzeit im Menü ändern.",
+"Ihr Platz in der ersten Reihe",
+"PETS & DOGUE verwendet notwendige Technologien für den Betrieb des Magazins. Mit Ihrer Zustimmung helfen Analyse und Personalisierung dabei, Inhalte, Empfehlungen und Ihr Erlebnis zu verbessern.",
+"Datenschutzrichtlinie",
+"Erforderlich",
+"Notwendig für Sprache, Sicherheit und grundlegende Funktionen.",
+"Analyse",
+"Hilft uns zu verstehen, wie Besucher PETS & DOGUE nutzen.",
+"Personalisierung",
+"Ermöglicht optionale Einstellungen und personalisierte Erlebnisse.",
+"ICH STIMME ZU",
+"ABLEHNEN",
+"DATENSCHUTZ-EINSTELLUNGEN",
+"SPEICHERN",
+"Willkommen bei PETS & DOGUE",
+"Lesen Sie kostenlos, melden Sie sich zum Speichern an oder werden Sie Club-Mitglied für Wettbewerbe, Marketplace und Mitgliedervorteile.",
+"Kostenlos",
+"Erster Monat",
+"1 Monat",
+"1 Jahr",
+"CLUB BEITRETEN",
+"ANMELDEN",
+"KOSTENLOS FORTFAHREN",
+"Beitreten oder anmelden können Sie jederzeit über das Menü."
+],
+
+es:[
+"Elige tu idioma",
+"Bienvenido a PETS & DOGUE. Elige tu idioma para entrar en la revista.",
+"CONTINUAR",
+"Puedes cambiar el idioma en cualquier momento desde el menú.",
+"Tu asiento en primera fila",
+"PETS & DOGUE utiliza tecnología esencial para que la revista funcione. Con tu permiso, la analítica y la personalización nos ayudan a mejorar historias, recomendaciones y tu experiencia.",
+"Política de privacidad",
+"Esenciales",
+"Necesarios para idioma, seguridad y funciones básicas.",
+"Analítica",
+"Nos ayuda a comprender cómo los visitantes utilizan PETS & DOGUE.",
+"Personalización",
+"Permite preferencias opcionales y experiencias personalizadas.",
+"ACEPTO",
+"RECHAZAR",
+"TUS OPCIONES DE PRIVACIDAD",
+"GUARDAR",
+"Bienvenido a PETS & DOGUE",
+"Lee gratis, inicia sesión para guardar tus favoritos o únete al Club para concursos, Marketplace y beneficios de miembro.",
+"Gratis",
+"Primer mes",
+"1 mes",
+"1 año",
+"UNIRME AL CLUB",
+"INICIAR SESIÓN",
+"CONTINUAR GRATIS",
+"Puedes unirte o iniciar sesión en cualquier momento desde el menú."
+],
+
+it:[
+"Scegli la lingua",
+"Benvenuto in PETS & DOGUE. Scegli la lingua per entrare nella rivista.",
+"CONTINUA",
+"Puoi cambiare lingua in qualsiasi momento dal menu.",
+"Il tuo posto in prima fila",
+"PETS & DOGUE utilizza tecnologie essenziali per il funzionamento della rivista. Con il tuo consenso, analisi e personalizzazione ci aiutano a migliorare storie, consigli ed esperienza.",
+"Privacy Policy",
+"Essenziali",
+"Necessari per lingua, sicurezza e funzioni di base.",
+"Analisi",
+"Ci aiuta a capire come i visitatori utilizzano PETS & DOGUE.",
+"Personalizzazione",
+"Consente preferenze opzionali ed esperienze personalizzate.",
+"ACCETTO",
+"RIFIUTA",
+"SCELTE SULLA PRIVACY",
+"SALVA",
+"Benvenuto in PETS & DOGUE",
+"Leggi gratuitamente, accedi per salvare i preferiti o entra nel Club per concorsi, Marketplace e vantaggi membri.",
+"Gratis",
+"Primo mese",
+"1 mese",
+"1 anno",
+"UNISCITI AL CLUB",
+"ACCEDI",
+"CONTINUA GRATIS",
+"Puoi unirti o accedere in qualsiasi momento dal menu."
+],
+
+pt:[
+"Escolha o seu idioma",
+"Bem-vindo ao PETS & DOGUE. Escolha o idioma para entrar na revista.",
+"CONTINUAR",
+"Pode alterar o idioma a qualquer momento no menu.",
+"O seu lugar na primeira fila",
+"PETS & DOGUE utiliza tecnologia essencial para operar a revista. Com a sua permissão, análise e personalização ajudam-nos a melhorar histórias, recomendações e a sua experiência.",
+"Política de Privacidade",
+"Essenciais",
+"Necessários para idioma, segurança e funções básicas.",
+"Análise",
+"Ajuda-nos a compreender como os visitantes utilizam PETS & DOGUE.",
+"Personalização",
+"Permite preferências opcionais e experiências personalizadas.",
+"CONCORDO",
+"REJEITAR",
+"ESCOLHAS DE PRIVACIDADE",
+"GUARDAR",
+"Bem-vindo ao PETS & DOGUE",
+"Leia gratuitamente, entre para guardar favoritos ou junte-se ao Club para concursos, Marketplace e benefícios.",
+"Grátis",
+"Primeiro mês",
+"1 mês",
+"1 ano",
+"ADERIR AO CLUB",
+"ENTRAR",
+"CONTINUAR GRÁTIS",
+"Pode aderir ou entrar a qualquer momento através do menu."
+],
+
+nl:[
+"Kies je taal",
+"Welkom bij PETS & DOGUE. Kies je taal om het magazine te openen.",
+"DOORGAAN",
+"Je kunt de taal altijd wijzigen via het menu.",
+"Jouw plaats op de eerste rij",
+"PETS & DOGUE gebruikt essentiële technologie om het magazine te laten werken. Met jouw toestemming helpen analyse en personalisatie ons verhalen, aanbevelingen en je ervaring te verbeteren.",
+"Privacybeleid",
+"Essentieel",
+"Nodig voor taal, beveiliging en basisfuncties.",
+"Analyse",
+"Helpt ons begrijpen hoe bezoekers PETS & DOGUE gebruiken.",
+"Personalisatie",
+"Maakt optionele voorkeuren en persoonlijke ervaringen mogelijk.",
+"AKKOORD",
+"WEIGEREN",
+"PRIVACYKEUZES",
+"OPSLAAN",
+"Welkom bij PETS & DOGUE",
+"Lees gratis, log in om favorieten te bewaren of word Club-lid voor wedstrijden, Marketplace en voordelen.",
+"Gratis",
+"Eerste maand",
+"1 maand",
+"1 jaar",
+"WORD CLUB-LID",
+"INLOGGEN",
+"GRATIS DOORGAAN",
+"Je kunt altijd lid worden of inloggen via het menu."
+],
+
+pl:[
+"Wybierz język",
+"Witamy w PETS & DOGUE. Wybierz język, aby wejść do magazynu.",
+"KONTYNUUJ",
+"Język możesz zmienić w dowolnym momencie w menu.",
+"Twoje miejsce w pierwszym rzędzie",
+"PETS & DOGUE używa niezbędnych technologii do działania magazynu. Za Twoją zgodą analityka i personalizacja pomagają nam ulepszać historie, rekomendacje i doświadczenie.",
+"Polityka prywatności",
+"Niezbędne",
+"Potrzebne do języka, bezpieczeństwa i podstawowych funkcji.",
+"Analityka",
+"Pomaga nam zrozumieć, jak odwiedzający korzystają z PETS & DOGUE.",
+"Personalizacja",
+"Pozwala na opcjonalne preferencje i spersonalizowane doświadczenia.",
+"ZGADZAM SIĘ",
+"ODRZUĆ",
+"USTAWIENIA PRYWATNOŚCI",
+"ZAPISZ",
+"Witamy w PETS & DOGUE",
+"Czytaj bezpłatnie, zaloguj się, aby zapisywać ulubione, lub dołącz do Clubu, aby korzystać z konkursów, Marketplace i korzyści.",
+"Za darmo",
+"Pierwszy miesiąc",
+"1 miesiąc",
+"1 rok",
+"DOŁĄCZ DO CLUBU",
+"ZALOGUJ SIĘ",
+"KONTYNUUJ BEZPŁATNIE",
+"Możesz dołączyć lub zalogować się w dowolnym momencie z menu."
+],
+
+cs:[
+"Vyberte jazyk",
+"Vítejte v PETS & DOGUE. Vyberte jazyk a vstupte do magazínu.",
+"POKRAČOVAT",
+"Jazyk můžete kdykoli změnit v nabídce.",
+"Vaše místo v první řadě",
+"PETS & DOGUE používá nezbytné technologie pro provoz magazínu. S vaším souhlasem nám analytika a personalizace pomáhají zlepšovat příběhy, doporučení a váš zážitek.",
+"Zásady ochrany soukromí",
+"Nezbytné",
+"Potřebné pro jazyk, bezpečnost a základní funkce.",
+"Analytika",
+"Pomáhá nám pochopit, jak návštěvníci používají PETS & DOGUE.",
+"Personalizace",
+"Umožňuje volitelné preference a personalizované prostředí.",
+"SOUHLASÍM",
+"ODMÍTNOUT",
+"NASTAVENÍ SOUKROMÍ",
+"ULOŽIT",
+"Vítejte v PETS & DOGUE",
+"Čtěte zdarma, přihlaste se pro ukládání oblíbených nebo vstupte do Clubu pro soutěže, Marketplace a členské výhody.",
+"Zdarma",
+"První měsíc",
+"1 měsíc",
+"1 rok",
+"VSTOUPIT DO CLUBU",
+"PŘIHLÁSIT SE",
+"POKRAČOVAT ZDARMA",
+"Připojit se nebo přihlásit můžete kdykoli z nabídky."
+],
+
+sk:[
+"Vyberte jazyk",
+"Vitajte v PETS & DOGUE. Vyberte jazyk a vstúpte do magazínu.",
+"POKRAČOVAŤ",
+"Jazyk môžete kedykoľvek zmeniť v menu.",
+"Vaše miesto v prvom rade",
+"PETS & DOGUE používa nevyhnutné technológie na fungovanie magazínu. S vaším súhlasom nám analytika a personalizácia pomáhajú zlepšovať príbehy, odporúčania a váš zážitok.",
+"Zásady ochrany súkromia",
+"Nevyhnutné",
+"Potrebné pre jazyk, bezpečnosť a základné funkcie.",
+"Analytika",
+"Pomáha nám pochopiť, ako návštevníci používajú PETS & DOGUE.",
+"Personalizácia",
+"Umožňuje voliteľné preferencie a personalizovaný zážitok.",
+"SÚHLASÍM",
+"ODMIETNUŤ",
+"NASTAVENIA SÚKROMIA",
+"ULOŽIŤ",
+"Vitajte v PETS & DOGUE",
+"Čítajte zdarma, prihláste sa pre uloženie obľúbených alebo vstúpte do Clubu pre súťaže, Marketplace a výhody.",
+"Zadarmo",
+"Prvý mesiac",
+"1 mesiac",
+"1 rok",
+"VSTÚPIŤ DO CLUBU",
+"PRIHLÁSIŤ SA",
+"POKRAČOVAŤ ZADARMO",
+"Pridať sa alebo prihlásiť môžete kedykoľvek cez menu."
+],
+
+hu:[
+"Válassz nyelvet",
+"Üdvözlünk a PETS & DOGUE világában. Válaszd ki a nyelvet a magazin megnyitásához.",
+"FOLYTATÁS",
+"A nyelvet bármikor módosíthatod a menüben.",
+"Az első sorból",
+"A PETS & DOGUE a magazin működéséhez szükséges technológiákat használ. Engedélyeddel az analitika és a személyre szabás segít javítani a történeteket, ajánlásokat és az élményt.",
+"Adatvédelmi szabályzat",
+"Szükséges",
+"A nyelvhez, biztonsághoz és alapfunkciókhoz szükséges.",
+"Analitika",
+"Segít megérteni, hogyan használják a látogatók a PETS & DOGUE-t.",
+"Személyre szabás",
+"Opcionális beállításokat és személyes élményt tesz lehetővé.",
+"ELFOGADOM",
+"ELUTASÍTOM",
+"ADATVÉDELMI BEÁLLÍTÁSOK",
+"MENTÉS",
+"Üdvözlünk a PETS & DOGUE-ban",
+"Olvass ingyen, jelentkezz be a kedvencek mentéséhez, vagy csatlakozz a Clubhoz versenyekért, Marketplace-hozzáférésért és előnyökért.",
+"Ingyenes",
+"Első hónap",
+"1 hónap",
+"1 év",
+"CSATLAKOZOM",
+"BEJELENTKEZÉS",
+"INGYENES FOLYTATÁS",
+"Bármikor csatlakozhatsz vagy bejelentkezhetsz a menüből."
+],
+
+ro:[
+"Alege limba",
+"Bine ai venit la PETS & DOGUE. Alege limba pentru a intra în revistă.",
+"CONTINUĂ",
+"Poți schimba limba oricând din meniu.",
+"Locul tău în primul rând",
+"PETS & DOGUE folosește tehnologii esențiale pentru funcționarea revistei. Cu acordul tău, analiza și personalizarea ne ajută să îmbunătățim poveștile, recomandările și experiența.",
+"Politica de Confidențialitate",
+"Esențiale",
+"Necesare pentru limbă, securitate și funcții de bază.",
+"Analiză",
+"Ne ajută să înțelegem cum vizitatorii folosesc PETS & DOGUE.",
+"Personalizare",
+"Permite preferințe opționale și experiențe personalizate.",
+"SUNT DE ACORD",
+"RESPING",
+"OPȚIUNI DE CONFIDENȚIALITATE",
+"SALVEAZĂ",
+"Bine ai venit la PETS & DOGUE",
+"Citește gratuit, autentifică-te pentru a salva favorite sau intră în Club pentru concursuri, Marketplace și beneficii.",
+"Gratuit",
+"Prima lună",
+"1 lună",
+"1 an",
+"INTRĂ ÎN CLUB",
+"AUTENTIFICARE",
+"CONTINUĂ GRATUIT",
+"Poți intra în Club sau te poți autentifica oricând din meniu."
+],
+
+bg:[
+"Изберете език",
+"Добре дошли в PETS & DOGUE. Изберете език, за да отворите списанието.",
+"ПРОДЪЛЖИ",
+"Можете да промените езика по всяко време от менюто.",
+"Вашето място на първия ред",
+"PETS & DOGUE използва необходими технологии за работа на списанието. С ваше разрешение аналитиката и персонализацията ни помагат да подобряваме историите, препоръките и изживяването.",
+"Политика за поверителност",
+"Необходими",
+"Нужни за езика, сигурността и основните функции.",
+"Аналитика",
+"Помага ни да разберем как посетителите използват PETS & DOGUE.",
+"Персонализация",
+"Позволява допълнителни предпочитания и персонализирано изживяване.",
+"СЪГЛАСЕН СЪМ",
+"ОТКАЖИ",
+"НАСТРОЙКИ ЗА ПОВЕРИТЕЛНОСТ",
+"ЗАПАЗИ",
+"Добре дошли в PETS & DOGUE",
+"Четете безплатно, влезте, за да запазвате любими, или се присъединете към Club за конкурси, Marketplace и членски предимства.",
+"Безплатно",
+"Първи месец",
+"1 месец",
+"1 година",
+"ПРИСЪЕДИНИ СЕ",
+"ВХОД",
+"ПРОДЪЛЖИ БЕЗПЛАТНО",
+"Можете да се присъедините или да влезете по всяко време от менюто."
+],
+
+el:[
+"Επιλέξτε γλώσσα",
+"Καλώς ήρθατε στο PETS & DOGUE. Επιλέξτε γλώσσα για να μπείτε στο περιοδικό.",
+"ΣΥΝΕΧΕΙΑ",
+"Μπορείτε να αλλάξετε γλώσσα οποιαδήποτε στιγμή από το μενού.",
+"Η θέση σας στην πρώτη σειρά",
+"Το PETS & DOGUE χρησιμοποιεί απαραίτητες τεχνολογίες για τη λειτουργία του περιοδικού. Με την άδειά σας, τα αναλυτικά στοιχεία και η εξατομίκευση μας βοηθούν να βελτιώνουμε ιστορίες, προτάσεις και εμπειρία.",
+"Πολιτική Απορρήτου",
+"Απαραίτητα",
+"Απαιτούνται για γλώσσα, ασφάλεια και βασικές λειτουργίες.",
+"Αναλυτικά",
+"Μας βοηθούν να κατανοήσουμε πώς χρησιμοποιούν οι επισκέπτες το PETS & DOGUE.",
+"Εξατομίκευση",
+"Επιτρέπει προαιρετικές προτιμήσεις και εξατομικευμένες εμπειρίες.",
+"ΣΥΜΦΩΝΩ",
+"ΑΠΟΡΡΙΨΗ",
+"ΕΠΙΛΟΓΕΣ ΑΠΟΡΡΗΤΟΥ",
+"ΑΠΟΘΗΚΕΥΣΗ",
+"Καλώς ήρθατε στο PETS & DOGUE",
+"Διαβάστε δωρεάν, συνδεθείτε για αποθήκευση αγαπημένων ή γίνετε μέλος του Club για διαγωνισμούς, Marketplace και προνόμια.",
+"Δωρεάν",
+"Πρώτος μήνας",
+"1 μήνας",
+"1 έτος",
+"ΕΓΓΡΑΦΗ ΣΤΟ CLUB",
+"ΣΥΝΔΕΣΗ",
+"ΣΥΝΕΧΕΙΑ ΔΩΡΕΑΝ",
+"Μπορείτε να εγγραφείτε ή να συνδεθείτε οποιαδήποτε στιγμή από το μενού."
+],
+
+sv:[
+"Välj språk",
+"Välkommen till PETS & DOGUE. Välj språk för att öppna magasinet.",
+"FORTSÄTT",
+"Du kan ändra språk när som helst i menyn.",
+"Din plats på första raden",
+"PETS & DOGUE använder nödvändig teknik för att driva magasinet. Med ditt tillstånd hjälper analys och personalisering oss att förbättra berättelser, rekommendationer och din upplevelse.",
+"Integritetspolicy",
+"Nödvändiga",
+"Krävs för språk, säkerhet och grundläggande funktioner.",
+"Analys",
+"Hjälper oss förstå hur besökare använder PETS & DOGUE.",
+"Personalisering",
+"Möjliggör valfria preferenser och personliga upplevelser.",
+"JAG GODKÄNNER",
+"AVVISA",
+"INTEGRITETSVAL",
+"SPARA",
+"Välkommen till PETS & DOGUE",
+"Läs gratis, logga in för att spara favoriter eller gå med i Club för tävlingar, Marketplace och medlemsförmåner.",
+"Gratis",
+"Första månaden",
+"1 månad",
+"1 år",
+"GÅ MED I CLUB",
+"LOGGA IN",
+"FORTSÄTT GRATIS",
+"Du kan gå med eller logga in när som helst via menyn."
+],
+
+da:[
+"Vælg sprog",
+"Velkommen til PETS & DOGUE. Vælg sprog for at åbne magasinet.",
+"FORTSÆT",
+"Du kan ændre sproget når som helst i menuen.",
+"Din plads på første række",
+"PETS & DOGUE bruger nødvendig teknologi til at drive magasinet. Med din tilladelse hjælper analyse og personalisering os med at forbedre historier, anbefalinger og din oplevelse.",
+"Privatlivspolitik",
+"Nødvendige",
+"Kræves til sprog, sikkerhed og grundlæggende funktioner.",
+"Analyse",
+"Hjælper os med at forstå, hvordan besøgende bruger PETS & DOGUE.",
+"Personalisering",
+"Muliggør valgfrie præferencer og personlige oplevelser.",
+"JEG ACCEPTERER",
+"AFVIS",
+"PRIVATLIVSVALG",
+"GEM",
+"Velkommen til PETS & DOGUE",
+"Læs gratis, log ind for at gemme favoritter eller bliv medlem af Club for konkurrencer, Marketplace og medlemsfordele.",
+"Gratis",
+"Første måned",
+"1 måned",
+"1 år",
+"BLIV MEDLEM",
+"LOG IND",
+"FORTSÆT GRATIS",
+"Du kan blive medlem eller logge ind når som helst fra menuen."
+],
+
+no:[
+"Velg språk",
+"Velkommen til PETS & DOGUE. Velg språk for å åpne magasinet.",
+"FORTSETT",
+"Du kan endre språk når som helst i menyen.",
+"Din plass på første rad",
+"PETS & DOGUE bruker nødvendig teknologi for å drive magasinet. Med din tillatelse hjelper analyse og personalisering oss med å forbedre historier, anbefalinger og opplevelsen din.",
+"Personvernregler",
+"Nødvendige",
+"Kreves for språk, sikkerhet og grunnleggende funksjoner.",
+"Analyse",
+"Hjelper oss forstå hvordan besøkende bruker PETS & DOGUE.",
+"Personalisering",
+"Muliggjør valgfrie preferanser og personlige opplevelser.",
+"JEG GODTAR",
+"AVVIS",
+"PERSONVERNVALG",
+"LAGRE",
+"Velkommen til PETS & DOGUE",
+"Les gratis, logg inn for å lagre favoritter eller bli med i Club for konkurranser, Marketplace og medlemsfordeler.",
+"Gratis",
+"Første måned",
+"1 måned",
+"1 år",
+"BLI MED I CLUB",
+"LOGG INN",
+"FORTSETT GRATIS",
+"Du kan bli med eller logge inn når som helst fra menyen."
+],
+
+fi:[
+"Valitse kieli",
+"Tervetuloa PETS & DOGUE -maailmaan. Valitse kieli avataksesi lehden.",
+"JATKA",
+"Voit vaihtaa kieltä milloin tahansa valikosta.",
+"Paikkasi eturivissä",
+"PETS & DOGUE käyttää lehden toimintaan välttämätöntä teknologiaa. Luvallasi analytiikka ja personointi auttavat meitä parantamaan tarinoita, suosituksia ja kokemustasi.",
+"Tietosuojakäytäntö",
+"Välttämättömät",
+"Tarvitaan kieleen, turvallisuuteen ja perustoimintoihin.",
+"Analytiikka",
+"Auttaa meitä ymmärtämään, miten kävijät käyttävät PETS & DOGUE -palvelua.",
+"Personointi",
+"Mahdollistaa valinnaiset asetukset ja henkilökohtaiset kokemukset.",
+"HYVÄKSYN",
+"HYLKÄÄ",
+"TIETOSUOJAVALINNAT",
+"TALLENNA",
+"Tervetuloa PETS & DOGUE -maailmaan",
+"Lue ilmaiseksi, kirjaudu tallentaaksesi suosikkeja tai liity Clubiin kilpailuja, Marketplacea ja jäsenetuja varten.",
+"Ilmainen",
+"Ensimmäinen kuukausi",
+"1 kuukausi",
+"1 vuosi",
+"LIITY CLUBIIN",
+"KIRJAUDU",
+"JATKA ILMAISEKSI",
+"Voit liittyä tai kirjautua milloin tahansa valikosta."
+],
+
+tr:[
+"Dilinizi seçin",
+"PETS & DOGUE'a hoş geldiniz. Dergiye girmek için dilinizi seçin.",
+"DEVAM",
+"Dili istediğiniz zaman menüden değiştirebilirsiniz.",
+"Ön sıradaki yeriniz",
+"PETS & DOGUE dergiyi çalıştırmak için gerekli teknolojileri kullanır. İzninizle analiz ve kişiselleştirme, hikâyeleri, önerileri ve deneyiminizi geliştirmemize yardımcı olur.",
+"Gizlilik Politikası",
+"Gerekli",
+"Dil, güvenlik ve temel site işlevleri için gereklidir.",
+"Analiz",
+"Ziyaretçilerin PETS & DOGUE'u nasıl kullandığını anlamamıza yardımcı olur.",
+"Kişiselleştirme",
+"İsteğe bağlı tercihler ve kişisel deneyimler sağlar.",
+"KABUL EDİYORUM",
+"REDDET",
+"GİZLİLİK SEÇENEKLERİ",
+"KAYDET",
+"PETS & DOGUE'a hoş geldiniz",
+"Ücretsiz okuyun, favorilerinizi kaydetmek için giriş yapın veya yarışmalar, Marketplace ve üye avantajları için Club'a katılın.",
+"Ücretsiz",
+"İlk ay",
+"1 ay",
+"1 yıl",
+"CLUB'A KATIL",
+"GİRİŞ YAP",
+"ÜCRETSİZ DEVAM",
+"Menüden istediğiniz zaman katılabilir veya giriş yapabilirsiniz."
+],
+
+ar:[
+"اختر لغتك",
+"مرحبًا بك في PETS & DOGUE. اختر لغتك للدخول إلى المجلة.",
+"متابعة",
+"يمكنك تغيير اللغة في أي وقت من القائمة.",
+"مقعدك في الصف الأمامي",
+"يستخدم PETS & DOGUE تقنيات ضرورية لتشغيل المجلة. وبموافقتك تساعدنا التحليلات والتخصيص على تحسين القصص والتوصيات وتجربتك.",
+"سياسة الخصوصية",
+"ضروري",
+"مطلوب للغة والأمان ووظائف الموقع الأساسية.",
+"التحليلات",
+"تساعدنا على فهم كيفية استخدام الزوار لـ PETS & DOGUE.",
+"التخصيص",
+"يسمح بتفضيلات اختيارية وتجارب مخصصة.",
+"أوافق",
+"رفض",
+"خيارات الخصوصية",
+"حفظ",
+"مرحبًا بك في PETS & DOGUE",
+"اقرأ مجانًا، سجّل الدخول لحفظ المفضلة، أو انضم إلى Club للمسابقات وMarketplace ومزايا الأعضاء.",
+"مجاني",
+"الشهر الأول",
+"شهر واحد",
+"سنة واحدة",
+"انضم إلى CLUB",
+"تسجيل الدخول",
+"المتابعة مجانًا",
+"يمكنك الانضمام أو تسجيل الدخول في أي وقت من القائمة."
+],
+
+hi:[
+"अपनी भाषा चुनें",
+"PETS & DOGUE में आपका स्वागत है। मैगज़ीन खोलने के लिए अपनी भाषा चुनें।",
+"जारी रखें",
+"आप मेनू से कभी भी भाषा बदल सकते हैं।",
+"आपकी फ्रंट-रो सीट",
+"PETS & DOGUE मैगज़ीन चलाने के लिए आवश्यक तकनीक का उपयोग करता है। आपकी अनुमति से एनालिटिक्स और पर्सनलाइज़ेशन हमें कहानियाँ, सुझाव और आपका अनुभव बेहतर करने में मदद करते हैं।",
+"गोपनीयता नीति",
+"आवश्यक",
+"भाषा, सुरक्षा और मूल साइट कार्यों के लिए आवश्यक।",
+"एनालिटिक्स",
+"हमें समझने में मदद करता है कि विज़िटर PETS & DOGUE का उपयोग कैसे करते हैं।",
+"पर्सनलाइज़ेशन",
+"वैकल्पिक पसंद और व्यक्तिगत अनुभव की अनुमति देता है।",
+"मैं सहमत हूँ",
+"अस्वीकार करें",
+"गोपनीयता विकल्प",
+"सहेजें",
+"PETS & DOGUE में आपका स्वागत है",
+"मुफ़्त पढ़ें, पसंदीदा सेव करने के लिए साइन इन करें, या प्रतियोगिताओं, Marketplace और सदस्य लाभों के लिए Club में शामिल हों।",
+"मुफ़्त",
+"पहला महीना",
+"1 महीना",
+"1 साल",
+"CLUB में शामिल हों",
+"साइन इन",
+"मुफ़्त जारी रखें",
+"आप मेनू से कभी भी शामिल हो सकते हैं या साइन इन कर सकते हैं।"
+]
+
+};
+
+function onboardingDictionary(){
+
+const lang=localStorage.getItem(HOME_LANGUAGE_KEY)||"en";
+const values=ONBOARDING_TRANSLATIONS[lang]||ONBOARDING_TRANSLATIONS.en;
+
+return{
+languageTitle:values[0],
+languageSubtitle:values[1],
+languageContinue:values[2],
+languageNote:values[3],
+
+consentTitle:values[4],
+consentText:values[5],
+consentPolicy:values[6],
+essentialTitle:values[7],
+essentialText:values[8],
+analyticsTitle:values[9],
+analyticsText:values[10],
+personalTitle:values[11],
+personalText:values[12],
+accept:values[13],
+reject:values[14],
+choices:values[15],
+save:values[16],
+
+entryTitle:values[17],
+entryText:values[18],
+entryFree:values[19],
+entryFreeLabel:values[20],
+entryMonth:values[21],
+entryYear:values[22],
+entryJoin:values[23],
+entrySignIn:values[24],
+entryContinue:values[25],
+entrySmall:values[26]
+};
+
 }
-return localStorage.getItem("pets_dogue_language")||"en"
+
+function setHomeText(id,value){
+
+const element=document.getElementById(id);
+
+if(element&&typeof value==="string"){
+element.textContent=value;
+}
+
+}
+
+function applyOnboardingLanguage(){
+
+const t=onboardingDictionary();
+
+setHomeText("languageWelcomeTitle",t.languageTitle);
+setHomeText("languageWelcomeSubtitle",t.languageSubtitle);
+setHomeText("languageContinue",t.languageContinue);
+setHomeText("languageWelcomeNote",t.languageNote);
+
+setHomeText("consentTitle",t.consentTitle);
+setHomeText("consentText",t.consentText);
+setHomeText("consentPolicyLink",t.consentPolicy);
+setHomeText("essentialTitle",t.essentialTitle);
+setHomeText("essentialText",t.essentialText);
+setHomeText("analyticsTitle",t.analyticsTitle);
+setHomeText("analyticsText",t.analyticsText);
+setHomeText("personalTitle",t.personalTitle);
+setHomeText("personalText",t.personalText);
+setHomeText("acceptAllButton",t.accept);
+setHomeText("rejectButton",t.reject);
+setHomeText("choicesButton",t.choices);
+setHomeText("saveChoicesButton",t.save);
+
+setHomeText("entryTitle",t.entryTitle);
+setHomeText("entryText",t.entryText);
+setHomeText("entryFree",t.entryFree);
+setHomeText("entryFreeLabel",t.entryFreeLabel);
+setHomeText("entryMonthLabel",t.entryMonth);
+setHomeText("entryYearLabel",t.entryYear);
+setHomeText("entryJoin",t.entryJoin);
+setHomeText("entrySignIn",t.entrySignIn);
+setHomeText("entryContinue",t.entryContinue);
+setHomeText("entrySmall",t.entrySmall);
+
+const lang=localStorage.getItem(HOME_LANGUAGE_KEY)||"en";
+
+document.documentElement.lang=lang;
+document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+const select=document.getElementById("languageSelect");
+
+if(select){
+select.value=lang;
+}
+
+}
+
+/* FIRST VISIT FLOW */
+
+function initFirstVisitFlow(){
+
+const language=localStorage.getItem(HOME_LANGUAGE_KEY);
+
+if(!language||!HOME_SUPPORTED.includes(language)){
+showLanguageWelcome();
+return;
+}
+
+applyOnboardingLanguage();
+showConsentOrEntry();
+
+}
+
+function showLanguageWelcome(){
+
+const modal=document.getElementById("languageWelcome");
+
+modal.classList.add("show");
+document.body.classList.add("onboarding-open");
+
+const grid=document.getElementById("welcomeLanguageGrid");
+const continueButton=document.getElementById("languageContinue");
+
+let selectedLanguage="";
+
+grid.querySelectorAll(".language-choice").forEach(button=>{
+
+button.onclick=()=>{
+
+selectedLanguage=button.dataset.lang||"";
+
+grid.querySelectorAll(".language-choice").forEach(item=>{
+item.classList.toggle("selected",item===button);
+});
+
+continueButton.disabled=!selectedLanguage;
+
+};
+
+});
+
+continueButton.onclick=()=>{
+
+if(!HOME_SUPPORTED.includes(selectedLanguage)){
+return;
+}
+
+localStorage.setItem(HOME_LANGUAGE_KEY,selectedLanguage);
+
+document.documentElement.lang=selectedLanguage;
+document.documentElement.dir=selectedLanguage==="ar"?"rtl":"ltr";
+
+modal.classList.remove("show");
+
+applyOnboardingLanguage();
+
+showConsentOrEntry();
+
+};
+
+}
+
+function showConsentOrEntry(){
+
+const hasConsent=Boolean(localStorage.getItem(HOME_CONSENT_KEY));
+
+if(!hasConsent){
+document.getElementById("consentLayer").classList.add("show");
+document.body.classList.add("onboarding-open");
+return;
+}
+
+showEntryIfNeeded();
+
+}
+
+let tempConsent={
+analytics:false,
+personalisation:false
+};
+
+function showConsentSettings(){
+
+document.getElementById("consentSettings").classList.add("show");
+document.getElementById("choicesButton").style.display="none";
+document.getElementById("saveChoicesButton").style.display="block";
+
+}
+
+function toggleConsent(type){
+
+tempConsent[type]=!tempConsent[type];
+
+const id=type==="analytics"
+?"analyticsToggle"
+:"personalToggle";
+
+document.getElementById(id).classList.toggle("on",tempConsent[type]);
+
+}
+
+function saveConsent(analytics,personalisation){
+
+const consent={
+essential:true,
+analytics:Boolean(analytics),
+personalisation:Boolean(personalisation),
+updatedAt:new Date().toISOString()
+};
+
+localStorage.setItem(
+HOME_CONSENT_KEY,
+JSON.stringify(consent)
+);
+
+document.getElementById("consentLayer").classList.remove("show");
+
+showEntryIfNeeded();
+
+}
+
+function saveCurrentConsent(){
+
+saveConsent(
+tempConsent.analytics,
+tempConsent.personalisation
+);
+
+}
+
+function showEntryIfNeeded(){
+
+if(localStorage.getItem(HOME_ENTRY_KEY)==="1"){
+document.body.classList.remove("onboarding-open");
+return;
+}
+
+document.getElementById("entryLayer").classList.add("show");
+document.body.classList.add("onboarding-open");
+
+}
+
+function completeEntryChoice(){
+
+localStorage.setItem(HOME_ENTRY_KEY,"1");
+
+}
+
+function continueWithoutAccount(event){
+
+event.preventDefault();
+
+localStorage.setItem(HOME_ENTRY_KEY,"1");
+
+document.getElementById("entryLayer").classList.remove("show");
+
+document.body.classList.remove("onboarding-open");
+
+}
+
+/* HOME EXISTING FUNCTIONS */
+
+function getHomeLanguage(){
+
+if(window.PetsDogueLanguage&&window.PetsDogueLanguage.getCurrentLanguage){
+
+const current=window.PetsDogueLanguage.getCurrentLanguage();
+
+if(typeof current==="string"){
+return current;
+}
+
+if(current&&current.code){
+return current.code;
+}
+
+}
+
+return localStorage.getItem(HOME_LANGUAGE_KEY)||"en";
+
 }
 
 function homeT(path,fallback){
+
 const root=window.PetsDogueTranslations&&window.PetsDogueTranslations.home;
-if(!root)return fallback;
+
+if(!root){
+return fallback;
+}
+
 const bundle=root[getHomeLanguage()]||root.en;
-if(!bundle)return fallback;
+
+if(!bundle){
+return fallback;
+}
+
 let value=bundle;
+
 path.split(".").forEach(key=>{
-value=value&&Object.prototype.hasOwnProperty.call(value,key)?value[key]:undefined
+value=value&&Object.prototype.hasOwnProperty.call(value,key)
+?value[key]
+:undefined;
 });
-return typeof value==="string"?value:fallback
+
+return typeof value==="string"?value:fallback;
+
 }
 
 let activeSpeechButton=null;
 
 function openMenu(){
+
 document.getElementById("sideMenu").classList.add("open");
 document.getElementById("menuOverlay").classList.add("show");
-document.body.classList.add("menu-open")
+document.body.classList.add("menu-open");
+
 }
 
 function closeMenu(){
+
 document.getElementById("sideMenu").classList.remove("open");
 document.getElementById("menuOverlay").classList.remove("show");
-document.body.classList.remove("menu-open")
+document.body.classList.remove("menu-open");
+
 }
 
 function openSearch(){
+
 document.getElementById("searchOverlay").classList.add("open");
 document.body.classList.add("menu-open");
-setTimeout(()=>document.getElementById("siteSearchInput").focus(),100)
+
+setTimeout(()=>{
+document.getElementById("siteSearchInput").focus();
+},100);
+
 }
 
 function closeSearch(){
+
 document.getElementById("searchOverlay").classList.remove("open");
-document.body.classList.remove("menu-open")
+document.body.classList.remove("menu-open");
+
 }
 
 function runSiteSearch(){
+
 const query=document.getElementById("siteSearchInput").value.trim().toLowerCase();
-if(!query)return;
+
+if(!query){
+return;
+}
 
 const routes=[
 {terms:["place","places","cafe","hotel","park","beach","vet","groomer"],url:"pet-friendly-places.html"},
@@ -1118,17 +2524,23 @@ const routes=[
 {terms:["article","story","interview"],url:"articles.html"}
 ];
 
-const route=routes.find(item=>item.terms.some(term=>query.includes(term)));
-window.location.href=route?route.url:"articles.html"
+const route=routes.find(item=>
+item.terms.some(term=>query.includes(term))
+);
+
+window.location.href=route?route.url:"articles.html";
+
 }
 
 function getNarrationLanguage(){
+
 const language=window.PetsDogueLanguage&&window.PetsDogueLanguage.getCurrentLanguage
 ?window.PetsDogueLanguage.getCurrentLanguage()
 :null;
 
-if(window.PetsDogueLanguage&&window.PetsDogueLanguage.getSpeechLanguage)
+if(window.PetsDogueLanguage&&window.PetsDogueLanguage.getSpeechLanguage){
 return window.PetsDogueLanguage.getSpeechLanguage();
+}
 
 const map={
 en:"en-GB",
@@ -1156,52 +2568,112 @@ ar:"ar-SA",
 hi:"hi-IN"
 };
 
-const code=typeof language==="string"?language:language?.code;
-return map[code]||"en-GB"
+const code=
+typeof language==="string"
+?language
+:language?.code;
+
+return map[code]||"en-GB";
+
 }
 
 function getAvailableVoices(){
-return window.speechSynthesis?window.speechSynthesis.getVoices():[]
+
+return window.speechSynthesis
+?window.speechSynthesis.getVoices()
+:[];
+
 }
 
 function chooseVoice(gender,languageCode){
+
 const voices=getAvailableVoices();
-const prefix=String(languageCode||"en").toLowerCase().split("-")[0];
-const languageVoices=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith(prefix));
-const female=["samantha","victoria","karen","moira","tessa","serena","susan","zira","aria","jenny","sonia","libby","ava","female"];
-const male=["daniel","alex","fred","george","arthur","david","mark","guy","ryan","liam","oliver","male"];
+
+const prefix=String(languageCode||"en")
+.toLowerCase()
+.split("-")[0];
+
+const languageVoices=voices.filter(v=>
+v.lang&&v.lang.toLowerCase().startsWith(prefix)
+);
+
+const female=[
+"samantha","victoria","karen","moira","tessa","serena",
+"susan","zira","aria","jenny","sonia","libby","ava","female"
+];
+
+const male=[
+"daniel","alex","fred","george","arthur","david",
+"mark","guy","ryan","liam","oliver","male"
+];
+
 const names=gender==="male"?male:female;
-return languageVoices.find(v=>names.some(n=>v.name.toLowerCase().includes(n)))||languageVoices[0]||voices[0]||null
+
+return languageVoices.find(v=>
+names.some(n=>v.name.toLowerCase().includes(n))
+)||languageVoices[0]||voices[0]||null;
+
 }
 
 function listenToArticle(button){
+
 if(!window.speechSynthesis){
-alert(homeT("messages.narrationUnsupported","Article narration is not supported by this browser."));
-return
+
+alert(
+homeT(
+"messages.narrationUnsupported",
+"Article narration is not supported by this browser."
+)
+);
+
+return;
 }
 
 if(activeSpeechButton===button){
 stopNarration();
-return
+return;
 }
 
 stopNarration();
 
 const article=button.closest(".article-row");
-const translatedText=article.querySelector(".article-text")?.innerText?.trim();
-const fallbackText=article.dataset.speech||"";
-const text=translatedText||fallbackText;
 
-if(!text)return;
+const translatedText=
+article.querySelector(".article-text")
+?.innerText
+?.trim();
 
-const utterance=new SpeechSynthesisUtterance(text);
-const gender=document.getElementById("voiceGender").value;
-const speed=Number(document.getElementById("voiceSpeed").value);
-const lang=getNarrationLanguage();
-const voice=chooseVoice(gender,lang);
+const fallbackText=
+article.dataset.speech||"";
+
+const speechText=
+translatedText||fallbackText;
+
+if(!speechText){
+return;
+}
+
+const utterance=
+new SpeechSynthesisUtterance(speechText);
+
+const gender=
+document.getElementById("voiceGender").value;
+
+const speed=
+Number(document.getElementById("voiceSpeed").value);
+
+const lang=
+getNarrationLanguage();
+
+const voice=
+chooseVoice(gender,lang);
 
 utterance.lang=lang;
-if(voice)utterance.voice=voice;
+
+if(voice){
+utterance.voice=voice;
+}
+
 utterance.rate=speed;
 utterance.pitch=gender==="female"?1.05:.92;
 utterance.volume=1;
@@ -1210,122 +2682,160 @@ button.classList.add("speaking");
 button.textContent="■";
 activeSpeechButton=button;
 
-utterance.onend=utterance.onerror=()=>{
+utterance.onend=
+utterance.onerror=
+()=>{
+
 button.classList.remove("speaking");
 button.textContent="🔊";
-activeSpeechButton=null
+activeSpeechButton=null;
+
 };
 
-window.speechSynthesis.speak(utterance)
+window.speechSynthesis.speak(utterance);
+
 }
 
 function stopNarration(){
-if(window.speechSynthesis)window.speechSynthesis.cancel();
+
+if(window.speechSynthesis){
+window.speechSynthesis.cancel();
+}
 
 if(activeSpeechButton){
+
 activeSpeechButton.classList.remove("speaking");
 activeSpeechButton.textContent="🔊";
-activeSpeechButton=null
+activeSpeechButton=null;
+
 }
+
 }
 
 function subscribeNewsletter(){
-const email=document.getElementById("newsletterEmail").value.trim();
+
+const email=
+document.getElementById("newsletterEmail")
+.value
+.trim();
 
 if(!email||!email.includes("@")){
-alert(homeT("messages.invalidEmail","Please enter a valid email address."));
-return
+
+alert(
+homeT(
+"messages.invalidEmail",
+"Please enter a valid email address."
+)
+);
+
+return;
 }
 
 let subscribers=[];
 
 try{
-subscribers=JSON.parse(localStorage.getItem("pets_dogue_newsletter")||"[]");
-if(!Array.isArray(subscribers))subscribers=[]
+
+subscribers=
+JSON.parse(
+localStorage.getItem("pets_dogue_newsletter")||"[]"
+);
+
+if(!Array.isArray(subscribers)){
+subscribers=[];
+}
+
 }catch(e){
-subscribers=[]
+
+subscribers=[];
+
 }
 
-if(!subscribers.includes(email))subscribers.push(email);
+if(!subscribers.includes(email)){
+subscribers.push(email);
+}
 
-localStorage.setItem("pets_dogue_newsletter",JSON.stringify(subscribers));
+localStorage.setItem(
+"pets_dogue_newsletter",
+JSON.stringify(subscribers)
+);
+
 document.getElementById("newsletterEmail").value="";
-alert(homeT("messages.newsletterSuccess","Welcome to the PETS & DOGUE community."))
+
+alert(
+homeT(
+"messages.newsletterSuccess",
+"Welcome to the PETS & DOGUE community."
+)
+);
+
 }
 
-function initWelcomeLanguage(){
-const STORAGE_KEY="pets_dogue_language";
-const modal=document.getElementById("languageWelcome");
-const grid=document.getElementById("welcomeLanguageGrid");
-const continueButton=document.getElementById("languageContinue");
+/* LANGUAGE MENU */
 
-if(!modal||!grid||!continueButton)return;
+document.getElementById("languageSelect").addEventListener("change",function(){
 
-const supported=[
-"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
-"hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
-];
+localStorage.setItem(
+HOME_LANGUAGE_KEY,
+this.value
+);
 
-const existing=localStorage.getItem(STORAGE_KEY);
+document.documentElement.lang=this.value;
+document.documentElement.dir=this.value==="ar"?"rtl":"ltr";
 
-if(existing&&supported.includes(existing)){
-return
-}
+applyOnboardingLanguage();
 
-let selectedLanguage="";
+window.dispatchEvent(
+new Event("petsdogue:languagechange")
+);
 
-modal.classList.add("show");
-document.body.classList.add("menu-open");
+setTimeout(()=>{
+window.location.reload();
+},50);
 
-grid.querySelectorAll(".language-choice").forEach(button=>{
-button.addEventListener("click",()=>{
-selectedLanguage=button.dataset.lang||"";
-
-grid.querySelectorAll(".language-choice").forEach(item=>{
-item.classList.toggle("selected",item===button)
 });
 
-continueButton.disabled=!selectedLanguage
-})
-});
-
-continueButton.addEventListener("click",()=>{
-if(!selectedLanguage||!supported.includes(selectedLanguage))return;
-
-localStorage.setItem(STORAGE_KEY,selectedLanguage);
-
-document.documentElement.setAttribute("lang",selectedLanguage);
-document.documentElement.setAttribute("dir",selectedLanguage==="ar"?"rtl":"ltr");
-
-const menuSelect=document.getElementById("languageSelect");
-
-if(menuSelect){
-menuSelect.value=selectedLanguage
-}
-
-window.location.reload()
-})
-}
+/* EVENTS */
 
 document.addEventListener("keydown",event=>{
+
 if(event.key==="Escape"){
+
 closeMenu();
 closeSearch();
-stopNarration()
+stopNarration();
+
 }
+
 });
 
 document.getElementById("siteSearchInput").addEventListener("keydown",event=>{
-if(event.key==="Enter")runSiteSearch()
-});
 
-window.addEventListener("beforeunload",stopNarration);
-
-if(window.speechSynthesis){
-window.speechSynthesis.onvoiceschanged=()=>getAvailableVoices()
+if(event.key==="Enter"){
+runSiteSearch();
 }
 
-initWelcomeLanguage();
+});
+
+window.addEventListener(
+"beforeunload",
+stopNarration
+);
+
+if(window.speechSynthesis){
+
+window.speechSynthesis.onvoiceschanged=
+()=>getAvailableVoices();
+
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+applyOnboardingLanguage();
+
+initFirstVisitFlow();
+
+});
+
 </script>
 
 <script src="/i18n/common.js?v=2"></script>
