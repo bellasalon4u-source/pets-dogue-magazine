@@ -2,19 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="PETS & DOGUE account">
-<title>PETS & DOGUE — Account</title>
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+name="description"
+content="PETS & DOGUE account and Club membership.">
+
+<title>PETS & DOGUE — My Account</title>
 
 <style>
 :root{
 --black:#070707;
 --cream:#f5f0e6;
+--white:#fff;
 --gold:#bd8b29;
---green:#58e814;
---grey:#706c66;
+--gold-light:#efd47a;
+--green:#59e915;
+--green-dark:#176b3b;
+--grey:#706b64;
 --line:#cbc4b8;
---red:#c62b2b;
+--soft:#f9f7f2;
+--red:#b62929;
 --serif:Georgia,"Times New Roman",serif;
 --sans:Arial,Helvetica,sans-serif;
 }
@@ -25,8 +35,8 @@ margin:0;
 padding:0;
 }
 
-html,body{
-min-height:100%;
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -54,6 +64,15 @@ font:inherit;
 button{
 cursor:pointer;
 }
+
+img{
+display:block;
+max-width:100%;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .site-header{
 background:var(--black);
@@ -90,7 +109,7 @@ gap:6px;
 width:31px;
 height:2px;
 background:#fff;
-border-radius:20px;
+border-radius:30px;
 }
 
 .brand{
@@ -167,175 +186,9 @@ display:none;
 white-space:nowrap;
 }
 
-.account-page{
-width:min(560px,calc(100% - 34px));
-margin:auto;
-padding:29px 0 34px;
-}
-
-.account-brand{
-text-align:center;
-margin-bottom:17px;
-}
-
-.account-brand-small{
-font-family:var(--serif);
-font-size:9px;
-font-weight:700;
-letter-spacing:2.6px;
-color:var(--gold);
-}
-
-.account-brand-big{
-font-family:var(--serif);
-font-size:34px;
-font-weight:400;
-letter-spacing:2.5px;
-color:var(--gold);
-}
-
-.account-page h1{
-font-family:var(--serif);
-font-size:38px;
-font-weight:400;
-text-align:center;
-line-height:1;
-}
-
-.intro{
-margin:9px auto 21px;
-max-width:460px;
-font-size:12px;
-line-height:1.45;
-text-align:center;
-color:var(--grey);
-}
-
-.field-label{
-display:block;
-font-size:9px;
-font-weight:900;
-letter-spacing:1.5px;
-text-transform:uppercase;
-margin-bottom:6px;
-}
-
-.input-wrap input{
-width:100%;
-height:51px;
-padding:0 13px;
-border:1.5px solid #111;
-background:#fff;
-font-size:16px;
-outline:none;
-}
-
-.input-wrap.error input{
-border:2px solid var(--red);
-background:#fff8f8;
-}
-
-.error-text{
-display:none;
-font-size:8px;
-font-weight:700;
-color:var(--red);
-margin-top:5px;
-}
-
-.input-wrap.error .error-text{
-display:block;
-}
-
-.continue-button,
-.club-button{
-width:100%;
-height:51px;
-border:0;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:10px;
-font-weight:900;
-letter-spacing:1.5px;
-text-transform:uppercase;
-}
-
-.continue-button{
-margin-top:10px;
-background:#080808;
-color:#fff;
-}
-
-.help-link{
-display:inline-block;
-font-size:10px;
-margin-top:12px;
-text-decoration:underline;
-text-underline-offset:3px;
-}
-
-.divider{
-display:flex;
-align-items:center;
-gap:12px;
-margin:23px 0 15px;
-font-size:8px;
-font-weight:900;
-letter-spacing:1.5px;
-color:#89837b;
-text-transform:uppercase;
-}
-
-.divider:before,
-.divider:after{
-content:"";
-height:1px;
-background:var(--line);
-flex:1;
-}
-
-.club-button{
-background:var(--green);
-color:#071007;
-}
-
-.legal{
-max-width:470px;
-margin:15px auto 0;
-font-size:8px;
-line-height:1.5;
-color:#77716a;
-text-align:center;
-}
-
-.legal a{
-text-decoration:underline;
-text-underline-offset:2px;
-}
-
-.mini-footer{
-background:#070707;
-color:#fff;
-text-align:center;
-padding:18px 14px;
-}
-
-.mini-footer strong{
-font-family:var(--serif);
-font-size:17px;
-font-weight:400;
-letter-spacing:2px;
-color:var(--gold);
-}
-
-.mini-footer span{
-display:block;
-margin-top:4px;
-font-size:7px;
-letter-spacing:1.2px;
-color:#888;
-}
+/* =========================================================
+   MENU
+========================================================= */
 
 .menu-overlay{
 position:fixed;
@@ -383,7 +236,7 @@ border-bottom:1px solid #292929;
 font-family:var(--serif);
 font-size:20px;
 font-weight:400;
-color:#efd47a;
+color:var(--gold-light);
 }
 
 .close-menu{
@@ -415,6 +268,7 @@ height:37px;
 border:1px solid #777;
 border-radius:50%;
 position:relative;
+flex:0 0 37px;
 }
 
 .menu-profile-circle:before{
@@ -450,6 +304,7 @@ display:block;
 font-size:8px;
 color:#aaa;
 margin-top:3px;
+word-break:break-word;
 }
 
 .menu-list{
@@ -473,8 +328,8 @@ font-size:19px;
 color:#777;
 }
 
-.menu-club{
-color:#efd47a;
+.menu-account-link{
+color:var(--gold-light);
 }
 
 .language-area{
@@ -500,6 +355,554 @@ background:#111;
 color:#fff;
 }
 
+/* =========================================================
+   MAIN
+========================================================= */
+
+.account-page{
+max-width:760px;
+margin:0 auto;
+}
+
+/* =========================================================
+   SIGN IN
+========================================================= */
+
+.signin-view{
+padding:38px 20px 52px;
+text-align:center;
+}
+
+.account-logo-small{
+font-family:var(--serif);
+font-size:13px;
+letter-spacing:3px;
+color:var(--gold);
+}
+
+.account-logo-big{
+font-family:var(--serif);
+font-size:50px;
+line-height:.9;
+font-weight:400;
+letter-spacing:3px;
+color:var(--gold);
+margin-top:4px;
+}
+
+.signin-view h1{
+font-family:var(--serif);
+font-size:43px;
+font-weight:400;
+line-height:1;
+margin-top:27px;
+}
+
+.signin-intro{
+font-size:13px;
+line-height:1.5;
+color:var(--grey);
+margin:13px auto 28px;
+max-width:560px;
+}
+
+.signin-form{
+text-align:left;
+}
+
+.form-label{
+display:block;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.7px;
+margin-bottom:7px;
+text-transform:uppercase;
+}
+
+.signin-input{
+width:100%;
+height:55px;
+padding:0 15px;
+border:1.5px solid #111;
+background:#fff;
+font-size:17px;
+outline:none;
+}
+
+.signin-input.error{
+border:2px solid var(--red);
+background:#fff8f8;
+}
+
+.signin-error{
+display:none;
+color:var(--red);
+font-size:9px;
+font-weight:700;
+margin-top:6px;
+}
+
+.signin-error.show{
+display:block;
+}
+
+.primary-button{
+width:100%;
+min-height:52px;
+border:0;
+background:#090909;
+color:#fff;
+font-size:10px;
+font-weight:900;
+letter-spacing:1.5px;
+margin-top:10px;
+}
+
+.primary-button:disabled{
+opacity:.55;
+cursor:wait;
+}
+
+.signin-help{
+display:inline-block;
+margin-top:16px;
+font-size:11px;
+text-decoration:underline;
+}
+
+.or-row{
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+gap:14px;
+margin:30px 0 18px;
+color:#888;
+font-size:8px;
+font-weight:900;
+letter-spacing:1.7px;
+}
+
+.or-row:before,
+.or-row:after{
+content:"";
+height:1px;
+background:#c9c2b7;
+}
+
+.join-button{
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+min-height:52px;
+background:var(--green);
+color:#111;
+font-size:10px;
+font-weight:900;
+letter-spacing:1px;
+}
+
+.signin-legal{
+font-size:8px;
+line-height:1.6;
+color:#827c74;
+margin-top:20px;
+}
+
+.signin-legal a{
+text-decoration:underline;
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-view{
+display:none;
+}
+
+.profile-hero{
+background:#090909;
+color:#fff;
+padding:32px 20px 26px;
+}
+
+.profile-kicker{
+font-size:8px;
+font-weight:900;
+letter-spacing:2.3px;
+color:var(--gold-light);
+text-transform:uppercase;
+}
+
+.profile-hero h1{
+font-family:var(--serif);
+font-size:35px;
+font-weight:400;
+line-height:1.05;
+margin-top:7px;
+}
+
+.profile-email{
+font-size:10px;
+color:#bbb;
+margin-top:7px;
+word-break:break-word;
+}
+
+.profile-status{
+display:inline-flex;
+align-items:center;
+gap:6px;
+margin-top:15px;
+padding:6px 10px;
+border:1px solid #555;
+font-size:8px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+.status-dot{
+width:7px;
+height:7px;
+border-radius:50%;
+background:#aaa;
+}
+
+.profile-status.active{
+border-color:#3d8d5f;
+}
+
+.profile-status.active .status-dot{
+background:var(--green);
+}
+
+/* =========================================================
+   CLUB CARD
+========================================================= */
+
+.content-section{
+padding:22px 16px;
+}
+
+.section-kicker{
+font-size:8px;
+font-weight:900;
+letter-spacing:2.2px;
+color:var(--gold);
+text-transform:uppercase;
+margin-bottom:5px;
+}
+
+.section-title{
+font-family:var(--serif);
+font-size:29px;
+font-weight:400;
+line-height:1.05;
+}
+
+.club-card{
+margin-top:15px;
+border:1px solid #bfb8ad;
+background:#fff;
+}
+
+.club-card-head{
+background:#090909;
+color:#fff;
+padding:16px;
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:flex-start;
+}
+
+.club-card-label{
+display:block;
+font-size:7px;
+font-weight:900;
+letter-spacing:1.7px;
+color:var(--gold-light);
+margin-bottom:5px;
+}
+
+.club-card-plan{
+font-family:var(--serif);
+font-size:23px;
+font-weight:400;
+line-height:1.05;
+}
+
+.club-card-price{
+font-family:var(--serif);
+font-size:20px;
+white-space:nowrap;
+}
+
+.club-row{
+display:flex;
+justify-content:space-between;
+gap:18px;
+padding:12px 14px;
+border-bottom:1px solid #ddd7ce;
+font-size:10px;
+line-height:1.4;
+}
+
+.club-row span{
+color:#777169;
+}
+
+.club-row strong{
+text-align:right;
+word-break:break-word;
+}
+
+.club-row:last-child{
+border-bottom:0;
+}
+
+.manage-button{
+width:100%;
+height:48px;
+border:0;
+background:#111;
+color:#fff;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.4px;
+margin-top:10px;
+}
+
+.manage-button:disabled{
+opacity:.55;
+cursor:wait;
+}
+
+.billing-note{
+font-size:8px;
+line-height:1.5;
+color:#777;
+text-align:center;
+margin-top:9px;
+}
+
+.billing-message{
+display:none;
+padding:10px;
+margin-top:10px;
+border:1px solid #bfb8ad;
+background:#faf8f4;
+font-size:9px;
+line-height:1.5;
+}
+
+.billing-message.show{
+display:block;
+}
+
+.billing-message.error{
+border-color:var(--red);
+background:#fff5f5;
+color:var(--red);
+}
+
+/* =========================================================
+   NO CLUB
+========================================================= */
+
+.no-club{
+margin-top:15px;
+padding:21px 17px;
+border:1px solid #c9c2b7;
+background:#fff;
+text-align:center;
+}
+
+.no-club h3{
+font-family:var(--serif);
+font-size:25px;
+font-weight:400;
+}
+
+.no-club p{
+font-size:10px;
+line-height:1.5;
+color:#716b64;
+margin:8px auto 15px;
+max-width:460px;
+}
+
+.no-club .join-button{
+min-height:48px;
+}
+
+/* =========================================================
+   PET PROFILE
+========================================================= */
+
+.pet-panel{
+margin-top:15px;
+background:#fff;
+border:1px solid #c9c2b7;
+padding:16px;
+}
+
+.pet-empty{
+text-align:center;
+padding:12px 4px;
+font-size:10px;
+line-height:1.5;
+color:#777;
+}
+
+.pet-info{
+display:none;
+grid-template-columns:1fr 1fr;
+gap:1px;
+background:#ddd6cc;
+border:1px solid #ddd6cc;
+}
+
+.pet-info.show{
+display:grid;
+}
+
+.pet-detail{
+background:#fff;
+padding:13px;
+min-height:67px;
+}
+
+.pet-detail span{
+display:block;
+font-size:7px;
+font-weight:900;
+letter-spacing:1.2px;
+color:#8a847d;
+margin-bottom:5px;
+text-transform:uppercase;
+}
+
+.pet-detail strong{
+display:block;
+font-family:var(--serif);
+font-size:17px;
+font-weight:400;
+word-break:break-word;
+}
+
+/* =========================================================
+   QUICK ACCESS
+========================================================= */
+
+.quick-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px;
+margin-top:15px;
+}
+
+.quick-link{
+min-height:96px;
+background:#fff;
+border:1px solid #c8c1b6;
+padding:14px;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+}
+
+.quick-icon{
+font-size:20px;
+margin-bottom:auto;
+}
+
+.quick-link strong{
+font-family:var(--serif);
+font-size:17px;
+font-weight:400;
+}
+
+.quick-link span{
+font-size:8px;
+color:#777;
+margin-top:4px;
+}
+
+/* =========================================================
+   ACCOUNT ACTIONS
+========================================================= */
+
+.account-actions{
+display:grid;
+gap:7px;
+margin-top:15px;
+}
+
+.account-action{
+width:100%;
+min-height:45px;
+border:1px solid #111;
+background:#fff;
+color:#111;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.2px;
+}
+
+.account-action.black{
+background:#111;
+color:#fff;
+}
+
+.account-action.danger{
+border-color:#aaa;
+color:#777;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer{
+background:#090909;
+color:#fff;
+text-align:center;
+padding:28px 18px;
+margin-top:20px;
+}
+
+.footer-brand{
+font-family:var(--serif);
+font-size:26px;
+font-weight:400;
+letter-spacing:2.6px;
+color:var(--gold);
+}
+
+.footer-subtitle{
+font-size:7px;
+letter-spacing:1.3px;
+color:#888;
+margin-top:6px;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+font-size:8px;
+color:#bbb;
+}
+
+/* =========================================================
+   RTL
+========================================================= */
+
 html[dir="rtl"] body{
 direction:rtl;
 }
@@ -514,6 +917,18 @@ html[dir="rtl"] .side-menu.open{
 transform:translateX(0);
 }
 
+html[dir="rtl"] .signin-form{
+text-align:right;
+}
+
+html[dir="rtl"] .club-row strong{
+text-align:left;
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
 @media(min-width:760px){
 
 .header-main{
@@ -524,8 +939,20 @@ height:116px;
 font-size:48px;
 }
 
-.account-page{
-padding-top:38px;
+.signin-view{
+padding-top:58px;
+}
+
+.signin-view h1{
+font-size:52px;
+}
+
+.content-section{
+padding:28px 20px;
+}
+
+.quick-grid{
+grid-template-columns:repeat(4,1fr);
 }
 
 }
@@ -534,46 +961,109 @@ padding-top:38px;
 
 <body>
 
-<div class="menu-overlay" id="menuOverlay"></div>
+<div
+class="menu-overlay"
+id="menuOverlay">
+</div>
 
-<aside class="side-menu" id="sideMenu">
+<aside
+class="side-menu"
+id="sideMenu">
 
 <div class="menu-head">
-<strong class="notranslate" translate="no">PETS & DOGUE</strong>
-<button class="close-menu" id="menuClose" type="button">×</button>
+
+<strong
+class="notranslate"
+translate="no">
+PETS & DOGUE
+</strong>
+
+<button
+class="close-menu"
+id="menuClose"
+type="button">
+×
+</button>
+
 </div>
 
 <div class="menu-account">
 
-<a href="account.html" class="menu-profile">
+<div class="menu-profile">
 
 <div class="menu-profile-circle"></div>
 
 <div>
+
 <strong id="menuAccountTitle"></strong>
+
 <span id="menuAccountText"></span>
+
 </div>
 
-</a>
+</div>
 
 </div>
 
 <nav class="menu-list">
-<a href="index.html" id="menuHome"></a>
-<a href="issue-01.html" id="menuIssue"></a>
-<a href="articles.html" id="menuArticles"></a>
-<a href="photos.html" id="menuPhotos"></a>
-<a href="members-gallery.html" id="menuStars"></a>
-<a href="pet-marketplace.html" id="menuMarketplace"></a>
-<a href="pet-friendly-places.html" id="menuPlaces"></a>
-<a href="club.html" class="menu-club" id="menuClub"></a>
+
+<a
+href="index.html"
+id="menuHome">
+</a>
+
+<a
+href="issue-01.html"
+id="menuIssue">
+</a>
+
+<a
+href="articles.html"
+id="menuArticles">
+</a>
+
+<a
+href="photos.html"
+id="menuPhotos">
+</a>
+
+<a
+href="members-gallery.html"
+id="menuStars">
+</a>
+
+<a
+href="pet-marketplace.html"
+id="menuMarketplace">
+</a>
+
+<a
+href="pet-friendly-places.html"
+id="menuPlaces">
+</a>
+
+<a
+href="club.html"
+id="menuClub">
+</a>
+
+<a
+href="account.html"
+class="menu-account-link"
+id="menuAccount">
+</a>
+
 </nav>
 
 <div class="language-area">
 
-<label id="languageLabel" for="languageSelect"></label>
+<label
+id="languageLabel"
+for="languageSelect">
+</label>
 
 <select id="languageSelect">
+
 <option value="en">English</option>
 <option value="ru">Русский</option>
 <option value="uk">Українська</option>
@@ -597,6 +1087,7 @@ padding-top:38px;
 <option value="tr">Türkçe</option>
 <option value="ar">العربية</option>
 <option value="hi">हिन्दी</option>
+
 </select>
 
 </div>
@@ -607,92 +1098,533 @@ padding-top:38px;
 
 <div class="header-main">
 
-<button class="menu-button" id="menuOpen" type="button" aria-label="Menu">
+<button
+class="menu-button"
+id="menuOpen"
+type="button"
+aria-label="Menu">
+
 <span></span>
 <span></span>
 <span></span>
+
 </button>
 
-<a href="index.html" class="brand notranslate" translate="no">
-<div class="brand-small">PETS &</div>
-<div class="brand-big">DOGUE</div>
+<a
+href="index.html"
+class="brand notranslate"
+translate="no">
+
+<div class="brand-small">
+PETS &
+</div>
+
+<div class="brand-big">
+DOGUE
+</div>
+
 </a>
 
-<a href="account.html" class="profile-button" aria-label="Account">
+<a
+href="account.html"
+class="profile-button"
+aria-label="Account">
+
 <span class="profile-icon"></span>
+
 </a>
 
 </div>
 
 <nav class="category-nav">
-<a href="index.html" id="navMagazine"></a>
-<a href="articles.html" id="navArticles"></a>
-<a href="photos.html" id="navPhotos"></a>
-<a href="members-gallery.html" id="navStars"></a>
-<a href="pet-marketplace.html" id="navMarketplace"></a>
-<a href="pet-friendly-places.html" id="navPlaces"></a>
+
+<a
+href="index.html"
+id="navMagazine">
+</a>
+
+<a
+href="articles.html"
+id="navArticles">
+</a>
+
+<a
+href="photos.html"
+id="navPhotos">
+</a>
+
+<a
+href="members-gallery.html"
+id="navStars">
+</a>
+
+<a
+href="pet-marketplace.html"
+id="navMarketplace">
+</a>
+
+<a
+href="pet-friendly-places.html"
+id="navPlaces">
+</a>
+
 </nav>
 
 </header>
 
 <main class="account-page">
 
-<div class="account-brand notranslate" translate="no">
-<div class="account-brand-small">PETS &</div>
-<div class="account-brand-big">DOGUE</div>
+<!-- =====================================================
+     SIGN IN
+===================================================== -->
+
+<section
+class="signin-view"
+id="signinView">
+
+<div class="account-logo-small">
+PETS &
 </div>
 
-<h1 id="signInTitle"></h1>
+<div class="account-logo-big">
+DOGUE
+</div>
 
-<p class="intro" id="signInIntro"></p>
+<h1 id="signinTitle"></h1>
 
-<form id="signInForm" novalidate>
+<p
+class="signin-intro"
+id="signinIntro">
+</p>
 
-<label class="field-label" id="emailLabel" for="accountEmail"></label>
+<form
+class="signin-form"
+id="signinForm"
+novalidate>
 
-<div class="input-wrap" id="emailWrap">
+<label
+class="form-label"
+for="signinEmail"
+id="signinEmailLabel">
+</label>
 
 <input
-id="accountEmail"
+class="signin-input"
+id="signinEmail"
 type="email"
 autocomplete="email"
 placeholder="you@example.com">
 
-<div class="error-text" id="emailError"></div>
-
+<div
+class="signin-error"
+id="signinError">
 </div>
 
-<button class="continue-button" id="continueButton" type="submit"></button>
+<button
+class="primary-button"
+id="signinButton"
+type="submit">
+</button>
 
 </form>
 
-<a class="help-link" id="helpLink" href="contact.html"></a>
+<a
+href="contact.html"
+class="signin-help"
+id="signinHelp">
+</a>
 
-<div class="divider" id="dividerText"></div>
+<div class="or-row">
+<span id="orText"></span>
+</div>
 
-<a class="club-button" id="joinClubButton" href="club.html"></a>
+<a
+href="club.html"
+class="join-button"
+id="joinClubButton">
+</a>
 
-<p class="legal">
-
-<span id="legalStart"></span>
-
-<a id="termsLink" href="terms.html"></a>
-
-<span id="legalAnd"></span>
-
-<a id="privacyLink" href="privacy.html"></a>.
-
+<p
+class="signin-legal"
+id="signinLegal">
 </p>
+
+</section>
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section
+class="profile-view"
+id="profileView">
+
+<div class="profile-hero">
+
+<div
+class="profile-kicker"
+id="profileKicker">
+</div>
+
+<h1 id="profileTitle"></h1>
+
+<div
+class="profile-email"
+id="profileEmail">
+</div>
+
+<div
+class="profile-status"
+id="profileStatus">
+
+<span class="status-dot"></span>
+
+<span id="profileStatusText"></span>
+
+</div>
+
+</div>
+
+<!-- CLUB -->
+
+<section class="content-section">
+
+<div
+class="section-kicker"
+id="clubSectionKicker">
+</div>
+
+<h2
+class="section-title"
+id="clubSectionTitle">
+</h2>
+
+<div id="activeClubBox">
+
+<div class="club-card">
+
+<div class="club-card-head">
+
+<div>
+
+<span
+class="club-card-label"
+id="clubCardLabel">
+</span>
+
+<strong
+class="club-card-plan"
+id="clubPlan">
+</strong>
+
+</div>
+
+<div
+class="club-card-price"
+id="clubPrice">
+</div>
+
+</div>
+
+<div class="club-row">
+
+<span id="clubStatusLabel"></span>
+
+<strong id="clubStatus"></strong>
+
+</div>
+
+<div class="club-row">
+
+<span id="clubStartLabel"></span>
+
+<strong id="clubStart"></strong>
+
+</div>
+
+<div class="club-row">
+
+<span id="clubUntilLabel"></span>
+
+<strong id="clubUntil"></strong>
+
+</div>
+
+<div class="club-row">
+
+<span id="clubNextLabel"></span>
+
+<strong id="clubNext"></strong>
+
+</div>
+
+<div class="club-row">
+
+<span id="clubEmailLabel"></span>
+
+<strong id="clubEmail"></strong>
+
+</div>
+
+</div>
+
+<button
+class="manage-button"
+id="manageMembership"
+type="button">
+</button>
+
+<p
+class="billing-note"
+id="billingNote">
+</p>
+
+<div
+class="billing-message"
+id="billingMessage">
+</div>
+
+</div>
+
+<div
+class="no-club"
+id="noClubBox">
+
+<h3 id="noClubTitle"></h3>
+
+<p id="noClubText"></p>
+
+<a
+href="club.html"
+class="join-button"
+id="noClubJoin">
+</a>
+
+</div>
+
+</section>
+
+<!-- PET -->
+
+<section class="content-section">
+
+<div
+class="section-kicker"
+id="petSectionKicker">
+</div>
+
+<h2
+class="section-title"
+id="petSectionTitle">
+</h2>
+
+<div class="pet-panel">
+
+<div
+class="pet-empty"
+id="petEmpty">
+</div>
+
+<div
+class="pet-info"
+id="petInfo">
+
+<div class="pet-detail">
+
+<span id="petNameLabel"></span>
+
+<strong id="petNameValue"></strong>
+
+</div>
+
+<div class="pet-detail">
+
+<span id="petTypeLabel"></span>
+
+<strong id="petTypeValue"></strong>
+
+</div>
+
+<div class="pet-detail">
+
+<span id="petBreedLabel"></span>
+
+<strong id="petBreedValue"></strong>
+
+</div>
+
+<div class="pet-detail">
+
+<span id="petProfileLabel"></span>
+
+<strong id="petProfileValue"></strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- QUICK ACCESS -->
+
+<section class="content-section">
+
+<div
+class="section-kicker"
+id="quickKicker">
+</div>
+
+<h2
+class="section-title"
+id="quickTitle">
+</h2>
+
+<div class="quick-grid">
+
+<a
+href="members-gallery.html"
+class="quick-link">
+
+<div class="quick-icon">
+★
+</div>
+
+<strong id="quickCover"></strong>
+
+<span id="quickCoverText"></span>
+
+</a>
+
+<a
+href="pet-marketplace.html"
+class="quick-link">
+
+<div class="quick-icon">
+◇
+</div>
+
+<strong id="quickMarketplace"></strong>
+
+<span id="quickMarketplaceText"></span>
+
+</a>
+
+<a
+href="articles.html"
+class="quick-link">
+
+<div class="quick-icon">
+✦
+</div>
+
+<strong id="quickArticles"></strong>
+
+<span id="quickArticlesText"></span>
+
+</a>
+
+<a
+href="pet-friendly-places.html"
+class="quick-link">
+
+<div class="quick-icon">
+⌖
+</div>
+
+<strong id="quickPlaces"></strong>
+
+<span id="quickPlacesText"></span>
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ACTIONS -->
+
+<section class="content-section">
+
+<div
+class="section-kicker"
+id="settingsKicker">
+</div>
+
+<h2
+class="section-title"
+id="settingsTitle">
+</h2>
+
+<div class="account-actions">
+
+<a
+href="club.html"
+class="account-action black"
+id="clubPageButton">
+</a>
+
+<button
+class="account-action danger"
+id="signoutButton"
+type="button">
+</button>
+
+</div>
+
+</section>
+
+</section>
 
 </main>
 
-<footer class="mini-footer">
+<footer class="site-footer">
 
-<strong class="notranslate" translate="no">
+<div
+class="footer-brand notranslate"
+translate="no">
 PETS & DOGUE
-</strong>
+</div>
 
-<span id="footerText"></span>
+<div
+class="footer-subtitle"
+id="footerSubtitle">
+</div>
+
+<div class="footer-links">
+
+<a
+href="index.html"
+id="footerHome">
+</a>
+
+<a
+href="articles.html"
+id="footerArticles">
+</a>
+
+<a
+href="club.html"
+id="footerClub">
+</a>
+
+<a
+href="privacy.html"
+id="footerPrivacy">
+</a>
+
+<a
+href="terms.html"
+id="footerTerms">
+</a>
+
+<a
+href="contact.html"
+id="footerContact">
+</a>
+
+</div>
 
 </footer>
 
@@ -701,184 +1633,2385 @@ PETS & DOGUE
 <script>
 "use strict";
 
-const ACCOUNT_TEXT={
+/* =========================================================
+   LANGUAGES
+========================================================= */
 
-en:["Magazine","Articles","Photos","Cover Stars","Marketplace","Places","Home","Latest Issue","My Account","Sign in or manage your profile","LANGUAGE","Sign in","Enter the email connected to your PETS & DOGUE account.","Email address","Continue","Need help signing in?","or","Join PETS & DOGUE Club","By continuing, you agree to our","Terms","and","Privacy Policy","Please enter a valid email address.","THE INTERNATIONAL LUXURY ANIMAL MAGAZINE"],
+const EN={
+nav:[
+"Magazine",
+"Articles",
+"Photos",
+"Cover Stars",
+"Marketplace",
+"Places"
+],
 
-ru:["Журнал","Статьи","Фото","Звёзды обложки","Маркетплейс","Места","Главная","Последний выпуск","Мой профиль","Войти или управлять профилем","ЯЗЫК","Войти","Введите email, связанный с вашим аккаунтом PETS & DOGUE.","Email адрес","Продолжить","Нужна помощь со входом?","или","Вступить в PETS & DOGUE Club","Продолжая, вы соглашаетесь с","Условиями","и","Политикой конфиденциальности","Введите правильный email адрес.","МЕЖДУНАРОДНЫЙ ЛЮКСОВЫЙ ЖУРНАЛ О ЖИВОТНЫХ"],
+menu:[
+"Home",
+"Latest Issue",
+"Articles",
+"Photos",
+"Cover Stars",
+"Marketplace",
+"Places",
+"PETS & DOGUE Club",
+"My Account"
+],
 
-uk:["Журнал","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця","Головна","Останній випуск","Мій профіль","Увійти або керувати профілем","МОВА","Увійти","Введіть email, пов’язаний із вашим акаунтом PETS & DOGUE.","Email адреса","Продовжити","Потрібна допомога зі входом?","або","Приєднатися до PETS & DOGUE Club","Продовжуючи, ви погоджуєтесь з","Умовами","та","Політикою конфіденційності","Введіть правильну email адресу.","МІЖНАРОДНИЙ ЛЮКСОВИЙ ЖУРНАЛ ПРО ТВАРИН"],
+language:"LANGUAGE",
 
-fr:["Magazine","Articles","Photos","Stars de couverture","Marketplace","Lieux","Accueil","Dernier numéro","Mon compte","Se connecter ou gérer le profil","LANGUE","Se connecter","Saisissez l’adresse e-mail liée à votre compte PETS & DOGUE.","Adresse e-mail","Continuer","Besoin d’aide pour vous connecter ?","ou","Rejoindre PETS & DOGUE Club","En continuant, vous acceptez nos","Conditions","et notre","Politique de confidentialité","Veuillez saisir une adresse e-mail valide.","LE MAGAZINE INTERNATIONAL DE LUXE POUR ANIMAUX"],
+menuAccount:"My Account",
+guest:"Sign in or manage your profile",
 
-de:["Magazin","Artikel","Fotos","Cover Stars","Marktplatz","Orte","Startseite","Neueste Ausgabe","Mein Konto","Anmelden oder Profil verwalten","SPRACHE","Anmelden","Geben Sie die mit Ihrem PETS & DOGUE Konto verbundene E-Mail-Adresse ein.","E-Mail-Adresse","Weiter","Hilfe bei der Anmeldung?","oder","PETS & DOGUE Club beitreten","Wenn Sie fortfahren, stimmen Sie unseren","Bedingungen","und der","Datenschutzrichtlinie","Bitte geben Sie eine gültige E-Mail-Adresse ein.","DAS INTERNATIONALE LUXUS-TIERMAGAZIN"],
+signinTitle:"Sign in",
+signinIntro:"Enter the email connected to your PETS & DOGUE account.",
+email:"Email address",
+continue:"CONTINUE",
+help:"Need help signing in?",
+or:"OR",
+join:"JOIN PETS & DOGUE CLUB",
+legal:"By continuing, you agree to our Terms and Privacy Policy.",
+invalid:"Please enter a valid email address.",
 
-es:["Revista","Artículos","Fotos","Estrellas de portada","Marketplace","Lugares","Inicio","Última edición","Mi cuenta","Inicia sesión o administra tu perfil","IDIOMA","Iniciar sesión","Introduce el email asociado a tu cuenta PETS & DOGUE.","Correo electrónico","Continuar","¿Necesitas ayuda para entrar?","o","Unirse a PETS & DOGUE Club","Al continuar, aceptas nuestros","Términos","y la","Política de privacidad","Introduce un correo electrónico válido.","LA REVISTA INTERNACIONAL DE LUJO SOBRE ANIMALES"],
+profileKicker:"PETS & DOGUE ACCOUNT",
+profileTitle:"My Account",
+reader:"PETS & DOGUE MEMBER",
+clubMember:"CLUB MEMBER",
 
-it:["Rivista","Articoli","Foto","Star di copertina","Marketplace","Luoghi","Home","Ultimo numero","Il mio account","Accedi o gestisci il profilo","LINGUA","Accedi","Inserisci l’email collegata al tuo account PETS & DOGUE.","Email","Continua","Hai bisogno di aiuto per accedere?","oppure","Entra nel PETS & DOGUE Club","Continuando, accetti i nostri","Termini","e la","Privacy Policy","Inserisci un indirizzo email valido.","LA RIVISTA INTERNAZIONALE DI LUSSO SUGLI ANIMALI"],
+clubKicker:"MEMBERSHIP",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"YOUR MEMBERSHIP",
+status:"Status",
+active:"Active",
+trial:"Complimentary trial",
+start:"Membership starts",
+until:"Valid until",
+next:"Next payment",
+memberEmail:"Member email",
+manage:"MANAGE MEMBERSHIP & PAYMENT",
+billingNote:"Change your payment method, view billing or cancel your membership securely through Stripe.",
+billingOpening:"OPENING SECURE BILLING…",
+billingError:"We couldn't open membership management. Please try again.",
 
-pt:["Revista","Artigos","Fotos","Estrelas de capa","Marketplace","Locais","Início","Última edição","A minha conta","Entrar ou gerir o perfil","IDIOMA","Entrar","Introduza o email associado à sua conta PETS & DOGUE.","Email","Continuar","Precisa de ajuda para entrar?","ou","Entrar no PETS & DOGUE Club","Ao continuar, concorda com os nossos","Termos","e a","Política de Privacidade","Introduza um email válido.","A REVISTA INTERNACIONAL DE LUXO SOBRE ANIMAIS"],
+noClubTitle:"You are not a Club member yet",
+noClubText:"Join PETS & DOGUE Club for Cover Star opportunities, partner benefits and member access.",
+noClubJoin:"JOIN PETS & DOGUE CLUB",
 
-nl:["Magazine","Artikelen","Foto's","Coversterren","Marketplace","Plaatsen","Home","Laatste editie","Mijn account","Log in of beheer je profiel","TAAL","Inloggen","Voer het e-mailadres in dat aan je PETS & DOGUE-account is gekoppeld.","E-mailadres","Doorgaan","Hulp nodig bij het inloggen?","of","Word lid van PETS & DOGUE Club","Door verder te gaan ga je akkoord met onze","Voorwaarden","en ons","Privacybeleid","Voer een geldig e-mailadres in.","HET INTERNATIONALE LUXE DIERENMAGAZINE"],
+petKicker:"PROFILE",
+petTitle:"My pet",
+petEmpty:"No pet has been added to this account yet. Pet details are optional.",
+petName:"Pet name",
+petType:"Animal",
+petBreed:"Breed",
+petProfile:"Member profile",
+notAdded:"Not added",
 
-pl:["Magazyn","Artykuły","Zdjęcia","Gwiazdy okładki","Marketplace","Miejsca","Strona główna","Najnowszy numer","Moje konto","Zaloguj się lub zarządzaj profilem","JĘZYK","Zaloguj się","Wprowadź e-mail powiązany z kontem PETS & DOGUE.","Adres e-mail","Dalej","Potrzebujesz pomocy przy logowaniu?","lub","Dołącz do PETS & DOGUE Club","Kontynuując, akceptujesz nasze","Warunki","i","Politykę prywatności","Wprowadź poprawny adres e-mail.","MIĘDZYNARODOWY LUKSUSOWY MAGAZYN O ZWIERZĘTACH"],
+quickKicker:"EXPLORE",
+quickTitle:"Quick access",
 
-cs:["Magazín","Články","Fotografie","Hvězdy obálky","Marketplace","Místa","Domů","Nejnovější vydání","Můj účet","Přihlášení nebo správa profilu","JAZYK","Přihlásit se","Zadejte e-mail propojený s účtem PETS & DOGUE.","E-mail","Pokračovat","Potřebujete pomoc s přihlášením?","nebo","Vstoupit do PETS & DOGUE Club","Pokračováním souhlasíte s našimi","Podmínkami","a","Zásadami ochrany soukromí","Zadejte platnou e-mailovou adresu.","MEZINÁRODNÍ LUXUSNÍ MAGAZÍN O ZVÍŘATECH"],
+quickCover:"Cover Stars",
+quickCoverText:"Competitions and member gallery",
 
-sk:["Magazín","Články","Fotografie","Hviezdy obálky","Marketplace","Miesta","Domov","Najnovšie vydanie","Môj účet","Prihlásenie alebo správa profilu","JAZYK","Prihlásiť sa","Zadajte e-mail prepojený s účtom PETS & DOGUE.","E-mail","Pokračovať","Potrebujete pomoc s prihlásením?","alebo","Vstúpiť do PETS & DOGUE Club","Pokračovaním súhlasíte s našimi","Podmienkami","a","Zásadami ochrany súkromia","Zadajte platnú e-mailovú adresu.","MEDZINÁRODNÝ LUXUSNÝ MAGAZÍN O ZVIERATÁCH"],
+quickMarketplace:"Marketplace",
+quickMarketplaceText:"Products, services and community listings",
 
-hu:["Magazin","Cikkek","Fotók","Címlapsztárok","Marketplace","Helyek","Főoldal","Legújabb szám","Fiókom","Bejelentkezés vagy profilkezelés","NYELV","Bejelentkezés","Adja meg a PETS & DOGUE-fiókjához tartozó e-mail-címet.","E-mail-cím","Tovább","Segítségre van szüksége?","vagy","Csatlakozás a PETS & DOGUE Clubhoz","A folytatással elfogadja a","Feltételeket","és az","Adatvédelmi irányelveket","Adjon meg érvényes e-mail-címet.","NEMZETKÖZI LUXUS ÁLLATMAGAZIN"],
+quickArticles:"Articles",
+quickArticlesText:"Stories, wellness and editorial",
 
-ro:["Revistă","Articole","Fotografii","Vedete de copertă","Marketplace","Locuri","Acasă","Ultimul număr","Contul meu","Autentificare sau administrare profil","LIMBĂ","Autentificare","Introduceți emailul asociat contului PETS & DOGUE.","Adresă de email","Continuă","Aveți nevoie de ajutor?","sau","Alăturați-vă PETS & DOGUE Club","Continuând, sunteți de acord cu","Termenii","și","Politica de confidențialitate","Introduceți o adresă de email validă.","REVISTA INTERNAȚIONALĂ DE LUX DESPRE ANIMALE"],
+quickPlaces:"Places",
+quickPlacesText:"Pet-friendly places and discoveries",
 
-bg:["Списание","Статии","Снимки","Звезди на корицата","Маркетплейс","Места","Начало","Последен брой","Моят профил","Вход или управление на профила","ЕЗИК","Вход","Въведете имейла, свързан с вашия PETS & DOGUE акаунт.","Имейл адрес","Продължи","Нуждаете се от помощ?","или","Присъединете се към PETS & DOGUE Club","Продължавайки, приемате нашите","Условия","и","Политика за поверителност","Въведете валиден имейл адрес.","МЕЖДУНАРОДНОТО ЛУКСОЗНО СПИСАНИЕ ЗА ЖИВОТНИ"],
+settingsKicker:"ACCOUNT",
+settingsTitle:"Account settings",
+clubPage:"OPEN CLUB PAGE",
+signout:"SIGN OUT",
 
-el:["Περιοδικό","Άρθρα","Φωτογραφίες","Cover Stars","Marketplace","Μέρη","Αρχική","Τελευταίο τεύχος","Ο λογαριασμός μου","Σύνδεση ή διαχείριση προφίλ","ΓΛΩΣΣΑ","Σύνδεση","Εισαγάγετε το email που συνδέεται με τον λογαριασμό PETS & DOGUE.","Email","Συνέχεια","Χρειάζεστε βοήθεια;","ή","Εγγραφή στο PETS & DOGUE Club","Συνεχίζοντας, συμφωνείτε με τους","Όρους","και την","Πολιτική Απορρήτου","Εισαγάγετε έγκυρη διεύθυνση email.","ΤΟ ΔΙΕΘΝΕΣ ΠΟΛΥΤΕΛΕΣ ΠΕΡΙΟΔΙΚΟ ΓΙΑ ΖΩΑ"],
+footer:"THE INTERNATIONAL LUXURY ANIMAL MAGAZINE",
+home:"Home",
+articles:"Articles",
+club:"Club",
+privacy:"Privacy",
+terms:"Terms",
+contact:"Contact",
 
-sv:["Magasin","Artiklar","Foton","Omslagsstjärnor","Marketplace","Platser","Hem","Senaste numret","Mitt konto","Logga in eller hantera din profil","SPRÅK","Logga in","Ange e-postadressen som är kopplad till ditt PETS & DOGUE-konto.","E-postadress","Fortsätt","Behöver du hjälp med att logga in?","eller","Gå med i PETS & DOGUE Club","Genom att fortsätta godkänner du våra","Villkor","och vår","Integritetspolicy","Ange en giltig e-postadress.","DET INTERNATIONELLA LYXIGA DJURMAGASINET"],
+plans:{
+free:"Free first month",
+monthly:"Monthly membership",
+annual:"Annual membership"
+},
 
-da:["Magasin","Artikler","Fotos","Forsidestjerner","Marketplace","Steder","Hjem","Seneste nummer","Min konto","Log ind eller administrer din profil","SPROG","Log ind","Indtast e-mailen til din PETS & DOGUE-konto.","E-mail","Fortsæt","Brug for hjælp?","eller","Bliv medlem af PETS & DOGUE Club","Ved at fortsætte accepterer du vores","Vilkår","og","Privatlivspolitik","Indtast en gyldig e-mailadresse.","DET INTERNATIONALE LUKSUSMAGASIN OM DYR"],
-
-no:["Magasin","Artikler","Bilder","Forsidestjerner","Marketplace","Steder","Hjem","Siste utgave","Min konto","Logg inn eller administrer profilen din","SPRÅK","Logg inn","Skriv inn e-posten knyttet til PETS & DOGUE-kontoen.","E-postadresse","Fortsett","Trenger du hjelp?","eller","Bli med i PETS & DOGUE Club","Ved å fortsette godtar du våre","Vilkår","og vår","Personvernpolicy","Skriv inn en gyldig e-postadresse.","DET INTERNASJONALE LUKSUSMAGASINET OM DYR"],
-
-fi:["Lehti","Artikkelit","Kuvat","Kansitähdet","Marketplace","Paikat","Koti","Uusin numero","Oma tili","Kirjaudu tai hallitse profiilia","KIELI","Kirjaudu","Anna PETS & DOGUE -tiliisi liitetty sähköposti.","Sähköpostiosoite","Jatka","Tarvitsetko apua?","tai","Liity PETS & DOGUE Clubiin","Jatkamalla hyväksyt","Käyttöehdot","ja","Tietosuojakäytännön","Anna kelvollinen sähköpostiosoite.","KANSAINVÄLINEN LUKSUSLEHTI ELÄIMISTÄ"],
-
-tr:["Dergi","Makaleler","Fotoğraflar","Kapak Yıldızları","Marketplace","Mekanlar","Ana Sayfa","Son Sayı","Hesabım","Giriş yap veya profilinizi yönetin","DİL","Giriş yap","PETS & DOGUE hesabınıza bağlı e-postayı girin.","E-posta adresi","Devam","Giriş için yardıma mı ihtiyacınız var?","veya","PETS & DOGUE Club'a katıl","Devam ederek","Şartları","ve","Gizlilik Politikasını","Geçerli bir e-posta adresi girin.","ULUSLARARASI LÜKS HAYVAN DERGİSİ"],
-
-ar:["المجلة","المقالات","الصور","نجوم الغلاف","السوق","الأماكن","الرئيسية","العدد الأخير","حسابي","تسجيل الدخول أو إدارة الملف الشخصي","اللغة","تسجيل الدخول","أدخل البريد الإلكتروني المرتبط بحساب PETS & DOGUE.","البريد الإلكتروني","متابعة","هل تحتاج إلى مساعدة؟","أو","انضم إلى PETS & DOGUE Club","بالمتابعة، فإنك توافق على","الشروط","و","سياسة الخصوصية","يرجى إدخال بريد إلكتروني صالح.","المجلة الدولية الفاخرة للحيوانات"],
-
-hi:["पत्रिका","लेख","फ़ोटो","कवर स्टार","मार्केटप्लेस","स्थान","होम","नवीनतम अंक","मेरा खाता","साइन इन करें या प्रोफ़ाइल प्रबंधित करें","भाषा","साइन इन","अपने PETS & DOGUE खाते से जुड़ा ईमेल दर्ज करें।","ईमेल पता","जारी रखें","साइन इन में मदद चाहिए?","या","PETS & DOGUE Club में शामिल हों","जारी रखते हुए, आप हमारी","शर्तों","और","गोपनीयता नीति","कृपया मान्य ईमेल पता दर्ज करें।","जानवरों की अंतरराष्ट्रीय लग्ज़री पत्रिका"]
+prices:{
+free:"£0",
+monthly:"£1",
+annual:"£10"
+}
 };
 
-function setText(id,value){
-const el=document.getElementById(id);
-if(el)el.textContent=value;
+const LANG={en:EN};
+
+const DATA={
+
+ru:{
+nav:["Журнал","Статьи","Фото","Звёзды обложки","Маркетплейс","Места"],
+menu:["Главная","Последний выпуск","Статьи","Фото","Звёзды обложки","Маркетплейс","Места","Клуб PETS & DOGUE","Мой профиль"],
+language:"ЯЗЫК",
+menuAccount:"Мой профиль",
+guest:"Войти или управлять профилем",
+signinTitle:"Войти",
+signinIntro:"Введите email, связанный с вашим аккаунтом PETS & DOGUE.",
+email:"Email адрес",
+continue:"ПРОДОЛЖИТЬ",
+help:"Нужна помощь со входом?",
+or:"ИЛИ",
+join:"ВСТУПИТЬ В PETS & DOGUE CLUB",
+legal:"Продолжая, вы соглашаетесь с Условиями и Политикой конфиденциальности.",
+invalid:"Введите правильный email адрес.",
+profileKicker:"АККАУНТ PETS & DOGUE",
+profileTitle:"Мой профиль",
+reader:"УЧАСТНИК PETS & DOGUE",
+clubMember:"УЧАСТНИК CLUB",
+clubKicker:"ЧЛЕНСТВО",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"ВАШЕ ЧЛЕНСТВО",
+status:"Статус",
+active:"Активно",
+trial:"Бесплатный период",
+start:"Начало членства",
+until:"Действует до",
+next:"Следующая оплата",
+memberEmail:"Email участника",
+manage:"УПРАВЛЯТЬ ЧЛЕНСТВОМ И ОПЛАТОЙ",
+billingNote:"Изменить карту, посмотреть платежи или отменить членство можно безопасно через Stripe.",
+billingOpening:"ОТКРЫВАЕМ УПРАВЛЕНИЕ ОПЛАТОЙ…",
+billingError:"Не удалось открыть управление членством. Попробуйте ещё раз.",
+noClubTitle:"У вас пока нет членства Club",
+noClubText:"Вступите в PETS & DOGUE Club для участия в Cover Star, скидок партнёров и доступа участника.",
+noClubJoin:"ВСТУПИТЬ В PETS & DOGUE CLUB",
+petKicker:"ПРОФИЛЬ",
+petTitle:"Мой питомец",
+petEmpty:"Питомец пока не добавлен. Данные о питомце необязательны.",
+petName:"Имя питомца",
+petType:"Животное",
+petBreed:"Порода",
+petProfile:"Профиль",
+notAdded:"Не добавлено",
+quickKicker:"РАЗДЕЛЫ",
+quickTitle:"Быстрый доступ",
+quickCover:"Звёзды обложки",
+quickCoverText:"Конкурсы и галерея участников",
+quickMarketplace:"Marketplace",
+quickMarketplaceText:"Товары, услуги и объявления",
+quickArticles:"Статьи",
+quickArticlesText:"Истории, здоровье и редакция",
+quickPlaces:"Места",
+quickPlacesText:"Pet-friendly места и открытия",
+settingsKicker:"АККАУНТ",
+settingsTitle:"Настройки аккаунта",
+clubPage:"ОТКРЫТЬ CLUB",
+signout:"ВЫЙТИ",
+footer:"МЕЖДУНАРОДНЫЙ ЛЮКСОВЫЙ ЖУРНАЛ О ЖИВОТНЫХ",
+home:"Главная",
+articles:"Статьи",
+club:"Клуб",
+privacy:"Конфиденциальность",
+terms:"Условия",
+contact:"Контакты",
+plans:{
+free:"Первый месяц бесплатно",
+monthly:"Месячное членство",
+annual:"Годовое членство"
+}
+},
+
+uk:{
+nav:["Журнал","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця"],
+menu:["Головна","Останній випуск","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця","Клуб PETS & DOGUE","Мій профіль"],
+language:"МОВА",
+menuAccount:"Мій профіль",
+guest:"Увійти або керувати профілем",
+signinTitle:"Увійти",
+signinIntro:"Введіть email, пов’язаний із вашим акаунтом PETS & DOGUE.",
+email:"Email адреса",
+continue:"ПРОДОВЖИТИ",
+help:"Потрібна допомога із входом?",
+or:"АБО",
+join:"ВСТУПИТИ ДО PETS & DOGUE CLUB",
+legal:"Продовжуючи, ви погоджуєтеся з Умовами та Політикою конфіденційності.",
+invalid:"Введіть правильну email адресу.",
+profileKicker:"АКАУНТ PETS & DOGUE",
+profileTitle:"Мій профіль",
+reader:"УЧАСНИК PETS & DOGUE",
+clubMember:"УЧАСНИК CLUB",
+clubKicker:"ЧЛЕНСТВО",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"ВАШЕ ЧЛЕНСТВО",
+status:"Статус",
+active:"Активне",
+trial:"Безкоштовний період",
+start:"Початок членства",
+until:"Діє до",
+next:"Наступна оплата",
+memberEmail:"Email учасника",
+manage:"КЕРУВАТИ ЧЛЕНСТВОМ ТА ОПЛАТОЮ",
+billingNote:"Змінити картку, переглянути платежі або скасувати членство можна безпечно через Stripe.",
+billingOpening:"ВІДКРИВАЄМО КЕРУВАННЯ ОПЛАТОЮ…",
+billingError:"Не вдалося відкрити керування членством. Спробуйте ще раз.",
+noClubTitle:"У вас ще немає членства Club",
+noClubText:"Приєднуйтесь до PETS & DOGUE Club для Cover Star, партнерських переваг і доступу учасника.",
+noClubJoin:"ВСТУПИТИ ДО PETS & DOGUE CLUB",
+petKicker:"ПРОФІЛЬ",
+petTitle:"Мій улюбленець",
+petEmpty:"Улюбленця ще не додано. Дані про нього необов’язкові.",
+petName:"Ім’я",
+petType:"Тварина",
+petBreed:"Порода",
+petProfile:"Профіль",
+notAdded:"Не додано",
+quickKicker:"РОЗДІЛИ",
+quickTitle:"Швидкий доступ",
+quickCover:"Зірки обкладинки",
+quickCoverText:"Конкурси та галерея учасників",
+quickMarketplace:"Marketplace",
+quickMarketplaceText:"Товари, послуги та оголошення",
+quickArticles:"Статті",
+quickArticlesText:"Історії, здоров’я та редакція",
+quickPlaces:"Місця",
+quickPlacesText:"Pet-friendly місця",
+settingsKicker:"АКАУНТ",
+settingsTitle:"Налаштування акаунта",
+clubPage:"ВІДКРИТИ CLUB",
+signout:"ВИЙТИ",
+footer:"МІЖНАРОДНИЙ ЛЮКСОВИЙ ЖУРНАЛ ПРО ТВАРИН",
+home:"Головна",
+articles:"Статті",
+club:"Клуб",
+privacy:"Конфіденційність",
+terms:"Умови",
+contact:"Контакти",
+plans:{
+free:"Перший місяць безкоштовно",
+monthly:"Місячне членство",
+annual:"Річне членство"
+}
+},
+
+fr:{
+language:"LANGUE",
+menuAccount:"Mon compte",
+guest:"Connexion ou gestion du profil",
+signinTitle:"Se connecter",
+signinIntro:"Saisissez l’adresse e-mail liée à votre compte PETS & DOGUE.",
+email:"Adresse e-mail",
+continue:"CONTINUER",
+help:"Besoin d’aide pour vous connecter ?",
+or:"OU",
+join:"REJOINDRE PETS & DOGUE CLUB",
+invalid:"Saisissez une adresse e-mail valide.",
+profileTitle:"Mon compte",
+reader:"MEMBRE PETS & DOGUE",
+clubMember:"MEMBRE DU CLUB",
+clubKicker:"ADHÉSION",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"VOTRE ADHÉSION",
+status:"Statut",
+active:"Active",
+trial:"Période offerte",
+start:"Début",
+until:"Valable jusqu’au",
+next:"Prochain paiement",
+memberEmail:"E-mail du membre",
+manage:"GÉRER L’ADHÉSION ET LE PAIEMENT",
+billingNote:"Modifiez votre moyen de paiement, consultez la facturation ou annulez via Stripe.",
+billingOpening:"OUVERTURE DE LA FACTURATION…",
+billingError:"Impossible d’ouvrir la gestion de l’adhésion.",
+noClubTitle:"Vous n’êtes pas encore membre du Club",
+noClubText:"Rejoignez le PETS & DOGUE Club pour les concours, avantages partenaires et accès membre.",
+noClubJoin:"REJOINDRE LE CLUB",
+petTitle:"Mon animal",
+petEmpty:"Aucun animal n’a encore été ajouté. Ces informations sont facultatives.",
+quickTitle:"Accès rapide",
+settingsTitle:"Paramètres du compte",
+clubPage:"OUVRIR LE CLUB",
+signout:"SE DÉCONNECTER"
+},
+
+de:{
+language:"SPRACHE",
+menuAccount:"Mein Konto",
+guest:"Anmelden oder Profil verwalten",
+signinTitle:"Anmelden",
+signinIntro:"Geben Sie die E-Mail-Adresse Ihres PETS & DOGUE-Kontos ein.",
+email:"E-Mail-Adresse",
+continue:"WEITER",
+help:"Hilfe bei der Anmeldung?",
+or:"ODER",
+join:"PETS & DOGUE CLUB BEITRETEN",
+invalid:"Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+profileTitle:"Mein Konto",
+reader:"PETS & DOGUE MITGLIED",
+clubMember:"CLUBMITGLIED",
+clubKicker:"MITGLIEDSCHAFT",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"IHRE MITGLIEDSCHAFT",
+status:"Status",
+active:"Aktiv",
+trial:"Kostenloser Zeitraum",
+start:"Beginn",
+until:"Gültig bis",
+next:"Nächste Zahlung",
+memberEmail:"Mitglieds-E-Mail",
+manage:"MITGLIEDSCHAFT & ZAHLUNG VERWALTEN",
+billingNote:"Zahlungsmethode ändern, Rechnungen ansehen oder Mitgliedschaft sicher über Stripe kündigen.",
+billingOpening:"ABRECHNUNG WIRD GEÖFFNET…",
+billingError:"Mitgliedschaftsverwaltung konnte nicht geöffnet werden.",
+noClubTitle:"Noch keine Club-Mitgliedschaft",
+noClubText:"Treten Sie dem PETS & DOGUE Club für Cover Star, Partnerangebote und Mitgliederzugang bei.",
+noClubJoin:"CLUB BEITRETEN",
+petTitle:"Mein Tier",
+petEmpty:"Noch kein Tier hinzugefügt. Tierdaten sind optional.",
+quickTitle:"Schnellzugriff",
+settingsTitle:"Kontoeinstellungen",
+clubPage:"CLUB ÖFFNEN",
+signout:"ABMELDEN"
+},
+
+es:{
+language:"IDIOMA",
+menuAccount:"Mi cuenta",
+guest:"Inicia sesión o gestiona tu perfil",
+signinTitle:"Iniciar sesión",
+signinIntro:"Introduce el email asociado a tu cuenta PETS & DOGUE.",
+email:"Correo electrónico",
+continue:"CONTINUAR",
+help:"¿Necesitas ayuda para iniciar sesión?",
+or:"O",
+join:"UNIRSE A PETS & DOGUE CLUB",
+invalid:"Introduce un correo válido.",
+profileTitle:"Mi cuenta",
+reader:"MIEMBRO PETS & DOGUE",
+clubMember:"MIEMBRO DEL CLUB",
+clubKicker:"MEMBRESÍA",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"TU MEMBRESÍA",
+status:"Estado",
+active:"Activa",
+trial:"Periodo gratuito",
+start:"Inicio",
+until:"Válida hasta",
+next:"Próximo pago",
+memberEmail:"Email del miembro",
+manage:"GESTIONAR MEMBRESÍA Y PAGO",
+billingNote:"Cambia tu método de pago, consulta facturas o cancela de forma segura mediante Stripe.",
+billingOpening:"ABRIENDO FACTURACIÓN…",
+billingError:"No se pudo abrir la gestión de la membresía.",
+noClubTitle:"Todavía no eres miembro del Club",
+noClubText:"Únete para Cover Star, ventajas de socios y acceso de miembro.",
+noClubJoin:"UNIRSE AL CLUB",
+petTitle:"Mi mascota",
+petEmpty:"Todavía no se ha añadido ninguna mascota. Es opcional.",
+quickTitle:"Acceso rápido",
+settingsTitle:"Configuración de cuenta",
+clubPage:"ABRIR CLUB",
+signout:"CERRAR SESIÓN"
+},
+
+it:{
+language:"LINGUA",
+menuAccount:"Il mio account",
+guest:"Accedi o gestisci il profilo",
+signinTitle:"Accedi",
+signinIntro:"Inserisci l'email collegata al tuo account PETS & DOGUE.",
+email:"Indirizzo email",
+continue:"CONTINUA",
+help:"Serve aiuto per accedere?",
+or:"OPPURE",
+join:"UNISCITI A PETS & DOGUE CLUB",
+invalid:"Inserisci un indirizzo email valido.",
+profileTitle:"Il mio account",
+reader:"MEMBRO PETS & DOGUE",
+clubMember:"MEMBRO CLUB",
+clubKicker:"ISCRIZIONE",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"LA TUA ISCRIZIONE",
+status:"Stato",
+active:"Attiva",
+trial:"Periodo gratuito",
+start:"Inizio",
+until:"Valida fino al",
+next:"Prossimo pagamento",
+memberEmail:"Email membro",
+manage:"GESTISCI ISCRIZIONE E PAGAMENTO",
+billingNote:"Modifica il pagamento, visualizza la fatturazione o annulla in sicurezza tramite Stripe.",
+billingOpening:"APERTURA FATTURAZIONE…",
+billingError:"Impossibile aprire la gestione dell'iscrizione.",
+noClubTitle:"Non sei ancora membro del Club",
+noClubText:"Unisciti per Cover Star, vantaggi partner e accesso membri.",
+noClubJoin:"UNISCITI AL CLUB",
+petTitle:"Il mio animale",
+petEmpty:"Nessun animale aggiunto. I dati sono facoltativi.",
+quickTitle:"Accesso rapido",
+settingsTitle:"Impostazioni account",
+clubPage:"APRI CLUB",
+signout:"ESCI"
+},
+
+pt:{
+language:"IDIOMA",
+menuAccount:"A minha conta",
+guest:"Iniciar sessão ou gerir perfil",
+signinTitle:"Iniciar sessão",
+signinIntro:"Introduza o email associado à sua conta PETS & DOGUE.",
+email:"Email",
+continue:"CONTINUAR",
+help:"Precisa de ajuda?",
+or:"OU",
+join:"ADERIR AO PETS & DOGUE CLUB",
+invalid:"Introduza um email válido.",
+profileTitle:"A minha conta",
+reader:"MEMBRO PETS & DOGUE",
+clubMember:"MEMBRO DO CLUB",
+clubKicker:"ADESÃO",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"A SUA ADESÃO",
+status:"Estado",
+active:"Ativa",
+trial:"Período gratuito",
+start:"Início",
+until:"Válida até",
+next:"Próximo pagamento",
+memberEmail:"Email do membro",
+manage:"GERIR ADESÃO E PAGAMENTO",
+billingNote:"Altere o pagamento, consulte a faturação ou cancele em segurança através da Stripe.",
+billingOpening:"A ABRIR FATURAÇÃO…",
+billingError:"Não foi possível abrir a gestão da adesão.",
+noClubTitle:"Ainda não é membro do Club",
+noClubText:"Adira para Cover Star, vantagens de parceiros e acesso de membro.",
+noClubJoin:"ADERIR AO CLUB",
+petTitle:"O meu animal",
+petEmpty:"Ainda não foi adicionado nenhum animal. É opcional.",
+quickTitle:"Acesso rápido",
+settingsTitle:"Definições da conta",
+clubPage:"ABRIR CLUB",
+signout:"TERMINAR SESSÃO"
+},
+
+nl:{
+language:"TAAL",
+menuAccount:"Mijn account",
+guest:"Aanmelden of profiel beheren",
+signinTitle:"Aanmelden",
+signinIntro:"Voer het e-mailadres van je PETS & DOGUE-account in.",
+email:"E-mailadres",
+continue:"DOORGAAN",
+help:"Hulp nodig bij aanmelden?",
+or:"OF",
+join:"WORD LID VAN PETS & DOGUE CLUB",
+invalid:"Voer een geldig e-mailadres in.",
+profileTitle:"Mijn account",
+reader:"PETS & DOGUE LID",
+clubMember:"CLUBLID",
+clubKicker:"LIDMAATSCHAP",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"JE LIDMAATSCHAP",
+status:"Status",
+active:"Actief",
+trial:"Gratis periode",
+start:"Start",
+until:"Geldig tot",
+next:"Volgende betaling",
+memberEmail:"E-mail lid",
+manage:"LIDMAATSCHAP & BETALING BEHEREN",
+billingNote:"Wijzig je betaalmethode, bekijk facturen of annuleer veilig via Stripe.",
+billingOpening:"FACTURATIE OPENEN…",
+billingError:"Lidmaatschapsbeheer kon niet worden geopend.",
+noClubTitle:"Je bent nog geen Club-lid",
+noClubText:"Word lid voor Cover Star, partneraanbiedingen en ledenvoordelen.",
+noClubJoin:"WORD LID",
+petTitle:"Mijn huisdier",
+petEmpty:"Nog geen huisdier toegevoegd. Dit is optioneel.",
+quickTitle:"Snelle toegang",
+settingsTitle:"Accountinstellingen",
+clubPage:"OPEN CLUB",
+signout:"AFMELDEN"
+},
+
+pl:{
+language:"JĘZYK",
+menuAccount:"Moje konto",
+guest:"Zaloguj się lub zarządzaj profilem",
+signinTitle:"Zaloguj się",
+signinIntro:"Wpisz email powiązany z kontem PETS & DOGUE.",
+email:"Adres email",
+continue:"DALEJ",
+help:"Potrzebujesz pomocy?",
+or:"LUB",
+join:"DOŁĄCZ DO PETS & DOGUE CLUB",
+invalid:"Wprowadź prawidłowy adres email.",
+profileTitle:"Moje konto",
+reader:"CZŁONEK PETS & DOGUE",
+clubMember:"CZŁONEK CLUB",
+clubKicker:"CZŁONKOSTWO",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"TWOJE CZŁONKOSTWO",
+status:"Status",
+active:"Aktywne",
+trial:"Okres bezpłatny",
+start:"Początek",
+until:"Ważne do",
+next:"Następna płatność",
+memberEmail:"Email członka",
+manage:"ZARZĄDZAJ CZŁONKOSTWEM I PŁATNOŚCIĄ",
+billingNote:"Zmień płatność, zobacz rachunki lub anuluj bezpiecznie przez Stripe.",
+billingOpening:"OTWIERANIE PŁATNOŚCI…",
+billingError:"Nie udało się otworzyć zarządzania członkostwem.",
+noClubTitle:"Nie jesteś jeszcze członkiem Club",
+noClubText:"Dołącz, aby korzystać z Cover Star, ofert partnerów i dostępu członkowskiego.",
+noClubJoin:"DOŁĄCZ DO CLUB",
+petTitle:"Moje zwierzę",
+petEmpty:"Nie dodano jeszcze zwierzęcia. Dane są opcjonalne.",
+quickTitle:"Szybki dostęp",
+settingsTitle:"Ustawienia konta",
+clubPage:"OTWÓRZ CLUB",
+signout:"WYLOGUJ"
+},
+
+cs:{
+language:"JAZYK",
+menuAccount:"Můj účet",
+guest:"Přihlášení nebo správa profilu",
+signinTitle:"Přihlásit se",
+signinIntro:"Zadejte e-mail propojený s účtem PETS & DOGUE.",
+email:"E-mail",
+continue:"POKRAČOVAT",
+help:"Potřebujete pomoc?",
+or:"NEBO",
+join:"VSTOUPIT DO PETS & DOGUE CLUB",
+invalid:"Zadejte platný e-mail.",
+profileTitle:"Můj účet",
+reader:"ČLEN PETS & DOGUE",
+clubMember:"ČLEN CLUB",
+clubKicker:"ČLENSTVÍ",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"VAŠE ČLENSTVÍ",
+status:"Stav",
+active:"Aktivní",
+trial:"Bezplatné období",
+start:"Začátek",
+until:"Platné do",
+next:"Další platba",
+memberEmail:"E-mail člena",
+manage:"SPRAVOVAT ČLENSTVÍ A PLATBU",
+billingNote:"Změňte platbu, zobrazte fakturaci nebo členství bezpečně zrušte přes Stripe.",
+billingOpening:"OTEVÍRÁNÍ FAKTURACE…",
+billingError:"Správu členství se nepodařilo otevřít.",
+noClubTitle:"Zatím nejste členem Club",
+noClubText:"Vstupte pro Cover Star, výhody partnerů a členský přístup.",
+noClubJoin:"VSTOUPIT DO CLUB",
+petTitle:"Můj mazlíček",
+petEmpty:"Zatím nebyl přidán žádný mazlíček. Je to volitelné.",
+quickTitle:"Rychlý přístup",
+settingsTitle:"Nastavení účtu",
+clubPage:"OTEVŘÍT CLUB",
+signout:"ODHLÁSIT"
+},
+
+sk:{
+language:"JAZYK",
+menuAccount:"Môj účet",
+guest:"Prihlásiť sa alebo spravovať profil",
+signinTitle:"Prihlásiť sa",
+signinIntro:"Zadajte email prepojený s účtom PETS & DOGUE.",
+email:"Email",
+continue:"POKRAČOVAŤ",
+help:"Potrebujete pomoc?",
+or:"ALEBO",
+join:"VSTÚPIŤ DO PETS & DOGUE CLUB",
+invalid:"Zadajte platný email.",
+profileTitle:"Môj účet",
+reader:"ČLEN PETS & DOGUE",
+clubMember:"ČLEN CLUB",
+clubKicker:"ČLENSTVO",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"VAŠE ČLENSTVO",
+status:"Stav",
+active:"Aktívne",
+trial:"Bezplatné obdobie",
+start:"Začiatok",
+until:"Platné do",
+next:"Ďalšia platba",
+memberEmail:"Email člena",
+manage:"SPRAVOVAŤ ČLENSTVO A PLATBU",
+billingNote:"Zmeňte platbu, pozrite fakturáciu alebo bezpečne zrušte členstvo cez Stripe.",
+billingOpening:"OTVÁRANIE FAKTURÁCIE…",
+billingError:"Správu členstva sa nepodarilo otvoriť.",
+noClubTitle:"Zatiaľ nie ste členom Club",
+noClubText:"Vstúpte pre Cover Star, partnerské výhody a členský prístup.",
+noClubJoin:"VSTÚPIŤ DO CLUB",
+petTitle:"Môj miláčik",
+petEmpty:"Zatiaľ nebolo pridané žiadne zviera. Je to voliteľné.",
+quickTitle:"Rýchly prístup",
+settingsTitle:"Nastavenia účtu",
+clubPage:"OTVORIŤ CLUB",
+signout:"ODHLÁSIŤ"
+},
+
+hu:{
+language:"NYELV",
+menuAccount:"Fiókom",
+guest:"Bejelentkezés vagy profilkezelés",
+signinTitle:"Bejelentkezés",
+signinIntro:"Adja meg a PETS & DOGUE-fiókhoz tartozó e-mail címet.",
+email:"E-mail cím",
+continue:"TOVÁBB",
+help:"Segítségre van szüksége?",
+or:"VAGY",
+join:"CSATLAKOZÁS A PETS & DOGUE CLUBHOZ",
+invalid:"Adjon meg érvényes e-mail címet.",
+profileTitle:"Fiókom",
+reader:"PETS & DOGUE TAG",
+clubMember:"CLUB TAG",
+clubKicker:"TAGSÁG",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"AZ ÖN TAGSÁGA",
+status:"Állapot",
+active:"Aktív",
+trial:"Ingyenes időszak",
+start:"Kezdés",
+until:"Érvényes",
+next:"Következő fizetés",
+memberEmail:"Tag e-mail",
+manage:"TAGSÁG ÉS FIZETÉS KEZELÉSE",
+billingNote:"Fizetés módosítása, számlázás megtekintése vagy lemondás biztonságosan Stripe-on keresztül.",
+billingOpening:"SZÁMLÁZÁS MEGNYITÁSA…",
+billingError:"A tagságkezelés nem nyitható meg.",
+noClubTitle:"Még nem Club-tag",
+noClubText:"Csatlakozzon a Cover Star, partnerelőnyök és tagsági hozzáférés miatt.",
+noClubJoin:"CSATLAKOZÁS",
+petTitle:"Háziállatom",
+petEmpty:"Még nincs hozzáadott állat. Ez opcionális.",
+quickTitle:"Gyors elérés",
+settingsTitle:"Fiókbeállítások",
+clubPage:"CLUB MEGNYITÁSA",
+signout:"KIJELENTKEZÉS"
+},
+
+ro:{
+language:"LIMBĂ",
+menuAccount:"Contul meu",
+guest:"Autentificare sau administrare profil",
+signinTitle:"Autentificare",
+signinIntro:"Introdu emailul asociat contului PETS & DOGUE.",
+email:"Adresă email",
+continue:"CONTINUĂ",
+help:"Ai nevoie de ajutor?",
+or:"SAU",
+join:"ALĂTURĂ-TE PETS & DOGUE CLUB",
+invalid:"Introdu un email valid.",
+profileTitle:"Contul meu",
+reader:"MEMBRU PETS & DOGUE",
+clubMember:"MEMBRU CLUB",
+clubKicker:"ABONAMENT",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"ABONAMENTUL TĂU",
+status:"Stare",
+active:"Activ",
+trial:"Perioadă gratuită",
+start:"Început",
+until:"Valabil până la",
+next:"Următoarea plată",
+memberEmail:"Email membru",
+manage:"GESTIONEAZĂ ABONAMENTUL ȘI PLATA",
+billingNote:"Schimbă plata, consultă facturile sau anulează în siguranță prin Stripe.",
+billingOpening:"SE DESCHIDE FACTURAREA…",
+billingError:"Administrarea abonamentului nu a putut fi deschisă.",
+noClubTitle:"Nu ești încă membru Club",
+noClubText:"Alătură-te pentru Cover Star, beneficii de partener și acces de membru.",
+noClubJoin:"ALĂTURĂ-TE CLUBULUI",
+petTitle:"Animalul meu",
+petEmpty:"Nu a fost adăugat încă niciun animal. Este opțional.",
+quickTitle:"Acces rapid",
+settingsTitle:"Setări cont",
+clubPage:"DESCHIDE CLUB",
+signout:"DECONECTARE"
+},
+
+bg:{
+language:"ЕЗИК",
+menuAccount:"Моят профил",
+guest:"Вход или управление на профила",
+signinTitle:"Вход",
+signinIntro:"Въведете имейла, свързан с акаунта ви PETS & DOGUE.",
+email:"Имейл адрес",
+continue:"ПРОДЪЛЖИ",
+help:"Нужна е помощ?",
+or:"ИЛИ",
+join:"ПРИСЪЕДИНИ СЕ КЪМ PETS & DOGUE CLUB",
+invalid:"Въведете валиден имейл.",
+profileTitle:"Моят профил",
+reader:"ЧЛЕН PETS & DOGUE",
+clubMember:"ЧЛЕН НА CLUB",
+clubKicker:"ЧЛЕНСТВО",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"ВАШЕТО ЧЛЕНСТВО",
+status:"Статус",
+active:"Активно",
+trial:"Безплатен период",
+start:"Начало",
+until:"Валидно до",
+next:"Следващо плащане",
+memberEmail:"Имейл на член",
+manage:"УПРАВЛЯВАЙ ЧЛЕНСТВО И ПЛАЩАНЕ",
+billingNote:"Променете плащането, вижте фактурите или отменете сигурно чрез Stripe.",
+billingOpening:"ОТВАРЯНЕ НА ФАКТУРИРАНЕ…",
+billingError:"Управлението на членството не можа да се отвори.",
+noClubTitle:"Все още не сте член на Club",
+noClubText:"Присъединете се за Cover Star, партньорски предимства и членски достъп.",
+noClubJoin:"ПРИСЪЕДИНИ СЕ",
+petTitle:"Моят любимец",
+petEmpty:"Все още няма добавен любимец. Данните са незадължителни.",
+quickTitle:"Бърз достъп",
+settingsTitle:"Настройки",
+clubPage:"ОТВОРИ CLUB",
+signout:"ИЗХОД"
+},
+
+el:{
+language:"ΓΛΩΣΣΑ",
+menuAccount:"Ο λογαριασμός μου",
+guest:"Σύνδεση ή διαχείριση προφίλ",
+signinTitle:"Σύνδεση",
+signinIntro:"Εισαγάγετε το email που συνδέεται με τον λογαριασμό PETS & DOGUE.",
+email:"Email",
+continue:"ΣΥΝΕΧΕΙΑ",
+help:"Χρειάζεστε βοήθεια;",
+or:"Ή",
+join:"ΕΓΓΡΑΦΗ ΣΤΟ PETS & DOGUE CLUB",
+invalid:"Εισαγάγετε έγκυρο email.",
+profileTitle:"Ο λογαριασμός μου",
+reader:"ΜΕΛΟΣ PETS & DOGUE",
+clubMember:"ΜΕΛΟΣ CLUB",
+clubKicker:"ΣΥΝΔΡΟΜΗ",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"Η ΣΥΝΔΡΟΜΗ ΣΑΣ",
+status:"Κατάσταση",
+active:"Ενεργή",
+trial:"Δωρεάν περίοδος",
+start:"Έναρξη",
+until:"Ισχύει έως",
+next:"Επόμενη πληρωμή",
+memberEmail:"Email μέλους",
+manage:"ΔΙΑΧΕΙΡΙΣΗ ΣΥΝΔΡΟΜΗΣ ΚΑΙ ΠΛΗΡΩΜΗΣ",
+billingNote:"Αλλάξτε πληρωμή, δείτε χρεώσεις ή ακυρώστε με ασφάλεια μέσω Stripe.",
+billingOpening:"ΑΝΟΙΓΜΑ ΧΡΕΩΣΕΩΝ…",
+billingError:"Δεν ήταν δυνατή η διαχείριση της συνδρομής.",
+noClubTitle:"Δεν είστε ακόμη μέλος του Club",
+noClubText:"Εγγραφείτε για Cover Star, προνόμια συνεργατών και πρόσβαση μέλους.",
+noClubJoin:"ΕΓΓΡΑΦΗ ΣΤΟ CLUB",
+petTitle:"Το κατοικίδιό μου",
+petEmpty:"Δεν έχει προστεθεί κατοικίδιο. Είναι προαιρετικό.",
+quickTitle:"Γρήγορη πρόσβαση",
+settingsTitle:"Ρυθμίσεις λογαριασμού",
+clubPage:"ΑΝΟΙΓΜΑ CLUB",
+signout:"ΑΠΟΣΥΝΔΕΣΗ"
+},
+
+sv:{
+language:"SPRÅK",
+menuAccount:"Mitt konto",
+guest:"Logga in eller hantera profil",
+signinTitle:"Logga in",
+signinIntro:"Ange e-postadressen kopplad till ditt PETS & DOGUE-konto.",
+email:"E-postadress",
+continue:"FORTSÄTT",
+help:"Behöver du hjälp?",
+or:"ELLER",
+join:"GÅ MED I PETS & DOGUE CLUB",
+invalid:"Ange en giltig e-postadress.",
+profileTitle:"Mitt konto",
+reader:"PETS & DOGUE-MEDLEM",
+clubMember:"CLUBMEDLEM",
+clubKicker:"MEDLEMSKAP",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"DITT MEDLEMSKAP",
+status:"Status",
+active:"Aktivt",
+trial:"Kostnadsfri period",
+start:"Start",
+until:"Giltigt till",
+next:"Nästa betalning",
+memberEmail:"Medlemsmail",
+manage:"HANTERA MEDLEMSKAP OCH BETALNING",
+billingNote:"Ändra betalning, se fakturering eller avsluta säkert via Stripe.",
+billingOpening:"ÖPPNAR FAKTURERING…",
+billingError:"Kunde inte öppna medlemskapshanteringen.",
+noClubTitle:"Du är inte Clubmedlem ännu",
+noClubText:"Gå med för Cover Star, partnerförmåner och medlemsåtkomst.",
+noClubJoin:"GÅ MED I CLUB",
+petTitle:"Mitt djur",
+petEmpty:"Inget djur har lagts till ännu. Det är valfritt.",
+quickTitle:"Snabbåtkomst",
+settingsTitle:"Kontoinställningar",
+clubPage:"ÖPPNA CLUB",
+signout:"LOGGA UT"
+},
+
+da:{
+language:"SPROG",
+menuAccount:"Min konto",
+guest:"Log ind eller administrer profil",
+signinTitle:"Log ind",
+signinIntro:"Indtast den e-mail, der er knyttet til din PETS & DOGUE-konto.",
+email:"E-mailadresse",
+continue:"FORTSÆT",
+help:"Brug for hjælp?",
+or:"ELLER",
+join:"BLIV MEDLEM AF PETS & DOGUE CLUB",
+invalid:"Indtast en gyldig e-mailadresse.",
+profileTitle:"Min konto",
+reader:"PETS & DOGUE-MEDLEM",
+clubMember:"CLUBMEDLEM",
+clubKicker:"MEDLEMSKAB",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"DIT MEDLEMSKAB",
+status:"Status",
+active:"Aktivt",
+trial:"Gratis periode",
+start:"Start",
+until:"Gyldigt til",
+next:"Næste betaling",
+memberEmail:"Medlemsmail",
+manage:"ADMINISTRER MEDLEMSKAB OG BETALING",
+billingNote:"Skift betaling, se fakturering eller opsig sikkert via Stripe.",
+billingOpening:"ÅBNER FAKTURERING…",
+billingError:"Kunne ikke åbne medlemsadministration.",
+noClubTitle:"Du er endnu ikke Clubmedlem",
+noClubText:"Bliv medlem for Cover Star, partnerfordele og medlemsadgang.",
+noClubJoin:"BLIV MEDLEM",
+petTitle:"Mit dyr",
+petEmpty:"Intet dyr er tilføjet endnu. Det er valgfrit.",
+quickTitle:"Hurtig adgang",
+settingsTitle:"Kontoindstillinger",
+clubPage:"ÅBN CLUB",
+signout:"LOG UD"
+},
+
+no:{
+language:"SPRÅK",
+menuAccount:"Min konto",
+guest:"Logg inn eller administrer profil",
+signinTitle:"Logg inn",
+signinIntro:"Skriv inn e-posten knyttet til PETS & DOGUE-kontoen.",
+email:"E-postadresse",
+continue:"FORTSETT",
+help:"Trenger du hjelp?",
+or:"ELLER",
+join:"BLI MED I PETS & DOGUE CLUB",
+invalid:"Skriv inn en gyldig e-postadresse.",
+profileTitle:"Min konto",
+reader:"PETS & DOGUE-MEDLEM",
+clubMember:"CLUBMEDLEM",
+clubKicker:"MEDLEMSKAP",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"DITT MEDLEMSKAP",
+status:"Status",
+active:"Aktivt",
+trial:"Gratis periode",
+start:"Start",
+until:"Gyldig til",
+next:"Neste betaling",
+memberEmail:"Medlemsmail",
+manage:"ADMINISTRER MEDLEMSKAP OG BETALING",
+billingNote:"Endre betaling, se fakturering eller avslutt sikkert via Stripe.",
+billingOpening:"ÅPNER FAKTURERING…",
+billingError:"Kunne ikke åpne medlemsadministrasjon.",
+noClubTitle:"Du er ikke Clubmedlem ennå",
+noClubText:"Bli medlem for Cover Star, partnerfordeler og medlemstilgang.",
+noClubJoin:"BLI MEDLEM",
+petTitle:"Kjæledyret mitt",
+petEmpty:"Ingen kjæledyr er lagt til ennå. Det er valgfritt.",
+quickTitle:"Hurtig tilgang",
+settingsTitle:"Kontoinnstillinger",
+clubPage:"ÅPNE CLUB",
+signout:"LOGG UT"
+},
+
+fi:{
+language:"KIELI",
+menuAccount:"Oma tili",
+guest:"Kirjaudu tai hallitse profiilia",
+signinTitle:"Kirjaudu",
+signinIntro:"Anna PETS & DOGUE -tiliisi liitetty sähköpostiosoite.",
+email:"Sähköpostiosoite",
+continue:"JATKA",
+help:"Tarvitsetko apua?",
+or:"TAI",
+join:"LIITY PETS & DOGUE CLUBIIN",
+invalid:"Anna kelvollinen sähköpostiosoite.",
+profileTitle:"Oma tili",
+reader:"PETS & DOGUE -JÄSEN",
+clubMember:"CLUB-JÄSEN",
+clubKicker:"JÄSENYYS",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"JÄSENYYTESI",
+status:"Tila",
+active:"Aktiivinen",
+trial:"Maksuton jakso",
+start:"Alkaa",
+until:"Voimassa asti",
+next:"Seuraava maksu",
+memberEmail:"Jäsenen email",
+manage:"HALLITSE JÄSENYYTTÄ JA MAKSUA",
+billingNote:"Vaihda maksutapaa, katso laskutusta tai peruuta turvallisesti Stripen kautta.",
+billingOpening:"AVATAAN LASKUTUSTA…",
+billingError:"Jäsenyyden hallintaa ei voitu avata.",
+noClubTitle:"Et ole vielä Club-jäsen",
+noClubText:"Liity Cover Star -mahdollisuuksiin, kumppanietuihin ja jäsenkäyttöön.",
+noClubJoin:"LIITY CLUBIIN",
+petTitle:"Lemmikkini",
+petEmpty:"Lemmikkiä ei ole vielä lisätty. Tiedot ovat valinnaisia.",
+quickTitle:"Pikavalinnat",
+settingsTitle:"Tilin asetukset",
+clubPage:"AVAA CLUB",
+signout:"KIRJAUDU ULOS"
+},
+
+tr:{
+language:"DİL",
+menuAccount:"Hesabım",
+guest:"Giriş yapın veya profilinizi yönetin",
+signinTitle:"Giriş yap",
+signinIntro:"PETS & DOGUE hesabınıza bağlı e-postayı girin.",
+email:"E-posta adresi",
+continue:"DEVAM ET",
+help:"Giriş için yardıma mı ihtiyacınız var?",
+or:"VEYA",
+join:"PETS & DOGUE CLUB'A KATIL",
+invalid:"Geçerli bir e-posta girin.",
+profileTitle:"Hesabım",
+reader:"PETS & DOGUE ÜYESİ",
+clubMember:"CLUB ÜYESİ",
+clubKicker:"ÜYELİK",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"ÜYELİĞİNİZ",
+status:"Durum",
+active:"Aktif",
+trial:"Ücretsiz dönem",
+start:"Başlangıç",
+until:"Geçerli olduğu tarih",
+next:"Sonraki ödeme",
+memberEmail:"Üye e-postası",
+manage:"ÜYELİK VE ÖDEMEYİ YÖNET",
+billingNote:"Ödemeyi değiştirin, faturaları görüntüleyin veya Stripe üzerinden güvenle iptal edin.",
+billingOpening:"FATURALAMA AÇILIYOR…",
+billingError:"Üyelik yönetimi açılamadı.",
+noClubTitle:"Henüz Club üyesi değilsiniz",
+noClubText:"Cover Star, ortak avantajları ve üye erişimi için katılın.",
+noClubJoin:"CLUB'A KATIL",
+petTitle:"Evcil hayvanım",
+petEmpty:"Henüz evcil hayvan eklenmedi. Bilgiler isteğe bağlıdır.",
+quickTitle:"Hızlı erişim",
+settingsTitle:"Hesap ayarları",
+clubPage:"CLUB'I AÇ",
+signout:"ÇIKIŞ YAP"
+},
+
+ar:{
+language:"اللغة",
+menuAccount:"حسابي",
+guest:"تسجيل الدخول أو إدارة الملف",
+signinTitle:"تسجيل الدخول",
+signinIntro:"أدخل البريد الإلكتروني المرتبط بحساب PETS & DOGUE.",
+email:"البريد الإلكتروني",
+continue:"متابعة",
+help:"هل تحتاج مساعدة في تسجيل الدخول؟",
+or:"أو",
+join:"انضم إلى PETS & DOGUE CLUB",
+invalid:"أدخل بريداً إلكترونياً صالحاً.",
+profileTitle:"حسابي",
+reader:"عضو PETS & DOGUE",
+clubMember:"عضو CLUB",
+clubKicker:"العضوية",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"عضويتك",
+status:"الحالة",
+active:"نشطة",
+trial:"فترة مجانية",
+start:"بداية العضوية",
+until:"صالحة حتى",
+next:"الدفعة التالية",
+memberEmail:"بريد العضو",
+manage:"إدارة العضوية والدفع",
+billingNote:"يمكنك تغيير وسيلة الدفع أو مراجعة الفواتير أو الإلغاء بأمان عبر Stripe.",
+billingOpening:"جارٍ فتح إدارة الدفع…",
+billingError:"تعذر فتح إدارة العضوية.",
+noClubTitle:"لست عضواً في Club بعد",
+noClubText:"انضم للاستفادة من Cover Star ومزايا الشركاء والوصول للأعضاء.",
+noClubJoin:"انضم إلى CLUB",
+petTitle:"حيواني",
+petEmpty:"لم تتم إضافة حيوان بعد. البيانات اختيارية.",
+quickTitle:"وصول سريع",
+settingsTitle:"إعدادات الحساب",
+clubPage:"فتح CLUB",
+signout:"تسجيل الخروج"
+},
+
+hi:{
+language:"भाषा",
+menuAccount:"मेरा खाता",
+guest:"साइन इन करें या प्रोफ़ाइल प्रबंधित करें",
+signinTitle:"साइन इन",
+signinIntro:"अपने PETS & DOGUE खाते से जुड़ा ईमेल दर्ज करें।",
+email:"ईमेल पता",
+continue:"आगे",
+help:"साइन इन में मदद चाहिए?",
+or:"या",
+join:"PETS & DOGUE CLUB में शामिल हों",
+invalid:"सही ईमेल पता दर्ज करें।",
+profileTitle:"मेरा खाता",
+reader:"PETS & DOGUE सदस्य",
+clubMember:"CLUB सदस्य",
+clubKicker:"सदस्यता",
+clubTitle:"PETS & DOGUE Club",
+clubCard:"आपकी सदस्यता",
+status:"स्थिति",
+active:"सक्रिय",
+trial:"मुफ़्त अवधि",
+start:"सदस्यता शुरू",
+until:"मान्य तक",
+next:"अगला भुगतान",
+memberEmail:"सदस्य ईमेल",
+manage:"सदस्यता और भुगतान प्रबंधित करें",
+billingNote:"Stripe के माध्यम से भुगतान बदलें, बिल देखें या सुरक्षित रूप से सदस्यता रद्द करें।",
+billingOpening:"भुगतान प्रबंधन खुल रहा है…",
+billingError:"सदस्यता प्रबंधन नहीं खुल सका।",
+noClubTitle:"आप अभी Club सदस्य नहीं हैं",
+noClubText:"Cover Star, पार्टनर लाभ और सदस्य एक्सेस के लिए शामिल हों।",
+noClubJoin:"CLUB में शामिल हों",
+petTitle:"मेरा पालतू",
+petEmpty:"अभी कोई पालतू नहीं जोड़ा गया है। जानकारी वैकल्पिक है।",
+quickTitle:"त्वरित पहुँच",
+settingsTitle:"खाता सेटिंग",
+clubPage:"CLUB खोलें",
+signout:"साइन आउट"
 }
 
-function applyLanguage(code){
+};
 
-if(!ACCOUNT_TEXT[code]){
+Object.entries(DATA).forEach(
+([code,patch])=>{
+
+LANG[code]={
+...EN,
+...patch,
+plans:{
+...EN.plans,
+...(patch.plans||{})
+},
+prices:{
+...EN.prices,
+...(patch.prices||{})
+}
+};
+
+}
+);
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const $=
+id=>
+document.getElementById(id);
+
+let currentLanguage="en";
+
+let currentMembership=null;
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function t(){
+
+return LANG[currentLanguage]||
+LANG.en;
+
+}
+
+function text(
+id,
+value
+){
+
+const element=$(id);
+
+if(element){
+
+element.textContent=
+value===undefined ||
+value===null
+?""
+:String(value);
+
+}
+
+}
+
+function safeJSON(
+value,
+fallback={}
+){
+
+try{
+
+return JSON.parse(
+value
+);
+
+}catch(error){
+
+return fallback;
+
+}
+
+}
+
+function validEmail(
+value
+){
+
+return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+.test(
+String(value||"").trim()
+);
+
+}
+
+function locale(){
+
+const map={
+en:"en-GB",
+ru:"ru-RU",
+uk:"uk-UA",
+fr:"fr-FR",
+de:"de-DE",
+es:"es-ES",
+it:"it-IT",
+pt:"pt-PT",
+nl:"nl-NL",
+pl:"pl-PL",
+cs:"cs-CZ",
+sk:"sk-SK",
+hu:"hu-HU",
+ro:"ro-RO",
+bg:"bg-BG",
+el:"el-GR",
+sv:"sv-SE",
+da:"da-DK",
+no:"nb-NO",
+fi:"fi-FI",
+tr:"tr-TR",
+ar:"ar-AE",
+hi:"hi-IN"
+};
+
+return map[currentLanguage]||
+"en-GB";
+
+}
+
+function formatDate(
+value
+){
+
+if(!value){
+return "—";
+}
+
+const date=
+new Date(
+value
+);
+
+if(
+Number.isNaN(
+date.getTime()
+)
+){
+
+return "—";
+
+}
+
+try{
+
+return new Intl.DateTimeFormat(
+locale(),
+{
+day:"numeric",
+month:"long",
+year:"numeric"
+}
+)
+.format(
+date
+);
+
+}catch(error){
+
+return date
+.toLocaleDateString();
+
+}
+
+}
+
+function getSavedMembership(){
+
+const data=
+safeJSON(
+localStorage.getItem(
+"petsDogueMembership"
+)||
+"{}"
+);
+
+if(
+data &&
+data.plan &&
+data.status
+){
+
+return data;
+
+}
+
+return null;
+
+}
+
+function getAccountEmail(){
+
+const membership=
+getSavedMembership();
+
+if(
+membership &&
+membership.email
+){
+
+return membership.email;
+
+}
+
+return localStorage.getItem(
+"petsDogueAccountEmail"
+)||
+"";
+
+}
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function renderLanguage(
+code
+){
+
+if(
+!LANG[code]
+){
+
 code="en";
+
 }
 
-PDI18N.setLanguage(code);
+currentLanguage=
+code;
 
-const x=ACCOUNT_TEXT[code];
+document.documentElement.lang=
+code;
 
-const navIds=[
-"navMagazine","navArticles","navPhotos",
-"navStars","navMarketplace","navPlaces"
-];
+document.documentElement.dir=
+code==="ar"
+?"rtl"
+:"ltr";
 
-navIds.forEach((id,i)=>setText(id,x[i]));
+$("languageSelect").value=
+code;
 
-setText("menuHome",x[6]);
-setText("menuIssue",x[7]);
-setText("menuArticles",x[1]);
-setText("menuPhotos",x[2]);
-setText("menuStars",x[3]);
-setText("menuMarketplace",x[4]);
-setText("menuPlaces",x[5]);
-setText("menuClub","PETS & DOGUE Club");
+const x=
+t();
 
-setText("menuAccountTitle",x[8]);
-setText("menuAccountText",x[9]);
-setText("languageLabel",x[10]);
+[
+"navMagazine",
+"navArticles",
+"navPhotos",
+"navStars",
+"navMarketplace",
+"navPlaces"
+]
+.forEach(
+(id,index)=>{
 
-setText("signInTitle",x[11]);
-setText("signInIntro",x[12]);
-setText("emailLabel",x[13]);
-setText("continueButton",x[14]);
-setText("helpLink",x[15]);
-setText("dividerText",x[16]);
-setText("joinClubButton",x[17]);
-setText("legalStart",x[18]);
-setText("termsLink",x[19]);
-setText("legalAnd",x[20]);
-setText("privacyLink",x[21]);
-setText("emailError",x[22]);
-setText("footerText",x[23]);
+text(
+id,
+x.nav[index]
+);
 
-document.getElementById("languageSelect").value=code;
+}
+);
+
+[
+"menuHome",
+"menuIssue",
+"menuArticles",
+"menuPhotos",
+"menuStars",
+"menuMarketplace",
+"menuPlaces",
+"menuClub",
+"menuAccount"
+]
+.forEach(
+(id,index)=>{
+
+text(
+id,
+x.menu[index]
+);
+
+}
+);
+
+text(
+"languageLabel",
+x.language
+);
+
+text(
+"menuAccountTitle",
+x.menuAccount
+);
+
+text(
+"signinTitle",
+x.signinTitle
+);
+
+text(
+"signinIntro",
+x.signinIntro
+);
+
+text(
+"signinEmailLabel",
+x.email
+);
+
+text(
+"signinButton",
+x.continue
+);
+
+text(
+"signinHelp",
+x.help
+);
+
+text(
+"orText",
+x.or
+);
+
+text(
+"joinClubButton",
+x.join
+);
+
+$("signinLegal").innerHTML=
+`${x.legal}`;
+
+text(
+"signinError",
+x.invalid
+);
+
+text(
+"profileKicker",
+x.profileKicker
+);
+
+text(
+"profileTitle",
+x.profileTitle
+);
+
+text(
+"clubSectionKicker",
+x.clubKicker
+);
+
+text(
+"clubSectionTitle",
+x.clubTitle
+);
+
+text(
+"clubCardLabel",
+x.clubCard
+);
+
+text(
+"clubStatusLabel",
+x.status
+);
+
+text(
+"clubStartLabel",
+x.start
+);
+
+text(
+"clubUntilLabel",
+x.until
+);
+
+text(
+"clubNextLabel",
+x.next
+);
+
+text(
+"clubEmailLabel",
+x.memberEmail
+);
+
+text(
+"manageMembership",
+x.manage
+);
+
+text(
+"billingNote",
+x.billingNote
+);
+
+text(
+"noClubTitle",
+x.noClubTitle
+);
+
+text(
+"noClubText",
+x.noClubText
+);
+
+text(
+"noClubJoin",
+x.noClubJoin
+);
+
+text(
+"petSectionKicker",
+x.petKicker
+);
+
+text(
+"petSectionTitle",
+x.petTitle
+);
+
+text(
+"petEmpty",
+x.petEmpty
+);
+
+text(
+"petNameLabel",
+x.petName
+);
+
+text(
+"petTypeLabel",
+x.petType
+);
+
+text(
+"petBreedLabel",
+x.petBreed
+);
+
+text(
+"petProfileLabel",
+x.petProfile
+);
+
+text(
+"quickKicker",
+x.quickKicker
+);
+
+text(
+"quickTitle",
+x.quickTitle
+);
+
+text(
+"quickCover",
+x.quickCover
+);
+
+text(
+"quickCoverText",
+x.quickCoverText
+);
+
+text(
+"quickMarketplace",
+x.quickMarketplace
+);
+
+text(
+"quickMarketplaceText",
+x.quickMarketplaceText
+);
+
+text(
+"quickArticles",
+x.quickArticles
+);
+
+text(
+"quickArticlesText",
+x.quickArticlesText
+);
+
+text(
+"quickPlaces",
+x.quickPlaces
+);
+
+text(
+"quickPlacesText",
+x.quickPlacesText
+);
+
+text(
+"settingsKicker",
+x.settingsKicker
+);
+
+text(
+"settingsTitle",
+x.settingsTitle
+);
+
+text(
+"clubPageButton",
+x.clubPage
+);
+
+text(
+"signoutButton",
+x.signout
+);
+
+text(
+"footerSubtitle",
+x.footer
+);
+
+text(
+"footerHome",
+x.home
+);
+
+text(
+"footerArticles",
+x.articles
+);
+
+text(
+"footerClub",
+x.club
+);
+
+text(
+"footerPrivacy",
+x.privacy
+);
+
+text(
+"footerTerms",
+x.terms
+);
+
+text(
+"footerContact",
+x.contact
+);
+
+renderAccount();
+
 }
 
-function validEmail(value){
-return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+function changeLanguage(
+code
+){
+
+if(
+window.PDI18N &&
+typeof window.PDI18N.setLanguage===
+"function"
+){
+
+window.PDI18N.setLanguage(
+code
+);
+
 }
+
+renderLanguage(
+code
+);
+
+}
+
+/* =========================================================
+   MENU
+========================================================= */
 
 function openMenu(){
-sideMenu.classList.add("open");
-menuOverlay.classList.add("show");
-document.body.classList.add("locked");
+
+$("sideMenu")
+.classList
+.add(
+"open"
+);
+
+$("menuOverlay")
+.classList
+.add(
+"show"
+);
+
+document.body
+.classList
+.add(
+"locked"
+);
+
 }
 
 function closeMenu(){
-sideMenu.classList.remove("open");
-menuOverlay.classList.remove("show");
-document.body.classList.remove("locked");
+
+$("sideMenu")
+.classList
+.remove(
+"open"
+);
+
+$("menuOverlay")
+.classList
+.remove(
+"show"
+);
+
+document.body
+.classList
+.remove(
+"locked"
+);
+
 }
 
-const sideMenu=document.getElementById("sideMenu");
-const menuOverlay=document.getElementById("menuOverlay");
+$("menuOpen")
+.addEventListener(
+"click",
+openMenu
+);
 
-document.getElementById("menuOpen").addEventListener("click",openMenu);
-document.getElementById("menuClose").addEventListener("click",closeMenu);
-menuOverlay.addEventListener("click",closeMenu);
+$("menuClose")
+.addEventListener(
+"click",
+closeMenu
+);
 
-document.getElementById("languageSelect").addEventListener("change",function(){
-applyLanguage(this.value);
-});
+$("menuOverlay")
+.addEventListener(
+"click",
+closeMenu
+);
 
-document.getElementById("signInForm").addEventListener("submit",function(event){
+/* =========================================================
+   SIGN IN
+========================================================= */
+
+$("signinForm")
+.addEventListener(
+"submit",
+event=>{
 
 event.preventDefault();
 
-const input=document.getElementById("accountEmail");
-const wrap=document.getElementById("emailWrap");
+const email=
+$("signinEmail")
+.value
+.trim();
 
-if(!validEmail(input.value.trim())){
+if(
+!validEmail(
+email
+)
+){
 
-wrap.classList.add("error");
-input.focus();
+$("signinEmail")
+.classList
+.add(
+"error"
+);
+
+$("signinError")
+.classList
+.add(
+"show"
+);
+
+$("signinEmail")
+.focus();
+
 return;
+
 }
 
-wrap.classList.remove("error");
+$("signinEmail")
+.classList
+.remove(
+"error"
+);
+
+$("signinError")
+.classList
+.remove(
+"show"
+);
 
 localStorage.setItem(
 "petsDogueAccountEmail",
-input.value.trim()
+email
 );
 
-location.href="profile.html";
-});
+renderAccount();
 
-document.getElementById("accountEmail").addEventListener("input",function(){
-
-if(validEmail(this.value.trim())){
-document.getElementById("emailWrap").classList.remove("error");
 }
-});
+);
 
-window.addEventListener("petsdogue:languagechange",function(event){
+$("signinEmail")
+.addEventListener(
+"input",
+()=>{
 
-const code=event.detail && event.detail.language;
+$("signinEmail")
+.classList
+.remove(
+"error"
+);
 
-if(code && ACCOUNT_TEXT[code]){
-applyLanguage(code);
+$("signinError")
+.classList
+.remove(
+"show"
+);
+
+}
+);
+
+/* =========================================================
+   RENDER ACCOUNT
+========================================================= */
+
+function renderAccount(){
+
+const x=
+t();
+
+const email=
+getAccountEmail();
+
+currentMembership=
+getSavedMembership();
+
+if(
+!email
+){
+
+$("signinView")
+.style.display=
+"block";
+
+$("profileView")
+.style.display=
+"none";
+
+text(
+"menuAccountText",
+x.guest
+);
+
+return;
+
 }
 
-});
+$("signinView")
+.style.display=
+"none";
 
-const initial=PDI18N.init();
+$("profileView")
+.style.display=
+"block";
 
-applyLanguage(initial);
+text(
+"profileEmail",
+email
+);
 
-const savedEmail=localStorage.getItem("petsDogueAccountEmail");
+text(
+"menuAccountText",
+email
+);
 
-if(savedEmail){
-document.getElementById("accountEmail").value=savedEmail;
+if(
+currentMembership
+){
+
+$("profileStatus")
+.classList
+.add(
+"active"
+);
+
+text(
+"profileStatusText",
+x.clubMember
+);
+
+$("activeClubBox")
+.style.display=
+"block";
+
+$("noClubBox")
+.style.display=
+"none";
+
+renderMembership(
+currentMembership
+);
+
+renderPet(
+currentMembership
+);
+
+}else{
+
+$("profileStatus")
+.classList
+.remove(
+"active"
+);
+
+text(
+"profileStatusText",
+x.reader
+);
+
+$("activeClubBox")
+.style.display=
+"none";
+
+$("noClubBox")
+.style.display=
+"block";
+
+renderPet(
+null
+);
+
 }
+
+}
+
+/* =========================================================
+   MEMBERSHIP
+========================================================= */
+
+function renderMembership(
+membership
+){
+
+const x=
+t();
+
+const plan=
+membership.plan||
+"monthly";
+
+text(
+"clubPlan",
+x.plans[plan]||
+plan
+);
+
+text(
+"clubPrice",
+x.prices[plan]||
+""
+);
+
+const isTrial=
+membership.status===
+"trialing";
+
+text(
+"clubStatus",
+isTrial
+?x.trial
+:x.active
+);
+
+const dates=
+membership.dates||
+{};
+
+text(
+"clubStart",
+formatDate(
+dates.startedAt
+)
+);
+
+text(
+"clubUntil",
+formatDate(
+dates.validUntil
+)
+);
+
+text(
+"clubNext",
+formatDate(
+dates.nextPayment
+)
+);
+
+text(
+"clubEmail",
+membership.email||
+getAccountEmail()
+);
+
+}
+
+/* =========================================================
+   PET
+========================================================= */
+
+function renderPet(
+membership
+){
+
+const x=
+t();
+
+const pet=
+membership &&
+membership.pet
+?membership.pet
+:null;
+
+if(
+!pet ||
+!(
+pet.name ||
+pet.type ||
+pet.breed
+)
+){
+
+$("petEmpty")
+.style.display=
+"block";
+
+$("petInfo")
+.classList
+.remove(
+"show"
+);
+
+return;
+
+}
+
+$("petEmpty")
+.style.display=
+"none";
+
+$("petInfo")
+.classList
+.add(
+"show"
+);
+
+text(
+"petNameValue",
+pet.name||
+x.notAdded
+);
+
+text(
+"petTypeValue",
+pet.type||
+x.notAdded
+);
+
+text(
+"petBreedValue",
+pet.breed||
+x.notAdded
+);
+
+text(
+"petProfileValue",
+membership.email||
+x.notAdded
+);
+
+}
+
+/* =========================================================
+   STRIPE PORTAL
+========================================================= */
+
+$("manageMembership")
+.addEventListener(
+"click",
+async()=>{
+
+const x=
+t();
+
+const button=
+$("manageMembership");
+
+const message=
+$("billingMessage");
+
+message
+.classList
+.remove(
+"show",
+"error"
+);
+
+message.textContent=
+"";
+
+const membership=
+getSavedMembership();
+
+const sessionId=
+membership &&
+membership.stripe &&
+membership.stripe.checkoutSessionId
+?membership.stripe.checkoutSessionId
+:"";
+
+if(
+!sessionId
+){
+
+message.textContent=
+x.billingError;
+
+message
+.classList
+.add(
+"show",
+"error"
+);
+
+return;
+
+}
+
+button.disabled=
+true;
+
+button.textContent=
+x.billingOpening;
+
+try{
+
+const response=
+await fetch(
+"/api/create-club-portal",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+sessionId
+})
+
+}
+);
+
+let data={};
+
+try{
+
+data=
+await response.json();
+
+}catch(error){}
+
+if(
+!response.ok ||
+!data.portalUrl
+){
+
+throw new Error(
+data.error||
+x.billingError
+);
+
+}
+
+window.location.assign(
+data.portalUrl
+);
+
+}catch(error){
+
+console.error(
+"PETS & DOGUE billing:",
+error
+);
+
+message.textContent=
+x.billingError;
+
+message
+.classList
+.add(
+"show",
+"error"
+);
+
+button.disabled=
+false;
+
+button.textContent=
+x.manage;
+
+}
+
+}
+);
+
+/* =========================================================
+   SIGN OUT
+========================================================= */
+
+$("signoutButton")
+.addEventListener(
+"click",
+()=>{
+
+localStorage.removeItem(
+"petsDogueAccountEmail"
+);
+
+/*
+  Membership verification is intentionally not deleted here.
+
+  It remains on this browser so the verified Club state
+  is not destroyed by a normal sign-out action.
+
+  A proper server-side authentication system can later
+  replace this browser session model.
+*/
+
+$("signinEmail")
+.value=
+"";
+
+renderAccount();
+
+}
+);
+
+/* =========================================================
+   BILLING RETURN
+========================================================= */
+
+function processBillingReturn(){
+
+const params=
+new URLSearchParams(
+window.location.search
+);
+
+if(
+params.get(
+"billing"
+)!==
+"return"
+){
+
+return;
+
+}
+
+const message=
+$("billingMessage");
+
+if(
+message
+){
+
+message.textContent=
+currentLanguage==="ru"
+?"Вы вернулись из безопасного управления членством."
+:currentLanguage==="uk"
+?"Ви повернулися з безпечного керування членством."
+:"You have returned from secure membership management.";
+
+message
+.classList
+.add(
+"show"
+);
+
+}
+
+try{
+
+const url=
+new URL(
+window.location.href
+);
+
+url.searchParams
+.delete(
+"billing"
+);
+
+window.history.replaceState(
+{},
+document.title,
+url.pathname+
+url.search+
+url.hash
+);
+
+}catch(error){}
+
+}
+
+/* =========================================================
+   LANGUAGE EVENTS
+========================================================= */
+
+$("languageSelect")
+.addEventListener(
+"change",
+function(){
+
+changeLanguage(
+this.value
+);
+
+}
+);
+
+window.addEventListener(
+"petsdogue:languagechange",
+event=>{
+
+const code=
+event.detail &&
+event.detail.language;
+
+if(
+code &&
+LANG[code] &&
+code!==currentLanguage
+){
+
+renderLanguage(
+code
+);
+
+}
+
+}
+);
+
+/* =========================================================
+   START
+========================================================= */
+
+let initialLanguage="en";
+
+if(
+window.PDI18N &&
+typeof window.PDI18N.init===
+"function"
+){
+
+initialLanguage=
+window.PDI18N.init()||
+"en";
+
+}
+
+if(
+!LANG[initialLanguage]
+){
+
+initialLanguage="en";
+
+}
+
+const savedEmail=
+getAccountEmail();
+
+if(
+savedEmail
+){
+
+$("signinEmail")
+.value=
+savedEmail;
+
+}
+
+renderLanguage(
+initialLanguage
+);
+
+processBillingReturn();
+
 </script>
 
 </body>
