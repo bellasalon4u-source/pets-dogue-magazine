@@ -2,21 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="description" content="Sign in to PETS & DOGUE or join PETS & DOGUE Club.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="PETS & DOGUE account">
 <title>PETS & DOGUE — Account</title>
 
 <style>
 :root{
 --black:#070707;
 --cream:#f5f0e6;
---white:#fff;
 --gold:#bd8b29;
---gold-light:#efd47a;
 --green:#58e814;
 --grey:#706c66;
---line:#cdc6b9;
---red:#c52a2a;
+--line:#cbc4b8;
+--red:#c62b2b;
 --serif:Georgia,"Times New Roman",serif;
 --sans:Arial,Helvetica,sans-serif;
 }
@@ -27,18 +25,18 @@ margin:0;
 padding:0;
 }
 
-html{
-scroll-behavior:smooth;
+html,body{
+min-height:100%;
 }
 
 body{
-min-height:100vh;
 font-family:var(--sans);
 background:var(--cream);
 color:#111;
+overflow-x:hidden;
 }
 
-body.menu-open{
+body.locked{
 overflow:hidden;
 }
 
@@ -57,22 +55,18 @@ button{
 cursor:pointer;
 }
 
-/* HEADER */
-
 .site-header{
 background:var(--black);
 color:#fff;
-border-bottom:1px solid #292929;
 }
 
 .header-main{
-height:108px;
-max-width:1440px;
-margin:auto;
-padding:0 16px;
+height:106px;
 display:grid;
-grid-template-columns:50px 1fr 50px;
+grid-template-columns:48px 1fr 48px;
 align-items:center;
+padding:0 16px;
+border-bottom:1px solid #292929;
 }
 
 .menu-button,
@@ -93,11 +87,10 @@ gap:6px;
 }
 
 .menu-button span{
-display:block;
 width:31px;
-height:2.5px;
-border-radius:10px;
+height:2px;
 background:#fff;
+border-radius:20px;
 }
 
 .brand{
@@ -116,16 +109,16 @@ margin-bottom:5px;
 
 .brand-big{
 font-family:var(--serif);
-font-size:42px;
-font-weight:normal;
+font-size:41px;
+font-weight:400;
 letter-spacing:2px;
 color:var(--gold);
 }
 
 .profile-icon{
 position:relative;
-width:28px;
-height:28px;
+width:29px;
+height:29px;
 }
 
 .profile-icon:before{
@@ -152,18 +145,17 @@ border-radius:16px 16px 0 0;
 }
 
 .category-nav{
-height:58px;
-background:#090909;
-border-top:1px solid #292929;
+height:56px;
 display:flex;
 align-items:center;
-gap:29px;
+gap:28px;
 padding:0 18px;
 overflow-x:auto;
 scrollbar-width:none;
-font-size:11px;
-font-weight:800;
-letter-spacing:1.1px;
+border-bottom:1px solid #292929;
+font-size:10px;
+font-weight:900;
+letter-spacing:1.2px;
 text-transform:uppercase;
 }
 
@@ -175,132 +167,128 @@ display:none;
 white-space:nowrap;
 }
 
-/* ACCOUNT */
-
 .account-page{
 width:min(560px,calc(100% - 34px));
-margin:0 auto;
-padding:38px 0 42px;
+margin:auto;
+padding:29px 0 34px;
 }
 
 .account-brand{
 text-align:center;
-margin-bottom:21px;
+margin-bottom:17px;
 }
 
 .account-brand-small{
 font-family:var(--serif);
-font-size:10px;
-font-weight:bold;
-letter-spacing:2.7px;
+font-size:9px;
+font-weight:700;
+letter-spacing:2.6px;
 color:var(--gold);
 }
 
 .account-brand-big{
 font-family:var(--serif);
-font-size:35px;
-font-weight:normal;
+font-size:34px;
+font-weight:400;
 letter-spacing:2.5px;
 color:var(--gold);
-margin-top:2px;
 }
 
-.signin-card h1{
+.account-page h1{
 font-family:var(--serif);
-font-size:39px;
-font-weight:normal;
+font-size:38px;
+font-weight:400;
+text-align:center;
 line-height:1;
-text-align:center;
 }
 
-.signin-intro{
-max-width:450px;
-margin:10px auto 24px;
-font-size:13px;
-line-height:1.5;
+.intro{
+margin:9px auto 21px;
+max-width:460px;
+font-size:12px;
+line-height:1.45;
+text-align:center;
 color:var(--grey);
-text-align:center;
 }
 
-.signin-form label{
+.field-label{
 display:block;
-font-size:10px;
+font-size:9px;
 font-weight:900;
-letter-spacing:1.6px;
+letter-spacing:1.5px;
 text-transform:uppercase;
-margin-bottom:7px;
+margin-bottom:6px;
 }
 
-.email-wrap{
-position:relative;
-}
-
-.signin-form input{
+.input-wrap input{
 width:100%;
-height:54px;
+height:51px;
+padding:0 13px;
 border:1.5px solid #111;
 background:#fff;
-padding:0 14px;
 font-size:16px;
 outline:none;
 }
 
-.signin-form input:focus{
-border-color:var(--gold);
-}
-
-.email-wrap.error input{
+.input-wrap.error input{
 border:2px solid var(--red);
 background:#fff8f8;
 }
 
-.field-error{
+.error-text{
 display:none;
-font-size:10px;
+font-size:8px;
 font-weight:700;
 color:var(--red);
-margin-top:6px;
+margin-top:5px;
 }
 
-.email-wrap.error .field-error{
+.input-wrap.error .error-text{
 display:block;
 }
 
-.continue-button{
+.continue-button,
+.club-button{
 width:100%;
-height:54px;
-margin-top:11px;
+height:51px;
 border:0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:10px;
+font-weight:900;
+letter-spacing:1.5px;
+text-transform:uppercase;
+}
+
+.continue-button{
+margin-top:10px;
 background:#080808;
 color:#fff;
-font-size:11px;
-font-weight:900;
-letter-spacing:1.6px;
-text-transform:uppercase;
 }
 
 .help-link{
 display:inline-block;
-margin-top:13px;
-font-size:11px;
+font-size:10px;
+margin-top:12px;
 text-decoration:underline;
 text-underline-offset:3px;
 }
 
-.account-divider{
+.divider{
 display:flex;
 align-items:center;
 gap:12px;
-margin:26px 0 17px;
+margin:23px 0 15px;
 font-size:8px;
 font-weight:900;
-letter-spacing:1.7px;
-color:#8b857e;
+letter-spacing:1.5px;
+color:#89837b;
 text-transform:uppercase;
 }
 
-.account-divider:before,
-.account-divider:after{
+.divider:before,
+.divider:after{
 content:"";
 height:1px;
 background:var(--line);
@@ -308,72 +296,55 @@ flex:1;
 }
 
 .club-button{
-width:100%;
-min-height:54px;
-display:flex;
-align-items:center;
-justify-content:center;
 background:var(--green);
-color:#081008;
-font-size:12px;
-font-weight:900;
-letter-spacing:.8px;
-text-transform:uppercase;
-border:0;
-text-align:center;
-padding:0 16px;
+color:#071007;
 }
 
-.account-legal{
-margin:16px auto 0;
+.legal{
 max-width:470px;
-font-size:9px;
-line-height:1.55;
-text-align:center;
+margin:15px auto 0;
+font-size:8px;
+line-height:1.5;
 color:#77716a;
+text-align:center;
 }
 
-.account-legal a{
+.legal a{
 text-decoration:underline;
 text-underline-offset:2px;
 }
-
-/* FOOTER */
 
 .mini-footer{
 background:#070707;
 color:#fff;
 text-align:center;
-padding:20px 16px;
+padding:18px 14px;
 }
 
 .mini-footer strong{
 font-family:var(--serif);
 font-size:17px;
-font-weight:normal;
+font-weight:400;
 letter-spacing:2px;
 color:var(--gold);
 }
 
 .mini-footer span{
 display:block;
-margin-top:5px;
-font-size:8px;
+margin-top:4px;
+font-size:7px;
 letter-spacing:1.2px;
-color:#8d8d8d;
-text-transform:uppercase;
+color:#888;
 }
-
-/* SIDE MENU */
 
 .menu-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.67);
 z-index:8000;
+background:rgba(0,0,0,.68);
 opacity:0;
 visibility:hidden;
-transition:.22s;
+transition:.2s;
 }
 
 .menu-overlay.show{
@@ -383,50 +354,50 @@ visibility:visible;
 
 .side-menu{
 position:fixed;
-left:0;
 top:0;
 bottom:0;
+left:0;
 z-index:8100;
 width:min(355px,88vw);
-background:#0a0a0a;
+background:#090909;
 color:#fff;
-transform:translateX(-102%);
-transition:transform .26s ease;
 overflow-y:auto;
+transform:translateX(-102%);
+transition:.24s ease;
 }
 
 .side-menu.open{
 transform:translateX(0);
 }
 
-.side-menu-head{
-height:86px;
-padding:0 20px;
+.menu-head{
+height:82px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+padding:0 19px;
 border-bottom:1px solid #292929;
 }
 
-.side-menu-head strong{
+.menu-head strong{
 font-family:var(--serif);
-font-size:21px;
-font-weight:normal;
-color:var(--gold-light);
+font-size:20px;
+font-weight:400;
+color:#efd47a;
 }
 
-.menu-close{
-width:38px;
-height:38px;
-border:1px solid #444;
+.close-menu{
+width:37px;
+height:37px;
 border-radius:50%;
+border:1px solid #555;
 background:transparent;
 color:#fff;
 font-size:21px;
 }
 
 .menu-account{
-padding:16px;
+padding:15px;
 border-bottom:1px solid #292929;
 }
 
@@ -434,103 +405,99 @@ border-bottom:1px solid #292929;
 display:flex;
 align-items:center;
 gap:11px;
-padding:13px;
+padding:12px;
 background:#151515;
 }
 
 .menu-profile-circle{
-width:38px;
-height:38px;
-border:1px solid #707070;
+width:37px;
+height:37px;
+border:1px solid #777;
 border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:16px;
+position:relative;
+}
+
+.menu-profile-circle:before{
+content:"";
+position:absolute;
+width:9px;
+height:9px;
+border:1.5px solid #fff;
+border-radius:50%;
+top:6px;
+left:12px;
+}
+
+.menu-profile-circle:after{
+content:"";
+position:absolute;
+width:19px;
+height:10px;
+border:1.5px solid #fff;
+border-bottom:0;
+border-radius:15px 15px 0 0;
+left:7px;
+bottom:5px;
 }
 
 .menu-profile strong{
 display:block;
-font-size:12px;
+font-size:11px;
 }
 
 .menu-profile span{
 display:block;
-font-size:9px;
+font-size:8px;
 color:#aaa;
 margin-top:3px;
 }
 
 .menu-list{
-padding:9px 17px 22px;
+padding:8px 16px 21px;
 }
 
 .menu-list a{
-min-height:45px;
+min-height:44px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-border-bottom:1px solid #242424;
-font-size:12px;
+border-bottom:1px solid #252525;
+font-size:11px;
 font-weight:700;
 }
 
 .menu-list a:after{
 content:"›";
 font-family:var(--serif);
-font-size:20px;
+font-size:19px;
 color:#777;
 }
 
 .menu-club{
-color:var(--gold-light);
+color:#efd47a;
 }
 
 .language-area{
+padding:17px 16px 24px;
 border-top:1px solid #292929;
-padding:18px 17px 25px;
 }
 
 .language-area label{
 display:block;
 font-size:8px;
-letter-spacing:1.9px;
 font-weight:900;
+letter-spacing:1.8px;
 color:#999;
-margin-bottom:8px;
+margin-bottom:7px;
 }
 
 .language-area select{
 width:100%;
-height:43px;
-background:#111;
-border:1px solid #444;
-color:#fff;
+height:42px;
 padding:0 10px;
-outline:none;
-}
-
-@media(min-width:760px){
-.header-main{
-height:120px;
-padding:0 24px;
-grid-template-columns:56px 1fr 56px;
-}
-
-.brand-big{
-font-size:49px;
-}
-
-.category-nav{
-height:64px;
-font-size:12px;
-gap:36px;
-padding:0 24px;
-}
-
-.account-page{
-padding-top:48px;
-}
+border:1px solid #444;
+background:#111;
+color:#fff;
 }
 
 html[dir="rtl"] body{
@@ -546,38 +513,45 @@ transform:translateX(102%);
 html[dir="rtl"] .side-menu.open{
 transform:translateX(0);
 }
+
+@media(min-width:760px){
+
+.header-main{
+height:116px;
+}
+
+.brand-big{
+font-size:48px;
+}
+
+.account-page{
+padding-top:38px;
+}
+
+}
 </style>
 </head>
 
 <body>
 
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+<div class="menu-overlay" id="menuOverlay"></div>
 
 <aside class="side-menu" id="sideMenu">
 
-<div class="side-menu-head">
+<div class="menu-head">
 <strong class="notranslate" translate="no">PETS & DOGUE</strong>
-
-<button
-class="menu-close"
-type="button"
-onclick="closeMenu()"
-aria-label="Close">
-×
-</button>
+<button class="close-menu" id="menuClose" type="button">×</button>
 </div>
 
 <div class="menu-account">
 
 <a href="account.html" class="menu-profile">
 
-<div class="menu-profile-circle">
-♙
-</div>
+<div class="menu-profile-circle"></div>
 
 <div>
-<strong id="menuAccountTitle">My Account</strong>
-<span id="menuAccountText">Sign in or manage your profile</span>
+<strong id="menuAccountTitle"></strong>
+<span id="menuAccountText"></span>
 </div>
 
 </a>
@@ -585,21 +559,19 @@ aria-label="Close">
 </div>
 
 <nav class="menu-list">
-<a href="index.html" id="menuHome">Home</a>
-<a href="issue-01.html" id="menuIssue">Latest Issue</a>
-<a href="articles.html" id="menuArticles">Articles</a>
-<a href="photos.html" id="menuPhotos">Photos</a>
-<a href="members-gallery.html" id="menuStars">Cover Stars</a>
-<a href="pet-marketplace.html" id="menuMarketplace">Marketplace</a>
-<a href="pet-friendly-places.html" id="menuPlaces">Places</a>
-<a href="club.html" class="menu-club" id="menuClub">PETS & DOGUE Club</a>
+<a href="index.html" id="menuHome"></a>
+<a href="issue-01.html" id="menuIssue"></a>
+<a href="articles.html" id="menuArticles"></a>
+<a href="photos.html" id="menuPhotos"></a>
+<a href="members-gallery.html" id="menuStars"></a>
+<a href="pet-marketplace.html" id="menuMarketplace"></a>
+<a href="pet-friendly-places.html" id="menuPlaces"></a>
+<a href="club.html" class="menu-club" id="menuClub"></a>
 </nav>
 
 <div class="language-area">
 
-<label for="languageSelect" id="languageLabel">
-LANGUAGE
-</label>
+<label id="languageLabel" for="languageSelect"></label>
 
 <select id="languageSelect">
 <option value="en">English</option>
@@ -635,50 +607,30 @@ LANGUAGE
 
 <div class="header-main">
 
-<button
-class="menu-button"
-type="button"
-onclick="openMenu()"
-aria-label="Menu">
+<button class="menu-button" id="menuOpen" type="button" aria-label="Menu">
 <span></span>
 <span></span>
 <span></span>
 </button>
 
-<a
-href="index.html"
-class="brand notranslate"
-translate="no"
-aria-label="PETS & DOGUE Home">
-
-<div class="brand-small">
-PETS &
-</div>
-
-<div class="brand-big">
-DOGUE
-</div>
-
+<a href="index.html" class="brand notranslate" translate="no">
+<div class="brand-small">PETS &</div>
+<div class="brand-big">DOGUE</div>
 </a>
 
-<a
-href="account.html"
-class="profile-button"
-aria-label="My Account">
-
+<a href="account.html" class="profile-button" aria-label="Account">
 <span class="profile-icon"></span>
-
 </a>
 
 </div>
 
 <nav class="category-nav">
-<a href="index.html" id="navMagazine">Magazine</a>
-<a href="articles.html" id="navArticles">Articles</a>
-<a href="photos.html" id="navPhotos">Photos</a>
-<a href="members-gallery.html" id="navStars">Cover Stars</a>
-<a href="pet-marketplace.html" id="navMarketplace">Marketplace</a>
-<a href="pet-friendly-places.html" id="navPlaces">Places</a>
+<a href="index.html" id="navMagazine"></a>
+<a href="articles.html" id="navArticles"></a>
+<a href="photos.html" id="navPhotos"></a>
+<a href="members-gallery.html" id="navStars"></a>
+<a href="pet-marketplace.html" id="navMarketplace"></a>
+<a href="pet-friendly-places.html" id="navPlaces"></a>
 </nav>
 
 </header>
@@ -690,87 +642,47 @@ aria-label="My Account">
 <div class="account-brand-big">DOGUE</div>
 </div>
 
-<section class="signin-card">
+<h1 id="signInTitle"></h1>
 
-<h1 id="signInTitle">
-Sign in
-</h1>
+<p class="intro" id="signInIntro"></p>
 
-<p class="signin-intro" id="signInIntro">
-Enter the email connected to your PETS & DOGUE account.
-</p>
+<form id="signInForm" novalidate>
 
-<form
-class="signin-form"
-onsubmit="continueSignIn(event)"
-novalidate>
+<label class="field-label" id="emailLabel" for="accountEmail"></label>
 
-<label for="accountEmail" id="emailLabel">
-Email address
-</label>
-
-<div class="email-wrap" id="emailWrap">
+<div class="input-wrap" id="emailWrap">
 
 <input
-type="email"
 id="accountEmail"
+type="email"
 autocomplete="email"
 placeholder="you@example.com">
 
-<div class="field-error" id="emailError">
-Please enter a valid email address.
-</div>
+<div class="error-text" id="emailError"></div>
 
 </div>
 
-<button
-class="continue-button"
-type="submit"
-id="continueButton">
-Continue
-</button>
+<button class="continue-button" id="continueButton" type="submit"></button>
 
 </form>
 
-<a
-href="contact.html"
-class="help-link"
-id="helpLink">
-Need help signing in?
-</a>
+<a class="help-link" id="helpLink" href="contact.html"></a>
 
-<div class="account-divider" id="dividerText">
-or
-</div>
+<div class="divider" id="dividerText"></div>
 
-<a
-href="club.html"
-class="club-button"
-id="joinClubButton">
-Join PETS & DOGUE Club
-</a>
+<a class="club-button" id="joinClubButton" href="club.html"></a>
 
-<p class="account-legal">
+<p class="legal">
 
-<span id="legalStart">
-By continuing, you agree to our
-</span>
+<span id="legalStart"></span>
 
-<a href="terms.html" id="termsLink">
-Terms
-</a>
+<a id="termsLink" href="terms.html"></a>
 
-<span id="legalAnd">
-and
-</span>
+<span id="legalAnd"></span>
 
-<a href="privacy.html" id="privacyLink">
-Privacy Policy
-</a>.
+<a id="privacyLink" href="privacy.html"></a>.
 
 </p>
-
-</section>
 
 </main>
 
@@ -780,833 +692,62 @@ Privacy Policy
 PETS & DOGUE
 </strong>
 
-<span id="footerText">
-The International Luxury Animal Magazine
-</span>
+<span id="footerText"></span>
 
 </footer>
 
+<script src="pd-i18n.js"></script>
+
 <script>
-const LANG_STORAGE_KEY="petsDogueLanguage";
-const FALLBACK_LANG_STORAGE_KEY="pdLanguage";const accountTranslations={
+"use strict";
 
-en:{
-nav:["Magazine","Articles","Photos","Cover Stars","Marketplace","Places"],
-menu:["Home","Latest Issue","Articles","Photos","Cover Stars","Marketplace","Places","PETS & DOGUE Club"],
-account:"My Account",
-accountText:"Sign in or manage your profile",
-language:"LANGUAGE",
-title:"Sign in",
-intro:"Enter the email connected to your PETS & DOGUE account.",
-email:"Email address",
-continue:"Continue",
-help:"Need help signing in?",
-or:"or",
-join:"Join PETS & DOGUE Club",
-legal:"By continuing, you agree to our",
-terms:"Terms",
-and:"and",
-privacy:"Privacy Policy",
-error:"Please enter a valid email address.",
-footer:"The International Luxury Animal Magazine"
-},
+const ACCOUNT_TEXT={
 
-ru:{
-nav:["Журнал","Статьи","Фото","Звёзды обложки","Маркетплейс","Места"],
-menu:["Главная","Последний выпуск","Статьи","Фото","Звёзды обложки","Маркетплейс","Места","Клуб PETS & DOGUE"],
-account:"Мой профиль",
-accountText:"Войти или управлять профилем",
-language:"ЯЗЫК",
-title:"Войти",
-intro:"Введите email, связанный с вашим аккаунтом PETS & DOGUE.",
-email:"Email адрес",
-continue:"Продолжить",
-help:"Нужна помощь со входом?",
-or:"или",
-join:"Вступить в PETS & DOGUE Club",
-legal:"Продолжая, вы соглашаетесь с",
-terms:"Условиями",
-and:"и",
-privacy:"Политикой конфиденциальности",
-error:"Введите правильный email адрес.",
-footer:"Международный журнал класса люкс о животных"
-},
+en:["Magazine","Articles","Photos","Cover Stars","Marketplace","Places","Home","Latest Issue","My Account","Sign in or manage your profile","LANGUAGE","Sign in","Enter the email connected to your PETS & DOGUE account.","Email address","Continue","Need help signing in?","or","Join PETS & DOGUE Club","By continuing, you agree to our","Terms","and","Privacy Policy","Please enter a valid email address.","THE INTERNATIONAL LUXURY ANIMAL MAGAZINE"],
 
-uk:{
-nav:["Журнал","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця"],
-menu:["Головна","Останній випуск","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця","Клуб PETS & DOGUE"],
-account:"Мій профіль",
-accountText:"Увійти або керувати профілем",
-language:"МОВА",
-title:"Увійти",
-intro:"Введіть email, пов’язаний із вашим акаунтом PETS & DOGUE.",
-email:"Email адреса",
-continue:"Продовжити",
-help:"Потрібна допомога зі входом?",
-or:"або",
-join:"Приєднатися до PETS & DOGUE Club",
-legal:"Продовжуючи, ви погоджуєтесь з",
-terms:"Умовами",
-and:"та",
-privacy:"Політикою конфіденційності",
-error:"Введіть правильну email адресу.",
-footer:"Міжнародний журнал класу люкс про тварин"
-},
+ru:["Журнал","Статьи","Фото","Звёзды обложки","Маркетплейс","Места","Главная","Последний выпуск","Мой профиль","Войти или управлять профилем","ЯЗЫК","Войти","Введите email, связанный с вашим аккаунтом PETS & DOGUE.","Email адрес","Продолжить","Нужна помощь со входом?","или","Вступить в PETS & DOGUE Club","Продолжая, вы соглашаетесь с","Условиями","и","Политикой конфиденциальности","Введите правильный email адрес.","МЕЖДУНАРОДНЫЙ ЛЮКСОВЫЙ ЖУРНАЛ О ЖИВОТНЫХ"],
 
-fr:{
-nav:["Magazine","Articles","Photos","Stars de couverture","Marketplace","Lieux"],
-menu:["Accueil","Dernier numéro","Articles","Photos","Stars de couverture","Marketplace","Lieux","Club PETS & DOGUE"],
-account:"Mon compte",
-accountText:"Connectez-vous ou gérez votre profil",
-language:"LANGUE",
-title:"Se connecter",
-intro:"Saisissez l’adresse e-mail liée à votre compte PETS & DOGUE.",
-email:"Adresse e-mail",
-continue:"Continuer",
-help:"Besoin d’aide pour vous connecter ?",
-or:"ou",
-join:"Rejoindre PETS & DOGUE Club",
-legal:"En continuant, vous acceptez nos",
-terms:"Conditions",
-and:"et notre",
-privacy:"Politique de confidentialité",
-error:"Veuillez saisir une adresse e-mail valide.",
-footer:"Le magazine international de luxe pour animaux"
-},
+uk:["Журнал","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця","Головна","Останній випуск","Мій профіль","Увійти або керувати профілем","МОВА","Увійти","Введіть email, пов’язаний із вашим акаунтом PETS & DOGUE.","Email адреса","Продовжити","Потрібна допомога зі входом?","або","Приєднатися до PETS & DOGUE Club","Продовжуючи, ви погоджуєтесь з","Умовами","та","Політикою конфіденційності","Введіть правильну email адресу.","МІЖНАРОДНИЙ ЛЮКСОВИЙ ЖУРНАЛ ПРО ТВАРИН"],
 
-de:{
-nav:["Magazin","Artikel","Fotos","Cover Stars","Marktplatz","Orte"],
-menu:["Startseite","Neueste Ausgabe","Artikel","Fotos","Cover Stars","Marktplatz","Orte","PETS & DOGUE Club"],
-account:"Mein Konto",
-accountText:"Anmelden oder Profil verwalten",
-language:"SPRACHE",
-title:"Anmelden",
-intro:"Geben Sie die E-Mail-Adresse ein, die mit Ihrem PETS & DOGUE Konto verbunden ist.",
-email:"E-Mail-Adresse",
-continue:"Weiter",
-help:"Brauchen Sie Hilfe bei der Anmeldung?",
-or:"oder",
-join:"PETS & DOGUE Club beitreten",
-legal:"Wenn Sie fortfahren, stimmen Sie unseren",
-terms:"Bedingungen",
-and:"und der",
-privacy:"Datenschutzrichtlinie",
-error:"Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-footer:"Das internationale Luxus-Tiermagazin"
-},
+fr:["Magazine","Articles","Photos","Stars de couverture","Marketplace","Lieux","Accueil","Dernier numéro","Mon compte","Se connecter ou gérer le profil","LANGUE","Se connecter","Saisissez l’adresse e-mail liée à votre compte PETS & DOGUE.","Adresse e-mail","Continuer","Besoin d’aide pour vous connecter ?","ou","Rejoindre PETS & DOGUE Club","En continuant, vous acceptez nos","Conditions","et notre","Politique de confidentialité","Veuillez saisir une adresse e-mail valide.","LE MAGAZINE INTERNATIONAL DE LUXE POUR ANIMAUX"],
 
-es:{
-nav:["Revista","Artículos","Fotos","Estrellas de portada","Marketplace","Lugares"],
-menu:["Inicio","Última edición","Artículos","Fotos","Estrellas de portada","Marketplace","Lugares","Club PETS & DOGUE"],
-account:"Mi cuenta",
-accountText:"Inicia sesión o administra tu perfil",
-language:"IDIOMA",
-title:"Iniciar sesión",
-intro:"Introduce el email asociado a tu cuenta PETS & DOGUE.",
-email:"Correo electrónico",
-continue:"Continuar",
-help:"¿Necesitas ayuda para iniciar sesión?",
-or:"o",
-join:"Unirse a PETS & DOGUE Club",
-legal:"Al continuar, aceptas nuestros",
-terms:"Términos",
-and:"y la",
-privacy:"Política de privacidad",
-error:"Introduce un correo electrónico válido.",
-footer:"La revista internacional de lujo sobre animales"
-},
+de:["Magazin","Artikel","Fotos","Cover Stars","Marktplatz","Orte","Startseite","Neueste Ausgabe","Mein Konto","Anmelden oder Profil verwalten","SPRACHE","Anmelden","Geben Sie die mit Ihrem PETS & DOGUE Konto verbundene E-Mail-Adresse ein.","E-Mail-Adresse","Weiter","Hilfe bei der Anmeldung?","oder","PETS & DOGUE Club beitreten","Wenn Sie fortfahren, stimmen Sie unseren","Bedingungen","und der","Datenschutzrichtlinie","Bitte geben Sie eine gültige E-Mail-Adresse ein.","DAS INTERNATIONALE LUXUS-TIERMAGAZIN"],
 
-it:{
-nav:["Rivista","Articoli","Foto","Star di copertina","Marketplace","Luoghi"],
-menu:["Home","Ultimo numero","Articoli","Foto","Star di copertina","Marketplace","Luoghi","Club PETS & DOGUE"],
-account:"Il mio account",
-accountText:"Accedi o gestisci il tuo profilo",
-language:"LINGUA",
-title:"Accedi",
-intro:"Inserisci l’email collegata al tuo account PETS & DOGUE.",
-email:"Email",
-continue:"Continua",
-help:"Hai bisogno di aiuto per accedere?",
-or:"oppure",
-join:"Entra nel PETS & DOGUE Club",
-legal:"Continuando, accetti i nostri",
-terms:"Termini",
-and:"e la",
-privacy:"Privacy Policy",
-error:"Inserisci un indirizzo email valido.",
-footer:"La rivista internazionale di lusso sugli animali"
-},
+es:["Revista","Artículos","Fotos","Estrellas de portada","Marketplace","Lugares","Inicio","Última edición","Mi cuenta","Inicia sesión o administra tu perfil","IDIOMA","Iniciar sesión","Introduce el email asociado a tu cuenta PETS & DOGUE.","Correo electrónico","Continuar","¿Necesitas ayuda para entrar?","o","Unirse a PETS & DOGUE Club","Al continuar, aceptas nuestros","Términos","y la","Política de privacidad","Introduce un correo electrónico válido.","LA REVISTA INTERNACIONAL DE LUJO SOBRE ANIMALES"],
 
-pt:{
-nav:["Revista","Artigos","Fotos","Estrelas de capa","Marketplace","Locais"],
-menu:["Início","Última edição","Artigos","Fotos","Estrelas de capa","Marketplace","Locais","Clube PETS & DOGUE"],
-account:"A minha conta",
-accountText:"Entre ou faça a gestão do seu perfil",
-language:"IDIOMA",
-title:"Entrar",
-intro:"Introduza o email associado à sua conta PETS & DOGUE.",
-email:"Email",
-continue:"Continuar",
-help:"Precisa de ajuda para entrar?",
-or:"ou",
-join:"Entrar no PETS & DOGUE Club",
-legal:"Ao continuar, concorda com os nossos",
-terms:"Termos",
-and:"e a",
-privacy:"Política de Privacidade",
-error:"Introduza um email válido.",
-footer:"A revista internacional de luxo sobre animais"
-},
+it:["Rivista","Articoli","Foto","Star di copertina","Marketplace","Luoghi","Home","Ultimo numero","Il mio account","Accedi o gestisci il profilo","LINGUA","Accedi","Inserisci l’email collegata al tuo account PETS & DOGUE.","Email","Continua","Hai bisogno di aiuto per accedere?","oppure","Entra nel PETS & DOGUE Club","Continuando, accetti i nostri","Termini","e la","Privacy Policy","Inserisci un indirizzo email valido.","LA RIVISTA INTERNAZIONALE DI LUSSO SUGLI ANIMALI"],
 
-nl:{
-nav:["Magazine","Artikelen","Foto's","Coversterren","Marketplace","Plaatsen"],
-menu:["Home","Laatste editie","Artikelen","Foto's","Coversterren","Marketplace","Plaatsen","PETS & DOGUE Club"],
-account:"Mijn account",
-accountText:"Log in of beheer je profiel",
-language:"TAAL",
-title:"Inloggen",
-intro:"Voer het e-mailadres in dat aan je PETS & DOGUE-account is gekoppeld.",
-email:"E-mailadres",
-continue:"Doorgaan",
-help:"Hulp nodig bij het inloggen?",
-or:"of",
-join:"Word lid van PETS & DOGUE Club",
-legal:"Door verder te gaan ga je akkoord met onze",
-terms:"Voorwaarden",
-and:"en ons",
-privacy:"Privacybeleid",
-error:"Voer een geldig e-mailadres in.",
-footer:"Het internationale luxe dierenmagazine"
-},
+pt:["Revista","Artigos","Fotos","Estrelas de capa","Marketplace","Locais","Início","Última edição","A minha conta","Entrar ou gerir o perfil","IDIOMA","Entrar","Introduza o email associado à sua conta PETS & DOGUE.","Email","Continuar","Precisa de ajuda para entrar?","ou","Entrar no PETS & DOGUE Club","Ao continuar, concorda com os nossos","Termos","e a","Política de Privacidade","Introduza um email válido.","A REVISTA INTERNACIONAL DE LUXO SOBRE ANIMAIS"],
 
-pl:{
-nav:["Magazyn","Artykuły","Zdjęcia","Gwiazdy okładki","Marketplace","Miejsca"],
-menu:["Strona główna","Najnowszy numer","Artykuły","Zdjęcia","Gwiazdy okładki","Marketplace","Miejsca","Klub PETS & DOGUE"],
-account:"Moje konto",
-accountText:"Zaloguj się lub zarządzaj profilem",
-language:"JĘZYK",
-title:"Zaloguj się",
-intro:"Wprowadź e-mail powiązany z kontem PETS & DOGUE.",
-email:"Adres e-mail",
-continue:"Dalej",
-help:"Potrzebujesz pomocy przy logowaniu?",
-or:"lub",
-join:"Dołącz do PETS & DOGUE Club",
-legal:"Kontynuując, akceptujesz nasze",
-terms:"Warunki",
-and:"i",
-privacy:"Politykę prywatności",
-error:"Wprowadź poprawny adres e-mail.",
-footer:"Międzynarodowy luksusowy magazyn o zwierzętach"
-},
+nl:["Magazine","Artikelen","Foto's","Coversterren","Marketplace","Plaatsen","Home","Laatste editie","Mijn account","Log in of beheer je profiel","TAAL","Inloggen","Voer het e-mailadres in dat aan je PETS & DOGUE-account is gekoppeld.","E-mailadres","Doorgaan","Hulp nodig bij het inloggen?","of","Word lid van PETS & DOGUE Club","Door verder te gaan ga je akkoord met onze","Voorwaarden","en ons","Privacybeleid","Voer een geldig e-mailadres in.","HET INTERNATIONALE LUXE DIERENMAGAZINE"],
 
-cs:{
-nav:["Magazín","Články","Fotografie","Hvězdy obálky","Marketplace","Místa"],
-menu:["Domů","Nejnovější vydání","Články","Fotografie","Hvězdy obálky","Marketplace","Místa","Klub PETS & DOGUE"],
-account:"Můj účet",
-accountText:"Přihlaste se nebo spravujte profil",
-language:"JAZYK",
-title:"Přihlásit se",
-intro:"Zadejte e-mail propojený s vaším účtem PETS & DOGUE.",
-email:"E-mail",
-continue:"Pokračovat",
-help:"Potřebujete pomoc s přihlášením?",
-or:"nebo",
-join:"Vstoupit do PETS & DOGUE Club",
-legal:"Pokračováním souhlasíte s našimi",
-terms:"Podmínkami",
-and:"a",
-privacy:"Zásadami ochrany soukromí",
-error:"Zadejte platnou e-mailovou adresu.",
-footer:"Mezinárodní luxusní magazín o zvířatech"
-},
+pl:["Magazyn","Artykuły","Zdjęcia","Gwiazdy okładki","Marketplace","Miejsca","Strona główna","Najnowszy numer","Moje konto","Zaloguj się lub zarządzaj profilem","JĘZYK","Zaloguj się","Wprowadź e-mail powiązany z kontem PETS & DOGUE.","Adres e-mail","Dalej","Potrzebujesz pomocy przy logowaniu?","lub","Dołącz do PETS & DOGUE Club","Kontynuując, akceptujesz nasze","Warunki","i","Politykę prywatności","Wprowadź poprawny adres e-mail.","MIĘDZYNARODOWY LUKSUSOWY MAGAZYN O ZWIERZĘTACH"],
 
-sk:{
-nav:["Magazín","Články","Fotografie","Hviezdy obálky","Marketplace","Miesta"],
-menu:["Domov","Najnovšie vydanie","Články","Fotografie","Hviezdy obálky","Marketplace","Miesta","Klub PETS & DOGUE"],
-account:"Môj účet",
-accountText:"Prihláste sa alebo spravujte profil",
-language:"JAZYK",
-title:"Prihlásiť sa",
-intro:"Zadajte e-mail prepojený s vaším účtom PETS & DOGUE.",
-email:"E-mail",
-continue:"Pokračovať",
-help:"Potrebujete pomoc s prihlásením?",
-or:"alebo",
-join:"Vstúpiť do PETS & DOGUE Club",
-legal:"Pokračovaním súhlasíte s našimi",
-terms:"Podmienkami",
-and:"a",
-privacy:"Zásadami ochrany súkromia",
-error:"Zadajte platnú e-mailovú adresu.",
-footer:"Medzinárodný luxusný magazín o zvieratách"
-},
+cs:["Magazín","Články","Fotografie","Hvězdy obálky","Marketplace","Místa","Domů","Nejnovější vydání","Můj účet","Přihlášení nebo správa profilu","JAZYK","Přihlásit se","Zadejte e-mail propojený s účtem PETS & DOGUE.","E-mail","Pokračovat","Potřebujete pomoc s přihlášením?","nebo","Vstoupit do PETS & DOGUE Club","Pokračováním souhlasíte s našimi","Podmínkami","a","Zásadami ochrany soukromí","Zadejte platnou e-mailovou adresu.","MEZINÁRODNÍ LUXUSNÍ MAGAZÍN O ZVÍŘATECH"],
 
-hu:{
-nav:["Magazin","Cikkek","Fotók","Címlapsztárok","Marketplace","Helyek"],
-menu:["Főoldal","Legújabb szám","Cikkek","Fotók","Címlapsztárok","Marketplace","Helyek","PETS & DOGUE Klub"],
-account:"Fiókom",
-accountText:"Jelentkezzen be vagy kezelje profilját",
-language:"NYELV",
-title:"Bejelentkezés",
-intro:"Adja meg a PETS & DOGUE-fiókjához tartozó e-mail-címet.",
-email:"E-mail-cím",
-continue:"Tovább",
-help:"Segítségre van szüksége?",
-or:"vagy",
-join:"Csatlakozás a PETS & DOGUE Clubhoz",
-legal:"A folytatással elfogadja a",
-terms:"Feltételeket",
-and:"és az",
-privacy:"Adatvédelmi irányelveket",
-error:"Adjon meg érvényes e-mail-címet.",
-footer:"Nemzetközi luxus állatmagazin"
-},
+sk:["Magazín","Články","Fotografie","Hviezdy obálky","Marketplace","Miesta","Domov","Najnovšie vydanie","Môj účet","Prihlásenie alebo správa profilu","JAZYK","Prihlásiť sa","Zadajte e-mail prepojený s účtom PETS & DOGUE.","E-mail","Pokračovať","Potrebujete pomoc s prihlásením?","alebo","Vstúpiť do PETS & DOGUE Club","Pokračovaním súhlasíte s našimi","Podmienkami","a","Zásadami ochrany súkromia","Zadajte platnú e-mailovú adresu.","MEDZINÁRODNÝ LUXUSNÝ MAGAZÍN O ZVIERATÁCH"],
 
-ro:{
-nav:["Revistă","Articole","Fotografii","Vedete de copertă","Marketplace","Locuri"],
-menu:["Acasă","Ultimul număr","Articole","Fotografii","Vedete de copertă","Marketplace","Locuri","Club PETS & DOGUE"],
-account:"Contul meu",
-accountText:"Autentifică-te sau gestionează profilul",
-language:"LIMBĂ",
-title:"Autentificare",
-intro:"Introduceți emailul asociat contului PETS & DOGUE.",
-email:"Adresă de email",
-continue:"Continuă",
-help:"Aveți nevoie de ajutor pentru autentificare?",
-or:"sau",
-join:"Alăturați-vă PETS & DOGUE Club",
-legal:"Continuând, sunteți de acord cu",
-terms:"Termenii",
-and:"și",
-privacy:"Politica de confidențialitate",
-error:"Introduceți o adresă de email validă.",
-footer:"Revista internațională de lux despre animale"
-},
+hu:["Magazin","Cikkek","Fotók","Címlapsztárok","Marketplace","Helyek","Főoldal","Legújabb szám","Fiókom","Bejelentkezés vagy profilkezelés","NYELV","Bejelentkezés","Adja meg a PETS & DOGUE-fiókjához tartozó e-mail-címet.","E-mail-cím","Tovább","Segítségre van szüksége?","vagy","Csatlakozás a PETS & DOGUE Clubhoz","A folytatással elfogadja a","Feltételeket","és az","Adatvédelmi irányelveket","Adjon meg érvényes e-mail-címet.","NEMZETKÖZI LUXUS ÁLLATMAGAZIN"],
 
-bg:{
-nav:["Списание","Статии","Снимки","Звезди на корицата","Маркетплейс","Места"],
-menu:["Начало","Последен брой","Статии","Снимки","Звезди на корицата","Маркетплейс","Места","Клуб PETS & DOGUE"],
-account:"Моят профил",
-accountText:"Влезте или управлявайте профила си",
-language:"ЕЗИК",
-title:"Вход",
-intro:"Въведете имейла, свързан с вашия PETS & DOGUE акаунт.",
-email:"Имейл адрес",
-continue:"Продължи",
-help:"Нуждаете се от помощ при вход?",
-or:"или",
-join:"Присъединете се към PETS & DOGUE Club",
-legal:"Продължавайки, приемате нашите",
-terms:"Условия",
-and:"и",
-privacy:"Политика за поверителност",
-error:"Въведете валиден имейл адрес.",
-footer:"Международното луксозно списание за животни"
-},
+ro:["Revistă","Articole","Fotografii","Vedete de copertă","Marketplace","Locuri","Acasă","Ultimul număr","Contul meu","Autentificare sau administrare profil","LIMBĂ","Autentificare","Introduceți emailul asociat contului PETS & DOGUE.","Adresă de email","Continuă","Aveți nevoie de ajutor?","sau","Alăturați-vă PETS & DOGUE Club","Continuând, sunteți de acord cu","Termenii","și","Politica de confidențialitate","Introduceți o adresă de email validă.","REVISTA INTERNAȚIONALĂ DE LUX DESPRE ANIMALE"],
 
-el:{
-nav:["Περιοδικό","Άρθρα","Φωτογραφίες","Cover Stars","Marketplace","Μέρη"],
-menu:["Αρχική","Τελευταίο τεύχος","Άρθρα","Φωτογραφίες","Cover Stars","Marketplace","Μέρη","PETS & DOGUE Club"],
-account:"Ο λογαριασμός μου",
-accountText:"Συνδεθείτε ή διαχειριστείτε το προφίλ σας",
-language:"ΓΛΩΣΣΑ",
-title:"Σύνδεση",
-intro:"Εισαγάγετε το email που συνδέεται με τον λογαριασμό PETS & DOGUE.",
-email:"Email",
-continue:"Συνέχεια",
-help:"Χρειάζεστε βοήθεια με τη σύνδεση;",
-or:"ή",
-join:"Εγγραφή στο PETS & DOGUE Club",
-legal:"Συνεχίζοντας, συμφωνείτε με τους",
-terms:"Όρους",
-and:"και την",
-privacy:"Πολιτική Απορρήτου",
-error:"Εισαγάγετε έγκυρη διεύθυνση email.",
-footer:"Το διεθνές πολυτελές περιοδικό για ζώα"
-}, const accountTranslations={
+bg:["Списание","Статии","Снимки","Звезди на корицата","Маркетплейс","Места","Начало","Последен брой","Моят профил","Вход или управление на профила","ЕЗИК","Вход","Въведете имейла, свързан с вашия PETS & DOGUE акаунт.","Имейл адрес","Продължи","Нуждаете се от помощ?","или","Присъединете се към PETS & DOGUE Club","Продължавайки, приемате нашите","Условия","и","Политика за поверителност","Въведете валиден имейл адрес.","МЕЖДУНАРОДНОТО ЛУКСОЗНО СПИСАНИЕ ЗА ЖИВОТНИ"],
 
-en:{
-nav:["Magazine","Articles","Photos","Cover Stars","Marketplace","Places"],
-menu:["Home","Latest Issue","Articles","Photos","Cover Stars","Marketplace","Places","PETS & DOGUE Club"],
-account:"My Account",
-accountText:"Sign in or manage your profile",
-language:"LANGUAGE",
-title:"Sign in",
-intro:"Enter the email connected to your PETS & DOGUE account.",
-email:"Email address",
-continue:"Continue",
-help:"Need help signing in?",
-or:"or",
-join:"Join PETS & DOGUE Club",
-legal:"By continuing, you agree to our",
-terms:"Terms",
-and:"and",
-privacy:"Privacy Policy",
-error:"Please enter a valid email address.",
-footer:"The International Luxury Animal Magazine"
-},
+el:["Περιοδικό","Άρθρα","Φωτογραφίες","Cover Stars","Marketplace","Μέρη","Αρχική","Τελευταίο τεύχος","Ο λογαριασμός μου","Σύνδεση ή διαχείριση προφίλ","ΓΛΩΣΣΑ","Σύνδεση","Εισαγάγετε το email που συνδέεται με τον λογαριασμό PETS & DOGUE.","Email","Συνέχεια","Χρειάζεστε βοήθεια;","ή","Εγγραφή στο PETS & DOGUE Club","Συνεχίζοντας, συμφωνείτε με τους","Όρους","και την","Πολιτική Απορρήτου","Εισαγάγετε έγκυρη διεύθυνση email.","ΤΟ ΔΙΕΘΝΕΣ ΠΟΛΥΤΕΛΕΣ ΠΕΡΙΟΔΙΚΟ ΓΙΑ ΖΩΑ"],
 
-ru:{
-nav:["Журнал","Статьи","Фото","Звёзды обложки","Маркетплейс","Места"],
-menu:["Главная","Последний выпуск","Статьи","Фото","Звёзды обложки","Маркетплейс","Места","Клуб PETS & DOGUE"],
-account:"Мой профиль",
-accountText:"Войти или управлять профилем",
-language:"ЯЗЫК",
-title:"Войти",
-intro:"Введите email, связанный с вашим аккаунтом PETS & DOGUE.",
-email:"Email адрес",
-continue:"Продолжить",
-help:"Нужна помощь со входом?",
-or:"или",
-join:"Вступить в PETS & DOGUE Club",
-legal:"Продолжая, вы соглашаетесь с",
-terms:"Условиями",
-and:"и",
-privacy:"Политикой конфиденциальности",
-error:"Введите правильный email адрес.",
-footer:"Международный журнал класса люкс о животных"
-},
+sv:["Magasin","Artiklar","Foton","Omslagsstjärnor","Marketplace","Platser","Hem","Senaste numret","Mitt konto","Logga in eller hantera din profil","SPRÅK","Logga in","Ange e-postadressen som är kopplad till ditt PETS & DOGUE-konto.","E-postadress","Fortsätt","Behöver du hjälp med att logga in?","eller","Gå med i PETS & DOGUE Club","Genom att fortsätta godkänner du våra","Villkor","och vår","Integritetspolicy","Ange en giltig e-postadress.","DET INTERNATIONELLA LYXIGA DJURMAGASINET"],
 
-uk:{
-nav:["Журнал","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця"],
-menu:["Головна","Останній випуск","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця","Клуб PETS & DOGUE"],
-account:"Мій профіль",
-accountText:"Увійти або керувати профілем",
-language:"МОВА",
-title:"Увійти",
-intro:"Введіть email, пов’язаний із вашим акаунтом PETS & DOGUE.",
-email:"Email адреса",
-continue:"Продовжити",
-help:"Потрібна допомога зі входом?",
-or:"або",
-join:"Приєднатися до PETS & DOGUE Club",
-legal:"Продовжуючи, ви погоджуєтесь з",
-terms:"Умовами",
-and:"та",
-privacy:"Політикою конфіденційності",
-error:"Введіть правильну email адресу.",
-footer:"Міжнародний журнал класу люкс про тварин"
-},
+da:["Magasin","Artikler","Fotos","Forsidestjerner","Marketplace","Steder","Hjem","Seneste nummer","Min konto","Log ind eller administrer din profil","SPROG","Log ind","Indtast e-mailen til din PETS & DOGUE-konto.","E-mail","Fortsæt","Brug for hjælp?","eller","Bliv medlem af PETS & DOGUE Club","Ved at fortsætte accepterer du vores","Vilkår","og","Privatlivspolitik","Indtast en gyldig e-mailadresse.","DET INTERNATIONALE LUKSUSMAGASIN OM DYR"],
 
-fr:{
-nav:["Magazine","Articles","Photos","Stars de couverture","Marketplace","Lieux"],
-menu:["Accueil","Dernier numéro","Articles","Photos","Stars de couverture","Marketplace","Lieux","Club PETS & DOGUE"],
-account:"Mon compte",
-accountText:"Connectez-vous ou gérez votre profil",
-language:"LANGUE",
-title:"Se connecter",
-intro:"Saisissez l’adresse e-mail liée à votre compte PETS & DOGUE.",
-email:"Adresse e-mail",
-continue:"Continuer",
-help:"Besoin d’aide pour vous connecter ?",
-or:"ou",
-join:"Rejoindre PETS & DOGUE Club",
-legal:"En continuant, vous acceptez nos",
-terms:"Conditions",
-and:"et notre",
-privacy:"Politique de confidentialité",
-error:"Veuillez saisir une adresse e-mail valide.",
-footer:"Le magazine international de luxe pour animaux"
-},
+no:["Magasin","Artikler","Bilder","Forsidestjerner","Marketplace","Steder","Hjem","Siste utgave","Min konto","Logg inn eller administrer profilen din","SPRÅK","Logg inn","Skriv inn e-posten knyttet til PETS & DOGUE-kontoen.","E-postadresse","Fortsett","Trenger du hjelp?","eller","Bli med i PETS & DOGUE Club","Ved å fortsette godtar du våre","Vilkår","og vår","Personvernpolicy","Skriv inn en gyldig e-postadresse.","DET INTERNASJONALE LUKSUSMAGASINET OM DYR"],
 
-de:{
-nav:["Magazin","Artikel","Fotos","Cover Stars","Marktplatz","Orte"],
-menu:["Startseite","Neueste Ausgabe","Artikel","Fotos","Cover Stars","Marktplatz","Orte","PETS & DOGUE Club"],
-account:"Mein Konto",
-accountText:"Anmelden oder Profil verwalten",
-language:"SPRACHE",
-title:"Anmelden",
-intro:"Geben Sie die E-Mail-Adresse ein, die mit Ihrem PETS & DOGUE Konto verbunden ist.",
-email:"E-Mail-Adresse",
-continue:"Weiter",
-help:"Brauchen Sie Hilfe bei der Anmeldung?",
-or:"oder",
-join:"PETS & DOGUE Club beitreten",
-legal:"Wenn Sie fortfahren, stimmen Sie unseren",
-terms:"Bedingungen",
-and:"und der",
-privacy:"Datenschutzrichtlinie",
-error:"Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-footer:"Das internationale Luxus-Tiermagazin"
-},
+fi:["Lehti","Artikkelit","Kuvat","Kansitähdet","Marketplace","Paikat","Koti","Uusin numero","Oma tili","Kirjaudu tai hallitse profiilia","KIELI","Kirjaudu","Anna PETS & DOGUE -tiliisi liitetty sähköposti.","Sähköpostiosoite","Jatka","Tarvitsetko apua?","tai","Liity PETS & DOGUE Clubiin","Jatkamalla hyväksyt","Käyttöehdot","ja","Tietosuojakäytännön","Anna kelvollinen sähköpostiosoite.","KANSAINVÄLINEN LUKSUSLEHTI ELÄIMISTÄ"],
 
-es:{
-nav:["Revista","Artículos","Fotos","Estrellas de portada","Marketplace","Lugares"],
-menu:["Inicio","Última edición","Artículos","Fotos","Estrellas de portada","Marketplace","Lugares","Club PETS & DOGUE"],
-account:"Mi cuenta",
-accountText:"Inicia sesión o administra tu perfil",
-language:"IDIOMA",
-title:"Iniciar sesión",
-intro:"Introduce el email asociado a tu cuenta PETS & DOGUE.",
-email:"Correo electrónico",
-continue:"Continuar",
-help:"¿Necesitas ayuda para iniciar sesión?",
-or:"o",
-join:"Unirse a PETS & DOGUE Club",
-legal:"Al continuar, aceptas nuestros",
-terms:"Términos",
-and:"y la",
-privacy:"Política de privacidad",
-error:"Introduce un correo electrónico válido.",
-footer:"La revista internacional de lujo sobre animales"
-},
+tr:["Dergi","Makaleler","Fotoğraflar","Kapak Yıldızları","Marketplace","Mekanlar","Ana Sayfa","Son Sayı","Hesabım","Giriş yap veya profilinizi yönetin","DİL","Giriş yap","PETS & DOGUE hesabınıza bağlı e-postayı girin.","E-posta adresi","Devam","Giriş için yardıma mı ihtiyacınız var?","veya","PETS & DOGUE Club'a katıl","Devam ederek","Şartları","ve","Gizlilik Politikasını","Geçerli bir e-posta adresi girin.","ULUSLARARASI LÜKS HAYVAN DERGİSİ"],
 
-it:{
-nav:["Rivista","Articoli","Foto","Star di copertina","Marketplace","Luoghi"],
-menu:["Home","Ultimo numero","Articoli","Foto","Star di copertina","Marketplace","Luoghi","Club PETS & DOGUE"],
-account:"Il mio account",
-accountText:"Accedi o gestisci il tuo profilo",
-language:"LINGUA",
-title:"Accedi",
-intro:"Inserisci l’email collegata al tuo account PETS & DOGUE.",
-email:"Email",
-continue:"Continua",
-help:"Hai bisogno di aiuto per accedere?",
-or:"oppure",
-join:"Entra nel PETS & DOGUE Club",
-legal:"Continuando, accetti i nostri",
-terms:"Termini",
-and:"e la",
-privacy:"Privacy Policy",
-error:"Inserisci un indirizzo email valido.",
-footer:"La rivista internazionale di lusso sugli animali"
-},
+ar:["المجلة","المقالات","الصور","نجوم الغلاف","السوق","الأماكن","الرئيسية","العدد الأخير","حسابي","تسجيل الدخول أو إدارة الملف الشخصي","اللغة","تسجيل الدخول","أدخل البريد الإلكتروني المرتبط بحساب PETS & DOGUE.","البريد الإلكتروني","متابعة","هل تحتاج إلى مساعدة؟","أو","انضم إلى PETS & DOGUE Club","بالمتابعة، فإنك توافق على","الشروط","و","سياسة الخصوصية","يرجى إدخال بريد إلكتروني صالح.","المجلة الدولية الفاخرة للحيوانات"],
 
-pt:{
-nav:["Revista","Artigos","Fotos","Estrelas de capa","Marketplace","Locais"],
-menu:["Início","Última edição","Artigos","Fotos","Estrelas de capa","Marketplace","Locais","Clube PETS & DOGUE"],
-account:"A minha conta",
-accountText:"Entre ou faça a gestão do seu perfil",
-language:"IDIOMA",
-title:"Entrar",
-intro:"Introduza o email associado à sua conta PETS & DOGUE.",
-email:"Email",
-continue:"Continuar",
-help:"Precisa de ajuda para entrar?",
-or:"ou",
-join:"Entrar no PETS & DOGUE Club",
-legal:"Ao continuar, concorda com os nossos",
-terms:"Termos",
-and:"e a",
-privacy:"Política de Privacidade",
-error:"Introduza um email válido.",
-footer:"A revista internacional de luxo sobre animais"
-},
-
-nl:{
-nav:["Magazine","Artikelen","Foto's","Coversterren","Marketplace","Plaatsen"],
-menu:["Home","Laatste editie","Artikelen","Foto's","Coversterren","Marketplace","Plaatsen","PETS & DOGUE Club"],
-account:"Mijn account",
-accountText:"Log in of beheer je profiel",
-language:"TAAL",
-title:"Inloggen",
-intro:"Voer het e-mailadres in dat aan je PETS & DOGUE-account is gekoppeld.",
-email:"E-mailadres",
-continue:"Doorgaan",
-help:"Hulp nodig bij het inloggen?",
-or:"of",
-join:"Word lid van PETS & DOGUE Club",
-legal:"Door verder te gaan ga je akkoord met onze",
-terms:"Voorwaarden",
-and:"en ons",
-privacy:"Privacybeleid",
-error:"Voer een geldig e-mailadres in.",
-footer:"Het internationale luxe dierenmagazine"
-},
-
-pl:{
-nav:["Magazyn","Artykuły","Zdjęcia","Gwiazdy okładki","Marketplace","Miejsca"],
-menu:["Strona główna","Najnowszy numer","Artykuły","Zdjęcia","Gwiazdy okładki","Marketplace","Miejsca","Klub PETS & DOGUE"],
-account:"Moje konto",
-accountText:"Zaloguj się lub zarządzaj profilem",
-language:"JĘZYK",
-title:"Zaloguj się",
-intro:"Wprowadź e-mail powiązany z kontem PETS & DOGUE.",
-email:"Adres e-mail",
-continue:"Dalej",
-help:"Potrzebujesz pomocy przy logowaniu?",
-or:"lub",
-join:"Dołącz do PETS & DOGUE Club",
-legal:"Kontynuując, akceptujesz nasze",
-terms:"Warunki",
-and:"i",
-privacy:"Politykę prywatności",
-error:"Wprowadź poprawny adres e-mail.",
-footer:"Międzynarodowy luksusowy magazyn o zwierzętach"
-},
-
-cs:{
-nav:["Magazín","Články","Fotografie","Hvězdy obálky","Marketplace","Místa"],
-menu:["Domů","Nejnovější vydání","Články","Fotografie","Hvězdy obálky","Marketplace","Místa","Klub PETS & DOGUE"],
-account:"Můj účet",
-accountText:"Přihlaste se nebo spravujte profil",
-language:"JAZYK",
-title:"Přihlásit se",
-intro:"Zadejte e-mail propojený s vaším účtem PETS & DOGUE.",
-email:"E-mail",
-continue:"Pokračovat",
-help:"Potřebujete pomoc s přihlášením?",
-or:"nebo",
-join:"Vstoupit do PETS & DOGUE Club",
-legal:"Pokračováním souhlasíte s našimi",
-terms:"Podmínkami",
-and:"a",
-privacy:"Zásadami ochrany soukromí",
-error:"Zadejte platnou e-mailovou adresu.",
-footer:"Mezinárodní luxusní magazín o zvířatech"
-},
-
-sk:{
-nav:["Magazín","Články","Fotografie","Hviezdy obálky","Marketplace","Miesta"],
-menu:["Domov","Najnovšie vydanie","Články","Fotografie","Hviezdy obálky","Marketplace","Miesta","Klub PETS & DOGUE"],
-account:"Môj účet",
-accountText:"Prihláste sa alebo spravujte profil",
-language:"JAZYK",
-title:"Prihlásiť sa",
-intro:"Zadajte e-mail prepojený s vaším účtom PETS & DOGUE.",
-email:"E-mail",
-continue:"Pokračovať",
-help:"Potrebujete pomoc s prihlásením?",
-or:"alebo",
-join:"Vstúpiť do PETS & DOGUE Club",
-legal:"Pokračovaním súhlasíte s našimi",
-terms:"Podmienkami",
-and:"a",
-privacy:"Zásadami ochrany súkromia",
-error:"Zadajte platnú e-mailovú adresu.",
-footer:"Medzinárodný luxusný magazín o zvieratách"
-},
-
-hu:{
-nav:["Magazin","Cikkek","Fotók","Címlapsztárok","Marketplace","Helyek"],
-menu:["Főoldal","Legújabb szám","Cikkek","Fotók","Címlapsztárok","Marketplace","Helyek","PETS & DOGUE Klub"],
-account:"Fiókom",
-accountText:"Jelentkezzen be vagy kezelje profilját",
-language:"NYELV",
-title:"Bejelentkezés",
-intro:"Adja meg a PETS & DOGUE-fiókjához tartozó e-mail-címet.",
-email:"E-mail-cím",
-continue:"Tovább",
-help:"Segítségre van szüksége?",
-or:"vagy",
-join:"Csatlakozás a PETS & DOGUE Clubhoz",
-legal:"A folytatással elfogadja a",
-terms:"Feltételeket",
-and:"és az",
-privacy:"Adatvédelmi irányelveket",
-error:"Adjon meg érvényes e-mail-címet.",
-footer:"Nemzetközi luxus állatmagazin"
-},
-
-ro:{
-nav:["Revistă","Articole","Fotografii","Vedete de copertă","Marketplace","Locuri"],
-menu:["Acasă","Ultimul număr","Articole","Fotografii","Vedete de copertă","Marketplace","Locuri","Club PETS & DOGUE"],
-account:"Contul meu",
-accountText:"Autentifică-te sau gestionează profilul",
-language:"LIMBĂ",
-title:"Autentificare",
-intro:"Introduceți emailul asociat contului PETS & DOGUE.",
-email:"Adresă de email",
-continue:"Continuă",
-help:"Aveți nevoie de ajutor pentru autentificare?",
-or:"sau",
-join:"Alăturați-vă PETS & DOGUE Club",
-legal:"Continuând, sunteți de acord cu",
-terms:"Termenii",
-and:"și",
-privacy:"Politica de confidențialitate",
-error:"Introduceți o adresă de email validă.",
-footer:"Revista internațională de lux despre animale"
-},
-
-bg:{
-nav:["Списание","Статии","Снимки","Звезди на корицата","Маркетплейс","Места"],
-menu:["Начало","Последен брой","Статии","Снимки","Звезди на корицата","Маркетплейс","Места","Клуб PETS & DOGUE"],
-account:"Моят профил",
-accountText:"Влезте или управлявайте профила си",
-language:"ЕЗИК",
-title:"Вход",
-intro:"Въведете имейла, свързан с вашия PETS & DOGUE акаунт.",
-email:"Имейл адрес",
-continue:"Продължи",
-help:"Нуждаете се от помощ при вход?",
-or:"или",
-join:"Присъединете се към PETS & DOGUE Club",
-legal:"Продължавайки, приемате нашите",
-terms:"Условия",
-and:"и",
-privacy:"Политика за поверителност",
-error:"Въведете валиден имейл адрес.",
-footer:"Международното луксозно списание за животни"
-},
-
-el:{
-nav:["Περιοδικό","Άρθρα","Φωτογραφίες","Cover Stars","Marketplace","Μέρη"],
-menu:["Αρχική","Τελευταίο τεύχος","Άρθρα","Φωτογραφίες","Cover Stars","Marketplace","Μέρη","PETS & DOGUE Club"],
-account:"Ο λογαριασμός μου",
-accountText:"Συνδεθείτε ή διαχειριστείτε το προφίλ σας",
-language:"ΓΛΩΣΣΑ",
-title:"Σύνδεση",
-intro:"Εισαγάγετε το email που συνδέεται με τον λογαριασμό PETS & DOGUE.",
-email:"Email",
-continue:"Συνέχεια",
-help:"Χρειάζεστε βοήθεια με τη σύνδεση;",
-or:"ή",
-join:"Εγγραφή στο PETS & DOGUE Club",
-legal:"Συνεχίζοντας, συμφωνείτε με τους",
-terms:"Όρους",
-and:"και την",
-privacy:"Πολιτική Απορρήτου",
-error:"Εισαγάγετε έγκυρη διεύθυνση email.",
-footer:"Το διεθνές πολυτελές περιοδικό για ζώα"
-},sv:{
-nav:["Magasin","Artiklar","Foton","Omslagsstjärnor","Marketplace","Platser"],
-menu:["Hem","Senaste numret","Artiklar","Foton","Omslagsstjärnor","Marketplace","Platser","PETS & DOGUE Club"],
-account:"Mitt konto",
-accountText:"Logga in eller hantera din profil",
-language:"SPRÅK",
-title:"Logga in",
-intro:"Ange e-postadressen som är kopplad till ditt PETS & DOGUE-konto.",
-email:"E-postadress",
-continue:"Fortsätt",
-help:"Behöver du hjälp med att logga in?",
-or:"eller",
-join:"Gå med i PETS & DOGUE Club",
-legal:"Genom att fortsätta godkänner du våra",
-terms:"Villkor",
-and:"och vår",
-privacy:"Integritetspolicy",
-error:"Ange en giltig e-postadress.",
-footer:"Det internationella lyxiga djurmagasinet"
-},
-
-da:{
-nav:["Magasin","Artikler","Fotos","Forsidestjerner","Marketplace","Steder"],
-menu:["Hjem","Seneste nummer","Artikler","Fotos","Forsidestjerner","Marketplace","Steder","PETS & DOGUE Club"],
-account:"Min konto",
-accountText:"Log ind eller administrer din profil",
-language:"SPROG",
-title:"Log ind",
-intro:"Indtast den e-mailadresse, der er knyttet til din PETS & DOGUE-konto.",
-email:"E-mailadresse",
-continue:"Fortsæt",
-help:"Brug for hjælp til login?",
-or:"eller",
-join:"Bliv medlem af PETS & DOGUE Club",
-legal:"Ved at fortsætte accepterer du vores",
-terms:"Vilkår",
-and:"og",
-privacy:"Privatlivspolitik",
-error:"Indtast en gyldig e-mailadresse.",
-footer:"Det internationale luksusmagasin om dyr"
-},
-
-no:{
-nav:["Magasin","Artikler","Bilder","Forsidestjerner","Marketplace","Steder"],
-menu:["Hjem","Siste utgave","Artikler","Bilder","Forsidestjerner","Marketplace","Steder","PETS & DOGUE Club"],
-account:"Min konto",
-accountText:"Logg inn eller administrer profilen din",
-language:"SPRÅK",
-title:"Logg inn",
-intro:"Skriv inn e-postadressen som er knyttet til PETS & DOGUE-kontoen din.",
-email:"E-postadresse",
-continue:"Fortsett",
-help:"Trenger du hjelp med innlogging?",
-or:"eller",
-join:"Bli med i PETS & DOGUE Club",
-legal:"Ved å fortsette godtar du våre",
-terms:"Vilkår",
-and:"og vår",
-privacy:"Personvernpolicy",
-error:"Skriv inn en gyldig e-postadresse.",
-footer:"Det internasjonale luksusmagasinet om dyr"
-},
-
-fi:{
-nav:["Lehti","Artikkelit","Kuvat","Kansitähdet","Marketplace","Paikat"],
-menu:["Koti","Uusin numero","Artikkelit","Kuvat","Kansitähdet","Marketplace","Paikat","PETS & DOGUE Club"],
-account:"Oma tili",
-accountText:"Kirjaudu sisään tai hallitse profiiliasi",
-language:"KIELI",
-title:"Kirjaudu",
-intro:"Anna PETS & DOGUE -tiliisi liitetty sähköpostiosoite.",
-email:"Sähköpostiosoite",
-continue:"Jatka",
-help:"Tarvitsetko apua kirjautumiseen?",
-or:"tai",
-join:"Liity PETS & DOGUE Clubiin",
-legal:"Jatkamalla hyväksyt",
-terms:"Käyttöehdot",
-and:"ja",
-privacy:"Tietosuojakäytännön",
-error:"Anna kelvollinen sähköpostiosoite.",
-footer:"Kansainvälinen luksuslehti eläimistä"
-},
-
-tr:{
-nav:["Dergi","Makaleler","Fotoğraflar","Kapak Yıldızları","Marketplace","Mekanlar"],
-menu:["Ana Sayfa","Son Sayı","Makaleler","Fotoğraflar","Kapak Yıldızları","Marketplace","Mekanlar","PETS & DOGUE Club"],
-account:"Hesabım",
-accountText:"Giriş yapın veya profilinizi yönetin",
-language:"DİL",
-title:"Giriş yap",
-intro:"PETS & DOGUE hesabınıza bağlı e-posta adresini girin.",
-email:"E-posta adresi",
-continue:"Devam",
-help:"Giriş yaparken yardıma mı ihtiyacınız var?",
-or:"veya",
-join:"PETS & DOGUE Club'a katıl",
-legal:"Devam ederek",
-terms:"Şartları",
-and:"ve",
-privacy:"Gizlilik Politikasını",
-error:"Geçerli bir e-posta adresi girin.",
-footer:"Uluslararası lüks hayvan dergisi"
-},
-
-ar:{
-nav:["المجلة","المقالات","الصور","نجوم الغلاف","السوق","الأماكن"],
-menu:["الرئيسية","العدد الأخير","المقالات","الصور","نجوم الغلاف","السوق","الأماكن","نادي PETS & DOGUE"],
-account:"حسابي",
-accountText:"سجّل الدخول أو أدِر ملفك الشخصي",
-language:"اللغة",
-title:"تسجيل الدخول",
-intro:"أدخل البريد الإلكتروني المرتبط بحساب PETS & DOGUE.",
-email:"البريد الإلكتروني",
-continue:"متابعة",
-help:"هل تحتاج إلى مساعدة في تسجيل الدخول؟",
-or:"أو",
-join:"انضم إلى PETS & DOGUE Club",
-legal:"بالمتابعة، فإنك توافق على",
-terms:"الشروط",
-and:"و",
-privacy:"سياسة الخصوصية",
-error:"يرجى إدخال بريد إلكتروني صالح.",
-footer:"المجلة الدولية الفاخرة للحيوانات"
-},
-
-hi:{
-nav:["पत्रिका","लेख","फ़ोटो","कवर स्टार","मार्केटप्लेस","स्थान"],
-menu:["होम","नवीनतम अंक","लेख","फ़ोटो","कवर स्टार","मार्केटप्लेस","स्थान","PETS & DOGUE Club"],
-account:"मेरा खाता",
-accountText:"साइन इन करें या अपना प्रोफ़ाइल प्रबंधित करें",
-language:"भाषा",
-title:"साइन इन",
-intro:"अपने PETS & DOGUE खाते से जुड़ा ईमेल पता दर्ज करें।",
-email:"ईमेल पता",
-continue:"जारी रखें",
-help:"साइन इन में मदद चाहिए?",
-or:"या",
-join:"PETS & DOGUE Club में शामिल हों",
-legal:"जारी रखते हुए, आप हमारी",
-terms:"शर्तों",
-and:"और",
-privacy:"गोपनीयता नीति",
-error:"कृपया मान्य ईमेल पता दर्ज करें।",
-footer:"जानवरों की अंतरराष्ट्रीय लग्ज़री पत्रिका"
-}
-
+hi:["पत्रिका","लेख","फ़ोटो","कवर स्टार","मार्केटप्लेस","स्थान","होम","नवीनतम अंक","मेरा खाता","साइन इन करें या प्रोफ़ाइल प्रबंधित करें","भाषा","साइन इन","अपने PETS & DOGUE खाते से जुड़ा ईमेल दर्ज करें।","ईमेल पता","जारी रखें","साइन इन में मदद चाहिए?","या","PETS & DOGUE Club में शामिल हों","जारी रखते हुए, आप हमारी","शर्तों","और","गोपनीयता नीति","कृपया मान्य ईमेल पता दर्ज करें।","जानवरों की अंतरराष्ट्रीय लग्ज़री पत्रिका"]
 };
 
 function setText(id,value){
@@ -1614,23 +755,81 @@ const el=document.getElementById(id);
 if(el)el.textContent=value;
 }
 
-function openMenu(){
-document.getElementById("sideMenu").classList.add("open");
-document.getElementById("menuOverlay").classList.add("show");
-document.body.classList.add("menu-open");
+function applyLanguage(code){
+
+if(!ACCOUNT_TEXT[code]){
+code="en";
 }
 
-function closeMenu(){
-document.getElementById("sideMenu").classList.remove("open");
-document.getElementById("menuOverlay").classList.remove("show");
-document.body.classList.remove("menu-open");
+PDI18N.setLanguage(code);
+
+const x=ACCOUNT_TEXT[code];
+
+const navIds=[
+"navMagazine","navArticles","navPhotos",
+"navStars","navMarketplace","navPlaces"
+];
+
+navIds.forEach((id,i)=>setText(id,x[i]));
+
+setText("menuHome",x[6]);
+setText("menuIssue",x[7]);
+setText("menuArticles",x[1]);
+setText("menuPhotos",x[2]);
+setText("menuStars",x[3]);
+setText("menuMarketplace",x[4]);
+setText("menuPlaces",x[5]);
+setText("menuClub","PETS & DOGUE Club");
+
+setText("menuAccountTitle",x[8]);
+setText("menuAccountText",x[9]);
+setText("languageLabel",x[10]);
+
+setText("signInTitle",x[11]);
+setText("signInIntro",x[12]);
+setText("emailLabel",x[13]);
+setText("continueButton",x[14]);
+setText("helpLink",x[15]);
+setText("dividerText",x[16]);
+setText("joinClubButton",x[17]);
+setText("legalStart",x[18]);
+setText("termsLink",x[19]);
+setText("legalAnd",x[20]);
+setText("privacyLink",x[21]);
+setText("emailError",x[22]);
+setText("footerText",x[23]);
+
+document.getElementById("languageSelect").value=code;
 }
 
 function validEmail(value){
 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function continueSignIn(event){
+function openMenu(){
+sideMenu.classList.add("open");
+menuOverlay.classList.add("show");
+document.body.classList.add("locked");
+}
+
+function closeMenu(){
+sideMenu.classList.remove("open");
+menuOverlay.classList.remove("show");
+document.body.classList.remove("locked");
+}
+
+const sideMenu=document.getElementById("sideMenu");
+const menuOverlay=document.getElementById("menuOverlay");
+
+document.getElementById("menuOpen").addEventListener("click",openMenu);
+document.getElementById("menuClose").addEventListener("click",closeMenu);
+menuOverlay.addEventListener("click",closeMenu);
+
+document.getElementById("languageSelect").addEventListener("change",function(){
+applyLanguage(this.value);
+});
+
+document.getElementById("signInForm").addEventListener("submit",function(event){
 
 event.preventDefault();
 
@@ -1638,6 +837,7 @@ const input=document.getElementById("accountEmail");
 const wrap=document.getElementById("emailWrap");
 
 if(!validEmail(input.value.trim())){
+
 wrap.classList.add("error");
 input.focus();
 return;
@@ -1650,489 +850,31 @@ localStorage.setItem(
 input.value.trim()
 );
 
-window.location.href="profile.html";
-}
+location.href="profile.html";
+});
 
-document
-.getElementById("accountEmail")
-.addEventListener("input",function(){
+document.getElementById("accountEmail").addEventListener("input",function(){
 
 if(validEmail(this.value.trim())){
 document.getElementById("emailWrap").classList.remove("error");
 }
-
 });
 
-function getSavedLanguage(){
+window.addEventListener("petsdogue:languagechange",function(event){
 
-const primary=
-localStorage.getItem(LANG_STORAGE_KEY);
+const code=event.detail && event.detail.language;
 
-const legacy=
-localStorage.getItem(FALLBACK_LANG_STORAGE_KEY);
-
-return primary||legacy||"en";
-}
-
-function applyLanguage(code){
-
-if(!accountTranslations[code]){
-code="en";
-}
-
-const t=accountTranslations[code];
-
-document.documentElement.lang=code;
-document.documentElement.dir=
-code==="ar"
-?"rtl"
-:"ltr";
-
-localStorage.setItem(
-LANG_STORAGE_KEY,
-code
-);
-
-localStorage.setItem(
-FALLBACK_LANG_STORAGE_KEY,
-code
-);
-
-const languageSelect=
-document.getElementById("languageSelect");
-
-if(languageSelect){
-languageSelect.value=code;
-}
-
-const navIds=[
-"navMagazine",
-"navArticles",
-"navPhotos",
-"navStars",
-"navMarketplace",
-"navPlaces"
-];
-
-navIds.forEach(function(id,index){
-setText(id,t.nav[index]);
-});
-
-const menuIds=[
-"menuHome",
-"menuIssue",
-"menuArticles",
-"menuPhotos",
-"menuStars",
-"menuMarketplace",
-"menuPlaces",
-"menuClub"
-];
-
-menuIds.forEach(function(id,index){
-setText(id,t.menu[index]);
-});
-
-setText("menuAccountTitle",t.account);
-setText("menuAccountText",t.accountText);
-setText("languageLabel",t.language);
-
-setText("signInTitle",t.title);
-setText("signInIntro",t.intro);
-setText("emailLabel",t.email);
-setText("continueButton",t.continue);
-setText("helpLink",t.help);
-setText("dividerText",t.or);
-setText("joinClubButton",t.join);
-
-setText("legalStart",t.legal);
-setText("termsLink",t.terms);
-setText("legalAnd",t.and);
-setText("privacyLink",t.privacy);
-
-setText("emailError",t.error);
-setText("footerText",t.footer);
-
-}
-
-document
-.getElementById("languageSelect")
-.addEventListener("change",function(){
-
-applyLanguage(this.value);
-
-});
-
-window.addEventListener("storage",function(event){
-
-if(
-event.key===LANG_STORAGE_KEY ||
-event.key===FALLBACK_LANG_STORAGE_KEY
-){
-
-applyLanguage(
-event.newValue||"en"
-);
-
+if(code && ACCOUNT_TEXT[code]){
+applyLanguage(code);
 }
 
 });
 
-document.addEventListener("keydown",function(event){
+const initial=PDI18N.init();
 
-if(event.key==="Escape"){
-closeMenu();
-}
+applyLanguage(initial);
 
-});
-
-const savedLanguage=
-getSavedLanguage();
-
-applyLanguage(savedLanguage);
-
-const savedEmail=
-localStorage.getItem("petsDogueAccountEmail");
-
-if(savedEmail){
-document.getElementById("accountEmail").value=savedEmail;
-}
-</script>
-
-</body>
-</html> sv:{
-nav:["Magasin","Artiklar","Foton","Omslagsstjärnor","Marketplace","Platser"],
-menu:["Hem","Senaste numret","Artiklar","Foton","Omslagsstjärnor","Marketplace","Platser","PETS & DOGUE Club"],
-account:"Mitt konto",
-accountText:"Logga in eller hantera din profil",
-language:"SPRÅK",
-title:"Logga in",
-intro:"Ange e-postadressen som är kopplad till ditt PETS & DOGUE-konto.",
-email:"E-postadress",
-continue:"Fortsätt",
-help:"Behöver du hjälp med att logga in?",
-or:"eller",
-join:"Gå med i PETS & DOGUE Club",
-legal:"Genom att fortsätta godkänner du våra",
-terms:"Villkor",
-and:"och vår",
-privacy:"Integritetspolicy",
-error:"Ange en giltig e-postadress.",
-footer:"Det internationella lyxiga djurmagasinet"
-},
-
-da:{
-nav:["Magasin","Artikler","Fotos","Forsidestjerner","Marketplace","Steder"],
-menu:["Hjem","Seneste nummer","Artikler","Fotos","Forsidestjerner","Marketplace","Steder","PETS & DOGUE Club"],
-account:"Min konto",
-accountText:"Log ind eller administrer din profil",
-language:"SPROG",
-title:"Log ind",
-intro:"Indtast den e-mailadresse, der er knyttet til din PETS & DOGUE-konto.",
-email:"E-mailadresse",
-continue:"Fortsæt",
-help:"Brug for hjælp til login?",
-or:"eller",
-join:"Bliv medlem af PETS & DOGUE Club",
-legal:"Ved at fortsætte accepterer du vores",
-terms:"Vilkår",
-and:"og",
-privacy:"Privatlivspolitik",
-error:"Indtast en gyldig e-mailadresse.",
-footer:"Det internationale luksusmagasin om dyr"
-},
-
-no:{
-nav:["Magasin","Artikler","Bilder","Forsidestjerner","Marketplace","Steder"],
-menu:["Hjem","Siste utgave","Artikler","Bilder","Forsidestjerner","Marketplace","Steder","PETS & DOGUE Club"],
-account:"Min konto",
-accountText:"Logg inn eller administrer profilen din",
-language:"SPRÅK",
-title:"Logg inn",
-intro:"Skriv inn e-postadressen som er knyttet til PETS & DOGUE-kontoen din.",
-email:"E-postadresse",
-continue:"Fortsett",
-help:"Trenger du hjelp med innlogging?",
-or:"eller",
-join:"Bli med i PETS & DOGUE Club",
-legal:"Ved å fortsette godtar du våre",
-terms:"Vilkår",
-and:"og vår",
-privacy:"Personvernpolicy",
-error:"Skriv inn en gyldig e-postadresse.",
-footer:"Det internasjonale luksusmagasinet om dyr"
-},
-
-fi:{
-nav:["Lehti","Artikkelit","Kuvat","Kansitähdet","Marketplace","Paikat"],
-menu:["Koti","Uusin numero","Artikkelit","Kuvat","Kansitähdet","Marketplace","Paikat","PETS & DOGUE Club"],
-account:"Oma tili",
-accountText:"Kirjaudu sisään tai hallitse profiiliasi",
-language:"KIELI",
-title:"Kirjaudu",
-intro:"Anna PETS & DOGUE -tiliisi liitetty sähköpostiosoite.",
-email:"Sähköpostiosoite",
-continue:"Jatka",
-help:"Tarvitsetko apua kirjautumiseen?",
-or:"tai",
-join:"Liity PETS & DOGUE Clubiin",
-legal:"Jatkamalla hyväksyt",
-terms:"Käyttöehdot",
-and:"ja",
-privacy:"Tietosuojakäytännön",
-error:"Anna kelvollinen sähköpostiosoite.",
-footer:"Kansainvälinen luksuslehti eläimistä"
-},
-
-tr:{
-nav:["Dergi","Makaleler","Fotoğraflar","Kapak Yıldızları","Marketplace","Mekanlar"],
-menu:["Ana Sayfa","Son Sayı","Makaleler","Fotoğraflar","Kapak Yıldızları","Marketplace","Mekanlar","PETS & DOGUE Club"],
-account:"Hesabım",
-accountText:"Giriş yapın veya profilinizi yönetin",
-language:"DİL",
-title:"Giriş yap",
-intro:"PETS & DOGUE hesabınıza bağlı e-posta adresini girin.",
-email:"E-posta adresi",
-continue:"Devam",
-help:"Giriş yaparken yardıma mı ihtiyacınız var?",
-or:"veya",
-join:"PETS & DOGUE Club'a katıl",
-legal:"Devam ederek",
-terms:"Şartları",
-and:"ve",
-privacy:"Gizlilik Politikasını",
-error:"Geçerli bir e-posta adresi girin.",
-footer:"Uluslararası lüks hayvan dergisi"
-},
-
-ar:{
-nav:["المجلة","المقالات","الصور","نجوم الغلاف","السوق","الأماكن"],
-menu:["الرئيسية","العدد الأخير","المقالات","الصور","نجوم الغلاف","السوق","الأماكن","نادي PETS & DOGUE"],
-account:"حسابي",
-accountText:"سجّل الدخول أو أدِر ملفك الشخصي",
-language:"اللغة",
-title:"تسجيل الدخول",
-intro:"أدخل البريد الإلكتروني المرتبط بحساب PETS & DOGUE.",
-email:"البريد الإلكتروني",
-continue:"متابعة",
-help:"هل تحتاج إلى مساعدة في تسجيل الدخول؟",
-or:"أو",
-join:"انضم إلى PETS & DOGUE Club",
-legal:"بالمتابعة، فإنك توافق على",
-terms:"الشروط",
-and:"و",
-privacy:"سياسة الخصوصية",
-error:"يرجى إدخال بريد إلكتروني صالح.",
-footer:"المجلة الدولية الفاخرة للحيوانات"
-},
-
-hi:{
-nav:["पत्रिका","लेख","फ़ोटो","कवर स्टार","मार्केटप्लेस","स्थान"],
-menu:["होम","नवीनतम अंक","लेख","फ़ोटो","कवर स्टार","मार्केटप्लेस","स्थान","PETS & DOGUE Club"],
-account:"मेरा खाता",
-accountText:"साइन इन करें या अपना प्रोफ़ाइल प्रबंधित करें",
-language:"भाषा",
-title:"साइन इन",
-intro:"अपने PETS & DOGUE खाते से जुड़ा ईमेल पता दर्ज करें।",
-email:"ईमेल पता",
-continue:"जारी रखें",
-help:"साइन इन में मदद चाहिए?",
-or:"या",
-join:"PETS & DOGUE Club में शामिल हों",
-legal:"जारी रखते हुए, आप हमारी",
-terms:"शर्तों",
-and:"और",
-privacy:"गोपनीयता नीति",
-error:"कृपया मान्य ईमेल पता दर्ज करें।",
-footer:"जानवरों की अंतरराष्ट्रीय लग्ज़री पत्रिका"
-}
-
-};
-
-function setText(id,value){
-const el=document.getElementById(id);
-if(el)el.textContent=value;
-}
-
-function openMenu(){
-document.getElementById("sideMenu").classList.add("open");
-document.getElementById("menuOverlay").classList.add("show");
-document.body.classList.add("menu-open");
-}
-
-function closeMenu(){
-document.getElementById("sideMenu").classList.remove("open");
-document.getElementById("menuOverlay").classList.remove("show");
-document.body.classList.remove("menu-open");
-}
-
-function validEmail(value){
-return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-function continueSignIn(event){
-
-event.preventDefault();
-
-const input=document.getElementById("accountEmail");
-const wrap=document.getElementById("emailWrap");
-
-if(!validEmail(input.value.trim())){
-wrap.classList.add("error");
-input.focus();
-return;
-}
-
-wrap.classList.remove("error");
-
-localStorage.setItem(
-"petsDogueAccountEmail",
-input.value.trim()
-);
-
-window.location.href="profile.html";
-}
-
-document
-.getElementById("accountEmail")
-.addEventListener("input",function(){
-
-if(validEmail(this.value.trim())){
-document.getElementById("emailWrap").classList.remove("error");
-}
-
-});
-
-function getSavedLanguage(){
-
-const primary=
-localStorage.getItem(LANG_STORAGE_KEY);
-
-const legacy=
-localStorage.getItem(FALLBACK_LANG_STORAGE_KEY);
-
-return primary||legacy||"en";
-}
-
-function applyLanguage(code){
-
-if(!accountTranslations[code]){
-code="en";
-}
-
-const t=accountTranslations[code];
-
-document.documentElement.lang=code;
-document.documentElement.dir=
-code==="ar"
-?"rtl"
-:"ltr";
-
-localStorage.setItem(
-LANG_STORAGE_KEY,
-code
-);
-
-localStorage.setItem(
-FALLBACK_LANG_STORAGE_KEY,
-code
-);
-
-const languageSelect=
-document.getElementById("languageSelect");
-
-if(languageSelect){
-languageSelect.value=code;
-}
-
-const navIds=[
-"navMagazine",
-"navArticles",
-"navPhotos",
-"navStars",
-"navMarketplace",
-"navPlaces"
-];
-
-navIds.forEach(function(id,index){
-setText(id,t.nav[index]);
-});
-
-const menuIds=[
-"menuHome",
-"menuIssue",
-"menuArticles",
-"menuPhotos",
-"menuStars",
-"menuMarketplace",
-"menuPlaces",
-"menuClub"
-];
-
-menuIds.forEach(function(id,index){
-setText(id,t.menu[index]);
-});
-
-setText("menuAccountTitle",t.account);
-setText("menuAccountText",t.accountText);
-setText("languageLabel",t.language);
-
-setText("signInTitle",t.title);
-setText("signInIntro",t.intro);
-setText("emailLabel",t.email);
-setText("continueButton",t.continue);
-setText("helpLink",t.help);
-setText("dividerText",t.or);
-setText("joinClubButton",t.join);
-
-setText("legalStart",t.legal);
-setText("termsLink",t.terms);
-setText("legalAnd",t.and);
-setText("privacyLink",t.privacy);
-
-setText("emailError",t.error);
-setText("footerText",t.footer);
-
-}
-
-document
-.getElementById("languageSelect")
-.addEventListener("change",function(){
-
-applyLanguage(this.value);
-
-});
-
-window.addEventListener("storage",function(event){
-
-if(
-event.key===LANG_STORAGE_KEY ||
-event.key===FALLBACK_LANG_STORAGE_KEY
-){
-
-applyLanguage(
-event.newValue||"en"
-);
-
-}
-
-});
-
-document.addEventListener("keydown",function(event){
-
-if(event.key==="Escape"){
-closeMenu();
-}
-
-});
-
-const savedLanguage=
-getSavedLanguage();
-
-applyLanguage(savedLanguage);
-
-const savedEmail=
-localStorage.getItem("petsDogueAccountEmail");
+const savedEmail=localStorage.getItem("petsDogueAccountEmail");
 
 if(savedEmail){
 document.getElementById("accountEmail").value=savedEmail;
