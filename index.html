@@ -90,11 +90,12 @@ border-bottom:1px solid #292929
 .header-main{
 height:108px;
 display:grid;
-grid-template-columns:88px 1fr 88px;
+grid-template-columns:88px minmax(0,1fr) auto;
 align-items:center;
 max-width:1550px;
 margin:auto;
-padding:0 18px
+padding:0 18px;
+gap:10px
 }
 
 .icon-button{
@@ -120,7 +121,8 @@ transform:scale(.95)
 }
 
 .menu-trigger{
-position:relative
+position:relative;
+justify-self:start
 }
 
 .menu-trigger .menu-lines{
@@ -161,7 +163,8 @@ border-radius:999px
 
 .brand{
 text-align:center;
-line-height:.85
+line-height:.85;
+justify-self:center
 }
 
 .brand-small{
@@ -178,8 +181,73 @@ font-weight:normal;
 letter-spacing:4px
 }
 
-.search-icon{
-font-size:30px
+.header-actions{
+display:flex;
+align-items:center;
+justify-content:flex-end;
+gap:8px
+}
+
+.header-subscribe{
+min-height:44px;
+border:0;
+background:var(--green);
+color:#080808;
+padding:0 18px;
+font-size:12px;
+font-weight:900;
+letter-spacing:1.3px;
+text-transform:uppercase;
+display:flex;
+align-items:center;
+justify-content:center;
+white-space:nowrap;
+box-shadow:0 0 18px rgba(101,229,31,.18);
+transition:.2s
+}
+
+.header-subscribe:hover{
+background:#7af431;
+box-shadow:0 0 22px rgba(101,229,31,.32)
+}
+
+.header-subscribe:active{
+transform:scale(.97)
+}
+
+.profile-trigger{
+position:relative
+}
+
+.profile-icon{
+width:27px;
+height:27px;
+position:relative
+}
+
+.profile-icon:before{
+content:"";
+position:absolute;
+left:50%;
+top:1px;
+transform:translateX(-50%);
+width:10px;
+height:10px;
+border:2px solid #fff;
+border-radius:50%
+}
+
+.profile-icon:after{
+content:"";
+position:absolute;
+left:50%;
+bottom:0;
+transform:translateX(-50%);
+width:23px;
+height:13px;
+border:2px solid #fff;
+border-bottom:0;
+border-radius:18px 18px 0 0
 }
 
 .desktop-categories{
@@ -334,38 +402,12 @@ box-shadow:inset 3px 0 0 var(--gold-rich)
 transform:scale(.98)
 }
 
-.language-continue{
-width:100%;
-min-height:52px;
-border:0;
-background:#080808;
-color:#fff;
-margin-top:20px;
-font-weight:bold;
-letter-spacing:1.2px;
-text-transform:uppercase;
-transition:.2s
-}
-
-.language-continue:disabled{
-opacity:.28;
-cursor:not-allowed
-}
-
-.language-continue:not(:disabled):hover{
-background:var(--gold-dark)
-}
-
-.language-continue:not(:disabled):active{
-transform:scale(.99)
-}
-
 .language-welcome-note{
 text-align:center;
 color:#777;
 font-size:11px;
 line-height:1.5;
-margin-top:14px
+margin-top:17px
 }
 
 /* PRIVACY */
@@ -524,9 +566,10 @@ cursor:default
 .menu-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.76);
+background:rgba(0,0,0,.58);
 display:none;
-z-index:2500
+z-index:2500;
+backdrop-filter:blur(2px)
 }
 
 .menu-overlay.show{
@@ -536,14 +579,15 @@ display:block
 .side-menu{
 position:fixed;
 top:0;
-left:-100%;
-width:min(455px,94%);
-height:100vh;
+left:-500px;
+width:min(455px,84vw);
+height:100dvh;
 background:#fff;
 z-index:2600;
 overflow-y:auto;
-transition:.38s ease;
-border-right:1px solid #222
+transition:left .32s ease;
+border-right:1px solid #222;
+box-shadow:22px 0 55px rgba(0,0,0,.24)
 }
 
 .side-menu.open{
@@ -553,7 +597,7 @@ left:0
 .side-menu-header{
 background:#0b0b0b;
 color:#fff;
-padding:24px;
+padding:22px 22px;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -565,68 +609,91 @@ border-bottom:1px solid #313131
 
 .side-menu-header h2{
 font-family:Georgia,serif;
-font-size:34px;
+font-size:35px;
 font-weight:normal
 }
 
 .close-menu{
-width:43px;
-height:43px;
+width:46px;
+height:46px;
 border:0;
 border-radius:50%;
 background:#fff;
 color:#111;
-font-size:23px
+font-size:27px;
+line-height:1
 }
 
-/* PROFILE + LANGUAGE ONE ROW */
-
-.menu-topbar{
+.menu-actions{
 display:grid;
-grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+grid-template-columns:1fr 1fr;
 gap:12px;
-padding:18px;
-border-bottom:1px solid #ddd;
+padding:18px 18px 13px;
 background:#f8f6f0
 }
 
-.menu-profile-link{
-min-height:84px;
+.menu-action{
+min-height:66px;
 border:1.5px solid #111;
-border-radius:22px;
 background:#fff;
+color:#111;
 display:flex;
-flex-direction:column;
+align-items:center;
 justify-content:center;
-align-items:flex-start;
-padding:14px 18px;
-transition:.2s
+gap:10px;
+font-weight:900;
+font-size:14px;
+text-transform:uppercase;
+letter-spacing:.5px;
+transition:.18s
 }
 
-.menu-profile-link:active{
+.menu-action.subscribe{
+background:var(--green);
+border-color:var(--green);
+color:#080808
+}
+
+.menu-action:active{
 transform:scale(.98)
 }
 
-.menu-profile-link small{
-display:block;
-font-size:10px;
-font-weight:bold;
-letter-spacing:1.6px;
-text-transform:uppercase;
-color:#777;
-margin-bottom:7px
+.mini-profile{
+width:23px;
+height:23px;
+position:relative;
+flex:0 0 23px
 }
 
-.menu-profile-link strong{
-font-size:17px;
-line-height:1.1;
-color:#111
+.mini-profile:before{
+content:"";
+position:absolute;
+width:8px;
+height:8px;
+border:1.8px solid currentColor;
+border-radius:50%;
+left:50%;
+top:0;
+transform:translateX(-50%)
+}
+
+.mini-profile:after{
+content:"";
+position:absolute;
+width:19px;
+height:10px;
+border:1.8px solid currentColor;
+border-bottom:0;
+border-radius:14px 14px 0 0;
+left:50%;
+bottom:0;
+transform:translateX(-50%)
 }
 
 .menu-language-inline{
-min-height:84px;
+margin:0 18px 14px;
+min-height:78px;
 border:1.5px solid #111;
-border-radius:22px;
 background:#fff;
 padding:12px 16px;
 display:flex;
@@ -667,9 +734,10 @@ outline:none
 }
 
 .menu-items{
-padding:18px;
+padding:15px 18px 18px;
 display:grid;
-gap:11px
+gap:11px;
+border-top:1px solid #ddd
 }
 
 .menu-item{
@@ -716,6 +784,22 @@ padding-right:8px
 padding:18px;
 border-top:1px solid #ddd;
 background:#f4f0e7
+}
+
+.menu-contact{
+width:100%;
+min-height:56px;
+border:1.5px solid #111;
+background:#111;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:13px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+margin-bottom:16px
 }
 
 .menu-bottom-links{
@@ -816,6 +900,21 @@ font-size:13px
 .search-suggestions a:hover{
 border-color:var(--gold-rich);
 color:var(--gold-light)
+}
+
+.menu-search-button{
+width:100%;
+min-height:52px;
+border:1.5px solid #111;
+background:#fff;
+color:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+font-size:13px;
+letter-spacing:.5px;
+margin-top:12px
 }
 
 /* HERO */
@@ -1829,9 +1928,11 @@ text-transform:uppercase
 
 html[dir="rtl"] .side-menu{
 left:auto;
-right:-100%;
+right:-500px;
 border-right:none;
-border-left:1px solid #222
+border-left:1px solid #222;
+box-shadow:-22px 0 55px rgba(0,0,0,.24);
+transition:right .32s ease
 }
 
 html[dir="rtl"] .side-menu.open{
@@ -1853,6 +1954,11 @@ text-align:right
 
 html[dir="rtl"] .language-choice{
 text-align:right
+}
+
+html[dir="rtl"] .language-select{
+padding:0 0 0 24px;
+background-position:left center
 }
 
 /* RESPONSIVE */
@@ -1896,22 +2002,43 @@ grid-template-columns:repeat(3,1fr)
 
 .header-main{
 height:87px;
-grid-template-columns:58px 1fr 58px;
-padding:0 8px
+grid-template-columns:54px minmax(0,1fr) auto;
+padding:0 8px;
+gap:5px
 }
 
 .brand-big{
-font-size:40px;
-letter-spacing:2px
+font-size:36px;
+letter-spacing:1.6px
 }
 
 .brand-small{
-font-size:11px
+font-size:10px
 }
 
 .icon-button{
-width:45px;
-height:45px
+width:44px;
+height:44px
+}
+
+.header-actions{
+gap:3px
+}
+
+.header-subscribe{
+min-height:39px;
+padding:0 11px;
+font-size:10px;
+letter-spacing:.65px
+}
+
+.profile-trigger{
+width:40px;
+height:44px
+}
+
+.profile-icon{
+transform:scale(.9)
 }
 
 .desktop-categories{
@@ -2129,8 +2256,18 @@ font-size:25px
 
 @media(max-width:430px){
 
+.header-main{
+grid-template-columns:47px minmax(0,1fr) auto;
+padding:0 5px
+}
+
 .brand-big{
-font-size:35px
+font-size:31px;
+letter-spacing:1px
+}
+
+.brand-small{
+font-size:9px
 }
 
 .menu-lang-mark{
@@ -2146,21 +2283,36 @@ margin-left:7px;
 width:27px
 }
 
-.menu-topbar{
-gap:10px;
-padding:14px
+.header-subscribe{
+padding:0 8px;
+font-size:9px;
+letter-spacing:.35px
 }
 
-.menu-profile-link,
+.profile-trigger{
+width:36px
+}
+
+.side-menu{
+width:84vw
+}
+
+.menu-actions{
+gap:8px;
+padding:14px 14px 11px
+}
+
+.menu-action{
+min-height:58px;
+font-size:11px
+}
+
 .menu-language-inline{
-min-height:78px;
-padding:12px 14px;
-border-radius:20px
+margin:0 14px 12px
 }
 
-.menu-profile-link strong,
-.language-select{
-font-size:15px
+.menu-items{
+padding:14px
 }
 
 .latest-cover{
@@ -2275,6 +2427,10 @@ font-size:31px
 animation:none!important
 }
 
+.side-menu{
+transition:none
+}
+
 }
 </style>
 </head>
@@ -2330,12 +2486,8 @@ Welcome to PETS &amp; DOGUE. Choose your language to enter the magazine.
 
 </div>
 
-<button class="language-continue" id="languageContinue" type="button" disabled>
-CONTINUE
-</button>
-
 <p class="language-welcome-note" id="languageWelcomeNote">
-You can change your language anytime from the menu.
+Tap a language to enter. You can change it anytime from the menu.
 </p>
 
 </div>
@@ -2370,36 +2522,27 @@ Privacy Policy
 <div class="consent-settings" id="consentSettings">
 
 <div class="consent-option">
-
 <div>
 <strong id="essentialTitle">Essential</strong>
 <p id="essentialText">Required for language, security and basic site functions.</p>
 </div>
-
 <button class="consent-toggle on locked" type="button" aria-label="Essential"></button>
-
 </div>
 
 <div class="consent-option">
-
 <div>
 <strong id="analyticsTitle">Analytics</strong>
 <p id="analyticsText">Helps us understand how visitors use PETS & DOGUE.</p>
 </div>
-
 <button class="consent-toggle" id="analyticsToggle" type="button" onclick="toggleConsent('analytics')"></button>
-
 </div>
 
 <div class="consent-option">
-
 <div>
 <strong id="personalTitle">Personalisation</strong>
 <p id="personalText">Allows optional preferences and personalised experiences.</p>
 </div>
-
 <button class="consent-toggle" id="personalToggle" type="button" onclick="toggleConsent('personalisation')"></button>
-
 </div>
 
 </div>
@@ -2432,7 +2575,7 @@ SAVE CHOICES
 
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
-<aside class="side-menu" id="sideMenu">
+<aside class="side-menu" id="sideMenu" aria-hidden="true">
 
 <div class="side-menu-header">
 
@@ -2446,23 +2589,22 @@ Contents
 
 </div>
 
-<div class="menu-topbar">
+<div class="menu-actions">
 
-<a class="menu-profile-link" href="account.html">
-
-<small id="profileLabel">
-PROFILE
-</small>
-
-<strong data-i18n="common.menu.signIn">
-Sign In
-</strong>
-
+<a class="menu-action" href="account.html">
+<span class="mini-profile" aria-hidden="true"></span>
+<span id="menuProfileText">Profile</span>
 </a>
+
+<a class="menu-action subscribe" href="club.html">
+<span id="menuSubscribeText">Subscribe</span>
+</a>
+
+</div>
 
 <div class="menu-language-inline">
 
-<span class="menu-language-label">
+<span class="menu-language-label" id="menuLanguageLabel">
 Language
 </span>
 
@@ -2496,166 +2638,130 @@ Language
 
 </div>
 
-</div>
-
 <div class="menu-items">
 
 <a class="menu-item" href="issue-01.html">
-
 <img alt="Latest issue" src="file_00000000a9d471fda9b4629589be22a9.png">
-
 <div>
 <h3 data-i18n="common.menu.latestIssue">Latest Issue</h3>
 <p data-i18n="common.menu.latestIssueDescription">Open the newest PETS & DOGUE digital magazine.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="articles.html">
-
 <img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.articles">Articles</h3>
 <p data-i18n="common.menu.articlesDescription">Read and listen to editorial stories.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="photos.html">
-
 <img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.photos">Photos</h3>
 <p data-i18n="common.menu.photosDescription">Portraits, galleries and visual stories.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="members-gallery.html">
-
 <img alt="Cover Stars" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.coverStar">Cover Star</h3>
 <p data-i18n="common.menu.coverStarDescription">Enter your pet and compete for the next cover.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="pet-fashion.html">
-
 <img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.fashion">Pet Fashion</h3>
 <p data-i18n="common.menu.fashionDescription">Luxury style, accessories and editorial looks.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="wellness.html">
-
 <img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.navigation.wellness">Wellness</h3>
 <p>Health, grooming and everyday care.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="pet-travel.html">
-
 <img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.travel">Travel</h3>
 <p data-i18n="common.menu.travelDescription">Hotels, beaches and pet-friendly journeys.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="pet-friendly-places.html">
-
 <img alt="Places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.places">Pet Friendly Places</h3>
 <p data-i18n="common.menu.placesDescription">Search real places, maps, routes and contacts.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="pets-in-need.html">
-
 <img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.rescue">Pets In Need</h3>
 <p data-i18n="common.menu.rescueDescription">Rescue, adoption and community support.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="contests.html">
-
 <img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.contests">Contests</h3>
 <p data-i18n="common.menu.contestsDescription">Competitions, votes and prizes.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="local-community.html">
-
 <img alt="Community" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.community">Local Community</h3>
 <p data-i18n="common.menu.communityDescription">Local recommendations, posts and support.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="pet-marketplace.html">
-
 <img alt="Marketplace" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.menu.marketplace">Marketplace</h3>
 <p data-i18n="common.menu.marketplaceDescription">Community listings, services and accessories.</p>
 </div>
-
 </a>
 
 <a class="menu-item" href="partners.html">
-
 <img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80">
-
 <div>
 <h3 data-i18n="common.navigation.partners">Partners</h3>
 <p>Premium partners, offers and member benefits.</p>
 </div>
-
 </a>
 
 </div>
 
 <div class="menu-bottom">
 
-<div class="menu-bottom-links">
+<a class="menu-contact" href="contact.html" id="menuContactText">
+Contact Us
+</a>
 
-<a href="contact.html" data-i18n="common.footer.contact">Contact</a>
+<button class="menu-search-button" type="button" onclick="openSearchFromMenu()" id="menuSearchText">
+Search
+</button>
+
+<div class="menu-bottom-links">
 <a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a>
 <a href="terms.html" data-i18n="common.footer.terms">Terms</a>
 <a href="copyright.html">Copyright</a>
 <a href="cookies.html">Cookies</a>
 <a href="admin.html" data-i18n="common.footer.admin">Admin</a>
-
 </div>
 
 </div>
@@ -2669,15 +2775,10 @@ Language
 <div class="search-modal">
 
 <div class="search-top">
-
 <h2 data-i18n="common.search.title">
 Search PETS & DOGUE
 </h2>
-
-<button type="button" onclick="closeSearch()">
-×
-</button>
-
+<button type="button" onclick="closeSearch()">×</button>
 </div>
 
 <div class="search-field">
@@ -2689,9 +2790,7 @@ placeholder="Search articles, places, pets..."
 type="search"
 >
 
-<button type="button" onclick="runSiteSearch()">
-⌕
-</button>
+<button type="button" onclick="runSiteSearch()">⌕</button>
 
 </div>
 
@@ -2718,15 +2817,14 @@ type="search"
 <div class="header-main">
 
 <button
-aria-label="Open menu and language settings"
+aria-label="Open menu"
 class="icon-button menu-trigger"
+id="headerMenuButton"
 type="button"
 onclick="openMenu()"
 >
 
-<span class="menu-lang-mark" aria-hidden="true">
-文
-</span>
+<span class="menu-lang-mark" aria-hidden="true">文</span>
 
 <span class="menu-lines" aria-hidden="true">
 <span></span>
@@ -2737,25 +2835,27 @@ onclick="openMenu()"
 </button>
 
 <a class="brand notranslate" href="index.html" translate="no">
+<div class="brand-small metallic-text">PETS &amp;</div>
+<div class="brand-big metallic-text">DOGUE</div>
+</a>
 
-<div class="brand-small metallic-text">
-PETS &amp;
-</div>
+<div class="header-actions">
 
-<div class="brand-big metallic-text">
-DOGUE
-</div>
-
+<a class="header-subscribe" href="club.html" id="headerSubscribeText">
+Subscribe
 </a>
 
 <button
-aria-label="Search"
-class="icon-button search-icon"
+aria-label="Open profile menu"
+class="icon-button profile-trigger"
+id="headerProfileButton"
 type="button"
-onclick="openSearch()"
+onclick="openMenu()"
 >
-⌕
+<span class="profile-icon" aria-hidden="true"></span>
 </button>
+
+</div>
 
 </div>
 
@@ -3857,8 +3957,7 @@ const ONBOARDING_TRANSLATIONS={
 
 en:[
 "Choose your language",
-"Welcome to PETS & DOGUE. Choose your language to enter the magazine.",
-"CONTINUE",
+"Welcome to PETS & DOGUE. Tap your language to enter the magazine.",
 "You can change your language anytime from the menu.",
 "Your front-row seat",
 "PETS & DOGUE uses essential technology to operate the magazine. With your permission, analytics and personalisation help us improve stories, recommendations and your experience.",
@@ -3877,8 +3976,7 @@ en:[
 
 uk:[
 "Оберіть мову",
-"Ласкаво просимо до PETS & DOGUE. Оберіть мову, щоб відкрити журнал.",
-"ПРОДОВЖИТИ",
+"Ласкаво просимо до PETS & DOGUE. Торкніться мови, щоб відкрити журнал.",
 "Мову можна змінити будь-коли в меню.",
 "Ваше місце в першому ряду",
 "PETS & DOGUE використовує необхідні технології для роботи журналу. З вашого дозволу аналітика та персоналізація допомагають нам покращувати історії, рекомендації та ваш досвід.",
@@ -3897,8 +3995,7 @@ uk:[
 
 ru:[
 "Выберите язык",
-"Добро пожаловать в PETS & DOGUE. Выберите язык, чтобы открыть журнал.",
-"ПРОДОЛЖИТЬ",
+"Добро пожаловать в PETS & DOGUE. Нажмите на язык, чтобы открыть журнал.",
 "Язык можно изменить в любое время через меню.",
 "Ваше место в первом ряду",
 "PETS & DOGUE использует необходимые технологии для работы журнала. С вашего разрешения аналитика и персонализация помогают нам улучшать истории, рекомендации и ваш опыт.",
@@ -3917,8 +4014,7 @@ ru:[
 
 fr:[
 "Choisissez votre langue",
-"Bienvenue chez PETS & DOGUE. Choisissez votre langue pour entrer dans le magazine.",
-"CONTINUER",
+"Bienvenue chez PETS & DOGUE. Touchez votre langue pour ouvrir le magazine.",
 "Vous pouvez changer de langue à tout moment dans le menu.",
 "Votre place au premier rang",
 "PETS & DOGUE utilise des technologies essentielles au fonctionnement du magazine. Avec votre accord, l’analyse et la personnalisation nous aident à améliorer les histoires, recommandations et votre expérience.",
@@ -3937,8 +4033,7 @@ fr:[
 
 de:[
 "Sprache auswählen",
-"Willkommen bei PETS & DOGUE. Wählen Sie Ihre Sprache, um das Magazin zu öffnen.",
-"WEITER",
+"Willkommen bei PETS & DOGUE. Tippen Sie auf Ihre Sprache, um das Magazin zu öffnen.",
 "Sie können die Sprache jederzeit im Menü ändern.",
 "Ihr Platz in der ersten Reihe",
 "PETS & DOGUE verwendet notwendige Technologien für den Betrieb des Magazins. Mit Ihrer Zustimmung helfen Analyse und Personalisierung dabei, Inhalte, Empfehlungen und Ihr Erlebnis zu verbessern.",
@@ -3957,8 +4052,7 @@ de:[
 
 es:[
 "Elige tu idioma",
-"Bienvenido a PETS & DOGUE. Elige tu idioma para entrar en la revista.",
-"CONTINUAR",
+"Bienvenido a PETS & DOGUE. Toca tu idioma para entrar en la revista.",
 "Puedes cambiar el idioma en cualquier momento desde el menú.",
 "Tu asiento en primera fila",
 "PETS & DOGUE utiliza tecnología esencial para que la revista funcione. Con tu permiso, la analítica y la personalización nos ayudan a mejorar historias, recomendaciones y tu experiencia.",
@@ -3977,8 +4071,7 @@ es:[
 
 it:[
 "Scegli la lingua",
-"Benvenuto in PETS & DOGUE. Scegli la lingua per entrare nella rivista.",
-"CONTINUA",
+"Benvenuto in PETS & DOGUE. Tocca la tua lingua per entrare nella rivista.",
 "Puoi cambiare lingua in qualsiasi momento dal menu.",
 "Il tuo posto in prima fila",
 "PETS & DOGUE utilizza tecnologie essenziali per il funzionamento della rivista. Con il tuo consenso, analisi e personalizzazione ci aiutano a migliorare storie, consigli ed esperienza.",
@@ -3997,8 +4090,7 @@ it:[
 
 pt:[
 "Escolha o seu idioma",
-"Bem-vindo ao PETS & DOGUE. Escolha o idioma para entrar na revista.",
-"CONTINUAR",
+"Bem-vindo ao PETS & DOGUE. Toque no seu idioma para entrar na revista.",
 "Pode alterar o idioma a qualquer momento no menu.",
 "O seu lugar na primeira fila",
 "PETS & DOGUE utiliza tecnologia essencial para operar a revista. Com a sua permissão, análise e personalização ajudam-nos a melhorar histórias, recomendações e a sua experiência.",
@@ -4017,8 +4109,7 @@ pt:[
 
 nl:[
 "Kies je taal",
-"Welkom bij PETS & DOGUE. Kies je taal om het magazine te openen.",
-"DOORGAAN",
+"Welkom bij PETS & DOGUE. Tik op je taal om het magazine te openen.",
 "Je kunt de taal altijd wijzigen via het menu.",
 "Jouw plaats op de eerste rij",
 "PETS & DOGUE gebruikt essentiële technologie om het magazine te laten werken. Met jouw toestemming helpen analyse en personalisatie ons verhalen, aanbevelingen en je ervaring te verbeteren.",
@@ -4037,8 +4128,7 @@ nl:[
 
 pl:[
 "Wybierz język",
-"Witamy w PETS & DOGUE. Wybierz język, aby wejść do magazynu.",
-"KONTYNUUJ",
+"Witamy w PETS & DOGUE. Dotknij języka, aby wejść do magazynu.",
 "Język możesz zmienić w dowolnym momencie w menu.",
 "Twoje miejsce w pierwszym rzędzie",
 "PETS & DOGUE używa niezbędnych technologii do działania magazynu. Za Twoją zgodą analityka i personalizacja pomagają nam ulepszać historie, rekomendacje i doświadczenie.",
@@ -4057,8 +4147,7 @@ pl:[
 
 cs:[
 "Vyberte jazyk",
-"Vítejte v PETS & DOGUE. Vyberte jazyk a vstupte do magazínu.",
-"POKRAČOVAT",
+"Vítejte v PETS & DOGUE. Klepněte na jazyk a vstupte do magazínu.",
 "Jazyk můžete kdykoli změnit v nabídce.",
 "Vaše místo v první řadě",
 "PETS & DOGUE používá nezbytné technologie pro provoz magazínu. S vaším souhlasem nám analytika a personalizace pomáhají zlepšovat příběhy, doporučení a váš zážitek.",
@@ -4077,8 +4166,7 @@ cs:[
 
 sk:[
 "Vyberte jazyk",
-"Vitajte v PETS & DOGUE. Vyberte jazyk a vstúpte do magazínu.",
-"POKRAČOVAŤ",
+"Vitajte v PETS & DOGUE. Klepnite na jazyk a vstúpte do magazínu.",
 "Jazyk môžete kedykoľvek zmeniť v menu.",
 "Vaše miesto v prvom rade",
 "PETS & DOGUE používa nevyhnutné technológie na fungovanie magazínu. S vaším súhlasom nám analytika a personalizácia pomáhajú zlepšovať príbehy, odporúčania a váš zážitok.",
@@ -4097,8 +4185,7 @@ sk:[
 
 hu:[
 "Válassz nyelvet",
-"Üdvözlünk a PETS & DOGUE világában. Válaszd ki a nyelvet a magazin megnyitásához.",
-"FOLYTATÁS",
+"Üdvözlünk a PETS & DOGUE világában. Koppints a nyelvre a magazin megnyitásához.",
 "A nyelvet bármikor módosíthatod a menüben.",
 "Az első sorból",
 "A PETS & DOGUE a magazin működéséhez szükséges technológiákat használ. Engedélyeddel az analitika és a személyre szabás segít javítani a történeteket, ajánlásokat és az élményt.",
@@ -4117,8 +4204,7 @@ hu:[
 
 ro:[
 "Alege limba",
-"Bine ai venit la PETS & DOGUE. Alege limba pentru a intra în revistă.",
-"CONTINUĂ",
+"Bine ai venit la PETS & DOGUE. Atinge limba pentru a intra în revistă.",
 "Poți schimba limba oricând din meniu.",
 "Locul tău în primul rând",
 "PETS & DOGUE folosește tehnologii esențiale pentru funcționarea revistei. Cu acordul tău, analiza și personalizarea ne ajută să îmbunătățim poveștile, recomandările și experiența.",
@@ -4137,8 +4223,7 @@ ro:[
 
 bg:[
 "Изберете език",
-"Добре дошли в PETS & DOGUE. Изберете език, за да отворите списанието.",
-"ПРОДЪЛЖИ",
+"Добре дошли в PETS & DOGUE. Натиснете езика, за да отворите списанието.",
 "Можете да промените езика по всяко време от менюто.",
 "Вашето място на първия ред",
 "PETS & DOGUE използва необходими технологии за работа на списанието. С ваше разрешение аналитиката и персонализацията ни помагат да подобряваме историите, препоръките и изживяването.",
@@ -4157,8 +4242,7 @@ bg:[
 
 el:[
 "Επιλέξτε γλώσσα",
-"Καλώς ήρθατε στο PETS & DOGUE. Επιλέξτε γλώσσα για να μπείτε στο περιοδικό.",
-"ΣΥΝΕΧΕΙΑ",
+"Καλώς ήρθατε στο PETS & DOGUE. Πατήστε τη γλώσσα σας για να μπείτε στο περιοδικό.",
 "Μπορείτε να αλλάξετε γλώσσα οποιαδήποτε στιγμή από το μενού.",
 "Η θέση σας στην πρώτη σειρά",
 "Το PETS & DOGUE χρησιμοποιεί απαραίτητες τεχνολογίες για τη λειτουργία του περιοδικού. Με την άδειά σας, τα αναλυτικά στοιχεία και η εξατομίκευση μας βοηθούν να βελτιώνουμε ιστορίες, προτάσεις και εμπειρία.",
@@ -4177,8 +4261,7 @@ el:[
 
 sv:[
 "Välj språk",
-"Välkommen till PETS & DOGUE. Välj språk för att öppna magasinet.",
-"FORTSÄTT",
+"Välkommen till PETS & DOGUE. Tryck på ditt språk för att öppna magasinet.",
 "Du kan ändra språk när som helst i menyn.",
 "Din plats på första raden",
 "PETS & DOGUE använder nödvändig teknik för att driva magasinet. Med ditt tillstånd hjälper analys och personalisering oss att förbättra berättelser, rekommendationer och din upplevelse.",
@@ -4197,8 +4280,7 @@ sv:[
 
 da:[
 "Vælg sprog",
-"Velkommen til PETS & DOGUE. Vælg sprog for at åbne magasinet.",
-"FORTSÆT",
+"Velkommen til PETS & DOGUE. Tryk på dit sprog for at åbne magasinet.",
 "Du kan ændre sproget når som helst i menuen.",
 "Din plads på første række",
 "PETS & DOGUE bruger nødvendig teknologi til at drive magasinet. Med din tilladelse hjælper analyse og personalisering os med at forbedre historier, anbefalinger og din oplevelse.",
@@ -4217,8 +4299,7 @@ da:[
 
 no:[
 "Velg språk",
-"Velkommen til PETS & DOGUE. Velg språk for å åpne magasinet.",
-"FORTSETT",
+"Velkommen til PETS & DOGUE. Trykk på språket ditt for å åpne magasinet.",
 "Du kan endre språk når som helst i menyen.",
 "Din plass på første rad",
 "PETS & DOGUE bruker nødvendig teknologi for å drive magasinet. Med din tillatelse hjelper analyse og personalisering oss med å forbedre historier, anbefalinger og opplevelsen din.",
@@ -4237,8 +4318,7 @@ no:[
 
 fi:[
 "Valitse kieli",
-"Tervetuloa PETS & DOGUE -maailmaan. Valitse kieli avataksesi lehden.",
-"JATKA",
+"Tervetuloa PETS & DOGUE -maailmaan. Napauta kieltä avataksesi lehden.",
 "Voit vaihtaa kieltä milloin tahansa valikosta.",
 "Paikkasi eturivissä",
 "PETS & DOGUE käyttää lehden toimintaan välttämätöntä teknologiaa. Luvallasi analytiikka ja personointi auttavat meitä parantamaan tarinoita, suosituksia ja kokemustasi.",
@@ -4257,8 +4337,7 @@ fi:[
 
 tr:[
 "Dilinizi seçin",
-"PETS & DOGUE'a hoş geldiniz. Dergiye girmek için dilinizi seçin.",
-"DEVAM",
+"PETS & DOGUE'a hoş geldiniz. Dergiyi açmak için dilinize dokunun.",
 "Dili istediğiniz zaman menüden değiştirebilirsiniz.",
 "Ön sıradaki yeriniz",
 "PETS & DOGUE dergiyi çalıştırmak için gerekli teknolojileri kullanır. İzninizle analiz ve kişiselleştirme, hikâyeleri, önerileri ve deneyiminizi geliştirmemize yardımcı olur.",
@@ -4277,8 +4356,7 @@ tr:[
 
 ar:[
 "اختر لغتك",
-"مرحبًا بك في PETS & DOGUE. اختر لغتك للدخول إلى المجلة.",
-"متابعة",
+"مرحبًا بك في PETS & DOGUE. اضغط على لغتك للدخول إلى المجلة.",
 "يمكنك تغيير اللغة في أي وقت من القائمة.",
 "مقعدك في الصف الأمامي",
 "يستخدم PETS & DOGUE تقنيات ضرورية لتشغيل المجلة. وبموافقتك تساعدنا التحليلات والتخصيص على تحسين القصص والتوصيات وتجربتك.",
@@ -4297,8 +4375,7 @@ ar:[
 
 hi:[
 "अपनी भाषा चुनें",
-"PETS & DOGUE में आपका स्वागत है। मैगज़ीन खोलने के लिए अपनी भाषा चुनें।",
-"जारी रखें",
+"PETS & DOGUE में आपका स्वागत है। मैगज़ीन खोलने के लिए अपनी भाषा पर टैप करें।",
 "आप मेनू से कभी भी भाषा बदल सकते हैं।",
 "आपकी फ्रंट-रो सीट",
 "PETS & DOGUE मैगज़ीन चलाने के लिए आवश्यक तकनीक का उपयोग करता है। आपकी अनुमति से एनालिटिक्स और पर्सनलाइज़ेशन हमें कहानियाँ, सुझाव और आपका अनुभव बेहतर करने में मदद करते हैं।",
@@ -4317,6 +4394,240 @@ hi:[
 
 };
 
+const QUICK_UI_TRANSLATIONS={
+
+en:{
+profile:"Profile",
+subscribe:"Subscribe",
+language:"Language",
+contact:"Contact Us",
+search:"Search",
+menuAria:"Open menu",
+profileAria:"Open profile menu"
+},
+
+uk:{
+profile:"Профіль",
+subscribe:"Підписка",
+language:"Мова",
+contact:"Зв’язатися з нами",
+search:"Пошук",
+menuAria:"Відкрити меню",
+profileAria:"Відкрити меню профілю"
+},
+
+ru:{
+profile:"Профиль",
+subscribe:"Подписка",
+language:"Язык",
+contact:"Связаться с нами",
+search:"Поиск",
+menuAria:"Открыть меню",
+profileAria:"Открыть меню профиля"
+},
+
+fr:{
+profile:"Profil",
+subscribe:"S’abonner",
+language:"Langue",
+contact:"Nous contacter",
+search:"Rechercher",
+menuAria:"Ouvrir le menu",
+profileAria:"Ouvrir le menu du profil"
+},
+
+de:{
+profile:"Profil",
+subscribe:"Abonnieren",
+language:"Sprache",
+contact:"Kontakt",
+search:"Suche",
+menuAria:"Menü öffnen",
+profileAria:"Profilmenü öffnen"
+},
+
+es:{
+profile:"Perfil",
+subscribe:"Suscribirse",
+language:"Idioma",
+contact:"Contáctanos",
+search:"Buscar",
+menuAria:"Abrir menú",
+profileAria:"Abrir menú de perfil"
+},
+
+it:{
+profile:"Profilo",
+subscribe:"Abbonati",
+language:"Lingua",
+contact:"Contattaci",
+search:"Cerca",
+menuAria:"Apri menu",
+profileAria:"Apri menu profilo"
+},
+
+pt:{
+profile:"Perfil",
+subscribe:"Assinar",
+language:"Idioma",
+contact:"Contacte-nos",
+search:"Pesquisar",
+menuAria:"Abrir menu",
+profileAria:"Abrir menu do perfil"
+},
+
+nl:{
+profile:"Profiel",
+subscribe:"Abonneren",
+language:"Taal",
+contact:"Contact",
+search:"Zoeken",
+menuAria:"Menu openen",
+profileAria:"Profielmenu openen"
+},
+
+pl:{
+profile:"Profil",
+subscribe:"Subskrypcja",
+language:"Język",
+contact:"Kontakt",
+search:"Szukaj",
+menuAria:"Otwórz menu",
+profileAria:"Otwórz menu profilu"
+},
+
+cs:{
+profile:"Profil",
+subscribe:"Předplatit",
+language:"Jazyk",
+contact:"Kontaktujte nás",
+search:"Hledat",
+menuAria:"Otevřít nabídku",
+profileAria:"Otevřít nabídku profilu"
+},
+
+sk:{
+profile:"Profil",
+subscribe:"Predplatné",
+language:"Jazyk",
+contact:"Kontaktujte nás",
+search:"Hľadať",
+menuAria:"Otvoriť menu",
+profileAria:"Otvoriť menu profilu"
+},
+
+hu:{
+profile:"Profil",
+subscribe:"Előfizetés",
+language:"Nyelv",
+contact:"Kapcsolat",
+search:"Keresés",
+menuAria:"Menü megnyitása",
+profileAria:"Profilmenü megnyitása"
+},
+
+ro:{
+profile:"Profil",
+subscribe:"Abonare",
+language:"Limbă",
+contact:"Contactează-ne",
+search:"Caută",
+menuAria:"Deschide meniul",
+profileAria:"Deschide meniul profilului"
+},
+
+bg:{
+profile:"Профил",
+subscribe:"Абонамент",
+language:"Език",
+contact:"Свържете се с нас",
+search:"Търсене",
+menuAria:"Отвори меню",
+profileAria:"Отвори меню на профила"
+},
+
+el:{
+profile:"Προφίλ",
+subscribe:"Συνδρομή",
+language:"Γλώσσα",
+contact:"Επικοινωνία",
+search:"Αναζήτηση",
+menuAria:"Άνοιγμα μενού",
+profileAria:"Άνοιγμα μενού προφίλ"
+},
+
+sv:{
+profile:"Profil",
+subscribe:"Prenumerera",
+language:"Språk",
+contact:"Kontakta oss",
+search:"Sök",
+menuAria:"Öppna meny",
+profileAria:"Öppna profilmeny"
+},
+
+da:{
+profile:"Profil",
+subscribe:"Abonner",
+language:"Sprog",
+contact:"Kontakt os",
+search:"Søg",
+menuAria:"Åbn menu",
+profileAria:"Åbn profilmenu"
+},
+
+no:{
+profile:"Profil",
+subscribe:"Abonner",
+language:"Språk",
+contact:"Kontakt oss",
+search:"Søk",
+menuAria:"Åpne meny",
+profileAria:"Åpne profilmeny"
+},
+
+fi:{
+profile:"Profiili",
+subscribe:"Tilaa",
+language:"Kieli",
+contact:"Ota yhteyttä",
+search:"Haku",
+menuAria:"Avaa valikko",
+profileAria:"Avaa profiilivalikko"
+},
+
+tr:{
+profile:"Profil",
+subscribe:"Abone Ol",
+language:"Dil",
+contact:"Bize Ulaşın",
+search:"Ara",
+menuAria:"Menüyü aç",
+profileAria:"Profil menüsünü aç"
+},
+
+ar:{
+profile:"الملف الشخصي",
+subscribe:"اشترك",
+language:"اللغة",
+contact:"اتصل بنا",
+search:"بحث",
+menuAria:"فتح القائمة",
+profileAria:"فتح قائمة الملف الشخصي"
+},
+
+hi:{
+profile:"प्रोफ़ाइल",
+subscribe:"सदस्यता",
+language:"भाषा",
+contact:"हमसे संपर्क करें",
+search:"खोजें",
+menuAria:"मेनू खोलें",
+profileAria:"प्रोफ़ाइल मेनू खोलें"
+}
+
+};
+
 function onboardingDictionary(){
 
 const lang=localStorage.getItem(HOME_LANGUAGE_KEY)||"en";
@@ -4325,21 +4636,20 @@ const values=ONBOARDING_TRANSLATIONS[lang]||ONBOARDING_TRANSLATIONS.en;
 return{
 languageTitle:values[0],
 languageSubtitle:values[1],
-languageContinue:values[2],
-languageNote:values[3],
-consentTitle:values[4],
-consentText:values[5],
-consentPolicy:values[6],
-essentialTitle:values[7],
-essentialText:values[8],
-analyticsTitle:values[9],
-analyticsText:values[10],
-personalTitle:values[11],
-personalText:values[12],
-accept:values[13],
-reject:values[14],
-choices:values[15],
-save:values[16]
+languageNote:values[2],
+consentTitle:values[3],
+consentText:values[4],
+consentPolicy:values[5],
+essentialTitle:values[6],
+essentialText:values[7],
+analyticsTitle:values[8],
+analyticsText:values[9],
+personalTitle:values[10],
+personalText:values[11],
+accept:values[12],
+reject:values[13],
+choices:values[14],
+save:values[15]
 };
 
 }
@@ -4354,13 +4664,47 @@ element.textContent=value;
 
 }
 
+function getSavedLanguage(){
+
+const saved=localStorage.getItem(HOME_LANGUAGE_KEY);
+
+return HOME_SUPPORTED.includes(saved)
+?saved
+:"en";
+
+}
+
+function applyQuickUiLanguage(){
+
+const lang=getSavedLanguage();
+const t=QUICK_UI_TRANSLATIONS[lang]||QUICK_UI_TRANSLATIONS.en;
+
+setHomeText("headerSubscribeText",t.subscribe);
+setHomeText("menuProfileText",t.profile);
+setHomeText("menuSubscribeText",t.subscribe);
+setHomeText("menuLanguageLabel",t.language);
+setHomeText("menuContactText",t.contact);
+setHomeText("menuSearchText",t.search);
+
+const menuButton=document.getElementById("headerMenuButton");
+const profileButton=document.getElementById("headerProfileButton");
+
+if(menuButton){
+menuButton.setAttribute("aria-label",t.menuAria);
+}
+
+if(profileButton){
+profileButton.setAttribute("aria-label",t.profileAria);
+}
+
+}
+
 function applyOnboardingLanguage(){
 
 const t=onboardingDictionary();
 
 setHomeText("languageWelcomeTitle",t.languageTitle);
 setHomeText("languageWelcomeSubtitle",t.languageSubtitle);
-setHomeText("languageContinue",t.languageContinue);
 setHomeText("languageWelcomeNote",t.languageNote);
 
 setHomeText("consentTitle",t.consentTitle);
@@ -4377,7 +4721,7 @@ setHomeText("rejectButton",t.reject);
 setHomeText("choicesButton",t.choices);
 setHomeText("saveChoicesButton",t.save);
 
-const lang=localStorage.getItem(HOME_LANGUAGE_KEY)||"en";
+const lang=getSavedLanguage();
 
 document.documentElement.lang=lang;
 document.documentElement.dir=lang==="ar"?"rtl":"ltr";
@@ -4387,6 +4731,41 @@ const select=document.getElementById("languageSelect");
 if(select){
 select.value=lang;
 }
+
+applyQuickUiLanguage();
+
+}
+
+function selectLanguageImmediately(language){
+
+if(!HOME_SUPPORTED.includes(language)){
+return;
+}
+
+localStorage.setItem(
+HOME_LANGUAGE_KEY,
+language
+);
+
+document.documentElement.lang=language;
+document.documentElement.dir=language==="ar"?"rtl":"ltr";
+
+applyOnboardingLanguage();
+
+window.dispatchEvent(
+new CustomEvent(
+"petsdogue:languagechange",
+{detail:{language}}
+)
+);
+
+const modal=document.getElementById("languageWelcome");
+
+if(modal){
+modal.classList.remove("show");
+}
+
+showConsentIfNeeded();
 
 }
 
@@ -4408,9 +4787,6 @@ function showLanguageWelcome(){
 
 const modal=document.getElementById("languageWelcome");
 const grid=document.getElementById("welcomeLanguageGrid");
-const continueButton=document.getElementById("languageContinue");
-
-let selectedLanguage="";
 
 modal.classList.add("show");
 document.body.classList.add("onboarding-open");
@@ -4419,38 +4795,17 @@ grid.querySelectorAll(".language-choice").forEach(button=>{
 
 button.onclick=()=>{
 
-selectedLanguage=button.dataset.lang||"";
+const selectedLanguage=button.dataset.lang||"";
 
 grid.querySelectorAll(".language-choice").forEach(item=>{
 item.classList.toggle("selected",item===button);
 });
 
-continueButton.disabled=!selectedLanguage;
+selectLanguageImmediately(selectedLanguage);
 
 };
 
 });
-
-continueButton.onclick=()=>{
-
-if(!HOME_SUPPORTED.includes(selectedLanguage)){
-return;
-}
-
-localStorage.setItem(
-HOME_LANGUAGE_KEY,
-selectedLanguage
-);
-
-document.documentElement.lang=selectedLanguage;
-document.documentElement.dir=selectedLanguage==="ar"?"rtl":"ltr";
-
-modal.classList.remove("show");
-
-applyOnboardingLanguage();
-showConsentIfNeeded();
-
-};
 
 }
 
@@ -4517,8 +4872,6 @@ localStorage.setItem(
 HOME_CONSENT_KEY,
 JSON.stringify(consent)
 );
-
-/* AFTER CONSENT — OPEN MAGAZINE DIRECTLY */
 
 document.getElementById("consentLayer").classList.remove("show");
 
@@ -4599,7 +4952,10 @@ let activeSpeechButton=null;
 
 function openMenu(){
 
-document.getElementById("sideMenu").classList.add("open");
+const sideMenu=document.getElementById("sideMenu");
+
+sideMenu.classList.add("open");
+sideMenu.setAttribute("aria-hidden","false");
 
 document.getElementById("menuOverlay").classList.add("show");
 
@@ -4609,11 +4965,24 @@ document.body.classList.add("menu-open");
 
 function closeMenu(){
 
-document.getElementById("sideMenu").classList.remove("open");
+const sideMenu=document.getElementById("sideMenu");
+
+sideMenu.classList.remove("open");
+sideMenu.setAttribute("aria-hidden","true");
 
 document.getElementById("menuOverlay").classList.remove("show");
 
 document.body.classList.remove("menu-open");
+
+}
+
+function openSearchFromMenu(){
+
+closeMenu();
+
+setTimeout(()=>{
+openSearch();
+},120);
 
 }
 
@@ -4685,7 +5054,7 @@ url:"pet-fashion.html"
 },
 
 {
-terms:["club","discount","member"],
+terms:["club","discount","member","subscribe","subscription"],
 url:"club.html"
 },
 
@@ -5012,30 +5381,34 @@ document
 .getElementById("languageSelect")
 .addEventListener("change",function(){
 
+const language=this.value;
+
+if(!HOME_SUPPORTED.includes(language)){
+return;
+}
+
 localStorage.setItem(
 HOME_LANGUAGE_KEY,
-this.value
+language
 );
 
-document.documentElement.lang=
-this.value;
-
-document.documentElement.dir=
-this.value==="ar"
-?"rtl"
-:"ltr";
+document.documentElement.lang=language;
+document.documentElement.dir=language==="ar"?"rtl":"ltr";
 
 applyOnboardingLanguage();
 
 window.dispatchEvent(
-new Event("petsdogue:languagechange")
+new CustomEvent(
+"petsdogue:languagechange",
+{detail:{language}}
+)
 );
 
 setTimeout(()=>{
 
 window.location.reload();
 
-},50);
+},60);
 
 });
 
@@ -5075,11 +5448,22 @@ window.speechSynthesis.onvoiceschanged=
 
 }
 
+window.addEventListener(
+"petsdogue:languagechange",
+()=>{
+
+applyOnboardingLanguage();
+applyQuickUiLanguage();
+
+}
+);
+
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
 applyOnboardingLanguage();
+applyQuickUiLanguage();
 initFirstVisitFlow();
 
 }
