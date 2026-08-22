@@ -105,7 +105,7 @@ export default async function handler(req, res) {
 
         trialDays: 30,
 
-        environmentPrice:
+        priceEnv:
           String(
             process.env.STRIPE_PRICE_MONTHLY || ""
           ).trim()
@@ -124,7 +124,7 @@ export default async function handler(req, res) {
 
         trialDays: 0,
 
-        environmentPrice:
+        priceEnv:
           String(
             process.env.STRIPE_PRICE_MONTHLY || ""
           ).trim()
@@ -143,7 +143,7 @@ export default async function handler(req, res) {
 
         trialDays: 0,
 
-        environmentPrice:
+        priceEnv:
           String(
             process.env.STRIPE_PRICE_ANNUAL || ""
           ).trim()
@@ -223,10 +223,127 @@ export default async function handler(req, res) {
       return data;
     }
 
+    async function findOrCreatePrice() {
+      /*
+        Use the existing Stripe Price ID from Vercel
+        when it has already been configured.
+      */
+
+      if (
+        selected.priceEnv &&
+        selected.priceEnv.startsWith("price_")
+      ) {
+        return selected.priceEnv;
+      }
+
+      /*
+        If no Price ID exists yet, create the
+        product and recurring price correctly.
+
+        Important:
+        Stripe Subscription items do NOT accept
+        price_data[product_data].
+
+        We therefore create Product first,
+        then Price, then pass only the Price ID
+        to the Subscription.
+      */
+
+      const productParams =
+        new URLSearchParams();
+
+      productParams.append(
+        "name",
+        selected.name
+      );
+
+      productParams.append(
+        "description",
+        selected.description
+      );
+
+      productParams.append(
+        "metadata[project]",
+        "PETS & DOGUE"
+      );
+
+      productParams.append(
+        "metadata[club_plan]",
+        plan
+      );
+
+      const product =
+        await stripeRequest(
+          "/products",
+          "POST",
+          productParams
+        );
+
+      if (
+        !product ||
+        !product.id
+      ) {
+        throw new Error(
+          "Stripe could not create the membership product."
+        );
+      }
+
+      const priceParams =
+        new URLSearchParams();
+
+      priceParams.append(
+        "product",
+        product.id
+      );
+
+      priceParams.append(
+        "currency",
+        "gbp"
+      );
+
+      priceParams.append(
+        "unit_amount",
+        String(selected.amount)
+      );
+
+      priceParams.append(
+        "recurring[interval]",
+        selected.interval
+      );
+
+      priceParams.append(
+        "metadata[project]",
+        "PETS & DOGUE"
+      );
+
+      priceParams.append(
+        "metadata[club_plan]",
+        plan
+      );
+
+      const price =
+        await stripeRequest(
+          "/prices",
+          "POST",
+          priceParams
+        );
+
+      if (
+        !price ||
+        !price.id
+      ) {
+        throw new Error(
+          "Stripe could not create the membership price."
+        );
+      }
+
+      return price.id;
+    }
+
     /*
-      --------------------------------------------------
+      ================================================
       CUSTOMER
-      --------------------------------------------------
+      ================================================
     */
 
     const customerList =
@@ -300,18 +417,23 @@ export default async function handler(req, res) {
     }
 
     /*
-      --------------------------------------------------
-      FREE TRIAL
-      --------------------------------------------------
+      ================================================
+      FREE 30-DAY TRIAL
+      ================================================
 
       £0 today.
 
-      First collect a valid payment method.
-      Subscription is created only after the
-      SetupIntent succeeds.
+      We first collect and authenticate a payment
+      method using SetupIntent.
+
+      After successful confirmation,
+      complete-club-trial.js creates the subscription.
     */
 
     if (plan === "free") {
+      const monthlyPriceId =
+        await findOrCreatePrice();
+
       const setupParams =
         new URLSearchParams();
 
@@ -338,6 +460,11 @@ export default async function handler(req, res) {
       setupParams.append(
         "metadata[plan]",
         "free"
+      );
+
+      setupParams.append(
+        "metadata[price_id]",
+        monthlyPriceId
       );
 
       setupParams.append(
@@ -423,6 +550,9 @@ export default async function handler(req, res) {
         intentId:
           setupIntent.id,
 
+        priceId:
+          monthlyPriceId,
+
         clientSecret:
           setupIntent.client_secret,
 
@@ -438,143 +568,13 @@ export default async function handler(req, res) {
     }
 
     /*
-      --------------------------------------------------
-      PRICE
-      --------------------------------------------------
-
-      Stripe Subscriptions do NOT accept:
-
-      items[0][price_data][product_data]
-
-      That was the exact reason for the
-      "Received unknown parameter" error.
-
-      A Subscription needs either:
-      - an existing Price ID
-      - or price_data with an existing Product ID.
-
-      First use the Price IDs already configured
-      in Vercel when available.
-
-      If they are not configured, create a Stripe
-      Product + recurring Price automatically.
+      ================================================
+      MONTHLY / ANNUAL
+      ================================================
     */
 
-    let stripePriceId =
-      selected.environmentPrice;
-
-    if (
-      stripePriceId &&
-      !stripePriceId.startsWith("price_")
-    ) {
-      console.warn(
-        "PETS & DOGUE: invalid Stripe Price environment variable:",
-        stripePriceId
-      );
-
-      stripePriceId = "";
-    }
-
-    if (!stripePriceId) {
-      const productParams =
-        new URLSearchParams();
-
-      productParams.append(
-        "name",
-        selected.name
-      );
-
-      productParams.append(
-        "description",
-        selected.description
-      );
-
-      productParams.append(
-        "metadata[project]",
-        "PETS & DOGUE"
-      );
-
-      productParams.append(
-        "metadata[club_plan]",
-        plan
-      );
-
-      const product =
-        await stripeRequest(
-          "/products",
-          "POST",
-          productParams
-        );
-
-      if (
-        !product ||
-        !product.id
-      ) {
-        return res.status(500).json({
-          error:
-            "Stripe could not create the membership product."
-        });
-      }
-
-      const priceParams =
-        new URLSearchParams();
-
-      priceParams.append(
-        "currency",
-        "gbp"
-      );
-
-      priceParams.append(
-        "unit_amount",
-        String(selected.amount)
-      );
-
-      priceParams.append(
-        "recurring[interval]",
-        selected.interval
-      );
-
-      priceParams.append(
-        "product",
-        product.id
-      );
-
-      priceParams.append(
-        "metadata[project]",
-        "PETS & DOGUE"
-      );
-
-      priceParams.append(
-        "metadata[club_plan]",
-        plan
-      );
-
-      const price =
-        await stripeRequest(
-          "/prices",
-          "POST",
-          priceParams
-        );
-
-      if (
-        !price ||
-        !price.id
-      ) {
-        return res.status(500).json({
-          error:
-            "Stripe could not create the membership price."
-        });
-      }
-
-      stripePriceId =
-        price.id;
-    }
-
-    /*
-      --------------------------------------------------
-      SUBSCRIPTION
-      --------------------------------------------------
-    */
+    const stripePriceId =
+      await findOrCreatePrice();
 
     const subscriptionParams =
       new URLSearchParams();
@@ -584,15 +584,20 @@ export default async function handler(req, res) {
       customer.id
     );
 
+    /*
+      Correct Subscription item format:
+      use an existing Stripe Price ID.
+    */
+
     subscriptionParams.append(
       "items[0][price]",
       stripePriceId
     );
 
     /*
-      Creates the subscription now,
-      but keeps it incomplete until the
-      Payment Element confirms payment.
+      Subscription remains incomplete until
+      Stripe Payment Element confirms the
+      first payment.
     */
 
     subscriptionParams.append(
@@ -600,19 +605,15 @@ export default async function handler(req, res) {
       "default_incomplete"
     );
 
-    /*
-      Save the successfully confirmed
-      payment method for future renewals.
-    */
+    subscriptionParams.append(
+      "collection_method",
+      "charge_automatically"
+    );
 
     subscriptionParams.append(
       "payment_settings[save_default_payment_method]",
       "on_subscription"
     );
-
-    /*
-      Metadata used by PETS & DOGUE.
-    */
 
     subscriptionParams.append(
       "metadata[project]",
@@ -677,8 +678,8 @@ export default async function handler(req, res) {
     );
 
     /*
-      Request the invoice confirmation secret
-      required by Stripe Payment Element.
+      Retrieve the first invoice payment secret
+      for Stripe Payment Element.
     */
 
     subscriptionParams.append(
@@ -711,11 +712,10 @@ export default async function handler(req, res) {
         : null;
 
     /*
-      Normally confirmation_secret is already
-      present because it was expanded above.
-
-      If Stripe did not include it, retrieve
-      the invoice again explicitly.
+      Fallback:
+      retrieve the invoice explicitly if the
+      confirmation secret was not returned
+      in the expanded Subscription response.
     */
 
     if (
@@ -736,7 +736,7 @@ export default async function handler(req, res) {
           );
       } catch (error) {
         console.error(
-          "PETS & DOGUE invoice confirmation-secret fallback:",
+          "PETS & DOGUE invoice confirmation fallback:",
           error
         );
       }
@@ -747,8 +747,7 @@ export default async function handler(req, res) {
       invoice.confirmation_secret &&
       typeof invoice.confirmation_secret ===
         "object"
-        ? invoice.confirmation_secret
-            .client_secret
+        ? invoice.confirmation_secret.client_secret
         : null;
 
     if (!confirmationSecret) {
@@ -763,7 +762,7 @@ export default async function handler(req, res) {
               ? invoice.id
               : null,
 
-          status:
+          subscriptionStatus:
             subscription.status
         }
       );
@@ -773,12 +772,6 @@ export default async function handler(req, res) {
           "Stripe could not prepare the secure payment form."
       });
     }
-
-    /*
-      --------------------------------------------------
-      RESPONSE TO CLUB.HTML
-      --------------------------------------------------
-    */
 
     return res.status(200).json({
       ok: true,
