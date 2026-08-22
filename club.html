@@ -478,14 +478,20 @@ max-height:465px;
 overflow:hidden;
 scroll-snap-align:center;
 background:#111;
-opacity:.40;
+opacity:.32;
 transform:scale(.91);
-transition:transform .24s ease,opacity .24s ease,box-shadow .24s ease;
+filter:saturate(.76) brightness(.91);
+transition:
+transform .25s ease,
+opacity .25s ease,
+filter .25s ease,
+box-shadow .25s ease;
 }
 
 .club-card.active{
 opacity:1;
 transform:scale(1);
+filter:none;
 z-index:3;
 box-shadow:0 13px 34px rgba(0,0,0,.18);
 }
@@ -499,7 +505,13 @@ object-fit:cover;
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.28) 42%,transparent 72%);
+background:linear-gradient(
+to top,
+rgba(0,0,0,.82),
+rgba(0,0,0,.28) 42%,
+transparent 72%
+);
+pointer-events:none;
 }
 
 .card-content{
@@ -928,7 +940,7 @@ letter-spacing:1.2px;
 margin-top:7px;
 }
 
-/* PAYMENT TOP — MORE COMPACT */
+/* PAYMENT TOP */
 
 .checkout-step{
 background:#f7f7f5;
@@ -1122,9 +1134,33 @@ font-weight:800;
 white-space:nowrap;
 }
 
+/* FIRST PAYMENT ROW — VISUALLY STRONGER */
+
+#walletChoice .payment-choice-header{
+min-height:72px;
+padding:0 15px 0 17px;
+}
+
+#walletChoice .payment-choice-label{
+font-size:12px;
+font-weight:900;
+letter-spacing:1.35px;
+}
+
+#walletChoice .payment-choice-brands{
+gap:12px;
+font-size:14px;
+font-weight:900;
+}
+
+#walletChoice .brand-paypal{
+font-size:15px;
+}
+
 .brand-paypal{
 font-style:italic;
 color:#0a6db7;
+font-weight:900;
 }
 
 .brand-mastercard{
@@ -1584,6 +1620,27 @@ font-size:9px;
 font-size:11px;
 gap:7px;
 }
+
+#walletChoice .payment-choice-header{
+min-height:70px;
+padding-left:14px;
+padding-right:12px;
+gap:8px;
+}
+
+#walletChoice .payment-choice-label{
+font-size:11px;
+letter-spacing:1.05px;
+}
+
+#walletChoice .payment-choice-brands{
+font-size:13px;
+gap:8px;
+}
+
+#walletChoice .brand-paypal{
+font-size:14px;
+}
 }
 </style>
 </head>
@@ -1764,16 +1821,18 @@ gap:7px;
 </div>
 
 <div class="carousel-controls">
-<button class="carousel-arrow" id="carouselPrev">←</button>
+<button class="carousel-arrow" id="carouselPrev" type="button">←</button>
+
 <div class="carousel-dots">
-<button class="carousel-dot active" data-dot="0"></button>
-<button class="carousel-dot" data-dot="1"></button>
-<button class="carousel-dot" data-dot="2"></button>
-<button class="carousel-dot" data-dot="3"></button>
-<button class="carousel-dot" data-dot="4"></button>
-<button class="carousel-dot" data-dot="5"></button>
+<button class="carousel-dot active" data-dot="0" type="button"></button>
+<button class="carousel-dot" data-dot="1" type="button"></button>
+<button class="carousel-dot" data-dot="2" type="button"></button>
+<button class="carousel-dot" data-dot="3" type="button"></button>
+<button class="carousel-dot" data-dot="4" type="button"></button>
+<button class="carousel-dot" data-dot="5" type="button"></button>
 </div>
-<button class="carousel-arrow" id="carouselNext">→</button>
+
+<button class="carousel-arrow" id="carouselNext" type="button">→</button>
 </div>
 
 </section>
@@ -1790,7 +1849,7 @@ gap:7px;
 
 <div class="plans-grid">
 
-<button class="plan-card trial" data-plan="free">
+<button class="plan-card trial" data-plan="free" type="button">
 <div class="plan-top">
 <span class="plan-badge free" id="freeBadge"></span>
 </div>
@@ -1800,7 +1859,7 @@ gap:7px;
 <div class="plan-action" id="freeAction"></div>
 </button>
 
-<button class="plan-card" data-plan="monthly">
+<button class="plan-card" data-plan="monthly" type="button">
 <div class="plan-top"></div>
 <div class="plan-price">£1</div>
 <div class="plan-period" id="monthlyPeriod"></div>
@@ -1808,7 +1867,7 @@ gap:7px;
 <div class="plan-action" id="monthlyAction"></div>
 </button>
 
-<button class="plan-card annual" data-plan="annual">
+<button class="plan-card annual" data-plan="annual" type="button">
 <div class="plan-top">
 <span class="plan-badge best" id="annualBadge"></span>
 </div>
@@ -1835,7 +1894,7 @@ gap:7px;
 
 <div class="membership-shell" id="membershipShell">
 
-<button class="membership-close" id="membershipClose">×</button>
+<button class="membership-close" id="membershipClose" type="button">×</button>
 
 <section class="membership-step active" id="questionStep">
 
@@ -1853,7 +1912,7 @@ gap:7px;
 <span class="summary-price" id="selectedPlanPrice"></span>
 </div>
 
-<form class="membership-form" id="questionForm">
+<form class="membership-form" id="questionForm" novalidate>
 
 <div class="field" id="firstNameBlock">
 <label>
@@ -1878,6 +1937,7 @@ gap:7px;
 <span id="countryLabel"></span>
 <span class="required-star">*</span>
 </label>
+
 <select id="memberCountry">
 <option value="" id="countryPlaceholder"></option>
 <option value="GB">United Kingdom</option>
@@ -1893,6 +1953,7 @@ gap:7px;
 <option value="SK">Slovakia</option>
 <option value="US">United States</option>
 </select>
+
 <div class="field-error" id="requiredError2"></div>
 </div>
 
@@ -1933,7 +1994,7 @@ gap:7px;
 <input id="petBreedId" type="hidden">
 </div>
 
-<button class="primary-button" id="questionNext"></button>
+<button class="primary-button" id="questionNext" type="submit"></button>
 
 </form>
 
@@ -1944,7 +2005,7 @@ gap:7px;
 <div class="payment-top">
 
 <div class="payment-topline">
-<button class="payment-back" id="checkoutBack"></button>
+<button class="payment-back" id="checkoutBack" type="button"></button>
 <span class="payment-secure" id="paymentSecure"></span>
 </div>
 
@@ -1986,7 +2047,7 @@ gap:7px;
 
 <div class="payment-choice open" id="walletChoice">
 
-<button class="payment-choice-header" id="walletChoiceToggle">
+<button class="payment-choice-header" id="walletChoiceToggle" type="button">
 
 <span class="payment-choice-label" id="payWithLabel"></span>
 
@@ -2009,6 +2070,7 @@ gap:7px;
 
 <div class="payment-consent">
 <input id="walletConsent" type="checkbox">
+
 <label for="walletConsent">
 <span id="consentBefore1"></span>
 <a href="terms.html" id="termsLink1"></a>,
@@ -2029,7 +2091,7 @@ gap:7px;
 
 <div class="payment-choice" id="cardChoice">
 
-<button class="payment-choice-header" id="cardChoiceToggle">
+<button class="payment-choice-header" id="cardChoiceToggle" type="button">
 
 <span class="payment-choice-label" id="cardPayLabel"></span>
 
@@ -2049,6 +2111,7 @@ gap:7px;
 
 <div class="payment-consent">
 <input id="cardConsent" type="checkbox">
+
 <label for="cardConsent">
 <span id="consentBefore2"></span>
 <a href="terms.html" id="termsLink2"></a>,
@@ -2057,7 +2120,7 @@ gap:7px;
 </label>
 </div>
 
-<button class="payment-submit" id="paymentSubmit" disabled></button>
+<button class="payment-submit" id="paymentSubmit" type="button" disabled></button>
 
 </div>
 
@@ -2079,11 +2142,13 @@ gap:7px;
 </section>
 
 <section class="membership-step" id="verifyStep">
+
 <div class="verify-wrap">
 <div class="verify-spinner"></div>
 <h2 id="verifyTitle"></h2>
 <p id="verifyText"></p>
 </div>
+
 </section>
 
 <section class="membership-step" id="successStep">
@@ -2091,6 +2156,7 @@ gap:7px;
 <div class="success-wrap">
 
 <div class="success-mark">✓</div>
+
 <h2 id="successTitle"></h2>
 <p class="success-intro" id="successIntro"></p>
 
@@ -2140,11 +2206,12 @@ gap:7px;
 <div class="failure-wrap">
 
 <div class="failure-icon">!</div>
+
 <h2 id="failureTitle"></h2>
 <p id="failureText"></p>
 
-<button class="primary-button" id="failureRetry"></button>
-<button class="secondary-button" id="failureClose"></button>
+<button class="primary-button" id="failureRetry" type="button"></button>
+<button class="secondary-button" id="failureClose" type="button"></button>
 
 </div>
 
@@ -2173,167 +2240,566 @@ const LANGS=[
 const I18N={
 
 en:{
-contents:"Contents",profile:"Profile",subscribe:"Subscribe",language:"Language",
-menu:["Home","Latest Issue","Articles","Photos","Cover Stars","Marketplace","Places","PETS & DOGUE Club"],
-nav:["Magazine","Articles","Photos","Cover Stars","Marketplace","Places"],
-contact:"Contact Us",privacy:"Privacy",terms:"Terms",cookies:"Cookies",
-clubKicker:"PETS & DOGUE CLUB",clubTitle:"A better world for your pet.",
-clubIntro:"Cover opportunities, partner benefits, member-only stories and useful services — all in one membership.",
-benefitsKicker:"CLUB BENEFITS",benefitsTitle:"What you get",
-cards:[
-["01 · COVER STAR","Become a Cover Star","Enter PETS & DOGUE competitions and give your pet the chance to appear on our cover."],
-["02 · MEMBER BENEFITS","Partner Discounts","Unlock exclusive member offers, VIP coupons and selected partner discounts."],
-["03 · EDITORIAL","Your Pet in DOGUE","Photos, stories and editorial opportunities created for PETS & DOGUE members."],
-["04 · PET HEALTH","Pet Health","Useful health guides, veterinary advice and everyday care for happier pets."],
-["05 · BEAUTY","Beauty & Grooming","Discover grooming, care and inspiration for every kind of animal."],
-["06 · LIFESTYLE","Lifestyle & Travel","Explore extraordinary animals, travel inspiration and the world of PETS & DOGUE."]
+contents:"Contents",
+profile:"Profile",
+subscribe:"Subscribe",
+language:"Language",
+menu:[
+"Home",
+"Latest Issue",
+"Articles",
+"Photos",
+"Cover Stars",
+"Marketplace",
+"Places",
+"PETS & DOGUE Club"
 ],
-plansKicker:"MEMBERSHIP",plansTitle:"Choose your plan",plansIntro:"Tap a plan to continue.",
-freeBadge:"30 DAYS FREE",freePeriod:"first 30 days",freeNote:"£0 today · then £1/month",freeAction:"START FREE →",
-monthlyPeriod:"per month",monthlyNote:"£1 charged today",monthlyAction:"CHOOSE MONTHLY →",
-annualBadge:"BEST VALUE",annualPeriod:"per year",annualNote:"£10 charged today",annualAction:"CHOOSE ANNUAL →",
+nav:[
+"Magazine",
+"Articles",
+"Photos",
+"Cover Stars",
+"Marketplace",
+"Places"
+],
+contact:"Contact Us",
+privacy:"Privacy",
+terms:"Terms",
+cookies:"Cookies",
+
+clubKicker:"PETS & DOGUE CLUB",
+clubTitle:"A better world for your pet.",
+clubIntro:"Cover opportunities, partner benefits, member-only stories and useful services — all in one membership.",
+
+benefitsKicker:"CLUB BENEFITS",
+benefitsTitle:"What you get",
+
+cards:[
+[
+"01 · COVER STAR",
+"Become a Cover Star",
+"Enter PETS & DOGUE competitions and give your pet the chance to appear on our cover."
+],
+[
+"02 · MEMBER BENEFITS",
+"Partner Discounts",
+"Unlock exclusive member offers, VIP coupons and selected partner discounts."
+],
+[
+"03 · EDITORIAL",
+"Your Pet in DOGUE",
+"Photos, stories and editorial opportunities created for PETS & DOGUE members."
+],
+[
+"04 · PET HEALTH",
+"Pet Health",
+"Useful health guides, veterinary advice and everyday care for happier pets."
+],
+[
+"05 · BEAUTY",
+"Beauty & Grooming",
+"Discover grooming, care and inspiration for every kind of animal."
+],
+[
+"06 · LIFESTYLE",
+"Lifestyle & Travel",
+"Explore extraordinary animals, travel inspiration and the world of PETS & DOGUE."
+]
+],
+
+plansKicker:"MEMBERSHIP",
+plansTitle:"Choose your plan",
+plansIntro:"Tap a plan to continue.",
+
+freeBadge:"30 DAYS FREE",
+freePeriod:"first 30 days",
+freeNote:"£0 today · then £1/month",
+freeAction:"START FREE →",
+
+monthlyPeriod:"per month",
+monthlyNote:"£1 charged today",
+monthlyAction:"CHOOSE MONTHLY →",
+
+annualBadge:"BEST VALUE",
+annualPeriod:"per year",
+annualNote:"£10 charged today",
+annualAction:"CHOOSE ANNUAL →",
+
 smallprint:"Free trial applies to the £1 monthly membership. Annual membership is £10 per year.",
-questionKicker:"PETS & DOGUE CLUB",questionTitle:"Tell us about you",questionIntro:"Only your basic member details are required. Pet details are optional.",
-selected:"SELECTED PLAN",firstName:"Your first name",email:"Email address",country:"Country",chooseCountry:"Choose your country",
-petTitle:"Your pet",petNote:"Optional — you can add these details now or later.",petName:"Pet's name",petType:"Type of pet",
-choosePet:"Choose one",pets:["Dog","Cat","Bird","Horse","Small animal","Other"],breed:"Breed",optional:"OPTIONAL",next:"NEXT",
-required:"Please answer this question.",invalidEmail:"Please enter a valid email address.",
+
+questionKicker:"PETS & DOGUE CLUB",
+questionTitle:"Tell us about you",
+questionIntro:"Only your basic member details are required. Pet details are optional.",
+
+selected:"SELECTED PLAN",
+firstName:"Your first name",
+email:"Email address",
+country:"Country",
+chooseCountry:"Choose your country",
+
+petTitle:"Your pet",
+petNote:"Optional — you can add these details now or later.",
+petName:"Pet's name",
+petType:"Type of pet",
+choosePet:"Choose one",
+pets:[
+"Dog",
+"Cat",
+"Bird",
+"Horse",
+"Small animal",
+"Other"
+],
+breed:"Breed",
+optional:"OPTIONAL",
+next:"NEXT",
+
+required:"Please answer this question.",
+invalidEmail:"Please enter a valid email address.",
+
 footer:"THE INTERNATIONAL LUXURY ANIMAL MAGAZINE",
+
 pay:{
-back:"← BACK",secure:"SECURE PAYMENT",title:"Complete your membership",
-membership:"YOUR MEMBERSHIP",due:"Due today",
+back:"← BACK",
+secure:"SECURE PAYMENT",
+title:"Complete your membership",
+membership:"YOUR MEMBERSHIP",
+due:"Due today",
+
 renewal:"Automatic renewal and cancellation",
+
 freeRenew:"After your free 30 days, your membership continues at £1/month until cancelled. Cancel before the trial ends to avoid the first charge.",
+
 monthlyRenew:"Your membership renews automatically at £1/month until cancelled.",
+
 annualRenew:"Your membership renews automatically at £10/year until cancelled.",
-payWith:"PAY WITH",card:"PAY WITH A CARD",or:"or",
-consentBefore:"By subscribing, you agree to our",terms:"terms and conditions",privacy:"privacy policy",
+
+payWith:"PAY WITH",
+card:"PAY WITH A CARD",
+or:"or",
+
+consentBefore:"By subscribing, you agree to our",
+terms:"terms and conditions",
+privacy:"privacy policy",
 consentAfter:"and automatic renewal/cancellation terms above.",
+
 walletFallback:"Google Pay, Apple Pay, PayPal and other supported wallets appear automatically when available on your device.",
-loading:"Preparing secure payment",pay:"PAY SECURELY",freeButton:"START FREE TRIAL",processing:"PROCESSING…",
+
+loading:"Preparing secure payment",
+
+pay:"PAY SECURELY",
+freeButton:"START FREE TRIAL",
+processing:"PROCESSING…",
+
 stripe:"Secure payment powered by Stripe",
+
 legal:"Your payment details are encrypted and handled securely by Stripe. PETS & DOGUE does not store your card number.",
+
 agree:"Please accept the membership terms to continue.",
+
 generic:"Unable to process payment. Please try again."
 },
-verifyTitle:"Confirming your membership",verifyText:"Please wait while PETS & DOGUE securely confirms your membership.",
-successTitle:"Welcome to PETS & DOGUE Club",successIntro:"Your membership is now active.",
-paid:"Paid today",start:"Membership starts",until:"Valid until",nextPayment:"Next payment",memberEmail:"Member email",
-account:"GO TO MY ACCOUNT",home:"BACK TO PETS & DOGUE",
-failureTitle:"We couldn't complete the payment.",failureText:"Please check your payment details and try again.",
-retry:"TRY AGAIN",close:"CLOSE"
+
+verifyTitle:"Confirming your membership",
+verifyText:"Please wait while PETS & DOGUE securely confirms your membership.",
+
+successTitle:"Welcome to PETS & DOGUE Club",
+successIntro:"Your membership is now active.",
+
+paid:"Paid today",
+start:"Membership starts",
+until:"Valid until",
+nextPayment:"Next payment",
+memberEmail:"Member email",
+
+account:"GO TO MY ACCOUNT",
+home:"BACK TO PETS & DOGUE",
+
+failureTitle:"We couldn't complete the payment.",
+failureText:"Please check your payment details and try again.",
+retry:"TRY AGAIN",
+close:"CLOSE"
 },
 
 ru:{
-contents:"Содержание",profile:"Профиль",subscribe:"Подписка",language:"Язык",
-menu:["Главная","Последний выпуск","Статьи","Фото","Звёзды обложки","Маркетплейс","Места","Клуб PETS & DOGUE"],
-nav:["Журнал","Статьи","Фото","Звёзды обложки","Маркетплейс","Места"],
-contact:"Связаться с нами",privacy:"Конфиденциальность",terms:"Условия",cookies:"Cookie",
-clubKicker:"КЛУБ PETS & DOGUE",clubTitle:"Лучший мир для вашего питомца.",
-clubIntro:"Шанс попасть на обложку, преимущества партнёров, материалы для участников и полезные сервисы — в одном членстве.",
-benefitsKicker:"ПРЕИМУЩЕСТВА КЛУБА",benefitsTitle:"Что вы получаете",
-cards:[
-["01 · ЗВЕЗДА ОБЛОЖКИ","Стать звездой обложки","Участвуйте в конкурсах PETS & DOGUE и дайте питомцу шанс появиться на нашей обложке."],
-["02 · ПРЕИМУЩЕСТВА","Скидки партнёров","Эксклюзивные предложения, VIP-купоны и скидки партнёров для участников клуба."],
-["03 · РЕДАКЦИЯ","Ваш питомец в DOGUE","Фото, истории и редакционные возможности специально для участников PETS & DOGUE."],
-["04 · ЗДОРОВЬЕ","Здоровье питомца","Полезные материалы о здоровье, ветеринарные советы и ежедневный уход."],
-["05 · КРАСОТА","Красота и груминг","Груминг, уход и вдохновение для животных разных видов."],
-["06 · СТИЛЬ ЖИЗНИ","Стиль жизни и путешествия","Необычные животные, путешествия и визуальный мир PETS & DOGUE."]
+contents:"Содержание",
+profile:"Профиль",
+subscribe:"Подписка",
+language:"Язык",
+
+menu:[
+"Главная",
+"Последний выпуск",
+"Статьи",
+"Фото",
+"Звёзды обложки",
+"Маркетплейс",
+"Места",
+"Клуб PETS & DOGUE"
 ],
-plansKicker:"ЧЛЕНСТВО",plansTitle:"Выберите свой план",plansIntro:"Нажмите на тариф, чтобы продолжить.",
-freeBadge:"30 ДНЕЙ БЕСПЛАТНО",freePeriod:"первые 30 дней",freeNote:"£0 сегодня · затем £1/мес.",freeAction:"НАЧАТЬ БЕСПЛАТНО →",
-monthlyPeriod:"в месяц",monthlyNote:"£1 сегодня",monthlyAction:"ВЫБРАТЬ МЕСЯЧНЫЙ →",
-annualBadge:"ЛУЧШАЯ ЦЕНА",annualPeriod:"в год",annualNote:"£10 сегодня",annualAction:"ВЫБРАТЬ ГОДОВОЙ →",
+
+nav:[
+"Журнал",
+"Статьи",
+"Фото",
+"Звёзды обложки",
+"Маркетплейс",
+"Места"
+],
+
+contact:"Связаться с нами",
+privacy:"Конфиденциальность",
+terms:"Условия",
+cookies:"Cookie",
+
+clubKicker:"КЛУБ PETS & DOGUE",
+clubTitle:"Лучший мир для вашего питомца.",
+
+clubIntro:"Шанс попасть на обложку, преимущества партнёров, материалы для участников и полезные сервисы — в одном членстве.",
+
+benefitsKicker:"ПРЕИМУЩЕСТВА КЛУБА",
+benefitsTitle:"Что вы получаете",
+
+cards:[
+[
+"01 · ЗВЕЗДА ОБЛОЖКИ",
+"Стать звездой обложки",
+"Участвуйте в конкурсах PETS & DOGUE и дайте питомцу шанс появиться на нашей обложке."
+],
+[
+"02 · ПРЕИМУЩЕСТВА",
+"Скидки партнёров",
+"Эксклюзивные предложения, VIP-купоны и скидки партнёров для участников клуба."
+],
+[
+"03 · РЕДАКЦИЯ",
+"Ваш питомец в DOGUE",
+"Фото, истории и редакционные возможности специально для участников PETS & DOGUE."
+],
+[
+"04 · ЗДОРОВЬЕ",
+"Здоровье питомца",
+"Полезные материалы о здоровье, ветеринарные советы и ежедневный уход."
+],
+[
+"05 · КРАСОТА",
+"Красота и груминг",
+"Груминг, уход и вдохновение для животных разных видов."
+],
+[
+"06 · СТИЛЬ ЖИЗНИ",
+"Стиль жизни и путешествия",
+"Необычные животные, путешествия и визуальный мир PETS & DOGUE."
+]
+],
+
+plansKicker:"ЧЛЕНСТВО",
+plansTitle:"Выберите свой план",
+plansIntro:"Нажмите на тариф, чтобы продолжить.",
+
+freeBadge:"30 ДНЕЙ БЕСПЛАТНО",
+freePeriod:"первые 30 дней",
+freeNote:"£0 сегодня · затем £1/мес.",
+freeAction:"НАЧАТЬ БЕСПЛАТНО →",
+
+monthlyPeriod:"в месяц",
+monthlyNote:"£1 сегодня",
+monthlyAction:"ВЫБРАТЬ МЕСЯЧНЫЙ →",
+
+annualBadge:"ЛУЧШАЯ ЦЕНА",
+annualPeriod:"в год",
+annualNote:"£10 сегодня",
+annualAction:"ВЫБРАТЬ ГОДОВОЙ →",
+
 smallprint:"30 бесплатных дней действуют для месячного членства £1. Годовое членство стоит £10.",
-questionKicker:"КЛУБ PETS & DOGUE",questionTitle:"Расскажите о себе",questionIntro:"Обязательны только основные данные участника. Данные питомца необязательны.",
-selected:"ВЫБРАННЫЙ ТАРИФ",firstName:"Ваше имя",email:"Email адрес",country:"Страна",chooseCountry:"Выберите страну",
-petTitle:"Ваш питомец",petNote:"Необязательно — эти данные можно добавить сейчас или позже.",petName:"Имя питомца",petType:"Тип животного",
-choosePet:"Выберите",pets:["Собака","Кошка","Птица","Лошадь","Маленькое животное","Другое"],breed:"Порода",optional:"НЕОБЯЗАТЕЛЬНО",next:"ДАЛЕЕ",
-required:"Пожалуйста, заполните это поле.",invalidEmail:"Введите правильный email адрес.",
+
+questionKicker:"КЛУБ PETS & DOGUE",
+questionTitle:"Расскажите о себе",
+questionIntro:"Обязательны только основные данные участника. Данные питомца необязательны.",
+
+selected:"ВЫБРАННЫЙ ТАРИФ",
+firstName:"Ваше имя",
+email:"Email адрес",
+country:"Страна",
+chooseCountry:"Выберите страну",
+
+petTitle:"Ваш питомец",
+petNote:"Необязательно — эти данные можно добавить сейчас или позже.",
+petName:"Имя питомца",
+petType:"Тип животного",
+choosePet:"Выберите",
+
+pets:[
+"Собака",
+"Кошка",
+"Птица",
+"Лошадь",
+"Маленькое животное",
+"Другое"
+],
+
+breed:"Порода",
+optional:"НЕОБЯЗАТЕЛЬНО",
+next:"ДАЛЕЕ",
+
+required:"Пожалуйста, заполните это поле.",
+invalidEmail:"Введите правильный email адрес.",
+
 footer:"МЕЖДУНАРОДНЫЙ ЛЮКСОВЫЙ ЖУРНАЛ О ЖИВОТНЫХ",
+
 pay:{
-back:"← НАЗАД",secure:"БЕЗОПАСНАЯ ОПЛАТА",title:"Завершите оформление",
-membership:"ВАШЕ ЧЛЕНСТВО",due:"К оплате сегодня",
+back:"← НАЗАД",
+secure:"БЕЗОПАСНАЯ ОПЛАТА",
+title:"Завершите оформление",
+
+membership:"ВАШЕ ЧЛЕНСТВО",
+due:"К оплате сегодня",
+
 renewal:"Автоматическое продление и отмена",
+
 freeRenew:"После 30 бесплатных дней членство продолжится за £1/мес. Отмените до окончания пробного периода, чтобы избежать первого списания.",
+
 monthlyRenew:"Членство автоматически продлевается за £1/мес. до отмены.",
+
 annualRenew:"Членство автоматически продлевается за £10/год до отмены.",
-payWith:"ОПЛАТИТЬ ЧЕРЕЗ",card:"ОПЛАТИТЬ КАРТОЙ",or:"или",
-consentBefore:"Оформляя подписку, вы соглашаетесь с",terms:"условиями",privacy:"политикой конфиденциальности",
+
+payWith:"ОПЛАТИТЬ ЧЕРЕЗ",
+card:"ОПЛАТИТЬ КАРТОЙ",
+or:"или",
+
+consentBefore:"Оформляя подписку, вы соглашаетесь с",
+terms:"условиями",
+privacy:"политикой конфиденциальности",
 consentAfter:"и указанными выше условиями автоматического продления и отмены.",
+
 walletFallback:"Google Pay, Apple Pay, PayPal и другие поддерживаемые кошельки появляются автоматически, если доступны на вашем устройстве.",
-loading:"Подготавливаем безопасную оплату",pay:"БЕЗОПАСНО ОПЛАТИТЬ",freeButton:"НАЧАТЬ БЕСПЛАТНЫЙ ПЕРИОД",processing:"ОБРАБОТКА…",
+
+loading:"Подготавливаем безопасную оплату",
+
+pay:"БЕЗОПАСНО ОПЛАТИТЬ",
+freeButton:"НАЧАТЬ БЕСПЛАТНЫЙ ПЕРИОД",
+processing:"ОБРАБОТКА…",
+
 stripe:"Безопасная оплата через Stripe",
+
 legal:"Платёжные данные шифруются и безопасно обрабатываются Stripe. PETS & DOGUE не хранит номер вашей карты.",
+
 agree:"Чтобы продолжить, согласитесь с условиями членства.",
+
 generic:"Не удалось провести оплату. Попробуйте ещё раз."
 },
-verifyTitle:"Подтверждаем членство",verifyText:"Подождите, PETS & DOGUE безопасно подтверждает ваше членство.",
-successTitle:"Добро пожаловать в PETS & DOGUE Club",successIntro:"Ваше членство активно.",
-paid:"Оплачено сегодня",start:"Начало членства",until:"Действует до",nextPayment:"Следующая оплата",memberEmail:"Email участника",
-account:"ПЕРЕЙТИ В ПРОФИЛЬ",home:"ВЕРНУТЬСЯ В PETS & DOGUE",
-failureTitle:"Не удалось завершить оплату.",failureText:"Проверьте платёжные данные и попробуйте снова.",
-retry:"ПОПРОБОВАТЬ СНОВА",close:"ЗАКРЫТЬ"
+
+verifyTitle:"Подтверждаем членство",
+verifyText:"Подождите, PETS & DOGUE безопасно подтверждает ваше членство.",
+
+successTitle:"Добро пожаловать в PETS & DOGUE Club",
+successIntro:"Ваше членство активно.",
+
+paid:"Оплачено сегодня",
+start:"Начало членства",
+until:"Действует до",
+nextPayment:"Следующая оплата",
+memberEmail:"Email участника",
+
+account:"ПЕРЕЙТИ В ПРОФИЛЬ",
+home:"ВЕРНУТЬСЯ В PETS & DOGUE",
+
+failureTitle:"Не удалось завершить оплату.",
+failureText:"Проверьте платёжные данные и попробуйте снова.",
+retry:"ПОПРОБОВАТЬ СНОВА",
+close:"ЗАКРЫТЬ"
 },
 
 uk:{
-contents:"Зміст",profile:"Профіль",subscribe:"Підписка",language:"Мова",
-menu:["Головна","Останній випуск","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця","Клуб PETS & DOGUE"],
-nav:["Журнал","Статті","Фото","Зірки обкладинки","Маркетплейс","Місця"],
-contact:"Зв’язатися з нами",privacy:"Конфіденційність",terms:"Умови",cookies:"Cookie",
-clubKicker:"КЛУБ PETS & DOGUE",clubTitle:"Кращий світ для вашого улюбленця.",
-clubIntro:"Можливість потрапити на обкладинку, переваги партнерів, матеріали для учасників і корисні сервіси — в одному членстві.",
-benefitsKicker:"ПЕРЕВАГИ КЛУБУ",benefitsTitle:"Що ви отримуєте",
-cards:[
-["01 · ЗІРКА ОБКЛАДИНКИ","Стати зіркою обкладинки","Беріть участь у конкурсах PETS & DOGUE та дайте улюбленцю шанс з’явитися на нашій обкладинці."],
-["02 · ПЕРЕВАГИ","Знижки партнерів","Ексклюзивні пропозиції, VIP-купони та знижки партнерів для членів клубу."],
-["03 · РЕДАКЦІЯ","Ваш улюбленець у DOGUE","Фото, історії та редакційні можливості для членів PETS & DOGUE."],
-["04 · ЗДОРОВ’Я","Здоров’я улюбленця","Корисні матеріали про здоров’я, ветеринарні поради та щоденний догляд."],
-["05 · КРАСА","Краса та грумінг","Грумінг, догляд і натхнення для тварин різних видів."],
-["06 · СТИЛЬ ЖИТТЯ","Стиль життя і подорожі","Незвичайні тварини, подорожі та візуальний світ PETS & DOGUE."]
+contents:"Зміст",
+profile:"Профіль",
+subscribe:"Підписка",
+language:"Мова",
+
+menu:[
+"Головна",
+"Останній випуск",
+"Статті",
+"Фото",
+"Зірки обкладинки",
+"Маркетплейс",
+"Місця",
+"Клуб PETS & DOGUE"
 ],
-plansKicker:"ЧЛЕНСТВО",plansTitle:"Оберіть свій план",plansIntro:"Натисніть на тариф, щоб продовжити.",
-freeBadge:"30 ДНІВ БЕЗКОШТОВНО",freePeriod:"перші 30 днів",freeNote:"£0 сьогодні · потім £1/міс.",freeAction:"ПОЧАТИ БЕЗКОШТОВНО →",
-monthlyPeriod:"на місяць",monthlyNote:"£1 сьогодні",monthlyAction:"ОБРАТИ МІСЯЧНИЙ →",
-annualBadge:"НАЙКРАЩА ЦІНА",annualPeriod:"на рік",annualNote:"£10 сьогодні",annualAction:"ОБРАТИ РІЧНИЙ →",
+
+nav:[
+"Журнал",
+"Статті",
+"Фото",
+"Зірки обкладинки",
+"Маркетплейс",
+"Місця"
+],
+
+contact:"Зв’язатися з нами",
+privacy:"Конфіденційність",
+terms:"Умови",
+cookies:"Cookie",
+
+clubKicker:"КЛУБ PETS & DOGUE",
+clubTitle:"Кращий світ для вашого улюбленця.",
+
+clubIntro:"Можливість потрапити на обкладинку, переваги партнерів, матеріали для учасників і корисні сервіси — в одному членстві.",
+
+benefitsKicker:"ПЕРЕВАГИ КЛУБУ",
+benefitsTitle:"Що ви отримуєте",
+
+cards:[
+[
+"01 · ЗІРКА ОБКЛАДИНКИ",
+"Стати зіркою обкладинки",
+"Беріть участь у конкурсах PETS & DOGUE та дайте улюбленцю шанс з’явитися на нашій обкладинці."
+],
+[
+"02 · ПЕРЕВАГИ",
+"Знижки партнерів",
+"Ексклюзивні пропозиції, VIP-купони та знижки партнерів для членів клубу."
+],
+[
+"03 · РЕДАКЦІЯ",
+"Ваш улюбленець у DOGUE",
+"Фото, історії та редакційні можливості для членів PETS & DOGUE."
+],
+[
+"04 · ЗДОРОВ’Я",
+"Здоров’я улюбленця",
+"Корисні матеріали про здоров’я, ветеринарні поради та щоденний догляд."
+],
+[
+"05 · КРАСА",
+"Краса та грумінг",
+"Грумінг, догляд і натхнення для тварин різних видів."
+],
+[
+"06 · СТИЛЬ ЖИТТЯ",
+"Стиль життя і подорожі",
+"Незвичайні тварини, подорожі та візуальний світ PETS & DOGUE."
+]
+],
+
+plansKicker:"ЧЛЕНСТВО",
+plansTitle:"Оберіть свій план",
+plansIntro:"Натисніть на тариф, щоб продовжити.",
+
+freeBadge:"30 ДНІВ БЕЗКОШТОВНО",
+freePeriod:"перші 30 днів",
+freeNote:"£0 сьогодні · потім £1/міс.",
+freeAction:"ПОЧАТИ БЕЗКОШТОВНО →",
+
+monthlyPeriod:"на місяць",
+monthlyNote:"£1 сьогодні",
+monthlyAction:"ОБРАТИ МІСЯЧНИЙ →",
+
+annualBadge:"НАЙКРАЩА ЦІНА",
+annualPeriod:"на рік",
+annualNote:"£10 сьогодні",
+annualAction:"ОБРАТИ РІЧНИЙ →",
+
 smallprint:"30 безкоштовних днів діють для місячного членства £1. Річне членство коштує £10.",
-questionKicker:"КЛУБ PETS & DOGUE",questionTitle:"Розкажіть про себе",questionIntro:"Обов’язкові лише основні дані учасника. Дані про улюбленця необов’язкові.",
-selected:"ОБРАНИЙ ТАРИФ",firstName:"Ваше ім’я",email:"Email адреса",country:"Країна",chooseCountry:"Оберіть країну",
-petTitle:"Ваш улюбленець",petNote:"Необов’язково — ці дані можна додати зараз або пізніше.",petName:"Ім’я улюбленця",petType:"Тип тварини",
-choosePet:"Оберіть",pets:["Собака","Кішка","Птах","Кінь","Маленька тварина","Інше"],breed:"Порода",optional:"НЕОБОВ’ЯЗКОВО",next:"ДАЛІ",
-required:"Будь ласка, заповніть це поле.",invalidEmail:"Введіть правильну email адресу.",
+
+questionKicker:"КЛУБ PETS & DOGUE",
+questionTitle:"Розкажіть про себе",
+questionIntro:"Обов’язкові лише основні дані учасника. Дані про улюбленця необов’язкові.",
+
+selected:"ОБРАНИЙ ТАРИФ",
+firstName:"Ваше ім’я",
+email:"Email адреса",
+country:"Країна",
+chooseCountry:"Оберіть країну",
+
+petTitle:"Ваш улюбленець",
+petNote:"Необов’язково — ці дані можна додати зараз або пізніше.",
+petName:"Ім’я улюбленця",
+petType:"Тип тварини",
+choosePet:"Оберіть",
+
+pets:[
+"Собака",
+"Кішка",
+"Птах",
+"Кінь",
+"Маленька тварина",
+"Інше"
+],
+
+breed:"Порода",
+optional:"НЕОБОВ’ЯЗКОВО",
+next:"ДАЛІ",
+
+required:"Будь ласка, заповніть це поле.",
+invalidEmail:"Введіть правильну email адресу.",
+
 footer:"МІЖНАРОДНИЙ ЛЮКСОВИЙ ЖУРНАЛ ПРО ТВАРИН",
+
 pay:{
-back:"← НАЗАД",secure:"БЕЗПЕЧНА ОПЛАТА",title:"Завершіть оформлення",
-membership:"ВАШЕ ЧЛЕНСТВО",due:"До сплати сьогодні",
+back:"← НАЗАД",
+secure:"БЕЗПЕЧНА ОПЛАТА",
+title:"Завершіть оформлення",
+
+membership:"ВАШЕ ЧЛЕНСТВО",
+due:"До сплати сьогодні",
+
 renewal:"Автоматичне продовження та скасування",
+
 freeRenew:"Після 30 безкоштовних днів членство продовжиться за £1/міс. Скасуйте до завершення пробного періоду, щоб уникнути першого списання.",
+
 monthlyRenew:"Членство автоматично продовжується за £1/міс. до скасування.",
+
 annualRenew:"Членство автоматично продовжується за £10/рік до скасування.",
-payWith:"ОПЛАТИТИ ЧЕРЕЗ",card:"ОПЛАТИТИ КАРТКОЮ",or:"або",
-consentBefore:"Оформлюючи підписку, ви погоджуєтеся з",terms:"умовами",privacy:"політикою конфіденційності",
+
+payWith:"ОПЛАТИТИ ЧЕРЕЗ",
+card:"ОПЛАТИТИ КАРТКОЮ",
+or:"або",
+
+consentBefore:"Оформлюючи підписку, ви погоджуєтеся з",
+terms:"умовами",
+privacy:"політикою конфіденційності",
 consentAfter:"та наведеними вище умовами автоматичного продовження і скасування.",
+
 walletFallback:"Google Pay, Apple Pay, PayPal та інші підтримувані гаманці з’являються автоматично, якщо доступні на вашому пристрої.",
-loading:"Готуємо безпечну оплату",pay:"БЕЗПЕЧНО ОПЛАТИТИ",freeButton:"ПОЧАТИ БЕЗКОШТОВНИЙ ПЕРІОД",processing:"ОБРОБКА…",
+
+loading:"Готуємо безпечну оплату",
+
+pay:"БЕЗПЕЧНО ОПЛАТИТИ",
+freeButton:"ПОЧАТИ БЕЗКОШТОВНИЙ ПЕРІОД",
+processing:"ОБРОБКА…",
+
 stripe:"Безпечна оплата через Stripe",
+
 legal:"Платіжні дані шифруються та безпечно обробляються Stripe. PETS & DOGUE не зберігає номер вашої картки.",
+
 agree:"Щоб продовжити, погодьтеся з умовами членства.",
+
 generic:"Не вдалося провести оплату. Спробуйте ще раз."
 },
-verifyTitle:"Підтверджуємо членство",verifyText:"Зачекайте, PETS & DOGUE безпечно підтверджує ваше членство.",
-successTitle:"Ласкаво просимо до PETS & DOGUE Club",successIntro:"Ваше членство активне.",
-paid:"Сплачено сьогодні",start:"Початок членства",until:"Діє до",nextPayment:"Наступна оплата",memberEmail:"Email учасника",
-account:"ПЕРЕЙТИ ДО ПРОФІЛЮ",home:"ПОВЕРНУТИСЯ ДО PETS & DOGUE",
-failureTitle:"Не вдалося завершити оплату.",failureText:"Перевірте платіжні дані та спробуйте ще раз.",
-retry:"СПРОБУВАТИ ЩЕ РАЗ",close:"ЗАКРИТИ"
+
+verifyTitle:"Підтверджуємо членство",
+verifyText:"Зачекайте, PETS & DOGUE безпечно підтверджує ваше членство.",
+
+successTitle:"Ласкаво просимо до PETS & DOGUE Club",
+successIntro:"Ваше членство активне.",
+
+paid:"Сплачено сьогодні",
+start:"Початок членства",
+until:"Діє до",
+nextPayment:"Наступна оплата",
+memberEmail:"Email учасника",
+
+account:"ПЕРЕЙТИ ДО ПРОФІЛЮ",
+home:"ПОВЕРНУТИСЯ ДО PETS & DOGUE",
+
+failureTitle:"Не вдалося завершити оплату.",
+failureText:"Перевірте платіжні дані та спробуйте ще раз.",
+retry:"СПРОБУВАТИ ЩЕ РАЗ",
+close:"ЗАКРИТИ"
 }
 
 };
-
-/*
-All remaining supported languages use a complete translated
-checkout and navigation layer, while PETS & DOGUE stays unchanged.
-*/
 
 const SIMPLE={
 fr:["Sommaire","Profil","S’abonner","Langue","Choisissez votre formule","Finalisez votre adhésion","PAIEMENT SÉCURISÉ","PAYER AVEC","PAYER PAR CARTE","À payer aujourd’hui","Renouvellement automatique et annulation","PAYER EN TOUTE SÉCURITÉ","ou"],
@@ -2360,7 +2826,9 @@ hi:["विषय सूची","प्रोफ़ाइल","सदस्य�
 
 Object.entries(SIMPLE).forEach(([code,v])=>{
 
-I18N[code]=JSON.parse(JSON.stringify(I18N.en));
+I18N[code]=JSON.parse(
+JSON.stringify(I18N.en)
+);
 
 I18N[code].contents=v[0];
 I18N[code].profile=v[1];
@@ -2409,11 +2877,13 @@ en:"30-day free trial",
 ru:"30 дней бесплатно",
 uk:"30 днів безкоштовно"
 },
+
 monthly:{
 en:"Monthly membership",
 ru:"Месячное членство",
 uk:"Місячне членство"
 },
+
 annual:{
 en:"Annual membership",
 ru:"Годовое членство",
@@ -2476,14 +2946,28 @@ txt("headerSubscribe",x.subscribe);
 txt("languageLabel",x.language);
 
 [
-"menuHome","menuIssue","menuArticles","menuPhotos",
-"menuStars","menuMarketplace","menuPlaces","menuClub"
-].forEach((id,i)=>txt(id,x.menu[i]));
+"menuHome",
+"menuIssue",
+"menuArticles",
+"menuPhotos",
+"menuStars",
+"menuMarketplace",
+"menuPlaces",
+"menuClub"
+].forEach((id,i)=>{
+txt(id,x.menu[i]);
+});
 
 [
-"navMagazine","navArticles","navPhotos",
-"navStars","navMarketplace","navPlaces"
-].forEach((id,i)=>txt(id,x.nav[i]));
+"navMagazine",
+"navArticles",
+"navPhotos",
+"navStars",
+"navMarketplace",
+"navPlaces"
+].forEach((id,i)=>{
+txt(id,x.nav[i]);
+});
 
 txt("menuContact",x.contact);
 txt("menuPrivacy",x.privacy);
@@ -2493,6 +2977,7 @@ txt("menuCookies",x.cookies);
 txt("clubKicker",x.clubKicker);
 txt("clubTitle",x.clubTitle);
 txt("clubIntro",x.clubIntro);
+
 txt("benefitsKicker",x.benefitsKicker);
 txt("benefitsTitle",x.benefitsTitle);
 
@@ -2527,6 +3012,7 @@ txt("questionTitle",x.questionTitle);
 txt("questionIntro",x.questionIntro);
 
 txt("selectedPlanLabel",x.selected);
+
 txt("firstNameLabel",x.firstName);
 txt("emailLabel",x.email);
 txt("countryLabel",x.country);
@@ -2562,24 +3048,49 @@ txt("footerText",x.footer);
 txt("checkoutBack",x.pay.back);
 txt("paymentSecure",x.pay.secure);
 txt("paymentTitle",x.pay.title);
+
 txt("membershipLabel",x.pay.membership);
 txt("dueLabel",x.pay.due);
+
 txt("payWithLabel",x.pay.payWith);
 txt("cardPayLabel",x.pay.card);
 txt("paymentOr",x.pay.or);
+
 txt("renewalTitle",x.pay.renewal);
+
 txt("paymentLoadingTitle",x.pay.loading);
 
-txt("consentBefore1",`${x.pay.consentBefore} `);
-txt("consentBefore2",`${x.pay.consentBefore} `);
+txt(
+"consentBefore1",
+`${x.pay.consentBefore} `
+);
+
+txt(
+"consentBefore2",
+`${x.pay.consentBefore} `
+);
+
 txt("termsLink1",x.pay.terms);
 txt("termsLink2",x.pay.terms);
+
 txt("privacyLink1",x.pay.privacy);
 txt("privacyLink2",x.pay.privacy);
-txt("consentAfter1",` ${x.pay.consentAfter}`);
-txt("consentAfter2",` ${x.pay.consentAfter}`);
 
-txt("walletFallback",x.pay.walletFallback);
+txt(
+"consentAfter1",
+` ${x.pay.consentAfter}`
+);
+
+txt(
+"consentAfter2",
+` ${x.pay.consentAfter}`
+);
+
+txt(
+"walletFallback",
+x.pay.walletFallback
+);
+
 txt("stripeText",x.pay.stripe);
 txt("paymentLegal",x.pay.legal);
 
@@ -2588,12 +3099,18 @@ txt("verifyText",x.verifyText);
 
 txt("successTitle",x.successTitle);
 txt("successIntro",x.successIntro);
-txt("successMembershipLabel",x.pay.membership);
+
+txt(
+"successMembershipLabel",
+x.pay.membership
+);
+
 txt("paidLabel",x.paid);
 txt("startLabel",x.start);
 txt("untilLabel",x.until);
 txt("nextLabel",x.nextPayment);
 txt("memberEmailLabel",x.memberEmail);
+
 txt("accountButton",x.account);
 txt("homeButton",x.home);
 
@@ -2609,15 +3126,40 @@ function updatePlanSummary(){
 
 const p=planData();
 
-txt("selectedPlanName",p.name);
-txt("selectedPlanPrice",p.price);
+txt(
+"selectedPlanName",
+p.name
+);
 
-txt("paymentPlanName",p.name);
-txt("paymentPlanPrice",p.price);
-txt("dueTodayValue",p.price);
+txt(
+"selectedPlanPrice",
+p.price
+);
 
-txt("paymentRenewalText",renewalText());
-txt("walletRenewalText",renewalText());
+txt(
+"paymentPlanName",
+p.name
+);
+
+txt(
+"paymentPlanPrice",
+p.price
+);
+
+txt(
+"dueTodayValue",
+p.price
+);
+
+txt(
+"paymentRenewalText",
+renewalText()
+);
+
+txt(
+"walletRenewalText",
+renewalText()
+);
 
 txt(
 "paymentSubmit",
@@ -2630,16 +3172,23 @@ selectedPlan==="free"
 /* MENU */
 
 function openMenu(){
+
 $("sideMenu").classList.add("open");
+
 $("menuOverlay").classList.add("show");
+
 document.body.classList.add("locked");
 }
 
 function closeMenu(){
+
 $("sideMenu").classList.remove("open");
+
 $("menuOverlay").classList.remove("show");
 
-if(!$("membershipOverlay").classList.contains("open")){
+if(
+!$("membershipOverlay").classList.contains("open")
+){
 document.body.classList.remove("locked");
 }
 }
@@ -2652,10 +3201,16 @@ $("menuOverlay").onclick=closeMenu;
 /* CAROUSEL */
 
 const track=$("carouselTrack");
-const cards=[...document.querySelectorAll(".club-card")];
-const dots=[...document.querySelectorAll(".carousel-dot")];
 
-function centerCard(index){
+const cards=[
+...document.querySelectorAll(".club-card")
+];
+
+const dots=[
+...document.querySelectorAll(".carousel-dot")
+];
+
+function setActiveSlide(index){
 
 if(index<0){
 index=cards.length-1;
@@ -2667,6 +3222,31 @@ index=0;
 
 activeSlide=index;
 
+cards.forEach((card,i)=>{
+card.classList.toggle(
+"active",
+i===index
+);
+});
+
+dots.forEach((dot,i)=>{
+dot.classList.toggle(
+"active",
+i===index
+);
+});
+}
+
+function centerCard(index){
+
+if(index<0){
+index=cards.length-1;
+}
+
+if(index>=cards.length){
+index=0;
+}
+
 const card=cards[index];
 
 track.scrollTo({
@@ -2677,31 +3257,133 @@ card.clientWidth/2,
 behavior:"smooth"
 });
 
-cards.forEach((el,i)=>{
-el.classList.toggle("active",i===index);
-});
-
-dots.forEach((el,i)=>{
-el.classList.toggle("active",i===index);
-});
+setActiveSlide(index);
 }
 
-$("carouselPrev").onclick=()=>centerCard(activeSlide-1);
-$("carouselNext").onclick=()=>centerCard(activeSlide+1);
+function detectCenteredCard(){
+
+if(!cards.length){
+return;
+}
+
+const viewportCenter=
+track.scrollLeft+
+track.clientWidth/2;
+
+let nearestIndex=0;
+let nearestDistance=Infinity;
+
+cards.forEach((card,index)=>{
+
+const cardCenter=
+card.offsetLeft+
+card.offsetWidth/2;
+
+const distance=
+Math.abs(
+cardCenter-
+viewportCenter
+);
+
+if(distance<nearestDistance){
+
+nearestDistance=distance;
+nearestIndex=index;
+}
+});
+
+setActiveSlide(
+nearestIndex
+);
+}
+
+let carouselFrame=null;
+
+track.addEventListener(
+"scroll",
+()=>{
+
+if(carouselFrame){
+cancelAnimationFrame(
+carouselFrame
+);
+}
+
+carouselFrame=
+requestAnimationFrame(
+detectCenteredCard
+);
+},
+{
+passive:true
+}
+);
+
+track.addEventListener(
+"touchend",
+()=>{
+
+setTimeout(
+detectCenteredCard,
+80
+);
+},
+{
+passive:true
+}
+);
+
+track.addEventListener(
+"pointerup",
+()=>{
+
+setTimeout(
+detectCenteredCard,
+80
+);
+}
+);
+
+$("carouselPrev").onclick=()=>{
+centerCard(
+activeSlide-1
+);
+};
+
+$("carouselNext").onclick=()=>{
+centerCard(
+activeSlide+1
+);
+};
 
 dots.forEach(dot=>{
-dot.onclick=()=>centerCard(Number(dot.dataset.dot));
+
+dot.onclick=()=>{
+
+centerCard(
+Number(
+dot.dataset.dot
+)
+);
+};
 });
 
 /* MODAL */
 
 function showStep(id){
 
-document.querySelectorAll(".membership-step").forEach(step=>{
-step.classList.remove("active");
+document
+.querySelectorAll(".membership-step")
+.forEach(step=>{
+
+step.classList.remove(
+"active"
+);
 });
 
-$(id).classList.add("active");
+$(id).classList.add(
+"active"
+);
 
 $("membershipShell").scrollTo({
 top:0,
@@ -2717,82 +3399,155 @@ destroyPayment();
 
 updatePlanSummary();
 
-$("membershipOverlay").classList.add("open");
+$("membershipOverlay")
+.classList.add("open");
 
-document.body.classList.add("locked");
+document.body
+.classList.add("locked");
 
-showStep("questionStep");
+showStep(
+"questionStep"
+);
 }
 
 function closeMembership(){
 
-$("membershipOverlay").classList.remove("open");
+$("membershipOverlay")
+.classList.remove("open");
 
-document.body.classList.remove("locked");
+document.body
+.classList.remove("locked");
 }
 
-document.querySelectorAll("[data-plan]").forEach(button=>{
-button.onclick=()=>openMembership(button.dataset.plan);
+document
+.querySelectorAll("[data-plan]")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+openMembership(
+button.dataset.plan
+);
+};
 });
 
-$("membershipClose").onclick=closeMembership;
-$("checkoutBack").onclick=()=>showStep("questionStep");
-$("failureClose").onclick=closeMembership;
+$("membershipClose").onclick=
+closeMembership;
+
+$("checkoutBack").onclick=
+()=>showStep("questionStep");
+
+$("failureClose").onclick=
+closeMembership;
 
 /* FORM */
 
 function validEmail(value){
-return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+
+return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+.test(
 String(value||"").trim()
 );
 }
 
-$("questionForm").onsubmit=async event=>{
+$("questionForm").onsubmit=
+async event=>{
 
 event.preventDefault();
 
-const first=$("firstName");
-const email=$("memberEmail");
-const country=$("memberCountry");
+const first=
+$("firstName");
 
-const firstBad=!first.value.trim();
-const emailBad=!validEmail(email.value);
-const countryBad=!country.value;
+const email=
+$("memberEmail");
 
-$("firstNameBlock").classList.toggle("error",firstBad);
-$("memberEmailBlock").classList.toggle("error",emailBad);
-$("countryBlock").classList.toggle("error",countryBad);
+const country=
+$("memberCountry");
 
-if(firstBad||emailBad||countryBad){
+const firstBad=
+!first.value.trim();
+
+const emailBad=
+!validEmail(
+email.value
+);
+
+const countryBad=
+!country.value;
+
+$("firstNameBlock")
+.classList.toggle(
+"error",
+firstBad
+);
+
+$("memberEmailBlock")
+.classList.toggle(
+"error",
+emailBad
+);
+
+$("countryBlock")
+.classList.toggle(
+"error",
+countryBad
+);
+
+if(
+firstBad||
+emailBad||
+countryBad
+){
 return;
 }
 
 localStorage.setItem(
 "petsDogueClubQuestionnaire",
 JSON.stringify({
-firstName:first.value.trim(),
-email:email.value.trim(),
-country:country.value,
-petName:$("petName").value.trim(),
-petType:$("petType").value,
-breed:$("petBreed").value.trim(),
-breedId:$("petBreedId").value
+firstName:
+first.value.trim(),
+
+email:
+email.value.trim(),
+
+country:
+country.value,
+
+petName:
+$("petName").value.trim(),
+
+petType:
+$("petType").value,
+
+breed:
+$("petBreed").value.trim(),
+
+breedId:
+$("petBreedId").value
 })
 );
 
-showStep("checkoutStep");
+showStep(
+"checkoutStep"
+);
 
 await preparePayment();
 };
 
 /* PAYMENT ACCORDIONS */
 
-function toggleChoice(openId,otherId){
+function toggleChoice(
+openId,
+otherId
+){
 
 const box=$(openId);
 const other=$(otherId);
 
-if(box.classList.contains("open")){
+if(
+box.classList.contains("open")
+){
+
 box.classList.remove("open");
 return;
 }
@@ -2801,23 +3556,38 @@ box.classList.add("open");
 other.classList.remove("open");
 }
 
-$("walletChoiceToggle").onclick=()=>{
-toggleChoice("walletChoice","cardChoice");
+$("walletChoiceToggle").onclick=
+()=>{
+
+toggleChoice(
+"walletChoice",
+"cardChoice"
+);
 };
 
-$("cardChoiceToggle").onclick=()=>{
-toggleChoice("cardChoice","walletChoice");
+$("cardChoiceToggle").onclick=
+()=>{
+
+toggleChoice(
+"cardChoice",
+"walletChoice"
+);
 };
 
-$("cardConsent").onchange=()=>{
+$("cardConsent").onchange=
+()=>{
+
 $("paymentSubmit").disabled=
 !$("cardConsent").checked||
 !paymentContext||
 paymentBusy;
 };
 
-$("walletConsent").onchange=()=>{
-$("paymentError").classList.remove("show");
+$("walletConsent").onchange=
+()=>{
+
+$("paymentError")
+.classList.remove("show");
 };
 
 /* STRIPE */
@@ -2825,16 +3595,20 @@ $("paymentError").classList.remove("show");
 function destroyPayment(){
 
 try{
+
 if(paymentElement){
 paymentElement.destroy();
 }
-}catch(e){}
+
+}catch(error){}
 
 try{
+
 if(expressElement){
 expressElement.destroy();
 }
-}catch(e){}
+
+}catch(error){}
 
 stripe=null;
 elements=null;
@@ -2846,22 +3620,41 @@ paymentBusy=false;
 $("paymentElement").innerHTML="";
 $("expressCheckoutElement").innerHTML="";
 
-$("paymentLoading").classList.remove("hidden");
-$("embeddedPaymentContent").classList.remove("ready");
+$("paymentLoading")
+.classList.remove("hidden");
+
+$("embeddedPaymentContent")
+.classList.remove("ready");
 
 $("cardConsent").checked=false;
 $("walletConsent").checked=false;
+
 $("paymentSubmit").disabled=true;
 }
 
 function stripeLocale(){
 
 const allowed=[
-"en","fr","de","es","it","pt","nl","pl",
-"cs","sv","da","no","fi","tr","ru"
+"en",
+"fr",
+"de",
+"es",
+"it",
+"pt",
+"nl",
+"pl",
+"cs",
+"sv",
+"da",
+"no",
+"fi",
+"tr",
+"ru"
 ];
 
-return allowed.includes(currentLanguage)
+return allowed.includes(
+currentLanguage
+)
 ?currentLanguage
 :"auto";
 }
@@ -2872,12 +3665,23 @@ return{
 theme:"stripe",
 
 variables:{
-fontFamily:"Arial,Helvetica,sans-serif",
-colorPrimary:"#111111",
-colorBackground:"#ffffff",
-colorText:"#111111",
-colorDanger:"#b42318",
-borderRadius:"0px"
+fontFamily:
+"Arial,Helvetica,sans-serif",
+
+colorPrimary:
+"#111111",
+
+colorBackground:
+"#ffffff",
+
+colorText:
+"#111111",
+
+colorDanger:
+"#b42318",
+
+borderRadius:
+"0px"
 }
 };
 }
@@ -2885,9 +3689,11 @@ borderRadius:"0px"
 function showPaymentError(message){
 
 $("paymentError").textContent=
-message||t().pay.generic;
+message||
+t().pay.generic;
 
-$("paymentError").classList.add("show");
+$("paymentError")
+.classList.add("show");
 }
 
 async function preparePayment(){
@@ -2905,48 +3711,82 @@ localStorage.getItem(
 
 try{
 
-const response=await fetch(
+const response=
+await fetch(
 "/api/create-club-payment",
 {
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
-body:JSON.stringify({
-plan:selectedPlan,
-language:currentLanguage,
-firstName:member.firstName||"",
-email:member.email||"",
-country:member.country||"",
-petName:member.petName||"",
-petType:member.petType||"",
-breed:member.breed||"",
-breedId:member.breedId||""
+
+body:
+JSON.stringify({
+plan:
+selectedPlan,
+
+language:
+currentLanguage,
+
+firstName:
+member.firstName||"",
+
+email:
+member.email||"",
+
+country:
+member.country||"",
+
+petName:
+member.petName||"",
+
+petType:
+member.petType||"",
+
+breed:
+member.breed||"",
+
+breedId:
+member.breedId||""
 })
 }
 );
 
-const result=await response.json();
+const result=
+await response.json();
 
 if(!response.ok){
+
 throw new Error(
-result.error||t().pay.generic
+result.error||
+t().pay.generic
 );
 }
 
-paymentContext=result;
+paymentContext=
+result;
 
-stripe=Stripe(
+stripe=
+Stripe(
 result.publishableKey
 );
 
-elements=stripe.elements({
-clientSecret:result.clientSecret,
-appearance:stripeAppearance(),
-locale:stripeLocale()
+elements=
+stripe.elements({
+clientSecret:
+result.clientSecret,
+
+appearance:
+stripeAppearance(),
+
+locale:
+stripeLocale()
 });
 
-paymentElement=elements.create(
+paymentElement=
+elements.create(
 "payment",
 {
 layout:{
@@ -2963,10 +3803,11 @@ paymentElement.mount(
 
 try{
 
-expressElement=elements.create(
+expressElement=
+elements.create(
 "expressCheckout",
 {
-buttonHeight:52
+buttonHeight:56
 }
 );
 
@@ -2975,13 +3816,19 @@ expressElement.on(
 event=>{
 
 const methods=
-event.availablePaymentMethods||{};
+event.availablePaymentMethods||
+{};
 
 const available=
-Object.values(methods).some(Boolean);
+Object
+.values(methods)
+.some(Boolean);
 
-$("walletFallback").style.display=
-available?"none":"block";
+$("walletFallback")
+.style.display=
+available
+?"none"
+:"block";
 }
 );
 
@@ -2989,7 +3836,9 @@ expressElement.on(
 "confirm",
 async()=>{
 
-if(!$("walletConsent").checked){
+if(
+!$("walletConsent").checked
+){
 
 showPaymentError(
 t().pay.agree
@@ -3008,29 +3857,48 @@ expressElement.mount(
 
 }catch(error){
 
-$("walletFallback").style.display="block";
+$("walletFallback")
+.style.display=
+"block";
 }
 
-$("paymentLoading").classList.add("hidden");
+$("paymentLoading")
+.classList.add(
+"hidden"
+);
 
-$("embeddedPaymentContent").classList.add("ready");
+$("embeddedPaymentContent")
+.classList.add(
+"ready"
+);
 
 $("paymentSubmit").disabled=
 !$("cardConsent").checked;
 
 }catch(error){
 
-$("paymentLoading").classList.add("hidden");
+$("paymentLoading")
+.classList.add(
+"hidden"
+);
 
-$("embeddedPaymentContent").classList.add("ready");
+$("embeddedPaymentContent")
+.classList.add(
+"ready"
+);
 
-showPaymentError(error.message);
+showPaymentError(
+error.message
+);
 }
 }
 
-$("paymentSubmit").onclick=async()=>{
+$("paymentSubmit").onclick=
+async()=>{
 
-if(!$("cardConsent").checked){
+if(
+!$("cardConsent").checked
+){
 
 showPaymentError(
 t().pay.agree
@@ -3062,7 +3930,8 @@ txt(
 t().pay.processing
 );
 
-$("paymentError").classList.remove("show");
+$("paymentError")
+.classList.remove("show");
 
 try{
 
@@ -3070,6 +3939,7 @@ const submitted=
 await elements.submit();
 
 if(submitted.error){
+
 throw new Error(
 submitted.error.message
 );
@@ -3081,33 +3951,56 @@ const returnUrl=
 sessionStorage.setItem(
 "petsDogueEmbeddedPayment",
 JSON.stringify({
-plan:selectedPlan,
-flow:paymentContext.flow,
-clientSecret:paymentContext.clientSecret,
-publishableKey:paymentContext.publishableKey,
-subscriptionId:paymentContext.subscriptionId||""
+plan:
+selectedPlan,
+
+flow:
+paymentContext.flow,
+
+clientSecret:
+paymentContext.clientSecret,
+
+publishableKey:
+paymentContext.publishableKey,
+
+subscriptionId:
+paymentContext.subscriptionId||
+""
 })
 );
 
-if(paymentContext.flow==="setup"){
+if(
+paymentContext.flow===
+"setup"
+){
 
 const result=
 await stripe.confirmSetup({
 elements,
-clientSecret:paymentContext.clientSecret,
-redirect:"if_required",
+
+clientSecret:
+paymentContext.clientSecret,
+
+redirect:
+"if_required",
+
 confirmParams:{
-return_url:returnUrl
+return_url:
+returnUrl
 }
 });
 
 if(result.error){
-throw new Error(result.error.message);
+
+throw new Error(
+result.error.message
+);
 }
 
 if(
 result.setupIntent&&
-result.setupIntent.status==="succeeded"
+result.setupIntent.status===
+"succeeded"
 ){
 
 await completeFreeTrial(
@@ -3121,20 +4014,32 @@ return;
 const result=
 await stripe.confirmPayment({
 elements,
-clientSecret:paymentContext.clientSecret,
-redirect:"if_required",
+
+clientSecret:
+paymentContext.clientSecret,
+
+redirect:
+"if_required",
+
 confirmParams:{
-return_url:returnUrl
+return_url:
+returnUrl
 }
 });
 
 if(result.error){
-throw new Error(result.error.message);
+
+throw new Error(
+result.error.message
+);
 }
 
 if(
 result.paymentIntent&&
-["succeeded","processing"].includes(
+[
+"succeeded",
+"processing"
+].includes(
 result.paymentIntent.status
 )
 ){
@@ -3165,9 +4070,13 @@ error.message
 }
 }
 
-async function completeFreeTrial(setupIntentId){
+async function completeFreeTrial(
+setupIntentId
+){
 
-showStep("verifyStep");
+showStep(
+"verifyStep"
+);
 
 try{
 
@@ -3176,10 +4085,14 @@ await fetch(
 "/api/complete-club-trial",
 {
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
-body:JSON.stringify({
+
+body:
+JSON.stringify({
 setupIntentId
 })
 }
@@ -3192,8 +4105,10 @@ if(
 !response.ok||
 !result.membership
 ){
+
 throw new Error(
-result.error||t().pay.generic
+result.error||
+t().pay.generic
 );
 }
 
@@ -3208,13 +4123,19 @@ txt(
 error.message
 );
 
-showStep("failureStep");
+showStep(
+"failureStep"
+);
 }
 }
 
-function completePaidMembership(paymentIntent){
+function completePaidMembership(
+paymentIntent
+){
 
-showStep("verifyStep");
+showStep(
+"verifyStep"
+);
 
 const member=
 JSON.parse(
@@ -3223,14 +4144,23 @@ localStorage.getItem(
 )||"{}"
 );
 
-const start=new Date();
-const end=new Date(start);
+const start=
+new Date();
 
-if(selectedPlan==="annual"){
+const end=
+new Date(start);
+
+if(
+selectedPlan===
+"annual"
+){
+
 end.setFullYear(
 end.getFullYear()+1
 );
+
 }else{
+
 end.setMonth(
 end.getMonth()+1
 );
@@ -3238,19 +4168,35 @@ end.getMonth()+1
 
 saveMembership({
 active:true,
-plan:selectedPlan,
-email:member.email||"",
+
+plan:
+selectedPlan,
+
+email:
+member.email||"",
+
 dates:{
-startedAt:start.toISOString(),
-validUntil:end.toISOString(),
-nextPayment:end.toISOString()
+startedAt:
+start.toISOString(),
+
+validUntil:
+end.toISOString(),
+
+nextPayment:
+end.toISOString()
 },
+
 stripe:{
-paymentIntentId:paymentIntent.id,
+paymentIntentId:
+paymentIntent.id,
+
 subscriptionId:
-paymentContext.subscriptionId||null,
+paymentContext.subscriptionId||
+null,
+
 customerId:
-paymentContext.customerId||null
+paymentContext.customerId||
+null
 }
 });
 }
@@ -3272,23 +4218,37 @@ year:"numeric"
 );
 }
 
-function saveMembership(membership){
+function saveMembership(
+membership
+){
 
 localStorage.setItem(
 "petsDogueMembership",
-JSON.stringify(membership)
+JSON.stringify(
+membership
+)
 );
 
-const oldPlan=selectedPlan;
+const oldPlan=
+selectedPlan;
 
 if(
 membership.plan&&
-["free","monthly","annual"].includes(membership.plan)
+[
+"free",
+"monthly",
+"annual"
+].includes(
+membership.plan
+)
 ){
-selectedPlan=membership.plan;
+
+selectedPlan=
+membership.plan;
 }
 
-const p=planData();
+const p=
+planData();
 
 txt(
 "membershipCardPlan",
@@ -3330,12 +4290,16 @@ membership.dates.nextPayment
 
 txt(
 "membershipEmail",
-membership.email||"—"
+membership.email||
+"—"
 );
 
-showStep("successStep");
+showStep(
+"successStep"
+);
 
-selectedPlan=oldPlan;
+selectedPlan=
+oldPlan;
 }
 
 /* RETURN AFTER REDIRECT METHOD */
@@ -3347,7 +4311,9 @@ new URLSearchParams(
 window.location.search
 );
 
-if(params.get("club_return")!=="1"){
+if(
+params.get("club_return")!=="1"
+){
 return;
 }
 
@@ -3358,41 +4324,63 @@ sessionStorage.getItem(
 )||"{}"
 );
 
-if(!saved.publishableKey){
+if(
+!saved.publishableKey
+){
 return;
 }
 
 selectedPlan=
-["free","monthly","annual"].includes(
+[
+"free",
+"monthly",
+"annual"
+].includes(
 params.get("plan")
 )
 ?params.get("plan")
 :(saved.plan||"free");
 
-$("membershipOverlay").classList.add("open");
-document.body.classList.add("locked");
+$("membershipOverlay")
+.classList.add("open");
 
-showStep("verifyStep");
+document.body
+.classList.add("locked");
+
+showStep(
+"verifyStep"
+);
 
 try{
 
 const returnStripe=
-Stripe(saved.publishableKey);
+Stripe(
+saved.publishableKey
+);
 
-if(saved.flow==="setup"){
+if(
+saved.flow===
+"setup"
+){
 
 const secret=
 params.get(
 "setup_intent_client_secret"
-)||saved.clientSecret;
+)||
+saved.clientSecret;
 
 const result=
-await returnStripe.retrieveSetupIntent(secret);
+await returnStripe
+.retrieveSetupIntent(
+secret
+);
 
 if(
 !result.setupIntent||
-result.setupIntent.status!=="succeeded"
+result.setupIntent.status!==
+"succeeded"
 ){
+
 throw new Error(
 result.error
 ?result.error.message
@@ -3409,17 +4397,25 @@ result.setupIntent.id
 const secret=
 params.get(
 "payment_intent_client_secret"
-)||saved.clientSecret;
+)||
+saved.clientSecret;
 
 const result=
-await returnStripe.retrievePaymentIntent(secret);
+await returnStripe
+.retrievePaymentIntent(
+secret
+);
 
 if(
 !result.paymentIntent||
-!["succeeded","processing"].includes(
+![
+"succeeded",
+"processing"
+].includes(
 result.paymentIntent.status
 )
 ){
+
 throw new Error(
 result.error
 ?result.error.message
@@ -3429,7 +4425,8 @@ result.error
 
 paymentContext={
 subscriptionId:
-saved.subscriptionId||""
+saved.subscriptionId||
+""
 };
 
 completePaidMembership(
@@ -3454,20 +4451,26 @@ txt(
 error.message
 );
 
-showStep("failureStep");
+showStep(
+"failureStep"
+);
 }
 }
 
-$("failureRetry").onclick=async()=>{
+$("failureRetry").onclick=
+async()=>{
 
-showStep("checkoutStep");
+showStep(
+"checkoutStep"
+);
 
 await preparePayment();
 };
 
 /* LANGUAGE */
 
-$("languageSelect").onchange=function(){
+$("languageSelect").onchange=
+function(){
 
 renderLanguage(
 this.value
@@ -3475,8 +4478,10 @@ this.value
 
 if(
 window.PDI18N&&
-typeof PDI18N.setLanguage==="function"
+typeof PDI18N.setLanguage===
+"function"
 ){
+
 PDI18N.setLanguage(
 this.value
 );
@@ -3486,9 +4491,14 @@ this.value
 let initialLanguage=
 localStorage.getItem(
 LANGUAGE_KEY
-)||"en";
+)||
+"en";
 
-if(!LANGS.includes(initialLanguage)){
+if(
+!LANGS.includes(
+initialLanguage
+)
+){
 initialLanguage="en";
 }
 
@@ -3504,32 +4514,46 @@ localStorage.getItem(
 );
 
 if(savedForm.firstName){
-$("firstName").value=savedForm.firstName;
+$("firstName").value=
+savedForm.firstName;
 }
 
 if(savedForm.email){
-$("memberEmail").value=savedForm.email;
+$("memberEmail").value=
+savedForm.email;
 }
 
 if(savedForm.country){
-$("memberCountry").value=savedForm.country;
+$("memberCountry").value=
+savedForm.country;
 }
 
 if(savedForm.petName){
-$("petName").value=savedForm.petName;
+$("petName").value=
+savedForm.petName;
 }
 
 if(savedForm.petType){
-$("petType").value=savedForm.petType;
+$("petType").value=
+savedForm.petType;
 }
 
 if(savedForm.breed){
-$("petBreed").value=savedForm.breed;
+$("petBreed").value=
+savedForm.breed;
 }
 
-requestAnimationFrame(()=>{
+requestAnimationFrame(
+()=>{
+
 centerCard(0);
-});
+
+setTimeout(
+detectCenteredCard,
+120
+);
+}
+);
 
 processReturn();
 
