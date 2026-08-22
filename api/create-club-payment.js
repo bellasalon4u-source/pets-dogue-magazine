@@ -19,12 +19,20 @@ export default async function handler(req, res) {
   ).trim();
 
   if (!stripeSecretKey) {
+    console.error(
+      "PETS & DOGUE: STRIPE_SECRET_KEY is missing."
+    );
+
     return res.status(500).json({
       error: "Stripe secret key is not configured."
     });
   }
 
   if (!stripePublishableKey) {
+    console.error(
+      "PETS & DOGUE: STRIPE_PUBLISHABLE_KEY is missing."
+    );
+
     return res.status(500).json({
       error: "Stripe publishable key is not configured."
     });
@@ -60,17 +68,23 @@ export default async function handler(req, res) {
       });
     }
 
-    const cleanEmail = String(email || "")
+    const cleanEmail = String(
+      email || ""
+    )
       .trim()
       .toLowerCase();
 
-    const cleanFirstName = String(firstName || "")
+    const cleanFirstName = String(
+      firstName || ""
+    )
       .trim()
       .slice(0, 100);
 
     if (
       !cleanEmail ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        cleanEmail
+      )
     ) {
       return res.status(400).json({
         error: "A valid email address is required."
@@ -79,34 +93,65 @@ export default async function handler(req, res) {
 
     const plans = {
       free: {
-        name: "PETS & DOGUE Club — 30 Day Free Trial",
+        name:
+          "PETS & DOGUE Club — 30 Day Free Trial",
+
         description:
           "First 30 days free, then £1 per month.",
+
         amount: 100,
+
         interval: "month",
-        trialDays: 30
+
+        trialDays: 30,
+
+        environmentPrice:
+          String(
+            process.env.STRIPE_PRICE_MONTHLY || ""
+          ).trim()
       },
 
       monthly: {
-        name: "PETS & DOGUE Club — Monthly Membership",
+        name:
+          "PETS & DOGUE Club — Monthly Membership",
+
         description:
           "PETS & DOGUE Club membership — £1 per month.",
+
         amount: 100,
+
         interval: "month",
-        trialDays: 0
+
+        trialDays: 0,
+
+        environmentPrice:
+          String(
+            process.env.STRIPE_PRICE_MONTHLY || ""
+          ).trim()
       },
 
       annual: {
-        name: "PETS & DOGUE Club — Annual Membership",
+        name:
+          "PETS & DOGUE Club — Annual Membership",
+
         description:
           "PETS & DOGUE Club membership — £10 per year.",
+
         amount: 1000,
+
         interval: "year",
-        trialDays: 0
+
+        trialDays: 0,
+
+        environmentPrice:
+          String(
+            process.env.STRIPE_PRICE_ANNUAL || ""
+          ).trim()
       }
     };
 
-    const selected = plans[plan];
+    const selected =
+      plans[plan];
 
     async function stripeRequest(
       path,
@@ -115,27 +160,34 @@ export default async function handler(req, res) {
     ) {
       const options = {
         method,
+
         headers: {
-          Authorization: `Bearer ${stripeSecretKey}`
+          Authorization:
+            `Bearer ${stripeSecretKey}`
         }
       };
 
       if (params) {
-        options.headers["Content-Type"] =
+        options.headers[
+          "Content-Type"
+        ] =
           "application/x-www-form-urlencoded";
 
-        options.body = params.toString();
+        options.body =
+          params.toString();
       }
 
-      const response = await fetch(
-        `https://api.stripe.com/v1${path}`,
-        options
-      );
+      const response =
+        await fetch(
+          `https://api.stripe.com/v1${path}`,
+          options
+        );
 
       let data = {};
 
       try {
-        data = await response.json();
+        data =
+          await response.json();
       } catch (error) {
         throw new Error(
           "Stripe returned an invalid response."
@@ -143,6 +195,15 @@ export default async function handler(req, res) {
       }
 
       if (!response.ok) {
+        console.error(
+          "PETS & DOGUE Stripe API error:",
+          {
+            path,
+            status: response.status,
+            data
+          }
+        );
+
         const message =
           data &&
           data.error &&
@@ -150,7 +211,8 @@ export default async function handler(req, res) {
             ? data.error.message
             : "Stripe request failed.";
 
-        const stripeError = new Error(message);
+        const stripeError =
+          new Error(message);
 
         stripeError.status =
           response.status || 500;
@@ -162,27 +224,27 @@ export default async function handler(req, res) {
     }
 
     /*
-      Try to reuse an existing Stripe customer
-      with the same email address.
+      --------------------------------------------------
+      CUSTOMER
+      --------------------------------------------------
     */
 
     const customerList =
       await stripeRequest(
-        `/customers?email=${encodeURIComponent(cleanEmail)}&limit=1`,
+        `/customers?email=${encodeURIComponent(
+          cleanEmail
+        )}&limit=1`,
         "GET"
       );
 
     let customer =
       customerList &&
-      Array.isArray(customerList.data) &&
+      Array.isArray(
+        customerList.data
+      ) &&
       customerList.data.length
         ? customerList.data[0]
         : null;
-
-    /*
-      Create a Stripe Customer when this email
-      has not been used before.
-    */
 
     if (!customer) {
       const customerParams =
@@ -227,27 +289,26 @@ export default async function handler(req, res) {
         );
     }
 
-    if (!customer || !customer.id) {
+    if (
+      !customer ||
+      !customer.id
+    ) {
       return res.status(500).json({
-        error: "Unable to create Stripe customer."
+        error:
+          "Unable to create Stripe customer."
       });
     }
 
     /*
-      ==================================================
-      FREE PLAN
-      ==================================================
+      --------------------------------------------------
+      FREE TRIAL
+      --------------------------------------------------
 
       £0 today.
 
-      We do NOT create the subscription yet.
-
-      First we securely collect and authenticate
-      the payment method with a SetupIntent.
-
-      After successful confirmation the next API
-      endpoint will create the 30-day trial and
-      attach this payment method to the subscription.
+      First collect a valid payment method.
+      Subscription is created only after the
+      SetupIntent succeeds.
     */
 
     if (plan === "free") {
@@ -372,23 +433,147 @@ export default async function handler(req, res) {
 
         currency: "gbp",
 
-        trialDays:
-          selected.trialDays
+        trialDays: 30
       });
     }
 
     /*
-      ==================================================
-      MONTHLY / ANNUAL PLAN
-      ==================================================
+      --------------------------------------------------
+      PRICE
+      --------------------------------------------------
 
-      Create an incomplete subscription.
+      Stripe Subscriptions do NOT accept:
 
-      Stripe generates the first invoice and
-      a payment confirmation secret.
+      items[0][price_data][product_data]
 
-      club.html will use this secret with
-      Stripe Elements / Payment Element.
+      That was the exact reason for the
+      "Received unknown parameter" error.
+
+      A Subscription needs either:
+      - an existing Price ID
+      - or price_data with an existing Product ID.
+
+      First use the Price IDs already configured
+      in Vercel when available.
+
+      If they are not configured, create a Stripe
+      Product + recurring Price automatically.
+    */
+
+    let stripePriceId =
+      selected.environmentPrice;
+
+    if (
+      stripePriceId &&
+      !stripePriceId.startsWith("price_")
+    ) {
+      console.warn(
+        "PETS & DOGUE: invalid Stripe Price environment variable:",
+        stripePriceId
+      );
+
+      stripePriceId = "";
+    }
+
+    if (!stripePriceId) {
+      const productParams =
+        new URLSearchParams();
+
+      productParams.append(
+        "name",
+        selected.name
+      );
+
+      productParams.append(
+        "description",
+        selected.description
+      );
+
+      productParams.append(
+        "metadata[project]",
+        "PETS & DOGUE"
+      );
+
+      productParams.append(
+        "metadata[club_plan]",
+        plan
+      );
+
+      const product =
+        await stripeRequest(
+          "/products",
+          "POST",
+          productParams
+        );
+
+      if (
+        !product ||
+        !product.id
+      ) {
+        return res.status(500).json({
+          error:
+            "Stripe could not create the membership product."
+        });
+      }
+
+      const priceParams =
+        new URLSearchParams();
+
+      priceParams.append(
+        "currency",
+        "gbp"
+      );
+
+      priceParams.append(
+        "unit_amount",
+        String(selected.amount)
+      );
+
+      priceParams.append(
+        "recurring[interval]",
+        selected.interval
+      );
+
+      priceParams.append(
+        "product",
+        product.id
+      );
+
+      priceParams.append(
+        "metadata[project]",
+        "PETS & DOGUE"
+      );
+
+      priceParams.append(
+        "metadata[club_plan]",
+        plan
+      );
+
+      const price =
+        await stripeRequest(
+          "/prices",
+          "POST",
+          priceParams
+        );
+
+      if (
+        !price ||
+        !price.id
+      ) {
+        return res.status(500).json({
+          error:
+            "Stripe could not create the membership price."
+        });
+      }
+
+      stripePriceId =
+        price.id;
+    }
+
+    /*
+      --------------------------------------------------
+      SUBSCRIPTION
+      --------------------------------------------------
     */
 
     const subscriptionParams =
@@ -400,39 +585,34 @@ export default async function handler(req, res) {
     );
 
     subscriptionParams.append(
+      "items[0][price]",
+      stripePriceId
+    );
+
+    /*
+      Creates the subscription now,
+      but keeps it incomplete until the
+      Payment Element confirms payment.
+    */
+
+    subscriptionParams.append(
       "payment_behavior",
       "default_incomplete"
     );
+
+    /*
+      Save the successfully confirmed
+      payment method for future renewals.
+    */
 
     subscriptionParams.append(
       "payment_settings[save_default_payment_method]",
       "on_subscription"
     );
 
-    subscriptionParams.append(
-      "items[0][price_data][currency]",
-      "gbp"
-    );
-
-    subscriptionParams.append(
-      "items[0][price_data][unit_amount]",
-      String(selected.amount)
-    );
-
-    subscriptionParams.append(
-      "items[0][price_data][recurring][interval]",
-      selected.interval
-    );
-
-    subscriptionParams.append(
-      "items[0][price_data][product_data][name]",
-      selected.name
-    );
-
-    subscriptionParams.append(
-      "items[0][price_data][product_data][description]",
-      selected.description
-    );
+    /*
+      Metadata used by PETS & DOGUE.
+    */
 
     subscriptionParams.append(
       "metadata[project]",
@@ -497,8 +677,8 @@ export default async function handler(req, res) {
     );
 
     /*
-      Newer Stripe invoice APIs expose the
-      payment confirmation secret here.
+      Request the invoice confirmation secret
+      required by Stripe Payment Element.
     */
 
     subscriptionParams.append(
@@ -523,17 +703,52 @@ export default async function handler(req, res) {
       });
     }
 
-    const invoice =
+    let invoice =
       subscription.latest_invoice &&
-      typeof subscription.latest_invoice === "object"
+      typeof subscription.latest_invoice ===
+        "object"
         ? subscription.latest_invoice
         : null;
+
+    /*
+      Normally confirmation_secret is already
+      present because it was expanded above.
+
+      If Stripe did not include it, retrieve
+      the invoice again explicitly.
+    */
+
+    if (
+      invoice &&
+      invoice.id &&
+      !(
+        invoice.confirmation_secret &&
+        invoice.confirmation_secret.client_secret
+      )
+    ) {
+      try {
+        invoice =
+          await stripeRequest(
+            `/invoices/${encodeURIComponent(
+              invoice.id
+            )}?expand[]=confirmation_secret`,
+            "GET"
+          );
+      } catch (error) {
+        console.error(
+          "PETS & DOGUE invoice confirmation-secret fallback:",
+          error
+        );
+      }
+    }
 
     const confirmationSecret =
       invoice &&
       invoice.confirmation_secret &&
-      typeof invoice.confirmation_secret === "object"
-        ? invoice.confirmation_secret.client_secret
+      typeof invoice.confirmation_secret ===
+        "object"
+        ? invoice.confirmation_secret
+            .client_secret
         : null;
 
     if (!confirmationSecret) {
@@ -546,7 +761,10 @@ export default async function handler(req, res) {
           invoiceId:
             invoice && invoice.id
               ? invoice.id
-              : null
+              : null,
+
+          status:
+            subscription.status
         }
       );
 
@@ -555,6 +773,12 @@ export default async function handler(req, res) {
           "Stripe could not prepare the secure payment form."
       });
     }
+
+    /*
+      --------------------------------------------------
+      RESPONSE TO CLUB.HTML
+      --------------------------------------------------
+    */
 
     return res.status(200).json({
       ok: true,
@@ -573,6 +797,9 @@ export default async function handler(req, res) {
         invoice && invoice.id
           ? invoice.id
           : null,
+
+      priceId:
+        stripePriceId,
 
       clientSecret:
         confirmationSecret,
