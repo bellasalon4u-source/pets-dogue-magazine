@@ -1,991 +1,407 @@
-"use strict";
+export default async function handler(req, res) {
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store");
 
-/*
-  PETS & DOGUE CLUB
-  Stripe Checkout verification
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
 
-  Purpose:
-  - verify Checkout Session directly with Stripe
-  - never trust URL parameters alone
-  - confirm the selected Club plan from Stripe metadata
-  - support paid subscriptions and the complimentary-trial plan
-  - return subscription dates when Stripe provides them
-
-  Required Vercel environment variable:
-  STRIPE_SECRET_KEY
-*/
-
-const STRIPE_API_BASE =
-  "https://api.stripe.com/v1";
-
-
-const ALLOWED_PLANS =
-  new Set([
-    "free",
-    "monthly",
-    "annual"
-  ]);
-
-
-function sendJson(
-  res,
-  status,
-  payload
-) {
-
-  res.statusCode = status;
-
-  res.setHeader(
-    "Content-Type",
-    "application/json; charset=utf-8"
-  );
-
-  res.setHeader(
-    "Cache-Control",
-    "no-store, max-age=0"
-  );
-
-  res.setHeader(
-    "Pragma",
-    "no-cache"
-  );
-
-  res.end(
-    JSON.stringify(payload)
-  );
-
-}
-
-
-function cleanString(
-  value,
-  maxLength = 300
-) {
-
-  if (
-    typeof value !== "string"
-  ) {
-    return "";
+    return res.status(405).json({
+      error: "Method not allowed."
+    });
   }
 
-  return value
-    .trim()
-    .slice(
-      0,
-      maxLength
-    );
+  const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
-}
+  if (!stripeSecretKey) {
+    console.error("PETS & DOGUE: STRIPE_SECRET_KEY is missing.");
 
-
-function isValidCheckoutSessionId(
-  value
-) {
-
-  return /^cs_(test|live)_[A-Za-z0-9_]+$/
-    .test(
-      String(value || "")
-    );
-
-}
-
-
-function unixToIso(
-  value
-) {
-
-  const timestamp =
-    Number(value);
-
-  if (
-    !Number.isFinite(timestamp) ||
-    timestamp <= 0
-  ) {
-    return null;
+    return res.status(500).json({
+      error: "Stripe verification is not configured."
+    });
   }
-
-  return new Date(
-    timestamp * 1000
-  ).toISOString();
-
-}
-
-
-async function readRequestBody(
-  req
-) {
-
-  if (
-    req.body &&
-    typeof req.body === "object"
-  ) {
-    return req.body;
-  }
-
-
-  if (
-    typeof req.body === "string" &&
-    req.body.trim()
-  ) {
-
-    try {
-
-      return JSON.parse(
-        req.body
-      );
-
-    } catch (error) {
-
-      return {};
-
-    }
-
-  }
-
-
-  const chunks = [];
-
-
-  for await (
-    const chunk of req
-  ) {
-
-    chunks.push(
-      Buffer.isBuffer(chunk)
-        ? chunk
-        : Buffer.from(chunk)
-    );
-
-  }
-
-
-  if (
-    !chunks.length
-  ) {
-    return {};
-  }
-
-
-  const raw =
-    Buffer
-      .concat(chunks)
-      .toString("utf8")
-      .trim();
-
-
-  if (!raw) {
-    return {};
-  }
-
 
   try {
+    const body =
+      typeof req.body === "string"
+        ? JSON.parse(req.body || "{}")
+        : req.body || {};
 
-    return JSON.parse(raw);
-
-  } catch (error) {
-
-    return {};
-
-  }
-
-}
-
-
-async function stripeGet(
-  path,
-  secretKey
-) {
-
-  const response =
-    await fetch(
-      `${STRIPE_API_BASE}${path}`,
-      {
-        method: "GET",
-
-        headers: {
-          Authorization:
-            `Bearer ${secretKey}`
-        }
-      }
-    );
-
-
-  let data = null;
-
-
-  try {
-
-    data =
-      await response.json();
-
-  } catch (error) {
-
-    data = null;
-
-  }
-
-
-  if (
-    !response.ok
-  ) {
-
-    const stripeMessage =
-      data &&
-      data.error &&
-      data.error.message
-        ? data.error.message
-        : "Stripe request failed.";
-
-
-    const error =
-      new Error(
-        stripeMessage
-      );
-
-
-    error.status =
-      response.status;
-
-
-    throw error;
-
-  }
-
-
-  return data;
-
-}
-
-
-function getCustomerEmail(
-  session
-) {
-
-  if (
-    session &&
-    session.customer_details &&
-    session.customer_details.email
-  ) {
-
-    return cleanString(
-      session.customer_details.email,
-      254
-    );
-
-  }
-
-
-  if (
-    session &&
-    session.customer_email
-  ) {
-
-    return cleanString(
-      session.customer_email,
-      254
-    );
-
-  }
-
-
-  if (
-    session &&
-    session.metadata &&
-    session.metadata.member_email
-  ) {
-
-    return cleanString(
-      session.metadata.member_email,
-      254
-    );
-
-  }
-
-
-  return "";
-
-}
-
-
-function getMembershipPlan(
-  session,
-  subscription
-) {
-
-  const candidates = [
-
-    session &&
-    session.metadata &&
-    session.metadata.membership_plan,
-
-    subscription &&
-    subscription.metadata &&
-    subscription.metadata.membership_plan
-
-  ];
-
-
-  for (
-    const candidate of candidates
-  ) {
-
-    const value =
-      cleanString(
-        candidate || "",
-        30
-      );
-
+    const sessionId = String(body.sessionId || "").trim();
 
     if (
-      ALLOWED_PLANS.has(value)
+      !sessionId ||
+      !(
+        sessionId.startsWith("cs_") ||
+        sessionId.startsWith("cs_test_") ||
+        sessionId.startsWith("cs_live_")
+      )
     ) {
-      return value;
+      return res.status(400).json({
+        error: "Invalid Stripe Checkout Session ID."
+      });
     }
-
-  }
-
-
-  return "";
-
-}
-
-
-function subscriptionIsUsable(
-  subscription
-) {
-
-  if (
-    !subscription ||
-    typeof subscription !== "object"
-  ) {
-    return false;
-  }
-
-
-  /*
-    Valid Club states.
-
-    trialing:
-      complimentary month is active
-
-    active:
-      paid subscription is active
-
-    past_due:
-      payment issue exists, therefore do NOT activate a new membership
-
-    incomplete:
-      payment still unfinished
-
-    incomplete_expired:
-      failed
-
-    canceled:
-      not active
-
-    unpaid:
-      not active
-  */
-
-  return [
-    "trialing",
-    "active"
-  ].includes(
-    subscription.status
-  );
-
-}
-
-
-function checkoutIsComplete(
-  session
-) {
-
-  return Boolean(
-    session &&
-    session.status === "complete"
-  );
-
-}
-
-
-function checkoutPaymentIsAcceptable(
-  session,
-  subscription
-) {
-
-  if (
-    !session
-  ) {
-    return false;
-  }
-
-
-  /*
-    Standard paid subscription:
-      payment_status = paid
-
-    Free 30-day trial:
-      payment_status can be no_payment_required
-
-    The subscription itself must additionally be
-    active or trialing.
-  */
-
-  const paymentStatus =
-    cleanString(
-      session.payment_status || "",
-      50
-    );
-
-
-  if (
-    paymentStatus === "paid"
-  ) {
-    return true;
-  }
-
-
-  if (
-    paymentStatus ===
-      "no_payment_required" &&
-    subscription &&
-    subscription.status === "trialing"
-  ) {
-    return true;
-  }
-
-
-  return false;
-
-}
-
-
-module.exports =
-async function handler(
-  req,
-  res
-) {
-
-  if (
-    req.method !== "POST"
-  ) {
-
-    res.setHeader(
-      "Allow",
-      "POST"
-    );
-
-
-    return sendJson(
-      res,
-      405,
-      {
-        ok: false,
-        verified: false,
-        error:
-          "Method not allowed."
-      }
-    );
-
-  }
-
-
-  const secretKey =
-    cleanString(
-      process.env.STRIPE_SECRET_KEY || "",
-      300
-    );
-
-
-  if (
-    !secretKey
-  ) {
-
-    console.error(
-      "PETS & DOGUE: STRIPE_SECRET_KEY is not configured."
-    );
-
-
-    return sendJson(
-      res,
-      500,
-      {
-        ok: false,
-        verified: false,
-        error:
-          "Payment verification is not configured."
-      }
-    );
-
-  }
-
-
-  let body = {};
-
-
-  try {
-
-    body =
-      await readRequestBody(
-        req
-      );
-
-  } catch (error) {
-
-    return sendJson(
-      res,
-      400,
-      {
-        ok: false,
-        verified: false,
-        error:
-          "Invalid request."
-      }
-    );
-
-  }
-
-
-  const sessionId =
-    cleanString(
-      body.sessionId || "",
-      300
-    );
-
-
-  if (
-    !isValidCheckoutSessionId(
-      sessionId
-    )
-  ) {
-
-    return sendJson(
-      res,
-      400,
-      {
-        ok: false,
-        verified: false,
-        error:
-          "Invalid Checkout Session."
-      }
-    );
-
-  }
-
-
-  try {
 
     /*
       Step 1:
-      Retrieve Checkout Session directly from Stripe.
+      Retrieve the Checkout Session directly from Stripe.
     */
 
-    const session =
-      await stripeGet(
-        `/checkout/sessions/${encodeURIComponent(sessionId)}`,
-        secretKey
-      );
+    const sessionUrl =
+      "https://api.stripe.com/v1/checkout/sessions/" +
+      encodeURIComponent(sessionId) +
+      "?expand[]=subscription&expand[]=customer";
 
+    const sessionResponse = await fetch(sessionUrl, {
+      method: "GET",
 
-    if (
-      !checkoutIsComplete(
+      headers: {
+        Authorization: `Bearer ${stripeSecretKey}`
+      }
+    });
+
+    const session = await sessionResponse.json();
+
+    if (!sessionResponse.ok) {
+      console.error(
+        "PETS & DOGUE Stripe session verification error:",
         session
-      )
-    ) {
-
-      return sendJson(
-        res,
-        200,
-        {
-          ok: true,
-          verified: false,
-          state:
-            "checkout_not_complete"
-        }
       );
 
+      return res.status(sessionResponse.status || 500).json({
+        verified: false,
+        error:
+          session &&
+          session.error &&
+          session.error.message
+            ? session.error.message
+            : "Unable to verify Stripe Checkout Session."
+      });
     }
 
+    /*
+      Checkout must actually be completed.
 
-    const subscriptionId =
-      typeof session.subscription === "string"
-        ? session.subscription
-        : (
-            session.subscription &&
-            session.subscription.id
-          )
-          ? session.subscription.id
-          : "";
+      For a free-trial subscription the payment_status
+      may be "no_payment_required", which is valid because
+      £0 is due today.
 
+      For immediately charged subscriptions it is normally "paid".
+    */
 
-    if (
-      !subscriptionId
-    ) {
+    const checkoutComplete =
+      session.status === "complete";
 
-      return sendJson(
-        res,
-        200,
-        {
-          ok: true,
-          verified: false,
-          state:
-            "subscription_missing"
-        }
-      );
+    const acceptablePaymentStatus =
+      session.payment_status === "paid" ||
+      session.payment_status === "no_payment_required";
 
+    if (!checkoutComplete || !acceptablePaymentStatus) {
+      return res.status(200).json({
+        verified: false,
+        state: "checkout_not_complete"
+      });
     }
-
 
     /*
       Step 2:
-      Retrieve the subscription separately.
-
-      This prevents the browser from deciding whether
-      membership is active.
+      Resolve the Stripe Subscription.
     */
 
-    const subscription =
-      await stripeGet(
-        `/subscriptions/${encodeURIComponent(subscriptionId)}`,
-        secretKey
-      );
+    let subscription = session.subscription || null;
 
-
-    const plan =
-      getMembershipPlan(
-        session,
-        subscription
-      );
-
-
-    if (
-      !plan
-    ) {
-
-      console.error(
-        "PETS & DOGUE: verified Stripe session has no valid Club plan.",
-        sessionId
-      );
-
-
-      return sendJson(
-        res,
-        200,
+    if (typeof subscription === "string") {
+      const subscriptionResponse = await fetch(
+        "https://api.stripe.com/v1/subscriptions/" +
+          encodeURIComponent(subscription),
         {
-          ok: true,
-          verified: false,
-          state:
-            "invalid_membership_plan"
-        }
-      );
+          method: "GET",
 
-    }
-
-
-    const usableSubscription =
-      subscriptionIsUsable(
-        subscription
-      );
-
-
-    const acceptablePayment =
-      checkoutPaymentIsAcceptable(
-        session,
-        subscription
-      );
-
-
-    if (
-      !usableSubscription ||
-      !acceptablePayment
-    ) {
-
-      return sendJson(
-        res,
-        200,
-        {
-          ok: true,
-          verified: false,
-
-          state:
-            "membership_not_active",
-
-          subscriptionStatus:
-            cleanString(
-              subscription.status || "",
-              50
-            ),
-
-          paymentStatus:
-            cleanString(
-              session.payment_status || "",
-              50
-            )
-        }
-      );
-
-    }
-
-
-    const email =
-      getCustomerEmail(
-        session
-      );
-
-
-    const customerId =
-      typeof session.customer === "string"
-        ? session.customer
-        : (
-            session.customer &&
-            session.customer.id
-          )
-          ? session.customer.id
-          : "";
-
-
-    const memberName =
-      cleanString(
-        session.metadata &&
-        session.metadata.member_first_name
-          ? session.metadata.member_first_name
-          : "",
-        100
-      );
-
-
-    const country =
-      cleanString(
-        session.metadata &&
-        session.metadata.country
-          ? session.metadata.country
-          : "",
-        10
-      )
-        .toUpperCase();
-
-
-    const language =
-      cleanString(
-        session.metadata &&
-        session.metadata.language
-          ? session.metadata.language
-          : "en",
-        10
-      )
-        .toLowerCase();
-
-
-    const petName =
-      cleanString(
-        session.metadata &&
-        session.metadata.pet_name
-          ? session.metadata.pet_name
-          : "",
-        100
-      );
-
-
-    const petType =
-      cleanString(
-        session.metadata &&
-        session.metadata.pet_type
-          ? session.metadata.pet_type
-          : "",
-        50
-      );
-
-
-    const petBreed =
-      cleanString(
-        session.metadata &&
-        session.metadata.pet_breed
-          ? session.metadata.pet_breed
-          : "",
-        150
-      );
-
-
-    const petBreedId =
-      cleanString(
-        session.metadata &&
-        session.metadata.pet_breed_id
-          ? session.metadata.pet_breed_id
-          : "",
-        150
-      );
-
-
-    const currentPeriodStart =
-      unixToIso(
-        subscription.current_period_start
-      );
-
-
-    const currentPeriodEnd =
-      unixToIso(
-        subscription.current_period_end
-      );
-
-
-    const trialStart =
-      unixToIso(
-        subscription.trial_start
-      );
-
-
-    const trialEnd =
-      unixToIso(
-        subscription.trial_end
-      );
-
-
-    const created =
-      unixToIso(
-        subscription.created
-      );
-
-
-    /*
-      For a trial membership the actual membership starts
-      immediately, not when the first £1 payment occurs.
-    */
-
-    const membershipStart =
-      trialStart ||
-      created ||
-      currentPeriodStart;
-
-
-    /*
-      The currently valid membership period ends at Stripe's
-      current_period_end.
-
-      We return the Stripe value itself. The frontend can
-      display it in the selected language.
-    */
-
-    const membershipValidUntil =
-      currentPeriodEnd ||
-      trialEnd;
-
-
-    const nextPayment =
-      subscription.status === "trialing"
-        ? trialEnd
-        : currentPeriodEnd;
-
-
-    /*
-      Never return card numbers, CVC or sensitive payment data.
-    */
-
-    return sendJson(
-      res,
-      200,
-      {
-        ok: true,
-        verified: true,
-
-        state:
-          subscription.status === "trialing"
-            ? "trial_active"
-            : "membership_active",
-
-        membership: {
-
-          plan,
-
-          status:
-            subscription.status,
-
-          email,
-
-          memberName,
-
-          country,
-
-          language,
-
-          pet: {
-            name:
-              petName,
-
-            type:
-              petType,
-
-            breed:
-              petBreed,
-
-            breedId:
-              petBreedId
-          },
-
-          stripe: {
-
-            checkoutSessionId:
-              session.id,
-
-            customerId,
-
-            subscriptionId:
-              subscription.id,
-
-            paymentStatus:
-              session.payment_status
-
-          },
-
-          dates: {
-
-            startedAt:
-              membershipStart,
-
-            validUntil:
-              membershipValidUntil,
-
-            nextPayment,
-
-            trialEndsAt:
-              trialEnd
-
+          headers: {
+            Authorization: `Bearer ${stripeSecretKey}`
           }
-
         }
+      );
 
+      const subscriptionData =
+        await subscriptionResponse.json();
+
+      if (!subscriptionResponse.ok) {
+        console.error(
+          "PETS & DOGUE Stripe subscription verification error:",
+          subscriptionData
+        );
+
+        return res.status(subscriptionResponse.status || 500).json({
+          verified: false,
+          error:
+            subscriptionData &&
+            subscriptionData.error &&
+            subscriptionData.error.message
+              ? subscriptionData.error.message
+              : "Unable to verify Stripe subscription."
+        });
       }
-    );
 
+      subscription = subscriptionData;
+    }
 
+    if (!subscription || typeof subscription !== "object") {
+      return res.status(200).json({
+        verified: false,
+        state: "subscription_missing"
+      });
+    }
+
+    /*
+      A valid PETS & DOGUE membership can be:
+      - trialing: 30-day free trial
+      - active: paid monthly or annual membership
+    */
+
+    const activeStatuses = [
+      "trialing",
+      "active"
+    ];
+
+    if (!activeStatuses.includes(subscription.status)) {
+      return res.status(200).json({
+        verified: false,
+        state: subscription.status || "subscription_not_active"
+      });
+    }
+
+    /*
+      Step 3:
+      Make sure this subscription belongs to PETS & DOGUE.
+
+      The create-checkout endpoint writes these metadata
+      values into subscription_data.
+    */
+
+    const metadata =
+      subscription.metadata &&
+      typeof subscription.metadata === "object"
+        ? subscription.metadata
+        : {};
+
+    if (metadata.project !== "PETS & DOGUE") {
+      console.error(
+        "PETS & DOGUE: Stripe subscription project metadata mismatch.",
+        subscription.id
+      );
+
+      return res.status(403).json({
+        verified: false,
+        error: "This subscription does not belong to PETS & DOGUE."
+      });
+    }
+
+    const allowedPlans = [
+      "free",
+      "monthly",
+      "annual"
+    ];
+
+    let plan =
+      String(
+        metadata.plan ||
+        (
+          session.metadata &&
+          session.metadata.plan
+        ) ||
+        ""
+      ).trim();
+
+    if (!allowedPlans.includes(plan)) {
+      return res.status(200).json({
+        verified: false,
+        state: "membership_plan_missing"
+      });
+    }
+
+    /*
+      Step 4:
+      Resolve member email.
+
+      Depending on Stripe's Checkout state it can be found
+      in customer_details, customer or subscription metadata.
+    */
+
+    let memberEmail = "";
+
+    if (
+      session.customer_details &&
+      session.customer_details.email
+    ) {
+      memberEmail =
+        String(session.customer_details.email).trim();
+    }
+
+    if (
+      !memberEmail &&
+      session.customer &&
+      typeof session.customer === "object" &&
+      session.customer.email
+    ) {
+      memberEmail =
+        String(session.customer.email).trim();
+    }
+
+    if (
+      !memberEmail &&
+      metadata.member_email
+    ) {
+      memberEmail =
+        String(metadata.member_email).trim();
+    }
+
+    /*
+      Step 5:
+      Determine membership dates.
+
+      Stripe timestamps are Unix seconds.
+    */
+
+    function stripeDate(timestamp) {
+      const value = Number(timestamp);
+
+      if (!Number.isFinite(value) || value <= 0) {
+        return null;
+      }
+
+      return new Date(value * 1000).toISOString();
+    }
+
+    const startedAt =
+      stripeDate(subscription.start_date) ||
+      stripeDate(subscription.created) ||
+      new Date().toISOString();
+
+    let validUntil = null;
+    let nextPayment = null;
+
+    /*
+      Free trial:
+      trial_end is the moment the first £1 monthly payment
+      becomes due if the member does not cancel.
+    */
+
+    if (
+      subscription.status === "trialing" &&
+      subscription.trial_end
+    ) {
+      validUntil =
+        stripeDate(subscription.trial_end);
+
+      nextPayment =
+        stripeDate(subscription.trial_end);
+    }
+
+    /*
+      Paid monthly / annual subscription:
+      current_period_end is normally the renewal boundary.
+
+      We support both the subscription-level field and
+      the period value on the first subscription item,
+      so the endpoint remains resilient across Stripe
+      API object variations.
+    */
+
+    if (!validUntil || !nextPayment) {
+      let periodEnd =
+        subscription.current_period_end || null;
+
+      if (
+        !periodEnd &&
+        subscription.items &&
+        Array.isArray(subscription.items.data) &&
+        subscription.items.data.length
+      ) {
+        periodEnd =
+          subscription.items.data[0].current_period_end ||
+          null;
+      }
+
+      if (periodEnd) {
+        validUntil =
+          stripeDate(periodEnd);
+
+        nextPayment =
+          stripeDate(periodEnd);
+      }
+    }
+
+    /*
+      If Stripe has cancelled the subscription at period end,
+      the membership remains active until that date,
+      but there should be no next automatic payment.
+    */
+
+    if (
+      subscription.cancel_at_period_end === true ||
+      subscription.cancel_at
+    ) {
+      nextPayment = null;
+
+      if (subscription.cancel_at) {
+        validUntil =
+          stripeDate(subscription.cancel_at) ||
+          validUntil;
+      }
+    }
+
+    /*
+      Step 6:
+      Return only the membership information needed
+      by club.html.
+
+      Never send the Stripe secret key or raw payment
+      information to the browser.
+    */
+
+    const membership = {
+      active: true,
+
+      plan,
+
+      status: subscription.status,
+
+      email: memberEmail,
+
+      dates: {
+        startedAt,
+        validUntil,
+        nextPayment
+      },
+
+      stripe: {
+        checkoutSessionId: session.id,
+        subscriptionId: subscription.id,
+        customerId:
+          typeof session.customer === "string"
+            ? session.customer
+            : (
+                session.customer &&
+                session.customer.id
+                  ? session.customer.id
+                  : null
+              )
+      }
+    };
+
+    return res.status(200).json({
+      verified: true,
+      membership
+    });
   } catch (error) {
-
     console.error(
-      "PETS & DOGUE Stripe verification error:",
+      "PETS & DOGUE verify checkout fatal error:",
       error
     );
 
-
-    const status =
-      Number(error.status) === 404
-        ? 404
-        : 500;
-
-
-    return sendJson(
-      res,
-      status,
-      {
-        ok: false,
-        verified: false,
-
-        error:
-          status === 404
-            ? "Checkout Session was not found."
-            : "Unable to verify the payment session."
-      }
-    );
-
+    return res.status(500).json({
+      verified: false,
+      error: "Unable to verify the membership. Please try again."
+    });
   }
-
-};
+}
