@@ -57,6 +57,11 @@ button{
 cursor:pointer;
 }
 
+button:disabled{
+cursor:not-allowed;
+opacity:.5;
+}
+
 a{
 color:inherit;
 text-decoration:none;
@@ -320,7 +325,7 @@ color:#111;
 font-size:43px;
 }
 
-.hero-card .barcode{
+.barcode{
 margin-top:18px;
 height:41px;
 background:
@@ -593,7 +598,6 @@ margin-top:6px;
 
 .records{
 display:grid;
-gap:0;
 }
 
 .record{
@@ -625,7 +629,7 @@ font-size:10px;
 font-size:8px;
 color:#777;
 margin-top:4px;
-line-height:1.4;
+line-height:1.45;
 }
 
 .record-status{
@@ -639,7 +643,8 @@ color:#216738;
 white-space:nowrap;
 }
 
-.record-status.pending{
+.record-status.pending,
+.record-status.awaiting_payment{
 background:#fff4d4;
 color:#8a6118;
 }
@@ -647,6 +652,44 @@ color:#8a6118;
 .record-status.draft{
 background:#eee;
 color:#666;
+}
+
+.record-status.paid{
+background:#111;
+color:var(--gold-light);
+}
+
+.record-actions{
+display:flex;
+flex-wrap:wrap;
+gap:5px;
+margin-top:7px;
+}
+
+.tiny-action{
+min-height:28px;
+padding:0 8px;
+border:1px solid #111;
+background:#fff;
+font-size:7px;
+font-weight:900;
+letter-spacing:.5px;
+}
+
+.tiny-action.dark{
+background:#111;
+color:#fff;
+}
+
+.tiny-link{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:28px;
+padding:0 8px;
+border:1px solid #111;
+font-size:7px;
+font-weight:900;
 }
 
 /* FORMS */
@@ -884,8 +927,7 @@ overflow:hidden;
 
 .offer-preview-image{
 height:190px;
-background:
-linear-gradient(135deg,#d8c29b,#f5ead5);
+background:linear-gradient(135deg,#d8c29b,#f5ead5);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -904,7 +946,7 @@ position:absolute;
 left:10px;
 top:10px;
 padding:5px 7px;
-background:rgba(255,255,255,.88);
+background:rgba(255,255,255,.9);
 font-size:6px;
 font-weight:900;
 letter-spacing:.7px;
@@ -1087,6 +1129,13 @@ linear-gradient(to top,rgba(0,0,0,.86),rgba(0,0,0,.08) 65%),
 linear-gradient(135deg,#8f744f,#d6bf92);
 }
 
+.magazine-preview-bg:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.72),transparent 72%);
+}
+
 .magazine-preview-bg img{
 width:100%;
 height:100%;
@@ -1136,6 +1185,58 @@ font-size:7px;
 font-weight:900;
 letter-spacing:1.2px;
 margin-top:16px;
+}
+
+/* BILLING */
+
+.billing-item{
+display:grid;
+grid-template-columns:1fr auto;
+gap:14px;
+align-items:center;
+padding:15px;
+border-bottom:1px solid #e5ded3;
+}
+
+.billing-item:last-child{
+border-bottom:0;
+}
+
+.billing-name{
+font-weight:900;
+font-size:10px;
+}
+
+.billing-meta{
+font-size:8px;
+line-height:1.45;
+color:#777;
+margin-top:4px;
+}
+
+.billing-amount{
+font-family:var(--serif);
+font-size:20px;
+}
+
+.billing-links{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+margin-top:8px;
+}
+
+.billing-link{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:29px;
+padding:0 9px;
+border:1px solid #111;
+background:#fff;
+font-size:7px;
+font-weight:900;
+letter-spacing:.6px;
 }
 
 /* REGISTRATION */
@@ -1194,6 +1295,94 @@ font-size:24px;
 margin-top:-4px;
 }
 
+/* PAYMENT VERIFY OVERLAY */
+
+.payment-overlay{
+position:fixed;
+inset:0;
+z-index:9500;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+background:rgba(0,0,0,.82);
+backdrop-filter:blur(5px);
+}
+
+.payment-overlay.open{
+display:flex;
+}
+
+.payment-status-card{
+width:min(430px,100%);
+background:#fff;
+padding:30px 24px;
+text-align:center;
+}
+
+.verify-spinner{
+width:46px;
+height:46px;
+border-radius:50%;
+border:3px solid #ddd5ca;
+border-top-color:#111;
+margin:0 auto 17px;
+animation:spin .75s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+.payment-status-icon{
+display:none;
+width:56px;
+height:56px;
+margin:0 auto 15px;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:25px;
+font-weight:900;
+}
+
+.payment-status-icon.success{
+display:flex;
+background:var(--green);
+}
+
+.payment-status-icon.error{
+display:flex;
+border:2px solid var(--red);
+color:var(--red);
+}
+
+.payment-status-card h2{
+font-family:var(--serif);
+font-size:27px;
+font-weight:400;
+}
+
+.payment-status-card p{
+margin-top:8px;
+font-size:9px;
+line-height:1.55;
+color:#676159;
+}
+
+.payment-status-button{
+display:none;
+width:100%;
+min-height:44px;
+border:0;
+background:#111;
+color:#fff;
+font-size:8px;
+font-weight:900;
+letter-spacing:1px;
+margin-top:17px;
+}
+
 /* TOAST */
 
 .toast{
@@ -1232,6 +1421,11 @@ right:10px;
 html[dir="rtl"] .preview-plan{
 right:auto;
 left:10px;
+}
+
+html[dir="rtl"] .ad-plan.best label:before{
+right:auto;
+left:9px;
 }
 
 /* MOBILE */
@@ -1410,6 +1604,14 @@ height:170px;
 
 .magazine-preview{
 min-height:500px;
+}
+
+.billing-item{
+grid-template-columns:1fr;
+}
+
+.billing-amount{
+font-size:24px;
 }
 
 }
@@ -2105,6 +2307,24 @@ min-height:500px;
 
 </div>
 
+<div class="payment-overlay" id="paymentOverlay">
+
+<div class="payment-status-card">
+
+<div class="verify-spinner" id="paymentSpinner"></div>
+
+<div class="payment-status-icon" id="paymentStatusIcon"></div>
+
+<h2 id="paymentStatusTitle"></h2>
+
+<p id="paymentStatusText"></p>
+
+<button class="payment-status-button" id="paymentStatusButton" type="button"></button>
+
+</div>
+
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -2117,49 +2337,41 @@ const PARTNER_KEY="petsDoguePartnerAccount";
 const OFFERS_KEY="petsDoguePartnerOffers";
 const ADS_KEY="petsDoguePartnerAds";
 const BILLING_KEY="petsDoguePartnerBilling";
+const PENDING_AD_KEY="petsDoguePendingAdvertising";
 
 const LANGS=[
 "en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
 "hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
 ];
 
-const BASE={
+const TRANSLATIONS={
 
+en:{
 club:"CLUB",
-
 heroEyebrow:"PETS & DOGUE PARTNERS",
 heroTitle:"Grow with PETS & DOGUE",
 heroText:"Create member-only offers or launch premium advertising campaigns directly in our magazine.",
-
 heroOffer:"CREATE MEMBER OFFER",
 heroAd:"BUY ADVERTISING",
-
 offerCardTitle:"Give Club members a special offer",
 offerCardText:"Publish discounts, gifts and exclusive privileges for PETS & DOGUE members. Online offers use promo codes and tracked links. Offline offers use unique barcodes.",
 startOffer:"CREATE OFFER",
-
 adCardTitle:"Advertise inside PETS & DOGUE",
 adCardText:"Upload your campaign, choose where it appears and pay online. Full-page ads are shown beautifully during magazine scrolling.",
 startAd:"CREATE AD",
-
 dashboardTitle:"Partner Dashboard",
 dashboardSub:"Manage your offers, advertising and performance.",
 logout:"LOG OUT",
-
 tabs:["DASHBOARD","NEW OFFER","ADVERTISING","BILLING"],
-
-stats:["ACTIVE OFFERS","ACTIVE ADS","VIEWS","GENERATED SALES"],
-
+stats:["ACTIVE OFFERS","PAID ADS","VIEWS","GENERATED SALES"],
 myOffers:"My offers",
 myOffersHint:"Club member privileges",
 myAds:"My advertising",
 myAdsHint:"Magazine campaigns",
-
 emptyOffers:"No offers yet",
 emptyOffersText:"Create your first PETS & DOGUE member privilege.",
 emptyAds:"No advertising yet",
 emptyAdsText:"Your campaigns will appear here.",
-
 offerDetails:"Offer details",
 company:"Business name",
 category:"Category",
@@ -2168,20 +2380,17 @@ description:"Short description",
 discount:"Discount / benefit",
 saving:"Typical saving",
 savingHint:"Optional. Example: £10, £25 value or FREE GIFT.",
-
 validity:"Validity and commission",
 starts:"Starts",
 ends:"Ends",
 totalLimit:"Maximum total redemptions",
 commission:"PETS & DOGUE commission %",
 oneUse:"Each member can use this offer only once.",
-
 access:"Who can use this offer",
 allMembers:"All Club members",
 allMembersText:"Available to monthly and annual members.",
 annualOnly:"Annual members only",
 annualOnlyText:"Shown as a Super Special Offer.",
-
 redeem:"How customers redeem",
 online:"Online",
 onlineText:"Promo code plus tracked partner link.",
@@ -2190,39 +2399,29 @@ offlineText:"Unique barcode shown by the member.",
 promoCode:"Promo code",
 partnerUrl:"Partner website / checkout URL",
 offlineInstructions:"Instructions for your staff",
-
 offerImage:"Offer image",
 uploadImage:"UPLOAD IMAGE",
 uploadHelp:"Recommended: landscape image, minimum 1200 px wide.",
-
 offerTerms:"I confirm that this offer, discount and validity period are accurate and can be honoured by my business.",
-
 publishOffer:"PUBLISH OFFER",
 saveDraft:"SAVE DRAFT",
-
 preview:"LIVE PREVIEW",
 validUntil:"Valid until",
 oneUseShort:"1 use",
-
 ad50:"Offer Boost",
 ad50Text:"Boost your member offer higher in the Special Offers catalogue.",
-
 ad100:"Featured Card",
 ad100Text:"Premium advertising card inside a relevant PETS & DOGUE section.",
-
 ad200:"Full Page",
 ad200Text:"Large editorial-style advertisement shown naturally while readers scroll magazine content.",
-
 adDetails:"Advertising details",
 headline:"Headline",
 copy:"Short message",
 cta:"Button text",
 url:"Destination URL",
-
 schedule:"Schedule and placement",
 placement:"Where should this campaign appear?",
-placementHint:"We automatically keep full-page advertising limited so the magazine never feels overloaded.",
-
+placementHint:"We automatically limit full-page advertising so the magazine never feels overloaded.",
 placements:[
 "Automatic — best relevant pages",
 "Magazine articles",
@@ -2232,23 +2431,19 @@ placements:[
 "Special Offers",
 "Home page"
 ],
-
 adImage:"Advertising image",
 adImageHelp:"Use a high-quality vertical or landscape image. The preview adapts automatically.",
-
 adTerms:"I confirm I have the right to use the submitted images, trademarks and advertising content.",
-
 payAd:"CONTINUE TO PAYMENT",
+payAgain:"PAY NOW",
+paymentStarting:"OPENING SECURE PAYMENT…",
 saveAd:"SAVE DRAFT",
 adPreview:"FULL PAGE PREVIEW",
 advertisement:"ADVERTISEMENT",
-
 billing:"Billing",
 billingHint:"Payments and invoices",
-
 registerTitle:"Create your Partner Account",
 registerText:"One account lets you publish Club offers and buy PETS & DOGUE advertising.",
-
 businessName:"Business name",
 businessType:"Business type",
 contactName:"Contact name",
@@ -2256,11 +2451,8 @@ businessEmail:"Business email",
 businessCountry:"Country",
 businessWebsite:"Website",
 businessAddress:"Business address",
-
 businessTerms:"I agree to the PETS & DOGUE Partner Terms and confirm that I am authorised to represent this business.",
-
 register:"CREATE PARTNER ACCOUNT",
-
 categories:[
 "Veterinary",
 "Grooming",
@@ -2275,7 +2467,6 @@ categories:[
 "Experiences",
 "Other"
 ],
-
 types:[
 "Company",
 "Shop",
@@ -2288,59 +2479,60 @@ types:[
 "Brand",
 "Other"
 ],
-
 draft:"DRAFT",
 pending:"PENDING",
+awaitingPayment:"AWAITING PAYMENT",
 active:"ACTIVE",
 paid:"PAID",
-
 saved:"Saved",
 offerPublished:"Offer created successfully.",
 adSaved:"Advertising campaign saved.",
 accountCreated:"Partner account created.",
-
-paymentSoon:"The campaign has been prepared. Stripe payment will be connected in the next server step.",
-
+checkoutError:"Unable to open secure payment. Please try again.",
+paymentChecking:"Confirming your payment",
+paymentCheckingText:"Please wait while PETS & DOGUE securely checks your Stripe payment.",
+paymentSuccess:"Payment confirmed",
+paymentSuccessText:"Your advertising campaign has been paid successfully and is now saved in your Partner Dashboard.",
+paymentCancelled:"Payment cancelled",
+paymentCancelledText:"No payment was taken. Your advertising campaign is still saved and can be paid later.",
+paymentFailed:"Payment could not be verified",
+paymentFailedText:"We could not confirm this payment. Please try again or check the campaign in your dashboard.",
+continueDashboard:"GO TO DASHBOARD",
 billingEmpty:"No payments yet.",
-billingEmptyText:"Paid advertising invoices will appear here."
-};
+billingEmptyText:"Paid advertising invoices will appear here.",
+invoice:"VIEW INVOICE",
+invoicePdf:"DOWNLOAD PDF",
+receipt:"RECEIPT",
+paymentDate:"Paid",
+campaignPeriod:"Campaign"
+},
 
-const RU={
-club:"ПОДПИСКА",
-
+ru:{
+club:"КЛУБ",
 heroEyebrow:"ПАРТНЁРЫ PETS & DOGUE",
 heroTitle:"Развивайте бизнес вместе с PETS & DOGUE",
 heroText:"Создавайте специальные предложения для участников клуба или запускайте премиальную рекламу прямо в нашем журнале.",
-
 heroOffer:"СОЗДАТЬ СПЕЦПРЕДЛОЖЕНИЕ",
 heroAd:"РАЗМЕСТИТЬ РЕКЛАМУ",
-
 offerCardTitle:"Дайте участникам клуба специальное предложение",
 offerCardText:"Размещайте скидки, подарки и эксклюзивные привилегии для подписчиков PETS & DOGUE. Онлайн — промокод и отслеживаемая ссылка. Офлайн — уникальный штрихкод.",
 startOffer:"СОЗДАТЬ ПРЕДЛОЖЕНИЕ",
-
 adCardTitle:"Разместите рекламу в PETS & DOGUE",
-adCardText:"Загрузите рекламу, выберите место размещения и оплатите онлайн. Полноэкранная реклама красиво появляется при прокрутке журнала.",
+adCardText:"Загрузите рекламу, выберите место размещения и оплатите онлайн. Большая рекламная страница красиво появляется во время прокрутки журнала.",
 startAd:"СОЗДАТЬ РЕКЛАМУ",
-
 dashboardTitle:"Кабинет партнёра",
 dashboardSub:"Управляйте предложениями, рекламой и результатами.",
 logout:"ВЫЙТИ",
-
 tabs:["КАБИНЕТ","НОВОЕ ПРЕДЛОЖЕНИЕ","РЕКЛАМА","ПЛАТЕЖИ"],
-
-stats:["АКТИВНЫЕ ПРЕДЛОЖЕНИЯ","АКТИВНАЯ РЕКЛАМА","ПРОСМОТРЫ","ПРОДАЖИ"],
-
+stats:["АКТИВНЫЕ ПРЕДЛОЖЕНИЯ","ОПЛАЧЕННАЯ РЕКЛАМА","ПРОСМОТРЫ","ПРОДАЖИ"],
 myOffers:"Мои предложения",
 myOffersHint:"Привилегии участников клуба",
 myAds:"Моя реклама",
 myAdsHint:"Рекламные кампании журнала",
-
 emptyOffers:"Предложений пока нет",
 emptyOffersText:"Создайте первую привилегию для участников PETS & DOGUE.",
 emptyAds:"Рекламы пока нет",
 emptyAdsText:"Здесь будут отображаться ваши кампании.",
-
 offerDetails:"Данные предложения",
 company:"Название компании",
 category:"Категория",
@@ -2349,62 +2541,48 @@ description:"Короткое описание",
 discount:"Скидка / бонус",
 saving:"Примерная экономия",
 savingHint:"Необязательно. Например: £10, подарок стоимостью £25 или FREE GIFT.",
-
 validity:"Срок действия и комиссия",
 starts:"Начало",
 ends:"Окончание",
 totalLimit:"Максимальное количество использований",
 commission:"Комиссия PETS & DOGUE %",
 oneUse:"Каждый участник может использовать это предложение только один раз.",
-
 access:"Кому доступно предложение",
 allMembers:"Всем участникам клуба",
 allMembersText:"Доступно месячным и годовым подписчикам.",
 annualOnly:"Только годовым",
 annualOnlyText:"Будет отмечено как Супер специальное предложение.",
-
 redeem:"Как использовать предложение",
 online:"Онлайн",
 onlineText:"Промокод и отслеживаемая ссылка партнёра.",
 offline:"В заведении",
 offlineText:"Участник показывает уникальный штрихкод.",
-
 promoCode:"Промокод",
 partnerUrl:"Сайт / страница заказа партнёра",
 offlineInstructions:"Инструкция для ваших сотрудников",
-
 offerImage:"Фото предложения",
 uploadImage:"ЗАГРУЗИТЬ ФОТО",
 uploadHelp:"Рекомендуется горизонтальное фото шириной не менее 1200 px.",
-
 offerTerms:"Я подтверждаю, что предложение, скидка и срок действия указаны правильно и мой бизнес выполнит эти условия.",
-
 publishOffer:"ОПУБЛИКОВАТЬ",
 saveDraft:"СОХРАНИТЬ ЧЕРНОВИК",
-
 preview:"ПРЕДПРОСМОТР",
 validUntil:"Действует до",
 oneUseShort:"1 раз",
-
 ad50:"Продвижение предложения",
 ad50Text:"Поднять ваше предложение выше в каталоге специальных предложений.",
-
 ad100:"Featured Card",
 ad100Text:"Крупная рекламная карточка внутри подходящего раздела PETS & DOGUE.",
-
 ad200:"Большая рекламная страница",
-ad200Text:"Красивая полноэкранная реклама, которая естественно появляется во время прокрутки журнала.",
-
+ad200Text:"Красивая крупная реклама, которая естественно появляется во время прокрутки журнала.",
 adDetails:"Данные рекламы",
 headline:"Заголовок",
 copy:"Короткий текст",
 cta:"Текст кнопки",
 url:"Ссылка",
-
 schedule:"Срок и размещение",
 placement:"Где показывать рекламу?",
 placementHint:"Количество больших рекламных страниц автоматически ограничивается, чтобы журнал не был перегружен.",
-
 placements:[
 "Автоматически — подходящие страницы",
 "Статьи журнала",
@@ -2414,23 +2592,19 @@ placements:[
 "Специальные предложения",
 "Главная страница"
 ],
-
 adImage:"Изображение рекламы",
 adImageHelp:"Используйте качественное вертикальное или горизонтальное изображение.",
-
 adTerms:"Я подтверждаю право использовать загруженные изображения, торговые марки и рекламные материалы.",
-
 payAd:"ПЕРЕЙТИ К ОПЛАТЕ",
+payAgain:"ОПЛАТИТЬ",
+paymentStarting:"ОТКРЫВАЕМ БЕЗОПАСНУЮ ОПЛАТУ…",
 saveAd:"СОХРАНИТЬ ЧЕРНОВИК",
 adPreview:"ПРЕДПРОСМОТР РЕКЛАМЫ",
 advertisement:"РЕКЛАМА",
-
 billing:"Платежи",
 billingHint:"Оплаты и квитанции",
-
 registerTitle:"Создайте аккаунт партнёра",
 registerText:"Один аккаунт позволяет размещать предложения для Club и покупать рекламу PETS & DOGUE.",
-
 businessName:"Название бизнеса",
 businessType:"Тип бизнеса",
 contactName:"Контактное лицо",
@@ -2438,11 +2612,8 @@ businessEmail:"Email бизнеса",
 businessCountry:"Страна",
 businessWebsite:"Сайт",
 businessAddress:"Адрес бизнеса",
-
 businessTerms:"Я принимаю условия PETS & DOGUE для партнёров и подтверждаю, что имею право представлять этот бизнес.",
-
 register:"СОЗДАТЬ АККАУНТ ПАРТНЁРА",
-
 categories:[
 "Ветеринария",
 "Груминг",
@@ -2457,7 +2628,6 @@ categories:[
 "Развлечения",
 "Другое"
 ],
-
 types:[
 "Компания",
 "Магазин",
@@ -2470,281 +2640,326 @@ types:[
 "Бренд",
 "Другое"
 ],
-
 draft:"ЧЕРНОВИК",
 pending:"НА ПРОВЕРКЕ",
+awaitingPayment:"ОЖИДАЕТ ОПЛАТЫ",
 active:"АКТИВНО",
 paid:"ОПЛАЧЕНО",
-
 saved:"Сохранено",
 offerPublished:"Предложение создано.",
 adSaved:"Рекламная кампания сохранена.",
 accountCreated:"Аккаунт партнёра создан.",
-
-paymentSoon:"Кампания подготовлена. Оплату Stripe подключим следующим серверным шагом.",
-
+checkoutError:"Не удалось открыть безопасную оплату. Попробуйте ещё раз.",
+paymentChecking:"Подтверждаем оплату",
+paymentCheckingText:"Подождите, PETS & DOGUE безопасно проверяет оплату Stripe.",
+paymentSuccess:"Оплата подтверждена",
+paymentSuccessText:"Реклама успешно оплачена и сохранена в вашем кабинете партнёра.",
+paymentCancelled:"Оплата отменена",
+paymentCancelledText:"Деньги не списаны. Рекламная кампания сохранена, и её можно оплатить позже.",
+paymentFailed:"Не удалось подтвердить оплату",
+paymentFailedText:"Мы не смогли подтвердить платёж. Попробуйте ещё раз или проверьте кампанию в кабинете.",
+continueDashboard:"ПЕРЕЙТИ В КАБИНЕТ",
 billingEmpty:"Платежей пока нет.",
-billingEmptyText:"Здесь появятся счета за оплаченную рекламу."
-};
+billingEmptyText:"Здесь появятся квитанции и счета за оплаченную рекламу.",
+invoice:"ОТКРЫТЬ СЧЁТ",
+invoicePdf:"PDF КВИТАНЦИИ",
+receipt:"КВИТАНЦИЯ",
+paymentDate:"Оплачено",
+campaignPeriod:"Период"
+},
 
-const UK={
-...RU,
-club:"ПІДПИСКА",
+uk:{
+club:"КЛУБ",
 heroEyebrow:"ПАРТНЕРИ PETS & DOGUE",
 heroTitle:"Розвивайте бізнес разом із PETS & DOGUE",
 heroText:"Створюйте спеціальні пропозиції для учасників клубу або запускайте преміальну рекламу безпосередньо в нашому журналі.",
 heroOffer:"СТВОРИТИ СПЕЦПРОПОЗИЦІЮ",
 heroAd:"РОЗМІСТИТИ РЕКЛАМУ",
+offerCardTitle:"Дайте учасникам клубу спеціальну пропозицію",
+offerCardText:"Розміщуйте знижки, подарунки та ексклюзивні привілеї для підписників PETS & DOGUE. Онлайн — промокод і відстежуване посилання. Офлайн — унікальний штрихкод.",
+startOffer:"СТВОРИТИ ПРОПОЗИЦІЮ",
+adCardTitle:"Розмістіть рекламу в PETS & DOGUE",
+adCardText:"Завантажте рекламу, оберіть місце розміщення та сплатіть онлайн. Велика рекламна сторінка красиво з’являється під час прокручування журналу.",
+startAd:"СТВОРИТИ РЕКЛАМУ",
 dashboardTitle:"Кабінет партнера",
+dashboardSub:"Керуйте пропозиціями, рекламою та результатами.",
 logout:"ВИЙТИ",
 tabs:["КАБІНЕТ","НОВА ПРОПОЗИЦІЯ","РЕКЛАМА","ПЛАТЕЖІ"],
+stats:["АКТИВНІ ПРОПОЗИЦІЇ","ОПЛАЧЕНА РЕКЛАМА","ПЕРЕГЛЯДИ","ПРОДАЖІ"],
+myOffers:"Мої пропозиції",
+myOffersHint:"Привілеї учасників клубу",
+myAds:"Моя реклама",
+myAdsHint:"Рекламні кампанії журналу",
+emptyOffers:"Пропозицій поки немає",
+emptyOffersText:"Створіть першу привілею для учасників PETS & DOGUE.",
+emptyAds:"Реклами поки немає",
+emptyAdsText:"Тут відображатимуться ваші кампанії.",
+offerDetails:"Дані пропозиції",
+company:"Назва компанії",
+category:"Категорія",
+offerTitle:"Назва пропозиції",
+description:"Короткий опис",
+discount:"Знижка / бонус",
+saving:"Приблизна економія",
+savingHint:"Необов’язково. Наприклад: £10, подарунок вартістю £25 або FREE GIFT.",
+validity:"Термін дії та комісія",
+starts:"Початок",
+ends:"Закінчення",
+totalLimit:"Максимальна кількість використань",
+commission:"Комісія PETS & DOGUE %",
+oneUse:"Кожен учасник може використати цю пропозицію лише один раз.",
+access:"Кому доступна пропозиція",
+allMembers:"Усім учасникам клубу",
+allMembersText:"Доступно місячним і річним підписникам.",
+annualOnly:"Лише річним",
+annualOnlyText:"Буде позначено як Супер спеціальна пропозиція.",
+redeem:"Як використати пропозицію",
+online:"Онлайн",
+onlineText:"Промокод і відстежуване посилання партнера.",
+offline:"У закладі",
+offlineText:"Учасник показує унікальний штрихкод.",
+promoCode:"Промокод",
+partnerUrl:"Сайт / сторінка замовлення партнера",
+offlineInstructions:"Інструкція для ваших співробітників",
+offerImage:"Фото пропозиції",
+uploadImage:"ЗАВАНТАЖИТИ ФОТО",
+uploadHelp:"Рекомендується горизонтальне фото шириною щонайменше 1200 px.",
+offerTerms:"Я підтверджую, що пропозиція, знижка та термін дії вказані правильно і мій бізнес виконає ці умови.",
 publishOffer:"ОПУБЛІКУВАТИ",
 saveDraft:"ЗБЕРЕГТИ ЧЕРНЕТКУ",
+preview:"ПЕРЕДПЕРЕГЛЯД",
+validUntil:"Діє до",
+oneUseShort:"1 раз",
+ad50:"Просування пропозиції",
+ad50Text:"Підняти вашу пропозицію вище в каталозі спеціальних пропозицій.",
+ad100:"Featured Card",
+ad100Text:"Велика рекламна картка всередині відповідного розділу PETS & DOGUE.",
+ad200:"Велика рекламна сторінка",
+ad200Text:"Красива велика реклама, що природно з’являється під час прокручування журналу.",
+adDetails:"Дані реклами",
+headline:"Заголовок",
+copy:"Короткий текст",
+cta:"Текст кнопки",
+url:"Посилання",
+schedule:"Термін і розміщення",
+placement:"Де показувати рекламу?",
+placementHint:"Кількість великих рекламних сторінок автоматично обмежується, щоб журнал не був перевантажений.",
+placements:[
+"Автоматично — відповідні сторінки",
+"Статті журналу",
+"Здоров’я тварин",
+"Подорожі та pet-friendly",
+"Маркетплейс",
+"Спеціальні пропозиції",
+"Головна сторінка"
+],
+adImage:"Зображення реклами",
+adImageHelp:"Використовуйте якісне вертикальне або горизонтальне зображення.",
+adTerms:"Я підтверджую право використовувати завантажені зображення, торгові марки та рекламні матеріали.",
+payAd:"ПЕРЕЙТИ ДО ОПЛАТИ",
+payAgain:"ОПЛАТИТИ",
+paymentStarting:"ВІДКРИВАЄМО БЕЗПЕЧНУ ОПЛАТУ…",
+saveAd:"ЗБЕРЕГТИ ЧЕРНЕТКУ",
+adPreview:"ПЕРЕДПЕРЕГЛЯД РЕКЛАМИ",
+advertisement:"РЕКЛАМА",
+billing:"Платежі",
+billingHint:"Оплати та квитанції",
 registerTitle:"Створіть акаунт партнера",
+registerText:"Один акаунт дозволяє розміщувати пропозиції Club та купувати рекламу PETS & DOGUE.",
+businessName:"Назва бізнесу",
+businessType:"Тип бізнесу",
+contactName:"Контактна особа",
+businessEmail:"Email бізнесу",
+businessCountry:"Країна",
+businessWebsite:"Сайт",
+businessAddress:"Адреса бізнесу",
+businessTerms:"Я приймаю умови PETS & DOGUE для партнерів і підтверджую, що маю право представляти цей бізнес.",
 register:"СТВОРИТИ АКАУНТ ПАРТНЕРА",
-active:"АКТИВНО",
+categories:[
+"Ветеринарія",
+"Грумінг",
+"Корм",
+"Зоомагазини",
+"Готелі та подорожі",
+"Pet-friendly кафе",
+"Дресирування",
+"Аксесуари",
+"Страхування",
+"Фотографія",
+"Розваги",
+"Інше"
+],
+types:[
+"Компанія",
+"Магазин",
+"Ветеринарна клініка",
+"Грумінг-салон",
+"Готель",
+"Ресторан / кафе",
+"Тренер",
+"Інтернет-магазин",
+"Бренд",
+"Інше"
+],
+draft:"ЧЕРНЕТКА",
 pending:"НА ПЕРЕВІРЦІ",
-draft:"ЧЕРНЕТКА"
-};
-
-const SHORT_TRANSLATIONS={
-
-fr:{
-heroTitle:"Développez votre activité avec PETS & DOGUE",
-heroText:"Créez des offres réservées aux membres ou lancez des campagnes publicitaires premium dans notre magazine.",
-heroOffer:"CRÉER UNE OFFRE",
-heroAd:"ACHETER UNE PUBLICITÉ",
-dashboardTitle:"Espace partenaire",
-tabs:["TABLEAU DE BORD","NOUVELLE OFFRE","PUBLICITÉ","FACTURATION"],
-logout:"DÉCONNEXION"
-},
-
-de:{
-heroTitle:"Wachsen Sie mit PETS & DOGUE",
-heroText:"Erstellen Sie exklusive Mitgliederangebote oder starten Sie Premium-Werbekampagnen direkt in unserem Magazin.",
-heroOffer:"ANGEBOT ERSTELLEN",
-heroAd:"WERBUNG BUCHEN",
-dashboardTitle:"Partner-Dashboard",
-tabs:["DASHBOARD","NEUES ANGEBOT","WERBUNG","ABRECHNUNG"],
-logout:"ABMELDEN"
-},
-
-es:{
-heroTitle:"Haz crecer tu negocio con PETS & DOGUE",
-heroText:"Crea ofertas exclusivas para miembros o campañas publicitarias premium dentro de nuestra revista.",
-heroOffer:"CREAR OFERTA",
-heroAd:"COMPRAR PUBLICIDAD",
-dashboardTitle:"Panel de socios",
-tabs:["PANEL","NUEVA OFERTA","PUBLICIDAD","PAGOS"],
-logout:"SALIR"
-},
-
-it:{
-heroTitle:"Fai crescere il tuo business con PETS & DOGUE",
-heroText:"Crea offerte riservate ai membri o campagne pubblicitarie premium nella nostra rivista.",
-heroOffer:"CREA OFFERTA",
-heroAd:"ACQUISTA PUBBLICITÀ",
-dashboardTitle:"Dashboard partner",
-tabs:["DASHBOARD","NUOVA OFFERTA","PUBBLICITÀ","PAGAMENTI"],
-logout:"ESCI"
-},
-
-pt:{
-heroTitle:"Faça o seu negócio crescer com PETS & DOGUE",
-heroText:"Crie ofertas exclusivas para membros ou campanhas publicitárias premium na nossa revista.",
-heroOffer:"CRIAR OFERTA",
-heroAd:"COMPRAR PUBLICIDADE",
-dashboardTitle:"Painel do parceiro",
-tabs:["PAINEL","NOVA OFERTA","PUBLICIDADE","PAGAMENTOS"],
-logout:"SAIR"
-},
-
-nl:{
-heroTitle:"Groei met PETS & DOGUE",
-heroText:"Maak exclusieve ledenaanbiedingen of start premium advertenties in ons magazine.",
-heroOffer:"AANBIEDING MAKEN",
-heroAd:"ADVERTEREN",
-dashboardTitle:"Partnerdashboard",
-tabs:["DASHBOARD","NIEUWE AANBIEDING","ADVERTENTIES","FACTURATIE"],
-logout:"UITLOGGEN"
-},
-
-pl:{
-heroTitle:"Rozwijaj biznes z PETS & DOGUE",
-heroText:"Twórz specjalne oferty dla członków lub uruchamiaj reklamy premium w naszym magazynie.",
-heroOffer:"UTWÓRZ OFERTĘ",
-heroAd:"KUP REKLAMĘ",
-dashboardTitle:"Panel partnera",
-tabs:["PANEL","NOWA OFERTA","REKLAMA","ROZLICZENIA"],
-logout:"WYLOGUJ"
-},
-
-cs:{
-heroTitle:"Rozvíjejte své podnikání s PETS & DOGUE",
-heroText:"Vytvářejte nabídky pro členy nebo prémiové reklamní kampaně přímo v našem magazínu.",
-heroOffer:"VYTVOŘIT NABÍDKU",
-heroAd:"KOUPIT REKLAMU",
-dashboardTitle:"Partnerský panel",
-tabs:["PŘEHLED","NOVÁ NABÍDKA","REKLAMA","PLATBY"],
-logout:"ODHLÁSIT"
-},
-
-sk:{
-heroTitle:"Rozvíjajte svoje podnikanie s PETS & DOGUE",
-heroText:"Vytvárajte ponuky pre členov alebo prémiové reklamné kampane priamo v našom magazíne.",
-heroOffer:"VYTVORIŤ PONUKU",
-heroAd:"KÚPIŤ REKLAMU",
-dashboardTitle:"Partnerský panel",
-tabs:["PREHĽAD","NOVÁ PONUKA","REKLAMA","PLATBY"],
-logout:"ODHLÁSIŤ"
-},
-
-hu:{
-heroTitle:"Növelje vállalkozását a PETS & DOGUE-val",
-heroText:"Készítsen klubtagi ajánlatokat vagy prémium hirdetési kampányokat magazinunkban.",
-heroOffer:"AJÁNLAT LÉTREHOZÁSA",
-heroAd:"HIRDETÉS VÁSÁRLÁSA",
-dashboardTitle:"Partner vezérlőpult",
-tabs:["ÁTTEKINTÉS","ÚJ AJÁNLAT","HIRDETÉS","SZÁMLÁZÁS"],
-logout:"KIJELENTKEZÉS"
-},
-
-ro:{
-heroTitle:"Dezvoltați afacerea cu PETS & DOGUE",
-heroText:"Creați oferte pentru membri sau campanii publicitare premium în revista noastră.",
-heroOffer:"CREAȚI OFERTĂ",
-heroAd:"CUMPĂRAȚI PUBLICITATE",
-dashboardTitle:"Panou partener",
-tabs:["PANOU","OFERTĂ NOUĂ","PUBLICITATE","PLĂȚI"],
-logout:"IEȘIRE"
-},
-
-bg:{
-heroTitle:"Развивайте бизнеса си с PETS & DOGUE",
-heroText:"Създавайте предложения за членове или премиум рекламни кампании в нашето списание.",
-heroOffer:"СЪЗДАЙ ОФЕРТА",
-heroAd:"КУПИ РЕКЛАМА",
-dashboardTitle:"Партньорски панел",
-tabs:["ТАБЛО","НОВА ОФЕРТА","РЕКЛАМА","ПЛАЩАНИЯ"],
-logout:"ИЗХОД"
-},
-
-el:{
-heroTitle:"Αναπτύξτε την επιχείρησή σας με το PETS & DOGUE",
-heroText:"Δημιουργήστε προσφορές για μέλη ή premium διαφημιστικές καμπάνιες στο περιοδικό μας.",
-heroOffer:"ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΣΦΟΡΑΣ",
-heroAd:"ΑΓΟΡΑ ΔΙΑΦΗΜΙΣΗΣ",
-dashboardTitle:"Πίνακας συνεργάτη",
-tabs:["ΠΙΝΑΚΑΣ","ΝΕΑ ΠΡΟΣΦΟΡΑ","ΔΙΑΦΗΜΙΣΗ","ΧΡΕΩΣΕΙΣ"],
-logout:"ΕΞΟΔΟΣ"
-},
-
-sv:{
-heroTitle:"Väx med PETS & DOGUE",
-heroText:"Skapa medlemserbjudanden eller premiumkampanjer direkt i vårt magasin.",
-heroOffer:"SKAPA ERBJUDANDE",
-heroAd:"KÖP ANNONS",
-dashboardTitle:"Partnerpanel",
-tabs:["ÖVERSIKT","NYTT ERBJUDANDE","ANNONSERING","FAKTURERING"],
-logout:"LOGGA UT"
-},
-
-da:{
-heroTitle:"Voks med PETS & DOGUE",
-heroText:"Opret medlemstilbud eller premiumkampagner direkte i vores magasin.",
-heroOffer:"OPRET TILBUD",
-heroAd:"KØB ANNONCE",
-dashboardTitle:"Partnerpanel",
-tabs:["OVERSIGT","NYT TILBUD","ANNONCERING","BETALING"],
-logout:"LOG UD"
-},
-
-no:{
-heroTitle:"Voks med PETS & DOGUE",
-heroText:"Opprett medlemstilbud eller premiumkampanjer direkte i magasinet vårt.",
-heroOffer:"OPPRETT TILBUD",
-heroAd:"KJØP ANNONSE",
-dashboardTitle:"Partnerpanel",
-tabs:["OVERSIKT","NYTT TILBUD","ANNONSERING","FAKTURERING"],
-logout:"LOGG UT"
-},
-
-fi:{
-heroTitle:"Kasvata liiketoimintaasi PETS & DOGUE:n kanssa",
-heroText:"Luo jäsenetuja tai premium-mainoskampanjoita suoraan lehteemme.",
-heroOffer:"LUO TARJOUS",
-heroAd:"OSTA MAINOS",
-dashboardTitle:"Kumppanin hallintapaneeli",
-tabs:["HALLINTA","UUSI TARJOUS","MAINONTA","LASKUTUS"],
-logout:"KIRJAUDU ULOS"
-},
-
-tr:{
-heroTitle:"PETS & DOGUE ile işinizi büyütün",
-heroText:"Üyelere özel teklifler oluşturun veya dergimizde premium reklam kampanyaları yayınlayın.",
-heroOffer:"TEKLİF OLUŞTUR",
-heroAd:"REKLAM SATIN AL",
-dashboardTitle:"İş ortağı paneli",
-tabs:["PANEL","YENİ TEKLİF","REKLAM","FATURALAMA"],
-logout:"ÇIKIŞ"
-},
-
-ar:{
-heroTitle:"نمِّ أعمالك مع PETS & DOGUE",
-heroText:"أنشئ عروضًا حصرية للأعضاء أو أطلق حملات إعلانية مميزة داخل مجلتنا.",
-heroOffer:"إنشاء عرض",
-heroAd:"شراء إعلان",
-dashboardTitle:"لوحة الشريك",
-tabs:["لوحة التحكم","عرض جديد","الإعلانات","الفواتير"],
-logout:"تسجيل الخروج"
-},
-
-hi:{
-heroTitle:"PETS & DOGUE के साथ अपना व्यवसाय बढ़ाएँ",
-heroText:"सदस्यों के लिए विशेष ऑफ़र बनाएँ या हमारी पत्रिका में प्रीमियम विज्ञापन अभियान चलाएँ।",
-heroOffer:"ऑफ़र बनाएँ",
-heroAd:"विज्ञापन खरीदें",
-dashboardTitle:"पार्टनर डैशबोर्ड",
-tabs:["डैशबोर्ड","नया ऑफ़र","विज्ञापन","बिलिंग"],
-logout:"लॉग आउट"
+awaitingPayment:"ОЧІКУЄ ОПЛАТИ",
+active:"АКТИВНО",
+paid:"ОПЛАЧЕНО",
+saved:"Збережено",
+offerPublished:"Пропозицію створено.",
+adSaved:"Рекламну кампанію збережено.",
+accountCreated:"Акаунт партнера створено.",
+checkoutError:"Не вдалося відкрити безпечну оплату. Спробуйте ще раз.",
+paymentChecking:"Підтверджуємо оплату",
+paymentCheckingText:"Зачекайте, PETS & DOGUE безпечно перевіряє оплату Stripe.",
+paymentSuccess:"Оплату підтверджено",
+paymentSuccessText:"Рекламу успішно оплачено та збережено у вашому кабінеті партнера.",
+paymentCancelled:"Оплату скасовано",
+paymentCancelledText:"Гроші не списані. Рекламну кампанію збережено, її можна оплатити пізніше.",
+paymentFailed:"Не вдалося підтвердити оплату",
+paymentFailedText:"Ми не змогли підтвердити платіж. Спробуйте ще раз або перевірте кампанію в кабінеті.",
+continueDashboard:"ПЕРЕЙТИ ДО КАБІНЕТУ",
+billingEmpty:"Платежів поки немає.",
+billingEmptyText:"Тут з’являться квитанції та рахунки за оплачену рекламу.",
+invoice:"ВІДКРИТИ РАХУНОК",
+invoicePdf:"PDF КВИТАНЦІЇ",
+receipt:"КВИТАНЦІЯ",
+paymentDate:"Оплачено",
+campaignPeriod:"Період"
 }
 
 };
 
-const DICT={en:BASE,ru:RU,uk:UK};
-
-Object.entries(SHORT_TRANSLATIONS).forEach(([code,short])=>{
-DICT[code]={
-...BASE,
-...short
+const LANGUAGE_UI={
+fr:["Développez votre activité avec PETS & DOGUE","CRÉER UNE OFFRE","ACHETER UNE PUBLICITÉ","Espace partenaire","DÉCONNEXION","OFFRE EN ATTENTE DE PAIEMENT","PAYÉ","PAIEMENT"],
+de:["Wachsen Sie mit PETS & DOGUE","ANGEBOT ERSTELLEN","WERBUNG BUCHEN","Partner-Dashboard","ABMELDEN","ZAHLUNG AUSSTEHEND","BEZAHLT","ZAHLUNG"],
+es:["Haz crecer tu negocio con PETS & DOGUE","CREAR OFERTA","COMPRAR PUBLICIDAD","Panel de socios","SALIR","PAGO PENDIENTE","PAGADO","PAGO"],
+it:["Fai crescere il tuo business con PETS & DOGUE","CREA OFFERTA","ACQUISTA PUBBLICITÀ","Dashboard partner","ESCI","IN ATTESA DI PAGAMENTO","PAGATO","PAGAMENTO"],
+pt:["Faça o seu negócio crescer com PETS & DOGUE","CRIAR OFERTA","COMPRAR PUBLICIDADE","Painel do parceiro","SAIR","AGUARDANDO PAGAMENTO","PAGO","PAGAMENTO"],
+nl:["Groei met PETS & DOGUE","AANBIEDING MAKEN","ADVERTEREN","Partnerdashboard","UITLOGGEN","WACHT OP BETALING","BETAALD","BETALING"],
+pl:["Rozwijaj biznes z PETS & DOGUE","UTWÓRZ OFERTĘ","KUP REKLAMĘ","Panel partnera","WYLOGUJ","OCZEKUJE NA PŁATNOŚĆ","OPŁACONO","PŁATNOŚĆ"],
+cs:["Rozvíjejte své podnikání s PETS & DOGUE","VYTVOŘIT NABÍDKU","KOUPIT REKLAMU","Partnerský panel","ODHLÁSIT","ČEKÁ NA PLATBU","ZAPLACENO","PLATBA"],
+sk:["Rozvíjajte svoje podnikanie s PETS & DOGUE","VYTVORIŤ PONUKU","KÚPIŤ REKLAMU","Partnerský panel","ODHLÁSIŤ","ČAKÁ NA PLATBU","ZAPLATENÉ","PLATBA"],
+hu:["Növelje vállalkozását a PETS & DOGUE-val","AJÁNLAT LÉTREHOZÁSA","HIRDETÉS VÁSÁRLÁSA","Partner vezérlőpult","KIJELENTKEZÉS","FIZETÉSRE VÁR","FIZETVE","FIZETÉS"],
+ro:["Dezvoltați afacerea cu PETS & DOGUE","CREAȚI OFERTĂ","CUMPĂRAȚI PUBLICITATE","Panou partener","IEȘIRE","AȘTEAPTĂ PLATA","PLĂTIT","PLATĂ"],
+bg:["Развивайте бизнеса си с PETS & DOGUE","СЪЗДАЙ ОФЕРТА","КУПИ РЕКЛАМА","Партньорски панел","ИЗХОД","ОЧАКВА ПЛАЩАНЕ","ПЛАТЕНО","ПЛАЩАНЕ"],
+el:["Αναπτύξτε την επιχείρησή σας με το PETS & DOGUE","ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΣΦΟΡΑΣ","ΑΓΟΡΑ ΔΙΑΦΗΜΙΣΗΣ","Πίνακας συνεργάτη","ΕΞΟΔΟΣ","ΑΝΑΜΟΝΗ ΠΛΗΡΩΜΗΣ","ΠΛΗΡΩΘΗΚΕ","ΠΛΗΡΩΜΗ"],
+sv:["Väx med PETS & DOGUE","SKAPA ERBJUDANDE","KÖP ANNONS","Partnerpanel","LOGGA UT","VÄNTAR PÅ BETALNING","BETALD","BETALNING"],
+da:["Voks med PETS & DOGUE","OPRET TILBUD","KØB ANNONCE","Partnerpanel","LOG UD","AFVENTER BETALING","BETALT","BETALING"],
+no:["Voks med PETS & DOGUE","OPPRETT TILBUD","KJØP ANNONSE","Partnerpanel","LOGG UT","VENTER PÅ BETALING","BETALT","BETALING"],
+fi:["Kasvata liiketoimintaasi PETS & DOGUE:n kanssa","LUO TARJOUS","OSTA MAINOS","Kumppanin hallintapaneeli","KIRJAUDU ULOS","ODOTTAA MAKSUA","MAKSETTU","MAKSU"],
+tr:["PETS & DOGUE ile işinizi büyütün","TEKLİF OLUŞTUR","REKLAM SATIN AL","İş ortağı paneli","ÇIKIŞ","ÖDEME BEKLİYOR","ÖDENDİ","ÖDEME"],
+ar:["نمِّ أعمالك مع PETS & DOGUE","إنشاء عرض","شراء إعلان","لوحة الشريك","تسجيل الخروج","بانتظار الدفع","مدفوع","الدفع"],
+hi:["PETS & DOGUE के साथ अपना व्यवसाय बढ़ाएँ","ऑफ़र बनाएँ","विज्ञापन खरीदें","पार्टनर डैशबोर्ड","लॉग आउट","भुगतान की प्रतीक्षा","भुगतान हो गया","भुगतान"]
 };
+
+Object.entries(LANGUAGE_UI).forEach(([code,v])=>{
+
+const copy=
+JSON.parse(JSON.stringify(TRANSLATIONS.en));
+
+copy.heroTitle=v[0];
+copy.heroOffer=v[1];
+copy.heroAd=v[2];
+copy.dashboardTitle=v[3];
+copy.logout=v[4];
+copy.awaitingPayment=v[5];
+copy.paid=v[6];
+copy.billing=v[7];
+
+TRANSLATIONS[code]=copy;
+
 });
-
-function lang(){
-return DICT[currentLanguage]||BASE;
-}
 
 let currentLanguage="en";
 let requestedMode=null;
 let offerImageData="";
 let adImageData="";
+let paymentBusy=false;
+
+function lang(){
+return TRANSLATIONS[currentLanguage]||TRANSLATIONS.en;
+}
 
 function text(id,value){
+
 const el=$(id);
+
 if(el){
 el.textContent=value??"";
 }
+
+}
+
+function escapeHtml(value){
+
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+function getJSON(key,fallback){
+
+try{
+return JSON.parse(
+localStorage.getItem(key)||
+JSON.stringify(fallback)
+);
+}catch{
+return fallback;
+}
+
+}
+
+function setJSON(key,value){
+localStorage.setItem(
+key,
+JSON.stringify(value)
+);
 }
 
 function fillSelect(selectId,items){
+
 const el=$(selectId);
+
+if(!el){
+return;
+}
+
+const previous=
+el.value;
+
 el.innerHTML="";
+
 items.forEach((item,index)=>{
-const option=document.createElement("option");
-option.value=String(index);
-option.textContent=item;
+
+const option=
+document.createElement("option");
+
+option.value=
+String(index);
+
+option.textContent=
+item;
+
 el.appendChild(option);
+
 });
+
+if(
+previous!==""&&
+[...el.options].some(
+option=>option.value===previous
+)
+){
+el.value=previous;
+}
+
 }
 
 function renderLanguage(code){
@@ -2755,10 +2970,14 @@ code="en";
 
 currentLanguage=code;
 
-localStorage.setItem(LANGUAGE_KEY,code);
+localStorage.setItem(
+LANGUAGE_KEY,
+code
+);
 
 document.documentElement.lang=code;
-document.documentElement.dir=code==="ar"?"rtl":"ltr";
+document.documentElement.dir=
+code==="ar"?"rtl":"ltr";
 
 $("languageSelect").value=code;
 
@@ -2789,14 +3008,18 @@ text("logoutButton",x.logout);
 "tabOffer",
 "tabAd",
 "tabBilling"
-].forEach((id,i)=>text(id,x.tabs[i]));
+].forEach((id,i)=>{
+text(id,x.tabs[i]);
+});
 
 [
 "statOffersLabel",
 "statAdsLabel",
 "statViewsLabel",
 "statSalesLabel"
-].forEach((id,i)=>text(id,x.stats[i]));
+].forEach((id,i)=>{
+text(id,x.stats[i]);
+});
 
 text("myOffersTitle",x.myOffers);
 text("myOffersHint",x.myOffersHint);
@@ -2871,7 +3094,6 @@ text("adImageButton",x.uploadImage);
 text("adImageHelp",x.adImageHelp);
 
 text("adTermsLabel",x.adTerms);
-text("payAdButton",x.payAd);
 text("saveAdDraftButton",x.saveAd);
 text("adPreviewLabel",x.adPreview);
 text("advertisementLabel",x.advertisement);
@@ -2892,159 +3114,290 @@ text("businessAddressLabel",x.businessAddress);
 text("businessTermsLabel",x.businessTerms);
 text("registerSubmit",x.register);
 
+text("paymentStatusButton",x.continueDashboard);
+
 fillSelect("offerCategory",x.categories);
 fillSelect("adCategory",x.categories);
 fillSelect("businessType",x.types);
 fillSelect("adPlacement",x.placements);
 
-renderDashboard();
-updateOfferPreview();
 updateAdPreview();
-}
+updateOfferPreview();
+renderDashboard();
 
-function getJSON(key,fallback){
-try{
-return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));
-}catch{
-return fallback;
-}
-}
-
-function setJSON(key,value){
-localStorage.setItem(key,JSON.stringify(value));
 }
 
 function partnerAccount(){
-return getJSON(PARTNER_KEY,null);
+return getJSON(
+PARTNER_KEY,
+null
+);
 }
 
 function showToast(message){
-text("toast",message);
-$("toast").classList.add("show");
 
-clearTimeout(showToast.timer);
+text(
+"toast",
+message
+);
 
-showToast.timer=setTimeout(()=>{
-$("toast").classList.remove("show");
-},2200);
+$("toast")
+.classList.add("show");
+
+clearTimeout(
+showToast.timer
+);
+
+showToast.timer=
+setTimeout(
+()=>{
+
+$("toast")
+.classList.remove("show");
+
+},
+2200
+);
+
 }
 
 function openRegister(mode){
+
 requestedMode=mode;
-$("registerOverlay").classList.add("open");
-document.body.classList.add("locked");
+
+$("registerOverlay")
+.classList.add("open");
+
+document.body
+.classList.add("locked");
+
 }
 
 function closeRegister(){
-$("registerOverlay").classList.remove("open");
-document.body.classList.remove("locked");
+
+$("registerOverlay")
+.classList.remove("open");
+
+document.body
+.classList.remove("locked");
+
 }
 
 function openApp(tab){
 
-$("landingView").classList.add("hidden");
-$("partnerApp").classList.add("show");
+$("landingView")
+.classList.add("hidden");
+
+$("partnerApp")
+.classList.add("show");
 
 if(tab){
 openTab(tab);
 }
 
 renderDashboard();
+
 }
 
 function openTab(panelId){
 
-document.querySelectorAll(".tab-button").forEach(button=>{
+document
+.querySelectorAll(".tab-button")
+.forEach(button=>{
+
 button.classList.toggle(
 "active",
 button.dataset.tab===panelId
 );
+
 });
 
-document.querySelectorAll(".tab-panel").forEach(panel=>{
+document
+.querySelectorAll(".tab-panel")
+.forEach(panel=>{
+
 panel.classList.toggle(
 "active",
 panel.id===panelId
 );
+
 });
 
+const top=
+$("partnerApp")
+.offsetTop-80;
+
 window.scrollTo({
-top:$("partnerApp").offsetTop-80,
+top,
 behavior:"smooth"
 });
+
 }
 
 function requirePartner(mode){
 
 if(partnerAccount()){
-openApp(mode==="offer"?"offerPanel":"adPanel");
+
+openApp(
+mode==="offer"
+?"offerPanel"
+:"adPanel"
+);
+
 }else{
+
 openRegister(mode);
+
 }
+
 }
 
-$("heroOfferButton").onclick=()=>requirePartner("offer");
-$("startOfferButton").onclick=()=>requirePartner("offer");
-$("heroAdButton").onclick=()=>requirePartner("ad");
-$("startAdButton").onclick=()=>requirePartner("ad");
+$("heroOfferButton").onclick=
+()=>requirePartner("offer");
 
-$("registerClose").onclick=closeRegister;
+$("startOfferButton").onclick=
+()=>requirePartner("offer");
 
-$("registerOverlay").addEventListener("click",event=>{
-if(event.target===$("registerOverlay")){
+$("heroAdButton").onclick=
+()=>requirePartner("ad");
+
+$("startAdButton").onclick=
+()=>requirePartner("ad");
+
+$("registerClose").onclick=
+closeRegister;
+
+$("registerOverlay")
+.addEventListener(
+"click",
+event=>{
+
+if(
+event.target===
+$("registerOverlay")
+){
 closeRegister();
 }
-});
 
-$("registerForm").onsubmit=event=>{
+}
+);
+
+$("registerForm")
+.onsubmit=
+event=>{
+
 event.preventDefault();
 
 const account={
-businessName:$("businessName").value.trim(),
-businessType:$("businessType").value,
-contactName:$("contactName").value.trim(),
-email:$("businessEmail").value.trim(),
-country:$("businessCountry").value.trim(),
-website:$("businessWebsite").value.trim(),
-address:$("businessAddress").value.trim(),
-createdAt:new Date().toISOString()
+
+businessName:
+$("businessName")
+.value.trim(),
+
+businessType:
+$("businessType")
+.value,
+
+contactName:
+$("contactName")
+.value.trim(),
+
+email:
+$("businessEmail")
+.value.trim(),
+
+country:
+$("businessCountry")
+.value.trim(),
+
+website:
+$("businessWebsite")
+.value.trim(),
+
+address:
+$("businessAddress")
+.value.trim(),
+
+createdAt:
+new Date()
+.toISOString()
+
 };
 
-setJSON(PARTNER_KEY,account);
+setJSON(
+PARTNER_KEY,
+account
+);
 
-$("offerCompany").value=account.businessName;
-$("adCompany").value=account.businessName;
+$("offerCompany").value=
+account.businessName;
+
+$("adCompany").value=
+account.businessName;
 
 closeRegister();
 
-showToast(lang().accountCreated);
+showToast(
+lang().accountCreated
+);
 
 openApp(
 requestedMode==="ad"
 ?"adPanel"
 :"offerPanel"
 );
+
 };
 
-$("logoutButton").onclick=()=>{
-localStorage.removeItem(PARTNER_KEY);
-$("partnerApp").classList.remove("show");
-$("landingView").classList.remove("hidden");
-window.scrollTo({top:0,behavior:"smooth"});
-};
+$("logoutButton").onclick=
+()=>{
 
-document.querySelectorAll(".tab-button").forEach(button=>{
-button.onclick=()=>openTab(button.dataset.tab);
+localStorage.removeItem(
+PARTNER_KEY
+);
+
+$("partnerApp")
+.classList.remove("show");
+
+$("landingView")
+.classList.remove("hidden");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
 });
 
-/* OFFER PREVIEW */
+};
+
+document
+.querySelectorAll(".tab-button")
+.forEach(button=>{
+
+button.onclick=
+()=>openTab(
+button.dataset.tab
+);
+
+});
+
+/* OFFER */
 
 function selectedAccess(){
-return document.querySelector('input[name="access"]:checked')?.value||"all";
+
+return document
+.querySelector(
+'input[name="access"]:checked'
+)?.value||"all";
+
 }
 
 function selectedRedeem(){
-return document.querySelector('input[name="redeem"]:checked')?.value||"online";
+
+return document
+.querySelector(
+'input[name="redeem"]:checked'
+)?.value||"online";
+
 }
 
 function updateOfferPreview(){
@@ -3053,7 +3406,9 @@ const x=lang();
 
 const category=
 x.categories[
-Number($("offerCategory").value||0)
+Number(
+$("offerCategory").value||0
+)
 ]||x.categories[0];
 
 text(
@@ -3064,7 +3419,11 @@ category
 const annual=
 selectedAccess()==="annual";
 
-$("offerPreview").classList.toggle("annual",annual);
+$("offerPreview")
+.classList.toggle(
+"annual",
+annual
+);
 
 text(
 "offerPreviewPlan",
@@ -3076,18 +3435,19 @@ annual
 text(
 "offerPreviewCompany",
 $("offerCompany").value.trim()||
-(x.company||"Business")
+x.company
 );
 
 text(
 "offerPreviewText",
 $("offerTitle").value.trim()||
-(x.offerTitle||"Offer")
+x.offerTitle
 );
 
 text(
 "offerPreviewDiscount",
-$("offerDiscount").value.trim()||"-20%"
+$("offerDiscount").value.trim()||
+"-20%"
 );
 
 const end=
@@ -3107,15 +3467,25 @@ x.oneUseShort
 
 text(
 "offerPreviewCode",
-$("offerCode").value.trim()||"DOGUE20"
+$("offerCode").value.trim()||
+"DOGUE20"
 );
 
 if(offerImageData){
-$("offerPreviewImage").src=offerImageData;
-$("offerPreviewImage").classList.remove("hidden");
+
+$("offerPreviewImage").src=
+offerImageData;
+
+$("offerPreviewImage")
+.classList.remove("hidden");
+
 }else{
-$("offerPreviewImage").classList.add("hidden");
+
+$("offerPreviewImage")
+.classList.add("hidden");
+
 }
+
 }
 
 [
@@ -3126,127 +3496,280 @@ $("offerPreviewImage").classList.add("hidden");
 "offerEnd",
 "offerCode"
 ].forEach(id=>{
-$(id).addEventListener("input",updateOfferPreview);
-$(id).addEventListener("change",updateOfferPreview);
+
+$(id).addEventListener(
+"input",
+updateOfferPreview
+);
+
+$(id).addEventListener(
+"change",
+updateOfferPreview
+);
+
 });
 
-document.querySelectorAll('input[name="access"]').forEach(input=>{
-input.onchange=updateOfferPreview;
+document
+.querySelectorAll(
+'input[name="access"]'
+)
+.forEach(input=>{
+
+input.onchange=
+updateOfferPreview;
+
 });
 
-document.querySelectorAll('input[name="redeem"]').forEach(input=>{
+document
+.querySelectorAll(
+'input[name="redeem"]'
+)
+.forEach(input=>{
 
 input.onchange=()=>{
 
 const offline=
 selectedRedeem()==="offline";
 
-$("promoCodeField").classList.toggle("hidden",offline);
-$("partnerUrlField").classList.toggle("hidden",offline);
-$("offlineInstructionsField").classList.toggle("hidden",!offline);
+$("promoCodeField")
+.classList.toggle(
+"hidden",
+offline
+);
+
+$("partnerUrlField")
+.classList.toggle(
+"hidden",
+offline
+);
+
+$("offlineInstructionsField")
+.classList.toggle(
+"hidden",
+!offline
+);
 
 updateOfferPreview();
+
 };
+
 });
 
-$("offerImage").onchange=event=>{
+$("offerImage").onchange=
+event=>{
 
-const file=event.target.files?.[0];
+const file=
+event.target.files?.[0];
 
 if(!file){
 return;
 }
 
-const reader=new FileReader();
+const reader=
+new FileReader();
 
-reader.onload=()=>{
-offerImageData=String(reader.result||"");
+reader.onload=
+()=>{
+
+offerImageData=
+String(
+reader.result||""
+);
+
 updateOfferPreview();
+
 };
 
 reader.readAsDataURL(file);
+
 };
 
 function createOffer(status){
 
-const account=partnerAccount();
+const account=
+partnerAccount();
 
 const offer={
-id:`offer_${Date.now()}`,
-company:$("offerCompany").value.trim(),
-category:$("offerCategory").value,
-title:$("offerTitle").value.trim(),
-description:$("offerDescription").value.trim(),
-discount:$("offerDiscount").value.trim(),
-saving:$("offerSaving").value.trim(),
-start:$("offerStart").value,
-end:$("offerEnd").value,
-limit:Number($("offerTotalLimit").value||0),
-commission:Number($("offerCommission").value||0),
+
+id:
+`offer_${Date.now()}`,
+
+company:
+$("offerCompany")
+.value.trim(),
+
+category:
+$("offerCategory")
+.value,
+
+title:
+$("offerTitle")
+.value.trim(),
+
+description:
+$("offerDescription")
+.value.trim(),
+
+discount:
+$("offerDiscount")
+.value.trim(),
+
+saving:
+$("offerSaving")
+.value.trim(),
+
+start:
+$("offerStart")
+.value,
+
+end:
+$("offerEnd")
+.value,
+
+limit:
+Number(
+$("offerTotalLimit")
+.value||0
+),
+
+commission:
+Number(
+$("offerCommission")
+.value||0
+),
+
 oneUse:true,
-access:selectedAccess(),
-redeem:selectedRedeem(),
-code:$("offerCode").value.trim(),
-url:$("offerUrl").value.trim(),
-offlineInstructions:$("offlineInstructions").value.trim(),
-image:offerImageData,
+
+access:
+selectedAccess(),
+
+redeem:
+selectedRedeem(),
+
+code:
+$("offerCode")
+.value.trim(),
+
+url:
+$("offerUrl")
+.value.trim(),
+
+offlineInstructions:
+$("offlineInstructions")
+.value.trim(),
+
+image:
+offerImageData,
+
 status,
-partnerEmail:account?.email||"",
-createdAt:new Date().toISOString(),
+
+partnerEmail:
+account?.email||"",
+
+createdAt:
+new Date()
+.toISOString(),
+
 redemptions:0,
+
 views:0,
+
 sales:0
+
 };
 
-const list=getJSON(OFFERS_KEY,[]);
-list.unshift(offer);
-setJSON(OFFERS_KEY,list);
+const list=
+getJSON(
+OFFERS_KEY,
+[]
+);
+
+list.unshift(
+offer
+);
+
+setJSON(
+OFFERS_KEY,
+list
+);
 
 renderDashboard();
 
 return offer;
+
 }
 
-$("offerForm").onsubmit=event=>{
+$("offerForm")
+.onsubmit=
+event=>{
+
 event.preventDefault();
 
-if(!$("offerTerms").checked){
+if(
+!$("offerTerms")
+.checked
+){
 return;
 }
 
-createOffer("pending");
+createOffer(
+"pending"
+);
 
-showToast(lang().offerPublished);
+showToast(
+lang().offerPublished
+);
 
-$("offerForm").reset();
+$("offerForm")
+.reset();
 
 $("accessAll").checked=true;
 $("redeemOnline").checked=true;
 $("offerOneUse").checked=true;
 $("offerTotalLimit").value="500";
 $("offerCommission").value="5";
+
 offerImageData="";
+
+setDefaultOfferDates();
 
 updateOfferPreview();
 
-openTab("dashboardPanel");
+openTab(
+"dashboardPanel"
+);
+
 };
 
-$("saveOfferDraftButton").onclick=()=>{
+$("saveOfferDraftButton")
+.onclick=
+()=>{
 
-createOffer("draft");
+createOffer(
+"draft"
+);
 
-showToast(lang().saved);
+showToast(
+lang().saved
+);
 
-openTab("dashboardPanel");
+openTab(
+"dashboardPanel"
+);
+
 };
 
-/* AD PREVIEW */
+/* ADVERTISING */
 
 function selectedAdPlan(){
+
 return Number(
-document.querySelector('input[name="adPlan"]:checked')?.value||200
+document
+.querySelector(
+'input[name="adPlan"]:checked'
+)?.value||200
 );
+
 }
 
 function updateAdPreview(){
@@ -3270,18 +3793,33 @@ $("adCta").value.trim()||
 );
 
 if(adImageData){
-$("adPreviewImage").src=adImageData;
-$("adPreviewImage").classList.remove("hidden");
+
+$("adPreviewImage").src=
+adImageData;
+
+$("adPreviewImage")
+.classList.remove("hidden");
+
 }else{
-$("adPreviewImage").classList.add("hidden");
+
+$("adPreviewImage")
+.classList.add("hidden");
+
 }
 
-const price=selectedAdPlan();
+const price=
+selectedAdPlan();
 
 text(
 "payAdButton",
-`${lang().payAd} · £${price}`
+paymentBusy
+?lang().paymentStarting
+:`${lang().payAd} · £${price}`
 );
+
+$("payAdButton").disabled=
+paymentBusy;
+
 }
 
 [
@@ -3289,86 +3827,879 @@ text(
 "adCopy",
 "adCta"
 ].forEach(id=>{
-$(id).addEventListener("input",updateAdPreview);
+
+$(id).addEventListener(
+"input",
+updateAdPreview
+);
+
 });
 
-document.querySelectorAll('input[name="adPlan"]').forEach(input=>{
-input.onchange=updateAdPreview;
+document
+.querySelectorAll(
+'input[name="adPlan"]'
+)
+.forEach(input=>{
+
+input.onchange=
+updateAdPreview;
+
 });
 
-$("adImage").onchange=event=>{
+$("adImage").onchange=
+event=>{
 
-const file=event.target.files?.[0];
+const file=
+event.target.files?.[0];
 
 if(!file){
 return;
 }
 
-const reader=new FileReader();
+const reader=
+new FileReader();
 
-reader.onload=()=>{
-adImageData=String(reader.result||"");
+reader.onload=
+()=>{
+
+adImageData=
+String(
+reader.result||""
+);
+
 updateAdPreview();
+
 };
 
 reader.readAsDataURL(file);
+
 };
 
-function createAd(status){
+function buildAdvertisingCampaign(status){
 
-const account=partnerAccount();
+const account=
+partnerAccount();
 
-const ad={
-id:`ad_${Date.now()}`,
-plan:selectedAdPlan(),
-company:$("adCompany").value.trim(),
-category:$("adCategory").value,
-headline:$("adHeadline").value.trim(),
-copy:$("adCopy").value.trim(),
-cta:$("adCta").value.trim(),
-url:$("adUrl").value.trim(),
-start:$("adStart").value,
-end:$("adEnd").value,
-placement:$("adPlacement").value,
-image:adImageData,
+return{
+
+id:
+`ad_${Date.now()}_${Math.random()
+.toString(36)
+.slice(2,8)}`,
+
+plan:
+selectedAdPlan(),
+
+company:
+$("adCompany")
+.value.trim(),
+
+category:
+$("adCategory")
+.value,
+
+headline:
+$("adHeadline")
+.value.trim(),
+
+copy:
+$("adCopy")
+.value.trim(),
+
+cta:
+$("adCta")
+.value.trim(),
+
+url:
+$("adUrl")
+.value.trim(),
+
+start:
+$("adStart")
+.value,
+
+end:
+$("adEnd")
+.value,
+
+placement:
+$("adPlacement")
+.value,
+
+image:
+adImageData,
+
 status,
-partnerEmail:account?.email||"",
-createdAt:new Date().toISOString(),
+
+partnerEmail:
+account?.email||"",
+
+contactName:
+account?.contactName||"",
+
+createdAt:
+new Date()
+.toISOString(),
+
 views:0,
-clicks:0
+
+clicks:0,
+
+stripe:{
+sessionId:null,
+invoiceId:null
+}
+
 };
 
-const list=getJSON(ADS_KEY,[]);
-list.unshift(ad);
-setJSON(ADS_KEY,list);
+}
+
+function saveNewAdvertisingCampaign(campaign){
+
+const list=
+getJSON(
+ADS_KEY,
+[]
+);
+
+list.unshift(
+campaign
+);
+
+setJSON(
+ADS_KEY,
+list
+);
 
 renderDashboard();
 
-return ad;
+return campaign;
+
 }
 
-$("adForm").onsubmit=event=>{
-event.preventDefault();
+function updateAdvertisingCampaign(
+campaignId,
+changes
+){
 
-if(!$("adTerms").checked){
+const list=
+getJSON(
+ADS_KEY,
+[]
+);
+
+const index=
+list.findIndex(
+item=>item.id===campaignId
+);
+
+if(index===-1){
+return null;
+}
+
+list[index]={
+...list[index],
+...changes
+};
+
+setJSON(
+ADS_KEY,
+list
+);
+
+renderDashboard();
+
+return list[index];
+
+}
+
+function getAdvertisingCampaign(
+campaignId
+){
+
+return getJSON(
+ADS_KEY,
+[]
+)
+.find(
+item=>item.id===campaignId
+)||null;
+
+}
+
+async function startAdvertisingCheckout(
+campaign
+){
+
+if(paymentBusy){
 return;
 }
 
-createAd("pending");
+const account=
+partnerAccount();
 
-showToast(lang().paymentSoon);
+if(!account){
 
-openTab("dashboardPanel");
+openRegister("ad");
+return;
+}
+
+paymentBusy=true;
+updateAdPreview();
+
+try{
+
+sessionStorage.setItem(
+PENDING_AD_KEY,
+campaign.id
+);
+
+const response=
+await fetch(
+"/api/create-advertising-checkout",
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+
+plan:
+campaign.plan,
+
+language:
+currentLanguage,
+
+partnerEmail:
+account.email,
+
+businessName:
+campaign.company,
+
+contactName:
+account.contactName||"",
+
+category:
+campaign.category,
+
+headline:
+campaign.headline,
+
+copy:
+campaign.copy,
+
+cta:
+campaign.cta,
+
+url:
+campaign.url,
+
+start:
+campaign.start,
+
+end:
+campaign.end,
+
+placement:
+campaign.placement,
+
+campaignId:
+campaign.id
+
+})
+}
+);
+
+const result=
+await response.json();
+
+if(
+!response.ok||
+!result.checkoutUrl
+){
+
+throw new Error(
+result.error||
+lang().checkoutError
+);
+
+}
+
+updateAdvertisingCampaign(
+campaign.id,
+{
+status:
+"awaiting_payment",
+
+stripe:{
+...(campaign.stripe||{}),
+
+sessionId:
+result.sessionId||null,
+
+customerId:
+result.customerId||null
+}
+}
+);
+
+window.location.href=
+result.checkoutUrl;
+
+}catch(error){
+
+paymentBusy=false;
+updateAdPreview();
+
+showToast(
+error.message||
+lang().checkoutError
+);
+
+}
+
+}
+
+$("adForm")
+.onsubmit=
+async event=>{
+
+event.preventDefault();
+
+if(
+!$("adTerms")
+.checked
+){
+return;
+}
+
+const campaign=
+buildAdvertisingCampaign(
+"awaiting_payment"
+);
+
+saveNewAdvertisingCampaign(
+campaign
+);
+
+await startAdvertisingCheckout(
+campaign
+);
+
 };
 
-$("saveAdDraftButton").onclick=()=>{
+$("saveAdDraftButton")
+.onclick=
+()=>{
 
-createAd("draft");
+const campaign=
+buildAdvertisingCampaign(
+"draft"
+);
 
-showToast(lang().adSaved);
+saveNewAdvertisingCampaign(
+campaign
+);
 
-openTab("dashboardPanel");
+showToast(
+lang().adSaved
+);
+
+openTab(
+"dashboardPanel"
+);
+
 };
+
+window.payExistingCampaign=
+async function(campaignId){
+
+const campaign=
+getAdvertisingCampaign(
+campaignId
+);
+
+if(!campaign){
+return;
+}
+
+await startAdvertisingCheckout(
+campaign
+);
+
+};
+
+/* PAYMENT RETURN */
+
+function openPaymentOverlay(){
+
+$("paymentOverlay")
+.classList.add("open");
+
+document.body
+.classList.add("locked");
+
+}
+
+function setPaymentOverlayState(
+type,
+title,
+message
+){
+
+$("paymentSpinner")
+.classList.add("hidden");
+
+const icon=
+$("paymentStatusIcon");
+
+icon.className=
+"payment-status-icon";
+
+if(type==="success"){
+
+icon.classList.add(
+"success"
+);
+
+icon.textContent="✓";
+
+}else if(type==="error"){
+
+icon.classList.add(
+"error"
+);
+
+icon.textContent="!";
+
+}else{
+
+icon.classList.add(
+"hidden"
+);
+
+}
+
+text(
+"paymentStatusTitle",
+title
+);
+
+text(
+"paymentStatusText",
+message
+);
+
+$("paymentStatusButton")
+.style.display=
+"block";
+
+}
+
+function closePaymentOverlay(){
+
+$("paymentOverlay")
+.classList.remove("open");
+
+document.body
+.classList.remove("locked");
+
+}
+
+$("paymentStatusButton")
+.onclick=
+()=>{
+
+closePaymentOverlay();
+
+openApp(
+"dashboardPanel"
+);
+
+};
+
+function cleanPaymentUrl(){
+
+const clean=
+`${window.location.pathname}`;
+
+history.replaceState(
+{},
+document.title,
+clean
+);
+
+}
+
+function addBillingRecord(
+verification
+){
+
+const campaign=
+verification.campaign||{};
+
+const stripe=
+verification.stripe||{};
+
+const receipt=
+verification.receipt||{};
+
+const list=
+getJSON(
+BILLING_KEY,
+[]
+);
+
+const exists=
+list.some(
+item=>
+item.sessionId===
+stripe.sessionId
+);
+
+if(exists){
+return;
+}
+
+list.unshift({
+
+id:
+`billing_${Date.now()}`,
+
+campaignId:
+campaign.id||"",
+
+description:
+campaign.headline||
+"PETS & DOGUE Advertising",
+
+businessName:
+campaign.businessName||"",
+
+plan:
+campaign.plan||0,
+
+amount:
+Number(
+receipt.amountPaid||
+campaign.amount||
+0
+)/100,
+
+currency:
+receipt.currency||
+"GBP",
+
+date:
+campaign.paidAt||
+new Date()
+.toISOString(),
+
+sessionId:
+stripe.sessionId||null,
+
+paymentIntentId:
+stripe.paymentIntentId||null,
+
+invoiceId:
+stripe.invoiceId||null,
+
+invoiceNumber:
+receipt.invoiceNumber||null,
+
+hostedInvoiceUrl:
+receipt.hostedInvoiceUrl||null,
+
+invoicePdf:
+receipt.invoicePdf||null
+
+});
+
+setJSON(
+BILLING_KEY,
+list
+);
+
+}
+
+async function verifyAdvertisingReturn(){
+
+const params=
+new URLSearchParams(
+window.location.search
+);
+
+const paymentState=
+params.get(
+"ad_payment"
+);
+
+if(!paymentState){
+return;
+}
+
+const account=
+partnerAccount();
+
+if(account){
+
+$("landingView")
+.classList.add("hidden");
+
+$("partnerApp")
+.classList.add("show");
+
+}
+
+openPaymentOverlay();
+
+if(
+paymentState===
+"cancelled"
+){
+
+$("paymentSpinner")
+.classList.add("hidden");
+
+setPaymentOverlayState(
+"error",
+lang().paymentCancelled,
+lang().paymentCancelledText
+);
+
+const pendingId=
+sessionStorage.getItem(
+PENDING_AD_KEY
+);
+
+if(pendingId){
+
+updateAdvertisingCampaign(
+pendingId,
+{
+status:
+"awaiting_payment"
+}
+);
+
+}
+
+cleanPaymentUrl();
+
+return;
+}
+
+const sessionId=
+params.get(
+"session_id"
+);
+
+if(
+paymentState!=="success"||
+!sessionId
+){
+
+setPaymentOverlayState(
+"error",
+lang().paymentFailed,
+lang().paymentFailedText
+);
+
+cleanPaymentUrl();
+
+return;
+}
+
+text(
+"paymentStatusTitle",
+lang().paymentChecking
+);
+
+text(
+"paymentStatusText",
+lang().paymentCheckingText
+);
+
+try{
+
+const response=
+await fetch(
+"/api/verify-advertising-payment",
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+sessionId
+})
+}
+);
+
+const result=
+await response.json();
+
+if(
+!response.ok||
+!result.ok||
+!result.verified||
+!result.paid
+){
+
+throw new Error(
+result.error||
+result.message||
+lang().paymentFailedText
+);
+
+}
+
+const campaign=
+result.campaign||{};
+
+const localCampaign=
+getAdvertisingCampaign(
+campaign.id
+);
+
+if(localCampaign){
+
+updateAdvertisingCampaign(
+campaign.id,
+{
+status:
+"paid",
+
+paidAt:
+campaign.paidAt||
+new Date().toISOString(),
+
+verifiedAt:
+new Date().toISOString(),
+
+stripe:{
+...(localCampaign.stripe||{}),
+
+sessionId:
+result.stripe?.sessionId||
+sessionId,
+
+customerId:
+result.stripe?.customerId||
+null,
+
+paymentIntentId:
+result.stripe?.paymentIntentId||
+null,
+
+invoiceId:
+result.stripe?.invoiceId||
+null,
+
+livemode:
+Boolean(
+result.stripe?.livemode
+)
+}
+}
+);
+
+}else{
+
+const pendingId=
+sessionStorage.getItem(
+PENDING_AD_KEY
+);
+
+if(pendingId){
+
+updateAdvertisingCampaign(
+pendingId,
+{
+status:
+"paid",
+
+paidAt:
+campaign.paidAt||
+new Date().toISOString(),
+
+verifiedAt:
+new Date().toISOString(),
+
+stripe:{
+sessionId:
+result.stripe?.sessionId||
+sessionId,
+
+customerId:
+result.stripe?.customerId||
+null,
+
+paymentIntentId:
+result.stripe?.paymentIntentId||
+null,
+
+invoiceId:
+result.stripe?.invoiceId||
+null,
+
+livemode:
+Boolean(
+result.stripe?.livemode
+)
+}
+}
+);
+
+}
+
+}
+
+addBillingRecord(
+result
+);
+
+sessionStorage.removeItem(
+PENDING_AD_KEY
+);
+
+renderDashboard();
+
+setPaymentOverlayState(
+"success",
+lang().paymentSuccess,
+lang().paymentSuccessText
+);
+
+cleanPaymentUrl();
+
+}catch(error){
+
+console.error(
+"Advertising payment verification:",
+error
+);
+
+setPaymentOverlayState(
+"error",
+lang().paymentFailed,
+error.message||
+lang().paymentFailedText
+);
+
+cleanPaymentUrl();
+
+}
+
+}
 
 /* DASHBOARD */
 
@@ -3380,15 +4711,23 @@ if(status==="active"){
 return x.active;
 }
 
-if(status==="pending"){
-return x.pending;
-}
-
 if(status==="paid"){
 return x.paid;
 }
 
+if(
+status===
+"awaiting_payment"
+){
+return x.awaitingPayment;
+}
+
+if(status==="pending"){
+return x.pending;
+}
+
 return x.draft;
+
 }
 
 function formatShortDate(value){
@@ -3397,9 +4736,15 @@ if(!value){
 return "—";
 }
 
-return new Date(
+const date=
+String(value)
+.includes("T")
+?new Date(value)
+:new Date(
 `${value}T12:00:00`
-).toLocaleDateString(
+);
+
+return date.toLocaleDateString(
 currentLanguage==="uk"
 ?"uk-UA"
 :currentLanguage==="ru"
@@ -3411,66 +4756,143 @@ month:"short",
 year:"numeric"
 }
 );
+
 }
 
 function recordImage(image){
 
 if(image){
-return `<img class="record-thumb" src="${escapeHtml(image)}" alt="">`;
+
+return `
+<img
+class="record-thumb"
+src="${escapeHtml(image)}"
+alt=""
+>
+`;
+
 }
 
-return `<div class="record-thumb"></div>`;
-}
+return `
+<div class="record-thumb"></div>
+`;
 
-function escapeHtml(value){
-
-return String(value??"")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
 }
 
 function renderDashboard(){
 
-const offers=getJSON(OFFERS_KEY,[]);
-const ads=getJSON(ADS_KEY,[]);
-const billing=getJSON(BILLING_KEY,[]);
+const offers=
+getJSON(
+OFFERS_KEY,
+[]
+);
+
+const ads=
+getJSON(
+ADS_KEY,
+[]
+);
+
+const billing=
+getJSON(
+BILLING_KEY,
+[]
+);
 
 const activeOffers=
-offers.filter(item=>item.status==="active"||item.status==="pending").length;
+offers.filter(
+item=>
+item.status==="active"||
+item.status==="pending"
+).length;
 
-const activeAds=
-ads.filter(item=>item.status==="active"||item.status==="pending").length;
+const paidAds=
+ads.filter(
+item=>
+item.status==="paid"||
+item.status==="active"
+).length;
 
 const views=
-offers.reduce((sum,item)=>sum+Number(item.views||0),0)+
-ads.reduce((sum,item)=>sum+Number(item.views||0),0);
+offers.reduce(
+(sum,item)=>
+sum+
+Number(
+item.views||0
+),
+0
+)+
+ads.reduce(
+(sum,item)=>
+sum+
+Number(
+item.views||0
+),
+0
+);
 
 const sales=
-offers.reduce((sum,item)=>sum+Number(item.sales||0),0);
+offers.reduce(
+(sum,item)=>
+sum+
+Number(
+item.sales||0
+),
+0
+);
 
-text("statOffers",String(activeOffers));
-text("statAds",String(activeAds));
-text("statViews",views.toLocaleString());
-text("statSales",`£${sales.toFixed(0)}`);
+text(
+"statOffers",
+String(activeOffers)
+);
 
-renderOfferRecords(offers);
-renderAdRecords(ads);
-renderBillingRecords(billing);
+text(
+"statAds",
+String(paidAds)
+);
+
+text(
+"statViews",
+views.toLocaleString()
+);
+
+text(
+"statSales",
+`£${sales.toFixed(0)}`
+);
+
+renderOfferRecords(
+offers
+);
+
+renderAdRecords(
+ads
+);
+
+renderBillingRecords(
+billing
+);
+
 }
 
 function renderOfferRecords(offers){
 
-const target=$("offersRecords");
+const target=
+$("offersRecords");
 
 if(!offers.length){
 
 target.innerHTML=`
 <div class="empty-state">
-<strong>${escapeHtml(lang().emptyOffers)}</strong>
-<p>${escapeHtml(lang().emptyOffersText)}</p>
+
+<strong>
+${escapeHtml(lang().emptyOffers)}
+</strong>
+
+<p>
+${escapeHtml(lang().emptyOffersText)}
+</p>
+
 </div>
 `;
 
@@ -3479,45 +4901,85 @@ return;
 
 target.innerHTML=`
 <div class="records">
-${offers.map(offer=>`
+
+${offers.map(
+offer=>`
 
 <div class="record">
 
-${recordImage(offer.image)}
+${recordImage(
+offer.image
+)}
 
 <div>
+
 <div class="record-title">
-${escapeHtml(offer.title||offer.company)}
+${escapeHtml(
+offer.title||
+offer.company
+)}
 </div>
 
 <div class="record-meta">
-${escapeHtml(offer.discount)}
- · ${escapeHtml(formatShortDate(offer.end))}
- · ${offer.access==="annual"?"ANNUAL":"CLUB"}
+
+${escapeHtml(
+offer.discount
+)}
+
+ ·
+
+${escapeHtml(
+formatShortDate(
+offer.end
+)
+)}
+
+ ·
+
+${offer.access==="annual"
+?"ANNUAL"
+:"CLUB"}
+
 </div>
+
 </div>
 
 <span class="record-status ${escapeHtml(offer.status)}">
-${escapeHtml(statusLabel(offer.status))}
+${escapeHtml(
+statusLabel(
+offer.status
+)
+)}
 </span>
 
 </div>
 
-`).join("")}
+`
+).join("")}
+
 </div>
 `;
+
 }
 
 function renderAdRecords(ads){
 
-const target=$("adsRecords");
+const target=
+$("adsRecords");
 
 if(!ads.length){
 
 target.innerHTML=`
 <div class="empty-state">
-<strong>${escapeHtml(lang().emptyAds)}</strong>
-<p>${escapeHtml(lang().emptyAdsText)}</p>
+
+<strong>
+${escapeHtml(lang().emptyAds)}
+</strong>
+
+<p>
+${escapeHtml(lang().emptyAdsText)}
+</p>
+
 </div>
 `;
 
@@ -3526,115 +4988,306 @@ return;
 
 target.innerHTML=`
 <div class="records">
-${ads.map(ad=>`
+
+${ads.map(
+ad=>{
+
+const canPay=
+ad.status==="draft"||
+ad.status==="awaiting_payment";
+
+return `
 
 <div class="record">
 
-${recordImage(ad.image)}
+${recordImage(
+ad.image
+)}
 
 <div>
+
 <div class="record-title">
-${escapeHtml(ad.headline||ad.company)}
+${escapeHtml(
+ad.headline||
+ad.company
+)}
 </div>
 
 <div class="record-meta">
+
 £${escapeHtml(ad.plan)}
- · ${escapeHtml(formatShortDate(ad.start))}
- — ${escapeHtml(formatShortDate(ad.end))}
+
+ ·
+
+${escapeHtml(
+formatShortDate(
+ad.start
+)
+)}
+
+ —
+
+${escapeHtml(
+formatShortDate(
+ad.end
+)
+)}
+
 </div>
+
+${canPay?`
+
+<div class="record-actions">
+
+<button
+class="tiny-action dark"
+type="button"
+onclick="payExistingCampaign('${escapeHtml(ad.id)}')"
+>
+${escapeHtml(lang().payAgain)} · £${escapeHtml(ad.plan)}
+</button>
+
+</div>
+
+`:""}
+
 </div>
 
 <span class="record-status ${escapeHtml(ad.status)}">
-${escapeHtml(statusLabel(ad.status))}
+
+${escapeHtml(
+statusLabel(
+ad.status
+)
+)}
+
 </span>
 
 </div>
 
-`).join("")}
+`;
+
+}
+).join("")}
+
 </div>
 `;
+
 }
 
 function renderBillingRecords(items){
 
-const target=$("billingRecords");
+const target=
+$("billingRecords");
 
 if(!items.length){
 
 target.innerHTML=`
 <div class="empty-state">
-<strong>${escapeHtml(lang().billingEmpty)}</strong>
-<p>${escapeHtml(lang().billingEmptyText)}</p>
+
+<strong>
+${escapeHtml(
+lang().billingEmpty
+)}
+</strong>
+
+<p>
+${escapeHtml(
+lang().billingEmptyText
+)}
+</p>
+
 </div>
 `;
 
 return;
 }
 
-target.innerHTML=`
-<div class="records">
-${items.map(item=>`
+target.innerHTML=
+items.map(
+item=>{
 
-<div class="record">
+const invoice=
+item.hostedInvoiceUrl
+?`
 
-<div class="record-thumb"></div>
+<a
+class="billing-link"
+href="${escapeHtml(item.hostedInvoiceUrl)}"
+target="_blank"
+rel="noopener noreferrer"
+>
+${escapeHtml(lang().invoice)}
+</a>
+
+`
+:"";
+
+const pdf=
+item.invoicePdf
+?`
+
+<a
+class="billing-link"
+href="${escapeHtml(item.invoicePdf)}"
+target="_blank"
+rel="noopener noreferrer"
+>
+${escapeHtml(lang().invoicePdf)}
+</a>
+
+`
+:"";
+
+return `
+
+<div class="billing-item">
 
 <div>
-<div class="record-title">
-${escapeHtml(item.description||"PETS & DOGUE Advertising")}
-</div>
 
-<div class="record-meta">
-${escapeHtml(formatShortDate(item.date))}
-</div>
-</div>
+<div class="billing-name">
 
-<span class="record-status paid">
-£${escapeHtml(item.amount)}
-</span>
+${escapeHtml(
+item.description||
+"PETS & DOGUE Advertising"
+)}
 
 </div>
 
-`).join("")}
+<div class="billing-meta">
+
+${escapeHtml(lang().paymentDate)}
+:
+${escapeHtml(
+formatShortDate(
+item.date
+)
+)}
+
+${item.invoiceNumber
+?` · ${escapeHtml(lang().receipt)} ${escapeHtml(item.invoiceNumber)}`
+:""}
+
 </div>
+
+<div class="billing-links">
+${invoice}
+${pdf}
+</div>
+
+</div>
+
+<div class="billing-amount">
+
+£${Number(
+item.amount||0
+).toFixed(2)}
+
+</div>
+
+</div>
+
 `;
+
+}
+).join("");
+
 }
 
-/* DEFAULT DATES */
+/* DATES */
 
 function dateInputValue(date){
 
-const year=date.getFullYear();
-const month=String(date.getMonth()+1).padStart(2,"0");
-const day=String(date.getDate()).padStart(2,"0");
+const year=
+date.getFullYear();
+
+const month=
+String(
+date.getMonth()+1
+).padStart(
+2,
+"0"
+);
+
+const day=
+String(
+date.getDate()
+).padStart(
+2,
+"0"
+);
 
 return `${year}-${month}-${day}`;
+
+}
+
+function setDefaultOfferDates(){
+
+const today=
+new Date();
+
+const plus30=
+new Date(today);
+
+plus30.setDate(
+plus30.getDate()+30
+);
+
+$("offerStart").value=
+dateInputValue(today);
+
+$("offerEnd").value=
+dateInputValue(plus30);
+
+}
+
+function setDefaultAdDates(){
+
+const today=
+new Date();
+
+const plus30=
+new Date(today);
+
+plus30.setDate(
+plus30.getDate()+30
+);
+
+$("adStart").value=
+dateInputValue(today);
+
+$("adEnd").value=
+dateInputValue(plus30);
+
 }
 
 function setDefaultDates(){
 
-const today=new Date();
+setDefaultOfferDates();
+setDefaultAdDates();
 
-const plus30=new Date(today);
-plus30.setDate(plus30.getDate()+30);
-
-$("offerStart").value=dateInputValue(today);
-$("offerEnd").value=dateInputValue(plus30);
-
-$("adStart").value=dateInputValue(today);
-$("adEnd").value=dateInputValue(plus30);
 }
 
-/* HEADER MENU */
+/* HEADER */
 
-$("menuButton").onclick=()=>{
-window.location.href="index.html";
+$("menuButton").onclick=
+()=>{
+
+window.location.href=
+"index.html";
+
 };
 
 /* LANGUAGE */
 
-$("languageSelect").onchange=function(){
-renderLanguage(this.value);
+$("languageSelect")
+.onchange=
+function(){
+
+renderLanguage(
+this.value
+);
+
 };
 
 /* INIT */
@@ -3642,7 +5295,9 @@ renderLanguage(this.value);
 setDefaultDates();
 
 const savedLanguage=
-localStorage.getItem(LANGUAGE_KEY)||"en";
+localStorage.getItem(
+LANGUAGE_KEY
+)||"en";
 
 renderLanguage(
 LANGS.includes(savedLanguage)
@@ -3650,17 +5305,25 @@ LANGS.includes(savedLanguage)
 :"en"
 );
 
-const account=partnerAccount();
+const account=
+partnerAccount();
 
 if(account){
 
-$("offerCompany").value=account.businessName||"";
-$("adCompany").value=account.businessName||"";
+$("offerCompany").value=
+account.businessName||"";
+
+$("adCompany").value=
+account.businessName||"";
 
 updateOfferPreview();
 updateAdPreview();
 
 }
+
+renderDashboard();
+
+verifyAdvertisingReturn();
 
 </script>
 
