@@ -11,17 +11,26 @@ Stripe is the source of truth.
 This endpoint:
 
 - verifies the Stripe Checkout Session
-- verifies the real recurring Stripe Subscription
+- verifies the recurring Stripe Subscription
 - confirms PETS & DOGUE Club metadata
-- confirms the selected membership plan
-- confirms price / currency / billing interval
-- accepts Club access only for:
-  active
-  trialing
-- returns data in the structure already expected
-  by the current club.html
+- confirms plan / price / currency / interval
+- grants access only for:
+    active
+    trialing
+- returns the membership structure expected by club.html
+- creates a secure HttpOnly Club session cookie
+
+The Club cookie will later be checked server-side by:
+- /api/use-offer
+- protected voucher endpoints
+
+IMPORTANT:
+The browser cannot read the HttpOnly cookie with JavaScript.
 =========================================================
 */
+
+const crypto =
+  require("crypto");
 
 const STRIPE_API_BASE =
   "https://api.stripe.com/v1";
@@ -38,6 +47,12 @@ const ACTIVE_MEMBERSHIP_STATUSES =
     "active",
     "trialing"
   ]);
+
+const CLUB_COOKIE_NAME =
+  "pets_dogue_club_session";
+
+const COOKIE_VERSION =
+  "v1";
 
 /* =========================================================
    RESPONSE
@@ -406,7 +421,8 @@ function getSubscriptionPrice(
 
   if (
     !price ||
-    price.object !== "price"
+    price.object !==
+      "price"
   ) {
 
     return null;
@@ -427,7 +443,7 @@ function getCustomerId(
 
   if (
     typeof session.customer ===
-    "string"
+      "string"
   ) {
 
     return session.customer;
@@ -450,6 +466,183 @@ function getCustomerId(
 }
 
 /* =========================================================
+   CLUB COOKIE SECRET
+========================================================= */
+
+function getCookieSecret(
+  stripeSecretKey
+) {
+
+  /*
+  Preferred:
+  PETS_DOGUE_SESSION_SECRET
+
+  If it has not been created yet, derive a private signing
+  secret from the existing Stripe secret.
+
+  This means the user does NOT need to stop now and add
+  another Vercel environment variable.
+
+  Later PETS_DOGUE_SESSION_SECRET can be added independently.
+  */
+
+  const configured =
+    cleanString(
+      process.env
+        .PETS_DOGUE_SESSION_SECRET ||
+      "",
+      1000
+    );
+
+  if (
+    configured.length >= 32
+  ) {
+
+    return configured;
+
+  }
+
+  return crypto
+    .createHash(
+      "sha256"
+    )
+    .update(
+      `pets-dogue-club-cookie:${stripeSecretKey}`
+    )
+    .digest(
+      "hex"
+    );
+
+}
+
+/* =========================================================
+   BASE64 URL
+========================================================= */
+
+function base64UrlEncode(
+  value
+) {
+
+  return Buffer
+    .from(
+      value,
+      "utf8"
+    )
+    .toString(
+      "base64url"
+    );
+
+}
+
+/* =========================================================
+   COOKIE SIGNATURE
+========================================================= */
+
+function signCookiePayload(
+  encodedPayload,
+  secret
+) {
+
+  return crypto
+    .createHmac(
+      "sha256",
+      secret
+    )
+    .update(
+      encodedPayload
+    )
+    .digest(
+      "base64url"
+    );
+
+}
+
+/* =========================================================
+   COOKIE
+========================================================= */
+
+function setClubCookie(
+  res,
+  payload,
+  secret,
+  maxAgeSeconds
+) {
+
+  const encodedPayload =
+    base64UrlEncode(
+      JSON.stringify(
+        payload
+      )
+    );
+
+  const signature =
+    signCookiePayload(
+      encodedPayload,
+      secret
+    );
+
+  const cookieValue =
+    `${COOKIE_VERSION}.${encodedPayload}.${signature}`;
+
+  const maxAge =
+    Math.max(
+      60,
+      Math.min(
+        Number(
+          maxAgeSeconds
+        ) || 3600,
+        60 * 60 * 24 * 400
+      )
+    );
+
+  const parts = [
+
+    `${CLUB_COOKIE_NAME}=${cookieValue}`,
+
+    "Path=/",
+
+    `Max-Age=${Math.floor(
+      maxAge
+    )}`,
+
+    "HttpOnly",
+
+    "Secure",
+
+    "SameSite=Lax"
+
+  ];
+
+  res.setHeader(
+    "Set-Cookie",
+    parts.join("; ")
+  );
+
+}
+
+/* =========================================================
+   CLEAR CLUB COOKIE
+========================================================= */
+
+function clearClubCookie(
+  res
+) {
+
+  res.setHeader(
+    "Set-Cookie",
+    [
+      `${CLUB_COOKIE_NAME}=`,
+      "Path=/",
+      "Max-Age=0",
+      "HttpOnly",
+      "Secure",
+      "SameSite=Lax"
+    ].join("; ")
+  );
+
+}
+
+/* =========================================================
    HANDLER
 ========================================================= */
 
@@ -464,7 +657,8 @@ async function handler(
   ======================================================= */
 
   if (
-    req.method !== "POST"
+    req.method !==
+      "POST"
   ) {
 
     res.setHeader(
@@ -629,6 +823,10 @@ async function handler(
         "checkout.session"
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         404,
@@ -652,13 +850,17 @@ async function handler(
     }
 
     /* =====================================================
-       MUST BE SUBSCRIPTION CHECKOUT
+       SUBSCRIPTION CHECKOUT ONLY
     ===================================================== */
 
     if (
       session.mode !==
       "subscription"
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -683,7 +885,7 @@ async function handler(
     }
 
     /* =====================================================
-       CHECKOUT METADATA
+       SESSION METADATA
     ===================================================== */
 
     const sessionMetadata =
@@ -694,6 +896,10 @@ async function handler(
       sessionMetadata.source !==
       "pets_dogue_club"
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -731,6 +937,10 @@ async function handler(
       )
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -762,6 +972,10 @@ async function handler(
       !expectedPlan
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -770,14 +984,14 @@ async function handler(
           ok:
             false,
 
-        verified:
-          false,
+          verified:
+            false,
 
-        active:
-          false,
+          active:
+            false,
 
-        error:
-          "Unable to verify the selected Club plan."
+          error:
+            "Unable to verify the selected Club plan."
 
         }
       );
@@ -785,13 +999,17 @@ async function handler(
     }
 
     /* =====================================================
-       CHECKOUT MUST BE COMPLETE
+       CHECKOUT STATUS
     ===================================================== */
 
     if (
       session.status !==
       "complete"
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -840,6 +1058,10 @@ async function handler(
         "subscription"
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -875,6 +1097,10 @@ async function handler(
       "pets_dogue_club"
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -903,6 +1129,10 @@ async function handler(
       "all_club_benefits"
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -930,6 +1160,10 @@ async function handler(
         .special_offers_access !==
       "all"
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -966,6 +1200,10 @@ async function handler(
       plan
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -989,7 +1227,7 @@ async function handler(
     }
 
     /* =====================================================
-       REAL STRIPE STATUS
+       SUBSCRIPTION STATUS
     ===================================================== */
 
     const subscriptionStatus =
@@ -1005,20 +1243,13 @@ async function handler(
           subscriptionStatus
         );
 
-    /*
-    Do not grant Club access for:
-
-    incomplete
-    incomplete_expired
-    past_due
-    unpaid
-    canceled
-    paused
-    */
-
     if (
       !active
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -1055,25 +1286,7 @@ async function handler(
               null,
 
             specialOffersAccess:
-              false,
-
-            email:
-              "",
-
-            stripe: {
-
-              checkoutSessionId:
-                session.id,
-
-              subscriptionId:
-                subscription.id,
-
-              customerId:
-                getCustomerId(
-                  session
-                )
-
-            }
+              false
 
           }
 
@@ -1094,6 +1307,10 @@ async function handler(
     if (
       !price
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -1122,6 +1339,10 @@ async function handler(
       true
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -1144,10 +1365,6 @@ async function handler(
 
     }
 
-    /* =====================================================
-       CURRENCY
-    ===================================================== */
-
     if (
       String(
         price.currency ||
@@ -1155,6 +1372,10 @@ async function handler(
       ).toLowerCase() !==
       "gbp"
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -1178,16 +1399,16 @@ async function handler(
 
     }
 
-    /* =====================================================
-       PRICE AMOUNT
-    ===================================================== */
-
     if (
       Number(
         price.unit_amount
       ) !==
       expectedPlan.amount
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -1211,13 +1432,13 @@ async function handler(
 
     }
 
-    /* =====================================================
-       RECURRING
-    ===================================================== */
-
     if (
       !price.recurring
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -1245,6 +1466,10 @@ async function handler(
       price.recurring.interval !==
       expectedPlan.interval
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -1277,6 +1502,10 @@ async function handler(
       1
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -1300,7 +1529,7 @@ async function handler(
     }
 
     /* =====================================================
-       VERIFY EMAIL
+       EMAIL
     ===================================================== */
 
     const checkoutEmail =
@@ -1347,6 +1576,10 @@ async function handler(
       )
     ) {
 
+      clearClubCookie(
+        res
+      );
+
       return sendJson(
         res,
         400,
@@ -1369,19 +1602,16 @@ async function handler(
 
     }
 
-    /*
-    Metadata was created by our Checkout endpoint.
-
-    If Stripe Checkout has an email and metadata has
-    an email, they must represent the same member.
-    */
-
     if (
       checkoutEmail &&
       metadataEmail &&
       checkoutEmail !==
         metadataEmail
     ) {
+
+      clearClubCookie(
+        res
+      );
 
       return sendJson(
         res,
@@ -1441,9 +1671,6 @@ async function handler(
 
     /* =====================================================
        DATES
-
-       These names intentionally match the structure
-       already used by current club.html.
     ===================================================== */
 
     const createdAt =
@@ -1475,72 +1702,114 @@ async function handler(
           .trial_end
       );
 
-    /*
-    For trial:
-    membership begins at trial_start.
-
-    Otherwise:
-    current_period_start is the best start value.
-    */
-
     const startedAt =
       trialStart ||
       currentPeriodStart ||
       createdAt;
-
-    /*
-    Current Club access remains valid through the
-    current Stripe billing period.
-
-    During the free introductory membership this
-    will normally be the end of the current trial /
-    subscription period.
-    */
 
     const validUntil =
       currentPeriodEnd ||
       trialEnd ||
       null;
 
-    /*
-    If cancellation is already scheduled,
-    there is no future renewal payment.
-
-    Otherwise current_period_end is the next
-    renewal point.
-    */
-
     const nextPayment =
       subscription
-        .cancel_at_period_end === true
+        .cancel_at_period_end ===
+          true
         ? null
         : currentPeriodEnd;
 
     /* =====================================================
-       BILLING
+       CREATE SECURE CLUB COOKIE
+
+       Cookie contains only identifiers needed to re-check
+       the real Stripe subscription server-side.
+
+       It does NOT contain:
+       - Stripe secret key
+       - payment card details
+       - promo codes
     ===================================================== */
 
-    const billingAmount =
-      expectedPlan.amount;
+    const nowSeconds =
+      Math.floor(
+        Date.now() /
+        1000
+      );
 
-    const billingFormatted =
-      `£${(
-        billingAmount /
-        100
-      ).toFixed(2)}`;
+    const stripePeriodEnd =
+      Number(
+        subscription
+          .current_period_end ||
+        subscription
+          .trial_end ||
+        0
+      );
+
+    /*
+    Cookie must never outlive the current verified Stripe
+    billing period.
+
+    Maximum safety cap: 400 days.
+    */
+
+    const fallbackSeconds =
+      60 * 60;
+
+    const secondsUntilPeriodEnd =
+      stripePeriodEnd > nowSeconds
+        ? stripePeriodEnd -
+          nowSeconds
+        : fallbackSeconds;
+
+    const cookieMaxAge =
+      Math.max(
+        60,
+        Math.min(
+          secondsUntilPeriodEnd,
+          60 * 60 * 24 * 400
+        )
+      );
+
+    const cookieSecret =
+      getCookieSecret(
+        secretKey
+      );
+
+    setClubCookie(
+      res,
+      {
+
+        sid:
+          session.id,
+
+        sub:
+          subscription.id,
+
+        customer:
+          getCustomerId(
+            session
+          ),
+
+        plan,
+
+        email:
+          memberEmail,
+
+        iat:
+          nowSeconds,
+
+        exp:
+          nowSeconds +
+          cookieMaxAge
+
+      },
+      cookieSecret,
+      cookieMaxAge
+    );
 
     /* =====================================================
-       MEMBERSHIP OBJECT
-
-       IMPORTANT:
-
-       Current club.html stores THIS object directly
-       in localStorage under:
-
-       petsDogueMembership
-
-       Therefore all fields needed by Club and
-       Special Offers are included inside it.
+       MEMBERSHIP OBJECT FOR CURRENT CLUB.HTML
     ===================================================== */
 
     const membership = {
@@ -1614,10 +1883,13 @@ async function handler(
       billing: {
 
         amount:
-          billingAmount,
+          expectedPlan.amount,
 
         amountFormatted:
-          billingFormatted,
+          `£${(
+            expectedPlan.amount /
+            100
+          ).toFixed(2)}`,
 
         currency:
           "GBP",
@@ -1687,11 +1959,6 @@ async function handler(
 
         membership,
 
-        /*
-        Also return structured fields outside membership
-        for future server-side integrations.
-        */
-
         member: {
 
           firstName,
@@ -1746,6 +2013,10 @@ async function handler(
     console.error(
       "PETS & DOGUE verify Club checkout error:",
       error
+    );
+
+    clearClubCookie(
+      res
     );
 
     let status =
