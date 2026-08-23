@@ -3,39 +3,29 @@
 /*
 =========================================================
 PETS & DOGUE
-GET ACTIVE CLUB OFFERS
+PUBLIC ACTIVE CLUB OFFERS
 =========================================================
 
-Public endpoint.
+Purpose:
 
-Returns only data that is safe to expose publicly.
+- Return public information needed to DISPLAY offer cards
+- Never expose protected redemption information
+- Never expose promo codes
+- Never expose private partner redirect URLs
+- Never expose offline redemption instructions
 
-IMPORTANT:
-- Promo codes are NOT returned here.
-- Partner checkout URLs are NOT returned here.
-- Offline staff instructions are NOT returned here.
-- Those values must be provided later through protected
-  member-only endpoints.
+Protected data is available only through:
 
-Geography returned:
-- locationScope
-- countryCode
-- countryName
-- city
+ONLINE:
+  /api/use-offer.js
+
+OFFLINE:
+  /api/get-offer-voucher.js
+
+Both protected endpoints verify the real Stripe
+Club subscription server-side.
 =========================================================
 */
-
-const SUPABASE_URL =
-  String(
-    process.env.SUPABASE_URL || ""
-  )
-    .trim()
-    .replace(/\/+$/, "");
-
-const SUPABASE_SECRET_KEY =
-  String(
-    process.env.SUPABASE_SECRET_KEY || ""
-  ).trim();
 
 /* =========================================================
    RESPONSE
@@ -47,55 +37,187 @@ function sendJson(
   payload
 ) {
 
-  res.statusCode = status;
+  res.statusCode =
+    status;
 
   res.setHeader(
     "Content-Type",
     "application/json; charset=utf-8"
   );
 
+  /*
+  Offers can change at any time:
+  paused
+  expired
+  voucher quantity exhausted
+  etc.
+
+  Do not allow stale browser/CDN responses.
+  */
+
   res.setHeader(
     "Cache-Control",
     "no-store, max-age=0"
   );
 
+  res.setHeader(
+    "Pragma",
+    "no-cache"
+  );
+
   res.end(
-    JSON.stringify(payload)
+    JSON.stringify(
+      payload
+    )
   );
 
 }
 
 /* =========================================================
-   SUPABASE
+   CLEAN VALUES
+========================================================= */
+
+function cleanString(
+  value,
+  maxLength = 500
+) {
+
+  if (
+    typeof value !== "string"
+  ) {
+
+    return "";
+
+  }
+
+  return value
+    .trim()
+    .slice(
+      0,
+      maxLength
+    );
+
+}
+
+/* =========================================================
+   SUPABASE CONFIG
+========================================================= */
+
+function getSupabaseConfig() {
+
+  const url =
+    cleanString(
+      process.env
+        .SUPABASE_URL ||
+      "",
+      1000
+    )
+      .replace(
+        /\/+$/,
+        ""
+      );
+
+  const secret =
+    cleanString(
+      process.env
+        .SUPABASE_SECRET_KEY ||
+      "",
+      2000
+    );
+
+  return {
+    url,
+    secret
+  };
+
+}
+
+/* =========================================================
+   SUPABASE HEADERS
+
+   Supports:
+
+   New Supabase secret keys:
+     sb_secret_...
+
+   Legacy service-role JWT:
+     eyJ...
+========================================================= */
+
+function buildSupabaseHeaders(
+  secret
+) {
+
+  const headers = {
+
+    apikey:
+      secret,
+
+    "Content-Type":
+      "application/json"
+
+  };
+
+  /*
+  Legacy service-role keys are JWTs and may also be sent
+  through Authorization.
+
+  New sb_secret_... keys should not be blindly treated
+  as JWT Bearer tokens.
+  */
+
+  if (
+    secret.startsWith(
+      "eyJ"
+    )
+  ) {
+
+    headers.Authorization =
+      `Bearer ${secret}`;
+
+  }
+
+  return headers;
+
+}
+
+/* =========================================================
+   SUPABASE REQUEST
 ========================================================= */
 
 async function supabaseRequest(
-  path,
-  options = {}
+  path
 ) {
+
+  const {
+    url,
+    secret
+  } =
+    getSupabaseConfig();
+
+  if (
+    !url ||
+    !secret
+  ) {
+
+    throw new Error(
+      "Supabase is not configured."
+    );
+
+  }
 
   const response =
     await fetch(
-      `${SUPABASE_URL}/rest/v1/${path}`,
+      `${url}/rest/v1/${path}`,
       {
 
         method:
-          options.method || "GET",
+          "GET",
 
-        headers: {
-
-          apikey:
-            SUPABASE_SECRET_KEY,
-
-          Authorization:
-            `Bearer ${SUPABASE_SECRET_KEY}`,
-
-          "Content-Type":
-            "application/json",
-
-          ...(options.headers || {})
-
-        }
+        headers:
+          buildSupabaseHeaders(
+            secret
+          )
 
       }
     );
@@ -103,7 +225,8 @@ async function supabaseRequest(
   const raw =
     await response.text();
 
-  let data = null;
+  let data =
+    null;
 
   if (
     raw
@@ -120,6 +243,7 @@ async function supabaseRequest(
 
       data =
         raw;
+
     }
 
   }
@@ -143,6 +267,7 @@ async function supabaseRequest(
       data;
 
     throw error;
+
   }
 
   return data;
@@ -150,234 +275,191 @@ async function supabaseRequest(
 }
 
 /* =========================================================
-   NORMALIZE CATEGORY
+   DATE CHECK
 ========================================================= */
 
-function normalizeCategory(
+function validDate(
   value
 ) {
 
-  const allowed =
-    new Set([
-      "veterinary",
-      "grooming",
-      "pet_food",
-      "pet_shop",
-      "travel",
-      "pet_friendly",
-      "training",
-      "accessories",
-      "insurance",
-      "photography",
-      "experiences",
-      "other"
-    ]);
+  if (
+    !value
+  ) {
 
-  const category =
-    String(
-      value || ""
+    return null;
+
+  }
+
+  const time =
+    new Date(
+      value
+    ).getTime();
+
+  if (
+    !Number.isFinite(
+      time
     )
-      .trim()
-      .toLowerCase();
+  ) {
 
-  return allowed.has(
-    category
-  )
-    ? category
-    : "other";
+    return null;
+
+  }
+
+  return time;
 
 }
 
 /* =========================================================
-   NORMALIZE LOCATION
+   NORMALIZE PUBLIC OFFER
 ========================================================= */
 
-function normalizeLocationScope(
-  value
-) {
-
-  const scope =
-    String(
-      value || ""
-    )
-      .trim()
-      .toLowerCase();
-
-  if (
-    scope === "international"
-  ) {
-
-    return "international";
-  }
-
-  return "country";
-
-}
-
-function normalizeCountryCode(
-  value
-) {
-
-  const code =
-    String(
-      value || ""
-    )
-      .trim()
-      .toUpperCase();
-
-  if (
-    /^[A-Z]{2}$/.test(
-      code
-    )
-  ) {
-
-    return code;
-  }
-
-  return null;
-
-}
-
-function cleanPublicString(
-  value,
-  maxLength = 1000
-) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "";
-  }
-
-  return String(value)
-    .trim()
-    .slice(
-      0,
-      maxLength
-    );
-
-}
-
-/* =========================================================
-   MAP OFFER
-========================================================= */
-
-function mapOffer(
+function normalizePublicOffer(
   row
 ) {
 
-  const locationScope =
-    normalizeLocationScope(
-      row.location_scope
-    );
+  /*
+  IMPORTANT:
+
+  Deliberately excluded:
+
+  promo_code
+  partner_url
+  offline_instructions
+  partner_email
+  commission_percent
+  sales_amount
+
+  Those values must never be included in this response.
+  */
 
   return {
 
     id:
-      String(
-        row.id || ""
+      cleanString(
+        row.id || "",
+        100
       ),
 
     businessName:
-      cleanPublicString(
-        row.business_name,
+      cleanString(
+        row.business_name ||
+        "PETS & DOGUE Partner",
         200
       ),
 
     category:
-      normalizeCategory(
-        row.category
+      cleanString(
+        row.category ||
+        "other",
+        80
       ),
 
     title:
-      cleanPublicString(
-        row.title,
-        220
+      cleanString(
+        row.title ||
+        "",
+        250
       ),
 
     description:
-      cleanPublicString(
-        row.description,
+      cleanString(
+        row.description ||
+        "",
         1500
       ),
 
     discount:
-      cleanPublicString(
-        row.discount_text,
+      cleanString(
+        row.discount_text ||
+        "",
         100
       ),
 
     saving:
-      cleanPublicString(
-        row.saving_text,
-        100
+      cleanString(
+        row.saving_text ||
+        "",
+        150
       ),
 
     redemptionType:
-      row.redemption_type === "offline"
+      row.redemption_type ===
+        "offline"
         ? "offline"
         : "online",
 
     image:
-      cleanPublicString(
-        row.image_url,
-        1600000
+      cleanString(
+        row.image_url ||
+        "",
+        2500000
       ),
 
     startsAt:
-      row.starts_at || null,
+      row.starts_at ||
+      null,
 
     endsAt:
-      row.ends_at || null,
+      row.ends_at ||
+      null,
 
     maxRedemptions:
-      row.max_redemptions === null
+      row.max_redemptions ===
+        null ||
+      row.max_redemptions ===
+        undefined
         ? null
         : Number(
             row.max_redemptions
           ),
 
     redemptionsCount:
-      Number(
-        row.redemptions_count || 0
+      Math.max(
+        0,
+        Number(
+          row.redemptions_count ||
+          0
+        )
       ),
 
     oneUsePerSubscriber:
-      row.one_use_per_subscriber !== false,
+      row.one_use_per_subscriber !==
+      false,
 
     accessScope:
-      row.access_scope === "all_subscribers"
-        ? "all_subscribers"
-        : "all_subscribers",
+      "all_subscribers",
 
     status:
       "active",
 
-    locationScope,
+    locationScope:
+      row.location_scope ===
+        "international"
+        ? "international"
+        : "country",
 
     countryCode:
-      locationScope === "country"
-        ? normalizeCountryCode(
-            row.country_code
-          )
+      row.country_code
+        ? cleanString(
+            row.country_code,
+            2
+          ).toUpperCase()
         : null,
 
     countryName:
-      locationScope === "country"
-        ? cleanPublicString(
+      row.country_name
+        ? cleanString(
             row.country_name,
             120
-          ) || null
+          )
         : null,
 
     city:
-      locationScope === "country"
-        ? cleanPublicString(
+      row.city
+        ? cleanString(
             row.city,
-            160
-          ) || null
+            120
+          )
         : null
 
   };
@@ -388,85 +470,112 @@ function mapOffer(
    OFFER AVAILABILITY
 ========================================================= */
 
-function isAvailable(
+function isCurrentlyAvailable(
   row,
   now
 ) {
 
   if (
-    row.status !== "active"
+    row.status !==
+    "active"
   ) {
 
     return false;
+
   }
 
   if (
-    row.access_scope !== "all_subscribers"
+    row.access_scope !==
+      "all_subscribers"
   ) {
 
     return false;
+
   }
 
-  const starts =
-    new Date(
+  const startsAt =
+    validDate(
       row.starts_at
-    ).getTime();
+    );
 
-  const ends =
-    new Date(
+  const endsAt =
+    validDate(
       row.ends_at
-    ).getTime();
+    );
 
   if (
-    !Number.isFinite(
-      starts
-    ) ||
-    !Number.isFinite(
-      ends
-    )
+    startsAt ===
+      null ||
+    endsAt ===
+      null
   ) {
 
     return false;
+
   }
 
   if (
-    now < starts ||
-    now > ends
+    now < startsAt ||
+    now > endsAt
   ) {
 
     return false;
+
   }
 
-  const maximum =
-    row.max_redemptions === null
+  const maxRedemptions =
+    row.max_redemptions ===
+      null ||
+    row.max_redemptions ===
+      undefined
       ? null
       : Number(
           row.max_redemptions
         );
 
-  const redeemed =
-    Number(
-      row.redemptions_count || 0
+  const redemptionsCount =
+    Math.max(
+      0,
+      Number(
+        row.redemptions_count ||
+        0
+      )
     );
 
+  /*
+  If the partner created a limited voucher allocation,
+  stop publishing the offer once all confirmed
+  redemptions have been used.
+  */
+
   if (
-    maximum !== null &&
+    maxRedemptions !==
+      null &&
     Number.isFinite(
-      maximum
+      maxRedemptions
     ) &&
-    maximum > 0 &&
-    redeemed >= maximum
+    maxRedemptions > 0 &&
+    redemptionsCount >=
+      maxRedemptions
   ) {
 
     return false;
+
   }
 
+  /*
+  International offers are online only.
+  */
+
   if (
-    row.location_scope === "international" &&
-    row.redemption_type !== "online"
+    row.location_scope ===
+      "international" &&
+    row.redemption_type !==
+      "online"
   ) {
 
     return false;
+
   }
 
   return true;
@@ -483,8 +592,13 @@ async function handler(
   res
 ) {
 
+  /* =======================================================
+     METHOD
+  ======================================================= */
+
   if (
-    req.method !== "GET"
+    req.method !==
+    "GET"
   ) {
 
     res.setHeader(
@@ -496,11 +610,13 @@ async function handler(
       res,
       405,
       {
+
         ok:
           false,
 
         error:
           "Method not allowed."
+
       }
     );
 
@@ -510,24 +626,35 @@ async function handler(
      CONFIG
   ======================================================= */
 
+  const {
+    url,
+    secret
+  } =
+    getSupabaseConfig();
+
   if (
-    !SUPABASE_URL ||
-    !SUPABASE_SECRET_KEY
+    !url ||
+    !secret
   ) {
 
     console.error(
-      "PETS & DOGUE active offers: Supabase environment variables are missing."
+      "PETS & DOGUE get-active-offers: Supabase configuration is missing."
     );
 
     return sendJson(
       res,
       500,
       {
+
         ok:
           false,
 
+        offers:
+          [],
+
         error:
-          "Offer service is unavailable."
+          "Offer service is not configured."
+
       }
     );
 
@@ -536,46 +663,66 @@ async function handler(
   try {
 
     /*
-    Security:
+    Only request fields that are safe or needed for
+    server-side availability checks.
 
-    Only columns safe for public display are selected.
-
-    promo_code
-    partner_url
-    offline_instructions
-    partner_email
-    partner_id
-
-    are intentionally excluded.
+    Secret redemption fields are intentionally omitted
+    from this SELECT.
     */
 
-    const fields = [
-      "id",
-      "business_name",
-      "category",
-      "title",
-      "description",
-      "discount_text",
-      "saving_text",
-      "redemption_type",
-      "image_url",
-      "starts_at",
-      "ends_at",
-      "max_redemptions",
-      "redemptions_count",
-      "one_use_per_subscriber",
-      "access_scope",
-      "status",
-      "location_scope",
-      "country_code",
-      "country_name",
-      "city",
-      "created_at"
-    ].join(",");
+    const fields =
+      [
+        "id",
+        "business_name",
+        "category",
+        "title",
+        "description",
+        "discount_text",
+        "saving_text",
+        "redemption_type",
+        "image_url",
+        "starts_at",
+        "ends_at",
+        "max_redemptions",
+        "redemptions_count",
+        "one_use_per_subscriber",
+        "access_scope",
+        "status",
+        "location_scope",
+        "country_code",
+        "country_name",
+        "city",
+        "created_at"
+      ]
+      .join(",");
+
+    /*
+    Ask Supabase for active offers only.
+
+    Date and voucher-capacity checks are repeated below
+    before anything reaches the browser.
+    */
+
+    const query =
+      [
+        `select=${encodeURIComponent(
+          fields
+        )}`,
+
+        "status=eq.active",
+
+        "access_scope=eq.all_subscribers",
+
+        "order=created_at.desc",
+
+        "limit=100"
+
+      ]
+      .join("&");
 
     const rows =
       await supabaseRequest(
-        `offers?status=eq.active&select=${encodeURIComponent(fields)}&order=created_at.desc&limit=100`
+        `offers?${query}`
       );
 
     if (
@@ -587,6 +734,7 @@ async function handler(
       throw new Error(
         "Invalid offers response."
       );
+
     }
 
     const now =
@@ -596,14 +744,29 @@ async function handler(
       rows
         .filter(
           row =>
-            isAvailable(
+            isCurrentlyAvailable(
               row,
               now
             )
         )
         .map(
-          mapOffer
+          normalizePublicOffer
+        )
+        .filter(
+          offer =>
+            Boolean(
+              offer.id
+            )
         );
+
+    /* =====================================================
+       SUCCESS
+
+       Notice that response does NOT include:
+       promoCode
+       partnerUrl
+       offlineInstructions
+    ===================================================== */
 
     return sendJson(
       res,
@@ -613,10 +776,10 @@ async function handler(
         ok:
           true,
 
-        count:
-          offers.length,
+        offers,
 
-        offers
+        count:
+          offers.length
 
       }
     );
@@ -626,7 +789,7 @@ async function handler(
   ) {
 
     console.error(
-      "PETS & DOGUE get active offers error:",
+      "PETS & DOGUE get-active-offers error:",
       error
     );
 
@@ -634,11 +797,16 @@ async function handler(
       res,
       500,
       {
+
         ok:
           false,
 
+        offers:
+          [],
+
         error:
-          "Unable to load active offers."
+          "Unable to load PETS & DOGUE Club offers."
+
       }
     );
 
