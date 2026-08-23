@@ -6,15 +6,34 @@ PETS & DOGUE
 CREATE PARTNER OFFER
 =========================================================
 
-Server rules:
+SERVER RULES
 
-- Discount: 1% — 99%
-- Available vouchers: 1 — 1,000,000
-- PETS & DOGUE commission: fixed 1%
-- Partner CANNOT modify commission
-- One voucher per subscriber
-- Final promo code generated server-side
-- New offers enter moderation as "pending"
+Discount:
+- 1% — 99%
+
+Vouchers:
+- 1 — 1,000,000
+
+Commission:
+- PETS & DOGUE fixed commission = 1%
+- Partner cannot modify it
+
+Geography:
+- country
+- international
+
+International:
+- online offers only
+
+Offline:
+- country required
+- city required
+
+Other:
+- one voucher per subscriber
+- all active Club subscribers
+- final promo code generated server-side
+- new offer status = pending
 =========================================================
 */
 
@@ -42,6 +61,12 @@ const VALID_REDEMPTION_TYPES =
   new Set([
     "online",
     "offline"
+  ]);
+
+const VALID_LOCATION_SCOPES =
+  new Set([
+    "country",
+    "international"
   ]);
 
 const CATEGORY_MAP = {
@@ -114,7 +139,6 @@ function cleanString(
   if (
     typeof value !== "string"
   ) {
-
     return "";
   }
 
@@ -200,7 +224,6 @@ async function readBody(
     req.body &&
     typeof req.body === "object"
   ) {
-
     return req.body;
   }
 
@@ -239,7 +262,6 @@ async function readBody(
   if (
     !chunks.length
   ) {
-
     return {};
   }
 
@@ -252,7 +274,6 @@ async function readBody(
   if (
     !raw
   ) {
-
     return {};
   }
 
@@ -278,29 +299,28 @@ async function supabaseRequest(
   options = {}
 ) {
 
-  const headers = {
-
-    apikey:
-      SUPABASE_SECRET_KEY,
-
-    Authorization:
-      `Bearer ${SUPABASE_SECRET_KEY}`,
-
-    "Content-Type":
-      "application/json",
-
-    ...options.headers
-
-  };
-
   const response =
     await fetch(
       `${SUPABASE_URL}/rest/v1/${path}`,
       {
+
         method:
           options.method || "GET",
 
-        headers,
+        headers: {
+
+          apikey:
+            SUPABASE_SECRET_KEY,
+
+          Authorization:
+            `Bearer ${SUPABASE_SECRET_KEY}`,
+
+          "Content-Type":
+            "application/json",
+
+          ...(options.headers || {})
+
+        },
 
         body:
           options.body
@@ -308,6 +328,7 @@ async function supabaseRequest(
                 options.body
               )
             : undefined
+
       }
     );
 
@@ -385,7 +406,6 @@ async function findPartnerByEmail(
     Array.isArray(rows) &&
     rows.length
   ) {
-
     return rows[0];
   }
 
@@ -467,7 +487,6 @@ async function getOrCreatePartner(
   if (
     existing
   ) {
-
     return existing;
   }
 
@@ -495,7 +514,6 @@ async function getOrCreatePartner(
       if (
         retry
       ) {
-
         return retry;
       }
 
@@ -515,8 +533,7 @@ function parseDiscountPercent(
 ) {
 
   /*
-  Accepted examples:
-
+  Accepted:
   20
   "20"
   "20%"
@@ -528,11 +545,11 @@ function parseDiscountPercent(
       value ?? ""
     )
       .trim()
-      .replace(
+      .replaceAll(
         "%",
         ""
       )
-      .replace(
+      .replaceAll(
         "-",
         ""
       );
@@ -545,7 +562,6 @@ function parseDiscountPercent(
   if (
     !Number.isFinite(number)
   ) {
-
     return null;
   }
 
@@ -555,17 +571,80 @@ function parseDiscountPercent(
     );
 
   if (
-    rounded <
-      MIN_DISCOUNT_PERCENT ||
-    rounded >
-      MAX_DISCOUNT_PERCENT
+    rounded < MIN_DISCOUNT_PERCENT ||
+    rounded > MAX_DISCOUNT_PERCENT
   ) {
-
     return null;
   }
 
   return rounded;
 
+}
+
+/* =========================================================
+   GEOGRAPHY
+========================================================= */
+
+function normalizeLocationScope(
+  value
+) {
+
+  const scope =
+    cleanString(
+      value,
+      30
+    ).toLowerCase();
+
+  if (
+    VALID_LOCATION_SCOPES.has(
+      scope
+    )
+  ) {
+    return scope;
+  }
+
+  return "";
+}
+
+function normalizeCountryCode(
+  value
+) {
+
+  const code =
+    cleanString(
+      value,
+      2
+    ).toUpperCase();
+
+  if (
+    !/^[A-Z]{2}$/.test(
+      code
+    )
+  ) {
+    return "";
+  }
+
+  return code;
+}
+
+function normalizeCountryName(
+  value
+) {
+
+  return cleanString(
+    value,
+    120
+  );
+}
+
+function normalizeCity(
+  value
+) {
+
+  return cleanString(
+    value,
+    160
+  );
 }
 
 /* =========================================================
@@ -580,6 +659,36 @@ function randomCharacters(
     "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
   let output = "";
+
+  if (
+    globalThis.crypto &&
+    typeof globalThis.crypto.getRandomValues === "function"
+  ) {
+
+    const values =
+      new Uint32Array(
+        length
+      );
+
+    globalThis.crypto
+      .getRandomValues(
+        values
+      );
+
+    for (
+      const value of values
+    ) {
+
+      output +=
+        alphabet[
+          value %
+          alphabet.length
+        ];
+
+    }
+
+    return output;
+  }
 
   for (
     let index = 0;
@@ -599,7 +708,6 @@ function randomCharacters(
   }
 
   return output;
-
 }
 
 function generatePromoCode() {
@@ -648,7 +756,6 @@ async function generateUniquePromoCode() {
     if (
       !exists
     ) {
-
       return code;
     }
 
@@ -678,7 +785,6 @@ function cleanImage(
   if (
     !image
   ) {
-
     return null;
   }
 
@@ -687,7 +793,6 @@ function cleanImage(
       "https://"
     )
   ) {
-
     return image;
   }
 
@@ -735,7 +840,6 @@ function normalizeDate(
   if (
     !raw
   ) {
-
     return null;
   }
 
@@ -771,7 +875,6 @@ function normalizeDate(
       date.getTime()
     )
   ) {
-
     return null;
   }
 
@@ -784,7 +887,7 @@ function normalizeDate(
    URL
 ========================================================= */
 
-function normalizeHttpsUrl(
+function normalizeHttpUrl(
   value
 ) {
 
@@ -797,7 +900,6 @@ function normalizeHttpsUrl(
   if (
     !raw
   ) {
-
     return "";
   }
 
@@ -812,7 +914,6 @@ function normalizeHttpsUrl(
       url.protocol !== "https:" &&
       url.protocol !== "http:"
     ) {
-
       return "";
     }
 
@@ -824,6 +925,38 @@ function normalizeHttpsUrl(
     return "";
   }
 
+}
+
+/* =========================================================
+   EXTERNAL ID
+========================================================= */
+
+function normalizeExternalId(
+  value
+) {
+
+  const externalId =
+    cleanString(
+      value,
+      150
+    );
+
+  if (
+    !externalId
+  ) {
+    return "";
+  }
+
+  if (
+    !/^[A-Za-z0-9_-]+$/
+      .test(
+        externalId
+      )
+  ) {
+    return "";
+  }
+
+  return externalId;
 }
 
 /* =========================================================
@@ -938,14 +1071,14 @@ async function handler(
       body.partnerEmail
     );
 
-  const country =
+  const partnerCountry =
     cleanString(
       body.country,
       100
     );
 
   const website =
-    normalizeHttpsUrl(
+    normalizeHttpUrl(
       body.website
     );
 
@@ -998,9 +1131,8 @@ async function handler(
   ======================================================= */
 
   const externalId =
-    cleanString(
-      body.externalId,
-      150
+    normalizeExternalId(
+      body.externalId
     );
 
   const category =
@@ -1041,7 +1173,7 @@ async function handler(
     ).toLowerCase();
 
   const partnerUrl =
-    normalizeHttpsUrl(
+    normalizeHttpUrl(
       body.partnerUrl
     );
 
@@ -1074,20 +1206,60 @@ async function handler(
   /*
   SECURITY:
 
-  We intentionally DO NOT use:
+  Browser commission is ignored.
 
   body.commissionPercent
-
-  The browser cannot determine the commission.
-  PETS & DOGUE controls this value here.
+  is intentionally NOT trusted.
   */
 
   const commissionPercent =
     FIXED_COMMISSION_PERCENT;
 
   /* =======================================================
-     VALIDATION
+     LOCATION
   ======================================================= */
+
+  const locationScope =
+    normalizeLocationScope(
+      body.locationScope
+    );
+
+  const countryCode =
+    normalizeCountryCode(
+      body.countryCode
+    );
+
+  const countryName =
+    normalizeCountryName(
+      body.countryName
+    );
+
+  const city =
+    normalizeCity(
+      body.city
+    );
+
+  /* =======================================================
+     BASIC VALIDATION
+  ======================================================= */
+
+  if (
+    !externalId
+  ) {
+
+    return sendJson(
+      res,
+      400,
+      {
+        ok:
+          false,
+
+        error:
+          "Invalid offer identifier."
+      }
+    );
+
+  }
 
   if (
     !title
@@ -1187,6 +1359,129 @@ async function handler(
 
   }
 
+  /* =======================================================
+     LOCATION VALIDATION
+  ======================================================= */
+
+  if (
+    !VALID_LOCATION_SCOPES.has(
+      locationScope
+    )
+  ) {
+
+    return sendJson(
+      res,
+      400,
+      {
+        ok:
+          false,
+
+        error:
+          "Please select where this offer is available."
+      }
+    );
+
+  }
+
+  /*
+  INTERNATIONAL:
+  only online
+  */
+
+  if (
+    locationScope === "international" &&
+    redemptionType !== "online"
+  ) {
+
+    return sendJson(
+      res,
+      400,
+      {
+        ok:
+          false,
+
+        error:
+          "International availability is only allowed for online offers."
+      }
+    );
+
+  }
+
+  /*
+  COUNTRY:
+  country code + country name required
+  */
+
+  if (
+    locationScope === "country"
+  ) {
+
+    if (
+      !countryCode
+    ) {
+
+      return sendJson(
+        res,
+        400,
+        {
+          ok:
+            false,
+
+          error:
+            "A valid country is required."
+        }
+      );
+
+    }
+
+    if (
+      !countryName
+    ) {
+
+      return sendJson(
+        res,
+        400,
+        {
+          ok:
+            false,
+
+          error:
+            "Country name is required."
+        }
+      );
+
+    }
+
+  }
+
+  /*
+  OFFLINE:
+  city is mandatory
+  */
+
+  if (
+    redemptionType === "offline" &&
+    !city
+  ) {
+
+    return sendJson(
+      res,
+      400,
+      {
+        ok:
+          false,
+
+        error:
+          "City is required for an in-store offer."
+      }
+    );
+
+  }
+
+  /* =======================================================
+     ONLINE URL
+  ======================================================= */
+
   if (
     redemptionType === "online" &&
     !partnerUrl
@@ -1205,6 +1500,10 @@ async function handler(
     );
 
   }
+
+  /* =======================================================
+     IMAGE
+  ======================================================= */
 
   let imageUrl = null;
 
@@ -1234,6 +1533,26 @@ async function handler(
   }
 
   /* =======================================================
+     FINAL NORMALIZED LOCATION
+  ======================================================= */
+
+  const finalCountryCode =
+    locationScope === "country"
+      ? countryCode
+      : null;
+
+  const finalCountryName =
+    locationScope === "country"
+      ? countryName
+      : null;
+
+  const finalCity =
+    locationScope === "country" &&
+    city
+      ? city
+      : null;
+
+  /* =======================================================
      CREATE PARTNER + OFFER
   ======================================================= */
 
@@ -1247,7 +1566,8 @@ async function handler(
           contactName,
           email:
             partnerEmail,
-          country,
+          country:
+            partnerCountry,
           website,
           address
         }
@@ -1278,7 +1598,7 @@ async function handler(
                 partner.id,
 
               external_id:
-                externalId || null,
+                externalId,
 
               business_name:
                 businessName,
@@ -1335,6 +1655,22 @@ async function handler(
 
               access_scope:
                 "all_subscribers",
+
+              /*
+              Geographic targeting
+              */
+
+              location_scope:
+                locationScope,
+
+              country_code:
+                finalCountryCode,
+
+              country_name:
+                finalCountryName,
+
+              city:
+                finalCity,
 
               status:
                 "pending"
@@ -1424,6 +1760,18 @@ async function handler(
 
           accessScope:
             "all_subscribers",
+
+          locationScope:
+            offer.location_scope,
+
+          countryCode:
+            offer.country_code,
+
+          countryName:
+            offer.country_name,
+
+          city:
+            offer.city,
 
           status:
             offer.status,
