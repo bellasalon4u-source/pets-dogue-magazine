@@ -649,6 +649,11 @@ background:#111;
 color:var(--gold-light);
 }
 
+.record-status.active{
+background:#ddf5d7;
+color:#1f6636;
+}
+
 .record-actions{
 display:flex;
 flex-wrap:wrap;
@@ -885,6 +890,14 @@ line-height:1.45;
 margin-top:7px;
 }
 
+.server-code-note{
+margin-top:8px;
+font-size:7px;
+line-height:1.5;
+color:var(--gold-dark);
+font-weight:700;
+}
+
 .regenerate-button{
 border:1px solid #111;
 background:#fff;
@@ -917,6 +930,13 @@ letter-spacing:1px;
 font-size:7px;
 color:#777;
 margin-top:5px;
+}
+
+.upload-success{
+font-size:7px;
+font-weight:900;
+color:var(--green-dark);
+margin-top:7px;
 }
 
 .primary{
@@ -1425,6 +1445,8 @@ letter-spacing:.8px;
 opacity:0;
 pointer-events:none;
 transition:.22s;
+max-width:calc(100vw - 28px);
+text-align:center;
 }
 
 .toast.show{
@@ -1627,7 +1649,6 @@ grid-template-columns:1fr;
 }
 
 }
-
 </style>
 </head>
 
@@ -1983,6 +2004,7 @@ grid-template-columns:1fr;
 </div>
 
 <p id="generatedCodeHint"></p>
+<p class="server-code-note" id="serverCodeNote"></p>
 
 </div>
 
@@ -2013,6 +2035,7 @@ grid-template-columns:1fr;
 <input id="offerImage" type="file" accept="image/*">
 
 <div class="upload-help" id="offerImageHelp"></div>
+<div class="upload-success hidden" id="offerImageReady"></div>
 
 </div>
 
@@ -2391,9 +2414,7 @@ const LANGS=[
 "hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
 ];
 
-const T={
-
-en:{
+const EN={
 club:"CLUB",
 heroEyebrow:"PETS & DOGUE PARTNERS",
 heroTitle:"Grow with PETS & DOGUE",
@@ -2401,7 +2422,7 @@ heroText:"Create exclusive offers for every PETS & DOGUE Club subscriber or laun
 heroOffer:"CREATE MEMBER OFFER",
 heroAd:"BUY ADVERTISING",
 offerCardTitle:"Give Club subscribers a special offer",
-offerCardText:"Every active PETS & DOGUE Club subscriber can use your offer. PETS & DOGUE automatically creates the promotional code.",
+offerCardText:"Every active PETS & DOGUE Club subscriber can use your offer. PETS & DOGUE creates the final promotional code automatically.",
 startOffer:"CREATE OFFER",
 adCardTitle:"Advertise inside PETS & DOGUE",
 adCardText:"Upload your campaign, choose placement and pay online. Premium full-page advertising appears naturally while readers scroll.",
@@ -2441,16 +2462,19 @@ online:"Online",
 onlineText:"PETS & DOGUE promo code plus the partner link.",
 offline:"In store",
 offlineText:"The subscriber presents the PETS & DOGUE code / barcode.",
-generatedCode:"Automatically generated promo code",
-regenerate:"NEW CODE",
-generatedHint:"Created automatically by PETS & DOGUE. The advertiser does not need to invent a code.",
+generatedCode:"Preview promotional code",
+regenerate:"NEW PREVIEW",
+generatedHint:"This code is only a preview while you create the offer.",
+serverCodeNote:"When you publish, PETS & DOGUE securely generates the final unique code on the server.",
 partnerUrl:"Partner website / checkout URL",
 offlineInstructions:"Instructions for your staff",
 offerImage:"Offer image",
 uploadImage:"UPLOAD IMAGE",
-uploadHelp:"Recommended: landscape image, minimum 1200 px wide.",
+uploadHelp:"Recommended: landscape image. Large photos are automatically compressed before submission.",
+imageReady:"IMAGE READY",
 offerTerms:"I confirm that this offer, discount and validity period are accurate and will be honoured by my business.",
 publishOffer:"PUBLISH OFFER",
+publishingOffer:"PUBLISHING…",
 saveDraft:"SAVE DRAFT",
 preview:"LIVE PREVIEW",
 validUntil:"Valid until",
@@ -2496,12 +2520,13 @@ register:"CREATE PARTNER ACCOUNT",
 categories:["Veterinary","Grooming","Pet food","Pet shops","Hotels & travel","Pet-friendly cafés","Training","Accessories","Insurance","Photography","Experiences","Other"],
 types:["Company","Shop","Veterinary clinic","Grooming salon","Hotel","Restaurant / café","Trainer","Online store","Brand","Other"],
 draft:"DRAFT",
-pending:"PENDING",
+pending:"PENDING REVIEW",
 awaitingPayment:"AWAITING PAYMENT",
 active:"ACTIVE",
 paid:"PAID",
 saved:"Saved",
-offerPublished:"Offer created successfully.",
+offerPublished:"Offer submitted successfully. PETS & DOGUE generated the final code and the offer is now pending review.",
+offerPublishError:"The offer could not be submitted. Please try again.",
 adSaved:"Advertising campaign saved.",
 accountCreated:"Partner account created.",
 checkoutError:"Unable to open secure payment. Please try again.",
@@ -2519,17 +2544,18 @@ billingEmptyText:"Paid advertising invoices will appear here.",
 invoice:"VIEW INVOICE",
 invoicePdf:"DOWNLOAD PDF",
 paymentDate:"Paid"
-},
+};
 
-ru:{
+const RU={
+...EN,
 club:"КЛУБ",
 heroEyebrow:"ПАРТНЁРЫ PETS & DOGUE",
 heroTitle:"Развивайте бизнес вместе с PETS & DOGUE",
-heroText:"Создавайте эксклюзивные предложения для всех подписчиков PETS & DOGUE Club или запускайте премиальную рекламу в журнале.",
+heroText:"Создавайте специальные предложения для всех подписчиков PETS & DOGUE Club или запускайте премиальную рекламу в журнале.",
 heroOffer:"СОЗДАТЬ ПРЕДЛОЖЕНИЕ",
 heroAd:"РАЗМЕСТИТЬ РЕКЛАМУ",
 offerCardTitle:"Дайте подписчикам Club специальное предложение",
-offerCardText:"Предложением сможет воспользоваться любой активный подписчик PETS & DOGUE Club. Промокод PETS & DOGUE создаст автоматически.",
+offerCardText:"Предложением сможет воспользоваться любой активный подписчик PETS & DOGUE Club. Финальный промокод PETS & DOGUE создаёт автоматически.",
 startOffer:"СОЗДАТЬ ПРЕДЛОЖЕНИЕ",
 adCardTitle:"Разместите рекламу в PETS & DOGUE",
 adCardText:"Загрузите рекламу, выберите размещение и оплатите онлайн. Большая премиальная реклама появляется во время прокрутки журнала.",
@@ -2569,16 +2595,19 @@ online:"Онлайн",
 onlineText:"Автоматический промокод PETS & DOGUE и ссылка партнёра.",
 offline:"В заведении",
 offlineText:"Подписчик показывает код / штрихкод PETS & DOGUE.",
-generatedCode:"Автоматический промокод",
-regenerate:"НОВЫЙ КОД",
-generatedHint:"PETS & DOGUE создаёт код автоматически. Рекламодателю ничего придумывать не нужно.",
+generatedCode:"Предварительный промокод",
+regenerate:"НОВЫЙ ПРИМЕР",
+generatedHint:"Во время заполнения формы здесь показывается только предварительный код.",
+serverCodeNote:"При публикации PETS & DOGUE безопасно создаст окончательный уникальный код на сервере.",
 partnerUrl:"Сайт / страница заказа партнёра",
 offlineInstructions:"Инструкция для ваших сотрудников",
 offerImage:"Фото предложения",
 uploadImage:"ЗАГРУЗИТЬ ФОТО",
-uploadHelp:"Рекомендуется горизонтальное фото шириной не менее 1200 px.",
+uploadHelp:"Рекомендуется горизонтальное фото. Большие изображения автоматически уменьшаются перед отправкой.",
+imageReady:"ФОТО ГОТОВО",
 offerTerms:"Я подтверждаю, что предложение, скидка и срок действия указаны правильно и мой бизнес выполнит эти условия.",
 publishOffer:"ОПУБЛИКОВАТЬ",
+publishingOffer:"ПУБЛИКУЕМ…",
 saveDraft:"СОХРАНИТЬ ЧЕРНОВИК",
 preview:"ПРЕДПРОСМОТР",
 validUntil:"Действует до",
@@ -2629,7 +2658,8 @@ awaitingPayment:"ОЖИДАЕТ ОПЛАТЫ",
 active:"АКТИВНО",
 paid:"ОПЛАЧЕНО",
 saved:"Сохранено",
-offerPublished:"Предложение создано.",
+offerPublished:"Предложение отправлено. PETS & DOGUE создал окончательный промокод, предложение ожидает проверки.",
+offerPublishError:"Не удалось отправить предложение. Попробуйте ещё раз.",
 adSaved:"Рекламная кампания сохранена.",
 accountCreated:"Аккаунт партнёра создан.",
 checkoutError:"Не удалось открыть безопасную оплату.",
@@ -2647,20 +2677,19 @@ billingEmptyText:"Здесь появятся счета за оплаченну
 invoice:"ОТКРЫТЬ СЧЁТ",
 invoicePdf:"PDF КВИТАНЦИИ",
 paymentDate:"Оплачено"
-},
+};
 
-uk:{
+const UK={
+...RU,
 club:"КЛУБ",
 heroEyebrow:"ПАРТНЕРИ PETS & DOGUE",
 heroTitle:"Розвивайте бізнес разом із PETS & DOGUE",
-heroText:"Створюйте ексклюзивні пропозиції для всіх підписників PETS & DOGUE Club або запускайте преміальну рекламу в журналі.",
+heroText:"Створюйте спеціальні пропозиції для всіх підписників PETS & DOGUE Club або запускайте преміальну рекламу в журналі.",
 heroOffer:"СТВОРИТИ ПРОПОЗИЦІЮ",
 heroAd:"РОЗМІСТИТИ РЕКЛАМУ",
 offerCardTitle:"Дайте підписникам Club спеціальну пропозицію",
-offerCardText:"Пропозицією може скористатися будь-який активний підписник PETS & DOGUE Club. Промокод PETS & DOGUE створить автоматично.",
+offerCardText:"Пропозицією може скористатися будь-який активний підписник PETS & DOGUE Club. Остаточний промокод PETS & DOGUE створює автоматично.",
 startOffer:"СТВОРИТИ ПРОПОЗИЦІЮ",
-adCardTitle:"Розмістіть рекламу в PETS & DOGUE",
-adCardText:"Завантажте рекламу, оберіть розміщення та сплатіть онлайн. Велика преміальна реклама з’являється під час прокручування журналу.",
 startAd:"СТВОРИТИ РЕКЛАМУ",
 dashboardTitle:"Кабінет партнера",
 dashboardSub:"Керуйте пропозиціями, рекламою, платежами та результатами.",
@@ -2670,11 +2699,6 @@ stats:["АКТИВНІ ПРОПОЗИЦІЇ","ОПЛАЧЕНА РЕКЛАМА","
 myOffers:"Мої пропозиції",
 myOffersHint:"Доступно всім підписникам Club",
 myAds:"Моя реклама",
-myAdsHint:"Рекламні кампанії журналу",
-emptyOffers:"Пропозицій поки немає",
-emptyOffersText:"Створіть першу пропозицію PETS & DOGUE Club.",
-emptyAds:"Реклами поки немає",
-emptyAdsText:"Тут відображатимуться ваші кампанії.",
 offerDetails:"Дані пропозиції",
 company:"Назва компанії",
 category:"Категорія",
@@ -2682,7 +2706,6 @@ offerTitle:"Назва пропозиції",
 description:"Короткий опис",
 discount:"Знижка / бонус",
 saving:"Приблизна економія",
-savingHint:"Необов’язково. Наприклад: £10, подарунок вартістю £25 або FREE GIFT.",
 validity:"Термін дії та комісія",
 starts:"Початок",
 ends:"Закінчення",
@@ -2697,47 +2720,26 @@ online:"Онлайн",
 onlineText:"Автоматичний промокод PETS & DOGUE та посилання партнера.",
 offline:"У закладі",
 offlineText:"Підписник показує код / штрихкод PETS & DOGUE.",
-generatedCode:"Автоматичний промокод",
-regenerate:"НОВИЙ КОД",
-generatedHint:"PETS & DOGUE створює код автоматично. Партнеру не потрібно вигадувати його самостійно.",
+generatedCode:"Попередній промокод",
+regenerate:"НОВИЙ ПРИКЛАД",
+generatedHint:"Під час заповнення тут показується лише попередній код.",
+serverCodeNote:"Під час публікації PETS & DOGUE безпечно створить остаточний унікальний код на сервері.",
 partnerUrl:"Сайт / сторінка замовлення партнера",
 offlineInstructions:"Інструкція для ваших співробітників",
 offerImage:"Фото пропозиції",
 uploadImage:"ЗАВАНТАЖИТИ ФОТО",
-uploadHelp:"Рекомендується горизонтальне фото шириною щонайменше 1200 px.",
-offerTerms:"Я підтверджую, що пропозиція, знижка та термін дії вказані правильно і мій бізнес виконає ці умови.",
+imageReady:"ФОТО ГОТОВЕ",
 publishOffer:"ОПУБЛІКУВАТИ",
+publishingOffer:"ПУБЛІКУЄМО…",
 saveDraft:"ЗБЕРЕГТИ ЧЕРНЕТКУ",
 preview:"ПЕРЕДПЕРЕГЛЯД",
 validUntil:"Діє до",
 oneUseShort:"1 раз",
 subscriberBadge:"ПІДПИСНИКАМ",
-ad50:"Просування пропозиції",
-ad50Text:"Підняти вашу пропозицію вище в каталозі спеціальних пропозицій.",
-ad100:"Featured Card",
-ad100Text:"Велика рекламна картка у відповідному розділі PETS & DOGUE.",
-ad200:"Велика рекламна сторінка",
-ad200Text:"Красива велика реклама, що природно з’являється під час прокручування журналу.",
-adDetails:"Дані реклами",
-headline:"Заголовок",
-copy:"Короткий текст",
-cta:"Текст кнопки",
-url:"Посилання",
-schedule:"Термін і розміщення",
-placement:"Де показувати рекламу?",
-placementHint:"Кількість великих рекламних сторінок автоматично обмежується.",
-placements:["Автоматично — відповідні сторінки","Статті журналу","Здоров’я тварин","Подорожі та pet-friendly","Маркетплейс","Спеціальні пропозиції","Головна сторінка"],
-adImage:"Зображення реклами",
-adImageHelp:"Використовуйте якісне вертикальне або горизонтальне зображення.",
-adTerms:"Я підтверджую право використовувати завантажені зображення, торгові марки та рекламні матеріали.",
-payAd:"ПЕРЕЙТИ ДО ОПЛАТИ",
-payAgain:"ОПЛАТИТИ",
-paymentStarting:"ВІДКРИВАЄМО БЕЗПЕЧНУ ОПЛАТУ…",
-saveAd:"ЗБЕРЕГТИ ЧЕРНЕТКУ",
-adPreview:"ПЕРЕДПЕРЕГЛЯД РЕКЛАМИ",
-advertisement:"РЕКЛАМА",
-billing:"Платежі",
-billingHint:"Оплати та квитанції",
+pending:"НА ПЕРЕВІРЦІ",
+saved:"Збережено",
+offerPublished:"Пропозицію надіслано. PETS & DOGUE створив остаточний промокод, пропозиція очікує перевірки.",
+offerPublishError:"Не вдалося надіслати пропозицію. Спробуйте ще раз.",
 registerTitle:"Створіть акаунт партнера",
 registerText:"Один акаунт дозволяє створювати пропозиції Club та купувати рекламу PETS & DOGUE.",
 businessName:"Назва бізнесу",
@@ -2747,278 +2749,66 @@ businessEmail:"Email бізнесу",
 businessCountry:"Країна",
 businessWebsite:"Сайт",
 businessAddress:"Адреса бізнесу",
-businessTerms:"Я приймаю умови PETS & DOGUE для партнерів і підтверджую право представляти цей бізнес.",
 register:"СТВОРИТИ АКАУНТ ПАРТНЕРА",
-categories:["Ветеринарія","Грумінг","Корм","Зоомагазини","Готелі та подорожі","Pet-friendly кафе","Дресирування","Аксесуари","Страхування","Фотографія","Розваги","Інше"],
-types:["Компанія","Магазин","Ветеринарна клініка","Грумінг-салон","Готель","Ресторан / кафе","Тренер","Інтернет-магазин","Бренд","Інше"],
-draft:"ЧЕРНЕТКА",
-pending:"НА ПЕРЕВІРЦІ",
-awaitingPayment:"ОЧІКУЄ ОПЛАТИ",
-active:"АКТИВНО",
-paid:"ОПЛАЧЕНО",
-saved:"Збережено",
-offerPublished:"Пропозицію створено.",
-adSaved:"Рекламну кампанію збережено.",
-accountCreated:"Акаунт партнера створено.",
-checkoutError:"Не вдалося відкрити безпечну оплату.",
-paymentChecking:"Підтверджуємо оплату",
-paymentCheckingText:"PETS & DOGUE безпечно перевіряє оплату Stripe.",
-paymentSuccess:"Оплату підтверджено",
-paymentSuccessText:"Рекламу успішно оплачено.",
-paymentCancelled:"Оплату скасовано",
-paymentCancelledText:"Гроші не списані. Кампанію збережено.",
-paymentFailed:"Не вдалося підтвердити оплату",
-paymentFailedText:"Ми не змогли підтвердити платіж.",
-continueDashboard:"ПЕРЕЙТИ ДО КАБІНЕТУ",
-billingEmpty:"Платежів поки немає.",
-billingEmptyText:"Тут з’являться рахунки за оплачену рекламу.",
-invoice:"ВІДКРИТИ РАХУНОК",
-invoicePdf:"PDF КВИТАНЦІЇ",
-paymentDate:"Оплачено"
-}
-
+categories:["Ветеринарія","Грумінг","Корм","Зоомагазини","Готелі та подорожі","Pet-friendly кафе","Дресирування","Аксесуари","Страхування","Фотографія","Розваги","Інше"]
 };
 
-const LOCALIZED={
+const TRANSLATIONS={
+en:EN,
+ru:RU,
+uk:UK,
 
-fr:{
-heroTitle:"Développez votre activité avec PETS & DOGUE",
-heroOffer:"CRÉER UNE OFFRE",
-heroAd:"ACHETER UNE PUBLICITÉ",
-allSubscribers:"Tous les abonnés PETS & DOGUE Club",
-allSubscribersText:"Aucune différence entre abonnement mensuel et annuel. Tout abonnement Club actif donne accès à l’offre.",
-generatedCode:"Code promo généré automatiquement",
-regenerate:"NOUVEAU CODE",
-subscriberBadge:"ABONNÉS"
-},
+fr:{...EN,club:"CLUB",heroTitle:"Développez votre activité avec PETS & DOGUE",heroOffer:"CRÉER UNE OFFRE",heroAd:"ACHETER UNE PUBLICITÉ",dashboardTitle:"Espace partenaire",logout:"SE DÉCONNECTER",allSubscribers:"Tous les abonnés PETS & DOGUE Club",allSubscribersText:"Aucune différence entre abonnement mensuel et annuel. Toute adhésion Club active donne accès à l'offre.",generatedCode:"Code promotionnel provisoire",regenerate:"NOUVEL APERÇU",serverCodeNote:"Lors de la publication, PETS & DOGUE génère le code final unique de manière sécurisée sur le serveur.",publishOffer:"PUBLIER L'OFFRE",publishingOffer:"PUBLICATION…",pending:"EN VÉRIFICATION",offerPublished:"Offre envoyée. PETS & DOGUE a généré le code final et l'offre est en attente de vérification.",offerPublishError:"Impossible d'envoyer l'offre.",categories:["Vétérinaire","Toilettage","Alimentation","Animaleries","Hôtels et voyages","Cafés pet-friendly","Éducation","Accessoires","Assurance","Photographie","Expériences","Autre"]},
 
-de:{
-heroTitle:"Wachsen Sie mit PETS & DOGUE",
-heroOffer:"ANGEBOT ERSTELLEN",
-heroAd:"WERBUNG BUCHEN",
-allSubscribers:"Alle PETS & DOGUE Club-Abonnenten",
-allSubscribersText:"Keine Trennung zwischen Monats- und Jahresabo. Jedes aktive Club-Abo erhält Zugang.",
-generatedCode:"Automatisch erstellter Gutscheincode",
-regenerate:"NEUER CODE",
-subscriberBadge:"ABONNENTEN"
-},
+de:{...EN,club:"CLUB",heroTitle:"Wachsen Sie mit PETS & DOGUE",heroOffer:"ANGEBOT ERSTELLEN",heroAd:"WERBUNG BUCHEN",dashboardTitle:"Partnerbereich",logout:"ABMELDEN",allSubscribers:"Alle PETS & DOGUE Club-Mitglieder",allSubscribersText:"Keine Trennung zwischen Monats- und Jahresabo. Jede aktive Club-Mitgliedschaft erhält Zugriff.",generatedCode:"Vorläufiger Gutscheincode",regenerate:"NEUE VORSCHAU",serverCodeNote:"Beim Veröffentlichen erzeugt PETS & DOGUE den endgültigen eindeutigen Code sicher auf dem Server.",publishOffer:"ANGEBOT VERÖFFENTLICHEN",publishingOffer:"WIRD VERÖFFENTLICHT…",pending:"IN PRÜFUNG",offerPublished:"Angebot gesendet. PETS & DOGUE hat den endgültigen Code erstellt; das Angebot wird geprüft.",offerPublishError:"Angebot konnte nicht gesendet werden.",categories:["Tierarzt","Grooming","Tierfutter","Tiergeschäfte","Hotels & Reisen","Pet-friendly Cafés","Training","Zubehör","Versicherung","Fotografie","Erlebnisse","Andere"]},
 
-es:{
-heroTitle:"Haz crecer tu negocio con PETS & DOGUE",
-heroOffer:"CREAR OFERTA",
-heroAd:"COMPRAR PUBLICIDAD",
-allSubscribers:"Todos los suscriptores de PETS & DOGUE Club",
-allSubscribersText:"Sin diferencia entre suscripción mensual y anual. Cualquier suscripción activa permite usar la oferta.",
-generatedCode:"Código promocional automático",
-regenerate:"NUEVO CÓDIGO",
-subscriberBadge:"SUSCRIPTORES"
-},
+es:{...EN,club:"CLUB",heroTitle:"Haz crecer tu negocio con PETS & DOGUE",heroOffer:"CREAR OFERTA",heroAd:"COMPRAR PUBLICIDAD",dashboardTitle:"Panel de socio",logout:"SALIR",allSubscribers:"Todos los suscriptores de PETS & DOGUE Club",allSubscribersText:"Sin diferencia entre mensual y anual. Cualquier suscripción Club activa permite usar la oferta.",generatedCode:"Código promocional provisional",regenerate:"NUEVA VISTA",serverCodeNote:"Al publicar, PETS & DOGUE genera de forma segura el código final único en el servidor.",publishOffer:"PUBLICAR OFERTA",publishingOffer:"PUBLICANDO…",pending:"EN REVISIÓN",offerPublished:"Oferta enviada. PETS & DOGUE generó el código final y la oferta está pendiente de revisión.",offerPublishError:"No se pudo enviar la oferta.",categories:["Veterinaria","Peluquería","Alimentación","Tiendas de mascotas","Hoteles y viajes","Cafés pet-friendly","Adiestramiento","Accesorios","Seguro","Fotografía","Experiencias","Otro"]},
 
-it:{
-heroTitle:"Fai crescere il tuo business con PETS & DOGUE",
-heroOffer:"CREA OFFERTA",
-heroAd:"ACQUISTA PUBBLICITÀ",
-allSubscribers:"Tutti gli abbonati PETS & DOGUE Club",
-allSubscribersText:"Nessuna distinzione tra mensile e annuale. Qualsiasi abbonamento Club attivo sblocca l'offerta.",
-generatedCode:"Codice promozionale automatico",
-regenerate:"NUOVO CODICE",
-subscriberBadge:"ABBONATI"
-},
+it:{...EN,club:"CLUB",heroTitle:"Fai crescere il tuo business con PETS & DOGUE",heroOffer:"CREA OFFERTA",heroAd:"ACQUISTA PUBBLICITÀ",dashboardTitle:"Area partner",logout:"ESCI",allSubscribers:"Tutti gli abbonati PETS & DOGUE Club",allSubscribersText:"Nessuna distinzione tra mensile e annuale. Qualsiasi abbonamento Club attivo sblocca l'offerta.",generatedCode:"Codice promozionale provvisorio",regenerate:"NUOVA ANTEPRIMA",serverCodeNote:"Alla pubblicazione PETS & DOGUE genera in modo sicuro il codice finale unico sul server.",publishOffer:"PUBBLICA OFFERTA",publishingOffer:"PUBBLICAZIONE…",pending:"IN REVISIONE",offerPublished:"Offerta inviata. PETS & DOGUE ha creato il codice finale; l'offerta è in revisione.",offerPublishError:"Impossibile inviare l'offerta.",categories:["Veterinaria","Toelettatura","Cibo per animali","Negozi per animali","Hotel e viaggi","Caffè pet-friendly","Addestramento","Accessori","Assicurazione","Fotografia","Esperienze","Altro"]},
 
-pt:{
-heroTitle:"Faça o seu negócio crescer com PETS & DOGUE",
-heroOffer:"CRIAR OFERTA",
-heroAd:"COMPRAR PUBLICIDADE",
-allSubscribers:"Todos os assinantes PETS & DOGUE Club",
-allSubscribersText:"Sem divisão entre mensal e anual. Qualquer assinatura Club ativa dá acesso à oferta.",
-generatedCode:"Código promocional automático",
-regenerate:"NOVO CÓDIGO",
-subscriberBadge:"ASSINANTES"
-},
+pt:{...EN,club:"CLUB",heroTitle:"Faça o seu negócio crescer com PETS & DOGUE",heroOffer:"CRIAR OFERTA",heroAd:"COMPRAR PUBLICIDADE",dashboardTitle:"Painel do parceiro",logout:"SAIR",allSubscribers:"Todos os assinantes PETS & DOGUE Club",allSubscribersText:"Sem divisão entre mensal e anual. Qualquer assinatura Club ativa dá acesso à oferta.",generatedCode:"Código promocional provisório",regenerate:"NOVA PRÉVIA",serverCodeNote:"Ao publicar, PETS & DOGUE gera com segurança o código final único no servidor.",publishOffer:"PUBLICAR OFERTA",publishingOffer:"PUBLICANDO…",pending:"EM ANÁLISE",offerPublished:"Oferta enviada. PETS & DOGUE gerou o código final e a oferta aguarda análise.",offerPublishError:"Não foi possível enviar a oferta.",categories:["Veterinária","Grooming","Alimentação","Lojas de animais","Hotéis e viagens","Cafés pet-friendly","Treino","Acessórios","Seguro","Fotografia","Experiências","Outro"]},
 
-nl:{
-heroTitle:"Groei met PETS & DOGUE",
-heroOffer:"AANBIEDING MAKEN",
-heroAd:"ADVERTEREN",
-allSubscribers:"Alle PETS & DOGUE Club-abonnees",
-allSubscribersText:"Geen verschil tussen maand- en jaarabonnement. Elk actief Club-abonnement geeft toegang.",
-generatedCode:"Automatisch gegenereerde promotiecode",
-regenerate:"NIEUWE CODE",
-subscriberBadge:"ABONNEES"
-},
+nl:{...EN,club:"CLUB",heroTitle:"Groei met PETS & DOGUE",heroOffer:"AANBIEDING MAKEN",heroAd:"ADVERTEREN",dashboardTitle:"Partnerdashboard",logout:"UITLOGGEN",allSubscribers:"Alle PETS & DOGUE Club-abonnees",allSubscribersText:"Geen verschil tussen maand- en jaarabonnement. Elk actief Club-abonnement geeft toegang.",generatedCode:"Voorlopige promotiecode",regenerate:"NIEUWE VOORBEELD",serverCodeNote:"Bij publicatie maakt PETS & DOGUE veilig de definitieve unieke code op de server.",publishOffer:"AANBIEDING PUBLICEREN",publishingOffer:"PUBLICEREN…",pending:"IN BEOORDELING",offerPublished:"Aanbieding verzonden. PETS & DOGUE heeft de definitieve code gemaakt; beoordeling volgt.",offerPublishError:"Aanbieding kon niet worden verzonden.",categories:["Dierenarts","Grooming","Dierenvoeding","Dierenwinkels","Hotels & reizen","Pet-friendly cafés","Training","Accessoires","Verzekering","Fotografie","Ervaringen","Overig"]},
 
-pl:{
-heroTitle:"Rozwijaj biznes z PETS & DOGUE",
-heroOffer:"UTWÓRZ OFERTĘ",
-heroAd:"KUP REKLAMĘ",
-allSubscribers:"Wszyscy subskrybenci PETS & DOGUE Club",
-allSubscribersText:"Bez podziału na plan miesięczny i roczny. Każda aktywna subskrypcja Club daje dostęp.",
-generatedCode:"Automatycznie wygenerowany kod",
-regenerate:"NOWY KOD",
-subscriberBadge:"SUBSKRYBENCI"
-},
+pl:{...EN,club:"CLUB",heroTitle:"Rozwijaj biznes z PETS & DOGUE",heroOffer:"UTWÓRZ OFERTĘ",heroAd:"KUP REKLAMĘ",dashboardTitle:"Panel partnera",logout:"WYLOGUJ",allSubscribers:"Wszyscy subskrybenci PETS & DOGUE Club",allSubscribersText:"Bez podziału na plan miesięczny i roczny. Każda aktywna subskrypcja Club daje dostęp.",generatedCode:"Wstępny kod promocyjny",regenerate:"NOWY PODGLĄD",serverCodeNote:"Po publikacji PETS & DOGUE bezpiecznie generuje ostateczny unikalny kod na serwerze.",publishOffer:"OPUBLIKUJ OFERTĘ",publishingOffer:"PUBLIKOWANIE…",pending:"W WERYFIKACJI",offerPublished:"Oferta wysłana. PETS & DOGUE utworzył kod końcowy; oferta oczekuje na weryfikację.",offerPublishError:"Nie udało się wysłać oferty.",categories:["Weterynaria","Grooming","Karma","Sklepy zoologiczne","Hotele i podróże","Kawiarnie pet-friendly","Szkolenie","Akcesoria","Ubezpieczenie","Fotografia","Atrakcje","Inne"]},
 
-cs:{
-heroTitle:"Rozvíjejte své podnikání s PETS & DOGUE",
-heroOffer:"VYTVOŘIT NABÍDKU",
-heroAd:"KOUPIT REKLAMU",
-allSubscribers:"Všichni předplatitelé PETS & DOGUE Club",
-allSubscribersText:"Bez rozdělení na měsíční a roční. Každé aktivní předplatné Club nabídku odemkne.",
-generatedCode:"Automaticky vytvořený promo kód",
-regenerate:"NOVÝ KÓD",
-subscriberBadge:"PŘEDPLATITELÉ"
-},
+cs:{...EN,club:"CLUB",heroTitle:"Rozvíjejte podnikání s PETS & DOGUE",heroOffer:"VYTVOŘIT NABÍDKU",heroAd:"KOUPIT REKLAMU",dashboardTitle:"Panel partnera",logout:"ODHLÁSIT",allSubscribers:"Všichni předplatitelé PETS & DOGUE Club",allSubscribersText:"Bez rozdělení na měsíční a roční. Každé aktivní členství Club nabídku odemkne.",generatedCode:"Náhled promo kódu",regenerate:"NOVÝ NÁHLED",serverCodeNote:"Při publikaci PETS & DOGUE bezpečně vytvoří konečný unikátní kód na serveru.",publishOffer:"PUBLIKOVAT NABÍDKU",publishingOffer:"PUBLIKUJE SE…",pending:"KE KONTROLE",offerPublished:"Nabídka odeslána. PETS & DOGUE vytvořil finální kód; nabídka čeká na kontrolu.",offerPublishError:"Nabídku se nepodařilo odeslat.",categories:["Veterina","Grooming","Krmivo","Zverimex","Hotely a cestování","Pet-friendly kavárny","Výcvik","Doplňky","Pojištění","Fotografie","Zážitky","Jiné"]},
 
-sk:{
-heroTitle:"Rozvíjajte svoje podnikanie s PETS & DOGUE",
-heroOffer:"VYTVORIŤ PONUKU",
-heroAd:"KÚPIŤ REKLAMU",
-allSubscribers:"Všetci predplatitelia PETS & DOGUE Club",
-allSubscribersText:"Bez rozdelenia na mesačné a ročné. Každé aktívne predplatné Club ponuku odomkne.",
-generatedCode:"Automaticky vytvorený promo kód",
-regenerate:"NOVÝ KÓD",
-subscriberBadge:"PREDPLATITELIA"
-},
+sk:{...EN,club:"CLUB",heroTitle:"Rozvíjajte podnikanie s PETS & DOGUE",heroOffer:"VYTVORIŤ PONUKU",heroAd:"KÚPIŤ REKLAMU",dashboardTitle:"Panel partnera",logout:"ODHLÁSIŤ",allSubscribers:"Všetci predplatitelia PETS & DOGUE Club",allSubscribersText:"Bez rozdelenia na mesačné a ročné. Každé aktívne členstvo Club ponuku odomkne.",generatedCode:"Náhľad promo kódu",regenerate:"NOVÝ NÁHĽAD",serverCodeNote:"Pri publikovaní PETS & DOGUE bezpečne vytvorí konečný unikátny kód na serveri.",publishOffer:"PUBLIKOVAŤ PONUKU",publishingOffer:"PUBLIKUJE SA…",pending:"NA KONTROLE",offerPublished:"Ponuka odoslaná. PETS & DOGUE vytvoril finálny kód; ponuka čaká na kontrolu.",offerPublishError:"Ponuku sa nepodarilo odoslať.",categories:["Veterina","Grooming","Krmivo","Chovateľské potreby","Hotely a cestovanie","Pet-friendly kaviarne","Výcvik","Doplnky","Poistenie","Fotografia","Zážitky","Iné"]},
 
-hu:{
-heroTitle:"Növelje vállalkozását a PETS & DOGUE-val",
-heroOffer:"AJÁNLAT LÉTREHOZÁSA",
-heroAd:"HIRDETÉS VÁSÁRLÁSA",
-allSubscribers:"Minden PETS & DOGUE Club előfizető",
-allSubscribersText:"Nincs különbség havi és éves előfizetés között. Minden aktív Club-előfizetés hozzáfér.",
-generatedCode:"Automatikusan generált promóciós kód",
-regenerate:"ÚJ KÓD",
-subscriberBadge:"ELŐFIZETŐK"
-},
+hu:{...EN,club:"CLUB",heroTitle:"Növelje vállalkozását a PETS & DOGUE-val",heroOffer:"AJÁNLAT LÉTREHOZÁSA",heroAd:"HIRDETÉS VÁSÁRLÁSA",dashboardTitle:"Partner irányítópult",logout:"KIJELENTKEZÉS",allSubscribers:"Minden PETS & DOGUE Club előfizető",allSubscribersText:"Nincs különbség havi és éves előfizetés között. Minden aktív Club-előfizetés hozzáfér.",generatedCode:"Előzetes promóciós kód",regenerate:"ÚJ ELŐNÉZET",serverCodeNote:"Közzétételkor a PETS & DOGUE biztonságosan létrehozza a végleges egyedi kódot a szerveren.",publishOffer:"AJÁNLAT KÖZZÉTÉTELE",publishingOffer:"KÖZZÉTÉTEL…",pending:"ELLENŐRZÉS ALATT",offerPublished:"Az ajánlat elküldve. A PETS & DOGUE létrehozta a végleges kódot; ellenőrzésre vár.",offerPublishError:"Az ajánlat elküldése sikertelen.",categories:["Állatorvos","Kozmetika","Állateledel","Kisállatboltok","Szállodák és utazás","Pet-friendly kávézók","Képzés","Kiegészítők","Biztosítás","Fotózás","Élmények","Egyéb"]},
 
-ro:{
-heroTitle:"Dezvoltați afacerea cu PETS & DOGUE",
-heroOffer:"CREAȚI OFERTĂ",
-heroAd:"CUMPĂRAȚI PUBLICITATE",
-allSubscribers:"Toți abonații PETS & DOGUE Club",
-allSubscribersText:"Fără diferență între abonamentul lunar și anual. Orice abonament Club activ oferă acces.",
-generatedCode:"Cod promoțional generat automat",
-regenerate:"COD NOU",
-subscriberBadge:"ABONAȚI"
-},
+ro:{...EN,club:"CLUB",heroTitle:"Dezvoltați afacerea cu PETS & DOGUE",heroOffer:"CREAȚI OFERTĂ",heroAd:"CUMPĂRAȚI PUBLICITATE",dashboardTitle:"Panou partener",logout:"IEȘIRE",allSubscribers:"Toți abonații PETS & DOGUE Club",allSubscribersText:"Fără diferență între abonamentul lunar și anual. Orice abonament Club activ oferă acces.",generatedCode:"Cod promoțional provizoriu",regenerate:"PREVIZUALIZARE NOUĂ",serverCodeNote:"La publicare, PETS & DOGUE generează în siguranță codul final unic pe server.",publishOffer:"PUBLICĂ OFERTA",publishingOffer:"SE PUBLICĂ…",pending:"ÎN VERIFICARE",offerPublished:"Oferta a fost trimisă. PETS & DOGUE a generat codul final; oferta așteaptă verificarea.",offerPublishError:"Oferta nu a putut fi trimisă.",categories:["Veterinar","Grooming","Hrană","Magazine animale","Hoteluri și călătorii","Cafenele pet-friendly","Dresaj","Accesorii","Asigurare","Fotografie","Experiențe","Altele"]},
 
-bg:{
-heroTitle:"Развивайте бизнеса си с PETS & DOGUE",
-heroOffer:"СЪЗДАЙ ОФЕРТА",
-heroAd:"КУПИ РЕКЛАМА",
-allSubscribers:"Всички абонати на PETS & DOGUE Club",
-allSubscribersText:"Без разделяне на месечни и годишни абонаменти. Всеки активен Club абонамент дава достъп.",
-generatedCode:"Автоматично генериран промокод",
-regenerate:"НОВ КОД",
-subscriberBadge:"АБОНАТИ"
-},
+bg:{...EN,club:"CLUB",heroTitle:"Развивайте бизнеса си с PETS & DOGUE",heroOffer:"СЪЗДАЙ ОФЕРТА",heroAd:"КУПИ РЕКЛАМА",dashboardTitle:"Партньорски панел",logout:"ИЗХОД",allSubscribers:"Всички абонати на PETS & DOGUE Club",allSubscribersText:"Без разделяне на месечни и годишни абонаменти. Всеки активен Club абонамент дава достъп.",generatedCode:"Предварителен промокод",regenerate:"НОВ ПРЕГЛЕД",serverCodeNote:"При публикуване PETS & DOGUE генерира сигурно окончателния уникален код на сървъра.",publishOffer:"ПУБЛИКУВАЙ ОФЕРТА",publishingOffer:"ПУБЛИКУВАНЕ…",pending:"ЗА ПРОВЕРКА",offerPublished:"Офертата е изпратена. PETS & DOGUE създаде финалния код; офертата чака проверка.",offerPublishError:"Офертата не можа да бъде изпратена.",categories:["Ветеринария","Груминг","Храна","Зоомагазини","Хотели и пътуване","Pet-friendly кафенета","Обучение","Аксесоари","Застраховане","Фотография","Преживявания","Друго"]},
 
-el:{
-heroTitle:"Αναπτύξτε την επιχείρησή σας με το PETS & DOGUE",
-heroOffer:"ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΣΦΟΡΑΣ",
-heroAd:"ΑΓΟΡΑ ΔΙΑΦΗΜΙΣΗΣ",
-allSubscribers:"Όλοι οι συνδρομητές PETS & DOGUE Club",
-allSubscribersText:"Χωρίς διάκριση μηνιαίας ή ετήσιας συνδρομής. Κάθε ενεργή συνδρομή Club δίνει πρόσβαση.",
-generatedCode:"Αυτόματα δημιουργημένος κωδικός",
-regenerate:"ΝΕΟΣ ΚΩΔΙΚΟΣ",
-subscriberBadge:"ΣΥΝΔΡΟΜΗΤΕΣ"
-},
+el:{...EN,club:"CLUB",heroTitle:"Αναπτύξτε την επιχείρησή σας με το PETS & DOGUE",heroOffer:"ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΣΦΟΡΑΣ",heroAd:"ΑΓΟΡΑ ΔΙΑΦΗΜΙΣΗΣ",dashboardTitle:"Πίνακας συνεργάτη",logout:"ΑΠΟΣΥΝΔΕΣΗ",allSubscribers:"Όλοι οι συνδρομητές PETS & DOGUE Club",allSubscribersText:"Χωρίς διάκριση μηνιαίας ή ετήσιας συνδρομής. Κάθε ενεργή συνδρομή Club δίνει πρόσβαση.",generatedCode:"Προσωρινός κωδικός προσφοράς",regenerate:"ΝΕΑ ΠΡΟΕΠΙΣΚΟΠΗΣΗ",serverCodeNote:"Κατά τη δημοσίευση το PETS & DOGUE δημιουργεί με ασφάλεια τον τελικό μοναδικό κωδικό στον διακομιστή.",publishOffer:"ΔΗΜΟΣΙΕΥΣΗ ΠΡΟΣΦΟΡΑΣ",publishingOffer:"ΔΗΜΟΣΙΕΥΣΗ…",pending:"ΥΠΟ ΕΛΕΓΧΟ",offerPublished:"Η προσφορά στάλθηκε. Το PETS & DOGUE δημιούργησε τον τελικό κωδικό και αναμένει έλεγχο.",offerPublishError:"Δεν ήταν δυνατή η αποστολή της προσφοράς.",categories:["Κτηνίατρος","Grooming","Τροφή","Καταστήματα κατοικιδίων","Ξενοδοχεία και ταξίδια","Pet-friendly καφέ","Εκπαίδευση","Αξεσουάρ","Ασφάλιση","Φωτογραφία","Εμπειρίες","Άλλο"]},
 
-sv:{
-heroTitle:"Väx med PETS & DOGUE",
-heroOffer:"SKAPA ERBJUDANDE",
-heroAd:"KÖP ANNONS",
-allSubscribers:"Alla PETS & DOGUE Club-prenumeranter",
-allSubscribersText:"Ingen skillnad mellan månads- och årsabonnemang. Alla aktiva Club-abonnemang ger tillgång.",
-generatedCode:"Automatiskt genererad kampanjkod",
-regenerate:"NY KOD",
-subscriberBadge:"PRENUMERANTER"
-},
+sv:{...EN,club:"CLUB",heroTitle:"Väx med PETS & DOGUE",heroOffer:"SKAPA ERBJUDANDE",heroAd:"KÖP ANNONS",dashboardTitle:"Partnerpanel",logout:"LOGGA UT",allSubscribers:"Alla PETS & DOGUE Club-prenumeranter",allSubscribersText:"Ingen skillnad mellan månads- och årsabonnemang. Alla aktiva Club-abonnemang ger tillgång.",generatedCode:"Preliminär kampanjkod",regenerate:"NY FÖRHANDSVISNING",serverCodeNote:"Vid publicering skapar PETS & DOGUE den slutliga unika koden säkert på servern.",publishOffer:"PUBLICERA ERBJUDANDE",publishingOffer:"PUBLICERAR…",pending:"UNDER GRANSKNING",offerPublished:"Erbjudandet skickades. PETS & DOGUE skapade slutkoden; erbjudandet granskas.",offerPublishError:"Erbjudandet kunde inte skickas.",categories:["Veterinär","Grooming","Djurfoder","Djuraffärer","Hotell och resor","Pet-friendly caféer","Träning","Tillbehör","Försäkring","Fotografi","Upplevelser","Annat"]},
 
-da:{
-heroTitle:"Voks med PETS & DOGUE",
-heroOffer:"OPRET TILBUD",
-heroAd:"KØB ANNONCE",
-allSubscribers:"Alle PETS & DOGUE Club-abonnenter",
-allSubscribersText:"Ingen forskel mellem måneds- og årsabonnement. Alle aktive Club-abonnementer giver adgang.",
-generatedCode:"Automatisk genereret kampagnekode",
-regenerate:"NY KODE",
-subscriberBadge:"ABONNENTER"
-},
+da:{...EN,club:"CLUB",heroTitle:"Voks med PETS & DOGUE",heroOffer:"OPRET TILBUD",heroAd:"KØB ANNONCE",dashboardTitle:"Partnerpanel",logout:"LOG UD",allSubscribers:"Alle PETS & DOGUE Club-abonnenter",allSubscribersText:"Ingen forskel mellem måneds- og årsabonnement. Alle aktive Club-abonnementer giver adgang.",generatedCode:"Foreløbig kampagnekode",regenerate:"NY FORHÅNDSVISNING",serverCodeNote:"Ved publicering opretter PETS & DOGUE sikkert den endelige unikke kode på serveren.",publishOffer:"PUBLICER TILBUD",publishingOffer:"PUBLICERER…",pending:"TIL GENNEMGANG",offerPublished:"Tilbuddet blev sendt. PETS & DOGUE oprettede slutkoden; tilbuddet afventer gennemgang.",offerPublishError:"Tilbuddet kunne ikke sendes.",categories:["Dyrlæge","Grooming","Dyrefoder","Dyrebutikker","Hoteller og rejser","Pet-friendly caféer","Træning","Tilbehør","Forsikring","Fotografi","Oplevelser","Andet"]},
 
-no:{
-heroTitle:"Voks med PETS & DOGUE",
-heroOffer:"OPPRETT TILBUD",
-heroAd:"KJØP ANNONSE",
-allSubscribers:"Alle PETS & DOGUE Club-abonnenter",
-allSubscribersText:"Ingen forskjell mellom måneds- og årsabonnement. Alle aktive Club-abonnement gir tilgang.",
-generatedCode:"Automatisk generert kampanjekode",
-regenerate:"NY KODE",
-subscriberBadge:"ABONNENTER"
-},
+no:{...EN,club:"CLUB",heroTitle:"Voks med PETS & DOGUE",heroOffer:"OPPRETT TILBUD",heroAd:"KJØP ANNONSE",dashboardTitle:"Partnerpanel",logout:"LOGG UT",allSubscribers:"Alle PETS & DOGUE Club-abonnenter",allSubscribersText:"Ingen forskjell mellom måneds- og årsabonnement. Alle aktive Club-abonnement gir tilgang.",generatedCode:"Foreløpig kampanjekode",regenerate:"NY FORHÅNDSVISNING",serverCodeNote:"Ved publisering oppretter PETS & DOGUE den endelige unike koden sikkert på serveren.",publishOffer:"PUBLISER TILBUD",publishingOffer:"PUBLISERER…",pending:"TIL VURDERING",offerPublished:"Tilbudet er sendt. PETS & DOGUE opprettet sluttkoden; tilbudet venter på vurdering.",offerPublishError:"Tilbudet kunne ikke sendes.",categories:["Veterinær","Grooming","Dyrefôr","Dyrebutikker","Hotell og reise","Pet-friendly kaféer","Trening","Tilbehør","Forsikring","Fotografi","Opplevelser","Annet"]},
 
-fi:{
-heroTitle:"Kasvata liiketoimintaasi PETS & DOGUE:n kanssa",
-heroOffer:"LUO TARJOUS",
-heroAd:"OSTA MAINOS",
-allSubscribers:"Kaikki PETS & DOGUE Club -tilaajat",
-allSubscribersText:"Ei eroa kuukausi- ja vuositilauksen välillä. Kaikki aktiiviset Club-tilaukset saavat tarjouksen.",
-generatedCode:"Automaattisesti luotu tarjouskoodi",
-regenerate:"UUSI KOODI",
-subscriberBadge:"TILAAJAT"
-},
+fi:{...EN,club:"CLUB",heroTitle:"Kasvata liiketoimintaasi PETS & DOGUE:n kanssa",heroOffer:"LUO TARJOUS",heroAd:"OSTA MAINOS",dashboardTitle:"Kumppanin hallinta",logout:"KIRJAUDU ULOS",allSubscribers:"Kaikki PETS & DOGUE Club -tilaajat",allSubscribersText:"Ei eroa kuukausi- ja vuositilauksen välillä. Kaikki aktiiviset Club-tilaukset saavat tarjouksen.",generatedCode:"Alustava tarjouskoodi",regenerate:"UUSI ESIKATSELU",serverCodeNote:"Julkaistaessa PETS & DOGUE luo lopullisen yksilöllisen koodin turvallisesti palvelimella.",publishOffer:"JULKAISE TARJOUS",publishingOffer:"JULKAISTAAN…",pending:"TARKISTETTAVANA",offerPublished:"Tarjous lähetettiin. PETS & DOGUE loi lopullisen koodin; tarjous odottaa tarkistusta.",offerPublishError:"Tarjousta ei voitu lähettää.",categories:["Eläinlääkäri","Trimmaus","Lemmikkiruoka","Lemmikkikaupat","Hotellit ja matkailu","Pet-friendly kahvilat","Koulutus","Tarvikkeet","Vakuutus","Valokuvaus","Elämykset","Muu"]},
 
-tr:{
-heroTitle:"PETS & DOGUE ile işinizi büyütün",
-heroOffer:"TEKLİF OLUŞTUR",
-heroAd:"REKLAM SATIN AL",
-allSubscribers:"Tüm PETS & DOGUE Club aboneleri",
-allSubscribersText:"Aylık ve yıllık abonelik ayrımı yoktur. Her aktif Club aboneliği teklife erişir.",
-generatedCode:"Otomatik oluşturulan promosyon kodu",
-regenerate:"YENİ KOD",
-subscriberBadge:"ABONELER"
-},
+tr:{...EN,club:"CLUB",heroTitle:"PETS & DOGUE ile işinizi büyütün",heroOffer:"TEKLİF OLUŞTUR",heroAd:"REKLAM SATIN AL",dashboardTitle:"Partner paneli",logout:"ÇIKIŞ",allSubscribers:"Tüm PETS & DOGUE Club aboneleri",allSubscribersText:"Aylık ve yıllık abonelik ayrımı yoktur. Her aktif Club aboneliği teklife erişir.",generatedCode:"Ön promosyon kodu",regenerate:"YENİ ÖNİZLEME",serverCodeNote:"Yayın sırasında PETS & DOGUE nihai benzersiz kodu sunucuda güvenli biçimde oluşturur.",publishOffer:"TEKLİFİ YAYINLA",publishingOffer:"YAYINLANIYOR…",pending:"İNCELEMEDE",offerPublished:"Teklif gönderildi. PETS & DOGUE nihai kodu oluşturdu; teklif inceleme bekliyor.",offerPublishError:"Teklif gönderilemedi.",categories:["Veteriner","Bakım","Evcil hayvan maması","Pet shop","Otel ve seyahat","Pet-friendly kafeler","Eğitim","Aksesuar","Sigorta","Fotoğraf","Deneyimler","Diğer"]},
 
-ar:{
-heroTitle:"نمِّ أعمالك مع PETS & DOGUE",
-heroOffer:"إنشاء عرض",
-heroAd:"شراء إعلان",
-allSubscribers:"جميع مشتركي PETS & DOGUE Club",
-allSubscribersText:"لا يوجد فرق بين الاشتراك الشهري والسنوي. أي اشتراك Club نشط يتيح العرض.",
-generatedCode:"رمز ترويجي يتم إنشاؤه تلقائيًا",
-regenerate:"رمز جديد",
-subscriberBadge:"المشتركون"
-},
+ar:{...EN,club:"النادي",heroTitle:"نمِّ أعمالك مع PETS & DOGUE",heroOffer:"إنشاء عرض",heroAd:"شراء إعلان",dashboardTitle:"لوحة الشريك",logout:"تسجيل الخروج",allSubscribers:"جميع مشتركي PETS & DOGUE Club",allSubscribersText:"لا يوجد فرق بين الاشتراك الشهري والسنوي. أي اشتراك Club نشط يتيح العرض.",generatedCode:"رمز ترويجي تجريبي",regenerate:"معاينة جديدة",serverCodeNote:"عند النشر، ينشئ PETS & DOGUE الرمز النهائي الفريد بأمان على الخادم.",publishOffer:"نشر العرض",publishingOffer:"جارٍ النشر…",pending:"قيد المراجعة",offerPublished:"تم إرسال العرض. أنشأ PETS & DOGUE الرمز النهائي والعرض قيد المراجعة.",offerPublishError:"تعذر إرسال العرض.",categories:["بيطري","العناية","طعام الحيوانات","متاجر الحيوانات","الفنادق والسفر","مقاهي Pet-friendly","التدريب","الإكسسوارات","التأمين","التصوير","تجارب","أخرى"]},
 
-hi:{
-heroTitle:"PETS & DOGUE के साथ अपना व्यवसाय बढ़ाएँ",
-heroOffer:"ऑफ़र बनाएँ",
-heroAd:"विज्ञापन खरीदें",
-allSubscribers:"सभी PETS & DOGUE Club सदस्य",
-allSubscribersText:"मासिक और वार्षिक सदस्यता में कोई अंतर नहीं। कोई भी सक्रिय Club सदस्यता ऑफ़र खोलती है।",
-generatedCode:"स्वचालित रूप से बनाया गया प्रोमो कोड",
-regenerate:"नया कोड",
-subscriberBadge:"सदस्य"
-}
-
+hi:{...EN,club:"CLUB",heroTitle:"PETS & DOGUE के साथ अपना व्यवसाय बढ़ाएँ",heroOffer:"ऑफ़र बनाएँ",heroAd:"विज्ञापन खरीदें",dashboardTitle:"पार्टनर डैशबोर्ड",logout:"लॉग आउट",allSubscribers:"सभी PETS & DOGUE Club सदस्य",allSubscribersText:"मासिक और वार्षिक सदस्यता में कोई अंतर नहीं। कोई भी सक्रिय Club सदस्यता ऑफ़र खोलती है।",generatedCode:"प्रारंभिक प्रोमो कोड",regenerate:"नई झलक",serverCodeNote:"प्रकाशित करते समय PETS & DOGUE अंतिम अद्वितीय कोड सुरक्षित रूप से सर्वर पर बनाता है।",publishOffer:"ऑफ़र प्रकाशित करें",publishingOffer:"प्रकाशित हो रहा है…",pending:"समीक्षा में",offerPublished:"ऑफ़र भेज दिया गया। PETS & DOGUE ने अंतिम कोड बनाया और ऑफ़र समीक्षा में है।",offerPublishError:"ऑफ़र भेजा नहीं जा सका।",categories:["पशु चिकित्सक","ग्रूमिंग","पालतू भोजन","पालतू दुकानें","होटल और यात्रा","Pet-friendly कैफ़े","ट्रेनिंग","एक्सेसरीज़","बीमा","फोटोग्राफी","अनुभव","अन्य"]}
 };
-
-Object.entries(LOCALIZED).forEach(([code,values])=>{
-T[code]={
-...T.en,
-...values
-};
-});
 
 let currentLanguage="en";
 let requestedMode=null;
 let offerImageData="";
 let adImageData="";
 let paymentBusy=false;
+let offerPublishing=false;
 let currentPromoCode="";
 
 function lang(){
-return T[currentLanguage]||T.en;
+return TRANSLATIONS[currentLanguage]||EN;
 }
 
 function text(id,value){
@@ -3048,12 +2838,10 @@ return String(value??"")
 }
 
 function fillSelect(id,items){
-
 const el=$(id);
 if(!el) return;
 
 const previous=el.value;
-
 el.innerHTML="";
 
 items.forEach((item,index)=>{
@@ -3066,48 +2854,38 @@ el.appendChild(option);
 if([...el.options].some(option=>option.value===previous)){
 el.value=previous;
 }
-
 }
 
 function generatePromoCode(){
-
 const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
 let random="";
 
 if(window.crypto&&window.crypto.getRandomValues){
-
 const values=new Uint32Array(6);
 window.crypto.getRandomValues(values);
 
 values.forEach(value=>{
 random+=alphabet[value%alphabet.length];
 });
-
 }else{
-
 for(let i=0;i<6;i++){
 random+=alphabet[Math.floor(Math.random()*alphabet.length)];
 }
-
 }
 
 return `DOGUE-${random}`;
 }
 
 function ensurePromoCode(){
-
 if(!currentPromoCode){
 currentPromoCode=generatePromoCode();
 }
 
 text("generatedPromoCode",currentPromoCode);
 text("offerPreviewCode",currentPromoCode);
-
 }
 
 function renderLanguage(code){
-
 if(!LANGS.includes(code)) code="en";
 
 currentLanguage=code;
@@ -3122,21 +2900,17 @@ $("languageSelect").value=code;
 const x=lang();
 
 text("clubLink",x.club);
-
 text("heroEyebrow",x.heroEyebrow);
 text("heroTitle",x.heroTitle);
 text("heroText",x.heroText);
 text("heroOfferButton",x.heroOffer);
 text("heroAdButton",x.heroAd);
-
 text("offerCardTitle",x.offerCardTitle);
 text("offerCardText",x.offerCardText);
 text("startOfferButton",x.startOffer);
-
 text("adCardTitle",x.adCardTitle);
 text("adCardText",x.adCardText);
 text("startAdButton",x.startAd);
-
 text("dashboardTitle",x.dashboardTitle);
 text("dashboardSub",x.dashboardSub);
 text("logoutButton",x.logout);
@@ -3162,40 +2936,34 @@ text("offerDescriptionLabel",x.description);
 text("offerDiscountLabel",x.discount);
 text("offerSavingLabel",x.saving);
 text("offerSavingHint",x.savingHint);
-
 text("offerValidityTitle",x.validity);
 text("offerStartLabel",x.starts);
 text("offerEndLabel",x.ends);
 text("offerTotalLimitLabel",x.totalLimit);
 text("offerCommissionLabel",x.commission);
 text("offerOneUseLabel",x.oneUse);
-
 text("offerAccessTitle",x.access);
 text("allSubscribersTitle",x.allSubscribers);
 text("allSubscribersText",x.allSubscribersText);
-
 text("offerRedeemTitle",x.redeem);
 text("redeemOnlineTitle",x.online);
 text("redeemOnlineText",x.onlineText);
 text("redeemOfflineTitle",x.offline);
 text("redeemOfflineText",x.offlineText);
-
 text("generatedCodeLabel",x.generatedCode);
 text("regenerateCodeButton",x.regenerate);
 text("generatedCodeHint",x.generatedHint);
-
+text("serverCodeNote",x.serverCodeNote);
 text("offerUrlLabel",x.partnerUrl);
 text("offlineInstructionsLabel",x.offlineInstructions);
-
 text("offerImageTitle",x.offerImage);
 text("offerImageButton",x.uploadImage);
 text("offerImageHelp",x.uploadHelp);
-
+text("offerImageReady",x.imageReady);
 text("offerTermsLabel",x.offerTerms);
-text("publishOfferButton",x.publishOffer);
+text("publishOfferButton",offerPublishing?x.publishingOffer:x.publishOffer);
 text("saveOfferDraftButton",x.saveDraft);
 text("offerPreviewLabel",x.preview);
-
 text("offerPreviewPlan",x.subscriberBadge);
 
 text("adPlan50Title",x.ad50);
@@ -3204,7 +2972,6 @@ text("adPlan100Title",x.ad100);
 text("adPlan100Text",x.ad100Text);
 text("adPlan200Title",x.ad200);
 text("adPlan200Text",x.ad200Text);
-
 text("adDetailsTitle",x.adDetails);
 text("adCompanyLabel",x.company);
 text("adCategoryLabel",x.category);
@@ -3212,28 +2979,23 @@ text("adHeadlineLabel",x.headline);
 text("adCopyLabel",x.copy);
 text("adCtaLabel",x.cta);
 text("adUrlLabel",x.url);
-
 text("adScheduleTitle",x.schedule);
 text("adStartLabel",x.starts);
 text("adEndLabel",x.ends);
 text("adPlacementLabel",x.placement);
 text("adPlacementHint",x.placementHint);
-
 text("adImageTitle",x.adImage);
 text("adImageButton",x.uploadImage);
 text("adImageHelp",x.adImageHelp);
-
 text("adTermsLabel",x.adTerms);
 text("saveAdDraftButton",x.saveAd);
 text("adPreviewLabel",x.adPreview);
 text("advertisementLabel",x.advertisement);
-
 text("billingTitle",x.billing);
 text("billingHint",x.billingHint);
 
 text("registerTitle",x.registerTitle);
 text("registerText",x.registerText);
-
 text("businessNameLabel",x.businessName);
 text("businessTypeLabel",x.businessType);
 text("contactNameLabel",x.contactName);
@@ -3243,7 +3005,6 @@ text("businessWebsiteLabel",x.businessWebsite);
 text("businessAddressLabel",x.businessAddress);
 text("businessTermsLabel",x.businessTerms);
 text("registerSubmit",x.register);
-
 text("paymentStatusButton",x.continueDashboard);
 
 fillSelect("offerCategory",x.categories);
@@ -3255,7 +3016,6 @@ ensurePromoCode();
 updateOfferPreview();
 updateAdPreview();
 renderDashboard();
-
 }
 
 function partnerAccount(){
@@ -3263,51 +3023,37 @@ return getJSON(PARTNER_KEY,null);
 }
 
 function showToast(message){
-
 text("toast",message);
-
 $("toast").classList.add("show");
 
 clearTimeout(showToast.timer);
 
 showToast.timer=setTimeout(()=>{
 $("toast").classList.remove("show");
-},2200);
-
+},3000);
 }
 
 function openRegister(mode){
-
 requestedMode=mode;
-
 $("registerOverlay").classList.add("open");
-
 document.body.classList.add("locked");
-
 }
 
 function closeRegister(){
-
 $("registerOverlay").classList.remove("open");
-
 document.body.classList.remove("locked");
-
 }
 
 function openApp(tab){
-
 $("landingView").classList.add("hidden");
-
 $("partnerApp").classList.add("show");
 
 if(tab) openTab(tab);
 
 renderDashboard();
-
 }
 
 function openTab(panelId){
-
 document.querySelectorAll(".tab-button").forEach(button=>{
 button.classList.toggle("active",button.dataset.tab===panelId);
 });
@@ -3320,17 +3066,14 @@ window.scrollTo({
 top:$("partnerApp").offsetTop-80,
 behavior:"smooth"
 });
-
 }
 
 function requirePartner(mode){
-
 if(partnerAccount()){
 openApp(mode==="offer"?"offerPanel":"adPanel");
 }else{
 openRegister(mode);
 }
-
 }
 
 $("heroOfferButton").onclick=()=>requirePartner("offer");
@@ -3345,7 +3088,6 @@ if(event.target===$("registerOverlay")) closeRegister();
 });
 
 $("registerForm").onsubmit=event=>{
-
 event.preventDefault();
 
 const account={
@@ -3365,22 +3107,18 @@ $("offerCompany").value=account.businessName;
 $("adCompany").value=account.businessName;
 
 closeRegister();
-
 showToast(lang().accountCreated);
 
 openApp(requestedMode==="ad"?"adPanel":"offerPanel");
-
 };
 
 $("logoutButton").onclick=()=>{
-
 localStorage.removeItem(PARTNER_KEY);
 
 $("partnerApp").classList.remove("show");
 $("landingView").classList.remove("hidden");
 
 window.scrollTo({top:0,behavior:"smooth"});
-
 };
 
 document.querySelectorAll(".tab-button").forEach(button=>{
@@ -3388,45 +3126,28 @@ button.onclick=()=>openTab(button.dataset.tab);
 });
 
 function selectedRedeem(){
-
 return document.querySelector('input[name="redeem"]:checked')?.value||"online";
-
 }
 
 function updateRedeemFields(){
-
 const offline=selectedRedeem()==="offline";
 
 $("partnerUrlField").classList.toggle("hidden",offline);
-
 $("offlineInstructionsField").classList.toggle("hidden",!offline);
 
+$("offerUrl").required=!offline;
 }
 
 function updateOfferPreview(){
-
 const x=lang();
 
 const category=x.categories[Number($("offerCategory").value||0)]||x.categories[0];
 
 text("offerPreviewCategory",category);
-
 text("offerPreviewPlan",x.subscriberBadge);
-
-text(
-"offerPreviewCompany",
-$("offerCompany").value.trim()||x.company
-);
-
-text(
-"offerPreviewText",
-$("offerTitle").value.trim()||x.offerTitle
-);
-
-text(
-"offerPreviewDiscount",
-$("offerDiscount").value.trim()||"-20%"
-);
+text("offerPreviewCompany",$("offerCompany").value.trim()||x.company);
+text("offerPreviewText",$("offerTitle").value.trim()||x.offerTitle);
+text("offerPreviewDiscount",$("offerDiscount").value.trim()||"-20%");
 
 const end=$("offerEnd").value;
 
@@ -3442,16 +3163,11 @@ text("offerPreviewOnce",x.oneUseShort);
 ensurePromoCode();
 
 if(offerImageData){
-
 $("offerPreviewImage").src=offerImageData;
 $("offerPreviewImage").classList.remove("hidden");
-
 }else{
-
 $("offerPreviewImage").classList.add("hidden");
-
 }
-
 }
 
 [
@@ -3461,129 +3177,286 @@ $("offerPreviewImage").classList.add("hidden");
 "offerDiscount",
 "offerEnd"
 ].forEach(id=>{
-
 $(id).addEventListener("input",updateOfferPreview);
 $(id).addEventListener("change",updateOfferPreview);
-
 });
 
 document.querySelectorAll('input[name="redeem"]').forEach(input=>{
-
 input.onchange=()=>{
 updateRedeemFields();
 updateOfferPreview();
 };
-
 });
 
 $("regenerateCodeButton").onclick=()=>{
-
 currentPromoCode=generatePromoCode();
-
 ensurePromoCode();
-
 };
 
-$("offerImage").onchange=event=>{
+function compressImage(file,maxWidth=1400,quality=.82){
+return new Promise((resolve,reject)=>{
+const reader=new FileReader();
 
+reader.onerror=()=>reject(new Error("Unable to read image."));
+
+reader.onload=()=>{
+const image=new Image();
+
+image.onerror=()=>reject(new Error("Unable to process image."));
+
+image.onload=()=>{
+let width=image.naturalWidth||image.width;
+let height=image.naturalHeight||image.height;
+
+if(width>maxWidth){
+height=Math.round(height*(maxWidth/width));
+width=maxWidth;
+}
+
+const canvas=document.createElement("canvas");
+canvas.width=width;
+canvas.height=height;
+
+const ctx=canvas.getContext("2d");
+
+ctx.drawImage(image,0,0,width,height);
+
+try{
+const data=canvas.toDataURL("image/jpeg",quality);
+resolve(data);
+}catch(error){
+reject(error);
+}
+};
+
+image.src=String(reader.result||"");
+};
+
+reader.readAsDataURL(file);
+});
+}
+
+$("offerImage").onchange=async event=>{
 const file=event.target.files?.[0];
 
 if(!file) return;
 
-const reader=new FileReader();
+try{
+offerImageData=await compressImage(file,1400,.8);
 
-reader.onload=()=>{
-
-offerImageData=String(reader.result||"");
+$("offerImageReady").classList.remove("hidden");
 
 updateOfferPreview();
-
+}catch(error){
+console.error(error);
+showToast(error.message||lang().offerPublishError);
+}
 };
 
-reader.readAsDataURL(file);
-
-};
-
-function createOffer(status){
-
+function buildLocalOffer(status,overrides={}){
 const account=partnerAccount();
 
-ensurePromoCode();
-
-const offer={
-
-id:`offer_${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
-
+return{
+id:overrides.id||`offer_${Date.now()}_${Math.random().toString(36).slice(2,7)}`,
+serverId:overrides.serverId||null,
+externalId:overrides.externalId||null,
 company:$("offerCompany").value.trim(),
-
 category:$("offerCategory").value,
-
 title:$("offerTitle").value.trim(),
-
 description:$("offerDescription").value.trim(),
-
 discount:$("offerDiscount").value.trim(),
-
 saving:$("offerSaving").value.trim(),
-
 start:$("offerStart").value,
-
 end:$("offerEnd").value,
-
 limit:Number($("offerTotalLimit").value||0),
-
 commission:Number($("offerCommission").value||0),
-
 oneUse:true,
-
 access:"all_subscribers",
-
 redeem:selectedRedeem(),
-
-code:currentPromoCode,
-
+code:overrides.code||currentPromoCode,
 url:$("offerUrl").value.trim(),
-
 offlineInstructions:$("offlineInstructions").value.trim(),
-
 image:offerImageData,
-
 status,
-
 partnerEmail:account?.email||"",
-
-createdAt:new Date().toISOString(),
-
+createdAt:overrides.createdAt||new Date().toISOString(),
 redemptions:0,
-
 views:0,
-
 sales:0
-
 };
+}
 
+function saveLocalOffer(offer){
 const list=getJSON(OFFERS_KEY,[]);
 
+const existingIndex=list.findIndex(item=>
+String(item.id)===String(offer.id)||
+(
+offer.serverId&&
+String(item.serverId)===String(offer.serverId)
+)
+);
+
+if(existingIndex>=0){
+list[existingIndex]=offer;
+}else{
 list.unshift(offer);
+}
 
 setJSON(OFFERS_KEY,list);
 
 renderDashboard();
 
 return offer;
-
 }
 
-$("offerForm").onsubmit=event=>{
+function createExternalOfferId(){
+if(window.crypto?.randomUUID){
+return `web_${window.crypto.randomUUID()}`;
+}
 
+return `web_${Date.now()}_${Math.random().toString(36).slice(2,12)}`;
+}
+
+function setOfferPublishing(value){
+offerPublishing=value;
+
+$("publishOfferButton").disabled=value;
+$("saveOfferDraftButton").disabled=value;
+$("regenerateCodeButton").disabled=value;
+
+text(
+"publishOfferButton",
+value
+?lang().publishingOffer
+:lang().publishOffer
+);
+}
+
+async function submitPartnerOffer(){
+if(offerPublishing) return;
+
+const account=partnerAccount();
+
+if(!account){
+openRegister("offer");
+return;
+}
+
+const externalId=createExternalOfferId();
+
+setOfferPublishing(true);
+
+try{
+const response=await fetch(
+"/api/create-partner-offer",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+externalId,
+businessName:$("offerCompany").value.trim(),
+businessType:account.businessType||"",
+contactName:account.contactName||"",
+partnerEmail:account.email||"",
+country:account.country||"",
+website:account.website||"",
+address:account.address||"",
+category:$("offerCategory").value,
+title:$("offerTitle").value.trim(),
+description:$("offerDescription").value.trim(),
+discount:$("offerDiscount").value.trim(),
+saving:$("offerSaving").value.trim(),
+redemptionType:selectedRedeem(),
+partnerUrl:$("offerUrl").value.trim(),
+offlineInstructions:$("offlineInstructions").value.trim(),
+start:$("offerStart").value,
+end:$("offerEnd").value,
+maxRedemptions:Number($("offerTotalLimit").value||500),
+commissionPercent:Number($("offerCommission").value||0),
+image:offerImageData
+})
+}
+);
+
+let result={};
+
+try{
+result=await response.json();
+}catch{
+result={};
+}
+
+if(!response.ok||!result.ok||!result.offer){
+throw new Error(
+result.error||
+lang().offerPublishError
+);
+}
+
+const serverOffer=result.offer;
+
+const localOffer=buildLocalOffer(
+serverOffer.status||"pending",
+{
+id:`local_${serverOffer.id}`,
+serverId:serverOffer.id,
+externalId:serverOffer.externalId||externalId,
+code:serverOffer.promoCode,
+createdAt:serverOffer.createdAt||new Date().toISOString()
+}
+);
+
+localOffer.category=$("offerCategory").value;
+localOffer.start=$("offerStart").value;
+localOffer.end=$("offerEnd").value;
+localOffer.status="pending";
+
+saveLocalOffer(localOffer);
+
+currentPromoCode=serverOffer.promoCode;
+
+ensurePromoCode();
+
+showToast(lang().offerPublished);
+
+resetOfferForm();
+
+openTab("dashboardPanel");
+
+}catch(error){
+console.error("PETS & DOGUE offer publish error:",error);
+
+showToast(
+error?.message||
+lang().offerPublishError
+);
+}finally{
+setOfferPublishing(false);
+}
+}
+
+$("offerForm").onsubmit=async event=>{
 event.preventDefault();
 
 if(!$("offerTerms").checked) return;
 
-createOffer("pending");
+await submitPartnerOffer();
+};
 
-showToast(lang().offerPublished);
+$("saveOfferDraftButton").onclick=()=>{
+const offer=buildLocalOffer("draft");
 
+saveLocalOffer(offer);
+
+showToast(lang().saved);
+
+openTab("dashboardPanel");
+};
+
+function resetOfferForm(){
 $("offerForm").reset();
 
 $("redeemOnline").checked=true;
@@ -3591,35 +3464,25 @@ $("offerOneUse").checked=true;
 $("offerTotalLimit").value="500";
 $("offerCommission").value="5";
 
+const account=partnerAccount();
+
+$("offerCompany").value=account?.businessName||"";
+
 offerImageData="";
 currentPromoCode=generatePromoCode();
+
+$("offerImageReady").classList.add("hidden");
 
 setDefaultOfferDates();
 updateRedeemFields();
 updateOfferPreview();
-
-openTab("dashboardPanel");
-
-};
-
-$("saveOfferDraftButton").onclick=()=>{
-
-createOffer("draft");
-
-showToast(lang().saved);
-
-openTab("dashboardPanel");
-
-};
+}
 
 function selectedAdPlan(){
-
 return Number(document.querySelector('input[name="adPlan"]:checked')?.value||200);
-
 }
 
 function updateAdPreview(){
-
 text(
 "adPreviewHeadline",
 $("adHeadline").value.trim()||lang().headline
@@ -3636,14 +3499,10 @@ $("adCta").value.trim()||"DISCOVER"
 );
 
 if(adImageData){
-
 $("adPreviewImage").src=adImageData;
 $("adPreviewImage").classList.remove("hidden");
-
 }else{
-
 $("adPreviewImage").classList.add("hidden");
-
 }
 
 const price=selectedAdPlan();
@@ -3656,7 +3515,6 @@ paymentBusy
 );
 
 $("payAdButton").disabled=paymentBusy;
-
 }
 
 ["adHeadline","adCopy","adCta"].forEach(id=>{
@@ -3667,95 +3525,59 @@ document.querySelectorAll('input[name="adPlan"]').forEach(input=>{
 input.onchange=updateAdPreview;
 });
 
-$("adImage").onchange=event=>{
-
+$("adImage").onchange=async event=>{
 const file=event.target.files?.[0];
 
 if(!file) return;
 
-const reader=new FileReader();
-
-reader.onload=()=>{
-
-adImageData=String(reader.result||"");
-
+try{
+adImageData=await compressImage(file,1600,.82);
 updateAdPreview();
-
-};
-
-reader.readAsDataURL(file);
-
+}catch(error){
+console.error(error);
+showToast(error.message||lang().checkoutError);
+}
 };
 
 function buildAdvertisingCampaign(status){
-
 const account=partnerAccount();
 
 return{
-
 id:`ad_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,
-
 plan:selectedAdPlan(),
-
 company:$("adCompany").value.trim(),
-
 category:$("adCategory").value,
-
 headline:$("adHeadline").value.trim(),
-
 copy:$("adCopy").value.trim(),
-
 cta:$("adCta").value.trim(),
-
 url:$("adUrl").value.trim(),
-
 start:$("adStart").value,
-
 end:$("adEnd").value,
-
 placement:$("adPlacement").value,
-
 image:adImageData,
-
 status,
-
 partnerEmail:account?.email||"",
-
 contactName:account?.contactName||"",
-
 createdAt:new Date().toISOString(),
-
 views:0,
-
 clicks:0,
-
 stripe:{
 sessionId:null,
 invoiceId:null
 }
-
 };
-
 }
 
 function saveNewAdvertisingCampaign(campaign){
-
 const list=getJSON(ADS_KEY,[]);
-
 list.unshift(campaign);
-
 setJSON(ADS_KEY,list);
-
 renderDashboard();
-
 return campaign;
-
 }
 
 function updateAdvertisingCampaign(campaignId,changes){
-
 const list=getJSON(ADS_KEY,[]);
-
 const index=list.findIndex(item=>item.id===campaignId);
 
 if(index===-1) return null;
@@ -3766,37 +3588,29 @@ list[index]={
 };
 
 setJSON(ADS_KEY,list);
-
 renderDashboard();
 
 return list[index];
-
 }
 
 function getAdvertisingCampaign(campaignId){
-
 return getJSON(ADS_KEY,[]).find(item=>item.id===campaignId)||null;
-
 }
 
 async function startAdvertisingCheckout(campaign){
-
 if(paymentBusy) return;
 
 const account=partnerAccount();
 
 if(!account){
-
 openRegister("ad");
 return;
-
 }
 
 paymentBusy=true;
 updateAdPreview();
 
 try{
-
 sessionStorage.setItem(PENDING_AD_KEY,campaign.id);
 
 const response=await fetch(
@@ -3828,9 +3642,7 @@ campaignId:campaign.id
 const result=await response.json();
 
 if(!response.ok||!result.checkoutUrl){
-
 throw new Error(result.error||lang().checkoutError);
-
 }
 
 updateAdvertisingCampaign(
@@ -3848,19 +3660,15 @@ customerId:result.customerId||null
 window.location.href=result.checkoutUrl;
 
 }catch(error){
-
 paymentBusy=false;
 
 updateAdPreview();
 
 showToast(error.message||lang().checkoutError);
-
 }
-
 }
 
 $("adForm").onsubmit=async event=>{
-
 event.preventDefault();
 
 if(!$("adTerms").checked) return;
@@ -3870,11 +3678,9 @@ const campaign=buildAdvertisingCampaign("awaiting_payment");
 saveNewAdvertisingCampaign(campaign);
 
 await startAdvertisingCheckout(campaign);
-
 };
 
 $("saveAdDraftButton").onclick=()=>{
-
 const campaign=buildAdvertisingCampaign("draft");
 
 saveNewAdvertisingCampaign(campaign);
@@ -3882,29 +3688,22 @@ saveNewAdvertisingCampaign(campaign);
 showToast(lang().adSaved);
 
 openTab("dashboardPanel");
-
 };
 
 window.payExistingCampaign=async function(campaignId){
-
 const campaign=getAdvertisingCampaign(campaignId);
 
 if(!campaign) return;
 
 await startAdvertisingCheckout(campaign);
-
 };
 
 function openPaymentOverlay(){
-
 $("paymentOverlay").classList.add("open");
-
 document.body.classList.add("locked");
-
 }
 
 function setPaymentOverlayState(type,title,message){
-
 $("paymentSpinner").classList.add("hidden");
 
 const icon=$("paymentStatusIcon");
@@ -3912,52 +3711,38 @@ const icon=$("paymentStatusIcon");
 icon.className="payment-status-icon";
 
 if(type==="success"){
-
 icon.classList.add("success");
 icon.textContent="✓";
-
 }else{
-
 icon.classList.add("error");
 icon.textContent="!";
-
 }
 
 text("paymentStatusTitle",title);
 text("paymentStatusText",message);
 
 $("paymentStatusButton").style.display="block";
-
 }
 
 function closePaymentOverlay(){
-
 $("paymentOverlay").classList.remove("open");
-
 document.body.classList.remove("locked");
-
 }
 
 $("paymentStatusButton").onclick=()=>{
-
 closePaymentOverlay();
-
 openApp("dashboardPanel");
-
 };
 
 function cleanPaymentUrl(){
-
 history.replaceState(
 {},
 document.title,
 window.location.pathname
 );
-
 }
 
 function addBillingRecord(verification){
-
 const campaign=verification.campaign||{};
 const stripe=verification.stripe||{};
 const receipt=verification.receipt||{};
@@ -3967,43 +3752,26 @@ const list=getJSON(BILLING_KEY,[]);
 if(list.some(item=>item.sessionId===stripe.sessionId)) return;
 
 list.unshift({
-
 id:`billing_${Date.now()}`,
-
 campaignId:campaign.id||"",
-
 description:campaign.headline||"PETS & DOGUE Advertising",
-
 businessName:campaign.businessName||"",
-
 plan:campaign.plan||0,
-
 amount:Number(receipt.amountPaid||campaign.amount||0)/100,
-
 currency:receipt.currency||"GBP",
-
 date:campaign.paidAt||new Date().toISOString(),
-
 sessionId:stripe.sessionId||null,
-
 paymentIntentId:stripe.paymentIntentId||null,
-
 invoiceId:stripe.invoiceId||null,
-
 invoiceNumber:receipt.invoiceNumber||null,
-
 hostedInvoiceUrl:receipt.hostedInvoiceUrl||null,
-
 invoicePdf:receipt.invoicePdf||null
-
 });
 
 setJSON(BILLING_KEY,list);
-
 }
 
 async function verifyAdvertisingReturn(){
-
 const params=new URLSearchParams(window.location.search);
 
 const paymentState=params.get("ad_payment");
@@ -4011,16 +3779,13 @@ const paymentState=params.get("ad_payment");
 if(!paymentState) return;
 
 if(partnerAccount()){
-
 $("landingView").classList.add("hidden");
 $("partnerApp").classList.add("show");
-
 }
 
 openPaymentOverlay();
 
 if(paymentState==="cancelled"){
-
 $("paymentSpinner").classList.add("hidden");
 
 setPaymentOverlayState(
@@ -4030,15 +3795,12 @@ lang().paymentCancelledText
 );
 
 cleanPaymentUrl();
-
 return;
-
 }
 
 const sessionId=params.get("session_id");
 
 if(paymentState!=="success"||!sessionId){
-
 setPaymentOverlayState(
 "error",
 lang().paymentFailed,
@@ -4046,16 +3808,13 @@ lang().paymentFailedText
 );
 
 cleanPaymentUrl();
-
 return;
-
 }
 
 text("paymentStatusTitle",lang().paymentChecking);
 text("paymentStatusText",lang().paymentCheckingText);
 
 try{
-
 const response=await fetch(
 "/api/verify-advertising-payment",
 {
@@ -4070,9 +3829,7 @@ body:JSON.stringify({sessionId})
 const result=await response.json();
 
 if(!response.ok||!result.ok||!result.verified||!result.paid){
-
 throw new Error(result.error||result.message||lang().paymentFailedText);
-
 }
 
 const campaign=result.campaign||{};
@@ -4084,7 +3841,6 @@ localCampaign?.id||
 sessionStorage.getItem(PENDING_AD_KEY);
 
 if(campaignId){
-
 updateAdvertisingCampaign(
 campaignId,
 {
@@ -4101,7 +3857,6 @@ livemode:Boolean(result.stripe?.livemode)
 }
 }
 );
-
 }
 
 addBillingRecord(result);
@@ -4119,7 +3874,6 @@ lang().paymentSuccessText
 cleanPaymentUrl();
 
 }catch(error){
-
 console.error(error);
 
 setPaymentOverlayState(
@@ -4129,13 +3883,10 @@ error.message||lang().paymentFailedText
 );
 
 cleanPaymentUrl();
-
 }
-
 }
 
 function statusLabel(status){
-
 const x=lang();
 
 if(status==="active") return x.active;
@@ -4144,11 +3895,9 @@ if(status==="awaiting_payment") return x.awaitingPayment;
 if(status==="pending") return x.pending;
 
 return x.draft;
-
 }
 
 function formatShortDate(value){
-
 if(!value) return "—";
 
 const date=
@@ -4168,23 +3917,17 @@ month:"short",
 year:"numeric"
 }
 );
-
 }
 
 function recordImage(image){
-
 if(image){
-
 return `<img class="record-thumb" src="${escapeHtml(image)}" alt="">`;
-
 }
 
 return `<div class="record-thumb"></div>`;
-
 }
 
 function renderDashboard(){
-
 const offers=getJSON(OFFERS_KEY,[]);
 const ads=getJSON(ADS_KEY,[]);
 const billing=getJSON(BILLING_KEY,[]);
@@ -4212,15 +3955,12 @@ text("statSales",`£${sales.toFixed(0)}`);
 renderOfferRecords(offers);
 renderAdRecords(ads);
 renderBillingRecords(billing);
-
 }
 
 function renderOfferRecords(offers){
-
 const target=$("offersRecords");
 
 if(!offers.length){
-
 target.innerHTML=`
 <div class="empty-state">
 <strong>${escapeHtml(lang().emptyOffers)}</strong>
@@ -4229,7 +3969,6 @@ target.innerHTML=`
 `;
 
 return;
-
 }
 
 target.innerHTML=`
@@ -4262,15 +4001,12 @@ ${escapeHtml(statusLabel(offer.status))}
 `).join("")}
 </div>
 `;
-
 }
 
 function renderAdRecords(ads){
-
 const target=$("adsRecords");
 
 if(!ads.length){
-
 target.innerHTML=`
 <div class="empty-state">
 <strong>${escapeHtml(lang().emptyAds)}</strong>
@@ -4279,13 +4015,11 @@ target.innerHTML=`
 `;
 
 return;
-
 }
 
 target.innerHTML=`
 <div class="records">
 ${ads.map(ad=>{
-
 const canPay=
 ad.status==="draft"||
 ad.status==="awaiting_payment";
@@ -4327,19 +4061,15 @@ ${escapeHtml(statusLabel(ad.status))}
 
 </div>
 `;
-
 }).join("")}
 </div>
 `;
-
 }
 
 function renderBillingRecords(items){
-
 const target=$("billingRecords");
 
 if(!items.length){
-
 target.innerHTML=`
 <div class="empty-state">
 <strong>${escapeHtml(lang().billingEmpty)}</strong>
@@ -4348,11 +4078,9 @@ target.innerHTML=`
 `;
 
 return;
-
 }
 
 target.innerHTML=items.map(item=>`
-
 <div class="billing-item">
 
 <div>
@@ -4400,56 +4128,40 @@ ${escapeHtml(lang().invoicePdf)}
 </div>
 
 </div>
-
 `).join("");
-
 }
 
 function dateInputValue(date){
-
 const year=date.getFullYear();
-
 const month=String(date.getMonth()+1).padStart(2,"0");
-
 const day=String(date.getDate()).padStart(2,"0");
 
 return `${year}-${month}-${day}`;
-
 }
 
 function setDefaultOfferDates(){
-
 const today=new Date();
-
 const plus30=new Date(today);
 
 plus30.setDate(plus30.getDate()+30);
 
 $("offerStart").value=dateInputValue(today);
-
 $("offerEnd").value=dateInputValue(plus30);
-
 }
 
 function setDefaultAdDates(){
-
 const today=new Date();
-
 const plus30=new Date(today);
 
 plus30.setDate(plus30.getDate()+30);
 
 $("adStart").value=dateInputValue(today);
-
 $("adEnd").value=dateInputValue(plus30);
-
 }
 
 function setDefaultDates(){
-
 setDefaultOfferDates();
 setDefaultAdDates();
-
 }
 
 $("menuButton").onclick=()=>{
@@ -4476,11 +4188,8 @@ LANGS.includes(savedLanguage)
 const account=partnerAccount();
 
 if(account){
-
 $("offerCompany").value=account.businessName||"";
-
 $("adCompany").value=account.businessName||"";
-
 }
 
 updateRedeemFields();
@@ -4489,7 +4198,6 @@ updateAdPreview();
 renderDashboard();
 
 verifyAdvertisingReturn();
-
 </script>
 
 </body>
