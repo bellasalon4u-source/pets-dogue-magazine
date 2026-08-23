@@ -757,6 +757,119 @@ resize:vertical;
 border-color:#111;
 }
 
+.range-box{
+border:1px solid #c9c0b3;
+background:#faf7f0;
+padding:14px;
+}
+
+.range-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+}
+
+.range-value{
+font-family:var(--serif);
+font-size:28px;
+font-weight:400;
+color:var(--gold-dark);
+white-space:nowrap;
+}
+
+.range-manual{
+width:110px!important;
+height:43px!important;
+font-size:16px;
+text-align:center;
+font-weight:800;
+}
+
+.range-control{
+width:100%;
+height:30px!important;
+padding:0!important;
+margin-top:10px;
+border:0!important;
+background:transparent!important;
+accent-color:#111;
+}
+
+.range-limits{
+display:flex;
+justify-content:space-between;
+gap:10px;
+font-size:6px;
+font-weight:900;
+letter-spacing:.6px;
+color:#8a847a;
+margin-top:3px;
+}
+
+.commission-box{
+border:2px solid #111;
+background:#f5efe3;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+}
+
+.commission-copy strong{
+display:block;
+font-family:var(--serif);
+font-size:19px;
+font-weight:400;
+}
+
+.commission-copy span{
+display:block;
+font-size:7px;
+line-height:1.45;
+color:#777;
+margin-top:4px;
+}
+
+.commission-value{
+font-family:var(--serif);
+font-size:34px;
+color:var(--gold-dark);
+white-space:nowrap;
+}
+
+.voucher-summary{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:6px;
+margin-top:10px;
+}
+
+.voucher-stat{
+border:1px solid #d8d0c3;
+background:#fff;
+padding:9px 7px;
+text-align:center;
+}
+
+.voucher-stat span{
+display:block;
+font-size:5px;
+font-weight:900;
+letter-spacing:.7px;
+color:#777;
+text-transform:uppercase;
+}
+
+.voucher-stat strong{
+display:block;
+font-family:var(--serif);
+font-size:17px;
+font-weight:400;
+margin-top:3px;
+}
+
 .check-row{
 display:flex;
 gap:8px;
@@ -1108,6 +1221,19 @@ transparent 14px 17px
 );
 }
 
+.preview-use-button{
+width:100%;
+min-height:42px;
+margin-top:10px;
+border:0;
+background:#111;
+color:#fff;
+font-size:7px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
 .ad-plans{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -1300,7 +1426,8 @@ letter-spacing:.6px;
 }
 
 .register-overlay,
-.payment-overlay{
+.payment-overlay,
+.review-overlay{
 position:fixed;
 inset:0;
 z-index:9000;
@@ -1312,7 +1439,8 @@ padding:15px;
 }
 
 .register-overlay.open,
-.payment-overlay.open{
+.payment-overlay.open,
+.review-overlay.open{
 display:flex;
 }
 
@@ -1428,6 +1556,98 @@ font-size:8px;
 font-weight:900;
 letter-spacing:1px;
 margin-top:17px;
+}
+
+.review-overlay{
+z-index:9600;
+backdrop-filter:blur(5px);
+align-items:flex-end;
+}
+
+.review-card{
+width:min(560px,100%);
+max-height:92vh;
+overflow:auto;
+background:#fff;
+}
+
+.review-head{
+background:#111;
+color:#fff;
+padding:19px;
+}
+
+.review-head small{
+display:block;
+font-size:7px;
+letter-spacing:1.5px;
+font-weight:900;
+color:var(--gold-light);
+}
+
+.review-head h2{
+font-family:var(--serif);
+font-size:27px;
+font-weight:400;
+margin-top:5px;
+}
+
+.review-head p{
+font-size:8px;
+line-height:1.5;
+color:#bbb;
+margin-top:6px;
+}
+
+.review-body{
+padding:16px;
+}
+
+.review-row{
+display:grid;
+grid-template-columns:130px 1fr;
+gap:12px;
+padding:10px 0;
+border-bottom:1px solid #ece5da;
+}
+
+.review-row span{
+font-size:7px;
+font-weight:900;
+letter-spacing:.6px;
+color:#777;
+text-transform:uppercase;
+}
+
+.review-row strong{
+font-size:10px;
+line-height:1.45;
+word-break:break-word;
+}
+
+.review-actions{
+padding-top:14px;
+}
+
+.review-submit{
+width:100%;
+height:49px;
+border:0;
+background:var(--gold);
+font-size:8px;
+font-weight:900;
+letter-spacing:1.1px;
+}
+
+.review-back{
+width:100%;
+height:42px;
+border:1px solid #111;
+background:#fff;
+font-size:8px;
+font-weight:900;
+letter-spacing:1px;
+margin-top:7px;
 }
 
 .toast{
@@ -1646,6 +1866,22 @@ min-height:500px;
 
 .billing-item{
 grid-template-columns:1fr;
+}
+
+.range-top{
+align-items:flex-end;
+}
+
+.range-manual{
+width:105px!important;
+}
+
+.voucher-summary{
+gap:4px;
+}
+
+.review-row{
+grid-template-columns:105px 1fr;
 }
 
 }
@@ -1887,12 +2123,51 @@ grid-template-columns:1fr;
 <textarea id="offerDescription" required></textarea>
 </div>
 
-<div class="field">
+<div class="field full">
+
 <label id="offerDiscountLabel"></label>
-<input id="offerDiscount" placeholder="-20%" required>
+
+<div class="range-box">
+
+<div class="range-top">
+
+<strong class="range-value" id="discountDisplay">20%</strong>
+
+<input
+class="range-manual"
+id="offerDiscountNumber"
+type="number"
+inputmode="numeric"
+min="1"
+max="99"
+step="1"
+value="20"
+>
+
 </div>
 
-<div class="field">
+<input
+class="range-control"
+id="offerDiscountRange"
+type="range"
+min="1"
+max="99"
+step="1"
+value="20"
+>
+
+<div class="range-limits">
+<span>1%</span>
+<span>99%</span>
+</div>
+
+</div>
+
+<div class="hint" id="discountHint"></div>
+
+</div>
+
+<div class="field full">
 <label id="offerSavingLabel"></label>
 <input id="offerSaving" placeholder="£10">
 <div class="hint" id="offerSavingHint"></div>
@@ -1918,14 +2193,86 @@ grid-template-columns:1fr;
 <input id="offerEnd" type="date" required>
 </div>
 
-<div class="field">
+<div class="field full">
+
 <label id="offerTotalLimitLabel"></label>
-<input id="offerTotalLimit" type="number" min="1" value="500">
+
+<div class="range-box">
+
+<div class="range-top">
+
+<strong class="range-value" id="voucherDisplay">500</strong>
+
+<input
+class="range-manual"
+id="offerTotalLimit"
+type="number"
+inputmode="numeric"
+min="1"
+max="1000000"
+step="1"
+value="500"
+>
+
 </div>
 
-<div class="field">
+<input
+class="range-control"
+id="voucherRange"
+type="range"
+min="1"
+max="1000000"
+step="1"
+value="500"
+>
+
+<div class="range-limits">
+<span>1</span>
+<span>1,000,000</span>
+</div>
+
+</div>
+
+<div class="hint" id="voucherHint"></div>
+
+<div class="voucher-summary">
+
+<div class="voucher-stat">
+<span id="voucherTotalLabel"></span>
+<strong id="voucherTotalValue">500</strong>
+</div>
+
+<div class="voucher-stat">
+<span id="voucherUsedLabel"></span>
+<strong>0</strong>
+</div>
+
+<div class="voucher-stat">
+<span id="voucherRemainingLabel"></span>
+<strong id="voucherRemainingValue">500</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="field full">
+
 <label id="offerCommissionLabel"></label>
-<input id="offerCommission" type="number" min="0" max="100" step=".1" value="5">
+
+<div class="commission-box">
+
+<div class="commission-copy">
+<strong id="commissionTitle"></strong>
+<span id="commissionHint"></span>
+</div>
+
+<div class="commission-value">
+1%
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -2013,6 +2360,7 @@ grid-template-columns:1fr;
 <div class="field" id="partnerUrlField">
 <label id="offerUrlLabel"></label>
 <input id="offerUrl" type="url" placeholder="https://">
+<div class="hint" id="onlineFlowHint"></div>
 </div>
 
 <div class="field full hidden" id="offlineInstructionsField">
@@ -2100,6 +2448,8 @@ grid-template-columns:1fr;
 </div>
 
 </div>
+
+<button class="preview-use-button" id="previewUseButton" type="button"></button>
 
 </div>
 
@@ -2377,6 +2727,76 @@ grid-template-columns:1fr;
 
 </div>
 
+<div class="review-overlay" id="reviewOverlay">
+
+<div class="review-card">
+
+<div class="review-head">
+
+<small>PETS &amp; DOGUE CLUB</small>
+
+<h2 id="reviewTitle"></h2>
+
+<p id="reviewText"></p>
+
+</div>
+
+<div class="review-body">
+
+<div class="review-row">
+<span id="reviewBusinessLabel"></span>
+<strong id="reviewBusiness"></strong>
+</div>
+
+<div class="review-row">
+<span id="reviewOfferLabel"></span>
+<strong id="reviewOffer"></strong>
+</div>
+
+<div class="review-row">
+<span id="reviewDiscountLabel"></span>
+<strong id="reviewDiscount"></strong>
+</div>
+
+<div class="review-row">
+<span id="reviewDatesLabel"></span>
+<strong id="reviewDates"></strong>
+</div>
+
+<div class="review-row">
+<span id="reviewVouchersLabel"></span>
+<strong id="reviewVouchers"></strong>
+</div>
+
+<div class="review-row">
+<span id="reviewCommissionLabel"></span>
+<strong>1%</strong>
+</div>
+
+<div class="review-row">
+<span id="reviewTypeLabel"></span>
+<strong id="reviewType"></strong>
+</div>
+
+<div class="review-row">
+<span id="reviewWebsiteLabel"></span>
+<strong id="reviewWebsite"></strong>
+</div>
+
+<div class="review-actions">
+
+<button class="review-submit" id="reviewSubmitButton" type="button"></button>
+
+<button class="review-back" id="reviewBackButton" type="button"></button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 <div class="payment-overlay" id="paymentOverlay">
 
 <div class="payment-status-card">
@@ -2408,6 +2828,8 @@ const OFFERS_KEY="petsDoguePartnerOffers";
 const ADS_KEY="petsDoguePartnerAds";
 const BILLING_KEY="petsDoguePartnerBilling";
 const PENDING_AD_KEY="petsDoguePendingAdvertising";
+
+const FIXED_COMMISSION_PERCENT=1;
 
 const LANGS=[
 "en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
@@ -2445,41 +2867,63 @@ company:"Business name",
 category:"Category",
 offerTitle:"Offer title",
 description:"Short description",
-discount:"Discount / benefit",
+discount:"Discount %",
+discountHint:"Choose a discount from 1% to 99% with the slider or enter the percentage manually.",
 saving:"Typical saving",
-savingHint:"Optional. Example: £10, £25 value or FREE GIFT.",
-validity:"Validity and commission",
+savingHint:"Optional. Example: £10 or £25.",
+validity:"Validity, vouchers and commission",
 starts:"Starts",
 ends:"Ends",
-totalLimit:"Maximum total redemptions",
-commission:"PETS & DOGUE commission %",
-oneUse:"Each subscriber can use this offer only once.",
+totalLimit:"Available vouchers",
+voucherHint:"Choose from 1 to 1,000,000 or enter the exact number manually.",
+voucherTotal:"TOTAL",
+voucherUsed:"USED",
+voucherRemaining:"REMAINING",
+commission:"PETS & DOGUE commission",
+commissionTitle:"Fixed PETS & DOGUE commission",
+commissionHint:"The partner cannot change this rate. PETS & DOGUE manages it centrally.",
+oneUse:"Each subscriber can use one voucher for this offer.",
 access:"Who can use this offer",
 allSubscribers:"All PETS & DOGUE Club subscribers",
 allSubscribersText:"No monthly or annual division. Any active Club subscription unlocks the offer.",
 redeem:"How customers redeem",
 online:"Online",
-onlineText:"PETS & DOGUE promo code plus the partner link.",
+onlineText:"The member taps Use Offer and is taken to your website with the PETS & DOGUE code.",
 offline:"In store",
-offlineText:"The subscriber presents the PETS & DOGUE code / barcode.",
+offlineText:"The member opens the PETS & DOGUE voucher and shows the code / barcode.",
 generatedCode:"Preview promotional code",
 regenerate:"NEW PREVIEW",
 generatedHint:"This code is only a preview while you create the offer.",
 serverCodeNote:"When you publish, PETS & DOGUE securely generates the final unique code on the server.",
 partnerUrl:"Partner website / checkout URL",
+onlineFlowHint:"Members will be sent to this website after tapping Use Offer.",
 offlineInstructions:"Instructions for your staff",
 offerImage:"Offer image",
 uploadImage:"UPLOAD IMAGE",
 uploadHelp:"Recommended: landscape image. Large photos are automatically compressed before submission.",
 imageReady:"IMAGE READY",
 offerTerms:"I confirm that this offer, discount and validity period are accurate and will be honoured by my business.",
-publishOffer:"PUBLISH OFFER",
+publishOffer:"REVIEW OFFER",
 publishingOffer:"PUBLISHING…",
 saveDraft:"SAVE DRAFT",
 preview:"LIVE PREVIEW",
 validUntil:"Valid until",
 oneUseShort:"1 use",
 subscriberBadge:"SUBSCRIBERS",
+useOffer:"USE OFFER",
+showVoucher:"SHOW VOUCHER",
+reviewTitle:"Check your offer",
+reviewText:"Please check the details before sending the offer to PETS & DOGUE for review.",
+reviewBusiness:"Business",
+reviewOffer:"Offer",
+reviewDiscount:"Discount",
+reviewDates:"Validity",
+reviewVouchers:"Available vouchers",
+reviewCommission:"Commission",
+reviewType:"Redemption",
+reviewWebsite:"Website",
+reviewSubmit:"SEND FOR REVIEW",
+reviewBack:"BACK TO EDIT",
 ad50:"Offer Boost",
 ad50Text:"Boost your offer higher in the Special Offers catalogue.",
 ad100:"Featured Card",
@@ -2578,110 +3022,74 @@ company:"Название компании",
 category:"Категория",
 offerTitle:"Название предложения",
 description:"Короткое описание",
-discount:"Скидка / бонус",
+discount:"Скидка %",
+discountHint:"Выберите скидку от 1% до 99% ползунком или введите процент вручную.",
 saving:"Примерная экономия",
-savingHint:"Необязательно. Например: £10, подарок стоимостью £25 или FREE GIFT.",
-validity:"Срок действия и комиссия",
+savingHint:"Необязательно. Например: £10 или £25.",
+validity:"Срок действия, ваучеры и комиссия",
 starts:"Начало",
 ends:"Окончание",
-totalLimit:"Максимальное количество использований",
-commission:"Комиссия PETS & DOGUE %",
-oneUse:"Каждый подписчик может использовать это предложение только один раз.",
+totalLimit:"Количество доступных ваучеров",
+voucherHint:"Выберите от 1 до 1 000 000 или введите точное количество вручную.",
+voucherTotal:"ВСЕГО",
+voucherUsed:"ИСПОЛЬЗОВАНО",
+voucherRemaining:"ОСТАЛОСЬ",
+commission:"Комиссия PETS & DOGUE",
+commissionTitle:"Фиксированная комиссия PETS & DOGUE",
+commissionHint:"Партнёр не может менять процент. PETS & DOGUE регулирует его централизованно.",
+oneUse:"Каждый подписчик может использовать один ваучер этого предложения.",
 access:"Кому доступно предложение",
 allSubscribers:"Всем подписчикам PETS & DOGUE Club",
 allSubscribersText:"Без разделения на месячную и годовую подписку. Любая активная подписка Club открывает доступ к предложению.",
 redeem:"Как использовать предложение",
 online:"Онлайн",
-onlineText:"Автоматический промокод PETS & DOGUE и ссылка партнёра.",
+onlineText:"Подписчик нажимает «Воспользоваться предложением» и переходит на ваш сайт с кодом PETS & DOGUE.",
 offline:"В заведении",
-offlineText:"Подписчик показывает код / штрихкод PETS & DOGUE.",
+offlineText:"Подписчик открывает ваучер PETS & DOGUE и показывает код / штрихкод.",
 generatedCode:"Предварительный промокод",
 regenerate:"НОВЫЙ ПРИМЕР",
 generatedHint:"Во время заполнения формы здесь показывается только предварительный код.",
 serverCodeNote:"При публикации PETS & DOGUE безопасно создаст окончательный уникальный код на сервере.",
 partnerUrl:"Сайт / страница заказа партнёра",
+onlineFlowHint:"После нажатия «Воспользоваться предложением» клиент перейдёт на этот сайт.",
 offlineInstructions:"Инструкция для ваших сотрудников",
 offerImage:"Фото предложения",
 uploadImage:"ЗАГРУЗИТЬ ФОТО",
 uploadHelp:"Рекомендуется горизонтальное фото. Большие изображения автоматически уменьшаются перед отправкой.",
 imageReady:"ФОТО ГОТОВО",
 offerTerms:"Я подтверждаю, что предложение, скидка и срок действия указаны правильно и мой бизнес выполнит эти условия.",
-publishOffer:"ОПУБЛИКОВАТЬ",
+publishOffer:"ПРОВЕРИТЬ ПРЕДЛОЖЕНИЕ",
 publishingOffer:"ПУБЛИКУЕМ…",
 saveDraft:"СОХРАНИТЬ ЧЕРНОВИК",
 preview:"ПРЕДПРОСМОТР",
 validUntil:"Действует до",
 oneUseShort:"1 раз",
 subscriberBadge:"ПОДПИСЧИКАМ",
-ad50:"Продвижение предложения",
-ad50Text:"Поднять ваше предложение выше в каталоге специальных предложений.",
-ad100:"Featured Card",
-ad100Text:"Крупная рекламная карточка внутри подходящего раздела PETS & DOGUE.",
-ad200:"Большая рекламная страница",
-ad200Text:"Красивая большая реклама, которая естественно появляется во время прокрутки журнала.",
-adDetails:"Данные рекламы",
-headline:"Заголовок",
-copy:"Короткий текст",
-cta:"Текст кнопки",
-url:"Ссылка",
-schedule:"Срок и размещение",
-placement:"Где показывать рекламу?",
-placementHint:"Количество больших рекламных страниц автоматически ограничивается, чтобы журнал не был перегружен.",
-placements:["Автоматически — подходящие страницы","Статьи журнала","Здоровье питомцев","Путешествия и pet-friendly","Маркетплейс","Специальные предложения","Главная страница"],
-adImage:"Изображение рекламы",
-adImageHelp:"Используйте качественное вертикальное или горизонтальное изображение.",
-adTerms:"Я подтверждаю право использовать загруженные изображения, торговые марки и рекламные материалы.",
-payAd:"ПЕРЕЙТИ К ОПЛАТЕ",
-payAgain:"ОПЛАТИТЬ",
-paymentStarting:"ОТКРЫВАЕМ БЕЗОПАСНУЮ ОПЛАТУ…",
-saveAd:"СОХРАНИТЬ ЧЕРНОВИК",
-adPreview:"ПРЕДПРОСМОТР РЕКЛАМЫ",
-advertisement:"РЕКЛАМА",
-billing:"Платежи",
-billingHint:"Оплаты и квитанции",
-registerTitle:"Создайте аккаунт партнёра",
-registerText:"Один аккаунт позволяет создавать предложения Club и покупать рекламу PETS & DOGUE.",
-businessName:"Название бизнеса",
-businessType:"Тип бизнеса",
-contactName:"Контактное лицо",
-businessEmail:"Email бизнеса",
-businessCountry:"Страна",
-businessWebsite:"Сайт",
-businessAddress:"Адрес бизнеса",
-businessTerms:"Я принимаю условия PETS & DOGUE для партнёров и подтверждаю, что имею право представлять этот бизнес.",
-register:"СОЗДАТЬ АККАУНТ ПАРТНЁРА",
-categories:["Ветеринария","Груминг","Корм","Зоомагазины","Отели и путешествия","Pet-friendly кафе","Дрессировка","Аксессуары","Страхование","Фотография","Развлечения","Другое"],
-types:["Компания","Магазин","Ветеринарная клиника","Груминг-салон","Отель","Ресторан / кафе","Тренер","Интернет-магазин","Бренд","Другое"],
+useOffer:"ВОСПОЛЬЗОВАТЬСЯ ПРЕДЛОЖЕНИЕМ",
+showVoucher:"ПОКАЗАТЬ ВАУЧЕР",
+reviewTitle:"Проверьте предложение",
+reviewText:"Проверьте данные перед отправкой предложения на модерацию PETS & DOGUE.",
+reviewBusiness:"Компания",
+reviewOffer:"Предложение",
+reviewDiscount:"Скидка",
+reviewDates:"Срок действия",
+reviewVouchers:"Доступные ваучеры",
+reviewCommission:"Комиссия",
+reviewType:"Использование",
+reviewWebsite:"Сайт",
+reviewSubmit:"ОТПРАВИТЬ НА ПРОВЕРКУ",
+reviewBack:"ВЕРНУТЬСЯ К РЕДАКТИРОВАНИЮ",
 draft:"ЧЕРНОВИК",
 pending:"НА ПРОВЕРКЕ",
 awaitingPayment:"ОЖИДАЕТ ОПЛАТЫ",
 active:"АКТИВНО",
 paid:"ОПЛАЧЕНО",
 saved:"Сохранено",
-offerPublished:"Предложение отправлено. PETS & DOGUE создал окончательный промокод, предложение ожидает проверки.",
-offerPublishError:"Не удалось отправить предложение. Попробуйте ещё раз.",
-adSaved:"Рекламная кампания сохранена.",
-accountCreated:"Аккаунт партнёра создан.",
-checkoutError:"Не удалось открыть безопасную оплату.",
-paymentChecking:"Подтверждаем оплату",
-paymentCheckingText:"PETS & DOGUE безопасно проверяет оплату Stripe.",
-paymentSuccess:"Оплата подтверждена",
-paymentSuccessText:"Реклама успешно оплачена.",
-paymentCancelled:"Оплата отменена",
-paymentCancelledText:"Деньги не списаны. Кампания сохранена.",
-paymentFailed:"Не удалось подтвердить оплату",
-paymentFailedText:"Мы не смогли подтвердить платёж.",
-continueDashboard:"ПЕРЕЙТИ В КАБИНЕТ",
-billingEmpty:"Платежей пока нет.",
-billingEmptyText:"Здесь появятся счета за оплаченную рекламу.",
-invoice:"ОТКРЫТЬ СЧЁТ",
-invoicePdf:"PDF КВИТАНЦИИ",
-paymentDate:"Оплачено"
+offerPublished:"Предложение отправлено. PETS & DOGUE создал окончательный промокод, предложение ожидает проверки."
 };
 
 const UK={
 ...RU,
-club:"КЛУБ",
 heroEyebrow:"ПАРТНЕРИ PETS & DOGUE",
 heroTitle:"Розвивайте бізнес разом із PETS & DOGUE",
 heroText:"Створюйте спеціальні пропозиції для всіх підписників PETS & DOGUE Club або запускайте преміальну рекламу в журналі.",
@@ -2690,113 +3098,466 @@ heroAd:"РОЗМІСТИТИ РЕКЛАМУ",
 offerCardTitle:"Дайте підписникам Club спеціальну пропозицію",
 offerCardText:"Пропозицією може скористатися будь-який активний підписник PETS & DOGUE Club. Остаточний промокод PETS & DOGUE створює автоматично.",
 startOffer:"СТВОРИТИ ПРОПОЗИЦІЮ",
-startAd:"СТВОРИТИ РЕКЛАМУ",
 dashboardTitle:"Кабінет партнера",
 dashboardSub:"Керуйте пропозиціями, рекламою, платежами та результатами.",
 logout:"ВИЙТИ",
-tabs:["КАБІНЕТ","НОВА ПРОПОЗИЦІЯ","РЕКЛАМА","ПЛАТЕЖІ"],
-stats:["АКТИВНІ ПРОПОЗИЦІЇ","ОПЛАЧЕНА РЕКЛАМА","ПЕРЕГЛЯДИ","ПРОДАЖІ"],
-myOffers:"Мої пропозиції",
-myOffersHint:"Доступно всім підписникам Club",
-myAds:"Моя реклама",
 offerDetails:"Дані пропозиції",
 company:"Назва компанії",
 category:"Категорія",
 offerTitle:"Назва пропозиції",
 description:"Короткий опис",
-discount:"Знижка / бонус",
+discount:"Знижка %",
+discountHint:"Оберіть знижку від 1% до 99% повзунком або введіть відсоток вручну.",
 saving:"Приблизна економія",
-validity:"Термін дії та комісія",
+savingHint:"Необов’язково. Наприклад: £10 або £25.",
+validity:"Термін дії, ваучери та комісія",
 starts:"Початок",
 ends:"Закінчення",
-totalLimit:"Максимальна кількість використань",
-commission:"Комісія PETS & DOGUE %",
-oneUse:"Кожен підписник може використати цю пропозицію лише один раз.",
+totalLimit:"Кількість доступних ваучерів",
+voucherHint:"Оберіть від 1 до 1 000 000 або введіть точну кількість вручну.",
+voucherTotal:"ВСЬОГО",
+voucherUsed:"ВИКОРИСТАНО",
+voucherRemaining:"ЗАЛИШИЛОСЯ",
+commission:"Комісія PETS & DOGUE",
+commissionTitle:"Фіксована комісія PETS & DOGUE",
+commissionHint:"Партнер не може змінювати цей відсоток. PETS & DOGUE керує ним централізовано.",
+oneUse:"Кожен підписник може використати один ваучер цієї пропозиції.",
 access:"Кому доступна пропозиція",
 allSubscribers:"Усім підписникам PETS & DOGUE Club",
 allSubscribersText:"Без поділу на місячну та річну підписку. Будь-яка активна підписка Club відкриває пропозицію.",
 redeem:"Як використати пропозицію",
 online:"Онлайн",
-onlineText:"Автоматичний промокод PETS & DOGUE та посилання партнера.",
+onlineText:"Підписник натискає «Скористатися пропозицією» і переходить на ваш сайт із кодом PETS & DOGUE.",
 offline:"У закладі",
-offlineText:"Підписник показує код / штрихкод PETS & DOGUE.",
-generatedCode:"Попередній промокод",
-regenerate:"НОВИЙ ПРИКЛАД",
-generatedHint:"Під час заповнення тут показується лише попередній код.",
-serverCodeNote:"Під час публікації PETS & DOGUE безпечно створить остаточний унікальний код на сервері.",
+offlineText:"Підписник відкриває ваучер PETS & DOGUE і показує код / штрихкод.",
 partnerUrl:"Сайт / сторінка замовлення партнера",
-offlineInstructions:"Інструкція для ваших співробітників",
-offerImage:"Фото пропозиції",
-uploadImage:"ЗАВАНТАЖИТИ ФОТО",
-imageReady:"ФОТО ГОТОВЕ",
-publishOffer:"ОПУБЛІКУВАТИ",
-publishingOffer:"ПУБЛІКУЄМО…",
-saveDraft:"ЗБЕРЕГТИ ЧЕРНЕТКУ",
-preview:"ПЕРЕДПЕРЕГЛЯД",
-validUntil:"Діє до",
-oneUseShort:"1 раз",
-subscriberBadge:"ПІДПИСНИКАМ",
-pending:"НА ПЕРЕВІРЦІ",
-saved:"Збережено",
-offerPublished:"Пропозицію надіслано. PETS & DOGUE створив остаточний промокод, пропозиція очікує перевірки.",
-offerPublishError:"Не вдалося надіслати пропозицію. Спробуйте ще раз.",
-registerTitle:"Створіть акаунт партнера",
-registerText:"Один акаунт дозволяє створювати пропозиції Club та купувати рекламу PETS & DOGUE.",
-businessName:"Назва бізнесу",
-businessType:"Тип бізнесу",
-contactName:"Контактна особа",
-businessEmail:"Email бізнесу",
-businessCountry:"Країна",
-businessWebsite:"Сайт",
-businessAddress:"Адреса бізнесу",
-register:"СТВОРИТИ АКАУНТ ПАРТНЕРА",
-categories:["Ветеринарія","Грумінг","Корм","Зоомагазини","Готелі та подорожі","Pet-friendly кафе","Дресирування","Аксесуари","Страхування","Фотографія","Розваги","Інше"]
+onlineFlowHint:"Після натискання кнопки клієнт перейде на цей сайт.",
+publishOffer:"ПЕРЕВІРИТИ ПРОПОЗИЦІЮ",
+useOffer:"СКОРИСТАТИСЯ ПРОПОЗИЦІЄЮ",
+showVoucher:"ПОКАЗАТИ ВАУЧЕР",
+reviewTitle:"Перевірте пропозицію",
+reviewText:"Перевірте дані перед відправленням пропозиції на модерацію PETS & DOGUE.",
+reviewBusiness:"Компанія",
+reviewOffer:"Пропозиція",
+reviewDiscount:"Знижка",
+reviewDates:"Термін дії",
+reviewVouchers:"Доступні ваучери",
+reviewCommission:"Комісія",
+reviewType:"Використання",
+reviewWebsite:"Сайт",
+reviewSubmit:"ВІДПРАВИТИ НА ПЕРЕВІРКУ",
+reviewBack:"ПОВЕРНУТИСЯ ДО РЕДАГУВАННЯ",
+pending:"НА ПЕРЕВІРЦІ"
 };
+
+function localized(base,values){
+return {...base,...values};
+}
 
 const TRANSLATIONS={
 en:EN,
 ru:RU,
 uk:UK,
 
-fr:{...EN,club:"CLUB",heroTitle:"Développez votre activité avec PETS & DOGUE",heroOffer:"CRÉER UNE OFFRE",heroAd:"ACHETER UNE PUBLICITÉ",dashboardTitle:"Espace partenaire",logout:"SE DÉCONNECTER",allSubscribers:"Tous les abonnés PETS & DOGUE Club",allSubscribersText:"Aucune différence entre abonnement mensuel et annuel. Toute adhésion Club active donne accès à l'offre.",generatedCode:"Code promotionnel provisoire",regenerate:"NOUVEL APERÇU",serverCodeNote:"Lors de la publication, PETS & DOGUE génère le code final unique de manière sécurisée sur le serveur.",publishOffer:"PUBLIER L'OFFRE",publishingOffer:"PUBLICATION…",pending:"EN VÉRIFICATION",offerPublished:"Offre envoyée. PETS & DOGUE a généré le code final et l'offre est en attente de vérification.",offerPublishError:"Impossible d'envoyer l'offre.",categories:["Vétérinaire","Toilettage","Alimentation","Animaleries","Hôtels et voyages","Cafés pet-friendly","Éducation","Accessoires","Assurance","Photographie","Expériences","Autre"]},
+fr:localized(EN,{
+discount:"Réduction %",
+discountHint:"Choisissez une réduction de 1 % à 99 % ou saisissez-la manuellement.",
+totalLimit:"Vouchers disponibles",
+voucherHint:"Choisissez de 1 à 1 000 000 ou saisissez le nombre exact.",
+voucherTotal:"TOTAL",
+voucherUsed:"UTILISÉS",
+voucherRemaining:"RESTANTS",
+commission:"Commission PETS & DOGUE",
+commissionTitle:"Commission PETS & DOGUE fixe",
+commissionHint:"Le partenaire ne peut pas modifier ce taux. PETS & DOGUE le gère.",
+useOffer:"UTILISER L’OFFRE",
+showVoucher:"AFFICHER LE VOUCHER",
+reviewTitle:"Vérifiez votre offre",
+reviewText:"Vérifiez les informations avant l’envoi à PETS & DOGUE.",
+reviewSubmit:"ENVOYER POUR VÉRIFICATION",
+reviewBack:"MODIFIER",
+publishOffer:"VÉRIFIER L’OFFRE"
+}),
 
-de:{...EN,club:"CLUB",heroTitle:"Wachsen Sie mit PETS & DOGUE",heroOffer:"ANGEBOT ERSTELLEN",heroAd:"WERBUNG BUCHEN",dashboardTitle:"Partnerbereich",logout:"ABMELDEN",allSubscribers:"Alle PETS & DOGUE Club-Mitglieder",allSubscribersText:"Keine Trennung zwischen Monats- und Jahresabo. Jede aktive Club-Mitgliedschaft erhält Zugriff.",generatedCode:"Vorläufiger Gutscheincode",regenerate:"NEUE VORSCHAU",serverCodeNote:"Beim Veröffentlichen erzeugt PETS & DOGUE den endgültigen eindeutigen Code sicher auf dem Server.",publishOffer:"ANGEBOT VERÖFFENTLICHEN",publishingOffer:"WIRD VERÖFFENTLICHT…",pending:"IN PRÜFUNG",offerPublished:"Angebot gesendet. PETS & DOGUE hat den endgültigen Code erstellt; das Angebot wird geprüft.",offerPublishError:"Angebot konnte nicht gesendet werden.",categories:["Tierarzt","Grooming","Tierfutter","Tiergeschäfte","Hotels & Reisen","Pet-friendly Cafés","Training","Zubehör","Versicherung","Fotografie","Erlebnisse","Andere"]},
+de:localized(EN,{
+discount:"Rabatt %",
+discountHint:"Wählen Sie 1–99 % oder geben Sie den Wert manuell ein.",
+totalLimit:"Verfügbare Gutscheine",
+voucherHint:"Wählen Sie 1 bis 1.000.000 oder geben Sie die genaue Anzahl ein.",
+voucherTotal:"GESAMT",
+voucherUsed:"VERWENDET",
+voucherRemaining:"ÜBRIG",
+commission:"PETS & DOGUE Provision",
+commissionTitle:"Feste PETS & DOGUE Provision",
+commissionHint:"Der Partner kann diesen Prozentsatz nicht ändern.",
+useOffer:"ANGEBOT NUTZEN",
+showVoucher:"GUTSCHEIN ANZEIGEN",
+reviewTitle:"Angebot prüfen",
+reviewText:"Bitte prüfen Sie die Angaben vor der Übermittlung.",
+reviewSubmit:"ZUR PRÜFUNG SENDEN",
+reviewBack:"ZURÜCK ZUM BEARBEITEN",
+publishOffer:"ANGEBOT PRÜFEN"
+}),
 
-es:{...EN,club:"CLUB",heroTitle:"Haz crecer tu negocio con PETS & DOGUE",heroOffer:"CREAR OFERTA",heroAd:"COMPRAR PUBLICIDAD",dashboardTitle:"Panel de socio",logout:"SALIR",allSubscribers:"Todos los suscriptores de PETS & DOGUE Club",allSubscribersText:"Sin diferencia entre mensual y anual. Cualquier suscripción Club activa permite usar la oferta.",generatedCode:"Código promocional provisional",regenerate:"NUEVA VISTA",serverCodeNote:"Al publicar, PETS & DOGUE genera de forma segura el código final único en el servidor.",publishOffer:"PUBLICAR OFERTA",publishingOffer:"PUBLICANDO…",pending:"EN REVISIÓN",offerPublished:"Oferta enviada. PETS & DOGUE generó el código final y la oferta está pendiente de revisión.",offerPublishError:"No se pudo enviar la oferta.",categories:["Veterinaria","Peluquería","Alimentación","Tiendas de mascotas","Hoteles y viajes","Cafés pet-friendly","Adiestramiento","Accesorios","Seguro","Fotografía","Experiencias","Otro"]},
+es:localized(EN,{
+discount:"Descuento %",
+discountHint:"Elige del 1 % al 99 % o introduce el porcentaje manualmente.",
+totalLimit:"Vouchers disponibles",
+voucherHint:"Elige de 1 a 1.000.000 o introduce el número exacto.",
+voucherTotal:"TOTAL",
+voucherUsed:"USADOS",
+voucherRemaining:"RESTANTES",
+commission:"Comisión PETS & DOGUE",
+commissionTitle:"Comisión fija PETS & DOGUE",
+commissionHint:"El socio no puede modificar este porcentaje.",
+useOffer:"USAR OFERTA",
+showVoucher:"MOSTRAR VOUCHER",
+reviewTitle:"Revisa tu oferta",
+reviewText:"Comprueba los datos antes de enviarla a revisión.",
+reviewSubmit:"ENVIAR A REVISIÓN",
+reviewBack:"VOLVER A EDITAR",
+publishOffer:"REVISAR OFERTA"
+}),
 
-it:{...EN,club:"CLUB",heroTitle:"Fai crescere il tuo business con PETS & DOGUE",heroOffer:"CREA OFFERTA",heroAd:"ACQUISTA PUBBLICITÀ",dashboardTitle:"Area partner",logout:"ESCI",allSubscribers:"Tutti gli abbonati PETS & DOGUE Club",allSubscribersText:"Nessuna distinzione tra mensile e annuale. Qualsiasi abbonamento Club attivo sblocca l'offerta.",generatedCode:"Codice promozionale provvisorio",regenerate:"NUOVA ANTEPRIMA",serverCodeNote:"Alla pubblicazione PETS & DOGUE genera in modo sicuro il codice finale unico sul server.",publishOffer:"PUBBLICA OFFERTA",publishingOffer:"PUBBLICAZIONE…",pending:"IN REVISIONE",offerPublished:"Offerta inviata. PETS & DOGUE ha creato il codice finale; l'offerta è in revisione.",offerPublishError:"Impossibile inviare l'offerta.",categories:["Veterinaria","Toelettatura","Cibo per animali","Negozi per animali","Hotel e viaggi","Caffè pet-friendly","Addestramento","Accessori","Assicurazione","Fotografia","Esperienze","Altro"]},
+it:localized(EN,{
+discount:"Sconto %",
+discountHint:"Scegli dal 1% al 99% o inserisci manualmente la percentuale.",
+totalLimit:"Voucher disponibili",
+voucherHint:"Scegli da 1 a 1.000.000 o inserisci il numero esatto.",
+voucherTotal:"TOTALE",
+voucherUsed:"USATI",
+voucherRemaining:"RIMASTI",
+commission:"Commissione PETS & DOGUE",
+commissionTitle:"Commissione PETS & DOGUE fissa",
+commissionHint:"Il partner non può modificare questa percentuale.",
+useOffer:"USA OFFERTA",
+showVoucher:"MOSTRA VOUCHER",
+reviewTitle:"Controlla l’offerta",
+reviewText:"Controlla i dati prima di inviarla alla revisione.",
+reviewSubmit:"INVIA ALLA REVISIONE",
+reviewBack:"TORNA A MODIFICARE",
+publishOffer:"CONTROLLA OFFERTA"
+}),
 
-pt:{...EN,club:"CLUB",heroTitle:"Faça o seu negócio crescer com PETS & DOGUE",heroOffer:"CRIAR OFERTA",heroAd:"COMPRAR PUBLICIDADE",dashboardTitle:"Painel do parceiro",logout:"SAIR",allSubscribers:"Todos os assinantes PETS & DOGUE Club",allSubscribersText:"Sem divisão entre mensal e anual. Qualquer assinatura Club ativa dá acesso à oferta.",generatedCode:"Código promocional provisório",regenerate:"NOVA PRÉVIA",serverCodeNote:"Ao publicar, PETS & DOGUE gera com segurança o código final único no servidor.",publishOffer:"PUBLICAR OFERTA",publishingOffer:"PUBLICANDO…",pending:"EM ANÁLISE",offerPublished:"Oferta enviada. PETS & DOGUE gerou o código final e a oferta aguarda análise.",offerPublishError:"Não foi possível enviar a oferta.",categories:["Veterinária","Grooming","Alimentação","Lojas de animais","Hotéis e viagens","Cafés pet-friendly","Treino","Acessórios","Seguro","Fotografia","Experiências","Outro"]},
+pt:localized(EN,{
+discount:"Desconto %",
+discountHint:"Escolha de 1% a 99% ou introduza a percentagem manualmente.",
+totalLimit:"Vouchers disponíveis",
+voucherHint:"Escolha de 1 a 1.000.000 ou introduza o número exato.",
+voucherTotal:"TOTAL",
+voucherUsed:"USADOS",
+voucherRemaining:"RESTANTES",
+commission:"Comissão PETS & DOGUE",
+commissionTitle:"Comissão PETS & DOGUE fixa",
+commissionHint:"O parceiro não pode alterar esta percentagem.",
+useOffer:"USAR OFERTA",
+showVoucher:"MOSTRAR VOUCHER",
+reviewTitle:"Verifique a oferta",
+reviewText:"Confirme os dados antes de enviar para revisão.",
+reviewSubmit:"ENVIAR PARA REVISÃO",
+reviewBack:"VOLTAR A EDITAR",
+publishOffer:"VERIFICAR OFERTA"
+}),
 
-nl:{...EN,club:"CLUB",heroTitle:"Groei met PETS & DOGUE",heroOffer:"AANBIEDING MAKEN",heroAd:"ADVERTEREN",dashboardTitle:"Partnerdashboard",logout:"UITLOGGEN",allSubscribers:"Alle PETS & DOGUE Club-abonnees",allSubscribersText:"Geen verschil tussen maand- en jaarabonnement. Elk actief Club-abonnement geeft toegang.",generatedCode:"Voorlopige promotiecode",regenerate:"NIEUWE VOORBEELD",serverCodeNote:"Bij publicatie maakt PETS & DOGUE veilig de definitieve unieke code op de server.",publishOffer:"AANBIEDING PUBLICEREN",publishingOffer:"PUBLICEREN…",pending:"IN BEOORDELING",offerPublished:"Aanbieding verzonden. PETS & DOGUE heeft de definitieve code gemaakt; beoordeling volgt.",offerPublishError:"Aanbieding kon niet worden verzonden.",categories:["Dierenarts","Grooming","Dierenvoeding","Dierenwinkels","Hotels & reizen","Pet-friendly cafés","Training","Accessoires","Verzekering","Fotografie","Ervaringen","Overig"]},
+nl:localized(EN,{
+discount:"Korting %",
+discountHint:"Kies 1% tot 99% of voer het percentage handmatig in.",
+totalLimit:"Beschikbare vouchers",
+voucherHint:"Kies 1 tot 1.000.000 of voer het exacte aantal in.",
+voucherTotal:"TOTAAL",
+voucherUsed:"GEBRUIKT",
+voucherRemaining:"OVER",
+commission:"PETS & DOGUE commissie",
+commissionTitle:"Vaste PETS & DOGUE commissie",
+commissionHint:"De partner kan dit percentage niet wijzigen.",
+useOffer:"AANBIEDING GEBRUIKEN",
+showVoucher:"VOUCHER TONEN",
+reviewTitle:"Controleer je aanbieding",
+reviewText:"Controleer de gegevens voordat je ze verstuurt.",
+reviewSubmit:"TER BEOORDELING VERSTUREN",
+reviewBack:"TERUG NAAR BEWERKEN",
+publishOffer:"AANBIEDING CONTROLEREN"
+}),
 
-pl:{...EN,club:"CLUB",heroTitle:"Rozwijaj biznes z PETS & DOGUE",heroOffer:"UTWÓRZ OFERTĘ",heroAd:"KUP REKLAMĘ",dashboardTitle:"Panel partnera",logout:"WYLOGUJ",allSubscribers:"Wszyscy subskrybenci PETS & DOGUE Club",allSubscribersText:"Bez podziału na plan miesięczny i roczny. Każda aktywna subskrypcja Club daje dostęp.",generatedCode:"Wstępny kod promocyjny",regenerate:"NOWY PODGLĄD",serverCodeNote:"Po publikacji PETS & DOGUE bezpiecznie generuje ostateczny unikalny kod na serwerze.",publishOffer:"OPUBLIKUJ OFERTĘ",publishingOffer:"PUBLIKOWANIE…",pending:"W WERYFIKACJI",offerPublished:"Oferta wysłana. PETS & DOGUE utworzył kod końcowy; oferta oczekuje na weryfikację.",offerPublishError:"Nie udało się wysłać oferty.",categories:["Weterynaria","Grooming","Karma","Sklepy zoologiczne","Hotele i podróże","Kawiarnie pet-friendly","Szkolenie","Akcesoria","Ubezpieczenie","Fotografia","Atrakcje","Inne"]},
+pl:localized(EN,{
+discount:"Rabat %",
+discountHint:"Wybierz od 1% do 99% lub wpisz procent ręcznie.",
+totalLimit:"Dostępne vouchery",
+voucherHint:"Wybierz od 1 do 1 000 000 lub wpisz dokładną liczbę.",
+voucherTotal:"ŁĄCZNIE",
+voucherUsed:"UŻYTE",
+voucherRemaining:"POZOSTAŁO",
+commission:"Prowizja PETS & DOGUE",
+commissionTitle:"Stała prowizja PETS & DOGUE",
+commissionHint:"Partner nie może zmienić tej wartości.",
+useOffer:"SKORZYSTAJ Z OFERTY",
+showVoucher:"POKAŻ VOUCHER",
+reviewTitle:"Sprawdź ofertę",
+reviewText:"Sprawdź dane przed wysłaniem do weryfikacji.",
+reviewSubmit:"WYŚLIJ DO WERYFIKACJI",
+reviewBack:"WRÓĆ DO EDYCJI",
+publishOffer:"SPRAWDŹ OFERTĘ"
+}),
 
-cs:{...EN,club:"CLUB",heroTitle:"Rozvíjejte podnikání s PETS & DOGUE",heroOffer:"VYTVOŘIT NABÍDKU",heroAd:"KOUPIT REKLAMU",dashboardTitle:"Panel partnera",logout:"ODHLÁSIT",allSubscribers:"Všichni předplatitelé PETS & DOGUE Club",allSubscribersText:"Bez rozdělení na měsíční a roční. Každé aktivní členství Club nabídku odemkne.",generatedCode:"Náhled promo kódu",regenerate:"NOVÝ NÁHLED",serverCodeNote:"Při publikaci PETS & DOGUE bezpečně vytvoří konečný unikátní kód na serveru.",publishOffer:"PUBLIKOVAT NABÍDKU",publishingOffer:"PUBLIKUJE SE…",pending:"KE KONTROLE",offerPublished:"Nabídka odeslána. PETS & DOGUE vytvořil finální kód; nabídka čeká na kontrolu.",offerPublishError:"Nabídku se nepodařilo odeslat.",categories:["Veterina","Grooming","Krmivo","Zverimex","Hotely a cestování","Pet-friendly kavárny","Výcvik","Doplňky","Pojištění","Fotografie","Zážitky","Jiné"]},
+cs:localized(EN,{
+discount:"Sleva %",
+discountHint:"Vyberte 1–99 % nebo zadejte procento ručně.",
+totalLimit:"Dostupné vouchery",
+voucherHint:"Vyberte 1 až 1 000 000 nebo zadejte přesný počet.",
+voucherTotal:"CELKEM",
+voucherUsed:"POUŽITO",
+voucherRemaining:"ZBÝVÁ",
+commission:"Provize PETS & DOGUE",
+commissionTitle:"Pevná provize PETS & DOGUE",
+commissionHint:"Partner tuto sazbu nemůže měnit.",
+useOffer:"VYUŽÍT NABÍDKU",
+showVoucher:"ZOBRAZIT VOUCHER",
+reviewTitle:"Zkontrolujte nabídku",
+reviewText:"Před odesláním zkontrolujte údaje.",
+reviewSubmit:"ODESLAT KE KONTROLE",
+reviewBack:"ZPĚT K ÚPRAVÁM",
+publishOffer:"ZKONTROLOVAT NABÍDKU"
+}),
 
-sk:{...EN,club:"CLUB",heroTitle:"Rozvíjajte podnikanie s PETS & DOGUE",heroOffer:"VYTVORIŤ PONUKU",heroAd:"KÚPIŤ REKLAMU",dashboardTitle:"Panel partnera",logout:"ODHLÁSIŤ",allSubscribers:"Všetci predplatitelia PETS & DOGUE Club",allSubscribersText:"Bez rozdelenia na mesačné a ročné. Každé aktívne členstvo Club ponuku odomkne.",generatedCode:"Náhľad promo kódu",regenerate:"NOVÝ NÁHĽAD",serverCodeNote:"Pri publikovaní PETS & DOGUE bezpečne vytvorí konečný unikátny kód na serveri.",publishOffer:"PUBLIKOVAŤ PONUKU",publishingOffer:"PUBLIKUJE SA…",pending:"NA KONTROLE",offerPublished:"Ponuka odoslaná. PETS & DOGUE vytvoril finálny kód; ponuka čaká na kontrolu.",offerPublishError:"Ponuku sa nepodarilo odoslať.",categories:["Veterina","Grooming","Krmivo","Chovateľské potreby","Hotely a cestovanie","Pet-friendly kaviarne","Výcvik","Doplnky","Poistenie","Fotografia","Zážitky","Iné"]},
+sk:localized(EN,{
+discount:"Zľava %",
+discountHint:"Vyberte 1–99 % alebo zadajte percento ručne.",
+totalLimit:"Dostupné vouchery",
+voucherHint:"Vyberte 1 až 1 000 000 alebo zadajte presný počet.",
+voucherTotal:"CELKOM",
+voucherUsed:"POUŽITÉ",
+voucherRemaining:"ZOSTÁVA",
+commission:"Provízia PETS & DOGUE",
+commissionTitle:"Pevná provízia PETS & DOGUE",
+commissionHint:"Partner túto sadzbu nemôže meniť.",
+useOffer:"VYUŽIŤ PONUKU",
+showVoucher:"ZOBRAZIŤ VOUCHER",
+reviewTitle:"Skontrolujte ponuku",
+reviewText:"Pred odoslaním skontrolujte údaje.",
+reviewSubmit:"ODOSLAŤ NA KONTROLU",
+reviewBack:"SPÄŤ K ÚPRAVÁM",
+publishOffer:"SKONTROLOVAŤ PONUKU"
+}),
 
-hu:{...EN,club:"CLUB",heroTitle:"Növelje vállalkozását a PETS & DOGUE-val",heroOffer:"AJÁNLAT LÉTREHOZÁSA",heroAd:"HIRDETÉS VÁSÁRLÁSA",dashboardTitle:"Partner irányítópult",logout:"KIJELENTKEZÉS",allSubscribers:"Minden PETS & DOGUE Club előfizető",allSubscribersText:"Nincs különbség havi és éves előfizetés között. Minden aktív Club-előfizetés hozzáfér.",generatedCode:"Előzetes promóciós kód",regenerate:"ÚJ ELŐNÉZET",serverCodeNote:"Közzétételkor a PETS & DOGUE biztonságosan létrehozza a végleges egyedi kódot a szerveren.",publishOffer:"AJÁNLAT KÖZZÉTÉTELE",publishingOffer:"KÖZZÉTÉTEL…",pending:"ELLENŐRZÉS ALATT",offerPublished:"Az ajánlat elküldve. A PETS & DOGUE létrehozta a végleges kódot; ellenőrzésre vár.",offerPublishError:"Az ajánlat elküldése sikertelen.",categories:["Állatorvos","Kozmetika","Állateledel","Kisállatboltok","Szállodák és utazás","Pet-friendly kávézók","Képzés","Kiegészítők","Biztosítás","Fotózás","Élmények","Egyéb"]},
+hu:localized(EN,{
+discount:"Kedvezmény %",
+discountHint:"Válasszon 1–99% között, vagy írja be kézzel.",
+totalLimit:"Elérhető kuponok",
+voucherHint:"Válasszon 1 és 1 000 000 között, vagy adja meg pontosan.",
+voucherTotal:"ÖSSZES",
+voucherUsed:"FELHASZNÁLT",
+voucherRemaining:"MARADT",
+commission:"PETS & DOGUE jutalék",
+commissionTitle:"Fix PETS & DOGUE jutalék",
+commissionHint:"A partner ezt az értéket nem módosíthatja.",
+useOffer:"AJÁNLAT FELHASZNÁLÁSA",
+showVoucher:"KUPON MEGJELENÍTÉSE",
+reviewTitle:"Ellenőrizze az ajánlatot",
+reviewText:"Küldés előtt ellenőrizze az adatokat.",
+reviewSubmit:"KÜLDÉS ELLENŐRZÉSRE",
+reviewBack:"VISSZA A SZERKESZTÉSHEZ",
+publishOffer:"AJÁNLAT ELLENŐRZÉSE"
+}),
 
-ro:{...EN,club:"CLUB",heroTitle:"Dezvoltați afacerea cu PETS & DOGUE",heroOffer:"CREAȚI OFERTĂ",heroAd:"CUMPĂRAȚI PUBLICITATE",dashboardTitle:"Panou partener",logout:"IEȘIRE",allSubscribers:"Toți abonații PETS & DOGUE Club",allSubscribersText:"Fără diferență între abonamentul lunar și anual. Orice abonament Club activ oferă acces.",generatedCode:"Cod promoțional provizoriu",regenerate:"PREVIZUALIZARE NOUĂ",serverCodeNote:"La publicare, PETS & DOGUE generează în siguranță codul final unic pe server.",publishOffer:"PUBLICĂ OFERTA",publishingOffer:"SE PUBLICĂ…",pending:"ÎN VERIFICARE",offerPublished:"Oferta a fost trimisă. PETS & DOGUE a generat codul final; oferta așteaptă verificarea.",offerPublishError:"Oferta nu a putut fi trimisă.",categories:["Veterinar","Grooming","Hrană","Magazine animale","Hoteluri și călătorii","Cafenele pet-friendly","Dresaj","Accesorii","Asigurare","Fotografie","Experiențe","Altele"]},
+ro:localized(EN,{
+discount:"Reducere %",
+discountHint:"Alegeți între 1% și 99% sau introduceți manual procentul.",
+totalLimit:"Vouchere disponibile",
+voucherHint:"Alegeți între 1 și 1.000.000 sau introduceți numărul exact.",
+voucherTotal:"TOTAL",
+voucherUsed:"FOLOSITE",
+voucherRemaining:"RĂMASE",
+commission:"Comision PETS & DOGUE",
+commissionTitle:"Comision PETS & DOGUE fix",
+commissionHint:"Partenerul nu poate modifica acest procent.",
+useOffer:"FOLOSEȘTE OFERTA",
+showVoucher:"ARATĂ VOUCHERUL",
+reviewTitle:"Verificați oferta",
+reviewText:"Verificați datele înainte de trimitere.",
+reviewSubmit:"TRIMITE LA VERIFICARE",
+reviewBack:"ÎNAPOI LA EDITARE",
+publishOffer:"VERIFICĂ OFERTA"
+}),
 
-bg:{...EN,club:"CLUB",heroTitle:"Развивайте бизнеса си с PETS & DOGUE",heroOffer:"СЪЗДАЙ ОФЕРТА",heroAd:"КУПИ РЕКЛАМА",dashboardTitle:"Партньорски панел",logout:"ИЗХОД",allSubscribers:"Всички абонати на PETS & DOGUE Club",allSubscribersText:"Без разделяне на месечни и годишни абонаменти. Всеки активен Club абонамент дава достъп.",generatedCode:"Предварителен промокод",regenerate:"НОВ ПРЕГЛЕД",serverCodeNote:"При публикуване PETS & DOGUE генерира сигурно окончателния уникален код на сървъра.",publishOffer:"ПУБЛИКУВАЙ ОФЕРТА",publishingOffer:"ПУБЛИКУВАНЕ…",pending:"ЗА ПРОВЕРКА",offerPublished:"Офертата е изпратена. PETS & DOGUE създаде финалния код; офертата чака проверка.",offerPublishError:"Офертата не можа да бъде изпратена.",categories:["Ветеринария","Груминг","Храна","Зоомагазини","Хотели и пътуване","Pet-friendly кафенета","Обучение","Аксесоари","Застраховане","Фотография","Преживявания","Друго"]},
+bg:localized(EN,{
+discount:"Отстъпка %",
+discountHint:"Изберете от 1% до 99% или въведете процента ръчно.",
+totalLimit:"Налични ваучери",
+voucherHint:"Изберете от 1 до 1 000 000 или въведете точния брой.",
+voucherTotal:"ОБЩО",
+voucherUsed:"ИЗПОЛЗВАНИ",
+voucherRemaining:"ОСТАВАТ",
+commission:"Комисиона PETS & DOGUE",
+commissionTitle:"Фиксирана комисиона PETS & DOGUE",
+commissionHint:"Партньорът не може да променя процента.",
+useOffer:"ИЗПОЛЗВАЙ ОФЕРТАТА",
+showVoucher:"ПОКАЖИ ВАУЧЕР",
+reviewTitle:"Проверете офертата",
+reviewText:"Проверете данните преди изпращане.",
+reviewSubmit:"ИЗПРАТИ ЗА ПРОВЕРКА",
+reviewBack:"ОБРАТНО КЪМ РЕДАКЦИЯ",
+publishOffer:"ПРОВЕРИ ОФЕРТАТА"
+}),
 
-el:{...EN,club:"CLUB",heroTitle:"Αναπτύξτε την επιχείρησή σας με το PETS & DOGUE",heroOffer:"ΔΗΜΙΟΥΡΓΙΑ ΠΡΟΣΦΟΡΑΣ",heroAd:"ΑΓΟΡΑ ΔΙΑΦΗΜΙΣΗΣ",dashboardTitle:"Πίνακας συνεργάτη",logout:"ΑΠΟΣΥΝΔΕΣΗ",allSubscribers:"Όλοι οι συνδρομητές PETS & DOGUE Club",allSubscribersText:"Χωρίς διάκριση μηνιαίας ή ετήσιας συνδρομής. Κάθε ενεργή συνδρομή Club δίνει πρόσβαση.",generatedCode:"Προσωρινός κωδικός προσφοράς",regenerate:"ΝΕΑ ΠΡΟΕΠΙΣΚΟΠΗΣΗ",serverCodeNote:"Κατά τη δημοσίευση το PETS & DOGUE δημιουργεί με ασφάλεια τον τελικό μοναδικό κωδικό στον διακομιστή.",publishOffer:"ΔΗΜΟΣΙΕΥΣΗ ΠΡΟΣΦΟΡΑΣ",publishingOffer:"ΔΗΜΟΣΙΕΥΣΗ…",pending:"ΥΠΟ ΕΛΕΓΧΟ",offerPublished:"Η προσφορά στάλθηκε. Το PETS & DOGUE δημιούργησε τον τελικό κωδικό και αναμένει έλεγχο.",offerPublishError:"Δεν ήταν δυνατή η αποστολή της προσφοράς.",categories:["Κτηνίατρος","Grooming","Τροφή","Καταστήματα κατοικιδίων","Ξενοδοχεία και ταξίδια","Pet-friendly καφέ","Εκπαίδευση","Αξεσουάρ","Ασφάλιση","Φωτογραφία","Εμπειρίες","Άλλο"]},
+el:localized(EN,{
+discount:"Έκπτωση %",
+discountHint:"Επιλέξτε 1%–99% ή πληκτρολογήστε το ποσοστό.",
+totalLimit:"Διαθέσιμα κουπόνια",
+voucherHint:"Επιλέξτε 1 έως 1.000.000 ή εισαγάγετε ακριβή αριθμό.",
+voucherTotal:"ΣΥΝΟΛΟ",
+voucherUsed:"ΧΡΗΣΙΜΟΠΟΙΗΘΗΚΑΝ",
+voucherRemaining:"ΑΠΟΜΕΝΟΥΝ",
+commission:"Προμήθεια PETS & DOGUE",
+commissionTitle:"Σταθερή προμήθεια PETS & DOGUE",
+commissionHint:"Ο συνεργάτης δεν μπορεί να αλλάξει το ποσοστό.",
+useOffer:"ΧΡΗΣΗ ΠΡΟΣΦΟΡΑΣ",
+showVoucher:"ΠΡΟΒΟΛΗ ΚΟΥΠΟΝΙΟΥ",
+reviewTitle:"Ελέγξτε την προσφορά",
+reviewText:"Ελέγξτε τα στοιχεία πριν από την αποστολή.",
+reviewSubmit:"ΑΠΟΣΤΟΛΗ ΓΙΑ ΕΛΕΓΧΟ",
+reviewBack:"ΠΙΣΩ ΣΤΗΝ ΕΠΕΞΕΡΓΑΣΙΑ",
+publishOffer:"ΕΛΕΓΧΟΣ ΠΡΟΣΦΟΡΑΣ"
+}),
 
-sv:{...EN,club:"CLUB",heroTitle:"Väx med PETS & DOGUE",heroOffer:"SKAPA ERBJUDANDE",heroAd:"KÖP ANNONS",dashboardTitle:"Partnerpanel",logout:"LOGGA UT",allSubscribers:"Alla PETS & DOGUE Club-prenumeranter",allSubscribersText:"Ingen skillnad mellan månads- och årsabonnemang. Alla aktiva Club-abonnemang ger tillgång.",generatedCode:"Preliminär kampanjkod",regenerate:"NY FÖRHANDSVISNING",serverCodeNote:"Vid publicering skapar PETS & DOGUE den slutliga unika koden säkert på servern.",publishOffer:"PUBLICERA ERBJUDANDE",publishingOffer:"PUBLICERAR…",pending:"UNDER GRANSKNING",offerPublished:"Erbjudandet skickades. PETS & DOGUE skapade slutkoden; erbjudandet granskas.",offerPublishError:"Erbjudandet kunde inte skickas.",categories:["Veterinär","Grooming","Djurfoder","Djuraffärer","Hotell och resor","Pet-friendly caféer","Träning","Tillbehör","Försäkring","Fotografi","Upplevelser","Annat"]},
+sv:localized(EN,{
+discount:"Rabatt %",
+discountHint:"Välj 1–99% eller skriv in procenten manuellt.",
+totalLimit:"Tillgängliga vouchers",
+voucherHint:"Välj 1 till 1 000 000 eller ange exakt antal.",
+voucherTotal:"TOTALT",
+voucherUsed:"ANVÄNDA",
+voucherRemaining:"KVAR",
+commission:"PETS & DOGUE provision",
+commissionTitle:"Fast PETS & DOGUE provision",
+commissionHint:"Partnern kan inte ändra procentsatsen.",
+useOffer:"ANVÄND ERBJUDANDE",
+showVoucher:"VISA VOUCHER",
+reviewTitle:"Kontrollera erbjudandet",
+reviewText:"Kontrollera uppgifterna före inskick.",
+reviewSubmit:"SKICKA FÖR GRANSKNING",
+reviewBack:"TILLBAKA TILL REDIGERING",
+publishOffer:"KONTROLLERA ERBJUDANDE"
+}),
 
-da:{...EN,club:"CLUB",heroTitle:"Voks med PETS & DOGUE",heroOffer:"OPRET TILBUD",heroAd:"KØB ANNONCE",dashboardTitle:"Partnerpanel",logout:"LOG UD",allSubscribers:"Alle PETS & DOGUE Club-abonnenter",allSubscribersText:"Ingen forskel mellem måneds- og årsabonnement. Alle aktive Club-abonnementer giver adgang.",generatedCode:"Foreløbig kampagnekode",regenerate:"NY FORHÅNDSVISNING",serverCodeNote:"Ved publicering opretter PETS & DOGUE sikkert den endelige unikke kode på serveren.",publishOffer:"PUBLICER TILBUD",publishingOffer:"PUBLICERER…",pending:"TIL GENNEMGANG",offerPublished:"Tilbuddet blev sendt. PETS & DOGUE oprettede slutkoden; tilbuddet afventer gennemgang.",offerPublishError:"Tilbuddet kunne ikke sendes.",categories:["Dyrlæge","Grooming","Dyrefoder","Dyrebutikker","Hoteller og rejser","Pet-friendly caféer","Træning","Tilbehør","Forsikring","Fotografi","Oplevelser","Andet"]},
+da:localized(EN,{
+discount:"Rabat %",
+discountHint:"Vælg 1–99% eller indtast procenten manuelt.",
+totalLimit:"Tilgængelige vouchers",
+voucherHint:"Vælg 1 til 1.000.000 eller indtast det præcise antal.",
+voucherTotal:"I ALT",
+voucherUsed:"BRUGT",
+voucherRemaining:"TILBAGE",
+commission:"PETS & DOGUE provision",
+commissionTitle:"Fast PETS & DOGUE provision",
+commissionHint:"Partneren kan ikke ændre satsen.",
+useOffer:"BRUG TILBUD",
+showVoucher:"VIS VOUCHER",
+reviewTitle:"Kontroller tilbuddet",
+reviewText:"Kontroller oplysningerne før indsendelse.",
+reviewSubmit:"SEND TIL GENNEMGANG",
+reviewBack:"TILBAGE TIL REDIGERING",
+publishOffer:"KONTROLLER TILBUD"
+}),
 
-no:{...EN,club:"CLUB",heroTitle:"Voks med PETS & DOGUE",heroOffer:"OPPRETT TILBUD",heroAd:"KJØP ANNONSE",dashboardTitle:"Partnerpanel",logout:"LOGG UT",allSubscribers:"Alle PETS & DOGUE Club-abonnenter",allSubscribersText:"Ingen forskjell mellom måneds- og årsabonnement. Alle aktive Club-abonnement gir tilgang.",generatedCode:"Foreløpig kampanjekode",regenerate:"NY FORHÅNDSVISNING",serverCodeNote:"Ved publisering oppretter PETS & DOGUE den endelige unike koden sikkert på serveren.",publishOffer:"PUBLISER TILBUD",publishingOffer:"PUBLISERER…",pending:"TIL VURDERING",offerPublished:"Tilbudet er sendt. PETS & DOGUE opprettet sluttkoden; tilbudet venter på vurdering.",offerPublishError:"Tilbudet kunne ikke sendes.",categories:["Veterinær","Grooming","Dyrefôr","Dyrebutikker","Hotell og reise","Pet-friendly kaféer","Trening","Tilbehør","Forsikring","Fotografi","Opplevelser","Annet"]},
+no:localized(EN,{
+discount:"Rabatt %",
+discountHint:"Velg 1–99% eller skriv inn prosenten manuelt.",
+totalLimit:"Tilgjengelige vouchers",
+voucherHint:"Velg 1 til 1 000 000 eller skriv inn nøyaktig antall.",
+voucherTotal:"TOTALT",
+voucherUsed:"BRUKT",
+voucherRemaining:"IGJEN",
+commission:"PETS & DOGUE provisjon",
+commissionTitle:"Fast PETS & DOGUE provisjon",
+commissionHint:"Partneren kan ikke endre satsen.",
+useOffer:"BRUK TILBUD",
+showVoucher:"VIS VOUCHER",
+reviewTitle:"Kontroller tilbudet",
+reviewText:"Kontroller opplysningene før innsending.",
+reviewSubmit:"SEND TIL VURDERING",
+reviewBack:"TILBAKE TIL REDIGERING",
+publishOffer:"KONTROLLER TILBUD"
+}),
 
-fi:{...EN,club:"CLUB",heroTitle:"Kasvata liiketoimintaasi PETS & DOGUE:n kanssa",heroOffer:"LUO TARJOUS",heroAd:"OSTA MAINOS",dashboardTitle:"Kumppanin hallinta",logout:"KIRJAUDU ULOS",allSubscribers:"Kaikki PETS & DOGUE Club -tilaajat",allSubscribersText:"Ei eroa kuukausi- ja vuositilauksen välillä. Kaikki aktiiviset Club-tilaukset saavat tarjouksen.",generatedCode:"Alustava tarjouskoodi",regenerate:"UUSI ESIKATSELU",serverCodeNote:"Julkaistaessa PETS & DOGUE luo lopullisen yksilöllisen koodin turvallisesti palvelimella.",publishOffer:"JULKAISE TARJOUS",publishingOffer:"JULKAISTAAN…",pending:"TARKISTETTAVANA",offerPublished:"Tarjous lähetettiin. PETS & DOGUE loi lopullisen koodin; tarjous odottaa tarkistusta.",offerPublishError:"Tarjousta ei voitu lähettää.",categories:["Eläinlääkäri","Trimmaus","Lemmikkiruoka","Lemmikkikaupat","Hotellit ja matkailu","Pet-friendly kahvilat","Koulutus","Tarvikkeet","Vakuutus","Valokuvaus","Elämykset","Muu"]},
+fi:localized(EN,{
+discount:"Alennus %",
+discountHint:"Valitse 1–99% tai syötä prosentti käsin.",
+totalLimit:"Saatavilla olevat voucherit",
+voucherHint:"Valitse 1–1 000 000 tai syötä tarkka määrä.",
+voucherTotal:"YHTEENSÄ",
+voucherUsed:"KÄYTETTY",
+voucherRemaining:"JÄLJELLÄ",
+commission:"PETS & DOGUE -komissio",
+commissionTitle:"Kiinteä PETS & DOGUE -komissio",
+commissionHint:"Kumppani ei voi muuttaa prosenttia.",
+useOffer:"KÄYTÄ TARJOUS",
+showVoucher:"NÄYTÄ VOUCHER",
+reviewTitle:"Tarkista tarjous",
+reviewText:"Tarkista tiedot ennen lähettämistä.",
+reviewSubmit:"LÄHETÄ TARKISTUKSEEN",
+reviewBack:"TAKAISIN MUOKKAUKSEEN",
+publishOffer:"TARKISTA TARJOUS"
+}),
 
-tr:{...EN,club:"CLUB",heroTitle:"PETS & DOGUE ile işinizi büyütün",heroOffer:"TEKLİF OLUŞTUR",heroAd:"REKLAM SATIN AL",dashboardTitle:"Partner paneli",logout:"ÇIKIŞ",allSubscribers:"Tüm PETS & DOGUE Club aboneleri",allSubscribersText:"Aylık ve yıllık abonelik ayrımı yoktur. Her aktif Club aboneliği teklife erişir.",generatedCode:"Ön promosyon kodu",regenerate:"YENİ ÖNİZLEME",serverCodeNote:"Yayın sırasında PETS & DOGUE nihai benzersiz kodu sunucuda güvenli biçimde oluşturur.",publishOffer:"TEKLİFİ YAYINLA",publishingOffer:"YAYINLANIYOR…",pending:"İNCELEMEDE",offerPublished:"Teklif gönderildi. PETS & DOGUE nihai kodu oluşturdu; teklif inceleme bekliyor.",offerPublishError:"Teklif gönderilemedi.",categories:["Veteriner","Bakım","Evcil hayvan maması","Pet shop","Otel ve seyahat","Pet-friendly kafeler","Eğitim","Aksesuar","Sigorta","Fotoğraf","Deneyimler","Diğer"]},
+tr:localized(EN,{
+discount:"İndirim %",
+discountHint:"%1–%99 seçin veya oranı elle girin.",
+totalLimit:"Mevcut kuponlar",
+voucherHint:"1 ile 1.000.000 arasında seçin veya tam sayıyı girin.",
+voucherTotal:"TOPLAM",
+voucherUsed:"KULLANILDI",
+voucherRemaining:"KALAN",
+commission:"PETS & DOGUE komisyonu",
+commissionTitle:"Sabit PETS & DOGUE komisyonu",
+commissionHint:"Partner bu oranı değiştiremez.",
+useOffer:"TEKLİFİ KULLAN",
+showVoucher:"KUPONU GÖSTER",
+reviewTitle:"Teklifi kontrol edin",
+reviewText:"Göndermeden önce bilgileri kontrol edin.",
+reviewSubmit:"İNCELEMEYE GÖNDER",
+reviewBack:"DÜZENLEMEYE DÖN",
+publishOffer:"TEKLİFİ KONTROL ET"
+}),
 
-ar:{...EN,club:"النادي",heroTitle:"نمِّ أعمالك مع PETS & DOGUE",heroOffer:"إنشاء عرض",heroAd:"شراء إعلان",dashboardTitle:"لوحة الشريك",logout:"تسجيل الخروج",allSubscribers:"جميع مشتركي PETS & DOGUE Club",allSubscribersText:"لا يوجد فرق بين الاشتراك الشهري والسنوي. أي اشتراك Club نشط يتيح العرض.",generatedCode:"رمز ترويجي تجريبي",regenerate:"معاينة جديدة",serverCodeNote:"عند النشر، ينشئ PETS & DOGUE الرمز النهائي الفريد بأمان على الخادم.",publishOffer:"نشر العرض",publishingOffer:"جارٍ النشر…",pending:"قيد المراجعة",offerPublished:"تم إرسال العرض. أنشأ PETS & DOGUE الرمز النهائي والعرض قيد المراجعة.",offerPublishError:"تعذر إرسال العرض.",categories:["بيطري","العناية","طعام الحيوانات","متاجر الحيوانات","الفنادق والسفر","مقاهي Pet-friendly","التدريب","الإكسسوارات","التأمين","التصوير","تجارب","أخرى"]},
+ar:localized(EN,{
+discount:"الخصم %",
+discountHint:"اختر خصمًا من 1% إلى 99% أو أدخل النسبة يدويًا.",
+totalLimit:"القسائم المتاحة",
+voucherHint:"اختر من 1 إلى 1,000,000 أو أدخل العدد بدقة.",
+voucherTotal:"الإجمالي",
+voucherUsed:"المستخدم",
+voucherRemaining:"المتبقي",
+commission:"عمولة PETS & DOGUE",
+commissionTitle:"عمولة PETS & DOGUE ثابتة",
+commissionHint:"لا يمكن للشريك تغيير هذه النسبة.",
+useOffer:"استخدام العرض",
+showVoucher:"عرض القسيمة",
+reviewTitle:"راجع العرض",
+reviewText:"تحقق من البيانات قبل إرسال العرض للمراجعة.",
+reviewSubmit:"إرسال للمراجعة",
+reviewBack:"العودة للتعديل",
+publishOffer:"مراجعة العرض"
+}),
 
-hi:{...EN,club:"CLUB",heroTitle:"PETS & DOGUE के साथ अपना व्यवसाय बढ़ाएँ",heroOffer:"ऑफ़र बनाएँ",heroAd:"विज्ञापन खरीदें",dashboardTitle:"पार्टनर डैशबोर्ड",logout:"लॉग आउट",allSubscribers:"सभी PETS & DOGUE Club सदस्य",allSubscribersText:"मासिक और वार्षिक सदस्यता में कोई अंतर नहीं। कोई भी सक्रिय Club सदस्यता ऑफ़र खोलती है।",generatedCode:"प्रारंभिक प्रोमो कोड",regenerate:"नई झलक",serverCodeNote:"प्रकाशित करते समय PETS & DOGUE अंतिम अद्वितीय कोड सुरक्षित रूप से सर्वर पर बनाता है।",publishOffer:"ऑफ़र प्रकाशित करें",publishingOffer:"प्रकाशित हो रहा है…",pending:"समीक्षा में",offerPublished:"ऑफ़र भेज दिया गया। PETS & DOGUE ने अंतिम कोड बनाया और ऑफ़र समीक्षा में है।",offerPublishError:"ऑफ़र भेजा नहीं जा सका।",categories:["पशु चिकित्सक","ग्रूमिंग","पालतू भोजन","पालतू दुकानें","होटल और यात्रा","Pet-friendly कैफ़े","ट्रेनिंग","एक्सेसरीज़","बीमा","फोटोग्राफी","अनुभव","अन्य"]}
+hi:localized(EN,{
+discount:"छूट %",
+discountHint:"1% से 99% चुनें या प्रतिशत स्वयं दर्ज करें।",
+totalLimit:"उपलब्ध वाउचर",
+voucherHint:"1 से 1,000,000 चुनें या सटीक संख्या दर्ज करें।",
+voucherTotal:"कुल",
+voucherUsed:"उपयोग",
+voucherRemaining:"बाकी",
+commission:"PETS & DOGUE कमीशन",
+commissionTitle:"निश्चित PETS & DOGUE कमीशन",
+commissionHint:"पार्टनर इस प्रतिशत को बदल नहीं सकता।",
+useOffer:"ऑफ़र का उपयोग करें",
+showVoucher:"वाउचर दिखाएँ",
+reviewTitle:"ऑफ़र जाँचें",
+reviewText:"समीक्षा के लिए भेजने से पहले जानकारी जाँचें।",
+reviewSubmit:"समीक्षा के लिए भेजें",
+reviewBack:"संपादन पर वापस जाएँ",
+publishOffer:"ऑफ़र जाँचें"
+})
 };
 
 let currentLanguage="en";
@@ -2856,6 +3617,16 @@ el.value=previous;
 }
 }
 
+function clamp(value,min,max,fallback){
+const number=Math.round(Number(value));
+
+if(!Number.isFinite(number)){
+return fallback;
+}
+
+return Math.min(max,Math.max(min,number));
+}
+
 function generatePromoCode(){
 const alphabet="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 let random="";
@@ -2883,6 +3654,80 @@ currentPromoCode=generatePromoCode();
 
 text("generatedPromoCode",currentPromoCode);
 text("offerPreviewCode",currentPromoCode);
+}
+
+function discountPercent(){
+return clamp(
+$("offerDiscountNumber").value,
+1,
+99,
+20
+);
+}
+
+function voucherCount(){
+return clamp(
+$("offerTotalLimit").value,
+1,
+1000000,
+500
+);
+}
+
+function syncDiscount(source){
+let value;
+
+if(source==="range"){
+value=clamp(
+$("offerDiscountRange").value,
+1,
+99,
+20
+);
+}else{
+value=clamp(
+$("offerDiscountNumber").value,
+1,
+99,
+20
+);
+}
+
+$("offerDiscountRange").value=String(value);
+$("offerDiscountNumber").value=String(value);
+
+text("discountDisplay",`${value}%`);
+
+updateOfferPreview();
+}
+
+function syncVouchers(source){
+let value;
+
+if(source==="range"){
+value=clamp(
+$("voucherRange").value,
+1,
+1000000,
+500
+);
+}else{
+value=clamp(
+$("offerTotalLimit").value,
+1,
+1000000,
+500
+);
+}
+
+$("voucherRange").value=String(value);
+$("offerTotalLimit").value=String(value);
+
+const formatted=value.toLocaleString();
+
+text("voucherDisplay",formatted);
+text("voucherTotalValue",formatted);
+text("voucherRemainingValue",formatted);
 }
 
 function renderLanguage(code){
@@ -2934,13 +3779,23 @@ text("offerCategoryLabel",x.category);
 text("offerTitleLabel",x.offerTitle);
 text("offerDescriptionLabel",x.description);
 text("offerDiscountLabel",x.discount);
+text("discountHint",x.discountHint);
 text("offerSavingLabel",x.saving);
 text("offerSavingHint",x.savingHint);
+
 text("offerValidityTitle",x.validity);
 text("offerStartLabel",x.starts);
 text("offerEndLabel",x.ends);
 text("offerTotalLimitLabel",x.totalLimit);
+text("voucherHint",x.voucherHint);
+text("voucherTotalLabel",x.voucherTotal);
+text("voucherUsedLabel",x.voucherUsed);
+text("voucherRemainingLabel",x.voucherRemaining);
+
 text("offerCommissionLabel",x.commission);
+text("commissionTitle",x.commissionTitle);
+text("commissionHint",x.commissionHint);
+
 text("offerOneUseLabel",x.oneUse);
 text("offerAccessTitle",x.access);
 text("allSubscribersTitle",x.allSubscribers);
@@ -2955,6 +3810,7 @@ text("regenerateCodeButton",x.regenerate);
 text("generatedCodeHint",x.generatedHint);
 text("serverCodeNote",x.serverCodeNote);
 text("offerUrlLabel",x.partnerUrl);
+text("onlineFlowHint",x.onlineFlowHint);
 text("offlineInstructionsLabel",x.offlineInstructions);
 text("offerImageTitle",x.offerImage);
 text("offerImageButton",x.uploadImage);
@@ -2965,6 +3821,19 @@ text("publishOfferButton",offerPublishing?x.publishingOffer:x.publishOffer);
 text("saveOfferDraftButton",x.saveDraft);
 text("offerPreviewLabel",x.preview);
 text("offerPreviewPlan",x.subscriberBadge);
+
+text("reviewTitle",x.reviewTitle);
+text("reviewText",x.reviewText);
+text("reviewBusinessLabel",x.reviewBusiness);
+text("reviewOfferLabel",x.reviewOffer);
+text("reviewDiscountLabel",x.reviewDiscount);
+text("reviewDatesLabel",x.reviewDates);
+text("reviewVouchersLabel",x.reviewVouchers);
+text("reviewCommissionLabel",x.reviewCommission);
+text("reviewTypeLabel",x.reviewType);
+text("reviewWebsiteLabel",x.reviewWebsite);
+text("reviewSubmitButton",x.reviewSubmit);
+text("reviewBackButton",x.reviewBack);
 
 text("adPlan50Title",x.ad50);
 text("adPlan50Text",x.ad50Text);
@@ -3011,6 +3880,9 @@ fillSelect("offerCategory",x.categories);
 fillSelect("adCategory",x.categories);
 fillSelect("businessType",x.types);
 fillSelect("adPlacement",x.placements);
+
+syncDiscount("number");
+syncVouchers("number");
 
 ensurePromoCode();
 updateOfferPreview();
@@ -3136,6 +4008,13 @@ $("partnerUrlField").classList.toggle("hidden",offline);
 $("offlineInstructionsField").classList.toggle("hidden",!offline);
 
 $("offerUrl").required=!offline;
+
+text(
+"previewUseButton",
+offline
+?lang().showVoucher
+:lang().useOffer
+);
 }
 
 function updateOfferPreview(){
@@ -3147,7 +4026,7 @@ text("offerPreviewCategory",category);
 text("offerPreviewPlan",x.subscriberBadge);
 text("offerPreviewCompany",$("offerCompany").value.trim()||x.company);
 text("offerPreviewText",$("offerTitle").value.trim()||x.offerTitle);
-text("offerPreviewDiscount",$("offerDiscount").value.trim()||"-20%");
+text("offerPreviewDiscount",`-${discountPercent()}%`);
 
 const end=$("offerEnd").value;
 
@@ -3159,6 +4038,13 @@ end
 );
 
 text("offerPreviewOnce",x.oneUseShort);
+
+text(
+"previewUseButton",
+selectedRedeem()==="offline"
+?x.showVoucher
+:x.useOffer
+);
 
 ensurePromoCode();
 
@@ -3174,11 +4060,42 @@ $("offerPreviewImage").classList.add("hidden");
 "offerCompany",
 "offerCategory",
 "offerTitle",
-"offerDiscount",
 "offerEnd"
 ].forEach(id=>{
 $(id).addEventListener("input",updateOfferPreview);
 $(id).addEventListener("change",updateOfferPreview);
+});
+
+$("offerDiscountRange").addEventListener("input",()=>{
+syncDiscount("range");
+});
+
+$("offerDiscountNumber").addEventListener("input",()=>{
+const raw=$("offerDiscountNumber").value;
+
+if(raw==="") return;
+
+syncDiscount("number");
+});
+
+$("offerDiscountNumber").addEventListener("blur",()=>{
+syncDiscount("number");
+});
+
+$("voucherRange").addEventListener("input",()=>{
+syncVouchers("range");
+});
+
+$("offerTotalLimit").addEventListener("input",()=>{
+const raw=$("offerTotalLimit").value;
+
+if(raw==="") return;
+
+syncVouchers("number");
+});
+
+$("offerTotalLimit").addEventListener("blur",()=>{
+syncVouchers("number");
 });
 
 document.querySelectorAll('input[name="redeem"]').forEach(input=>{
@@ -3191,6 +4108,18 @@ updateOfferPreview();
 $("regenerateCodeButton").onclick=()=>{
 currentPromoCode=generatePromoCode();
 ensurePromoCode();
+};
+
+$("previewUseButton").onclick=event=>{
+event.preventDefault();
+
+if(selectedRedeem()==="online"){
+const url=$("offerUrl").value.trim();
+
+if(url){
+window.open(url,"_blank","noopener,noreferrer");
+}
+}
 };
 
 function compressImage(file,maxWidth=1400,quality=.82){
@@ -3264,12 +4193,13 @@ company:$("offerCompany").value.trim(),
 category:$("offerCategory").value,
 title:$("offerTitle").value.trim(),
 description:$("offerDescription").value.trim(),
-discount:$("offerDiscount").value.trim(),
+discount:`-${discountPercent()}%`,
+discountPercent:discountPercent(),
 saving:$("offerSaving").value.trim(),
 start:$("offerStart").value,
 end:$("offerEnd").value,
-limit:Number($("offerTotalLimit").value||0),
-commission:Number($("offerCommission").value||0),
+limit:voucherCount(),
+commission:FIXED_COMMISSION_PERCENT,
 oneUse:true,
 access:"all_subscribers",
 redeem:selectedRedeem(),
@@ -3324,6 +4254,7 @@ offerPublishing=value;
 $("publishOfferButton").disabled=value;
 $("saveOfferDraftButton").disabled=value;
 $("regenerateCodeButton").disabled=value;
+$("reviewSubmitButton").disabled=value;
 
 text(
 "publishOfferButton",
@@ -3331,7 +4262,61 @@ value
 ?lang().publishingOffer
 :lang().publishOffer
 );
+
+if(value){
+text("reviewSubmitButton",lang().publishingOffer);
+}else{
+text("reviewSubmitButton",lang().reviewSubmit);
 }
+}
+
+function openReview(){
+const x=lang();
+
+text("reviewBusiness",$("offerCompany").value.trim());
+text("reviewOffer",$("offerTitle").value.trim());
+text("reviewDiscount",`${discountPercent()}%`);
+
+text(
+"reviewDates",
+`${formatShortDate($("offerStart").value)} — ${formatShortDate($("offerEnd").value)}`
+);
+
+text(
+"reviewVouchers",
+voucherCount().toLocaleString()
+);
+
+text(
+"reviewType",
+selectedRedeem()==="online"
+?x.online
+:x.offline
+);
+
+text(
+"reviewWebsite",
+selectedRedeem()==="online"
+?$("offerUrl").value.trim()
+:"—"
+);
+
+$("reviewOverlay").classList.add("open");
+document.body.classList.add("locked");
+}
+
+function closeReview(){
+$("reviewOverlay").classList.remove("open");
+document.body.classList.remove("locked");
+}
+
+$("reviewBackButton").onclick=closeReview;
+
+$("reviewOverlay").addEventListener("click",event=>{
+if(event.target===$("reviewOverlay")){
+closeReview();
+}
+});
 
 async function submitPartnerOffer(){
 if(offerPublishing) return;
@@ -3367,15 +4352,15 @@ address:account.address||"",
 category:$("offerCategory").value,
 title:$("offerTitle").value.trim(),
 description:$("offerDescription").value.trim(),
-discount:$("offerDiscount").value.trim(),
+discount:`-${discountPercent()}%`,
 saving:$("offerSaving").value.trim(),
 redemptionType:selectedRedeem(),
 partnerUrl:$("offerUrl").value.trim(),
 offlineInstructions:$("offlineInstructions").value.trim(),
 start:$("offerStart").value,
 end:$("offerEnd").value,
-maxRedemptions:Number($("offerTotalLimit").value||500),
-commissionPercent:Number($("offerCommission").value||0),
+maxRedemptions:voucherCount(),
+commissionPercent:FIXED_COMMISSION_PERCENT,
 image:offerImageData
 })
 }
@@ -3420,6 +4405,8 @@ currentPromoCode=serverOffer.promoCode;
 
 ensurePromoCode();
 
+closeReview();
+
 showToast(lang().offerPublished);
 
 resetOfferForm();
@@ -3438,11 +4425,18 @@ setOfferPublishing(false);
 }
 }
 
-$("offerForm").onsubmit=async event=>{
+$("offerForm").onsubmit=event=>{
 event.preventDefault();
 
 if(!$("offerTerms").checked) return;
 
+syncDiscount("number");
+syncVouchers("number");
+
+openReview();
+};
+
+$("reviewSubmitButton").onclick=async()=>{
 await submitPartnerOffer();
 };
 
@@ -3461,8 +4455,12 @@ $("offerForm").reset();
 
 $("redeemOnline").checked=true;
 $("offerOneUse").checked=true;
+
+$("offerDiscountNumber").value="20";
+$("offerDiscountRange").value="20";
+
 $("offerTotalLimit").value="500";
-$("offerCommission").value="5";
+$("voucherRange").value="500";
 
 const account=partnerAccount();
 
@@ -3474,6 +4472,8 @@ currentPromoCode=generatePromoCode();
 $("offerImageReady").classList.add("hidden");
 
 setDefaultOfferDates();
+syncDiscount("number");
+syncVouchers("number");
 updateRedeemFields();
 updateOfferPreview();
 }
@@ -3973,7 +4973,13 @@ return;
 
 target.innerHTML=`
 <div class="records">
-${offers.map(offer=>`
+${offers.map(offer=>{
+
+const total=Number(offer.limit||0);
+const used=Number(offer.redemptions||0);
+const remaining=Math.max(0,total-used);
+
+return`
 <div class="record">
 
 ${recordImage(offer.image)}
@@ -3988,7 +4994,15 @@ ${escapeHtml(offer.title||offer.company)}
 ${escapeHtml(offer.discount)}
  · ${escapeHtml(formatShortDate(offer.end))}
  · ${escapeHtml(offer.code||"")}
- · ${escapeHtml(lang().subscriberBadge)}
+</div>
+
+<div class="record-meta">
+${escapeHtml(lang().voucherTotal)}:
+${escapeHtml(total.toLocaleString())}
+ · ${escapeHtml(lang().voucherUsed)}:
+${escapeHtml(used.toLocaleString())}
+ · ${escapeHtml(lang().voucherRemaining)}:
+${escapeHtml(remaining.toLocaleString())}
 </div>
 
 </div>
@@ -3998,7 +5012,8 @@ ${escapeHtml(statusLabel(offer.status))}
 </span>
 
 </div>
-`).join("")}
+`;
+}).join("")}
 </div>
 `;
 }
@@ -4192,6 +5207,8 @@ $("offerCompany").value=account.businessName||"";
 $("adCompany").value=account.businessName||"";
 }
 
+syncDiscount("number");
+syncVouchers("number");
 updateRedeemFields();
 updateOfferPreview();
 updateAdPreview();
