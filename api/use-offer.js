@@ -3,45 +3,59 @@
 /*
 =========================================================
 PETS & DOGUE
-TRACKED ONLINE OFFER REDIRECT
+SECURE ONLINE CLUB OFFER REDIRECT
 =========================================================
 
-Flow:
+Purpose:
 
-PETS & DOGUE Special Offer
-        ↓
-/api/use-offer?id=OFFER_ID
-        ↓
-Validate offer on server
-        ↓
-Register tracked action
-        ↓
-Redirect to partner website
+- Protect online Club offers
+- Read signed HttpOnly Club session cookie
+- Verify the real Stripe subscription on every use
+- Allow only ACTIVE / TRIALING Club members
+- Verify PETS & DOGUE Club metadata
+- Verify recurring Stripe plan
+- Load the offer privately from Supabase
+- Check that the offer is active and usable
+- Prevent a confirmed redeemed offer being used again
+- Track the click
+- Redirect to the partner website
 
 IMPORTANT:
 
-- Opening an offer card is NOT a redemption.
-- Clicking "Use Offer" is NOT a completed sale.
-- This endpoint only records customer interest / click.
-- A voucher becomes REDEEMED only after a later
-  confirmed purchase/redemption flow.
+A click is NOT a redemption.
+
+Online redemption must only be marked after a confirmed
+purchase / conversion from the partner or affiliate system.
 =========================================================
 */
 
-const SUPABASE_URL =
-  String(
-    process.env.SUPABASE_URL || ""
-  )
-    .trim()
-    .replace(/\/+$/, "");
+const crypto =
+  require("crypto");
 
-const SUPABASE_SECRET_KEY =
-  String(
-    process.env.SUPABASE_SECRET_KEY || ""
-  ).trim();
+const STRIPE_API_BASE =
+  "https://api.stripe.com/v1";
+
+const CLUB_COOKIE_NAME =
+  "pets_dogue_club_session";
+
+const COOKIE_VERSION =
+  "v1";
+
+const ACTIVE_MEMBERSHIP_STATUSES =
+  new Set([
+    "active",
+    "trialing"
+  ]);
+
+const VALID_PLANS =
+  new Set([
+    "free",
+    "monthly",
+    "annual"
+  ]);
 
 /* =========================================================
-   RESPONSE HELPERS
+   RESPONSE
 ========================================================= */
 
 function sendJson(
@@ -50,7 +64,8 @@ function sendJson(
   payload
 ) {
 
-  res.statusCode = status;
+  res.statusCode =
+    status;
 
   res.setHeader(
     "Content-Type",
@@ -62,27 +77,40 @@ function sendJson(
     "no-store, max-age=0"
   );
 
+  res.setHeader(
+    "Pragma",
+    "no-cache"
+  );
+
   res.end(
-    JSON.stringify(payload)
+    JSON.stringify(
+      payload
+    )
   );
 
 }
 
 function redirect(
   res,
-  url
+  location
 ) {
 
-  res.statusCode = 302;
-
-  res.setHeader(
-    "Location",
-    url
-  );
+  res.statusCode =
+    302;
 
   res.setHeader(
     "Cache-Control",
     "no-store, max-age=0"
+  );
+
+  res.setHeader(
+    "Pragma",
+    "no-cache"
+  );
+
+  res.setHeader(
+    "Location",
+    location
   );
 
   res.end();
@@ -90,23 +118,23 @@ function redirect(
 }
 
 /* =========================================================
-   CLEAN STRING
+   CLEAN VALUES
 ========================================================= */
 
 function cleanString(
   value,
-  maxLength = 1000
+  maxLength = 500
 ) {
 
   if (
-    value === null ||
-    value === undefined
+    typeof value !== "string"
   ) {
 
     return "";
+
   }
 
-  return String(value)
+  return value
     .trim()
     .slice(
       0,
@@ -115,9 +143,18 @@ function cleanString(
 
 }
 
-/* =========================================================
-   UUID
-========================================================= */
+function validEmail(
+  value
+) {
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(
+      String(
+        value || ""
+      ).trim()
+    );
+
+}
 
 function isUuid(
   value
@@ -125,92 +162,957 @@ function isUuid(
 
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
     .test(
-      String(value || "")
+      String(
+        value || ""
+      )
     );
 
 }
 
 /* =========================================================
-   SAFE PARTNER URL
+   COOKIE
 ========================================================= */
 
-function normalizePartnerUrl(
-  value
+function parseCookies(
+  req
 ) {
+
+  const cookieHeader =
+    cleanString(
+      req.headers?.cookie ||
+      "",
+      12000
+    );
+
+  const result =
+    {};
+
+  if (
+    !cookieHeader
+  ) {
+
+    return result;
+
+  }
+
+  cookieHeader
+    .split(";")
+    .forEach(
+      part => {
+
+        const index =
+          part.indexOf("=");
+
+        if (
+          index < 1
+        ) {
+
+          return;
+
+        }
+
+        const key =
+          part
+            .slice(
+              0,
+              index
+            )
+            .trim();
+
+        const value =
+          part
+            .slice(
+              index + 1
+            )
+            .trim();
+
+        if (
+          key
+        ) {
+
+          result[key] =
+            value;
+
+        }
+
+      }
+    );
+
+  return result;
+
+}
+
+/* =========================================================
+   COOKIE SECRET
+
+   MUST MATCH verify-club-checkout.js
+========================================================= */
+
+function getCookieSecret(
+  stripeSecretKey
+) {
+
+  const configured =
+    cleanString(
+      process.env
+        .PETS_DOGUE_SESSION_SECRET ||
+      "",
+      1000
+    );
+
+  if (
+    configured.length >= 32
+  ) {
+
+    return configured;
+
+  }
+
+  return crypto
+    .createHash(
+      "sha256"
+    )
+    .update(
+      `pets-dogue-club-cookie:${stripeSecretKey}`
+    )
+    .digest(
+      "hex"
+    );
+
+}
+
+/* =========================================================
+   COOKIE SIGNATURE
+========================================================= */
+
+function signCookiePayload(
+  encodedPayload,
+  secret
+) {
+
+  return crypto
+    .createHmac(
+      "sha256",
+      secret
+    )
+    .update(
+      encodedPayload
+    )
+    .digest(
+      "base64url"
+    );
+
+}
+
+function safeEqual(
+  first,
+  second
+) {
+
+  const a =
+    Buffer.from(
+      String(
+        first || ""
+      )
+    );
+
+  const b =
+    Buffer.from(
+      String(
+        second || ""
+      )
+    );
+
+  if (
+    a.length !==
+    b.length
+  ) {
+
+    return false;
+
+  }
+
+  return crypto
+    .timingSafeEqual(
+      a,
+      b
+    );
+
+}
+
+/* =========================================================
+   VERIFY CLUB COOKIE
+========================================================= */
+
+function verifyClubCookie(
+  req,
+  secret
+) {
+
+  const cookies =
+    parseCookies(
+      req
+    );
 
   const raw =
     cleanString(
-      value,
-      1500
+      cookies[
+        CLUB_COOKIE_NAME
+      ] || "",
+      12000
     );
 
   if (
     !raw
   ) {
 
-    return "";
+    return {
+      ok: false,
+      reason: "missing"
+    };
+
   }
+
+  const parts =
+    raw.split(".");
+
+  if (
+    parts.length !== 3
+  ) {
+
+    return {
+      ok: false,
+      reason: "invalid"
+    };
+
+  }
+
+  const [
+    version,
+    encodedPayload,
+    signature
+  ] =
+    parts;
+
+  if (
+    version !==
+    COOKIE_VERSION
+  ) {
+
+    return {
+      ok: false,
+      reason: "version"
+    };
+
+  }
+
+  const expectedSignature =
+    signCookiePayload(
+      encodedPayload,
+      secret
+    );
+
+  if (
+    !safeEqual(
+      signature,
+      expectedSignature
+    )
+  ) {
+
+    return {
+      ok: false,
+      reason: "signature"
+    };
+
+  }
+
+  let payload =
+    null;
 
   try {
 
-    const url =
-      new URL(
-        raw
+    payload =
+      JSON.parse(
+        Buffer
+          .from(
+            encodedPayload,
+            "base64url"
+          )
+          .toString(
+            "utf8"
+          )
       );
-
-    if (
-      url.protocol !== "https:" &&
-      url.protocol !== "http:"
-    ) {
-
-      return "";
-    }
-
-    return url
-      .toString();
 
   } catch {
 
-    return "";
+    return {
+      ok: false,
+      reason: "payload"
+    };
+
   }
+
+  if (
+    !payload ||
+    typeof payload !==
+      "object"
+  ) {
+
+    return {
+      ok: false,
+      reason: "payload"
+    };
+
+  }
+
+  const subscriptionId =
+    cleanString(
+      payload.sub || "",
+      300
+    );
+
+  const sessionId =
+    cleanString(
+      payload.sid || "",
+      300
+    );
+
+  const email =
+    cleanString(
+      payload.email || "",
+      254
+    ).toLowerCase();
+
+  const plan =
+    cleanString(
+      payload.plan || "",
+      30
+    ).toLowerCase();
+
+  const expiresAt =
+    Number(
+      payload.exp || 0
+    );
+
+  const issuedAt =
+    Number(
+      payload.iat || 0
+    );
+
+  if (
+    !subscriptionId.startsWith(
+      "sub_"
+    )
+  ) {
+
+    return {
+      ok: false,
+      reason: "subscription"
+    };
+
+  }
+
+  if (
+    !sessionId.startsWith(
+      "cs_"
+    )
+  ) {
+
+    return {
+      ok: false,
+      reason: "session"
+    };
+
+  }
+
+  if (
+    !validEmail(
+      email
+    )
+  ) {
+
+    return {
+      ok: false,
+      reason: "email"
+    };
+
+  }
+
+  if (
+    !VALID_PLANS.has(
+      plan
+    )
+  ) {
+
+    return {
+      ok: false,
+      reason: "plan"
+    };
+
+  }
+
+  const now =
+    Math.floor(
+      Date.now() /
+      1000
+    );
+
+  if (
+    !Number.isFinite(
+      expiresAt
+    ) ||
+    expiresAt <= now
+  ) {
+
+    return {
+      ok: false,
+      reason: "expired"
+    };
+
+  }
+
+  if (
+    !Number.isFinite(
+      issuedAt
+    ) ||
+    issuedAt <= 0 ||
+    issuedAt > now + 300
+  ) {
+
+    return {
+      ok: false,
+      reason: "issued_at"
+    };
+
+  }
+
+  return {
+
+    ok:
+      true,
+
+    payload: {
+
+      subscriptionId,
+
+      sessionId,
+
+      customerId:
+        cleanString(
+          payload.customer ||
+          "",
+          300
+        ),
+
+      email,
+
+      plan,
+
+      issuedAt,
+
+      expiresAt
+
+    }
+
+  };
 
 }
 
 /* =========================================================
-   SUPABASE REQUEST
+   CLEAR INVALID CLUB COOKIE
 ========================================================= */
+
+function clearClubCookie(
+  res
+) {
+
+  res.setHeader(
+    "Set-Cookie",
+    [
+      `${CLUB_COOKIE_NAME}=`,
+      "Path=/",
+      "Max-Age=0",
+      "HttpOnly",
+      "Secure",
+      "SameSite=Lax"
+    ].join("; ")
+  );
+
+}
+
+/* =========================================================
+   STRIPE
+========================================================= */
+
+async function stripeRequest(
+  path,
+  secretKey
+) {
+
+  const response =
+    await fetch(
+      `${STRIPE_API_BASE}${path}`,
+      {
+
+        method:
+          "GET",
+
+        headers: {
+
+          Authorization:
+            `Bearer ${secretKey}`
+
+        }
+
+      }
+    );
+
+  let data =
+    null;
+
+  try {
+
+    data =
+      await response.json();
+
+  } catch {
+
+    data =
+      null;
+
+  }
+
+  if (
+    !response.ok
+  ) {
+
+    const error =
+      new Error(
+        data?.error?.message ||
+        "Stripe request failed."
+      );
+
+    error.status =
+      response.status;
+
+    error.stripe =
+      data;
+
+    throw error;
+
+  }
+
+  return data;
+
+}
+
+/* =========================================================
+   PLAN
+========================================================= */
+
+function getExpectedPlan(
+  plan
+) {
+
+  if (
+    plan === "free"
+  ) {
+
+    return {
+
+      amount:
+        100,
+
+      interval:
+        "month"
+
+    };
+
+  }
+
+  if (
+    plan === "monthly"
+  ) {
+
+    return {
+
+      amount:
+        100,
+
+      interval:
+        "month"
+
+    };
+
+  }
+
+  if (
+    plan === "annual"
+  ) {
+
+    return {
+
+      amount:
+        1000,
+
+      interval:
+        "year"
+
+    };
+
+  }
+
+  return null;
+
+}
+
+/* =========================================================
+   VERIFY REAL STRIPE MEMBERSHIP
+========================================================= */
+
+async function verifyStripeMembership(
+  cookieMembership,
+  secretKey
+) {
+
+  const subscription =
+    await stripeRequest(
+      `/subscriptions/${encodeURIComponent(
+        cookieMembership.subscriptionId
+      )}?expand[]=items.data.price`,
+      secretKey
+    );
+
+  if (
+    !subscription ||
+    subscription.object !==
+      "subscription"
+  ) {
+
+    return {
+      active: false,
+      reason: "subscription_not_found"
+    };
+
+  }
+
+  const metadata =
+    subscription.metadata ||
+    {};
+
+  if (
+    metadata.source !==
+    "pets_dogue_club"
+  ) {
+
+    return {
+      active: false,
+      reason: "invalid_source"
+    };
+
+  }
+
+  if (
+    metadata.access_scope !==
+    "all_club_benefits"
+  ) {
+
+    return {
+      active: false,
+      reason: "invalid_access"
+    };
+
+  }
+
+  if (
+    metadata.special_offers_access !==
+    "all"
+  ) {
+
+    return {
+      active: false,
+      reason: "no_special_offers_access"
+    };
+
+  }
+
+  const status =
+    cleanString(
+      subscription.status ||
+      "",
+      50
+    ).toLowerCase();
+
+  if (
+    !ACTIVE_MEMBERSHIP_STATUSES.has(
+      status
+    )
+  ) {
+
+    return {
+
+      active:
+        false,
+
+      reason:
+        "inactive",
+
+      status
+
+    };
+
+  }
+
+  const stripePlan =
+    cleanString(
+      metadata.membership_plan ||
+      "",
+      30
+    ).toLowerCase();
+
+  if (
+    !VALID_PLANS.has(
+      stripePlan
+    ) ||
+    stripePlan !==
+      cookieMembership.plan
+  ) {
+
+    return {
+      active: false,
+      reason: "plan_mismatch"
+    };
+
+  }
+
+  const stripeEmail =
+    cleanString(
+      metadata.member_email ||
+      "",
+      254
+    ).toLowerCase();
+
+  if (
+    !validEmail(
+      stripeEmail
+    ) ||
+    stripeEmail !==
+      cookieMembership.email
+  ) {
+
+    return {
+      active: false,
+      reason: "email_mismatch"
+    };
+
+  }
+
+  const expected =
+    getExpectedPlan(
+      stripePlan
+    );
+
+  if (
+    !expected
+  ) {
+
+    return {
+      active: false,
+      reason: "invalid_plan"
+    };
+
+  }
+
+  const price =
+    subscription
+      ?.items
+      ?.data
+      ?.[0]
+      ?.price;
+
+  if (
+    !price ||
+    price.object !==
+      "price"
+  ) {
+
+    return {
+      active: false,
+      reason: "price_missing"
+    };
+
+  }
+
+  if (
+    price.active !==
+    true
+  ) {
+
+    return {
+      active: false,
+      reason: "price_inactive"
+    };
+
+  }
+
+  if (
+    String(
+      price.currency ||
+      ""
+    ).toLowerCase() !==
+    "gbp"
+  ) {
+
+    return {
+      active: false,
+      reason: "currency"
+    };
+
+  }
+
+  if (
+    Number(
+      price.unit_amount
+    ) !==
+    expected.amount
+  ) {
+
+    return {
+      active: false,
+      reason: "amount"
+    };
+
+  }
+
+  if (
+    !price.recurring ||
+    price.recurring.interval !==
+      expected.interval ||
+    Number(
+      price.recurring
+        .interval_count ||
+      1
+    ) !== 1
+  ) {
+
+    return {
+      active: false,
+      reason: "interval"
+    };
+
+  }
+
+  /*
+  Stripe status is still checked on every request.
+
+  cancel_at_period_end does NOT remove access immediately.
+  The customer keeps Club benefits until Stripe changes
+  the subscription status after the paid/trial period ends.
+  */
+
+  return {
+
+    active:
+      true,
+
+    subscription,
+
+    status,
+
+    plan:
+      stripePlan,
+
+    email:
+      stripeEmail
+
+  };
+
+}
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+function getSupabaseConfig() {
+
+  const url =
+    cleanString(
+      process.env
+        .SUPABASE_URL ||
+      "",
+      1000
+    )
+      .replace(
+        /\/+$/,
+        ""
+      );
+
+  const secret =
+    cleanString(
+      process.env
+        .SUPABASE_SECRET_KEY ||
+      "",
+      2000
+    );
+
+  return {
+    url,
+    secret
+  };
+
+}
 
 async function supabaseRequest(
   path,
   options = {}
 ) {
 
+  const {
+    url,
+    secret
+  } =
+    getSupabaseConfig();
+
+  if (
+    !url ||
+    !secret
+  ) {
+
+    throw new Error(
+      "Supabase is not configured."
+    );
+
+  }
+
+  const headers = {
+
+    apikey:
+      secret,
+
+    Authorization:
+      `Bearer ${secret}`,
+
+    "Content-Type":
+      "application/json",
+
+    ...(options.headers || {})
+
+  };
+
   const response =
     await fetch(
-      `${SUPABASE_URL}/rest/v1/${path}`,
+      `${url}/rest/v1/${path}`,
       {
 
         method:
           options.method ||
           "GET",
 
-        headers: {
-
-          apikey:
-            SUPABASE_SECRET_KEY,
-
-          Authorization:
-            `Bearer ${SUPABASE_SECRET_KEY}`,
-
-          "Content-Type":
-            "application/json",
-
-          ...(options.headers || {})
-
-        },
+        headers,
 
         body:
-          options.body
+          options.body !==
+          undefined
             ? JSON.stringify(
                 options.body
               )
@@ -222,7 +1124,8 @@ async function supabaseRequest(
   const raw =
     await response.text();
 
-  let data = null;
+  let data =
+    null;
 
   if (
     raw
@@ -274,26 +1177,50 @@ async function supabaseRequest(
    LOAD OFFER
 ========================================================= */
 
-async function loadOffer(
+async function getOffer(
   offerId
 ) {
 
-  const encodedId =
-    encodeURIComponent(
-      offerId
-    );
+  const select =
+    [
+      "id",
+      "business_name",
+      "title",
+      "promo_code",
+      "redemption_type",
+      "partner_url",
+      "starts_at",
+      "ends_at",
+      "max_redemptions",
+      "redemptions_count",
+      "one_use_per_subscriber",
+      "access_scope",
+      "status",
+      "location_scope",
+      "country_code",
+      "country_name",
+      "city",
+      "views_count"
+    ].join(",");
 
   const rows =
     await supabaseRequest(
-      `offers?id=eq.${encodedId}&select=id,status,starts_at,ends_at,redemption_type,partner_url,promo_code,views_count,max_redemptions,redemptions_count&limit=1`
+      `offers?id=eq.${encodeURIComponent(
+        offerId
+      )}&select=${encodeURIComponent(
+        select
+      )}&limit=1`
     );
 
   if (
-    !Array.isArray(rows) ||
+    !Array.isArray(
+      rows
+    ) ||
     !rows.length
   ) {
 
     return null;
+
   }
 
   return rows[0];
@@ -301,7 +1228,7 @@ async function loadOffer(
 }
 
 /* =========================================================
-   VALIDATE ACTIVE OFFER
+   OFFER VALIDATION
 ========================================================= */
 
 function validateOffer(
@@ -313,131 +1240,57 @@ function validateOffer(
   ) {
 
     return {
-      valid:
-        false,
-
-      reason:
-        "Offer not found."
+      ok: false,
+      status: 404,
+      error: "Offer not found."
     };
 
   }
 
   if (
-    offer.status !== "active"
+    offer.status !==
+    "active"
   ) {
 
     return {
-      valid:
-        false,
-
-      reason:
-        "Offer is not active."
+      ok: false,
+      status: 410,
+      error: "This offer is not active."
     };
 
   }
 
   if (
-    offer.redemption_type !== "online"
+    offer.access_scope !==
+    "all_subscribers"
   ) {
 
     return {
-      valid:
-        false,
-
-      reason:
-        "This is not an online offer."
-    };
-
-  }
-
-  const now =
-    Date.now();
-
-  const start =
-    new Date(
-      offer.starts_at
-    ).getTime();
-
-  const end =
-    new Date(
-      offer.ends_at
-    ).getTime();
-
-  if (
-    !Number.isFinite(start) ||
-    !Number.isFinite(end)
-  ) {
-
-    return {
-      valid:
-        false,
-
-      reason:
-        "Offer dates are invalid."
+      ok: false,
+      status: 403,
+      error: "This offer is not available to this membership."
     };
 
   }
 
   if (
-    now < start
+    offer.redemption_type !==
+    "online"
   ) {
 
     return {
-      valid:
-        false,
-
-      reason:
-        "Offer has not started yet."
-    };
-
-  }
-
-  if (
-    now > end
-  ) {
-
-    return {
-      valid:
-        false,
-
-      reason:
-        "Offer has expired."
-    };
-
-  }
-
-  const maximum =
-    offer.max_redemptions === null
-      ? null
-      : Number(
-          offer.max_redemptions
-        );
-
-  const redeemed =
-    Number(
-      offer.redemptions_count || 0
-    );
-
-  if (
-    maximum !== null &&
-    Number.isFinite(maximum) &&
-    maximum > 0 &&
-    redeemed >= maximum
-  ) {
-
-    return {
-      valid:
-        false,
-
-      reason:
-        "No vouchers remain."
+      ok: false,
+      status: 400,
+      error: "This is not an online offer."
     };
 
   }
 
   const partnerUrl =
-    normalizePartnerUrl(
-      offer.partner_url
+    cleanString(
+      offer.partner_url ||
+      "",
+      2000
     );
 
   if (
@@ -445,81 +1298,207 @@ function validateOffer(
   ) {
 
     return {
-      valid:
-        false,
+      ok: false,
+      status: 410,
+      error: "Partner website is unavailable."
+    };
 
-      reason:
-        "Partner website is unavailable."
+  }
+
+  try {
+
+    const url =
+      new URL(
+        partnerUrl
+      );
+
+    if (
+      url.protocol !== "https:" &&
+      url.protocol !== "http:"
+    ) {
+
+      throw new Error(
+        "Invalid protocol."
+      );
+
+    }
+
+  } catch {
+
+    return {
+      ok: false,
+      status: 400,
+      error: "Invalid partner website."
+    };
+
+  }
+
+  const now =
+    Date.now();
+
+  const startsAt =
+    new Date(
+      offer.starts_at
+    ).getTime();
+
+  const endsAt =
+    new Date(
+      offer.ends_at
+    ).getTime();
+
+  if (
+    !Number.isFinite(
+      startsAt
+    ) ||
+    !Number.isFinite(
+      endsAt
+    )
+  ) {
+
+    return {
+      ok: false,
+      status: 410,
+      error: "Offer dates are invalid."
+    };
+
+  }
+
+  if (
+    now < startsAt
+  ) {
+
+    return {
+      ok: false,
+      status: 403,
+      error: "This offer has not started yet."
+    };
+
+  }
+
+  if (
+    now > endsAt
+  ) {
+
+    return {
+      ok: false,
+      status: 410,
+      error: "This offer has expired."
+    };
+
+  }
+
+  const maximum =
+    offer.max_redemptions ===
+      null
+      ? null
+      : Number(
+          offer.max_redemptions
+        );
+
+  const redeemed =
+    Number(
+      offer.redemptions_count ||
+      0
+    );
+
+  if (
+    maximum !== null &&
+    Number.isFinite(
+      maximum
+    ) &&
+    maximum > 0 &&
+    redeemed >=
+      maximum
+  ) {
+
+    return {
+      ok: false,
+      status: 410,
+      error: "All vouchers for this offer have been used."
     };
 
   }
 
   return {
-    valid:
-      true,
-
-    partnerUrl
+    ok: true
   };
 
 }
 
 /* =========================================================
-   CLICK TRACKING
+   ALREADY REDEEMED
 ========================================================= */
 
-async function registerTrackedClick(
-  offer
+async function hasAlreadyRedeemed(
+  offerId,
+  email
 ) {
 
-  /*
-  Current database already has views_count.
+  const rows =
+    await supabaseRequest(
+      `offer_redemptions?offer_id=eq.${encodeURIComponent(
+        offerId
+      )}&subscriber_email=eq.${encodeURIComponent(
+        email
+      )}&status=eq.redeemed&select=id&limit=1`
+    );
 
-  For this stage we use it as the server-side count of
-  tracked "Use Offer" actions.
+  return (
+    Array.isArray(
+      rows
+    ) &&
+    rows.length > 0
+  );
 
-  This is NOT a redemption counter.
+}
 
-  redemptions_count stays unchanged.
+/* =========================================================
+   TRACK CLICK
+========================================================= */
 
-  Later we can split analytics into:
-  - card views
-  - clicks
-  - claims
-  - redeemed purchases
-  once the dedicated analytics table is added.
-  */
+async function incrementOfferClick(
+  offer
+) {
 
   const current =
     Math.max(
       0,
       Number(
-        offer.views_count || 0
+        offer.views_count ||
+        0
       )
     );
 
-  const next =
-    current + 1;
+  /*
+  A click is analytics only.
 
-  const encodedId =
-    encodeURIComponent(
-      offer.id
-    );
+  It must NOT:
+  - increment redemptions_count
+  - create redeemed status
+  - consume the member's voucher
+  */
 
   await supabaseRequest(
-    `offers?id=eq.${encodedId}`,
+    `offers?id=eq.${encodeURIComponent(
+      offer.id
+    )}`,
     {
 
       method:
         "PATCH",
 
       headers: {
+
         Prefer:
           "return=minimal"
+
       },
 
       body: {
+
         views_count:
-          next
+          current + 1
+
       }
 
     }
@@ -528,94 +1507,54 @@ async function registerTrackedClick(
 }
 
 /* =========================================================
-   ADD PETS & DOGUE PARAMETERS
+   BUILD TRACKED PARTNER URL
 ========================================================= */
 
-function buildDestinationUrl(
-  partnerUrl,
+function buildPartnerUrl(
   offer
 ) {
 
   const url =
     new URL(
-      partnerUrl
+      offer.partner_url
     );
 
   /*
-  These parameters let compatible partner websites
-  identify PETS & DOGUE traffic.
-
-  Existing partner parameters are preserved.
+  PETS & DOGUE attribution
   */
 
-  if (
-    !url.searchParams.has(
-      "utm_source"
-    )
-  ) {
+  url.searchParams.set(
+    "utm_source",
+    "petsanddogue"
+  );
 
-    url.searchParams.set(
-      "utm_source",
-      "petsanddogue"
-    );
+  url.searchParams.set(
+    "utm_medium",
+    "club_offer"
+  );
 
-  }
+  url.searchParams.set(
+    "utm_campaign",
+    `offer_${offer.id}`
+  );
 
-  if (
-    !url.searchParams.has(
-      "utm_medium"
-    )
-  ) {
-
-    url.searchParams.set(
-      "utm_medium",
-      "club_offer"
-    );
-
-  }
-
-  if (
-    !url.searchParams.has(
-      "utm_campaign"
-    )
-  ) {
-
-    url.searchParams.set(
-      "utm_campaign",
-      `offer_${offer.id}`
-    );
-
-  }
-
-  if (
-    !url.searchParams.has(
-      "pd_offer"
-    )
-  ) {
-
-    url.searchParams.set(
-      "pd_offer",
+  url.searchParams.set(
+    "pd_offer",
+    String(
       offer.id
-    );
-
-  }
+    )
+  );
 
   /*
-  Promo code is added as a URL parameter.
+  The promo code is intentionally NOT returned by
+  /api/get-active-offers.
 
-  A compatible partner checkout can automatically
-  read this value.
-
-  If the partner does not support automatic code
-  application, the member can still use the visible
-  PETS & DOGUE promo code.
+  It is only inserted here AFTER server-side membership
+  verification.
   */
 
   if (
-    offer.promo_code &&
-    !url.searchParams.has(
-      "pd_code"
-    )
+    offer.promo_code
   ) {
 
     url.searchParams.set(
@@ -627,8 +1566,7 @@ function buildDestinationUrl(
 
   }
 
-  return url
-    .toString();
+  return url.toString();
 
 }
 
@@ -642,8 +1580,13 @@ async function handler(
   res
 ) {
 
+  /* =======================================================
+     METHOD
+  ======================================================= */
+
   if (
-    req.method !== "GET"
+    req.method !==
+    "GET"
   ) {
 
     res.setHeader(
@@ -655,11 +1598,13 @@ async function handler(
       res,
       405,
       {
+
         ok:
           false,
 
         error:
           "Method not allowed."
+
       }
     );
 
@@ -669,9 +1614,50 @@ async function handler(
      CONFIG
   ======================================================= */
 
+  const stripeSecretKey =
+    cleanString(
+      process.env
+        .STRIPE_SECRET_KEY ||
+      "",
+      300
+    );
+
   if (
-    !SUPABASE_URL ||
-    !SUPABASE_SECRET_KEY
+    !stripeSecretKey
+  ) {
+
+    console.error(
+      "PETS & DOGUE use-offer: STRIPE_SECRET_KEY is missing."
+    );
+
+    return sendJson(
+      res,
+      500,
+      {
+
+        ok:
+          false,
+
+        error:
+          "Club verification is unavailable."
+
+      }
+    );
+
+  }
+
+  const {
+    url:
+      supabaseUrl,
+
+    secret:
+      supabaseSecret
+  } =
+    getSupabaseConfig();
+
+  if (
+    !supabaseUrl ||
+    !supabaseSecret
   ) {
 
     console.error(
@@ -682,11 +1668,13 @@ async function handler(
       res,
       500,
       {
+
         ok:
           false,
 
         error:
           "Offer service is unavailable."
+
       }
     );
 
@@ -698,12 +1686,12 @@ async function handler(
 
   const offerId =
     cleanString(
-      req.query?.id,
+      req.query?.id ||
+      "",
       100
     );
 
   if (
-    !offerId ||
     !isUuid(
       offerId
     )
@@ -713,95 +1701,166 @@ async function handler(
       res,
       400,
       {
+
         ok:
           false,
 
         error:
-          "Invalid offer."
+          "A valid offer ID is required."
+
       }
     );
 
   }
 
   /* =======================================================
-     LOAD + CHECK OFFER
+     VERIFY SIGNED CLUB COOKIE
   ======================================================= */
+
+  const cookieSecret =
+    getCookieSecret(
+      stripeSecretKey
+    );
+
+  const cookieResult =
+    verifyClubCookie(
+      req,
+      cookieSecret
+    );
+
+  if (
+    !cookieResult.ok
+  ) {
+
+    clearClubCookie(
+      res
+    );
+
+    return sendJson(
+      res,
+      401,
+      {
+
+        ok:
+          false,
+
+        membershipRequired:
+          true,
+
+        reason:
+          cookieResult.reason,
+
+        error:
+          "An active PETS & DOGUE Club membership is required."
+
+      }
+    );
+
+  }
+
+  /* =======================================================
+     VERIFY REAL STRIPE SUBSCRIPTION
+  ======================================================= */
+
+  let verifiedMembership;
 
   try {
 
-    const offer =
-      await loadOffer(
-        offerId
+    verifiedMembership =
+      await verifyStripeMembership(
+        cookieResult.payload,
+        stripeSecretKey
       );
-
-    const check =
-      validateOffer(
-        offer
-      );
-
-    if (
-      !check.valid
-    ) {
-
-      return sendJson(
-        res,
-        404,
-        {
-          ok:
-            false,
-
-          error:
-            check.reason
-        }
-      );
-
-    }
-
-    /* =====================================================
-       TRACK CLICK
-
-       Tracking failure should NOT prevent a legitimate
-       customer from reaching the partner.
-    ===================================================== */
-
-    try {
-
-      await registerTrackedClick(
-        offer
-      );
-
-    } catch (
-      trackingError
-    ) {
-
-      console.error(
-        "PETS & DOGUE offer tracking error:",
-        trackingError
-      );
-
-    }
-
-    /* =====================================================
-       REDIRECT
-    ===================================================== */
-
-    const destination =
-      buildDestinationUrl(
-        check.partnerUrl,
-        offer
-      );
-
-    return redirect(
-      res,
-      destination
-    );
 
   } catch (
     error
   ) {
 
     console.error(
-      "PETS & DOGUE use-offer error:",
+      "PETS & DOGUE Stripe membership check failed:",
+      error
+    );
+
+    /*
+    Stripe verification failure must fail CLOSED.
+
+    We do not allow the offer when Stripe cannot confirm
+    membership.
+    */
+
+    return sendJson(
+      res,
+      503,
+      {
+
+        ok:
+          false,
+
+        membershipRequired:
+          true,
+
+        error:
+          "Unable to verify Club membership right now. Please try again."
+
+      }
+    );
+
+  }
+
+  if (
+    !verifiedMembership.active
+  ) {
+
+    clearClubCookie(
+      res
+    );
+
+    return sendJson(
+      res,
+      401,
+      {
+
+        ok:
+          false,
+
+        membershipRequired:
+          true,
+
+        reason:
+          verifiedMembership.reason ||
+          "inactive",
+
+        membershipStatus:
+          verifiedMembership.status ||
+          null,
+
+        error:
+          "Your PETS & DOGUE Club membership is not active."
+
+      }
+    );
+
+  }
+
+  /* =======================================================
+     LOAD OFFER
+  ======================================================= */
+
+  let offer;
+
+  try {
+
+    offer =
+      await getOffer(
+        offerId
+      );
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "PETS & DOGUE offer lookup failed:",
       error
     );
 
@@ -809,14 +1868,194 @@ async function handler(
       res,
       500,
       {
+
         ok:
           false,
 
         error:
-          "Unable to open this offer."
+          "Unable to load this offer."
+
       }
     );
 
   }
+
+  /* =======================================================
+     VALIDATE OFFER
+  ======================================================= */
+
+  const offerValidation =
+    validateOffer(
+      offer
+    );
+
+  if (
+    !offerValidation.ok
+  ) {
+
+    return sendJson(
+      res,
+      offerValidation.status,
+      {
+
+        ok:
+          false,
+
+        error:
+          offerValidation.error
+
+      }
+    );
+
+  }
+
+  /* =======================================================
+     ONE USE PER SUBSCRIBER
+
+     Only a confirmed REDEEMED record blocks future use.
+
+     Merely opening this redirect does NOT consume the offer.
+  ======================================================= */
+
+  if (
+    offer.one_use_per_subscriber !==
+    false
+  ) {
+
+    try {
+
+      const redeemed =
+        await hasAlreadyRedeemed(
+          offer.id,
+          verifiedMembership.email
+        );
+
+      if (
+        redeemed
+      ) {
+
+        return sendJson(
+          res,
+          409,
+          {
+
+            ok:
+              false,
+
+            alreadyRedeemed:
+              true,
+
+            error:
+              "You have already used this PETS & DOGUE Club offer."
+
+          }
+        );
+
+      }
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        "PETS & DOGUE redemption lookup failed:",
+        error
+      );
+
+      /*
+      Fail closed.
+
+      If we cannot confirm whether the one-use offer has
+      already been redeemed, do not risk granting it twice.
+      */
+
+      return sendJson(
+        res,
+        503,
+        {
+
+          ok:
+            false,
+
+          error:
+            "Unable to verify this voucher right now. Please try again."
+
+        }
+      );
+
+    }
+
+  }
+
+  /* =======================================================
+     BUILD PRIVATE TRACKED REDIRECT
+  ======================================================= */
+
+  let destination;
+
+  try {
+
+    destination =
+      buildPartnerUrl(
+        offer
+      );
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "PETS & DOGUE invalid partner URL:",
+      error
+    );
+
+    return sendJson(
+      res,
+      500,
+      {
+
+        ok:
+          false,
+
+        error:
+          "The partner website is unavailable."
+
+      }
+    );
+
+  }
+
+  /* =======================================================
+     ANALYTICS
+
+     Failure to record a click should NOT stop a valid member
+     from reaching the partner website.
+  ======================================================= */
+
+  try {
+
+    await incrementOfferClick(
+      offer
+    );
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "PETS & DOGUE click tracking failed:",
+      error
+    );
+
+  }
+
+  /* =======================================================
+     REDIRECT
+  ======================================================= */
+
+  return redirect(
+    res,
+    destination
+  );
 
 };
