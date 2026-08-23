@@ -6,21 +6,20 @@ PETS & DOGUE CLUB
 VERIFY STRIPE MEMBERSHIP CHECKOUT
 =========================================================
 
-Purpose:
-
-- Verify a PETS & DOGUE Club Stripe Checkout Session
-- Verify the real Stripe Subscription
-- Confirm that the subscription belongs to PETS & DOGUE
-- Confirm membership plan
-- Confirm recurring Stripe price
-- Confirm active/trialing membership status
-- Return safe membership data to club.html
-
-IMPORTANT:
-
-This endpoint does NOT trust browser/localStorage values.
-
 Stripe is the source of truth.
+
+This endpoint:
+
+- verifies the Stripe Checkout Session
+- verifies the real recurring Stripe Subscription
+- confirms PETS & DOGUE Club metadata
+- confirms the selected membership plan
+- confirms price / currency / billing interval
+- accepts Club access only for:
+  active
+  trialing
+- returns data in the structure already expected
+  by the current club.html
 =========================================================
 */
 
@@ -88,7 +87,9 @@ function cleanString(
   if (
     typeof value !== "string"
   ) {
+
     return "";
+
   }
 
   return value
@@ -110,6 +111,32 @@ function validEmail(
         value || ""
       ).trim()
     );
+
+}
+
+function unixToIso(
+  value
+) {
+
+  const number =
+    Number(
+      value
+    );
+
+  if (
+    !Number.isFinite(
+      number
+    ) ||
+    number <= 0
+  ) {
+
+    return null;
+
+  }
+
+  return new Date(
+    number * 1000
+  ).toISOString();
 
 }
 
@@ -209,7 +236,7 @@ async function readRequestBody(
 }
 
 /* =========================================================
-   STRIPE REQUEST
+   STRIPE
 ========================================================= */
 
 async function stripeRequest(
@@ -254,17 +281,17 @@ async function stripeRequest(
     !response.ok
   ) {
 
-    const message =
-      data?.error?.message ||
-      "Stripe request failed.";
-
     const error =
       new Error(
-        message
+        data?.error?.message ||
+        "Stripe request failed."
       );
 
     error.status =
       response.status;
+
+    error.stripe =
+      data;
 
     throw error;
 
@@ -275,7 +302,7 @@ async function stripeRequest(
 }
 
 /* =========================================================
-   PLAN CONFIGURATION
+   EXPECTED PLAN
 ========================================================= */
 
 function getExpectedPlan(
@@ -288,7 +315,7 @@ function getExpectedPlan(
 
     return {
 
-      plan:
+      id:
         "free",
 
       amount:
@@ -310,7 +337,7 @@ function getExpectedPlan(
 
     return {
 
-      plan:
+      id:
         "monthly",
 
       amount:
@@ -332,7 +359,7 @@ function getExpectedPlan(
 
     return {
 
-      plan:
+      id:
         "annual",
 
       amount:
@@ -353,37 +380,7 @@ function getExpectedPlan(
 }
 
 /* =========================================================
-   DATE
-========================================================= */
-
-function unixToIso(
-  unix
-) {
-
-  const value =
-    Number(
-      unix
-    );
-
-  if (
-    !Number.isFinite(
-      value
-    ) ||
-    value <= 0
-  ) {
-
-    return null;
-
-  }
-
-  return new Date(
-    value * 1000
-  ).toISOString();
-
-}
-
-/* =========================================================
-   SUBSCRIPTION ITEM
+   PRICE
 ========================================================= */
 
 function getSubscriptionPrice(
@@ -404,11 +401,8 @@ function getSubscriptionPrice(
 
   }
 
-  const item =
-    items[0];
-
   const price =
-    item?.price;
+    items[0]?.price;
 
   if (
     !price ||
@@ -424,7 +418,39 @@ function getSubscriptionPrice(
 }
 
 /* =========================================================
-   MAIN HANDLER
+   CUSTOMER
+========================================================= */
+
+function getCustomerId(
+  session
+) {
+
+  if (
+    typeof session.customer ===
+    "string"
+  ) {
+
+    return session.customer;
+
+  }
+
+  if (
+    session.customer &&
+    typeof session.customer ===
+      "object"
+  ) {
+
+    return session.customer.id ||
+      null;
+
+  }
+
+  return null;
+
+}
+
+/* =========================================================
+   HANDLER
 ========================================================= */
 
 module.exports =
@@ -457,6 +483,9 @@ async function handler(
         verified:
           false,
 
+        active:
+          false,
+
         error:
           "Method not allowed."
 
@@ -466,7 +495,7 @@ async function handler(
   }
 
   /* =======================================================
-     CONFIGURATION
+     STRIPE CONFIG
   ======================================================= */
 
   const secretKey =
@@ -496,6 +525,9 @@ async function handler(
         verified:
           false,
 
+        active:
+          false,
+
         error:
           "Club verification is not configured."
 
@@ -505,7 +537,7 @@ async function handler(
   }
 
   /* =======================================================
-     BODY
+     REQUEST
   ======================================================= */
 
   let body =
@@ -529,6 +561,9 @@ async function handler(
           false,
 
         verified:
+          false,
+
+        active:
           false,
 
         error:
@@ -563,6 +598,9 @@ async function handler(
         verified:
           false,
 
+        active:
+          false,
+
         error:
           "A valid Stripe Checkout Session ID is required."
 
@@ -574,12 +612,7 @@ async function handler(
   try {
 
     /* =====================================================
-       LOAD CHECKOUT SESSION
-
-       Expand:
-       - subscription
-       - subscription items prices
-       - customer
+       CHECKOUT SESSION
     ===================================================== */
 
     const session =
@@ -607,6 +640,9 @@ async function handler(
           verified:
             false,
 
+          active:
+            false,
+
           error:
             "Checkout Session was not found."
 
@@ -616,7 +652,7 @@ async function handler(
     }
 
     /* =====================================================
-       CHECKOUT MODE
+       MUST BE SUBSCRIPTION CHECKOUT
     ===================================================== */
 
     if (
@@ -635,6 +671,9 @@ async function handler(
           verified:
             false,
 
+          active:
+            false,
+
           error:
             "This Checkout Session is not a Club subscription."
 
@@ -644,7 +683,7 @@ async function handler(
     }
 
     /* =====================================================
-       SESSION METADATA
+       CHECKOUT METADATA
     ===================================================== */
 
     const sessionMetadata =
@@ -667,8 +706,11 @@ async function handler(
           verified:
             false,
 
+          active:
+            false,
+
           error:
-            "This payment does not belong to PETS & DOGUE Club."
+            "This Checkout Session does not belong to PETS & DOGUE Club."
 
         }
       );
@@ -700,6 +742,9 @@ async function handler(
           verified:
             false,
 
+          active:
+            false,
+
           error:
             "Invalid PETS & DOGUE Club membership plan."
 
@@ -725,11 +770,14 @@ async function handler(
           ok:
             false,
 
-          verified:
-            false,
+        verified:
+          false,
 
-          error:
-            "Unable to verify the selected Club plan."
+        active:
+          false,
+
+        error:
+          "Unable to verify the selected Club plan."
 
         }
       );
@@ -737,7 +785,7 @@ async function handler(
     }
 
     /* =====================================================
-       CHECKOUT STATUS
+       CHECKOUT MUST BE COMPLETE
     ===================================================== */
 
     if (
@@ -759,16 +807,16 @@ async function handler(
           active:
             false,
 
+          state:
+            "checkout_incomplete",
+
           checkoutStatus:
             session.status ||
             null,
 
           paymentStatus:
             session.payment_status ||
-            null,
-
-          message:
-            "Stripe Checkout has not been completed."
+            null
 
         }
       );
@@ -933,7 +981,7 @@ async function handler(
             false,
 
           error:
-            "Checkout plan and subscription plan do not match."
+            "Checkout plan and Stripe subscription plan do not match."
 
         }
       );
@@ -941,11 +989,7 @@ async function handler(
     }
 
     /* =====================================================
-       SUBSCRIPTION STATUS
-
-       Club access is valid only while Stripe says:
-       - trialing
-       - active
+       REAL STRIPE STATUS
     ===================================================== */
 
     const subscriptionStatus =
@@ -960,6 +1004,17 @@ async function handler(
         .has(
           subscriptionStatus
         );
+
+    /*
+    Do not grant Club access for:
+
+    incomplete
+    incomplete_expired
+    past_due
+    unpaid
+    canceled
+    paused
+    */
 
     if (
       !active
@@ -979,6 +1034,9 @@ async function handler(
           active:
             false,
 
+          state:
+            "membership_inactive",
+
           membership: {
 
             plan,
@@ -987,18 +1045,35 @@ async function handler(
               subscriptionStatus ||
               "inactive",
 
+            active:
+              false,
+
             access:
-              false
+              false,
 
-          },
+            accessScope:
+              null,
 
-          stripe: {
+            specialOffersAccess:
+              false,
 
-            sessionId:
-              session.id,
+            email:
+              "",
 
-            subscriptionId:
-              subscription.id
+            stripe: {
+
+              checkoutSessionId:
+                session.id,
+
+              subscriptionId:
+                subscription.id,
+
+              customerId:
+                getCustomerId(
+                  session
+                )
+
+            }
 
           }
 
@@ -1008,7 +1083,7 @@ async function handler(
     }
 
     /* =====================================================
-       VERIFY REAL RECURRING PRICE
+       PRICE
     ===================================================== */
 
     const price =
@@ -1043,7 +1118,8 @@ async function handler(
     }
 
     if (
-      price.active !== true
+      price.active !==
+      true
     ) {
 
       return sendJson(
@@ -1067,6 +1143,10 @@ async function handler(
       );
 
     }
+
+    /* =====================================================
+       CURRENCY
+    ===================================================== */
 
     if (
       String(
@@ -1098,6 +1178,10 @@ async function handler(
 
     }
 
+    /* =====================================================
+       PRICE AMOUNT
+    ===================================================== */
+
     if (
       Number(
         price.unit_amount
@@ -1126,6 +1210,10 @@ async function handler(
       );
 
     }
+
+    /* =====================================================
+       RECURRING
+    ===================================================== */
 
     if (
       !price.recurring
@@ -1212,7 +1300,7 @@ async function handler(
     }
 
     /* =====================================================
-       MEMBER EMAIL
+       VERIFY EMAIL
     ===================================================== */
 
     const checkoutEmail =
@@ -1236,8 +1324,20 @@ async function handler(
         254
       ).toLowerCase();
 
+    const customerEmail =
+      session.customer &&
+      typeof session.customer ===
+        "object"
+        ? cleanString(
+            session.customer.email ||
+            "",
+            254
+          ).toLowerCase()
+        : "";
+
     const memberEmail =
       checkoutEmail ||
+      customerEmail ||
       metadataEmail;
 
     if (
@@ -1270,7 +1370,10 @@ async function handler(
     }
 
     /*
-    If both values exist they should belong to the same member.
+    Metadata was created by our Checkout endpoint.
+
+    If Stripe Checkout has an email and metadata has
+    an email, they must represent the same member.
     */
 
     if (
@@ -1303,7 +1406,7 @@ async function handler(
     }
 
     /* =====================================================
-       MEMBER
+       MEMBER DETAILS
     ===================================================== */
 
     const firstName =
@@ -1337,8 +1440,16 @@ async function handler(
       ).toLowerCase();
 
     /* =====================================================
-       SUBSCRIPTION DATES
+       DATES
+
+       These names intentionally match the structure
+       already used by current club.html.
     ===================================================== */
+
+    const createdAt =
+      unixToIso(
+        subscription.created
+      );
 
     const currentPeriodStart =
       unixToIso(
@@ -1364,28 +1475,194 @@ async function handler(
           .trial_end
       );
 
-    const createdAt =
-      unixToIso(
-        subscription.created
-      );
+    /*
+    For trial:
+    membership begins at trial_start.
+
+    Otherwise:
+    current_period_start is the best start value.
+    */
+
+    const startedAt =
+      trialStart ||
+      currentPeriodStart ||
+      createdAt;
+
+    /*
+    Current Club access remains valid through the
+    current Stripe billing period.
+
+    During the free introductory membership this
+    will normally be the end of the current trial /
+    subscription period.
+    */
+
+    const validUntil =
+      currentPeriodEnd ||
+      trialEnd ||
+      null;
+
+    /*
+    If cancellation is already scheduled,
+    there is no future renewal payment.
+
+    Otherwise current_period_end is the next
+    renewal point.
+    */
+
+    const nextPayment =
+      subscription
+        .cancel_at_period_end === true
+        ? null
+        : currentPeriodEnd;
 
     /* =====================================================
-       CUSTOMER
+       BILLING
     ===================================================== */
 
-    const customer =
-      session.customer &&
-      typeof session.customer ===
-        "object"
-        ? session.customer
-        : null;
+    const billingAmount =
+      expectedPlan.amount;
 
-    const customerId =
-      typeof session.customer ===
-        "string"
-        ? session.customer
-        : customer?.id ||
-          null;
+    const billingFormatted =
+      `£${(
+        billingAmount /
+        100
+      ).toFixed(2)}`;
+
+    /* =====================================================
+       MEMBERSHIP OBJECT
+
+       IMPORTANT:
+
+       Current club.html stores THIS object directly
+       in localStorage under:
+
+       petsDogueMembership
+
+       Therefore all fields needed by Club and
+       Special Offers are included inside it.
+    ===================================================== */
+
+    const membership = {
+
+      plan,
+
+      status:
+        subscriptionStatus,
+
+      active:
+        true,
+
+      access:
+        true,
+
+      accessScope:
+        "all_club_benefits",
+
+      specialOffersAccess:
+        "all",
+
+      recurring:
+        true,
+
+      autoRenew:
+        subscription
+          .cancel_at_period_end !==
+        true,
+
+      cancelAtPeriodEnd:
+        Boolean(
+          subscription
+            .cancel_at_period_end
+        ),
+
+      firstName,
+
+      email:
+        memberEmail,
+
+      country,
+
+      language,
+
+      startedAt,
+
+      validUntil,
+
+      nextPayment,
+
+      dates: {
+
+        startedAt,
+
+        validUntil,
+
+        nextPayment,
+
+        currentPeriodStart,
+
+        currentPeriodEnd,
+
+        trialStart,
+
+        trialEnd,
+
+        createdAt
+
+      },
+
+      billing: {
+
+        amount:
+          billingAmount,
+
+        amountFormatted:
+          billingFormatted,
+
+        currency:
+          "GBP",
+
+        interval:
+          expectedPlan.interval
+
+      },
+
+      stripe: {
+
+        checkoutSessionId:
+          session.id,
+
+        subscriptionId:
+          subscription.id,
+
+        customerId:
+          getCustomerId(
+            session
+          ),
+
+        priceId:
+          price.id,
+
+        checkoutStatus:
+          session.status,
+
+        paymentStatus:
+          session.payment_status,
+
+        subscriptionStatus,
+
+        livemode:
+          Boolean(
+            session.livemode
+          )
+
+      },
+
+      verifiedAt:
+        new Date()
+          .toISOString()
+
+    };
 
     /* =====================================================
        SUCCESS
@@ -1405,66 +1682,15 @@ async function handler(
         active:
           true,
 
-        membership: {
+        state:
+          "active_membership",
 
-          status:
-            subscriptionStatus,
+        membership,
 
-          plan,
-
-          access:
-            true,
-
-          accessScope:
-            "all_club_benefits",
-
-          specialOffersAccess:
-            "all",
-
-          recurring:
-            true,
-
-          autoRenew:
-            subscription
-              .cancel_at_period_end !==
-            true,
-
-          cancelAtPeriodEnd:
-            Boolean(
-              subscription
-                .cancel_at_period_end
-            ),
-
-          billing: {
-
-            amount:
-              expectedPlan.amount,
-
-            amountFormatted:
-              `£${(
-                expectedPlan.amount /
-                100
-              ).toFixed(2)}`,
-
-            currency:
-              "GBP",
-
-            interval:
-              expectedPlan.interval
-
-          },
-
-          currentPeriodStart,
-
-          currentPeriodEnd,
-
-          trialStart,
-
-          trialEnd,
-
-          createdAt
-
-        },
+        /*
+        Also return structured fields outside membership
+        for future server-side integrations.
+        */
 
         member: {
 
@@ -1487,7 +1713,10 @@ async function handler(
           subscriptionId:
             subscription.id,
 
-          customerId,
+          customerId:
+            getCustomerId(
+              session
+            ),
 
           priceId:
             price.id,
@@ -1557,6 +1786,9 @@ async function handler(
 
         active:
           false,
+
+        state:
+          "verification_error",
 
         error:
           error?.message ||
