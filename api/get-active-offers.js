@@ -3,17 +3,25 @@
 /*
 =========================================================
 PETS & DOGUE
-PUBLIC ACTIVE CLUB OFFERS API
+GET ACTIVE CLUB OFFERS
 =========================================================
 
-Purpose:
-- Reads offers from Supabase securely on the server.
-- Never exposes SUPABASE_SECRET_KEY to the browser.
-- Returns ONLY active offers.
-- Returns ONLY offers currently within their validity dates.
-- All offers are available to ALL active PETS & DOGUE
-  Club subscribers.
-- No monthly / annual separation.
+Public endpoint.
+
+Returns only data that is safe to expose publicly.
+
+IMPORTANT:
+- Promo codes are NOT returned here.
+- Partner checkout URLs are NOT returned here.
+- Offline staff instructions are NOT returned here.
+- Those values must be provided later through protected
+  member-only endpoints.
+
+Geography returned:
+- locationScope
+- countryCode
+- countryName
+- city
 =========================================================
 */
 
@@ -46,14 +54,9 @@ function sendJson(
     "application/json; charset=utf-8"
   );
 
-  /*
-  Offers can change,
-  so don't allow long browser caching.
-  */
-
   res.setHeader(
     "Cache-Control",
-    "public, max-age=0, s-maxage=30, stale-while-revalidate=60"
+    "no-store, max-age=0"
   );
 
   res.end(
@@ -67,26 +70,33 @@ function sendJson(
 ========================================================= */
 
 async function supabaseRequest(
-  path
+  path,
+  options = {}
 ) {
 
   const response =
     await fetch(
       `${SUPABASE_URL}/rest/v1/${path}`,
       {
+
         method:
-          "GET",
+          options.method || "GET",
 
         headers: {
+
           apikey:
             SUPABASE_SECRET_KEY,
 
           Authorization:
             `Bearer ${SUPABASE_SECRET_KEY}`,
 
-          Accept:
-            "application/json"
+          "Content-Type":
+            "application/json",
+
+          ...(options.headers || {})
+
         }
+
       }
     );
 
@@ -102,7 +112,9 @@ async function supabaseRequest(
     try {
 
       data =
-        JSON.parse(raw);
+        JSON.parse(
+          raw
+        );
 
     } catch {
 
@@ -116,17 +128,19 @@ async function supabaseRequest(
     !response.ok
   ) {
 
-    const message =
-      data?.message ||
-      data?.hint ||
-      data?.details ||
-      `Supabase request failed with status ${response.status}.`;
-
     const error =
-      new Error(message);
+      new Error(
+        data?.message ||
+        data?.hint ||
+        data?.details ||
+        `Supabase request failed with status ${response.status}.`
+      );
 
     error.status =
       response.status;
+
+    error.data =
+      data;
 
     throw error;
   }
@@ -136,12 +150,97 @@ async function supabaseRequest(
 }
 
 /* =========================================================
-   SAFE STRING
+   NORMALIZE CATEGORY
 ========================================================= */
 
-function safeString(
+function normalizeCategory(
+  value
+) {
+
+  const allowed =
+    new Set([
+      "veterinary",
+      "grooming",
+      "pet_food",
+      "pet_shop",
+      "travel",
+      "pet_friendly",
+      "training",
+      "accessories",
+      "insurance",
+      "photography",
+      "experiences",
+      "other"
+    ]);
+
+  const category =
+    String(
+      value || ""
+    )
+      .trim()
+      .toLowerCase();
+
+  return allowed.has(
+    category
+  )
+    ? category
+    : "other";
+
+}
+
+/* =========================================================
+   NORMALIZE LOCATION
+========================================================= */
+
+function normalizeLocationScope(
+  value
+) {
+
+  const scope =
+    String(
+      value || ""
+    )
+      .trim()
+      .toLowerCase();
+
+  if (
+    scope === "international"
+  ) {
+
+    return "international";
+  }
+
+  return "country";
+
+}
+
+function normalizeCountryCode(
+  value
+) {
+
+  const code =
+    String(
+      value || ""
+    )
+      .trim()
+      .toUpperCase();
+
+  if (
+    /^[A-Z]{2}$/.test(
+      code
+    )
+  ) {
+
+    return code;
+  }
+
+  return null;
+
+}
+
+function cleanPublicString(
   value,
-  maxLength = 2000
+  maxLength = 1000
 ) {
 
   if (
@@ -162,109 +261,27 @@ function safeString(
 }
 
 /* =========================================================
-   CATEGORY
-========================================================= */
-
-function normalizeCategory(
-  value
-) {
-
-  const category =
-    safeString(
-      value,
-      80
-    ).toLowerCase();
-
-  const valid =
-    new Set([
-      "veterinary",
-      "grooming",
-      "pet_food",
-      "pet_shop",
-      "travel",
-      "pet_friendly",
-      "training",
-      "accessories",
-      "insurance",
-      "photography",
-      "experiences",
-      "other"
-    ]);
-
-  return valid.has(category)
-    ? category
-    : "other";
-
-}
-
-/* =========================================================
-   IMAGE
-========================================================= */
-
-function safeImage(
-  value
-) {
-
-  const image =
-    safeString(
-      value,
-      1600000
-    );
-
-  if (
-    !image
-  ) {
-
-    return "";
-  }
-
-  if (
-    image.startsWith(
-      "https://"
-    )
-  ) {
-
-    return image;
-  }
-
-  /*
-  Current partner form may still store compressed
-  image data as a data URL.
-
-  This is allowed temporarily until images are moved
-  into Supabase Storage.
-  */
-
-  if (
-    /^data:image\/(jpeg|jpg|png|webp);base64,/i
-      .test(image)
-  ) {
-
-    return image;
-  }
-
-  return "";
-
-}
-
-/* =========================================================
-   MAP DATABASE OFFER
+   MAP OFFER
 ========================================================= */
 
 function mapOffer(
   row
 ) {
 
+  const locationScope =
+    normalizeLocationScope(
+      row.location_scope
+    );
+
   return {
 
     id:
-      safeString(
-        row.id,
-        100
+      String(
+        row.id || ""
       ),
 
     businessName:
-      safeString(
+      cleanPublicString(
         row.business_name,
         200
       ),
@@ -275,41 +292,27 @@ function mapOffer(
       ),
 
     title:
-      safeString(
+      cleanPublicString(
         row.title,
-        250
+        220
       ),
 
     description:
-      safeString(
+      cleanPublicString(
         row.description,
-        2000
+        1500
       ),
 
     discount:
-      safeString(
+      cleanPublicString(
         row.discount_text,
-        120
+        100
       ),
 
     saving:
-      safeString(
+      cleanPublicString(
         row.saving_text,
-        120
-      ),
-
-    /*
-    Promo code is returned because the current
-    special-offers page handles locking in the UI.
-
-    Later, when Club identity is fully server-backed,
-    code claiming will move behind a protected endpoint.
-    */
-
-    promoCode:
-      safeString(
-        row.promo_code,
-        120
+        100
       ),
 
     redemptionType:
@@ -317,34 +320,17 @@ function mapOffer(
         ? "offline"
         : "online",
 
-    partnerUrl:
-      safeString(
-        row.partner_url,
-        1200
-      ),
-
-    offlineInstructions:
-      safeString(
-        row.offline_instructions,
-        2000
-      ),
-
     image:
-      safeImage(
-        row.image_url
+      cleanPublicString(
+        row.image_url,
+        1600000
       ),
 
     startsAt:
-      safeString(
-        row.starts_at,
-        80
-      ),
+      row.starts_at || null,
 
     endsAt:
-      safeString(
-        row.ends_at,
-        80
-      ),
+      row.ends_at || null,
 
     maxRedemptions:
       row.max_redemptions === null
@@ -353,22 +339,137 @@ function mapOffer(
             row.max_redemptions
           ),
 
+    redemptionsCount:
+      Number(
+        row.redemptions_count || 0
+      ),
+
     oneUsePerSubscriber:
       row.one_use_per_subscriber !== false,
 
     accessScope:
-      "all_subscribers",
+      row.access_scope === "all_subscribers"
+        ? "all_subscribers"
+        : "all_subscribers",
 
     status:
       "active",
 
-    createdAt:
-      safeString(
-        row.created_at,
-        80
-      )
+    locationScope,
+
+    countryCode:
+      locationScope === "country"
+        ? normalizeCountryCode(
+            row.country_code
+          )
+        : null,
+
+    countryName:
+      locationScope === "country"
+        ? cleanPublicString(
+            row.country_name,
+            120
+          ) || null
+        : null,
+
+    city:
+      locationScope === "country"
+        ? cleanPublicString(
+            row.city,
+            160
+          ) || null
+        : null
 
   };
+
+}
+
+/* =========================================================
+   OFFER AVAILABILITY
+========================================================= */
+
+function isAvailable(
+  row,
+  now
+) {
+
+  if (
+    row.status !== "active"
+  ) {
+
+    return false;
+  }
+
+  if (
+    row.access_scope !== "all_subscribers"
+  ) {
+
+    return false;
+  }
+
+  const starts =
+    new Date(
+      row.starts_at
+    ).getTime();
+
+  const ends =
+    new Date(
+      row.ends_at
+    ).getTime();
+
+  if (
+    !Number.isFinite(
+      starts
+    ) ||
+    !Number.isFinite(
+      ends
+    )
+  ) {
+
+    return false;
+  }
+
+  if (
+    now < starts ||
+    now > ends
+  ) {
+
+    return false;
+  }
+
+  const maximum =
+    row.max_redemptions === null
+      ? null
+      : Number(
+          row.max_redemptions
+        );
+
+  const redeemed =
+    Number(
+      row.redemptions_count || 0
+    );
+
+  if (
+    maximum !== null &&
+    Number.isFinite(
+      maximum
+    ) &&
+    maximum > 0 &&
+    redeemed >= maximum
+  ) {
+
+    return false;
+  }
+
+  if (
+    row.location_scope === "international" &&
+    row.redemption_type !== "online"
+  ) {
+
+    return false;
+  }
+
+  return true;
 
 }
 
@@ -405,13 +506,17 @@ async function handler(
 
   }
 
+  /* =======================================================
+     CONFIG
+  ======================================================= */
+
   if (
     !SUPABASE_URL ||
     !SUPABASE_SECRET_KEY
   ) {
 
     console.error(
-      "PETS & DOGUE: Supabase environment variables are missing."
+      "PETS & DOGUE active offers: Supabase environment variables are missing."
     );
 
     return sendJson(
@@ -422,7 +527,7 @@ async function handler(
           false,
 
         error:
-          "Offers database is not configured."
+          "Offer service is unavailable."
       }
     );
 
@@ -430,96 +535,89 @@ async function handler(
 
   try {
 
-    const now =
-      new Date()
-        .toISOString();
-
     /*
-    Only retrieve offers which are:
+    Security:
 
-    status = active
-    start <= now
-    end >= now
+    Only columns safe for public display are selected.
 
-    Sorting:
-    newest active offers first.
+    promo_code
+    partner_url
+    offline_instructions
+    partner_email
+    partner_id
+
+    are intentionally excluded.
     */
 
-    const query =
-      [
-        "select=" +
-        [
-          "id",
-          "business_name",
-          "category",
-          "title",
-          "description",
-          "discount_text",
-          "saving_text",
-          "promo_code",
-          "redemption_type",
-          "partner_url",
-          "offline_instructions",
-          "image_url",
-          "starts_at",
-          "ends_at",
-          "max_redemptions",
-          "one_use_per_subscriber",
-          "access_scope",
-          "status",
-          "created_at"
-        ].join(","),
-
-        "status=eq.active",
-
-        `starts_at=lte.${encodeURIComponent(
-          now
-        )}`,
-
-        `ends_at=gte.${encodeURIComponent(
-          now
-        )}`,
-
-        "order=created_at.desc",
-
-        "limit=100"
-      ]
-        .join("&");
+    const fields = [
+      "id",
+      "business_name",
+      "category",
+      "title",
+      "description",
+      "discount_text",
+      "saving_text",
+      "redemption_type",
+      "image_url",
+      "starts_at",
+      "ends_at",
+      "max_redemptions",
+      "redemptions_count",
+      "one_use_per_subscriber",
+      "access_scope",
+      "status",
+      "location_scope",
+      "country_code",
+      "country_name",
+      "city",
+      "created_at"
+    ].join(",");
 
     const rows =
       await supabaseRequest(
-        `offers?${query}`
+        `offers?status=eq.active&select=${encodeURIComponent(fields)}&order=created_at.desc&limit=100`
       );
 
+    if (
+      !Array.isArray(
+        rows
+      )
+    ) {
+
+      throw new Error(
+        "Invalid offers response."
+      );
+    }
+
+    const now =
+      Date.now();
+
     const offers =
-      Array.isArray(rows)
-        ? rows
-            .filter(
-              row =>
-                row &&
-                row.status === "active" &&
-                row.access_scope === "all_subscribers"
+      rows
+        .filter(
+          row =>
+            isAvailable(
+              row,
+              now
             )
-            .map(
-              mapOffer
-            )
-        : [];
+        )
+        .map(
+          mapOffer
+        );
 
     return sendJson(
       res,
       200,
       {
+
         ok:
           true,
 
         count:
           offers.length,
 
-        offers,
+        offers
 
-        generatedAt:
-          new Date()
-            .toISOString()
       }
     );
 
@@ -528,7 +626,7 @@ async function handler(
   ) {
 
     console.error(
-      "PETS & DOGUE active offers API error:",
+      "PETS & DOGUE get active offers error:",
       error
     );
 
@@ -540,7 +638,7 @@ async function handler(
           false,
 
         error:
-          "Unable to load PETS & DOGUE offers."
+          "Unable to load active offers."
       }
     );
 
