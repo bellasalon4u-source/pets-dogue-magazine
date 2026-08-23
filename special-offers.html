@@ -1,0 +1,2290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="PETS & DOGUE Club special offers, partner discounts and exclusive member benefits.">
+<title>PETS & DOGUE — Special Offers</title>
+
+<style>
+:root{
+--black:#070707;
+--black2:#111;
+--cream:#f7f1e6;
+--cream2:#eee4d2;
+--white:#fff;
+--gold:#c6922b;
+--gold2:#e5bd63;
+--gold-dark:#8c6217;
+--green:#426f3c;
+--grey:#74716b;
+--line:#d7cdbc;
+--red:#a62828;
+--serif:Georgia,"Times New Roman",serif;
+--sans:Arial,Helvetica,sans-serif;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:var(--sans);
+background:var(--cream);
+color:#111;
+overflow-x:hidden;
+}
+
+body.modal-open{
+overflow:hidden;
+}
+
+button,
+select,
+input{
+font:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+a{
+color:inherit;
+text-decoration:none;
+}
+
+img{
+display:block;
+width:100%;
+}
+
+.notranslate{
+translate:no;
+}
+
+.site-header{
+position:sticky;
+top:0;
+z-index:3000;
+height:72px;
+background:#070707;
+color:#fff;
+border-bottom:1px solid #262626;
+display:grid;
+grid-template-columns:60px 1fr auto;
+align-items:center;
+padding:0 14px;
+}
+
+.menu-button{
+width:42px;
+height:42px;
+border:0;
+background:none;
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap:5px;
+padding:7px;
+}
+
+.menu-button span{
+display:block;
+width:27px;
+height:2px;
+background:#fff;
+}
+
+.brand{
+justify-self:center;
+text-align:center;
+font-family:var(--serif);
+color:var(--gold);
+line-height:.9;
+}
+
+.brand small{
+display:block;
+font-size:8px;
+letter-spacing:3px;
+}
+
+.brand strong{
+display:block;
+font-size:29px;
+font-weight:400;
+letter-spacing:2px;
+margin-top:5px;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+gap:7px;
+}
+
+.club-link{
+display:flex;
+align-items:center;
+justify-content:center;
+height:38px;
+padding:0 12px;
+background:var(--gold);
+color:#111;
+font-size:8px;
+font-weight:900;
+letter-spacing:1px;
+}
+
+.lang-select{
+height:38px;
+min-width:58px;
+background:#111;
+color:#fff;
+border:1px solid #444;
+padding:0 6px;
+font-size:8px;
+font-weight:900;
+}
+
+.hero{
+position:relative;
+background:#111;
+overflow:hidden;
+}
+
+.hero-image{
+position:relative;
+height:min(76vw,760px);
+min-height:420px;
+max-height:760px;
+overflow:hidden;
+}
+
+.hero-image img{
+height:100%;
+object-fit:cover;
+object-position:center 48%;
+}
+
+.hero-image:after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(to bottom,rgba(0,0,0,.03) 45%,rgba(0,0,0,.7) 100%);
+pointer-events:none;
+}
+
+.hero-copy{
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+z-index:2;
+max-width:1180px;
+margin:auto;
+padding:36px 26px 30px;
+color:#fff;
+}
+
+.hero-kicker{
+font-size:8px;
+font-weight:900;
+letter-spacing:2.6px;
+color:#f3d57e;
+text-transform:uppercase;
+}
+
+.hero-title{
+font-family:var(--serif);
+font-size:47px;
+line-height:.98;
+font-weight:400;
+margin-top:8px;
+max-width:650px;
+}
+
+.hero-text{
+font-size:12px;
+line-height:1.5;
+max-width:560px;
+margin-top:11px;
+color:#f1eee8;
+}
+
+.hero-badge{
+display:inline-flex;
+align-items:center;
+gap:7px;
+margin-top:14px;
+padding:8px 11px;
+border:1px solid rgba(255,255,255,.55);
+background:rgba(0,0,0,.42);
+backdrop-filter:blur(6px);
+font-size:7px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+.hero-badge-icon{
+color:var(--gold2);
+font-size:14px;
+}
+
+.offers-shell{
+max-width:1180px;
+margin:auto;
+padding:22px 18px 55px;
+}
+
+.section-intro{
+text-align:center;
+padding:6px 0 18px;
+}
+
+.section-intro h1{
+font-family:var(--serif);
+font-size:34px;
+font-weight:400;
+line-height:1;
+}
+
+.section-intro p{
+font-size:10px;
+line-height:1.5;
+color:#716c64;
+margin:9px auto 0;
+max-width:620px;
+}
+
+.filters{
+display:flex;
+gap:7px;
+overflow-x:auto;
+padding-bottom:14px;
+scrollbar-width:none;
+}
+
+.filters::-webkit-scrollbar{
+display:none;
+}
+
+.filter{
+white-space:nowrap;
+border:1px solid #c9c0b1;
+background:#fff;
+min-height:35px;
+padding:0 13px;
+border-radius:30px;
+font-size:7px;
+font-weight:900;
+letter-spacing:.5px;
+text-transform:uppercase;
+}
+
+.filter.active{
+background:#111;
+border-color:#111;
+color:#fff;
+}
+
+.offer-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:12px;
+align-items:stretch;
+}
+
+.offer-card{
+position:relative;
+min-width:0;
+background:#fff;
+border:1px solid var(--line);
+overflow:hidden;
+display:flex;
+flex-direction:column;
+transition:transform .18s ease,box-shadow .18s ease;
+cursor:pointer;
+}
+
+.offer-card:not(.used):active{
+transform:scale(.985);
+}
+
+.offer-card-image{
+position:relative;
+aspect-ratio:1.42/1;
+background:
+linear-gradient(135deg,#e4d3af,#f7efe1);
+overflow:hidden;
+}
+
+.offer-card-image img{
+height:100%;
+object-fit:cover;
+}
+
+.offer-card-image:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.45),transparent 55%);
+}
+
+.category-badge{
+position:absolute;
+top:7px;
+left:7px;
+z-index:2;
+background:rgba(255,255,255,.91);
+padding:5px 7px;
+font-size:6px;
+font-weight:900;
+letter-spacing:.5px;
+text-transform:uppercase;
+}
+
+.club-badge{
+position:absolute;
+right:7px;
+top:7px;
+z-index:2;
+background:#080808;
+color:#f1d27a;
+padding:5px 7px;
+font-size:6px;
+font-weight:900;
+letter-spacing:.7px;
+text-transform:uppercase;
+}
+
+.discount-badge{
+position:absolute;
+left:9px;
+bottom:8px;
+z-index:2;
+font-family:var(--serif);
+font-size:29px;
+line-height:1;
+color:#fff;
+text-shadow:0 2px 10px rgba(0,0,0,.45);
+}
+
+.offer-card-body{
+display:flex;
+flex-direction:column;
+flex:1;
+padding:10px;
+}
+
+.partner-name{
+font-family:var(--serif);
+font-size:16px;
+line-height:1.05;
+}
+
+.offer-title{
+font-size:8px;
+line-height:1.4;
+margin-top:5px;
+min-height:23px;
+}
+
+.offer-meta{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:4px;
+margin-top:8px;
+padding-top:7px;
+border-top:1px solid #eee7dc;
+font-size:6px;
+color:#777;
+}
+
+.offer-meta span:last-child{
+white-space:nowrap;
+}
+
+.redemption{
+margin-top:8px;
+border-top:1px solid #ded7cb;
+padding-top:8px;
+}
+
+.promo-line{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:5px;
+margin-bottom:7px;
+}
+
+.promo-label{
+font-size:5px;
+font-weight:900;
+letter-spacing:.6px;
+color:#777;
+text-transform:uppercase;
+}
+
+.promo-code{
+font-size:8px;
+font-weight:900;
+letter-spacing:.8px;
+white-space:nowrap;
+}
+
+.barcode{
+width:100%;
+height:40px;
+display:flex;
+align-items:stretch;
+justify-content:center;
+overflow:hidden;
+background:#fff;
+padding:3px 5px;
+}
+
+.barcode-bar{
+display:block;
+height:100%;
+background:#111;
+flex:0 0 auto;
+}
+
+.barcode-space{
+display:block;
+height:100%;
+background:#fff;
+flex:0 0 auto;
+}
+
+.member-note{
+margin-top:7px;
+min-height:26px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:#f5efe3;
+font-size:6px;
+font-weight:900;
+letter-spacing:.4px;
+color:#5c554b;
+text-transform:uppercase;
+padding:5px;
+}
+
+.offer-card.locked .redemption{
+filter:blur(4px);
+user-select:none;
+pointer-events:none;
+}
+
+.offer-card.locked .member-note{
+background:#111;
+color:#f0cf74;
+filter:none;
+}
+
+.offer-card.used{
+cursor:default;
+filter:grayscale(1);
+opacity:.63;
+}
+
+.offer-card.used .offer-card-image:after{
+background:rgba(50,50,50,.25);
+}
+
+.offer-card.used .redemption{
+opacity:.45;
+}
+
+.offer-card.used .member-note{
+background:#222;
+color:#fff;
+font-size:7px;
+}
+
+.offer-card.expired{
+opacity:.48;
+filter:grayscale(1);
+cursor:default;
+}
+
+.offer-card.expired .member-note{
+background:#ddd;
+color:#555;
+}
+
+.no-results{
+grid-column:1/-1;
+padding:40px 15px;
+text-align:center;
+background:#fff;
+border:1px solid var(--line);
+font-family:var(--serif);
+font-size:21px;
+}
+
+.subscription-modal{
+position:fixed;
+inset:0;
+z-index:9000;
+display:none;
+align-items:flex-end;
+justify-content:center;
+padding:14px;
+background:rgba(0,0,0,.76);
+backdrop-filter:blur(5px);
+}
+
+.subscription-modal.open{
+display:flex;
+}
+
+.subscription-card{
+width:min(520px,100%);
+background:#faf5ea;
+border:1px solid #dfc078;
+box-shadow:0 20px 70px rgba(0,0,0,.4);
+}
+
+.subscription-head{
+background:#080808;
+color:#fff;
+padding:18px 18px 15px;
+position:relative;
+}
+
+.subscription-head small{
+display:block;
+font-size:7px;
+font-weight:900;
+letter-spacing:2px;
+color:var(--gold2);
+text-transform:uppercase;
+}
+
+.subscription-head h2{
+font-family:var(--serif);
+font-size:27px;
+font-weight:400;
+line-height:1.05;
+margin-top:7px;
+}
+
+.subscription-head p{
+font-size:8px;
+line-height:1.45;
+color:#ccc;
+margin-top:7px;
+max-width:410px;
+}
+
+.modal-close{
+position:absolute;
+right:10px;
+top:9px;
+width:36px;
+height:36px;
+border:0;
+background:none;
+color:#fff;
+font-size:24px;
+}
+
+.subscription-body{
+padding:14px;
+}
+
+.plan{
+display:grid;
+grid-template-columns:1fr auto;
+gap:10px;
+align-items:center;
+background:#fff;
+border:1px solid #cfc3b2;
+padding:13px;
+margin-bottom:8px;
+}
+
+.plan.best{
+border:2px solid var(--gold);
+}
+
+.plan-title{
+font-family:var(--serif);
+font-size:19px;
+}
+
+.plan-copy{
+font-size:7px;
+line-height:1.4;
+color:#777;
+margin-top:3px;
+}
+
+.plan-price{
+text-align:right;
+font-family:var(--serif);
+font-size:26px;
+color:var(--gold-dark);
+}
+
+.plan-price small{
+display:block;
+font-family:var(--sans);
+font-size:6px;
+color:#777;
+}
+
+.subscribe-button{
+width:100%;
+height:47px;
+border:0;
+background:var(--gold);
+color:#111;
+font-size:8px;
+font-weight:900;
+letter-spacing:1.2px;
+text-transform:uppercase;
+}
+
+.modal-footnote{
+text-align:center;
+font-size:6px;
+line-height:1.45;
+color:#777;
+margin-top:9px;
+}
+
+.offer-modal{
+position:fixed;
+inset:0;
+z-index:9100;
+display:none;
+align-items:flex-end;
+justify-content:center;
+background:rgba(0,0,0,.78);
+padding:14px;
+}
+
+.offer-modal.open{
+display:flex;
+}
+
+.offer-modal-card{
+width:min(480px,100%);
+background:#fff;
+max-height:91vh;
+overflow:auto;
+}
+
+.offer-modal-image{
+height:230px;
+background:#e8ddca;
+position:relative;
+}
+
+.offer-modal-image img{
+height:100%;
+object-fit:cover;
+}
+
+.offer-modal-copy{
+padding:17px;
+}
+
+.offer-modal-copy h2{
+font-family:var(--serif);
+font-size:27px;
+font-weight:400;
+}
+
+.offer-modal-copy p{
+font-size:9px;
+line-height:1.5;
+color:#666;
+margin-top:7px;
+}
+
+.offer-modal-discount{
+font-family:var(--serif);
+font-size:39px;
+color:var(--gold-dark);
+margin-top:11px;
+}
+
+.offer-modal-code{
+margin-top:14px;
+padding:13px;
+background:#f7f1e6;
+border:1px solid #d2c8b9;
+text-align:center;
+}
+
+.offer-modal-code small{
+font-size:6px;
+font-weight:900;
+letter-spacing:1px;
+color:#777;
+}
+
+.offer-modal-code strong{
+display:block;
+font-size:18px;
+letter-spacing:1.5px;
+margin-top:5px;
+}
+
+.offer-modal .barcode{
+height:57px;
+margin-top:8px;
+}
+
+.offer-modal-valid{
+display:flex;
+justify-content:space-between;
+gap:10px;
+font-size:7px;
+color:#777;
+margin-top:10px;
+}
+
+.offer-modal-close{
+width:100%;
+height:43px;
+border:1px solid #111;
+background:#111;
+color:#fff;
+font-size:8px;
+font-weight:900;
+letter-spacing:1px;
+margin-top:14px;
+}
+
+@media(max-width:700px){
+
+.site-header{
+height:68px;
+grid-template-columns:52px 1fr auto;
+padding:0 8px;
+}
+
+.brand strong{
+font-size:25px;
+}
+
+.club-link{
+display:none;
+}
+
+.hero-image{
+height:112vw;
+min-height:440px;
+max-height:620px;
+}
+
+.hero-copy{
+padding:26px 17px 22px;
+}
+
+.hero-title{
+font-size:37px;
+}
+
+.hero-text{
+font-size:10px;
+}
+
+.offers-shell{
+padding:16px 7px 45px;
+}
+
+.section-intro h1{
+font-size:28px;
+}
+
+.offer-grid{
+gap:5px;
+}
+
+.offer-card-body{
+padding:6px;
+}
+
+.category-badge,
+.club-badge{
+top:4px;
+padding:3px 4px;
+font-size:4.5px;
+}
+
+.category-badge{
+left:4px;
+}
+
+.club-badge{
+right:4px;
+}
+
+.discount-badge{
+left:5px;
+bottom:5px;
+font-size:20px;
+}
+
+.partner-name{
+font-size:11px;
+}
+
+.offer-title{
+font-size:5.8px;
+line-height:1.3;
+min-height:23px;
+}
+
+.offer-meta{
+font-size:4.7px;
+margin-top:5px;
+padding-top:5px;
+}
+
+.redemption{
+margin-top:5px;
+padding-top:5px;
+}
+
+.promo-label{
+font-size:4px;
+}
+
+.promo-code{
+font-size:5.8px;
+letter-spacing:.3px;
+}
+
+.barcode{
+height:30px;
+padding:2px;
+}
+
+.member-note{
+font-size:4.5px;
+min-height:23px;
+margin-top:5px;
+padding:3px;
+}
+
+.offer-card.used .member-note{
+font-size:5px;
+}
+
+.filters{
+padding-left:2px;
+padding-right:2px;
+}
+
+.filter{
+min-height:31px;
+padding:0 10px;
+font-size:6px;
+}
+
+}
+
+@media(max-width:380px){
+
+.offer-grid{
+gap:4px;
+}
+
+.offer-card-body{
+padding:5px;
+}
+
+.partner-name{
+font-size:10px;
+}
+
+.discount-badge{
+font-size:18px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+<button class="menu-button" id="menuButton" type="button" aria-label="Menu">
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+<a href="index.html" class="brand notranslate" translate="no">
+<small>PETS &amp;</small>
+<strong>DOGUE</strong>
+</a>
+
+<div class="header-right">
+
+<a href="club.html" class="club-link" id="clubLink"></a>
+
+<select class="lang-select" id="languageSelect" aria-label="Language">
+<option value="en">EN</option>
+<option value="uk">UA</option>
+<option value="ru">RU</option>
+<option value="fr">FR</option>
+<option value="de">DE</option>
+<option value="es">ES</option>
+<option value="it">IT</option>
+<option value="pt">PT</option>
+<option value="nl">NL</option>
+<option value="pl">PL</option>
+<option value="cs">CZ</option>
+<option value="sk">SK</option>
+<option value="hu">HU</option>
+<option value="ro">RO</option>
+<option value="bg">BG</option>
+<option value="el">GR</option>
+<option value="sv">SE</option>
+<option value="da">DK</option>
+<option value="no">NO</option>
+<option value="fi">FI</option>
+<option value="tr">TR</option>
+<option value="ar">AR</option>
+<option value="hi">HI</option>
+</select>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-image">
+
+<img
+alt="PETS & DOGUE Partner Discounts"
+src="data:image/webp;base64,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"
+>
+
+</div>
+
+<div class="hero-copy">
+
+<div class="hero-kicker" id="heroKicker"></div>
+
+<h1 class="hero-title" id="heroTitle"></h1>
+
+<p class="hero-text" id="heroText"></p>
+
+<div class="hero-badge">
+<span class="hero-badge-icon">♛</span>
+<span id="heroBadge"></span>
+</div>
+
+</div>
+
+</section>
+
+<main class="offers-shell">
+
+<section class="section-intro">
+
+<h1 id="offersTitle"></h1>
+
+<p id="offersIntro"></p>
+
+</section>
+
+<div class="filters" id="filters"></div>
+
+<section class="offer-grid" id="offerGrid"></section>
+
+</main>
+
+<div class="subscription-modal" id="subscriptionModal">
+
+<div class="subscription-card">
+
+<div class="subscription-head">
+
+<button class="modal-close" id="subscriptionClose" type="button">×</button>
+
+<small>PETS &amp; DOGUE CLUB</small>
+
+<h2 id="gateTitle"></h2>
+
+<p id="gateText"></p>
+
+</div>
+
+<div class="subscription-body">
+
+<div class="plan">
+
+<div>
+<div class="plan-title" id="monthlyTitle"></div>
+<div class="plan-copy" id="monthlyText"></div>
+</div>
+
+<div class="plan-price">
+£1
+<small id="monthlyPeriod"></small>
+</div>
+
+</div>
+
+<div class="plan best">
+
+<div>
+<div class="plan-title" id="annualTitle"></div>
+<div class="plan-copy" id="annualText"></div>
+</div>
+
+<div class="plan-price">
+£10
+<small id="annualPeriod"></small>
+</div>
+
+</div>
+
+<button class="subscribe-button" id="subscribeButton" type="button"></button>
+
+<div class="modal-footnote" id="gateFootnote"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="offer-modal" id="offerModal">
+
+<div class="offer-modal-card">
+
+<div class="offer-modal-image">
+<img id="modalOfferImage" alt="">
+</div>
+
+<div class="offer-modal-copy">
+
+<h2 id="modalPartner"></h2>
+
+<p id="modalTitle"></p>
+
+<div class="offer-modal-discount" id="modalDiscount"></div>
+
+<div class="offer-modal-code">
+
+<small id="modalCodeLabel"></small>
+
+<strong id="modalCode"></strong>
+
+<div class="barcode" id="modalBarcode"></div>
+
+</div>
+
+<div class="offer-modal-valid">
+
+<span id="modalValid"></span>
+
+<span id="modalOnce"></span>
+
+</div>
+
+<button class="offer-modal-close" id="offerModalClose" type="button"></button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+"use strict";
+
+const $=id=>document.getElementById(id);
+
+const LANGUAGE_KEY="pets_dogue_language";
+const PARTNER_OFFERS_KEY="petsDoguePartnerOffers";
+const USED_OFFERS_KEY="petsDogueUsedOffers";
+const PENDING_OFFER_KEY="petsDoguePendingOfferId";
+
+const LANGS=[
+"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
+"hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+];
+
+const I18N={
+
+en:{
+club:"CLUB",
+heroKicker:"PETS & DOGUE CLUB PRIVILEGES",
+heroTitle:"Special offers for you",
+heroText:"Bright partner discounts, gifts and member prices. Browse everything freely — any active PETS & DOGUE Club subscription unlocks every offer.",
+heroBadge:"ALL OFFERS ARE AVAILABLE TO EVERY ACTIVE CLUB SUBSCRIBER",
+offersTitle:"Partner discounts",
+offersIntro:"Tap any offer to view your personal code or barcode. Each offer can be redeemed once per subscriber.",
+all:"All",
+vet:"Veterinary",
+groom:"Grooming",
+food:"Food",
+shop:"Shopping",
+travel:"Travel",
+cafe:"Pet-friendly",
+training:"Training",
+insurance:"Insurance",
+valid:"Valid until",
+once:"1 use",
+members:"For Club subscribers",
+tapUnlock:"Tap to unlock with Club",
+used:"USED ✓",
+expired:"EXPIRED",
+noResults:"No offers in this category yet.",
+gateTitle:"Unlock this offer with PETS & DOGUE Club",
+gateText:"All discounts are available with any active Club subscription. There is no difference between monthly and annual access.",
+monthlyTitle:"Monthly membership",
+monthlyText:"First 30 days free, then £1 per month.",
+monthlyPeriod:"/ month",
+annualTitle:"Annual membership",
+annualText:"£10 per year. Renews automatically every year until cancelled.",
+annualPeriod:"/ year",
+subscribe:"CHOOSE MEMBERSHIP",
+gateFootnote:"Monthly and annual subscriptions renew automatically until cancelled.",
+code:"YOUR PETS & DOGUE CODE",
+close:"CLOSE",
+t1:"20% off all grooming services",
+t2:"15% off a complete veterinary check-up",
+t3:"10% off pet food and treats",
+t4:"£25 off pet-friendly hotel stays",
+t5:"20% off collars, leads and accessories",
+t6:"15% off pet-friendly café orders",
+t7:"20% off dog training courses",
+t8:"15% off pet travel insurance",
+t9:"10% off pet photography sessions"
+},
+
+ru:{
+club:"КЛУБ",
+heroKicker:"ПРИВИЛЕГИИ PETS & DOGUE CLUB",
+heroTitle:"Специальные предложения для вас",
+heroText:"Яркие скидки, подарки и специальные цены от наших партнёров. Смотреть предложения могут все, а использовать — любой активный подписчик PETS & DOGUE Club.",
+heroBadge:"ВСЕ СКИДКИ ДОСТУПНЫ ЛЮБОМУ АКТИВНОМУ ПОДПИСЧИКУ CLUB",
+offersTitle:"Скидки партнёров",
+offersIntro:"Нажмите на предложение, чтобы открыть свой код или штрихкод. Каждое предложение можно использовать один раз.",
+all:"Все",
+vet:"Ветеринария",
+groom:"Груминг",
+food:"Питание",
+shop:"Покупки",
+travel:"Путешествия",
+cafe:"Pet-friendly",
+training:"Дрессировка",
+insurance:"Страхование",
+valid:"Действует до",
+once:"1 раз",
+members:"Для подписчиков Club",
+tapUnlock:"Нажмите, чтобы открыть по подписке",
+used:"ИСПОЛЬЗОВАНО ✓",
+expired:"ИСТЁК СРОК",
+noResults:"В этой категории пока нет предложений.",
+gateTitle:"Откройте предложение с PETS & DOGUE Club",
+gateText:"Все скидки доступны с любой активной подпиской Club. Между месячной и годовой подпиской нет разницы в доступе.",
+monthlyTitle:"Месячная подписка",
+monthlyText:"Первые 30 дней бесплатно, затем £1 в месяц.",
+monthlyPeriod:"/ месяц",
+annualTitle:"Годовая подписка",
+annualText:"£10 в год. Автоматически продлевается каждый год до отмены.",
+annualPeriod:"/ год",
+subscribe:"ВЫБРАТЬ ПОДПИСКУ",
+gateFootnote:"Месячная и годовая подписки автоматически продлеваются, пока пользователь их не отменит.",
+code:"ВАШ КОД PETS & DOGUE",
+close:"ЗАКРЫТЬ",
+t1:"-20% на все услуги груминга",
+t2:"-15% на полный ветеринарный чек-ап",
+t3:"-10% на корм и лакомства",
+t4:"£25 скидки на проживание в pet-friendly отеле",
+t5:"-20% на ошейники, поводки и аксессуары",
+t6:"-15% на заказ в pet-friendly кафе",
+t7:"-20% на курсы дрессировки",
+t8:"-15% на страховку для путешествий с питомцем",
+t9:"-10% на фотосессию питомца"
+},
+
+uk:{
+club:"КЛУБ",
+heroKicker:"ПРИВІЛЕЇ PETS & DOGUE CLUB",
+heroTitle:"Спеціальні пропозиції для вас",
+heroText:"Яскраві знижки, подарунки та спеціальні ціни від партнерів. Переглядати можуть усі, а використовувати — будь-який активний підписник PETS & DOGUE Club.",
+heroBadge:"УСІ ЗНИЖКИ ДОСТУПНІ КОЖНОМУ АКТИВНОМУ ПІДПИСНИКУ CLUB",
+offersTitle:"Знижки партнерів",
+offersIntro:"Натисніть на пропозицію, щоб відкрити свій код або штрихкод. Кожну пропозицію можна використати один раз.",
+all:"Усі",
+vet:"Ветеринарія",
+groom:"Грумінг",
+food:"Харчування",
+shop:"Покупки",
+travel:"Подорожі",
+cafe:"Pet-friendly",
+training:"Дресирування",
+insurance:"Страхування",
+valid:"Діє до",
+once:"1 раз",
+members:"Для підписників Club",
+tapUnlock:"Натисніть, щоб відкрити за підпискою",
+used:"ВИКОРИСТАНО ✓",
+expired:"ТЕРМІН МИНУВ",
+noResults:"У цій категорії поки немає пропозицій.",
+gateTitle:"Відкрийте пропозицію з PETS & DOGUE Club",
+gateText:"Усі знижки доступні з будь-якою активною підпискою Club. Різниці в доступі між місячною та річною немає.",
+monthlyTitle:"Місячна підписка",
+monthlyText:"Перші 30 днів безкоштовно, потім £1 на місяць.",
+monthlyPeriod:"/ місяць",
+annualTitle:"Річна підписка",
+annualText:"£10 на рік. Автоматично поновлюється щороку до скасування.",
+annualPeriod:"/ рік",
+subscribe:"ОБРАТИ ПІДПИСКУ",
+gateFootnote:"Місячна та річна підписки автоматично поновлюються, доки користувач їх не скасує.",
+code:"ВАШ КОД PETS & DOGUE",
+close:"ЗАКРИТИ",
+t1:"-20% на всі послуги грумінгу",
+t2:"-15% на повний ветеринарний чек-ап",
+t3:"-10% на корм і ласощі",
+t4:"£25 знижки на pet-friendly готель",
+t5:"-20% на нашийники, повідці та аксесуари",
+t6:"-15% на замовлення у pet-friendly кафе",
+t7:"-20% на курси дресирування",
+t8:"-15% на страхування подорожей із твариною",
+t9:"-10% на фотосесію тварини"
+},
+
+fr:{
+club:"CLUB",
+heroKicker:"PRIVILÈGES PETS & DOGUE CLUB",
+heroTitle:"Des offres spéciales pour vous",
+heroText:"Réductions, cadeaux et tarifs membres chez nos partenaires. Toute adhésion Club active donne accès à toutes les offres.",
+heroBadge:"TOUTES LES OFFRES SONT ACCESSIBLES À TOUS LES MEMBRES ACTIFS",
+offersTitle:"Réductions partenaires",
+offersIntro:"Touchez une offre pour afficher votre code ou code-barres. Une utilisation par membre.",
+all:"Tout",
+vet:"Vétérinaire",
+groom:"Toilettage",
+food:"Alimentation",
+shop:"Shopping",
+travel:"Voyage",
+cafe:"Pet-friendly",
+training:"Éducation",
+insurance:"Assurance",
+valid:"Valable jusqu’au",
+once:"1 utilisation",
+members:"Pour les membres Club",
+tapUnlock:"Touchez pour débloquer",
+used:"UTILISÉ ✓",
+expired:"EXPIRÉ",
+noResults:"Aucune offre dans cette catégorie.",
+gateTitle:"Débloquez cette offre avec PETS & DOGUE Club",
+gateText:"Toutes les réductions sont accessibles avec toute adhésion Club active.",
+monthlyTitle:"Abonnement mensuel",
+monthlyText:"30 premiers jours gratuits, puis £1 par mois.",
+monthlyPeriod:"/ mois",
+annualTitle:"Abonnement annuel",
+annualText:"£10 par an, renouvelé automatiquement jusqu’à annulation.",
+annualPeriod:"/ an",
+subscribe:"CHOISIR L’ABONNEMENT",
+gateFootnote:"Les abonnements se renouvellent automatiquement jusqu’à annulation.",
+code:"VOTRE CODE PETS & DOGUE",
+close:"FERMER",
+t1:"-20% sur tous les services de toilettage",
+t2:"-15% sur un bilan vétérinaire complet",
+t3:"-10% sur aliments et friandises",
+t4:"£25 de réduction sur un hôtel pet-friendly",
+t5:"-20% sur colliers, laisses et accessoires",
+t6:"-15% dans un café pet-friendly",
+t7:"-20% sur les cours d’éducation canine",
+t8:"-15% sur l’assurance voyage pour animaux",
+t9:"-10% sur une séance photo pour animaux"
+},
+
+de:{
+club:"CLUB",
+heroKicker:"PETS & DOGUE CLUB VORTEILE",
+heroTitle:"Spezielle Angebote für Sie",
+heroText:"Rabatte, Geschenke und Mitgliederpreise unserer Partner. Jede aktive Club-Mitgliedschaft schaltet alle Angebote frei.",
+heroBadge:"ALLE ANGEBOTE GELTEN FÜR ALLE AKTIVEN CLUB-MITGLIEDER",
+offersTitle:"Partnerrabatte",
+offersIntro:"Angebot antippen, um Code oder Barcode zu öffnen. Einmal pro Mitglied nutzbar.",
+all:"Alle",
+vet:"Tierarzt",
+groom:"Grooming",
+food:"Futter",
+shop:"Shopping",
+travel:"Reisen",
+cafe:"Pet-friendly",
+training:"Training",
+insurance:"Versicherung",
+valid:"Gültig bis",
+once:"1 Nutzung",
+members:"Für Club-Mitglieder",
+tapUnlock:"Tippen zum Freischalten",
+used:"VERWENDET ✓",
+expired:"ABGELAUFEN",
+noResults:"Noch keine Angebote in dieser Kategorie.",
+gateTitle:"Mit PETS & DOGUE Club freischalten",
+gateText:"Alle Rabatte gelten für jede aktive Club-Mitgliedschaft.",
+monthlyTitle:"Monatliche Mitgliedschaft",
+monthlyText:"30 Tage kostenlos, danach £1 pro Monat.",
+monthlyPeriod:"/ Monat",
+annualTitle:"Jahresmitgliedschaft",
+annualText:"£10 pro Jahr, automatische Verlängerung bis zur Kündigung.",
+annualPeriod:"/ Jahr",
+subscribe:"MITGLIEDSCHAFT WÄHLEN",
+gateFootnote:"Mitgliedschaften verlängern sich automatisch bis zur Kündigung.",
+code:"IHR PETS & DOGUE CODE",
+close:"SCHLIESSEN",
+t1:"20% Rabatt auf alle Grooming-Leistungen",
+t2:"15% Rabatt auf einen kompletten Tierarzt-Check",
+t3:"10% Rabatt auf Futter und Snacks",
+t4:"£25 Rabatt auf pet-friendly Hotels",
+t5:"20% Rabatt auf Halsbänder, Leinen und Zubehör",
+t6:"15% Rabatt im pet-friendly Café",
+t7:"20% Rabatt auf Hundetraining",
+t8:"15% Rabatt auf Reiseversicherung für Haustiere",
+t9:"10% Rabatt auf Tierfotografie"
+},
+
+es:{
+club:"CLUB",
+heroKicker:"PRIVILEGIOS PETS & DOGUE CLUB",
+heroTitle:"Ofertas especiales para ti",
+heroText:"Descuentos, regalos y precios exclusivos de nuestros socios. Cualquier suscripción Club activa desbloquea todas las ofertas.",
+heroBadge:"TODAS LAS OFERTAS SON PARA TODOS LOS SUSCRIPTORES ACTIVOS",
+offersTitle:"Descuentos de socios",
+offersIntro:"Toca una oferta para ver tu código o código de barras. Un uso por suscriptor.",
+all:"Todo",
+vet:"Veterinaria",
+groom:"Peluquería",
+food:"Alimentación",
+shop:"Compras",
+travel:"Viajes",
+cafe:"Pet-friendly",
+training:"Adiestramiento",
+insurance:"Seguro",
+valid:"Válido hasta",
+once:"1 uso",
+members:"Para suscriptores Club",
+tapUnlock:"Toca para desbloquear",
+used:"UTILIZADO ✓",
+expired:"CADUCADO",
+noResults:"Aún no hay ofertas en esta categoría.",
+gateTitle:"Desbloquea esta oferta con PETS & DOGUE Club",
+gateText:"Todos los descuentos están disponibles con cualquier suscripción Club activa.",
+monthlyTitle:"Suscripción mensual",
+monthlyText:"30 días gratis y después £1 al mes.",
+monthlyPeriod:"/ mes",
+annualTitle:"Suscripción anual",
+annualText:"£10 al año, renovación automática hasta cancelación.",
+annualPeriod:"/ año",
+subscribe:"ELEGIR SUSCRIPCIÓN",
+gateFootnote:"Las suscripciones se renuevan automáticamente hasta que se cancelen.",
+code:"TU CÓDIGO PETS & DOGUE",
+close:"CERRAR",
+t1:"20% de descuento en peluquería",
+t2:"15% de descuento en chequeo veterinario",
+t3:"10% de descuento en comida y premios",
+t4:"£25 de descuento en hoteles pet-friendly",
+t5:"20% de descuento en accesorios",
+t6:"15% de descuento en cafés pet-friendly",
+t7:"20% de descuento en cursos de adiestramiento",
+t8:"15% de descuento en seguro de viaje",
+t9:"10% de descuento en fotografía de mascotas"
+},
+
+it:{
+club:"CLUB",heroKicker:"PRIVILEGI PETS & DOGUE CLUB",heroTitle:"Offerte speciali per te",heroText:"Sconti, regali e prezzi riservati dai nostri partner. Qualsiasi abbonamento Club attivo sblocca tutte le offerte.",heroBadge:"TUTTE LE OFFERTE SONO PER TUTTI GLI ABBONATI ATTIVI",offersTitle:"Sconti partner",offersIntro:"Tocca un'offerta per vedere codice o barcode. Un utilizzo per abbonato.",all:"Tutte",vet:"Veterinaria",groom:"Toelettatura",food:"Alimentazione",shop:"Shopping",travel:"Viaggi",cafe:"Pet-friendly",training:"Addestramento",insurance:"Assicurazione",valid:"Valido fino al",once:"1 utilizzo",members:"Per abbonati Club",tapUnlock:"Tocca per sbloccare",used:"UTILIZZATO ✓",expired:"SCADUTO",noResults:"Nessuna offerta in questa categoria.",gateTitle:"Sblocca con PETS & DOGUE Club",gateText:"Tutti gli sconti sono disponibili con qualsiasi abbonamento Club attivo.",monthlyTitle:"Abbonamento mensile",monthlyText:"30 giorni gratis, poi £1 al mese.",monthlyPeriod:"/ mese",annualTitle:"Abbonamento annuale",annualText:"£10 all'anno con rinnovo automatico fino alla cancellazione.",annualPeriod:"/ anno",subscribe:"SCEGLI ABBONAMENTO",gateFootnote:"Gli abbonamenti si rinnovano automaticamente fino alla cancellazione.",code:"IL TUO CODICE PETS & DOGUE",close:"CHIUDI",t1:"-20% su tutti i servizi di toelettatura",t2:"-15% su check-up veterinario completo",t3:"-10% su alimenti e snack",t4:"£25 di sconto su hotel pet-friendly",t5:"-20% su collari, guinzagli e accessori",t6:"-15% nei café pet-friendly",t7:"-20% sui corsi di addestramento",t8:"-15% sull'assicurazione viaggio",t9:"-10% sulla fotografia per animali"
+},
+
+pt:{
+club:"CLUB",heroKicker:"PRIVILÉGIOS PETS & DOGUE CLUB",heroTitle:"Ofertas especiais para você",heroText:"Descontos, presentes e preços exclusivos dos nossos parceiros. Qualquer assinatura Club ativa libera todas as ofertas.",heroBadge:"TODAS AS OFERTAS PARA TODOS OS ASSINANTES ATIVOS",offersTitle:"Descontos de parceiros",offersIntro:"Toque numa oferta para ver o código ou código de barras. Um uso por assinante.",all:"Tudo",vet:"Veterinária",groom:"Grooming",food:"Alimentação",shop:"Compras",travel:"Viagens",cafe:"Pet-friendly",training:"Treino",insurance:"Seguro",valid:"Válido até",once:"1 uso",members:"Para assinantes Club",tapUnlock:"Toque para desbloquear",used:"USADO ✓",expired:"EXPIRADO",noResults:"Ainda não há ofertas nesta categoria.",gateTitle:"Desbloqueie com PETS & DOGUE Club",gateText:"Todos os descontos estão disponíveis com qualquer assinatura Club ativa.",monthlyTitle:"Assinatura mensal",monthlyText:"30 dias grátis, depois £1 por mês.",monthlyPeriod:"/ mês",annualTitle:"Assinatura anual",annualText:"£10 por ano, renovação automática até cancelamento.",annualPeriod:"/ ano",subscribe:"ESCOLHER ASSINATURA",gateFootnote:"As assinaturas renovam automaticamente até serem canceladas.",code:"SEU CÓDIGO PETS & DOGUE",close:"FECHAR",t1:"-20% em todos os serviços de grooming",t2:"-15% em check-up veterinário completo",t3:"-10% em alimentos e petiscos",t4:"£25 de desconto em hotel pet-friendly",t5:"-20% em coleiras e acessórios",t6:"-15% em cafés pet-friendly",t7:"-20% em cursos de treino",t8:"-15% em seguro de viagem",t9:"-10% em fotografia de pets"
+},
+
+nl:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB VOORDELEN",heroTitle:"Speciale aanbiedingen voor jou",heroText:"Kortingen, cadeaus en ledenprijzen van onze partners. Elk actief Club-abonnement geeft toegang tot alle aanbiedingen.",heroBadge:"ALLE AANBIEDINGEN VOOR ALLE ACTIEVE CLUB-ABONNEES",offersTitle:"Partnerkortingen",offersIntro:"Tik op een aanbieding voor je code of barcode. Eén keer per abonnee.",all:"Alles",vet:"Dierenarts",groom:"Grooming",food:"Voeding",shop:"Winkelen",travel:"Reizen",cafe:"Pet-friendly",training:"Training",insurance:"Verzekering",valid:"Geldig tot",once:"1 keer",members:"Voor Club-abonnees",tapUnlock:"Tik om te ontgrendelen",used:"GEBRUIKT ✓",expired:"VERLOPEN",noResults:"Nog geen aanbiedingen in deze categorie.",gateTitle:"Ontgrendel met PETS & DOGUE Club",gateText:"Alle kortingen zijn beschikbaar met elk actief Club-abonnement.",monthlyTitle:"Maandelijks",monthlyText:"30 dagen gratis, daarna £1 per maand.",monthlyPeriod:"/ maand",annualTitle:"Jaarlijks",annualText:"£10 per jaar, automatische verlenging tot opzegging.",annualPeriod:"/ jaar",subscribe:"KIES ABONNEMENT",gateFootnote:"Abonnementen worden automatisch verlengd tot ze worden opgezegd.",code:"JOUW PETS & DOGUE CODE",close:"SLUITEN",t1:"20% korting op grooming",t2:"15% korting op dierenartscheck",t3:"10% korting op voer en snacks",t4:"£25 korting op pet-friendly hotels",t5:"20% korting op accessoires",t6:"15% korting in pet-friendly cafés",t7:"20% korting op training",t8:"15% korting op reisverzekering",t9:"10% korting op dierenfotografie"
+},
+
+pl:{
+club:"CLUB",heroKicker:"PRZYWILEJE PETS & DOGUE CLUB",heroTitle:"Specjalne oferty dla Ciebie",heroText:"Rabaty, prezenty i ceny klubowe od partnerów. Każda aktywna subskrypcja Club odblokowuje wszystkie oferty.",heroBadge:"WSZYSTKIE OFERTY DLA WSZYSTKICH AKTYWNYCH SUBSKRYBENTÓW",offersTitle:"Rabaty partnerów",offersIntro:"Dotknij oferty, aby zobaczyć kod lub kod kreskowy. Jedno użycie na osobę.",all:"Wszystko",vet:"Weterynaria",groom:"Grooming",food:"Karma",shop:"Zakupy",travel:"Podróże",cafe:"Pet-friendly",training:"Szkolenie",insurance:"Ubezpieczenie",valid:"Ważne do",once:"1 użycie",members:"Dla członków Club",tapUnlock:"Dotknij, aby odblokować",used:"WYKORZYSTANO ✓",expired:"WYGASŁO",noResults:"Brak ofert w tej kategorii.",gateTitle:"Odblokuj z PETS & DOGUE Club",gateText:"Wszystkie rabaty są dostępne z każdą aktywną subskrypcją Club.",monthlyTitle:"Miesięcznie",monthlyText:"30 dni bezpłatnie, potem £1 miesięcznie.",monthlyPeriod:"/ miesiąc",annualTitle:"Rocznie",annualText:"£10 rocznie, automatyczne odnowienie do anulowania.",annualPeriod:"/ rok",subscribe:"WYBIERZ SUBSKRYPCJĘ",gateFootnote:"Subskrypcje odnawiają się automatycznie do anulowania.",code:"TWÓJ KOD PETS & DOGUE",close:"ZAMKNIJ",t1:"-20% na grooming",t2:"-15% na pełny przegląd weterynaryjny",t3:"-10% na karmę i przysmaki",t4:"£25 zniżki na hotel pet-friendly",t5:"-20% na akcesoria",t6:"-15% w kawiarni pet-friendly",t7:"-20% na szkolenie",t8:"-15% na ubezpieczenie podróżne",t9:"-10% na sesję fotograficzną"
+},
+
+cs:{
+club:"CLUB",heroKicker:"VÝHODY PETS & DOGUE CLUB",heroTitle:"Speciální nabídky pro vás",heroText:"Slevy, dárky a členské ceny od partnerů. Každé aktivní členství Club odemkne všechny nabídky.",heroBadge:"VŠECHNY NABÍDKY PRO VŠECHNY AKTIVNÍ ČLENY",offersTitle:"Partnerské slevy",offersIntro:"Klepnutím zobrazíte kód nebo čárový kód. Jedno použití na člena.",all:"Vše",vet:"Veterina",groom:"Grooming",food:"Krmivo",shop:"Nákupy",travel:"Cestování",cafe:"Pet-friendly",training:"Výcvik",insurance:"Pojištění",valid:"Platí do",once:"1 použití",members:"Pro členy Club",tapUnlock:"Klepněte pro odemčení",used:"POUŽITO ✓",expired:"VYPRŠELO",noResults:"V této kategorii zatím nejsou nabídky.",gateTitle:"Odemkněte s PETS & DOGUE Club",gateText:"Všechny slevy jsou dostupné s jakýmkoli aktivním členstvím Club.",monthlyTitle:"Měsíční členství",monthlyText:"30 dní zdarma, poté £1 měsíčně.",monthlyPeriod:"/ měsíc",annualTitle:"Roční členství",annualText:"£10 ročně, automatické obnovení do zrušení.",annualPeriod:"/ rok",subscribe:"VYBRAT ČLENSTVÍ",gateFootnote:"Členství se automaticky obnovuje do zrušení.",code:"VÁŠ KÓD PETS & DOGUE",close:"ZAVŘÍT",t1:"-20% na grooming",t2:"-15% na veterinární kontrolu",t3:"-10% na krmivo a pamlsky",t4:"£25 sleva na pet-friendly hotel",t5:"-20% na doplňky",t6:"-15% v pet-friendly kavárně",t7:"-20% na výcvik",t8:"-15% na cestovní pojištění",t9:"-10% na focení mazlíčka"
+},
+
+sk:{
+club:"CLUB",heroKicker:"VÝHODY PETS & DOGUE CLUB",heroTitle:"Špeciálne ponuky pre vás",heroText:"Zľavy, darčeky a členské ceny od partnerov. Každé aktívne členstvo Club odomkne všetky ponuky.",heroBadge:"VŠETKY PONUKY PRE VŠETKÝCH AKTÍVNYCH ČLENOV",offersTitle:"Partnerské zľavy",offersIntro:"Ťuknite na ponuku a zobrazte kód alebo čiarový kód. Jedno použitie na člena.",all:"Všetko",vet:"Veterina",groom:"Grooming",food:"Krmivo",shop:"Nákupy",travel:"Cestovanie",cafe:"Pet-friendly",training:"Výcvik",insurance:"Poistenie",valid:"Platí do",once:"1 použitie",members:"Pre členov Club",tapUnlock:"Ťuknite pre odomknutie",used:"POUŽITÉ ✓",expired:"VYPRŠALO",noResults:"V tejto kategórii zatiaľ nie sú ponuky.",gateTitle:"Odomknite s PETS & DOGUE Club",gateText:"Všetky zľavy sú dostupné s akýmkoľvek aktívnym členstvom Club.",monthlyTitle:"Mesačné členstvo",monthlyText:"30 dní zdarma, potom £1 mesačne.",monthlyPeriod:"/ mesiac",annualTitle:"Ročné členstvo",annualText:"£10 ročne, automatické obnovenie do zrušenia.",annualPeriod:"/ rok",subscribe:"VYBRAŤ ČLENSTVO",gateFootnote:"Členstvo sa automaticky obnovuje do zrušenia.",code:"VÁŠ KÓD PETS & DOGUE",close:"ZAVRIEŤ",t1:"-20% na grooming",t2:"-15% na veterinárnu kontrolu",t3:"-10% na krmivo a maškrty",t4:"£25 zľava na pet-friendly hotel",t5:"-20% na doplnky",t6:"-15% v pet-friendly kaviarni",t7:"-20% na výcvik",t8:"-15% na cestovné poistenie",t9:"-10% na fotenie zvieraťa"
+},
+
+hu:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB ELŐNYÖK",heroTitle:"Különleges ajánlatok Önnek",heroText:"Kedvezmények, ajándékok és klubárak partnereinktől. Minden aktív Club-előfizetés minden ajánlatot felold.",heroBadge:"MINDEN AJÁNLAT MINDEN AKTÍV CLUB-TAGNAK",offersTitle:"Partnerkedvezmények",offersIntro:"Érintse meg az ajánlatot a kód vagy vonalkód megnyitásához. Egy használat tagonként.",all:"Mind",vet:"Állatorvos",groom:"Kozmetika",food:"Eledel",shop:"Vásárlás",travel:"Utazás",cafe:"Pet-friendly",training:"Képzés",insurance:"Biztosítás",valid:"Érvényes",once:"1 használat",members:"Club-tagoknak",tapUnlock:"Érintse meg a feloldáshoz",used:"FELHASZNÁLVA ✓",expired:"LEJÁRT",noResults:"Még nincs ajánlat ebben a kategóriában.",gateTitle:"Oldja fel PETS & DOGUE Clubbal",gateText:"Minden kedvezmény bármely aktív Club-előfizetéssel elérhető.",monthlyTitle:"Havi tagság",monthlyText:"30 nap ingyenes, majd £1 havonta.",monthlyPeriod:"/ hó",annualTitle:"Éves tagság",annualText:"£10 évente, automatikus megújítással lemondásig.",annualPeriod:"/ év",subscribe:"TAGSÁG KIVÁLASZTÁSA",gateFootnote:"Az előfizetések automatikusan megújulnak lemondásig.",code:"AZ ÖN PETS & DOGUE KÓDJA",close:"BEZÁRÁS",t1:"20% kedvezmény kozmetikára",t2:"15% kedvezmény állatorvosi vizsgálatra",t3:"10% kedvezmény eledelre",t4:"£25 kedvezmény pet-friendly hotelre",t5:"20% kedvezmény kiegészítőkre",t6:"15% kedvezmény pet-friendly kávézóban",t7:"20% kedvezmény képzésre",t8:"15% kedvezmény utasbiztosításra",t9:"10% kedvezmény fotózásra"
+},
+
+ro:{
+club:"CLUB",heroKicker:"BENEFICII PETS & DOGUE CLUB",heroTitle:"Oferte speciale pentru tine",heroText:"Reduceri, cadouri și prețuri de membru de la parteneri. Orice abonament Club activ deblochează toate ofertele.",heroBadge:"TOATE OFERTELE PENTRU TOȚI ABONAȚII ACTIVI",offersTitle:"Reduceri parteneri",offersIntro:"Apasă oferta pentru cod sau cod de bare. O utilizare per abonat.",all:"Toate",vet:"Veterinar",groom:"Grooming",food:"Hrană",shop:"Cumpărături",travel:"Călătorii",cafe:"Pet-friendly",training:"Dresaj",insurance:"Asigurare",valid:"Valabil până la",once:"1 utilizare",members:"Pentru abonații Club",tapUnlock:"Apasă pentru deblocare",used:"FOLOSIT ✓",expired:"EXPIRAT",noResults:"Nu există încă oferte aici.",gateTitle:"Deblochează cu PETS & DOGUE Club",gateText:"Toate reducerile sunt disponibile cu orice abonament Club activ.",monthlyTitle:"Abonament lunar",monthlyText:"30 zile gratuit, apoi £1 lunar.",monthlyPeriod:"/ lună",annualTitle:"Abonament anual",annualText:"£10 pe an, reînnoire automată până la anulare.",annualPeriod:"/ an",subscribe:"ALEGE ABONAMENTUL",gateFootnote:"Abonamentele se reînnoiesc automat până la anulare.",code:"CODUL TĂU PETS & DOGUE",close:"ÎNCHIDE",t1:"-20% la grooming",t2:"-15% la control veterinar complet",t3:"-10% la hrană și recompense",t4:"£25 reducere la hotel pet-friendly",t5:"-20% la accesorii",t6:"-15% la cafenele pet-friendly",t7:"-20% la dresaj",t8:"-15% la asigurare de călătorie",t9:"-10% la fotografie pentru animale"
+},
+
+bg:{
+club:"CLUB",heroKicker:"ПРИВИЛЕГИИ PETS & DOGUE CLUB",heroTitle:"Специални предложения за вас",heroText:"Отстъпки, подаръци и клубни цени от партньори. Всеки активен Club абонамент отключва всички предложения.",heroBadge:"ВСИЧКИ ОФЕРТИ СА ЗА ВСИЧКИ АКТИВНИ АБОНАТИ",offersTitle:"Партньорски отстъпки",offersIntro:"Натиснете офертата за код или баркод. Едно използване на абонат.",all:"Всички",vet:"Ветеринар",groom:"Груминг",food:"Храна",shop:"Пазаруване",travel:"Пътуване",cafe:"Pet-friendly",training:"Обучение",insurance:"Застраховка",valid:"Валидно до",once:"1 път",members:"За Club абонати",tapUnlock:"Натиснете за отключване",used:"ИЗПОЛЗВАНО ✓",expired:"ИЗТЕКЛО",noResults:"Все още няма оферти.",gateTitle:"Отключете с PETS & DOGUE Club",gateText:"Всички отстъпки са достъпни с всеки активен Club абонамент.",monthlyTitle:"Месечен абонамент",monthlyText:"30 дни безплатно, след това £1 месечно.",monthlyPeriod:"/ месец",annualTitle:"Годишен абонамент",annualText:"£10 годишно, автоматично подновяване до отказ.",annualPeriod:"/ година",subscribe:"ИЗБЕРЕТЕ АБОНАМЕНТ",gateFootnote:"Абонаментите се подновяват автоматично до отказ.",code:"ВАШИЯТ PETS & DOGUE КОД",close:"ЗАТВОРИ",t1:"-20% за груминг",t2:"-15% за ветеринарен преглед",t3:"-10% за храна и лакомства",t4:"£25 отстъпка за pet-friendly хотел",t5:"-20% за аксесоари",t6:"-15% в pet-friendly кафе",t7:"-20% за обучение",t8:"-15% за пътна застраховка",t9:"-10% за фотосесия"
+},
+
+el:{
+club:"CLUB",heroKicker:"ΠΡΟΝΟΜΙΑ PETS & DOGUE CLUB",heroTitle:"Ειδικές προσφορές για εσάς",heroText:"Εκπτώσεις, δώρα και τιμές μελών από συνεργάτες. Κάθε ενεργή συνδρομή Club ξεκλειδώνει όλες τις προσφορές.",heroBadge:"ΟΛΕΣ ΟΙ ΠΡΟΣΦΟΡΕΣ ΓΙΑ ΟΛΑ ΤΑ ΕΝΕΡΓΑ ΜΕΛΗ",offersTitle:"Εκπτώσεις συνεργατών",offersIntro:"Πατήστε μια προσφορά για κωδικό ή barcode. Μία χρήση ανά μέλος.",all:"Όλα",vet:"Κτηνίατρος",groom:"Grooming",food:"Τροφή",shop:"Αγορές",travel:"Ταξίδια",cafe:"Pet-friendly",training:"Εκπαίδευση",insurance:"Ασφάλιση",valid:"Ισχύει έως",once:"1 χρήση",members:"Για μέλη Club",tapUnlock:"Πατήστε για ξεκλείδωμα",used:"ΧΡΗΣΙΜΟΠΟΙΗΘΗΚΕ ✓",expired:"ΕΛΗΞΕ",noResults:"Δεν υπάρχουν ακόμη προσφορές.",gateTitle:"Ξεκλειδώστε με PETS & DOGUE Club",gateText:"Όλες οι εκπτώσεις είναι διαθέσιμες με κάθε ενεργή συνδρομή Club.",monthlyTitle:"Μηνιαία συνδρομή",monthlyText:"30 ημέρες δωρεάν και μετά £1/μήνα.",monthlyPeriod:"/ μήνα",annualTitle:"Ετήσια συνδρομή",annualText:"£10/έτος με αυτόματη ανανέωση μέχρι ακύρωση.",annualPeriod:"/ έτος",subscribe:"ΕΠΙΛΟΓΗ ΣΥΝΔΡΟΜΗΣ",gateFootnote:"Οι συνδρομές ανανεώνονται αυτόματα μέχρι ακύρωση.",code:"Ο ΚΩΔΙΚΟΣ PETS & DOGUE",close:"ΚΛΕΙΣΙΜΟ",t1:"-20% στο grooming",t2:"-15% σε κτηνιατρικό έλεγχο",t3:"-10% σε τροφές",t4:"£25 έκπτωση σε pet-friendly ξενοδοχείο",t5:"-20% σε αξεσουάρ",t6:"-15% σε pet-friendly café",t7:"-20% σε εκπαίδευση",t8:"-15% σε ταξιδιωτική ασφάλιση",t9:"-10% σε φωτογράφιση"
+},
+
+sv:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB-FÖRMÅNER",heroTitle:"Specialerbjudanden för dig",heroText:"Rabatter, gåvor och medlemspriser från partners. Alla aktiva Club-abonnemang låser upp alla erbjudanden.",heroBadge:"ALLA ERBJUDANDEN FÖR ALLA AKTIVA MEDLEMMAR",offersTitle:"Partnerrabatter",offersIntro:"Tryck på erbjudandet för kod eller streckkod. En användning per medlem.",all:"Alla",vet:"Veterinär",groom:"Grooming",food:"Foder",shop:"Shopping",travel:"Resor",cafe:"Pet-friendly",training:"Träning",insurance:"Försäkring",valid:"Gäller till",once:"1 gång",members:"För Club-medlemmar",tapUnlock:"Tryck för att låsa upp",used:"ANVÄND ✓",expired:"UTGÅNGET",noResults:"Inga erbjudanden ännu.",gateTitle:"Lås upp med PETS & DOGUE Club",gateText:"Alla rabatter ingår i alla aktiva Club-abonnemang.",monthlyTitle:"Månadsabonnemang",monthlyText:"30 dagar gratis, därefter £1/månad.",monthlyPeriod:"/ månad",annualTitle:"Årsabonnemang",annualText:"£10/år med automatisk förnyelse tills uppsägning.",annualPeriod:"/ år",subscribe:"VÄLJ ABONNEMANG",gateFootnote:"Abonnemang förnyas automatiskt tills de sägs upp.",code:"DIN PETS & DOGUE-KOD",close:"STÄNG",t1:"20% rabatt på grooming",t2:"15% rabatt på veterinärkontroll",t3:"10% rabatt på foder",t4:"£25 rabatt på pet-friendly hotell",t5:"20% rabatt på tillbehör",t6:"15% rabatt på pet-friendly café",t7:"20% rabatt på träning",t8:"15% rabatt på reseförsäkring",t9:"10% rabatt på fotografering"
+},
+
+da:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB-FORDELE",heroTitle:"Særlige tilbud til dig",heroText:"Rabatter, gaver og medlemspriser fra partnere. Alle aktive Club-abonnementer åbner alle tilbud.",heroBadge:"ALLE TILBUD TIL ALLE AKTIVE MEDLEMMER",offersTitle:"Partnerrabatter",offersIntro:"Tryk på et tilbud for kode eller stregkode. Én brug pr. medlem.",all:"Alle",vet:"Dyrlæge",groom:"Grooming",food:"Foder",shop:"Shopping",travel:"Rejser",cafe:"Pet-friendly",training:"Træning",insurance:"Forsikring",valid:"Gyldig til",once:"1 gang",members:"For Club-medlemmer",tapUnlock:"Tryk for at låse op",used:"BRUGT ✓",expired:"UDLØBET",noResults:"Ingen tilbud endnu.",gateTitle:"Lås op med PETS & DOGUE Club",gateText:"Alle rabatter er tilgængelige med ethvert aktivt Club-abonnement.",monthlyTitle:"Månedligt abonnement",monthlyText:"30 dage gratis, derefter £1/måned.",monthlyPeriod:"/ måned",annualTitle:"Årligt abonnement",annualText:"£10/år med automatisk fornyelse indtil opsigelse.",annualPeriod:"/ år",subscribe:"VÆLG ABONNEMENT",gateFootnote:"Abonnementer fornyes automatisk indtil opsigelse.",code:"DIN PETS & DOGUE-KODE",close:"LUK",t1:"20% rabat på grooming",t2:"15% rabat på dyrlægecheck",t3:"10% rabat på foder",t4:"£25 rabat på pet-friendly hotel",t5:"20% rabat på tilbehør",t6:"15% rabat på pet-friendly café",t7:"20% rabat på træning",t8:"15% rabat på rejseforsikring",t9:"10% rabat på fotografering"
+},
+
+no:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB-FORDELER",heroTitle:"Spesialtilbud for deg",heroText:"Rabatter, gaver og medlemspriser fra partnere. Alle aktive Club-abonnement gir tilgang til alle tilbud.",heroBadge:"ALLE TILBUD FOR ALLE AKTIVE MEDLEMMER",offersTitle:"Partnerrabatter",offersIntro:"Trykk på et tilbud for kode eller strekkode. Én bruk per medlem.",all:"Alle",vet:"Veterinær",groom:"Grooming",food:"Fôr",shop:"Shopping",travel:"Reise",cafe:"Pet-friendly",training:"Trening",insurance:"Forsikring",valid:"Gyldig til",once:"1 gang",members:"For Club-medlemmer",tapUnlock:"Trykk for å låse opp",used:"BRUKT ✓",expired:"UTLØPT",noResults:"Ingen tilbud ennå.",gateTitle:"Lås opp med PETS & DOGUE Club",gateText:"Alle rabatter er tilgjengelige med ethvert aktivt Club-abonnement.",monthlyTitle:"Månedsabonnement",monthlyText:"30 dager gratis, deretter £1/måned.",monthlyPeriod:"/ måned",annualTitle:"Årsabonnement",annualText:"£10/år med automatisk fornyelse frem til oppsigelse.",annualPeriod:"/ år",subscribe:"VELG ABONNEMENT",gateFootnote:"Abonnement fornyes automatisk frem til oppsigelse.",code:"DIN PETS & DOGUE-KODE",close:"LUKK",t1:"20% rabatt på grooming",t2:"15% rabatt på veterinærsjekk",t3:"10% rabatt på fôr",t4:"£25 rabatt på pet-friendly hotell",t5:"20% rabatt på tilbehør",t6:"15% rabatt på pet-friendly café",t7:"20% rabatt på trening",t8:"15% rabatt på reiseforsikring",t9:"10% rabatt på fotografering"
+},
+
+fi:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB -EDUT",heroTitle:"Erikoistarjouksia sinulle",heroText:"Alennuksia, lahjoja ja jäsenhintoja kumppaneilta. Kaikki aktiiviset Club-jäsenyydet avaavat kaikki tarjoukset.",heroBadge:"KAIKKI TARJOUKSET KAIKILLE AKTIIVISILLE JÄSENILLE",offersTitle:"Kumppanialennukset",offersIntro:"Napauta tarjousta nähdäksesi koodin tai viivakoodin. Yksi käyttö jäsentä kohti.",all:"Kaikki",vet:"Eläinlääkäri",groom:"Trimmaus",food:"Ruoka",shop:"Ostokset",travel:"Matkailu",cafe:"Pet-friendly",training:"Koulutus",insurance:"Vakuutus",valid:"Voimassa",once:"1 käyttö",members:"Club-jäsenille",tapUnlock:"Napauta avataksesi",used:"KÄYTETTY ✓",expired:"VANHENTUNUT",noResults:"Ei tarjouksia vielä.",gateTitle:"Avaa PETS & DOGUE Clubilla",gateText:"Kaikki alennukset kuuluvat jokaiseen aktiiviseen Club-jäsenyyteen.",monthlyTitle:"Kuukausijäsenyys",monthlyText:"30 päivää ilmaiseksi, sitten £1/kk.",monthlyPeriod:"/ kk",annualTitle:"Vuosijäsenyys",annualText:"£10/vuosi, automaattinen uusinta peruutukseen asti.",annualPeriod:"/ vuosi",subscribe:"VALITSE JÄSENYYS",gateFootnote:"Jäsenyydet uusiutuvat automaattisesti peruutukseen asti.",code:"PETS & DOGUE -KOODISI",close:"SULJE",t1:"20% alennus trimmauksesta",t2:"15% alennus eläinlääkärintarkastuksesta",t3:"10% alennus ruoasta",t4:"£25 alennus pet-friendly hotellista",t5:"20% alennus tarvikkeista",t6:"15% alennus pet-friendly kahvilassa",t7:"20% alennus koulutuksesta",t8:"15% alennus matkavakuutuksesta",t9:"10% alennus lemmikkikuvauksesta"
+},
+
+tr:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB AYRICALIKLARI",heroTitle:"Size özel teklifler",heroText:"Partnerlerden indirimler, hediyeler ve üye fiyatları. Her aktif Club aboneliği tüm teklifleri açar.",heroBadge:"TÜM TEKLİFLER TÜM AKTİF CLUB ÜYELERİNE AÇIK",offersTitle:"Partner indirimleri",offersIntro:"Kod veya barkodu görmek için teklife dokunun. Üye başına bir kullanım.",all:"Tümü",vet:"Veteriner",groom:"Bakım",food:"Mama",shop:"Alışveriş",travel:"Seyahat",cafe:"Pet-friendly",training:"Eğitim",insurance:"Sigorta",valid:"Geçerli",once:"1 kullanım",members:"Club üyelerine",tapUnlock:"Açmak için dokunun",used:"KULLANILDI ✓",expired:"SÜRESİ DOLDU",noResults:"Henüz teklif yok.",gateTitle:"PETS & DOGUE Club ile açın",gateText:"Tüm indirimler her aktif Club aboneliğinde kullanılabilir.",monthlyTitle:"Aylık abonelik",monthlyText:"30 gün ücretsiz, sonra aylık £1.",monthlyPeriod:"/ ay",annualTitle:"Yıllık abonelik",annualText:"Yıllık £10, iptale kadar otomatik yenilenir.",annualPeriod:"/ yıl",subscribe:"ABONELİK SEÇ",gateFootnote:"Abonelikler iptal edilene kadar otomatik yenilenir.",code:"PETS & DOGUE KODUNUZ",close:"KAPAT",t1:"Bakım hizmetlerinde %20 indirim",t2:"Veteriner kontrolünde %15 indirim",t3:"Mama ve ödüllerde %10 indirim",t4:"Pet-friendly otelde £25 indirim",t5:"Aksesuarlarda %20 indirim",t6:"Pet-friendly kafede %15 indirim",t7:"Eğitimde %20 indirim",t8:"Seyahat sigortasında %15 indirim",t9:"Evcil hayvan fotoğrafında %10 indirim"
+},
+
+ar:{
+club:"النادي",heroKicker:"مزايا PETS & DOGUE CLUB",heroTitle:"عروض خاصة لك",heroText:"خصومات وهدايا وأسعار أعضاء من شركائنا. أي اشتراك Club نشط يفتح جميع العروض.",heroBadge:"جميع العروض متاحة لجميع المشتركين النشطين",offersTitle:"خصومات الشركاء",offersIntro:"اضغط على العرض لعرض الرمز أو الباركود. استخدام واحد لكل مشترك.",all:"الكل",vet:"بيطري",groom:"العناية",food:"الطعام",shop:"التسوق",travel:"السفر",cafe:"Pet-friendly",training:"التدريب",insurance:"التأمين",valid:"صالح حتى",once:"استخدام واحد",members:"لمشتركي Club",tapUnlock:"اضغط لفتح العرض",used:"تم الاستخدام ✓",expired:"منتهي",noResults:"لا توجد عروض بعد.",gateTitle:"افتح العرض مع PETS & DOGUE Club",gateText:"جميع الخصومات متاحة مع أي اشتراك Club نشط.",monthlyTitle:"اشتراك شهري",monthlyText:"30 يومًا مجانًا ثم £1 شهريًا.",monthlyPeriod:"/ شهر",annualTitle:"اشتراك سنوي",annualText:"£10 سنويًا مع تجديد تلقائي حتى الإلغاء.",annualPeriod:"/ سنة",subscribe:"اختر الاشتراك",gateFootnote:"تتجدد الاشتراكات تلقائيًا حتى يتم إلغاؤها.",code:"رمز PETS & DOGUE الخاص بك",close:"إغلاق",t1:"خصم 20% على خدمات العناية",t2:"خصم 15% على الفحص البيطري",t3:"خصم 10% على الطعام والمكافآت",t4:"خصم £25 على فندق pet-friendly",t5:"خصم 20% على الإكسسوارات",t6:"خصم 15% في مقهى pet-friendly",t7:"خصم 20% على التدريب",t8:"خصم 15% على تأمين السفر",t9:"خصم 10% على تصوير الحيوانات"
+},
+
+hi:{
+club:"CLUB",heroKicker:"PETS & DOGUE CLUB लाभ",heroTitle:"आपके लिए विशेष ऑफ़र",heroText:"हमारे पार्टनरों से छूट, उपहार और सदस्य मूल्य। कोई भी सक्रिय Club सदस्यता सभी ऑफ़र खोलती है।",heroBadge:"सभी ऑफ़र सभी सक्रिय CLUB सदस्यों के लिए",offersTitle:"पार्टनर छूट",offersIntro:"कोड या बारकोड देखने के लिए ऑफ़र पर टैप करें। प्रति सदस्य एक उपयोग।",all:"सभी",vet:"पशु चिकित्सक",groom:"ग्रूमिंग",food:"भोजन",shop:"खरीदारी",travel:"यात्रा",cafe:"Pet-friendly",training:"ट्रेनिंग",insurance:"बीमा",valid:"मान्य",once:"1 उपयोग",members:"Club सदस्यों के लिए",tapUnlock:"खोलने के लिए टैप करें",used:"उपयोग किया ✓",expired:"समाप्त",noResults:"अभी कोई ऑफ़र नहीं है।",gateTitle:"PETS & DOGUE Club से ऑफ़र खोलें",gateText:"सभी छूट किसी भी सक्रिय Club सदस्यता के साथ उपलब्ध हैं।",monthlyTitle:"मासिक सदस्यता",monthlyText:"30 दिन मुफ़्त, फिर £1 प्रति माह।",monthlyPeriod:"/ माह",annualTitle:"वार्षिक सदस्यता",annualText:"£10 प्रति वर्ष, रद्द होने तक स्वतः नवीनीकरण।",annualPeriod:"/ वर्ष",subscribe:"सदस्यता चुनें",gateFootnote:"सदस्यता रद्द होने तक स्वतः नवीनीकृत होती है।",code:"आपका PETS & DOGUE कोड",close:"बंद करें",t1:"ग्रूमिंग पर 20% छूट",t2:"पशु चिकित्सक जांच पर 15% छूट",t3:"भोजन पर 10% छूट",t4:"Pet-friendly होटल पर £25 छूट",t5:"एक्सेसरीज़ पर 20% छूट",t6:"Pet-friendly कैफ़े में 15% छूट",t7:"ट्रेनिंग पर 20% छूट",t8:"यात्रा बीमा पर 15% छूट",t9:"पालतू फोटोग्राफी पर 10% छूट"
+}
+
+};
+
+["pt","nl","pl","cs","sk","hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"].forEach(code=>{
+if(!I18N[code]){
+I18N[code]={...I18N.en};
+}
+});
+
+const OTHER_COMPLETE={
+};
+
+const DEMO_IMAGES=[
+"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1541599468348-e96984315921?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=82",
+"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=82"
+];
+
+const DEMO_OFFERS=[
+{id:"demo_groom",partner:"PrettyPaw",category:"groom",discount:"-20%",titleKey:"t1",code:"DOGUE-GROOM20",days:38,image:DEMO_IMAGES[0]},
+{id:"demo_vet",partner:"Royal Vet Clinic",category:"vet",discount:"-15%",titleKey:"t2",code:"DOGUE-VET15",days:52,image:DEMO_IMAGES[1]},
+{id:"demo_food",partner:"ORYGO",category:"food",discount:"-10%",titleKey:"t3",code:"DOGUE-FOOD10",days:33,image:DEMO_IMAGES[2]},
+{id:"demo_hotel",partner:"Paw Palace Hotel",category:"travel",discount:"£25",titleKey:"t4",code:"DOGUE-HOTEL25",days:61,image:DEMO_IMAGES[3]},
+{id:"demo_shop",partner:"PAW & CO",category:"shop",discount:"-20%",titleKey:"t5",code:"DOGUE-PAW20",days:44,image:DEMO_IMAGES[4]},
+{id:"demo_cafe",partner:"Barkin' Café",category:"cafe",discount:"-15%",titleKey:"t6",code:"DOGUE-CAFE15",days:29,image:DEMO_IMAGES[5]},
+{id:"demo_training",partner:"Good Dog Academy",category:"training",discount:"-20%",titleKey:"t7",code:"DOGUE-TRAIN20",days:57,image:DEMO_IMAGES[6]},
+{id:"demo_insurance",partner:"Safe Paws",category:"insurance",discount:"-15%",titleKey:"t8",code:"DOGUE-SAFE15",days:72,image:DEMO_IMAGES[7]},
+{id:"demo_photo",partner:"Paws & Pose",category:"shop",discount:"-10%",titleKey:"t9",code:"DOGUE-PHOTO10",days:47,image:DEMO_IMAGES[8]}
+];
+
+const CATEGORY_KEYS=[
+"all",
+"vet",
+"groom",
+"food",
+"shop",
+"travel",
+"cafe",
+"training",
+"insurance"
+];
+
+const CODE39={
+"0":"nnnwwnwnn",
+"1":"wnnwnnnnw",
+"2":"nnwwnnnnw",
+"3":"wnwwnnnnn",
+"4":"nnnwwnnnw",
+"5":"wnnwwnnnn",
+"6":"nnwwwnnnn",
+"7":"nnnwnnwnw",
+"8":"wnnwnnwnn",
+"9":"nnwwnnwnn",
+"A":"wnnnnwnnw",
+"B":"nnwnnwnnw",
+"C":"wnwnnwnnn",
+"D":"nnnnwwnnw",
+"E":"wnnnwwnnn",
+"F":"nnwnwwnnn",
+"G":"nnnnnwwnw",
+"H":"wnnnnwwnn",
+"I":"nnwnnwwnn",
+"J":"nnnnwwwnn",
+"K":"wnnnnnnww",
+"L":"nnwnnnnww",
+"M":"wnwnnnnwn",
+"N":"nnnnwnnww",
+"O":"wnnnwnnwn",
+"P":"nnwnwnnwn",
+"Q":"nnnnnnwww",
+"R":"wnnnnnwwn",
+"S":"nnwnnnwwn",
+"T":"nnnnwnwwn",
+"U":"wwnnnnnnw",
+"V":"nwwnnnnnw",
+"W":"wwwnnnnnn",
+"X":"nwnnwnnnw",
+"Y":"wwnnwnnnn",
+"Z":"nwwnwnnnn",
+"-":"nwnnnnwnw",
+".":"wwnnnnwnn",
+" ":"nwwnnnwnn",
+"$":"nwnwnwnnn",
+"/":"nwnwnnnwn",
+"+":"nwnnnwnwn",
+"%":"nnnwnwnwn",
+"*":"nwnnwnwnn"
+};
+
+let currentLanguage="en";
+let activeCategory="all";
+let selectedOffer=null;
+
+function t(){
+return I18N[currentLanguage]||I18N.en;
+}
+
+function daysFromNow(days){
+const d=new Date();
+d.setDate(d.getDate()+days);
+return d.toISOString().slice(0,10);
+}
+
+function dateLocale(){
+const map={
+ru:"ru-RU",
+uk:"uk-UA",
+fr:"fr-FR",
+de:"de-DE",
+es:"es-ES",
+it:"it-IT",
+pt:"pt-PT",
+nl:"nl-NL",
+pl:"pl-PL",
+cs:"cs-CZ",
+sk:"sk-SK",
+hu:"hu-HU",
+ro:"ro-RO",
+bg:"bg-BG",
+el:"el-GR",
+sv:"sv-SE",
+da:"da-DK",
+no:"nb-NO",
+fi:"fi-FI",
+tr:"tr-TR",
+ar:"ar",
+hi:"hi-IN"
+};
+return map[currentLanguage]||"en-GB";
+}
+
+function formatDate(value){
+
+if(!value){
+return "—";
+}
+
+const d=
+String(value).includes("T")
+?new Date(value)
+:new Date(`${value}T12:00:00`);
+
+return d.toLocaleDateString(
+dateLocale(),
+{
+day:"2-digit",
+month:"short",
+year:"numeric"
+}
+);
+
+}
+
+function escapeHtml(value){
+
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+function getJSON(key,fallback){
+
+try{
+return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));
+}catch{
+return fallback;
+}
+
+}
+
+function membershipObject(){
+
+const keys=[
+"petsDogueClubMembership",
+"pets_dogue_club_membership",
+"petsDogueMembership",
+"pets_dogue_membership",
+"clubMembership"
+];
+
+for(const key of keys){
+
+const raw=localStorage.getItem(key);
+
+if(!raw){
+continue;
+}
+
+try{
+
+const parsed=JSON.parse(raw);
+
+if(parsed){
+return parsed;
+}
+
+}catch{
+
+if(raw==="active"||raw==="paid"||raw==="true"){
+return {status:"active"};
+}
+
+}
+
+}
+
+return null;
+}
+
+function hasActiveMembership(){
+
+const membership=membershipObject();
+
+if(!membership){
+return false;
+}
+
+if(membership===true){
+return true;
+}
+
+const status=
+String(
+membership.status||
+membership.subscriptionStatus||
+membership.membershipStatus||
+""
+).toLowerCase();
+
+return [
+"active",
+"trialing",
+"trial",
+"paid",
+"current"
+].includes(status);
+
+}
+
+function usedOfferIds(){
+
+const value=getJSON(USED_OFFERS_KEY,[]);
+
+return Array.isArray(value)
+?value.map(String)
+:[];
+
+}
+
+function normalizePartnerOffers(){
+
+const stored=getJSON(PARTNER_OFFERS_KEY,[]);
+
+if(!Array.isArray(stored)){
+return [];
+}
+
+return stored
+.filter(item=>item&&["active","paid"].includes(String(item.status||"").toLowerCase()))
+.map((item,index)=>{
+
+const categoryIndex=Number(item.category||0);
+
+const categoryMap=[
+"vet",
+"groom",
+"food",
+"shop",
+"travel",
+"cafe",
+"training",
+"shop",
+"insurance",
+"shop",
+"travel",
+"shop"
+];
+
+return{
+id:String(item.id||`partner_${index}`),
+partner:String(item.company||"PETS & DOGUE Partner"),
+category:categoryMap[categoryIndex]||"shop",
+discount:String(item.discount||item.saving||"SPECIAL"),
+customTitle:String(item.title||item.description||"Member offer"),
+code:String(item.code||`DOGUE-${String(item.id||Date.now()).slice(-6).toUpperCase()}`),
+end:item.end||daysFromNow(30),
+image:item.image||DEMO_IMAGES[index%DEMO_IMAGES.length]
+};
+
+});
+
+}
+
+function allOffers(){
+
+const demo=
+DEMO_OFFERS.map(item=>({
+...item,
+end:daysFromNow(item.days)
+}));
+
+return[
+...normalizePartnerOffers(),
+...demo
+];
+
+}
+
+function isExpired(offer){
+
+if(!offer.end){
+return false;
+}
+
+const end=new Date(`${offer.end}T23:59:59`);
+
+return Date.now()>end.getTime();
+
+}
+
+function offerTitle(offer){
+
+if(offer.customTitle){
+return offer.customTitle;
+}
+
+return t()[offer.titleKey]||offer.titleKey||"";
+}
+
+function categoryLabel(key){
+
+return t()[key]||key;
+
+}
+
+function renderLanguage(code){
+
+if(!LANGS.includes(code)){
+code="en";
+}
+
+currentLanguage=code;
+
+localStorage.setItem(LANGUAGE_KEY,code);
+
+document.documentElement.lang=code;
+document.documentElement.dir=code==="ar"?"rtl":"ltr";
+
+$("languageSelect").value=code;
+
+const x=t();
+
+$("clubLink").textContent=x.club;
+$("heroKicker").textContent=x.heroKicker;
+$("heroTitle").textContent=x.heroTitle;
+$("heroText").textContent=x.heroText;
+$("heroBadge").textContent=x.heroBadge;
+$("offersTitle").textContent=x.offersTitle;
+$("offersIntro").textContent=x.offersIntro;
+
+$("gateTitle").textContent=x.gateTitle;
+$("gateText").textContent=x.gateText;
+$("monthlyTitle").textContent=x.monthlyTitle;
+$("monthlyText").textContent=x.monthlyText;
+$("monthlyPeriod").textContent=x.monthlyPeriod;
+$("annualTitle").textContent=x.annualTitle;
+$("annualText").textContent=x.annualText;
+$("annualPeriod").textContent=x.annualPeriod;
+$("subscribeButton").textContent=x.subscribe;
+$("gateFootnote").textContent=x.gateFootnote;
+
+$("modalCodeLabel").textContent=x.code;
+$("offerModalClose").textContent=x.close;
+
+renderFilters();
+renderOffers();
+
+}
+
+function renderFilters(){
+
+$("filters").innerHTML=
+CATEGORY_KEYS.map(key=>`
+<button
+class="filter ${key===activeCategory?"active":""}"
+type="button"
+data-category="${escapeHtml(key)}"
+>
+${escapeHtml(categoryLabel(key))}
+</button>
+`).join("");
+
+document.querySelectorAll(".filter").forEach(button=>{
+
+button.onclick=()=>{
+
+activeCategory=button.dataset.category||"all";
+
+renderFilters();
+renderOffers();
+
+};
+
+});
+
+}
+
+function renderBarcode(container,code){
+
+container.innerHTML="";
+
+const clean=
+String(code||"")
+.toUpperCase()
+.replace(/[^0-9A-Z.\- $/+%]/g,"-");
+
+const encoded=
+`*${clean}*`;
+
+const narrow=1;
+const wide=3;
+
+for(const character of encoded){
+
+const pattern=CODE39[character]||CODE39["-"];
+
+pattern.split("").forEach((widthType,index)=>{
+
+const bar=
+document.createElement("span");
+
+const width=
+widthType==="w"
+?wide
+:narrow;
+
+bar.className=
+index%2===0
+?"barcode-bar"
+:"barcode-space";
+
+bar.style.width=`${width}px`;
+
+container.appendChild(bar);
+
+});
+
+const gap=document.createElement("span");
+gap.className="barcode-space";
+gap.style.width=`${narrow}px`;
+
+container.appendChild(gap);
+
+}
+
+}
+
+function renderOffers(){
+
+const used=usedOfferIds();
+const member=hasActiveMembership();
+
+const offers=
+allOffers().filter(offer=>
+activeCategory==="all"||
+offer.category===activeCategory
+);
+
+if(!offers.length){
+
+$("offerGrid").innerHTML=`
+<div class="no-results">
+${escapeHtml(t().noResults)}
+</div>
+`;
+
+return;
+}
+
+$("offerGrid").innerHTML=
+offers.map(offer=>{
+
+const expired=isExpired(offer);
+const isUsed=used.includes(String(offer.id));
+const state=
+isUsed
+?"used"
+:expired
+?"expired"
+:member
+?""
+:"locked";
+
+const statusText=
+isUsed
+?t().used
+:expired
+?t().expired
+:member
+?t().members
+:t().tapUnlock;
+
+return`
+<article
+class="offer-card ${state}"
+data-offer-id="${escapeHtml(offer.id)}"
+>
+
+<div class="offer-card-image">
+
+<img
+src="${escapeHtml(offer.image)}"
+alt="${escapeHtml(offer.partner)}"
+loading="lazy"
+>
+
+<span class="category-badge">
+${escapeHtml(categoryLabel(offer.category))}
+</span>
+
+<span class="club-badge">
+CLUB
+</span>
+
+<span class="discount-badge">
+${escapeHtml(offer.discount)}
+</span>
+
+</div>
+
+<div class="offer-card-body">
+
+<div class="partner-name">
+${escapeHtml(offer.partner)}
+</div>
+
+<div class="offer-title">
+${escapeHtml(offerTitle(offer))}
+</div>
+
+<div class="offer-meta">
+
+<span>
+${escapeHtml(t().valid)}
+${escapeHtml(formatDate(offer.end))}
+</span>
+
+<span>
+${escapeHtml(t().once)}
+</span>
+
+</div>
+
+<div class="redemption">
+
+<div class="promo-line">
+
+<span class="promo-label">
+${escapeHtml(t().code)}
+</span>
+
+<span class="promo-code">
+${escapeHtml(offer.code)}
+</span>
+
+</div>
+
+<div
+class="barcode"
+id="barcode_${escapeHtml(offer.id)}"
+></div>
+
+</div>
+
+<div class="member-note">
+${escapeHtml(statusText)}
+</div>
+
+</div>
+
+</article>
+`;
+
+}).join("");
+
+offers.forEach(offer=>{
+
+const barcode=
+document.getElementById(`barcode_${offer.id}`);
+
+if(barcode){
+renderBarcode(barcode,offer.code);
+}
+
+});
+
+document.querySelectorAll(".offer-card").forEach(card=>{
+
+card.onclick=()=>{
+
+const offer=
+allOffers().find(
+item=>String(item.id)===String(card.dataset.offerId)
+);
+
+if(!offer){
+return;
+}
+
+if(
+used.includes(String(offer.id))||
+isExpired(offer)
+){
+return;
+}
+
+if(!hasActiveMembership()){
+
+sessionStorage.setItem(
+PENDING_OFFER_KEY,
+String(offer.id)
+);
+
+openSubscriptionGate();
+
+return;
+}
+
+openOffer(offer);
+
+};
+
+});
+
+}
+
+function openSubscriptionGate(){
+
+$("subscriptionModal").classList.add("open");
+document.body.classList.add("modal-open");
+
+}
+
+function closeSubscriptionGate(){
+
+$("subscriptionModal").classList.remove("open");
+document.body.classList.remove("modal-open");
+
+}
+
+function openOffer(offer){
+
+selectedOffer=offer;
+
+$("modalOfferImage").src=offer.image;
+$("modalPartner").textContent=offer.partner;
+$("modalTitle").textContent=offerTitle(offer);
+$("modalDiscount").textContent=offer.discount;
+$("modalCode").textContent=offer.code;
+
+$("modalValid").textContent=
+`${t().valid} ${formatDate(offer.end)}`;
+
+$("modalOnce").textContent=t().once;
+
+renderBarcode(
+$("modalBarcode"),
+offer.code
+);
+
+$("offerModal").classList.add("open");
+
+document.body.classList.add("modal-open");
+
+}
+
+function closeOffer(){
+
+$("offerModal").classList.remove("open");
+
+document.body.classList.remove("modal-open");
+
+selectedOffer=null;
+
+}
+
+$("subscriptionClose").onclick=
+closeSubscriptionGate;
+
+$("subscriptionModal").onclick=event=>{
+
+if(event.target===$("subscriptionModal")){
+closeSubscriptionGate();
+}
+
+};
+
+$("subscribeButton").onclick=()=>{
+
+const offerId=
+sessionStorage.getItem(PENDING_OFFER_KEY)||"";
+
+const returnUrl=
+encodeURIComponent(
+`special-offers.html${offerId?`?offer=${offerId}`:""}`
+);
+
+window.location.href=
+`club.html?return=${returnUrl}`;
+
+};
+
+$("offerModalClose").onclick=
+closeOffer;
+
+$("offerModal").onclick=event=>{
+
+if(event.target===$("offerModal")){
+closeOffer();
+}
+
+};
+
+$("menuButton").onclick=()=>{
+window.location.href="index.html";
+};
+
+$("languageSelect").onchange=function(){
+renderLanguage(this.value);
+};
+
+function restorePendingOffer(){
+
+if(!hasActiveMembership()){
+return;
+}
+
+const params=
+new URLSearchParams(window.location.search);
+
+const id=
+params.get("offer")||
+sessionStorage.getItem(PENDING_OFFER_KEY);
+
+if(!id){
+return;
+}
+
+const offer=
+allOffers().find(
+item=>String(item.id)===String(id)
+);
+
+if(
+offer&&
+!isExpired(offer)&&
+!usedOfferIds().includes(String(offer.id))
+){
+
+setTimeout(()=>{
+openOffer(offer);
+},250);
+
+}
+
+sessionStorage.removeItem(PENDING_OFFER_KEY);
+
+if(params.has("offer")){
+
+history.replaceState(
+{},
+document.title,
+window.location.pathname
+);
+
+}
+
+}
+
+const savedLanguage=
+localStorage.getItem(LANGUAGE_KEY)||"en";
+
+renderLanguage(
+LANGS.includes(savedLanguage)
+?savedLanguage
+:"en"
+);
+
+restorePendingOffer();
+
+</script>
+
+</body>
+</html>
