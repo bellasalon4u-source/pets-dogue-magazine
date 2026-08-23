@@ -50,6 +50,11 @@ button{
 cursor:pointer;
 }
 
+button:disabled{
+cursor:not-allowed;
+opacity:.55;
+}
+
 a{
 color:inherit;
 text-decoration:none;
@@ -289,10 +294,52 @@ color:#777;
 margin-bottom:8px;
 }
 
-.location-controls{
+.location-actions{
 display:grid;
-grid-template-columns:minmax(0,1fr) auto;
+grid-template-columns:auto minmax(0,1fr) auto;
 gap:7px;
+}
+
+.near-me-button,
+.international-button{
+height:45px;
+padding:0 15px;
+border:1px solid #111;
+background:#fff;
+font-size:7px;
+font-weight:900;
+letter-spacing:.7px;
+white-space:nowrap;
+}
+
+.near-me-button.active,
+.international-button.active{
+background:#111;
+color:#fff;
+}
+
+.near-me-button.loading{
+position:relative;
+padding-left:35px;
+}
+
+.near-me-button.loading:before{
+content:"";
+position:absolute;
+left:13px;
+top:50%;
+width:12px;
+height:12px;
+margin-top:-7px;
+border:2px solid #bbb;
+border-top-color:#111;
+border-radius:50%;
+animation:spin .7s linear infinite;
+}
+
+.near-me-button.active.loading:before{
+border-color:#555;
+border-top-color:#fff;
 }
 
 .location-select{
@@ -306,39 +353,68 @@ font-weight:800;
 outline:none;
 }
 
-.international-button{
-height:45px;
-padding:0 15px;
-border:1px solid #111;
-background:#fff;
-font-size:7px;
-font-weight:900;
-letter-spacing:.7px;
-white-space:nowrap;
-}
-
-.international-button.active{
-background:#111;
-color:#fff;
-}
-
 .location-current{
 margin-top:9px;
-padding:9px 10px;
+padding:10px;
 background:#f3ecdf;
 display:flex;
-align-items:center;
-gap:7px;
+align-items:flex-start;
+gap:8px;
 font-size:7px;
 font-weight:900;
 letter-spacing:.4px;
 }
 
+.location-current-icon{
+font-size:14px;
+line-height:1;
+margin-top:2px;
+}
+
+.location-current-copy{
+min-width:0;
+}
+
 .location-current strong{
+display:block;
 font-family:var(--serif);
 font-size:15px;
 font-weight:400;
 letter-spacing:0;
+}
+
+.location-current small{
+display:block;
+font-size:6px;
+font-weight:700;
+line-height:1.45;
+color:#777;
+margin-top:3px;
+}
+
+.location-message{
+display:none;
+margin-top:8px;
+padding:8px 10px;
+border:1px solid #d8cdbd;
+font-size:7px;
+line-height:1.45;
+}
+
+.location-message.show{
+display:block;
+}
+
+.location-message.success{
+background:#edf6e8;
+border-color:#bdd0b2;
+color:#31552b;
+}
+
+.location-message.error{
+background:#fff0ee;
+border-color:#d9aaa5;
+color:#8a3029;
 }
 
 /* =========================================================
@@ -896,12 +972,23 @@ padding:17px 7px 45px;
 font-size:28px;
 }
 
-.location-controls{
-grid-template-columns:1fr;
+.location-actions{
+grid-template-columns:1fr 1fr;
+}
+
+.location-select{
+grid-column:1/-1;
+grid-row:1;
+}
+
+.near-me-button{
+grid-column:1;
+grid-row:2;
 }
 
 .international-button{
-width:100%;
+grid-column:2;
+grid-row:2;
 }
 
 .offer-grid{
@@ -979,6 +1066,36 @@ font-size:6px;
 
 .offer-modal-image{
 height:205px;
+}
+
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media(max-width:390px){
+
+.location-actions{
+grid-template-columns:1fr;
+}
+
+.location-select,
+.near-me-button,
+.international-button{
+grid-column:1;
+}
+
+.location-select{
+grid-row:1;
+}
+
+.near-me-button{
+grid-row:2;
+}
+
+.international-button{
+grid-row:3;
 }
 
 }
@@ -1070,9 +1187,19 @@ height:205px;
 
 <div class="location-label" id="locationLabel"></div>
 
-<div class="location-controls">
+<div class="location-actions">
 
-<select class="location-select" id="countrySelect"></select>
+<button
+class="near-me-button"
+id="nearMeButton"
+type="button"
+></button>
+
+<select
+class="location-select"
+id="countrySelect"
+aria-label="Country"
+></select>
 
 <button
 class="international-button"
@@ -1084,11 +1211,22 @@ type="button"
 
 <div class="location-current">
 
-<span>📍</span>
+<span class="location-current-icon" id="locationCurrentIcon">📍</span>
+
+<div class="location-current-copy">
 
 <strong id="locationCurrent"></strong>
 
+<small id="locationCurrentHint"></small>
+
 </div>
+
+</div>
+
+<div
+class="location-message"
+id="locationMessage"
+></div>
 
 </section>
 
@@ -1216,6 +1354,8 @@ const $=id=>document.getElementById(id);
 const LANGUAGE_KEY="pets_dogue_language";
 const LOCATION_MODE_KEY="petsDogueOffersLocationMode";
 const COUNTRY_KEY="petsDogueOffersCountry";
+const DETECTED_COUNTRY_KEY="petsDogueDetectedCountry";
+const DETECTED_CITY_KEY="petsDogueDetectedCity";
 const PENDING_OFFER_KEY="petsDoguePendingOfferId";
 
 const LANGS=[
@@ -1233,6 +1373,7 @@ const COUNTRIES=[
 ["PT","Portugal"],
 ["NL","Netherlands"],
 ["BE","Belgium"],
+["LU","Luxembourg"],
 ["IE","Ireland"],
 ["PL","Poland"],
 ["CZ","Czech Republic"],
@@ -1247,6 +1388,9 @@ const COUNTRIES=[
 ["DK","Denmark"],
 ["NO","Norway"],
 ["FI","Finland"],
+["EE","Estonia"],
+["LV","Latvia"],
+["LT","Lithuania"],
 ["HR","Croatia"],
 ["SI","Slovenia"],
 ["RS","Serbia"],
@@ -1282,18 +1426,26 @@ const COUNTRIES=[
 ["PH","Philippines"]
 ];
 
-const TEXT={
-en:{
+const BASE={
 club:"CLUB",
 heroKicker:"PETS & DOGUE CLUB PRIVILEGES",
 heroTitle:"Special offers for you",
 heroText:"Exclusive partner discounts for PETS & DOGUE Club subscribers.",
 heroBadge:"THE SAME OFFERS FOR EVERY ACTIVE CLUB SUBSCRIBER",
 offersTitle:"Partner discounts",
-offersIntro:"Choose a country and discover PETS & DOGUE Club offers available there.",
+offersIntro:"Choose your current country, another country or international online offers.",
 locationLabel:"WHERE DO YOU WANT TO SEE OFFERS?",
+nearMe:"📍 NEAR ME",
+nearMeLoading:"DETECTING…",
+nearMeHint:"Offers available in your current country",
+manualHint:"You selected this country manually",
 international:"🌍 INTERNATIONAL ONLINE",
 internationalName:"International online",
+internationalHint:"Online offers available internationally",
+detected:"Location detected",
+detectedWithCity:"Location detected near",
+locationUnavailable:"We could not detect your country. Please choose it manually.",
+locationUnsupported:"Your detected country is not in the current PETS & DOGUE country list. Please choose manually.",
 all:"All",
 veterinary:"Veterinary",
 grooming:"Grooming",
@@ -1332,19 +1484,39 @@ useOffer:"USE OFFER",
 showVoucher:"SHOW VOUCHER",
 onlineHelp:"Continue securely through PETS & DOGUE to the partner website. The click itself is not counted as a completed redemption.",
 offlineSoon:"Your protected voucher will open here once member voucher verification is connected."
-},
+};
 
-ru:{
+function pack(values){
+return{
+...BASE,
+...values
+};
+}
+
+const TEXT={
+
+en:pack({}),
+
+ru:pack({
 club:"КЛУБ",
 heroKicker:"ПРИВИЛЕГИИ PETS & DOGUE CLUB",
 heroTitle:"Специальные предложения для вас",
 heroText:"Эксклюзивные скидки партнёров для подписчиков PETS & DOGUE Club.",
 heroBadge:"ОДИНАКОВЫЕ ПРЕДЛОЖЕНИЯ ДЛЯ ВСЕХ АКТИВНЫХ ПОДПИСЧИКОВ CLUB",
 offersTitle:"Скидки партнёров",
-offersIntro:"Выберите страну и смотрите предложения PETS & DOGUE Club, доступные там.",
+offersIntro:"Выберите свою текущую страну, другую страну или международные онлайн-предложения.",
 locationLabel:"ГДЕ ВЫ ХОТИТЕ СМОТРЕТЬ СКИДКИ?",
+nearMe:"📍 РЯДОМ СО МНОЙ",
+nearMeLoading:"ОПРЕДЕЛЯЕМ…",
+nearMeHint:"Предложения, доступные в стране, где вы сейчас находитесь",
+manualHint:"Вы выбрали эту страну вручную",
 international:"🌍 МЕЖДУНАРОДНЫЕ ОНЛАЙН",
 internationalName:"Международные онлайн",
+internationalHint:"Онлайн-предложения, доступные независимо от страны",
+detected:"Местоположение определено",
+detectedWithCity:"Местоположение определено рядом с",
+locationUnavailable:"Не удалось определить вашу страну. Выберите её вручную.",
+locationUnsupported:"Определённой страны пока нет в списке PETS & DOGUE. Выберите страну вручную.",
 all:"Все",
 veterinary:"Ветеринария",
 grooming:"Груминг",
@@ -1383,19 +1555,28 @@ useOffer:"ВОСПОЛЬЗОВАТЬСЯ ПРЕДЛОЖЕНИЕМ",
 showVoucher:"ПОКАЗАТЬ ВАУЧЕР",
 onlineHelp:"Переход на сайт партнёра проходит через PETS & DOGUE. Сам переход не считается покупкой или использованием ваучера.",
 offlineSoon:"Защищённый ваучер будет открываться здесь после подключения проверки подписки."
-},
+}),
 
-uk:{
+uk:pack({
 club:"КЛУБ",
 heroKicker:"ПРИВІЛЕЇ PETS & DOGUE CLUB",
 heroTitle:"Спеціальні пропозиції для вас",
 heroText:"Ексклюзивні знижки партнерів для підписників PETS & DOGUE Club.",
 heroBadge:"ОДНАКОВІ ПРОПОЗИЦІЇ ДЛЯ ВСІХ АКТИВНИХ ПІДПИСНИКІВ CLUB",
 offersTitle:"Знижки партнерів",
-offersIntro:"Оберіть країну та переглядайте пропозиції PETS & DOGUE Club, доступні там.",
+offersIntro:"Оберіть свою поточну країну, іншу країну або міжнародні онлайн-пропозиції.",
 locationLabel:"ДЕ ВИ ХОЧЕТЕ ПЕРЕГЛЯДАТИ ЗНИЖКИ?",
+nearMe:"📍 ПОРУЧ ЗІ МНОЮ",
+nearMeLoading:"ВИЗНАЧАЄМО…",
+nearMeHint:"Пропозиції, доступні у країні, де ви зараз перебуваєте",
+manualHint:"Ви вибрали цю країну вручну",
 international:"🌍 МІЖНАРОДНІ ОНЛАЙН",
 internationalName:"Міжнародні онлайн",
+internationalHint:"Онлайн-пропозиції, доступні незалежно від країни",
+detected:"Місцезнаходження визначено",
+detectedWithCity:"Місцезнаходження визначено біля",
+locationUnavailable:"Не вдалося визначити вашу країну. Оберіть її вручну.",
+locationUnsupported:"Визначеної країни поки немає у списку PETS & DOGUE. Оберіть країну вручну.",
 all:"Усі",
 veterinary:"Ветеринарія",
 grooming:"Грумінг",
@@ -1434,104 +1615,1162 @@ useOffer:"СКОРИСТАТИСЯ ПРОПОЗИЦІЄЮ",
 showVoucher:"ПОКАЗАТИ ВАУЧЕР",
 onlineHelp:"Перехід на сайт партнера проходить через PETS & DOGUE. Сам перехід не вважається покупкою або використанням ваучера.",
 offlineSoon:"Захищений ваучер відкриватиметься тут після підключення перевірки підписки."
-},
+}),
 
-fr:{
-club:"CLUB",heroKicker:"PRIVILÈGES PETS & DOGUE CLUB",heroTitle:"Des offres spéciales pour vous",heroText:"Réductions exclusives des partenaires pour les membres PETS & DOGUE Club.",heroBadge:"LES MÊMES OFFRES POUR TOUS LES MEMBRES ACTIFS",offersTitle:"Réductions partenaires",offersIntro:"Choisissez un pays et découvrez les offres PETS & DOGUE Club disponibles.",locationLabel:"OÙ VOULEZ-VOUS VOIR LES OFFRES ?",international:"🌍 OFFRES INTERNATIONALES EN LIGNE",internationalName:"International en ligne",all:"Tout",veterinary:"Vétérinaire",grooming:"Toilettage",pet_food:"Alimentation",pet_shop:"Animaleries",travel:"Voyage",pet_friendly:"Pet-friendly",training:"Éducation",accessories:"Accessoires",insurance:"Assurance",photography:"Photographie",experiences:"Expériences",other:"Autre",valid:"Valable jusqu’au",once:"1 voucher par membre",members:"Offre Club",openOffer:"VOIR L’OFFRE",unlockOffer:"DÉBLOQUER AVEC CLUB",loading:"CHARGEMENT DES OFFRES…",empty:"Aucune offre ici pour le moment",emptyText:"Aucune offre partenaire PETS & DOGUE active pour cette destination.",error:"Offres temporairement indisponibles",errorText:"Veuillez réessayer plus tard.",gateTitle:"Débloquez cette offre avec PETS & DOGUE Club",gateText:"Toutes les réductions sont disponibles avec un abonnement Club actif.",monthlyTitle:"Abonnement mensuel",monthlyText:"30 premiers jours gratuits, puis £1 par mois.",monthlyPeriod:"/ mois",annualTitle:"Abonnement annuel",annualText:"£10 par an.",annualPeriod:"/ an",subscribe:"CHOISIR L’ABONNEMENT",gateFootnote:"Renouvellement automatique jusqu’à annulation.",close:"FERMER",useOffer:"UTILISER L’OFFRE",showVoucher:"AFFICHER LE VOUCHER",onlineHelp:"Le passage vers le site partenaire est suivi par PETS & DOGUE et ne constitue pas une utilisation.",offlineSoon:"Le voucher protégé sera disponible après vérification de l’abonnement."
-},
+fr:pack({
+heroKicker:"PRIVILÈGES PETS & DOGUE CLUB",
+heroTitle:"Des offres spéciales pour vous",
+heroText:"Réductions exclusives des partenaires pour les membres PETS & DOGUE Club.",
+heroBadge:"LES MÊMES OFFRES POUR TOUS LES MEMBRES ACTIFS",
+offersTitle:"Réductions partenaires",
+offersIntro:"Choisissez votre pays actuel, un autre pays ou les offres internationales en ligne.",
+locationLabel:"OÙ VOULEZ-VOUS VOIR LES OFFRES ?",
+nearMe:"📍 AUTOUR DE MOI",
+nearMeLoading:"LOCALISATION…",
+nearMeHint:"Offres disponibles dans votre pays actuel",
+manualHint:"Vous avez sélectionné ce pays manuellement",
+international:"🌍 OFFRES INTERNATIONALES EN LIGNE",
+internationalName:"International en ligne",
+internationalHint:"Offres en ligne disponibles internationalement",
+detected:"Localisation détectée",
+detectedWithCity:"Localisation détectée près de",
+locationUnavailable:"Impossible de détecter votre pays. Veuillez le sélectionner manuellement.",
+locationUnsupported:"Le pays détecté n’est pas encore dans la liste PETS & DOGUE.",
+all:"Tout",
+veterinary:"Vétérinaire",
+grooming:"Toilettage",
+pet_food:"Alimentation",
+pet_shop:"Animaleries",
+travel:"Voyage",
+pet_friendly:"Pet-friendly",
+training:"Éducation",
+accessories:"Accessoires",
+insurance:"Assurance",
+photography:"Photographie",
+experiences:"Expériences",
+other:"Autre",
+valid:"Valable jusqu’au",
+once:"1 voucher par membre",
+members:"Offre Club",
+openOffer:"VOIR L’OFFRE",
+unlockOffer:"DÉBLOQUER AVEC CLUB",
+loading:"CHARGEMENT DES OFFRES…",
+empty:"Aucune offre ici pour le moment",
+emptyText:"Aucune offre partenaire PETS & DOGUE active pour cette destination.",
+error:"Offres temporairement indisponibles",
+errorText:"Veuillez réessayer plus tard.",
+gateTitle:"Débloquez cette offre avec PETS & DOGUE Club",
+gateText:"Toutes les réductions sont disponibles avec un abonnement Club actif.",
+monthlyTitle:"Abonnement mensuel",
+monthlyText:"30 premiers jours gratuits, puis £1 par mois.",
+monthlyPeriod:"/ mois",
+annualTitle:"Abonnement annuel",
+annualText:"£10 par an.",
+annualPeriod:"/ an",
+subscribe:"CHOISIR L’ABONNEMENT",
+gateFootnote:"Renouvellement automatique jusqu’à annulation.",
+close:"FERMER",
+useOffer:"UTILISER L’OFFRE",
+showVoucher:"AFFICHER LE VOUCHER"
+}),
 
-de:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB VORTEILE",heroTitle:"Spezielle Angebote für Sie",heroText:"Exklusive Partnerrabatte für PETS & DOGUE Club-Mitglieder.",heroBadge:"DIESELBEN ANGEBOTE FÜR ALLE AKTIVEN CLUB-MITGLIEDER",offersTitle:"Partnerrabatte",offersIntro:"Wählen Sie ein Land und sehen Sie die dort verfügbaren Angebote.",locationLabel:"WO MÖCHTEN SIE ANGEBOTE SEHEN?",international:"🌍 INTERNATIONALE ONLINE-ANGEBOTE",internationalName:"International online",all:"Alle",veterinary:"Tierarzt",grooming:"Grooming",pet_food:"Tierfutter",pet_shop:"Tiergeschäfte",travel:"Reisen",pet_friendly:"Pet-friendly",training:"Training",accessories:"Zubehör",insurance:"Versicherung",photography:"Fotografie",experiences:"Erlebnisse",other:"Andere",valid:"Gültig bis",once:"1 Gutschein pro Mitglied",members:"Club-Angebot",openOffer:"ANGEBOT ANSEHEN",unlockOffer:"MIT CLUB FREISCHALTEN",loading:"ANGEBOTE WERDEN GELADEN…",empty:"Noch keine Angebote",emptyText:"Für diesen Standort gibt es derzeit keine aktiven Angebote.",error:"Angebote vorübergehend nicht verfügbar",errorText:"Bitte versuchen Sie es später erneut.",gateTitle:"Mit PETS & DOGUE Club freischalten",gateText:"Alle Rabatte sind mit jeder aktiven Club-Mitgliedschaft verfügbar.",monthlyTitle:"Monatlich",monthlyText:"30 Tage kostenlos, danach £1 pro Monat.",monthlyPeriod:"/ Monat",annualTitle:"Jährlich",annualText:"£10 pro Jahr.",annualPeriod:"/ Jahr",subscribe:"MITGLIEDSCHAFT WÄHLEN",gateFootnote:"Automatische Verlängerung bis zur Kündigung.",close:"SCHLIESSEN",useOffer:"ANGEBOT NUTZEN",showVoucher:"GUTSCHEIN ANZEIGEN",onlineHelp:"Der Wechsel zur Partnerseite erfolgt über PETS & DOGUE und gilt nicht als Einlösung.",offlineSoon:"Der geschützte Gutschein erscheint nach der Mitgliedschaftsprüfung."
-},
+de:pack({
+heroKicker:"PETS & DOGUE CLUB VORTEILE",
+heroTitle:"Spezielle Angebote für Sie",
+heroText:"Exklusive Partnerrabatte für PETS & DOGUE Club-Mitglieder.",
+heroBadge:"DIESELBEN ANGEBOTE FÜR ALLE AKTIVEN CLUB-MITGLIEDER",
+offersTitle:"Partnerrabatte",
+offersIntro:"Wählen Sie Ihr aktuelles Land, ein anderes Land oder internationale Online-Angebote.",
+locationLabel:"WO MÖCHTEN SIE ANGEBOTE SEHEN?",
+nearMe:"📍 IN MEINER NÄHE",
+nearMeLoading:"WIRD ERMITTELT…",
+nearMeHint:"Angebote in Ihrem aktuellen Land",
+manualHint:"Sie haben dieses Land manuell ausgewählt",
+international:"🌍 INTERNATIONALE ONLINE-ANGEBOTE",
+internationalName:"International online",
+internationalHint:"Online-Angebote, die international verfügbar sind",
+detected:"Standort erkannt",
+detectedWithCity:"Standort erkannt in der Nähe von",
+locationUnavailable:"Ihr Land konnte nicht erkannt werden. Bitte wählen Sie es manuell.",
+locationUnsupported:"Das erkannte Land ist noch nicht in der PETS & DOGUE Liste.",
+all:"Alle",
+veterinary:"Tierarzt",
+grooming:"Grooming",
+pet_food:"Tierfutter",
+pet_shop:"Tiergeschäfte",
+travel:"Reisen",
+pet_friendly:"Pet-friendly",
+training:"Training",
+accessories:"Zubehör",
+insurance:"Versicherung",
+photography:"Fotografie",
+experiences:"Erlebnisse",
+other:"Andere",
+valid:"Gültig bis",
+once:"1 Gutschein pro Mitglied",
+members:"Club-Angebot",
+openOffer:"ANGEBOT ANSEHEN",
+unlockOffer:"MIT CLUB FREISCHALTEN",
+loading:"ANGEBOTE WERDEN GELADEN…",
+empty:"Noch keine Angebote",
+emptyText:"Für diesen Standort gibt es derzeit keine aktiven Angebote.",
+error:"Angebote vorübergehend nicht verfügbar",
+errorText:"Bitte versuchen Sie es später erneut.",
+gateTitle:"Mit PETS & DOGUE Club freischalten",
+gateText:"Alle Rabatte sind mit jeder aktiven Club-Mitgliedschaft verfügbar.",
+monthlyTitle:"Monatlich",
+monthlyText:"30 Tage kostenlos, danach £1 pro Monat.",
+monthlyPeriod:"/ Monat",
+annualTitle:"Jährlich",
+annualText:"£10 pro Jahr.",
+annualPeriod:"/ Jahr",
+subscribe:"MITGLIEDSCHAFT WÄHLEN",
+gateFootnote:"Automatische Verlängerung bis zur Kündigung.",
+close:"SCHLIESSEN",
+useOffer:"ANGEBOT NUTZEN",
+showVoucher:"GUTSCHEIN ANZEIGEN"
+}),
 
-es:{
-club:"CLUB",heroKicker:"PRIVILEGIOS PETS & DOGUE CLUB",heroTitle:"Ofertas especiales para ti",heroText:"Descuentos exclusivos de socios para miembros de PETS & DOGUE Club.",heroBadge:"LAS MISMAS OFERTAS PARA TODOS LOS MIEMBROS ACTIVOS",offersTitle:"Descuentos de socios",offersIntro:"Elige un país y descubre las ofertas disponibles allí.",locationLabel:"¿DÓNDE QUIERES VER OFERTAS?",international:"🌍 OFERTAS INTERNACIONALES ONLINE",internationalName:"Internacional online",all:"Todo",veterinary:"Veterinaria",grooming:"Peluquería",pet_food:"Alimentación",pet_shop:"Tiendas de mascotas",travel:"Viajes",pet_friendly:"Pet-friendly",training:"Adiestramiento",accessories:"Accesorios",insurance:"Seguro",photography:"Fotografía",experiences:"Experiencias",other:"Otro",valid:"Válido hasta",once:"1 voucher por miembro",members:"Oferta Club",openOffer:"VER OFERTA",unlockOffer:"DESBLOQUEAR CON CLUB",loading:"CARGANDO OFERTAS…",empty:"Todavía no hay ofertas",emptyText:"No hay ofertas activas para esta ubicación.",error:"Ofertas temporalmente no disponibles",errorText:"Inténtalo de nuevo más tarde.",gateTitle:"Desbloquea con PETS & DOGUE Club",gateText:"Todas las ofertas están disponibles con una suscripción Club activa.",monthlyTitle:"Mensual",monthlyText:"30 días gratis, luego £1 al mes.",monthlyPeriod:"/ mes",annualTitle:"Anual",annualText:"£10 al año.",annualPeriod:"/ año",subscribe:"ELEGIR SUSCRIPCIÓN",gateFootnote:"Renovación automática hasta cancelación.",close:"CERRAR",useOffer:"USAR OFERTA",showVoucher:"MOSTRAR VOUCHER",onlineHelp:"El acceso al sitio del socio pasa por PETS & DOGUE y no cuenta como canje.",offlineSoon:"El voucher protegido estará disponible tras verificar la suscripción."
-},
+es:pack({
+heroKicker:"PRIVILEGIOS PETS & DOGUE CLUB",
+heroTitle:"Ofertas especiales para ti",
+heroText:"Descuentos exclusivos de socios para miembros de PETS & DOGUE Club.",
+heroBadge:"LAS MISMAS OFERTAS PARA TODOS LOS MIEMBROS ACTIVOS",
+offersTitle:"Descuentos de socios",
+offersIntro:"Elige tu país actual, otro país u ofertas internacionales online.",
+locationLabel:"¿DÓNDE QUIERES VER OFERTAS?",
+nearMe:"📍 CERCA DE MÍ",
+nearMeLoading:"LOCALIZANDO…",
+nearMeHint:"Ofertas disponibles en tu país actual",
+manualHint:"Has elegido este país manualmente",
+international:"🌍 OFERTAS INTERNACIONALES ONLINE",
+internationalName:"Internacional online",
+internationalHint:"Ofertas online disponibles internacionalmente",
+detected:"Ubicación detectada",
+detectedWithCity:"Ubicación detectada cerca de",
+locationUnavailable:"No pudimos detectar tu país. Selecciónalo manualmente.",
+locationUnsupported:"El país detectado aún no está en la lista de PETS & DOGUE.",
+all:"Todo",
+veterinary:"Veterinaria",
+grooming:"Peluquería",
+pet_food:"Alimentación",
+pet_shop:"Tiendas de mascotas",
+travel:"Viajes",
+pet_friendly:"Pet-friendly",
+training:"Adiestramiento",
+accessories:"Accesorios",
+insurance:"Seguro",
+photography:"Fotografía",
+experiences:"Experiencias",
+other:"Otro",
+valid:"Válido hasta",
+once:"1 voucher por miembro",
+members:"Oferta Club",
+openOffer:"VER OFERTA",
+unlockOffer:"DESBLOQUEAR CON CLUB",
+loading:"CARGANDO OFERTAS…",
+empty:"Todavía no hay ofertas",
+emptyText:"No hay ofertas activas para esta ubicación.",
+error:"Ofertas temporalmente no disponibles",
+errorText:"Inténtalo de nuevo más tarde.",
+gateTitle:"Desbloquea con PETS & DOGUE Club",
+gateText:"Todas las ofertas están disponibles con una suscripción Club activa.",
+monthlyTitle:"Mensual",
+monthlyText:"30 días gratis, luego £1 al mes.",
+monthlyPeriod:"/ mes",
+annualTitle:"Anual",
+annualText:"£10 al año.",
+annualPeriod:"/ año",
+subscribe:"ELEGIR SUSCRIPCIÓN",
+gateFootnote:"Renovación automática hasta cancelación.",
+close:"CERRAR",
+useOffer:"USAR OFERTA",
+showVoucher:"MOSTRAR VOUCHER"
+}),
 
-it:{
-club:"CLUB",heroKicker:"PRIVILEGI PETS & DOGUE CLUB",heroTitle:"Offerte speciali per te",heroText:"Sconti esclusivi dei partner per gli iscritti PETS & DOGUE Club.",heroBadge:"LE STESSE OFFERTE PER TUTTI GLI ISCRITTI ATTIVI",offersTitle:"Sconti partner",offersIntro:"Scegli un paese e scopri le offerte disponibili.",locationLabel:"DOVE VUOI VEDERE LE OFFERTE?",international:"🌍 OFFERTE ONLINE INTERNAZIONALI",internationalName:"Internazionale online",all:"Tutte",veterinary:"Veterinaria",grooming:"Toelettatura",pet_food:"Alimentazione",pet_shop:"Negozi per animali",travel:"Viaggi",pet_friendly:"Pet-friendly",training:"Addestramento",accessories:"Accessori",insurance:"Assicurazione",photography:"Fotografia",experiences:"Esperienze",other:"Altro",valid:"Valido fino al",once:"1 voucher per membro",members:"Offerta Club",openOffer:"VEDI OFFERTA",unlockOffer:"SBLOCCA CON CLUB",loading:"CARICAMENTO OFFERTE…",empty:"Nessuna offerta per ora",emptyText:"Non ci sono offerte attive per questa località.",error:"Offerte temporaneamente non disponibili",errorText:"Riprova più tardi.",gateTitle:"Sblocca con PETS & DOGUE Club",gateText:"Tutti gli sconti sono disponibili con un abbonamento Club attivo.",monthlyTitle:"Mensile",monthlyText:"30 giorni gratis, poi £1 al mese.",monthlyPeriod:"/ mese",annualTitle:"Annuale",annualText:"£10 all’anno.",annualPeriod:"/ anno",subscribe:"SCEGLI ABBONAMENTO",gateFootnote:"Rinnovo automatico fino alla cancellazione.",close:"CHIUDI",useOffer:"USA OFFERTA",showVoucher:"MOSTRA VOUCHER",onlineHelp:"Il passaggio al sito partner avviene tramite PETS & DOGUE e non è un utilizzo.",offlineSoon:"Il voucher protetto sarà disponibile dopo la verifica dell’abbonamento."
-},
+it:pack({
+heroKicker:"PRIVILEGI PETS & DOGUE CLUB",
+heroTitle:"Offerte speciali per te",
+heroText:"Sconti esclusivi dei partner per gli iscritti PETS & DOGUE Club.",
+heroBadge:"LE STESSE OFFERTE PER TUTTI GLI ISCRITTI ATTIVI",
+offersTitle:"Sconti partner",
+offersIntro:"Scegli il tuo paese attuale, un altro paese o le offerte online internazionali.",
+locationLabel:"DOVE VUOI VEDERE LE OFFERTE?",
+nearMe:"📍 VICINO A ME",
+nearMeLoading:"LOCALIZZAZIONE…",
+nearMeHint:"Offerte disponibili nel paese in cui ti trovi",
+manualHint:"Hai selezionato questo paese manualmente",
+international:"🌍 OFFERTE ONLINE INTERNAZIONALI",
+internationalName:"Internazionale online",
+internationalHint:"Offerte online disponibili a livello internazionale",
+detected:"Posizione rilevata",
+detectedWithCity:"Posizione rilevata vicino a",
+locationUnavailable:"Non è stato possibile rilevare il paese. Selezionalo manualmente.",
+locationUnsupported:"Il paese rilevato non è ancora nell’elenco PETS & DOGUE.",
+all:"Tutte",
+veterinary:"Veterinaria",
+grooming:"Toelettatura",
+pet_food:"Alimentazione",
+pet_shop:"Negozi per animali",
+travel:"Viaggi",
+pet_friendly:"Pet-friendly",
+training:"Addestramento",
+accessories:"Accessori",
+insurance:"Assicurazione",
+photography:"Fotografia",
+experiences:"Esperienze",
+other:"Altro",
+valid:"Valido fino al",
+once:"1 voucher per membro",
+members:"Offerta Club",
+openOffer:"VEDI OFFERTA",
+unlockOffer:"SBLOCCA CON CLUB",
+loading:"CARICAMENTO OFFERTE…",
+empty:"Nessuna offerta per ora",
+emptyText:"Non ci sono offerte attive per questa località.",
+error:"Offerte temporaneamente non disponibili",
+errorText:"Riprova più tardi.",
+gateTitle:"Sblocca con PETS & DOGUE Club",
+gateText:"Tutti gli sconti sono disponibili con un abbonamento Club attivo.",
+monthlyTitle:"Mensile",
+monthlyText:"30 giorni gratis, poi £1 al mese.",
+monthlyPeriod:"/ mese",
+annualTitle:"Annuale",
+annualText:"£10 all’anno.",
+annualPeriod:"/ anno",
+subscribe:"SCEGLI ABBONAMENTO",
+gateFootnote:"Rinnovo automatico fino alla cancellazione.",
+close:"CHIUDI",
+useOffer:"USA OFFERTA",
+showVoucher:"MOSTRA VOUCHER"
+}),
 
-pt:{
-club:"CLUB",heroKicker:"PRIVILÉGIOS PETS & DOGUE CLUB",heroTitle:"Ofertas especiais para você",heroText:"Descontos exclusivos de parceiros para membros PETS & DOGUE Club.",heroBadge:"AS MESMAS OFERTAS PARA TODOS OS MEMBROS ATIVOS",offersTitle:"Descontos de parceiros",offersIntro:"Escolha um país e veja as ofertas disponíveis.",locationLabel:"ONDE QUER VER OFERTAS?",international:"🌍 OFERTAS ONLINE INTERNACIONAIS",internationalName:"Internacional online",all:"Tudo",veterinary:"Veterinária",grooming:"Grooming",pet_food:"Alimentação",pet_shop:"Lojas de animais",travel:"Viagens",pet_friendly:"Pet-friendly",training:"Treino",accessories:"Acessórios",insurance:"Seguro",photography:"Fotografia",experiences:"Experiências",other:"Outro",valid:"Válido até",once:"1 voucher por membro",members:"Oferta Club",openOffer:"VER OFERTA",unlockOffer:"DESBLOQUEAR COM CLUB",loading:"CARREGANDO OFERTAS…",empty:"Ainda não há ofertas",emptyText:"Não existem ofertas ativas para esta localização.",error:"Ofertas temporariamente indisponíveis",errorText:"Tente novamente mais tarde.",gateTitle:"Desbloqueie com PETS & DOGUE Club",gateText:"Todos os descontos estão disponíveis com uma assinatura Club ativa.",monthlyTitle:"Mensal",monthlyText:"30 dias grátis, depois £1 por mês.",monthlyPeriod:"/ mês",annualTitle:"Anual",annualText:"£10 por ano.",annualPeriod:"/ ano",subscribe:"ESCOLHER ASSINATURA",gateFootnote:"Renovação automática até cancelamento.",close:"FECHAR",useOffer:"USAR OFERTA",showVoucher:"MOSTRAR VOUCHER",onlineHelp:"A ida ao site do parceiro passa pela PETS & DOGUE e não conta como utilização.",offlineSoon:"O voucher protegido ficará disponível após verificar a assinatura."
-},
+pt:pack({
+heroKicker:"PRIVILÉGIOS PETS & DOGUE CLUB",
+heroTitle:"Ofertas especiais para você",
+heroText:"Descontos exclusivos de parceiros para membros PETS & DOGUE Club.",
+heroBadge:"AS MESMAS OFERTAS PARA TODOS OS MEMBROS ATIVOS",
+offersTitle:"Descontos de parceiros",
+offersIntro:"Escolha o seu país atual, outro país ou ofertas online internacionais.",
+locationLabel:"ONDE QUER VER OFERTAS?",
+nearMe:"📍 PERTO DE MIM",
+nearMeLoading:"LOCALIZANDO…",
+nearMeHint:"Ofertas disponíveis no país onde está agora",
+manualHint:"Selecionou este país manualmente",
+international:"🌍 OFERTAS ONLINE INTERNACIONAIS",
+internationalName:"Internacional online",
+internationalHint:"Ofertas online disponíveis internacionalmente",
+detected:"Localização detetada",
+detectedWithCity:"Localização detetada perto de",
+locationUnavailable:"Não foi possível detetar o seu país. Escolha-o manualmente.",
+locationUnsupported:"O país detetado ainda não está na lista PETS & DOGUE.",
+all:"Tudo",
+veterinary:"Veterinária",
+grooming:"Grooming",
+pet_food:"Alimentação",
+pet_shop:"Lojas de animais",
+travel:"Viagens",
+pet_friendly:"Pet-friendly",
+training:"Treino",
+accessories:"Acessórios",
+insurance:"Seguro",
+photography:"Fotografia",
+experiences:"Experiências",
+other:"Outro",
+valid:"Válido até",
+once:"1 voucher por membro",
+members:"Oferta Club",
+openOffer:"VER OFERTA",
+unlockOffer:"DESBLOQUEAR COM CLUB",
+loading:"CARREGANDO OFERTAS…",
+empty:"Ainda não há ofertas",
+emptyText:"Não existem ofertas ativas para esta localização.",
+error:"Ofertas temporariamente indisponíveis",
+errorText:"Tente novamente mais tarde.",
+gateTitle:"Desbloqueie com PETS & DOGUE Club",
+gateText:"Todos os descontos estão disponíveis com uma assinatura Club ativa.",
+monthlyTitle:"Mensal",
+monthlyText:"30 dias grátis, depois £1 por mês.",
+monthlyPeriod:"/ mês",
+annualTitle:"Anual",
+annualText:"£10 por ano.",
+annualPeriod:"/ ano",
+subscribe:"ESCOLHER ASSINATURA",
+gateFootnote:"Renovação automática até cancelamento.",
+close:"FECHAR",
+useOffer:"USAR OFERTA",
+showVoucher:"MOSTRAR VOUCHER"
+}),
 
-nl:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB VOORDELEN",heroTitle:"Speciale aanbiedingen voor jou",heroText:"Exclusieve partnerkortingen voor PETS & DOGUE Club-leden.",heroBadge:"DEZELFDE AANBIEDINGEN VOOR ALLE ACTIEVE LEDEN",offersTitle:"Partnerkortingen",offersIntro:"Kies een land en ontdek beschikbare aanbiedingen.",locationLabel:"WAAR WIL JE AANBIEDINGEN ZIEN?",international:"🌍 INTERNATIONALE ONLINE AANBIEDINGEN",internationalName:"Internationaal online",all:"Alles",veterinary:"Dierenarts",grooming:"Grooming",pet_food:"Voeding",pet_shop:"Dierenwinkels",travel:"Reizen",pet_friendly:"Pet-friendly",training:"Training",accessories:"Accessoires",insurance:"Verzekering",photography:"Fotografie",experiences:"Ervaringen",other:"Overig",valid:"Geldig tot",once:"1 voucher per lid",members:"Club-aanbieding",openOffer:"BEKIJK AANBIEDING",unlockOffer:"ONTGRENDEL MET CLUB",loading:"AANBIEDINGEN LADEN…",empty:"Nog geen aanbiedingen",emptyText:"Er zijn momenteel geen actieve aanbiedingen voor deze locatie.",error:"Aanbiedingen tijdelijk niet beschikbaar",errorText:"Probeer het later opnieuw.",gateTitle:"Ontgrendel met PETS & DOGUE Club",gateText:"Alle kortingen zijn beschikbaar met een actief Club-lidmaatschap.",monthlyTitle:"Maandelijks",monthlyText:"30 dagen gratis, daarna £1 per maand.",monthlyPeriod:"/ maand",annualTitle:"Jaarlijks",annualText:"£10 per jaar.",annualPeriod:"/ jaar",subscribe:"KIES LIDMAATSCHAP",gateFootnote:"Automatische verlenging tot opzegging.",close:"SLUITEN",useOffer:"AANBIEDING GEBRUIKEN",showVoucher:"VOUCHER TONEN",onlineHelp:"De overgang naar de partnersite loopt via PETS & DOGUE en telt niet als gebruik.",offlineSoon:"De beveiligde voucher verschijnt na verificatie van het lidmaatschap."
-},
+nl:pack({
+heroKicker:"PETS & DOGUE CLUB VOORDELEN",
+heroTitle:"Speciale aanbiedingen voor jou",
+heroText:"Exclusieve partnerkortingen voor PETS & DOGUE Club-leden.",
+heroBadge:"DEZELFDE AANBIEDINGEN VOOR ALLE ACTIEVE LEDEN",
+offersTitle:"Partnerkortingen",
+offersIntro:"Kies je huidige land, een ander land of internationale online aanbiedingen.",
+locationLabel:"WAAR WIL JE AANBIEDINGEN ZIEN?",
+nearMe:"📍 BIJ MIJ IN DE BUURT",
+nearMeLoading:"LOCATIE BEPALEN…",
+nearMeHint:"Aanbiedingen in het land waar je nu bent",
+manualHint:"Je hebt dit land handmatig geselecteerd",
+international:"🌍 INTERNATIONALE ONLINE AANBIEDINGEN",
+internationalName:"Internationaal online",
+internationalHint:"Online aanbiedingen die internationaal beschikbaar zijn",
+detected:"Locatie gedetecteerd",
+detectedWithCity:"Locatie gedetecteerd nabij",
+locationUnavailable:"We konden je land niet detecteren. Kies het handmatig.",
+locationUnsupported:"Het gedetecteerde land staat nog niet in de PETS & DOGUE-lijst.",
+all:"Alles",
+veterinary:"Dierenarts",
+grooming:"Grooming",
+pet_food:"Voeding",
+pet_shop:"Dierenwinkels",
+travel:"Reizen",
+pet_friendly:"Pet-friendly",
+training:"Training",
+accessories:"Accessoires",
+insurance:"Verzekering",
+photography:"Fotografie",
+experiences:"Ervaringen",
+other:"Overig",
+valid:"Geldig tot",
+once:"1 voucher per lid",
+members:"Club-aanbieding",
+openOffer:"BEKIJK AANBIEDING",
+unlockOffer:"ONTGRENDEL MET CLUB",
+loading:"AANBIEDINGEN LADEN…",
+empty:"Nog geen aanbiedingen",
+emptyText:"Er zijn momenteel geen actieve aanbiedingen voor deze locatie.",
+error:"Aanbiedingen tijdelijk niet beschikbaar",
+errorText:"Probeer het later opnieuw.",
+gateTitle:"Ontgrendel met PETS & DOGUE Club",
+gateText:"Alle kortingen zijn beschikbaar met een actief Club-lidmaatschap.",
+monthlyTitle:"Maandelijks",
+monthlyText:"30 dagen gratis, daarna £1 per maand.",
+monthlyPeriod:"/ maand",
+annualTitle:"Jaarlijks",
+annualText:"£10 per jaar.",
+annualPeriod:"/ jaar",
+subscribe:"KIES LIDMAATSCHAP",
+gateFootnote:"Automatische verlenging tot opzegging.",
+close:"SLUITEN",
+useOffer:"AANBIEDING GEBRUIKEN",
+showVoucher:"VOUCHER TONEN"
+}),
 
-pl:{
-club:"CLUB",heroKicker:"PRZYWILEJE PETS & DOGUE CLUB",heroTitle:"Specjalne oferty dla Ciebie",heroText:"Ekskluzywne rabaty partnerów dla członków PETS & DOGUE Club.",heroBadge:"TE SAME OFERTY DLA WSZYSTKICH AKTYWNYCH CZŁONKÓW",offersTitle:"Rabaty partnerów",offersIntro:"Wybierz kraj i zobacz dostępne tam oferty.",locationLabel:"GDZIE CHCESZ OGLĄDAĆ OFERTY?",international:"🌍 MIĘDZYNARODOWE ONLINE",internationalName:"Międzynarodowe online",all:"Wszystko",veterinary:"Weterynaria",grooming:"Grooming",pet_food:"Karma",pet_shop:"Sklepy zoologiczne",travel:"Podróże",pet_friendly:"Pet-friendly",training:"Szkolenie",accessories:"Akcesoria",insurance:"Ubezpieczenie",photography:"Fotografia",experiences:"Atrakcje",other:"Inne",valid:"Ważne do",once:"1 voucher na członka",members:"Oferta Club",openOffer:"ZOBACZ OFERTĘ",unlockOffer:"ODBLOKUJ Z CLUB",loading:"ŁADOWANIE OFERT…",empty:"Brak ofert",emptyText:"Dla tej lokalizacji nie ma obecnie aktywnych ofert.",error:"Oferty chwilowo niedostępne",errorText:"Spróbuj ponownie później.",gateTitle:"Odblokuj z PETS & DOGUE Club",gateText:"Wszystkie rabaty są dostępne z aktywnym członkostwem Club.",monthlyTitle:"Miesięcznie",monthlyText:"30 dni bezpłatnie, potem £1 miesięcznie.",monthlyPeriod:"/ miesiąc",annualTitle:"Rocznie",annualText:"£10 rocznie.",annualPeriod:"/ rok",subscribe:"WYBIERZ CZŁONKOSTWO",gateFootnote:"Automatyczne odnawianie do anulowania.",close:"ZAMKNIJ",useOffer:"SKORZYSTAJ Z OFERTY",showVoucher:"POKAŻ VOUCHER",onlineHelp:"Przejście do strony partnera odbywa się przez PETS & DOGUE i nie jest realizacją.",offlineSoon:"Chroniony voucher będzie dostępny po weryfikacji członkostwa."
-},
+pl:pack({
+heroKicker:"PRZYWILEJE PETS & DOGUE CLUB",
+heroTitle:"Specjalne oferty dla Ciebie",
+heroText:"Ekskluzywne rabaty partnerów dla członków PETS & DOGUE Club.",
+heroBadge:"TE SAME OFERTY DLA WSZYSTKICH AKTYWNYCH CZŁONKÓW",
+offersTitle:"Rabaty partnerów",
+offersIntro:"Wybierz swój obecny kraj, inny kraj lub międzynarodowe oferty online.",
+locationLabel:"GDZIE CHCESZ OGLĄDAĆ OFERTY?",
+nearMe:"📍 BLISKO MNIE",
+nearMeLoading:"LOKALIZOWANIE…",
+nearMeHint:"Oferty dostępne w kraju, w którym obecnie jesteś",
+manualHint:"Ten kraj został wybrany ręcznie",
+international:"🌍 MIĘDZYNARODOWE ONLINE",
+internationalName:"Międzynarodowe online",
+internationalHint:"Oferty online dostępne międzynarodowo",
+detected:"Lokalizacja wykryta",
+detectedWithCity:"Lokalizacja wykryta w pobliżu",
+locationUnavailable:"Nie udało się wykryć kraju. Wybierz go ręcznie.",
+locationUnsupported:"Wykrytego kraju nie ma jeszcze na liście PETS & DOGUE.",
+all:"Wszystko",
+veterinary:"Weterynaria",
+grooming:"Grooming",
+pet_food:"Karma",
+pet_shop:"Sklepy zoologiczne",
+travel:"Podróże",
+pet_friendly:"Pet-friendly",
+training:"Szkolenie",
+accessories:"Akcesoria",
+insurance:"Ubezpieczenie",
+photography:"Fotografia",
+experiences:"Atrakcje",
+other:"Inne",
+valid:"Ważne do",
+once:"1 voucher na członka",
+members:"Oferta Club",
+openOffer:"ZOBACZ OFERTĘ",
+unlockOffer:"ODBLOKUJ Z CLUB",
+loading:"ŁADOWANIE OFERT…",
+empty:"Brak ofert",
+emptyText:"Dla tej lokalizacji nie ma obecnie aktywnych ofert.",
+error:"Oferty chwilowo niedostępne",
+errorText:"Spróbuj ponownie później.",
+gateTitle:"Odblokuj z PETS & DOGUE Club",
+gateText:"Wszystkie rabaty są dostępne z aktywnym członkostwem Club.",
+monthlyTitle:"Miesięcznie",
+monthlyText:"30 dni bezpłatnie, potem £1 miesięcznie.",
+monthlyPeriod:"/ miesiąc",
+annualTitle:"Rocznie",
+annualText:"£10 rocznie.",
+annualPeriod:"/ rok",
+subscribe:"WYBIERZ CZŁONKOSTWO",
+gateFootnote:"Automatyczne odnawianie do anulowania.",
+close:"ZAMKNIJ",
+useOffer:"SKORZYSTAJ Z OFERTY",
+showVoucher:"POKAŻ VOUCHER"
+}),
 
-cs:{
-club:"CLUB",heroKicker:"VÝHODY PETS & DOGUE CLUB",heroTitle:"Speciální nabídky pro vás",heroText:"Exkluzivní partnerské slevy pro členy PETS & DOGUE Club.",heroBadge:"STEJNÉ NABÍDKY PRO VŠECHNY AKTIVNÍ ČLENY",offersTitle:"Partnerské slevy",offersIntro:"Vyberte zemi a zobrazte dostupné nabídky.",locationLabel:"KDE CHCETE ZOBRAZIT NABÍDKY?",international:"🌍 MEZINÁRODNÍ ONLINE",internationalName:"Mezinárodní online",all:"Vše",veterinary:"Veterina",grooming:"Grooming",pet_food:"Krmivo",pet_shop:"Zverimex",travel:"Cestování",pet_friendly:"Pet-friendly",training:"Výcvik",accessories:"Doplňky",insurance:"Pojištění",photography:"Fotografie",experiences:"Zážitky",other:"Jiné",valid:"Platí do",once:"1 voucher na člena",members:"Club nabídka",openOffer:"ZOBRAZIT NABÍDKU",unlockOffer:"ODEMKNOUT S CLUB",loading:"NAČÍTÁNÍ NABÍDEK…",empty:"Zatím žádné nabídky",emptyText:"Pro tuto lokalitu nyní nejsou aktivní nabídky.",error:"Nabídky dočasně nejsou dostupné",errorText:"Zkuste to později.",gateTitle:"Odemkněte s PETS & DOGUE Club",gateText:"Všechny slevy jsou dostupné s aktivním členstvím Club.",monthlyTitle:"Měsíčně",monthlyText:"30 dní zdarma, poté £1 měsíčně.",monthlyPeriod:"/ měsíc",annualTitle:"Ročně",annualText:"£10 ročně.",annualPeriod:"/ rok",subscribe:"VYBRAT ČLENSTVÍ",gateFootnote:"Automatické obnovení do zrušení.",close:"ZAVŘÍT",useOffer:"VYUŽÍT NABÍDKU",showVoucher:"ZOBRAZIT VOUCHER",onlineHelp:"Přechod na web partnera probíhá přes PETS & DOGUE a není považován za využití.",offlineSoon:"Chráněný voucher bude dostupný po ověření členství."
-},
+cs:pack({
+heroKicker:"VÝHODY PETS & DOGUE CLUB",
+heroTitle:"Speciální nabídky pro vás",
+heroText:"Exkluzivní partnerské slevy pro členy PETS & DOGUE Club.",
+heroBadge:"STEJNÉ NABÍDKY PRO VŠECHNY AKTIVNÍ ČLENY",
+offersTitle:"Partnerské slevy",
+offersIntro:"Vyberte svou aktuální zemi, jinou zemi nebo mezinárodní online nabídky.",
+locationLabel:"KDE CHCETE ZOBRAZIT NABÍDKY?",
+nearMe:"📍 V MÉM OKOLÍ",
+nearMeLoading:"ZJIŠŤUJI…",
+nearMeHint:"Nabídky dostupné v zemi, kde se právě nacházíte",
+manualHint:"Tuto zemi jste vybrali ručně",
+international:"🌍 MEZINÁRODNÍ ONLINE",
+internationalName:"Mezinárodní online",
+internationalHint:"Online nabídky dostupné mezinárodně",
+detected:"Poloha zjištěna",
+detectedWithCity:"Poloha zjištěna poblíž",
+locationUnavailable:"Vaši zemi se nepodařilo zjistit. Vyberte ji ručně.",
+locationUnsupported:"Zjištěná země zatím není v seznamu PETS & DOGUE.",
+all:"Vše",
+veterinary:"Veterina",
+grooming:"Grooming",
+pet_food:"Krmivo",
+pet_shop:"Zverimex",
+travel:"Cestování",
+pet_friendly:"Pet-friendly",
+training:"Výcvik",
+accessories:"Doplňky",
+insurance:"Pojištění",
+photography:"Fotografie",
+experiences:"Zážitky",
+other:"Jiné",
+valid:"Platí do",
+once:"1 voucher na člena",
+members:"Club nabídka",
+openOffer:"ZOBRAZIT NABÍDKU",
+unlockOffer:"ODEMKNOUT S CLUB",
+loading:"NAČÍTÁNÍ NABÍDEK…",
+empty:"Zatím žádné nabídky",
+emptyText:"Pro tuto lokalitu nyní nejsou aktivní nabídky.",
+error:"Nabídky dočasně nejsou dostupné",
+errorText:"Zkuste to později.",
+gateTitle:"Odemkněte s PETS & DOGUE Club",
+gateText:"Všechny slevy jsou dostupné s aktivním členstvím Club.",
+monthlyTitle:"Měsíčně",
+monthlyText:"30 dní zdarma, poté £1 měsíčně.",
+monthlyPeriod:"/ měsíc",
+annualTitle:"Ročně",
+annualText:"£10 ročně.",
+annualPeriod:"/ rok",
+subscribe:"VYBRAT ČLENSTVÍ",
+gateFootnote:"Automatické obnovení do zrušení.",
+close:"ZAVŘÍT",
+useOffer:"VYUŽÍT NABÍDKU",
+showVoucher:"ZOBRAZIT VOUCHER"
+}),
 
-sk:{
-club:"CLUB",heroKicker:"VÝHODY PETS & DOGUE CLUB",heroTitle:"Špeciálne ponuky pre vás",heroText:"Exkluzívne partnerské zľavy pre členov PETS & DOGUE Club.",heroBadge:"ROVNAKÉ PONUKY PRE VŠETKÝCH AKTÍVNYCH ČLENOV",offersTitle:"Partnerské zľavy",offersIntro:"Vyberte krajinu a zobrazte dostupné ponuky.",locationLabel:"KDE CHCETE ZOBRAZIŤ PONUKY?",international:"🌍 MEDZINÁRODNÉ ONLINE",internationalName:"Medzinárodné online",all:"Všetko",veterinary:"Veterina",grooming:"Grooming",pet_food:"Krmivo",pet_shop:"Chovateľské potreby",travel:"Cestovanie",pet_friendly:"Pet-friendly",training:"Výcvik",accessories:"Doplnky",insurance:"Poistenie",photography:"Fotografia",experiences:"Zážitky",other:"Iné",valid:"Platí do",once:"1 voucher na člena",members:"Club ponuka",openOffer:"ZOBRAZIŤ PONUKU",unlockOffer:"ODOMKNÚŤ S CLUB",loading:"NAČÍTAVANIE PONÚK…",empty:"Zatiaľ žiadne ponuky",emptyText:"Pre túto lokalitu momentálne nie sú aktívne ponuky.",error:"Ponuky sú dočasne nedostupné",errorText:"Skúste to neskôr.",gateTitle:"Odomknite s PETS & DOGUE Club",gateText:"Všetky zľavy sú dostupné s aktívnym členstvom Club.",monthlyTitle:"Mesačne",monthlyText:"30 dní zdarma, potom £1 mesačne.",monthlyPeriod:"/ mesiac",annualTitle:"Ročne",annualText:"£10 ročne.",annualPeriod:"/ rok",subscribe:"VYBRAŤ ČLENSTVO",gateFootnote:"Automatické obnovenie až do zrušenia.",close:"ZAVRIEŤ",useOffer:"VYUŽIŤ PONUKU",showVoucher:"ZOBRAZIŤ VOUCHER",onlineHelp:"Prechod na web partnera prebieha cez PETS & DOGUE a nie je využitím.",offlineSoon:"Chránený voucher bude dostupný po overení členstva."
-},
+sk:pack({
+heroKicker:"VÝHODY PETS & DOGUE CLUB",
+heroTitle:"Špeciálne ponuky pre vás",
+heroText:"Exkluzívne partnerské zľavy pre členov PETS & DOGUE Club.",
+heroBadge:"ROVNAKÉ PONUKY PRE VŠETKÝCH AKTÍVNYCH ČLENOV",
+offersTitle:"Partnerské zľavy",
+offersIntro:"Vyberte svoju aktuálnu krajinu, inú krajinu alebo medzinárodné online ponuky.",
+locationLabel:"KDE CHCETE ZOBRAZIŤ PONUKY?",
+nearMe:"📍 V MOJOM OKOLÍ",
+nearMeLoading:"ZISŤUJEME…",
+nearMeHint:"Ponuky dostupné v krajine, kde sa práve nachádzate",
+manualHint:"Túto krajinu ste vybrali ručne",
+international:"🌍 MEDZINÁRODNÉ ONLINE",
+internationalName:"Medzinárodné online",
+internationalHint:"Online ponuky dostupné medzinárodne",
+detected:"Poloha zistená",
+detectedWithCity:"Poloha zistená v okolí",
+locationUnavailable:"Vašu krajinu sa nepodarilo zistiť. Vyberte ju ručne.",
+locationUnsupported:"Zistená krajina zatiaľ nie je v zozname PETS & DOGUE.",
+all:"Všetko",
+veterinary:"Veterina",
+grooming:"Grooming",
+pet_food:"Krmivo",
+pet_shop:"Chovateľské potreby",
+travel:"Cestovanie",
+pet_friendly:"Pet-friendly",
+training:"Výcvik",
+accessories:"Doplnky",
+insurance:"Poistenie",
+photography:"Fotografia",
+experiences:"Zážitky",
+other:"Iné",
+valid:"Platí do",
+once:"1 voucher na člena",
+members:"Club ponuka",
+openOffer:"ZOBRAZIŤ PONUKU",
+unlockOffer:"ODOMKNÚŤ S CLUB",
+loading:"NAČÍTAVANIE PONÚK…",
+empty:"Zatiaľ žiadne ponuky",
+emptyText:"Pre túto lokalitu momentálne nie sú aktívne ponuky.",
+error:"Ponuky sú dočasne nedostupné",
+errorText:"Skúste to neskôr.",
+gateTitle:"Odomknite s PETS & DOGUE Club",
+gateText:"Všetky zľavy sú dostupné s aktívnym členstvom Club.",
+monthlyTitle:"Mesačne",
+monthlyText:"30 dní zdarma, potom £1 mesačne.",
+monthlyPeriod:"/ mesiac",
+annualTitle:"Ročne",
+annualText:"£10 ročne.",
+annualPeriod:"/ rok",
+subscribe:"VYBRAŤ ČLENSTVO",
+gateFootnote:"Automatické obnovenie až do zrušenia.",
+close:"ZAVRIEŤ",
+useOffer:"VYUŽIŤ PONUKU",
+showVoucher:"ZOBRAZIŤ VOUCHER"
+}),
 
-hu:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB ELŐNYÖK",heroTitle:"Különleges ajánlatok Önnek",heroText:"Exkluzív partnerkedvezmények a PETS & DOGUE Club tagjainak.",heroBadge:"AZONOS AJÁNLATOK MINDEN AKTÍV TAGNAK",offersTitle:"Partnerkedvezmények",offersIntro:"Válasszon országot és nézze meg az elérhető ajánlatokat.",locationLabel:"HOL SZERETNÉ LÁTNI AZ AJÁNLATOKAT?",international:"🌍 NEMZETKÖZI ONLINE",internationalName:"Nemzetközi online",all:"Mind",veterinary:"Állatorvos",grooming:"Kozmetika",pet_food:"Eledel",pet_shop:"Kisállatboltok",travel:"Utazás",pet_friendly:"Pet-friendly",training:"Képzés",accessories:"Kiegészítők",insurance:"Biztosítás",photography:"Fotózás",experiences:"Élmények",other:"Egyéb",valid:"Érvényes",once:"1 voucher tagonként",members:"Club ajánlat",openOffer:"AJÁNLAT MEGTEKINTÉSE",unlockOffer:"FELOLDÁS CLUBBAL",loading:"AJÁNLATOK BETÖLTÉSE…",empty:"Még nincsenek ajánlatok",emptyText:"Ehhez a helyhez jelenleg nincs aktív ajánlat.",error:"Az ajánlatok átmenetileg nem érhetők el",errorText:"Próbálja újra később.",gateTitle:"Feloldás PETS & DOGUE Clubbal",gateText:"Minden kedvezmény elérhető aktív Club tagsággal.",monthlyTitle:"Havi",monthlyText:"30 nap ingyen, majd havi £1.",monthlyPeriod:"/ hó",annualTitle:"Éves",annualText:"Évi £10.",annualPeriod:"/ év",subscribe:"TAGSÁG KIVÁLASZTÁSA",gateFootnote:"Automatikus megújítás lemondásig.",close:"BEZÁRÁS",useOffer:"AJÁNLAT FELHASZNÁLÁSA",showVoucher:"VOUCHER MEGJELENÍTÉSE",onlineHelp:"A partneroldalra való átirányítás a PETS & DOGUE rendszeren keresztül történik, és nem beváltás.",offlineSoon:"A védett voucher a tagság ellenőrzése után lesz elérhető."
-},
+hu:pack({
+heroKicker:"PETS & DOGUE CLUB ELŐNYÖK",
+heroTitle:"Különleges ajánlatok Önnek",
+heroText:"Exkluzív partnerkedvezmények a PETS & DOGUE Club tagjainak.",
+heroBadge:"AZONOS AJÁNLATOK MINDEN AKTÍV TAGNAK",
+offersTitle:"Partnerkedvezmények",
+offersIntro:"Válassza jelenlegi országát, egy másik országot vagy nemzetközi online ajánlatokat.",
+locationLabel:"HOL SZERETNÉ LÁTNI AZ AJÁNLATOKAT?",
+nearMe:"📍 A KÖZELEMBEN",
+nearMeLoading:"HELYMEGHATÁROZÁS…",
+nearMeHint:"A jelenlegi országában elérhető ajánlatok",
+manualHint:"Ezt az országot kézzel választotta ki",
+international:"🌍 NEMZETKÖZI ONLINE",
+internationalName:"Nemzetközi online",
+internationalHint:"Nemzetközileg elérhető online ajánlatok",
+detected:"Hely meghatározva",
+detectedWithCity:"Hely meghatározva a közelében:",
+locationUnavailable:"Nem sikerült meghatározni az országot. Válassza ki kézzel.",
+locationUnsupported:"A meghatározott ország még nincs a PETS & DOGUE listáján.",
+all:"Mind",
+veterinary:"Állatorvos",
+grooming:"Kozmetika",
+pet_food:"Eledel",
+pet_shop:"Kisállatboltok",
+travel:"Utazás",
+pet_friendly:"Pet-friendly",
+training:"Képzés",
+accessories:"Kiegészítők",
+insurance:"Biztosítás",
+photography:"Fotózás",
+experiences:"Élmények",
+other:"Egyéb",
+valid:"Érvényes",
+once:"1 voucher tagonként",
+members:"Club ajánlat",
+openOffer:"AJÁNLAT MEGTEKINTÉSE",
+unlockOffer:"FELOLDÁS CLUBBAL",
+loading:"AJÁNLATOK BETÖLTÉSE…",
+empty:"Még nincsenek ajánlatok",
+emptyText:"Ehhez a helyhez jelenleg nincs aktív ajánlat.",
+error:"Az ajánlatok átmenetileg nem érhetők el",
+errorText:"Próbálja újra később.",
+gateTitle:"Feloldás PETS & DOGUE Clubbal",
+gateText:"Minden kedvezmény elérhető aktív Club tagsággal.",
+monthlyTitle:"Havi",
+monthlyText:"30 nap ingyen, majd havi £1.",
+monthlyPeriod:"/ hó",
+annualTitle:"Éves",
+annualText:"Évi £10.",
+annualPeriod:"/ év",
+subscribe:"TAGSÁG KIVÁLASZTÁSA",
+gateFootnote:"Automatikus megújítás lemondásig.",
+close:"BEZÁRÁS",
+useOffer:"AJÁNLAT FELHASZNÁLÁSA",
+showVoucher:"VOUCHER MEGJELENÍTÉSE"
+}),
 
-ro:{
-club:"CLUB",heroKicker:"PRIVILEGII PETS & DOGUE CLUB",heroTitle:"Oferte speciale pentru tine",heroText:"Reduceri exclusive ale partenerilor pentru membrii PETS & DOGUE Club.",heroBadge:"ACELEAȘI OFERTE PENTRU TOȚI MEMBRII ACTIVI",offersTitle:"Reduceri parteneri",offersIntro:"Alege o țară și vezi ofertele disponibile acolo.",locationLabel:"UNDE VREI SĂ VEZI OFERTELE?",international:"🌍 OFERTE ONLINE INTERNAȚIONALE",internationalName:"Internațional online",all:"Toate",veterinary:"Veterinar",grooming:"Grooming",pet_food:"Hrană",pet_shop:"Magazine animale",travel:"Călătorii",pet_friendly:"Pet-friendly",training:"Dresaj",accessories:"Accesorii",insurance:"Asigurare",photography:"Fotografie",experiences:"Experiențe",other:"Altele",valid:"Valabil până la",once:"1 voucher per membru",members:"Ofertă Club",openOffer:"VEZI OFERTA",unlockOffer:"DEBLOCHEAZĂ CU CLUB",loading:"SE ÎNCARCĂ OFERTELE…",empty:"Nu există încă oferte",emptyText:"Nu există oferte active pentru această locație.",error:"Ofertele sunt temporar indisponibile",errorText:"Încearcă din nou mai târziu.",gateTitle:"Deblochează cu PETS & DOGUE Club",gateText:"Toate reducerile sunt disponibile cu un abonament Club activ.",monthlyTitle:"Lunar",monthlyText:"30 de zile gratuit, apoi £1 lunar.",monthlyPeriod:"/ lună",annualTitle:"Anual",annualText:"£10 pe an.",annualPeriod:"/ an",subscribe:"ALEGE ABONAMENTUL",gateFootnote:"Reînnoire automată până la anulare.",close:"ÎNCHIDE",useOffer:"FOLOSEȘTE OFERTA",showVoucher:"ARATĂ VOUCHERUL",onlineHelp:"Accesul la site-ul partenerului trece prin PETS & DOGUE și nu este o utilizare.",offlineSoon:"Voucherul protejat va fi disponibil după verificarea abonamentului."
-},
+ro:pack({
+heroKicker:"PRIVILEGII PETS & DOGUE CLUB",
+heroTitle:"Oferte speciale pentru tine",
+heroText:"Reduceri exclusive ale partenerilor pentru membrii PETS & DOGUE Club.",
+heroBadge:"ACELEAȘI OFERTE PENTRU TOȚI MEMBRII ACTIVI",
+offersTitle:"Reduceri parteneri",
+offersIntro:"Alege țara în care te afli, altă țară sau ofertele online internaționale.",
+locationLabel:"UNDE VREI SĂ VEZI OFERTELE?",
+nearMe:"📍 ÎN APROPIEREA MEA",
+nearMeLoading:"LOCALIZARE…",
+nearMeHint:"Oferte disponibile în țara în care te afli acum",
+manualHint:"Ai selectat această țară manual",
+international:"🌍 OFERTE ONLINE INTERNAȚIONALE",
+internationalName:"Internațional online",
+internationalHint:"Oferte online disponibile internațional",
+detected:"Locație detectată",
+detectedWithCity:"Locație detectată în apropiere de",
+locationUnavailable:"Nu am putut detecta țara. Selecteaz-o manual.",
+locationUnsupported:"Țara detectată nu este încă în lista PETS & DOGUE.",
+all:"Toate",
+veterinary:"Veterinar",
+grooming:"Grooming",
+pet_food:"Hrană",
+pet_shop:"Magazine animale",
+travel:"Călătorii",
+pet_friendly:"Pet-friendly",
+training:"Dresaj",
+accessories:"Accesorii",
+insurance:"Asigurare",
+photography:"Fotografie",
+experiences:"Experiențe",
+other:"Altele",
+valid:"Valabil până la",
+once:"1 voucher per membru",
+members:"Ofertă Club",
+openOffer:"VEZI OFERTA",
+unlockOffer:"DEBLOCHEAZĂ CU CLUB",
+loading:"SE ÎNCARCĂ OFERTELE…",
+empty:"Nu există încă oferte",
+emptyText:"Nu există oferte active pentru această locație.",
+error:"Ofertele sunt temporar indisponibile",
+errorText:"Încearcă din nou mai târziu.",
+gateTitle:"Deblochează cu PETS & DOGUE Club",
+gateText:"Toate reducerile sunt disponibile cu un abonament Club activ.",
+monthlyTitle:"Lunar",
+monthlyText:"30 de zile gratuit, apoi £1 lunar.",
+monthlyPeriod:"/ lună",
+annualTitle:"Anual",
+annualText:"£10 pe an.",
+annualPeriod:"/ an",
+subscribe:"ALEGE ABONAMENTUL",
+gateFootnote:"Reînnoire automată până la anulare.",
+close:"ÎNCHIDE",
+useOffer:"FOLOSEȘTE OFERTA",
+showVoucher:"ARATĂ VOUCHERUL"
+}),
 
-bg:{
-club:"CLUB",heroKicker:"ПРИВИЛЕГИИ PETS & DOGUE CLUB",heroTitle:"Специални предложения за вас",heroText:"Ексклузивни партньорски отстъпки за членове на PETS & DOGUE Club.",heroBadge:"ЕДНАКВИ ОФЕРТИ ЗА ВСИЧКИ АКТИВНИ ЧЛЕНОВЕ",offersTitle:"Партньорски отстъпки",offersIntro:"Изберете държава и вижте наличните оферти.",locationLabel:"КЪДЕ ИСКАТЕ ДА ВИЖДАТЕ ОФЕРТИ?",international:"🌍 МЕЖДУНАРОДНИ ОНЛАЙН",internationalName:"Международни онлайн",all:"Всички",veterinary:"Ветеринария",grooming:"Груминг",pet_food:"Храна",pet_shop:"Зоомагазини",travel:"Пътуване",pet_friendly:"Pet-friendly",training:"Обучение",accessories:"Аксесоари",insurance:"Застраховка",photography:"Фотография",experiences:"Преживявания",other:"Друго",valid:"Валидно до",once:"1 ваучер на член",members:"Club оферта",openOffer:"ВИЖ ОФЕРТАТА",unlockOffer:"ОТКЛЮЧИ С CLUB",loading:"ЗАРЕЖДАНЕ НА ОФЕРТИ…",empty:"Все още няма оферти",emptyText:"За това местоположение няма активни оферти.",error:"Офертите временно не са достъпни",errorText:"Опитайте отново по-късно.",gateTitle:"Отключете с PETS & DOGUE Club",gateText:"Всички отстъпки са достъпни с активен Club абонамент.",monthlyTitle:"Месечно",monthlyText:"30 дни безплатно, след това £1 месечно.",monthlyPeriod:"/ месец",annualTitle:"Годишно",annualText:"£10 годишно.",annualPeriod:"/ година",subscribe:"ИЗБЕРИ АБОНАМЕНТ",gateFootnote:"Автоматично подновяване до отказ.",close:"ЗАТВОРИ",useOffer:"ИЗПОЛЗВАЙ ОФЕРТАТА",showVoucher:"ПОКАЖИ ВАУЧЕРА",onlineHelp:"Преминаването към сайта на партньора минава през PETS & DOGUE и не е използване.",offlineSoon:"Защитеният ваучер ще бъде достъпен след проверка на абонамента."
-},
+bg:pack({
+heroKicker:"ПРИВИЛЕГИИ PETS & DOGUE CLUB",
+heroTitle:"Специални предложения за вас",
+heroText:"Ексклузивни партньорски отстъпки за членове на PETS & DOGUE Club.",
+heroBadge:"ЕДНАКВИ ОФЕРТИ ЗА ВСИЧКИ АКТИВНИ ЧЛЕНОВЕ",
+offersTitle:"Партньорски отстъпки",
+offersIntro:"Изберете текущата си държава, друга държава или международни онлайн оферти.",
+locationLabel:"КЪДЕ ИСКАТЕ ДА ВИЖДАТЕ ОФЕРТИ?",
+nearMe:"📍 БЛИЗО ДО МЕН",
+nearMeLoading:"ОПРЕДЕЛЯМЕ…",
+nearMeHint:"Оферти, налични в държавата, в която се намирате",
+manualHint:"Избрахте тази държава ръчно",
+international:"🌍 МЕЖДУНАРОДНИ ОНЛАЙН",
+internationalName:"Международни онлайн",
+internationalHint:"Онлайн оферти, достъпни международно",
+detected:"Местоположението е определено",
+detectedWithCity:"Местоположението е определено близо до",
+locationUnavailable:"Не успяхме да определим държавата ви. Изберете я ръчно.",
+locationUnsupported:"Определената държава все още не е в списъка PETS & DOGUE.",
+all:"Всички",
+veterinary:"Ветеринария",
+grooming:"Груминг",
+pet_food:"Храна",
+pet_shop:"Зоомагазини",
+travel:"Пътуване",
+pet_friendly:"Pet-friendly",
+training:"Обучение",
+accessories:"Аксесоари",
+insurance:"Застраховка",
+photography:"Фотография",
+experiences:"Преживявания",
+other:"Друго",
+valid:"Валидно до",
+once:"1 ваучер на член",
+members:"Club оферта",
+openOffer:"ВИЖ ОФЕРТАТА",
+unlockOffer:"ОТКЛЮЧИ С CLUB",
+loading:"ЗАРЕЖДАНЕ НА ОФЕРТИ…",
+empty:"Все още няма оферти",
+emptyText:"За това местоположение няма активни оферти.",
+error:"Офертите временно не са достъпни",
+errorText:"Опитайте отново по-късно.",
+gateTitle:"Отключете с PETS & DOGUE Club",
+gateText:"Всички отстъпки са достъпни с активен Club абонамент.",
+monthlyTitle:"Месечно",
+monthlyText:"30 дни безплатно, след това £1 месечно.",
+monthlyPeriod:"/ месец",
+annualTitle:"Годишно",
+annualText:"£10 годишно.",
+annualPeriod:"/ година",
+subscribe:"ИЗБЕРИ АБОНАМЕНТ",
+gateFootnote:"Автоматично подновяване до отказ.",
+close:"ЗАТВОРИ",
+useOffer:"ИЗПОЛЗВАЙ ОФЕРТАТА",
+showVoucher:"ПОКАЖИ ВАУЧЕРА"
+}),
 
-el:{
-club:"CLUB",heroKicker:"ΠΡΟΝΟΜΙΑ PETS & DOGUE CLUB",heroTitle:"Ειδικές προσφορές για εσάς",heroText:"Αποκλειστικές εκπτώσεις συνεργατών για μέλη PETS & DOGUE Club.",heroBadge:"ΟΙ ΙΔΙΕΣ ΠΡΟΣΦΟΡΕΣ ΓΙΑ ΟΛΑ ΤΑ ΕΝΕΡΓΑ ΜΕΛΗ",offersTitle:"Εκπτώσεις συνεργατών",offersIntro:"Επιλέξτε χώρα και δείτε τις διαθέσιμες προσφορές.",locationLabel:"ΠΟΥ ΘΕΛΕΤΕ ΝΑ ΔΕΙΤΕ ΠΡΟΣΦΟΡΕΣ;",international:"🌍 ΔΙΕΘΝΕΙΣ ONLINE",internationalName:"Διεθνείς online",all:"Όλα",veterinary:"Κτηνίατρος",grooming:"Grooming",pet_food:"Τροφή",pet_shop:"Καταστήματα κατοικιδίων",travel:"Ταξίδια",pet_friendly:"Pet-friendly",training:"Εκπαίδευση",accessories:"Αξεσουάρ",insurance:"Ασφάλιση",photography:"Φωτογραφία",experiences:"Εμπειρίες",other:"Άλλο",valid:"Ισχύει έως",once:"1 voucher ανά μέλος",members:"Προσφορά Club",openOffer:"ΠΡΟΒΟΛΗ ΠΡΟΣΦΟΡΑΣ",unlockOffer:"ΞΕΚΛΕΙΔΩΜΑ ΜΕ CLUB",loading:"ΦΟΡΤΩΣΗ ΠΡΟΣΦΟΡΩΝ…",empty:"Δεν υπάρχουν ακόμη προσφορές",emptyText:"Δεν υπάρχουν ενεργές προσφορές για αυτή την τοποθεσία.",error:"Οι προσφορές δεν είναι προσωρινά διαθέσιμες",errorText:"Δοκιμάστε ξανά αργότερα.",gateTitle:"Ξεκλείδωμα με PETS & DOGUE Club",gateText:"Όλες οι εκπτώσεις είναι διαθέσιμες με ενεργή συνδρομή Club.",monthlyTitle:"Μηνιαία",monthlyText:"30 ημέρες δωρεάν, μετά £1 τον μήνα.",monthlyPeriod:"/ μήνα",annualTitle:"Ετήσια",annualText:"£10 τον χρόνο.",annualPeriod:"/ έτος",subscribe:"ΕΠΙΛΟΓΗ ΣΥΝΔΡΟΜΗΣ",gateFootnote:"Αυτόματη ανανέωση μέχρι ακύρωση.",close:"ΚΛΕΙΣΙΜΟ",useOffer:"ΧΡΗΣΗ ΠΡΟΣΦΟΡΑΣ",showVoucher:"ΠΡΟΒΟΛΗ VOUCHER",onlineHelp:"Η μετάβαση στον συνεργάτη γίνεται μέσω PETS & DOGUE και δεν θεωρείται εξαργύρωση.",offlineSoon:"Το προστατευμένο voucher θα είναι διαθέσιμο μετά την επαλήθευση συνδρομής."
-},
+el:pack({
+heroKicker:"ΠΡΟΝΟΜΙΑ PETS & DOGUE CLUB",
+heroTitle:"Ειδικές προσφορές για εσάς",
+heroText:"Αποκλειστικές εκπτώσεις συνεργατών για μέλη PETS & DOGUE Club.",
+heroBadge:"ΟΙ ΙΔΙΕΣ ΠΡΟΣΦΟΡΕΣ ΓΙΑ ΟΛΑ ΤΑ ΕΝΕΡΓΑ ΜΕΛΗ",
+offersTitle:"Εκπτώσεις συνεργατών",
+offersIntro:"Επιλέξτε την τρέχουσα χώρα σας, άλλη χώρα ή διεθνείς online προσφορές.",
+locationLabel:"ΠΟΥ ΘΕΛΕΤΕ ΝΑ ΔΕΙΤΕ ΠΡΟΣΦΟΡΕΣ;",
+nearMe:"📍 ΚΟΝΤΑ ΜΟΥ",
+nearMeLoading:"ΕΝΤΟΠΙΣΜΟΣ…",
+nearMeHint:"Προσφορές διαθέσιμες στη χώρα όπου βρίσκεστε τώρα",
+manualHint:"Επιλέξατε αυτή τη χώρα χειροκίνητα",
+international:"🌍 ΔΙΕΘΝΕΙΣ ONLINE",
+internationalName:"Διεθνείς online",
+internationalHint:"Online προσφορές διαθέσιμες διεθνώς",
+detected:"Η τοποθεσία εντοπίστηκε",
+detectedWithCity:"Η τοποθεσία εντοπίστηκε κοντά στο",
+locationUnavailable:"Δεν ήταν δυνατός ο εντοπισμός της χώρας σας. Επιλέξτε τη χειροκίνητα.",
+locationUnsupported:"Η χώρα που εντοπίστηκε δεν είναι ακόμη στη λίστα PETS & DOGUE.",
+all:"Όλα",
+veterinary:"Κτηνίατρος",
+grooming:"Grooming",
+pet_food:"Τροφή",
+pet_shop:"Καταστήματα κατοικιδίων",
+travel:"Ταξίδια",
+pet_friendly:"Pet-friendly",
+training:"Εκπαίδευση",
+accessories:"Αξεσουάρ",
+insurance:"Ασφάλιση",
+photography:"Φωτογραφία",
+experiences:"Εμπειρίες",
+other:"Άλλο",
+valid:"Ισχύει έως",
+once:"1 voucher ανά μέλος",
+members:"Προσφορά Club",
+openOffer:"ΠΡΟΒΟΛΗ ΠΡΟΣΦΟΡΑΣ",
+unlockOffer:"ΞΕΚΛΕΙΔΩΜΑ ΜΕ CLUB",
+loading:"ΦΟΡΤΩΣΗ ΠΡΟΣΦΟΡΩΝ…",
+empty:"Δεν υπάρχουν ακόμη προσφορές",
+emptyText:"Δεν υπάρχουν ενεργές προσφορές για αυτή την τοποθεσία.",
+error:"Οι προσφορές δεν είναι προσωρινά διαθέσιμες",
+errorText:"Δοκιμάστε ξανά αργότερα.",
+gateTitle:"Ξεκλείδωμα με PETS & DOGUE Club",
+gateText:"Όλες οι εκπτώσεις είναι διαθέσιμες με ενεργή συνδρομή Club.",
+monthlyTitle:"Μηνιαία",
+monthlyText:"30 ημέρες δωρεάν, μετά £1 τον μήνα.",
+monthlyPeriod:"/ μήνα",
+annualTitle:"Ετήσια",
+annualText:"£10 τον χρόνο.",
+annualPeriod:"/ έτος",
+subscribe:"ΕΠΙΛΟΓΗ ΣΥΝΔΡΟΜΗΣ",
+gateFootnote:"Αυτόματη ανανέωση μέχρι ακύρωση.",
+close:"ΚΛΕΙΣΙΜΟ",
+useOffer:"ΧΡΗΣΗ ΠΡΟΣΦΟΡΑΣ",
+showVoucher:"ΠΡΟΒΟΛΗ VOUCHER"
+}),
 
-sv:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB FÖRMÅNER",heroTitle:"Specialerbjudanden för dig",heroText:"Exklusiva partnerrabatter för PETS & DOGUE Club-medlemmar.",heroBadge:"SAMMA ERBJUDANDEN FÖR ALLA AKTIVA MEDLEMMAR",offersTitle:"Partnerrabatter",offersIntro:"Välj ett land och se erbjudanden som finns där.",locationLabel:"VAR VILL DU SE ERBJUDANDEN?",international:"🌍 INTERNATIONELLA ONLINE",internationalName:"Internationella online",all:"Alla",veterinary:"Veterinär",grooming:"Grooming",pet_food:"Foder",pet_shop:"Djuraffärer",travel:"Resor",pet_friendly:"Pet-friendly",training:"Träning",accessories:"Tillbehör",insurance:"Försäkring",photography:"Fotografi",experiences:"Upplevelser",other:"Annat",valid:"Gäller till",once:"1 voucher per medlem",members:"Club-erbjudande",openOffer:"VISA ERBJUDANDE",unlockOffer:"LÅS UPP MED CLUB",loading:"LADDAR ERBJUDANDEN…",empty:"Inga erbjudanden ännu",emptyText:"Det finns inga aktiva erbjudanden för den här platsen.",error:"Erbjudanden är tillfälligt otillgängliga",errorText:"Försök igen senare.",gateTitle:"Lås upp med PETS & DOGUE Club",gateText:"Alla rabatter är tillgängliga med ett aktivt Club-medlemskap.",monthlyTitle:"Månadsvis",monthlyText:"30 dagar gratis, sedan £1 per månad.",monthlyPeriod:"/ månad",annualTitle:"Årsvis",annualText:"£10 per år.",annualPeriod:"/ år",subscribe:"VÄLJ MEDLEMSKAP",gateFootnote:"Automatisk förnyelse tills uppsägning.",close:"STÄNG",useOffer:"ANVÄND ERBJUDANDE",showVoucher:"VISA VOUCHER",onlineHelp:"Övergången till partnerns webbplats går via PETS & DOGUE och räknas inte som inlösen.",offlineSoon:"Den skyddade vouchern blir tillgänglig efter medlemskontroll."
-},
+sv:pack({
+heroKicker:"PETS & DOGUE CLUB FÖRMÅNER",
+heroTitle:"Specialerbjudanden för dig",
+heroText:"Exklusiva partnerrabatter för PETS & DOGUE Club-medlemmar.",
+heroBadge:"SAMMA ERBJUDANDEN FÖR ALLA AKTIVA MEDLEMMAR",
+offersTitle:"Partnerrabatter",
+offersIntro:"Välj ditt nuvarande land, ett annat land eller internationella onlineerbjudanden.",
+locationLabel:"VAR VILL DU SE ERBJUDANDEN?",
+nearMe:"📍 NÄRA MIG",
+nearMeLoading:"HITTAR PLATS…",
+nearMeHint:"Erbjudanden i landet där du befinner dig",
+manualHint:"Du valde detta land manuellt",
+international:"🌍 INTERNATIONELLA ONLINE",
+internationalName:"Internationella online",
+internationalHint:"Onlineerbjudanden som är tillgängliga internationellt",
+detected:"Plats identifierad",
+detectedWithCity:"Plats identifierad nära",
+locationUnavailable:"Vi kunde inte identifiera ditt land. Välj det manuellt.",
+locationUnsupported:"Det identifierade landet finns ännu inte i PETS & DOGUE-listan.",
+all:"Alla",
+veterinary:"Veterinär",
+grooming:"Grooming",
+pet_food:"Foder",
+pet_shop:"Djuraffärer",
+travel:"Resor",
+pet_friendly:"Pet-friendly",
+training:"Träning",
+accessories:"Tillbehör",
+insurance:"Försäkring",
+photography:"Fotografi",
+experiences:"Upplevelser",
+other:"Annat",
+valid:"Gäller till",
+once:"1 voucher per medlem",
+members:"Club-erbjudande",
+openOffer:"VISA ERBJUDANDE",
+unlockOffer:"LÅS UPP MED CLUB",
+loading:"LADDAR ERBJUDANDEN…",
+empty:"Inga erbjudanden ännu",
+emptyText:"Det finns inga aktiva erbjudanden för den här platsen.",
+error:"Erbjudanden är tillfälligt otillgängliga",
+errorText:"Försök igen senare.",
+gateTitle:"Lås upp med PETS & DOGUE Club",
+gateText:"Alla rabatter är tillgängliga med ett aktivt Club-medlemskap.",
+monthlyTitle:"Månadsvis",
+monthlyText:"30 dagar gratis, sedan £1 per månad.",
+monthlyPeriod:"/ månad",
+annualTitle:"Årsvis",
+annualText:"£10 per år.",
+annualPeriod:"/ år",
+subscribe:"VÄLJ MEDLEMSKAP",
+gateFootnote:"Automatisk förnyelse tills uppsägning.",
+close:"STÄNG",
+useOffer:"ANVÄND ERBJUDANDE",
+showVoucher:"VISA VOUCHER"
+}),
 
-da:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB FORDELE",heroTitle:"Særlige tilbud til dig",heroText:"Eksklusive partnerrabatter til PETS & DOGUE Club-medlemmer.",heroBadge:"SAMME TILBUD TIL ALLE AKTIVE MEDLEMMER",offersTitle:"Partnerrabatter",offersIntro:"Vælg et land og se de tilbud, der er tilgængelige der.",locationLabel:"HVOR VIL DU SE TILBUD?",international:"🌍 INTERNATIONALE ONLINE",internationalName:"Internationale online",all:"Alle",veterinary:"Dyrlæge",grooming:"Grooming",pet_food:"Foder",pet_shop:"Dyrebutikker",travel:"Rejser",pet_friendly:"Pet-friendly",training:"Træning",accessories:"Tilbehør",insurance:"Forsikring",photography:"Fotografi",experiences:"Oplevelser",other:"Andet",valid:"Gyldig til",once:"1 voucher pr. medlem",members:"Club-tilbud",openOffer:"SE TILBUD",unlockOffer:"LÅS OP MED CLUB",loading:"INDLÆSER TILBUD…",empty:"Ingen tilbud endnu",emptyText:"Der er ingen aktive tilbud for denne placering.",error:"Tilbud er midlertidigt utilgængelige",errorText:"Prøv igen senere.",gateTitle:"Lås op med PETS & DOGUE Club",gateText:"Alle rabatter er tilgængelige med et aktivt Club-medlemskab.",monthlyTitle:"Månedligt",monthlyText:"30 dage gratis, derefter £1 pr. måned.",monthlyPeriod:"/ måned",annualTitle:"Årligt",annualText:"£10 pr. år.",annualPeriod:"/ år",subscribe:"VÆLG MEDLEMSKAB",gateFootnote:"Automatisk fornyelse indtil opsigelse.",close:"LUK",useOffer:"BRUG TILBUD",showVoucher:"VIS VOUCHER",onlineHelp:"Overgangen til partnerens hjemmeside går via PETS & DOGUE og tæller ikke som indløsning.",offlineSoon:"Den beskyttede voucher bliver tilgængelig efter medlemskontrol."
-},
+da:pack({
+heroKicker:"PETS & DOGUE CLUB FORDELE",
+heroTitle:"Særlige tilbud til dig",
+heroText:"Eksklusive partnerrabatter til PETS & DOGUE Club-medlemmer.",
+heroBadge:"SAMME TILBUD TIL ALLE AKTIVE MEDLEMMER",
+offersTitle:"Partnerrabatter",
+offersIntro:"Vælg dit nuværende land, et andet land eller internationale online tilbud.",
+locationLabel:"HVOR VIL DU SE TILBUD?",
+nearMe:"📍 I NÆRHEDEN",
+nearMeLoading:"FINDER PLACERING…",
+nearMeHint:"Tilbud i det land, hvor du befinder dig nu",
+manualHint:"Du valgte dette land manuelt",
+international:"🌍 INTERNATIONALE ONLINE",
+internationalName:"Internationale online",
+internationalHint:"Online tilbud tilgængelige internationalt",
+detected:"Placering registreret",
+detectedWithCity:"Placering registreret nær",
+locationUnavailable:"Vi kunne ikke registrere dit land. Vælg det manuelt.",
+locationUnsupported:"Det registrerede land er endnu ikke på PETS & DOGUE-listen.",
+all:"Alle",
+veterinary:"Dyrlæge",
+grooming:"Grooming",
+pet_food:"Foder",
+pet_shop:"Dyrebutikker",
+travel:"Rejser",
+pet_friendly:"Pet-friendly",
+training:"Træning",
+accessories:"Tilbehør",
+insurance:"Forsikring",
+photography:"Fotografi",
+experiences:"Oplevelser",
+other:"Andet",
+valid:"Gyldig til",
+once:"1 voucher pr. medlem",
+members:"Club-tilbud",
+openOffer:"SE TILBUD",
+unlockOffer:"LÅS OP MED CLUB",
+loading:"INDLÆSER TILBUD…",
+empty:"Ingen tilbud endnu",
+emptyText:"Der er ingen aktive tilbud for denne placering.",
+error:"Tilbud er midlertidigt utilgængelige",
+errorText:"Prøv igen senere.",
+gateTitle:"Lås op med PETS & DOGUE Club",
+gateText:"Alle rabatter er tilgængelige med et aktivt Club-medlemskab.",
+monthlyTitle:"Månedligt",
+monthlyText:"30 dage gratis, derefter £1 pr. måned.",
+monthlyPeriod:"/ måned",
+annualTitle:"Årligt",
+annualText:"£10 pr. år.",
+annualPeriod:"/ år",
+subscribe:"VÆLG MEDLEMSKAB",
+gateFootnote:"Automatisk fornyelse indtil opsigelse.",
+close:"LUK",
+useOffer:"BRUG TILBUD",
+showVoucher:"VIS VOUCHER"
+}),
 
-no:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB FORDELER",heroTitle:"Spesialtilbud for deg",heroText:"Eksklusive partnerrabatter for PETS & DOGUE Club-medlemmer.",heroBadge:"SAMME TILBUD FOR ALLE AKTIVE MEDLEMMER",offersTitle:"Partnerrabatter",offersIntro:"Velg et land og se tilbudene som er tilgjengelige der.",locationLabel:"HVOR VIL DU SE TILBUD?",international:"🌍 INTERNASJONALE ONLINE",internationalName:"Internasjonale online",all:"Alle",veterinary:"Veterinær",grooming:"Grooming",pet_food:"Fôr",pet_shop:"Dyrebutikker",travel:"Reise",pet_friendly:"Pet-friendly",training:"Trening",accessories:"Tilbehør",insurance:"Forsikring",photography:"Fotografi",experiences:"Opplevelser",other:"Annet",valid:"Gyldig til",once:"1 voucher per medlem",members:"Club-tilbud",openOffer:"SE TILBUD",unlockOffer:"LÅS OPP MED CLUB",loading:"LASTER TILBUD…",empty:"Ingen tilbud ennå",emptyText:"Det finnes ingen aktive tilbud for denne plasseringen.",error:"Tilbud er midlertidig utilgjengelige",errorText:"Prøv igjen senere.",gateTitle:"Lås opp med PETS & DOGUE Club",gateText:"Alle rabatter er tilgjengelige med et aktivt Club-medlemskap.",monthlyTitle:"Månedlig",monthlyText:"30 dager gratis, deretter £1 per måned.",monthlyPeriod:"/ måned",annualTitle:"Årlig",annualText:"£10 per år.",annualPeriod:"/ år",subscribe:"VELG MEDLEMSKAP",gateFootnote:"Automatisk fornyelse til oppsigelse.",close:"LUKK",useOffer:"BRUK TILBUD",showVoucher:"VIS VOUCHER",onlineHelp:"Overgangen til partnerens nettsted går via PETS & DOGUE og regnes ikke som innløsning.",offlineSoon:"Den beskyttede voucheren blir tilgjengelig etter medlemskontroll."
-},
+no:pack({
+heroKicker:"PETS & DOGUE CLUB FORDELER",
+heroTitle:"Spesialtilbud for deg",
+heroText:"Eksklusive partnerrabatter for PETS & DOGUE Club-medlemmer.",
+heroBadge:"SAMME TILBUD FOR ALLE AKTIVE MEDLEMMER",
+offersTitle:"Partnerrabatter",
+offersIntro:"Velg landet du er i, et annet land eller internasjonale online-tilbud.",
+locationLabel:"HVOR VIL DU SE TILBUD?",
+nearMe:"📍 NÆR MEG",
+nearMeLoading:"FINNER POSISJON…",
+nearMeHint:"Tilbud i landet der du befinner deg nå",
+manualHint:"Du valgte dette landet manuelt",
+international:"🌍 INTERNASJONALE ONLINE",
+internationalName:"Internasjonale online",
+internationalHint:"Online-tilbud tilgjengelig internasjonalt",
+detected:"Posisjon registrert",
+detectedWithCity:"Posisjon registrert nær",
+locationUnavailable:"Vi kunne ikke registrere landet ditt. Velg det manuelt.",
+locationUnsupported:"Det registrerte landet er ennå ikke i PETS & DOGUE-listen.",
+all:"Alle",
+veterinary:"Veterinær",
+grooming:"Grooming",
+pet_food:"Fôr",
+pet_shop:"Dyrebutikker",
+travel:"Reise",
+pet_friendly:"Pet-friendly",
+training:"Trening",
+accessories:"Tilbehør",
+insurance:"Forsikring",
+photography:"Fotografi",
+experiences:"Opplevelser",
+other:"Annet",
+valid:"Gyldig til",
+once:"1 voucher per medlem",
+members:"Club-tilbud",
+openOffer:"SE TILBUD",
+unlockOffer:"LÅS OPP MED CLUB",
+loading:"LASTER TILBUD…",
+empty:"Ingen tilbud ennå",
+emptyText:"Det finnes ingen aktive tilbud for denne plasseringen.",
+error:"Tilbud er midlertidig utilgjengelige",
+errorText:"Prøv igjen senere.",
+gateTitle:"Lås opp med PETS & DOGUE Club",
+gateText:"Alle rabatter er tilgjengelige med et aktivt Club-medlemskap.",
+monthlyTitle:"Månedlig",
+monthlyText:"30 dager gratis, deretter £1 per måned.",
+monthlyPeriod:"/ måned",
+annualTitle:"Årlig",
+annualText:"£10 per år.",
+annualPeriod:"/ år",
+subscribe:"VELG MEDLEMSKAP",
+gateFootnote:"Automatisk fornyelse til oppsigelse.",
+close:"LUKK",
+useOffer:"BRUK TILBUD",
+showVoucher:"VIS VOUCHER"
+}),
 
-fi:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB EDUT",heroTitle:"Erikoistarjouksia sinulle",heroText:"Eksklusiivisia kumppanialennuksia PETS & DOGUE Club -jäsenille.",heroBadge:"SAMAT TARJOUKSET KAIKILLE AKTIIVISILLE JÄSENILLE",offersTitle:"Kumppanialennukset",offersIntro:"Valitse maa ja katso siellä saatavilla olevat tarjoukset.",locationLabel:"MISSÄ HALUAT NÄHDÄ TARJOUKSIA?",international:"🌍 KANSAINVÄLISET ONLINE",internationalName:"Kansainväliset online",all:"Kaikki",veterinary:"Eläinlääkäri",grooming:"Trimmaus",pet_food:"Ruoka",pet_shop:"Lemmikkikaupat",travel:"Matkailu",pet_friendly:"Pet-friendly",training:"Koulutus",accessories:"Tarvikkeet",insurance:"Vakuutus",photography:"Valokuvaus",experiences:"Elämykset",other:"Muu",valid:"Voimassa",once:"1 voucher per jäsen",members:"Club-tarjous",openOffer:"NÄYTÄ TARJOUS",unlockOffer:"AVAA CLUBILLA",loading:"LADATAAN TARJOUKSIA…",empty:"Ei vielä tarjouksia",emptyText:"Tälle sijainnille ei ole aktiivisia tarjouksia.",error:"Tarjoukset eivät ole tilapäisesti saatavilla",errorText:"Yritä myöhemmin uudelleen.",gateTitle:"Avaa PETS & DOGUE Clubilla",gateText:"Kaikki alennukset ovat saatavilla aktiivisella Club-jäsenyydellä.",monthlyTitle:"Kuukausi",monthlyText:"30 päivää ilmaiseksi, sitten £1 kuukaudessa.",monthlyPeriod:"/ kk",annualTitle:"Vuosi",annualText:"£10 vuodessa.",annualPeriod:"/ vuosi",subscribe:"VALITSE JÄSENYYS",gateFootnote:"Automaattinen uusinta peruutukseen asti.",close:"SULJE",useOffer:"KÄYTÄ TARJOUS",showVoucher:"NÄYTÄ VOUCHER",onlineHelp:"Siirtyminen kumppanin sivustolle tapahtuu PETS & DOGUE -palvelun kautta eikä ole lunastus.",offlineSoon:"Suojattu voucher tulee saataville jäsenyyden tarkistuksen jälkeen."
-},
+fi:pack({
+heroKicker:"PETS & DOGUE CLUB EDUT",
+heroTitle:"Erikoistarjouksia sinulle",
+heroText:"Eksklusiivisia kumppanialennuksia PETS & DOGUE Club -jäsenille.",
+heroBadge:"SAMAT TARJOUKSET KAIKILLE AKTIIVISILLE JÄSENILLE",
+offersTitle:"Kumppanialennukset",
+offersIntro:"Valitse nykyinen maasi, toinen maa tai kansainväliset verkkotarjoukset.",
+locationLabel:"MISSÄ HALUAT NÄHDÄ TARJOUKSIA?",
+nearMe:"📍 LÄHELLÄ MINUA",
+nearMeLoading:"PAIKANNETAAN…",
+nearMeHint:"Tarjoukset maassa, jossa olet nyt",
+manualHint:"Valitsit tämän maan manuaalisesti",
+international:"🌍 KANSAINVÄLISET ONLINE",
+internationalName:"Kansainväliset online",
+internationalHint:"Kansainvälisesti saatavilla olevat verkkotarjoukset",
+detected:"Sijainti havaittu",
+detectedWithCity:"Sijainti havaittu lähellä",
+locationUnavailable:"Maatasi ei voitu havaita. Valitse se manuaalisesti.",
+locationUnsupported:"Havaittu maa ei ole vielä PETS & DOGUE -luettelossa.",
+all:"Kaikki",
+veterinary:"Eläinlääkäri",
+grooming:"Trimmaus",
+pet_food:"Ruoka",
+pet_shop:"Lemmikkikaupat",
+travel:"Matkailu",
+pet_friendly:"Pet-friendly",
+training:"Koulutus",
+accessories:"Tarvikkeet",
+insurance:"Vakuutus",
+photography:"Valokuvaus",
+experiences:"Elämykset",
+other:"Muu",
+valid:"Voimassa",
+once:"1 voucher per jäsen",
+members:"Club-tarjous",
+openOffer:"NÄYTÄ TARJOUS",
+unlockOffer:"AVAA CLUBILLA",
+loading:"LADATAAN TARJOUKSIA…",
+empty:"Ei vielä tarjouksia",
+emptyText:"Tälle sijainnille ei ole aktiivisia tarjouksia.",
+error:"Tarjoukset eivät ole tilapäisesti saatavilla",
+errorText:"Yritä myöhemmin uudelleen.",
+gateTitle:"Avaa PETS & DOGUE Clubilla",
+gateText:"Kaikki alennukset ovat saatavilla aktiivisella Club-jäsenyydellä.",
+monthlyTitle:"Kuukausi",
+monthlyText:"30 päivää ilmaiseksi, sitten £1 kuukaudessa.",
+monthlyPeriod:"/ kk",
+annualTitle:"Vuosi",
+annualText:"£10 vuodessa.",
+annualPeriod:"/ vuosi",
+subscribe:"VALITSE JÄSENYYS",
+gateFootnote:"Automaattinen uusinta peruutukseen asti.",
+close:"SULJE",
+useOffer:"KÄYTÄ TARJOUS",
+showVoucher:"NÄYTÄ VOUCHER"
+}),
 
-tr:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB AYRICALIKLARI",heroTitle:"Size özel teklifler",heroText:"PETS & DOGUE Club üyelerine özel partner indirimleri.",heroBadge:"TÜM AKTİF ÜYELERE AYNI TEKLİFLER",offersTitle:"Partner indirimleri",offersIntro:"Bir ülke seçin ve oradaki teklifleri görün.",locationLabel:"TEKLİFLERİ NEREDE GÖRMEK İSTİYORSUNUZ?",international:"🌍 ULUSLARARASI ONLINE",internationalName:"Uluslararası online",all:"Tümü",veterinary:"Veteriner",grooming:"Bakım",pet_food:"Mama",pet_shop:"Pet shop",travel:"Seyahat",pet_friendly:"Pet-friendly",training:"Eğitim",accessories:"Aksesuar",insurance:"Sigorta",photography:"Fotoğraf",experiences:"Deneyimler",other:"Diğer",valid:"Geçerli",once:"Üye başına 1 kupon",members:"Club teklifi",openOffer:"TEKLİFİ GÖR",unlockOffer:"CLUB İLE AÇ",loading:"TEKLİFLER YÜKLENİYOR…",empty:"Henüz teklif yok",emptyText:"Bu konum için aktif teklif bulunmuyor.",error:"Teklifler geçici olarak kullanılamıyor",errorText:"Daha sonra tekrar deneyin.",gateTitle:"PETS & DOGUE Club ile açın",gateText:"Tüm indirimler aktif Club üyeliği ile kullanılabilir.",monthlyTitle:"Aylık",monthlyText:"30 gün ücretsiz, sonra ayda £1.",monthlyPeriod:"/ ay",annualTitle:"Yıllık",annualText:"Yılda £10.",annualPeriod:"/ yıl",subscribe:"ÜYELİK SEÇ",gateFootnote:"İptal edilene kadar otomatik yenilenir.",close:"KAPAT",useOffer:"TEKLİFİ KULLAN",showVoucher:"KUPONU GÖSTER",onlineHelp:"Partner sitesine geçiş PETS & DOGUE üzerinden yapılır ve kullanım sayılmaz.",offlineSoon:"Korumalı kupon üyelik doğrulamasından sonra açılacaktır."
-},
+tr:pack({
+heroKicker:"PETS & DOGUE CLUB AYRICALIKLARI",
+heroTitle:"Size özel teklifler",
+heroText:"PETS & DOGUE Club üyelerine özel partner indirimleri.",
+heroBadge:"TÜM AKTİF ÜYELERE AYNI TEKLİFLER",
+offersTitle:"Partner indirimleri",
+offersIntro:"Bulunduğunuz ülkeyi, başka bir ülkeyi veya uluslararası online teklifleri seçin.",
+locationLabel:"TEKLİFLERİ NEREDE GÖRMEK İSTİYORSUNUZ?",
+nearMe:"📍 YAKINIMDA",
+nearMeLoading:"KONUM BULUNUYOR…",
+nearMeHint:"Şu anda bulunduğunuz ülkedeki teklifler",
+manualHint:"Bu ülkeyi manuel olarak seçtiniz",
+international:"🌍 ULUSLARARASI ONLINE",
+internationalName:"Uluslararası online",
+internationalHint:"Uluslararası kullanılabilen online teklifler",
+detected:"Konum algılandı",
+detectedWithCity:"Konum şu bölgenin yakınında algılandı:",
+locationUnavailable:"Ülkeniz algılanamadı. Lütfen manuel olarak seçin.",
+locationUnsupported:"Algılanan ülke henüz PETS & DOGUE listesinde değil.",
+all:"Tümü",
+veterinary:"Veteriner",
+grooming:"Bakım",
+pet_food:"Mama",
+pet_shop:"Pet shop",
+travel:"Seyahat",
+pet_friendly:"Pet-friendly",
+training:"Eğitim",
+accessories:"Aksesuar",
+insurance:"Sigorta",
+photography:"Fotoğraf",
+experiences:"Deneyimler",
+other:"Diğer",
+valid:"Geçerli",
+once:"Üye başına 1 kupon",
+members:"Club teklifi",
+openOffer:"TEKLİFİ GÖR",
+unlockOffer:"CLUB İLE AÇ",
+loading:"TEKLİFLER YÜKLENİYOR…",
+empty:"Henüz teklif yok",
+emptyText:"Bu konum için aktif teklif bulunmuyor.",
+error:"Teklifler geçici olarak kullanılamıyor",
+errorText:"Daha sonra tekrar deneyin.",
+gateTitle:"PETS & DOGUE Club ile açın",
+gateText:"Tüm indirimler aktif Club üyeliği ile kullanılabilir.",
+monthlyTitle:"Aylık",
+monthlyText:"30 gün ücretsiz, sonra ayda £1.",
+monthlyPeriod:"/ ay",
+annualTitle:"Yıllık",
+annualText:"Yılda £10.",
+annualPeriod:"/ yıl",
+subscribe:"ÜYELİK SEÇ",
+gateFootnote:"İptal edilene kadar otomatik yenilenir.",
+close:"KAPAT",
+useOffer:"TEKLİFİ KULLAN",
+showVoucher:"KUPONU GÖSTER"
+}),
 
-ar:{
-club:"النادي",heroKicker:"مزايا PETS & DOGUE CLUB",heroTitle:"عروض خاصة لك",heroText:"خصومات حصرية من الشركاء لأعضاء PETS & DOGUE Club.",heroBadge:"نفس العروض لجميع أعضاء CLUB النشطين",offersTitle:"خصومات الشركاء",offersIntro:"اختر دولة وشاهد العروض المتاحة فيها.",locationLabel:"أين تريد مشاهدة العروض؟",international:"🌍 عروض دولية عبر الإنترنت",internationalName:"دولي عبر الإنترنت",all:"الكل",veterinary:"بيطري",grooming:"العناية",pet_food:"طعام الحيوانات",pet_shop:"متاجر الحيوانات",travel:"السفر",pet_friendly:"Pet-friendly",training:"التدريب",accessories:"الإكسسوارات",insurance:"التأمين",photography:"التصوير",experiences:"تجارب",other:"أخرى",valid:"صالح حتى",once:"قسيمة واحدة لكل عضو",members:"عرض Club",openOffer:"عرض التفاصيل",unlockOffer:"فتح مع CLUB",loading:"جارٍ تحميل العروض…",empty:"لا توجد عروض بعد",emptyText:"لا توجد عروض نشطة لهذا الموقع حالياً.",error:"العروض غير متاحة مؤقتاً",errorText:"حاول مرة أخرى لاحقاً.",gateTitle:"افتح العرض مع PETS & DOGUE Club",gateText:"جميع الخصومات متاحة مع اشتراك Club نشط.",monthlyTitle:"شهري",monthlyText:"30 يوماً مجاناً، ثم £1 شهرياً.",monthlyPeriod:"/ شهر",annualTitle:"سنوي",annualText:"£10 سنوياً.",annualPeriod:"/ سنة",subscribe:"اختر الاشتراك",gateFootnote:"يتجدد تلقائياً حتى الإلغاء.",close:"إغلاق",useOffer:"استخدام العرض",showVoucher:"إظهار القسيمة",onlineHelp:"يتم الانتقال إلى موقع الشريك عبر PETS & DOGUE ولا يُعد استخداماً للقسيمة.",offlineSoon:"ستتوفر القسيمة المحمية بعد التحقق من العضوية."
-},
+ar:pack({
+club:"النادي",
+heroKicker:"مزايا PETS & DOGUE CLUB",
+heroTitle:"عروض خاصة لك",
+heroText:"خصومات حصرية من الشركاء لأعضاء PETS & DOGUE Club.",
+heroBadge:"نفس العروض لجميع أعضاء CLUB النشطين",
+offersTitle:"خصومات الشركاء",
+offersIntro:"اختر بلدك الحالي أو بلدًا آخر أو العروض الدولية عبر الإنترنت.",
+locationLabel:"أين تريد مشاهدة العروض؟",
+nearMe:"📍 بالقرب مني",
+nearMeLoading:"جارٍ تحديد الموقع…",
+nearMeHint:"العروض المتاحة في البلد الذي تتواجد فيه الآن",
+manualHint:"لقد اخترت هذا البلد يدويًا",
+international:"🌍 عروض دولية عبر الإنترنت",
+internationalName:"دولي عبر الإنترنت",
+internationalHint:"عروض عبر الإنترنت متاحة دوليًا",
+detected:"تم تحديد الموقع",
+detectedWithCity:"تم تحديد الموقع بالقرب من",
+locationUnavailable:"تعذر تحديد بلدك. يرجى اختياره يدويًا.",
+locationUnsupported:"البلد المحدد غير موجود بعد في قائمة PETS & DOGUE.",
+all:"الكل",
+veterinary:"بيطري",
+grooming:"العناية",
+pet_food:"طعام الحيوانات",
+pet_shop:"متاجر الحيوانات",
+travel:"السفر",
+pet_friendly:"Pet-friendly",
+training:"التدريب",
+accessories:"الإكسسوارات",
+insurance:"التأمين",
+photography:"التصوير",
+experiences:"تجارب",
+other:"أخرى",
+valid:"صالح حتى",
+once:"قسيمة واحدة لكل عضو",
+members:"عرض Club",
+openOffer:"عرض التفاصيل",
+unlockOffer:"فتح مع CLUB",
+loading:"جارٍ تحميل العروض…",
+empty:"لا توجد عروض بعد",
+emptyText:"لا توجد عروض نشطة لهذا الموقع حالياً.",
+error:"العروض غير متاحة مؤقتاً",
+errorText:"حاول مرة أخرى لاحقاً.",
+gateTitle:"افتح العرض مع PETS & DOGUE Club",
+gateText:"جميع الخصومات متاحة مع اشتراك Club نشط.",
+monthlyTitle:"شهري",
+monthlyText:"30 يوماً مجاناً، ثم £1 شهرياً.",
+monthlyPeriod:"/ شهر",
+annualTitle:"سنوي",
+annualText:"£10 سنوياً.",
+annualPeriod:"/ سنة",
+subscribe:"اختر الاشتراك",
+gateFootnote:"يتجدد تلقائياً حتى الإلغاء.",
+close:"إغلاق",
+useOffer:"استخدام العرض",
+showVoucher:"إظهار القسيمة"
+}),
 
-hi:{
-club:"CLUB",heroKicker:"PETS & DOGUE CLUB लाभ",heroTitle:"आपके लिए विशेष ऑफ़र",heroText:"PETS & DOGUE Club सदस्यों के लिए विशेष पार्टनर छूट।",heroBadge:"सभी सक्रिय सदस्यों के लिए समान ऑफ़र",offersTitle:"पार्टनर छूट",offersIntro:"देश चुनें और वहाँ उपलब्ध ऑफ़र देखें।",locationLabel:"आप कहाँ के ऑफ़र देखना चाहते हैं?",international:"🌍 अंतरराष्ट्रीय ऑनलाइन",internationalName:"अंतरराष्ट्रीय ऑनलाइन",all:"सभी",veterinary:"पशु चिकित्सक",grooming:"ग्रूमिंग",pet_food:"पालतू भोजन",pet_shop:"पालतू दुकानें",travel:"यात्रा",pet_friendly:"Pet-friendly",training:"ट्रेनिंग",accessories:"एक्सेसरीज़",insurance:"बीमा",photography:"फोटोग्राफी",experiences:"अनुभव",other:"अन्य",valid:"मान्य",once:"प्रति सदस्य 1 वाउचर",members:"Club ऑफ़र",openOffer:"ऑफ़र देखें",unlockOffer:"CLUB से खोलें",loading:"ऑफ़र लोड हो रहे हैं…",empty:"अभी कोई ऑफ़र नहीं",emptyText:"इस स्थान के लिए अभी कोई सक्रिय ऑफ़र नहीं है।",error:"ऑफ़र अस्थायी रूप से उपलब्ध नहीं हैं",errorText:"बाद में फिर प्रयास करें।",gateTitle:"PETS & DOGUE Club से ऑफ़र खोलें",gateText:"सभी छूट सक्रिय Club सदस्यता के साथ उपलब्ध हैं।",monthlyTitle:"मासिक",monthlyText:"30 दिन मुफ्त, फिर £1 प्रति माह।",monthlyPeriod:"/ माह",annualTitle:"वार्षिक",annualText:"£10 प्रति वर्ष।",annualPeriod:"/ वर्ष",subscribe:"सदस्यता चुनें",gateFootnote:"रद्द होने तक स्वतः नवीनीकरण।",close:"बंद करें",useOffer:"ऑफ़र का उपयोग करें",showVoucher:"वाउचर दिखाएँ",onlineHelp:"पार्टनर वेबसाइट पर जाना PETS & DOGUE के माध्यम से होता है और इसे रिडेम्प्शन नहीं माना जाता।",offlineSoon:"सुरक्षित वाउचर सदस्यता सत्यापन के बाद उपलब्ध होगा।"
-}
+hi:pack({
+heroKicker:"PETS & DOGUE CLUB लाभ",
+heroTitle:"आपके लिए विशेष ऑफ़र",
+heroText:"PETS & DOGUE Club सदस्यों के लिए विशेष पार्टनर छूट।",
+heroBadge:"सभी सक्रिय सदस्यों के लिए समान ऑफ़र",
+offersTitle:"पार्टनर छूट",
+offersIntro:"अपना वर्तमान देश, कोई अन्य देश या अंतरराष्ट्रीय ऑनलाइन ऑफ़र चुनें।",
+locationLabel:"आप कहाँ के ऑफ़र देखना चाहते हैं?",
+nearMe:"📍 मेरे पास",
+nearMeLoading:"स्थान पता किया जा रहा है…",
+nearMeHint:"उस देश में उपलब्ध ऑफ़र जहाँ आप अभी हैं",
+manualHint:"आपने यह देश मैन्युअल रूप से चुना है",
+international:"🌍 अंतरराष्ट्रीय ऑनलाइन",
+internationalName:"अंतरराष्ट्रीय ऑनलाइन",
+internationalHint:"अंतरराष्ट्रीय रूप से उपलब्ध ऑनलाइन ऑफ़र",
+detected:"स्थान पता चला",
+detectedWithCity:"स्थान इसके पास पता चला:",
+locationUnavailable:"हम आपका देश पता नहीं कर सके। कृपया इसे मैन्युअल रूप से चुनें।",
+locationUnsupported:"पता चला देश अभी PETS & DOGUE सूची में नहीं है।",
+all:"सभी",
+veterinary:"पशु चिकित्सक",
+grooming:"ग्रूमिंग",
+pet_food:"पालतू भोजन",
+pet_shop:"पालतू दुकानें",
+travel:"यात्रा",
+pet_friendly:"Pet-friendly",
+training:"ट्रेनिंग",
+accessories:"एक्सेसरीज़",
+insurance:"बीमा",
+photography:"फोटोग्राफी",
+experiences:"अनुभव",
+other:"अन्य",
+valid:"मान्य",
+once:"प्रति सदस्य 1 वाउचर",
+members:"Club ऑफ़र",
+openOffer:"ऑफ़र देखें",
+unlockOffer:"CLUB से खोलें",
+loading:"ऑफ़र लोड हो रहे हैं…",
+empty:"अभी कोई ऑफ़र नहीं",
+emptyText:"इस स्थान के लिए अभी कोई सक्रिय ऑफ़र नहीं है।",
+error:"ऑफ़र अस्थायी रूप से उपलब्ध नहीं हैं",
+errorText:"बाद में फिर प्रयास करें।",
+gateTitle:"PETS & DOGUE Club से ऑफ़र खोलें",
+gateText:"सभी छूट सक्रिय Club सदस्यता के साथ उपलब्ध हैं।",
+monthlyTitle:"मासिक",
+monthlyText:"30 दिन मुफ्त, फिर £1 प्रति माह।",
+monthlyPeriod:"/ माह",
+annualTitle:"वार्षिक",
+annualText:"£10 प्रति वर्ष।",
+annualPeriod:"/ वर्ष",
+subscribe:"सदस्यता चुनें",
+gateFootnote:"रद्द होने तक स्वतः नवीनीकरण।",
+close:"बंद करें",
+useOffer:"ऑफ़र का उपयोग करें",
+showVoucher:"वाउचर दिखाएँ"
+})
+
 };
 
 /*
-Languages whose main marketplace UI remains structurally identical
-but whose location/category labels are localized below.
-*/
-
-TEXT.cs=TEXT.cs;
-TEXT.sk=TEXT.sk;
-
-/*
-Additional supported languages.
+=========================================================
+LANGUAGES USING COMPLETE ENGLISH BASE + LOCAL LOCATION UI
+=========================================================
 */
 
 TEXT.pt=TEXT.pt;
 TEXT.nl=TEXT.nl;
 TEXT.pl=TEXT.pl;
+TEXT.cs=TEXT.cs;
+TEXT.sk=TEXT.sk;
 TEXT.hu=TEXT.hu;
 TEXT.ro=TEXT.ro;
 TEXT.bg=TEXT.bg;
@@ -1545,86 +2784,21 @@ TEXT.ar=TEXT.ar;
 TEXT.hi=TEXT.hi;
 
 /*
-Complete supported-language fallbacks for interface strings that
-share the same PETS & DOGUE terminology.
+=========================================================
+FALLBACKS FOR THE REMAINING SITE LANGUAGES
+=========================================================
 */
 
-TEXT.be=TEXT.en;
+TEXT.fr=TEXT.fr;
+TEXT.de=TEXT.de;
+TEXT.es=TEXT.es;
+TEXT.it=TEXT.it;
 
 /*
-Missing supported interface packs use translated navigation/location
-terminology while retaining PETS & DOGUE brand wording.
+=========================================================
+CATEGORIES
+=========================================================
 */
-
-TEXT["es"]=TEXT.es;
-TEXT["it"]=TEXT.it;
-TEXT["de"]=TEXT.de;
-TEXT["fr"]=TEXT.fr;
-
-/*
-The following packs complete the 23 configured site languages.
-*/
-
-TEXT["pt"]=TEXT.pt;
-TEXT["nl"]=TEXT.nl;
-TEXT["pl"]=TEXT.pl;
-TEXT["cs"]=TEXT.cs;
-TEXT["sk"]=TEXT.sk;
-TEXT["hu"]=TEXT.hu;
-TEXT["ro"]=TEXT.ro;
-TEXT["bg"]=TEXT.bg;
-TEXT["el"]=TEXT.el;
-TEXT["sv"]=TEXT.sv;
-TEXT["da"]=TEXT.da;
-TEXT["no"]=TEXT.no;
-TEXT["fi"]=TEXT.fi;
-TEXT["tr"]=TEXT.tr;
-TEXT["ar"]=TEXT.ar;
-TEXT["hi"]=TEXT.hi;
-
-/*
-For language codes that are supported by the selector but whose
-wording follows the existing PETS & DOGUE terminology:
-*/
-
-TEXT["pt"]=TEXT.pt;
-
-/*
-Additional translation packs
-*/
-
-TEXT["nl"]=TEXT.nl;
-
-/*
-Because the language selector contains exactly the following
-23 codes, all are resolved below.
-*/
-
-const LANGUAGE_ALIASES={
-en:"en",
-uk:"uk",
-ru:"ru",
-fr:"fr",
-de:"de",
-es:"es",
-it:"it",
-pt:"pt",
-nl:"nl",
-pl:"pl",
-cs:"cs",
-sk:"sk",
-hu:"hu",
-ro:"ro",
-bg:"bg",
-el:"el",
-sv:"sv",
-da:"da",
-no:"no",
-fi:"fi",
-tr:"tr",
-ar:"ar",
-hi:"hi"
-};
 
 const CATEGORIES=[
 "all",
@@ -1658,22 +2832,32 @@ other:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit
 };
 
 let currentLanguage="en";
+
 let locationMode=
 localStorage.getItem(LOCATION_MODE_KEY)==="international"
 ?"international"
+:localStorage.getItem(LOCATION_MODE_KEY)==="near"
+?"near"
 :"country";
 
 let selectedCountry=
 localStorage.getItem(COUNTRY_KEY)||"GB";
+
+let detectedCountry=
+localStorage.getItem(DETECTED_COUNTRY_KEY)||"";
+
+let detectedCity=
+localStorage.getItem(DETECTED_CITY_KEY)||"";
 
 let activeCategory="all";
 let offers=[];
 let loading=true;
 let loadFailed=false;
 let selectedOffer=null;
+let locationDetecting=false;
 
 function t(){
-return TEXT[LANGUAGE_ALIASES[currentLanguage]]||TEXT.en;
+return TEXT[currentLanguage]||TEXT.en;
 }
 
 function escapeHtml(value){
@@ -1707,7 +2891,14 @@ return display.of(code)||fallback;
 return fallback;
 }
 
+function supportedCountry(code){
+return COUNTRIES.some(
+item=>item[0]===code
+);
+}
+
 function fillCountries(){
+
 $("countrySelect").innerHTML=
 COUNTRIES
 .map(([code])=>`
@@ -1718,17 +2909,22 @@ ${escapeHtml(countryName(code))}
 .join("");
 
 if(
-!COUNTRIES.some(
-item=>item[0]===selectedCountry
+!supportedCountry(
+selectedCountry
 )
 ){
+
 selectedCountry="GB";
+
 }
 
-$("countrySelect").value=selectedCountry;
+$("countrySelect").value=
+selectedCountry;
+
 }
 
 function dateLocale(){
+
 const map={
 ru:"ru-RU",
 uk:"uk-UA",
@@ -1758,11 +2954,21 @@ return map[currentLanguage]||"en-GB";
 }
 
 function formatDate(value){
-if(!value) return "—";
 
-const date=new Date(value);
+if(!value){
+return "—";
+}
 
-if(Number.isNaN(date.getTime())){
+const date=
+new Date(
+value
+);
+
+if(
+Number.isNaN(
+date.getTime()
+)
+){
 return "—";
 }
 
@@ -1776,7 +2982,12 @@ year:"numeric"
 );
 }
 
+/* =========================================================
+   MEMBERSHIP
+========================================================= */
+
 function membershipObject(){
+
 const keys=[
 "petsDogueClubMembership",
 "pets_dogue_club_membership",
@@ -1785,15 +2996,25 @@ const keys=[
 "clubMembership"
 ];
 
-for(const key of keys){
+for(
+const key of keys
+){
 
-const raw=localStorage.getItem(key);
+const raw=
+localStorage.getItem(
+key
+);
 
-if(!raw) continue;
+if(!raw){
+continue;
+}
 
 try{
 
-const value=JSON.parse(raw);
+const value=
+JSON.parse(
+raw
+);
 
 if(value){
 return value;
@@ -1806,7 +3027,11 @@ raw==="active"||
 raw==="paid"||
 raw==="true"
 ){
-return {status:"active"};
+
+return{
+status:"active"
+};
+
 }
 
 }
@@ -1817,7 +3042,9 @@ return null;
 }
 
 function hasActiveMembership(){
-const membership=membershipObject();
+
+const membership=
+membershipObject();
 
 if(!membership){
 return false;
@@ -1841,60 +3068,132 @@ return[
 "trial",
 "paid",
 "current"
-].includes(status);
+].includes(
+status
+);
+
 }
 
+/* =========================================================
+   NORMALIZE OFFERS
+========================================================= */
+
 function normalizeOffer(raw){
+
 const category=
-CATEGORIES.includes(raw.category)&&
+CATEGORIES.includes(
+raw.category
+)&&
 raw.category!=="all"
 ?raw.category
 :"other";
 
 return{
-id:String(raw.id||""),
-businessName:String(raw.businessName||"PETS & DOGUE Partner"),
+
+id:
+String(
+raw.id||""
+),
+
+businessName:
+String(
+raw.businessName||
+"PETS & DOGUE Partner"
+),
+
 category,
-title:String(raw.title||""),
-description:String(raw.description||""),
-discount:String(raw.discount||""),
-saving:String(raw.saving||""),
+
+title:
+String(
+raw.title||""
+),
+
+description:
+String(
+raw.description||""
+),
+
+discount:
+String(
+raw.discount||""
+),
+
+saving:
+String(
+raw.saving||""
+),
+
 redemptionType:
 raw.redemptionType==="offline"
 ?"offline"
 :"online",
-image:String(
+
+image:
+String(
 raw.image||
 FALLBACK_IMAGES[category]||
 FALLBACK_IMAGES.other
 ),
-startsAt:String(raw.startsAt||""),
-endsAt:String(raw.endsAt||""),
+
+startsAt:
+String(
+raw.startsAt||""
+),
+
+endsAt:
+String(
+raw.endsAt||""
+),
+
 maxRedemptions:
 raw.maxRedemptions===null
 ?null
-:Number(raw.maxRedemptions||0),
-redemptionsCount:Number(raw.redemptionsCount||0),
-oneUsePerSubscriber:raw.oneUsePerSubscriber!==false,
-accessScope:"all_subscribers",
-status:"active",
+:Number(
+raw.maxRedemptions||0
+),
+
+redemptionsCount:
+Number(
+raw.redemptionsCount||0
+),
+
+oneUsePerSubscriber:
+raw.oneUsePerSubscriber!==false,
+
+accessScope:
+"all_subscribers",
+
+status:
+"active",
+
 locationScope:
 raw.locationScope==="international"
 ?"international"
 :"country",
+
 countryCode:
 raw.countryCode
-?String(raw.countryCode).toUpperCase()
+?String(
+raw.countryCode
+).toUpperCase()
 :null,
+
 countryName:
 raw.countryName
-?String(raw.countryName)
+?String(
+raw.countryName
+)
 :null,
+
 city:
 raw.city
-?String(raw.city)
+?String(
+raw.city
+)
 :null
+
 };
+
 }
 
 function categoryLabel(key){
@@ -1902,77 +3201,191 @@ return t()[key]||key;
 }
 
 function offerLocation(offer){
-if(offer.locationScope==="international"){
+
+if(
+offer.locationScope===
+"international"
+){
+
 return `🌍 ${t().internationalName}`;
+
 }
 
 const country=
 offer.countryCode
-?countryName(offer.countryCode)
+?countryName(
+offer.countryCode
+)
 :offer.countryName||"";
 
-if(offer.city){
+if(
+offer.city
+){
+
 return `📍 ${offer.city}, ${country}`;
+
 }
 
 return `📍 ${country}`;
 }
 
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
 function renderLanguage(code){
-if(!LANGS.includes(code)){
+
+if(
+!LANGS.includes(
+code
+)
+){
+
 code="en";
+
 }
 
-currentLanguage=code;
+currentLanguage=
+code;
 
 localStorage.setItem(
 LANGUAGE_KEY,
 code
 );
 
-document.documentElement.lang=code;
+document.documentElement.lang=
+code;
+
 document.documentElement.dir=
 code==="ar"
 ?"rtl"
 :"ltr";
 
-$("languageSelect").value=code;
+$("languageSelect").value=
+code;
 
-$("clubLink").textContent=t().club;
-$("heroKicker").textContent=t().heroKicker;
-$("heroTitle").textContent=t().heroTitle;
-$("heroText").textContent=t().heroText;
-$("heroBadge").textContent=t().heroBadge;
-$("offersTitle").textContent=t().offersTitle;
-$("offersIntro").textContent=t().offersIntro;
-$("locationLabel").textContent=t().locationLabel;
-$("internationalButton").textContent=t().international;
+$("clubLink").textContent=
+t().club;
 
-$("gateTitle").textContent=t().gateTitle;
-$("gateText").textContent=t().gateText;
-$("monthlyTitle").textContent=t().monthlyTitle;
-$("monthlyText").textContent=t().monthlyText;
-$("monthlyPeriod").textContent=t().monthlyPeriod;
-$("annualTitle").textContent=t().annualTitle;
-$("annualText").textContent=t().annualText;
-$("annualPeriod").textContent=t().annualPeriod;
-$("subscribeButton").textContent=t().subscribe;
-$("gateFootnote").textContent=t().gateFootnote;
-$("offerModalClose").textContent=t().close;
+$("heroKicker").textContent=
+t().heroKicker;
+
+$("heroTitle").textContent=
+t().heroTitle;
+
+$("heroText").textContent=
+t().heroText;
+
+$("heroBadge").textContent=
+t().heroBadge;
+
+$("offersTitle").textContent=
+t().offersTitle;
+
+$("offersIntro").textContent=
+t().offersIntro;
+
+$("locationLabel").textContent=
+t().locationLabel;
+
+$("nearMeButton").textContent=
+locationDetecting
+?t().nearMeLoading
+:t().nearMe;
+
+$("internationalButton").textContent=
+t().international;
+
+$("gateTitle").textContent=
+t().gateTitle;
+
+$("gateText").textContent=
+t().gateText;
+
+$("monthlyTitle").textContent=
+t().monthlyTitle;
+
+$("monthlyText").textContent=
+t().monthlyText;
+
+$("monthlyPeriod").textContent=
+t().monthlyPeriod;
+
+$("annualTitle").textContent=
+t().annualTitle;
+
+$("annualText").textContent=
+t().annualText;
+
+$("annualPeriod").textContent=
+t().annualPeriod;
+
+$("subscribeButton").textContent=
+t().subscribe;
+
+$("gateFootnote").textContent=
+t().gateFootnote;
+
+$("offerModalClose").textContent=
+t().close;
 
 fillCountries();
 renderLocationState();
 renderFilters();
 renderOffers();
 
-if(selectedOffer){
-populateOfferModal(selectedOffer);
+if(
+selectedOffer
+){
+
+populateOfferModal(
+selectedOffer
+);
+
 }
+
+}
+
+/* =========================================================
+   LOCATION UI
+========================================================= */
+
+function hideLocationMessage(){
+
+const box=
+$("locationMessage");
+
+box.className=
+"location-message";
+
+box.textContent=
+"";
+
+}
+
+function showLocationMessage(
+message,
+type
+){
+
+const box=
+$("locationMessage");
+
+box.textContent=
+message;
+
+box.className=
+`location-message show ${type||""}`;
+
 }
 
 function renderLocationState(){
+
 const international=
 locationMode==="international";
+
+const near=
+locationMode==="near";
 
 $("internationalButton")
 .classList
@@ -1981,24 +3394,93 @@ $("internationalButton")
 international
 );
 
+$("nearMeButton")
+.classList
+.toggle(
+"active",
+near
+);
+
+$("nearMeButton")
+.classList
+.toggle(
+"loading",
+locationDetecting
+);
+
+$("nearMeButton").disabled=
+locationDetecting;
+
+$("nearMeButton").textContent=
+locationDetecting
+?t().nearMeLoading
+:t().nearMe;
+
 $("countrySelect").disabled=
-international;
+international||
+locationDetecting;
 
 $("countrySelect").style.opacity=
 international
 ?".48"
 :"1";
 
-$("locationCurrent").textContent=
+if(
 international
-?t().internationalName
-:countryName(selectedCountry);
+){
+
+$("locationCurrentIcon").textContent=
+"🌍";
+
+$("locationCurrent").textContent=
+t().internationalName;
+
+$("locationCurrentHint").textContent=
+t().internationalHint;
+
+return;
 }
 
+$("locationCurrentIcon").textContent=
+"📍";
+
+$("locationCurrent").textContent=
+countryName(
+selectedCountry
+);
+
+if(
+near
+){
+
+const cityHint=
+detectedCity
+?`${t().detectedWithCity} ${detectedCity}`
+:t().nearMeHint;
+
+$("locationCurrentHint").textContent=
+cityHint;
+
+}else{
+
+$("locationCurrentHint").textContent=
+t().manualHint;
+
+}
+
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
 function renderFilters(){
+
 $("filters").innerHTML=
 CATEGORIES
-.map(key=>`
+.map(
+key=>`
+
 <button
 type="button"
 class="filter ${key===activeCategory?"active":""}"
@@ -2006,75 +3488,156 @@ data-category="${escapeHtml(key)}"
 >
 ${escapeHtml(categoryLabel(key))}
 </button>
-`)
+
+`
+)
 .join("");
 
 document
-.querySelectorAll(".filter")
-.forEach(button=>{
+.querySelectorAll(
+".filter"
+)
+.forEach(
+button=>{
 
-button.onclick=()=>{
+button.onclick=
+()=>{
+
 activeCategory=
 button.dataset.category||
 "all";
 
 renderFilters();
 renderOffers();
+
 };
 
-});
+}
+);
+
 }
 
+/* =========================================================
+   STATES
+========================================================= */
+
 function renderLoading(){
+
 $("offerGrid").innerHTML=`
+
 <div class="loading">
+
 <div class="spinner"></div>
-<p>${escapeHtml(t().loading)}</p>
+
+<p>
+${escapeHtml(t().loading)}
+</p>
+
 </div>
+
 `;
+
 }
 
 function renderError(){
+
 $("offerGrid").innerHTML=`
+
 <div class="no-results">
-<strong>${escapeHtml(t().error)}</strong>
-<p>${escapeHtml(t().errorText)}</p>
+
+<strong>
+${escapeHtml(t().error)}
+</strong>
+
+<p>
+${escapeHtml(t().errorText)}
+</p>
+
 </div>
+
 `;
+
 }
 
 function renderEmpty(){
+
 $("offerGrid").innerHTML=`
+
 <div class="no-results">
-<strong>${escapeHtml(t().empty)}</strong>
-<p>${escapeHtml(t().emptyText)}</p>
+
+<strong>
+${escapeHtml(t().empty)}
+</strong>
+
+<p>
+${escapeHtml(t().emptyText)}
+</p>
+
 </div>
+
 `;
+
 }
 
-function offerMatchesLocation(offer){
-if(locationMode==="international"){
+/* =========================================================
+   LOCATION FILTER
+========================================================= */
+
+function offerMatchesLocation(
+offer
+){
+
+if(
+locationMode===
+"international"
+){
 
 return(
-offer.locationScope==="international"&&
-offer.redemptionType==="online"
+offer.locationScope===
+"international"
+&&
+offer.redemptionType===
+"online"
 );
 
 }
 
+/*
+Both manual country mode and Near Me mode
+filter by the selected country code.
+
+Near Me simply chooses selectedCountry automatically
+using the server-side detector.
+*/
+
 return(
-offer.locationScope==="country"&&
-offer.countryCode===selectedCountry
+offer.locationScope===
+"country"
+&&
+offer.countryCode===
+selectedCountry
 );
+
 }
+
+/* =========================================================
+   OFFERS
+========================================================= */
 
 function renderOffers(){
-if(loading){
+
+if(
+loading
+){
+
 renderLoading();
 return;
 }
 
-if(loadFailed){
+if(
+loadFailed
+){
+
 renderError();
 return;
 }
@@ -2083,26 +3646,38 @@ const member=
 hasActiveMembership();
 
 const filtered=
-offers.filter(offer=>{
+offers.filter(
+offer=>{
 
 const categoryMatch=
-activeCategory==="all"||
-offer.category===activeCategory;
+activeCategory==="all"
+||
+offer.category===
+activeCategory;
 
 return(
-categoryMatch&&
-offerMatchesLocation(offer)
+categoryMatch
+&&
+offerMatchesLocation(
+offer
+)
 );
-});
 
-if(!filtered.length){
+}
+);
+
+if(
+!filtered.length
+){
+
 renderEmpty();
 return;
 }
 
 $("offerGrid").innerHTML=
 filtered
-.map(offer=>`
+.map(
+offer=>`
 
 <article
 class="offer-card ${member?"":"locked"}"
@@ -2146,9 +3721,11 @@ ${escapeHtml(offerLocation(offer))}
 </div>
 
 ${offer.description?`
+
 <div class="offer-description">
 ${escapeHtml(offer.description)}
 </div>
+
 `:""}
 
 <div class="offer-meta">
@@ -2182,69 +3759,111 @@ ${escapeHtml(t().members)}
 </div>
 
 </article>
-`)
+
+`
+)
 .join("");
 
 document
-.querySelectorAll(".offer-card")
-.forEach(card=>{
+.querySelectorAll(
+".offer-card"
+)
+.forEach(
+card=>{
 
-card.onclick=()=>{
+card.onclick=
+()=>{
 
 const offer=
 offers.find(
 item=>
 String(item.id)===
-String(card.dataset.offerId)
+String(
+card.dataset.offerId
+)
 );
 
-if(!offer){
+if(
+!offer
+){
 return;
 }
 
-if(!hasActiveMembership()){
+if(
+!hasActiveMembership()
+){
 
 sessionStorage.setItem(
 PENDING_OFFER_KEY,
-String(offer.id)
+String(
+offer.id
+)
 );
 
 openSubscriptionGate();
-
 return;
 }
 
-openOffer(offer);
+openOffer(
+offer
+);
 
 };
 
-});
+}
+);
+
 }
 
+/* =========================================================
+   SUBSCRIPTION GATE
+========================================================= */
+
 function openSubscriptionGate(){
+
 $("subscriptionModal")
 .classList
-.add("open");
+.add(
+"open"
+);
 
 document.body
 .classList
-.add("modal-open");
+.add(
+"modal-open"
+);
+
 }
 
 function closeSubscriptionGate(){
+
 $("subscriptionModal")
 .classList
-.remove("open");
+.remove(
+"open"
+);
 
 document.body
 .classList
-.remove("modal-open");
+.remove(
+"modal-open"
+);
+
 }
 
-function populateOfferModal(offer){
+/* =========================================================
+   OFFER MODAL
+========================================================= */
+
+function populateOfferModal(
+offer
+){
+
 $("modalOfferImage").src=
 offer.image||
-FALLBACK_IMAGES[offer.category]||
+FALLBACK_IMAGES[
+offer.category
+]||
 FALLBACK_IMAGES.other;
 
 $("modalPartner").textContent=
@@ -2257,7 +3876,9 @@ $("modalDescription").textContent=
 offer.description||"";
 
 $("modalLocation").textContent=
-offerLocation(offer);
+offerLocation(
+offer
+);
 
 $("modalDiscount").textContent=
 offer.discount;
@@ -2273,18 +3894,25 @@ t().close;
 
 $("useOfferButton")
 .classList
-.add("hidden");
+.add(
+"hidden"
+);
 
 $("showVoucherButton")
 .classList
-.add("hidden");
+.add(
+"hidden"
+);
 
 $("onlineHelp")
 .classList
-.add("hidden");
+.add(
+"hidden"
+);
 
 if(
-offer.redemptionType==="online"
+offer.redemptionType===
+"online"
 ){
 
 $("onlineHelp").textContent=
@@ -2292,14 +3920,18 @@ t().onlineHelp;
 
 $("onlineHelp")
 .classList
-.remove("hidden");
+.remove(
+"hidden"
+);
 
 $("useOfferButton").textContent=
 t().useOffer;
 
 $("useOfferButton")
 .classList
-.remove("hidden");
+.remove(
+"hidden"
+);
 
 }else{
 
@@ -2308,55 +3940,84 @@ t().offlineSoon;
 
 $("onlineHelp")
 .classList
-.remove("hidden");
+.remove(
+"hidden"
+);
 
 $("showVoucherButton").textContent=
 t().showVoucher;
 
 $("showVoucherButton")
 .classList
-.remove("hidden");
+.remove(
+"hidden"
+);
 
 }
+
 }
 
-function openOffer(offer){
-selectedOffer=offer;
+function openOffer(
+offer
+){
 
-populateOfferModal(offer);
+selectedOffer=
+offer;
+
+populateOfferModal(
+offer
+);
 
 $("offerModal")
 .classList
-.add("open");
+.add(
+"open"
+);
 
 document.body
 .classList
-.add("modal-open");
+.add(
+"modal-open"
+);
+
 }
 
 function closeOffer(){
+
 $("offerModal")
 .classList
-.remove("open");
+.remove(
+"open"
+);
 
 document.body
 .classList
-.remove("modal-open");
+.remove(
+"modal-open"
+);
 
-selectedOffer=null;
+selectedOffer=
+null;
+
 }
 
 /* =========================================================
    ONLINE TRACKED REDIRECT
 ========================================================= */
 
-$("useOfferButton").onclick=()=>{
+$("useOfferButton").onclick=
+()=>{
+
 if(
-!selectedOffer||
-selectedOffer.redemptionType!=="online"||
+!selectedOffer
+||
+selectedOffer.redemptionType!=="online"
+||
 !selectedOffer.id
 ){
+
 return;
+
 }
 
 const trackedUrl=
@@ -2367,33 +4028,39 @@ trackedUrl,
 "_blank",
 "noopener,noreferrer"
 );
+
 };
 
-/*
-Offline promo codes are intentionally no longer delivered
-by the public offers API.
+/* =========================================================
+   OFFLINE
+========================================================= */
 
-The next protected member endpoint will return the voucher.
-*/
+$("showVoucherButton").onclick=
+()=>{
 
-$("showVoucherButton").onclick=()=>{
-if(!selectedOffer){
+if(
+!selectedOffer
+){
 return;
 }
 
 $("onlineHelp").textContent=
 t().offlineSoon;
+
 };
 
 /* =========================================================
-   LOCATION CONTROLS
+   MANUAL COUNTRY
 ========================================================= */
 
-$("countrySelect").onchange=function(){
+$("countrySelect").onchange=
+function(){
 
-selectedCountry=this.value;
+selectedCountry=
+this.value;
 
-locationMode="country";
+locationMode=
+"country";
 
 localStorage.setItem(
 COUNTRY_KEY,
@@ -2405,34 +4072,216 @@ LOCATION_MODE_KEY,
 locationMode
 );
 
+hideLocationMessage();
 renderLocationState();
 renderOffers();
+
 };
 
-$("internationalButton").onclick=()=>{
+/* =========================================================
+   INTERNATIONAL
+========================================================= */
 
-if(locationMode==="international"){
-locationMode="country";
-}else{
-locationMode="international";
-}
+$("internationalButton").onclick=
+()=>{
+
+locationMode=
+locationMode==="international"
+?"country"
+:"international";
 
 localStorage.setItem(
 LOCATION_MODE_KEY,
 locationMode
 );
 
+hideLocationMessage();
 renderLocationState();
 renderOffers();
+
 };
 
 /* =========================================================
-   LOAD
+   NEAR ME
+========================================================= */
+
+async function detectNearMe(){
+
+if(
+locationDetecting
+){
+return;
+}
+
+locationDetecting=
+true;
+
+hideLocationMessage();
+renderLocationState();
+
+try{
+
+const response=
+await fetch(
+"/api/detect-location",
+{
+method:"GET",
+headers:{
+Accept:"application/json"
+},
+cache:"no-store"
+}
+);
+
+const result=
+await response.json();
+
+if(
+!response.ok
+||
+!result.ok
+||
+!result.detected
+||
+!result.countryCode
+){
+
+throw new Error(
+t().locationUnavailable
+);
+
+}
+
+const code=
+String(
+result.countryCode
+)
+.trim()
+.toUpperCase();
+
+if(
+!supportedCountry(
+code
+)
+){
+
+throw new Error(
+t().locationUnsupported
+);
+
+}
+
+detectedCountry=
+code;
+
+detectedCity=
+result.city
+?String(
+result.city
+).trim()
+:"";
+
+selectedCountry=
+code;
+
+locationMode=
+"near";
+
+localStorage.setItem(
+DETECTED_COUNTRY_KEY,
+detectedCountry
+);
+
+if(
+detectedCity
+){
+
+localStorage.setItem(
+DETECTED_CITY_KEY,
+detectedCity
+);
+
+}else{
+
+localStorage.removeItem(
+DETECTED_CITY_KEY
+);
+
+}
+
+localStorage.setItem(
+COUNTRY_KEY,
+selectedCountry
+);
+
+localStorage.setItem(
+LOCATION_MODE_KEY,
+locationMode
+);
+
+$("countrySelect").value=
+selectedCountry;
+
+const message=
+detectedCity
+?`${t().detected}: ${detectedCity}, ${countryName(selectedCountry)}`
+:`${t().detected}: ${countryName(selectedCountry)}`;
+
+showLocationMessage(
+message,
+"success"
+);
+
+renderOffers();
+
+}catch(
+error
+){
+
+console.error(
+"PETS & DOGUE location detection:",
+error
+);
+
+locationMode=
+"country";
+
+localStorage.setItem(
+LOCATION_MODE_KEY,
+locationMode
+);
+
+showLocationMessage(
+error?.message||
+t().locationUnavailable,
+"error"
+);
+
+}finally{
+
+locationDetecting=
+false;
+
+renderLocationState();
+
+}
+
+}
+
+$("nearMeButton").onclick=
+detectNearMe;
+
+/* =========================================================
+   LOAD OFFERS
 ========================================================= */
 
 async function loadOffers(){
-loading=true;
-loadFailed=false;
+
+loading=
+true;
+
+loadFailed=
+false;
 
 renderOffers();
 
@@ -2454,33 +4303,48 @@ const result=
 await response.json();
 
 if(
-!response.ok||
-!result.ok||
-!Array.isArray(result.offers)
+!response.ok
+||
+!result.ok
+||
+!Array.isArray(
+result.offers
+)
 ){
+
 throw new Error(
 result.error||
 "Unable to load offers."
 );
+
 }
 
 offers=
 result.offers
-.map(normalizeOffer)
+.map(
+normalizeOffer
+)
 .filter(
 offer=>
-offer.id&&
-offer.status==="active"&&
+offer.id
+&&
+offer.status==="active"
+&&
 offer.accessScope==="all_subscribers"
 );
 
-loading=false;
-loadFailed=false;
+loading=
+false;
+
+loadFailed=
+false;
 
 renderOffers();
 restorePendingOffer();
 
-}catch(error){
+}catch(
+error
+){
 
 console.error(
 "PETS & DOGUE offers:",
@@ -2488,15 +4352,28 @@ error
 );
 
 offers=[];
-loading=false;
-loadFailed=true;
+
+loading=
+false;
+
+loadFailed=
+true;
 
 renderOffers();
-}
+
 }
 
+}
+
+/* =========================================================
+   RESTORE OFFER
+========================================================= */
+
 function restorePendingOffer(){
-if(!hasActiveMembership()){
+
+if(
+!hasActiveMembership()
+){
 return;
 }
 
@@ -2506,35 +4383,48 @@ window.location.search
 );
 
 const id=
-params.get("offer")||
+params.get(
+"offer"
+)
+||
 sessionStorage.getItem(
 PENDING_OFFER_KEY
 );
 
-if(!id){
+if(
+!id
+){
 return;
 }
 
 const offer=
 offers.find(
 item=>
-String(item.id)===String(id)
+String(item.id)===
+String(id)
 );
 
-if(offer){
-
 if(
-offer.locationScope==="international"
+offer
 ){
 
-locationMode="international";
+if(
+offer.locationScope===
+"international"
+){
+
+locationMode=
+"international";
 
 }else if(
 offer.countryCode
 ){
 
-locationMode="country";
-selectedCountry=offer.countryCode;
+locationMode=
+"country";
+
+selectedCountry=
+offer.countryCode;
 
 localStorage.setItem(
 COUNTRY_KEY,
@@ -2554,7 +4444,9 @@ renderOffers();
 
 setTimeout(
 ()=>{
-openOffer(offer);
+openOffer(
+offer
+);
 },
 180
 );
@@ -2565,7 +4457,11 @@ sessionStorage.removeItem(
 PENDING_OFFER_KEY
 );
 
-if(params.has("offer")){
+if(
+params.has(
+"offer"
+)
+){
 
 history.replaceState(
 {},
@@ -2574,27 +4470,32 @@ window.location.pathname
 );
 
 }
+
 }
 
 /* =========================================================
-   SUBSCRIPTION
+   SUBSCRIBE
 ========================================================= */
 
 $("subscriptionClose").onclick=
 closeSubscriptionGate;
 
-$("subscriptionModal").onclick=event=>{
+$("subscriptionModal").onclick=
+event=>{
 
 if(
 event.target===
 $("subscriptionModal")
 ){
+
 closeSubscriptionGate();
+
 }
 
 };
 
-$("subscribeButton").onclick=()=>{
+$("subscribeButton").onclick=
+()=>{
 
 const offerId=
 sessionStorage.getItem(
@@ -2612,22 +4513,26 @@ offerId
 
 window.location.href=
 `club.html?return=${returnUrl}`;
+
 };
 
 /* =========================================================
-   MODAL
+   MODAL EVENTS
 ========================================================= */
 
 $("offerModalClose").onclick=
 closeOffer;
 
-$("offerModal").onclick=event=>{
+$("offerModal").onclick=
+event=>{
 
 if(
 event.target===
 $("offerModal")
 ){
+
 closeOffer();
+
 }
 
 };
@@ -2636,13 +4541,21 @@ closeOffer();
    NAVIGATION
 ========================================================= */
 
-$("menuButton").onclick=()=>{
-window.location.href="index.html";
+$("menuButton").onclick=
+()=>{
+
+window.location.href=
+"index.html";
+
 };
 
 $("languageSelect").onchange=
 function(){
-renderLanguage(this.value);
+
+renderLanguage(
+this.value
+);
+
 };
 
 /* =========================================================
@@ -2655,12 +4568,15 @@ LANGUAGE_KEY
 )||"en";
 
 renderLanguage(
-LANGS.includes(savedLanguage)
+LANGS.includes(
+savedLanguage
+)
 ?savedLanguage
 :"en"
 );
 
 loadOffers();
+
 </script>
 
 </body>
