@@ -1,321 +1,3147 @@
-"use strict";
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta
+  name="description"
+  content="Discover verified pet-friendly cafés, restaurants, hotels, dog parks, beaches, veterinary clinics, groomers and pet shops with PETS & DOGUE."
+>
+<title>Pet-Friendly Places | PETS & DOGUE</title>
 
-/*
-=========================================================
-PETS & DOGUE
-VERIFIED PET-FRIENDLY PLACES
-Google Places API (New)
-=========================================================
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+>
 
-This endpoint:
+<style>
+:root{
+  --black:#070707;
+  --black2:#111;
+  --cream:#f5f0e6;
+  --cream2:#e9e1d3;
+  --white:#fff;
+  --grey:#716d66;
+  --line:#d2cabd;
+  --gold:#c99a2e;
+  --gold-light:#efd47c;
+  --green:#65e51f;
+  --green-dark:#2b7015;
+  --red:#b93b3b;
+  --shadow:0 18px 55px rgba(0,0,0,.13);
+}
 
-POST
-/api/pet-friendly-places
+*{
+  box-sizing:border-box;
+}
 
-Searches real Google Places and returns only places
-with verified pet-friendly evidence.
+html{
+  scroll-behavior:smooth;
+  background:var(--cream);
+}
 
-GET
-/api/pet-friendly-places?photo=...
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--black);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+}
 
-Securely proxies Google place photographs without
-exposing GOOGLE_PLACES_API_KEY to the browser.
+body.rtl{
+  direction:rtl;
+}
 
-Required Vercel environment variable:
+a{
+  color:inherit;
+}
 
-GOOGLE_PLACES_API_KEY
-=========================================================
-*/
+button,
+input,
+select{
+  font:inherit;
+}
 
-const GOOGLE_NEARBY_URL =
-  "https://places.googleapis.com/v1/places:searchNearby";
+button{
+  cursor:pointer;
+}
 
-const DEFAULT_RADIUS =
-  5000;
-
-const MAX_RADIUS =
-  25000;
-
-const DEFAULT_RESULTS =
-  20;
-
-const MAX_RESULTS =
-  20;
-
-
-/* =========================================================
-   GOOGLE SEARCH TYPES
-========================================================= */
-
-const CATEGORY_TYPES = {
-
-  all: [
-    "cafe",
-    "restaurant",
-    "hotel",
-    "veterinary_care",
-    "pet_store",
-    "dog_park"
-  ],
-
-  cafe: [
-    "cafe"
-  ],
-
-  restaurant: [
-    "restaurant"
-  ],
-
-  hotel: [
-    "hotel"
-  ],
-
-  veterinary: [
-    "veterinary_care"
-  ],
-
-  "pet-shop": [
-    "pet_store"
-  ],
-
-  "dog-park": [
-    "dog_park"
-  ]
-
-};
-
+img{
+  display:block;
+  max-width:100%;
+}
 
 /* =========================================================
-   INHERENTLY PET-ORIENTED TYPES
+   HEADER
 ========================================================= */
 
-const INHERENTLY_PET_FRIENDLY_TYPES =
-  new Set([
-    "veterinary_care",
-    "veterinarian",
-    "pet_store",
-    "dog_park"
-  ]);
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(7,7,7,.98);
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(16px);
+}
 
+.header-main{
+  min-height:68px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:16px;
+  padding:0 20px;
+}
+
+.brand{
+  text-decoration:none;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;
+  font-weight:700;
+  letter-spacing:1.8px;
+  white-space:nowrap;
+}
+
+.brand span{
+  color:var(--gold-light);
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.language-select{
+  height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  background:#151515;
+  color:#fff;
+  padding:0 13px;
+  max-width:95px;
+}
+
+.profile-btn{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  text-decoration:none;
+  font-size:19px;
+}
+
+.subscribe-btn{
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  border-radius:999px;
+  background:var(--green);
+  color:#071102;
+  text-decoration:none;
+  font-weight:900;
+}
+
+.nav-strip{
+  display:flex;
+  overflow-x:auto;
+  scrollbar-width:none;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:0 12px;
+}
+
+.nav-strip::-webkit-scrollbar{
+  display:none;
+}
+
+.nav-strip a{
+  flex:0 0 auto;
+  padding:11px 13px;
+  color:#ccc;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+  border-bottom:2px solid transparent;
+}
+
+.nav-strip a.active{
+  color:#fff;
+  border-bottom-color:var(--green);
+}
 
 /* =========================================================
-   CORS
+   HERO
 ========================================================= */
 
-function setCors(
-  req,
-  res
-) {
+.hero{
+  position:relative;
+  min-height:440px;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 79% 30%,rgba(101,229,31,.17),transparent 27%),
+    radial-gradient(circle at 10% 14%,rgba(201,154,46,.18),transparent 27%),
+    linear-gradient(125deg,#050505,#151515 58%,#050505);
+  color:#fff;
+}
 
-  const origin =
-    String(
-      req.headers?.origin || ""
-    ).trim();
-
-  const allowedOrigins =
-    new Set([
-      "https://petsanddogue.com",
-      "https://www.petsanddogue.com",
-      "https://pets-dogue-magazine.vercel.app"
-    ]);
-
-  if (
-    origin &&
-    (
-      allowedOrigins.has(origin) ||
-      origin.endsWith(".vercel.app")
-    )
-  ) {
-
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      origin
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.12)),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 119px,
+      rgba(255,255,255,.025) 120px
     );
+  pointer-events:none;
+}
 
+.hero-inner{
+  position:relative;
+  z-index:2;
+  width:min(1180px,100%);
+  margin:auto;
+  padding:70px 24px 43px;
+}
+
+.hero-kicker{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin-bottom:14px;
+  color:var(--green);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+}
+
+.hero-kicker::before{
+  content:"";
+  width:34px;
+  height:2px;
+  background:var(--green);
+}
+
+.hero h1{
+  max-width:870px;
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(44px,8vw,90px);
+  font-weight:500;
+  line-height:.92;
+  letter-spacing:-3px;
+}
+
+.hero p{
+  max-width:700px;
+  margin:22px 0 0;
+  color:#d9d9d9;
+  font-size:17px;
+  line-height:1.55;
+}
+
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:28px;
+}
+
+.hero-tag{
+  min-height:36px;
+  display:flex;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;
+  padding:0 13px;
+  background:rgba(0,0,0,.26);
+  font-size:11px;
+  font-weight:850;
+}
+
+.hero-tag.verified{
+  color:#0b1705;
+  background:var(--green);
+  border-color:var(--green);
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-shell{
+  position:relative;
+  z-index:30;
+  width:min(1180px,calc(100% - 28px));
+  margin:-25px auto 0;
+  background:#fff;
+  border-radius:24px;
+  padding:14px;
+  box-shadow:var(--shadow);
+}
+
+.search-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  gap:10px;
+}
+
+.search-field{
+  min-width:0;
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:0 16px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#faf8f4;
+}
+
+.search-field input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#111;
+}
+
+.near-btn,
+.search-btn{
+  min-height:54px;
+  border-radius:16px;
+  border:1px solid #111;
+  padding:0 19px;
+  font-weight:900;
+}
+
+.near-btn{
+  min-width:130px;
+  background:var(--green);
+  border-color:var(--green);
+  color:#0a1505;
+}
+
+.search-btn{
+  background:#111;
+  color:#fff;
+}
+
+.near-btn[disabled],
+.search-btn[disabled]{
+  opacity:.55;
+  cursor:wait;
+}
+
+.search-status{
+  min-height:20px;
+  margin:10px 5px 0;
+  color:#6d6961;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.search-status.success{
+  color:var(--green-dark);
+  font-weight:800;
+}
+
+.search-status.error{
+  color:var(--red);
+  font-weight:800;
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.filters{
+  width:min(1180px,calc(100% - 28px));
+  margin:22px auto 0;
+}
+
+.filter-scroll{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  padding:2px 0 7px;
+}
+
+.filter-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+.filter-btn{
+  flex:0 0 auto;
+  min-height:43px;
+  padding:0 17px;
+  border-radius:999px;
+  border:1px solid #beb6a9;
+  background:transparent;
+  color:#111;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.filter-btn.active{
+  background:#111;
+  border-color:#111;
+  color:#fff;
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.main-grid{
+  width:min(1180px,calc(100% - 28px));
+  margin:18px auto 70px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 420px;
+  gap:18px;
+  align-items:start;
+}
+
+.results-panel{
+  min-width:0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+  padding:17px 0;
+  border-top:1px solid #bdb5a8;
+}
+
+.section-head h2{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:35px;
+  font-weight:500;
+}
+
+.results-count{
+  color:#6d685f;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.results-list{
+  display:grid;
+  gap:13px;
+}
+
+.place-card{
+  position:relative;
+  min-height:245px;
+  display:grid;
+  grid-template-columns:42% 58%;
+  overflow:hidden;
+  border-radius:23px;
+  background:#fff;
+  border:1px solid #d6cec1;
+  box-shadow:0 6px 20px rgba(0,0,0,.04);
+}
+
+.place-photo{
+  position:relative;
+  min-height:245px;
+  background:
+    radial-gradient(circle at 28% 26%,rgba(101,229,31,.24),transparent 30%),
+    radial-gradient(circle at 75% 80%,rgba(201,154,46,.19),transparent 31%),
+    linear-gradient(145deg,#111,#242424);
+  overflow:hidden;
+}
+
+.place-photo img{
+  width:100%;
+  height:100%;
+  min-height:245px;
+  object-fit:cover;
+}
+
+.place-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(0,0,0,.58)
+  );
+  pointer-events:none;
+}
+
+.photo-fallback{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:58px;
+}
+
+.photo-source{
+  position:absolute;
+  z-index:3;
+  bottom:11px;
+  left:11px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(0,0,0,.68);
+  color:#fff;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+
+.place-body{
+  min-width:0;
+  padding:18px 18px 16px;
+  display:flex;
+  flex-direction:column;
+}
+
+.place-top{
+  display:flex;
+  gap:10px;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.place-category{
+  margin-bottom:6px;
+  color:#826b20;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.place-name{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:27px;
+  font-weight:600;
+  line-height:1.05;
+}
+
+.rating{
+  flex:0 0 auto;
+  min-height:34px;
+  display:flex;
+  align-items:center;
+  padding:0 10px;
+  border-radius:999px;
+  background:#111;
+  color:#fff;
+  font-size:11px;
+  font-weight:900;
+}
+
+.rating-count{
+  margin-left:4px;
+  color:#bbb;
+  font-weight:700;
+}
+
+.place-address{
+  margin:11px 0 0;
+  color:#6a655e;
+  font-size:13px;
+  line-height:1.48;
+}
+
+.place-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:13px;
+}
+
+.badge{
+  min-height:28px;
+  display:inline-flex;
+  align-items:center;
+  padding:0 9px;
+  border-radius:999px;
+  background:#f1ede6;
+  color:#292723;
+  font-size:10px;
+  font-weight:850;
+}
+
+.badge.verified{
+  background:#dff8d1;
+  color:#1a5f08;
+}
+
+.badge.open{
+  background:#e9f6e1;
+  color:#225d12;
+}
+
+.badge.closed{
+  background:#f8e2e2;
+  color:#842929;
+}
+
+.place-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:auto;
+  padding-top:16px;
+}
+
+.place-actions a{
+  min-height:36px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 12px;
+  border-radius:999px;
+  border:1px solid #beb6a9;
+  color:#111;
+  background:#fff;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:900;
+}
+
+.place-actions a.primary{
+  background:#111;
+  border-color:#111;
+  color:#fff;
+}
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.map-panel{
+  position:sticky;
+  top:126px;
+  overflow:hidden;
+  border-radius:23px;
+  background:#111;
+  box-shadow:var(--shadow);
+}
+
+.map-head{
+  min-height:65px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:0 18px;
+  background:#111;
+  color:#fff;
+}
+
+.map-head strong{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:22px;
+  font-weight:500;
+}
+
+.map-source{
+  color:#aaa;
+  font-size:10px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+#map{
+  width:100%;
+  height:520px;
+  background:#dcdcdc;
+}
+
+.leaflet-container{
+  width:100% !important;
+  height:100% !important;
+  font-family:inherit;
+}
+
+.leaflet-tile-pane{
+  opacity:1;
+}
+
+.leaflet-tile{
+  max-width:none !important;
+  max-height:none !important;
+}
+
+.leaflet-popup-content-wrapper{
+  border-radius:14px;
+}
+
+.popup-name{
+  margin-bottom:4px;
+  font-weight:900;
+}
+
+.popup-meta{
+  max-width:220px;
+  color:#666;
+  font-size:11px;
+  line-height:1.35;
+}
+
+/* =========================================================
+   STATES
+========================================================= */
+
+.loading{
+  padding:34px 24px;
+  border-radius:22px;
+  border:1px solid #d6cec1;
+  background:#fff;
+  text-align:center;
+}
+
+.loader{
+  width:37px;
+  height:37px;
+  margin:0 auto 12px;
+  border:3px solid #ddd;
+  border-top-color:#111;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.empty{
+  padding:37px 26px;
+  border-radius:22px;
+  background:#111;
+  color:#fff;
+}
+
+.empty h3{
+  margin:0 0 8px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:30px;
+  font-weight:500;
+}
+
+.empty p{
+  margin:0;
+  color:#bbb;
+  line-height:1.55;
+}
+
+/* =========================================================
+   TRUST SECTION
+========================================================= */
+
+.info-band{
+  background:#111;
+  color:#fff;
+}
+
+.info-band-inner{
+  width:min(1180px,calc(100% - 28px));
+  margin:auto;
+  padding:46px 0;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:35px;
+}
+
+.info-band h2{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:42px;
+  line-height:1;
+  font-weight:500;
+}
+
+.info-copy{
+  color:#c8c8c8;
+  line-height:1.6;
+}
+
+.source-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+
+.source-tag{
+  min-height:31px;
+  display:flex;
+  align-items:center;
+  padding:0 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.2);
+  font-size:10px;
+  font-weight:850;
+}
+
+.footer{
+  padding:28px 20px 36px;
+  background:#050505;
+  color:#999;
+  text-align:center;
+  font-size:11px;
+}
+
+.footer strong{
+  color:#fff;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  .main-grid{
+    grid-template-columns:1fr;
   }
 
-  res.setHeader(
-    "Vary",
-    "Origin"
-  );
-
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS"
-  );
-
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type"
-  );
-
-}
-
-
-/* =========================================================
-   RESPONSE
-========================================================= */
-
-function sendJson(
-  res,
-  status,
-  payload
-) {
-
-  res.statusCode =
-    status;
-
-  res.setHeader(
-    "Content-Type",
-    "application/json; charset=utf-8"
-  );
-
-  res.setHeader(
-    "Cache-Control",
-    "no-store, max-age=0"
-  );
-
-  res.end(
-    JSON.stringify(payload)
-  );
-
-}
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function cleanString(
-  value,
-  maxLength = 500
-) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "";
-
+  .map-panel{
+    position:relative;
+    top:auto;
+    order:-1;
   }
 
-  return String(value)
-    .trim()
-    .slice(
-      0,
-      maxLength
+  #map{
+    height:330px;
+  }
+
+  .info-band-inner{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:640px){
+
+  .header-main{
+    grid-template-columns:1fr auto;
+    gap:8px;
+    padding:0 13px;
+  }
+
+  .header-main > div:first-of-type{
+    display:none;
+  }
+
+  .brand{
+    font-size:16px;
+    letter-spacing:1.2px;
+  }
+
+  .language-select{
+    max-width:72px;
+    padding:0 9px;
+  }
+
+  .profile-btn{
+    width:40px;
+    height:40px;
+  }
+
+  .subscribe-btn{
+    min-height:40px;
+    padding:0 11px;
+    font-size:11px;
+  }
+
+  .hero{
+    min-height:405px;
+  }
+
+  .hero-inner{
+    padding:58px 20px 40px;
+  }
+
+  .hero h1{
+    font-size:51px;
+    letter-spacing:-2px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .search-shell{
+    margin-top:-20px;
+  }
+
+  .search-grid{
+    grid-template-columns:minmax(0,1fr) 57px;
+  }
+
+  .search-btn{
+    grid-column:1 / -1;
+  }
+
+  .near-btn{
+    min-width:57px;
+    width:57px;
+    padding:0;
+    font-size:0;
+  }
+
+  .near-btn::after{
+    content:"⌖";
+    font-size:24px;
+  }
+
+  .section-head h2{
+    font-size:31px;
+  }
+
+  .place-card{
+    grid-template-columns:1fr;
+  }
+
+  .place-photo{
+    min-height:205px;
+  }
+
+  .place-photo img{
+    min-height:205px;
+  }
+
+  .place-body{
+    padding:17px 16px 16px;
+  }
+
+  .place-name{
+    font-size:25px;
+  }
+
+  #map{
+    height:300px;
+  }
+
+  .info-band h2{
+    font-size:35px;
+  }
+
+}
+
+[dir="rtl"] .photo-source{
+  left:auto;
+  right:11px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <div class="header-main">
+
+    <a class="brand" href="index.html">
+      PETS <span>&</span> DOGUE
+    </a>
+
+    <div></div>
+
+    <div class="header-actions">
+
+      <select
+        id="languageSelect"
+        class="language-select"
+        aria-label="Language"
+      >
+        <option value="en">EN</option>
+        <option value="uk">UA</option>
+        <option value="ru">RU</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="it">IT</option>
+        <option value="pt">PT</option>
+        <option value="nl">NL</option>
+        <option value="pl">PL</option>
+        <option value="cs">CZ</option>
+        <option value="sk">SK</option>
+        <option value="hu">HU</option>
+        <option value="ro">RO</option>
+        <option value="bg">BG</option>
+        <option value="el">GR</option>
+        <option value="sv">SE</option>
+        <option value="da">DK</option>
+        <option value="no">NO</option>
+        <option value="fi">FI</option>
+        <option value="tr">TR</option>
+        <option value="ar">AR</option>
+        <option value="hi">HI</option>
+      </select>
+
+      <a
+        class="profile-btn"
+        href="account.html"
+        aria-label="Profile"
+      >♙</a>
+
+      <a
+        class="subscribe-btn"
+        href="club.html"
+        id="subscribeButton"
+      >
+        Subscribe
+      </a>
+
+    </div>
+
+  </div>
+
+  <nav class="nav-strip">
+    <a href="index.html">Magazine</a>
+    <a href="special-offers.html">Discounts</a>
+    <a href="members-gallery.html">Cover Stars</a>
+    <a href="articles.html">Articles</a>
+    <a href="photos.html">Photos</a>
+    <a href="pet-fashion.html">Fashion</a>
+    <a href="pet-travel.html">Travel</a>
+    <a href="wellness.html">Wellness</a>
+    <a href="pet-friendly-places.html" class="active">Places</a>
+    <a href="contests.html">Contests</a>
+    <a href="community.html">Community</a>
+    <a href="help.html">Help</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="partners.html">Partners</a>
+  </nav>
+
+</header>
+
+<main>
+
+  <section class="hero">
+
+    <div class="hero-inner">
+
+      <div
+        class="hero-kicker"
+        id="heroKicker"
+      >
+        Verified places · Real world
+      </div>
+
+      <h1 id="heroTitle">
+        Places where your dog is welcome.
+      </h1>
+
+      <p id="heroText">
+        We filter out unconfirmed venues and show places with pet-friendly evidence.
+      </p>
+
+      <div class="hero-tags">
+
+        <span
+          class="hero-tag verified"
+          id="verifiedTag"
+        >
+          ✓ Verified pet-friendly
+        </span>
+
+        <span class="hero-tag">
+          Google Places
+        </span>
+
+        <span class="hero-tag">
+          OpenStreetMap
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="search-shell">
+
+    <div class="search-grid">
+
+      <label class="search-field">
+        <span>⌕</span>
+
+        <input
+          id="locationInput"
+          type="search"
+          autocomplete="off"
+          placeholder="City, postcode or area"
+        >
+      </label>
+
+      <button
+        id="nearMeButton"
+        class="near-btn"
+        type="button"
+      >
+        Near me
+      </button>
+
+      <button
+        id="searchButton"
+        class="search-btn"
+        type="button"
+      >
+        Search
+      </button>
+
+    </div>
+
+    <div
+      id="searchStatus"
+      class="search-status"
+      aria-live="polite"
+    ></div>
+
+  </section>
+
+  <section class="filters">
+
+    <div class="filter-scroll">
+
+      <button
+        class="filter-btn active"
+        type="button"
+        data-category="all"
+      >All</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="cafe"
+      >Cafés</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="restaurant"
+      >Restaurants</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="hotel"
+      >Hotels</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="dog-park"
+      >Dog parks</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="beach"
+      >Beaches</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="veterinary"
+      >Vets</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="groomer"
+      >Groomers</button>
+
+      <button
+        class="filter-btn"
+        type="button"
+        data-category="pet-shop"
+      >Pet shops</button>
+
+    </div>
+
+  </section>
+
+  <section class="main-grid">
+
+    <div class="results-panel">
+
+      <div class="section-head">
+
+        <h2 id="resultsTitle">
+          Verified places
+        </h2>
+
+        <div
+          id="resultsCount"
+          class="results-count"
+        >
+          0 places
+        </div>
+
+      </div>
+
+      <div
+        id="resultsList"
+        class="results-list"
+      >
+
+        <div class="empty">
+
+          <h3 id="emptyTitle">
+            Choose a location
+          </h3>
+
+          <p id="emptyText">
+            Search for a city or use Near me.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <aside class="map-panel">
+
+      <div class="map-head">
+
+        <strong id="mapTitle">
+          Pet-friendly map
+        </strong>
+
+        <span class="map-source">
+          LIVE MAP
+        </span>
+
+      </div>
+
+      <div id="map"></div>
+
+    </aside>
+
+  </section>
+
+  <section class="info-band">
+
+    <div class="info-band-inner">
+
+      <h2 id="trustTitle">
+        We do the checking before you arrive.
+      </h2>
+
+      <div class="info-copy">
+
+        <div id="trustText">
+          Ordinary venues with unknown pet rules are removed. PETS & DOGUE shows places with explicit dog-friendly evidence or animal-specific services.
+        </div>
+
+        <div class="source-tags">
+
+          <span class="source-tag">
+            Google allowsDogs
+          </span>
+
+          <span class="source-tag">
+            Dog parks
+          </span>
+
+          <span class="source-tag">
+            Pet services
+          </span>
+
+          <span class="source-tag">
+            PETS & DOGUE Verified — next
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+  <strong>PETS & DOGUE</strong>
+  · Verified pet-friendly discovery
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+(function () {
+  "use strict";
+
+  const LANGUAGE_KEY =
+    "pets_dogue_language";
+
+  const DEFAULT_LANGUAGE =
+    "en";
+
+  const translations = {
+
+    en:{
+      subscribe:"Subscribe",
+      kicker:"Verified places · Real world",
+      title:"Places where your dog is welcome.",
+      text:"We filter out unconfirmed venues and show places with pet-friendly evidence.",
+      verified:"✓ Verified pet-friendly",
+      near:"Near me",
+      search:"Search",
+      placeholder:"City, postcode or area",
+      results:"Verified places",
+      map:"Pet-friendly map",
+      emptyTitle:"Choose a location",
+      emptyText:"Search for a city or use Near me.",
+      loading:"Checking pet-friendly places around you…",
+      noVerified:"No verified pet-friendly places were found here yet.",
+      locationError:"Your precise location is unavailable. Trying an approximate location…",
+      locationFallback:"Using your approximate location.",
+      locationSuccess:"Using your current location.",
+      searchError:"We could not find that location.",
+      apiError:"Pet-friendly places could not be loaded right now.",
+      places:"places",
+      verifiedBadge:"✓ Pet-friendly verified",
+      dogAllowed:"✓ Dogs allowed",
+      dogPark:"✓ Dog park",
+      petService:"✓ Pet service",
+      open:"Open now",
+      closed:"Closed",
+      directions:"Directions",
+      website:"Website",
+      phone:"Call",
+      reviews:"reviews",
+      photo:"Place photo",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"We do the checking before you arrive.",
+      trustText:"Ordinary venues with unknown pet rules are removed. PETS & DOGUE shows places with explicit dog-friendly evidence or animal-specific services.",
+      categories:{
+        all:"All",
+        cafe:"Cafés",
+        restaurant:"Restaurants",
+        hotel:"Hotels",
+        "dog-park":"Dog parks",
+        beach:"Beaches",
+        veterinary:"Vets",
+        groomer:"Groomers",
+        "pet-shop":"Pet shops"
+      }
+    },
+
+    uk:{
+      subscribe:"Підписка",
+      kicker:"Перевірені місця · Реальний світ",
+      title:"Місця, де вашому собаці раді.",
+      text:"Ми відсіюємо непідтверджені заклади та показуємо місця з доказами pet-friendly.",
+      verified:"✓ Pet-friendly підтверджено",
+      near:"Поруч зі мною",
+      search:"Пошук",
+      placeholder:"Місто, індекс або район",
+      results:"Перевірені місця",
+      map:"Pet-friendly карта",
+      emptyTitle:"Оберіть локацію",
+      emptyText:"Знайдіть місто або використайте «Поруч зі мною».",
+      loading:"Перевіряємо pet-friendly місця поруч…",
+      noVerified:"Поки не знайдено підтверджених pet-friendly місць.",
+      locationError:"Точна локація недоступна. Шукаємо приблизну…",
+      locationFallback:"Використовуємо приблизну локацію.",
+      locationSuccess:"Використовуємо вашу поточну локацію.",
+      searchError:"Не вдалося знайти цю локацію.",
+      apiError:"Не вдалося завантажити pet-friendly місця.",
+      places:"місць",
+      verifiedBadge:"✓ Pet-friendly підтверджено",
+      dogAllowed:"✓ Собаки дозволені",
+      dogPark:"✓ Парк для собак",
+      petService:"✓ Послуги для тварин",
+      open:"Відчинено",
+      closed:"Зачинено",
+      directions:"Маршрут",
+      website:"Сайт",
+      phone:"Подзвонити",
+      reviews:"відгуків",
+      photo:"Фото місця",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Ми перевіряємо до вашого візиту.",
+      trustText:"Звичайні заклади з невідомими правилами щодо тварин не показуються. PETS & DOGUE залишає місця з підтвердженням або спеціальні сервіси для тварин.",
+      categories:{
+        all:"Усі",
+        cafe:"Кафе",
+        restaurant:"Ресторани",
+        hotel:"Готелі",
+        "dog-park":"Парки для собак",
+        beach:"Пляжі",
+        veterinary:"Ветеринари",
+        groomer:"Грумінг",
+        "pet-shop":"Зоомагазини"
+      }
+    },
+
+    ru:{
+      subscribe:"Подписка",
+      kicker:"Проверенные места · Реальный мир",
+      title:"Места, где вашей собаке рады.",
+      text:"Мы отсеиваем неподтверждённые заведения и показываем места с доказанным pet-friendly статусом.",
+      verified:"✓ Pet-friendly подтверждено",
+      near:"Рядом со мной",
+      search:"Найти",
+      placeholder:"Город, индекс или район",
+      results:"Проверенные места",
+      map:"Pet-friendly карта",
+      emptyTitle:"Выберите локацию",
+      emptyText:"Введите город или используйте «Рядом со мной».",
+      loading:"Проверяем pet-friendly места рядом…",
+      noVerified:"Здесь пока не найдено подтверждённых pet-friendly мест.",
+      locationError:"Точная геолокация недоступна. Пробуем определить примерное местоположение…",
+      locationFallback:"Используем приблизительное местоположение.",
+      locationSuccess:"Используем ваше текущее местоположение.",
+      searchError:"Не удалось найти эту локацию.",
+      apiError:"Сейчас не удалось загрузить pet-friendly места.",
+      places:"мест",
+      verifiedBadge:"✓ Pet-friendly подтверждено",
+      dogAllowed:"✓ С собаками можно",
+      dogPark:"✓ Парк для собак",
+      petService:"✓ Сервис для животных",
+      open:"Открыто",
+      closed:"Закрыто",
+      directions:"Маршрут",
+      website:"Сайт",
+      phone:"Позвонить",
+      reviews:"отзывов",
+      photo:"Фото места",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Мы проверяем до вашего визита.",
+      trustText:"Обычные заведения с неизвестными правилами для животных исключаются. PETS & DOGUE показывает места с подтверждением или специальные сервисы для животных.",
+      categories:{
+        all:"Все",
+        cafe:"Кафе",
+        restaurant:"Рестораны",
+        hotel:"Отели",
+        "dog-park":"Парки для собак",
+        beach:"Пляжи",
+        veterinary:"Ветеринары",
+        groomer:"Груминг",
+        "pet-shop":"Зоомагазины"
+      }
+    },
+
+    fr:{
+      subscribe:"S’abonner",
+      kicker:"Lieux vérifiés · Monde réel",
+      title:"Les lieux où votre chien est bienvenu.",
+      text:"Nous retirons les lieux non confirmés et gardons ceux avec une preuve pet-friendly.",
+      verified:"✓ Pet-friendly vérifié",
+      near:"Près de moi",
+      search:"Rechercher",
+      placeholder:"Ville, code postal ou quartier",
+      results:"Lieux vérifiés",
+      map:"Carte pet-friendly",
+      emptyTitle:"Choisissez un lieu",
+      emptyText:"Recherchez une ville ou utilisez votre position.",
+      loading:"Vérification des lieux pet-friendly…",
+      noVerified:"Aucun lieu pet-friendly vérifié trouvé ici.",
+      locationError:"Position précise indisponible. Recherche approximative…",
+      locationFallback:"Position approximative utilisée.",
+      locationSuccess:"Position actuelle utilisée.",
+      searchError:"Lieu introuvable.",
+      apiError:"Impossible de charger les lieux pet-friendly.",
+      places:"lieux",
+      verifiedBadge:"✓ Pet-friendly vérifié",
+      dogAllowed:"✓ Chiens acceptés",
+      dogPark:"✓ Parc pour chiens",
+      petService:"✓ Service animalier",
+      open:"Ouvert",
+      closed:"Fermé",
+      directions:"Itinéraire",
+      website:"Site",
+      phone:"Appeler",
+      reviews:"avis",
+      photo:"Photo du lieu",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Nous vérifions avant votre visite.",
+      trustText:"Les lieux dont la politique animale est inconnue sont retirés.",
+      categories:{all:"Tous",cafe:"Cafés",restaurant:"Restaurants",hotel:"Hôtels","dog-park":"Parcs canins",beach:"Plages",veterinary:"Vétérinaires",groomer:"Toilettage","pet-shop":"Animaleries"}
+    },
+
+    de:{
+      subscribe:"Abonnieren",
+      kicker:"Geprüfte Orte · Echte Welt",
+      title:"Orte, an denen dein Hund willkommen ist.",
+      text:"Nicht bestätigte Orte werden ausgefiltert.",
+      verified:"✓ Tierfreundlich bestätigt",
+      near:"In meiner Nähe",
+      search:"Suchen",
+      placeholder:"Stadt, PLZ oder Gebiet",
+      results:"Geprüfte Orte",
+      map:"Tierfreundliche Karte",
+      emptyTitle:"Ort auswählen",
+      emptyText:"Suche eine Stadt oder nutze deinen Standort.",
+      loading:"Tierfreundliche Orte werden geprüft…",
+      noVerified:"Keine bestätigten tierfreundlichen Orte gefunden.",
+      locationError:"Genauer Standort nicht verfügbar. Ungefährer Standort wird versucht…",
+      locationFallback:"Ungefährer Standort wird verwendet.",
+      locationSuccess:"Aktueller Standort wird verwendet.",
+      searchError:"Ort konnte nicht gefunden werden.",
+      apiError:"Orte konnten nicht geladen werden.",
+      places:"Orte",
+      verifiedBadge:"✓ Tierfreundlich bestätigt",
+      dogAllowed:"✓ Hunde erlaubt",
+      dogPark:"✓ Hundepark",
+      petService:"✓ Tierservice",
+      open:"Geöffnet",
+      closed:"Geschlossen",
+      directions:"Route",
+      website:"Website",
+      phone:"Anrufen",
+      reviews:"Bewertungen",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Wir prüfen vor deinem Besuch.",
+      trustText:"Orte mit unbekannten Tierregeln werden nicht angezeigt.",
+      categories:{all:"Alle",cafe:"Cafés",restaurant:"Restaurants",hotel:"Hotels","dog-park":"Hundeparks",beach:"Strände",veterinary:"Tierärzte",groomer:"Pflege","pet-shop":"Tierläden"}
+    },
+
+    es:{
+      subscribe:"Suscribirse",
+      kicker:"Lugares verificados · Mundo real",
+      title:"Lugares donde tu perro es bienvenido.",
+      text:"Filtramos los lugares sin confirmación pet-friendly.",
+      verified:"✓ Pet-friendly verificado",
+      near:"Cerca de mí",
+      search:"Buscar",
+      placeholder:"Ciudad, código postal o zona",
+      results:"Lugares verificados",
+      map:"Mapa pet-friendly",
+      emptyTitle:"Elige una ubicación",
+      emptyText:"Busca una ciudad o usa tu ubicación.",
+      loading:"Comprobando lugares pet-friendly…",
+      noVerified:"No se encontraron lugares pet-friendly verificados.",
+      locationError:"La ubicación precisa no está disponible. Probando ubicación aproximada…",
+      locationFallback:"Usando ubicación aproximada.",
+      locationSuccess:"Usando tu ubicación actual.",
+      searchError:"No pudimos encontrar esa ubicación.",
+      apiError:"No se pudieron cargar los lugares.",
+      places:"lugares",
+      verifiedBadge:"✓ Pet-friendly verificado",
+      dogAllowed:"✓ Perros permitidos",
+      dogPark:"✓ Parque para perros",
+      petService:"✓ Servicio para mascotas",
+      open:"Abierto",
+      closed:"Cerrado",
+      directions:"Cómo llegar",
+      website:"Web",
+      phone:"Llamar",
+      reviews:"reseñas",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Comprobamos antes de tu visita.",
+      trustText:"No mostramos lugares con reglas desconocidas.",
+      categories:{all:"Todo",cafe:"Cafés",restaurant:"Restaurantes",hotel:"Hoteles","dog-park":"Parques caninos",beach:"Playas",veterinary:"Veterinarios",groomer:"Peluquerías","pet-shop":"Tiendas"}
+    },
+
+    it:{
+      subscribe:"Abbonati",
+      kicker:"Luoghi verificati · Mondo reale",
+      title:"Luoghi dove il tuo cane è il benvenuto.",
+      text:"Escludiamo i luoghi senza conferma pet-friendly.",
+      verified:"✓ Pet-friendly verificato",
+      near:"Vicino a me",
+      search:"Cerca",
+      placeholder:"Città, CAP o zona",
+      results:"Luoghi verificati",
+      map:"Mappa pet-friendly",
+      emptyTitle:"Scegli una posizione",
+      emptyText:"Cerca una città o usa la tua posizione.",
+      loading:"Verifica dei luoghi pet-friendly…",
+      noVerified:"Nessun luogo pet-friendly verificato trovato.",
+      locationError:"Posizione precisa non disponibile. Proviamo quella approssimativa…",
+      locationFallback:"Usiamo la posizione approssimativa.",
+      locationSuccess:"Usiamo la tua posizione attuale.",
+      searchError:"Posizione non trovata.",
+      apiError:"Impossibile caricare i luoghi.",
+      places:"luoghi",
+      verifiedBadge:"✓ Pet-friendly verificato",
+      dogAllowed:"✓ Cani ammessi",
+      dogPark:"✓ Area cani",
+      petService:"✓ Servizio animali",
+      open:"Aperto",
+      closed:"Chiuso",
+      directions:"Indicazioni",
+      website:"Sito",
+      phone:"Chiama",
+      reviews:"recensioni",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Controlliamo prima della tua visita.",
+      trustText:"I luoghi con regole sconosciute non vengono mostrati.",
+      categories:{all:"Tutto",cafe:"Caffè",restaurant:"Ristoranti",hotel:"Hotel","dog-park":"Aree cani",beach:"Spiagge",veterinary:"Veterinari",groomer:"Toelettatura","pet-shop":"Negozi animali"}
+    },
+
+    pt:{
+      subscribe:"Subscrever",
+      kicker:"Locais verificados · Mundo real",
+      title:"Locais onde o seu cão é bem-vindo.",
+      text:"Removemos locais sem confirmação pet-friendly.",
+      verified:"✓ Pet-friendly verificado",
+      near:"Perto de mim",
+      search:"Pesquisar",
+      placeholder:"Cidade, código postal ou zona",
+      results:"Locais verificados",
+      map:"Mapa pet-friendly",
+      emptyTitle:"Escolha uma localização",
+      emptyText:"Pesquise uma cidade ou use a sua localização.",
+      loading:"A verificar locais pet-friendly…",
+      noVerified:"Nenhum local pet-friendly verificado encontrado.",
+      locationError:"Localização precisa indisponível. A tentar localização aproximada…",
+      locationFallback:"A usar localização aproximada.",
+      locationSuccess:"A usar a sua localização atual.",
+      searchError:"Localização não encontrada.",
+      apiError:"Não foi possível carregar os locais.",
+      places:"locais",
+      verifiedBadge:"✓ Pet-friendly verificado",
+      dogAllowed:"✓ Cães permitidos",
+      dogPark:"✓ Parque canino",
+      petService:"✓ Serviço para animais",
+      open:"Aberto",
+      closed:"Fechado",
+      directions:"Direções",
+      website:"Site",
+      phone:"Ligar",
+      reviews:"avaliações",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Verificamos antes da sua visita.",
+      trustText:"Locais com regras desconhecidas não são mostrados.",
+      categories:{all:"Todos",cafe:"Cafés",restaurant:"Restaurantes",hotel:"Hotéis","dog-park":"Parques caninos",beach:"Praias",veterinary:"Veterinários",groomer:"Grooming","pet-shop":"Lojas animais"}
+    },
+
+    nl:{
+      subscribe:"Abonneren",
+      kicker:"Geverifieerde plekken · Echte wereld",
+      title:"Plekken waar je hond welkom is.",
+      text:"Onbevestigde locaties worden weggefilterd.",
+      verified:"✓ Huisdiervriendelijk bevestigd",
+      near:"Bij mij",
+      search:"Zoeken",
+      placeholder:"Stad, postcode of gebied",
+      results:"Geverifieerde plekken",
+      map:"Huisdiervriendelijke kaart",
+      emptyTitle:"Kies een locatie",
+      emptyText:"Zoek een stad of gebruik je locatie.",
+      loading:"Huisdiervriendelijke plekken controleren…",
+      noVerified:"Geen geverifieerde plekken gevonden.",
+      locationError:"Exacte locatie niet beschikbaar. Geschatte locatie proberen…",
+      locationFallback:"Geschatte locatie wordt gebruikt.",
+      locationSuccess:"Huidige locatie wordt gebruikt.",
+      searchError:"Locatie niet gevonden.",
+      apiError:"Plekken konden niet worden geladen.",
+      places:"plekken",
+      verifiedBadge:"✓ Huisdiervriendelijk bevestigd",
+      dogAllowed:"✓ Honden toegestaan",
+      dogPark:"✓ Hondenpark",
+      petService:"✓ Dierenservice",
+      open:"Open",
+      closed:"Gesloten",
+      directions:"Route",
+      website:"Website",
+      phone:"Bellen",
+      reviews:"reviews",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Wij controleren vóór je bezoek.",
+      trustText:"Plekken met onbekende regels worden niet getoond.",
+      categories:{all:"Alles",cafe:"Cafés",restaurant:"Restaurants",hotel:"Hotels","dog-park":"Hondenparken",beach:"Stranden",veterinary:"Dierenartsen",groomer:"Trimsalons","pet-shop":"Dierenwinkels"}
+    },
+
+    pl:{
+      subscribe:"Subskrypcja",
+      kicker:"Zweryfikowane miejsca · Prawdziwy świat",
+      title:"Miejsca, gdzie Twój pies jest mile widziany.",
+      text:"Usuwamy miejsca bez potwierdzenia pet-friendly.",
+      verified:"✓ Pet-friendly potwierdzone",
+      near:"W pobliżu",
+      search:"Szukaj",
+      placeholder:"Miasto, kod lub okolica",
+      results:"Zweryfikowane miejsca",
+      map:"Mapa pet-friendly",
+      emptyTitle:"Wybierz lokalizację",
+      emptyText:"Wyszukaj miasto lub użyj lokalizacji.",
+      loading:"Sprawdzamy miejsca pet-friendly…",
+      noVerified:"Nie znaleziono zweryfikowanych miejsc.",
+      locationError:"Dokładna lokalizacja niedostępna. Próbujemy przybliżonej…",
+      locationFallback:"Używamy przybliżonej lokalizacji.",
+      locationSuccess:"Używamy bieżącej lokalizacji.",
+      searchError:"Nie znaleziono lokalizacji.",
+      apiError:"Nie można załadować miejsc.",
+      places:"miejsc",
+      verifiedBadge:"✓ Pet-friendly potwierdzone",
+      dogAllowed:"✓ Psy dozwolone",
+      dogPark:"✓ Park dla psów",
+      petService:"✓ Usługi dla zwierząt",
+      open:"Otwarte",
+      closed:"Zamknięte",
+      directions:"Trasa",
+      website:"Strona",
+      phone:"Zadzwoń",
+      reviews:"opinii",
+      photo:"Zdjęcie",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Sprawdzamy przed wizytą.",
+      trustText:"Miejsca z nieznanymi zasadami nie są wyświetlane.",
+      categories:{all:"Wszystko",cafe:"Kawiarnie",restaurant:"Restauracje",hotel:"Hotele","dog-park":"Parki dla psów",beach:"Plaże",veterinary:"Weterynarze",groomer:"Grooming","pet-shop":"Sklepy zoologiczne"}
+    },
+
+    cs:{
+      subscribe:"Předplatit",
+      kicker:"Ověřená místa · Skutečný svět",
+      title:"Místa, kde je váš pes vítán.",
+      text:"Neověřená místa nezobrazujeme.",
+      verified:"✓ Pet-friendly ověřeno",
+      near:"V mém okolí",
+      search:"Hledat",
+      placeholder:"Město, PSČ nebo oblast",
+      results:"Ověřená místa",
+      map:"Pet-friendly mapa",
+      emptyTitle:"Vyberte lokalitu",
+      emptyText:"Vyhledejte město nebo použijte polohu.",
+      loading:"Ověřujeme pet-friendly místa…",
+      noVerified:"Nebyla nalezena ověřená místa.",
+      locationError:"Přesná poloha není dostupná. Zkoušíme přibližnou…",
+      locationFallback:"Používáme přibližnou polohu.",
+      locationSuccess:"Používáme aktuální polohu.",
+      searchError:"Lokalita nebyla nalezena.",
+      apiError:"Místa nelze načíst.",
+      places:"míst",
+      verifiedBadge:"✓ Pet-friendly ověřeno",
+      dogAllowed:"✓ Psi povoleni",
+      dogPark:"✓ Psí park",
+      petService:"✓ Služby pro zvířata",
+      open:"Otevřeno",
+      closed:"Zavřeno",
+      directions:"Trasa",
+      website:"Web",
+      phone:"Volat",
+      reviews:"recenzí",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Ověřujeme před návštěvou.",
+      trustText:"Místa s neznámými pravidly nezobrazujeme.",
+      categories:{all:"Vše",cafe:"Kavárny",restaurant:"Restaurace",hotel:"Hotely","dog-park":"Psí parky",beach:"Pláže",veterinary:"Veterináři",groomer:"Grooming","pet-shop":"Chovatelské potřeby"}
+    },
+
+    sk:{
+      subscribe:"Predplatné",
+      kicker:"Overené miesta · Skutočný svet",
+      title:"Miesta, kde je váš pes vítaný.",
+      text:"Neoverené miesta nezobrazujeme.",
+      verified:"✓ Pet-friendly overené",
+      near:"V mojom okolí",
+      search:"Hľadať",
+      placeholder:"Mesto, PSČ alebo oblasť",
+      results:"Overené miesta",
+      map:"Pet-friendly mapa",
+      emptyTitle:"Vyberte lokalitu",
+      emptyText:"Vyhľadajte mesto alebo použite polohu.",
+      loading:"Overujeme pet-friendly miesta…",
+      noVerified:"Nenašli sa overené miesta.",
+      locationError:"Presná poloha nie je dostupná. Skúšame približnú…",
+      locationFallback:"Používame približnú polohu.",
+      locationSuccess:"Používame aktuálnu polohu.",
+      searchError:"Lokalita sa nenašla.",
+      apiError:"Miesta sa nedajú načítať.",
+      places:"miest",
+      verifiedBadge:"✓ Pet-friendly overené",
+      dogAllowed:"✓ Psy povolené",
+      dogPark:"✓ Psí park",
+      petService:"✓ Služby pre zvieratá",
+      open:"Otvorené",
+      closed:"Zatvorené",
+      directions:"Trasa",
+      website:"Web",
+      phone:"Volanie",
+      reviews:"recenzií",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Overujeme pred návštevou.",
+      trustText:"Miesta s neznámymi pravidlami nezobrazujeme.",
+      categories:{all:"Všetko",cafe:"Kaviarne",restaurant:"Reštaurácie",hotel:"Hotely","dog-park":"Psie parky",beach:"Pláže",veterinary:"Veterinári",groomer:"Grooming","pet-shop":"Obchody pre zvieratá"}
+    },
+
+    hu:{
+      subscribe:"Előfizetés",
+      kicker:"Ellenőrzött helyek · Valódi világ",
+      title:"Helyek, ahol a kutyádat szívesen látják.",
+      text:"A nem megerősített helyeket kiszűrjük.",
+      verified:"✓ Állatbarát ellenőrizve",
+      near:"Közelemben",
+      search:"Keresés",
+      placeholder:"Város, irányítószám vagy terület",
+      results:"Ellenőrzött helyek",
+      map:"Állatbarát térkép",
+      emptyTitle:"Válassz helyet",
+      emptyText:"Keress várost vagy használd a helyzeted.",
+      loading:"Állatbarát helyek ellenőrzése…",
+      noVerified:"Nem találtunk ellenőrzött helyet.",
+      locationError:"A pontos hely nem érhető el. Közelítő hely meghatározása…",
+      locationFallback:"Közelítő hely használata.",
+      locationSuccess:"Aktuális hely használata.",
+      searchError:"A hely nem található.",
+      apiError:"A helyek nem tölthetők be.",
+      places:"hely",
+      verifiedBadge:"✓ Állatbarát ellenőrizve",
+      dogAllowed:"✓ Kutyák bevihetők",
+      dogPark:"✓ Kutyapark",
+      petService:"✓ Állatszolgáltatás",
+      open:"Nyitva",
+      closed:"Zárva",
+      directions:"Útvonal",
+      website:"Web",
+      phone:"Hívás",
+      reviews:"értékelés",
+      photo:"Fotó",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Ellenőrizzük, mielőtt odamész.",
+      trustText:"Az ismeretlen szabályú helyeket nem jelenítjük meg.",
+      categories:{all:"Mind",cafe:"Kávézók",restaurant:"Éttermek",hotel:"Hotelek","dog-park":"Kutyaparkok",beach:"Strandok",veterinary:"Állatorvosok",groomer:"Kozmetika","pet-shop":"Állatboltok"}
+    },
+
+    ro:{
+      subscribe:"Abonare",
+      kicker:"Locuri verificate · Lume reală",
+      title:"Locuri unde câinele tău este binevenit.",
+      text:"Eliminăm locurile fără confirmare pet-friendly.",
+      verified:"✓ Pet-friendly verificat",
+      near:"Lângă mine",
+      search:"Caută",
+      placeholder:"Oraș, cod poștal sau zonă",
+      results:"Locuri verificate",
+      map:"Hartă pet-friendly",
+      emptyTitle:"Alege o locație",
+      emptyText:"Caută un oraș sau folosește locația.",
+      loading:"Verificăm locuri pet-friendly…",
+      noVerified:"Nu au fost găsite locuri verificate.",
+      locationError:"Locația exactă nu este disponibilă. Încercăm aproximativ…",
+      locationFallback:"Folosim locația aproximativă.",
+      locationSuccess:"Folosim locația curentă.",
+      searchError:"Locația nu a fost găsită.",
+      apiError:"Locurile nu pot fi încărcate.",
+      places:"locuri",
+      verifiedBadge:"✓ Pet-friendly verificat",
+      dogAllowed:"✓ Câinii sunt acceptați",
+      dogPark:"✓ Parc pentru câini",
+      petService:"✓ Serviciu pentru animale",
+      open:"Deschis",
+      closed:"Închis",
+      directions:"Traseu",
+      website:"Site",
+      phone:"Sună",
+      reviews:"recenzii",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Verificăm înainte de vizită.",
+      trustText:"Locurile cu reguli necunoscute nu sunt afișate.",
+      categories:{all:"Toate",cafe:"Cafenele",restaurant:"Restaurante",hotel:"Hoteluri","dog-park":"Parcuri câini",beach:"Plaje",veterinary:"Veterinari",groomer:"Grooming","pet-shop":"Magazine animale"}
+    },
+
+    bg:{
+      subscribe:"Абонамент",
+      kicker:"Проверени места · Реален свят",
+      title:"Места, където кучето ви е добре дошло.",
+      text:"Премахваме местата без потвърден pet-friendly статус.",
+      verified:"✓ Pet-friendly потвърдено",
+      near:"Близо до мен",
+      search:"Търси",
+      placeholder:"Град, пощенски код или район",
+      results:"Проверени места",
+      map:"Pet-friendly карта",
+      emptyTitle:"Изберете място",
+      emptyText:"Потърсете град или използвайте местоположението си.",
+      loading:"Проверяваме pet-friendly места…",
+      noVerified:"Няма намерени потвърдени места.",
+      locationError:"Точното местоположение не е налично. Опитваме приблизително…",
+      locationFallback:"Използваме приблизително местоположение.",
+      locationSuccess:"Използваме текущото ви местоположение.",
+      searchError:"Мястото не е намерено.",
+      apiError:"Местата не могат да бъдат заредени.",
+      places:"места",
+      verifiedBadge:"✓ Pet-friendly потвърдено",
+      dogAllowed:"✓ Кучета са разрешени",
+      dogPark:"✓ Парк за кучета",
+      petService:"✓ Услуга за животни",
+      open:"Отворено",
+      closed:"Затворено",
+      directions:"Маршрут",
+      website:"Сайт",
+      phone:"Обади се",
+      reviews:"отзива",
+      photo:"Снимка",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Проверяваме преди посещението.",
+      trustText:"Не показваме места с неизвестни правила.",
+      categories:{all:"Всички",cafe:"Кафенета",restaurant:"Ресторанти",hotel:"Хотели","dog-park":"Паркове за кучета",beach:"Плажове",veterinary:"Ветеринари",groomer:"Груминг","pet-shop":"Зоомагазини"}
+    },
+
+    el:{
+      subscribe:"Συνδρομή",
+      kicker:"Επαληθευμένα μέρη · Πραγματικός κόσμος",
+      title:"Μέρη όπου ο σκύλος σας είναι ευπρόσδεκτος.",
+      text:"Αφαιρούμε μέρη χωρίς επιβεβαιωμένη pet-friendly πολιτική.",
+      verified:"✓ Pet-friendly επαληθευμένο",
+      near:"Κοντά μου",
+      search:"Αναζήτηση",
+      placeholder:"Πόλη, ΤΚ ή περιοχή",
+      results:"Επαληθευμένα μέρη",
+      map:"Pet-friendly χάρτης",
+      emptyTitle:"Επιλέξτε τοποθεσία",
+      emptyText:"Αναζητήστε πόλη ή χρησιμοποιήστε την τοποθεσία σας.",
+      loading:"Ελέγχουμε pet-friendly μέρη…",
+      noVerified:"Δεν βρέθηκαν επαληθευμένα μέρη.",
+      locationError:"Η ακριβής τοποθεσία δεν είναι διαθέσιμη. Δοκιμάζουμε κατά προσέγγιση…",
+      locationFallback:"Χρήση κατά προσέγγιση τοποθεσίας.",
+      locationSuccess:"Χρήση τρέχουσας τοποθεσίας.",
+      searchError:"Η τοποθεσία δεν βρέθηκε.",
+      apiError:"Δεν ήταν δυνατή η φόρτωση.",
+      places:"μέρη",
+      verifiedBadge:"✓ Pet-friendly επαληθευμένο",
+      dogAllowed:"✓ Επιτρέπονται σκύλοι",
+      dogPark:"✓ Πάρκο σκύλων",
+      petService:"✓ Υπηρεσία ζώων",
+      open:"Ανοιχτά",
+      closed:"Κλειστά",
+      directions:"Οδηγίες",
+      website:"Ιστότοπος",
+      phone:"Κλήση",
+      reviews:"κριτικές",
+      photo:"Φωτογραφία",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Ελέγχουμε πριν την επίσκεψη.",
+      trustText:"Δεν εμφανίζουμε μέρη με άγνωστη πολιτική.",
+      categories:{all:"Όλα",cafe:"Καφέ",restaurant:"Εστιατόρια",hotel:"Ξενοδοχεία","dog-park":"Πάρκα σκύλων",beach:"Παραλίες",veterinary:"Κτηνίατροι",groomer:"Grooming","pet-shop":"Pet shops"}
+    },
+
+    sv:{
+      subscribe:"Prenumerera",
+      kicker:"Verifierade platser · Verklig värld",
+      title:"Platser där din hund är välkommen.",
+      text:"Vi tar bort platser utan bekräftad djurpolicy.",
+      verified:"✓ Djurvänligt verifierat",
+      near:"Nära mig",
+      search:"Sök",
+      placeholder:"Stad, postnummer eller område",
+      results:"Verifierade platser",
+      map:"Djurvänlig karta",
+      emptyTitle:"Välj plats",
+      emptyText:"Sök efter en stad eller använd din plats.",
+      loading:"Kontrollerar djurvänliga platser…",
+      noVerified:"Inga verifierade platser hittades.",
+      locationError:"Exakt position är inte tillgänglig. Försöker ungefärlig…",
+      locationFallback:"Använder ungefärlig plats.",
+      locationSuccess:"Använder din aktuella plats.",
+      searchError:"Platsen kunde inte hittas.",
+      apiError:"Platser kunde inte laddas.",
+      places:"platser",
+      verifiedBadge:"✓ Djurvänligt verifierat",
+      dogAllowed:"✓ Hundar tillåtna",
+      dogPark:"✓ Hundpark",
+      petService:"✓ Djurservice",
+      open:"Öppet",
+      closed:"Stängt",
+      directions:"Vägbeskrivning",
+      website:"Webb",
+      phone:"Ring",
+      reviews:"recensioner",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Vi kontrollerar före ditt besök.",
+      trustText:"Platser med okända regler visas inte.",
+      categories:{all:"Alla",cafe:"Caféer",restaurant:"Restauranger",hotel:"Hotell","dog-park":"Hundparker",beach:"Stränder",veterinary:"Veterinärer",groomer:"Grooming","pet-shop":"Djuraffärer"}
+    },
+
+    da:{
+      subscribe:"Abonnér",
+      kicker:"Verificerede steder · Virkelig verden",
+      title:"Steder hvor din hund er velkommen.",
+      text:"Vi fjerner steder uden bekræftet kæledyrspolitik.",
+      verified:"✓ Kæledyrsvenligt verificeret",
+      near:"Nær mig",
+      search:"Søg",
+      placeholder:"By, postnummer eller område",
+      results:"Verificerede steder",
+      map:"Kæledyrsvenligt kort",
+      emptyTitle:"Vælg placering",
+      emptyText:"Søg efter en by eller brug din placering.",
+      loading:"Kontrollerer kæledyrsvenlige steder…",
+      noVerified:"Ingen verificerede steder fundet.",
+      locationError:"Præcis placering er ikke tilgængelig. Prøver omtrentlig…",
+      locationFallback:"Bruger omtrentlig placering.",
+      locationSuccess:"Bruger din aktuelle placering.",
+      searchError:"Placeringen blev ikke fundet.",
+      apiError:"Steder kunne ikke indlæses.",
+      places:"steder",
+      verifiedBadge:"✓ Kæledyrsvenligt verificeret",
+      dogAllowed:"✓ Hunde tilladt",
+      dogPark:"✓ Hundepark",
+      petService:"✓ Dyreservice",
+      open:"Åben",
+      closed:"Lukket",
+      directions:"Rute",
+      website:"Website",
+      phone:"Ring",
+      reviews:"anmeldelser",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Vi kontrollerer før dit besøg.",
+      trustText:"Steder med ukendte regler vises ikke.",
+      categories:{all:"Alle",cafe:"Caféer",restaurant:"Restauranter",hotel:"Hoteller","dog-park":"Hundeparker",beach:"Strande",veterinary:"Dyrlæger",groomer:"Grooming","pet-shop":"Dyrebutikker"}
+    },
+
+    no:{
+      subscribe:"Abonner",
+      kicker:"Verifiserte steder · Ekte verden",
+      title:"Steder der hunden din er velkommen.",
+      text:"Vi fjerner steder uten bekreftet dyrepolicy.",
+      verified:"✓ Dyrevennlig verifisert",
+      near:"Nær meg",
+      search:"Søk",
+      placeholder:"By, postnummer eller område",
+      results:"Verifiserte steder",
+      map:"Dyrevennlig kart",
+      emptyTitle:"Velg sted",
+      emptyText:"Søk etter en by eller bruk posisjonen din.",
+      loading:"Kontrollerer dyrevennlige steder…",
+      noVerified:"Ingen verifiserte steder funnet.",
+      locationError:"Nøyaktig posisjon er ikke tilgjengelig. Prøver omtrentlig…",
+      locationFallback:"Bruker omtrentlig posisjon.",
+      locationSuccess:"Bruker din nåværende posisjon.",
+      searchError:"Stedet ble ikke funnet.",
+      apiError:"Steder kunne ikke lastes.",
+      places:"steder",
+      verifiedBadge:"✓ Dyrevennlig verifisert",
+      dogAllowed:"✓ Hunder tillatt",
+      dogPark:"✓ Hundepark",
+      petService:"✓ Dyreservice",
+      open:"Åpent",
+      closed:"Stengt",
+      directions:"Rute",
+      website:"Nettside",
+      phone:"Ring",
+      reviews:"anmeldelser",
+      photo:"Foto",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Vi kontrollerer før besøket.",
+      trustText:"Steder med ukjente regler vises ikke.",
+      categories:{all:"Alle",cafe:"Kafeer",restaurant:"Restauranter",hotel:"Hoteller","dog-park":"Hundeparker",beach:"Strender",veterinary:"Veterinærer",groomer:"Grooming","pet-shop":"Dyrebutikker"}
+    },
+
+    fi:{
+      subscribe:"Tilaa",
+      kicker:"Varmennetut paikat · Oikea maailma",
+      title:"Paikat, joissa koirasi on tervetullut.",
+      text:"Poistamme paikat, joiden lemmikkikäytäntöä ei ole vahvistettu.",
+      verified:"✓ Lemmikkiystävällinen vahvistettu",
+      near:"Lähelläni",
+      search:"Hae",
+      placeholder:"Kaupunki, postinumero tai alue",
+      results:"Varmennetut paikat",
+      map:"Lemmikkiystävällinen kartta",
+      emptyTitle:"Valitse sijainti",
+      emptyText:"Hae kaupunkia tai käytä sijaintiasi.",
+      loading:"Tarkistetaan lemmikkiystävällisiä paikkoja…",
+      noVerified:"Varmennettuja paikkoja ei löytynyt.",
+      locationError:"Tarkka sijainti ei ole käytettävissä. Kokeillaan likimääräistä…",
+      locationFallback:"Käytetään likimääräistä sijaintia.",
+      locationSuccess:"Käytetään nykyistä sijaintiasi.",
+      searchError:"Sijaintia ei löytynyt.",
+      apiError:"Paikkoja ei voitu ladata.",
+      places:"paikkaa",
+      verifiedBadge:"✓ Lemmikkiystävällinen vahvistettu",
+      dogAllowed:"✓ Koirat sallittu",
+      dogPark:"✓ Koirapuisto",
+      petService:"✓ Lemmikkipalvelu",
+      open:"Auki",
+      closed:"Suljettu",
+      directions:"Reitti",
+      website:"Sivusto",
+      phone:"Soita",
+      reviews:"arvostelua",
+      photo:"Kuva",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Tarkistamme ennen vierailua.",
+      trustText:"Paikkoja, joiden säännöt eivät ole tiedossa, ei näytetä.",
+      categories:{all:"Kaikki",cafe:"Kahvilat",restaurant:"Ravintolat",hotel:"Hotellit","dog-park":"Koirapuistot",beach:"Rannat",veterinary:"Eläinlääkärit",groomer:"Trimmaus","pet-shop":"Eläinkaupat"}
+    },
+
+    tr:{
+      subscribe:"Abone ol",
+      kicker:"Doğrulanmış yerler · Gerçek dünya",
+      title:"Köpeğinizin hoş karşılandığı yerler.",
+      text:"Pet-friendly durumu doğrulanmamış yerleri göstermiyoruz.",
+      verified:"✓ Pet-friendly doğrulandı",
+      near:"Yakınımda",
+      search:"Ara",
+      placeholder:"Şehir, posta kodu veya bölge",
+      results:"Doğrulanmış yerler",
+      map:"Pet-friendly harita",
+      emptyTitle:"Konum seçin",
+      emptyText:"Şehir arayın veya konumunuzu kullanın.",
+      loading:"Pet-friendly yerler kontrol ediliyor…",
+      noVerified:"Doğrulanmış yer bulunamadı.",
+      locationError:"Kesin konum kullanılamıyor. Yaklaşık konum deneniyor…",
+      locationFallback:"Yaklaşık konum kullanılıyor.",
+      locationSuccess:"Mevcut konumunuz kullanılıyor.",
+      searchError:"Konum bulunamadı.",
+      apiError:"Yerler yüklenemedi.",
+      places:"yer",
+      verifiedBadge:"✓ Pet-friendly doğrulandı",
+      dogAllowed:"✓ Köpekler kabul edilir",
+      dogPark:"✓ Köpek parkı",
+      petService:"✓ Evcil hayvan hizmeti",
+      open:"Açık",
+      closed:"Kapalı",
+      directions:"Yol tarifi",
+      website:"Web sitesi",
+      phone:"Ara",
+      reviews:"yorum",
+      photo:"Fotoğraf",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"Gitmeden önce kontrol ediyoruz.",
+      trustText:"Kuralları bilinmeyen yerleri göstermiyoruz.",
+      categories:{all:"Tümü",cafe:"Kafeler",restaurant:"Restoranlar",hotel:"Oteller","dog-park":"Köpek parkları",beach:"Plajlar",veterinary:"Veterinerler",groomer:"Bakım","pet-shop":"Pet shoplar"}
+    },
+
+    ar:{
+      subscribe:"اشترك",
+      kicker:"أماكن موثقة · عالم حقيقي",
+      title:"أماكن يرحب فيها بكلبك.",
+      text:"نستبعد الأماكن التي لا يوجد تأكيد بأنها صديقة للحيوانات.",
+      verified:"✓ صديق للحيوانات موثق",
+      near:"بالقرب مني",
+      search:"بحث",
+      placeholder:"مدينة أو رمز بريدي أو منطقة",
+      results:"أماكن موثقة",
+      map:"خريطة صديقة للحيوانات",
+      emptyTitle:"اختر الموقع",
+      emptyText:"ابحث عن مدينة أو استخدم موقعك.",
+      loading:"جارٍ التحقق من الأماكن الصديقة للحيوانات…",
+      noVerified:"لم يتم العثور على أماكن موثقة.",
+      locationError:"الموقع الدقيق غير متاح. نحاول الموقع التقريبي…",
+      locationFallback:"نستخدم الموقع التقريبي.",
+      locationSuccess:"نستخدم موقعك الحالي.",
+      searchError:"تعذر العثور على الموقع.",
+      apiError:"تعذر تحميل الأماكن.",
+      places:"أماكن",
+      verifiedBadge:"✓ صديق للحيوانات موثق",
+      dogAllowed:"✓ الكلاب مسموحة",
+      dogPark:"✓ حديقة كلاب",
+      petService:"✓ خدمة للحيوانات",
+      open:"مفتوح",
+      closed:"مغلق",
+      directions:"الاتجاهات",
+      website:"الموقع",
+      phone:"اتصال",
+      reviews:"مراجعات",
+      photo:"صورة",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"نتحقق قبل زيارتك.",
+      trustText:"لا نعرض الأماكن ذات القواعد غير المعروفة.",
+      categories:{all:"الكل",cafe:"مقاهي",restaurant:"مطاعم",hotel:"فنادق","dog-park":"حدائق الكلاب",beach:"شواطئ",veterinary:"بيطري",groomer:"عناية","pet-shop":"متاجر الحيوانات"}
+    },
+
+    hi:{
+      subscribe:"सदस्यता",
+      kicker:"सत्यापित स्थान · वास्तविक दुनिया",
+      title:"वे स्थान जहाँ आपका कुत्ता स्वागत योग्य है।",
+      text:"हम बिना पुष्टि वाले pet-friendly स्थान नहीं दिखाते।",
+      verified:"✓ Pet-friendly सत्यापित",
+      near:"मेरे पास",
+      search:"खोजें",
+      placeholder:"शहर, पोस्टकोड या क्षेत्र",
+      results:"सत्यापित स्थान",
+      map:"Pet-friendly मानचित्र",
+      emptyTitle:"स्थान चुनें",
+      emptyText:"शहर खोजें या अपना स्थान उपयोग करें।",
+      loading:"Pet-friendly स्थान जाँचे जा रहे हैं…",
+      noVerified:"कोई सत्यापित स्थान नहीं मिला।",
+      locationError:"सटीक स्थान उपलब्ध नहीं है। अनुमानित स्थान आज़मा रहे हैं…",
+      locationFallback:"अनुमानित स्थान उपयोग किया जा रहा है।",
+      locationSuccess:"आपका वर्तमान स्थान उपयोग किया जा रहा है।",
+      searchError:"स्थान नहीं मिला।",
+      apiError:"स्थान लोड नहीं हो सके।",
+      places:"स्थान",
+      verifiedBadge:"✓ Pet-friendly सत्यापित",
+      dogAllowed:"✓ कुत्तों की अनुमति",
+      dogPark:"✓ डॉग पार्क",
+      petService:"✓ पालतू सेवा",
+      open:"खुला",
+      closed:"बंद",
+      directions:"दिशाएँ",
+      website:"वेबसाइट",
+      phone:"कॉल",
+      reviews:"समीक्षाएँ",
+      photo:"फोटो",
+      sourceGoogle:"Google Places",
+      sourceOsm:"OpenStreetMap",
+      trustTitle:"आपके आने से पहले हम जाँचते हैं।",
+      trustText:"अज्ञात नियम वाले स्थान नहीं दिखाए जाते।",
+      categories:{all:"सभी",cafe:"कैफ़े",restaurant:"रेस्तराँ",hotel:"होटल","dog-park":"डॉग पार्क",beach:"समुद्र तट",veterinary:"पशु चिकित्सक",groomer:"ग्रूमिंग","pet-shop":"Pet shops"}
+    }
+
+  };
+
+  const languageSelect =
+    document.getElementById(
+      "languageSelect"
     );
 
-}
+  const locationInput =
+    document.getElementById(
+      "locationInput"
+    );
 
+  const nearMeButton =
+    document.getElementById(
+      "nearMeButton"
+    );
 
-function finiteNumber(
-  value
-) {
+  const searchButton =
+    document.getElementById(
+      "searchButton"
+    );
 
-  const number =
-    Number(value);
+  const searchStatus =
+    document.getElementById(
+      "searchStatus"
+    );
 
-  return Number.isFinite(number)
-    ? number
-    : null;
+  const resultsList =
+    document.getElementById(
+      "resultsList"
+    );
 
-}
+  const resultsCount =
+    document.getElementById(
+      "resultsCount"
+    );
 
+  let currentLanguage =
+    getInitialLanguage();
 
-function clamp(
-  value,
-  minimum,
-  maximum
-) {
+  let currentCategory =
+    "all";
 
-  return Math.min(
-    maximum,
-    Math.max(
-      minimum,
-      value
-    )
-  );
+  let currentLocation =
+    null;
 
-}
-
-
-function normalizeCategory(
-  value
-) {
-
-  const category =
-    cleanString(
-      value || "all",
-      50
-    )
-      .toLowerCase();
-
-  return Object.prototype
-    .hasOwnProperty.call(
-      CATEGORY_TYPES,
-      category
-    )
-      ? category
-      : "all";
-
-}
-
-
-/* =========================================================
-   PLACE TYPES
-========================================================= */
-
-function normalizeTypeList(
-  place
-) {
-
-  const result =
+  let currentPlaces =
     [];
 
-  const primaryType =
-    cleanString(
-      place?.primaryType || "",
-      120
+  const map =
+    L.map(
+      "map",
+      {
+        zoomControl:true,
+        attributionControl:true
+      }
     )
-      .toLowerCase();
+      .setView(
+        [51.5074,-0.1278],
+        11
+      );
 
-  if (
-    primaryType
-  ) {
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      maxZoom:19,
+      tileSize:256,
+      zoomOffset:0,
+      attribution:
+        "&copy; OpenStreetMap contributors"
+    }
+  )
+    .addTo(
+      map
+    );
 
-    result.push(
-      primaryType
+  const markerLayer =
+    L.layerGroup()
+      .addTo(
+        map
+      );
+
+  function getInitialLanguage(){
+
+    let saved =
+      "";
+
+    try{
+
+      saved =
+        localStorage.getItem(
+          LANGUAGE_KEY
+        ) || "";
+
+    }catch(error){}
+
+    const urlLanguage =
+      new URLSearchParams(
+        window.location.search
+      )
+        .get(
+          "lang"
+        );
+
+    const candidate =
+      urlLanguage ||
+      saved ||
+      DEFAULT_LANGUAGE;
+
+    return translations[
+      candidate
+    ]
+      ? candidate
+      : DEFAULT_LANGUAGE;
+
+  }
+
+  function t(){
+
+    return (
+      translations[
+        currentLanguage
+      ] ||
+      translations.en
     );
 
   }
 
-  if (
-    Array.isArray(
-      place?.types
-    )
-  ) {
+  function saveLanguage(){
 
-    place.types.forEach(
-      function(type) {
+    try{
 
-        const normalized =
-          cleanString(
-            type,
-            120
+      localStorage.setItem(
+        LANGUAGE_KEY,
+        currentLanguage
+      );
+
+    }catch(error){}
+
+    try{
+
+      const url =
+        new URL(
+          window.location.href
+        );
+
+      url.searchParams.set(
+        "lang",
+        currentLanguage
+      );
+
+      history.replaceState(
+        history.state,
+        "",
+        url.toString()
+      );
+
+    }catch(error){}
+
+  }
+
+  function setStatus(
+    message,
+    type
+  ){
+
+    searchStatus.textContent =
+      message || "";
+
+    searchStatus.className =
+      "search-status";
+
+    if(
+      type
+    ){
+
+      searchStatus.classList.add(
+        type
+      );
+
+    }
+
+  }
+
+  function updateInternalLinks(){
+
+    document
+      .querySelectorAll(
+        "a[href]"
+      )
+      .forEach(
+        function(
+          link
+        ){
+
+          const raw =
+            link.getAttribute(
+              "href"
+            );
+
+          if(
+            !raw ||
+            raw.startsWith("#") ||
+            raw.startsWith("mailto:") ||
+            raw.startsWith("tel:") ||
+            raw.startsWith("http")
+          ){
+
+            return;
+
+          }
+
+          try{
+
+            const url =
+              new URL(
+                raw,
+                window.location.href
+              );
+
+            url.searchParams.set(
+              "lang",
+              currentLanguage
+            );
+
+            link.setAttribute(
+              "href",
+              url.pathname.replace(
+                /^\//,
+                ""
+              ) +
+              url.search +
+              url.hash
+            );
+
+          }catch(error){}
+
+        }
+      );
+
+  }
+
+  function translatePage(){
+
+    const copy =
+      t();
+
+    const rtl =
+      currentLanguage ===
+      "ar";
+
+    document.documentElement.lang =
+      currentLanguage;
+
+    document.documentElement.dir =
+      rtl
+        ? "rtl"
+        : "ltr";
+
+    document.body.classList.toggle(
+      "rtl",
+      rtl
+    );
+
+    languageSelect.value =
+      currentLanguage;
+
+    document.getElementById(
+      "subscribeButton"
+    ).textContent =
+      copy.subscribe;
+
+    document.getElementById(
+      "heroKicker"
+    ).textContent =
+      copy.kicker;
+
+    document.getElementById(
+      "heroTitle"
+    ).textContent =
+      copy.title;
+
+    document.getElementById(
+      "heroText"
+    ).textContent =
+      copy.text;
+
+    document.getElementById(
+      "verifiedTag"
+    ).textContent =
+      copy.verified;
+
+    locationInput.placeholder =
+      copy.placeholder;
+
+    nearMeButton.textContent =
+      copy.near;
+
+    searchButton.textContent =
+      copy.search;
+
+    document.getElementById(
+      "resultsTitle"
+    ).textContent =
+      copy.results;
+
+    document.getElementById(
+      "mapTitle"
+    ).textContent =
+      copy.map;
+
+    document.getElementById(
+      "trustTitle"
+    ).textContent =
+      copy.trustTitle;
+
+    document.getElementById(
+      "trustText"
+    ).textContent =
+      copy.trustText;
+
+    document
+      .querySelectorAll(
+        "[data-category]"
+      )
+      .forEach(
+        function(
+          button
+        ){
+
+          const category =
+            button.dataset.category;
+
+          button.textContent =
+            copy.categories[
+              category
+            ] ||
+            category;
+
+        }
+      );
+
+    if(
+      currentPlaces.length
+    ){
+
+      renderPlaces(
+        currentPlaces
+      );
+
+    }else{
+
+      renderEmpty();
+
+    }
+
+    updateInternalLinks();
+
+    scheduleMapResize();
+
+  }
+
+  function renderLoading(){
+
+    resultsList.innerHTML =
+      '<div class="loading">' +
+        '<div class="loader"></div>' +
+        '<strong>' +
+          escapeHtml(
+            t().loading
+          ) +
+        '</strong>' +
+      '</div>';
+
+  }
+
+  function renderEmpty(
+    message
+  ){
+
+    const copy =
+      t();
+
+    resultsList.innerHTML =
+      '<div class="empty">' +
+        '<h3>' +
+          escapeHtml(
+            message ||
+            copy.emptyTitle
+          ) +
+        '</h3>' +
+        '<p>' +
+          escapeHtml(
+            message
+              ? copy.emptyText
+              : copy.emptyText
+          ) +
+        '</p>' +
+      '</div>';
+
+    resultsCount.textContent =
+      "0 " +
+      copy.places;
+
+    markerLayer.clearLayers();
+
+    scheduleMapResize();
+
+  }
+
+  function categorySymbol(
+    category
+  ){
+
+    const icons = {
+      cafe:"☕",
+      restaurant:"🍽",
+      hotel:"⌂",
+      "dog-park":"🐕",
+      beach:"≈",
+      veterinary:"✚",
+      groomer:"✂",
+      "pet-shop":"🐾",
+      other:"◆"
+    };
+
+    return (
+      icons[
+        category
+      ] ||
+      icons.other
+    );
+
+  }
+
+  function categoryName(
+    category
+  ){
+
+    return (
+      t().categories[
+        category
+      ] ||
+      category
+    );
+
+  }
+
+  function verificationLabel(
+    place
+  ){
+
+    const copy =
+      t();
+
+    const verification =
+      place?.petFriendly?.verification;
+
+    const verificationType =
+      place?.petFriendly?.verificationType;
+
+    if(
+      verification ===
+      "google_allows_dogs"
+    ){
+
+      return copy.dogAllowed;
+
+    }
+
+    if(
+      verificationType ===
+      "dog_park"
+    ){
+
+      return copy.dogPark;
+
+    }
+
+    if(
+      verification ===
+      "osm_dogs_allowed"
+    ){
+
+      return copy.dogAllowed;
+
+    }
+
+    if(
+      verification ===
+      "osm_dog_park"
+    ){
+
+      return copy.dogPark;
+
+    }
+
+    if(
+      verification ===
+      "google_place_type" ||
+      verification ===
+      "osm_pet_service"
+    ){
+
+      return copy.petService;
+
+    }
+
+    return copy.verifiedBadge;
+
+  }
+
+  function buildFallbackVisual(
+    category
+  ){
+
+    return (
+      '<div class="photo-fallback">' +
+        escapeHtml(
+          categorySymbol(
+            category
           )
-            .toLowerCase();
+        ) +
+      '</div>'
+    );
 
-        if (
-          normalized &&
-          !result.includes(
-            normalized
+  }
+
+  function renderPlaces(
+    places
+  ){
+
+    currentPlaces =
+      places;
+
+    const copy =
+      t();
+
+    resultsCount.textContent =
+      places.length +
+      " " +
+      copy.places;
+
+    markerLayer.clearLayers();
+
+    if(
+      !places.length
+    ){
+
+      renderEmpty(
+        copy.noVerified
+      );
+
+      return;
+
+    }
+
+    resultsList.innerHTML =
+      places
+        .map(
+          function(
+            place,
+            index
+          ){
+
+            const category =
+              place.category ||
+              place.uiCategory ||
+              "other";
+
+            const rating =
+              Number.isFinite(
+                Number(
+                  place.rating
+                )
+              )
+                ? Number(
+                    place.rating
+                  ).toFixed(1)
+                : null;
+
+            const ratingCount =
+              Number(
+                place.ratingCount ||
+                0
+              );
+
+            const openNow =
+              place.openingHours &&
+              typeof place.openingHours.openNow ===
+              "boolean"
+                ? place.openingHours.openNow
+                : null;
+
+            const mapsUrl =
+              place.googleMapsUrl ||
+              (
+                "https://www.google.com/maps/search/?api=1&query=" +
+                encodeURIComponent(
+                  place.location.lat +
+                  "," +
+                  place.location.lng
+                )
+              );
+
+            const photoUrl =
+              place.photo &&
+              place.photo.url
+                ? place.photo.url
+                : "";
+
+            const source =
+              place.source ===
+              "google"
+                ? copy.sourceGoogle
+                : copy.sourceOsm;
+
+            return (
+              '<article class="place-card" data-place-index="' +
+                index +
+              '">' +
+
+                '<div class="place-photo">' +
+
+                  (
+                    photoUrl
+                      ? '<img loading="lazy" src="' +
+                          escapeAttribute(
+                            photoUrl
+                          ) +
+                        '" alt="' +
+                          escapeAttribute(
+                            place.name ||
+                            copy.photo
+                          ) +
+                        '" onerror="this.style.display=\'none\'">'
+                      : ""
+                  ) +
+
+                  buildFallbackVisual(
+                    category
+                  ) +
+
+                  '<span class="photo-source">' +
+                    escapeHtml(
+                      source
+                    ) +
+                  '</span>' +
+
+                '</div>' +
+
+                '<div class="place-body">' +
+
+                  '<div class="place-top">' +
+
+                    '<div>' +
+
+                      '<div class="place-category">' +
+                        escapeHtml(
+                          categoryName(
+                            category
+                          )
+                        ) +
+                      '</div>' +
+
+                      '<h3 class="place-name">' +
+                        escapeHtml(
+                          place.name ||
+                          "Place"
+                        ) +
+                      '</h3>' +
+
+                    '</div>' +
+
+                    (
+                      rating
+                        ? '<div class="rating">' +
+                            '★ ' +
+                            escapeHtml(
+                              rating
+                            ) +
+                            (
+                              ratingCount
+                                ? '<span class="rating-count">(' +
+                                    escapeHtml(
+                                      ratingCount
+                                    ) +
+                                  ')</span>'
+                                : ""
+                            ) +
+                          '</div>'
+                        : ""
+                    ) +
+
+                  '</div>' +
+
+                  '<p class="place-address">' +
+                    escapeHtml(
+                      place.address ||
+                      ""
+                    ) +
+                  '</p>' +
+
+                  '<div class="place-badges">' +
+
+                    '<span class="badge verified">' +
+                      escapeHtml(
+                        verificationLabel(
+                          place
+                        )
+                      ) +
+                    '</span>' +
+
+                    (
+                      openNow === true
+                        ? '<span class="badge open">' +
+                            escapeHtml(
+                              copy.open
+                            ) +
+                          '</span>'
+                        : ""
+                    ) +
+
+                    (
+                      openNow === false
+                        ? '<span class="badge closed">' +
+                            escapeHtml(
+                              copy.closed
+                            ) +
+                          '</span>'
+                        : ""
+                    ) +
+
+                  '</div>' +
+
+                  '<div class="place-actions">' +
+
+                    '<a class="primary" target="_blank" rel="noopener" href="' +
+                      escapeAttribute(
+                        mapsUrl
+                      ) +
+                    '">' +
+                      escapeHtml(
+                        copy.directions
+                      ) +
+                    '</a>' +
+
+                    (
+                      place.website
+                        ? '<a target="_blank" rel="noopener" href="' +
+                            escapeAttribute(
+                              place.website
+                            ) +
+                          '">' +
+                            escapeHtml(
+                              copy.website
+                            ) +
+                          '</a>'
+                        : ""
+                    ) +
+
+                    (
+                      place.phone
+                        ? '<a href="tel:' +
+                            escapeAttribute(
+                              place.phone
+                            ) +
+                          '">' +
+                            escapeHtml(
+                              copy.phone
+                            ) +
+                          '</a>'
+                        : ""
+                    ) +
+
+                  '</div>' +
+
+                '</div>' +
+
+              '</article>'
+            );
+
+          }
+        )
+        .join("");
+
+    const bounds =
+      [];
+
+    places.forEach(
+      function(
+        place,
+        index
+      ){
+
+        const lat =
+          Number(
+            place.location?.lat
+          );
+
+        const lng =
+          Number(
+            place.location?.lng
+          );
+
+        if(
+          !Number.isFinite(
+            lat
+          ) ||
+          !Number.isFinite(
+            lng
           )
-        ) {
+        ){
 
-          result.push(
-            normalized
+          return;
+
+        }
+
+        bounds.push(
+          [lat,lng]
+        );
+
+        const marker =
+          L.marker(
+            [lat,lng]
+          )
+            .addTo(
+              markerLayer
+            );
+
+        marker.bindPopup(
+          '<div class="popup-name">' +
+            escapeHtml(
+              place.name ||
+              ""
+            ) +
+          '</div>' +
+          '<div class="popup-meta">' +
+            escapeHtml(
+              place.address ||
+              ""
+            ) +
+          '</div>'
+        );
+
+        marker.on(
+          "click",
+          function(){
+
+            const card =
+              document.querySelector(
+                '[data-place-index="' +
+                index +
+                '"]'
+              );
+
+            if(
+              card
+            ){
+
+              card.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+              });
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+    scheduleMapResize(
+      function(){
+
+        if(
+          bounds.length ===
+          1
+        ){
+
+          map.setView(
+            bounds[0],
+            15
+          );
+
+        }else if(
+          bounds.length >
+          1
+        ){
+
+          map.fitBounds(
+            bounds,
+            {
+              padding:[28,28],
+              maxZoom:15
+            }
           );
 
         }
@@ -325,1690 +3151,1212 @@ function normalizeTypeList(
 
   }
 
-  return result;
+  async function searchGoogle(
+    latitude,
+    longitude,
+    category
+  ){
 
-}
-
-
-function hasType(
-  types,
-  exactTypes
-) {
-
-  return exactTypes.some(
-    function(type) {
-
-      return types.includes(
-        type
-      );
-
-    }
-  );
-
-}
-
-
-function hasTypeEnding(
-  types,
-  ending
-) {
-
-  return types.some(
-    function(type) {
-
-      return (
-        type === ending ||
-        type.endsWith(
-          "_" + ending
-        )
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   CATEGORY NORMALISATION
-========================================================= */
-
-function normalizeGoogleCategory(
-  place
-) {
-
-  const types =
-    normalizeTypeList(
-      place
-    );
-
-  /*
-  DOG PARK
-  */
-
-  if (
-    hasType(
-      types,
+    const apiCategory =
       [
-        "dog_park"
-      ]
-    )
-  ) {
-
-    return "dog-park";
-
-  }
-
-
-  /*
-  VETERINARY
-  */
-
-  if (
-    hasType(
-      types,
-      [
-        "veterinary_care",
-        "veterinarian",
-        "animal_hospital"
-      ]
-    )
-  ) {
-
-    return "veterinary";
-
-  }
-
-
-  /*
-  PET SHOP
-  */
-
-  if (
-    hasType(
-      types,
-      [
-        "pet_store",
-        "pet_supply_store"
-      ]
-    )
-  ) {
-
-    return "pet-shop";
-
-  }
-
-
-  /*
-  CAFE
-
-  Google may return more specific primary types such as:
-  coffee_shop
-  cat_cafe
-  dog_cafe
-  etc.
-  */
-
-  if (
-    hasType(
-      types,
-      [
+        "all",
         "cafe",
-        "coffee_shop",
-        "coffee_store",
-        "tea_house"
-      ]
-    ) ||
-    hasTypeEnding(
-      types,
-      "cafe"
-    )
-  ) {
-
-    return "cafe";
-
-  }
-
-
-  /*
-  RESTAURANT
-
-  Google frequently returns subtype names such as:
-  indian_restaurant
-  italian_restaurant
-  seafood_restaurant
-  fine_dining_restaurant
-  breakfast_restaurant
-  etc.
-
-  Any *_restaurant must therefore be normalised
-  to PETS & DOGUE category "restaurant".
-  */
-
-  if (
-    hasType(
-      types,
-      [
         "restaurant",
-        "bar",
-        "pub",
-        "food_court",
-        "brasserie"
-      ]
-    ) ||
-    hasTypeEnding(
-      types,
-      "restaurant"
-    )
-  ) {
-
-    return "restaurant";
-
-  }
-
-
-  /*
-  HOTEL / LODGING
-
-  Google can return:
-  hotel
-  resort_hotel
-  bed_and_breakfast
-  guest_house
-  hostel
-  motel
-  lodging
-  etc.
-  */
-
-  if (
-    hasType(
-      types,
-      [
         "hotel",
-        "lodging",
-        "resort_hotel",
-        "bed_and_breakfast",
-        "guest_house",
-        "hostel",
-        "motel"
-      ]
-    ) ||
-    hasTypeEnding(
-      types,
-      "hotel"
-    )
-  ) {
-
-    return "hotel";
-
-  }
-
-
-  return "other";
-
-}
-
-
-/* =========================================================
-   PET-FRIENDLY VERIFICATION
-========================================================= */
-
-function getPetFriendlyEvidence(
-  place
-) {
-
-  /*
-  Strongest evidence:
-  Google explicitly reports dogs are allowed.
-  */
-
-  if (
-    place?.allowsDogs === true
-  ) {
-
-    return {
-
-      allowed:
-        true,
-
-      verified:
-        true,
-
-      verification:
-        "google_allows_dogs",
-
-      verificationType:
-        null,
-
-      label:
-        "Dogs allowed",
-
-      source:
-        "Google Places"
-
-    };
-
-  }
-
-
-  /*
-  Explicitly not allowed.
-  */
-
-  if (
-    place?.allowsDogs === false
-  ) {
-
-    return {
-
-      allowed:
-        false,
-
-      verified:
-        true,
-
-      verification:
-        "google_dogs_not_allowed",
-
-      verificationType:
-        null,
-
-      label:
-        "Dogs not allowed",
-
-      source:
-        "Google Places"
-
-    };
-
-  }
-
-
-  /*
-  Animal-specific places.
-  */
-
-  const types =
-    normalizeTypeList(
-      place
-    );
-
-  const inherentType =
-    types.find(
-      function(type) {
-
-        return INHERENTLY_PET_FRIENDLY_TYPES
-          .has(type);
-
-      }
-    );
-
-  if (
-    inherentType
-  ) {
-
-    let label =
-      "Pet-friendly place";
-
-    if (
-      inherentType ===
-      "dog_park"
-    ) {
-
-      label =
-        "Dog park";
-
-    }
-
-    if (
-      inherentType ===
-      "veterinary_care" ||
-      inherentType ===
-      "veterinarian"
-    ) {
-
-      label =
-        "Pet service";
-
-    }
-
-    if (
-      inherentType ===
-      "pet_store"
-    ) {
-
-      label =
-        "Pet shop";
-
-    }
-
-    return {
-
-      allowed:
-        true,
-
-      verified:
-        true,
-
-      verification:
-        "google_place_type",
-
-      verificationType:
-        inherentType,
-
-      label,
-
-      source:
-        "Google Places"
-
-    };
-
-  }
-
-
-  /*
-  Unknown policy:
-  do not expose as pet-friendly.
-  */
-
-  return {
-
-    allowed:
-      false,
-
-    verified:
-      false,
-
-    verification:
-      "unconfirmed",
-
-    verificationType:
-      null,
-
-    label:
-      "Pet policy unconfirmed",
-
-    source:
-      "Google Places"
-
-  };
-
-}
-
-
-/* =========================================================
-   OPENING HOURS
-========================================================= */
-
-function buildOpeningHours(
-  place
-) {
-
-  const hours =
-    place?.currentOpeningHours ||
-    place?.regularOpeningHours ||
-    null;
-
-  if (
-    !hours
-  ) {
-
-    return {
-
-      openNow:
-        null,
-
-      weekdayDescriptions:
-        []
-
-    };
-
-  }
-
-  return {
-
-    openNow:
-      typeof hours.openNow ===
-      "boolean"
-        ? hours.openNow
-        : null,
-
-    weekdayDescriptions:
-      Array.isArray(
-        hours.weekdayDescriptions
+        "dog-park",
+        "veterinary",
+        "pet-shop"
+      ].includes(
+        category
       )
-        ? hours.weekdayDescriptions
-            .map(
-              function(item) {
-
-                return cleanString(
-                  item,
-                  300
-                );
-
-              }
-            )
-            .filter(Boolean)
-        : []
-
-  };
-
-}
-
-
-/* =========================================================
-   PHOTO DATA
-========================================================= */
-
-function getPhoto(
-  place
-) {
-
-  if (
-    !Array.isArray(
-      place?.photos
-    ) ||
-    !place.photos.length
-  ) {
-
-    return null;
-
-  }
-
-  const photo =
-    place.photos[0];
-
-  const name =
-    cleanString(
-      photo?.name || "",
-      1200
-    );
-
-  if (
-    !name
-  ) {
-
-    return null;
-
-  }
-
-  return {
-
-    name,
-
-    /*
-    Browser requests the image from OUR endpoint.
-
-    The Google API key stays on the server.
-    */
-
-    url:
-      "/api/pet-friendly-places?photo=" +
-      encodeURIComponent(name) +
-      "&width=1000",
-
-    width:
-      finiteNumber(
-        photo?.widthPx
-      ),
-
-    height:
-      finiteNumber(
-        photo?.heightPx
-      )
-
-  };
-
-}
-
-
-/* =========================================================
-   NORMALIZE PLACE
-========================================================= */
-
-function normalizePlace(
-  place
-) {
-
-  const latitude =
-    finiteNumber(
-      place?.location?.latitude
-    );
-
-  const longitude =
-    finiteNumber(
-      place?.location?.longitude
-    );
-
-  if (
-    latitude === null ||
-    longitude === null
-  ) {
-
-    return null;
-
-  }
-
-  const petFriendly =
-    getPetFriendlyEvidence(
-      place
-    );
-
-  /*
-  STRICT PET-FRIENDLY FILTER
-  */
-
-  if (
-    petFriendly.allowed !==
-    true
-  ) {
-
-    return null;
-
-  }
-
-  const category =
-    normalizeGoogleCategory(
-      place
-    );
-
-  return {
-
-    id:
-      cleanString(
-        place?.id || "",
-        400
-      ),
-
-    providerId:
-      cleanString(
-        place?.id || "",
-        400
-      ),
-
-    source:
-      "google",
-
-    name:
-      cleanString(
-        place?.displayName?.text ||
-        "Pet-friendly place",
-        300
-      ),
-
-    category,
-
-    categoryLabel:
-      cleanString(
-        place?.primaryTypeDisplayName?.text ||
-        place?.primaryType ||
-        "",
-        200
-      ),
-
-    address:
-      cleanString(
-        place?.formattedAddress ||
-        "",
-        700
-      ),
-
-    location: {
-
-      lat:
-        latitude,
-
-      lng:
-        longitude
-
-    },
-
-    rating:
-      finiteNumber(
-        place?.rating
-      ),
-
-    ratingCount:
-      finiteNumber(
-        place?.userRatingCount
-      ) || 0,
-
-    website:
-      cleanString(
-        place?.websiteUri ||
-        "",
-        1200
-      ),
-
-    googleMapsUrl:
-      cleanString(
-        place?.googleMapsUri ||
-        "",
-        1200
-      ),
-
-    phone:
-      cleanString(
-        place?.internationalPhoneNumber ||
-        place?.nationalPhoneNumber ||
-        "",
-        150
-      ),
-
-    businessStatus:
-      cleanString(
-        place?.businessStatus ||
-        "",
-        100
-      ),
-
-    openingHours:
-      buildOpeningHours(
-        place
-      ),
-
-    photo:
-      getPhoto(
-        place
-      ),
-
-    petFriendly: {
-
-      allowed:
-        true,
-
-      allowsDogs:
-        place?.allowsDogs === true
-          ? true
-          : null,
-
-      verified:
-        true,
-
-      verification:
-        petFriendly.verification,
-
-      verificationType:
-        petFriendly.verificationType,
-
-      label:
-        petFriendly.label,
-
-      source:
-        petFriendly.source
-
-    },
-
-    petsDogueVerified:
-      false
-
-  };
-
-}
-
-
-/* =========================================================
-   BODY
-========================================================= */
-
-async function readBody(
-  req
-) {
-
-  if (
-    req.body &&
-    typeof req.body ===
-    "object"
-  ) {
-
-    return req.body;
-
-  }
-
-  if (
-    typeof req.body ===
-    "string" &&
-    req.body.trim()
-  ) {
-
-    try {
-
-      return JSON.parse(
-        req.body
+        ? category
+        : "all";
+
+    const response =
+      await fetch(
+        "/api/pet-friendly-places",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:
+            JSON.stringify({
+              latitude,
+              longitude,
+              radius:5000,
+              category:
+                apiCategory,
+              maxResults:20
+            })
+        }
       );
 
-    } catch {
+    let data =
+      {};
 
-      return {};
-
-    }
-
-  }
-
-  const chunks =
-    [];
-
-  for await (
-    const chunk
-    of req
-  ) {
-
-    chunks.push(
-      Buffer.isBuffer(chunk)
-        ? chunk
-        : Buffer.from(chunk)
-    );
-
-  }
-
-  if (
-    !chunks.length
-  ) {
-
-    return {};
-
-  }
-
-  const raw =
-    Buffer
-      .concat(chunks)
-      .toString("utf8")
-      .trim();
-
-  if (
-    !raw
-  ) {
-
-    return {};
-
-  }
-
-  try {
-
-    return JSON.parse(raw);
-
-  } catch {
-
-    return {};
-
-  }
-
-}
-
-
-/* =========================================================
-   GOOGLE FIELD MASK
-========================================================= */
-
-function buildFieldMask() {
-
-  return [
-    "places.id",
-    "places.displayName",
-    "places.formattedAddress",
-    "places.location",
-    "places.primaryType",
-    "places.primaryTypeDisplayName",
-    "places.types",
-    "places.rating",
-    "places.userRatingCount",
-    "places.googleMapsUri",
-    "places.websiteUri",
-    "places.nationalPhoneNumber",
-    "places.internationalPhoneNumber",
-    "places.regularOpeningHours",
-    "places.currentOpeningHours",
-    "places.photos",
-    "places.businessStatus",
-    "places.allowsDogs"
-  ].join(",");
-
-}
-
-
-/* =========================================================
-   GOOGLE SEARCH
-========================================================= */
-
-async function fetchGooglePlaces({
-  apiKey,
-  latitude,
-  longitude,
-  radius,
-  category,
-  maxResults
-}) {
-
-  const includedTypes =
-    CATEGORY_TYPES[
-      category
-    ] ||
-    CATEGORY_TYPES.all;
-
-  const requestBody = {
-
-    includedTypes,
-
-    maxResultCount:
-      maxResults,
-
-    rankPreference:
-      "POPULARITY",
-
-    locationRestriction: {
-
-      circle: {
-
-        center: {
-
-          latitude,
-
-          longitude
-
-        },
-
-        radius
-
-      }
-
-    }
-
-  };
-
-  const response =
-    await fetch(
-      GOOGLE_NEARBY_URL,
-      {
-
-        method:
-          "POST",
-
-        headers: {
-
-          "Content-Type":
-            "application/json",
-
-          "X-Goog-Api-Key":
-            apiKey,
-
-          "X-Goog-FieldMask":
-            buildFieldMask()
-
-        },
-
-        body:
-          JSON.stringify(
-            requestBody
-          )
-
-      }
-    );
-
-  const raw =
-    await response.text();
-
-  let data =
-    {};
-
-  if (
-    raw
-  ) {
-
-    try {
+    try{
 
       data =
-        JSON.parse(raw);
+        await response.json();
 
-    } catch {
+    }catch(error){}
 
-      data = {
-        raw
-      };
+    if(
+      !response.ok ||
+      !data.ok
+    ){
+
+      throw new Error(
+        data.error ||
+        "Google Places failed"
+      );
 
     }
 
-  }
-
-  if (
-    !response.ok
-  ) {
-
-    console.error(
-      "PETS & DOGUE Google Places error:",
-      {
-        status:
-          response.status,
-
-        data
-      }
-    );
-
-    const message =
-      cleanString(
-        data?.error?.message ||
-        "",
-        900
-      );
-
-    const error =
-      new Error(
-        message ||
-        "Google Places request failed."
-      );
-
-    error.status =
-      response.status;
-
-    throw error;
-
-  }
-
-  const rawPlaces =
-    Array.isArray(
-      data?.places
+    return Array.isArray(
+      data.places
     )
       ? data.places
       : [];
 
-  const verifiedPlaces =
-    rawPlaces
-      .map(
-        normalizePlace
+  }
+
+  function osmPetEvidence(
+    category,
+    tags
+  ){
+
+    const dog =
+      String(
+        tags.dog ||
+        tags.dogs ||
+        ""
       )
-      .filter(Boolean);
+        .toLowerCase();
 
-  return {
+    if(
+      category ===
+      "dog-park"
+    ){
 
-    rawCount:
-      rawPlaces.length,
+      return {
+        allowed:true,
+        verification:
+          "osm_dog_park"
+      };
 
-    verifiedCount:
-      verifiedPlaces.length,
+    }
 
-    places:
-      verifiedPlaces
+    if(
+      category ===
+      "groomer"
+    ){
 
-  };
+      return {
+        allowed:true,
+        verification:
+          "osm_pet_service"
+      };
 
-}
+    }
 
+    if(
+      [
+        "yes",
+        "leashed",
+        "designated"
+      ].includes(
+        dog
+      )
+    ){
 
-/* =========================================================
-   GOOGLE PHOTO PROXY
-========================================================= */
+      return {
+        allowed:true,
+        verification:
+          "osm_dogs_allowed"
+      };
 
-function validPhotoResource(
-  value
-) {
+    }
 
-  const photo =
-    String(
-      value || ""
-    ).trim();
+    return {
+      allowed:false
+    };
 
-  /*
-  Google photo resource must begin with places/
-  and contain /photos/.
+  }
 
-  Do not unnecessarily restrict Google's resource token,
-  because the token format may contain characters beyond
-  simple letters/numbers.
-  */
+  async function searchOsm(
+    latitude,
+    longitude,
+    category
+  ){
 
-  return (
-    photo.startsWith(
-      "places/"
-    ) &&
-    photo.includes(
-      "/photos/"
-    ) &&
-    photo.length < 1200
-  );
+    const radius =
+      5000;
 
-}
+    let selector =
+      "";
 
+    if(
+      category ===
+      "dog-park"
+    ){
 
-async function handlePhotoRequest(
-  req,
-  res,
-  apiKey
-) {
+      selector =
+        'nwr["leisure"="dog_park"](around:' +
+        radius + "," +
+        latitude + "," +
+        longitude + ');';
 
-  const photoName =
-    cleanString(
-      req.query?.photo ||
-      "",
-      1200
+    }
+
+    if(
+      category ===
+      "beach"
+    ){
+
+      selector =
+        'nwr["natural"="beach"]["dog"~"yes|leashed|designated",i](around:' +
+        radius + "," +
+        latitude + "," +
+        longitude + ');';
+
+    }
+
+    if(
+      category ===
+      "groomer"
+    ){
+
+      selector =
+        'nwr["shop"="pet_grooming"](around:' +
+        radius + "," +
+        latitude + "," +
+        longitude + ');' +
+        'nwr["craft"="pet_groomer"](around:' +
+        radius + "," +
+        latitude + "," +
+        longitude + ');';
+
+    }
+
+    if(
+      !selector
+    ){
+
+      return [];
+
+    }
+
+    const query =
+      '[out:json][timeout:18];(' +
+      selector +
+      ');out center tags;';
+
+    const response =
+      await fetch(
+        "https://overpass-api.de/api/interpreter",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/x-www-form-urlencoded;charset=UTF-8"
+          },
+          body:
+            "data=" +
+            encodeURIComponent(
+              query
+            )
+        }
+      );
+
+    if(
+      !response.ok
+    ){
+
+      return [];
+
+    }
+
+    const data =
+      await response.json();
+
+    return (
+      Array.isArray(
+        data.elements
+      )
+        ? data.elements
+        : []
+    )
+      .map(
+        function(
+          item
+        ){
+
+          const lat =
+            Number(
+              item.lat ??
+              item.center?.lat
+            );
+
+          const lng =
+            Number(
+              item.lon ??
+              item.center?.lon
+            );
+
+          if(
+            !Number.isFinite(
+              lat
+            ) ||
+            !Number.isFinite(
+              lng
+            )
+          ){
+
+            return null;
+
+          }
+
+          const tags =
+            item.tags ||
+            {};
+
+          const evidence =
+            osmPetEvidence(
+              category,
+              tags
+            );
+
+          if(
+            !evidence.allowed
+          ){
+
+            return null;
+
+          }
+
+          const fallbackName =
+            category ===
+            "dog-park"
+              ? "Dog park"
+              : category ===
+                "beach"
+                  ? "Dog-friendly beach"
+                  : "Pet grooming";
+
+          return {
+
+            id:
+              "osm-" +
+              item.type +
+              "-" +
+              item.id,
+
+            providerId:
+              "osm-" +
+              item.id,
+
+            source:
+              "osm",
+
+            name:
+              tags.name ||
+              tags["name:en"] ||
+              fallbackName,
+
+            category,
+
+            address:[
+              tags["addr:housenumber"],
+              tags["addr:street"],
+              tags["addr:city"]
+            ]
+              .filter(Boolean)
+              .join(" "),
+
+            location:{
+              lat,
+              lng
+            },
+
+            rating:null,
+            ratingCount:0,
+
+            website:
+              tags.website ||
+              tags["contact:website"] ||
+              "",
+
+            phone:
+              tags.phone ||
+              tags["contact:phone"] ||
+              "",
+
+            googleMapsUrl:"",
+
+            openingHours:{
+              openNow:null,
+              weekdayDescriptions:[]
+            },
+
+            photo:null,
+
+            petFriendly:{
+              allowed:true,
+              verified:true,
+              verification:
+                evidence.verification,
+              verificationType:
+                category ===
+                "dog-park"
+                  ? "dog_park"
+                  : null,
+              source:
+                "OpenStreetMap"
+            }
+
+          };
+
+        }
+      )
+      .filter(Boolean)
+      .slice(
+        0,
+        20
+      );
+
+  }
+
+  function mergePlaces(
+    groups
+  ){
+
+    const unique =
+      new Map();
+
+    groups
+      .flat()
+      .filter(Boolean)
+      .forEach(
+        function(
+          place
+        ){
+
+          const lat =
+            Number(
+              place.location?.lat
+            );
+
+          const lng =
+            Number(
+              place.location?.lng
+            );
+
+          const key =
+            place.providerId ||
+            place.id ||
+            [
+              String(
+                place.name ||
+                ""
+              )
+                .toLowerCase(),
+              Number.isFinite(
+                lat
+              )
+                ? lat.toFixed(5)
+                : "",
+              Number.isFinite(
+                lng
+              )
+                ? lng.toFixed(5)
+                : ""
+            ].join("|");
+
+          if(
+            !unique.has(
+              key
+            )
+          ){
+
+            unique.set(
+              key,
+              place
+            );
+
+          }
+
+        }
+      );
+
+    return Array.from(
+      unique.values()
     );
 
-  if (
-    !validPhotoResource(
-      photoName
-    )
-  ) {
+  }
 
-    return sendJson(
-      res,
-      400,
-      {
+  async function loadPlaces(
+    latitude,
+    longitude
+  ){
 
-        ok:
-          false,
+    currentLocation = {
+      latitude,
+      longitude
+    };
 
-        error:
-          "Invalid photo reference."
+    renderLoading();
+
+    setStatus(
+      t().loading
+    );
+
+    try{
+
+      let places =
+        [];
+
+      if(
+        currentCategory ===
+        "all"
+      ){
+
+        const settled =
+          await Promise.allSettled([
+            searchGoogle(
+              latitude,
+              longitude,
+              "all"
+            ),
+            searchOsm(
+              latitude,
+              longitude,
+              "dog-park"
+            ),
+            searchOsm(
+              latitude,
+              longitude,
+              "beach"
+            ),
+            searchOsm(
+              latitude,
+              longitude,
+              "groomer"
+            )
+          ]);
+
+        places =
+          mergePlaces(
+            settled
+              .filter(
+                item =>
+                  item.status ===
+                  "fulfilled"
+              )
+              .map(
+                item =>
+                  item.value
+              )
+          );
+
+      }else if(
+        [
+          "beach",
+          "groomer"
+        ].includes(
+          currentCategory
+        )
+      ){
+
+        places =
+          await searchOsm(
+            latitude,
+            longitude,
+            currentCategory
+          );
+
+      }else if(
+        currentCategory ===
+        "dog-park"
+      ){
+
+        const settled =
+          await Promise.allSettled([
+            searchGoogle(
+              latitude,
+              longitude,
+              "dog-park"
+            ),
+            searchOsm(
+              latitude,
+              longitude,
+              "dog-park"
+            )
+          ]);
+
+        places =
+          mergePlaces(
+            settled
+              .filter(
+                item =>
+                  item.status ===
+                  "fulfilled"
+              )
+              .map(
+                item =>
+                  item.value
+              )
+          );
+
+      }else{
+
+        places =
+          await searchGoogle(
+            latitude,
+            longitude,
+            currentCategory
+          );
+
+      }
+
+      setStatus(
+        ""
+      );
+
+      renderPlaces(
+        places
+      );
+
+    }catch(error){
+
+      console.error(
+        "PETS & DOGUE places error:",
+        error
+      );
+
+      setStatus(
+        t().apiError,
+        "error"
+      );
+
+      renderEmpty(
+        t().apiError
+      );
+
+    }
+
+  }
+
+  async function geocodeLocation(
+    query
+  ){
+
+    const response =
+      await fetch(
+        "https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1&q=" +
+        encodeURIComponent(
+          query
+        ),
+        {
+          headers:{
+            "Accept":
+              "application/json"
+          }
+        }
+      );
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        "Geocoding failed"
+      );
+
+    }
+
+    const data =
+      await response.json();
+
+    if(
+      !Array.isArray(
+        data
+      ) ||
+      !data.length
+    ){
+
+      return null;
+
+    }
+
+    const latitude =
+      Number(
+        data[0].lat
+      );
+
+    const longitude =
+      Number(
+        data[0].lon
+      );
+
+    if(
+      !Number.isFinite(
+        latitude
+      ) ||
+      !Number.isFinite(
+        longitude
+      )
+    ){
+
+      return null;
+
+    }
+
+    return {
+      latitude,
+      longitude,
+      label:
+        data[0].display_name ||
+        query
+    };
+
+  }
+
+  async function reverseGeocode(
+    latitude,
+    longitude
+  ){
+
+    try{
+
+      const response =
+        await fetch(
+          "https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=12&lat=" +
+          encodeURIComponent(
+            latitude
+          ) +
+          "&lon=" +
+          encodeURIComponent(
+            longitude
+          )
+        );
+
+      if(
+        !response.ok
+      ){
+
+        return "";
+
+      }
+
+      const data =
+        await response.json();
+
+      const address =
+        data.address ||
+        {};
+
+      return (
+        address.city ||
+        address.town ||
+        address.village ||
+        address.suburb ||
+        data.display_name ||
+        ""
+      );
+
+    }catch(error){
+
+      return "";
+
+    }
+
+  }
+
+  async function detectApproximateLocation(){
+
+    try{
+
+      const response =
+        await fetch(
+          "/api/detect-location",
+          {
+            method:"GET",
+            cache:"no-store"
+          }
+        );
+
+      if(
+        !response.ok
+      ){
+
+        return null;
+
+      }
+
+      const data =
+        await response.json();
+
+      if(
+        !data ||
+        !data.detected
+      ){
+
+        return null;
+
+      }
+
+      const query =
+        [
+          data.city,
+          data.region,
+          data.countryName
+        ]
+          .filter(Boolean)
+          .join(", ");
+
+      if(
+        !query
+      ){
+
+        return null;
+
+      }
+
+      return await geocodeLocation(
+        query
+      );
+
+    }catch(error){
+
+      return null;
+
+    }
+
+  }
+
+  async function searchTypedLocation(){
+
+    const query =
+      locationInput.value
+        .trim();
+
+    if(
+      !query
+    ){
+
+      locationInput.focus();
+
+      return;
+
+    }
+
+    searchButton.disabled =
+      true;
+
+    setStatus(
+      t().loading
+    );
+
+    try{
+
+      const location =
+        await geocodeLocation(
+          query
+        );
+
+      if(
+        !location
+      ){
+
+        setStatus(
+          t().searchError,
+          "error"
+        );
+
+        return;
+
+      }
+
+      locationInput.value =
+        location.label;
+
+      await loadPlaces(
+        location.latitude,
+        location.longitude
+      );
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+      setStatus(
+        t().searchError,
+        "error"
+      );
+
+    }finally{
+
+      searchButton.disabled =
+        false;
+
+    }
+
+  }
+
+  async function useApproximateFallback(){
+
+    setStatus(
+      t().locationError
+    );
+
+    const approximate =
+      await detectApproximateLocation();
+
+    if(
+      !approximate
+    ){
+
+      setStatus(
+        t().searchError,
+        "error"
+      );
+
+      return false;
+
+    }
+
+    locationInput.value =
+      approximate.label;
+
+    setStatus(
+      t().locationFallback,
+      "success"
+    );
+
+    await loadPlaces(
+      approximate.latitude,
+      approximate.longitude
+    );
+
+    return true;
+
+  }
+
+  function getGpsLocation(){
+
+    return new Promise(
+      function(
+        resolve,
+        reject
+      ){
+
+        if(
+          !navigator.geolocation
+        ){
+
+          reject(
+            new Error(
+              "Geolocation unavailable"
+            )
+          );
+
+          return;
+
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          resolve,
+          reject,
+          {
+            enableHighAccuracy:true,
+            timeout:15000,
+            maximumAge:0
+          }
+        );
 
       }
     );
 
   }
 
-  const requestedWidth =
-    finiteNumber(
-      req.query?.width
+  async function useCurrentLocation(){
+
+    nearMeButton.disabled =
+      true;
+
+    setStatus(
+      t().loading
     );
 
-  const width =
-    Math.round(
-      clamp(
-        requestedWidth ||
-        1000,
-        200,
-        1600
-      )
-    );
+    try{
 
-  /*
-  Request actual image bytes from Google.
+      const position =
+        await getGpsLocation();
 
-  We intentionally allow Google to perform its normal
-  media redirect internally inside fetch().
-  The final image is then streamed to the browser.
+      const latitude =
+        Number(
+          position.coords.latitude
+        );
 
-  This is more reliable on mobile browsers than exposing
-  Google's temporary redirect URL.
-  */
+      const longitude =
+        Number(
+          position.coords.longitude
+        );
 
-  const mediaUrl =
-    "https://places.googleapis.com/v1/" +
-    photoName +
-    "/media?maxWidthPx=" +
-    encodeURIComponent(
-      width
-    );
+      if(
+        !Number.isFinite(
+          latitude
+        ) ||
+        !Number.isFinite(
+          longitude
+        )
+      ){
 
-  const response =
-    await fetch(
-      mediaUrl,
-      {
-
-        method:
-          "GET",
-
-        headers: {
-
-          "X-Goog-Api-Key":
-            apiKey
-
-        },
-
-        redirect:
-          "follow"
+        throw new Error(
+          "Invalid GPS position"
+        );
 
       }
+
+      const city =
+        await reverseGeocode(
+          latitude,
+          longitude
+        );
+
+      locationInput.value =
+        city ||
+        t().near;
+
+      setStatus(
+        t().locationSuccess,
+        "success"
+      );
+
+      await loadPlaces(
+        latitude,
+        longitude
+      );
+
+    }catch(error){
+
+      console.warn(
+        "PETS & DOGUE precise geolocation:",
+        error
+      );
+
+      await useApproximateFallback();
+
+    }finally{
+
+      nearMeButton.disabled =
+        false;
+
+    }
+
+  }
+
+  function scheduleMapResize(
+    callback
+  ){
+
+    window.setTimeout(
+      function(){
+
+        map.invalidateSize(
+          true
+        );
+
+        if(
+          typeof callback ===
+          "function"
+        ){
+
+          callback();
+
+        }
+
+      },
+      120
     );
 
-  if (
-    !response.ok
-  ) {
+    window.setTimeout(
+      function(){
 
-    const details =
-      await response
-        .text()
-        .catch(
-          function() {
+        map.invalidateSize(
+          true
+        );
 
-            return "";
+      },
+      450
+    );
+
+  }
+
+  function escapeHtml(
+    value
+  ){
+
+    return String(
+      value ?? ""
+    )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+  function escapeAttribute(
+    value
+  ){
+
+    return escapeHtml(
+      value
+    );
+
+  }
+
+  languageSelect.addEventListener(
+    "change",
+    function(){
+
+      currentLanguage =
+        languageSelect.value;
+
+      saveLanguage();
+
+      translatePage();
+
+    }
+  );
+
+  searchButton.addEventListener(
+    "click",
+    searchTypedLocation
+  );
+
+  locationInput.addEventListener(
+    "keydown",
+    function(
+      event
+    ){
+
+      if(
+        event.key ===
+        "Enter"
+      ){
+
+        searchTypedLocation();
+
+      }
+
+    }
+  );
+
+  nearMeButton.addEventListener(
+    "click",
+    useCurrentLocation
+  );
+
+  document
+    .querySelectorAll(
+      ".filter-btn"
+    )
+    .forEach(
+      function(
+        button
+      ){
+
+        button.addEventListener(
+          "click",
+          async function(){
+
+            currentCategory =
+              button.dataset.category;
+
+            document
+              .querySelectorAll(
+                ".filter-btn"
+              )
+              .forEach(
+                function(
+                  item
+                ){
+
+                  item.classList.remove(
+                    "active"
+                  );
+
+                }
+              );
+
+            button.classList.add(
+              "active"
+            );
+
+            if(
+              currentLocation
+            ){
+
+              await loadPlaces(
+                currentLocation.latitude,
+                currentLocation.longitude
+              );
+
+            }
 
           }
         );
 
-    console.error(
-      "PETS & DOGUE Google photo error:",
-      {
-        status:
-          response.status,
-
-        details:
-          details.slice(
-            0,
-            500
-          )
       }
     );
 
-    return sendJson(
-      res,
-      404,
-      {
+  window.addEventListener(
+    "resize",
+    function(){
 
-        ok:
-          false,
-
-        error:
-          "Place photo is unavailable."
-
-      }
-    );
-
-  }
-
-  const contentType =
-    cleanString(
-      response.headers.get(
-        "content-type"
-      ) ||
-      "image/jpeg",
-      100
-    );
-
-  if (
-    !contentType.startsWith(
-      "image/"
-    )
-  ) {
-
-    console.error(
-      "PETS & DOGUE unexpected Google photo content type:",
-      contentType
-    );
-
-    return sendJson(
-      res,
-      404,
-      {
-
-        ok:
-          false,
-
-        error:
-          "Place photo is unavailable."
-
-      }
-    );
-
-  }
-
-  const arrayBuffer =
-    await response.arrayBuffer();
-
-  const buffer =
-    Buffer.from(
-      arrayBuffer
-    );
-
-  if (
-    !buffer.length
-  ) {
-
-    return sendJson(
-      res,
-      404,
-      {
-
-        ok:
-          false,
-
-        error:
-          "Place photo is empty."
-
-      }
-    );
-
-  }
-
-  res.statusCode =
-    200;
-
-  res.setHeader(
-    "Content-Type",
-    contentType
-  );
-
-  res.setHeader(
-    "Content-Length",
-    String(
-      buffer.length
-    )
-  );
-
-  res.setHeader(
-    "Cache-Control",
-    "public, max-age=3600, s-maxage=3600"
-  );
-
-  res.setHeader(
-    "X-Content-Type-Options",
-    "nosniff"
-  );
-
-  return res.end(
-    buffer
-  );
-
-}
-
-
-/* =========================================================
-   HANDLER
-========================================================= */
-
-module.exports =
-async function handler(
-  req,
-  res
-) {
-
-  setCors(
-    req,
-    res
-  );
-
-
-  /* =======================================================
-     OPTIONS
-  ======================================================= */
-
-  if (
-    req.method ===
-    "OPTIONS"
-  ) {
-
-    res.statusCode =
-      204;
-
-    return res.end();
-
-  }
-
-
-  const apiKey =
-    cleanString(
-      process.env.GOOGLE_PLACES_API_KEY ||
-      "",
-      600
-    );
-
-  if (
-    !apiKey
-  ) {
-
-    console.error(
-      "PETS & DOGUE: GOOGLE_PLACES_API_KEY is missing."
-    );
-
-    return sendJson(
-      res,
-      500,
-      {
-
-        ok:
-          false,
-
-        error:
-          "Google Places is not configured."
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     GET
-     PHOTO OR SERVICE STATUS
-  ======================================================= */
-
-  if (
-    req.method ===
-    "GET"
-  ) {
-
-    if (
-      req.query?.photo
-    ) {
-
-      return handlePhotoRequest(
-        req,
-        res,
-        apiKey
-      );
+      scheduleMapResize();
 
     }
+  );
 
-    return sendJson(
-      res,
-      200,
-      {
+  window.addEventListener(
+    "orientationchange",
+    function(){
 
-        ok:
-          true,
-
-        service:
-          "PETS & DOGUE verified pet-friendly places",
-
-        searchMethod:
-          "POST",
-
-        photoMethod:
-          "GET",
-
-        verifiedPetFriendlyOnly:
-          true
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     POST ONLY FOR SEARCH
-  ======================================================= */
-
-  if (
-    req.method !==
-    "POST"
-  ) {
-
-    res.setHeader(
-      "Allow",
-      "GET, POST, OPTIONS"
-    );
-
-    return sendJson(
-      res,
-      405,
-      {
-
-        ok:
-          false,
-
-        error:
-          "Method not allowed."
-
-      }
-    );
-
-  }
-
-
-  let body =
-    {};
-
-  try {
-
-    body =
-      await readBody(
-        req
-      );
-
-  } catch {
-
-    return sendJson(
-      res,
-      400,
-      {
-
-        ok:
-          false,
-
-        error:
-          "Invalid request body."
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     LOCATION
-  ======================================================= */
-
-  const latitude =
-    finiteNumber(
-      body.latitude ??
-      body.lat
-    );
-
-  const longitude =
-    finiteNumber(
-      body.longitude ??
-      body.lng
-    );
-
-  if (
-    latitude === null ||
-    latitude < -90 ||
-    latitude > 90
-  ) {
-
-    return sendJson(
-      res,
-      400,
-      {
-
-        ok:
-          false,
-
-        error:
-          "A valid latitude is required."
-
-      }
-    );
-
-  }
-
-  if (
-    longitude === null ||
-    longitude < -180 ||
-    longitude > 180
-  ) {
-
-    return sendJson(
-      res,
-      400,
-      {
-
-        ok:
-          false,
-
-        error:
-          "A valid longitude is required."
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     RADIUS
-  ======================================================= */
-
-  const requestedRadius =
-    finiteNumber(
-      body.radius
-    );
-
-  const radius =
-    Math.round(
-      clamp(
-        requestedRadius ||
-        DEFAULT_RADIUS,
-        100,
-        MAX_RADIUS
-      )
-    );
-
-
-  /* =======================================================
-     RESULT LIMIT
-  ======================================================= */
-
-  const requestedMaxResults =
-    finiteNumber(
-      body.maxResults
-    );
-
-  const maxResults =
-    Math.round(
-      clamp(
-        requestedMaxResults ||
-        DEFAULT_RESULTS,
-        1,
-        MAX_RESULTS
-      )
-    );
-
-
-  /* =======================================================
-     CATEGORY
-  ======================================================= */
-
-  const category =
-    normalizeCategory(
-      body.category
-    );
-
-
-  /* =======================================================
-     GOOGLE PLACES
-  ======================================================= */
-
-  try {
-
-    const google =
-      await fetchGooglePlaces({
-        apiKey,
-        latitude,
-        longitude,
-        radius,
-        category,
-        maxResults
-      });
-
-    return sendJson(
-      res,
-      200,
-      {
-
-        ok:
-          true,
-
-        source:
-          "google_places",
-
-        verifiedPetFriendlyOnly:
-          true,
-
-        category,
-
-        location: {
-
-          latitude,
-
-          longitude,
-
-          radius
-
-        },
-
-        counts: {
-
-          googleReturned:
-            google.rawCount,
-
-          petFriendlyVerified:
-            google.verifiedCount
-
-        },
-
-        count:
-          google.places.length,
-
-        places:
-          google.places
-
-      }
-    );
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      "PETS & DOGUE pet-friendly places error:",
-      error
-    );
-
-    const upstreamStatus =
-      Number(
-        error?.status
-      );
-
-    let status =
-      500;
-
-    if (
-      upstreamStatus ===
-      400
-    ) {
-
-      status =
-        400;
+      scheduleMapResize();
 
     }
+  );
 
-    if (
-      upstreamStatus ===
-      429
-    ) {
+  translatePage();
 
-      status =
-        429;
+  scheduleMapResize();
 
-    }
+})();
+</script>
 
-    if (
-      upstreamStatus ===
-      401 ||
-      upstreamStatus ===
-      403
-    ) {
-
-      status =
-        502;
-
-    }
-
-    return sendJson(
-      res,
-      status,
-      {
-
-        ok:
-          false,
-
-        error:
-          error?.message ||
-          "Unable to load verified pet-friendly places."
-
-      }
-    );
-
-  }
-
-};
+</body>
+</html>
