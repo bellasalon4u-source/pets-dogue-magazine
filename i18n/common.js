@@ -6,7 +6,8 @@ ru:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — междунаро�
 fr:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — le magazine international de luxe consacré aux animaux"},account:{signIn:"SE CONNECTER",joinClub:"REJOINDRE LE CLUB",edition:"LE MAGAZINE INTERNATIONAL DE LUXE CONSACRÉ AUX ANIMAUX"},navigation:{magazine:"MAGAZINE",articles:"ARTICLES",photos:"PHOTOS",coverStars:"STARS DE COUVERTURE",fashion:"MODE",wellness:"BIEN-ÊTRE",travel:"VOYAGES",places:"LIEUX",rescue:"SAUVETAGE",contests:"CONCOURS",community:"COMMUNAUTÉ",marketplace:"MARKETPLACE",partners:"PARTENAIRES"},search:{title:"Rechercher dans PETS & DOGUE",placeholder:"Rechercher des articles, lieux, animaux...",articles:"Articles",photos:"Photos",coverStars:"Stars de couverture",places:"Lieux",travel:"Voyages",rescue:"Sauvetage",marketplace:"Marketplace"},footer:{subtitle:"Le magazine international de luxe consacré aux animaux",home:"Accueil",latestIssue:"Dernier numéro",articles:"Articles",photos:"Photos",coverStars:"Stars de couverture",places:"Lieux",marketplace:"Marketplace",club:"Club",partners:"Partenaires",advertise:"Publicité",contact:"Contact",privacy:"Confidentialité",terms:"Conditions",admin:"Admin"},system:{stop:"Arrêter",subscribe:"S’ABONNER",invalidEmail:"Veuillez saisir une adresse e-mail valide.",newsletterSuccess:"Bienvenue dans la communauté PETS & DOGUE.",narrationUnsupported:"La lecture audio n’est pas prise en charge par ce navigateur."},menu:{contents:"Sommaire",signIn:"Se connecter",joinClub:"Rejoindre le club",home:"Accueil",homeDescription:"Retourner à la page d’accueil de PETS & DOGUE.",latestIssue:"Dernier numéro",latestIssueDescription:"Ouvrez le nouveau magazine numérique PETS & DOGUE.",articles:"Articles",articlesDescription:"Lisez et écoutez nos récits éditoriaux.",photos:"Photos",photosDescription:"Portraits, galeries et histoires visuelles.",coverStar:"Star de couverture",coverStarDescription:"Inscrivez votre animal pour la prochaine couverture.",fashion:"Mode animale",fashionDescription:"Style de luxe, accessoires et looks éditoriaux.",travel:"Voyages",travelDescription:"Hôtels, plages et voyages pet-friendly.",places:"Lieux pet-friendly",placesDescription:"Trouvez des lieux, cartes, itinéraires et contacts.",rescue:"Animaux à aider",rescueDescription:"Sauvetage, adoption et soutien communautaire.",contests:"Concours",contestsDescription:"Compétitions, votes et prix.",community:"Communauté locale",communityDescription:"Recommandations locales, publications et entraide.",marketplace:"Marketplace",marketplaceDescription:"Annonces, services et accessoires de la communauté."}},
 de:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — das internationale Luxusmagazin für Tiere"},account:{signIn:"ANMELDEN",joinClub:"CLUB BEITRETEN",edition:"DAS INTERNATIONALE LUXUSMAGAZIN FÜR TIERE"},navigation:{magazine:"MAGAZIN",articles:"ARTIKEL",photos:"FOTOS",coverStars:"COVERSTARS",fashion:"MODE",wellness:"WOHLBEFINDEN",travel:"REISEN",places:"ORTE",rescue:"RETTUNG",contests:"WETTBEWERBE",community:"COMMUNITY",marketplace:"MARKTPLATZ",partners:"PARTNER"},search:{title:"PETS & DOGUE durchsuchen",placeholder:"Artikel, Orte, Tiere suchen...",articles:"Artikel",photos:"Fotos",coverStars:"Coverstars",places:"Orte",travel:"Reisen",rescue:"Rettung",marketplace:"Marktplatz"},footer:{subtitle:"Das internationale Luxusmagazin für Tiere",home:"Startseite",latestIssue:"Neueste Ausgabe",articles:"Artikel",photos:"Fotos",coverStars:"Coverstars",places:"Orte",marketplace:"Marktplatz",club:"Club",partners:"Partner",advertise:"Werben",contact:"Kontakt",privacy:"Datenschutz",terms:"Bedingungen",admin:"Admin"},system:{stop:"Stopp",subscribe:"ABONNIEREN",invalidEmail:"Bitte geben Sie eine gültige E-Mail-Adresse ein.",newsletterSuccess:"Willkommen in der PETS & DOGUE Community.",narrationUnsupported:"Die Artikelwiedergabe wird von diesem Browser nicht unterstützt."},menu:{contents:"Inhalt",signIn:"Anmelden",joinClub:"Club beitreten",home:"Startseite",homeDescription:"Zur PETS & DOGUE Startseite zurückkehren.",latestIssue:"Neueste Ausgabe",latestIssueDescription:"Öffnen Sie die neueste digitale Ausgabe von PETS & DOGUE.",articles:"Artikel",articlesDescription:"Lesen und hören Sie redaktionelle Geschichten.",photos:"Fotos",photosDescription:"Porträts, Galerien und visuelle Geschichten.",coverStar:"Coverstar",coverStarDescription:"Melden Sie Ihr Tier für das nächste Cover an.",fashion:"Tiermode",fashionDescription:"Luxus-Stil, Accessoires und redaktionelle Looks.",travel:"Reisen",travelDescription:"Hotels, Strände und tierfreundliche Reisen.",places:"Tierfreundliche Orte",placesDescription:"Finden Sie Orte, Karten, Routen und Kontakte.",rescue:"Tiere in Not",rescueDescription:"Rettung, Adoption und Unterstützung der Gemeinschaft.",contests:"Wettbewerbe",contestsDescription:"Wettbewerbe, Abstimmungen und Preise.",community:"Lokale Community",communityDescription:"Lokale Empfehlungen, Beiträge und Unterstützung.",marketplace:"Marktplatz",marketplaceDescription:"Anzeigen, Dienstleistungen und Accessoires der Community."}},
 es:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — la revista internacional de lujo sobre animales"},account:{signIn:"INICIAR SESIÓN",joinClub:"UNIRSE AL CLUB",edition:"LA REVISTA INTERNACIONAL DE LUJO SOBRE ANIMALES"},navigation:{magazine:"REVISTA",articles:"ARTÍCULOS",photos:"FOTOS",coverStars:"ESTRELLAS DE PORTADA",fashion:"MODA",wellness:"BIENESTAR",travel:"VIAJES",places:"LUGARES",rescue:"RESCATE",contests:"CONCURSOS",community:"COMUNIDAD",marketplace:"MARKETPLACE",partners:"SOCIOS"},search:{title:"Buscar en PETS & DOGUE",placeholder:"Buscar artículos, lugares, mascotas...",articles:"Artículos",photos:"Fotos",coverStars:"Estrellas de portada",places:"Lugares",travel:"Viajes",rescue:"Rescate",marketplace:"Marketplace"},footer:{subtitle:"La revista internacional de lujo sobre animales",home:"Inicio",latestIssue:"Último número",articles:"Artículos",photos:"Fotos",coverStars:"Estrellas de portada",places:"Lugares",marketplace:"Marketplace",club:"Club",partners:"Socios",advertise:"Publicidad",contact:"Contacto",privacy:"Privacidad",terms:"Términos",admin:"Admin"},system:{stop:"Detener",subscribe:"SUSCRIBIRSE",invalidEmail:"Introduce una dirección de correo válida.",newsletterSuccess:"Bienvenido a la comunidad PETS & DOGUE.",narrationUnsupported:"Este navegador no admite la narración de artículos."},menu:{contents:"Contenido",signIn:"Iniciar sesión",joinClub:"Unirse al club",home:"Inicio",homeDescription:"Volver a la página principal de PETS & DOGUE.",latestIssue:"Último número",latestIssueDescription:"Abre la nueva revista digital de PETS & DOGUE.",articles:"Artículos",articlesDescription:"Lee y escucha historias editoriales.",photos:"Fotos",photosDescription:"Retratos, galerías e historias visuales.",coverStar:"Estrella de portada",coverStarDescription:"Inscribe a tu mascota para la próxima portada.",fashion:"Moda para mascotas",fashionDescription:"Estilo de lujo, accesorios y looks editoriales.",travel:"Viajes",travelDescription:"Hoteles, playas y viajes pet-friendly.",places:"Lugares pet-friendly",placesDescription:"Busca lugares, mapas, rutas y contactos.",rescue:"Animales que necesitan ayuda",rescueDescription:"Rescate, adopción y apoyo comunitario.",contests:"Concursos",contestsDescription:"Competiciones, votaciones y premios.",community:"Comunidad local",communityDescription:"Recomendaciones locales, publicaciones y apoyo.",marketplace:"Marketplace",marketplaceDescription:"Anuncios, servicios y accesorios de la comunidad."}},
-it:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — la rivista internazionale di lusso dedicata agli animali"},account:{signIn:"ACCEDI",joinClub:"UNISCITI AL CLUB",edition:"LA RIVISTA INTERNAZIONALE DI LUSSO DEDICATA AGLI ANIMALI"},navigation:{magazine:"MAGAZINE",articles:"ARTICOLI",photos:"FOTO",coverStars:"STAR DI COPERTINA",fashion:"MODA",wellness:"BENESSERE",travel:"VIAGGI",places:"LUOGHI",rescue:"SALVATAGGIO",contests:"CONCORSI",community:"COMUNITÀ",marketplace:"MARKETPLACE",partners:"PARTNER"},search:{title:"Cerca in PETS & DOGUE",placeholder:"Cerca articoli, luoghi, animali...",articles:"Articoli",photos:"Foto",coverStars:"Star di copertina",places:"Luoghi",travel:"Viaggi",rescue:"Salvataggio",marketplace:"Marketplace"},footer:{subtitle:"La rivista internazionale di lusso dedicata agli animali",home:"Home",latestIssue:"Ultimo numero",articles:"Articoli",photos:"Foto",coverStars:"Star di copertina",places:"Luoghi",marketplace:"Marketplace",club:"Club",partners:"Partner",advertise:"Pubblicità",contact:"Contatti",privacy:"Privacy",terms:"Termini",admin:"Admin"},system:{stop:"Stop",subscribe:"ISCRIVITI",invalidEmail:"Inserisci un indirizzo e-mail valido.",newsletterSuccess:"Benvenuto nella community PETS & DOGUE.",narrationUnsupported:"La lettura degli articoli non è supportata da questo browser."},menu:{contents:"Contenuti",signIn:"Accedi",joinClub:"Unisciti al club",home:"Home",homeDescription:"Torna alla pagina principale di PETS & DOGUE.",latestIssue:"Ultimo numero",latestIssueDescription:"Apri il nuovo magazine digitale PETS & DOGUE.",articles:"Articoli",articlesDescription:"Leggi e ascolta storie editoriali.",photos:"Foto",photosDescription:"Ritratti, gallerie e storie visive.",coverStar:"Star di copertina",coverStarDescription:"Iscrivi il tuo animale per la prossima copertina.",fashion:"Moda per animali",fashionDescription:"Stile di lusso, accessori e look editoriali.",travel:"Viaggi",travelDescription:"Hotel, spiagge e viaggi pet-friendly.",places:"Luoghi pet-friendly",placesDescription:"Cerca luoghi, mappe, percorsi e contatti.",rescue:"Animali da aiutare",rescueDescription:"Salvataggio, adozione e supporto della comunità.",contests:"Concorsi",contestsDescription:"Competizioni, votazioni e premi.",community:"Comunità locale",communityDescription:"Consigli locali, post e supporto.",marketplace:"Marketplace",marketplaceDescription:"Annunci, servizi e accessori della comunità."}} ,pt:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — a revista internacional de luxo sobre animais"},account:{signIn:"ENTRAR",joinClub:"ADERIR AO CLUBE",edition:"A REVISTA INTERNACIONAL DE LUXO SOBRE ANIMAIS"},navigation:{magazine:"REVISTA",articles:"ARTIGOS",photos:"FOTOS",coverStars:"ESTRELAS DE CAPA",fashion:"MODA",wellness:"BEM-ESTAR",travel:"VIAGENS",places:"LOCAIS",rescue:"RESGATE",contests:"CONCURSOS",community:"COMUNIDADE",marketplace:"MARKETPLACE",partners:"PARCEIROS"},search:{title:"Pesquisar em PETS & DOGUE",placeholder:"Pesquisar artigos, locais, animais...",articles:"Artigos",photos:"Fotografias",coverStars:"Estrelas de capa",places:"Locais",travel:"Viagens",rescue:"Resgate",marketplace:"Marketplace"},footer:{subtitle:"A revista internacional de luxo sobre animais",home:"Início",latestIssue:"Última edição",articles:"Artigos",photos:"Fotografias",coverStars:"Estrelas de capa",places:"Locais",marketplace:"Marketplace",club:"Clube",partners:"Parceiros",advertise:"Publicidade",contact:"Contacto",privacy:"Privacidade",terms:"Termos",admin:"Admin"},system:{stop:"Parar",subscribe:"SUBSCREVER",invalidEmail:"Introduza um endereço de e-mail válido.",newsletterSuccess:"Bem-vindo à comunidade PETS & DOGUE.",narrationUnsupported:"A narração de artigos não é suportada por este navegador."},menu:{contents:"Conteúdos",signIn:"Entrar",joinClub:"Aderir ao clube",home:"Início",homeDescription:"Voltar à página inicial da PETS & DOGUE.",latestIssue:"Última edição",latestIssueDescription:"Abra a nova revista digital PETS & DOGUE.",articles:"Artigos",articlesDescription:"Leia e ouça histórias editoriais.",photos:"Fotografias",photosDescription:"Retratos, galerias e histórias visuais.",coverStar:"Estrela de capa",coverStarDescription:"Inscreva o seu animal para a próxima capa.",fashion:"Moda animal",fashionDescription:"Estilo de luxo, acessórios e looks editoriais.",travel:"Viagens",travelDescription:"Hotéis, praias e viagens pet-friendly.",places:"Locais pet-friendly",placesDescription:"Pesquise locais, mapas, rotas e contactos.",rescue:"Animais que precisam de ajuda",rescueDescription:"Resgate, adoção e apoio comunitário.",contests:"Concursos",contestsDescription:"Competições, votações e prémios.",community:"Comunidade local",communityDescription:"Recomendações locais, publicações e apoio.",marketplace:"Marketplace",marketplaceDescription:"Anúncios, serviços e acessórios da comunidade."}},
+it:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — la rivista internazionale di lusso dedicata agli animali"},account:{signIn:"ACCEDI",joinClub:"UNISCITI AL CLUB",edition:"LA RIVISTA INTERNAZIONALE DI LUSSO DEDICATA AGLI ANIMALI"},navigation:{magazine:"MAGAZINE",articles:"ARTICOLI",photos:"FOTO",coverStars:"STAR DI COPERTINA",fashion:"MODA",wellness:"BENESSERE",travel:"VIAGGI",places:"LUOGHI",rescue:"SALVATAGGIO",contests:"CONCORSI",community:"COMUNITÀ",marketplace:"MARKETPLACE",partners:"PARTNER"},search:{title:"Cerca in PETS & DOGUE",placeholder:"Cerca articoli, luoghi, animali...",articles:"Articoli",photos:"Foto",coverStars:"Star di copertina",places:"Luoghi",travel:"Viaggi",rescue:"Salvataggio",marketplace:"Marketplace"},footer:{subtitle:"La rivista internazionale di lusso dedicata agli animali",home:"Home",latestIssue:"Ultimo numero",articles:"Articoli",photos:"Foto",coverStars:"Star di copertina",places:"Luoghi",marketplace:"Marketplace",club:"Club",partners:"Partner",advertise:"Pubblicità",contact:"Contatti",privacy:"Privacy",terms:"Termini",admin:"Admin"},system:{stop:"Stop",subscribe:"ISCRIVITI",invalidEmail:"Inserisci un indirizzo e-mail valido.",newsletterSuccess:"Benvenuto nella community PETS & DOGUE.",narrationUnsupported:"La lettura degli articoli non è supportata da questo browser."},menu:{contents:"Contenuti",signIn:"Accedi",joinClub:"Unisciti al club",home:"Home",homeDescription:"Torna alla pagina principale di PETS & DOGUE.",latestIssue:"Ultimo numero",latestIssueDescription:"Apri il nuovo magazine digitale PETS & DOGUE.",articles:"Articoli",articlesDescription:"Leggi e ascolta storie editoriali.",photos:"Foto",photosDescription:"Ritratti, gallerie e storie visive.",coverStar:"Star di copertina",coverStarDescription:"Iscrivi il tuo animale per la prossima copertina.",fashion:"Moda per animali",fashionDescription:"Stile di lusso, accessori e look editoriali.",travel:"Viaggi",travelDescription:"Hotel, spiagge e viaggi pet-friendly.",places:"Luoghi pet-friendly",placesDescription:"Cerca luoghi, mappe, percorsi e contatti.",rescue:"Animali da aiutare",rescueDescription:"Salvataggio, adozione e supporto della comunità.",contests:"Concorsi",contestsDescription:"Competizioni, votazioni e premi.",community:"Comunità locale",communityDescription:"Consigli locali, post e supporto.",marketplace:"Marketplace",marketplaceDescription:"Annunci, servizi e accessori della comunità."}},
+pt:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — a revista internacional de luxo sobre animais"},account:{signIn:"ENTRAR",joinClub:"ADERIR AO CLUBE",edition:"A REVISTA INTERNACIONAL DE LUXO SOBRE ANIMAIS"},navigation:{magazine:"REVISTA",articles:"ARTIGOS",photos:"FOTOS",coverStars:"ESTRELAS DE CAPA",fashion:"MODA",wellness:"BEM-ESTAR",travel:"VIAGENS",places:"LOCAIS",rescue:"RESGATE",contests:"CONCURSOS",community:"COMUNIDADE",marketplace:"MARKETPLACE",partners:"PARCEIROS"},search:{title:"Pesquisar em PETS & DOGUE",placeholder:"Pesquisar artigos, locais, animais...",articles:"Artigos",photos:"Fotografias",coverStars:"Estrelas de capa",places:"Locais",travel:"Viagens",rescue:"Resgate",marketplace:"Marketplace"},footer:{subtitle:"A revista internacional de luxo sobre animais",home:"Início",latestIssue:"Última edição",articles:"Artigos",photos:"Fotografias",coverStars:"Estrelas de capa",places:"Locais",marketplace:"Marketplace",club:"Clube",partners:"Parceiros",advertise:"Publicidade",contact:"Contacto",privacy:"Privacidade",terms:"Termos",admin:"Admin"},system:{stop:"Parar",subscribe:"SUBSCREVER",invalidEmail:"Introduza um endereço de e-mail válido.",newsletterSuccess:"Bem-vindo à comunidade PETS & DOGUE.",narrationUnsupported:"A narração de artigos não é suportada por este navegador."},menu:{contents:"Conteúdos",signIn:"Entrar",joinClub:"Aderir ao clube",home:"Início",homeDescription:"Voltar à página inicial da PETS & DOGUE.",latestIssue:"Última edição",latestIssueDescription:"Abra a nova revista digital PETS & DOGUE.",articles:"Artigos",articlesDescription:"Leia e ouça histórias editoriais.",photos:"Fotografias",photosDescription:"Retratos, galerias e histórias visuais.",coverStar:"Estrela de capa",coverStarDescription:"Inscreva o seu animal para a próxima capa.",fashion:"Moda animal",fashionDescription:"Estilo de luxo, acessórios e looks editoriais.",travel:"Viagens",travelDescription:"Hotéis, praias e viagens pet-friendly.",places:"Locais pet-friendly",placesDescription:"Pesquise locais, mapas, rotas e contactos.",rescue:"Animais que precisam de ajuda",rescueDescription:"Resgate, adoção e apoio comunitário.",contests:"Concursos",contestsDescription:"Competições, votações e prémios.",community:"Comunidade local",communityDescription:"Recomendações locais, publicações e apoio.",marketplace:"Marketplace",marketplaceDescription:"Anúncios, serviços e acessórios da comunidade."}},
 nl:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — het internationale luxe dierenmagazine"},account:{signIn:"INLOGGEN",joinClub:"WORD LID",edition:"HET INTERNATIONALE LUXE DIERENMAGAZINE"},navigation:{magazine:"MAGAZINE",articles:"ARTIKELEN",photos:"FOTO’S",coverStars:"COVERSTERREN",fashion:"MODE",wellness:"WELZIJN",travel:"REIZEN",places:"PLEKKEN",rescue:"REDDING",contests:"WEDSTRIJDEN",community:"COMMUNITY",marketplace:"MARKTPLAATS",partners:"PARTNERS"},search:{title:"Zoeken in PETS & DOGUE",placeholder:"Zoek artikelen, plekken, dieren...",articles:"Artikelen",photos:"Foto’s",coverStars:"Coversterren",places:"Plekken",travel:"Reizen",rescue:"Redding",marketplace:"Marktplaats"},footer:{subtitle:"Het internationale luxe dierenmagazine",home:"Home",latestIssue:"Nieuwste editie",articles:"Artikelen",photos:"Foto’s",coverStars:"Coversterren",places:"Plekken",marketplace:"Marktplaats",club:"Club",partners:"Partners",advertise:"Adverteren",contact:"Contact",privacy:"Privacy",terms:"Voorwaarden",admin:"Admin"},system:{stop:"Stop",subscribe:"ABONNEREN",invalidEmail:"Voer een geldig e-mailadres in.",newsletterSuccess:"Welkom bij de PETS & DOGUE community.",narrationUnsupported:"Artikelvoorlezing wordt niet ondersteund door deze browser."},menu:{contents:"Inhoud",signIn:"Inloggen",joinClub:"Word lid",home:"Home",homeDescription:"Ga terug naar de PETS & DOGUE-homepage.",latestIssue:"Nieuwste editie",latestIssueDescription:"Open het nieuwste digitale magazine van PETS & DOGUE.",articles:"Artikelen",articlesDescription:"Lees en beluister redactionele verhalen.",photos:"Foto’s",photosDescription:"Portretten, galerijen en visuele verhalen.",coverStar:"Coverster",coverStarDescription:"Schrijf je huisdier in voor de volgende cover.",fashion:"Dierenmode",fashionDescription:"Luxe stijl, accessoires en redactionele looks.",travel:"Reizen",travelDescription:"Hotels, stranden en huisdiervriendelijke reizen.",places:"Huisdiervriendelijke plekken",placesDescription:"Zoek echte plekken, kaarten, routes en contacten.",rescue:"Dieren in nood",rescueDescription:"Redding, adoptie en steun vanuit de community.",contests:"Wedstrijden",contestsDescription:"Competities, stemmen en prijzen.",community:"Lokale community",communityDescription:"Lokale aanbevelingen, berichten en steun.",marketplace:"Marktplaats",marketplaceDescription:"Community-aanbiedingen, diensten en accessoires."}},
 pl:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — międzynarodowy luksusowy magazyn o zwierzętach"},account:{signIn:"ZALOGUJ SIĘ",joinClub:"DOŁĄCZ DO KLUBU",edition:"MIĘDZYNARODOWY LUKSUSOWY MAGAZYN O ZWIERZĘTACH"},navigation:{magazine:"MAGAZYN",articles:"ARTYKUŁY",photos:"ZDJĘCIA",coverStars:"GWIAZDY OKŁADKI",fashion:"MODA",wellness:"ZDROWIE",travel:"PODRÓŻE",places:"MIEJSCA",rescue:"POMOC",contests:"KONKURSY",community:"SPOŁECZNOŚĆ",marketplace:"MARKETPLACE",partners:"PARTNERZY"},search:{title:"Szukaj w PETS & DOGUE",placeholder:"Szukaj artykułów, miejsc, zwierząt...",articles:"Artykuły",photos:"Zdjęcia",coverStars:"Gwiazdy okładki",places:"Miejsca",travel:"Podróże",rescue:"Pomoc",marketplace:"Marketplace"},footer:{subtitle:"Międzynarodowy luksusowy magazyn o zwierzętach",home:"Strona główna",latestIssue:"Najnowszy numer",articles:"Artykuły",photos:"Zdjęcia",coverStars:"Gwiazdy okładki",places:"Miejsca",marketplace:"Marketplace",club:"Klub",partners:"Partnerzy",advertise:"Reklama",contact:"Kontakt",privacy:"Prywatność",terms:"Warunki",admin:"Admin"},system:{stop:"Stop",subscribe:"SUBSKRYBUJ",invalidEmail:"Wprowadź prawidłowy adres e-mail.",newsletterSuccess:"Witamy w społeczności PETS & DOGUE.",narrationUnsupported:"Ta przeglądarka nie obsługuje czytania artykułów."},menu:{contents:"Spis treści",signIn:"Zaloguj się",joinClub:"Dołącz do klubu",home:"Strona główna",homeDescription:"Wróć na stronę główną PETS & DOGUE.",latestIssue:"Najnowszy numer",latestIssueDescription:"Otwórz najnowszy cyfrowy magazyn PETS & DOGUE.",articles:"Artykuły",articlesDescription:"Czytaj i słuchaj materiałów redakcyjnych.",photos:"Zdjęcia",photosDescription:"Portrety, galerie i historie wizualne.",coverStar:"Gwiazda okładki",coverStarDescription:"Zgłoś swojego pupila do następnej okładki.",fashion:"Moda dla zwierząt",fashionDescription:"Luksusowy styl, dodatki i sesje redakcyjne.",travel:"Podróże",travelDescription:"Hotele, plaże i podróże przyjazne zwierzętom.",places:"Miejsca przyjazne zwierzętom",placesDescription:"Znajdź prawdziwe miejsca, mapy, trasy i kontakty.",rescue:"Zwierzęta w potrzebie",rescueDescription:"Ratowanie, adopcja i wsparcie społeczności.",contests:"Konkursy",contestsDescription:"Konkursy, głosowania i nagrody.",community:"Lokalna społeczność",communityDescription:"Lokalne rekomendacje, posty i wsparcie.",marketplace:"Marketplace",marketplaceDescription:"Ogłoszenia, usługi i akcesoria społeczności."}},
 cs:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — mezinárodní luxusní magazín o zvířatech"},account:{signIn:"PŘIHLÁSIT SE",joinClub:"VSTOUPIT DO KLUBU",edition:"MEZINÁRODNÍ LUXUSNÍ MAGAZÍN O ZVÍŘATECH"},navigation:{magazine:"MAGAZÍN",articles:"ČLÁNKY",photos:"FOTOGRAFIE",coverStars:"HVĚZDY OBÁLKY",fashion:"MÓDA",wellness:"ZDRAVÍ",travel:"CESTOVÁNÍ",places:"MÍSTA",rescue:"ZÁCHRANA",contests:"SOUTĚŽE",community:"KOMUNITA",marketplace:"MARKETPLACE",partners:"PARTNEŘI"},search:{title:"Hledat v PETS & DOGUE",placeholder:"Hledat články, místa, mazlíčky...",articles:"Články",photos:"Fotografie",coverStars:"Hvězdy obálky",places:"Místa",travel:"Cestování",rescue:"Záchrana",marketplace:"Marketplace"},footer:{subtitle:"Mezinárodní luxusní magazín o zvířatech",home:"Domů",latestIssue:"Nejnovější vydání",articles:"Články",photos:"Fotografie",coverStars:"Hvězdy obálky",places:"Místa",marketplace:"Marketplace",club:"Klub",partners:"Partneři",advertise:"Inzerce",contact:"Kontakt",privacy:"Soukromí",terms:"Podmínky",admin:"Admin"},system:{stop:"Stop",subscribe:"ODEBÍRAT",invalidEmail:"Zadejte platnou e-mailovou adresu.",newsletterSuccess:"Vítejte v komunitě PETS & DOGUE.",narrationUnsupported:"Tento prohlížeč nepodporuje předčítání článků."},menu:{contents:"Obsah",signIn:"Přihlásit se",joinClub:"Vstoupit do klubu",home:"Domů",homeDescription:"Zpět na domovskou stránku PETS & DOGUE.",latestIssue:"Nejnovější vydání",latestIssueDescription:"Otevřete nejnovější digitální magazín PETS & DOGUE.",articles:"Články",articlesDescription:"Čtěte a poslouchejte redakční příběhy.",photos:"Fotografie",photosDescription:"Portréty, galerie a vizuální příběhy.",coverStar:"Hvězda obálky",coverStarDescription:"Přihlaste svého mazlíčka do soutěže o další obálku.",fashion:"Móda pro mazlíčky",fashionDescription:"Luxusní styl, doplňky a redakční vzhledy.",travel:"Cestování",travelDescription:"Hotely, pláže a cesty přátelské ke zvířatům.",places:"Místa přátelská ke zvířatům",placesDescription:"Hledejte skutečná místa, mapy, trasy a kontakty.",rescue:"Zvířata v nouzi",rescueDescription:"Záchrana, adopce a podpora komunity.",contests:"Soutěže",contestsDescription:"Soutěže, hlasování a ceny.",community:"Místní komunita",communityDescription:"Místní doporučení, příspěvky a podpora.",marketplace:"Marketplace",marketplaceDescription:"Inzeráty, služby a doplňky komunity."}},
@@ -17,12 +18,23 @@ bg:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — междунаро�
 el:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — το διεθνές πολυτελές περιοδικό για ζώα"},account:{signIn:"ΣΥΝΔΕΣΗ",joinClub:"ΓΙΝΕ ΜΕΛΟΣ",edition:"ΤΟ ΔΙΕΘΝΕΣ ΠΟΛΥΤΕΛΕΣ ΠΕΡΙΟΔΙΚΟ ΓΙΑ ΖΩΑ"},navigation:{magazine:"ΠΕΡΙΟΔΙΚΟ",articles:"ΑΡΘΡΑ",photos:"ΦΩΤΟΓΡΑΦΙΕΣ",coverStars:"ΑΣΤΕΡΙΑ ΕΞΩΦΥΛΛΟΥ",fashion:"ΜΟΔΑ",wellness:"ΕΥΕΞΙΑ",travel:"ΤΑΞΙΔΙΑ",places:"ΜΕΡΗ",rescue:"ΔΙΑΣΩΣΗ",contests:"ΔΙΑΓΩΝΙΣΜΟΙ",community:"ΚΟΙΝΟΤΗΤΑ",marketplace:"MARKETPLACE",partners:"ΣΥΝΕΡΓΑΤΕΣ"},search:{title:"Αναζήτηση στο PETS & DOGUE",placeholder:"Αναζήτηση άρθρων, μερών, κατοικιδίων...",articles:"Άρθρα",photos:"Φωτογραφίες",coverStars:"Αστέρια εξωφύλλου",places:"Μέρη",travel:"Ταξίδια",rescue:"Διάσωση",marketplace:"Marketplace"},footer:{subtitle:"Το διεθνές πολυτελές περιοδικό για ζώα",home:"Αρχική",latestIssue:"Τελευταίο τεύχος",articles:"Άρθρα",photos:"Φωτογραφίες",coverStars:"Αστέρια εξωφύλλου",places:"Μέρη",marketplace:"Marketplace",club:"Club",partners:"Συνεργάτες",advertise:"Διαφήμιση",contact:"Επικοινωνία",privacy:"Απόρρητο",terms:"Όροι",admin:"Admin"},system:{stop:"Διακοπή",subscribe:"ΕΓΓΡΑΦΗ",invalidEmail:"Εισαγάγετε έγκυρη διεύθυνση email.",newsletterSuccess:"Καλώς ήρθατε στην κοινότητα PETS & DOGUE.",narrationUnsupported:"Αυτό το πρόγραμμα περιήγησης δεν υποστηρίζει αφήγηση άρθρων."},menu:{contents:"Περιεχόμενα",signIn:"Σύνδεση",joinClub:"Γίνε μέλος",home:"Αρχική",homeDescription:"Επιστροφή στην αρχική σελίδα του PETS & DOGUE.",latestIssue:"Τελευταίο τεύχος",latestIssueDescription:"Ανοίξτε το νέο ψηφιακό τεύχος του PETS & DOGUE.",articles:"Άρθρα",articlesDescription:"Διαβάστε και ακούστε συντακτικές ιστορίες.",photos:"Φωτογραφίες",photosDescription:"Πορτρέτα, γκαλερί και οπτικές ιστορίες.",coverStar:"Αστέρι εξωφύλλου",coverStarDescription:"Δηλώστε το κατοικίδιό σας για το επόμενο εξώφυλλο.",fashion:"Μόδα κατοικιδίων",fashionDescription:"Πολυτελές στιλ, αξεσουάρ και editorial εμφανίσεις.",travel:"Ταξίδια",travelDescription:"Ξενοδοχεία, παραλίες και ταξίδια φιλικά προς τα κατοικίδια.",places:"Pet-friendly μέρη",placesDescription:"Βρείτε μέρη, χάρτες, διαδρομές και επαφές.",rescue:"Ζώα σε ανάγκη",rescueDescription:"Διάσωση, υιοθεσία και υποστήριξη κοινότητας.",contests:"Διαγωνισμοί",contestsDescription:"Διαγωνισμοί, ψηφοφορίες και βραβεία.",community:"Τοπική κοινότητα",communityDescription:"Τοπικές προτάσεις, αναρτήσεις και υποστήριξη.",marketplace:"Marketplace",marketplaceDescription:"Αγγελίες, υπηρεσίες και αξεσουάρ κοινότητας."}},
 sv:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — det internationella lyxmagasinet om djur"},account:{signIn:"LOGGA IN",joinClub:"GÅ MED I KLUBBEN",edition:"DET INTERNATIONELLA LYX MAGASINET OM DJUR"},navigation:{magazine:"MAGASIN",articles:"ARTIKLAR",photos:"FOTON",coverStars:"OMSLAGSSTJÄRNOR",fashion:"MODE",wellness:"VÄLMÅENDE",travel:"RESOR",places:"PLATSER",rescue:"RÄDDNING",contests:"TÄVLINGAR",community:"COMMUNITY",marketplace:"MARKNADSPLATS",partners:"PARTNERS"},search:{title:"Sök i PETS & DOGUE",placeholder:"Sök artiklar, platser, djur...",articles:"Artiklar",photos:"Foton",coverStars:"Omslagsstjärnor",places:"Platser",travel:"Resor",rescue:"Räddning",marketplace:"Marknadsplats"},footer:{subtitle:"Det internationella lyxmagasinet om djur",home:"Hem",latestIssue:"Senaste numret",articles:"Artiklar",photos:"Foton",coverStars:"Omslagsstjärnor",places:"Platser",marketplace:"Marknadsplats",club:"Klubb",partners:"Partners",advertise:"Annonsera",contact:"Kontakt",privacy:"Integritet",terms:"Villkor",admin:"Admin"},system:{stop:"Stoppa",subscribe:"PRENUMERERA",invalidEmail:"Ange en giltig e-postadress.",newsletterSuccess:"Välkommen till PETS & DOGUE-communityn.",narrationUnsupported:"Artikeluppläsning stöds inte av den här webbläsaren."},menu:{contents:"Innehåll",signIn:"Logga in",joinClub:"Gå med i klubben",home:"Hem",homeDescription:"Gå tillbaka till PETS & DOGUE-startsidan.",latestIssue:"Senaste numret",latestIssueDescription:"Öppna det senaste digitala numret av PETS & DOGUE.",articles:"Artiklar",articlesDescription:"Läs och lyssna på redaktionella berättelser.",photos:"Foton",photosDescription:"Porträtt, gallerier och visuella berättelser.",coverStar:"Omslagsstjärna",coverStarDescription:"Anmäl ditt djur till nästa omslag.",fashion:"Djurmode",fashionDescription:"Lyxig stil, accessoarer och redaktionella looks.",travel:"Resor",travelDescription:"Hotell, stränder och djurvänliga resor.",places:"Djurvänliga platser",placesDescription:"Sök platser, kartor, rutter och kontakter.",rescue:"Djur i behov",rescueDescription:"Räddning, adoption och stöd från communityn.",contests:"Tävlingar",contestsDescription:"Tävlingar, omröstningar och priser.",community:"Lokal community",communityDescription:"Lokala rekommendationer, inlägg och stöd.",marketplace:"Marknadsplats",marketplaceDescription:"Communityannonser, tjänster och accessoarer."}},
 da:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — det internationale luksusmagasin om dyr"},account:{signIn:"LOG IND",joinClub:"BLIV MEDLEM",edition:"DET INTERNATIONALE LUKSUSMAGASIN OM DYR"},navigation:{magazine:"MAGASIN",articles:"ARTIKLER",photos:"FOTOS",coverStars:"FORSIDESTJERNER",fashion:"MODE",wellness:"VELVÆRE",travel:"REJSER",places:"STEDER",rescue:"REDNING",contests:"KONKURRENCER",community:"FÆLLESSKAB",marketplace:"MARKEDSPLADS",partners:"PARTNERE"},search:{title:"Søg i PETS & DOGUE",placeholder:"Søg artikler, steder, dyr...",articles:"Artikler",photos:"Fotos",coverStars:"Forsidestjerner",places:"Steder",travel:"Rejser",rescue:"Redning",marketplace:"Markedsplads"},footer:{subtitle:"Det internationale luksusmagasin om dyr",home:"Forside",latestIssue:"Seneste udgave",articles:"Artikler",photos:"Fotos",coverStars:"Forsidestjerner",places:"Steder",marketplace:"Markedsplads",club:"Klub",partners:"Partnere",advertise:"Annoncér",contact:"Kontakt",privacy:"Privatliv",terms:"Vilkår",admin:"Admin"},system:{stop:"Stop",subscribe:"TILMELD",invalidEmail:"Indtast en gyldig e-mailadresse.",newsletterSuccess:"Velkommen til PETS & DOGUE-fællesskabet.",narrationUnsupported:"Artikeloplæsning understøttes ikke af denne browser."},menu:{contents:"Indhold",signIn:"Log ind",joinClub:"Bliv medlem",home:"Forside",homeDescription:"Gå tilbage til PETS & DOGUE-forsiden.",latestIssue:"Seneste udgave",latestIssueDescription:"Åbn den nyeste digitale udgave af PETS & DOGUE.",articles:"Artikler",articlesDescription:"Læs og lyt til redaktionelle historier.",photos:"Fotos",photosDescription:"Portrætter, gallerier og visuelle historier.",coverStar:"Forsidestjerne",coverStarDescription:"Tilmeld dit kæledyr til den næste forside.",fashion:"Dyremode",fashionDescription:"Luksusstil, accessories og redaktionelle looks.",travel:"Rejser",travelDescription:"Hoteller, strande og kæledyrsvenlige rejser.",places:"Kæledyrsvenlige steder",placesDescription:"Find steder, kort, ruter og kontakter.",rescue:"Dyr i nød",rescueDescription:"Redning, adoption og fællesskabsstøtte.",contests:"Konkurrencer",contestsDescription:"Konkurrencer, afstemninger og præmier.",community:"Lokalt fællesskab",communityDescription:"Lokale anbefalinger, opslag og støtte.",marketplace:"Markedsplads",marketplaceDescription:"Fællesskabsannoncer, tjenester og accessories."}},
-no:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — det internasjonale luksusmagasinet om dyr"},account:{signIn:"LOGG INN",joinClub:"BLI MED I KLUBBEN",edition:"DET INTERNASJONALE LUKSUSMAGASINET OM DYR"},navigation:{magazine:"MAGASIN",articles:"ARTIKLER",photos:"BILDER",coverStars:"FORSIDESTJERNER",fashion:"MOTE",wellness:"VELVÆRE",travel:"REISE",places:"STEDER",rescue:"REDNING",contests:"KONKURRANSER",community:"FELLESSKAP",marketplace:"MARKEDSPLASS",partners:"PARTNERE"},search:{title:"Søk i PETS & DOGUE",placeholder:"Søk artikler, steder, dyr...",articles:"Artikler",photos:"Bilder",coverStars:"Forsidestjerner",places:"Steder",travel:"Reise",rescue:"Redning",marketplace:"Markedsplass"},footer:{subtitle:"Det internasjonale luksusmagasinet om dyr",home:"Hjem",latestIssue:"Nyeste utgave",articles:"Artikler",photos:"Bilder",coverStars:"Forsidestjerner",places:"Steder",marketplace:"Markedsplass",club:"Klubb",partners:"Partnere",advertise:"Annonser",contact:"Kontakt",privacy:"Personvern",terms:"Vilkår",admin:"Admin"},system:{stop:"Stopp",subscribe:"ABONNER",invalidEmail:"Skriv inn en gyldig e-postadresse.",newsletterSuccess:"Velkommen til PETS & DOGUE-fellesskapet.",narrationUnsupported:"Denne nettleseren støtter ikke opplesning av artikler."},menu:{contents:"Innhold",signIn:"Logg inn",joinClub:"Bli med i klubben",home:"Hjem",homeDescription:"Gå tilbake til PETS & DOGUE-forsiden.",latestIssue:"Nyeste utgave",latestIssueDescription:"Åpne den nyeste digitale utgaven av PETS & DOGUE.",articles:"Artikler",articlesDescription:"Les og lytt til redaksjonelle historier.",photos:"Bilder",photosDescription:"Portretter, gallerier og visuelle historier.",coverStar:"Forsidestjerne",coverStarDescription:"Meld på kjæledyret ditt til neste forside.",fashion:"Dyremote",fashionDescription:"Luksusstil, tilbehør og redaksjonelle looks.",travel:"Reise",travelDescription:"Hoteller, strender og dyrevennlige reiser.",places:"Dyrevennlige steder",placesDescription:"Finn steder, kart, ruter og kontakter.",rescue:"Dyr i nød",rescueDescription:"Redning, adopsjon og støtte fra fellesskapet.",contests:"Konkurranser",contestsDescription:"Konkurranser, avstemninger og premier.",community:"Lokalt fellesskap",communityDescription:"Lokale anbefalinger, innlegg og støtte.",marketplace:"Markedsplass",marketplaceDescription:"Annonser, tjenester og tilbehør fra fellesskapet."}} ,fi:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — kansainvälinen luksuslehti eläimistä"},account:{signIn:"KIRJAUDU",joinClub:"LIITY KLUBIIN",edition:"KANSAINVÄLINEN LUKSUSLEHTI ELÄIMISTÄ"},navigation:{magazine:"LEHTI",articles:"ARTIKKELIT",photos:"KUVAT",coverStars:"KANSITÄHDET",fashion:"MUOTI",wellness:"HYVINVOINTI",travel:"MATKAILU",places:"PAIKAT",rescue:"PELASTUS",contests:"KILPAILUT",community:"YHTEISÖ",marketplace:"MARKKINAPAIKKA",partners:"KUMPPANIT"},search:{title:"Hae PETS & DOGUE -lehdestä",placeholder:"Hae artikkeleita, paikkoja, lemmikkejä...",articles:"Artikkelit",photos:"Kuvat",coverStars:"Kansitähdet",places:"Paikat",travel:"Matkailu",rescue:"Pelastus",marketplace:"Markkinapaikka"},footer:{subtitle:"Kansainvälinen luksuslehti eläimistä",home:"Etusivu",latestIssue:"Uusin numero",articles:"Artikkelit",photos:"Kuvat",coverStars:"Kansitähdet",places:"Paikat",marketplace:"Markkinapaikka",club:"Klubi",partners:"Kumppanit",advertise:"Mainosta",contact:"Yhteystiedot",privacy:"Tietosuoja",terms:"Ehdot",admin:"Admin"},system:{stop:"Pysäytä",subscribe:"TILAA",invalidEmail:"Anna kelvollinen sähköpostiosoite.",newsletterSuccess:"Tervetuloa PETS & DOGUE -yhteisöön.",narrationUnsupported:"Tämä selain ei tue artikkelien ääneenlukua."},menu:{contents:"Sisältö",signIn:"Kirjaudu",joinClub:"Liity klubiin",home:"Etusivu",homeDescription:"Palaa PETS & DOGUE -etusivulle.",latestIssue:"Uusin numero",latestIssueDescription:"Avaa PETS & DOGUE -lehden uusin digitaalinen numero.",articles:"Artikkelit",articlesDescription:"Lue ja kuuntele toimituksellisia tarinoita.",photos:"Kuvat",photosDescription:"Muotokuvat, galleriat ja visuaaliset tarinat.",coverStar:"Kansitähti",coverStarDescription:"Ilmoita lemmikkisi seuraavan kannen kilpailuun.",fashion:"Lemmikkimuoti",fashionDescription:"Luksustyyliä, asusteita ja toimituksellisia lookeja.",travel:"Matkailu",travelDescription:"Hotelleja, rantoja ja lemmikkiystävällisiä matkoja.",places:"Lemmikkiystävälliset paikat",placesDescription:"Etsi paikkoja, karttoja, reittejä ja yhteystietoja.",rescue:"Apua tarvitsevat eläimet",rescueDescription:"Pelastus, adoptio ja yhteisön tuki.",contests:"Kilpailut",contestsDescription:"Kilpailuja, äänestyksiä ja palkintoja.",community:"Paikallinen yhteisö",communityDescription:"Paikallisia suosituksia, julkaisuja ja tukea.",marketplace:"Markkinapaikka",marketplaceDescription:"Yhteisön ilmoituksia, palveluja ja asusteita."}},
+no:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — det internasjonale luksusmagasinet om dyr"},account:{signIn:"LOGG INN",joinClub:"BLI MED I KLUBBEN",edition:"DET INTERNASJONALE LUKSUSMAGASINET OM DYR"},navigation:{magazine:"MAGASIN",articles:"ARTIKLER",photos:"BILDER",coverStars:"FORSIDESTJERNER",fashion:"MOTE",wellness:"VELVÆRE",travel:"REISE",places:"STEDER",rescue:"REDNING",contests:"KONKURRANSER",community:"FELLESSKAP",marketplace:"MARKEDSPLASS",partners:"PARTNERE"},search:{title:"Søk i PETS & DOGUE",placeholder:"Søk artikler, steder, dyr...",articles:"Artikler",photos:"Bilder",coverStars:"Forsidestjerner",places:"Steder",travel:"Reise",rescue:"Redning",marketplace:"Markedsplass"},footer:{subtitle:"Det internasjonale luksusmagasinet om dyr",home:"Hjem",latestIssue:"Nyeste utgave",articles:"Artikler",photos:"Bilder",coverStars:"Forsidestjerner",places:"Steder",marketplace:"Markedsplass",club:"Klubb",partners:"Partnere",advertise:"Annonser",contact:"Kontakt",privacy:"Personvern",terms:"Vilkår",admin:"Admin"},system:{stop:"Stopp",subscribe:"ABONNER",invalidEmail:"Skriv inn en gyldig e-postadresse.",newsletterSuccess:"Velkommen til PETS & DOGUE-fellesskapet.",narrationUnsupported:"Denne nettleseren støtter ikke opplesning av artikler."},menu:{contents:"Innhold",signIn:"Logg inn",joinClub:"Bli med i klubben",home:"Hjem",homeDescription:"Gå tilbake til PETS & DOGUE-forsiden.",latestIssue:"Nyeste utgave",latestIssueDescription:"Åpne den nyeste digitale utgaven av PETS & DOGUE.",articles:"Artikler",articlesDescription:"Les og lytt til redaksjonelle historier.",photos:"Bilder",photosDescription:"Portretter, gallerier og visuelle historier.",coverStar:"Forsidestjerne",coverStarDescription:"Meld på kjæledyret ditt til neste forside.",fashion:"Dyremote",fashionDescription:"Luksusstil, tilbehør og redaksjonelle looks.",travel:"Reise",travelDescription:"Hoteller, strender og dyrevennlige reiser.",places:"Dyrevennlige steder",placesDescription:"Finn steder, kart, ruter og kontakter.",rescue:"Dyr i nød",rescueDescription:"Redning, adopsjon og støtte fra fellesskapet.",contests:"Konkurranser",contestsDescription:"Konkurranser, avstemninger og premier.",community:"Lokalt fellesskap",communityDescription:"Lokale anbefalinger, innlegg og støtte.",marketplace:"Markedsplass",marketplaceDescription:"Annonser, tjenester og tilbehør fra fellesskapet."}},
+fi:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — kansainvälinen luksuslehti eläimistä"},account:{signIn:"KIRJAUDU",joinClub:"LIITY KLUBIIN",edition:"KANSAINVÄLINEN LUKSUSLEHTI ELÄIMISTÄ"},navigation:{magazine:"LEHTI",articles:"ARTIKKELIT",photos:"KUVAT",coverStars:"KANSITÄHDET",fashion:"MUOTI",wellness:"HYVINVOINTI",travel:"MATKAILU",places:"PAIKAT",rescue:"PELASTUS",contests:"KILPAILUT",community:"YHTEISÖ",marketplace:"MARKKINAPAIKKA",partners:"KUMPPANIT"},search:{title:"Hae PETS & DOGUE -lehdestä",placeholder:"Hae artikkeleita, paikkoja, lemmikkejä...",articles:"Artikkelit",photos:"Kuvat",coverStars:"Kansitähdet",places:"Paikat",travel:"Matkailu",rescue:"Pelastus",marketplace:"Markkinapaikka"},footer:{subtitle:"Kansainvälinen luksuslehti eläimistä",home:"Etusivu",latestIssue:"Uusin numero",articles:"Artikkelit",photos:"Kuvat",coverStars:"Kansitähdet",places:"Paikat",marketplace:"Markkinapaikka",club:"Klubi",partners:"Kumppanit",advertise:"Mainosta",contact:"Yhteystiedot",privacy:"Tietosuoja",terms:"Ehdot",admin:"Admin"},system:{stop:"Pysäytä",subscribe:"TILAA",invalidEmail:"Anna kelvollinen sähköpostiosoite.",newsletterSuccess:"Tervetuloa PETS & DOGUE -yhteisöön.",narrationUnsupported:"Tämä selain ei tue artikkelien ääneenlukua."},menu:{contents:"Sisältö",signIn:"Kirjaudu",joinClub:"Liity klubiin",home:"Etusivu",homeDescription:"Palaa PETS & DOGUE -etusivulle.",latestIssue:"Uusin numero",latestIssueDescription:"Avaa PETS & DOGUE -lehden uusin digitaalinen numero.",articles:"Artikkelit",articlesDescription:"Lue ja kuuntele toimituksellisia tarinoita.",photos:"Kuvat",photosDescription:"Muotokuvat, galleriat ja visuaaliset tarinat.",coverStar:"Kansitähti",coverStarDescription:"Ilmoita lemmikkisi seuraavan kannen kilpailuun.",fashion:"Lemmikkimuoti",fashionDescription:"Luksustyyliä, asusteita ja toimituksellisia lookeja.",travel:"Matkailu",travelDescription:"Hotelleja, rantoja ja lemmikkiystävällisiä matkoja.",places:"Lemmikkiystävälliset paikat",placesDescription:"Etsi paikkoja, karttoja, reittejä ja yhteystietoja.",rescue:"Apua tarvitsevat eläimet",rescueDescription:"Pelastus, adoptio ja yhteisön tuki.",contests:"Kilpailut",contestsDescription:"Kilpailuja, äänestyksiä ja palkintoja.",community:"Paikallinen yhteisö",communityDescription:"Paikallisia suosituksia, julkaisuja ja tukea.",marketplace:"Markkinapaikka",marketplaceDescription:"Yhteisön ilmoituksia, palveluja ja asusteita."}},
 tr:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — uluslararası lüks hayvan dergisi"},account:{signIn:"GİRİŞ YAP",joinClub:"KULÜBE KATIL",edition:"ULUSLARARASI LÜKS HAYVAN DERGİSİ"},navigation:{magazine:"DERGİ",articles:"MAKALELER",photos:"FOTOĞRAFLAR",coverStars:"KAPAK YILDIZLARI",fashion:"MODA",wellness:"SAĞLIK",travel:"SEYAHAT",places:"YERLER",rescue:"KURTARMA",contests:"YARIŞMALAR",community:"TOPLULUK",marketplace:"PAZAR YERİ",partners:"ORTAKLAR"},search:{title:"PETS & DOGUE’da ara",placeholder:"Makaleler, yerler, evcil hayvanlar ara...",articles:"Makaleler",photos:"Fotoğraflar",coverStars:"Kapak yıldızları",places:"Yerler",travel:"Seyahat",rescue:"Kurtarma",marketplace:"Pazar yeri"},footer:{subtitle:"Uluslararası lüks hayvan dergisi",home:"Ana sayfa",latestIssue:"Son sayı",articles:"Makaleler",photos:"Fotoğraflar",coverStars:"Kapak yıldızları",places:"Yerler",marketplace:"Pazar yeri",club:"Kulüp",partners:"Ortaklar",advertise:"Reklam",contact:"İletişim",privacy:"Gizlilik",terms:"Koşullar",admin:"Admin"},system:{stop:"Durdur",subscribe:"ABONE OL",invalidEmail:"Geçerli bir e-posta adresi girin.",newsletterSuccess:"PETS & DOGUE topluluğuna hoş geldiniz.",narrationUnsupported:"Bu tarayıcı makale seslendirmesini desteklemiyor."},menu:{contents:"İçindekiler",signIn:"Giriş yap",joinClub:"Kulübe katıl",home:"Ana sayfa",homeDescription:"PETS & DOGUE ana sayfasına dönün.",latestIssue:"Son sayı",latestIssueDescription:"PETS & DOGUE’un en yeni dijital sayısını açın.",articles:"Makaleler",articlesDescription:"Editoryal hikâyeleri okuyun ve dinleyin.",photos:"Fotoğraflar",photosDescription:"Portreler, galeriler ve görsel hikâyeler.",coverStar:"Kapak yıldızı",coverStarDescription:"Evcil hayvanınızı bir sonraki kapak için aday gösterin.",fashion:"Evcil hayvan modası",fashionDescription:"Lüks stil, aksesuarlar ve editoryal görünümler.",travel:"Seyahat",travelDescription:"Oteller, plajlar ve evcil hayvan dostu yolculuklar.",places:"Evcil hayvan dostu yerler",placesDescription:"Yerleri, haritaları, rotaları ve iletişim bilgilerini bulun.",rescue:"Yardıma ihtiyacı olan hayvanlar",rescueDescription:"Kurtarma, sahiplendirme ve topluluk desteği.",contests:"Yarışmalar",contestsDescription:"Yarışmalar, oylamalar ve ödüller.",community:"Yerel topluluk",communityDescription:"Yerel öneriler, paylaşımlar ve destek.",marketplace:"Pazar yeri",marketplaceDescription:"Topluluk ilanları, hizmetler ve aksesuarlar."}},
 ar:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — المجلة العالمية الفاخرة للحيوانات"},account:{signIn:"تسجيل الدخول",joinClub:"انضم إلى النادي",edition:"المجلة العالمية الفاخرة للحيوانات"},navigation:{magazine:"المجلة",articles:"مقالات",photos:"صور",coverStars:"نجوم الغلاف",fashion:"الموضة",wellness:"العافية",travel:"السفر",places:"الأماكن",rescue:"الإنقاذ",contests:"المسابقات",community:"المجتمع",marketplace:"السوق",partners:"الشركاء"},search:{title:"ابحث في PETS & DOGUE",placeholder:"ابحث عن مقالات وأماكن وحيوانات...",articles:"مقالات",photos:"صور",coverStars:"نجوم الغلاف",places:"أماكن",travel:"سفر",rescue:"إنقاذ",marketplace:"السوق"},footer:{subtitle:"المجلة العالمية الفاخرة للحيوانات",home:"الرئيسية",latestIssue:"أحدث عدد",articles:"مقالات",photos:"صور",coverStars:"نجوم الغلاف",places:"أماكن",marketplace:"السوق",club:"النادي",partners:"الشركاء",advertise:"الإعلان",contact:"اتصل بنا",privacy:"الخصوصية",terms:"الشروط",admin:"الإدارة"},system:{stop:"إيقاف",subscribe:"اشترك",invalidEmail:"يرجى إدخال بريد إلكتروني صالح.",newsletterSuccess:"مرحبًا بك في مجتمع PETS & DOGUE.",narrationUnsupported:"هذا المتصفح لا يدعم قراءة المقالات صوتيًا."},menu:{contents:"المحتويات",signIn:"تسجيل الدخول",joinClub:"انضم إلى النادي",home:"الرئيسية",homeDescription:"العودة إلى الصفحة الرئيسية لـ PETS & DOGUE.",latestIssue:"أحدث عدد",latestIssueDescription:"افتح أحدث إصدار رقمي من PETS & DOGUE.",articles:"مقالات",articlesDescription:"اقرأ واستمع إلى القصص التحريرية.",photos:"صور",photosDescription:"بورتريهات ومعارض وقصص بصرية.",coverStar:"نجم الغلاف",coverStarDescription:"رشّح حيوانك الأليف للغلاف القادم.",fashion:"موضة الحيوانات",fashionDescription:"أناقة فاخرة وإكسسوارات وإطلالات تحريرية.",travel:"سفر",travelDescription:"فنادق وشواطئ ورحلات صديقة للحيوانات.",places:"أماكن صديقة للحيوانات",placesDescription:"ابحث عن أماكن وخرائط ومسارات وبيانات اتصال.",rescue:"حيوانات تحتاج إلى المساعدة",rescueDescription:"إنقاذ وتبنٍّ ودعم مجتمعي.",contests:"مسابقات",contestsDescription:"مسابقات وتصويت وجوائز.",community:"المجتمع المحلي",communityDescription:"توصيات محلية ومنشورات ودعم.",marketplace:"السوق",marketplaceDescription:"إعلانات وخدمات وإكسسوارات من المجتمع."}},
 hi:{meta:{title:"PETS & DOGUE",description:"PETS & DOGUE — जानवरों पर अंतरराष्ट्रीय लक्ज़री पत्रिका"},account:{signIn:"साइन इन",joinClub:"क्लब से जुड़ें",edition:"जानवरों पर अंतरराष्ट्रीय लक्ज़री पत्रिका"},navigation:{magazine:"पत्रिका",articles:"लेख",photos:"तस्वीरें",coverStars:"कवर स्टार्स",fashion:"फैशन",wellness:"वेलनेस",travel:"यात्रा",places:"स्थान",rescue:"बचाव",contests:"प्रतियोगिताएँ",community:"समुदाय",marketplace:"मार्केटप्लेस",partners:"साझेदार"},search:{title:"PETS & DOGUE में खोजें",placeholder:"लेख, स्थान, पालतू खोजें...",articles:"लेख",photos:"तस्वीरें",coverStars:"कवर स्टार्स",places:"स्थान",travel:"यात्रा",rescue:"बचाव",marketplace:"मार्केटप्लेस"},footer:{subtitle:"जानवरों पर अंतरराष्ट्रीय लक्ज़री पत्रिका",home:"होम",latestIssue:"नवीनतम अंक",articles:"लेख",photos:"तस्वीरें",coverStars:"कवर स्टार्स",places:"स्थान",marketplace:"मार्केटप्लेस",club:"क्लब",partners:"साझेदार",advertise:"विज्ञापन",contact:"संपर्क",privacy:"गोपनीयता",terms:"शर्तें",admin:"एडमिन"},system:{stop:"रोकें",subscribe:"सदस्यता लें",invalidEmail:"कृपया सही ईमेल पता दर्ज करें।",newsletterSuccess:"PETS & DOGUE समुदाय में आपका स्वागत है।",narrationUnsupported:"यह ब्राउज़र लेखों का वाचन समर्थित नहीं करता।"},menu:{contents:"विषय सूची",signIn:"साइन इन",joinClub:"क्लब से जुड़ें",home:"होम",homeDescription:"PETS & DOGUE होमपेज पर वापस जाएँ।",latestIssue:"नवीनतम अंक",latestIssueDescription:"PETS & DOGUE का नवीनतम डिजिटल अंक खोलें।",articles:"लेख",articlesDescription:"संपादकीय कहानियाँ पढ़ें और सुनें।",photos:"तस्वीरें",photosDescription:"पोर्ट्रेट, गैलरी और दृश्य कहानियाँ।",coverStar:"कवर स्टार",coverStarDescription:"अपने पालतू को अगली कवर प्रतियोगिता में शामिल करें।",fashion:"पेट फैशन",fashionDescription:"लक्ज़री स्टाइल, एक्सेसरीज़ और संपादकीय लुक।",travel:"यात्रा",travelDescription:"होटल, समुद्र तट और पेट-फ्रेंडली यात्राएँ।",places:"पेट-फ्रेंडली स्थान",placesDescription:"स्थान, नक्शे, मार्ग और संपर्क खोजें।",rescue:"मदद की ज़रूरत वाले जानवर",rescueDescription:"बचाव, गोद लेना और सामुदायिक सहायता।",contests:"प्रतियोगिताएँ",contestsDescription:"प्रतियोगिताएँ, वोटिंग और पुरस्कार।",community:"स्थानीय समुदाय",communityDescription:"स्थानीय सुझाव, पोस्ट और सहायता।",marketplace:"मार्केटप्लेस",marketplaceDescription:"समुदाय की लिस्टिंग, सेवाएँ और एक्सेसरीज़।"}}
 };
-(function(){"use strict";const C=window.PetsDogueTranslations&&window.PetsDogueTranslations.common;if(!C)return;const X={
+
+(function(){
+"use strict";
+
+const C=
+  window.PetsDogueTranslations &&
+  window.PetsDogueTranslations.common;
+
+if(!C)return;
+
+const X={
 en:{partners:"Partners",partnersDescription:"Discover PETS & DOGUE partners and collaborations.",openMenu:"Open menu",closeMenu:"Close menu",home:"Home",decreaseText:"Decrease text",increaseText:"Increase text",previewArticle:"Preview article",archive:"Archive",about:"About",copyright:"Copyright",cookies:"Cookies"},
 uk:{partners:"Партнери",partnersDescription:"Відкрийте партнерів і колаборації PETS & DOGUE.",openMenu:"Відкрити меню",closeMenu:"Закрити меню",home:"Головна",decreaseText:"Зменшити текст",increaseText:"Збільшити текст",previewArticle:"Прослухати уривок статті",archive:"Архів",about:"Про нас",copyright:"Авторські права",cookies:"Файли cookie"},
 ru:{partners:"Партнёры",partnersDescription:"Откройте партнёров и коллаборации PETS & DOGUE.",openMenu:"Открыть меню",closeMenu:"Закрыть меню",home:"Главная",decreaseText:"Уменьшить текст",increaseText:"Увеличить текст",previewArticle:"Прослушать фрагмент статьи",archive:"Архив",about:"О нас",copyright:"Авторские права",cookies:"Файлы cookie"},
@@ -46,4 +58,409 @@ fi:{partners:"Kumppanit",partnersDescription:"Tutustu PETS & DOGUE -kumppaneihin
 tr:{partners:"Ortaklar",partnersDescription:"PETS & DOGUE ortaklarını ve iş birliklerini keşfedin.",openMenu:"Menüyü aç",closeMenu:"Menüyü kapat",home:"Ana sayfa",decreaseText:"Metni küçült",increaseText:"Metni büyüt",previewArticle:"Makale önizlemesini dinle",archive:"Arşiv",about:"Hakkımızda",copyright:"Telif hakkı",cookies:"Çerezler"},
 ar:{partners:"الشركاء",partnersDescription:"اكتشف شركاء وتعاونات PETS & DOGUE.",openMenu:"فتح القائمة",closeMenu:"إغلاق القائمة",home:"الرئيسية",decreaseText:"تصغير النص",increaseText:"تكبير النص",previewArticle:"استمع إلى معاينة المقال",archive:"الأرشيف",about:"من نحن",copyright:"حقوق النشر",cookies:"ملفات تعريف الارتباط"},
 hi:{partners:"साझेदार",partnersDescription:"PETS & DOGUE के साझेदार और सहयोग देखें।",openMenu:"मेनू खोलें",closeMenu:"मेनू बंद करें",home:"होम",decreaseText:"टेक्स्ट छोटा करें",increaseText:"टेक्स्ट बड़ा करें",previewArticle:"लेख का पूर्वावलोकन सुनें",archive:"आर्काइव",about:"हमारे बारे में",copyright:"कॉपीराइट",cookies:"कुकीज़"}
-};Object.keys(C).forEach(code=>{const t=C[code],x=X[code]||X.en;if(!t)return;t.menu=t.menu||{};t.footer=t.footer||{};t.accessibility=t.accessibility||{};t.menu.partners=t.menu.partners||x.partners;t.menu.partnersDescription=t.menu.partnersDescription||x.partnersDescription;t.footer.archive=t.footer.archive||x.archive;t.footer.about=t.footer.about||x.about;t.footer.copyright=t.footer.copyright||x.copyright;t.footer.cookies=t.footer.cookies||x.cookies;t.accessibility.openMenu=x.openMenu;t.accessibility.closeMenu=x.closeMenu;t.accessibility.home=x.home;t.accessibility.decreaseText=x.decreaseText;t.accessibility.increaseText=x.increaseText;t.accessibility.previewArticle=x.previewArticle});})();
+};
+
+Object.keys(C).forEach(code=>{
+  const t=C[code];
+  const x=X[code]||X.en;
+
+  if(!t)return;
+
+  t.menu=t.menu||{};
+  t.footer=t.footer||{};
+  t.accessibility=t.accessibility||{};
+
+  t.menu.partners=t.menu.partners||x.partners;
+  t.menu.partnersDescription=t.menu.partnersDescription||x.partnersDescription;
+
+  t.footer.archive=t.footer.archive||x.archive;
+  t.footer.about=t.footer.about||x.about;
+  t.footer.copyright=t.footer.copyright||x.copyright;
+  t.footer.cookies=t.footer.cookies||x.cookies;
+
+  t.accessibility.openMenu=x.openMenu;
+  t.accessibility.closeMenu=x.closeMenu;
+  t.accessibility.home=x.home;
+  t.accessibility.decreaseText=x.decreaseText;
+  t.accessibility.increaseText=x.increaseText;
+  t.accessibility.previewArticle=x.previewArticle;
+});
+
+})();
+
+
+/*
+=========================================================
+PETS & DOGUE
+GLOBAL NAVIGATION LABEL UPDATE
+=========================================================
+
+Adds:
+
+- Discounts
+- Wellness menu item
+- Pets Welcome naming
+
+The physical navigation ORDER is controlled by each HTML
+page and will be updated separately.
+
+All supported languages are defined here.
+=========================================================
+*/
+
+(function(){
+"use strict";
+
+const COMMON=
+  window.PetsDogueTranslations &&
+  window.PetsDogueTranslations.common;
+
+if(!COMMON)return;
+
+
+const NAV_UPDATE={
+
+en:{
+  discounts:"DISCOUNTS",
+  discountsMenu:"Discounts",
+  discountsDescription:"Member offers, privileges and selected PETS & DOGUE savings.",
+  wellnessMenu:"Health",
+  wellnessDescription:"Health, wellness, veterinary guidance and everyday care.",
+  welcomeNav:"PETS WELCOME",
+  welcome:"Pets Welcome",
+  welcomeDescription:"Discover places where pets are welcome, with maps, routes and contacts."
+},
+
+uk:{
+  discounts:"ЗНИЖКИ",
+  discountsMenu:"Знижки",
+  discountsDescription:"Пропозиції, привілеї та спеціальні знижки PETS & DOGUE.",
+  wellnessMenu:"Здоров’я",
+  wellnessDescription:"Здоров’я, добробут, ветеринарні поради та щоденний догляд.",
+  welcomeNav:"УЛЮБЛЕНЦЯМ РАДІ",
+  welcome:"Улюбленцям раді",
+  welcomeDescription:"Знаходьте місця, де раді улюбленцям, з картами, маршрутами та контактами."
+},
+
+ru:{
+  discounts:"СКИДКИ",
+  discountsMenu:"Скидки",
+  discountsDescription:"Предложения, привилегии и специальные скидки PETS & DOGUE.",
+  wellnessMenu:"Здоровье",
+  wellnessDescription:"Здоровье, благополучие, ветеринарные рекомендации и ежедневный уход.",
+  welcomeNav:"ПИТОМЦАМ РАДЫ",
+  welcome:"Питомцам рады",
+  welcomeDescription:"Находите места, где рады питомцам, с картами, маршрутами и контактами."
+},
+
+fr:{
+  discounts:"RÉDUCTIONS",
+  discountsMenu:"Réductions",
+  discountsDescription:"Offres, privilèges et réductions sélectionnées PETS & DOGUE.",
+  wellnessMenu:"Santé",
+  wellnessDescription:"Santé, bien-être, conseils vétérinaires et soins quotidiens.",
+  welcomeNav:"ANIMAUX BIENVENUS",
+  welcome:"Animaux bienvenus",
+  welcomeDescription:"Découvrez les lieux où les animaux sont les bienvenus, avec cartes, itinéraires et contacts."
+},
+
+de:{
+  discounts:"RABATTE",
+  discountsMenu:"Rabatte",
+  discountsDescription:"Angebote, Vorteile und ausgewählte PETS & DOGUE Rabatte.",
+  wellnessMenu:"Gesundheit",
+  wellnessDescription:"Gesundheit, Wohlbefinden, tierärztliche Tipps und tägliche Pflege.",
+  welcomeNav:"TIERE WILLKOMMEN",
+  welcome:"Tiere willkommen",
+  welcomeDescription:"Entdecken Sie Orte, an denen Tiere willkommen sind, mit Karten, Routen und Kontakten."
+},
+
+es:{
+  discounts:"DESCUENTOS",
+  discountsMenu:"Descuentos",
+  discountsDescription:"Ofertas, ventajas y descuentos seleccionados de PETS & DOGUE.",
+  wellnessMenu:"Salud",
+  wellnessDescription:"Salud, bienestar, orientación veterinaria y cuidados diarios.",
+  welcomeNav:"MASCOTAS BIENVENIDAS",
+  welcome:"Mascotas bienvenidas",
+  welcomeDescription:"Descubre lugares donde las mascotas son bienvenidas, con mapas, rutas y contactos."
+},
+
+it:{
+  discounts:"SCONTI",
+  discountsMenu:"Sconti",
+  discountsDescription:"Offerte, vantaggi e sconti selezionati PETS & DOGUE.",
+  wellnessMenu:"Salute",
+  wellnessDescription:"Salute, benessere, consigli veterinari e cura quotidiana.",
+  welcomeNav:"ANIMALI BENVENUTI",
+  welcome:"Animali benvenuti",
+  welcomeDescription:"Scopri luoghi dove gli animali sono benvenuti, con mappe, percorsi e contatti."
+},
+
+pt:{
+  discounts:"DESCONTOS",
+  discountsMenu:"Descontos",
+  discountsDescription:"Ofertas, vantagens e descontos selecionados PETS & DOGUE.",
+  wellnessMenu:"Saúde",
+  wellnessDescription:"Saúde, bem-estar, orientação veterinária e cuidados diários.",
+  welcomeNav:"ANIMAIS BEM-VINDOS",
+  welcome:"Animais bem-vindos",
+  welcomeDescription:"Descubra locais onde os animais são bem-vindos, com mapas, rotas e contactos."
+},
+
+nl:{
+  discounts:"KORTINGEN",
+  discountsMenu:"Kortingen",
+  discountsDescription:"Aanbiedingen, voordelen en geselecteerde PETS & DOGUE-kortingen.",
+  wellnessMenu:"Gezondheid",
+  wellnessDescription:"Gezondheid, welzijn, veterinair advies en dagelijkse verzorging.",
+  welcomeNav:"HUISDIEREN WELKOM",
+  welcome:"Huisdieren welkom",
+  welcomeDescription:"Ontdek plekken waar huisdieren welkom zijn, met kaarten, routes en contactgegevens."
+},
+
+pl:{
+  discounts:"ZNIŻKI",
+  discountsMenu:"Zniżki",
+  discountsDescription:"Oferty, przywileje i wybrane zniżki PETS & DOGUE.",
+  wellnessMenu:"Zdrowie",
+  wellnessDescription:"Zdrowie, dobrostan, porady weterynaryjne i codzienna opieka.",
+  welcomeNav:"PUPILE MILE WIDZIANE",
+  welcome:"Pupile mile widziane",
+  welcomeDescription:"Odkrywaj miejsca, w których zwierzęta są mile widziane, z mapami, trasami i kontaktami."
+},
+
+cs:{
+  discounts:"SLEVY",
+  discountsMenu:"Slevy",
+  discountsDescription:"Nabídky, výhody a vybrané slevy PETS & DOGUE.",
+  wellnessMenu:"Zdraví",
+  wellnessDescription:"Zdraví, pohoda, veterinární rady a každodenní péče.",
+  welcomeNav:"MAZLÍČCI VÍTÁNI",
+  welcome:"Mazlíčci vítáni",
+  welcomeDescription:"Objevte místa, kde jsou mazlíčci vítáni, s mapami, trasami a kontakty."
+},
+
+sk:{
+  discounts:"ZĽAVY",
+  discountsMenu:"Zľavy",
+  discountsDescription:"Ponuky, výhody a vybrané zľavy PETS & DOGUE.",
+  wellnessMenu:"Zdravie",
+  wellnessDescription:"Zdravie, pohoda, veterinárne rady a každodenná starostlivosť.",
+  welcomeNav:"MILÁČIKOVIA VÍTANÍ",
+  welcome:"Miláčikovia vítaní",
+  welcomeDescription:"Objavte miesta, kde sú miláčikovia vítaní, s mapami, trasami a kontaktmi."
+},
+
+hu:{
+  discounts:"KEDVEZMÉNYEK",
+  discountsMenu:"Kedvezmények",
+  discountsDescription:"Ajánlatok, előnyök és válogatott PETS & DOGUE kedvezmények.",
+  wellnessMenu:"Egészség",
+  wellnessDescription:"Egészség, jóllét, állatorvosi tanácsok és mindennapi gondozás.",
+  welcomeNav:"ÁLLATBARÁT",
+  welcome:"Állatbarát",
+  welcomeDescription:"Fedezzen fel állatbarát helyeket térképekkel, útvonalakkal és elérhetőségekkel."
+},
+
+ro:{
+  discounts:"REDUCERI",
+  discountsMenu:"Reduceri",
+  discountsDescription:"Oferte, avantaje și reduceri selectate PETS & DOGUE.",
+  wellnessMenu:"Sănătate",
+  wellnessDescription:"Sănătate, bunăstare, sfaturi veterinare și îngrijire zilnică.",
+  welcomeNav:"ANIMALE BINEVENITE",
+  welcome:"Animale binevenite",
+  welcomeDescription:"Descoperă locuri unde animalele sunt binevenite, cu hărți, rute și contacte."
+},
+
+bg:{
+  discounts:"ОТСТЪПКИ",
+  discountsMenu:"Отстъпки",
+  discountsDescription:"Оферти, привилегии и подбрани отстъпки PETS & DOGUE.",
+  wellnessMenu:"Здраве",
+  wellnessDescription:"Здраве, благополучие, ветеринарни съвети и ежедневна грижа.",
+  welcomeNav:"ЛЮБИМЦИ ДОБРЕ ДОШЛИ",
+  welcome:"Любимци добре дошли",
+  welcomeDescription:"Откривайте места, където любимците са добре дошли, с карти, маршрути и контакти."
+},
+
+el:{
+  discounts:"ΕΚΠΤΩΣΕΙΣ",
+  discountsMenu:"Εκπτώσεις",
+  discountsDescription:"Προσφορές, προνόμια και επιλεγμένες εκπτώσεις PETS & DOGUE.",
+  wellnessMenu:"Υγεία",
+  wellnessDescription:"Υγεία, ευεξία, κτηνιατρικές συμβουλές και καθημερινή φροντίδα.",
+  welcomeNav:"ΚΑΤΟΙΚΙΔΙΑ ΕΥΠΡΟΣΔΕΚΤΑ",
+  welcome:"Κατοικίδια ευπρόσδεκτα",
+  welcomeDescription:"Ανακαλύψτε μέρη όπου τα κατοικίδια είναι ευπρόσδεκτα, με χάρτες, διαδρομές και στοιχεία επικοινωνίας."
+},
+
+sv:{
+  discounts:"RABATTER",
+  discountsMenu:"Rabatter",
+  discountsDescription:"Erbjudanden, förmåner och utvalda PETS & DOGUE-rabatter.",
+  wellnessMenu:"Hälsa",
+  wellnessDescription:"Hälsa, välmående, veterinärråd och daglig omsorg.",
+  welcomeNav:"HUSDJUR VÄLKOMNA",
+  welcome:"Husdjur välkomna",
+  welcomeDescription:"Upptäck platser där husdjur är välkomna, med kartor, rutter och kontaktuppgifter."
+},
+
+da:{
+  discounts:"RABATTER",
+  discountsMenu:"Rabatter",
+  discountsDescription:"Tilbud, fordele og udvalgte PETS & DOGUE-rabatter.",
+  wellnessMenu:"Sundhed",
+  wellnessDescription:"Sundhed, velvære, dyrlægeråd og daglig pleje.",
+  welcomeNav:"KÆLEDYR VELKOMNE",
+  welcome:"Kæledyr velkomne",
+  welcomeDescription:"Find steder hvor kæledyr er velkomne, med kort, ruter og kontaktoplysninger."
+},
+
+no:{
+  discounts:"RABATTER",
+  discountsMenu:"Rabatter",
+  discountsDescription:"Tilbud, fordeler og utvalgte PETS & DOGUE-rabatter.",
+  wellnessMenu:"Helse",
+  wellnessDescription:"Helse, velvære, veterinærråd og daglig omsorg.",
+  welcomeNav:"KJÆLEDYR VELKOMNE",
+  welcome:"Kjæledyr velkomne",
+  welcomeDescription:"Finn steder der kjæledyr er velkomne, med kart, ruter og kontaktinformasjon."
+},
+
+fi:{
+  discounts:"ALENNUKSET",
+  discountsMenu:"Alennukset",
+  discountsDescription:"Tarjouksia, etuja ja valittuja PETS & DOGUE -alennuksia.",
+  wellnessMenu:"Terveys",
+  wellnessDescription:"Terveys, hyvinvointi, eläinlääkärin neuvot ja päivittäinen hoito.",
+  welcomeNav:"LEMMIKIT TERVETULLEITA",
+  welcome:"Lemmikit tervetulleita",
+  welcomeDescription:"Löydä paikkoja, joissa lemmikit ovat tervetulleita, karttoineen, reitteineen ja yhteystietoineen."
+},
+
+tr:{
+  discounts:"İNDİRİMLER",
+  discountsMenu:"İndirimler",
+  discountsDescription:"PETS & DOGUE teklifleri, ayrıcalıkları ve seçili indirimleri.",
+  wellnessMenu:"Sağlık",
+  wellnessDescription:"Sağlık, iyi yaşam, veteriner önerileri ve günlük bakım.",
+  welcomeNav:"EVCİL HAYVANLAR HOŞ GELDİ",
+  welcome:"Evcil hayvanlar hoş geldi",
+  welcomeDescription:"Evcil hayvanların hoş karşılandığı yerleri haritalar, rotalar ve iletişim bilgileriyle keşfedin."
+},
+
+ar:{
+  discounts:"الخصومات",
+  discountsMenu:"الخصومات",
+  discountsDescription:"عروض ومزايا وخصومات مختارة من PETS & DOGUE.",
+  wellnessMenu:"الصحة",
+  wellnessDescription:"الصحة والعافية والإرشادات البيطرية والعناية اليومية.",
+  welcomeNav:"الحيوانات مرحب بها",
+  welcome:"الحيوانات مرحب بها",
+  welcomeDescription:"اكتشف الأماكن التي ترحب بالحيوانات الأليفة مع الخرائط والمسارات وبيانات الاتصال."
+},
+
+hi:{
+  discounts:"छूट",
+  discountsMenu:"छूट",
+  discountsDescription:"PETS & DOGUE के ऑफ़र, विशेष लाभ और चुनी हुई छूट।",
+  wellnessMenu:"स्वास्थ्य",
+  wellnessDescription:"स्वास्थ्य, वेलनेस, पशु चिकित्सा सलाह और रोज़मर्रा की देखभाल।",
+  welcomeNav:"पालतू जानवरों का स्वागत है",
+  welcome:"पालतू जानवरों का स्वागत है",
+  welcomeDescription:"ऐसी जगहें खोजें जहाँ पालतू जानवरों का स्वागत है, नक्शे, मार्ग और संपर्क के साथ।"
+}
+
+};
+
+
+Object.keys(COMMON).forEach(function(code){
+
+  const t=
+    COMMON[code];
+
+  const n=
+    NAV_UPDATE[code] ||
+    NAV_UPDATE.en;
+
+  if(!t)return;
+
+  t.navigation=
+    t.navigation ||
+    {};
+
+  t.search=
+    t.search ||
+    {};
+
+  t.footer=
+    t.footer ||
+    {};
+
+  t.menu=
+    t.menu ||
+    {};
+
+
+  /*
+  =========================================================
+  NAVIGATION
+  =========================================================
+  */
+
+  t.navigation.discounts=
+    n.discounts;
+
+  t.navigation.places=
+    n.welcomeNav;
+
+
+  /*
+  =========================================================
+  SEARCH
+  =========================================================
+  */
+
+  t.search.places=
+    n.welcome;
+
+
+  /*
+  =========================================================
+  FOOTER
+  =========================================================
+  */
+
+  t.footer.places=
+    n.welcome;
+
+
+  /*
+  =========================================================
+  SIDE MENU
+  =========================================================
+  */
+
+  t.menu.discounts=
+    n.discountsMenu;
+
+  t.menu.discountsDescription=
+    n.discountsDescription;
+
+  t.menu.wellness=
+    n.wellnessMenu;
+
+  t.menu.wellnessDescription=
+    n.wellnessDescription;
+
+  t.menu.places=
+    n.welcome;
+
+  t.menu.placesDescription=
+    n.welcomeDescription;
+
+});
+
+})();
