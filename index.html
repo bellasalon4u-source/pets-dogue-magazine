@@ -1555,18 +1555,17 @@ The International Luxury Animal Magazine
 <div class="footer-links">
 
 <a href="issue-01.html" data-footer-key="magazine"></a>
-<a href="special-offers.html" data-footer-key="offers"></a>
 <a href="members-gallery.html" data-footer-key="coverStars"></a>
+<a href="special-offers.html" data-footer-key="offers"></a>
+<a href="pet-friendly-places.html" data-footer-key="places"></a>
 <a href="articles.html" data-footer-key="articles"></a>
 <a href="photos.html" data-footer-key="photos"></a>
-<a href="pet-fashion.html" data-footer-key="fashion"></a>
 <a href="pet-travel.html" data-footer-key="travel"></a>
+<a href="pet-fashion.html" data-footer-key="fashion"></a>
 <a href="wellness.html" data-footer-key="wellness"></a>
-<a href="pet-friendly-places.html" data-footer-key="places"></a>
-<a href="contests.html" data-footer-key="contests"></a>
 <a href="local-community.html" data-footer-key="community"></a>
-<a href="pets-in-need.html" data-footer-key="rescue"></a>
 <a href="pet-marketplace.html" data-footer-key="marketplace"></a>
+<a href="contests.html" data-footer-key="contests"></a>
 <a href="partners.html" data-footer-key="partners"></a>
 
 </div>
@@ -1587,6 +1586,28 @@ Complete 23-language navigation + home interface
 
 const LANGUAGE_KEY="pets_dogue_language";
 
+/*
+=========================================================
+GLOBAL NAVIGATION ORDER
+
+1. Magazine
+2. Cover Stars
+3. Discounts
+4. Pet-Friendly Welcome
+5. Articles
+6. Photos
+7. Travel
+8. Fashion
+9. Health
+10. Community
+11. Marketplace
+12. Contests
+13. Partners
+
+Partners is always last.
+=========================================================
+*/
+
 const NAV_ITEMS=[
 {
 key:"magazine",
@@ -1594,14 +1615,19 @@ url:"issue-01.html",
 image:"file_00000000a9d471fda9b4629589be22a9.png"
 },
 {
+key:"coverStars",
+url:"members-gallery.html",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82"
+},
+{
 key:"offers",
 url:"special-offers.html",
 image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
 },
 {
-key:"coverStars",
-url:"members-gallery.html",
-image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82"
+key:"places",
+url:"pet-friendly-places.html",
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82"
 },
 {
 key:"articles",
@@ -1614,14 +1640,14 @@ url:"photos.html",
 image:"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=82"
 },
 {
-key:"fashion",
-url:"pet-fashion.html",
-image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=82"
-},
-{
 key:"travel",
 url:"pet-travel.html",
 image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"fashion",
+url:"pet-fashion.html",
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=82"
 },
 {
 key:"wellness",
@@ -1629,29 +1655,19 @@ url:"wellness.html",
 image:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=82"
 },
 {
-key:"places",
-url:"pet-friendly-places.html",
-image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82"
-},
-{
-key:"contests",
-url:"contests.html",
-image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82"
-},
-{
 key:"community",
 url:"local-community.html",
 image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=82"
 },
 {
-key:"rescue",
-url:"pets-in-need.html",
-image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=82"
-},
-{
 key:"marketplace",
 url:"pet-marketplace.html",
 image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"contests",
+url:"contests.html",
+image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82"
 },
 {
 key:"partners",
@@ -1669,19 +1685,19 @@ subscribe:"Subscribe",
 language:"Language",
 nav:{
 magazine:"Magazine",
-offers:"Discounts",
 coverStars:"Cover Stars",
+offers:"Discounts",
+places:"Pet-Friendly Welcome",
 articles:"Articles",
 photos:"Photos",
-fashion:"Fashion",
 travel:"Travel",
-wellness:"Wellness",
-places:"Places",
-contests:"Contests",
+fashion:"Fashion",
+wellness:"Health",
 community:"Community",
-rescue:"Help",
 marketplace:"Marketplace",
-partners:"Partners"
+contests:"Contests",
+partners:"Partners",
+rescue:"Help"
 },
 latestLabel:"Latest issue",
 latestTitle:"Miso: the first PETS & DOGUE cover star",
@@ -1704,6 +1720,7 @@ fashionTitle:"Style with personality",
 travelTitle:"Go further together",
 wellnessTitle:"Care for every day",
 placesTitle:"Places worth discovering",
+placesDescription:"Discover places where pets are welcome, with maps, routes and contacts.",
 contestsTitle:"Play. Enter. Win.",
 communityTitle:"Everything interesting happening near you",
 rescueTitle:"Help or ask for help",
@@ -1722,19 +1739,19 @@ subscribe:"Подписка",
 language:"Язык",
 nav:{
 magazine:"Журнал",
-offers:"Скидки",
 coverStars:"Звёзды обложки",
+offers:"Скидки",
+places:"Питомцам рады",
 articles:"Статьи",
 photos:"Фото",
-fashion:"Мода",
 travel:"Путешествия",
+fashion:"Мода",
 wellness:"Здоровье",
-places:"Места",
-contests:"Конкурсы",
 community:"Сообщество",
-rescue:"Помощь",
 marketplace:"Маркетплейс",
-partners:"Партнёры"
+contests:"Конкурсы",
+partners:"Партнёры",
+rescue:"Помощь"
 },
 latestLabel:"Последний выпуск",
 latestTitle:"Мисо: первая звезда обложки PETS & DOGUE",
@@ -1756,7 +1773,8 @@ photosTitle:"Визуальные истории",
 fashionTitle:"Стиль с характером",
 travelTitle:"Путешествуйте дальше вместе",
 wellnessTitle:"Забота каждый день",
-placesTitle:"Места, которые стоит открыть",
+placesTitle:"Места, где питомцам рады",
+placesDescription:"Находите места, где рады питомцам, с картами, маршрутами и контактами.",
 contestsTitle:"Участвуйте. Играйте. Побеждайте.",
 communityTitle:"Всё интересное, что происходит рядом с вами",
 rescueTitle:"Помочь или попросить помощи",
@@ -1775,19 +1793,19 @@ subscribe:"Підписка",
 language:"Мова",
 nav:{
 magazine:"Журнал",
-offers:"Знижки",
 coverStars:"Зірки обкладинки",
+offers:"Знижки",
+places:"Улюбленцям раді",
 articles:"Статті",
 photos:"Фото",
-fashion:"Мода",
 travel:"Подорожі",
+fashion:"Мода",
 wellness:"Здоров’я",
-places:"Місця",
-contests:"Конкурси",
 community:"Спільнота",
-rescue:"Допомога",
 marketplace:"Маркетплейс",
-partners:"Партнери"
+contests:"Конкурси",
+partners:"Партнери",
+rescue:"Допомога"
 },
 latestLabel:"Останній випуск",
 latestTitle:"Місо: перша зірка обкладинки PETS & DOGUE",
@@ -1809,7 +1827,8 @@ photosTitle:"Візуальні історії",
 fashionTitle:"Стиль із характером",
 travelTitle:"Подорожуйте далі разом",
 wellnessTitle:"Турбота щодня",
-placesTitle:"Місця, які варто відкрити",
+placesTitle:"Місця, де улюбленцям раді",
+placesDescription:"Знаходьте місця, де раді улюбленцям, з картами, маршрутами та контактами.",
 contestsTitle:"Беріть участь. Грайте. Перемагайте.",
 communityTitle:"Усе цікаве, що відбувається поруч із вами",
 rescueTitle:"Допомогти або попросити допомоги",
@@ -1828,19 +1847,19 @@ subscribe:"Abonnement",
 language:"Langue",
 nav:{
 magazine:"Magazine",
-offers:"Réductions",
 coverStars:"Stars de couverture",
+offers:"Réductions",
+places:"Animaux bienvenus",
 articles:"Articles",
 photos:"Photos",
-fashion:"Mode",
 travel:"Voyages",
-wellness:"Bien-être",
-places:"Adresses",
-contests:"Concours",
+fashion:"Mode",
+wellness:"Santé",
 community:"Communauté",
-rescue:"Aide",
 marketplace:"Marketplace",
-partners:"Partenaires"
+contests:"Concours",
+partners:"Partenaires",
+rescue:"Aide"
 }
 },
 
@@ -1851,19 +1870,19 @@ subscribe:"Abo",
 language:"Sprache",
 nav:{
 magazine:"Magazin",
-offers:"Rabatte",
 coverStars:"Cover Stars",
+offers:"Rabatte",
+places:"Tiere willkommen",
 articles:"Artikel",
 photos:"Fotos",
-fashion:"Mode",
 travel:"Reisen",
+fashion:"Mode",
 wellness:"Gesundheit",
-places:"Orte",
-contests:"Wettbewerbe",
 community:"Community",
-rescue:"Hilfe",
 marketplace:"Marktplatz",
-partners:"Partner"
+contests:"Wettbewerbe",
+partners:"Partner",
+rescue:"Hilfe"
 }
 },
 
@@ -1874,19 +1893,19 @@ subscribe:"Suscripción",
 language:"Idioma",
 nav:{
 magazine:"Revista",
-offers:"Descuentos",
 coverStars:"Estrellas de portada",
+offers:"Descuentos",
+places:"Mascotas bienvenidas",
 articles:"Artículos",
 photos:"Fotos",
-fashion:"Moda",
 travel:"Viajes",
-wellness:"Bienestar",
-places:"Lugares",
-contests:"Concursos",
+fashion:"Moda",
+wellness:"Salud",
 community:"Comunidad",
-rescue:"Ayuda",
 marketplace:"Marketplace",
-partners:"Socios"
+contests:"Concursos",
+partners:"Socios",
+rescue:"Ayuda"
 }
 },
 
@@ -1897,19 +1916,19 @@ subscribe:"Abbonamento",
 language:"Lingua",
 nav:{
 magazine:"Rivista",
-offers:"Sconti",
 coverStars:"Cover Star",
+offers:"Sconti",
+places:"Animali benvenuti",
 articles:"Articoli",
 photos:"Foto",
-fashion:"Moda",
 travel:"Viaggi",
-wellness:"Benessere",
-places:"Luoghi",
-contests:"Concorsi",
+fashion:"Moda",
+wellness:"Salute",
 community:"Community",
-rescue:"Aiuto",
 marketplace:"Marketplace",
-partners:"Partner"
+contests:"Concorsi",
+partners:"Partner",
+rescue:"Aiuto"
 }
 },
 
@@ -1920,19 +1939,19 @@ subscribe:"Assinatura",
 language:"Idioma",
 nav:{
 magazine:"Revista",
-offers:"Descontos",
 coverStars:"Estrelas da capa",
+offers:"Descontos",
+places:"Animais bem-vindos",
 articles:"Artigos",
 photos:"Fotos",
-fashion:"Moda",
 travel:"Viagens",
-wellness:"Bem-estar",
-places:"Lugares",
-contests:"Concursos",
+fashion:"Moda",
+wellness:"Saúde",
 community:"Comunidade",
-rescue:"Ajuda",
 marketplace:"Marketplace",
-partners:"Parceiros"
+contests:"Concursos",
+partners:"Parceiros",
+rescue:"Ajuda"
 }
 },
 
@@ -1943,19 +1962,19 @@ subscribe:"Abonnement",
 language:"Taal",
 nav:{
 magazine:"Magazine",
-offers:"Kortingen",
 coverStars:"Coversterren",
+offers:"Kortingen",
+places:"Huisdieren welkom",
 articles:"Artikelen",
 photos:"Foto's",
-fashion:"Mode",
 travel:"Reizen",
-wellness:"Wellness",
-places:"Plaatsen",
-contests:"Wedstrijden",
+fashion:"Mode",
+wellness:"Gezondheid",
 community:"Community",
-rescue:"Hulp",
 marketplace:"Marktplaats",
-partners:"Partners"
+contests:"Wedstrijden",
+partners:"Partners",
+rescue:"Hulp"
 }
 },
 
@@ -1966,19 +1985,19 @@ subscribe:"Subskrypcja",
 language:"Język",
 nav:{
 magazine:"Magazyn",
-offers:"Rabaty",
 coverStars:"Gwiazdy okładki",
+offers:"Zniżki",
+places:"Pupile mile widziane",
 articles:"Artykuły",
 photos:"Zdjęcia",
-fashion:"Moda",
 travel:"Podróże",
+fashion:"Moda",
 wellness:"Zdrowie",
-places:"Miejsca",
-contests:"Konkursy",
 community:"Społeczność",
-rescue:"Pomoc",
 marketplace:"Marketplace",
-partners:"Partnerzy"
+contests:"Konkursy",
+partners:"Partnerzy",
+rescue:"Pomoc"
 }
 },
 
@@ -1989,19 +2008,19 @@ subscribe:"Předplatné",
 language:"Jazyk",
 nav:{
 magazine:"Magazín",
-offers:"Slevy",
 coverStars:"Hvězdy obálky",
+offers:"Slevy",
+places:"Mazlíčci vítáni",
 articles:"Články",
 photos:"Fotografie",
-fashion:"Móda",
 travel:"Cestování",
+fashion:"Móda",
 wellness:"Zdraví",
-places:"Místa",
-contests:"Soutěže",
 community:"Komunita",
-rescue:"Pomoc",
 marketplace:"Marketplace",
-partners:"Partneři"
+contests:"Soutěže",
+partners:"Partneři",
+rescue:"Pomoc"
 }
 },
 
@@ -2012,19 +2031,19 @@ subscribe:"Predplatné",
 language:"Jazyk",
 nav:{
 magazine:"Magazín",
-offers:"Zľavy",
 coverStars:"Hviezdy obálky",
+offers:"Zľavy",
+places:"Miláčikovia vítaní",
 articles:"Články",
 photos:"Fotografie",
-fashion:"Móda",
 travel:"Cestovanie",
+fashion:"Móda",
 wellness:"Zdravie",
-places:"Miesta",
-contests:"Súťaže",
 community:"Komunita",
-rescue:"Pomoc",
 marketplace:"Marketplace",
-partners:"Partneri"
+contests:"Súťaže",
+partners:"Partneri",
+rescue:"Pomoc"
 }
 },
 
@@ -2035,19 +2054,19 @@ subscribe:"Előfizetés",
 language:"Nyelv",
 nav:{
 magazine:"Magazin",
-offers:"Kedvezmények",
 coverStars:"Címlapsztárok",
+offers:"Kedvezmények",
+places:"Állatbarát",
 articles:"Cikkek",
 photos:"Fotók",
-fashion:"Divat",
 travel:"Utazás",
+fashion:"Divat",
 wellness:"Egészség",
-places:"Helyek",
-contests:"Versenyek",
 community:"Közösség",
-rescue:"Segítség",
 marketplace:"Piactér",
-partners:"Partnerek"
+contests:"Versenyek",
+partners:"Partnerek",
+rescue:"Segítség"
 }
 },
 
@@ -2058,19 +2077,19 @@ subscribe:"Abonament",
 language:"Limbă",
 nav:{
 magazine:"Revistă",
-offers:"Reduceri",
 coverStars:"Vedete de copertă",
+offers:"Reduceri",
+places:"Animale binevenite",
 articles:"Articole",
 photos:"Fotografii",
-fashion:"Modă",
 travel:"Călătorii",
+fashion:"Modă",
 wellness:"Sănătate",
-places:"Locuri",
-contests:"Concursuri",
 community:"Comunitate",
-rescue:"Ajutor",
 marketplace:"Marketplace",
-partners:"Parteneri"
+contests:"Concursuri",
+partners:"Parteneri",
+rescue:"Ajutor"
 }
 },
 
@@ -2081,19 +2100,19 @@ subscribe:"Абонамент",
 language:"Език",
 nav:{
 magazine:"Списание",
-offers:"Отстъпки",
 coverStars:"Звезди на корицата",
+offers:"Отстъпки",
+places:"Любимци добре дошли",
 articles:"Статии",
 photos:"Снимки",
-fashion:"Мода",
 travel:"Пътувания",
+fashion:"Мода",
 wellness:"Здраве",
-places:"Места",
-contests:"Конкурси",
 community:"Общност",
-rescue:"Помощ",
 marketplace:"Маркетплейс",
-partners:"Партньори"
+contests:"Конкурси",
+partners:"Партньори",
+rescue:"Помощ"
 }
 },
 
@@ -2104,19 +2123,19 @@ subscribe:"Συνδρομή",
 language:"Γλώσσα",
 nav:{
 magazine:"Περιοδικό",
-offers:"Εκπτώσεις",
 coverStars:"Αστέρια εξωφύλλου",
+offers:"Εκπτώσεις",
+places:"Κατοικίδια ευπρόσδεκτα",
 articles:"Άρθρα",
 photos:"Φωτογραφίες",
-fashion:"Μόδα",
 travel:"Ταξίδια",
+fashion:"Μόδα",
 wellness:"Υγεία",
-places:"Μέρη",
-contests:"Διαγωνισμοί",
 community:"Κοινότητα",
-rescue:"Βοήθεια",
 marketplace:"Marketplace",
-partners:"Συνεργάτες"
+contests:"Διαγωνισμοί",
+partners:"Συνεργάτες",
+rescue:"Βοήθεια"
 }
 },
 
@@ -2127,19 +2146,19 @@ subscribe:"Prenumeration",
 language:"Språk",
 nav:{
 magazine:"Magasin",
-offers:"Rabatter",
 coverStars:"Omslagsstjärnor",
+offers:"Rabatter",
+places:"Husdjur välkomna",
 articles:"Artiklar",
 photos:"Foton",
-fashion:"Mode",
 travel:"Resor",
+fashion:"Mode",
 wellness:"Hälsa",
-places:"Platser",
-contests:"Tävlingar",
 community:"Community",
-rescue:"Hjälp",
 marketplace:"Marknadsplats",
-partners:"Partners"
+contests:"Tävlingar",
+partners:"Partners",
+rescue:"Hjälp"
 }
 },
 
@@ -2150,19 +2169,19 @@ subscribe:"Abonnement",
 language:"Sprog",
 nav:{
 magazine:"Magasin",
-offers:"Rabatter",
 coverStars:"Forsidestjerner",
+offers:"Rabatter",
+places:"Kæledyr velkomne",
 articles:"Artikler",
 photos:"Fotos",
-fashion:"Mode",
 travel:"Rejser",
+fashion:"Mode",
 wellness:"Sundhed",
-places:"Steder",
-contests:"Konkurrencer",
 community:"Community",
-rescue:"Hjælp",
 marketplace:"Marketplace",
-partners:"Partnere"
+contests:"Konkurrencer",
+partners:"Partnere",
+rescue:"Hjælp"
 }
 },
 
@@ -2173,19 +2192,19 @@ subscribe:"Abonnement",
 language:"Språk",
 nav:{
 magazine:"Magasin",
-offers:"Rabatter",
 coverStars:"Forsidestjerner",
+offers:"Rabatter",
+places:"Kjæledyr velkomne",
 articles:"Artikler",
 photos:"Bilder",
-fashion:"Mote",
 travel:"Reiser",
+fashion:"Mote",
 wellness:"Helse",
-places:"Steder",
-contests:"Konkurranser",
 community:"Fellesskap",
-rescue:"Hjelp",
 marketplace:"Markedsplass",
-partners:"Partnere"
+contests:"Konkurranser",
+partners:"Partnere",
+rescue:"Hjelp"
 }
 },
 
@@ -2196,19 +2215,19 @@ subscribe:"Tilaus",
 language:"Kieli",
 nav:{
 magazine:"Lehti",
-offers:"Alennukset",
 coverStars:"Kansitähdet",
+offers:"Alennukset",
+places:"Lemmikit tervetulleita",
 articles:"Artikkelit",
 photos:"Kuvat",
-fashion:"Muoti",
 travel:"Matkailu",
-wellness:"Hyvinvointi",
-places:"Paikat",
-contests:"Kilpailut",
+fashion:"Muoti",
+wellness:"Terveys",
 community:"Yhteisö",
-rescue:"Apu",
 marketplace:"Marketplace",
-partners:"Kumppanit"
+contests:"Kilpailut",
+partners:"Kumppanit",
+rescue:"Apu"
 }
 },
 
@@ -2219,19 +2238,19 @@ subscribe:"Abonelik",
 language:"Dil",
 nav:{
 magazine:"Dergi",
-offers:"İndirimler",
 coverStars:"Kapak yıldızları",
+offers:"İndirimler",
+places:"Evcil hayvanlar hoş geldi",
 articles:"Makaleler",
 photos:"Fotoğraflar",
-fashion:"Moda",
 travel:"Seyahat",
+fashion:"Moda",
 wellness:"Sağlık",
-places:"Mekanlar",
-contests:"Yarışmalar",
 community:"Topluluk",
-rescue:"Yardım",
 marketplace:"Pazar",
-partners:"Ortaklar"
+contests:"Yarışmalar",
+partners:"Ortaklar",
+rescue:"Yardım"
 }
 },
 
@@ -2242,19 +2261,19 @@ subscribe:"الاشتراك",
 language:"اللغة",
 nav:{
 magazine:"المجلة",
-offers:"الخصومات",
 coverStars:"نجوم الغلاف",
+offers:"الخصومات",
+places:"الحيوانات مرحب بها",
 articles:"المقالات",
 photos:"الصور",
-fashion:"الموضة",
 travel:"السفر",
+fashion:"الموضة",
 wellness:"الصحة",
-places:"الأماكن",
-contests:"المسابقات",
 community:"المجتمع",
-rescue:"المساعدة",
 marketplace:"السوق",
-partners:"الشركاء"
+contests:"المسابقات",
+partners:"الشركاء",
+rescue:"المساعدة"
 }
 },
 
@@ -2265,19 +2284,19 @@ subscribe:"सदस्यता",
 language:"भाषा",
 nav:{
 magazine:"पत्रिका",
-offers:"छूट",
 coverStars:"कवर स्टार",
+offers:"छूट",
+places:"पालतू जानवरों का स्वागत है",
 articles:"लेख",
 photos:"फ़ोटो",
-fashion:"फ़ैशन",
 travel:"यात्रा",
+fashion:"फ़ैशन",
 wellness:"स्वास्थ्य",
-places:"स्थान",
-contests:"प्रतियोगिताएँ",
 community:"समुदाय",
-rescue:"मदद",
 marketplace:"मार्केटप्लेस",
-partners:"पार्टनर"
+contests:"प्रतियोगिताएँ",
+partners:"पार्टनर",
+rescue:"मदद"
 }
 }
 
@@ -2285,11 +2304,6 @@ partners:"पार्टनर"
 
 /* =========================================================
 FALLBACK
-
-For languages where the main editorial copy is not
-overridden above, English copy is used only as a final
-technical fallback. Navigation and principal controls
-are localized in all 23 languages.
 ========================================================= */
 
 function bundle(language){
@@ -2309,7 +2323,64 @@ nav:{
 }
 
 /* =========================================================
-MENU
+SIDE MENU DESCRIPTION
+========================================================= */
+
+function getMenuDescription(key,tr){
+
+const descriptions={
+
+magazine:
+tr.latestText,
+
+coverStars:
+tr.starText,
+
+offers:
+tr.offersText,
+
+places:
+tr.placesDescription||
+tr.worldText,
+
+articles:
+tr.articlesText,
+
+photos:
+tr.worldText,
+
+travel:
+tr.worldText,
+
+fashion:
+tr.worldText,
+
+wellness:
+tr.worldText,
+
+community:
+tr.communityTitle,
+
+marketplace:
+tr.marketTitle,
+
+contests:
+tr.contestsTitle,
+
+partners:
+tr.partnerText
+
+};
+
+return(
+descriptions[key]||
+tr.worldText
+);
+
+}
+
+/* =========================================================
+MENU + TOP NAV
 ========================================================= */
 
 function renderNavigation(language){
@@ -2330,20 +2401,16 @@ ${tr.nav[item.key]}
 document.getElementById("sideMenuList").innerHTML=
 NAV_ITEMS
 .map(
-(item,index)=>`
+item=>`
 <a class="menu-item" href="${item.url}">
-<img src="${item.image}" alt="${tr.nav[item.key]}" loading="lazy">
+<img
+src="${item.image}"
+alt="${tr.nav[item.key]}"
+loading="lazy"
+>
 <div class="menu-item-copy">
 <h3>${tr.nav[item.key]}</h3>
-<p>${
-index===0
-?tr.latestText
-:index===1
-?tr.offersText
-:index===2
-?tr.starText
-:tr.worldText
-}</p>
+<p>${getMenuDescription(item.key,tr)}</p>
 </div>
 </a>
 `
