@@ -1,86 +1,499 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title data-i18n="petFriendly.meta.title">Pet Friendly Places | PETS & DOGUE</title><meta id="pageDescription" name="description" content="Search pet-friendly cafés, hotels, parks, beaches, veterinary clinics, groomers and other places with the PETS & DOGUE directory." data-i18n-attr="content:petFriendly.meta.description"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script><style>
-:root{--black:#070707;--cream:#f4efe5;--white:#fff;--green:#65e51f;--red:#b83232;--orange:#e09b38;--gold-deep:#6f4b0c;--gold-dark:#8e6415;--gold:#c99a2e;--gold-rich:#d8ad45;--gold-light:#f1d783;--gold-highlight:#fff2b6;--gold-metal:linear-gradient(110deg,#6f4b0c 0%,#b9841e 18%,#f4db83 38%,#fff3bb 48%,#d4a536 59%,#8b5e12 78%,#e8c568 100%)}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--cream);color:#111;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}body.menu-open,body.modal-open{overflow:hidden}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}img{display:block;width:100%}.metallic{background:var(--gold-metal);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 10s ease-in-out infinite}@keyframes shine{0%,72%{background-position:100%}100%{background-position:-80%}}
-.site-header{background:#070707;color:#fff;position:sticky;top:0;z-index:1800;border-bottom:1px solid #333}.header-main{height:108px;max-width:1550px;margin:auto;padding:0 18px;display:grid;grid-template-columns:80px 1fr 80px;align-items:center}.icon-button{width:50px;height:50px;border:0;background:transparent;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%}.menu-lines{width:30px;display:grid;gap:6px}.menu-lines span{display:block;height:2px;background:#fff;border-radius:999px}.brand{text-align:center;line-height:.88}.brand-small{font:14px Georgia,serif;letter-spacing:1.5px}.brand-big{font:normal 58px Georgia,serif;letter-spacing:4px}.home-icon svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:2}.category-nav{display:flex;gap:30px;overflow-x:auto;padding:16px 24px;border-top:1px solid #292929;border-bottom:1px solid #303030;scrollbar-width:none}.category-nav::-webkit-scrollbar{display:none}.category-nav a{position:relative;white-space:nowrap;font-size:14px;font-weight:bold;letter-spacing:.7px;padding-bottom:7px}.category-nav a.active{color:var(--gold-light)}.category-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold-metal)}
-.menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.74);display:none;z-index:2500}.menu-overlay.show{display:block}.side-menu{position:fixed;top:0;left:-100%;width:min(430px,94%);height:100vh;background:#fff;z-index:2600;overflow-y:auto;transition:.35s;border-right:2px solid #111}.side-menu.open{left:0}.side-menu-header{background:#111;color:#fff;padding:24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:3}.side-menu-header h2{font:normal 32px Georgia,serif}.side-menu-header button{width:43px;height:43px;border:0;background:#fff;border-radius:50%;font-size:24px}.menu-account{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:18px 18px 12px}.menu-account a{padding:12px;text-align:center;border:2px solid #111;border-radius:999px;font-weight:bold}.menu-account a:last-child{background:var(--green);border-color:var(--green)}.menu-language{padding:0 18px 18px;border-bottom:1px solid #ddd}.menu-language span{display:block;font-size:10px;font-weight:bold;letter-spacing:1.5px;color:#777;margin:5px 0 8px}.menu-language select{width:100%;height:48px;border:2px solid #111;border-radius:999px;background:#faf8f3;padding:0 15px}.menu-list{padding:18px;display:grid;gap:12px}.menu-item{display:grid;grid-template-columns:82px 1fr;align-items:center;gap:14px;border:2px solid #111;background:#faf8f3;border-radius:21px;overflow:hidden}.menu-item img{width:82px;height:82px;object-fit:cover}.menu-item h3{font:21px Georgia,serif;margin-bottom:4px}.menu-item p{font-size:12px;line-height:1.45;color:#666;padding-right:9px}.menu-bottom{padding:18px;background:#f4f0e7;border-top:1px solid #ddd}.menu-bottom div{display:flex;flex-wrap:wrap;gap:13px 20px}.menu-bottom a{font-size:12px;font-weight:bold;color:#666}
-.hero{height:545px;position:relative;overflow:hidden;background:#111}.hero>img{height:100%;object-fit:cover;object-position:center 55%}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.97),rgba(0,0,0,.08) 67%)}.hero-content{position:absolute;z-index:2;left:50%;bottom:42px;transform:translateX(-50%);width:min(1050px,90%);text-align:center;color:#fff}.hero-kicker{display:block;color:var(--gold-light);font-size:10px;font-weight:bold;letter-spacing:2.7px;margin-bottom:12px}.hero h1{font:normal 66px/.95 Georgia,serif;margin-bottom:14px}.hero p{font:18px/1.6 Georgia,serif;color:#eee;max-width:900px;margin:auto}.hero-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:20px}
-.btn{display:inline-block;border:0;padding:12px 17px;border-radius:999px;font-size:12px;font-weight:bold;text-align:center}.btn.black{background:#111;color:#fff}.btn.gold{background:var(--gold-metal);color:#111}.btn.green{background:var(--green);color:#111}.btn.light{background:#fff;color:#111;border:1px solid #111}.btn.danger{background:var(--red);color:#fff}.btn:disabled{opacity:.55;cursor:not-allowed}
-main{max-width:1500px;margin:auto;padding:16px 18px 65px}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;background:#080808;padding:5px;border:1px solid #111}.stat{background:#fff;padding:22px 10px;text-align:center}.stat strong{display:block;font:normal 38px Georgia,serif;color:var(--gold-dark);margin-bottom:5px}.stat span{font-size:10px;font-weight:bold;color:#666}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:38px 0 16px;padding-bottom:12px;border-bottom:3px solid #111}.section-head h2{font:normal 50px/.95 Georgia,serif}.section-head span{font-size:10px;font-weight:bold;letter-spacing:2px;color:var(--gold-dark)}
-.search-panel{background:#fff;border:1.5px solid #111;padding:14px;margin-bottom:10px}.search-grid{display:grid;grid-template-columns:minmax(250px,2fr) 1fr 1fr auto auto;gap:9px}.search-grid input,.search-grid select{width:100%;height:48px;padding:0 14px;border:1px solid #aaa;border-radius:999px;background:#fff}.search-help{font-size:11px;line-height:1.55;color:#666;margin-top:10px}.search-status{display:none;margin-top:10px;padding:12px 14px;font-size:11px;font-weight:bold}.search-status.show{display:block}.search-status.loading{background:#fff8df;border:1px solid #e2c264}.search-status.success{background:#ecfff0;border:1px solid var(--green)}.search-status.error{background:#ffeaea;border:1px solid #d86a6a}.source-legend{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.source-pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #ccc;border-radius:999px;padding:8px 11px;font-size:10px;font-weight:bold}.source-dot{width:8px;height:8px;border-radius:50%}.source-dot.internet{background:#69a8ff}.source-dot.cms{background:var(--gold)}.source-dot.community{background:#b57cff}.source-dot.verified{background:var(--green)}.source-dot.review{background:var(--orange)}.filters{display:flex;gap:7px;overflow-x:auto;padding:4px 0 17px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{white-space:nowrap;background:#fff;border:1.5px solid #111;border-radius:999px;padding:10px 15px;font-size:11px;font-weight:bold}.filter.active{background:#111;color:#fff}
-.layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(350px,.6fr);gap:8px;align-items:start}.results-header{display:flex;justify-content:space-between;align-items:end;gap:15px;background:#111;color:#fff;padding:18px}.results-header h2{font:normal 31px Georgia,serif;color:var(--gold-light)}.results-header p{font-size:11px;color:#bbb;margin-top:5px}.results-header select{height:43px;border-radius:999px;padding:0 12px;min-width:190px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:6px}.place-card{background:#fff;border:1.5px solid #111;overflow:hidden;display:flex;flex-direction:column}.place-card.under-review{border-color:var(--orange)}.place-image{height:245px;position:relative;overflow:hidden;background:#eee}.place-image img{height:100%;object-fit:cover;transition:.5s}.place-card:hover .place-image img{transform:scale(1.03)}.place-image-fallback{height:100%;display:flex;align-items:center;justify-content:center;font-size:62px;background:linear-gradient(135deg,#fff,#efe9db)}.place-source{position:absolute;top:12px;left:12px;padding:6px 9px;border-radius:999px;font-size:8px;font-weight:bold;color:#fff;background:#111}.place-source.internet{background:#3985e6}.place-source.cms{background:var(--gold-dark)}.place-source.community{background:#8a52cb}.verified-badge,.review-badge{position:absolute;top:12px;right:12px;padding:6px 9px;border-radius:999px;font-size:8px;font-weight:bold;color:#fff}.verified-badge{background:var(--green);color:#111}.review-badge{background:var(--orange)}.place-content{padding:16px;display:flex;flex-direction:column;height:100%}.category-badge{display:inline-block;width:max-content;background:var(--gold-metal);color:#111;padding:6px 9px;border-radius:999px;font-size:8px;font-weight:bold;margin-bottom:8px}.place-content h3{font:normal 26px/1.04 Georgia,serif;margin-bottom:7px}.place-meta{color:#777;font-size:11px;line-height:1.5;margin-bottom:9px}.distance{font-weight:bold;color:var(--gold-dark)}.trust-box{background:#f5f1e8;border:1px solid #ddd;paddi  ng:11px;margin-bottom:10px}.trust-row{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:10px;font-weight:bold;margin-bottom:7px}.trust-row:last-child{margin-bottom:0}.trust-score{font:normal 18px Georgia,serif;color:var(--gold-dark)}.trust-bar{height:6px;background:#ddd;border-radius:999px;overflow:hidden}.trust-fill{height:100%;background:linear-gradient(90deg,#b83232,#e09b38,#65e51f);border-radius:999px}.pet-policy{background:#f8f7f3;padding:10px;font-size:10px;line-height:1.5;margin-bottom:10px}.pet-policy.disputed{background:#fff3d7;border:1px solid var(--orange)}.place-content p{color:#555;font-size:11px;line-height:1.55;margin-bottom:12px}.place-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:auto}.place-actions .btn{padding:9px 10px;font-size:9px}.save-btn.saved,.like-btn.liked{background:var(--green);color:#111;border-color:var(--green)}.report-btn.reported{background:#eee;color:#777;border-color:#aaa}.empty-state{display:none;background:#fff;border:2px dashed #aaa;padding:38px;text-align:center;color:#666}.empty-state h3{font:normal 30px Georgia,serif;margin-bottom:8px}
-.map-panel{background:#080808;color:#fff;padding:18px;position:sticky;top:175px}.map-panel h2{font:normal 32px Georgia,serif;color:var(--gold-light);margin-bottom:13px}#placesMap{height:640px;overflow:hidden;background:#ddd}.map-info{background:#fff;color:#111;padding:14px;margin-top:8px}.map-info strong{display:block;font-size:12px;margin-bottom:5px}.map-info p{color:#555;font-size:10px;line-height:1.5} .saved-section{margin-top:8px;background:#080808;color:#fff;padding:28px 20px}.saved-section .section-head{margin:0 0 16px;border-color:#444}.saved-section .section-head h2{color:var(--gold-light)}.saved-section .section-head span{color:var(--gold-light)}.saved-list{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.saved-item{background:#fff;color:#111;padding:17px;border:1px solid #333}.saved-item h3{font:normal 23px Georgia,serif;margin-bottom:6px}.saved-item p{color:#666;font-size:11px;line-height:1.5;margin-bottom:10px}
-.community-section{display:grid;grid-template-columns:.75fr 1.25fr;margin-top:8px;background:#fff;border:1.5px solid #111}.community-intro{background:#111;color:#fff;padding:42px;display:flex;flex-direction:column;justify-content:center}.community-intro>span{font-size:10px;font-weight:bold;letter-spacing:2.3px;color:var(--gold-light);margin-bottom:10px}.community-intro h2{font:normal 43px/.98 Georgia,serif;color:var(--gold-light);margin-bottom:12px}.community-intro p{font-size:13px;line-height:1.65;color:#ccc}.community-form{padding:30px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.form-grid input,.form-grid select,.community-form textarea{width:100%;padding:12px;border:1px solid #aaa;background:#fff;border-radius:10px}.community-form textarea{min-height:115px;resize:vertical;margin-top:8px}.checkbox{display:flex;align-items:flex-start;gap:8px;margin:10px 0 14px;color:#555;font-size:10px;line-height:1.5}.checkbox input{width:auto;margin-top:2px}.form-message{display:none;padding:12px;margin-top:12px;font-size:11px;font-weight:bold}.form-message.success{display:block;background:#ecfff0;border:1px solid var(--green)}.form-message.error{display:block;background:#ffeaea;border:1px solid #d86a6a}
-.club{display:grid;grid-template-columns:1.05fr .95fr;margin-top:8px;background:#111;color:#fff;min-height:420px}.club-image{position:relative}.club-image img{position:absolute;inset:0;height:100%;object-fit:cover}.club-copy{padding:42px;display:flex;flex-direction:column;justify-content:center}.club-copy>span{font-size:10px;font-weight:bold;letter-spacing:2.4px;color:var(--gold-light);margin-bottom:10px}.club h2{font:normal 43px/.98 Georgia,serif;color:var(--gold-light);margin-bottom:12px}.club p{font-size:13px;line-height:1.65;color:#ccc}.benefits{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:18px}.benefit{background:#fff;color:#111;padding:13px;font-size:10px;font-weight:bold}.club .btn{margin-top:17px}
-footer{background:#050505;color:#fff;text-align:center;padding:60px 20px;border-top:1px solid #292929}.footer-brand{font:normal 51px Georgia,serif;letter-spacing:3px}.footer-subtitle{color:#aaa;margin:10px 0 28px}.footer-links{display:flex;justify-content:center;gap:17px;flex-wrap:wrap;margin-bottom:28px}.footer-links a{font-size:13px;color:#ccc}.admin-small{font-size:10px;letter-spacing:2px;color:#666;text-transform:uppercase}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:5000;display:none;padding:20px;overflow-y:auto}.modal-overlay.open{display:block}.modal-card{max-width:900px;margin:30px auto;background:#fff;border:2px solid #111;position:relative;overflow:hidden}.modal-card.small{max-width:650px}.modal-hero{height:370px;background:#eee}.modal-hero img{height:100%;object-fit:cover}.modal-fallback{height:100%;display:flex;align-items:center;justify-content:center;font-size:90px}.modal-content{padding:28px}.modal-content h2{font:normal 42px Georgia,serif;margin-bottom:10px}.modal-content p{color:#555;font-size:14px;line-height:1.7;white-space:pre-wrap}.modal-close{position:absolute;top:15px;right:15px;width:44px;height:44px;border:0;border-radius:50%;background:#111;color:#fff;font-size:23px;z-index:3}.report-options{display:grid;gap:7px;margin:17px 0}.report-option{display:flex;gap:10px;align-items:flex-start;background:#f8f7f3;border:1px solid #ddd;padding:12px;cursor:pointer}.report-option input{width:auto;margin-top:3px}.report-option span{font-size:11px;line-height:1.5}.report-notice{background:#fff8df;border:1px solid #e2c264;padding:13px;color:#555;font-size:11px;line-height:1.5;margin-bottom:15px}.leaflet-popup-content-wrapper{border-radius:14px}.leaflet-popup-content{line-height:1.45}
-html[dir="rtl"] .side-menu{left:auto;right:-100%;border-right:0;border-left:2px solid #111}html[dir="rtl"] .side-menu.open{right:0;left:auto}html[dir="rtl"] .menu-item p{padding-right:0;padding-left:9px}html[dir="rtl"] input,html[dir="rtl"] textarea,html[dir="rtl"] select{text-align:right}html[dir="rtl"] .place-source{left:auto;right:12px}html[dir="rtl"] .verified-badge,html[dir="rtl"] .review-badge{right:auto;left:12px}html[dir="rtl"] .modal-close{right:auto;left:15px}
-@media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}.search-grid{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}.map-panel{position:static}.grid{grid-template-columns:1fr 1fr}#placesMap{height:480px}.community-section,.club{grid-template-columns:1fr}.club-image{min-height:400px}.saved-list{grid-template-columns:1fr 1fr}}
-@media(max-width:760px){.header-main{height:87px;grid-template-columns:55px 1fr 55px;padding:0 8px}.brand-big{font-size:39px;letter-spacing:2px}.brand-small{font-size:11px}.category-nav{padding:14px 15px;gap:22px}.category-nav a{font-size:12px}.hero{height:445px}.hero h1{font-size:45px}.hero p{font-size:15px}.hero-content{bottom:25px}main{padding:10px 10px 45px}.stats{grid-template-columns:1fr 1fr;gap:4px}.section-head{align-items:flex-start;flex-direction:column;margin-top:30px}.section-head h2{font-size:39px}.search-grid{grid-template-columns:1fr}.results-header{align-items:flex-start;flex-direction:column}.results-header select{width:100%}.grid{grid-template-columns:1fr 1fr;gap:5px}.place-image{height:205px}.place-content{padding:12px}.place-content h3{font-size:21px}.place-actions .btn{font-size:8px;padding:8px 8px}.map-panel{padding:12px}#placesMap{height:420px}.saved-list{grid-template-columns:1fr}.community-intro,.community-form,.club-copy{padding:30px 18px}.community-intro h2,.club h2{font-size:37px}.form-grid{grid-template-columns:1fr}.benefits{grid-template-columns:1fr 1fr}.club-image{min-height:350px}.footer-brand{font-size:39px}.modal-hero{height:260px}.modal-content{padding:20px}.modal-content h2{font-size:32px}}
-@media(max-width:430px){.brand-big{font-size:34px}.hero{height:425px}.grid{grid-template-columns:1fr}.place-image{height:255px}.benefits{grid-template-columns:1fr 1fr}}
-@media(prefers-reduced-motion:reduce){.metallic{animation:none}.place-image img{transition:none}}
-</style></head><body>
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div><aside class="side-menu" id="sideMenu"><div class="side-menu-header"><h2 data-i18n="common.menu.contents">Contents</h2><button type="button" onclick="closeMenu()" aria-label="Close menu">×</button></div><div class="menu-account"><a href="account.html" data-i18n="common.menu.signIn">Sign In</a><a href="club.html" data-i18n="common.menu.joinClub">Join Club</a></div><div class="menu-language"><span class="notranslate" translate="no">LANGUAGE</span><select id="languageSelect"><option value="en">EN — English</option><option value="uk">UA — Українська</option><option value="ru">RU — Русский</option><option value="fr">FR — Français</option><option value="de">DE — Deutsch</option><option value="es">ES — Español</option><option value="it">IT — Italiano</option><option value="pt">PT — Português</option><option value="nl">NL — Nederlands</option><option value="pl">PL — Polski</option><option value="cs">CZ — Čeština</option><option value="sk">SK — Slovenčina</option><option value="hu">HU — Magyar</option><option value="ro">RO — Română</option><option value="bg">BG — Български</option><option value="el">GR — Ελληνικά</option><option value="sv">SE — Svenska</option><option value="da">DK — Dansk</option><option value="no">NO — Norsk</option><option value="fi">FI — Suomi</option><option value="tr">TR — Türkçe</option><option value="ar">AR — العربية</option><option value="hi">HI — हिन्दी</option></select></div><div class="menu-list">
-<a class="menu-item" href="index.html"><img src="file_00000000a9d471fda9b4629589be22a9.png" alt="Home"><div><h3 data-i18n="common.menu.home">Home</h3><p data-i18n="common.menu.homeDescription">Return to the PETS & DOGUE homepage.</p></div></a>
-<a class="menu-item" href="articles.html"><img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80" alt="Articles"><div><h3 data-i18n="common.menu.articles">Articles</h3><p data-i18n="common.menu.articlesDescription">Read and listen to editorial stories.</p></div></a>
-<a class="menu-item" href="pet-travel.html"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80" alt="Travel"><div><h3 data-i18n="common.menu.travel">Travel</h3><p data-i18n="common.menu.travelDescription">Hotels, beaches and pet-friendly journeys.</p></div></a>
-<a class="menu-item" href="wellness.html"><img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80" alt="Wellness"><div><h3 data-i18n="common.menu.wellness">Wellness</h3><p data-i18n="common.menu.wellnessDescription">Care, grooming, health and everyday wellbeing.</p></div></a>
-<a class="menu-item" href="local-community.html"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80" alt="Community"><div><h3 data-i18n="common.menu.community">Community</h3><p data-i18n="common.menu.communityDescription">Local stories, recommendations and pet people.</p></div></a>
-<a class="menu-item" href="partners.html"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80" alt="Partners"><div><h3 data-i18n="common.menu.partners">Partners</h3><p data-i18n="common.menu.partnersDescription">Discover selected brands and member offers.</p></div></a>
-<a class="menu-item" href="pets-in-need.html"><img src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80" alt="Rescue"><div><h3 data-i18n="common.menu.rescue">Pets In Need</h3><p data-i18n="common.menu.rescueDescription">Rescue, adoption and stories that need visibility.</p></div></a>
-</div><div class="menu-bottom"><div><a href="contact.html" data-i18n="common.footer.contact">Contact</a><a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a><a href="terms.html" data-i18n="common.footer.terms">Terms</a><a href="admin.html" data-i18n="common.footer.admin">Admin</a></div></div></aside> <header class="site-header"><div class="header-main"><button class="icon-button" type="button" onclick="openMenu()" aria-label="Open menu"><span class="menu-lines"><span></span><span></span><span></span></span></button><a class="brand notranslate" href="index.html" translate="no"><div class="brand-small metallic">PETS &amp;</div><div class="brand-big metallic">DOGUE</div></a><a class="icon-button home-icon" href="index.html" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21H3Z"></path><path d="M9 21v-7h6v7"></path></svg></a></div><nav class="category-nav"><a data-i18n="common.navigation.magazine" href="issue-01.html">MAGAZINE</a><a data-i18n="common.navigation.articles" href="articles.html">ARTICLES</a><a data-i18n="common.navigation.photos" href="photos.html">PHOTOS</a><a data-i18n="common.navigation.coverStars" href="members-gallery.html">COVER STARS</a><a data-i18n="common.navigation.fashion" href="pet-fashion.html">FASHION</a><a data-i18n="common.navigation.wellness" href="wellness.html">WELLNESS</a><a data-i18n="common.navigation.travel" href="pet-travel.html">TRAVEL</a><a class="active" data-i18n="common.navigation.places" href="pet-friendly-places.html">PLACES</a><a data-i18n="common.navigation.rescue" href="pets-in-need.html">RESCUE</a><a data-i18n="common.navigation.contests" href="contests.html">CONTESTS</a><a data-i18n="common.navigation.community" href="local-community.html">COMMUNITY</a><a data-i18n="common.navigation.marketplace" href="pet-marketplace.html">MARKETPLACE</a><a data-i18n="common.navigation.partners" href="partners.html">PARTNERS</a></nav></header>
-<section class="hero"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1800&q=85" alt="Pet-friendly places"><div class="hero-content"><span class="hero-kicker notranslate" translate="no">PETS &amp; DOGUE · PLACES</span><h1 data-i18n="petFriendly.hero.title">Pet Friendly Places</h1><p data-i18n="petFriendly.hero.description">Search real places near any city or postcode, explore them on the map, submit new locations and help protect the accuracy of the PETS & DOGUE directory.</p><div class="hero-actions"><a href="#directory" class="btn green" data-i18n="petFriendly.hero.search">Search Places</a><a href="#add-place" class="btn gold" data-i18n="petFriendly.hero.add">Add A Place</a><a href="club.html" class="btn light" data-i18n="petFriendly.hero.club">Join The Club</a></div></div></section>
-<main><section class="stats"><div class="stat"><strong id="resultCount">0</strong><span data-i18n="petFriendly.stats.results">Results</span></div><div class="stat"><strong id="internetCount">0</strong><span data-i18n="petFriendly.stats.internet">Internet Places</span></div><div class="stat"><strong id="verifiedCount">0</strong><span data-i18n="petFriendly.stats.verified">DOGUE Verified</span></div><div class="stat"><strong id="savedCount">0</strong><span data-i18n="petFriendly.stats.saved">Saved</span></div><div class="stat"><strong id="reviewCount">0</strong><span data-i18n="petFriendly.stats.review">Under Review</span></div></section>
-<section id="directory"><div class="section-head"><h2 data-i18n="petFriendly.directory.title">Find Places Near You</h2><span class="notranslate" translate="no">DOGUE TRUST DIRECTORY</span></div><section class="search-panel"><div class="search-grid"><input id="locationSearch" type="text" placeholder="City, country or postcode — e.g. Bournemouth BH2" data-i18n-placeholder="petFriendly.search.locationPlaceholder"><select id="categorySearch"><option value="All" data-i18n="petFriendly.categories.all">All Categories</option><option value="Cafe" data-i18n="petFriendly.categories.cafes">Cafés</option><option value="Restaurant" data-i18n="petFriendly.categories.restaurants">Restaurants</option><option value="Hotel" data-i18n="petFriendly.categories.hotels">Hotels</option><option value="Park" data-i18n="petFriendly.categories.parksDogParks">Parks & Dog Parks</option><option value="Beach" data-i18n="petFriendly.categories.beaches">Beaches</option><option value="Veterinary" data-i18n="petFriendly.categories.vetsFull">Veterinary Clinics</option><option value="Grooming" data-i18n="petFriendly.categories.groomers">Groomers</option><option value="Pet Shop" data-i18n="petFriendly.categories.petShops">Pet Shops</option></select><select id="radiusSearch"><option value="1000">1 km</option><option value="3000">3 km</option><option value="5000" selected>5 km</option><option value="10000">10 km</option><option value="25000">25 km</option></select><button id="searchButton" class="btn gold" type="button" onclick="searchByText()" data-i18n="petFriendly.search.button">Search</button><button id="locationButton" class="btn green" type="button" onclick="useMyLocation()" data-i18n="petFriendly.search.myLocation">📍 Use My Location</button></div><p class="search-help" data-i18n="petFriendly.search.help">Internet results come from OpenStreetMap. Pet-policy information may be incomplete, so always confirm directly with a venue before visiting.</p><div class="search-status" id="searchStatus"></div></section>
-<div class="source-legend"><span class="source-pill"><span class="source-dot internet"></span><span data-i18n="petFriendly.sources.internet">Internet result</span></span><span class="source-pill"><span class="source-dot cms"></span><span class="notranslate" translate="no">PETS &amp; DOGUE CMS</span></span><span class="source-pill"><span class="source-dot community"></span><span data-i18n="petFriendly.sources.community">Community submitted</span></span><span class="source-pill"><span class="source-dot verified"></span><span data-i18n="petFriendly.sources.verified">DOGUE Verified</span></span><span class="source-pill"><span class="source-dot review"></span><span data-i18n="petFriendly.sources.review">Under Review</span></span></div>
-<div class="filters" id="categoryFilters"><button class="filter active" onclick="setCategory('All',this)" data-i18n="petFriendly.filters.all">All</button><button class="filter" onclick="setCategory('Cafe',this)" data-i18n="petFriendly.categories.cafes">Cafés</button><button class="filter" onclick="setCategory('Restaurant',this)" data-i18n="petFriendly.categories.restaurants">Restaurants</button><button class="filter" onclick="setCategory('Hotel',this)" data-i18n="petFriendly.categories.hotels">Hotels</button><button class="filter" onclick="setCategory('Park',this)" data-i18n="petFriendly.categories.parks">Parks</button><button class="filter" onclick="setCategory('Beach',this)" data-i18n="petFriendly.categories.beaches">Beaches</button><button class="filter" onclick="setCategory('Veterinary',this)" data-i18n="petFriendly.categories.vets">Vets</button><button class="filter" onclick="setCategory('Grooming',this)" data-i18n="petFriendly.categories.groomers">Groomers</button><button class="filter" onclick="setCategory('Pet Shop',this)" data-i18n="petFriendly.categories.petShops">Pet Shops</button></div>
-<div class="layout"><section><div class="results-header"><div><h2 id="resultsTitle" data-i18n="petFriendly.results.defaultTitle">PETS & DOGUE Places</h2><p id="resultsSubtitle" data-i18n="petFriendly.results.defaultSubtitle">Search a location or use your current position.</p></div><select id="sortSelect" onchange="renderPlaces()"><option value="distance" data-i18n="petFriendly.sort.distance">Nearest first</option><option value="trust" data-i18n="petFriendly.sort.trust">Highest trust score</option><option value="name" data-i18n="petFriendly.sort.name">Name A–Z</option><option value="source" data-i18n="petFriendly.sort.source">DOGUE places first</option></select></div><div class="grid" id="placesGrid"></div><div class="empty-state" id="emptyState"><h3 data-i18n="petFriendly.empty.title">No places found</h3><p data-i18n="petFriendly.empty.description">Try a larger radius, another category or a different location.</p></div></section><aside class="map-panel"><h2 data-i18n="petFriendly.map.title">Live Map</h2><div id="placesMap"></div><div class="map-info"><strong id="mapInfoTitle" data-i18n="petFriendly.map.searchTitle">Search for a location</strong><p id="mapInfoText" data-i18n="petFriendly.map.searchText">Real map markers will appear here.</p></div></aside></div></section>
-<section class="saved-section"><div class="section-head"><h2 data-i18n="petFriendly.saved.title">Saved Places</h2><span class="notranslate" translate="no">PETS &amp; DOGUE</span></div><div class="saved-list" id="savedList"></div></section>
-<section class="community-section" id="add-place"><div class="community-intro"><span class="notranslate" translate="no">PETS &amp; DOGUE · COMMUNITY</span><h2 data-i18n="petFriendly.submit.title">Add A Pet-Friendly Place</h2><p data-i18n="petFriendly.submit.description">Know a café, hotel, park, beach, groomer or another location that welcomes pets? Submit it for editorial review. It will not become public until approved.</p></div><div class="community-form"><div class="form-grid"><input id="submitPlaceName" type="text" placeholder="Place name" data-i18n-placeholder="petFriendly.submit.placeName"><select id="submitPlaceCategory"><option value="" data-i18n="petFriendly.submit.chooseCategory">Choose category</option><option value="Cafe" data-i18n="petFriendly.categoryLabels.Cafe">Café</option><option value="Restaurant" data-i18n="petFriendly.categoryLabels.Restaurant">Restaurant</option><option value="Hotel" data-i18n="petFriendly.categoryLabels.Hotel">Hotel</option><option value="Park" data-i18n="petFriendly.categoryLabels.Park">Park</option><option value="Beach" data-i18n="petFriendly.categoryLabels.Beach">Beach</option><option value="Veterinary" data-i18n="petFriendly.categoryLabels.Veterinary">Veterinary</option><option value="Grooming" data-i18n="petFriendly.categoryLabels.Grooming">Grooming</option><option value="Pet Shop" data-i18n="petFriendly.categoryLabels.PetShop">Pet Shop</option><option value="Other" data-i18n="petFriendly.categoryLabels.Other">Other</option></select><input id="submitPlaceAddress" type="text" placeholder="Full address or postcode" data-i18n-placeholder="petFriendly.submit.address"><input id="submitPlaceWebsite" type="url" placeholder="Website or social link" data-i18n-placeholder="petFriendly.submit.website"><input id="submitPlacePhone" type="text" placeholder="Telephone, optional" data-i18n-placeholder="petFriendly.submit.phone"><input id="submitPlacePetPolicy" type="text" placeholder="Pet policy — e.g. dogs welcome on terrace" data-i18n-placeholder="petFriendly.submit.policy"><input id="submitName" type="text" placeholder="Your name" data-i18n-placeholder="petFriendly.submit.name"><input id="submitEmail" type="email" placeholder="Your email" data-i18n-placeholder="petFriendly.submit.email"></div><textarea id="submitDescription" placeholder="Tell us why this place is pet friendly and what visitors should know..." data-i18n-placeholder="petFriendly.submit.details"></textarea><label class="checkbox"><input id="submitAgreement" type="checkbox"><span data-i18n="petFriendly.submit.agreement">I confirm that the information is accurate. I understand that the submission will be reviewed before publication.</span></label><button class="btn green" type="button" onclick="submitCommunityPlace()" data-i18n="petFriendly.submit.button">Submit For Review</button><div class="form-message" id="submissionMessage"></div></div></section>
-<section class="club"><div class="club-image"><img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1300&q=85" alt="PETS & DOGUE Club places"></div><div class="club-copy"><span class="notranslate" translate="no">PETS &amp; DOGUE CLUB</span><h2 data-i18n="petFriendly.club.title">PETS & DOGUE Club Benefits</h2><p data-i18n="petFriendly.club.description">Club members can unlock selected offers from pet-friendly hotels, cafés, groomers, travel partners and trusted local businesses.</p><div class="benefits"><div class="benefit" data-i18n="petFriendly.club.hotel">🏨 Hotel Discounts</div><div class="benefit" data-i18n="petFriendly.club.cafe">☕ Café Offers</div><div class="benefit" data-i18n="petFriendly.club.grooming">✂️ Grooming Benefits</div><div class="benefit" data-i18n="petFriendly.club.bookings">🎟 Partner Bookings</div><div class="benefit" data-i18n="petFriendly.club.local">📍 Local Recommendations</div><div class="benefit" data-i18n="petFriendly.club.qr">💚 Member QR Card</div></div><a href="club.html" class="btn green" data-i18n="petFriendly.club.button">Explore Club Benefits</a></div></section></main>
-<footer><div class="footer-brand metallic notranslate" translate="no">PETS &amp; DOGUE</div><p class="footer-subtitle" data-i18n="common.footer.subtitle">The International Luxury Animal Magazine</p><div class="footer-links"><a href="index.html" data-i18n="common.footer.home">Home</a><a href="issue-01.html" data-i18n="common.footer.latestIssue">Latest Issue</a><a href="articles.html" data-i18n="common.footer.articles">Articles</a><a href="photos.html" data-i18n="common.footer.photos">Photos</a><a href="members-gallery.html" data-i18n="common.footer.coverStars">Cover Stars</a><a href="pet-travel.html" data-i18n="common.navigation.travel">Travel</a><a href="pet-friendly-places.html" data-i18n="common.footer.places">Places</a><a href="club.html" data-i18n="common.footer.club">Club</a><a href="partners.html" data-i18n="common.footer.partners">Partners</a><a href="contact.html" data-i18n="common.footer.contact">Contact</a><a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a><a href="terms.html" data-i18n="common.footer.terms">Terms</a></div><a href="admin.html" class="admin-small" data-i18n="common.footer.admin">Admin</a></footer>
-<div class="modal-overlay" id="placeModal" onclick="closeModalFromOverlay(event,'placeModal')"><div class="modal-card"><button class="modal-close" type="button" onclick="closePlaceModal()" aria-label="Close" data-i18n-attr="aria-label:petFriendly.dynamic.close">×</button><div class="modal-hero" id="modalHero"></div><div class="modal-content"><span class="category-badge" id="modalCategory"></span><h2 id="modalName"></h2><div class="place-meta" id="modalMeta"></div><div class="trust-box"><div class="trust-row"><span data-i18n="petFriendly.dynamic.trustScore">DOGUE Trust Score</span><span class="trust-score" id="modalTrustScore">0/100</span></div><div class="trust-bar"><div class="trust-fill" id="modalTrustFill"></div></div></div><div class="pet-policy" id="modalPetPolicy"></div><p id="modalDescription"></p><br><div class="place-actions"><a id="modalWebsite" href="#" target="_blank" rel="noopener noreferrer" class="btn gold" data-i18n="petFriendly.dynamic.website">Visit Website</a><a id="modalDirections" href="#" target="_blank" rel="noopener noreferrer" class="btn black" data-i18n="petFriendly.dynamic.directions">Directions</a><button id="modalReportButton" class="btn danger" type="button" onclick="openReportFromPlaceModal()" data-i18n="petFriendly.dynamic.reportProblem">🚩 Report Problem</button></div></div></div></div>
-<div class="modal-overlay" id="reportModal" onclick="closeModalFromOverlay(event,'reportModal')"><div class="modal-card small"><button class="modal-close" type="button" onclick="closeReportModal()" aria-label="Close" data-i18n-attr="aria-label:petFriendly.dynamic.close">×</button><div class="modal-content"><h2 data-i18n="petFriendly.report.title">Report A Problem</h2><p id="reportPlaceName" data-i18n="petFriendly.report.description">Tell us what has changed about this place.</p><div class="report-notice" data-i18n="petFriendly.report.notice">One report can be submitted from this browser for each place. Reports are reviewed through the DOGUE Trust Center.</div><div class="report-options"><label class="report-option"><input type="radio" name="reportReason" value="No longer pet friendly"><span data-i18n="petFriendly.report.notFriendly">❌ No longer pet friendly</span></label><label class="report-option"><input type="radio" name="reportReason" value="Staff refused pets"><span data-i18n="petFriendly.report.refused">🚫 Staff refused pets</span></label><label class="report-option"><input type="radio" name="reportReason" value="Closed permanently"><span data-i18n="petFriendly.report.closed">🏪 Closed permanently</span></label><label class="report-option"><input type="radio" name="reportReason" value="Wrong address"><span data-i18n="petFriendly.report.address">📍 Wrong address</span></label><label class="report-option"><input type="radio" name="reportReason" value="Wrong phone number"><span data-i18n="petFriendly.report.phone">☎️ Wrong telephone number</span></label><label class="report-option"><input type="radio" name="reportReason" value="Website unavailable"><span data-i18n="petFriendly.report.website">🌐 Website unavailable</span></label><label class="report-option"><input type="radio" name="reportReason" value="Unsafe"><span data-i18n="petFriendly.report.unsafe">⚠️ Unsafe place or conditions</span></label><label class="report-option"><input type="radio" name="reportReason" value="Other"><span data-i18n="petFriendly.report.other">✍️ Other problem</span></label></div><textarea id="reportDetails" placeholder="Add useful details, optional..." data-i18n-placeholder="petFriendly.report.details"></textarea><br><button class="btn danger" type="button" onclick="submitPlaceReport()" data-i18n="petFriendly.report.button">Submit Report</button><div class="form-message" id="reportMessage"></div></div></div></div>   <script src="/i18n/common.js?v=2"></script><script src="/i18n/pet-friendly-places.js?v=2"></script><script src="/i18n/engine.js?v=3"></script><script>
-const CMS_KEY="pets_dogue_cms_v1",SAVED_KEY="pets_dogue_saved_live_places",LIKES_KEY="pets_dogue_live_place_likes",LIKED_KEY="pets_dogue_live_place_liked",SUBMISSIONS_KEY="pets_dogue_place_submissions",REPORTS_KEY="pets_dogue_place_reports",REPORTED_KEY="pets_dogue_places_reported_by_user",MODERATION_KEY="pets_dogue_place_moderation",LANGUAGE_KEY="pets_dogue_language",NOMINATIM_URL="https://nominatim.openstreetmap.org/search",OVERPASS_URL="https://overpass-api.de/api/interpreter",$=id=>document.getElementById(id),sideMenu=$("sideMenu"),menuOverlay=$("menuOverlay"),languageSelect=$("languageSelect");let map,markersLayer,userMarker,activeCategory="All",currentCentre=null,currentSearchLabel="",internetPlaces=[],cmsPlaces=[],communityPlaces=[],visiblePlaces=[],selectedPlaceId=null,selectedReportPlaceId=null,savedPlaces=readStorageArray(SAVED_KEY),placeLikes=readStorageObject(LIKES_KEY),likedPlaces=readStorageObject(LIKED_KEY),placeReports=readStorageArray(REPORTS_KEY),reportedByUser=readStorageObject(REPORTED_KEY),placeModeration=readStorageObject(MODERATION_KEY);
-function openMenu(){sideMenu.classList.add("open");menuOverlay.classList.add("show");document.body.classList.add("menu-open")}function closeMenu(){sideMenu.classList.remove("open");menuOverlay.classList.remove("show");document.body.classList.remove("menu-open")}
-function currentLanguage(){if(window.PetsDogueLanguage&&typeof window.PetsDogueLanguage.getCurrentLanguage==="function"){const v=window.PetsDogueLanguage.getCurrentLanguage();if(typeof v==="string")return v;if(v&&v.code)return v.code}const language=localStorage.getItem(LANGUAGE_KEY)||languageSelect?.value||"en",translations=window.PetsDogueTranslations?.petFriendly;return translations?.[language]?language:"en"}function t(path,fallback=""){const translations=window.PetsDogueTranslations?.petFriendly;if(!translations)return fallback;const read=source=>path.split(".").reduce((value,key)=>value&&Object.prototype.hasOwnProperty.call(value,key)?value[key]:undefined,source),language=currentLanguage();return read(translations[language])??read(translations.en)??fallback}function template(text,values={}){return Object.entries(values).reduce((result,[key,value])=>result.replaceAll(`{${key}}`,String(value)),text)}
-function categoryLabel(category){const map={Cafe:"Cafe",Restaurant:"Restaurant",Hotel:"Hotel",Park:"Park",Beach:"Beach",Veterinary:"Veterinary",Grooming:"Grooming","Pet Shop":"PetShop",Other:"Other"};return t("categoryLabels."+(map[category]||"Other"),category)}
-const categoryDefinitions={Cafe:{icon:"☕",image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80"},Restaurant:{icon:"🍽️",image:"https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"},Hotel:{icon:"🏨",image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"},Park:{icon:"🌳",image:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"},Beach:{icon:"🏖️",image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"},Veterinary:{icon:"🩺",image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80"},Grooming:{icon:"✂️",image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80"},"Pet Shop":{icon:"🛍️",image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"},Other:{icon:"🐾",image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80"}};
-function readStorageArray(key){try{const value=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(value)?value:[]}catch(error){return[]}}function readStorageObject(key){try{const value=JSON.parse(localStorage.getItem(key)||"{}");return value&&typeof value==="object"&&!Array.isArray(value)?value:{}}catch(error){return{}}}function escapeHTML(value){return String(value||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}function safeURL(value){const url=String(value||"").trim();if(!url)return"";try{const parsed=new URL(url,window.location.href);if(parsed.protocol==="http:"||parsed.protocol==="https:")return parsed.href}catch(error){}return""}
-function initMap(){map=L.map("placesMap",{zoomControl:true}).setView([50.7192,-1.8808],11);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'}).addTo(map);markersLayer=L.layerGroup().addTo(map)}
-function loadLocalPlaces(){cmsPlaces=[];communityPlaces=[];try{const cms=JSON.parse(localStorage.getItem(CMS_KEY)||"{}");if(Array.isArray(cms.places))cmsPlaces=cms.places.map(place=>normalizeLocalPlace(place,place.source||"cms"))}catch(error){console.error("Unable to read CMS places.",error)}const submissions=readStorageArray(SUBMISSIONS_KEY);communityPlaces=submissions.filter(place=>["Approved","DOGUE Verified","Admin Restored"].includes(place.status)).map(place=>normalizeLocalPlace(place,"community"));recalculateModeration();renderPlaces()}
-function normalizeLocalPlace(place,source){const category=normalizeCategory(place.category||place.type||"Other"),latitude=toNumber(place.latitude??place.lat),longitude=toNumber(place.longitude??place.lon),verified=place.status==="DOGUE Verified"||place.verified===true;return{id:String(place.id||`${source}-${Date.now()}-${Math.random()}`),name:place.name||place.businessName||t("dynamic.defaultPlaceName","Pet Friendly Place"),category,location:place.location||place.address||"",address:place.address||place.location||"",website:safeURL(place.website),phone:place.phone||"",description:place.description||t("dynamic.localDescription","Selected PETS & DOGUE pet-friendly place."),petPolicy:place.petPolicy||t("dynamic.confirmPolicy","Contact the venue to confirm its current pet policy."),latitude,longitude,image:place.image||categoryDefinitions[category]?.image||categoryDefinitions.Other.image,source,verified,distance:null,likes:Number(place.likes||0),tags:{}}}
-function normalizeCategory(value){const text=String(value||"").toLowerCase();if(text.includes("café")||text.includes("cafe")||text.includes("coffee"))return"Cafe";if(text.includes("restaurant")||text.includes("food")||text.includes("pub")||text.includes("bar"))return"Restaurant";if(text.includes("hotel")||text.includes("guest_house")||text.includes("hostel"))return"Hotel";if(text.includes("beach"))return"Beach";if(text.includes("park"))return"Park";if(text.includes("vet")||text.includes("clinic"))return"Veterinary";if(text.includes("groom"))return"Grooming";if(text.includes("pet shop")||text.includes("pet_shop"))return"Pet Shop";return"Other"}function toNumber(value){if(value===null||value===undefined||value==="")return null;const number=Number(value);return Number.isFinite(number)?number:null}
-function setStatus(message,type){const status=$("searchStatus");status.textContent=message;status.className=`search-status show ${type}`}function toggleSearchButtons(disabled){$("searchButton").disabled=disabled;$("locationButton").disabled=disabled}
-async function searchByText(){const query=$("locationSearch").value.trim();if(!query){setStatus(t("messages.enterLocation","Enter a city, country or postcode first."),"error");return}toggleSearchButtons(true);setStatus(t("messages.findingLocation","Finding the location…"),"loading");try{const params=new URLSearchParams({q:query,format:"jsonv2",limit:"1",addressdetails:"1"}),response=await fetch(`${NOMINATIM_URL}?${params.toString()}`,{headers:{"Accept":"application/json","Accept-Language":currentLanguage()}});if(!response.ok)throw new Error(t("messages.locationFailed","Location search failed."));const results=await response.json();if(!Array.isArray(results)||!results.length)throw new Error(t("messages.notFound","Location not found. Try a city with a country or a complete postcode."));const result=results[0];currentCentre={lat:Number(result.lat),lon:Number(result.lon)};currentSearchLabel=result.display_name||query;map.setView([currentCentre.lat,currentCentre.lon],13);setUserMarker(currentCentre.lat,currentCentre.lon,currentSearchLabel);await fetchNearbyPlaces(currentCentre.lat,currentCentre.lon)}catch(error){console.error(error);setStatus(error.message||t("messages.unableSearch","Unable to search this location."),"error")}finally{toggleSearchButtons(false)}}
-function useMyLocation(){if(!navigator.geolocation){setStatus(t("messages.geoUnsupported","Geolocation is not supported by this browser."),"error");return}toggleSearchButtons(true);setStatus(t("messages.waitingPermission","Waiting for location permission…"),"loading");navigator.geolocation.getCurrentPosition(async position=>{currentCentre={lat:position.coords.latitude,lon:position.coords.longitude};currentSearchLabel=t("messages.currentLocation","Your current location");$("locationSearch").value=t("messages.currentLocationShort","Current location");map.setView([currentCentre.lat,currentCentre.lon],14);setUserMarker(currentCentre.lat,currentCentre.lon,t("messages.yourLocation","Your location"));try{await fetchNearbyPlaces(currentCentre.lat,currentCentre.lon)}catch(error){console.error(error);setStatus(error.message||t("messages.unableNearby","Unable to load nearby places."),"error")}finally{toggleSearchButtons(false)}},error=>{toggleSearchButtons(false);const messages={1:t("messages.permissionDenied","Location permission was denied."),2:t("messages.locationUnknown","Your location could not be determined."),3:t("messages.locationTimeout","The location request timed out.")};setStatus(messages[error.code]||t("messages.unableCurrent","Unable to use your current location."),"error")},{enableHighAccuracy:true,timeout:15000,maximumAge:300000})}
-function setUserMarker(lat,lon,label){if(userMarker)map.removeLayer(userMarker);userMarker=L.circleMarker([lat,lon],{radius:9,color:"#111",weight:3,fillColor:"#65e51f",fillOpacity:1}).addTo(map);userMarker.bindPopup(`<strong>${escapeHTML(label)}</strong>`)}
-async function fetchNearbyPlaces(lat,lon){const radius=Number($("radiusSearch").value),selectedCategory=$("categorySearch").value;setStatus(t("messages.searchingOSM","Searching OpenStreetMap for nearby places…"),"loading");const query=buildOverpassQuery(lat,lon,radius,selectedCategory),response=await fetch(OVERPASS_URL,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:new URLSearchParams({data:query})});if(!response.ok)throw new Error(t("messages.mapBusy","The public map service is busy. Please try again shortly."));const data=await response.json();internetPlaces=convertOverpassElements(data.elements||[],lat,lon);recalculateModeration();setStatus(template(t("messages.internetFound","{count} internet places found near {location}."),{count:internetPlaces.length,location:currentSearchLabel}),"success");renderPlaces()}
-function buildOverpassQuery(lat,lon,radius,category){const selectors=getOverpassSelectors(category),queryParts=selectors.map(selector=>`\nnwr(around:${radius},${lat},${lon})${selector};`).join("");return`[out:json][timeout:25];(${queryParts});out center tags;`}function getOverpassSelectors(category){const selectorMap={Cafe:['["amenity"="cafe"]'],Restaurant:['["amenity"="restaurant"]','["amenity"="pub"]','["amenity"="bar"]'],Hotel:['["tourism"="hotel"]','["tourism"="guest_house"]','["tourism"="hostel"]'],Park:['["leisure"="park"]','["leisure"="dog_park"]','["leisure"="nature_reserve"]'],Beach:['["natural"="beach"]','["leisure"="beach_resort"]'],Veterinary:['["amenity"="veterinary"]'],Grooming:['["shop"="pet_grooming"]','["craft"="pet_grooming"]','["service:animal"="grooming"]'],"Pet Shop":['["shop"="pet"]']};return category!=="All"&&selectorMap[category]?selectorMap[category]:Object.values(selectorMap).flat()}
-function convertOverpassElements(elements,centreLat,centreLon){const seen=new Set();return elements.map(element=>{const tags=element.tags||{},latitude=element.lat??element.center?.lat,longitude=element.lon??element.center?.lon;if(!Number.isFinite(Number(latitude))||!Number.isFinite(Number(longitude)))return null;const category=detectOSMCategory(tags),name=tags.name||tags["name:en"]||template(t("dynamic.genericPlace","{category} Place"),{category:categoryLabel(category)}),key=`${name.toLowerCase()}-${Number(latitude).toFixed(5)}-${Number(longitude).toFixed(5)}`;if(seen.has(key))return null;seen.add(key);const dogTag=tags.dog||tags.dogs||tags["dog:access"]||tags.pets,petPolicy=describePetPolicy(dogTag,tags),address=buildAddress(tags);return{id:`osm-${element.type}-${element.id}`,name,category,location:address||currentSearchLabel,address,website:safeURL(tags.website||tags["contact:website"]||tags.url),phone:tags.phone||tags["contact:phone"]||"",description:buildOSMDescription(tags,category),petPolicy,latitude:Number(latitude),longitude:Number(longitude),image:categoryDefinitions[category]?.image||categoryDefinitions.Other.image,source:"internet",verified:false,distance:haversineDistance(centreLat,centreLon,Number(latitude),Number(longitude)),likes:0,tags}}).filter(Boolean).sort((a,b)=>(a.distance??Infinity)-(b.distance??Infinity)).slice(0,80)}
-function detectOSMCategory(tags){if(tags.amenity==="cafe")return"Cafe";if(["restaurant","pub","bar"].includes(tags.amenity))return"Restaurant";if(["hotel","guest_house","hostel"].includes(tags.tourism))return"Hotel";if(tags.natural==="beach"||tags.leisure==="beach_resort")return"Beach";if(["park","dog_park","nature_reserve"].includes(tags.leisure))return"Park";if(tags.amenity==="veterinary")return"Veterinary";if(tags.shop==="pet_grooming"||tags.craft==="pet_grooming"||tags["service:animal"]==="grooming")return"Grooming";if(tags.shop==="pet")return"Pet Shop";return"Other"}
-function describePetPolicy(dogTag,tags){const value=String(dogTag||"").toLowerCase();if(["yes","designated","permissive"].includes(value))return t("policy.welcome","🐾 OpenStreetMap indicates that dogs or pets are welcome.");if(["leashed","on_leash"].includes(value))return t("policy.lead","🦮 Dogs appear to be allowed on a lead.");if(value==="no")return t("policy.no","🚫 OpenStreetMap indicates that dogs may not be allowed.");if(tags.leisure==="dog_park")return t("policy.dogPark","🐕 Dedicated dog park.");return t("policy.unconfirmed","ℹ️ Pet policy is not confirmed. Contact the venue before visiting.")}
-function buildAddress(tags){return[tags["addr:housenumber"],tags["addr:street"],tags["addr:suburb"],tags["addr:city"],tags["addr:postcode"]].filter(Boolean).join(", ")}function buildOSMDescription(tags,category){const parts=[];if(tags.description)parts.push(tags.description);if(tags.cuisine)parts.push(template(t("dynamic.cuisine","Cuisine: {value}."),{value:String(tags.cuisine).replaceAll(";",", ")}));if(tags.outdoor_seating==="yes")parts.push(t("dynamic.outdoor","Outdoor seating available."));if(tags.opening_hours)parts.push(template(t("dynamic.hours","Opening hours: {value}."),{value:tags.opening_hours}));if(!parts.length)parts.push(template(t("dynamic.osmPlace","{category} location found through OpenStreetMap."),{category:categoryLabel(category)}));return parts.join(" ")}function haversineDistance(lat1,lon1,lat2,lon2){const earthRadius=6371,toRadians=degrees=>degrees*Math.PI/180,dLat=toRadians(lat2-lat1),dLon=toRadians(lon2-lon1),a=Math.sin(dLat/2)**2+Math.cos(toRadians(lat1))*Math.cos(toRadians(lat2))*Math.sin(dLon/2)**2;return earthRadius*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))}
-function setCategory(category,button){activeCategory=category;document.querySelectorAll(".filter").forEach(item=>item.classList.remove("active"));button.classList.add("active");$("categorySearch").value=category==="All"?"All":category;if(currentCentre)fetchNearbyPlaces(currentCentre.lat,currentCentre.lon).catch(error=>{console.error(error);setStatus(t("messages.categoryRefresh","The category could not be refreshed. Existing results are still available."),"error")});else renderPlaces()}
-function getAllPlaces(){const unique=new Map();[...cmsPlaces,...communityPlaces,...internetPlaces].forEach(place=>{const key=place.id||`${place.name}-${place.latitude}-${place.longitude}`;if(!unique.has(key))unique.set(key,place)});return[...unique.values()]}function findPlace(placeId){return getAllPlaces().find(place=>String(place.id)===String(placeId))}function getModeration(placeId){return placeModeration[String(placeId)]||{placeId:String(placeId),reportCount:0,moderationStatus:"Active",verified:false,adminOverride:false}}
-function recalculateModeration(){const reportGroups={};placeReports.forEach(report=>{const placeId=String(report.placeId||"");if(!placeId)return;if(!reportGroups[placeId])reportGroups[placeId]=[];reportGroups[placeId].push(report)});Object.entries(reportGroups).forEach(([placeId,reports])=>{const existing=placeModeration[placeId]||{};if(existing.adminOverride===true)return;const place=findPlace(placeId),verified=existing.verified===true||place?.verified===true,reviewThreshold=verified?5:3,hideThreshold=verified?8:5,reportCount=reports.length;let status=verified?"DOGUE Verified":"Active";if(reportCount>=hideThreshold)status="Auto Hidden";else if(reportCount>=reviewThreshold)status="Under Review";placeModeration[placeId]={...existing,placeId,placeName:place?.name||existing.placeName||reports[0]?.placeName||t("dynamic.reportedPlace","Reported Place"),verified,reportCount,moderationStatus:status,lastReportAt:reports.map(report=>report.createdAt).filter(Boolean).sort().reverse()[0]||"",autoHiddenAt:status==="Auto Hidden"?existing.autoHiddenAt||new Date().toISOString():"",updatedAt:new Date().toISOString()}});localStorage.setItem(MODERATION_KEY,JSON.stringify(placeModeration))}
-function calculateTrustScore(place){const moderation=getModeration(place.id);let score=72;if(place.source==="cms")score+=7;if(place.source==="community")score+=3;if(place.verified||moderation.verified)score+=21;if(place.petPolicy&&!place.petPolicy.toLowerCase().includes("not confirmed"))score+=4;score-=Number(moderation.reportCount||0)*8;if(moderation.moderationStatus==="Under Review")score-=10;if(["Auto Hidden","Removed","Not Pet Friendly"].includes(moderation.moderationStatus))score=0;return Math.max(0,Math.min(100,score))}function isPlacePublic(place){return!["Auto Hidden","Removed","Not Pet Friendly"].includes(getModeration(place.id).moderationStatus)}
-function getFilteredPlaces(){const selectedCategory=$("categorySearch").value;let places=getAllPlaces().filter(isPlacePublic).filter(place=>(activeCategory==="All"||place.category===activeCategory)&&(selectedCategory==="All"||place.category===selectedCategory));if(currentCentre)places=places.map(place=>Number.isFinite(place.latitude)&&Number.isFinite(place.longitude)?{...place,distance:haversineDistance(currentCentre.lat,currentCentre.lon,place.latitude,place.longitude)}:place);const sortValue=$("sortSelect").value;places.sort((a,b)=>sortValue==="name"?a.name.localeCompare(b.name):sortValue==="trust"?calculateTrustScore(b)-calculateTrustScore(a):sortValue==="source"?({cms:0,community:1,internet:2}[a.source]??9)-({cms:0,community:1,internet:2}[b.source]??9):(a.distance??Infinity)-(b.distance??Infinity));return places}
-function renderPlaces(){recalculateModeration();visiblePlaces=getFilteredPlaces();const grid=$("placesGrid"),emptyState=$("emptyState");grid.innerHTML="";emptyState.style.display=visiblePlaces.length?"none":"block";visiblePlaces.forEach(place=>grid.insertAdjacentHTML("beforeend",createPlaceCard(place)));$("resultsTitle").textContent=currentSearchLabel||t("results.defaultTitle","PETS & DOGUE Places");$("resultsSubtitle").textContent=visiblePlaces.length===1?t("results.one","1 place shown"):template(t("results.many","{count} places shown"),{count:visiblePlaces.length});updateStatistics();renderMapMarkers();renderSavedPlaces()}
-function createPlaceCard(place){const id=String(place.id),moderation=getModeration(id),trustScore=calculateTrustScore(place),saved=savedPlaces.some(item=>String(item.id)===id),liked=Boolean(likedPlaces[id]),alreadyReported=Boolean(reportedByUser[id]),likes=placeLikes[id]!==undefined?Number(placeLikes[id]):Number(place.likes||0),categoryInfo=categoryDefinitions[place.category]||categoryDefinitions.Other,categoryName=categoryLabel(place.category),imageHTML=place.image?`<img src="${escapeHTML(place.image)}" alt="${escapeHTML(place.name)}" onerror="this.parentElement.innerHTML='<div class=&quot;place-image-fallback&quot;>${categoryInfo.icon}</div>'">`:`<div class="place-image-fallback">${categoryInfo.icon}</div>`,sourceLabel=place.source==="cms"?"PETS & DOGUE":place.source==="community"?t("sources.communityShort","COMMUNITY"):t("sources.internetShort","INTERNET"),underReview=moderation.moderationStatus==="Under Review",distanceText=Number.isFinite(place.distance)?`<span class="distance">${escapeHTML(formatDistance(place.distance))}</span>`:"";return`<article class="place-card ${underReview?"under-review":""}"><div class="place-image">${imageHTML}<span class="place-source ${escapeHTML(place.source)}">${escapeHTML(sourceLabel)}</span>${place.verified||moderation.verified?`<span class="verified-badge">${escapeHTML(t("dynamic.verifiedBadge","✓ DOGUE VERIFIED"))}</span>`:underReview?`<span class="review-badge">${escapeHTML(t("dynamic.reviewBadge","⚠ UNDER REVIEW"))}</span>`:""}</div><div class="place-content"><span class="category-badge">${escapeHTML(categoryInfo.icon)} ${escapeHTML(categoryName)}</span><h3>${escapeHTML(place.name)}</h3><div class="place-meta">📍 ${escapeHTML(place.address||place.location||t("dynamic.locationUnavailable","Location unavailable"))}<br>${distanceText}</div><div class="trust-box"><div class="trust-row"><span>${escapeHTML(getTrustLabel(trustScore,moderation))}</span><span class="trust-score">${trustScore}/100</span></div><div class="trust-bar"><div class="trust-fill" style="width:${trustScore}%"></div></div>${moderation.reportCount>0?`<div class="trust-row" style="margin-top:10px"><span>${escapeHTML(t("dynamic.communityReports","Community reports"))}</span><span>${moderation.reportCount}</span></div>`:""}</div><div class="pet-policy ${underReview?"disputed":""}">${escapeHTML(underReview?t("dynamic.disputed","⚠️ Pet policy disputed. This place is currently under community review."):place.petPolicy||t("dynamic.policyUnknown","Pet policy not confirmed."))}</div><p>${escapeHTML(place.description||t("dynamic.placeInfo","Pet-friendly place information."))}</p><div class="place-actions"><button class="btn gold" type="button" onclick="openPlaceModal('${escapeHTML(id)}')">${escapeHTML(t("dynamic.details","Details"))}</button>${Number.isFinite(place.latitude)&&Number.isFinite(place.longitude)?`<a class="btn black" href="https://www.openstreetmap.org/directions?to=${place.latitude}%2C${place.longitude}" target="_blank" rel="noopener noreferrer">${escapeHTML(t("dynamic.directions","Directions"))}</a>`:""}<button class="btn light save-btn ${saved?"saved":""}" type="button" onclick="toggleSavedPlace('${escapeHTML(id)}',this)">${escapeHTML(saved?t("dynamic.saved","♥ Saved"):t("dynamic.save","♡ Save"))}</button><button class="btn light like-btn ${liked?"liked":""}" type="button" onclick="togglePlaceLike('${escapeHTML(id)}',this)">❤️ <span>${likes}</span></button><button class="btn light report-btn ${alreadyReported?"reported":""}" type="button" onclick="openReportModal('${escapeHTML(id)}')" ${alreadyReported?"disabled":""}>${escapeHTML(alreadyReported?t("dynamic.reported","✓ Reported"):t("dynamic.report","🚩 Report"))}</button></div></div></article>`}
-function getTrustLabel(score,moderation){if(moderation.moderationStatus==="Under Review")return t("trust.review","🟠 Under Review");if(moderation.verified)return t("trust.verified","🟢 DOGUE Verified");if(score>=88)return t("trust.favourite","🟢 Community Favourite");if(score>=65)return t("trust.new","🟡 New / Unverified Place");return t("trust.limited","🟠 Limited Trust Data")}function formatDistance(distance){return distance<1?template(t("dynamic.metresAway","{value} m away"),{value:Math.round(distance*1000)}):template(t("dynamic.kmAway","{value} km away"),{value:distance.toFixed(1)})}
-function updateStatistics(){const allPublicPlaces=getAllPlaces().filter(isPlacePublic);$("resultCount").textContent=visiblePlaces.length;$("internetCount").textContent=internetPlaces.filter(isPlacePublic).length;$("verifiedCount").textContent=allPublicPlaces.filter(place=>place.verified||getModeration(place.id).verified).length;$("savedCount").textContent=savedPlaces.length;$("reviewCount").textContent=allPublicPlaces.filter(place=>getModeration(place.id).moderationStatus==="Under Review").length}
-function renderMapMarkers(){markersLayer.clearLayers();const bounds=[];visiblePlaces.forEach(place=>{if(!Number.isFinite(place.latitude)||!Number.isFinite(place.longitude))return;const categoryInfo=categoryDefinitions[place.category]||categoryDefinitions.Other,marker=L.marker([place.latitude,place.longitude]);marker.bindPopup(`<strong>${escapeHTML(place.name)}</strong><br>${escapeHTML(categoryInfo.icon)} ${escapeHTML(categoryLabel(place.category))}<br>${escapeHTML(t("dynamic.trustScore","DOGUE Trust Score"))}: ${calculateTrustScore(place)}/100<br>${Number.isFinite(place.distance)?escapeHTML(formatDistance(place.distance)):""}<br><br><button onclick="openPlaceModal('${escapeHTML(String(place.id))}')">${escapeHTML(t("dynamic.details","Details"))}</button>`);marker.addTo(markersLayer);bounds.push([place.latitude,place.longitude])});if(currentCentre)bounds.push([currentCentre.lat,currentCentre.lon]);if(bounds.length>1)map.fitBounds(bounds,{padding:[35,35],maxZoom:15});else if(bounds.length===1)map.setView(bounds[0],14);$("mapInfoTitle").textContent=visiblePlaces.length===1?t("map.one","1 place on the map"):template(t("map.many","{count} places on the map"),{count:visiblePlaces.length});$("mapInfoText").textContent=currentSearchLabel?template(t("map.near","Results near {location}."),{location:currentSearchLabel}):t("map.noSearch","Search a location to load nearby internet results.")}
-function toggleSavedPlace(id,button){const place=findPlace(id);if(!place)return;const index=savedPlaces.findIndex(item=>String(item.id)===String(id));if(index>=0){savedPlaces.splice(index,1);button.classList.remove("saved");button.textContent=t("dynamic.save","♡ Save")}else{savedPlaces.push({id:String(place.id),name:place.name,category:place.category,location:place.location||place.address||"",latitude:place.latitude,longitude:place.longitude,source:place.source});button.classList.add("saved");button.textContent=t("dynamic.saved","♥ Saved")}localStorage.setItem(SAVED_KEY,JSON.stringify(savedPlaces));renderSavedPlaces();updateStatistics()}
-function renderSavedPlaces(){const savedList=$("savedList");savedList.innerHTML="";if(!savedPlaces.length){savedList.innerHTML=`<div class="saved-item"><h3>${escapeHTML(t("saved.emptyTitle","Your saved places will appear here"))}</h3><p>${escapeHTML(t("saved.emptyText","Use the Save button on any place card."))}</p></div>`;return}savedPlaces.forEach(item=>savedList.insertAdjacentHTML("beforeend",`<div class="saved-item"><h3>${escapeHTML(item.name)}</h3><p>${escapeHTML(categoryLabel(item.category))} · ${escapeHTML(item.location||t("saved.location","Saved location"))}</p>${Number.isFinite(item.latitude)&&Number.isFinite(item.longitude)?`<a class="btn gold" href="https://www.openstreetmap.org/directions?to=${item.latitude}%2C${item.longitude}" target="_blank" rel="noopener noreferrer">${escapeHTML(t("dynamic.directions","Directions"))}</a>`:""} <button class="btn black" type="button" onclick="removeSavedPlace('${escapeHTML(String(item.id))}')">${escapeHTML(t("dynamic.remove","Remove"))}</button></div>`))}
-function removeSavedPlace(id){savedPlaces=savedPlaces.filter(item=>String(item.id)!==String(id));localStorage.setItem(SAVED_KEY,JSON.stringify(savedPlaces));renderPlaces()}function togglePlaceLike(id,button){const place=findPlace(id);if(!place)return;const current=placeLikes[id]!==undefined?Number(placeLikes[id]):Number(place.likes||0);if(likedPlaces[id]){placeLikes[id]=Math.max(0,current-1);likedPlaces[id]=false;button.classList.remove("liked")}else{placeLikes[id]=current+1;likedPlaces[id]=true;button.classList.add("liked")}button.querySelector("span").textContent=placeLikes[id];localStorage.setItem(LIKES_KEY,JSON.stringify(placeLikes));localStorage.setItem(LIKED_KEY,JSON.stringify(likedPlaces))}
-function openPlaceModal(id){const place=findPlace(id);if(!place)return;selectedPlaceId=String(id);const categoryInfo=categoryDefinitions[place.category]||categoryDefinitions.Other,modalHero=$("modalHero");modalHero.innerHTML=place.image?`<img src="${escapeHTML(place.image)}" alt="${escapeHTML(place.name)}" onerror="this.parentElement.innerHTML='<div class=&quot;modal-fallback&quot;>${categoryInfo.icon}</div>'">`:`<div class="modal-fallback">${categoryInfo.icon}</div>`;$("modalCategory").textContent=`${categoryInfo.icon} ${categoryLabel(place.category)}`;$("modalName").textContent=place.name;$("modalMeta").textContent=[place.address||place.location,Number.isFinite(place.distance)?formatDistance(place.distance):"",place.phone].filter(Boolean).join(" · ");const trustScore=calculateTrustScore(place);$("modalTrustScore").textContent=`${trustScore}/100`;$("modalTrustFill").style.width=`${trustScore}%`;const moderation=getModeration(place.id);$("modalPetPolicy").textContent=moderation.moderationStatus==="Under Review"?t("dynamic.modalDisputed","⚠️ This pet policy is currently disputed and under review."):place.petPolicy||t("dynamic.policyUnknown","Pet policy is not confirmed.");$("modalDescription").textContent=place.description||"";const website=$("modalWebsite");if(place.website){website.href=place.website;website.style.display="inline-block"}else website.style.display="none";const directions=$("modalDirections");if(Number.isFinite(place.latitude)&&Number.isFinite(place.longitude)){directions.href=`https://www.openstreetmap.org/directions?to=${place.latitude}%2C${place.longitude}`;directions.style.display="inline-block"}else directions.style.display="none";const reportButton=$("modalReportButton");if(reportedByUser[String(id)]){reportButton.disabled=true;reportButton.textContent=t("dynamic.reported","✓ Reported")}else{reportButton.disabled=false;reportButton.textContent=t("dynamic.reportProblem","🚩 Report Problem")}openModal("placeModal")}
-function closePlaceModal(){closeModal("placeModal")}function openReportFromPlaceModal(){if(!selectedPlaceId)return;closePlaceModal();openReportModal(selectedPlaceId)}
-function openReportModal(id){const place=findPlace(id);if(!place)return;if(reportedByUser[String(id)]){alert(t("report.already","You have already reported this place from this browser."));return}selectedReportPlaceId=String(id);$("reportPlaceName").textContent=template(t("report.reporting","Reporting: {name}"),{name:place.name});document.querySelectorAll('input[name="reportReason"]').forEach(input=>input.checked=false);$("reportDetails").value="";$("reportMessage").className="form-message";$("reportMessage").textContent="";openModal("reportModal")}function closeReportModal(){closeModal("reportModal");selectedReportPlaceId=null}
-function submitPlaceReport(){if(!selectedReportPlaceId)return;const place=findPlace(selectedReportPlaceId);if(!place)return;const selectedReason=document.querySelector('input[name="reportReason"]:checked');if(!selectedReason){showReportMessage(t("report.choose","Choose a reason for the report."),"error");return}if(reportedByUser[selectedReportPlaceId]){showReportMessage(t("report.alreadyShort","You have already reported this place."),"error");return}const report={id:`report-${Date.now()}-${Math.random().toString(16).slice(2)}`,placeId:String(place.id),placeName:place.name,reason:selectedReason.value,details:$("reportDetails").value.trim(),source:place.source,location:place.location||place.address||"",latitude:place.latitude,longitude:place.longitude,createdAt:new Date().toISOString()};placeReports.push(report);reportedByUser[String(place.id)]={reported:true,reportId:report.id,createdAt:report.createdAt};localStorage.setItem(REPORTS_KEY,JSON.stringify(placeReports));localStorage.setItem(REPORTED_KEY,JSON.stringify(reportedByUser));recalculateModeration();const moderation=getModeration(place.id);if(moderation.moderationStatus==="Auto Hidden")showReportMessage(t("report.hidden","Thank you. This place has reached the community report threshold and is now temporarily hidden pending administrator review."),"success");else if(moderation.moderationStatus==="Under Review")showReportMessage(t("report.underReview","Thank you. This place is now marked Under Review while its pet policy is checked."),"success");else showReportMessage(t("report.saved","Thank you. Your report has been saved for DOGUE Trust moderation."),"success");setTimeout(()=>{closeReportModal();renderPlaces()},1800)}
-function showReportMessage(message,type){$("reportMessage").textContent=message;$("reportMessage").className=`form-message ${type}`}function openModal(id){$(id).classList.add("open");document.body.classList.add("modal-open")}function closeModal(id){$(id).classList.remove("open");if(!document.querySelector(".modal-overlay.open"))document.body.classList.remove("modal-open")}function closeModalFromOverlay(event,id){if(event.target.id===id)closeModal(id)}
-async function submitCommunityPlace(){const name=$("submitPlaceName").value.trim(),category=$("submitPlaceCategory").value,address=$("submitPlaceAddress").value.trim(),email=$("submitEmail").value.trim(),agreement=$("submitAgreement").checked;if(!name||!category||!address||!email){showSubmissionMessage(t("submitMessages.required","Complete the place name, category, address and email."),"error");return}if(!email.includes("@")){showSubmissionMessage(t("submitMessages.email","Enter a valid email address."),"error");return}if(!agreement){showSubmissionMessage(t("submitMessages.agreement","Confirm that the submitted information is accurate."),"error");return}let coordinates={latitude:null,longitude:null};try{coordinates=await geocodeSubmittedAddress(address)}catch(error){console.warn("Submitted address could not be geocoded.",error)}const submission={id:`submission-${Date.now()}`,name,category,address,location:address,website:safeURL($("submitPlaceWebsite").value),phone:$("submitPlacePhone").value.trim(),petPolicy:$("submitPlacePetPolicy").value.trim()||t("submitMessages.communityPolicy","Pet policy supplied by a community member."),description:$("submitDescription").value.trim(),submittedBy:$("submitName").value.trim()||t("submitMessages.communityMember","Community member"),email,latitude:coordinates.latitude,longitude:coordinates.longitude,source:"community",status:"Pending Review",verified:false,submittedAt:new Date().toISOString()},submissions=readStorageArray(SUBMISSIONS_KEY);submissions.unshift(submission);localStorage.setItem(SUBMISSIONS_KEY,JSON.stringify(submissions));clearSubmissionForm();showSubmissionMessage(t("submitMessages.success","Thank you. The place has been saved as Pending Review and is ready for administrator moderation."),"success")}
-async function geocodeSubmittedAddress(address){const params=new URLSearchParams({q:address,format:"jsonv2",limit:"1"}),response=await fetch(`${NOMINATIM_URL}?${params.toString()}`,{headers:{"Accept":"application/json","Accept-Language":currentLanguage()}});if(!response.ok)throw new Error(t("submitMessages.lookupFailed","Address lookup failed."));const results=await response.json();if(!Array.isArray(results)||!results.length)return{latitude:null,longitude:null};return{latitude:Number(results[0].lat),longitude:Number(results[0].lon)}}
-function clearSubmissionForm(){["submitPlaceName","submitPlaceAddress","submitPlaceWebsite","submitPlacePhone","submitPlacePetPolicy","submitName","submitEmail","submitDescription"].forEach(id=>$(id).value="");$("submitPlaceCategory").value="";$("submitAgreement").checked=false}function showSubmissionMessage(message,type){$("submissionMessage").textContent=message;$("submissionMessage").className=`form-message ${type}`}
-function refreshDynamicLanguage(){if(currentSearchLabel==="Your current location")currentSearchLabel=t("messages.currentLocation","Your current location");renderPlaces();if(selectedPlaceId&&$("placeModal").classList.contains("open"))openPlaceModal(selectedPlaceId);if(selectedReportPlaceId&&$("reportModal").classList.contains("open")){const place=findPlace(selectedReportPlaceId);if(place)$("reportPlaceName").textContent=template(t("report.reporting","Reporting: {name}"),{name:place.name})}}
-document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeMenu();closePlaceModal();closeReportModal()}});window.addEventListener("languagechange",()=>setTimeout(refreshDynamicLanguage,0));window.addEventListener("petsdogue:languagechange",()=>setTimeout(refreshDynamicLanguage,0));window.addEventListener("storage",event=>{if(event.key===CMS_KEY||event.key===SUBMISSIONS_KEY)loadLocalPlaces();if(event.key===SAVED_KEY){savedPlaces=readStorageArray(SAVED_KEY);renderPlaces()}if(event.key===LIKES_KEY){placeLikes=readStorageObject(LIKES_KEY);renderPlaces()}if(event.key===REPORTS_KEY){placeReports=readStorageArray(REPORTS_KEY);recalculateModeration();renderPlaces()}if(event.key===MODERATION_KEY){placeModeration=readStorageObject(MODERATION_KEY);renderPlaces()}});
-document.addEventListener("DOMContentLoaded",()=>{initMap();loadLocalPlaces();renderPlaces();languageSelect?.addEventListener("change",()=>setTimeout(refreshDynamicLanguage,50))});
-</script></body></html>
+const GOOGLE_PLACES_URL =
+  "https://places.googleapis.com/v1/places:searchNearby";
+
+const DEFAULT_RADIUS = 5000;
+const MAX_RADIUS = 25000;
+const MAX_RESULTS = 20;
+
+const CATEGORY_TYPES = {
+  All: [
+    "cafe",
+    "restaurant",
+    "hotel",
+    "veterinary_care",
+    "pet_store"
+  ],
+  Cafe: ["cafe"],
+  Restaurant: ["restaurant"],
+  Hotel: ["hotel"],
+  Veterinary: ["veterinary_care"],
+  "Pet Shop": ["pet_store"]
+};
+
+function setCors(res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
+function json(res, status, payload) {
+  setCors(res);
+  res.status(status).json(payload);
+}
+
+function toNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function clampRadius(value) {
+  const parsed = toNumber(value);
+
+  if (!parsed) {
+    return DEFAULT_RADIUS;
+  }
+
+  return Math.min(
+    MAX_RADIUS,
+    Math.max(100, Math.round(parsed))
+  );
+}
+
+function normalizeCategory(value) {
+  const category = String(value || "All").trim();
+
+  if (Object.prototype.hasOwnProperty.call(CATEGORY_TYPES, category)) {
+    return category;
+  }
+
+  return "All";
+}
+
+function buildFieldMask() {
+  return [
+    "places.id",
+    "places.displayName",
+    "places.formattedAddress",
+    "places.location",
+    "places.primaryType",
+    "places.primaryTypeDisplayName",
+    "places.types",
+    "places.rating",
+    "places.userRatingCount",
+    "places.googleMapsUri",
+    "places.websiteUri",
+    "places.nationalPhoneNumber",
+    "places.internationalPhoneNumber",
+    "places.regularOpeningHours",
+    "places.currentOpeningHours",
+    "places.photos",
+    "places.businessStatus",
+    "places.allowsDogs"
+  ].join(",");
+}
+
+function normalizeGoogleCategory(place) {
+  const primary = String(place.primaryType || "").toLowerCase();
+  const types = Array.isArray(place.types)
+    ? place.types.map(item => String(item).toLowerCase())
+    : [];
+
+  const all = [primary, ...types];
+
+  if (
+    all.includes("cafe") ||
+    all.includes("coffee_shop")
+  ) {
+    return "Cafe";
+  }
+
+  if (
+    all.includes("restaurant") ||
+    all.includes("bar") ||
+    all.includes("pub")
+  ) {
+    return "Restaurant";
+  }
+
+  if (
+    all.includes("hotel") ||
+    all.includes("lodging")
+  ) {
+    return "Hotel";
+  }
+
+  if (
+    all.includes("veterinary_care") ||
+    all.includes("veterinarian")
+  ) {
+    return "Veterinary";
+  }
+
+  if (
+    all.includes("pet_store")
+  ) {
+    return "Pet Shop";
+  }
+
+  return "Other";
+}
+
+function getPhotoName(place) {
+  if (!Array.isArray(place.photos) || !place.photos.length) {
+    return "";
+  }
+
+  return String(place.photos[0]?.name || "");
+}
+
+function getPetPolicy(place) {
+  if (place.allowsDogs === true) {
+    return {
+      status: "confirmed",
+      allowsDogs: true,
+      text: "Dogs are indicated as allowed by Google Places."
+    };
+  }
+
+  if (place.allowsDogs === false) {
+    return {
+      status: "confirmed",
+      allowsDogs: false,
+      text: "Dogs are indicated as not allowed by Google Places."
+    };
+  }
+
+  return {
+    status: "unknown",
+    allowsDogs: null,
+    text: "Pet policy is not confirmed. Contact the venue before visiting."
+  };
+}
+
+function buildOpeningHours(place) {
+  const hours =
+    place.currentOpeningHours ||
+    place.regularOpeningHours ||
+    null;
+
+  if (!hours) {
+    return null;
+  }
+
+  return {
+    openNow:
+      typeof hours.openNow === "boolean"
+        ? hours.openNow
+        : null,
+
+    weekdayDescriptions:
+      Array.isArray(hours.weekdayDescriptions)
+        ? hours.weekdayDescriptions
+        : []
+  };
+}
+
+function buildGooglePlace(place) {
+  const lat = toNumber(place.location?.latitude);
+  const lng = toNumber(place.location?.longitude);
+
+  if (lat === null || lng === null) {
+    return null;
+  }
+
+  const petPolicy = getPetPolicy(place);
+
+  return {
+    id: `google-${place.id}`,
+    providerId: place.id,
+
+    source: "google",
+
+    name:
+      place.displayName?.text ||
+      "Pet Friendly Place",
+
+    category:
+      normalizeGoogleCategory(place),
+
+    categoryLabel:
+      place.primaryTypeDisplayName?.text ||
+      place.primaryType ||
+      "",
+
+    address:
+      place.formattedAddress ||
+      "",
+
+    latitude: lat,
+    longitude: lng,
+
+    rating:
+      typeof place.rating === "number"
+        ? place.rating
+        : null,
+
+    ratingCount:
+      Number.isFinite(Number(place.userRatingCount))
+        ? Number(place.userRatingCount)
+        : 0,
+
+    website:
+      place.websiteUri ||
+      "",
+
+    googleMapsUrl:
+      place.googleMapsUri ||
+      "",
+
+    phone:
+      place.internationalPhoneNumber ||
+      place.nationalPhoneNumber ||
+      "",
+
+    businessStatus:
+      place.businessStatus ||
+      "",
+
+    openingHours:
+      buildOpeningHours(place),
+
+    allowsDogs:
+      petPolicy.allowsDogs,
+
+    petPolicyStatus:
+      petPolicy.status,
+
+    petPolicy:
+      petPolicy.text,
+
+    photoName:
+      getPhotoName(place),
+
+    verified: false,
+
+    trustSource:
+      "Google Places"
+  };
+}
+
+async function fetchGooglePlaces({
+  latitude,
+  longitude,
+  radius,
+  category
+}) {
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+
+  if (!apiKey) {
+    return {
+      enabled: false,
+      places: [],
+      error: "GOOGLE_PLACES_API_KEY is not configured."
+    };
+  }
+
+  const includedTypes =
+    CATEGORY_TYPES[category] ||
+    CATEGORY_TYPES.All;
+
+  const requestBody = {
+    includedTypes,
+    maxResultCount: MAX_RESULTS,
+    rankPreference: "POPULARITY",
+
+    locationRestriction: {
+      circle: {
+        center: {
+          latitude,
+          longitude
+        },
+        radius
+      }
+    }
+  };
+
+  const response = await fetch(
+    GOOGLE_PLACES_URL,
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": apiKey,
+        "X-Goog-FieldMask": buildFieldMask()
+      },
+
+      body: JSON.stringify(requestBody)
+    }
+  );
+
+  if (!response.ok) {
+    const details = await response
+      .text()
+      .catch(() => "");
+
+    throw new Error(
+      `Google Places request failed with ${response.status}${
+        details ? `: ${details}` : ""
+      }`
+    );
+  }
+
+  const data = await response.json();
+
+  const places = Array.isArray(data.places)
+    ? data.places
+        .map(buildGooglePlace)
+        .filter(Boolean)
+    : [];
+
+  return {
+    enabled: true,
+    places
+  };
+}
+
+function mergePlaces(...groups) {
+  const unique = new Map();
+
+  groups
+    .flat()
+    .filter(Boolean)
+    .forEach(place => {
+      const key =
+        place.providerId ||
+        place.id ||
+        [
+          String(place.name || "").toLowerCase(),
+          Number(place.latitude).toFixed(5),
+          Number(place.longitude).toFixed(5)
+        ].join("|");
+
+      if (!unique.has(key)) {
+        unique.set(key, place);
+      }
+    });
+
+  return [...unique.values()];
+}
+
+export default async function handler(req, res) {
+  setCors(res);
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
+  if (req.method !== "POST") {
+    return json(
+      res,
+      405,
+      {
+        ok: false,
+        error: "Method not allowed."
+      }
+    );
+  }
+
+  try {
+    const latitude =
+      toNumber(req.body?.latitude);
+
+    const longitude =
+      toNumber(req.body?.longitude);
+
+    if (
+      latitude === null ||
+      longitude === null ||
+      latitude < -90 ||
+      latitude > 90 ||
+      longitude < -180 ||
+      longitude > 180
+    ) {
+      return json(
+        res,
+        400,
+        {
+          ok: false,
+          error: "Valid latitude and longitude are required."
+        }
+      );
+    }
+
+    const radius =
+      clampRadius(req.body?.radius);
+
+    const category =
+      normalizeCategory(req.body?.category);
+
+    const google =
+      await fetchGooglePlaces({
+        latitude,
+        longitude,
+        radius,
+        category
+      });
+
+    /*
+      Later we can add PETS & DOGUE Verified places here
+      from Supabase without exposing the database secret.
+
+      Example future structure:
+
+      const doguePlaces = await fetchVerifiedDoguePlaces({
+        latitude,
+        longitude,
+        radius,
+        category
+      });
+
+      const places = mergePlaces(
+        doguePlaces,
+        google.places
+      );
+    */
+
+    const places =
+      mergePlaces(
+        google.places
+      );
+
+    return json(
+      res,
+      200,
+      {
+        ok: true,
+
+        location: {
+          latitude,
+          longitude,
+          radius
+        },
+
+        category,
+
+        sources: {
+          google: {
+            enabled: google.enabled,
+            count: google.places.length
+          },
+
+          dogue: {
+            enabled: false,
+            count: 0
+          }
+        },
+
+        count: places.length,
+
+        places
+      }
+    );
+  } catch (error) {
+    console.error(
+      "pet-friendly-places API error:",
+      error
+    );
+
+    return json(
+      res,
+      500,
+      {
+        ok: false,
+        error:
+          "Unable to load nearby places right now."
+      }
+    );
+  }
+}
