@@ -3,411 +3,638 @@
 /*
 =========================================================
 PETS & DOGUE
-REAL PET-FRIENDLY PLACES
-Google Places API (New)
-=========================================================
+Pet-Friendly Places API
+Vercel Serverless Function
 
-Purpose:
-- Search real nearby businesses
-- Keep GOOGLE_PLACES_API_KEY hidden on Vercel
-- Return normalized place data to the website
-- Support pet-friendly discovery
+Required environment variable:
 
-Required Vercel environment variable:
 GOOGLE_PLACES_API_KEY
+or
+GOOGLE_MAPS_API_KEY
 
-Google endpoint:
-https://places.googleapis.com/v1/places:searchNearby
+This API:
+1. Searches real Google Places.
+2. Returns real Google place photos.
+3. Proxies photos through this endpoint so the API key
+   is never exposed in the browser.
 =========================================================
 */
 
-const GOOGLE_PLACES_API_URL =
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const GOOGLE_API_KEY =
+  process.env.GOOGLE_PLACES_API_KEY ||
+  process.env.GOOGLE_MAPS_API_KEY ||
+  "";
+
+const GOOGLE_NEARBY_URL =
   "https://places.googleapis.com/v1/places:searchNearby";
 
-const MAX_RADIUS_METERS =
-  25000;
+const GOOGLE_TEXT_URL =
+  "https://places.googleapis.com/v1/places:searchText";
 
-const MAX_RESULTS =
+const GOOGLE_PLACE_BASE =
+  "https://places.googleapis.com/v1";
+
+const DEFAULT_MAX_RESULTS =
   20;
 
-/*
-=========================================================
-SUPPORTED CATEGORIES
-=========================================================
+const MAX_RADIUS_METERS =
+  50000;
 
-Google Places API (New) Nearby Search accepts
-official Google place types.
 
-Parks / beaches can continue to be supplemented
-from OpenStreetMap on the front end.
-=========================================================
-*/
+/* =========================================================
+   CATEGORY CONFIG
+========================================================= */
 
 const CATEGORY_TYPES = {
 
-  all: [],
-
-  cafe: [
-    "cafe"
+  cafe:[
+    "cafe",
+    "coffee_shop"
   ],
 
-  restaurant: [
+  restaurant:[
     "restaurant"
   ],
 
-  hotel: [
-    "hotel"
+  hotel:[
+    "hotel",
+    "lodging"
   ],
 
-  veterinary: [
+  veterinary:[
     "veterinary_care"
   ],
 
-  "pet-shop": [
+  "pet-shop":[
     "pet_store"
+  ],
+
+  "dog-park":[
+    "dog_park",
+    "park"
+  ],
+
+  park:[
+    "dog_park",
+    "park"
+  ],
+
+  beach:[
+    "beach"
+  ],
+
+  events:[
+    "event_venue"
   ]
 
 };
 
-/*
-=========================================================
-CORS + RESPONSE
-=========================================================
-*/
 
-function setCors(
-  req,
-  res
-) {
+/* =========================================================
+   COMMON HEADERS
+========================================================= */
 
-  const origin =
-    String(
-      req.headers?.origin || ""
-    ).trim();
+function setCommonHeaders(
+  response
+){
 
-  const allowedOrigins =
-    new Set([
-      "https://petsanddogue.com",
-      "https://www.petsanddogue.com",
-      "https://pets-dogue-magazine.vercel.app"
-    ]);
-
-  if (
-    origin &&
-    (
-      allowedOrigins.has(origin) ||
-      origin.endsWith(
-        ".vercel.app"
-      )
-    )
-  ) {
-
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      origin
-    );
-
-  }
-
-  res.setHeader(
-    "Vary",
-    "Origin"
+  response.setHeader(
+    "Access-Control-Allow-Origin",
+    "*"
   );
 
-  res.setHeader(
+  response.setHeader(
     "Access-Control-Allow-Methods",
-    "POST, OPTIONS"
+    "GET,POST,OPTIONS"
   );
 
-  res.setHeader(
+  response.setHeader(
     "Access-Control-Allow-Headers",
     "Content-Type"
   );
 
-}
-
-function sendJson(
-  res,
-  status,
-  payload
-) {
-
-  res.statusCode =
-    status;
-
-  res.setHeader(
-    "Content-Type",
-    "application/json; charset=utf-8"
-  );
-
-  res.setHeader(
-    "Cache-Control",
-    "no-store, max-age=0"
-  );
-
-  res.end(
-    JSON.stringify(
-      payload
-    )
+  response.setHeader(
+    "X-Content-Type-Options",
+    "nosniff"
   );
 
 }
 
-/*
-=========================================================
-HELPERS
-=========================================================
-*/
 
-function cleanString(
-  value,
-  maxLength = 200
-) {
+/* =========================================================
+   HELPERS
+========================================================= */
 
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "";
-
-  }
-
-  return String(value)
-    .trim()
-    .slice(
-      0,
-      maxLength
-    );
-
-}
-
-function finiteNumber(
+function numberOrNull(
   value
-) {
+){
 
   const number =
     Number(value);
 
-  return Number.isFinite(number)
+  return Number.isFinite(
+    number
+  )
     ? number
     : null;
 
 }
 
+
 function clamp(
   value,
-  minimum,
-  maximum
-) {
+  min,
+  max
+){
 
   return Math.min(
-    maximum,
+    max,
     Math.max(
-      minimum,
+      min,
       value
     )
   );
 
 }
 
-function normalizeCategory(
+
+function cleanString(
   value
-) {
+){
 
-  const category =
-    cleanString(
-      value || "all",
-      50
-    )
-      .toLowerCase();
-
-  return Object.prototype.hasOwnProperty.call(
-    CATEGORY_TYPES,
-    category
-  )
-    ? category
-    : "all";
+  return String(
+    value ?? ""
+  ).trim();
 
 }
 
-function getDisplayName(
-  place
-) {
 
-  if (
-    place?.displayName?.text
-  ) {
+function getPhotoProxyUrl(
+  request,
+  photoName,
+  width = 1000
+){
 
-    return cleanString(
-      place.displayName.text,
-      300
+  if(
+    !photoName
+  ){
+
+    return "";
+
+  }
+
+  const host =
+    request.headers[
+      "x-forwarded-host"
+    ] ||
+    request.headers.host ||
+    "";
+
+  const protocol =
+    request.headers[
+      "x-forwarded-proto"
+    ] ||
+    "https";
+
+  if(
+    !host
+  ){
+
+    return (
+      "/api/pet-friendly-places?photo=" +
+      encodeURIComponent(
+        photoName
+      ) +
+      "&width=" +
+      encodeURIComponent(
+        width
+      )
     );
 
   }
 
-  return "";
-
-}
-
-function getPhone(
-  place
-) {
-
   return (
-    cleanString(
-      place?.internationalPhoneNumber || "",
-      100
-    ) ||
-    cleanString(
-      place?.nationalPhoneNumber || "",
-      100
+    protocol +
+    "://" +
+    host +
+    "/api/pet-friendly-places?photo=" +
+    encodeURIComponent(
+      photoName
+    ) +
+    "&width=" +
+    encodeURIComponent(
+      width
     )
   );
 
 }
 
-function getOpeningData(
-  place
-) {
 
-  const opening =
-    place?.regularOpeningHours;
+function normalizeCategory(
+  category
+){
 
-  if (
-    !opening ||
-    typeof opening !== "object"
-  ) {
+  const value =
+    cleanString(
+      category
+    )
+      .toLowerCase();
 
-    return {
-      openNow:
-        null,
+  const aliases = {
 
-      weekdayDescriptions:
-        []
-    };
+    cafes:"cafe",
+    coffee:"cafe",
+    coffee_shop:"cafe",
 
-  }
+    restaurants:"restaurant",
 
-  return {
+    hotels:"hotel",
+    lodging:"hotel",
 
-    openNow:
-      typeof opening.openNow === "boolean"
-        ? opening.openNow
-        : null,
+    vet:"veterinary",
+    vets:"veterinary",
+    veterinarian:"veterinary",
+    veterinarians:"veterinary",
+    veterinary_care:"veterinary",
 
-    weekdayDescriptions:
-      Array.isArray(
-        opening.weekdayDescriptions
-      )
-        ? opening.weekdayDescriptions
-            .map(
-              item =>
-                cleanString(
-                  item,
-                  300
-                )
-            )
-            .filter(Boolean)
-        : []
+    shop:"pet-shop",
+    petshop:"pet-shop",
+    "pet shop":"pet-shop",
+    pet_store:"pet-shop",
+
+    park:"park",
+    parks:"park",
+    dogpark:"dog-park",
+    "dog park":"dog-park",
+    dog_park:"dog-park",
+
+    beaches:"beach",
+
+    event:"events",
+    events:"events",
+    show:"events",
+    shows:"events",
+
+    all:"all"
 
   };
 
+  return (
+    aliases[value] ||
+    value ||
+    "all"
+  );
+
 }
 
-function normalizePhoto(
-  photo
-) {
 
-  if (
-    !photo ||
-    typeof photo !== "object"
-  ) {
+function detectCategoryFromTypes(
+  types
+){
+
+  const values =
+    Array.isArray(
+      types
+    )
+      ? types
+      : [];
+
+  if(
+    values.includes(
+      "veterinary_care"
+    )
+  ){
+
+    return "veterinary";
+
+  }
+
+  if(
+    values.includes(
+      "pet_store"
+    )
+  ){
+
+    return "pet-shop";
+
+  }
+
+  if(
+    values.includes(
+      "dog_park"
+    )
+  ){
+
+    return "park";
+
+  }
+
+  if(
+    values.includes(
+      "beach"
+    )
+  ){
+
+    return "beach";
+
+  }
+
+  if(
+    values.includes(
+      "hotel"
+    ) ||
+    values.includes(
+      "lodging"
+    )
+  ){
+
+    return "hotel";
+
+  }
+
+  if(
+    values.includes(
+      "restaurant"
+    )
+  ){
+
+    return "restaurant";
+
+  }
+
+  if(
+    values.includes(
+      "cafe"
+    ) ||
+    values.includes(
+      "coffee_shop"
+    )
+  ){
+
+    return "cafe";
+
+  }
+
+  if(
+    values.includes(
+      "park"
+    )
+  ){
+
+    return "park";
+
+  }
+
+  if(
+    values.includes(
+      "event_venue"
+    )
+  ){
+
+    return "events";
+
+  }
+
+  return "other";
+
+}
+
+
+function getDisplayName(
+  place
+){
+
+  if(
+    typeof place?.displayName ===
+    "string"
+  ){
+
+    return place.displayName;
+
+  }
+
+  return (
+    place?.displayName?.text ||
+    ""
+  );
+
+}
+
+
+function getPhoto(
+  request,
+  place
+){
+
+  const photos =
+    Array.isArray(
+      place?.photos
+    )
+      ? place.photos
+      : [];
+
+  if(
+    !photos.length
+  ){
 
     return null;
 
   }
+
+  const photo =
+    photos[0];
 
   const name =
     cleanString(
-      photo.name || "",
-      500
+      photo?.name
     );
 
-  if (
+  if(
     !name
-  ) {
+  ){
 
     return null;
 
   }
 
   return {
-
     name,
-
     widthPx:
-      finiteNumber(
+      numberOrNull(
         photo.widthPx
       ),
-
     heightPx:
-      finiteNumber(
+      numberOrNull(
         photo.heightPx
       ),
-
-    authorAttributions:
-      Array.isArray(
-        photo.authorAttributions
+    url:
+      getPhotoProxyUrl(
+        request,
+        name,
+        1000
       )
-        ? photo.authorAttributions
-        : []
-
   };
 
 }
 
-function normalizePlace(
+
+/* =========================================================
+   PET FRIENDLY DETECTION
+========================================================= */
+
+function isExplicitlyDogFriendly(
   place
-) {
+){
 
-  const opening =
-    getOpeningData(
-      place
-    );
+  if(
+    place?.allowsDogs ===
+    true
+  ){
 
-  const latitude =
-    finiteNumber(
+    return true;
+
+  }
+
+  return false;
+
+}
+
+
+function categoryNaturallyPetRelevant(
+  category
+){
+
+  return [
+    "veterinary",
+    "pet-shop",
+    "park",
+    "beach",
+    "events"
+  ].includes(
+    category
+  );
+
+}
+
+
+/* =========================================================
+   NORMALIZE GOOGLE PLACE
+========================================================= */
+
+function normalizeGooglePlace(
+  request,
+  place,
+  requestedCategory
+){
+
+  const lat =
+    numberOrNull(
       place?.location?.latitude
     );
 
-  const longitude =
-    finiteNumber(
+  const lng =
+    numberOrNull(
       place?.location?.longitude
     );
 
-  const allowsDogs =
-    typeof place?.allowsDogs ===
-      "boolean"
-      ? place.allowsDogs
-      : null;
+  if(
+    lat === null ||
+    lng === null
+  ){
+
+    return null;
+
+  }
+
+  const detectedCategory =
+    detectCategoryFromTypes(
+      place?.types
+    );
+
+  let category =
+    requestedCategory;
+
+  if(
+    !category ||
+    category === "all" ||
+    category === "dog-park"
+  ){
+
+    category =
+      detectedCategory;
+
+  }
+
+  if(
+    category === "dog-park"
+  ){
+
+    category =
+      "park";
+
+  }
 
   const photo =
-    Array.isArray(
-      place?.photos
-    ) &&
-    place.photos.length
-      ? normalizePhoto(
-          place.photos[0]
-        )
+    getPhoto(
+      request,
+      place
+    );
+
+  const openingHours =
+    place?.currentOpeningHours
+      ? {
+          openNow:
+            typeof place
+              .currentOpeningHours
+              .openNow ===
+            "boolean"
+              ? place
+                  .currentOpeningHours
+                  .openNow
+              : null,
+
+          weekdayDescriptions:
+            Array.isArray(
+              place
+                .currentOpeningHours
+                .weekdayDescriptions
+            )
+              ? place
+                  .currentOpeningHours
+                  .weekdayDescriptions
+              : []
+        }
       : null;
+
+  const petFriendly =
+    isExplicitlyDogFriendly(
+      place
+    ) ||
+    categoryNaturallyPetRelevant(
+      category
+    );
 
   return {
 
     id:
       cleanString(
-        place?.id || "",
-        300
+        place.id
+      ) ||
+      (
+        "google-" +
+        lat +
+        "-" +
+        lng
+      ),
+
+    providerId:
+      cleanString(
+        place.id
       ),
 
     source:
@@ -416,371 +643,273 @@ function normalizePlace(
     name:
       getDisplayName(
         place
-      ),
+      ) ||
+      "Pet-friendly place",
 
-    address:
-      cleanString(
-        place?.formattedAddress || "",
-        500
-      ),
-
-    location: {
-
-      lat:
-        latitude,
-
-      lng:
-        longitude
-
-    },
-
-    primaryType:
-      cleanString(
-        place?.primaryType || "",
-        100
-      ),
+    category,
 
     types:
       Array.isArray(
-        place?.types
+        place.types
       )
         ? place.types
-            .map(
-              type =>
-                cleanString(
-                  type,
-                  100
-                )
-            )
-            .filter(Boolean)
         : [],
 
-    rating:
-      finiteNumber(
-        place?.rating
+    address:
+      cleanString(
+        place.formattedAddress
       ),
 
-    userRatingCount:
-      finiteNumber(
-        place?.userRatingCount
+    location:{
+      lat,
+      lng
+    },
+
+    rating:
+      numberOrNull(
+        place.rating
+      ),
+
+    ratingCount:
+      numberOrNull(
+        place.userRatingCount
+      ) ||
+      0,
+
+    website:
+      cleanString(
+        place.websiteUri
       ),
 
     googleMapsUrl:
       cleanString(
-        place?.googleMapsUri || "",
-        1000
-      ),
-
-    website:
-      cleanString(
-        place?.websiteUri || "",
-        1000
+        place.googleMapsUri
       ),
 
     phone:
-      getPhone(
-        place
-      ),
-
-    businessStatus:
       cleanString(
-        place?.businessStatus || "",
-        100
+        place.nationalPhoneNumber ||
+        place.internationalPhoneNumber
       ),
 
-    openingHours: {
+    openingHours,
 
-      openNow:
-        opening.openNow,
-
-      weekdayDescriptions:
-        opening.weekdayDescriptions
-
-    },
-
-    petFriendly: {
-
-      allowsDogs,
-
-      verified:
-        allowsDogs === true,
-
-      source:
-        allowsDogs === true
-          ? "google"
-          : "unknown"
-
-    },
+    allowsDogs:
+      place?.allowsDogs ===
+      true,
 
     photo,
 
-    /*
-    Reserved for future PETS & DOGUE
-    verification through Supabase.
-    */
+    photos:
+      Array.isArray(
+        place.photos
+      )
+        ? place.photos
+            .slice(
+              0,
+              5
+            )
+            .map(
+              function(item){
 
-    petsDogueVerified:
-      false
+                const name =
+                  cleanString(
+                    item?.name
+                  );
+
+                if(
+                  !name
+                ){
+
+                  return null;
+
+                }
+
+                return {
+                  name,
+                  widthPx:
+                    numberOrNull(
+                      item.widthPx
+                    ),
+                  heightPx:
+                    numberOrNull(
+                      item.heightPx
+                    ),
+                  url:
+                    getPhotoProxyUrl(
+                      request,
+                      name,
+                      1000
+                    )
+                };
+
+              }
+            )
+            .filter(Boolean)
+        : [],
+
+    petFriendly:{
+      allowed:
+        petFriendly,
+      verified:
+        isExplicitlyDogFriendly(
+          place
+        )
+    }
 
   };
 
 }
 
-/*
-=========================================================
-BODY
-=========================================================
-*/
 
-async function readBody(
-  req
-) {
+/* =========================================================
+   GOOGLE FIELD MASK
+========================================================= */
 
-  if (
-    req.body &&
-    typeof req.body === "object"
-  ) {
+const FIELD_MASK = [
+  "places.id",
+  "places.displayName",
+  "places.formattedAddress",
+  "places.location",
+  "places.types",
+  "places.rating",
+  "places.userRatingCount",
+  "places.websiteUri",
+  "places.googleMapsUri",
+  "places.nationalPhoneNumber",
+  "places.internationalPhoneNumber",
+  "places.currentOpeningHours",
+  "places.photos",
+  "places.allowsDogs"
+].join(",");
 
-    return req.body;
 
-  }
+/* =========================================================
+   GOOGLE REQUEST
+========================================================= */
 
-  if (
-    typeof req.body === "string" &&
-    req.body.trim()
-  ) {
+async function googleFetch(
+  url,
+  body
+){
 
-    try {
+  const response =
+    await fetch(
+      url,
+      {
+        method:"POST",
 
-      return JSON.parse(
-        req.body
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          "X-Goog-Api-Key":
+            GOOGLE_API_KEY,
+
+          "X-Goog-FieldMask":
+            FIELD_MASK
+        },
+
+        body:
+          JSON.stringify(
+            body
+          )
+      }
+    );
+
+  const data =
+    await response
+      .json()
+      .catch(
+        function(){
+
+          return {};
+
+        }
       );
 
-    } catch {
+  if(
+    !response.ok
+  ){
 
-      return {};
+    const message =
+      data?.error?.message ||
+      data?.message ||
+      (
+        "Google Places request failed with status " +
+        response.status
+      );
 
-    }
-
-  }
-
-  const chunks = [];
-
-  for await (
-    const chunk
-    of req
-  ) {
-
-    chunks.push(
-      Buffer.isBuffer(chunk)
-        ? chunk
-        : Buffer.from(chunk)
+    throw new Error(
+      message
     );
 
   }
 
-  if (
-    !chunks.length
-  ) {
-
-    return {};
-
-  }
-
-  const raw =
-    Buffer
-      .concat(chunks)
-      .toString("utf8")
-      .trim();
-
-  if (
-    !raw
-  ) {
-
-    return {};
-
-  }
-
-  try {
-
-    return JSON.parse(
-      raw
-    );
-
-  } catch {
-
-    return {};
-
-  }
+  return data;
 
 }
 
-/*
-=========================================================
-GOOGLE REQUEST
-=========================================================
-*/
 
-async function searchGooglePlaces({
-  apiKey,
+/* =========================================================
+   NEARBY SEARCH
+========================================================= */
+
+async function searchNearbyCategory(
+  request,
   latitude,
   longitude,
   radius,
   category,
   maxResults
-}) {
+){
 
-  const requestBody = {
+  const types =
+    CATEGORY_TYPES[
+      category
+    ] ||
+    [];
+
+  if(
+    !types.length
+  ){
+
+    return [];
+
+  }
+
+  const body = {
+
+    includedTypes:
+      types,
 
     maxResultCount:
-      maxResults,
+      clamp(
+        maxResults,
+        1,
+        20
+      ),
 
     rankPreference:
-      "POPULARITY",
+      "DISTANCE",
 
-    locationRestriction: {
-
-      circle: {
-
-        center: {
-
+    locationRestriction:{
+      circle:{
+        center:{
           latitude,
-
           longitude
-
         },
-
         radius
-
       }
-
     }
 
   };
 
-  const includedTypes =
-    CATEGORY_TYPES[
-      category
-    ];
-
-  if (
-    Array.isArray(
-      includedTypes
-    ) &&
-    includedTypes.length
-  ) {
-
-    requestBody.includedTypes =
-      includedTypes;
-
-  }
-
-  const fieldMask = [
-    "places.id",
-    "places.displayName",
-    "places.formattedAddress",
-    "places.location",
-    "places.primaryType",
-    "places.types",
-    "places.rating",
-    "places.userRatingCount",
-    "places.googleMapsUri",
-    "places.websiteUri",
-    "places.internationalPhoneNumber",
-    "places.nationalPhoneNumber",
-    "places.regularOpeningHours",
-    "places.photos",
-    "places.businessStatus",
-    "places.allowsDogs"
-  ].join(",");
-
-  const response =
-    await fetch(
-      GOOGLE_PLACES_API_URL,
-      {
-
-        method:
-          "POST",
-
-        headers: {
-
-          "Content-Type":
-            "application/json",
-
-          "X-Goog-Api-Key":
-            apiKey,
-
-          "X-Goog-FieldMask":
-            fieldMask
-
-        },
-
-        body:
-          JSON.stringify(
-            requestBody
-          )
-
-      }
+  const data =
+    await googleFetch(
+      GOOGLE_NEARBY_URL,
+      body
     );
-
-  const raw =
-    await response.text();
-
-  let data = {};
-
-  if (
-    raw
-  ) {
-
-    try {
-
-      data =
-        JSON.parse(
-          raw
-        );
-
-    } catch {
-
-      data = {
-        raw
-      };
-
-    }
-
-  }
-
-  if (
-    !response.ok
-  ) {
-
-    console.error(
-      "PETS & DOGUE Google Places error:",
-      {
-        status:
-          response.status,
-
-        data
-      }
-    );
-
-    const googleMessage =
-      cleanString(
-        data?.error?.message || "",
-        500
-      );
-
-    const error =
-      new Error(
-        googleMessage ||
-        "Google Places request failed."
-      );
-
-    error.status =
-      response.status;
-
-    throw error;
-
-  }
 
   const places =
     Array.isArray(
@@ -789,341 +918,1068 @@ async function searchGooglePlaces({
       ? data.places
       : [];
 
-  return places;
+  return places
+    .map(
+      function(place){
+
+        return normalizeGooglePlace(
+          request,
+          place,
+          category
+        );
+
+      }
+    )
+    .filter(Boolean);
 
 }
 
-/*
-=========================================================
-HANDLER
-=========================================================
-*/
 
-module.exports =
-async function handler(
-  req,
-  res
-) {
+/* =========================================================
+   TEXT SEARCH
+   Used as a supplement for categories where Nearby Search
+   may return too few results.
+========================================================= */
 
-  setCors(
-    req,
-    res
-  );
+async function searchTextCategory(
+  request,
+  latitude,
+  longitude,
+  radius,
+  category,
+  maxResults
+){
 
-  if (
-    req.method === "OPTIONS"
-  ) {
+  const queries = {
 
-    res.statusCode =
-      204;
+    cafe:
+      "pet friendly cafe",
 
-    return res.end();
+    restaurant:
+      "pet friendly restaurant",
+
+    hotel:
+      "pet friendly hotel",
+
+    veterinary:
+      "veterinary clinic",
+
+    "pet-shop":
+      "pet shop",
+
+    "dog-park":
+      "dog park",
+
+    park:
+      "dog friendly park",
+
+    beach:
+      "dog friendly beach",
+
+    events:
+      "dog show pet event equestrian event"
+
+  };
+
+  const textQuery =
+    queries[
+      category
+    ];
+
+  if(
+    !textQuery
+  ){
+
+    return [];
 
   }
 
-  if (
-    req.method !== "POST"
-  ) {
+  const body = {
 
-    res.setHeader(
-      "Allow",
-      "POST, OPTIONS"
+    textQuery,
+
+    pageSize:
+      clamp(
+        maxResults,
+        1,
+        20
+      ),
+
+    locationBias:{
+      circle:{
+        center:{
+          latitude,
+          longitude
+        },
+        radius
+      }
+    }
+
+  };
+
+  const data =
+    await googleFetch(
+      GOOGLE_TEXT_URL,
+      body
     );
 
-    return sendJson(
-      res,
-      405,
-      {
+  const places =
+    Array.isArray(
+      data?.places
+    )
+      ? data.places
+      : [];
 
-        ok:
-          false,
+  return places
+    .map(
+      function(place){
 
-        error:
-          "Method not allowed. Use POST."
+        return normalizeGooglePlace(
+          request,
+          place,
+          category
+        );
 
       }
-    );
+    )
+    .filter(Boolean);
 
-  }
+}
 
-  const apiKey =
-    cleanString(
-      process.env.GOOGLE_PLACES_API_KEY || "",
-      500
-    );
 
-  if (
-    !apiKey
-  ) {
+/* =========================================================
+   DISTANCE
+========================================================= */
 
-    console.error(
-      "PETS & DOGUE: GOOGLE_PLACES_API_KEY is missing."
-    );
+function haversineKm(
+  lat1,
+  lng1,
+  lat2,
+  lng2
+){
 
-    return sendJson(
-      res,
-      500,
-      {
+  const earthRadius =
+    6371;
 
-        ok:
-          false,
+  const toRad =
+    function(value){
 
-        error:
-          "Google Places is not configured."
-
-      }
-    );
-
-  }
-
-  let body = {};
-
-  try {
-
-    body =
-      await readBody(
-        req
+      return (
+        value *
+        Math.PI /
+        180
       );
 
-  } catch {
+    };
 
-    return sendJson(
-      res,
-      400,
-      {
+  const dLat =
+    toRad(
+      lat2 - lat1
+    );
 
-        ok:
-          false,
+  const dLng =
+    toRad(
+      lng2 - lng1
+    );
 
-        error:
-          "Invalid request body."
+  const a =
+    Math.sin(
+      dLat / 2
+    ) ** 2 +
+    Math.cos(
+      toRad(
+        lat1
+      )
+    ) *
+    Math.cos(
+      toRad(
+        lat2
+      )
+    ) *
+    Math.sin(
+      dLng / 2
+    ) ** 2;
+
+  return (
+    earthRadius *
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    )
+  );
+
+}
+
+
+/* =========================================================
+   DEDUPLICATION
+========================================================= */
+
+function mergePlaces(
+  places,
+  latitude,
+  longitude
+){
+
+  const map =
+    new Map();
+
+  places
+    .filter(Boolean)
+    .forEach(
+      function(place){
+
+        const id =
+          cleanString(
+            place.id
+          );
+
+        const fallbackKey =
+          (
+            cleanString(
+              place.name
+            )
+              .toLowerCase() +
+            "|" +
+            Number(
+              place.location?.lat
+            ).toFixed(5) +
+            "|" +
+            Number(
+              place.location?.lng
+            ).toFixed(5)
+          );
+
+        const key =
+          id ||
+          fallbackKey;
+
+        if(
+          !map.has(
+            key
+          )
+        ){
+
+          map.set(
+            key,
+            place
+          );
+
+          return;
+
+        }
+
+        const existing =
+          map.get(
+            key
+          );
+
+        /*
+        Prefer the version with a photo.
+        */
+
+        if(
+          !existing.photo &&
+          place.photo
+        ){
+
+          map.set(
+            key,
+            Object.assign(
+              {},
+              existing,
+              place
+            )
+          );
+
+        }
 
       }
     );
 
+  return Array.from(
+    map.values()
+  )
+    .map(
+      function(place){
+
+        const distance =
+          haversineKm(
+            latitude,
+            longitude,
+            place.location.lat,
+            place.location.lng
+          );
+
+        return Object.assign(
+          {},
+          place,
+          {
+            distance
+          }
+        );
+
+      }
+    )
+    .sort(
+      function(a,b){
+
+        return (
+          Number(
+            a.distance
+          ) -
+          Number(
+            b.distance
+          )
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH ONE CATEGORY
+========================================================= */
+
+async function searchOneCategory(
+  request,
+  latitude,
+  longitude,
+  radius,
+  category,
+  maxResults
+){
+
+  const nearbyPromise =
+    searchNearbyCategory(
+      request,
+      latitude,
+      longitude,
+      radius,
+      category,
+      maxResults
+    )
+      .catch(
+        function(error){
+
+          console.warn(
+            "Nearby search failed:",
+            category,
+            error.message
+          );
+
+          return [];
+
+        }
+      );
+
+  const textPromise =
+    searchTextCategory(
+      request,
+      latitude,
+      longitude,
+      radius,
+      category,
+      maxResults
+    )
+      .catch(
+        function(error){
+
+          console.warn(
+            "Text search failed:",
+            category,
+            error.message
+          );
+
+          return [];
+
+        }
+      );
+
+  const result =
+    await Promise.all([
+      nearbyPromise,
+      textPromise
+    ]);
+
+  return mergePlaces(
+    [
+      ...result[0],
+      ...result[1]
+    ],
+    latitude,
+    longitude
+  )
+    .filter(
+      function(place){
+
+        return (
+          place.distance <=
+          (
+            radius /
+            1000
+          ) +
+          1
+        );
+
+      }
+    )
+    .slice(
+      0,
+      maxResults
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH ALL
+========================================================= */
+
+async function searchAllCategories(
+  request,
+  latitude,
+  longitude,
+  radius,
+  maxResults
+){
+
+  /*
+  We search the categories separately because Google Nearby
+  Search gives much better real-place coverage this way.
+  */
+
+  const categories = [
+    "cafe",
+    "restaurant",
+    "hotel",
+    "veterinary",
+    "pet-shop",
+    "dog-park"
+  ];
+
+  const perCategory =
+    8;
+
+  const promises =
+    categories.map(
+      function(category){
+
+        return searchOneCategory(
+          request,
+          latitude,
+          longitude,
+          radius,
+          category,
+          perCategory
+        )
+          .catch(
+            function(error){
+
+              console.warn(
+                "Category search failed:",
+                category,
+                error.message
+              );
+
+              return [];
+
+            }
+          );
+
+      }
+    );
+
+  const groups =
+    await Promise.all(
+      promises
+    );
+
+  const places =
+    mergePlaces(
+      groups.flat(),
+      latitude,
+      longitude
+    );
+
+  /*
+  Prefer places with real Google photos for the editorial
+  card grid, but retain distance as the main order.
+  */
+
+  places.sort(
+    function(a,b){
+
+      const distanceDifference =
+        Number(
+          a.distance
+        ) -
+        Number(
+          b.distance
+        );
+
+      if(
+        Math.abs(
+          distanceDifference
+        ) >
+        1
+      ){
+
+        return distanceDifference;
+
+      }
+
+      const aPhoto =
+        a.photo
+          ? 1
+          : 0;
+
+      const bPhoto =
+        b.photo
+          ? 1
+          : 0;
+
+      if(
+        aPhoto !==
+        bPhoto
+      ){
+
+        return (
+          bPhoto -
+          aPhoto
+        );
+
+      }
+
+      return (
+        Number(
+          b.rating || 0
+        ) -
+        Number(
+          a.rating || 0
+        )
+      );
+
+    }
+  );
+
+  return places.slice(
+    0,
+    maxResults
+  );
+
+}
+
+
+/* =========================================================
+   PHOTO PROXY
+========================================================= */
+
+async function proxyGooglePhoto(
+  request,
+  response
+){
+
+  const photoName =
+    cleanString(
+      request.query?.photo
+    );
+
+  if(
+    !photoName
+  ){
+
+    return response
+      .status(400)
+      .json({
+        ok:false,
+        error:
+          "Missing photo name."
+      });
+
   }
 
+  /*
+  Only allow valid Google Places photo resource names.
+  */
+
+  if(
+    !/^places\/[^/]+\/photos\/[^/]+$/i.test(
+      photoName
+    )
+  ){
+
+    return response
+      .status(400)
+      .json({
+        ok:false,
+        error:
+          "Invalid photo resource."
+      });
+
+  }
+
+  const requestedWidth =
+    numberOrNull(
+      request.query?.width
+    ) ||
+    1000;
+
+  const width =
+    Math.round(
+      clamp(
+        requestedWidth,
+        200,
+        1600
+      )
+    );
+
+  const mediaUrl =
+    GOOGLE_PLACE_BASE +
+    "/" +
+    photoName +
+    "/media" +
+    "?maxWidthPx=" +
+    encodeURIComponent(
+      width
+    ) +
+    "&skipHttpRedirect=true" +
+    "&key=" +
+    encodeURIComponent(
+      GOOGLE_API_KEY
+    );
+
+  const metadataResponse =
+    await fetch(
+      mediaUrl,
+      {
+        headers:{
+          "Accept":
+            "application/json"
+        }
+      }
+    );
+
+  if(
+    !metadataResponse.ok
+  ){
+
+    const errorText =
+      await metadataResponse
+        .text()
+        .catch(
+          function(){
+
+            return "";
+
+          }
+        );
+
+    console.error(
+      "Google photo metadata error:",
+      metadataResponse.status,
+      errorText
+    );
+
+    return response
+      .status(
+        metadataResponse.status
+      )
+      .json({
+        ok:false,
+        error:
+          "Google photo could not be loaded."
+      });
+
+  }
+
+  const metadata =
+    await metadataResponse
+      .json()
+      .catch(
+        function(){
+
+          return null;
+
+        }
+      );
+
+  const photoUri =
+    cleanString(
+      metadata?.photoUri
+    );
+
+  if(
+    !photoUri
+  ){
+
+    return response
+      .status(404)
+      .json({
+        ok:false,
+        error:
+          "Photo URL was not returned."
+      });
+
+  }
+
+  const imageResponse =
+    await fetch(
+      photoUri,
+      {
+        redirect:"follow"
+      }
+    );
+
+  if(
+    !imageResponse.ok
+  ){
+
+    return response
+      .status(
+        imageResponse.status
+      )
+      .json({
+        ok:false,
+        error:
+          "Photo image could not be loaded."
+      });
+
+  }
+
+  const contentType =
+    imageResponse.headers.get(
+      "content-type"
+    ) ||
+    "image/jpeg";
+
+  const arrayBuffer =
+    await imageResponse.arrayBuffer();
+
+  const buffer =
+    Buffer.from(
+      arrayBuffer
+    );
+
+  response.setHeader(
+    "Content-Type",
+    contentType
+  );
+
+  response.setHeader(
+    "Cache-Control",
+    "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"
+  );
+
+  response.setHeader(
+    "Content-Length",
+    String(
+      buffer.length
+    )
+  );
+
+  return response
+    .status(200)
+    .send(
+      buffer
+    );
+
+}
+
+
+/* =========================================================
+   MAIN SEARCH HANDLER
+========================================================= */
+
+async function handleSearch(
+  request,
+  response
+){
+
+  const body =
+    request.body ||
+    {};
+
   const latitude =
-    finiteNumber(
-      body.latitude ??
-      body.lat
+    numberOrNull(
+      body.latitude
     );
 
   const longitude =
-    finiteNumber(
-      body.longitude ??
-      body.lng
+    numberOrNull(
+      body.longitude
     );
 
-  if (
+  if(
     latitude === null ||
-    latitude < -90 ||
-    latitude > 90
-  ) {
+    longitude === null
+  ){
 
-    return sendJson(
-      res,
-      400,
-      {
-
-        ok:
-          false,
-
+    return response
+      .status(400)
+      .json({
+        ok:false,
         error:
-          "A valid latitude is required."
-
-      }
-    );
+          "Latitude and longitude are required."
+      });
 
   }
 
-  if (
-    longitude === null ||
+  if(
+    latitude < -90 ||
+    latitude > 90 ||
     longitude < -180 ||
     longitude > 180
-  ) {
+  ){
 
-    return sendJson(
-      res,
-      400,
-      {
-
-        ok:
-          false,
-
+    return response
+      .status(400)
+      .json({
+        ok:false,
         error:
-          "A valid longitude is required."
-
-      }
-    );
+          "Invalid coordinates."
+      });
 
   }
 
   const requestedRadius =
-    finiteNumber(
+    numberOrNull(
       body.radius
-    );
+    ) ||
+    15000;
 
   const radius =
-    requestedRadius === null
-      ? 5000
-      : clamp(
-          requestedRadius,
-          100,
-          MAX_RADIUS_METERS
-        );
+    clamp(
+      requestedRadius,
+      100,
+      MAX_RADIUS_METERS
+    );
 
   const requestedMaxResults =
-    finiteNumber(
-      body.maxResults
+    Math.round(
+      numberOrNull(
+        body.maxResults
+      ) ||
+      DEFAULT_MAX_RESULTS
     );
 
   const maxResults =
-    requestedMaxResults === null
-      ? MAX_RESULTS
-      : Math.round(
-          clamp(
-            requestedMaxResults,
-            1,
-            MAX_RESULTS
-          )
-        );
+    clamp(
+      requestedMaxResults,
+      1,
+      20
+    );
 
   const category =
     normalizeCategory(
       body.category
     );
 
-  try {
+  let places =
+    [];
 
-    const googlePlaces =
-      await searchGooglePlaces({
-        apiKey,
+  if(
+    category === "all"
+  ){
+
+    places =
+      await searchAllCategories(
+        request,
+        latitude,
+        longitude,
+        radius,
+        maxResults
+      );
+
+  }else{
+
+    places =
+      await searchOneCategory(
+        request,
         latitude,
         longitude,
         radius,
         category,
         maxResults
-      });
-
-    const places =
-      googlePlaces
-        .map(
-          normalizePlace
-        )
-        .filter(
-          place =>
-            place.id &&
-            place.name &&
-            place.location.lat !== null &&
-            place.location.lng !== null
-        );
-
-    /*
-    Future stage:
-
-    Merge PETS & DOGUE Verified places
-    from Supabase here before returning.
-
-    Google Places remains the real-world
-    business source, while our database
-    will hold our own verification,
-    partner status and community data.
-    */
-
-    return sendJson(
-      res,
-      200,
-      {
-
-        ok:
-          true,
-
-        source:
-          "google_places",
-
-        category,
-
-        search: {
-
-          latitude,
-
-          longitude,
-
-          radius,
-
-          maxResults
-
-        },
-
-        count:
-          places.length,
-
-        places
-
-      }
-    );
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      "PETS & DOGUE pet-friendly places error:",
-      error
-    );
-
-    const upstreamStatus =
-      Number(
-        error?.status
       );
-
-    let status =
-      500;
-
-    if (
-      upstreamStatus === 400
-    ) {
-
-      status =
-        400;
-
-    }
-
-    if (
-      upstreamStatus === 401 ||
-      upstreamStatus === 403
-    ) {
-
-      status =
-        502;
-
-    }
-
-    if (
-      upstreamStatus === 429
-    ) {
-
-      status =
-        429;
-
-    }
-
-    return sendJson(
-      res,
-      status,
-      {
-
-        ok:
-          false,
-
-        error:
-          error?.message ||
-          "Unable to load pet-friendly places."
-
-      }
-    );
 
   }
 
-};
+  /*
+  Final safety filter:
+  no record without usable coordinates reaches the browser.
+  */
+
+  places =
+    places.filter(
+      function(place){
+
+        return (
+          numberOrNull(
+            place?.location?.lat
+          ) !== null &&
+          numberOrNull(
+            place?.location?.lng
+          ) !== null
+        );
+
+      }
+    );
+
+  response.setHeader(
+    "Cache-Control",
+    "s-maxage=300, stale-while-revalidate=900"
+  );
+
+  return response
+    .status(200)
+    .json({
+      ok:true,
+
+      center:{
+        latitude,
+        longitude
+      },
+
+      radius,
+
+      category,
+
+      count:
+        places.length,
+
+      places
+    });
+
+}
+
+
+/* =========================================================
+   API HANDLER
+========================================================= */
+
+module.exports =
+  async function handler(
+    request,
+    response
+  ){
+
+    setCommonHeaders(
+      response
+    );
+
+    if(
+      request.method ===
+      "OPTIONS"
+    ){
+
+      return response
+        .status(204)
+        .end();
+
+    }
+
+    if(
+      !GOOGLE_API_KEY
+    ){
+
+      return response
+        .status(500)
+        .json({
+          ok:false,
+          error:
+            "Google Places API key is not configured. Add GOOGLE_PLACES_API_KEY or GOOGLE_MAPS_API_KEY in Vercel Environment Variables."
+        });
+
+    }
+
+    try{
+
+      /*
+      GET with ?photo=...
+      Returns the real Google photo image.
+      */
+
+      if(
+        request.method === "GET" &&
+        request.query?.photo
+      ){
+
+        return await proxyGooglePhoto(
+          request,
+          response
+        );
+
+      }
+
+      /*
+      Small status check.
+      */
+
+      if(
+        request.method === "GET"
+      ){
+
+        return response
+          .status(200)
+          .json({
+            ok:true,
+            service:
+              "PETS & DOGUE Pet-Friendly Places API",
+            configured:true
+          });
+
+      }
+
+      /*
+      Place search.
+      */
+
+      if(
+        request.method === "POST"
+      ){
+
+        return await handleSearch(
+          request,
+          response
+        );
+
+      }
+
+      response.setHeader(
+        "Allow",
+        "GET, POST, OPTIONS"
+      );
+
+      return response
+        .status(405)
+        .json({
+          ok:false,
+          error:
+            "Method not allowed."
+        });
+
+    }catch(
+      error
+    ){
+
+      console.error(
+        "Pet-Friendly Places API:",
+        error
+      );
+
+      return response
+        .status(500)
+        .json({
+          ok:false,
+          error:
+            error?.message ||
+            "Unexpected server error."
+        });
+
+    }
+
+  };
