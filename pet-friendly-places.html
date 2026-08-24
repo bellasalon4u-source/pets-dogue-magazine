@@ -29,6 +29,7 @@
   --green-dark:#24641c;
   --green-soft:#d9f8ca;
   --gold:#c99729;
+  --gold-dark:#8d641c;
   --gold-light:#e5c66f;
   --shadow:0 18px 45px rgba(0,0,0,.10);
 }
@@ -50,7 +51,9 @@ body{
 }
 
 button,
-input{
+input,
+select,
+textarea{
   font:inherit;
 }
 
@@ -96,8 +99,7 @@ img{
 }
 
 .menu-btn,
-.profile-btn,
-.home-btn{
+.profile-btn{
   border:0;
   background:transparent;
   color:#fff;
@@ -152,8 +154,7 @@ img{
   gap:13px;
 }
 
-.profile-btn,
-.home-btn{
+.profile-btn{
   width:58px;
   height:58px;
   border:1px solid #333;
@@ -408,11 +409,21 @@ img{
   line-height:1.48;
 }
 
+.search-area{
+  position:relative;
+  z-index:750;
+}
+
 .search-row{
   display:grid;
   grid-template-columns:1fr 62px 62px;
   gap:10px;
   margin-top:20px;
+}
+
+.search-field-wrap{
+  position:relative;
+  min-width:0;
 }
 
 .search-field{
@@ -425,6 +436,18 @@ img{
   border:1px solid var(--line);
   border-radius:17px;
   background:#fbf8f1;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+.search-field.selected{
+  border-color:var(--gold);
+  background:#fffaf0;
+  box-shadow:
+    0 0 0 2px rgba(201,151,41,.14),
+    0 8px 24px rgba(150,105,22,.10);
 }
 
 .search-field svg{
@@ -433,11 +456,171 @@ img{
 
 .search-field input{
   width:100%;
+  min-width:0;
   border:0;
   outline:0;
   background:transparent;
   color:#111;
   font-size:17px;
+}
+
+.search-clear{
+  flex:0 0 auto;
+  width:28px;
+  height:28px;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:#777;
+  display:none;
+  place-items:center;
+  font-size:20px;
+  line-height:1;
+}
+
+.search-clear.show{
+  display:grid;
+}
+
+.location-suggestions{
+  position:absolute;
+  top:calc(100% + 7px);
+  left:0;
+  right:0;
+  z-index:900;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#fffdf8;
+  box-shadow:0 18px 40px rgba(0,0,0,.17);
+}
+
+.location-suggestion{
+  width:100%;
+  min-height:58px;
+  border:0;
+  border-bottom:1px solid #e8e1d6;
+  background:#fffdf8;
+  color:#111;
+  padding:10px 14px;
+  display:grid;
+  grid-template-columns:30px 1fr;
+  gap:9px;
+  align-items:center;
+  text-align:left;
+}
+
+.location-suggestion:last-child{
+  border-bottom:0;
+}
+
+.location-suggestion:hover,
+.location-suggestion:focus-visible{
+  background:#f8f0dd;
+}
+
+.location-suggestion.selected{
+  background:
+    linear-gradient(
+      110deg,
+      #8f6518 0%,
+      #d3a83e 30%,
+      #f0d27b 52%,
+      #c5942b 78%,
+      #8f6518 100%
+    );
+  color:#111;
+}
+
+.suggestion-pin{
+  width:28px;
+  height:28px;
+  border:1px solid currentColor;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:14px;
+}
+
+.suggestion-main{
+  min-width:0;
+}
+
+.suggestion-title{
+  display:block;
+  font-size:14px;
+  font-weight:900;
+  line-height:1.25;
+}
+
+.suggestion-subtitle{
+  display:block;
+  margin-top:3px;
+  color:#777269;
+  font-size:11px;
+  line-height:1.28;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.location-suggestion.selected .suggestion-subtitle{
+  color:#33250e;
+}
+
+.suggestion-loading,
+.suggestion-empty{
+  padding:15px;
+  color:#777;
+  font-size:12px;
+}
+
+.selected-location{
+  display:none;
+  align-items:center;
+  gap:9px;
+  width:max-content;
+  max-width:100%;
+  margin-top:9px;
+  min-height:34px;
+  padding:6px 12px;
+  border:1px solid #b38322;
+  border-radius:999px;
+  background:
+    linear-gradient(
+      110deg,
+      #8b621a 0%,
+      #d3a63d 28%,
+      #f0d477 50%,
+      #d2a23a 72%,
+      #8c641c 100%
+    );
+  color:#111;
+  box-shadow:0 8px 18px rgba(117,80,14,.14);
+  font-size:12px;
+  font-weight:900;
+}
+
+.selected-location.show{
+  display:flex;
+}
+
+.selected-location-check{
+  width:19px;
+  height:19px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#111;
+  color:#fff;
+  font-size:11px;
+}
+
+.selected-location-text{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .icon-action{
@@ -687,22 +870,53 @@ img{
 .card-photo{
   object-fit:cover;
   z-index:-3;
+  opacity:0;
+  transform:scale(1.015);
+  transition:
+    opacity .28s ease,
+    transform .6s ease;
+}
+
+.card-photo.loaded{
+  opacity:1;
+}
+
+.place-card:hover .card-photo.loaded{
+  transform:scale(1.045);
 }
 
 .card-photo-fallback{
   z-index:-4;
   background:
     radial-gradient(
-      circle at 25% 20%,
-      rgba(84,239,11,.20),
+      circle at 24% 15%,
+      rgba(84,239,11,.27),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(201,151,41,.12),
       transparent 35%
     ),
     linear-gradient(
       150deg,
-      #101710,
-      #181818 54%,
-      #080808
+      #0d160d,
+      #171717 54%,
+      #070707
     );
+}
+
+.card-photo-fallback:after{
+  content:"PETS & DOGUE";
+  position:absolute;
+  left:50%;
+  top:43%;
+  transform:translate(-50%,-50%);
+  color:rgba(255,255,255,.09);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:20px;
+  letter-spacing:4px;
+  white-space:nowrap;
 }
 
 .place-card:after{
@@ -713,9 +927,10 @@ img{
   background:
     linear-gradient(
       to bottom,
-      rgba(0,0,0,.05) 20%,
-      rgba(0,0,0,.15) 45%,
-      rgba(0,0,0,.88) 100%
+      rgba(0,0,0,.03) 12%,
+      rgba(0,0,0,.08) 34%,
+      rgba(0,0,0,.28) 58%,
+      rgba(0,0,0,.94) 100%
     );
 }
 
@@ -726,7 +941,7 @@ img{
   z-index:5;
   width:45px;
   height:45px;
-  border:0;
+  border:1px solid rgba(255,255,255,.18);
   border-radius:50%;
   background:rgba(0,0,0,.46);
   color:#fff;
@@ -766,7 +981,14 @@ img{
   min-height:28px;
   padding:0 11px;
   border-radius:999px;
-  background:rgba(201,151,41,.94);
+  background:
+    linear-gradient(
+      110deg,
+      #8b6217,
+      #d2a33b 36%,
+      #e5c66f 56%,
+      #b47f20
+    );
   color:#111;
   font-size:12px;
   font-weight:900;
@@ -784,11 +1006,12 @@ img{
   font-size:27px;
   font-weight:400;
   line-height:1.02;
+  text-shadow:0 2px 10px rgba(0,0,0,.38);
 }
 
 .card-address{
   margin:0;
-  color:rgba(255,255,255,.80);
+  color:rgba(255,255,255,.84);
   font-size:13px;
   line-height:1.35;
   display:-webkit-box;
@@ -813,7 +1036,7 @@ img{
   min-height:27px;
   padding:0 10px;
   border-radius:99px;
-  background:rgba(84,239,11,.90);
+  background:rgba(84,239,11,.93);
   color:#092006;
   font-weight:900;
 }
@@ -1043,6 +1266,10 @@ html[dir="rtl"] .card-heart{
   left:13px;
 }
 
+html[dir="rtl"] .location-suggestion{
+  text-align:right;
+}
+
 
 /* =========================================================
    RESPONSIVE
@@ -1079,8 +1306,7 @@ html[dir="rtl"] .card-heart{
     letter-spacing:3px;
   }
 
-  .profile-btn,
-  .home-btn{
+  .profile-btn{
     width:48px;
     height:48px;
   }
@@ -1225,6 +1451,22 @@ html[dir="rtl"] .card-heart{
 
   .search-field input{
     font-size:14px;
+  }
+
+  .selected-location{
+    font-size:10px;
+  }
+
+  .location-suggestion{
+    min-height:53px;
+  }
+
+  .suggestion-title{
+    font-size:12px;
+  }
+
+  .suggestion-subtitle{
+    font-size:10px;
   }
 
   .radius-top{
@@ -1395,7 +1637,6 @@ select:focus-visible{
   outline:3px solid var(--green);
   outline-offset:2px;
 }
-
 </style>
 </head>
 
@@ -1448,37 +1689,14 @@ select:focus-visible{
   <nav class="header-nav">
     <div class="header-nav-inner">
 
-      <a href="index.html" data-i18n="navMagazine">
-        Magazine
-      </a>
-
-      <a href="special-offers.html" data-i18n="navDiscounts">
-        Discounts
-      </a>
-
-      <a href="members-gallery.html" data-i18n="navCoverStars">
-        Cover Stars
-      </a>
-
-      <a href="articles.html" data-i18n="navArticles">
-        Articles
-      </a>
-
-      <a href="photos.html" data-i18n="navPhotos">
-        Photos
-      </a>
-
-      <a href="pet-fashion.html" data-i18n="navFashion">
-        Fashion
-      </a>
-
-      <a href="pet-travel.html" data-i18n="navTravel">
-        Travel
-      </a>
-
-      <a href="wellness.html" data-i18n="navHealth">
-        Health
-      </a>
+      <a href="index.html" data-i18n="navMagazine">Magazine</a>
+      <a href="special-offers.html" data-i18n="navDiscounts">Discounts</a>
+      <a href="members-gallery.html" data-i18n="navCoverStars">Cover Stars</a>
+      <a href="articles.html" data-i18n="navArticles">Articles</a>
+      <a href="photos.html" data-i18n="navPhotos">Photos</a>
+      <a href="pet-fashion.html" data-i18n="navFashion">Fashion</a>
+      <a href="pet-travel.html" data-i18n="navTravel">Travel</a>
+      <a href="wellness.html" data-i18n="navHealth">Health</a>
 
       <a
         href="pet-friendly-places.html"
@@ -1488,21 +1706,10 @@ select:focus-visible{
         Places
       </a>
 
-      <a href="contests.html" data-i18n="navContests">
-        Contests
-      </a>
-
-      <a href="community.html" data-i18n="navCommunity">
-        Community
-      </a>
-
-      <a href="marketplace.html" data-i18n="navMarketplace">
-        Marketplace
-      </a>
-
-      <a href="partners.html" data-i18n="navPartners">
-        Partners
-      </a>
+      <a href="contests.html" data-i18n="navContests">Contests</a>
+      <a href="community.html" data-i18n="navCommunity">Community</a>
+      <a href="marketplace.html" data-i18n="navMarketplace">Marketplace</a>
+      <a href="partners.html" data-i18n="navPartners">Partners</a>
 
     </div>
   </nav>
@@ -1522,6 +1729,7 @@ select:focus-visible{
 >
 
   <div class="drawer-head">
+
     <div
       class="drawer-title"
       data-i18n="contents"
@@ -1537,6 +1745,7 @@ select:focus-visible{
     >
       ×
     </button>
+
   </div>
 
   <div class="drawer-actions">
@@ -1593,61 +1802,100 @@ select:focus-visible{
       </div>
 
 
-      <div class="search-row">
+      <div class="search-area">
 
-        <label class="search-field">
+        <div class="search-row">
 
-          <svg
-            width="21"
-            height="21"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
+          <div class="search-field-wrap">
+
+            <label
+              class="search-field"
+              id="searchField"
+            >
+
+              <svg
+                width="21"
+                height="21"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M16 16L21 21"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+
+              <input
+                id="locationInput"
+                type="search"
+                autocomplete="off"
+                autocapitalize="words"
+                spellcheck="false"
+                data-i18n-placeholder="searchPlaceholder"
+                placeholder="City, postcode or area"
+              >
+
+              <button
+                class="search-clear"
+                id="searchClear"
+                type="button"
+                aria-label="Clear"
+              >
+                ×
+              </button>
+
+            </label>
+
+            <div
+              class="location-suggestions"
+              id="locationSuggestions"
+              hidden
+            ></div>
+
+          </div>
+
+          <button
+            class="icon-action"
+            id="locationBtn"
+            type="button"
+            aria-label="Use my location"
+            title="Use my location"
           >
-            <circle
-              cx="11"
-              cy="11"
-              r="6"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-            <path
-              d="M16 16L21 21"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-          </svg>
+            ⊙
+          </button>
 
-          <input
-            id="locationInput"
-            type="search"
-            autocomplete="off"
-            data-i18n-placeholder="searchPlaceholder"
-            placeholder="City, postcode or area"
+          <button
+            class="icon-action add"
+            id="topAddBtn"
+            type="button"
+            aria-label="Add place"
+            title="Add place"
           >
+            +
+          </button>
 
-        </label>
+        </div>
 
-        <button
-          class="icon-action"
-          id="locationBtn"
-          type="button"
-          aria-label="Use my location"
-          title="Use my location"
+        <div
+          class="selected-location"
+          id="selectedLocation"
         >
-          ⊙
-        </button>
-
-        <button
-          class="icon-action add"
-          id="topAddBtn"
-          type="button"
-          aria-label="Add place"
-          title="Add place"
-        >
-          +
-        </button>
+          <span class="selected-location-check">✓</span>
+          <span
+            class="selected-location-text"
+            id="selectedLocationText"
+          ></span>
+        </div>
 
       </div>
 
@@ -1821,6 +2069,7 @@ select:focus-visible{
         class="sort-select"
         id="sortSelect"
       >
+
         <option
           value="distance"
           data-i18n="sortNearest"
@@ -1834,6 +2083,7 @@ select:focus-visible{
         >
           Highest rated
         </option>
+
       </select>
 
     </div>
@@ -1902,6 +2152,7 @@ select:focus-visible{
     <form id="addPlaceForm">
 
       <div class="form-field">
+
         <label
           for="addName"
           data-i18n="placeName"
@@ -1913,6 +2164,7 @@ select:focus-visible{
           id="addName"
           required
         >
+
       </div>
 
       <div class="form-field">
@@ -1926,43 +2178,21 @@ select:focus-visible{
 
         <select id="addCategory">
 
-          <option value="cafe" data-i18n="catCafe">
-            Cafes
-          </option>
-
-          <option value="restaurant" data-i18n="catRestaurant">
-            Restaurants
-          </option>
-
-          <option value="hotel" data-i18n="catHotel">
-            Hotels
-          </option>
-
-          <option value="park" data-i18n="catPark">
-            Parks
-          </option>
-
-          <option value="beach" data-i18n="catBeach">
-            Beaches
-          </option>
-
-          <option value="veterinary" data-i18n="catVet">
-            Veterinary
-          </option>
-
-          <option value="pet-shop" data-i18n="catShop">
-            Pet shops
-          </option>
-
-          <option value="events" data-i18n="catEvents">
-            Events & shows
-          </option>
+          <option value="cafe" data-i18n="catCafe">Cafes</option>
+          <option value="restaurant" data-i18n="catRestaurant">Restaurants</option>
+          <option value="hotel" data-i18n="catHotel">Hotels</option>
+          <option value="park" data-i18n="catPark">Parks</option>
+          <option value="beach" data-i18n="catBeach">Beaches</option>
+          <option value="veterinary" data-i18n="catVet">Veterinary</option>
+          <option value="pet-shop" data-i18n="catShop">Pet shops</option>
+          <option value="events" data-i18n="catEvents">Events & shows</option>
 
         </select>
 
       </div>
 
       <div class="form-field">
+
         <label
           for="addAddress"
           data-i18n="address"
@@ -1971,9 +2201,11 @@ select:focus-visible{
         </label>
 
         <input id="addAddress">
+
       </div>
 
       <div class="form-field">
+
         <label
           for="addWebsite"
           data-i18n="website"
@@ -1986,9 +2218,11 @@ select:focus-visible{
           type="url"
           placeholder="https://"
         >
+
       </div>
 
       <div class="form-field">
+
         <label
           for="addNote"
           data-i18n="note"
@@ -1997,6 +2231,7 @@ select:focus-visible{
         </label>
 
         <textarea id="addNote"></textarea>
+
       </div>
 
       <button
@@ -2046,9 +2281,9 @@ const OVERPASS_URL =
   "https://overpass-api.de/api/interpreter";
 
 const DEFAULT_LOCATION = {
-  lat: 50.8225,
-  lng: -0.1372,
-  label: "Brighton"
+  lat:50.8225,
+  lng:-0.1372,
+  label:"Brighton"
 };
 
 const LANGUAGE_KEYS = [
@@ -2150,6 +2385,9 @@ const BASE_EN = {
   places:"places",
 
   searching:"Searching for verified pet-friendly places…",
+  suggestionsSearching:"Searching locations…",
+  suggestionsEmpty:"No matching locations found.",
+  selectedLocation:"Selected location",
   locationSearching:"Finding your location…",
   geocodeFail:"We could not find this location.",
   locationFail:"We could not determine your location.",
@@ -2228,6 +2466,9 @@ ru:{
   places:"мест",
 
   searching:"Ищем проверенные pet-friendly места…",
+  suggestionsSearching:"Ищем локации…",
+  suggestionsEmpty:"Подходящие локации не найдены.",
+  selectedLocation:"Выбранная локация",
   locationSearching:"Определяем ваше местоположение…",
   geocodeFail:"Не удалось найти эту локацию.",
   locationFail:"Не удалось определить ваше местоположение.",
@@ -2303,6 +2544,9 @@ uk:{
   places:"місць",
 
   searching:"Шукаємо перевірені pet-friendly місця…",
+  suggestionsSearching:"Шукаємо локації…",
+  suggestionsEmpty:"Відповідні локації не знайдено.",
+  selectedLocation:"Вибрана локація",
   locationSearching:"Визначаємо ваше місцезнаходження…",
   geocodeFail:"Не вдалося знайти цю локацію.",
   locationFail:"Не вдалося визначити ваше місцезнаходження.",
@@ -2355,6 +2599,9 @@ fr:{
   catSaved:"Enregistrés",
   found:"Trouvé",
   places:"lieux",
+  suggestionsSearching:"Recherche des lieux…",
+  suggestionsEmpty:"Aucun lieu correspondant trouvé.",
+  selectedLocation:"Lieu sélectionné",
   searching:"Recherche des lieux pet-friendly vérifiés…",
   noPlaces:"Aucun lieu pet-friendly vérifié trouvé.",
   tryAnother:"Essayez une autre catégorie, un rayon plus grand ou une ville voisine."
@@ -2382,6 +2629,9 @@ de:{
   catSaved:"Gespeichert",
   found:"Gefunden",
   places:"Orte",
+  suggestionsSearching:"Orte werden gesucht…",
+  suggestionsEmpty:"Keine passenden Orte gefunden.",
+  selectedLocation:"Ausgewählter Ort",
   searching:"Verifizierte pet-friendly Orte werden gesucht…",
   noPlaces:"Keine verifizierten pet-friendly Orte gefunden.",
   tryAnother:"Versuchen Sie eine andere Kategorie oder einen größeren Radius."
@@ -2409,6 +2659,9 @@ es:{
   catSaved:"Guardados",
   found:"Encontrados",
   places:"lugares",
+  suggestionsSearching:"Buscando ubicaciones…",
+  suggestionsEmpty:"No se encontraron ubicaciones.",
+  selectedLocation:"Ubicación seleccionada",
   searching:"Buscando lugares pet-friendly verificados…",
   noPlaces:"No se encontraron lugares pet-friendly verificados.",
   tryAnother:"Prueba otra categoría, un radio mayor o una ciudad cercana."
@@ -2436,6 +2689,9 @@ it:{
   catSaved:"Salvati",
   found:"Trovati",
   places:"luoghi",
+  suggestionsSearching:"Ricerca località…",
+  suggestionsEmpty:"Nessuna località trovata.",
+  selectedLocation:"Località selezionata",
   searching:"Ricerca di luoghi pet-friendly verificati…",
   noPlaces:"Nessun luogo pet-friendly verificato trovato.",
   tryAnother:"Prova un’altra categoria o un raggio più grande."
@@ -2463,6 +2719,9 @@ pt:{
   catSaved:"Guardados",
   found:"Encontrados",
   places:"locais",
+  suggestionsSearching:"A procurar locais…",
+  suggestionsEmpty:"Nenhum local correspondente encontrado.",
+  selectedLocation:"Local selecionado",
   searching:"A procurar locais pet-friendly verificados…",
   noPlaces:"Nenhum local pet-friendly verificado encontrado.",
   tryAnother:"Experimente outra categoria ou um raio maior."
@@ -2490,6 +2749,9 @@ nl:{
   catSaved:"Opgeslagen",
   found:"Gevonden",
   places:"plekken",
+  suggestionsSearching:"Locaties zoeken…",
+  suggestionsEmpty:"Geen locaties gevonden.",
+  selectedLocation:"Geselecteerde locatie",
   searching:"Geverifieerde pet-friendly plekken zoeken…",
   noPlaces:"Geen geverifieerde pet-friendly plekken gevonden.",
   tryAnother:"Probeer een andere categorie of grotere straal."
@@ -2517,6 +2779,9 @@ pl:{
   catSaved:"Zapisane",
   found:"Znaleziono",
   places:"miejsc",
+  suggestionsSearching:"Szukamy lokalizacji…",
+  suggestionsEmpty:"Nie znaleziono lokalizacji.",
+  selectedLocation:"Wybrana lokalizacja",
   searching:"Szukamy zweryfikowanych miejsc pet-friendly…",
   noPlaces:"Nie znaleziono zweryfikowanych miejsc pet-friendly.",
   tryAnother:"Spróbuj innej kategorii lub większego promienia."
@@ -2544,6 +2809,9 @@ cs:{
   catSaved:"Uložené",
   found:"Nalezeno",
   places:"míst",
+  suggestionsSearching:"Hledáme lokality…",
+  suggestionsEmpty:"Žádná lokalita nenalezena.",
+  selectedLocation:"Vybraná lokalita",
   searching:"Hledáme ověřená pet-friendly místa…",
   noPlaces:"Nebyla nalezena ověřená pet-friendly místa.",
   tryAnother:"Zkuste jinou kategorii nebo větší okruh."
@@ -2571,6 +2839,9 @@ sk:{
   catSaved:"Uložené",
   found:"Nájdené",
   places:"miest",
+  suggestionsSearching:"Hľadáme lokality…",
+  suggestionsEmpty:"Žiadna lokalita sa nenašla.",
+  selectedLocation:"Vybraná lokalita",
   searching:"Hľadáme overené pet-friendly miesta…",
   noPlaces:"Nenašli sa overené pet-friendly miesta.",
   tryAnother:"Skúste inú kategóriu alebo väčší okruh."
@@ -2598,6 +2869,9 @@ hu:{
   catSaved:"Mentett",
   found:"Találat",
   places:"hely",
+  suggestionsSearching:"Helyek keresése…",
+  suggestionsEmpty:"Nincs találat.",
+  selectedLocation:"Kiválasztott hely",
   searching:"Ellenőrzött pet-friendly helyek keresése…",
   noPlaces:"Nem található ellenőrzött pet-friendly hely.",
   tryAnother:"Próbáljon más kategóriát vagy nagyobb sugarat."
@@ -2625,6 +2899,9 @@ ro:{
   catSaved:"Salvate",
   found:"Găsite",
   places:"locuri",
+  suggestionsSearching:"Căutăm locații…",
+  suggestionsEmpty:"Nu au fost găsite locații.",
+  selectedLocation:"Locație selectată",
   searching:"Căutăm locuri pet-friendly verificate…",
   noPlaces:"Nu au fost găsite locuri pet-friendly verificate.",
   tryAnother:"Încercați altă categorie sau o rază mai mare."
@@ -2652,6 +2929,9 @@ bg:{
   catSaved:"Запазени",
   found:"Намерени",
   places:"места",
+  suggestionsSearching:"Търсим локации…",
+  suggestionsEmpty:"Няма намерени локации.",
+  selectedLocation:"Избрана локация",
   searching:"Търсим проверени pet-friendly места…",
   noPlaces:"Не са намерени проверени pet-friendly места.",
   tryAnother:"Опитайте друга категория или по-голям радиус."
@@ -2679,6 +2959,9 @@ el:{
   catSaved:"Αποθηκευμένα",
   found:"Βρέθηκαν",
   places:"μέρη",
+  suggestionsSearching:"Αναζήτηση τοποθεσιών…",
+  suggestionsEmpty:"Δεν βρέθηκαν τοποθεσίες.",
+  selectedLocation:"Επιλεγμένη τοποθεσία",
   searching:"Αναζήτηση επαληθευμένων pet-friendly χώρων…",
   noPlaces:"Δεν βρέθηκαν επαληθευμένα pet-friendly μέρη.",
   tryAnother:"Δοκιμάστε άλλη κατηγορία ή μεγαλύτερη ακτίνα."
@@ -2706,6 +2989,9 @@ sv:{
   catSaved:"Sparade",
   found:"Hittade",
   places:"platser",
+  suggestionsSearching:"Söker platser…",
+  suggestionsEmpty:"Inga platser hittades.",
+  selectedLocation:"Vald plats",
   searching:"Söker verifierade pet-friendly platser…",
   noPlaces:"Inga verifierade pet-friendly platser hittades.",
   tryAnother:"Prova en annan kategori eller större radie."
@@ -2733,6 +3019,9 @@ da:{
   catSaved:"Gemte",
   found:"Fundet",
   places:"steder",
+  suggestionsSearching:"Søger steder…",
+  suggestionsEmpty:"Ingen steder fundet.",
+  selectedLocation:"Valgt sted",
   searching:"Søger verificerede pet-friendly steder…",
   noPlaces:"Ingen verificerede pet-friendly steder fundet.",
   tryAnother:"Prøv en anden kategori eller større radius."
@@ -2760,6 +3049,9 @@ no:{
   catSaved:"Lagrede",
   found:"Funnet",
   places:"steder",
+  suggestionsSearching:"Søker steder…",
+  suggestionsEmpty:"Ingen steder funnet.",
+  selectedLocation:"Valgt sted",
   searching:"Søker etter verifiserte pet-friendly steder…",
   noPlaces:"Ingen verifiserte pet-friendly steder funnet.",
   tryAnother:"Prøv en annen kategori eller større radius."
@@ -2787,6 +3079,9 @@ fi:{
   catSaved:"Tallennetut",
   found:"Löytyi",
   places:"paikkaa",
+  suggestionsSearching:"Etsitään paikkoja…",
+  suggestionsEmpty:"Paikkoja ei löytynyt.",
+  selectedLocation:"Valittu paikka",
   searching:"Etsitään vahvistettuja pet-friendly paikkoja…",
   noPlaces:"Vahvistettuja pet-friendly paikkoja ei löytynyt.",
   tryAnother:"Kokeile toista kategoriaa tai suurempaa sädettä."
@@ -2814,6 +3109,9 @@ tr:{
   catSaved:"Kaydedilenler",
   found:"Bulundu",
   places:"yer",
+  suggestionsSearching:"Konumlar aranıyor…",
+  suggestionsEmpty:"Konum bulunamadı.",
+  selectedLocation:"Seçili konum",
   searching:"Doğrulanmış pet-friendly yerler aranıyor…",
   noPlaces:"Doğrulanmış pet-friendly yer bulunamadı.",
   tryAnother:"Başka bir kategori veya daha geniş yarıçap deneyin."
@@ -2841,6 +3139,9 @@ ar:{
   catSaved:"المحفوظة",
   found:"تم العثور على",
   places:"أماكن",
+  suggestionsSearching:"جارٍ البحث عن المواقع…",
+  suggestionsEmpty:"لم يتم العثور على مواقع.",
+  selectedLocation:"الموقع المحدد",
   searching:"جارٍ البحث عن أماكن موثقة صديقة للحيوانات…",
   noPlaces:"لم يتم العثور على أماكن موثقة صديقة للحيوانات.",
   tryAnother:"جرّب فئة أخرى أو نطاقاً أكبر."
@@ -2868,6 +3169,9 @@ hi:{
   catSaved:"सहेजे गए",
   found:"मिले",
   places:"स्थान",
+  suggestionsSearching:"स्थान खोजे जा रहे हैं…",
+  suggestionsEmpty:"कोई स्थान नहीं मिला।",
+  selectedLocation:"चुना गया स्थान",
   searching:"सत्यापित pet-friendly स्थान खोज रहे हैं…",
   noPlaces:"कोई सत्यापित pet-friendly स्थान नहीं मिला।",
   tryAnother:"दूसरी श्रेणी या बड़ी दूरी आज़माएँ।"
@@ -2875,8 +3179,6 @@ hi:{
 
 };
 
-
-/* fill missing strings from English */
 
 [
   "fr","de","es","it","pt","nl","pl","cs","sk","hu","ro",
@@ -2945,6 +3247,18 @@ let placeMarkers =
 
 let modalCoordinates =
   null;
+
+let suggestionTimer =
+  null;
+
+let suggestionRequestId =
+  0;
+
+let currentSuggestions =
+  [];
+
+let locationConfirmed =
+  false;
 
 
 /* =========================================================
@@ -3039,27 +3353,40 @@ function detectLanguage(){
 
   }
 
-  const cookieMatch =
-    document.cookie.match(
-      /(?:^|;\s*)i18next=([^;]+)/
-    );
+  const cookieMatches = [
+    /(?:^|;\s*)i18next=([^;]+)/,
+    /(?:^|;\s*)language=([^;]+)/,
+    /(?:^|;\s*)lang=([^;]+)/
+  ];
 
-  if(
-    cookieMatch
+  for(
+    const pattern
+    of cookieMatches
   ){
 
-    const value =
-      normalizeLanguage(
-        decodeURIComponent(
-          cookieMatch[1]
-        )
+    const match =
+      document.cookie.match(
+        pattern
       );
 
     if(
-      value
+      match
     ){
 
-      return value;
+      const value =
+        normalizeLanguage(
+          decodeURIComponent(
+            match[1]
+          )
+        );
+
+      if(
+        value
+      ){
+
+        return value;
+
+      }
 
     }
 
@@ -3229,7 +3556,7 @@ function applyLanguage(
   }
 
   updateRadiusLabel();
-
+  updateSelectedLocation();
   renderResults();
 
 }
@@ -3242,26 +3569,11 @@ function escapeHtml(
   return String(
     value ?? ""
   )
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
@@ -3489,6 +3801,84 @@ function categoryLabel(
   return t(
     map[category] ||
     "navPlaces"
+  );
+
+}
+
+
+function shortLocationName(
+  item
+){
+
+  const address =
+    item?.address ||
+    {};
+
+  return (
+    address.city ||
+    address.town ||
+    address.village ||
+    address.municipality ||
+    address.county ||
+    item?.name ||
+    String(
+      item?.display_name ||
+      ""
+    )
+      .split(",")[0]
+  );
+
+}
+
+
+function compactLocationLabel(
+  item
+){
+
+  const address =
+    item?.address ||
+    {};
+
+  const parts = [
+    address.city ||
+    address.town ||
+    address.village ||
+    address.municipality ||
+    item?.name ||
+    "",
+    address.state ||
+    address.county ||
+    "",
+    address.country ||
+    ""
+  ]
+    .filter(Boolean);
+
+  const unique =
+    [];
+
+  parts.forEach(
+    function(part){
+
+      if(
+        !unique.includes(
+          part
+        )
+      ){
+
+        unique.push(
+          part
+        );
+
+      }
+
+    }
+  );
+
+  return (
+    unique.join(", ") ||
+    item?.display_name ||
+    ""
   );
 
 }
@@ -3851,23 +4241,30 @@ function updateMapMarkers(
 
 
 /* =========================================================
-   GEOCODING
+   GEOCODING + AUTOCOMPLETE
 ========================================================= */
 
-async function geocode(
-  query
+async function fetchLocationSuggestions(
+  query,
+  limit = 6
 ){
 
-  const url =
-    NOMINATIM_URL +
-    "?format=jsonv2&limit=1&addressdetails=1&q=" +
-    encodeURIComponent(
-      query
-    );
+  const params =
+    new URLSearchParams({
+      format:"jsonv2",
+      addressdetails:"1",
+      namedetails:"1",
+      limit:String(limit),
+      q:query,
+      "accept-language":
+        currentLanguage
+    });
 
   const response =
     await fetch(
-      url,
+      NOMINATIM_URL +
+      "?" +
+      params.toString(),
       {
         headers:{
           "Accept":
@@ -3889,27 +4286,84 @@ async function geocode(
   const data =
     await response.json();
 
+  return Array.isArray(
+    data
+  )
+    ? data
+    : [];
+
+}
+
+
+async function geocode(
+  query
+){
+
+  const results =
+    await fetchLocationSuggestions(
+      query,
+      1
+    );
+
   if(
-    !Array.isArray(
-      data
-    ) ||
-    !data.length
+    !results.length
   ){
 
     return null;
 
   }
 
+  return suggestionToLocation(
+    results[0]
+  );
+
+}
+
+
+function suggestionToLocation(
+  suggestion
+){
+
+  const lat =
+    finiteNumber(
+      suggestion?.lat
+    );
+
+  const lng =
+    finiteNumber(
+      suggestion?.lon
+    );
+
+  if(
+    lat === null ||
+    lng === null
+  ){
+
+    return null;
+
+  }
+
+  const compact =
+    compactLocationLabel(
+      suggestion
+    );
+
   return {
-    lat:Number(
-      data[0].lat
-    ),
-    lng:Number(
-      data[0].lon
-    ),
+    lat,
+    lng,
     label:
-      data[0].display_name ||
-      query
+      compact ||
+      suggestion.display_name ||
+      "",
+    fullLabel:
+      suggestion.display_name ||
+      compact ||
+      "",
+    shortLabel:
+      shortLocationName(
+        suggestion
+      ) ||
+      compact
   };
 
 }
@@ -3924,7 +4378,11 @@ async function reverseGeocode(
 
     const response =
       await fetch(
-        "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
+        "https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&accept-language=" +
+        encodeURIComponent(
+          currentLanguage
+        ) +
+        "&lat=" +
         encodeURIComponent(
           lat
         ) +
@@ -3952,6 +4410,9 @@ async function reverseGeocode(
       await response.json();
 
     return (
+      compactLocationLabel(
+        data
+      ) ||
       data?.display_name ||
       ""
     );
@@ -3961,6 +4422,344 @@ async function reverseGeocode(
     return "";
 
   }
+
+}
+
+
+/* =========================================================
+   LOCATION SUGGESTION UI
+========================================================= */
+
+const locationInput =
+  document.getElementById(
+    "locationInput"
+  );
+
+const searchField =
+  document.getElementById(
+    "searchField"
+  );
+
+const searchClear =
+  document.getElementById(
+    "searchClear"
+  );
+
+const locationSuggestions =
+  document.getElementById(
+    "locationSuggestions"
+  );
+
+const selectedLocation =
+  document.getElementById(
+    "selectedLocation"
+  );
+
+const selectedLocationText =
+  document.getElementById(
+    "selectedLocationText"
+  );
+
+
+function hideSuggestions(){
+
+  locationSuggestions.hidden =
+    true;
+
+  locationSuggestions.innerHTML =
+    "";
+
+}
+
+
+function showSuggestionMessage(
+  text,
+  className
+){
+
+  locationSuggestions.innerHTML =
+    `
+    <div class="${className}">
+      ${escapeHtml(text)}
+    </div>
+    `;
+
+  locationSuggestions.hidden =
+    false;
+
+}
+
+
+function updateClearButton(){
+
+  searchClear.classList.toggle(
+    "show",
+    Boolean(
+      locationInput.value.trim()
+    )
+  );
+
+}
+
+
+function updateSelectedLocation(){
+
+  if(
+    locationConfirmed &&
+    currentLocation?.label
+  ){
+
+    searchField.classList.add(
+      "selected"
+    );
+
+    selectedLocation.classList.add(
+      "show"
+    );
+
+    selectedLocationText.textContent =
+      currentLocation.label;
+
+  }else{
+
+    searchField.classList.remove(
+      "selected"
+    );
+
+    selectedLocation.classList.remove(
+      "show"
+    );
+
+    selectedLocationText.textContent =
+      "";
+
+  }
+
+}
+
+
+function renderLocationSuggestions(
+  suggestions
+){
+
+  currentSuggestions =
+    suggestions;
+
+  if(
+    !suggestions.length
+  ){
+
+    showSuggestionMessage(
+      t("suggestionsEmpty"),
+      "suggestion-empty"
+    );
+
+    return;
+
+  }
+
+  locationSuggestions.innerHTML =
+    suggestions
+      .map(
+        function(item,index){
+
+          const title =
+            shortLocationName(
+              item
+            ) ||
+            item.display_name ||
+            "";
+
+          const subtitle =
+            item.display_name ||
+            "";
+
+          return `
+            <button
+              class="location-suggestion"
+              type="button"
+              data-suggestion-index="${index}"
+            >
+              <span class="suggestion-pin">⌖</span>
+
+              <span class="suggestion-main">
+
+                <span class="suggestion-title">
+                  ${escapeHtml(title)}
+                </span>
+
+                <span class="suggestion-subtitle">
+                  ${escapeHtml(subtitle)}
+                </span>
+
+              </span>
+            </button>
+          `;
+
+        }
+      )
+      .join("");
+
+  locationSuggestions.hidden =
+    false;
+
+  locationSuggestions
+    .querySelectorAll(
+      "[data-suggestion-index]"
+    )
+    .forEach(
+      function(button){
+
+        button.addEventListener(
+          "click",
+          async function(){
+
+            const index =
+              Number(
+                this.dataset.suggestionIndex
+              );
+
+            const suggestion =
+              currentSuggestions[
+                index
+              ];
+
+            if(
+              suggestion
+            ){
+
+              this.classList.add(
+                "selected"
+              );
+
+              await selectLocationSuggestion(
+                suggestion
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+async function requestSuggestions(){
+
+  const query =
+    locationInput.value
+      .trim();
+
+  if(
+    query.length < 2
+  ){
+
+    hideSuggestions();
+
+    return;
+
+  }
+
+  const requestId =
+    ++suggestionRequestId;
+
+  showSuggestionMessage(
+    t("suggestionsSearching"),
+    "suggestion-loading"
+  );
+
+  try{
+
+    const suggestions =
+      await fetchLocationSuggestions(
+        query,
+        6
+      );
+
+    if(
+      requestId !==
+      suggestionRequestId
+    ){
+
+      return;
+
+    }
+
+    renderLocationSuggestions(
+      suggestions
+    );
+
+  }catch(
+    error
+  ){
+
+    console.warn(
+      "Autocomplete:",
+      error
+    );
+
+    if(
+      requestId !==
+      suggestionRequestId
+    ){
+
+      return;
+
+    }
+
+    hideSuggestions();
+
+  }
+
+}
+
+
+async function selectLocationSuggestion(
+  suggestion
+){
+
+  const location =
+    suggestionToLocation(
+      suggestion
+    );
+
+  if(
+    !location
+  ){
+
+    return;
+
+  }
+
+  currentLocation =
+    location;
+
+  locationConfirmed =
+    true;
+
+  locationInput.value =
+    location.shortLabel ||
+    location.label;
+
+  updateClearButton();
+  updateSelectedLocation();
+
+  hideSuggestions();
+
+  map.setView(
+    [
+      location.lat,
+      location.lng
+    ],
+    13
+  );
+
+  persistSearch();
+
+  await searchPlaces();
 
 }
 
@@ -4054,6 +4853,122 @@ async function fetchGooglePlaces(
 }
 
 
+function normalizePhotoData(
+  place
+){
+
+  if(
+    typeof place?.photo ===
+    "string" &&
+    place.photo.trim()
+  ){
+
+    return {
+      url:
+        place.photo.trim()
+    };
+
+  }
+
+  if(
+    place?.photo?.url
+  ){
+
+    return {
+      url:
+        String(
+          place.photo.url
+        )
+    };
+
+  }
+
+  if(
+    place?.photo?.name
+  ){
+
+    return {
+      url:
+        API_URL +
+        "?photo=" +
+        encodeURIComponent(
+          place.photo.name
+        ) +
+        "&width=1200"
+    };
+
+  }
+
+  if(
+    place?.photoName
+  ){
+
+    return {
+      url:
+        API_URL +
+        "?photo=" +
+        encodeURIComponent(
+          place.photoName
+        ) +
+        "&width=1200"
+    };
+
+  }
+
+  if(
+    Array.isArray(
+      place?.photos
+    ) &&
+    place.photos[0]
+  ){
+
+    const first =
+      place.photos[0];
+
+    if(
+      typeof first ===
+      "string"
+    ){
+
+      return {
+        url:first
+      };
+
+    }
+
+    if(
+      first.url
+    ){
+
+      return {
+        url:first.url
+      };
+
+    }
+
+    if(
+      first.name
+    ){
+
+      return {
+        url:
+          API_URL +
+          "?photo=" +
+          encodeURIComponent(
+            first.name
+          ) +
+          "&width=1200"
+      };
+
+    }
+
+  }
+
+  return null;
+
+}
+
+
 function normalizeApiPlace(
   place
 ){
@@ -4129,19 +5044,8 @@ function normalizeApiPlace(
       place.openingHours ||
       null,
     photo:
-      place.photo ||
-      (
-        place.photoName
-          ? {
-              url:
-                API_URL +
-                "?photo=" +
-                encodeURIComponent(
-                  place.photoName
-                ) +
-                "&width=1000"
-            }
-          : null
+      normalizePhotoData(
+        place
       ),
     petFriendly:{
       allowed:true,
@@ -4163,7 +5067,7 @@ function normalizeCategoryName(
       .trim()
       .toLowerCase();
 
-  const map = {
+  const categoryMap = {
     cafe:"cafe",
     restaurant:"restaurant",
     hotel:"hotel",
@@ -4177,7 +5081,7 @@ function normalizeCategoryName(
   };
 
   return (
-    map[category] ||
+    categoryMap[category] ||
     "other"
   );
 
@@ -4383,7 +5287,7 @@ function osmImageUrl(
       encodeURIComponent(
         filename
       ) +
-      "?width=1000"
+      "?width=1200"
     );
 
   }
@@ -4507,8 +5411,7 @@ function normalizeOsmPlace(
     photo:
       photoUrl
         ? {
-            url:
-              photoUrl
+            url:photoUrl
           }
         : null,
     petFriendly:{
@@ -4587,7 +5490,7 @@ function mergePlaces(
   groups
 ){
 
-  const map =
+  const mergedMap =
     new Map();
 
   groups
@@ -4596,32 +5499,46 @@ function mergePlaces(
     .forEach(
       function(place){
 
-        const key =
-          place.id ||
-          (
-            String(
-              place.name || ""
-            )
-              .toLowerCase() +
-            "|" +
-            Number(
-              place.location?.lat
-            )
-              .toFixed(4) +
-            "|" +
-            Number(
-              place.location?.lng
-            )
-              .toFixed(4)
+        const lat =
+          finiteNumber(
+            place.location?.lat
           );
 
+        const lng =
+          finiteNumber(
+            place.location?.lng
+          );
+
+        const fallbackKey =
+          String(
+            place.name || ""
+          )
+            .trim()
+            .toLowerCase() +
+          "|" +
+          (
+            lat !== null
+              ? lat.toFixed(4)
+              : ""
+          ) +
+          "|" +
+          (
+            lng !== null
+              ? lng.toFixed(4)
+              : ""
+          );
+
+        const key =
+          place.id ||
+          fallbackKey;
+
         if(
-          !map.has(
+          !mergedMap.has(
             key
           )
         ){
 
-          map.set(
+          mergedMap.set(
             key,
             place
           );
@@ -4632,7 +5549,7 @@ function mergePlaces(
     );
 
   return Array.from(
-    map.values()
+    mergedMap.values()
   );
 
 }
@@ -4658,6 +5575,7 @@ async function searchPlaces(){
     visibleLimit =
       12;
 
+    sortResults();
     renderResults();
 
     updateMapMarkers(
@@ -4683,43 +5601,38 @@ async function searchPlaces(){
 
   try{
 
-    const requests =
-      [];
-
-    requests.push(
-      fetchGooglePlaces(
-        currentCategory
-      )
-        .catch(
-          function(error){
-
-            console.warn(
-              "Google Places:",
-              error
-            );
-
-            return [];
-
-          }
-        )
-    );
-
-    requests.push(
-      fetchOsmPlaces(
-        currentCategory
-      )
-    );
-
     const result =
-      await Promise.all(
-        requests
-      );
+      await Promise.all([
+
+        fetchGooglePlaces(
+          currentCategory
+        )
+          .catch(
+            function(error){
+
+              console.warn(
+                "Google Places:",
+                error
+              );
+
+              return [];
+
+            }
+          ),
+
+        fetchOsmPlaces(
+          currentCategory
+        )
+
+      ]);
 
     google =
-      result[0] || [];
+      result[0] ||
+      [];
 
     osm =
-      result[1] || [];
+      result[1] ||
+      [];
 
   }catch(
     error
@@ -4876,6 +5789,104 @@ function sortResults(){
 
 
 /* =========================================================
+   PHOTOS
+========================================================= */
+
+function finalPhotoUrl(
+  place
+){
+
+  if(
+    place?.photo?.url
+  ){
+
+    return String(
+      place.photo.url
+    );
+
+  }
+
+  if(
+    place?.photo?.name
+  ){
+
+    return (
+      API_URL +
+      "?photo=" +
+      encodeURIComponent(
+        place.photo.name
+      ) +
+      "&width=1200"
+    );
+
+  }
+
+  return "";
+
+}
+
+
+function activateCardImages(){
+
+  document
+    .querySelectorAll(
+      ".card-photo"
+    )
+    .forEach(
+      function(image){
+
+        if(
+          image.complete &&
+          image.naturalWidth >
+          20
+        ){
+
+          image.classList.add(
+            "loaded"
+          );
+
+        }
+
+        image.addEventListener(
+          "load",
+          function(){
+
+            if(
+              this.naturalWidth >
+              20
+            ){
+
+              this.classList.add(
+                "loaded"
+              );
+
+            }
+
+          },
+          {
+            once:true
+          }
+        );
+
+        image.addEventListener(
+          "error",
+          function(){
+
+            this.remove();
+
+          },
+          {
+            once:true
+          }
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
    CARD RENDER
 ========================================================= */
 
@@ -4938,8 +5949,15 @@ function renderResults(){
     cards.innerHTML =
       `
       <div class="empty">
-        <h3>${escapeHtml(title)}</h3>
-        <p>${escapeHtml(text)}</p>
+
+        <h3>
+          ${escapeHtml(title)}
+        </h3>
+
+        <p>
+          ${escapeHtml(text)}
+        </p>
+
       </div>
       `;
 
@@ -4962,6 +5980,8 @@ function renderResults(){
         renderPlaceCard
       )
       .join("");
+
+  activateCardImages();
 
   loadWrap.hidden =
     results.length <=
@@ -5023,8 +6043,9 @@ function renderPlaceCard(
     );
 
   const photo =
-    place.photo?.url ||
-    "";
+    finalPhotoUrl(
+      place
+    );
 
   const rating =
     finiteNumber(
@@ -5068,8 +6089,7 @@ function renderPlaceCard(
         src="${escapeHtml(photo)}"
         alt="${escapeHtml(place.name)}"
         loading="lazy"
-        referrerpolicy="no-referrer"
-        onerror="this.remove()"
+        decoding="async"
       >
       `;
 
@@ -5109,7 +6129,8 @@ function renderPlaceCard(
         )
       : "";
 
-  const meta = [];
+  const meta =
+    [];
 
   if(
     distance !== null
@@ -5269,11 +6290,6 @@ function renderPlaceCard(
    SEARCH UI
 ========================================================= */
 
-const locationInput =
-  document.getElementById(
-    "locationInput"
-  );
-
 const radiusSlider =
   document.getElementById(
     "radiusSlider"
@@ -5303,7 +6319,8 @@ function setStatus(
       "statusLine"
     )
     .textContent =
-      text || "";
+      text ||
+      "";
 
 }
 
@@ -5311,7 +6328,8 @@ function setStatus(
 async function searchTypedLocation(){
 
   const query =
-    locationInput.value.trim();
+    locationInput.value
+      .trim();
 
   if(
     !query
@@ -5327,13 +6345,26 @@ async function searchTypedLocation(){
 
   try{
 
-    const location =
-      await geocode(
-        query
-      );
+    let suggestion =
+      currentSuggestions[0];
 
     if(
-      !location
+      !suggestion
+    ){
+
+      const suggestions =
+        await fetchLocationSuggestions(
+          query,
+          1
+        );
+
+      suggestion =
+        suggestions[0];
+
+    }
+
+    if(
+      !suggestion
     ){
 
       setStatus(
@@ -5344,13 +6375,9 @@ async function searchTypedLocation(){
 
     }
 
-    currentLocation =
-      location;
-
-    locationInput.value =
-      query;
-
-    await searchPlaces();
+    await selectLocationSuggestion(
+      suggestion
+    );
 
   }catch(
     error
@@ -5410,7 +6437,11 @@ function useDeviceLocation(
         lng,
         label:
           address ||
-          "Current location"
+          "Current location",
+        shortLabel:
+          address
+            ? address.split(",")[0]
+            : "Current location"
       });
 
     },
@@ -5453,8 +6484,24 @@ document
           currentLocation =
             location;
 
+          locationConfirmed =
+            true;
+
           locationInput.value =
+            location.shortLabel ||
             location.label;
+
+          updateClearButton();
+          updateSelectedLocation();
+          hideSuggestions();
+
+          map.setView(
+            [
+              location.lat,
+              location.lng
+            ],
+            13
+          );
 
           await searchPlaces();
 
@@ -5463,6 +6510,75 @@ document
 
     }
   );
+
+
+locationInput.addEventListener(
+  "input",
+  function(){
+
+    updateClearButton();
+
+    locationConfirmed =
+      false;
+
+    updateSelectedLocation();
+
+    clearTimeout(
+      suggestionTimer
+    );
+
+    const value =
+      this.value.trim();
+
+    if(
+      value.length < 2
+    ){
+
+      currentSuggestions =
+        [];
+
+      hideSuggestions();
+
+      return;
+
+    }
+
+    suggestionTimer =
+      setTimeout(
+        requestSuggestions,
+        330
+      );
+
+  }
+);
+
+
+locationInput.addEventListener(
+  "focus",
+  function(){
+
+    const value =
+      this.value.trim();
+
+    if(
+      value.length >= 2 &&
+      !locationConfirmed
+    ){
+
+      clearTimeout(
+        suggestionTimer
+      );
+
+      suggestionTimer =
+        setTimeout(
+          requestSuggestions,
+          130
+        );
+
+    }
+
+  }
+);
 
 
 locationInput.addEventListener(
@@ -5477,6 +6593,64 @@ locationInput.addEventListener(
       event.preventDefault();
 
       searchTypedLocation();
+
+    }
+
+    if(
+      event.key ===
+      "Escape"
+    ){
+
+      hideSuggestions();
+
+    }
+
+  }
+);
+
+
+searchClear.addEventListener(
+  "click",
+  function(event){
+
+    event.preventDefault();
+
+    locationInput.value =
+      "";
+
+    locationConfirmed =
+      false;
+
+    currentSuggestions =
+      [];
+
+    updateClearButton();
+    updateSelectedLocation();
+    hideSuggestions();
+
+    locationInput.focus();
+
+  }
+);
+
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const searchArea =
+      document.querySelector(
+        ".search-area"
+      );
+
+    if(
+      searchArea &&
+      !searchArea.contains(
+        event.target
+      )
+    ){
+
+      hideSuggestions();
 
     }
 
@@ -5592,6 +6766,7 @@ const addModal =
   document.getElementById(
     "addModal"
   );
+
 
 function openAddModal(){
 
@@ -5838,7 +7013,9 @@ function persistSearch(){
         radius:
           currentRadiusKm,
         query:
-          locationInput.value
+          locationInput.value,
+        confirmed:
+          locationConfirmed
       })
     );
 
@@ -5877,6 +7054,15 @@ function restoreSearch(){
       label:
         saved.location.label ||
         saved.query ||
+        "",
+      fullLabel:
+        saved.location.fullLabel ||
+        saved.location.label ||
+        "",
+      shortLabel:
+        saved.location.shortLabel ||
+        saved.query ||
+        saved.location.label ||
         ""
     };
 
@@ -5903,13 +7089,20 @@ function restoreSearch(){
 
   }
 
+  locationConfirmed =
+    saved?.confirmed === true;
+
   radiusSlider.value =
     currentRadiusKm;
 
   locationInput.value =
     saved?.query ||
+    currentLocation.shortLabel ||
     currentLocation.label ||
     "";
+
+  updateClearButton();
+  updateSelectedLocation();
 
 }
 
@@ -5930,6 +7123,8 @@ async function initialise(){
   );
 
   updateRadiusLabel();
+  updateClearButton();
+  updateSelectedLocation();
 
   map.setView(
     [
@@ -5982,7 +7177,6 @@ window.addEventListener(
 
   }
 );
-
 </script>
 
 </body>
