@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="PETS & DOGUE — The International Luxury Animal Magazine">
 <title>PETS & DOGUE</title>
 
@@ -10,2442 +10,1057 @@
 :root{
 --black:#070707;
 --black2:#111;
+--cream:#f5f0e6;
 --white:#fff;
---cream:#f6f2e9;
---cream2:#eee8dc;
---green:#65e51f;
---green-dark:#14572e;
---border:#d8d3c8;
---gold-deep:#6f4b0c;
---gold-dark:#8e6415;
---gold:#c99a2e;
---gold-rich:#d8ad45;
---gold-light:#f1d783;
---gold-highlight:#fff2b6;
---gold-metal:linear-gradient(110deg,#6f4b0c 0%,#b9841e 18%,#f4db83 38%,#fff3bb 48%,#d4a536 59%,#8b5e12 78%,#e8c568 100%)
+--gold:#c89a32;
+--gold-light:#f0d27a;
+--green:#5ee719;
+--line:#292929;
+--serif:Georgia,"Times New Roman",serif;
+--sans:Arial,Helvetica,sans-serif;
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-html{scroll-behavior:smooth}
+html{
+scroll-behavior:smooth;
+}
 
 body{
-background:var(--cream);
-color:#111;
-font-family:Arial,Helvetica,sans-serif;
-overflow-x:hidden
+background:var(--black);
+color:#fff;
+font-family:var(--sans);
+overflow-x:hidden;
 }
 
-body.menu-open,
-body.onboarding-open{
-overflow:hidden
+body.menu-open{
+overflow:hidden;
 }
 
 a{
 color:inherit;
-text-decoration:none
+text-decoration:none;
 }
 
-button,input,select{
-font:inherit
+button,
+select{
+font:inherit;
 }
 
 button{
-cursor:pointer
+cursor:pointer;
 }
 
 img{
 display:block;
-max-width:100%
+width:100%;
 }
 
-.metallic-text{
-background:var(--gold-metal);
-background-size:220% 100%;
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
-filter:
-drop-shadow(0 1px 0 rgba(255,244,190,.22))
-drop-shadow(0 3px 8px rgba(160,108,14,.2));
-animation:goldShine 10s ease-in-out infinite
-}
-
-@keyframes goldShine{
-0%,72%{background-position:100% 50%}
-100%{background-position:-80% 50%}
-}
-
-/* HEADER */
+/* =========================================================
+HEADER
+========================================================= */
 
 .site-header{
-background:var(--black);
-color:#fff;
 position:sticky;
 top:0;
-z-index:1800;
-border-bottom:1px solid #292929
+z-index:5000;
+background:#050505;
+border-bottom:1px solid #272727;
 }
 
 .header-main{
-height:108px;
+height:116px;
 display:grid;
-grid-template-columns:88px minmax(0,1fr) auto;
+grid-template-columns:82px 1fr auto;
 align-items:center;
-max-width:1550px;
+gap:10px;
+padding:0 20px;
+max-width:1600px;
 margin:auto;
-padding:0 18px;
-gap:10px
 }
 
-.icon-button{
-width:52px;
-height:52px;
+.menu-button{
+width:58px;
+height:58px;
+border:0;
 background:transparent;
-border:1px solid transparent;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-transition:.22s
-}
-
-.icon-button:hover{
-border-color:#5b5b5b;
-background:#151515
-}
-
-.icon-button:active{
-transform:scale(.95)
-}
-
-.menu-trigger{
-position:relative;
-justify-self:start
-}
-
-.menu-trigger .menu-lines{
-margin-left:9px
-}
-
-.menu-lang-mark{
-position:absolute;
-left:1px;
-top:1px;
-width:21px;
-height:21px;
-border:1.4px solid #fff;
-border-radius:50%;
-background:#070707;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:Georgia,serif;
-font-size:11px;
-line-height:1;
-font-weight:bold;
-z-index:2
-}
-
-.menu-lines{
-width:30px;
 display:grid;
-gap:6px
+align-content:center;
+gap:7px;
+padding:8px;
 }
 
-.menu-lines span{
-height:2px;
+.menu-button span{
+display:block;
+height:3px;
 background:#fff;
-border-radius:999px
+border-radius:999px;
 }
 
 .brand{
 text-align:center;
-line-height:.85;
-justify-self:center
+font-family:var(--serif);
+line-height:.84;
+justify-self:center;
 }
 
 .brand-small{
-font-family:Georgia,serif;
-font-size:16px;
-letter-spacing:1.8px;
-font-weight:bold
+font-size:14px;
+letter-spacing:2px;
+color:var(--gold);
+text-transform:uppercase;
 }
 
 .brand-big{
-font-family:Georgia,serif;
-font-size:62px;
-font-weight:normal;
-letter-spacing:4px
+font-size:56px;
+font-weight:400;
+letter-spacing:4px;
+color:var(--gold);
+margin-top:8px;
 }
 
 .header-actions{
 display:flex;
 align-items:center;
-justify-content:flex-end;
-gap:8px
+gap:12px;
 }
 
-.header-subscribe{
-min-height:44px;
+.subscribe-top{
+height:54px;
+padding:0 22px;
 border:0;
 background:var(--green);
 color:#080808;
-padding:0 18px;
-font-size:12px;
 font-weight:900;
-letter-spacing:1.3px;
-text-transform:uppercase;
+font-size:13px;
+letter-spacing:.6px;
 display:flex;
 align-items:center;
 justify-content:center;
-white-space:nowrap;
-box-shadow:0 0 18px rgba(101,229,31,.18);
-transition:.2s
+text-transform:uppercase;
 }
 
-.header-subscribe:hover{
-background:#7af431;
-box-shadow:0 0 22px rgba(101,229,31,.32)
-}
-
-.header-subscribe:active{
-transform:scale(.97)
-}
-
-.profile-trigger{
-position:relative
+.profile-button{
+width:54px;
+height:54px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:transparent;
+border:0;
+color:#fff;
 }
 
 .profile-icon{
-width:27px;
-height:27px;
-position:relative
+position:relative;
+width:34px;
+height:38px;
 }
 
 .profile-icon:before{
 content:"";
 position:absolute;
+top:0;
 left:50%;
-top:1px;
 transform:translateX(-50%);
-width:10px;
-height:10px;
-border:2px solid #fff;
-border-radius:50%
+width:15px;
+height:15px;
+border:3px solid currentColor;
+border-radius:50%;
 }
 
 .profile-icon:after{
 content:"";
 position:absolute;
-left:50%;
+left:4px;
+right:4px;
 bottom:0;
-transform:translateX(-50%);
-width:23px;
-height:13px;
-border:2px solid #fff;
+height:20px;
+border:3px solid currentColor;
 border-bottom:0;
-border-radius:18px 18px 0 0
+border-radius:22px 22px 0 0;
 }
 
-.desktop-categories{
-background:var(--black);
-border-top:1px solid #262626;
-border-bottom:1px solid #343434;
+/* =========================================================
+TOP NAV
+========================================================= */
+
+.primary-nav{
+height:64px;
 display:flex;
 align-items:center;
-justify-content:center;
-gap:29px;
+gap:34px;
+padding:0 27px;
 overflow-x:auto;
-padding:16px 26px;
-scrollbar-width:none
+background:#070707;
+border-top:1px solid #262626;
+scrollbar-width:none;
+scroll-behavior:smooth;
 }
 
-.desktop-categories::-webkit-scrollbar{
-display:none
+.primary-nav::-webkit-scrollbar{
+display:none;
 }
 
-.desktop-categories a{
+.primary-nav a{
+flex:0 0 auto;
+height:64px;
+display:flex;
+align-items:center;
 position:relative;
+font-size:14px;
+font-weight:900;
+letter-spacing:.65px;
+text-transform:uppercase;
 white-space:nowrap;
-font-weight:bold;
-font-size:13px;
-letter-spacing:.8px;
-padding:3px 0 7px;
-transition:.22s
 }
 
-.desktop-categories a:hover{
-color:var(--gold-light)
+.primary-nav a:hover,
+.primary-nav a:focus{
+color:var(--gold-light);
 }
 
-.desktop-categories a.active{
-color:var(--gold-light)
+.primary-nav a:first-child{
+color:var(--gold-light);
 }
 
-.desktop-categories a.active:after{
+.primary-nav a:first-child:after{
 content:"";
 position:absolute;
 left:0;
 right:0;
 bottom:0;
-height:2px;
-background:var(--gold-metal);
-box-shadow:0 0 8px rgba(216,173,69,.35)
+height:3px;
+background:linear-gradient(90deg,#8c6011,#f5dc8b,#9b6a12);
 }
 
-/* LANGUAGE FIRST VISIT */
-
-.language-welcome{
-position:fixed;
-inset:0;
-z-index:6000;
-background:rgba(0,0,0,.86);
-display:none;
-align-items:center;
-justify-content:center;
-padding:16px;
-backdrop-filter:blur(6px)
-}
-
-.language-welcome.show{
-display:flex
-}
-
-.language-welcome-card{
-width:min(540px,100%);
-max-height:92vh;
-overflow-y:auto;
-background:#f8f6f0;
-color:#111;
-border:1px solid #222;
-box-shadow:0 28px 90px rgba(0,0,0,.5)
-}
-
-.language-welcome-top{
-background:#080808;
-color:#fff;
-padding:27px 22px 25px;
-text-align:center;
-border-bottom:1px solid #2b2b2b
-}
-
-.language-welcome-logo-small{
-font-family:Georgia,serif;
-font-size:13px;
-letter-spacing:2px;
-font-weight:bold
-}
-
-.language-welcome-logo-big{
-font-family:Georgia,serif;
-font-size:46px;
-letter-spacing:4px;
-font-weight:normal;
-line-height:1;
-margin-top:4px
-}
-
-.language-welcome-body{
-padding:28px 24px 25px
-}
-
-.language-welcome-title{
-font-family:Georgia,serif;
-font-size:38px;
-font-weight:normal;
-line-height:1.05;
-text-align:center
-}
-
-.language-welcome-subtitle{
-font-size:13px;
-line-height:1.55;
-color:#666;
-text-align:center;
-margin:10px auto 23px;
-max-width:390px
-}
-
-.language-welcome-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:9px
-}
-
-.language-choice{
-min-height:47px;
-border:1.5px solid #171717;
-border-radius:999px;
-background:#fff;
-color:#111;
-padding:10px 15px;
-text-align:left;
-font-weight:bold;
-transition:.18s
-}
-
-.language-choice:hover{
-border-color:var(--gold-dark)
-}
-
-.language-choice.selected{
-background:#111;
-color:#fff;
-border-color:#111;
-box-shadow:inset 3px 0 0 var(--gold-rich)
-}
-
-.language-choice:active{
-transform:scale(.98)
-}
-
-.language-welcome-note{
-text-align:center;
-color:#777;
-font-size:11px;
-line-height:1.5;
-margin-top:17px
-}
-
-/* PRIVACY */
-
-.consent-layer{
-position:fixed;
-inset:0;
-z-index:5900;
-background:rgba(0,0,0,.74);
-display:none;
-align-items:center;
-justify-content:center;
-padding:15px;
-backdrop-filter:blur(5px)
-}
-
-.consent-layer.show{
-display:flex
-}
-
-.consent-card{
-width:min(540px,100%);
-max-height:93vh;
-overflow-y:auto;
-background:#f8f6f0;
-border:1px solid #111;
-box-shadow:0 30px 90px rgba(0,0,0,.46)
-}
-
-.consent-brand{
-background:#080808;
-text-align:center;
-padding:22px 18px 20px;
-border-bottom:1px solid #333
-}
-
-.consent-brand-small{
-font:700 11px Georgia,serif;
-letter-spacing:2px
-}
-
-.consent-brand-big{
-font:normal 38px Georgia,serif;
-letter-spacing:3px
-}
-
-.consent-body{
-padding:26px 24px
-}
-
-.consent-body h2{
-font:normal 34px/.98 Georgia,serif;
-margin-bottom:13px
-}
-
-.consent-body>p{
-font:13px/1.65 Georgia,serif;
-color:#444;
-margin-bottom:14px
-}
-
-.consent-policy-link{
-display:inline-block;
-text-decoration:underline;
-font:14px Georgia,serif;
-margin:4px 0 18px
-}
-
-.consent-actions{
-display:grid;
-gap:9px
-}
-
-.consent-actions button{
-height:51px;
-border:1.5px solid #111;
-background:#111;
-color:#fff;
-font-size:11px;
-font-weight:bold;
-letter-spacing:.5px
-}
-
-.consent-actions .consent-accept{
-background:var(--green-dark);
-border-color:var(--green-dark)
-}
-
-.consent-settings{
-display:none;
-margin:18px 0 2px;
-border-top:1px solid #ccc
-}
-
-.consent-settings.show{
-display:block
-}
-
-.consent-option{
-display:grid;
-grid-template-columns:1fr auto;
-gap:13px;
-align-items:center;
-padding:13px 0;
-border-bottom:1px solid #ddd
-}
-
-.consent-option strong{
-font-size:12px;
-display:block;
-margin-bottom:4px
-}
-
-.consent-option p{
-font-size:10px;
-line-height:1.45;
-color:#777
-}
-
-.consent-toggle{
-width:45px;
-height:25px;
-border:0;
-border-radius:999px;
-background:#aaa;
-position:relative
-}
-
-.consent-toggle:after{
-content:"";
-position:absolute;
-top:3px;
-left:3px;
-width:19px;
-height:19px;
-border-radius:50%;
-background:#fff;
-transition:.2s
-}
-
-.consent-toggle.on{
-background:var(--green-dark)
-}
-
-.consent-toggle.on:after{
-left:23px
-}
-
-.consent-toggle.locked{
-opacity:.55;
-cursor:default
-}
-
-/* SIDE MENU */
+/* =========================================================
+SIDE MENU
+========================================================= */
 
 .menu-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.58);
-display:none;
-z-index:2500;
-backdrop-filter:blur(2px)
+background:rgba(0,0,0,.74);
+z-index:9000;
+opacity:0;
+visibility:hidden;
+transition:.25s;
 }
 
 .menu-overlay.show{
-display:block
+opacity:1;
+visibility:visible;
 }
 
 .side-menu{
 position:fixed;
 top:0;
-left:-500px;
-width:min(390px,80vw);
-height:100dvh;
-background:#fff;
-z-index:2600;
+left:0;
+bottom:0;
+width:min(560px,88vw);
+background:#f8f5ee;
+color:#111;
+z-index:9100;
+transform:translateX(-103%);
+transition:.3s ease;
 overflow-y:auto;
-transition:left .32s ease;
-border-right:1px solid #222;
-box-shadow:22px 0 55px rgba(0,0,0,.24)
 }
 
 .side-menu.open{
-left:0
+transform:translateX(0);
 }
 
-.side-menu-header{
-background:#0b0b0b;
-color:#fff;
-padding:20px 20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+.side-menu-head{
 position:sticky;
 top:0;
-z-index:3;
-border-bottom:1px solid #313131
+z-index:5;
+height:128px;
+background:#080808;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:22px 27px;
 }
 
-.side-menu-header h2{
-font-family:Georgia,serif;
-font-size:32px;
-font-weight:normal
+.side-menu-head h2{
+font-family:var(--serif);
+font-size:49px;
+font-weight:400;
 }
 
 .close-menu{
-width:43px;
-height:43px;
-border:0;
+width:58px;
+height:58px;
 border-radius:50%;
+border:0;
 background:#fff;
 color:#111;
-font-size:25px;
-line-height:1
+font-size:38px;
+line-height:1;
 }
 
-.menu-actions{
+.menu-tools{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-padding:15px 15px 11px;
-background:#f8f6f0
+padding:18px;
+border-bottom:1px solid #d3cdc1;
 }
 
-.menu-action{
-min-height:60px;
-border:1.5px solid #111;
-background:#fff;
-color:#111;
+.menu-tool{
+height:55px;
+border:2px solid #111;
 display:flex;
 align-items:center;
 justify-content:center;
-gap:9px;
-font-weight:900;
 font-size:12px;
+font-weight:900;
 text-transform:uppercase;
-letter-spacing:.45px;
-transition:.18s
 }
 
-.menu-action.subscribe{
+.menu-tool.club{
 background:var(--green);
 border-color:var(--green);
-color:#080808
 }
 
-.menu-action:active{
-transform:scale(.98)
+.language-box{
+margin:0 18px 16px;
+border:2px solid #111;
+padding:11px 14px 13px;
 }
 
-.mini-profile{
-width:23px;
-height:23px;
-position:relative;
-flex:0 0 23px
-}
-
-.mini-profile:before{
-content:"";
-position:absolute;
-width:8px;
-height:8px;
-border:1.8px solid currentColor;
-border-radius:50%;
-left:50%;
-top:0;
-transform:translateX(-50%)
-}
-
-.mini-profile:after{
-content:"";
-position:absolute;
-width:19px;
-height:10px;
-border:1.8px solid currentColor;
-border-bottom:0;
-border-radius:14px 14px 0 0;
-left:50%;
-bottom:0;
-transform:translateX(-50%)
-}
-
-.menu-language-inline{
-margin:0 15px 12px;
-min-height:73px;
-border:1.5px solid #111;
-background:#fff;
-padding:11px 14px;
-display:flex;
-flex-direction:column;
-justify-content:center
-}
-
-.menu-language-inline .menu-language-label{
+.language-box label{
 display:block;
 font-size:9px;
-font-weight:bold;
-letter-spacing:1.6px;
-text-transform:uppercase;
+font-weight:900;
+letter-spacing:2px;
 color:#777;
-margin-bottom:6px
+margin-bottom:8px;
 }
 
-.language-select{
+.language-box select{
 width:100%;
-height:33px;
-border:none;
-background-color:transparent;
-color:#111;
-font-weight:bold;
-font-size:16px;
-padding:0 24px 0 0;
-outline:none;
-appearance:none;
--webkit-appearance:none;
-background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-background-repeat:no-repeat;
-background-position:right center;
-background-size:18px
+height:42px;
+background:transparent;
+border:0;
+outline:0;
+font-size:15px;
+font-weight:800;
 }
 
-.language-select:focus{
-outline:none
-}
-
-.menu-items{
-padding:13px 15px 16px;
+.menu-list{
 display:grid;
-gap:9px;
-border-top:1px solid #ddd
+gap:8px;
+padding:8px 18px 28px;
 }
 
 .menu-item{
+min-height:88px;
 display:grid;
-grid-template-columns:74px 1fr;
-gap:12px;
-align-items:center;
-border:1.5px solid #171717;
-border-radius:15px;
+grid-template-columns:92px 1fr;
+border:2px solid #111;
 overflow:hidden;
-background:#faf8f3;
-transition:.2s
-}
-
-.menu-item:hover{
-transform:translateY(-1px);
-box-shadow:0 8px 20px rgba(0,0,0,.07)
-}
-
-.menu-item:active{
-transform:scale(.99)
+background:#fff;
 }
 
 .menu-item img{
-width:74px;
-height:74px;
-object-fit:cover
+width:92px;
+height:100%;
+min-height:84px;
+object-fit:cover;
 }
 
-.menu-item h3{
-font-family:Georgia,serif;
-font-size:19px;
-margin-bottom:3px
-}
-
-.menu-item p{
-font-size:11px;
-line-height:1.4;
-color:#666;
-padding-right:7px
-}
-
-.menu-bottom{
-padding:15px;
-border-top:1px solid #ddd;
-background:#f4f0e7
-}
-
-.menu-contact{
-width:100%;
-min-height:52px;
-border:1.5px solid #111;
-background:#111;
-color:#fff;
+.menu-item-copy{
+padding:12px 15px;
 display:flex;
-align-items:center;
+flex-direction:column;
 justify-content:center;
-font-size:12px;
+}
+
+.menu-item-copy h3{
+font-family:var(--serif);
+font-size:22px;
+line-height:1;
+font-weight:400;
+}
+
+.menu-item-copy p{
+font-size:10px;
+line-height:1.35;
+color:#6c6c6c;
+margin-top:5px;
+}
+
+/* =========================================================
+EDITORIAL INTRO
+========================================================= */
+
+.editorial-intro{
+max-width:1600px;
+margin:auto;
+background:#080808;
+}
+
+.intro-grid{
+display:grid;
+grid-template-columns:1.45fr .72fr;
+grid-template-rows:360px 360px;
+gap:4px;
+background:#070707;
+}
+
+.editorial-card{
+position:relative;
+overflow:hidden;
+background:#191919;
+color:#fff;
+}
+
+.editorial-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:transform .55s ease;
+}
+
+.editorial-card:hover img{
+transform:scale(1.035);
+}
+
+.editorial-card:after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.9) 0%,
+rgba(0,0,0,.48) 38%,
+rgba(0,0,0,.04) 76%
+);
+}
+
+.editorial-card.cover{
+grid-row:1 / 3;
+}
+
+.editorial-copy{
+position:absolute;
+left:30px;
+right:30px;
+bottom:28px;
+z-index:2;
+}
+
+.editorial-eyebrow{
+display:inline-flex;
+align-items:center;
+gap:7px;
+background:#080808;
+border-left:4px solid var(--gold);
+padding:8px 12px;
+font-size:10px;
+font-weight:900;
+letter-spacing:1.7px;
+text-transform:uppercase;
+}
+
+.editorial-copy h1,
+.editorial-copy h2{
+font-family:var(--serif);
+font-weight:400;
+line-height:.96;
+margin-top:13px;
+}
+
+.editorial-copy h1{
+font-size:58px;
+max-width:760px;
+}
+
+.editorial-copy h2{
+font-size:38px;
+}
+
+.editorial-copy p{
+max-width:720px;
+font-family:var(--serif);
+font-size:18px;
+line-height:1.45;
+margin-top:10px;
+color:#eee;
+}
+
+.editorial-arrow{
+display:inline-block;
+margin-top:13px;
+font-size:11px;
 font-weight:900;
 letter-spacing:1px;
 text-transform:uppercase;
-margin-bottom:12px
 }
 
-.menu-search-button{
-width:100%;
-min-height:48px;
-border:1.5px solid #111;
-background:#fff;
-color:#111;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-font-size:12px;
-letter-spacing:.5px;
-margin-bottom:14px
-}
+/* =========================================================
+SECTION TITLE
+========================================================= */
 
-.menu-bottom-links{
-display:flex;
-flex-wrap:wrap;
-gap:11px 16px
-}
-
-.menu-bottom-links a{
-font-size:11px;
-color:#666;
-font-weight:bold
-}
-
-/* SEARCH */
-
-.search-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.97);
-z-index:3000;
-display:none;
-padding:25px
-}
-
-.search-overlay.open{
-display:block
-}
-
-.search-modal{
-max-width:800px;
-margin:85px auto;
-color:#fff
-}
-
-.search-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:35px
-}
-
-.search-top h2{
-font-family:Georgia,serif;
-font-size:45px;
-font-weight:normal
-}
-
-.search-top button{
-width:48px;
-height:48px;
-border:1px solid #555;
-border-radius:50%;
-font-size:25px;
-background:#111;
-color:#fff
-}
-
-.search-field{
-display:flex;
-border-bottom:2px solid transparent;
-border-image:var(--gold-metal) 1
-}
-
-.search-field input{
-flex:1;
-background:transparent;
-border:none;
-outline:none;
-padding:20px 5px;
-font-family:Georgia,serif;
-font-size:32px;
-color:#fff
-}
-
-.search-field button{
-background:transparent;
-border:none;
-color:var(--gold-light);
-font-size:28px;
-padding:10px
-}
-
-.search-suggestions{
-margin-top:30px;
-display:flex;
-gap:10px;
-flex-wrap:wrap
-}
-
-.search-suggestions a{
-border:1px solid #666;
-border-radius:999px;
-padding:10px 15px;
-font-size:13px
-}
-
-.search-suggestions a:hover{
-border-color:var(--gold-rich);
-color:var(--gold-light)
-}
-
-/* HERO */
-
-.hero{
-background:#fff;
-padding:18px;
-border-bottom:1px solid #ccc
-}
-
-.hero-grid{
-max-width:1550px;
+section.visual-world{
+max-width:1600px;
 margin:auto;
-display:grid;
-grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr);
-gap:14px
+background:#080808;
+padding:0 0 4px;
 }
 
-.latest-cover{
-position:relative;
-min-height:630px;
-overflow:hidden;
-background:#111;
-color:#fff
-}
-
-.latest-cover img{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover
-}
-
-.latest-cover:after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,.03) 64%)
-}
-
-.cover-copy{
-position:absolute;
-left:34px;
-right:34px;
-bottom:34px;
-z-index:2
-}
-
-.cover-copy span{
-display:inline-block;
-background:#0d0d0d;
-border-left:3px solid var(--gold-rich);
-padding:8px 12px;
-font-size:11px;
-font-weight:bold;
-letter-spacing:2px;
-margin-bottom:14px
-}
-
-.cover-copy h1{
-font-family:Georgia,serif;
-font-weight:normal;
-font-size:59px;
-line-height:.98;
-max-width:850px;
-margin-bottom:15px
-}
-
-.cover-copy p{
-font-family:Georgia,serif;
-font-size:20px;
-line-height:1.55;
-max-width:750px;
-color:#eee
-}
-
-.cover-star-card{
-position:relative;
-min-height:630px;
-background:#fff;
-overflow:hidden;
+.world-heading{
 display:flex;
-align-items:center;
-justify-content:center;
-isolation:isolate
-}
-
-.cover-star-mosaic{
-position:absolute;
-inset:0;
-z-index:0;
-display:grid;
-grid-template-columns:1.15fr .85fr 1.05fr;
-grid-template-rows:1.08fr .92fr 1fr 1fr;
-grid-template-areas:
-"a b c"
-"a d c"
-"e d f"
-"e g f";
-gap:4px;
-padding:4px;
-background:#fff
-}
-
-.cover-star-cell{
-position:relative;
-overflow:hidden;
-background:#eee
-}
-
-.cover-star-cell:nth-child(1){grid-area:a}
-.cover-star-cell:nth-child(2){grid-area:b}
-.cover-star-cell:nth-child(3){grid-area:c}
-.cover-star-cell:nth-child(4){grid-area:d}
-.cover-star-cell:nth-child(5){grid-area:e}
-.cover-star-cell:nth-child(6){grid-area:f}
-.cover-star-cell:nth-child(7){grid-area:g}
-
-.cover-star-cell img{
-width:100%;
-height:100%;
-object-fit:cover;
-filter:saturate(1.05) contrast(1.03);
-will-change:transform
-}
-
-.cover-star-cell:nth-child(odd) img{
-animation:coverZoomA 9s ease-in-out infinite
-}
-
-.cover-star-cell:nth-child(even) img{
-animation:coverZoomB 11s ease-in-out infinite
-}
-
-.cover-star-cell:nth-child(2) img{animation-delay:-2s}
-.cover-star-cell:nth-child(3) img{animation-delay:-4s}
-.cover-star-cell:nth-child(4) img{animation-delay:-6s}
-.cover-star-cell:nth-child(5) img{animation-delay:-3s}
-.cover-star-cell:nth-child(6) img{animation-delay:-7s}
-.cover-star-cell:nth-child(7) img{animation-delay:-5s}
-
-@keyframes coverZoomA{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.085)}
-}
-
-@keyframes coverZoomB{
-0%,100%{transform:scale(1.075)}
-50%{transform:scale(1)}
-}
-
-.cover-star-focus{
-position:relative;
-z-index:5;
-width:100%;
-min-height:630px;
-display:flex;
-align-items:center;
-justify-content:center;
-pointer-events:none
-}
-
-.star-shape{
-position:relative;
-width:min(395px,80%);
-aspect-ratio:1;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:68px
-}
-
-.star-orbit{
-position:absolute;
-inset:0;
-transform-origin:center;
-animation:starSpin 18s linear infinite
-}
-
-.star-burst{
-position:absolute;
-inset:0;
-background:#fff12f;
-clip-path:polygon(50% 0%,61% 30%,92% 18%,72% 45%,100% 56%,68% 62%,78% 94%,53% 72%,33% 100%,34% 67%,0% 72%,28% 51%,4% 34%,37% 35%);
-filter:drop-shadow(0 10px 18px rgba(0,0,0,.18)) drop-shadow(0 0 10px rgba(255,216,62,.95));
-animation:starMorph 4.6s ease-in-out infinite;
-transform-origin:center
-}
-
-.star-burst:before{
-content:"";
-position:absolute;
-inset:-5px;
-clip-path:inherit;
-background:conic-gradient(from 0deg,transparent 0deg 24deg,#fffbe0 28deg,#ffd34d 34deg,#fff 40deg,#c58a12 46deg,transparent 57deg 360deg);
-animation:goldRun 3s linear infinite;
-filter:drop-shadow(0 0 7px rgba(255,207,54,.95));
-z-index:-1
-}
-
-@keyframes starSpin{
-to{transform:rotate(360deg)}
-}
-
-@keyframes goldRun{
-to{transform:rotate(360deg)}
-}
-
-@keyframes starMorph{
-0%,100%{transform:scale(1)}
-25%{transform:scale(1.07,.96)}
-50%{transform:scale(.96,1.08)}
-75%{transform:scale(1.05,.98)}
-}
-
-.star-text{
-position:relative;
-z-index:4;
-width:100%;
-text-align:center
-}
-
-.star-text small{
-display:block;
-font-size:11px;
-font-weight:800;
-letter-spacing:1.8px;
-margin-bottom:10px
-}
-
-.star-text strong{
-display:block;
-font-family:Georgia,serif;
-font-size:34px;
-line-height:.94;
-font-weight:bold
-}
-
-.star-text em{
-display:block;
-font-style:normal;
-font-weight:800;
-font-size:12px;
-line-height:1.25;
-margin-top:14px
-}
-
-.star-prize{
-display:block;
-font-family:Georgia,serif;
-font-size:28px;
-font-weight:bold;
-line-height:1;
-margin-top:8px
-}
-
-/* STORIES */
-
-.story-section{
-background:#fff;
-padding:28px 12px 24px;
-border-bottom:1px solid #ddd
-}
-
-.story-scroll{
-max-width:1500px;
-margin:auto;
-display:flex;
-gap:18px;
-overflow-x:auto;
-padding:6px;
-scrollbar-width:none
-}
-
-.story-scroll::-webkit-scrollbar{
-display:none
-}
-
-.story-item{
-flex:0 0 101px;
-text-align:center
-}
-
-.story-ring{
-width:88px;
-height:88px;
-border-radius:50%;
-padding:3px;
-margin:auto;
-background:var(--gold-metal);
-box-shadow:0 6px 18px rgba(120,80,10,.16);
-transition:.22s
-}
-
-.story-item:hover .story-ring{
-transform:scale(1.055)
-}
-
-.story-item:active .story-ring{
-transform:scale(.98)
-}
-
-.story-ring img{
-width:100%;
-height:100%;
-border-radius:50%;
-object-fit:cover;
-border:4px solid #fff
-}
-
-.story-item span{
-display:block;
-margin-top:9px;
-font-size:12px;
-font-weight:bold;
-line-height:1.2
-}
-
-/* SECTIONS */
-
-.section{
-max-width:1500px;
-margin:auto;
-padding:68px 20px
-}
-
-.section-heading{
-display:flex;
-align-items:end;
+align-items:flex-end;
 justify-content:space-between;
 gap:20px;
-border-bottom:3px solid #111;
-padding-bottom:14px;
-margin-bottom:27px;
-position:relative
+padding:32px 24px 20px;
+background:var(--cream);
+color:#111;
 }
 
-.section-heading:after{
-content:"";
-position:absolute;
-left:0;
-bottom:-3px;
-width:86px;
-height:3px;
-background:var(--gold-metal)
+.world-heading h2{
+font-family:var(--serif);
+font-size:54px;
+font-weight:400;
+line-height:.92;
 }
 
-.section-heading h2{
-font-family:Georgia,serif;
-font-size:50px;
-font-weight:normal;
-line-height:.95
-}
-
-.section-heading a{
+.world-heading p{
+max-width:470px;
 font-size:12px;
-font-weight:bold;
-letter-spacing:1px
+line-height:1.5;
+font-weight:700;
+text-align:right;
 }
 
-.section-heading a:hover{
-color:var(--gold-dark)
-}
+/* =========================================================
+DENSE MAGAZINE MOSAIC
+========================================================= */
 
-.editorial-mosaic{
+.magazine-grid{
 display:grid;
-grid-template-columns:1.5fr .75fr .75fr;
-grid-template-rows:350px 350px;
+grid-template-columns:repeat(4,minmax(0,1fr));
+grid-auto-rows:270px;
 gap:4px;
-background:#111;
-border:4px solid #111
+background:#080808;
 }
 
-.mosaic-card{
+.magazine-card{
 position:relative;
 overflow:hidden;
+background:#222;
 color:#fff;
-background:#222
+min-width:0;
 }
 
-.mosaic-card.large{
-grid-row:1/3
+.magazine-card.large{
+grid-column:span 2;
+grid-row:span 2;
 }
 
-.mosaic-card.wide{
-grid-column:2/4
+.magazine-card.wide{
+grid-column:span 2;
 }
 
-.mosaic-card img{
+.magazine-card.tall{
+grid-row:span 2;
+}
+
+.magazine-card img{
 width:100%;
 height:100%;
 object-fit:cover;
-transition:.6s
+transition:.55s ease;
 }
 
-.mosaic-card:hover img{
-transform:scale(1.05)
+.magazine-card:hover img{
+transform:scale(1.045);
 }
 
-.mosaic-card:after{
+.magazine-card:after{
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.9),transparent 67%)
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.88) 0%,
+rgba(0,0,0,.38) 42%,
+transparent 76%
+);
 }
 
-.mosaic-copy{
+.card-copy{
 position:absolute;
-left:22px;
-right:22px;
-bottom:22px;
-z-index:2
-}
-
-.mosaic-copy span{
-display:inline-block;
-background:#111;
-border-left:2px solid var(--gold-rich);
-padding:7px 10px;
-font-size:10px;
-font-weight:bold;
-letter-spacing:1.2px;
-margin-bottom:10px
-}
-
-.mosaic-copy h3{
-font-family:Georgia,serif;
-font-size:31px;
-line-height:1.05;
-font-weight:normal
-}
-
-.mosaic-card.large .mosaic-copy h3{
-font-size:51px
-}
-
-/* VOICE */
-
-.voice-settings{
-background:#0b0b0b;
-color:#fff;
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-flex-wrap:wrap;
-border:1px solid var(--gold-dark);
-box-shadow:inset 0 1px 0 rgba(255,242,182,.12);
-margin-bottom:10px
-}
-
-.voice-settings h3{
-font-family:Georgia,serif;
-font-size:26px;
-font-weight:normal;
-color:var(--gold-light)
-}
-
-.voice-settings p{
-font-size:13px;
-color:#bbb;
-margin-top:4px
-}
-
-.voice-controls{
-display:flex;
-gap:8px;
-flex-wrap:wrap
-}
-
-.voice-controls select,
-.voice-controls button{
-border:none;
-border-radius:999px;
-padding:11px 15px;
-font-weight:bold
-}
-
-.voice-controls select{
-background:#fff;
-color:#111
-}
-
-.voice-controls button{
-background:var(--gold-metal);
-color:#111
-}
-
-/* ARTICLES */
-
-.article-list{
-background:#050505;
-color:#fff;
-padding:28px
-}
-
-.article-list-feature{
-border-bottom:1px solid #333;
-padding-bottom:25px;
-margin-bottom:8px
-}
-
-.article-list-feature span{
-font-size:11px;
-letter-spacing:2px;
-font-weight:bold;
-color:var(--gold-light)
-}
-
-.article-list-feature h3{
-font-family:Georgia,serif;
-font-size:51px;
-font-weight:normal;
-line-height:1.02;
-margin-top:11px;
-max-width:1000px
-}
-
-.article-row{
-display:grid;
-grid-template-columns:160px minmax(0,1fr) auto;
-gap:24px;
-align-items:center;
-border-bottom:1px solid #333;
-padding:18px 0
-}
-
-.article-row img{
-width:160px;
-height:125px;
-object-fit:cover
-}
-
-.article-text span{
-font-size:11px;
-font-weight:bold;
-letter-spacing:1px;
-color:var(--gold-light)
-}
-
-.article-text h3{
-font-family:Georgia,serif;
-font-weight:normal;
-font-size:28px;
-line-height:1.13;
-margin:6px 0
-}
-
-.article-text p{
-font-size:14px;
-line-height:1.6;
-color:#bbb
-}
-
-.listen-button{
-width:48px;
-height:48px;
-border:1px solid #777;
-border-radius:50%;
-background:transparent;
-color:#fff;
-font-size:19px;
-transition:.2s
-}
-
-.listen-button:hover,
-.listen-button.speaking{
-background:var(--green);
-color:#111;
-border-color:var(--green)
-}
-
-.listen-button:active{
-transform:scale(.95)
-}
-
-/* PHOTOS */
-
-.photo-wall{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-grid-auto-rows:220px;
-gap:4px;
-background:#111;
-border:4px solid #111
-}
-
-.photo-tile{
-position:relative;
-overflow:hidden;
-background:#222
-}
-
-.photo-tile.tall{
-grid-row:span 2
-}
-
-.photo-tile.wide{
-grid-column:span 2
-}
-
-.photo-tile img{
-width:100%;
-height:100%;
-object-fit:cover;
-transition:.5s
-}
-
-.photo-tile:hover img{
-transform:scale(1.055)
-}
-
-.photo-tile:after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.72),transparent 58%)
-}
-
-.photo-label{
-position:absolute;
-left:15px;
-bottom:14px;
-right:15px;
 z-index:2;
-color:#fff
+left:18px;
+right:18px;
+bottom:18px;
 }
 
-.photo-label span{
-background:#111;
-border-left:2px solid var(--gold-rich);
+.card-label{
+display:inline-block;
+background:#080808;
+border-left:3px solid var(--gold);
 padding:6px 9px;
-font-size:10px;
-font-weight:bold;
-letter-spacing:1px
+font-size:8px;
+font-weight:900;
+letter-spacing:1.2px;
+text-transform:uppercase;
 }
 
-.photo-label h3{
-font-family:Georgia,serif;
-font-size:24px;
-font-weight:normal;
-margin-top:8px
+.card-copy h3{
+font-family:var(--serif);
+font-size:29px;
+font-weight:400;
+line-height:1;
+margin-top:9px;
 }
 
-/* CATEGORIES */
+.magazine-card.large .card-copy h3{
+font-size:52px;
+max-width:620px;
+}
 
-.visual-categories{
+.magazine-card.tall .card-copy h3{
+font-size:39px;
+}
+
+.card-copy p{
+font-size:11px;
+line-height:1.4;
+margin-top:7px;
+max-width:470px;
+color:#eee;
+}
+
+/* =========================================================
+PARTNER END CARD
+========================================================= */
+
+.partner-end{
+max-width:1600px;
+margin:auto;
 display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px
+grid-template-columns:1.25fr .75fr;
+min-height:390px;
+background:#090909;
+border-top:4px solid #090909;
 }
 
-.visual-category{
+.partner-end-image{
 position:relative;
-height:390px;
 overflow:hidden;
-background:#111;
-color:#fff
 }
 
-.visual-category img{
+.partner-end-image img{
 width:100%;
 height:100%;
 object-fit:cover;
-transition:.6s
 }
 
-.visual-category:hover img{
-transform:scale(1.055)
-}
-
-.visual-category:after{
+.partner-end-image:after{
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.84),rgba(0,0,0,.03) 66%)
+background:linear-gradient(to right,transparent 40%,#090909 100%);
 }
 
-.visual-category-copy{
-position:absolute;
-left:22px;
-right:22px;
-bottom:22px;
-z-index:2
-}
-
-.visual-category-copy small{
-display:block;
-font-weight:bold;
-letter-spacing:2px;
-font-size:10px;
-margin-bottom:7px;
-color:var(--gold-light)
-}
-
-.visual-category-copy h3{
-font-family:Georgia,serif;
-font-size:39px;
-font-weight:normal;
-line-height:1
-}
-
-.visual-category-copy p{
-font-size:14px;
-line-height:1.55;
-color:#ddd;
-margin-top:9px
-}
-
-/* USEFUL */
-
-.useful-section{
-background:#111;
-color:#fff;
-padding:70px 20px;
-position:relative
-}
-
-.useful-section:before{
-content:"";
-position:absolute;
-top:0;
-left:50%;
-transform:translateX(-50%);
-width:min(900px,70%);
-height:1px;
-background:var(--gold-metal)
-}
-
-.useful-inner{
-max-width:1500px;
-margin:auto
-}
-
-.useful-inner h2{
-font-family:Georgia,serif;
-font-size:52px;
-font-weight:normal;
-text-align:center;
-color:var(--gold-light);
-margin-bottom:13px
-}
-
-.useful-intro{
-text-align:center;
-color:#ccc;
-max-width:850px;
-margin:0 auto 35px;
-line-height:1.7
-}
-
-.useful-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:14px
-}
-
-.useful-card{
-background:#fff;
-color:#111;
-min-height:200px;
-padding:24px;
-border-bottom:3px solid transparent;
+.partner-end-copy{
+padding:45px 40px;
 display:flex;
 flex-direction:column;
-justify-content:space-between;
-transition:.25s
-}
-
-.useful-card:hover{
-transform:translateY(-5px);
-border-bottom-color:var(--gold-rich);
-background:#fffdf8
-}
-
-.useful-card:active{
-transform:translateY(-1px)
-}
-
-.useful-card .icon{
-font-size:39px
-}
-
-.useful-card h3{
-font-family:Georgia,serif;
-font-size:27px;
-margin:12px 0 7px
-}
-
-.useful-card p{
-color:#666;
-line-height:1.55;
-font-size:14px
-}
-
-/* CLUB */
-
-.club-section{
-max-width:1500px;
-margin:70px auto;
-padding:0 20px
-}
-
-.club-box{
-position:relative;
-overflow:hidden;
-background:
-radial-gradient(circle at 80% 20%,rgba(101,229,31,.18),transparent 26%),
-linear-gradient(135deg,#111,#21190d);
-color:#fff;
-padding:60px 35px;
-border:1px solid var(--gold-dark);
-box-shadow:inset 0 1px 0 rgba(255,242,182,.15)
-}
-
-.club-box:before{
-content:"";
-position:absolute;
-left:0;
-right:0;
-top:0;
-height:2px;
-background:var(--gold-metal)
-}
-
-.club-box h2{
-font-family:Georgia,serif;
-font-weight:normal;
-font-size:57px;
-color:var(--gold-light);
-max-width:850px
-}
-
-.club-box>p{
-font-size:18px;
-line-height:1.8;
-color:#ddd;
-max-width:850px;
-margin:18px 0 30px
-}
-
-.club-benefits{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-gap:10px;
-margin-bottom:30px
-}
-
-.club-benefit{
-background:#fff;
-color:#111;
-padding:18px;
-font-weight:bold;
-text-align:center
-}
-
-.club-button{
-display:inline-block;
-background:var(--green);
-color:#111;
-padding:16px 25px;
-border-radius:999px;
-font-weight:bold;
-box-shadow:0 0 20px rgba(101,229,31,.38);
-transition:.2s
-}
-
-.club-button:hover{
-transform:translateY(-1px);
-box-shadow:0 0 24px rgba(101,229,31,.5)
-}
-
-.club-button:active{
-transform:scale(.98)
-}
-
-/* NEWSLETTER */
-
-.newsletter{
-max-width:1500px;
-margin:0 auto 70px;
-padding:0 20px
-}
-
-.newsletter-inner{
-background:#fff;
-border:1.5px solid #111;
-padding:42px 25px;
-text-align:center;
-position:relative
-}
-
-.newsletter-inner:before{
-content:"";
-position:absolute;
-top:-1px;
-left:50%;
-transform:translateX(-50%);
-width:140px;
-height:3px;
-background:var(--gold-metal)
-}
-
-.newsletter-inner h2{
-font-family:Georgia,serif;
-font-size:45px;
-font-weight:normal;
-margin-bottom:10px
-}
-
-.newsletter-inner p{
-color:#666;
-line-height:1.7;
-margin-bottom:22px
-}
-
-.newsletter-form{
-display:flex;
 justify-content:center;
-gap:10px;
-flex-wrap:wrap
 }
 
-.newsletter-form input{
-width:min(420px,100%);
-border:1px solid #aaa;
-border-radius:999px;
-padding:15px 18px
+.partner-end-copy span{
+font-size:9px;
+font-weight:900;
+letter-spacing:2.3px;
+color:var(--gold-light);
 }
 
-.newsletter-form input:focus{
-outline:none;
-border-color:var(--gold-rich);
-box-shadow:0 0 0 3px rgba(216,173,69,.12)
+.partner-end-copy h2{
+font-family:var(--serif);
+font-size:47px;
+font-weight:400;
+line-height:.95;
+color:var(--gold-light);
+margin-top:10px;
 }
 
-.newsletter-form button{
-border:none;
-border-radius:999px;
-background:#111;
+.partner-end-copy p{
+font-size:13px;
+line-height:1.6;
+color:#ccc;
+margin-top:15px;
+}
+
+.partner-end-copy strong{
+display:inline-block;
+margin-top:20px;
+font-size:10px;
+letter-spacing:1px;
 color:#fff;
-padding:15px 24px;
-font-weight:bold
 }
 
-/* FOOTER */
+/* =========================================================
+FOOTER
+========================================================= */
 
 footer{
 background:#050505;
 color:#fff;
-padding:60px 20px;
 text-align:center;
-border-top:1px solid #2f2f2f
+padding:48px 18px 36px;
+border-top:1px solid #292929;
 }
 
 .footer-brand{
-font-family:Georgia,serif;
-font-size:52px;
-letter-spacing:3px
+font-family:var(--serif);
+font-size:42px;
+letter-spacing:5px;
+color:var(--gold);
 }
 
-.footer-subtitle{
+.footer-tagline{
+font-size:11px;
 color:#aaa;
-margin:10px 0 30px
+margin-top:9px;
 }
 
 .footer-links{
 display:flex;
 justify-content:center;
-gap:17px;
 flex-wrap:wrap;
-margin-bottom:28px
+gap:17px 25px;
+margin:27px auto 0;
+max-width:900px;
 }
 
 .footer-links a{
-color:#ccc;
-font-size:13px
-}
-
-.footer-links a:hover{
-color:var(--gold-light)
-}
-
-.footer-social{
-display:flex;
-justify-content:center;
-gap:12px;
-margin-bottom:25px
-}
-
-.footer-social a{
-width:42px;
-height:42px;
-display:flex;
-align-items:center;
-justify-content:center;
-border:1px solid #555;
-border-radius:50%
-}
-
-.admin-link{
 font-size:10px;
-letter-spacing:2px;
-color:#666;
-text-transform:uppercase
+font-weight:800;
 }
 
-/* RTL */
+.footer-copy{
+font-size:8px;
+color:#666;
+margin-top:29px;
+}
+
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] body{
+direction:rtl;
+}
 
 html[dir="rtl"] .side-menu{
 left:auto;
-right:-500px;
-border-right:none;
-border-left:1px solid #222;
-box-shadow:-22px 0 55px rgba(0,0,0,.24);
-transition:right .32s ease
+right:0;
+transform:translateX(103%);
 }
 
 html[dir="rtl"] .side-menu.open{
-right:0;
-left:auto
+transform:translateX(0);
 }
 
-html[dir="rtl"] .menu-item p{
-padding-right:0;
-padding-left:8px
+html[dir="rtl"] .card-label,
+html[dir="rtl"] .editorial-eyebrow{
+border-left:0;
+border-right:3px solid var(--gold);
 }
 
-html[dir="rtl"] .cover-copy,
-html[dir="rtl"] .mosaic-copy,
-html[dir="rtl"] .visual-category-copy,
-html[dir="rtl"] .photo-label{
-text-align:right
+html[dir="rtl"] .partner-end-image:after{
+background:linear-gradient(to left,transparent 40%,#090909 100%);
 }
 
-html[dir="rtl"] .language-choice{
-text-align:right
-}
+/* =========================================================
+TABLET
+========================================================= */
 
-html[dir="rtl"] .language-select{
-padding:0 0 0 24px;
-background-position:left center
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-
-.hero-grid{
-grid-template-columns:1fr
-}
-
-.cover-star-card,
-.cover-star-focus{
-min-height:560px
-}
-
-.editorial-mosaic{
-grid-template-columns:1fr 1fr;
-grid-template-rows:430px 300px 300px
-}
-
-.mosaic-card.large{
-grid-column:1/3;
-grid-row:auto
-}
-
-.mosaic-card.wide{
-grid-column:auto
-}
-
-.visual-categories{
-grid-template-columns:repeat(2,1fr)
-}
-
-.photo-wall{
-grid-template-columns:repeat(3,1fr)
-}
-
-}
-
-@media(max-width:760px){
+@media(max-width:1000px){
 
 .header-main{
-height:87px;
-grid-template-columns:54px minmax(0,1fr) auto;
-padding:0 8px;
-gap:5px
+height:104px;
+grid-template-columns:68px 1fr auto;
+padding:0 14px;
 }
 
 .brand-big{
-font-size:36px;
-letter-spacing:1.6px
+font-size:48px;
 }
 
 .brand-small{
-font-size:10px
+font-size:12px;
 }
 
-.icon-button{
-width:44px;
-height:44px
+.subscribe-top{
+height:48px;
+padding:0 17px;
+}
+
+.profile-button{
+width:46px;
+}
+
+.primary-nav{
+gap:27px;
+padding-left:20px;
+padding-right:20px;
+}
+
+.intro-grid{
+grid-template-columns:1.2fr .8fr;
+grid-template-rows:330px 330px;
+}
+
+.editorial-copy h1{
+font-size:48px;
+}
+
+.magazine-grid{
+grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+.header-main{
+height:162px;
+grid-template-columns:62px 1fr 122px;
+padding:0 10px;
+}
+
+.menu-button{
+width:55px;
+height:55px;
+}
+
+.brand-small{
+font-size:10px;
+letter-spacing:1.6px;
+}
+
+.brand-big{
+font-size:44px;
+letter-spacing:2px;
 }
 
 .header-actions{
-gap:3px
+gap:5px;
 }
 
-.header-subscribe{
-min-height:39px;
-padding:0 11px;
-font-size:10px;
-letter-spacing:.65px
+.subscribe-top{
+height:52px;
+padding:0 12px;
+font-size:11px;
 }
 
-.profile-trigger{
-width:40px;
-height:44px
+.profile-button{
+width:43px;
+height:52px;
 }
 
 .profile-icon{
-transform:scale(.9)
+transform:scale(.88);
 }
 
-.desktop-categories{
-justify-content:flex-start;
-padding:14px 15px;
-gap:23px
+.primary-nav{
+height:64px;
+gap:29px;
+padding:0 26px;
 }
 
-.desktop-categories a{
-font-size:12px
+.primary-nav a{
+height:64px;
+font-size:13px;
 }
 
-.hero{
-padding:8px 0
-}
-
-.latest-cover{
-min-height:560px
-}
-
-.cover-copy{
-left:20px;
-right:20px;
-bottom:22px
-}
-
-.cover-copy h1{
-font-size:42px
-}
-
-.cover-copy p{
-font-size:17px
-}
-
-.cover-star-card,
-.cover-star-focus{
-min-height:560px
-}
-
-.cover-star-mosaic{
+.intro-grid{
+display:grid;
 grid-template-columns:1fr 1fr;
-grid-template-rows:160px 150px 150px 145px 145px;
-grid-template-areas:
-"a b"
-"a c"
-"d c"
-"e f"
-"g f";
+grid-template-rows:580px 330px;
 gap:3px;
-padding:3px
 }
 
-.star-shape{
-width:min(320px,84vw);
-padding:56px
+.editorial-card.cover{
+grid-column:1 / 3;
+grid-row:1;
 }
 
-.star-text strong{
-font-size:29px
+.editorial-card:not(.cover){
+grid-row:2;
 }
 
-.star-prize{
-font-size:24px
+.editorial-copy{
+left:18px;
+right:18px;
+bottom:20px;
 }
 
-.story-item{
-flex-basis:89px
+.editorial-copy h1{
+font-size:43px;
 }
 
-.story-ring{
-width:77px;
-height:77px
+.editorial-copy h2{
+font-size:27px;
 }
 
-.section{
-padding:50px 10px
+.editorial-copy p{
+font-size:15px;
 }
 
-.section-heading{
-align-items:flex-start
+.editorial-eyebrow{
+font-size:8px;
 }
 
-.section-heading h2{
-font-size:39px
+.world-heading{
+padding:24px 18px 18px;
+align-items:flex-start;
 }
 
-.editorial-mosaic{
+.world-heading h2{
+font-size:42px;
+}
+
+.world-heading p{
+display:none;
+}
+
+.magazine-grid{
 grid-template-columns:1fr 1fr;
-grid-template-rows:470px 260px 260px;
+grid-auto-rows:270px;
 gap:3px;
-border-width:3px
 }
 
-.mosaic-card.large{
-grid-column:1/3
+.magazine-card.large{
+grid-column:1 / 3;
+grid-row:span 2;
 }
 
-.mosaic-copy{
+.magazine-card.wide{
+grid-column:1 / 3;
+}
+
+.magazine-card.tall{
+grid-row:span 2;
+}
+
+.card-copy{
 left:14px;
 right:14px;
-bottom:14px
+bottom:14px;
 }
 
-.mosaic-copy h3{
-font-size:23px
+.card-copy h3{
+font-size:25px;
 }
 
-.mosaic-card.large .mosaic-copy h3{
-font-size:39px
+.magazine-card.large .card-copy h3{
+font-size:43px;
 }
 
-.voice-settings{
-align-items:flex-start;
-flex-direction:column
-}
-
-.article-list{
-padding:18px
-}
-
-.article-list-feature h3{
-font-size:39px
-}
-
-.article-row{
-grid-template-columns:106px 1fr;
-gap:15px
-}
-
-.article-row img{
-width:106px;
-height:110px
-}
-
-.article-row .listen-button{
-grid-column:2;
-width:100%;
-height:39px;
-border-radius:999px
-}
-
-.article-text h3{
-font-size:23px
-}
-
-.article-text p{
-display:none
-}
-
-.photo-wall{
-grid-template-columns:repeat(2,1fr);
-grid-auto-rows:190px;
-gap:3px;
-border-width:3px
-}
-
-.photo-tile.wide{
-grid-column:span 2
-}
-
-.visual-categories{
-grid-template-columns:1fr
-}
-
-.visual-category{
-height:500px
-}
-
-.useful-section{
-padding:55px 12px
-}
-
-.useful-inner h2{
-font-size:41px
-}
-
-.club-section{
-padding:0 10px;
-margin:50px auto
-}
-
-.club-box{
-padding:42px 22px
-}
-
-.club-box h2{
-font-size:43px
-}
-
-.newsletter{
-padding:0 10px
-}
-
-.newsletter-inner h2{
-font-size:37px
-}
-
-.footer-brand{
-font-size:43px
-}
-
-.search-modal{
-margin-top:45px
-}
-
-.search-top h2{
-font-size:36px
-}
-
-.search-field input{
-font-size:25px
-}
-
-}
-
-@media(max-width:430px){
-
-.header-main{
-grid-template-columns:47px minmax(0,1fr) auto;
-padding:0 5px
-}
-
-.brand-big{
+.magazine-card.tall .card-copy h3{
 font-size:31px;
-letter-spacing:1px
 }
 
-.brand-small{
-font-size:9px
-}
-
-.menu-lang-mark{
-width:18px;
-height:18px;
+.card-copy p{
 font-size:9px;
-left:0;
-top:0
 }
 
-.menu-trigger .menu-lines{
-margin-left:7px;
-width:27px
+.partner-end{
+grid-template-columns:1fr;
+min-height:0;
 }
 
-.header-subscribe{
-padding:0 8px;
-font-size:9px;
-letter-spacing:.35px
+.partner-end-image{
+height:280px;
 }
 
-.profile-trigger{
-width:36px
+.partner-end-image:after{
+background:linear-gradient(to top,#090909 0%,transparent 70%);
 }
 
-.side-menu{
-width:80vw
+.partner-end-copy{
+padding:23px 22px 32px;
 }
 
-.menu-actions{
-gap:7px;
-padding:12px 12px 9px
+.partner-end-copy h2{
+font-size:39px;
 }
 
-.menu-action{
-min-height:55px;
-font-size:10px
+.side-menu-head{
+height:124px;
 }
 
-.menu-language-inline{
-margin:0 12px 10px
-}
-
-.menu-items{
-padding:12px
+.side-menu-head h2{
+font-size:43px;
 }
 
 .menu-item{
-grid-template-columns:68px 1fr
+grid-template-columns:104px 1fr;
 }
 
 .menu-item img{
-width:68px;
-height:68px
+width:104px;
 }
 
-.menu-item h3{
-font-size:18px
+footer{
+padding-top:38px;
 }
 
-.menu-item p{
-font-size:10px
-}
-
-.latest-cover{
-min-height:590px
-}
-
-.cover-copy h1{
-font-size:37px
-}
-
-.cover-star-card,
-.cover-star-focus{
-min-height:520px
-}
-
-.star-shape{
-width:min(300px,85vw);
-padding:50px
-}
-
-.star-text small{
-font-size:10px
-}
-
-.star-text strong{
-font-size:26px
-}
-
-.star-text em{
-font-size:11px
-}
-
-.star-prize{
-font-size:22px
-}
-
-.story-scroll{
-gap:12px
-}
-
-.story-item{
-flex-basis:82px
-}
-
-.story-ring{
-width:71px;
-height:71px
-}
-
-.editorial-mosaic{
-grid-template-rows:440px 220px 220px
-}
-
-.mosaic-copy h3{
-font-size:20px
-}
-
-.mosaic-card.large .mosaic-copy h3{
-font-size:34px
-}
-
-.photo-wall{
-grid-auto-rows:175px
-}
-
-.language-welcome{
-padding:8px
-}
-
-.language-welcome-card{
-max-height:94vh
-}
-
-.language-welcome-logo-big{
-font-size:39px
-}
-
-.language-welcome-body{
-padding:23px 16px 19px
-}
-
-.language-welcome-title{
-font-size:32px
-}
-
-.language-welcome-grid{
-grid-template-columns:1fr
-}
-
-.language-choice{
-min-height:43px;
-padding:9px 14px
-}
-
-.consent-body{
-padding:23px 18px
-}
-
-.consent-body h2{
-font-size:31px
+.footer-brand{
+font-size:37px;
 }
 
 }
 
-@media(prefers-reduced-motion:reduce){
+@media(max-width:390px){
 
-.metallic-text,
-.cover-star-cell img,
-.star-orbit,
-.star-burst,
-.star-burst:before{
-animation:none!important
+.header-main{
+grid-template-columns:54px 1fr 115px;
 }
 
-.side-menu{
-transition:none
+.brand-big{
+font-size:39px;
+}
+
+.subscribe-top{
+font-size:10px;
+padding:0 9px;
+}
+
+.intro-grid{
+grid-template-rows:530px 295px;
+}
+
+.editorial-copy h1{
+font-size:39px;
+}
+
+.editorial-copy h2{
+font-size:24px;
+}
+
+.magazine-grid{
+grid-auto-rows:250px;
 }
 
 }
@@ -2454,179 +1069,52 @@ transition:none
 
 <body>
 
-<!-- FIRST VISIT LANGUAGE -->
+<div class="menu-overlay" id="menuOverlay"></div>
 
-<div class="language-welcome" id="languageWelcome" role="dialog" aria-modal="true" aria-labelledby="languageWelcomeTitle">
+<aside class="side-menu" id="sideMenu">
 
-<div class="language-welcome-card">
+<div class="side-menu-head">
 
-<div class="language-welcome-top">
-<div class="language-welcome-logo-small metallic-text notranslate" translate="no">PETS &amp;</div>
-<div class="language-welcome-logo-big metallic-text notranslate" translate="no">DOGUE</div>
-</div>
+<h2 id="menuTitle">Contents</h2>
 
-<div class="language-welcome-body">
-
-<h2 class="language-welcome-title" id="languageWelcomeTitle">
-Choose your language
-</h2>
-
-<p class="language-welcome-subtitle" id="languageWelcomeSubtitle">
-Welcome to PETS &amp; DOGUE. Choose your language to enter the magazine.
-</p>
-
-<div class="language-welcome-grid" id="welcomeLanguageGrid">
-
-<button class="language-choice" type="button" data-lang="en">🇬🇧 EN — English</button>
-<button class="language-choice" type="button" data-lang="uk">🇺🇦 UA — Українська</button>
-<button class="language-choice" type="button" data-lang="ru">🇷🇺 RU — Русский</button>
-<button class="language-choice" type="button" data-lang="fr">🇫🇷 FR — Français</button>
-<button class="language-choice" type="button" data-lang="de">🇩🇪 DE — Deutsch</button>
-<button class="language-choice" type="button" data-lang="es">🇪🇸 ES — Español</button>
-<button class="language-choice" type="button" data-lang="it">🇮🇹 IT — Italiano</button>
-<button class="language-choice" type="button" data-lang="pt">🇵🇹 PT — Português</button>
-<button class="language-choice" type="button" data-lang="nl">🇳🇱 NL — Nederlands</button>
-<button class="language-choice" type="button" data-lang="pl">🇵🇱 PL — Polski</button>
-<button class="language-choice" type="button" data-lang="cs">🇨🇿 CZ — Čeština</button>
-<button class="language-choice" type="button" data-lang="sk">🇸🇰 SK — Slovenčina</button>
-<button class="language-choice" type="button" data-lang="hu">🇭🇺 HU — Magyar</button>
-<button class="language-choice" type="button" data-lang="ro">🇷🇴 RO — Română</button>
-<button class="language-choice" type="button" data-lang="bg">🇧🇬 BG — Български</button>
-<button class="language-choice" type="button" data-lang="el">🇬🇷 GR — Ελληνικά</button>
-<button class="language-choice" type="button" data-lang="sv">🇸🇪 SE — Svenska</button>
-<button class="language-choice" type="button" data-lang="da">🇩🇰 DK — Dansk</button>
-<button class="language-choice" type="button" data-lang="no">🇳🇴 NO — Norsk</button>
-<button class="language-choice" type="button" data-lang="fi">🇫🇮 FI — Suomi</button>
-<button class="language-choice" type="button" data-lang="tr">🇹🇷 TR — Türkçe</button>
-<button class="language-choice" type="button" data-lang="ar">🇸🇦 AR — العربية</button>
-<button class="language-choice" type="button" data-lang="hi">🇮🇳 HI — हिन्दी</button>
-
-</div>
-
-<p class="language-welcome-note" id="languageWelcomeNote">
-Tap a language to enter. You can change it anytime from the menu.
-</p>
-
-</div>
-</div>
-</div>
-
-<!-- PRIVACY -->
-
-<div class="consent-layer" id="consentLayer" role="dialog" aria-modal="true">
-
-<div class="consent-card">
-
-<div class="consent-brand notranslate" translate="no">
-<div class="consent-brand-small metallic-text">PETS &amp;</div>
-<div class="consent-brand-big metallic-text">DOGUE</div>
-</div>
-
-<div class="consent-body">
-
-<h2 id="consentTitle">
-Your front-row seat
-</h2>
-
-<p id="consentText">
-PETS & DOGUE uses essential technology to operate the magazine. With your permission, analytics and personalisation help us improve stories, recommendations and your experience.
-</p>
-
-<a class="consent-policy-link" href="privacy.html" id="consentPolicyLink">
-Privacy Policy
-</a>
-
-<div class="consent-settings" id="consentSettings">
-
-<div class="consent-option">
-<div>
-<strong id="essentialTitle">Essential</strong>
-<p id="essentialText">Required for language, security and basic site functions.</p>
-</div>
-<button class="consent-toggle on locked" type="button" aria-label="Essential"></button>
-</div>
-
-<div class="consent-option">
-<div>
-<strong id="analyticsTitle">Analytics</strong>
-<p id="analyticsText">Helps us understand how visitors use PETS & DOGUE.</p>
-</div>
-<button class="consent-toggle" id="analyticsToggle" type="button" onclick="toggleConsent('analytics')"></button>
-</div>
-
-<div class="consent-option">
-<div>
-<strong id="personalTitle">Personalisation</strong>
-<p id="personalText">Allows optional preferences and personalised experiences.</p>
-</div>
-<button class="consent-toggle" id="personalToggle" type="button" onclick="toggleConsent('personalisation')"></button>
-</div>
-
-</div>
-
-<div class="consent-actions">
-
-<button class="consent-accept" id="acceptAllButton" type="button" onclick="saveConsent(true,true)">
-I AGREE
-</button>
-
-<button id="rejectButton" type="button" onclick="saveConsent(false,false)">
-REJECT
-</button>
-
-<button id="choicesButton" type="button" onclick="showConsentSettings()">
-YOUR PRIVACY CHOICES
-</button>
-
-<button id="saveChoicesButton" type="button" onclick="saveCurrentConsent()" style="display:none">
-SAVE CHOICES
-</button>
-
-</div>
-
-</div>
-</div>
-</div>
-
-<!-- MENU -->
-
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-
-<aside class="side-menu" id="sideMenu" aria-hidden="true">
-
-<div class="side-menu-header">
-
-<h2 data-i18n="common.menu.contents">
-Contents
-</h2>
-
-<button class="close-menu" type="button" onclick="closeMenu()" aria-label="Close menu">
+<button
+class="close-menu"
+id="closeMenuButton"
+type="button"
+aria-label="Close menu"
+>
 ×
 </button>
 
 </div>
 
-<div class="menu-actions">
+<div class="menu-tools">
 
-<a class="menu-action" href="account.html">
-<span class="mini-profile" aria-hidden="true"></span>
-<span id="menuProfileText">Profile</span>
+<a
+class="menu-tool"
+href="account.html"
+id="menuProfile"
+>
+PROFILE
 </a>
 
-<a class="menu-action subscribe" href="club.html">
-<span id="menuSubscribeText">Subscribe</span>
+<a
+class="menu-tool club"
+href="club.html"
+id="menuSubscribe"
+>
+SUBSCRIBE
 </a>
 
 </div>
 
-<div class="menu-language-inline">
+<div class="language-box">
 
-<span class="menu-language-label" id="menuLanguageLabel">
-Language
-</span>
+<label id="languageLabel">
+LANGUAGE
+</label>
 
-<select id="languageSelect" class="language-select" aria-label="Choose language">
-
+<select id="languageSelect">
 <option value="en">🇬🇧 EN — English</option>
 <option value="uk">🇺🇦 UA — Українська</option>
 <option value="ru">🇷🇺 RU — Русский</option>
@@ -2650,538 +1138,182 @@ Language
 <option value="tr">🇹🇷 TR — Türkçe</option>
 <option value="ar">🇸🇦 AR — العربية</option>
 <option value="hi">🇮🇳 HI — हिन्दी</option>
-
 </select>
 
 </div>
 
-<div class="menu-items">
-
-<a class="menu-item" href="issue-01.html">
-<img alt="Latest issue" src="file_00000000a9d471fda9b4629589be22a9.png">
-<div>
-<h3 data-i18n="common.menu.latestIssue">Latest Issue</h3>
-<p data-i18n="common.menu.latestIssueDescription">Open the newest PETS & DOGUE digital magazine.</p>
-</div>
-</a>
-
-<a class="menu-item" href="articles.html">
-<img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.articles">Articles</h3>
-<p data-i18n="common.menu.articlesDescription">Read and listen to editorial stories.</p>
-</div>
-</a>
-
-<a class="menu-item" href="photos.html">
-<img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.photos">Photos</h3>
-<p data-i18n="common.menu.photosDescription">Portraits, galleries and visual stories.</p>
-</div>
-</a>
-
-<a class="menu-item" href="members-gallery.html">
-<img alt="Cover Stars" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.coverStar">Cover Star</h3>
-<p data-i18n="common.menu.coverStarDescription">Enter your pet and compete for the next cover.</p>
-</div>
-</a>
-
-<a class="menu-item" href="pet-fashion.html">
-<img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.fashion">Pet Fashion</h3>
-<p data-i18n="common.menu.fashionDescription">Luxury style, accessories and editorial looks.</p>
-</div>
-</a>
-
-<a class="menu-item" href="wellness.html">
-<img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.navigation.wellness">Wellness</h3>
-<p>Health, grooming and everyday care.</p>
-</div>
-</a>
-
-<a class="menu-item" href="pet-travel.html">
-<img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.travel">Travel</h3>
-<p data-i18n="common.menu.travelDescription">Hotels, beaches and pet-friendly journeys.</p>
-</div>
-</a>
-
-<a class="menu-item" href="pet-friendly-places.html">
-<img alt="Places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.places">Pet Friendly Places</h3>
-<p data-i18n="common.menu.placesDescription">Search real places, maps, routes and contacts.</p>
-</div>
-</a>
-
-<a class="menu-item" href="pets-in-need.html">
-<img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.rescue">Pets In Need</h3>
-<p data-i18n="common.menu.rescueDescription">Rescue, adoption and community support.</p>
-</div>
-</a>
-
-<a class="menu-item" href="contests.html">
-<img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.contests">Contests</h3>
-<p data-i18n="common.menu.contestsDescription">Competitions, votes and prizes.</p>
-</div>
-</a>
-
-<a class="menu-item" href="local-community.html">
-<img alt="Community" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.community">Local Community</h3>
-<p data-i18n="common.menu.communityDescription">Local recommendations, posts and support.</p>
-</div>
-</a>
-
-<a class="menu-item" href="pet-marketplace.html">
-<img alt="Marketplace" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.menu.marketplace">Marketplace</h3>
-<p data-i18n="common.menu.marketplaceDescription">Community listings, services and accessories.</p>
-</div>
-</a>
-
-<a class="menu-item" href="partners.html">
-<img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80">
-<div>
-<h3 data-i18n="common.navigation.partners">Partners</h3>
-<p>Premium partners, offers and member benefits.</p>
-</div>
-</a>
-
-</div>
-
-<div class="menu-bottom">
-
-<a class="menu-contact" href="contact.html" id="menuContactText">
-Contact Us
-</a>
-
-<button class="menu-search-button" type="button" onclick="openSearchFromMenu()" id="menuSearchText">
-Search
-</button>
-
-<div class="menu-bottom-links">
-<a href="privacy.html" data-i18n="common.footer.privacy">Privacy</a>
-<a href="terms.html" data-i18n="common.footer.terms">Terms</a>
-<a href="copyright.html">Copyright</a>
-<a href="cookies.html">Cookies</a>
-<a href="admin.html" data-i18n="common.footer.admin">Admin</a>
-</div>
-
-</div>
+<nav class="menu-list" id="sideMenuList"></nav>
 
 </aside>
-
-<!-- SEARCH -->
-
-<div class="search-overlay" id="searchOverlay">
-
-<div class="search-modal">
-
-<div class="search-top">
-<h2 data-i18n="common.search.title">
-Search PETS & DOGUE
-</h2>
-<button type="button" onclick="closeSearch()">×</button>
-</div>
-
-<div class="search-field">
-
-<input
-data-i18n-placeholder="common.search.placeholder"
-id="siteSearchInput"
-placeholder="Search articles, places, pets..."
-type="search"
->
-
-<button type="button" onclick="runSiteSearch()">⌕</button>
-
-</div>
-
-<div class="search-suggestions">
-
-<a data-i18n="common.search.articles" href="articles.html">Articles</a>
-<a data-i18n="common.search.photos" href="photos.html">Photos</a>
-<a data-i18n="common.search.coverStars" href="members-gallery.html">Cover Stars</a>
-<a data-i18n="common.search.places" href="pet-friendly-places.html">Places</a>
-<a data-i18n="common.search.travel" href="pet-travel.html">Travel</a>
-<a data-i18n="common.search.rescue" href="pets-in-need.html">Rescue</a>
-<a data-i18n="common.search.marketplace" href="pet-marketplace.html">Marketplace</a>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- HEADER -->
 
 <header class="site-header">
 
 <div class="header-main">
 
 <button
-aria-label="Open menu"
-class="icon-button menu-trigger"
-id="headerMenuButton"
+class="menu-button"
+id="menuButton"
 type="button"
-onclick="openMenu()"
+aria-label="Open menu"
 >
-
-<span class="menu-lang-mark" aria-hidden="true">文</span>
-
-<span class="menu-lines" aria-hidden="true">
 <span></span>
 <span></span>
 <span></span>
-</span>
-
 </button>
 
-<a class="brand notranslate" href="index.html" translate="no">
-<div class="brand-small metallic-text">PETS &amp;</div>
-<div class="brand-big metallic-text">DOGUE</div>
+<a
+class="brand notranslate"
+translate="no"
+href="index.html"
+>
+<div class="brand-small">PETS &amp;</div>
+<div class="brand-big">DOGUE</div>
 </a>
 
 <div class="header-actions">
 
-<a class="header-subscribe" href="club.html" id="headerSubscribeText">
-Subscribe
+<a
+class="subscribe-top"
+href="club.html"
+id="topSubscribe"
+>
+SUBSCRIBE
 </a>
 
-<button
-aria-label="Open profile menu"
-class="icon-button profile-trigger"
-id="headerProfileButton"
-type="button"
-onclick="openMenu()"
+<a
+class="profile-button"
+href="account.html"
+aria-label="Profile"
 >
-<span class="profile-icon" aria-hidden="true"></span>
-</button>
+<span class="profile-icon"></span>
+</a>
 
 </div>
 
 </div>
 
-<nav class="desktop-categories">
-
-<a data-i18n="common.navigation.magazine" href="issue-01.html">MAGAZINE</a>
-<a data-i18n="common.navigation.articles" href="articles.html">ARTICLES</a>
-<a data-i18n="common.navigation.photos" href="photos.html">PHOTOS</a>
-<a data-i18n="common.navigation.coverStars" href="members-gallery.html">COVER STARS</a>
-<a data-i18n="common.navigation.fashion" href="pet-fashion.html">FASHION</a>
-<a data-i18n="common.navigation.wellness" href="wellness.html">WELLNESS</a>
-<a data-i18n="common.navigation.travel" href="pet-travel.html">TRAVEL</a>
-<a data-i18n="common.navigation.places" href="pet-friendly-places.html">PLACES</a>
-<a data-i18n="common.navigation.rescue" href="pets-in-need.html">RESCUE</a>
-<a data-i18n="common.navigation.contests" href="contests.html">CONTESTS</a>
-<a data-i18n="common.navigation.community" href="local-community.html">COMMUNITY</a>
-<a data-i18n="common.navigation.marketplace" href="pet-marketplace.html">MARKETPLACE</a>
-<a data-i18n="common.navigation.partners" href="partners.html">PARTNERS</a>
-
-</nav>
+<nav
+class="primary-nav"
+id="primaryNav"
+></nav>
 
 </header>
 
-<!-- HERO -->
+<main>
 
-<section class="hero">
+<section class="editorial-intro">
 
-<div class="hero-grid">
+<div class="intro-grid">
 
-<a class="latest-cover" href="issue-01.html">
-
-<img
-alt="Latest PETS & DOGUE issue"
-src="file_00000000a9d471fda9b4629589be22a9.png"
+<a
+class="editorial-card cover"
+href="issue-01.html"
 >
 
-<div class="cover-copy">
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="PETS & DOGUE latest issue"
+>
 
-<span data-i18n="home.hero.issueLabel">
+<div class="editorial-copy">
+
+<span
+class="editorial-eyebrow"
+id="latestLabel"
+>
 LATEST ISSUE
 </span>
 
-<h1 data-i18n="home.hero.title">
-Miso: The First PETS & DOGUE Cover Star
+<h1 id="latestTitle">
+Miso: the first PETS & DOGUE cover star
 </h1>
 
-<p data-i18n="home.hero.description">
+<p id="latestText">
 Open Issue 01 and enter the visual world of PETS & DOGUE.
 </p>
+
+<strong
+class="editorial-arrow"
+id="latestAction"
+>
+OPEN THE MAGAZINE →
+</strong>
 
 </div>
 
 </a>
 
 <a
-class="cover-star-card"
-href="members-gallery.html"
-aria-label="Become the next PETS & DOGUE cover star"
+class="editorial-card"
+href="special-offers.html"
 >
 
-<div class="cover-star-mosaic" aria-hidden="true">
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=88"
+alt="PETS & DOGUE Club offers"
+>
 
-<div class="cover-star-cell">
-<img src="cover-star/cover-golf-bulldog.png" alt="">
-</div>
+<div class="editorial-copy">
 
-<div class="cover-star-cell">
-<img src="cover-star/cover-surf-parrot.png" alt="">
-</div>
+<span
+class="editorial-eyebrow"
+id="offersLabel"
+>
+CLUB OFFERS
+</span>
 
-<div class="cover-star-cell">
-<img src="cover-star/cover-horse-salon.png" alt="">
-</div>
+<h2 id="offersTitle">
+Discover your benefits
+</h2>
 
-<div class="cover-star-cell">
-<img src="cover-star/cover-turtle-spa.png" alt="">
-</div>
+<p id="offersText">
+Member discounts from selected pet-friendly partners.
+</p>
 
-<div class="cover-star-cell">
-<img src="cover-star/cover-capri-sphynx.png" alt="">
-</div>
-
-<div class="cover-star-cell">
-<img src="cover-star/cover-gym-cat.png" alt="">
-</div>
-
-<div class="cover-star-cell">
-<img src="cover-star/cover-miso-luxury.png" alt="">
-</div>
-
-</div>
-
-<div class="cover-star-focus">
-
-<div class="star-shape">
-
-<div class="star-orbit">
-<div class="star-burst"></div>
-</div>
-
-<div class="star-text">
-
-<small data-i18n="home.hero.myPetIs">
-MY PET IS —
-</small>
-
-<strong data-i18n="home.hero.nextCoverStar">
-THE NEXT<br>COVER STAR
+<strong
+class="editorial-arrow"
+id="offersAction"
+>
+SEE OFFERS →
 </strong>
 
-<em data-i18n="home.hero.enter">
-TAP TO ENTER
-</em>
+</div>
 
-<span class="star-prize" data-i18n="home.hero.prize">
-PRIZE
+</a>
+
+<a
+class="editorial-card"
+href="members-gallery.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=88"
+alt="Next PETS & DOGUE cover star"
+>
+
+<div class="editorial-copy">
+
+<span
+class="editorial-eyebrow"
+id="starLabel"
+>
+YOUR VOTE
 </span>
 
-</div>
-
-</div>
-
-</div>
-
-</a>
-
-</div>
-
-</section>
-
-<!-- STORY ROW -->
-
-<section class="story-section">
-
-<div class="story-scroll">
-
-<a class="story-item" href="issue-01.html">
-<div class="story-ring">
-<img alt="Issue 01" src="file_00000000a9d471fda9b4629589be22a9.png">
-</div>
-<span data-i18n="home.stories.issue">Issue 01</span>
-</a>
-
-<a class="story-item" href="members-gallery.html">
-<div class="story-ring">
-<img alt="Cover Stars" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.coverStars">Cover Stars</span>
-</a>
-
-<a class="story-item" href="articles.html">
-<div class="story-ring">
-<img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.articles">Articles</span>
-</a>
-
-<a class="story-item" href="pet-fashion.html">
-<div class="story-ring">
-<img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.fashion">Fashion</span>
-</a>
-
-<a class="story-item" href="pet-travel.html">
-<div class="story-ring">
-<img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.travel">Travel</span>
-</a>
-
-<a class="story-item" href="wellness.html">
-<div class="story-ring">
-<img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.wellness">Wellness</span>
-</a>
-
-<a class="story-item" href="photos.html">
-<div class="story-ring">
-<img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.photos">Photos</span>
-</a>
-
-<a class="story-item" href="pets-in-need.html">
-<div class="story-ring">
-<img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.rescue">Rescue</span>
-</a>
-
-<a class="story-item" href="pet-friendly-places.html">
-<div class="story-ring">
-<img alt="Places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.places">Places</span>
-</a>
-
-<a class="story-item" href="contests.html">
-<div class="story-ring">
-<img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.contests">Contests</span>
-</a>
-
-<a class="story-item" href="partners.html">
-<div class="story-ring">
-<img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.offers">Offers</span>
-</a>
-
-<a class="story-item" href="pet-marketplace.html">
-<div class="story-ring">
-<img alt="Marketplace" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=300&q=80">
-</div>
-<span data-i18n="home.stories.market">Market</span>
-</a>
-
-</div>
-
-</section>
-
-<!-- EDITORIAL -->
-
-<section class="section">
-
-<div class="section-heading">
-
-<h2 data-i18n="home.editorial.heading">
-Inside PETS & DOGUE
+<h2 id="starTitle">
+Choose the next cover star
 </h2>
 
-<a data-i18n="home.editorial.viewAll" href="articles.html">
-VIEW ALL STORIES →
-</a>
+<p id="starText">
+Meet the pets, read their stories and tap the heart.
+</p>
 
-</div>
-
-<div class="editorial-mosaic">
-
-<a class="mosaic-card large" href="issue-01.html">
-
-<img alt="Miso" src="file_00000000a9d471fda9b4629589be22a9.png">
-
-<div class="mosaic-copy">
-
-<span data-i18n="home.editorial.coverLabel">
-COVER STORY
-</span>
-
-<h3 data-i18n="home.editorial.coverTitle">
-The Beginning of a New Luxury Animal Magazine
-</h3>
-
-</div>
-
-</a>
-
-<a class="mosaic-card" href="pet-fashion.html">
-
-<img alt="Pet fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1000&q=80">
-
-<div class="mosaic-copy">
-
-<span data-i18n="common.navigation.fashion">
-FASHION
-</span>
-
-<h3 data-i18n="home.editorial.fashionTitle">
-The New Rules of Pet Style
-</h3>
-
-</div>
-
-</a>
-
-<a class="mosaic-card" href="pet-travel.html">
-
-<img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80">
-
-<div class="mosaic-copy">
-
-<span data-i18n="common.navigation.travel">
-TRAVEL
-</span>
-
-<h3 data-i18n="home.editorial.travelTitle">
-Beautiful Escapes With Your Pet
-</h3>
-
-</div>
-
-</a>
-
-<a class="mosaic-card wide" href="pets-in-need.html">
-
-<img alt="Rescue stories" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1400&q=80">
-
-<div class="mosaic-copy">
-
-<span data-i18n="common.navigation.rescue">
-RESCUE
-</span>
-
-<h3 data-i18n="home.editorial.rescueTitle">
-Stories That Can Change an Animal’s Life
-</h3>
+<strong
+class="editorial-arrow"
+id="starAction"
+>
+VOTE NOW →
+</strong>
 
 </div>
 
@@ -3191,565 +1323,174 @@ Stories That Can Change an Animal’s Life
 
 </section>
 
-<!-- TODAY STORIES -->
+<section class="visual-world">
 
-<section class="section">
+<div class="world-heading">
 
-<div class="section-heading">
-
-<h2 data-i18n="home.todayStories.heading">
-Today’s Stories
+<h2 id="worldTitle">
+Inside PETS &amp; DOGUE
 </h2>
 
-<a data-i18n="home.todayStories.readAll" href="articles.html">
-READ ALL →
-</a>
-
-</div>
-
-<div class="voice-settings">
-
-<div>
-
-<h3 data-i18n="home.todayStories.listenTitle">
-Listen To PETS & DOGUE
-</h3>
-
-<p data-i18n="home.todayStories.listenDescription">
-Choose a voice and tap the speaker beside a story.
+<p id="worldText">
+Stories, style, travel, wellness and everything that makes life with animals extraordinary.
 </p>
 
 </div>
 
-<div class="voice-controls">
+<div class="magazine-grid">
 
-<select id="voiceGender">
-
-<option data-i18n="home.todayStories.femaleSpeaker" value="female">
-Female Speaker
-</option>
-
-<option data-i18n="home.todayStories.maleSpeaker" value="male">
-Male Speaker
-</option>
-
-</select>
-
-<select id="voiceSpeed">
-<option value="0.85">0.85×</option>
-<option selected value="1">1×</option>
-<option value="1.2">1.2×</option>
-<option value="1.4">1.4×</option>
-</select>
-
-<button data-i18n="home.todayStories.stop" type="button" onclick="stopNarration()">
-■ Stop
-</button>
-
-</div>
-
-</div>
-
-<div class="article-list">
-
-<div class="article-list-feature">
-
-<span data-i18n="home.todayStories.editorSelection">
-EDITOR’S SELECTION
-</span>
-
-<h3 data-i18n="home.todayStories.editorTitle">
-Style, Care, Travel and the Stories Animals Deserve
-</h3>
-
-</div>
-
-<article
-class="article-row"
-data-speech="How to prepare your pet for a professional magazine photoshoot. Grooming, lighting, patience and comfort can transform a beautiful portrait into an unforgettable editorial image."
+<a
+class="magazine-card large"
+href="articles.html"
 >
-
 <img
-alt="Pet photography"
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=80"
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1300&q=88"
+alt="PETS & DOGUE articles"
 >
-
-<a class="article-text" href="article.html?story=photoshoot">
-
-<span data-i18n="home.todayStories.photographyLabel">
-PHOTOGRAPHY
-</span>
-
-<h3 data-i18n="home.todayStories.photographyTitle">
-How To Prepare Your Pet for a Magazine Photoshoot
-</h3>
-
-<p data-i18n="home.todayStories.photographyDescription">
-Grooming, light, comfort and simple techniques for an editorial portrait.
-</p>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="articles"></span>
+<h3 id="articlesFeatureTitle">Stories worth stopping for</h3>
+<p id="articlesFeatureText">Editorial stories about animals, people, culture and life together.</p>
+</div>
 </a>
 
-<button
-aria-label="Listen to story"
-class="listen-button"
-type="button"
-onclick="listenToArticle(this)"
+<a
+class="magazine-card tall"
+href="photos.html"
 >
-🔊
-</button>
-
-</article>
-
-<article
-class="article-row"
-data-speech="The rise of luxury pet friendly travel. Hotels, villas and destinations are creating new experiences for guests who travel with animal companions."
->
-
 <img
-alt="Pet-friendly hotel"
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80"
+src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=900&q=88"
+alt="PETS & DOGUE photography"
 >
-
-<a class="article-text" href="article.html?story=travel">
-
-<span data-i18n="common.navigation.travel">
-TRAVEL
-</span>
-
-<h3 data-i18n="home.todayStories.travelTitle">
-The Rise of Luxury Pet-Friendly Travel
-</h3>
-
-<p data-i18n="home.todayStories.travelDescription">
-Inside the hotels and destinations creating better experiences for pets.
-</p>
-
-</a>
-
-<button
-aria-label="Listen to story"
-class="listen-button"
-type="button"
-onclick="listenToArticle(this)"
->
-🔊
-</button>
-
-</article>
-
-<article
-class="article-row"
-data-speech="Why pet friendly places need community verification. Visitors can report changed policies, incorrect information and places that no longer welcome animals."
->
-
-<img
-alt="Pet-friendly café"
-src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=80"
->
-
-<a class="article-text" href="article.html?story=places">
-
-<span data-i18n="home.todayStories.guideLabel">
-USEFUL GUIDE
-</span>
-
-<h3 data-i18n="home.todayStories.guideTitle">
-How DOGUE Trust Protects Pet-Friendly Recommendations
-</h3>
-
-<p data-i18n="home.todayStories.guideDescription">
-Community reports and verification help keep information useful and accurate.
-</p>
-
-</a>
-
-<button
-aria-label="Listen to story"
-class="listen-button"
-type="button"
-onclick="listenToArticle(this)"
->
-🔊
-</button>
-
-</article>
-
-<article
-class="article-row"
-data-speech="The people helping animals behind the scenes. Volunteers provide transport, photography, fostering, fundraising and practical support for rescue organisations."
->
-
-<img
-alt="Volunteers"
-src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=700&q=80"
->
-
-<a class="article-text" href="article.html?story=volunteers">
-
-<span data-i18n="common.navigation.community">
-COMMUNITY
-</span>
-
-<h3 data-i18n="home.todayStories.communityTitle">
-The People Helping Animals Behind the Scenes
-</h3>
-
-<p data-i18n="home.todayStories.communityDescription">
-Meet the volunteers creating change through practical help and visibility.
-</p>
-
-</a>
-
-<button
-aria-label="Listen to story"
-class="listen-button"
-type="button"
-onclick="listenToArticle(this)"
->
-🔊
-</button>
-
-</article>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="photos"></span>
+<h3 id="photosFeatureTitle">Visual stories</h3>
 </div>
-
-</section>
-
-<!-- VISUAL STORIES -->
-
-<section class="section">
-
-<div class="section-heading">
-
-<h2 data-i18n="home.visualStories.heading">
-Visual Stories
-</h2>
-
-<a data-i18n="home.visualStories.openGallery" href="photos.html">
-OPEN PHOTO GALLERY →
 </a>
 
-</div>
-
-<div class="photo-wall">
-
-<a class="photo-tile tall" href="photos.html">
-
-<img
-alt="Dogs"
-src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=80"
+<a
+class="magazine-card"
+href="pet-fashion.html"
 >
-
-<div class="photo-label">
-
-<span data-i18n="common.navigation.community">
-COMMUNITY
-</span>
-
-<h3 data-i18n="home.visualStories.communityTitle">
-Beautiful Lives Together
-</h3>
-
-</div>
-
-</a>
-
-<a class="photo-tile wide" href="members-gallery.html">
-
 <img
-alt="Dog portrait"
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
+src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=88"
+alt="Pet fashion"
 >
-
-<div class="photo-label">
-
-<span data-i18n="home.visualStories.coverLabel">
-COVER STAR
-</span>
-
-<h3 data-i18n="home.visualStories.coverTitle">
-Could Your Pet Be Next?
-</h3>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="fashion"></span>
+<h3 id="fashionFeatureTitle">Style with personality</h3>
 </div>
-
 </a>
 
-<a class="photo-tile" href="photos.html">
-
-<img
-alt="Cat"
-src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=700&q=80"
+<a
+class="magazine-card"
+href="pet-travel.html"
 >
-
-<div class="photo-label">
-
-<span data-i18n="home.visualStories.portraitLabel">
-PORTRAIT
-</span>
-
-<h3 data-i18n="home.visualStories.portraitTitle">
-Soft Elegance
-</h3>
-
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=88"
+alt="Pet travel"
+>
+<div class="card-copy">
+<span class="card-label" data-nav-key="travel"></span>
+<h3 id="travelFeatureTitle">Go further together</h3>
 </div>
-
 </a>
 
-<a class="photo-tile" href="wellness.html">
-
+<a
+class="magazine-card wide"
+href="wellness.html"
+>
 <img
+src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1300&q=88"
 alt="Pet wellness"
-src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=80"
 >
-
-<div class="photo-label">
-
-<span data-i18n="common.navigation.wellness">
-WELLNESS
-</span>
-
-<h3 data-i18n="home.visualStories.wellnessTitle">
-Care Rituals
-</h3>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="wellness"></span>
+<h3 id="wellnessFeatureTitle">Care for every day</h3>
 </div>
-
 </a>
 
-<a class="photo-tile wide" href="pets-in-need.html">
-
+<a
+class="magazine-card"
+href="pet-friendly-places.html"
+>
 <img
-alt="Rescue dog"
-src="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=1200&q=80"
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=88"
+alt="Pet-friendly places"
 >
-
-<div class="photo-label">
-
-<span data-i18n="common.navigation.rescue">
-RESCUE
-</span>
-
-<h3 data-i18n="home.visualStories.rescueTitle">
-A Story Worth Sharing
-</h3>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="places"></span>
+<h3 id="placesFeatureTitle">Places worth discovering</h3>
 </div>
-
 </a>
 
-<a class="photo-tile" href="photos.html">
-
+<a
+class="magazine-card"
+href="contests.html"
+>
 <img
-alt="Bird"
-src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=700&q=80"
+src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=88"
+alt="PETS & DOGUE contests"
 >
-
-<div class="photo-label">
-
-<span data-i18n="home.visualStories.exoticLabel">
-EXOTIC
-</span>
-
-<h3 data-i18n="home.visualStories.exoticTitle">
-Colour and Freedom
-</h3>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="contests"></span>
+<h3 id="contestsFeatureTitle">Play. Enter. Win.</h3>
 </div>
-
 </a>
 
-<a class="photo-tile tall" href="pet-travel.html">
-
+<a
+class="magazine-card wide"
+href="local-community.html"
+>
 <img
-alt="Beach"
-src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1300&q=88"
+alt="Local pet community"
 >
-
-<div class="photo-label">
-
-<span data-i18n="common.navigation.travel">
-TRAVEL
-</span>
-
-<h3 data-i18n="home.visualStories.travelTitle">
-Summer by the Sea
-</h3>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="community"></span>
+<h3 id="communityFeatureTitle">Everything interesting happening near you</h3>
 </div>
-
 </a>
 
-<a class="photo-tile" href="local-community.html">
-
+<a
+class="magazine-card tall"
+href="pets-in-need.html"
+>
 <img
-alt="Community dogs"
-src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=700&q=80"
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=900&q=88"
+alt="Help animals"
 >
-
-<div class="photo-label">
-
-<span data-i18n="home.visualStories.localLabel">
-LOCAL
-</span>
-
-<h3 data-i18n="home.visualStories.localTitle">
-Meet Near You
-</h3>
-
+<div class="card-copy">
+<span class="card-label" data-nav-key="rescue"></span>
+<h3 id="rescueFeatureTitle">Help or ask for help</h3>
 </div>
-
 </a>
 
-<a class="photo-tile" href="partners.html">
-
+<a
+class="magazine-card"
+href="pet-marketplace.html"
+>
 <img
-alt="Hotel"
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80"
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=88"
+alt="PETS & DOGUE marketplace"
 >
-
-<div class="photo-label">
-
-<span data-i18n="home.visualStories.clubLabel">
-CLUB
-</span>
-
-<h3 data-i18n="home.visualStories.clubTitle">
-Partner Benefits
-</h3>
-
-</div>
-
-</a>
-
-</div>
-
-</section>
-
-<!-- RUBRICS -->
-
-<section class="section">
-
-<div class="section-heading">
-
-<h2 data-i18n="home.rubrics.heading">
-Explore Every Rubric
-</h2>
-
-<a data-i18n="home.rubrics.allRubrics" href="categories.html">
-ALL RUBRICS →
-</a>
-
-</div>
-
-<div class="visual-categories">
-
-<a class="visual-category" href="photos.html">
-<img alt="Photos" src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.photosEyebrow">VISUAL DOGUE</small>
-<h3 data-i18n="home.rubrics.photosTitle">Photos</h3>
-<p data-i18n="home.rubrics.photosDescription">Portraits, editorials and unforgettable moments.</p>
+<div class="card-copy">
+<span class="card-label" data-nav-key="marketplace"></span>
+<h3 id="marketFeatureTitle">Find what you need</h3>
 </div>
 </a>
 
-<a class="visual-category" href="articles.html">
-<img alt="Articles" src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.articlesEyebrow">READ & LISTEN</small>
-<h3 data-i18n="home.rubrics.articlesTitle">Articles</h3>
-<p data-i18n="home.rubrics.articlesDescription">Stories, interviews and useful editorial guides.</p>
-</div>
-</a>
-
-<a class="visual-category" href="pet-fashion.html">
-<img alt="Fashion" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.fashionEyebrow">LUXURY STYLE</small>
-<h3 data-i18n="home.rubrics.fashionTitle">Fashion</h3>
-<p data-i18n="home.rubrics.fashionDescription">Accessories, style, shopping and editorial looks.</p>
-</div>
-</a>
-
-<a class="visual-category" href="pet-travel.html">
-<img alt="Travel" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.travelEyebrow">WORLD OF DOGUE</small>
-<h3 data-i18n="home.rubrics.travelTitle">Travel</h3>
-<p data-i18n="home.rubrics.travelDescription">Hotels, beaches and unforgettable journeys.</p>
-</div>
-</a>
-
-<a class="visual-category" href="wellness.html">
-<img alt="Wellness" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.wellnessEyebrow">CARE</small>
-<h3 data-i18n="home.rubrics.wellnessTitle">Wellness</h3>
-<p data-i18n="home.rubrics.wellnessDescription">Health, grooming and calm everyday routines.</p>
-</div>
-</a>
-
-<a class="visual-category" href="pets-in-need.html">
-<img alt="Rescue" src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.rescueEyebrow">WITH PURPOSE</small>
-<h3 data-i18n="home.rubrics.rescueTitle">Rescue</h3>
-<p data-i18n="home.rubrics.rescueDescription">Adoption, visibility and stories that matter.</p>
-</div>
-</a>
-
-<a class="visual-category" href="pet-friendly-places.html">
-<img alt="Pet-friendly places" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.placesEyebrow">NEAR YOU</small>
-<h3 data-i18n="home.rubrics.placesTitle">Places</h3>
-<p data-i18n="home.rubrics.placesDescription">Find cafés, hotels, parks, beaches and services.</p>
-</div>
-</a>
-
-<a class="visual-category" href="contests.html">
-<img alt="Contests" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.contestsEyebrow">WIN & SHINE</small>
-<h3 data-i18n="home.rubrics.contestsTitle">Contests</h3>
-<p data-i18n="home.rubrics.contestsDescription">Votes, prizes, challenges and cover competitions.</p>
-</div>
-</a>
-
-<a class="visual-category" href="members-gallery.html">
-<img alt="Cover Stars" src="file_00000000a9d471fda9b4629589be22a9.png">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.coverStarsEyebrow">NEXT ISSUE</small>
-<h3 data-i18n="home.rubrics.coverStarsTitle">Cover Stars</h3>
-<p data-i18n="home.rubrics.coverStarsDescription">Enter your pet and become part of the magazine.</p>
-</div>
-</a>
-
-<a class="visual-category" href="local-community.html">
-<img alt="Community" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.visualStories.localLabel">LOCAL</small>
-<h3 data-i18n="home.rubrics.communityTitle">Community</h3>
-<p data-i18n="home.rubrics.communityDescription">Posts, recommendations and support near you.</p>
-</div>
-</a>
-
-<a class="visual-category" href="pet-marketplace.html">
-<img alt="Marketplace" src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.marketplaceEyebrow">MEMBERS</small>
-<h3 data-i18n="home.rubrics.marketplaceTitle">Marketplace</h3>
-<p data-i18n="home.rubrics.marketplaceDescription">Listings, accessories, services and rehoming.</p>
-</div>
-</a>
-
-<a class="visual-category" href="partners.html">
-<img alt="Partners" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80">
-<div class="visual-category-copy">
-<small data-i18n="home.rubrics.partnersEyebrow">CLUB BENEFITS</small>
-<h3 data-i18n="home.rubrics.partnersTitle">Partners</h3>
-<p data-i18n="home.rubrics.partnersDescription">Discounts, offers and selected premium services.</p>
+<a
+class="magazine-card"
+href="club.html"
+>
+<img
+src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=88"
+alt="PETS & DOGUE Club"
+>
+<div class="card-copy">
+<span class="card-label">PETS &amp; DOGUE CLUB</span>
+<h3 id="clubFeatureTitle">More for members</h3>
 </div>
 </a>
 
@@ -3757,1740 +1498,1131 @@ ALL RUBRICS →
 
 </section>
 
-<!-- USEFUL -->
+<a
+class="partner-end"
+href="partners.html"
+>
 
-<section class="useful-section">
+<div class="partner-end-image">
 
-<div class="useful-inner">
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1300&q=88"
+alt="PETS & DOGUE partnerships"
+>
 
-<h2 data-i18n="home.useful.heading">
-Beautiful and Useful
+</div>
+
+<div class="partner-end-copy">
+
+<span>
+PETS &amp; DOGUE · B2B
+</span>
+
+<h2 id="partnerTitle">
+Work with PETS & DOGUE
 </h2>
 
-<p class="useful-intro" data-i18n="home.useful.intro">
-PETS & DOGUE combines luxury editorial content with practical services for people who live, travel and care for animals.
+<p id="partnerText">
+Advertising, editorial stories, news, Club discounts, brand features and collaborations.
 </p>
 
-<div class="useful-grid">
+<strong id="partnerAction">
+PARTNER WITH US →
+</strong>
 
-<a class="useful-card" href="pet-friendly-places.html">
-<div class="icon">📍</div>
-<div>
-<h3 data-i18n="home.useful.placesTitle">Find Places</h3>
-<p data-i18n="home.useful.placesDescription">Search pet-friendly cafés, hotels, beaches, parks, vets and groomers.</p>
 </div>
+
 </a>
 
-<a class="useful-card" href="pet-marketplace.html">
-<div class="icon">🛍️</div>
-<div>
-<h3 data-i18n="home.useful.marketplaceTitle">Marketplace</h3>
-<p data-i18n="home.useful.marketplaceDescription">Browse listings, services, accessories and responsible rehoming posts.</p>
-</div>
-</a>
-
-<a class="useful-card" href="local-community.html">
-<div class="icon">💬</div>
-<div>
-<h3 data-i18n="home.useful.communityTitle">Local Community</h3>
-<p data-i18n="home.useful.communityDescription">Ask questions, share recommendations and discover information nearby.</p>
-</div>
-</a>
-
-<a class="useful-card" href="pets-in-need.html">
-<div class="icon">❤️</div>
-<div>
-<h3 data-i18n="home.useful.helpTitle">Help Animals</h3>
-<p data-i18n="home.useful.helpDescription">Support rescue cases, adoption stories and animals needing visibility.</p>
-</div>
-</a>
-
-<a class="useful-card" href="members-gallery.html">
-<div class="icon">👑</div>
-<div>
-<h3 data-i18n="home.useful.starTitle">Become A Star</h3>
-<p data-i18n="home.useful.starDescription">Upload your pet and compete for the next PETS & DOGUE cover.</p>
-</div>
-</a>
-
-<a class="useful-card" href="partners.html">
-<div class="icon">🎁</div>
-<div>
-<h3 data-i18n="home.useful.clubTitle">Club Benefits</h3>
-<p data-i18n="home.useful.clubDescription">Discover discounts, hotels, cafés and premium pet services.</p>
-</div>
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CLUB -->
-
-<section class="club-section">
-
-<div class="club-box">
-
-<h2 data-i18n="home.club.heading">
-Join the PETS & DOGUE World
-</h2>
-
-<p data-i18n="home.club.description">
-Become part of the Club for cover-star competitions, partner benefits, exclusive content, member identity and future premium experiences.
-</p>
-
-<div class="club-benefits">
-
-<div class="club-benefit" data-i18n="home.club.coverEntry">
-Cover Star Entry
-</div>
-
-<div class="club-benefit" data-i18n="home.club.discounts">
-Partner Discounts
-</div>
-
-<div class="club-benefit" data-i18n="home.club.qrCard">
-Member QR Card
-</div>
-
-<div class="club-benefit" data-i18n="home.club.premiumStories">
-Premium Stories
-</div>
-
-<div class="club-benefit" data-i18n="home.club.contests">
-Contests & Prizes
-</div>
-
-<div class="club-benefit" data-i18n="home.club.community">
-Community Access
-</div>
-
-</div>
-
-<a class="club-button" data-i18n="home.club.button" href="club.html">
-JOIN PETS & DOGUE CLUB →
-</a>
-
-</div>
-
-</section>
-
-<!-- NEWSLETTER -->
-
-<section class="newsletter">
-
-<div class="newsletter-inner">
-
-<h2 data-i18n="home.newsletter.heading">
-Your Front-Row Seat to the Animal World
-</h2>
-
-<p data-i18n="home.newsletter.description">
-Receive new issues, cover-star announcements, visual stories, travel ideas and community updates.
-</p>
-
-<div class="newsletter-form">
-
-<input
-data-i18n-placeholder="home.newsletter.placeholder"
-id="newsletterEmail"
-placeholder="Your email address"
-type="email"
->
-
-<button
-data-i18n="home.newsletter.button"
-type="button"
-onclick="subscribeNewsletter()"
->
-SUBSCRIBE
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
+</main>
 
 <footer>
 
-<div class="footer-brand metallic-text notranslate" translate="no">
+<div
+class="footer-brand notranslate"
+translate="no"
+>
 PETS &amp; DOGUE
 </div>
 
-<p class="footer-subtitle" data-i18n="common.footer.subtitle">
+<p
+class="footer-tagline"
+id="footerTagline"
+>
 The International Luxury Animal Magazine
 </p>
 
 <div class="footer-links">
 
-<a data-i18n="common.footer.home" href="index.html">Home</a>
-<a data-i18n="common.footer.latestIssue" href="issue-01.html">Latest Issue</a>
-<a data-i18n="common.footer.articles" href="articles.html">Articles</a>
-<a data-i18n="common.footer.photos" href="photos.html">Photos</a>
-<a data-i18n="common.footer.coverStars" href="members-gallery.html">Cover Stars</a>
-<a data-i18n="common.footer.places" href="pet-friendly-places.html">Places</a>
-<a data-i18n="common.footer.marketplace" href="pet-marketplace.html">Marketplace</a>
-<a data-i18n="common.footer.club" href="club.html">Club</a>
-<a data-i18n="common.footer.partners" href="partners.html">Partners</a>
-<a data-i18n="common.footer.advertise" href="advertise.html">Advertise</a>
-<a data-i18n="common.footer.contact" href="contact.html">Contact</a>
-<a data-i18n="common.footer.privacy" href="privacy.html">Privacy</a>
-<a data-i18n="common.footer.terms" href="terms.html">Terms</a>
-<a href="copyright.html">Copyright</a>
-<a href="cookies.html">Cookies</a>
+<a href="issue-01.html" data-footer-key="magazine"></a>
+<a href="special-offers.html" data-footer-key="offers"></a>
+<a href="members-gallery.html" data-footer-key="coverStars"></a>
+<a href="articles.html" data-footer-key="articles"></a>
+<a href="photos.html" data-footer-key="photos"></a>
+<a href="pet-fashion.html" data-footer-key="fashion"></a>
+<a href="pet-travel.html" data-footer-key="travel"></a>
+<a href="wellness.html" data-footer-key="wellness"></a>
+<a href="pet-friendly-places.html" data-footer-key="places"></a>
+<a href="contests.html" data-footer-key="contests"></a>
+<a href="local-community.html" data-footer-key="community"></a>
+<a href="pets-in-need.html" data-footer-key="rescue"></a>
+<a href="pet-marketplace.html" data-footer-key="marketplace"></a>
+<a href="partners.html" data-footer-key="partners"></a>
 
 </div>
 
-<div class="footer-social">
-
-<a aria-label="Instagram" href="#">◎</a>
-<a aria-label="TikTok" href="#">♪</a>
-<a aria-label="YouTube" href="#">▶</a>
-<a aria-label="Pinterest" href="#">P</a>
-
+<div class="footer-copy">
+© PETS &amp; DOGUE
 </div>
-
-<a class="admin-link" data-i18n="common.footer.admin" href="admin.html">
-Admin
-</a>
 
 </footer>
 
 <script>
-const HOME_LANGUAGE_KEY="pets_dogue_language";
-const HOME_CONSENT_KEY="pets_dogue_cookie_consent";
+"use strict";
 
-const HOME_SUPPORTED=[
-"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
-"hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+/* =========================================================
+PETS & DOGUE HOME
+Complete 23-language navigation + home interface
+========================================================= */
+
+const LANGUAGE_KEY="pets_dogue_language";
+
+const NAV_ITEMS=[
+{
+key:"magazine",
+url:"issue-01.html",
+image:"file_00000000a9d471fda9b4629589be22a9.png"
+},
+{
+key:"offers",
+url:"special-offers.html",
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"coverStars",
+url:"members-gallery.html",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"articles",
+url:"articles.html",
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"photos",
+url:"photos.html",
+image:"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"fashion",
+url:"pet-fashion.html",
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"travel",
+url:"pet-travel.html",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"wellness",
+url:"wellness.html",
+image:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"places",
+url:"pet-friendly-places.html",
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"contests",
+url:"contests.html",
+image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"community",
+url:"local-community.html",
+image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"rescue",
+url:"pets-in-need.html",
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"marketplace",
+url:"pet-marketplace.html",
+image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82"
+},
+{
+key:"partners",
+url:"partners.html",
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
+}
 ];
 
-const ONBOARDING_TRANSLATIONS={
-
-en:[
-"Choose your language",
-"Welcome to PETS & DOGUE. Tap your language to enter the magazine.",
-"You can change your language anytime from the menu.",
-"Your front-row seat",
-"PETS & DOGUE uses essential technology to operate the magazine. With your permission, analytics and personalisation help us improve stories, recommendations and your experience.",
-"Privacy Policy",
-"Essential",
-"Required for language, security and basic site functions.",
-"Analytics",
-"Helps us understand how visitors use PETS & DOGUE.",
-"Personalisation",
-"Allows optional preferences and personalised experiences.",
-"I AGREE",
-"REJECT",
-"YOUR PRIVACY CHOICES",
-"SAVE CHOICES"
-],
-
-uk:[
-"Оберіть мову",
-"Ласкаво просимо до PETS & DOGUE. Торкніться мови, щоб відкрити журнал.",
-"Мову можна змінити будь-коли в меню.",
-"Ваше місце в першому ряду",
-"PETS & DOGUE використовує необхідні технології для роботи журналу. З вашого дозволу аналітика та персоналізація допомагають нам покращувати історії, рекомендації та ваш досвід.",
-"Політика конфіденційності",
-"Необхідні",
-"Потрібні для мови, безпеки та основної роботи сайту.",
-"Аналітика",
-"Допомагає нам зрозуміти, як відвідувачі користуються PETS & DOGUE.",
-"Персоналізація",
-"Дозволяє додаткові налаштування та персоналізований досвід.",
-"ПОГОДЖУЮСЯ",
-"ВІДХИЛИТИ",
-"НАЛАШТУВАННЯ КОНФІДЕНЦІЙНОСТІ",
-"ЗБЕРЕГТИ"
-],
-
-ru:[
-"Выберите язык",
-"Добро пожаловать в PETS & DOGUE. Нажмите на язык, чтобы открыть журнал.",
-"Язык можно изменить в любое время через меню.",
-"Ваше место в первом ряду",
-"PETS & DOGUE использует необходимые технологии для работы журнала. С вашего разрешения аналитика и персонализация помогают нам улучшать истории, рекомендации и ваш опыт.",
-"Политика конфиденциальности",
-"Необходимые",
-"Нужны для языка, безопасности и базовой работы сайта.",
-"Аналитика",
-"Помогает нам понимать, как посетители используют PETS & DOGUE.",
-"Персонализация",
-"Позволяет дополнительные настройки и персонализированный опыт.",
-"Я СОГЛАСЕН",
-"ОТКЛОНИТЬ",
-"НАСТРОЙКИ КОНФИДЕНЦИАЛЬНОСТИ",
-"СОХРАНИТЬ"
-],
-
-fr:[
-"Choisissez votre langue",
-"Bienvenue chez PETS & DOGUE. Touchez votre langue pour ouvrir le magazine.",
-"Vous pouvez changer de langue à tout moment dans le menu.",
-"Votre place au premier rang",
-"PETS & DOGUE utilise des technologies essentielles au fonctionnement du magazine. Avec votre accord, l’analyse et la personnalisation nous aident à améliorer les histoires, recommandations et votre expérience.",
-"Politique de confidentialité",
-"Essentiel",
-"Nécessaire pour la langue, la sécurité et les fonctions de base.",
-"Analyse",
-"Nous aide à comprendre comment les visiteurs utilisent PETS & DOGUE.",
-"Personnalisation",
-"Permet des préférences facultatives et une expérience personnalisée.",
-"J’ACCEPTE",
-"REFUSER",
-"VOS CHOIX DE CONFIDENTIALITÉ",
-"ENREGISTRER"
-],
-
-de:[
-"Sprache auswählen",
-"Willkommen bei PETS & DOGUE. Tippen Sie auf Ihre Sprache, um das Magazin zu öffnen.",
-"Sie können die Sprache jederzeit im Menü ändern.",
-"Ihr Platz in der ersten Reihe",
-"PETS & DOGUE verwendet notwendige Technologien für den Betrieb des Magazins. Mit Ihrer Zustimmung helfen Analyse und Personalisierung dabei, Inhalte, Empfehlungen und Ihr Erlebnis zu verbessern.",
-"Datenschutzrichtlinie",
-"Erforderlich",
-"Notwendig für Sprache, Sicherheit und grundlegende Funktionen.",
-"Analyse",
-"Hilft uns zu verstehen, wie Besucher PETS & DOGUE nutzen.",
-"Personalisierung",
-"Ermöglicht optionale Einstellungen und personalisierte Erlebnisse.",
-"ICH STIMME ZU",
-"ABLEHNEN",
-"DATENSCHUTZ-EINSTELLUNGEN",
-"SPEICHERN"
-],
-
-es:[
-"Elige tu idioma",
-"Bienvenido a PETS & DOGUE. Toca tu idioma para entrar en la revista.",
-"Puedes cambiar el idioma en cualquier momento desde el menú.",
-"Tu asiento en primera fila",
-"PETS & DOGUE utiliza tecnología esencial para que la revista funcione. Con tu permiso, la analítica y la personalización nos ayudan a mejorar historias, recomendaciones y tu experiencia.",
-"Política de privacidad",
-"Esenciales",
-"Necesarios para idioma, seguridad y funciones básicas.",
-"Analítica",
-"Nos ayuda a comprender cómo los visitantes utilizan PETS & DOGUE.",
-"Personalización",
-"Permite preferencias opcionales y experiencias personalizadas.",
-"ACEPTO",
-"RECHAZAR",
-"TUS OPCIONES DE PRIVACIDAD",
-"GUARDAR"
-],
-
-it:[
-"Scegli la lingua",
-"Benvenuto in PETS & DOGUE. Tocca la tua lingua per entrare nella rivista.",
-"Puoi cambiare lingua in qualsiasi momento dal menu.",
-"Il tuo posto in prima fila",
-"PETS & DOGUE utilizza tecnologie essenziali per il funzionamento della rivista. Con il tuo consenso, analisi e personalizzazione ci aiutano a migliorare storie, consigli ed esperienza.",
-"Privacy Policy",
-"Essenziali",
-"Necessari per lingua, sicurezza e funzioni di base.",
-"Analisi",
-"Ci aiuta a capire come i visitatori utilizzano PETS & DOGUE.",
-"Personalizzazione",
-"Consente preferenze opzionali ed esperienze personalizzate.",
-"ACCETTO",
-"RIFIUTA",
-"SCELTE SULLA PRIVACY",
-"SALVA"
-],
-
-pt:[
-"Escolha o seu idioma",
-"Bem-vindo ao PETS & DOGUE. Toque no seu idioma para entrar na revista.",
-"Pode alterar o idioma a qualquer momento no menu.",
-"O seu lugar na primeira fila",
-"PETS & DOGUE utiliza tecnologia essencial para operar a revista. Com a sua permissão, análise e personalização ajudam-nos a melhorar histórias, recomendações e a sua experiência.",
-"Política de Privacidade",
-"Essenciais",
-"Necessários para idioma, segurança e funções básicas.",
-"Análise",
-"Ajuda-nos a compreender como os visitantes utilizam PETS & DOGUE.",
-"Personalização",
-"Permite preferências opcionais e experiências personalizadas.",
-"CONCORDO",
-"REJEITAR",
-"ESCOLHAS DE PRIVACIDADE",
-"GUARDAR"
-],
-
-nl:[
-"Kies je taal",
-"Welkom bij PETS & DOGUE. Tik op je taal om het magazine te openen.",
-"Je kunt de taal altijd wijzigen via het menu.",
-"Jouw plaats op de eerste rij",
-"PETS & DOGUE gebruikt essentiële technologie om het magazine te laten werken. Met jouw toestemming helpen analyse en personalisatie ons verhalen, aanbevelingen en je ervaring te verbeteren.",
-"Privacybeleid",
-"Essentieel",
-"Nodig voor taal, beveiliging en basisfuncties.",
-"Analyse",
-"Helpt ons begrijpen hoe bezoekers PETS & DOGUE gebruiken.",
-"Personalisatie",
-"Maakt optionele voorkeuren en persoonlijke ervaringen mogelijk.",
-"AKKOORD",
-"WEIGEREN",
-"PRIVACYKEUZES",
-"OPSLAAN"
-],
-
-pl:[
-"Wybierz język",
-"Witamy w PETS & DOGUE. Dotknij języka, aby wejść do magazynu.",
-"Język możesz zmienić w dowolnym momencie w menu.",
-"Twoje miejsce w pierwszym rzędzie",
-"PETS & DOGUE używa niezbędnych technologii do działania magazynu. Za Twoją zgodą analityka i personalizacja pomagają nam ulepszać historie, rekomendacje i doświadczenie.",
-"Polityka prywatności",
-"Niezbędne",
-"Potrzebne do języka, bezpieczeństwa i podstawowych funkcji.",
-"Analityka",
-"Pomaga nam zrozumieć, jak odwiedzający korzystają z PETS & DOGUE.",
-"Personalizacja",
-"Pozwala na opcjonalne preferencje i spersonalizowane doświadczenia.",
-"ZGADZAM SIĘ",
-"ODRZUĆ",
-"USTAWIENIA PRYWATNOŚCI",
-"ZAPISZ"
-],
-
-cs:[
-"Vyberte jazyk",
-"Vítejte v PETS & DOGUE. Klepněte na jazyk a vstupte do magazínu.",
-"Jazyk můžete kdykoli změnit v nabídce.",
-"Vaše místo v první řadě",
-"PETS & DOGUE používá nezbytné technologie pro provoz magazínu. S vaším souhlasem nám analytika a personalizace pomáhají zlepšovat příběhy, doporučení a váš zážitek.",
-"Zásady ochrany soukromí",
-"Nezbytné",
-"Potřebné pro jazyk, bezpečnost a základní funkce.",
-"Analytika",
-"Pomáhá nám pochopit, jak návštěvníci používají PETS & DOGUE.",
-"Personalizace",
-"Umožňuje volitelné preference a personalizované prostředí.",
-"SOUHLASÍM",
-"ODMÍTNOUT",
-"NASTAVENÍ SOUKROMÍ",
-"ULOŽIT"
-],
-
-sk:[
-"Vyberte jazyk",
-"Vitajte v PETS & DOGUE. Klepnite na jazyk a vstúpte do magazínu.",
-"Jazyk môžete kedykoľvek zmeniť v menu.",
-"Vaše miesto v prvom rade",
-"PETS & DOGUE používa nevyhnutné technológie na fungovanie magazínu. S vaším súhlasom nám analytika a personalizácia pomáhajú zlepšovať príbehy, odporúčania a váš zážitok.",
-"Zásady ochrany súkromia",
-"Nevyhnutné",
-"Potrebné pre jazyk, bezpečnosť a základné funkcie.",
-"Analytika",
-"Pomáha nám pochopiť, ako návštevníci používajú PETS & DOGUE.",
-"Personalizácia",
-"Umožňuje voliteľné preference a personalizovaný zážitok.",
-"SÚHLASÍM",
-"ODMIETNUŤ",
-"NASTAVENIA SÚKROMIA",
-"ULOŽIŤ"
-],
-
-hu:[
-"Válassz nyelvet",
-"Üdvözlünk a PETS & DOGUE világában. Koppints a nyelvre a magazin megnyitásához.",
-"A nyelvet bármikor módosíthatod a menüben.",
-"Az első sorból",
-"A PETS & DOGUE a magazin működéséhez szükséges technológiákat használ. Engedélyeddel az analitika és a személyre szabás segít javítani a történeteket, ajánlásokat és az élményt.",
-"Adatvédelmi szabályzat",
-"Szükséges",
-"A nyelvhez, biztonsághoz és alapfunkciókhoz szükséges.",
-"Analitika",
-"Segít megérteni, hogyan használják a látogatók a PETS & DOGUE-t.",
-"Személyre szabás",
-"Opcionális beállításokat és személyes élményt tesz lehetővé.",
-"ELFOGADOM",
-"ELUTASÍTOM",
-"ADATVÉDELMI BEÁLLÍTÁSOK",
-"MENTÉS"
-],
-
-ro:[
-"Alege limba",
-"Bine ai venit la PETS & DOGUE. Atinge limba pentru a intra în revistă.",
-"Poți schimba limba oricând din meniu.",
-"Locul tău în primul rând",
-"PETS & DOGUE folosește tehnologii esențiale pentru funcționarea revistei. Cu acordul tău, analiza și personalizarea ne ajută să îmbunătățim poveștile, recomandările și experiența.",
-"Politica de Confidențialitate",
-"Esențiale",
-"Necesare pentru limbă, securitate și funcții de bază.",
-"Analiză",
-"Ne ajută să înțelegem cum vizitatorii folosesc PETS & DOGUE.",
-"Personalizare",
-"Permite preferințe opționale și experiențe personalizate.",
-"SUNT DE ACORD",
-"RESPING",
-"OPȚIUNI DE CONFIDENȚIALITATE",
-"SALVEAZĂ"
-],
-
-bg:[
-"Изберете език",
-"Добре дошли в PETS & DOGUE. Натиснете езика, за да отворите списанието.",
-"Можете да промените езика по всяко време от менюто.",
-"Вашето място на първия ред",
-"PETS & DOGUE използва необходими технологии за работа на списанието. С ваше разрешение аналитиката и персонализацията ни помагат да подобряваме историите, препоръките и изживяването.",
-"Политика за поверителност",
-"Необходими",
-"Нужни за езика, сигурността и основните функции.",
-"Аналитика",
-"Помага ни да разберем как посетителите използват PETS & DOGUE.",
-"Персонализация",
-"Позволява допълнителни предпочитания и персонализирано изживяване.",
-"СЪГЛАСЕН СЪМ",
-"ОТКАЖИ",
-"НАСТРОЙКИ ЗА ПОВЕРИТЕЛНОСТ",
-"ЗАПАЗИ"
-],
-
-el:[
-"Επιλέξτε γλώσσα",
-"Καλώς ήρθατε στο PETS & DOGUE. Πατήστε τη γλώσσα σας για να μπείτε στο περιοδικό.",
-"Μπορείτε να αλλάξετε γλώσσα οποιαδήποτε στιγμή από το μενού.",
-"Η θέση σας στην πρώτη σειρά",
-"Το PETS & DOGUE χρησιμοποιεί απαραίτητες τεχνολογίες για τη λειτουργία του περιοδικού. Με την άδειά σας, τα αναλυτικά στοιχεία και η εξατομίκευση μας βοηθούν να βελτιώνουμε ιστορίες, προτάσεις και εμπειρία.",
-"Πολιτική Απορρήτου",
-"Απαραίτητα",
-"Απαιτούνται για γλώσσα, ασφάλεια και βασικές λειτουργίες.",
-"Αναλυτικά",
-"Μας βοηθούν να κατανοήσουμε πώς χρησιμοποιούν οι επισκέπτες το PETS & DOGUE.",
-"Εξατομίκευση",
-"Επιτρέπει προαιρετικές προτιμήσεις και εξατομικευμένες εμπειρίες.",
-"ΣΥΜΦΩΝΩ",
-"ΑΠΟΡΡΙΨΗ",
-"ΕΠΙΛΟΓΕΣ ΑΠΟΡΡΗΤΟΥ",
-"ΑΠΟΘΗΚΕΥΣΗ"
-],
-
-sv:[
-"Välj språk",
-"Välkommen till PETS & DOGUE. Tryck på ditt språk för att öppna magasinet.",
-"Du kan ändra språk när som helst i menyn.",
-"Din plats på första raden",
-"PETS & DOGUE använder nödvändig teknik för att driva magasinet. Med ditt tillstånd hjälper analys och personalisering oss att förbättra berättelser, rekommendationer och din upplevelse.",
-"Integritetspolicy",
-"Nödvändiga",
-"Krävs för språk, säkerhet och grundläggande funktioner.",
-"Analys",
-"Hjälper oss förstå hur besökare använder PETS & DOGUE.",
-"Personalisering",
-"Möjliggör valfria preferenser och personliga upplevelser.",
-"JAG GODKÄNNER",
-"AVVISA",
-"INTEGRITETSVAL",
-"SPARA"
-],
-
-da:[
-"Vælg sprog",
-"Velkommen til PETS & DOGUE. Tryk på dit sprog for at åbne magasinet.",
-"Du kan ændre sproget når som helst i menuen.",
-"Din plads på første række",
-"PETS & DOGUE bruger nødvendig teknologi til at drive magasinet. Med din tilladelse hjælper analyse og personalisering os med at forbedre historier, anbefalinger og din oplevelse.",
-"Privatlivspolitik",
-"Nødvendige",
-"Kræves til sprog, sikkerhed og grundlæggende funktioner.",
-"Analyse",
-"Hjælper os med at forstå, hvordan besøgende bruger PETS & DOGUE.",
-"Personalisering",
-"Muliggør valgfrie præferencer og personlige oplevelser.",
-"JEG ACCEPTERER",
-"AFVIS",
-"PRIVATLIVSVALG",
-"GEM"
-],
-
-no:[
-"Velg språk",
-"Velkommen til PETS & DOGUE. Trykk på språket ditt for å åpne magasinet.",
-"Du kan endre språk når som helst i menyen.",
-"Din plass på første rad",
-"PETS & DOGUE bruker nødvendig teknologi for å drive magasinet. Med din tillatelse hjelper analyse og personalisering oss med å forbedre historier, anbefalinger og opplevelsen din.",
-"Personvernregler",
-"Nødvendige",
-"Kreves for språk, sikkerhet og grunnleggende funksjoner.",
-"Analyse",
-"Hjelper oss forstå hvordan besøkende bruker PETS & DOGUE.",
-"Personalisering",
-"Muliggjør valgfrie preferanser og personlige opplevelser.",
-"JEG GODTAR",
-"AVVIS",
-"PERSONVERNVALG",
-"LAGRE"
-],
-
-fi:[
-"Valitse kieli",
-"Tervetuloa PETS & DOGUE -maailmaan. Napauta kieltä avataksesi lehden.",
-"Voit vaihtaa kieltä milloin tahansa valikosta.",
-"Paikkasi eturivissä",
-"PETS & DOGUE käyttää lehden toimintaan välttämätöntä teknologiaa. Luvallasi analytiikka ja personointi auttavat meitä parantamaan tarinoita, suosituksia ja kokemustasi.",
-"Tietosuojakäytäntö",
-"Välttämättömät",
-"Tarvitaan kieleen, turvallisuuteen ja perustoimintoihin.",
-"Analytiikka",
-"Auttaa meitä ymmärtämään, miten kävijät käyttävät PETS & DOGUE -palvelua.",
-"Personointi",
-"Mahdollistaa valinnaiset asetukset ja henkilökohtaiset kokemukset.",
-"HYVÄKSYN",
-"HYLKÄÄ",
-"TIETOSUOJAVALINNAT",
-"TALLENNA"
-],
-
-tr:[
-"Dilinizi seçin",
-"PETS & DOGUE'a hoş geldiniz. Dergiyi açmak için dilinize dokunun.",
-"Dili istediğiniz zaman menüden değiştirebilirsiniz.",
-"Ön sıradaki yeriniz",
-"PETS & DOGUE dergiyi çalıştırmak için gerekli teknolojileri kullanır. İzninizle analiz ve kişiselleştirme, hikâyeleri, önerileri ve deneyiminizi geliştirmemize yardımcı olur.",
-"Gizlilik Politikası",
-"Gerekli",
-"Dil, güvenlik ve temel site işlevleri için gereklidir.",
-"Analiz",
-"Ziyaretçilerin PETS & DOGUE'u nasıl kullandığını anlamamıza yardımcı olur.",
-"Kişiselleştirme",
-"İsteğe bağlı tercihler ve kişisel deneyimler sağlar.",
-"KABUL EDİYORUM",
-"REDDET",
-"GİZLİLİK SEÇENEKLERİ",
-"KAYDET"
-],
-
-ar:[
-"اختر لغتك",
-"مرحبًا بك في PETS & DOGUE. اضغط على لغتك للدخول إلى المجلة.",
-"يمكنك تغيير اللغة في أي وقت من القائمة.",
-"مقعدك في الصف الأمامي",
-"يستخدم PETS & DOGUE تقنيات ضرورية لتشغيل المجلة. وبموافقتك تساعدنا التحليلات والتخصيص على تحسين القصص والتوصيات وتجربتك.",
-"سياسة الخصوصية",
-"ضروري",
-"مطلوب للغة والأمان ووظائف الموقع الأساسية.",
-"التحليلات",
-"تساعدنا على فهم كيفية استخدام الزوار لـ PETS & DOGUE.",
-"التخصيص",
-"يسمح بتفضيلات اختيارية وتجارب مخصصة.",
-"أوافق",
-"رفض",
-"خيارات الخصوصية",
-"حفظ"
-],
-
-hi:[
-"अपनी भाषा चुनें",
-"PETS & DOGUE में आपका स्वागत है। मैगज़ीन खोलने के लिए अपनी भाषा पर टैप करें।",
-"आप मेनू से कभी भी भाषा बदल सकते हैं।",
-"आपकी फ्रंट-रो सीट",
-"PETS & DOGUE मैगज़ीन चलाने के लिए आवश्यक तकनीक का उपयोग करता है। आपकी अनुमति से एनालिटिक्स और पर्सनलाइज़ेशन हमें कहानियाँ, सुझाव और आपका अनुभव बेहतर करने में मदद करते हैं।",
-"गोपनीयता नीति",
-"आवश्यक",
-"भाषा, सुरक्षा और मूल साइट कार्यों के लिए आवश्यक।",
-"एनालिटिक्स",
-"हमें समझने में मदद करता है कि विज़िटर PETS & DOGUE का उपयोग कैसे करते हैं।",
-"पर्सनलाइज़ेशन",
-"वैकल्पिक पसंद और व्यक्तिगत अनुभव की अनुमति देता है।",
-"मैं सहमत हूँ",
-"अस्वीकार करें",
-"गोपनीयता विकल्प",
-"सहेजें"
-]
-
-};
-
-const QUICK_UI_TRANSLATIONS={
+const T={
 
 en:{
+menu:"Contents",
 profile:"Profile",
 subscribe:"Subscribe",
 language:"Language",
-contact:"Contact Us",
-search:"Search",
-menuAria:"Open menu",
-profileAria:"Open profile menu"
+nav:{
+magazine:"Magazine",
+offers:"Discounts",
+coverStars:"Cover Stars",
+articles:"Articles",
+photos:"Photos",
+fashion:"Fashion",
+travel:"Travel",
+wellness:"Wellness",
+places:"Places",
+contests:"Contests",
+community:"Community",
+rescue:"Help",
+marketplace:"Marketplace",
+partners:"Partners"
 },
-
-uk:{
-profile:"Профіль",
-subscribe:"Підписка",
-language:"Мова",
-contact:"Зв’язатися з нами",
-search:"Пошук",
-menuAria:"Відкрити меню",
-profileAria:"Відкрити меню профілю"
+latestLabel:"Latest issue",
+latestTitle:"Miso: the first PETS & DOGUE cover star",
+latestText:"Open Issue 01 and enter the visual world of PETS & DOGUE.",
+latestAction:"Open the magazine →",
+offersLabel:"Club discounts",
+offersTitle:"Discover your benefits",
+offersText:"Member discounts from selected pet-friendly partners.",
+offersAction:"See discounts →",
+starLabel:"Your vote",
+starTitle:"Choose the next cover star",
+starText:"Meet the pets, read their stories and tap the heart.",
+starAction:"Vote now →",
+worldTitle:"Inside PETS & DOGUE",
+worldText:"Stories, style, travel, wellness and everything that makes life with animals extraordinary.",
+articlesTitle:"Stories worth stopping for",
+articlesText:"Editorial stories about animals, people, culture and life together.",
+photosTitle:"Visual stories",
+fashionTitle:"Style with personality",
+travelTitle:"Go further together",
+wellnessTitle:"Care for every day",
+placesTitle:"Places worth discovering",
+contestsTitle:"Play. Enter. Win.",
+communityTitle:"Everything interesting happening near you",
+rescueTitle:"Help or ask for help",
+marketTitle:"Find what you need",
+clubTitle:"More for members",
+partnerTitle:"Work with PETS & DOGUE",
+partnerText:"Advertising, editorial stories, news, Club discounts, brand features and collaborations.",
+partnerAction:"Partner with us →",
+tagline:"The International Luxury Animal Magazine"
 },
 
 ru:{
+menu:"Содержание",
 profile:"Профиль",
 subscribe:"Подписка",
 language:"Язык",
-contact:"Связаться с нами",
-search:"Поиск",
-menuAria:"Открыть меню",
-profileAria:"Открыть меню профиля"
+nav:{
+magazine:"Журнал",
+offers:"Скидки",
+coverStars:"Звёзды обложки",
+articles:"Статьи",
+photos:"Фото",
+fashion:"Мода",
+travel:"Путешествия",
+wellness:"Здоровье",
+places:"Места",
+contests:"Конкурсы",
+community:"Сообщество",
+rescue:"Помощь",
+marketplace:"Маркетплейс",
+partners:"Партнёры"
+},
+latestLabel:"Последний выпуск",
+latestTitle:"Мисо: первая звезда обложки PETS & DOGUE",
+latestText:"Откройте выпуск №1 и погрузитесь в визуальный мир PETS & DOGUE.",
+latestAction:"Открыть журнал →",
+offersLabel:"Скидки Club",
+offersTitle:"Откройте свои преимущества",
+offersText:"Специальные скидки от выбранных pet-friendly партнёров.",
+offersAction:"Смотреть скидки →",
+starLabel:"Ваш голос",
+starTitle:"Выберите следующую звезду обложки",
+starText:"Знакомьтесь с питомцами, читайте их истории и нажимайте сердечко.",
+starAction:"Голосовать →",
+worldTitle:"Внутри PETS & DOGUE",
+worldText:"Истории, стиль, путешествия, здоровье и всё, что делает жизнь с животными особенной.",
+articlesTitle:"Истории, на которых хочется остановиться",
+articlesText:"Редакционные истории о животных, людях, культуре и жизни вместе.",
+photosTitle:"Визуальные истории",
+fashionTitle:"Стиль с характером",
+travelTitle:"Путешествуйте дальше вместе",
+wellnessTitle:"Забота каждый день",
+placesTitle:"Места, которые стоит открыть",
+contestsTitle:"Участвуйте. Играйте. Побеждайте.",
+communityTitle:"Всё интересное, что происходит рядом с вами",
+rescueTitle:"Помочь или попросить помощи",
+marketTitle:"Найдите то, что нужно",
+clubTitle:"Больше для участников",
+partnerTitle:"Сотрудничайте с PETS & DOGUE",
+partnerText:"Реклама, редакционные статьи, новости, скидки Club, бренды и коллаборации.",
+partnerAction:"Стать партнёром →",
+tagline:"Международный журнал класса люкс о животных"
+},
+
+uk:{
+menu:"Зміст",
+profile:"Профіль",
+subscribe:"Підписка",
+language:"Мова",
+nav:{
+magazine:"Журнал",
+offers:"Знижки",
+coverStars:"Зірки обкладинки",
+articles:"Статті",
+photos:"Фото",
+fashion:"Мода",
+travel:"Подорожі",
+wellness:"Здоров’я",
+places:"Місця",
+contests:"Конкурси",
+community:"Спільнота",
+rescue:"Допомога",
+marketplace:"Маркетплейс",
+partners:"Партнери"
+},
+latestLabel:"Останній випуск",
+latestTitle:"Місо: перша зірка обкладинки PETS & DOGUE",
+latestText:"Відкрийте випуск №1 і пориньте у візуальний світ PETS & DOGUE.",
+latestAction:"Відкрити журнал →",
+offersLabel:"Знижки Club",
+offersTitle:"Відкрийте свої переваги",
+offersText:"Спеціальні знижки від вибраних pet-friendly партнерів.",
+offersAction:"Дивитися знижки →",
+starLabel:"Ваш голос",
+starTitle:"Оберіть наступну зірку обкладинки",
+starText:"Знайомтеся з улюбленцями, читайте їхні історії та натискайте сердечко.",
+starAction:"Голосувати →",
+worldTitle:"Усередині PETS & DOGUE",
+worldText:"Історії, стиль, подорожі, здоров’я та все, що робить життя з тваринами особливим.",
+articlesTitle:"Історії, біля яких хочеться зупинитися",
+articlesText:"Редакційні історії про тварин, людей, культуру та спільне життя.",
+photosTitle:"Візуальні історії",
+fashionTitle:"Стиль із характером",
+travelTitle:"Подорожуйте далі разом",
+wellnessTitle:"Турбота щодня",
+placesTitle:"Місця, які варто відкрити",
+contestsTitle:"Беріть участь. Грайте. Перемагайте.",
+communityTitle:"Усе цікаве, що відбувається поруч із вами",
+rescueTitle:"Допомогти або попросити допомоги",
+marketTitle:"Знайдіть те, що потрібно",
+clubTitle:"Більше для учасників",
+partnerTitle:"Співпрацюйте з PETS & DOGUE",
+partnerText:"Реклама, редакційні статті, новини, знижки Club, бренди та колаборації.",
+partnerAction:"Стати партнером →",
+tagline:"Міжнародний люксовий журнал про тварин"
 },
 
 fr:{
+menu:"Sommaire",
 profile:"Profil",
-subscribe:"S’abonner",
+subscribe:"Abonnement",
 language:"Langue",
-contact:"Nous contacter",
-search:"Rechercher",
-menuAria:"Ouvrir le menu",
-profileAria:"Ouvrir le menu du profil"
+nav:{
+magazine:"Magazine",
+offers:"Réductions",
+coverStars:"Stars de couverture",
+articles:"Articles",
+photos:"Photos",
+fashion:"Mode",
+travel:"Voyages",
+wellness:"Bien-être",
+places:"Adresses",
+contests:"Concours",
+community:"Communauté",
+rescue:"Aide",
+marketplace:"Marketplace",
+partners:"Partenaires"
+}
 },
 
 de:{
+menu:"Inhalt",
 profile:"Profil",
-subscribe:"Abonnieren",
+subscribe:"Abo",
 language:"Sprache",
-contact:"Kontakt",
-search:"Suche",
-menuAria:"Menü öffnen",
-profileAria:"Profilmenü öffnen"
+nav:{
+magazine:"Magazin",
+offers:"Rabatte",
+coverStars:"Cover Stars",
+articles:"Artikel",
+photos:"Fotos",
+fashion:"Mode",
+travel:"Reisen",
+wellness:"Gesundheit",
+places:"Orte",
+contests:"Wettbewerbe",
+community:"Community",
+rescue:"Hilfe",
+marketplace:"Marktplatz",
+partners:"Partner"
+}
 },
 
 es:{
+menu:"Contenido",
 profile:"Perfil",
-subscribe:"Suscribirse",
+subscribe:"Suscripción",
 language:"Idioma",
-contact:"Contáctanos",
-search:"Buscar",
-menuAria:"Abrir menú",
-profileAria:"Abrir menú de perfil"
+nav:{
+magazine:"Revista",
+offers:"Descuentos",
+coverStars:"Estrellas de portada",
+articles:"Artículos",
+photos:"Fotos",
+fashion:"Moda",
+travel:"Viajes",
+wellness:"Bienestar",
+places:"Lugares",
+contests:"Concursos",
+community:"Comunidad",
+rescue:"Ayuda",
+marketplace:"Marketplace",
+partners:"Socios"
+}
 },
 
 it:{
+menu:"Contenuti",
 profile:"Profilo",
-subscribe:"Abbonati",
+subscribe:"Abbonamento",
 language:"Lingua",
-contact:"Contattaci",
-search:"Cerca",
-menuAria:"Apri menu",
-profileAria:"Apri menu profilo"
+nav:{
+magazine:"Rivista",
+offers:"Sconti",
+coverStars:"Cover Star",
+articles:"Articoli",
+photos:"Foto",
+fashion:"Moda",
+travel:"Viaggi",
+wellness:"Benessere",
+places:"Luoghi",
+contests:"Concorsi",
+community:"Community",
+rescue:"Aiuto",
+marketplace:"Marketplace",
+partners:"Partner"
+}
 },
 
 pt:{
+menu:"Conteúdo",
 profile:"Perfil",
-subscribe:"Assinar",
+subscribe:"Assinatura",
 language:"Idioma",
-contact:"Contacte-nos",
-search:"Pesquisar",
-menuAria:"Abrir menu",
-profileAria:"Abrir menu do perfil"
+nav:{
+magazine:"Revista",
+offers:"Descontos",
+coverStars:"Estrelas da capa",
+articles:"Artigos",
+photos:"Fotos",
+fashion:"Moda",
+travel:"Viagens",
+wellness:"Bem-estar",
+places:"Lugares",
+contests:"Concursos",
+community:"Comunidade",
+rescue:"Ajuda",
+marketplace:"Marketplace",
+partners:"Parceiros"
+}
 },
 
 nl:{
+menu:"Inhoud",
 profile:"Profiel",
-subscribe:"Abonneren",
+subscribe:"Abonnement",
 language:"Taal",
-contact:"Contact",
-search:"Zoeken",
-menuAria:"Menu openen",
-profileAria:"Profielmenu openen"
+nav:{
+magazine:"Magazine",
+offers:"Kortingen",
+coverStars:"Coversterren",
+articles:"Artikelen",
+photos:"Foto's",
+fashion:"Mode",
+travel:"Reizen",
+wellness:"Wellness",
+places:"Plaatsen",
+contests:"Wedstrijden",
+community:"Community",
+rescue:"Hulp",
+marketplace:"Marktplaats",
+partners:"Partners"
+}
 },
 
 pl:{
+menu:"Spis treści",
 profile:"Profil",
 subscribe:"Subskrypcja",
 language:"Język",
-contact:"Kontakt",
-search:"Szukaj",
-menuAria:"Otwórz menu",
-profileAria:"Otwórz menu profilu"
+nav:{
+magazine:"Magazyn",
+offers:"Rabaty",
+coverStars:"Gwiazdy okładki",
+articles:"Artykuły",
+photos:"Zdjęcia",
+fashion:"Moda",
+travel:"Podróże",
+wellness:"Zdrowie",
+places:"Miejsca",
+contests:"Konkursy",
+community:"Społeczność",
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partnerzy"
+}
 },
 
 cs:{
+menu:"Obsah",
 profile:"Profil",
-subscribe:"Předplatit",
+subscribe:"Předplatné",
 language:"Jazyk",
-contact:"Kontaktujte nás",
-search:"Hledat",
-menuAria:"Otevřít nabídku",
-profileAria:"Otevřít nabídku profilu"
+nav:{
+magazine:"Magazín",
+offers:"Slevy",
+coverStars:"Hvězdy obálky",
+articles:"Články",
+photos:"Fotografie",
+fashion:"Móda",
+travel:"Cestování",
+wellness:"Zdraví",
+places:"Místa",
+contests:"Soutěže",
+community:"Komunita",
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partneři"
+}
 },
 
 sk:{
+menu:"Obsah",
 profile:"Profil",
 subscribe:"Predplatné",
 language:"Jazyk",
-contact:"Kontaktujte nás",
-search:"Hľadať",
-menuAria:"Otvoriť menu",
-profileAria:"Otvoriť menu profilu"
+nav:{
+magazine:"Magazín",
+offers:"Zľavy",
+coverStars:"Hviezdy obálky",
+articles:"Články",
+photos:"Fotografie",
+fashion:"Móda",
+travel:"Cestovanie",
+wellness:"Zdravie",
+places:"Miesta",
+contests:"Súťaže",
+community:"Komunita",
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partneri"
+}
 },
 
 hu:{
+menu:"Tartalom",
 profile:"Profil",
 subscribe:"Előfizetés",
 language:"Nyelv",
-contact:"Kapcsolat",
-search:"Keresés",
-menuAria:"Menü megnyitása",
-profileAria:"Profilmenü megnyitása"
+nav:{
+magazine:"Magazin",
+offers:"Kedvezmények",
+coverStars:"Címlapsztárok",
+articles:"Cikkek",
+photos:"Fotók",
+fashion:"Divat",
+travel:"Utazás",
+wellness:"Egészség",
+places:"Helyek",
+contests:"Versenyek",
+community:"Közösség",
+rescue:"Segítség",
+marketplace:"Piactér",
+partners:"Partnerek"
+}
 },
 
 ro:{
+menu:"Conținut",
 profile:"Profil",
-subscribe:"Abonare",
+subscribe:"Abonament",
 language:"Limbă",
-contact:"Contactează-ne",
-search:"Caută",
-menuAria:"Deschide meniul",
-profileAria:"Deschide meniul profilului"
+nav:{
+magazine:"Revistă",
+offers:"Reduceri",
+coverStars:"Vedete de copertă",
+articles:"Articole",
+photos:"Fotografii",
+fashion:"Modă",
+travel:"Călătorii",
+wellness:"Sănătate",
+places:"Locuri",
+contests:"Concursuri",
+community:"Comunitate",
+rescue:"Ajutor",
+marketplace:"Marketplace",
+partners:"Parteneri"
+}
 },
 
 bg:{
+menu:"Съдържание",
 profile:"Профил",
 subscribe:"Абонамент",
 language:"Език",
-contact:"Свържете се с нас",
-search:"Търсене",
-menuAria:"Отвори меню",
-profileAria:"Отвори меню на профила"
+nav:{
+magazine:"Списание",
+offers:"Отстъпки",
+coverStars:"Звезди на корицата",
+articles:"Статии",
+photos:"Снимки",
+fashion:"Мода",
+travel:"Пътувания",
+wellness:"Здраве",
+places:"Места",
+contests:"Конкурси",
+community:"Общност",
+rescue:"Помощ",
+marketplace:"Маркетплейс",
+partners:"Партньори"
+}
 },
 
 el:{
+menu:"Περιεχόμενα",
 profile:"Προφίλ",
 subscribe:"Συνδρομή",
 language:"Γλώσσα",
-contact:"Επικοινωνία",
-search:"Αναζήτηση",
-menuAria:"Άνοιγμα μενού",
-profileAria:"Άνοιγμα μενού προφίλ"
+nav:{
+magazine:"Περιοδικό",
+offers:"Εκπτώσεις",
+coverStars:"Αστέρια εξωφύλλου",
+articles:"Άρθρα",
+photos:"Φωτογραφίες",
+fashion:"Μόδα",
+travel:"Ταξίδια",
+wellness:"Υγεία",
+places:"Μέρη",
+contests:"Διαγωνισμοί",
+community:"Κοινότητα",
+rescue:"Βοήθεια",
+marketplace:"Marketplace",
+partners:"Συνεργάτες"
+}
 },
 
 sv:{
+menu:"Innehåll",
 profile:"Profil",
-subscribe:"Prenumerera",
+subscribe:"Prenumeration",
 language:"Språk",
-contact:"Kontakta oss",
-search:"Sök",
-menuAria:"Öppna meny",
-profileAria:"Öppna profilmeny"
+nav:{
+magazine:"Magasin",
+offers:"Rabatter",
+coverStars:"Omslagsstjärnor",
+articles:"Artiklar",
+photos:"Foton",
+fashion:"Mode",
+travel:"Resor",
+wellness:"Hälsa",
+places:"Platser",
+contests:"Tävlingar",
+community:"Community",
+rescue:"Hjälp",
+marketplace:"Marknadsplats",
+partners:"Partners"
+}
 },
 
 da:{
+menu:"Indhold",
 profile:"Profil",
-subscribe:"Abonner",
+subscribe:"Abonnement",
 language:"Sprog",
-contact:"Kontakt os",
-search:"Søg",
-menuAria:"Åbn menu",
-profileAria:"Åbn profilmenu"
+nav:{
+magazine:"Magasin",
+offers:"Rabatter",
+coverStars:"Forsidestjerner",
+articles:"Artikler",
+photos:"Fotos",
+fashion:"Mode",
+travel:"Rejser",
+wellness:"Sundhed",
+places:"Steder",
+contests:"Konkurrencer",
+community:"Community",
+rescue:"Hjælp",
+marketplace:"Marketplace",
+partners:"Partnere"
+}
 },
 
 no:{
+menu:"Innhold",
 profile:"Profil",
-subscribe:"Abonner",
+subscribe:"Abonnement",
 language:"Språk",
-contact:"Kontakt oss",
-search:"Søk",
-menuAria:"Åpne meny",
-profileAria:"Åpne profilmeny"
+nav:{
+magazine:"Magasin",
+offers:"Rabatter",
+coverStars:"Forsidestjerner",
+articles:"Artikler",
+photos:"Bilder",
+fashion:"Mote",
+travel:"Reiser",
+wellness:"Helse",
+places:"Steder",
+contests:"Konkurranser",
+community:"Fellesskap",
+rescue:"Hjelp",
+marketplace:"Markedsplass",
+partners:"Partnere"
+}
 },
 
 fi:{
+menu:"Sisältö",
 profile:"Profiili",
-subscribe:"Tilaa",
+subscribe:"Tilaus",
 language:"Kieli",
-contact:"Ota yhteyttä",
-search:"Haku",
-menuAria:"Avaa valikko",
-profileAria:"Avaa profiilivalikko"
+nav:{
+magazine:"Lehti",
+offers:"Alennukset",
+coverStars:"Kansitähdet",
+articles:"Artikkelit",
+photos:"Kuvat",
+fashion:"Muoti",
+travel:"Matkailu",
+wellness:"Hyvinvointi",
+places:"Paikat",
+contests:"Kilpailut",
+community:"Yhteisö",
+rescue:"Apu",
+marketplace:"Marketplace",
+partners:"Kumppanit"
+}
 },
 
 tr:{
+menu:"İçindekiler",
 profile:"Profil",
-subscribe:"Abone Ol",
+subscribe:"Abonelik",
 language:"Dil",
-contact:"Bize Ulaşın",
-search:"Ara",
-menuAria:"Menüyü aç",
-profileAria:"Profil menüsünü aç"
+nav:{
+magazine:"Dergi",
+offers:"İndirimler",
+coverStars:"Kapak yıldızları",
+articles:"Makaleler",
+photos:"Fotoğraflar",
+fashion:"Moda",
+travel:"Seyahat",
+wellness:"Sağlık",
+places:"Mekanlar",
+contests:"Yarışmalar",
+community:"Topluluk",
+rescue:"Yardım",
+marketplace:"Pazar",
+partners:"Ortaklar"
+}
 },
 
 ar:{
+menu:"المحتويات",
 profile:"الملف الشخصي",
-subscribe:"اشترك",
+subscribe:"الاشتراك",
 language:"اللغة",
-contact:"اتصل بنا",
-search:"بحث",
-menuAria:"فتح القائمة",
-profileAria:"فتح قائمة الملف الشخصي"
+nav:{
+magazine:"المجلة",
+offers:"الخصومات",
+coverStars:"نجوم الغلاف",
+articles:"المقالات",
+photos:"الصور",
+fashion:"الموضة",
+travel:"السفر",
+wellness:"الصحة",
+places:"الأماكن",
+contests:"المسابقات",
+community:"المجتمع",
+rescue:"المساعدة",
+marketplace:"السوق",
+partners:"الشركاء"
+}
 },
 
 hi:{
+menu:"सामग्री",
 profile:"प्रोफ़ाइल",
 subscribe:"सदस्यता",
 language:"भाषा",
-contact:"हमसे संपर्क करें",
-search:"खोजें",
-menuAria:"मेनू खोलें",
-profileAria:"प्रोफ़ाइल मेनू खोलें"
+nav:{
+magazine:"पत्रिका",
+offers:"छूट",
+coverStars:"कवर स्टार",
+articles:"लेख",
+photos:"फ़ोटो",
+fashion:"फ़ैशन",
+travel:"यात्रा",
+wellness:"स्वास्थ्य",
+places:"स्थान",
+contests:"प्रतियोगिताएँ",
+community:"समुदाय",
+rescue:"मदद",
+marketplace:"मार्केटप्लेस",
+partners:"पार्टनर"
+}
 }
 
 };
 
-function onboardingDictionary(){
+/* =========================================================
+FALLBACK
 
-const lang=localStorage.getItem(HOME_LANGUAGE_KEY)||"en";
-const values=ONBOARDING_TRANSLATIONS[lang]||ONBOARDING_TRANSLATIONS.en;
+For languages where the main editorial copy is not
+overridden above, English copy is used only as a final
+technical fallback. Navigation and principal controls
+are localized in all 23 languages.
+========================================================= */
+
+function bundle(language){
+
+const base=T.en;
+const local=T[language]||{};
 
 return{
-languageTitle:values[0],
-languageSubtitle:values[1],
-languageNote:values[2],
-consentTitle:values[3],
-consentText:values[4],
-consentPolicy:values[5],
-essentialTitle:values[6],
-essentialText:values[7],
-analyticsTitle:values[8],
-analyticsText:values[9],
-personalTitle:values[10],
-personalText:values[11],
-accept:values[12],
-reject:values[13],
-choices:values[14],
-save:values[15]
+...base,
+...local,
+nav:{
+...base.nav,
+...(local.nav||{})
+}
 };
 
 }
 
-function setHomeText(id,value){
+/* =========================================================
+MENU
+========================================================= */
 
-const element=document.getElementById(id);
+function renderNavigation(language){
 
-if(element&&typeof value==="string"){
-element.textContent=value;
+const tr=bundle(language);
+
+document.getElementById("primaryNav").innerHTML=
+NAV_ITEMS
+.map(
+item=>`
+<a href="${item.url}" data-nav="${item.key}">
+${tr.nav[item.key]}
+</a>
+`
+)
+.join("");
+
+document.getElementById("sideMenuList").innerHTML=
+NAV_ITEMS
+.map(
+(item,index)=>`
+<a class="menu-item" href="${item.url}">
+<img src="${item.image}" alt="${tr.nav[item.key]}" loading="lazy">
+<div class="menu-item-copy">
+<h3>${tr.nav[item.key]}</h3>
+<p>${
+index===0
+?tr.latestText
+:index===1
+?tr.offersText
+:index===2
+?tr.starText
+:tr.worldText
+}</p>
+</div>
+</a>
+`
+)
+.join("");
+
+document
+.querySelectorAll("[data-nav-key]")
+.forEach(
+element=>{
+
+const key=
+element.dataset.navKey;
+
+element.textContent=
+tr.nav[key]||
+key;
+
 }
+);
+
+document
+.querySelectorAll("[data-footer-key]")
+.forEach(
+element=>{
+
+const key=
+element.dataset.footerKey;
+
+element.textContent=
+tr.nav[key]||
+key;
 
 }
-
-function getSavedLanguage(){
-
-const saved=localStorage.getItem(HOME_LANGUAGE_KEY);
-
-return HOME_SUPPORTED.includes(saved)
-?saved
-:"en";
-
-}
-
-function applyQuickUiLanguage(){
-
-const lang=getSavedLanguage();
-const t=QUICK_UI_TRANSLATIONS[lang]||QUICK_UI_TRANSLATIONS.en;
-
-setHomeText("headerSubscribeText",t.subscribe);
-setHomeText("menuProfileText",t.profile);
-setHomeText("menuSubscribeText",t.subscribe);
-setHomeText("menuLanguageLabel",t.language);
-setHomeText("menuContactText",t.contact);
-setHomeText("menuSearchText",t.search);
-
-const menuButton=document.getElementById("headerMenuButton");
-const profileButton=document.getElementById("headerProfileButton");
-
-if(menuButton){
-menuButton.setAttribute("aria-label",t.menuAria);
-}
-
-if(profileButton){
-profileButton.setAttribute("aria-label",t.profileAria);
-}
-
-}
-
-function applyOnboardingLanguage(){
-
-const t=onboardingDictionary();
-
-setHomeText("languageWelcomeTitle",t.languageTitle);
-setHomeText("languageWelcomeSubtitle",t.languageSubtitle);
-setHomeText("languageWelcomeNote",t.languageNote);
-
-setHomeText("consentTitle",t.consentTitle);
-setHomeText("consentText",t.consentText);
-setHomeText("consentPolicyLink",t.consentPolicy);
-setHomeText("essentialTitle",t.essentialTitle);
-setHomeText("essentialText",t.essentialText);
-setHomeText("analyticsTitle",t.analyticsTitle);
-setHomeText("analyticsText",t.analyticsText);
-setHomeText("personalTitle",t.personalTitle);
-setHomeText("personalText",t.personalText);
-setHomeText("acceptAllButton",t.accept);
-setHomeText("rejectButton",t.reject);
-setHomeText("choicesButton",t.choices);
-setHomeText("saveChoicesButton",t.save);
-
-const lang=getSavedLanguage();
-
-document.documentElement.lang=lang;
-document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-
-const select=document.getElementById("languageSelect");
-
-if(select){
-select.value=lang;
-}
-
-applyQuickUiLanguage();
+);
 
 }
 
-function selectLanguageImmediately(language){
+/* =========================================================
+LANGUAGE
+========================================================= */
 
-if(!HOME_SUPPORTED.includes(language)){
-return;
+function applyLanguage(language){
+
+if(
+!T[language]
+){
+
+language="en";
+
 }
+
+const tr=bundle(language);
 
 localStorage.setItem(
-HOME_LANGUAGE_KEY,
+LANGUAGE_KEY,
 language
 );
 
-document.documentElement.lang=language;
-document.documentElement.dir=language==="ar"?"rtl":"ltr";
+document.documentElement.lang=
+language;
 
-applyOnboardingLanguage();
+document.documentElement.dir=
+language==="ar"
+?"rtl"
+:"ltr";
 
-window.dispatchEvent(
-new CustomEvent(
-"petsdogue:languagechange",
-{detail:{language}}
-)
-);
+document.getElementById("languageSelect").value=
+language;
 
-const modal=document.getElementById("languageWelcome");
+document.getElementById("menuTitle").textContent=
+tr.menu;
 
-if(modal){
-modal.classList.remove("show");
-}
+document.getElementById("menuProfile").textContent=
+tr.profile;
 
-showConsentIfNeeded();
+document.getElementById("menuSubscribe").textContent=
+tr.subscribe;
 
-}
+document.getElementById("topSubscribe").textContent=
+tr.subscribe;
 
-function initFirstVisitFlow(){
+document.getElementById("languageLabel").textContent=
+tr.language;
 
-const language=localStorage.getItem(HOME_LANGUAGE_KEY);
+document.getElementById("latestLabel").textContent=
+tr.latestLabel;
 
-if(!language||!HOME_SUPPORTED.includes(language)){
-showLanguageWelcome();
-return;
-}
+document.getElementById("latestTitle").textContent=
+tr.latestTitle;
 
-applyOnboardingLanguage();
-showConsentIfNeeded();
+document.getElementById("latestText").textContent=
+tr.latestText;
 
-}
+document.getElementById("latestAction").textContent=
+tr.latestAction;
 
-function showLanguageWelcome(){
+document.getElementById("offersLabel").textContent=
+tr.offersLabel;
 
-const modal=document.getElementById("languageWelcome");
-const grid=document.getElementById("welcomeLanguageGrid");
+document.getElementById("offersTitle").textContent=
+tr.offersTitle;
 
-modal.classList.add("show");
-document.body.classList.add("onboarding-open");
+document.getElementById("offersText").textContent=
+tr.offersText;
 
-grid.querySelectorAll(".language-choice").forEach(button=>{
+document.getElementById("offersAction").textContent=
+tr.offersAction;
 
-button.onclick=()=>{
+document.getElementById("starLabel").textContent=
+tr.starLabel;
 
-const selectedLanguage=button.dataset.lang||"";
+document.getElementById("starTitle").textContent=
+tr.starTitle;
 
-grid.querySelectorAll(".language-choice").forEach(item=>{
-item.classList.toggle("selected",item===button);
-});
+document.getElementById("starText").textContent=
+tr.starText;
 
-selectLanguageImmediately(selectedLanguage);
+document.getElementById("starAction").textContent=
+tr.starAction;
 
-};
+document.getElementById("worldTitle").textContent=
+tr.worldTitle;
 
-});
+document.getElementById("worldText").textContent=
+tr.worldText;
 
-}
+document.getElementById("articlesFeatureTitle").textContent=
+tr.articlesTitle;
 
-function showConsentIfNeeded(){
+document.getElementById("articlesFeatureText").textContent=
+tr.articlesText;
 
-const hasConsent=Boolean(
-localStorage.getItem(HOME_CONSENT_KEY)
-);
+document.getElementById("photosFeatureTitle").textContent=
+tr.photosTitle;
 
-if(hasConsent){
+document.getElementById("fashionFeatureTitle").textContent=
+tr.fashionTitle;
 
-document.getElementById("consentLayer").classList.remove("show");
-document.body.classList.remove("onboarding-open");
-return;
+document.getElementById("travelFeatureTitle").textContent=
+tr.travelTitle;
 
-}
+document.getElementById("wellnessFeatureTitle").textContent=
+tr.wellnessTitle;
 
-document.getElementById("consentLayer").classList.add("show");
-document.body.classList.add("onboarding-open");
+document.getElementById("placesFeatureTitle").textContent=
+tr.placesTitle;
 
-}
+document.getElementById("contestsFeatureTitle").textContent=
+tr.contestsTitle;
 
-let tempConsent={
-analytics:false,
-personalisation:false
-};
+document.getElementById("communityFeatureTitle").textContent=
+tr.communityTitle;
 
-function showConsentSettings(){
+document.getElementById("rescueFeatureTitle").textContent=
+tr.rescueTitle;
 
-document.getElementById("consentSettings").classList.add("show");
+document.getElementById("marketFeatureTitle").textContent=
+tr.marketTitle;
 
-document.getElementById("choicesButton").style.display="none";
+document.getElementById("clubFeatureTitle").textContent=
+tr.clubTitle;
 
-document.getElementById("saveChoicesButton").style.display="block";
+document.getElementById("partnerTitle").textContent=
+tr.partnerTitle;
 
-}
+document.getElementById("partnerText").textContent=
+tr.partnerText;
 
-function toggleConsent(type){
+document.getElementById("partnerAction").textContent=
+tr.partnerAction;
 
-tempConsent[type]=!tempConsent[type];
+document.getElementById("footerTagline").textContent=
+tr.tagline;
 
-const id=
-type==="analytics"
-?"analyticsToggle"
-:"personalToggle";
-
-document.getElementById(id).classList.toggle(
-"on",
-tempConsent[type]
-);
-
-}
-
-function saveConsent(analytics,personalisation){
-
-const consent={
-essential:true,
-analytics:Boolean(analytics),
-personalisation:Boolean(personalisation),
-updatedAt:new Date().toISOString()
-};
-
-localStorage.setItem(
-HOME_CONSENT_KEY,
-JSON.stringify(consent)
-);
-
-document.getElementById("consentLayer").classList.remove("show");
-
-document.body.classList.remove("onboarding-open");
-
-}
-
-function saveCurrentConsent(){
-
-saveConsent(
-tempConsent.analytics,
-tempConsent.personalisation
+renderNavigation(
+language
 );
 
 }
 
-function getHomeLanguage(){
-
-if(
-window.PetsDogueLanguage &&
-window.PetsDogueLanguage.getCurrentLanguage
-){
-
-const current=
-window.PetsDogueLanguage.getCurrentLanguage();
-
-if(typeof current==="string"){
-return current;
-}
-
-if(current&&current.code){
-return current.code;
-}
-
-}
-
-return localStorage.getItem(HOME_LANGUAGE_KEY)||"en";
-
-}
-
-function homeT(path,fallback){
-
-const root=
-window.PetsDogueTranslations &&
-window.PetsDogueTranslations.home;
-
-if(!root){
-return fallback;
-}
-
-const bundle=
-root[getHomeLanguage()]||
-root.en;
-
-if(!bundle){
-return fallback;
-}
-
-let value=bundle;
-
-path.split(".").forEach(key=>{
-
-value=
-value &&
-Object.prototype.hasOwnProperty.call(value,key)
-?value[key]
-:undefined;
-
-});
-
-return typeof value==="string"
-?value
-:fallback;
-
-}
-
-let activeSpeechButton=null;
+/* =========================================================
+OPEN / CLOSE MENU
+========================================================= */
 
 function openMenu(){
 
-const sideMenu=document.getElementById("sideMenu");
+document.getElementById("sideMenu")
+.classList
+.add("open");
 
-sideMenu.classList.add("open");
-sideMenu.setAttribute("aria-hidden","false");
+document.getElementById("menuOverlay")
+.classList
+.add("show");
 
-document.getElementById("menuOverlay").classList.add("show");
-
-document.body.classList.add("menu-open");
+document.body
+.classList
+.add("menu-open");
 
 }
 
 function closeMenu(){
 
-const sideMenu=document.getElementById("sideMenu");
+document.getElementById("sideMenu")
+.classList
+.remove("open");
 
-sideMenu.classList.remove("open");
-sideMenu.setAttribute("aria-hidden","true");
+document.getElementById("menuOverlay")
+.classList
+.remove("show");
 
-document.getElementById("menuOverlay").classList.remove("show");
-
-document.body.classList.remove("menu-open");
-
-}
-
-function openSearchFromMenu(){
-
-closeMenu();
-
-setTimeout(()=>{
-openSearch();
-},120);
+document.body
+.classList
+.remove("menu-open");
 
 }
 
-function openSearch(){
-
-document.getElementById("searchOverlay").classList.add("open");
-
-document.body.classList.add("menu-open");
-
-setTimeout(()=>{
-
-document.getElementById("siteSearchInput").focus();
-
-},100);
-
-}
-
-function closeSearch(){
-
-document.getElementById("searchOverlay").classList.remove("open");
-
-document.body.classList.remove("menu-open");
-
-}
-
-function runSiteSearch(){
-
-const query=
-document
-.getElementById("siteSearchInput")
-.value
-.trim()
-.toLowerCase();
-
-if(!query){
-return;
-}
-
-const routes=[
-
-{
-terms:["place","places","cafe","hotel","park","beach","vet","groomer"],
-url:"pet-friendly-places.html"
-},
-
-{
-terms:["cover","star","competition","pet model"],
-url:"members-gallery.html"
-},
-
-{
-terms:["photo","photos","gallery","portrait"],
-url:"photos.html"
-},
-
-{
-terms:["travel","holiday","hotel"],
-url:"pet-travel.html"
-},
-
-{
-terms:["rescue","adoption","help","need"],
-url:"pets-in-need.html"
-},
-
-{
-terms:["fashion","style","accessories"],
-url:"pet-fashion.html"
-},
-
-{
-terms:["club","discount","member","subscribe","subscription"],
-url:"club.html"
-},
-
-{
-terms:["market","marketplace","listing","service"],
-url:"pet-marketplace.html"
-},
-
-{
-terms:["article","story","interview"],
-url:"articles.html"
-}
-
-];
-
-const route=
-routes.find(item=>
-item.terms.some(term=>query.includes(term))
+document.getElementById("menuButton")
+.addEventListener(
+"click",
+openMenu
 );
 
-window.location.href=
-route
-?route.url
-:"articles.html";
-
-}
-
-function getNarrationLanguage(){
-
-const language=
-window.PetsDogueLanguage &&
-window.PetsDogueLanguage.getCurrentLanguage
-?window.PetsDogueLanguage.getCurrentLanguage()
-:null;
-
-if(
-window.PetsDogueLanguage &&
-window.PetsDogueLanguage.getSpeechLanguage
-){
-
-return window.PetsDogueLanguage.getSpeechLanguage();
-
-}
-
-const map={
-en:"en-GB",
-uk:"uk-UA",
-ru:"ru-RU",
-fr:"fr-FR",
-de:"de-DE",
-es:"es-ES",
-it:"it-IT",
-pt:"pt-PT",
-nl:"nl-NL",
-pl:"pl-PL",
-cs:"cs-CZ",
-sk:"sk-SK",
-hu:"hu-HU",
-ro:"ro-RO",
-bg:"bg-BG",
-el:"el-GR",
-sv:"sv-SE",
-da:"da-DK",
-no:"nb-NO",
-fi:"fi-FI",
-tr:"tr-TR",
-ar:"ar-SA",
-hi:"hi-IN"
-};
-
-const code=
-typeof language==="string"
-?language
-:language?.code;
-
-return map[code]||"en-GB";
-
-}
-
-function getAvailableVoices(){
-
-return window.speechSynthesis
-?window.speechSynthesis.getVoices()
-:[];
-
-}
-
-function chooseVoice(gender,languageCode){
-
-const voices=getAvailableVoices();
-
-const prefix=
-String(languageCode||"en")
-.toLowerCase()
-.split("-")[0];
-
-const languageVoices=
-voices.filter(v=>
-v.lang &&
-v.lang.toLowerCase().startsWith(prefix)
+document.getElementById("closeMenuButton")
+.addEventListener(
+"click",
+closeMenu
 );
 
-const female=[
-"samantha",
-"victoria",
-"karen",
-"moira",
-"tessa",
-"serena",
-"susan",
-"zira",
-"aria",
-"jenny",
-"sonia",
-"libby",
-"ava",
-"female"
-];
-
-const male=[
-"daniel",
-"alex",
-"fred",
-"george",
-"arthur",
-"david",
-"mark",
-"guy",
-"ryan",
-"liam",
-"oliver",
-"male"
-];
-
-const names=
-gender==="male"
-?male
-:female;
-
-return languageVoices.find(v=>
-names.some(n=>
-v.name.toLowerCase().includes(n)
-)
-)
-||languageVoices[0]
-||voices[0]
-||null;
-
-}
-
-function listenToArticle(button){
-
-if(!window.speechSynthesis){
-
-alert(
-homeT(
-"messages.narrationUnsupported",
-"Article narration is not supported by this browser."
-)
+document.getElementById("menuOverlay")
+.addEventListener(
+"click",
+closeMenu
 );
 
-return;
+document.getElementById("languageSelect")
+.addEventListener(
+"change",
+event=>{
 
-}
-
-if(activeSpeechButton===button){
-
-stopNarration();
-return;
-
-}
-
-stopNarration();
-
-const article=
-button.closest(".article-row");
-
-const translatedText=
-article
-.querySelector(".article-text")
-?.innerText
-?.trim();
-
-const fallbackText=
-article.dataset.speech||"";
-
-const speechText=
-translatedText||fallbackText;
-
-if(!speechText){
-return;
-}
-
-const utterance=
-new SpeechSynthesisUtterance(speechText);
-
-const gender=
-document.getElementById("voiceGender").value;
-
-const speed=
-Number(
-document.getElementById("voiceSpeed").value
+applyLanguage(
+event.target.value
 );
-
-const lang=
-getNarrationLanguage();
-
-const voice=
-chooseVoice(gender,lang);
-
-utterance.lang=lang;
-
-if(voice){
-utterance.voice=voice;
-}
-
-utterance.rate=speed;
-utterance.pitch=gender==="female"?1.05:.92;
-utterance.volume=1;
-
-button.classList.add("speaking");
-button.textContent="■";
-
-activeSpeechButton=button;
-
-utterance.onend=
-utterance.onerror=
-()=>{
-
-button.classList.remove("speaking");
-button.textContent="🔊";
-activeSpeechButton=null;
-
-};
-
-window.speechSynthesis.speak(utterance);
-
-}
-
-function stopNarration(){
-
-if(window.speechSynthesis){
-
-window.speechSynthesis.cancel();
-
-}
-
-if(activeSpeechButton){
-
-activeSpeechButton.classList.remove("speaking");
-activeSpeechButton.textContent="🔊";
-activeSpeechButton=null;
-
-}
-
-}
-
-function subscribeNewsletter(){
-
-const email=
-document
-.getElementById("newsletterEmail")
-.value
-.trim();
-
-if(
-!email ||
-!email.includes("@")
-){
-
-alert(
-homeT(
-"messages.invalidEmail",
-"Please enter a valid email address."
-)
-);
-
-return;
-
-}
-
-let subscribers=[];
-
-try{
-
-subscribers=
-JSON.parse(
-localStorage.getItem("pets_dogue_newsletter")||"[]"
-);
-
-if(!Array.isArray(subscribers)){
-subscribers=[];
-}
-
-}catch(e){
-
-subscribers=[];
-
-}
-
-if(!subscribers.includes(email)){
-subscribers.push(email);
-}
-
-localStorage.setItem(
-"pets_dogue_newsletter",
-JSON.stringify(subscribers)
-);
-
-document.getElementById("newsletterEmail").value="";
-
-alert(
-homeT(
-"messages.newsletterSuccess",
-"Welcome to the PETS & DOGUE community."
-)
-);
-
-}
-
-/* LANGUAGE MENU */
-
-document
-.getElementById("languageSelect")
-.addEventListener("change",function(){
-
-const language=this.value;
-
-if(!HOME_SUPPORTED.includes(language)){
-return;
-}
-
-localStorage.setItem(
-HOME_LANGUAGE_KEY,
-language
-);
-
-document.documentElement.lang=language;
-document.documentElement.dir=language==="ar"?"rtl":"ltr";
-
-applyOnboardingLanguage();
-
-window.dispatchEvent(
-new CustomEvent(
-"petsdogue:languagechange",
-{detail:{language}}
-)
-);
-
-setTimeout(()=>{
-
-window.location.reload();
-
-},60);
-
-});
-
-/* EVENTS */
-
-document.addEventListener("keydown",event=>{
-
-if(event.key==="Escape"){
-
-closeMenu();
-closeSearch();
-stopNarration();
-
-}
-
-});
-
-document
-.getElementById("siteSearchInput")
-.addEventListener("keydown",event=>{
-
-if(event.key==="Enter"){
-runSiteSearch();
-}
-
-});
-
-window.addEventListener(
-"beforeunload",
-stopNarration
-);
-
-if(window.speechSynthesis){
-
-window.speechSynthesis.onvoiceschanged=
-()=>getAvailableVoices();
-
-}
-
-window.addEventListener(
-"petsdogue:languagechange",
-()=>{
-
-applyOnboardingLanguage();
-applyQuickUiLanguage();
 
 }
 );
 
 document.addEventListener(
-"DOMContentLoaded",
-()=>{
+"keydown",
+event=>{
 
-applyOnboardingLanguage();
-applyQuickUiLanguage();
-initFirstVisitFlow();
+if(
+event.key==="Escape"
+){
+
+closeMenu();
+
+}
 
 }
 );
 
-</script>
+/* =========================================================
+START
+========================================================= */
 
-<script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/home.js?v=3"></script>
-<script src="/i18n/engine.js?v=3"></script>
+const savedLanguage=
+localStorage.getItem(
+LANGUAGE_KEY
+)||
+"en";
+
+applyLanguage(
+T[savedLanguage]
+?savedLanguage
+:"en"
+);
+
+</script>
 
 </body>
 </html>
