@@ -3,8 +3,9 @@
 /*
 =========================================================
 PETS & DOGUE
-Pet-Friendly Places API
+PET-FRIENDLY PLACES API
 Vercel Serverless Function
+=========================================================
 
 Required environment variable:
 
@@ -13,10 +14,27 @@ or
 GOOGLE_MAPS_API_KEY
 
 This API:
-1. Searches real Google Places.
-2. Returns real Google place photos.
-3. Proxies photos through this endpoint so the API key
-   is never exposed in the browser.
+
+POST
+/api/pet-friendly-places
+
+Searches real Google Places.
+
+GET
+/api/pet-friendly-places?photo=...
+
+Securely proxies real Google place photographs.
+
+IMPORTANT:
+
+Some Google search responses do not include photos even
+when the actual Google Place has photographs.
+
+For those places this endpoint automatically performs a
+Place Details request by place ID and enriches the result
+with real Google photographs.
+
+The API key never reaches the browser.
 =========================================================
 */
 
@@ -42,8 +60,20 @@ const GOOGLE_PLACE_BASE =
 const DEFAULT_MAX_RESULTS =
   20;
 
+const MAX_RESULTS =
+  20;
+
 const MAX_RADIUS_METERS =
   50000;
+
+const PHOTO_WIDTH_DEFAULT =
+  1000;
+
+const PHOTO_WIDTH_MIN =
+  200;
+
+const PHOTO_WIDTH_MAX =
+  1600;
 
 
 /* =========================================================
@@ -62,8 +92,7 @@ const CATEGORY_TYPES = {
   ],
 
   hotel:[
-    "hotel",
-    "lodging"
+    "hotel"
   ],
 
   veterinary:[
@@ -75,8 +104,7 @@ const CATEGORY_TYPES = {
   ],
 
   "dog-park":[
-    "dog_park",
-    "park"
+    "dog_park"
   ],
 
   park:[
@@ -93,6 +121,54 @@ const CATEGORY_TYPES = {
   ]
 
 };
+
+
+/* =========================================================
+   FIELD MASKS
+========================================================= */
+
+const SEARCH_FIELD_MASK = [
+  "places.id",
+  "places.displayName",
+  "places.formattedAddress",
+  "places.location",
+  "places.primaryType",
+  "places.primaryTypeDisplayName",
+  "places.types",
+  "places.rating",
+  "places.userRatingCount",
+  "places.websiteUri",
+  "places.googleMapsUri",
+  "places.nationalPhoneNumber",
+  "places.internationalPhoneNumber",
+  "places.regularOpeningHours",
+  "places.currentOpeningHours",
+  "places.photos",
+  "places.businessStatus",
+  "places.allowsDogs"
+].join(",");
+
+
+const DETAILS_FIELD_MASK = [
+  "id",
+  "displayName",
+  "formattedAddress",
+  "location",
+  "primaryType",
+  "primaryTypeDisplayName",
+  "types",
+  "rating",
+  "userRatingCount",
+  "websiteUri",
+  "googleMapsUri",
+  "nationalPhoneNumber",
+  "internationalPhoneNumber",
+  "regularOpeningHours",
+  "currentOpeningHours",
+  "photos",
+  "businessStatus",
+  "allowsDogs"
+].join(",");
 
 
 /* =========================================================
@@ -164,67 +240,108 @@ function clamp(
 
 
 function cleanString(
-  value
-){
-
-  return String(
-    value ?? ""
-  ).trim();
-
-}
-
-
-function getPhotoProxyUrl(
-  request,
-  photoName,
-  width = 1000
+  value,
+  maxLength = 2000
 ){
 
   if(
-    !photoName
+    value === null ||
+    value === undefined
   ){
 
     return "";
 
   }
 
-  const host =
-    request.headers[
-      "x-forwarded-host"
-    ] ||
-    request.headers.host ||
-    "";
+  return String(
+    value
+  )
+    .trim()
+    .slice(
+      0,
+      maxLength
+    );
 
-  const protocol =
-    request.headers[
-      "x-forwarded-proto"
-    ] ||
-    "https";
+}
+
+
+function safeArray(
+  value
+){
+
+  return Array.isArray(
+    value
+  )
+    ? value
+    : [];
+
+}
+
+
+function uniqueStrings(
+  values
+){
+
+  return Array.from(
+    new Set(
+      safeArray(
+        values
+      )
+        .map(
+          function(value){
+
+            return cleanString(
+              value,
+              200
+            );
+
+          }
+        )
+        .filter(Boolean)
+    )
+  );
+
+}
+
+
+/* =========================================================
+   PHOTO PROXY URL
+========================================================= */
+
+function getPhotoProxyUrl(
+  request,
+  photoName,
+  width = PHOTO_WIDTH_DEFAULT
+){
+
+  const name =
+    cleanString(
+      photoName,
+      1600
+    );
 
   if(
-    !host
+    !name
   ){
 
-    return (
-      "/api/pet-friendly-places?photo=" +
-      encodeURIComponent(
-        photoName
-      ) +
-      "&width=" +
-      encodeURIComponent(
-        width
-      )
-    );
+    return "";
 
   }
 
+  /*
+  Always prefer a relative URL.
+
+  This is safer across:
+  - production domain
+  - Vercel previews
+  - custom domain
+  - www / non-www
+  */
+
   return (
-    protocol +
-    "://" +
-    host +
     "/api/pet-friendly-places?photo=" +
     encodeURIComponent(
-      photoName
+      name
     ) +
     "&width=" +
     encodeURIComponent(
@@ -235,13 +352,18 @@ function getPhotoProxyUrl(
 }
 
 
+/* =========================================================
+   CATEGORY NORMALISATION
+========================================================= */
+
 function normalizeCategory(
   category
 ){
 
   const value =
     cleanString(
-      category
+      category,
+      80
     )
       .toLowerCase();
 
@@ -249,12 +371,15 @@ function normalizeCategory(
 
     cafes:"cafe",
     coffee:"cafe",
+    coffeeshop:"cafe",
     coffee_shop:"cafe",
 
     restaurants:"restaurant",
 
     hotels:"hotel",
     lodging:"hotel",
+    motel:"hotel",
+    resort:"hotel",
 
     vet:"veterinary",
     vets:"veterinary",
@@ -269,10 +394,12 @@ function normalizeCategory(
 
     park:"park",
     parks:"park",
+
     dogpark:"dog-park",
     "dog park":"dog-park",
     dog_park:"dog-park",
 
+    beach:"beach",
     beaches:"beach",
 
     event:"events",
@@ -293,20 +420,129 @@ function normalizeCategory(
 }
 
 
-function detectCategoryFromTypes(
-  types
+/* =========================================================
+   GOOGLE PLACE TYPES
+========================================================= */
+
+function getPlaceTypes(
+  place
 ){
 
-  const values =
-    Array.isArray(
-      types
+  const types =
+    [];
+
+  const primaryType =
+    cleanString(
+      place?.primaryType,
+      160
     )
-      ? types
-      : [];
+      .toLowerCase();
 
   if(
-    values.includes(
-      "veterinary_care"
+    primaryType
+  ){
+
+    types.push(
+      primaryType
+    );
+
+  }
+
+  safeArray(
+    place?.types
+  )
+    .forEach(
+      function(type){
+
+        const normalized =
+          cleanString(
+            type,
+            160
+          )
+            .toLowerCase();
+
+        if(
+          normalized &&
+          !types.includes(
+            normalized
+          )
+        ){
+
+          types.push(
+            normalized
+          );
+
+        }
+
+      }
+    );
+
+  return types;
+
+}
+
+
+function hasExactType(
+  types,
+  values
+){
+
+  return values.some(
+    function(value){
+
+      return types.includes(
+        value
+      );
+
+    }
+  );
+
+}
+
+
+function hasEndingType(
+  types,
+  ending
+){
+
+  return types.some(
+    function(type){
+
+      return (
+        type === ending ||
+        type.endsWith(
+          "_" + ending
+        )
+      );
+
+    }
+  );
+
+}
+
+
+function detectCategoryFromTypes(
+  place
+){
+
+  const types =
+    getPlaceTypes(
+      place
+    );
+
+
+  /*
+  VETERINARY
+  */
+
+  if(
+    hasExactType(
+      types,
+      [
+        "veterinary_care",
+        "veterinarian",
+        "animal_hospital"
+      ]
     )
   ){
 
@@ -314,9 +550,18 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  PET SHOP
+  */
+
   if(
-    values.includes(
-      "pet_store"
+    hasExactType(
+      types,
+      [
+        "pet_store",
+        "pet_supply_store"
+      ]
     )
   ){
 
@@ -324,9 +569,17 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  DOG PARK
+  */
+
   if(
-    values.includes(
-      "dog_park"
+    hasExactType(
+      types,
+      [
+        "dog_park"
+      ]
     )
   ){
 
@@ -334,9 +587,17 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  BEACH
+  */
+
   if(
-    values.includes(
-      "beach"
+    hasExactType(
+      types,
+      [
+        "beach"
+      ]
     )
   ){
 
@@ -344,12 +605,32 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  HOTEL
+
+  Google frequently returns more specific types such as:
+  resort_hotel
+  extended_stay_hotel
+  etc.
+  */
+
   if(
-    values.includes(
-      "hotel"
+    hasExactType(
+      types,
+      [
+        "hotel",
+        "lodging",
+        "motel",
+        "hostel",
+        "guest_house",
+        "bed_and_breakfast",
+        "resort_hotel"
+      ]
     ) ||
-    values.includes(
-      "lodging"
+    hasEndingType(
+      types,
+      "hotel"
     )
   ){
 
@@ -357,8 +638,24 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  RESTAURANT
+  */
+
   if(
-    values.includes(
+    hasExactType(
+      types,
+      [
+        "restaurant",
+        "bar",
+        "pub",
+        "food_court",
+        "brasserie"
+      ]
+    ) ||
+    hasEndingType(
+      types,
       "restaurant"
     )
   ){
@@ -367,12 +664,24 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  CAFE
+  */
+
   if(
-    values.includes(
-      "cafe"
+    hasExactType(
+      types,
+      [
+        "cafe",
+        "coffee_shop",
+        "coffee_store",
+        "tea_house"
+      ]
     ) ||
-    values.includes(
-      "coffee_shop"
+    hasEndingType(
+      types,
+      "cafe"
     )
   ){
 
@@ -380,9 +689,17 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  PARK
+  */
+
   if(
-    values.includes(
-      "park"
+    hasExactType(
+      types,
+      [
+        "park"
+      ]
     )
   ){
 
@@ -390,9 +707,17 @@ function detectCategoryFromTypes(
 
   }
 
+
+  /*
+  EVENT
+  */
+
   if(
-    values.includes(
-      "event_venue"
+    hasExactType(
+      types,
+      [
+        "event_venue"
+      ]
     )
   ){
 
@@ -400,10 +725,15 @@ function detectCategoryFromTypes(
 
   }
 
+
   return "other";
 
 }
 
+
+/* =========================================================
+   DISPLAY NAME
+========================================================= */
 
 function getDisplayName(
   place
@@ -414,44 +744,84 @@ function getDisplayName(
     "string"
   ){
 
-    return place.displayName;
+    return cleanString(
+      place.displayName,
+      500
+    );
 
   }
 
-  return (
-    place?.displayName?.text ||
-    ""
+  return cleanString(
+    place?.displayName?.text,
+    500
   );
 
 }
 
 
-function getPhoto(
-  request,
+/* =========================================================
+   OPENING HOURS
+========================================================= */
+
+function normalizeOpeningHours(
   place
 ){
 
-  const photos =
-    Array.isArray(
-      place?.photos
-    )
-      ? place.photos
-      : [];
+  const hours =
+    place?.currentOpeningHours ||
+    place?.regularOpeningHours ||
+    null;
 
   if(
-    !photos.length
+    !hours
   ){
 
     return null;
 
   }
 
-  const photo =
-    photos[0];
+  return {
+
+    openNow:
+      typeof hours.openNow ===
+      "boolean"
+        ? hours.openNow
+        : null,
+
+    weekdayDescriptions:
+      safeArray(
+        hours.weekdayDescriptions
+      )
+        .map(
+          function(item){
+
+            return cleanString(
+              item,
+              300
+            );
+
+          }
+        )
+        .filter(Boolean)
+
+  };
+
+}
+
+
+/* =========================================================
+   PHOTO NORMALISATION
+========================================================= */
+
+function normalizePhoto(
+  request,
+  photo
+){
 
   const name =
     cleanString(
-      photo?.name
+      photo?.name,
+      1600
     );
 
   if(
@@ -463,44 +833,88 @@ function getPhoto(
   }
 
   return {
+
     name,
+
     widthPx:
       numberOrNull(
-        photo.widthPx
+        photo?.widthPx
       ),
+
     heightPx:
       numberOrNull(
-        photo.heightPx
+        photo?.heightPx
       ),
+
     url:
       getPhotoProxyUrl(
         request,
         name,
-        1000
+        PHOTO_WIDTH_DEFAULT
       )
+
   };
 
 }
 
 
+function getPhotos(
+  request,
+  place
+){
+
+  return safeArray(
+    place?.photos
+  )
+    .slice(
+      0,
+      10
+    )
+    .map(
+      function(photo){
+
+        return normalizePhoto(
+          request,
+          photo
+        );
+
+      }
+    )
+    .filter(Boolean);
+
+}
+
+
+function getPrimaryPhoto(
+  request,
+  place
+){
+
+  const photos =
+    getPhotos(
+      request,
+      place
+    );
+
+  return photos.length
+    ? photos[0]
+    : null;
+
+}
+
+
 /* =========================================================
-   PET FRIENDLY DETECTION
+   PET-FRIENDLY DETECTION
 ========================================================= */
 
 function isExplicitlyDogFriendly(
   place
 ){
 
-  if(
+  return (
     place?.allowsDogs ===
     true
-  ){
-
-    return true;
-
-  }
-
-  return false;
+  );
 
 }
 
@@ -553,16 +967,18 @@ function normalizeGooglePlace(
 
   const detectedCategory =
     detectCategoryFromTypes(
-      place?.types
+      place
     );
 
   let category =
-    requestedCategory;
+    normalizeCategory(
+      requestedCategory
+    );
 
   if(
-    !category ||
     category === "all" ||
-    category === "dog-park"
+    category === "dog-park" ||
+    !category
   ){
 
     category =
@@ -579,51 +995,37 @@ function normalizeGooglePlace(
 
   }
 
-  const photo =
-    getPhoto(
+  const photos =
+    getPhotos(
       request,
       place
     );
 
-  const openingHours =
-    place?.currentOpeningHours
-      ? {
-          openNow:
-            typeof place
-              .currentOpeningHours
-              .openNow ===
-            "boolean"
-              ? place
-                  .currentOpeningHours
-                  .openNow
-              : null,
-
-          weekdayDescriptions:
-            Array.isArray(
-              place
-                .currentOpeningHours
-                .weekdayDescriptions
-            )
-              ? place
-                  .currentOpeningHours
-                  .weekdayDescriptions
-              : []
-        }
+  const photo =
+    photos.length
+      ? photos[0]
       : null;
 
-  const petFriendly =
+  const explicitDogFriendly =
     isExplicitlyDogFriendly(
       place
-    ) ||
+    );
+
+  const naturallyPetRelevant =
     categoryNaturallyPetRelevant(
       category
     );
+
+  const petFriendly =
+    explicitDogFriendly ||
+    naturallyPetRelevant;
 
   return {
 
     id:
       cleanString(
-        place.id
+        place?.id,
+        500
       ) ||
       (
         "google-" +
@@ -634,7 +1036,8 @@ function normalizeGooglePlace(
 
     providerId:
       cleanString(
-        place.id
+        place?.id,
+        500
       ),
 
     source:
@@ -648,16 +1051,22 @@ function normalizeGooglePlace(
 
     category,
 
+    categoryLabel:
+      cleanString(
+        place?.primaryTypeDisplayName?.text ||
+        place?.primaryType,
+        250
+      ),
+
     types:
-      Array.isArray(
-        place.types
-      )
-        ? place.types
-        : [],
+      getPlaceTypes(
+        place
+      ),
 
     address:
       cleanString(
-        place.formattedAddress
+        place?.formattedAddress,
+        800
       ),
 
     location:{
@@ -667,94 +1076,65 @@ function normalizeGooglePlace(
 
     rating:
       numberOrNull(
-        place.rating
+        place?.rating
       ),
 
     ratingCount:
       numberOrNull(
-        place.userRatingCount
+        place?.userRatingCount
       ) ||
       0,
 
     website:
       cleanString(
-        place.websiteUri
+        place?.websiteUri,
+        2000
       ),
 
     googleMapsUrl:
       cleanString(
-        place.googleMapsUri
+        place?.googleMapsUri,
+        2000
       ),
 
     phone:
       cleanString(
-        place.nationalPhoneNumber ||
-        place.internationalPhoneNumber
+        place?.internationalPhoneNumber ||
+        place?.nationalPhoneNumber,
+        200
       ),
 
-    openingHours,
+    businessStatus:
+      cleanString(
+        place?.businessStatus,
+        120
+      ),
+
+    openingHours:
+      normalizeOpeningHours(
+        place
+      ),
 
     allowsDogs:
-      place?.allowsDogs ===
-      true,
+      explicitDogFriendly,
 
     photo,
 
-    photos:
-      Array.isArray(
-        place.photos
-      )
-        ? place.photos
-            .slice(
-              0,
-              5
-            )
-            .map(
-              function(item){
-
-                const name =
-                  cleanString(
-                    item?.name
-                  );
-
-                if(
-                  !name
-                ){
-
-                  return null;
-
-                }
-
-                return {
-                  name,
-                  widthPx:
-                    numberOrNull(
-                      item.widthPx
-                    ),
-                  heightPx:
-                    numberOrNull(
-                      item.heightPx
-                    ),
-                  url:
-                    getPhotoProxyUrl(
-                      request,
-                      name,
-                      1000
-                    )
-                };
-
-              }
-            )
-            .filter(Boolean)
-        : [],
+    photos,
 
     petFriendly:{
       allowed:
         petFriendly,
+
       verified:
-        isExplicitlyDogFriendly(
-          place
-        )
+        explicitDogFriendly,
+
+      source:
+        explicitDogFriendly
+          ? "google_allows_dogs"
+          : naturallyPetRelevant
+            ? "google_place_type"
+            : "google_search"
     }
 
   };
@@ -763,43 +1143,25 @@ function normalizeGooglePlace(
 
 
 /* =========================================================
-   GOOGLE FIELD MASK
+   GOOGLE POST REQUEST
 ========================================================= */
 
-const FIELD_MASK = [
-  "places.id",
-  "places.displayName",
-  "places.formattedAddress",
-  "places.location",
-  "places.types",
-  "places.rating",
-  "places.userRatingCount",
-  "places.websiteUri",
-  "places.googleMapsUri",
-  "places.nationalPhoneNumber",
-  "places.internationalPhoneNumber",
-  "places.currentOpeningHours",
-  "places.photos",
-  "places.allowsDogs"
-].join(",");
-
-
-/* =========================================================
-   GOOGLE REQUEST
-========================================================= */
-
-async function googleFetch(
+async function googlePost(
   url,
-  body
+  body,
+  fieldMask = SEARCH_FIELD_MASK
 ){
 
   const response =
     await fetch(
       url,
       {
-        method:"POST",
+
+        method:
+          "POST",
 
         headers:{
+
           "Content-Type":
             "application/json",
 
@@ -807,46 +1169,362 @@ async function googleFetch(
             GOOGLE_API_KEY,
 
           "X-Goog-FieldMask":
-            FIELD_MASK
+            fieldMask
+
         },
 
         body:
           JSON.stringify(
             body
           )
+
       }
     );
 
-  const data =
-    await response
-      .json()
-      .catch(
-        function(){
+  const raw =
+    await response.text();
 
-          return {};
+  let data =
+    {};
 
-        }
-      );
+  if(
+    raw
+  ){
+
+    try{
+
+      data =
+        JSON.parse(
+          raw
+        );
+
+    }catch{
+
+      data = {
+        raw
+      };
+
+    }
+
+  }
 
   if(
     !response.ok
   ){
 
     const message =
-      data?.error?.message ||
-      data?.message ||
-      (
-        "Google Places request failed with status " +
-        response.status
+      cleanString(
+        data?.error?.message ||
+        data?.message ||
+        "",
+        1200
       );
 
-    throw new Error(
-      message
-    );
+    const error =
+      new Error(
+        message ||
+        (
+          "Google Places request failed with status " +
+          response.status
+        )
+      );
+
+    error.status =
+      response.status;
+
+    throw error;
 
   }
 
   return data;
+
+}
+
+
+/* =========================================================
+   GOOGLE PLACE DETAILS
+========================================================= */
+
+async function fetchPlaceDetails(
+  placeId
+){
+
+  const id =
+    cleanString(
+      placeId,
+      500
+    );
+
+  if(
+    !id
+  ){
+
+    return null;
+
+  }
+
+  const url =
+    GOOGLE_PLACE_BASE +
+    "/places/" +
+    encodeURIComponent(
+      id
+    );
+
+  const response =
+    await fetch(
+      url,
+      {
+
+        method:
+          "GET",
+
+        headers:{
+
+          "X-Goog-Api-Key":
+            GOOGLE_API_KEY,
+
+          "X-Goog-FieldMask":
+            DETAILS_FIELD_MASK
+
+        }
+
+      }
+    );
+
+  const raw =
+    await response.text();
+
+  let data =
+    null;
+
+  if(
+    raw
+  ){
+
+    try{
+
+      data =
+        JSON.parse(
+          raw
+        );
+
+    }catch{
+
+      data =
+        null;
+
+    }
+
+  }
+
+  if(
+    !response.ok
+  ){
+
+    console.warn(
+      "PETS & DOGUE Place Details failed:",
+      id,
+      response.status
+    );
+
+    return null;
+
+  }
+
+  return data;
+
+}
+
+
+/* =========================================================
+   MERGE RAW GOOGLE DATA
+========================================================= */
+
+function mergeRawPlaceData(
+  original,
+  details
+){
+
+  if(
+    !details
+  ){
+
+    return original;
+
+  }
+
+  const result =
+    Object.assign(
+      {},
+      original,
+      details
+    );
+
+  /*
+  Do not overwrite useful search data with empty detail data.
+  */
+
+  [
+    "displayName",
+    "formattedAddress",
+    "location",
+    "primaryType",
+    "primaryTypeDisplayName",
+    "types",
+    "rating",
+    "userRatingCount",
+    "websiteUri",
+    "googleMapsUri",
+    "nationalPhoneNumber",
+    "internationalPhoneNumber",
+    "regularOpeningHours",
+    "currentOpeningHours",
+    "photos",
+    "businessStatus",
+    "allowsDogs"
+  ].forEach(
+    function(key){
+
+      const value =
+        details[
+          key
+        ];
+
+      const emptyArray =
+        Array.isArray(
+          value
+        ) &&
+        value.length ===
+        0;
+
+      if(
+        value === undefined ||
+        value === null ||
+        value === "" ||
+        emptyArray
+      ){
+
+        result[
+          key
+        ] =
+          original[
+            key
+          ];
+
+      }
+
+    }
+  );
+
+  return result;
+
+}
+
+
+/* =========================================================
+   PHOTO ENRICHMENT
+========================================================= */
+
+async function enrichRawPlaceWithDetails(
+  place
+){
+
+  const hasPhotos =
+    Array.isArray(
+      place?.photos
+    ) &&
+    place.photos.length >
+    0;
+
+  /*
+  Search already returned photos.
+  Nothing else needed.
+  */
+
+  if(
+    hasPhotos
+  ){
+
+    return place;
+
+  }
+
+  const placeId =
+    cleanString(
+      place?.id,
+      500
+    );
+
+  if(
+    !placeId
+  ){
+
+    return place;
+
+  }
+
+  try{
+
+    const details =
+      await fetchPlaceDetails(
+        placeId
+      );
+
+    return mergeRawPlaceData(
+      place,
+      details
+    );
+
+  }catch(
+    error
+  ){
+
+    console.warn(
+      "PETS & DOGUE photo enrichment failed:",
+      placeId,
+      error?.message ||
+      error
+    );
+
+    return place;
+
+  }
+
+}
+
+
+/* =========================================================
+   ENRICH A GROUP OF SEARCH RESULTS
+========================================================= */
+
+async function enrichSearchPlaces(
+  places
+){
+
+  const values =
+    safeArray(
+      places
+    );
+
+  /*
+  Only places without photos trigger an additional API call.
+  Calls run concurrently for speed.
+  */
+
+  const enriched =
+    await Promise.all(
+      values.map(
+        function(place){
+
+          return enrichRawPlaceWithDetails(
+            place
+          );
+
+        }
+      )
+    );
+
+  return enriched;
 
 }
 
@@ -864,9 +1542,14 @@ async function searchNearbyCategory(
   maxResults
 ){
 
+  const normalizedCategory =
+    normalizeCategory(
+      category
+    );
+
   const types =
     CATEGORY_TYPES[
-      category
+      normalizedCategory
     ] ||
     [];
 
@@ -881,51 +1564,61 @@ async function searchNearbyCategory(
   const body = {
 
     includedTypes:
-      types,
+      uniqueStrings(
+        types
+      ),
 
     maxResultCount:
       clamp(
         maxResults,
         1,
-        20
+        MAX_RESULTS
       ),
 
     rankPreference:
       "DISTANCE",
 
     locationRestriction:{
+
       circle:{
+
         center:{
           latitude,
           longitude
         },
+
         radius
+
       }
+
     }
 
   };
 
   const data =
-    await googleFetch(
+    await googlePost(
       GOOGLE_NEARBY_URL,
       body
     );
 
-  const places =
-    Array.isArray(
+  const rawPlaces =
+    safeArray(
       data?.places
-    )
-      ? data.places
-      : [];
+    );
 
-  return places
+  const enrichedPlaces =
+    await enrichSearchPlaces(
+      rawPlaces
+    );
+
+  return enrichedPlaces
     .map(
       function(place){
 
         return normalizeGooglePlace(
           request,
           place,
-          category
+          normalizedCategory
         );
 
       }
@@ -937,8 +1630,6 @@ async function searchNearbyCategory(
 
 /* =========================================================
    TEXT SEARCH
-   Used as a supplement for categories where Nearby Search
-   may return too few results.
 ========================================================= */
 
 async function searchTextCategory(
@@ -949,6 +1640,11 @@ async function searchTextCategory(
   category,
   maxResults
 ){
+
+  const normalizedCategory =
+    normalizeCategory(
+      category
+    );
 
   const queries = {
 
@@ -977,13 +1673,13 @@ async function searchTextCategory(
       "dog friendly beach",
 
     events:
-      "dog show pet event equestrian event"
+      "pet event dog show equestrian event"
 
   };
 
   const textQuery =
     queries[
-      category
+      normalizedCategory
     ];
 
   if(
@@ -1002,42 +1698,57 @@ async function searchTextCategory(
       clamp(
         maxResults,
         1,
-        20
+        MAX_RESULTS
       ),
 
     locationBias:{
+
       circle:{
+
         center:{
           latitude,
           longitude
         },
+
         radius
+
       }
+
     }
 
   };
 
   const data =
-    await googleFetch(
+    await googlePost(
       GOOGLE_TEXT_URL,
       body
     );
 
-  const places =
-    Array.isArray(
+  const rawPlaces =
+    safeArray(
       data?.places
-    )
-      ? data.places
-      : [];
+    );
 
-  return places
+  /*
+  Text Search frequently returns hotel results without
+  a photos array.
+
+  Place Details enrichment below specifically solves this.
+  */
+
+  const enrichedPlaces =
+    await enrichSearchPlaces(
+      rawPlaces
+    );
+
+  return enrichedPlaces
     .map(
       function(place){
 
         return normalizeGooglePlace(
           request,
           place,
-          category
+          normalizedCategory
         );
 
       }
@@ -1074,17 +1785,20 @@ function haversineKm(
 
   const dLat =
     toRad(
-      lat2 - lat1
+      lat2 -
+      lat1
     );
 
   const dLng =
     toRad(
-      lng2 - lng1
+      lng2 -
+      lng1
     );
 
   const a =
     Math.sin(
-      dLat / 2
+      dLat /
+      2
     ) ** 2 +
     Math.cos(
       toRad(
@@ -1097,15 +1811,21 @@ function haversineKm(
       )
     ) *
     Math.sin(
-      dLng / 2
+      dLng /
+      2
     ) ** 2;
 
   return (
     earthRadius *
     2 *
     Math.atan2(
-      Math.sqrt(a),
-      Math.sqrt(1 - a)
+      Math.sqrt(
+        a
+      ),
+      Math.sqrt(
+        1 -
+        a
+      )
     )
   );
 
@@ -1116,39 +1836,182 @@ function haversineKm(
    DEDUPLICATION
 ========================================================= */
 
+function placeHasPhoto(
+  place
+){
+
+  return Boolean(
+    place?.photo?.url ||
+    (
+      Array.isArray(
+        place?.photos
+      ) &&
+      place.photos.some(
+        function(photo){
+
+          return Boolean(
+            photo?.url
+          );
+
+        }
+      )
+    )
+  );
+
+}
+
+
+function mergePlaceRecords(
+  existing,
+  incoming
+){
+
+  if(
+    !existing
+  ){
+
+    return incoming;
+
+  }
+
+  if(
+    !incoming
+  ){
+
+    return existing;
+
+  }
+
+  const existingHasPhoto =
+    placeHasPhoto(
+      existing
+    );
+
+  const incomingHasPhoto =
+    placeHasPhoto(
+      incoming
+    );
+
+  let preferred =
+    existing;
+
+  let fallback =
+    incoming;
+
+  if(
+    !existingHasPhoto &&
+    incomingHasPhoto
+  ){
+
+    preferred =
+      incoming;
+
+    fallback =
+      existing;
+
+  }
+
+  const merged =
+    Object.assign(
+      {},
+      fallback,
+      preferred
+    );
+
+  /*
+  Explicitly preserve photo arrays from either record.
+  */
+
+  if(
+    !merged.photo
+  ){
+
+    merged.photo =
+      existing.photo ||
+      incoming.photo ||
+      null;
+
+  }
+
+  if(
+    !Array.isArray(
+      merged.photos
+    ) ||
+    !merged.photos.length
+  ){
+
+    merged.photos =
+      safeArray(
+        existing.photos
+      ).length
+        ? existing.photos
+        : safeArray(
+            incoming.photos
+          );
+
+  }
+
+  return merged;
+
+}
+
+
 function mergePlaces(
   places,
   latitude,
   longitude
 ){
 
-  const map =
+  const placeMap =
     new Map();
 
-  places
+  safeArray(
+    places
+  )
     .filter(Boolean)
     .forEach(
       function(place){
 
         const id =
           cleanString(
-            place.id
+            place?.id,
+            600
           );
+
+        const lat =
+          numberOrNull(
+            place?.location?.lat
+          );
+
+        const lng =
+          numberOrNull(
+            place?.location?.lng
+          );
+
+        if(
+          lat === null ||
+          lng === null
+        ){
+
+          return;
+
+        }
 
         const fallbackKey =
           (
             cleanString(
-              place.name
+              place?.name,
+              500
             )
               .toLowerCase() +
             "|" +
-            Number(
-              place.location?.lat
-            ).toFixed(5) +
+            lat.toFixed(
+              5
+            ) +
             "|" +
-            Number(
-              place.location?.lng
-            ).toFixed(5)
+            lng.toFixed(
+              5
+            )
           );
 
         const key =
@@ -1156,12 +2019,12 @@ function mergePlaces(
           fallbackKey;
 
         if(
-          !map.has(
+          !placeMap.has(
             key
           )
         ){
 
-          map.set(
+          placeMap.set(
             key,
             place
           );
@@ -1171,35 +2034,23 @@ function mergePlaces(
         }
 
         const existing =
-          map.get(
+          placeMap.get(
             key
           );
 
-        /*
-        Prefer the version with a photo.
-        */
-
-        if(
-          !existing.photo &&
-          place.photo
-        ){
-
-          map.set(
-            key,
-            Object.assign(
-              {},
-              existing,
-              place
-            )
-          );
-
-        }
+        placeMap.set(
+          key,
+          mergePlaceRecords(
+            existing,
+            place
+          )
+        );
 
       }
     );
 
   return Array.from(
-    map.values()
+    placeMap.values()
   )
     .map(
       function(place){
@@ -1253,22 +2104,28 @@ async function searchOneCategory(
   maxResults
 ){
 
+  const normalizedCategory =
+    normalizeCategory(
+      category
+    );
+
   const nearbyPromise =
     searchNearbyCategory(
       request,
       latitude,
       longitude,
       radius,
-      category,
+      normalizedCategory,
       maxResults
     )
       .catch(
         function(error){
 
           console.warn(
-            "Nearby search failed:",
-            category,
-            error.message
+            "PETS & DOGUE Nearby search failed:",
+            normalizedCategory,
+            error?.message ||
+            error
           );
 
           return [];
@@ -1282,16 +2139,17 @@ async function searchOneCategory(
       latitude,
       longitude,
       radius,
-      category,
+      normalizedCategory,
       maxResults
     )
       .catch(
         function(error){
 
           console.warn(
-            "Text search failed:",
-            category,
-            error.message
+            "PETS & DOGUE Text search failed:",
+            normalizedCategory,
+            error?.message ||
+            error
           );
 
           return [];
@@ -1305,14 +2163,17 @@ async function searchOneCategory(
       textPromise
     ]);
 
-  return mergePlaces(
-    [
-      ...result[0],
-      ...result[1]
-    ],
-    latitude,
-    longitude
-  )
+  const merged =
+    mergePlaces(
+      [
+        ...result[0],
+        ...result[1]
+      ],
+      latitude,
+      longitude
+    );
+
+  return merged
     .filter(
       function(place){
 
@@ -1327,6 +2188,74 @@ async function searchOneCategory(
 
       }
     )
+    .sort(
+      function(a,b){
+
+        /*
+        Primary sort remains distance.
+
+        When two places are close together,
+        prefer the one with a real photograph.
+        */
+
+        const distanceDifference =
+          Number(
+            a.distance
+          ) -
+          Number(
+            b.distance
+          );
+
+        if(
+          Math.abs(
+            distanceDifference
+          ) >
+          0.75
+        ){
+
+          return distanceDifference;
+
+        }
+
+        const aPhoto =
+          placeHasPhoto(
+            a
+          )
+            ? 1
+            : 0;
+
+        const bPhoto =
+          placeHasPhoto(
+            b
+          )
+            ? 1
+            : 0;
+
+        if(
+          aPhoto !==
+          bPhoto
+        ){
+
+          return (
+            bPhoto -
+            aPhoto
+          );
+
+        }
+
+        return (
+          Number(
+            b.rating ||
+            0
+          ) -
+          Number(
+            a.rating ||
+            0
+          )
+        );
+
+      }
+    )
     .slice(
       0,
       maxResults
@@ -1336,7 +2265,7 @@ async function searchOneCategory(
 
 
 /* =========================================================
-   SEARCH ALL
+   SEARCH ALL CATEGORIES
 ========================================================= */
 
 async function searchAllCategories(
@@ -1347,11 +2276,6 @@ async function searchAllCategories(
   maxResults
 ){
 
-  /*
-  We search the categories separately because Google Nearby
-  Search gives much better real-place coverage this way.
-  */
-
   const categories = [
     "cafe",
     "restaurant",
@@ -1360,6 +2284,12 @@ async function searchAllCategories(
     "pet-shop",
     "dog-park"
   ];
+
+  /*
+  We intentionally retrieve more than the final number
+  from every category, because the final merged grid should
+  contain varied places with real photographs.
+  */
 
   const perCategory =
     8;
@@ -1380,9 +2310,10 @@ async function searchAllCategories(
             function(error){
 
               console.warn(
-                "Category search failed:",
+                "PETS & DOGUE category search failed:",
                 category,
-                error.message
+                error?.message ||
+                error
               );
 
               return [];
@@ -1406,8 +2337,11 @@ async function searchAllCategories(
     );
 
   /*
-  Prefer places with real Google photos for the editorial
-  card grid, but retain distance as the main order.
+  Nearby places stay first.
+
+  Inside roughly the same distance zone we give preference
+  to real photographs because PETS & DOGUE uses an editorial
+  image-led grid.
   */
 
   places.sort(
@@ -1425,7 +2359,7 @@ async function searchAllCategories(
         Math.abs(
           distanceDifference
         ) >
-        1
+        0.75
       ){
 
         return distanceDifference;
@@ -1433,12 +2367,16 @@ async function searchAllCategories(
       }
 
       const aPhoto =
-        a.photo
+        placeHasPhoto(
+          a
+        )
           ? 1
           : 0;
 
       const bPhoto =
-        b.photo
+        placeHasPhoto(
+          b
+        )
           ? 1
           : 0;
 
@@ -1456,10 +2394,12 @@ async function searchAllCategories(
 
       return (
         Number(
-          b.rating || 0
+          b.rating ||
+          0
         ) -
         Number(
-          a.rating || 0
+          a.rating ||
+          0
         )
       );
 
@@ -1475,100 +2415,108 @@ async function searchAllCategories(
 
 
 /* =========================================================
-   PHOTO PROXY
+   PHOTO RESOURCE VALIDATION
 ========================================================= */
 
-async function proxyGooglePhoto(
-  request,
-  response
+function validPhotoResource(
+  value
 ){
 
   const photoName =
     cleanString(
-      request.query?.photo
+      value,
+      1600
     );
-
-  if(
-    !photoName
-  ){
-
-    return response
-      .status(400)
-      .json({
-        ok:false,
-        error:
-          "Missing photo name."
-      });
-
-  }
 
   /*
-  Only allow valid Google Places photo resource names.
+  Google currently uses resources similar to:
+
+  places/PLACE_ID/photos/PHOTO_REFERENCE
+
+  Do not use an overly strict token regex because Google
+  may change the exact characters used in the resource ID.
   */
 
-  if(
-    !/^places\/[^/]+\/photos\/[^/]+$/i.test(
-      photoName
+  return (
+    photoName.startsWith(
+      "places/"
+    ) &&
+    photoName.includes(
+      "/photos/"
+    ) &&
+    photoName.length <
+      1600 &&
+    !photoName.includes(
+      ".."
+    ) &&
+    !photoName.includes(
+      "?"
+    ) &&
+    !photoName.includes(
+      "#"
     )
-  ){
+  );
 
-    return response
-      .status(400)
-      .json({
-        ok:false,
-        error:
-          "Invalid photo resource."
-      });
+}
 
-  }
 
-  const requestedWidth =
-    numberOrNull(
-      request.query?.width
-    ) ||
-    1000;
+/* =========================================================
+   PHOTO MEDIA REQUEST
+========================================================= */
 
-  const width =
-    Math.round(
-      clamp(
-        requestedWidth,
-        200,
-        1600
-      )
-    );
+async function fetchGooglePhotoBytes(
+  photoName,
+  width
+){
 
   const mediaUrl =
     GOOGLE_PLACE_BASE +
     "/" +
     photoName +
-    "/media" +
-    "?maxWidthPx=" +
+    "/media?maxWidthPx=" +
     encodeURIComponent(
       width
-    ) +
-    "&skipHttpRedirect=true" +
-    "&key=" +
-    encodeURIComponent(
-      GOOGLE_API_KEY
     );
 
-  const metadataResponse =
+  /*
+  Preferred method.
+
+  Let Google's media endpoint redirect internally.
+  The server follows it and sends the image bytes to our
+  browser. This is reliable on mobile Chrome/Samsung
+  Internet and does not expose the Google API key.
+  */
+
+  const response =
     await fetch(
       mediaUrl,
       {
+
+        method:
+          "GET",
+
         headers:{
+
+          "X-Goog-Api-Key":
+            GOOGLE_API_KEY,
+
           "Accept":
-            "application/json"
-        }
+            "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+
+        },
+
+        redirect:
+          "follow"
+
       }
     );
 
   if(
-    !metadataResponse.ok
+    !response.ok
   ){
 
-    const errorText =
-      await metadataResponse
+    const details =
+      await response
         .text()
         .catch(
           function(){
@@ -1578,21 +2526,142 @@ async function proxyGooglePhoto(
           }
         );
 
-    console.error(
-      "Google photo metadata error:",
-      metadataResponse.status,
-      errorText
+    const error =
+      new Error(
+        "Google photo media request failed."
+      );
+
+    error.status =
+      response.status;
+
+    error.details =
+      details.slice(
+        0,
+        500
+      );
+
+    throw error;
+
+  }
+
+  const contentType =
+    cleanString(
+      response.headers.get(
+        "content-type"
+      ) ||
+      "",
+      150
     );
 
-    return response
-      .status(
-        metadataResponse.status
-      )
-      .json({
-        ok:false,
-        error:
-          "Google photo could not be loaded."
-      });
+  if(
+    !contentType.startsWith(
+      "image/"
+    )
+  ){
+
+    const error =
+      new Error(
+        "Google photo response was not an image."
+      );
+
+    error.status =
+      502;
+
+    error.details =
+      contentType;
+
+    throw error;
+
+  }
+
+  const arrayBuffer =
+    await response.arrayBuffer();
+
+  const buffer =
+    Buffer.from(
+      arrayBuffer
+    );
+
+  if(
+    !buffer.length
+  ){
+
+    const error =
+      new Error(
+        "Google photo response was empty."
+      );
+
+    error.status =
+      404;
+
+    throw error;
+
+  }
+
+  return {
+
+    buffer,
+
+    contentType
+
+  };
+
+}
+
+
+/* =========================================================
+   PHOTO METADATA FALLBACK
+========================================================= */
+
+async function fetchGooglePhotoViaMetadata(
+  photoName,
+  width
+){
+
+  const metadataUrl =
+    GOOGLE_PLACE_BASE +
+    "/" +
+    photoName +
+    "/media?maxWidthPx=" +
+    encodeURIComponent(
+      width
+    ) +
+    "&skipHttpRedirect=true";
+
+  const metadataResponse =
+    await fetch(
+      metadataUrl,
+      {
+
+        method:
+          "GET",
+
+        headers:{
+
+          "X-Goog-Api-Key":
+            GOOGLE_API_KEY,
+
+          "Accept":
+            "application/json"
+
+        }
+
+      }
+    );
+
+  if(
+    !metadataResponse.ok
+  ){
+
+    const error =
+      new Error(
+        "Google photo metadata request failed."
+      );
+
+    error.status =
+      metadataResponse.status;
+
+    throw error;
 
   }
 
@@ -1609,20 +2678,23 @@ async function proxyGooglePhoto(
 
   const photoUri =
     cleanString(
-      metadata?.photoUri
+      metadata?.photoUri,
+      4000
     );
 
   if(
     !photoUri
   ){
 
-    return response
-      .status(404)
-      .json({
-        ok:false,
-        error:
-          "Photo URL was not returned."
-      });
+    const error =
+      new Error(
+        "Google photo URL was not returned."
+      );
+
+    error.status =
+      404;
+
+    throw error;
 
   }
 
@@ -1630,7 +2702,8 @@ async function proxyGooglePhoto(
     await fetch(
       photoUri,
       {
-        redirect:"follow"
+        redirect:
+          "follow"
       }
     );
 
@@ -1638,23 +2711,44 @@ async function proxyGooglePhoto(
     !imageResponse.ok
   ){
 
-    return response
-      .status(
-        imageResponse.status
-      )
-      .json({
-        ok:false,
-        error:
-          "Photo image could not be loaded."
-      });
+    const error =
+      new Error(
+        "Google photo image request failed."
+      );
+
+    error.status =
+      imageResponse.status;
+
+    throw error;
 
   }
 
   const contentType =
-    imageResponse.headers.get(
-      "content-type"
-    ) ||
-    "image/jpeg";
+    cleanString(
+      imageResponse.headers.get(
+        "content-type"
+      ) ||
+      "",
+      150
+    );
+
+  if(
+    !contentType.startsWith(
+      "image/"
+    )
+  ){
+
+    const error =
+      new Error(
+        "Google photo metadata URL did not return an image."
+      );
+
+    error.status =
+      502;
+
+    throw error;
+
+  }
 
   const arrayBuffer =
     await imageResponse.arrayBuffer();
@@ -1664,9 +2758,185 @@ async function proxyGooglePhoto(
       arrayBuffer
     );
 
+  if(
+    !buffer.length
+  ){
+
+    const error =
+      new Error(
+        "Google photo image was empty."
+      );
+
+    error.status =
+      404;
+
+    throw error;
+
+  }
+
+  return {
+
+    buffer,
+
+    contentType
+
+  };
+
+}
+
+
+/* =========================================================
+   PHOTO PROXY
+========================================================= */
+
+async function proxyGooglePhoto(
+  request,
+  response
+){
+
+  const photoName =
+    cleanString(
+      request.query?.photo,
+      1600
+    );
+
+  if(
+    !photoName
+  ){
+
+    return response
+      .status(
+        400
+      )
+      .json({
+        ok:false,
+        error:
+          "Missing photo name."
+      });
+
+  }
+
+  if(
+    !validPhotoResource(
+      photoName
+    )
+  ){
+
+    return response
+      .status(
+        400
+      )
+      .json({
+        ok:false,
+        error:
+          "Invalid photo resource."
+      });
+
+  }
+
+  const requestedWidth =
+    numberOrNull(
+      request.query?.width
+    ) ||
+    PHOTO_WIDTH_DEFAULT;
+
+  const width =
+    Math.round(
+      clamp(
+        requestedWidth,
+        PHOTO_WIDTH_MIN,
+        PHOTO_WIDTH_MAX
+      )
+    );
+
+  let image =
+    null;
+
+  /*
+  Attempt 1:
+  Direct Google media request.
+  */
+
+  try{
+
+    image =
+      await fetchGooglePhotoBytes(
+        photoName,
+        width
+      );
+
+  }catch(
+    directError
+  ){
+
+    console.warn(
+      "PETS & DOGUE direct Google photo request failed:",
+      directError?.status ||
+      "",
+      directError?.message ||
+      directError
+    );
+
+    /*
+    Attempt 2:
+    Google metadata -> temporary photoUri.
+    */
+
+    try{
+
+      image =
+        await fetchGooglePhotoViaMetadata(
+          photoName,
+          width
+        );
+
+    }catch(
+      metadataError
+    ){
+
+      console.error(
+        "PETS & DOGUE Google photo failed completely:",
+        {
+          photoName,
+          direct:
+            directError?.message ||
+            "",
+          metadata:
+            metadataError?.message ||
+            ""
+        }
+      );
+
+      return response
+        .status(
+          Number(
+            metadataError?.status
+          ) ||
+          Number(
+            directError?.status
+          ) ||
+          404
+        )
+        .json({
+          ok:false,
+          error:
+            "Google photo could not be loaded."
+        });
+
+    }
+
+  }
+
   response.setHeader(
     "Content-Type",
-    contentType
+    image.contentType
+  );
+
+  response.setHeader(
+    "Content-Length",
+    String(
+      image.buffer.length
+    )
   );
 
   response.setHeader(
@@ -1675,16 +2945,16 @@ async function proxyGooglePhoto(
   );
 
   response.setHeader(
-    "Content-Length",
-    String(
-      buffer.length
-    )
+    "Cross-Origin-Resource-Policy",
+    "cross-origin"
   );
 
   return response
-    .status(200)
+    .status(
+      200
+    )
     .send(
-      buffer
+      image.buffer
     );
 
 }
@@ -1700,17 +2970,22 @@ async function handleSearch(
 ){
 
   const body =
-    request.body ||
-    {};
+    request.body &&
+    typeof request.body ===
+    "object"
+      ? request.body
+      : {};
 
   const latitude =
     numberOrNull(
-      body.latitude
+      body.latitude ??
+      body.lat
     );
 
   const longitude =
     numberOrNull(
-      body.longitude
+      body.longitude ??
+      body.lng
     );
 
   if(
@@ -1719,7 +2994,9 @@ async function handleSearch(
   ){
 
     return response
-      .status(400)
+      .status(
+        400
+      )
       .json({
         ok:false,
         error:
@@ -1729,14 +3006,20 @@ async function handleSearch(
   }
 
   if(
-    latitude < -90 ||
-    latitude > 90 ||
-    longitude < -180 ||
-    longitude > 180
+    latitude <
+      -90 ||
+    latitude >
+      90 ||
+    longitude <
+      -180 ||
+    longitude >
+      180
   ){
 
     return response
-      .status(400)
+      .status(
+        400
+      )
       .json({
         ok:false,
         error:
@@ -1770,7 +3053,7 @@ async function handleSearch(
     clamp(
       requestedMaxResults,
       1,
-      20
+      MAX_RESULTS
     );
 
   const category =
@@ -1782,7 +3065,8 @@ async function handleSearch(
     [];
 
   if(
-    category === "all"
+    category ===
+    "all"
   ){
 
     places =
@@ -1809,35 +3093,53 @@ async function handleSearch(
   }
 
   /*
-  Final safety filter:
-  no record without usable coordinates reaches the browser.
+  Never send broken coordinate records to the browser.
   */
 
   places =
+    safeArray(
+      places
+    )
+      .filter(
+        function(place){
+
+          return (
+            numberOrNull(
+              place?.location?.lat
+            ) !== null &&
+            numberOrNull(
+              place?.location?.lng
+            ) !== null
+          );
+
+        }
+      );
+
+  /*
+  Extra photo statistics are useful while this feature is
+  being tested. They do not affect the frontend.
+  */
+
+  const photoCount =
     places.filter(
-      function(place){
-
-        return (
-          numberOrNull(
-            place?.location?.lat
-          ) !== null &&
-          numberOrNull(
-            place?.location?.lng
-          ) !== null
-        );
-
-      }
-    );
+      placeHasPhoto
+    ).length;
 
   response.setHeader(
     "Cache-Control",
-    "s-maxage=300, stale-while-revalidate=900"
+    "s-maxage=120, stale-while-revalidate=600"
   );
 
   return response
-    .status(200)
+    .status(
+      200
+    )
     .json({
+
       ok:true,
+
+      source:
+        "google_places",
 
       center:{
         latitude,
@@ -1851,7 +3153,17 @@ async function handleSearch(
       count:
         places.length,
 
+      photoCount,
+
+      missingPhotoCount:
+        Math.max(
+          0,
+          places.length -
+          photoCount
+        ),
+
       places
+
     });
 
 }
@@ -1871,23 +3183,41 @@ module.exports =
       response
     );
 
+
+    /*
+    CORS preflight
+    */
+
     if(
       request.method ===
       "OPTIONS"
     ){
 
       return response
-        .status(204)
+        .status(
+          204
+        )
         .end();
 
     }
+
+
+    /*
+    API KEY
+    */
 
     if(
       !GOOGLE_API_KEY
     ){
 
+      console.error(
+        "PETS & DOGUE: Google Places API key is missing."
+      );
+
       return response
-        .status(500)
+        .status(
+          500
+        )
         .json({
           ok:false,
           error:
@@ -1896,15 +3226,19 @@ module.exports =
 
     }
 
+
     try{
 
+
       /*
-      GET with ?photo=...
-      Returns the real Google photo image.
+      =======================================================
+      GET PHOTO
+      =======================================================
       */
 
       if(
-        request.method === "GET" &&
+        request.method ===
+          "GET" &&
         request.query?.photo
       ){
 
@@ -1915,31 +3249,52 @@ module.exports =
 
       }
 
+
       /*
-      Small status check.
+      =======================================================
+      GET SERVICE STATUS
+      =======================================================
       */
 
       if(
-        request.method === "GET"
+        request.method ===
+        "GET"
       ){
 
         return response
-          .status(200)
+          .status(
+            200
+          )
           .json({
+
             ok:true,
+
             service:
               "PETS & DOGUE Pet-Friendly Places API",
-            configured:true
+
+            configured:
+              true,
+
+            placeDetailsPhotoEnrichment:
+              true,
+
+            photoProxy:
+              true
+
           });
 
       }
 
+
       /*
-      Place search.
+      =======================================================
+      POST SEARCH
+      =======================================================
       */
 
       if(
-        request.method === "POST"
+        request.method ===
+        "POST"
       ){
 
         return await handleSearch(
@@ -1949,35 +3304,93 @@ module.exports =
 
       }
 
+
+      /*
+      =======================================================
+      UNSUPPORTED METHOD
+      =======================================================
+      */
+
       response.setHeader(
         "Allow",
         "GET, POST, OPTIONS"
       );
 
       return response
-        .status(405)
+        .status(
+          405
+        )
         .json({
           ok:false,
           error:
             "Method not allowed."
         });
 
+
     }catch(
       error
     ){
 
       console.error(
-        "Pet-Friendly Places API:",
+        "PETS & DOGUE Pet-Friendly Places API error:",
         error
       );
 
+      let status =
+        500;
+
+      const upstreamStatus =
+        Number(
+          error?.status
+        );
+
+      if(
+        upstreamStatus ===
+        400
+      ){
+
+        status =
+          400;
+
+      }
+
+      if(
+        upstreamStatus ===
+        429
+      ){
+
+        status =
+          429;
+
+      }
+
+      if(
+        upstreamStatus ===
+          401 ||
+        upstreamStatus ===
+          403
+      ){
+
+        status =
+          502;
+
+      }
+
       return response
-        .status(500)
+        .status(
+          status
+        )
         .json({
+
           ok:false,
+
           error:
-            error?.message ||
+            cleanString(
+              error?.message,
+              1200
+            ) ||
             "Unexpected server error."
+
         });
 
     }
