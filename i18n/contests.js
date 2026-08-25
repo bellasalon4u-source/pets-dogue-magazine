@@ -254,7 +254,7 @@ cover:{title:"Další hvězda obálky DOGUE",prize:"Budoucí příspěvek na ob�
 photo:{title:"Nejlepší fotografie mazlíčka",prize:"Zvýrazněné umístění v galerii Fotografie PETS & DOGUE",rules:"Pošlete nejkrásnější, nejzábavnější nebo nejemotivnější fotografii svého mazlíčka. Přijímáme pouze jasné, originální a odpovědné příspěvky."},
 rescue:{title:"Nejinspirativnější příběh záchrany",prize:"Redakční příspěvek o zvířatech, která potřebují pomoc",rules:"Řekněte nám příběh záchrany nebo adopce, který si zaslouží pozornost, péči a podporu komunity."}
 }
-} ,
+},
 
 sk:{
 meta:{title:"Súťaže & ceny | PETS & DOGUE",description:"Objavte súťaže PETS & DOGUE, komunitné hlasovanie, ceny, výzvy o obálku a víťazov."},
@@ -289,7 +289,7 @@ search:{placeholder:"Keresés verseny, díj, győztes vagy állapot szerint...",
 status:{allCompetitions:"Minden verseny",open:"Nyitott",upcoming:"Hamarosan",votingClosed:"Szavazás lezárva",completed:"Befejezve"},
 filters:{all:"Mind",open:"Most nyitott",upcoming:"Hamarosan",votingClosed:"Szavazás lezárva",completed:"Befejezett"},
 empty:{title:"Nem található verseny",description:"Próbáljon más állapotot vagy keresési kifejezést."},
-prizes:{title:"Havi PETS & DOGUE díjak",description:"A versenyek partnerajándékokat, állatdivat-kiegészítőket, ápolási utalványokat, szállodai kedvezményeket, fotózásokat és prémium magazinmegjelenéseket is tartalmazhatnak.",cover:"👑 Címlapsztár-megjelenés",fashion:"🎁 Divataján­dékok kedvenceknek",grooming:"✂️ Ápolási utalvány",partner:"🏨 Partnerkedvezmények",photo:"📸 Fotómegjelenés",hall:"🏆 Hely a Hírességek csarnokában"},
+prizes:{title:"Havi PETS & DOGUE díjak",description:"A versenyek partnerajándékokat, állatdivat-kiegészítőket, ápolási utalványokat, szállodai kedvezményeket, fotózásokat és prémium magazinmegjelenéseket is tartalmazhatnak.",cover:"👑 Címlapsztár-megjelenés",fashion:"🎁 Divatajándékok kedvenceknek",grooming:"✂️ Ápolási utalvány",partner:"🏨 Partnerkedvezmények",photo:"📸 Fotómegjelenés",hall:"🏆 Hely a Hírességek csarnokában"},
 rules:{title:"Hogyan működik",one:"Nevezze kedvencét a megfelelő verseny- vagy jelentkezési oldalon.",two:"A kiválasztott nevezések megjelenhetnek a PETS & DOGUE versenyeiben és nyilvános szavazásokon.",three:"Az olvasók szívekkel és szavazatokkal támogathatják kedvenceiket.",four:"A győztesek megjelenhetnek a magazinban, a Fotók között, a Hírességek csarnokában vagy jövőbeli címlapokon.",five:"A PETS & DOGUE eltávolíthatja a gyanús, visszaélésszerű vagy manipulált szavazási tevékenységet.",six:"A részvétel nem garantál megjelenést, kiválasztást vagy tárgyi nyereményt."},
 footer:{home:"Kezdőlap",photos:"Fotók",members:"Tagok galériája",coverStars:"Címlapsztárok",hall:"Hírességek csarnoka",account:"Fiók",privacy:"Adatvédelem",contact:"Kapcsolat"},
 modal:{close:"Bezárás",imageAlt:"Versenykép"},
