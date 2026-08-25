@@ -8,14 +8,19 @@
 id="pageDescription"
 name="description"
 content="Explore responsible pet listings, services and community stories in the PETS & DOGUE marketplace."
-data-i18n-attr="content:marketplace.meta.description">
+data-i18n-attr="content:marketplace.meta.description"
+>
 
 <title data-i18n="marketplace.meta.title">
 Pet Marketplace | PETS & DOGUE
 </title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
 
 :root{
 --ink:#0b0b0b;
@@ -25,124 +30,157 @@ Pet Marketplace | PETS & DOGUE
 --gold-light:#f1d477;
 --muted:#707070;
 --line:#d9d5cb;
---green:#5b982c;
+--green:#65e51f;
 --serif:Georgia,"Times New Roman",serif;
 --sans:Arial,Helvetica,sans-serif
 }
 
-html{scroll-behavior:smooth}
+html{
+scroll-behavior:smooth
+}
 
 body{
 background:var(--paper);
 color:var(--ink);
-font-family:var(--sans)
+font-family:var(--sans);
+overflow-x:hidden
 }
 
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-img{display:block;width:100%}
+body.menu-open,
+body.modal-open{
+overflow:hidden
+}
+
+button,
+input,
+select,
+textarea{
+font:inherit
+}
+
+button{
+cursor:pointer
+}
+
+a{
+color:inherit;
+text-decoration:none
+}
+
+img{
+display:block;
+width:100%
+}
+
+[hidden]{
+display:none!important
+}
 
 
-/* =========================
-   GLOBAL DOGUE HEADER
-========================= */
+/* =========================================================
+HEADER
+========================================================= */
 
 .site-header{
 position:sticky;
 top:0;
-z-index:1000;
+z-index:1800;
 background:#050505;
 color:#fff;
 border-bottom:1px solid #272727
 }
 
 .header-main{
-height:128px;
+height:108px;
+max-width:1550px;
+margin:auto;
+padding:0 18px;
 display:grid;
-grid-template-columns:64px 1fr 64px;
-align-items:center;
-padding:0 22px
-}
-
-.brand{
-text-align:center;
-line-height:1
-}
-
-.brand-small{
-font-family:var(--serif);
-font-size:15px;
-letter-spacing:3px;
-color:#cda751;
-margin-bottom:5px
-}
-
-.brand-big{
-font-family:var(--serif);
-font-size:53px;
-font-weight:400;
-letter-spacing:5px;
-color:#fff
+grid-template-columns:80px 1fr 80px;
+align-items:center
 }
 
 .icon-btn{
+width:50px;
+height:50px;
 border:0;
-background:none;
+background:transparent;
 color:#fff;
 display:flex;
 align-items:center;
-justify-content:center
+justify-content:center;
+border-radius:50%
 }
 
 .menu-lines{
-width:38px;
-height:27px;
-display:flex;
-flex-direction:column;
-justify-content:space-between
+width:30px;
+display:grid;
+gap:6px
 }
 
 .menu-lines span{
 display:block;
-height:3px;
-width:100%;
+height:2px;
 background:#fff;
-border-radius:10px
+border-radius:999px
+}
+
+.brand{
+text-align:center;
+line-height:.88
+}
+
+.brand-small{
+font:14px Georgia,serif;
+letter-spacing:1.5px;
+color:var(--gold-light)
+}
+
+.brand-big{
+font:normal 58px Georgia,serif;
+letter-spacing:4px
 }
 
 .home-svg{
-width:35px;
-height:35px
+width:30px;
+height:30px;
+fill:none;
+stroke:#fff;
+stroke-width:2
 }
 
+
+/* =========================================================
+NAV
+========================================================= */
+
 .nav-strip{
-height:58px;
 display:flex;
-align-items:center;
-gap:34px;
+gap:30px;
 overflow-x:auto;
+padding:16px 24px;
+border-top:1px solid #292929;
+border-bottom:1px solid #303030;
 scrollbar-width:none;
-border-top:1px solid #262626;
-padding:0 26px;
-font-weight:900;
-font-size:14px;
-letter-spacing:.8px;
+scroll-behavior:smooth
+}
+
+.nav-strip::-webkit-scrollbar{
+display:none
+}
+
+.nav-strip a{
+position:relative;
 white-space:nowrap;
+font-size:14px;
+font-weight:bold;
+letter-spacing:.7px;
+padding-bottom:7px;
 text-transform:uppercase
 }
 
-.nav-strip::-webkit-scrollbar{display:none}
-
-.nav-strip a{
-height:58px;
-display:flex;
-align-items:center;
-position:relative
-}
-
 .nav-strip a.active{
-color:#d7b45b
+color:var(--gold-light)
 }
 
 .nav-strip a.active:after{
@@ -150,15 +188,176 @@ content:"";
 position:absolute;
 left:0;
 right:0;
-bottom:3px;
+bottom:0;
 height:2px;
-background:linear-gradient(90deg,#8d6716,#f3d77a,#9f761c)
+background:linear-gradient(
+90deg,
+#8d6716,
+#f3d77a,
+#9f761c
+)
 }
 
 
-/* =========================
-   PAGE
-========================= */
+/* =========================================================
+SIDE MENU
+========================================================= */
+
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.74);
+display:none;
+z-index:2500
+}
+
+.menu-overlay.show{
+display:block
+}
+
+.side-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:min(430px,94%);
+height:100vh;
+background:#fff;
+color:#111;
+z-index:2600;
+overflow-y:auto;
+transition:.35s;
+border-right:2px solid #111
+}
+
+.side-menu.open{
+left:0
+}
+
+.side-menu-header{
+background:#111;
+color:#fff;
+padding:24px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+z-index:3
+}
+
+.side-menu-header h2{
+font:normal 32px Georgia,serif
+}
+
+.side-menu-header button{
+width:43px;
+height:43px;
+border:0;
+background:#fff;
+border-radius:50%;
+font-size:24px
+}
+
+.menu-account{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:18px 18px 12px
+}
+
+.menu-account a{
+padding:12px;
+text-align:center;
+border:2px solid #111;
+border-radius:999px;
+font-weight:bold
+}
+
+.menu-account a:last-child{
+background:var(--green);
+border-color:var(--green)
+}
+
+.menu-language{
+padding:0 18px 18px;
+border-bottom:1px solid #ddd
+}
+
+.menu-language span{
+display:block;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1.5px;
+color:#777;
+margin:5px 0 8px
+}
+
+.menu-language select{
+width:100%;
+height:48px;
+border:2px solid #111;
+border-radius:999px;
+background:#faf8f3;
+padding:0 15px
+}
+
+.menu-list{
+padding:18px;
+display:grid;
+gap:10px
+}
+
+.menu-item{
+display:grid;
+grid-template-columns:82px 1fr;
+align-items:center;
+gap:14px;
+border:2px solid #111;
+background:#faf8f3;
+border-radius:18px;
+overflow:hidden
+}
+
+.menu-item img{
+width:82px;
+height:82px;
+object-fit:cover
+}
+
+.menu-item h3{
+font:21px Georgia,serif;
+margin-bottom:4px
+}
+
+.menu-item p{
+font-size:12px;
+line-height:1.45;
+color:#666;
+padding-right:9px
+}
+
+.menu-bottom{
+padding:18px;
+background:#f4f0e7;
+border-top:1px solid #ddd
+}
+
+.menu-bottom div{
+display:flex;
+flex-wrap:wrap;
+gap:13px 20px
+}
+
+.menu-bottom a{
+font-size:12px;
+font-weight:bold;
+color:#666
+}
+
+
+/* =========================================================
+PAGE
+========================================================= */
 
 .market-shell{
 max-width:1240px;
@@ -199,10 +398,14 @@ white-space:nowrap;
 padding-bottom:4px
 }
 
+.saved-link.active{
+color:#a27317
+}
 
-/* =========================
-   LOCATION SUMMARY
-========================= */
+
+/* =========================================================
+LOCATION
+========================================================= */
 
 .location-summary{
 display:flex;
@@ -250,9 +453,9 @@ justify-content:center
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+/* =========================================================
+SEARCH
+========================================================= */
 
 .search-wrap{
 position:relative
@@ -302,9 +505,9 @@ background:#fff
 }
 
 
-/* =========================
-   LOCATION PANEL
-========================= */
+/* =========================================================
+LOCATION PANEL
+========================================================= */
 
 .location-panel{
 display:none;
@@ -467,9 +670,9 @@ accent-color:#111
 }
 
 
-/* =========================
-   PREMIUM POST BUTTON
-========================= */
+/* =========================================================
+POST BUTTON
+========================================================= */
 
 .market-post-main{
 width:100%;
@@ -507,9 +710,9 @@ line-height:1
 }
 
 
-/* =========================
-   FLOATING POST
-========================= */
+/* =========================================================
+FLOATING POST
+========================================================= */
 
 .floating-post{
 position:fixed;
@@ -535,9 +738,9 @@ color:#d8ad48
 }
 
 
-/* =========================
-   QUICK FILTERS
-========================= */
+/* =========================================================
+QUICK FILTERS
+========================================================= */
 
 .quick-row{
 display:flex;
@@ -547,7 +750,9 @@ scrollbar-width:none;
 padding:10px 0 2px
 }
 
-.quick-row::-webkit-scrollbar{display:none}
+.quick-row::-webkit-scrollbar{
+display:none
+}
 
 .quick{
 flex:none;
@@ -567,9 +772,9 @@ border-color:#111
 }
 
 
-/* =========================
-   HEADINGS
-========================= */
+/* =========================================================
+HEADINGS
+========================================================= */
 
 .section-head{
 display:flex;
@@ -593,9 +798,9 @@ font-size:15px
 }
 
 
-/* =========================
-   BROWSE
-========================= */
+/* =========================================================
+BROWSE
+========================================================= */
 
 .browse-grid{
 display:grid;
@@ -638,7 +843,11 @@ transform:scale(1.025)
 .browse-shade{
 position:absolute;
 inset:0;
-background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.83))
+background:linear-gradient(
+180deg,
+transparent 38%,
+rgba(0,0,0,.83)
+)
 }
 
 .browse-copy{
@@ -664,9 +873,9 @@ margin-top:4px
 }
 
 
-/* =========================
-   LISTINGS
-========================= */
+/* =========================================================
+LISTINGS
+========================================================= */
 
 .listings-head{
 margin-top:43px
@@ -700,7 +909,10 @@ cursor:pointer
 content:"";
 position:absolute;
 inset:48% 0 0;
-background:linear-gradient(transparent,rgba(0,0,0,.62));
+background:linear-gradient(
+transparent,
+rgba(0,0,0,.62)
+);
 pointer-events:none
 }
 
@@ -779,10 +991,28 @@ height:45px;
 font-weight:900
 }
 
+.empty-market{
+grid-column:1/-1;
+background:#fff;
+border:1px solid #ccc;
+padding:45px 20px;
+text-align:center
+}
 
-/* =========================
-   BOTTOM CTA
-========================= */
+.empty-market h3{
+font:normal 30px Georgia,serif;
+margin-bottom:8px
+}
+
+.empty-market p{
+color:#666;
+line-height:1.5
+}
+
+
+/* =========================================================
+BOTTOM CTA
+========================================================= */
 
 .publish-strip{
 margin-top:51px;
@@ -824,15 +1054,15 @@ margin-top:22px
 }
 
 
-/* =========================
-   MODALS
-========================= */
+/* =========================================================
+MODALS
+========================================================= */
 
 .modal{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.72);
-z-index:2000;
+z-index:3000;
 display:none;
 align-items:flex-end;
 justify-content:center
@@ -911,9 +1141,9 @@ word-break:break-word
 }
 
 
-/* =========================
-   PUBLISH FORM
-========================= */
+/* =========================================================
+PUBLISH FORM
+========================================================= */
 
 .publish-form h2{
 font-family:var(--serif);
@@ -962,7 +1192,12 @@ border:1px dashed #999!important
 .form-submit{
 width:100%;
 border:1px solid #aa7e1e;
-background:linear-gradient(100deg,#a47515,#e1bd5e,#a97a17);
+background:linear-gradient(
+100deg,
+#a47515,
+#e1bd5e,
+#a97a17
+);
 font-weight:900;
 padding:17px;
 margin-top:15px
@@ -976,9 +1211,26 @@ margin-top:10px
 }
 
 
-/* =========================
-   RTL
-========================= */
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] .side-menu{
+left:auto;
+right:-100%;
+border-right:0;
+border-left:2px solid #111
+}
+
+html[dir="rtl"] .side-menu.open{
+right:0;
+left:auto
+}
+
+html[dir="rtl"] .menu-item p{
+padding-right:0;
+padding-left:9px
+}
 
 html[dir="rtl"] .location-main,
 html[dir="rtl"] .location-option,
@@ -1016,47 +1268,50 @@ right:auto;
 left:16px
 }
 
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select{
+text-align:right
+}
 
-/* =========================
-   MOBILE
-========================= */
+
+/* =========================================================
+MOBILE
+========================================================= */
 
 @media(max-width:720px){
 
 .header-main{
-height:128px;
-grid-template-columns:52px 1fr 52px;
-padding:0 20px
-}
-
-.brand-small{
-font-size:14px
+height:87px;
+grid-template-columns:55px 1fr 55px;
+padding:0 8px
 }
 
 .brand-big{
-font-size:50px;
-letter-spacing:4px
+font-size:39px;
+letter-spacing:2px
+}
+
+.brand-small{
+font-size:11px
 }
 
 .menu-lines{
-width:36px;
-height:25px
+width:30px
 }
 
 .home-svg{
-width:34px;
-height:34px
+width:30px;
+height:30px
 }
 
 .nav-strip{
-height:58px;
-gap:31px;
-padding:0 21px;
-font-size:13px
+padding:14px 15px;
+gap:22px
 }
 
 .nav-strip a{
-height:58px
+font-size:12px
 }
 
 .market-shell{
@@ -1184,7 +1439,7 @@ font-size:37px
 @media(max-width:410px){
 
 .brand-big{
-font-size:46px
+font-size:34px
 }
 
 .market-title{
@@ -1208,10 +1463,301 @@ margin-left:0
 }
 
 }
+
+@media(prefers-reduced-motion:reduce){
+
+.browse-card img{
+transition:none
+}
+
+}
 </style>
 </head>
 
 <body>
+
+<div
+class="menu-overlay"
+id="menuOverlay"
+onclick="closeMenu()">
+</div>
+
+<aside
+class="side-menu"
+id="sideMenu">
+
+<div class="side-menu-header">
+
+<h2 data-i18n="common.menu.contents">
+Contents
+</h2>
+
+<button
+type="button"
+onclick="closeMenu()"
+aria-label="Close menu">
+×
+</button>
+
+</div>
+
+<div class="menu-account">
+
+<a
+href="account.html"
+data-i18n="common.menu.signIn">
+Sign In
+</a>
+
+<a
+href="club.html"
+data-i18n="common.menu.joinClub">
+Join Club
+</a>
+
+</div>
+
+<div class="menu-language">
+
+<span
+class="notranslate"
+translate="no">
+LANGUAGE
+</span>
+
+<select id="languageSelect">
+
+<option value="en">EN — English</option>
+<option value="uk">UA — Українська</option>
+<option value="ru">RU — Русский</option>
+<option value="fr">FR — Français</option>
+<option value="de">DE — Deutsch</option>
+<option value="es">ES — Español</option>
+<option value="it">IT — Italiano</option>
+<option value="pt">PT — Português</option>
+<option value="nl">NL — Nederlands</option>
+<option value="pl">PL — Polski</option>
+<option value="cs">CZ — Čeština</option>
+<option value="sk">SK — Slovenčina</option>
+<option value="hu">HU — Magyar</option>
+<option value="ro">RO — Română</option>
+<option value="bg">BG — Български</option>
+<option value="el">GR — Ελληνικά</option>
+<option value="sv">SE — Svenska</option>
+<option value="da">DK — Dansk</option>
+<option value="no">NO — Norsk</option>
+<option value="fi">FI — Suomi</option>
+<option value="tr">TR — Türkçe</option>
+<option value="ar">AR — العربية</option>
+<option value="hi">HI — हिन्दी</option>
+
+</select>
+
+</div>
+
+<div class="menu-list">
+
+<a class="menu-item" href="issue-01.html">
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Latest Issue">
+
+<div>
+<h3 data-i18n="common.menu.latestIssue">Latest Issue</h3>
+<p>PETS &amp; DOGUE</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="articles.html">
+
+<img
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
+alt="Articles">
+
+<div>
+<h3 data-i18n="common.menu.articles">Articles</h3>
+<p data-i18n="common.menu.articlesDescription">
+Read and listen to editorial stories.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="photos.html">
+
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
+alt="Photos">
+
+<div>
+<h3 data-i18n="common.menu.photos">Photos</h3>
+<p data-i18n="common.menu.photosDescription">
+Portraits, galleries and visual stories.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="members-gallery.html">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+alt="Cover Star">
+
+<div>
+<h3 data-i18n="common.menu.coverStar">Cover Star</h3>
+<p data-i18n="common.menu.coverStarDescription">
+Enter your pet into the next cover competition.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="pet-fashion.html">
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+alt="Fashion">
+
+<div>
+<h3 data-i18n="common.navigation.fashion">Fashion</h3>
+<p>PETS &amp; DOGUE EDIT</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="pet-travel.html">
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
+alt="Travel">
+
+<div>
+<h3 data-i18n="common.menu.travel">Travel</h3>
+<p data-i18n="common.menu.travelDescription">
+Hotels, beaches and pet-friendly journeys.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="wellness.html">
+
+<img
+src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80"
+alt="Wellness">
+
+<div>
+<h3 data-i18n="common.menu.wellness">Wellness</h3>
+<p data-i18n="common.menu.wellnessDescription">
+Care, grooming, health and everyday wellbeing.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="pet-friendly-places.html">
+
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
+alt="Places">
+
+<div>
+<h3 data-i18n="common.menu.places">Places</h3>
+<p data-i18n="common.menu.placesDescription">
+Pet-friendly hotels, cafés and destinations.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="local-community.html">
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+alt="Community">
+
+<div>
+<h3 data-i18n="common.menu.community">Community</h3>
+<p data-i18n="common.menu.communityDescription">
+Local stories, recommendations and pet people.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="pets-in-need.html">
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
+alt="Rescue">
+
+<div>
+<h3 data-i18n="common.menu.rescue">Pets In Need</h3>
+<p data-i18n="common.menu.rescueDescription">
+Rescue, adoption and stories that need visibility.
+</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="pet-marketplace.html">
+
+<img
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+alt="Marketplace">
+
+<div>
+<h3 data-i18n="common.navigation.marketplace">Marketplace</h3>
+<p>PETS &amp; DOGUE MARKETPLACE</p>
+</div>
+
+</a>
+
+<a class="menu-item" href="partners.html">
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
+alt="Partners">
+
+<div>
+<h3 data-i18n="common.menu.partners">Partners</h3>
+<p data-i18n="common.menu.partnersDescription">
+Discover selected brands and member offers.
+</p>
+</div>
+
+</a>
+
+</div>
+
+<div class="menu-bottom">
+
+<div>
+
+<a href="contact.html" data-i18n="common.footer.contact">
+Contact
+</a>
+
+<a href="privacy.html" data-i18n="common.footer.privacy">
+Privacy
+</a>
+
+<a href="terms.html" data-i18n="common.footer.terms">
+Terms
+</a>
+
+<a href="admin.html" data-i18n="common.footer.admin">
+Admin
+</a>
+
+</div>
+
+</div>
+
+</aside>
 
 
 <header class="site-header">
@@ -1221,8 +1767,8 @@ margin-left:0
 <button
 class="icon-btn"
 type="button"
-onclick="history.back()"
-aria-label="Back">
+onclick="openMenu()"
+aria-label="Open menu">
 
 <span class="menu-lines">
 <span></span>
@@ -1232,14 +1778,13 @@ aria-label="Back">
 
 </button>
 
-
 <a
 class="brand notranslate"
 translate="no"
 href="index.html">
 
 <div class="brand-small">
-pets &amp;
+PETS &amp;
 </div>
 
 <div class="brand-big">
@@ -1248,7 +1793,6 @@ DOGUE
 
 </a>
 
-
 <a
 class="icon-btn"
 href="index.html"
@@ -1256,13 +1800,10 @@ aria-label="Home">
 
 <svg
 class="home-svg"
-viewBox="0 0 48 48"
-fill="none"
-stroke="currentColor"
-stroke-width="4">
+viewBox="0 0 24 24">
 
-<path d="M6 22L24 7l18 15v20H6V22Z"></path>
-<path d="M18 42V27h12v15"></path>
+<path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
+<path d="M9 21v-7h6v7"></path>
 
 </svg>
 
@@ -1270,8 +1811,9 @@ stroke-width="4">
 
 </div>
 
-
-<nav class="nav-strip">
+<nav
+class="nav-strip"
+id="categoryNav">
 
 <a
 href="issue-01.html"
@@ -1357,9 +1899,7 @@ PARTNERS
 </header>
 
 
-
 <main class="market-shell">
-
 
 <div class="market-intro">
 
@@ -1379,9 +1919,9 @@ Pet Marketplace
 
 </div>
 
-
 <button
 class="saved-link"
+id="savedLink"
 type="button"
 onclick="showSavedOnly()">
 
@@ -1390,7 +1930,6 @@ onclick="showSavedOnly()">
 </button>
 
 </div>
-
 
 
 <div class="location-summary">
@@ -1423,9 +1962,7 @@ aria-label="Change location">
 </div>
 
 
-
 <div class="search-wrap">
-
 
 <div class="search-bar">
 
@@ -1456,11 +1993,9 @@ aria-label="Location filters">
 </div>
 
 
-
 <div
 class="location-panel"
 id="locationPanel">
-
 
 <div class="location-panel-head">
 
@@ -1479,11 +2014,11 @@ class="location-panel-distance"
 id="locationPanelDistance">
 </div>
 
-
 <div class="location-panel-actions">
 
 <button
 class="location-done"
+id="locationDone"
 type="button"
 onclick="closeLocationPanel()">
 ✓ Done
@@ -1501,13 +2036,12 @@ aria-label="Close">
 
 </div>
 
-
 <label
 class="location-label"
+id="locationChangeLabel"
 for="locationInput">
 Change location
 </label>
-
 
 <div class="location-input-wrap">
 
@@ -1526,14 +2060,13 @@ id="locationResults">
 
 </div>
 
-
 <button
 class="near-btn"
+id="nearBtn"
 type="button"
 onclick="useMyLocation()">
 ◎ Near me
 </button>
-
 
 <div
 class="radius-box"
@@ -1541,8 +2074,8 @@ id="radiusBox">
 
 <div class="radius-row">
 
-<span>
-Distance from me
+<span id="distanceFromLocationLabel">
+Distance
 </span>
 
 <span id="radiusValue">
@@ -1567,7 +2100,6 @@ oninput="updateRadius()">
 </div>
 
 
-
 <button
 class="market-post-main"
 type="button"
@@ -1588,7 +2120,6 @@ Publish A Listing
 </button>
 
 
-
 <div class="quick-row">
 
 <button
@@ -1601,6 +2132,7 @@ All
 
 <button
 class="quick"
+id="filterSale"
 data-filter="sale"
 onclick="setQuickFilter(this,'sale')">
 For sale
@@ -1608,6 +2140,7 @@ For sale
 
 <button
 class="quick"
+id="filterFree"
 data-filter="free"
 onclick="setQuickFilter(this,'free')">
 Free / Rehome
@@ -1624,15 +2157,17 @@ Accessories &amp; Services
 </div>
 
 
-
 <div class="section-head">
 
-<h2 class="section-title">
+<h2
+class="section-title"
+id="browseHeading">
 Browse
 </h2>
 
 <button
 class="view-all"
+id="viewAllButton"
 type="button"
 onclick="setBrowse('all')">
 View all
@@ -1641,9 +2176,7 @@ View all
 </div>
 
 
-
 <section class="browse-grid">
-
 
 <button
 class="browse-card"
@@ -1669,7 +2202,6 @@ Dog
 </span>
 
 </button>
-
 
 
 <button
@@ -1698,7 +2230,6 @@ Cat
 </button>
 
 
-
 <button
 class="browse-card"
 type="button"
@@ -1712,7 +2243,9 @@ alt="Puppies">
 
 <span class="browse-copy">
 
-<small>YOUNG PETS</small>
+<small id="youngPetsLabel">
+YOUNG PETS
+</small>
 
 <h3 data-i18n="marketplace.page.puppiesKittens">
 Puppies &amp; Kittens
@@ -1721,7 +2254,6 @@ Puppies &amp; Kittens
 </span>
 
 </button>
-
 
 
 <button
@@ -1737,7 +2269,9 @@ alt="Find a home">
 
 <span class="browse-copy">
 
-<small>RESPONSIBLE</small>
+<small id="responsibleLabel">
+RESPONSIBLE
+</small>
 
 <h3 data-i18n="marketplace.page.findHome">
 Find A Home
@@ -1746,7 +2280,6 @@ Find A Home
 </span>
 
 </button>
-
 
 
 <button
@@ -1762,7 +2295,9 @@ alt="Services">
 
 <span class="browse-copy">
 
-<small>SERVICES</small>
+<small id="servicesLabel">
+SERVICES
+</small>
 
 <h3 data-i18n="marketplace.page.accessoriesServices">
 Accessories &amp; Services
@@ -1775,12 +2310,13 @@ Accessories &amp; Services
 </section>
 
 
-
 <div class="section-head listings-head">
 
 <div>
 
-<div class="eyebrow">
+<div
+class="eyebrow"
+id="discoverLabel">
 DISCOVER
 </div>
 
@@ -1800,7 +2336,6 @@ id="listingCount">
 </div>
 
 
-
 <section
 class="listings"
 id="listingGrid">
@@ -1808,16 +2343,16 @@ id="listingGrid">
 
 <article
 class="listing-card"
-data-id="miso-01"
+data-id="milo-01"
 data-type="sale"
 data-animal="dogs"
 data-lat="51.5074"
 data-lng="-0.1278"
-data-search="pomeranian dog london sale">
+data-search="milo pomeranian dog london sale">
 
 <div
 class="listing-photo"
-onclick="openDetails('miso-01')">
+onclick="openDetails('milo-01')">
 
 <img
 src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?auto=format&fit=crop&w=1000&q=85"
@@ -1826,7 +2361,8 @@ alt="Pomeranian">
 <button
 class="heart"
 type="button"
-onclick="toggleSaved(event,'miso-01',this)">
+onclick="toggleSaved(event,'milo-01',this)"
+aria-label="Save">
 ♡
 </button>
 
@@ -1834,12 +2370,13 @@ onclick="toggleSaved(event,'miso-01',this)">
 £950
 </span>
 
-<span class="tag">
+<span
+class="tag"
+data-listing-tag="sale">
 FOR SALE
 </span>
 
 </div>
-
 
 <div class="listing-copy">
 
@@ -1858,7 +2395,7 @@ Pomeranian · 2 years
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('miso-01')"
+onclick="openDetails('milo-01')"
 data-i18n="marketplace.page.contactOwner">
 Contact Owner
 </button>
@@ -1868,7 +2405,6 @@ Contact Owner
 </article>
 
 
-
 <article
 class="listing-card"
 data-id="cat-01"
@@ -1876,7 +2412,7 @@ data-type="free"
 data-animal="cats"
 data-lat="51.4545"
 data-lng="-2.5879"
-data-search="british shorthair cat bristol free rehome">
+data-search="luna british shorthair cat bristol free rehome">
 
 <div
 class="listing-photo"
@@ -1889,7 +2425,8 @@ alt="Cat">
 <button
 class="heart"
 type="button"
-onclick="toggleSaved(event,'cat-01',this)">
+onclick="toggleSaved(event,'cat-01',this)"
+aria-label="Save">
 ♡
 </button>
 
@@ -1897,12 +2434,13 @@ onclick="toggleSaved(event,'cat-01',this)">
 FREE
 </span>
 
-<span class="tag">
+<span
+class="tag"
+data-listing-tag="free">
 REHOME
 </span>
 
 </div>
-
 
 <div class="listing-copy">
 
@@ -1931,7 +2469,6 @@ Contact Owner
 </article>
 
 
-
 <article
 class="listing-card"
 data-id="puppy-01"
@@ -1939,7 +2476,7 @@ data-type="sale"
 data-animal="puppies"
 data-lat="53.4808"
 data-lng="-2.2426"
-data-search="cockapoo puppy manchester sale teddy">
+data-search="teddy cockapoo puppy manchester sale">
 
 <div
 class="listing-photo"
@@ -1952,7 +2489,8 @@ alt="Puppy">
 <button
 class="heart"
 type="button"
-onclick="toggleSaved(event,'puppy-01',this)">
+onclick="toggleSaved(event,'puppy-01',this)"
+aria-label="Save">
 ♡
 </button>
 
@@ -1960,12 +2498,13 @@ onclick="toggleSaved(event,'puppy-01',this)">
 £1,250
 </span>
 
-<span class="tag">
+<span
+class="tag"
+data-listing-tag="sale">
 FOR SALE
 </span>
 
 </div>
-
 
 <div class="listing-copy">
 
@@ -1994,7 +2533,6 @@ Contact Owner
 </article>
 
 
-
 <article
 class="listing-card"
 data-id="groom-01"
@@ -2002,7 +2540,7 @@ data-type="service"
 data-animal="services"
 data-lat="51.5413"
 data-lng="-0.1420"
-data-search="dog grooming styling london service">
+data-search="dogue grooming styling london service">
 
 <div
 class="listing-photo"
@@ -2015,7 +2553,8 @@ alt="Dog grooming">
 <button
 class="heart"
 type="button"
-onclick="toggleSaved(event,'groom-01',this)">
+onclick="toggleSaved(event,'groom-01',this)"
+aria-label="Save">
 ♡
 </button>
 
@@ -2023,12 +2562,13 @@ onclick="toggleSaved(event,'groom-01',this)">
 FROM £35
 </span>
 
-<span class="tag">
+<span
+class="tag"
+data-listing-tag="service">
 SERVICE
 </span>
 
 </div>
-
 
 <div class="listing-copy">
 
@@ -2057,7 +2597,6 @@ Contact Seller
 </article>
 
 
-
 <article
 class="listing-card"
 data-id="rabbit-01"
@@ -2065,7 +2604,7 @@ data-type="free"
 data-animal="other"
 data-lat="50.8225"
 data-lng="-0.1372"
-data-search="rabbit brighton free rehome">
+data-search="snow rabbit brighton free rehome">
 
 <div
 class="listing-photo"
@@ -2078,7 +2617,8 @@ alt="Rabbit">
 <button
 class="heart"
 type="button"
-onclick="toggleSaved(event,'rabbit-01',this)">
+onclick="toggleSaved(event,'rabbit-01',this)"
+aria-label="Save">
 ♡
 </button>
 
@@ -2086,12 +2626,13 @@ onclick="toggleSaved(event,'rabbit-01',this)">
 FREE
 </span>
 
-<span class="tag">
+<span
+class="tag"
+data-listing-tag="free">
 REHOME
 </span>
 
 </div>
-
 
 <div class="listing-copy">
 
@@ -2120,7 +2661,6 @@ Contact Owner
 </article>
 
 
-
 <article
 class="listing-card"
 data-id="photo-01"
@@ -2128,7 +2668,7 @@ data-type="service"
 data-animal="services"
 data-lat="51.5155"
 data-lng="-0.0922"
-data-search="pet photography london service">
+data-search="pet portrait studio photography london service">
 
 <div
 class="listing-photo"
@@ -2141,7 +2681,8 @@ alt="Pet photography">
 <button
 class="heart"
 type="button"
-onclick="toggleSaved(event,'photo-01',this)">
+onclick="toggleSaved(event,'photo-01',this)"
+aria-label="Save">
 ♡
 </button>
 
@@ -2149,12 +2690,13 @@ onclick="toggleSaved(event,'photo-01',this)">
 FROM £60
 </span>
 
-<span class="tag">
+<span
+class="tag"
+data-listing-tag="service">
 SERVICE
 </span>
 
 </div>
-
 
 <div class="listing-copy">
 
@@ -2185,10 +2727,25 @@ Contact Seller
 </section>
 
 
+<div
+class="empty-market"
+id="emptyMarket"
+hidden>
+
+<h3 id="emptyTitle">
+No listings found
+</h3>
+
+<p id="emptyText">
+Try another search, category or location.
+</p>
+
+</div>
+
 
 <section class="publish-strip">
 
-<small>
+<small id="sellRehomeServices">
 SELL · REHOME · SERVICES
 </small>
 
@@ -2201,7 +2758,11 @@ class="publish-main-btn"
 type="button"
 onclick="openPublish()">
 
-＋ <span data-i18n="marketplace.page.publishTitle">Publish A Listing</span> · £1
+＋
+<span data-i18n="marketplace.page.publishTitle">
+Publish A Listing
+</span>
+· £1
 
 </button>
 
@@ -2210,23 +2771,21 @@ onclick="openPublish()">
 </main>
 
 
-
 <button
 class="floating-post"
 type="button"
 onclick="openPublish()">
 
 <span>＋</span>
-
-<span>POST</span>
-
+<span id="floatingPostText">POST</span>
 <strong>£1</strong>
 
 </button>
 
 
-
-<!-- DETAILS MODAL -->
+<!-- =======================================================
+DETAILS MODAL
+======================================================= -->
 
 <div
 class="modal"
@@ -2238,7 +2797,8 @@ onclick="closeOnBackdrop(event,'detailsModal')">
 <button
 class="modal-close"
 type="button"
-onclick="closeModal('detailsModal')">
+onclick="closeModal('detailsModal')"
+aria-label="Close">
 ×
 </button>
 
@@ -2285,8 +2845,9 @@ id="detailContact">
 </div>
 
 
-
-<!-- PUBLISH MODAL -->
+<!-- =======================================================
+PUBLISH MODAL
+======================================================= -->
 
 <div
 class="modal"
@@ -2298,7 +2859,8 @@ onclick="closeOnBackdrop(event,'publishModal')">
 <button
 class="modal-close"
 type="button"
-onclick="closeModal('publishModal')">
+onclick="closeModal('publishModal')"
+aria-label="Close">
 ×
 </button>
 
@@ -2312,7 +2874,9 @@ PETS &amp; DOGUE MARKETPLACE
 Publish A Listing
 </h2>
 
-<div class="fee-note">
+<div
+class="fee-note"
+id="feeNote">
 Publishing fee: £1 per listing
 </div>
 
@@ -2321,15 +2885,20 @@ Publishing fee: £1 per listing
 
 <select id="newType">
 
-<option value="sale">
+<option
+value="sale"
+id="publishSaleOption">
 For sale
 </option>
 
-<option value="free">
+<option
+value="free"
+id="publishFreeOption">
 Free / Rehome
 </option>
 
-<option value="service"
+<option
+value="service"
 data-i18n="marketplace.page.accessoriesServices">
 Accessories &amp; Services
 </option>
@@ -2357,7 +2926,9 @@ data-i18n="marketplace.page.puppiesKittens">
 Puppies &amp; Kittens
 </option>
 
-<option value="other">
+<option
+value="other"
+id="otherAnimalOption">
 Other animal
 </option>
 
@@ -2417,7 +2988,8 @@ accept="image/*">
 <textarea
 id="newDescription"
 placeholder="Write a short description, story, details or conditions..."
-data-i18n-attr="placeholder:marketplace.page.story"></textarea>
+data-i18n-attr="placeholder:marketplace.page.story">
+</textarea>
 
 
 <button
@@ -2434,7 +3006,9 @@ Publish Listing
 </button>
 
 
-<p class="tiny-note">
+<p
+class="tiny-note"
+id="checkoutNote">
 The £1 checkout will be connected to the payment backend.
 </p>
 
@@ -2443,25 +3017,1161 @@ The £1 checkout will be connected to the payment backend.
 </div>
 
 
-
 <script src="/i18n/common.js?v=2"></script>
 <script src="/i18n/marketplace.js?v=4"></script>
+<script src="/i18n/engine.js?v=3"></script>
 
 <script>
+"use strict";
 
-let activeFilter="all";
-let browseFilter="all";
-let savedOnly=false;
-let myPosition=null;
-let selectedPosition=null;
-let locationTimer=null;
+/* =========================================================
+CONFIG
+========================================================= */
 
+const LANGUAGE_KEY=
+"pets_dogue_language";
+
+const SAVED_KEY=
+"dogue_market_saved";
+
+const LOCAL_LISTINGS_KEY=
+"pets_dogue_market_local_listings_v2";
+
+const MARKET_LOCATION_KEY=
+"pets_dogue_market_location_v2";
+
+const $=
+id=>document.getElementById(id);
+
+
+/* =========================================================
+LOCAL UI TRANSLATIONS
+========================================================= */
+
+const LOCAL_UI={
+
+en:{
+saved:"Saved",
+anywhere:"Anywhere",
+done:"Done",
+changeLocation:"Change location",
+locationPlaceholder:"Search any city, region or country...",
+nearMe:"Near me",
+distance:"Distance",
+findingLocation:"Finding your location…",
+noGeolocation:"Geolocation is not available on this device.",
+allowLocation:"Please allow location access to use Near me.",
+searching:"Searching…",
+noPlaces:"No places found",
+locationUnavailable:"Location search unavailable",
+forSale:"For sale",
+freeRehome:"Free / Rehome",
+service:"Service",
+browse:"Browse",
+viewAll:"View all",
+youngPets:"Young pets",
+responsible:"Responsible",
+services:"Services",
+discover:"Discover",
+listings:"listings",
+listing:"listing",
+emptyTitle:"No listings found",
+emptyText:"Try another search, category or location.",
+sellRehomeServices:"Sell · Rehome · Services",
+post:"Post",
+fee:"Publishing fee: £1 per listing",
+otherAnimal:"Other animal",
+pricePlaceholder:"Price, FREE or FROM £...",
+checkout:"The £1 checkout will be connected to the payment backend.",
+required:"Please add name, location, contact and a photo.",
+created:"Listing preview created. £1 checkout connection is the next backend step.",
+contactButton:"View & contact",
+defaultDescription:"Marketplace listing.",
+contact:"Contact",
+free:"FREE",
+from:"FROM",
+rehome:"REHOME",
+forSaleUpper:"FOR SALE",
+serviceUpper:"SERVICE",
+freeRehomeUpper:"FREE / REHOME",
+selectedLocation:"Selected location"
+},
+
+uk:{
+saved:"Збережені",
+anywhere:"Будь-де",
+done:"Готово",
+changeLocation:"Змінити локацію",
+locationPlaceholder:"Знайти місто, регіон або країну...",
+nearMe:"Поруч зі мною",
+distance:"Відстань",
+findingLocation:"Визначаємо вашу локацію…",
+noGeolocation:"Геолокація недоступна на цьому пристрої.",
+allowLocation:"Дозвольте доступ до геолокації.",
+searching:"Пошук…",
+noPlaces:"Місць не знайдено",
+locationUnavailable:"Пошук локації недоступний",
+forSale:"Продаж",
+freeRehome:"Безкоштовно / Новий дім",
+service:"Послуга",
+browse:"Категорії",
+viewAll:"Показати все",
+youngPets:"Молоді тварини",
+responsible:"Відповідально",
+services:"Послуги",
+discover:"Відкривайте",
+listings:"оголошень",
+listing:"оголошення",
+emptyTitle:"Оголошень не знайдено",
+emptyText:"Спробуйте інший пошук, категорію або локацію.",
+sellRehomeServices:"Продаж · Новий дім · Послуги",
+post:"Додати",
+fee:"Вартість публікації: £1 за оголошення",
+otherAnimal:"Інша тварина",
+pricePlaceholder:"Ціна, БЕЗКОШТОВНО або ВІД £...",
+checkout:"Оплата £1 буде підключена до платіжної системи.",
+required:"Додайте назву, локацію, контакт і фото.",
+created:"Попередній перегляд оголошення створено. Наступний крок — підключення оплати £1.",
+contactButton:"Переглянути й зв’язатися",
+defaultDescription:"Оголошення Marketplace.",
+contact:"Контакт",
+free:"БЕЗКОШТОВНО",
+from:"ВІД",
+rehome:"НОВИЙ ДІМ",
+forSaleUpper:"ПРОДАЖ",
+serviceUpper:"ПОСЛУГА",
+freeRehomeUpper:"БЕЗКОШТОВНО / НОВИЙ ДІМ",
+selectedLocation:"Обрана локація"
+},
+
+ru:{
+saved:"Сохранённые",
+anywhere:"Везде",
+done:"Готово",
+changeLocation:"Изменить локацию",
+locationPlaceholder:"Найти город, регион или страну...",
+nearMe:"Рядом со мной",
+distance:"Расстояние",
+findingLocation:"Определяем вашу локацию…",
+noGeolocation:"Геолокация недоступна на этом устройстве.",
+allowLocation:"Разрешите доступ к геолокации.",
+searching:"Поиск…",
+noPlaces:"Места не найдены",
+locationUnavailable:"Поиск локации недоступен",
+forSale:"Продажа",
+freeRehome:"Бесплатно / Новый дом",
+service:"Услуга",
+browse:"Категории",
+viewAll:"Показать все",
+youngPets:"Молодые животные",
+responsible:"Ответственно",
+services:"Услуги",
+discover:"Открывайте",
+listings:"объявлений",
+listing:"объявление",
+emptyTitle:"Объявления не найдены",
+emptyText:"Попробуйте другой поиск, категорию или локацию.",
+sellRehomeServices:"Продажа · Новый дом · Услуги",
+post:"Добавить",
+fee:"Стоимость публикации: £1 за объявление",
+otherAnimal:"Другое животное",
+pricePlaceholder:"Цена, БЕСПЛАТНО или ОТ £...",
+checkout:"Оплата £1 будет подключена к платёжной системе.",
+required:"Добавьте название, локацию, контакт и фото.",
+created:"Предпросмотр объявления создан. Следующий шаг — подключение оплаты £1.",
+contactButton:"Посмотреть и связаться",
+defaultDescription:"Объявление Marketplace.",
+contact:"Контакт",
+free:"БЕСПЛАТНО",
+from:"ОТ",
+rehome:"НОВЫЙ ДОМ",
+forSaleUpper:"ПРОДАЖА",
+serviceUpper:"УСЛУГА",
+freeRehomeUpper:"БЕСПЛАТНО / НОВЫЙ ДОМ",
+selectedLocation:"Выбрана локация"
+},
+
+fr:{
+saved:"Enregistrés",
+anywhere:"Partout",
+done:"Terminé",
+changeLocation:"Changer de lieu",
+locationPlaceholder:"Rechercher une ville, région ou pays...",
+nearMe:"Près de moi",
+distance:"Distance",
+findingLocation:"Recherche de votre position…",
+noGeolocation:"La géolocalisation n’est pas disponible.",
+allowLocation:"Autorisez l’accès à votre position.",
+searching:"Recherche…",
+noPlaces:"Aucun lieu trouvé",
+locationUnavailable:"Recherche de lieu indisponible",
+forSale:"À vendre",
+freeRehome:"Gratuit / Adoption",
+service:"Service",
+browse:"Explorer",
+viewAll:"Tout voir",
+youngPets:"Jeunes animaux",
+responsible:"Responsable",
+services:"Services",
+discover:"Découvrir",
+listings:"annonces",
+listing:"annonce",
+emptyTitle:"Aucune annonce trouvée",
+emptyText:"Essayez une autre recherche, catégorie ou localisation.",
+sellRehomeServices:"Vente · Adoption · Services",
+post:"Publier",
+fee:"Frais de publication : £1 par annonce",
+otherAnimal:"Autre animal",
+pricePlaceholder:"Prix, GRATUIT ou À PARTIR DE £...",
+checkout:"Le paiement de £1 sera connecté au système de paiement.",
+required:"Ajoutez un nom, un lieu, un contact et une photo.",
+created:"Aperçu de l’annonce créé. Prochaine étape : paiement de £1.",
+contactButton:"Voir et contacter",
+defaultDescription:"Annonce Marketplace.",
+contact:"Contact",
+free:"GRATUIT",
+from:"DÈS",
+rehome:"ADOPTION",
+forSaleUpper:"À VENDRE",
+serviceUpper:"SERVICE",
+freeRehomeUpper:"GRATUIT / ADOPTION",
+selectedLocation:"Lieu sélectionné"
+},
+
+de:{
+saved:"Gespeichert",
+anywhere:"Überall",
+done:"Fertig",
+changeLocation:"Ort ändern",
+locationPlaceholder:"Stadt, Region oder Land suchen...",
+nearMe:"In meiner Nähe",
+distance:"Entfernung",
+findingLocation:"Standort wird ermittelt…",
+noGeolocation:"Geolokalisierung ist nicht verfügbar.",
+allowLocation:"Bitte Standortzugriff erlauben.",
+searching:"Suche…",
+noPlaces:"Keine Orte gefunden",
+locationUnavailable:"Ortssuche nicht verfügbar",
+forSale:"Zu verkaufen",
+freeRehome:"Kostenlos / Neues Zuhause",
+service:"Service",
+browse:"Entdecken",
+viewAll:"Alle anzeigen",
+youngPets:"Junge Tiere",
+responsible:"Verantwortungsvoll",
+services:"Services",
+discover:"Entdecken",
+listings:"Anzeigen",
+listing:"Anzeige",
+emptyTitle:"Keine Anzeigen gefunden",
+emptyText:"Versuchen Sie eine andere Suche, Kategorie oder einen anderen Ort.",
+sellRehomeServices:"Verkaufen · Vermitteln · Services",
+post:"Anzeige",
+fee:"Veröffentlichungsgebühr: £1 pro Anzeige",
+otherAnimal:"Anderes Tier",
+pricePlaceholder:"Preis, KOSTENLOS oder AB £...",
+checkout:"Die £1-Zahlung wird an das Zahlungssystem angebunden.",
+required:"Bitte Name, Ort, Kontakt und Foto hinzufügen.",
+created:"Anzeigenvorschau erstellt. Als Nächstes wird die £1-Zahlung angebunden.",
+contactButton:"Ansehen & kontaktieren",
+defaultDescription:"Marketplace-Anzeige.",
+contact:"Kontakt",
+free:"KOSTENLOS",
+from:"AB",
+rehome:"NEUES ZUHAUSE",
+forSaleUpper:"ZU VERKAUFEN",
+serviceUpper:"SERVICE",
+freeRehomeUpper:"KOSTENLOS / NEUES ZUHAUSE",
+selectedLocation:"Ausgewählter Ort"
+},
+
+es:{
+saved:"Guardados",
+anywhere:"Cualquier lugar",
+done:"Listo",
+changeLocation:"Cambiar ubicación",
+locationPlaceholder:"Buscar ciudad, región o país...",
+nearMe:"Cerca de mí",
+distance:"Distancia",
+findingLocation:"Buscando tu ubicación…",
+noGeolocation:"La geolocalización no está disponible.",
+allowLocation:"Permite el acceso a tu ubicación.",
+searching:"Buscando…",
+noPlaces:"No se encontraron lugares",
+locationUnavailable:"Búsqueda de ubicación no disponible",
+forSale:"En venta",
+freeRehome:"Gratis / Nuevo hogar",
+service:"Servicio",
+browse:"Explorar",
+viewAll:"Ver todo",
+youngPets:"Mascotas jóvenes",
+responsible:"Responsable",
+services:"Servicios",
+discover:"Descubrir",
+listings:"anuncios",
+listing:"anuncio",
+emptyTitle:"No se encontraron anuncios",
+emptyText:"Prueba otra búsqueda, categoría o ubicación.",
+sellRehomeServices:"Venta · Nuevo hogar · Servicios",
+post:"Publicar",
+fee:"Tarifa de publicación: £1 por anuncio",
+otherAnimal:"Otro animal",
+pricePlaceholder:"Precio, GRATIS o DESDE £...",
+checkout:"El pago de £1 se conectará al sistema de pago.",
+required:"Añade nombre, ubicación, contacto y foto.",
+created:"Vista previa creada. El siguiente paso es conectar el pago de £1.",
+contactButton:"Ver y contactar",
+defaultDescription:"Anuncio Marketplace.",
+contact:"Contacto",
+free:"GRATIS",
+from:"DESDE",
+rehome:"NUEVO HOGAR",
+forSaleUpper:"EN VENTA",
+serviceUpper:"SERVICIO",
+freeRehomeUpper:"GRATIS / NUEVO HOGAR",
+selectedLocation:"Ubicación seleccionada"
+},
+
+it:{
+saved:"Salvati",
+anywhere:"Ovunque",
+done:"Fatto",
+changeLocation:"Cambia località",
+locationPlaceholder:"Cerca città, regione o paese...",
+nearMe:"Vicino a me",
+distance:"Distanza",
+findingLocation:"Ricerca della posizione…",
+noGeolocation:"La geolocalizzazione non è disponibile.",
+allowLocation:"Consenti l’accesso alla posizione.",
+searching:"Ricerca…",
+noPlaces:"Nessun luogo trovato",
+locationUnavailable:"Ricerca località non disponibile",
+forSale:"In vendita",
+freeRehome:"Gratis / Nuova casa",
+service:"Servizio",
+browse:"Esplora",
+viewAll:"Vedi tutto",
+youngPets:"Animali giovani",
+responsible:"Responsabile",
+services:"Servizi",
+discover:"Scopri",
+listings:"annunci",
+listing:"annuncio",
+emptyTitle:"Nessun annuncio trovato",
+emptyText:"Prova un’altra ricerca, categoria o località.",
+sellRehomeServices:"Vendita · Nuova casa · Servizi",
+post:"Pubblica",
+fee:"Costo pubblicazione: £1 per annuncio",
+otherAnimal:"Altro animale",
+pricePlaceholder:"Prezzo, GRATIS o DA £...",
+checkout:"Il pagamento di £1 sarà collegato al sistema di pagamento.",
+required:"Aggiungi nome, località, contatto e foto.",
+created:"Anteprima annuncio creata. Il prossimo passo è collegare il pagamento di £1.",
+contactButton:"Visualizza e contatta",
+defaultDescription:"Annuncio Marketplace.",
+contact:"Contatto",
+free:"GRATIS",
+from:"DA",
+rehome:"NUOVA CASA",
+forSaleUpper:"IN VENDITA",
+serviceUpper:"SERVIZIO",
+freeRehomeUpper:"GRATIS / NUOVA CASA",
+selectedLocation:"Località selezionata"
+},
+
+pt:{
+saved:"Guardados",
+anywhere:"Qualquer lugar",
+done:"Concluído",
+changeLocation:"Alterar localização",
+locationPlaceholder:"Pesquisar cidade, região ou país...",
+nearMe:"Perto de mim",
+distance:"Distância",
+findingLocation:"A localizar…",
+noGeolocation:"A geolocalização não está disponível.",
+allowLocation:"Permita o acesso à localização.",
+searching:"A pesquisar…",
+noPlaces:"Nenhum local encontrado",
+locationUnavailable:"Pesquisa de localização indisponível",
+forSale:"À venda",
+freeRehome:"Grátis / Novo lar",
+service:"Serviço",
+browse:"Explorar",
+viewAll:"Ver tudo",
+youngPets:"Animais jovens",
+responsible:"Responsável",
+services:"Serviços",
+discover:"Descobrir",
+listings:"anúncios",
+listing:"anúncio",
+emptyTitle:"Nenhum anúncio encontrado",
+emptyText:"Experimente outra pesquisa, categoria ou localização.",
+sellRehomeServices:"Venda · Novo lar · Serviços",
+post:"Publicar",
+fee:"Taxa de publicação: £1 por anúncio",
+otherAnimal:"Outro animal",
+pricePlaceholder:"Preço, GRÁTIS ou DESDE £...",
+checkout:"O pagamento de £1 será ligado ao sistema de pagamento.",
+required:"Adicione nome, localização, contacto e foto.",
+created:"Pré-visualização criada. O próximo passo é ligar o pagamento de £1.",
+contactButton:"Ver e contactar",
+defaultDescription:"Anúncio Marketplace.",
+contact:"Contacto",
+free:"GRÁTIS",
+from:"DESDE",
+rehome:"NOVO LAR",
+forSaleUpper:"À VENDA",
+serviceUpper:"SERVIÇO",
+freeRehomeUpper:"GRÁTIS / NOVO LAR",
+selectedLocation:"Local selecionado"
+},
+
+nl:{
+saved:"Opgeslagen",
+anywhere:"Overal",
+done:"Klaar",
+changeLocation:"Locatie wijzigen",
+locationPlaceholder:"Zoek stad, regio of land...",
+nearMe:"Bij mij in de buurt",
+distance:"Afstand",
+findingLocation:"Locatie bepalen…",
+noGeolocation:"Geolocatie is niet beschikbaar.",
+allowLocation:"Sta toegang tot uw locatie toe.",
+searching:"Zoeken…",
+noPlaces:"Geen plaatsen gevonden",
+locationUnavailable:"Locatie zoeken niet beschikbaar",
+forSale:"Te koop",
+freeRehome:"Gratis / Nieuw thuis",
+service:"Dienst",
+browse:"Ontdek",
+viewAll:"Alles bekijken",
+youngPets:"Jonge dieren",
+responsible:"Verantwoord",
+services:"Diensten",
+discover:"Ontdek",
+listings:"advertenties",
+listing:"advertentie",
+emptyTitle:"Geen advertenties gevonden",
+emptyText:"Probeer een andere zoekopdracht, categorie of locatie.",
+sellRehomeServices:"Verkoop · Nieuw thuis · Diensten",
+post:"Plaatsen",
+fee:"Plaatsingskosten: £1 per advertentie",
+otherAnimal:"Ander dier",
+pricePlaceholder:"Prijs, GRATIS of VANAF £...",
+checkout:"De betaling van £1 wordt gekoppeld aan het betalingssysteem.",
+required:"Voeg naam, locatie, contact en foto toe.",
+created:"Advertentievoorbeeld gemaakt. De volgende stap is de £1-betaling.",
+contactButton:"Bekijken & contact",
+defaultDescription:"Marketplace-advertentie.",
+contact:"Contact",
+free:"GRATIS",
+from:"VANAF",
+rehome:"NIEUW THUIS",
+forSaleUpper:"TE KOOP",
+serviceUpper:"DIENST",
+freeRehomeUpper:"GRATIS / NIEUW THUIS",
+selectedLocation:"Geselecteerde locatie"
+},
+
+pl:{
+saved:"Zapisane",
+anywhere:"Wszędzie",
+done:"Gotowe",
+changeLocation:"Zmień lokalizację",
+locationPlaceholder:"Szukaj miasta, regionu lub kraju...",
+nearMe:"W pobliżu",
+distance:"Odległość",
+findingLocation:"Ustalamy lokalizację…",
+noGeolocation:"Geolokalizacja jest niedostępna.",
+allowLocation:"Zezwól na dostęp do lokalizacji.",
+searching:"Szukamy…",
+noPlaces:"Nie znaleziono miejsc",
+locationUnavailable:"Wyszukiwanie lokalizacji niedostępne",
+forSale:"Na sprzedaż",
+freeRehome:"Za darmo / Nowy dom",
+service:"Usługa",
+browse:"Przeglądaj",
+viewAll:"Pokaż wszystko",
+youngPets:"Młode zwierzęta",
+responsible:"Odpowiedzialnie",
+services:"Usługi",
+discover:"Odkrywaj",
+listings:"ogłoszeń",
+listing:"ogłoszenie",
+emptyTitle:"Nie znaleziono ogłoszeń",
+emptyText:"Spróbuj innego wyszukiwania, kategorii lub lokalizacji.",
+sellRehomeServices:"Sprzedaż · Nowy dom · Usługi",
+post:"Dodaj",
+fee:"Opłata za publikację: £1 za ogłoszenie",
+otherAnimal:"Inne zwierzę",
+pricePlaceholder:"Cena, ZA DARMO lub OD £...",
+checkout:"Płatność £1 zostanie podłączona do systemu płatności.",
+required:"Dodaj nazwę, lokalizację, kontakt i zdjęcie.",
+created:"Podgląd ogłoszenia utworzony. Następny krok to płatność £1.",
+contactButton:"Zobacz i skontaktuj się",
+defaultDescription:"Ogłoszenie Marketplace.",
+contact:"Kontakt",
+free:"ZA DARMO",
+from:"OD",
+rehome:"NOWY DOM",
+forSaleUpper:"NA SPRZEDAŻ",
+serviceUpper:"USŁUGA",
+freeRehomeUpper:"ZA DARMO / NOWY DOM",
+selectedLocation:"Wybrana lokalizacja"
+},
+
+cs:{
+saved:"Uložené",
+anywhere:"Kdekoliv",
+done:"Hotovo",
+changeLocation:"Změnit místo",
+locationPlaceholder:"Hledat město, region nebo zemi...",
+nearMe:"V mém okolí",
+distance:"Vzdálenost",
+findingLocation:"Zjišťujeme polohu…",
+noGeolocation:"Geolokace není dostupná.",
+allowLocation:"Povolte přístup k poloze.",
+searching:"Hledání…",
+noPlaces:"Nebyla nalezena žádná místa",
+locationUnavailable:"Vyhledávání polohy není dostupné",
+forSale:"Na prodej",
+freeRehome:"Zdarma / Nový domov",
+service:"Služba",
+browse:"Procházet",
+viewAll:"Zobrazit vše",
+youngPets:"Mladá zvířata",
+responsible:"Odpovědně",
+services:"Služby",
+discover:"Objevujte",
+listings:"inzerátů",
+listing:"inzerát",
+emptyTitle:"Žádné inzeráty",
+emptyText:"Zkuste jiný dotaz, kategorii nebo místo.",
+sellRehomeServices:"Prodej · Nový domov · Služby",
+post:"Přidat",
+fee:"Poplatek za zveřejnění: £1 za inzerát",
+otherAnimal:"Jiné zvíře",
+pricePlaceholder:"Cena, ZDARMA nebo OD £...",
+checkout:"Platba £1 bude připojena k platebnímu systému.",
+required:"Přidejte název, místo, kontakt a fotografii.",
+created:"Náhled inzerátu byl vytvořen. Dalším krokem je platba £1.",
+contactButton:"Zobrazit a kontaktovat",
+defaultDescription:"Inzerát Marketplace.",
+contact:"Kontakt",
+free:"ZDARMA",
+from:"OD",
+rehome:"NOVÝ DOMOV",
+forSaleUpper:"NA PRODEJ",
+serviceUpper:"SLUŽBA",
+freeRehomeUpper:"ZDARMA / NOVÝ DOMOV",
+selectedLocation:"Vybraná lokalita"
+},
+
+sk:{
+saved:"Uložené",
+anywhere:"Kdekoľvek",
+done:"Hotovo",
+changeLocation:"Zmeniť miesto",
+locationPlaceholder:"Hľadať mesto, región alebo krajinu...",
+nearMe:"V mojom okolí",
+distance:"Vzdialenosť",
+findingLocation:"Zisťujeme polohu…",
+noGeolocation:"Geolokácia nie je dostupná.",
+allowLocation:"Povoľte prístup k polohe.",
+searching:"Hľadanie…",
+noPlaces:"Nenašli sa žiadne miesta",
+locationUnavailable:"Vyhľadávanie polohy nie je dostupné",
+forSale:"Na predaj",
+freeRehome:"Zadarmo / Nový domov",
+service:"Služba",
+browse:"Prehliadať",
+viewAll:"Zobraziť všetko",
+youngPets:"Mladé zvieratá",
+responsible:"Zodpovedne",
+services:"Služby",
+discover:"Objavujte",
+listings:"inzerátov",
+listing:"inzerát",
+emptyTitle:"Žiadne inzeráty",
+emptyText:"Skúste iné vyhľadávanie, kategóriu alebo miesto.",
+sellRehomeServices:"Predaj · Nový domov · Služby",
+post:"Pridať",
+fee:"Poplatok za zverejnenie: £1 za inzerát",
+otherAnimal:"Iné zviera",
+pricePlaceholder:"Cena, ZADARMO alebo OD £...",
+checkout:"Platba £1 bude pripojená k platobnému systému.",
+required:"Pridajte názov, miesto, kontakt a fotografiu.",
+created:"Náhľad inzerátu bol vytvorený. Ďalším krokom je platba £1.",
+contactButton:"Zobraziť a kontaktovať",
+defaultDescription:"Inzerát Marketplace.",
+contact:"Kontakt",
+free:"ZADARMO",
+from:"OD",
+rehome:"NOVÝ DOMOV",
+forSaleUpper:"NA PREDAJ",
+serviceUpper:"SLUŽBA",
+freeRehomeUpper:"ZADARMO / NOVÝ DOMOV",
+selectedLocation:"Vybraná lokalita"
+},
+
+hu:{
+saved:"Mentett",
+anywhere:"Bárhol",
+done:"Kész",
+changeLocation:"Hely módosítása",
+locationPlaceholder:"Város, régió vagy ország keresése...",
+nearMe:"A közelemben",
+distance:"Távolság",
+findingLocation:"Helymeghatározás…",
+noGeolocation:"A helymeghatározás nem érhető el.",
+allowLocation:"Engedélyezze a helyhozzáférést.",
+searching:"Keresés…",
+noPlaces:"Nincs találat",
+locationUnavailable:"A helykeresés nem érhető el",
+forSale:"Eladó",
+freeRehome:"Ingyenes / Új otthon",
+service:"Szolgáltatás",
+browse:"Böngészés",
+viewAll:"Összes",
+youngPets:"Fiatal állatok",
+responsible:"Felelősen",
+services:"Szolgáltatások",
+discover:"Fedezze fel",
+listings:"hirdetés",
+listing:"hirdetés",
+emptyTitle:"Nincs találat",
+emptyText:"Próbáljon más keresést, kategóriát vagy helyet.",
+sellRehomeServices:"Eladás · Új otthon · Szolgáltatások",
+post:"Hirdetés",
+fee:"Közzétételi díj: £1 hirdetésenként",
+otherAnimal:"Más állat",
+pricePlaceholder:"Ár, INGYENES vagy £-TÓL...",
+checkout:"Az £1 fizetés később kapcsolódik a fizetési rendszerhez.",
+required:"Adjon meg nevet, helyet, elérhetőséget és fotót.",
+created:"A hirdetés előnézete elkészült. Következő lépés az £1 fizetés.",
+contactButton:"Megtekintés és kapcsolat",
+defaultDescription:"Marketplace hirdetés.",
+contact:"Kapcsolat",
+free:"INGYENES",
+from:"TÓL",
+rehome:"ÚJ OTTHON",
+forSaleUpper:"ELADÓ",
+serviceUpper:"SZOLGÁLTATÁS",
+freeRehomeUpper:"INGYENES / ÚJ OTTHON",
+selectedLocation:"Kiválasztott hely"
+},
+
+ro:{
+saved:"Salvate",
+anywhere:"Oriunde",
+done:"Gata",
+changeLocation:"Schimbă locația",
+locationPlaceholder:"Caută oraș, regiune sau țară...",
+nearMe:"În apropiere",
+distance:"Distanță",
+findingLocation:"Se determină locația…",
+noGeolocation:"Geolocalizarea nu este disponibilă.",
+allowLocation:"Permiteți accesul la locație.",
+searching:"Căutare…",
+noPlaces:"Nu s-au găsit locuri",
+locationUnavailable:"Căutarea locației nu este disponibilă",
+forSale:"De vânzare",
+freeRehome:"Gratuit / Casă nouă",
+service:"Serviciu",
+browse:"Explorează",
+viewAll:"Vezi tot",
+youngPets:"Animale tinere",
+responsible:"Responsabil",
+services:"Servicii",
+discover:"Descoperă",
+listings:"anunțuri",
+listing:"anunț",
+emptyTitle:"Nu s-au găsit anunțuri",
+emptyText:"Încercați altă căutare, categorie sau locație.",
+sellRehomeServices:"Vânzare · Casă nouă · Servicii",
+post:"Publică",
+fee:"Taxă de publicare: £1 per anunț",
+otherAnimal:"Alt animal",
+pricePlaceholder:"Preț, GRATUIT sau DE LA £...",
+checkout:"Plata de £1 va fi conectată la sistemul de plată.",
+required:"Adăugați nume, locație, contact și fotografie.",
+created:"Previzualizarea anunțului a fost creată. Urmează plata de £1.",
+contactButton:"Vezi și contactează",
+defaultDescription:"Anunț Marketplace.",
+contact:"Contact",
+free:"GRATUIT",
+from:"DE LA",
+rehome:"CASĂ NOUĂ",
+forSaleUpper:"DE VÂNZARE",
+serviceUpper:"SERVICIU",
+freeRehomeUpper:"GRATUIT / CASĂ NOUĂ",
+selectedLocation:"Locație selectată"
+},
+
+bg:{
+saved:"Запазени",
+anywhere:"Навсякъде",
+done:"Готово",
+changeLocation:"Промяна на локация",
+locationPlaceholder:"Търсене на град, регион или държава...",
+nearMe:"Близо до мен",
+distance:"Разстояние",
+findingLocation:"Определяме местоположението…",
+noGeolocation:"Геолокацията не е налична.",
+allowLocation:"Разрешете достъп до местоположението.",
+searching:"Търсене…",
+noPlaces:"Няма намерени места",
+locationUnavailable:"Търсенето на местоположение не е налично",
+forSale:"За продажба",
+freeRehome:"Безплатно / Нов дом",
+service:"Услуга",
+browse:"Разгледайте",
+viewAll:"Виж всички",
+youngPets:"Млади животни",
+responsible:"Отговорно",
+services:"Услуги",
+discover:"Открийте",
+listings:"обяви",
+listing:"обява",
+emptyTitle:"Няма намерени обяви",
+emptyText:"Опитайте друго търсене, категория или място.",
+sellRehomeServices:"Продажба · Нов дом · Услуги",
+post:"Публикувай",
+fee:"Такса за публикуване: £1 на обява",
+otherAnimal:"Друго животно",
+pricePlaceholder:"Цена, БЕЗПЛАТНО или ОТ £...",
+checkout:"Плащането от £1 ще бъде свързано с платежната система.",
+required:"Добавете име, място, контакт и снимка.",
+created:"Прегледът на обявата е създаден. Следва плащането от £1.",
+contactButton:"Виж и се свържи",
+defaultDescription:"Marketplace обява.",
+contact:"Контакт",
+free:"БЕЗПЛАТНО",
+from:"ОТ",
+rehome:"НОВ ДОМ",
+forSaleUpper:"ЗА ПРОДАЖБА",
+serviceUpper:"УСЛУГА",
+freeRehomeUpper:"БЕЗПЛАТНО / НОВ ДОМ",
+selectedLocation:"Избрано място"
+},
+
+el:{
+saved:"Αποθηκευμένα",
+anywhere:"Οπουδήποτε",
+done:"Έτοιμο",
+changeLocation:"Αλλαγή τοποθεσίας",
+locationPlaceholder:"Αναζήτηση πόλης, περιοχής ή χώρας...",
+nearMe:"Κοντά μου",
+distance:"Απόσταση",
+findingLocation:"Εντοπισμός τοποθεσίας…",
+noGeolocation:"Η γεωεντόπιση δεν είναι διαθέσιμη.",
+allowLocation:"Επιτρέψτε πρόσβαση στην τοποθεσία.",
+searching:"Αναζήτηση…",
+noPlaces:"Δεν βρέθηκαν μέρη",
+locationUnavailable:"Η αναζήτηση τοποθεσίας δεν είναι διαθέσιμη",
+forSale:"Πώληση",
+freeRehome:"Δωρεάν / Νέο σπίτι",
+service:"Υπηρεσία",
+browse:"Περιήγηση",
+viewAll:"Προβολή όλων",
+youngPets:"Νεαρά ζώα",
+responsible:"Υπεύθυνα",
+services:"Υπηρεσίες",
+discover:"Ανακαλύψτε",
+listings:"αγγελίες",
+listing:"αγγελία",
+emptyTitle:"Δεν βρέθηκαν αγγελίες",
+emptyText:"Δοκιμάστε άλλη αναζήτηση, κατηγορία ή τοποθεσία.",
+sellRehomeServices:"Πώληση · Νέο σπίτι · Υπηρεσίες",
+post:"Δημοσίευση",
+fee:"Κόστος δημοσίευσης: £1 ανά αγγελία",
+otherAnimal:"Άλλο ζώο",
+pricePlaceholder:"Τιμή, ΔΩΡΕΑΝ ή ΑΠΟ £...",
+checkout:"Η πληρωμή £1 θα συνδεθεί με το σύστημα πληρωμών.",
+required:"Προσθέστε όνομα, τοποθεσία, επαφή και φωτογραφία.",
+created:"Η προεπισκόπηση δημιουργήθηκε. Επόμενο βήμα η πληρωμή £1.",
+contactButton:"Προβολή και επικοινωνία",
+defaultDescription:"Αγγελία Marketplace.",
+contact:"Επικοινωνία",
+free:"ΔΩΡΕΑΝ",
+from:"ΑΠΟ",
+rehome:"ΝΕΟ ΣΠΙΤΙ",
+forSaleUpper:"ΠΩΛΕΙΤΑΙ",
+serviceUpper:"ΥΠΗΡΕΣΙΑ",
+freeRehomeUpper:"ΔΩΡΕΑΝ / ΝΕΟ ΣΠΙΤΙ",
+selectedLocation:"Επιλεγμένη τοποθεσία"
+},
+
+sv:{
+saved:"Sparade",
+anywhere:"Överallt",
+done:"Klar",
+changeLocation:"Ändra plats",
+locationPlaceholder:"Sök stad, region eller land...",
+nearMe:"Nära mig",
+distance:"Avstånd",
+findingLocation:"Hämtar din plats…",
+noGeolocation:"Geolokalisering är inte tillgänglig.",
+allowLocation:"Tillåt åtkomst till din plats.",
+searching:"Söker…",
+noPlaces:"Inga platser hittades",
+locationUnavailable:"Platssökning är inte tillgänglig",
+forSale:"Till salu",
+freeRehome:"Gratis / Nytt hem",
+service:"Tjänst",
+browse:"Utforska",
+viewAll:"Visa alla",
+youngPets:"Unga djur",
+responsible:"Ansvarsfullt",
+services:"Tjänster",
+discover:"Upptäck",
+listings:"annonser",
+listing:"annons",
+emptyTitle:"Inga annonser hittades",
+emptyText:"Prova en annan sökning, kategori eller plats.",
+sellRehomeServices:"Sälj · Nytt hem · Tjänster",
+post:"Lägg upp",
+fee:"Publiceringsavgift: £1 per annons",
+otherAnimal:"Annat djur",
+pricePlaceholder:"Pris, GRATIS eller FRÅN £...",
+checkout:"Betalningen på £1 kopplas till betalningssystemet.",
+required:"Lägg till namn, plats, kontakt och foto.",
+created:"Förhandsvisning skapad. Nästa steg är betalning på £1.",
+contactButton:"Visa och kontakta",
+defaultDescription:"Marketplace-annons.",
+contact:"Kontakt",
+free:"GRATIS",
+from:"FRÅN",
+rehome:"NYTT HEM",
+forSaleUpper:"TILL SALU",
+serviceUpper:"TJÄNST",
+freeRehomeUpper:"GRATIS / NYTT HEM",
+selectedLocation:"Vald plats"
+},
+
+da:{
+saved:"Gemte",
+anywhere:"Overalt",
+done:"Færdig",
+changeLocation:"Skift placering",
+locationPlaceholder:"Søg by, region eller land...",
+nearMe:"I nærheden",
+distance:"Afstand",
+findingLocation:"Finder din placering…",
+noGeolocation:"Geolokation er ikke tilgængelig.",
+allowLocation:"Tillad adgang til din placering.",
+searching:"Søger…",
+noPlaces:"Ingen steder fundet",
+locationUnavailable:"Lokationssøgning er ikke tilgængelig",
+forSale:"Til salg",
+freeRehome:"Gratis / Nyt hjem",
+service:"Service",
+browse:"Udforsk",
+viewAll:"Vis alle",
+youngPets:"Unge dyr",
+responsible:"Ansvarligt",
+services:"Services",
+discover:"Opdag",
+listings:"annoncer",
+listing:"annonce",
+emptyTitle:"Ingen annoncer fundet",
+emptyText:"Prøv en anden søgning, kategori eller placering.",
+sellRehomeServices:"Salg · Nyt hjem · Services",
+post:"Opret",
+fee:"Publiceringsgebyr: £1 pr. annonce",
+otherAnimal:"Andet dyr",
+pricePlaceholder:"Pris, GRATIS eller FRA £...",
+checkout:"Betalingen på £1 bliver tilsluttet betalingssystemet.",
+required:"Tilføj navn, placering, kontakt og foto.",
+created:"Annoncevisning oprettet. Næste trin er betaling på £1.",
+contactButton:"Se og kontakt",
+defaultDescription:"Marketplace-annonce.",
+contact:"Kontakt",
+free:"GRATIS",
+from:"FRA",
+rehome:"NYT HJEM",
+forSaleUpper:"TIL SALG",
+serviceUpper:"SERVICE",
+freeRehomeUpper:"GRATIS / NYT HJEM",
+selectedLocation:"Valgt placering"
+},
+
+no:{
+saved:"Lagrede",
+anywhere:"Overalt",
+done:"Ferdig",
+changeLocation:"Endre sted",
+locationPlaceholder:"Søk etter by, region eller land...",
+nearMe:"I nærheten",
+distance:"Avstand",
+findingLocation:"Finner posisjonen din…",
+noGeolocation:"Geolokasjon er ikke tilgjengelig.",
+allowLocation:"Tillat tilgang til posisjonen din.",
+searching:"Søker…",
+noPlaces:"Ingen steder funnet",
+locationUnavailable:"Stedsøk er ikke tilgjengelig",
+forSale:"Til salgs",
+freeRehome:"Gratis / Nytt hjem",
+service:"Tjeneste",
+browse:"Utforsk",
+viewAll:"Vis alle",
+youngPets:"Unge dyr",
+responsible:"Ansvarlig",
+services:"Tjenester",
+discover:"Oppdag",
+listings:"annonser",
+listing:"annonse",
+emptyTitle:"Ingen annonser funnet",
+emptyText:"Prøv et annet søk, kategori eller sted.",
+sellRehomeServices:"Salg · Nytt hjem · Tjenester",
+post:"Publiser",
+fee:"Publiseringsgebyr: £1 per annonse",
+otherAnimal:"Annet dyr",
+pricePlaceholder:"Pris, GRATIS eller FRA £...",
+checkout:"Betalingen på £1 kobles til betalingssystemet.",
+required:"Legg til navn, sted, kontakt og bilde.",
+created:"Forhåndsvisningen er opprettet. Neste steg er betaling på £1.",
+contactButton:"Se og kontakt",
+defaultDescription:"Marketplace-annonse.",
+contact:"Kontakt",
+free:"GRATIS",
+from:"FRA",
+rehome:"NYTT HJEM",
+forSaleUpper:"TIL SALGS",
+serviceUpper:"TJENESTE",
+freeRehomeUpper:"GRATIS / NYTT HJEM",
+selectedLocation:"Valgt sted"
+},
+
+fi:{
+saved:"Tallennetut",
+anywhere:"Missä tahansa",
+done:"Valmis",
+changeLocation:"Vaihda sijaintia",
+locationPlaceholder:"Hae kaupunkia, aluetta tai maata...",
+nearMe:"Lähellä minua",
+distance:"Etäisyys",
+findingLocation:"Haetaan sijaintia…",
+noGeolocation:"Paikannus ei ole käytettävissä.",
+allowLocation:"Salli sijainnin käyttö.",
+searching:"Haetaan…",
+noPlaces:"Paikkoja ei löytynyt",
+locationUnavailable:"Sijaintihakua ei ole saatavilla",
+forSale:"Myydään",
+freeRehome:"Ilmainen / Uusi koti",
+service:"Palvelu",
+browse:"Selaa",
+viewAll:"Näytä kaikki",
+youngPets:"Nuoret eläimet",
+responsible:"Vastuullisesti",
+services:"Palvelut",
+discover:"Tutustu",
+listings:"ilmoitusta",
+listing:"ilmoitus",
+emptyTitle:"Ilmoituksia ei löytynyt",
+emptyText:"Kokeile toista hakua, kategoriaa tai sijaintia.",
+sellRehomeServices:"Myynti · Uusi koti · Palvelut",
+post:"Julkaise",
+fee:"Julkaisumaksu: £1 per ilmoitus",
+otherAnimal:"Muu eläin",
+pricePlaceholder:"Hinta, ILMAINEN tai ALKAEN £...",
+checkout:"£1 maksu liitetään maksujärjestelmään.",
+required:"Lisää nimi, sijainti, yhteystieto ja kuva.",
+created:"Ilmoituksen esikatselu luotu. Seuraava vaihe on £1 maksu.",
+contactButton:"Näytä ja ota yhteyttä",
+defaultDescription:"Marketplace-ilmoitus.",
+contact:"Yhteystieto",
+free:"ILMAINEN",
+from:"ALKAEN",
+rehome:"UUSI KOTI",
+forSaleUpper:"MYYDÄÄN",
+serviceUpper:"PALVELU",
+freeRehomeUpper:"ILMAINEN / UUSI KOTI",
+selectedLocation:"Valittu sijainti"
+},
+
+tr:{
+saved:"Kaydedilenler",
+anywhere:"Her yerde",
+done:"Bitti",
+changeLocation:"Konumu değiştir",
+locationPlaceholder:"Şehir, bölge veya ülke ara...",
+nearMe:"Yakınımda",
+distance:"Mesafe",
+findingLocation:"Konumunuz bulunuyor…",
+noGeolocation:"Konum özelliği kullanılamıyor.",
+allowLocation:"Konum erişimine izin verin.",
+searching:"Aranıyor…",
+noPlaces:"Yer bulunamadı",
+locationUnavailable:"Konum araması kullanılamıyor",
+forSale:"Satılık",
+freeRehome:"Ücretsiz / Yeni yuva",
+service:"Hizmet",
+browse:"Keşfet",
+viewAll:"Tümünü gör",
+youngPets:"Genç hayvanlar",
+responsible:"Sorumlu",
+services:"Hizmetler",
+discover:"Keşfet",
+listings:"ilan",
+listing:"ilan",
+emptyTitle:"İlan bulunamadı",
+emptyText:"Başka bir arama, kategori veya konum deneyin.",
+sellRehomeServices:"Satış · Yeni yuva · Hizmetler",
+post:"İlan ver",
+fee:"Yayın ücreti: ilan başına £1",
+otherAnimal:"Diğer hayvan",
+pricePlaceholder:"Fiyat, ÜCRETSİZ veya £...’DAN",
+checkout:"£1 ödeme ödeme sistemine bağlanacaktır.",
+required:"Ad, konum, iletişim ve fotoğraf ekleyin.",
+created:"İlan önizlemesi oluşturuldu. Sonraki adım £1 ödeme bağlantısıdır.",
+contactButton:"Görüntüle ve iletişim kur",
+defaultDescription:"Marketplace ilanı.",
+contact:"İletişim",
+free:"ÜCRETSİZ",
+from:"BAŞLAYAN",
+rehome:"YENİ YUVA",
+forSaleUpper:"SATILIK",
+serviceUpper:"HİZMET",
+freeRehomeUpper:"ÜCRETSİZ / YENİ YUVA",
+selectedLocation:"Seçilen konum"
+},
+
+ar:{
+saved:"المحفوظة",
+anywhere:"أي مكان",
+done:"تم",
+changeLocation:"تغيير الموقع",
+locationPlaceholder:"ابحث عن مدينة أو منطقة أو دولة...",
+nearMe:"بالقرب مني",
+distance:"المسافة",
+findingLocation:"جارٍ تحديد موقعك…",
+noGeolocation:"خدمة تحديد الموقع غير متاحة.",
+allowLocation:"يرجى السماح بالوصول إلى موقعك.",
+searching:"جارٍ البحث…",
+noPlaces:"لم يتم العثور على أماكن",
+locationUnavailable:"البحث عن الموقع غير متاح",
+forSale:"للبيع",
+freeRehome:"مجاناً / منزل جديد",
+service:"خدمة",
+browse:"تصفح",
+viewAll:"عرض الكل",
+youngPets:"حيوانات صغيرة",
+responsible:"بمسؤولية",
+services:"الخدمات",
+discover:"اكتشف",
+listings:"إعلانات",
+listing:"إعلان",
+emptyTitle:"لم يتم العثور على إعلانات",
+emptyText:"جرّب بحثاً أو فئة أو موقعاً آخر.",
+sellRehomeServices:"بيع · منزل جديد · خدمات",
+post:"نشر",
+fee:"رسوم النشر: £1 لكل إعلان",
+otherAnimal:"حيوان آخر",
+pricePlaceholder:"السعر، مجاناً أو من £...",
+checkout:"سيتم ربط دفع £1 بنظام الدفع.",
+required:"أضف الاسم والموقع ووسيلة الاتصال والصورة.",
+created:"تم إنشاء معاينة الإعلان. الخطوة التالية هي ربط دفع £1.",
+contactButton:"عرض وتواصل",
+defaultDescription:"إعلان Marketplace.",
+contact:"التواصل",
+free:"مجاناً",
+from:"من",
+rehome:"منزل جديد",
+forSaleUpper:"للبيع",
+serviceUpper:"خدمة",
+freeRehomeUpper:"مجاناً / منزل جديد",
+selectedLocation:"الموقع المحدد"
+},
+
+hi:{
+saved:"सहेजे गए",
+anywhere:"कहीं भी",
+done:"हो गया",
+changeLocation:"स्थान बदलें",
+locationPlaceholder:"शहर, क्षेत्र या देश खोजें...",
+nearMe:"मेरे पास",
+distance:"दूरी",
+findingLocation:"आपका स्थान खोजा जा रहा है…",
+noGeolocation:"जियोलोकेशन उपलब्ध नहीं है।",
+allowLocation:"कृपया लोकेशन एक्सेस की अनुमति दें।",
+searching:"खोज रहे हैं…",
+noPlaces:"कोई स्थान नहीं मिला",
+locationUnavailable:"स्थान खोज उपलब्ध नहीं है",
+forSale:"बिक्री के लिए",
+freeRehome:"मुफ़्त / नया घर",
+service:"सेवा",
+browse:"ब्राउज़ करें",
+viewAll:"सभी देखें",
+youngPets:"युवा पालतू",
+responsible:"जिम्मेदार",
+services:"सेवाएँ",
+discover:"खोजें",
+listings:"लिस्टिंग",
+listing:"लिस्टिंग",
+emptyTitle:"कोई लिस्टिंग नहीं मिली",
+emptyText:"दूसरी खोज, श्रेणी या स्थान आज़माएँ।",
+sellRehomeServices:"बिक्री · नया घर · सेवाएँ",
+post:"पोस्ट",
+fee:"प्रकाशन शुल्क: £1 प्रति लिस्टिंग",
+otherAnimal:"अन्य जानवर",
+pricePlaceholder:"कीमत, मुफ़्त या £... से",
+checkout:"£1 भुगतान को भुगतान प्रणाली से जोड़ा जाएगा।",
+required:"नाम, स्थान, संपर्क और फोटो जोड़ें।",
+created:"लिस्टिंग पूर्वावलोकन बन गया। अगला कदम £1 भुगतान जोड़ना है।",
+contactButton:"देखें और संपर्क करें",
+defaultDescription:"Marketplace लिस्टिंग।",
+contact:"संपर्क",
+free:"मुफ़्त",
+from:"से",
+rehome:"नया घर",
+forSaleUpper:"बिक्री के लिए",
+serviceUpper:"सेवा",
+freeRehomeUpper:"मुफ़्त / नया घर",
+selectedLocation:"चुना गया स्थान"
+}
+
+};
+
+
+/* =========================================================
+STATE
+========================================================= */
+
+let activeFilter=
+"all";
+
+let browseFilter=
+"all";
+
+let savedOnly=
+false;
+
+let selectedPosition=
+null;
+
+let selectedLocationName=
+"";
+
+let locationTimer=
+null;
+
+let locationAbortController=
+null;
+
+let currentDetailId=
+null;
+
+
+/* =========================================================
+DEFAULT DETAILS
+========================================================= */
 
 const DETAILS={
 
-"miso-01":{
+"milo-01":{
 title:"Milo",
-tag:"FOR SALE",
+tagType:"sale",
 meta:"Pomeranian · 2 years · 📍 London",
 description:"Friendly companion dog. Contact the owner directly for full information, health details and viewing arrangements.",
 contact:"seller@example.com",
@@ -2470,7 +4180,7 @@ image:"https://images.unsplash.com/photo-1601979031925-424e53b6caaa?auto=format&
 
 "cat-01":{
 title:"Luna",
-tag:"FREE / REHOME",
+tagType:"free",
 meta:"British Shorthair · Female · 📍 Bristol",
 description:"Looking for a responsible new home. Please contact the owner directly for full details.",
 contact:"owner@example.com",
@@ -2479,7 +4189,7 @@ image:"https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&
 
 "puppy-01":{
 title:"Teddy",
-tag:"FOR SALE",
+tagType:"sale",
 meta:"Cockapoo · 12 weeks · 📍 Manchester",
 description:"Young Cockapoo listing. Ask the advertiser about health checks, registration, parents and viewing.",
 contact:"seller@example.com",
@@ -2488,7 +4198,7 @@ image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit
 
 "groom-01":{
 title:"DOGUE Grooming",
-tag:"SERVICE",
+tagType:"service",
 meta:"Grooming & styling · 📍 London",
 description:"Premium grooming and styling service for pets.",
 contact:"+44 7000 000000",
@@ -2497,7 +4207,7 @@ image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&
 
 "rabbit-01":{
 title:"Snow",
-tag:"FREE / REHOME",
+tagType:"free",
 meta:"Rabbit · 1 year · 📍 Brighton",
 description:"Seeking a caring home. Contact the advertiser directly for details.",
 contact:"owner@example.com",
@@ -2506,7 +4216,7 @@ image:"https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&
 
 "photo-01":{
 title:"Pet Portrait Studio",
-tag:"SERVICE",
+tagType:"service",
 meta:"Pet photography · 📍 London",
 description:"Editorial pet portrait photography and private sessions.",
 contact:"studio@example.com",
@@ -2516,30 +4226,279 @@ image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&
 };
 
 
-function openLocationPanel(){
+/* =========================================================
+LANGUAGE
+========================================================= */
+
+function currentLanguage(){
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.getCurrentLanguage==="function"
+){
+
+const value=
+window.PetsDogueLanguage.getCurrentLanguage();
+
+if(typeof value==="string"){
+return normalizeLanguage(value);
+}
+
+if(value&&value.code){
+return normalizeLanguage(value.code);
+}
+
+}
+
+return normalizeLanguage(
+localStorage.getItem(LANGUAGE_KEY)||
+$("languageSelect")?.value||
+"en"
+);
+
+}
+
+
+function normalizeLanguage(value){
+
+let code=
+String(value||"")
+.trim()
+.toLowerCase();
+
+if(code.includes("-")){
+code=code.split("-")[0];
+}
+
+if(code==="ua"){
+code="uk";
+}
+
+return LOCAL_UI[code]
+?code
+:"en";
+
+}
+
+
+function ui(key){
+
+const lang=
+currentLanguage();
+
+return LOCAL_UI[lang]?.[key]||
+LOCAL_UI.en[key]||
+key;
+
+}
+
+
+function typeTag(type){
+
+if(type==="sale"){
+return ui("forSaleUpper");
+}
+
+if(type==="free"){
+return ui("freeRehomeUpper");
+}
+
+return ui("serviceUpper");
+
+}
+
+
+function applyLocalLanguage(){
+
+$("savedText").textContent=
+getSaved().length
+?ui("saved")+" "+getSaved().length
+:ui("saved");
+
+$("locationDone").textContent=
+"✓ "+ui("done");
+
+$("locationChangeLabel").textContent=
+ui("changeLocation");
+
+$("locationInput").placeholder=
+ui("locationPlaceholder");
+
+$("nearBtn").textContent=
+"◎ "+ui("nearMe");
+
+$("distanceFromLocationLabel").textContent=
+ui("distance");
+
+$("filterSale").textContent=
+ui("forSale");
+
+$("filterFree").textContent=
+ui("freeRehome");
+
+$("browseHeading").textContent=
+ui("browse");
+
+$("viewAllButton").textContent=
+ui("viewAll");
+
+$("youngPetsLabel").textContent=
+ui("youngPets").toUpperCase();
+
+$("responsibleLabel").textContent=
+ui("responsible").toUpperCase();
+
+$("servicesLabel").textContent=
+ui("services").toUpperCase();
+
+$("discoverLabel").textContent=
+ui("discover").toUpperCase();
+
+$("emptyTitle").textContent=
+ui("emptyTitle");
+
+$("emptyText").textContent=
+ui("emptyText");
+
+$("sellRehomeServices").textContent=
+ui("sellRehomeServices").toUpperCase();
+
+$("floatingPostText").textContent=
+ui("post").toUpperCase();
+
+$("feeNote").textContent=
+ui("fee");
+
+$("publishSaleOption").textContent=
+ui("forSale");
+
+$("publishFreeOption").textContent=
+ui("freeRehome");
+
+$("otherAnimalOption").textContent=
+ui("otherAnimal");
+
+$("newPrice").placeholder=
+ui("pricePlaceholder");
+
+$("checkoutNote").textContent=
+ui("checkout");
 
 document
-.getElementById("locationPanel")
-.classList.add("open");
+.querySelectorAll("[data-listing-tag]")
+.forEach(
+element=>{
+
+element.textContent=
+typeTag(
+element.dataset.listingTag
+);
+
+}
+);
+
+if(
+!selectedPosition
+){
+
+$("currentLocationLabel").textContent=
+ui("anywhere");
+
+$("locationPanelCurrent").textContent=
+ui("anywhere");
+
+}else if(
+selectedLocationName
+){
+
+$("currentLocationLabel").textContent=
+selectedLocationName;
+
+$("locationPanelCurrent").textContent=
+selectedLocationName;
+
+}
+
+if(currentDetailId){
+refreshOpenDetail();
+}
+
+applyFilters();
+
+}
+
+
+/* =========================================================
+MENU
+========================================================= */
+
+function openMenu(){
+
+$("sideMenu")
+.classList
+.add("open");
+
+$("menuOverlay")
+.classList
+.add("show");
+
+document.body
+.classList
+.add("menu-open");
+
+}
+
+
+function closeMenu(){
+
+$("sideMenu")
+.classList
+.remove("open");
+
+$("menuOverlay")
+.classList
+.remove("show");
+
+document.body
+.classList
+.remove("menu-open");
+
+}
+
+
+/* =========================================================
+LOCATION PANEL
+========================================================= */
+
+function openLocationPanel(){
+
+$("locationPanel")
+.classList
+.add("open");
 
 }
 
 
 function closeLocationPanel(){
 
-document
-.getElementById("locationPanel")
-.classList.remove("open");
+$("locationPanel")
+.classList
+.remove("open");
 
 }
 
 
 function queueLocationSearch(){
 
-clearTimeout(locationTimer);
+clearTimeout(
+locationTimer
+);
 
 locationTimer=
-setTimeout(searchWorldLocation,350);
+setTimeout(
+searchWorldLocation,
+350
+);
 
 }
 
@@ -2547,14 +4506,15 @@ setTimeout(searchWorldLocation,350);
 async function searchWorldLocation(){
 
 const input=
-document.getElementById("locationInput");
+$("locationInput");
 
 const box=
-document.getElementById("locationResults");
+$("locationResults");
 
-const q=input.value.trim();
+const query=
+input.value.trim();
 
-if(q.length<2){
+if(query.length<2){
 
 box.classList.remove("show");
 box.innerHTML="";
@@ -2563,61 +4523,111 @@ return;
 
 }
 
+if(locationAbortController){
+
+locationAbortController.abort();
+
+}
+
+locationAbortController=
+new AbortController();
+
 box.classList.add("show");
 
 box.innerHTML=
-'<button class="location-option">Searching…</button>';
+`
+<button
+class="location-option"
+type="button"
+disabled>
+${escapeHTML(ui("searching"))}
+</button>
+`;
 
 try{
 
 const url=
-"https://nominatim.openstreetmap.org/search?format=json&limit=6&addressdetails=1&q="+
-encodeURIComponent(q);
+"https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&addressdetails=1&accept-language="+
+encodeURIComponent(currentLanguage())+
+"&q="+
+encodeURIComponent(query);
 
 const response=
-await fetch(url,{
+await fetch(
+url,
+{
 headers:{
 "Accept":"application/json"
+},
+signal:
+locationAbortController.signal
 }
-});
+);
+
+if(!response.ok){
+throw new Error("Location search failed");
+}
 
 const results=
 await response.json();
 
-if(!results.length){
+if(!Array.isArray(results)||!results.length){
 
 box.innerHTML=
-'<button class="location-option">No places found</button>';
+`
+<button
+class="location-option"
+type="button"
+disabled>
+${escapeHTML(ui("noPlaces"))}
+</button>
+`;
 
 return;
 
 }
 
 box.innerHTML=
-results.map(place=>{
+results
+.map(
+place=>{
 
 const name=
-String(place.display_name)
-.replace(/"/g,"&quot;");
+String(
+place.display_name||""
+);
 
 return `
 <button
 class="location-option"
 type="button"
-data-lat="${place.lat}"
-data-lng="${place.lon}"
-data-name="${name}"
+data-lat="${escapeHTML(place.lat)}"
+data-lng="${escapeHTML(place.lon)}"
+data-name="${escapeHTML(name)}"
 onclick="chooseWorldLocation(this)">
-${name}
+${escapeHTML(name)}
 </button>
 `;
 
-}).join("");
+}
+)
+.join("");
 
 }catch(error){
 
+if(error?.name==="AbortError"){
+return;
+}
+
 box.innerHTML=
-'<button class="location-option">Location search unavailable</button>';
+`
+<button
+class="location-option"
+type="button"
+disabled>
+${escapeHTML(ui("locationUnavailable"))}
+</button>
+`;
 
 }
 
@@ -2627,39 +4637,37 @@ box.innerHTML=
 function chooseWorldLocation(button){
 
 selectedPosition={
-lat:Number(button.dataset.lat),
-lng:Number(button.dataset.lng)
+lat:Number(
+button.dataset.lat
+),
+lng:Number(
+button.dataset.lng
+)
 };
 
-myPosition=null;
+selectedLocationName=
+button.dataset.name||
+ui("selectedLocation");
 
-document
-.getElementById("currentLocationLabel")
-.textContent=
-button.dataset.name;
+$("currentLocationLabel").textContent=
+selectedLocationName;
 
-document
-.getElementById("locationPanelCurrent")
-.textContent=
-button.dataset.name;
+$("locationPanelCurrent").textContent=
+selectedLocationName;
 
-document
-.getElementById("distanceLabel")
-.textContent="";
+$("locationResults")
+.classList
+.remove("show");
 
-document
-.getElementById("locationPanelDistance")
-.textContent="";
+$("locationInput").value="";
 
-document
-.getElementById("radiusBox")
-.classList.remove("show");
+$("radiusBox")
+.classList
+.add("show");
 
-document
-.getElementById("locationResults")
-.classList.remove("show");
+persistLocation();
 
-applyFilters();
+updateRadius();
 
 }
 
@@ -2668,44 +4676,62 @@ function useMyLocation(){
 
 if(!navigator.geolocation){
 
-alert("Geolocation is not available on this device.");
+alert(
+ui("noGeolocation")
+);
 
 return;
 
 }
 
-const label=
-document.getElementById("currentLocationLabel");
-
-label.textContent=
-"Finding your location…";
+$("currentLocationLabel").textContent=
+ui("findingLocation");
 
 navigator.geolocation.getCurrentPosition(
 
 async position=>{
 
-myPosition={
-lat:position.coords.latitude,
-lng:position.coords.longitude
+selectedPosition={
+lat:
+position.coords.latitude,
+lng:
+position.coords.longitude
 };
 
-selectedPosition=myPosition;
+$("radiusBox")
+.classList
+.add("show");
 
-document
-.getElementById("radiusBox")
-.classList.add("show");
+let placeName=
+ui("nearMe");
 
 try{
 
 const url=
-`https://nominatim.openstreetmap.org/reverse?format=json&lat=${myPosition.lat}&lon=${myPosition.lng}&zoom=10`;
+"https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+
+encodeURIComponent(
+selectedPosition.lat
+)+
+"&lon="+
+encodeURIComponent(
+selectedPosition.lng
+)+
+"&zoom=10&accept-language="+
+encodeURIComponent(
+currentLanguage()
+);
 
 const response=
-await fetch(url,{
+await fetch(
+url,
+{
 headers:{
 "Accept":"application/json"
 }
-});
+}
+);
+
+if(response.ok){
 
 const result=
 await response.json();
@@ -2717,27 +4743,40 @@ const place=
 address.city||
 address.town||
 address.village||
+address.municipality||
 address.county||
-"Near me";
+"";
 
-const text=
-"Near me · "+place;
+if(place){
 
-label.textContent=text;
+placeName=
+ui("nearMe")+
+" · "+
+place;
 
-document
-.getElementById("locationPanelCurrent")
-.textContent=text;
+}
+
+}
 
 }catch(error){
 
-label.textContent="Near me";
-
-document
-.getElementById("locationPanelCurrent")
-.textContent="Near me";
+console.warn(
+"Reverse geocoding:",
+error
+);
 
 }
+
+selectedLocationName=
+placeName;
+
+$("currentLocationLabel").textContent=
+placeName;
+
+$("locationPanelCurrent").textContent=
+placeName;
+
+persistLocation();
 
 updateRadius();
 
@@ -2745,9 +4784,20 @@ updateRadius();
 
 ()=>{
 
-label.textContent="Anywhere";
+selectedPosition=
+null;
 
-alert("Please allow location access to use Near me.");
+selectedLocationName="";
+
+$("currentLocationLabel").textContent=
+ui("anywhere");
+
+$("locationPanelCurrent").textContent=
+ui("anywhere");
+
+alert(
+ui("allowLocation")
+);
 
 },
 
@@ -2765,45 +4815,188 @@ maximumAge:300000
 function updateRadius(){
 
 const value=
-document
-.getElementById("radiusSlider")
-.value;
+Number(
+$("radiusSlider").value
+);
 
-document
-.getElementById("radiusValue")
-.textContent=
+$("radiusValue").textContent=
 value+" km";
 
-document
-.getElementById("distanceLabel")
-.textContent=
+if(selectedPosition){
+
+$("distanceLabel").textContent=
 "· "+value+" km";
 
-document
-.getElementById("locationPanelDistance")
-.textContent=
+$("locationPanelDistance").textContent=
 value+" km";
+
+}else{
+
+$("distanceLabel").textContent="";
+
+$("locationPanelDistance").textContent="";
+
+}
+
+persistLocation();
 
 applyFilters();
 
 }
 
 
-function distanceKm(lat1,lng1,lat2,lng2){
+function persistLocation(){
 
-const R=6371;
+try{
+
+localStorage.setItem(
+MARKET_LOCATION_KEY,
+JSON.stringify({
+position:
+selectedPosition,
+name:
+selectedLocationName,
+radius:
+Number(
+$("radiusSlider").value
+)
+})
+);
+
+}catch(error){
+
+console.warn(
+"Marketplace location save:",
+error
+);
+
+}
+
+}
+
+
+function restoreLocation(){
+
+try{
+
+const saved=
+JSON.parse(
+localStorage.getItem(
+MARKET_LOCATION_KEY
+)||
+"null"
+);
+
+if(
+saved?.position &&
+Number.isFinite(
+Number(
+saved.position.lat
+)
+) &&
+Number.isFinite(
+Number(
+saved.position.lng
+)
+)
+){
+
+selectedPosition={
+lat:Number(
+saved.position.lat
+),
+lng:Number(
+saved.position.lng
+)
+};
+
+selectedLocationName=
+String(
+saved.name||""
+);
+
+$("radiusBox")
+.classList
+.add("show");
+
+}
+
+if(
+Number.isFinite(
+Number(
+saved?.radius
+)
+)
+){
+
+$("radiusSlider").value=
+Math.min(
+500,
+Math.max(
+1,
+Number(
+saved.radius
+)
+)
+);
+
+}
+
+}catch(error){
+
+selectedPosition=null;
+selectedLocationName="";
+
+}
+
+}
+
+
+/* =========================================================
+DISTANCE
+========================================================= */
+
+function distanceKm(
+lat1,
+lng1,
+lat2,
+lng2
+){
+
+const R=
+6371;
 
 const dLat=
-(lat2-lat1)*Math.PI/180;
+(
+lat2-lat1
+)*
+Math.PI/
+180;
 
 const dLng=
-(lng2-lng1)*Math.PI/180;
+(
+lng2-lng1
+)*
+Math.PI/
+180;
 
 const a=
-Math.sin(dLat/2)**2+
-Math.cos(lat1*Math.PI/180)*
-Math.cos(lat2*Math.PI/180)*
-Math.sin(dLng/2)**2;
+Math.sin(
+dLat/2
+)**2+
+Math.cos(
+lat1*
+Math.PI/
+180
+)*
+Math.cos(
+lat2*
+Math.PI/
+180
+)*
+Math.sin(
+dLng/2
+)**2;
 
 return R*
 2*
@@ -2815,18 +5008,39 @@ Math.sqrt(1-a)
 }
 
 
-function setQuickFilter(button,type){
+/* =========================================================
+FILTERS
+========================================================= */
 
-activeFilter=type;
-savedOnly=false;
+function setQuickFilter(
+button,
+type
+){
+
+activeFilter=
+type;
+
+savedOnly=
+false;
+
+$("savedLink")
+.classList
+.remove("active");
 
 document
-.querySelectorAll(".quick[data-filter]")
-.forEach(btn=>
-btn.classList.remove("active")
+.querySelectorAll(
+".quick[data-filter]"
+)
+.forEach(
+item=>
+item.classList.remove(
+"active"
+)
 );
 
-button.classList.add("active");
+button.classList.add(
+"active"
+);
 
 applyFilters();
 
@@ -2835,12 +5049,15 @@ applyFilters();
 
 function setBrowse(type){
 
-browseFilter=type;
+browseFilter=
+type;
 
 applyFilters();
 
 document
-.querySelector(".listings-head")
+.querySelector(
+".listings-head"
+)
 .scrollIntoView({
 behavior:"smooth",
 block:"start"
@@ -2851,104 +5068,26 @@ block:"start"
 
 function showSavedOnly(){
 
-savedOnly=!savedOnly;
+savedOnly=
+!savedOnly;
+
+$("savedLink")
+.classList
+.toggle(
+"active",
+savedOnly
+);
 
 applyFilters();
 
 document
-.querySelector(".listings-head")
+.querySelector(
+".listings-head"
+)
 .scrollIntoView({
-behavior:"smooth"
+behavior:"smooth",
+block:"start"
 });
-
-}
-
-
-function getSaved(){
-
-try{
-
-return JSON.parse(
-localStorage.getItem("dogue_market_saved")||"[]"
-);
-
-}catch(e){
-
-return[];
-
-}
-
-}
-
-
-function toggleSaved(event,id,button){
-
-event.stopPropagation();
-
-let saved=getSaved();
-
-if(saved.includes(id)){
-
-saved=
-saved.filter(item=>item!==id);
-
-button.classList.remove("saved");
-button.textContent="♡";
-
-}else{
-
-saved.push(id);
-
-button.classList.add("saved");
-button.textContent="♥";
-
-}
-
-localStorage.setItem(
-"dogue_market_saved",
-JSON.stringify(saved)
-);
-
-updateSavedButtons();
-
-}
-
-
-function updateSavedButtons(){
-
-const saved=getSaved();
-
-document
-.querySelectorAll(".listing-card")
-.forEach(card=>{
-
-const button=
-card.querySelector(".heart");
-
-if(!button)return;
-
-if(saved.includes(card.dataset.id)){
-
-button.classList.add("saved");
-button.textContent="♥";
-
-}else{
-
-button.classList.remove("saved");
-button.textContent="♡";
-
-}
-
-});
-
-document
-.getElementById("savedText")
-.textContent=
-saved.length
-?
-`Saved ${saved.length}`
-:
-"Saved";
 
 }
 
@@ -2956,26 +5095,30 @@ saved.length
 function applyFilters(){
 
 const query=
-document
-.getElementById("mainSearch")
+$("mainSearch")
 .value
 .toLowerCase()
 .trim();
 
 const cards=[
-...document.querySelectorAll(".listing-card")
+...document.querySelectorAll(
+".listing-card"
+)
 ];
 
-const saved=getSaved();
+const saved=
+getSaved();
 
 const radius=
 Number(
-document.getElementById("radiusSlider").value
+$("radiusSlider").value
 );
 
-let visible=0;
+let visible=
+0;
 
-cards.forEach(card=>{
+cards.forEach(
+card=>{
 
 const text=
 (
@@ -2987,17 +5130,18 @@ card.innerText
 
 let ok=
 !query||
-text.includes(query);
-
+text.includes(
+query
+);
 
 if(activeFilter!=="all"){
 
 ok=
 ok&&
-card.dataset.type===activeFilter;
+card.dataset.type===
+activeFilter;
 
 }
-
 
 if(browseFilter!=="all"){
 
@@ -3007,7 +5151,9 @@ ok=
 ok&&
 card.dataset.type==="free";
 
-}else if(browseFilter==="services"){
+}else if(
+browseFilter==="services"
+){
 
 ok=
 ok&&
@@ -3017,29 +5163,34 @@ card.dataset.type==="service";
 
 ok=
 ok&&
-card.dataset.animal===browseFilter;
+card.dataset.animal===
+browseFilter;
 
 }
 
 }
-
 
 if(savedOnly){
 
 ok=
 ok&&
-saved.includes(card.dataset.id);
+saved.includes(
+card.dataset.id
+);
 
 }
 
-
-if(myPosition){
+if(selectedPosition){
 
 const lat=
-Number(card.dataset.lat);
+Number(
+card.dataset.lat
+);
 
 const lng=
-Number(card.dataset.lng);
+Number(
+card.dataset.lng
+);
 
 if(
 Number.isFinite(lat)&&
@@ -3049,8 +5200,8 @@ Number.isFinite(lng)
 ok=
 ok&&
 distanceKm(
-myPosition.lat,
-myPosition.lng,
+selectedPosition.lat,
+selectedPosition.lng,
 lat,
 lng
 )<=radius;
@@ -3059,74 +5210,295 @@ lng
 
 }
 
-
 card.style.display=
 ok
-?
-"block"
-:
-"none";
+?"block"
+:"none";
 
-if(ok)visible++;
+if(ok){
+visible++;
+}
 
-});
+}
+);
 
+$("listingCount").textContent=
+visible+
+" "+
+(
+visible===1
+?ui("listing")
+:ui("listings")
+);
 
-document
-.getElementById("listingCount")
-.textContent=
-visible+" listings";
+$("emptyMarket").hidden=
+visible!==0;
 
 }
 
 
-function openDetails(id){
+/* =========================================================
+SAVED
+========================================================= */
 
-const data=DETAILS[id];
+function getSaved(){
 
-if(!data)return;
+try{
 
-document.getElementById("detailImage").src=data.image;
-document.getElementById("detailTag").textContent=data.tag;
-document.getElementById("detailTitle").textContent=data.title;
-document.getElementById("detailMeta").textContent=data.meta;
-document.getElementById("detailDescription").textContent=data.description;
-document.getElementById("detailContact").textContent=data.contact;
+const value=
+JSON.parse(
+localStorage.getItem(
+SAVED_KEY
+)||
+"[]"
+);
+
+return Array.isArray(value)
+?value
+:[];
+
+}catch(error){
+
+return[];
+
+}
+
+}
+
+
+function toggleSaved(
+event,
+id,
+button
+){
+
+event.stopPropagation();
+
+let saved=
+getSaved();
+
+if(saved.includes(id)){
+
+saved=
+saved.filter(
+item=>item!==id
+);
+
+button.classList.remove(
+"saved"
+);
+
+button.textContent=
+"♡";
+
+}else{
+
+saved.push(
+id
+);
+
+button.classList.add(
+"saved"
+);
+
+button.textContent=
+"♥";
+
+}
+
+localStorage.setItem(
+SAVED_KEY,
+JSON.stringify(
+saved
+)
+);
+
+updateSavedButtons();
+
+if(savedOnly){
+applyFilters();
+}
+
+}
+
+
+function updateSavedButtons(){
+
+const saved=
+getSaved();
 
 document
-.getElementById("detailsModal")
-.classList.add("open");
+.querySelectorAll(
+".listing-card"
+)
+.forEach(
+card=>{
 
-document.body.style.overflow="hidden";
+const button=
+card.querySelector(
+".heart"
+);
+
+if(!button){
+return;
+}
+
+if(
+saved.includes(
+card.dataset.id
+)
+){
+
+button.classList.add(
+"saved"
+);
+
+button.textContent=
+"♥";
+
+}else{
+
+button.classList.remove(
+"saved"
+);
+
+button.textContent=
+"♡";
+
+}
+
+}
+);
+
+$("savedText").textContent=
+saved.length
+?ui("saved")+" "+saved.length
+:ui("saved");
+
+}
+
+
+/* =========================================================
+DETAILS
+========================================================= */
+
+function openDetails(id){
+
+const data=
+DETAILS[id];
+
+if(!data){
+return;
+}
+
+currentDetailId=
+id;
+
+$("detailImage").src=
+data.image;
+
+$("detailImage").alt=
+data.title;
+
+$("detailTag").textContent=
+typeTag(
+data.tagType
+);
+
+$("detailTitle").textContent=
+data.title;
+
+$("detailMeta").textContent=
+data.meta;
+
+$("detailDescription").textContent=
+data.description||
+ui("defaultDescription");
+
+$("detailContact").textContent=
+data.contact;
+
+$("detailsModal")
+.classList
+.add("open");
+
+document.body
+.classList
+.add("modal-open");
+
+}
+
+
+function refreshOpenDetail(){
+
+if(
+!currentDetailId||
+!DETAILS[currentDetailId]
+){
+return;
+}
+
+$("detailTag").textContent=
+typeTag(
+DETAILS[currentDetailId].tagType
+);
 
 }
 
 
 function openPublish(){
 
-document
-.getElementById("publishModal")
-.classList.add("open");
+$("publishModal")
+.classList
+.add("open");
 
-document.body.style.overflow="hidden";
+document.body
+.classList
+.add("modal-open");
 
 }
 
 
 function closeModal(id){
 
-document
-.getElementById(id)
-.classList.remove("open");
+const modal=
+$(id);
 
-document.body.style.overflow="";
+if(!modal){
+return;
+}
+
+modal.classList.remove(
+"open"
+);
+
+if(id==="detailsModal"){
+currentDetailId=null;
+}
+
+if(
+!document.querySelector(
+".modal.open"
+)
+){
+
+document.body
+.classList
+.remove("modal-open");
+
+}
 
 }
 
 
-function closeOnBackdrop(event,id){
+function closeOnBackdrop(
+event,
+id
+){
 
-if(event.target.id===id){
+if(
+event.target.id===id
+){
 
 closeModal(id);
 
@@ -3135,129 +5507,317 @@ closeModal(id);
 }
 
 
+/* =========================================================
+LOCAL LISTINGS
+========================================================= */
+
+function getLocalListings(){
+
+try{
+
+const value=
+JSON.parse(
+localStorage.getItem(
+LOCAL_LISTINGS_KEY
+)||
+"[]"
+);
+
+return Array.isArray(value)
+?value
+:[];
+
+}catch(error){
+
+return[];
+
+}
+
+}
+
+
+function saveLocalListings(listings){
+
+try{
+
+localStorage.setItem(
+LOCAL_LISTINGS_KEY,
+JSON.stringify(
+listings
+)
+);
+
+}catch(error){
+
+console.warn(
+"Could not persist listing.",
+error
+);
+
+}
+
+}
+
+
+function renderStoredListings(){
+
+const listings=
+getLocalListings();
+
+listings
+.slice()
+.reverse()
+.forEach(
+listing=>{
+
+if(
+document.querySelector(
+`.listing-card[data-id="${CSS.escape(listing.id)}"]`
+)
+){
+return;
+}
+
+insertLocalListing(
+listing,
+false
+);
+
+}
+);
+
+}
+
+
 function createLocalListing(){
 
 const title=
-document.getElementById("newTitle").value.trim();
+$("newTitle")
+.value
+.trim();
 
 const location=
-document.getElementById("newLocation").value.trim();
+$("newLocation")
+.value
+.trim();
 
 const contact=
-document.getElementById("newContact").value.trim();
+$("newContact")
+.value
+.trim();
 
 const photo=
-document.getElementById("newPhoto").files[0];
+$("newPhoto")
+.files[0];
 
-if(!title||!location||!contact||!photo){
+if(
+!title||
+!location||
+!contact||
+!photo
+){
 
-alert("Please add name, location, contact and a photo.");
+alert(
+ui("required")
+);
 
 return;
 
 }
 
-const reader=new FileReader();
+const reader=
+new FileReader();
 
-reader.onload=function(event){
+reader.onload=
+function(event){
 
-const type=
-document.getElementById("newType").value;
+const listing={
 
-const animal=
-document.getElementById("newAnimal").value;
+id:
+"local-"+
+Date.now(),
 
-const breed=
-document.getElementById("newBreed").value.trim();
+type:
+$("newType").value,
 
-const price=
-document.getElementById("newPrice").value.trim()
-||
-"CONTACT";
-
-const description=
-document.getElementById("newDescription").value.trim();
-
-const id=
-"local-"+Date.now();
-
-const typeLabel=
-type==="sale"
-?
-"FOR SALE"
-:
-type==="free"
-?
-"FREE / REHOME"
-:
-"SERVICE";
-
-
-DETAILS[id]={
+animal:
+$("newAnimal").value,
 
 title,
 
-tag:typeLabel,
+breed:
+$("newBreed").value.trim(),
 
-meta:
-(
-breed
-?
-breed+" · "
-:
-""
-)
-+
-"📍 "+
 location,
 
+price:
+$("newPrice").value.trim()||
+"CONTACT",
+
 description:
-description||
-"Marketplace listing.",
+$("newDescription").value.trim()||
+ui("defaultDescription"),
 
 contact,
 
-image:event.target.result
+image:
+event.target.result,
+
+lat:null,
+lng:null
 
 };
 
+const stored=
+getLocalListings();
+
+stored.unshift(
+listing
+);
+
+saveLocalListings(
+stored
+);
+
+insertLocalListing(
+listing,
+true
+);
+
+resetPublishForm();
+
+closeModal(
+"publishModal"
+);
+
+applyFilters();
+
+alert(
+ui("created")
+);
+
+};
+
+reader.readAsDataURL(
+photo
+);
+
+}
+
+
+function insertLocalListing(
+listing,
+prepend
+){
+
+DETAILS[listing.id]={
+
+title:
+listing.title,
+
+tagType:
+listing.type,
+
+meta:
+(
+listing.breed
+?listing.breed+" · "
+:""
+)+
+"📍 "+
+listing.location,
+
+description:
+listing.description||
+ui("defaultDescription"),
+
+contact:
+listing.contact,
+
+image:
+listing.image
+
+};
 
 const article=
-document.createElement("article");
+document.createElement(
+"article"
+);
 
-article.className="listing-card";
-article.dataset.id=id;
-article.dataset.type=type;
-article.dataset.animal=animal;
+article.className=
+"listing-card";
+
+article.dataset.id=
+listing.id;
+
+article.dataset.type=
+listing.type;
+
+article.dataset.animal=
+listing.animal;
+
+if(
+Number.isFinite(
+Number(
+listing.lat
+)
+) &&
+Number.isFinite(
+Number(
+listing.lng
+)
+)
+){
+
+article.dataset.lat=
+String(
+listing.lat
+);
+
+article.dataset.lng=
+String(
+listing.lng
+);
+
+}
 
 article.dataset.search=
-`${title} ${breed} ${location} ${type} ${animal}`
+[
+listing.title,
+listing.breed,
+listing.location,
+listing.type,
+listing.animal
+]
+.join(" ")
 .toLowerCase();
 
-
-article.innerHTML=`
-
+article.innerHTML=
+`
 <div
 class="listing-photo"
-onclick="openDetails('${id}')">
+onclick="openDetails('${escapeHTML(listing.id)}')">
 
 <img
-src="${event.target.result}"
-alt="">
+src="${escapeHTML(listing.image)}"
+alt="${escapeHTML(listing.title)}">
 
 <button
 class="heart"
 type="button"
-onclick="toggleSaved(event,'${id}',this)">
+onclick="toggleSaved(event,'${escapeHTML(listing.id)}',this)"
+aria-label="Save">
 ♡
 </button>
 
 <span class="price">
-${escapeHTML(price)}
+${escapeHTML(listing.price)}
 </span>
 
-<span class="tag">
-${typeLabel}
+<span
+class="tag"
+data-listing-tag="${escapeHTML(listing.type)}">
+${escapeHTML(typeTag(listing.type))}
 </span>
 
 </div>
@@ -3265,90 +5825,322 @@ ${typeLabel}
 <div class="listing-copy">
 
 <h3 class="listing-name">
-${escapeHTML(title)}
+${escapeHTML(listing.title)}
 </h3>
 
 <div class="listing-meta">
-${escapeHTML(breed)}
+${escapeHTML(listing.breed)}
 </div>
 
 <div class="listing-meta">
-📍 ${escapeHTML(location)}
+📍 ${escapeHTML(listing.location)}
 </div>
 
 <button
 class="contact-small"
 type="button"
-onclick="openDetails('${id}')">
-View &amp; contact
+onclick="openDetails('${escapeHTML(listing.id)}')">
+${escapeHTML(ui("contactButton"))}
 </button>
 
 </div>
-
 `;
 
+if(prepend){
 
-document
-.getElementById("listingGrid")
-.prepend(article);
-
-closeModal("publishModal");
-
-applyFilters();
-
-if(
-typeof window.PetsDogueMarketplaceApplyLanguage==="function"
-){
-
-window.PetsDogueMarketplaceApplyLanguage();
-
-}
-
-alert(
-"Listing preview created. £1 checkout connection is the next backend step."
+$("listingGrid")
+.prepend(
+article
 );
 
-};
+}else{
 
-reader.readAsDataURL(photo);
+$("listingGrid")
+.append(
+article
+);
 
 }
 
+}
+
+
+function resetPublishForm(){
+
+$("newType").value=
+"sale";
+
+$("newAnimal").value=
+"dogs";
+
+$("newTitle").value=
+"";
+
+$("newBreed").value=
+"";
+
+$("newLocation").value=
+"";
+
+$("newPrice").value=
+"";
+
+$("newContact").value=
+"";
+
+$("newPhoto").value=
+"";
+
+$("newDescription").value=
+"";
+
+}
+
+
+/* =========================================================
+HTML ESCAPE
+========================================================= */
 
 function escapeHTML(value){
 
-return String(value||"")
-
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+return String(
+value||
+""
+)
+.replaceAll(
+"&",
+"&amp;"
+)
+.replaceAll(
+"<",
+"&lt;"
+)
+.replaceAll(
+">",
+"&gt;"
+)
+.replaceAll(
+'"',
+"&quot;"
+)
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
+
+/* =========================================================
+ACTIVE NAV
+========================================================= */
+
+function keepMarketplaceVisible(){
+
+const active=
+$("categoryNav")
+?.querySelector(
+".active"
+);
+
+if(!active){
+return;
+}
+
+requestAnimationFrame(
+()=>{
+
+active.scrollIntoView({
+behavior:"instant",
+inline:"center",
+block:"nearest"
+});
+
+}
+);
+
+}
+
+
+/* =========================================================
+EVENTS
+========================================================= */
 
 document.addEventListener(
 "keydown",
 event=>{
 
-if(event.key==="Escape"){
+if(
+event.key==="Escape"
+){
 
+closeMenu();
 closeLocationPanel();
 closeModal("detailsModal");
 closeModal("publishModal");
 
 }
 
-});
+}
+);
 
+
+document.addEventListener(
+"click",
+event=>{
+
+if(
+!event.target.closest(
+".location-panel"
+) &&
+!event.target.closest(
+".location-summary"
+) &&
+!event.target.closest(
+".filter-toggle"
+)
+){
+
+closeLocationPanel();
+
+}
+
+}
+);
+
+
+window.addEventListener(
+"storage",
+event=>{
+
+if(
+event.key===SAVED_KEY
+){
 
 updateSavedButtons();
 applyFilters();
 
-</script>
+}
 
-<script src="/i18n/engine.js?v=3"></script>
+if(
+event.key===LOCAL_LISTINGS_KEY
+){
+
+window.location.reload();
+
+}
+
+if(
+event.key===LANGUAGE_KEY
+){
+
+setTimeout(
+applyLocalLanguage,
+0
+);
+
+}
+
+}
+);
+
+
+window.addEventListener(
+"languagechange",
+()=>setTimeout(
+applyLocalLanguage,
+0
+)
+);
+
+
+window.addEventListener(
+"petsdogue:languagechange",
+()=>setTimeout(
+applyLocalLanguage,
+0
+)
+);
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+restoreLocation();
+
+renderStoredListings();
+
+applyLocalLanguage();
+
+updateSavedButtons();
+
+updateRadius();
+
+keepMarketplaceVisible();
+
+$("languageSelect")
+?.addEventListener(
+"change",
+()=>setTimeout(
+applyLocalLanguage,
+50
+)
+);
+
+const observer=
+new MutationObserver(
+mutations=>{
+
+if(
+mutations.some(
+item=>
+item.type==="attributes" &&
+(
+item.attributeName==="lang" ||
+item.attributeName==="dir"
+)
+)
+){
+
+setTimeout(
+applyLocalLanguage,
+0
+);
+
+}
+
+}
+);
+
+observer.observe(
+document.documentElement,
+{
+attributes:true,
+attributeFilter:[
+"lang",
+"dir"
+]
+}
+);
+
+}
+);
+
+
+window.addEventListener(
+"pageshow",
+()=>{
+
+applyLocalLanguage();
+updateSavedButtons();
+applyFilters();
+keepMarketplaceVisible();
+
+}
+);
+
+</script>
 
 </body>
 </html>
