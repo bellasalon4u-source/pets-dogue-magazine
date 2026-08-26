@@ -196,52 +196,61 @@ background:linear-gradient(
 }
 
 /* =========================================================
-SIDE MENU
+ARTICLES CONTENTS MENU
 ========================================================= */
 
 .menu-overlay{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.74);
-display:none;
+opacity:0;
+visibility:hidden;
+pointer-events:none;
 z-index:2500;
+transition:opacity .25s ease,visibility .25s ease;
 }
 
 .menu-overlay.show{
-display:block;
+opacity:1;
+visibility:visible;
+pointer-events:auto;
 }
 
 .side-menu{
 position:fixed;
 top:0;
-left:-100%;
-width:min(430px,94%);
-height:100vh;
+bottom:0;
+left:0;
+width:min(430px,94vw);
+height:100dvh;
+max-height:100dvh;
 background:#fff;
 z-index:2600;
-overflow-y:auto;
-transition:.35s;
+display:flex;
+flex-direction:column;
+overflow:hidden;
 border-right:2px solid #111;
+transform:translateX(-105%);
+transition:transform .35s ease;
+overscroll-behavior:contain;
 }
 
 .side-menu.open{
-left:0;
+transform:translateX(0);
 }
 
 .side-menu-header{
 background:#111;
 color:#fff;
-padding:24px;
+padding:20px 22px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-position:sticky;
-top:0;
-z-index:3;
+flex:0 0 auto;
 }
 
 .side-menu-header h2{
-font:normal 32px Georgia,serif;
+font:normal 31px Georgia,serif;
 }
 
 .side-menu-header button{
@@ -249,104 +258,92 @@ width:43px;
 height:43px;
 border:0;
 background:#fff;
+color:#111;
 border-radius:50%;
 font-size:24px;
 }
 
-.menu-account{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-padding:18px 18px 12px;
-}
-
-.menu-account a{
-padding:12px;
-text-align:center;
-border:2px solid #111;
-border-radius:999px;
-font-weight:bold;
-}
-
-.menu-account a:last-child{
-background:var(--green);
-border-color:var(--green);
-}
-
-.menu-language{
-padding:0 18px 18px;
+.menu-context{
+padding:15px 18px 13px;
 border-bottom:1px solid #ddd;
+background:#f7f3ea;
+flex:0 0 auto;
 }
 
-.menu-language span{
-display:block;
+.menu-context-label{
 font-size:10px;
 font-weight:bold;
-letter-spacing:1.5px;
+letter-spacing:1.7px;
+text-transform:uppercase;
 color:#777;
-margin:5px 0 8px;
+margin-bottom:5px;
 }
 
-.menu-language select{
-width:100%;
-height:48px;
-border:2px solid #111;
-border-radius:999px;
-background:#faf8f3;
-padding:0 15px;
+.menu-context-title{
+font:normal 26px/1.05 Georgia,serif;
 }
 
 .menu-list{
-padding:18px;
+padding:14px 14px max(28px,env(safe-area-inset-bottom));
 display:grid;
-gap:12px;
+gap:10px;
+overflow-y:auto;
+overflow-x:hidden;
+flex:1 1 auto;
+min-height:0;
+-webkit-overflow-scrolling:touch;
+overscroll-behavior:contain;
+scrollbar-width:thin;
 }
 
 .menu-item{
 display:grid;
-grid-template-columns:82px minmax(0,1fr);
-align-items:center;
-gap:14px;
-border:2px solid #111;
+grid-template-columns:88px minmax(0,1fr);
+align-items:stretch;
+min-height:92px;
+border:1.5px solid #111;
 background:#faf8f3;
-border-radius:21px;
 overflow:hidden;
+flex:none;
 }
 
 .menu-item img{
-width:82px;
-height:82px;
+width:88px;
+height:100%;
+min-height:92px;
 object-fit:cover;
 }
 
-.menu-item h3{
-font:21px Georgia,serif;
-margin-bottom:4px;
-}
-
-.menu-item p{
-font-size:12px;
-line-height:1.45;
-color:#666;
-padding-right:9px;
-}
-
-.menu-bottom{
-padding:18px;
-background:#f4f0e7;
-border-top:1px solid #ddd;
-}
-
-.menu-bottom div{
+.menu-item-copy{
+padding:11px 12px;
 display:flex;
-flex-wrap:wrap;
-gap:13px 20px;
+flex-direction:column;
+justify-content:center;
+min-width:0;
 }
 
-.menu-bottom a{
-font-size:12px;
+.menu-item-category{
+font-size:9px;
+line-height:1.2;
 font-weight:bold;
-color:#666;
+letter-spacing:1.2px;
+color:#8b651a;
+text-transform:uppercase;
+margin-bottom:5px;
+}
+
+.menu-item h3{
+font:normal 19px/1.08 Georgia,serif;
+overflow-wrap:anywhere;
+}
+
+.menu-item.active{
+background:#111;
+color:#fff;
+}
+
+.menu-item.active .menu-item-category{
+color:var(--gold-light);
 }
 
 /* =========================================================
@@ -687,19 +684,14 @@ RTL
 
 html[dir="rtl"] .side-menu{
 left:auto;
-right:-100%;
+right:0;
 border-right:0;
 border-left:2px solid #111;
+transform:translateX(105%);
 }
 
 html[dir="rtl"] .side-menu.open{
-right:0;
-left:auto;
-}
-
-html[dir="rtl"] .menu-item p{
-padding-right:0;
-padding-left:9px;
+transform:translateX(0);
 }
 
 html[dir="rtl"] .hero-copy{
@@ -745,6 +737,52 @@ gap:22px;
 
 .category-nav a{
 font-size:12px;
+}
+
+.side-menu{
+width:min(390px,94vw);
+}
+
+.side-menu-header{
+padding:
+max(16px,env(safe-area-inset-top))
+18px
+15px;
+}
+
+.side-menu-header h2{
+font-size:28px;
+}
+
+.menu-context{
+padding:12px 14px 11px;
+}
+
+.menu-context-title{
+font-size:23px;
+}
+
+.menu-list{
+padding:11px 10px max(30px,env(safe-area-inset-bottom));
+gap:8px;
+}
+
+.menu-item{
+grid-template-columns:78px minmax(0,1fr);
+min-height:82px;
+}
+
+.menu-item img{
+width:78px;
+min-height:82px;
+}
+
+.menu-item-copy{
+padding:9px 10px;
+}
+
+.menu-item h3{
+font-size:17px;
 }
 
 .hero-image{
@@ -876,6 +914,11 @@ html{
 scroll-behavior:auto;
 }
 
+.side-menu,
+.menu-overlay{
+transition:none;
+}
+
 }
 </style>
 </head>
@@ -891,6 +934,7 @@ onclick="closeMenu()"
 <aside
 class="side-menu"
 id="sideMenu"
+aria-label="Article contents"
 >
 
 <div class="side-menu-header">
@@ -909,317 +953,25 @@ aria-label="Close menu"
 
 </div>
 
-<div class="menu-account">
+<div class="menu-context">
 
-<a
-href="account.html"
-data-i18n="common.menu.signIn"
->
-Sign In
-</a>
-
-<a
-href="club.html"
-data-i18n="common.menu.joinClub"
->
-Join Club
-</a>
-
+<div class="menu-context-label">
+PETS &amp; DOGUE
 </div>
 
-<div class="menu-language">
-
-<span
-class="notranslate"
-translate="no"
+<div
+class="menu-context-title"
+data-i18n="common.navigation.articles"
 >
-LANGUAGE
-</span>
-
-<select id="languageSelect">
-
-<option value="en">EN — English</option>
-<option value="uk">UA — Українська</option>
-<option value="ru">RU — Русский</option>
-<option value="fr">FR — Français</option>
-<option value="de">DE — Deutsch</option>
-<option value="es">ES — Español</option>
-<option value="it">IT — Italiano</option>
-<option value="pt">PT — Português</option>
-<option value="nl">NL — Nederlands</option>
-<option value="pl">PL — Polski</option>
-<option value="cs">CZ — Čeština</option>
-<option value="sk">SK — Slovenčina</option>
-<option value="hu">HU — Magyar</option>
-<option value="ro">RO — Română</option>
-<option value="bg">BG — Български</option>
-<option value="el">GR — Ελληνικά</option>
-<option value="sv">SE — Svenska</option>
-<option value="da">DK — Dansk</option>
-<option value="no">NO — Norsk</option>
-<option value="fi">FI — Suomi</option>
-<option value="tr">TR — Türkçe</option>
-<option value="ar">AR — العربية</option>
-<option value="hi">HI — हिन्दी</option>
-
-</select>
-
-</div>
-
-<div class="menu-list">
-
-<a
-class="menu-item"
-href="issue-01.html"
->
-
-<img
-src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="Magazine"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.magazine">
-Magazine
-</h3>
-
-<p data-i18n="common.menu.latestIssueDescription">
-Open the newest PETS & DOGUE digital magazine.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="articles.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
-alt="Articles"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.articles">
 Articles
-</h3>
-
-<p data-i18n="common.menu.articlesDescription">
-Read and listen to editorial stories.
-</p>
+</div>
 
 </div>
 
-</a>
-
-<a
-class="menu-item"
-href="photos.html"
+<div
+class="menu-list"
+id="articleContentsList"
 >
-
-<img
-src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
-alt="Photos"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.photos">
-Photos
-</h3>
-
-<p data-i18n="common.menu.photosDescription">
-Portraits, galleries and visual stories.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="members-gallery.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
-alt="Cover Stars"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.coverStars">
-Cover Stars
-</h3>
-
-<p data-i18n="common.menu.coverStarDescription">
-Enter your pet and compete for the next cover.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="pet-fashion.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
-alt="Fashion"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.fashion">
-Fashion
-</h3>
-
-<p data-i18n="common.menu.fashionDescription">
-Luxury style, shopping and editorial looks.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="pet-travel.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
-alt="Travel"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.travel">
-Travel
-</h3>
-
-<p data-i18n="common.menu.travelDescription">
-Hotels, beaches and pet-friendly journeys.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="wellness.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80"
-alt="Wellness"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.wellness">
-Wellness
-</h3>
-
-<p>
-Health, care, wellness and everyday guidance.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="pets-in-need.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
-alt="Rescue"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.rescue">
-Rescue
-</h3>
-
-<p data-i18n="common.menu.rescueDescription">
-Rescue, adoption and stories that need visibility.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="pet-marketplace.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
-alt="Marketplace"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.marketplace">
-Marketplace
-</h3>
-
-<p data-i18n="common.menu.marketplaceDescription">
-Community listings, services and accessories.
-</p>
-
-</div>
-
-</a>
-
-</div>
-
-<div class="menu-bottom">
-
-<div>
-
-<a
-href="contact.html"
-data-i18n="common.footer.contact"
->
-Contact
-</a>
-
-<a
-href="privacy.html"
-data-i18n="common.footer.privacy"
->
-Privacy
-</a>
-
-<a
-href="terms.html"
-data-i18n="common.footer.terms"
->
-Terms
-</a>
-
-<a
-href="admin.html"
-data-i18n="common.footer.admin"
->
-Admin
-</a>
-
-</div>
-
 </div>
 
 </aside>
@@ -1232,7 +984,7 @@ Admin
 class="icon-button"
 type="button"
 onclick="openMenu()"
-aria-label="Open menu"
+aria-label="Open article contents"
 >
 
 <span class="menu-lines">
@@ -1450,8 +1202,7 @@ Listen
 <span
 class="audio-status"
 id="audioStatus"
->
-</span>
+></span>
 
 </div>
 
@@ -1698,73 +1449,43 @@ The International Luxury Animal Magazine
 
 <div class="footer-links">
 
-<a
-href="index.html"
-data-i18n="common.footer.home"
->
+<a href="index.html" data-i18n="common.footer.home">
 Home
 </a>
 
-<a
-href="articles.html"
-data-i18n="common.footer.articles"
->
+<a href="articles.html" data-i18n="common.footer.articles">
 Articles
 </a>
 
-<a
-href="photos.html"
-data-i18n="common.footer.photos"
->
+<a href="photos.html" data-i18n="common.footer.photos">
 Photos
 </a>
 
-<a
-href="members-gallery.html"
-data-i18n="common.footer.coverStars"
->
+<a href="members-gallery.html" data-i18n="common.footer.coverStars">
 Cover Stars
 </a>
 
-<a
-href="pet-marketplace.html"
-data-i18n="common.footer.marketplace"
->
+<a href="pet-marketplace.html" data-i18n="common.footer.marketplace">
 Marketplace
 </a>
 
-<a
-href="club.html"
-data-i18n="common.footer.club"
->
+<a href="club.html" data-i18n="common.footer.club">
 Club
 </a>
 
-<a
-href="partners.html"
-data-i18n="common.footer.partners"
->
+<a href="partners.html" data-i18n="common.footer.partners">
 Partners
 </a>
 
-<a
-href="contact.html"
-data-i18n="common.footer.contact"
->
+<a href="contact.html" data-i18n="common.footer.contact">
 Contact
 </a>
 
-<a
-href="privacy.html"
-data-i18n="common.footer.privacy"
->
+<a href="privacy.html" data-i18n="common.footer.privacy">
 Privacy
 </a>
 
-<a
-href="terms.html"
-data-i18n="common.footer.terms"
->
+<a href="terms.html" data-i18n="common.footer.terms">
 Terms
 </a>
 
@@ -1827,6 +1548,323 @@ false;
 
 let languageRefreshTimer =
 null;
+
+/* =========================================================
+ARTICLE CONTENTS
+========================================================= */
+
+const ARTICLE_MENU_IMAGES = {
+default:
+"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80",
+
+photoshoot:
+"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80",
+
+travel:
+"https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=500&q=80",
+
+places:
+"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80",
+
+volunteers:
+"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
+};
+
+function getStoredArticles(){
+
+try{
+
+const articles =
+JSON.parse(
+localStorage.getItem(
+"pd_articles"
+) ||
+"[]"
+);
+
+return Array.isArray(
+articles
+)
+? articles
+: [];
+
+}catch(
+error
+){
+
+console.error(
+"Could not load stored articles.",
+error
+);
+
+return [];
+
+}
+
+}
+
+function getArticleMenuEntries(){
+
+const entries = [];
+
+const bundle =
+articleBundle();
+
+if(
+bundle &&
+bundle.default
+){
+
+entries.push({
+type:"story",
+key:"default",
+category:
+bundle.default.category ||
+"ARTICLE",
+title:
+bundle.default.title ||
+"Article",
+image:
+bundle.default.image ||
+ARTICLE_MENU_IMAGES.default,
+href:"article.html"
+});
+
+}
+
+if(
+bundle &&
+bundle.stories
+){
+
+Object.keys(
+bundle.stories
+)
+.forEach(
+key =>{
+
+const story =
+bundle.stories[
+key
+];
+
+if(
+!story ||
+!story.title
+){
+
+return;
+
+}
+
+entries.push({
+type:"story",
+key,
+category:
+story.category ||
+"ARTICLE",
+title:
+story.title,
+image:
+story.image ||
+ARTICLE_MENU_IMAGES[key] ||
+ARTICLE_MENU_IMAGES.default,
+href:
+"article.html?story=" +
+encodeURIComponent(
+key
+)
+});
+
+}
+);
+
+}
+
+getStoredArticles()
+.forEach(
+article =>{
+
+if(
+!article ||
+article.id == null
+){
+
+return;
+
+}
+
+const translated =
+getStoredArticleTranslation(
+article
+) ||
+{};
+
+const title =
+translated.title ||
+article.title;
+
+if(
+!title
+){
+
+return;
+
+}
+
+entries.push({
+type:"stored",
+key:String(
+article.id
+),
+category:
+translated.category ||
+article.category ||
+"ARTICLE",
+title,
+image:
+translated.image ||
+article.image ||
+ARTICLE_MENU_IMAGES.default,
+href:
+"article.html?id=" +
+encodeURIComponent(
+article.id
+)
+});
+
+}
+);
+
+return entries;
+
+}
+
+function renderArticleContents(){
+
+const list =
+$("articleContentsList");
+
+if(
+!list
+){
+
+return;
+
+}
+
+const entries =
+getArticleMenuEntries();
+
+list.innerHTML =
+"";
+
+entries.forEach(
+entry =>{
+
+const link =
+document.createElement(
+"a"
+);
+
+link.className =
+"menu-item";
+
+link.href =
+entry.href;
+
+if(
+currentStoredArticle &&
+entry.type ===
+"stored" &&
+String(
+currentStoredArticle.id
+) ===
+entry.key
+){
+
+link.classList.add(
+"active"
+);
+
+}
+
+if(
+!currentStoredArticle &&
+entry.type ===
+"story" &&
+entry.key ===
+currentStoryKey
+){
+
+link.classList.add(
+"active"
+);
+
+}
+
+const image =
+document.createElement(
+"img"
+);
+
+image.src =
+entry.image;
+
+image.alt =
+entry.title;
+
+const copy =
+document.createElement(
+"div"
+);
+
+copy.className =
+"menu-item-copy";
+
+const category =
+document.createElement(
+"span"
+);
+
+category.className =
+"menu-item-category";
+
+category.textContent =
+entry.category;
+
+const title =
+document.createElement(
+"h3"
+);
+
+title.textContent =
+entry.title;
+
+copy.appendChild(
+category
+);
+
+copy.appendChild(
+title
+);
+
+link.appendChild(
+image
+);
+
+link.appendChild(
+copy
+);
+
+list.appendChild(
+link
+);
+
+}
+);
+
+}
 
 /* =========================================================
 LANGUAGE
@@ -2058,6 +2096,8 @@ MENU
 
 function openMenu(){
 
+renderArticleContents();
+
 $("sideMenu")
 .classList
 .add(
@@ -2074,6 +2114,30 @@ document.body
 .classList
 .add(
 "menu-open"
+);
+
+setTimeout(
+()=>{
+
+const active =
+$("articleContentsList")
+?.querySelector(
+".menu-item.active"
+);
+
+if(
+active
+){
+
+active.scrollIntoView({
+block:"nearest",
+behavior:"smooth"
+});
+
+}
+
+},
+100
 );
 
 }
@@ -2107,17 +2171,6 @@ CLOSE ARTICLE
 function closeArticle(){
 
 stopSpeech();
-
-if(
-window.history.length >
-1
-){
-
-window.history.back();
-
-return;
-
-}
 
 window.location.href =
 "articles.html";
@@ -2953,64 +3006,24 @@ return;
 target.innerHTML =
 "";
 
-if(
-body.p1
-){
-
-target.appendChild(
-createParagraph(
-body.p1
-)
-);
-
+if(body.p1){
+target.appendChild(createParagraph(body.p1));
 }
 
-if(
-body.p2
-){
-
-target.appendChild(
-createParagraph(
-body.p2
-)
-);
-
+if(body.p2){
+target.appendChild(createParagraph(body.p2));
 }
 
-if(
-body.h2a
-){
-
-target.appendChild(
-createHeading(
-body.h2a
-)
-);
-
+if(body.h2a){
+target.appendChild(createHeading(body.h2a));
 }
 
-if(
-body.p3
-){
-
-target.appendChild(
-createParagraph(
-body.p3
-)
-);
-
+if(body.p3){
+target.appendChild(createParagraph(body.p3));
 }
 
-if(
-body.p4
-){
-
-target.appendChild(
-createParagraph(
-body.p4
-)
-);
-
+if(body.p4){
+target.appendChild(createParagraph(body.p4));
 }
 
 target.appendChild(
@@ -3020,148 +3033,52 @@ DEFAULT_ARTICLE_IMAGE,
 )
 );
 
-if(
-body.caption
-){
-
-target.appendChild(
-createCaption(
-body.caption
-)
-);
-
+if(body.caption){
+target.appendChild(createCaption(body.caption));
 }
 
-if(
-body.quote
-){
-
-target.appendChild(
-createQuote(
-body.quote
-)
-);
-
+if(body.quote){
+target.appendChild(createQuote(body.quote));
 }
 
-if(
-body.h2b
-){
-
-target.appendChild(
-createHeading(
-body.h2b
-)
-);
-
+if(body.h2b){
+target.appendChild(createHeading(body.h2b));
 }
 
-if(
-body.p5
-){
-
-target.appendChild(
-createParagraph(
-body.p5
-)
-);
-
+if(body.p5){
+target.appendChild(createParagraph(body.p5));
 }
 
-if(
-body.p6
-){
-
-target.appendChild(
-createParagraph(
-body.p6
-)
-);
-
+if(body.p6){
+target.appendChild(createParagraph(body.p6));
 }
 
-if(
-body.h2c
-){
-
-target.appendChild(
-createHeading(
-body.h2c
-)
-);
-
+if(body.h2c){
+target.appendChild(createHeading(body.h2c));
 }
 
-if(
-body.p7
-){
-
-target.appendChild(
-createParagraph(
-body.p7
-)
-);
-
+if(body.p7){
+target.appendChild(createParagraph(body.p7));
 }
 
-if(
-body.p8
-){
-
-target.appendChild(
-createParagraph(
-body.p8
-)
-);
-
+if(body.p8){
+target.appendChild(createParagraph(body.p8));
 }
 
-if(
-body.h2d
-){
-
-target.appendChild(
-createHeading(
-body.h2d
-)
-);
-
+if(body.h2d){
+target.appendChild(createHeading(body.h2d));
 }
 
-if(
-body.p9
-){
-
-target.appendChild(
-createParagraph(
-body.p9
-)
-);
-
+if(body.p9){
+target.appendChild(createParagraph(body.p9));
 }
 
-if(
-body.p10
-){
-
-target.appendChild(
-createParagraph(
-body.p10
-)
-);
-
+if(body.p10){
+target.appendChild(createParagraph(body.p10));
 }
 
-if(
-body.p11
-){
-
-target.appendChild(
-createParagraph(
-body.p11
-)
-);
-
+if(body.p11){
+target.appendChild(createParagraph(body.p11));
 }
 
 prepareSpeechBlocks();
@@ -3613,6 +3530,9 @@ if(
 !story
 ){
 
+currentStoryKey =
+"default";
+
 applyDefaultArticleLanguage();
 
 return;
@@ -3804,36 +3724,16 @@ const lower =
 clean.toLowerCase();
 
 if(
-lower.startsWith(
-"by "
-) ||
-lower.startsWith(
-"автор:"
-) ||
-lower.startsWith(
-"редакция"
-) ||
-lower.startsWith(
-"редакція"
-) ||
-lower.startsWith(
-"par "
-) ||
-lower.startsWith(
-"von "
-) ||
-lower.startsWith(
-"por "
-) ||
-lower.startsWith(
-"di "
-) ||
-lower.startsWith(
-"av "
-) ||
-lower.startsWith(
-"af "
-)
+lower.startsWith("by ") ||
+lower.startsWith("автор:") ||
+lower.startsWith("редакция") ||
+lower.startsWith("редакція") ||
+lower.startsWith("par ") ||
+lower.startsWith("von ") ||
+lower.startsWith("por ") ||
+lower.startsWith("di ") ||
+lower.startsWith("av ") ||
+lower.startsWith("af ")
 ){
 
 return clean;
@@ -4020,42 +3920,8 @@ return false;
 
 }
 
-let storedArticles =
-[];
-
-try{
-
-storedArticles =
-JSON.parse(
-localStorage.getItem(
-"pd_articles"
-) ||
-"[]"
-);
-
-if(
-!Array.isArray(
-storedArticles
-)
-){
-
-storedArticles =
-[];
-
-}
-
-}catch(
-error
-){
-
-console.error(
-"Could not load stored articles.",
-error
-);
-
-return false;
-
-}
+const storedArticles =
+getStoredArticles();
 
 const article =
 storedArticles.find(
@@ -4165,15 +4031,6 @@ language ===
 : "ltr";
 
 if(
-$("languageSelect")
-){
-
-$("languageSelect").value =
-language;
-
-}
-
-if(
 currentStoredArticle
 ){
 
@@ -4184,6 +4041,8 @@ applyStoredArticleLanguage();
 applyTranslatedStory();
 
 }
+
+renderArticleContents();
 
 prepareSpeechBlocks();
 
@@ -4240,7 +4099,7 @@ requestAnimationFrame(
 ()=>{
 
 active.scrollIntoView({
-behavior:"instant",
+behavior:"auto",
 inline:"center",
 block:"nearest"
 });
@@ -4278,14 +4137,6 @@ loadStoryFromQuery();
 
 }
 
-prepareSpeechBlocks();
-
-setListenButton(
-false
-);
-
-keepArticlesVisible();
-
 const language =
 getCurrentLanguage();
 
@@ -4298,14 +4149,15 @@ language ===
 ? "rtl"
 : "ltr";
 
-if(
-$("languageSelect")
-){
+renderArticleContents();
 
-$("languageSelect").value =
-language;
+prepareSpeechBlocks();
 
-}
+setListenButton(
+false
+);
+
+keepArticlesVisible();
 
 maybeStartAutoListen();
 
@@ -4345,25 +4197,6 @@ closeArticle();
 }
 );
 
-$("languageSelect")
-?.addEventListener(
-"change",
-()=>{
-
-setTimeout(
-()=>{
-
-scheduleLanguageRefresh(
-0
-);
-
-},
-80
-);
-
-}
-);
-
 window.addEventListener(
 "storage",
 event =>{
@@ -4376,6 +4209,15 @@ LANGUAGE_KEY
 scheduleLanguageRefresh(
 0
 );
+
+}
+
+if(
+event.key ===
+"pd_articles"
+){
+
+renderArticleContents();
 
 }
 
@@ -4466,6 +4308,8 @@ window.addEventListener(
 ()=>{
 
 keepArticlesVisible();
+
+renderArticleContents();
 
 }
 );
