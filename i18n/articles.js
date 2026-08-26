@@ -1,719 +1,740 @@
-/* ЧАСТЬ 1/6 */
+
 window.PetsDogueTranslations=window.PetsDogueTranslations||{};
 
-(function(){
+window.PetsDogueTranslations.articles={
 
-const A={};
-
-function make(c){
-const minute=n=>`${n} ${c.min}`;
-const card=(category,title,description,author,time)=>({
-category,title,description,author,time:minute(time),
-search:`${category} ${title} ${description}`,
-speech:`${title}. ${description}`
-});
-
-return{
-meta:{title:c.metaTitle,description:c.metaDescription},
+en:{
+meta:{
+title:"Articles | PETS & DOGUE",
+description:"Explore PETS & DOGUE editorial stories, interviews, guides, travel, fashion, wellness and rescue features."
+},
 hero:{
-kicker:c.kicker,title:c.heroTitle,description:c.heroDescription,
-explore:c.explore,listen:c.listen,coverStar:c.coverStar
-},
-stories:{
-coverStars:c.coverStars,fashion:c.fashion,travel:c.travel,
-wellness:c.wellness,rescue:c.rescue,places:c.places,
-volunteers:c.volunteers,community:c.community
-},
-search:{placeholder:c.searchPlaceholder,button:c.searchButton},
-filters:{
-allCategories:c.allCategories,all:c.all,
-coverStar:c.coverStarSingle,coverStars:c.coverStars,
-fashion:c.fashion,travel:c.travel,wellness:c.wellness,
-rescue:c.rescue,community:c.community,places:c.places
-},
-featured:{
-heading:c.featuredHeading,
-description:c.featuredDescription,
-photoshootLabel:`${c.coverStarSingle.toUpperCase()} · ${c.listenShort}`,
-photoshootTitle:c.photoshootTitle,
-photoshootDescription:c.photoshootDescription,
-travelLabel:`${c.travel.toUpperCase()} · ${c.listenShort}`,
-travelTitle:c.travelTitle,
-rescueLabel:c.rescue.toUpperCase(),
-rescueTitle:c.rescueTitle
-},
-latest:{heading:c.latest},
-results:{zero:c.zero,one:c.one,many:c.many},
-cards:{
-audio:`🔊 ${c.audio}`,
-read:c.read,
-readListen:c.readListen,
-photoshoot:card(c.coverStarSingle.toUpperCase(),c.photoshootTitle,c.photoshootCard,c.editors,7),
-fashion:card(c.fashion.toUpperCase(),c.fashionTitle,c.fashionDescription,c.fashionDesk,6),
-travel:card(c.travel.toUpperCase(),c.travelTitle,c.travelDescription,c.travelDesk,8),
-wellness:card(c.wellness.toUpperCase(),c.wellnessTitle,c.wellnessDescription,c.wellnessDesk,5),
-rescue:card(c.rescue.toUpperCase(),c.rescueTitle,c.rescueDescription,c.rescueDesk,7),
-places:card(c.places.toUpperCase(),c.placesTitle,c.placesDescription,c.localDesk,5),
-volunteers:card(c.community.toUpperCase(),c.volunteersTitle,c.volunteersDescription,c.communityDesk,6),
-community:card(c.localCommunity.toUpperCase(),c.communityTitle,c.communityDescription,c.localCommunity,4)
-},
-empty:{title:c.emptyTitle,description:c.emptyDescription},
-visual:{
-heading:c.visualHeading,openGallery:c.openGallery,
-coverLabel:c.coverStarSingle.toUpperCase(),coverTitle:c.visualCover,
-travelLabel:c.travel.toUpperCase(),travelTitle:c.visualTravel,
-fashionLabel:c.fashion.toUpperCase(),fashionTitle:c.visualFashion,
-rescueLabel:c.rescue.toUpperCase(),rescueTitle:c.visualRescue,
-wellnessLabel:c.wellness.toUpperCase(),wellnessTitle:c.visualWellness,
-localLabel:c.local.toUpperCase(),localTitle:c.visualLocal
-},
-coverStar:{myPetIs:c.myPetIs,next:c.nextCover,enter:c.enter},
-newsletter:{
-heading:c.newsHeading,description:c.newsDescription,
-placeholder:c.email,button:c.subscribe
-},
-messages:{
-narrationUnsupported:c.noVoice,
-invalidEmail:c.invalidEmail,
-newsletterSuccess:c.success
-}
-};
-}
-
-A.en=make({
-metaTitle:"Articles | PETS & DOGUE",
-metaDescription:"Explore PETS & DOGUE editorial stories, interviews, guides, travel, fashion, wellness and rescue features.",
 kicker:"PETS & DOGUE EDITORIAL",
-heroTitle:"Stories Worth Seeing, Reading and Hearing",
-heroDescription:"Discover visual journalism, luxury animal lifestyle, useful guides, travel, wellness, fashion, interviews and rescue stories. Every full article includes voice narration.",
-explore:"Explore Stories",listen:"Listen To An Article",coverStar:"Become A Cover Star",
-coverStars:"Cover Stars",fashion:"Fashion",travel:"Travel",wellness:"Wellness",rescue:"Rescue",places:"Places",volunteers:"Volunteers",community:"Community",
-searchPlaceholder:"Search stories, categories or topics...",searchButton:"Search",
-allCategories:"All Categories",all:"All",coverStarSingle:"Cover Star",
-featuredHeading:"Editor’s Selection",featuredDescription:"The stories, images and useful guides selected by the PETS & DOGUE editorial team.",
-listenShort:"LISTEN",
-photoshootTitle:"How To Prepare Your Pet for a Professional Magazine Photoshoot",
-photoshootDescription:"Comfort, grooming, light and the details that transform a beautiful portrait into an editorial image.",
-travelTitle:"The Rise of Luxury Pet-Friendly Hotels",
-rescueTitle:"Why Visibility Can Change an Animal’s Life",
-latest:"Latest Stories",zero:"No editorial stories available.",one:"One editorial story available.",many:"{count} editorial stories available.",
-audio:"AUDIO",read:"READ",readListen:"READ & LISTEN",min:"min",
-photoshootCard:"Simple grooming, lighting and comfort techniques for a beautiful editorial portrait.",
-fashionTitle:"The New Rules of Luxury Pet Style",fashionDescription:"Modern animal fashion is becoming lighter, more expressive and more comfortable.",
-travelDescription:"Hotels are redesigning the guest experience for people travelling with animal companions.",
-wellnessTitle:"Daily Rituals for a Calmer and Happier Pet",wellnessDescription:"Small routines can support comfort, confidence and a stronger relationship with your animal.",
-rescueDescription:"A photograph and an honest story can connect rescue animals with support and future homes.",
-placesTitle:"How DOGUE Trust Protects Pet-Friendly Recommendations",placesDescription:"Community reports, verification and moderation can keep local information useful.",
-volunteersTitle:"The People Helping Animals Behind the Scenes",volunteersDescription:"Volunteers provide transport, fostering, photography, fundraising and practical help.",
-communityTitle:"What Pet Owners Recommend Near You",communityDescription:"Local knowledge can reveal trusted walks, cafés, services and useful support nearby.",
-editors:"By PETS & DOGUE Editors",fashionDesk:"Fashion Desk",travelDesk:"Travel Desk",wellnessDesk:"Wellness Editors",rescueDesk:"Rescue Desk",localDesk:"Local Desk",communityDesk:"Community Editors",localCommunity:"Local Community",
-emptyTitle:"No matching stories",emptyDescription:"Try another search word or select a different category.",
-visualHeading:"Visual Journalism",openGallery:"OPEN PHOTO GALLERY →",
-visualCover:"The Face of a Future Issue",visualTravel:"Beautiful Escapes With Your Pet",visualFashion:"Editorial Style",visualRescue:"A Life Worth Seeing",visualWellness:"Daily Care",local:"Local",visualLocal:"Together Near You",
-myPetIs:"MY PET IS",nextCover:"THE NEXT COVER STAR",enter:"TAP TO ENTER →",
-newsHeading:"Receive New PETS & DOGUE Stories",newsDescription:"Get new issues, narrated articles, visual editorials and useful animal lifestyle guides.",email:"Your email address",subscribe:"SUBSCRIBE",
-noVoice:"Voice narration is not supported by this browser.",invalidEmail:"Please enter a valid email address.",success:"Welcome to the PETS & DOGUE community."
+description:"Discover visual journalism, luxury animal lifestyle, useful guides, travel, wellness, fashion, interviews and rescue stories. Every full article includes voice narration."
+},
+search:{
+placeholder:"Search stories, categories or topics..."
+},
+latest:{
+heading:"Latest Stories"
+},
+results:{
+zero:"No editorial stories available.",
+one:"One editorial story available.",
+many:"{count} editorial stories available."
+},
+empty:{
+title:"No matching stories",
+description:"Try another search word."
+},
+cards:{
+photoshoot:{
+category:"COVER STAR",
+title:"How To Prepare Your Pet for a Professional Magazine Photoshoot",
+description:"Simple grooming, lighting and comfort techniques for a beautiful editorial portrait.",
+author:"By PETS & DOGUE Editors",
+time:"7 min"
+},
+travel:{
+category:"TRAVEL",
+title:"The Rise of Luxury Pet-Friendly Hotels",
+description:"Hotels are redesigning the guest experience for people travelling with animal companions.",
+author:"Travel Desk",
+time:"8 min"
+},
+fashion:{
+category:"FASHION",
+title:"The New Rules of Luxury Pet Style",
+description:"Modern animal fashion is becoming lighter, more expressive and more comfortable.",
+author:"Fashion Desk",
+time:"6 min"
+},
+wellness:{
+category:"WELLNESS",
+title:"Daily Rituals for a Calmer and Happier Pet",
+description:"Small routines can support comfort, confidence and a stronger relationship with your animal.",
+author:"Wellness Editors",
+time:"5 min"
+},
+rescue:{
+category:"RESCUE",
+title:"Why Visibility Can Change an Animal’s Life",
+description:"A photograph and an honest story can connect rescue animals with support and future homes.",
+author:"Rescue Desk",
+time:"7 min"
+},
+places:{
+category:"PET-FRIENDLY PLACES",
+title:"How DOGUE Trust Protects Pet-Friendly Recommendations",
+description:"Community reports, verification and moderation can keep local information useful.",
+author:"Local Desk",
+time:"5 min"
+},
+volunteers:{
+category:"COMMUNITY",
+title:"The People Helping Animals Behind the Scenes",
+description:"Volunteers provide transport, fostering, photography, fundraising and practical help.",
+author:"Community Editors",
+time:"6 min"
+},
+community:{
+category:"LOCAL COMMUNITY",
+title:"What Pet Owners Recommend Near You",
+description:"Local knowledge can reveal trusted walks, cafés, services and useful support nearby.",
+author:"Local Community",
+time:"4 min"
+}
+}
+},
+
+ru:{
+meta:{
+title:"Статьи | PETS & DOGUE",
+description:"Редакционные истории PETS & DOGUE о животных, путешествиях, моде, здоровье, спасении и образе жизни."
+},
+hero:{
+kicker:"РЕДАКЦИЯ PETS & DOGUE",
+description:"Откройте визуальную журналистику, роскошный образ жизни с животными, полезные гиды, путешествия, здоровье, моду, интервью и истории спасения. Полные статьи можно слушать."
+},
+search:{
+placeholder:"Поиск историй, категорий или тем..."
+},
+latest:{
+heading:"Последние истории"
+},
+results:{
+zero:"Статей пока нет.",
+one:"Доступна 1 история.",
+many:"Доступно историй: {count}."
+},
+empty:{
+title:"Ничего не найдено",
+description:"Попробуйте другое слово для поиска."
+},
+cards:{
+photoshoot:{
+category:"ЗВЕЗДА ОБЛОЖКИ",
+title:"Как подготовить питомца к профессиональной журнальной фотосессии",
+description:"Груминг, правильный свет и комфорт помогают создать красивый журнальный портрет.",
+author:"Редакция PETS & DOGUE",
+time:"7 мин"
+},
+travel:{
+category:"ПУТЕШЕСТВИЯ",
+title:"Расцвет роскошных pet-friendly отелей",
+description:"Как премиальные отели меняют сервис для гостей, путешествующих вместе с животными.",
+author:"Редакция путешествий",
+time:"8 мин"
+},
+fashion:{
+category:"МОДА",
+title:"Новые правила роскошного стиля для питомцев",
+description:"Современная мода для животных становится легче, выразительнее и комфортнее.",
+author:"Редакция моды",
+time:"6 мин"
+},
+wellness:{
+category:"ЗДОРОВЬЕ",
+title:"Ежедневные ритуалы для спокойного и счастливого питомца",
+description:"Простые привычки помогают питомцу чувствовать себя спокойнее, увереннее и безопаснее.",
+author:"Редакция здоровья",
+time:"5 мин"
+},
+rescue:{
+category:"СПАСЕНИЕ",
+title:"Почему видимость может изменить жизнь животного",
+description:"Фотография и честная история помогают животным найти поддержку и новый дом.",
+author:"Редакция спасения",
+time:"7 мин"
+},
+places:{
+category:"МЕСТА",
+title:"Как DOGUE Trust защищает рекомендации pet-friendly мест",
+description:"Отзывы, проверка и модерация помогают сохранять рекомендации актуальными и полезными.",
+author:"Редакция мест",
+time:"5 мин"
+},
+volunteers:{
+category:"СООБЩЕСТВО",
+title:"Люди, которые помогают животным за кулисами",
+description:"Волонтёры помогают транспортом, передержкой, фотографиями, сбором средств и ежедневной работой.",
+author:"Редакция сообщества",
+time:"6 мин"
+},
+community:{
+category:"МЕСТНОЕ СООБЩЕСТВО",
+title:"Что владельцы питомцев рекомендуют рядом с вами",
+description:"Местные жители делятся проверенными маршрутами, кафе, сервисами и полезными местами.",
+author:"Местное сообщество",
+time:"4 мин"
+}
+}
+},
+
+uk:{
+meta:{
+title:"Статті | PETS & DOGUE",
+description:"Редакційні історії PETS & DOGUE про тварин, подорожі, моду, здоров’я, порятунок і стиль життя."
+},
+hero:{
+kicker:"РЕДАКЦІЯ PETS & DOGUE",
+description:"Відкрийте візуальну журналістику, розкішний стиль життя з тваринами, корисні гіди, подорожі, здоров’я, моду, інтерв’ю та історії порятунку. Повні статті можна слухати."
+},
+search:{
+placeholder:"Пошук історій, категорій або тем..."
+},
+latest:{
+heading:"Останні історії"
+},
+results:{
+zero:"Статей поки немає.",
+one:"Доступна 1 історія.",
+many:"Доступно історій: {count}."
+},
+empty:{
+title:"Нічого не знайдено",
+description:"Спробуйте інше слово для пошуку."
+},
+cards:{
+photoshoot:{
+category:"ЗІРКА ОБКЛАДИНКИ",
+title:"Як підготувати улюбленця до професійної журнальної фотосесії",
+description:"Грумінг, правильне світло та комфорт допомагають створити красивий редакційний портрет.",
+author:"Редакція PETS & DOGUE",
+time:"7 хв"
+},
+travel:{
+category:"ПОДОРОЖІ",
+title:"Розквіт розкішних pet-friendly готелів",
+description:"Як преміальні готелі змінюють сервіс для гостей, які подорожують із тваринами.",
+author:"Редакція подорожей",
+time:"8 хв"
+},
+fashion:{
+category:"МОДА",
+title:"Нові правила розкішного стилю для улюбленців",
+description:"Сучасна мода для тварин стає легшою, виразнішою та комфортнішою.",
+author:"Редакція моди",
+time:"6 хв"
+},
+wellness:{
+category:"ЗДОРОВ’Я",
+title:"Щоденні ритуали для спокійного та щасливого улюбленця",
+description:"Прості звички допомагають тварині почуватися спокійніше, впевненіше та безпечніше.",
+author:"Редакція здоров’я",
+time:"5 хв"
+},
+rescue:{
+category:"ПОРЯТУНОК",
+title:"Чому видимість може змінити життя тварини",
+description:"Фотографія та чесна історія можуть допомогти тварині знайти підтримку й новий дім.",
+author:"Редакція порятунку",
+time:"7 хв"
+},
+places:{
+category:"МІСЦЯ",
+title:"Як DOGUE Trust захищає рекомендації pet-friendly місць",
+description:"Відгуки, перевірка та модерація допомагають зберігати рекомендації актуальними.",
+author:"Редакція місць",
+time:"5 хв"
+},
+volunteers:{
+category:"СПІЛЬНОТА",
+title:"Люди, які допомагають тваринам за лаштунками",
+description:"Волонтери допомагають транспортом, перетримкою, фотографіями та збором коштів.",
+author:"Редакція спільноти",
+time:"6 хв"
+},
+community:{
+category:"МІСЦЕВА СПІЛЬНОТА",
+title:"Що власники тварин рекомендують поруч із вами",
+description:"Місцеві власники діляться перевіреними маршрутами, кафе, сервісами та корисними місцями.",
+author:"Місцева спільнота",
+time:"4 хв"
+}
+}
+},
+
+fr:{
+meta:{
+title:"Articles | PETS & DOGUE",
+description:"Découvrez les histoires éditoriales PETS & DOGUE sur les animaux, le voyage, la mode, le bien-être et le sauvetage."
+},
+hero:{
+kicker:"RÉDACTION PETS & DOGUE",
+description:"Découvrez le journalisme visuel, l’art de vivre avec les animaux, les guides pratiques, le voyage, le bien-être, la mode, les interviews et les histoires de sauvetage. Les articles complets peuvent être écoutés."
+},
+search:{
+placeholder:"Rechercher des histoires, catégories ou sujets..."
+},
+latest:{
+heading:"Dernières histoires"
+},
+results:{
+zero:"Aucune histoire disponible.",
+one:"1 histoire disponible.",
+many:"{count} histoires disponibles."
+},
+empty:{
+title:"Aucun résultat",
+description:"Essayez un autre mot de recherche."
+},
+cards:{
+photoshoot:{category:"STAR DE COUVERTURE",title:"Comment préparer votre animal pour une séance photo professionnelle de magazine",description:"Toilettage, lumière et confort pour créer un beau portrait éditorial.",author:"Rédaction PETS & DOGUE",time:"7 min"},
+travel:{category:"VOYAGE",title:"L’essor des hôtels de luxe pet-friendly",description:"Les hôtels premium réinventent l’expérience des clients qui voyagent avec leurs animaux.",author:"Rédaction Voyage",time:"8 min"},
+fashion:{category:"MODE",title:"Les nouvelles règles du style de luxe pour animaux",description:"La mode animale devient plus légère, expressive et confortable.",author:"Rédaction Mode",time:"6 min"},
+wellness:{category:"BIEN-ÊTRE",title:"Des rituels quotidiens pour un animal plus calme et heureux",description:"De petites habitudes favorisent le confort, la confiance et la sécurité.",author:"Rédaction Bien-être",time:"5 min"},
+rescue:{category:"SAUVETAGE",title:"Pourquoi la visibilité peut changer la vie d’un animal",description:"Une photo et une histoire sincère peuvent aider un animal à trouver soutien et foyer.",author:"Rédaction Sauvetage",time:"7 min"},
+places:{category:"LIEUX",title:"Comment DOGUE Trust protège les recommandations pet-friendly",description:"Les signalements, la vérification et la modération gardent les recommandations utiles.",author:"Rédaction Locale",time:"5 min"},
+volunteers:{category:"COMMUNAUTÉ",title:"Les personnes qui aident les animaux en coulisses",description:"Les bénévoles assurent transport, accueil, photographie et aide pratique.",author:"Rédaction Communauté",time:"6 min"},
+community:{category:"COMMUNAUTÉ LOCALE",title:"Ce que les propriétaires d’animaux recommandent près de chez vous",description:"Les habitants partagent promenades, cafés, services et lieux de confiance.",author:"Communauté locale",time:"4 min"}
+}
+},
+
+de:{
+meta:{title:"Artikel | PETS & DOGUE",description:"Entdecken Sie PETS & DOGUE Geschichten über Tiere, Reisen, Mode, Wohlbefinden und Rettung."},
+hero:{kicker:"PETS & DOGUE REDAKTION",description:"Entdecken Sie visuellen Journalismus, luxuriöses Leben mit Tieren, hilfreiche Guides, Reisen, Wohlbefinden, Mode, Interviews und Rettungsgeschichten. Vollständige Artikel können angehört werden."},
+search:{placeholder:"Geschichten, Kategorien oder Themen suchen..."},
+latest:{heading:"Neueste Geschichten"},
+results:{zero:"Keine Geschichten verfügbar.",one:"1 Geschichte verfügbar.",many:"{count} Geschichten verfügbar."},
+empty:{title:"Keine Ergebnisse",description:"Versuchen Sie einen anderen Suchbegriff."},
+cards:{
+photoshoot:{category:"COVER STAR",title:"So bereiten Sie Ihr Tier auf ein professionelles Magazin-Fotoshooting vor",description:"Pflege, Licht und Komfort für ein gelungenes Editorial-Porträt.",author:"PETS & DOGUE Redaktion",time:"7 Min."},
+travel:{category:"REISEN",title:"Der Aufstieg luxuriöser tierfreundlicher Hotels",description:"Premiumhotels gestalten das Erlebnis für Gäste mit Tieren neu.",author:"Reiseredaktion",time:"8 Min."},
+fashion:{category:"MODE",title:"Die neuen Regeln luxuriöser Tiermode",description:"Moderne Tiermode wird leichter, ausdrucksvoller und bequemer.",author:"Moderation",time:"6 Min."},
+wellness:{category:"WOHLBEFINDEN",title:"Tägliche Rituale für ein ruhigeres und glücklicheres Tier",description:"Kleine Routinen fördern Komfort, Vertrauen und Sicherheit.",author:"Wellness-Redaktion",time:"5 Min."},
+rescue:{category:"RETTUNG",title:"Warum Sichtbarkeit das Leben eines Tieres verändern kann",description:"Ein Foto und eine ehrliche Geschichte können Unterstützung und ein Zuhause bringen.",author:"Rettungsredaktion",time:"7 Min."},
+places:{category:"ORTE",title:"Wie DOGUE Trust tierfreundliche Empfehlungen schützt",description:"Meldungen, Prüfung und Moderation halten lokale Empfehlungen zuverlässig.",author:"Lokale Redaktion",time:"5 Min."},
+volunteers:{category:"COMMUNITY",title:"Die Menschen, die Tieren hinter den Kulissen helfen",description:"Freiwillige helfen mit Transport, Pflege, Fotos und praktischer Unterstützung.",author:"Community-Redaktion",time:"6 Min."},
+community:{category:"LOKALE COMMUNITY",title:"Was Tierhalter in Ihrer Nähe empfehlen",description:"Lokale Tierhalter teilen bewährte Spazierwege, Cafés und Services.",author:"Lokale Community",time:"4 Min."}
+}
+},
+
+es:{
+meta:{title:"Artículos | PETS & DOGUE",description:"Descubre historias PETS & DOGUE sobre animales, viajes, moda, bienestar y rescate."},
+hero:{kicker:"REDACCIÓN PETS & DOGUE",description:"Descubre periodismo visual, estilo de vida con animales, guías, viajes, bienestar, moda, entrevistas e historias de rescate. Los artículos completos pueden escucharse."},
+search:{placeholder:"Buscar historias, categorías o temas..."},
+latest:{heading:"Últimas historias"},
+results:{zero:"No hay historias disponibles.",one:"1 historia disponible.",many:"{count} historias disponibles."},
+empty:{title:"No se encontraron resultados",description:"Prueba otra palabra de búsqueda."},
+cards:{
+photoshoot:{category:"ESTRELLA DE PORTADA",title:"Cómo preparar a tu mascota para una sesión profesional de revista",description:"Aseo, luz y comodidad para conseguir un bonito retrato editorial.",author:"Redacción PETS & DOGUE",time:"7 min"},
+travel:{category:"VIAJES",title:"El auge de los hoteles de lujo pet-friendly",description:"Los hoteles premium rediseñan la experiencia para huéspedes con animales.",author:"Redacción de Viajes",time:"8 min"},
+fashion:{category:"MODA",title:"Las nuevas reglas del estilo de lujo para mascotas",description:"La moda para animales se vuelve más ligera, expresiva y cómoda.",author:"Redacción de Moda",time:"6 min"},
+wellness:{category:"BIENESTAR",title:"Rituales diarios para una mascota más tranquila y feliz",description:"Pequeñas rutinas favorecen la comodidad, confianza y seguridad.",author:"Redacción de Bienestar",time:"5 min"},
+rescue:{category:"RESCATE",title:"Por qué la visibilidad puede cambiar la vida de un animal",description:"Una fotografía y una historia honesta pueden ayudar a encontrar apoyo y hogar.",author:"Redacción de Rescate",time:"7 min"},
+places:{category:"LUGARES",title:"Cómo DOGUE Trust protege las recomendaciones pet-friendly",description:"Los informes, la verificación y la moderación mantienen útiles las recomendaciones.",author:"Redacción Local",time:"5 min"},
+volunteers:{category:"COMUNIDAD",title:"Las personas que ayudan a los animales entre bastidores",description:"Los voluntarios ayudan con transporte, acogida, fotografía y tareas prácticas.",author:"Redacción Comunidad",time:"6 min"},
+community:{category:"COMUNIDAD LOCAL",title:"Lo que recomiendan los dueños de mascotas cerca de ti",description:"La comunidad comparte paseos, cafés, servicios y lugares de confianza.",author:"Comunidad local",time:"4 min"}
+}
+},
+
+it:{
+meta:{title:"Articoli | PETS & DOGUE",description:"Scopri le storie PETS & DOGUE su animali, viaggi, moda, benessere e salvataggio."},
+hero:{kicker:"REDAZIONE PETS & DOGUE",description:"Scopri giornalismo visivo, lifestyle con animali, guide utili, viaggi, benessere, moda, interviste e storie di salvataggio. Gli articoli completi possono essere ascoltati."},
+search:{placeholder:"Cerca storie, categorie o argomenti..."},
+latest:{heading:"Ultime storie"},
+results:{zero:"Nessuna storia disponibile.",one:"1 storia disponibile.",many:"{count} storie disponibili."},
+empty:{title:"Nessun risultato",description:"Prova un’altra parola di ricerca."},
+cards:{
+photoshoot:{category:"STAR DI COPERTINA",title:"Come preparare il tuo animale per un servizio fotografico professionale da rivista",description:"Toelettatura, luce e comfort per un elegante ritratto editoriale.",author:"Redazione PETS & DOGUE",time:"7 min"},
+travel:{category:"VIAGGI",title:"La crescita degli hotel di lusso pet-friendly",description:"Gli hotel premium ripensano l’esperienza per gli ospiti con animali.",author:"Redazione Viaggi",time:"8 min"},
+fashion:{category:"MODA",title:"Le nuove regole dello stile di lusso per animali",description:"La moda pet diventa più leggera, espressiva e confortevole.",author:"Redazione Moda",time:"6 min"},
+wellness:{category:"BENESSERE",title:"Rituali quotidiani per un animale più sereno e felice",description:"Piccole routine favoriscono comfort, fiducia e sicurezza.",author:"Redazione Benessere",time:"5 min"},
+rescue:{category:"SALVATAGGIO",title:"Perché la visibilità può cambiare la vita di un animale",description:"Una fotografia e una storia sincera possono aiutare a trovare supporto e casa.",author:"Redazione Salvataggio",time:"7 min"},
+places:{category:"LUOGHI",title:"Come DOGUE Trust protegge i consigli pet-friendly",description:"Segnalazioni, verifiche e moderazione mantengono affidabili i consigli locali.",author:"Redazione Locale",time:"5 min"},
+volunteers:{category:"COMUNITÀ",title:"Le persone che aiutano gli animali dietro le quinte",description:"I volontari aiutano con trasporti, stalli, fotografie e attività pratiche.",author:"Redazione Comunità",time:"6 min"},
+community:{category:"COMUNITÀ LOCALE",title:"Cosa consigliano i proprietari di animali vicino a te",description:"La comunità condivide passeggiate, locali, servizi e luoghi affidabili.",author:"Comunità locale",time:"4 min"}
+}
+},
+
+pt:{
+meta:{title:"Artigos | PETS & DOGUE",description:"Descubra histórias PETS & DOGUE sobre animais, viagens, moda, bem-estar e resgate."},
+hero:{kicker:"REDAÇÃO PETS & DOGUE",description:"Descubra jornalismo visual, lifestyle com animais, guias úteis, viagens, bem-estar, moda, entrevistas e histórias de resgate. Os artigos completos podem ser ouvidos."},
+search:{placeholder:"Pesquisar histórias, categorias ou temas..."},
+latest:{heading:"Histórias recentes"},
+results:{zero:"Nenhuma história disponível.",one:"1 história disponível.",many:"{count} histórias disponíveis."},
+empty:{title:"Nenhum resultado",description:"Experimente outra palavra de pesquisa."},
+cards:{
+photoshoot:{category:"ESTRELA DE CAPA",title:"Como preparar o seu animal para uma sessão fotográfica profissional de revista",description:"Cuidados, luz e conforto para um belo retrato editorial.",author:"Redação PETS & DOGUE",time:"7 min"},
+travel:{category:"VIAGENS",title:"A ascensão dos hotéis de luxo pet-friendly",description:"Hotéis premium estão a reinventar a experiência para hóspedes com animais.",author:"Redação de Viagens",time:"8 min"},
+fashion:{category:"MODA",title:"As novas regras do estilo de luxo para animais",description:"A moda animal está mais leve, expressiva e confortável.",author:"Redação de Moda",time:"6 min"},
+wellness:{category:"BEM-ESTAR",title:"Rituais diários para um animal mais calmo e feliz",description:"Pequenas rotinas promovem conforto, confiança e segurança.",author:"Redação de Bem-estar",time:"5 min"},
+rescue:{category:"RESGATE",title:"Porque a visibilidade pode mudar a vida de um animal",description:"Uma fotografia e uma história honesta podem ajudar a encontrar apoio e um lar.",author:"Redação de Resgate",time:"7 min"},
+places:{category:"LUGARES",title:"Como o DOGUE Trust protege recomendações pet-friendly",description:"Relatos, verificação e moderação mantêm as recomendações úteis.",author:"Redação Local",time:"5 min"},
+volunteers:{category:"COMUNIDADE",title:"As pessoas que ajudam animais nos bastidores",description:"Voluntários ajudam com transporte, acolhimento, fotografia e tarefas práticas.",author:"Redação Comunidade",time:"6 min"},
+community:{category:"COMUNIDADE LOCAL",title:"O que os donos de animais recomendam perto de si",description:"A comunidade partilha passeios, cafés, serviços e locais de confiança.",author:"Comunidade local",time:"4 min"}
+}
+},
+
+nl:{
+meta:{title:"Artikelen | PETS & DOGUE",description:"Ontdek PETS & DOGUE-verhalen over dieren, reizen, mode, welzijn en redding."},
+hero:{kicker:"PETS & DOGUE REDACTIE",description:"Ontdek visuele journalistiek, luxe leven met dieren, handige gidsen, reizen, welzijn, mode, interviews en reddingsverhalen. Volledige artikelen kunnen worden beluisterd."},
+search:{placeholder:"Zoek verhalen, categorieën of onderwerpen..."},
+latest:{heading:"Nieuwste verhalen"},
+results:{zero:"Geen verhalen beschikbaar.",one:"1 verhaal beschikbaar.",many:"{count} verhalen beschikbaar."},
+empty:{title:"Geen resultaten",description:"Probeer een ander zoekwoord."},
+cards:{
+photoshoot:{category:"COVERSTER",title:"Zo bereid je je huisdier voor op een professionele magazinefotoshoot",description:"Verzorging, licht en comfort voor een mooi redactioneel portret.",author:"PETS & DOGUE Redactie",time:"7 min"},
+travel:{category:"REIZEN",title:"De opkomst van luxe huisdiervriendelijke hotels",description:"Premiumhotels vernieuwen de ervaring voor gasten met dieren.",author:"Reisredactie",time:"8 min"},
+fashion:{category:"MODE",title:"De nieuwe regels van luxe huisdierenstijl",description:"Huisdierenmode wordt lichter, expressiever en comfortabeler.",author:"Moderedactie",time:"6 min"},
+wellness:{category:"WELZIJN",title:"Dagelijkse rituelen voor een rustiger en gelukkiger huisdier",description:"Kleine routines ondersteunen comfort, vertrouwen en veiligheid.",author:"Welzijnsredactie",time:"5 min"},
+rescue:{category:"REDDING",title:"Waarom zichtbaarheid het leven van een dier kan veranderen",description:"Een foto en eerlijk verhaal kunnen helpen steun en een thuis te vinden.",author:"Reddingsredactie",time:"7 min"},
+places:{category:"PLEKKEN",title:"Hoe DOGUE Trust huisdiervriendelijke aanbevelingen beschermt",description:"Meldingen, controle en moderatie houden lokale informatie betrouwbaar.",author:"Lokale redactie",time:"5 min"},
+volunteers:{category:"COMMUNITY",title:"De mensen die achter de schermen dieren helpen",description:"Vrijwilligers helpen met vervoer, opvang, fotografie en praktische taken.",author:"Communityredactie",time:"6 min"},
+community:{category:"LOKALE COMMUNITY",title:"Wat huisdiereigenaren bij jou in de buurt aanbevelen",description:"De community deelt betrouwbare wandelingen, cafés, diensten en plekken.",author:"Lokale community",time:"4 min"}
+}
+},
+
+pl:{
+meta:{title:"Artykuły | PETS & DOGUE",description:"Odkrywaj historie PETS & DOGUE o zwierzętach, podróżach, modzie, dobrostanie i ratowaniu."},
+hero:{kicker:"REDAKCJA PETS & DOGUE",description:"Odkrywaj dziennikarstwo wizualne, luksusowe życie ze zwierzętami, poradniki, podróże, dobrostan, modę, wywiady i historie ratunkowe. Pełnych artykułów można słuchać."},
+search:{placeholder:"Szukaj historii, kategorii lub tematów..."},
+latest:{heading:"Najnowsze historie"},
+results:{zero:"Brak dostępnych historii.",one:"Dostępna 1 historia.",many:"Dostępnych historii: {count}."},
+empty:{title:"Brak wyników",description:"Spróbuj innego słowa."},
+cards:{
+photoshoot:{category:"GWIAZDA OKŁADKI",title:"Jak przygotować pupila do profesjonalnej sesji zdjęciowej dla magazynu",description:"Pielęgnacja, światło i komfort pomagają stworzyć piękny portret.",author:"Redakcja PETS & DOGUE",time:"7 min"},
+travel:{category:"PODRÓŻE",title:"Rozwój luksusowych hoteli przyjaznych zwierzętom",description:"Hotele premium zmieniają doświadczenie gości podróżujących ze zwierzętami.",author:"Redakcja Podróży",time:"8 min"},
+fashion:{category:"MODA",title:"Nowe zasady luksusowego stylu dla zwierząt",description:"Moda dla zwierząt staje się lżejsza, bardziej wyrazista i wygodna.",author:"Redakcja Mody",time:"6 min"},
+wellness:{category:"DOBROSTAN",title:"Codzienne rytuały dla spokojniejszego i szczęśliwszego pupila",description:"Małe rytuały wspierają komfort, pewność siebie i bezpieczeństwo.",author:"Redakcja Dobrostanu",time:"5 min"},
+rescue:{category:"RATUNEK",title:"Dlaczego widoczność może zmienić życie zwierzęcia",description:"Zdjęcie i szczera historia mogą pomóc znaleźć wsparcie i dom.",author:"Redakcja Ratunkowa",time:"7 min"},
+places:{category:"MIEJSCA",title:"Jak DOGUE Trust chroni rekomendacje miejsc przyjaznych zwierzętom",description:"Zgłoszenia, weryfikacja i moderacja utrzymują informacje aktualne.",author:"Redakcja Lokalna",time:"5 min"},
+volunteers:{category:"SPOŁECZNOŚĆ",title:"Ludzie pomagający zwierzętom za kulisami",description:"Wolontariusze pomagają transportem, opieką, fotografią i praktycznymi zadaniami.",author:"Redakcja Społeczności",time:"6 min"},
+community:{category:"LOKALNA SPOŁECZNOŚĆ",title:"Co właściciele zwierząt polecają w Twojej okolicy",description:"Lokalna społeczność poleca spacery, kawiarnie, usługi i sprawdzone miejsca.",author:"Lokalna społeczność",time:"4 min"}
+}
+},
+
+cs:{
+meta:{title:"Články | PETS & DOGUE",description:"Objevujte příběhy PETS & DOGUE o zvířatech, cestování, módě, pohodě a záchraně."},
+hero:{kicker:"REDAKCE PETS & DOGUE",description:"Objevte vizuální žurnalistiku, luxusní život se zvířaty, užitečné průvodce, cestování, pohodu, módu, rozhovory a příběhy záchrany. Celé články lze poslouchat."},
+search:{placeholder:"Hledat příběhy, kategorie nebo témata..."},
+latest:{heading:"Nejnovější příběhy"},
+results:{zero:"Žádné příběhy nejsou dostupné.",one:"Dostupný 1 příběh.",many:"Dostupných příběhů: {count}."},
+empty:{title:"Nic nebylo nalezeno",description:"Zkuste jiné hledané slovo."},
+cards:{
+photoshoot:{category:"HVĚZDA OBÁLKY",title:"Jak připravit mazlíčka na profesionální focení pro magazín",description:"Péče, světlo a pohodlí pomohou vytvořit krásný redakční portrét.",author:"Redakce PETS & DOGUE",time:"7 min"},
+travel:{category:"CESTOVÁNÍ",title:"Vzestup luxusních hotelů přátelských ke zvířatům",description:"Prémiové hotely mění zážitek hostů cestujících se zvířaty.",author:"Redakce Cestování",time:"8 min"},
+fashion:{category:"MÓDA",title:"Nová pravidla luxusního stylu pro mazlíčky",description:"Móda pro zvířata je lehčí, výraznější a pohodlnější.",author:"Redakce Módy",time:"6 min"},
+wellness:{category:"POHODA",title:"Každodenní rituály pro klidnějšího a šťastnějšího mazlíčka",description:"Malé rutiny podporují pohodlí, důvěru a bezpečí.",author:"Redakce Pohody",time:"5 min"},
+rescue:{category:"ZÁCHRANA",title:"Proč může viditelnost změnit život zvířete",description:"Fotografie a pravdivý příběh mohou pomoci najít podporu a domov.",author:"Redakce Záchrany",time:"7 min"},
+places:{category:"MÍSTA",title:"Jak DOGUE Trust chrání doporučení pet-friendly míst",description:"Hlášení, ověřování a moderace pomáhají udržovat informace spolehlivé.",author:"Místní redakce",time:"5 min"},
+volunteers:{category:"KOMUNITA",title:"Lidé, kteří pomáhají zvířatům v zákulisí",description:"Dobrovolníci pomáhají dopravou, péčí, fotografiemi a praktickými úkoly.",author:"Redakce Komunity",time:"6 min"},
+community:{category:"MÍSTNÍ KOMUNITA",title:"Co doporučují majitelé zvířat ve vašem okolí",description:"Místní lidé sdílejí ověřené procházky, kavárny, služby a místa.",author:"Místní komunita",time:"4 min"}
+}
+},
+
+sk:{
+meta:{title:"Články | PETS & DOGUE",description:"Objavujte príbehy PETS & DOGUE o zvieratách, cestovaní, móde, pohode a záchrane."},
+hero:{kicker:"REDAKCIA PETS & DOGUE",description:"Objavte vizuálnu žurnalistiku, luxusný život so zvieratami, užitočné príručky, cestovanie, pohodu, módu, rozhovory a príbehy záchrany. Celé články možno počúvať."},
+search:{placeholder:"Hľadať príbehy, kategórie alebo témy..."},
+latest:{heading:"Najnovšie príbehy"},
+results:{zero:"Žiadne príbehy nie sú dostupné.",one:"Dostupný 1 príbeh.",many:"Dostupných príbehov: {count}."},
+empty:{title:"Nič sa nenašlo",description:"Skúste iné vyhľadávacie slovo."},
+cards:{
+photoshoot:{category:"HVIEZDA OBÁLKY",title:"Ako pripraviť miláčika na profesionálne fotografovanie pre magazín",description:"Úprava, svetlo a pohodlie pomôžu vytvoriť krásny redakčný portrét.",author:"Redakcia PETS & DOGUE",time:"7 min"},
+travel:{category:"CESTOVANIE",title:"Vzostup luxusných hotelov priateľských k zvieratám",description:"Prémiové hotely menia zážitok hostí cestujúcich so zvieratami.",author:"Redakcia Cestovania",time:"8 min"},
+fashion:{category:"MÓDA",title:"Nové pravidlá luxusného štýlu pre miláčikov",description:"Móda pre zvieratá je ľahšia, výraznejšia a pohodlnejšia.",author:"Redakcia Módy",time:"6 min"},
+wellness:{category:"POHODA",title:"Denné rituály pre pokojnejšieho a šťastnejšieho miláčika",description:"Malé rutiny podporujú pohodlie, dôveru a bezpečnosť.",author:"Redakcia Pohody",time:"5 min"},
+rescue:{category:"ZÁCHRANA",title:"Prečo môže viditeľnosť zmeniť život zvieraťa",description:"Fotografia a úprimný príbeh môžu pomôcť nájsť podporu a domov.",author:"Redakcia Záchrany",time:"7 min"},
+places:{category:"MIESTA",title:"Ako DOGUE Trust chráni odporúčania pet-friendly miest",description:"Hlásenia, overovanie a moderácia pomáhajú udržiavať informácie spoľahlivé.",author:"Miestna redakcia",time:"5 min"},
+volunteers:{category:"KOMUNITA",title:"Ľudia, ktorí pomáhajú zvieratám v zákulisí",description:"Dobrovoľníci pomáhajú dopravou, dočasnou starostlivosťou a fotografiami.",author:"Redakcia Komunity",time:"6 min"},
+community:{category:"MIESTNA KOMUNITA",title:"Čo odporúčajú majitelia zvierat vo vašom okolí",description:"Miestni ľudia zdieľajú overené prechádzky, kaviarne, služby a miesta.",author:"Miestna komunita",time:"4 min"}
+}
+},
+
+hu:{
+meta:{title:"Cikkek | PETS & DOGUE",description:"Fedezze fel a PETS & DOGUE állatokról, utazásról, divatról, jóllétről és mentésről szóló történeteit."},
+hero:{kicker:"PETS & DOGUE SZERKESZTŐSÉG",description:"Fedezze fel a vizuális újságírást, az állatokkal való luxus életet, útmutatókat, utazást, jóllétet, divatot, interjúkat és mentési történeteket. A teljes cikkek meghallgathatók."},
+search:{placeholder:"Történetek, kategóriák vagy témák keresése..."},
+latest:{heading:"Legújabb történetek"},
+results:{zero:"Nincs elérhető történet.",one:"1 történet érhető el.",many:"{count} történet érhető el."},
+empty:{title:"Nincs találat",description:"Próbáljon másik keresőszót."},
+cards:{
+photoshoot:{category:"CÍMLAPSZTÁR",title:"Hogyan készítse fel kedvencét egy professzionális magazinfotózásra",description:"Ápolás, fény és kényelem egy szép szerkesztőségi portréhoz.",author:"PETS & DOGUE szerkesztőség",time:"7 perc"},
+travel:{category:"UTAZÁS",title:"A luxus állatbarát szállodák térnyerése",description:"A prémium szállodák újragondolják az állatokkal érkező vendégek élményét.",author:"Utazási szerkesztőség",time:"8 perc"},
+fashion:{category:"DIVAT",title:"A luxus állatstílus új szabályai",description:"Az állatdivat könnyebb, kifejezőbb és kényelmesebb lesz.",author:"Divatszerkesztőség",time:"6 perc"},
+wellness:{category:"JÓLLÉT",title:"Napi rituálék egy nyugodtabb és boldogabb kedvencért",description:"A kis rutinok támogatják a kényelmet, bizalmat és biztonságot.",author:"Jólléti szerkesztőség",time:"5 perc"},
+rescue:{category:"MENTÉS",title:"Miért változtathatja meg a láthatóság egy állat életét",description:"Egy fotó és őszinte történet segíthet támogatást és otthont találni.",author:"Mentési szerkesztőség",time:"7 perc"},
+places:{category:"HELYEK",title:"Hogyan védi a DOGUE Trust az állatbarát ajánlásokat",description:"A jelentések, ellenőrzés és moderáció megbízhatóan tartják az információkat.",author:"Helyi szerkesztőség",time:"5 perc"},
+volunteers:{category:"KÖZÖSSÉG",title:"Az emberek, akik a háttérben segítik az állatokat",description:"Az önkéntesek szállítással, befogadással, fotózással és gyakorlati segítséggel támogatnak.",author:"Közösségi szerkesztőség",time:"6 perc"},
+community:{category:"HELYI KÖZÖSSÉG",title:"Mit ajánlanak az állattartók az Ön közelében",description:"A helyiek megbízható sétákat, kávézókat, szolgáltatásokat és helyeket osztanak meg.",author:"Helyi közösség",time:"4 perc"}
+}
+},
+
+ro:{
+meta:{title:"Articole | PETS & DOGUE",description:"Descoperiți povești PETS & DOGUE despre animale, călătorii, modă, bunăstare și salvare."},
+hero:{kicker:"REDACȚIA PETS & DOGUE",description:"Descoperiți jurnalism vizual, stil de viață premium cu animale, ghiduri, călătorii, bunăstare, modă, interviuri și povești de salvare. Articolele complete pot fi ascultate."},
+search:{placeholder:"Caută povești, categorii sau subiecte..."},
+latest:{heading:"Cele mai noi povești"},
+results:{zero:"Nu există povești disponibile.",one:"1 poveste disponibilă.",many:"{count} povești disponibile."},
+empty:{title:"Niciun rezultat",description:"Încercați un alt cuvânt."},
+cards:{
+photoshoot:{category:"VEDETĂ DE COPERTĂ",title:"Cum să pregătiți animalul pentru o ședință foto profesională de revistă",description:"Îngrijire, lumină și confort pentru un portret editorial frumos.",author:"Redacția PETS & DOGUE",time:"7 min"},
+travel:{category:"CĂLĂTORII",title:"Ascensiunea hotelurilor de lux pet-friendly",description:"Hotelurile premium regândesc experiența oaspeților care călătoresc cu animale.",author:"Redacția Călătorii",time:"8 min"},
+fashion:{category:"MODĂ",title:"Noile reguli ale stilului de lux pentru animale",description:"Moda pentru animale devine mai ușoară, expresivă și confortabilă.",author:"Redacția Modă",time:"6 min"},
+wellness:{category:"BUNĂSTARE",title:"Ritualuri zilnice pentru un animal mai calm și fericit",description:"Rutinele mici sprijină confortul, încrederea și siguranța.",author:"Redacția Bunăstare",time:"5 min"},
+rescue:{category:"SALVARE",title:"De ce vizibilitatea poate schimba viața unui animal",description:"O fotografie și o poveste sinceră pot ajuta un animal să găsească sprijin și casă.",author:"Redacția Salvare",time:"7 min"},
+places:{category:"LOCURI",title:"Cum protejează DOGUE Trust recomandările pet-friendly",description:"Raportările, verificarea și moderarea mențin recomandările utile.",author:"Redacția Locală",time:"5 min"},
+volunteers:{category:"COMUNITATE",title:"Oamenii care ajută animalele din culise",description:"Voluntarii ajută cu transport, găzduire, fotografie și activități practice.",author:"Redacția Comunitate",time:"6 min"},
+community:{category:"COMUNITATE LOCALĂ",title:"Ce recomandă proprietarii de animale din apropiere",description:"Comunitatea locală recomandă plimbări, cafenele, servicii și locuri de încredere.",author:"Comunitatea locală",time:"4 min"}
+}
+},
+
+bg:{
+meta:{title:"Статии | PETS & DOGUE",description:"Открийте истории PETS & DOGUE за животни, пътувания, мода, благополучие и спасяване."},
+hero:{kicker:"РЕДАКЦИЯ PETS & DOGUE",description:"Открийте визуална журналистика, луксозен живот с животни, полезни ръководства, пътувания, благополучие, мода, интервюта и спасителни истории. Пълните статии могат да се слушат."},
+search:{placeholder:"Търсене на истории, категории или теми..."},
+latest:{heading:"Последни истории"},
+results:{zero:"Няма налични истории.",one:"Налична е 1 история.",many:"Налични истории: {count}."},
+empty:{title:"Няма резултати",description:"Опитайте друга дума за търсене."},
+cards:{
+photoshoot:{category:"ЗВЕЗДА НА КОРИЦАТА",title:"Как да подготвите любимеца си за професионална фотосесия за списание",description:"Грижа, светлина и комфорт за красив редакционен портрет.",author:"Редакция PETS & DOGUE",time:"7 мин"},
+travel:{category:"ПЪТУВАНИЯ",title:"Възходът на луксозните pet-friendly хотели",description:"Премиум хотелите променят преживяването за гости с животни.",author:"Редакция Пътувания",time:"8 мин"},
+fashion:{category:"МОДА",title:"Новите правила на луксозния стил за любимци",description:"Модата за животни става по-лека, изразителна и удобна.",author:"Редакция Мода",time:"6 мин"},
+wellness:{category:"БЛАГОПОЛУЧИЕ",title:"Ежедневни ритуали за по-спокоен и щастлив любимец",description:"Малките навици подкрепят комфорта, увереността и безопасността.",author:"Редакция Благополучие",time:"5 мин"},
+rescue:{category:"СПАСЯВАНЕ",title:"Защо видимостта може да промени живота на животно",description:"Снимка и честна история могат да помогнат за намиране на подкрепа и дом.",author:"Редакция Спасяване",time:"7 мин"},
+places:{category:"МЕСТА",title:"Как DOGUE Trust защитава pet-friendly препоръките",description:"Сигнали, проверка и модерация поддържат препоръките надеждни.",author:"Местна редакция",time:"5 мин"},
+volunteers:{category:"ОБЩНОСТ",title:"Хората, които помагат на животните зад кулисите",description:"Доброволците помагат с транспорт, временни домове, снимки и практически задачи.",author:"Редакция Общност",time:"6 мин"},
+community:{category:"МЕСТНА ОБЩНОСТ",title:"Какво препоръчват собствениците на животни близо до вас",description:"Местната общност споделя разходки, кафенета, услуги и доверени места.",author:"Местна общност",time:"4 мин"}
+}
+},
+
+el:{
+meta:{title:"Άρθρα | PETS & DOGUE",description:"Ανακαλύψτε ιστορίες PETS & DOGUE για ζώα, ταξίδια, μόδα, ευεξία και διάσωση."},
+hero:{kicker:"ΣΥΝΤΑΞΗ PETS & DOGUE",description:"Ανακαλύψτε οπτική δημοσιογραφία, πολυτελή ζωή με ζώα, οδηγούς, ταξίδια, ευεξία, μόδα, συνεντεύξεις και ιστορίες διάσωσης. Τα πλήρη άρθρα μπορούν να ακουστούν."},
+search:{placeholder:"Αναζήτηση ιστοριών, κατηγοριών ή θεμάτων..."},
+latest:{heading:"Τελευταίες ιστορίες"},
+results:{zero:"Δεν υπάρχουν διαθέσιμες ιστορίες.",one:"1 διαθέσιμη ιστορία.",many:"{count} διαθέσιμες ιστορίες."},
+empty:{title:"Δεν βρέθηκαν αποτελέσματα",description:"Δοκιμάστε άλλη λέξη αναζήτησης."},
+cards:{
+photoshoot:{category:"ΑΣΤΕΡΙ ΕΞΩΦΥΛΛΟΥ",title:"Πώς να προετοιμάσετε το κατοικίδιό σας για επαγγελματική φωτογράφιση περιοδικού",description:"Περιποίηση, φως και άνεση για ένα όμορφο editorial πορτρέτο.",author:"Σύνταξη PETS & DOGUE",time:"7 λεπτά"},
+travel:{category:"ΤΑΞΙΔΙΑ",title:"Η άνοδος των πολυτελών pet-friendly ξενοδοχείων",description:"Τα premium ξενοδοχεία ανασχεδιάζουν την εμπειρία για επισκέπτες με ζώα.",author:"Σύνταξη Ταξιδιών",time:"8 λεπτά"},
+fashion:{category:"ΜΟΔΑ",title:"Οι νέοι κανόνες πολυτελούς στυλ για κατοικίδια",description:"Η μόδα κατοικιδίων γίνεται πιο ελαφριά, εκφραστική και άνετη.",author:"Σύνταξη Μόδας",time:"6 λεπτά"},
+wellness:{category:"ΕΥΕΞΙΑ",title:"Καθημερινές συνήθειες για πιο ήρεμο και χαρούμενο κατοικίδιο",description:"Μικρές ρουτίνες ενισχύουν την άνεση, την εμπιστοσύνη και την ασφάλεια.",author:"Σύνταξη Ευεξίας",time:"5 λεπτά"},
+rescue:{category:"ΔΙΑΣΩΣΗ",title:"Γιατί η προβολή μπορεί να αλλάξει τη ζωή ενός ζώου",description:"Μια φωτογραφία και μια ειλικρινής ιστορία μπορούν να βοηθήσουν ένα ζώο να βρει σπίτι.",author:"Σύνταξη Διάσωσης",time:"7 λεπτά"},
+places:{category:"ΜΕΡΗ",title:"Πώς το DOGUE Trust προστατεύει τις pet-friendly προτάσεις",description:"Αναφορές, επαλήθευση και εποπτεία κρατούν τις πληροφορίες αξιόπιστες.",author:"Τοπική σύνταξη",time:"5 λεπτά"},
+volunteers:{category:"ΚΟΙΝΟΤΗΤΑ",title:"Οι άνθρωποι που βοηθούν τα ζώα στα παρασκήνια",description:"Οι εθελοντές βοηθούν με μεταφορές, φιλοξενία, φωτογραφία και πρακτικές εργασίες.",author:"Σύνταξη Κοινότητας",time:"6 λεπτά"},
+community:{category:"ΤΟΠΙΚΗ ΚΟΙΝΟΤΗΤΑ",title:"Τι προτείνουν οι ιδιοκτήτες κατοικιδίων κοντά σας",description:"Η τοπική κοινότητα μοιράζεται βόλτες, καφέ, υπηρεσίες και αξιόπιστα μέρη.",author:"Τοπική κοινότητα",time:"4 λεπτά"}
+}
+},
+
+sv:{
+meta:{title:"Artiklar | PETS & DOGUE",description:"Upptäck PETS & DOGUE-berättelser om djur, resor, mode, välmående och räddning."},
+hero:{kicker:"PETS & DOGUE REDAKTION",description:"Upptäck visuell journalistik, lyxigt liv med djur, guider, resor, välmående, mode, intervjuer och räddningshistorier. Hela artiklar kan lyssnas på."},
+search:{placeholder:"Sök berättelser, kategorier eller ämnen..."},
+latest:{heading:"Senaste berättelser"},
+results:{zero:"Inga berättelser tillgängliga.",one:"1 berättelse tillgänglig.",many:"{count} berättelser tillgängliga."},
+empty:{title:"Inga resultat",description:"Prova ett annat sökord."},
+cards:{
+photoshoot:{category:"OMSLAGSSTJÄRNA",title:"Så förbereder du ditt husdjur för en professionell magasinplåtning",description:"Pälsvård, ljus och komfort för ett vackert redaktionellt porträtt.",author:"PETS & DOGUE Redaktion",time:"7 min"},
+travel:{category:"RESOR",title:"Lyxiga djurvänliga hotell växer",description:"Premiumhotell förändrar upplevelsen för gäster som reser med djur.",author:"Reseredaktionen",time:"8 min"},
+fashion:{category:"MODE",title:"De nya reglerna för lyxig djurstil",description:"Djurmode blir lättare, mer uttrycksfullt och bekvämare.",author:"Moderedaktionen",time:"6 min"},
+wellness:{category:"VÄLMÅENDE",title:"Dagliga ritualer för ett lugnare och gladare husdjur",description:"Små rutiner stödjer komfort, trygghet och självförtroende.",author:"Välmåenderedaktionen",time:"5 min"},
+rescue:{category:"RÄDDNING",title:"Varför synlighet kan förändra ett djurs liv",description:"Ett foto och en ärlig berättelse kan hjälpa ett djur hitta stöd och hem.",author:"Räddningsredaktionen",time:"7 min"},
+places:{category:"PLATSER",title:"Så skyddar DOGUE Trust djurvänliga rekommendationer",description:"Rapporter, verifiering och moderering håller informationen pålitlig.",author:"Lokala redaktionen",time:"5 min"},
+volunteers:{category:"COMMUNITY",title:"Människorna som hjälper djur bakom kulisserna",description:"Volontärer hjälper med transport, jourhem, foto och praktiska uppgifter.",author:"Communityredaktionen",time:"6 min"},
+community:{category:"LOKAL COMMUNITY",title:"Vad djurägare nära dig rekommenderar",description:"Lokala djurägare delar promenader, kaféer, tjänster och pålitliga platser.",author:"Lokal community",time:"4 min"}
+}
+},
+
+da:{
+meta:{title:"Artikler | PETS & DOGUE",description:"Oplev PETS & DOGUE-historier om dyr, rejser, mode, trivsel og redning."},
+hero:{kicker:"PETS & DOGUE REDAKTION",description:"Oplev visuel journalistik, luksusliv med dyr, nyttige guider, rejser, trivsel, mode, interviews og redningshistorier. Hele artikler kan lyttes til."},
+search:{placeholder:"Søg historier, kategorier eller emner..."},
+latest:{heading:"Seneste historier"},
+results:{zero:"Ingen historier tilgængelige.",one:"1 historie tilgængelig.",many:"{count} historier tilgængelige."},
+empty:{title:"Ingen resultater",description:"Prøv et andet søgeord."},
+cards:{
+photoshoot:{category:"FORSIDESTJERNE",title:"Sådan forbereder du dit kæledyr til en professionel magasinfotografering",description:"Pleje, lys og komfort til et smukt redaktionelt portræt.",author:"PETS & DOGUE Redaktion",time:"7 min"},
+travel:{category:"REJSER",title:"Fremgangen for luksuriøse kæledyrsvenlige hoteller",description:"Premiumhoteller ændrer oplevelsen for gæster, der rejser med dyr.",author:"Rejseredaktionen",time:"8 min"},
+fashion:{category:"MODE",title:"De nye regler for luksuriøs kæledyrsstil",description:"Kæledyrsmode bliver lettere, mere udtryksfuld og behagelig.",author:"Moderedaktionen",time:"6 min"},
+wellness:{category:"TRIVSEL",title:"Daglige ritualer for et roligere og gladere kæledyr",description:"Små rutiner støtter komfort, tillid og tryghed.",author:"Trivselsredaktionen",time:"5 min"},
+rescue:{category:"REDNING",title:"Hvorfor synlighed kan ændre et dyrs liv",description:"Et foto og en ærlig historie kan hjælpe et dyr med at finde støtte og hjem.",author:"Redningsredaktionen",time:"7 min"},
+places:{category:"STEDER",title:"Sådan beskytter DOGUE Trust kæledyrsvenlige anbefalinger",description:"Rapporter, kontrol og moderering holder lokale anbefalinger pålidelige.",author:"Lokalredaktionen",time:"5 min"},
+volunteers:{category:"FÆLLESSKAB",title:"Menneskene der hjælper dyr bag kulisserne",description:"Frivillige hjælper med transport, plejefamilier, foto og praktiske opgaver.",author:"Fællesskabsredaktionen",time:"6 min"},
+community:{category:"LOKALT FÆLLESSKAB",title:"Hvad kæledyrsejere i nærheden anbefaler",description:"Lokale ejere deler gåture, caféer, tjenester og pålidelige steder.",author:"Lokalt fællesskab",time:"4 min"}
+}
+},
+
+no:{
+meta:{title:"Artikler | PETS & DOGUE",description:"Oppdag PETS & DOGUE-historier om dyr, reiser, mote, trivsel og redning."},
+hero:{kicker:"PETS & DOGUE REDAKSJON",description:"Oppdag visuell journalistikk, luksusliv med dyr, nyttige guider, reiser, trivsel, mote, intervjuer og redningshistorier. Hele artikler kan lyttes til."},
+search:{placeholder:"Søk historier, kategorier eller temaer..."},
+latest:{heading:"Siste historier"},
+results:{zero:"Ingen historier tilgjengelige.",one:"1 historie tilgjengelig.",many:"{count} historier tilgjengelige."},
+empty:{title:"Ingen resultater",description:"Prøv et annet søkeord."},
+cards:{
+photoshoot:{category:"FORSIDESTJERNE",title:"Slik forbereder du kjæledyret ditt til en profesjonell magasinshoot",description:"Stell, lys og komfort for et vakkert redaksjonelt portrett.",author:"PETS & DOGUE-redaksjonen",time:"7 min"},
+travel:{category:"REISER",title:"Veksten i luksuriøse kjæledyrvennlige hoteller",description:"Premiumhoteller endrer opplevelsen for gjester som reiser med dyr.",author:"Reiseredaksjonen",time:"8 min"},
+fashion:{category:"MOTE",title:"De nye reglene for luksuriøs kjæledyrstil",description:"Kjæledyrmote blir lettere, mer uttrykksfull og komfortabel.",author:"Moteredaksjonen",time:"6 min"},
+wellness:{category:"TRIVSEL",title:"Daglige ritualer for et roligere og gladere kjæledyr",description:"Små rutiner støtter komfort, trygghet og tillit.",author:"Trivselsredaksjonen",time:"5 min"},
+rescue:{category:"REDNING",title:"Hvorfor synlighet kan forandre et dyrs liv",description:"Et bilde og en ærlig historie kan hjelpe et dyr å finne støtte og hjem.",author:"Redningsredaksjonen",time:"7 min"},
+places:{category:"STEDER",title:"Slik beskytter DOGUE Trust kjæledyrvennlige anbefalinger",description:"Rapporter, kontroll og moderering holder lokale anbefalinger pålitelige.",author:"Lokalredaksjonen",time:"5 min"},
+volunteers:{category:"FELLESSKAP",title:"Menneskene som hjelper dyr bak kulissene",description:"Frivillige hjelper med transport, fosterhjem, foto og praktiske oppgaver.",author:"Fellesskapsredaksjonen",time:"6 min"},
+community:{category:"LOKALT FELLESSKAP",title:"Hva kjæledyreiere i nærheten anbefaler",description:"Lokale eiere deler turer, kafeer, tjenester og pålitelige steder.",author:"Lokalt fellesskap",time:"4 min"}
+}
+},
+
+fi:{
+meta:{title:"Artikkelit | PETS & DOGUE",description:"Tutustu PETS & DOGUE -tarinoihin eläimistä, matkailusta, muodista, hyvinvoinnista ja pelastamisesta."},
+hero:{kicker:"PETS & DOGUE -TOIMITUS",description:"Tutustu visuaaliseen journalismiin, ylelliseen elämään eläinten kanssa, oppaisiin, matkailuun, hyvinvointiin, muotiin, haastatteluihin ja pelastustarinoihin. Kokonaiset artikkelit voi kuunnella."},
+search:{placeholder:"Hae tarinoita, kategorioita tai aiheita..."},
+latest:{heading:"Uusimmat tarinat"},
+results:{zero:"Tarinoita ei ole saatavilla.",one:"1 tarina saatavilla.",many:"{count} tarinaa saatavilla."},
+empty:{title:"Ei tuloksia",description:"Kokeile toista hakusanaa."},
+cards:{
+photoshoot:{category:"KANSITÄHTI",title:"Näin valmistelet lemmikkisi ammattimaiseen lehtikuvaukseen",description:"Hoito, valo ja mukavuus auttavat luomaan kauniin toimituksellisen muotokuvan.",author:"PETS & DOGUE -toimitus",time:"7 min"},
+travel:{category:"MATKAILU",title:"Ylellisten lemmikkiystävällisten hotellien kasvu",description:"Premium-hotellit uudistavat kokemusta eläinten kanssa matkustaville.",author:"Matkailutoimitus",time:"8 min"},
+fashion:{category:"MUOTI",title:"Lemmikkien luksustyylin uudet säännöt",description:"Lemmikkimuoti muuttuu kevyemmäksi, ilmeikkäämmäksi ja mukavammaksi.",author:"Muotitoimitus",time:"6 min"},
+wellness:{category:"HYVINVOINTI",title:"Päivittäisiä rituaaleja rauhallisemmalle ja onnellisemmalle lemmikille",description:"Pienet rutiinit tukevat mukavuutta, luottamusta ja turvallisuutta.",author:"Hyvinvointitoimitus",time:"5 min"},
+rescue:{category:"PELASTUS",title:"Miksi näkyvyys voi muuttaa eläimen elämän",description:"Kuva ja rehellinen tarina voivat auttaa eläintä löytämään tuen ja kodin.",author:"Pelastustoimitus",time:"7 min"},
+places:{category:"PAIKAT",title:"Näin DOGUE Trust suojaa lemmikkiystävällisiä suosituksia",description:"Ilmoitukset, tarkistus ja moderointi pitävät paikalliset tiedot luotettavina.",author:"Paikallistoimitus",time:"5 min"},
+volunteers:{category:"YHTEISÖ",title:"Ihmiset, jotka auttavat eläimiä kulissien takana",description:"Vapaaehtoiset auttavat kuljetuksissa, sijaiskodeissa, kuvauksessa ja käytännön tehtävissä.",author:"Yhteisötoimitus",time:"6 min"},
+community:{category:"PAIKALLINEN YHTEISÖ",title:"Mitä lemmikinomistajat suosittelevat lähelläsi",description:"Paikalliset jakavat luotettavia kävelyreittejä, kahviloita, palveluita ja paikkoja.",author:"Paikallinen yhteisö",time:"4 min"}
+}
+},
+
+tr:{
+meta:{title:"Makaleler | PETS & DOGUE",description:"Hayvanlar, seyahat, moda, refah ve kurtarma hakkında PETS & DOGUE hikâyelerini keşfedin."},
+hero:{kicker:"PETS & DOGUE EDİTORYAL",description:"Görsel gazetecilik, hayvanlarla lüks yaşam, faydalı rehberler, seyahat, refah, moda, röportajlar ve kurtarma hikâyelerini keşfedin. Tam makaleler sesli dinlenebilir."},
+search:{placeholder:"Hikâye, kategori veya konu ara..."},
+latest:{heading:"Son Hikâyeler"},
+results:{zero:"Hikâye bulunmuyor.",one:"1 hikâye mevcut.",many:"{count} hikâye mevcut."},
+empty:{title:"Sonuç bulunamadı",description:"Başka bir arama kelimesi deneyin."},
+cards:{
+photoshoot:{category:"KAPAK YILDIZI",title:"Evcil Hayvanınızı Profesyonel Bir Dergi Çekimine Nasıl Hazırlarsınız",description:"Bakım, ışık ve konfor güzel bir editoryal portre yaratır.",author:"PETS & DOGUE Editoryal",time:"7 dk"},
+travel:{category:"SEYAHAT",title:"Lüks Evcil Hayvan Dostu Otellerin Yükselişi",description:"Premium oteller hayvanlarla seyahat eden misafirlerin deneyimini yeniden tasarlıyor.",author:"Seyahat Editoryal",time:"8 dk"},
+fashion:{category:"MODA",title:"Lüks Evcil Hayvan Stilinin Yeni Kuralları",description:"Evcil hayvan modası daha hafif, etkileyici ve rahat hale geliyor.",author:"Moda Editoryal",time:"6 dk"},
+wellness:{category:"REFAH",title:"Daha Sakin ve Mutlu Bir Evcil Hayvan İçin Günlük Ritüeller",description:"Küçük rutinler konforu, güveni ve güvenliği destekler.",author:"Refah Editoryal",time:"5 dk"},
+rescue:{category:"KURTARMA",title:"Görünürlük Bir Hayvanın Hayatını Neden Değiştirebilir",description:"Bir fotoğraf ve dürüst hikâye destek ve yuva bulunmasına yardımcı olabilir.",author:"Kurtarma Editoryal",time:"7 dk"},
+places:{category:"MEKÂNLAR",title:"DOGUE Trust Evcil Hayvan Dostu Önerileri Nasıl Korur",description:"Bildirimler, doğrulama ve moderasyon yerel bilgileri güvenilir tutar.",author:"Yerel Editoryal",time:"5 dk"},
+volunteers:{category:"TOPLULUK",title:"Perde Arkasında Hayvanlara Yardım Eden İnsanlar",description:"Gönüllüler ulaşım, geçici yuva, fotoğraf ve pratik işlerde destek olur.",author:"Topluluk Editoryal",time:"6 dk"},
+community:{category:"YEREL TOPLULUK",title:"Yakınınızdaki Evcil Hayvan Sahipleri Neleri Öneriyor",description:"Yerel topluluk güvenilir yürüyüşleri, kafeleri, hizmetleri ve yerleri paylaşır.",author:"Yerel topluluk",time:"4 dk"}
+}
+},
+
+ar:{
+meta:{title:"المقالات | PETS & DOGUE",description:"اكتشف قصص PETS & DOGUE عن الحيوانات والسفر والموضة والرفاه والإنقاذ."},
+hero:{kicker:"هيئة تحرير PETS & DOGUE",description:"اكتشف الصحافة البصرية والحياة الراقية مع الحيوانات والأدلة المفيدة والسفر والرفاه والموضة والمقابلات وقصص الإنقاذ. يمكن الاستماع إلى المقالات الكاملة."},
+search:{placeholder:"ابحث عن القصص أو الفئات أو الموضوعات..."},
+latest:{heading:"أحدث القصص"},
+results:{zero:"لا توجد قصص متاحة.",one:"تتوفر قصة واحدة.",many:"عدد القصص المتاحة: {count}."},
+empty:{title:"لا توجد نتائج",description:"جرّب كلمة بحث أخرى."},
+cards:{
+photoshoot:{category:"نجم الغلاف",title:"كيف تجهّز حيوانك الأليف لجلسة تصوير احترافية لمجلة",description:"العناية والإضاءة والراحة تساعد على إنشاء بورتريه تحريري جميل.",author:"هيئة تحرير PETS & DOGUE",time:"7 دقائق"},
+travel:{category:"السفر",title:"صعود الفنادق الفاخرة الصديقة للحيوانات",description:"تعيد الفنادق الراقية تصميم تجربة الضيوف الذين يسافرون مع حيواناتهم.",author:"تحرير السفر",time:"8 دقائق"},
+fashion:{category:"الموضة",title:"القواعد الجديدة للأناقة الفاخرة للحيوانات",description:"تصبح موضة الحيوانات أكثر خفة وتعبيراً وراحة.",author:"تحرير الموضة",time:"6 دقائق"},
+wellness:{category:"الرفاه",title:"طقوس يومية لحيوان أكثر هدوءاً وسعادة",description:"تدعم العادات الصغيرة الراحة والثقة والأمان.",author:"تحرير الرفاه",time:"5 دقائق"},
+rescue:{category:"الإنقاذ",title:"لماذا يمكن للظهور أن يغيّر حياة حيوان",description:"قد تساعد صورة وقصة صادقة الحيوان على العثور على الدعم والمنزل.",author:"تحرير الإنقاذ",time:"7 دقائق"},
+places:{category:"الأماكن",title:"كيف يحمي DOGUE Trust توصيات الأماكن الصديقة للحيوانات",description:"تحافظ التقارير والتحقق والإشراف على موثوقية المعلومات المحلية.",author:"التحرير المحلي",time:"5 دقائق"},
+volunteers:{category:"المجتمع",title:"الأشخاص الذين يساعدون الحيوانات خلف الكواليس",description:"يساعد المتطوعون في النقل والاستضافة المؤقتة والتصوير والمهام العملية.",author:"تحرير المجتمع",time:"6 دقائق"},
+community:{category:"المجتمع المحلي",title:"ما الذي يوصي به أصحاب الحيوانات بالقرب منك",description:"يشارك المجتمع المحلي مسارات المشي والمقاهي والخدمات والأماكن الموثوقة.",author:"المجتمع المحلي",time:"4 دقائق"}
+}
+},
+
+hi:{
+meta:{title:"लेख | PETS & DOGUE",description:"जानवरों, यात्रा, फैशन, कल्याण और बचाव पर PETS & DOGUE की कहानियाँ खोजें।"},
+hero:{kicker:"PETS & DOGUE संपादकीय",description:"विज़ुअल जर्नलिज़्म, जानवरों के साथ लक्ज़री जीवन, उपयोगी गाइड, यात्रा, कल्याण, फैशन, इंटरव्यू और बचाव की कहानियाँ खोजें। पूरे लेखों को सुना जा सकता है।"},
+search:{placeholder:"कहानियाँ, श्रेणियाँ या विषय खोजें..."},
+latest:{heading:"नई कहानियाँ"},
+results:{zero:"कोई कहानी उपलब्ध नहीं है।",one:"1 कहानी उपलब्ध है।",many:"{count} कहानियाँ उपलब्ध हैं।"},
+empty:{title:"कोई परिणाम नहीं मिला",description:"कोई दूसरा खोज शब्द आज़माएँ।"},
+cards:{
+photoshoot:{category:"कवर स्टार",title:"पेशेवर पत्रिका फोटोशूट के लिए अपने पालतू को कैसे तैयार करें",description:"देखभाल, रोशनी और आराम एक सुंदर संपादकीय पोर्ट्रेट बनाने में मदद करते हैं।",author:"PETS & DOGUE संपादकीय",time:"7 मिनट"},
+travel:{category:"यात्रा",title:"लक्ज़री pet-friendly होटलों का बढ़ता चलन",description:"प्रीमियम होटल जानवरों के साथ यात्रा करने वाले मेहमानों का अनुभव बदल रहे हैं।",author:"यात्रा संपादकीय",time:"8 मिनट"},
+fashion:{category:"फैशन",title:"लक्ज़री पालतू स्टाइल के नए नियम",description:"पालतू फैशन अधिक हल्का, अभिव्यक्तिपूर्ण और आरामदायक हो रहा है।",author:"फैशन संपादकीय",time:"6 मिनट"},
+wellness:{category:"कल्याण",title:"शांत और खुश पालतू के लिए दैनिक रिवाज",description:"छोटी दिनचर्या आराम, भरोसा और सुरक्षा बढ़ाती है।",author:"कल्याण संपादकीय",time:"5 मिनट"},
+rescue:{category:"बचाव",title:"दिखाई देना किसी जानवर की जिंदगी क्यों बदल सकता है",description:"एक तस्वीर और सच्ची कहानी जानवर को मदद और घर दिला सकती है।",author:"बचाव संपादकीय",time:"7 मिनट"},
+places:{category:"स्थान",title:"DOGUE Trust pet-friendly सुझावों की सुरक्षा कैसे करता है",description:"रिपोर्ट, सत्यापन और मॉडरेशन स्थानीय जानकारी को भरोसेमंद रखते हैं।",author:"स्थानीय संपादकीय",time:"5 मिनट"},
+volunteers:{category:"समुदाय",title:"पर्दे के पीछे जानवरों की मदद करने वाले लोग",description:"स्वयंसेवक परिवहन, अस्थायी घर, तस्वीरों और व्यावहारिक कामों में मदद करते हैं।",author:"समुदाय संपादकीय",time:"6 मिनट"},
+community:{category:"स्थानीय समुदाय",title:"आपके पास पालतू मालिक क्या सुझाते हैं",description:"स्थानीय समुदाय भरोसेमंद वॉक, कैफ़े, सेवाएँ और स्थान साझा करता है।",author:"स्थानीय समुदाय",time:"4 मिनट"}
+}
+}
+
+};
+
+(function(){
+"use strict";
+
+const A=
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.articles;
+
+if(!A||!A.en){
+return;
+}
+
+const E=A.en;
+
+Object.keys(A).forEach(code=>{
+
+const t=A[code];
+
+if(!t){
+return;
+}
+
+t.meta=t.meta||{};
+t.hero=t.hero||{};
+t.search=t.search||{};
+t.latest=t.latest||{};
+t.results=t.results||{};
+t.empty=t.empty||{};
+t.cards=t.cards||{};
+
+["title","description"].forEach(key=>{
+if(!t.meta[key]){
+t.meta[key]=E.meta[key];
+}
 });
 
-A.ru=make({
-metaTitle:"Статьи | PETS & DOGUE",
-metaDescription:"Редакционные истории PETS & DOGUE: интервью, полезные гиды, путешествия, мода, здоровье и помощь животным.",
-kicker:"РЕДАКЦИЯ PETS & DOGUE",heroTitle:"Истории, которые стоит увидеть, прочитать и услышать",
-heroDescription:"Откройте визуальную журналистику, роскошный образ жизни с животными, полезные гиды, путешествия, здоровье, моду, интервью и истории спасения. Полные статьи можно слушать.",
-explore:"Смотреть истории",listen:"Послушать статью",coverStar:"Стать звездой обложки",
-coverStars:"Звёзды обложки",fashion:"Мода",travel:"Путешествия",wellness:"Здоровье",rescue:"Спасение",places:"Места",volunteers:"Волонтёры",community:"Сообщество",
-searchPlaceholder:"Поиск историй, категорий или тем...",searchButton:"Найти",allCategories:"Все категории",all:"Все",coverStarSingle:"Звезда обложки",
-featuredHeading:"Выбор редакции",featuredDescription:"Истории, фотографии и полезные материалы, выбранные редакцией PETS & DOGUE.",listenShort:"СЛУШАТЬ",
-photoshootTitle:"Как подготовить питомца к профессиональной журнальной фотосессии",photoshootDescription:"Комфорт, груминг, свет и детали, которые превращают красивый портрет в настоящий редакционный кадр.",
-travelTitle:"Расцвет роскошных pet-friendly отелей",rescueTitle:"Почему видимость может изменить жизнь животного",
-latest:"Последние истории",zero:"Нет доступных редакционных историй.",one:"Доступна одна редакционная история.",many:"Доступно историй: {count}.",
-audio:"АУДИО",read:"ЧИТАТЬ",readListen:"ЧИТАТЬ И СЛУШАТЬ",min:"мин",
-photoshootCard:"Простые советы по грумингу, освещению и комфорту для красивого редакционного портрета.",
-fashionTitle:"Новые правила роскошного стиля для питомцев",fashionDescription:"Современная мода для животных становится легче, выразительнее и комфортнее.",
-travelDescription:"Отели меняют гостевой опыт для людей, путешествующих вместе с животными.",
-wellnessTitle:"Ежедневные ритуалы для спокойного и счастливого питомца",wellnessDescription:"Небольшие привычки помогают укрепить комфорт, уверенность и связь с животным.",
-rescueDescription:"Фотография и честная история могут помочь спасённому животному найти поддержку и будущий дом.",
-placesTitle:"Как DOGUE Trust защищает рекомендации pet-friendly мест",placesDescription:"Отзывы сообщества, проверка и модерация помогают сохранять местную информацию полезной.",
-volunteersTitle:"Люди, которые помогают животным за кулисами",volunteersDescription:"Волонтёры помогают с транспортом, передержкой, фотографиями, сборами и практическими задачами.",
-communityTitle:"Что владельцы питомцев рекомендуют рядом с вами",communityDescription:"Местные жители могут подсказать проверенные прогулки, кафе, услуги и полезную помощь поблизости.",
-editors:"Редакция PETS & DOGUE",fashionDesk:"Редакция моды",travelDesk:"Редакция путешествий",wellnessDesk:"Редакция здоровья",rescueDesk:"Редакция спасения",localDesk:"Локальная редакция",communityDesk:"Редакция сообщества",localCommunity:"Местное сообщество",
-emptyTitle:"Ничего не найдено",emptyDescription:"Попробуйте другое слово или выберите другую категорию.",
-visualHeading:"Визуальная журналистика",openGallery:"ОТКРЫТЬ ФОТОГАЛЕРЕЮ →",visualCover:"Лицо будущего выпуска",visualTravel:"Красивые путешествия с питомцем",visualFashion:"Редакционный стиль",visualRescue:"Жизнь, которую стоит увидеть",visualWellness:"Ежедневный уход",local:"Рядом",visualLocal:"Вместе рядом с вами",
-myPetIs:"МОЙ ПИТОМЕЦ —",nextCover:"СЛЕДУЮЩАЯ ЗВЕЗДА ОБЛОЖКИ",enter:"НАЖМИТЕ, ЧТОБЫ УЧАСТВОВАТЬ →",
-newsHeading:"Получайте новые истории PETS & DOGUE",newsDescription:"Новые выпуски, озвученные статьи, визуальные редакционные материалы и полезные гиды о жизни с животными.",email:"Ваш email",subscribe:"ПОДПИСАТЬСЯ",
-noVoice:"Этот браузер не поддерживает голосовое озвучивание.",invalidEmail:"Введите корректный email.",success:"Добро пожаловать в сообщество PETS & DOGUE."
-}); /* ЧАСТЬ 2/6 */
-A.uk=make({
-metaTitle:"Статті | PETS & DOGUE",metaDescription:"Редакційні історії PETS & DOGUE: інтерв’ю, корисні гіди, подорожі, мода, здоров’я та допомога тваринам.",
-kicker:"РЕДАКЦІЯ PETS & DOGUE",heroTitle:"Історії, які варто побачити, прочитати й почути",
-heroDescription:"Відкрийте візуальну журналістику, розкішний стиль життя з тваринами, корисні гіди, подорожі, здоров’я, моду, інтерв’ю та історії порятунку. Повні статті можна слухати.",
-explore:"Переглянути історії",listen:"Послухати статтю",coverStar:"Стати зіркою обкладинки",
-coverStars:"Зірки обкладинки",fashion:"Мода",travel:"Подорожі",wellness:"Здоров’я",rescue:"Порятунок",places:"Місця",volunteers:"Волонтери",community:"Спільнота",
-searchPlaceholder:"Пошук історій, категорій або тем...",searchButton:"Знайти",allCategories:"Усі категорії",all:"Усі",coverStarSingle:"Зірка обкладинки",
-featuredHeading:"Вибір редакції",featuredDescription:"Історії, фотографії та корисні матеріали, обрані редакцією PETS & DOGUE.",listenShort:"СЛУХАТИ",
-photoshootTitle:"Як підготувати улюбленця до професійної журнальної фотосесії",photoshootDescription:"Комфорт, грумінг, світло та деталі, які перетворюють красивий портрет на справжній редакційний кадр.",
-travelTitle:"Розквіт розкішних pet-friendly готелів",rescueTitle:"Чому видимість може змінити життя тварини",
-latest:"Останні історії",zero:"Немає доступних редакційних історій.",one:"Доступна одна редакційна історія.",many:"Доступно історій: {count}.",
-audio:"АУДІО",read:"ЧИТАТИ",readListen:"ЧИТАТИ Й СЛУХАТИ",min:"хв",
-photoshootCard:"Прості поради щодо грумінгу, освітлення й комфорту для красивого редакційного портрета.",
-fashionTitle:"Нові правила розкішного стилю для улюбленців",fashionDescription:"Сучасна мода для тварин стає легшою, виразнішою та комфортнішою.",
-travelDescription:"Готелі змінюють досвід гостей, які подорожують разом із тваринами.",
-wellnessTitle:"Щоденні ритуали для спокійного та щасливого улюбленця",wellnessDescription:"Невеликі звички підтримують комфорт, упевненість і міцніший зв’язок із твариною.",
-rescueDescription:"Фотографія та чесна історія можуть допомогти врятованій тварині знайти підтримку й майбутній дім.",
-placesTitle:"Як DOGUE Trust захищає рекомендації pet-friendly місць",placesDescription:"Відгуки спільноти, перевірка та модерація допомагають зберігати місцеву інформацію корисною.",
-volunteersTitle:"Люди, які допомагають тваринам за лаштунками",volunteersDescription:"Волонтери допомагають із транспортом, перетримкою, фотографіями, зборами та практичними справами.",
-communityTitle:"Що власники тварин рекомендують поруч із вами",communityDescription:"Місцевий досвід допомагає знайти перевірені маршрути, кафе, послуги та корисну підтримку поруч.",
-editors:"Редакція PETS & DOGUE",fashionDesk:"Редакція моди",travelDesk:"Редакція подорожей",wellnessDesk:"Редакція здоров’я",rescueDesk:"Редакція порятунку",localDesk:"Локальна редакція",communityDesk:"Редакція спільноти",localCommunity:"Місцева спільнота",
-emptyTitle:"Нічого не знайдено",emptyDescription:"Спробуйте інше слово або виберіть іншу категорію.",
-visualHeading:"Візуальна журналістика",openGallery:"ВІДКРИТИ ФОТОГАЛЕРЕЮ →",visualCover:"Обличчя майбутнього випуску",visualTravel:"Красиві подорожі з улюбленцем",visualFashion:"Редакційний стиль",visualRescue:"Життя, яке варто побачити",visualWellness:"Щоденний догляд",local:"Поруч",visualLocal:"Разом поруч із вами",
-myPetIs:"МІЙ УЛЮБЛЕНЕЦЬ —",nextCover:"НАСТУПНА ЗІРКА ОБКЛАДИНКИ",enter:"НАТИСНІТЬ, ЩОБ ВЗЯТИ УЧАСТЬ →",
-newsHeading:"Отримуйте нові історії PETS & DOGUE",newsDescription:"Нові випуски, озвучені статті, візуальні редакційні матеріали та корисні гіди про життя з тваринами.",email:"Ваш email",subscribe:"ПІДПИСАТИСЯ",
-noVoice:"Цей браузер не підтримує голосове озвучення.",invalidEmail:"Введіть коректний email.",success:"Ласкаво просимо до спільноти PETS & DOGUE."
+["kicker","description"].forEach(key=>{
+if(!t.hero[key]){
+t.hero[key]=E.hero[key];
+}
 });
 
-A.fr=make({
-metaTitle:"Articles | PETS & DOGUE",metaDescription:"Découvrez les histoires éditoriales, interviews, guides, voyages, mode, bien-être et sauvetage de PETS & DOGUE.",
-kicker:"ÉDITORIAL PETS & DOGUE",heroTitle:"Des histoires à voir, lire et écouter",heroDescription:"Découvrez le journalisme visuel, l’art de vivre avec les animaux, des guides utiles, le voyage, le bien-être, la mode, des interviews et des histoires de sauvetage. Chaque article complet propose une narration audio.",
-explore:"Découvrir les histoires",listen:"Écouter un article",coverStar:"Devenir star de couverture",
-coverStars:"Stars de couverture",fashion:"Mode",travel:"Voyage",wellness:"Bien-être",rescue:"Sauvetage",places:"Lieux",volunteers:"Bénévoles",community:"Communauté",
-searchPlaceholder:"Rechercher des histoires, catégories ou sujets...",searchButton:"Rechercher",allCategories:"Toutes les catégories",all:"Tout",coverStarSingle:"Star de couverture",
-featuredHeading:"Sélection de la rédaction",featuredDescription:"Les histoires, images et guides utiles sélectionnés par la rédaction PETS & DOGUE.",listenShort:"ÉCOUTER",
-photoshootTitle:"Comment préparer votre animal à une séance photo professionnelle pour un magazine",photoshootDescription:"Confort, toilettage, lumière et détails qui transforment un beau portrait en image éditoriale.",
-travelTitle:"L’essor des hôtels de luxe pet-friendly",rescueTitle:"Pourquoi la visibilité peut changer la vie d’un animal",
-latest:"Dernières histoires",zero:"Aucune histoire éditoriale disponible.",one:"Une histoire éditoriale disponible.",many:"{count} histoires éditoriales disponibles.",
-audio:"AUDIO",read:"LIRE",readListen:"LIRE & ÉCOUTER",min:"min",
-photoshootCard:"Des conseils simples de toilettage, lumière et confort pour un beau portrait éditorial.",
-fashionTitle:"Les nouvelles règles du style animalier de luxe",fashionDescription:"La mode animale moderne devient plus légère, plus expressive et plus confortable.",
-travelDescription:"Les hôtels repensent l’expérience de leurs clients voyageant avec des animaux.",
-wellnessTitle:"Des rituels quotidiens pour un animal plus calme et heureux",wellnessDescription:"De petites routines peuvent renforcer le confort, la confiance et la relation avec votre animal.",
-rescueDescription:"Une photographie et une histoire sincère peuvent aider un animal sauvé à trouver du soutien et un futur foyer.",
-placesTitle:"Comment DOGUE Trust protège les recommandations pet-friendly",placesDescription:"Les signalements de la communauté, la vérification et la modération permettent de conserver des informations locales utiles.",
-volunteersTitle:"Les personnes qui aident les animaux en coulisses",volunteersDescription:"Les bénévoles assurent transport, accueil temporaire, photographie, collecte de fonds et aide pratique.",
-communityTitle:"Ce que les propriétaires d’animaux recommandent près de chez vous",communityDescription:"Les connaissances locales révèlent promenades, cafés, services et aides de confiance à proximité.",
-editors:"Rédaction PETS & DOGUE",fashionDesk:"Rédaction Mode",travelDesk:"Rédaction Voyage",wellnessDesk:"Rédaction Bien-être",rescueDesk:"Rédaction Sauvetage",localDesk:"Rédaction Locale",communityDesk:"Rédaction Communauté",localCommunity:"Communauté locale",
-emptyTitle:"Aucune histoire correspondante",emptyDescription:"Essayez un autre mot ou choisissez une autre catégorie.",
-visualHeading:"Journalisme visuel",openGallery:"OUVRIR LA GALERIE PHOTO →",visualCover:"Le visage d’un prochain numéro",visualTravel:"De belles escapades avec votre animal",visualFashion:"Style éditorial",visualRescue:"Une vie qui mérite d’être vue",visualWellness:"Soins quotidiens",local:"Local",visualLocal:"Ensemble près de chez vous",
-myPetIs:"MON ANIMAL EST",nextCover:"LA PROCHAINE STAR DE COUVERTURE",enter:"APPUYEZ POUR PARTICIPER →",
-newsHeading:"Recevez les nouvelles histoires PETS & DOGUE",newsDescription:"Recevez les nouveaux numéros, articles narrés, éditoriaux visuels et guides utiles.",email:"Votre adresse e-mail",subscribe:"S’ABONNER",
-noVoice:"La narration vocale n’est pas prise en charge par ce navigateur.",invalidEmail:"Veuillez saisir une adresse e-mail valide.",success:"Bienvenue dans la communauté PETS & DOGUE."
+if(!t.search.placeholder){
+t.search.placeholder=E.search.placeholder;
+}
+
+if(!t.latest.heading){
+t.latest.heading=E.latest.heading;
+}
+
+["zero","one","many"].forEach(key=>{
+if(!t.results[key]){
+t.results[key]=E.results[key];
+}
 });
 
-A.de=make({
-metaTitle:"Artikel | PETS & DOGUE",metaDescription:"Entdecken Sie redaktionelle Geschichten, Interviews, Guides, Reisen, Mode, Wellness und Tierrettung von PETS & DOGUE.",
-kicker:"PETS & DOGUE REDAKTION",heroTitle:"Geschichten zum Sehen, Lesen und Hören",heroDescription:"Entdecken Sie visuellen Journalismus, luxuriösen Lifestyle mit Tieren, nützliche Guides, Reisen, Wellness, Mode, Interviews und Rettungsgeschichten. Jeder vollständige Artikel bietet Sprachausgabe.",
-explore:"Geschichten entdecken",listen:"Artikel anhören",coverStar:"Cover Star werden",
-coverStars:"Cover Stars",fashion:"Mode",travel:"Reisen",wellness:"Wellness",rescue:"Tierrettung",places:"Orte",volunteers:"Freiwillige",community:"Community",
-searchPlaceholder:"Geschichten, Kategorien oder Themen suchen...",searchButton:"Suchen",allCategories:"Alle Kategorien",all:"Alle",coverStarSingle:"Cover Star",
-featuredHeading:"Auswahl der Redaktion",featuredDescription:"Geschichten, Bilder und hilfreiche Guides, ausgewählt von der PETS & DOGUE Redaktion.",listenShort:"ANHÖREN",
-photoshootTitle:"So bereiten Sie Ihr Tier auf ein professionelles Magazin-Fotoshooting vor",photoshootDescription:"Komfort, Grooming, Licht und Details, die ein schönes Porträt in ein Editorial-Bild verwandeln.",
-travelTitle:"Der Aufstieg luxuriöser tierfreundlicher Hotels",rescueTitle:"Warum Sichtbarkeit das Leben eines Tieres verändern kann",
-latest:"Neueste Geschichten",zero:"Keine redaktionellen Geschichten verfügbar.",one:"Eine redaktionelle Geschichte verfügbar.",many:"{count} redaktionelle Geschichten verfügbar.",
-audio:"AUDIO",read:"LESEN",readListen:"LESEN & ANHÖREN",min:"Min.",
-photoshootCard:"Einfache Tipps zu Grooming, Licht und Komfort für ein schönes Editorial-Porträt.",
-fashionTitle:"Die neuen Regeln für luxuriösen Tierstil",fashionDescription:"Moderne Tiermode wird leichter, ausdrucksstärker und komfortabler.",
-travelDescription:"Hotels gestalten das Gästeerlebnis für Menschen neu, die mit Tieren reisen.",
-wellnessTitle:"Tägliche Rituale für ein ruhigeres und glücklicheres Tier",wellnessDescription:"Kleine Routinen können Komfort, Selbstvertrauen und die Bindung zu Ihrem Tier stärken.",
-rescueDescription:"Ein Foto und eine ehrliche Geschichte können gerettete Tiere mit Unterstützung und einem zukünftigen Zuhause verbinden.",
-placesTitle:"Wie DOGUE Trust tierfreundliche Empfehlungen schützt",placesDescription:"Community-Berichte, Verifizierung und Moderation halten lokale Informationen hilfreich.",
-volunteersTitle:"Die Menschen, die Tieren hinter den Kulissen helfen",volunteersDescription:"Freiwillige unterstützen bei Transport, Pflege, Fotografie, Spendenaktionen und praktischer Hilfe.",
-communityTitle:"Was Tierhalter in Ihrer Nähe empfehlen",communityDescription:"Lokales Wissen zeigt vertrauenswürdige Spazierwege, Cafés, Dienstleistungen und Hilfe in der Nähe.",
-editors:"PETS & DOGUE Redaktion",fashionDesk:"Mode-Redaktion",travelDesk:"Reise-Redaktion",wellnessDesk:"Wellness-Redaktion",rescueDesk:"Rettungs-Redaktion",localDesk:"Lokale Redaktion",communityDesk:"Community-Redaktion",localCommunity:"Lokale Community",
-emptyTitle:"Keine passenden Geschichten",emptyDescription:"Versuchen Sie einen anderen Suchbegriff oder eine andere Kategorie.",
-visualHeading:"Visueller Journalismus",openGallery:"FOTOGALERIE ÖFFNEN →",visualCover:"Das Gesicht einer zukünftigen Ausgabe",visualTravel:"Schöne Auszeiten mit Ihrem Tier",visualFashion:"Editorial Style",visualRescue:"Ein Leben, das gesehen werden sollte",visualWellness:"Tägliche Pflege",local:"Lokal",visualLocal:"Gemeinsam in Ihrer Nähe",
-myPetIs:"MEIN TIER IST",nextCover:"DER NÄCHSTE COVER STAR",enter:"TIPPEN ZUM TEILNEHMEN →",
-newsHeading:"Neue PETS & DOGUE Geschichten erhalten",newsDescription:"Neue Ausgaben, vertonte Artikel, visuelle Editorials und hilfreiche Tier-Lifestyle-Guides.",email:"Ihre E-Mail-Adresse",subscribe:"ABONNIEREN",
-noVoice:"Sprachausgabe wird von diesem Browser nicht unterstützt.",invalidEmail:"Bitte geben Sie eine gültige E-Mail-Adresse ein.",success:"Willkommen in der PETS & DOGUE Community."
-}); /* ЧАСТЬ 3/6 */
-A.es=make({
-metaTitle:"Artículos | PETS & DOGUE",metaDescription:"Descubre historias editoriales, entrevistas, guías, viajes, moda, bienestar y rescate de PETS & DOGUE.",
-kicker:"EDITORIAL PETS & DOGUE",heroTitle:"Historias que merece la pena ver, leer y escuchar",heroDescription:"Descubre periodismo visual, estilo de vida animal de lujo, guías útiles, viajes, bienestar, moda, entrevistas e historias de rescate. Cada artículo completo incluye narración por voz.",
-explore:"Explorar historias",listen:"Escuchar un artículo",coverStar:"Convertirse en estrella de portada",
-coverStars:"Estrellas de portada",fashion:"Moda",travel:"Viajes",wellness:"Bienestar",rescue:"Rescate",places:"Lugares",volunteers:"Voluntarios",community:"Comunidad",
-searchPlaceholder:"Buscar historias, categorías o temas...",searchButton:"Buscar",allCategories:"Todas las categorías",all:"Todo",coverStarSingle:"Estrella de portada",
-featuredHeading:"Selección editorial",featuredDescription:"Historias, imágenes y guías útiles seleccionadas por el equipo editorial de PETS & DOGUE.",listenShort:"ESCUCHAR",
-photoshootTitle:"Cómo preparar a tu mascota para una sesión de fotos profesional de revista",photoshootDescription:"Comodidad, grooming, luz y detalles que convierten un bonito retrato en una imagen editorial.",
-travelTitle:"El auge de los hoteles pet-friendly de lujo",rescueTitle:"Por qué la visibilidad puede cambiar la vida de un animal",
-latest:"Últimas historias",zero:"No hay historias editoriales disponibles.",one:"Hay una historia editorial disponible.",many:"Hay {count} historias editoriales disponibles.",
-audio:"AUDIO",read:"LEER",readListen:"LEER Y ESCUCHAR",min:"min",
-photoshootCard:"Consejos sencillos de grooming, iluminación y comodidad para un bonito retrato editorial.",
-fashionTitle:"Las nuevas reglas del estilo pet de lujo",fashionDescription:"La moda animal moderna es cada vez más ligera, expresiva y cómoda.",
-travelDescription:"Los hoteles están rediseñando la experiencia para huéspedes que viajan con animales.",
-wellnessTitle:"Rituales diarios para una mascota más tranquila y feliz",wellnessDescription:"Pequeñas rutinas pueden mejorar la comodidad, la confianza y el vínculo con tu animal.",
-rescueDescription:"Una fotografía y una historia sincera pueden conectar a un animal rescatado con apoyo y un futuro hogar.",
-placesTitle:"Cómo DOGUE Trust protege las recomendaciones pet-friendly",placesDescription:"Los informes de la comunidad, la verificación y la moderación mantienen útil la información local.",
-volunteersTitle:"Las personas que ayudan a los animales entre bastidores",volunteersDescription:"Los voluntarios ayudan con transporte, acogida, fotografía, recaudación y tareas prácticas.",
-communityTitle:"Lo que recomiendan los dueños de mascotas cerca de ti",communityDescription:"El conocimiento local puede revelar paseos, cafés, servicios y apoyo de confianza.",
-editors:"Editores PETS & DOGUE",fashionDesk:"Redacción de Moda",travelDesk:"Redacción de Viajes",wellnessDesk:"Redacción de Bienestar",rescueDesk:"Redacción de Rescate",localDesk:"Redacción Local",communityDesk:"Redacción de Comunidad",localCommunity:"Comunidad local",
-emptyTitle:"No hay historias coincidentes",emptyDescription:"Prueba otra palabra o selecciona otra categoría.",
-visualHeading:"Periodismo visual",openGallery:"ABRIR GALERÍA DE FOTOS →",visualCover:"El rostro de un futuro número",visualTravel:"Escapadas bonitas con tu mascota",visualFashion:"Estilo editorial",visualRescue:"Una vida que merece ser vista",visualWellness:"Cuidados diarios",local:"Local",visualLocal:"Juntos cerca de ti",
-myPetIs:"MI MASCOTA ES",nextCover:"LA PRÓXIMA ESTRELLA DE PORTADA",enter:"TOCA PARA PARTICIPAR →",
-newsHeading:"Recibe nuevas historias de PETS & DOGUE",newsDescription:"Recibe nuevos números, artículos narrados, editoriales visuales y guías útiles de estilo de vida animal.",email:"Tu correo electrónico",subscribe:"SUSCRIBIRSE",
-noVoice:"Este navegador no admite narración por voz.",invalidEmail:"Introduce un correo electrónico válido.",success:"Bienvenido a la comunidad PETS & DOGUE."
+["title","description"].forEach(key=>{
+if(!t.empty[key]){
+t.empty[key]=E.empty[key];
+}
 });
 
-A.it=make({
-metaTitle:"Articoli | PETS & DOGUE",metaDescription:"Scopri storie editoriali, interviste, guide, viaggi, moda, benessere e soccorso di PETS & DOGUE.",
-kicker:"EDITORIALE PETS & DOGUE",heroTitle:"Storie da vedere, leggere e ascoltare",heroDescription:"Scopri giornalismo visivo, lifestyle animale luxury, guide utili, viaggi, benessere, moda, interviste e storie di salvataggio. Ogni articolo completo include la narrazione vocale.",
-explore:"Esplora le storie",listen:"Ascolta un articolo",coverStar:"Diventa una star di copertina",
-coverStars:"Star di copertina",fashion:"Moda",travel:"Viaggi",wellness:"Benessere",rescue:"Salvataggio",places:"Luoghi",volunteers:"Volontari",community:"Community",
-searchPlaceholder:"Cerca storie, categorie o argomenti...",searchButton:"Cerca",allCategories:"Tutte le categorie",all:"Tutto",coverStarSingle:"Star di copertina",
-featuredHeading:"Scelta della redazione",featuredDescription:"Storie, immagini e guide utili selezionate dalla redazione PETS & DOGUE.",listenShort:"ASCOLTA",
-photoshootTitle:"Come preparare il tuo animale a un servizio fotografico professionale per una rivista",photoshootDescription:"Comfort, grooming, luce e dettagli che trasformano un bel ritratto in un’immagine editoriale.",
-travelTitle:"L’ascesa degli hotel pet-friendly di lusso",rescueTitle:"Perché la visibilità può cambiare la vita di un animale",
-latest:"Ultime storie",zero:"Nessuna storia editoriale disponibile.",one:"Una storia editoriale disponibile.",many:"{count} storie editoriali disponibili.",
-audio:"AUDIO",read:"LEGGI",readListen:"LEGGI E ASCOLTA",min:"min",
-photoshootCard:"Semplici consigli su grooming, illuminazione e comfort per un bellissimo ritratto editoriale.",
-fashionTitle:"Le nuove regole dello stile pet di lusso",fashionDescription:"La moda animale moderna diventa più leggera, espressiva e confortevole.",
-travelDescription:"Gli hotel stanno ripensando l’esperienza degli ospiti che viaggiano con animali.",
-wellnessTitle:"Rituali quotidiani per un animale più calmo e felice",wellnessDescription:"Piccole routine possono sostenere comfort, sicurezza e un legame più forte con il tuo animale.",
-rescueDescription:"Una fotografia e una storia sincera possono aiutare un animale salvato a trovare sostegno e una futura casa.",
-placesTitle:"Come DOGUE Trust protegge le raccomandazioni pet-friendly",placesDescription:"Segnalazioni della community, verifica e moderazione mantengono utili le informazioni locali.",
-volunteersTitle:"Le persone che aiutano gli animali dietro le quinte",volunteersDescription:"I volontari offrono trasporto, stallo, fotografia, raccolta fondi e aiuto pratico.",
-communityTitle:"Cosa consigliano i proprietari di animali vicino a te",communityDescription:"La conoscenza locale può rivelare passeggiate, caffè, servizi e supporto affidabile.",
-editors:"Redazione PETS & DOGUE",fashionDesk:"Redazione Moda",travelDesk:"Redazione Viaggi",wellnessDesk:"Redazione Benessere",rescueDesk:"Redazione Salvataggio",localDesk:"Redazione Locale",communityDesk:"Redazione Community",localCommunity:"Community locale",
-emptyTitle:"Nessuna storia corrispondente",emptyDescription:"Prova un’altra parola o seleziona una categoria diversa.",
-visualHeading:"Giornalismo visivo",openGallery:"APRI LA GALLERIA FOTO →",visualCover:"Il volto di un prossimo numero",visualTravel:"Bellissime fughe con il tuo animale",visualFashion:"Stile editoriale",visualRescue:"Una vita che merita di essere vista",visualWellness:"Cura quotidiana",local:"Locale",visualLocal:"Insieme vicino a te",
-myPetIs:"IL MIO ANIMALE È",nextCover:"LA PROSSIMA STAR DI COPERTINA",enter:"TOCCA PER PARTECIPARE →",
-newsHeading:"Ricevi nuove storie PETS & DOGUE",newsDescription:"Ricevi nuovi numeri, articoli narrati, editoriali visivi e utili guide sul lifestyle animale.",email:"Il tuo indirizzo email",subscribe:"ISCRIVITI",
-noVoice:"La narrazione vocale non è supportata da questo browser.",invalidEmail:"Inserisci un indirizzo email valido.",success:"Benvenuto nella community PETS & DOGUE."
+Object.keys(E.cards).forEach(id=>{
+
+t.cards[id]=t.cards[id]||{};
+
+[
+"category",
+"title",
+"description",
+"author",
+"time"
+].forEach(key=>{
+
+if(!t.cards[id][key]){
+t.cards[id][key]=E.cards[id][key];
+}
+
 });
 
-A.pt=make({
-metaTitle:"Artigos | PETS & DOGUE",metaDescription:"Explore histórias editoriais, entrevistas, guias, viagens, moda, bem-estar e resgate da PETS & DOGUE.",
-kicker:"EDITORIAL PETS & DOGUE",heroTitle:"Histórias para ver, ler e ouvir",heroDescription:"Descubra jornalismo visual, lifestyle animal de luxo, guias úteis, viagens, bem-estar, moda, entrevistas e histórias de resgate. Todos os artigos completos incluem narração por voz.",
-explore:"Explorar histórias",listen:"Ouvir um artigo",coverStar:"Tornar-se estrela de capa",
-coverStars:"Estrelas de capa",fashion:"Moda",travel:"Viagens",wellness:"Bem-estar",rescue:"Resgate",places:"Locais",volunteers:"Voluntários",community:"Comunidade",
-searchPlaceholder:"Pesquisar histórias, categorias ou temas...",searchButton:"Pesquisar",allCategories:"Todas as categorias",all:"Tudo",coverStarSingle:"Estrela de capa",
-featuredHeading:"Seleção editorial",featuredDescription:"Histórias, imagens e guias úteis selecionados pela equipa editorial PETS & DOGUE.",listenShort:"OUVIR",
-photoshootTitle:"Como preparar o seu animal para uma sessão fotográfica profissional de revista",photoshootDescription:"Conforto, grooming, luz e detalhes que transformam um belo retrato numa imagem editorial.",
-travelTitle:"A ascensão dos hotéis pet-friendly de luxo",rescueTitle:"Porque a visibilidade pode mudar a vida de um animal",
-latest:"Últimas histórias",zero:"Não há histórias editoriais disponíveis.",one:"Há uma história editorial disponível.",many:"Há {count} histórias editoriais disponíveis.",
-audio:"ÁUDIO",read:"LER",readListen:"LER E OUVIR",min:"min",
-photoshootCard:"Dicas simples de grooming, iluminação e conforto para um belo retrato editorial.",
-fashionTitle:"As novas regras do estilo pet de luxo",fashionDescription:"A moda animal moderna está a tornar-se mais leve, expressiva e confortável.",
-travelDescription:"Os hotéis estão a redesenhar a experiência dos hóspedes que viajam com animais.",
-wellnessTitle:"Rituais diários para um animal mais calmo e feliz",wellnessDescription:"Pequenas rotinas podem apoiar conforto, confiança e uma relação mais forte com o seu animal.",
-rescueDescription:"Uma fotografia e uma história sincera podem ligar animais resgatados a apoio e futuros lares.",
-placesTitle:"Como o DOGUE Trust protege recomendações pet-friendly",placesDescription:"Relatos da comunidade, verificação e moderação ajudam a manter úteis as informações locais.",
-volunteersTitle:"As pessoas que ajudam animais nos bastidores",volunteersDescription:"Voluntários oferecem transporte, acolhimento, fotografia, angariação de fundos e ajuda prática.",
-communityTitle:"O que os donos de animais recomendam perto de si",communityDescription:"O conhecimento local pode revelar passeios, cafés, serviços e apoio de confiança.",
-editors:"Editores PETS & DOGUE",fashionDesk:"Redação de Moda",travelDesk:"Redação de Viagens",wellnessDesk:"Redação de Bem-estar",rescueDesk:"Redação de Resgate",localDesk:"Redação Local",communityDesk:"Redação da Comunidade",localCommunity:"Comunidade local",
-emptyTitle:"Nenhuma história encontrada",emptyDescription:"Experimente outra palavra ou escolha uma categoria diferente.",
-visualHeading:"Jornalismo visual",openGallery:"ABRIR GALERIA DE FOTOS →",visualCover:"O rosto de uma futura edição",visualTravel:"Belas escapadas com o seu animal",visualFashion:"Estilo editorial",visualRescue:"Uma vida que merece ser vista",visualWellness:"Cuidados diários",local:"Local",visualLocal:"Juntos perto de si",
-myPetIs:"O MEU ANIMAL É",nextCover:"A PRÓXIMA ESTRELA DE CAPA",enter:"TOQUE PARA PARTICIPAR →",
-newsHeading:"Receba novas histórias PETS & DOGUE",newsDescription:"Receba novas edições, artigos narrados, editoriais visuais e guias úteis de lifestyle animal.",email:"O seu email",subscribe:"SUBSCREVER",
-noVoice:"Este navegador não suporta narração por voz.",invalidEmail:"Introduza um email válido.",success:"Bem-vindo à comunidade PETS & DOGUE."
-});/* ЧАСТЬ 4/6 */
-A.nl=make({
-metaTitle:"Artikelen | PETS & DOGUE",metaDescription:"Ontdek redactionele verhalen, interviews, gidsen, reizen, mode, welzijn en redding van PETS & DOGUE.",
-kicker:"PETS & DOGUE REDACTIE",heroTitle:"Verhalen om te zien, lezen en horen",heroDescription:"Ontdek visuele journalistiek, luxe leven met dieren, nuttige gidsen, reizen, welzijn, mode, interviews en reddingsverhalen. Elk volledig artikel bevat gesproken vertelling.",
-explore:"Verhalen ontdekken",listen:"Luister naar een artikel",coverStar:"Word Cover Star",
-coverStars:"Cover Stars",fashion:"Mode",travel:"Reizen",wellness:"Welzijn",rescue:"Redding",places:"Plaatsen",volunteers:"Vrijwilligers",community:"Community",
-searchPlaceholder:"Zoek verhalen, categorieën of onderwerpen...",searchButton:"Zoeken",allCategories:"Alle categorieën",all:"Alles",coverStarSingle:"Cover Star",
-featuredHeading:"Keuze van de redactie",featuredDescription:"Verhalen, beelden en nuttige gidsen geselecteerd door de PETS & DOGUE-redactie.",listenShort:"LUISTER",
-photoshootTitle:"Zo bereid je je huisdier voor op een professionele magazineshoot",photoshootDescription:"Comfort, vachtverzorging, licht en details die een mooi portret veranderen in een redactioneel beeld.",
-travelTitle:"De opkomst van luxe huisdiervriendelijke hotels",rescueTitle:"Waarom zichtbaarheid het leven van een dier kan veranderen",
-latest:"Nieuwste verhalen",zero:"Geen redactionele verhalen beschikbaar.",one:"Eén redactioneel verhaal beschikbaar.",many:"{count} redactionele verhalen beschikbaar.",
-audio:"AUDIO",read:"LEZEN",readListen:"LEZEN & LUISTEREN",min:"min",
-photoshootCard:"Eenvoudige tips voor vachtverzorging, licht en comfort voor een mooi redactioneel portret.",
-fashionTitle:"De nieuwe regels van luxe dierenstijl",fashionDescription:"Moderne dierenmode wordt lichter, expressiever en comfortabeler.",
-travelDescription:"Hotels herontwerpen de ervaring voor gasten die met dieren reizen.",
-wellnessTitle:"Dagelijkse rituelen voor een rustiger en gelukkiger huisdier",wellnessDescription:"Kleine routines ondersteunen comfort, vertrouwen en een sterkere band met je dier.",
-rescueDescription:"Een foto en een eerlijk verhaal kunnen geredde dieren verbinden met steun en een toekomstig thuis.",
-placesTitle:"Hoe DOGUE Trust huisdiervriendelijke aanbevelingen beschermt",placesDescription:"Communitymeldingen, verificatie en moderatie houden lokale informatie nuttig.",
-volunteersTitle:"De mensen die dieren achter de schermen helpen",volunteersDescription:"Vrijwilligers helpen met vervoer, opvang, fotografie, fondsenwerving en praktische ondersteuning.",
-communityTitle:"Wat huisdiereigenaren bij jou in de buurt aanbevelen",communityDescription:"Lokale kennis onthult betrouwbare wandelingen, cafés, diensten en hulp in de buurt.",
-editors:"PETS & DOGUE-redactie",fashionDesk:"Moderedactie",travelDesk:"Reisredactie",wellnessDesk:"Welzijnsredactie",rescueDesk:"Reddingsredactie",localDesk:"Lokale redactie",communityDesk:"Communityredactie",localCommunity:"Lokale community",
-emptyTitle:"Geen passende verhalen",emptyDescription:"Probeer een ander woord of kies een andere categorie.",
-visualHeading:"Visuele journalistiek",openGallery:"FOTOGALERIJ OPENEN →",visualCover:"Het gezicht van een toekomstig nummer",visualTravel:"Mooie uitstapjes met je huisdier",visualFashion:"Redactionele stijl",visualRescue:"Een leven dat gezien mag worden",visualWellness:"Dagelijkse verzorging",local:"Lokaal",visualLocal:"Samen bij jou in de buurt",
-myPetIs:"MIJN HUISDIER IS",nextCover:"DE VOLGENDE COVER STAR",enter:"TIK OM MEE TE DOEN →",
-newsHeading:"Ontvang nieuwe PETS & DOGUE-verhalen",newsDescription:"Ontvang nieuwe edities, gesproken artikelen, visuele editorials en nuttige gidsen.",email:"Je e-mailadres",subscribe:"ABONNEREN",
-noVoice:"Spraakvertelling wordt niet ondersteund door deze browser.",invalidEmail:"Voer een geldig e-mailadres in.",success:"Welkom bij de PETS & DOGUE-community."
 });
 
-A.pl=make({
-metaTitle:"Artykuły | PETS & DOGUE",metaDescription:"Poznaj historie redakcyjne, wywiady, poradniki, podróże, modę, wellness i ratowanie zwierząt w PETS & DOGUE.",
-kicker:"REDAKCJA PETS & DOGUE",heroTitle:"Historie warte zobaczenia, przeczytania i wysłuchania",heroDescription:"Poznaj dziennikarstwo wizualne, luksusowy styl życia ze zwierzętami, przydatne poradniki, podróże, wellness, modę, wywiady i historie ratunkowe. Każdy pełny artykuł ma narrację głosową.",
-explore:"Odkryj historie",listen:"Posłuchaj artykułu",coverStar:"Zostań gwiazdą okładki",
-coverStars:"Gwiazdy okładki",fashion:"Moda",travel:"Podróże",wellness:"Wellness",rescue:"Ratunek",places:"Miejsca",volunteers:"Wolontariusze",community:"Społeczność",
-searchPlaceholder:"Szukaj historii, kategorii lub tematów...",searchButton:"Szukaj",allCategories:"Wszystkie kategorie",all:"Wszystko",coverStarSingle:"Gwiazda okładki",
-featuredHeading:"Wybór redakcji",featuredDescription:"Historie, zdjęcia i przydatne poradniki wybrane przez redakcję PETS & DOGUE.",listenShort:"SŁUCHAJ",
-photoshootTitle:"Jak przygotować zwierzę do profesjonalnej sesji zdjęciowej do magazynu",photoshootDescription:"Komfort, pielęgnacja, światło i detale, które zmieniają piękny portret w zdjęcie redakcyjne.",
-travelTitle:"Rozwój luksusowych hoteli przyjaznych zwierzętom",rescueTitle:"Dlaczego widoczność może zmienić życie zwierzęcia",
-latest:"Najnowsze historie",zero:"Brak dostępnych historii redakcyjnych.",one:"Dostępna jest jedna historia redakcyjna.",many:"Dostępnych historii: {count}.",
-audio:"AUDIO",read:"CZYTAJ",readListen:"CZYTAJ I SŁUCHAJ",min:"min",
-photoshootCard:"Proste wskazówki dotyczące pielęgnacji, światła i komfortu dla pięknego portretu redakcyjnego.",
-fashionTitle:"Nowe zasady luksusowego stylu dla zwierząt",fashionDescription:"Współczesna moda dla zwierząt staje się lżejsza, bardziej wyrazista i wygodniejsza.",
-travelDescription:"Hotele zmieniają doświadczenie gości podróżujących ze zwierzętami.",
-wellnessTitle:"Codzienne rytuały dla spokojniejszego i szczęśliwszego zwierzęcia",wellnessDescription:"Małe rutyny mogą poprawić komfort, pewność siebie i więź ze zwierzęciem.",
-rescueDescription:"Zdjęcie i szczera historia mogą pomóc uratowanemu zwierzęciu znaleźć wsparcie i przyszły dom.",
-placesTitle:"Jak DOGUE Trust chroni rekomendacje miejsc przyjaznych zwierzętom",placesDescription:"Zgłoszenia społeczności, weryfikacja i moderacja pomagają utrzymać lokalne informacje użytecznymi.",
-volunteersTitle:"Ludzie pomagający zwierzętom za kulisami",volunteersDescription:"Wolontariusze pomagają w transporcie, domach tymczasowych, fotografii, zbiórkach i codziennych zadaniach.",
-communityTitle:"Co polecają właściciele zwierząt w Twojej okolicy",communityDescription:"Lokalna wiedza pomaga odkryć sprawdzone spacery, kawiarnie, usługi i pomoc w pobliżu.",
-editors:"Redakcja PETS & DOGUE",fashionDesk:"Redakcja Mody",travelDesk:"Redakcja Podróży",wellnessDesk:"Redakcja Wellness",rescueDesk:"Redakcja Ratunkowa",localDesk:"Redakcja Lokalna",communityDesk:"Redakcja Społeczności",localCommunity:"Lokalna społeczność",
-emptyTitle:"Brak pasujących historii",emptyDescription:"Spróbuj innego słowa lub wybierz inną kategorię.",
-visualHeading:"Dziennikarstwo wizualne",openGallery:"OTWÓRZ GALERIĘ ZDJĘĆ →",visualCover:"Twarz przyszłego wydania",visualTravel:"Piękne podróże ze zwierzęciem",visualFashion:"Styl redakcyjny",visualRescue:"Życie warte zobaczenia",visualWellness:"Codzienna opieka",local:"Lokalnie",visualLocal:"Razem blisko Ciebie",
-myPetIs:"MOJE ZWIERZĘ TO",nextCover:"NASTĘPNA GWIAZDA OKŁADKI",enter:"DOTKNIJ, ABY WZIĄĆ UDZIAŁ →",
-newsHeading:"Otrzymuj nowe historie PETS & DOGUE",newsDescription:"Nowe wydania, artykuły z narracją, wizualne materiały redakcyjne i przydatne poradniki.",email:"Twój adres e-mail",subscribe:"SUBSKRYBUJ",
-noVoice:"Ta przeglądarka nie obsługuje narracji głosowej.",invalidEmail:"Wprowadź poprawny adres e-mail.",success:"Witamy w społeczności PETS & DOGUE."
 });
-
-A.cs=make({
-metaTitle:"Články | PETS & DOGUE",metaDescription:"Objevte redakční příběhy, rozhovory, průvodce, cestování, módu, wellness a záchranu zvířat od PETS & DOGUE.",
-kicker:"REDAKCE PETS & DOGUE",heroTitle:"Příběhy, které stojí za to vidět, číst a slyšet",heroDescription:"Objevte vizuální žurnalistiku, luxusní život se zvířaty, užitečné průvodce, cestování, wellness, módu, rozhovory a záchranné příběhy. Každý celý článek nabízí hlasové vyprávění.",
-explore:"Prozkoumat příběhy",listen:"Poslechnout článek",coverStar:"Staňte se hvězdou obálky",
-coverStars:"Hvězdy obálky",fashion:"Móda",travel:"Cestování",wellness:"Wellness",rescue:"Záchrana",places:"Místa",volunteers:"Dobrovolníci",community:"Komunita",
-searchPlaceholder:"Hledat příběhy, kategorie nebo témata...",searchButton:"Hledat",allCategories:"Všechny kategorie",all:"Vše",coverStarSingle:"Hvězda obálky",
-featuredHeading:"Výběr redakce",featuredDescription:"Příběhy, fotografie a užitečné průvodce vybrané redakcí PETS & DOGUE.",listenShort:"POSLECHNOUT",
-photoshootTitle:"Jak připravit zvíře na profesionální focení pro magazín",photoshootDescription:"Pohodlí, péče o srst, světlo a detaily, které promění krásný portrét v redakční fotografii.",
-travelTitle:"Vzestup luxusních pet-friendly hotelů",rescueTitle:"Proč může viditelnost změnit život zvířete",
-latest:"Nejnovější příběhy",zero:"Nejsou dostupné žádné redakční příběhy.",one:"Je dostupný jeden redakční příběh.",many:"Dostupných příběhů: {count}.",
-audio:"AUDIO",read:"ČÍST",readListen:"ČÍST A POSLOUCHAT",min:"min",
-photoshootCard:"Jednoduché tipy pro péči, osvětlení a pohodlí při tvorbě krásného redakčního portrétu.",
-fashionTitle:"Nová pravidla luxusního stylu pro zvířata",fashionDescription:"Moderní zvířecí móda je lehčí, výraznější a pohodlnější.",
-travelDescription:"Hotely mění zážitek hostů, kteří cestují se zvířaty.",
-wellnessTitle:"Každodenní rituály pro klidnější a šťastnější zvíře",wellnessDescription:"Malé rutiny mohou podpořit pohodlí, sebejistotu a silnější vztah se zvířetem.",
-rescueDescription:"Fotografie a upřímný příběh mohou spojit zachráněné zvíře s podporou a budoucím domovem.",
-placesTitle:"Jak DOGUE Trust chrání pet-friendly doporučení",placesDescription:"Hlášení komunity, ověřování a moderace pomáhají udržovat místní informace užitečné.",
-volunteersTitle:"Lidé, kteří pomáhají zvířatům v zákulisí",volunteersDescription:"Dobrovolníci zajišťují dopravu, dočasnou péči, fotografování, sbírky a praktickou pomoc.",
-communityTitle:"Co doporučují majitelé zvířat ve vašem okolí",communityDescription:"Místní zkušenosti pomáhají najít důvěryhodné procházky, kavárny, služby a podporu.",
-editors:"Redakce PETS & DOGUE",fashionDesk:"Redakce módy",travelDesk:"Redakce cestování",wellnessDesk:"Redakce wellness",rescueDesk:"Redakce záchrany",localDesk:"Místní redakce",communityDesk:"Redakce komunity",localCommunity:"Místní komunita",
-emptyTitle:"Žádné odpovídající příběhy",emptyDescription:"Zkuste jiné slovo nebo vyberte jinou kategorii.",
-visualHeading:"Vizuální žurnalistika",openGallery:"OTEVŘÍT FOTOGALERII →",visualCover:"Tvář budoucího vydání",visualTravel:"Krásné cesty s vaším zvířetem",visualFashion:"Redakční styl",visualRescue:"Život, který stojí za vidění",visualWellness:"Každodenní péče",local:"Místní",visualLocal:"Společně ve vašem okolí",
-myPetIs:"MOJE ZVÍŘE JE",nextCover:"DALŠÍ HVĚZDA OBÁLKY",enter:"KLEPNĚTE PRO ÚČAST →",
-newsHeading:"Dostávejte nové příběhy PETS & DOGUE",newsDescription:"Nová vydání, namluvené články, vizuální editorialy a užitečné průvodce.",email:"Váš e-mail",subscribe:"ODEBÍRAT",
-noVoice:"Tento prohlížeč nepodporuje hlasové vyprávění.",invalidEmail:"Zadejte platnou e-mailovou adresu.",success:"Vítejte v komunitě PETS & DOGUE."
-});/* ЧАСТЬ 5/6 */
-A.sk=make({
-metaTitle:"Články | PETS & DOGUE",metaDescription:"Objavte redakčné príbehy, rozhovory, sprievodcov, cestovanie, módu, wellness a záchranu zvierat od PETS & DOGUE.",
-kicker:"REDAKCIA PETS & DOGUE",heroTitle:"Príbehy, ktoré sa oplatí vidieť, čítať a počuť",heroDescription:"Objavte vizuálnu žurnalistiku, luxusný život so zvieratami, užitočné sprievodce, cestovanie, wellness, módu, rozhovory a záchranné príbehy. Každý celý článok obsahuje hlasové rozprávanie.",
-explore:"Objaviť príbehy",listen:"Vypočuť článok",coverStar:"Stať sa hviezdou obálky",
-coverStars:"Hviezdy obálky",fashion:"Móda",travel:"Cestovanie",wellness:"Wellness",rescue:"Záchrana",places:"Miesta",volunteers:"Dobrovoľníci",community:"Komunita",
-searchPlaceholder:"Hľadať príbehy, kategórie alebo témy...",searchButton:"Hľadať",allCategories:"Všetky kategórie",all:"Všetko",coverStarSingle:"Hviezda obálky",
-featuredHeading:"Výber redakcie",featuredDescription:"Príbehy, fotografie a užitočné sprievodce vybrané redakciou PETS & DOGUE.",listenShort:"POČÚVAŤ",
-photoshootTitle:"Ako pripraviť zviera na profesionálne fotografovanie pre magazín",photoshootDescription:"Pohodlie, grooming, svetlo a detaily, ktoré premenia krásny portrét na redakčný záber.",
-travelTitle:"Vzostup luxusných pet-friendly hotelov",rescueTitle:"Prečo môže viditeľnosť zmeniť život zvieraťa",
-latest:"Najnovšie príbehy",zero:"Nie sú dostupné žiadne redakčné príbehy.",one:"Je dostupný jeden redakčný príbeh.",many:"Dostupných príbehov: {count}.",
-audio:"AUDIO",read:"ČÍTAŤ",readListen:"ČÍTAŤ A POČÚVAŤ",min:"min",
-photoshootCard:"Jednoduché tipy na grooming, osvetlenie a pohodlie pre krásny redakčný portrét.",
-fashionTitle:"Nové pravidlá luxusného štýlu pre zvieratá",fashionDescription:"Moderná zvieracia móda je ľahšia, výraznejšia a pohodlnejšia.",
-travelDescription:"Hotely menia zážitok hostí cestujúcich so zvieratami.",
-wellnessTitle:"Každodenné rituály pre pokojnejšie a šťastnejšie zviera",wellnessDescription:"Malé rutiny podporujú pohodlie, istotu a silnejší vzťah so zvieraťom.",
-rescueDescription:"Fotografia a úprimný príbeh môžu pomôcť zachránenému zvieraťu nájsť podporu a budúci domov.",
-placesTitle:"Ako DOGUE Trust chráni pet-friendly odporúčania",placesDescription:"Hlásenia komunity, overovanie a moderovanie pomáhajú udržiavať miestne informácie užitočné.",
-volunteersTitle:"Ľudia, ktorí pomáhajú zvieratám v zákulisí",volunteersDescription:"Dobrovoľníci pomáhajú s dopravou, dočasnou starostlivosťou, fotografovaním, zbierkami a praktickou pomocou.",
-communityTitle:"Čo odporúčajú majitelia zvierat vo vašom okolí",communityDescription:"Miestne skúsenosti pomáhajú nájsť dôveryhodné prechádzky, kaviarne, služby a podporu.",
-editors:"Redakcia PETS & DOGUE",fashionDesk:"Redakcia módy",travelDesk:"Redakcia cestovania",wellnessDesk:"Redakcia wellness",rescueDesk:"Redakcia záchrany",localDesk:"Miestna redakcia",communityDesk:"Redakcia komunity",localCommunity:"Miestna komunita",
-emptyTitle:"Žiadne zodpovedajúce príbehy",emptyDescription:"Skúste iné slovo alebo vyberte inú kategóriu.",
-visualHeading:"Vizuálna žurnalistika",openGallery:"OTVORIŤ FOTOGALÉRIU →",visualCover:"Tvár budúceho vydania",visualTravel:"Krásne cesty so zvieraťom",visualFashion:"Redakčný štýl",visualRescue:"Život, ktorý stojí za videnie",visualWellness:"Každodenná starostlivosť",local:"Miestne",visualLocal:"Spolu vo vašom okolí",
-myPetIs:"MOJE ZVIERA JE",nextCover:"ĎALŠIA HVIEZDA OBÁLKY",enter:"KLEPNITE PRE ÚČASŤ →",
-newsHeading:"Dostávajte nové príbehy PETS & DOGUE",newsDescription:"Nové vydania, nahovorené články, vizuálne editorialy a užitočné sprievodce.",email:"Váš e-mail",subscribe:"ODOBERAŤ",
-noVoice:"Tento prehliadač nepodporuje hlasové rozprávanie.",invalidEmail:"Zadajte platnú e-mailovú adresu.",success:"Vitajte v komunite PETS & DOGUE."
-});
-
-A.hu=make({
-metaTitle:"Cikkek | PETS & DOGUE",metaDescription:"Fedezze fel a PETS & DOGUE szerkesztőségi történeteit, interjúit, útmutatóit, utazási, divat-, wellness- és mentési anyagait.",
-kicker:"PETS & DOGUE SZERKESZTŐSÉG",heroTitle:"Történetek, amelyeket érdemes látni, olvasni és hallani",heroDescription:"Fedezze fel a vizuális újságírást, a luxus állatos életmódot, hasznos útmutatókat, utazást, wellness-t, divatot, interjúkat és mentési történeteket. Minden teljes cikk hangos narrációval is elérhető.",
-explore:"Történetek felfedezése",listen:"Cikk meghallgatása",coverStar:"Legyen címlapsztár",
-coverStars:"Címlapsztárok",fashion:"Divat",travel:"Utazás",wellness:"Wellness",rescue:"Mentés",places:"Helyek",volunteers:"Önkéntesek",community:"Közösség",
-searchPlaceholder:"Történetek, kategóriák vagy témák keresése...",searchButton:"Keresés",allCategories:"Minden kategória",all:"Mind",coverStarSingle:"Címlapsztár",
-featuredHeading:"A szerkesztőség választása",featuredDescription:"A PETS & DOGUE szerkesztősége által kiválasztott történetek, képek és hasznos útmutatók.",listenShort:"HALLGATÁS",
-photoshootTitle:"Hogyan készítse fel kedvencét egy professzionális magazinfotózásra",photoshootDescription:"Kényelem, grooming, fény és részletek, amelyek egy szép portrét szerkesztőségi képpé alakítanak.",
-travelTitle:"A luxus állatbarát szállodák térnyerése",rescueTitle:"Miért változtathatja meg a láthatóság egy állat életét",
-latest:"Legújabb történetek",zero:"Nincs elérhető szerkesztőségi történet.",one:"Egy szerkesztőségi történet érhető el.",many:"{count} szerkesztőségi történet érhető el.",
-audio:"HANG",read:"OLVASÁS",readListen:"OLVASÁS ÉS HALLGATÁS",min:"perc",
-photoshootCard:"Egyszerű grooming-, világítási és kényelmi tippek egy szép szerkesztőségi portréhoz.",
-fashionTitle:"A luxus állatstílus új szabályai",fashionDescription:"A modern állatdivat könnyebb, kifejezőbb és kényelmesebb lesz.",
-travelDescription:"A szállodák újragondolják a vendégélményt az állattal utazók számára.",
-wellnessTitle:"Mindennapi rituálék egy nyugodtabb és boldogabb kedvencért",wellnessDescription:"A kis rutinok támogatják a kényelmet, az önbizalmat és az erősebb kapcsolatot.",
-rescueDescription:"Egy fénykép és őszinte történet összekötheti a mentett állatokat a támogatással és leendő otthonukkal.",
-placesTitle:"Hogyan védi a DOGUE Trust az állatbarát ajánlásokat",placesDescription:"A közösségi jelentések, ellenőrzés és moderáció segítik a helyi információk megbízhatóságát.",
-volunteersTitle:"Az emberek, akik a háttérben segítik az állatokat",volunteersDescription:"Az önkéntesek szállítással, ideiglenes befogadással, fotózással, adománygyűjtéssel és gyakorlati segítséggel támogatnak.",
-communityTitle:"Mit ajánlanak az állattartók az Ön közelében",communityDescription:"A helyi tudás megbízható sétákat, kávézókat, szolgáltatásokat és segítséget mutathat meg.",
-editors:"PETS & DOGUE szerkesztőség",fashionDesk:"Divatszerkesztőség",travelDesk:"Utazási szerkesztőség",wellnessDesk:"Wellness szerkesztőség",rescueDesk:"Mentési szerkesztőség",localDesk:"Helyi szerkesztőség",communityDesk:"Közösségi szerkesztőség",localCommunity:"Helyi közösség",
-emptyTitle:"Nincs megfelelő történet",emptyDescription:"Próbáljon más keresőkifejezést vagy kategóriát.",
-visualHeading:"Vizuális újságírás",openGallery:"FOTÓGALÉRIA MEGNYITÁSA →",visualCover:"Egy jövőbeli lapszám arca",visualTravel:"Gyönyörű utazások kedvencével",visualFashion:"Szerkesztőségi stílus",visualRescue:"Egy élet, amelyet látni kell",visualWellness:"Mindennapi gondozás",local:"Helyi",visualLocal:"Együtt az Ön közelében",
-myPetIs:"A KEDVENCEM",nextCover:"A KÖVETKEZŐ CÍMLAPSZTÁR",enter:"KOPPINTSON A NEVEZÉSHEZ →",
-newsHeading:"Kapja meg a PETS & DOGUE új történeteit",newsDescription:"Új lapszámok, narrált cikkek, vizuális editorialok és hasznos útmutatók.",email:"E-mail-címe",subscribe:"FELIRATKOZÁS",
-noVoice:"Ez a böngésző nem támogatja a hangos narrációt.",invalidEmail:"Adjon meg érvényes e-mail-címet.",success:"Üdvözöljük a PETS & DOGUE közösségében."
-});
-
-A.ro=make({
-metaTitle:"Articole | PETS & DOGUE",metaDescription:"Descoperă povești editoriale, interviuri, ghiduri, călătorii, modă, wellness și salvare de animale de la PETS & DOGUE.",
-kicker:"EDITORIAL PETS & DOGUE",heroTitle:"Povești care merită văzute, citite și ascultate",heroDescription:"Descoperă jurnalism vizual, lifestyle premium cu animale, ghiduri utile, călătorii, wellness, modă, interviuri și povești de salvare. Fiecare articol complet include narațiune vocală.",
-explore:"Explorează poveștile",listen:"Ascultă un articol",coverStar:"Devino vedetă de copertă",
-coverStars:"Vedete de copertă",fashion:"Modă",travel:"Călătorii",wellness:"Wellness",rescue:"Salvare",places:"Locuri",volunteers:"Voluntari",community:"Comunitate",
-searchPlaceholder:"Caută povești, categorii sau subiecte...",searchButton:"Caută",allCategories:"Toate categoriile",all:"Toate",coverStarSingle:"Vedetă de copertă",
-featuredHeading:"Selecția redacției",featuredDescription:"Povești, imagini și ghiduri utile selectate de echipa editorială PETS & DOGUE.",listenShort:"ASCULTĂ",
-photoshootTitle:"Cum să-ți pregătești animalul pentru o ședință foto profesională de revistă",photoshootDescription:"Confort, grooming, lumină și detalii care transformă un portret frumos într-o imagine editorială.",
-travelTitle:"Ascensiunea hotelurilor pet-friendly de lux",rescueTitle:"De ce vizibilitatea poate schimba viața unui animal",
-latest:"Ultimele povești",zero:"Nu există povești editoriale disponibile.",one:"Este disponibilă o poveste editorială.",many:"Sunt disponibile {count} povești editoriale.",
-audio:"AUDIO",read:"CITEȘTE",readListen:"CITEȘTE ȘI ASCULTĂ",min:"min",
-photoshootCard:"Sfaturi simple de grooming, iluminare și confort pentru un portret editorial frumos.",
-fashionTitle:"Noile reguli ale stilului de lux pentru animale",fashionDescription:"Moda modernă pentru animale devine mai ușoară, expresivă și confortabilă.",
-travelDescription:"Hotelurile regândesc experiența oaspeților care călătoresc cu animale.",
-wellnessTitle:"Ritualuri zilnice pentru un animal mai calm și fericit",wellnessDescription:"Rutinele mici pot susține confortul, încrederea și legătura cu animalul.",
-rescueDescription:"O fotografie și o poveste sinceră pot conecta animalele salvate cu sprijin și viitoare familii.",
-placesTitle:"Cum protejează DOGUE Trust recomandările pet-friendly",placesDescription:"Raportările comunității, verificarea și moderarea păstrează informațiile locale utile.",
-volunteersTitle:"Oamenii care ajută animalele din culise",volunteersDescription:"Voluntarii ajută cu transport, foster, fotografie, strângere de fonduri și sprijin practic.",
-communityTitle:"Ce recomandă proprietarii de animale din apropierea ta",communityDescription:"Cunoașterea locală poate dezvălui plimbări, cafenele, servicii și sprijin de încredere.",
-editors:"Redacția PETS & DOGUE",fashionDesk:"Redacția Modă",travelDesk:"Redacția Călătorii",wellnessDesk:"Redacția Wellness",rescueDesk:"Redacția Salvare",localDesk:"Redacția Locală",communityDesk:"Redacția Comunitate",localCommunity:"Comunitate locală",
-emptyTitle:"Nu există povești potrivite",emptyDescription:"Încearcă un alt cuvânt sau selectează o altă categorie.",
-visualHeading:"Jurnalism vizual",openGallery:"DESCHIDE GALERIA FOTO →",visualCover:"Chipul unei ediții viitoare",visualTravel:"Evadări frumoase cu animalul tău",visualFashion:"Stil editorial",visualRescue:"O viață care merită văzută",visualWellness:"Îngrijire zilnică",local:"Local",visualLocal:"Împreună aproape de tine",
-myPetIs:"ANIMALUL MEU ESTE",nextCover:"URMĂTOAREA VEDETĂ DE COPERTĂ",enter:"ATINGE PENTRU ÎNSCRIERE →",
-newsHeading:"Primește noi povești PETS & DOGUE",newsDescription:"Primește ediții noi, articole narate, editoriale vizuale și ghiduri utile.",email:"Adresa ta de email",subscribe:"ABONEAZĂ-TE",
-noVoice:"Acest browser nu acceptă narațiune vocală.",invalidEmail:"Introdu o adresă de email validă.",success:"Bine ai venit în comunitatea PETS & DOGUE."
-});
-
-A.bg=make({
-metaTitle:"Статии | PETS & DOGUE",metaDescription:"Открийте редакционни истории, интервюта, ръководства, пътувания, мода, wellness и спасяване на животни от PETS & DOGUE.",
-kicker:"РЕДАКЦИЯ PETS & DOGUE",heroTitle:"Истории, които си струва да видите, прочетете и чуете",heroDescription:"Открийте визуална журналистика, луксозен живот с животни, полезни ръководства, пътувания, wellness, мода, интервюта и истории за спасяване. Всяка пълна статия има гласов разказ.",
-explore:"Разгледай историите",listen:"Слушай статия",coverStar:"Стани звезда на корицата",
-coverStars:"Звезди на корицата",fashion:"Мода",travel:"Пътувания",wellness:"Wellness",rescue:"Спасяване",places:"Места",volunteers:"Доброволци",community:"Общност",
-searchPlaceholder:"Търсене на истории, категории или теми...",searchButton:"Търси",allCategories:"Всички категории",all:"Всички",coverStarSingle:"Звезда на корицата",
-featuredHeading:"Избор на редакцията",featuredDescription:"Истории, изображения и полезни ръководства, избрани от редакцията на PETS & DOGUE.",listenShort:"СЛУШАЙ",
-photoshootTitle:"Как да подготвите животното си за професионална фотосесия за списание",photoshootDescription:"Комфорт, grooming, светлина и детайли, които превръщат красивия портрет в редакционно изображение.",
-travelTitle:"Възходът на луксозните pet-friendly хотели",rescueTitle:"Защо видимостта може да промени живота на животно",
-latest:"Последни истории",zero:"Няма налични редакционни истории.",one:"Има една редакционна история.",many:"Налични редакционни истории: {count}.",
-audio:"АУДИО",read:"ЧЕТИ",readListen:"ЧЕТИ И СЛУШАЙ",min:"мин",
-photoshootCard:"Прости съвети за grooming, осветление и комфорт за красив редакционен портрет.",
-fashionTitle:"Новите правила на луксозния стил за животни",fashionDescription:"Съвременната мода за животни става по-лека, изразителна и удобна.",
-travelDescription:"Хотелите променят преживяването за гостите, които пътуват с животни.",
-wellnessTitle:"Ежедневни ритуали за по-спокойно и щастливо животно",wellnessDescription:"Малките рутини могат да подкрепят комфорта, увереността и по-силната връзка с животното.",
-rescueDescription:"Снимка и честна история могат да помогнат на спасено животно да намери подкрепа и бъдещ дом.",
-placesTitle:"Как DOGUE Trust защитава pet-friendly препоръките",placesDescription:"Сигналите от общността, проверката и модерацията помагат местната информация да остане полезна.",
-volunteersTitle:"Хората, които помагат на животните зад кулисите",volunteersDescription:"Доброволците помагат с транспорт, временен дом, фотография, набиране на средства и практическа помощ.",
-communityTitle:"Какво препоръчват собствениците на животни близо до вас",communityDescription:"Местният опит може да покаже надеждни разходки, кафенета, услуги и помощ.",
-editors:"Редакция PETS & DOGUE",fashionDesk:"Редакция Мода",travelDesk:"Редакция Пътувания",wellnessDesk:"Редакция Wellness",rescueDesk:"Редакция Спасяване",localDesk:"Местна редакция",communityDesk:"Редакция Общност",localCommunity:"Местна общност",
-emptyTitle:"Няма съвпадащи истории",emptyDescription:"Опитайте друга дума или изберете друга категория.",
-visualHeading:"Визуална журналистика",openGallery:"ОТВОРИ ФОТОГАЛЕРИЯТА →",visualCover:"Лицето на бъдещ брой",visualTravel:"Красиви пътувания с вашия любимец",visualFashion:"Редакционен стил",visualRescue:"Живот, който си струва да бъде видян",visualWellness:"Ежедневна грижа",local:"Местно",visualLocal:"Заедно близо до вас",
-myPetIs:"МОЯТ ЛЮБИМЕЦ Е",nextCover:"СЛЕДВАЩАТА ЗВЕЗДА НА КОРИЦАТА",enter:"НАТИСНЕТЕ ЗА УЧАСТИЕ →",
-newsHeading:"Получавайте нови истории от PETS & DOGUE",newsDescription:"Нови броеве, озвучени статии, визуални редакционни материали и полезни ръководства.",email:"Вашият email",subscribe:"АБОНИРАЙ СЕ",
-noVoice:"Този браузър не поддържа гласова функция.",invalidEmail:"Въведете валиден email адрес.",success:"Добре дошли в общността на PETS & DOGUE."
-});/* ЧАСТЬ 6/6 */
-A.el=make({
-metaTitle:"Άρθρα | PETS & DOGUE",metaDescription:"Ανακαλύψτε ιστορίες, συνεντεύξεις, οδηγούς, ταξίδια, μόδα, ευεξία και διασώσεις από το PETS & DOGUE.",
-kicker:"ΣΥΝΤΑΞΗ PETS & DOGUE",heroTitle:"Ιστορίες που αξίζει να δείτε, να διαβάσετε και να ακούσετε",heroDescription:"Ανακαλύψτε οπτική δημοσιογραφία, premium ζωή με ζώα, χρήσιμους οδηγούς, ταξίδια, ευεξία, μόδα, συνεντεύξεις και ιστορίες διάσωσης. Κάθε πλήρες άρθρο διαθέτει φωνητική αφήγηση.",
-explore:"Δείτε τις ιστορίες",listen:"Ακούστε ένα άρθρο",coverStar:"Γίνετε αστέρι εξωφύλλου",
-coverStars:"Αστέρια εξωφύλλου",fashion:"Μόδα",travel:"Ταξίδια",wellness:"Ευεξία",rescue:"Διάσωση",places:"Μέρη",volunteers:"Εθελοντές",community:"Κοινότητα",
-searchPlaceholder:"Αναζήτηση ιστοριών, κατηγοριών ή θεμάτων...",searchButton:"Αναζήτηση",allCategories:"Όλες οι κατηγορίες",all:"Όλα",coverStarSingle:"Αστέρι εξωφύλλου",
-featuredHeading:"Επιλογή σύνταξης",featuredDescription:"Ιστορίες, εικόνες και χρήσιμοι οδηγοί που επέλεξε η συντακτική ομάδα του PETS & DOGUE.",listenShort:"ΑΚΟΥΣΤΕ",
-photoshootTitle:"Πώς να προετοιμάσετε το κατοικίδιό σας για επαγγελματική φωτογράφιση περιοδικού",photoshootDescription:"Άνεση, περιποίηση, φως και λεπτομέρειες που μετατρέπουν ένα όμορφο πορτρέτο σε editorial εικόνα.",
-travelTitle:"Η άνοδος των πολυτελών pet-friendly ξενοδοχείων",rescueTitle:"Γιατί η προβολή μπορεί να αλλάξει τη ζωή ενός ζώου",
-latest:"Τελευταίες ιστορίες",zero:"Δεν υπάρχουν διαθέσιμες ιστορίες.",one:"Υπάρχει μία διαθέσιμη ιστορία.",many:"Υπάρχουν {count} διαθέσιμες ιστορίες.",
-audio:"ΗΧΟΣ",read:"ΔΙΑΒΑΣΤΕ",readListen:"ΔΙΑΒΑΣΤΕ & ΑΚΟΥΣΤΕ",min:"λεπτά",
-photoshootCard:"Απλές συμβουλές περιποίησης, φωτισμού και άνεσης για ένα όμορφο editorial πορτρέτο.",
-fashionTitle:"Οι νέοι κανόνες του luxury pet style",fashionDescription:"Η σύγχρονη μόδα για ζώα γίνεται πιο ελαφριά, εκφραστική και άνετη.",
-travelDescription:"Τα ξενοδοχεία επανασχεδιάζουν την εμπειρία των επισκεπτών που ταξιδεύουν με ζώα.",
-wellnessTitle:"Καθημερινές συνήθειες για ένα πιο ήρεμο και χαρούμενο κατοικίδιο",wellnessDescription:"Μικρές ρουτίνες μπορούν να ενισχύσουν την άνεση, την αυτοπεποίθηση και τη σχέση με το ζώο σας.",
-rescueDescription:"Μια φωτογραφία και μια ειλικρινής ιστορία μπορούν να συνδέσουν ένα διασωθέν ζώο με υποστήριξη και ένα μελλοντικό σπίτι.",
-placesTitle:"Πώς το DOGUE Trust προστατεύει τις pet-friendly προτάσεις",placesDescription:"Οι αναφορές της κοινότητας, η επαλήθευση και η εποπτεία διατηρούν χρήσιμες τις τοπικές πληροφορίες.",
-volunteersTitle:"Οι άνθρωποι που βοηθούν τα ζώα στα παρασκήνια",volunteersDescription:"Οι εθελοντές βοηθούν με μεταφορές, φιλοξενία, φωτογράφιση, συγκέντρωση χρημάτων και πρακτική υποστήριξη.",
-communityTitle:"Τι προτείνουν οι ιδιοκτήτες κατοικιδίων κοντά σας",communityDescription:"Η τοπική γνώση μπορεί να αποκαλύψει αξιόπιστους περιπάτους, καφέ, υπηρεσίες και υποστήριξη.",
-editors:"Σύνταξη PETS & DOGUE",fashionDesk:"Σύνταξη Μόδας",travelDesk:"Σύνταξη Ταξιδιών",wellnessDesk:"Σύνταξη Ευεξίας",rescueDesk:"Σύνταξη Διάσωσης",localDesk:"Τοπική Σύνταξη",communityDesk:"Σύνταξη Κοινότητας",localCommunity:"Τοπική κοινότητα",
-emptyTitle:"Δεν βρέθηκαν ιστορίες",emptyDescription:"Δοκιμάστε άλλη λέξη ή επιλέξτε διαφορετική κατηγορία.",
-visualHeading:"Οπτική δημοσιογραφία",openGallery:"ΑΝΟΙΓΜΑ ΦΩΤΟΓΡΑΦΙΚΗΣ ΣΥΛΛΟΓΗΣ →",visualCover:"Το πρόσωπο ενός μελλοντικού τεύχους",visualTravel:"Όμορφες αποδράσεις με το κατοικίδιό σας",visualFashion:"Editorial στιλ",visualRescue:"Μια ζωή που αξίζει να φανεί",visualWellness:"Καθημερινή φροντίδα",local:"Τοπικά",visualLocal:"Μαζί κοντά σας",
-myPetIs:"ΤΟ ΚΑΤΟΙΚΙΔΙΟ ΜΟΥ ΕΙΝΑΙ",nextCover:"ΤΟ ΕΠΟΜΕΝΟ ΑΣΤΕΡΙ ΕΞΩΦΥΛΛΟΥ",enter:"ΠΑΤΗΣΤΕ ΓΙΑ ΣΥΜΜΕΤΟΧΗ →",
-newsHeading:"Λάβετε νέες ιστορίες PETS & DOGUE",newsDescription:"Νέα τεύχη, αφηγημένα άρθρα, οπτικά editorial και χρήσιμοι οδηγοί.",email:"Το email σας",subscribe:"ΕΓΓΡΑΦΗ",
-noVoice:"Αυτό το πρόγραμμα περιήγησης δεν υποστηρίζει φωνητική αφήγηση.",invalidEmail:"Εισαγάγετε έγκυρη διεύθυνση email.",success:"Καλώς ήρθατε στην κοινότητα PETS & DOGUE."
-});
-
-A.sv=make({
-metaTitle:"Artiklar | PETS & DOGUE",metaDescription:"Upptäck redaktionella berättelser, intervjuer, guider, resor, mode, wellness och räddning från PETS & DOGUE.",
-kicker:"PETS & DOGUE REDAKTION",heroTitle:"Berättelser värda att se, läsa och höra",heroDescription:"Upptäck visuell journalistik, lyxigt liv med djur, användbara guider, resor, wellness, mode, intervjuer och räddningsberättelser. Varje fullständig artikel innehåller röstberättelse.",
-explore:"Utforska berättelser",listen:"Lyssna på en artikel",coverStar:"Bli omslagsstjärna",
-coverStars:"Omslagsstjärnor",fashion:"Mode",travel:"Resor",wellness:"Wellness",rescue:"Räddning",places:"Platser",volunteers:"Volontärer",community:"Gemenskap",
-searchPlaceholder:"Sök berättelser, kategorier eller ämnen...",searchButton:"Sök",allCategories:"Alla kategorier",all:"Alla",coverStarSingle:"Omslagsstjärna",
-featuredHeading:"Redaktionens val",featuredDescription:"Berättelser, bilder och användbara guider utvalda av PETS & DOGUE-redaktionen.",listenShort:"LYSSNA",
-photoshootTitle:"Så förbereder du ditt djur för en professionell magasinplåtning",photoshootDescription:"Komfort, pälsvård, ljus och detaljer som förvandlar ett vackert porträtt till en redaktionell bild.",
-travelTitle:"Framväxten av lyxiga djurvänliga hotell",rescueTitle:"Varför synlighet kan förändra ett djurs liv",
-latest:"Senaste berättelser",zero:"Inga redaktionella berättelser finns.",one:"En redaktionell berättelse finns.",many:"{count} redaktionella berättelser finns.",
-audio:"LJUD",read:"LÄS",readListen:"LÄS & LYSSNA",min:"min",
-photoshootCard:"Enkla tips om pälsvård, ljus och komfort för ett vackert redaktionellt porträtt.",
-fashionTitle:"De nya reglerna för lyxig djurstil",fashionDescription:"Modern djurmode blir lättare, mer uttrycksfullt och bekvämare.",
-travelDescription:"Hotell omformar gästupplevelsen för personer som reser med djur.",
-wellnessTitle:"Dagliga ritualer för ett lugnare och gladare djur",wellnessDescription:"Små rutiner kan stödja komfort, trygghet och en starkare relation med ditt djur.",
-rescueDescription:"Ett foto och en ärlig berättelse kan hjälpa ett räddat djur att hitta stöd och ett framtida hem.",
-placesTitle:"Så skyddar DOGUE Trust djurvänliga rekommendationer",placesDescription:"Rapporter från communityn, verifiering och moderering håller lokal information användbar.",
-volunteersTitle:"Människorna som hjälper djur bakom kulisserna",volunteersDescription:"Volontärer hjälper med transport, jourhem, fotografi, insamling och praktiskt stöd.",
-communityTitle:"Vad djurägare rekommenderar nära dig",communityDescription:"Lokal kunskap kan visa pålitliga promenader, kaféer, tjänster och stöd i närheten.",
-editors:"PETS & DOGUE-redaktionen",fashionDesk:"Moderadaktionen",travelDesk:"Reseredaktionen",wellnessDesk:"Wellnessredaktionen",rescueDesk:"Räddningsredaktionen",localDesk:"Lokala redaktionen",communityDesk:"Communityredaktionen",localCommunity:"Lokal gemenskap",
-emptyTitle:"Inga matchande berättelser",emptyDescription:"Prova ett annat ord eller välj en annan kategori.",
-visualHeading:"Visuell journalistik",openGallery:"ÖPPNA FOTOGALLERI →",visualCover:"Ansiktet för ett framtida nummer",visualTravel:"Vackra resor med ditt djur",visualFashion:"Redaktionell stil",visualRescue:"Ett liv värt att se",visualWellness:"Daglig vård",local:"Lokalt",visualLocal:"Tillsammans nära dig",
-myPetIs:"MITT DJUR ÄR",nextCover:"NÄSTA OMSLAGSSTJÄRNA",enter:"TRYCK FÖR ATT DELTA →",
-newsHeading:"Få nya PETS & DOGUE-berättelser",newsDescription:"Få nya nummer, upplästa artiklar, visuella editorial och användbara guider.",email:"Din e-postadress",subscribe:"PRENUMERERA",
-noVoice:"Röstberättelse stöds inte av denna webbläsare.",invalidEmail:"Ange en giltig e-postadress.",success:"Välkommen till PETS & DOGUE-communityn."
-});
-
-A.da=make({
-metaTitle:"Artikler | PETS & DOGUE",metaDescription:"Oplev redaktionelle historier, interviews, guider, rejser, mode, wellness og redning fra PETS & DOGUE.",
-kicker:"PETS & DOGUE REDAKTION",heroTitle:"Historier der er værd at se, læse og høre",heroDescription:"Oplev visuel journalistik, luksuriøst liv med dyr, nyttige guider, rejser, wellness, mode, interviews og redningshistorier. Hver fuld artikel inkluderer stemmefortælling.",
-explore:"Udforsk historier",listen:"Lyt til en artikel",coverStar:"Bliv forsidemodel",
-coverStars:"Forsidestjerner",fashion:"Mode",travel:"Rejser",wellness:"Wellness",rescue:"Redning",places:"Steder",volunteers:"Frivillige",community:"Fællesskab",
-searchPlaceholder:"Søg historier, kategorier eller emner...",searchButton:"Søg",allCategories:"Alle kategorier",all:"Alle",coverStarSingle:"Forsidestjerne",
-featuredHeading:"Redaktionens valg",featuredDescription:"Historier, billeder og nyttige guider udvalgt af PETS & DOGUE-redaktionen.",listenShort:"LYT",
-photoshootTitle:"Sådan forbereder du dit dyr til en professionel magasinfotografering",photoshootDescription:"Komfort, pelspleje, lys og detaljer, der forvandler et smukt portræt til et redaktionelt billede.",
-travelTitle:"Fremkomsten af luksuriøse kæledyrsvenlige hoteller",rescueTitle:"Hvorfor synlighed kan ændre et dyrs liv",
-latest:"Seneste historier",zero:"Ingen redaktionelle historier tilgængelige.",one:"Én redaktionel historie tilgængelig.",many:"{count} redaktionelle historier tilgængelige.",
-audio:"LYD",read:"LÆS",readListen:"LÆS & LYT",min:"min",
-photoshootCard:"Enkle tips til pelspleje, lys og komfort for et smukt redaktionelt portræt.",
-fashionTitle:"De nye regler for luksuriøs dyrestil",fashionDescription:"Moderne dyremode bliver lettere, mere udtryksfuld og komfortabel.",
-travelDescription:"Hoteller redesigner oplevelsen for gæster, der rejser med dyr.",
-wellnessTitle:"Daglige ritualer for et roligere og gladere dyr",wellnessDescription:"Små rutiner kan støtte komfort, tryghed og et stærkere forhold til dit dyr.",
-rescueDescription:"Et foto og en ærlig historie kan hjælpe et reddet dyr med at finde støtte og et fremtidigt hjem.",
-placesTitle:"Sådan beskytter DOGUE Trust kæledyrsvenlige anbefalinger",placesDescription:"Communityrapporter, verificering og moderering holder lokale oplysninger nyttige.",
-volunteersTitle:"Menneskene der hjælper dyr bag kulisserne",volunteersDescription:"Frivillige hjælper med transport, plejefamilier, fotografi, fundraising og praktisk støtte.",
-communityTitle:"Hvad dyreejere anbefaler nær dig",communityDescription:"Lokal viden kan afsløre pålidelige gåture, caféer, tjenester og hjælp i nærheden.",
-editors:"PETS & DOGUE-redaktionen",fashionDesk:"Moderadaktionen",travelDesk:"Rejseredaktionen",wellnessDesk:"Wellnessredaktionen",rescueDesk:"Redningsredaktionen",localDesk:"Lokalredaktionen",communityDesk:"Fællesskabsredaktionen",localCommunity:"Lokalt fællesskab",
-emptyTitle:"Ingen matchende historier",emptyDescription:"Prøv et andet ord eller vælg en anden kategori.",
-visualHeading:"Visuel journalistik",openGallery:"ÅBN FOTOGALLERI →",visualCover:"Ansigtet på et fremtidigt nummer",visualTravel:"Smukke rejser med dit dyr",visualFashion:"Redaktionel stil",visualRescue:"Et liv der er værd at se",visualWellness:"Daglig pleje",local:"Lokalt",visualLocal:"Sammen nær dig",
-myPetIs:"MIT KÆLEDYR ER",nextCover:"DEN NÆSTE FORSIDESTJERNE",enter:"TRYK FOR AT DELTAGE →",
-newsHeading:"Modtag nye PETS & DOGUE-historier",newsDescription:"Få nye udgaver, oplæste artikler, visuelle editorials og nyttige guider.",email:"Din e-mailadresse",subscribe:"TILMELD",
-noVoice:"Stemmefortælling understøttes ikke af denne browser.",invalidEmail:"Indtast en gyldig e-mailadresse.",success:"Velkommen til PETS & DOGUE-fællesskabet."
-});
-
-A.no=make({
-metaTitle:"Artikler | PETS & DOGUE",metaDescription:"Utforsk redaksjonelle historier, intervjuer, guider, reiser, mote, wellness og redning fra PETS & DOGUE.",
-kicker:"PETS & DOGUE REDAKSJON",heroTitle:"Historier verdt å se, lese og høre",heroDescription:"Oppdag visuell journalistikk, luksuriøst liv med dyr, nyttige guider, reiser, wellness, mote, intervjuer og redningshistorier. Hver fullstendige artikkel inkluderer stemmenarrasjon.",
-explore:"Utforsk historier",listen:"Lytt til en artikkel",coverStar:"Bli forsidestjerne",
-coverStars:"Forsidestjerner",fashion:"Mote",travel:"Reiser",wellness:"Wellness",rescue:"Redning",places:"Steder",volunteers:"Frivillige",community:"Fellesskap",
-searchPlaceholder:"Søk historier, kategorier eller emner...",searchButton:"Søk",allCategories:"Alle kategorier",all:"Alle",coverStarSingle:"Forsidestjerne",
-featuredHeading:"Redaksjonens utvalg",featuredDescription:"Historier, bilder og nyttige guider valgt av PETS & DOGUE-redaksjonen.",listenShort:"LYTT",
-photoshootTitle:"Slik forbereder du kjæledyret ditt til en profesjonell magasinfotografering",photoshootDescription:"Komfort, pelsstell, lys og detaljer som gjør et vakkert portrett til et redaksjonelt bilde.",
-travelTitle:"Fremveksten av luksuriøse kjæledyrvennlige hoteller",rescueTitle:"Hvorfor synlighet kan endre et dyrs liv",
-latest:"Siste historier",zero:"Ingen redaksjonelle historier tilgjengelig.",one:"Én redaksjonell historie tilgjengelig.",many:"{count} redaksjonelle historier tilgjengelig.",
-audio:"LYD",read:"LES",readListen:"LES & LYTT",min:"min",
-photoshootCard:"Enkle tips om pelsstell, lys og komfort for et vakkert redaksjonelt portrett.",
-fashionTitle:"De nye reglene for luksuriøs dyrestil",fashionDescription:"Moderne dyremote blir lettere, mer uttrykksfull og komfortabel.",
-travelDescription:"Hoteller redesigner gjesteopplevelsen for mennesker som reiser med dyr.",
-wellnessTitle:"Daglige ritualer for et roligere og lykkeligere kjæledyr",wellnessDescription:"Små rutiner kan støtte komfort, trygghet og et sterkere forhold til dyret ditt.",
-rescueDescription:"Et fotografi og en ærlig historie kan hjelpe et reddet dyr med støtte og et fremtidig hjem.",
-placesTitle:"Slik beskytter DOGUE Trust kjæledyrvennlige anbefalinger",placesDescription:"Rapporter fra fellesskapet, verifisering og moderering holder lokal informasjon nyttig.",
-volunteersTitle:"Menneskene som hjelper dyr bak kulissene",volunteersDescription:"Frivillige hjelper med transport, fosterhjem, fotografering, innsamling og praktisk støtte.",
-communityTitle:"Hva dyreeiere anbefaler nær deg",communityDescription:"Lokal kunnskap kan vise pålitelige turer, kafeer, tjenester og støtte i nærheten.",
-editors:"PETS & DOGUE-redaksjonen",fashionDesk:"Moteredaksjonen",travelDesk:"Reiseredaksjonen",wellnessDesk:"Wellnessredaksjonen",rescueDesk:"Redningsredaksjonen",localDesk:"Lokalredaksjonen",communityDesk:"Fellesskapsredaksjonen",localCommunity:"Lokalt fellesskap",
-emptyTitle:"Ingen matchende historier",emptyDescription:"Prøv et annet ord eller velg en annen kategori.",
-visualHeading:"Visuell journalistikk",openGallery:"ÅPNE FOTOGALLERI →",visualCover:"Ansiktet til en fremtidig utgave",visualTravel:"Vakre reiser med kjæledyret ditt",visualFashion:"Redaksjonell stil",visualRescue:"Et liv verdt å se",visualWellness:"Daglig omsorg",local:"Lokalt",visualLocal:"Sammen nær deg",
-myPetIs:"KJÆLEDYRET MITT ER",nextCover:"DEN NESTE FORSIDESTJERNEN",enter:"TRYKK FOR Å DELTA →",
-newsHeading:"Få nye PETS & DOGUE-historier",newsDescription:"Få nye utgaver, oppleste artikler, visuelle editorials og nyttige guider.",email:"E-postadressen din",subscribe:"ABONNER",
-noVoice:"Stemmenarrasjon støttes ikke av denne nettleseren.",invalidEmail:"Skriv inn en gyldig e-postadresse.",success:"Velkommen til PETS & DOGUE-fellesskapet."
-});
-
-A.fi=make({
-metaTitle:"Artikkelit | PETS & DOGUE",metaDescription:"Tutustu PETS & DOGUE -lehden toimituksellisiin tarinoihin, haastatteluihin, oppaisiin, matkailuun, muotiin, hyvinvointiin ja eläinten pelastamiseen.",
-kicker:"PETS & DOGUE TOIMITUS",heroTitle:"Tarinoita, jotka kannattaa nähdä, lukea ja kuulla",heroDescription:"Tutustu visuaaliseen journalismiin, ylelliseen elämään eläinten kanssa, hyödyllisiin oppaisiin, matkailuun, hyvinvointiin, muotiin, haastatteluihin ja pelastustarinoihin. Jokaisessa kokonaisessa artikkelissa on äänikerronta.",
-explore:"Tutustu tarinoihin",listen:"Kuuntele artikkeli",coverStar:"Ryhdy kansitähdeksi",
-coverStars:"Kansitähdet",fashion:"Muoti",travel:"Matkailu",wellness:"Hyvinvointi",rescue:"Pelastus",places:"Paikat",volunteers:"Vapaaehtoiset",community:"Yhteisö",
-searchPlaceholder:"Hae tarinoita, kategorioita tai aiheita...",searchButton:"Hae",allCategories:"Kaikki kategoriat",all:"Kaikki",coverStarSingle:"Kansitähti",
-featuredHeading:"Toimituksen valinnat",featuredDescription:"PETS & DOGUE -toimituksen valitsemia tarinoita, kuvia ja hyödyllisiä oppaita.",listenShort:"KUUNTELE",
-photoshootTitle:"Näin valmistelet lemmikkisi ammattimaiseen lehtikuvaukseen",photoshootDescription:"Mukavuus, turkinhoito, valo ja yksityiskohdat muuttavat kauniin muotokuvan toimitukselliseksi kuvaksi.",
-travelTitle:"Ylellisten lemmikkiystävällisten hotellien nousu",rescueTitle:"Miksi näkyvyys voi muuttaa eläimen elämän",
-latest:"Uusimmat tarinat",zero:"Ei toimituksellisia tarinoita.",one:"Yksi toimituksellinen tarina saatavilla.",many:"{count} toimituksellista tarinaa saatavilla.",
-audio:"ÄÄNI",read:"LUE",readListen:"LUE & KUUNTELE",min:"min",
-photoshootCard:"Yksinkertaisia turkinhoito-, valaistus- ja mukavuusvinkkejä kauniiseen toimitukselliseen muotokuvaan.",
-fashionTitle:"Ylellisen lemmikkityylin uudet säännöt",fashionDescription:"Moderni eläinmuoti muuttuu kevyemmäksi, ilmeikkäämmäksi ja mukavammaksi.",
-travelDescription:"Hotellit uudistavat kokemusta eläinten kanssa matkustaville vieraille.",
-wellnessTitle:"Päivittäiset rituaalit rauhallisemmalle ja onnellisemmalle lemmikille",wellnessDescription:"Pienet rutiinit tukevat mukavuutta, itsevarmuutta ja vahvempaa suhdetta eläimeen.",
-rescueDescription:"Valokuva ja rehellinen tarina voivat auttaa pelastettua eläintä löytämään tukea ja tulevan kodin.",
-placesTitle:"Kuinka DOGUE Trust suojaa lemmikkiystävällisiä suosituksia",placesDescription:"Yhteisön ilmoitukset, varmennus ja moderointi pitävät paikalliset tiedot hyödyllisinä.",
-volunteersTitle:"Ihmiset, jotka auttavat eläimiä kulissien takana",volunteersDescription:"Vapaaehtoiset auttavat kuljetuksissa, sijaiskodeissa, valokuvauksessa, varainkeruussa ja käytännön tehtävissä.",
-communityTitle:"Mitä lemmikinomistajat suosittelevat lähelläsi",communityDescription:"Paikallinen tieto voi paljastaa luotettavia kävelyreittejä, kahviloita, palveluja ja apua.",
-editors:"PETS & DOGUE -toimitus",fashionDesk:"Muotitoimitus",travelDesk:"Matkatoimitus",wellnessDesk:"Hyvinvointitoimitus",rescueDesk:"Pelastustoimitus",localDesk:"Paikallistoimitus",communityDesk:"Yhteisötoimitus",localCommunity:"Paikallinen yhteisö",
-emptyTitle:"Ei vastaavia tarinoita",emptyDescription:"Kokeile toista hakusanaa tai valitse toinen kategoria.",
-visualHeading:"Visuaalinen journalismi",openGallery:"AVAA KUVAGALLERIA →",visualCover:"Tulevan numeron kasvot",visualTravel:"Kauniita matkoja lemmikkisi kanssa",visualFashion:"Toimituksellinen tyyli",visualRescue:"Elämä, joka ansaitsee tulla nähdyksi",visualWellness:"Päivittäinen hoito",local:"Paikallinen",visualLocal:"Yhdessä lähelläsi",
-myPetIs:"LEMMIKKINI ON",nextCover:"SEURAAVA KANSITÄHTI",enter:"NAPAUTA OSALLISTUAKSESI →",
-newsHeading:"Saa uudet PETS & DOGUE -tarinat",newsDescription:"Saat uusia numeroita, äänitettyjä artikkeleita, visuaalisia editorial-kuvia ja hyödyllisiä oppaita.",email:"Sähköpostiosoitteesi",subscribe:"TILAA",
-noVoice:"Tämä selain ei tue äänikerrontaa.",invalidEmail:"Anna kelvollinen sähköpostiosoite.",success:"Tervetuloa PETS & DOGUE -yhteisöön."
-});
-
-A.tr=make({
-metaTitle:"Makaleler | PETS & DOGUE",metaDescription:"PETS & DOGUE editoryal hikâyelerini, röportajları, rehberleri, seyahat, moda, wellness ve kurtarma içeriklerini keşfedin.",
-kicker:"PETS & DOGUE EDİTORYAL",heroTitle:"Görmeye, okumaya ve dinlemeye değer hikâyeler",heroDescription:"Görsel gazeteciliği, hayvanlarla lüks yaşamı, faydalı rehberleri, seyahati, wellness, modayı, röportajları ve kurtarma hikâyelerini keşfedin. Her tam makalede sesli anlatım bulunur.",
-explore:"Hikâyeleri keşfet",listen:"Bir makale dinle",coverStar:"Kapak yıldızı ol",
-coverStars:"Kapak yıldızları",fashion:"Moda",travel:"Seyahat",wellness:"Wellness",rescue:"Kurtarma",places:"Mekânlar",volunteers:"Gönüllüler",community:"Topluluk",
-searchPlaceholder:"Hikâye, kategori veya konu ara...",searchButton:"Ara",allCategories:"Tüm kategoriler",all:"Tümü",coverStarSingle:"Kapak yıldızı",
-featuredHeading:"Editörün seçimi",featuredDescription:"PETS & DOGUE editörleri tarafından seçilen hikâyeler, görseller ve faydalı rehberler.",listenShort:"DİNLE",
-photoshootTitle:"Evcil hayvanınızı profesyonel dergi çekimine nasıl hazırlarsınız",photoshootDescription:"Konfor, grooming, ışık ve güzel bir portreyi editoryal görsele dönüştüren ayrıntılar.",
-travelTitle:"Lüks pet-friendly otellerin yükselişi",rescueTitle:"Görünürlük neden bir hayvanın hayatını değiştirebilir",
-latest:"Son hikâyeler",zero:"Editoryal hikâye bulunmuyor.",one:"Bir editoryal hikâye mevcut.",many:"{count} editoryal hikâye mevcut.",
-audio:"SES",read:"OKU",readListen:"OKU & DİNLE",min:"dk",
-photoshootCard:"Güzel bir editoryal portre için basit grooming, ışık ve konfor önerileri.",
-fashionTitle:"Lüks pet stilinin yeni kuralları",fashionDescription:"Modern hayvan modası daha hafif, ifade dolu ve konforlu hâle geliyor.",
-travelDescription:"Oteller hayvanlarıyla seyahat eden misafirlerin deneyimini yeniden tasarlıyor.",
-wellnessTitle:"Daha sakin ve mutlu bir evcil hayvan için günlük ritüeller",wellnessDescription:"Küçük rutinler konforu, güveni ve hayvanınızla bağınızı destekleyebilir.",
-rescueDescription:"Bir fotoğraf ve dürüst bir hikâye kurtarılan hayvanları destek ve gelecekteki yuvalarla buluşturabilir.",
-placesTitle:"DOGUE Trust pet-friendly önerileri nasıl korur",placesDescription:"Topluluk bildirimleri, doğrulama ve moderasyon yerel bilgileri faydalı tutar.",
-volunteersTitle:"Perde arkasında hayvanlara yardım eden insanlar",volunteersDescription:"Gönüllüler ulaşım, geçici yuva, fotoğraf, bağış toplama ve pratik yardım sağlar.",
-communityTitle:"Yakınınızdaki hayvan sahipleri ne öneriyor",communityDescription:"Yerel bilgi güvenilir yürüyüşleri, kafeleri, hizmetleri ve desteği ortaya çıkarabilir.",
-editors:"PETS & DOGUE Editörleri",fashionDesk:"Moda Editörleri",travelDesk:"Seyahat Editörleri",wellnessDesk:"Wellness Editörleri",rescueDesk:"Kurtarma Editörleri",localDesk:"Yerel Editörler",communityDesk:"Topluluk Editörleri",localCommunity:"Yerel Topluluk",
-emptyTitle:"Eşleşen hikâye yok",emptyDescription:"Başka bir kelime deneyin veya farklı bir kategori seçin.",
-visualHeading:"Görsel Gazetecilik",openGallery:"FOTOĞRAF GALERİSİNİ AÇ →",visualCover:"Gelecek sayının yüzü",visualTravel:"Evcil hayvanınızla güzel kaçamaklar",visualFashion:"Editoryal stil",visualRescue:"Görülmeye değer bir hayat",visualWellness:"Günlük bakım",local:"Yerel",visualLocal:"Yakınınızda birlikte",
-myPetIs:"EVCİL HAYVANIM",nextCover:"BİR SONRAKİ KAPAK YILDIZI",enter:"KATILMAK İÇİN DOKUN →",
-newsHeading:"Yeni PETS & DOGUE hikâyelerini alın",newsDescription:"Yeni sayılar, sesli makaleler, görsel editorial içerikler ve faydalı rehberler alın.",email:"E-posta adresiniz",subscribe:"ABONE OL",
-noVoice:"Bu tarayıcı sesli anlatımı desteklemiyor.",invalidEmail:"Geçerli bir e-posta adresi girin.",success:"PETS & DOGUE topluluğuna hoş geldiniz."
-});
-
-A.ar=make({
-metaTitle:"المقالات | PETS & DOGUE",metaDescription:"اكتشف قصص PETS & DOGUE التحريرية والمقابلات والأدلة والسفر والموضة والعافية والإنقاذ.",
-kicker:"تحرير PETS & DOGUE",heroTitle:"قصص تستحق المشاهدة والقراءة والاستماع",heroDescription:"اكتشف الصحافة البصرية وأسلوب الحياة الفاخر مع الحيوانات والأدلة المفيدة والسفر والعافية والموضة والمقابلات وقصص الإنقاذ. كل مقال كامل يتضمن سرداً صوتياً.",
-explore:"استكشف القصص",listen:"استمع إلى مقال",coverStar:"كن نجم الغلاف",
-coverStars:"نجوم الغلاف",fashion:"الموضة",travel:"السفر",wellness:"العافية",rescue:"الإنقاذ",places:"الأماكن",volunteers:"المتطوعون",community:"المجتمع",
-searchPlaceholder:"ابحث عن القصص أو الفئات أو المواضيع...",searchButton:"بحث",allCategories:"كل الفئات",all:"الكل",coverStarSingle:"نجم الغلاف",
-featuredHeading:"اختيار التحرير",featuredDescription:"قصص وصور وأدلة مفيدة اختارها فريق تحرير PETS & DOGUE.",listenShort:"استمع",
-photoshootTitle:"كيف تجهز حيوانك الأليف لجلسة تصوير احترافية للمجلة",photoshootDescription:"الراحة والعناية والإضاءة والتفاصيل التي تحول الصورة الجميلة إلى لقطة تحريرية.",
-travelTitle:"صعود الفنادق الفاخرة الصديقة للحيوانات",rescueTitle:"كيف يمكن للظهور أن يغير حياة حيوان",
-latest:"أحدث القصص",zero:"لا توجد قصص تحريرية متاحة.",one:"توجد قصة تحريرية واحدة.",many:"توجد {count} قصص تحريرية.",
-audio:"صوت",read:"اقرأ",readListen:"اقرأ واستمع",min:"د",
-photoshootCard:"نصائح بسيطة للعناية والإضاءة والراحة للحصول على صورة تحريرية جميلة.",
-fashionTitle:"القواعد الجديدة لأسلوب الحيوانات الفاخر",fashionDescription:"أصبحت موضة الحيوانات الحديثة أخف وأكثر تعبيراً وراحة.",
-travelDescription:"تعيد الفنادق تصميم تجربة الضيوف الذين يسافرون مع الحيوانات.",
-wellnessTitle:"طقوس يومية لحيوان أكثر هدوءاً وسعادة",wellnessDescription:"يمكن للروتينات الصغيرة أن تدعم الراحة والثقة وتقوي علاقتك بحيوانك.",
-rescueDescription:"يمكن لصورة وقصة صادقة أن تساعد الحيوان المنقذ في العثور على الدعم ومنزل مستقبلي.",
-placesTitle:"كيف يحمي DOGUE Trust التوصيات الصديقة للحيوانات",placesDescription:"تساعد تقارير المجتمع والتحقق والإشراف في إبقاء المعلومات المحلية مفيدة.",
-volunteersTitle:"الأشخاص الذين يساعدون الحيوانات خلف الكواليس",volunteersDescription:"يساعد المتطوعون في النقل والرعاية المؤقتة والتصوير وجمع التبرعات والدعم العملي.",
-communityTitle:"ما الذي يوصي به أصحاب الحيوانات بالقرب منك",communityDescription:"يمكن للمعرفة المحلية أن تكشف عن مسارات ومقاهٍ وخدمات ودعم موثوق قريباً منك.",
-editors:"محررو PETS & DOGUE",fashionDesk:"تحرير الموضة",travelDesk:"تحرير السفر",wellnessDesk:"تحرير العافية",rescueDesk:"تحرير الإنقاذ",localDesk:"التحرير المحلي",communityDesk:"تحرير المجتمع",localCommunity:"المجتمع المحلي",
-emptyTitle:"لا توجد قصص مطابقة",emptyDescription:"جرّب كلمة أخرى أو اختر فئة مختلفة.",
-visualHeading:"الصحافة البصرية",openGallery:"افتح معرض الصور ←",visualCover:"وجه عدد قادم",visualTravel:"رحلات جميلة مع حيوانك",visualFashion:"أسلوب تحريري",visualRescue:"حياة تستحق أن تُرى",visualWellness:"العناية اليومية",local:"محلي",visualLocal:"معاً بالقرب منك",
-myPetIs:"حيواني هو",nextCover:"نجم الغلاف القادم",enter:"اضغط للمشاركة ←",
-newsHeading:"احصل على قصص PETS & DOGUE الجديدة",newsDescription:"احصل على أعداد جديدة ومقالات صوتية ومواد بصرية وأدلة مفيدة.",email:"بريدك الإلكتروني",subscribe:"اشتراك",
-noVoice:"هذا المتصفح لا يدعم السرد الصوتي.",invalidEmail:"يرجى إدخال بريد إلكتروني صحيح.",success:"مرحباً بك في مجتمع PETS & DOGUE."
-});
-
-A.hi=make({
-metaTitle:"लेख | PETS & DOGUE",metaDescription:"PETS & DOGUE की संपादकीय कहानियाँ, इंटरव्यू, गाइड, यात्रा, फैशन, वेलनेस और रेस्क्यू फीचर्स देखें।",
-kicker:"PETS & DOGUE संपादकीय",heroTitle:"देखने, पढ़ने और सुनने लायक कहानियाँ",heroDescription:"विज़ुअल जर्नलिज़्म, जानवरों के साथ लग्ज़री लाइफस्टाइल, उपयोगी गाइड, यात्रा, वेलनेस, फैशन, इंटरव्यू और रेस्क्यू कहानियाँ खोजें। हर पूरा लेख वॉइस नैरेशन के साथ उपलब्ध है।",
-explore:"कहानियाँ देखें",listen:"लेख सुनें",coverStar:"कवर स्टार बनें",
-coverStars:"कवर स्टार",fashion:"फैशन",travel:"यात्रा",wellness:"वेलनेस",rescue:"रेस्क्यू",places:"स्थान",volunteers:"स्वयंसेवक",community:"समुदाय",
-searchPlaceholder:"कहानियाँ, श्रेणियाँ या विषय खोजें...",searchButton:"खोजें",allCategories:"सभी श्रेणियाँ",all:"सभी",coverStarSingle:"कवर स्टार",
-featuredHeading:"संपादक की पसंद",featuredDescription:"PETS & DOGUE संपादकीय टीम द्वारा चुनी गई कहानियाँ, तस्वीरें और उपयोगी गाइड।",listenShort:"सुनें",
-photoshootTitle:"अपने पालतू जानवर को प्रोफेशनल मैगज़ीन फोटोशूट के लिए कैसे तैयार करें",photoshootDescription:"आराम, ग्रूमिंग, रोशनी और वे विवरण जो एक सुंदर पोर्ट्रेट को संपादकीय तस्वीर में बदलते हैं।",
-travelTitle:"लक्ज़री pet-friendly होटलों का बढ़ता चलन",rescueTitle:"दिखाई देना किसी जानवर की ज़िंदगी कैसे बदल सकता है",
-latest:"नई कहानियाँ",zero:"कोई संपादकीय कहानी उपलब्ध नहीं है।",one:"एक संपादकीय कहानी उपलब्ध है।",many:"{count} संपादकीय कहानियाँ उपलब्ध हैं।",
-audio:"ऑडियो",read:"पढ़ें",readListen:"पढ़ें और सुनें",min:"मिनट",
-photoshootCard:"सुंदर संपादकीय पोर्ट्रेट के लिए आसान ग्रूमिंग, लाइटिंग और आराम के सुझाव।",
-fashionTitle:"लक्ज़री पेट स्टाइल के नए नियम",fashionDescription:"आधुनिक पालतू फैशन अधिक हल्का, अभिव्यक्तिपूर्ण और आरामदायक हो रहा है।",
-travelDescription:"होटल जानवरों के साथ यात्रा करने वाले मेहमानों के अनुभव को नया रूप दे रहे हैं।",
-wellnessTitle:"शांत और खुश पालतू जानवर के लिए रोज़ाना की आदतें",wellnessDescription:"छोटी दिनचर्याएँ आराम, आत्मविश्वास और आपके जानवर के साथ मजबूत संबंध में मदद कर सकती हैं।",
-rescueDescription:"एक तस्वीर और सच्ची कहानी किसी बचाए गए जानवर को सहायता और भविष्य का घर दिला सकती है।",
-placesTitle:"DOGUE Trust pet-friendly सुझावों की सुरक्षा कैसे करता है",placesDescription:"समुदाय की रिपोर्ट, सत्यापन और मॉडरेशन स्थानीय जानकारी को उपयोगी बनाए रखते हैं।",
-volunteersTitle:"वे लोग जो पर्दे के पीछे जानवरों की मदद करते हैं",volunteersDescription:"स्वयंसेवक परिवहन, अस्थायी देखभाल, फोटोग्राफी, फंडरेज़िंग और व्यावहारिक मदद करते हैं।",
-communityTitle:"आपके पास पालतू मालिक क्या सुझाते हैं",communityDescription:"स्थानीय जानकारी भरोसेमंद वॉक, कैफ़े, सेवाएँ और सहायता खोजने में मदद कर सकती है।",
-editors:"PETS & DOGUE संपादक",fashionDesk:"फैशन डेस्क",travelDesk:"ट्रैवल डेस्क",wellnessDesk:"वेलनेस संपादक",rescueDesk:"रेस्क्यू डेस्क",localDesk:"लोकल डेस्क",communityDesk:"कम्युनिटी संपादक",localCommunity:"स्थानीय समुदाय",
-emptyTitle:"कोई मिलती हुई कहानी नहीं",emptyDescription:"दूसरा शब्द आज़माएँ या कोई दूसरी श्रेणी चुनें।",
-visualHeading:"विज़ुअल जर्नलिज़्म",openGallery:"फोटो गैलरी खोलें →",visualCover:"आने वाले अंक का चेहरा",visualTravel:"अपने पालतू जानवर के साथ खूबसूरत यात्राएँ",visualFashion:"संपादकीय स्टाइल",visualRescue:"एक ज़िंदगी जिसे देखा जाना चाहिए",visualWellness:"रोज़ाना देखभाल",local:"स्थानीय",visualLocal:"आपके पास साथ-साथ",
-myPetIs:"मेरा पालतू है",nextCover:"अगला कवर स्टार",enter:"भाग लेने के लिए टैप करें →",
-newsHeading:"नई PETS & DOGUE कहानियाँ पाएँ",newsDescription:"नए अंक, सुनाए गए लेख, विज़ुअल संपादकीय और उपयोगी गाइड पाएँ।",email:"आपका ईमेल पता",subscribe:"सदस्य बनें",
-noVoice:"यह ब्राउज़र वॉइस नैरेशन का समर्थन नहीं करता।",invalidEmail:"कृपया सही ईमेल पता दर्ज करें।",success:"PETS & DOGUE समुदाय में आपका स्वागत है।"
-});
-
-/* Less-common European locales kept fully localized too */
-
-A.sv=A.sv;
-A.da=A.da;
-A.no=A.no;
-A.fi=A.fi;
-
-window.PetsDogueTranslations.articles=A;
 
 })();
