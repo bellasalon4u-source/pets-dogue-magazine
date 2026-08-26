@@ -21,7 +21,7 @@ content="Read and listen to PETS & DOGUE editorial stories."
 --gold-light:#efd38c;
 --green:#65e51f;
 --border:#d8d3c8;
---grey:#747474;
+--grey:#777;
 }
 
 *{
@@ -61,66 +61,58 @@ max-width:100%;
 HEADER
 ========================================================= */
 
-.site-header{
-height:88px;
+.article-header{
 background:var(--black);
 color:#fff;
 position:sticky;
 top:0;
-z-index:2000;
+z-index:1000;
 border-bottom:1px solid #292929;
 }
 
-.header-inner{
-height:100%;
-max-width:1200px;
+.article-header-inner{
+height:122px;
+max-width:1100px;
 margin:auto;
-padding:0 14px;
+padding:0 18px;
 display:grid;
-grid-template-columns:52px minmax(0,1fr) 52px;
+grid-template-columns:72px minmax(0,1fr) 72px;
 align-items:center;
 }
 
-.close-button,
-.home-button{
-width:46px;
-height:46px;
-border:1px solid #4d4d4d;
+.header-round{
+width:58px;
+height:58px;
+border:1px solid #4c4c4c;
 border-radius:50%;
 background:#111;
 color:#fff;
 display:flex;
 align-items:center;
 justify-content:center;
+font-size:31px;
+font-weight:300;
 }
 
-.close-button{
-font-size:27px;
-line-height:1;
-}
-
-.home-button svg{
-width:27px;
-height:27px;
-stroke:currentColor;
-stroke-width:2;
-fill:none;
+.header-round.home{
+font-size:29px;
+margin-left:auto;
 }
 
 .brand{
 text-align:center;
-line-height:.88;
+line-height:.9;
 }
 
 .brand-small{
-font:11px Georgia,serif;
-letter-spacing:1px;
+font:15px Georgia,serif;
 color:var(--gold-light);
+letter-spacing:1px;
 }
 
 .brand-big{
-font:normal 38px Georgia,serif;
-letter-spacing:2px;
+font:normal 59px Georgia,serif;
+letter-spacing:4px;
 }
 
 /* =========================================================
@@ -132,73 +124,73 @@ background:#111;
 color:#fff;
 }
 
-.hero-image{
-height:610px;
+.hero-media{
 position:relative;
-overflow:hidden;
-max-width:1500px;
+height:650px;
+max-width:1200px;
 margin:auto;
+overflow:hidden;
 background:#222;
 }
 
-.hero-image img{
-position:absolute;
-inset:0;
+.hero-media img{
+width:100%;
 height:100%;
 object-fit:cover;
 }
 
-.hero-image:after{
+.hero-media:after{
 content:"";
 position:absolute;
 inset:0;
 background:
 linear-gradient(
 to top,
-rgba(0,0,0,.96) 0%,
-rgba(0,0,0,.69) 38%,
-rgba(0,0,0,.1) 78%
+rgba(0,0,0,.98) 0%,
+rgba(0,0,0,.78) 35%,
+rgba(0,0,0,.22) 75%,
+rgba(0,0,0,.08) 100%
 );
 }
 
 .hero-copy{
 position:absolute;
+z-index:2;
 left:50%;
 bottom:38px;
 transform:translateX(-50%);
-width:min(1050px,91%);
-z-index:2;
+width:min(1040px,91%);
 }
 
 .article-category{
-display:inline-block;
-font-size:10px;
-font-weight:bold;
+display:block;
+margin-bottom:15px;
+font-size:11px;
+font-weight:800;
 letter-spacing:2px;
 color:var(--gold-light);
 text-transform:uppercase;
-margin-bottom:12px;
 }
 
 .hero-copy h1{
-font:normal 61px/1.01 Georgia,serif;
-max-width:960px;
+max-width:900px;
+font:normal 64px/1.02 Georgia,serif;
 overflow-wrap:anywhere;
 }
 
 .article-intro{
-max-width:820px;
-font:20px/1.45 Georgia,serif;
-margin-top:15px;
+max-width:860px;
+margin-top:18px;
+font:22px/1.45 Georgia,serif;
 color:#eee;
 }
 
 .article-meta{
 display:flex;
-gap:8px 20px;
 flex-wrap:wrap;
-margin-top:19px;
-font-size:12px;
+gap:9px 23px;
+margin-top:22px;
+font-size:13px;
 color:#ddd;
 }
 
@@ -206,41 +198,36 @@ color:#ddd;
 AUDIO
 ========================================================= */
 
-.audio-shell{
+.audio-section{
 background:#fff;
 border-bottom:1px solid var(--border);
-position:sticky;
-top:88px;
-z-index:1500;
 }
 
 .audio-inner{
-max-width:920px;
+max-width:930px;
 margin:auto;
-padding:10px 16px;
+padding:16px 18px;
 display:flex;
 align-items:center;
-gap:12px;
+gap:15px;
 }
 
 .listen-button{
-min-height:48px;
-padding:0 20px;
-border:1.5px solid #111;
+min-height:58px;
+padding:0 25px;
+border:0;
 border-radius:999px;
 background:#111;
 color:#fff;
-font-size:13px;
-font-weight:bold;
+font-weight:800;
+font-size:16px;
 display:flex;
 align-items:center;
-justify-content:center;
-gap:8px;
+gap:10px;
 }
 
 .listen-button.active{
 background:var(--green);
-border-color:var(--green);
 color:#111;
 }
 
@@ -250,103 +237,86 @@ color:#777;
 }
 
 /* =========================================================
-ARTICLE
+ARTICLE CONTENT
 ========================================================= */
 
 .article-shell{
-max-width:920px;
+max-width:930px;
 margin:auto;
-padding:28px 16px 80px;
+padding:38px 18px 75px;
 }
 
-.article-content{
+.article-card{
 background:#fff;
 border:2px solid #111;
-padding:48px;
+padding:50px;
 }
 
 .article-body p{
-font:20px/1.82 Georgia,serif;
+font:21px/1.82 Georgia,serif;
 color:#292929;
-margin-bottom:27px;
+margin-bottom:29px;
 }
 
 .article-body h2{
-font:normal 42px/1.08 Georgia,serif;
-margin:50px 0 20px;
+font:normal 43px/1.08 Georgia,serif;
+margin:48px 0 21px;
 }
 
 .article-body blockquote{
+font:28px/1.46 Georgia,serif;
+background:#f7f1e3;
 border-left:6px solid var(--gold);
-background:#f8f3e7;
-padding:23px 26px;
-margin:38px 0;
-font:27px/1.45 Georgia,serif;
+padding:25px 28px;
+margin:39px 0;
 }
 
 .article-photo{
 width:100%;
-max-height:600px;
+max-height:590px;
 object-fit:cover;
-margin:30px 0;
+margin:35px 0;
 }
 
-.image-caption{
+.article-caption{
 display:block;
-font-size:12px;
-line-height:1.45;
-color:#777;
+margin-top:-23px;
+margin-bottom:35px;
 text-align:center;
-margin:-17px 0 32px;
+font-size:12px;
+color:#777;
 }
 
 .speech-block{
-scroll-margin-top:170px;
-border-radius:5px;
+scroll-margin-top:150px;
+border-radius:4px;
 }
 
 .speech-block.speaking-now{
-background:#fff3bb;
-box-shadow:0 0 0 8px #fff3bb;
-}
-
-.article-tags{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-border-top:2px solid #111;
-padding-top:22px;
-margin-top:44px;
-}
-
-.article-tag{
-background:#111;
-color:#fff;
-font-size:10px;
-font-weight:bold;
-letter-spacing:.7px;
-padding:8px 12px;
+background:#fff5c8;
+box-shadow:0 0 0 8px #fff5c8;
 }
 
 /* =========================================================
-BOTTOM
+ACTIONS
 ========================================================= */
 
 .article-actions{
+margin-top:42px;
+padding-top:28px;
+border-top:3px solid #111;
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:10px;
-margin-top:27px;
+gap:12px;
 }
 
 .action-button{
-min-height:50px;
+min-height:58px;
 border:2px solid #111;
 border-radius:999px;
 background:#fff;
-color:#111;
-font-weight:bold;
-font-size:13px;
+font-weight:800;
+font-size:15px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -355,26 +325,6 @@ justify-content:center;
 .action-button.gold{
 background:var(--gold);
 border-color:var(--gold);
-}
-
-.back-to-articles{
-max-width:920px;
-margin:0 auto 70px;
-padding:0 16px;
-}
-
-.back-to-articles a{
-width:100%;
-min-height:58px;
-border:2px solid #111;
-background:#111;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:999px;
-font-size:14px;
-font-weight:bold;
 }
 
 /* =========================================================
@@ -396,35 +346,104 @@ MOBILE
 
 @media(max-width:760px){
 
-.site-header{
-height:82px;
+.article-header-inner{
+height:105px;
+grid-template-columns:62px minmax(0,1fr) 62px;
+padding:0 14px;
 }
 
-.header-inner{
-grid-template-columns:48px minmax(0,1fr) 48px;
-padding:0 8px;
+.header-round{
+width:52px;
+height:52px;
+font-size:29px;
 }
 
-.close-button,
-.home-button{
-width:43px;
-height:43px;
-}
-
-.brand-big{
-font-size:34px;
+.header-round.home{
+font-size:26px;
 }
 
 .brand-small{
-font-size:10px;
+font-size:12px;
 }
 
-.hero-image{
-height:560px;
+.brand-big{
+font-size:46px;
+letter-spacing:2px;
+}
+
+.hero-media{
+height:575px;
 }
 
 .hero-copy{
-bottom:27px;
+bottom:29px;
+}
+
+.hero-copy h1{
+font-size:44px;
+line-height:1.03;
+}
+
+.article-intro{
+font-size:18px;
+}
+
+.article-meta{
+font-size:12px;
+gap:8px 15px;
+}
+
+.audio-inner{
+padding:14px 16px;
+}
+
+.listen-button{
+min-height:55px;
+padding:0 22px;
+font-size:15px;
+}
+
+.article-shell{
+padding:24px 10px 55px;
+}
+
+.article-card{
+padding:29px 20px;
+}
+
+.article-body p{
+font-size:19px;
+line-height:1.75;
+}
+
+.article-body h2{
+font-size:35px;
+margin-top:41px;
+}
+
+.article-body blockquote{
+font-size:23px;
+padding:20px;
+}
+
+.article-actions{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:430px){
+
+.article-header-inner{
+height:96px;
+}
+
+.brand-big{
+font-size:40px;
+}
+
+.hero-media{
+height:545px;
 }
 
 .hero-copy h1{
@@ -435,83 +454,8 @@ font-size:39px;
 font-size:17px;
 }
 
-.article-meta{
-font-size:11px;
-gap:7px 13px;
-}
-
-.audio-shell{
-top:82px;
-}
-
-.audio-inner{
-padding:9px 12px;
-}
-
-.listen-button{
-min-height:45px;
-padding:0 17px;
-}
-
-.article-shell{
-padding:20px 9px 45px;
-}
-
-.article-content{
-padding:27px 19px;
-}
-
-.article-body p{
-font-size:18px;
-line-height:1.76;
-margin-bottom:24px;
-}
-
-.article-body h2{
-font-size:34px;
-margin:41px 0 18px;
-}
-
-.article-body blockquote{
-font-size:22px;
-padding:18px;
-margin:31px 0;
-}
-
-.speech-block{
-scroll-margin-top:155px;
-}
-
-.back-to-articles{
-padding:0 9px;
-margin-bottom:50px;
-}
-
-}
-
-@media(max-width:430px){
-
-.hero-image{
-height:530px;
-}
-
-.hero-copy h1{
-font-size:35px;
-}
-
-.article-content{
-padding:24px 17px;
-}
-
-.article-actions{
-grid-template-columns:1fr;
-}
-
-.audio-status{
-max-width:120px;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+.article-card{
+padding:25px 17px;
 }
 
 }
@@ -528,14 +472,14 @@ scroll-behavior:auto;
 
 <body>
 
-<header class="site-header">
+<header class="article-header">
 
-<div class="header-inner">
+<div class="article-header-inner">
 
 <button
-class="close-button"
+class="header-round"
 type="button"
-onclick="closeArticle()"
+onclick="goToArticles()"
 aria-label="Close article"
 >
 ×
@@ -543,8 +487,9 @@ aria-label="Close article"
 
 <a
 class="brand notranslate"
-href="articles.html"
+href="index.html"
 translate="no"
+aria-label="PETS & DOGUE home"
 >
 
 <div class="brand-small">
@@ -558,17 +503,11 @@ DOGUE
 </a>
 
 <a
-class="home-button"
+class="header-round home"
 href="index.html"
 aria-label="Home"
 >
-
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path d="M3 10.5L12 3l9 7.5"></path>
-<path d="M5 9.8V21h14V9.8"></path>
-<path d="M9.5 21v-7h5v7"></path>
-</svg>
-
+⌂
 </a>
 
 </div>
@@ -577,12 +516,12 @@ aria-label="Home"
 
 <section class="article-hero">
 
-<div class="hero-image">
+<div class="hero-media">
 
 <img
 id="articleHeroImage"
 src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1800&q=85"
-alt="Featured pet"
+alt="PETS & DOGUE article"
 >
 
 <div class="hero-copy">
@@ -627,7 +566,7 @@ PETS & DOGUE Editorial
 
 </section>
 
-<section class="audio-shell">
+<section class="audio-section">
 
 <div class="audio-inner">
 
@@ -659,16 +598,11 @@ id="audioStatus"
 
 <main class="article-shell">
 
-<article class="article-content">
+<article class="article-card">
 
 <div
 class="article-body"
 id="articleBody"
-></div>
-
-<div
-class="article-tags"
-id="articleTags"
 ></div>
 
 <div class="article-actions">
@@ -685,8 +619,8 @@ Share
 <button
 class="action-button"
 type="button"
-onclick="closeArticle()"
-id="closeButtonBottom"
+onclick="goToArticles()"
+id="backButton"
 >
 ← Articles
 </button>
@@ -697,52 +631,36 @@ id="closeButtonBottom"
 
 </main>
 
-<div class="back-to-articles">
-
-<a
-href="articles.html"
-id="backArticlesButton"
->
-← Articles
-</a>
-
-</div>
-
-<script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/article.js?v=3"></script>
-<script src="/i18n/engine.js?v=3"></script>
+<script src="/i18n/common.js?v=4"></script>
+<script src="/i18n/article.js?v=4"></script>
+<script src="/i18n/engine.js?v=4"></script>
 
 <script>
 "use strict";
 
+/* =========================================================
+CONFIG
+========================================================= */
+
 const LANGUAGE_KEY =
 "pets_dogue_language";
 
-const $ =
-id =>
-document.getElementById(id);
-
-const DEFAULT_HERO =
-"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1800&q=85";
-
-const DEFAULT_BODY_IMAGE =
-"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1400&q=85";
-
 const STORY_IMAGES = {
+
 default:
 "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1800&q=85",
 
 photoshoot:
-"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1800&q=85",
+"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1800&q=85",
 
 travel:
-"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85",
+"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=85",
 
 fashion:
 "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1800&q=85",
 
 wellness:
-"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1800&q=85",
+"https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=1800&q=85",
 
 rescue:
 "https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1800&q=85",
@@ -751,40 +669,38 @@ places:
 "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85",
 
 volunteers:
-"https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1800&q=85"
+"https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1800&q=85",
+
+community:
+"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1800&q=85"
+
 };
 
-const STORY_BODY_IMAGES = {
-default:
-DEFAULT_BODY_IMAGE,
-
-photoshoot:
-"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1400&q=85",
-
-travel:
-"https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=1400&q=85",
-
-fashion:
-"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1400&q=85",
-
-wellness:
-"https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=1400&q=85",
-
-rescue:
-"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1400&q=85",
-
-places:
-"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=85",
-
-volunteers:
-"https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1400&q=85"
-};
-
-let currentStoryKey =
-"default";
-
-let currentStoredArticle =
-null;
+const SUPPORTED_LANGUAGES = [
+"en",
+"uk",
+"ru",
+"fr",
+"de",
+"es",
+"it",
+"pt",
+"nl",
+"pl",
+"cs",
+"sk",
+"hu",
+"ro",
+"bg",
+"el",
+"sv",
+"da",
+"no",
+"fi",
+"tr",
+"ar",
+"hi"
+];
 
 let speechActive =
 false;
@@ -795,23 +711,24 @@ let speechQueue =
 let speechIndex =
 0;
 
-let currentUtterance =
-null;
-
 let currentSpeechElement =
 null;
 
-let autoListenRequested =
-false;
+let currentStoryKey =
+"default";
 
-let autoListenStarted =
-false;
+let refreshTimer =
+null;
+
+const $ =
+id =>
+document.getElementById(id);
 
 /* =========================================================
 LANGUAGE
 ========================================================= */
 
-function normaliseLanguageCode(
+function normaliseLanguage(
 value
 ){
 
@@ -828,25 +745,14 @@ String(
 value
 )
 .trim()
-.toLowerCase();
-
-if(
-code.includes("-")
-){
-
-code =
-code.split("-")[0];
-
-}
-
-if(
-code.includes("_")
-){
-
-code =
-code.split("_")[0];
-
-}
+.toLowerCase()
+.replace(
+"_",
+"-"
+)
+.split(
+"-"
+)[0];
 
 const aliases = {
 ua:"uk",
@@ -856,13 +762,21 @@ se:"sv",
 dk:"da"
 };
 
-return aliases[code] ||
-code ||
-"en";
+code =
+aliases[code] ||
+code;
+
+return SUPPORTED_LANGUAGES.includes(
+code
+)
+? code
+: "en";
 
 }
 
 function getCurrentLanguage(){
+
+try{
 
 if(
 window.PetsDogueLanguage &&
@@ -870,34 +784,34 @@ typeof window.PetsDogueLanguage.getCurrentLanguage ===
 "function"
 ){
 
-try{
-
-const value =
+const result =
 window.PetsDogueLanguage.getCurrentLanguage();
 
 if(
-typeof value ===
+typeof result ===
 "string"
 ){
 
-return normaliseLanguageCode(
-value
+return normaliseLanguage(
+result
 );
 
 }
 
 if(
-value &&
-typeof value ===
+result &&
+typeof result ===
 "object"
 ){
 
-return normaliseLanguageCode(
-value.code ||
-value.language ||
-value.lang ||
+return normaliseLanguage(
+result.code ||
+result.language ||
+result.lang ||
 "en"
 );
+
+}
 
 }
 
@@ -906,15 +820,13 @@ error
 ){
 
 console.warn(
-"Could not read language.",
+"Could not read language from PETS & DOGUE engine.",
 error
 );
 
 }
 
-}
-
-return normaliseLanguageCode(
+return normaliseLanguage(
 localStorage.getItem(
 LANGUAGE_KEY
 ) ||
@@ -924,7 +836,7 @@ document.documentElement.lang ||
 
 }
 
-function articleRoot(){
+function getArticleRoot(){
 
 return (
 window.PetsDogueTranslations &&
@@ -934,10 +846,10 @@ null;
 
 }
 
-function articleBundle(){
+function getLanguageBundle(){
 
 const root =
-articleRoot();
+getArticleRoot();
 
 if(
 !root
@@ -958,13 +870,13 @@ null
 
 }
 
-function articleT(
+function articleText(
 path,
 fallback
 ){
 
 let value =
-articleBundle();
+getLanguageBundle();
 
 if(
 !value
@@ -975,18 +887,29 @@ return fallback;
 }
 
 path
-.split(".")
+.split(
+"."
+)
 .forEach(
 key =>{
 
-value =
+if(
 value &&
 Object.prototype.hasOwnProperty.call(
 value,
 key
 )
-? value[key]
-: undefined;
+){
+
+value =
+value[key];
+
+}else{
+
+value =
+undefined;
+
+}
 
 }
 );
@@ -999,13 +922,44 @@ return typeof value ===
 }
 
 /* =========================================================
-ARTICLE
+STORY
 ========================================================= */
 
-function getStoryTranslation(){
+function getStoryKey(){
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const requested =
+params.get(
+"story"
+);
+
+const validStories = [
+"photoshoot",
+"travel",
+"fashion",
+"wellness",
+"rescue",
+"places",
+"volunteers",
+"community"
+];
+
+return validStories.includes(
+requested
+)
+? requested
+: "default";
+
+}
+
+function getCurrentStory(){
 
 const bundle =
-articleBundle();
+getLanguageBundle();
 
 if(
 !bundle
@@ -1025,15 +979,45 @@ null;
 
 }
 
-return (
+if(
 bundle.stories &&
 bundle.stories[
 currentStoryKey
 ]
-) ||
+){
+
+return bundle.stories[
+currentStoryKey
+];
+
+}
+
+const english =
+getArticleRoot()?.en;
+
+if(
+english &&
+english.stories &&
+english.stories[
+currentStoryKey
+]
+){
+
+return english.stories[
+currentStoryKey
+];
+
+}
+
+return bundle.default ||
+english?.default ||
 null;
 
 }
+
+/* =========================================================
+DOM HELPERS
+========================================================= */
 
 function setText(
 id,
@@ -1044,32 +1028,34 @@ const element =
 $(id);
 
 if(
-element &&
-typeof value ===
-"string" &&
-value.trim()
+!element
 ){
 
+return;
+
+}
+
 element.textContent =
-value;
+typeof value ===
+"string"
+? value
+: "";
 
 }
 
-}
-
-function setMetaDescription(
+function setMeta(
 value
 ){
 
+const meta =
+$("pageDescription");
+
 if(
-$("pageDescription") &&
-typeof value ===
-"string" &&
-value.trim()
+meta &&
+value
 ){
 
-$("pageDescription")
-.setAttribute(
+meta.setAttribute(
 "content",
 value
 );
@@ -1078,16 +1064,14 @@ value
 
 }
 
-/* =========================================================
-CONTENT ELEMENTS
-========================================================= */
-
 function createParagraph(
 text
 ){
 
 const element =
-document.createElement("p");
+document.createElement(
+"p"
+);
 
 element.textContent =
 text ||
@@ -1102,7 +1086,9 @@ text
 ){
 
 const element =
-document.createElement("h2");
+document.createElement(
+"h2"
+);
 
 element.textContent =
 text ||
@@ -1117,7 +1103,9 @@ text
 ){
 
 const element =
-document.createElement("blockquote");
+document.createElement(
+"blockquote"
+);
 
 element.textContent =
 text ||
@@ -1127,28 +1115,27 @@ return element;
 
 }
 
-function createImage(
+function createPhoto(
 src,
 alt
 ){
 
-const element =
-document.createElement("img");
+const image =
+document.createElement(
+"img"
+);
 
-element.className =
+image.className =
 "article-photo";
 
-element.src =
+image.src =
 src;
 
-element.alt =
+image.alt =
 alt ||
 "";
 
-element.loading =
-"lazy";
-
-return element;
+return image;
 
 }
 
@@ -1156,142 +1143,27 @@ function createCaption(
 text
 ){
 
-const element =
-document.createElement("span");
+const caption =
+document.createElement(
+"span"
+);
 
-element.className =
-"image-caption";
+caption.className =
+"article-caption";
 
-element.textContent =
+caption.textContent =
 text ||
 "";
 
-return element;
+return caption;
 
 }
 
 /* =========================================================
-DEFAULT BODY
+RENDER BODY
 ========================================================= */
 
-function renderDefaultBody(
-body
-){
-
-const target =
-$("articleBody");
-
-if(
-!target ||
-!body
-){
-
-return;
-
-}
-
-target.innerHTML =
-"";
-
-[
-["p",body.p1],
-["p",body.p2],
-["h2",body.h2a],
-["p",body.p3],
-["p",body.p4]
-]
-.forEach(
-item =>{
-
-if(
-!item[1]
-){
-
-return;
-
-}
-
-target.appendChild(
-item[0] ===
-"h2"
-? createHeading(item[1])
-: createParagraph(item[1])
-);
-
-}
-);
-
-target.appendChild(
-createImage(
-STORY_BODY_IMAGES.default,
-"Pet lifestyle"
-)
-);
-
-if(
-body.caption
-){
-
-target.appendChild(
-createCaption(
-body.caption
-)
-);
-
-}
-
-if(
-body.quote
-){
-
-target.appendChild(
-createQuote(
-body.quote
-)
-);
-
-}
-
-[
-["h2",body.h2b],
-["p",body.p5],
-["p",body.p6],
-["h2",body.h2c],
-["p",body.p7],
-["p",body.p8],
-["h2",body.h2d],
-["p",body.p9],
-["p",body.p10],
-["p",body.p11]
-]
-.forEach(
-item =>{
-
-if(
-!item[1]
-){
-
-return;
-
-}
-
-target.appendChild(
-item[0] ===
-"h2"
-? createHeading(item[1])
-: createParagraph(item[1])
-);
-
-}
-);
-
-}
-
-/* =========================================================
-RICH BODY
-========================================================= */
-
-function renderRichBody(
+function renderBody(
 body
 ){
 
@@ -1318,7 +1190,9 @@ return;
 }
 
 if(
-Array.isArray(body)
+Array.isArray(
+body
+)
 ){
 
 body.forEach(
@@ -1384,9 +1258,10 @@ block.src
 ){
 
 target.appendChild(
-createImage(
+createPhoto(
 block.src,
-block.alt
+block.alt ||
+""
 )
 );
 
@@ -1406,11 +1281,17 @@ return;
 
 }
 
+if(
+block.text
+){
+
 target.appendChild(
 createParagraph(
 block.text
 )
 );
+
+}
 
 }
 );
@@ -1421,25 +1302,80 @@ return;
 
 if(
 typeof body ===
-"string"
+"object"
 ){
 
-body
-.split(/\n\s*\n/)
-.forEach(
-text =>{
+const sequence = [
+["p1","p"],
+["p2","p"],
+["h2a","h2"],
+["p3","p"],
+["p4","p"],
+["quote","quote"],
+["h2b","h2"],
+["p5","p"],
+["p6","p"],
+["h2c","h2"],
+["p7","p"],
+["p8","p"],
+["h2d","h2"],
+["p9","p"],
+["p10","p"],
+["p11","p"]
+];
+
+sequence.forEach(
+item =>{
+
+const key =
+item[0];
+
+const type =
+item[1];
 
 if(
-text.trim()
+!body[key]
+){
+
+return;
+
+}
+
+if(
+type ===
+"h2"
 ){
 
 target.appendChild(
-createParagraph(
-text.trim()
+createHeading(
+body[key]
 )
 );
 
+return;
+
 }
+
+if(
+type ===
+"quote"
+){
+
+target.appendChild(
+createQuote(
+body[key]
+)
+);
+
+return;
+
+}
+
+target.appendChild(
+createParagraph(
+body[key]
+)
+);
 
 }
 );
@@ -1449,15 +1385,13 @@ text.trim()
 }
 
 /* =========================================================
-TAGS
+ARTICLE IMAGE INSIDE CONTENT
 ========================================================= */
 
-function renderTags(
-tags
-){
+function addEditorialImage(){
 
 const target =
-$("articleTags");
+$("articleBody");
 
 if(
 !target
@@ -1467,331 +1401,69 @@ return;
 
 }
 
-target.innerHTML =
-"";
-
-if(
-!tags
-){
-
-return;
-
-}
-
-const values =
-Array.isArray(tags)
-? tags
-: Object.values(tags);
-
-values.forEach(
-value =>{
-
-if(
-typeof value !==
-"string" ||
-!value.trim()
-){
-
-return;
-
-}
-
-const tag =
-document.createElement("span");
-
-tag.className =
-"article-tag";
-
-tag.textContent =
-value;
-
-target.appendChild(
-tag
+const paragraphs =
+target.querySelectorAll(
+"p"
 );
 
+if(
+paragraphs.length <
+2
+){
+
+return;
+
 }
+
+const image =
+createPhoto(
+STORY_IMAGES[
+currentStoryKey
+] ||
+STORY_IMAGES.default,
+$("articleTitle")
+?.textContent ||
+"PETS & DOGUE"
+);
+
+const anchor =
+paragraphs[
+Math.min(
+1,
+paragraphs.length -
+1
+)
+];
+
+anchor.insertAdjacentElement(
+"afterend",
+image
 );
 
 }
 
 /* =========================================================
-STORED ARTICLES
+RENDER ARTICLE
 ========================================================= */
 
-function getStoredTranslation(
-article
-){
+function renderArticle(){
 
-if(
-!article
-){
-
-return null;
-
-}
+stopSpeech();
 
 const language =
 getCurrentLanguage();
 
-return (
-article.translations &&
-article.translations[language]
-) ||
-(
-article.i18n &&
-article.i18n[language]
-) ||
-null;
+document.documentElement.lang =
+language;
 
-}
-
-function loadStoredArticle(){
-
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-const id =
-params.get("id");
-
-if(
-!id
-){
-
-return false;
-
-}
-
-let articles =
-[];
-
-try{
-
-articles =
-JSON.parse(
-localStorage.getItem(
-"pd_articles"
-) ||
-"[]"
-);
-
-}catch(
-error
-){
-
-console.error(
-"Could not parse stored articles.",
-error
-);
-
-return false;
-
-}
-
-if(
-!Array.isArray(articles)
-){
-
-return false;
-
-}
-
-const article =
-articles.find(
-item =>
-String(item.id) ===
-String(id)
-);
-
-if(
-!article
-){
-
-return false;
-
-}
-
-currentStoredArticle =
-article;
-
-return true;
-
-}
-
-/* =========================================================
-RENDER STORED
-========================================================= */
-
-function renderStoredArticle(){
-
-if(
-!currentStoredArticle
-){
-
-return;
-
-}
-
-const translated =
-getStoredTranslation(
-currentStoredArticle
-) ||
-{};
-
-const article =
-currentStoredArticle;
-
-const title =
-translated.title ||
-article.title ||
-"Article";
-
-const intro =
-translated.description ||
-translated.intro ||
-article.description ||
-article.intro ||
-"";
-
-const category =
-translated.category ||
-article.category ||
-"ARTICLE";
-
-const author =
-translated.author ||
-article.author ||
-"";
-
-const date =
-translated.date ||
-article.date ||
-"";
-
-const readingTime =
-translated.readingTime ||
-article.readingTime ||
-"";
-
-const image =
-translated.image ||
-article.image ||
-DEFAULT_HERO;
-
-const body =
-translated.content ||
-translated.body ||
-article.content ||
-article.body ||
-"";
-
-const tags =
-translated.tags ||
-article.tags ||
-[];
-
-setText(
-"articleCategory",
-category
-);
-
-setText(
-"articleTitle",
-title
-);
-
-setText(
-"articleIntro",
-intro
-);
-
-setText(
-"articleAuthor",
-author
-);
-
-setText(
-"articleDate",
-date
-);
-
-setText(
-"readingTime",
-readingTime
-);
-
-$("articleHeroImage").src =
-image;
-
-renderRichBody(
-body
-);
-
-renderTags(
-tags
-);
-
-document.title =
-title +
-" | PETS & DOGUE";
-
-setMetaDescription(
-translated.metaDescription ||
-article.metaDescription ||
-intro ||
-"Read and listen to PETS & DOGUE editorial stories."
-);
-
-}
-
-/* =========================================================
-RENDER TRANSLATED STORY
-========================================================= */
-
-function renderTranslatedStory(){
+document.documentElement.dir =
+language ===
+"ar"
+? "rtl"
+: "ltr";
 
 const story =
-getStoryTranslation();
-
-if(
-!story
-){
-
-const english =
-articleRoot()?.en;
-
-const fallback =
-currentStoryKey ===
-"default"
-? english?.default
-: english?.stories?.[
-currentStoryKey
-];
-
-if(
-fallback
-){
-
-renderStoryObject(
-fallback
-);
-
-}
-
-return;
-
-}
-
-renderStoryObject(
-story
-);
-
-}
-
-function renderStoryObject(
-story
-){
+getCurrentStory();
 
 if(
 !story
@@ -1804,13 +1476,13 @@ return;
 setText(
 "articleCategory",
 story.category ||
-"ARTICLE"
+""
 );
 
 setText(
 "articleTitle",
 story.title ||
-"Article"
+""
 );
 
 setText(
@@ -1837,149 +1509,35 @@ story.readingTime ||
 ""
 );
 
-$("articleHeroImage").src =
+const hero =
+$("articleHeroImage");
+
+if(
+hero
+){
+
+hero.src =
 story.image ||
 STORY_IMAGES[
 currentStoryKey
 ] ||
-DEFAULT_HERO;
+STORY_IMAGES.default;
 
-if(
-currentStoryKey ===
-"default" &&
-story.body &&
-!Array.isArray(story.body)
-){
+hero.alt =
+story.title ||
+"PETS & DOGUE article";
 
-renderDefaultBody(
+}
+
+renderBody(
 story.body
 );
 
-}else{
-
-renderRichBody(
-story.body
-);
-
-if(
-$("articleBody") &&
-$("articleBody").children.length
-){
-
-const hasImage =
-$("articleBody")
-.querySelector(
-".article-photo"
-);
-
-if(
-!hasImage
-){
-
-const image =
-createImage(
-STORY_BODY_IMAGES[
-currentStoryKey
-] ||
-DEFAULT_BODY_IMAGE,
-story.title ||
-"Article image"
-);
-
-const children =
-Array.from(
-$("articleBody").children
-);
-
-const insertAfter =
-Math.min(
-2,
-children.length
-);
-
-if(
-insertAfter > 0
-){
-
-children[
-insertAfter - 1
-]
-.after(
-image
-);
-
-}else{
-
-$("articleBody")
-.appendChild(
-image
-);
-
-}
-
-}
-
-}
-
-}
-
-if(
-story.tags
-){
-
-renderTags(
-story.tags
-);
-
-}else{
-
-const defaultTags =
-articleBundle()?.default?.tags;
-
-renderTags(
-defaultTags ||
-[]
-);
-
-}
-
-document.title =
-(
-story.metaTitle ||
-story.title ||
-"Article"
-) +
-" | PETS & DOGUE";
-
-setMetaDescription(
-story.metaDescription ||
-story.intro ||
-"Read and listen to PETS & DOGUE editorial stories."
-);
-
-}
-
-/* =========================================================
-UI LANGUAGE
-========================================================= */
-
-function applyUiLanguage(){
-
-const language =
-getCurrentLanguage();
-
-document.documentElement.lang =
-language;
-
-document.documentElement.dir =
-language ===
-"ar"
-? "rtl"
-: "ltr";
+addEditorialImage();
 
 setText(
 "listenButtonText",
-articleT(
+articleText(
 "ui.listen",
 "Listen"
 )
@@ -1987,58 +1545,43 @@ articleT(
 
 setText(
 "shareButton",
-articleT(
+articleText(
 "ui.share",
 "Share"
 )
 );
 
-const articlesLabel = {
-en:"Articles",
-ru:"Статьи",
-uk:"Статті",
-fr:"Articles",
-de:"Artikel",
-es:"Artículos",
-it:"Articoli",
-pt:"Artigos",
-nl:"Artikelen",
-pl:"Artykuły",
-cs:"Články",
-sk:"Články",
-hu:"Cikkek",
-ro:"Articole",
-bg:"Статии",
-el:"Άρθρα",
-sv:"Artiklar",
-da:"Artikler",
-no:"Artikler",
-fi:"Artikkelit",
-tr:"Makaleler",
-ar:"المقالات",
-hi:"लेख"
-}[language] ||
-"Articles";
-
 setText(
-"closeButtonBottom",
+"backButton",
 "← " +
-articlesLabel
+articleText(
+"ui.backToArticles",
+"Articles"
+)
 );
 
-setText(
-"backArticlesButton",
-"← " +
-articlesLabel
+document.title =
+(
+story.title ||
+"Article"
+) +
+" | PETS & DOGUE";
+
+setMeta(
+story.metaDescription ||
+story.intro ||
+"Read and listen to PETS & DOGUE editorial stories."
 );
+
+prepareSpeechBlocks();
 
 }
 
 /* =========================================================
-CLOSE
+NAVIGATION
 ========================================================= */
 
-function closeArticle(){
+function goToArticles(){
 
 stopSpeech();
 
@@ -2069,7 +1612,8 @@ if(
 navigator.share
 ){
 
-navigator.share({
+navigator
+.share({
 title,
 text,
 url:window.location.href
@@ -2082,9 +1626,16 @@ return;
 
 }
 
+copyLink();
+
+}
+
+function copyLink(){
+
 if(
 navigator.clipboard &&
-navigator.clipboard.writeText
+typeof navigator.clipboard.writeText ===
+"function"
 ){
 
 navigator.clipboard
@@ -2095,7 +1646,7 @@ window.location.href
 ()=>{
 
 alert(
-articleT(
+articleText(
 "messages.linkCopied",
 "Article link copied."
 )
@@ -2104,26 +1655,21 @@ articleT(
 }
 )
 .catch(
-()=>{
-
-alert(
-articleT(
-"messages.copyFallback",
-"Copy this link:"
-) +
-" " +
-window.location.href
-);
-
-}
+fallbackCopy
 );
 
 return;
 
 }
 
+fallbackCopy();
+
+}
+
+function fallbackCopy(){
+
 alert(
-articleT(
+articleText(
 "messages.copyFallback",
 "Copy this link:"
 ) +
@@ -2137,9 +1683,9 @@ window.location.href
 SPEECH
 ========================================================= */
 
-function getNarrationLanguage(){
+function getSpeechLanguage(){
 
-const map = {
+const languages = {
 en:"en-GB",
 uk:"uk-UA",
 ru:"ru-RU",
@@ -2165,10 +1711,12 @@ ar:"ar-SA",
 hi:"hi-IN"
 };
 
-return map[
+return (
+languages[
 getCurrentLanguage()
 ] ||
-"en-GB";
+"en-GB"
+);
 
 }
 
@@ -2176,7 +1724,7 @@ function prepareSpeechBlocks(){
 
 document
 .querySelectorAll(
-".speech-block,.speaking-now"
+".speech-block"
 )
 .forEach(
 element =>{
@@ -2189,7 +1737,7 @@ element.classList.remove(
 }
 );
 
-speechQueue =
+const blocks =
 [];
 
 [
@@ -2208,7 +1756,7 @@ element.classList.add(
 "speech-block"
 );
 
-speechQueue.push(
+blocks.push(
 element
 );
 
@@ -2219,7 +1767,7 @@ element
 
 document
 .querySelectorAll(
-"#articleBody h2,#articleBody p,#articleBody blockquote"
+"#articleBody p,#articleBody h2,#articleBody blockquote"
 )
 .forEach(
 element =>{
@@ -2232,7 +1780,7 @@ element.classList.add(
 "speech-block"
 );
 
-speechQueue.push(
+blocks.push(
 element
 );
 
@@ -2241,55 +1789,63 @@ element
 }
 );
 
+speechQueue =
+blocks;
+
 }
 
 function clearSpeechHighlight(){
 
-if(
-currentSpeechElement
-){
-
-currentSpeechElement
-.classList
-.remove(
+document
+.querySelectorAll(
+".speaking-now"
+)
+.forEach(
+element =>
+element.classList.remove(
 "speaking-now"
+)
 );
-
-}
 
 currentSpeechElement =
 null;
 
 }
 
-function setListenButton(
-active
+function updateSpeechButton(){
+
+const button =
+$("listenButton");
+
+if(
+button
 ){
 
-$("listenButton")
-?.classList.toggle(
+button.classList.toggle(
 "active",
-active
+speechActive
+);
+
+}
+
+setText(
+"listenIcon",
+speechActive
+? "■"
+: "🔊"
 );
 
 setText(
 "listenButtonText",
-active
-? articleT(
+speechActive
+? articleText(
 "ui.stop",
 "Stop"
 )
-: articleT(
+: articleText(
 "ui.listen",
 "Listen"
 )
-);
-
-setText(
-"listenIcon",
-active
-? "■"
-: "🔊"
 );
 
 }
@@ -2298,19 +1854,15 @@ function setAudioStatus(
 value
 ){
 
-if(
-$("audioStatus")
-){
-
-$("audioStatus").textContent =
+setText(
+"audioStatus",
 value ||
-"";
+""
+);
 
 }
 
-}
-
-function chooseVoice(){
+function getVoice(){
 
 if(
 !("speechSynthesis" in window)
@@ -2323,12 +1875,14 @@ return null;
 const voices =
 window.speechSynthesis.getVoices();
 
-const language =
-getNarrationLanguage()
+const wanted =
+getSpeechLanguage()
 .toLowerCase();
 
 const short =
-language.split("-")[0];
+wanted.split(
+"-"
+)[0];
 
 return (
 voices.find(
@@ -2338,7 +1892,7 @@ voice.lang ||
 ""
 )
 .toLowerCase() ===
-language
+wanted
 ) ||
 voices.find(
 voice =>
@@ -2351,7 +1905,6 @@ voice.lang ||
 short
 )
 ) ||
-voices[0] ||
 null
 );
 
@@ -2372,7 +1925,7 @@ speechIndex >=
 speechQueue.length
 ){
 
-finishSpeech();
+stopSpeech();
 
 return;
 
@@ -2384,7 +1937,9 @@ speechIndex
 ];
 
 const text =
-element.textContent.trim();
+element
+.textContent
+.trim();
 
 if(
 !text
@@ -2426,11 +1981,8 @@ new SpeechSynthesisUtterance(
 text
 );
 
-currentUtterance =
-utterance;
-
 utterance.lang =
-getNarrationLanguage();
+getSpeechLanguage();
 
 utterance.rate =
 .94;
@@ -2438,8 +1990,11 @@ utterance.rate =
 utterance.pitch =
 1;
 
+utterance.volume =
+1;
+
 const voice =
-chooseVoice();
+getVoice();
 
 if(
 voice
@@ -2451,7 +2006,7 @@ voice;
 }
 
 utterance.onend =
-()=>{
+function(){
 
 if(
 !speechActive
@@ -2465,13 +2020,13 @@ speechIndex++;
 
 setTimeout(
 speakNext,
-100
+90
 );
 
 };
 
 utterance.onerror =
-()=>{
+function(){
 
 if(
 !speechActive
@@ -2485,7 +2040,7 @@ speechIndex++;
 
 setTimeout(
 speakNext,
-100
+90
 );
 
 };
@@ -2503,7 +2058,7 @@ if(
 ){
 
 alert(
-articleT(
+articleText(
 "messages.narrationUnsupported",
 "Audio reading is not supported in this browser."
 )
@@ -2525,15 +2080,13 @@ return;
 
 }
 
-speechIndex =
-0;
-
 speechActive =
 true;
 
-setListenButton(
-true
-);
+speechIndex =
+0;
+
+updateSpeechButton();
 
 window.speechSynthesis.cancel();
 
@@ -2560,41 +2113,13 @@ false;
 speechIndex =
 0;
 
-currentUtterance =
-null;
-
 clearSpeechHighlight();
-
-setListenButton(
-false
-);
 
 setAudioStatus(
 ""
 );
 
-}
-
-function finishSpeech(){
-
-speechActive =
-false;
-
-speechIndex =
-0;
-
-currentUtterance =
-null;
-
-clearSpeechHighlight();
-
-setListenButton(
-false
-);
-
-setAudioStatus(
-""
-);
+updateSpeechButton();
 
 }
 
@@ -2615,124 +2140,26 @@ startSpeech();
 }
 
 /* =========================================================
-REFRESH
+LANGUAGE REFRESH
 ========================================================= */
 
-function refreshArticle(){
+function scheduleRefresh(){
 
-const wasSpeaking =
-speechActive;
+clearTimeout(
+refreshTimer
+);
 
-stopSpeech();
-
-applyUiLanguage();
-
-if(
-currentStoredArticle
-){
-
-renderStoredArticle();
-
-}else{
-
-renderTranslatedStory();
-
-}
-
-prepareSpeechBlocks();
-
-if(
-wasSpeaking
-){
-
+refreshTimer =
 setTimeout(
-startSpeech,
-250
+renderArticle,
+80
 );
-
-}
-
-}
-
-/* =========================================================
-INITIALISE
-========================================================= */
-
-function initialiseArticle(){
-
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-currentStoryKey =
-params.get(
-"story"
-) ||
-"default";
-
-autoListenRequested =
-params.get(
-"listen"
-) ===
-"1";
-
-applyUiLanguage();
-
-if(
-loadStoredArticle()
-){
-
-renderStoredArticle();
-
-}else{
-
-renderTranslatedStory();
-
-}
-
-prepareSpeechBlocks();
-
-setListenButton(
-false
-);
-
-if(
-autoListenRequested &&
-!autoListenStarted
-){
-
-autoListenStarted =
-true;
-
-setTimeout(
-startSpeech,
-650
-);
-
-}
 
 }
 
 /* =========================================================
 EVENTS
 ========================================================= */
-
-document.addEventListener(
-"keydown",
-event =>{
-
-if(
-event.key ===
-"Escape"
-){
-
-closeArticle();
-
-}
-
-}
-);
 
 window.addEventListener(
 "storage",
@@ -2743,7 +2170,7 @@ event.key ===
 LANGUAGE_KEY
 ){
 
-refreshArticle();
+scheduleRefresh();
 
 }
 
@@ -2752,12 +2179,12 @@ refreshArticle();
 
 window.addEventListener(
 "petsdogue:languagechange",
-refreshArticle
+scheduleRefresh
 );
 
 window.addEventListener(
 "languagechange",
-refreshArticle
+scheduleRefresh
 );
 
 window.addEventListener(
@@ -2771,18 +2198,76 @@ stopSpeech
 );
 
 document.addEventListener(
+"keydown",
+event =>{
+
+if(
+event.key ===
+"Escape"
+){
+
+goToArticles();
+
+}
+
+}
+);
+
+/* =========================================================
+INIT
+========================================================= */
+
+document.addEventListener(
 "DOMContentLoaded",
-initialiseArticle
+()=>{
+
+currentStoryKey =
+getStoryKey();
+
+renderArticle();
+
+const observer =
+new MutationObserver(
+mutations =>{
+
+const changed =
+mutations.some(
+mutation =>
+mutation.type ===
+"attributes" &&
+(
+mutation.attributeName ===
+"lang" ||
+mutation.attributeName ===
+"dir"
+)
 );
 
 if(
-"speechSynthesis" in window
+changed
 ){
 
-window.speechSynthesis.onvoiceschanged =
-function(){};
+scheduleRefresh();
 
 }
+
+}
+);
+
+observer.observe(
+document.documentElement,
+{
+attributes:true,
+attributeFilter:[
+"lang",
+"dir"
+]
+}
+);
+
+}
+);
+
 </script>
 
 </body>
