@@ -41,18 +41,13 @@ font-family:Arial,Helvetica,sans-serif;
 overflow-x:hidden;
 }
 
-body.menu-open{
-overflow:hidden;
-}
-
 a{
 color:inherit;
 text-decoration:none;
 }
 
 button,
-input,
-select{
+input{
 font:inherit;
 }
 
@@ -67,7 +62,7 @@ max-width:100%;
 }
 
 /* =========================================================
-GLOBAL MAGAZINE HEADER
+HEADER
 ========================================================= */
 
 .site-header{
@@ -80,90 +75,77 @@ border-bottom:1px solid #292929;
 }
 
 .header-main{
-height:118px;
-max-width:1500px;
+height:112px;
+max-width:1550px;
 margin:auto;
-padding:0 22px;
+padding:0 18px;
 display:grid;
-grid-template-columns:86px minmax(0,1fr) 86px;
+grid-template-columns:80px minmax(0,1fr) 80px;
 align-items:center;
 }
 
-.icon-button{
-width:58px;
-height:58px;
+.menu-button,
+.home-button{
+width:52px;
+height:52px;
 display:flex;
 align-items:center;
 justify-content:center;
 border:0;
 background:transparent;
 color:#fff;
-border-radius:50%;
 }
 
 .menu-lines{
-width:42px;
+width:34px;
 display:grid;
-gap:8px;
+gap:7px;
 }
 
 .menu-lines span{
 display:block;
-height:4px;
+height:3px;
 background:#fff;
 border-radius:999px;
 }
 
-.brand{
-text-align:center;
-line-height:.84;
-color:var(--gold);
-}
-
-.brand-small{
-font:16px Georgia,serif;
-letter-spacing:3px;
-color:var(--gold);
-text-transform:uppercase;
-margin-bottom:7px;
-}
-
-.brand-big{
-font:normal 64px Georgia,serif;
-letter-spacing:4px;
-}
-
 .home-button{
-width:58px;
-height:58px;
-display:flex;
-align-items:center;
-justify-content:center;
 margin-left:auto;
-color:#fff;
 }
 
 .home-button svg{
-width:45px;
-height:45px;
+width:35px;
+height:35px;
 stroke:currentColor;
 stroke-width:2;
 fill:none;
 }
 
-/* =========================================================
-CATEGORY NAVIGATION
-========================================================= */
+.brand{
+text-align:center;
+line-height:.9;
+color:var(--gold);
+}
+
+.brand-small{
+font:15px Georgia,serif;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.brand-big{
+font:normal 58px Georgia,serif;
+letter-spacing:4px;
+}
 
 .category-nav{
 display:flex;
-align-items:center;
-gap:42px;
+gap:36px;
 overflow-x:auto;
 overflow-y:hidden;
-padding:21px 30px 18px;
+padding:16px 28px 15px;
 border-top:1px solid #292929;
-border-bottom:1px solid #303030;
+border-bottom:1px solid #292929;
 scrollbar-width:none;
 -webkit-overflow-scrolling:touch;
 }
@@ -176,11 +158,11 @@ display:none;
 position:relative;
 flex:none;
 white-space:nowrap;
-font-size:18px;
+font-size:14px;
 font-weight:800;
 letter-spacing:.7px;
+padding-bottom:8px;
 text-transform:uppercase;
-padding-bottom:10px;
 }
 
 .category-nav a.active{
@@ -194,12 +176,10 @@ left:0;
 right:0;
 bottom:0;
 height:3px;
-background:
-linear-gradient(
+background:linear-gradient(
 90deg,
 #8d6716,
 #f3d77a,
-#fff0a9,
 #9f761c
 );
 }
@@ -208,12 +188,16 @@ linear-gradient(
 SIDE MENU
 ========================================================= */
 
+body.menu-open{
+overflow:hidden;
+}
+
 .menu-overlay{
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.72);
 display:none;
-z-index:2400;
+z-index:2500;
 }
 
 .menu-overlay.show{
@@ -225,12 +209,11 @@ position:fixed;
 top:0;
 left:-100%;
 width:min(430px,94%);
-height:100dvh;
+height:100vh;
 background:#fff;
-color:#111;
-z-index:2500;
+z-index:2600;
 overflow-y:auto;
-transition:left .32s ease;
+transition:.35s;
 border-right:2px solid #111;
 }
 
@@ -241,77 +224,122 @@ left:0;
 .side-menu-header{
 background:#111;
 color:#fff;
-min-height:92px;
-padding:20px;
+padding:24px;
 display:flex;
 align-items:center;
 justify-content:space-between;
 position:sticky;
 top:0;
-z-index:2;
+z-index:3;
 }
 
 .side-menu-header h2{
-font:normal 34px Georgia,serif;
+font:normal 32px Georgia,serif;
 }
 
-.side-menu-close{
-width:45px;
-height:45px;
-border:1px solid #555;
+.side-menu-header button{
+width:43px;
+height:43px;
+border:0;
+background:#fff;
 border-radius:50%;
-background:#111;
-color:#fff;
-font-size:28px;
-line-height:1;
-display:flex;
-align-items:center;
-justify-content:center;
+font-size:24px;
 }
 
-.side-menu-links{
-padding:16px;
+.menu-account{
 display:grid;
-gap:9px;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:18px 18px 12px;
 }
 
-.side-menu-links a{
-min-height:52px;
-padding:0 16px;
-border:1.5px solid #111;
-border-radius:14px;
-display:flex;
-align-items:center;
-font-weight:800;
-font-size:14px;
-background:#faf8f3;
+.menu-account a{
+padding:12px;
+text-align:center;
+border:2px solid #111;
+border-radius:999px;
+font-weight:bold;
 }
 
-.side-menu-links a.active{
-background:#111;
-color:#fff;
+.menu-account a:last-child{
+background:var(--green);
+border-color:var(--green);
 }
 
-.side-menu-language{
-padding:5px 16px 20px;
+.menu-language{
+padding:0 18px 18px;
+border-bottom:1px solid #ddd;
 }
 
-.side-menu-language label{
+.menu-language span{
 display:block;
 font-size:10px;
 font-weight:bold;
 letter-spacing:1.5px;
 color:#777;
-margin:0 0 8px;
+margin:5px 0 8px;
 }
 
-.side-menu-language select{
+.menu-language select{
 width:100%;
 height:48px;
 border:2px solid #111;
 border-radius:999px;
 background:#faf8f3;
 padding:0 15px;
+}
+
+.menu-list{
+padding:18px;
+display:grid;
+gap:12px;
+}
+
+.menu-item{
+display:grid;
+grid-template-columns:82px minmax(0,1fr);
+align-items:center;
+gap:14px;
+border:2px solid #111;
+background:#faf8f3;
+border-radius:21px;
+overflow:hidden;
+}
+
+.menu-item img{
+width:82px;
+height:82px;
+object-fit:cover;
+}
+
+.menu-item h3{
+font:21px Georgia,serif;
+margin-bottom:4px;
+}
+
+.menu-item p{
+font-size:12px;
+line-height:1.45;
+color:#666;
+padding-right:9px;
+}
+
+.menu-bottom{
+padding:18px;
+background:#f4f0e7;
+border-top:1px solid #ddd;
+}
+
+.menu-bottom div{
+display:flex;
+flex-wrap:wrap;
+gap:13px 20px;
+}
+
+.menu-bottom a{
+font-size:12px;
+font-weight:bold;
+color:#666;
 }
 
 /* =========================================================
@@ -388,82 +416,13 @@ color:#ddd;
 }
 
 /* =========================================================
-SEARCH
-========================================================= */
-
-.search-section{
-max-width:1400px;
-margin:auto;
-padding:28px 18px 18px;
-}
-
-.search-box{
-height:62px;
-display:grid;
-grid-template-columns:48px minmax(0,1fr) 52px;
-align-items:center;
-background:#fff;
-border:2px solid #b9b7b0;
-border-radius:999px;
-overflow:hidden;
-}
-
-.search-icon{
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.search-icon svg{
-width:25px;
-height:25px;
-fill:none;
-stroke:#111;
-stroke-width:2;
-}
-
-.search-box input{
-width:100%;
-height:100%;
-border:0;
-outline:0;
-background:transparent;
-font-size:17px;
-color:#111;
-min-width:0;
-}
-
-.search-box input::placeholder{
-color:#999;
-}
-
-.search-clear{
-width:44px;
-height:44px;
-border:0;
-border-radius:50%;
-background:#111;
-color:#fff;
-font-size:23px;
-display:flex;
-align-items:center;
-justify-content:center;
-margin-right:7px;
-visibility:hidden;
-}
-
-.search-clear.show{
-visibility:visible;
-}
-
-/* =========================================================
 TITLE
 ========================================================= */
 
 .list-heading{
 max-width:1400px;
 margin:auto;
-padding:17px 18px 18px;
+padding:34px 18px 18px;
 }
 
 .list-heading h2{
@@ -637,25 +596,6 @@ line-height:1;
 margin-left:9px;
 }
 
-.empty-state{
-display:none;
-grid-column:1 / -1;
-background:#fff;
-border:2px solid #111;
-padding:50px 20px;
-text-align:center;
-}
-
-.empty-state h3{
-font:normal 34px Georgia,serif;
-margin-bottom:8px;
-}
-
-.empty-state p{
-font-size:14px;
-color:#777;
-}
-
 /* =========================================================
 RTL
 ========================================================= */
@@ -665,7 +605,6 @@ left:auto;
 right:-100%;
 border-right:0;
 border-left:2px solid #111;
-transition:right .32s ease;
 }
 
 html[dir="rtl"] .side-menu.open{
@@ -673,13 +612,13 @@ right:0;
 left:auto;
 }
 
-html[dir="rtl"] .card-copy{
-text-align:right;
+html[dir="rtl"] .menu-item p{
+padding-right:0;
+padding-left:9px;
 }
 
-html[dir="rtl"] .search-clear{
-margin-right:0;
-margin-left:7px;
+html[dir="rtl"] .card-copy{
+text-align:right;
 }
 
 html[dir="rtl"] .read-button:after{
@@ -695,53 +634,43 @@ MOBILE
 @media(max-width:760px){
 
 .header-main{
-height:122px;
-grid-template-columns:68px minmax(0,1fr) 68px;
-padding:0 13px;
+height:112px;
+grid-template-columns:60px minmax(0,1fr) 60px;
+padding:0 11px;
 }
 
-.icon-button{
-width:58px;
-height:58px;
+.menu-button,
+.home-button{
+width:50px;
+height:50px;
 }
 
 .menu-lines{
-width:40px;
+width:34px;
 gap:7px;
 }
 
-.menu-lines span{
-height:4px;
-}
-
 .brand-big{
-font-size:50px;
+font-size:52px;
 letter-spacing:2px;
 }
 
 .brand-small{
 font-size:12px;
-letter-spacing:2.5px;
-}
-
-.home-button{
-width:58px;
-height:58px;
 }
 
 .home-button svg{
-width:43px;
-height:43px;
+width:33px;
+height:33px;
 }
 
 .category-nav{
-gap:37px;
-padding:20px 28px 17px;
+padding:14px 22px 13px;
+gap:34px;
 }
 
 .category-nav a{
-font-size:17px;
-padding-bottom:9px;
+font-size:13px;
 }
 
 .page-intro{
@@ -757,21 +686,8 @@ font-size:17px;
 line-height:1.5;
 }
 
-.search-section{
-padding:23px 14px 11px;
-}
-
-.search-box{
-height:58px;
-grid-template-columns:44px minmax(0,1fr) 50px;
-}
-
-.search-box input{
-font-size:16px;
-}
-
 .list-heading{
-padding:17px 14px 15px;
+padding:28px 14px 15px;
 }
 
 .list-heading h2{
@@ -800,25 +716,11 @@ font-size:37px;
 @media(max-width:430px){
 
 .header-main{
-height:120px;
+height:112px;
 }
 
 .brand-big{
-font-size:46px;
-}
-
-.brand-small{
-font-size:11px;
-}
-
-.category-nav{
-gap:34px;
-padding-left:24px;
-padding-right:24px;
-}
-
-.category-nav a{
-font-size:16px;
+font-size:48px;
 }
 
 .page-intro h1{
@@ -866,10 +768,6 @@ scroll-behavior:auto;
 transition:none;
 }
 
-.side-menu{
-transition:none;
-}
-
 }
 </style>
 </head>
@@ -894,7 +792,6 @@ Contents
 </h2>
 
 <button
-class="side-menu-close"
 type="button"
 onclick="closeMenu()"
 aria-label="Close menu"
@@ -904,111 +801,32 @@ aria-label="Close menu"
 
 </div>
 
-<nav class="side-menu-links">
+<div class="menu-account">
 
 <a
-href="issue-01.html"
-data-i18n="common.navigation.magazine"
+href="account.html"
+data-i18n="common.menu.signIn"
 >
-Magazine
-</a>
-
-<a
-class="active"
-href="articles.html"
-data-i18n="common.navigation.articles"
->
-Articles
-</a>
-
-<a
-href="photos.html"
-data-i18n="common.navigation.photos"
->
-Photos
-</a>
-
-<a
-href="members-gallery.html"
-data-i18n="common.navigation.coverStars"
->
-Cover Stars
-</a>
-
-<a
-href="pet-fashion.html"
-data-i18n="common.navigation.fashion"
->
-Fashion
-</a>
-
-<a
-href="wellness.html"
-data-i18n="common.navigation.wellness"
->
-Wellness
-</a>
-
-<a
-href="pet-travel.html"
-data-i18n="common.navigation.travel"
->
-Travel
-</a>
-
-<a
-href="pet-friendly-places.html"
-data-i18n="common.navigation.places"
->
-Places
-</a>
-
-<a
-href="pets-in-need.html"
-data-i18n="common.navigation.rescue"
->
-Rescue
-</a>
-
-<a
-href="contests.html"
-data-i18n="common.navigation.contests"
->
-Contests
-</a>
-
-<a
-href="local-community.html"
-data-i18n="common.navigation.community"
->
-Community
-</a>
-
-<a
-href="pet-marketplace.html"
-data-i18n="common.navigation.marketplace"
->
-Marketplace
+Sign In
 </a>
 
 <a
 href="club.html"
-data-i18n="common.footer.club"
+data-i18n="common.menu.joinClub"
 >
-Club
+Join Club
 </a>
 
-</nav>
+</div>
 
-<div class="side-menu-language">
+<div class="menu-language">
 
-<label
+<span
 class="notranslate"
 translate="no"
-for="languageSelect"
 >
 LANGUAGE
-</label>
+</span>
 
 <select id="languageSelect">
 
@@ -1040,6 +858,262 @@ LANGUAGE
 
 </div>
 
+<div class="menu-list">
+
+<a
+class="menu-item"
+href="issue-01.html"
+>
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Magazine"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.magazine">
+Magazine
+</h3>
+
+<p data-i18n="common.menu.latestIssueDescription">
+Open the newest PETS & DOGUE digital magazine.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="articles.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
+alt="Articles"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.articles">
+Articles
+</h3>
+
+<p data-i18n="common.menu.articlesDescription">
+Read and listen to editorial stories.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="photos.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
+alt="Photos"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.photos">
+Photos
+</h3>
+
+<p data-i18n="common.menu.photosDescription">
+Portraits, galleries and visual stories.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="members-gallery.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+alt="Cover Stars"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.coverStars">
+Cover Stars
+</h3>
+
+<p data-i18n="common.menu.coverStarDescription">
+Enter your pet and compete for the next cover.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="pet-fashion.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
+alt="Fashion"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.fashion">
+Fashion
+</h3>
+
+<p data-i18n="common.menu.fashionDescription">
+Luxury style, shopping and editorial looks.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="pet-travel.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
+alt="Travel"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.travel">
+Travel
+</h3>
+
+<p data-i18n="common.menu.travelDescription">
+Hotels, beaches and pet-friendly journeys.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="wellness.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80"
+alt="Wellness"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.wellness">
+Wellness
+</h3>
+
+<p>
+Health, care, wellness and everyday guidance.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="pets-in-need.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+alt="Rescue"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.rescue">
+Rescue
+</h3>
+
+<p data-i18n="common.menu.rescueDescription">
+Rescue, adoption and stories that need visibility.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="pet-marketplace.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+alt="Marketplace"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.marketplace">
+Marketplace
+</h3>
+
+<p data-i18n="common.menu.marketplaceDescription">
+Community listings, services and accessories.
+</p>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="menu-bottom">
+
+<div>
+
+<a
+href="contact.html"
+data-i18n="common.footer.contact"
+>
+Contact
+</a>
+
+<a
+href="privacy.html"
+data-i18n="common.footer.privacy"
+>
+Privacy
+</a>
+
+<a
+href="terms.html"
+data-i18n="common.footer.terms"
+>
+Terms
+</a>
+
+<a
+href="admin.html"
+data-i18n="common.footer.admin"
+>
+Admin
+</a>
+
+</div>
+
+</div>
+
 </aside>
 
 <header class="site-header">
@@ -1047,7 +1121,7 @@ LANGUAGE
 <div class="header-main">
 
 <button
-class="icon-button"
+class="menu-button"
 type="button"
 onclick="openMenu()"
 aria-label="Open menu"
@@ -1217,41 +1291,6 @@ Stories, guides and editorial features. Read each article or listen to it.
 
 </section>
 
-<section class="search-section">
-
-<div class="search-box">
-
-<span class="search-icon">
-
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<circle cx="11" cy="11" r="7"></circle>
-<path d="M16.5 16.5L21 21"></path>
-</svg>
-
-</span>
-
-<input
-id="articleSearch"
-type="search"
-placeholder="Search articles..."
-autocomplete="off"
-oninput="filterArticles()"
->
-
-<button
-class="search-clear"
-id="searchClear"
-type="button"
-onclick="clearSearch()"
-aria-label="Clear search"
->
-×
-</button>
-
-</div>
-
-</section>
-
 <section class="list-heading">
 
 <h2 id="latestTitle">
@@ -1279,7 +1318,6 @@ id="articleGrid"
 <article
 class="article-card"
 data-story="photoshoot"
-data-search="photoshoot photography cover star magazine portrait grooming"
 >
 
 <img
@@ -1337,7 +1375,6 @@ Read
 <article
 class="article-card"
 data-story="travel"
-data-search="travel hotels luxury pet friendly hotel holiday journey"
 >
 
 <img
@@ -1395,7 +1432,6 @@ Read
 <article
 class="article-card"
 data-story="fashion"
-data-search="fashion pet style luxury clothing clothes accessories comfort"
 >
 
 <img
@@ -1453,7 +1489,6 @@ Read
 <article
 class="article-card"
 data-story="wellness"
-data-search="wellness health routine calm pet care wellbeing"
 >
 
 <img
@@ -1511,12 +1546,11 @@ Read
 <article
 class="article-card"
 data-story="rescue"
-data-search="rescue adoption visibility animal life help shelter"
 >
 
 <img
 class="article-card-image"
-src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1400&q=85"
+src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=1400&q=85"
 alt="Rescue animal"
 >
 
@@ -1569,7 +1603,6 @@ Read
 <article
 class="article-card"
 data-story="places"
-data-search="places dogue trust pet friendly recommendations guide"
 >
 
 <img
@@ -1627,7 +1660,6 @@ Read
 <article
 class="article-card"
 data-story="volunteers"
-data-search="volunteers community rescue helping animals foster photography transport"
 >
 
 <img
@@ -1685,7 +1717,6 @@ Read
 <article
 class="article-card"
 data-story="community"
-data-search="community local owners pets recommendations nearby local"
 >
 
 <img
@@ -1740,21 +1771,6 @@ Read
 
 </article>
 
-<div
-class="empty-state"
-id="emptyState"
->
-
-<h3 id="emptyTitle">
-No articles found
-</h3>
-
-<p id="emptyText">
-Try another word or clear the search.
-</p>
-
-</div>
-
 </div>
 
 </main>
@@ -1766,10 +1782,6 @@ Try another word or clear the search.
 <script>
 "use strict";
 
-/* =========================================================
-STATE
-========================================================= */
-
 const LANGUAGE_KEY =
 "pets_dogue_language";
 
@@ -1779,339 +1791,262 @@ null;
 let previewUtterance =
 null;
 
-/* =========================================================
-UI TRANSLATIONS
-========================================================= */
-
 const UI = {
 
 en:{
 kicker:"PETS & DOGUE EDITORIAL",
 title:"Articles",
 intro:"Stories, guides and editorial features. Read each article or listen to it.",
-search:"Search articles...",
 latest:"Latest Stories",
 stories:"stories",
 listen:"Listen",
 stop:"Stop",
-read:"Read",
-emptyTitle:"No articles found",
-emptyText:"Try another word or clear the search."
+read:"Read"
 },
 
 ru:{
 kicker:"РЕДАКЦИЯ PETS & DOGUE",
 title:"Статьи",
 intro:"Истории, гиды и редакционные материалы. Каждую статью можно читать или слушать.",
-search:"Поиск статей...",
 latest:"Последние истории",
 stories:"историй",
 listen:"Слушать",
 stop:"Стоп",
-read:"Читать",
-emptyTitle:"Статьи не найдены",
-emptyText:"Попробуйте другое слово или очистите поиск."
+read:"Читать"
 },
 
 uk:{
 kicker:"РЕДАКЦІЯ PETS & DOGUE",
 title:"Статті",
 intro:"Історії, гіди та редакційні матеріали. Кожну статтю можна читати або слухати.",
-search:"Пошук статей...",
 latest:"Останні історії",
 stories:"історій",
 listen:"Слухати",
 stop:"Стоп",
-read:"Читати",
-emptyTitle:"Статті не знайдено",
-emptyText:"Спробуйте інше слово або очистьте пошук."
+read:"Читати"
 },
 
 fr:{
 kicker:"RÉDACTION PETS & DOGUE",
 title:"Articles",
 intro:"Histoires, guides et sujets éditoriaux. Lisez chaque article ou écoutez-le.",
-search:"Rechercher des articles...",
 latest:"Dernières histoires",
 stories:"histoires",
 listen:"Écouter",
 stop:"Arrêter",
-read:"Lire",
-emptyTitle:"Aucun article trouvé",
-emptyText:"Essayez un autre mot ou effacez la recherche."
+read:"Lire"
 },
 
 de:{
 kicker:"PETS & DOGUE REDAKTION",
 title:"Artikel",
 intro:"Geschichten, Ratgeber und redaktionelle Beiträge. Lesen oder hören Sie jeden Artikel.",
-search:"Artikel suchen...",
 latest:"Neueste Geschichten",
 stories:"Artikel",
 listen:"Anhören",
 stop:"Stopp",
-read:"Lesen",
-emptyTitle:"Keine Artikel gefunden",
-emptyText:"Versuchen Sie ein anderes Wort oder löschen Sie die Suche."
+read:"Lesen"
 },
 
 es:{
 kicker:"REDACCIÓN PETS & DOGUE",
 title:"Artículos",
 intro:"Historias, guías y contenidos editoriales. Lee cada artículo o escúchalo.",
-search:"Buscar artículos...",
 latest:"Últimas historias",
 stories:"historias",
 listen:"Escuchar",
 stop:"Detener",
-read:"Leer",
-emptyTitle:"No se encontraron artículos",
-emptyText:"Prueba otra palabra o borra la búsqueda."
+read:"Leer"
 },
 
 it:{
 kicker:"REDAZIONE PETS & DOGUE",
 title:"Articoli",
 intro:"Storie, guide e contenuti editoriali. Leggi ogni articolo oppure ascoltalo.",
-search:"Cerca articoli...",
 latest:"Ultime storie",
 stories:"storie",
 listen:"Ascolta",
 stop:"Ferma",
-read:"Leggi",
-emptyTitle:"Nessun articolo trovato",
-emptyText:"Prova un'altra parola o cancella la ricerca."
+read:"Leggi"
 },
 
 pt:{
 kicker:"EDITORIAL PETS & DOGUE",
 title:"Artigos",
 intro:"Histórias, guias e conteúdos editoriais. Leia cada artigo ou ouça-o.",
-search:"Pesquisar artigos...",
 latest:"Últimas histórias",
 stories:"histórias",
 listen:"Ouvir",
 stop:"Parar",
-read:"Ler",
-emptyTitle:"Nenhum artigo encontrado",
-emptyText:"Experimente outra palavra ou limpe a pesquisa."
+read:"Ler"
 },
 
 nl:{
 kicker:"PETS & DOGUE REDACTIE",
 title:"Artikelen",
 intro:"Verhalen, gidsen en redactionele stukken. Lees elk artikel of luister ernaar.",
-search:"Artikelen zoeken...",
 latest:"Laatste verhalen",
 stories:"verhalen",
 listen:"Luisteren",
 stop:"Stoppen",
-read:"Lezen",
-emptyTitle:"Geen artikelen gevonden",
-emptyText:"Probeer een ander woord of wis de zoekopdracht."
+read:"Lezen"
 },
 
 pl:{
 kicker:"REDAKCJA PETS & DOGUE",
 title:"Artykuły",
 intro:"Historie, poradniki i materiały redakcyjne. Każdy artykuł możesz przeczytać lub posłuchać.",
-search:"Szukaj artykułów...",
 latest:"Najnowsze historie",
 stories:"historii",
 listen:"Słuchaj",
 stop:"Stop",
-read:"Czytaj",
-emptyTitle:"Nie znaleziono artykułów",
-emptyText:"Spróbuj innego słowa lub wyczyść wyszukiwanie."
+read:"Czytaj"
 },
 
 cs:{
 kicker:"REDAKCE PETS & DOGUE",
 title:"Články",
 intro:"Příběhy, průvodci a redakční obsah. Každý článek si můžete přečíst nebo poslechnout.",
-search:"Hledat články...",
 latest:"Nejnovější příběhy",
 stories:"článků",
 listen:"Poslouchat",
 stop:"Zastavit",
-read:"Číst",
-emptyTitle:"Žádné články nenalezeny",
-emptyText:"Zkuste jiné slovo nebo vymažte hledání."
+read:"Číst"
 },
 
 sk:{
 kicker:"REDAKCIA PETS & DOGUE",
 title:"Články",
 intro:"Príbehy, sprievodcovia a redakčný obsah. Každý článok si môžete prečítať alebo vypočuť.",
-search:"Hľadať články...",
 latest:"Najnovšie príbehy",
 stories:"článkov",
 listen:"Počúvať",
 stop:"Zastaviť",
-read:"Čítať",
-emptyTitle:"Nenašli sa žiadne články",
-emptyText:"Skúste iné slovo alebo vymažte vyhľadávanie."
+read:"Čítať"
 },
 
 hu:{
 kicker:"PETS & DOGUE SZERKESZTŐSÉG",
 title:"Cikkek",
 intro:"Történetek, útmutatók és szerkesztőségi anyagok. Minden cikk olvasható vagy meghallgatható.",
-search:"Cikkek keresése...",
 latest:"Legújabb történetek",
 stories:"cikk",
 listen:"Hallgatás",
 stop:"Leállítás",
-read:"Olvasás",
-emptyTitle:"Nem található cikk",
-emptyText:"Próbáljon másik szót vagy törölje a keresést."
+read:"Olvasás"
 },
 
 ro:{
 kicker:"REDAȚIA PETS & DOGUE",
 title:"Articole",
 intro:"Povești, ghiduri și materiale editoriale. Citiți fiecare articol sau ascultați-l.",
-search:"Caută articole...",
 latest:"Cele mai noi povești",
 stories:"articole",
 listen:"Ascultă",
 stop:"Oprire",
-read:"Citește",
-emptyTitle:"Nu s-au găsit articole",
-emptyText:"Încercați alt cuvânt sau ștergeți căutarea."
+read:"Citește"
 },
 
 bg:{
 kicker:"РЕДАКЦИЯ PETS & DOGUE",
 title:"Статии",
 intro:"Истории, гидове и редакционни материали. Всяка статия може да бъде прочетена или слушана.",
-search:"Търсене на статии...",
 latest:"Последни истории",
 stories:"статии",
 listen:"Слушай",
 stop:"Стоп",
-read:"Чети",
-emptyTitle:"Няма намерени статии",
-emptyText:"Опитайте друга дума или изчистете търсенето."
+read:"Чети"
 },
 
 el:{
 kicker:"ΣΥΝΤΑΞΗ PETS & DOGUE",
 title:"Άρθρα",
 intro:"Ιστορίες, οδηγοί και editorial θέματα. Διαβάστε κάθε άρθρο ή ακούστε το.",
-search:"Αναζήτηση άρθρων...",
 latest:"Τελευταίες ιστορίες",
 stories:"άρθρα",
 listen:"Ακρόαση",
 stop:"Διακοπή",
-read:"Ανάγνωση",
-emptyTitle:"Δεν βρέθηκαν άρθρα",
-emptyText:"Δοκιμάστε άλλη λέξη ή καθαρίστε την αναζήτηση."
+read:"Ανάγνωση"
 },
 
 sv:{
 kicker:"PETS & DOGUE REDAKTION",
 title:"Artiklar",
 intro:"Berättelser, guider och redaktionellt innehåll. Läs varje artikel eller lyssna på den.",
-search:"Sök artiklar...",
 latest:"Senaste berättelserna",
 stories:"artiklar",
 listen:"Lyssna",
 stop:"Stoppa",
-read:"Läs",
-emptyTitle:"Inga artiklar hittades",
-emptyText:"Prova ett annat ord eller rensa sökningen."
+read:"Läs"
 },
 
 da:{
 kicker:"PETS & DOGUE REDAKTION",
 title:"Artikler",
 intro:"Historier, guider og redaktionelt indhold. Læs hver artikel eller lyt til den.",
-search:"Søg artikler...",
 latest:"Seneste historier",
 stories:"artikler",
 listen:"Lyt",
 stop:"Stop",
-read:"Læs",
-emptyTitle:"Ingen artikler fundet",
-emptyText:"Prøv et andet ord eller ryd søgningen."
+read:"Læs"
 },
 
 no:{
 kicker:"PETS & DOGUE REDAKSJON",
 title:"Artikler",
 intro:"Historier, guider og redaksjonelt innhold. Les hver artikkel eller lytt til den.",
-search:"Søk i artikler...",
 latest:"Siste historier",
 stories:"artikler",
 listen:"Lytt",
 stop:"Stopp",
-read:"Les",
-emptyTitle:"Ingen artikler funnet",
-emptyText:"Prøv et annet ord eller tøm søket."
+read:"Les"
 },
 
 fi:{
 kicker:"PETS & DOGUE -TOIMITUS",
 title:"Artikkelit",
 intro:"Tarinoita, oppaita ja toimituksellisia sisältöjä. Lue jokainen artikkeli tai kuuntele se.",
-search:"Hae artikkeleita...",
 latest:"Uusimmat tarinat",
 stories:"artikkelia",
 listen:"Kuuntele",
 stop:"Pysäytä",
-read:"Lue",
-emptyTitle:"Artikkeleita ei löytynyt",
-emptyText:"Kokeile toista sanaa tai tyhjennä haku."
+read:"Lue"
 },
 
 tr:{
 kicker:"PETS & DOGUE EDİTORYAL",
 title:"Makaleler",
 intro:"Hikâyeler, rehberler ve editoryal içerikler. Her makaleyi okuyun veya dinleyin.",
-search:"Makale ara...",
 latest:"Son Hikâyeler",
 stories:"makale",
 listen:"Dinle",
 stop:"Durdur",
-read:"Oku",
-emptyTitle:"Makale bulunamadı",
-emptyText:"Başka bir kelime deneyin veya aramayı temizleyin."
+read:"Oku"
 },
 
 ar:{
 kicker:"هيئة تحرير PETS & DOGUE",
 title:"المقالات",
 intro:"قصص وأدلة ومواد تحريرية. اقرأ كل مقال أو استمع إليه.",
-search:"ابحث في المقالات...",
 latest:"أحدث القصص",
 stories:"مقالات",
 listen:"استمع",
 stop:"إيقاف",
-read:"اقرأ",
-emptyTitle:"لم يتم العثور على مقالات",
-emptyText:"جرّب كلمة أخرى أو امسح البحث."
+read:"اقرأ"
 },
 
 hi:{
 kicker:"PETS & DOGUE संपादकीय",
 title:"लेख",
 intro:"कहानियाँ, गाइड और संपादकीय सामग्री। हर लेख पढ़ें या सुनें।",
-search:"लेख खोजें...",
 latest:"नवीनतम कहानियाँ",
 stories:"लेख",
 listen:"सुनें",
 stop:"रोकें",
-read:"पढ़ें",
-emptyTitle:"कोई लेख नहीं मिला",
-emptyText:"दूसरा शब्द आज़माएँ या खोज साफ़ करें।"
+read:"पढ़ें"
 }
 
 };
-
-/* =========================================================
-FALLBACK STORY TEXT
-========================================================= */
 
 const FALLBACK_STORIES = {
 
@@ -2165,10 +2100,6 @@ intro:"Local experiences can help other owners discover trusted places, services
 
 };
 
-/* =========================================================
-LANGUAGE
-========================================================= */
-
 function normaliseLanguageCode(
 value
 ){
@@ -2182,7 +2113,9 @@ return "en";
 }
 
 let code =
-String(value)
+String(
+value
+)
 .trim()
 .toLowerCase();
 
@@ -2326,18 +2259,18 @@ bundle.stories &&
 bundle.stories[storyKey]
 ){
 
-return bundle.stories[storyKey];
+return bundle.stories[
+storyKey
+];
 
 }
 
-return FALLBACK_STORIES[storyKey] ||
+return FALLBACK_STORIES[
+storyKey
+] ||
 null;
 
 }
-
-/* =========================================================
-MENU
-========================================================= */
 
 function openMenu(){
 
@@ -2395,9 +2328,38 @@ document.body
 
 }
 
-/* =========================================================
-RENDER
-========================================================= */
+function keepArticlesVisible(){
+
+const active =
+document
+.getElementById(
+"categoryNav"
+)
+?.querySelector(
+".active"
+);
+
+if(
+!active
+){
+
+return;
+
+}
+
+requestAnimationFrame(
+()=>{
+
+active.scrollIntoView({
+behavior:"instant",
+inline:"center",
+block:"nearest"
+});
+
+}
+);
+
+}
 
 function applyLanguage(){
 
@@ -2418,54 +2380,51 @@ language ===
 ? "rtl"
 : "ltr";
 
-const languageSelect =
-document.getElementById(
-"languageSelect"
-);
+document
+.getElementById(
+"pageKicker"
+)
+.textContent =
+ui.kicker;
+
+document
+.getElementById(
+"pageTitle"
+)
+.textContent =
+ui.title;
+
+document
+.getElementById(
+"pageIntro"
+)
+.textContent =
+ui.intro;
+
+document
+.getElementById(
+"latestTitle"
+)
+.textContent =
+ui.latest;
 
 if(
-languageSelect
+document.getElementById(
+"languageSelect"
+)
 ){
 
-languageSelect.value =
+document
+.getElementById(
+"languageSelect"
+)
+.value =
 language;
 
 }
 
-document.getElementById(
-"pageKicker"
-).textContent =
-ui.kicker;
-
-document.getElementById(
-"pageTitle"
-).textContent =
-ui.title;
-
-document.getElementById(
-"pageIntro"
-).textContent =
-ui.intro;
-
-document.getElementById(
-"articleSearch"
-).placeholder =
-ui.search;
-
-document.getElementById(
-"latestTitle"
-).textContent =
-ui.latest;
-
-document.getElementById(
-"emptyTitle"
-).textContent =
-ui.emptyTitle;
-
-document.getElementById(
-"emptyText"
-).textContent =
-ui.emptyText;
+let total =
+0;
 
 document
 .querySelectorAll(
@@ -2492,6 +2451,8 @@ if(
 return;
 
 }
+
+total++;
 
 const category =
 card.querySelector(
@@ -2569,172 +2530,22 @@ ui.read;
 }
 );
 
-filterArticles();
+document
+.getElementById(
+"resultsCount"
+)
+.textContent =
+total +
+" " +
+ui.stories;
 
 document.title =
 ui.title +
 " | PETS & DOGUE";
 
-setTimeout(
-keepArticlesNavVisible,
-80
-);
+keepArticlesVisible();
 
 }
-
-/* =========================================================
-FILTER
-========================================================= */
-
-function filterArticles(){
-
-const input =
-document.getElementById(
-"articleSearch"
-);
-
-const query =
-input.value
-.trim()
-.toLowerCase();
-
-const clearButton =
-document.getElementById(
-"searchClear"
-);
-
-clearButton.classList.toggle(
-"show",
-Boolean(query)
-);
-
-let visible =
-0;
-
-document
-.querySelectorAll(
-".article-card"
-)
-.forEach(
-card =>{
-
-const text =
-(
-card.dataset.search +
-" " +
-card.innerText
-)
-.toLowerCase();
-
-const show =
-!query ||
-text.includes(query);
-
-card.style.display =
-show
-? ""
-: "none";
-
-if(
-show
-){
-
-visible++;
-
-}
-
-}
-);
-
-const ui =
-getUi();
-
-document.getElementById(
-"resultsCount"
-).textContent =
-visible +
-" " +
-ui.stories;
-
-document.getElementById(
-"emptyState"
-).style.display =
-visible ===
-0
-? "block"
-: "none";
-
-}
-
-function clearSearch(){
-
-const input =
-document.getElementById(
-"articleSearch"
-);
-
-input.value =
-"";
-
-filterArticles();
-
-input.focus();
-
-}
-
-/* =========================================================
-NAV POSITION
-========================================================= */
-
-function keepArticlesNavVisible(){
-
-const nav =
-document.getElementById(
-"categoryNav"
-);
-
-if(
-!nav
-){
-
-return;
-
-}
-
-const active =
-nav.querySelector(
-".active"
-);
-
-if(
-!active
-){
-
-return;
-
-}
-
-const targetLeft =
-active.offsetLeft -
-(
-nav.clientWidth -
-active.offsetWidth
-) /
-2;
-
-nav.scrollTo({
-left:Math.max(
-0,
-targetLeft
-),
-behavior:"auto"
-});
-
-}
-
-/* =========================================================
-AUDIO PREVIEW
-========================================================= */
 
 function getNarrationLanguage(){
 
@@ -2921,8 +2732,12 @@ const text =
 story.title,
 story.intro
 ]
-.filter(Boolean)
-.join(". ");
+.filter(
+Boolean
+)
+.join(
+". "
+);
 
 if(
 !text
@@ -2935,7 +2750,9 @@ return;
 activePreviewButton =
 button;
 
-button.classList.add(
+button
+.classList
+.add(
 "speaking"
 );
 
@@ -2996,10 +2813,6 @@ utterance
 
 }
 
-/* =========================================================
-EVENTS
-========================================================= */
-
 document.addEventListener(
 "keydown",
 event =>{
@@ -3035,32 +2848,12 @@ document
 )
 ?.addEventListener(
 "change",
-event =>{
+()=>{
 
-const language =
-normaliseLanguageCode(
-event.target.value
+setTimeout(
+applyLanguage,
+80
 );
-
-localStorage.setItem(
-LANGUAGE_KEY,
-language
-);
-
-window.dispatchEvent(
-new CustomEvent(
-"petsdogue:languagechange",
-{
-detail:{
-language
-}
-}
-)
-);
-
-applyLanguage();
-
-closeMenu();
 
 }
 );
@@ -3101,24 +2894,20 @@ window.addEventListener(
 stopPreview
 );
 
-window.addEventListener(
-"pageshow",
-()=>{
-
-keepArticlesNavVisible();
-
-}
-);
-
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
 applyLanguage();
 
-keepArticlesNavVisible();
+keepArticlesVisible();
 
 }
+);
+
+window.addEventListener(
+"pageshow",
+keepArticlesVisible
 );
 
 if(
