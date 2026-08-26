@@ -36,10 +36,16 @@ padding:0
 }
 
 html{
-scroll-behavior:smooth
+scroll-behavior:smooth;
+width:100%;
+max-width:100%;
+overflow-x:hidden
 }
 
 body{
+width:100%;
+max-width:100%;
+min-width:0;
 background:var(--paper);
 color:var(--ink);
 font-family:var(--sans);
@@ -69,7 +75,8 @@ text-decoration:none
 
 img{
 display:block;
-width:100%
+width:100%;
+max-width:100%
 }
 
 [hidden]{
@@ -85,6 +92,9 @@ HEADER
 position:sticky;
 top:0;
 z-index:1800;
+width:100%;
+max-width:100vw;
+overflow:hidden;
 background:#050505;
 color:#fff;
 border-bottom:1px solid #272727
@@ -92,11 +102,12 @@ border-bottom:1px solid #272727
 
 .header-main{
 height:108px;
+width:100%;
 max-width:1550px;
 margin:auto;
 padding:0 18px;
 display:grid;
-grid-template-columns:80px 1fr 80px;
+grid-template-columns:80px minmax(0,1fr) 80px;
 align-items:center
 }
 
@@ -126,6 +137,7 @@ border-radius:999px
 }
 
 .brand{
+min-width:0;
 text-align:center;
 line-height:.88
 }
@@ -155,14 +167,18 @@ NAV
 ========================================================= */
 
 .nav-strip{
+width:100%;
+max-width:100%;
 display:flex;
 gap:30px;
 overflow-x:auto;
+overflow-y:hidden;
 padding:16px 24px;
 border-top:1px solid #292929;
 border-bottom:1px solid #303030;
 scrollbar-width:none;
-scroll-behavior:smooth
+scroll-behavior:smooth;
+-webkit-overflow-scrolling:touch
 }
 
 .nav-strip::-webkit-scrollbar{
@@ -171,6 +187,7 @@ display:none
 
 .nav-strip a{
 position:relative;
+flex:none;
 white-space:nowrap;
 font-size:14px;
 font-weight:bold;
@@ -220,11 +237,13 @@ position:fixed;
 top:0;
 left:-100%;
 width:min(430px,94%);
+max-width:94vw;
 height:100vh;
 background:#fff;
 color:#111;
 z-index:2600;
 overflow-y:auto;
+overflow-x:hidden;
 transition:.35s;
 border-right:2px solid #111
 }
@@ -308,8 +327,9 @@ gap:10px
 }
 
 .menu-item{
+min-width:0;
 display:grid;
-grid-template-columns:82px 1fr;
+grid-template-columns:82px minmax(0,1fr);
 align-items:center;
 gap:14px;
 border:2px solid #111;
@@ -330,10 +350,12 @@ margin-bottom:4px
 }
 
 .menu-item p{
+min-width:0;
 font-size:12px;
 line-height:1.45;
 color:#666;
-padding-right:9px
+padding-right:9px;
+overflow-wrap:anywhere
 }
 
 .menu-bottom{
@@ -360,36 +382,52 @@ PAGE
 ========================================================= */
 
 .market-shell{
+width:100%;
 max-width:1240px;
+min-width:0;
 margin:auto;
-padding:25px 26px 90px
+padding:25px 26px 90px;
+overflow:hidden
 }
 
 .market-intro{
+width:100%;
+min-width:0;
 display:grid;
-grid-template-columns:1fr auto;
+grid-template-columns:minmax(0,1fr) auto;
 gap:18px;
 align-items:end;
 margin-bottom:12px
 }
 
+.market-intro>div{
+min-width:0
+}
+
 .eyebrow{
+max-width:100%;
 color:var(--gold);
 font-size:12px;
 font-weight:900;
 letter-spacing:3px;
 text-transform:uppercase;
-margin-bottom:6px
+margin-bottom:6px;
+overflow-wrap:anywhere
 }
 
 .market-title{
+max-width:100%;
+min-width:0;
 font-family:var(--serif);
 font-size:58px;
 font-weight:400;
-line-height:.95
+line-height:.95;
+overflow-wrap:anywhere;
+word-break:normal
 }
 
 .saved-link{
+max-width:100%;
 border:0;
 background:none;
 font-size:16px;
@@ -408,6 +446,7 @@ LOCATION
 ========================================================= */
 
 .location-summary{
+width:100%;
 display:flex;
 align-items:center;
 gap:10px;
@@ -441,6 +480,7 @@ white-space:nowrap
 
 .location-edit{
 margin-left:auto;
+flex:none;
 border:1px solid #b6b1a7;
 width:32px;
 height:32px;
@@ -458,15 +498,19 @@ SEARCH
 ========================================================= */
 
 .search-wrap{
-position:relative
+position:relative;
+width:100%;
+min-width:0
 }
 
 .search-bar{
+width:100%;
+min-width:0;
 height:58px;
 background:#fff;
 border:1px solid #d2cec4;
 display:grid;
-grid-template-columns:48px 1fr 52px;
+grid-template-columns:48px minmax(0,1fr) 52px;
 align-items:center;
 padding:4px 5px 4px 7px
 }
@@ -511,6 +555,8 @@ LOCATION PANEL
 
 .location-panel{
 display:none;
+width:100%;
+min-width:0;
 margin-top:8px;
 background:#faf9f5;
 border:1px solid #839d63;
@@ -526,7 +572,8 @@ display:block
 display:flex;
 align-items:center;
 gap:9px;
-margin-bottom:13px
+margin-bottom:13px;
+min-width:0
 }
 
 .location-panel-icon{
@@ -561,7 +608,8 @@ white-space:nowrap
 margin-left:auto;
 display:flex;
 gap:7px;
-align-items:center
+align-items:center;
+flex:none
 }
 
 .location-done{
@@ -605,6 +653,7 @@ height:48px;
 padding:0 13px;
 outline:0;
 width:100%;
+min-width:0;
 background:#fff
 }
 
@@ -628,7 +677,8 @@ background:#fff;
 border:0;
 border-bottom:1px solid #eee;
 padding:12px 13px;
-font-size:14px
+font-size:14px;
+overflow-wrap:anywhere
 }
 
 .location-option:last-child{
@@ -676,6 +726,7 @@ POST BUTTON
 
 .market-post-main{
 width:100%;
+min-width:0;
 min-height:54px;
 border:1px solid #a97d1c;
 background:
@@ -696,7 +747,9 @@ align-items:center;
 justify-content:center;
 gap:9px;
 margin-top:10px;
-box-shadow:0 8px 19px rgba(174,130,31,.18)
+padding:10px 14px;
+box-shadow:0 8px 19px rgba(174,130,31,.18);
+text-align:center
 }
 
 .market-post-main:hover{
@@ -706,7 +759,8 @@ filter:brightness(1.03)
 .post-plus{
 font-size:25px;
 font-weight:400;
-line-height:1
+line-height:1;
+flex:none
 }
 
 
@@ -720,6 +774,7 @@ right:16px;
 bottom:18px;
 z-index:1200;
 height:49px;
+max-width:calc(100vw - 32px);
 padding:0 18px;
 border:1px solid #b1862d;
 background:#090909;
@@ -743,11 +798,15 @@ QUICK FILTERS
 ========================================================= */
 
 .quick-row{
+width:100%;
+max-width:100%;
 display:flex;
 gap:8px;
 overflow-x:auto;
+overflow-y:hidden;
 scrollbar-width:none;
-padding:10px 0 2px
+padding:10px 0 2px;
+-webkit-overflow-scrolling:touch
 }
 
 .quick-row::-webkit-scrollbar{
@@ -777,24 +836,36 @@ HEADINGS
 ========================================================= */
 
 .section-head{
+width:100%;
+min-width:0;
 display:flex;
 align-items:flex-end;
 justify-content:space-between;
+gap:14px;
 margin:31px 0 13px
 }
 
+.section-head>div{
+min-width:0
+}
+
 .section-title{
+max-width:100%;
+min-width:0;
 font-family:var(--serif);
 font-weight:400;
 font-size:43px;
-line-height:1
+line-height:1;
+overflow-wrap:anywhere
 }
 
 .view-all{
+flex:none;
 border:0;
 background:none;
 text-decoration:underline;
-font-size:15px
+font-size:15px;
+white-space:nowrap
 }
 
 
@@ -803,6 +874,8 @@ BROWSE
 ========================================================= */
 
 .browse-grid{
+width:100%;
+min-width:0;
 display:grid;
 grid-template-columns:1.15fr .85fr .85fr;
 grid-template-rows:280px 240px;
@@ -810,6 +883,7 @@ gap:6px
 }
 
 .browse-card{
+min-width:0;
 position:relative;
 overflow:hidden;
 background:#ddd;
@@ -855,21 +929,26 @@ position:absolute;
 left:17px;
 right:14px;
 bottom:15px;
+min-width:0;
 color:#fff
 }
 
 .browse-copy small{
+display:block;
 font-weight:900;
 letter-spacing:2px;
 color:#e2bd63;
-font-size:11px
+font-size:11px;
+overflow-wrap:anywhere
 }
 
 .browse-copy h3{
+max-width:100%;
 font-family:var(--serif);
 font-size:31px;
 font-weight:400;
-margin-top:4px
+margin-top:4px;
+overflow-wrap:anywhere
 }
 
 
@@ -882,11 +961,15 @@ margin-top:43px
 }
 
 .listing-count{
+flex:none;
 color:#777;
-font-size:15px
+font-size:15px;
+white-space:nowrap
 }
 
 .listings{
+width:100%;
+min-width:0;
 display:grid;
 grid-template-columns:repeat(2,minmax(0,1fr));
 gap:29px 10px;
@@ -894,7 +977,8 @@ margin-top:15px
 }
 
 .listing-card{
-min-width:0
+min-width:0;
+overflow:hidden
 }
 
 .listing-photo{
@@ -944,11 +1028,15 @@ position:absolute;
 z-index:4;
 left:12px;
 bottom:12px;
+max-width:calc(100% - 24px);
 background:#fff;
 padding:8px 12px;
 border-radius:999px;
 font-size:13px;
-font-weight:900
+font-weight:900;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
 }
 
 .tag{
@@ -956,29 +1044,37 @@ position:absolute;
 z-index:4;
 right:12px;
 bottom:17px;
+max-width:48%;
 color:#e4bd5d;
 font-size:10px;
 font-weight:900;
 letter-spacing:1.7px;
-text-transform:uppercase
+text-transform:uppercase;
+text-align:right;
+overflow-wrap:anywhere
 }
 
 .listing-copy{
+min-width:0;
 padding:10px 4px 0
 }
 
 .listing-name{
+max-width:100%;
 font-family:var(--serif);
 font-size:29px;
 font-weight:400;
 line-height:1;
-margin-bottom:7px
+margin-bottom:7px;
+overflow-wrap:anywhere
 }
 
 .listing-meta{
+max-width:100%;
 font-size:14px;
 color:#6d6d6d;
-line-height:1.45
+line-height:1.45;
+overflow-wrap:anywhere
 }
 
 .contact-small{
@@ -988,10 +1084,12 @@ color:#fff;
 width:100%;
 margin-top:10px;
 height:45px;
+padding:0 8px;
 font-weight:900
 }
 
 .empty-market{
+width:100%;
 grid-column:1/-1;
 background:#fff;
 border:1px solid #ccc;
@@ -1015,24 +1113,32 @@ BOTTOM CTA
 ========================================================= */
 
 .publish-strip{
+width:100%;
+min-width:0;
 margin-top:51px;
 background:#080808;
 color:#fff;
-padding:28px
+padding:28px;
+overflow:hidden
 }
 
 .publish-strip small{
+display:block;
+max-width:100%;
 color:#d0a43b;
 font-weight:900;
-letter-spacing:3px
+letter-spacing:3px;
+overflow-wrap:anywhere
 }
 
 .publish-strip h2{
+max-width:100%;
 font-family:var(--serif);
 font-size:40px;
 font-weight:400;
 line-height:1.05;
-margin-top:8px
+margin-top:8px;
+overflow-wrap:anywhere
 }
 
 .publish-main-btn{
@@ -1074,8 +1180,10 @@ display:flex
 
 .modal-sheet{
 width:min(760px,100%);
+max-width:100vw;
 max-height:94vh;
 overflow:auto;
+overflow-x:hidden;
 background:#fff;
 padding:22px
 }
@@ -1092,6 +1200,7 @@ font-size:24px
 }
 
 .detail-image{
+width:100%;
 height:420px;
 object-fit:cover;
 margin-top:10px
@@ -1106,20 +1215,24 @@ margin-top:18px
 }
 
 .detail-title{
+max-width:100%;
 font-family:var(--serif);
 font-size:44px;
-margin:7px 0 10px
+margin:7px 0 10px;
+overflow-wrap:anywhere
 }
 
 .detail-meta{
 color:#777;
-line-height:1.6
+line-height:1.6;
+overflow-wrap:anywhere
 }
 
 .detail-description{
 font-size:17px;
 line-height:1.6;
-margin:18px 0
+margin:18px 0;
+overflow-wrap:anywhere
 }
 
 .contact-box{
@@ -1146,9 +1259,11 @@ PUBLISH FORM
 ========================================================= */
 
 .publish-form h2{
+max-width:100%;
 font-family:var(--serif);
 font-size:42px;
-margin:7px 0
+margin:7px 0;
+overflow-wrap:anywhere
 }
 
 .fee-note{
@@ -1169,6 +1284,7 @@ gap:12px
 .form-grid select,
 .publish-form textarea{
 width:100%;
+min-width:0;
 border:1px solid #ccc;
 background:#fff;
 padding:14px;
@@ -1260,7 +1376,8 @@ right:12px
 
 html[dir="rtl"] .tag{
 right:auto;
-left:12px
+left:12px;
+text-align:left
 }
 
 html[dir="rtl"] .floating-post{
@@ -1276,15 +1393,20 @@ text-align:right
 
 
 /* =========================================================
-MOBILE
+TABLET / MOBILE
 ========================================================= */
 
 @media(max-width:720px){
 
 .header-main{
 height:87px;
-grid-template-columns:55px 1fr 55px;
+grid-template-columns:55px minmax(0,1fr) 55px;
 padding:0 8px
+}
+
+.icon-btn{
+width:48px;
+height:48px
 }
 
 .brand-big{
@@ -1315,32 +1437,78 @@ font-size:12px
 }
 
 .market-shell{
-padding:20px 12px 65px
+width:100%;
+max-width:100%;
+padding:18px 12px 68px;
+overflow:hidden
 }
 
 .market-intro{
-margin-bottom:10px
+width:100%;
+display:grid;
+grid-template-columns:minmax(0,1fr);
+gap:9px;
+align-items:start;
+margin-bottom:12px
 }
 
 .market-title{
-font-size:49px
+width:100%;
+max-width:100%;
+font-size:clamp(40px,12vw,49px);
+line-height:.96
 }
 
 .eyebrow{
-font-size:11px
+font-size:10px;
+letter-spacing:2.4px
 }
 
 .saved-link{
-font-size:15px
+justify-self:start;
+font-size:14px;
+padding:0;
+white-space:normal;
+text-align:left
+}
+
+.location-summary{
+gap:8px;
+min-width:0
+}
+
+.location-pin{
+font-size:17px
 }
 
 .location-main{
-max-width:66%;
+flex:1 1 auto;
+max-width:none;
 font-size:15px
 }
 
+.location-distance{
+font-size:13px
+}
+
+.location-edit{
+width:34px;
+height:34px
+}
+
 .search-bar{
-height:56px
+width:100%;
+height:56px;
+grid-template-columns:43px minmax(0,1fr) 48px;
+padding:4px
+}
+
+.search-symbol{
+font-size:24px
+}
+
+.search-bar input{
+font-size:15px
 }
 
 .filter-toggle{
@@ -1349,25 +1517,52 @@ width:46px
 }
 
 .market-post-main{
-height:52px;
-margin-top:9px
+width:100%;
+min-height:52px;
+height:auto;
+margin-top:9px;
+padding:11px 10px;
+font-size:13px;
+gap:6px;
+white-space:normal
+}
+
+.post-plus{
+font-size:23px
 }
 
 .quick-row{
-margin-right:-12px
+width:100%;
+max-width:100%;
+margin:0;
+padding:10px 0 3px
+}
+
+.quick{
+font-size:13px;
+padding:10px 15px
 }
 
 .section-head{
-margin-top:29px
+width:100%;
+min-width:0;
+margin-top:29px;
+gap:10px
 }
 
 .section-title{
-font-size:39px
+font-size:clamp(34px,10vw,39px);
+line-height:1
+}
+
+.view-all{
+font-size:14px
 }
 
 .browse-grid{
-grid-template-columns:1.15fr .85fr;
-grid-template-rows:280px 205px 185px 185px;
+width:100%;
+grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+grid-template-rows:250px 188px 165px 165px;
 gap:4px
 }
 
@@ -1384,42 +1579,94 @@ grid-column:1/3
 }
 
 .browse-copy{
-left:12px;
-bottom:12px
+left:11px;
+right:10px;
+bottom:11px
+}
+
+.browse-copy small{
+font-size:9px;
+letter-spacing:1.4px
 }
 
 .browse-copy h3{
-font-size:25px
+font-size:23px;
+line-height:1.02
+}
+
+.listings-head{
+align-items:flex-end
+}
+
+.listing-count{
+font-size:12px
 }
 
 .listings{
-gap:27px 7px
+width:100%;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:25px 7px
 }
 
 .listing-photo{
-height:330px
+height:300px
 }
 
 .listing-name{
-font-size:24px
-}
-
-.listing-meta{
-font-size:13px
-}
-
-.heart{
-width:43px;
-height:43px;
 font-size:23px
 }
 
+.listing-meta{
+font-size:12px
+}
+
+.heart{
+width:40px;
+height:40px;
+font-size:21px;
+right:8px;
+top:8px
+}
+
+.price{
+left:8px;
+bottom:8px;
+padding:7px 9px;
+font-size:11px
+}
+
+.tag{
+right:8px;
+bottom:12px;
+font-size:8px;
+letter-spacing:1px
+}
+
+.contact-small{
+height:43px;
+font-size:12px
+}
+
 .publish-strip{
-padding:24px 18px
+padding:24px 16px
+}
+
+.publish-strip small{
+font-size:9px;
+letter-spacing:2px
 }
 
 .publish-strip h2{
 font-size:35px
+}
+
+.floating-post{
+right:12px;
+bottom:12px;
+height:45px;
+max-width:calc(100vw - 24px);
+padding:0 13px;
+font-size:11px
 }
 
 .form-grid{
@@ -1427,14 +1674,83 @@ grid-template-columns:1fr
 }
 
 .detail-image{
-height:360px
+height:330px
 }
 
 .detail-title{
-font-size:37px
+font-size:36px
+}
+
+.modal-sheet{
+padding:17px
+}
+
+.location-panel{
+padding:12px
+}
+
+.location-panel-head{
+flex-wrap:wrap;
+align-items:center
+}
+
+.location-panel-current{
+flex:1 1 140px
+}
+
+.location-panel-actions{
+margin-left:auto
 }
 
 }
+
+
+@media(max-width:480px){
+
+.market-shell{
+padding-left:10px;
+padding-right:10px
+}
+
+.market-title{
+font-size:clamp(38px,12.5vw,46px)
+}
+
+.section-title{
+font-size:36px
+}
+
+.browse-grid{
+grid-template-columns:1fr 1fr;
+grid-template-rows:230px 170px 150px 150px
+}
+
+.browse-copy h3{
+font-size:21px
+}
+
+.listing-photo{
+height:275px
+}
+
+.listing-name{
+font-size:21px
+}
+
+.listing-meta{
+font-size:11px
+}
+
+.contact-small{
+font-size:11px
+}
+
+.market-post-main{
+font-size:12px
+}
+
+}
+
 
 @media(max-width:410px){
 
@@ -1442,27 +1758,72 @@ font-size:37px
 font-size:34px
 }
 
+.brand-small{
+font-size:10px
+}
+
 .market-title{
-font-size:44px
+font-size:42px
+}
+
+.section-head{
+align-items:flex-end
+}
+
+.section-title{
+font-size:34px
+}
+
+.view-all{
+font-size:13px
 }
 
 .listing-photo{
-height:290px
+height:255px
 }
 
 .browse-grid{
-grid-template-rows:255px 185px 170px 170px
-}
-
-.location-panel-head{
-flex-wrap:wrap
+grid-template-rows:215px 160px 145px 145px
 }
 
 .location-panel-actions{
-margin-left:0
+width:100%;
+margin-left:0;
+justify-content:flex-end
 }
 
 }
+
+
+@media(max-width:360px){
+
+.header-main{
+grid-template-columns:50px minmax(0,1fr) 50px
+}
+
+.brand-big{
+font-size:31px
+}
+
+.market-title{
+font-size:38px
+}
+
+.section-title{
+font-size:31px
+}
+
+.listing-photo{
+height:235px
+}
+
+.quick{
+font-size:12px;
+padding:9px 13px
+}
+
+}
+
 
 @media(prefers-reduced-motion:reduce){
 
@@ -2053,10 +2414,7 @@ placeholder="Search any city, region or country..."
 autocomplete="off"
 oninput="queueLocationSearch()">
 
-<div
-class="location-results"
-id="locationResults">
-</div>
+<div class="location-results" id="locationResults"></div>
 
 </div>
 
@@ -2783,10 +3141,6 @@ onclick="openPublish()">
 </button>
 
 
-<!-- =======================================================
-DETAILS MODAL
-======================================================= -->
-
 <div
 class="modal"
 id="detailsModal"
@@ -2844,10 +3198,6 @@ id="detailContact">
 
 </div>
 
-
-<!-- =======================================================
-PUBLISH MODAL
-======================================================= -->
 
 <div
 class="modal"
@@ -3024,10 +3374,6 @@ The £1 checkout will be connected to the payment backend.
 <script>
 "use strict";
 
-/* =========================================================
-CONFIG
-========================================================= */
-
 const LANGUAGE_KEY=
 "pets_dogue_language";
 
@@ -3043,10 +3389,6 @@ const MARKET_LOCATION_KEY=
 const $=
 id=>document.getElementById(id);
 
-
-/* =========================================================
-LOCAL UI TRANSLATIONS
-========================================================= */
 
 const LOCAL_UI={
 
@@ -3159,10 +3501,10 @@ searching:"Поиск…",
 noPlaces:"Места не найдены",
 locationUnavailable:"Поиск локации недоступен",
 forSale:"Продажа",
-freeRehome:"Бесплатно / Новый дом",
+freeRehome:"Бесплатно / Ищет дом",
 service:"Услуга",
 browse:"Категории",
-viewAll:"Показать все",
+viewAll:"Смотреть все",
 youngPets:"Молодые животные",
 responsible:"Ответственно",
 services:"Услуги",
@@ -3171,7 +3513,7 @@ listings:"объявлений",
 listing:"объявление",
 emptyTitle:"Объявления не найдены",
 emptyText:"Попробуйте другой поиск, категорию или локацию.",
-sellRehomeServices:"Продажа · Новый дом · Услуги",
+sellRehomeServices:"Продажа · Ищет дом · Услуги",
 post:"Добавить",
 fee:"Стоимость публикации: £1 за объявление",
 otherAnimal:"Другое животное",
@@ -3184,10 +3526,10 @@ defaultDescription:"Объявление Marketplace.",
 contact:"Контакт",
 free:"БЕСПЛАТНО",
 from:"ОТ",
-rehome:"НОВЫЙ ДОМ",
+rehome:"ИЩЕТ ДОМ",
 forSaleUpper:"ПРОДАЖА",
 serviceUpper:"УСЛУГА",
-freeRehomeUpper:"БЕСПЛАТНО / НОВЫЙ ДОМ",
+freeRehomeUpper:"БЕСПЛАТНО / ИЩЕТ ДОМ",
 selectedLocation:"Выбрана локация"
 },
 
@@ -4134,10 +4476,6 @@ selectedLocation:"चुना गया स्थान"
 };
 
 
-/* =========================================================
-STATE
-========================================================= */
-
 let activeFilter=
 "all";
 
@@ -4162,10 +4500,6 @@ null;
 let currentDetailId=
 null;
 
-
-/* =========================================================
-DEFAULT DETAILS
-========================================================= */
 
 const DETAILS={
 
@@ -4225,10 +4559,6 @@ image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&
 
 };
 
-
-/* =========================================================
-LANGUAGE
-========================================================= */
 
 function currentLanguage(){
 
@@ -4428,10 +4758,6 @@ applyFilters();
 }
 
 
-/* =========================================================
-MENU
-========================================================= */
-
 function openMenu(){
 
 $("sideMenu")
@@ -4465,10 +4791,6 @@ document.body
 
 }
 
-
-/* =========================================================
-LOCATION PANEL
-========================================================= */
 
 function openLocationPanel(){
 
@@ -4952,10 +5274,6 @@ selectedLocationName="";
 }
 
 
-/* =========================================================
-DISTANCE
-========================================================= */
-
 function distanceKm(
 lat1,
 lng1,
@@ -5007,10 +5325,6 @@ Math.sqrt(1-a)
 
 }
 
-
-/* =========================================================
-FILTERS
-========================================================= */
 
 function setQuickFilter(
 button,
@@ -5237,10 +5551,6 @@ visible!==0;
 }
 
 
-/* =========================================================
-SAVED
-========================================================= */
-
 function getSaved(){
 
 try{
@@ -5378,10 +5688,6 @@ saved.length
 }
 
 
-/* =========================================================
-DETAILS
-========================================================= */
-
 function openDetails(id){
 
 const data=
@@ -5506,10 +5812,6 @@ closeModal(id);
 
 }
 
-
-/* =========================================================
-LOCAL LISTINGS
-========================================================= */
 
 function getLocalListings(){
 
@@ -5897,10 +6199,6 @@ $("newDescription").value=
 }
 
 
-/* =========================================================
-HTML ESCAPE
-========================================================= */
-
 function escapeHTML(value){
 
 return String(
@@ -5931,10 +6229,6 @@ value||
 }
 
 
-/* =========================================================
-ACTIVE NAV
-========================================================= */
-
 function keepMarketplaceVisible(){
 
 const active=
@@ -5961,10 +6255,6 @@ block:"nearest"
 
 }
 
-
-/* =========================================================
-EVENTS
-========================================================= */
 
 document.addEventListener(
 "keydown",
