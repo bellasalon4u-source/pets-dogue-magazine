@@ -4,13 +4,17 @@
 PETS & DOGUE
 GLOBAL HEADER + RUBRIC NAV + COMPACT EDITORIAL SIDE MENU
 
-CHANGES ONLY:
-- unified top header
-- fixed rubric navigation
-- compact left side menu
-- language selector inside side menu
+CURRENT CHANGE ONLY:
+1. PROFILE → SIGN IN / ВОЙТИ / LOCAL TRANSLATION
+2. EVERY SIDE-MENU CARD ALWAYS HAS A SHORT DESCRIPTION
 
 DOES NOT CHANGE:
+- approved header scale
+- fixed rubric order
+- horizontal swipe
+- menu width / scale
+- menu photos
+- active rubric
 - page content
 - maps
 - search
@@ -186,10 +190,11 @@ const TEXT={
 
 en:{
 menu:"Contents",
-profile:"Profile",
+signIn:"Sign In",
 club:"Join Club",
 language:"Language",
 contact:"Contact us",
+fallbackDescription:"Explore this PETS & DOGUE section.",
 
 magazine:"Magazine",
 coverStars:"Cover Stars",
@@ -209,10 +214,11 @@ partners:"Partners"
 
 uk:{
 menu:"Зміст",
-profile:"Профіль",
+signIn:"Увійти",
 club:"Вступити до клубу",
 language:"Мова",
 contact:"Зв’язатися з нами",
+fallbackDescription:"Відкрийте цей розділ PETS & DOGUE.",
 
 magazine:"Журнал",
 coverStars:"Зірки обкладинки",
@@ -232,10 +238,11 @@ partners:"Партнери"
 
 ru:{
 menu:"Содержание",
-profile:"Профиль",
+signIn:"Войти",
 club:"Вступить в клуб",
 language:"Язык",
 contact:"Связаться с нами",
+fallbackDescription:"Откройте этот раздел PETS & DOGUE.",
 
 magazine:"Журнал",
 coverStars:"Звёзды обложки",
@@ -255,10 +262,11 @@ partners:"Партнёры"
 
 fr:{
 menu:"Sommaire",
-profile:"Profil",
+signIn:"Connexion",
 club:"Rejoindre le Club",
 language:"Langue",
 contact:"Nous contacter",
+fallbackDescription:"Découvrez cette rubrique PETS & DOGUE.",
 
 magazine:"Magazine",
 coverStars:"Stars de couverture",
@@ -278,10 +286,11 @@ partners:"Partenaires"
 
 de:{
 menu:"Inhalt",
-profile:"Profil",
+signIn:"Anmelden",
 club:"Club beitreten",
 language:"Sprache",
 contact:"Kontakt",
+fallbackDescription:"Entdecken Sie diesen PETS & DOGUE Bereich.",
 
 magazine:"Magazin",
 coverStars:"Cover Stars",
@@ -301,10 +310,11 @@ partners:"Partner"
 
 es:{
 menu:"Contenido",
-profile:"Perfil",
+signIn:"Iniciar sesión",
 club:"Únete al Club",
 language:"Idioma",
 contact:"Contáctanos",
+fallbackDescription:"Explora esta sección de PETS & DOGUE.",
 
 magazine:"Revista",
 coverStars:"Estrellas de portada",
@@ -324,10 +334,11 @@ partners:"Socios"
 
 it:{
 menu:"Contenuti",
-profile:"Profilo",
+signIn:"Accedi",
 club:"Unisciti al Club",
 language:"Lingua",
 contact:"Contattaci",
+fallbackDescription:"Esplora questa sezione PETS & DOGUE.",
 
 magazine:"Rivista",
 coverStars:"Cover Star",
@@ -347,10 +358,11 @@ partners:"Partner"
 
 pt:{
 menu:"Conteúdo",
-profile:"Perfil",
+signIn:"Entrar",
 club:"Entrar no Club",
 language:"Idioma",
 contact:"Contacte-nos",
+fallbackDescription:"Explore esta secção PETS & DOGUE.",
 
 magazine:"Revista",
 coverStars:"Estrelas da capa",
@@ -370,10 +382,11 @@ partners:"Parceiros"
 
 nl:{
 menu:"Inhoud",
-profile:"Profiel",
+signIn:"Inloggen",
 club:"Word lid",
 language:"Taal",
 contact:"Contact",
+fallbackDescription:"Ontdek deze PETS & DOGUE rubriek.",
 
 magazine:"Magazine",
 coverStars:"Coversterren",
@@ -393,10 +406,11 @@ partners:"Partners"
 
 pl:{
 menu:"Spis treści",
-profile:"Profil",
+signIn:"Zaloguj się",
 club:"Dołącz do klubu",
 language:"Język",
 contact:"Kontakt",
+fallbackDescription:"Odkryj tę sekcję PETS & DOGUE.",
 
 magazine:"Magazyn",
 coverStars:"Gwiazdy okładki",
@@ -416,10 +430,11 @@ partners:"Partnerzy"
 
 cs:{
 menu:"Obsah",
-profile:"Profil",
+signIn:"Přihlásit se",
 club:"Vstoupit do klubu",
 language:"Jazyk",
 contact:"Kontaktujte nás",
+fallbackDescription:"Objevte tuto sekci PETS & DOGUE.",
 
 magazine:"Magazín",
 coverStars:"Hvězdy obálky",
@@ -439,10 +454,11 @@ partners:"Partneři"
 
 sk:{
 menu:"Obsah",
-profile:"Profil",
+signIn:"Prihlásiť sa",
 club:"Vstúpiť do klubu",
 language:"Jazyk",
 contact:"Kontaktujte nás",
+fallbackDescription:"Objavte túto sekciu PETS & DOGUE.",
 
 magazine:"Magazín",
 coverStars:"Hviezdy obálky",
@@ -462,10 +478,11 @@ partners:"Partneri"
 
 hu:{
 menu:"Tartalom",
-profile:"Profil",
+signIn:"Belépés",
 club:"Csatlakozás",
 language:"Nyelv",
 contact:"Kapcsolat",
+fallbackDescription:"Fedezze fel ezt a PETS & DOGUE rovatot.",
 
 magazine:"Magazin",
 coverStars:"Címlapsztárok",
@@ -485,10 +502,11 @@ partners:"Partnerek"
 
 ro:{
 menu:"Conținut",
-profile:"Profil",
+signIn:"Autentificare",
 club:"Intră în Club",
 language:"Limbă",
 contact:"Contactați-ne",
+fallbackDescription:"Descoperă această secțiune PETS & DOGUE.",
 
 magazine:"Revistă",
 coverStars:"Vedete de copertă",
@@ -508,10 +526,11 @@ partners:"Parteneri"
 
 bg:{
 menu:"Съдържание",
-profile:"Профил",
+signIn:"Вход",
 club:"Влезте в клуба",
 language:"Език",
 contact:"Свържете се с нас",
+fallbackDescription:"Разгледайте този раздел на PETS & DOGUE.",
 
 magazine:"Списание",
 coverStars:"Звезди на корицата",
@@ -531,10 +550,11 @@ partners:"Партньори"
 
 el:{
 menu:"Περιεχόμενα",
-profile:"Προφίλ",
+signIn:"Σύνδεση",
 club:"Εγγραφή στο Club",
 language:"Γλώσσα",
 contact:"Επικοινωνία",
+fallbackDescription:"Ανακαλύψτε αυτή την ενότητα PETS & DOGUE.",
 
 magazine:"Περιοδικό",
 coverStars:"Αστέρια εξωφύλλου",
@@ -554,10 +574,11 @@ partners:"Συνεργάτες"
 
 sv:{
 menu:"Innehåll",
-profile:"Profil",
+signIn:"Logga in",
 club:"Gå med i Club",
 language:"Språk",
 contact:"Kontakta oss",
+fallbackDescription:"Utforska denna PETS & DOGUE-sektion.",
 
 magazine:"Magasin",
 coverStars:"Omslagsstjärnor",
@@ -577,10 +598,11 @@ partners:"Partners"
 
 da:{
 menu:"Indhold",
-profile:"Profil",
+signIn:"Log ind",
 club:"Tilmeld Club",
 language:"Sprog",
 contact:"Kontakt os",
+fallbackDescription:"Udforsk denne PETS & DOGUE-sektion.",
 
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
@@ -600,10 +622,11 @@ partners:"Partnere"
 
 no:{
 menu:"Innhold",
-profile:"Profil",
+signIn:"Logg inn",
 club:"Bli med i Club",
 language:"Språk",
 contact:"Kontakt oss",
+fallbackDescription:"Utforsk denne PETS & DOGUE-seksjonen.",
 
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
@@ -623,10 +646,11 @@ partners:"Partnere"
 
 fi:{
 menu:"Sisältö",
-profile:"Profiili",
+signIn:"Kirjaudu",
 club:"Liity Clubiin",
 language:"Kieli",
 contact:"Ota yhteyttä",
+fallbackDescription:"Tutustu tähän PETS & DOGUE -osioon.",
 
 magazine:"Lehti",
 coverStars:"Kansitähdet",
@@ -646,10 +670,11 @@ partners:"Kumppanit"
 
 tr:{
 menu:"İçindekiler",
-profile:"Profil",
+signIn:"Giriş yap",
 club:"Club'a katıl",
 language:"Dil",
 contact:"Bize ulaşın",
+fallbackDescription:"Bu PETS & DOGUE bölümünü keşfedin.",
 
 magazine:"Dergi",
 coverStars:"Kapak yıldızları",
@@ -669,10 +694,11 @@ partners:"Ortaklar"
 
 ar:{
 menu:"المحتويات",
-profile:"الملف الشخصي",
+signIn:"تسجيل الدخول",
 club:"الانضمام إلى النادي",
 language:"اللغة",
 contact:"اتصل بنا",
+fallbackDescription:"اكتشف هذا القسم من PETS & DOGUE.",
 
 magazine:"المجلة",
 coverStars:"نجوم الغلاف",
@@ -692,10 +718,11 @@ partners:"الشركاء"
 
 hi:{
 menu:"सामग्री",
-profile:"प्रोफ़ाइल",
+signIn:"साइन इन",
 club:"क्लब में शामिल हों",
 language:"भाषा",
 contact:"संपर्क करें",
+fallbackDescription:"PETS & DOGUE के इस सेक्शन को देखें।",
 
 magazine:"पत्रिका",
 coverStars:"कवर स्टार",
@@ -717,10 +744,7 @@ partners:"पार्टनर"
 
 
 /* =========================================================
-EXTRA MENU DESCRIPTIONS
-
-The other descriptions are taken from existing
-PETS & DOGUE common i18n when available.
+SPECIFIC CARD DESCRIPTIONS
 ========================================================= */
 
 const EXTRA_MENU={
@@ -793,7 +817,7 @@ partners:"Vybrané značky, služby a partneři."
 
 sk:{
 offers:"Ponuky Club a výhody pre členov.",
-wellness:"Zdravie, starostlivosť a každodenná péče.",
+wellness:"Zdravie, starostlivosť a každodenná starostlivosť.",
 partners:"Vybrané značky, služby a partneri."
 },
 
@@ -1073,13 +1097,7 @@ value||
 
 
 /* =========================================================
-EXISTING COMMON I18N
-
-Used only to reuse the translations that are already
-present in the project.
-
-If unavailable, the menu remains functional and uses
-the global labels above.
+EXISTING PROJECT COMMON I18N
 ========================================================= */
 
 function getCommonMenu(language){
@@ -1101,7 +1119,41 @@ return null;
 
 
 /* =========================================================
+DESCRIPTION HELPER
+========================================================= */
+
+function firstUsefulDescription(){
+
+for(
+const value of arguments
+){
+
+if(
+typeof value==="string" &&
+value.trim()
+){
+
+return value.trim();
+
+}
+
+}
+
+
+return"";
+
+}
+
+
+/* =========================================================
 MENU CARD COPY
+
+IMPORTANT:
+EVERY CARD GETS A DESCRIPTION.
+
+Existing project translations are preferred.
+If a specific translated description does not exist,
+a translated safe fallback is used.
 ========================================================= */
 
 function getMenuCardCopy(
@@ -1126,6 +1178,11 @@ EXTRA_MENU[language]||
 EXTRA_MENU.en;
 
 
+const fallback=
+labels.fallbackDescription||
+TEXT.en.fallbackDescription;
+
+
 switch(key){
 
 case"magazine":
@@ -1133,11 +1190,15 @@ case"magazine":
 return{
 title:
 common.latestIssue||
+common.magazine||
 labels.magazine,
 
 description:
-common.latestIssueDescription||
-""
+firstUsefulDescription(
+common.latestIssueDescription,
+common.magazineDescription,
+fallback
+)
 };
 
 
@@ -1146,11 +1207,15 @@ case"coverStars":
 return{
 title:
 common.coverStar||
+common.coverStars||
 labels.coverStars,
 
 description:
-common.coverStarDescription||
-""
+firstUsefulDescription(
+common.coverStarDescription,
+common.coverStarsDescription,
+fallback
+)
 };
 
 
@@ -1158,10 +1223,17 @@ case"offers":
 
 return{
 title:
+common.discounts||
+common.offers||
 labels.offers,
 
 description:
-extra.offers
+firstUsefulDescription(
+common.discountsDescription,
+common.offersDescription,
+extra.offers,
+fallback
+)
 };
 
 
@@ -1169,11 +1241,16 @@ case"places":
 
 return{
 title:
+common.places||
+common.petsWelcome||
 labels.places,
 
 description:
-common.placesDescription||
-""
+firstUsefulDescription(
+common.placesDescription,
+common.petsWelcomeDescription,
+fallback
+)
 };
 
 
@@ -1181,11 +1258,14 @@ case"articles":
 
 return{
 title:
+common.articles||
 labels.articles,
 
 description:
-common.articlesDescription||
-""
+firstUsefulDescription(
+common.articlesDescription,
+fallback
+)
 };
 
 
@@ -1193,11 +1273,14 @@ case"photos":
 
 return{
 title:
+common.photos||
 labels.photos,
 
 description:
-common.photosDescription||
-""
+firstUsefulDescription(
+common.photosDescription,
+fallback
+)
 };
 
 
@@ -1205,11 +1288,14 @@ case"travel":
 
 return{
 title:
+common.travel||
 labels.travel,
 
 description:
-common.travelDescription||
-""
+firstUsefulDescription(
+common.travelDescription,
+fallback
+)
 };
 
 
@@ -1217,11 +1303,14 @@ case"fashion":
 
 return{
 title:
+common.fashion||
 labels.fashion,
 
 description:
-common.fashionDescription||
-""
+firstUsefulDescription(
+common.fashionDescription,
+fallback
+)
 };
 
 
@@ -1229,10 +1318,17 @@ case"wellness":
 
 return{
 title:
+common.wellness||
+common.health||
 labels.wellness,
 
 description:
-extra.wellness
+firstUsefulDescription(
+common.wellnessDescription,
+common.healthDescription,
+extra.wellness,
+fallback
+)
 };
 
 
@@ -1240,11 +1336,14 @@ case"community":
 
 return{
 title:
+common.community||
 labels.community,
 
 description:
-common.communityDescription||
-""
+firstUsefulDescription(
+common.communityDescription,
+fallback
+)
 };
 
 
@@ -1252,11 +1351,14 @@ case"contests":
 
 return{
 title:
+common.contests||
 labels.contests,
 
 description:
-common.contestsDescription||
-""
+firstUsefulDescription(
+common.contestsDescription,
+fallback
+)
 };
 
 
@@ -1264,11 +1366,16 @@ case"rescue":
 
 return{
 title:
+common.rescue||
+common.help||
 labels.rescue,
 
 description:
-common.rescueDescription||
-""
+firstUsefulDescription(
+common.rescueDescription,
+common.helpDescription,
+fallback
+)
 };
 
 
@@ -1276,11 +1383,14 @@ case"marketplace":
 
 return{
 title:
+common.marketplace||
 labels.marketplace,
 
 description:
-common.marketplaceDescription||
-""
+firstUsefulDescription(
+common.marketplaceDescription,
+fallback
+)
 };
 
 
@@ -1288,10 +1398,15 @@ case"partners":
 
 return{
 title:
+common.partners||
 labels.partners,
 
 description:
-extra.partners
+firstUsefulDescription(
+common.partnersDescription,
+extra.partners,
+fallback
+)
 };
 
 
@@ -1302,7 +1417,8 @@ title:
 labels[key]||
 key,
 
-description:""
+description:
+fallback
 };
 
 }
@@ -1731,11 +1847,11 @@ pointer-events:auto;
 /* =========================================================
 EDITORIAL SIDE MENU
 
-VISUAL:
-same magazine-card menu as approved screenshot.
-
-SCALE:
-smaller and narrower.
+APPROVED:
+- same photo-card design
+- compact
+- narrow
+- left side
 ========================================================= */
 
 #pdGlobalMenu{
@@ -2208,12 +2324,6 @@ overflow:hidden !important;
 
 /* =========================================================
 RTL
-
-Page remains RTL.
-Rubric physical order remains unchanged.
-
-Side panel opens from the correct physical side
-for an RTL interface.
 ========================================================= */
 
 html[dir="rtl"] #pdGlobalRubrics{
@@ -2498,9 +2608,6 @@ style
 
 /* =========================================================
 HIDE EXISTING TOP SHELL
-
-Existing elements remain in DOM.
-Only their visual copies are hidden.
 ========================================================= */
 
 function hideExistingShell(){
@@ -2941,9 +3048,7 @@ previousScroll;
 
 
 /* =========================================================
-SIGN-IN COPY
-
-Reuse existing multilingual common.js whenever available.
+SIGN IN COPY
 ========================================================= */
 
 function getSignInText(
@@ -2956,18 +3061,11 @@ language
 );
 
 
-if(
-common?.signIn
-){
-
-return common.signIn;
-
-}
-
-
-return(
-TEXT[language]?.profile||
-TEXT.en.profile
+return firstUsefulDescription(
+common?.signIn,
+common?.login,
+TEXT[language]?.signIn,
+TEXT.en.signIn
 );
 
 }
@@ -3052,17 +3150,11 @@ copy.title
 )}
 </h3>
 
-${
-copy.description
-?`
 <p>
 ${escapeHTML(
 copy.description
 )}
 </p>
-`
-:""
-}
 
 </span>
 
@@ -3208,9 +3300,6 @@ handleLanguageChange
 
 /* =========================================================
 LANGUAGE CHANGE
-
-Does not replace page i18n.
-Synchronises with the existing language system.
 ========================================================= */
 
 function handleLanguageChange(
@@ -3291,10 +3380,6 @@ break;
 }
 
 
-/*
-Synchronise an existing page selector.
-*/
-
 const existingSelect=
 document.getElementById(
 "languageSelect"
@@ -3333,11 +3418,6 @@ error
 }
 
 
-/*
-Tell existing PETS & DOGUE pages to refresh
-their own translations.
-*/
-
 window.dispatchEvent(
 new Event(
 "petsdogue:languagechange"
@@ -3354,10 +3434,6 @@ renderSideMenu();
 
 /* =========================================================
 POSITION ACTIVE RUBRIC ONCE
-
-After this:
-browser owns horizontal swipe.
-No repeated recentering.
 ========================================================= */
 
 function positionActiveOnce(){
@@ -3605,10 +3681,6 @@ positionActiveOnce,
 );
 
 
-/*
-Existing page language change.
-*/
-
 window.addEventListener(
 "petsdogue:languagechange",
 ()=>{
@@ -3621,10 +3693,6 @@ refreshShellLanguage,
 }
 );
 
-
-/*
-Language changed in another browser tab.
-*/
 
 window.addEventListener(
 "storage",
@@ -3644,10 +3712,6 @@ refreshShellLanguage,
 }
 );
 
-
-/*
-Escape closes only this menu.
-*/
 
 document.addEventListener(
 "keydown",
