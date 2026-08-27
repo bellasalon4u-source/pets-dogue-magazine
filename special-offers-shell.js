@@ -2,95 +2,120 @@
 
 /* =========================================================
 PETS & DOGUE
-SPECIAL OFFERS — MASTER VISUAL SHELL
+SPECIAL OFFERS — MASTER HEADER SHELL
+
+VISUAL REFERENCE:
+issue-01.html
 
 ONLY:
-- unified PETS & DOGUE header
-- hamburger menu
+- unified header scale
+- hamburger
+- PETS & DOGUE logo
 - home icon
 - fixed global rubric order
 - Discounts active
-- free horizontal rubric swipe
-- language selector moved into menu
+- free horizontal native swipe
+- language selector inside menu
 
 DOES NOT CHANGE:
 - offers
-- location detection
-- country selection
+- country/location logic
 - Club verification
 - vouchers
-- Stripe access
-- offer modals
+- Stripe
 - API calls
-- existing 23-language offer translations
+- offer cards
+- existing page translations
 ========================================================= */
 
 (function(){
 
 const LANGUAGE_KEY="pets_dogue_language";
 
+const LANGUAGE_ALIASES={
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+
+/* =========================================================
+ONE GLOBAL NAVIGATION ORDER
+========================================================= */
+
 const NAV_ITEMS=[
+
 {
 key:"magazine",
 url:"issue-01.html"
 },
+
 {
 key:"coverStars",
 url:"members-gallery.html"
 },
+
 {
 key:"offers",
 url:"special-offers.html"
 },
+
 {
 key:"places",
 url:"pet-friendly-places.html"
 },
+
 {
 key:"articles",
 url:"articles.html"
 },
+
 {
 key:"photos",
 url:"photos.html"
 },
+
 {
 key:"travel",
 url:"pet-travel.html"
 },
+
 {
 key:"fashion",
 url:"pet-fashion.html"
 },
+
 {
 key:"wellness",
 url:"wellness.html"
 },
+
 {
 key:"community",
 url:"local-community.html"
 },
-{
-key:"contests",
-url:"contests.html"
-},
-{
-key:"rescue",
-url:"pets-in-need.html"
-},
+
 {
 key:"marketplace",
 url:"pet-marketplace.html"
 },
+
+{
+key:"contests",
+url:"contests.html"
+},
+
 {
 key:"partners",
 url:"partners.html"
 }
+
 ];
 
 
 /* =========================================================
-NAVIGATION TRANSLATIONS
 23 LANGUAGES
 ========================================================= */
 
@@ -111,9 +136,8 @@ travel:"Travel",
 fashion:"Fashion",
 wellness:"Health",
 community:"Community",
-contests:"Contests",
-rescue:"Help",
 marketplace:"Marketplace",
+contests:"Contests",
 partners:"Partners"
 },
 
@@ -132,9 +156,8 @@ travel:"Подорожі",
 fashion:"Мода",
 wellness:"Здоров’я",
 community:"Спільнота",
-contests:"Конкурси",
-rescue:"Допомога",
 marketplace:"Маркетплейс",
+contests:"Конкурси",
 partners:"Партнери"
 },
 
@@ -153,9 +176,8 @@ travel:"Путешествия",
 fashion:"Мода",
 wellness:"Здоровье",
 community:"Сообщество",
-contests:"Конкурсы",
-rescue:"Помощь",
 marketplace:"Маркетплейс",
+contests:"Конкурсы",
 partners:"Партнёры"
 },
 
@@ -174,9 +196,8 @@ travel:"Voyages",
 fashion:"Mode",
 wellness:"Santé",
 community:"Communauté",
-contests:"Concours",
-rescue:"Aide",
 marketplace:"Marketplace",
+contests:"Concours",
 partners:"Partenaires"
 },
 
@@ -195,9 +216,8 @@ travel:"Reisen",
 fashion:"Mode",
 wellness:"Gesundheit",
 community:"Community",
-contests:"Wettbewerbe",
-rescue:"Hilfe",
 marketplace:"Marktplatz",
+contests:"Wettbewerbe",
 partners:"Partner"
 },
 
@@ -216,9 +236,8 @@ travel:"Viajes",
 fashion:"Moda",
 wellness:"Salud",
 community:"Comunidad",
-contests:"Concursos",
-rescue:"Ayuda",
 marketplace:"Marketplace",
+contests:"Concursos",
 partners:"Socios"
 },
 
@@ -237,9 +256,8 @@ travel:"Viaggi",
 fashion:"Moda",
 wellness:"Salute",
 community:"Community",
-contests:"Concorsi",
-rescue:"Aiuto",
 marketplace:"Marketplace",
+contests:"Concorsi",
 partners:"Partner"
 },
 
@@ -258,9 +276,8 @@ travel:"Viagens",
 fashion:"Moda",
 wellness:"Saúde",
 community:"Comunidade",
-contests:"Concursos",
-rescue:"Ajuda",
 marketplace:"Marketplace",
+contests:"Concursos",
 partners:"Parceiros"
 },
 
@@ -279,9 +296,8 @@ travel:"Reizen",
 fashion:"Mode",
 wellness:"Gezondheid",
 community:"Community",
-contests:"Wedstrijden",
-rescue:"Hulp",
 marketplace:"Marktplaats",
+contests:"Wedstrijden",
 partners:"Partners"
 },
 
@@ -300,9 +316,8 @@ travel:"Podróże",
 fashion:"Moda",
 wellness:"Zdrowie",
 community:"Społeczność",
-contests:"Konkursy",
-rescue:"Pomoc",
 marketplace:"Marketplace",
+contests:"Konkursy",
 partners:"Partnerzy"
 },
 
@@ -321,9 +336,8 @@ travel:"Cestování",
 fashion:"Móda",
 wellness:"Zdraví",
 community:"Komunita",
-contests:"Soutěže",
-rescue:"Pomoc",
 marketplace:"Marketplace",
+contests:"Soutěže",
 partners:"Partneři"
 },
 
@@ -342,9 +356,8 @@ travel:"Cestovanie",
 fashion:"Móda",
 wellness:"Zdravie",
 community:"Komunita",
-contests:"Súťaže",
-rescue:"Pomoc",
 marketplace:"Marketplace",
+contests:"Súťaže",
 partners:"Partneri"
 },
 
@@ -363,9 +376,8 @@ travel:"Utazás",
 fashion:"Divat",
 wellness:"Egészség",
 community:"Közösség",
-contests:"Versenyek",
-rescue:"Segítség",
 marketplace:"Piactér",
+contests:"Versenyek",
 partners:"Partnerek"
 },
 
@@ -384,9 +396,8 @@ travel:"Călătorii",
 fashion:"Modă",
 wellness:"Sănătate",
 community:"Comunitate",
-contests:"Concursuri",
-rescue:"Ajutor",
 marketplace:"Marketplace",
+contests:"Concursuri",
 partners:"Parteneri"
 },
 
@@ -405,9 +416,8 @@ travel:"Пътувания",
 fashion:"Мода",
 wellness:"Здраве",
 community:"Общност",
-contests:"Конкурси",
-rescue:"Помощ",
 marketplace:"Маркетплейс",
+contests:"Конкурси",
 partners:"Партньори"
 },
 
@@ -426,9 +436,8 @@ travel:"Ταξίδια",
 fashion:"Μόδα",
 wellness:"Υγεία",
 community:"Κοινότητα",
-contests:"Διαγωνισμοί",
-rescue:"Βοήθεια",
 marketplace:"Marketplace",
+contests:"Διαγωνισμοί",
 partners:"Συνεργάτες"
 },
 
@@ -447,9 +456,8 @@ travel:"Resor",
 fashion:"Mode",
 wellness:"Hälsa",
 community:"Community",
-contests:"Tävlingar",
-rescue:"Hjälp",
 marketplace:"Marknadsplats",
+contests:"Tävlingar",
 partners:"Partners"
 },
 
@@ -468,9 +476,8 @@ travel:"Rejser",
 fashion:"Mode",
 wellness:"Sundhed",
 community:"Community",
-contests:"Konkurrencer",
-rescue:"Hjælp",
 marketplace:"Marketplace",
+contests:"Konkurrencer",
 partners:"Partnere"
 },
 
@@ -489,9 +496,8 @@ travel:"Reiser",
 fashion:"Mote",
 wellness:"Helse",
 community:"Fellesskap",
-contests:"Konkurranser",
-rescue:"Hjelp",
 marketplace:"Markedsplass",
+contests:"Konkurranser",
 partners:"Partnere"
 },
 
@@ -510,9 +516,8 @@ travel:"Matkailu",
 fashion:"Muoti",
 wellness:"Terveys",
 community:"Yhteisö",
-contests:"Kilpailut",
-rescue:"Apu",
 marketplace:"Marketplace",
+contests:"Kilpailut",
 partners:"Kumppanit"
 },
 
@@ -531,9 +536,8 @@ travel:"Seyahat",
 fashion:"Moda",
 wellness:"Sağlık",
 community:"Topluluk",
-contests:"Yarışmalar",
-rescue:"Yardım",
 marketplace:"Pazar",
+contests:"Yarışmalar",
 partners:"Ortaklar"
 },
 
@@ -552,9 +556,8 @@ travel:"السفر",
 fashion:"الموضة",
 wellness:"الصحة",
 community:"المجتمع",
-contests:"المسابقات",
-rescue:"المساعدة",
 marketplace:"السوق",
+contests:"المسابقات",
 partners:"الشركاء"
 },
 
@@ -573,9 +576,8 @@ travel:"यात्रा",
 fashion:"फ़ैशन",
 wellness:"स्वास्थ्य",
 community:"समुदाय",
-contests:"प्रतियोगिताएँ",
-rescue:"मदद",
 marketplace:"मार्केटप्लेस",
+contests:"प्रतियोगिताएँ",
 partners:"पार्टनर"
 }
 
@@ -583,72 +585,116 @@ partners:"पार्टनर"
 
 
 /* =========================================================
-LANGUAGE OPTIONS
+LANGUAGE SELECT
 ========================================================= */
 
 const LANGUAGE_OPTIONS=[
+
 ["en","🇬🇧 EN — English"],
+
 ["uk","🇺🇦 UA — Українська"],
+
 ["ru","🇷🇺 RU — Русский"],
+
 ["fr","🇫🇷 FR — Français"],
+
 ["de","🇩🇪 DE — Deutsch"],
+
 ["es","🇪🇸 ES — Español"],
+
 ["it","🇮🇹 IT — Italiano"],
+
 ["pt","🇵🇹 PT — Português"],
+
 ["nl","🇳🇱 NL — Nederlands"],
+
 ["pl","🇵🇱 PL — Polski"],
+
 ["cs","🇨🇿 CZ — Čeština"],
+
 ["sk","🇸🇰 SK — Slovenčina"],
+
 ["hu","🇭🇺 HU — Magyar"],
+
 ["ro","🇷🇴 RO — Română"],
+
 ["bg","🇧🇬 BG — Български"],
+
 ["el","🇬🇷 GR — Ελληνικά"],
+
 ["sv","🇸🇪 SE — Svenska"],
+
 ["da","🇩🇰 DK — Dansk"],
+
 ["no","🇳🇴 NO — Norsk"],
+
 ["fi","🇫🇮 FI — Suomi"],
+
 ["tr","🇹🇷 TR — Türkçe"],
+
 ["ar","🇸🇦 AR — العربية"],
+
 ["hi","🇮🇳 HI — हिन्दी"]
+
 ];
 
 
 /* =========================================================
-STYLE
+INSTALL STYLE
 ========================================================= */
 
 function installStyles(){
 
+const oldStyle=
+document.getElementById(
+"pd-special-shell-style"
+);
+
 if(
-document.getElementById("pd-special-shell-style")
+oldStyle
 ){
-return;
+
+oldStyle.remove();
+
 }
 
-const style=document.createElement("style");
 
-style.id="pd-special-shell-style";
+const style=
+document.createElement(
+"style"
+);
+
+style.id=
+"pd-special-shell-style";
+
 
 style.textContent=`
 
 /* =========================================================
-SPECIAL OFFERS MASTER HEADER
+PETS & DOGUE
+EXACT COMPACT MASTER HEADER SCALE
 ========================================================= */
 
-.site-header.pd-master-header{
+.pd-original-header-hidden{
+display:none !important;
+}
+
+
+/* =========================================================
+MASTER HEADER
+========================================================= */
+
+.pd-master-header{
 position:sticky !important;
+
 top:0 !important;
+
 z-index:5000 !important;
 
 width:100% !important;
-height:auto !important;
-min-height:0 !important;
 
-padding:0 !important;
+background:#050505 !important;
 
-display:block !important;
-
-background:#070707 !important;
 color:#fff !important;
 
 border-bottom:1px solid #292929 !important;
@@ -657,61 +703,69 @@ border-bottom:1px solid #292929 !important;
 
 /* =========================================================
 TOP ROW
+
+Reference:
+desktop 88px
+tablet 84px
+mobile 78px
 ========================================================= */
 
-.pd-master-header .pd-header-main{
-width:100%;
-max-width:1440px;
+.pd-header-main{
+height:88px;
 
-height:116px;
-min-height:116px;
+min-height:88px;
 
-margin:0 auto;
+max-width:1600px;
 
-padding:0 28px;
+margin:auto;
+
+padding:0 18px;
 
 display:grid;
 
 grid-template-columns:
-72px
+58px
 minmax(0,1fr)
-72px;
+58px;
 
 align-items:center;
+
+gap:10px;
 }
 
 
 /* =========================================================
-MENU BUTTON
+HAMBURGER
 ========================================================= */
 
-.pd-master-header .menu-button{
-justify-self:start;
+.pd-menu-button{
+width:46px;
 
-width:54px !important;
-height:54px !important;
+height:46px;
 
-padding:8px 3px !important;
+padding:7px;
 
-border:0 !important;
+border:0;
 
-background:transparent !important;
+background:transparent;
 
-display:grid !important;
-align-content:center !important;
+display:grid;
 
-gap:7px !important;
+align-content:center;
+
+gap:6px;
 }
 
-.pd-master-header .menu-button span{
-display:block !important;
+.pd-menu-button span{
+display:block;
 
-width:100% !important;
-height:3px !important;
+width:100%;
 
-background:#fff !important;
+height:2px;
 
-border-radius:999px !important;
+background:#fff;
+
+border-radius:999px;
 }
 
 
@@ -719,56 +773,48 @@ border-radius:999px !important;
 BRAND
 ========================================================= */
 
-.pd-master-header .brand{
-justify-self:center !important;
-align-self:center !important;
+.pd-brand{
+justify-self:center;
 
-display:flex !important;
-flex-direction:column !important;
-
-align-items:center !important;
-justify-content:center !important;
-
-text-align:center !important;
+text-align:center;
 
 font-family:
 Georgia,
 "Times New Roman",
-serif !important;
+serif;
 
-line-height:.88 !important;
+line-height:.83;
 
-white-space:nowrap !important;
+white-space:nowrap;
+
+text-decoration:none;
 }
 
-.pd-master-header .brand small{
-display:block !important;
+.pd-brand-small{
+font-size:10px;
 
-font-size:13px !important;
+letter-spacing:2px;
 
-font-weight:400 !important;
+color:#c89b3c;
 
-line-height:1 !important;
-
-letter-spacing:2.5px !important;
-
-color:#c99a2e !important;
+text-transform:uppercase;
 }
 
-.pd-master-header .brand strong{
-display:block !important;
+.pd-brand-big{
+margin-top:6px;
 
-margin-top:7px !important;
+font-family:
+Georgia,
+"Times New Roman",
+serif;
 
-font-size:52px !important;
+font-size:39px;
 
-font-weight:400 !important;
+font-weight:400;
 
-line-height:.78 !important;
+letter-spacing:3px;
 
-letter-spacing:4px !important;
-
-color:#c99a2e !important;
+color:#c89b3c;
 }
 
 
@@ -779,92 +825,88 @@ HOME
 .pd-home-button{
 justify-self:end;
 
-width:54px;
-height:54px;
+width:46px;
+
+height:46px;
 
 display:flex;
 
 align-items:center;
-justify-content:center;
 
-border:0;
+justify-content:center;
 
 background:transparent;
 
+border:0;
+
 color:#fff;
+
+text-decoration:none;
 }
 
 .pd-home-button svg{
-width:33px;
-height:33px;
+display:block;
+
+width:31px;
+
+height:31px;
 
 fill:none;
 
-stroke:#fff;
-stroke-width:2;
+stroke:currentColor;
+
+stroke-width:2.4;
 
 stroke-linecap:round;
+
 stroke-linejoin:round;
 }
 
 
 /* =========================================================
-NAVIGATION
+GLOBAL RUBRIC NAVIGATION
 ========================================================= */
 
 .pd-category-nav{
-position:relative;
-
 width:100%;
 
-height:66px;
-min-height:66px;
+height:50px;
+
+min-height:50px;
 
 display:flex;
 
 align-items:stretch;
 
+padding:0 8px;
+
 gap:0;
 
-padding:0;
-margin:0;
-
 overflow-x:auto;
+
 overflow-y:hidden;
 
 background:#070707;
 
-border-top:1px solid #292929;
-border-bottom:1px solid #292929;
+border-top:1px solid #262626;
+
+border-bottom:1px solid #262626;
 
 scrollbar-width:none;
 
 -webkit-overflow-scrolling:touch;
 
+overscroll-behavior-x:contain;
+
 scroll-behavior:auto;
 
 scroll-snap-type:none;
-
-overscroll-behavior-x:contain;
 
 touch-action:pan-x;
 }
 
 .pd-category-nav::-webkit-scrollbar{
 display:none;
-}
-
-.pd-category-nav::before,
-.pd-category-nav::after{
-content:"";
-
-display:block;
-
-flex:0 0 34px;
-
-height:1px;
-
-pointer-events:none;
 }
 
 .pd-category-nav a{
@@ -874,13 +916,14 @@ flex:0 0 auto;
 
 min-width:max-content;
 
-height:66px;
+height:50px;
 
-padding:0 22px;
+padding:0 18px;
 
 display:flex;
 
 align-items:center;
+
 justify-content:center;
 
 font-family:
@@ -888,13 +931,13 @@ Arial,
 Helvetica,
 sans-serif;
 
-font-size:14px;
+font-size:12px;
 
 font-weight:900;
 
-line-height:1;
-
 letter-spacing:.55px;
+
+line-height:1;
 
 text-transform:uppercase;
 
@@ -905,10 +948,12 @@ color:#fff;
 text-decoration:none;
 
 -webkit-user-drag:none;
+
+user-select:none;
 }
 
 .pd-category-nav a.active{
-color:#f1d783;
+color:#efd277;
 }
 
 .pd-category-nav a.active::after{
@@ -916,26 +961,26 @@ content:"";
 
 position:absolute;
 
-left:20px;
-right:20px;
+left:17px;
+
+right:17px;
+
 bottom:0;
 
-height:4px;
+height:3px;
 
 background:
 linear-gradient(
 90deg,
-#70470a 0%,
-#c99428 25%,
-#fff0a6 50%,
-#c99428 75%,
-#70470a 100%
+#8c6011,
+#f5dc8b,
+#9b6a12
 );
 }
 
 
 /* =========================================================
-SIDE MENU
+SIDE MENU OVERLAY
 ========================================================= */
 
 .pd-shell-overlay{
@@ -945,42 +990,56 @@ inset:0;
 
 z-index:9000;
 
-background:rgba(0,0,0,.74);
+background:rgba(0,0,0,.72);
 
 opacity:0;
 
 visibility:hidden;
 
-transition:.22s ease;
+transition:
+opacity .22s ease,
+visibility .22s ease;
 
-backdrop-filter:blur(3px);
+backdrop-filter:blur(2px);
+
+-webkit-backdrop-filter:blur(2px);
 }
 
 .pd-shell-overlay.show{
 opacity:1;
+
 visibility:visible;
 }
+
+
+/* =========================================================
+SIDE MENU
+========================================================= */
 
 .pd-shell-menu{
 position:fixed;
 
 top:0;
+
 left:0;
+
 bottom:0;
 
 z-index:9100;
 
-width:min(560px,90vw);
+width:min(520px,90vw);
+
+max-width:520px;
 
 background:#f8f5ee;
 
 color:#111;
 
+overflow-y:auto;
+
 transform:translateX(-103%);
 
 transition:transform .28s ease;
-
-overflow-y:auto;
 }
 
 .pd-shell-menu.open{
@@ -994,14 +1053,17 @@ top:0;
 
 z-index:5;
 
-height:112px;
+height:88px;
 
-padding:18px 22px;
+min-height:88px;
 
 display:flex;
 
 align-items:center;
+
 justify-content:space-between;
+
+padding:16px 22px;
 
 background:#080808;
 
@@ -1014,24 +1076,33 @@ Georgia,
 "Times New Roman",
 serif;
 
-font-size:43px;
+font-size:37px;
 
 font-weight:400;
+
+line-height:1;
 }
 
 .pd-shell-close{
-width:50px;
-height:50px;
+width:45px;
+
+height:45px;
 
 border:0;
 
 border-radius:50%;
 
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
 background:#fff;
 
 color:#111;
 
-font-size:32px;
+font-size:29px;
 
 line-height:1;
 }
@@ -1044,25 +1115,37 @@ grid-template-columns:1fr 1fr;
 gap:9px;
 
 padding:15px;
+
+border-bottom:1px solid #d3cdc1;
 }
 
 .pd-shell-tool{
-height:50px;
+height:49px;
 
 border:2px solid #111;
 
 display:flex;
 
 align-items:center;
+
 justify-content:center;
 
 background:#fff;
+
+color:#111;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
 
 font-size:11px;
 
 font-weight:900;
 
 text-transform:uppercase;
+
+text-decoration:none;
 }
 
 .pd-shell-tool.club{
@@ -1072,7 +1155,7 @@ border-color:#65e51f;
 }
 
 .pd-shell-language{
-margin:0 15px 15px;
+margin:15px;
 
 padding:10px 13px;
 
@@ -1085,6 +1168,11 @@ background:#fff;
 display:block;
 
 margin-bottom:7px;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
 
 font-size:9px;
 
@@ -1108,6 +1196,11 @@ background:#fff;
 
 color:#111;
 
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
 font-size:14px;
 
 font-weight:800;
@@ -1122,7 +1215,7 @@ padding:0 15px 25px;
 }
 
 .pd-shell-list a{
-min-height:58px;
+min-height:54px;
 
 padding:0 16px;
 
@@ -1134,27 +1227,31 @@ border:2px solid #111;
 
 background:#fff;
 
+color:#111;
+
 font-family:
 Georgia,
 "Times New Roman",
 serif;
 
-font-size:20px;
+font-size:19px;
+
+text-decoration:none;
 }
 
 .pd-shell-list a.active{
 background:#111;
 
-color:#f1d783;
+color:#efd277;
 }
 
 
 /* =========================================================
-HIDE ORIGINAL RIGHT AREA
+BODY MENU LOCK
 ========================================================= */
 
-.pd-master-header .header-right{
-display:none !important;
+body.pd-menu-open{
+overflow:hidden !important;
 }
 
 
@@ -1164,6 +1261,7 @@ RTL
 
 html[dir="rtl"] .pd-shell-menu{
 left:auto;
+
 right:0;
 
 transform:translateX(103%);
@@ -1173,9 +1271,10 @@ html[dir="rtl"] .pd-shell-menu.open{
 transform:translateX(0);
 }
 
+
 /*
-Keep physical rubric order identical in Arabic.
-Text itself remains RTL.
+Keep physical category order identical
+to all other languages.
 */
 
 html[dir="rtl"] .pd-category-nav{
@@ -1188,100 +1287,202 @@ direction:rtl;
 
 
 /* =========================================================
-MOBILE
+TABLET
 ========================================================= */
 
-@media(max-width:760px){
+@media(max-width:1000px){
 
-.pd-master-header .pd-header-main{
-height:112px;
-min-height:112px;
+.pd-header-main{
+height:84px;
 
-padding:0 18px;
+min-height:84px;
 
 grid-template-columns:
-58px
+54px
 minmax(0,1fr)
-58px;
+54px;
+
+padding:0 13px;
 }
 
-.pd-master-header .menu-button{
-width:50px !important;
-height:50px !important;
-
-gap:6px !important;
+.pd-brand-big{
+font-size:37px;
 }
 
-.pd-master-header .menu-button span{
-height:3px !important;
-}
-
-.pd-master-header .brand small{
-font-size:11px !important;
-
-letter-spacing:2.1px !important;
-}
-
-.pd-master-header .brand strong{
-font-size:45px !important;
-
-letter-spacing:3px !important;
-
-margin-top:7px !important;
+.pd-brand-small{
+font-size:9px;
 }
 
 .pd-home-button{
-width:50px;
-height:50px;
+width:42px;
+
+height:42px;
 }
 
 .pd-home-button svg{
-width:31px;
-height:31px;
+width:29px;
+
+height:29px;
 }
 
 .pd-category-nav{
-height:64px;
-min-height:64px;
-}
+height:48px;
 
-.pd-category-nav::before,
-.pd-category-nav::after{
-flex:0 0 max(
-24px,
-calc(50vw - 105px)
-);
+min-height:48px;
 }
 
 .pd-category-nav a{
-height:64px;
+height:48px;
 
-padding:0 18px;
+padding:0 17px;
 
-font-size:13px;
+font-size:11.5px;
+}
 
-letter-spacing:.45px;
+}
+
+
+/* =========================================================
+MOBILE
+EXACT SCALE OF THE APPROVED ISSUE HEADER
+========================================================= */
+
+@media(max-width:850px){
+
+.pd-header-main{
+height:78px !important;
+
+min-height:78px !important;
+
+grid-template-columns:
+48px
+minmax(0,1fr)
+48px !important;
+
+gap:5px;
+
+padding:
+0
+10px !important;
+}
+
+
+/* HAMBURGER */
+
+.pd-menu-button{
+width:43px !important;
+
+height:43px !important;
+
+padding:7px 5px !important;
+
+gap:5px !important;
+}
+
+.pd-menu-button span{
+height:2px !important;
+}
+
+
+/* LOGO */
+
+.pd-brand-small{
+font-size:8px !important;
+
+letter-spacing:1.65px !important;
+}
+
+.pd-brand-big{
+font-size:31px !important;
+
+letter-spacing:1.8px !important;
+
+margin-top:5px !important;
+}
+
+
+/* HOME */
+
+.pd-home-button{
+width:43px !important;
+
+height:43px !important;
+}
+
+.pd-home-button svg{
+width:29px !important;
+
+height:29px !important;
+}
+
+
+/* CATEGORY STRIP */
+
+.pd-category-nav{
+height:46px !important;
+
+min-height:46px !important;
+
+padding:
+0
+7px !important;
+
+overflow-x:auto !important;
+
+overflow-y:hidden !important;
+
+-webkit-overflow-scrolling:touch !important;
+
+touch-action:pan-x !important;
+
+scroll-behavior:auto !important;
+}
+
+.pd-category-nav a{
+height:46px !important;
+
+padding:
+0
+16px !important;
+
+font-size:11.5px !important;
+
+letter-spacing:.45px !important;
 }
 
 .pd-category-nav a.active::after{
-left:17px;
-right:17px;
+left:15px !important;
 
-height:4px;
+right:15px !important;
+
+height:3px !important;
 }
 
+
+/* SIDE MENU */
+
 .pd-shell-menu{
-width:min(92vw,520px);
+width:min(520px,90vw);
 }
 
 .pd-shell-menu-head{
-height:100px;
+height:78px;
 
-padding:15px 18px;
+min-height:78px;
+
+padding:13px 17px;
 }
 
 .pd-shell-menu-head h2{
-font-size:37px;
+font-size:32px;
+}
+
+.pd-shell-close{
+width:42px;
+
+height:42px;
+
+font-size:27px;
 }
 
 }
@@ -1291,87 +1492,267 @@ font-size:37px;
 SMALL MOBILE
 ========================================================= */
 
-@media(max-width:430px){
+@media(max-width:390px){
 
-.pd-master-header .pd-header-main{
-height:108px;
-min-height:108px;
-
-padding-left:14px;
-padding-right:14px;
+.pd-header-main{
+padding:
+0
+8px !important;
 }
 
-.pd-master-header .brand strong{
-font-size:42px !important;
-}
+.pd-brand-big{
+font-size:30px !important;
 
-.pd-master-header .brand small{
-font-size:10px !important;
+letter-spacing:1.6px !important;
 }
 
 .pd-category-nav a{
-padding-left:16px;
-padding-right:16px;
+padding:
+0
+15px !important;
 
-font-size:12.5px;
-}
-
-.pd-category-nav::before,
-.pd-category-nav::after{
-flex-basis:max(
-20px,
-calc(50vw - 98px)
-);
+font-size:11px !important;
 }
 
 }
 
 `;
 
-document.head.appendChild(style);
+document.head.appendChild(
+style
+);
 
 }
 
 
 /* =========================================================
-CURRENT LANGUAGE
+LANGUAGE
 ========================================================= */
+
+function normalizeLanguage(
+value
+){
+
+const raw=
+String(
+value||
+"en"
+)
+.toLowerCase();
+
+
+return(
+LANGUAGE_ALIASES[raw]||
+raw
+);
+
+}
+
 
 function getLanguage(){
 
 const saved=
-localStorage.getItem(LANGUAGE_KEY)||
+normalizeLanguage(
+localStorage.getItem(
+LANGUAGE_KEY
+)||
 document.documentElement.lang||
-"en";
+"en"
+);
 
-return NAV_TEXT[saved]
+
+return(
+NAV_TEXT[saved]
 ?saved
-:"en";
+:"en"
+);
 
 }
 
 
 /* =========================================================
-BUILD SIDE MENU
+CREATE MASTER HEADER
+========================================================= */
+
+function createMasterHeader(){
+
+if(
+document.getElementById(
+"pdMasterHeader"
+)
+){
+
+return;
+
+}
+
+
+const originalHeader=
+document.querySelector(
+"header.site-header"
+);
+
+
+if(
+originalHeader
+){
+
+originalHeader.classList.add(
+"pd-original-header-hidden"
+);
+
+}
+
+
+const header=
+document.createElement(
+"header"
+);
+
+
+header.className=
+"pd-master-header";
+
+
+header.id=
+"pdMasterHeader";
+
+
+header.innerHTML=`
+
+<div class="pd-header-main">
+
+<button
+class="pd-menu-button"
+id="pdMasterMenuButton"
+type="button"
+aria-label="Open menu"
+>
+
+<span></span>
+<span></span>
+<span></span>
+
+</button>
+
+
+<a
+class="pd-brand notranslate"
+href="index.html"
+translate="no"
+>
+
+<div class="pd-brand-small">
+PETS &amp;
+</div>
+
+<div class="pd-brand-big">
+DOGUE
+</div>
+
+</a>
+
+
+<a
+class="pd-home-button"
+href="index.html"
+aria-label="Home"
+>
+
+<svg viewBox="0 0 24 24">
+
+<path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
+
+<path d="M9 21v-7h6v7"></path>
+
+</svg>
+
+</a>
+
+</div>
+
+
+<nav
+class="pd-category-nav"
+id="pdCategoryNav"
+aria-label="PETS & DOGUE sections"
+>
+</nav>
+
+`;
+
+
+if(
+originalHeader
+){
+
+originalHeader.parentNode.insertBefore(
+header,
+originalHeader
+);
+
+}else{
+
+document.body.insertBefore(
+header,
+document.body.firstChild
+);
+
+}
+
+
+document
+.getElementById(
+"pdMasterMenuButton"
+)
+?.addEventListener(
+"click",
+openMenu
+);
+
+}
+
+
+/* =========================================================
+CREATE SIDE MENU
 ========================================================= */
 
 function createMenu(){
 
+if(
+document.getElementById(
+"pdShellMenu"
+)
+){
+
+return;
+
+}
+
+
 const overlay=
-document.createElement("div");
+document.createElement(
+"div"
+);
+
 
 overlay.className=
 "pd-shell-overlay";
+
 
 overlay.id=
 "pdShellOverlay";
 
 
 const menu=
-document.createElement("aside");
+document.createElement(
+"aside"
+);
+
 
 menu.className=
 "pd-shell-menu";
+
 
 menu.id=
 "pdShellMenu";
@@ -1380,6 +1761,7 @@ menu.id=
 document.body.appendChild(
 overlay
 );
+
 
 document.body.appendChild(
 menu
@@ -1390,12 +1772,6 @@ overlay.addEventListener(
 "click",
 closeMenu
 );
-
-
-return{
-overlay,
-menu
-};
 
 }
 
@@ -1426,10 +1802,8 @@ document
 );
 
 
-document.body
-.classList
-.add(
-"menu-open"
+document.body.classList.add(
+"pd-menu-open"
 );
 
 }
@@ -1457,17 +1831,89 @@ document
 );
 
 
-document.body
-.classList
-.remove(
-"menu-open"
+document.body.classList.remove(
+"pd-menu-open"
 );
 
 }
 
 
 /* =========================================================
-RENDER MENU
+RENDER TOP NAVIGATION
+========================================================= */
+
+function renderNavigation(){
+
+const language=
+getLanguage();
+
+
+const tr=
+NAV_TEXT[language]||
+NAV_TEXT.en;
+
+
+const nav=
+document.getElementById(
+"pdCategoryNav"
+);
+
+
+if(
+!nav
+){
+
+return;
+
+}
+
+
+const previousScroll=
+nav.scrollLeft;
+
+
+nav.innerHTML=
+NAV_ITEMS
+.map(
+item=>{
+
+const active=
+item.key==="offers";
+
+
+return`
+
+<a
+href="${item.url}"
+class="${active?"active":""}"
+${active?'aria-current="page"':""}
+>
+
+${tr[item.key]}
+
+</a>
+
+`;
+
+}
+)
+.join("");
+
+
+requestAnimationFrame(
+()=>{
+
+nav.scrollLeft=
+previousScroll;
+
+}
+);
+
+}
+
+
+/* =========================================================
+RENDER SIDE MENU
 ========================================================= */
 
 function renderMenu(){
@@ -1475,19 +1921,24 @@ function renderMenu(){
 const language=
 getLanguage();
 
+
 const tr=
 NAV_TEXT[language]||
 NAV_TEXT.en;
+
 
 const menu=
 document.getElementById(
 "pdShellMenu"
 );
 
+
 if(
 !menu
 ){
+
 return;
+
 }
 
 
@@ -1532,9 +1983,10 @@ ${tr.subscribe}
 
 <div class="pd-shell-language">
 
-<label>
+<label for="pdShellLanguage">
 ${tr.language.toUpperCase()}
 </label>
+
 
 <select
 id="pdShellLanguage"
@@ -1544,12 +1996,16 @@ aria-label="${tr.language}"
 ${LANGUAGE_OPTIONS
 .map(
 item=>`
+
 <option
 value="${item[0]}"
 ${item[0]===language?"selected":""}
 >
+
 ${item[1]}
+
 </option>
+
 `
 )
 .join("")}
@@ -1564,12 +2020,16 @@ ${item[1]}
 ${NAV_ITEMS
 .map(
 item=>`
+
 <a
 href="${item.url}"
 class="${item.key==="offers"?"active":""}"
 >
+
 ${tr[item.key]}
+
 </a>
+
 `
 )
 .join("")}
@@ -1595,22 +2055,34 @@ document
 )
 ?.addEventListener(
 "change",
-event=>{
+handleLanguageChange
+);
 
-const value=
-event.target.value;
+}
+
+
+/* =========================================================
+LANGUAGE CHANGE
+========================================================= */
+
+function handleLanguageChange(
+event
+){
+
+const language=
+normalizeLanguage(
+event.target.value
+);
 
 
 localStorage.setItem(
 LANGUAGE_KEY,
-value
+language
 );
 
 
 /*
-Use existing Special Offers language function.
-
-This preserves all current translations and page state.
+Prefer the page's existing language engine.
 */
 
 if(
@@ -1618,25 +2090,44 @@ typeof window.renderLanguage===
 "function"
 ){
 
+try{
+
 window.renderLanguage(
-value
+language
 );
 
-}else{
+}catch(error){
 
-const oldSelect=
+console.warn(
+"PETS & DOGUE language refresh:",
+error
+);
+
+}
+
+}
+
+
+/*
+Synchronise the original Special Offers
+language selector if it exists.
+*/
+
+const originalLanguageSelect=
 document.getElementById(
 "languageSelect"
 );
 
+
 if(
-oldSelect
+originalLanguageSelect
 ){
 
-oldSelect.value=
-value;
+originalLanguageSelect.value=
+language;
 
-oldSelect.dispatchEvent(
+
+originalLanguageSelect.dispatchEvent(
 new Event(
 "change",
 {
@@ -1647,7 +2138,24 @@ bubbles:true
 
 }
 
+
+if(
+language==="ar"
+){
+
+document.documentElement.dir=
+"rtl";
+
+}else{
+
+document.documentElement.dir=
+"ltr";
+
 }
+
+
+document.documentElement.lang=
+language;
 
 
 renderNavigation();
@@ -1655,72 +2163,13 @@ renderNavigation();
 renderMenu();
 
 }
-);
-
-}
 
 
 /* =========================================================
-RENDER NAVIGATION
-========================================================= */
+POSITION ACTIVE RUBRIC ONLY ONCE
 
-function renderNavigation(){
-
-const language=
-getLanguage();
-
-const tr=
-NAV_TEXT[language]||
-NAV_TEXT.en;
-
-
-const nav=
-document.getElementById(
-"pdCategoryNav"
-);
-
-
-if(
-!nav
-){
-return;
-}
-
-
-const oldScroll=
-nav.scrollLeft;
-
-
-nav.innerHTML=
-NAV_ITEMS
-.map(
-item=>`
-<a
-href="${item.url}"
-class="${item.key==="offers"?"active":""}"
-${item.key==="offers"?'aria-current="page"':""}
->
-${tr[item.key]}
-</a>
-`
-)
-.join("");
-
-
-requestAnimationFrame(
-()=>{
-
-nav.scrollLeft=
-oldScroll;
-
-}
-);
-
-}
-
-
-/* =========================================================
-CENTRE DISCOUNTS ONCE
+After this the browser owns the swipe.
+No repeated centring.
 ========================================================= */
 
 function positionActiveOnce(){
@@ -1734,20 +2183,24 @@ document.getElementById(
 if(
 !nav
 ){
+
 return;
+
 }
 
 
 const active=
 nav.querySelector(
-".active"
+"a.active"
 );
 
 
 if(
 !active
 ){
+
 return;
+
 }
 
 
@@ -1760,9 +2213,13 @@ requestAnimationFrame(
 try{
 
 active.scrollIntoView({
+
 behavior:"auto",
+
 block:"nearest",
+
 inline:"center"
+
 });
 
 }catch(error){
@@ -1772,7 +2229,8 @@ active.offsetLeft-
 (
 nav.clientWidth-
 active.offsetWidth
-)/2;
+)/
+2;
 
 
 nav.scrollLeft=
@@ -1793,227 +2251,10 @@ target
 
 
 /* =========================================================
-BUILD HEADER
+SYNC SHELL AFTER EXTERNAL LANGUAGE CHANGE
 ========================================================= */
 
-function buildHeader(){
-
-const header=
-document.querySelector(
-"header.site-header"
-);
-
-
-if(
-!header
-){
-return;
-}
-
-
-header.classList.add(
-"pd-master-header"
-);
-
-
-/*
-Keep the original menu button and brand.
-This avoids breaking any existing identifiers used by
-the Special Offers page.
-*/
-
-const menuButton=
-document.getElementById(
-"menuButton"
-);
-
-
-const brand=
-header.querySelector(
-".brand"
-);
-
-
-if(
-!menuButton||
-!brand
-){
-return;
-}
-
-
-/*
-Remove original inline onclick assigned by
-the current Special Offers script.
-*/
-
-menuButton.onclick=
-null;
-
-
-/*
-Create master row.
-*/
-
-const main=
-document.createElement(
-"div"
-);
-
-main.className=
-"pd-header-main";
-
-
-main.appendChild(
-menuButton
-);
-
-
-main.appendChild(
-brand
-);
-
-
-/*
-Home icon.
-*/
-
-const home=
-document.createElement(
-"a"
-);
-
-home.className=
-"pd-home-button";
-
-home.href=
-"index.html";
-
-home.setAttribute(
-"aria-label",
-"Home"
-);
-
-home.innerHTML=`
-
-<svg
-viewBox="0 0 24 24"
-aria-hidden="true"
->
-
-<path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
-
-<path d="M9 21v-7h6v7"></path>
-
-</svg>
-
-`;
-
-
-main.appendChild(
-home
-);
-
-
-/*
-Keep the old header-right in DOM because
-the existing page language logic refers to
-languageSelect and clubLink.
-
-It is simply hidden visually.
-*/
-
-const oldRight=
-header.querySelector(
-".header-right"
-);
-
-
-header.innerHTML="";
-
-
-header.appendChild(
-main
-);
-
-
-if(
-oldRight
-){
-
-header.appendChild(
-oldRight
-);
-
-}
-
-
-/*
-Add permanent rubric navigation.
-*/
-
-const nav=
-document.createElement(
-"nav"
-);
-
-nav.className=
-"pd-category-nav";
-
-nav.id=
-"pdCategoryNav";
-
-
-header.appendChild(
-nav
-);
-
-
-menuButton.addEventListener(
-"click",
-event=>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-openMenu();
-
-}
-);
-
-
-renderNavigation();
-
-}
-
-
-/* =========================================================
-LANGUAGE SYNCHRONISATION
-========================================================= */
-
-function syncLanguage(){
-
-const language=
-getLanguage();
-
-
-const oldSelect=
-document.getElementById(
-"languageSelect"
-);
-
-
-if(
-oldSelect &&
-oldSelect.value!==language
-){
-
-oldSelect.value=
-language;
-
-}
-
+function syncShellLanguage(){
 
 renderNavigation();
 
@@ -2030,32 +2271,38 @@ function start(){
 
 installStyles();
 
+createMasterHeader();
+
 createMenu();
 
-buildHeader();
+renderNavigation();
 
 renderMenu();
 
-positionActiveOnce();
+
+setTimeout(
+positionActiveOnce,
+80
+);
 
 
 /*
-Listen to the existing hidden language selector too.
+Synchronise if the original selector changes.
 */
 
-const oldSelect=
+const originalLanguageSelect=
 document.getElementById(
 "languageSelect"
 );
 
 
-oldSelect
+originalLanguageSelect
 ?.addEventListener(
 "change",
 ()=>{
 
 setTimeout(
-syncLanguage,
+syncShellLanguage,
 0
 );
 
@@ -2064,7 +2311,41 @@ syncLanguage,
 
 
 /*
-Language may also change from another browser tab.
+Existing PETS & DOGUE i18n event.
+*/
+
+window.addEventListener(
+"petsdogue:languagechange",
+()=>{
+
+setTimeout(
+syncShellLanguage,
+0
+);
+
+}
+);
+
+
+/*
+Browser language event.
+*/
+
+window.addEventListener(
+"languagechange",
+()=>{
+
+setTimeout(
+syncShellLanguage,
+0
+);
+
+}
+);
+
+
+/*
+Another browser tab changed language.
 */
 
 window.addEventListener(
@@ -2076,7 +2357,7 @@ event.key===
 LANGUAGE_KEY
 ){
 
-syncLanguage();
+syncShellLanguage();
 
 }
 
@@ -2106,13 +2387,13 @@ closeMenu();
 }
 
 
-/*
-The current Special Offers script is placed before
-this file and is already loaded when this runs.
-*/
+/* =========================================================
+INITIALISE
+========================================================= */
 
 if(
-document.readyState==="loading"
+document.readyState===
+"loading"
 ){
 
 document.addEventListener(
