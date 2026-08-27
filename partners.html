@@ -21,12 +21,14 @@ Partners & Club Benefits | PETS & DOGUE
 --cream:#f4efe5;
 --white:#fff;
 --green:#65e51f;
+
 --gold-deep:#6f4b0c;
 --gold-dark:#8e6415;
 --gold:#c99a2e;
 --gold-rich:#d8ad45;
 --gold-light:#f1d783;
 --gold-highlight:#fff2b6;
+
 --gold-metal:linear-gradient(
 110deg,
 #6f4b0c 0%,
@@ -36,182 +38,344 @@ Partners & Club Benefits | PETS & DOGUE
 #d4a536 59%,
 #8b5e12 78%,
 #e8c568 100%
-)
+);
+
+--serif:Georgia,"Times New Roman",serif;
+--sans:Arial,Helvetica,sans-serif;
 }
 
 *{
 box-sizing:border-box;
 margin:0;
-padding:0
+padding:0;
 }
 
 html{
-scroll-behavior:smooth
+scroll-behavior:smooth;
 }
 
 body{
 background:var(--cream);
 color:#111;
-font-family:Arial,Helvetica,sans-serif;
-overflow-x:hidden
+font-family:var(--sans);
+overflow-x:hidden;
 }
 
 body.menu-open{
-overflow:hidden
+overflow:hidden;
 }
 
 a{
 text-decoration:none;
-color:inherit
+color:inherit;
 }
 
 button,
 input,
 select,
 textarea{
-font:inherit
+font:inherit;
 }
 
 button{
-cursor:pointer
+cursor:pointer;
 }
 
 img{
 display:block;
-width:100%
+width:100%;
 }
+
+
+/* =========================================================
+METALLIC
+========================================================= */
 
 .metallic{
 background:var(--gold-metal);
-background-size:220% 100%;
 -webkit-background-clip:text;
 background-clip:text;
 color:transparent;
-animation:shine 10s ease-in-out infinite
 }
 
-@keyframes shine{
-0%,72%{
-background-position:100%
-}
-100%{
-background-position:-80%
-}
-}
 
 /* =========================================================
-HEADER
+UNIFIED HEADER
 ========================================================= */
 
 .site-header{
-background:#070707;
-color:#fff;
 position:sticky;
 top:0;
-z-index:1800;
-border-bottom:1px solid #333
+z-index:5000;
+
+width:100%;
+
+background:#070707;
+color:#fff;
+
+border-bottom:1px solid #292929;
 }
+
+
+/* =========================================================
+HEADER MAIN
+========================================================= */
 
 .header-main{
-height:108px;
-max-width:1550px;
-margin:auto;
-padding:0 18px;
+width:100%;
+max-width:1440px;
+
+height:116px;
+min-height:116px;
+
+margin:0 auto;
+padding:0 28px;
+
 display:grid;
-grid-template-columns:80px 1fr 80px;
-align-items:center
+
+grid-template-columns:
+72px
+minmax(0,1fr)
+72px;
+
+align-items:center;
 }
 
+
+/* =========================================================
+MENU / HOME ICONS
+========================================================= */
+
 .icon-button{
-width:50px;
-height:50px;
+width:54px;
+height:54px;
+
+padding:0;
+
+border:0;
+
+background:transparent;
+color:#fff;
+
 display:flex;
 align-items:center;
 justify-content:center;
-border:0;
-background:transparent;
-color:#fff;
-border-radius:50%
 }
 
 .menu-lines{
-width:30px;
+width:34px;
+
 display:grid;
-gap:6px
+gap:7px;
 }
 
 .menu-lines span{
 display:block;
-height:2px;
+
+width:100%;
+height:3px;
+
 background:#fff;
-border-radius:999px
+
+border-radius:999px;
 }
 
-.brand{
-text-align:center;
-line-height:.88
-}
-
-.brand-small{
-font:14px Georgia,serif;
-letter-spacing:1.5px
-}
-
-.brand-big{
-font:normal 58px Georgia,serif;
-letter-spacing:4px
+.home-icon{
+justify-self:end;
 }
 
 .home-icon svg{
-width:30px;
-height:30px;
+width:33px;
+height:33px;
+
 fill:none;
 stroke:#fff;
-stroke-width:2
+stroke-width:2;
 }
 
+
 /* =========================================================
-NAVIGATION
+LOGO
+========================================================= */
+
+.brand{
+justify-self:center;
+align-self:center;
+
+display:flex;
+flex-direction:column;
+
+align-items:center;
+justify-content:center;
+
+text-align:center;
+
+line-height:.88;
+
+white-space:nowrap;
+}
+
+.brand-small{
+display:block;
+
+font-family:var(--serif);
+
+font-size:13px;
+font-weight:400;
+line-height:1;
+
+letter-spacing:2.5px;
+
+color:#c99a2e;
+
+margin:0;
+}
+
+.brand-big{
+display:block;
+
+font-family:var(--serif);
+
+font-size:52px;
+font-weight:400;
+line-height:.78;
+
+letter-spacing:4px;
+
+color:#c99a2e;
+
+margin-top:7px;
+}
+
+
+/* =========================================================
+GLOBAL RUBRIC NAVIGATION
 ========================================================= */
 
 .category-nav{
+position:relative;
+
+width:100%;
+
+height:66px;
+min-height:66px;
+
 display:flex;
-gap:30px;
+align-items:stretch;
+
+gap:0;
+
+padding:0;
+margin:0;
+
 overflow-x:auto;
-padding:16px 24px;
+overflow-y:hidden;
+
+background:#070707;
+
 border-top:1px solid #292929;
-border-bottom:1px solid #303030;
+border-bottom:1px solid #292929;
+
 scrollbar-width:none;
-scroll-behavior:smooth
+
+-webkit-overflow-scrolling:touch;
+
+scroll-behavior:auto;
+scroll-snap-type:none;
+
+overscroll-behavior-x:contain;
+
+touch-action:pan-x;
 }
 
 .category-nav::-webkit-scrollbar{
-display:none
+display:none;
+width:0;
+height:0;
+}
+
+
+/*
+Extra real space before first rubric
+and after Partners.
+
+This is important:
+Partners can remain centred,
+but the user can still freely swipe
+back through every previous rubric.
+*/
+
+.category-nav::before,
+.category-nav::after{
+content:"";
+
+display:block;
+
+flex:0 0 34px;
+
+height:1px;
+
+pointer-events:none;
 }
 
 .category-nav a{
 position:relative;
-white-space:nowrap;
+
+flex:0 0 auto;
+
+height:66px;
+
+padding:0 22px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+font-family:var(--sans);
+
 font-size:14px;
-font-weight:bold;
-letter-spacing:.7px;
-padding-bottom:7px;
-text-transform:uppercase
+font-weight:900;
+line-height:1;
+
+letter-spacing:.55px;
+
+text-transform:uppercase;
+
+white-space:nowrap;
+
+color:#fff;
+
+-webkit-user-drag:none;
+user-select:none;
 }
 
 .category-nav a.active{
-color:var(--gold-light)
+color:var(--gold-light);
 }
 
-.category-nav a.active:after{
+.category-nav a.active::after{
 content:"";
+
 position:absolute;
-left:0;
-right:0;
+
+left:20px;
+right:20px;
 bottom:0;
-height:2px;
-background:var(--gold-metal)
+
+height:4px;
+
+background:
+linear-gradient(
+90deg,
+#70470a 0%,
+#c99428 25%,
+#fff0a6 50%,
+#c99428 75%,
+#70470a 100%
+);
 }
+
 
 /* =========================================================
 SIDE MENU
@@ -219,156 +383,239 @@ SIDE MENU
 
 .menu-overlay{
 position:fixed;
+
 inset:0;
+
+z-index:9000;
+
 background:rgba(0,0,0,.74);
-display:none;
-z-index:2500;
-backdrop-filter:blur(3px)
+
+opacity:0;
+visibility:hidden;
+
+transition:.25s;
+
+backdrop-filter:blur(3px);
 }
 
 .menu-overlay.show{
-display:block
+opacity:1;
+visibility:visible;
 }
 
 .side-menu{
 position:fixed;
+
 top:0;
-left:-100%;
-width:min(430px,94%);
-height:100vh;
-background:#fff;
+left:0;
+bottom:0;
+
+z-index:9100;
+
+width:min(560px,88vw);
+
+background:#f8f5ee;
 color:#111;
-z-index:2600;
+
+transform:translateX(-103%);
+
+transition:.3s ease;
+
 overflow-y:auto;
-transition:.35s;
-border-right:1px solid #111
 }
 
 .side-menu.open{
-left:0
+transform:translateX(0);
 }
 
 .side-menu-header{
-background:#111;
+position:sticky;
+
+top:0;
+
+z-index:5;
+
+height:128px;
+
+background:#080808;
 color:#fff;
-padding:24px;
+
 display:flex;
+
 align-items:center;
 justify-content:space-between;
-position:sticky;
-top:0;
-z-index:3
+
+padding:22px 27px;
 }
 
 .side-menu-header h2{
-font:normal 32px Georgia,serif
+font-family:var(--serif);
+
+font-size:49px;
+font-weight:400;
 }
 
-.side-menu-header button{
-width:43px;
-height:43px;
-border:1px solid #555;
-background:#111;
-color:#fff;
+.close-menu{
+width:58px;
+height:58px;
+
+border:0;
 border-radius:50%;
-font-size:24px
+
+background:#fff;
+color:#111;
+
+font-size:38px;
+line-height:1;
 }
 
 .menu-account{
 display:grid;
+
 grid-template-columns:1fr 1fr;
+
 gap:10px;
-padding:18px 18px 12px
+
+padding:18px;
+
+border-bottom:1px solid #d3cdc1;
 }
 
 .menu-account a{
-padding:12px;
-text-align:center;
+height:55px;
+
 border:2px solid #111;
-border-radius:999px;
-font-weight:bold
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+font-size:12px;
+font-weight:900;
+
+text-transform:uppercase;
 }
 
 .menu-account a:last-child{
 background:var(--green);
-border-color:var(--green)
+border-color:var(--green);
 }
 
 .menu-language{
-padding:0 18px 18px;
-border-bottom:1px solid #ddd
+margin:0 18px 16px;
+
+border:2px solid #111;
+
+padding:11px 14px 13px;
 }
 
 .menu-language span{
 display:block;
-font-size:10px;
-font-weight:bold;
-letter-spacing:1.5px;
+
+font-size:9px;
+font-weight:900;
+
+letter-spacing:2px;
+
 color:#777;
-margin:5px 0 8px
+
+margin-bottom:8px;
 }
 
 .menu-language select{
 width:100%;
-height:48px;
-border:2px solid #111;
-border-radius:999px;
-background:#faf8f3;
-padding:0 15px
+height:42px;
+
+background:transparent;
+
+border:0;
+outline:0;
+
+font-size:15px;
+font-weight:800;
 }
 
 .menu-list{
-padding:18px;
 display:grid;
-gap:12px
+
+gap:8px;
+
+padding:8px 18px 28px;
 }
 
 .menu-item{
+min-height:88px;
+
 display:grid;
-grid-template-columns:82px 1fr;
-align-items:center;
-gap:14px;
+
+grid-template-columns:92px 1fr;
+
 border:2px solid #111;
-background:#faf8f3;
-border-radius:21px;
-overflow:hidden
+
+overflow:hidden;
+
+background:#fff;
 }
 
 .menu-item img{
-width:82px;
-height:82px;
-object-fit:cover
+width:92px;
+height:100%;
+
+min-height:84px;
+
+object-fit:cover;
 }
 
-.menu-item h3{
-font:21px Georgia,serif;
-margin-bottom:4px
+.menu-item-copy{
+padding:12px 15px;
+
+display:flex;
+flex-direction:column;
+
+justify-content:center;
 }
 
-.menu-item p{
-font-size:12px;
-line-height:1.45;
-color:#666;
-padding-right:9px
+.menu-item-copy h3{
+font-family:var(--serif);
+
+font-size:22px;
+font-weight:400;
+line-height:1;
+}
+
+.menu-item-copy p{
+font-size:10px;
+line-height:1.35;
+
+color:#6c6c6c;
+
+margin-top:5px;
 }
 
 .menu-bottom{
 padding:18px;
+
 background:#f4f0e7;
-border-top:1px solid #ddd
+
+border-top:1px solid #ddd;
 }
 
 .menu-bottom div{
 display:flex;
+
 flex-wrap:wrap;
-gap:13px 20px
+
+gap:13px 20px;
 }
 
 .menu-bottom a{
 font-size:12px;
 font-weight:bold;
-color:#666
+
+color:#666;
 }
+
 
 /* =========================================================
 HERO
@@ -376,21 +623,29 @@ HERO
 
 .hero{
 height:570px;
+
 position:relative;
+
 overflow:hidden;
-background:#111
+
+background:#111;
 }
 
 .hero>img{
+width:100%;
 height:100%;
+
 object-fit:cover;
-object-position:center 52%
+object-position:center 52%;
 }
 
-.hero:after{
+.hero::after{
 content:"";
+
 position:absolute;
+
 inset:0;
+
 background:
 linear-gradient(
 to top,
@@ -401,81 +656,118 @@ linear-gradient(
 to right,
 rgba(0,0,0,.18),
 transparent
-)
+);
 }
 
 .hero-content{
 position:absolute;
+
 z-index:2;
+
 left:50%;
 bottom:46px;
+
 transform:translateX(-50%);
+
 width:min(1050px,91%);
+
 text-align:center;
-color:#fff
+
+color:#fff;
 }
 
 .hero-kicker{
 display:block;
+
 color:var(--gold-light);
+
 font-size:10px;
 font-weight:bold;
+
 letter-spacing:2.8px;
-margin-bottom:12px
+
+margin-bottom:12px;
 }
 
 .hero h1{
-font:normal 68px/.94 Georgia,serif;
-margin-bottom:15px
+font-family:var(--serif);
+
+font-size:68px;
+font-weight:400;
+line-height:.94;
+
+margin-bottom:15px;
 }
 
 .hero p{
-font:19px/1.55 Georgia,serif;
+font-family:var(--serif);
+
+font-size:19px;
+line-height:1.55;
+
 color:#eee;
+
 max-width:850px;
-margin:auto
+
+margin:auto;
 }
 
 .hero-actions{
 display:flex;
+
 justify-content:center;
+
 gap:8px;
+
 flex-wrap:wrap;
-margin-top:22px
+
+margin-top:22px;
 }
+
+
+/* =========================================================
+BUTTONS
+========================================================= */
 
 .btn,
 .action-button{
 display:inline-flex;
+
 align-items:center;
 justify-content:center;
+
 border:0;
+
 padding:12px 18px;
+
 border-radius:999px;
+
 font-size:11px;
-font-weight:bold
+font-weight:bold;
 }
 
 .black{
 background:#111;
-color:#fff
+color:#fff;
 }
 
 .gold{
 background:var(--gold-metal);
-color:#111
+color:#111;
 }
 
 .green{
 background:var(--green);
-color:#111
+color:#111;
 }
 
 .light{
 background:#fff;
 color:#111;
-border:1px solid #111
+
+border:1px solid #111;
 }
+
 
 /* =========================================================
 MAIN
@@ -483,9 +775,12 @@ MAIN
 
 main{
 max-width:1450px;
+
 margin:auto;
-padding:16px 18px 65px
+
+padding:16px 18px 65px;
 }
+
 
 /* =========================================================
 CLUB STRIP
@@ -493,42 +788,59 @@ CLUB STRIP
 
 .club-strip{
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
+
 background:#050505;
+
 border:1px solid #111;
-margin-bottom:8px
+
+margin-bottom:8px;
 }
 
 .club-strip-card{
 color:#fff;
+
 padding:23px;
-border-right:1px solid #333
+
+border-right:1px solid #333;
 }
 
 .club-strip-card:last-child{
-border-right:0
+border-right:0;
 }
 
 .club-strip-card span{
 display:block;
+
 font-size:9px;
 font-weight:bold;
+
 letter-spacing:2px;
+
 color:var(--gold-light);
-margin-bottom:8px
+
+margin-bottom:8px;
 }
 
 .club-strip-card strong{
 display:block;
-font:normal 27px Georgia,serif;
-margin-bottom:5px
+
+font-family:var(--serif);
+
+font-size:27px;
+font-weight:400;
+
+margin-bottom:5px;
 }
 
 .club-strip-card p{
 font-size:11px;
 line-height:1.5;
-color:#aaa
+
+color:#aaa;
 }
+
 
 /* =========================================================
 STATS
@@ -536,31 +848,46 @@ STATS
 
 .stats{
 display:grid;
+
 grid-template-columns:repeat(4,1fr);
+
 gap:5px;
+
 background:#080808;
+
 padding:5px;
-border:1px solid #111
+
+border:1px solid #111;
 }
 
 .stat{
 background:#fff;
+
 padding:25px 12px;
-text-align:center
+
+text-align:center;
 }
 
 .stat strong{
 display:block;
-font:normal 42px Georgia,serif;
+
+font-family:var(--serif);
+
+font-size:42px;
+font-weight:400;
+
 color:var(--gold-dark);
-margin-bottom:5px
+
+margin-bottom:5px;
 }
 
 .stat span{
 font-size:11px;
 font-weight:bold;
-color:#666
+
+color:#666;
 }
+
 
 /* =========================================================
 CLUB BANNER
@@ -568,124 +895,177 @@ CLUB BANNER
 
 .club-banner{
 display:grid;
+
 grid-template-columns:.92fr 1.08fr;
+
 margin-top:8px;
+
 background:#111;
 color:#fff;
+
 min-height:455px;
-overflow:hidden
+
+overflow:hidden;
 }
 
 .club-image{
-position:relative
+position:relative;
 }
 
 .club-image img{
 position:absolute;
+
 inset:0;
+
+width:100%;
 height:100%;
-object-fit:cover
+
+object-fit:cover;
 }
 
 .club-copy{
 padding:44px;
+
 display:flex;
 flex-direction:column;
-justify-content:center
+
+justify-content:center;
 }
 
 .club-copy>span{
 font-size:10px;
 font-weight:bold;
+
 letter-spacing:2.4px;
+
 color:var(--gold-light);
-margin-bottom:10px
+
+margin-bottom:10px;
 }
 
 .club-banner h2{
-font:normal 46px/.98 Georgia,serif;
+font-family:var(--serif);
+
+font-size:46px;
+font-weight:400;
+line-height:.98;
+
 color:var(--gold-light);
-margin-bottom:12px
+
+margin-bottom:12px;
 }
 
 .club-banner p{
 font-size:14px;
 line-height:1.65;
-color:#ccc
+
+color:#ccc;
 }
 
 .club-price{
 display:flex;
+
 gap:8px;
+
 flex-wrap:wrap;
-margin-top:17px
+
+margin-top:17px;
 }
 
 .club-price-card{
 background:#fff;
 color:#111;
+
 padding:14px 17px;
+
 min-width:190px;
-border:1px solid #444
+
+border:1px solid #444;
 }
 
 .club-price-card span{
 display:block;
+
 font-size:9px;
 font-weight:bold;
+
 letter-spacing:1.2px;
+
 color:#777;
-margin-bottom:4px
+
+margin-bottom:4px;
 }
 
 .club-price-card strong{
-font:normal 25px Georgia,serif
+font-family:var(--serif);
+
+font-size:25px;
+font-weight:400;
 }
 
 .club-benefits{
 display:grid;
+
 grid-template-columns:1fr 1fr;
+
 gap:6px;
-margin-top:8px
+
+margin-top:8px;
 }
 
 .club-benefit{
 background:#fff;
 color:#111;
+
 padding:14px;
+
 font-size:11px;
 font-weight:bold;
-border:1px solid #333
+
+border:1px solid #333;
 }
 
 .club-copy .btn{
-margin-top:18px
+margin-top:18px;
 }
 
+
 /* =========================================================
-HEADINGS
+SECTION HEAD
 ========================================================= */
 
 .section-head{
 display:flex;
-align-items:end;
+
+align-items:flex-end;
 justify-content:space-between;
+
 gap:18px;
+
 margin:42px 0 17px;
+
 padding-bottom:12px;
-border-bottom:3px solid #111
+
+border-bottom:3px solid #111;
 }
 
 .section-head h2{
-font:normal 51px/.95 Georgia,serif
+font-family:var(--serif);
+
+font-size:51px;
+font-weight:400;
+line-height:.95;
 }
 
 .section-head span{
 font-size:10px;
 font-weight:bold;
+
 letter-spacing:2px;
-color:var(--gold-dark)
+
+color:var(--gold-dark);
 }
+
 
 /* =========================================================
 SEARCH
@@ -693,54 +1073,72 @@ SEARCH
 
 .search-panel{
 background:#fff;
+
 border:1.5px solid #111;
+
 padding:14px;
-margin-bottom:10px
+
+margin-bottom:10px;
 }
 
 .search-grid{
 display:grid;
+
 grid-template-columns:2fr 1fr 1fr auto;
-gap:9px
+
+gap:9px;
 }
 
 .search-grid input,
 .search-grid select{
 width:100%;
 height:48px;
+
 padding:0 14px;
+
 border:1px solid #aaa;
 border-radius:999px;
-background:#fff
+
+background:#fff;
 }
 
 .filters{
 display:flex;
+
 gap:8px;
+
 overflow-x:auto;
+
 margin-bottom:17px;
+
 padding:4px 0;
-scrollbar-width:none
+
+scrollbar-width:none;
 }
 
 .filters::-webkit-scrollbar{
-display:none
+display:none;
 }
 
 .filter{
 white-space:nowrap;
+
 background:#fff;
+
 border:1.5px solid #111;
 border-radius:999px;
+
 padding:10px 16px;
+
 font-size:12px;
-font-weight:bold
+font-weight:bold;
 }
 
 .filter.active{
 background:#111;
-color:#fff
+color:#fff;
 }
+
 
 /* =========================================================
 PARTNERS
@@ -748,167 +1146,235 @@ PARTNERS
 
 .partner-grid{
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
-gap:8px
+
+gap:8px;
 }
 
 .partner-card{
 background:#fff;
+
 border:1.5px solid #111;
+
 overflow:hidden;
+
 display:flex;
 flex-direction:column;
-min-width:0
+
+min-width:0;
 }
 
 .partner-card:first-child{
-grid-column:span 2
+grid-column:span 2;
 }
 
 .partner-image{
 position:relative;
+
 height:310px;
+
 overflow:hidden;
-background:#222
+
+background:#222;
 }
 
 .partner-card:first-child .partner-image{
-height:445px
+height:445px;
 }
 
 .partner-image img{
+width:100%;
 height:100%;
+
 object-fit:cover;
-transition:.55s
+
+transition:.55s ease;
 }
 
 .partner-card:hover .partner-image img{
-transform:scale(1.035)
+transform:scale(1.035);
 }
 
 .logo-mark{
 position:absolute;
+
 left:14px;
 bottom:14px;
+
 width:62px;
 height:62px;
+
 background:#fff;
+
 border:2px solid var(--gold-dark);
+
 display:flex;
+
 align-items:center;
 justify-content:center;
-font:normal 21px Georgia,serif;
+
+font-family:var(--serif);
+
+font-size:21px;
+
 color:var(--gold-dark);
-box-shadow:0 7px 20px rgba(0,0,0,.2)
+
+box-shadow:0 7px 20px rgba(0,0,0,.2);
 }
 
 .partner-content{
 padding:20px;
+
 display:flex;
 flex-direction:column;
-height:100%
+
+height:100%;
 }
 
 .badge-row{
 display:flex;
+
 gap:6px;
+
 flex-wrap:wrap;
-margin-bottom:9px
+
+margin-bottom:9px;
 }
 
 .badge{
 display:inline-block;
+
 background:var(--gold-metal);
+
 color:#111;
+
 padding:6px 9px;
+
 border-radius:999px;
+
 font-size:8px;
 font-weight:bold;
-letter-spacing:.5px
+
+letter-spacing:.5px;
 }
 
 .member-only{
-background:var(--green)
+background:var(--green);
 }
 
 .cms-badge{
 background:#111;
-color:#fff
+color:#fff;
 }
 
 .partner-card h3{
-font:normal 30px/1.04 Georgia,serif;
-margin-bottom:7px
+font-family:var(--serif);
+
+font-size:30px;
+font-weight:400;
+line-height:1.04;
+
+margin-bottom:7px;
 }
 
 .partner-card:first-child h3{
-font-size:38px
+font-size:38px;
 }
 
 .meta{
 font-size:11px;
+
 color:#777;
-margin-bottom:8px
+
+margin-bottom:8px;
 }
 
 .rating{
 font-size:11px;
 font-weight:bold;
+
 color:var(--gold-dark);
-margin-bottom:8px
+
+margin-bottom:8px;
 }
 
 .partner-card p{
 color:#555;
+
 font-size:13px;
 line-height:1.55;
-margin-bottom:12px
+
+margin-bottom:12px;
 }
 
 .discount{
-font:normal 25px Georgia,serif;
+font-family:var(--serif);
+
+font-size:25px;
+
 color:var(--gold-dark);
-margin-bottom:11px
+
+margin-bottom:11px;
 }
 
 .promo-box{
 background:#faf6ea;
+
 border:1px solid #d7ba70;
+
 padding:11px;
+
 font-size:11px;
-margin-bottom:12px
+
+margin-bottom:12px;
 }
 
 .promo-code{
 font-weight:bold;
-letter-spacing:1px
+
+letter-spacing:1px;
 }
 
 .actions{
 display:flex;
+
 gap:6px;
+
 flex-wrap:wrap;
-margin-top:auto
+
+margin-top:auto;
 }
 
 .save-btn.saved{
 background:var(--green);
-border-color:var(--green)
+
+border-color:var(--green);
 }
 
 .empty-state{
 display:none;
+
 background:#fff;
+
 border:2px dashed #aaa;
+
 padding:40px;
+
 text-align:center;
-color:#666
+
+color:#666;
 }
 
 .empty-state h3{
-font:normal 31px Georgia,serif;
-margin-bottom:8px
+font-family:var(--serif);
+
+font-size:31px;
+font-weight:400;
+
+margin-bottom:8px;
 }
+
 
 /* =========================================================
 SAVED
@@ -916,45 +1382,59 @@ SAVED
 
 .saved-section{
 margin-top:8px;
+
 background:#080808;
 color:#fff;
-padding:32px 22px
+
+padding:32px 22px;
 }
 
 .saved-section .section-head{
 margin:0 0 17px;
-border-color:#444
+
+border-color:#444;
 }
 
 .saved-section .section-head h2,
 .saved-section .section-head span{
-color:var(--gold-light)
+color:var(--gold-light);
 }
 
 .saved-list{
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
-gap:6px
+
+gap:6px;
 }
 
 .saved-item{
 background:#fff;
 color:#111;
+
 padding:18px;
-border:1px solid #333
+
+border:1px solid #333;
 }
 
 .saved-item h3{
-font:normal 24px Georgia,serif;
-margin-bottom:6px
+font-family:var(--serif);
+
+font-size:24px;
+font-weight:400;
+
+margin-bottom:6px;
 }
 
 .saved-item p{
 font-size:12px;
-color:#666;
 line-height:1.5;
-margin-bottom:11px
+
+color:#666;
+
+margin-bottom:11px;
 }
+
 
 /* =========================================================
 APPLICATION
@@ -962,118 +1442,163 @@ APPLICATION
 
 .apply-section{
 display:grid;
+
 grid-template-columns:.8fr 1.2fr;
+
 margin-top:8px;
+
 background:#fff;
-border:1.5px solid #111
+
+border:1.5px solid #111;
 }
 
 .apply-intro{
 background:#111;
 color:#fff;
+
 padding:43px;
+
 display:flex;
 flex-direction:column;
-justify-content:center
+
+justify-content:center;
 }
 
-.apply-intro span{
+.apply-intro>span{
 font-size:10px;
 font-weight:bold;
+
 letter-spacing:2.3px;
+
 color:var(--gold-light);
-margin-bottom:10px
+
+margin-bottom:10px;
 }
 
 .apply-intro h2{
-font:normal 44px/.98 Georgia,serif;
+font-family:var(--serif);
+
+font-size:44px;
+font-weight:400;
+line-height:.98;
+
 color:var(--gold-light);
-margin-bottom:13px
+
+margin-bottom:13px;
 }
 
 .apply-intro p{
 font-size:14px;
 line-height:1.65;
-color:#ccc
+
+color:#ccc;
 }
 
 .partner-points{
 margin-top:19px;
+
 display:grid;
-gap:7px
+
+gap:7px;
 }
 
 .partner-point{
 background:#fff;
 color:#111;
+
 padding:12px;
+
 font-size:11px;
-font-weight:bold
+font-weight:bold;
 }
 
 .apply-form{
-padding:34px
+padding:34px;
 }
 
 .form-label{
 display:block;
+
 font-size:9px;
 font-weight:bold;
+
 letter-spacing:1.3px;
+
 color:#777;
-margin:0 0 7px
+
+margin:0 0 7px;
 }
 
 .form-grid{
 display:grid;
+
 grid-template-columns:1fr 1fr;
+
 gap:9px;
-margin-bottom:9px
+
+margin-bottom:9px;
 }
 
 .form-grid input,
 .form-grid select,
 .apply-form textarea{
 width:100%;
+
 padding:13px;
+
 border:1px solid #aaa;
+
 background:#fff;
-border-radius:0
+
+border-radius:0;
 }
 
 .apply-form textarea{
 min-height:130px;
-resize:vertical
+
+resize:vertical;
 }
 
 .checkbox{
 display:flex;
+
 gap:9px;
+
 align-items:flex-start;
+
 color:#555;
+
 font-size:11px;
 line-height:1.5;
-margin:13px 0
+
+margin:13px 0;
 }
 
 .checkbox input{
 width:auto;
-margin-top:2px
+
+margin-top:2px;
 }
 
 .application-status{
 display:none;
+
 margin-top:13px;
+
 padding:13px;
+
 background:#f4f0e7;
+
 border:1px solid #111;
+
 font-size:11px;
-font-weight:bold
+font-weight:bold;
 }
 
 .application-status.show{
-display:block
+display:block;
 }
+
 
 /* =========================================================
 PARTNER NOTE
@@ -1081,57 +1606,81 @@ PARTNER NOTE
 
 .partner-note{
 display:grid;
+
 grid-template-columns:1.1fr .9fr;
+
 margin-top:8px;
+
 background:#111;
 color:#fff;
-min-height:405px
+
+min-height:405px;
 }
 
 .note-image{
-position:relative
+position:relative;
 }
 
 .note-image img{
 position:absolute;
+
 inset:0;
+
+width:100%;
 height:100%;
-object-fit:cover
+
+object-fit:cover;
 }
 
 .note-copy{
 padding:42px;
+
 display:flex;
 flex-direction:column;
-justify-content:center
+
+justify-content:center;
 }
 
-.note-copy span{
+.note-copy>span{
 font-size:10px;
 font-weight:bold;
+
 letter-spacing:2.3px;
+
 color:var(--gold-light);
-margin-bottom:10px
+
+margin-bottom:10px;
 }
 
 .partner-note h2{
-font:normal 43px/.98 Georgia,serif;
+font-family:var(--serif);
+
+font-size:43px;
+font-weight:400;
+line-height:.98;
+
 color:var(--gold-light);
-margin-bottom:12px
+
+margin-bottom:12px;
 }
 
 .partner-note p{
 font-size:14px;
 line-height:1.65;
+
 color:#ccc;
-margin-bottom:18px
+
+margin-bottom:18px;
 }
 
 .note-actions{
 display:flex;
+
 gap:7px;
-flex-wrap:wrap
+
+flex-wrap:wrap;
 }
+
 
 /* =========================================================
 FOOTER
@@ -1140,72 +1689,101 @@ FOOTER
 footer{
 background:#050505;
 color:#fff;
+
 text-align:center;
+
 padding:60px 20px;
-border-top:1px solid #292929
+
+border-top:1px solid #292929;
 }
 
 .footer-brand{
-font:normal 51px Georgia,serif;
-letter-spacing:3px
+font-family:var(--serif);
+
+font-size:51px;
+
+letter-spacing:3px;
 }
 
 .footer-subtitle{
 color:#aaa;
-margin:10px 0 28px
+
+margin:10px 0 28px;
 }
 
 .footer-links{
 display:flex;
+
 justify-content:center;
+
 gap:17px;
+
 flex-wrap:wrap;
-margin-bottom:28px
+
+margin-bottom:28px;
 }
 
 .footer-links a{
 font-size:13px;
-color:#ccc
+
+color:#ccc;
 }
 
 .admin-small{
 font-size:10px;
+
 letter-spacing:2px;
+
 color:#666;
-text-transform:uppercase
+
+text-transform:uppercase;
 }
+
 
 /* =========================================================
 RTL
 ========================================================= */
 
+html[dir="rtl"] body{
+direction:rtl;
+}
+
 html[dir="rtl"] .side-menu{
 left:auto;
-right:-100%;
-border-right:0;
-border-left:1px solid #111
+right:0;
+
+transform:translateX(103%);
 }
 
 html[dir="rtl"] .side-menu.open{
-right:0;
-left:auto
+transform:translateX(0);
 }
 
-html[dir="rtl"] .menu-item p{
-padding-right:0;
-padding-left:9px
+/*
+The page remains RTL in Arabic,
+but rubric physical order remains identical
+to every other language.
+*/
+
+html[dir="rtl"] .category-nav{
+direction:ltr;
+}
+
+html[dir="rtl"] .category-nav a{
+direction:rtl;
 }
 
 html[dir="rtl"] .logo-mark{
 left:auto;
-right:14px
+right:14px;
 }
 
 html[dir="rtl"] input,
 html[dir="rtl"] textarea,
 html[dir="rtl"] select{
-text-align:right
+text-align:right;
 }
+
 
 /* =========================================================
 TABLET
@@ -1216,40 +1794,41 @@ TABLET
 .club-banner,
 .partner-note,
 .apply-section{
-grid-template-columns:1fr
+grid-template-columns:1fr;
 }
 
 .club-image,
 .note-image{
-min-height:420px
+min-height:420px;
 }
 
 .partner-grid{
-grid-template-columns:1fr 1fr
+grid-template-columns:1fr 1fr;
 }
 
 .partner-card:first-child{
-grid-column:1/-1
+grid-column:1/-1;
 }
 
 .saved-list{
-grid-template-columns:1fr 1fr
+grid-template-columns:1fr 1fr;
 }
 
 .club-strip{
-grid-template-columns:1fr
+grid-template-columns:1fr;
 }
 
 .club-strip-card{
 border-right:0;
-border-bottom:1px solid #333
+border-bottom:1px solid #333;
 }
 
 .club-strip-card:last-child{
-border-bottom:0
+border-bottom:0;
 }
 
 }
+
 
 /* =========================================================
 MOBILE
@@ -1258,214 +1837,332 @@ MOBILE
 @media(max-width:760px){
 
 .header-main{
-height:87px;
-grid-template-columns:55px 1fr 55px;
-padding:0 8px
+height:112px;
+min-height:112px;
+
+padding:0 18px;
+
+grid-template-columns:
+58px
+minmax(0,1fr)
+58px;
 }
 
-.brand-big{
-font-size:39px;
-letter-spacing:2px
+.icon-button{
+width:50px;
+height:50px;
+}
+
+.menu-lines{
+width:33px;
+
+gap:6px;
+}
+
+.menu-lines span{
+height:3px;
+}
+
+.home-icon svg{
+width:31px;
+height:31px;
 }
 
 .brand-small{
-font-size:11px
+font-size:11px;
+
+letter-spacing:2.1px;
 }
 
+.brand-big{
+font-size:45px;
+
+letter-spacing:3px;
+
+margin-top:7px;
+}
+
+
+/* important mobile rubric behaviour */
+
 .category-nav{
-padding:14px 15px;
-gap:22px
+height:64px;
+min-height:64px;
+
+touch-action:pan-x;
+
+overflow-x:auto;
+overflow-y:hidden;
+
+-webkit-overflow-scrolling:touch;
+}
+
+.category-nav::before,
+.category-nav::after{
+flex:0 0 max(
+24px,
+calc(50vw - 105px)
+);
 }
 
 .category-nav a{
-font-size:12px
+height:64px;
+
+padding:0 18px;
+
+font-size:13px;
+
+letter-spacing:.45px;
 }
 
+.category-nav a.active::after{
+left:17px;
+right:17px;
+
+height:4px;
+}
+
+
 .hero{
-height:445px
+height:445px;
 }
 
 .hero h1{
-font-size:46px
+font-size:46px;
 }
 
 .hero p{
-font-size:16px
+font-size:16px;
 }
 
 .hero-content{
-bottom:27px
+bottom:27px;
 }
 
 .hero-actions{
-margin-top:16px
+margin-top:16px;
 }
 
 main{
-padding:10px 10px 45px
+padding:10px 10px 45px;
 }
 
 .stats{
 grid-template-columns:1fr 1fr;
+
 gap:4px;
-padding:4px
+
+padding:4px;
 }
 
 .stat strong{
-font-size:36px
+font-size:36px;
 }
 
 .club-copy,
 .note-copy,
 .apply-intro{
-padding:32px 20px
+padding:32px 20px;
 }
 
 .club-banner h2,
 .partner-note h2,
 .apply-intro h2{
-font-size:38px
+font-size:38px;
 }
 
 .club-benefits{
-grid-template-columns:1fr 1fr
+grid-template-columns:1fr 1fr;
 }
 
 .section-head{
 align-items:flex-start;
+
 flex-direction:column;
-margin-top:32px
+
+margin-top:32px;
 }
 
 .section-head h2{
-font-size:40px
+font-size:40px;
 }
 
 .search-grid{
-grid-template-columns:1fr
+grid-template-columns:1fr;
 }
 
 .partner-grid{
 grid-template-columns:1fr 1fr;
-gap:5px
+
+gap:5px;
 }
 
 .partner-card:first-child{
-grid-column:1/-1
+grid-column:1/-1;
 }
 
 .partner-image{
-height:235px
+height:235px;
 }
 
 .partner-card:first-child .partner-image{
-height:400px
+height:400px;
 }
 
 .partner-content{
-padding:13px
+padding:13px;
 }
 
 .partner-card h3{
-font-size:23px
+font-size:23px;
 }
 
 .partner-card:first-child h3{
-font-size:33px
+font-size:33px;
 }
 
 .partner-card p{
-font-size:11px
+font-size:11px;
 }
 
 .discount{
-font-size:20px
+font-size:20px;
 }
 
 .actions .btn{
 font-size:9px;
-padding:9px 10px
+
+padding:9px 10px;
 }
 
 .saved-list{
-grid-template-columns:1fr 1fr
+grid-template-columns:1fr 1fr;
 }
 
 .apply-form{
-padding:22px 14px
+padding:22px 14px;
 }
 
 .form-grid{
-grid-template-columns:1fr 1fr
+grid-template-columns:1fr 1fr;
 }
 
 .club-image,
 .note-image{
-min-height:350px
+min-height:350px;
 }
 
 .footer-brand{
-font-size:39px
+font-size:39px;
+}
+
+.side-menu-header{
+height:124px;
+}
+
+.side-menu-header h2{
+font-size:43px;
+}
+
+.menu-item{
+grid-template-columns:104px 1fr;
+}
+
+.menu-item img{
+width:104px;
 }
 
 }
+
+
+/* =========================================================
+SMALL MOBILE
+========================================================= */
 
 @media(max-width:430px){
 
+.header-main{
+height:108px;
+min-height:108px;
+
+padding-left:14px;
+padding-right:14px;
+}
+
 .brand-big{
-font-size:34px
+font-size:42px;
+}
+
+.brand-small{
+font-size:10px;
+}
+
+.category-nav a{
+padding-left:16px;
+padding-right:16px;
+
+font-size:12.5px;
+}
+
+.category-nav::before,
+.category-nav::after{
+flex-basis:max(
+20px,
+calc(50vw - 98px)
+);
 }
 
 .hero{
-height:420px
+height:420px;
 }
 
 .partner-image{
-height:210px
+height:210px;
 }
 
 .partner-card:first-child .partner-image{
-height:350px
+height:350px;
 }
 
 .partner-card h3{
-font-size:21px
+font-size:21px;
 }
 
 .partner-card:first-child h3{
-font-size:30px
+font-size:30px;
 }
 
 .saved-list{
-grid-template-columns:1fr
+grid-template-columns:1fr;
 }
 
 .form-grid{
-grid-template-columns:1fr
+grid-template-columns:1fr;
 }
 
 .club-benefits{
-grid-template-columns:1fr
+grid-template-columns:1fr;
 }
 
 .club-price{
-display:grid
+display:grid;
 }
 
 .club-price-card{
-min-width:0
+min-width:0;
 }
 
 }
+
+
+/* =========================================================
+REDUCED MOTION
+========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
-.metallic{
-animation:none
-}
-
 .partner-image img{
-transition:none
+transition:none;
 }
 
 }
@@ -1477,8 +2174,8 @@ transition:none
 <div
 class="menu-overlay"
 id="menuOverlay"
-onclick="closeMenu()"
 ></div>
+
 
 <aside
 class="side-menu"
@@ -1492,14 +2189,16 @@ Contents
 </h2>
 
 <button
+class="close-menu"
+id="closeMenuButton"
 type="button"
-onclick="closeMenu()"
 aria-label="Close menu"
 >
 ×
 </button>
 
 </div>
+
 
 <div class="menu-account">
 
@@ -1519,46 +2218,45 @@ Join Club
 
 </div>
 
+
 <div class="menu-language">
 
-<span
-class="notranslate"
-translate="no"
->
+<span>
 LANGUAGE
 </span>
 
 <select id="languageSelect">
 
-<option value="en">EN — English</option>
-<option value="uk">UA — Українська</option>
-<option value="ru">RU — Русский</option>
-<option value="fr">FR — Français</option>
-<option value="de">DE — Deutsch</option>
-<option value="es">ES — Español</option>
-<option value="it">IT — Italiano</option>
-<option value="pt">PT — Português</option>
-<option value="nl">NL — Nederlands</option>
-<option value="pl">PL — Polski</option>
-<option value="cs">CZ — Čeština</option>
-<option value="sk">SK — Slovenčina</option>
-<option value="hu">HU — Magyar</option>
-<option value="ro">RO — Română</option>
-<option value="bg">BG — Български</option>
-<option value="el">GR — Ελληνικά</option>
-<option value="sv">SE — Svenska</option>
-<option value="da">DK — Dansk</option>
-<option value="no">NO — Norsk</option>
-<option value="fi">FI — Suomi</option>
-<option value="tr">TR — Türkçe</option>
-<option value="ar">AR — العربية</option>
-<option value="hi">HI — हिन्दी</option>
+<option value="en">🇬🇧 EN — English</option>
+<option value="uk">🇺🇦 UA — Українська</option>
+<option value="ru">🇷🇺 RU — Русский</option>
+<option value="fr">🇫🇷 FR — Français</option>
+<option value="de">🇩🇪 DE — Deutsch</option>
+<option value="es">🇪🇸 ES — Español</option>
+<option value="it">🇮🇹 IT — Italiano</option>
+<option value="pt">🇵🇹 PT — Português</option>
+<option value="nl">🇳🇱 NL — Nederlands</option>
+<option value="pl">🇵🇱 PL — Polski</option>
+<option value="cs">🇨🇿 CZ — Čeština</option>
+<option value="sk">🇸🇰 SK — Slovenčina</option>
+<option value="hu">🇭🇺 HU — Magyar</option>
+<option value="ro">🇷🇴 RO — Română</option>
+<option value="bg">🇧🇬 BG — Български</option>
+<option value="el">🇬🇷 GR — Ελληνικά</option>
+<option value="sv">🇸🇪 SE — Svenska</option>
+<option value="da">🇩🇰 DK — Dansk</option>
+<option value="no">🇳🇴 NO — Norsk</option>
+<option value="fi">🇫🇮 FI — Suomi</option>
+<option value="tr">🇹🇷 TR — Türkçe</option>
+<option value="ar">🇸🇦 AR — العربية</option>
+<option value="hi">🇮🇳 HI — हिन्दी</option>
 
 </select>
 
 </div>
 
-<div class="menu-list">
+
+<nav class="menu-list">
 
 <a
 class="menu-item"
@@ -1567,10 +2265,10 @@ href="index.html"
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="Home"
+alt="PETS & DOGUE"
 >
 
-<div>
+<div class="menu-item-copy">
 
 <h3 data-i18n="common.menu.home">
 Home
@@ -1584,29 +2282,31 @@ Return to the PETS & DOGUE homepage.
 
 </a>
 
+
 <a
 class="menu-item"
-href="articles.html"
+href="issue-01.html"
 >
 
 <img
-src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
-alt="Articles"
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="PETS & DOGUE magazine"
 >
 
-<div>
+<div class="menu-item-copy">
 
-<h3 data-i18n="common.menu.articles">
-Articles
+<h3 data-i18n="common.menu.latestIssue">
+Latest Issue
 </h3>
 
-<p data-i18n="common.menu.articlesDescription">
-Read and listen to editorial stories.
+<p data-i18n="common.menu.latestIssueDescription">
+Open the newest PETS & DOGUE digital magazine.
 </p>
 
 </div>
 
 </a>
+
 
 <a
 class="menu-item"
@@ -1614,11 +2314,11 @@ href="members-gallery.html"
 >
 
 <img
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
-alt="Cover Star"
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82"
+alt="Cover Stars"
 >
 
-<div>
+<div class="menu-item-copy">
 
 <h3 data-i18n="common.menu.coverStar">
 Cover Star
@@ -1632,23 +2332,149 @@ Enter your pet into the next cover competition.
 
 </a>
 
+
+<a
+class="menu-item"
+href="articles.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=82"
+alt="Articles"
+>
+
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.articles">
+Articles
+</h3>
+
+<p data-i18n="common.menu.articlesDescription">
+Read and listen to editorial stories.
+</p>
+
+</div>
+
+</a>
+
+
+<a
+class="menu-item"
+href="photos.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=82"
+alt="Photos"
+>
+
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.photos">
+Photos
+</h3>
+
+<p data-i18n="common.menu.photosDescription">
+Portraits, galleries and visual stories.
+</p>
+
+</div>
+
+</a>
+
+
+<a
+class="menu-item"
+href="pet-travel.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=82"
+alt="Travel"
+>
+
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.travel">
+Travel
+</h3>
+
+<p data-i18n="common.menu.travelDescription">
+Hotels, beaches and pet-friendly journeys.
+</p>
+
+</div>
+
+</a>
+
+
+<a
+class="menu-item"
+href="pets-in-need.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=82"
+alt="Pets In Need"
+>
+
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.rescue">
+Pets In Need
+</h3>
+
+<p data-i18n="common.menu.rescueDescription">
+Rescue, adoption and community support.
+</p>
+
+</div>
+
+</a>
+
+
+<a
+class="menu-item"
+href="local-community.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=82"
+alt="Community"
+>
+
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.community">
+Local Community
+</h3>
+
+<p data-i18n="common.menu.communityDescription">
+Local recommendations, posts and support.
+</p>
+
+</div>
+
+</a>
+
+
 <a
 class="menu-item"
 href="pet-marketplace.html"
 >
 
 <img
-src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80"
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82"
 alt="Marketplace"
 >
 
-<div>
+<div class="menu-item-copy">
 
-<h3 data-i18n="common.navigation.marketplace">
+<h3 data-i18n="common.menu.marketplace">
 Marketplace
 </h3>
 
-<p data-i18n="partners.menu.marketplaceDescription">
+<p data-i18n="common.menu.marketplaceDescription">
 Community listings, services and accessories.
 </p>
 
@@ -1656,55 +2482,8 @@ Community listings, services and accessories.
 
 </a>
 
-<a
-class="menu-item"
-href="club.html"
->
+</nav>
 
-<img
-src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
-alt="Club"
->
-
-<div>
-
-<h3 data-i18n="common.footer.club">
-Club
-</h3>
-
-<p data-i18n="partners.menu.clubDescription">
-Membership, benefits and premium access.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="contact.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=500&q=80"
-alt="Contact"
->
-
-<div>
-
-<h3 data-i18n="common.footer.contact">
-Contact
-</h3>
-
-<p data-i18n="partners.menu.contactDescription">
-Editorial, partnership and support enquiries.
-</p>
-
-</div>
-
-</a>
-
-</div>
 
 <div class="menu-bottom">
 
@@ -1731,17 +2510,11 @@ data-i18n="common.footer.terms"
 Terms
 </a>
 
-<a
-href="copyright.html"
-data-i18n="partners.footer.copyright"
->
+<a href="copyright.html">
 Copyright
 </a>
 
-<a
-href="cookies.html"
-data-i18n="partners.footer.cookies"
->
+<a href="cookies.html">
 Cookies
 </a>
 
@@ -1758,14 +2531,15 @@ Admin
 
 </aside>
 
+
 <header class="site-header">
 
 <div class="header-main">
 
 <button
 class="icon-button"
+id="menuButton"
 type="button"
-onclick="openMenu()"
 aria-label="Open menu"
 >
 
@@ -1777,21 +2551,23 @@ aria-label="Open menu"
 
 </button>
 
+
 <a
 class="brand notranslate"
 href="index.html"
 translate="no"
 >
 
-<div class="brand-small metallic">
+<div class="brand-small">
 PETS &amp;
 </div>
 
-<div class="brand-big metallic">
+<div class="brand-big">
 DOGUE
 </div>
 
 </a>
+
 
 <a
 class="icon-button home-icon"
@@ -1800,13 +2576,17 @@ aria-label="Home"
 >
 
 <svg viewBox="0 0 24 24">
+
 <path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
+
 <path d="M9 21v-7h6v7"></path>
+
 </svg>
 
 </a>
 
 </div>
+
 
 <nav
 class="category-nav"
@@ -1814,93 +2594,100 @@ id="categoryNav"
 >
 
 <a
-data-i18n="common.navigation.magazine"
 href="issue-01.html"
+data-i18n="common.navigation.magazine"
 >
 MAGAZINE
 </a>
 
 <a
-data-i18n="common.navigation.articles"
-href="articles.html"
->
-ARTICLES
-</a>
-
-<a
-data-i18n="common.navigation.photos"
-href="photos.html"
->
-PHOTOS
-</a>
-
-<a
-data-i18n="common.navigation.coverStars"
 href="members-gallery.html"
+data-i18n="common.navigation.coverStars"
 >
 COVER STARS
 </a>
 
 <a
-data-i18n="common.navigation.fashion"
-href="pet-fashion.html"
+href="special-offers.html"
+id="discountNav"
 >
-FASHION
+DISCOUNTS
 </a>
 
 <a
-data-i18n="common.navigation.wellness"
-href="wellness.html"
->
-WELLNESS
-</a>
-
-<a
-data-i18n="common.navigation.travel"
-href="pet-travel.html"
->
-TRAVEL
-</a>
-
-<a
-data-i18n="common.navigation.places"
 href="pet-friendly-places.html"
+data-i18n="common.navigation.places"
 >
 PLACES
 </a>
 
 <a
-data-i18n="common.navigation.rescue"
-href="pets-in-need.html"
+href="articles.html"
+data-i18n="common.navigation.articles"
 >
-RESCUE
+ARTICLES
 </a>
 
 <a
-data-i18n="common.navigation.contests"
-href="contests.html"
+href="photos.html"
+data-i18n="common.navigation.photos"
 >
-CONTESTS
+PHOTOS
 </a>
 
 <a
-data-i18n="common.navigation.community"
+href="pet-travel.html"
+data-i18n="common.navigation.travel"
+>
+TRAVEL
+</a>
+
+<a
+href="pet-fashion.html"
+data-i18n="common.navigation.fashion"
+>
+FASHION
+</a>
+
+<a
+href="wellness.html"
+data-i18n="common.navigation.wellness"
+>
+WELLNESS
+</a>
+
+<a
 href="local-community.html"
+data-i18n="common.navigation.community"
 >
 COMMUNITY
 </a>
 
 <a
-data-i18n="common.navigation.marketplace"
+href="contests.html"
+data-i18n="common.navigation.contests"
+>
+CONTESTS
+</a>
+
+<a
+href="pets-in-need.html"
+data-i18n="common.navigation.rescue"
+>
+RESCUE
+</a>
+
+<a
 href="pet-marketplace.html"
+data-i18n="common.navigation.marketplace"
 >
 MARKETPLACE
 </a>
 
 <a
 class="active"
-data-i18n="common.navigation.partners"
 href="partners.html"
+data-i18n="common.navigation.partners"
 >
 PARTNERS
 </a>
@@ -1908,6 +2695,7 @@ PARTNERS
 </nav>
 
 </header>
+
 
 <section class="hero">
 
@@ -1933,6 +2721,7 @@ Partners & Discounts
 <p data-i18n="partners.hero.description">
 Discover curated pet brands, hotels, groomers, cafés, photographers, clinics and lifestyle partners selected for the PETS & DOGUE community.
 </p>
+
 
 <div class="hero-actions">
 
@@ -1966,7 +2755,9 @@ Join The Club
 
 </section>
 
+
 <main>
+
 
 <section class="club-strip">
 
@@ -1979,21 +2770,16 @@ translate="no"
 PETS &amp; DOGUE CLUB
 </span>
 
-<strong
-id="stripMonthly"
-data-i18n="partners.extra.monthly"
->
+<strong data-i18n="partners.extra.monthly">
 First month £0
 </strong>
 
-<p
-id="stripMonthlyText"
-data-i18n="partners.extra.monthlyText"
->
+<p data-i18n="partners.extra.monthlyText">
 Then £1 per month until cancelled.
 </p>
 
 </article>
+
 
 <article class="club-strip-card">
 
@@ -2001,21 +2787,16 @@ Then £1 per month until cancelled.
 ANNUAL MEMBERSHIP
 </span>
 
-<strong
-id="stripAnnual"
-data-i18n="partners.extra.annual"
->
+<strong data-i18n="partners.extra.annual">
 £10 for one year
 </strong>
 
-<p
-id="stripAnnualText"
-data-i18n="partners.extra.annualText"
->
+<p data-i18n="partners.extra.annualText">
 A simple annual membership option.
 </p>
 
 </article>
+
 
 <article class="club-strip-card">
 
@@ -2023,23 +2804,18 @@ A simple annual membership option.
 MEMBER BENEFITS
 </span>
 
-<strong
-id="stripBenefits"
-data-i18n="partners.extra.benefits"
->
+<strong data-i18n="partners.extra.benefits">
 Selected partner offers
 </strong>
 
-<p
-id="stripBenefitsText"
-data-i18n="partners.extra.benefitsText"
->
+<p data-i18n="partners.extra.benefitsText">
 Member discounts and benefits may vary by partner and availability.
 </p>
 
 </article>
 
 </section>
+
 
 <section class="stats">
 
@@ -2055,6 +2831,7 @@ Partners
 
 </div>
 
+
 <div class="stat">
 
 <strong id="discountCount">
@@ -2067,6 +2844,7 @@ Member Offers
 
 </div>
 
+
 <div class="stat">
 
 <strong id="categoryCount">
@@ -2078,6 +2856,7 @@ Categories
 </span>
 
 </div>
+
 
 <div class="stat">
 
@@ -2093,6 +2872,7 @@ Locations
 
 </section>
 
+
 <section class="club-banner">
 
 <div class="club-image">
@@ -2104,6 +2884,7 @@ data-i18n-attr="alt:partners.images.club"
 >
 
 </div>
+
 
 <div class="club-copy">
 
@@ -2122,45 +2903,36 @@ PETS & DOGUE Club Benefits
 Club members unlock selected partner discounts, private promotional codes, priority offers and future digital member-card benefits.
 </p>
 
+
 <div class="club-price">
 
 <div class="club-price-card">
 
-<span
-id="monthlyPlanLabel"
-data-i18n="partners.extra.monthlyLabel"
->
+<span data-i18n="partners.extra.monthlyLabel">
 MONTHLY
 </span>
 
-<strong
-id="monthlyPlanPrice"
-data-i18n="partners.extra.monthlyPrice"
->
+<strong data-i18n="partners.extra.monthlyPrice">
 £0 first month · then £1/month
 </strong>
 
 </div>
 
+
 <div class="club-price-card">
 
-<span
-id="annualPlanLabel"
-data-i18n="partners.extra.annualLabel"
->
+<span data-i18n="partners.extra.annualLabel">
 ANNUAL
 </span>
 
-<strong
-id="annualPlanPrice"
-data-i18n="partners.extra.annualPrice"
->
+<strong data-i18n="partners.extra.annualPrice">
 £10 / year
 </strong>
 
 </div>
 
 </div>
+
 
 <div class="club-benefits">
 
@@ -2173,7 +2945,6 @@ data-i18n="partners.club.discount"
 
 <div
 class="club-benefit"
-id="benefitMarketplace"
 data-i18n="partners.extra.marketBenefit"
 >
 🛍 Marketplace member access
@@ -2195,6 +2966,7 @@ data-i18n="partners.club.priority"
 
 </div>
 
+
 <a
 href="club.html"
 class="btn green"
@@ -2206,6 +2978,7 @@ Join PETS & DOGUE Club
 </div>
 
 </section>
+
 
 <section id="directory">
 
@@ -2224,6 +2997,7 @@ CURATED · MEMBER BENEFITS
 
 </div>
 
+
 <section class="search-panel">
 
 <div class="search-grid">
@@ -2233,23 +3007,16 @@ id="searchInput"
 type="search"
 placeholder="Search brand, service, city or category..."
 data-i18n-placeholder="partners.directory.searchPlaceholder"
-oninput="renderPartners()"
 >
 
-<select
-id="categorySearch"
-onchange="categorySelectChanged()"
-></select>
+<select id="categorySearch"></select>
 
-<select
-id="locationSearch"
-onchange="renderPartners()"
-></select>
+<select id="locationSearch"></select>
 
 <button
 class="action-button black"
+id="searchButton"
 type="button"
-onclick="renderPartners()"
 data-i18n="partners.directory.searchButton"
 >
 Search
@@ -2259,15 +3026,18 @@ Search
 
 </section>
 
+
 <div
 class="filters"
 id="categoryFilters"
 ></div>
 
+
 <section
 class="partner-grid"
 id="partnerGrid"
 ></section>
+
 
 <div
 class="empty-state"
@@ -2285,6 +3055,7 @@ Try another category, location or search term.
 </div>
 
 </section>
+
 
 <section class="saved-section">
 
@@ -2310,6 +3081,7 @@ id="savedList"
 
 </section>
 
+
 <section
 class="apply-section"
 id="apply"
@@ -2332,11 +3104,11 @@ Become A PETS & DOGUE Partner
 Brands, hotels, groomers, cafés, photographers, clinics and pet businesses can apply for advertising, directory placement and member-discount partnerships.
 </p>
 
+
 <div class="partner-points">
 
 <div
 class="partner-point"
-id="partnerPoint1"
 data-i18n="partners.extra.point1"
 >
 ✦ Premium directory presence
@@ -2344,7 +3116,6 @@ data-i18n="partners.extra.point1"
 
 <div
 class="partner-point"
-id="partnerPoint2"
 data-i18n="partners.extra.point2"
 >
 ✦ Club member offers
@@ -2352,7 +3123,6 @@ data-i18n="partners.extra.point2"
 
 <div
 class="partner-point"
-id="partnerPoint3"
 data-i18n="partners.extra.point3"
 >
 ✦ Editorial & campaign opportunities
@@ -2362,15 +3132,16 @@ data-i18n="partners.extra.point3"
 
 </div>
 
+
 <div class="apply-form">
 
 <span
 class="form-label"
-id="applicationLabel"
 data-i18n="partners.extra.application"
 >
 PARTNERSHIP APPLICATION
 </span>
+
 
 <div class="form-grid">
 
@@ -2401,6 +3172,7 @@ type="url"
 placeholder="Website or social link"
 data-i18n-placeholder="partners.apply.website"
 >
+
 
 <select id="businessCategory">
 
@@ -2490,6 +3262,7 @@ Other
 
 </select>
 
+
 <input
 id="businessLocation"
 type="text"
@@ -2499,11 +3272,13 @@ data-i18n-placeholder="partners.apply.location"
 
 </div>
 
+
 <textarea
 id="businessMessage"
 placeholder="Tell us about your business and the offer you would like to provide..."
 data-i18n-placeholder="partners.apply.message"
 ></textarea>
+
 
 <label class="checkbox">
 
@@ -2518,14 +3293,16 @@ I confirm that the information is accurate and I agree to be contacted about a P
 
 </label>
 
+
 <button
 class="action-button green"
+id="submitApplicationButton"
 type="button"
-onclick="submitPartnerApplication()"
 data-i18n="partners.apply.submit"
 >
 Submit Application
 </button>
+
 
 <a
 href="media-kit.html"
@@ -2534,6 +3311,7 @@ data-i18n="partners.apply.mediaKit"
 >
 View Media Kit
 </a>
+
 
 <div
 class="application-status"
@@ -2546,6 +3324,7 @@ aria-live="polite"
 
 </section>
 
+
 <section class="partner-note">
 
 <div class="note-image">
@@ -2557,6 +3336,7 @@ data-i18n-attr="alt:partners.images.note"
 >
 
 </div>
+
 
 <div class="note-copy">
 
@@ -2574,6 +3354,7 @@ Luxury Visibility With Purpose
 <p data-i18n="partners.note.description">
 PETS & DOGUE connects premium animal lifestyle brands with a community that values design, care, travel, wellness and responsible pet ownership.
 </p>
+
 
 <div class="note-actions">
 
@@ -2601,6 +3382,7 @@ Contact PETS & DOGUE
 
 </main>
 
+
 <footer>
 
 <div
@@ -2616,6 +3398,7 @@ data-i18n="common.footer.subtitle"
 >
 The International Luxury Animal Magazine
 </p>
+
 
 <div class="footer-links">
 
@@ -2655,17 +3438,17 @@ Cover Stars
 </a>
 
 <a
-href="pet-marketplace.html"
-data-i18n="common.navigation.marketplace"
+href="pet-friendly-places.html"
+data-i18n="common.footer.places"
 >
-Marketplace
+Places
 </a>
 
 <a
-href="contests.html"
-data-i18n="common.navigation.contests"
+href="pet-marketplace.html"
+data-i18n="common.footer.marketplace"
 >
-Contests
+Marketplace
 </a>
 
 <a
@@ -2703,21 +3486,8 @@ data-i18n="common.footer.terms"
 Terms
 </a>
 
-<a
-href="copyright.html"
-data-i18n="partners.footer.copyright"
->
-Copyright
-</a>
-
-<a
-href="cookies.html"
-data-i18n="partners.footer.cookies"
->
-Cookies
-</a>
-
 </div>
+
 
 <a
 href="admin.html"
@@ -2729,66 +3499,239 @@ Admin
 
 </footer>
 
+
 <script src="/i18n/common.js?v=2"></script>
 <script src="/i18n/partners.js?v=3"></script>
 <script src="/i18n/engine.js?v=3"></script>
 
+
 <script>
-const CMS_KEY="pets_dogue_cms_v1";
-const SAVED_KEY="pd_saved_partners";
-const LANGUAGE_KEY="pets_dogue_language";
+"use strict";
 
-let activeCategory="All";
-let publicPartners=[];
-let savedPartners=[];
 
-const $=id=>document.getElementById(id);
+/* =========================================================
+PETS & DOGUE PARTNERS
+FULL PAGE LOGIC
 
-const sideMenu=$("sideMenu");
-const menuOverlay=$("menuOverlay");
-const languageSelect=$("languageSelect");
-const categoryNav=$("categoryNav");
+Header navigation is deliberately NOT rebuilt
+or continuously re-centred.
 
-const partnerCount=$("partnerCount");
-const discountCount=$("discountCount");
-const categoryCount=$("categoryCount");
-const locationCount=$("locationCount");
+The DOM above contains one permanent rubric order.
+The active rubric is centred only once when opening
+the page. After that the user owns horizontal scrolling.
+========================================================= */
 
-const searchInput=$("searchInput");
-const categorySearch=$("categorySearch");
-const locationSearch=$("locationSearch");
-const categoryFilters=$("categoryFilters");
-const partnerGrid=$("partnerGrid");
-const emptyState=$("emptyState");
-const savedList=$("savedList");
 
-const businessName=$("businessName");
-const contactName=$("contactName");
-const businessEmail=$("businessEmail");
-const businessWebsite=$("businessWebsite");
-const businessCategory=$("businessCategory");
-const businessLocation=$("businessLocation");
-const businessMessage=$("businessMessage");
-const businessAgree=$("businessAgree");
-const applicationStatus=$("applicationStatus");
-const pageDescription=$("pageDescription");
+const CMS_KEY=
+"pets_dogue_cms_v1";
+
+const SAVED_KEY=
+"pd_saved_partners";
+
+const LANGUAGE_KEY=
+"pets_dogue_language";
+
+
+let activeCategory=
+"All";
+
+let publicPartners=
+[];
+
+let savedPartners=
+[];
+
+let navigationTouched=
+false;
+
+let initialNavigationPositionDone=
+false;
+
+
+const $=
+id=>
+document.getElementById(id);
+
+
+const sideMenu=
+$("sideMenu");
+
+const menuOverlay=
+$("menuOverlay");
+
+const menuButton=
+$("menuButton");
+
+const closeMenuButton=
+$("closeMenuButton");
+
+const languageSelect=
+$("languageSelect");
+
+const categoryNav=
+$("categoryNav");
+
+const discountNav=
+$("discountNav");
+
+const partnerCount=
+$("partnerCount");
+
+const discountCount=
+$("discountCount");
+
+const categoryCount=
+$("categoryCount");
+
+const locationCount=
+$("locationCount");
+
+const searchInput=
+$("searchInput");
+
+const searchButton=
+$("searchButton");
+
+const categorySearch=
+$("categorySearch");
+
+const locationSearch=
+$("locationSearch");
+
+const categoryFilters=
+$("categoryFilters");
+
+const partnerGrid=
+$("partnerGrid");
+
+const emptyState=
+$("emptyState");
+
+const savedList=
+$("savedList");
+
+const businessName=
+$("businessName");
+
+const contactName=
+$("contactName");
+
+const businessEmail=
+$("businessEmail");
+
+const businessWebsite=
+$("businessWebsite");
+
+const businessCategory=
+$("businessCategory");
+
+const businessLocation=
+$("businessLocation");
+
+const businessMessage=
+$("businessMessage");
+
+const businessAgree=
+$("businessAgree");
+
+const applicationStatus=
+$("applicationStatus");
+
+const submitApplicationButton=
+$("submitApplicationButton");
+
+const pageDescription=
+$("pageDescription");
+
+
+/* =========================================================
+DISCOUNT RUBRIC — 23 LANGUAGES
+
+common.js currently does not contain a
+common.navigation.discounts key, therefore this
+one rubric is translated locally without touching
+the existing global i18n files.
+========================================================= */
+
+const DISCOUNT_NAV_LABELS={
+
+en:"DISCOUNTS",
+
+uk:"ЗНИЖКИ",
+
+ru:"СКИДКИ",
+
+fr:"RÉDUCTIONS",
+
+de:"RABATTE",
+
+es:"DESCUENTOS",
+
+it:"SCONTI",
+
+pt:"DESCONTOS",
+
+nl:"KORTINGEN",
+
+pl:"ZNIŻKI",
+
+cs:"SLEVY",
+
+sk:"ZĽAVY",
+
+hu:"KEDVEZMÉNYEK",
+
+ro:"REDUCERI",
+
+bg:"ОТСТЪПКИ",
+
+el:"ΕΚΠΤΩΣΕΙΣ",
+
+sv:"RABATTER",
+
+da:"RABATTER",
+
+no:"RABATTER",
+
+fi:"ALENNUKSET",
+
+tr:"İNDİRİMLER",
+
+ar:"الخصومات",
+
+hi:"छूट"
+
+};
+
+
+/* =========================================================
+SAVED PARTNERS
+========================================================= */
 
 try{
 
 savedPartners=
 JSON.parse(
-localStorage.getItem(SAVED_KEY)||"[]"
+localStorage.getItem(SAVED_KEY)||
+"[]"
 );
 
-if(!Array.isArray(savedPartners)){
-savedPartners=[];
+if(
+!Array.isArray(savedPartners)
+){
+
+savedPartners=
+[];
+
 }
 
 }catch(error){
 
-savedPartners=[];
+savedPartners=
+[];
 
 }
+
 
 /* =========================================================
 MENU
@@ -2796,19 +3739,71 @@ MENU
 
 function openMenu(){
 
-sideMenu.classList.add("open");
-menuOverlay.classList.add("show");
-document.body.classList.add("menu-open");
+sideMenu?.classList.add(
+"open"
+);
+
+menuOverlay?.classList.add(
+"show"
+);
+
+document.body.classList.add(
+"menu-open"
+);
 
 }
+
 
 function closeMenu(){
 
-sideMenu.classList.remove("open");
-menuOverlay.classList.remove("show");
-document.body.classList.remove("menu-open");
+sideMenu?.classList.remove(
+"open"
+);
+
+menuOverlay?.classList.remove(
+"show"
+);
+
+document.body.classList.remove(
+"menu-open"
+);
 
 }
+
+
+menuButton?.addEventListener(
+"click",
+openMenu
+);
+
+
+closeMenuButton?.addEventListener(
+"click",
+closeMenu
+);
+
+
+menuOverlay?.addEventListener(
+"click",
+closeMenu
+);
+
+
+document.addEventListener(
+"keydown",
+event=>{
+
+if(
+event.key==="Escape"
+){
+
+closeMenu();
+
+}
+
+}
+);
+
 
 /* =========================================================
 LANGUAGE
@@ -2818,89 +3813,317 @@ function currentLanguage(){
 
 if(
 window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage.getCurrentLanguage==="function"
+typeof window.PetsDogueLanguage
+.getCurrentLanguage==="function"
 ){
 
-const value=
-window.PetsDogueLanguage.getCurrentLanguage();
+const language=
+window.PetsDogueLanguage
+.getCurrentLanguage();
 
-if(typeof value==="string"){
-return value;
+if(
+typeof language==="string"
+){
+
+return language;
+
 }
 
-if(value&&value.code){
-return value.code;
-}
+if(
+language &&
+language.code
+){
+
+return language.code;
 
 }
 
-const lang=
-localStorage.getItem(LANGUAGE_KEY)||
+}
+
+
+const saved=
+localStorage.getItem(
+LANGUAGE_KEY
+)||
 languageSelect?.value||
 "en";
 
-return window.PetsDogueTranslations?.partners?.[lang]
-?lang
-:"en";
+return saved;
 
 }
 
-function pageTranslation(path,fallback=""){
 
-const root=
-window.PetsDogueTranslations?.partners;
+function pageTranslation(
+path,
+fallback=""
+){
 
-if(!root){
+const translations=
+window
+.PetsDogueTranslations
+?.partners;
+
+if(
+!translations
+){
+
 return fallback;
+
 }
 
-const read=source=>
+
+const read=
+source=>
 path
 .split(".")
 .reduce(
 (value,key)=>
 value &&
-Object.prototype.hasOwnProperty.call(value,key)
+Object.prototype
+.hasOwnProperty
+.call(
+value,
+key
+)
 ?value[key]
 :undefined,
 source
 );
 
+
+const language=
+currentLanguage();
+
+
 const translated=
-read(root[currentLanguage()]);
+read(
+translations[language]
+);
+
 
 const english=
-read(root.en);
+read(
+translations.en
+);
 
-return translated ?? english ?? fallback;
+
+return(
+translated ??
+english ??
+fallback
+);
 
 }
 
-function categoryLabel(category){
+
+/* =========================================================
+LOCAL NAV TRANSLATION
+========================================================= */
+
+function refreshDiscountNavigation(){
+
+if(
+!discountNav
+){
+
+return;
+
+}
+
+
+const language=
+currentLanguage();
+
+
+discountNav.textContent=
+DISCOUNT_NAV_LABELS[language]||
+DISCOUNT_NAV_LABELS.en;
+
+}
+
+
+/* =========================================================
+CATEGORY TRANSLATION
+========================================================= */
+
+function categoryLabel(
+category
+){
 
 const map={
-"Pet Fashion":"petFashion",
-"Grooming":"grooming",
-"Hotels":"hotels",
-"Photography":"photography",
-"Wellness":"wellness",
-"Pet Friendly":"petFriendly",
-"Travel":"travel",
-"Veterinary":"veterinary",
-"Training":"training",
-"Insurance":"insurance",
-"Other":"other",
-"Partner":"partner"
+
+"Pet Fashion":
+"petFashion",
+
+"Grooming":
+"grooming",
+
+"Hotels":
+"hotels",
+
+"Photography":
+"photography",
+
+"Wellness":
+"wellness",
+
+"Pet Friendly":
+"petFriendly",
+
+"Travel":
+"travel",
+
+"Veterinary":
+"veterinary",
+
+"Training":
+"training",
+
+"Insurance":
+"insurance",
+
+"Other":
+"other",
+
+"Partner":
+"partner"
+
 };
 
-return map[category]
-?pageTranslation(
-"categories."+map[category],
-category
-)
-:category;
+
+if(
+!map[category]
+){
+
+return category;
 
 }
+
+
+return pageTranslation(
+"categories."+
+map[category],
+category
+);
+
+}
+
+
+/* =========================================================
+HEADER NAVIGATION
+
+The important rule:
+scrollIntoView is called ONLY ONCE.
+
+There is no scroll listener which returns the
+strip to Partners.
+
+There is no MutationObserver which repeatedly
+centres the selected rubric.
+
+Native mobile horizontal scrolling remains free.
+========================================================= */
+
+function positionActiveNavigationOnce(){
+
+if(
+initialNavigationPositionDone ||
+navigationTouched ||
+!categoryNav
+){
+
+return;
+
+}
+
+
+const active=
+categoryNav.querySelector(
+"a.active"
+);
+
+
+if(
+!active
+){
+
+return;
+
+}
+
+
+initialNavigationPositionDone=
+true;
+
+
+requestAnimationFrame(
+()=>{
+
+requestAnimationFrame(
+()=>{
+
+try{
+
+active.scrollIntoView({
+behavior:"auto",
+block:"nearest",
+inline:"center"
+});
+
+}catch(error){
+
+const target=
+active.offsetLeft-
+(
+categoryNav.clientWidth-
+active.offsetWidth
+)/2;
+
+categoryNav.scrollLeft=
+Math.max(
+0,
+target
+);
+
+}
+
+}
+);
+
+}
+);
+
+}
+
+
+/* =========================================================
+USER OWNS RUBRIC SCROLL
+========================================================= */
+
+[
+"touchstart",
+"pointerdown",
+"wheel"
+]
+.forEach(
+eventName=>{
+
+categoryNav?.addEventListener(
+eventName,
+()=>{
+
+navigationTouched=
+true;
+
+},
+{
+passive:true
+}
+);
+
+}
+);
+
 
 /* =========================================================
 FALLBACK PARTNERS
@@ -2910,113 +4133,231 @@ const fallbackPartners=[
 
 {
 id:"fallback-fashion",
+
 name:"Luxury Pet Boutique",
+
 category:"Pet Fashion",
+
 location:"Online",
+
 discount:"10% OFF",
+
 code:"DOGUE10",
+
 website:"",
-descriptionKey:"fallback.fashion.description",
-image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80",
+
+descriptionKey:
+"fallback.fashion.description",
+
+image:
+"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80",
+
 rating:"★★★★★ 4.9",
+
 memberOnly:true
 },
+
 
 {
 id:"fallback-grooming",
+
 name:"Premium Grooming Studio",
+
 category:"Grooming",
+
 location:"London",
+
 discount:"15% OFF",
+
 code:"DOGUESPA15",
+
 website:"",
-descriptionKey:"fallback.grooming.description",
-image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80",
+
+descriptionKey:
+"fallback.grooming.description",
+
+image:
+"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80",
+
 rating:"★★★★★ 4.8",
+
 memberOnly:true
 },
+
 
 {
 id:"fallback-hotel",
+
 name:"Pet-Friendly Hotel",
+
 category:"Hotels",
+
 location:"UK & Europe",
+
 discount:"12% OFF",
+
 code:"STAYDOGUE12",
+
 website:"",
-descriptionKey:"fallback.hotel.description",
-image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+
+descriptionKey:
+"fallback.hotel.description",
+
+image:
+"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+
 rating:"★★★★★ 4.9",
+
 memberOnly:true
 },
+
 
 {
 id:"fallback-photo",
+
 name:"Pet Portrait Studio",
+
 category:"Photography",
+
 location:"London",
+
 discount:"20% OFF",
+
 code:"COVERSTAR20",
+
 website:"",
-descriptionKey:"fallback.photo.description",
-image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
+
+descriptionKey:
+"fallback.photo.description",
+
+image:
+"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
+
 rating:"★★★★★ 5.0",
+
 memberOnly:true
 },
 
+
 {
 id:"fallback-wellness",
+
 name:"Pet Wellness Partner",
+
 category:"Wellness",
+
 location:"Bournemouth",
-discountKey:"dynamic.memberOffer",
+
+discountKey:
+"dynamic.memberOffer",
+
 code:"",
+
 website:"",
-descriptionKey:"fallback.wellness.description",
-image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80",
+
+descriptionKey:
+"fallback.wellness.description",
+
+image:
+"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80",
+
 rating:"★★★★☆ 4.7",
+
 memberOnly:false
 },
 
+
 {
 id:"fallback-cafe",
+
 name:"Dog-Friendly Café",
+
 category:"Pet Friendly",
+
 location:"Bournemouth",
-discountKey:"dynamic.freeTreat",
+
+discountKey:
+"dynamic.freeTreat",
+
 code:"",
+
 website:"",
-descriptionKey:"fallback.cafe.description",
-image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
+
+descriptionKey:
+"fallback.cafe.description",
+
+image:
+"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80",
+
 rating:"★★★★★ 4.8",
+
 memberOnly:false
 }
 
 ];
 
+
 /* =========================================================
 HELPERS
 ========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(
+value
+){
 
-return String(value||"")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+return String(
+value||
+""
+)
+
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
 
-function safeURL(value){
+
+function safeURL(
+value
+){
 
 const url=
-String(value||"").trim();
+String(
+value||
+""
+)
+.trim();
 
-if(!url){
+
+if(
+!url
+){
+
 return"";
+
 }
+
 
 try{
 
@@ -3026,90 +4367,163 @@ url,
 window.location.origin
 );
 
+
 if(
-parsed.protocol==="http:"||
+parsed.protocol==="http:" ||
 parsed.protocol==="https:"
 ){
+
 return parsed.href;
+
 }
 
-}catch(error){}
+}catch(error){
+}
+
 
 return"";
 
 }
 
-function selectPartnerImage(category,name){
+
+function selectPartnerImage(
+category,
+name
+){
 
 const text=
 (
-String(category||"")+" "+
-String(name||"")
-).toLowerCase();
+String(
+category||
+""
+)+
+" "+
+String(
+name||
+""
+)
+)
+.toLowerCase();
 
-if(text.includes("groom")){
+
+if(
+text.includes(
+"groom"
+)
+){
 
 return"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1200&q=80";
 
 }
 
+
 if(
-text.includes("hotel")||
-text.includes("travel")
+text.includes(
+"hotel"
+)||
+text.includes(
+"travel"
+)
 ){
 
 return"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80";
 
 }
 
-if(text.includes("photo")){
+
+if(
+text.includes(
+"photo"
+)
+){
 
 return"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80";
 
 }
 
+
 if(
-text.includes("cafe")||
-text.includes("café")||
-text.includes("friendly")||
-text.includes("food")
+text.includes(
+"cafe"
+)||
+text.includes(
+"café"
+)||
+text.includes(
+"friendly"
+)||
+text.includes(
+"food"
+)
 ){
 
 return"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80";
 
 }
 
+
 if(
-text.includes("wellness")||
-text.includes("vet")||
-text.includes("clinic")
+text.includes(
+"wellness"
+)||
+text.includes(
+"vet"
+)||
+text.includes(
+"clinic"
+)
 ){
 
 return"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80";
 
 }
 
+
 return"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80";
 
 }
 
-function getInitials(name){
+
+function getInitials(
+name
+){
 
 const words=
-String(name||"PD")
+String(
+name||
+"PD"
+)
 .trim()
 .split(/\s+/)
 .filter(Boolean);
 
-if(!words.length){
+
+if(
+!words.length
+){
+
 return"PD";
-}
-
-return words.length===1
-?words[0].slice(0,2).toUpperCase()
-:(words[0][0]+words[1][0]).toUpperCase();
 
 }
+
+
+return(
+words.length===1
+?words[0]
+.slice(
+0,
+2
+)
+.toUpperCase()
+:(
+words[0][0]+
+words[1][0]
+)
+.toUpperCase()
+);
+
+}
+
 
 /* =========================================================
 LOAD PARTNERS
@@ -3117,30 +4531,46 @@ LOAD PARTNERS
 
 function loadPartners(){
 
-let cmsPartners=[];
+let cmsPartners=
+[];
+
 
 try{
 
 const cms=
 JSON.parse(
-localStorage.getItem(CMS_KEY)||"{}"
+localStorage.getItem(
+CMS_KEY
+)||
+"{}"
 );
 
-if(Array.isArray(cms.partners)){
+
+if(
+Array.isArray(
+cms.partners
+)
+){
 
 cmsPartners=
 cms.partners.map(
-(partner,index)=>({
+(
+partner,
+index
+)=>({
 
 ...partner,
+
 
 id:
 partner.id||
 "cms-"+index,
 
+
 category:
 partner.category||
 "Partner",
+
 
 location:
 partner.location||
@@ -3149,6 +4579,7 @@ pageTranslation(
 "Worldwide"
 ),
 
+
 discount:
 partner.discount||
 pageTranslation(
@@ -3156,13 +4587,16 @@ pageTranslation(
 "Member Offer"
 ),
 
+
 code:
 partner.code||
 "",
 
+
 website:
 partner.website||
 "",
+
 
 description:
 partner.description||
@@ -3171,12 +4605,14 @@ pageTranslation(
 "Selected PETS & DOGUE partner."
 ),
 
+
 image:
 partner.image||
 selectPartnerImage(
 partner.category,
 partner.name
 ),
+
 
 rating:
 partner.rating||
@@ -3186,11 +4622,13 @@ pageTranslation(
 "Selected Partner"
 ),
 
+
 memberOnly:
 Boolean(
 partner.code||
 partner.discount
 ),
+
 
 fromCMS:true
 
@@ -3208,30 +4646,46 @@ error
 
 }
 
+
 const cmsNames=
 new Set(
 cmsPartners.map(
 partner=>
-String(partner.name).toLowerCase()
+String(
+partner.name
+)
+.toLowerCase()
 )
 );
 
+
 publicPartners=[
+
 ...cmsPartners,
+
 ...fallbackPartners.filter(
 partner=>
 !cmsNames.has(
-String(partner.name).toLowerCase()
+String(
+partner.name
+)
+.toLowerCase()
 )
 )
+
 ];
 
+
 buildFilters();
+
 updateStatistics();
+
 renderPartners();
+
 renderSavedPartners();
 
 }
+
 
 /* =========================================================
 FILTERS
@@ -3242,35 +4696,58 @@ function buildFilters(){
 const categories=[
 ...new Set(
 publicPartners
-.map(partner=>partner.category)
+.map(
+partner=>
+partner.category
+)
 .filter(Boolean)
 )
-].sort();
+]
+.sort();
+
 
 const locations=[
 ...new Set(
 publicPartners
-.map(partner=>partner.location)
+.map(
+partner=>
+partner.location
+)
 .filter(Boolean)
 )
-].sort();
+]
+.sort();
+
 
 const selectedCategory=
 categorySearch.value||
 activeCategory;
 
+
 const selectedLocation=
 locationSearch.value||
 "All";
 
-categorySearch.innerHTML="";
-locationSearch.innerHTML="";
-categoryFilters.innerHTML="";
+
+categorySearch.innerHTML=
+"";
+
+locationSearch.innerHTML=
+"";
+
+categoryFilters.innerHTML=
+"";
+
 
 const allCategoriesOption=
-document.createElement("option");
+document.createElement(
+"option"
+);
 
-allCategoriesOption.value="All";
+
+allCategoriesOption.value=
+"All";
+
 
 allCategoriesOption.textContent=
 pageTranslation(
@@ -3278,14 +4755,21 @@ pageTranslation(
 "All Categories"
 );
 
+
 categorySearch.appendChild(
 allCategoriesOption
 );
 
-const allLocationsOption=
-document.createElement("option");
 
-allLocationsOption.value="All";
+const allLocationsOption=
+document.createElement(
+"option"
+);
+
+
+allLocationsOption.value=
+"All";
+
 
 allLocationsOption.textContent=
 pageTranslation(
@@ -3293,14 +4777,21 @@ pageTranslation(
 "All Locations"
 );
 
+
 locationSearch.appendChild(
 allLocationsOption
 );
 
-const allButton=
-document.createElement("button");
 
-allButton.type="button";
+const allButton=
+document.createElement(
+"button"
+);
+
+
+allButton.type=
+"button";
+
 
 allButton.className=
 "filter"+
@@ -3310,7 +4801,10 @@ activeCategory==="All"
 :""
 );
 
-allButton.dataset.category="All";
+
+allButton.dataset.category=
+"All";
+
 
 allButton.textContent=
 pageTranslation(
@@ -3318,37 +4812,58 @@ pageTranslation(
 "All"
 );
 
-allButton.onclick=()=>{
+
+allButton.addEventListener(
+"click",
+()=>{
 
 filterCategory(
 allButton,
 "All"
 );
 
-};
+}
+);
+
 
 categoryFilters.appendChild(
 allButton
 );
 
-categories.forEach(category=>{
+
+categories.forEach(
+category=>{
 
 const option=
-document.createElement("option");
+document.createElement(
+"option"
+);
 
-option.value=category;
+
+option.value=
+category;
+
 
 option.textContent=
-categoryLabel(category);
+categoryLabel(
+category
+);
+
 
 categorySearch.appendChild(
 option
 );
 
-const button=
-document.createElement("button");
 
-button.type="button";
+const button=
+document.createElement(
+"button"
+);
+
+
+button.type=
+"button";
+
 
 button.className=
 "filter"+
@@ -3358,42 +4873,66 @@ activeCategory===category
 :""
 );
 
-button.dataset.category=category;
+
+button.dataset.category=
+category;
+
 
 button.textContent=
-categoryLabel(category);
+categoryLabel(
+category
+);
 
-button.onclick=()=>{
+
+button.addEventListener(
+"click",
+()=>{
 
 filterCategory(
 button,
 category
 );
 
-};
+}
+);
+
 
 categoryFilters.appendChild(
 button
 );
 
-});
+}
+);
 
-locations.forEach(location=>{
+
+locations.forEach(
+location=>{
 
 const option=
-document.createElement("option");
+document.createElement(
+"option"
+);
 
-option.value=location;
-option.textContent=location;
+
+option.value=
+location;
+
+option.textContent=
+location;
+
 
 locationSearch.appendChild(
 option
 );
 
-});
+}
+);
+
 
 categorySearch.value=
-[...categorySearch.options]
+[
+...categorySearch.options
+]
 .some(
 option=>
 option.value===selectedCategory
@@ -3401,8 +4940,11 @@ option.value===selectedCategory
 ?selectedCategory
 :"All";
 
+
 locationSearch.value=
-[...locationSearch.options]
+[
+...locationSearch.options
+]
 .some(
 option=>
 option.value===selectedLocation
@@ -3412,10 +4954,16 @@ option.value===selectedLocation
 
 }
 
+
+/* =========================================================
+STATISTICS
+========================================================= */
+
 function updateStatistics(){
 
 partnerCount.textContent=
 publicPartners.length;
+
 
 discountCount.textContent=
 publicPartners.filter(
@@ -3423,65 +4971,108 @@ partner=>
 partner.discount||
 partner.discountKey||
 partner.code
-).length;
+)
+.length;
+
 
 categoryCount.textContent=
 new Set(
 publicPartners
-.map(partner=>partner.category)
+.map(
+partner=>
+partner.category
+)
 .filter(Boolean)
-).size;
+)
+.size;
+
 
 locationCount.textContent=
 new Set(
 publicPartners
-.map(partner=>partner.location)
+.map(
+partner=>
+partner.location
+)
 .filter(Boolean)
-).size;
+)
+.size;
 
 }
 
-function filterCategory(button,category){
 
-activeCategory=category;
+/* =========================================================
+CATEGORY FILTER
+========================================================= */
+
+function filterCategory(
+button,
+category
+){
+
+activeCategory=
+category;
+
 
 document
-.querySelectorAll(".filter")
+.querySelectorAll(
+".filter"
+)
 .forEach(
 item=>
-item.classList.remove("active")
+item.classList.remove(
+"active"
+)
 );
 
-button.classList.add("active");
+
+button.classList.add(
+"active"
+);
+
 
 categorySearch.value=
 category==="All"
 ?"All"
 :category;
 
+
 renderPartners();
 
 }
+
 
 function categorySelectChanged(){
 
 activeCategory=
 categorySearch.value;
 
+
 document
-.querySelectorAll(".filter")
-.forEach(button=>{
+.querySelectorAll(
+".filter"
+)
+.forEach(
+button=>{
 
 button.classList.toggle(
 "active",
-button.dataset.category===activeCategory
+button.dataset.category===
+activeCategory
 );
 
-});
+}
+);
+
 
 renderPartners();
 
 }
+
+
+/* =========================================================
+FILTER PARTNERS
+========================================================= */
 
 function getFilteredPartners(){
 
@@ -3490,55 +5081,95 @@ searchInput.value
 .toLowerCase()
 .trim();
 
+
 const category=
 categorySearch.value;
+
 
 const location=
 locationSearch.value;
 
-return publicPartners.filter(partner=>{
+
+return publicPartners.filter(
+partner=>{
 
 const searchable=[
+
 partner.name,
+
 partner.category,
-categoryLabel(partner.category),
+
+categoryLabel(
+partner.category
+),
+
 partner.location,
+
 partner.description,
+
 partner.descriptionKey
 ?pageTranslation(
 partner.descriptionKey,
 ""
 )
 :"",
+
 partner.discount,
+
 partner.discountKey
 ?pageTranslation(
 partner.discountKey,
 ""
 )
 :"",
+
 partner.code
+
 ]
 .join(" ")
 .toLowerCase();
 
+
 return(
-(activeCategory==="All"||
-partner.category===activeCategory)
+
+(
+activeCategory==="All"||
+partner.category===
+activeCategory
+)
+
 &&
-(category==="All"||
-partner.category===category)
+
+(
+category==="All"||
+partner.category===
+category
+)
+
 &&
-(location==="All"||
-partner.location===location)
+
+(
+location==="All"||
+partner.location===
+location
+)
+
 &&
-(!query||
-searchable.includes(query))
+
+(
+!query||
+searchable.includes(
+query
+)
+)
+
 );
 
-});
+}
+);
 
 }
+
 
 /* =========================================================
 PARTNER CARDS
@@ -3549,37 +5180,57 @@ function renderPartners(){
 const partners=
 getFilteredPartners();
 
-partnerGrid.innerHTML="";
+
+partnerGrid.innerHTML=
+"";
+
 
 emptyState.style.display=
 partners.length
 ?"none"
 :"block";
 
-partners.forEach(partner=>{
+
+partners.forEach(
+partner=>{
 
 partnerGrid.insertAdjacentHTML(
 "beforeend",
-createPartnerCard(partner)
+createPartnerCard(
+partner
+)
 );
 
-});
+}
+);
 
 }
 
-function createPartnerCard(partner){
+
+function createPartnerCard(
+partner
+){
 
 const id=
-String(partner.id);
+String(
+partner.id
+);
+
 
 const saved=
 savedPartners.some(
 item=>
-String(item.id)===id
+String(
+item.id
+)===id
 );
 
+
 const website=
-safeURL(partner.website);
+safeURL(
+partner.website
+);
+
 
 const websiteButton=
 website
@@ -3612,6 +5263,7 @@ pageTranslation(
 </a>
 `;
 
+
 const promo=
 partner.code
 ?`
@@ -3622,7 +5274,9 @@ pageTranslation(
 )
 )}
 <span class="promo-code">
-${escapeHTML(partner.code)}
+${escapeHTML(
+partner.code
+)}
 </span>
 `
 :escapeHTML(
@@ -3632,6 +5286,7 @@ pageTranslation(
 )
 );
 
+
 const description=
 partner.descriptionKey
 ?pageTranslation(
@@ -3639,6 +5294,7 @@ partner.descriptionKey,
 ""
 )
 :partner.description;
+
 
 const discount=
 partner.discountKey
@@ -3652,6 +5308,7 @@ pageTranslation(
 "Partner Offer"
 );
 
+
 return`
 <article class="partner-card">
 
@@ -3664,11 +5321,14 @@ alt="${escapeHTML(partner.name)}"
 
 <div class="logo-mark">
 ${escapeHTML(
-getInitials(partner.name)
+getInitials(
+partner.name
+)
 )}
 </div>
 
 </div>
+
 
 <div class="partner-content">
 
@@ -3679,35 +5339,42 @@ ${escapeHTML(
 categoryLabel(
 partner.category||
 "Partner"
-).toUpperCase()
+)
+.toUpperCase()
 )}
 </span>
+
 
 ${
 partner.memberOnly
 ?`
 <span class="badge member-only">
+
 ${escapeHTML(
 pageTranslation(
 "dynamic.membersOnly",
 "MEMBERS ONLY"
 )
 )}
+
 </span>
 `
 :""
 }
 
+
 ${
 partner.fromCMS
 ?`
 <span class="badge cms-badge">
+
 ${escapeHTML(
 pageTranslation(
 "dynamic.newPartner",
 "PARTNER"
 )
 )}
+
 </span>
 `
 :""
@@ -3715,29 +5382,46 @@ pageTranslation(
 
 </div>
 
+
 <h3>
-${escapeHTML(partner.name)}
+${escapeHTML(
+partner.name
+)}
 </h3>
 
+
 <div class="meta">
-${escapeHTML(partner.location)}
+${escapeHTML(
+partner.location
+)}
 </div>
+
 
 <div class="rating">
-${escapeHTML(partner.rating)}
+${escapeHTML(
+partner.rating
+)}
 </div>
+
 
 <p>
-${escapeHTML(description)}
+${escapeHTML(
+description
+)}
 </p>
 
+
 <div class="discount">
-${escapeHTML(discount)}
+${escapeHTML(
+discount
+)}
 </div>
+
 
 <div class="promo-box">
 ${promo}
 </div>
+
 
 <div class="actions">
 
@@ -3746,8 +5430,9 @@ ${websiteButton}
 <button
 type="button"
 class="btn light save-btn ${saved?"saved":""}"
-onclick="toggleSavedPartner('${escapeHTML(id)}',this)"
+data-partner-id="${escapeHTML(id)}"
 >
+
 ${escapeHTML(
 saved
 ?pageTranslation(
@@ -3759,6 +5444,7 @@ saved
 "♡ Save"
 )
 )}
+
 </button>
 
 </div>
@@ -3770,36 +5456,63 @@ saved
 
 }
 
+
 /* =========================================================
-SAVED PARTNERS
+SAVE PARTNER
 ========================================================= */
 
-function toggleSavedPartner(id,button){
+function toggleSavedPartner(
+id,
+button
+){
 
 const partner=
 publicPartners.find(
 item=>
-String(item.id)===String(id)
+String(
+item.id
+)===
+String(
+id
+)
 );
 
-if(!partner){
+
+if(
+!partner
+){
+
 return;
+
 }
+
 
 const index=
 savedPartners.findIndex(
 item=>
-String(item.id)===String(id)
+String(
+item.id
+)===
+String(
+id
+)
 );
 
-if(index>=0){
+
+if(
+index>=0
+){
 
 savedPartners.splice(
 index,
 1
 );
 
-button.classList.remove("saved");
+
+button.classList.remove(
+"saved"
+);
+
 
 button.textContent=
 pageTranslation(
@@ -3811,15 +5524,31 @@ pageTranslation(
 
 savedPartners.push({
 
-id:String(partner.id),
-name:partner.name,
-category:partner.category,
-location:partner.location,
-website:partner.website||""
+id:
+String(
+partner.id
+),
+
+name:
+partner.name,
+
+category:
+partner.category,
+
+location:
+partner.location,
+
+website:
+partner.website||
+""
 
 });
 
-button.classList.add("saved");
+
+button.classList.add(
+"saved"
+);
+
 
 button.textContent=
 pageTranslation(
@@ -3829,40 +5558,58 @@ pageTranslation(
 
 }
 
+
 localStorage.setItem(
 SAVED_KEY,
-JSON.stringify(savedPartners)
+JSON.stringify(
+savedPartners
+)
 );
+
 
 renderSavedPartners();
 
 }
 
+
+/* =========================================================
+SAVED LIST
+========================================================= */
+
 function renderSavedPartners(){
 
-savedList.innerHTML="";
+savedList.innerHTML=
+"";
 
-if(!savedPartners.length){
+
+if(
+!savedPartners.length
+){
 
 savedList.innerHTML=`
+
 <div class="saved-item">
 
 <h3>
+
 ${escapeHTML(
 pageTranslation(
 "saved.emptyTitle",
 "Your favourites will appear here"
 )
 )}
+
 </h3>
 
 <p>
+
 ${escapeHTML(
 pageTranslation(
 "saved.emptyDescription",
 "Tap “Save” on any partner card."
 )
 )}
+
 </p>
 
 </div>
@@ -3872,89 +5619,137 @@ return;
 
 }
 
-savedPartners.forEach(item=>{
+
+savedPartners.forEach(
+item=>{
 
 const website=
-safeURL(item.website);
+safeURL(
+item.website
+);
+
 
 savedList.insertAdjacentHTML(
 "beforeend",
 `
+
 <div class="saved-item">
 
 <h3>
-${escapeHTML(item.name)}
+${escapeHTML(
+item.name
+)}
 </h3>
 
 <p>
+
 ${escapeHTML(
-categoryLabel(item.category)
+categoryLabel(
+item.category
+)
 )}
+
  ·
-${escapeHTML(item.location)}
+
+${escapeHTML(
+item.location
+)}
+
 </p>
+
 
 ${
 website
 ?`
+
 <a
 href="${escapeHTML(website)}"
 target="_blank"
 rel="noopener noreferrer"
 class="btn gold"
 >
+
 ${escapeHTML(
 pageTranslation(
 "dynamic.visit",
 "Visit"
 )
 )}
+
 </a>
+
 `
 :""
 }
 
+
 <button
 type="button"
-class="btn black"
-onclick="removeSavedPartner('${escapeHTML(String(item.id))}')"
+class="btn black remove-saved-button"
+data-partner-id="${escapeHTML(
+String(
+item.id
+)
+)}"
 >
+
 ${escapeHTML(
 pageTranslation(
 "dynamic.remove",
 "Remove"
 )
 )}
+
 </button>
 
 </div>
+
 `
 );
 
-});
+}
+);
 
 }
 
-function removeSavedPartner(id){
+
+/* =========================================================
+REMOVE SAVED
+========================================================= */
+
+function removeSavedPartner(
+id
+){
 
 savedPartners=
 savedPartners.filter(
 item=>
-String(item.id)!==String(id)
+String(
+item.id
+)!==
+String(
+id
+)
 );
+
 
 localStorage.setItem(
 SAVED_KEY,
-JSON.stringify(savedPartners)
+JSON.stringify(
+savedPartners
+)
 );
 
+
 renderSavedPartners();
+
 renderPartners();
 
 }
 
+
 /* =========================================================
-PARTNER APPLICATION
+APPLICATION
 ========================================================= */
 
 function submitPartnerApplication(){
@@ -3962,25 +5757,35 @@ function submitPartnerApplication(){
 const name=
 businessName.value.trim();
 
+
 const contact=
 contactName.value.trim();
+
 
 const email=
 businessEmail.value.trim();
 
+
 const website=
 businessWebsite.value.trim();
+
 
 const category=
 businessCategory.value;
 
+
 const location=
 businessLocation.value.trim();
+
 
 const message=
 businessMessage.value.trim();
 
-applicationStatus.classList.remove("show");
+
+applicationStatus.classList.remove(
+"show"
+);
+
 
 if(
 !name||
@@ -3995,14 +5800,21 @@ pageTranslation(
 "Please complete the required business details."
 );
 
-applicationStatus.classList.add("show");
+
+applicationStatus.classList.add(
+"show"
+);
+
 
 return;
 
 }
 
+
 if(
-!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+email
+)
 ){
 
 applicationStatus.textContent=
@@ -4011,13 +5823,20 @@ pageTranslation(
 "Please enter a valid business email."
 );
 
-applicationStatus.classList.add("show");
+
+applicationStatus.classList.add(
+"show"
+);
+
 
 return;
 
 }
 
-if(!businessAgree.checked){
+
+if(
+!businessAgree.checked
+){
 
 applicationStatus.textContent=
 pageTranslation(
@@ -4025,11 +5844,16 @@ pageTranslation(
 "Please confirm that the information is accurate."
 );
 
-applicationStatus.classList.add("show");
+
+applicationStatus.classList.add(
+"show"
+);
+
 
 return;
 
 }
+
 
 applicationStatus.textContent=
 pageTranslation(
@@ -4037,7 +5861,11 @@ pageTranslation(
 "Your email app will open with your partnership application prepared."
 );
 
-applicationStatus.classList.add("show");
+
+applicationStatus.classList.add(
+"show"
+);
+
 
 const subject=
 encodeURIComponent(
@@ -4045,19 +5873,36 @@ encodeURIComponent(
 name
 );
 
+
 const body=
 encodeURIComponent(
-"Business: "+name+
-"\nContact: "+contact+
-"\nEmail: "+email+
-"\nWebsite / Social: "+website+
-"\nCategory: "+category+
-"\nLocation: "+location+
+
+"Business: "+
+name+
+
+"\nContact: "+
+contact+
+
+"\nEmail: "+
+email+
+
+"\nWebsite / Social: "+
+website+
+
+"\nCategory: "+
+category+
+
+"\nLocation: "+
+location+
+
 "\n\nPartnership proposal:\n"+
 message
+
 );
 
-setTimeout(()=>{
+
+setTimeout(
+()=>{
 
 window.location.href=
 "mailto:petsanddogue@gmail.com?subject="+
@@ -4065,50 +5910,16 @@ subject+
 "&body="+
 body;
 
-},150);
+},
+150
+);
 
 }
+
 
 /* =========================================================
-LANGUAGE REFRESH
+META
 ========================================================= */
-
-function refreshPlaceholders(){
-
-const map={
-searchInput:"directory.searchPlaceholder",
-businessName:"apply.businessName",
-contactName:"apply.contactName",
-businessEmail:"apply.email",
-businessWebsite:"apply.website",
-businessLocation:"apply.location",
-businessMessage:"apply.message"
-};
-
-Object.entries(map).forEach(
-([id,key])=>{
-
-const element=$(id);
-
-const value=
-pageTranslation(
-key,
-""
-);
-
-if(
-element&&
-value
-){
-
-element.placeholder=value;
-
-}
-
-}
-);
-
-}
 
 function updatePageMeta(){
 
@@ -4118,18 +5929,26 @@ pageTranslation(
 "Partners & Club Benefits | PETS & DOGUE"
 );
 
+
 const description=
 pageTranslation(
 "meta.description",
 "Discover PETS & DOGUE partners, Club member benefits and premium pet lifestyle offers."
 );
 
-if(title){
-document.title=title;
-}
 
 if(
-description&&
+title
+){
+
+document.title=
+title;
+
+}
+
+
+if(
+description &&
 pageDescription
 ){
 
@@ -4142,85 +5961,172 @@ description
 
 }
 
-function keepActiveRubricVisible(){
 
-const active=
-categoryNav?.querySelector(".active");
-
-if(!active){
-return;
-}
-
-requestAnimationFrame(()=>{
-
-active.scrollIntoView({
-behavior:"instant",
-inline:"center",
-block:"nearest"
-});
-
-});
-
-}
+/* =========================================================
+LANGUAGE REFRESH FOR DYNAMIC CONTENT
+========================================================= */
 
 function refreshPartnersLanguage(){
 
-const lang=
-currentLanguage();
-
-document.documentElement.lang=lang;
-document.documentElement.dir=
-lang==="ar"
-?"rtl"
-:"ltr";
-
-if(languageSelect){
-languageSelect.value=lang;
-}
+refreshDiscountNavigation();
 
 buildFilters();
+
 renderPartners();
+
 renderSavedPartners();
-refreshPlaceholders();
+
 updatePageMeta();
-keepActiveRubricVisible();
 
 }
 
+
 /* =========================================================
-EVENTS
+EVENT DELEGATION
+========================================================= */
+
+partnerGrid?.addEventListener(
+"click",
+event=>{
+
+const button=
+event.target.closest(
+".save-btn"
+);
+
+
+if(
+!button
+){
+
+return;
+
+}
+
+
+toggleSavedPartner(
+button.dataset.partnerId,
+button
+);
+
+}
+);
+
+
+savedList?.addEventListener(
+"click",
+event=>{
+
+const button=
+event.target.closest(
+".remove-saved-button"
+);
+
+
+if(
+!button
+){
+
+return;
+
+}
+
+
+removeSavedPartner(
+button.dataset.partnerId
+);
+
+}
+);
+
+
+/* =========================================================
+SEARCH EVENTS
+========================================================= */
+
+searchInput?.addEventListener(
+"input",
+renderPartners
+);
+
+
+searchButton?.addEventListener(
+"click",
+renderPartners
+);
+
+
+categorySearch?.addEventListener(
+"change",
+categorySelectChanged
+);
+
+
+locationSearch?.addEventListener(
+"change",
+renderPartners
+);
+
+
+submitApplicationButton?.addEventListener(
+"click",
+submitPartnerApplication
+);
+
+
+/* =========================================================
+STORAGE
 ========================================================= */
 
 window.addEventListener(
 "storage",
 event=>{
 
-if(event.key===CMS_KEY){
+if(
+event.key===CMS_KEY
+){
 
 loadPartners();
 
 }
 
-if(event.key===SAVED_KEY){
+
+if(
+event.key===SAVED_KEY
+){
 
 try{
 
 savedPartners=
 JSON.parse(
-localStorage.getItem(SAVED_KEY)||"[]"
+localStorage.getItem(
+SAVED_KEY
+)||
+"[]"
 );
 
-if(!Array.isArray(savedPartners)){
-savedPartners=[];
+
+if(
+!Array.isArray(
+savedPartners
+)
+){
+
+savedPartners=
+[];
+
 }
 
 }catch(error){
 
-savedPartners=[];
+savedPartners=
+[];
 
 }
 
+
 renderSavedPartners();
+
 renderPartners();
 
 }
@@ -4228,17 +6134,15 @@ renderPartners();
 }
 );
 
-window.addEventListener(
-"languagechange",
-()=>{
 
-setTimeout(
-refreshPartnersLanguage,
-0
-);
+/* =========================================================
+I18N EVENT
 
-}
-);
+Important:
+NO horizontal re-centering here.
+
+Changing language cannot lock the rubric strip.
+========================================================= */
 
 window.addEventListener(
 "petsdogue:languagechange",
@@ -4252,830 +6156,60 @@ refreshPartnersLanguage,
 }
 );
 
-document.addEventListener(
-"keydown",
-event=>{
 
-if(event.key==="Escape"){
-closeMenu();
-}
-
-}
-);
+/* =========================================================
+START
+========================================================= */
 
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
+
+refreshDiscountNavigation();
 
 loadPartners();
-refreshPlaceholders();
+
 updatePageMeta();
-keepActiveRubricVisible();
 
-const observer=
-new MutationObserver(
-mutations=>{
-
-if(
-mutations.some(
-mutation=>
-mutation.type==="attributes"&&
-(
-mutation.attributeName==="lang"||
-mutation.attributeName==="dir"
-)
-)
-){
 
 setTimeout(
-refreshPartnersLanguage,
-0
-);
-
-}
-
-}
-);
-
-observer.observe(
-document.documentElement,
-{
-attributes:true,
-attributeFilter:[
-"lang",
-"dir"
-]
-}
-);
-
-languageSelect?.addEventListener(
-"change",
-()=>{
-
-localStorage.setItem(
-LANGUAGE_KEY,
-languageSelect.value
-);
-
-setTimeout(
-refreshPartnersLanguage,
-50
+positionActiveNavigationOnce,
+120
 );
 
 }
 );
 
-}
-);
+
+/* =========================================================
+PAGE RESTORE
+========================================================= */
 
 window.addEventListener(
 "pageshow",
 ()=>{
+
+refreshDiscountNavigation();
 
 refreshPartnersLanguage();
-keepActiveRubricVisible();
 
-}
-);
-</script>
-<script>
-(function(){
-
-"use strict";
-
-/* =========================================================
-PETS & DOGUE
-PARTNERS — VISUAL HEADER FIX ONLY
-
-Does NOT change:
-- translations
-- language persistence
-- partner data
-- forms
-- saved partners
-- Club
-- page content
-
-Only:
-- unified header proportions
-- unified rubric order
-- active rubric position
-- free horizontal navigation
-- mobile edge space for first/last rubric
-========================================================= */
-
-const GLOBAL_NAV_ORDER=[
-"issue-01.html",
-"members-gallery.html",
-"special-offers.html",
-"pet-friendly-places.html",
-"articles.html",
-"photos.html",
-"pet-travel.html",
-"pet-fashion.html",
-"wellness.html",
-"local-community.html",
-"pet-marketplace.html",
-"contests.html",
-"partners.html"
-];
-
-function cleanHref(value){
-
-if(!value){
-return"";
-}
-
-return String(value)
-.split("?")[0]
-.split("#")[0]
-.replace(/^.*\//,"");
-
-}
-
-function installHeaderVisualStyles(){
 
 if(
-document.getElementById(
-"pd-partners-header-visual-fix"
-)
+!navigationTouched &&
+!initialNavigationPositionDone
 ){
-return;
-}
-
-const style=
-document.createElement("style");
-
-style.id=
-"pd-partners-header-visual-fix";
-
-style.textContent=`
-
-/* =========================================================
-UNIFIED PETS & DOGUE HEADER
-========================================================= */
-
-.site-header{
-position:sticky !important;
-top:0 !important;
-z-index:5000 !important;
-width:100% !important;
-background:#070707 !important;
-color:#fff !important;
-border-bottom:1px solid #292929 !important;
-}
-
-/* main black logo area */
-
-.site-header .header-main{
-width:100% !important;
-max-width:1440px !important;
-height:116px !important;
-min-height:116px !important;
-margin:0 auto !important;
-padding:0 28px !important;
-
-display:grid !important;
-grid-template-columns:72px minmax(0,1fr) 72px !important;
-align-items:center !important;
-}
-
-/* hamburger + home */
-
-.site-header .icon-button{
-width:54px !important;
-height:54px !important;
-padding:0 !important;
-border:0 !important;
-background:transparent !important;
-color:#fff !important;
-
-display:flex !important;
-align-items:center !important;
-justify-content:center !important;
-}
-
-.site-header .menu-lines{
-width:34px !important;
-display:grid !important;
-gap:7px !important;
-}
-
-.site-header .menu-lines span{
-display:block !important;
-width:100% !important;
-height:3px !important;
-background:#fff !important;
-border-radius:999px !important;
-}
-
-.site-header .home-icon{
-justify-self:end !important;
-}
-
-.site-header .home-icon svg{
-width:33px !important;
-height:33px !important;
-fill:none !important;
-stroke:#fff !important;
-stroke-width:2 !important;
-}
-
-/* logo */
-
-.site-header .brand{
-justify-self:center !important;
-align-self:center !important;
-
-display:flex !important;
-flex-direction:column !important;
-align-items:center !important;
-justify-content:center !important;
-
-text-align:center !important;
-line-height:.88 !important;
-white-space:nowrap !important;
-}
-
-.site-header .brand-small{
-display:block !important;
-margin:0 !important;
-
-font-family:Georgia,"Times New Roman",serif !important;
-font-size:13px !important;
-font-weight:400 !important;
-line-height:1 !important;
-letter-spacing:2.5px !important;
-
-color:#c99a2e !important;
-}
-
-.site-header .brand-big{
-display:block !important;
-margin:7px 0 0 !important;
-
-font-family:Georgia,"Times New Roman",serif !important;
-font-size:52px !important;
-font-weight:400 !important;
-line-height:.78 !important;
-letter-spacing:4px !important;
-
-color:#c99a2e !important;
-}
-
-/* remove any animation effect that can visually change logo */
-
-.site-header .brand .metallic{
-animation:none !important;
-background:none !important;
--webkit-background-clip:initial !important;
-background-clip:initial !important;
-color:#c99a2e !important;
-}
-
-/* =========================================================
-ONE STABLE RUBRIC STRIP
-========================================================= */
-
-.site-header .category-nav{
-position:relative !important;
-
-width:100% !important;
-height:66px !important;
-min-height:66px !important;
-
-display:flex !important;
-align-items:stretch !important;
-
-gap:0 !important;
-margin:0 !important;
-padding:0 5px !important;
-
-overflow-x:auto !important;
-overflow-y:hidden !important;
-
-background:#070707 !important;
-
-border-top:1px solid #292929 !important;
-border-bottom:1px solid #292929 !important;
-
-scrollbar-width:none !important;
-scroll-behavior:auto !important;
-scroll-snap-type:none !important;
-overscroll-behavior-x:contain !important;
--webkit-overflow-scrolling:touch !important;
-
-overflow-anchor:none !important;
-}
-
-/*
-Extra real scroll space on BOTH ends.
-
-This is important for PARTNERS:
-the final rubric is no longer pressed against
-the physical end of the scroll container.
-*/
-
-.site-header .category-nav::before,
-.site-header .category-nav::after{
-content:"" !important;
-display:block !important;
-flex:0 0 18px !important;
-height:1px !important;
-pointer-events:none !important;
-}
-
-.site-header .category-nav::-webkit-scrollbar{
-display:none !important;
-width:0 !important;
-height:0 !important;
-}
-
-.site-header .category-nav a{
-position:relative !important;
-
-flex:0 0 auto !important;
-min-width:max-content !important;
-
-height:66px !important;
-padding:0 22px !important;
-
-display:flex !important;
-align-items:center !important;
-justify-content:center !important;
-
-font-family:Arial,Helvetica,sans-serif !important;
-font-size:14px !important;
-font-weight:900 !important;
-line-height:1 !important;
-letter-spacing:.55px !important;
-
-text-transform:uppercase !important;
-white-space:nowrap !important;
-
-word-break:normal !important;
-overflow-wrap:normal !important;
-hyphens:none !important;
-
-color:#fff !important;
-text-decoration:none !important;
-
-transform:none !important;
-}
-
-/* selected rubric */
-
-.site-header .category-nav a.active{
-color:#f1d783 !important;
-}
-
-.site-header .category-nav a.active::after{
-content:"" !important;
-
-position:absolute !important;
-left:20px !important;
-right:20px !important;
-bottom:0 !important;
-
-height:4px !important;
-
-background:
-linear-gradient(
-90deg,
-#70470a 0%,
-#c99428 25%,
-#fff0a6 50%,
-#c99428 75%,
-#70470a 100%
-) !important;
-}
-
-/* =========================================================
-MOBILE
-========================================================= */
-
-@media(max-width:760px){
-
-.site-header .header-main{
-height:112px !important;
-min-height:112px !important;
-
-padding:0 18px !important;
-
-grid-template-columns:
-58px
-minmax(0,1fr)
-58px !important;
-}
-
-.site-header .icon-button{
-width:50px !important;
-height:50px !important;
-}
-
-.site-header .menu-lines{
-width:33px !important;
-gap:6px !important;
-}
-
-.site-header .menu-lines span{
-height:3px !important;
-}
-
-.site-header .home-icon svg{
-width:31px !important;
-height:31px !important;
-}
-
-.site-header .brand-small{
-font-size:11px !important;
-letter-spacing:2.1px !important;
-}
-
-.site-header .brand-big{
-font-size:45px !important;
-letter-spacing:3px !important;
-margin-top:7px !important;
-}
-
-.site-header .category-nav{
-height:64px !important;
-min-height:64px !important;
-
-padding:0 !important;
-
-touch-action:auto !important;
-}
-
-/*
-Large invisible edge space is intentional.
-
-It lets the first AND last rubric move toward
-the centre instead of locking to the edge.
-*/
-
-.site-header .category-nav::before,
-.site-header .category-nav::after{
-flex:0 0 max(
-18px,
-calc(50vw - 105px)
-) !important;
-}
-
-.site-header .category-nav a{
-height:64px !important;
-
-padding:0 18px !important;
-
-font-size:13px !important;
-letter-spacing:.45px !important;
-}
-
-.site-header .category-nav a.active::after{
-left:17px !important;
-right:17px !important;
-height:4px !important;
-}
-
-}
-
-/* =========================================================
-SMALL MOBILE
-========================================================= */
-
-@media(max-width:390px){
-
-.site-header .header-main{
-height:108px !important;
-min-height:108px !important;
-
-padding-left:14px !important;
-padding-right:14px !important;
-}
-
-.site-header .brand-big{
-font-size:42px !important;
-}
-
-.site-header .brand-small{
-font-size:10px !important;
-}
-
-.site-header .category-nav a{
-padding-left:16px !important;
-padding-right:16px !important;
-font-size:12.5px !important;
-}
-
-.site-header .category-nav::before,
-.site-header .category-nav::after{
-flex-basis:max(
-14px,
-calc(50vw - 98px)
-) !important;
-}
-
-}
-
-/* =========================================================
-RTL
-========================================================= */
-
-html[dir="rtl"] .site-header .category-nav{
-direction:rtl !important;
-}
-
-`;
-
-document.head.appendChild(style);
-
-}
-
-function normalizeNavigationOrder(){
-
-const nav=
-document.getElementById("categoryNav");
-
-if(!nav){
-return;
-}
-
-const links=
-Array.from(
-nav.querySelectorAll("a")
-);
-
-const byHref=
-new Map();
-
-links.forEach(link=>{
-
-const key=
-cleanHref(
-link.getAttribute("href")
-);
-
-if(
-key &&
-!byHref.has(key)
-){
-
-byHref.set(
-key,
-link
-);
-
-}
-
-});
-
-/*
-Same order on every PETS & DOGUE page:
-
-01 Magazine
-02 Cover Stars
-03 Discounts
-04 Pet-Friendly Welcome
-05 Articles
-06 Photos
-07 Travel
-08 Fashion
-09 Health
-10 Community
-11 Marketplace
-12 Contests
-13 Partners
-*/
-
-GLOBAL_NAV_ORDER.forEach(
-href=>{
-
-const link=
-byHref.get(href);
-
-if(link){
-
-nav.appendChild(link);
-
-}
-
-}
-);
-
-/*
-Any page-specific link not included in the
-global navigation is kept after the common rubrics.
-Nothing is deleted.
-*/
-
-links.forEach(link=>{
-
-const href=
-cleanHref(
-link.getAttribute("href")
-);
-
-if(
-!GLOBAL_NAV_ORDER.includes(href)
-){
-
-nav.appendChild(link);
-
-}
-
-});
-
-}
-
-function guaranteePartnersActive(){
-
-const nav=
-document.getElementById("categoryNav");
-
-if(!nav){
-return;
-}
-
-const current=
-cleanHref(
-window.location.pathname
-);
-
-if(
-current!=="partners.html"
-){
-
-return;
-}
-
-nav
-.querySelectorAll("a")
-.forEach(link=>{
-
-link.classList.toggle(
-"active",
-cleanHref(
-link.getAttribute("href")
-)==="partners.html"
-);
-
-});
-
-}
-
-function centerActiveRubric(){
-
-const nav=
-document.getElementById("categoryNav");
-
-if(!nav){
-return;
-}
-
-const active=
-nav.querySelector("a.active");
-
-if(!active){
-return;
-}
-
-requestAnimationFrame(()=>{
-
-requestAnimationFrame(()=>{
-
-try{
-
-active.scrollIntoView({
-behavior:"auto",
-block:"nearest",
-inline:"center"
-});
-
-}catch(error){
-
-const target=
-active.offsetLeft-
-(
-nav.clientWidth-
-active.offsetWidth
-)/2;
-
-nav.scrollLeft=
-Math.max(
-0,
-target
-);
-
-}
-
-});
-
-});
-
-}
-
-function prepareHeader(){
-
-installHeaderVisualStyles();
-
-normalizeNavigationOrder();
-
-guaranteePartnersActive();
-
-centerActiveRubric();
-
-}
-
-if(
-document.readyState==="loading"
-){
-
-document.addEventListener(
-"DOMContentLoaded",
-prepareHeader,
-{
-once:true
-}
-);
-
-}else{
-
-prepareHeader();
-
-}
-
-/*
-When returning to Partners with browser Back,
-show Partners again without rebuilding the page.
-*/
-
-window.addEventListener(
-"pageshow",
-()=>{
 
 setTimeout(
-()=>{
-
-normalizeNavigationOrder();
-
-guaranteePartnersActive();
-
-centerActiveRubric();
-
-},
-40
-);
-
-}
-);
-
-/*
-Translations are allowed to change text normally.
-After language change we only restore the visual order.
-No translation values are replaced.
-*/
-
-window.addEventListener(
-"petsdogue:languagechange",
-()=>{
-
-setTimeout(
-()=>{
-
-normalizeNavigationOrder();
-
-guaranteePartnersActive();
-
-centerActiveRubric();
-
-},
+positionActiveNavigationOnce,
 80
 );
 
 }
-);
-
-window.addEventListener(
-"languagechange",
-()=>{
-
-setTimeout(
-()=>{
-
-normalizeNavigationOrder();
-
-guaranteePartnersActive();
-
-centerActiveRubric();
-
-},
-80
-);
 
 }
 );
 
-})();
 </script>
+
 </body>
 </html>
