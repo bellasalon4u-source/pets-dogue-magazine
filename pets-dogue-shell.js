@@ -2,32 +2,26 @@
 
 /* =========================================================
 PETS & DOGUE
-GLOBAL HEADER + RUBRIC NAV + COMPACT SIDE MENU
+GLOBAL HEADER + RUBRIC NAV + COMPACT EDITORIAL SIDE MENU
 
-ONE SHARED VISUAL / FUNCTIONAL STANDARD FOR CATEGORY PAGES.
-
-THIS FILE CHANGES ONLY:
-- top header
-- hamburger button
-- PETS & DOGUE logo
-- home button
-- horizontal rubric navigation
+CHANGES ONLY:
+- unified top header
+- fixed rubric navigation
 - compact left side menu
-- language control inside side menu
+- language selector inside side menu
 
-THIS FILE DOES NOT CHANGE:
+DOES NOT CHANGE:
 - page content
-- article logic
-- audio
 - maps
 - search
 - filters
+- articles
+- audio
 - marketplace
 - community
 - offers
 - Club payments
 - Stripe
-- partner data
 - forms
 - APIs
 - page-specific translations
@@ -38,119 +32,117 @@ hu, ro, bg, el, sv, da, no, fi, tr, ar, hi
 
 LANGUAGE STORAGE:
 pets_dogue_language
-
-ARABIC:
-RTL page support is preserved.
-The physical rubric order stays identical on every language.
 ========================================================= */
 
 (function(){
 
-"use strict";
-
-
-/* =========================================================
-CONFIG
-========================================================= */
-
-const LANGUAGE_KEY=
-"pets_dogue_language";
-
+const LANGUAGE_KEY="pets_dogue_language";
 
 const LANGUAGE_ALIASES={
-
 ua:"uk",
 cz:"cs",
 gr:"el",
 se:"sv",
 dk:"da"
-
 };
 
 
 /* =========================================================
-ONE PERMANENT RUBRIC ORDER
-
-NEVER REORDER THIS LIST PER ACTIVE PAGE.
+ONE FIXED RUBRIC ORDER
+NEVER REORDER
 ========================================================= */
 
 const NAV_ITEMS=[
 
 {
 key:"magazine",
-url:"issue-01.html"
+url:"issue-01.html",
+image:"file_00000000a9d471fda9b4629589be22a9.png"
 },
 
 {
 key:"coverStars",
-url:"members-gallery.html"
+url:"members-gallery.html",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"offers",
-url:"special-offers.html"
+url:"special-offers.html",
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"places",
-url:"pet-friendly-places.html"
+url:"pet-friendly-places.html",
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"articles",
-url:"articles.html"
+url:"articles.html",
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"photos",
-url:"photos.html"
+url:"photos.html",
+image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"travel",
-url:"pet-travel.html"
+url:"pet-travel.html",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"fashion",
-url:"pet-fashion.html"
+url:"pet-fashion.html",
+image:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"wellness",
-url:"wellness.html"
+url:"wellness.html",
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"community",
-url:"local-community.html"
+url:"local-community.html",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"contests",
-url:"contests.html"
+url:"contests.html",
+image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"rescue",
-url:"pets-in-need.html"
+url:"pets-in-need.html",
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"marketplace",
-url:"pet-marketplace.html"
+url:"pet-marketplace.html",
+image:"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80"
 },
 
 {
 key:"partners",
-url:"partners.html"
+url:"partners.html",
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
 }
 
 ];
 
 
 /* =========================================================
-PATH → ACTIVE RUBRIC
+PAGE → ACTIVE RUBRIC
 ========================================================= */
 
 const PAGE_KEYS={
@@ -187,7 +179,7 @@ const PAGE_KEYS={
 
 
 /* =========================================================
-23-LANGUAGE HEADER / MENU TRANSLATIONS
+23 LANGUAGES
 ========================================================= */
 
 const TEXT={
@@ -215,7 +207,6 @@ marketplace:"Marketplace",
 partners:"Partners"
 },
 
-
 uk:{
 menu:"Зміст",
 profile:"Профіль",
@@ -238,7 +229,6 @@ rescue:"Допомога",
 marketplace:"Маркетплейс",
 partners:"Партнери"
 },
-
 
 ru:{
 menu:"Содержание",
@@ -263,7 +253,6 @@ marketplace:"Маркетплейс",
 partners:"Партнёры"
 },
 
-
 fr:{
 menu:"Sommaire",
 profile:"Profil",
@@ -286,7 +275,6 @@ rescue:"Aide",
 marketplace:"Marketplace",
 partners:"Partenaires"
 },
-
 
 de:{
 menu:"Inhalt",
@@ -311,7 +299,6 @@ marketplace:"Marktplatz",
 partners:"Partner"
 },
 
-
 es:{
 menu:"Contenido",
 profile:"Perfil",
@@ -334,7 +321,6 @@ rescue:"Ayuda",
 marketplace:"Marketplace",
 partners:"Socios"
 },
-
 
 it:{
 menu:"Contenuti",
@@ -359,7 +345,6 @@ marketplace:"Marketplace",
 partners:"Partner"
 },
 
-
 pt:{
 menu:"Conteúdo",
 profile:"Perfil",
@@ -383,11 +368,10 @@ marketplace:"Marketplace",
 partners:"Parceiros"
 },
 
-
 nl:{
 menu:"Inhoud",
 profile:"Profiel",
-club:"Word lid van Club",
+club:"Word lid",
 language:"Taal",
 contact:"Contact",
 
@@ -407,11 +391,10 @@ marketplace:"Marktplaats",
 partners:"Partners"
 },
 
-
 pl:{
 menu:"Spis treści",
 profile:"Profil",
-club:"Dołącz do Club",
+club:"Dołącz do klubu",
 language:"Język",
 contact:"Kontakt",
 
@@ -431,11 +414,10 @@ marketplace:"Marketplace",
 partners:"Partnerzy"
 },
 
-
 cs:{
 menu:"Obsah",
 profile:"Profil",
-club:"Vstoupit do Club",
+club:"Vstoupit do klubu",
 language:"Jazyk",
 contact:"Kontaktujte nás",
 
@@ -455,11 +437,10 @@ marketplace:"Marketplace",
 partners:"Partneři"
 },
 
-
 sk:{
 menu:"Obsah",
 profile:"Profil",
-club:"Vstúpiť do Club",
+club:"Vstúpiť do klubu",
 language:"Jazyk",
 contact:"Kontaktujte nás",
 
@@ -479,11 +460,10 @@ marketplace:"Marketplace",
 partners:"Partneri"
 },
 
-
 hu:{
 menu:"Tartalom",
 profile:"Profil",
-club:"Csatlakozás a Clubhoz",
+club:"Csatlakozás",
 language:"Nyelv",
 contact:"Kapcsolat",
 
@@ -502,7 +482,6 @@ rescue:"Segítség",
 marketplace:"Piactér",
 partners:"Partnerek"
 },
-
 
 ro:{
 menu:"Conținut",
@@ -527,11 +506,10 @@ marketplace:"Marketplace",
 partners:"Parteneri"
 },
 
-
 bg:{
 menu:"Съдържание",
 profile:"Профил",
-club:"Влезте в Club",
+club:"Влезте в клуба",
 language:"Език",
 contact:"Свържете се с нас",
 
@@ -550,7 +528,6 @@ rescue:"Помощ",
 marketplace:"Маркетплейс",
 partners:"Партньори"
 },
-
 
 el:{
 menu:"Περιεχόμενα",
@@ -575,7 +552,6 @@ marketplace:"Marketplace",
 partners:"Συνεργάτες"
 },
 
-
 sv:{
 menu:"Innehåll",
 profile:"Profil",
@@ -598,7 +574,6 @@ rescue:"Hjälp",
 marketplace:"Marknadsplats",
 partners:"Partners"
 },
-
 
 da:{
 menu:"Indhold",
@@ -623,7 +598,6 @@ marketplace:"Marketplace",
 partners:"Partnere"
 },
 
-
 no:{
 menu:"Innhold",
 profile:"Profil",
@@ -646,7 +620,6 @@ rescue:"Hjelp",
 marketplace:"Markedsplass",
 partners:"Partnere"
 },
-
 
 fi:{
 menu:"Sisältö",
@@ -671,7 +644,6 @@ marketplace:"Marketplace",
 partners:"Kumppanit"
 },
 
-
 tr:{
 menu:"İçindekiler",
 profile:"Profil",
@@ -695,7 +667,6 @@ marketplace:"Pazar",
 partners:"Ortaklar"
 },
 
-
 ar:{
 menu:"المحتويات",
 profile:"الملف الشخصي",
@@ -718,7 +689,6 @@ rescue:"المساعدة",
 marketplace:"السوق",
 partners:"الشركاء"
 },
-
 
 hi:{
 menu:"सामग्री",
@@ -747,55 +717,183 @@ partners:"पार्टनर"
 
 
 /* =========================================================
+EXTRA MENU DESCRIPTIONS
+
+The other descriptions are taken from existing
+PETS & DOGUE common i18n when available.
+========================================================= */
+
+const EXTRA_MENU={
+
+en:{
+offers:"Club offers and member benefits.",
+wellness:"Health, grooming and everyday pet care.",
+partners:"Selected brands, services and lifestyle partners."
+},
+
+uk:{
+offers:"Пропозиції Club та переваги для учасників.",
+wellness:"Здоров’я, грумінг і щоденний догляд.",
+partners:"Відібрані бренди, послуги та lifestyle-партнери."
+},
+
+ru:{
+offers:"Предложения Club и преимущества для участников.",
+wellness:"Здоровье, груминг и ежедневный уход.",
+partners:"Отобранные бренды, услуги и lifestyle-партнёры."
+},
+
+fr:{
+offers:"Offres du Club et avantages membres.",
+wellness:"Santé, toilettage et soins quotidiens.",
+partners:"Marques, services et partenaires sélectionnés."
+},
+
+de:{
+offers:"Club-Angebote und Vorteile für Mitglieder.",
+wellness:"Gesundheit, Pflege und tägliche Betreuung.",
+partners:"Ausgewählte Marken, Services und Lifestyle-Partner."
+},
+
+es:{
+offers:"Ofertas del Club y ventajas para miembros.",
+wellness:"Salud, cuidado y bienestar diario.",
+partners:"Marcas, servicios y socios seleccionados."
+},
+
+it:{
+offers:"Offerte Club e vantaggi per i membri.",
+wellness:"Salute, toelettatura e cura quotidiana.",
+partners:"Brand, servizi e partner selezionati."
+},
+
+pt:{
+offers:"Ofertas do Club e benefícios para membros.",
+wellness:"Saúde, cuidados e bem-estar diário.",
+partners:"Marcas, serviços e parceiros selecionados."
+},
+
+nl:{
+offers:"Clubaanbiedingen en ledenvoordelen.",
+wellness:"Gezondheid, verzorging en dagelijkse zorg.",
+partners:"Geselecteerde merken, diensten en partners."
+},
+
+pl:{
+offers:"Oferty Club i korzyści dla członków.",
+wellness:"Zdrowie, pielęgnacja i codzienna opieka.",
+partners:"Wybrane marki, usługi i partnerzy."
+},
+
+cs:{
+offers:"Nabídky Club a výhody pro členy.",
+wellness:"Zdraví, péče a každodenní starostlivost.",
+partners:"Vybrané značky, služby a partneři."
+},
+
+sk:{
+offers:"Ponuky Club a výhody pre členov.",
+wellness:"Zdravie, starostlivosť a každodenná péče.",
+partners:"Vybrané značky, služby a partneri."
+},
+
+hu:{
+offers:"Club ajánlatok és tagsági előnyök.",
+wellness:"Egészség, ápolás és mindennapi gondozás.",
+partners:"Válogatott márkák, szolgáltatások és partnerek."
+},
+
+ro:{
+offers:"Oferte Club și beneficii pentru membri.",
+wellness:"Sănătate, îngrijire și wellness zilnic.",
+partners:"Branduri, servicii și parteneri selectați."
+},
+
+bg:{
+offers:"Club оферти и предимства за членове.",
+wellness:"Здраве, грижа и ежедневен комфорт.",
+partners:"Подбрани марки, услуги и партньори."
+},
+
+el:{
+offers:"Προσφορές Club και προνόμια μελών.",
+wellness:"Υγεία, περιποίηση και καθημερινή φροντίδα.",
+partners:"Επιλεγμένες μάρκες, υπηρεσίες και συνεργάτες."
+},
+
+sv:{
+offers:"Club-erbjudanden och medlemsförmåner.",
+wellness:"Hälsa, pälsvård och daglig omsorg.",
+partners:"Utvalda varumärken, tjänster och partners."
+},
+
+da:{
+offers:"Club-tilbud og medlemsfordele.",
+wellness:"Sundhed, pleje og daglig omsorg.",
+partners:"Udvalgte brands, tjenester og partnere."
+},
+
+no:{
+offers:"Club-tilbud og medlemsfordeler.",
+wellness:"Helse, pleie og daglig omsorg.",
+partners:"Utvalgte merker, tjenester og partnere."
+},
+
+fi:{
+offers:"Club-tarjoukset ja jäsenedut.",
+wellness:"Terveys, hoito ja päivittäinen hyvinvointi.",
+partners:"Valitut brändit, palvelut ja kumppanit."
+},
+
+tr:{
+offers:"Club teklifleri ve üye avantajları.",
+wellness:"Sağlık, bakım ve günlük evcil hayvan bakımı.",
+partners:"Seçilmiş markalar, hizmetler ve ortaklar."
+},
+
+ar:{
+offers:"عروض النادي ومزايا الأعضاء.",
+wellness:"الصحة والعناية والرعاية اليومية.",
+partners:"علامات وخدمات وشركاء مختارون."
+},
+
+hi:{
+offers:"Club ऑफ़र और सदस्य लाभ।",
+wellness:"स्वास्थ्य, ग्रूमिंग और रोज़मर्रा की देखभाल।",
+partners:"चुने हुए ब्रांड, सेवाएँ और पार्टनर।"
+}
+
+};
+
+
+/* =========================================================
 LANGUAGE OPTIONS
 ========================================================= */
 
 const LANGUAGE_OPTIONS=[
 
 ["en","🇬🇧 EN — English"],
-
 ["uk","🇺🇦 UA — Українська"],
-
 ["ru","🇷🇺 RU — Русский"],
-
 ["fr","🇫🇷 FR — Français"],
-
 ["de","🇩🇪 DE — Deutsch"],
-
 ["es","🇪🇸 ES — Español"],
-
 ["it","🇮🇹 IT — Italiano"],
-
 ["pt","🇵🇹 PT — Português"],
-
 ["nl","🇳🇱 NL — Nederlands"],
-
 ["pl","🇵🇱 PL — Polski"],
-
 ["cs","🇨🇿 CZ — Čeština"],
-
 ["sk","🇸🇰 SK — Slovenčina"],
-
 ["hu","🇭🇺 HU — Magyar"],
-
 ["ro","🇷🇴 RO — Română"],
-
 ["bg","🇧🇬 BG — Български"],
-
 ["el","🇬🇷 GR — Ελληνικά"],
-
 ["sv","🇸🇪 SE — Svenska"],
-
 ["da","🇩🇰 DK — Dansk"],
-
 ["no","🇳🇴 NO — Norsk"],
-
 ["fi","🇫🇮 FI — Suomi"],
-
 ["tr","🇹🇷 TR — Türkçe"],
-
 ["ar","🇸🇦 AR — العربية"],
-
 ["hi","🇮🇳 HI — हिन्दी"]
 
 ];
@@ -805,25 +903,18 @@ const LANGUAGE_OPTIONS=[
 STATE
 ========================================================= */
 
-let activeKey=
-"";
+let activeKey="";
 
+let activePositionDone=false;
 
-let activePositionDone=
-false;
-
-
-let userTouchedRubrics=
-false;
+let userTouchedRubrics=false;
 
 
 /* =========================================================
 HELPERS
 ========================================================= */
 
-function normalizeLanguage(
-value
-){
+function normalizeLanguage(value){
 
 let code=
 String(
@@ -865,36 +956,29 @@ code||
 
 function getLanguage(){
 
-let language=
-"";
+let language="";
 
 
 if(
 window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage
-.getCurrentLanguage===
-"function"
+typeof window.PetsDogueLanguage.getCurrentLanguage==="function"
 ){
 
 try{
 
 const result=
-window.PetsDogueLanguage
-.getCurrentLanguage();
+window.PetsDogueLanguage.getCurrentLanguage();
 
 
 if(
-typeof result===
-"string"
+typeof result==="string"
 ){
 
-language=
-result;
+language=result;
 
 }else if(
 result &&
-typeof result===
-"object"
+typeof result==="object"
 ){
 
 language=
@@ -973,6 +1057,259 @@ currentFilename()
 }
 
 
+function escapeHTML(value){
+
+return String(
+value||
+""
+)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+EXISTING COMMON I18N
+
+Used only to reuse the translations that are already
+present in the project.
+
+If unavailable, the menu remains functional and uses
+the global labels above.
+========================================================= */
+
+function getCommonMenu(language){
+
+try{
+
+return(
+window.PetsDogueTranslations?.common?.[language]?.menu||
+null
+);
+
+}catch(error){
+
+return null;
+
+}
+
+}
+
+
+/* =========================================================
+MENU CARD COPY
+========================================================= */
+
+function getMenuCardCopy(
+key,
+language
+){
+
+const labels=
+TEXT[language]||
+TEXT.en;
+
+
+const common=
+getCommonMenu(
+language
+)||
+{};
+
+
+const extra=
+EXTRA_MENU[language]||
+EXTRA_MENU.en;
+
+
+switch(key){
+
+case"magazine":
+
+return{
+title:
+common.latestIssue||
+labels.magazine,
+
+description:
+common.latestIssueDescription||
+""
+};
+
+
+case"coverStars":
+
+return{
+title:
+common.coverStar||
+labels.coverStars,
+
+description:
+common.coverStarDescription||
+""
+};
+
+
+case"offers":
+
+return{
+title:
+labels.offers,
+
+description:
+extra.offers
+};
+
+
+case"places":
+
+return{
+title:
+labels.places,
+
+description:
+common.placesDescription||
+""
+};
+
+
+case"articles":
+
+return{
+title:
+labels.articles,
+
+description:
+common.articlesDescription||
+""
+};
+
+
+case"photos":
+
+return{
+title:
+labels.photos,
+
+description:
+common.photosDescription||
+""
+};
+
+
+case"travel":
+
+return{
+title:
+labels.travel,
+
+description:
+common.travelDescription||
+""
+};
+
+
+case"fashion":
+
+return{
+title:
+labels.fashion,
+
+description:
+common.fashionDescription||
+""
+};
+
+
+case"wellness":
+
+return{
+title:
+labels.wellness,
+
+description:
+extra.wellness
+};
+
+
+case"community":
+
+return{
+title:
+labels.community,
+
+description:
+common.communityDescription||
+""
+};
+
+
+case"contests":
+
+return{
+title:
+labels.contests,
+
+description:
+common.contestsDescription||
+""
+};
+
+
+case"rescue":
+
+return{
+title:
+labels.rescue,
+
+description:
+common.rescueDescription||
+""
+};
+
+
+case"marketplace":
+
+return{
+title:
+labels.marketplace,
+
+description:
+common.marketplaceDescription||
+""
+};
+
+
+case"partners":
+
+return{
+title:
+labels.partners,
+
+description:
+extra.partners
+};
+
+
+default:
+
+return{
+title:
+labels[key]||
+key,
+
+description:""
+};
+
+}
+
+}
+
+
 /* =========================================================
 MASTER CSS
 ========================================================= */
@@ -1007,7 +1344,7 @@ style.id=
 style.textContent=`
 
 /* =========================================================
-HIDE ONLY OLD TOP SHELL ELEMENTS MARKED BY JS
+HIDE OLD VISUAL SHELL ONLY
 ========================================================= */
 
 .pd-global-old-shell-hidden{
@@ -1090,6 +1427,8 @@ display:grid;
 align-content:center;
 
 gap:5px;
+
+cursor:pointer;
 }
 
 #pdGlobalMenuButton span{
@@ -1353,7 +1692,7 @@ linear-gradient(
 
 
 /* =========================================================
-OVERLAY
+MENU OVERLAY
 ========================================================= */
 
 #pdGlobalOverlay{
@@ -1363,7 +1702,7 @@ inset:0;
 
 z-index:8900;
 
-background:rgba(0,0,0,.58);
+background:rgba(0,0,0,.67);
 
 opacity:0;
 
@@ -1375,9 +1714,9 @@ transition:
 opacity .22s ease,
 visibility .22s ease;
 
-backdrop-filter:blur(1px);
+backdrop-filter:blur(2px);
 
--webkit-backdrop-filter:blur(1px);
+-webkit-backdrop-filter:blur(2px);
 }
 
 #pdGlobalOverlay.show{
@@ -1390,11 +1729,13 @@ pointer-events:auto;
 
 
 /* =========================================================
-COMPACT SIDE MENU
+EDITORIAL SIDE MENU
 
-IMPORTANT:
-NOT FULL SCREEN.
-LEFT SIDE ONLY.
+VISUAL:
+same magazine-card menu as approved screenshot.
+
+SCALE:
+smaller and narrower.
 ========================================================= */
 
 #pdGlobalMenu{
@@ -1408,23 +1749,27 @@ bottom:0;
 
 z-index:9000;
 
-width:min(82vw,340px);
+width:min(76vw,300px);
 
-max-width:340px;
+max-width:300px;
 
-background:#f7f3ea;
+background:#fff;
 
 color:#111;
 
 overflow-y:auto;
 
+overflow-x:hidden;
+
 overscroll-behavior:contain;
 
+-webkit-overflow-scrolling:touch;
+
 box-shadow:
-14px
+12px
 0
-32px
-rgba(0,0,0,.24);
+30px
+rgba(0,0,0,.27);
 
 transform:translateX(-104%);
 
@@ -1450,19 +1795,21 @@ position:sticky;
 
 top:0;
 
-z-index:4;
+z-index:6;
 
-height:74px;
+height:68px;
 
-min-height:74px;
+min-height:68px;
 
-padding:0 15px 0 18px;
+padding:0 11px 0 15px;
 
 display:flex;
 
 align-items:center;
 
 justify-content:space-between;
+
+gap:8px;
 
 background:#080808;
 
@@ -1472,6 +1819,8 @@ border-bottom:1px solid #292929;
 }
 
 .pd-global-menu-head h2{
+min-width:0;
+
 margin:0;
 
 font-family:
@@ -1479,17 +1828,25 @@ Georgia,
 "Times New Roman",
 serif;
 
-font-size:29px;
+font-size:26px;
 
 font-weight:400;
 
 line-height:1;
+
+white-space:nowrap;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
 }
 
 #pdGlobalClose{
-width:39px;
+flex:0 0 auto;
 
-height:39px;
+width:37px;
+
+height:37px;
 
 display:flex;
 
@@ -1497,7 +1854,9 @@ align-items:center;
 
 justify-content:center;
 
-border:1px solid #444;
+padding:0;
+
+border:1px solid #484848;
 
 border-radius:50%;
 
@@ -1505,16 +1864,18 @@ background:#111;
 
 color:#fff;
 
-font-size:25px;
+font-size:24px;
 
 font-weight:300;
 
 line-height:1;
+
+cursor:pointer;
 }
 
 
 /* =========================================================
-PROFILE + CLUB
+SIGN IN + CLUB
 ========================================================= */
 
 .pd-global-account{
@@ -1522,17 +1883,21 @@ display:grid;
 
 grid-template-columns:1fr 1fr;
 
-gap:7px;
+gap:6px;
 
-padding:12px;
+padding:10px;
 
-border-bottom:1px solid #d7d1c6;
+background:#fff;
+
+border-bottom:1px solid #dedede;
 }
 
 .pd-global-account a{
-min-height:44px;
+min-width:0;
 
-padding:7px 9px;
+min-height:40px;
+
+padding:7px 5px;
 
 display:flex;
 
@@ -1544,17 +1909,22 @@ text-align:center;
 
 border:1.5px solid #111;
 
-border-radius:8px;
+border-radius:999px;
 
 background:#fff;
 
 color:#111;
 
-font-size:10.5px;
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+font-size:9.5px;
 
 font-weight:900;
 
-line-height:1.15;
+line-height:1.1;
 
 text-transform:uppercase;
 
@@ -1573,21 +1943,30 @@ LANGUAGE
 ========================================================= */
 
 .pd-global-language{
-padding:11px 12px 12px;
+padding:9px 10px 10px;
 
-border-bottom:1px solid #d7d1c6;
+background:#fff;
+
+border-bottom:1px solid #dedede;
 }
 
 .pd-global-language label{
 display:block;
 
-margin:0 0 6px 2px;
+margin:0 0 5px 2px;
 
-font-size:8px;
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+font-size:7.5px;
 
 font-weight:900;
 
-letter-spacing:1.8px;
+line-height:1;
+
+letter-spacing:1.55px;
 
 text-transform:uppercase;
 
@@ -1597,52 +1976,17 @@ color:#777;
 #pdGlobalLanguage{
 width:100%;
 
-height:43px;
+height:40px;
 
-padding:0 12px;
+padding:0 10px;
 
 border:1.5px solid #111;
 
-border-radius:8px;
+border-radius:999px;
 
 outline:0;
 
-background:#fff;
-
-color:#111;
-
-font-size:12px;
-
-font-weight:800;
-}
-
-
-/* =========================================================
-MENU RUBRICS
-========================================================= */
-
-#pdGlobalMenuList{
-display:grid;
-
-gap:5px;
-
-padding:10px 12px 16px;
-}
-
-#pdGlobalMenuList a{
-min-height:40px;
-
-padding:8px 12px;
-
-display:flex;
-
-align-items:center;
-
-border:1.5px solid #111;
-
-border-radius:8px;
-
-background:#fff;
+background:#faf8f3;
 
 color:#111;
 
@@ -1653,21 +1997,155 @@ sans-serif;
 
 font-size:11px;
 
-font-weight:850;
+font-weight:800;
+}
 
-line-height:1.15;
 
-text-transform:uppercase;
+/* =========================================================
+PHOTO RUBRIC CARDS
+========================================================= */
+
+#pdGlobalMenuList{
+display:grid;
+
+grid-template-columns:1fr;
+
+gap:7px;
+
+padding:10px;
+
+background:#fff;
+}
+
+.pd-global-menu-card{
+position:relative;
+
+min-width:0;
+
+min-height:72px;
+
+display:grid;
+
+grid-template-columns:
+64px
+minmax(0,1fr);
+
+align-items:stretch;
+
+overflow:hidden;
+
+border:1.5px solid #151515;
+
+border-radius:17px;
+
+background:#faf8f3;
+
+color:#111;
 
 text-decoration:none;
 }
 
-#pdGlobalMenuList a.active{
-background:#111;
+.pd-global-menu-card-image{
+position:relative;
 
+width:64px;
+
+min-height:72px;
+
+overflow:hidden;
+
+background:#ddd;
+}
+
+.pd-global-menu-card-image img{
+position:absolute;
+
+inset:0;
+
+width:100%;
+
+height:100%;
+
+display:block;
+
+object-fit:cover;
+
+object-position:center;
+}
+
+.pd-global-menu-card-copy{
+min-width:0;
+
+padding:8px 8px 7px 9px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+}
+
+.pd-global-menu-card h3{
+margin:0 0 3px;
+
+font-family:
+Georgia,
+"Times New Roman",
+serif;
+
+font-size:15px;
+
+font-weight:700;
+
+line-height:1.03;
+
+color:#111;
+
+overflow-wrap:anywhere;
+}
+
+.pd-global-menu-card p{
+margin:0;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+font-size:9.3px;
+
+font-weight:400;
+
+line-height:1.3;
+
+color:#676767;
+
+display:-webkit-box;
+
+-webkit-line-clamp:2;
+
+-webkit-box-orient:vertical;
+
+overflow:hidden;
+}
+
+
+/* =========================================================
+ACTIVE MENU CARD
+========================================================= */
+
+.pd-global-menu-card.active{
+background:#0b0b0b;
+
+border-color:#0b0b0b;
+}
+
+.pd-global-menu-card.active h3{
 color:#efd38c;
+}
 
-border-color:#111;
+.pd-global-menu-card.active p{
+color:#ddd;
 }
 
 
@@ -1676,11 +2154,13 @@ CONTACT
 ========================================================= */
 
 .pd-global-menu-footer{
-padding:0 12px 18px;
+padding:2px 10px 14px;
+
+background:#fff;
 }
 
 .pd-global-menu-footer a{
-min-height:42px;
+min-height:38px;
 
 display:flex;
 
@@ -1688,17 +2168,28 @@ align-items:center;
 
 justify-content:center;
 
-border:0;
+padding:7px 10px;
 
-border-radius:8px;
+border:1.5px solid #111;
 
-background:#d4a536;
+border-radius:999px;
 
-color:#111;
+background:#111;
 
-font-size:11px;
+color:#efd38c;
+
+font-family:
+Arial,
+Helvetica,
+sans-serif;
+
+font-size:9.5px;
 
 font-weight:900;
+
+line-height:1;
+
+letter-spacing:.25px;
 
 text-transform:uppercase;
 
@@ -1719,7 +2210,10 @@ overflow:hidden !important;
 RTL
 
 Page remains RTL.
-Global navigation physical order remains fixed.
+Rubric physical order remains unchanged.
+
+Side panel opens from the correct physical side
+for an RTL interface.
 ========================================================= */
 
 html[dir="rtl"] #pdGlobalRubrics{
@@ -1736,10 +2230,10 @@ left:auto;
 right:0;
 
 box-shadow:
--14px
+-12px
 0
-32px
-rgba(0,0,0,.24);
+30px
+rgba(0,0,0,.27);
 
 transform:translateX(104%);
 }
@@ -1748,8 +2242,17 @@ html[dir="rtl"] #pdGlobalMenu.open{
 transform:translateX(0);
 }
 
-html[dir="rtl"] .pd-global-menu-head,
-html[dir="rtl"] #pdGlobalMenuList a{
+html[dir="rtl"] .pd-global-menu-head{
+direction:rtl;
+}
+
+html[dir="rtl"] .pd-global-menu-card{
+grid-template-columns:
+64px
+minmax(0,1fr);
+}
+
+html[dir="rtl"] .pd-global-menu-card-copy{
 text-align:right;
 }
 
@@ -1799,13 +2302,98 @@ padding-right:15px;
 font-size:11px;
 }
 
+
+#pdGlobalMenu{
+width:min(76vw,286px);
+
+max-width:286px;
+}
+
+.pd-global-menu-head{
+height:65px;
+
+min-height:65px;
+
+padding-left:13px;
+}
+
+.pd-global-menu-head h2{
+font-size:24px;
+}
+
+#pdGlobalClose{
+width:35px;
+
+height:35px;
+
+font-size:22px;
+}
+
+.pd-global-account{
+padding:8px;
+
+gap:5px;
+}
+
+.pd-global-account a{
+min-height:38px;
+
+font-size:9px;
+}
+
+.pd-global-language{
+padding:8px;
+}
+
+#pdGlobalLanguage{
+height:38px;
+
+font-size:10.5px;
+}
+
+#pdGlobalMenuList{
+padding:8px;
+
+gap:6px;
+}
+
+.pd-global-menu-card{
+min-height:68px;
+
+grid-template-columns:
+60px
+minmax(0,1fr);
+
+border-radius:16px;
+}
+
+.pd-global-menu-card-image{
+width:60px;
+
+min-height:68px;
+}
+
+.pd-global-menu-card-copy{
+padding:
+7px
+7px
+6px
+8px;
+}
+
+.pd-global-menu-card h3{
+font-size:14px;
+}
+
+.pd-global-menu-card p{
+font-size:8.8px;
+}
+
 }
 
 
 /* =========================================================
 TABLET / DESKTOP
-
-Same proportions, slightly more breathing room.
 ========================================================= */
 
 @media(min-width:851px){
@@ -1875,6 +2463,13 @@ padding:0 18px;
 font-size:12px;
 }
 
+
+#pdGlobalMenu{
+width:min(340px,32vw);
+
+max-width:340px;
+}
+
 }
 
 
@@ -1902,17 +2497,15 @@ style
 
 
 /* =========================================================
-MARK EXISTING TOP SHELL
+HIDE EXISTING TOP SHELL
 
-We keep the original elements in the DOM.
-We only hide their visual copy.
-This minimizes risk to page-specific JS.
+Existing elements remain in DOM.
+Only their visual copies are hidden.
 ========================================================= */
 
 function hideExistingShell(){
 
-const elements=
-[
+const elements=[
 ...document.querySelectorAll(
 "header.site-header"
 )
@@ -1936,11 +2529,6 @@ element.classList.add(
 );
 
 
-/*
-Some pages have the rubric strip outside the header.
-Hide only a top-of-page strip with known navigation classes.
-*/
-
 const navSelectors=[
 
 ".primary-nav",
@@ -1950,6 +2538,8 @@ const navSelectors=[
 ".global-nav",
 
 ".rubric-nav",
+
+".desktop-categories",
 
 "#categoryNav"
 
@@ -1967,8 +2557,7 @@ selector
 element=>{
 
 if(
-element.id===
-"pdGlobalRubrics"
+element.id==="pdGlobalRubrics"
 ){
 
 return;
@@ -1977,13 +2566,11 @@ return;
 
 
 const rect=
-element
-.getBoundingClientRect();
+element.getBoundingClientRect();
 
 
 if(
-rect.top<
-320
+rect.top<340
 ){
 
 element.classList.add(
@@ -2094,13 +2681,9 @@ aria-label="PETS & DOGUE sections"
 `;
 
 
-const firstBodyChild=
-document.body.firstChild;
-
-
 document.body.insertBefore(
 header,
-firstBodyChild
+document.body.firstChild
 );
 
 
@@ -2117,7 +2700,7 @@ openMenu
 
 
 /* =========================================================
-CREATE MENU
+CREATE SIDE MENU
 ========================================================= */
 
 function createSideMenu(){
@@ -2315,8 +2898,7 @@ NAV_ITEMS
 item=>{
 
 const isActive=
-item.key===
-activeKey;
+item.key===activeKey;
 
 
 return`
@@ -2327,7 +2909,9 @@ class="${isActive?"active":""}"
 ${isActive?'aria-current="page"':""}
 >
 
-${labels[item.key]}
+${escapeHTML(
+labels[item.key]
+)}
 
 </a>
 
@@ -2352,6 +2936,39 @@ previousScroll;
 );
 
 }
+
+}
+
+
+/* =========================================================
+SIGN-IN COPY
+
+Reuse existing multilingual common.js whenever available.
+========================================================= */
+
+function getSignInText(
+language
+){
+
+const common=
+getCommonMenu(
+language
+);
+
+
+if(
+common?.signIn
+){
+
+return common.signIn;
+
+}
+
+
+return(
+TEXT[language]?.profile||
+TEXT.en.profile
+);
 
 }
 
@@ -2386,12 +3003,86 @@ return;
 }
 
 
+const signIn=
+getSignInText(
+language
+);
+
+
+const cards=
+NAV_ITEMS
+.map(
+item=>{
+
+const copy=
+getMenuCardCopy(
+item.key,
+language
+);
+
+
+const active=
+item.key===activeKey;
+
+
+return`
+
+<a
+class="pd-global-menu-card ${active?"active":""}"
+href="${item.url}"
+${active?'aria-current="page"':""}
+>
+
+<span class="pd-global-menu-card-image">
+
+<img
+src="${item.image}"
+alt=""
+loading="lazy"
+>
+
+</span>
+
+
+<span class="pd-global-menu-card-copy">
+
+<h3>
+${escapeHTML(
+copy.title
+)}
+</h3>
+
+${
+copy.description
+?`
+<p>
+${escapeHTML(
+copy.description
+)}
+</p>
+`
+:""
+}
+
+</span>
+
+</a>
+
+`;
+
+}
+)
+.join("");
+
+
 menu.innerHTML=`
 
 <div class="pd-global-menu-head">
 
 <h2>
-${labels.menu}
+${escapeHTML(
+labels.menu
+)}
 </h2>
 
 
@@ -2410,7 +3101,9 @@ aria-label="Close menu"
 
 <a href="account.html">
 
-${labels.profile}
+${escapeHTML(
+signIn
+)}
 
 </a>
 
@@ -2420,7 +3113,9 @@ class="club"
 href="club.html"
 >
 
-${labels.club}
+${escapeHTML(
+labels.club
+)}
 
 </a>
 
@@ -2431,14 +3126,18 @@ ${labels.club}
 
 <label for="pdGlobalLanguage">
 
-${labels.language}
+${escapeHTML(
+labels.language
+)}
 
 </label>
 
 
 <select
 id="pdGlobalLanguage"
-aria-label="${labels.language}"
+aria-label="${escapeHTML(
+labels.language
+)}"
 >
 
 ${LANGUAGE_OPTIONS
@@ -2465,22 +3164,7 @@ ${option[1]}
 
 <nav id="pdGlobalMenuList">
 
-${NAV_ITEMS
-.map(
-item=>`
-
-<a
-href="${item.url}"
-class="${item.key===activeKey?"active":""}"
->
-
-${labels[item.key]}
-
-</a>
-
-`
-)
-.join("")}
+${cards}
 
 </nav>
 
@@ -2489,7 +3173,9 @@ ${labels[item.key]}
 
 <a href="contact.html">
 
-${labels.contact}
+${escapeHTML(
+labels.contact
+)}
 
 </a>
 
@@ -2502,7 +3188,7 @@ document
 .getElementById(
 "pdGlobalClose"
 )
-.addEventListener(
+?.addEventListener(
 "click",
 closeMenu
 );
@@ -2512,7 +3198,7 @@ document
 .getElementById(
 "pdGlobalLanguage"
 )
-.addEventListener(
+?.addEventListener(
 "change",
 handleLanguageChange
 );
@@ -2523,9 +3209,8 @@ handleLanguageChange
 /* =========================================================
 LANGUAGE CHANGE
 
-Do not replace any page translation system.
-Update its existing storage key and emit the event
-that current PETS & DOGUE pages already listen to.
+Does not replace page i18n.
+Synchronises with the existing language system.
 ========================================================= */
 
 function handleLanguageChange(
@@ -2554,11 +3239,6 @@ language==="ar"
 :"ltr";
 
 
-/*
-If an existing language controller exposes
-a setter, use it.
-*/
-
 if(
 window.PetsDogueLanguage
 ){
@@ -2583,8 +3263,7 @@ const setter of setters
 ){
 
 if(
-typeof controller[setter]===
-"function"
+typeof controller[setter]==="function"
 ){
 
 try{
@@ -2613,8 +3292,7 @@ break;
 
 
 /*
-Synchronize an existing page language select,
-if the page already has one.
+Synchronise an existing page selector.
 */
 
 const existingSelect=
@@ -2646,7 +3324,7 @@ bubbles:true
 }catch(error){
 
 console.warn(
-"PETS & DOGUE existing language select sync failed.",
+"PETS & DOGUE language selector sync failed.",
 error
 );
 
@@ -2656,8 +3334,8 @@ error
 
 
 /*
-Pages such as articles.html already listen for
-this event and re-render their own translated content.
+Tell existing PETS & DOGUE pages to refresh
+their own translations.
 */
 
 window.dispatchEvent(
@@ -2675,14 +3353,11 @@ renderSideMenu();
 
 
 /* =========================================================
-ACTIVE RUBRIC POSITION
+POSITION ACTIVE RUBRIC ONCE
 
-ONE TIME ONLY.
-
-After the first positioning:
-NO forced recenter on scroll.
-NO forced recenter on resize.
-NO forced recenter on touch.
+After this:
+browser owns horizontal swipe.
+No repeated recentering.
 ========================================================= */
 
 function positionActiveOnce(){
@@ -2722,16 +3397,14 @@ if(
 !active
 ){
 
-activePositionDone=
-true;
+activePositionDone=true;
 
 return;
 
 }
 
 
-activePositionDone=
-true;
+activePositionDone=true;
 
 
 requestAnimationFrame(
@@ -2779,7 +3452,7 @@ target
 
 
 /* =========================================================
-FREE NATIVE SWIPE
+FREE NATIVE RUBRIC SWIPE
 ========================================================= */
 
 function installRubricInteraction(){
@@ -2800,8 +3473,7 @@ return;
 
 
 if(
-nav.dataset.interactionReady===
-"1"
+nav.dataset.interactionReady==="1"
 ){
 
 return;
@@ -2809,8 +3481,7 @@ return;
 }
 
 
-nav.dataset.interactionReady=
-"1";
+nav.dataset.interactionReady="1";
 
 
 [
@@ -2825,8 +3496,7 @@ nav.addEventListener(
 eventName,
 ()=>{
 
-userTouchedRubrics=
-true;
+userTouchedRubrics=true;
 
 },
 {
@@ -2841,7 +3511,7 @@ passive:true
 
 
 /* =========================================================
-LANGUAGE REFRESH FROM PAGE / OTHER TAB
+REFRESH LANGUAGE
 ========================================================= */
 
 function refreshShellLanguage(){
@@ -2855,9 +3525,6 @@ renderSideMenu();
 
 /* =========================================================
 ESCAPE
-
-Capture phase prevents an old page-specific Escape handler
-from navigating away while this menu is open.
 ========================================================= */
 
 function handleEscape(
@@ -2916,11 +3583,6 @@ getActiveKey();
 installStyles();
 
 
-/*
-Hide visual copies of the old header/navigation only.
-Existing elements stay in DOM so their page JS is not destroyed.
-*/
-
 hideExistingShell();
 
 
@@ -2944,7 +3606,7 @@ positionActiveOnce,
 
 
 /*
-Refresh shell labels if the page's current i18n system changes.
+Existing page language change.
 */
 
 window.addEventListener(
@@ -2961,7 +3623,7 @@ refreshShellLanguage,
 
 
 /*
-Cross-tab language persistence.
+Language changed in another browser tab.
 */
 
 window.addEventListener(
@@ -2969,8 +3631,7 @@ window.addEventListener(
 event=>{
 
 if(
-event.key===
-LANGUAGE_KEY
+event.key===LANGUAGE_KEY
 ){
 
 setTimeout(
@@ -2985,8 +3646,7 @@ refreshShellLanguage,
 
 
 /*
-Close side menu with Escape without triggering
-an old page-specific Escape action.
+Escape closes only this menu.
 */
 
 document.addEventListener(
@@ -3003,8 +3663,7 @@ INITIALISE
 ========================================================= */
 
 if(
-document.readyState===
-"loading"
+document.readyState==="loading"
 ){
 
 document.addEventListener(
