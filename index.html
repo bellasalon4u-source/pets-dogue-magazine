@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta
 name="viewport"
 content="width=device-width,initial-scale=1,viewport-fit=cover"
 >
+
 <meta
 name="description"
 content="PETS & DOGUE — The International Luxury Animal Magazine"
 >
+
 <title>PETS & DOGUE</title>
 
 <link
@@ -30,7 +33,6 @@ href="visual-system.css?v=1"
 --serif:Georgia,"Times New Roman",serif;
 --sans:Arial,Helvetica,sans-serif;
 
-/* PAGE-SPECIFIC COMPACT SCALE */
 --home-header-height:88px;
 --home-nav-height:50px;
 }
@@ -43,6 +45,7 @@ padding:0;
 
 html{
 scroll-behavior:smooth;
+-webkit-text-size-adjust:100%;
 }
 
 body{
@@ -79,7 +82,8 @@ image-rendering:auto;
 
 /* =========================================================
 HEADER
-COMPACT — NO DOUBLE / HUGE MOBILE HEADER
+ONE MASTER VISUAL:
+MENU / LOGO / HOME
 ========================================================= */
 
 .site-header{
@@ -95,7 +99,7 @@ border-bottom:1px solid #272727;
 height:var(--home-header-height);
 min-height:var(--home-header-height);
 display:grid;
-grid-template-columns:58px minmax(0,1fr) auto;
+grid-template-columns:58px minmax(0,1fr) 58px;
 align-items:center;
 gap:10px;
 padding:0 18px;
@@ -145,73 +149,33 @@ color:var(--gold);
 margin-top:6px;
 }
 
-.header-actions{
+.home-button{
+justify-self:end;
+width:46px;
+height:46px;
 display:flex;
 align-items:center;
-justify-content:flex-end;
-gap:7px;
-}
-
-.subscribe-top{
-height:42px;
-padding:0 15px;
+justify-content:center;
 border:0;
-background:var(--green);
-color:#080808;
-font-weight:900;
-font-size:11px;
-letter-spacing:.55px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-transform:uppercase;
-white-space:nowrap;
-}
-
-.profile-button{
-width:42px;
-height:42px;
-display:flex;
-align-items:center;
-justify-content:center;
 background:transparent;
-border:0;
 color:#fff;
 }
 
-.profile-icon{
-position:relative;
-width:27px;
+.home-button svg{
+display:block;
+width:31px;
 height:31px;
-}
-
-.profile-icon:before{
-content:"";
-position:absolute;
-top:0;
-left:50%;
-transform:translateX(-50%);
-width:12px;
-height:12px;
-border:2px solid currentColor;
-border-radius:50%;
-}
-
-.profile-icon:after{
-content:"";
-position:absolute;
-left:3px;
-right:3px;
-bottom:0;
-height:16px;
-border:2px solid currentColor;
-border-bottom:0;
-border-radius:20px 20px 0 0;
+fill:none;
+stroke:currentColor;
+stroke-width:2.4;
+stroke-linecap:round;
+stroke-linejoin:round;
 }
 
 /* =========================================================
 TOP NAV
-FIXED ORDER — ONLY HORIZONTAL SCROLL
+FIXED ORDER
+NEVER REBUILT IN ANOTHER ORDER
 ========================================================= */
 
 .primary-nav{
@@ -249,11 +213,13 @@ padding:0 18px;
 display:flex;
 align-items:center;
 justify-content:center;
+
 font-size:12px;
 font-weight:900;
 letter-spacing:.55px;
 line-height:1;
 text-transform:uppercase;
+
 white-space:nowrap;
 word-break:normal;
 overflow-wrap:normal;
@@ -265,11 +231,11 @@ hyphens:none;
 color:var(--gold-light);
 }
 
-.primary-nav a:first-child{
+.primary-nav a.active{
 color:var(--gold-light);
 }
 
-.primary-nav a:first-child:after{
+.primary-nav a.active:after{
 content:"";
 position:absolute;
 left:17px;
@@ -297,6 +263,7 @@ z-index:9000;
 opacity:0;
 visibility:hidden;
 transition:.25s;
+
 backdrop-filter:blur(2px);
 -webkit-backdrop-filter:blur(2px);
 }
@@ -452,7 +419,6 @@ margin-top:5px;
 
 /* =========================================================
 EDITORIAL INTRO
-LARGE, BRIGHT, CLEAN PHOTOGRAPHY
 ========================================================= */
 
 .editorial-intro{
@@ -879,7 +845,7 @@ TABLET
 .header-main{
 height:84px;
 min-height:84px;
-grid-template-columns:54px minmax(0,1fr) auto;
+grid-template-columns:54px minmax(0,1fr) 54px;
 padding:0 13px;
 }
 
@@ -891,14 +857,14 @@ font-size:37px;
 font-size:9px;
 }
 
-.subscribe-top{
-height:40px;
-padding:0 13px;
+.home-button{
+width:42px;
+height:42px;
 }
 
-.profile-button{
-width:40px;
-height:40px;
+.home-button svg{
+width:29px;
+height:29px;
 }
 
 .primary-nav{
@@ -938,11 +904,6 @@ MOBILE
 --home-nav-height:46px;
 }
 
-/*
-Override shared visual-system.css mobile values.
-This page deliberately uses the compact master header.
-*/
-
 .site-header{
 position:sticky;
 top:0;
@@ -951,7 +912,7 @@ top:0;
 .header-main{
 height:78px !important;
 min-height:78px !important;
-grid-template-columns:48px minmax(0,1fr) auto !important;
+grid-template-columns:48px minmax(0,1fr) 48px !important;
 gap:5px;
 padding:0 10px !important;
 }
@@ -982,36 +943,14 @@ letter-spacing:1.8px !important;
 margin-top:5px !important;
 }
 
-.header-actions{
-gap:3px;
+.home-button{
+width:43px !important;
+height:43px !important;
 }
 
-.subscribe-top{
-height:38px;
-padding:0 9px;
-font-size:9px;
-letter-spacing:.25px;
-}
-
-.profile-button{
-width:35px !important;
-height:38px !important;
-}
-
-.profile-icon{
-width:23px;
-height:27px;
-}
-
-.profile-icon:before{
-width:10px;
-height:10px;
-border-width:2px;
-}
-
-.profile-icon:after{
-height:14px;
-border-width:2px;
+.home-button svg{
+width:29px;
+height:29px;
 }
 
 .primary-nav{
@@ -1028,15 +967,13 @@ font-size:10.5px !important;
 letter-spacing:.35px !important;
 }
 
-.primary-nav a:first-child:after{
+.primary-nav a.active:after{
 left:13px;
 right:13px;
 height:3px;
 }
 
-/* =========================================================
-MOBILE INTRO
-========================================================= */
+/* MOBILE INTRO */
 
 .intro-grid{
 display:grid;
@@ -1092,9 +1029,7 @@ font-size:8px;
 margin-top:9px;
 }
 
-/* =========================================================
-MOBILE WORLD
-========================================================= */
+/* MOBILE WORLD */
 
 .world-heading{
 padding:21px 16px 16px;
@@ -1109,9 +1044,7 @@ font-size:35px;
 display:none;
 }
 
-/* =========================================================
-MOBILE MOSAIC
-========================================================= */
+/* MOBILE MOSAIC */
 
 .magazine-grid{
 grid-template-columns:1fr 1fr;
@@ -1158,9 +1091,7 @@ font-size:9px;
 font-size:10px;
 }
 
-/* =========================================================
-MOBILE PARTNER
-========================================================= */
+/* MOBILE PARTNER */
 
 .partner-end{
 grid-template-columns:1fr;
@@ -1188,9 +1119,7 @@ padding:21px 19px 29px;
 font-size:34px;
 }
 
-/* =========================================================
-MOBILE SIDE MENU
-========================================================= */
+/* MOBILE SIDE MENU */
 
 .side-menu{
 width:min(92vw,500px) !important;
@@ -1239,18 +1168,13 @@ SMALL MOBILE
 @media(max-width:390px){
 
 .header-main{
-grid-template-columns:45px minmax(0,1fr) auto !important;
+grid-template-columns:45px minmax(0,1fr) 45px !important;
 padding-left:8px !important;
 padding-right:8px !important;
 }
 
 .brand-big{
 font-size:29px !important;
-}
-
-.subscribe-top{
-font-size:8.5px;
-padding:0 8px;
 }
 
 .intro-grid{
@@ -1280,15 +1204,6 @@ VERY SMALL MOBILE
 ========================================================= */
 
 @media(max-width:350px){
-
-.subscribe-top{
-padding:0 6px;
-font-size:8px;
-}
-
-.profile-button{
-width:31px !important;
-}
 
 .brand-big{
 font-size:27px !important;
@@ -1444,25 +1359,22 @@ DOGUE
 
 </a>
 
-<div class="header-actions">
-
 <a
-class="subscribe-top"
-href="club.html"
-id="topSubscribe"
+class="home-button"
+href="index.html"
+aria-label="Home"
 >
-SUBSCRIBE
-</a>
 
-<a
-class="profile-button"
-href="account.html"
-aria-label="Profile"
+<svg
+viewBox="0 0 32 32"
+aria-hidden="true"
 >
-<span class="profile-icon"></span>
-</a>
+<path d="M4 14.5 16 4l12 10.5"></path>
+<path d="M7 13v15h18V13"></path>
+<path d="M13 28V18h6v10"></path>
+</svg>
 
-</div>
+</a>
 
 </div>
 
@@ -2033,13 +1945,18 @@ data-footer-key="community"
 ></a>
 
 <a
-href="pet-marketplace.html"
-data-footer-key="marketplace"
+href="contests.html"
+data-footer-key="contests"
 ></a>
 
 <a
-href="contests.html"
-data-footer-key="contests"
+href="pets-in-need.html"
+data-footer-key="rescue"
+></a>
+
+<a
+href="pet-marketplace.html"
+data-footer-key="marketplace"
 ></a>
 
 <a
@@ -2061,19 +1978,18 @@ data-footer-key="partners"
 /* =========================================================
 PETS & DOGUE HOME
 
-IMPORTANT:
-- Existing functionality preserved
-- Existing 23-language system preserved
-- Fixed global rubric order
-- Navigation does not reorder itself
+VISUAL RULES:
+- same navigation order on every language
+- active section only changes colour
+- navigation never reorders
+- right header control is always HOME
 ========================================================= */
 
 const LANGUAGE_KEY =
 "pets_dogue_language";
 
 /* =========================================================
-GLOBAL NAVIGATION ORDER
-NEVER CHANGE ORDER PER LANGUAGE
+MASTER GLOBAL NAVIGATION ORDER
 
 1. Magazine
 2. Cover Stars
@@ -2085,11 +2001,10 @@ NEVER CHANGE ORDER PER LANGUAGE
 8. Fashion
 9. Health
 10. Community
-11. Marketplace
-12. Contests
-13. Partners
-
-Partners always last.
+11. Contests
+12. Help
+13. Marketplace
+14. Partners
 ========================================================= */
 
 const NAV_ITEMS = [
@@ -2155,15 +2070,21 @@ image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit
 },
 
 {
-key:"marketplace",
-url:"pet-marketplace.html",
-image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=700&q=90"
-},
-
-{
 key:"contests",
 url:"contests.html",
 image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=90"
+},
+
+{
+key:"rescue",
+url:"pets-in-need.html",
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=700&q=90"
+},
+
+{
+key:"marketplace",
+url:"pet-marketplace.html",
+image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=700&q=90"
 },
 
 {
@@ -2176,7 +2097,6 @@ image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&
 
 /* =========================================================
 TRANSLATIONS
-Existing multilingual structure preserved.
 ========================================================= */
 
 const T = {
@@ -2198,10 +2118,10 @@ travel:"Travel",
 fashion:"Fashion",
 wellness:"Health",
 community:"Community",
-marketplace:"Marketplace",
 contests:"Contests",
-partners:"Partners",
-rescue:"Help"
+rescue:"Help",
+marketplace:"Marketplace",
+partners:"Partners"
 },
 
 latestLabel:"Latest issue",
@@ -2263,10 +2183,10 @@ travel:"Путешествия",
 fashion:"Мода",
 wellness:"Здоровье",
 community:"Сообщество",
-marketplace:"Маркетплейс",
 contests:"Конкурсы",
-partners:"Партнёры",
-rescue:"Помощь"
+rescue:"Помощь",
+marketplace:"Маркетплейс",
+partners:"Партнёры"
 },
 
 latestLabel:"Последний выпуск",
@@ -2328,10 +2248,10 @@ travel:"Подорожі",
 fashion:"Мода",
 wellness:"Здоров’я",
 community:"Спільнота",
-marketplace:"Маркетплейс",
 contests:"Конкурси",
-partners:"Партнери",
-rescue:"Допомога"
+rescue:"Допомога",
+marketplace:"Маркетплейс",
+partners:"Партнери"
 },
 
 latestLabel:"Останній випуск",
@@ -2381,7 +2301,6 @@ menu:"Sommaire",
 profile:"Profil",
 subscribe:"Abonnement",
 language:"Langue",
-
 nav:{
 magazine:"Magazine",
 coverStars:"Stars de couverture",
@@ -2393,10 +2312,10 @@ travel:"Voyages",
 fashion:"Mode",
 wellness:"Santé",
 community:"Communauté",
-marketplace:"Marketplace",
 contests:"Concours",
-partners:"Partenaires",
-rescue:"Aide"
+rescue:"Aide",
+marketplace:"Marketplace",
+partners:"Partenaires"
 }
 },
 
@@ -2405,7 +2324,6 @@ menu:"Inhalt",
 profile:"Profil",
 subscribe:"Abo",
 language:"Sprache",
-
 nav:{
 magazine:"Magazin",
 coverStars:"Cover Stars",
@@ -2417,10 +2335,10 @@ travel:"Reisen",
 fashion:"Mode",
 wellness:"Gesundheit",
 community:"Community",
-marketplace:"Marktplatz",
 contests:"Wettbewerbe",
-partners:"Partner",
-rescue:"Hilfe"
+rescue:"Hilfe",
+marketplace:"Marktplatz",
+partners:"Partner"
 }
 },
 
@@ -2429,7 +2347,6 @@ menu:"Contenido",
 profile:"Perfil",
 subscribe:"Suscripción",
 language:"Idioma",
-
 nav:{
 magazine:"Revista",
 coverStars:"Estrellas de portada",
@@ -2441,10 +2358,10 @@ travel:"Viajes",
 fashion:"Moda",
 wellness:"Salud",
 community:"Comunidad",
-marketplace:"Marketplace",
 contests:"Concursos",
-partners:"Socios",
-rescue:"Ayuda"
+rescue:"Ayuda",
+marketplace:"Marketplace",
+partners:"Socios"
 }
 },
 
@@ -2453,7 +2370,6 @@ menu:"Contenuti",
 profile:"Profilo",
 subscribe:"Abbonamento",
 language:"Lingua",
-
 nav:{
 magazine:"Rivista",
 coverStars:"Cover Star",
@@ -2465,10 +2381,10 @@ travel:"Viaggi",
 fashion:"Moda",
 wellness:"Salute",
 community:"Community",
-marketplace:"Marketplace",
 contests:"Concorsi",
-partners:"Partner",
-rescue:"Aiuto"
+rescue:"Aiuto",
+marketplace:"Marketplace",
+partners:"Partner"
 }
 },
 
@@ -2477,7 +2393,6 @@ menu:"Conteúdo",
 profile:"Perfil",
 subscribe:"Assinatura",
 language:"Idioma",
-
 nav:{
 magazine:"Revista",
 coverStars:"Estrelas da capa",
@@ -2489,10 +2404,10 @@ travel:"Viagens",
 fashion:"Moda",
 wellness:"Saúde",
 community:"Comunidade",
-marketplace:"Marketplace",
 contests:"Concursos",
-partners:"Parceiros",
-rescue:"Ajuda"
+rescue:"Ajuda",
+marketplace:"Marketplace",
+partners:"Parceiros"
 }
 },
 
@@ -2501,7 +2416,6 @@ menu:"Inhoud",
 profile:"Profiel",
 subscribe:"Abonnement",
 language:"Taal",
-
 nav:{
 magazine:"Magazine",
 coverStars:"Coversterren",
@@ -2513,10 +2427,10 @@ travel:"Reizen",
 fashion:"Mode",
 wellness:"Gezondheid",
 community:"Community",
-marketplace:"Marktplaats",
 contests:"Wedstrijden",
-partners:"Partners",
-rescue:"Hulp"
+rescue:"Hulp",
+marketplace:"Marktplaats",
+partners:"Partners"
 }
 },
 
@@ -2525,7 +2439,6 @@ menu:"Spis treści",
 profile:"Profil",
 subscribe:"Subskrypcja",
 language:"Język",
-
 nav:{
 magazine:"Magazyn",
 coverStars:"Gwiazdy okładki",
@@ -2537,10 +2450,10 @@ travel:"Podróże",
 fashion:"Moda",
 wellness:"Zdrowie",
 community:"Społeczność",
-marketplace:"Marketplace",
 contests:"Konkursy",
-partners:"Partnerzy",
-rescue:"Pomoc"
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partnerzy"
 }
 },
 
@@ -2549,7 +2462,6 @@ menu:"Obsah",
 profile:"Profil",
 subscribe:"Předplatné",
 language:"Jazyk",
-
 nav:{
 magazine:"Magazín",
 coverStars:"Hvězdy obálky",
@@ -2561,10 +2473,10 @@ travel:"Cestování",
 fashion:"Móda",
 wellness:"Zdraví",
 community:"Komunita",
-marketplace:"Marketplace",
 contests:"Soutěže",
-partners:"Partneři",
-rescue:"Pomoc"
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partneři"
 }
 },
 
@@ -2573,7 +2485,6 @@ menu:"Obsah",
 profile:"Profil",
 subscribe:"Predplatné",
 language:"Jazyk",
-
 nav:{
 magazine:"Magazín",
 coverStars:"Hviezdy obálky",
@@ -2585,10 +2496,10 @@ travel:"Cestovanie",
 fashion:"Móda",
 wellness:"Zdravie",
 community:"Komunita",
-marketplace:"Marketplace",
 contests:"Súťaže",
-partners:"Partneri",
-rescue:"Pomoc"
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partneri"
 }
 },
 
@@ -2597,7 +2508,6 @@ menu:"Tartalom",
 profile:"Profil",
 subscribe:"Előfizetés",
 language:"Nyelv",
-
 nav:{
 magazine:"Magazin",
 coverStars:"Címlapsztárok",
@@ -2609,10 +2519,10 @@ travel:"Utazás",
 fashion:"Divat",
 wellness:"Egészség",
 community:"Közösség",
-marketplace:"Piactér",
 contests:"Versenyek",
-partners:"Partnerek",
-rescue:"Segítség"
+rescue:"Segítség",
+marketplace:"Piactér",
+partners:"Partnerek"
 }
 },
 
@@ -2621,7 +2531,6 @@ menu:"Conținut",
 profile:"Profil",
 subscribe:"Abonament",
 language:"Limbă",
-
 nav:{
 magazine:"Revistă",
 coverStars:"Vedete de copertă",
@@ -2633,10 +2542,10 @@ travel:"Călătorii",
 fashion:"Modă",
 wellness:"Sănătate",
 community:"Comunitate",
-marketplace:"Marketplace",
 contests:"Concursuri",
-partners:"Parteneri",
-rescue:"Ajutor"
+rescue:"Ajutor",
+marketplace:"Marketplace",
+partners:"Parteneri"
 }
 },
 
@@ -2645,7 +2554,6 @@ menu:"Съдържание",
 profile:"Профил",
 subscribe:"Абонамент",
 language:"Език",
-
 nav:{
 magazine:"Списание",
 coverStars:"Звезди на корицата",
@@ -2657,10 +2565,10 @@ travel:"Пътувания",
 fashion:"Мода",
 wellness:"Здраве",
 community:"Общност",
-marketplace:"Маркетплейс",
 contests:"Конкурси",
-partners:"Партньори",
-rescue:"Помощ"
+rescue:"Помощ",
+marketplace:"Маркетплейс",
+partners:"Партньори"
 }
 },
 
@@ -2669,7 +2577,6 @@ menu:"Περιεχόμενα",
 profile:"Προφίλ",
 subscribe:"Συνδρομή",
 language:"Γλώσσα",
-
 nav:{
 magazine:"Περιοδικό",
 coverStars:"Αστέρια εξωφύλλου",
@@ -2681,10 +2588,10 @@ travel:"Ταξίδια",
 fashion:"Μόδα",
 wellness:"Υγεία",
 community:"Κοινότητα",
-marketplace:"Marketplace",
 contests:"Διαγωνισμοί",
-partners:"Συνεργάτες",
-rescue:"Βοήθεια"
+rescue:"Βοήθεια",
+marketplace:"Marketplace",
+partners:"Συνεργάτες"
 }
 },
 
@@ -2693,7 +2600,6 @@ menu:"Innehåll",
 profile:"Profil",
 subscribe:"Prenumeration",
 language:"Språk",
-
 nav:{
 magazine:"Magasin",
 coverStars:"Omslagsstjärnor",
@@ -2705,10 +2611,10 @@ travel:"Resor",
 fashion:"Mode",
 wellness:"Hälsa",
 community:"Community",
-marketplace:"Marknadsplats",
 contests:"Tävlingar",
-partners:"Partners",
-rescue:"Hjälp"
+rescue:"Hjälp",
+marketplace:"Marknadsplats",
+partners:"Partners"
 }
 },
 
@@ -2717,7 +2623,6 @@ menu:"Indhold",
 profile:"Profil",
 subscribe:"Abonnement",
 language:"Sprog",
-
 nav:{
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
@@ -2729,10 +2634,10 @@ travel:"Rejser",
 fashion:"Mode",
 wellness:"Sundhed",
 community:"Community",
-marketplace:"Marketplace",
 contests:"Konkurrencer",
-partners:"Partnere",
-rescue:"Hjælp"
+rescue:"Hjælp",
+marketplace:"Marketplace",
+partners:"Partnere"
 }
 },
 
@@ -2741,7 +2646,6 @@ menu:"Innhold",
 profile:"Profil",
 subscribe:"Abonnement",
 language:"Språk",
-
 nav:{
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
@@ -2753,10 +2657,10 @@ travel:"Reiser",
 fashion:"Mote",
 wellness:"Helse",
 community:"Fellesskap",
-marketplace:"Markedsplass",
 contests:"Konkurranser",
-partners:"Partnere",
-rescue:"Hjelp"
+rescue:"Hjelp",
+marketplace:"Markedsplass",
+partners:"Partnere"
 }
 },
 
@@ -2765,7 +2669,6 @@ menu:"Sisältö",
 profile:"Profiili",
 subscribe:"Tilaus",
 language:"Kieli",
-
 nav:{
 magazine:"Lehti",
 coverStars:"Kansitähdet",
@@ -2777,10 +2680,10 @@ travel:"Matkailu",
 fashion:"Muoti",
 wellness:"Terveys",
 community:"Yhteisö",
-marketplace:"Marketplace",
 contests:"Kilpailut",
-partners:"Kumppanit",
-rescue:"Apu"
+rescue:"Apu",
+marketplace:"Marketplace",
+partners:"Kumppanit"
 }
 },
 
@@ -2789,7 +2692,6 @@ menu:"İçindekiler",
 profile:"Profil",
 subscribe:"Abonelik",
 language:"Dil",
-
 nav:{
 magazine:"Dergi",
 coverStars:"Kapak yıldızları",
@@ -2801,10 +2703,10 @@ travel:"Seyahat",
 fashion:"Moda",
 wellness:"Sağlık",
 community:"Topluluk",
-marketplace:"Pazar",
 contests:"Yarışmalar",
-partners:"Ortaklar",
-rescue:"Yardım"
+rescue:"Yardım",
+marketplace:"Pazar",
+partners:"Ortaklar"
 }
 },
 
@@ -2813,7 +2715,6 @@ menu:"المحتويات",
 profile:"الملف الشخصي",
 subscribe:"الاشتراك",
 language:"اللغة",
-
 nav:{
 magazine:"المجلة",
 coverStars:"نجوم الغلاف",
@@ -2825,10 +2726,10 @@ travel:"السفر",
 fashion:"الموضة",
 wellness:"الصحة",
 community:"المجتمع",
-marketplace:"السوق",
 contests:"المسابقات",
-partners:"الشركاء",
-rescue:"المساعدة"
+rescue:"المساعدة",
+marketplace:"السوق",
+partners:"الشركاء"
 }
 },
 
@@ -2837,7 +2738,6 @@ menu:"सामग्री",
 profile:"प्रोफ़ाइल",
 subscribe:"सदस्यता",
 language:"भाषा",
-
 nav:{
 magazine:"पत्रिका",
 coverStars:"कवर स्टार",
@@ -2849,10 +2749,10 @@ travel:"यात्रा",
 fashion:"फ़ैशन",
 wellness:"स्वास्थ्य",
 community:"समुदाय",
-marketplace:"मार्केटप्लेस",
 contests:"प्रतियोगिताएँ",
-partners:"पार्टनर",
-rescue:"मदद"
+rescue:"मदद",
+marketplace:"मार्केटप्लेस",
+partners:"पार्टनर"
 }
 }
 
@@ -2873,18 +2773,14 @@ const local =
 T[language] ||
 {};
 
-return {
+return{
 
 ...base,
-
 ...local,
 
 nav:{
 ...base.nav,
-...(
-local.nav ||
-{}
-)
+...(local.nav || {})
 }
 
 };
@@ -2900,7 +2796,7 @@ key,
 tr
 ){
 
-const descriptions = {
+const descriptions={
 
 magazine:
 tr.latestText,
@@ -2933,18 +2829,21 @@ tr.worldText,
 community:
 tr.communityTitle,
 
-marketplace:
-tr.marketTitle,
-
 contests:
 tr.contestsTitle,
+
+rescue:
+tr.rescueTitle,
+
+marketplace:
+tr.marketTitle,
 
 partners:
 tr.partnerText
 
 };
 
-return (
+return(
 descriptions[key] ||
 tr.worldText
 );
@@ -2953,7 +2852,6 @@ tr.worldText
 
 /* =========================================================
 MENU + TOP NAV
-FIXED ORDER
 ========================================================= */
 
 function renderNavigation(
@@ -2976,31 +2874,25 @@ primaryNav.scrollLeft;
 primaryNav.innerHTML =
 NAV_ITEMS
 .map(
-(
-item,
-index
-) =>
-`
+item =>`
 <a
 href="${item.url}"
 data-nav="${item.key}"
-${index === 0 ? 'aria-current="page"' : ""}
+class="${item.key === "magazine" ? "active" : ""}"
+${item.key === "magazine" ? 'aria-current="page"' : ""}
 >
 ${tr.nav[item.key]}
 </a>
 `
 )
-.join(
-""
-);
+.join("");
 
 document.getElementById(
 "sideMenuList"
 ).innerHTML =
 NAV_ITEMS
 .map(
-item =>
-`
+item =>`
 <a
 class="menu-item"
 href="${item.url}"
@@ -3031,9 +2923,7 @@ tr
 </a>
 `
 )
-.join(
-""
-);
+.join("");
 
 document
 .querySelectorAll(
@@ -3111,8 +3001,7 @@ document.documentElement.lang =
 language;
 
 document.documentElement.dir =
-language ===
-"ar"
+language === "ar"
 ? "rtl"
 : "ltr";
 
@@ -3133,11 +3022,6 @@ tr.profile;
 
 document.getElementById(
 "menuSubscribe"
-).textContent =
-tr.subscribe;
-
-document.getElementById(
-"topSubscribe"
 ).textContent =
 tr.subscribe;
 
@@ -3401,8 +3285,7 @@ document.addEventListener(
 event =>{
 
 if(
-event.key ===
-"Escape"
+event.key === "Escape"
 ){
 
 closeMenu();
@@ -3413,7 +3296,7 @@ closeMenu();
 );
 
 /* =========================================================
-SYNC LANGUAGE BETWEEN TABS / PAGES
+SYNC LANGUAGE BETWEEN TABS
 ========================================================= */
 
 window.addEventListener(
