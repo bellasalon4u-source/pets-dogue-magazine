@@ -1,0 +1,800 @@
+/* =========================================================
+PETS & DOGUE
+MASTER HEADER VISUAL SYSTEM
+v2
+
+ONLY THE GLOBAL TOP SHELL
+
+Purpose:
+- identical header proportions on every rubric
+- fixed visual order of rubric navigation
+- menu left
+- PETS & DOGUE centered
+- home right
+- active rubric in metallic gold
+- stable horizontal navigation
+- no content/layout/data/function changes
+- RTL safe
+========================================================= */
+
+:root{
+--pd-black:#070707;
+--pd-white:#fff;
+
+--pd-gold:#c89a32;
+--pd-gold-light:#f0d27a;
+
+--pd-serif:Georgia,"Times New Roman",serif;
+--pd-sans:Arial,Helvetica,sans-serif;
+
+--pd-header-desktop:108px;
+
+--pd-nav-gap-desktop:29px;
+--pd-nav-gap-mobile:23px;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
+header.site-header{
+position:sticky !important;
+top:0 !important;
+z-index:5000 !important;
+
+width:100% !important;
+
+background:var(--pd-black) !important;
+color:var(--pd-white) !important;
+
+border-bottom:1px solid #292929 !important;
+}
+
+/* =========================================================
+MAIN HEADER ROW
+========================================================= */
+
+header.site-header .header-main{
+width:100% !important;
+max-width:1550px !important;
+
+height:var(--pd-header-desktop) !important;
+min-height:var(--pd-header-desktop) !important;
+
+margin:0 auto !important;
+padding:0 18px !important;
+
+display:grid !important;
+grid-template-columns:88px minmax(0,1fr) 88px !important;
+
+align-items:center !important;
+gap:0 !important;
+}
+
+/* =========================================================
+BRAND
+========================================================= */
+
+header.site-header .brand{
+justify-self:center !important;
+align-self:center !important;
+
+display:flex !important;
+flex-direction:column !important;
+align-items:center !important;
+justify-content:center !important;
+
+max-width:100% !important;
+
+text-align:center !important;
+text-decoration:none !important;
+
+line-height:.85 !important;
+white-space:nowrap !important;
+}
+
+/* PETS & */
+
+header.site-header .brand-small,
+header.site-header .brand small{
+display:block !important;
+
+margin:0 !important;
+
+font-family:var(--pd-serif) !important;
+font-size:16px !important;
+font-weight:400 !important;
+line-height:1 !important;
+
+letter-spacing:1.8px !important;
+
+color:var(--pd-gold) !important;
+}
+
+/* DOGUE */
+
+header.site-header .brand-big,
+header.site-header .brand strong{
+display:block !important;
+
+margin:7px 0 0 !important;
+
+font-family:var(--pd-serif) !important;
+font-size:62px !important;
+font-weight:400 !important;
+line-height:.78 !important;
+
+letter-spacing:4px !important;
+
+color:var(--pd-gold) !important;
+}
+
+/* =========================================================
+LEFT / RIGHT HEADER BUTTONS
+========================================================= */
+
+header.site-header .menu-button,
+header.site-header .icon-button,
+header.site-header .home-button,
+header.site-header .home-icon{
+-webkit-tap-highlight-color:transparent;
+}
+
+/* =========================================================
+HAMBURGER
+========================================================= */
+
+header.site-header .menu-button{
+justify-self:start !important;
+
+width:52px !important;
+height:52px !important;
+
+padding:8px 3px !important;
+
+border:0 !important;
+background:transparent !important;
+
+display:grid !important;
+align-content:center !important;
+
+gap:6px !important;
+}
+
+header.site-header .menu-button span{
+display:block !important;
+
+width:100% !important;
+height:2px !important;
+
+background:#fff !important;
+
+border-radius:999px !important;
+}
+
+/* pages using .icon-button + .menu-lines */
+
+header.site-header .icon-button{
+width:52px !important;
+height:52px !important;
+
+padding:0 !important;
+
+border:0 !important;
+background:transparent !important;
+
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+
+color:#fff !important;
+}
+
+header.site-header .menu-lines{
+width:30px !important;
+
+display:grid !important;
+
+gap:6px !important;
+}
+
+header.site-header .menu-lines span{
+display:block !important;
+
+width:100% !important;
+height:2px !important;
+
+background:#fff !important;
+
+border-radius:999px !important;
+}
+
+/* =========================================================
+HOME
+========================================================= */
+
+header.site-header .home-button,
+header.site-header .home-icon{
+justify-self:end !important;
+
+width:52px !important;
+height:52px !important;
+
+padding:0 !important;
+
+border:0 !important;
+background:transparent !important;
+
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+
+color:#fff !important;
+}
+
+header.site-header .home-button svg,
+header.site-header .home-icon svg{
+display:block !important;
+
+width:29px !important;
+height:29px !important;
+
+fill:none !important;
+
+stroke:#fff !important;
+stroke-width:2 !important;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+/* =========================================================
+TOP RUBRIC NAVIGATION
+========================================================= */
+
+header.site-header .primary-nav,
+header.site-header .desktop-categories,
+header.site-header .category-nav{
+position:relative !important;
+
+width:100% !important;
+
+height:auto !important;
+min-height:0 !important;
+
+margin:0 !important;
+
+padding:16px 26px !important;
+
+display:flex !important;
+align-items:center !important;
+justify-content:flex-start !important;
+
+gap:var(--pd-nav-gap-desktop) !important;
+
+overflow-x:auto !important;
+overflow-y:hidden !important;
+
+background:var(--pd-black) !important;
+
+border-top:1px solid #262626 !important;
+border-bottom:1px solid #343434 !important;
+
+scrollbar-width:none !important;
+
+scroll-behavior:auto !important;
+
+overscroll-behavior-x:contain !important;
+
+-webkit-overflow-scrolling:touch;
+
+scroll-snap-type:none !important;
+
+overflow-anchor:none !important;
+}
+
+header.site-header .primary-nav::-webkit-scrollbar,
+header.site-header .desktop-categories::-webkit-scrollbar,
+header.site-header .category-nav::-webkit-scrollbar{
+display:none !important;
+}
+
+/* =========================================================
+RUBRIC LINKS
+========================================================= */
+
+header.site-header .primary-nav a,
+header.site-header .desktop-categories a,
+header.site-header .category-nav a{
+position:relative !important;
+
+flex:0 0 auto !important;
+
+width:auto !important;
+min-width:max-content !important;
+
+height:auto !important;
+min-height:0 !important;
+
+padding:3px 0 7px !important;
+margin:0 !important;
+
+display:flex !important;
+align-items:center !important;
+justify-content:center !important;
+
+font-family:var(--pd-sans) !important;
+
+font-size:13px !important;
+font-weight:900 !important;
+
+line-height:1 !important;
+
+letter-spacing:.8px !important;
+
+text-transform:uppercase !important;
+
+white-space:nowrap !important;
+
+word-break:normal !important;
+overflow-wrap:normal !important;
+hyphens:none !important;
+
+text-decoration:none !important;
+
+color:#fff !important;
+
+transform:none !important;
+}
+
+/* =========================================================
+ACTIVE RUBRIC
+========================================================= */
+
+header.site-header .primary-nav a.active,
+header.site-header .desktop-categories a.active,
+header.site-header .category-nav a.active,
+
+header.site-header .primary-nav a[aria-current="page"],
+header.site-header .desktop-categories a[aria-current="page"],
+header.site-header .category-nav a[aria-current="page"]{
+color:var(--pd-gold-light) !important;
+}
+
+header.site-header .primary-nav a.active::after,
+header.site-header .desktop-categories a.active::after,
+header.site-header .category-nav a.active::after,
+
+header.site-header .primary-nav a[aria-current="page"]::after,
+header.site-header .desktop-categories a[aria-current="page"]::after,
+header.site-header .category-nav a[aria-current="page"]::after{
+content:"" !important;
+
+position:absolute !important;
+
+left:0 !important;
+right:0 !important;
+bottom:0 !important;
+
+height:2px !important;
+
+background:
+linear-gradient(
+90deg,
+#8c6011 0%,
+#c99428 28%,
+#f7df90 50%,
+#c99428 72%,
+#8c6011 100%
+) !important;
+
+box-shadow:
+0 0 7px rgba(216,173,69,.35) !important;
+}
+
+/* =========================================================
+NAVIGATION STABILITY
+
+Do not let translated text change flex proportions.
+Do not let anchors shrink or wrap.
+========================================================= */
+
+header.site-header .primary-nav *,
+header.site-header .desktop-categories *,
+header.site-header .category-nav *{
+flex-shrink:0 !important;
+}
+
+/* =========================================================
+SIDE MENU
+
+Only proportions.
+Existing menu functionality and i18n are untouched.
+========================================================= */
+
+.side-menu{
+max-width:560px;
+}
+
+.side-menu-head,
+.side-menu-header{
+background:#080808;
+color:#fff;
+}
+
+.side-menu-head h2,
+.side-menu-header h2{
+font-family:var(--pd-serif);
+font-weight:400;
+line-height:1;
+}
+
+/* =========================================================
+PHOTO / CAROUSEL DOTS
+
+Reusable visual indicator for sections containing
+multiple swipeable photos.
+========================================================= */
+
+.pd-slider-dots,
+.slider-dots,
+.carousel-dots,
+.gallery-dots{
+width:100%;
+
+min-height:28px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+gap:7px;
+
+padding:8px 12px;
+}
+
+.pd-slider-dot,
+.slider-dot,
+.carousel-dot,
+.gallery-dot{
+width:7px;
+height:7px;
+
+flex:0 0 7px;
+
+padding:0;
+
+border:0;
+border-radius:50%;
+
+background:#aaa;
+
+opacity:.55;
+}
+
+.pd-slider-dot.active,
+.slider-dot.active,
+.carousel-dot.active,
+.gallery-dot.active{
+width:21px;
+
+border-radius:999px;
+
+background:var(--pd-gold);
+
+opacity:1;
+}
+
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] header.site-header .primary-nav,
+html[dir="rtl"] header.site-header .desktop-categories,
+html[dir="rtl"] header.site-header .category-nav{
+direction:rtl !important;
+}
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+header.site-header .header-main{
+height:100px !important;
+min-height:100px !important;
+
+grid-template-columns:
+68px
+minmax(0,1fr)
+68px !important;
+
+padding-left:16px !important;
+padding-right:16px !important;
+}
+
+header.site-header .brand-small,
+header.site-header .brand small{
+font-size:13px !important;
+}
+
+header.site-header .brand-big,
+header.site-header .brand strong{
+font-size:50px !important;
+letter-spacing:3px !important;
+}
+
+header.site-header .primary-nav,
+header.site-header .desktop-categories,
+header.site-header .category-nav{
+padding:15px 20px !important;
+gap:26px !important;
+}
+
+header.site-header .primary-nav a,
+header.site-header .desktop-categories a,
+header.site-header .category-nav a{
+font-size:12.5px !important;
+}
+
+}
+
+/* =========================================================
+MOBILE
+EXACT VISUAL REFERENCE:
+Photos / Travel / Fashion / Wellness
+========================================================= */
+
+@media(max-width:760px){
+
+header.site-header .header-main{
+height:87px !important;
+min-height:87px !important;
+
+grid-template-columns:
+58px
+minmax(0,1fr)
+58px !important;
+
+padding:0 8px !important;
+}
+
+/* hamburger */
+
+header.site-header .menu-button,
+header.site-header .icon-button{
+width:45px !important;
+height:45px !important;
+}
+
+header.site-header .menu-button{
+padding:7px !important;
+gap:6px !important;
+}
+
+header.site-header .menu-lines{
+width:30px !important;
+gap:6px !important;
+}
+
+header.site-header .menu-button span,
+header.site-header .menu-lines span{
+height:2px !important;
+}
+
+/* logo */
+
+header.site-header .brand-small,
+header.site-header .brand small{
+font-size:11px !important;
+
+letter-spacing:1.8px !important;
+
+line-height:1 !important;
+}
+
+header.site-header .brand-big,
+header.site-header .brand strong{
+font-size:40px !important;
+
+letter-spacing:2px !important;
+
+line-height:.82 !important;
+
+margin-top:6px !important;
+}
+
+/* home */
+
+header.site-header .home-button,
+header.site-header .home-icon{
+width:45px !important;
+height:45px !important;
+}
+
+header.site-header .home-button svg,
+header.site-header .home-icon svg{
+width:29px !important;
+height:29px !important;
+}
+
+/* rubric row */
+
+header.site-header .primary-nav,
+header.site-header .desktop-categories,
+header.site-header .category-nav{
+height:auto !important;
+min-height:0 !important;
+
+padding:14px 15px !important;
+
+gap:23px !important;
+
+align-items:center !important;
+}
+
+/* rubric names */
+
+header.site-header .primary-nav a,
+header.site-header .desktop-categories a,
+header.site-header .category-nav a{
+height:auto !important;
+min-height:0 !important;
+
+padding:3px 0 7px !important;
+
+font-size:12px !important;
+
+letter-spacing:.7px !important;
+
+line-height:1 !important;
+}
+
+/* active gold underline */
+
+header.site-header .primary-nav a.active::after,
+header.site-header .desktop-categories a.active::after,
+header.site-header .category-nav a.active::after,
+
+header.site-header .primary-nav a[aria-current="page"]::after,
+header.site-header .desktop-categories a[aria-current="page"]::after,
+header.site-header .category-nav a[aria-current="page"]::after{
+left:0 !important;
+right:0 !important;
+
+height:2px !important;
+}
+
+/* menu remains useful but not enormous */
+
+.side-menu{
+width:min(92vw,520px) !important;
+}
+
+.side-menu-head,
+.side-menu-header{
+min-height:82px !important;
+height:auto !important;
+
+padding:15px 18px !important;
+}
+
+.side-menu-head h2,
+.side-menu-header h2{
+font-size:36px !important;
+}
+
+}
+
+/* =========================================================
+SMALL MOBILE
+Keep exactly the same visual hierarchy.
+Do not create a second oversized mobile layout.
+========================================================= */
+
+@media(max-width:430px){
+
+header.site-header .header-main{
+height:87px !important;
+min-height:87px !important;
+
+grid-template-columns:
+54px
+minmax(0,1fr)
+54px !important;
+
+padding-left:8px !important;
+padding-right:8px !important;
+}
+
+header.site-header .brand-small,
+header.site-header .brand small{
+font-size:10.5px !important;
+}
+
+header.site-header .brand-big,
+header.site-header .brand strong{
+font-size:39px !important;
+
+letter-spacing:2px !important;
+
+margin-top:6px !important;
+}
+
+header.site-header .primary-nav,
+header.site-header .desktop-categories,
+header.site-header .category-nav{
+padding:14px 15px !important;
+
+gap:22px !important;
+}
+
+header.site-header .primary-nav a,
+header.site-header .desktop-categories a,
+header.site-header .category-nav a{
+font-size:12px !important;
+
+padding:3px 0 7px !important;
+}
+
+}
+
+/* =========================================================
+VERY SMALL PHONES
+========================================================= */
+
+@media(max-width:360px){
+
+header.site-header .header-main{
+grid-template-columns:
+50px
+minmax(0,1fr)
+50px !important;
+}
+
+header.site-header .brand-big,
+header.site-header .brand strong{
+font-size:36px !important;
+}
+
+header.site-header .brand-small,
+header.site-header .brand small{
+font-size:9.5px !important;
+}
+
+header.site-header .primary-nav,
+header.site-header .desktop-categories,
+header.site-header .category-nav{
+gap:19px !important;
+padding-left:12px !important;
+padding-right:12px !important;
+}
+
+header.site-header .primary-nav a,
+header.site-header .desktop-categories a,
+header.site-header .category-nav a{
+font-size:11.5px !important;
+}
+
+}
+
+/* =========================================================
+REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+header.site-header *,
+.side-menu *{
+scroll-behavior:auto !important;
+animation-duration:.01ms !important;
+animation-iteration-count:1 !important;
+transition-duration:.01ms !important;
+}
+
+}
+
+/* =========================================================
+END MASTER HEADER VISUAL SYSTEM
+========================================================= */
