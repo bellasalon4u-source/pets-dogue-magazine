@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="PETS & DOGUE — The International Luxury Animal Magazine">
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+<meta
+name="description"
+content="PETS & DOGUE — The International Luxury Animal Magazine"
+>
 <title>PETS & DOGUE</title>
+
+<link
+rel="stylesheet"
+href="visual-system.css?v=1"
+>
 
 <style>
 :root{
@@ -18,6 +29,10 @@
 --line:#292929;
 --serif:Georgia,"Times New Roman",serif;
 --sans:Arial,Helvetica,sans-serif;
+
+/* PAGE-SPECIFIC COMPACT SCALE */
+--home-header-height:88px;
+--home-nav-height:50px;
 }
 
 *{
@@ -58,45 +73,51 @@ cursor:pointer;
 img{
 display:block;
 width:100%;
+height:auto;
+image-rendering:auto;
 }
 
 /* =========================================================
 HEADER
+COMPACT — NO DOUBLE / HUGE MOBILE HEADER
 ========================================================= */
 
 .site-header{
 position:sticky;
 top:0;
 z-index:5000;
+width:100%;
 background:#050505;
 border-bottom:1px solid #272727;
 }
 
 .header-main{
-height:116px;
+height:var(--home-header-height);
+min-height:var(--home-header-height);
 display:grid;
-grid-template-columns:82px 1fr auto;
+grid-template-columns:58px minmax(0,1fr) auto;
 align-items:center;
 gap:10px;
-padding:0 20px;
+padding:0 18px;
 max-width:1600px;
 margin:auto;
 }
 
 .menu-button{
-width:58px;
-height:58px;
+width:46px;
+height:46px;
 border:0;
 background:transparent;
 display:grid;
 align-content:center;
-gap:7px;
-padding:8px;
+gap:6px;
+padding:7px;
 }
 
 .menu-button span{
 display:block;
-height:3px;
+width:100%;
+height:2px;
 background:#fff;
 border-radius:999px;
 }
@@ -104,49 +125,52 @@ border-radius:999px;
 .brand{
 text-align:center;
 font-family:var(--serif);
-line-height:.84;
+line-height:.83;
 justify-self:center;
+white-space:nowrap;
 }
 
 .brand-small{
-font-size:14px;
+font-size:10px;
 letter-spacing:2px;
 color:var(--gold);
 text-transform:uppercase;
 }
 
 .brand-big{
-font-size:56px;
+font-size:39px;
 font-weight:400;
-letter-spacing:4px;
+letter-spacing:3px;
 color:var(--gold);
-margin-top:8px;
+margin-top:6px;
 }
 
 .header-actions{
 display:flex;
 align-items:center;
-gap:12px;
+justify-content:flex-end;
+gap:7px;
 }
 
 .subscribe-top{
-height:54px;
-padding:0 22px;
+height:42px;
+padding:0 15px;
 border:0;
 background:var(--green);
 color:#080808;
 font-weight:900;
-font-size:13px;
-letter-spacing:.6px;
+font-size:11px;
+letter-spacing:.55px;
 display:flex;
 align-items:center;
 justify-content:center;
 text-transform:uppercase;
+white-space:nowrap;
 }
 
 .profile-button{
-width:54px;
-height:54px;
+width:42px;
+height:42px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -157,8 +181,8 @@ color:#fff;
 
 .profile-icon{
 position:relative;
-width:34px;
-height:38px;
+width:27px;
+height:31px;
 }
 
 .profile-icon:before{
@@ -167,39 +191,49 @@ position:absolute;
 top:0;
 left:50%;
 transform:translateX(-50%);
-width:15px;
-height:15px;
-border:3px solid currentColor;
+width:12px;
+height:12px;
+border:2px solid currentColor;
 border-radius:50%;
 }
 
 .profile-icon:after{
 content:"";
 position:absolute;
-left:4px;
-right:4px;
+left:3px;
+right:3px;
 bottom:0;
-height:20px;
-border:3px solid currentColor;
+height:16px;
+border:2px solid currentColor;
 border-bottom:0;
-border-radius:22px 22px 0 0;
+border-radius:20px 20px 0 0;
 }
 
 /* =========================================================
 TOP NAV
+FIXED ORDER — ONLY HORIZONTAL SCROLL
 ========================================================= */
 
 .primary-nav{
-height:64px;
+width:100%;
+height:var(--home-nav-height);
+min-height:var(--home-nav-height);
 display:flex;
-align-items:center;
-gap:34px;
-padding:0 27px;
+align-items:stretch;
+gap:0;
+padding:0 8px;
+margin:0;
 overflow-x:auto;
+overflow-y:hidden;
 background:#070707;
 border-top:1px solid #262626;
+border-bottom:1px solid #262626;
 scrollbar-width:none;
-scroll-behavior:smooth;
+scroll-behavior:auto;
+overscroll-behavior-x:contain;
+-webkit-overflow-scrolling:touch;
+overflow-anchor:none;
+scroll-snap-type:none;
 }
 
 .primary-nav::-webkit-scrollbar{
@@ -207,16 +241,23 @@ display:none;
 }
 
 .primary-nav a{
+position:relative;
 flex:0 0 auto;
-height:64px;
+min-width:max-content;
+height:var(--home-nav-height);
+padding:0 18px;
 display:flex;
 align-items:center;
-position:relative;
-font-size:14px;
+justify-content:center;
+font-size:12px;
 font-weight:900;
-letter-spacing:.65px;
+letter-spacing:.55px;
+line-height:1;
 text-transform:uppercase;
 white-space:nowrap;
+word-break:normal;
+overflow-wrap:normal;
+hyphens:none;
 }
 
 .primary-nav a:hover,
@@ -231,11 +272,17 @@ color:var(--gold-light);
 .primary-nav a:first-child:after{
 content:"";
 position:absolute;
-left:0;
-right:0;
+left:17px;
+right:17px;
 bottom:0;
 height:3px;
-background:linear-gradient(90deg,#8c6011,#f5dc8b,#9b6a12);
+background:
+linear-gradient(
+90deg,
+#8c6011,
+#f5dc8b,
+#9b6a12
+);
 }
 
 /* =========================================================
@@ -250,6 +297,8 @@ z-index:9000;
 opacity:0;
 visibility:hidden;
 transition:.25s;
+backdrop-filter:blur(2px);
+-webkit-backdrop-filter:blur(2px);
 }
 
 .menu-overlay.show{
@@ -262,7 +311,8 @@ position:fixed;
 top:0;
 left:0;
 bottom:0;
-width:min(560px,88vw);
+width:min(520px,88vw);
+max-width:520px;
 background:#f8f5ee;
 color:#111;
 z-index:9100;
@@ -279,47 +329,49 @@ transform:translateX(0);
 position:sticky;
 top:0;
 z-index:5;
-height:128px;
+height:88px;
+min-height:88px;
 background:#080808;
 color:#fff;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:22px 27px;
+padding:16px 22px;
 }
 
 .side-menu-head h2{
 font-family:var(--serif);
-font-size:49px;
+font-size:37px;
 font-weight:400;
+line-height:1;
 }
 
 .close-menu{
-width:58px;
-height:58px;
+width:45px;
+height:45px;
 border-radius:50%;
 border:0;
 background:#fff;
 color:#111;
-font-size:38px;
+font-size:29px;
 line-height:1;
 }
 
 .menu-tools{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:10px;
-padding:18px;
+gap:9px;
+padding:15px;
 border-bottom:1px solid #d3cdc1;
 }
 
 .menu-tool{
-height:55px;
+height:49px;
 border:2px solid #111;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:12px;
+font-size:11px;
 font-weight:900;
 text-transform:uppercase;
 }
@@ -330,9 +382,9 @@ border-color:var(--green);
 }
 
 .language-box{
-margin:0 18px 16px;
+margin:0 15px 14px;
 border:2px solid #111;
-padding:11px 14px 13px;
+padding:10px 13px 11px;
 }
 
 .language-box label{
@@ -341,43 +393,44 @@ font-size:9px;
 font-weight:900;
 letter-spacing:2px;
 color:#777;
-margin-bottom:8px;
+margin-bottom:7px;
 }
 
 .language-box select{
 width:100%;
-height:42px;
+height:39px;
 background:transparent;
 border:0;
 outline:0;
-font-size:15px;
+font-size:14px;
 font-weight:800;
 }
 
 .menu-list{
 display:grid;
-gap:8px;
-padding:8px 18px 28px;
+gap:7px;
+padding:7px 15px 25px;
 }
 
 .menu-item{
-min-height:88px;
+min-height:84px;
 display:grid;
-grid-template-columns:92px 1fr;
+grid-template-columns:94px 1fr;
 border:2px solid #111;
 overflow:hidden;
 background:#fff;
 }
 
 .menu-item img{
-width:92px;
+width:94px;
 height:100%;
-min-height:84px;
+min-height:80px;
 object-fit:cover;
+object-position:center;
 }
 
 .menu-item-copy{
-padding:12px 15px;
+padding:10px 14px;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -385,7 +438,7 @@ justify-content:center;
 
 .menu-item-copy h3{
 font-family:var(--serif);
-font-size:22px;
+font-size:21px;
 line-height:1;
 font-weight:400;
 }
@@ -399,6 +452,7 @@ margin-top:5px;
 
 /* =========================================================
 EDITORIAL INTRO
+LARGE, BRIGHT, CLEAN PHOTOGRAPHY
 ========================================================= */
 
 .editorial-intro{
@@ -409,8 +463,8 @@ background:#080808;
 
 .intro-grid{
 display:grid;
-grid-template-columns:1.45fr .72fr;
-grid-template-rows:360px 360px;
+grid-template-columns:1.48fr .72fr;
+grid-template-rows:330px 330px;
 gap:4px;
 background:#070707;
 }
@@ -420,17 +474,21 @@ position:relative;
 overflow:hidden;
 background:#191919;
 color:#fff;
+min-width:0;
 }
 
 .editorial-card img{
+position:absolute;
+inset:0;
 width:100%;
 height:100%;
 object-fit:cover;
-transition:transform .55s ease;
+object-position:center;
+transition:transform .45s ease;
 }
 
 .editorial-card:hover img{
-transform:scale(1.035);
+transform:scale(1.025);
 }
 
 .editorial-card:after{
@@ -440,9 +498,9 @@ inset:0;
 background:
 linear-gradient(
 to top,
-rgba(0,0,0,.9) 0%,
-rgba(0,0,0,.48) 38%,
-rgba(0,0,0,.04) 76%
+rgba(0,0,0,.91) 0%,
+rgba(0,0,0,.43) 37%,
+rgba(0,0,0,.02) 74%
 );
 }
 
@@ -450,11 +508,15 @@ rgba(0,0,0,.04) 76%
 grid-row:1 / 3;
 }
 
+.editorial-card.cover img{
+object-position:center 36%;
+}
+
 .editorial-copy{
 position:absolute;
-left:30px;
-right:30px;
-bottom:28px;
+left:28px;
+right:28px;
+bottom:27px;
 z-index:2;
 }
 
@@ -462,12 +524,12 @@ z-index:2;
 display:inline-flex;
 align-items:center;
 gap:7px;
-background:#080808;
+background:rgba(8,8,8,.91);
 border-left:4px solid var(--gold);
-padding:8px 12px;
-font-size:10px;
+padding:7px 11px;
+font-size:9px;
 font-weight:900;
-letter-spacing:1.7px;
+letter-spacing:1.6px;
 text-transform:uppercase;
 }
 
@@ -476,31 +538,32 @@ text-transform:uppercase;
 font-family:var(--serif);
 font-weight:400;
 line-height:.96;
-margin-top:13px;
+margin-top:12px;
+text-wrap:balance;
 }
 
 .editorial-copy h1{
-font-size:58px;
-max-width:760px;
+font-size:52px;
+max-width:720px;
 }
 
 .editorial-copy h2{
-font-size:38px;
+font-size:34px;
 }
 
 .editorial-copy p{
-max-width:720px;
+max-width:680px;
 font-family:var(--serif);
-font-size:18px;
-line-height:1.45;
-margin-top:10px;
+font-size:16px;
+line-height:1.43;
+margin-top:9px;
 color:#eee;
 }
 
 .editorial-arrow{
 display:inline-block;
-margin-top:13px;
-font-size:11px;
+margin-top:12px;
+font-size:10px;
 font-weight:900;
 letter-spacing:1px;
 text-transform:uppercase;
@@ -522,34 +585,34 @@ display:flex;
 align-items:flex-end;
 justify-content:space-between;
 gap:20px;
-padding:32px 24px 20px;
+padding:28px 24px 18px;
 background:var(--cream);
 color:#111;
 }
 
 .world-heading h2{
 font-family:var(--serif);
-font-size:54px;
+font-size:46px;
 font-weight:400;
-line-height:.92;
+line-height:.94;
 }
 
 .world-heading p{
 max-width:470px;
-font-size:12px;
+font-size:11px;
 line-height:1.5;
 font-weight:700;
 text-align:right;
 }
 
 /* =========================================================
-DENSE MAGAZINE MOSAIC
+MAGAZINE MOSAIC
 ========================================================= */
 
 .magazine-grid{
 display:grid;
 grid-template-columns:repeat(4,minmax(0,1fr));
-grid-auto-rows:270px;
+grid-auto-rows:255px;
 gap:4px;
 background:#080808;
 }
@@ -576,14 +639,17 @@ grid-row:span 2;
 }
 
 .magazine-card img{
+position:absolute;
+inset:0;
 width:100%;
 height:100%;
 object-fit:cover;
-transition:.55s ease;
+object-position:center;
+transition:transform .45s ease;
 }
 
 .magazine-card:hover img{
-transform:scale(1.045);
+transform:scale(1.03);
 }
 
 .magazine-card:after{
@@ -593,9 +659,9 @@ inset:0;
 background:
 linear-gradient(
 to top,
-rgba(0,0,0,.88) 0%,
-rgba(0,0,0,.38) 42%,
-transparent 76%
+rgba(0,0,0,.9) 0%,
+rgba(0,0,0,.34) 40%,
+transparent 75%
 );
 }
 
@@ -609,7 +675,7 @@ bottom:18px;
 
 .card-label{
 display:inline-block;
-background:#080808;
+background:rgba(8,8,8,.92);
 border-left:3px solid var(--gold);
 padding:6px 9px;
 font-size:8px;
@@ -620,23 +686,24 @@ text-transform:uppercase;
 
 .card-copy h3{
 font-family:var(--serif);
-font-size:29px;
+font-size:27px;
 font-weight:400;
 line-height:1;
 margin-top:9px;
+text-wrap:balance;
 }
 
 .magazine-card.large .card-copy h3{
-font-size:52px;
+font-size:46px;
 max-width:620px;
 }
 
 .magazine-card.tall .card-copy h3{
-font-size:39px;
+font-size:35px;
 }
 
 .card-copy p{
-font-size:11px;
+font-size:10px;
 line-height:1.4;
 margin-top:7px;
 max-width:470px;
@@ -651,8 +718,8 @@ PARTNER END CARD
 max-width:1600px;
 margin:auto;
 display:grid;
-grid-template-columns:1.25fr .75fr;
-min-height:390px;
+grid-template-columns:1.28fr .72fr;
+min-height:360px;
 background:#090909;
 border-top:4px solid #090909;
 }
@@ -663,20 +730,28 @@ overflow:hidden;
 }
 
 .partner-end-image img{
+position:absolute;
+inset:0;
 width:100%;
 height:100%;
 object-fit:cover;
+object-position:center;
 }
 
 .partner-end-image:after{
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to right,transparent 40%,#090909 100%);
+background:
+linear-gradient(
+to right,
+transparent 40%,
+#090909 100%
+);
 }
 
 .partner-end-copy{
-padding:45px 40px;
+padding:39px 38px;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -691,7 +766,7 @@ color:var(--gold-light);
 
 .partner-end-copy h2{
 font-family:var(--serif);
-font-size:47px;
+font-size:42px;
 font-weight:400;
 line-height:.95;
 color:var(--gold-light);
@@ -699,15 +774,15 @@ margin-top:10px;
 }
 
 .partner-end-copy p{
-font-size:13px;
+font-size:12px;
 line-height:1.6;
 color:#ccc;
-margin-top:15px;
+margin-top:14px;
 }
 
 .partner-end-copy strong{
 display:inline-block;
-margin-top:20px;
+margin-top:19px;
 font-size:10px;
 letter-spacing:1px;
 color:#fff;
@@ -721,19 +796,19 @@ footer{
 background:#050505;
 color:#fff;
 text-align:center;
-padding:48px 18px 36px;
+padding:43px 18px 33px;
 border-top:1px solid #292929;
 }
 
 .footer-brand{
 font-family:var(--serif);
-font-size:42px;
+font-size:39px;
 letter-spacing:5px;
 color:var(--gold);
 }
 
 .footer-tagline{
-font-size:11px;
+font-size:10px;
 color:#aaa;
 margin-top:9px;
 }
@@ -742,8 +817,8 @@ margin-top:9px;
 display:flex;
 justify-content:center;
 flex-wrap:wrap;
-gap:17px 25px;
-margin:27px auto 0;
+gap:15px 23px;
+margin:25px auto 0;
 max-width:900px;
 }
 
@@ -755,7 +830,7 @@ font-weight:800;
 .footer-copy{
 font-size:8px;
 color:#666;
-margin-top:29px;
+margin-top:27px;
 }
 
 /* =========================================================
@@ -783,7 +858,16 @@ border-right:3px solid var(--gold);
 }
 
 html[dir="rtl"] .partner-end-image:after{
-background:linear-gradient(to left,transparent 40%,#090909 100%);
+background:
+linear-gradient(
+to left,
+transparent 40%,
+#090909 100%
+);
+}
+
+html[dir="rtl"] .world-heading p{
+text-align:left;
 }
 
 /* =========================================================
@@ -793,41 +877,48 @@ TABLET
 @media(max-width:1000px){
 
 .header-main{
-height:104px;
-grid-template-columns:68px 1fr auto;
-padding:0 14px;
+height:84px;
+min-height:84px;
+grid-template-columns:54px minmax(0,1fr) auto;
+padding:0 13px;
 }
 
 .brand-big{
-font-size:48px;
+font-size:37px;
 }
 
 .brand-small{
-font-size:12px;
+font-size:9px;
 }
 
 .subscribe-top{
-height:48px;
-padding:0 17px;
+height:40px;
+padding:0 13px;
 }
 
 .profile-button{
-width:46px;
+width:40px;
+height:40px;
 }
 
 .primary-nav{
-gap:27px;
-padding-left:20px;
-padding-right:20px;
+height:48px;
+min-height:48px;
+}
+
+.primary-nav a{
+height:48px;
+padding:0 17px;
+font-size:11.5px;
 }
 
 .intro-grid{
 grid-template-columns:1.2fr .8fr;
-grid-template-rows:330px 330px;
+grid-template-rows:310px 310px;
 }
 
 .editorial-copy h1{
-font-size:48px;
+font-size:45px;
 }
 
 .magazine-grid{
@@ -842,61 +933,115 @@ MOBILE
 
 @media(max-width:700px){
 
+:root{
+--home-header-height:78px;
+--home-nav-height:46px;
+}
+
+/*
+Override shared visual-system.css mobile values.
+This page deliberately uses the compact master header.
+*/
+
+.site-header{
+position:sticky;
+top:0;
+}
+
 .header-main{
-height:162px;
-grid-template-columns:62px 1fr 122px;
-padding:0 10px;
+height:78px !important;
+min-height:78px !important;
+grid-template-columns:48px minmax(0,1fr) auto !important;
+gap:5px;
+padding:0 10px !important;
 }
 
 .menu-button{
-width:55px;
-height:55px;
-}
-
-.brand-small{
-font-size:10px;
-letter-spacing:1.6px;
-}
-
-.brand-big{
-font-size:44px;
-letter-spacing:2px;
-}
-
-.header-actions{
+width:43px !important;
+height:43px !important;
+padding:7px 5px;
 gap:5px;
 }
 
+.menu-button span{
+height:2px;
+}
+
+.brand{
+max-width:100%;
+}
+
+.brand-small{
+font-size:8px !important;
+letter-spacing:1.65px !important;
+}
+
+.brand-big{
+font-size:31px !important;
+letter-spacing:1.8px !important;
+margin-top:5px !important;
+}
+
+.header-actions{
+gap:3px;
+}
+
 .subscribe-top{
-height:52px;
-padding:0 12px;
-font-size:11px;
+height:38px;
+padding:0 9px;
+font-size:9px;
+letter-spacing:.25px;
 }
 
 .profile-button{
-width:43px;
-height:52px;
+width:35px !important;
+height:38px !important;
 }
 
 .profile-icon{
-transform:scale(.88);
+width:23px;
+height:27px;
+}
+
+.profile-icon:before{
+width:10px;
+height:10px;
+border-width:2px;
+}
+
+.profile-icon:after{
+height:14px;
+border-width:2px;
 }
 
 .primary-nav{
-height:64px;
-gap:29px;
-padding:0 26px;
+height:46px !important;
+min-height:46px !important;
+padding:0 3px !important;
+gap:0 !important;
 }
 
 .primary-nav a{
-height:64px;
-font-size:13px;
+height:46px !important;
+padding:0 14px !important;
+font-size:10.5px !important;
+letter-spacing:.35px !important;
 }
+
+.primary-nav a:first-child:after{
+left:13px;
+right:13px;
+height:3px;
+}
+
+/* =========================================================
+MOBILE INTRO
+========================================================= */
 
 .intro-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-grid-template-rows:580px 330px;
+grid-template-rows:490px 265px;
 gap:3px;
 }
 
@@ -909,44 +1054,68 @@ grid-row:1;
 grid-row:2;
 }
 
+.editorial-card.cover img{
+object-position:center 32%;
+}
+
 .editorial-copy{
-left:18px;
-right:18px;
-bottom:20px;
+left:16px;
+right:16px;
+bottom:18px;
 }
 
 .editorial-copy h1{
-font-size:43px;
+font-size:36px;
+line-height:.96;
 }
 
 .editorial-copy h2{
-font-size:27px;
+font-size:22px;
 }
 
 .editorial-copy p{
-font-size:15px;
+font-size:13px;
+line-height:1.38;
+}
+
+.editorial-card:not(.cover) .editorial-copy p{
+display:none;
 }
 
 .editorial-eyebrow{
-font-size:8px;
+font-size:7px;
+padding:6px 8px;
 }
 
+.editorial-arrow{
+font-size:8px;
+margin-top:9px;
+}
+
+/* =========================================================
+MOBILE WORLD
+========================================================= */
+
 .world-heading{
-padding:24px 18px 18px;
+padding:21px 16px 16px;
 align-items:flex-start;
 }
 
 .world-heading h2{
-font-size:42px;
+font-size:35px;
 }
 
 .world-heading p{
 display:none;
 }
 
+/* =========================================================
+MOBILE MOSAIC
+========================================================= */
+
 .magazine-grid{
 grid-template-columns:1fr 1fr;
-grid-auto-rows:270px;
+grid-auto-rows:235px;
 gap:3px;
 }
 
@@ -964,26 +1133,34 @@ grid-row:span 2;
 }
 
 .card-copy{
-left:14px;
-right:14px;
-bottom:14px;
+left:13px;
+right:13px;
+bottom:13px;
 }
 
 .card-copy h3{
-font-size:25px;
+font-size:22px;
 }
 
 .magazine-card.large .card-copy h3{
-font-size:43px;
+font-size:36px;
 }
 
 .magazine-card.tall .card-copy h3{
-font-size:31px;
+font-size:28px;
 }
 
 .card-copy p{
 font-size:9px;
 }
+
+.magazine-card.large .card-copy p{
+font-size:10px;
+}
+
+/* =========================================================
+MOBILE PARTNER
+========================================================= */
 
 .partner-end{
 grid-template-columns:1fr;
@@ -991,76 +1168,153 @@ min-height:0;
 }
 
 .partner-end-image{
-height:280px;
+height:255px;
 }
 
 .partner-end-image:after{
-background:linear-gradient(to top,#090909 0%,transparent 70%);
+background:
+linear-gradient(
+to top,
+#090909 0%,
+transparent 70%
+);
 }
 
 .partner-end-copy{
-padding:23px 22px 32px;
+padding:21px 19px 29px;
 }
 
 .partner-end-copy h2{
-font-size:39px;
+font-size:34px;
+}
+
+/* =========================================================
+MOBILE SIDE MENU
+========================================================= */
+
+.side-menu{
+width:min(92vw,500px) !important;
 }
 
 .side-menu-head{
-height:124px;
+height:78px !important;
+min-height:78px !important;
+padding:14px 18px !important;
 }
 
 .side-menu-head h2{
-font-size:43px;
+font-size:33px !important;
+}
+
+.close-menu{
+width:42px;
+height:42px;
+font-size:27px;
 }
 
 .menu-item{
-grid-template-columns:104px 1fr;
+grid-template-columns:94px 1fr;
+min-height:82px;
 }
 
 .menu-item img{
-width:104px;
+width:94px;
 }
 
 footer{
-padding-top:38px;
+padding-top:35px;
 }
 
 .footer-brand{
-font-size:37px;
+font-size:33px;
+letter-spacing:3px;
 }
 
 }
+
+/* =========================================================
+SMALL MOBILE
+========================================================= */
 
 @media(max-width:390px){
 
 .header-main{
-grid-template-columns:54px 1fr 115px;
+grid-template-columns:45px minmax(0,1fr) auto !important;
+padding-left:8px !important;
+padding-right:8px !important;
 }
 
 .brand-big{
-font-size:39px;
+font-size:29px !important;
 }
 
 .subscribe-top{
-font-size:10px;
-padding:0 9px;
+font-size:8.5px;
+padding:0 8px;
 }
 
 .intro-grid{
-grid-template-rows:530px 295px;
+grid-template-rows:455px 245px;
 }
 
 .editorial-copy h1{
-font-size:39px;
+font-size:33px;
 }
 
 .editorial-copy h2{
-font-size:24px;
+font-size:20px;
 }
 
 .magazine-grid{
-grid-auto-rows:250px;
+grid-auto-rows:220px;
+}
+
+.magazine-card.large .card-copy h3{
+font-size:33px;
+}
+
+}
+
+/* =========================================================
+VERY SMALL MOBILE
+========================================================= */
+
+@media(max-width:350px){
+
+.subscribe-top{
+padding:0 6px;
+font-size:8px;
+}
+
+.profile-button{
+width:31px !important;
+}
+
+.brand-big{
+font-size:27px !important;
+}
+
+.primary-nav a{
+padding-left:12px !important;
+padding-right:12px !important;
+font-size:10px !important;
+}
+
+}
+
+/* =========================================================
+REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+html{
+scroll-behavior:auto;
+}
+
+.editorial-card img,
+.magazine-card img{
+transition:none;
 }
 
 }
@@ -1069,13 +1323,21 @@ grid-auto-rows:250px;
 
 <body>
 
-<div class="menu-overlay" id="menuOverlay"></div>
+<div
+class="menu-overlay"
+id="menuOverlay"
+></div>
 
-<aside class="side-menu" id="sideMenu">
+<aside
+class="side-menu"
+id="sideMenu"
+>
 
 <div class="side-menu-head">
 
-<h2 id="menuTitle">Contents</h2>
+<h2 id="menuTitle">
+Contents
+</h2>
 
 <button
 class="close-menu"
@@ -1115,6 +1377,7 @@ LANGUAGE
 </label>
 
 <select id="languageSelect">
+
 <option value="en">🇬🇧 EN — English</option>
 <option value="uk">🇺🇦 UA — Українська</option>
 <option value="ru">🇷🇺 RU — Русский</option>
@@ -1138,11 +1401,15 @@ LANGUAGE
 <option value="tr">🇹🇷 TR — Türkçe</option>
 <option value="ar">🇸🇦 AR — العربية</option>
 <option value="hi">🇮🇳 HI — हिन्दी</option>
+
 </select>
 
 </div>
 
-<nav class="menu-list" id="sideMenuList"></nav>
+<nav
+class="menu-list"
+id="sideMenuList"
+></nav>
 
 </aside>
 
@@ -1166,8 +1433,15 @@ class="brand notranslate"
 translate="no"
 href="index.html"
 >
-<div class="brand-small">PETS &amp;</div>
-<div class="brand-big">DOGUE</div>
+
+<div class="brand-small">
+PETS &amp;
+</div>
+
+<div class="brand-big">
+DOGUE
+</div>
+
 </a>
 
 <div class="header-actions">
@@ -1213,6 +1487,9 @@ href="issue-01.html"
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
 alt="PETS & DOGUE latest issue"
+loading="eager"
+fetchpriority="high"
+decoding="async"
 >
 
 <div class="editorial-copy">
@@ -1249,8 +1526,10 @@ href="special-offers.html"
 >
 
 <img
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=88"
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=92"
 alt="PETS & DOGUE Club offers"
+loading="eager"
+decoding="async"
 >
 
 <div class="editorial-copy">
@@ -1287,8 +1566,10 @@ href="members-gallery.html"
 >
 
 <img
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=88"
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1600&q=92"
 alt="Next PETS & DOGUE cover star"
+loading="eager"
+decoding="async"
 >
 
 <div class="editorial-copy">
@@ -1343,155 +1624,300 @@ Stories, style, travel, wellness and everything that makes life with animals ext
 class="magazine-card large"
 href="articles.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1300&q=88"
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1800&q=92"
 alt="PETS & DOGUE articles"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="articles"></span>
-<h3 id="articlesFeatureTitle">Stories worth stopping for</h3>
-<p id="articlesFeatureText">Editorial stories about animals, people, culture and life together.</p>
+
+<span
+class="card-label"
+data-nav-key="articles"
+></span>
+
+<h3 id="articlesFeatureTitle">
+Stories worth stopping for
+</h3>
+
+<p id="articlesFeatureText">
+Editorial stories about animals, people, culture and life together.
+</p>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card tall"
 href="photos.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1300&q=92"
 alt="PETS & DOGUE photography"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="photos"></span>
-<h3 id="photosFeatureTitle">Visual stories</h3>
+
+<span
+class="card-label"
+data-nav-key="photos"
+></span>
+
+<h3 id="photosFeatureTitle">
+Visual stories
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card"
 href="pet-fashion.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1300&q=92"
 alt="Pet fashion"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="fashion"></span>
-<h3 id="fashionFeatureTitle">Style with personality</h3>
+
+<span
+class="card-label"
+data-nav-key="fashion"
+></span>
+
+<h3 id="fashionFeatureTitle">
+Style with personality
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card"
 href="pet-travel.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1300&q=92"
 alt="Pet travel"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="travel"></span>
-<h3 id="travelFeatureTitle">Go further together</h3>
+
+<span
+class="card-label"
+data-nav-key="travel"
+></span>
+
+<h3 id="travelFeatureTitle">
+Go further together
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card wide"
 href="wellness.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1300&q=88"
+src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1800&q=92"
 alt="Pet wellness"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="wellness"></span>
-<h3 id="wellnessFeatureTitle">Care for every day</h3>
+
+<span
+class="card-label"
+data-nav-key="wellness"
+></span>
+
+<h3 id="wellnessFeatureTitle">
+Care for every day
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card"
 href="pet-friendly-places.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1300&q=92"
 alt="Pet-friendly places"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="places"></span>
-<h3 id="placesFeatureTitle">Places worth discovering</h3>
+
+<span
+class="card-label"
+data-nav-key="places"
+></span>
+
+<h3 id="placesFeatureTitle">
+Places worth discovering
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card"
 href="contests.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1300&q=92"
 alt="PETS & DOGUE contests"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="contests"></span>
-<h3 id="contestsFeatureTitle">Play. Enter. Win.</h3>
+
+<span
+class="card-label"
+data-nav-key="contests"
+></span>
+
+<h3 id="contestsFeatureTitle">
+Play. Enter. Win.
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card wide"
 href="local-community.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1300&q=88"
+src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1800&q=92"
 alt="Local pet community"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="community"></span>
-<h3 id="communityFeatureTitle">Everything interesting happening near you</h3>
+
+<span
+class="card-label"
+data-nav-key="community"
+></span>
+
+<h3 id="communityFeatureTitle">
+Everything interesting happening near you
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card tall"
 href="pets-in-need.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1300&q=92"
 alt="Help animals"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="rescue"></span>
-<h3 id="rescueFeatureTitle">Help or ask for help</h3>
+
+<span
+class="card-label"
+data-nav-key="rescue"
+></span>
+
+<h3 id="rescueFeatureTitle">
+Help or ask for help
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card"
 href="pet-marketplace.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1300&q=92"
 alt="PETS & DOGUE marketplace"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label" data-nav-key="marketplace"></span>
-<h3 id="marketFeatureTitle">Find what you need</h3>
+
+<span
+class="card-label"
+data-nav-key="marketplace"
+></span>
+
+<h3 id="marketFeatureTitle">
+Find what you need
+</h3>
+
 </div>
+
 </a>
 
 <a
 class="magazine-card"
 href="club.html"
 >
+
 <img
-src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=88"
+src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1300&q=92"
 alt="PETS & DOGUE Club"
+loading="lazy"
+decoding="async"
 >
+
 <div class="card-copy">
-<span class="card-label">PETS &amp; DOGUE CLUB</span>
-<h3 id="clubFeatureTitle">More for members</h3>
+
+<span class="card-label">
+PETS &amp; DOGUE CLUB
+</span>
+
+<h3 id="clubFeatureTitle">
+More for members
+</h3>
+
 </div>
+
 </a>
 
 </div>
@@ -1506,8 +1932,10 @@ href="partners.html"
 <div class="partner-end-image">
 
 <img
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1300&q=88"
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=92"
 alt="PETS & DOGUE partnerships"
+loading="lazy"
+decoding="async"
 >
 
 </div>
@@ -1554,19 +1982,70 @@ The International Luxury Animal Magazine
 
 <div class="footer-links">
 
-<a href="issue-01.html" data-footer-key="magazine"></a>
-<a href="members-gallery.html" data-footer-key="coverStars"></a>
-<a href="special-offers.html" data-footer-key="offers"></a>
-<a href="pet-friendly-places.html" data-footer-key="places"></a>
-<a href="articles.html" data-footer-key="articles"></a>
-<a href="photos.html" data-footer-key="photos"></a>
-<a href="pet-travel.html" data-footer-key="travel"></a>
-<a href="pet-fashion.html" data-footer-key="fashion"></a>
-<a href="wellness.html" data-footer-key="wellness"></a>
-<a href="local-community.html" data-footer-key="community"></a>
-<a href="pet-marketplace.html" data-footer-key="marketplace"></a>
-<a href="contests.html" data-footer-key="contests"></a>
-<a href="partners.html" data-footer-key="partners"></a>
+<a
+href="issue-01.html"
+data-footer-key="magazine"
+></a>
+
+<a
+href="members-gallery.html"
+data-footer-key="coverStars"
+></a>
+
+<a
+href="special-offers.html"
+data-footer-key="offers"
+></a>
+
+<a
+href="pet-friendly-places.html"
+data-footer-key="places"
+></a>
+
+<a
+href="articles.html"
+data-footer-key="articles"
+></a>
+
+<a
+href="photos.html"
+data-footer-key="photos"
+></a>
+
+<a
+href="pet-travel.html"
+data-footer-key="travel"
+></a>
+
+<a
+href="pet-fashion.html"
+data-footer-key="fashion"
+></a>
+
+<a
+href="wellness.html"
+data-footer-key="wellness"
+></a>
+
+<a
+href="local-community.html"
+data-footer-key="community"
+></a>
+
+<a
+href="pet-marketplace.html"
+data-footer-key="marketplace"
+></a>
+
+<a
+href="contests.html"
+data-footer-key="contests"
+></a>
+
+<a
+href="partners.html"
+data-footer-key="partners"
+></a>
 
 </div>
 
@@ -1581,14 +2060,20 @@ The International Luxury Animal Magazine
 
 /* =========================================================
 PETS & DOGUE HOME
-Complete 23-language navigation + home interface
+
+IMPORTANT:
+- Existing functionality preserved
+- Existing 23-language system preserved
+- Fixed global rubric order
+- Navigation does not reorder itself
 ========================================================= */
 
-const LANGUAGE_KEY="pets_dogue_language";
+const LANGUAGE_KEY =
+"pets_dogue_language";
 
-/*
-=========================================================
+/* =========================================================
 GLOBAL NAVIGATION ORDER
+NEVER CHANGE ORDER PER LANGUAGE
 
 1. Magazine
 2. Cover Stars
@@ -1604,85 +2089,104 @@ GLOBAL NAVIGATION ORDER
 12. Contests
 13. Partners
 
-Partners is always last.
-=========================================================
-*/
+Partners always last.
+========================================================= */
 
-const NAV_ITEMS=[
+const NAV_ITEMS = [
+
 {
 key:"magazine",
 url:"issue-01.html",
 image:"file_00000000a9d471fda9b4629589be22a9.png"
 },
+
 {
 key:"coverStars",
 url:"members-gallery.html",
-image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"offers",
 url:"special-offers.html",
-image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"places",
 url:"pet-friendly-places.html",
-image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"articles",
 url:"articles.html",
-image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"photos",
 url:"photos.html",
-image:"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"travel",
 url:"pet-travel.html",
-image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"fashion",
 url:"pet-fashion.html",
-image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"wellness",
 url:"wellness.html",
-image:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"community",
 url:"local-community.html",
-image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"marketplace",
 url:"pet-marketplace.html",
-image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"contests",
 url:"contests.html",
-image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=90"
 },
+
 {
 key:"partners",
 url:"partners.html",
-image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=90"
 }
+
 ];
 
-const T={
+/* =========================================================
+TRANSLATIONS
+Existing multilingual structure preserved.
+========================================================= */
+
+const T = {
 
 en:{
 menu:"Contents",
 profile:"Profile",
 subscribe:"Subscribe",
 language:"Language",
+
 nav:{
 magazine:"Magazine",
 coverStars:"Cover Stars",
@@ -1699,36 +2203,46 @@ contests:"Contests",
 partners:"Partners",
 rescue:"Help"
 },
+
 latestLabel:"Latest issue",
 latestTitle:"Miso: the first PETS & DOGUE cover star",
 latestText:"Open Issue 01 and enter the visual world of PETS & DOGUE.",
 latestAction:"Open the magazine →",
+
 offersLabel:"Club discounts",
 offersTitle:"Discover your benefits",
 offersText:"Member discounts from selected pet-friendly partners.",
 offersAction:"See discounts →",
+
 starLabel:"Your vote",
 starTitle:"Choose the next cover star",
 starText:"Meet the pets, read their stories and tap the heart.",
 starAction:"Vote now →",
+
 worldTitle:"Inside PETS & DOGUE",
 worldText:"Stories, style, travel, wellness and everything that makes life with animals extraordinary.",
+
 articlesTitle:"Stories worth stopping for",
 articlesText:"Editorial stories about animals, people, culture and life together.",
+
 photosTitle:"Visual stories",
 fashionTitle:"Style with personality",
 travelTitle:"Go further together",
 wellnessTitle:"Care for every day",
+
 placesTitle:"Places worth discovering",
 placesDescription:"Discover places where pets are welcome, with maps, routes and contacts.",
+
 contestsTitle:"Play. Enter. Win.",
 communityTitle:"Everything interesting happening near you",
 rescueTitle:"Help or ask for help",
 marketTitle:"Find what you need",
 clubTitle:"More for members",
+
 partnerTitle:"Work with PETS & DOGUE",
 partnerText:"Advertising, editorial stories, news, Club discounts, brand features and collaborations.",
 partnerAction:"Partner with us →",
+
 tagline:"The International Luxury Animal Magazine"
 },
 
@@ -1737,6 +2251,7 @@ menu:"Содержание",
 profile:"Профиль",
 subscribe:"Подписка",
 language:"Язык",
+
 nav:{
 magazine:"Журнал",
 coverStars:"Звёзды обложки",
@@ -1753,36 +2268,46 @@ contests:"Конкурсы",
 partners:"Партнёры",
 rescue:"Помощь"
 },
+
 latestLabel:"Последний выпуск",
 latestTitle:"Мисо: первая звезда обложки PETS & DOGUE",
 latestText:"Откройте выпуск №1 и погрузитесь в визуальный мир PETS & DOGUE.",
 latestAction:"Открыть журнал →",
+
 offersLabel:"Скидки Club",
 offersTitle:"Откройте свои преимущества",
 offersText:"Специальные скидки от выбранных pet-friendly партнёров.",
 offersAction:"Смотреть скидки →",
+
 starLabel:"Ваш голос",
 starTitle:"Выберите следующую звезду обложки",
 starText:"Знакомьтесь с питомцами, читайте их истории и нажимайте сердечко.",
 starAction:"Голосовать →",
+
 worldTitle:"Внутри PETS & DOGUE",
 worldText:"Истории, стиль, путешествия, здоровье и всё, что делает жизнь с животными особенной.",
+
 articlesTitle:"Истории, на которых хочется остановиться",
 articlesText:"Редакционные истории о животных, людях, культуре и жизни вместе.",
+
 photosTitle:"Визуальные истории",
 fashionTitle:"Стиль с характером",
 travelTitle:"Путешествуйте дальше вместе",
 wellnessTitle:"Забота каждый день",
+
 placesTitle:"Места, где питомцам рады",
 placesDescription:"Находите места, где рады питомцам, с картами, маршрутами и контактами.",
+
 contestsTitle:"Участвуйте. Играйте. Побеждайте.",
 communityTitle:"Всё интересное, что происходит рядом с вами",
 rescueTitle:"Помочь или попросить помощи",
 marketTitle:"Найдите то, что нужно",
 clubTitle:"Больше для участников",
+
 partnerTitle:"Сотрудничайте с PETS & DOGUE",
 partnerText:"Реклама, редакционные статьи, новости, скидки Club, бренды и коллаборации.",
 partnerAction:"Стать партнёром →",
+
 tagline:"Международный журнал класса люкс о животных"
 },
 
@@ -1791,6 +2316,7 @@ menu:"Зміст",
 profile:"Профіль",
 subscribe:"Підписка",
 language:"Мова",
+
 nav:{
 magazine:"Журнал",
 coverStars:"Зірки обкладинки",
@@ -1807,36 +2333,46 @@ contests:"Конкурси",
 partners:"Партнери",
 rescue:"Допомога"
 },
+
 latestLabel:"Останній випуск",
 latestTitle:"Місо: перша зірка обкладинки PETS & DOGUE",
 latestText:"Відкрийте випуск №1 і пориньте у візуальний світ PETS & DOGUE.",
 latestAction:"Відкрити журнал →",
+
 offersLabel:"Знижки Club",
 offersTitle:"Відкрийте свої переваги",
 offersText:"Спеціальні знижки від вибраних pet-friendly партнерів.",
 offersAction:"Дивитися знижки →",
+
 starLabel:"Ваш голос",
 starTitle:"Оберіть наступну зірку обкладинки",
 starText:"Знайомтеся з улюбленцями, читайте їхні історії та натискайте сердечко.",
 starAction:"Голосувати →",
+
 worldTitle:"Усередині PETS & DOGUE",
 worldText:"Історії, стиль, подорожі, здоров’я та все, що робить життя з тваринами особливим.",
+
 articlesTitle:"Історії, біля яких хочеться зупинитися",
 articlesText:"Редакційні історії про тварин, людей, культуру та спільне життя.",
+
 photosTitle:"Візуальні історії",
 fashionTitle:"Стиль із характером",
 travelTitle:"Подорожуйте далі разом",
 wellnessTitle:"Турбота щодня",
+
 placesTitle:"Місця, де улюбленцям раді",
 placesDescription:"Знаходьте місця, де раді улюбленцям, з картами, маршрутами та контактами.",
+
 contestsTitle:"Беріть участь. Грайте. Перемагайте.",
 communityTitle:"Усе цікаве, що відбувається поруч із вами",
 rescueTitle:"Допомогти або попросити допомоги",
 marketTitle:"Знайдіть те, що потрібно",
 clubTitle:"Більше для учасників",
+
 partnerTitle:"Співпрацюйте з PETS & DOGUE",
 partnerText:"Реклама, редакційні статті, новини, знижки Club, бренди та колаборації.",
 partnerAction:"Стати партнером →",
+
 tagline:"Міжнародний люксовий журнал про тварин"
 },
 
@@ -1845,6 +2381,7 @@ menu:"Sommaire",
 profile:"Profil",
 subscribe:"Abonnement",
 language:"Langue",
+
 nav:{
 magazine:"Magazine",
 coverStars:"Stars de couverture",
@@ -1868,6 +2405,7 @@ menu:"Inhalt",
 profile:"Profil",
 subscribe:"Abo",
 language:"Sprache",
+
 nav:{
 magazine:"Magazin",
 coverStars:"Cover Stars",
@@ -1891,6 +2429,7 @@ menu:"Contenido",
 profile:"Perfil",
 subscribe:"Suscripción",
 language:"Idioma",
+
 nav:{
 magazine:"Revista",
 coverStars:"Estrellas de portada",
@@ -1914,6 +2453,7 @@ menu:"Contenuti",
 profile:"Profilo",
 subscribe:"Abbonamento",
 language:"Lingua",
+
 nav:{
 magazine:"Rivista",
 coverStars:"Cover Star",
@@ -1937,6 +2477,7 @@ menu:"Conteúdo",
 profile:"Perfil",
 subscribe:"Assinatura",
 language:"Idioma",
+
 nav:{
 magazine:"Revista",
 coverStars:"Estrelas da capa",
@@ -1960,6 +2501,7 @@ menu:"Inhoud",
 profile:"Profiel",
 subscribe:"Abonnement",
 language:"Taal",
+
 nav:{
 magazine:"Magazine",
 coverStars:"Coversterren",
@@ -1983,6 +2525,7 @@ menu:"Spis treści",
 profile:"Profil",
 subscribe:"Subskrypcja",
 language:"Język",
+
 nav:{
 magazine:"Magazyn",
 coverStars:"Gwiazdy okładki",
@@ -2006,6 +2549,7 @@ menu:"Obsah",
 profile:"Profil",
 subscribe:"Předplatné",
 language:"Jazyk",
+
 nav:{
 magazine:"Magazín",
 coverStars:"Hvězdy obálky",
@@ -2029,6 +2573,7 @@ menu:"Obsah",
 profile:"Profil",
 subscribe:"Predplatné",
 language:"Jazyk",
+
 nav:{
 magazine:"Magazín",
 coverStars:"Hviezdy obálky",
@@ -2052,6 +2597,7 @@ menu:"Tartalom",
 profile:"Profil",
 subscribe:"Előfizetés",
 language:"Nyelv",
+
 nav:{
 magazine:"Magazin",
 coverStars:"Címlapsztárok",
@@ -2075,6 +2621,7 @@ menu:"Conținut",
 profile:"Profil",
 subscribe:"Abonament",
 language:"Limbă",
+
 nav:{
 magazine:"Revistă",
 coverStars:"Vedete de copertă",
@@ -2098,6 +2645,7 @@ menu:"Съдържание",
 profile:"Профил",
 subscribe:"Абонамент",
 language:"Език",
+
 nav:{
 magazine:"Списание",
 coverStars:"Звезди на корицата",
@@ -2121,6 +2669,7 @@ menu:"Περιεχόμενα",
 profile:"Προφίλ",
 subscribe:"Συνδρομή",
 language:"Γλώσσα",
+
 nav:{
 magazine:"Περιοδικό",
 coverStars:"Αστέρια εξωφύλλου",
@@ -2144,6 +2693,7 @@ menu:"Innehåll",
 profile:"Profil",
 subscribe:"Prenumeration",
 language:"Språk",
+
 nav:{
 magazine:"Magasin",
 coverStars:"Omslagsstjärnor",
@@ -2167,6 +2717,7 @@ menu:"Indhold",
 profile:"Profil",
 subscribe:"Abonnement",
 language:"Sprog",
+
 nav:{
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
@@ -2190,6 +2741,7 @@ menu:"Innhold",
 profile:"Profil",
 subscribe:"Abonnement",
 language:"Språk",
+
 nav:{
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
@@ -2213,6 +2765,7 @@ menu:"Sisältö",
 profile:"Profiili",
 subscribe:"Tilaus",
 language:"Kieli",
+
 nav:{
 magazine:"Lehti",
 coverStars:"Kansitähdet",
@@ -2236,6 +2789,7 @@ menu:"İçindekiler",
 profile:"Profil",
 subscribe:"Abonelik",
 language:"Dil",
+
 nav:{
 magazine:"Dergi",
 coverStars:"Kapak yıldızları",
@@ -2259,6 +2813,7 @@ menu:"المحتويات",
 profile:"الملف الشخصي",
 subscribe:"الاشتراك",
 language:"اللغة",
+
 nav:{
 magazine:"المجلة",
 coverStars:"نجوم الغلاف",
@@ -2282,6 +2837,7 @@ menu:"सामग्री",
 profile:"प्रोफ़ाइल",
 subscribe:"सदस्यता",
 language:"भाषा",
+
 nav:{
 magazine:"पत्रिका",
 coverStars:"कवर स्टार",
@@ -2306,18 +2862,31 @@ rescue:"मदद"
 FALLBACK
 ========================================================= */
 
-function bundle(language){
+function bundle(
+language
+){
 
-const base=T.en;
-const local=T[language]||{};
+const base =
+T.en;
 
-return{
+const local =
+T[language] ||
+{};
+
+return {
+
 ...base,
+
 ...local,
+
 nav:{
 ...base.nav,
-...(local.nav||{})
+...(
+local.nav ||
+{}
+)
 }
+
 };
 
 }
@@ -2326,9 +2895,12 @@ nav:{
 SIDE MENU DESCRIPTION
 ========================================================= */
 
-function getMenuDescription(key,tr){
+function getMenuDescription(
+key,
+tr
+){
 
-const descriptions={
+const descriptions = {
 
 magazine:
 tr.latestText,
@@ -2340,7 +2912,7 @@ offers:
 tr.offersText,
 
 places:
-tr.placesDescription||
+tr.placesDescription ||
 tr.worldText,
 
 articles:
@@ -2372,8 +2944,8 @@ tr.partnerText
 
 };
 
-return(
-descriptions[key]||
+return (
+descriptions[key] ||
 tr.worldText
 );
 
@@ -2381,68 +2953,127 @@ tr.worldText
 
 /* =========================================================
 MENU + TOP NAV
+FIXED ORDER
 ========================================================= */
 
-function renderNavigation(language){
+function renderNavigation(
+language
+){
 
-const tr=bundle(language);
+const tr =
+bundle(
+language
+);
 
-document.getElementById("primaryNav").innerHTML=
+const primaryNav =
+document.getElementById(
+"primaryNav"
+);
+
+const previousScroll =
+primaryNav.scrollLeft;
+
+primaryNav.innerHTML =
 NAV_ITEMS
 .map(
-item=>`
-<a href="${item.url}" data-nav="${item.key}">
+(
+item,
+index
+) =>
+`
+<a
+href="${item.url}"
+data-nav="${item.key}"
+${index === 0 ? 'aria-current="page"' : ""}
+>
 ${tr.nav[item.key]}
 </a>
 `
 )
-.join("");
+.join(
+""
+);
 
-document.getElementById("sideMenuList").innerHTML=
+document.getElementById(
+"sideMenuList"
+).innerHTML =
 NAV_ITEMS
 .map(
-item=>`
-<a class="menu-item" href="${item.url}">
+item =>
+`
+<a
+class="menu-item"
+href="${item.url}"
+>
+
 <img
 src="${item.image}"
 alt="${tr.nav[item.key]}"
 loading="lazy"
+decoding="async"
 >
+
 <div class="menu-item-copy">
-<h3>${tr.nav[item.key]}</h3>
-<p>${getMenuDescription(item.key,tr)}</p>
+
+<h3>
+${tr.nav[item.key]}
+</h3>
+
+<p>
+${getMenuDescription(
+item.key,
+tr
+)}
+</p>
+
 </div>
+
 </a>
 `
 )
-.join("");
+.join(
+""
+);
 
 document
-.querySelectorAll("[data-nav-key]")
+.querySelectorAll(
+"[data-nav-key]"
+)
 .forEach(
-element=>{
+element =>{
 
-const key=
+const key =
 element.dataset.navKey;
 
-element.textContent=
-tr.nav[key]||
+element.textContent =
+tr.nav[key] ||
 key;
 
 }
 );
 
 document
-.querySelectorAll("[data-footer-key]")
+.querySelectorAll(
+"[data-footer-key]"
+)
 .forEach(
-element=>{
+element =>{
 
-const key=
+const key =
 element.dataset.footerKey;
 
-element.textContent=
-tr.nav[key]||
+element.textContent =
+tr.nav[key] ||
 key;
+
+}
+);
+
+requestAnimationFrame(
+()=>{
+
+primaryNav.scrollLeft =
+previousScroll;
 
 }
 );
@@ -2453,137 +3084,216 @@ key;
 LANGUAGE
 ========================================================= */
 
-function applyLanguage(language){
+function applyLanguage(
+language
+){
 
 if(
 !T[language]
 ){
 
-language="en";
+language =
+"en";
 
 }
 
-const tr=bundle(language);
+const tr =
+bundle(
+language
+);
 
 localStorage.setItem(
 LANGUAGE_KEY,
 language
 );
 
-document.documentElement.lang=
+document.documentElement.lang =
 language;
 
-document.documentElement.dir=
-language==="ar"
-?"rtl"
-:"ltr";
+document.documentElement.dir =
+language ===
+"ar"
+? "rtl"
+: "ltr";
 
-document.getElementById("languageSelect").value=
+document.getElementById(
+"languageSelect"
+).value =
 language;
 
-document.getElementById("menuTitle").textContent=
+document.getElementById(
+"menuTitle"
+).textContent =
 tr.menu;
 
-document.getElementById("menuProfile").textContent=
+document.getElementById(
+"menuProfile"
+).textContent =
 tr.profile;
 
-document.getElementById("menuSubscribe").textContent=
+document.getElementById(
+"menuSubscribe"
+).textContent =
 tr.subscribe;
 
-document.getElementById("topSubscribe").textContent=
+document.getElementById(
+"topSubscribe"
+).textContent =
 tr.subscribe;
 
-document.getElementById("languageLabel").textContent=
+document.getElementById(
+"languageLabel"
+).textContent =
 tr.language;
 
-document.getElementById("latestLabel").textContent=
+document.getElementById(
+"latestLabel"
+).textContent =
 tr.latestLabel;
 
-document.getElementById("latestTitle").textContent=
+document.getElementById(
+"latestTitle"
+).textContent =
 tr.latestTitle;
 
-document.getElementById("latestText").textContent=
+document.getElementById(
+"latestText"
+).textContent =
 tr.latestText;
 
-document.getElementById("latestAction").textContent=
+document.getElementById(
+"latestAction"
+).textContent =
 tr.latestAction;
 
-document.getElementById("offersLabel").textContent=
+document.getElementById(
+"offersLabel"
+).textContent =
 tr.offersLabel;
 
-document.getElementById("offersTitle").textContent=
+document.getElementById(
+"offersTitle"
+).textContent =
 tr.offersTitle;
 
-document.getElementById("offersText").textContent=
+document.getElementById(
+"offersText"
+).textContent =
 tr.offersText;
 
-document.getElementById("offersAction").textContent=
+document.getElementById(
+"offersAction"
+).textContent =
 tr.offersAction;
 
-document.getElementById("starLabel").textContent=
+document.getElementById(
+"starLabel"
+).textContent =
 tr.starLabel;
 
-document.getElementById("starTitle").textContent=
+document.getElementById(
+"starTitle"
+).textContent =
 tr.starTitle;
 
-document.getElementById("starText").textContent=
+document.getElementById(
+"starText"
+).textContent =
 tr.starText;
 
-document.getElementById("starAction").textContent=
+document.getElementById(
+"starAction"
+).textContent =
 tr.starAction;
 
-document.getElementById("worldTitle").textContent=
+document.getElementById(
+"worldTitle"
+).textContent =
 tr.worldTitle;
 
-document.getElementById("worldText").textContent=
+document.getElementById(
+"worldText"
+).textContent =
 tr.worldText;
 
-document.getElementById("articlesFeatureTitle").textContent=
+document.getElementById(
+"articlesFeatureTitle"
+).textContent =
 tr.articlesTitle;
 
-document.getElementById("articlesFeatureText").textContent=
+document.getElementById(
+"articlesFeatureText"
+).textContent =
 tr.articlesText;
 
-document.getElementById("photosFeatureTitle").textContent=
+document.getElementById(
+"photosFeatureTitle"
+).textContent =
 tr.photosTitle;
 
-document.getElementById("fashionFeatureTitle").textContent=
+document.getElementById(
+"fashionFeatureTitle"
+).textContent =
 tr.fashionTitle;
 
-document.getElementById("travelFeatureTitle").textContent=
+document.getElementById(
+"travelFeatureTitle"
+).textContent =
 tr.travelTitle;
 
-document.getElementById("wellnessFeatureTitle").textContent=
+document.getElementById(
+"wellnessFeatureTitle"
+).textContent =
 tr.wellnessTitle;
 
-document.getElementById("placesFeatureTitle").textContent=
+document.getElementById(
+"placesFeatureTitle"
+).textContent =
 tr.placesTitle;
 
-document.getElementById("contestsFeatureTitle").textContent=
+document.getElementById(
+"contestsFeatureTitle"
+).textContent =
 tr.contestsTitle;
 
-document.getElementById("communityFeatureTitle").textContent=
+document.getElementById(
+"communityFeatureTitle"
+).textContent =
 tr.communityTitle;
 
-document.getElementById("rescueFeatureTitle").textContent=
+document.getElementById(
+"rescueFeatureTitle"
+).textContent =
 tr.rescueTitle;
 
-document.getElementById("marketFeatureTitle").textContent=
+document.getElementById(
+"marketFeatureTitle"
+).textContent =
 tr.marketTitle;
 
-document.getElementById("clubFeatureTitle").textContent=
+document.getElementById(
+"clubFeatureTitle"
+).textContent =
 tr.clubTitle;
 
-document.getElementById("partnerTitle").textContent=
+document.getElementById(
+"partnerTitle"
+).textContent =
 tr.partnerTitle;
 
-document.getElementById("partnerText").textContent=
+document.getElementById(
+"partnerText"
+).textContent =
 tr.partnerText;
 
-document.getElementById("partnerAction").textContent=
+document.getElementById(
+"partnerAction"
+).textContent =
 tr.partnerAction;
 
-document.getElementById("footerTagline").textContent=
+document.getElementById(
+"footerTagline"
+).textContent =
 tr.tagline;
 
 renderNavigation(
@@ -2598,58 +3308,86 @@ OPEN / CLOSE MENU
 
 function openMenu(){
 
-document.getElementById("sideMenu")
+document.getElementById(
+"sideMenu"
+)
 .classList
-.add("open");
+.add(
+"open"
+);
 
-document.getElementById("menuOverlay")
+document.getElementById(
+"menuOverlay"
+)
 .classList
-.add("show");
+.add(
+"show"
+);
 
 document.body
 .classList
-.add("menu-open");
+.add(
+"menu-open"
+);
 
 }
 
 function closeMenu(){
 
-document.getElementById("sideMenu")
+document.getElementById(
+"sideMenu"
+)
 .classList
-.remove("open");
+.remove(
+"open"
+);
 
-document.getElementById("menuOverlay")
+document.getElementById(
+"menuOverlay"
+)
 .classList
-.remove("show");
+.remove(
+"show"
+);
 
 document.body
 .classList
-.remove("menu-open");
+.remove(
+"menu-open"
+);
 
 }
 
-document.getElementById("menuButton")
+document.getElementById(
+"menuButton"
+)
 .addEventListener(
 "click",
 openMenu
 );
 
-document.getElementById("closeMenuButton")
+document.getElementById(
+"closeMenuButton"
+)
 .addEventListener(
 "click",
 closeMenu
 );
 
-document.getElementById("menuOverlay")
+document.getElementById(
+"menuOverlay"
+)
 .addEventListener(
 "click",
 closeMenu
 );
 
-document.getElementById("languageSelect")
+document.getElementById(
+"languageSelect"
+)
 .addEventListener(
 "change",
-event=>{
+event =>{
 
 applyLanguage(
 event.target.value
@@ -2660,10 +3398,11 @@ event.target.value
 
 document.addEventListener(
 "keydown",
-event=>{
+event =>{
 
 if(
-event.key==="Escape"
+event.key ===
+"Escape"
 ){
 
 closeMenu();
@@ -2674,19 +3413,49 @@ closeMenu();
 );
 
 /* =========================================================
+SYNC LANGUAGE BETWEEN TABS / PAGES
+========================================================= */
+
+window.addEventListener(
+"storage",
+event =>{
+
+if(
+event.key !==
+LANGUAGE_KEY
+){
+
+return;
+
+}
+
+const language =
+event.newValue ||
+"en";
+
+applyLanguage(
+T[language]
+? language
+: "en"
+);
+
+}
+);
+
+/* =========================================================
 START
 ========================================================= */
 
-const savedLanguage=
+const savedLanguage =
 localStorage.getItem(
 LANGUAGE_KEY
-)||
+) ||
 "en";
 
 applyLanguage(
 T[savedLanguage]
-?savedLanguage
-:"en"
+? savedLanguage
+: "en"
 );
 
 </script>
