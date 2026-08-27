@@ -2,134 +2,1297 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title data-i18n="issue01.meta.title">Issue 01 — PETS & DOGUE</title>
 <meta
-  name="description"
-  content="The debut issue of PETS & DOGUE."
-  data-i18n-attr="content:issue01.meta.description"
+name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<title data-i18n="issue01.meta.title">
+Issue 01 — PETS & DOGUE
+</title>
+
+<meta
+name="description"
+content="The debut issue of PETS & DOGUE."
+data-i18n-attr="content:issue01.meta.description"
+>
+
+<link
+rel="stylesheet"
+href="visual-system.css?v=1"
 >
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f8f7f3;color:#111}
-a{text-decoration:none;color:inherit}
+:root{
+--black:#070707;
+--cream:#f8f7f3;
+--gold:#c89b3c;
+--gold-light:#efd277;
+--green:#5ee719;
+--white:#fff;
+--serif:Georgia,"Times New Roman",serif;
+--sans:Arial,Helvetica,sans-serif;
 
-header{background:white;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:1000}
-.top{height:66px;display:flex;align-items:center;justify-content:space-between;max-width:1400px;margin:auto;padding:0 18px}
-.logo{text-align:center;line-height:.9}
-.logo-small{font-size:15px;color:#b78a2e}
-.logo-big{font-size:42px;font-family:Georgia,serif;font-weight:bold;color:#c89b3c;letter-spacing:3px}
-.back{background:#111;color:white;padding:12px 18px;border-radius:999px;font-weight:bold;font-size:14px}
-.issue-label{font-size:13px;font-weight:bold;color:#555}
+--shell-header-height:88px;
+--shell-nav-height:50px;
+}
 
-.hero{max-width:1500px;margin:auto;padding:24px 18px}
-.cover{position:relative;border-radius:40px;overflow:hidden;box-shadow:0 25px 75px rgba(0,0,0,.22)}
-.cover img{width:100%;display:block}
-.cover-text{position:absolute;left:40px;right:40px;bottom:40px;color:white;text-shadow:0 4px 20px rgba(0,0,0,.7)}
-.cover-text span{display:inline-block;background:#c89b3c;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:15px}
-.cover-text h1{font-family:Georgia,serif;font-size:72px;margin-bottom:12px}
-.cover-text p{font-size:22px;line-height:1.6;max-width:850px}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-.issue-intro{max-width:1000px;margin:70px auto;text-align:center;padding:0 22px}
-.kicker{letter-spacing:3px;color:#b78a2e;font-size:13px;font-weight:bold;margin-bottom:18px}
-.issue-intro h2{font-family:Georgia,serif;font-size:58px;margin-bottom:20px}
-.issue-intro p{font-size:21px;line-height:1.8;color:#555}
+html{
+scroll-behavior:smooth;
+-webkit-text-size-adjust:100%;
+}
 
-.toc{max-width:1200px;margin:70px auto;padding:0 20px}
-.toc h2{font-family:Georgia,serif;font-size:46px;text-align:center;margin-bottom:35px}
-.toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.toc-card{background:white;border:2px solid #111;border-radius:28px;padding:22px;text-align:center}
-.toc-card span{color:#c89b3c;font-weight:bold;font-size:13px}
-.toc-card h3{font-family:Georgia,serif;font-size:28px;margin-top:8px}
+body{
+background:#f8f7f3;
+color:#111;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
+}
 
-.page{max-width:1200px;margin:90px auto;padding:0 20px}
-.editorial{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center;background:white;border:2px solid #111;border-radius:42px;overflow:hidden;box-shadow:0 16px 45px rgba(0,0,0,.08)}
-.editorial.reverse{direction:rtl}
-.editorial.reverse .text{direction:ltr}
-.editorial img{width:100%;height:620px;object-fit:cover}
-.text{padding:38px}
-.badge{display:inline-block;background:#c89b3c;color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:bold;margin-bottom:16px}
-.text h2{font-family:Georgia,serif;font-size:50px;margin-bottom:18px}
-.text p{font-size:18px;line-height:1.9;color:#444;margin-bottom:16px}
-.quote{font-family:Georgia,serif;font-size:28px;color:#b78a2e;margin:24px 0;line-height:1.5}
+body.menu-open{
+overflow:hidden;
+}
 
-.full-page{max-width:1400px;margin:90px auto;padding:0 20px}
-.full-card{position:relative;border-radius:44px;overflow:hidden;min-height:650px;display:flex;align-items:flex-end;box-shadow:0 20px 60px rgba(0,0,0,.18)}
-.full-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.full-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.05))}
-.full-content{position:relative;z-index:2;color:white;padding:45px;max-width:850px}
-.full-content h2{font-family:Georgia,serif;font-size:64px;margin-bottom:18px}
-.full-content p{font-size:21px;line-height:1.8;color:#eee}
+a{
+text-decoration:none;
+color:inherit;
+}
 
-.buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
-.btn{display:inline-block;background:#111;color:white;padding:15px 22px;border-radius:999px;font-weight:bold}
-.btn.gold{background:#c89b3c}
+button,
+select{
+font:inherit;
+}
 
-.shop-strip{max-width:1200px;margin:90px auto;padding:0 20px}
-.shop-box{background:#111;color:white;border-radius:42px;padding:50px 30px;text-align:center}
-.shop-box h2{font-family:Georgia,serif;font-size:50px;color:#d6aa45;margin-bottom:18px}
-.shop-box p{font-size:20px;line-height:1.8;max-width:850px;margin:auto}
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:35px}
-.shop-item{background:white;color:#111;border-radius:25px;padding:22px;font-weight:bold}
+button{
+cursor:pointer;
+}
 
-.final{max-width:1000px;margin:90px auto;text-align:center;padding:0 22px}
-.final h2{font-family:Georgia,serif;font-size:56px;margin-bottom:18px}
-.final p{font-size:21px;line-height:1.8;color:#555;margin-bottom:25px}
+/* =========================================================
+MASTER PETS & DOGUE HEADER
+========================================================= */
 
-footer{margin-top:70px;padding:55px 20px;background:#050505;color:white;text-align:center}
-footer h2{font-family:Georgia,serif;font-size:46px;margin-bottom:10px}
-footer p{color:#ddd}
-.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:22px}
-.footer-links a{color:#ccc;font-size:14px}
-.admin-small{display:block;margin-top:25px;color:#777;font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.site-header{
+position:sticky;
+top:0;
+z-index:5000;
+width:100%;
+background:#050505;
+color:#fff;
+border-bottom:1px solid #292929;
+}
 
-html[dir="rtl"] body{text-align:right}
-html[dir="rtl"] .editorial.reverse{direction:ltr}
-html[dir="rtl"] .editorial.reverse .text{direction:rtl}
-html[dir="rtl"] .editorial:not(.reverse) .text{direction:rtl}
-html[dir="rtl"] .cover-text{direction:rtl}
-html[dir="rtl"] .buttons{direction:rtl}
-html[dir="rtl"] .footer-links{direction:rtl}
+.header-main{
+height:var(--shell-header-height);
+min-height:var(--shell-header-height);
+max-width:1600px;
+margin:auto;
+padding:0 18px;
+
+display:grid;
+grid-template-columns:58px minmax(0,1fr) 58px;
+align-items:center;
+gap:10px;
+}
+
+.menu-button{
+width:46px;
+height:46px;
+padding:7px;
+border:0;
+background:transparent;
+
+display:grid;
+align-content:center;
+gap:6px;
+}
+
+.menu-button span{
+display:block;
+width:100%;
+height:2px;
+background:#fff;
+border-radius:999px;
+}
+
+.brand{
+justify-self:center;
+text-align:center;
+font-family:var(--serif);
+line-height:.83;
+white-space:nowrap;
+}
+
+.brand-small{
+font-size:10px;
+letter-spacing:2px;
+color:var(--gold);
+text-transform:uppercase;
+}
+
+.brand-big{
+margin-top:6px;
+font-family:var(--serif);
+font-size:39px;
+font-weight:400;
+letter-spacing:3px;
+color:var(--gold);
+}
+
+.home-button{
+justify-self:end;
+width:46px;
+height:46px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:transparent;
+border:0;
+color:#fff;
+}
+
+.home-button svg{
+display:block;
+width:31px;
+height:31px;
+fill:none;
+stroke:currentColor;
+stroke-width:2.4;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+/* =========================================================
+MASTER RUBRIC NAVIGATION
+ORDER NEVER CHANGES
+========================================================= */
+
+.primary-nav{
+width:100%;
+height:var(--shell-nav-height);
+min-height:var(--shell-nav-height);
+
+display:flex;
+align-items:stretch;
+
+padding:0 8px;
+gap:0;
+
+overflow-x:auto;
+overflow-y:hidden;
+
+background:#070707;
+border-top:1px solid #262626;
+border-bottom:1px solid #262626;
+
+scrollbar-width:none;
+-webkit-overflow-scrolling:touch;
+overscroll-behavior-x:contain;
+scroll-behavior:smooth;
+}
+
+.primary-nav::-webkit-scrollbar{
+display:none;
+}
+
+.primary-nav a{
+position:relative;
+flex:0 0 auto;
+min-width:max-content;
+height:var(--shell-nav-height);
+
+padding:0 18px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-family:var(--sans);
+font-size:12px;
+font-weight:900;
+letter-spacing:.55px;
+line-height:1;
+
+text-transform:uppercase;
+white-space:nowrap;
+
+color:#fff;
+}
+
+.primary-nav a:hover,
+.primary-nav a:focus{
+color:var(--gold-light);
+}
+
+.primary-nav a.active{
+color:var(--gold-light);
+}
+
+.primary-nav a.active:after{
+content:"";
+position:absolute;
+left:17px;
+right:17px;
+bottom:0;
+height:3px;
+
+background:
+linear-gradient(
+90deg,
+#8c6011,
+#f5dc8b,
+#9b6a12
+);
+}
+
+/* =========================================================
+SIDE MENU
+========================================================= */
+
+.menu-overlay{
+position:fixed;
+inset:0;
+z-index:9000;
+
+background:rgba(0,0,0,.72);
+
+opacity:0;
+visibility:hidden;
+
+transition:
+opacity .22s ease,
+visibility .22s ease;
+
+backdrop-filter:blur(2px);
+-webkit-backdrop-filter:blur(2px);
+}
+
+.menu-overlay.show{
+opacity:1;
+visibility:visible;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+left:0;
+bottom:0;
+
+z-index:9100;
+
+width:min(520px,90vw);
+max-width:520px;
+
+background:#f8f5ee;
+color:#111;
+
+overflow-y:auto;
+
+transform:translateX(-103%);
+transition:transform .28s ease;
+}
+
+.side-menu.open{
+transform:translateX(0);
+}
+
+.side-menu-head{
+position:sticky;
+top:0;
+z-index:5;
+
+height:88px;
+min-height:88px;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:16px 22px;
+
+background:#080808;
+color:#fff;
+}
+
+.side-menu-head h2{
+font-family:var(--serif);
+font-size:37px;
+font-weight:400;
+line-height:1;
+}
+
+.close-menu{
+width:45px;
+height:45px;
+
+border:0;
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:#fff;
+color:#111;
+
+font-size:29px;
+line-height:1;
+}
+
+.menu-tools{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+
+padding:15px;
+
+border-bottom:1px solid #d3cdc1;
+}
+
+.menu-tool{
+height:49px;
+
+border:2px solid #111;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:11px;
+font-weight:900;
+text-transform:uppercase;
+
+background:#fff;
+}
+
+.menu-tool.club{
+background:var(--green);
+border-color:var(--green);
+}
+
+.language-box{
+margin:0 15px 14px;
+padding:10px 13px 11px;
+
+border:2px solid #111;
+background:#fff;
+}
+
+.language-box label{
+display:block;
+
+margin-bottom:7px;
+
+font-size:9px;
+font-weight:900;
+letter-spacing:2px;
+color:#777;
+text-transform:uppercase;
+}
+
+.language-box select{
+width:100%;
+height:39px;
+
+border:0;
+outline:0;
+
+background:transparent;
+
+font-size:14px;
+font-weight:800;
+color:#111;
+}
+
+.menu-list{
+display:grid;
+gap:7px;
+
+padding:7px 15px 25px;
+}
+
+.menu-item{
+min-height:62px;
+
+display:flex;
+align-items:center;
+
+padding:0 18px;
+
+border:2px solid #111;
+background:#fff;
+
+font-family:var(--serif);
+font-size:21px;
+line-height:1.05;
+}
+
+.menu-item.active{
+background:#111;
+color:var(--gold-light);
+}
+
+/* =========================================================
+ISSUE CONTENT
+ORIGINAL CONTENT VISUALS PRESERVED
+========================================================= */
+
+.hero{
+max-width:1500px;
+margin:auto;
+padding:24px 18px;
+}
+
+.cover{
+position:relative;
+border-radius:40px;
+overflow:hidden;
+box-shadow:0 25px 75px rgba(0,0,0,.22);
+}
+
+.cover img{
+width:100%;
+display:block;
+}
+
+.cover-text{
+position:absolute;
+left:40px;
+right:40px;
+bottom:40px;
+
+color:white;
+text-shadow:0 4px 20px rgba(0,0,0,.7);
+}
+
+.cover-text span{
+display:inline-block;
+
+background:#c89b3c;
+
+padding:8px 14px;
+border-radius:999px;
+
+font-size:12px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.cover-text h1{
+font-family:Georgia,serif;
+font-size:72px;
+margin-bottom:12px;
+}
+
+.cover-text p{
+font-size:22px;
+line-height:1.6;
+max-width:850px;
+}
+
+.issue-intro{
+max-width:1000px;
+margin:70px auto;
+text-align:center;
+padding:0 22px;
+}
+
+.kicker{
+letter-spacing:3px;
+color:#b78a2e;
+font-size:13px;
+font-weight:bold;
+margin-bottom:18px;
+}
+
+.issue-intro h2{
+font-family:Georgia,serif;
+font-size:58px;
+margin-bottom:20px;
+}
+
+.issue-intro p{
+font-size:21px;
+line-height:1.8;
+color:#555;
+}
+
+.toc{
+max-width:1200px;
+margin:70px auto;
+padding:0 20px;
+}
+
+.toc h2{
+font-family:Georgia,serif;
+font-size:46px;
+text-align:center;
+margin-bottom:35px;
+}
+
+.toc-grid{
+display:grid;
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(230px,1fr)
+);
+gap:18px;
+}
+
+.toc-card{
+background:white;
+border:2px solid #111;
+border-radius:28px;
+padding:22px;
+text-align:center;
+}
+
+.toc-card span{
+color:#c89b3c;
+font-weight:bold;
+font-size:13px;
+}
+
+.toc-card h3{
+font-family:Georgia,serif;
+font-size:28px;
+margin-top:8px;
+}
+
+.page{
+max-width:1200px;
+margin:90px auto;
+padding:0 20px;
+}
+
+.editorial{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:35px;
+align-items:center;
+
+background:white;
+border:2px solid #111;
+border-radius:42px;
+
+overflow:hidden;
+
+box-shadow:0 16px 45px rgba(0,0,0,.08);
+}
+
+.editorial.reverse{
+direction:rtl;
+}
+
+.editorial.reverse .text{
+direction:ltr;
+}
+
+.editorial img{
+width:100%;
+height:620px;
+object-fit:cover;
+}
+
+.text{
+padding:38px;
+}
+
+.badge{
+display:inline-block;
+
+background:#c89b3c;
+color:white;
+
+padding:8px 14px;
+border-radius:999px;
+
+font-size:12px;
+font-weight:bold;
+margin-bottom:16px;
+}
+
+.text h2{
+font-family:Georgia,serif;
+font-size:50px;
+margin-bottom:18px;
+}
+
+.text p{
+font-size:18px;
+line-height:1.9;
+color:#444;
+margin-bottom:16px;
+}
+
+.quote{
+font-family:Georgia,serif;
+font-size:28px;
+color:#b78a2e;
+margin:24px 0;
+line-height:1.5;
+}
+
+.full-page{
+max-width:1400px;
+margin:90px auto;
+padding:0 20px;
+}
+
+.full-card{
+position:relative;
+
+border-radius:44px;
+overflow:hidden;
+
+min-height:650px;
+
+display:flex;
+align-items:flex-end;
+
+box-shadow:0 20px 60px rgba(0,0,0,.18);
+}
+
+.full-card img{
+position:absolute;
+inset:0;
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+}
+
+.full-card:after{
+content:"";
+
+position:absolute;
+inset:0;
+
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.9),
+rgba(0,0,0,.05)
+);
+}
+
+.full-content{
+position:relative;
+z-index:2;
+
+color:white;
+
+padding:45px;
+
+max-width:850px;
+}
+
+.full-content h2{
+font-family:Georgia,serif;
+font-size:64px;
+margin-bottom:18px;
+}
+
+.full-content p{
+font-size:21px;
+line-height:1.8;
+color:#eee;
+}
+
+.buttons{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+margin-top:24px;
+}
+
+.btn{
+display:inline-block;
+
+background:#111;
+color:white;
+
+padding:15px 22px;
+border-radius:999px;
+
+font-weight:bold;
+}
+
+.btn.gold{
+background:#c89b3c;
+}
+
+.shop-strip{
+max-width:1200px;
+margin:90px auto;
+padding:0 20px;
+}
+
+.shop-box{
+background:#111;
+color:white;
+
+border-radius:42px;
+
+padding:50px 30px;
+
+text-align:center;
+}
+
+.shop-box h2{
+font-family:Georgia,serif;
+font-size:50px;
+color:#d6aa45;
+margin-bottom:18px;
+}
+
+.shop-box p{
+font-size:20px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+}
+
+.shop-grid{
+display:grid;
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(220px,1fr)
+);
+
+gap:18px;
+margin-top:35px;
+}
+
+.shop-item{
+background:white;
+color:#111;
+
+border-radius:25px;
+padding:22px;
+
+font-weight:bold;
+}
+
+.final{
+max-width:1000px;
+margin:90px auto;
+text-align:center;
+padding:0 22px;
+}
+
+.final h2{
+font-family:Georgia,serif;
+font-size:56px;
+margin-bottom:18px;
+}
+
+.final p{
+font-size:21px;
+line-height:1.8;
+color:#555;
+margin-bottom:25px;
+}
+
+footer{
+margin-top:70px;
+
+padding:55px 20px;
+
+background:#050505;
+color:white;
+
+text-align:center;
+}
+
+footer h2{
+font-family:Georgia,serif;
+font-size:46px;
+margin-bottom:10px;
+}
+
+footer p{
+color:#ddd;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+gap:16px;
+flex-wrap:wrap;
+margin-top:22px;
+}
+
+.footer-links a{
+color:#ccc;
+font-size:14px;
+}
+
+.admin-small{
+display:block;
+
+margin-top:25px;
+
+color:#777;
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] body{
+text-align:right;
+}
+
+html[dir="rtl"] .side-menu{
+left:auto;
+right:0;
+transform:translateX(103%);
+}
+
+html[dir="rtl"] .side-menu.open{
+transform:translateX(0);
+}
+
+html[dir="rtl"] .editorial.reverse{
+direction:ltr;
+}
+
+html[dir="rtl"] .editorial.reverse .text{
+direction:rtl;
+}
+
+html[dir="rtl"] .editorial:not(.reverse) .text{
+direction:rtl;
+}
+
+html[dir="rtl"] .cover-text{
+direction:rtl;
+}
+
+html[dir="rtl"] .buttons{
+direction:rtl;
+}
+
+html[dir="rtl"] .footer-links{
+direction:rtl;
+}
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media(max-width:1000px){
+
+.header-main{
+height:84px;
+min-height:84px;
+grid-template-columns:54px minmax(0,1fr) 54px;
+padding:0 13px;
+}
+
+.brand-big{
+font-size:37px;
+}
+
+.brand-small{
+font-size:9px;
+}
+
+.home-button{
+width:42px;
+height:42px;
+}
+
+.home-button svg{
+width:29px;
+height:29px;
+}
+
+.primary-nav{
+height:48px;
+min-height:48px;
+}
+
+.primary-nav a{
+height:48px;
+padding:0 17px;
+font-size:11.5px;
+}
+
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
 
 @media(max-width:850px){
-.logo-big{font-size:34px}
-.back{font-size:12px;padding:10px 14px}
-.issue-label{display:none}
-.cover-text{position:static;background:#111;padding:28px;text-shadow:none}
-.cover-text h1{font-size:44px}
-.cover-text p{font-size:18px}
-.issue-intro h2{font-size:40px}
-.editorial,.editorial.reverse{grid-template-columns:1fr;direction:ltr}
-.editorial img{height:420px}
-.text h2{font-size:38px}
-.full-card{min-height:520px}
-.full-content{padding:30px}
-.full-content h2{font-size:42px}
+
+:root{
+--shell-header-height:78px;
+--shell-nav-height:46px;
+}
+
+/* MASTER HEADER */
+
+.site-header{
+position:sticky;
+top:0;
+}
+
+.header-main{
+height:78px !important;
+min-height:78px !important;
+
+grid-template-columns:
+48px
+minmax(0,1fr)
+48px !important;
+
+gap:5px;
+
+padding:
+0
+10px !important;
+}
+
+.menu-button{
+width:43px !important;
+height:43px !important;
+
+padding:7px 5px;
+gap:5px;
+}
+
+.menu-button span{
+height:2px;
+}
+
+.brand-small{
+font-size:8px !important;
+letter-spacing:1.65px !important;
+}
+
+.brand-big{
+font-size:31px !important;
+letter-spacing:1.8px !important;
+margin-top:5px !important;
+}
+
+.home-button{
+width:43px !important;
+height:43px !important;
+}
+
+.home-button svg{
+width:29px;
+height:29px;
+}
+
+.primary-nav{
+height:46px !important;
+min-height:46px !important;
+
+padding:0 3px !important;
+gap:0 !important;
+}
+
+.primary-nav a{
+height:46px !important;
+
+padding:
+0
+14px !important;
+
+font-size:10.5px !important;
+letter-spacing:.35px !important;
+}
+
+.primary-nav a.active:after{
+left:13px;
+right:13px;
+height:3px;
+}
+
+/* SIDE MENU */
+
+.side-menu{
+width:min(92vw,500px);
+}
+
+.side-menu-head{
+height:78px;
+min-height:78px;
+padding:14px 18px;
+}
+
+.side-menu-head h2{
+font-size:33px;
+}
+
+.close-menu{
+width:42px;
+height:42px;
+font-size:27px;
+}
+
+/* ORIGINAL ISSUE CONTENT */
+
+.hero{
+padding:16px 12px 22px;
+}
+
+.cover{
+border-radius:26px;
+}
+
+.cover-text{
+position:static;
+background:#111;
+padding:28px;
+text-shadow:none;
+}
+
+.cover-text h1{
+font-size:44px;
+}
+
+.cover-text p{
+font-size:18px;
+}
+
+.issue-intro h2{
+font-size:40px;
+}
+
+.editorial,
+.editorial.reverse{
+grid-template-columns:1fr;
+direction:ltr;
+}
+
+.editorial img{
+height:420px;
+}
+
+.text h2{
+font-size:38px;
+}
+
+.full-card{
+min-height:520px;
+}
+
+.full-content{
+padding:30px;
+}
+
+.full-content h2{
+font-size:42px;
+}
+
+}
+
+/* =========================================================
+SMALL MOBILE
+========================================================= */
+
+@media(max-width:390px){
+
+.header-main{
+grid-template-columns:
+45px
+minmax(0,1fr)
+45px !important;
+
+padding-left:8px !important;
+padding-right:8px !important;
+}
+
+.brand-big{
+font-size:29px !important;
+}
+
+.primary-nav a{
+padding-left:12px !important;
+padding-right:12px !important;
+font-size:10px !important;
+}
+
+.cover-text{
+padding:24px 22px;
+}
+
+.cover-text h1{
+font-size:39px;
+}
+
+.cover-text p{
+font-size:16px;
+}
+
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="top">
+<div
+class="menu-overlay"
+id="menuOverlay"
+></div>
 
-<a href="index.html" class="back" data-i18n="issue01.header.home">
-← Home
-</a>
+<aside
+class="side-menu"
+id="sideMenu"
+>
 
-<a href="index.html" class="logo">
-<div class="logo-small">pets &</div>
-<div class="logo-big">DOGUE</div>
-</a>
+<div class="side-menu-head">
 
-<div class="issue-label" data-i18n="issue01.header.issue">
-ISSUE 01
+<h2 id="shellMenuTitle">
+Contents
+</h2>
+
+<button
+class="close-menu"
+id="closeMenuButton"
+type="button"
+aria-label="Close menu"
+>
+×
+</button>
+
 </div>
 
+<div class="menu-tools">
+
+<a
+class="menu-tool"
+href="account.html"
+id="shellProfile"
+>
+PROFILE
+</a>
+
+<a
+class="menu-tool club"
+href="club.html"
+id="shellSubscribe"
+>
+SUBSCRIBE
+</a>
+
 </div>
+
+<div class="language-box">
+
+<label id="shellLanguageLabel">
+LANGUAGE
+</label>
+
+<select id="shellLanguageSelect">
+
+<option value="en">🇬🇧 EN — English</option>
+<option value="uk">🇺🇦 UA — Українська</option>
+<option value="ru">🇷🇺 RU — Русский</option>
+<option value="fr">🇫🇷 FR — Français</option>
+<option value="de">🇩🇪 DE — Deutsch</option>
+<option value="es">🇪🇸 ES — Español</option>
+<option value="it">🇮🇹 IT — Italiano</option>
+<option value="pt">🇵🇹 PT — Português</option>
+<option value="nl">🇳🇱 NL — Nederlands</option>
+<option value="pl">🇵🇱 PL — Polski</option>
+<option value="cs">🇨🇿 CZ — Čeština</option>
+<option value="sk">🇸🇰 SK — Slovenčina</option>
+<option value="hu">🇭🇺 HU — Magyar</option>
+<option value="ro">🇷🇴 RO — Română</option>
+<option value="bg">🇧🇬 BG — Български</option>
+<option value="el">🇬🇷 GR — Ελληνικά</option>
+<option value="sv">🇸🇪 SE — Svenska</option>
+<option value="da">🇩🇰 DK — Dansk</option>
+<option value="no">🇳🇴 NO — Norsk</option>
+<option value="fi">🇫🇮 FI — Suomi</option>
+<option value="tr">🇹🇷 TR — Türkçe</option>
+<option value="ar">🇸🇦 AR — العربية</option>
+<option value="hi">🇮🇳 HI — हिन्दी</option>
+
+</select>
+
+</div>
+
+<nav
+class="menu-list"
+id="shellMenuList"
+></nav>
+
+</aside>
+
+<header class="site-header">
+
+<div class="header-main">
+
+<button
+class="menu-button"
+id="menuButton"
+type="button"
+aria-label="Open menu"
+>
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+<a
+class="brand notranslate"
+translate="no"
+href="index.html"
+>
+
+<div class="brand-small">
+PETS &amp;
+</div>
+
+<div class="brand-big">
+DOGUE
+</div>
+
+</a>
+
+<a
+class="home-button"
+href="index.html"
+aria-label="Home"
+>
+
+<svg
+viewBox="0 0 32 32"
+aria-hidden="true"
+>
+<path d="M4 14.5 16 4l12 10.5"></path>
+<path d="M7 13v15h18V13"></path>
+<path d="M13 28V18h6v10"></path>
+</svg>
+
+</a>
+
+</div>
+
+<nav
+class="primary-nav"
+id="primaryNav"
+></nav>
+
 </header>
 
 
@@ -137,9 +1300,9 @@ ISSUE 01
 <div class="cover">
 
 <img
-  src="file_00000000a9d471fda9b4629589be22a9.png"
-  alt="PETS & DOGUE Issue 01"
-  data-i18n-attr="alt:issue01.hero.imageAlt"
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="PETS & DOGUE Issue 01"
+data-i18n-attr="alt:issue01.hero.imageAlt"
 >
 
 <div class="cover-text">
@@ -163,7 +1326,10 @@ The debut luxury animal issue starring Miso, cover stars, summer style, travel, 
 
 <section class="issue-intro">
 
-<div class="kicker" data-i18n="issue01.intro.kicker">
+<div
+class="kicker"
+data-i18n="issue01.intro.kicker"
+>
 THE DEBUT ISSUE
 </div>
 
@@ -188,32 +1354,44 @@ Inside This Issue
 
 <div class="toc-card">
 <span>01</span>
-<h3 data-i18n="issue01.toc.editorLetter">Editor’s Letter</h3>
+<h3 data-i18n="issue01.toc.editorLetter">
+Editor’s Letter
+</h3>
 </div>
 
 <div class="toc-card">
 <span>02</span>
-<h3 data-i18n="issue01.toc.miso">Miso Cover Story</h3>
+<h3 data-i18n="issue01.toc.miso">
+Miso Cover Story
+</h3>
 </div>
 
 <div class="toc-card">
 <span>03</span>
-<h3 data-i18n="issue01.toc.summer">Icons Of Summer</h3>
+<h3 data-i18n="issue01.toc.summer">
+Icons Of Summer
+</h3>
 </div>
 
 <div class="toc-card">
 <span>04</span>
-<h3 data-i18n="issue01.toc.fashion">Pet Fashion</h3>
+<h3 data-i18n="issue01.toc.fashion">
+Pet Fashion
+</h3>
 </div>
 
 <div class="toc-card">
 <span>05</span>
-<h3 data-i18n="issue01.toc.travelWellness">Travel & Wellness</h3>
+<h3 data-i18n="issue01.toc.travelWellness">
+Travel & Wellness
+</h3>
 </div>
 
 <div class="toc-card">
 <span>06</span>
-<h3 data-i18n="issue01.toc.community">Community</h3>
+<h3 data-i18n="issue01.toc.community">
+Community
+</h3>
 </div>
 
 </div>
@@ -224,13 +1402,16 @@ Inside This Issue
 <div class="editorial">
 
 <img
-  src="file_00000000a9d471fda9b4629589be22a9.png"
-  alt="Miso"
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Miso"
 >
 
 <div class="text">
 
-<span class="badge" data-i18n="issue01.editor.badge">
+<span
+class="badge"
+data-i18n="issue01.editor.badge"
+>
 EDITOR’S LETTER
 </span>
 
@@ -246,7 +1427,10 @@ This magazine was created for people who see animals not as accessories, but as 
 Our first issue celebrates summer, elegance, rescue, community and the idea that every animal can become unforgettable.
 </p>
 
-<div class="quote" data-i18n="issue01.editor.quote">
+<div
+class="quote"
+data-i18n="issue01.editor.quote"
+>
 “A luxury magazine for every extraordinary pet.”
 </div>
 
@@ -263,14 +1447,17 @@ From cover stars to local communities, PETS & DOGUE is more than a magazine. It 
 <div class="full-card">
 
 <img
-  src="file_00000000a9d471fda9b4629589be22a9.png"
-  alt="Miso Cover Star"
-  data-i18n-attr="alt:issue01.cover.imageAlt"
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="Miso Cover Star"
+data-i18n-attr="alt:issue01.cover.imageAlt"
 >
 
 <div class="full-content">
 
-<span class="badge" data-i18n="issue01.cover.badge">
+<span
+class="badge"
+data-i18n="issue01.cover.badge"
+>
 COVER STORY
 </span>
 
@@ -285,17 +1472,17 @@ Miso is the face of Issue 01 — soft, glamorous, playful and unforgettable. She
 <div class="buttons">
 
 <a
-  href="cover-stars.html"
-  class="btn gold"
-  data-i18n="issue01.cover.viewStars"
+href="cover-stars.html"
+class="btn gold"
+data-i18n="issue01.cover.viewStars"
 >
 View Cover Stars
 </a>
 
 <a
-  href="become-cover-star.html"
-  class="btn"
-  data-i18n="issue01.cover.becomeStar"
+href="become-cover-star.html"
+class="btn"
+data-i18n="issue01.cover.becomeStar"
 >
 Become A Cover Star
 </a>
@@ -310,14 +1497,17 @@ Become A Cover Star
 <div class="editorial reverse">
 
 <img
-  src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
-  alt="Pet Fashion"
-  data-i18n-attr="alt:issue01.fashion.imageAlt"
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
+alt="Pet Fashion"
+data-i18n-attr="alt:issue01.fashion.imageAlt"
 >
 
 <div class="text">
 
-<span class="badge" data-i18n="issue01.fashion.badge">
+<span
+class="badge"
+data-i18n="issue01.fashion.badge"
+>
 PET FASHION
 </span>
 
@@ -336,17 +1526,17 @@ Issue 01 introduces a world of bows, collars, carriers, soft textures and luxury
 <div class="buttons">
 
 <a
-  href="pet-fashion.html"
-  class="btn gold"
-  data-i18n="issue01.fashion.explore"
+href="pet-fashion.html"
+class="btn gold"
+data-i18n="issue01.fashion.explore"
 >
 Explore Fashion
 </a>
 
 <a
-  href="partners.html"
-  class="btn"
-  data-i18n="issue01.fashion.partners"
+href="partners.html"
+class="btn"
+data-i18n="issue01.fashion.partners"
 >
 Shop Partners
 </a>
@@ -361,14 +1551,17 @@ Shop Partners
 <div class="editorial">
 
 <img
-  src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-  alt="Pet Travel"
-  data-i18n-attr="alt:issue01.travel.imageAlt"
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+alt="Pet Travel"
+data-i18n-attr="alt:issue01.travel.imageAlt"
 >
 
 <div class="text">
 
-<span class="badge" data-i18n="issue01.travel.badge">
+<span
+class="badge"
+data-i18n="issue01.travel.badge"
+>
 TRAVEL
 </span>
 
@@ -387,17 +1580,17 @@ Future PETS & DOGUE issues will explore hotels, cafés, beaches, villas and dest
 <div class="buttons">
 
 <a
-  href="pet-travel.html"
-  class="btn gold"
-  data-i18n="issue01.travel.guide"
+href="pet-travel.html"
+class="btn gold"
+data-i18n="issue01.travel.guide"
 >
 Travel Guide
 </a>
 
 <a
-  href="pet-friendly-places.html"
-  class="btn"
-  data-i18n="issue01.travel.places"
+href="pet-friendly-places.html"
+class="btn"
+data-i18n="issue01.travel.places"
 >
 Friendly Places
 </a>
@@ -412,14 +1605,17 @@ Friendly Places
 <div class="editorial reverse">
 
 <img
-  src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80"
-  alt="Pets In Need"
-  data-i18n-attr="alt:issue01.rescue.imageAlt"
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80"
+alt="Pets In Need"
+data-i18n-attr="alt:issue01.rescue.imageAlt"
 >
 
 <div class="text">
 
-<span class="badge" data-i18n="issue01.rescue.badge">
+<span
+class="badge"
+data-i18n="issue01.rescue.badge"
+>
 PETS IN NEED
 </span>
 
@@ -438,17 +1634,17 @@ The future of this magazine includes rescue stories, volunteer networks and loca
 <div class="buttons">
 
 <a
-  href="pets-in-need.html"
-  class="btn gold"
-  data-i18n="issue01.rescue.help"
+href="pets-in-need.html"
+class="btn gold"
+data-i18n="issue01.rescue.help"
 >
 Help Animals
 </a>
 
 <a
-  href="volunteer-network.html"
-  class="btn"
-  data-i18n="issue01.rescue.volunteer"
+href="volunteer-network.html"
+class="btn"
+data-i18n="issue01.rescue.volunteer"
 >
 Volunteer
 </a>
@@ -472,27 +1668,45 @@ Future PETS & DOGUE issues will include partner shopping links, member discounts
 
 <div class="shop-grid">
 
-<div class="shop-item" data-i18n="issue01.shop.collars">
+<div
+class="shop-item"
+data-i18n="issue01.shop.collars"
+>
 Luxury Collars
 </div>
 
-<div class="shop-item" data-i18n="issue01.shop.fashion">
+<div
+class="shop-item"
+data-i18n="issue01.shop.fashion"
+>
 Pet Fashion
 </div>
 
-<div class="shop-item" data-i18n="issue01.shop.travelAccessories">
+<div
+class="shop-item"
+data-i18n="issue01.shop.travelAccessories"
+>
 Travel Accessories
 </div>
 
-<div class="shop-item" data-i18n="issue01.shop.grooming">
+<div
+class="shop-item"
+data-i18n="issue01.shop.grooming"
+>
 Grooming Offers
 </div>
 
-<div class="shop-item" data-i18n="issue01.shop.hotels">
+<div
+class="shop-item"
+data-i18n="issue01.shop.hotels"
+>
 Pet-Friendly Hotels
 </div>
 
-<div class="shop-item" data-i18n="issue01.shop.discounts">
+<div
+class="shop-item"
+data-i18n="issue01.shop.discounts"
+>
 Member Discounts
 </div>
 
@@ -501,9 +1715,9 @@ Member Discounts
 <br><br>
 
 <a
-  href="partners.html"
-  class="btn gold"
-  data-i18n="issue01.shop.viewOffers"
+href="partners.html"
+class="btn gold"
+data-i18n="issue01.shop.viewOffers"
 >
 View Partner Offers
 </a>
@@ -522,36 +1736,39 @@ Continue The Issue
 Discover photos, articles, contests, local community posts, club benefits and future PETS & DOGUE cover stars.
 </p>
 
-<div class="buttons" style="justify-content:center;">
+<div
+class="buttons"
+style="justify-content:center;"
+>
 
 <a
-  href="photos.html"
-  class="btn gold"
-  data-i18n="issue01.final.photos"
+href="photos.html"
+class="btn gold"
+data-i18n="issue01.final.photos"
 >
 Photos
 </a>
 
 <a
-  href="articles.html"
-  class="btn"
-  data-i18n="issue01.final.articles"
+href="articles.html"
+class="btn"
+data-i18n="issue01.final.articles"
 >
 Articles
 </a>
 
 <a
-  href="contests.html"
-  class="btn"
-  data-i18n="issue01.final.contests"
+href="contests.html"
+class="btn"
+data-i18n="issue01.final.contests"
 >
 Contests
 </a>
 
 <a
-  href="club.html"
-  class="btn"
-  data-i18n="issue01.final.joinClub"
+href="club.html"
+class="btn"
+data-i18n="issue01.final.joinClub"
 >
 Join Club
 </a>
@@ -562,7 +1779,9 @@ Join Club
 
 <footer>
 
-<h2>PETS & DOGUE</h2>
+<h2>
+PETS & DOGUE
+</h2>
 
 <p data-i18n="common.footer.subtitle">
 The International Luxury Animal Magazine
@@ -570,36 +1789,54 @@ The International Luxury Animal Magazine
 
 <div class="footer-links">
 
-<a href="index.html" data-i18n="common.footer.home">
+<a
+href="index.html"
+data-i18n="common.footer.home"
+>
 Home
 </a>
 
-<a href="archive.html" data-i18n="issue01.footer.archive">
+<a
+href="archive.html"
+data-i18n="issue01.footer.archive"
+>
 Archive
 </a>
 
-<a href="issue-02.html" data-i18n="issue01.footer.issue02">
+<a
+href="issue-02.html"
+data-i18n="issue01.footer.issue02"
+>
 Issue 02
 </a>
 
-<a href="privacy.html" data-i18n="common.footer.privacy">
+<a
+href="privacy.html"
+data-i18n="common.footer.privacy"
+>
 Privacy
 </a>
 
-<a href="terms.html" data-i18n="common.footer.terms">
+<a
+href="terms.html"
+data-i18n="common.footer.terms"
+>
 Terms
 </a>
 
-<a href="contact.html" data-i18n="common.footer.contact">
+<a
+href="contact.html"
+data-i18n="common.footer.contact"
+>
 Contact
 </a>
 
 </div>
 
 <a
-  href="admin.html"
-  class="admin-small"
-  data-i18n="common.footer.admin"
+href="admin.html"
+class="admin-small"
+data-i18n="common.footer.admin"
 >
 Admin
 </a>
@@ -611,6 +1848,847 @@ Admin
 <script src="i18n/common.js"></script>
 <script src="i18n/issue-01.js"></script>
 <script src="i18n/engine.js"></script>
+
+<script>
+"use strict";
+
+/* =========================================================
+PETS & DOGUE MASTER SHELL FOR ISSUE 01
+
+ONLY GLOBAL VISUAL/NAVIGATION SHELL.
+ISSUE CONTENT AND EXISTING I18N REMAIN UNCHANGED.
+========================================================= */
+
+const SHELL_LANGUAGE_KEY =
+"pets_dogue_language";
+
+const SHELL_NAV_ITEMS = [
+
+{
+key:"magazine",
+url:"issue-01.html"
+},
+
+{
+key:"coverStars",
+url:"members-gallery.html"
+},
+
+{
+key:"offers",
+url:"special-offers.html"
+},
+
+{
+key:"places",
+url:"pet-friendly-places.html"
+},
+
+{
+key:"articles",
+url:"articles.html"
+},
+
+{
+key:"photos",
+url:"photos.html"
+},
+
+{
+key:"travel",
+url:"pet-travel.html"
+},
+
+{
+key:"fashion",
+url:"pet-fashion.html"
+},
+
+{
+key:"wellness",
+url:"wellness.html"
+},
+
+{
+key:"community",
+url:"local-community.html"
+},
+
+{
+key:"contests",
+url:"contests.html"
+},
+
+{
+key:"rescue",
+url:"pets-in-need.html"
+},
+
+{
+key:"marketplace",
+url:"pet-marketplace.html"
+},
+
+{
+key:"partners",
+url:"partners.html"
+}
+
+];
+
+const SHELL_T = {
+
+en:{
+menu:"Contents",
+profile:"Profile",
+subscribe:"Subscribe",
+language:"Language",
+nav:{
+magazine:"Magazine",
+coverStars:"Cover Stars",
+offers:"Discounts",
+places:"Pet-Friendly Welcome",
+articles:"Articles",
+photos:"Photos",
+travel:"Travel",
+fashion:"Fashion",
+wellness:"Health",
+community:"Community",
+contests:"Contests",
+rescue:"Help",
+marketplace:"Marketplace",
+partners:"Partners"
+}
+},
+
+uk:{
+menu:"Зміст",
+profile:"Профіль",
+subscribe:"Підписка",
+language:"Мова",
+nav:{
+magazine:"Журнал",
+coverStars:"Зірки обкладинки",
+offers:"Знижки",
+places:"Улюбленцям раді",
+articles:"Статті",
+photos:"Фото",
+travel:"Подорожі",
+fashion:"Мода",
+wellness:"Здоров’я",
+community:"Спільнота",
+contests:"Конкурси",
+rescue:"Допомога",
+marketplace:"Маркетплейс",
+partners:"Партнери"
+}
+},
+
+ru:{
+menu:"Содержание",
+profile:"Профиль",
+subscribe:"Подписка",
+language:"Язык",
+nav:{
+magazine:"Журнал",
+coverStars:"Звёзды обложки",
+offers:"Скидки",
+places:"Питомцам рады",
+articles:"Статьи",
+photos:"Фото",
+travel:"Путешествия",
+fashion:"Мода",
+wellness:"Здоровье",
+community:"Сообщество",
+contests:"Конкурсы",
+rescue:"Помощь",
+marketplace:"Маркетплейс",
+partners:"Партнёры"
+}
+},
+
+fr:{
+menu:"Sommaire",
+profile:"Profil",
+subscribe:"Abonnement",
+language:"Langue",
+nav:{
+magazine:"Magazine",
+coverStars:"Stars de couverture",
+offers:"Réductions",
+places:"Animaux bienvenus",
+articles:"Articles",
+photos:"Photos",
+travel:"Voyages",
+fashion:"Mode",
+wellness:"Santé",
+community:"Communauté",
+contests:"Concours",
+rescue:"Aide",
+marketplace:"Marketplace",
+partners:"Partenaires"
+}
+},
+
+de:{
+menu:"Inhalt",
+profile:"Profil",
+subscribe:"Abo",
+language:"Sprache",
+nav:{
+magazine:"Magazin",
+coverStars:"Cover Stars",
+offers:"Rabatte",
+places:"Tiere willkommen",
+articles:"Artikel",
+photos:"Fotos",
+travel:"Reisen",
+fashion:"Mode",
+wellness:"Gesundheit",
+community:"Community",
+contests:"Wettbewerbe",
+rescue:"Hilfe",
+marketplace:"Marktplatz",
+partners:"Partner"
+}
+},
+
+es:{
+menu:"Contenido",
+profile:"Perfil",
+subscribe:"Suscripción",
+language:"Idioma",
+nav:{
+magazine:"Revista",
+coverStars:"Estrellas de portada",
+offers:"Descuentos",
+places:"Mascotas bienvenidas",
+articles:"Artículos",
+photos:"Fotos",
+travel:"Viajes",
+fashion:"Moda",
+wellness:"Salud",
+community:"Comunidad",
+contests:"Concursos",
+rescue:"Ayuda",
+marketplace:"Marketplace",
+partners:"Socios"
+}
+},
+
+it:{
+menu:"Contenuti",
+profile:"Profilo",
+subscribe:"Abbonamento",
+language:"Lingua",
+nav:{
+magazine:"Rivista",
+coverStars:"Cover Star",
+offers:"Sconti",
+places:"Animali benvenuti",
+articles:"Articoli",
+photos:"Foto",
+travel:"Viaggi",
+fashion:"Moda",
+wellness:"Salute",
+community:"Community",
+contests:"Concorsi",
+rescue:"Aiuto",
+marketplace:"Marketplace",
+partners:"Partner"
+}
+},
+
+pt:{
+menu:"Conteúdo",
+profile:"Perfil",
+subscribe:"Assinatura",
+language:"Idioma",
+nav:{
+magazine:"Revista",
+coverStars:"Estrelas da capa",
+offers:"Descontos",
+places:"Animais bem-vindos",
+articles:"Artigos",
+photos:"Fotos",
+travel:"Viagens",
+fashion:"Moda",
+wellness:"Saúde",
+community:"Comunidade",
+contests:"Concursos",
+rescue:"Ajuda",
+marketplace:"Marketplace",
+partners:"Parceiros"
+}
+},
+
+nl:{
+menu:"Inhoud",
+profile:"Profiel",
+subscribe:"Abonnement",
+language:"Taal",
+nav:{
+magazine:"Magazine",
+coverStars:"Coversterren",
+offers:"Kortingen",
+places:"Huisdieren welkom",
+articles:"Artikelen",
+photos:"Foto's",
+travel:"Reizen",
+fashion:"Mode",
+wellness:"Gezondheid",
+community:"Community",
+contests:"Wedstrijden",
+rescue:"Hulp",
+marketplace:"Marktplaats",
+partners:"Partners"
+}
+},
+
+pl:{
+menu:"Spis treści",
+profile:"Profil",
+subscribe:"Subskrypcja",
+language:"Język",
+nav:{
+magazine:"Magazyn",
+coverStars:"Gwiazdy okładki",
+offers:"Zniżki",
+places:"Pupile mile widziane",
+articles:"Artykuły",
+photos:"Zdjęcia",
+travel:"Podróże",
+fashion:"Moda",
+wellness:"Zdrowie",
+community:"Społeczność",
+contests:"Konkursy",
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partnerzy"
+}
+},
+
+cs:{
+menu:"Obsah",
+profile:"Profil",
+subscribe:"Předplatné",
+language:"Jazyk",
+nav:{
+magazine:"Magazín",
+coverStars:"Hvězdy obálky",
+offers:"Slevy",
+places:"Mazlíčci vítáni",
+articles:"Články",
+photos:"Fotografie",
+travel:"Cestování",
+fashion:"Móda",
+wellness:"Zdraví",
+community:"Komunita",
+contests:"Soutěže",
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partneři"
+}
+},
+
+sk:{
+menu:"Obsah",
+profile:"Profil",
+subscribe:"Predplatné",
+language:"Jazyk",
+nav:{
+magazine:"Magazín",
+coverStars:"Hviezdy obálky",
+offers:"Zľavy",
+places:"Miláčikovia vítaní",
+articles:"Články",
+photos:"Fotografie",
+travel:"Cestovanie",
+fashion:"Móda",
+wellness:"Zdravie",
+community:"Komunita",
+contests:"Súťaže",
+rescue:"Pomoc",
+marketplace:"Marketplace",
+partners:"Partneri"
+}
+},
+
+hu:{
+menu:"Tartalom",
+profile:"Profil",
+subscribe:"Előfizetés",
+language:"Nyelv",
+nav:{
+magazine:"Magazin",
+coverStars:"Címlapsztárok",
+offers:"Kedvezmények",
+places:"Állatbarát",
+articles:"Cikkek",
+photos:"Fotók",
+travel:"Utazás",
+fashion:"Divat",
+wellness:"Egészség",
+community:"Közösség",
+contests:"Versenyek",
+rescue:"Segítség",
+marketplace:"Piactér",
+partners:"Partnerek"
+}
+},
+
+ro:{
+menu:"Conținut",
+profile:"Profil",
+subscribe:"Abonament",
+language:"Limbă",
+nav:{
+magazine:"Revistă",
+coverStars:"Vedete de copertă",
+offers:"Reduceri",
+places:"Animale binevenite",
+articles:"Articole",
+photos:"Fotografii",
+travel:"Călătorii",
+fashion:"Modă",
+wellness:"Sănătate",
+community:"Comunitate",
+contests:"Concursuri",
+rescue:"Ajutor",
+marketplace:"Marketplace",
+partners:"Parteneri"
+}
+},
+
+bg:{
+menu:"Съдържание",
+profile:"Профил",
+subscribe:"Абонамент",
+language:"Език",
+nav:{
+magazine:"Списание",
+coverStars:"Звезди на корицата",
+offers:"Отстъпки",
+places:"Любимци добре дошли",
+articles:"Статии",
+photos:"Снимки",
+travel:"Пътувания",
+fashion:"Мода",
+wellness:"Здраве",
+community:"Общност",
+contests:"Конкурси",
+rescue:"Помощ",
+marketplace:"Маркетплейс",
+partners:"Партньори"
+}
+},
+
+el:{
+menu:"Περιεχόμενα",
+profile:"Προφίλ",
+subscribe:"Συνδρομή",
+language:"Γλώσσα",
+nav:{
+magazine:"Περιοδικό",
+coverStars:"Αστέρια εξωφύλλου",
+offers:"Εκπτώσεις",
+places:"Κατοικίδια ευπρόσδεκτα",
+articles:"Άρθρα",
+photos:"Φωτογραφίες",
+travel:"Ταξίδια",
+fashion:"Μόδα",
+wellness:"Υγεία",
+community:"Κοινότητα",
+contests:"Διαγωνισμοί",
+rescue:"Βοήθεια",
+marketplace:"Marketplace",
+partners:"Συνεργάτες"
+}
+},
+
+sv:{
+menu:"Innehåll",
+profile:"Profil",
+subscribe:"Prenumeration",
+language:"Språk",
+nav:{
+magazine:"Magasin",
+coverStars:"Omslagsstjärnor",
+offers:"Rabatter",
+places:"Husdjur välkomna",
+articles:"Artiklar",
+photos:"Foton",
+travel:"Resor",
+fashion:"Mode",
+wellness:"Hälsa",
+community:"Community",
+contests:"Tävlingar",
+rescue:"Hjälp",
+marketplace:"Marknadsplats",
+partners:"Partners"
+}
+},
+
+da:{
+menu:"Indhold",
+profile:"Profil",
+subscribe:"Abonnement",
+language:"Sprog",
+nav:{
+magazine:"Magasin",
+coverStars:"Forsidestjerner",
+offers:"Rabatter",
+places:"Kæledyr velkomne",
+articles:"Artikler",
+photos:"Fotos",
+travel:"Rejser",
+fashion:"Mode",
+wellness:"Sundhed",
+community:"Community",
+contests:"Konkurrencer",
+rescue:"Hjælp",
+marketplace:"Marketplace",
+partners:"Partnere"
+}
+},
+
+no:{
+menu:"Innhold",
+profile:"Profil",
+subscribe:"Abonnement",
+language:"Språk",
+nav:{
+magazine:"Magasin",
+coverStars:"Forsidestjerner",
+offers:"Rabatter",
+places:"Kjæledyr velkomne",
+articles:"Artikler",
+photos:"Bilder",
+travel:"Reiser",
+fashion:"Mote",
+wellness:"Helse",
+community:"Fellesskap",
+contests:"Konkurranser",
+rescue:"Hjelp",
+marketplace:"Markedsplass",
+partners:"Partnere"
+}
+},
+
+fi:{
+menu:"Sisältö",
+profile:"Profiili",
+subscribe:"Tilaus",
+language:"Kieli",
+nav:{
+magazine:"Lehti",
+coverStars:"Kansitähdet",
+offers:"Alennukset",
+places:"Lemmikit tervetulleita",
+articles:"Artikkelit",
+photos:"Kuvat",
+travel:"Matkailu",
+fashion:"Muoti",
+wellness:"Terveys",
+community:"Yhteisö",
+contests:"Kilpailut",
+rescue:"Apu",
+marketplace:"Marketplace",
+partners:"Kumppanit"
+}
+},
+
+tr:{
+menu:"İçindekiler",
+profile:"Profil",
+subscribe:"Abonelik",
+language:"Dil",
+nav:{
+magazine:"Dergi",
+coverStars:"Kapak yıldızları",
+offers:"İndirimler",
+places:"Evcil hayvanlar hoş geldi",
+articles:"Makaleler",
+photos:"Fotoğraflar",
+travel:"Seyahat",
+fashion:"Moda",
+wellness:"Sağlık",
+community:"Topluluk",
+contests:"Yarışmalar",
+rescue:"Yardım",
+marketplace:"Pazar",
+partners:"Ortaklar"
+}
+},
+
+ar:{
+menu:"المحتويات",
+profile:"الملف الشخصي",
+subscribe:"الاشتراك",
+language:"اللغة",
+nav:{
+magazine:"المجلة",
+coverStars:"نجوم الغلاف",
+offers:"الخصومات",
+places:"الحيوانات مرحب بها",
+articles:"المقالات",
+photos:"الصور",
+travel:"السفر",
+fashion:"الموضة",
+wellness:"الصحة",
+community:"المجتمع",
+contests:"المسابقات",
+rescue:"المساعدة",
+marketplace:"السوق",
+partners:"الشركاء"
+}
+},
+
+hi:{
+menu:"सामग्री",
+profile:"प्रोफ़ाइल",
+subscribe:"सदस्यता",
+language:"भाषा",
+nav:{
+magazine:"पत्रिका",
+coverStars:"कवर स्टार",
+offers:"छूट",
+places:"पालतू जानवरों का स्वागत है",
+articles:"लेख",
+photos:"फ़ोटो",
+travel:"यात्रा",
+fashion:"फ़ैशन",
+wellness:"स्वास्थ्य",
+community:"समुदाय",
+contests:"प्रतियोगिताएँ",
+rescue:"मदद",
+marketplace:"मार्केटप्लेस",
+partners:"पार्टनर"
+}
+}
+
+};
+
+function getShellLanguage(){
+
+const saved =
+localStorage.getItem(
+SHELL_LANGUAGE_KEY
+) ||
+document.documentElement.lang ||
+"en";
+
+return SHELL_T[saved]
+? saved
+: "en";
+
+}
+
+function renderShell(){
+
+const language =
+getShellLanguage();
+
+const tr =
+SHELL_T[language];
+
+document.getElementById(
+"shellMenuTitle"
+).textContent =
+tr.menu;
+
+document.getElementById(
+"shellProfile"
+).textContent =
+tr.profile;
+
+document.getElementById(
+"shellSubscribe"
+).textContent =
+tr.subscribe;
+
+document.getElementById(
+"shellLanguageLabel"
+).textContent =
+tr.language;
+
+document.getElementById(
+"shellLanguageSelect"
+).value =
+language;
+
+const primaryNav =
+document.getElementById(
+"primaryNav"
+);
+
+primaryNav.innerHTML =
+SHELL_NAV_ITEMS
+.map(
+item => `
+<a
+href="${item.url}"
+data-shell-nav="${item.key}"
+class="${item.key === "magazine" ? "active" : ""}"
+${item.key === "magazine" ? 'aria-current="page"' : ""}
+>
+${tr.nav[item.key]}
+</a>
+`
+)
+.join("");
+
+document.getElementById(
+"shellMenuList"
+).innerHTML =
+SHELL_NAV_ITEMS
+.map(
+item => `
+<a
+class="menu-item ${item.key === "magazine" ? "active" : ""}"
+href="${item.url}"
+>
+${tr.nav[item.key]}
+</a>
+`
+)
+.join("");
+
+requestAnimationFrame(
+()=>{
+
+const active =
+primaryNav.querySelector(
+".active"
+);
+
+if(
+active
+){
+
+active.scrollIntoView({
+behavior:"auto",
+block:"nearest",
+inline:"center"
+});
+
+}
+
+}
+);
+
+}
+
+function openShellMenu(){
+
+document.getElementById(
+"sideMenu"
+).classList.add(
+"open"
+);
+
+document.getElementById(
+"menuOverlay"
+).classList.add(
+"show"
+);
+
+document.body.classList.add(
+"menu-open"
+);
+
+}
+
+function closeShellMenu(){
+
+document.getElementById(
+"sideMenu"
+).classList.remove(
+"open"
+);
+
+document.getElementById(
+"menuOverlay"
+).classList.remove(
+"show"
+);
+
+document.body.classList.remove(
+"menu-open"
+);
+
+}
+
+document.getElementById(
+"menuButton"
+).addEventListener(
+"click",
+openShellMenu
+);
+
+document.getElementById(
+"closeMenuButton"
+).addEventListener(
+"click",
+closeShellMenu
+);
+
+document.getElementById(
+"menuOverlay"
+).addEventListener(
+"click",
+closeShellMenu
+);
+
+document.getElementById(
+"shellLanguageSelect"
+).addEventListener(
+"change",
+event =>{
+
+localStorage.setItem(
+SHELL_LANGUAGE_KEY,
+event.target.value
+);
+
+location.reload();
+
+}
+);
+
+document.addEventListener(
+"keydown",
+event =>{
+
+if(
+event.key === "Escape"
+){
+
+closeShellMenu();
+
+}
+
+}
+);
+
+window.addEventListener(
+"storage",
+event =>{
+
+if(
+event.key === SHELL_LANGUAGE_KEY
+){
+
+renderShell();
+
+}
+
+}
+);
+
+renderShell();
+
+</script>
 
 </body>
 </html>
