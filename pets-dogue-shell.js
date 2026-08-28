@@ -1,79 +1,43 @@
 "use strict";
 
 /* =========================================================
-PETS & DOGUE
-MASTER GLOBAL SHELL
-
-FINAL AGREED STRUCTURE
+PETS & DOGUE — MASTER GLOBAL SHELL
 
 ONE SOURCE OF TRUTH FOR:
-- HEADER
-- HORIZONTAL RUBRICS
-- SIDE MENU
-- LANGUAGE OF THE SHELL
-- ACTIVE RUBRIC
-- FIXED RUBRIC ORDER
+- header
+- horizontal rubrics
+- compact side menu
+- shell language
+- active rubric
+- fixed rubric order
+
+DOES NOT CHANGE PAGE-SPECIFIC CONTENT OR FUNCTIONS.
+
+FINAL ORDER:
+1. Magazine
+2. Cover Stars
+3. Discounts
+4. Pet-Friendly
+5. Marketplace
+6. Travel
+7. Fashion
+8. Health
+9. Articles
+10. Photos
+11. Community
+12. Contests
+13. Pets in Need / Помощь животным
+14. Partners
 
 IMPORTANT:
-THIS FILE DOES NOT CHANGE PAGE CONTENT OR PAGE FUNCTIONS.
-
-DO NOT CHANGE:
-- articles
-- audio
-- maps
-- search
-- filters
-- marketplace logic
-- community logic
-- contests logic
-- Club
-- Stripe
-- offers
-- partners
-- forms
-- APIs
-- page-specific content
-- page-specific i18n
-
-LANGUAGES:
-en, uk, ru, fr, de, es, it, pt, nl, pl, cs, sk,
-hu, ro, bg, el, sv, da, no, fi, tr, ar, hi
-
-LANGUAGE STORAGE:
-pets_dogue_language
-
-FINAL RUBRIC ORDER:
-
-1. MAGAZINE
-2. COVER STARS
-3. DISCOUNTS
-4. PET-FRIENDLY
-5. MARKETPLACE
-6. TRAVEL
-7. FASHION
-8. HEALTH
-9. ARTICLES
-10. PHOTOS
-11. COMMUNITY
-12. CONTESTS
-13. PETS IN NEED / ПОМОЩЬ ЖИВОТНЫМ
-14. PARTNERS
-
-IMPORTANT:
-- NO WELLNESS
-- ONLY HEALTH
-- NO HELP / RESCUE DUPLICATION
-- ONLY ONE "PETS IN NEED / ПОМОЩЬ ЖИВОТНЫМ" RUBRIC
+- no Wellness rubric in shell; only Health
+- no Help / Rescue duplication; only Pets in Need
+- same order on every page and in every language
 ========================================================= */
 
 (function(){
 
 const LANGUAGE_KEY="pets_dogue_language";
-
-
-/* =========================================================
-LANGUAGE ALIASES
-========================================================= */
 
 const LANGUAGE_ALIASES={
 ua:"uk",
@@ -83,11 +47,13 @@ se:"sv",
 dk:"da"
 };
 
-
-/* =========================================================
-FINAL NAVIGATION
-ONE ORDER EVERYWHERE
-========================================================= */
+const REVERSE_LANGUAGE_ALIASES={
+uk:"ua",
+cs:"cz",
+el:"gr",
+sv:"se",
+da:"dk"
+};
 
 const NAV_ITEMS=[
 
@@ -177,11 +143,6 @@ image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&
 
 ];
 
-
-/* =========================================================
-PAGE → ACTIVE RUBRIC
-========================================================= */
-
 const PAGE_KEYS={
 
 "issue-01.html":"magazine",
@@ -200,36 +161,33 @@ const PAGE_KEYS={
 
 "wellness.html":"health",
 
+"health.html":"health",
+
 "articles.html":"articles",
 
 "photos.html":"photos",
 
 "local-community.html":"community",
 
+"community.html":"community",
+
 "contests.html":"contests",
 
 "pets-in-need.html":"animalHelp",
+
+"rescue.html":"animalHelp",
+
+"help.html":"animalHelp",
+
+"animal-help.html":"animalHelp",
 
 "partners.html":"partners"
 
 };
 
-
-/* =========================================================
-ALL 23 LANGUAGES
-
-NAVIGATION + MENU + ACCESSIBILITY + CARD DESCRIPTIONS
-========================================================= */
-
 const TEXT={
 
-
-/* =========================================================
-ENGLISH
-========================================================= */
-
 en:{
-
 menu:"Contents",
 signIn:"Sign In",
 joinClub:"Join Club",
@@ -272,16 +230,9 @@ contests:"Take part in PETS & DOGUE competitions.",
 animalHelp:"Rescue, adoption and help for animals in need.",
 partners:"Selected brands, services and lifestyle partners."
 }
-
 },
 
-
-/* =========================================================
-UKRAINIAN
-========================================================= */
-
 uk:{
-
 menu:"Зміст",
 signIn:"Увійти",
 joinClub:"Вступити до клубу",
@@ -324,16 +275,9 @@ contests:"Беріть участь у конкурсах PETS & DOGUE.",
 animalHelp:"Порятунок, адопція та допомога тваринам.",
 partners:"Відібрані бренди, послуги та партнери."
 }
-
 },
 
-
-/* =========================================================
-RUSSIAN
-========================================================= */
-
 ru:{
-
 menu:"Содержание",
 signIn:"Войти",
 joinClub:"Вступить в клуб",
@@ -376,16 +320,9 @@ contests:"Участвуйте в конкурсах PETS & DOGUE.",
 animalHelp:"Спасение, поиск дома и помощь животным.",
 partners:"Отобранные бренды, услуги и партнёры."
 }
-
 },
 
-
-/* =========================================================
-FRENCH
-========================================================= */
-
 fr:{
-
 menu:"Sommaire",
 signIn:"Connexion",
 joinClub:"Rejoindre le Club",
@@ -428,16 +365,9 @@ contests:"Participez aux concours PETS & DOGUE.",
 animalHelp:"Sauvetage, adoption et aide aux animaux.",
 partners:"Marques, services et partenaires sélectionnés."
 }
-
 },
 
-
-/* =========================================================
-GERMAN
-========================================================= */
-
 de:{
-
 menu:"Inhalt",
 signIn:"Anmelden",
 joinClub:"Club beitreten",
@@ -480,16 +410,9 @@ contests:"Nehmen Sie an PETS & DOGUE Wettbewerben teil.",
 animalHelp:"Rettung, Adoption und Hilfe für Tiere.",
 partners:"Ausgewählte Marken, Services und Partner."
 }
-
 },
 
-
-/* =========================================================
-SPANISH
-========================================================= */
-
 es:{
-
 menu:"Contenido",
 signIn:"Iniciar sesión",
 joinClub:"Únete al Club",
@@ -532,16 +455,9 @@ contests:"Participa en concursos PETS & DOGUE.",
 animalHelp:"Rescate, adopción y ayuda para animales.",
 partners:"Marcas, servicios y socios seleccionados."
 }
-
 },
 
-
-/* =========================================================
-ITALIAN
-========================================================= */
-
 it:{
-
 menu:"Contenuti",
 signIn:"Accedi",
 joinClub:"Unisciti al Club",
@@ -584,16 +500,9 @@ contests:"Partecipa ai concorsi PETS & DOGUE.",
 animalHelp:"Salvataggio, adozione e aiuto agli animali.",
 partners:"Brand, servizi e partner selezionati."
 }
-
 },
 
-
-/* =========================================================
-PORTUGUESE
-========================================================= */
-
 pt:{
-
 menu:"Conteúdo",
 signIn:"Entrar",
 joinClub:"Entrar no Club",
@@ -636,16 +545,9 @@ contests:"Participe nos concursos PETS & DOGUE.",
 animalHelp:"Resgate, adoção e ajuda aos animais.",
 partners:"Marcas, serviços e parceiros selecionados."
 }
-
 },
 
-
-/* =========================================================
-DUTCH
-========================================================= */
-
 nl:{
-
 menu:"Inhoud",
 signIn:"Inloggen",
 joinClub:"Word lid",
@@ -688,16 +590,9 @@ contests:"Doe mee aan PETS & DOGUE wedstrijden.",
 animalHelp:"Redding, adoptie en hulp voor dieren.",
 partners:"Geselecteerde merken, diensten en partners."
 }
-
 },
 
-
-/* =========================================================
-POLISH
-========================================================= */
-
 pl:{
-
 menu:"Spis treści",
 signIn:"Zaloguj się",
 joinClub:"Dołącz do klubu",
@@ -740,16 +635,9 @@ contests:"Bierz udział w konkursach PETS & DOGUE.",
 animalHelp:"Ratowanie, adopcja i pomoc zwierzętom.",
 partners:"Wybrane marki, usługi i partnerzy."
 }
-
 },
 
-
-/* =========================================================
-CZECH
-========================================================= */
-
 cs:{
-
 menu:"Obsah",
 signIn:"Přihlásit se",
 joinClub:"Vstoupit do klubu",
@@ -792,16 +680,9 @@ contests:"Zapojte se do soutěží PETS & DOGUE.",
 animalHelp:"Záchrana, adopce a pomoc zvířatům.",
 partners:"Vybrané značky, služby a partneři."
 }
-
 },
 
-
-/* =========================================================
-SLOVAK
-========================================================= */
-
 sk:{
-
 menu:"Obsah",
 signIn:"Prihlásiť sa",
 joinClub:"Vstúpiť do klubu",
@@ -844,16 +725,9 @@ contests:"Zapojte sa do súťaží PETS & DOGUE.",
 animalHelp:"Záchrana, adopcia a pomoc zvieratám.",
 partners:"Vybrané značky, služby a partneri."
 }
-
 },
 
-
-/* =========================================================
-HUNGARIAN
-========================================================= */
-
 hu:{
-
 menu:"Tartalom",
 signIn:"Belépés",
 joinClub:"Csatlakozás",
@@ -896,16 +770,9 @@ contests:"Vegyen részt PETS & DOGUE versenyeken.",
 animalHelp:"Mentés, örökbefogadás és segítség az állatoknak.",
 partners:"Válogatott márkák, szolgáltatások és partnerek."
 }
-
 },
 
-
-/* =========================================================
-ROMANIAN
-========================================================= */
-
 ro:{
-
 menu:"Conținut",
 signIn:"Autentificare",
 joinClub:"Intră în Club",
@@ -948,16 +815,9 @@ contests:"Participă la concursurile PETS & DOGUE.",
 animalHelp:"Salvare, adopție și ajutor pentru animale.",
 partners:"Branduri, servicii și parteneri selectați."
 }
-
 },
 
-
-/* =========================================================
-BULGARIAN
-========================================================= */
-
 bg:{
-
 menu:"Съдържание",
 signIn:"Вход",
 joinClub:"Влезте в клуба",
@@ -1000,16 +860,9 @@ contests:"Участвайте в конкурсите PETS & DOGUE.",
 animalHelp:"Спасяване, осиновяване и помощ за животни.",
 partners:"Подбрани марки, услуги и партньори."
 }
-
 },
 
-
-/* =========================================================
-GREEK
-========================================================= */
-
 el:{
-
 menu:"Περιεχόμενα",
 signIn:"Σύνδεση",
 joinClub:"Εγγραφή στο Club",
@@ -1052,16 +905,9 @@ contests:"Πάρτε μέρος στους διαγωνισμούς PETS & DOGUE
 animalHelp:"Διάσωση, υιοθεσία και βοήθεια στα ζώα.",
 partners:"Επιλεγμένες μάρκες, υπηρεσίες και συνεργάτες."
 }
-
 },
 
-
-/* =========================================================
-SWEDISH
-========================================================= */
-
 sv:{
-
 menu:"Innehåll",
 signIn:"Logga in",
 joinClub:"Gå med i Club",
@@ -1104,16 +950,9 @@ contests:"Delta i PETS & DOGUE-tävlingar.",
 animalHelp:"Räddning, adoption och hjälp för djur.",
 partners:"Utvalda varumärken, tjänster och partners."
 }
-
 },
 
-
-/* =========================================================
-DANISH
-========================================================= */
-
 da:{
-
 menu:"Indhold",
 signIn:"Log ind",
 joinClub:"Tilmeld Club",
@@ -1156,16 +995,9 @@ contests:"Deltag i PETS & DOGUE-konkurrencer.",
 animalHelp:"Redning, adoption og hjælp til dyr.",
 partners:"Udvalgte brands, tjenester og partnere."
 }
-
 },
 
-
-/* =========================================================
-NORWEGIAN
-========================================================= */
-
 no:{
-
 menu:"Innhold",
 signIn:"Logg inn",
 joinClub:"Bli med i Club",
@@ -1208,16 +1040,9 @@ contests:"Delta i PETS & DOGUE-konkurranser.",
 animalHelp:"Redning, adopsjon og hjelp til dyr.",
 partners:"Utvalgte merker, tjenester og partnere."
 }
-
 },
 
-
-/* =========================================================
-FINNISH
-========================================================= */
-
 fi:{
-
 menu:"Sisältö",
 signIn:"Kirjaudu",
 joinClub:"Liity Clubiin",
@@ -1260,16 +1085,9 @@ contests:"Osallistu PETS & DOGUE -kilpailuihin.",
 animalHelp:"Pelastusta, adoptiota ja apua eläimille.",
 partners:"Valittuja brändejä, palveluita ja kumppaneita."
 }
-
 },
 
-
-/* =========================================================
-TURKISH
-========================================================= */
-
 tr:{
-
 menu:"İçindekiler",
 signIn:"Giriş yap",
 joinClub:"Club'a katıl",
@@ -1312,16 +1130,9 @@ contests:"PETS & DOGUE yarışmalarına katılın.",
 animalHelp:"Kurtarma, sahiplendirme ve hayvanlara yardım.",
 partners:"Seçilmiş markalar, hizmetler ve ortaklar."
 }
-
 },
 
-
-/* =========================================================
-ARABIC
-========================================================= */
-
 ar:{
-
 menu:"المحتويات",
 signIn:"تسجيل الدخول",
 joinClub:"الانضمام إلى النادي",
@@ -1364,16 +1175,9 @@ contests:"شارك في مسابقات PETS & DOGUE.",
 animalHelp:"إنقاذ وتبنّي ومساعدة الحيوانات المحتاجة.",
 partners:"علامات وخدمات وشركاء مختارون."
 }
-
 },
 
-
-/* =========================================================
-HINDI
-========================================================= */
-
 hi:{
-
 menu:"सामग्री",
 signIn:"साइन इन",
 joinClub:"क्लब में शामिल हों",
@@ -1416,48 +1220,66 @@ contests:"PETS & DOGUE प्रतियोगिताओं में भा�
 animalHelp:"बचाव, गोद लेना और जरूरतमंद जानवरों की मदद।",
 partners:"चुने हुए ब्रांड, सेवाएँ और पार्टनर।"
 }
-
 }
 
 };
 
-
-/* =========================================================
-LANGUAGE OPTIONS
-========================================================= */
-
 const LANGUAGE_OPTIONS=[
 
 ["en","🇬🇧 EN — English"],
+
 ["uk","🇺🇦 UA — Українська"],
+
 ["ru","🇷🇺 RU — Русский"],
+
 ["fr","🇫🇷 FR — Français"],
+
 ["de","🇩🇪 DE — Deutsch"],
+
 ["es","🇪🇸 ES — Español"],
+
 ["it","🇮🇹 IT — Italiano"],
+
 ["pt","🇵🇹 PT — Português"],
+
 ["nl","🇳🇱 NL — Nederlands"],
+
 ["pl","🇵🇱 PL — Polski"],
+
 ["cs","🇨🇿 CZ — Čeština"],
+
 ["sk","🇸🇰 SK — Slovenčina"],
+
 ["hu","🇭🇺 HU — Magyar"],
+
 ["ro","🇷🇴 RO — Română"],
+
 ["bg","🇧🇬 BG — Български"],
+
 ["el","🇬🇷 GR — Ελληνικά"],
+
 ["sv","🇸🇪 SE — Svenska"],
+
 ["da","🇩🇰 DK — Dansk"],
+
 ["no","🇳🇴 NO — Norsk"],
+
 ["fi","🇫🇮 FI — Suomi"],
+
 ["tr","🇹🇷 TR — Türkçe"],
+
 ["ar","🇸🇦 AR — العربية"],
+
 ["hi","🇮🇳 HI — हिन्दी"]
 
 ];
 
-
-/* =========================================================
-STATE
-========================================================= */
+const RUBRIC_URLS=
+new Set(
+NAV_ITEMS.map(
+item=>item.url
+)
+);
 
 let activeKey="";
 
@@ -1467,12 +1289,16 @@ let userTouchedRubrics=false;
 
 let internalLanguageChange=false;
 
+let legacyObserver=null;
+
 
 /* =========================================================
-HELPERS
+LANGUAGE
 ========================================================= */
 
-function normalizeLanguage(value){
+function normalizeLanguage(
+value
+){
 
 let code=
 String(
@@ -1512,42 +1338,6 @@ code||
 }
 
 
-function currentFilename(){
-
-const path=
-String(
-window.location.pathname||
-""
-);
-
-
-const file=
-path
-.split("/")
-.filter(Boolean)
-.pop();
-
-
-return(
-file||
-"index.html"
-);
-
-}
-
-
-function getActiveKey(){
-
-return(
-PAGE_KEYS[
-currentFilename()
-]||
-""
-);
-
-}
-
-
 function getLanguage(){
 
 let language=
@@ -1574,7 +1364,49 @@ return language;
 }
 
 
-function escapeHTML(value){
+/* =========================================================
+CURRENT PAGE
+========================================================= */
+
+function currentFilename(){
+
+const path=
+String(
+window.location.pathname||
+""
+);
+
+
+return(
+path
+.split("/")
+.filter(Boolean)
+.pop()||
+"index.html"
+);
+
+}
+
+
+function getActiveKey(){
+
+return(
+PAGE_KEYS[
+currentFilename()
+]||
+""
+);
+
+}
+
+
+/* =========================================================
+ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+value
+){
 
 return String(
 value||
@@ -1610,24 +1442,514 @@ value||
 
 
 /* =========================================================
-CSS
+LINK HELPERS
 ========================================================= */
 
-function installStyles(){
+function hrefFilename(
+href
+){
 
-const previous=
-document.getElementById(
-"pdGlobalShellStyles"
+try{
+
+const url=
+new URL(
+href,
+window.location.href
+);
+
+
+return(
+url.pathname
+.split("/")
+.filter(Boolean)
+.pop()||
+""
+);
+
+}catch(error){
+
+return"";
+
+}
+
+}
+
+
+function rubricLinkCount(
+root
+){
+
+if(
+!root||
+!root.querySelectorAll
+){
+
+return 0;
+
+}
+
+
+let count=0;
+
+
+root
+.querySelectorAll(
+"a[href]"
+)
+.forEach(
+link=>{
+
+const filename=
+hrefFilename(
+link.getAttribute(
+"href"
+)||
+""
 );
 
 
 if(
-previous
+RUBRIC_URLS.has(
+filename
+)
 ){
 
-previous.remove();
+count+=1;
 
 }
+
+}
+);
+
+
+return count;
+
+}
+
+
+/* =========================================================
+OLD SHELL DETECTION
+========================================================= */
+
+function isInsideGlobalShell(
+element
+){
+
+return Boolean(
+element?.closest?.(
+"#pdGlobalHeader,#pdGlobalMenu,#pdGlobalOverlay"
+)
+);
+
+}
+
+
+function hideLegacyElement(
+element
+){
+
+if(
+!element||
+element.nodeType!==1||
+isInsideGlobalShell(
+element
+)
+){
+
+return;
+
+}
+
+
+element.classList.add(
+"pd-global-old-shell-hidden"
+);
+
+
+element.setAttribute(
+"aria-hidden",
+"true"
+);
+
+}
+
+
+function looksLikeLegacyHeader(
+element
+){
+
+if(
+!element||
+element.nodeType!==1||
+isInsideGlobalShell(
+element
+)
+){
+
+return false;
+
+}
+
+
+const tag=
+element.tagName?.toLowerCase();
+
+
+if(
+tag!=="header"
+){
+
+return false;
+
+}
+
+
+const text=
+(
+element.textContent||
+""
+)
+.toLowerCase();
+
+
+return(
+rubricLinkCount(
+element
+)>=2||
+text.includes(
+"dogue"
+)
+);
+
+}
+
+
+function looksLikeLegacyNav(
+element
+){
+
+if(
+!element||
+element.nodeType!==1||
+isInsideGlobalShell(
+element
+)
+){
+
+return false;
+
+}
+
+
+const tag=
+element.tagName?.toLowerCase();
+
+
+if(
+tag!=="nav"
+){
+
+return false;
+
+}
+
+
+return(
+rubricLinkCount(
+element
+)>=3
+);
+
+}
+
+
+function looksLikeLegacyDrawer(
+element
+){
+
+if(
+!element||
+element.nodeType!==1||
+isInsideGlobalShell(
+element
+)
+){
+
+return false;
+
+}
+
+
+const idClass=
+`${element.id||""} ${element.className||""}`
+.toLowerCase();
+
+
+const text=
+(
+element.textContent||
+""
+)
+.toLowerCase();
+
+
+const drawerName=
+/(drawer|side.?menu|mobile.?menu|menu.?panel|menu.?overlay|nav.?overlay|shell.?menu|master.?menu)/
+.test(
+idClass
+);
+
+
+const menuWords=
+/(contents|содержание|зміст|sommaire|inhalt|contenido|contenuti|conteúdo|inhoud|spis treści|obsah|tartalom|conținut|съдържание|περιεχόμενα|innehåll|indhold|innhold|sisältö|i̇çindekiler|المحتويات|सामग्री)/i
+.test(
+text
+);
+
+
+return(
+rubricLinkCount(
+element
+)>=5&&
+(
+drawerName||
+menuWords
+)
+);
+
+}
+
+
+/* =========================================================
+KNOWN OLD SHELL SELECTORS
+========================================================= */
+
+function hideKnownLegacySelectors(
+root=document
+){
+
+const selectors=[
+
+"header.site-header",
+
+"#pdMasterHeader",
+
+".pd-master-header",
+
+"#pdShellMenu",
+
+"#pdShellOverlay",
+
+"#siteMenu",
+
+"#sideMenu",
+
+"#menuDrawer",
+
+"#mobileMenu",
+
+"#menuOverlay",
+
+".site-menu-drawer",
+
+".menu-drawer",
+
+".mobile-menu-drawer",
+
+".drawer-overlay",
+
+".menu-overlay",
+
+".primary-nav",
+
+".category-nav",
+
+".global-nav",
+
+".rubric-nav",
+
+".desktop-categories",
+
+"#categoryNav"
+
+];
+
+
+selectors.forEach(
+selector=>{
+
+root
+.querySelectorAll?.(
+selector
+)
+.forEach(
+element=>{
+
+if(
+!isInsideGlobalShell(
+element
+)
+){
+
+hideLegacyElement(
+element
+);
+
+}
+
+}
+);
+
+}
+);
+
+}
+
+
+/* =========================================================
+HIDE OLD SHELL
+========================================================= */
+
+function hideLegacyShellIn(
+root=document
+){
+
+hideKnownLegacySelectors(
+root
+);
+
+
+const candidates=[];
+
+
+if(
+root.nodeType===1
+){
+
+candidates.push(
+root
+);
+
+}
+
+
+root
+.querySelectorAll?.(
+"header,nav,aside,[id],[class]"
+)
+.forEach(
+element=>{
+
+candidates.push(
+element
+);
+
+}
+);
+
+
+candidates.forEach(
+element=>{
+
+if(
+looksLikeLegacyHeader(
+element
+)||
+looksLikeLegacyNav(
+element
+)||
+looksLikeLegacyDrawer(
+element
+)
+){
+
+hideLegacyElement(
+element
+);
+
+}
+
+}
+);
+
+}
+
+
+/* =========================================================
+GUARD AGAINST PAGE SCRIPTS RECREATING OLD MENUS
+
+This is important for pages whose own language renderer
+rebuilds an old header/menu after the global shell loads.
+========================================================= */
+
+function installLegacyShellGuard(){
+
+hideLegacyShellIn(
+document
+);
+
+
+if(
+legacyObserver
+){
+
+return;
+
+}
+
+
+legacyObserver=
+new MutationObserver(
+mutations=>{
+
+mutations.forEach(
+mutation=>{
+
+mutation.addedNodes.forEach(
+node=>{
+
+if(
+node.nodeType===1
+){
+
+hideLegacyShellIn(
+node
+);
+
+}
+
+}
+);
+
+}
+);
+
+}
+);
+
+
+legacyObserver.observe(
+document.body,
+{
+childList:true,
+subtree:true
+}
+);
+
+}
+
+
+/* =========================================================
+GLOBAL CSS
+========================================================= */
+
+function installStyles(){
+
+document
+.getElementById(
+"pdGlobalShellStyles"
+)
+?.remove();
 
 
 const style=
@@ -1642,12 +1964,10 @@ style.id=
 
 style.textContent=`
 
-/* =========================================================
-HIDE OLD SHELL VISUALLY ONLY
-========================================================= */
-
 .pd-global-old-shell-hidden{
 display:none !important;
+visibility:hidden !important;
+pointer-events:none !important;
 }
 
 
@@ -1657,23 +1977,13 @@ GLOBAL HEADER
 
 #pdGlobalHeader{
 position:sticky;
-
 top:0;
-
 z-index:7000;
-
 width:100%;
-
 background:#070707;
-
 color:#fff;
-
 border-bottom:1px solid #292929;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 
@@ -1683,24 +1993,13 @@ HEADER TOP
 
 #pdGlobalHeaderMain{
 height:78px;
-
 min-height:78px;
-
 display:grid;
-
-grid-template-columns:
-48px
-minmax(0,1fr)
-48px;
-
+grid-template-columns:48px minmax(0,1fr) 48px;
 align-items:center;
-
 gap:5px;
-
 padding:0 10px;
-
 margin:0 auto;
-
 max-width:1500px;
 }
 
@@ -1711,33 +2010,21 @@ HAMBURGER
 
 #pdGlobalMenuButton{
 width:43px;
-
 height:43px;
-
 padding:7px 5px;
-
 border:0;
-
 background:transparent;
-
 display:grid;
-
 align-content:center;
-
 gap:5px;
-
 cursor:pointer;
 }
 
 #pdGlobalMenuButton span{
 display:block;
-
 width:100%;
-
 height:2px;
-
 background:#fff;
-
 border-radius:999px;
 }
 
@@ -1748,57 +2035,32 @@ BRAND
 
 #pdGlobalBrand{
 justify-self:center;
-
 display:flex;
-
 flex-direction:column;
-
 align-items:center;
-
 justify-content:center;
-
 text-align:center;
-
 white-space:nowrap;
-
 text-decoration:none;
 }
 
 #pdGlobalBrandSmall{
-font-family:
-Georgia,
-"Times New Roman",
-serif;
-
+font-family:Georgia,"Times New Roman",serif;
 font-size:8px;
-
 font-weight:400;
-
 line-height:1;
-
 letter-spacing:1.65px;
-
 text-transform:uppercase;
-
 color:#c89b3c;
 }
 
 #pdGlobalBrandBig{
 margin-top:5px;
-
-font-family:
-Georgia,
-"Times New Roman",
-serif;
-
+font-family:Georgia,"Times New Roman",serif;
 font-size:31px;
-
 font-weight:400;
-
 line-height:.82;
-
 letter-spacing:1.8px;
-
 color:#c89b3c;
 }
 
@@ -1809,154 +2071,91 @@ HOME
 
 #pdGlobalHome{
 justify-self:end;
-
 width:43px;
-
 height:43px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 border:0;
-
 background:transparent;
-
 color:#fff;
-
 text-decoration:none;
 }
 
 #pdGlobalHome svg{
 width:29px;
-
 height:29px;
-
 fill:none;
-
 stroke:#fff;
-
 stroke-width:2.15;
-
 stroke-linecap:round;
-
 stroke-linejoin:round;
 }
 
 
 /* =========================================================
-TOP RUBRICS
+HORIZONTAL RUBRICS
 ========================================================= */
 
 #pdGlobalRubrics{
 position:relative;
-
 width:100%;
-
 height:46px;
-
 min-height:46px;
-
 display:flex;
-
 align-items:stretch;
-
 gap:0;
-
 margin:0;
-
 padding:0 7px;
-
 overflow-x:auto;
-
 overflow-y:hidden;
-
 background:#070707;
-
 border-top:1px solid #292929;
-
 border-bottom:1px solid #292929;
-
 scrollbar-width:none;
-
 -webkit-overflow-scrolling:touch;
-
 touch-action:pan-x;
-
 overscroll-behavior-inline:contain;
-
 scroll-behavior:auto;
-
 scroll-snap-type:none;
-
 direction:ltr;
 }
 
 #pdGlobalRubrics::-webkit-scrollbar{
 display:none;
-
 width:0;
-
 height:0;
 }
 
 #pdGlobalRubrics::before,
 #pdGlobalRubrics::after{
 content:"";
-
 display:block;
-
 flex:0 0 8px;
-
 height:1px;
-
 pointer-events:none;
 }
 
 #pdGlobalRubrics a{
 position:relative;
-
 flex:0 0 auto;
-
 min-width:max-content;
-
 height:46px;
-
 padding:0 16px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
+font-family:Arial,Helvetica,sans-serif;
 font-size:11.5px;
-
 font-weight:900;
-
 line-height:1;
-
 letter-spacing:.45px;
-
 text-transform:uppercase;
-
 white-space:nowrap;
-
 color:#fff;
-
 text-decoration:none;
-
 user-select:none;
-
 -webkit-user-select:none;
-
 -webkit-user-drag:none;
 }
 
@@ -1966,17 +2165,11 @@ color:#efd38c;
 
 #pdGlobalRubrics a.active::after{
 content:"";
-
 position:absolute;
-
 left:15px;
-
 right:15px;
-
 bottom:0;
-
 height:3px;
-
 background:
 linear-gradient(
 90deg,
@@ -1995,88 +2188,52 @@ OVERLAY
 
 #pdGlobalOverlay{
 position:fixed;
-
 inset:0;
-
 z-index:8900;
-
 background:rgba(0,0,0,.66);
-
 opacity:0;
-
 visibility:hidden;
-
 pointer-events:none;
-
 transition:
 opacity .22s ease,
 visibility .22s ease;
-
 backdrop-filter:blur(2px);
-
 -webkit-backdrop-filter:blur(2px);
 }
 
 #pdGlobalOverlay.show{
 opacity:1;
-
 visibility:visible;
-
 pointer-events:auto;
 }
 
 
 /* =========================================================
 COMPACT SIDE MENU
-
-REFERENCE:
-PHOTO CARD MENU
-
-IMPORTANT:
-NOT FULL WIDTH
 ========================================================= */
 
 #pdGlobalMenu{
 position:fixed;
-
 top:0;
-
 left:0;
-
 bottom:0;
-
 z-index:9000;
-
 width:min(74vw,292px);
-
 max-width:292px;
-
 background:#fff;
-
 color:#111;
-
 overflow-y:auto;
-
 overflow-x:hidden;
-
 overscroll-behavior:contain;
-
 -webkit-overflow-scrolling:touch;
-
 box-shadow:
 12px
 0
 30px
 rgba(0,0,0,.27);
-
 transform:translateX(-104%);
-
 transition:transform .27s ease;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 #pdGlobalMenu.open{
@@ -2090,148 +2247,86 @@ MENU HEADER
 
 .pd-global-menu-head{
 position:sticky;
-
 top:0;
-
 z-index:6;
-
 height:64px;
-
 min-height:64px;
-
 padding:0 10px 0 14px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 gap:8px;
-
 background:#080808;
-
 color:#fff;
-
 border-bottom:1px solid #292929;
 }
 
 .pd-global-menu-head h2{
 min-width:0;
-
 margin:0;
-
-font-family:
-Georgia,
-"Times New Roman",
-serif;
-
+font-family:Georgia,"Times New Roman",serif;
 font-size:24px;
-
 font-weight:400;
-
 line-height:1;
-
 white-space:nowrap;
-
 overflow:hidden;
-
 text-overflow:ellipsis;
 }
 
 #pdGlobalClose{
 flex:0 0 auto;
-
 width:35px;
-
 height:35px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 padding:0;
-
 border:1px solid #484848;
-
 border-radius:50%;
-
 background:#111;
-
 color:#fff;
-
 font-size:23px;
-
 font-weight:300;
-
 line-height:1;
-
 cursor:pointer;
 }
 
 
 /* =========================================================
-SIGN IN / JOIN CLUB
+ACCOUNT BUTTONS
 ========================================================= */
 
 .pd-global-account{
 display:grid;
-
 grid-template-columns:1fr 1fr;
-
 gap:6px;
-
 padding:8px;
-
 background:#fff;
-
 border-bottom:1px solid #dedede;
 }
 
 .pd-global-account a{
 min-width:0;
-
 min-height:37px;
-
 padding:6px 5px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 text-align:center;
-
 border:1.5px solid #111;
-
 border-radius:999px;
-
 background:#fff;
-
 color:#111;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
+font-family:Arial,Helvetica,sans-serif;
 font-size:8.7px;
-
 font-weight:900;
-
 line-height:1.1;
-
 text-transform:uppercase;
-
 text-decoration:none;
 }
 
 .pd-global-account a.club{
 background:#65e51f;
-
 border-color:#65e51f;
 }
 
@@ -2242,194 +2337,119 @@ LANGUAGE
 
 .pd-global-language{
 padding:8px;
-
 background:#fff;
-
 border-bottom:1px solid #dedede;
 }
 
 .pd-global-language label{
 display:block;
-
 margin:0 0 5px 2px;
-
 font-size:7px;
-
 font-weight:900;
-
 line-height:1;
-
 letter-spacing:1.4px;
-
 text-transform:uppercase;
-
 color:#777;
 }
 
 #pdGlobalLanguage{
 width:100%;
-
 height:37px;
-
 padding:0 10px;
-
 border:1.5px solid #111;
-
 border-radius:999px;
-
 outline:0;
-
 background:#faf8f3;
-
 color:#111;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
+font-family:Arial,Helvetica,sans-serif;
 font-size:10.5px;
-
 font-weight:800;
 }
 
 
 /* =========================================================
-SIDE MENU PHOTO CARDS
+PHOTO CARDS
 ========================================================= */
 
 #pdGlobalMenuList{
 display:grid;
-
 grid-template-columns:1fr;
-
 gap:6px;
-
 padding:8px;
-
 background:#fff;
 }
 
 .pd-global-menu-card{
 position:relative;
-
 min-width:0;
-
 min-height:68px;
-
 display:grid;
-
-grid-template-columns:
-60px
-minmax(0,1fr);
-
+grid-template-columns:60px minmax(0,1fr);
 align-items:stretch;
-
 overflow:hidden;
-
 border:1.5px solid #151515;
-
 border-radius:15px;
-
 background:#faf8f3;
-
 color:#111;
-
 text-decoration:none;
 }
 
 .pd-global-menu-card-image{
 position:relative;
-
 width:60px;
-
 min-height:68px;
-
 overflow:hidden;
-
 background:#ddd;
 }
 
 .pd-global-menu-card-image img{
 position:absolute;
-
 inset:0;
-
 width:100%;
-
 height:100%;
-
 display:block;
-
 object-fit:cover;
-
 object-position:center;
 }
 
 .pd-global-menu-card-copy{
 min-width:0;
-
 padding:7px 7px 6px 8px;
-
 display:flex;
-
 flex-direction:column;
-
 justify-content:center;
 }
 
 .pd-global-menu-card h3{
 margin:0 0 3px;
-
-font-family:
-Georgia,
-"Times New Roman",
-serif;
-
+font-family:Georgia,"Times New Roman",serif;
 font-size:14px;
-
 font-weight:700;
-
 line-height:1.03;
-
 color:#111;
-
 overflow-wrap:anywhere;
 }
 
 .pd-global-menu-card p{
 margin:0;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
+font-family:Arial,Helvetica,sans-serif;
 font-size:8.7px;
-
 font-weight:400;
-
 line-height:1.26;
-
 color:#676767;
-
 display:-webkit-box;
-
 -webkit-line-clamp:2;
-
 -webkit-box-orient:vertical;
-
 overflow:hidden;
 }
 
 
 /* =========================================================
-ACTIVE SIDE CARD
+ACTIVE CARD
 ========================================================= */
 
 .pd-global-menu-card.active{
 background:#0b0b0b;
-
 border-color:#0b0b0b;
 }
 
@@ -2448,37 +2468,23 @@ CONTACT
 
 .pd-global-menu-footer{
 padding:0 8px 12px;
-
 background:#fff;
 }
 
 .pd-global-menu-footer a{
 min-height:36px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 padding:7px 9px;
-
 border:1.5px solid #111;
-
 border-radius:999px;
-
 background:#111;
-
 color:#efd38c;
-
 font-size:9px;
-
 font-weight:900;
-
 line-height:1;
-
 text-transform:uppercase;
-
 text-decoration:none;
 }
 
@@ -2506,15 +2512,12 @@ direction:rtl;
 
 html[dir="rtl"] #pdGlobalMenu{
 left:auto;
-
 right:0;
-
 box-shadow:
 -12px
 0
 30px
 rgba(0,0,0,.27);
-
 transform:translateX(104%);
 }
 
@@ -2539,46 +2542,32 @@ SMALL MOBILE
 
 #pdGlobalHeaderMain{
 height:76px;
-
 min-height:76px;
-
-grid-template-columns:
-46px
-minmax(0,1fr)
-46px;
-
+grid-template-columns:46px minmax(0,1fr) 46px;
 padding:0 8px;
 }
 
 #pdGlobalBrandBig{
 font-size:30px;
-
 letter-spacing:1.6px;
 }
 
 #pdGlobalRubrics{
 height:45px;
-
 min-height:45px;
-
 padding-left:5px;
-
 padding-right:5px;
 }
 
 #pdGlobalRubrics a{
 height:45px;
-
 padding-left:15px;
-
 padding-right:15px;
-
 font-size:11px;
 }
 
 #pdGlobalMenu{
 width:min(74vw,280px);
-
 max-width:280px;
 }
 
@@ -2593,72 +2582,53 @@ DESKTOP
 
 #pdGlobalHeaderMain{
 height:88px;
-
 min-height:88px;
-
-grid-template-columns:
-56px
-minmax(0,1fr)
-56px;
-
+grid-template-columns:56px minmax(0,1fr) 56px;
 padding:0 18px;
 }
 
 #pdGlobalMenuButton{
 width:48px;
-
 height:48px;
-
 padding:7px;
-
 gap:6px;
 }
 
 #pdGlobalBrandSmall{
 font-size:10px;
-
 letter-spacing:2px;
 }
 
 #pdGlobalBrandBig{
 font-size:39px;
-
 letter-spacing:3px;
-
 margin-top:6px;
 }
 
 #pdGlobalHome{
 width:48px;
-
 height:48px;
 }
 
 #pdGlobalHome svg{
 width:31px;
-
 height:31px;
 }
 
 #pdGlobalRubrics{
 height:50px;
-
 min-height:50px;
-
 padding:0 10px;
 }
 
 #pdGlobalRubrics a{
 height:50px;
-
 padding:0 18px;
-
 font-size:12px;
 }
 
 #pdGlobalMenu{
 width:min(320px,30vw);
-
 max-width:320px;
 }
 
@@ -2689,127 +2659,7 @@ style
 
 
 /* =========================================================
-HIDE OLD HEADER / OLD TOP NAV
-
-IMPORTANT:
-OLD ELEMENTS STAY IN DOM.
-PAGE-SPECIFIC JS IS NOT DESTROYED.
-========================================================= */
-
-function hideExistingShell(){
-
-document
-.querySelectorAll(
-"header.site-header"
-)
-.forEach(
-element=>{
-
-if(
-element.id!=="pdGlobalHeader"
-){
-
-element.classList.add(
-"pd-global-old-shell-hidden"
-);
-
-}
-
-}
-);
-
-
-/*
-Old special-offers shell.
-*/
-
-[
-"#pdMasterHeader",
-".pd-master-header",
-"#pdShellMenu",
-"#pdShellOverlay"
-]
-.forEach(
-selector=>{
-
-document
-.querySelectorAll(
-selector
-)
-.forEach(
-element=>{
-
-element.classList.add(
-"pd-global-old-shell-hidden"
-);
-
-}
-);
-
-}
-);
-
-
-/*
-Old horizontal nav bars near the top.
-*/
-
-const navSelectors=[
-
-".primary-nav",
-".category-nav",
-".global-nav",
-".rubric-nav",
-".desktop-categories",
-"#categoryNav"
-
-];
-
-
-navSelectors.forEach(
-selector=>{
-
-document
-.querySelectorAll(
-selector
-)
-.forEach(
-element=>{
-
-if(
-element.id==="pdGlobalRubrics"
-){
-
-return;
-
-}
-
-
-const rect=
-element.getBoundingClientRect();
-
-
-if(
-rect.top<350
-){
-
-element.classList.add(
-"pd-global-old-shell-hidden"
-);
-
-}
-
-}
-);
-
-}
-);
-
-}
-
-
-/* =========================================================
-CREATE GLOBAL HEADER
+CREATE HEADER
 ========================================================= */
 
 function createHeader(){
@@ -2825,12 +2675,10 @@ return;
 }
 
 
-const language=
-getLanguage();
-
-
 const copy=
-TEXT[language]||
+TEXT[
+getLanguage()
+]||
 TEXT.en;
 
 
@@ -2994,7 +2842,7 @@ closeMenu
 
 
 /* =========================================================
-OPEN / CLOSE MENU
+OPEN / CLOSE
 ========================================================= */
 
 function openMenu(){
@@ -3092,17 +2940,61 @@ document.body.classList.remove(
 
 
 /* =========================================================
-RENDER TOP RUBRICS
+PREVENT OLD PAGE NAVIGATION JS FROM INTERFERING
+
+We do not prevent normal link navigation.
+We only stop old delegated click handlers from receiving
+clicks from the new master shell.
+========================================================= */
+
+function stopLegacyNavigationInterference(
+root
+){
+
+root
+?.querySelectorAll?.(
+"a[data-pd-global-link]"
+)
+.forEach(
+link=>{
+
+if(
+link.dataset.pdSafeClick==="1"
+){
+
+return;
+
+}
+
+
+link.dataset.pdSafeClick="1";
+
+
+link.addEventListener(
+"click",
+event=>{
+
+event.stopPropagation();
+
+}
+);
+
+}
+);
+
+}
+
+
+/* =========================================================
+RENDER HORIZONTAL RUBRICS
 ========================================================= */
 
 function renderRubrics(){
 
-const language=
-getLanguage();
-
-
 const copy=
-TEXT[language]||
+TEXT[
+getLanguage()
+]||
 TEXT.en;
 
 
@@ -3137,13 +3029,16 @@ item.key===activeKey;
 return`
 
 <a
+data-pd-global-link="1"
 href="${item.url}"
 class="${active?"active":""}"
 ${active?'aria-current="page"':""}
 >
 
 ${escapeHTML(
-copy.nav[item.key]
+copy.nav[
+item.key
+]
 )}
 
 </a>
@@ -3153,6 +3048,11 @@ copy.nav[item.key]
 }
 )
 .join("");
+
+
+stopLegacyNavigationInterference(
+nav
+);
 
 
 if(
@@ -3215,6 +3115,7 @@ item.key===activeKey;
 return`
 
 <a
+data-pd-global-link="1"
 class="pd-global-menu-card ${active?"active":""}"
 href="${item.url}"
 ${active?'aria-current="page"':""}
@@ -3236,7 +3137,9 @@ loading="lazy"
 <h3>
 
 ${escapeHTML(
-copy.nav[item.key]
+copy.nav[
+item.key
+]
 )}
 
 </h3>
@@ -3245,7 +3148,9 @@ copy.nav[item.key]
 <p>
 
 ${escapeHTML(
-copy.desc[item.key]
+copy.desc[
+item.key
+]
 )}
 
 </p>
@@ -3289,7 +3194,10 @@ copy.closeMenu
 
 <div class="pd-global-account">
 
-<a href="account.html">
+<a
+data-pd-global-link="1"
+href="account.html"
+>
 
 ${escapeHTML(
 copy.signIn
@@ -3299,6 +3207,7 @@ copy.signIn
 
 
 <a
+data-pd-global-link="1"
 class="club"
 href="club.html"
 >
@@ -3361,7 +3270,10 @@ ${cards}
 
 <div class="pd-global-menu-footer">
 
-<a href="contact.html">
+<a
+data-pd-global-link="1"
+href="contact.html"
+>
 
 ${escapeHTML(
 copy.contact
@@ -3393,21 +3305,24 @@ document
 handleLanguageChange
 );
 
+
+stopLegacyNavigationInterference(
+menu
+);
+
 }
 
 
 /* =========================================================
-UPDATE HEADER ACCESSIBILITY TEXT
+HEADER LANGUAGE
 ========================================================= */
 
 function updateHeaderLanguage(){
 
-const language=
-getLanguage();
-
-
 const copy=
-TEXT[language]||
+TEXT[
+getLanguage()
+]||
 TEXT.en;
 
 
@@ -3434,20 +3349,7 @@ copy.home
 
 
 /* =========================================================
-EXISTING PAGE LANGUAGE SELECT
-
-Some old pages use:
-uk
-or
-ua
-
-cs
-or
-cz
-
-etc.
-
-Find whichever option exists.
+OLD PAGE LANGUAGE SELECT
 ========================================================= */
 
 function valueForExistingSelect(
@@ -3455,26 +3357,21 @@ select,
 language
 ){
 
-const candidates=[language];
-
-
-const reverseAliases={
-
-uk:"ua",
-cs:"cz",
-el:"gr",
-sv:"se",
-da:"dk"
-
-};
+const candidates=[
+language
+];
 
 
 if(
-reverseAliases[language]
+REVERSE_LANGUAGE_ALIASES[
+language
+]
 ){
 
 candidates.push(
-reverseAliases[language]
+REVERSE_LANGUAGE_ALIASES[
+language
+]
 );
 
 }
@@ -3513,11 +3410,10 @@ return"";
 
 
 /* =========================================================
-SYNC SAVED LANGUAGE WITH EXISTING PAGE
+SYNC PAGE CONTENT LANGUAGE
 
-IMPORTANT:
-WE USE THE PAGE'S EXISTING TRANSLATION SYSTEM.
-WE DO NOT REPLACE PAGE CONTENT TRANSLATIONS.
+The page keeps its own page-specific translations.
+The shell only synchronises the selected language.
 ========================================================= */
 
 function syncExistingPageLanguage(
@@ -3537,9 +3433,9 @@ language==="ar"
 let handled=false;
 
 
-/*
-Existing central controller.
-*/
+/* =========================================================
+CENTRAL LANGUAGE CONTROLLER
+========================================================= */
 
 if(
 window.PetsDogueLanguage
@@ -3549,17 +3445,12 @@ const controller=
 window.PetsDogueLanguage;
 
 
-const setters=[
-
+for(
+const setter of [
 "setLanguage",
 "changeLanguage",
 "selectLanguage"
-
-];
-
-
-for(
-const setter of setters
+]
 ){
 
 if(
@@ -3594,12 +3485,12 @@ break;
 }
 
 
-/*
-Some pages expose renderLanguage().
-*/
+/* =========================================================
+PAGE renderLanguage()
+========================================================= */
 
 if(
-!handled &&
+!handled&&
 typeof window.renderLanguage==="function"
 ){
 
@@ -3624,9 +3515,9 @@ error
 }
 
 
-/*
-Existing language select.
-*/
+/* =========================================================
+OLD PAGE SELECT
+========================================================= */
 
 const existingSelect=
 document.getElementById(
@@ -3646,7 +3537,7 @@ language
 
 
 if(
-value &&
+value&&
 existingSelect.value!==value
 ){
 
@@ -3682,13 +3573,30 @@ error
 }
 
 
+/*
+A page translation function may rebuild its old menu.
+Immediately hide that old shell again.
+*/
+
+setTimeout(
+()=>{
+
+hideLegacyShellIn(
+document
+);
+
+},
+0
+);
+
+
 return handled;
 
 }
 
 
 /* =========================================================
-LANGUAGE CHANGE FROM GLOBAL MENU
+GLOBAL LANGUAGE CHANGE
 ========================================================= */
 
 function handleLanguageChange(
@@ -3735,7 +3643,9 @@ language
 
 updateHeaderLanguage();
 
+
 renderRubrics();
+
 
 renderSideMenu();
 
@@ -3757,6 +3667,11 @@ setTimeout(
 
 internalLanguageChange=false;
 
+
+hideLegacyShellIn(
+document
+);
+
 },
 0
 );
@@ -3767,16 +3682,10 @@ internalLanguageChange=false;
 /* =========================================================
 POSITION ACTIVE RUBRIC ONCE
 
-ONLY ONCE.
+Only once after page load.
 
-AFTER THIS:
-USER CONTROLS THE STRIP.
-
-NO:
-- repeated centering
-- scroll lock
-- resize centering
-- forced return
+After this the user has completely free native horizontal
+swiping. No automatic re-centering on touch or resize.
 ========================================================= */
 
 function positionActiveOnce(){
@@ -3830,18 +3739,6 @@ requestAnimationFrame(
 requestAnimationFrame(
 ()=>{
 
-try{
-
-active.scrollIntoView(
-{
-behavior:"auto",
-block:"nearest",
-inline:"center"
-}
-);
-
-}catch(error){
-
 const target=
 active.offsetLeft-
 (
@@ -3856,8 +3753,6 @@ Math.max(
 0,
 target
 );
-
-}
 
 }
 );
@@ -3881,15 +3776,7 @@ document.getElementById(
 
 
 if(
-!nav
-){
-
-return;
-
-}
-
-
-if(
+!nav||
 nav.dataset.interactionReady==="1"
 ){
 
@@ -3928,16 +3815,23 @@ passive:true
 
 
 /* =========================================================
-REFRESH SHELL LANGUAGE
+REFRESH SHELL LABELS
 ========================================================= */
 
 function refreshShellLanguage(){
 
 updateHeaderLanguage();
 
+
 renderRubrics();
 
+
 renderSideMenu();
+
+
+hideLegacyShellIn(
+document
+);
 
 }
 
@@ -3966,8 +3860,7 @@ document.getElementById(
 
 
 if(
-!menu||
-!menu.classList.contains(
+!menu?.classList.contains(
 "open"
 )
 ){
@@ -3979,7 +3872,9 @@ return;
 
 event.preventDefault();
 
+
 event.stopPropagation();
+
 
 event.stopImmediatePropagation();
 
@@ -4003,42 +3898,50 @@ installStyles();
 
 
 /*
-Old visual shell stays in DOM but is hidden.
+First remove every old visible header/menu/nav from view.
+The old DOM remains alive for page-specific code.
 */
 
-hideExistingShell();
+hideLegacyShellIn(
+document
+);
 
 
 /*
-Create the one master shell.
+Create the ONE visible global shell.
 */
 
 createHeader();
+
 
 createSideMenu();
 
 
 /*
-Render it.
+Protect against page scripts recreating their old shell.
+*/
+
+installLegacyShellGuard();
+
+
+/*
+Render the fixed global order.
 */
 
 renderRubrics();
 
+
 renderSideMenu();
+
 
 updateHeaderLanguage();
 
-
-/*
-Native horizontal swipe.
-*/
 
 installRubricInteraction();
 
 
 /*
-Synchronise page with the language saved by the user.
-This fixes pages opening in English unexpectedly.
+Apply the user's saved language to the current page.
 */
 
 const savedLanguage=
@@ -4051,20 +3954,60 @@ savedLanguage
 
 
 /*
-Centre active rubric only once.
+Some old pages rebuild their old navigation a little later.
+These extra checks remove those duplicates without touching
+the page's actual content or functions.
 */
 
 setTimeout(
-positionActiveOnce,
-90
+()=>{
+
+hideLegacyShellIn(
+document
+);
+
+},
+40
+);
+
+
+setTimeout(
+()=>{
+
+hideLegacyShellIn(
+document
+);
+
+},
+180
+);
+
+
+setTimeout(
+()=>{
+
+hideLegacyShellIn(
+document
+);
+
+},
+700
 );
 
 
 /*
-Existing page changed its language.
-Do not rebuild page functionality.
-Only update shell labels.
+Centre active rubric exactly once.
 */
+
+setTimeout(
+positionActiveOnce,
+100
+);
+
+
+/* =========================================================
+LANGUAGE EVENT FROM PAGE
+========================================================= */
 
 window.addEventListener(
 "petsdogue:languagechange",
@@ -4090,7 +4033,9 @@ document.documentElement.lang
 
 
 if(
-TEXT[eventLanguage]
+TEXT[
+eventLanguage
+]
 ){
 
 localStorage.setItem(
@@ -4110,9 +4055,9 @@ refreshShellLanguage,
 );
 
 
-/*
-Language changed in another browser tab.
-*/
+/* =========================================================
+LANGUAGE CHANGED IN ANOTHER TAB
+========================================================= */
 
 window.addEventListener(
 "storage",
@@ -4142,9 +4087,9 @@ refreshShellLanguage();
 );
 
 
-/*
-Escape closes only the global menu.
-*/
+/* =========================================================
+ESCAPE CLOSES GLOBAL MENU
+========================================================= */
 
 document.addEventListener(
 "keydown",
