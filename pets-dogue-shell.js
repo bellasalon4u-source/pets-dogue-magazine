@@ -2,33 +2,38 @@
 
 /* =========================================================
 PETS & DOGUE
-GLOBAL HEADER + RUBRIC NAV + COMPACT EDITORIAL SIDE MENU
+MASTER GLOBAL SHELL
 
-CURRENT CHANGE ONLY:
-1. PROFILE → SIGN IN / ВОЙТИ / LOCAL TRANSLATION
-2. EVERY SIDE-MENU CARD ALWAYS HAS A SHORT DESCRIPTION
+FINAL AGREED STRUCTURE
 
-DOES NOT CHANGE:
-- approved header scale
-- fixed rubric order
-- horizontal swipe
-- menu width / scale
-- menu photos
-- active rubric
-- page content
+ONE SOURCE OF TRUTH FOR:
+- HEADER
+- HORIZONTAL RUBRICS
+- SIDE MENU
+- LANGUAGE OF THE SHELL
+- ACTIVE RUBRIC
+- FIXED RUBRIC ORDER
+
+IMPORTANT:
+THIS FILE DOES NOT CHANGE PAGE CONTENT OR PAGE FUNCTIONS.
+
+DO NOT CHANGE:
+- articles
+- audio
 - maps
 - search
 - filters
-- articles
-- audio
-- marketplace
-- community
-- offers
-- Club payments
+- marketplace logic
+- community logic
+- contests logic
+- Club
 - Stripe
+- offers
+- partners
 - forms
 - APIs
-- page-specific translations
+- page-specific content
+- page-specific i18n
 
 LANGUAGES:
 en, uk, ru, fr, de, es, it, pt, nl, pl, cs, sk,
@@ -36,11 +41,39 @@ hu, ro, bg, el, sv, da, no, fi, tr, ar, hi
 
 LANGUAGE STORAGE:
 pets_dogue_language
+
+FINAL RUBRIC ORDER:
+
+1. MAGAZINE
+2. COVER STARS
+3. DISCOUNTS
+4. PET-FRIENDLY
+5. MARKETPLACE
+6. TRAVEL
+7. FASHION
+8. HEALTH
+9. ARTICLES
+10. PHOTOS
+11. COMMUNITY
+12. CONTESTS
+13. PETS IN NEED / ПОМОЩЬ ЖИВОТНЫМ
+14. PARTNERS
+
+IMPORTANT:
+- NO WELLNESS
+- ONLY HEALTH
+- NO HELP / RESCUE DUPLICATION
+- ONLY ONE "PETS IN NEED / ПОМОЩЬ ЖИВОТНЫМ" RUBRIC
 ========================================================= */
 
 (function(){
 
 const LANGUAGE_KEY="pets_dogue_language";
+
+
+/* =========================================================
+LANGUAGE ALIASES
+========================================================= */
 
 const LANGUAGE_ALIASES={
 ua:"uk",
@@ -52,8 +85,8 @@ dk:"da"
 
 
 /* =========================================================
-ONE FIXED RUBRIC ORDER
-NEVER REORDER
+FINAL NAVIGATION
+ONE ORDER EVERYWHERE
 ========================================================= */
 
 const NAV_ITEMS=[
@@ -61,85 +94,85 @@ const NAV_ITEMS=[
 {
 key:"magazine",
 url:"issue-01.html",
-image:"file_00000000a9d471fda9b4629589be22a9.png"
+image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82"
 },
 
 {
 key:"coverStars",
 url:"members-gallery.html",
-image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82"
 },
 
 {
-key:"offers",
+key:"discounts",
 url:"special-offers.html",
-image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=82"
 },
 
 {
-key:"places",
+key:"petFriendly",
 url:"pet-friendly-places.html",
-image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"articles",
-url:"articles.html",
-image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"photos",
-url:"photos.html",
-image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"travel",
-url:"pet-travel.html",
-image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"fashion",
-url:"pet-fashion.html",
-image:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"wellness",
-url:"wellness.html",
-image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"community",
-url:"local-community.html",
-image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"contests",
-url:"contests.html",
-image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=80"
-},
-
-{
-key:"rescue",
-url:"pets-in-need.html",
-image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82"
 },
 
 {
 key:"marketplace",
 url:"pet-marketplace.html",
-image:"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80"
+image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"travel",
+url:"pet-travel.html",
+image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"fashion",
+url:"pet-fashion.html",
+image:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"health",
+url:"wellness.html",
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"articles",
+url:"articles.html",
+image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"photos",
+url:"photos.html",
+image:"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"community",
+url:"local-community.html",
+image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"contests",
+url:"contests.html",
+image:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=500&q=82"
+},
+
+{
+key:"animalHelp",
+url:"pets-in-need.html",
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=82"
 },
 
 {
 key:"partners",
 url:"partners.html",
-image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
 }
 
 ];
@@ -155,27 +188,27 @@ const PAGE_KEYS={
 
 "members-gallery.html":"coverStars",
 
-"special-offers.html":"offers",
+"special-offers.html":"discounts",
 
-"pet-friendly-places.html":"places",
+"pet-friendly-places.html":"petFriendly",
 
-"articles.html":"articles",
-
-"photos.html":"photos",
+"pet-marketplace.html":"marketplace",
 
 "pet-travel.html":"travel",
 
 "pet-fashion.html":"fashion",
 
-"wellness.html":"wellness",
+"wellness.html":"health",
+
+"articles.html":"articles",
+
+"photos.html":"photos",
 
 "local-community.html":"community",
 
 "contests.html":"contests",
 
-"pets-in-need.html":"rescue",
-
-"pet-marketplace.html":"marketplace",
+"pets-in-need.html":"animalHelp",
 
 "partners.html":"partners"
 
@@ -183,708 +216,1207 @@ const PAGE_KEYS={
 
 
 /* =========================================================
-23 LANGUAGES
+ALL 23 LANGUAGES
+
+NAVIGATION + MENU + ACCESSIBILITY + CARD DESCRIPTIONS
 ========================================================= */
 
 const TEXT={
 
+
+/* =========================================================
+ENGLISH
+========================================================= */
+
 en:{
+
 menu:"Contents",
 signIn:"Sign In",
-club:"Join Club",
+joinClub:"Join Club",
 language:"Language",
 contact:"Contact us",
-fallbackDescription:"Explore this PETS & DOGUE section.",
+openMenu:"Open menu",
+closeMenu:"Close menu",
+home:"Home",
 
+nav:{
 magazine:"Magazine",
 coverStars:"Cover Stars",
-offers:"Discounts",
-places:"Pets Welcome",
-articles:"Articles",
-photos:"Photos",
+discounts:"Discounts",
+petFriendly:"Pet-Friendly",
+marketplace:"Marketplace",
 travel:"Travel",
 fashion:"Fashion",
-wellness:"Health",
-community:"Community",
-contests:"Contests",
-rescue:"Help",
-marketplace:"Marketplace",
-partners:"Partners"
-},
-
-uk:{
-menu:"Зміст",
-signIn:"Увійти",
-club:"Вступити до клубу",
-language:"Мова",
-contact:"Зв’язатися з нами",
-fallbackDescription:"Відкрийте цей розділ PETS & DOGUE.",
-
-magazine:"Журнал",
-coverStars:"Зірки обкладинки",
-offers:"Знижки",
-places:"Улюбленцям раді",
-articles:"Статті",
-photos:"Фото",
-travel:"Подорожі",
-fashion:"Мода",
-wellness:"Здоров’я",
-community:"Спільнота",
-contests:"Конкурси",
-rescue:"Допомога",
-marketplace:"Маркетплейс",
-partners:"Партнери"
-},
-
-ru:{
-menu:"Содержание",
-signIn:"Войти",
-club:"Вступить в клуб",
-language:"Язык",
-contact:"Связаться с нами",
-fallbackDescription:"Откройте этот раздел PETS & DOGUE.",
-
-magazine:"Журнал",
-coverStars:"Звёзды обложки",
-offers:"Скидки",
-places:"Питомцам рады",
-articles:"Статьи",
-photos:"Фото",
-travel:"Путешествия",
-fashion:"Мода",
-wellness:"Здоровье",
-community:"Сообщество",
-contests:"Конкурсы",
-rescue:"Помощь",
-marketplace:"Маркетплейс",
-partners:"Партнёры"
-},
-
-fr:{
-menu:"Sommaire",
-signIn:"Connexion",
-club:"Rejoindre le Club",
-language:"Langue",
-contact:"Nous contacter",
-fallbackDescription:"Découvrez cette rubrique PETS & DOGUE.",
-
-magazine:"Magazine",
-coverStars:"Stars de couverture",
-offers:"Réductions",
-places:"Animaux bienvenus",
+health:"Health",
 articles:"Articles",
 photos:"Photos",
-travel:"Voyages",
-fashion:"Mode",
-wellness:"Santé",
-community:"Communauté",
-contests:"Concours",
-rescue:"Aide",
-marketplace:"Marketplace",
-partners:"Partenaires"
-},
-
-de:{
-menu:"Inhalt",
-signIn:"Anmelden",
-club:"Club beitreten",
-language:"Sprache",
-contact:"Kontakt",
-fallbackDescription:"Entdecken Sie diesen PETS & DOGUE Bereich.",
-
-magazine:"Magazin",
-coverStars:"Cover Stars",
-offers:"Rabatte",
-places:"Tiere willkommen",
-articles:"Artikel",
-photos:"Fotos",
-travel:"Reisen",
-fashion:"Mode",
-wellness:"Gesundheit",
 community:"Community",
-contests:"Wettbewerbe",
-rescue:"Hilfe",
-marketplace:"Marktplatz",
-partners:"Partner"
-},
-
-es:{
-menu:"Contenido",
-signIn:"Iniciar sesión",
-club:"Únete al Club",
-language:"Idioma",
-contact:"Contáctanos",
-fallbackDescription:"Explora esta sección de PETS & DOGUE.",
-
-magazine:"Revista",
-coverStars:"Estrellas de portada",
-offers:"Descuentos",
-places:"Mascotas bienvenidas",
-articles:"Artículos",
-photos:"Fotos",
-travel:"Viajes",
-fashion:"Moda",
-wellness:"Salud",
-community:"Comunidad",
-contests:"Concursos",
-rescue:"Ayuda",
-marketplace:"Marketplace",
-partners:"Socios"
-},
-
-it:{
-menu:"Contenuti",
-signIn:"Accedi",
-club:"Unisciti al Club",
-language:"Lingua",
-contact:"Contattaci",
-fallbackDescription:"Esplora questa sezione PETS & DOGUE.",
-
-magazine:"Rivista",
-coverStars:"Cover Star",
-offers:"Sconti",
-places:"Animali benvenuti",
-articles:"Articoli",
-photos:"Foto",
-travel:"Viaggi",
-fashion:"Moda",
-wellness:"Salute",
-community:"Community",
-contests:"Concorsi",
-rescue:"Aiuto",
-marketplace:"Marketplace",
-partners:"Partner"
-},
-
-pt:{
-menu:"Conteúdo",
-signIn:"Entrar",
-club:"Entrar no Club",
-language:"Idioma",
-contact:"Contacte-nos",
-fallbackDescription:"Explore esta secção PETS & DOGUE.",
-
-magazine:"Revista",
-coverStars:"Estrelas da capa",
-offers:"Descontos",
-places:"Animais bem-vindos",
-articles:"Artigos",
-photos:"Fotos",
-travel:"Viagens",
-fashion:"Moda",
-wellness:"Saúde",
-community:"Comunidade",
-contests:"Concursos",
-rescue:"Ajuda",
-marketplace:"Marketplace",
-partners:"Parceiros"
-},
-
-nl:{
-menu:"Inhoud",
-signIn:"Inloggen",
-club:"Word lid",
-language:"Taal",
-contact:"Contact",
-fallbackDescription:"Ontdek deze PETS & DOGUE rubriek.",
-
-magazine:"Magazine",
-coverStars:"Coversterren",
-offers:"Kortingen",
-places:"Huisdieren welkom",
-articles:"Artikelen",
-photos:"Foto's",
-travel:"Reizen",
-fashion:"Mode",
-wellness:"Gezondheid",
-community:"Community",
-contests:"Wedstrijden",
-rescue:"Hulp",
-marketplace:"Marktplaats",
+contests:"Contests",
+animalHelp:"Pets in Need",
 partners:"Partners"
 },
 
-pl:{
-menu:"Spis treści",
-signIn:"Zaloguj się",
-club:"Dołącz do klubu",
-language:"Język",
-contact:"Kontakt",
-fallbackDescription:"Odkryj tę sekcję PETS & DOGUE.",
-
-magazine:"Magazyn",
-coverStars:"Gwiazdy okładki",
-offers:"Zniżki",
-places:"Pupile mile widziane",
-articles:"Artykuły",
-photos:"Zdjęcia",
-travel:"Podróże",
-fashion:"Moda",
-wellness:"Zdrowie",
-community:"Społeczność",
-contests:"Konkursy",
-rescue:"Pomoc",
-marketplace:"Marketplace",
-partners:"Partnerzy"
-},
-
-cs:{
-menu:"Obsah",
-signIn:"Přihlásit se",
-club:"Vstoupit do klubu",
-language:"Jazyk",
-contact:"Kontaktujte nás",
-fallbackDescription:"Objevte tuto sekci PETS & DOGUE.",
-
-magazine:"Magazín",
-coverStars:"Hvězdy obálky",
-offers:"Slevy",
-places:"Mazlíčci vítáni",
-articles:"Články",
-photos:"Fotografie",
-travel:"Cestování",
-fashion:"Móda",
-wellness:"Zdraví",
-community:"Komunita",
-contests:"Soutěže",
-rescue:"Pomoc",
-marketplace:"Marketplace",
-partners:"Partneři"
-},
-
-sk:{
-menu:"Obsah",
-signIn:"Prihlásiť sa",
-club:"Vstúpiť do klubu",
-language:"Jazyk",
-contact:"Kontaktujte nás",
-fallbackDescription:"Objavte túto sekciu PETS & DOGUE.",
-
-magazine:"Magazín",
-coverStars:"Hviezdy obálky",
-offers:"Zľavy",
-places:"Miláčikovia vítaní",
-articles:"Články",
-photos:"Fotografie",
-travel:"Cestovanie",
-fashion:"Móda",
-wellness:"Zdravie",
-community:"Komunita",
-contests:"Súťaže",
-rescue:"Pomoc",
-marketplace:"Marketplace",
-partners:"Partneri"
-},
-
-hu:{
-menu:"Tartalom",
-signIn:"Belépés",
-club:"Csatlakozás",
-language:"Nyelv",
-contact:"Kapcsolat",
-fallbackDescription:"Fedezze fel ezt a PETS & DOGUE rovatot.",
-
-magazine:"Magazin",
-coverStars:"Címlapsztárok",
-offers:"Kedvezmények",
-places:"Állatbarát",
-articles:"Cikkek",
-photos:"Fotók",
-travel:"Utazás",
-fashion:"Divat",
-wellness:"Egészség",
-community:"Közösség",
-contests:"Versenyek",
-rescue:"Segítség",
-marketplace:"Piactér",
-partners:"Partnerek"
-},
-
-ro:{
-menu:"Conținut",
-signIn:"Autentificare",
-club:"Intră în Club",
-language:"Limbă",
-contact:"Contactați-ne",
-fallbackDescription:"Descoperă această secțiune PETS & DOGUE.",
-
-magazine:"Revistă",
-coverStars:"Vedete de copertă",
-offers:"Reduceri",
-places:"Animale binevenite",
-articles:"Articole",
-photos:"Fotografii",
-travel:"Călătorii",
-fashion:"Modă",
-wellness:"Sănătate",
-community:"Comunitate",
-contests:"Concursuri",
-rescue:"Ajutor",
-marketplace:"Marketplace",
-partners:"Parteneri"
-},
-
-bg:{
-menu:"Съдържание",
-signIn:"Вход",
-club:"Влезте в клуба",
-language:"Език",
-contact:"Свържете се с нас",
-fallbackDescription:"Разгледайте този раздел на PETS & DOGUE.",
-
-magazine:"Списание",
-coverStars:"Звезди на корицата",
-offers:"Отстъпки",
-places:"Любимци добре дошли",
-articles:"Статии",
-photos:"Снимки",
-travel:"Пътувания",
-fashion:"Мода",
-wellness:"Здраве",
-community:"Общност",
-contests:"Конкурси",
-rescue:"Помощ",
-marketplace:"Маркетплейс",
-partners:"Партньори"
-},
-
-el:{
-menu:"Περιεχόμενα",
-signIn:"Σύνδεση",
-club:"Εγγραφή στο Club",
-language:"Γλώσσα",
-contact:"Επικοινωνία",
-fallbackDescription:"Ανακαλύψτε αυτή την ενότητα PETS & DOGUE.",
-
-magazine:"Περιοδικό",
-coverStars:"Αστέρια εξωφύλλου",
-offers:"Εκπτώσεις",
-places:"Κατοικίδια ευπρόσδεκτα",
-articles:"Άρθρα",
-photos:"Φωτογραφίες",
-travel:"Ταξίδια",
-fashion:"Μόδα",
-wellness:"Υγεία",
-community:"Κοινότητα",
-contests:"Διαγωνισμοί",
-rescue:"Βοήθεια",
-marketplace:"Marketplace",
-partners:"Συνεργάτες"
-},
-
-sv:{
-menu:"Innehåll",
-signIn:"Logga in",
-club:"Gå med i Club",
-language:"Språk",
-contact:"Kontakta oss",
-fallbackDescription:"Utforska denna PETS & DOGUE-sektion.",
-
-magazine:"Magasin",
-coverStars:"Omslagsstjärnor",
-offers:"Rabatter",
-places:"Husdjur välkomna",
-articles:"Artiklar",
-photos:"Foton",
-travel:"Resor",
-fashion:"Mode",
-wellness:"Hälsa",
-community:"Community",
-contests:"Tävlingar",
-rescue:"Hjälp",
-marketplace:"Marknadsplats",
-partners:"Partners"
-},
-
-da:{
-menu:"Indhold",
-signIn:"Log ind",
-club:"Tilmeld Club",
-language:"Sprog",
-contact:"Kontakt os",
-fallbackDescription:"Udforsk denne PETS & DOGUE-sektion.",
-
-magazine:"Magasin",
-coverStars:"Forsidestjerner",
-offers:"Rabatter",
-places:"Kæledyr velkomne",
-articles:"Artikler",
-photos:"Fotos",
-travel:"Rejser",
-fashion:"Mode",
-wellness:"Sundhed",
-community:"Community",
-contests:"Konkurrencer",
-rescue:"Hjælp",
-marketplace:"Marketplace",
-partners:"Partnere"
-},
-
-no:{
-menu:"Innhold",
-signIn:"Logg inn",
-club:"Bli med i Club",
-language:"Språk",
-contact:"Kontakt oss",
-fallbackDescription:"Utforsk denne PETS & DOGUE-seksjonen.",
-
-magazine:"Magasin",
-coverStars:"Forsidestjerner",
-offers:"Rabatter",
-places:"Kjæledyr velkomne",
-articles:"Artikler",
-photos:"Bilder",
-travel:"Reiser",
-fashion:"Mote",
-wellness:"Helse",
-community:"Fellesskap",
-contests:"Konkurranser",
-rescue:"Hjelp",
-marketplace:"Markedsplass",
-partners:"Partnere"
-},
-
-fi:{
-menu:"Sisältö",
-signIn:"Kirjaudu",
-club:"Liity Clubiin",
-language:"Kieli",
-contact:"Ota yhteyttä",
-fallbackDescription:"Tutustu tähän PETS & DOGUE -osioon.",
-
-magazine:"Lehti",
-coverStars:"Kansitähdet",
-offers:"Alennukset",
-places:"Lemmikit tervetulleita",
-articles:"Artikkelit",
-photos:"Kuvat",
-travel:"Matkailu",
-fashion:"Muoti",
-wellness:"Terveys",
-community:"Yhteisö",
-contests:"Kilpailut",
-rescue:"Apu",
-marketplace:"Marketplace",
-partners:"Kumppanit"
-},
-
-tr:{
-menu:"İçindekiler",
-signIn:"Giriş yap",
-club:"Club'a katıl",
-language:"Dil",
-contact:"Bize ulaşın",
-fallbackDescription:"Bu PETS & DOGUE bölümünü keşfedin.",
-
-magazine:"Dergi",
-coverStars:"Kapak yıldızları",
-offers:"İndirimler",
-places:"Evcil hayvanlar hoş geldi",
-articles:"Makaleler",
-photos:"Fotoğraflar",
-travel:"Seyahat",
-fashion:"Moda",
-wellness:"Sağlık",
-community:"Topluluk",
-contests:"Yarışmalar",
-rescue:"Yardım",
-marketplace:"Pazar",
-partners:"Ortaklar"
-},
-
-ar:{
-menu:"المحتويات",
-signIn:"تسجيل الدخول",
-club:"الانضمام إلى النادي",
-language:"اللغة",
-contact:"اتصل بنا",
-fallbackDescription:"اكتشف هذا القسم من PETS & DOGUE.",
-
-magazine:"المجلة",
-coverStars:"نجوم الغلاف",
-offers:"الخصومات",
-places:"الحيوانات مرحب بها",
-articles:"المقالات",
-photos:"الصور",
-travel:"السفر",
-fashion:"الموضة",
-wellness:"الصحة",
-community:"المجتمع",
-contests:"المسابقات",
-rescue:"المساعدة",
-marketplace:"السوق",
-partners:"الشركاء"
-},
-
-hi:{
-menu:"सामग्री",
-signIn:"साइन इन",
-club:"क्लब में शामिल हों",
-language:"भाषा",
-contact:"संपर्क करें",
-fallbackDescription:"PETS & DOGUE के इस सेक्शन को देखें।",
-
-magazine:"पत्रिका",
-coverStars:"कवर स्टार",
-offers:"छूट",
-places:"पालतू जानवरों का स्वागत है",
-articles:"लेख",
-photos:"फ़ोटो",
-travel:"यात्रा",
-fashion:"फ़ैशन",
-wellness:"स्वास्थ्य",
-community:"समुदाय",
-contests:"प्रतियोगिताएँ",
-rescue:"मदद",
-marketplace:"मार्केटप्लेस",
-partners:"पार्टनर"
+desc:{
+magazine:"Read the latest PETS & DOGUE issue.",
+coverStars:"Meet our stars and enter your pet.",
+discounts:"Exclusive offers and Club member benefits.",
+petFriendly:"Discover places where pets are welcome.",
+marketplace:"Buy, sell and discover pet services.",
+travel:"Pet-friendly journeys, hotels and destinations.",
+fashion:"Style, accessories and pet fashion.",
+health:"Health, grooming and everyday pet care.",
+articles:"Editorial stories, interviews and guides.",
+photos:"Portraits, galleries and visual stories.",
+community:"Local people, places, events and support.",
+contests:"Take part in PETS & DOGUE competitions.",
+animalHelp:"Rescue, adoption and help for animals in need.",
+partners:"Selected brands, services and lifestyle partners."
 }
 
-};
+},
 
 
 /* =========================================================
-SPECIFIC CARD DESCRIPTIONS
+UKRAINIAN
 ========================================================= */
 
-const EXTRA_MENU={
-
-en:{
-offers:"Club offers and member benefits.",
-wellness:"Health, grooming and everyday pet care.",
-partners:"Selected brands, services and lifestyle partners."
-},
-
 uk:{
-offers:"Пропозиції Club та переваги для учасників.",
-wellness:"Здоров’я, грумінг і щоденний догляд.",
-partners:"Відібрані бренди, послуги та lifestyle-партнери."
+
+menu:"Зміст",
+signIn:"Увійти",
+joinClub:"Вступити до клубу",
+language:"Мова",
+contact:"Зв’язатися з нами",
+openMenu:"Відкрити меню",
+closeMenu:"Закрити меню",
+home:"Головна",
+
+nav:{
+magazine:"Журнал",
+coverStars:"Зірки обкладинки",
+discounts:"Знижки",
+petFriendly:"Улюбленцям раді",
+marketplace:"Маркетплейс",
+travel:"Подорожі",
+fashion:"Мода",
+health:"Здоров’я",
+articles:"Статті",
+photos:"Фото",
+community:"Спільнота",
+contests:"Конкурси",
+animalHelp:"Допомога тваринам",
+partners:"Партнери"
 },
+
+desc:{
+magazine:"Читайте останній випуск PETS & DOGUE.",
+coverStars:"Знайомтеся із зірками та подавайте свого улюбленця.",
+discounts:"Ексклюзивні пропозиції та переваги Club.",
+petFriendly:"Місця, де вашим улюбленцям завжди раді.",
+marketplace:"Купуйте, продавайте та знаходьте послуги.",
+travel:"Подорожі, готелі та напрямки з улюбленцями.",
+fashion:"Стиль, аксесуари та мода для улюбленців.",
+health:"Здоров’я, грумінг і щоденний догляд.",
+articles:"Редакційні історії, інтерв’ю та поради.",
+photos:"Портрети, галереї та візуальні історії.",
+community:"Люди, місця, події та підтримка поруч.",
+contests:"Беріть участь у конкурсах PETS & DOGUE.",
+animalHelp:"Порятунок, адопція та допомога тваринам.",
+partners:"Відібрані бренди, послуги та партнери."
+}
+
+},
+
+
+/* =========================================================
+RUSSIAN
+========================================================= */
 
 ru:{
-offers:"Предложения Club и преимущества для участников.",
-wellness:"Здоровье, груминг и ежедневный уход.",
-partners:"Отобранные бренды, услуги и lifestyle-партнёры."
+
+menu:"Содержание",
+signIn:"Войти",
+joinClub:"Вступить в клуб",
+language:"Язык",
+contact:"Связаться с нами",
+openMenu:"Открыть меню",
+closeMenu:"Закрыть меню",
+home:"Главная",
+
+nav:{
+magazine:"Журнал",
+coverStars:"Звёзды обложки",
+discounts:"Скидки",
+petFriendly:"Питомцам рады",
+marketplace:"Маркетплейс",
+travel:"Путешествия",
+fashion:"Мода",
+health:"Здоровье",
+articles:"Статьи",
+photos:"Фото",
+community:"Сообщество",
+contests:"Конкурсы",
+animalHelp:"Помощь животным",
+partners:"Партнёры"
 },
+
+desc:{
+magazine:"Читайте последний выпуск PETS & DOGUE.",
+coverStars:"Знакомьтесь со звёздами и заявляйте питомца.",
+discounts:"Эксклюзивные предложения и преимущества Club.",
+petFriendly:"Места, где вашим питомцам всегда рады.",
+marketplace:"Покупайте, продавайте и находите услуги.",
+travel:"Путешествия, отели и маршруты с питомцами.",
+fashion:"Стиль, аксессуары и мода для питомцев.",
+health:"Здоровье, груминг и ежедневный уход.",
+articles:"Редакционные истории, интервью и гиды.",
+photos:"Портреты, галереи и визуальные истории.",
+community:"Люди, места, события и помощь рядом.",
+contests:"Участвуйте в конкурсах PETS & DOGUE.",
+animalHelp:"Спасение, поиск дома и помощь животным.",
+partners:"Отобранные бренды, услуги и партнёры."
+}
+
+},
+
+
+/* =========================================================
+FRENCH
+========================================================= */
 
 fr:{
-offers:"Offres du Club et avantages membres.",
-wellness:"Santé, toilettage et soins quotidiens.",
-partners:"Marques, services et partenaires sélectionnés."
+
+menu:"Sommaire",
+signIn:"Connexion",
+joinClub:"Rejoindre le Club",
+language:"Langue",
+contact:"Nous contacter",
+openMenu:"Ouvrir le menu",
+closeMenu:"Fermer le menu",
+home:"Accueil",
+
+nav:{
+magazine:"Magazine",
+coverStars:"Stars de couverture",
+discounts:"Réductions",
+petFriendly:"Animaux bienvenus",
+marketplace:"Marketplace",
+travel:"Voyages",
+fashion:"Mode",
+health:"Santé",
+articles:"Articles",
+photos:"Photos",
+community:"Communauté",
+contests:"Concours",
+animalHelp:"Aide aux animaux",
+partners:"Partenaires"
 },
+
+desc:{
+magazine:"Découvrez le dernier numéro de PETS & DOGUE.",
+coverStars:"Découvrez nos stars et inscrivez votre animal.",
+discounts:"Offres exclusives et avantages du Club.",
+petFriendly:"Découvrez les lieux qui accueillent les animaux.",
+marketplace:"Achetez, vendez et trouvez des services.",
+travel:"Voyages, hôtels et destinations avec animaux.",
+fashion:"Style, accessoires et mode pour animaux.",
+health:"Santé, toilettage et soins quotidiens.",
+articles:"Histoires, interviews et guides éditoriaux.",
+photos:"Portraits, galeries et histoires visuelles.",
+community:"Personnes, lieux, événements et entraide locale.",
+contests:"Participez aux concours PETS & DOGUE.",
+animalHelp:"Sauvetage, adoption et aide aux animaux.",
+partners:"Marques, services et partenaires sélectionnés."
+}
+
+},
+
+
+/* =========================================================
+GERMAN
+========================================================= */
 
 de:{
-offers:"Club-Angebote und Vorteile für Mitglieder.",
-wellness:"Gesundheit, Pflege und tägliche Betreuung.",
-partners:"Ausgewählte Marken, Services und Lifestyle-Partner."
+
+menu:"Inhalt",
+signIn:"Anmelden",
+joinClub:"Club beitreten",
+language:"Sprache",
+contact:"Kontakt",
+openMenu:"Menü öffnen",
+closeMenu:"Menü schließen",
+home:"Startseite",
+
+nav:{
+magazine:"Magazin",
+coverStars:"Cover Stars",
+discounts:"Rabatte",
+petFriendly:"Tierfreundlich",
+marketplace:"Marktplatz",
+travel:"Reisen",
+fashion:"Mode",
+health:"Gesundheit",
+articles:"Artikel",
+photos:"Fotos",
+community:"Community",
+contests:"Wettbewerbe",
+animalHelp:"Hilfe für Tiere",
+partners:"Partner"
 },
+
+desc:{
+magazine:"Lesen Sie die neueste PETS & DOGUE Ausgabe.",
+coverStars:"Entdecken Sie unsere Stars und melden Sie Ihr Tier an.",
+discounts:"Exklusive Angebote und Club-Vorteile.",
+petFriendly:"Entdecken Sie tierfreundliche Orte.",
+marketplace:"Kaufen, verkaufen und Services entdecken.",
+travel:"Tierfreundliche Reisen, Hotels und Ziele.",
+fashion:"Stil, Accessoires und Tiermode.",
+health:"Gesundheit, Pflege und tägliche Betreuung.",
+articles:"Editorials, Interviews und Ratgeber.",
+photos:"Porträts, Galerien und visuelle Geschichten.",
+community:"Lokale Menschen, Orte, Events und Hilfe.",
+contests:"Nehmen Sie an PETS & DOGUE Wettbewerben teil.",
+animalHelp:"Rettung, Adoption und Hilfe für Tiere.",
+partners:"Ausgewählte Marken, Services und Partner."
+}
+
+},
+
+
+/* =========================================================
+SPANISH
+========================================================= */
 
 es:{
-offers:"Ofertas del Club y ventajas para miembros.",
-wellness:"Salud, cuidado y bienestar diario.",
-partners:"Marcas, servicios y socios seleccionados."
+
+menu:"Contenido",
+signIn:"Iniciar sesión",
+joinClub:"Únete al Club",
+language:"Idioma",
+contact:"Contáctanos",
+openMenu:"Abrir menú",
+closeMenu:"Cerrar menú",
+home:"Inicio",
+
+nav:{
+magazine:"Revista",
+coverStars:"Estrellas de portada",
+discounts:"Descuentos",
+petFriendly:"Pet-Friendly",
+marketplace:"Marketplace",
+travel:"Viajes",
+fashion:"Moda",
+health:"Salud",
+articles:"Artículos",
+photos:"Fotos",
+community:"Comunidad",
+contests:"Concursos",
+animalHelp:"Ayuda a animales",
+partners:"Socios"
 },
+
+desc:{
+magazine:"Lee el último número de PETS & DOGUE.",
+coverStars:"Conoce nuestras estrellas e inscribe a tu mascota.",
+discounts:"Ofertas exclusivas y ventajas del Club.",
+petFriendly:"Descubre lugares donde admiten mascotas.",
+marketplace:"Compra, vende y encuentra servicios.",
+travel:"Viajes, hoteles y destinos con mascotas.",
+fashion:"Estilo, accesorios y moda para mascotas.",
+health:"Salud, peluquería y cuidados diarios.",
+articles:"Historias, entrevistas y guías editoriales.",
+photos:"Retratos, galerías e historias visuales.",
+community:"Personas, lugares, eventos y apoyo local.",
+contests:"Participa en concursos PETS & DOGUE.",
+animalHelp:"Rescate, adopción y ayuda para animales.",
+partners:"Marcas, servicios y socios seleccionados."
+}
+
+},
+
+
+/* =========================================================
+ITALIAN
+========================================================= */
 
 it:{
-offers:"Offerte Club e vantaggi per i membri.",
-wellness:"Salute, toelettatura e cura quotidiana.",
-partners:"Brand, servizi e partner selezionati."
+
+menu:"Contenuti",
+signIn:"Accedi",
+joinClub:"Unisciti al Club",
+language:"Lingua",
+contact:"Contattaci",
+openMenu:"Apri menu",
+closeMenu:"Chiudi menu",
+home:"Home",
+
+nav:{
+magazine:"Rivista",
+coverStars:"Cover Stars",
+discounts:"Sconti",
+petFriendly:"Pet-Friendly",
+marketplace:"Marketplace",
+travel:"Viaggi",
+fashion:"Moda",
+health:"Salute",
+articles:"Articoli",
+photos:"Foto",
+community:"Community",
+contests:"Concorsi",
+animalHelp:"Aiuto agli animali",
+partners:"Partner"
 },
+
+desc:{
+magazine:"Leggi l’ultimo numero di PETS & DOGUE.",
+coverStars:"Scopri le nostre star e iscrivi il tuo animale.",
+discounts:"Offerte esclusive e vantaggi del Club.",
+petFriendly:"Scopri i luoghi che accolgono gli animali.",
+marketplace:"Compra, vendi e trova servizi.",
+travel:"Viaggi, hotel e destinazioni pet-friendly.",
+fashion:"Stile, accessori e moda per animali.",
+health:"Salute, toelettatura e cura quotidiana.",
+articles:"Storie editoriali, interviste e guide.",
+photos:"Ritratti, gallerie e storie visive.",
+community:"Persone, luoghi, eventi e supporto locale.",
+contests:"Partecipa ai concorsi PETS & DOGUE.",
+animalHelp:"Salvataggio, adozione e aiuto agli animali.",
+partners:"Brand, servizi e partner selezionati."
+}
+
+},
+
+
+/* =========================================================
+PORTUGUESE
+========================================================= */
 
 pt:{
-offers:"Ofertas do Club e benefícios para membros.",
-wellness:"Saúde, cuidados e bem-estar diário.",
-partners:"Marcas, serviços e parceiros selecionados."
+
+menu:"Conteúdo",
+signIn:"Entrar",
+joinClub:"Entrar no Club",
+language:"Idioma",
+contact:"Contacte-nos",
+openMenu:"Abrir menu",
+closeMenu:"Fechar menu",
+home:"Início",
+
+nav:{
+magazine:"Revista",
+coverStars:"Estrelas da capa",
+discounts:"Descontos",
+petFriendly:"Pet-Friendly",
+marketplace:"Marketplace",
+travel:"Viagens",
+fashion:"Moda",
+health:"Saúde",
+articles:"Artigos",
+photos:"Fotos",
+community:"Comunidade",
+contests:"Concursos",
+animalHelp:"Ajuda aos animais",
+partners:"Parceiros"
 },
+
+desc:{
+magazine:"Leia a edição mais recente da PETS & DOGUE.",
+coverStars:"Conheça as nossas estrelas e inscreva o seu animal.",
+discounts:"Ofertas exclusivas e benefícios do Club.",
+petFriendly:"Descubra locais onde os animais são bem-vindos.",
+marketplace:"Compre, venda e encontre serviços.",
+travel:"Viagens, hotéis e destinos com animais.",
+fashion:"Estilo, acessórios e moda para animais.",
+health:"Saúde, grooming e cuidados diários.",
+articles:"Histórias editoriais, entrevistas e guias.",
+photos:"Retratos, galerias e histórias visuais.",
+community:"Pessoas, locais, eventos e apoio local.",
+contests:"Participe nos concursos PETS & DOGUE.",
+animalHelp:"Resgate, adoção e ajuda aos animais.",
+partners:"Marcas, serviços e parceiros selecionados."
+}
+
+},
+
+
+/* =========================================================
+DUTCH
+========================================================= */
 
 nl:{
-offers:"Clubaanbiedingen en ledenvoordelen.",
-wellness:"Gezondheid, verzorging en dagelijkse zorg.",
-partners:"Geselecteerde merken, diensten en partners."
+
+menu:"Inhoud",
+signIn:"Inloggen",
+joinClub:"Word lid",
+language:"Taal",
+contact:"Contact",
+openMenu:"Menu openen",
+closeMenu:"Menu sluiten",
+home:"Home",
+
+nav:{
+magazine:"Magazine",
+coverStars:"Coversterren",
+discounts:"Kortingen",
+petFriendly:"Huisdiervriendelijk",
+marketplace:"Marktplaats",
+travel:"Reizen",
+fashion:"Mode",
+health:"Gezondheid",
+articles:"Artikelen",
+photos:"Foto's",
+community:"Community",
+contests:"Wedstrijden",
+animalHelp:"Hulp voor dieren",
+partners:"Partners"
 },
+
+desc:{
+magazine:"Lees het nieuwste nummer van PETS & DOGUE.",
+coverStars:"Ontmoet onze sterren en meld je huisdier aan.",
+discounts:"Exclusieve aanbiedingen en Club-voordelen.",
+petFriendly:"Ontdek plaatsen waar huisdieren welkom zijn.",
+marketplace:"Koop, verkoop en ontdek diensten.",
+travel:"Huisdiervriendelijke reizen, hotels en bestemmingen.",
+fashion:"Stijl, accessoires en mode voor huisdieren.",
+health:"Gezondheid, verzorging en dagelijkse zorg.",
+articles:"Redactionele verhalen, interviews en gidsen.",
+photos:"Portretten, galerijen en visuele verhalen.",
+community:"Lokale mensen, plaatsen, evenementen en steun.",
+contests:"Doe mee aan PETS & DOGUE wedstrijden.",
+animalHelp:"Redding, adoptie en hulp voor dieren.",
+partners:"Geselecteerde merken, diensten en partners."
+}
+
+},
+
+
+/* =========================================================
+POLISH
+========================================================= */
 
 pl:{
-offers:"Oferty Club i korzyści dla członków.",
-wellness:"Zdrowie, pielęgnacja i codzienna opieka.",
-partners:"Wybrane marki, usługi i partnerzy."
+
+menu:"Spis treści",
+signIn:"Zaloguj się",
+joinClub:"Dołącz do klubu",
+language:"Język",
+contact:"Kontakt",
+openMenu:"Otwórz menu",
+closeMenu:"Zamknij menu",
+home:"Strona główna",
+
+nav:{
+magazine:"Magazyn",
+coverStars:"Gwiazdy okładki",
+discounts:"Zniżki",
+petFriendly:"Przyjazne zwierzętom",
+marketplace:"Marketplace",
+travel:"Podróże",
+fashion:"Moda",
+health:"Zdrowie",
+articles:"Artykuły",
+photos:"Zdjęcia",
+community:"Społeczność",
+contests:"Konkursy",
+animalHelp:"Pomoc zwierzętom",
+partners:"Partnerzy"
 },
+
+desc:{
+magazine:"Przeczytaj najnowszy numer PETS & DOGUE.",
+coverStars:"Poznaj nasze gwiazdy i zgłoś swojego pupila.",
+discounts:"Ekskluzywne oferty i korzyści Club.",
+petFriendly:"Odkrywaj miejsca przyjazne zwierzętom.",
+marketplace:"Kupuj, sprzedawaj i znajduj usługi.",
+travel:"Podróże, hotele i miejsca przyjazne zwierzętom.",
+fashion:"Styl, akcesoria i moda dla zwierząt.",
+health:"Zdrowie, pielęgnacja i codzienna opieka.",
+articles:"Historie, wywiady i poradniki redakcyjne.",
+photos:"Portrety, galerie i historie wizualne.",
+community:"Ludzie, miejsca, wydarzenia i lokalne wsparcie.",
+contests:"Bierz udział w konkursach PETS & DOGUE.",
+animalHelp:"Ratowanie, adopcja i pomoc zwierzętom.",
+partners:"Wybrane marki, usługi i partnerzy."
+}
+
+},
+
+
+/* =========================================================
+CZECH
+========================================================= */
 
 cs:{
-offers:"Nabídky Club a výhody pro členy.",
-wellness:"Zdraví, péče a každodenní starostlivost.",
-partners:"Vybrané značky, služby a partneři."
+
+menu:"Obsah",
+signIn:"Přihlásit se",
+joinClub:"Vstoupit do klubu",
+language:"Jazyk",
+contact:"Kontaktujte nás",
+openMenu:"Otevřít menu",
+closeMenu:"Zavřít menu",
+home:"Domů",
+
+nav:{
+magazine:"Magazín",
+coverStars:"Hvězdy obálky",
+discounts:"Slevy",
+petFriendly:"Přátelské ke zvířatům",
+marketplace:"Marketplace",
+travel:"Cestování",
+fashion:"Móda",
+health:"Zdraví",
+articles:"Články",
+photos:"Fotografie",
+community:"Komunita",
+contests:"Soutěže",
+animalHelp:"Pomoc zvířatům",
+partners:"Partneři"
 },
+
+desc:{
+magazine:"Přečtěte si nejnovější vydání PETS & DOGUE.",
+coverStars:"Poznejte naše hvězdy a přihlaste svého mazlíčka.",
+discounts:"Exkluzivní nabídky a výhody Club.",
+petFriendly:"Objevujte místa přátelská ke zvířatům.",
+marketplace:"Nakupujte, prodávejte a hledejte služby.",
+travel:"Cestování, hotely a destinace se zvířaty.",
+fashion:"Styl, doplňky a móda pro zvířata.",
+health:"Zdraví, péče a každodenní starostlivost.",
+articles:"Redakční příběhy, rozhovory a průvodci.",
+photos:"Portréty, galerie a vizuální příběhy.",
+community:"Lidé, místa, události a místní podpora.",
+contests:"Zapojte se do soutěží PETS & DOGUE.",
+animalHelp:"Záchrana, adopce a pomoc zvířatům.",
+partners:"Vybrané značky, služby a partneři."
+}
+
+},
+
+
+/* =========================================================
+SLOVAK
+========================================================= */
 
 sk:{
-offers:"Ponuky Club a výhody pre členov.",
-wellness:"Zdravie, starostlivosť a každodenná starostlivosť.",
-partners:"Vybrané značky, služby a partneri."
+
+menu:"Obsah",
+signIn:"Prihlásiť sa",
+joinClub:"Vstúpiť do klubu",
+language:"Jazyk",
+contact:"Kontaktujte nás",
+openMenu:"Otvoriť menu",
+closeMenu:"Zavrieť menu",
+home:"Domov",
+
+nav:{
+magazine:"Magazín",
+coverStars:"Hviezdy obálky",
+discounts:"Zľavy",
+petFriendly:"Priateľské k zvieratám",
+marketplace:"Marketplace",
+travel:"Cestovanie",
+fashion:"Móda",
+health:"Zdravie",
+articles:"Články",
+photos:"Fotografie",
+community:"Komunita",
+contests:"Súťaže",
+animalHelp:"Pomoc zvieratám",
+partners:"Partneri"
 },
+
+desc:{
+magazine:"Prečítajte si najnovšie vydanie PETS & DOGUE.",
+coverStars:"Spoznajte naše hviezdy a prihláste svojho miláčika.",
+discounts:"Exkluzívne ponuky a výhody Club.",
+petFriendly:"Objavujte miesta priateľské k zvieratám.",
+marketplace:"Nakupujte, predávajte a hľadajte služby.",
+travel:"Cestovanie, hotely a destinácie so zvieratami.",
+fashion:"Štýl, doplnky a móda pre zvieratá.",
+health:"Zdravie, starostlivosť a každodenná péče.",
+articles:"Redakčné príbehy, rozhovory a sprievodcovia.",
+photos:"Portréty, galérie a vizuálne príbehy.",
+community:"Ľudia, miesta, udalosti a miestna podpora.",
+contests:"Zapojte sa do súťaží PETS & DOGUE.",
+animalHelp:"Záchrana, adopcia a pomoc zvieratám.",
+partners:"Vybrané značky, služby a partneri."
+}
+
+},
+
+
+/* =========================================================
+HUNGARIAN
+========================================================= */
 
 hu:{
-offers:"Club ajánlatok és tagsági előnyök.",
-wellness:"Egészség, ápolás és mindennapi gondozás.",
-partners:"Válogatott márkák, szolgáltatások és partnerek."
+
+menu:"Tartalom",
+signIn:"Belépés",
+joinClub:"Csatlakozás",
+language:"Nyelv",
+contact:"Kapcsolat",
+openMenu:"Menü megnyitása",
+closeMenu:"Menü bezárása",
+home:"Kezdőlap",
+
+nav:{
+magazine:"Magazin",
+coverStars:"Címlapsztárok",
+discounts:"Kedvezmények",
+petFriendly:"Állatbarát",
+marketplace:"Piactér",
+travel:"Utazás",
+fashion:"Divat",
+health:"Egészség",
+articles:"Cikkek",
+photos:"Fotók",
+community:"Közösség",
+contests:"Versenyek",
+animalHelp:"Állatsegítés",
+partners:"Partnerek"
 },
+
+desc:{
+magazine:"Olvassa el a PETS & DOGUE legújabb számát.",
+coverStars:"Ismerje meg sztárjainkat és nevezze kedvencét.",
+discounts:"Exkluzív ajánlatok és Club-előnyök.",
+petFriendly:"Fedezze fel az állatbarát helyeket.",
+marketplace:"Vásároljon, adjon el és találjon szolgáltatásokat.",
+travel:"Állatbarát utazások, szállodák és úti célok.",
+fashion:"Stílus, kiegészítők és kisállatdivat.",
+health:"Egészség, ápolás és mindennapi gondozás.",
+articles:"Szerkesztőségi történetek, interjúk és útmutatók.",
+photos:"Portrék, galériák és vizuális történetek.",
+community:"Helyi emberek, helyek, események és támogatás.",
+contests:"Vegyen részt PETS & DOGUE versenyeken.",
+animalHelp:"Mentés, örökbefogadás és segítség az állatoknak.",
+partners:"Válogatott márkák, szolgáltatások és partnerek."
+}
+
+},
+
+
+/* =========================================================
+ROMANIAN
+========================================================= */
 
 ro:{
-offers:"Oferte Club și beneficii pentru membri.",
-wellness:"Sănătate, îngrijire și wellness zilnic.",
-partners:"Branduri, servicii și parteneri selectați."
+
+menu:"Conținut",
+signIn:"Autentificare",
+joinClub:"Intră în Club",
+language:"Limbă",
+contact:"Contactați-ne",
+openMenu:"Deschide meniul",
+closeMenu:"Închide meniul",
+home:"Acasă",
+
+nav:{
+magazine:"Revistă",
+coverStars:"Vedete de copertă",
+discounts:"Reduceri",
+petFriendly:"Pet-Friendly",
+marketplace:"Marketplace",
+travel:"Călătorii",
+fashion:"Modă",
+health:"Sănătate",
+articles:"Articole",
+photos:"Fotografii",
+community:"Comunitate",
+contests:"Concursuri",
+animalHelp:"Ajutor pentru animale",
+partners:"Parteneri"
 },
+
+desc:{
+magazine:"Citește cea mai nouă ediție PETS & DOGUE.",
+coverStars:"Descoperă vedetele și înscrie animalul tău.",
+discounts:"Oferte exclusive și beneficii Club.",
+petFriendly:"Descoperă locuri unde animalele sunt binevenite.",
+marketplace:"Cumpără, vinde și găsește servicii.",
+travel:"Călătorii, hoteluri și destinații cu animale.",
+fashion:"Stil, accesorii și modă pentru animale.",
+health:"Sănătate, grooming și îngrijire zilnică.",
+articles:"Povești editoriale, interviuri și ghiduri.",
+photos:"Portrete, galerii și povești vizuale.",
+community:"Oameni, locuri, evenimente și sprijin local.",
+contests:"Participă la concursurile PETS & DOGUE.",
+animalHelp:"Salvare, adopție și ajutor pentru animale.",
+partners:"Branduri, servicii și parteneri selectați."
+}
+
+},
+
+
+/* =========================================================
+BULGARIAN
+========================================================= */
 
 bg:{
-offers:"Club оферти и предимства за членове.",
-wellness:"Здраве, грижа и ежедневен комфорт.",
-partners:"Подбрани марки, услуги и партньори."
+
+menu:"Съдържание",
+signIn:"Вход",
+joinClub:"Влезте в клуба",
+language:"Език",
+contact:"Свържете се с нас",
+openMenu:"Отвори менюто",
+closeMenu:"Затвори менюто",
+home:"Начало",
+
+nav:{
+magazine:"Списание",
+coverStars:"Звезди на корицата",
+discounts:"Отстъпки",
+petFriendly:"Любимци добре дошли",
+marketplace:"Маркетплейс",
+travel:"Пътувания",
+fashion:"Мода",
+health:"Здраве",
+articles:"Статии",
+photos:"Снимки",
+community:"Общност",
+contests:"Конкурси",
+animalHelp:"Помощ за животни",
+partners:"Партньори"
 },
+
+desc:{
+magazine:"Прочетете най-новия брой на PETS & DOGUE.",
+coverStars:"Запознайте се със звездите и включете любимеца си.",
+discounts:"Ексклузивни оферти и Club предимства.",
+petFriendly:"Открийте места, където любимците са добре дошли.",
+marketplace:"Купувайте, продавайте и намирайте услуги.",
+travel:"Пътувания, хотели и дестинации с любимци.",
+fashion:"Стил, аксесоари и мода за любимци.",
+health:"Здраве, груминг и ежедневна грижа.",
+articles:"Редакционни истории, интервюта и ръководства.",
+photos:"Портрети, галерии и визуални истории.",
+community:"Хора, места, събития и местна подкрепа.",
+contests:"Участвайте в конкурсите PETS & DOGUE.",
+animalHelp:"Спасяване, осиновяване и помощ за животни.",
+partners:"Подбрани марки, услуги и партньори."
+}
+
+},
+
+
+/* =========================================================
+GREEK
+========================================================= */
 
 el:{
-offers:"Προσφορές Club και προνόμια μελών.",
-wellness:"Υγεία, περιποίηση και καθημερινή φροντίδα.",
-partners:"Επιλεγμένες μάρκες, υπηρεσίες και συνεργάτες."
+
+menu:"Περιεχόμενα",
+signIn:"Σύνδεση",
+joinClub:"Εγγραφή στο Club",
+language:"Γλώσσα",
+contact:"Επικοινωνία",
+openMenu:"Άνοιγμα μενού",
+closeMenu:"Κλείσιμο μενού",
+home:"Αρχική",
+
+nav:{
+magazine:"Περιοδικό",
+coverStars:"Αστέρια εξωφύλλου",
+discounts:"Εκπτώσεις",
+petFriendly:"Φιλικό στα κατοικίδια",
+marketplace:"Marketplace",
+travel:"Ταξίδια",
+fashion:"Μόδα",
+health:"Υγεία",
+articles:"Άρθρα",
+photos:"Φωτογραφίες",
+community:"Κοινότητα",
+contests:"Διαγωνισμοί",
+animalHelp:"Βοήθεια στα ζώα",
+partners:"Συνεργάτες"
 },
+
+desc:{
+magazine:"Διαβάστε το τελευταίο τεύχος του PETS & DOGUE.",
+coverStars:"Γνωρίστε τα αστέρια μας και δηλώστε το κατοικίδιό σας.",
+discounts:"Αποκλειστικές προσφορές και προνόμια Club.",
+petFriendly:"Ανακαλύψτε μέρη φιλικά προς τα κατοικίδια.",
+marketplace:"Αγοράστε, πουλήστε και βρείτε υπηρεσίες.",
+travel:"Ταξίδια, ξενοδοχεία και προορισμοί με κατοικίδια.",
+fashion:"Στυλ, αξεσουάρ και μόδα για κατοικίδια.",
+health:"Υγεία, περιποίηση και καθημερινή φροντίδα.",
+articles:"Ιστορίες, συνεντεύξεις και οδηγοί.",
+photos:"Πορτρέτα, γκαλερί και οπτικές ιστορίες.",
+community:"Άνθρωποι, μέρη, εκδηλώσεις και τοπική υποστήριξη.",
+contests:"Πάρτε μέρος στους διαγωνισμούς PETS & DOGUE.",
+animalHelp:"Διάσωση, υιοθεσία και βοήθεια στα ζώα.",
+partners:"Επιλεγμένες μάρκες, υπηρεσίες και συνεργάτες."
+}
+
+},
+
+
+/* =========================================================
+SWEDISH
+========================================================= */
 
 sv:{
-offers:"Club-erbjudanden och medlemsförmåner.",
-wellness:"Hälsa, pälsvård och daglig omsorg.",
-partners:"Utvalda varumärken, tjänster och partners."
+
+menu:"Innehåll",
+signIn:"Logga in",
+joinClub:"Gå med i Club",
+language:"Språk",
+contact:"Kontakta oss",
+openMenu:"Öppna meny",
+closeMenu:"Stäng meny",
+home:"Hem",
+
+nav:{
+magazine:"Magasin",
+coverStars:"Omslagsstjärnor",
+discounts:"Rabatter",
+petFriendly:"Husdjursvänligt",
+marketplace:"Marknadsplats",
+travel:"Resor",
+fashion:"Mode",
+health:"Hälsa",
+articles:"Artiklar",
+photos:"Foton",
+community:"Community",
+contests:"Tävlingar",
+animalHelp:"Hjälp för djur",
+partners:"Partners"
 },
+
+desc:{
+magazine:"Läs det senaste numret av PETS & DOGUE.",
+coverStars:"Möt våra stjärnor och anmäl ditt husdjur.",
+discounts:"Exklusiva erbjudanden och Club-förmåner.",
+petFriendly:"Upptäck platser där husdjur är välkomna.",
+marketplace:"Köp, sälj och hitta tjänster.",
+travel:"Husdjursvänliga resor, hotell och destinationer.",
+fashion:"Stil, accessoarer och mode för husdjur.",
+health:"Hälsa, pälsvård och daglig omsorg.",
+articles:"Redaktionella berättelser, intervjuer och guider.",
+photos:"Porträtt, gallerier och visuella berättelser.",
+community:"Lokala människor, platser, event och stöd.",
+contests:"Delta i PETS & DOGUE-tävlingar.",
+animalHelp:"Räddning, adoption och hjälp för djur.",
+partners:"Utvalda varumärken, tjänster och partners."
+}
+
+},
+
+
+/* =========================================================
+DANISH
+========================================================= */
 
 da:{
-offers:"Club-tilbud og medlemsfordele.",
-wellness:"Sundhed, pleje og daglig omsorg.",
-partners:"Udvalgte brands, tjenester og partnere."
+
+menu:"Indhold",
+signIn:"Log ind",
+joinClub:"Tilmeld Club",
+language:"Sprog",
+contact:"Kontakt os",
+openMenu:"Åbn menu",
+closeMenu:"Luk menu",
+home:"Hjem",
+
+nav:{
+magazine:"Magasin",
+coverStars:"Forsidestjerner",
+discounts:"Rabatter",
+petFriendly:"Kæledyrsvenligt",
+marketplace:"Marketplace",
+travel:"Rejser",
+fashion:"Mode",
+health:"Sundhed",
+articles:"Artikler",
+photos:"Fotos",
+community:"Community",
+contests:"Konkurrencer",
+animalHelp:"Hjælp til dyr",
+partners:"Partnere"
 },
+
+desc:{
+magazine:"Læs det nyeste nummer af PETS & DOGUE.",
+coverStars:"Mød vores stjerner og tilmeld dit kæledyr.",
+discounts:"Eksklusive tilbud og Club-fordele.",
+petFriendly:"Find steder hvor kæledyr er velkomne.",
+marketplace:"Køb, sælg og find tjenester.",
+travel:"Kæledyrsvenlige rejser, hoteller og destinationer.",
+fashion:"Stil, tilbehør og mode til kæledyr.",
+health:"Sundhed, pleje og daglig omsorg.",
+articles:"Redaktionelle historier, interviews og guider.",
+photos:"Portrætter, gallerier og visuelle historier.",
+community:"Lokale mennesker, steder, events og støtte.",
+contests:"Deltag i PETS & DOGUE-konkurrencer.",
+animalHelp:"Redning, adoption og hjælp til dyr.",
+partners:"Udvalgte brands, tjenester og partnere."
+}
+
+},
+
+
+/* =========================================================
+NORWEGIAN
+========================================================= */
 
 no:{
-offers:"Club-tilbud og medlemsfordeler.",
-wellness:"Helse, pleie og daglig omsorg.",
-partners:"Utvalgte merker, tjenester og partnere."
+
+menu:"Innhold",
+signIn:"Logg inn",
+joinClub:"Bli med i Club",
+language:"Språk",
+contact:"Kontakt oss",
+openMenu:"Åpne meny",
+closeMenu:"Lukk meny",
+home:"Hjem",
+
+nav:{
+magazine:"Magasin",
+coverStars:"Forsidestjerner",
+discounts:"Rabatter",
+petFriendly:"Dyrevennlig",
+marketplace:"Markedsplass",
+travel:"Reiser",
+fashion:"Mote",
+health:"Helse",
+articles:"Artikler",
+photos:"Bilder",
+community:"Fellesskap",
+contests:"Konkurranser",
+animalHelp:"Hjelp til dyr",
+partners:"Partnere"
 },
+
+desc:{
+magazine:"Les den nyeste utgaven av PETS & DOGUE.",
+coverStars:"Møt stjernene våre og meld på kjæledyret ditt.",
+discounts:"Eksklusive tilbud og Club-fordeler.",
+petFriendly:"Finn steder hvor kjæledyr er velkomne.",
+marketplace:"Kjøp, selg og finn tjenester.",
+travel:"Dyrevennlige reiser, hoteller og destinasjoner.",
+fashion:"Stil, tilbehør og mote for kjæledyr.",
+health:"Helse, pelspleie og daglig omsorg.",
+articles:"Redaksjonelle historier, intervjuer og guider.",
+photos:"Portretter, gallerier og visuelle historier.",
+community:"Lokale mennesker, steder, arrangementer og støtte.",
+contests:"Delta i PETS & DOGUE-konkurranser.",
+animalHelp:"Redning, adopsjon og hjelp til dyr.",
+partners:"Utvalgte merker, tjenester og partnere."
+}
+
+},
+
+
+/* =========================================================
+FINNISH
+========================================================= */
 
 fi:{
-offers:"Club-tarjoukset ja jäsenedut.",
-wellness:"Terveys, hoito ja päivittäinen hyvinvointi.",
-partners:"Valitut brändit, palvelut ja kumppanit."
+
+menu:"Sisältö",
+signIn:"Kirjaudu",
+joinClub:"Liity Clubiin",
+language:"Kieli",
+contact:"Ota yhteyttä",
+openMenu:"Avaa valikko",
+closeMenu:"Sulje valikko",
+home:"Etusivu",
+
+nav:{
+magazine:"Lehti",
+coverStars:"Kansitähdet",
+discounts:"Alennukset",
+petFriendly:"Lemmikkiystävällinen",
+marketplace:"Marketplace",
+travel:"Matkailu",
+fashion:"Muoti",
+health:"Terveys",
+articles:"Artikkelit",
+photos:"Kuvat",
+community:"Yhteisö",
+contests:"Kilpailut",
+animalHelp:"Apua eläimille",
+partners:"Kumppanit"
 },
+
+desc:{
+magazine:"Lue PETS & DOGUE -lehden uusin numero.",
+coverStars:"Tapaa tähtemme ja ilmoita lemmikkisi.",
+discounts:"Eksklusiivisia tarjouksia ja Club-etuja.",
+petFriendly:"Löydä paikkoja, joihin lemmikit ovat tervetulleita.",
+marketplace:"Osta, myy ja löydä palveluita.",
+travel:"Lemmikkiystävällisiä matkoja, hotelleja ja kohteita.",
+fashion:"Tyyliä, asusteita ja lemmikkimuotia.",
+health:"Terveyttä, hoitoa ja päivittäistä hyvinvointia.",
+articles:"Toimituksellisia tarinoita, haastatteluja ja oppaita.",
+photos:"Muotokuvia, gallerioita ja visuaalisia tarinoita.",
+community:"Paikallisia ihmisiä, paikkoja, tapahtumia ja tukea.",
+contests:"Osallistu PETS & DOGUE -kilpailuihin.",
+animalHelp:"Pelastusta, adoptiota ja apua eläimille.",
+partners:"Valittuja brändejä, palveluita ja kumppaneita."
+}
+
+},
+
+
+/* =========================================================
+TURKISH
+========================================================= */
 
 tr:{
-offers:"Club teklifleri ve üye avantajları.",
-wellness:"Sağlık, bakım ve günlük evcil hayvan bakımı.",
-partners:"Seçilmiş markalar, hizmetler ve ortaklar."
+
+menu:"İçindekiler",
+signIn:"Giriş yap",
+joinClub:"Club'a katıl",
+language:"Dil",
+contact:"Bize ulaşın",
+openMenu:"Menüyü aç",
+closeMenu:"Menüyü kapat",
+home:"Ana sayfa",
+
+nav:{
+magazine:"Dergi",
+coverStars:"Kapak yıldızları",
+discounts:"İndirimler",
+petFriendly:"Evcil hayvan dostu",
+marketplace:"Pazar",
+travel:"Seyahat",
+fashion:"Moda",
+health:"Sağlık",
+articles:"Makaleler",
+photos:"Fotoğraflar",
+community:"Topluluk",
+contests:"Yarışmalar",
+animalHelp:"Hayvanlara yardım",
+partners:"Ortaklar"
 },
+
+desc:{
+magazine:"PETS & DOGUE'un son sayısını okuyun.",
+coverStars:"Yıldızlarımızı tanıyın ve evcil hayvanınızı katın.",
+discounts:"Özel teklifler ve Club avantajları.",
+petFriendly:"Evcil hayvan dostu yerleri keşfedin.",
+marketplace:"Alın, satın ve hizmetleri keşfedin.",
+travel:"Evcil hayvan dostu seyahatler, oteller ve rotalar.",
+fashion:"Stil, aksesuarlar ve evcil hayvan modası.",
+health:"Sağlık, bakım ve günlük evcil hayvan bakımı.",
+articles:"Editoryal hikâyeler, röportajlar ve rehberler.",
+photos:"Portreler, galeriler ve görsel hikâyeler.",
+community:"Yerel insanlar, yerler, etkinlikler ve destek.",
+contests:"PETS & DOGUE yarışmalarına katılın.",
+animalHelp:"Kurtarma, sahiplendirme ve hayvanlara yardım.",
+partners:"Seçilmiş markalar, hizmetler ve ortaklar."
+}
+
+},
+
+
+/* =========================================================
+ARABIC
+========================================================= */
 
 ar:{
-offers:"عروض النادي ومزايا الأعضاء.",
-wellness:"الصحة والعناية والرعاية اليومية.",
-partners:"علامات وخدمات وشركاء مختارون."
+
+menu:"المحتويات",
+signIn:"تسجيل الدخول",
+joinClub:"الانضمام إلى النادي",
+language:"اللغة",
+contact:"اتصل بنا",
+openMenu:"فتح القائمة",
+closeMenu:"إغلاق القائمة",
+home:"الرئيسية",
+
+nav:{
+magazine:"المجلة",
+coverStars:"نجوم الغلاف",
+discounts:"الخصومات",
+petFriendly:"أماكن صديقة للحيوانات",
+marketplace:"السوق",
+travel:"السفر",
+fashion:"الموضة",
+health:"الصحة",
+articles:"المقالات",
+photos:"الصور",
+community:"المجتمع",
+contests:"المسابقات",
+animalHelp:"مساعدة الحيوانات",
+partners:"الشركاء"
 },
 
+desc:{
+magazine:"اقرأ أحدث إصدار من PETS & DOGUE.",
+coverStars:"تعرّف على نجومنا وشارك حيوانك الأليف.",
+discounts:"عروض حصرية ومزايا أعضاء النادي.",
+petFriendly:"اكتشف الأماكن التي ترحب بالحيوانات.",
+marketplace:"اشترِ وبع واعثر على خدمات الحيوانات.",
+travel:"رحلات وفنادق ووجهات صديقة للحيوانات.",
+fashion:"الأناقة والإكسسوارات وموضة الحيوانات.",
+health:"الصحة والعناية والرعاية اليومية.",
+articles:"قصص ومقابلات وأدلة تحريرية.",
+photos:"صور وبورتريهات وقصص بصرية.",
+community:"أشخاص وأماكن وفعاليات ودعم محلي.",
+contests:"شارك في مسابقات PETS & DOGUE.",
+animalHelp:"إنقاذ وتبنّي ومساعدة الحيوانات المحتاجة.",
+partners:"علامات وخدمات وشركاء مختارون."
+}
+
+},
+
+
+/* =========================================================
+HINDI
+========================================================= */
+
 hi:{
-offers:"Club ऑफ़र और सदस्य लाभ।",
-wellness:"स्वास्थ्य, ग्रूमिंग और रोज़मर्रा की देखभाल।",
+
+menu:"सामग्री",
+signIn:"साइन इन",
+joinClub:"क्लब में शामिल हों",
+language:"भाषा",
+contact:"संपर्क करें",
+openMenu:"मेनू खोलें",
+closeMenu:"मेनू बंद करें",
+home:"होम",
+
+nav:{
+magazine:"पत्रिका",
+coverStars:"कवर स्टार",
+discounts:"छूट",
+petFriendly:"पेट-फ्रेंडली",
+marketplace:"मार्केटप्लेस",
+travel:"यात्रा",
+fashion:"फ़ैशन",
+health:"स्वास्थ्य",
+articles:"लेख",
+photos:"फ़ोटो",
+community:"समुदाय",
+contests:"प्रतियोगिताएँ",
+animalHelp:"जानवरों की मदद",
+partners:"पार्टनर"
+},
+
+desc:{
+magazine:"PETS & DOGUE का नवीनतम अंक पढ़ें।",
+coverStars:"हमारे सितारों से मिलें और अपने पालतू को शामिल करें।",
+discounts:"विशेष ऑफ़र और Club सदस्य लाभ।",
+petFriendly:"ऐसी जगहें खोजें जहाँ पालतू जानवरों का स्वागत है।",
+marketplace:"खरीदें, बेचें और पालतू सेवाएँ खोजें।",
+travel:"पालतू-अनुकूल यात्राएँ, होटल और गंतव्य।",
+fashion:"स्टाइल, एक्सेसरीज़ और पालतू फ़ैशन।",
+health:"स्वास्थ्य, ग्रूमिंग और रोज़मर्रा की देखभाल।",
+articles:"संपादकीय कहानियाँ, इंटरव्यू और गाइड।",
+photos:"पोर्ट्रेट, गैलरी और विज़ुअल कहानियाँ।",
+community:"स्थानीय लोग, जगहें, कार्यक्रम और सहायता।",
+contests:"PETS & DOGUE प्रतियोगिताओं में भाग लें।",
+animalHelp:"बचाव, गोद लेना और जरूरतमंद जानवरों की मदद।",
 partners:"चुने हुए ब्रांड, सेवाएँ और पार्टनर।"
+}
+
 }
 
 };
@@ -933,6 +1465,8 @@ let activePositionDone=false;
 
 let userTouchedRubrics=false;
 
+let internalLanguageChange=false;
+
 
 /* =========================================================
 HELPERS
@@ -978,73 +1512,6 @@ code||
 }
 
 
-function getLanguage(){
-
-let language="";
-
-
-if(
-window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage.getCurrentLanguage==="function"
-){
-
-try{
-
-const result=
-window.PetsDogueLanguage.getCurrentLanguage();
-
-
-if(
-typeof result==="string"
-){
-
-language=result;
-
-}else if(
-result &&
-typeof result==="object"
-){
-
-language=
-result.code||
-result.language||
-result.lang||
-"";
-
-}
-
-}catch(error){
-
-console.warn(
-"PETS & DOGUE: language read failed.",
-error
-);
-
-}
-
-}
-
-
-language=
-normalizeLanguage(
-language||
-localStorage.getItem(
-LANGUAGE_KEY
-)||
-document.documentElement.lang||
-"en"
-);
-
-
-return(
-TEXT[language]
-?language
-:"en"
-);
-
-}
-
-
 function currentFilename(){
 
 const path=
@@ -1081,353 +1548,69 @@ currentFilename()
 }
 
 
+function getLanguage(){
+
+let language=
+normalizeLanguage(
+localStorage.getItem(
+LANGUAGE_KEY
+)||
+document.documentElement.lang||
+"en"
+);
+
+
+if(
+!TEXT[language]
+){
+
+language="en";
+
+}
+
+
+return language;
+
+}
+
+
 function escapeHTML(value){
 
 return String(
 value||
 ""
 )
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
 
-}
+.replaceAll(
+"&",
+"&amp;"
+)
 
+.replaceAll(
+"<",
+"&lt;"
+)
 
-/* =========================================================
-EXISTING PROJECT COMMON I18N
-========================================================= */
+.replaceAll(
+">",
+"&gt;"
+)
 
-function getCommonMenu(language){
+.replaceAll(
+'"',
+"&quot;"
+)
 
-try{
-
-return(
-window.PetsDogueTranslations?.common?.[language]?.menu||
-null
+.replaceAll(
+"'",
+"&#039;"
 );
 
-}catch(error){
-
-return null;
-
-}
-
 }
 
 
 /* =========================================================
-DESCRIPTION HELPER
-========================================================= */
-
-function firstUsefulDescription(){
-
-for(
-const value of arguments
-){
-
-if(
-typeof value==="string" &&
-value.trim()
-){
-
-return value.trim();
-
-}
-
-}
-
-
-return"";
-
-}
-
-
-/* =========================================================
-MENU CARD COPY
-
-IMPORTANT:
-EVERY CARD GETS A DESCRIPTION.
-
-Existing project translations are preferred.
-If a specific translated description does not exist,
-a translated safe fallback is used.
-========================================================= */
-
-function getMenuCardCopy(
-key,
-language
-){
-
-const labels=
-TEXT[language]||
-TEXT.en;
-
-
-const common=
-getCommonMenu(
-language
-)||
-{};
-
-
-const extra=
-EXTRA_MENU[language]||
-EXTRA_MENU.en;
-
-
-const fallback=
-labels.fallbackDescription||
-TEXT.en.fallbackDescription;
-
-
-switch(key){
-
-case"magazine":
-
-return{
-title:
-common.latestIssue||
-common.magazine||
-labels.magazine,
-
-description:
-firstUsefulDescription(
-common.latestIssueDescription,
-common.magazineDescription,
-fallback
-)
-};
-
-
-case"coverStars":
-
-return{
-title:
-common.coverStar||
-common.coverStars||
-labels.coverStars,
-
-description:
-firstUsefulDescription(
-common.coverStarDescription,
-common.coverStarsDescription,
-fallback
-)
-};
-
-
-case"offers":
-
-return{
-title:
-common.discounts||
-common.offers||
-labels.offers,
-
-description:
-firstUsefulDescription(
-common.discountsDescription,
-common.offersDescription,
-extra.offers,
-fallback
-)
-};
-
-
-case"places":
-
-return{
-title:
-common.places||
-common.petsWelcome||
-labels.places,
-
-description:
-firstUsefulDescription(
-common.placesDescription,
-common.petsWelcomeDescription,
-fallback
-)
-};
-
-
-case"articles":
-
-return{
-title:
-common.articles||
-labels.articles,
-
-description:
-firstUsefulDescription(
-common.articlesDescription,
-fallback
-)
-};
-
-
-case"photos":
-
-return{
-title:
-common.photos||
-labels.photos,
-
-description:
-firstUsefulDescription(
-common.photosDescription,
-fallback
-)
-};
-
-
-case"travel":
-
-return{
-title:
-common.travel||
-labels.travel,
-
-description:
-firstUsefulDescription(
-common.travelDescription,
-fallback
-)
-};
-
-
-case"fashion":
-
-return{
-title:
-common.fashion||
-labels.fashion,
-
-description:
-firstUsefulDescription(
-common.fashionDescription,
-fallback
-)
-};
-
-
-case"wellness":
-
-return{
-title:
-common.wellness||
-common.health||
-labels.wellness,
-
-description:
-firstUsefulDescription(
-common.wellnessDescription,
-common.healthDescription,
-extra.wellness,
-fallback
-)
-};
-
-
-case"community":
-
-return{
-title:
-common.community||
-labels.community,
-
-description:
-firstUsefulDescription(
-common.communityDescription,
-fallback
-)
-};
-
-
-case"contests":
-
-return{
-title:
-common.contests||
-labels.contests,
-
-description:
-firstUsefulDescription(
-common.contestsDescription,
-fallback
-)
-};
-
-
-case"rescue":
-
-return{
-title:
-common.rescue||
-common.help||
-labels.rescue,
-
-description:
-firstUsefulDescription(
-common.rescueDescription,
-common.helpDescription,
-fallback
-)
-};
-
-
-case"marketplace":
-
-return{
-title:
-common.marketplace||
-labels.marketplace,
-
-description:
-firstUsefulDescription(
-common.marketplaceDescription,
-fallback
-)
-};
-
-
-case"partners":
-
-return{
-title:
-common.partners||
-labels.partners,
-
-description:
-firstUsefulDescription(
-common.partnersDescription,
-extra.partners,
-fallback
-)
-};
-
-
-default:
-
-return{
-title:
-labels[key]||
-key,
-
-description:
-fallback
-};
-
-}
-
-}
-
-
-/* =========================================================
-MASTER CSS
+CSS
 ========================================================= */
 
 function installStyles(){
@@ -1460,7 +1643,7 @@ style.id=
 style.textContent=`
 
 /* =========================================================
-HIDE OLD VISUAL SHELL ONLY
+HIDE OLD SHELL VISUALLY ONLY
 ========================================================= */
 
 .pd-global-old-shell-hidden{
@@ -1469,7 +1652,7 @@ display:none !important;
 
 
 /* =========================================================
-MASTER HEADER
+GLOBAL HEADER
 ========================================================= */
 
 #pdGlobalHeader{
@@ -1495,8 +1678,7 @@ sans-serif;
 
 
 /* =========================================================
-TOP ROW
-APPROVED COMPACT SCALE
+HEADER TOP
 ========================================================= */
 
 #pdGlobalHeaderMain{
@@ -1556,12 +1738,12 @@ height:2px;
 
 background:#fff;
 
-border-radius:99px;
+border-radius:999px;
 }
 
 
 /* =========================================================
-LOGO
+BRAND
 ========================================================= */
 
 #pdGlobalBrand{
@@ -1665,7 +1847,7 @@ stroke-linejoin:round;
 
 
 /* =========================================================
-RUBRIC STRIP
+TOP RUBRICS
 ========================================================= */
 
 #pdGlobalRubrics{
@@ -1683,9 +1865,9 @@ align-items:stretch;
 
 gap:0;
 
-padding:0 7px;
-
 margin:0;
+
+padding:0 7px;
 
 overflow-x:auto;
 
@@ -1808,7 +1990,7 @@ linear-gradient(
 
 
 /* =========================================================
-MENU OVERLAY
+OVERLAY
 ========================================================= */
 
 #pdGlobalOverlay{
@@ -1818,7 +2000,7 @@ inset:0;
 
 z-index:8900;
 
-background:rgba(0,0,0,.67);
+background:rgba(0,0,0,.66);
 
 opacity:0;
 
@@ -1845,13 +2027,13 @@ pointer-events:auto;
 
 
 /* =========================================================
-EDITORIAL SIDE MENU
+COMPACT SIDE MENU
 
-APPROVED:
-- same photo-card design
-- compact
-- narrow
-- left side
+REFERENCE:
+PHOTO CARD MENU
+
+IMPORTANT:
+NOT FULL WIDTH
 ========================================================= */
 
 #pdGlobalMenu{
@@ -1865,9 +2047,9 @@ bottom:0;
 
 z-index:9000;
 
-width:min(76vw,300px);
+width:min(74vw,292px);
 
-max-width:300px;
+max-width:292px;
 
 background:#fff;
 
@@ -1913,11 +2095,11 @@ top:0;
 
 z-index:6;
 
-height:68px;
+height:64px;
 
-min-height:68px;
+min-height:64px;
 
-padding:0 11px 0 15px;
+padding:0 10px 0 14px;
 
 display:flex;
 
@@ -1944,7 +2126,7 @@ Georgia,
 "Times New Roman",
 serif;
 
-font-size:26px;
+font-size:24px;
 
 font-weight:400;
 
@@ -1960,9 +2142,9 @@ text-overflow:ellipsis;
 #pdGlobalClose{
 flex:0 0 auto;
 
-width:37px;
+width:35px;
 
-height:37px;
+height:35px;
 
 display:flex;
 
@@ -1980,7 +2162,7 @@ background:#111;
 
 color:#fff;
 
-font-size:24px;
+font-size:23px;
 
 font-weight:300;
 
@@ -1991,7 +2173,7 @@ cursor:pointer;
 
 
 /* =========================================================
-SIGN IN + CLUB
+SIGN IN / JOIN CLUB
 ========================================================= */
 
 .pd-global-account{
@@ -2001,7 +2183,7 @@ grid-template-columns:1fr 1fr;
 
 gap:6px;
 
-padding:10px;
+padding:8px;
 
 background:#fff;
 
@@ -2011,9 +2193,9 @@ border-bottom:1px solid #dedede;
 .pd-global-account a{
 min-width:0;
 
-min-height:40px;
+min-height:37px;
 
-padding:7px 5px;
+padding:6px 5px;
 
 display:flex;
 
@@ -2036,7 +2218,7 @@ Arial,
 Helvetica,
 sans-serif;
 
-font-size:9.5px;
+font-size:8.7px;
 
 font-weight:900;
 
@@ -2059,7 +2241,7 @@ LANGUAGE
 ========================================================= */
 
 .pd-global-language{
-padding:9px 10px 10px;
+padding:8px;
 
 background:#fff;
 
@@ -2071,18 +2253,13 @@ display:block;
 
 margin:0 0 5px 2px;
 
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
-font-size:7.5px;
+font-size:7px;
 
 font-weight:900;
 
 line-height:1;
 
-letter-spacing:1.55px;
+letter-spacing:1.4px;
 
 text-transform:uppercase;
 
@@ -2092,7 +2269,7 @@ color:#777;
 #pdGlobalLanguage{
 width:100%;
 
-height:40px;
+height:37px;
 
 padding:0 10px;
 
@@ -2111,14 +2288,14 @@ Arial,
 Helvetica,
 sans-serif;
 
-font-size:11px;
+font-size:10.5px;
 
 font-weight:800;
 }
 
 
 /* =========================================================
-PHOTO RUBRIC CARDS
+SIDE MENU PHOTO CARDS
 ========================================================= */
 
 #pdGlobalMenuList{
@@ -2126,9 +2303,9 @@ display:grid;
 
 grid-template-columns:1fr;
 
-gap:7px;
+gap:6px;
 
-padding:10px;
+padding:8px;
 
 background:#fff;
 }
@@ -2138,12 +2315,12 @@ position:relative;
 
 min-width:0;
 
-min-height:72px;
+min-height:68px;
 
 display:grid;
 
 grid-template-columns:
-64px
+60px
 minmax(0,1fr);
 
 align-items:stretch;
@@ -2152,7 +2329,7 @@ overflow:hidden;
 
 border:1.5px solid #151515;
 
-border-radius:17px;
+border-radius:15px;
 
 background:#faf8f3;
 
@@ -2164,9 +2341,9 @@ text-decoration:none;
 .pd-global-menu-card-image{
 position:relative;
 
-width:64px;
+width:60px;
 
-min-height:72px;
+min-height:68px;
 
 overflow:hidden;
 
@@ -2192,7 +2369,7 @@ object-position:center;
 .pd-global-menu-card-copy{
 min-width:0;
 
-padding:8px 8px 7px 9px;
+padding:7px 7px 6px 8px;
 
 display:flex;
 
@@ -2209,7 +2386,7 @@ Georgia,
 "Times New Roman",
 serif;
 
-font-size:15px;
+font-size:14px;
 
 font-weight:700;
 
@@ -2228,11 +2405,11 @@ Arial,
 Helvetica,
 sans-serif;
 
-font-size:9.3px;
+font-size:8.7px;
 
 font-weight:400;
 
-line-height:1.3;
+line-height:1.26;
 
 color:#676767;
 
@@ -2247,7 +2424,7 @@ overflow:hidden;
 
 
 /* =========================================================
-ACTIVE MENU CARD
+ACTIVE SIDE CARD
 ========================================================= */
 
 .pd-global-menu-card.active{
@@ -2270,13 +2447,13 @@ CONTACT
 ========================================================= */
 
 .pd-global-menu-footer{
-padding:2px 10px 14px;
+padding:0 8px 12px;
 
 background:#fff;
 }
 
 .pd-global-menu-footer a{
-min-height:38px;
+min-height:36px;
 
 display:flex;
 
@@ -2284,7 +2461,7 @@ align-items:center;
 
 justify-content:center;
 
-padding:7px 10px;
+padding:7px 9px;
 
 border:1.5px solid #111;
 
@@ -2294,18 +2471,11 @@ background:#111;
 
 color:#efd38c;
 
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
-font-size:9.5px;
+font-size:9px;
 
 font-weight:900;
 
 line-height:1;
-
-letter-spacing:.25px;
 
 text-transform:uppercase;
 
@@ -2356,19 +2526,13 @@ html[dir="rtl"] .pd-global-menu-head{
 direction:rtl;
 }
 
-html[dir="rtl"] .pd-global-menu-card{
-grid-template-columns:
-64px
-minmax(0,1fr);
-}
-
 html[dir="rtl"] .pd-global-menu-card-copy{
 text-align:right;
 }
 
 
 /* =========================================================
-VERY SMALL MOBILE
+SMALL MOBILE
 ========================================================= */
 
 @media(max-width:390px){
@@ -2412,98 +2576,17 @@ padding-right:15px;
 font-size:11px;
 }
 
-
 #pdGlobalMenu{
-width:min(76vw,286px);
+width:min(74vw,280px);
 
-max-width:286px;
-}
-
-.pd-global-menu-head{
-height:65px;
-
-min-height:65px;
-
-padding-left:13px;
-}
-
-.pd-global-menu-head h2{
-font-size:24px;
-}
-
-#pdGlobalClose{
-width:35px;
-
-height:35px;
-
-font-size:22px;
-}
-
-.pd-global-account{
-padding:8px;
-
-gap:5px;
-}
-
-.pd-global-account a{
-min-height:38px;
-
-font-size:9px;
-}
-
-.pd-global-language{
-padding:8px;
-}
-
-#pdGlobalLanguage{
-height:38px;
-
-font-size:10.5px;
-}
-
-#pdGlobalMenuList{
-padding:8px;
-
-gap:6px;
-}
-
-.pd-global-menu-card{
-min-height:68px;
-
-grid-template-columns:
-60px
-minmax(0,1fr);
-
-border-radius:16px;
-}
-
-.pd-global-menu-card-image{
-width:60px;
-
-min-height:68px;
-}
-
-.pd-global-menu-card-copy{
-padding:
-7px
-7px
-6px
-8px;
-}
-
-.pd-global-menu-card h3{
-font-size:14px;
-}
-
-.pd-global-menu-card p{
-font-size:8.8px;
+max-width:280px;
 }
 
 }
 
 
 /* =========================================================
-TABLET / DESKTOP
+DESKTOP
 ========================================================= */
 
 @media(min-width:851px){
@@ -2573,11 +2656,10 @@ padding:0 18px;
 font-size:12px;
 }
 
-
 #pdGlobalMenu{
-width:min(340px,32vw);
+width:min(320px,30vw);
 
-max-width:340px;
+max-width:320px;
 }
 
 }
@@ -2607,19 +2689,20 @@ style
 
 
 /* =========================================================
-HIDE EXISTING TOP SHELL
+HIDE OLD HEADER / OLD TOP NAV
+
+IMPORTANT:
+OLD ELEMENTS STAY IN DOM.
+PAGE-SPECIFIC JS IS NOT DESTROYED.
 ========================================================= */
 
 function hideExistingShell(){
 
-const elements=[
-...document.querySelectorAll(
+document
+.querySelectorAll(
 "header.site-header"
 )
-];
-
-
-elements.forEach(
+.forEach(
 element=>{
 
 if(
@@ -2636,18 +2719,48 @@ element.classList.add(
 );
 
 
+/*
+Old special-offers shell.
+*/
+
+[
+"#pdMasterHeader",
+".pd-master-header",
+"#pdShellMenu",
+"#pdShellOverlay"
+]
+.forEach(
+selector=>{
+
+document
+.querySelectorAll(
+selector
+)
+.forEach(
+element=>{
+
+element.classList.add(
+"pd-global-old-shell-hidden"
+);
+
+}
+);
+
+}
+);
+
+
+/*
+Old horizontal nav bars near the top.
+*/
+
 const navSelectors=[
 
 ".primary-nav",
-
 ".category-nav",
-
 ".global-nav",
-
 ".rubric-nav",
-
 ".desktop-categories",
-
 "#categoryNav"
 
 ];
@@ -2677,7 +2790,7 @@ element.getBoundingClientRect();
 
 
 if(
-rect.top<340
+rect.top<350
 ){
 
 element.classList.add(
@@ -2696,7 +2809,7 @@ element.classList.add(
 
 
 /* =========================================================
-CREATE HEADER
+CREATE GLOBAL HEADER
 ========================================================= */
 
 function createHeader(){
@@ -2710,6 +2823,15 @@ document.getElementById(
 return;
 
 }
+
+
+const language=
+getLanguage();
+
+
+const copy=
+TEXT[language]||
+TEXT.en;
 
 
 const header=
@@ -2729,7 +2851,9 @@ header.innerHTML=`
 <button
 id="pdGlobalMenuButton"
 type="button"
-aria-label="Open menu"
+aria-label="${escapeHTML(
+copy.openMenu
+)}"
 >
 
 <span></span>
@@ -2760,7 +2884,9 @@ DOGUE
 <a
 id="pdGlobalHome"
 href="index.html"
-aria-label="Home"
+aria-label="${escapeHTML(
+copy.home
+)}"
 >
 
 <svg
@@ -2781,7 +2907,7 @@ aria-hidden="true"
 
 <nav
 id="pdGlobalRubrics"
-aria-label="PETS & DOGUE sections"
+aria-label="PETS & DOGUE"
 >
 </nav>
 
@@ -2798,7 +2924,7 @@ document
 .getElementById(
 "pdGlobalMenuButton"
 )
-.addEventListener(
+?.addEventListener(
 "click",
 openMenu
 );
@@ -2868,7 +2994,7 @@ closeMenu
 
 
 /* =========================================================
-OPEN / CLOSE
+OPEN / CLOSE MENU
 ========================================================= */
 
 function openMenu(){
@@ -2975,7 +3101,7 @@ const language=
 getLanguage();
 
 
-const labels=
+const copy=
 TEXT[language]||
 TEXT.en;
 
@@ -2995,7 +3121,7 @@ return;
 }
 
 
-const previousScroll=
+const oldScroll=
 nav.scrollLeft;
 
 
@@ -3004,7 +3130,7 @@ NAV_ITEMS
 .map(
 item=>{
 
-const isActive=
+const active=
 item.key===activeKey;
 
 
@@ -3012,12 +3138,12 @@ return`
 
 <a
 href="${item.url}"
-class="${isActive?"active":""}"
-${isActive?'aria-current="page"':""}
+class="${active?"active":""}"
+${active?'aria-current="page"':""}
 >
 
 ${escapeHTML(
-labels[item.key]
+copy.nav[item.key]
 )}
 
 </a>
@@ -3037,36 +3163,12 @@ requestAnimationFrame(
 ()=>{
 
 nav.scrollLeft=
-previousScroll;
+oldScroll;
 
 }
 );
 
 }
-
-}
-
-
-/* =========================================================
-SIGN IN COPY
-========================================================= */
-
-function getSignInText(
-language
-){
-
-const common=
-getCommonMenu(
-language
-);
-
-
-return firstUsefulDescription(
-common?.signIn,
-common?.login,
-TEXT[language]?.signIn,
-TEXT.en.signIn
-);
 
 }
 
@@ -3081,7 +3183,7 @@ const language=
 getLanguage();
 
 
-const labels=
+const copy=
 TEXT[language]||
 TEXT.en;
 
@@ -3101,23 +3203,10 @@ return;
 }
 
 
-const signIn=
-getSignInText(
-language
-);
-
-
 const cards=
 NAV_ITEMS
 .map(
 item=>{
-
-const copy=
-getMenuCardCopy(
-item.key,
-language
-);
-
 
 const active=
 item.key===activeKey;
@@ -3145,15 +3234,20 @@ loading="lazy"
 <span class="pd-global-menu-card-copy">
 
 <h3>
+
 ${escapeHTML(
-copy.title
+copy.nav[item.key]
 )}
+
 </h3>
 
+
 <p>
+
 ${escapeHTML(
-copy.description
+copy.desc[item.key]
 )}
+
 </p>
 
 </span>
@@ -3172,16 +3266,20 @@ menu.innerHTML=`
 <div class="pd-global-menu-head">
 
 <h2>
+
 ${escapeHTML(
-labels.menu
+copy.menu
 )}
+
 </h2>
 
 
 <button
 id="pdGlobalClose"
 type="button"
-aria-label="Close menu"
+aria-label="${escapeHTML(
+copy.closeMenu
+)}"
 >
 ×
 </button>
@@ -3194,7 +3292,7 @@ aria-label="Close menu"
 <a href="account.html">
 
 ${escapeHTML(
-signIn
+copy.signIn
 )}
 
 </a>
@@ -3206,7 +3304,7 @@ href="club.html"
 >
 
 ${escapeHTML(
-labels.club
+copy.joinClub
 )}
 
 </a>
@@ -3219,7 +3317,7 @@ labels.club
 <label for="pdGlobalLanguage">
 
 ${escapeHTML(
-labels.language
+copy.language
 )}
 
 </label>
@@ -3228,7 +3326,7 @@ labels.language
 <select
 id="pdGlobalLanguage"
 aria-label="${escapeHTML(
-labels.language
+copy.language
 )}"
 >
 
@@ -3266,7 +3364,7 @@ ${cards}
 <a href="contact.html">
 
 ${escapeHTML(
-labels.contact
+copy.contact
 )}
 
 </a>
@@ -3299,24 +3397,132 @@ handleLanguageChange
 
 
 /* =========================================================
-LANGUAGE CHANGE
+UPDATE HEADER ACCESSIBILITY TEXT
 ========================================================= */
 
-function handleLanguageChange(
-event
-){
+function updateHeaderLanguage(){
 
 const language=
-normalizeLanguage(
-event.target.value
+getLanguage();
+
+
+const copy=
+TEXT[language]||
+TEXT.en;
+
+
+document
+.getElementById(
+"pdGlobalMenuButton"
+)
+?.setAttribute(
+"aria-label",
+copy.openMenu
 );
 
 
-localStorage.setItem(
-LANGUAGE_KEY,
+document
+.getElementById(
+"pdGlobalHome"
+)
+?.setAttribute(
+"aria-label",
+copy.home
+);
+
+}
+
+
+/* =========================================================
+EXISTING PAGE LANGUAGE SELECT
+
+Some old pages use:
+uk
+or
+ua
+
+cs
+or
+cz
+
+etc.
+
+Find whichever option exists.
+========================================================= */
+
+function valueForExistingSelect(
+select,
 language
+){
+
+const candidates=[language];
+
+
+const reverseAliases={
+
+uk:"ua",
+cs:"cz",
+el:"gr",
+sv:"se",
+da:"dk"
+
+};
+
+
+if(
+reverseAliases[language]
+){
+
+candidates.push(
+reverseAliases[language]
 );
 
+}
+
+
+for(
+const candidate of candidates
+){
+
+const exists=
+Array
+.from(
+select.options||
+[]
+)
+.some(
+option=>
+option.value===candidate
+);
+
+
+if(
+exists
+){
+
+return candidate;
+
+}
+
+}
+
+
+return"";
+
+}
+
+
+/* =========================================================
+SYNC SAVED LANGUAGE WITH EXISTING PAGE
+
+IMPORTANT:
+WE USE THE PAGE'S EXISTING TRANSLATION SYSTEM.
+WE DO NOT REPLACE PAGE CONTENT TRANSLATIONS.
+========================================================= */
+
+function syncExistingPageLanguage(
+language
+){
 
 document.documentElement.lang=
 language;
@@ -3327,6 +3533,13 @@ language==="ar"
 ?"rtl"
 :"ltr";
 
+
+let handled=false;
+
+
+/*
+Existing central controller.
+*/
 
 if(
 window.PetsDogueLanguage
@@ -3339,9 +3552,7 @@ window.PetsDogueLanguage;
 const setters=[
 
 "setLanguage",
-
 "changeLanguage",
-
 "selectLanguage"
 
 ];
@@ -3361,10 +3572,13 @@ controller[setter](
 language
 );
 
+
+handled=true;
+
 }catch(error){
 
 console.warn(
-"PETS & DOGUE language setter failed.",
+"PETS & DOGUE language controller:",
 error
 );
 
@@ -3380,6 +3594,40 @@ break;
 }
 
 
+/*
+Some pages expose renderLanguage().
+*/
+
+if(
+!handled &&
+typeof window.renderLanguage==="function"
+){
+
+try{
+
+window.renderLanguage(
+language
+);
+
+
+handled=true;
+
+}catch(error){
+
+console.warn(
+"PETS & DOGUE renderLanguage:",
+error
+);
+
+}
+
+}
+
+
+/*
+Existing language select.
+*/
+
 const existingSelect=
 document.getElementById(
 "languageSelect"
@@ -3387,14 +3635,25 @@ document.getElementById(
 
 
 if(
-existingSelect &&
-existingSelect!==event.target
+existingSelect
+){
+
+const value=
+valueForExistingSelect(
+existingSelect,
+language
+);
+
+
+if(
+value &&
+existingSelect.value!==value
 ){
 
 try{
 
 existingSelect.value=
-language;
+value;
 
 
 existingSelect.dispatchEvent(
@@ -3406,10 +3665,13 @@ bubbles:true
 )
 );
 
+
+handled=true;
+
 }catch(error){
 
 console.warn(
-"PETS & DOGUE language selector sync failed.",
+"PETS & DOGUE language select:",
 error
 );
 
@@ -3417,23 +3679,104 @@ error
 
 }
 
+}
 
-window.dispatchEvent(
-new Event(
-"petsdogue:languagechange"
-)
+
+return handled;
+
+}
+
+
+/* =========================================================
+LANGUAGE CHANGE FROM GLOBAL MENU
+========================================================= */
+
+function handleLanguageChange(
+event
+){
+
+if(
+internalLanguageChange
+){
+
+return;
+
+}
+
+
+const language=
+normalizeLanguage(
+event.target.value
 );
 
+
+if(
+!TEXT[language]
+){
+
+return;
+
+}
+
+
+internalLanguageChange=true;
+
+
+localStorage.setItem(
+LANGUAGE_KEY,
+language
+);
+
+
+syncExistingPageLanguage(
+language
+);
+
+
+updateHeaderLanguage();
 
 renderRubrics();
 
 renderSideMenu();
+
+
+window.dispatchEvent(
+new CustomEvent(
+"petsdogue:languagechange",
+{
+detail:{
+language
+}
+}
+)
+);
+
+
+setTimeout(
+()=>{
+
+internalLanguageChange=false;
+
+},
+0
+);
 
 }
 
 
 /* =========================================================
 POSITION ACTIVE RUBRIC ONCE
+
+ONLY ONCE.
+
+AFTER THIS:
+USER CONTROLS THE STRIP.
+
+NO:
+- repeated centering
+- scroll lock
+- resize centering
+- forced return
 ========================================================= */
 
 function positionActiveOnce(){
@@ -3469,18 +3812,16 @@ nav.querySelector(
 );
 
 
+activePositionDone=true;
+
+
 if(
 !active
 ){
 
-activePositionDone=true;
-
 return;
 
 }
-
-
-activePositionDone=true;
 
 
 requestAnimationFrame(
@@ -3528,7 +3869,7 @@ target
 
 
 /* =========================================================
-FREE NATIVE RUBRIC SWIPE
+FREE NATIVE HORIZONTAL SWIPE
 ========================================================= */
 
 function installRubricInteraction(){
@@ -3587,10 +3928,12 @@ passive:true
 
 
 /* =========================================================
-REFRESH LANGUAGE
+REFRESH SHELL LANGUAGE
 ========================================================= */
 
 function refreshShellLanguage(){
+
+updateHeaderLanguage();
 
 renderRubrics();
 
@@ -3659,21 +4002,57 @@ getActiveKey();
 installStyles();
 
 
+/*
+Old visual shell stays in DOM but is hidden.
+*/
+
 hideExistingShell();
 
+
+/*
+Create the one master shell.
+*/
 
 createHeader();
 
 createSideMenu();
 
 
+/*
+Render it.
+*/
+
 renderRubrics();
 
 renderSideMenu();
 
+updateHeaderLanguage();
+
+
+/*
+Native horizontal swipe.
+*/
 
 installRubricInteraction();
 
+
+/*
+Synchronise page with the language saved by the user.
+This fixes pages opening in English unexpectedly.
+*/
+
+const savedLanguage=
+getLanguage();
+
+
+syncExistingPageLanguage(
+savedLanguage
+);
+
+
+/*
+Centre active rubric only once.
+*/
 
 setTimeout(
 positionActiveOnce,
@@ -3681,9 +4060,46 @@ positionActiveOnce,
 );
 
 
+/*
+Existing page changed its language.
+Do not rebuild page functionality.
+Only update shell labels.
+*/
+
 window.addEventListener(
 "petsdogue:languagechange",
-()=>{
+event=>{
+
+if(
+internalLanguageChange
+){
+
+return;
+
+}
+
+
+const eventLanguage=
+normalizeLanguage(
+event?.detail?.language||
+localStorage.getItem(
+LANGUAGE_KEY
+)||
+document.documentElement.lang
+);
+
+
+if(
+TEXT[eventLanguage]
+){
+
+localStorage.setItem(
+LANGUAGE_KEY,
+eventLanguage
+);
+
+}
+
 
 setTimeout(
 refreshShellLanguage,
@@ -3693,25 +4109,42 @@ refreshShellLanguage,
 }
 );
 
+
+/*
+Language changed in another browser tab.
+*/
 
 window.addEventListener(
 "storage",
 event=>{
 
 if(
-event.key===LANGUAGE_KEY
+event.key!==LANGUAGE_KEY
 ){
 
-setTimeout(
-refreshShellLanguage,
-0
-);
+return;
 
 }
 
+
+const language=
+getLanguage();
+
+
+syncExistingPageLanguage(
+language
+);
+
+
+refreshShellLanguage();
+
 }
 );
 
+
+/*
+Escape closes only the global menu.
+*/
 
 document.addEventListener(
 "keydown",
