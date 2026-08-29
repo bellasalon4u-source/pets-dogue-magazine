@@ -1,38 +1,41 @@
 "use strict";
 
 /* =========================================================
-PETS & DOGUE — MASTER GLOBAL SHELL
+PETS & DOGUE
+MASTER GLOBAL SHELL
 
 ONE SOURCE OF TRUTH FOR:
-- header
-- horizontal rubrics
-- compact side menu
-- shell language
-- active rubric
-- fixed rubric order
+- HEADER
+- HORIZONTAL RUBRICS
+- SIDE MENU
+- SHELL LANGUAGE
+- ACTIVE RUBRIC
+- FIXED RUBRIC ORDER
 
-DOES NOT CHANGE PAGE-SPECIFIC CONTENT OR FUNCTIONS.
+THIS FILE DOES NOT CHANGE PAGE CONTENT OR PAGE FUNCTIONS.
 
-FINAL ORDER:
-1. Magazine
-2. Cover Stars
-3. Discounts
-4. Pet-Friendly
-5. Marketplace
-6. Travel
-7. Fashion
-8. Health
-9. Articles
-10. Photos
-11. Community
-12. Contests
-13. Pets in Need / Помощь животным
-14. Partners
+FINAL RUBRIC ORDER:
+1. MAGAZINE
+2. COVER STARS
+3. DISCOUNTS
+4. PET-FRIENDLY
+5. MARKETPLACE
+6. TRAVEL
+7. FASHION
+8. HEALTH
+9. ARTICLES
+10. PHOTOS
+11. COMMUNITY
+12. CONTESTS
+13. PETS IN NEED / ПОМОЩЬ ЖИВОТНЫМ
+14. PARTNERS
 
 IMPORTANT:
-- no Wellness rubric in shell; only Health
-- no Help / Rescue duplication; only Pets in Need
-- same order on every page and in every language
+- NO WELLNESS LABEL — ONLY HEALTH
+- NO HELP / RESCUE DUPLICATION
+- ONLY ONE PETS IN NEED / ПОМОЩЬ ЖИВОТНЫМ RUBRIC
+- SAME SIDE MENU ON EVERY PAGE
+- SAME RUBRIC ORDER ON EVERY PAGE
 ========================================================= */
 
 (function(){
@@ -47,142 +50,98 @@ se:"sv",
 dk:"da"
 };
 
-const REVERSE_LANGUAGE_ALIASES={
-uk:"ua",
-cs:"cz",
-el:"gr",
-sv:"se",
-da:"dk"
-};
-
 const NAV_ITEMS=[
-
 {
 key:"magazine",
 url:"issue-01.html",
 image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"coverStars",
 url:"members-gallery.html",
 image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"discounts",
 url:"special-offers.html",
 image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"petFriendly",
 url:"pet-friendly-places.html",
 image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"marketplace",
 url:"pet-marketplace.html",
 image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"travel",
 url:"pet-travel.html",
 image:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"fashion",
 url:"pet-fashion.html",
 image:"https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"health",
 url:"wellness.html",
 image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"articles",
 url:"articles.html",
 image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"photos",
 url:"photos.html",
 image:"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"community",
 url:"local-community.html",
 image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"contests",
 url:"contests.html",
 image:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"animalHelp",
 url:"pets-in-need.html",
-image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=82"
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=82"
 },
-
 {
 key:"partners",
 url:"partners.html",
 image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
 }
-
 ];
 
 const PAGE_KEYS={
-
 "issue-01.html":"magazine",
-
 "members-gallery.html":"coverStars",
-
 "special-offers.html":"discounts",
-
 "pet-friendly-places.html":"petFriendly",
-
 "pet-marketplace.html":"marketplace",
-
 "pet-travel.html":"travel",
-
 "pet-fashion.html":"fashion",
-
 "wellness.html":"health",
-
 "health.html":"health",
-
 "articles.html":"articles",
-
 "photos.html":"photos",
-
 "local-community.html":"community",
-
 "community.html":"community",
-
 "contests.html":"contests",
-
 "pets-in-need.html":"animalHelp",
-
 "rescue.html":"animalHelp",
-
 "help.html":"animalHelp",
-
-"animal-help.html":"animalHelp",
-
 "partners.html":"partners"
-
 };
 
 const TEXT={
@@ -1225,109 +1184,62 @@ partners:"चुने हुए ब्रांड, सेवाएँ और �
 };
 
 const LANGUAGE_OPTIONS=[
-
 ["en","🇬🇧 EN — English"],
-
 ["uk","🇺🇦 UA — Українська"],
-
 ["ru","🇷🇺 RU — Русский"],
-
 ["fr","🇫🇷 FR — Français"],
-
 ["de","🇩🇪 DE — Deutsch"],
-
 ["es","🇪🇸 ES — Español"],
-
 ["it","🇮🇹 IT — Italiano"],
-
 ["pt","🇵🇹 PT — Português"],
-
 ["nl","🇳🇱 NL — Nederlands"],
-
 ["pl","🇵🇱 PL — Polski"],
-
 ["cs","🇨🇿 CZ — Čeština"],
-
 ["sk","🇸🇰 SK — Slovenčina"],
-
 ["hu","🇭🇺 HU — Magyar"],
-
 ["ro","🇷🇴 RO — Română"],
-
 ["bg","🇧🇬 BG — Български"],
-
 ["el","🇬🇷 GR — Ελληνικά"],
-
 ["sv","🇸🇪 SE — Svenska"],
-
 ["da","🇩🇰 DK — Dansk"],
-
 ["no","🇳🇴 NO — Norsk"],
-
 ["fi","🇫🇮 FI — Suomi"],
-
 ["tr","🇹🇷 TR — Türkçe"],
-
 ["ar","🇸🇦 AR — العربية"],
-
 ["hi","🇮🇳 HI — हिन्दी"]
-
 ];
 
-const RUBRIC_URLS=
-new Set(
-NAV_ITEMS.map(
-item=>item.url
-)
-);
-
 let activeKey="";
-
+let shellLanguage="en";
 let activePositionDone=false;
-
 let userTouchedRubrics=false;
-
 let internalLanguageChange=false;
-
 let legacyObserver=null;
+let langObserver=null;
 
-
-/* =========================================================
-LANGUAGE
-========================================================= */
-
-function normalizeLanguage(
-value
-){
+function normalizeLanguage(value){
 
 let code=
 String(
 value||
-"en"
+""
 )
 .trim()
 .toLowerCase();
 
-
 if(
 code.includes("-")
 ){
-
 code=
 code.split("-")[0];
-
 }
-
 
 if(
 code.includes("_")
 ){
-
 code=
 code.split("_")[0];
-
 }
-
 
 return(
 LANGUAGE_ALIASES[code]||
@@ -1337,36 +1249,14 @@ code||
 
 }
 
+function isSupportedLanguage(value){
 
-function getLanguage(){
-
-let language=
-normalizeLanguage(
-localStorage.getItem(
-LANGUAGE_KEY
-)||
-document.documentElement.lang||
-"en"
+return Object.prototype.hasOwnProperty.call(
+TEXT,
+normalizeLanguage(value)
 );
 
-
-if(
-!TEXT[language]
-){
-
-language="en";
-
 }
-
-
-return language;
-
-}
-
-
-/* =========================================================
-CURRENT PAGE
-========================================================= */
 
 function currentFilename(){
 
@@ -1376,17 +1266,18 @@ window.location.pathname||
 ""
 );
 
-
-return(
+const file=
 path
 .split("/")
 .filter(Boolean)
-.pop()||
+.pop();
+
+return(
+file||
 "index.html"
 );
 
 }
-
 
 function getActiveKey(){
 
@@ -1399,40 +1290,155 @@ currentFilename()
 
 }
 
+function findExistingLanguageSelect(){
 
-/* =========================================================
-ESCAPE HTML
-========================================================= */
+const candidates=[
+"#languageSelect",
+"#langSelect",
+"select[name='language']",
+"select[data-language-select]"
+];
 
-function escapeHTML(
-value
+for(
+const selector of candidates
 ){
+
+const select=
+document.querySelector(
+selector
+);
+
+if(
+select &&
+select.id!=="pdGlobalLanguage"
+){
+return select;
+}
+
+}
+
+return null;
+
+}
+
+function detectInitialLanguage(){
+
+const select=
+findExistingLanguageSelect();
+
+const selectLanguage=
+select
+?normalizeLanguage(select.value)
+:"";
+
+const htmlLanguage=
+normalizeLanguage(
+document.documentElement.lang||
+""
+);
+
+const storedLanguage=
+normalizeLanguage(
+localStorage.getItem(
+LANGUAGE_KEY
+)||
+""
+);
+
+if(
+selectLanguage &&
+selectLanguage!=="en" &&
+isSupportedLanguage(selectLanguage)
+){
+return selectLanguage;
+}
+
+if(
+htmlLanguage &&
+htmlLanguage!=="en" &&
+isSupportedLanguage(htmlLanguage)
+){
+return htmlLanguage;
+}
+
+if(
+storedLanguage &&
+isSupportedLanguage(storedLanguage)
+){
+return storedLanguage;
+}
+
+if(
+selectLanguage &&
+isSupportedLanguage(selectLanguage)
+){
+return selectLanguage;
+}
+
+if(
+htmlLanguage &&
+isSupportedLanguage(htmlLanguage)
+){
+return htmlLanguage;
+}
+
+return"en";
+
+}
+
+function persistLanguage(language){
+
+const code=
+normalizeLanguage(
+language
+);
+
+if(
+!TEXT[code]
+){
+return;
+}
+
+shellLanguage=
+code;
+
+localStorage.setItem(
+LANGUAGE_KEY,
+code
+);
+
+document.documentElement.lang=
+code;
+
+document.documentElement.dir=
+code==="ar"
+?"rtl"
+:"ltr";
+
+}
+
+function escapeHTML(value){
 
 return String(
 value||
 ""
 )
-
 .replaceAll(
 "&",
 "&amp;"
 )
-
 .replaceAll(
 "<",
 "&lt;"
 )
-
 .replaceAll(
 ">",
 "&gt;"
 )
-
 .replaceAll(
 '"',
 "&quot;"
 )
-
 .replaceAll(
 "'",
 "&#039;"
@@ -1440,540 +1446,47 @@ value||
 
 }
 
-
-/* =========================================================
-LINK HELPERS
-========================================================= */
-
-function hrefFilename(
-href
-){
-
-try{
-
-const url=
-new URL(
-href,
-window.location.href
-);
-
-
-return(
-url.pathname
-.split("/")
-.filter(Boolean)
-.pop()||
-""
-);
-
-}catch(error){
-
-return"";
-
-}
-
-}
-
-
-function rubricLinkCount(
-root
-){
-
-if(
-!root||
-!root.querySelectorAll
-){
-
-return 0;
-
-}
-
-
-let count=0;
-
-
-root
-.querySelectorAll(
-"a[href]"
-)
-.forEach(
-link=>{
-
-const filename=
-hrefFilename(
-link.getAttribute(
-"href"
-)||
-""
-);
-
-
-if(
-RUBRIC_URLS.has(
-filename
-)
-){
-
-count+=1;
-
-}
-
-}
-);
-
-
-return count;
-
-}
-
-
-/* =========================================================
-OLD SHELL DETECTION
-========================================================= */
-
-function isInsideGlobalShell(
-element
-){
-
-return Boolean(
-element?.closest?.(
-"#pdGlobalHeader,#pdGlobalMenu,#pdGlobalOverlay"
-)
-);
-
-}
-
-
-function hideLegacyElement(
-element
-){
-
-if(
-!element||
-element.nodeType!==1||
-isInsideGlobalShell(
-element
-)
-){
-
-return;
-
-}
-
-
-element.classList.add(
-"pd-global-old-shell-hidden"
-);
-
-
-element.setAttribute(
-"aria-hidden",
-"true"
-);
-
-}
-
-
-function looksLikeLegacyHeader(
-element
-){
-
-if(
-!element||
-element.nodeType!==1||
-isInsideGlobalShell(
-element
-)
-){
-
-return false;
-
-}
-
-
-const tag=
-element.tagName?.toLowerCase();
-
-
-if(
-tag!=="header"
-){
-
-return false;
-
-}
-
-
-const text=
-(
-element.textContent||
-""
-)
-.toLowerCase();
-
-
-return(
-rubricLinkCount(
-element
-)>=2||
-text.includes(
-"dogue"
-)
-);
-
-}
-
-
-function looksLikeLegacyNav(
-element
-){
-
-if(
-!element||
-element.nodeType!==1||
-isInsideGlobalShell(
-element
-)
-){
-
-return false;
-
-}
-
-
-const tag=
-element.tagName?.toLowerCase();
-
-
-if(
-tag!=="nav"
-){
-
-return false;
-
-}
-
-
-return(
-rubricLinkCount(
-element
-)>=3
-);
-
-}
-
-
-function looksLikeLegacyDrawer(
-element
-){
-
-if(
-!element||
-element.nodeType!==1||
-isInsideGlobalShell(
-element
-)
-){
-
-return false;
-
-}
-
-
-const idClass=
-`${element.id||""} ${element.className||""}`
-.toLowerCase();
-
-
-const text=
-(
-element.textContent||
-""
-)
-.toLowerCase();
-
-
-const drawerName=
-/(drawer|side.?menu|mobile.?menu|menu.?panel|menu.?overlay|nav.?overlay|shell.?menu|master.?menu)/
-.test(
-idClass
-);
-
-
-const menuWords=
-/(contents|содержание|зміст|sommaire|inhalt|contenido|contenuti|conteúdo|inhoud|spis treści|obsah|tartalom|conținut|съдържание|περιεχόμενα|innehåll|indhold|innhold|sisältö|i̇çindekiler|المحتويات|सामग्री)/i
-.test(
-text
-);
-
-
-return(
-rubricLinkCount(
-element
-)>=5&&
-(
-drawerName||
-menuWords
-)
-);
-
-}
-
-
-/* =========================================================
-KNOWN OLD SHELL SELECTORS
-========================================================= */
-
-function hideKnownLegacySelectors(
-root=document
-){
-
-const selectors=[
-
-"header.site-header",
-
-"#pdMasterHeader",
-
-".pd-master-header",
-
-"#pdShellMenu",
-
-"#pdShellOverlay",
-
-"#siteMenu",
-
-"#sideMenu",
-
-"#menuDrawer",
-
-"#mobileMenu",
-
-"#menuOverlay",
-
-".site-menu-drawer",
-
-".menu-drawer",
-
-".mobile-menu-drawer",
-
-".drawer-overlay",
-
-".menu-overlay",
-
-".primary-nav",
-
-".category-nav",
-
-".global-nav",
-
-".rubric-nav",
-
-".desktop-categories",
-
-"#categoryNav"
-
-];
-
-
-selectors.forEach(
-selector=>{
-
-root
-.querySelectorAll?.(
-selector
-)
-.forEach(
-element=>{
-
-if(
-!isInsideGlobalShell(
-element
-)
-){
-
-hideLegacyElement(
-element
-);
-
-}
-
-}
-);
-
-}
-);
-
-}
-
-
-/* =========================================================
-HIDE OLD SHELL
-========================================================= */
-
-function hideLegacyShellIn(
-root=document
-){
-
-hideKnownLegacySelectors(
-root
-);
-
-
-const candidates=[];
-
-
-if(
-root.nodeType===1
-){
-
-candidates.push(
-root
-);
-
-}
-
-
-root
-.querySelectorAll?.(
-"header,nav,aside,[id],[class]"
-)
-.forEach(
-element=>{
-
-candidates.push(
-element
-);
-
-}
-);
-
-
-candidates.forEach(
-element=>{
-
-if(
-looksLikeLegacyHeader(
-element
-)||
-looksLikeLegacyNav(
-element
-)||
-looksLikeLegacyDrawer(
-element
-)
-){
-
-hideLegacyElement(
-element
-);
-
-}
-
-}
-);
-
-}
-
-
-/* =========================================================
-GUARD AGAINST PAGE SCRIPTS RECREATING OLD MENUS
-
-This is important for pages whose own language renderer
-rebuilds an old header/menu after the global shell loads.
-========================================================= */
-
-function installLegacyShellGuard(){
-
-hideLegacyShellIn(
-document
-);
-
-
-if(
-legacyObserver
-){
-
-return;
-
-}
-
-
-legacyObserver=
-new MutationObserver(
-mutations=>{
-
-mutations.forEach(
-mutation=>{
-
-mutation.addedNodes.forEach(
-node=>{
-
-if(
-node.nodeType===1
-){
-
-hideLegacyShellIn(
-node
-);
-
-}
-
-}
-);
-
-}
-);
-
-}
-);
-
-
-legacyObserver.observe(
-document.body,
-{
-childList:true,
-subtree:true
-}
-);
-
-}
-
-
-/* =========================================================
-GLOBAL CSS
-========================================================= */
-
 function installStyles(){
 
-document
-.getElementById(
+const previous=
+document.getElementById(
 "pdGlobalShellStyles"
-)
-?.remove();
+);
 
+if(
+previous
+){
+previous.remove();
+}
 
 const style=
 document.createElement(
 "style"
 );
 
-
 style.id=
 "pdGlobalShellStyles";
-
 
 style.textContent=`
 
 .pd-global-old-shell-hidden{
 display:none !important;
-visibility:hidden !important;
-pointer-events:none !important;
 }
 
-
-/* =========================================================
-GLOBAL HEADER
-========================================================= */
+body>header.site-header:not(#pdGlobalHeader),
+body>.site-header:not(#pdGlobalHeader),
+#pdMasterHeader,
+.pd-master-header,
+#pdShellMenu,
+#pdShellOverlay,
+.primary-nav:not(#pdGlobalRubrics),
+.category-nav:not(#pdGlobalRubrics),
+.global-nav:not(#pdGlobalRubrics),
+.rubric-nav:not(#pdGlobalRubrics),
+.desktop-categories:not(#pdGlobalRubrics),
+#categoryNav:not(#pdGlobalRubrics){
+display:none !important;
+}
 
 #pdGlobalHeader{
 position:sticky;
@@ -1986,11 +1499,6 @@ border-bottom:1px solid #292929;
 font-family:Arial,Helvetica,sans-serif;
 }
 
-
-/* =========================================================
-HEADER TOP
-========================================================= */
-
 #pdGlobalHeaderMain{
 height:78px;
 min-height:78px;
@@ -2002,11 +1510,6 @@ padding:0 10px;
 margin:0 auto;
 max-width:1500px;
 }
-
-
-/* =========================================================
-HAMBURGER
-========================================================= */
 
 #pdGlobalMenuButton{
 width:43px;
@@ -2027,11 +1530,6 @@ height:2px;
 background:#fff;
 border-radius:999px;
 }
-
-
-/* =========================================================
-BRAND
-========================================================= */
 
 #pdGlobalBrand{
 justify-self:center;
@@ -2064,11 +1562,6 @@ letter-spacing:1.8px;
 color:#c89b3c;
 }
 
-
-/* =========================================================
-HOME
-========================================================= */
-
 #pdGlobalHome{
 justify-self:end;
 width:43px;
@@ -2091,11 +1584,6 @@ stroke-width:2.15;
 stroke-linecap:round;
 stroke-linejoin:round;
 }
-
-
-/* =========================================================
-HORIZONTAL RUBRICS
-========================================================= */
 
 #pdGlobalRubrics{
 position:relative;
@@ -2181,11 +1669,6 @@ linear-gradient(
 );
 }
 
-
-/* =========================================================
-OVERLAY
-========================================================= */
-
 #pdGlobalOverlay{
 position:fixed;
 inset:0;
@@ -2207,18 +1690,13 @@ visibility:visible;
 pointer-events:auto;
 }
 
-
-/* =========================================================
-COMPACT SIDE MENU
-========================================================= */
-
 #pdGlobalMenu{
 position:fixed;
 top:0;
 left:0;
 bottom:0;
 z-index:9000;
-width:min(74vw,292px);
+width:min(73vw,292px);
 max-width:292px;
 background:#fff;
 color:#111;
@@ -2226,11 +1704,7 @@ overflow-y:auto;
 overflow-x:hidden;
 overscroll-behavior:contain;
 -webkit-overflow-scrolling:touch;
-box-shadow:
-12px
-0
-30px
-rgba(0,0,0,.27);
+box-shadow:12px 0 30px rgba(0,0,0,.27);
 transform:translateX(-104%);
 transition:transform .27s ease;
 font-family:Arial,Helvetica,sans-serif;
@@ -2239,11 +1713,6 @@ font-family:Arial,Helvetica,sans-serif;
 #pdGlobalMenu.open{
 transform:translateX(0);
 }
-
-
-/* =========================================================
-MENU HEADER
-========================================================= */
 
 .pd-global-menu-head{
 position:sticky;
@@ -2291,11 +1760,6 @@ line-height:1;
 cursor:pointer;
 }
 
-
-/* =========================================================
-ACCOUNT BUTTONS
-========================================================= */
-
 .pd-global-account{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -2330,11 +1794,6 @@ background:#65e51f;
 border-color:#65e51f;
 }
 
-
-/* =========================================================
-LANGUAGE
-========================================================= */
-
 .pd-global-language{
 padding:8px;
 background:#fff;
@@ -2365,11 +1824,6 @@ font-family:Arial,Helvetica,sans-serif;
 font-size:10.5px;
 font-weight:800;
 }
-
-
-/* =========================================================
-PHOTO CARDS
-========================================================= */
 
 #pdGlobalMenuList{
 display:grid;
@@ -2443,11 +1897,6 @@ display:-webkit-box;
 overflow:hidden;
 }
 
-
-/* =========================================================
-ACTIVE CARD
-========================================================= */
-
 .pd-global-menu-card.active{
 background:#0b0b0b;
 border-color:#0b0b0b;
@@ -2460,11 +1909,6 @@ color:#efd38c;
 .pd-global-menu-card.active p{
 color:#ddd;
 }
-
-
-/* =========================================================
-CONTACT
-========================================================= */
 
 .pd-global-menu-footer{
 padding:0 8px 12px;
@@ -2488,19 +1932,9 @@ text-transform:uppercase;
 text-decoration:none;
 }
 
-
-/* =========================================================
-BODY LOCK
-========================================================= */
-
 body.pd-global-menu-open{
 overflow:hidden !important;
 }
-
-
-/* =========================================================
-RTL
-========================================================= */
 
 html[dir="rtl"] #pdGlobalRubrics{
 direction:ltr;
@@ -2513,11 +1947,7 @@ direction:rtl;
 html[dir="rtl"] #pdGlobalMenu{
 left:auto;
 right:0;
-box-shadow:
--12px
-0
-30px
-rgba(0,0,0,.27);
+box-shadow:-12px 0 30px rgba(0,0,0,.27);
 transform:translateX(104%);
 }
 
@@ -2532,11 +1962,6 @@ direction:rtl;
 html[dir="rtl"] .pd-global-menu-card-copy{
 text-align:right;
 }
-
-
-/* =========================================================
-SMALL MOBILE
-========================================================= */
 
 @media(max-width:390px){
 
@@ -2567,16 +1992,11 @@ font-size:11px;
 }
 
 #pdGlobalMenu{
-width:min(74vw,280px);
+width:min(73vw,280px);
 max-width:280px;
 }
 
 }
-
-
-/* =========================================================
-DESKTOP
-========================================================= */
 
 @media(min-width:851px){
 
@@ -2634,11 +2054,6 @@ max-width:320px;
 
 }
 
-
-/* =========================================================
-REDUCED MOTION
-========================================================= */
-
 @media(prefers-reduced-motion:reduce){
 
 #pdGlobalMenu,
@@ -2650,17 +2065,80 @@ transition:none;
 
 `;
 
-
 document.head.appendChild(
 style
 );
 
 }
 
+function hideExistingShell(){
 
-/* =========================================================
-CREATE HEADER
-========================================================= */
+const selectors=[
+"header.site-header",
+"body > .site-header",
+"#pdMasterHeader",
+".pd-master-header",
+"#pdShellMenu",
+"#pdShellOverlay",
+".primary-nav",
+".category-nav",
+".global-nav",
+".rubric-nav",
+".desktop-categories",
+"#categoryNav"
+];
+
+selectors.forEach(
+selector=>{
+
+document
+.querySelectorAll(
+selector
+)
+.forEach(
+element=>{
+
+if(
+element.id==="pdGlobalHeader"||
+element.id==="pdGlobalRubrics"
+){
+return;
+}
+
+element.classList.add(
+"pd-global-old-shell-hidden"
+);
+
+}
+);
+
+}
+);
+
+}
+
+function watchForLegacyShell(){
+
+if(
+legacyObserver
+){
+return;
+}
+
+legacyObserver=
+new MutationObserver(
+()=>hideExistingShell()
+);
+
+legacyObserver.observe(
+document.body,
+{
+childList:true,
+subtree:true
+}
+);
+
+}
 
 function createHeader(){
 
@@ -2669,28 +2147,20 @@ document.getElementById(
 "pdGlobalHeader"
 )
 ){
-
 return;
-
 }
 
-
 const copy=
-TEXT[
-getLanguage()
-]||
+TEXT[shellLanguage]||
 TEXT.en;
-
 
 const header=
 document.createElement(
 "header"
 );
 
-
 header.id=
 "pdGlobalHeader";
-
 
 header.innerHTML=`
 
@@ -2699,9 +2169,7 @@ header.innerHTML=`
 <button
 id="pdGlobalMenuButton"
 type="button"
-aria-label="${escapeHTML(
-copy.openMenu
-)}"
+aria-label="${escapeHTML(copy.openMenu)}"
 >
 
 <span></span>
@@ -2709,7 +2177,6 @@ copy.openMenu
 <span></span>
 
 </button>
-
 
 <a
 id="pdGlobalBrand"
@@ -2728,13 +2195,10 @@ DOGUE
 
 </a>
 
-
 <a
 id="pdGlobalHome"
 href="index.html"
-aria-label="${escapeHTML(
-copy.home
-)}"
+aria-label="${escapeHTML(copy.home)}"
 >
 
 <svg
@@ -2743,7 +2207,6 @@ aria-hidden="true"
 >
 
 <path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
-
 <path d="M9 21v-7h6v7"></path>
 
 </svg>
@@ -2751,7 +2214,6 @@ aria-hidden="true"
 </a>
 
 </div>
-
 
 <nav
 id="pdGlobalRubrics"
@@ -2761,12 +2223,10 @@ aria-label="PETS & DOGUE"
 
 `;
 
-
 document.body.insertBefore(
 header,
 document.body.firstChild
 );
-
 
 document
 .getElementById(
@@ -2779,11 +2239,6 @@ openMenu
 
 }
 
-
-/* =========================================================
-CREATE SIDE MENU
-========================================================= */
-
 function createSideMenu(){
 
 if(
@@ -2791,47 +2246,37 @@ document.getElementById(
 "pdGlobalMenu"
 )
 ){
-
 return;
-
 }
-
 
 const overlay=
 document.createElement(
 "div"
 );
 
-
 overlay.id=
 "pdGlobalOverlay";
-
 
 const menu=
 document.createElement(
 "aside"
 );
 
-
 menu.id=
 "pdGlobalMenu";
-
 
 menu.setAttribute(
 "aria-hidden",
 "true"
 );
 
-
 document.body.appendChild(
 overlay
 );
 
-
 document.body.appendChild(
 menu
 );
-
 
 overlay.addEventListener(
 "click",
@@ -2840,11 +2285,6 @@ closeMenu
 
 }
 
-
-/* =========================================================
-OPEN / CLOSE
-========================================================= */
-
 function openMenu(){
 
 const menu=
@@ -2852,45 +2292,36 @@ document.getElementById(
 "pdGlobalMenu"
 );
 
-
 const overlay=
 document.getElementById(
 "pdGlobalOverlay"
 );
 
-
 if(
 !menu||
 !overlay
 ){
-
 return;
-
 }
-
 
 menu.classList.add(
 "open"
 );
 
-
 overlay.classList.add(
 "show"
 );
-
 
 menu.setAttribute(
 "aria-hidden",
 "false"
 );
 
-
 document.body.classList.add(
 "pd-global-menu-open"
 );
 
 }
-
 
 function closeMenu(){
 
@@ -2899,38 +2330,30 @@ document.getElementById(
 "pdGlobalMenu"
 );
 
-
 const overlay=
 document.getElementById(
 "pdGlobalOverlay"
 );
 
-
 if(
 !menu||
 !overlay
 ){
-
 return;
-
 }
-
 
 menu.classList.remove(
 "open"
 );
 
-
 overlay.classList.remove(
 "show"
 );
-
 
 menu.setAttribute(
 "aria-hidden",
 "true"
 );
-
 
 document.body.classList.remove(
 "pd-global-menu-open"
@@ -2938,84 +2361,25 @@ document.body.classList.remove(
 
 }
 
-
-/* =========================================================
-PREVENT OLD PAGE NAVIGATION JS FROM INTERFERING
-
-We do not prevent normal link navigation.
-We only stop old delegated click handlers from receiving
-clicks from the new master shell.
-========================================================= */
-
-function stopLegacyNavigationInterference(
-root
-){
-
-root
-?.querySelectorAll?.(
-"a[data-pd-global-link]"
-)
-.forEach(
-link=>{
-
-if(
-link.dataset.pdSafeClick==="1"
-){
-
-return;
-
-}
-
-
-link.dataset.pdSafeClick="1";
-
-
-link.addEventListener(
-"click",
-event=>{
-
-event.stopPropagation();
-
-}
-);
-
-}
-);
-
-}
-
-
-/* =========================================================
-RENDER HORIZONTAL RUBRICS
-========================================================= */
-
 function renderRubrics(){
 
 const copy=
-TEXT[
-getLanguage()
-]||
+TEXT[shellLanguage]||
 TEXT.en;
-
 
 const nav=
 document.getElementById(
 "pdGlobalRubrics"
 );
 
-
 if(
 !nav
 ){
-
 return;
-
 }
-
 
 const oldScroll=
 nav.scrollLeft;
-
 
 nav.innerHTML=
 NAV_ITEMS
@@ -3025,20 +2389,17 @@ item=>{
 const active=
 item.key===activeKey;
 
-
 return`
 
 <a
-data-pd-global-link="1"
 href="${item.url}"
+data-pd-nav="${item.key}"
 class="${active?"active":""}"
 ${active?'aria-current="page"':""}
 >
 
 ${escapeHTML(
-copy.nav[
-item.key
-]
+copy.nav[item.key]
 )}
 
 </a>
@@ -3048,12 +2409,6 @@ item.key
 }
 )
 .join("");
-
-
-stopLegacyNavigationInterference(
-nav
-);
-
 
 if(
 userTouchedRubrics
@@ -3072,36 +2427,30 @@ oldScroll;
 
 }
 
-
-/* =========================================================
-RENDER SIDE MENU
-========================================================= */
-
 function renderSideMenu(){
 
-const language=
-getLanguage();
-
-
 const copy=
-TEXT[language]||
+TEXT[shellLanguage]||
 TEXT.en;
-
 
 const menu=
 document.getElementById(
 "pdGlobalMenu"
 );
 
-
 if(
 !menu
 ){
-
 return;
-
 }
 
+const oldScroll=
+menu.scrollTop;
+
+const wasOpen=
+menu.classList.contains(
+"open"
+);
 
 const cards=
 NAV_ITEMS
@@ -3111,13 +2460,12 @@ item=>{
 const active=
 item.key===activeKey;
 
-
 return`
 
 <a
-data-pd-global-link="1"
 class="pd-global-menu-card ${active?"active":""}"
 href="${item.url}"
+data-pd-nav="${item.key}"
 ${active?'aria-current="page"':""}
 >
 
@@ -3127,32 +2475,19 @@ ${active?'aria-current="page"':""}
 src="${item.image}"
 alt=""
 loading="lazy"
+referrerpolicy="no-referrer"
 >
 
 </span>
 
-
 <span class="pd-global-menu-card-copy">
 
 <h3>
-
-${escapeHTML(
-copy.nav[
-item.key
-]
-)}
-
+${escapeHTML(copy.nav[item.key])}
 </h3>
 
-
 <p>
-
-${escapeHTML(
-copy.desc[
-item.key
-]
-)}
-
+${escapeHTML(copy.desc[item.key])}
 </p>
 
 </span>
@@ -3165,78 +2500,48 @@ item.key
 )
 .join("");
 
-
 menu.innerHTML=`
 
 <div class="pd-global-menu-head">
 
 <h2>
-
-${escapeHTML(
-copy.menu
-)}
-
+${escapeHTML(copy.menu)}
 </h2>
-
 
 <button
 id="pdGlobalClose"
 type="button"
-aria-label="${escapeHTML(
-copy.closeMenu
-)}"
+aria-label="${escapeHTML(copy.closeMenu)}"
 >
 ×
 </button>
 
 </div>
 
-
 <div class="pd-global-account">
 
-<a
-data-pd-global-link="1"
-href="account.html"
->
-
-${escapeHTML(
-copy.signIn
-)}
-
+<a href="account.html">
+${escapeHTML(copy.signIn)}
 </a>
 
-
 <a
-data-pd-global-link="1"
 class="club"
 href="club.html"
 >
-
-${escapeHTML(
-copy.joinClub
-)}
-
+${escapeHTML(copy.joinClub)}
 </a>
 
 </div>
 
-
 <div class="pd-global-language">
 
 <label for="pdGlobalLanguage">
-
-${escapeHTML(
-copy.language
-)}
-
+${escapeHTML(copy.language)}
 </label>
-
 
 <select
 id="pdGlobalLanguage"
-aria-label="${escapeHTML(
-copy.language
-)}"
+aria-label="${escapeHTML(copy.language)}"
 >
 
 ${LANGUAGE_OPTIONS
@@ -3245,11 +2550,9 @@ option=>`
 
 <option
 value="${option[0]}"
-${option[0]===language?"selected":""}
+${option[0]===shellLanguage?"selected":""}
 >
-
 ${option[1]}
-
 </option>
 
 `
@@ -3260,31 +2563,21 @@ ${option[1]}
 
 </div>
 
-
 <nav id="pdGlobalMenuList">
 
 ${cards}
 
 </nav>
 
-
 <div class="pd-global-menu-footer">
 
-<a
-data-pd-global-link="1"
-href="contact.html"
->
-
-${escapeHTML(
-copy.contact
-)}
-
+<a href="contact.html">
+${escapeHTML(copy.contact)}
 </a>
 
 </div>
 
 `;
-
 
 document
 .getElementById(
@@ -3295,7 +2588,6 @@ document
 closeMenu
 );
 
-
 document
 .getElementById(
 "pdGlobalLanguage"
@@ -3305,26 +2597,37 @@ document
 handleLanguageChange
 );
 
+if(
+wasOpen
+){
 
-stopLegacyNavigationInterference(
-menu
+menu.classList.add(
+"open"
+);
+
+menu.setAttribute(
+"aria-hidden",
+"false"
+);
+
+requestAnimationFrame(
+()=>{
+
+menu.scrollTop=
+oldScroll;
+
+}
 );
 
 }
 
-
-/* =========================================================
-HEADER LANGUAGE
-========================================================= */
+}
 
 function updateHeaderLanguage(){
 
 const copy=
-TEXT[
-getLanguage()
-]||
+TEXT[shellLanguage]||
 TEXT.en;
-
 
 document
 .getElementById(
@@ -3334,7 +2637,6 @@ document
 "aria-label",
 copy.openMenu
 );
-
 
 document
 .getElementById(
@@ -3347,35 +2649,32 @@ copy.home
 
 }
 
-
-/* =========================================================
-OLD PAGE LANGUAGE SELECT
-========================================================= */
-
 function valueForExistingSelect(
 select,
 language
 ){
 
+const reverseAliases={
+uk:"ua",
+cs:"cz",
+el:"gr",
+sv:"se",
+da:"dk"
+};
+
 const candidates=[
 language
 ];
 
-
 if(
-REVERSE_LANGUAGE_ALIASES[
-language
-]
+reverseAliases[language]
 ){
 
 candidates.push(
-REVERSE_LANGUAGE_ALIASES[
-language
-]
+reverseAliases[language]
 );
 
 }
-
 
 for(
 const candidate of candidates
@@ -3389,53 +2688,56 @@ select.options||
 )
 .some(
 option=>
+normalizeLanguage(option.value)===language &&
 option.value===candidate
 );
-
 
 if(
 exists
 ){
-
 return candidate;
-
 }
 
 }
 
+const normalizedMatch=
+Array
+.from(
+select.options||
+[]
+)
+.find(
+option=>
+normalizeLanguage(option.value)===language
+);
 
-return"";
+return normalizedMatch
+?normalizedMatch.value
+:"";
 
 }
-
-
-/* =========================================================
-SYNC PAGE CONTENT LANGUAGE
-
-The page keeps its own page-specific translations.
-The shell only synchronises the selected language.
-========================================================= */
 
 function syncExistingPageLanguage(
 language
 ){
 
-document.documentElement.lang=
-language;
+const code=
+normalizeLanguage(
+language
+);
 
+if(
+!TEXT[code]
+){
+return false;
+}
 
-document.documentElement.dir=
-language==="ar"
-?"rtl"
-:"ltr";
+persistLanguage(
+code
+);
 
-
-let handled=false;
-
-
-/* =========================================================
-CENTRAL LANGUAGE CONTROLLER
-========================================================= */
+let handled=
+false;
 
 if(
 window.PetsDogueLanguage
@@ -3443,7 +2745,6 @@ window.PetsDogueLanguage
 
 const controller=
 window.PetsDogueLanguage;
-
 
 for(
 const setter of [
@@ -3460,11 +2761,11 @@ typeof controller[setter]==="function"
 try{
 
 controller[setter](
-language
+code
 );
 
-
-handled=true;
+handled=
+true;
 
 }catch(error){
 
@@ -3475,7 +2776,6 @@ error
 
 }
 
-
 break;
 
 }
@@ -3484,24 +2784,19 @@ break;
 
 }
 
-
-/* =========================================================
-PAGE renderLanguage()
-========================================================= */
-
 if(
-!handled&&
+!handled &&
 typeof window.renderLanguage==="function"
 ){
 
 try{
 
 window.renderLanguage(
-language
+code
 );
 
-
-handled=true;
+handled=
+true;
 
 }catch(error){
 
@@ -3514,16 +2809,8 @@ error
 
 }
 
-
-/* =========================================================
-OLD PAGE SELECT
-========================================================= */
-
 const existingSelect=
-document.getElementById(
-"languageSelect"
-);
-
+findExistingLanguageSelect();
 
 if(
 existingSelect
@@ -3532,12 +2819,11 @@ existingSelect
 const value=
 valueForExistingSelect(
 existingSelect,
-language
+code
 );
 
-
 if(
-value&&
+value &&
 existingSelect.value!==value
 ){
 
@@ -3545,7 +2831,6 @@ try{
 
 existingSelect.value=
 value;
-
 
 existingSelect.dispatchEvent(
 new Event(
@@ -3556,8 +2841,8 @@ bubbles:true
 )
 );
 
-
-handled=true;
+handled=
+true;
 
 }catch(error){
 
@@ -3572,105 +2857,87 @@ error
 
 }
 
-
-/*
-A page translation function may rebuild its old menu.
-Immediately hide that old shell again.
-*/
-
-setTimeout(
-()=>{
-
-hideLegacyShellIn(
-document
+persistLanguage(
+code
 );
 
-},
-0
-);
-
+hideExistingShell();
 
 return handled;
 
 }
 
-
-/* =========================================================
-GLOBAL LANGUAGE CHANGE
-========================================================= */
-
-function handleLanguageChange(
-event
-){
-
-if(
-internalLanguageChange
-){
-
-return;
-
-}
-
-
-const language=
-normalizeLanguage(
-event.target.value
-);
-
-
-if(
-!TEXT[language]
-){
-
-return;
-
-}
-
-
-internalLanguageChange=true;
-
-
-localStorage.setItem(
-LANGUAGE_KEY,
-language
-);
-
-
-syncExistingPageLanguage(
-language
-);
-
+function refreshShellLanguage(){
 
 updateHeaderLanguage();
 
-
 renderRubrics();
-
 
 renderSideMenu();
 
+}
+
+function applyLanguage(
+language,
+{
+syncPage=true,
+announce=true
+}={}
+){
+
+const code=
+normalizeLanguage(
+language
+);
+
+if(
+!TEXT[code]
+){
+return;
+}
+
+internalLanguageChange=
+true;
+
+persistLanguage(
+code
+);
+
+if(
+syncPage
+){
+
+syncExistingPageLanguage(
+code
+);
+
+}
+
+refreshShellLanguage();
+
+if(
+announce
+){
 
 window.dispatchEvent(
 new CustomEvent(
 "petsdogue:languagechange",
 {
 detail:{
-language
+language:code,
+source:"global-shell"
 }
 }
 )
 );
 
+}
 
 setTimeout(
 ()=>{
 
-internalLanguageChange=false;
-
-
-hideLegacyShellIn(
-document
-);
+internalLanguageChange=
+false;
 
 },
 0
@@ -3678,15 +2945,19 @@ document
 
 }
 
+function handleLanguageChange(
+event
+){
 
-/* =========================================================
-POSITION ACTIVE RUBRIC ONCE
+applyLanguage(
+event.target.value,
+{
+syncPage:true,
+announce:true
+}
+);
 
-Only once after page load.
-
-After this the user has completely free native horizontal
-swiping. No automatic re-centering on touch or resize.
-========================================================= */
+}
 
 function positionActiveOnce(){
 
@@ -3694,47 +2965,33 @@ if(
 activePositionDone||
 userTouchedRubrics
 ){
-
 return;
-
 }
-
 
 const nav=
 document.getElementById(
 "pdGlobalRubrics"
 );
 
-
 if(
 !nav
 ){
-
 return;
-
 }
-
 
 const active=
 nav.querySelector(
 "a.active"
 );
 
-
-activePositionDone=true;
-
+activePositionDone=
+true;
 
 if(
 !active
 ){
-
 return;
-
 }
-
-
-requestAnimationFrame(
-()=>{
 
 requestAnimationFrame(
 ()=>{
@@ -3747,25 +3004,26 @@ active.offsetWidth
 )/
 2;
 
+const max=
+Math.max(
+0,
+nav.scrollWidth-
+nav.clientWidth
+);
 
 nav.scrollLeft=
 Math.max(
 0,
+Math.min(
+max,
 target
+)
 );
 
 }
 );
 
 }
-);
-
-}
-
-
-/* =========================================================
-FREE NATIVE HORIZONTAL SWIPE
-========================================================= */
 
 function installRubricInteraction(){
 
@@ -3774,19 +3032,15 @@ document.getElementById(
 "pdGlobalRubrics"
 );
 
-
 if(
 !nav||
 nav.dataset.interactionReady==="1"
 ){
-
 return;
-
 }
 
-
-nav.dataset.interactionReady="1";
-
+nav.dataset.interactionReady=
+"1";
 
 [
 "touchstart",
@@ -3800,7 +3054,8 @@ nav.addEventListener(
 eventName,
 ()=>{
 
-userTouchedRubrics=true;
+userTouchedRubrics=
+true;
 
 },
 {
@@ -3813,32 +3068,27 @@ passive:true
 
 }
 
+function preserveLanguageBeforeNavigation(
+event
+){
 
-/* =========================================================
-REFRESH SHELL LABELS
-========================================================= */
+const link=
+event.target.closest(
+"a[data-pd-nav]"
+);
 
-function refreshShellLanguage(){
+if(
+!link
+){
+return;
+}
 
-updateHeaderLanguage();
-
-
-renderRubrics();
-
-
-renderSideMenu();
-
-
-hideLegacyShellIn(
-document
+localStorage.setItem(
+LANGUAGE_KEY,
+shellLanguage
 );
 
 }
-
-
-/* =========================================================
-ESCAPE
-========================================================= */
 
 function handleEscape(
 event
@@ -3847,167 +3097,141 @@ event
 if(
 event.key!=="Escape"
 ){
-
 return;
-
 }
-
 
 const menu=
 document.getElementById(
 "pdGlobalMenu"
 );
 
-
 if(
-!menu?.classList.contains(
+!menu||
+!menu.classList.contains(
 "open"
 )
 ){
-
 return;
-
 }
 
-
 event.preventDefault();
-
-
 event.stopPropagation();
-
-
 event.stopImmediatePropagation();
-
 
 closeMenu();
 
 }
 
+function installLanguageObserver(){
 
-/* =========================================================
-START
-========================================================= */
+if(
+langObserver
+){
+return;
+}
 
-function start(){
+langObserver=
+new MutationObserver(
+mutations=>{
 
-activeKey=
-getActiveKey();
+for(
+const mutation of mutations
+){
 
+if(
+mutation.type!=="attributes"||
+mutation.attributeName!=="lang"
+){
+continue;
+}
 
-installStyles();
-
-
-/*
-First remove every old visible header/menu/nav from view.
-The old DOM remains alive for page-specific code.
-*/
-
-hideLegacyShellIn(
-document
+const observed=
+normalizeLanguage(
+document.documentElement.lang||
+""
 );
 
+if(
+!TEXT[observed]||
+observed===shellLanguage||
+internalLanguageChange
+){
+continue;
+}
 
-/*
-Create the ONE visible global shell.
-*/
-
-createHeader();
-
-
-createSideMenu();
-
-
-/*
-Protect against page scripts recreating their old shell.
-*/
-
-installLegacyShellGuard();
-
-
-/*
-Render the fixed global order.
-*/
-
-renderRubrics();
-
-
-renderSideMenu();
-
-
-updateHeaderLanguage();
-
-
-installRubricInteraction();
-
-
-/*
-Apply the user's saved language to the current page.
-*/
-
-const savedLanguage=
-getLanguage();
-
-
-syncExistingPageLanguage(
-savedLanguage
+persistLanguage(
+observed
 );
 
+refreshShellLanguage();
 
-/*
-Some old pages rebuild their old navigation a little later.
-These extra checks remove those duplicates without touching
-the page's actual content or functions.
-*/
+}
 
-setTimeout(
-()=>{
-
-hideLegacyShellIn(
-document
+}
 );
+
+langObserver.observe(
+document.documentElement,
+{
+attributes:true,
+attributeFilter:[
+"lang"
+]
+}
+);
+
+}
+
+function installExternalLanguageListener(){
+
+document.addEventListener(
+"change",
+event=>{
+
+const target=
+event.target;
+
+if(
+!(
+target instanceof HTMLSelectElement
+)
+){
+return;
+}
+
+if(
+target.id==="pdGlobalLanguage"
+){
+return;
+}
+
+if(
+target!==findExistingLanguageSelect()
+){
+return;
+}
+
+const language=
+normalizeLanguage(
+target.value
+);
+
+if(
+!TEXT[language]||
+language===shellLanguage
+){
+return;
+}
+
+persistLanguage(
+language
+);
+
+refreshShellLanguage();
 
 },
-40
+true
 );
-
-
-setTimeout(
-()=>{
-
-hideLegacyShellIn(
-document
-);
-
-},
-180
-);
-
-
-setTimeout(
-()=>{
-
-hideLegacyShellIn(
-document
-);
-
-},
-700
-);
-
-
-/*
-Centre active rubric exactly once.
-*/
-
-setTimeout(
-positionActiveOnce,
-100
-);
-
-
-/* =========================================================
-LANGUAGE EVENT FROM PAGE
-========================================================= */
 
 window.addEventListener(
 "petsdogue:languagechange",
@@ -4016,48 +3240,36 @@ event=>{
 if(
 internalLanguageChange
 ){
-
 return;
-
 }
-
-
-const eventLanguage=
-normalizeLanguage(
-event?.detail?.language||
-localStorage.getItem(
-LANGUAGE_KEY
-)||
-document.documentElement.lang
-);
-
 
 if(
-TEXT[
-eventLanguage
-]
+event?.detail?.source==="global-shell"
 ){
-
-localStorage.setItem(
-LANGUAGE_KEY,
-eventLanguage
-);
-
+return;
 }
 
-
-setTimeout(
-refreshShellLanguage,
-0
+const language=
+normalizeLanguage(
+event?.detail?.language||
+""
 );
+
+if(
+!TEXT[language]||
+language===shellLanguage
+){
+return;
+}
+
+persistLanguage(
+language
+);
+
+refreshShellLanguage();
 
 }
 );
-
-
-/* =========================================================
-LANGUAGE CHANGED IN ANOTHER TAB
-========================================================= */
 
 window.addEventListener(
 "storage",
@@ -4066,30 +3278,123 @@ event=>{
 if(
 event.key!==LANGUAGE_KEY
 ){
-
 return;
-
 }
 
-
 const language=
-getLanguage();
+normalizeLanguage(
+event.newValue||
+""
+);
 
+if(
+!TEXT[language]
+){
+return;
+}
+
+persistLanguage(
+language
+);
 
 syncExistingPageLanguage(
 language
 );
-
 
 refreshShellLanguage();
 
 }
 );
 
+}
 
-/* =========================================================
-ESCAPE CLOSES GLOBAL MENU
-========================================================= */
+function reinforceLanguageAfterPageInit(){
+
+const expected=
+shellLanguage;
+
+[
+120,
+450,
+1000
+]
+.forEach(
+delay=>{
+
+setTimeout(
+()=>{
+
+if(
+shellLanguage!==expected
+){
+return;
+}
+
+persistLanguage(
+expected
+);
+
+syncExistingPageLanguage(
+expected
+);
+
+refreshShellLanguage();
+
+hideExistingShell();
+
+},
+delay
+);
+
+}
+);
+
+}
+
+function start(){
+
+activeKey=
+getActiveKey();
+
+shellLanguage=
+detectInitialLanguage();
+
+persistLanguage(
+shellLanguage
+);
+
+installStyles();
+
+hideExistingShell();
+
+createHeader();
+
+createSideMenu();
+
+renderRubrics();
+
+renderSideMenu();
+
+updateHeaderLanguage();
+
+installRubricInteraction();
+
+installLanguageObserver();
+
+installExternalLanguageListener();
+
+watchForLegacyShell();
+
+syncExistingPageLanguage(
+shellLanguage
+);
+
+reinforceLanguageAfterPageInit();
+
+setTimeout(
+positionActiveOnce,
+90
+);
 
 document.addEventListener(
 "keydown",
@@ -4097,12 +3402,39 @@ handleEscape,
 true
 );
 
+document.addEventListener(
+"pointerdown",
+preserveLanguageBeforeNavigation,
+true
+);
+
+document.addEventListener(
+"click",
+preserveLanguageBeforeNavigation,
+true
+);
+
+window.addEventListener(
+"pageshow",
+()=>{
+
+hideExistingShell();
+
+persistLanguage(
+shellLanguage
+);
+
+refreshShellLanguage();
+
+setTimeout(
+positionActiveOnce,
+40
+);
+
 }
+);
 
-
-/* =========================================================
-INITIALISE
-========================================================= */
+}
 
 if(
 document.readyState==="loading"
