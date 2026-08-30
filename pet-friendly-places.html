@@ -259,6 +259,8 @@ margin-top:16px;
 left:0;
 right:0;
 top:68px;
+max-height:340px;
+overflow-y:auto;
 }
 
 .location-suggestion,
@@ -304,6 +306,41 @@ line-height:1.35;
 color:var(--gold);
 font-size:18px;
 line-height:1;
+}
+
+.google-suggestion-mark{
+flex:0 0 auto;
+width:28px;
+height:28px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#111;
+color:#fff;
+font-size:13px;
+font-weight:900;
+}
+
+.google-suggestion-copy{
+min-width:0;
+flex:1;
+}
+
+.google-suggestion-distance{
+flex:0 0 auto;
+padding-top:2px;
+color:#8c877e;
+font-size:10px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.add-place-loading{
+padding:15px;
+color:#6e6960;
+font-size:12px;
+font-weight:700;
+text-align:center;
 }
 
 .icon-action{
@@ -374,7 +411,9 @@ height:23px;
 border-radius:50%;
 background:var(--green);
 border:0;
-} /* MAP */
+}
+
+/* MAP */
 
 .map-shell{
 position:relative;
@@ -492,9 +531,7 @@ color:#071007;
 width:25px;
 text-align:center;
 font-size:20px;
-}
-
-/* RESULTS */
+} /* RESULTS */
 
 .results-head{
 border-top:1px solid var(--line);
@@ -792,7 +829,7 @@ font-weight:900;
 .modal-backdrop{
 position:fixed;
 inset:0;
-z-index:9600;
+z-index:10200;
 display:none;
 align-items:center;
 justify-content:center;
@@ -882,6 +919,50 @@ font-size:11px;
 line-height:1.4;
 }
 
+.google-place-selected{
+display:none;
+margin-top:12px;
+padding:13px 14px;
+border:1px solid var(--gold);
+border-radius:14px;
+background:#fffaf0;
+}
+
+.google-place-selected.visible{
+display:block;
+}
+
+.google-place-selected strong{
+display:block;
+font-family:Georgia,"Times New Roman",serif;
+font-size:20px;
+font-weight:400;
+line-height:1.15;
+}
+
+.google-place-selected small{
+display:block;
+margin-top:5px;
+color:#6f6b63;
+font-size:11px;
+line-height:1.4;
+}
+
+.google-place-selected-badge{
+display:inline-flex;
+align-items:center;
+gap:6px;
+min-height:25px;
+margin-top:8px;
+padding:0 9px;
+border-radius:999px;
+background:#111;
+color:#fff;
+font-size:9px;
+font-weight:900;
+letter-spacing:.5px;
+}
+
 .place-summary{
 margin-top:14px;
 padding:14px;
@@ -923,7 +1004,7 @@ background:#fff;
 cursor:pointer;
 }
 
-.policy-option:has(input:checked){
+.policy-option.selected{
 border-color:#111;
 box-shadow:inset 0 0 0 1px #111;
 }
@@ -946,7 +1027,9 @@ font-size:22px;
 min-width:0;
 font-size:14px;
 font-weight:900;
-} .modal-location{
+}
+
+.modal-location{
 margin-top:14px;
 width:100%;
 min-height:48px;
@@ -968,6 +1051,11 @@ color:#080808;
 font-weight:900;
 }
 
+.modal-submit:disabled{
+opacity:.45;
+cursor:not-allowed;
+}
+
 .modal-secondary{
 margin-top:9px;
 width:100%;
@@ -979,7 +1067,7 @@ color:#111;
 font-weight:900;
 }
 
-/* FULL DETAILS */
+/* FULL PLACE DETAILS */
 
 .place-details-overlay{
 position:fixed;
@@ -1255,9 +1343,7 @@ border-radius:13px;
 background:#111;
 color:#fff;
 font-weight:900;
-}
-
-/* FULLSCREEN MAP */
+} /* FULLSCREEN MAP */
 
 .full-map-overlay{
 position:fixed;
@@ -1413,10 +1499,12 @@ font-size:10px;
 font-weight:900;
 }
 
+/* ROUTE */
+
 .route-sheet{
 position:fixed;
 inset:0;
-z-index:10100;
+z-index:10300;
 display:none;
 align-items:flex-end;
 justify-content:center;
@@ -1458,6 +1546,8 @@ font-weight:900;
 background:#111;
 color:#fff;
 }
+
+/* MAP MARKERS */
 
 .pd-marker{
 width:34px;
@@ -1931,7 +2021,9 @@ type="button"
 
 </div>
 
-</div> <aside class="category-panel">
+</div>
+
+<aside class="category-panel">
 
 <button
 class="category-button active"
@@ -2090,9 +2182,7 @@ Show more places
 
 </section>
 
-</main>
-
-<!-- ADD PLACE -->
+</main> <!-- ADD PLACE -->
 
 <div
 class="modal-backdrop"
@@ -2158,6 +2248,21 @@ data-extra-i18n="searchPlaceHelp"
 >
 Start typing a business name or address and choose the correct place.
 </p>
+
+<div
+class="google-place-selected"
+id="googlePlaceSelected"
+>
+
+<strong id="googlePlaceSelectedName"></strong>
+
+<small id="googlePlaceSelectedAddress"></small>
+
+<span class="google-place-selected-badge">
+Google Places
+</span>
+
+</div>
 
 </div>
 
@@ -2362,6 +2467,7 @@ Use my current location
 
 <button
 class="modal-submit"
+id="addPlaceSubmit"
 type="submit"
 data-i18n="savePlace"
 >
@@ -2807,7 +2913,12 @@ MASTER_LANGUAGE_KEY,
 const SAVED_KEY="pets_dogue_saved_places_v2";
 const ADDED_KEY="pets_dogue_added_places_v2";
 const SEARCH_KEY="pets_dogue_places_search_v2";
-const POLICY_KEY="pets_dogue_pet_place_rules_v2";
+
+/*
+Keep v1 permanently here so previously saved PETS & DOGUE
+pet-access rules remain attached to the same places.
+*/
+const POLICY_KEY="pets_dogue_pet_place_rules_v1";
 
 const LANGUAGE_NAMES={
 en:"EN — English",
@@ -2900,79 +3011,14 @@ locationSelected:"Selected location",
 navPlaces:"Pet-Friendly"
 };
 
-const TRANSLATIONS={ ru:{
-heroTitle:"Найдите места, где рады вашему питомцу",
-heroText:"Кафе, рестораны, отели, пляжи, парки, ветклиники, зоомагазины и события рядом с вами.",
-searchPlaceholder:"Город, индекс или район",
-radius:"Радиус поиска",
-verifiedMap:"Проверенные места",
-addPlaceShort:"Добавить",
-
-catAll:"Все категории",
-catCafe:"Кафе",
-catRestaurant:"Рестораны",
-catHotel:"Отели",
-catPark:"Парки",
-catBeach:"Пляжи",
-catVet:"Ветклиники",
-catShop:"Зоомагазины",
-catEvents:"События и шоу",
-catSaved:"Сохранённые",
-
-sortNearest:"Сначала ближайшие",
-sortRating:"Сначала лучший рейтинг",
-
-found:"Найдено",
-places:"мест",
-
-searching:"Ищем проверенные pet-friendly места…",
-locationSearching:"Определяем ваше местоположение…",
-geocodeFail:"Не удалось найти эту локацию.",
-locationFail:"Не удалось определить ваше местоположение.",
-
-noPlaces:"Проверенные pet-friendly места не найдены.",
-tryAnother:"Попробуйте другую категорию, больший радиус или соседний город.",
-
-savedEmpty:"У вас пока нет сохранённых мест.",
-savedEmptyText:"Нажмите сердечко на карточке места, чтобы сохранить его.",
-
-petFriendly:"Pet-friendly",
-open:"Открыто",
-closed:"Закрыто",
-
-route:"Маршрут",
-website:"Сайт",
-call:"Позвонить",
-
-sourceGoogle:"Google",
-sourceOSM:"OpenStreetMap",
-addedByMe:"Добавлено мной",
-
-km:"км",
-loadMore:"Показать ещё места",
-
-addPlaceTitle:"Добавить pet-friendly место",
-placeName:"Название места",
-category:"Категория",
-address:"Адрес",
-useLocation:"Использовать мою геолокацию",
-savePlace:"Сохранить место",
-
-placeSaved:"Место сохранено на вашем устройстве.",
-needLocation:"Сначала укажите геолокацию места.",
-locationSelected:"Выбрана локация",
-
-navPlaces:"Питомцам рады"
-},
-
-uk:{
+const TRANSLATIONS={
+en:{...BASE_EN},uk:{
 heroTitle:"Знайдіть місця, де раді вашому улюбленцю",
 heroText:"Кафе, ресторани, готелі, пляжі, парки, ветклініки, зоомагазини та події поруч із вами.",
 searchPlaceholder:"Місто, індекс або район",
 radius:"Радіус пошуку",
 verifiedMap:"Перевірені місця",
 addPlaceShort:"Додати",
-
 catAll:"Усі категорії",
 catCafe:"Кафе",
 catRestaurant:"Ресторани",
@@ -2983,51 +3029,91 @@ catVet:"Ветклініки",
 catShop:"Зоомагазини",
 catEvents:"Події та шоу",
 catSaved:"Збережені",
-
 sortNearest:"Спочатку найближчі",
 sortRating:"Найвищий рейтинг",
-
 found:"Знайдено",
 places:"місць",
-
 searching:"Шукаємо перевірені pet-friendly місця…",
 locationSearching:"Визначаємо ваше місцезнаходження…",
 geocodeFail:"Не вдалося знайти цю локацію.",
 locationFail:"Не вдалося визначити ваше місцезнаходження.",
-
 noPlaces:"Перевірених pet-friendly місць не знайдено.",
 tryAnother:"Спробуйте іншу категорію, більший радіус або сусіднє місто.",
-
 savedEmpty:"У вас поки немає збережених місць.",
 savedEmptyText:"Натисніть сердечко на картці місця, щоб зберегти його.",
-
 petFriendly:"Pet-friendly",
 open:"Відкрито",
 closed:"Закрито",
-
 route:"Маршрут",
 website:"Сайт",
 call:"Подзвонити",
-
 sourceGoogle:"Google",
 sourceOSM:"OpenStreetMap",
 addedByMe:"Додано мною",
-
 km:"км",
 loadMore:"Показати ще",
-
 addPlaceTitle:"Додати pet-friendly місце",
 placeName:"Назва місця",
 category:"Категорія",
 address:"Адреса",
 useLocation:"Використати мою геолокацію",
 savePlace:"Зберегти місце",
-
 placeSaved:"Місце збережено на вашому пристрої.",
 needLocation:"Спочатку виберіть геолокацію місця.",
 locationSelected:"Обрана локація",
-
 navPlaces:"Улюбленцям раді"
+},
+
+ru:{
+heroTitle:"Найдите места, где рады вашему питомцу",
+heroText:"Кафе, рестораны, отели, пляжи, парки, ветклиники, зоомагазины и события рядом с вами.",
+searchPlaceholder:"Город, индекс или район",
+radius:"Радиус поиска",
+verifiedMap:"Проверенные места",
+addPlaceShort:"Добавить",
+catAll:"Все категории",
+catCafe:"Кафе",
+catRestaurant:"Рестораны",
+catHotel:"Отели",
+catPark:"Парки",
+catBeach:"Пляжи",
+catVet:"Ветклиники",
+catShop:"Зоомагазины",
+catEvents:"События и шоу",
+catSaved:"Сохранённые",
+sortNearest:"Сначала ближайшие",
+sortRating:"Сначала лучший рейтинг",
+found:"Найдено",
+places:"мест",
+searching:"Ищем проверенные pet-friendly места…",
+locationSearching:"Определяем ваше местоположение…",
+geocodeFail:"Не удалось найти эту локацию.",
+locationFail:"Не удалось определить ваше местоположение.",
+noPlaces:"Проверенные pet-friendly места не найдены.",
+tryAnother:"Попробуйте другую категорию, больший радиус или соседний город.",
+savedEmpty:"У вас пока нет сохранённых мест.",
+savedEmptyText:"Нажмите сердечко на карточке места, чтобы сохранить его.",
+petFriendly:"Pet-friendly",
+open:"Открыто",
+closed:"Закрыто",
+route:"Маршрут",
+website:"Сайт",
+call:"Позвонить",
+sourceGoogle:"Google",
+sourceOSM:"OpenStreetMap",
+addedByMe:"Добавлено мной",
+km:"км",
+loadMore:"Показать ещё места",
+addPlaceTitle:"Добавить pet-friendly место",
+placeName:"Название места",
+category:"Категория",
+address:"Адрес",
+useLocation:"Использовать мою геолокацию",
+savePlace:"Сохранить место",
+placeSaved:"Место сохранено на вашем устройстве.",
+needLocation:"Сначала укажите геолокацию места.",
+locationSelected:"Выбрана локация",
+navPlaces:"Питомцам рады"
 },
 
 fr:{
@@ -3037,7 +3123,6 @@ searchPlaceholder:"Ville, code postal ou quartier",
 radius:"Rayon de recherche",
 verifiedMap:"Lieux vérifiés",
 addPlaceShort:"Ajouter",
-
 catAll:"Toutes les catégories",
 catCafe:"Cafés",
 catRestaurant:"Restaurants",
@@ -3048,50 +3133,38 @@ catVet:"Vétérinaires",
 catShop:"Animaleries",
 catEvents:"Événements",
 catSaved:"Enregistrés",
-
 sortNearest:"Les plus proches",
 sortRating:"Mieux notés",
-
 found:"Trouvé",
 places:"lieux",
-
 searching:"Recherche des lieux pet-friendly vérifiés…",
 locationSearching:"Recherche de votre position…",
 geocodeFail:"Impossible de trouver ce lieu.",
 locationFail:"Impossible de déterminer votre position.",
-
 noPlaces:"Aucun lieu pet-friendly vérifié trouvé.",
 tryAnother:"Essayez une autre catégorie, un rayon plus grand ou une ville voisine.",
-
 savedEmpty:"Vous n’avez encore enregistré aucun lieu.",
 savedEmptyText:"Touchez le cœur sur une fiche pour l’enregistrer.",
-
 petFriendly:"Pet-friendly",
 open:"Ouvert",
 closed:"Fermé",
-
 route:"Itinéraire",
 website:"Site",
 call:"Appeler",
-
 sourceGoogle:"Google",
 sourceOSM:"OpenStreetMap",
 addedByMe:"Ajouté par moi",
-
 km:"km",
 loadMore:"Afficher plus",
-
 addPlaceTitle:"Ajouter un lieu pet-friendly",
 placeName:"Nom du lieu",
 category:"Catégorie",
 address:"Adresse",
 useLocation:"Utiliser ma position",
 savePlace:"Enregistrer",
-
 placeSaved:"Lieu enregistré sur votre appareil.",
 needLocation:"Choisissez d’abord la position du lieu.",
 locationSelected:"Lieu sélectionné",
-
 navPlaces:"Pet-Friendly"
 },
 
@@ -3102,7 +3175,6 @@ searchPlaceholder:"Stadt, PLZ oder Bezirk",
 radius:"Suchradius",
 verifiedMap:"Verifizierte Orte",
 addPlaceShort:"Ort hinzufügen",
-
 catAll:"Alle Kategorien",
 catCafe:"Cafés",
 catRestaurant:"Restaurants",
@@ -3113,50 +3185,38 @@ catVet:"Tierärzte",
 catShop:"Tierhandlungen",
 catEvents:"Events & Shows",
 catSaved:"Gespeichert",
-
 sortNearest:"Nächste zuerst",
 sortRating:"Beste Bewertung",
-
 found:"Gefunden",
 places:"Orte",
-
 searching:"Verifizierte pet-friendly Orte werden gesucht…",
 locationSearching:"Standort wird ermittelt…",
 geocodeFail:"Dieser Ort wurde nicht gefunden.",
 locationFail:"Ihr Standort konnte nicht ermittelt werden.",
-
 noPlaces:"Keine verifizierten pet-friendly Orte gefunden.",
 tryAnother:"Versuchen Sie eine andere Kategorie oder einen größeren Radius.",
-
 savedEmpty:"Sie haben noch keine Orte gespeichert.",
 savedEmptyText:"Tippen Sie auf das Herz einer Karte, um sie zu speichern.",
-
 petFriendly:"Pet-friendly",
 open:"Geöffnet",
 closed:"Geschlossen",
-
 route:"Route",
 website:"Website",
 call:"Anrufen",
-
 sourceGoogle:"Google",
 sourceOSM:"OpenStreetMap",
 addedByMe:"Von mir hinzugefügt",
-
 km:"km",
 loadMore:"Mehr anzeigen",
-
 addPlaceTitle:"Tierfreundlichen Ort hinzufügen",
 placeName:"Name des Ortes",
 category:"Kategorie",
 address:"Adresse",
 useLocation:"Meinen Standort verwenden",
 savePlace:"Ort speichern",
-
 placeSaved:"Ort wurde auf Ihrem Gerät gespeichert.",
 needLocation:"Wählen Sie zuerst den Standort.",
 locationSelected:"Ausgewählter Ort",
-
 navPlaces:"Tierfreundlich"
 },
 
@@ -3167,7 +3227,6 @@ searchPlaceholder:"Ciudad, código postal o zona",
 radius:"Radio de búsqueda",
 verifiedMap:"Lugares verificados",
 addPlaceShort:"Añadir",
-
 catAll:"Todas las categorías",
 catCafe:"Cafés",
 catRestaurant:"Restaurantes",
@@ -3178,50 +3237,38 @@ catVet:"Veterinarios",
 catShop:"Tiendas de mascotas",
 catEvents:"Eventos",
 catSaved:"Guardados",
-
 sortNearest:"Más cercanos",
 sortRating:"Mejor valorados",
-
 found:"Encontrados",
 places:"lugares",
-
 searching:"Buscando lugares pet-friendly verificados…",
 locationSearching:"Buscando tu ubicación…",
 geocodeFail:"No pudimos encontrar esta ubicación.",
 locationFail:"No pudimos determinar tu ubicación.",
-
 noPlaces:"No se encontraron lugares pet-friendly verificados.",
 tryAnother:"Prueba otra categoría, un radio mayor o una ciudad cercana.",
-
 savedEmpty:"Todavía no has guardado lugares.",
 savedEmptyText:"Pulsa el corazón de una tarjeta para guardarla.",
-
 petFriendly:"Pet-friendly",
 open:"Abierto",
 closed:"Cerrado",
-
 route:"Cómo llegar",
 website:"Web",
 call:"Llamar",
-
 sourceGoogle:"Google",
 sourceOSM:"OpenStreetMap",
 addedByMe:"Añadido por mí",
-
 km:"km",
 loadMore:"Mostrar más",
-
 addPlaceTitle:"Añadir un lugar pet-friendly",
 placeName:"Nombre del lugar",
 category:"Categoría",
 address:"Dirección",
 useLocation:"Usar mi ubicación",
 savePlace:"Guardar lugar",
-
 placeSaved:"Lugar guardado en tu dispositivo.",
 needLocation:"Primero elige la ubicación.",
 locationSelected:"Ubicación seleccionada",
-
 navPlaces:"Pet-Friendly"
 },
 
@@ -3232,7 +3279,6 @@ searchPlaceholder:"Città, CAP o zona",
 radius:"Raggio di ricerca",
 verifiedMap:"Luoghi verificati",
 addPlaceShort:"Aggiungi",
-
 catAll:"Tutte le categorie",
 catCafe:"Caffè",
 catRestaurant:"Ristoranti",
@@ -3243,50 +3289,38 @@ catVet:"Veterinari",
 catShop:"Negozi per animali",
 catEvents:"Eventi",
 catSaved:"Salvati",
-
 sortNearest:"Più vicini",
 sortRating:"Più votati",
-
 found:"Trovati",
 places:"luoghi",
-
 searching:"Ricerca di luoghi pet-friendly verificati…",
 locationSearching:"Ricerca della posizione…",
 geocodeFail:"Impossibile trovare questa località.",
 locationFail:"Impossibile determinare la posizione.",
-
 noPlaces:"Nessun luogo pet-friendly verificato trovato.",
 tryAnother:"Prova un’altra categoria o un raggio più grande.",
-
 savedEmpty:"Non hai ancora salvato luoghi.",
 savedEmptyText:"Tocca il cuore su una scheda per salvarla.",
-
 petFriendly:"Pet-friendly",
 open:"Aperto",
 closed:"Chiuso",
-
 route:"Indicazioni",
 website:"Sito",
 call:"Chiama",
-
 sourceGoogle:"Google",
 sourceOSM:"OpenStreetMap",
 addedByMe:"Aggiunto da me",
-
 km:"km",
 loadMore:"Mostra altro",
-
 addPlaceTitle:"Aggiungi un luogo pet-friendly",
 placeName:"Nome del luogo",
 category:"Categoria",
 address:"Indirizzo",
 useLocation:"Usa la mia posizione",
 savePlace:"Salva luogo",
-
 placeSaved:"Luogo salvato sul dispositivo.",
 needLocation:"Scegli prima la posizione.",
 locationSelected:"Località selezionata",
-
 navPlaces:"Pet-Friendly"
 },
 
@@ -3297,7 +3331,6 @@ searchPlaceholder:"Cidade, código postal ou zona",
 radius:"Raio de pesquisa",
 verifiedMap:"Locais verificados",
 addPlaceShort:"Adicionar",
-
 catAll:"Todas as categorias",
 catCafe:"Cafés",
 catRestaurant:"Restaurantes",
@@ -3308,50 +3341,38 @@ catVet:"Veterinários",
 catShop:"Pet shops",
 catEvents:"Eventos",
 catSaved:"Guardados",
-
 sortNearest:"Mais próximos",
 sortRating:"Melhor avaliação",
-
 found:"Encontrados",
 places:"locais",
-
 searching:"A procurar locais pet-friendly verificados…",
 locationSearching:"A procurar a sua localização…",
 geocodeFail:"Não foi possível encontrar este local.",
 locationFail:"Não foi possível determinar a sua localização.",
-
 noPlaces:"Nenhum local pet-friendly verificado encontrado.",
 tryAnother:"Experimente outra categoria ou um raio maior.",
-
 savedEmpty:"Ainda não guardou locais.",
 savedEmptyText:"Toque no coração de um cartão para guardar.",
-
 petFriendly:"Pet-friendly",
 open:"Aberto",
 closed:"Fechado",
-
 route:"Direções",
 website:"Website",
 call:"Ligar",
-
 sourceGoogle:"Google",
 sourceOSM:"OpenStreetMap",
 addedByMe:"Adicionado por mim",
-
 km:"km",
 loadMore:"Mostrar mais",
-
 addPlaceTitle:"Adicionar local pet-friendly",
 placeName:"Nome do local",
 category:"Categoria",
 address:"Morada",
 useLocation:"Usar a minha localização",
 savePlace:"Guardar local",
-
 placeSaved:"Local guardado no dispositivo.",
 needLocation:"Escolha primeiro a localização.",
 locationSelected:"Local selecionado",
-
 navPlaces:"Pet-Friendly"
 },
 
@@ -3362,7 +3383,6 @@ searchPlaceholder:"Stad, postcode of wijk",
 radius:"Zoekradius",
 verifiedMap:"Geverifieerde plekken",
 addPlaceShort:"Toevoegen",
-
 catAll:"Alle categorieën",
 catCafe:"Cafés",
 catRestaurant:"Restaurants",
@@ -3373,52 +3393,42 @@ catVet:"Dierenartsen",
 catShop:"Dierenwinkels",
 catEvents:"Evenementen",
 catSaved:"Opgeslagen",
-
 sortNearest:"Dichtstbij",
 sortRating:"Hoogste score",
-
 found:"Gevonden",
 places:"plekken",
-
 searching:"Geverifieerde pet-friendly plekken zoeken…",
 locationSearching:"Uw locatie zoeken…",
 geocodeFail:"Deze locatie kon niet worden gevonden.",
 locationFail:"Uw locatie kon niet worden bepaald.",
-
 noPlaces:"Geen geverifieerde pet-friendly plekken gevonden.",
 tryAnother:"Probeer een andere categorie of grotere straal.",
-
 savedEmpty:"U heeft nog geen plekken opgeslagen.",
 savedEmptyText:"Tik op het hartje om een plek op te slaan.",
-
 petFriendly:"Pet-friendly",
 open:"Open",
 closed:"Gesloten",
-
 route:"Route",
 website:"Website",
 call:"Bellen",
-
 sourceGoogle:"Google",
 sourceOSM:"OpenStreetMap",
 addedByMe:"Door mij toegevoegd",
-
 km:"km",
 loadMore:"Meer tonen",
-
 addPlaceTitle:"Pet-friendly plek toevoegen",
 placeName:"Naam van de plek",
 category:"Categorie",
 address:"Adres",
 useLocation:"Mijn locatie gebruiken",
 savePlace:"Plek opslaan",
-
 placeSaved:"Plek opgeslagen op uw apparaat.",
 needLocation:"Kies eerst de locatie.",
 locationSelected:"Geselecteerde locatie",
-
 navPlaces:"Huisdiervriendelijk"
-},pl:{
+},
+
+pl:{
 heroTitle:"Znajdź miejsca przyjazne Twojemu zwierzakowi",
 heroText:"Kawiarnie, restauracje, hotele, plaże, parki, weterynarze, sklepy i wydarzenia w pobliżu.",
 searchPlaceholder:"Miasto, kod lub dzielnica",
@@ -3572,9 +3582,7 @@ placeSaved:"Miesto bolo uložené v zariadení.",
 needLocation:"Najprv vyberte polohu.",
 locationSelected:"Vybraná lokalita",
 navPlaces:"Priateľské k zvieratám"
-},
-
-hu:{
+},hu:{
 heroTitle:"Találjon helyeket, ahol kedvencét is szívesen látják",
 heroText:"Kávézók, éttermek, hotelek, strandok, parkok, állatorvosok, üzletek és események a közelben.",
 searchPlaceholder:"Város, irányítószám vagy környék",
@@ -4148,68 +4156,13 @@ navPlaces:"पेट-फ्रेंडली"
 
 };
 
-Object.keys(LANGUAGE_NAMES).forEach(function(code){
-
-TRANSLATIONS[code]=Object.assign(
-{},
-BASE_EN,
-TRANSLATIONS[code]||{}
-);
-
-});
-
 const POLICY_TEXT={
 
-en:{
-petRules:"Pet rules",
-petRulesTitle:"Pet access",
-whereAllowed:"Where are pets allowed?",
-insideOutside:"Inside & outside",
-terraceOnly:"Terrace / outside only",
-gardenOnly:"Garden only",
-restrictions:"Restrictions / ask venue",
-shortNote:"Short note — optional",
-notePlaceholder:"Example: Dogs are allowed on the terrace only.",
-saveRules:"Save pet rules",
-rulesSaved:"Pet rules saved.",
-chooseAccess:"Please choose where pets are allowed.",
-removeRules:"Remove custom rules",
-rulesRemoved:"Custom pet rules removed."
-},
+en:{petRules:"Pet rules",petRulesTitle:"Pet access",whereAllowed:"Where are pets allowed?",insideOutside:"Inside & outside",terraceOnly:"Terrace / outside only",gardenOnly:"Garden only",restrictions:"Restrictions / ask venue",shortNote:"Short note — optional",notePlaceholder:"Example: Dogs are allowed on the terrace only.",saveRules:"Save pet rules",rulesSaved:"Pet rules saved.",chooseAccess:"Please choose where pets are allowed.",removeRules:"Remove custom rules",rulesRemoved:"Custom pet rules removed."},
 
-uk:{
-petRules:"Правила для тварин",
-petRulesTitle:"Доступ із тваринами",
-whereAllowed:"Де дозволено перебувати з тваринами?",
-insideOutside:"Всередині та надворі",
-terraceOnly:"Лише тераса / надворі",
-gardenOnly:"Лише сад",
-restrictions:"Є обмеження / уточніть у закладі",
-shortNote:"Коротке уточнення — необов’язково",
-notePlaceholder:"Наприклад: із собаками можна лише на терасі.",
-saveRules:"Зберегти правила",
-rulesSaved:"Правила для тварин збережено.",
-chooseAccess:"Виберіть, де дозволено перебувати з тваринами.",
-removeRules:"Видалити власні правила",
-rulesRemoved:"Власні правила видалено."
-},
+uk:{petRules:"Правила для тварин",petRulesTitle:"Доступ із тваринами",whereAllowed:"Де дозволено перебувати з тваринами?",insideOutside:"Всередині та надворі",terraceOnly:"Лише тераса / надворі",gardenOnly:"Лише сад",restrictions:"Є обмеження / уточніть у закладі",shortNote:"Коротке уточнення — необов’язково",notePlaceholder:"Наприклад: із собаками можна лише на терасі.",saveRules:"Зберегти правила",rulesSaved:"Правила для тварин збережено.",chooseAccess:"Виберіть, де дозволено перебувати з тваринами.",removeRules:"Видалити власні правила",rulesRemoved:"Власні правила видалено."},
 
-ru:{
-petRules:"Правила для питомцев",
-petRulesTitle:"Доступ с питомцами",
-whereAllowed:"Где разрешено находиться с питомцем?",
-insideOutside:"Внутри и снаружи",
-terraceOnly:"Только терраса / снаружи",
-gardenOnly:"Только сад",
-restrictions:"Есть ограничения / уточнить у заведения",
-shortNote:"Короткое уточнение — необязательно",
-notePlaceholder:"Например: с собаками можно только на террасе.",
-saveRules:"Сохранить правила",
-rulesSaved:"Правила для питомцев сохранены.",
-chooseAccess:"Выберите, где разрешено находиться с питомцем.",
-removeRules:"Удалить мои правила",
-rulesRemoved:"Мои правила для питомцев удалены."
-},
+ru:{petRules:"Правила для питомцев",petRulesTitle:"Доступ с питомцами",whereAllowed:"Где разрешено находиться с питомцем?",insideOutside:"Внутри и снаружи",terraceOnly:"Только терраса / снаружи",gardenOnly:"Только сад",restrictions:"Есть ограничения / уточнить у заведения",shortNote:"Короткое уточнение — необязательно",notePlaceholder:"Например: с собаками можно только на террасе.",saveRules:"Сохранить правила",rulesSaved:"Правила для питомцев сохранены.",chooseAccess:"Выберите, где разрешено находиться с питомцем.",removeRules:"Удалить мои правила",rulesRemoved:"Мои правила для питомцев удалены."},
 
 fr:{petRules:"Règles animaux",petRulesTitle:"Accès avec animaux",whereAllowed:"Où les animaux sont-ils autorisés ?",insideOutside:"À l’intérieur et à l’extérieur",terraceOnly:"Terrasse / extérieur uniquement",gardenOnly:"Jardin uniquement",restrictions:"Restrictions / demander au lieu",shortNote:"Petite précision — facultative",notePlaceholder:"Exemple : chiens autorisés uniquement en terrasse.",saveRules:"Enregistrer les règles",rulesSaved:"Règles enregistrées.",chooseAccess:"Choisissez où les animaux sont autorisés.",removeRules:"Supprimer mes règles",rulesRemoved:"Règles personnalisées supprimées."},
 
@@ -4255,55 +4208,53 @@ hi:{petRules:"पालतू नियम",petRulesTitle:"पालतू प�
 
 const EXTRA_TEXT={
 
-en:{searchPlace:"Search place or address",searchPlacePlaceholder:"Business name or address",searchPlaceHelp:"Start typing a business name or address and choose the correct place.",petInfoTitle:"Pet information",googleMaps:"Google Maps",waze:"Waze",save:"Save",saved:"Saved",share:"Share",routeChoose:"Choose navigation",expandMap:"Expand map",mapTitle:"Pet-Friendly map",communityInfo:"PETS & DOGUE community information",lastUpdated:"Updated",cancel:"Cancel",copied:"Link copied"},
+en:{searchPlace:"Search place or address",searchPlacePlaceholder:"Business name or address",searchPlaceHelp:"Start typing a business name or address and choose the correct Google place.",petInfoTitle:"Pet information",googleMaps:"Google Maps",waze:"Waze",save:"Save",saved:"Saved",share:"Share",routeChoose:"Choose navigation",expandMap:"Expand map",mapTitle:"Pet-Friendly map",communityInfo:"PETS & DOGUE community information",lastUpdated:"Updated",cancel:"Cancel",copied:"Link copied",googleSearching:"Searching Google Places…",googleNoResults:"No matching Google places found.",googleError:"Google Places search is temporarily unavailable."},
 
-uk:{searchPlace:"Знайти місце або адресу",searchPlacePlaceholder:"Назва закладу або адреса",searchPlaceHelp:"Почніть вводити назву закладу або адресу та виберіть правильне місце.",petInfoTitle:"Інформація для власників тварин",googleMaps:"Google Maps",waze:"Waze",save:"Зберегти",saved:"Збережено",share:"Поділитися",routeChoose:"Оберіть навігацію",expandMap:"Відкрити карту",mapTitle:"Карта Pet-Friendly",communityInfo:"Інформація спільноти PETS & DOGUE",lastUpdated:"Оновлено",cancel:"Скасувати",copied:"Посилання скопійовано"},
+uk:{searchPlace:"Знайти місце або адресу",searchPlacePlaceholder:"Назва закладу або адреса",searchPlaceHelp:"Почніть вводити назву або адресу та виберіть правильне місце Google.",petInfoTitle:"Інформація для власників тварин",googleMaps:"Google Maps",waze:"Waze",save:"Зберегти",saved:"Збережено",share:"Поділитися",routeChoose:"Оберіть навігацію",expandMap:"Відкрити карту",mapTitle:"Карта Pet-Friendly",communityInfo:"Інформація спільноти PETS & DOGUE",lastUpdated:"Оновлено",cancel:"Скасувати",copied:"Посилання скопійовано",googleSearching:"Шукаємо в Google Places…",googleNoResults:"Відповідних місць Google не знайдено.",googleError:"Пошук Google Places тимчасово недоступний."},
 
-ru:{searchPlace:"Найти место или адрес",searchPlacePlaceholder:"Название заведения или адрес",searchPlaceHelp:"Начните вводить название заведения или адрес и выберите нужное место.",petInfoTitle:"Информация для владельцев питомцев",googleMaps:"Google Maps",waze:"Waze",save:"Сохранить",saved:"Сохранено",share:"Поделиться",routeChoose:"Выберите навигацию",expandMap:"Открыть карту",mapTitle:"Карта Pet-Friendly",communityInfo:"Информация сообщества PETS & DOGUE",lastUpdated:"Обновлено",cancel:"Отмена",copied:"Ссылка скопирована"},
+ru:{searchPlace:"Найти место или адрес",searchPlacePlaceholder:"Название заведения или адрес",searchPlaceHelp:"Начните вводить название или адрес и выберите правильное место Google.",petInfoTitle:"Информация для владельцев питомцев",googleMaps:"Google Maps",waze:"Waze",save:"Сохранить",saved:"Сохранено",share:"Поделиться",routeChoose:"Выберите навигацию",expandMap:"Открыть карту",mapTitle:"Карта Pet-Friendly",communityInfo:"Информация сообщества PETS & DOGUE",lastUpdated:"Обновлено",cancel:"Отмена",copied:"Ссылка скопирована",googleSearching:"Ищем в Google Places…",googleNoResults:"Подходящих мест Google не найдено.",googleError:"Поиск Google Places временно недоступен."},
 
-fr:{searchPlace:"Rechercher un lieu ou une adresse",searchPlacePlaceholder:"Nom de l’établissement ou adresse",searchPlaceHelp:"Commencez à saisir un nom ou une adresse puis choisissez le bon lieu.",petInfoTitle:"Informations pour les animaux",googleMaps:"Google Maps",waze:"Waze",save:"Enregistrer",saved:"Enregistré",share:"Partager",routeChoose:"Choisir la navigation",expandMap:"Agrandir la carte",mapTitle:"Carte Pet-Friendly",communityInfo:"Informations de la communauté PETS & DOGUE",lastUpdated:"Mis à jour",cancel:"Annuler",copied:"Lien copié"},
+fr:{searchPlace:"Rechercher un lieu ou une adresse",searchPlacePlaceholder:"Nom de l’établissement ou adresse",searchPlaceHelp:"Saisissez un nom ou une adresse et choisissez le bon lieu Google.",petInfoTitle:"Informations pour les animaux",googleMaps:"Google Maps",waze:"Waze",save:"Enregistrer",saved:"Enregistré",share:"Partager",routeChoose:"Choisir la navigation",expandMap:"Agrandir la carte",mapTitle:"Carte Pet-Friendly",communityInfo:"Informations de la communauté PETS & DOGUE",lastUpdated:"Mis à jour",cancel:"Annuler",copied:"Lien copié",googleSearching:"Recherche dans Google Places…",googleNoResults:"Aucun lieu Google correspondant.",googleError:"La recherche Google Places est temporairement indisponible."},
 
-de:{searchPlace:"Ort oder Adresse suchen",searchPlacePlaceholder:"Name des Betriebs oder Adresse",searchPlaceHelp:"Geben Sie einen Namen oder eine Adresse ein und wählen Sie den richtigen Ort.",petInfoTitle:"Informationen für Haustiere",googleMaps:"Google Maps",waze:"Waze",save:"Speichern",saved:"Gespeichert",share:"Teilen",routeChoose:"Navigation wählen",expandMap:"Karte öffnen",mapTitle:"Pet-Friendly Karte",communityInfo:"Informationen der PETS & DOGUE Community",lastUpdated:"Aktualisiert",cancel:"Abbrechen",copied:"Link kopiert"},
+de:{searchPlace:"Ort oder Adresse suchen",searchPlacePlaceholder:"Name des Betriebs oder Adresse",searchPlaceHelp:"Geben Sie einen Namen oder eine Adresse ein und wählen Sie den richtigen Google-Ort.",petInfoTitle:"Informationen für Haustiere",googleMaps:"Google Maps",waze:"Waze",save:"Speichern",saved:"Gespeichert",share:"Teilen",routeChoose:"Navigation wählen",expandMap:"Karte öffnen",mapTitle:"Pet-Friendly Karte",communityInfo:"Informationen der PETS & DOGUE Community",lastUpdated:"Aktualisiert",cancel:"Abbrechen",copied:"Link kopiert",googleSearching:"Google Places wird durchsucht…",googleNoResults:"Keine passenden Google-Orte gefunden.",googleError:"Google Places ist vorübergehend nicht verfügbar."},
 
-es:{searchPlace:"Buscar lugar o dirección",searchPlacePlaceholder:"Nombre del negocio o dirección",searchPlaceHelp:"Empieza a escribir el nombre o la dirección y elige el lugar correcto.",petInfoTitle:"Información para mascotas",googleMaps:"Google Maps",waze:"Waze",save:"Guardar",saved:"Guardado",share:"Compartir",routeChoose:"Elige navegación",expandMap:"Abrir mapa",mapTitle:"Mapa Pet-Friendly",communityInfo:"Información de la comunidad PETS & DOGUE",lastUpdated:"Actualizado",cancel:"Cancelar",copied:"Enlace copiado"},
+es:{searchPlace:"Buscar lugar o dirección",searchPlacePlaceholder:"Nombre del negocio o dirección",searchPlaceHelp:"Escribe un nombre o una dirección y elige el lugar correcto de Google.",petInfoTitle:"Información para mascotas",googleMaps:"Google Maps",waze:"Waze",save:"Guardar",saved:"Guardado",share:"Compartir",routeChoose:"Elige navegación",expandMap:"Abrir mapa",mapTitle:"Mapa Pet-Friendly",communityInfo:"Información de la comunidad PETS & DOGUE",lastUpdated:"Actualizado",cancel:"Cancelar",copied:"Enlace copiado",googleSearching:"Buscando en Google Places…",googleNoResults:"No se encontraron lugares de Google.",googleError:"Google Places no está disponible temporalmente."},
 
-it:{searchPlace:"Cerca luogo o indirizzo",searchPlacePlaceholder:"Nome dell’attività o indirizzo",searchPlaceHelp:"Inizia a digitare il nome o l’indirizzo e scegli il luogo corretto.",petInfoTitle:"Informazioni per animali",googleMaps:"Google Maps",waze:"Waze",save:"Salva",saved:"Salvato",share:"Condividi",routeChoose:"Scegli navigazione",expandMap:"Apri mappa",mapTitle:"Mappa Pet-Friendly",communityInfo:"Informazioni della community PETS & DOGUE",lastUpdated:"Aggiornato",cancel:"Annulla",copied:"Link copiato"},
+it:{searchPlace:"Cerca luogo o indirizzo",searchPlacePlaceholder:"Nome dell’attività o indirizzo",searchPlaceHelp:"Digita un nome o un indirizzo e scegli il luogo Google corretto.",petInfoTitle:"Informazioni per animali",googleMaps:"Google Maps",waze:"Waze",save:"Salva",saved:"Salvato",share:"Condividi",routeChoose:"Scegli navigazione",expandMap:"Apri mappa",mapTitle:"Mappa Pet-Friendly",communityInfo:"Informazioni della community PETS & DOGUE",lastUpdated:"Aggiornato",cancel:"Annulla",copied:"Link copiato",googleSearching:"Ricerca su Google Places…",googleNoResults:"Nessun luogo Google corrispondente.",googleError:"Google Places è temporaneamente non disponibile."},
 
-pt:{searchPlace:"Pesquisar local ou morada",searchPlacePlaceholder:"Nome do estabelecimento ou morada",searchPlaceHelp:"Comece a escrever o nome ou a morada e escolha o local correto.",petInfoTitle:"Informação para animais",googleMaps:"Google Maps",waze:"Waze",save:"Guardar",saved:"Guardado",share:"Partilhar",routeChoose:"Escolher navegação",expandMap:"Abrir mapa",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informação da comunidade PETS & DOGUE",lastUpdated:"Atualizado",cancel:"Cancelar",copied:"Ligação copiada"},
+pt:{searchPlace:"Pesquisar local ou morada",searchPlacePlaceholder:"Nome do estabelecimento ou morada",searchPlaceHelp:"Escreva um nome ou morada e escolha o local Google correto.",petInfoTitle:"Informação para animais",googleMaps:"Google Maps",waze:"Waze",save:"Guardar",saved:"Guardado",share:"Partilhar",routeChoose:"Escolher navegação",expandMap:"Abrir mapa",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informação da comunidade PETS & DOGUE",lastUpdated:"Atualizado",cancel:"Cancelar",copied:"Ligação copiada",googleSearching:"A pesquisar no Google Places…",googleNoResults:"Nenhum local Google correspondente.",googleError:"O Google Places está temporariamente indisponível."},
 
-nl:{searchPlace:"Zoek plaats of adres",searchPlacePlaceholder:"Bedrijfsnaam of adres",searchPlaceHelp:"Typ een bedrijfsnaam of adres en kies de juiste plek.",petInfoTitle:"Huisdierinformatie",googleMaps:"Google Maps",waze:"Waze",save:"Opslaan",saved:"Opgeslagen",share:"Delen",routeChoose:"Kies navigatie",expandMap:"Kaart openen",mapTitle:"Pet-Friendly kaart",communityInfo:"Informatie van de PETS & DOGUE-community",lastUpdated:"Bijgewerkt",cancel:"Annuleren",copied:"Link gekopieerd"},
+nl:{searchPlace:"Zoek plaats of adres",searchPlacePlaceholder:"Bedrijfsnaam of adres",searchPlaceHelp:"Typ een naam of adres en kies de juiste Google-locatie.",petInfoTitle:"Huisdierinformatie",googleMaps:"Google Maps",waze:"Waze",save:"Opslaan",saved:"Opgeslagen",share:"Delen",routeChoose:"Kies navigatie",expandMap:"Kaart openen",mapTitle:"Pet-Friendly kaart",communityInfo:"Informatie van de PETS & DOGUE-community",lastUpdated:"Bijgewerkt",cancel:"Annuleren",copied:"Link gekopieerd",googleSearching:"Zoeken in Google Places…",googleNoResults:"Geen overeenkomende Google-locaties gevonden.",googleError:"Google Places is tijdelijk niet beschikbaar."},
 
-pl:{searchPlace:"Znajdź miejsce lub adres",searchPlacePlaceholder:"Nazwa lokalu lub adres",searchPlaceHelp:"Zacznij wpisywać nazwę lub adres i wybierz właściwe miejsce.",petInfoTitle:"Informacje dla właścicieli zwierząt",googleMaps:"Google Maps",waze:"Waze",save:"Zapisz",saved:"Zapisano",share:"Udostępnij",routeChoose:"Wybierz nawigację",expandMap:"Otwórz mapę",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informacje społeczności PETS & DOGUE",lastUpdated:"Zaktualizowano",cancel:"Anuluj",copied:"Link skopiowany"},
+pl:{searchPlace:"Znajdź miejsce lub adres",searchPlacePlaceholder:"Nazwa lokalu lub adres",searchPlaceHelp:"Wpisz nazwę lub adres i wybierz właściwe miejsce Google.",petInfoTitle:"Informacje dla właścicieli zwierząt",googleMaps:"Google Maps",waze:"Waze",save:"Zapisz",saved:"Zapisano",share:"Udostępnij",routeChoose:"Wybierz nawigację",expandMap:"Otwórz mapę",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informacje społeczności PETS & DOGUE",lastUpdated:"Zaktualizowano",cancel:"Anuluj",copied:"Link skopiowany",googleSearching:"Wyszukiwanie w Google Places…",googleNoResults:"Nie znaleziono pasujących miejsc Google.",googleError:"Google Places jest chwilowo niedostępne."},
 
-cs:{searchPlace:"Najít místo nebo adresu",searchPlacePlaceholder:"Název podniku nebo adresa",searchPlaceHelp:"Začněte psát název nebo adresu a vyberte správné místo.",petInfoTitle:"Informace pro majitele zvířat",googleMaps:"Google Maps",waze:"Waze",save:"Uložit",saved:"Uloženo",share:"Sdílet",routeChoose:"Vyberte navigaci",expandMap:"Otevřít mapu",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informace komunity PETS & DOGUE",lastUpdated:"Aktualizováno",cancel:"Zrušit",copied:"Odkaz zkopírován"},
+cs:{searchPlace:"Najít místo nebo adresu",searchPlacePlaceholder:"Název podniku nebo adresa",searchPlaceHelp:"Zadejte název nebo adresu a vyberte správné místo Google.",petInfoTitle:"Informace pro majitele zvířat",googleMaps:"Google Maps",waze:"Waze",save:"Uložit",saved:"Uloženo",share:"Sdílet",routeChoose:"Vyberte navigaci",expandMap:"Otevřít mapu",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informace komunity PETS & DOGUE",lastUpdated:"Aktualizováno",cancel:"Zrušit",copied:"Odkaz zkopírován",googleSearching:"Vyhledávání v Google Places…",googleNoResults:"Nebyla nalezena odpovídající místa Google.",googleError:"Google Places je dočasně nedostupné."},
 
-sk:{searchPlace:"Nájsť miesto alebo adresu",searchPlacePlaceholder:"Názov podniku alebo adresa",searchPlaceHelp:"Začnite písať názov alebo adresu a vyberte správne miesto.",petInfoTitle:"Informácie pre majiteľov zvierat",googleMaps:"Google Maps",waze:"Waze",save:"Uložiť",saved:"Uložené",share:"Zdieľať",routeChoose:"Vyberte navigáciu",expandMap:"Otvoriť mapu",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informácie komunity PETS & DOGUE",lastUpdated:"Aktualizované",cancel:"Zrušiť",copied:"Odkaz skopírovaný"},
+sk:{searchPlace:"Nájsť miesto alebo adresu",searchPlacePlaceholder:"Názov podniku alebo adresa",searchPlaceHelp:"Zadajte názov alebo adresu a vyberte správne miesto Google.",petInfoTitle:"Informácie pre majiteľov zvierat",googleMaps:"Google Maps",waze:"Waze",save:"Uložiť",saved:"Uložené",share:"Zdieľať",routeChoose:"Vyberte navigáciu",expandMap:"Otvoriť mapu",mapTitle:"Mapa Pet-Friendly",communityInfo:"Informácie komunity PETS & DOGUE",lastUpdated:"Aktualizované",cancel:"Zrušiť",copied:"Odkaz skopírovaný",googleSearching:"Vyhľadávanie v Google Places…",googleNoResults:"Nenašli sa zodpovedajúce miesta Google.",googleError:"Google Places je dočasne nedostupné."},
 
-hu:{searchPlace:"Hely vagy cím keresése",searchPlacePlaceholder:"Hely neve vagy címe",searchPlaceHelp:"Kezdje el beírni a nevet vagy címet, majd válassza ki a megfelelő helyet.",petInfoTitle:"Háziállat-információ",googleMaps:"Google Maps",waze:"Waze",save:"Mentés",saved:"Mentve",share:"Megosztás",routeChoose:"Navigáció választása",expandMap:"Térkép megnyitása",mapTitle:"Pet-Friendly térkép",communityInfo:"PETS & DOGUE közösségi információ",lastUpdated:"Frissítve",cancel:"Mégse",copied:"Link másolva"},
+hu:{searchPlace:"Hely vagy cím keresése",searchPlacePlaceholder:"Hely neve vagy címe",searchPlaceHelp:"Írjon be egy nevet vagy címet, majd válassza ki a megfelelő Google-helyet.",petInfoTitle:"Háziállat-információ",googleMaps:"Google Maps",waze:"Waze",save:"Mentés",saved:"Mentve",share:"Megosztás",routeChoose:"Navigáció választása",expandMap:"Térkép megnyitása",mapTitle:"Pet-Friendly térkép",communityInfo:"PETS & DOGUE közösségi információ",lastUpdated:"Frissítve",cancel:"Mégse",copied:"Link másolva",googleSearching:"Keresés a Google Placesben…",googleNoResults:"Nem található megfelelő Google-hely.",googleError:"A Google Places átmenetileg nem érhető el."},
 
-ro:{searchPlace:"Caută loc sau adresă",searchPlacePlaceholder:"Numele locației sau adresa",searchPlaceHelp:"Începeți să introduceți numele sau adresa și alegeți locul corect.",petInfoTitle:"Informații pentru animale",googleMaps:"Google Maps",waze:"Waze",save:"Salvează",saved:"Salvat",share:"Distribuie",routeChoose:"Alege navigația",expandMap:"Deschide harta",mapTitle:"Harta Pet-Friendly",communityInfo:"Informații din comunitatea PETS & DOGUE",lastUpdated:"Actualizat",cancel:"Anulează",copied:"Link copiat"},
+ro:{searchPlace:"Caută loc sau adresă",searchPlacePlaceholder:"Numele locației sau adresa",searchPlaceHelp:"Introduceți un nume sau o adresă și alegeți locația Google corectă.",petInfoTitle:"Informații pentru animale",googleMaps:"Google Maps",waze:"Waze",save:"Salvează",saved:"Salvat",share:"Distribuie",routeChoose:"Alege navigația",expandMap:"Deschide harta",mapTitle:"Harta Pet-Friendly",communityInfo:"Informații din comunitatea PETS & DOGUE",lastUpdated:"Actualizat",cancel:"Anulează",copied:"Link copiat",googleSearching:"Căutare în Google Places…",googleNoResults:"Nu s-au găsit locații Google potrivite.",googleError:"Google Places este temporar indisponibil."},
 
-bg:{searchPlace:"Намери място или адрес",searchPlacePlaceholder:"Име на обекта или адрес",searchPlaceHelp:"Започнете да пишете името или адреса и изберете правилното място.",petInfoTitle:"Информация за любимци",googleMaps:"Google Maps",waze:"Waze",save:"Запази",saved:"Запазено",share:"Сподели",routeChoose:"Изберете навигация",expandMap:"Отвори картата",mapTitle:"Pet-Friendly карта",communityInfo:"Информация от общността PETS & DOGUE",lastUpdated:"Обновено",cancel:"Отказ",copied:"Линкът е копиран"},
+bg:{searchPlace:"Намери място или адрес",searchPlacePlaceholder:"Име на обекта или адрес",searchPlaceHelp:"Въведете име или адрес и изберете правилното място в Google.",petInfoTitle:"Информация за любимци",googleMaps:"Google Maps",waze:"Waze",save:"Запази",saved:"Запазено",share:"Сподели",routeChoose:"Изберете навигация",expandMap:"Отвори картата",mapTitle:"Pet-Friendly карта",communityInfo:"Информация от общността PETS & DOGUE",lastUpdated:"Обновено",cancel:"Отказ",copied:"Линкът е копиран",googleSearching:"Търсене в Google Places…",googleNoResults:"Не са намерени подходящи места в Google.",googleError:"Google Places временно не е достъпно."},
 
-el:{searchPlace:"Αναζήτηση μέρους ή διεύθυνσης",searchPlacePlaceholder:"Όνομα επιχείρησης ή διεύθυνση",searchPlaceHelp:"Πληκτρολογήστε όνομα ή διεύθυνση και επιλέξτε το σωστό μέρος.",petInfoTitle:"Πληροφορίες κατοικίδιων",googleMaps:"Google Maps",waze:"Waze",save:"Αποθήκευση",saved:"Αποθηκεύτηκε",share:"Κοινοποίηση",routeChoose:"Επιλογή πλοήγησης",expandMap:"Άνοιγμα χάρτη",mapTitle:"Χάρτης Pet-Friendly",communityInfo:"Πληροφορίες κοινότητας PETS & DOGUE",lastUpdated:"Ενημερώθηκε",cancel:"Ακύρωση",copied:"Ο σύνδεσμος αντιγράφηκε"},
+el:{searchPlace:"Αναζήτηση μέρους ή διεύθυνσης",searchPlacePlaceholder:"Όνομα επιχείρησης ή διεύθυνση",searchPlaceHelp:"Πληκτρολογήστε όνομα ή διεύθυνση και επιλέξτε το σωστό μέρος Google.",petInfoTitle:"Πληροφορίες κατοικίδιων",googleMaps:"Google Maps",waze:"Waze",save:"Αποθήκευση",saved:"Αποθηκεύτηκε",share:"Κοινοποίηση",routeChoose:"Επιλογή πλοήγησης",expandMap:"Άνοιγμα χάρτη",mapTitle:"Χάρτης Pet-Friendly",communityInfo:"Πληροφορίες κοινότητας PETS & DOGUE",lastUpdated:"Ενημερώθηκε",cancel:"Ακύρωση",copied:"Ο σύνδεσμος αντιγράφηκε",googleSearching:"Αναζήτηση στο Google Places…",googleNoResults:"Δεν βρέθηκαν αντίστοιχα μέρη Google.",googleError:"Το Google Places δεν είναι προσωρινά διαθέσιμο."},
 
-sv:{searchPlace:"Sök plats eller adress",searchPlacePlaceholder:"Företagsnamn eller adress",searchPlaceHelp:"Börja skriva ett namn eller en adress och välj rätt plats.",petInfoTitle:"Husdjursinformation",googleMaps:"Google Maps",waze:"Waze",save:"Spara",saved:"Sparad",share:"Dela",routeChoose:"Välj navigering",expandMap:"Öppna karta",mapTitle:"Pet-Friendly karta",communityInfo:"Information från PETS & DOGUE-communityn",lastUpdated:"Uppdaterad",cancel:"Avbryt",copied:"Länk kopierad"},
+sv:{searchPlace:"Sök plats eller adress",searchPlacePlaceholder:"Företagsnamn eller adress",searchPlaceHelp:"Skriv ett namn eller en adress och välj rätt Google-plats.",petInfoTitle:"Husdjursinformation",googleMaps:"Google Maps",waze:"Waze",save:"Spara",saved:"Sparad",share:"Dela",routeChoose:"Välj navigering",expandMap:"Öppna karta",mapTitle:"Pet-Friendly karta",communityInfo:"Information från PETS & DOGUE-communityn",lastUpdated:"Uppdaterad",cancel:"Avbryt",copied:"Länk kopierad",googleSearching:"Söker i Google Places…",googleNoResults:"Inga matchande Google-platser hittades.",googleError:"Google Places är tillfälligt otillgängligt."},
 
-da:{searchPlace:"Søg sted eller adresse",searchPlacePlaceholder:"Virksomhedsnavn eller adresse",searchPlaceHelp:"Begynd at skrive et navn eller en adresse, og vælg det rigtige sted.",petInfoTitle:"Information om kæledyr",googleMaps:"Google Maps",waze:"Waze",save:"Gem",saved:"Gemt",share:"Del",routeChoose:"Vælg navigation",expandMap:"Åbn kort",mapTitle:"Pet-Friendly kort",communityInfo:"Information fra PETS & DOGUE-fællesskabet",lastUpdated:"Opdateret",cancel:"Annuller",copied:"Link kopieret"},
+da:{searchPlace:"Søg sted eller adresse",searchPlacePlaceholder:"Virksomhedsnavn eller adresse",searchPlaceHelp:"Skriv et navn eller en adresse, og vælg det rigtige Google-sted.",petInfoTitle:"Information om kæledyr",googleMaps:"Google Maps",waze:"Waze",save:"Gem",saved:"Gemt",share:"Del",routeChoose:"Vælg navigation",expandMap:"Åbn kort",mapTitle:"Pet-Friendly kort",communityInfo:"Information fra PETS & DOGUE-fællesskabet",lastUpdated:"Opdateret",cancel:"Annuller",copied:"Link kopieret",googleSearching:"Søger i Google Places…",googleNoResults:"Ingen matchende Google-steder fundet.",googleError:"Google Places er midlertidigt utilgængeligt."},
 
-no:{searchPlace:"Søk etter sted eller adresse",searchPlacePlaceholder:"Stedsnavn eller adresse",searchPlaceHelp:"Begynn å skrive et navn eller en adresse og velg riktig sted.",petInfoTitle:"Informasjon om kjæledyr",googleMaps:"Google Maps",waze:"Waze",save:"Lagre",saved:"Lagret",share:"Del",routeChoose:"Velg navigasjon",expandMap:"Åpne kart",mapTitle:"Pet-Friendly kart",communityInfo:"Informasjon fra PETS & DOGUE-fellesskapet",lastUpdated:"Oppdatert",cancel:"Avbryt",copied:"Lenke kopiert"},
+no:{searchPlace:"Søk etter sted eller adresse",searchPlacePlaceholder:"Stedsnavn eller adresse",searchPlaceHelp:"Skriv et navn eller en adresse og velg riktig Google-sted.",petInfoTitle:"Informasjon om kjæledyr",googleMaps:"Google Maps",waze:"Waze",save:"Lagre",saved:"Lagret",share:"Del",routeChoose:"Velg navigasjon",expandMap:"Åpne kart",mapTitle:"Pet-Friendly kart",communityInfo:"Informasjon fra PETS & DOGUE-fellesskapet",lastUpdated:"Oppdatert",cancel:"Avbryt",copied:"Lenke kopiert",googleSearching:"Søker i Google Places…",googleNoResults:"Ingen samsvarende Google-steder funnet.",googleError:"Google Places er midlertidig utilgjengelig."},
 
-fi:{searchPlace:"Etsi paikkaa tai osoitetta",searchPlacePlaceholder:"Paikan nimi tai osoite",searchPlaceHelp:"Aloita nimen tai osoitteen kirjoittaminen ja valitse oikea paikka.",petInfoTitle:"Lemmikkitiedot",googleMaps:"Google Maps",waze:"Waze",save:"Tallenna",saved:"Tallennettu",share:"Jaa",routeChoose:"Valitse navigointi",expandMap:"Avaa kartta",mapTitle:"Pet-Friendly kartta",communityInfo:"PETS & DOGUE -yhteisön tiedot",lastUpdated:"Päivitetty",cancel:"Peruuta",copied:"Linkki kopioitu"},
+fi:{searchPlace:"Etsi paikkaa tai osoitetta",searchPlacePlaceholder:"Paikan nimi tai osoite",searchPlaceHelp:"Kirjoita nimi tai osoite ja valitse oikea Google-paikka.",petInfoTitle:"Lemmikkitiedot",googleMaps:"Google Maps",waze:"Waze",save:"Tallenna",saved:"Tallennettu",share:"Jaa",routeChoose:"Valitse navigointi",expandMap:"Avaa kartta",mapTitle:"Pet-Friendly kartta",communityInfo:"PETS & DOGUE -yhteisön tiedot",lastUpdated:"Päivitetty",cancel:"Peruuta",copied:"Linkki kopioitu",googleSearching:"Haetaan Google Placesista…",googleNoResults:"Sopivia Google-paikkoja ei löytynyt.",googleError:"Google Places ei ole juuri nyt käytettävissä."},
 
-tr:{searchPlace:"Yer veya adres ara",searchPlacePlaceholder:"İşletme adı veya adres",searchPlaceHelp:"İsim veya adres yazmaya başlayın ve doğru yeri seçin.",petInfoTitle:"Evcil hayvan bilgileri",googleMaps:"Google Maps",waze:"Waze",save:"Kaydet",saved:"Kaydedildi",share:"Paylaş",routeChoose:"Navigasyon seçin",expandMap:"Haritayı aç",mapTitle:"Pet-Friendly haritası",communityInfo:"PETS & DOGUE topluluk bilgisi",lastUpdated:"Güncellendi",cancel:"İptal",copied:"Bağlantı kopyalandı"},
+tr:{searchPlace:"Yer veya adres ara",searchPlacePlaceholder:"İşletme adı veya adres",searchPlaceHelp:"Bir ad veya adres yazın ve doğru Google yerini seçin.",petInfoTitle:"Evcil hayvan bilgileri",googleMaps:"Google Maps",waze:"Waze",save:"Kaydet",saved:"Kaydedildi",share:"Paylaş",routeChoose:"Navigasyon seçin",expandMap:"Haritayı aç",mapTitle:"Pet-Friendly haritası",communityInfo:"PETS & DOGUE topluluk bilgisi",lastUpdated:"Güncellendi",cancel:"İptal",copied:"Bağlantı kopyalandı",googleSearching:"Google Places'ta aranıyor…",googleNoResults:"Eşleşen Google yeri bulunamadı.",googleError:"Google Places geçici olarak kullanılamıyor."},
 
-ar:{searchPlace:"ابحث عن مكان أو عنوان",searchPlacePlaceholder:"اسم النشاط أو العنوان",searchPlaceHelp:"ابدأ بكتابة اسم المكان أو العنوان ثم اختر المكان الصحيح.",petInfoTitle:"معلومات الحيوانات الأليفة",googleMaps:"Google Maps",waze:"Waze",save:"حفظ",saved:"تم الحفظ",share:"مشاركة",routeChoose:"اختر تطبيق الملاحة",expandMap:"فتح الخريطة",mapTitle:"خريطة Pet-Friendly",communityInfo:"معلومات مجتمع PETS & DOGUE",lastUpdated:"تم التحديث",cancel:"إلغاء",copied:"تم نسخ الرابط"},
+ar:{searchPlace:"ابحث عن مكان أو عنوان",searchPlacePlaceholder:"اسم النشاط أو العنوان",searchPlaceHelp:"اكتب اسمًا أو عنوانًا واختر المكان الصحيح من Google.",petInfoTitle:"معلومات الحيوانات الأليفة",googleMaps:"Google Maps",waze:"Waze",save:"حفظ",saved:"تم الحفظ",share:"مشاركة",routeChoose:"اختر تطبيق الملاحة",expandMap:"فتح الخريطة",mapTitle:"خريطة Pet-Friendly",communityInfo:"معلومات مجتمع PETS & DOGUE",lastUpdated:"تم التحديث",cancel:"إلغاء",copied:"تم نسخ الرابط",googleSearching:"جارٍ البحث في Google Places…",googleNoResults:"لم يتم العثور على أماكن Google مطابقة.",googleError:"بحث Google Places غير متاح مؤقتًا."},
 
-hi:{searchPlace:"स्थान या पता खोजें",searchPlacePlaceholder:"व्यवसाय का नाम या पता",searchPlaceHelp:"नाम या पता लिखना शुरू करें और सही स्थान चुनें।",petInfoTitle:"पालतू जानकारी",googleMaps:"Google Maps",waze:"Waze",save:"सहेजें",saved:"सहेजा गया",share:"साझा करें",routeChoose:"नेविगेशन चुनें",expandMap:"मानचित्र खोलें",mapTitle:"Pet-Friendly मानचित्र",communityInfo:"PETS & DOGUE समुदाय जानकारी",lastUpdated:"अपडेट किया गया",cancel:"रद्द करें",copied:"लिंक कॉपी किया गया"}
+hi:{searchPlace:"स्थान या पता खोजें",searchPlacePlaceholder:"व्यवसाय का नाम या पता",searchPlaceHelp:"नाम या पता लिखें और सही Google स्थान चुनें।",petInfoTitle:"पालतू जानकारी",googleMaps:"Google Maps",waze:"Waze",save:"सहेजें",saved:"सहेजा गया",share:"साझा करें",routeChoose:"नेविगेशन चुनें",expandMap:"मानचित्र खोलें",mapTitle:"Pet-Friendly मानचित्र",communityInfo:"PETS & DOGUE समुदाय जानकारी",lastUpdated:"अपडेट किया गया",cancel:"रद्द करें",copied:"लिंक कॉपी किया गया",googleSearching:"Google Places में खोज रहे हैं…",googleNoResults:"कोई मेल खाता Google स्थान नहीं मिला।",googleError:"Google Places खोज अस्थायी रूप से उपलब्ध नहीं है।"}
 
-};
-
-let currentLanguage="en";
+};let currentLanguage="en";
 let currentCategory="all";
 let currentRadiusKm=15;
 let currentLocation={...DEFAULT_LOCATION};
@@ -4322,6 +4273,7 @@ let suggestionAbort=null;
 
 let addSuggestionTimer=null;
 let addSuggestionAbort=null;
+let googleAutocompleteSessionToken="";
 
 let policyEditingPlace=null;
 let detailPlace=null;
@@ -4333,7 +4285,12 @@ let detailMapMarker=null;
 
 let fullMap=null;
 let fullMapMarkers=[];
-let fullMapUserMarker=null;const ACTIVE_POLICY_KEY="pets_dogue_pet_place_rules_v1";
+let fullMapUserMarker=null;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
 
 function safeJsonParse(value,fallback){
 
@@ -4346,8 +4303,11 @@ return result??fallback;
 }catch{
 
 return fallback;
+
 }
+
 }
+
 
 function normalizeLanguage(value){
 
@@ -4376,7 +4336,9 @@ code
 )
 ? code
 : "";
+
 }
+
 
 function detectLanguage(){
 
@@ -4411,6 +4373,7 @@ return value;
 }
 
 }catch{}
+
 }
 
 return normalizeLanguage(
@@ -4422,7 +4385,9 @@ navigator.language
 )
 ||
 "en";
+
 }
+
 
 function persistLanguage(language){
 
@@ -4450,8 +4415,11 @@ normalized
 );
 
 }catch{}
+
 });
+
 }
+
 
 function t(key){
 
@@ -4460,7 +4428,9 @@ return TRANSLATIONS[currentLanguage]?.[key]
 BASE_EN[key]
 ||
 key;
+
 }
+
 
 function pt(key){
 
@@ -4469,7 +4439,9 @@ return POLICY_TEXT[currentLanguage]?.[key]
 POLICY_TEXT.en[key]
 ||
 key;
+
 }
+
 
 function xt(key){
 
@@ -4478,7 +4450,9 @@ return EXTRA_TEXT[currentLanguage]?.[key]
 EXTRA_TEXT.en[key]
 ||
 key;
+
 }
+
 
 function escapeHtml(value){
 
@@ -4488,7 +4462,9 @@ return String(value??"")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 }
+
 
 function finiteNumber(value){
 
@@ -4497,7 +4473,9 @@ const number=Number(value);
 return Number.isFinite(number)
 ? number
 : null;
+
 }
+
 
 function safeExternalUrl(value){
 
@@ -4526,15 +4504,20 @@ return url.href;
 }catch{
 
 return "";
+
 }
+
 }
+
 
 function safePhone(value){
 
 return String(value||"")
 .replace(/[^\d+*#(),.\-\s]/g,"")
 .trim();
+
 }
+
 
 function haversineKm(lat1,lng1,lat2,lng2){
 
@@ -4554,7 +4537,9 @@ return R*2*Math.atan2(
 Math.sqrt(a),
 Math.sqrt(1-a)
 );
+
 }
+
 
 function normalizeIdentityText(value){
 
@@ -4563,20 +4548,38 @@ return String(value||"")
 .normalize("NFKD")
 .replace(/[^\p{L}\p{N}]+/gu,"")
 .trim();
+
 }
+
 
 function placeIdentityKey(place){
 
-const lat=finiteNumber(
+const providerId=
+String(
+place?.providerId||
+""
+).trim();
+
+if(providerId){
+
+return "google|"+providerId;
+
+}
+
+const lat=
+finiteNumber(
 place?.location?.lat
 );
 
-const lng=finiteNumber(
+const lng=
+finiteNumber(
 place?.location?.lng
 );
 
 const name=
-normalizeIdentityText(place?.name);
+normalizeIdentityText(
+place?.name
+);
 
 if(lat!==null&&lng!==null){
 
@@ -4585,13 +4588,16 @@ name,
 lat.toFixed(4),
 lng.toFixed(4)
 ].join("|");
+
 }
 
 return [
 name,
 normalizeIdentityText(place?.address)
 ].join("|");
+
 }
+
 
 function googleMapsUrlForPlace(place){
 
@@ -4604,11 +4610,13 @@ if(existing){
 return existing;
 }
 
-const lat=finiteNumber(
+const lat=
+finiteNumber(
 place?.location?.lat
 );
 
-const lng=finiteNumber(
+const lng=
+finiteNumber(
 place?.location?.lng
 );
 
@@ -4618,17 +4626,23 @@ return "";
 
 return (
 "https://www.google.com/maps/search/?api=1&query="+
-encodeURIComponent(lat+","+lng)
+encodeURIComponent(
+lat+","+lng
+)
 );
+
 }
+
 
 function wazeUrlForPlace(place){
 
-const lat=finiteNumber(
+const lat=
+finiteNumber(
 place?.location?.lat
 );
 
-const lng=finiteNumber(
+const lng=
+finiteNumber(
 place?.location?.lng
 );
 
@@ -4638,10 +4652,52 @@ return "";
 
 return (
 "https://www.waze.com/ul?ll="+
-encodeURIComponent(lat+","+lng)+
+encodeURIComponent(
+lat+","+lng
+)+
 "&navigate=yes"
 );
+
 }
+
+
+function generateSessionToken(){
+
+try{
+
+if(
+window.crypto&&
+typeof window.crypto.randomUUID==="function"
+){
+
+return window.crypto.randomUUID();
+
+}
+
+}catch{}
+
+return (
+Date.now().toString(36)+
+"-"+
+Math.random().toString(36).slice(2)+
+"-"+
+Math.random().toString(36).slice(2)
+);
+
+}
+
+
+function resetGoogleAutocompleteSession(){
+
+googleAutocompleteSessionToken=
+generateSessionToken();
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
 
 function applyLanguage(language){
 
@@ -4724,7 +4780,9 @@ renderFullMapCategories();
 if(detailPlace){
 renderDetailPlace(detailPlace);
 }
+
 }
+
 
 window.PetsDogueLanguage={
 
@@ -4738,6 +4796,11 @@ return currentLanguage;
 
 };
 
+
+/* =========================================================
+   SAVED PLACES
+========================================================= */
+
 function getSavedPlaces(){
 
 const value=safeJsonParse(
@@ -4748,7 +4811,9 @@ localStorage.getItem(SAVED_KEY),
 return Array.isArray(value)
 ? value
 : [];
+
 }
+
 
 function setSavedPlaces(places){
 
@@ -4756,7 +4821,9 @@ localStorage.setItem(
 SAVED_KEY,
 JSON.stringify(places)
 );
+
 }
+
 
 function isSaved(place){
 
@@ -4768,7 +4835,9 @@ return getSavedPlaces()
 return placeIdentityKey(saved)===key;
 
 });
+
 }
+
 
 function toggleSaved(place){
 
@@ -4792,6 +4861,7 @@ return placeIdentityKey(item)!==key;
 }else{
 
 saved.unshift(place);
+
 }
 
 setSavedPlaces(saved);
@@ -4800,12 +4870,18 @@ renderResults();
 if(detailPlace){
 renderDetailPlace(detailPlace);
 }
+
 }
+
+
+/* =========================================================
+   PET RULES
+========================================================= */
 
 function getPolicies(){
 
 const value=safeJsonParse(
-localStorage.getItem(ACTIVE_POLICY_KEY),
+localStorage.getItem(POLICY_KEY),
 {}
 );
 
@@ -4816,19 +4892,23 @@ typeof value==="object"&&
 )
 ? value
 : {};
+
 }
+
 
 function savePolicies(policies){
 
 try{
 
 localStorage.setItem(
-ACTIVE_POLICY_KEY,
+POLICY_KEY,
 JSON.stringify(policies)
 );
 
 }catch{}
+
 }
+
 
 function getPolicy(place){
 
@@ -4840,7 +4920,9 @@ const policies=getPolicies();
 const key=placeIdentityKey(place);
 
 return policies[key]||null;
+
 }
+
 
 function setPolicy(place,access,note){
 
@@ -4859,7 +4941,9 @@ updatedAt:new Date().toISOString()
 };
 
 savePolicies(policies);
+
 }
+
 
 function removePolicy(place){
 
@@ -4874,7 +4958,9 @@ placeIdentityKey(place)
 ];
 
 savePolicies(policies);
+
 }
+
 
 function policyPresentation(policy){
 
@@ -4918,7 +5004,13 @@ return {
 label:"i "+pt("restrictions"),
 className:"policy-restrictions"
 };
+
 }
+
+
+/* =========================================================
+   ADDED PLACES
+========================================================= */
 
 function getAddedPlaces(){
 
@@ -4930,7 +5022,9 @@ localStorage.getItem(ADDED_KEY),
 return Array.isArray(value)
 ? value
 : [];
+
 }
+
 
 function categoryLabel(category){
 
@@ -4951,9 +5045,111 @@ return t(
 map[category]||
 "navPlaces"
 );
+
 }
 
-/* MAIN MAP */
+
+/* =========================================================
+   CATEGORY DETECTION
+========================================================= */
+
+function normalizeFrontendCategory(value){
+
+const category=
+String(value||"")
+.trim()
+.toLowerCase();
+
+const map={
+cafe:"cafe",
+coffee_shop:"cafe",
+
+restaurant:"restaurant",
+bar:"restaurant",
+pub:"restaurant",
+food_court:"restaurant",
+
+hotel:"hotel",
+lodging:"hotel",
+motel:"hotel",
+hostel:"hotel",
+guest_house:"hotel",
+bed_and_breakfast:"hotel",
+
+park:"park",
+dog_park:"park",
+
+beach:"beach",
+
+veterinary_care:"veterinary",
+veterinarian:"veterinary",
+animal_hospital:"veterinary",
+
+pet_store:"pet-shop",
+pet_supply_store:"pet-shop",
+
+event_venue:"events",
+
+"pet-shop":"pet-shop",
+events:"events"
+};
+
+if(map[category]){
+return map[category];
+}
+
+if(category.endsWith("_restaurant")){
+return "restaurant";
+}
+
+if(category.endsWith("_cafe")){
+return "cafe";
+}
+
+if(category.endsWith("_hotel")){
+return "hotel";
+}
+
+return "other";
+
+}
+
+
+function categoryFromGooglePlace(place){
+
+const direct=
+normalizeFrontendCategory(
+place?.category
+);
+
+if(direct!=="other"){
+return direct;
+}
+
+const types=
+Array.isArray(place?.types)
+? place.types
+: [];
+
+for(const type of types){
+
+const detected=
+normalizeFrontendCategory(type);
+
+if(detected!=="other"){
+return detected;
+}
+
+}
+
+return "restaurant";
+
+}
+
+
+/* =========================================================
+   MAIN MAP
+========================================================= */
 
 const map=L.map(
 "map",
@@ -4979,6 +5175,7 @@ attribution:"&copy; OpenStreetMap"
 )
 .addTo(map);
 
+
 function createPlaceIcon(){
 
 return L.divIcon({
@@ -4989,6 +5186,7 @@ iconAnchor:[17,17]
 });
 
 }
+
 
 function createUserIcon(){
 
@@ -5001,6 +5199,7 @@ iconAnchor:[11,11]
 
 }
 
+
 function clearPlaceMarkers(){
 
 placeMarkers.forEach(function(marker){
@@ -5010,7 +5209,9 @@ map.removeLayer(marker);
 });
 
 placeMarkers=[];
+
 }
+
 
 function updateMapMarkers(places){
 
@@ -5117,7 +5318,13 @@ setTimeout(function(){
 map.invalidateSize();
 
 },80);
+
 }
+
+
+/* =========================================================
+   LOCATION SEARCH
+========================================================= */
 
 const searchField=
 document.getElementById("searchField");
@@ -5139,6 +5346,16 @@ document.getElementById("addPlaceSearch");
 
 const addPlaceSuggestions=
 document.getElementById("addPlaceSuggestions");
+
+const googlePlaceSelected=
+document.getElementById("googlePlaceSelected");
+
+const googlePlaceSelectedName=
+document.getElementById("googlePlaceSelectedName");
+
+const googlePlaceSelectedAddress=
+document.getElementById("googlePlaceSelectedAddress");
+
 
 function updateSelectedLocationUI(){
 
@@ -5162,7 +5379,9 @@ searchField.classList.remove("selected");
 locationConfirm.classList.remove("visible");
 
 }
+
 }
+
 
 async function nominatimSearch(
 query,
@@ -5200,7 +5419,9 @@ const data=await response.json();
 return Array.isArray(data)
 ? data
 : [];
+
 }
+
 
 async function geocodeSuggestions(query){
 
@@ -5215,7 +5436,9 @@ return nominatimSearch(
 query,
 suggestionAbort
 );
+
 }
+
 
 async function geocode(query){
 
@@ -5231,7 +5454,9 @@ lat:Number(results[0].lat),
 lng:Number(results[0].lon),
 label:results[0].display_name||query
 };
+
 }
+
 
 async function reverseGeocode(lat,lng){
 
@@ -5259,14 +5484,19 @@ return data?.display_name||"";
 }catch{
 
 return "";
+
 }
+
 }
+
 
 function closeSuggestions(){
 
 locationSuggestions.hidden=true;
 locationSuggestions.innerHTML="";
+
 }
+
 
 function shortSuggestionName(item){
 
@@ -5286,7 +5516,9 @@ String(
 item?.display_name||""
 ).split(",")[0]
 );
+
 }
+
 
 function renderSuggestions(results){
 
@@ -5294,6 +5526,7 @@ if(!results.length){
 
 closeSuggestions();
 return;
+
 }
 
 locationSuggestions.innerHTML=
@@ -5377,176 +5610,279 @@ await searchPlaces();
 );
 
 });
+
 }
+
+
+/* =========================================================
+   GOOGLE ADD-PLACE AUTOCOMPLETE
+========================================================= */
 
 function closeAddSuggestions(){
 
 addPlaceSuggestions.hidden=true;
 addPlaceSuggestions.innerHTML="";
+
 }
 
-function guessCategoryFromNominatim(item){
 
-const text=[
-item?.type,
-item?.category,
-item?.class
-]
-.join(" ")
-.toLowerCase();
+function clearSelectedGooglePlace(){
 
-if(
-text.includes("cafe")||
-text.includes("coffee")
-){
-return "cafe";
+modalCoordinates=null;
+modalSelectedPlaceData=null;
+
+googlePlaceSelected
+.classList
+.remove("visible");
+
+googlePlaceSelectedName.textContent="";
+googlePlaceSelectedAddress.textContent="";
+
 }
 
-if(
-text.includes("restaurant")||
-text.includes("food")
-){
-return "restaurant";
+
+function showSelectedGooglePlace(place){
+
+googlePlaceSelectedName.textContent=
+place.name||"";
+
+googlePlaceSelectedAddress.textContent=
+place.address||"";
+
+googlePlaceSelected
+.classList
+.add("visible");
+
 }
 
-if(
-text.includes("hotel")||
-text.includes("hostel")
-){
-return "hotel";
+
+async function fetchGoogleAutocomplete(query){
+
+if(addSuggestionAbort){
+addSuggestionAbort.abort();
 }
 
-if(text.includes("veterinary")){
-return "veterinary";
+addSuggestionAbort=
+new AbortController();
+
+if(!googleAutocompleteSessionToken){
+
+resetGoogleAutocompleteSession();
+
 }
 
-if(text.includes("beach")){
-return "beach";
-}
+const body={
 
-if(
-text.includes("park")||
-text.includes("garden")
-){
-return "park";
-}
+action:"autocomplete",
 
-return "restaurant";
-}
+query,
 
-function nominatimPhotoUrl(item){
+language:
+currentLanguage,
 
-const direct=
-String(
-item?.extratags?.image||""
-);
+sessionToken:
+googleAutocompleteSessionToken,
 
-if(/^https?:\/\//i.test(direct)){
-return direct;
-}
+latitude:
+currentLocation?.lat,
 
-const commons=
-String(
-item?.extratags?.wikimedia_commons||""
-);
+longitude:
+currentLocation?.lng,
 
-if(commons){
-
-const filename=
-commons.replace(/^File:/i,"");
-
-return (
-"https://commons.wikimedia.org/wiki/Special:FilePath/"+
-encodeURIComponent(filename)+
-"?width=1000"
-);
-}
-
-return "";
-}
-
-function applyAddPlaceSuggestion(item){
-
-const name=
-shortSuggestionName(item);
-
-modalCoordinates={
-lat:Number(item.lat),
-lng:Number(item.lon)
-};
-
-modalSelectedPlaceData={
-
-website:
-item?.extratags?.website||
-item?.extratags?.["contact:website"]||
-"",
-
-phone:
-item?.extratags?.phone||
-item?.extratags?.["contact:phone"]||
-"",
-
-photo:
-nominatimPhotoUrl(item)
+radius:
+Math.max(
+currentRadiusKm*1000,
+15000
+)
 
 };
 
-document
-.getElementById("addName")
-.value=name;
+const response=await fetch(
+API_URL,
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(body),
+signal:addSuggestionAbort.signal
+}
+);
 
-document
-.getElementById("addAddress")
-.value=
-item.display_name||"";
+const data=
+await response
+.json()
+.catch(function(){
 
-document
-.getElementById("addCategory")
-.value=
-guessCategoryFromNominatim(item);
+return {};
 
-addPlaceSearch.value=name;
+});
 
-closeAddSuggestions();
+if(
+!response.ok||
+data?.ok!==true
+){
+
+throw new Error(
+data?.error||
+"Google autocomplete failed"
+);
+
 }
 
-function renderAddSuggestions(results){
+return Array.isArray(
+data.suggestions
+)
+? data.suggestions
+: [];
+
+}
+
+
+async function fetchGooglePlaceDetails(placeId){
+
+const response=await fetch(
+API_URL,
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+
+action:"details",
+
+placeId,
+
+language:
+currentLanguage,
+
+sessionToken:
+googleAutocompleteSessionToken
+
+})
+}
+);
+
+const data=
+await response
+.json()
+.catch(function(){
+
+return {};
+
+});
+
+if(
+!response.ok||
+data?.ok!==true||
+!data?.place
+){
+
+throw new Error(
+data?.error||
+"Google Place Details failed"
+);
+
+}
+
+return data.place;
+
+}
+
+
+function renderGoogleAutocompleteSuggestions(results){
 
 if(!results.length){
 
-closeAddSuggestions();
+addPlaceSuggestions.innerHTML=`
+<div class="add-place-loading">
+${escapeHtml(
+xt("googleNoResults")
+)}
+</div>
+`;
+
+addPlaceSuggestions.hidden=false;
+
 return;
+
 }
 
 addPlaceSuggestions.innerHTML=
 results
 .map(function(item,index){
 
+let distance="";
+
+const meters=
+finiteNumber(
+item.distanceMeters
+);
+
+if(meters!==null){
+
+if(meters<1000){
+
+distance=
+Math.round(meters)+
+" m";
+
+}else{
+
+distance=
+(
+meters/1000
+).toFixed(
+meters<10000?1:0
+)+
+" "+
+t("km");
+
+}
+
+}
+
 return `
 <button
 type="button"
 class="add-place-suggestion"
-data-add-suggestion="${index}"
+data-google-suggestion="${index}"
 >
 
-<span class="suggestion-pin">◆</span>
+<span class="google-suggestion-mark">
+G
+</span>
 
-<span>
+<span class="google-suggestion-copy">
 
 <strong>
 ${escapeHtml(
-shortSuggestionName(item)
+item.name||
+item.text||
+"Google Place"
 )}
 </strong>
 
 <small>
 ${escapeHtml(
-item.display_name||""
+item.address||
+item.text||
+""
 )}
 </small>
 
 </span>
+
+${
+distance
+? `
+<span class="google-suggestion-distance">
+${escapeHtml(distance)}
+</span>
+`
+: ""
+}
 
 </button>
 `;
@@ -5558,30 +5894,213 @@ addPlaceSuggestions.hidden=false;
 
 addPlaceSuggestions
 .querySelectorAll(
-"[data-add-suggestion]"
+"[data-google-suggestion]"
 )
 .forEach(function(button){
 
 button.addEventListener(
 "click",
-function(){
+async function(){
 
-const item=
+const suggestion=
 results[
 Number(
-this.dataset.addSuggestion
+this.dataset.googleSuggestion
 )
 ];
 
-if(item){
-applyAddPlaceSuggestion(item);
+if(!suggestion?.placeId){
+return;
+}
+
+addPlaceSuggestions.innerHTML=`
+<div class="add-place-loading">
+${escapeHtml(
+xt("googleSearching")
+)}
+</div>
+`;
+
+addPlaceSuggestions.hidden=false;
+
+try{
+
+const place=
+await fetchGooglePlaceDetails(
+suggestion.placeId
+);
+
+applyGooglePlaceSelection(place);
+
+}catch(error){
+
+console.warn(error);
+
+addPlaceSuggestions.innerHTML=`
+<div class="add-place-loading">
+${escapeHtml(
+xt("googleError")
+)}
+</div>
+`;
+
 }
 
 }
 );
 
 });
+
 }
+
+
+function applyGooglePlaceSelection(place){
+
+const lat=
+finiteNumber(
+place?.location?.lat
+);
+
+const lng=
+finiteNumber(
+place?.location?.lng
+);
+
+if(lat===null||lng===null){
+return;
+}
+
+modalCoordinates={
+lat,
+lng
+};
+
+modalSelectedPlaceData={
+
+id:
+place.id||
+place.providerId||
+"",
+
+providerId:
+place.providerId||
+place.id||
+"",
+
+source:"google",
+
+name:
+place.name||
+"",
+
+category:
+categoryFromGooglePlace(place),
+
+address:
+place.address||
+"",
+
+website:
+place.website||
+"",
+
+phone:
+place.phone||
+"",
+
+googleMapsUrl:
+place.googleMapsUrl||
+"",
+
+rating:
+finiteNumber(
+place.rating
+),
+
+ratingCount:
+finiteNumber(
+place.ratingCount
+)||0,
+
+openingHours:
+place.openingHours||
+null,
+
+photo:
+place.photo||
+null,
+
+photos:
+Array.isArray(place.photos)
+? place.photos
+: [],
+
+types:
+Array.isArray(place.types)
+? place.types
+: [],
+
+allowsDogs:
+place.allowsDogs===true,
+
+location:{
+lat,
+lng
+}
+
+};
+
+document
+.getElementById("addName")
+.value=
+modalSelectedPlaceData.name;
+
+document
+.getElementById("addAddress")
+.value=
+modalSelectedPlaceData.address;
+
+const category=
+modalSelectedPlaceData.category;
+
+const categorySelect=
+document.getElementById(
+"addCategory"
+);
+
+if(
+Array.from(
+categorySelect.options
+)
+.some(function(option){
+
+return option.value===category;
+
+})
+){
+
+categorySelect.value=
+category;
+
+}
+
+addPlaceSearch.value=
+modalSelectedPlaceData.name;
+
+showSelectedGooglePlace(
+modalSelectedPlaceData
+);
+
+closeAddSuggestions();
+
+/*
+The autocomplete session ends after the user chooses a
+Google prediction and Place Details is requested.
+*/
+resetGoogleAutocompleteSession();
+
+}
+
 
 addPlaceSearch.addEventListener(
 "input",
@@ -5593,11 +6112,32 @@ clearTimeout(
 addSuggestionTimer
 );
 
+if(
+modalSelectedPlaceData&&
+query!==
+modalSelectedPlaceData.name
+){
+
+clearSelectedGooglePlace();
+
+}
+
 if(query.length<2){
 
 closeAddSuggestions();
 return;
+
 }
+
+addPlaceSuggestions.innerHTML=`
+<div class="add-place-loading">
+${escapeHtml(
+xt("googleSearching")
+)}
+</div>
+`;
+
+addPlaceSuggestions.hidden=false;
 
 addSuggestionTimer=
 setTimeout(
@@ -5605,37 +6145,46 @@ async function(){
 
 try{
 
-if(addSuggestionAbort){
-addSuggestionAbort.abort();
-}
-
-addSuggestionAbort=
-new AbortController();
-
 const results=
-await nominatimSearch(
-query,
-addSuggestionAbort
+await fetchGoogleAutocomplete(
+query
 );
 
-renderAddSuggestions(results);
+renderGoogleAutocompleteSuggestions(
+results
+);
 
 }catch(error){
 
-if(error?.name!=="AbortError"){
-console.warn(error);
+if(error?.name==="AbortError"){
+return;
 }
+
+console.warn(error);
+
+addPlaceSuggestions.innerHTML=`
+<div class="add-place-loading">
+${escapeHtml(
+xt("googleError")
+)}
+</div>
+`;
+
+addPlaceSuggestions.hidden=false;
 
 }
 
 },
-300
+280
 );
 
 }
 );
 
-/* PLACE SOURCES */
+
+/* =========================================================
+   GOOGLE NEARBY SEARCH
+========================================================= */
 
 async function fetchGooglePlaces(category){
 
@@ -5673,7 +6222,9 @@ maxResults:20
 const data=await response
 .json()
 .catch(function(){
+
 return {};
+
 });
 
 if(
@@ -5685,6 +6236,7 @@ throw new Error(
 data?.error||
 "Google Places error"
 );
+
 }
 
 return Array.isArray(data.places)
@@ -5692,7 +6244,9 @@ return Array.isArray(data.places)
 .map(normalizeApiPlace)
 .filter(Boolean)
 : [];
+
 }
+
 
 function normalizeApiPlace(place){
 
@@ -5715,6 +6269,7 @@ let photo=null;
 if(place?.photo?.url){
 
 photo={
+...place.photo,
 url:place.photo.url
 };
 
@@ -5724,7 +6279,9 @@ photo={
 url:
 API_URL+
 "?photo="+
-encodeURIComponent(place.photoName)+
+encodeURIComponent(
+place.photoName
+)+
 "&width=1000"
 };
 
@@ -5743,6 +6300,13 @@ lng
 )
 ),
 
+providerId:
+String(
+place.providerId||
+place.id||
+""
+),
+
 source:"google",
 
 name:
@@ -5750,7 +6314,7 @@ place.name||
 "Pet-friendly place",
 
 category:
-normalizeCategoryName(
+normalizeFrontendCategory(
 place.category
 ),
 
@@ -5782,36 +6346,34 @@ place.openingHours||null,
 
 photo,
 
-petFriendly:{
+photos:
+Array.isArray(place.photos)
+? place.photos
+: [],
+
+types:
+Array.isArray(place.types)
+? place.types
+: [],
+
+allowsDogs:
+place.allowsDogs===true,
+
+petFriendly:
+place.petFriendly||
+{
 allowed:true,
-verified:true
+verified:false
 }
 
 };
+
 }
 
-function normalizeCategoryName(value){
 
-const category=
-String(value||"")
-.trim()
-.toLowerCase();
-
-const map={
-cafe:"cafe",
-restaurant:"restaurant",
-hotel:"hotel",
-veterinary:"veterinary",
-"pet shop":"pet-shop",
-"pet-shop":"pet-shop",
-"dog-park":"park",
-park:"park",
-beach:"beach",
-events:"events"
-};
-
-return map[category]||"other";
-}
+/* =========================================================
+   OPENSTREETMAP
+========================================================= */
 
 function buildOverpassQuery(category){
 
@@ -5866,7 +6428,9 @@ out center tags;
 }
 
 return "";
+
 }
+
 
 async function fetchOsmPlaces(category){
 
@@ -5910,8 +6474,11 @@ data?.elements
 }catch{
 
 return [];
+
 }
+
 }
+
 
 function normalizeOsmPlace(element){
 
@@ -5946,6 +6513,8 @@ element.type+
 "-"+
 element.id,
 
+providerId:"",
+
 source:"osm",
 
 name:
@@ -5977,7 +6546,9 @@ tags["contact:website"]||
 
 googleMapsUrl:
 "https://www.google.com/maps/search/?api=1&query="+
-encodeURIComponent(lat+","+lng),
+encodeURIComponent(
+lat+","+lng
+),
 
 phone:
 tags.phone||
@@ -5986,6 +6557,7 @@ tags["contact:phone"]||
 
 openingHours:null,
 photo:null,
+photos:[],
 
 petFriendly:{
 allowed:true,
@@ -5993,19 +6565,198 @@ verified:true
 }
 
 };
+
+} /* =========================================================
+   LEGACY PET-RULE COMPATIBILITY
+========================================================= */
+
+function legacyPlaceIdentityKey(place){
+
+const lat=
+finiteNumber(
+place?.location?.lat
+);
+
+const lng=
+finiteNumber(
+place?.location?.lng
+);
+
+const name=
+normalizeIdentityText(
+place?.name
+);
+
+if(lat!==null&&lng!==null){
+
+return [
+name,
+lat.toFixed(4),
+lng.toFixed(4)
+].join("|");
+
 }
+
+return [
+name,
+normalizeIdentityText(
+place?.address
+)
+].join("|");
+
+}
+
+
+/*
+Existing PETS & DOGUE rules were saved before Google place IDs
+were used as the preferred identity.
+
+Keep those v1 rules working and silently migrate them to the
+new stable Google place ID whenever possible.
+*/
+
+function getPolicy(place){
+
+if(!place){
+return null;
+}
+
+const policies=
+getPolicies();
+
+const currentKey=
+placeIdentityKey(place);
+
+if(policies[currentKey]){
+return policies[currentKey];
+}
+
+const legacyKey=
+legacyPlaceIdentityKey(place);
+
+if(
+legacyKey&&
+policies[legacyKey]
+){
+
+if(
+currentKey!==legacyKey
+){
+
+policies[currentKey]=
+policies[legacyKey];
+
+savePolicies(
+policies
+);
+
+}
+
+return policies[legacyKey];
+
+}
+
+return null;
+
+}
+
+
+function setPolicy(place,access,note){
+
+if(!place){
+return;
+}
+
+const policies=
+getPolicies();
+
+const policy={
+access,
+note:String(note||"").trim(),
+updatedAt:new Date().toISOString()
+};
+
+const currentKey=
+placeIdentityKey(place);
+
+const legacyKey=
+legacyPlaceIdentityKey(place);
+
+policies[currentKey]=policy;
+
+if(
+legacyKey&&
+legacyKey!==currentKey
+){
+
+policies[legacyKey]=policy;
+
+}
+
+savePolicies(
+policies
+);
+
+}
+
+
+function removePolicy(place){
+
+if(!place){
+return;
+}
+
+const policies=
+getPolicies();
+
+const currentKey=
+placeIdentityKey(place);
+
+const legacyKey=
+legacyPlaceIdentityKey(place);
+
+delete policies[currentKey];
+
+if(legacyKey){
+delete policies[legacyKey];
+}
+
+savePolicies(
+policies
+);
+
+}
+
+
+/* =========================================================
+   ADDED PLACES NEAR CURRENT LOCATION
+========================================================= */
 
 function nearbyAddedPlaces(){
 
 return getAddedPlaces()
 .map(function(place){
 
+const lat=
+finiteNumber(
+place?.location?.lat
+);
+
+const lng=
+finiteNumber(
+place?.location?.lng
+);
+
+if(lat===null||lng===null){
+return null;
+}
+
 const distance=
 haversineKm(
 currentLocation.lat,
 currentLocation.lng,
-place.location.lat,
-place.location.lng
+lat,
+lng
 );
 
 return Object.assign(
@@ -6017,6 +6768,7 @@ distance
 );
 
 })
+.filter(Boolean)
 .filter(function(place){
 
 if(
@@ -6036,11 +6788,118 @@ currentCategory
 );
 
 });
+
 }
+
+
+/* =========================================================
+   FRONTEND DEDUPLICATION
+========================================================= */
+
+function mergeFrontendPlaceRecords(
+existing,
+incoming
+){
+
+if(!existing){
+return incoming;
+}
+
+if(!incoming){
+return existing;
+}
+
+const existingGoogle=
+existing.source==="google";
+
+const incomingGoogle=
+incoming.source==="google";
+
+const primary=
+incomingGoogle&&!existingGoogle
+? incoming
+: existing;
+
+const secondary=
+primary===existing
+? incoming
+: existing;
+
+return Object.assign(
+{},
+secondary,
+primary,
+{
+
+providerId:
+primary.providerId||
+secondary.providerId||
+"",
+
+photo:
+primary.photo||
+secondary.photo||
+null,
+
+photos:
+(
+Array.isArray(primary.photos)&&
+primary.photos.length
+)
+? primary.photos
+: (
+Array.isArray(secondary.photos)
+? secondary.photos
+: []
+),
+
+website:
+primary.website||
+secondary.website||
+"",
+
+googleMapsUrl:
+primary.googleMapsUrl||
+secondary.googleMapsUrl||
+"",
+
+phone:
+primary.phone||
+secondary.phone||
+"",
+
+openingHours:
+primary.openingHours||
+secondary.openingHours||
+null,
+
+rating:
+finiteNumber(primary.rating)!==null
+? primary.rating
+: secondary.rating,
+
+ratingCount:
+Number(primary.ratingCount||0)||
+Number(secondary.ratingCount||0),
+
+addedByMe:
+Boolean(
+primary.addedByMe||
+secondary.addedByMe||
+primary.source==="local"||
+secondary.source==="local"
+)
+
+}
+);
+
+}
+
 
 function mergePlaces(groups){
 
-const merged=new Map();
+const merged=
+new Map();
 
 groups
 .flat()
@@ -6058,43 +6917,14 @@ place
 );
 
 return;
+
 }
-
-const existing=
-merged.get(key);
-
-const primary=
-place.source==="google"
-? place
-: existing;
-
-const secondary=
-place.source==="google"
-? existing
-: place;
 
 merged.set(
 key,
-Object.assign(
-{},
-secondary,
-primary,
-{
-photo:
-primary.photo||
-secondary.photo||
-null,
-
-website:
-primary.website||
-secondary.website||
-"",
-
-phone:
-primary.phone||
-secondary.phone||
-""
-}
+mergeFrontendPlaceRecords(
+merged.get(key),
+place
 )
 );
 
@@ -6103,7 +6933,9 @@ secondary.phone||
 return Array.from(
 merged.values()
 );
+
 }
+
 
 function addDistance(place){
 
@@ -6141,24 +6973,29 @@ place,
 distance
 }
 );
+
 }
 
-function sortResults(){
+
+function sortPlaceArray(places){
 
 const mode=
 document
 .getElementById("sortSelect")
 .value;
 
-currentResults.sort(
+return places.sort(
 function(a,b){
 
 if(mode==="rating"){
 
-return (
+const ratingDifference=
 Number(b.rating||0)-
-Number(a.rating||0)
-);
+Number(a.rating||0);
+
+if(ratingDifference!==0){
+return ratingDifference;
+}
 
 }
 
@@ -6169,7 +7006,22 @@ Number(b.distance??999999)
 
 }
 );
+
 }
+
+
+function sortResults(){
+
+sortPlaceArray(
+currentResults
+);
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
 
 async function searchPlaces(){
 
@@ -6179,13 +7031,28 @@ currentResults=
 getSavedPlaces()
 .map(addDistance);
 
+sortResults();
+
 visibleLimit=12;
 
 renderResults();
 updateMapMarkers(currentResults);
 refreshFullMapIfOpen();
 
+setStatus(
+currentResults.length
+? (
+t("found")+
+": "+
+currentResults.length+
+" "+
+t("places")
+)
+: ""
+);
+
 return;
+
 }
 
 setStatus(
@@ -6200,8 +7067,15 @@ await Promise.all([
 fetchGooglePlaces(
 currentCategory
 )
-.catch(function(){
+.catch(function(error){
+
+console.warn(
+"PETS & DOGUE Google search:",
+error
+);
+
 return [];
+
 }),
 
 fetchOsmPlaces(
@@ -6210,9 +7084,14 @@ currentCategory
 
 ]);
 
-const google=result[0]||[];
-const osm=result[1]||[];
-const added=nearbyAddedPlaces();
+const google=
+result[0]||[];
+
+const osm=
+result[1]||[];
+
+const added=
+nearbyAddedPlaces();
 
 currentResults=
 mergePlaces([
@@ -6232,9 +7111,13 @@ currentRadiusKm+.5
 });
 
 sortResults();
+
 persistSearch();
 renderResults();
-updateMapMarkers(currentResults);
+updateMapMarkers(
+currentResults
+);
+
 updateSelectedLocationUI();
 refreshFullMapIfOpen();
 
@@ -6255,29 +7138,57 @@ t("noPlaces")
 );
 
 }
+
 }
+
 
 function currentVisibleResults(){
 
 if(currentCategory==="saved"){
 
-return getSavedPlaces()
-.map(addDistance);
+return sortPlaceArray(
+getSavedPlaces()
+.map(addDistance)
+);
 
 }
 
 return currentResults.slice();
-} function renderResults(){
 
-const cards=document.getElementById("cards");
-const count=document.getElementById("resultsCount");
-const loadWrap=document.getElementById("loadMoreWrap");
+}
 
-if(!cards||!count||!loadWrap){
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+function renderResults(){
+
+const cards=
+document.getElementById(
+"cards"
+);
+
+const count=
+document.getElementById(
+"resultsCount"
+);
+
+const loadWrap=
+document.getElementById(
+"loadMoreWrap"
+);
+
+if(
+!cards||
+!count||
+!loadWrap
+){
 return;
 }
 
-const results=currentVisibleResults();
+const results=
+currentVisibleResults();
 
 count.textContent=
 t("found")+
@@ -6290,160 +7201,61 @@ if(!results.length){
 
 cards.innerHTML=`
 <div class="empty">
-<h3>${
-escapeHtml(
+
+<h3>
+${escapeHtml(
 currentCategory==="saved"
 ? t("savedEmpty")
 : t("noPlaces")
-)
-}</h3>
+)}
+</h3>
 
-<p>${
-escapeHtml(
+<p>
+${escapeHtml(
 currentCategory==="saved"
 ? t("savedEmptyText")
 : t("tryAnother")
-)
-}</p>
+)}
+</p>
+
 </div>
 `;
 
 loadWrap.hidden=true;
+
 return;
+
 }
 
 const visible=
-results.slice(0,visibleLimit);
+results.slice(
+0,
+visibleLimit
+);
 
 cards.innerHTML=
 visible
-.map(renderPlaceCard)
+.map(
+renderPlaceCard
+)
 .join("");
 
 loadWrap.hidden=
-results.length<=visibleLimit;
+results.length<=
+visibleLimit;
 
 bindCardEvents(
 cards,
 results
 );
-}
-
-function bindCardEvents(container,results){
-
-container
-.querySelectorAll("[data-heart-key]")
-.forEach(function(button){
-
-button.addEventListener(
-"click",
-function(event){
-
-event.stopPropagation();
-
-const place=
-results.find(function(item){
-
-return (
-placeIdentityKey(item)===
-button.dataset.heartKey
-);
-
-});
-
-if(place){
-toggleSaved(place);
-}
-
-}
-);
-
-});
-
-container
-.querySelectorAll("[data-policy-key]")
-.forEach(function(button){
-
-button.addEventListener(
-"click",
-function(event){
-
-event.stopPropagation();
-
-const place=
-results.find(function(item){
-
-return (
-placeIdentityKey(item)===
-button.dataset.policyKey
-);
-
-});
-
-if(place){
-openPolicyModal(place);
-}
-
-}
-);
-
-});
-
-container
-.querySelectorAll("[data-open-place]")
-.forEach(function(card){
-
-const openCard=function(event){
-
-if(event.target.closest("button,a")){
-return;
-}
-
-const place=
-results.find(function(item){
-
-return (
-placeIdentityKey(item)===
-card.dataset.openPlace
-);
-
-});
-
-if(place){
-openDetailPlace(place);
-}
-
-};
-
-card.addEventListener(
-"click",
-openCard
-);
-
-card.addEventListener(
-"keydown",
-function(event){
-
-if(
-event.key==="Enter"||
-event.key===" "
-){
-
-event.preventDefault();
-openCard(event);
 
 }
 
-}
-);
-
-});
-
-}
 
 function renderPlaceCard(place){
 
-const saved=isSaved(place);
+const saved=
+isSaved(place);
 
 const photo=
 safeExternalUrl(
@@ -6464,24 +7276,34 @@ const policy=
 getPolicy(place);
 
 const policyView=
-policyPresentation(policy);
+policyPresentation(
+policy
+);
 
 const key=
 placeIdentityKey(place);
 
 let sourceLabel="";
 
-if(place.source==="google"){
+if(place.addedByMe){
 
-sourceLabel=t("sourceGoogle");
+sourceLabel=
+t("addedByMe");
+
+}else if(place.source==="google"){
+
+sourceLabel=
+t("sourceGoogle");
 
 }else if(place.source==="osm"){
 
-sourceLabel=t("sourceOSM");
+sourceLabel=
+t("sourceOSM");
 
 }else{
 
-sourceLabel=t("addedByMe");
+sourceLabel=
+t("addedByMe");
 
 }
 
@@ -6509,7 +7331,9 @@ place.ratingCount+
 
 }
 
+if(sourceLabel){
 meta.push(sourceLabel);
+}
 
 return `
 <article
@@ -6539,6 +7363,11 @@ onerror="this.style.display='none'"
 class="card-heart ${saved?"saved":""}"
 type="button"
 data-heart-key="${escapeHtml(key)}"
+aria-label="${escapeHtml(
+saved
+? xt("saved")
+: xt("save")
+)}"
 >
 ${saved?"♥":"♡"}
 </button>
@@ -6548,7 +7377,11 @@ ${saved?"♥":"♡"}
 <div class="card-topline">
 
 <span class="card-category">
-${escapeHtml(categoryLabel(place.category))}
+${escapeHtml(
+categoryLabel(
+place.category
+)
+)}
 </span>
 
 <span class="card-rating">
@@ -6627,6 +7460,151 @@ ${escapeHtml(t("route"))}
 
 }
 
+
+function bindCardEvents(
+container,
+results
+){
+
+container
+.querySelectorAll(
+"[data-heart-key]"
+)
+.forEach(function(button){
+
+button.addEventListener(
+"click",
+function(event){
+
+event.stopPropagation();
+
+const place=
+results.find(function(item){
+
+return (
+placeIdentityKey(item)===
+button.dataset.heartKey
+);
+
+});
+
+if(place){
+
+toggleSaved(
+place
+);
+
+}
+
+}
+);
+
+});
+
+
+container
+.querySelectorAll(
+"[data-policy-key]"
+)
+.forEach(function(button){
+
+button.addEventListener(
+"click",
+function(event){
+
+event.stopPropagation();
+
+const place=
+results.find(function(item){
+
+return (
+placeIdentityKey(item)===
+button.dataset.policyKey
+);
+
+});
+
+if(place){
+
+openPolicyModal(
+place
+);
+
+}
+
+}
+);
+
+});
+
+
+container
+.querySelectorAll(
+"[data-open-place]"
+)
+.forEach(function(card){
+
+const openCard=
+function(event){
+
+if(
+event.target.closest(
+"button,a"
+)
+){
+return;
+}
+
+const place=
+results.find(function(item){
+
+return (
+placeIdentityKey(item)===
+card.dataset.openPlace
+);
+
+});
+
+if(place){
+
+openDetailPlace(
+place
+);
+
+}
+
+};
+
+card.addEventListener(
+"click",
+openCard
+);
+
+card.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key==="Enter"||
+event.key===" "
+){
+
+event.preventDefault();
+
+openCard(
+event
+);
+
+}
+
+}
+);
+
+});
+
+}
+
+
 document.addEventListener(
 "click",
 function(event){
@@ -6654,13 +7632,20 @@ button.dataset.quickRoute
 });
 
 if(place){
-openRouteChooser(place);
+
+openRouteChooser(
+place
+);
+
 }
 
 }
 );
 
-/* DETAILS */
+
+/* =========================================================
+   DETAILS
+========================================================= */
 
 const detailsOverlay=
 document.getElementById(
@@ -6717,11 +7702,21 @@ document.getElementById(
 "detailsPetMeta"
 );
 
-function openDetailPlace(place){
+let detailHistoryPlace=null;
+
+
+function showDetailVisual(place){
+
+if(!place){
+return;
+}
 
 detailPlace=place;
+detailHistoryPlace=place;
 
-renderDetailPlace(place);
+renderDetailPlace(
+place
+);
 
 detailsOverlay
 .classList
@@ -6739,6 +7734,39 @@ document.body
 "pd-overlay-lock"
 );
 
+setTimeout(function(){
+
+renderDetailMap(
+place
+);
+
+},60);
+
+}
+
+
+function openDetailPlace(place){
+
+if(!place){
+return;
+}
+
+if(
+detailsOverlay
+.classList
+.contains("open")&&
+placeIdentityKey(detailPlace)===
+placeIdentityKey(place)
+){
+
+return;
+
+}
+
+showDetailVisual(
+place
+);
+
 history.pushState(
 {
 pdOverlay:"detail"
@@ -6746,15 +7774,12 @@ pdOverlay:"detail"
 ""
 );
 
-setTimeout(function(){
-
-renderDetailMap(place);
-
-},60);
-
 }
 
-function closeDetailVisual(){
+
+function closeDetailVisual(
+preserveHistoryPlace=false
+){
 
 detailsOverlay
 .classList
@@ -6767,6 +7792,12 @@ detailsOverlay
 );
 
 detailPlace=null;
+
+if(!preserveHistoryPlace){
+
+detailHistoryPlace=null;
+
+}
 
 if(
 !fullMapOverlay
@@ -6784,6 +7815,7 @@ document.body
 
 }
 
+
 function renderDetailPlace(place){
 
 if(!place){
@@ -6800,15 +7832,19 @@ place.photo?.url
 if(photo){
 
 detailsPhoto.src=photo;
-detailsPhoto.alt=place.name||"";
-detailsPhoto.hidden=false;
+detailsPhoto.alt=
+place.name||"";
 
+detailsPhoto.hidden=false;
 detailsPhotoFallback.hidden=true;
 
 }else{
 
 detailsPhoto.hidden=true;
-detailsPhoto.removeAttribute("src");
+
+detailsPhoto.removeAttribute(
+"src"
+);
 
 detailsPhotoFallback.hidden=false;
 
@@ -6835,7 +7871,9 @@ place.rating
 if(rating!==null){
 
 facts.push(
-`<span class="detail-fact">★ ${escapeHtml(rating.toFixed(1))}</span>`
+`<span class="detail-fact">★ ${escapeHtml(
+rating.toFixed(1)
+)}</span>`
 );
 
 }
@@ -6843,7 +7881,9 @@ facts.push(
 if(place.ratingCount){
 
 facts.push(
-`<span class="detail-fact">(${escapeHtml(place.ratingCount)})</span>`
+`<span class="detail-fact">(${escapeHtml(
+place.ratingCount
+)})</span>`
 );
 
 }
@@ -6877,7 +7917,9 @@ typeof place.openingHours.openNow===
 if(openNow===true){
 
 facts.push(
-`<span class="detail-fact open">${escapeHtml(t("open"))}</span>`
+`<span class="detail-fact open">${escapeHtml(
+t("open")
+)}</span>`
 );
 
 }
@@ -6885,7 +7927,9 @@ facts.push(
 if(openNow===false){
 
 facts.push(
-`<span class="detail-fact closed">${escapeHtml(t("closed"))}</span>`
+`<span class="detail-fact closed">${escapeHtml(
+t("closed")
+)}</span>`
 );
 
 }
@@ -6893,8 +7937,13 @@ facts.push(
 detailsFacts.innerHTML=
 facts.join("");
 
-renderDetailActions(place);
-renderDetailPetInfo(place);
+renderDetailActions(
+place
+);
+
+renderDetailPetInfo(
+place
+);
 
 if(
 detailsOverlay
@@ -6902,19 +7951,26 @@ detailsOverlay
 .contains("open")
 ){
 
-renderDetailMap(place);
+renderDetailMap(
+place
+);
 
 }
 
 }
+
 
 function renderDetailActions(place){
 
 const googleUrl=
-googleMapsUrlForPlace(place);
+googleMapsUrlForPlace(
+place
+);
 
 const wazeUrl=
-wazeUrlForPlace(place);
+wazeUrlForPlace(
+place
+);
 
 const website=
 safeExternalUrl(
@@ -6927,27 +7983,11 @@ place.phone
 );
 
 const saved=
-isSaved(place);
+isSaved(
+place
+);
 
 const actions=[];
-
-if(
-place.category==="hotel"&&
-website
-){
-
-actions.push(`
-<a
-class="details-action primary"
-href="${escapeHtml(website)}"
-target="_blank"
-rel="noopener"
->
-🌐 ${escapeHtml(t("website"))}
-</a>
-`);
-
-}
 
 actions.push(`
 <button
@@ -6959,40 +7999,7 @@ type="button"
 </button>
 `);
 
-if(googleUrl){
-
-actions.push(`
-<a
-class="details-action"
-href="${escapeHtml(googleUrl)}"
-target="_blank"
-rel="noopener"
->
-📍 ${escapeHtml(xt("googleMaps"))}
-</a>
-`);
-
-}
-
-if(wazeUrl){
-
-actions.push(`
-<a
-class="details-action"
-href="${escapeHtml(wazeUrl)}"
-target="_blank"
-rel="noopener"
->
-◉ ${escapeHtml(xt("waze"))}
-</a>
-`);
-
-}
-
-if(
-website&&
-place.category!=="hotel"
-){
+if(website){
 
 actions.push(`
 <a
@@ -7015,6 +8022,21 @@ class="details-action"
 href="tel:${escapeHtml(phone)}"
 >
 ☎ ${escapeHtml(t("call"))}
+</a>
+`);
+
+}
+
+if(googleUrl){
+
+actions.push(`
+<a
+class="details-action"
+href="${escapeHtml(googleUrl)}"
+target="_blank"
+rel="noopener"
+>
+📍 ${escapeHtml(xt("googleMaps"))}
 </a>
 `);
 
@@ -7048,6 +8070,7 @@ type="button"
 detailsActions.innerHTML=
 actions.join("");
 
+
 document
 .getElementById(
 "detailsRouteButton"
@@ -7056,10 +8079,13 @@ document
 "click",
 function(){
 
-openRouteChooser(place);
+openRouteChooser(
+place
+);
 
 }
 );
+
 
 document
 .getElementById(
@@ -7069,10 +8095,13 @@ document
 "click",
 function(){
 
-toggleSaved(place);
+toggleSaved(
+place
+);
 
 }
 );
+
 
 document
 .getElementById(
@@ -7082,20 +8111,27 @@ document
 "click",
 function(){
 
-sharePlace(place);
+sharePlace(
+place
+);
 
 }
 );
 
 }
 
+
 function renderDetailPetInfo(place){
 
 const policy=
-getPolicy(place);
+getPolicy(
+place
+);
 
 const view=
-policyPresentation(policy);
+policyPresentation(
+policy
+);
 
 detailsPetStatus.className=
 "pet-info-status "+
@@ -7155,6 +8191,7 @@ meta.join(" · ");
 
 }
 
+
 function renderDetailMap(place){
 
 const lat=
@@ -7173,7 +8210,8 @@ return;
 
 if(!detailMap){
 
-detailMap=L.map(
+detailMap=
+L.map(
 "detailMap",
 {
 zoomControl:false,
@@ -7188,7 +8226,9 @@ maxZoom:19,
 attribution:"&copy; OpenStreetMap"
 }
 )
-.addTo(detailMap);
+.addTo(
+detailMap
+);
 
 }
 
@@ -7207,7 +8247,9 @@ L.marker(
 icon:createPlaceIcon()
 }
 )
-.addTo(detailMap);
+.addTo(
+detailMap
+);
 
 detailMap.setView(
 [lat,lng],
@@ -7222,22 +8264,31 @@ detailMap.invalidateSize();
 
 }
 
+
 async function sharePlace(place){
 
 const url=
-googleMapsUrlForPlace(place)
+googleMapsUrlForPlace(
+place
+)
 ||
 window.location.href;
 
 const payload={
-title:place.name||"PETS & DOGUE",
+
+title:
+place.name||
+"PETS & DOGUE",
+
 text:[
 place.name,
 place.address
 ]
 .filter(Boolean)
 .join(" — "),
+
 url
+
 };
 
 if(navigator.share){
@@ -7266,7 +8317,9 @@ return;
 try{
 
 await navigator.clipboard
-.writeText(url);
+.writeText(
+url
+);
 
 setStatus(
 xt("copied")
@@ -7276,7 +8329,10 @@ xt("copied")
 
 }
 
-/* FULL MAP */
+
+/* =========================================================
+   FULLSCREEN MAP
+========================================================= */
 
 const fullMapOverlay=
 document.getElementById(
@@ -7292,6 +8348,7 @@ const fullMapPreview=
 document.getElementById(
 "fullMapPreview"
 );
+
 
 function setCurrentCategory(category){
 
@@ -7314,6 +8371,7 @@ currentCategory
 });
 
 }
+
 
 function renderFullMapCategories(){
 
@@ -7377,13 +8435,15 @@ renderFullMapMarkers();
 
 }
 
+
 function ensureFullMap(){
 
 if(fullMap){
 return;
 }
 
-fullMap=L.map(
+fullMap=
+L.map(
 "fullMap",
 {
 zoomControl:true,
@@ -7405,11 +8465,14 @@ maxZoom:19,
 attribution:"&copy; OpenStreetMap"
 }
 )
-.addTo(fullMap);
+.addTo(
+fullMap
+);
 
 }
 
-function openFullMap(){
+
+function showFullMapVisual(){
 
 fullMapOverlay
 .classList
@@ -7430,13 +8493,6 @@ document.body
 renderFullMapCategories();
 ensureFullMap();
 
-history.pushState(
-{
-pdOverlay:"fullMap"
-},
-""
-);
-
 setTimeout(function(){
 
 fullMap.invalidateSize();
@@ -7445,6 +8501,36 @@ renderFullMapMarkers();
 },80);
 
 }
+
+
+function openFullMap(
+pushHistory=true
+){
+
+if(
+fullMapOverlay
+.classList
+.contains("open")
+){
+
+return;
+}
+
+showFullMapVisual();
+
+if(pushHistory){
+
+history.pushState(
+{
+pdOverlay:"fullMap"
+},
+""
+);
+
+}
+
+}
+
 
 function closeFullMapVisual(){
 
@@ -7480,6 +8566,7 @@ document.body
 
 }
 
+
 function clearFullMapMarkers(){
 
 if(!fullMap){
@@ -7489,7 +8576,9 @@ return;
 fullMapMarkers
 .forEach(function(marker){
 
-fullMap.removeLayer(marker);
+fullMap.removeLayer(
+marker
+);
 
 });
 
@@ -7506,6 +8595,7 @@ fullMapUserMarker=null;
 }
 
 }
+
 
 function renderFullMapMarkers(){
 
@@ -7543,18 +8633,24 @@ L.marker(
 icon:createPlaceIcon()
 }
 )
-.addTo(fullMap);
+.addTo(
+fullMap
+);
 
 marker.on(
 "click",
 function(){
 
-showFullMapPreview(place);
+showFullMapPreview(
+place
+);
 
 }
 );
 
-fullMapMarkers.push(marker);
+fullMapMarkers.push(
+marker
+);
 
 bounds.push([
 lat,
@@ -7576,7 +8672,9 @@ icon:createUserIcon(),
 zIndexOffset:1000
 }
 )
-.addTo(fullMap);
+.addTo(
+fullMap
+);
 
 bounds.push([
 currentLocation.lat,
@@ -7595,9 +8693,7 @@ maxZoom:14
 }
 );
 
-}else if(
-bounds.length===1
-){
+}else if(bounds.length===1){
 
 fullMap.setView(
 bounds[0],
@@ -7607,6 +8703,7 @@ bounds[0],
 }
 
 }
+
 
 function refreshFullMapIfOpen(){
 
@@ -7623,9 +8720,11 @@ renderFullMapMarkers();
 
 }
 
+
 function showFullMapPreview(place){
 
-fullMapPreviewPlace=place;
+fullMapPreviewPlace=
+place;
 
 const photo=
 safeExternalUrl(
@@ -7674,7 +8773,9 @@ fullMapPreview
 
 }
 
-fullMapPreview.addEventListener(
+
+fullMapPreview
+.addEventListener(
 "click",
 function(){
 
@@ -7689,22 +8790,60 @@ fullMapPreviewPlace
 }
 );
 
-/* ROUTE */
+
+fullMapPreview
+.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key==="Enter"||
+event.key===" "
+){
+
+event.preventDefault();
+
+if(fullMapPreviewPlace){
+
+openDetailPlace(
+fullMapPreviewPlace
+);
+
+}
+
+}
+
+}
+);
+
+
+/* =========================================================
+   ROUTE CHOOSER
+========================================================= */
 
 const routeSheet=
 document.getElementById(
 "routeSheet"
 );
 
+
 function openRouteChooser(place){
 
-routePlace=place;
+routePlace=
+place;
 
 routeSheet
 .classList
 .add("open");
 
+document.body
+.classList
+.add(
+"pd-overlay-lock"
+);
+
 }
+
 
 function closeRouteChooser(){
 
@@ -7714,7 +8853,21 @@ routeSheet
 
 routePlace=null;
 
+if(
+!detailsOverlay.classList.contains("open")&&
+!fullMapOverlay.classList.contains("open")
+){
+
+document.body
+.classList
+.remove(
+"pd-overlay-lock"
+);
+
 }
+
+}
+
 
 document
 .getElementById(
@@ -7748,6 +8901,7 @@ closeRouteChooser();
 }
 );
 
+
 document
 .getElementById(
 "routeWaze"
@@ -7780,6 +8934,7 @@ closeRouteChooser();
 }
 );
 
+
 document
 .getElementById(
 "routeCancel"
@@ -7789,12 +8944,16 @@ document
 closeRouteChooser
 );
 
-/* CONTROLS */
+
+/* =========================================================
+   PAGE CONTROLS
+========================================================= */
 
 const radiusSlider=
 document.getElementById(
 "radiusSlider"
 );
+
 
 function updateRadiusLabel(){
 
@@ -7809,6 +8968,7 @@ t("km");
 
 }
 
+
 function setStatus(text){
 
 document
@@ -7819,6 +8979,7 @@ document
 text||"";
 
 }
+
 
 function useDeviceLocation(callback){
 
@@ -7880,6 +9041,7 @@ maximumAge:60000
 
 }
 
+
 document
 .getElementById(
 "locationBtn"
@@ -7891,7 +9053,8 @@ function(){
 useDeviceLocation(
 async function(location){
 
-currentLocation=location;
+currentLocation=
+location;
 
 locationInput.value=
 location.label;
@@ -7905,6 +9068,7 @@ await searchPlaces();
 
 }
 );
+
 
 locationInput.addEventListener(
 "input",
@@ -7921,6 +9085,7 @@ if(query.length<2){
 
 closeSuggestions();
 return;
+
 }
 
 suggestionTimer=
@@ -7945,7 +9110,9 @@ error?.name!==
 "AbortError"
 ){
 
-console.warn(error);
+console.warn(
+error
+);
 
 }
 
@@ -7957,6 +9124,7 @@ console.warn(error);
 
 }
 );
+
 
 locationInput.addEventListener(
 "keydown",
@@ -7976,7 +9144,9 @@ return;
 }
 
 const location=
-await geocode(query);
+await geocode(
+query
+);
 
 if(!location){
 
@@ -7987,7 +9157,8 @@ t("geocodeFail")
 return;
 }
 
-currentLocation=location;
+currentLocation=
+location;
 
 closeSuggestions();
 updateSelectedLocationUI();
@@ -7997,17 +9168,21 @@ await searchPlaces();
 }
 );
 
+
 radiusSlider.addEventListener(
 "input",
 function(){
 
 currentRadiusKm=
-Number(this.value);
+Number(
+this.value
+);
 
 updateRadiusLabel();
 
 }
 );
+
 
 radiusSlider.addEventListener(
 "change",
@@ -8017,6 +9192,7 @@ searchPlaces();
 
 }
 );
+
 
 document
 .querySelectorAll(
@@ -8040,6 +9216,7 @@ searchPlaces();
 
 });
 
+
 document
 .getElementById(
 "sortSelect"
@@ -8050,9 +9227,11 @@ function(){
 
 sortResults();
 renderResults();
+refreshFullMapIfOpen();
 
 }
 );
+
 
 document
 .getElementById(
@@ -8069,6 +9248,7 @@ renderResults();
 }
 );
 
+
 document
 .getElementById(
 "mapExpandBtn"
@@ -8084,6 +9264,7 @@ openFullMap();
 }
 );
 
+
 map.on(
 "click",
 function(){
@@ -8093,21 +9274,62 @@ openFullMap();
 }
 );
 
-document
-.getElementById(
-"detailMapExpand"
-)
-.addEventListener(
-"click",
-openFullMap
-);
 
-/* ADD PLACE */
+/* =========================================================
+   ADD PLACE
+========================================================= */
 
 const addModal=
 document.getElementById(
 "addModal"
 );
+
+
+function updatePolicyOptionStyles(
+root=document
+){
+
+root
+.querySelectorAll(
+".policy-option"
+)
+.forEach(function(option){
+
+const radio=
+option.querySelector(
+'input[type="radio"]'
+);
+
+option.classList.toggle(
+"selected",
+Boolean(radio?.checked)
+);
+
+});
+
+}
+
+
+document.addEventListener(
+"change",
+function(event){
+
+if(
+event.target.matches(
+'input[name="addPetAccess"],input[name="petAccess"]'
+)
+){
+
+updatePolicyOptionStyles(
+event.target.closest(".modal")||
+document
+);
+
+}
+
+}
+);
+
 
 function openAddModal(){
 
@@ -8122,13 +9344,39 @@ document
 
 addPlaceSearch.value="";
 
+googlePlaceSelected
+.classList
+.remove("visible");
+
+googlePlaceSelectedName.textContent="";
+googlePlaceSelectedAddress.textContent="";
+
 closeAddSuggestions();
+
+resetGoogleAutocompleteSession();
+
+updatePolicyOptionStyles(
+addModal
+);
 
 addModal
 .classList
 .add("open");
 
+document.body
+.classList
+.add(
+"pd-overlay-lock"
+);
+
+setTimeout(function(){
+
+addPlaceSearch.focus();
+
+},80);
+
 }
+
 
 function closeAddModal(){
 
@@ -8138,7 +9386,30 @@ addModal
 
 closeAddSuggestions();
 
+if(addSuggestionAbort){
+
+try{
+addSuggestionAbort.abort();
+}catch{}
+
 }
+
+if(
+!detailsOverlay.classList.contains("open")&&
+!fullMapOverlay.classList.contains("open")&&
+!policyModal.classList.contains("open")
+){
+
+document.body
+.classList
+.remove(
+"pd-overlay-lock"
+);
+
+}
+
+}
+
 
 document
 .getElementById(
@@ -8148,6 +9419,7 @@ document
 "click",
 openAddModal
 );
+
 
 document
 .getElementById(
@@ -8164,6 +9436,7 @@ openAddModal();
 }
 );
 
+
 document
 .getElementById(
 "modalClose"
@@ -8173,6 +9446,7 @@ document
 closeAddModal
 );
 
+
 document
 .getElementById(
 "modalLocationBtn"
@@ -8180,6 +9454,8 @@ document
 .addEventListener(
 "click",
 function(){
+
+clearSelectedGooglePlace();
 
 useDeviceLocation(
 function(location){
@@ -8201,6 +9477,7 @@ location.label;
 
 }
 );
+
 
 document
 .getElementById(
@@ -8247,84 +9524,159 @@ if(!name){
 return;
 }
 
-const photo=
-safeExternalUrl(
-modalSelectedPlaceData?.photo
-);
-
-const place={
-
-id:
-"local-"+
-Date.now(),
-
-source:"local",
-
-name,
-
-category:
+const category=
 document
 .getElementById(
 "addCategory"
 )
-.value,
+.value;
 
-address:
+const address=
 document
 .getElementById(
 "addAddress"
 )
 .value
-.trim(),
+.trim();
+
+const googleData=
+modalSelectedPlaceData;
+
+const providerId=
+String(
+googleData?.providerId||
+googleData?.id||
+""
+);
+
+const photo=
+googleData?.photo?.url
+? googleData.photo
+: null;
+
+const place={
+
+id:
+providerId
+? (
+"local-google-"+
+providerId
+)
+: (
+"local-"+
+Date.now()
+),
+
+providerId,
+
+source:"local",
+
+addedByMe:true,
+
+name,
+
+category,
+
+address,
 
 website:
-modalSelectedPlaceData?.website||
-"",
-
-phone:
-modalSelectedPlaceData?.phone||
+googleData?.website||
 "",
 
 googleMapsUrl:
+googleData?.googleMapsUrl||
+(
 "https://www.google.com/maps/search/?api=1&query="+
 encodeURIComponent(
 modalCoordinates.lat+
 ","+
 modalCoordinates.lng
+)
 ),
+
+phone:
+googleData?.phone||
+"",
 
 location:{
 lat:modalCoordinates.lat,
 lng:modalCoordinates.lng
 },
 
-rating:null,
-ratingCount:0,
+rating:
+finiteNumber(
+googleData?.rating
+),
 
-openingHours:null,
+ratingCount:
+finiteNumber(
+googleData?.ratingCount
+)||0,
 
-photo:
+openingHours:
+googleData?.openingHours||
+null,
+
+photo,
+
+photos:
+Array.isArray(
+googleData?.photos
+)
+? googleData.photos
+: (
 photo
-? {
-url:photo
-}
-: null,
+? [photo]
+: []
+),
+
+types:
+Array.isArray(
+googleData?.types
+)
+? googleData.types
+: [],
+
+allowsDogs:
+googleData?.allowsDogs===
+true,
 
 petFriendly:{
 allowed:true,
-verified:false
+verified:
+googleData?.allowsDogs===
+true
 }
 
 };
 
-const added=
+let added=
 getAddedPlaces();
 
-added.unshift(place);
+const key=
+placeIdentityKey(
+place
+);
+
+added=
+added.filter(function(item){
+
+return (
+placeIdentityKey(item)!==
+key
+);
+
+});
+
+added.unshift(
+place
+);
 
 localStorage.setItem(
 ADDED_KEY,
-JSON.stringify(added)
+JSON.stringify(
+added
+)
 );
 
 setPolicy(
@@ -8349,7 +9701,10 @@ searchPlaces();
 }
 );
 
-/* PET RULES */
+
+/* =========================================================
+   PET RULES MODAL
+========================================================= */
 
 const policyModal=
 document.getElementById(
@@ -8361,26 +9716,32 @@ document.getElementById(
 "policyNote"
 );
 
+
 function openPolicyModal(place){
 
-policyEditingPlace=place;
+policyEditingPlace=
+place;
 
 document
 .getElementById(
 "policyPlaceName"
 )
 .textContent=
-place.name||"";
+place.name||
+"";
 
 document
 .getElementById(
 "policyPlaceAddress"
 )
 .textContent=
-place.address||"";
+place.address||
+"";
 
 const policy=
-getPolicy(place);
+getPolicy(
+place
+);
 
 document
 .querySelectorAll(
@@ -8398,13 +9759,25 @@ policy.access
 });
 
 policyNote.value=
-policy?.note||"";
+policy?.note||
+"";
+
+updatePolicyOptionStyles(
+policyModal
+);
 
 policyModal
 .classList
 .add("open");
 
+document.body
+.classList
+.add(
+"pd-overlay-lock"
+);
+
 }
+
 
 function closePolicyModal(){
 
@@ -8414,7 +9787,22 @@ policyModal
 
 policyEditingPlace=null;
 
+if(
+!detailsOverlay.classList.contains("open")&&
+!fullMapOverlay.classList.contains("open")&&
+!addModal.classList.contains("open")
+){
+
+document.body
+.classList
+.remove(
+"pd-overlay-lock"
+);
+
 }
+
+}
+
 
 document
 .getElementById(
@@ -8424,6 +9812,7 @@ document
 "click",
 closePolicyModal
 );
+
 
 document
 .getElementById(
@@ -8468,6 +9857,7 @@ renderResults();
 updateMapMarkers(
 currentResults
 );
+
 refreshFullMapIfOpen();
 
 if(detailPlace){
@@ -8485,6 +9875,7 @@ pt("rulesSaved")
 }
 );
 
+
 document
 .getElementById(
 "removePolicyBtn"
@@ -8500,7 +9891,9 @@ return;
 const place=
 policyEditingPlace;
 
-removePolicy(place);
+removePolicy(
+place
+);
 
 closePolicyModal();
 
@@ -8527,7 +9920,10 @@ pt("rulesRemoved")
 }
 );
 
-/* CLOSE / BACK */
+
+/* =========================================================
+   OVERLAY NAVIGATION / DEVICE BACK
+========================================================= */
 
 document
 .getElementById(
@@ -8553,6 +9949,7 @@ closeDetailVisual();
 }
 );
 
+
 document
 .getElementById(
 "detailsEditRules"
@@ -8571,6 +9968,39 @@ detailPlace
 
 }
 );
+
+
+document
+.getElementById(
+"detailMapExpand"
+)
+.addEventListener(
+"click",
+function(){
+
+if(!detailPlace){
+return;
+}
+
+/*
+Keep the selected place available so Back can return
+from the fullscreen map to the place detail screen.
+*/
+
+detailHistoryPlace=
+detailPlace;
+
+closeDetailVisual(
+true
+);
+
+openFullMap(
+true
+);
+
+}
+);
+
 
 document
 .getElementById(
@@ -8596,16 +10026,111 @@ closeFullMapVisual();
 }
 );
 
+
 window.addEventListener(
 "popstate",
-function(){
+function(event){
 
 closeRouteChooser();
+
+const state=
+event.state?.pdOverlay||
+"";
+
+/*
+Back from place detail opened on top of fullscreen map:
+close details and reveal the already-open map.
+*/
+
+if(state==="fullMap"){
+
+if(
+detailsOverlay
+.classList
+.contains("open")
+){
+
+closeDetailVisual(
+true
+);
+
+}
+
+if(
+!fullMapOverlay
+.classList
+.contains("open")
+){
+
+showFullMapVisual();
+
+}
+
+return;
+
+}
+
+
+/*
+Back from fullscreen map that was opened from a detail view:
+restore that detail without adding a new history entry.
+*/
+
+if(
+state==="detail"&&
+detailHistoryPlace
+){
+
+closeFullMapVisual();
+
+if(
+!detailsOverlay
+.classList
+.contains("open")
+){
+
+showDetailVisual(
+detailHistoryPlace
+);
+
+}
+
+return;
+
+}
+
+
+/*
+Back to the normal page.
+*/
+
+if(
+detailsOverlay
+.classList
+.contains("open")
+){
+
 closeDetailVisual();
+
+}
+
+if(
+fullMapOverlay
+.classList
+.contains("open")
+){
+
 closeFullMapVisual();
 
 }
+
+}
 );
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
 
 document.addEventListener(
 "keydown",
@@ -8626,6 +10151,7 @@ routeSheet
 
 closeRouteChooser();
 return;
+
 }
 
 if(
@@ -8636,6 +10162,7 @@ policyModal
 
 closePolicyModal();
 return;
+
 }
 
 if(
@@ -8646,6 +10173,7 @@ addModal
 
 closeAddModal();
 return;
+
 }
 
 if(
@@ -8654,8 +10182,21 @@ detailsOverlay
 .contains("open")
 ){
 
+if(
+history.state?.pdOverlay===
+"detail"
+){
+
+history.back();
+
+}else{
+
 closeDetailVisual();
+
+}
+
 return;
+
 }
 
 if(
@@ -8664,14 +10205,74 @@ fullMapOverlay
 .contains("open")
 ){
 
+if(
+history.state?.pdOverlay===
+"fullMap"
+){
+
+history.back();
+
+}else{
+
 closeFullMapVisual();
+
+}
 
 }
 
 }
 );
 
-/* STORAGE */
+
+/* =========================================================
+   CLICK OUTSIDE SMALL MODALS
+========================================================= */
+
+addModal.addEventListener(
+"click",
+function(event){
+
+if(event.target===addModal){
+
+closeAddModal();
+
+}
+
+}
+);
+
+
+policyModal.addEventListener(
+"click",
+function(event){
+
+if(event.target===policyModal){
+
+closePolicyModal();
+
+}
+
+}
+);
+
+
+routeSheet.addEventListener(
+"click",
+function(event){
+
+if(event.target===routeSheet){
+
+closeRouteChooser();
+
+}
+
+}
+);
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
 
 function persistSearch(){
 
@@ -8680,15 +10281,23 @@ try{
 localStorage.setItem(
 SEARCH_KEY,
 JSON.stringify({
-location:currentLocation,
-radius:currentRadiusKm,
-query:locationInput.value
+
+location:
+currentLocation,
+
+radius:
+currentRadiusKm,
+
+query:
+locationInput.value
+
 })
 );
 
 }catch{}
 
 }
+
 
 function restoreSearch(){
 
@@ -8711,22 +10320,30 @@ saved.location.lng
 ){
 
 currentLocation={
-lat:Number(
+
+lat:
+Number(
 saved.location.lat
 ),
-lng:Number(
+
+lng:
+Number(
 saved.location.lng
 ),
+
 label:
 saved.location.label||
 ""
+
 };
 
 }
 
 if(
 Number.isFinite(
-Number(saved?.radius)
+Number(
+saved?.radius
+)
 )
 ){
 
@@ -8735,7 +10352,9 @@ Math.min(
 25,
 Math.max(
 1,
-Number(saved.radius)
+Number(
+saved.radius
+)
 )
 );
 
@@ -8751,6 +10370,11 @@ currentLocation.label||
 
 }
 
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
 async function initialise(){
 
 currentLanguage=
@@ -8758,8 +10382,14 @@ detectLanguage();
 
 restoreSearch();
 
+resetGoogleAutocompleteSession();
+
 applyLanguage(
 currentLanguage
+);
+
+updatePolicyOptionStyles(
+document
 );
 
 map.setView(
@@ -8774,10 +10404,16 @@ await searchPlaces();
 
 }
 
+
 window.addEventListener(
 "load",
 initialise
 );
+
+
+/* =========================================================
+   LANGUAGE SYNC
+========================================================= */
 
 window.addEventListener(
 "storage",
@@ -8808,17 +10444,37 @@ language
 }
 );
 
+
+/*
+Shared PETS & DOGUE shell may change the language inside
+the same document, where the browser storage event does not
+fire. Check the canonical language key periodically and
+synchronise this page only when it actually changes.
+*/
+
+setInterval(
+function(){
+
+const language=
+detectLanguage();
+
+if(
+language&&
+language!==
+currentLanguage
+){
+
+applyLanguage(
+language
+);
+
+}
+
+},
+800
+);
+
 </script>
-
-<style>
-.modal-backdrop{
-z-index:10200;
-}
-
-.route-sheet{
-z-index:10300;
-}
-</style>
 
 <script src="pets-dogue-shell.js?v=20260830-petfriendly-5"></script>
 
