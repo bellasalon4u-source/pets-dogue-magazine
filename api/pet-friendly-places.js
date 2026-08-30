@@ -13,28 +13,70 @@ GOOGLE_PLACES_API_KEY
 or
 GOOGLE_MAPS_API_KEY
 
-This API:
+SUPPORTED REQUESTS
 
 POST
 /api/pet-friendly-places
 
-Searches real Google Places.
+1. Nearby/category search
+{
+  latitude,
+  longitude,
+  radius,
+  category,
+  maxResults
+}
+
+2. Google Places autocomplete
+{
+  action:"autocomplete",
+  query:"Pizza Express",
+  language:"en",
+  sessionToken:"...",
+  latitude:51.5,
+  longitude:-0.1,
+  radius:15000,
+  regionCode:"uk"
+}
+
+3. Google Place Details
+{
+  action:"details",
+  placeId:"...",
+  language:"en",
+  sessionToken:"...",
+  regionCode:"uk"
+}
 
 GET
 /api/pet-friendly-places?photo=...
 
 Securely proxies real Google place photographs.
 
-IMPORTANT:
+IMPORTANT
 
-Some Google search responses do not include photos even
-when the actual Google Place has photographs.
+The Google API key never reaches the browser.
 
-For those places this endpoint automatically performs a
-Place Details request by place ID and enriches the result
-with real Google photographs.
+Autocomplete uses Google Places API (New).
 
-The API key never reaches the browser.
+After the user selects a prediction, Place Details retrieves
+the canonical Google place record including:
+
+- Google place ID
+- official place name
+- formatted address
+- coordinates
+- category/types
+- rating
+- website
+- phone
+- Google Maps URL
+- opening hours
+- photos
+- allowsDogs when Google provides it
+
+The same endpoint continues to support all existing nearby
+search and photograph functionality.
 =========================================================
 */
 
@@ -54,6 +96,9 @@ const GOOGLE_NEARBY_URL =
 const GOOGLE_TEXT_URL =
   "https://places.googleapis.com/v1/places:searchText";
 
+const GOOGLE_AUTOCOMPLETE_URL =
+  "https://places.googleapis.com/v1/places:autocomplete";
+
 const GOOGLE_PLACE_BASE =
   "https://places.googleapis.com/v1";
 
@@ -64,6 +109,15 @@ const MAX_RESULTS =
   20;
 
 const MAX_RADIUS_METERS =
+  50000;
+
+const AUTOCOMPLETE_RADIUS_DEFAULT =
+  20000;
+
+const AUTOCOMPLETE_RADIUS_MIN =
+  100;
+
+const AUTOCOMPLETE_RADIUS_MAX =
   50000;
 
 const PHOTO_WIDTH_DEFAULT =
@@ -171,6 +225,17 @@ const DETAILS_FIELD_MASK = [
 ].join(",");
 
 
+const AUTOCOMPLETE_FIELD_MASK = [
+  "suggestions.placePrediction.place",
+  "suggestions.placePrediction.placeId",
+  "suggestions.placePrediction.text.text",
+  "suggestions.placePrediction.structuredFormat.mainText.text",
+  "suggestions.placePrediction.structuredFormat.secondaryText.text",
+  "suggestions.placePrediction.types",
+  "suggestions.placePrediction.distanceMeters"
+].join(",");
+
+
 /* =========================================================
    COMMON HEADERS
 ========================================================= */
@@ -203,7 +268,7 @@ function setCommonHeaders(
 
 
 /* =========================================================
-   HELPERS
+   BASIC HELPERS
 ========================================================= */
 
 function numberOrNull(
@@ -305,6 +370,127 @@ function uniqueStrings(
 
 
 /* =========================================================
+   LANGUAGE / REGION
+========================================================= */
+
+function normalizeLanguageCode(
+  value
+){
+
+  let language =
+    cleanString(
+      value,
+      40
+    )
+      .replace(
+        "_",
+        "-"
+      )
+      .toLowerCase();
+
+  const aliases = {
+
+    ua:"uk",
+    cz:"cs",
+    gr:"el",
+    se:"sv",
+    dk:"da"
+
+  };
+
+  if(
+    aliases[
+      language
+    ]
+  ){
+
+    language =
+      aliases[
+        language
+      ];
+
+  }
+
+  /*
+  PETS & DOGUE currently uses simple language codes,
+  all of which are valid BCP-47 language tags.
+  */
+
+  if(
+    !/^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/i.test(
+      language
+    )
+  ){
+
+    return "";
+
+  }
+
+  return language;
+
+}
+
+
+function normalizeRegionCode(
+  value
+){
+
+  const region =
+    cleanString(
+      value,
+      10
+    )
+      .toLowerCase();
+
+  if(
+    !/^[a-z]{2}$/.test(
+      region
+    )
+  ){
+
+    return "";
+
+  }
+
+  return region;
+
+}
+
+
+function normalizeSessionToken(
+  value
+){
+
+  const token =
+    cleanString(
+      value,
+      500
+    );
+
+  if(
+    !token
+  ){
+
+    return "";
+
+  }
+
+  /*
+  Keep the token opaque.
+
+  We only remove control characters before passing it
+  to Google.
+  */
+
+  return token.replace(
+    /[\u0000-\u001F\u007F]/g,
+    ""
+  );
+
+}
+
+
+/* =========================================================
    PHOTO PROXY URL
 ========================================================= */
 
@@ -331,7 +517,7 @@ function getPhotoProxyUrl(
   /*
   Always prefer a relative URL.
 
-  This is safer across:
+  This is safe across:
   - production domain
   - Vercel previews
   - custom domain
@@ -608,11 +794,6 @@ function detectCategoryFromTypes(
 
   /*
   HOTEL
-
-  Google frequently returns more specific types such as:
-  resort_hotel
-  extended_stay_hotel
-  etc.
   */
 
   if(
@@ -728,10 +909,7 @@ function detectCategoryFromTypes(
 
   return "other";
 
-}
-
-
-/* =========================================================
+}/* =========================================================
    DISPLAY NAME
 ========================================================= */
 
@@ -943,7 +1121,7 @@ function categoryNaturallyPetRelevant(
 function normalizeGooglePlace(
   request,
   place,
-  requestedCategory
+  requestedCategory = "all"
 ){
 
   const lat =
@@ -992,6 +1170,16 @@ function normalizeGooglePlace(
 
     category =
       "park";
+
+  }
+
+  if(
+    category === "other" &&
+    detectedCategory !== "other"
+  ){
+
+    category =
+      detectedCategory;
 
   }
 
@@ -1123,6 +1311,7 @@ function normalizeGooglePlace(
     photos,
 
     petFriendly:{
+
       allowed:
         petFriendly,
 
@@ -1135,6 +1324,7 @@ function normalizeGooglePlace(
           : naturallyPetRelevant
             ? "google_place_type"
             : "google_search"
+
     }
 
   };
@@ -1246,7 +1436,8 @@ async function googlePost(
 ========================================================= */
 
 async function fetchPlaceDetails(
-  placeId
+  placeId,
+  options = {}
 ){
 
   const id =
@@ -1263,11 +1454,70 @@ async function fetchPlaceDetails(
 
   }
 
+  const query =
+    new URLSearchParams();
+
+  const language =
+    normalizeLanguageCode(
+      options.language
+    );
+
+  const regionCode =
+    normalizeRegionCode(
+      options.regionCode
+    );
+
+  const sessionToken =
+    normalizeSessionToken(
+      options.sessionToken
+    );
+
+  if(
+    language
+  ){
+
+    query.set(
+      "languageCode",
+      language
+    );
+
+  }
+
+  if(
+    regionCode
+  ){
+
+    query.set(
+      "regionCode",
+      regionCode
+    );
+
+  }
+
+  if(
+    sessionToken
+  ){
+
+    query.set(
+      "sessionToken",
+      sessionToken
+    );
+
+  }
+
+  const queryString =
+    query.toString();
+
   const url =
     GOOGLE_PLACE_BASE +
     "/places/" +
     encodeURIComponent(
       id
+    ) +
+    (
+      queryString
+        ? "?" + queryString
+        : ""
     );
 
   const response =
@@ -1321,17 +1571,291 @@ async function fetchPlaceDetails(
     !response.ok
   ){
 
-    console.warn(
-      "PETS & DOGUE Place Details failed:",
-      id,
-      response.status
-    );
+    const message =
+      cleanString(
+        data?.error?.message ||
+        data?.message ||
+        "",
+        1200
+      );
+
+    const error =
+      new Error(
+        message ||
+        (
+          "Google Place Details request failed with status " +
+          response.status
+        )
+      );
+
+    error.status =
+      response.status;
+
+    throw error;
+
+  }
+
+  return data;
+
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE NORMALISATION
+========================================================= */
+
+function normalizeAutocompletePrediction(
+  suggestion
+){
+
+  const prediction =
+    suggestion?.placePrediction;
+
+  if(
+    !prediction
+  ){
 
     return null;
 
   }
 
-  return data;
+  const resourceName =
+    cleanString(
+      prediction.place,
+      800
+    );
+
+  let placeId =
+    cleanString(
+      prediction.placeId,
+      500
+    );
+
+  if(
+    !placeId &&
+    resourceName.startsWith(
+      "places/"
+    )
+  ){
+
+    placeId =
+      resourceName.slice(
+        "places/".length
+      );
+
+  }
+
+  if(
+    !placeId
+  ){
+
+    return null;
+
+  }
+
+  const fullText =
+    cleanString(
+      prediction?.text?.text,
+      800
+    );
+
+  const mainText =
+    cleanString(
+      prediction?.structuredFormat?.mainText?.text,
+      500
+    ) ||
+    fullText;
+
+  const secondaryText =
+    cleanString(
+      prediction?.structuredFormat?.secondaryText?.text,
+      800
+    );
+
+  return {
+
+    placeId,
+
+    place:
+      resourceName ||
+      (
+        "places/" +
+        placeId
+      ),
+
+    name:
+      mainText,
+
+    address:
+      secondaryText,
+
+    text:
+      fullText ||
+      [
+        mainText,
+        secondaryText
+      ]
+        .filter(Boolean)
+        .join(", "),
+
+    types:
+      uniqueStrings(
+        prediction.types
+      ),
+
+    distanceMeters:
+      numberOrNull(
+        prediction.distanceMeters
+      )
+
+  };
+
+}
+
+
+/* =========================================================
+   GOOGLE AUTOCOMPLETE
+========================================================= */
+
+async function fetchAutocomplete(
+  input,
+  options = {}
+){
+
+  const query =
+    cleanString(
+      input,
+      300
+    );
+
+  if(
+    query.length <
+    2
+  ){
+
+    return [];
+
+  }
+
+  const body = {
+
+    input:
+      query,
+
+    includeQueryPredictions:
+      false
+
+  };
+
+  const language =
+    normalizeLanguageCode(
+      options.language
+    );
+
+  const regionCode =
+    normalizeRegionCode(
+      options.regionCode
+    );
+
+  const sessionToken =
+    normalizeSessionToken(
+      options.sessionToken
+    );
+
+  if(
+    language
+  ){
+
+    body.languageCode =
+      language;
+
+  }
+
+  if(
+    regionCode
+  ){
+
+    body.regionCode =
+      regionCode;
+
+  }
+
+  if(
+    sessionToken
+  ){
+
+    body.sessionToken =
+      sessionToken;
+
+  }
+
+  const latitude =
+    numberOrNull(
+      options.latitude
+    );
+
+  const longitude =
+    numberOrNull(
+      options.longitude
+    );
+
+  if(
+    latitude !== null &&
+    longitude !== null &&
+    latitude >= -90 &&
+    latitude <= 90 &&
+    longitude >= -180 &&
+    longitude <= 180
+  ){
+
+    const requestedRadius =
+      numberOrNull(
+        options.radius
+      ) ||
+      AUTOCOMPLETE_RADIUS_DEFAULT;
+
+    const radius =
+      clamp(
+        requestedRadius,
+        AUTOCOMPLETE_RADIUS_MIN,
+        AUTOCOMPLETE_RADIUS_MAX
+      );
+
+    body.locationBias = {
+
+      circle:{
+
+        center:{
+          latitude,
+          longitude
+        },
+
+        radius
+
+      }
+
+    };
+
+  }
+
+  const data =
+    await googlePost(
+      GOOGLE_AUTOCOMPLETE_URL,
+      body,
+      AUTOCOMPLETE_FIELD_MASK
+    );
+
+  return safeArray(
+    data?.suggestions
+  )
+    .map(
+      normalizeAutocompletePrediction
+    )
+    .filter(Boolean)
+    .slice(
+      0,
+      8
+    );
 
 }
 
@@ -1359,10 +1883,6 @@ function mergeRawPlaceData(
       original,
       details
     );
-
-  /*
-  Do not overwrite useful search data with empty detail data.
-  */
 
   [
     "displayName",
@@ -1436,11 +1956,6 @@ async function enrichRawPlaceWithDetails(
     place.photos.length >
     0;
 
-  /*
-  Search already returned photos.
-  Nothing else needed.
-  */
-
   if(
     hasPhotos
   ){
@@ -1494,7 +2009,7 @@ async function enrichRawPlaceWithDetails(
 
 
 /* =========================================================
-   ENRICH A GROUP OF SEARCH RESULTS
+   ENRICH SEARCH RESULTS
 ========================================================= */
 
 async function enrichSearchPlaces(
@@ -1506,30 +2021,19 @@ async function enrichSearchPlaces(
       places
     );
 
-  /*
-  Only places without photos trigger an additional API call.
-  Calls run concurrently for speed.
-  */
+  return Promise.all(
+    values.map(
+      function(place){
 
-  const enriched =
-    await Promise.all(
-      values.map(
-        function(place){
+        return enrichRawPlaceWithDetails(
+          place
+        );
 
-          return enrichRawPlaceWithDetails(
-            place
-          );
+      }
+    )
+  );
 
-        }
-      )
-    );
-
-  return enriched;
-
-}
-
-
-/* =========================================================
+} /* =========================================================
    NEARBY SEARCH
 ========================================================= */
 
@@ -1729,13 +2233,6 @@ async function searchTextCategory(
       data?.places
     );
 
-  /*
-  Text Search frequently returns hotel results without
-  a photos array.
-
-  Place Details enrichment below specifically solves this.
-  */
-
   const enrichedPlaces =
     await enrichSearchPlaces(
       rawPlaces
@@ -1833,7 +2330,7 @@ function haversineKm(
 
 
 /* =========================================================
-   DEDUPLICATION
+   PHOTO CHECK
 ========================================================= */
 
 function placeHasPhoto(
@@ -1855,6 +2352,79 @@ function placeHasPhoto(
 
         }
       )
+    )
+  );
+
+}
+
+
+/* =========================================================
+   DEDUPLICATION HELPERS
+========================================================= */
+
+function normalizePlaceIdentityText(
+  value
+){
+
+  return cleanString(
+    value,
+    600
+  )
+    .toLowerCase()
+    .normalize(
+      "NFKD"
+    )
+    .replace(
+      /[^\p{L}\p{N}]+/gu,
+      ""
+    );
+
+}
+
+
+function fallbackPlaceKey(
+  place
+){
+
+  const lat =
+    numberOrNull(
+      place?.location?.lat
+    );
+
+  const lng =
+    numberOrNull(
+      place?.location?.lng
+    );
+
+  const name =
+    normalizePlaceIdentityText(
+      place?.name
+    );
+
+  if(
+    lat !== null &&
+    lng !== null
+  ){
+
+    return (
+      name +
+      "|" +
+      lat.toFixed(
+        5
+      ) +
+      "|" +
+      lng.toFixed(
+        5
+      )
+    );
+
+  }
+
+  return (
+    name +
+    "|" +
+    normalizePlaceIdentityText(
+      place?.address
     )
   );
 
@@ -1898,6 +2468,10 @@ function mergePlaceRecords(
   let fallback =
     incoming;
 
+  /*
+  Prefer the record that already contains a real photograph.
+  */
+
   if(
     !existingHasPhoto &&
     incomingHasPhoto
@@ -1919,8 +2493,79 @@ function mergePlaceRecords(
     );
 
   /*
-  Explicitly preserve photo arrays from either record.
+  Preserve important fields if the preferred record
+  happens to have an empty value.
   */
+
+  if(
+    !cleanString(
+      merged.name,
+      500
+    )
+  ){
+
+    merged.name =
+      existing.name ||
+      incoming.name ||
+      "";
+
+  }
+
+  if(
+    !cleanString(
+      merged.address,
+      800
+    )
+  ){
+
+    merged.address =
+      existing.address ||
+      incoming.address ||
+      "";
+
+  }
+
+  if(
+    !cleanString(
+      merged.website,
+      2000
+    )
+  ){
+
+    merged.website =
+      existing.website ||
+      incoming.website ||
+      "";
+
+  }
+
+  if(
+    !cleanString(
+      merged.googleMapsUrl,
+      2000
+    )
+  ){
+
+    merged.googleMapsUrl =
+      existing.googleMapsUrl ||
+      incoming.googleMapsUrl ||
+      "";
+
+  }
+
+  if(
+    !cleanString(
+      merged.phone,
+      200
+    )
+  ){
+
+    merged.phone =
+      existing.phone ||
+      incoming.phone ||
+      "";
+
+  }
 
   if(
     !merged.photo
@@ -1951,10 +2596,69 @@ function mergePlaceRecords(
 
   }
 
+  if(
+    numberOrNull(
+      merged.rating
+    ) === null
+  ){
+
+    merged.rating =
+      numberOrNull(
+        existing.rating
+      ) ??
+      numberOrNull(
+        incoming.rating
+      );
+
+  }
+
+  if(
+    !numberOrNull(
+      merged.ratingCount
+    )
+  ){
+
+    merged.ratingCount =
+      numberOrNull(
+        existing.ratingCount
+      ) ||
+      numberOrNull(
+        incoming.ratingCount
+      ) ||
+      0;
+
+  }
+
+  if(
+    !merged.openingHours
+  ){
+
+    merged.openingHours =
+      existing.openingHours ||
+      incoming.openingHours ||
+      null;
+
+  }
+
+  if(
+    !merged.location
+  ){
+
+    merged.location =
+      existing.location ||
+      incoming.location ||
+      null;
+
+  }
+
   return merged;
 
 }
 
+
+/* =========================================================
+   MERGE SEARCH RESULTS
+========================================================= */
 
 function mergePlaces(
   places,
@@ -1971,12 +2675,6 @@ function mergePlaces(
     .filter(Boolean)
     .forEach(
       function(place){
-
-        const id =
-          cleanString(
-            place?.id,
-            600
-          );
 
         const lat =
           numberOrNull(
@@ -1997,26 +2695,19 @@ function mergePlaces(
 
         }
 
-        const fallbackKey =
-          (
-            cleanString(
-              place?.name,
-              500
-            )
-              .toLowerCase() +
-            "|" +
-            lat.toFixed(
-              5
-            ) +
-            "|" +
-            lng.toFixed(
-              5
-            )
+        const providerId =
+          cleanString(
+            place?.providerId ||
+            place?.id,
+            600
           );
 
         const key =
-          id ||
-          fallbackKey;
+          providerId
+            ? "google|" + providerId
+            : "fallback|" + fallbackPlaceKey(
+                place
+              );
 
         if(
           !placeMap.has(
@@ -2033,15 +2724,12 @@ function mergePlaces(
 
         }
 
-        const existing =
-          placeMap.get(
-            key
-          );
-
         placeMap.set(
           key,
           mergePlaceRecords(
-            existing,
+            placeMap.get(
+              key
+            ),
             place
           )
         );
@@ -2082,6 +2770,90 @@ function mergePlaces(
           ) -
           Number(
             b.distance
+          )
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   RESULT SORTING
+========================================================= */
+
+function sortSearchResults(
+  places
+){
+
+  return safeArray(
+    places
+  )
+    .slice()
+    .sort(
+      function(a,b){
+
+        const distanceDifference =
+          Number(
+            a.distance
+          ) -
+          Number(
+            b.distance
+          );
+
+        /*
+        Distance remains the primary signal.
+
+        When places are less than about 750 metres apart,
+        prefer a result with a real Google photograph.
+        */
+
+        if(
+          Math.abs(
+            distanceDifference
+          ) >
+          0.75
+        ){
+
+          return distanceDifference;
+
+        }
+
+        const aPhoto =
+          placeHasPhoto(
+            a
+          )
+            ? 1
+            : 0;
+
+        const bPhoto =
+          placeHasPhoto(
+            b
+          )
+            ? 1
+            : 0;
+
+        if(
+          aPhoto !==
+          bPhoto
+        ){
+
+          return (
+            bPhoto -
+            aPhoto
+          );
+
+        }
+
+        return (
+          Number(
+            b.rating ||
+            0
+          ) -
+          Number(
+            a.rating ||
+            0
           )
         );
 
@@ -2173,8 +2945,8 @@ async function searchOneCategory(
       longitude
     );
 
-  return merged
-    .filter(
+  return sortSearchResults(
+    merged.filter(
       function(place){
 
         return (
@@ -2188,74 +2960,7 @@ async function searchOneCategory(
 
       }
     )
-    .sort(
-      function(a,b){
-
-        /*
-        Primary sort remains distance.
-
-        When two places are close together,
-        prefer the one with a real photograph.
-        */
-
-        const distanceDifference =
-          Number(
-            a.distance
-          ) -
-          Number(
-            b.distance
-          );
-
-        if(
-          Math.abs(
-            distanceDifference
-          ) >
-          0.75
-        ){
-
-          return distanceDifference;
-
-        }
-
-        const aPhoto =
-          placeHasPhoto(
-            a
-          )
-            ? 1
-            : 0;
-
-        const bPhoto =
-          placeHasPhoto(
-            b
-          )
-            ? 1
-            : 0;
-
-        if(
-          aPhoto !==
-          bPhoto
-        ){
-
-          return (
-            bPhoto -
-            aPhoto
-          );
-
-        }
-
-        return (
-          Number(
-            b.rating ||
-            0
-          ) -
-          Number(
-            a.rating ||
-            0
-          )
-        );
-
-      }
-    )
+  )
     .slice(
       0,
       maxResults
@@ -2284,12 +2989,6 @@ async function searchAllCategories(
     "pet-shop",
     "dog-park"
   ];
-
-  /*
-  We intentionally retrieve more than the final number
-  from every category, because the final merged grid should
-  contain varied places with real photographs.
-  */
 
   const perCategory =
     8;
@@ -2336,85 +3035,15 @@ async function searchAllCategories(
       longitude
     );
 
-  /*
-  Nearby places stay first.
+  return sortSearchResults(
+    places
+  )
+    .slice(
+      0,
+      maxResults
+    );
 
-  Inside roughly the same distance zone we give preference
-  to real photographs because PETS & DOGUE uses an editorial
-  image-led grid.
-  */
-
-  places.sort(
-    function(a,b){
-
-      const distanceDifference =
-        Number(
-          a.distance
-        ) -
-        Number(
-          b.distance
-        );
-
-      if(
-        Math.abs(
-          distanceDifference
-        ) >
-        0.75
-      ){
-
-        return distanceDifference;
-
-      }
-
-      const aPhoto =
-        placeHasPhoto(
-          a
-        )
-          ? 1
-          : 0;
-
-      const bPhoto =
-        placeHasPhoto(
-          b
-        )
-          ? 1
-          : 0;
-
-      if(
-        aPhoto !==
-        bPhoto
-      ){
-
-        return (
-          bPhoto -
-          aPhoto
-        );
-
-      }
-
-      return (
-        Number(
-          b.rating ||
-          0
-        ) -
-        Number(
-          a.rating ||
-          0
-        )
-      );
-
-    }
-  );
-
-  return places.slice(
-    0,
-    maxResults
-  );
-
-}
-
-
-/* =========================================================
+} /* =========================================================
    PHOTO RESOURCE VALIDATION
 ========================================================= */
 
@@ -2429,12 +3058,12 @@ function validPhotoResource(
     );
 
   /*
-  Google currently uses resources similar to:
+  Google photo resources currently look similar to:
 
   places/PLACE_ID/photos/PHOTO_REFERENCE
 
-  Do not use an overly strict token regex because Google
-  may change the exact characters used in the resource ID.
+  Keep validation flexible enough for Google resource IDs
+  while preventing malformed paths.
   */
 
   return (
@@ -2477,15 +3106,6 @@ async function fetchGooglePhotoBytes(
     encodeURIComponent(
       width
     );
-
-  /*
-  Preferred method.
-
-  Let Google's media endpoint redirect internally.
-  The server follows it and sends the image bytes to our
-  browser. This is reliable on mobile Chrome/Samsung
-  Internet and does not expose the Google API key.
-  */
 
   const response =
     await fetch(
@@ -2961,6 +3581,296 @@ async function proxyGooglePhoto(
 
 
 /* =========================================================
+   AUTOCOMPLETE REQUEST VALIDATION
+========================================================= */
+
+function readAutocompleteOptions(
+  body
+){
+
+  const latitude =
+    numberOrNull(
+      body.latitude ??
+      body.lat
+    );
+
+  const longitude =
+    numberOrNull(
+      body.longitude ??
+      body.lng
+    );
+
+  let validLatitude =
+    latitude;
+
+  let validLongitude =
+    longitude;
+
+  if(
+    latitude === null ||
+    longitude === null ||
+    latitude < -90 ||
+    latitude > 90 ||
+    longitude < -180 ||
+    longitude > 180
+  ){
+
+    validLatitude =
+      null;
+
+    validLongitude =
+      null;
+
+  }
+
+  const requestedRadius =
+    numberOrNull(
+      body.radius
+    );
+
+  const radius =
+    requestedRadius === null
+      ? AUTOCOMPLETE_RADIUS_DEFAULT
+      : clamp(
+          requestedRadius,
+          AUTOCOMPLETE_RADIUS_MIN,
+          AUTOCOMPLETE_RADIUS_MAX
+        );
+
+  return {
+
+    language:
+      normalizeLanguageCode(
+        body.language ??
+        body.languageCode
+      ),
+
+    regionCode:
+      normalizeRegionCode(
+        body.regionCode ??
+        body.region
+      ),
+
+    sessionToken:
+      normalizeSessionToken(
+        body.sessionToken
+      ),
+
+    latitude:
+      validLatitude,
+
+    longitude:
+      validLongitude,
+
+    radius
+
+  };
+
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE HANDLER
+========================================================= */
+
+async function handleAutocomplete(
+  request,
+  response
+){
+
+  const body =
+    request.body &&
+    typeof request.body ===
+    "object"
+      ? request.body
+      : {};
+
+  const query =
+    cleanString(
+      body.query ??
+      body.input,
+      300
+    );
+
+  if(
+    query.length <
+    2
+  ){
+
+    return response
+      .status(
+        200
+      )
+      .json({
+
+        ok:true,
+
+        source:
+          "google_places_autocomplete",
+
+        suggestions:[]
+
+      });
+
+  }
+
+  const options =
+    readAutocompleteOptions(
+      body
+    );
+
+  const suggestions =
+    await fetchAutocomplete(
+      query,
+      options
+    );
+
+  response.setHeader(
+    "Cache-Control",
+    "private, no-store"
+  );
+
+  return response
+    .status(
+      200
+    )
+    .json({
+
+      ok:true,
+
+      source:
+        "google_places_autocomplete",
+
+      query,
+
+      count:
+        suggestions.length,
+
+      suggestions
+
+    });
+
+}
+
+
+/* =========================================================
+   PLACE DETAILS HANDLER
+========================================================= */
+
+async function handlePlaceDetails(
+  request,
+  response
+){
+
+  const body =
+    request.body &&
+    typeof request.body ===
+    "object"
+      ? request.body
+      : {};
+
+  const placeId =
+    cleanString(
+      body.placeId ??
+      body.id,
+      500
+    );
+
+  if(
+    !placeId
+  ){
+
+    return response
+      .status(
+        400
+      )
+      .json({
+        ok:false,
+        error:
+          "Place ID is required."
+      });
+
+  }
+
+  const details =
+    await fetchPlaceDetails(
+      placeId,
+      {
+
+        language:
+          body.language ??
+          body.languageCode,
+
+        regionCode:
+          body.regionCode ??
+          body.region,
+
+        sessionToken:
+          body.sessionToken
+
+      }
+    );
+
+  if(
+    !details
+  ){
+
+    return response
+      .status(
+        404
+      )
+      .json({
+        ok:false,
+        error:
+          "Google place could not be found."
+      });
+
+  }
+
+  const place =
+    normalizeGooglePlace(
+      request,
+      details,
+      "all"
+    );
+
+  if(
+    !place
+  ){
+
+    return response
+      .status(
+        502
+      )
+      .json({
+        ok:false,
+        error:
+          "Google returned an incomplete place record."
+      });
+
+  }
+
+  response.setHeader(
+    "Cache-Control",
+    "private, no-store"
+  );
+
+  return response
+    .status(
+      200
+    )
+    .json({
+
+      ok:true,
+
+      source:
+        "google_place_details",
+
+      place
+
+    });
+
+} /* =========================================================
    MAIN SEARCH HANDLER
 ========================================================= */
 
@@ -3115,11 +4025,6 @@ async function handleSearch(
         }
       );
 
-  /*
-  Extra photo statistics are useful while this feature is
-  being tested. They do not affect the frontend.
-  */
-
   const photoCount =
     places.filter(
       placeHasPhoto
@@ -3170,6 +4075,93 @@ async function handleSearch(
 
 
 /* =========================================================
+   POST ACTION ROUTER
+========================================================= */
+
+async function handlePost(
+  request,
+  response
+){
+
+  const body =
+    request.body &&
+    typeof request.body ===
+    "object"
+      ? request.body
+      : {};
+
+  const action =
+    cleanString(
+      body.action,
+      80
+    )
+      .toLowerCase();
+
+  /*
+  ---------------------------------------------------------
+  GOOGLE AUTOCOMPLETE
+  ---------------------------------------------------------
+  */
+
+  if(
+    action ===
+    "autocomplete"
+  ){
+
+    return handleAutocomplete(
+      request,
+      response
+    );
+
+  }
+
+
+  /*
+  ---------------------------------------------------------
+  GOOGLE PLACE DETAILS
+  ---------------------------------------------------------
+  */
+
+  if(
+    action ===
+    "details"
+  ){
+
+    return handlePlaceDetails(
+      request,
+      response
+    );
+
+  }
+
+
+  /*
+  ---------------------------------------------------------
+  EXISTING NEARBY SEARCH
+
+  No action is required here.
+
+  This keeps the existing frontend contract working:
+
+  {
+    latitude,
+    longitude,
+    radius,
+    category,
+    maxResults
+  }
+  ---------------------------------------------------------
+  */
+
+  return handleSearch(
+    request,
+    response
+  );
+
+}
+
+
+/* =========================================================
    API HANDLER
 ========================================================= */
 
@@ -3185,7 +4177,9 @@ module.exports =
 
 
     /*
-    CORS preflight
+    =======================================================
+    CORS PREFLIGHT
+    =======================================================
     */
 
     if(
@@ -3203,7 +4197,9 @@ module.exports =
 
 
     /*
-    API KEY
+    =======================================================
+    GOOGLE API KEY
+    =======================================================
     */
 
     if(
@@ -3231,9 +4227,9 @@ module.exports =
 
 
       /*
-      =======================================================
+      =====================================================
       GET PHOTO
-      =======================================================
+      =====================================================
       */
 
       if(
@@ -3251,9 +4247,9 @@ module.exports =
 
 
       /*
-      =======================================================
+      =====================================================
       GET SERVICE STATUS
-      =======================================================
+      =====================================================
       */
 
       if(
@@ -3275,6 +4271,21 @@ module.exports =
             configured:
               true,
 
+            googlePlaces:
+              true,
+
+            nearbySearch:
+              true,
+
+            textSearch:
+              true,
+
+            autocomplete:
+              true,
+
+            placeDetails:
+              true,
+
             placeDetailsPhotoEnrichment:
               true,
 
@@ -3287,9 +4298,16 @@ module.exports =
 
 
       /*
-      =======================================================
-      POST SEARCH
-      =======================================================
+      =====================================================
+      POST
+      =====================================================
+
+      Supported:
+
+      action:"autocomplete"
+      action:"details"
+
+      or the existing nearby/category search request.
       */
 
       if(
@@ -3297,7 +4315,12 @@ module.exports =
         "POST"
       ){
 
-        return await handleSearch(
+        return await handlePost(
+          request,
+          response
+        );
+
+      }         return await handlePost(
           request,
           response
         );
@@ -3306,9 +4329,9 @@ module.exports =
 
 
       /*
-      =======================================================
+      =====================================================
       UNSUPPORTED METHOD
-      =======================================================
+      =====================================================
       */
 
       response.setHeader(
@@ -3344,6 +4367,11 @@ module.exports =
           error?.status
         );
 
+
+      /*
+      Google validation / bad request
+      */
+
       if(
         upstreamStatus ===
         400
@@ -3354,6 +4382,26 @@ module.exports =
 
       }
 
+
+      /*
+      Google resource not found
+      */
+
+      if(
+        upstreamStatus ===
+        404
+      ){
+
+        status =
+          404;
+
+      }
+
+
+      /*
+      Google quota / rate limit
+      */
+
       if(
         upstreamStatus ===
         429
@@ -3363,6 +4411,14 @@ module.exports =
           429;
 
       }
+
+
+      /*
+      Authentication / Google API configuration errors.
+
+      Do not expose Google credentials or internal details
+      to the browser.
+      */
 
       if(
         upstreamStatus ===
@@ -3375,6 +4431,24 @@ module.exports =
           502;
 
       }
+
+
+      /*
+      Other upstream Google errors
+      */
+
+      if(
+        upstreamStatus >=
+          500 &&
+        upstreamStatus <=
+          599
+      ){
+
+        status =
+          502;
+
+      }
+
 
       return response
         .status(
