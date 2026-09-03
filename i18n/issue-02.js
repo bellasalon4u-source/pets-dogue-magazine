@@ -24,7 +24,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "COMING SOON",
       title: "Issue 02 — Autumn 2026",
       description:
-        "The next PETS & DOGUE issue will bring new cover stars, luxury animal stories, pet fashion, wellness, travel and beautiful editorials from around the world."
+        "The next PETS & DOGUE issue will bring new cover stars, luxury animal stories, pet fashion, wellness and beautiful editorials from around the world."
     },
     cover: {
       title: "PETS & DOGUE — ISSUE 02"
@@ -38,7 +38,7 @@ window.PetsDogueTranslations.issue02 = {
         "Pets submitted by readers may be considered for features and editorials.",
       autumnTitle: "🍂 Autumn Luxury",
       autumnDescription:
-        "Seasonal pet fashion, cosy interiors, travel and wellness inspiration."
+        "Seasonal pet fashion, cosy interiors and wellness inspiration."
     },
     cta: {
       submit: "Submit Your Pet",
@@ -76,7 +76,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "НЕЗАБАРОМ",
       title: "Випуск 02 — Осінь 2026",
       description:
-        "Наступний випуск PETS & DOGUE представить нових зірок обкладинки, люксові історії про тварин, моду, добробут, подорожі та красиві редакційні матеріали з усього світу."
+        "Наступний випуск PETS & DOGUE представить нових зірок обкладинки, люксові історії про тварин, моду, добробут і красиві редакційні матеріали з усього світу."
     },
     cover: {
       title: "PETS & DOGUE — ВИПУСК 02"
@@ -90,7 +90,7 @@ window.PetsDogueTranslations.issue02 = {
         "Улюбленці, надіслані читачами, можуть бути відібрані для публікацій і редакційних матеріалів.",
       autumnTitle: "🍂 Осінній люкс",
       autumnDescription:
-        "Сезонна мода для тварин, затишні інтер’єри, подорожі та натхнення для добробуту."
+        "Сезонна мода для тварин, затишні інтер’єри та натхнення для добробуту."
     },
     cta: {
       submit: "Додати свого улюбленця",
@@ -128,7 +128,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "СКОРО",
       title: "Выпуск 02 — Осень 2026",
       description:
-        "Следующий выпуск PETS & DOGUE представит новых звёзд обложки, люксовые истории о животных, моду, благополучие, путешествия и красивые редакционные материалы со всего мира."
+        "Следующий выпуск PETS & DOGUE представит новых звёзд обложки, люксовые истории о животных, моду, благополучие и красивые редакционные материалы со всего мира."
     },
     cover: {
       title: "PETS & DOGUE — ВЫПУСК 02"
@@ -142,7 +142,7 @@ window.PetsDogueTranslations.issue02 = {
         "Питомцы, присланные читателями, могут быть отобраны для публикаций и редакционных материалов.",
       autumnTitle: "🍂 Осенняя роскошь",
       autumnDescription:
-        "Сезонная мода для питомцев, уютные интерьеры, путешествия и вдохновение для благополучия."
+        "Сезонная мода для питомцев, уютные интерьеры и вдохновение для благополучия."
     },
     cta: {
       submit: "Добавить своего питомца",
@@ -180,7 +180,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "BIENTÔT",
       title: "Numéro 02 — Automne 2026",
       description:
-        "Le prochain numéro de PETS & DOGUE présentera de nouvelles stars de couverture, des histoires animales haut de gamme, la mode, le bien-être, les voyages et de magnifiques éditoriaux du monde entier."
+        "Le prochain numéro de PETS & DOGUE présentera de nouvelles stars de couverture, des histoires animales haut de gamme, la mode, le bien-être et de magnifiques éditoriaux du monde entier."
     },
     cover: {
       title: "PETS & DOGUE — NUMÉRO 02"
@@ -194,7 +194,7 @@ window.PetsDogueTranslations.issue02 = {
         "Les animaux proposés par les lecteurs pourront être sélectionnés pour des articles et éditoriaux.",
       autumnTitle: "🍂 Luxe d’automne",
       autumnDescription:
-        "Mode saisonnière, intérieurs chaleureux, voyages et inspiration bien-être."
+        "Mode saisonnière, intérieurs chaleureux et inspiration bien-être."
     },
     cta: {
       submit: "Proposer votre animal",
@@ -232,7 +232,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "DEMNÄCHST",
       title: "Ausgabe 02 — Herbst 2026",
       description:
-        "Die nächste PETS & DOGUE-Ausgabe bringt neue Coverstars, luxuriöse Tiergeschichten, Mode, Wohlbefinden, Reisen und wunderschöne Editorials aus aller Welt."
+        "Die nächste PETS & DOGUE-Ausgabe bringt neue Coverstars, luxuriöse Tiergeschichten, Mode, Wohlbefinden und wunderschöne Editorials aus aller Welt."
     },
     cover: {
       title: "PETS & DOGUE — AUSGABE 02"
@@ -246,7 +246,7 @@ window.PetsDogueTranslations.issue02 = {
         "Von Lesern eingereichte Tiere können für Beiträge und Editorials ausgewählt werden.",
       autumnTitle: "🍂 Herbstlicher Luxus",
       autumnDescription:
-        "Saisonale Tiermode, gemütliche Interieurs, Reisen und Wellness-Inspiration."
+        "Saisonale Tiermode, gemütliche Interieurs und Wellness-Inspiration."
     },
     cta: {
       submit: "Tier einreichen",
@@ -284,7 +284,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "PRÓXIMAMENTE",
       title: "Número 02 — Otoño 2026",
       description:
-        "El próximo número de PETS & DOGUE traerá nuevas estrellas de portada, historias de lujo sobre animales, moda, bienestar, viajes y bellos editoriales de todo el mundo."
+        "El próximo número de PETS & DOGUE traerá nuevas estrellas de portada, historias de lujo sobre animales, moda, bienestar y bellos editoriales de todo el mundo."
     },
     cover: {
       title: "PETS & DOGUE — NÚMERO 02"
@@ -298,7 +298,7 @@ window.PetsDogueTranslations.issue02 = {
         "Las mascotas enviadas por los lectores podrán ser consideradas para reportajes y editoriales.",
       autumnTitle: "🍂 Lujo de otoño",
       autumnDescription:
-        "Moda estacional para mascotas, interiores acogedores, viajes e inspiración de bienestar."
+        "Moda estacional para mascotas, interiores acogedores e inspiración de bienestar."
     },
     cta: {
       submit: "Envía tu mascota",
@@ -313,7 +313,7 @@ window.PetsDogueTranslations.issue02 = {
       contact: "Contacto",
       advertise: "Publicidad"
     }
-  }   ,
+  },
 
   it: {
     meta: {
@@ -336,7 +336,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "IN ARRIVO",
       title: "Numero 02 — Autunno 2026",
       description:
-        "Il prossimo numero di PETS & DOGUE presenterà nuove star di copertina, storie luxury sugli animali, moda, benessere, viaggi e splendidi editoriali da tutto il mondo."
+        "Il prossimo numero di PETS & DOGUE presenterà nuove star di copertina, storie luxury sugli animali, moda, benessere e splendidi editoriali da tutto il mondo."
     },
     cover: {
       title: "PETS & DOGUE — NUMERO 02"
@@ -350,7 +350,7 @@ window.PetsDogueTranslations.issue02 = {
         "Gli animali inviati dai lettori potranno essere selezionati per articoli ed editoriali.",
       autumnTitle: "🍂 Lusso d’autunno",
       autumnDescription:
-        "Moda stagionale per animali, interni accoglienti, viaggi e ispirazione wellness."
+        "Moda stagionale per animali, interni accoglienti e ispirazione wellness."
     },
     cta: {
       submit: "Invia il tuo pet",
@@ -388,7 +388,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "EM BREVE",
       title: "Edição 02 — Outono 2026",
       description:
-        "A próxima edição da PETS & DOGUE trará novas estrelas de capa, histórias de luxo sobre animais, moda, bem-estar, viagens e belos editoriais de todo o mundo."
+        "A próxima edição da PETS & DOGUE trará novas estrelas de capa, histórias de luxo sobre animais, moda, bem-estar e belos editoriais de todo o mundo."
     },
     cover: {
       title: "PETS & DOGUE — EDIÇÃO 02"
@@ -402,7 +402,7 @@ window.PetsDogueTranslations.issue02 = {
         "Animais enviados pelos leitores poderão ser considerados para reportagens e editoriais.",
       autumnTitle: "🍂 Luxo de outono",
       autumnDescription:
-        "Moda sazonal para animais, interiores acolhedores, viagens e inspiração de bem-estar."
+        "Moda sazonal para animais, interiores acolhedores e inspiração de bem-estar."
     },
     cta: {
       submit: "Envie o seu animal",
@@ -440,7 +440,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "BINNENKORT",
       title: "Editie 02 — Herfst 2026",
       description:
-        "De volgende PETS & DOGUE-editie brengt nieuwe coversterren, luxe dierenverhalen, mode, welzijn, reizen en prachtige editorials uit de hele wereld."
+        "De volgende PETS & DOGUE-editie brengt nieuwe coversterren, luxe dierenverhalen, mode, welzijn en prachtige editorials uit de hele wereld."
     },
     cover: {
       title: "PETS & DOGUE — EDITIE 02"
@@ -454,7 +454,7 @@ window.PetsDogueTranslations.issue02 = {
         "Door lezers ingezonden huisdieren kunnen worden geselecteerd voor artikelen en editorials.",
       autumnTitle: "🍂 Herfstluxe",
       autumnDescription:
-        "Seizoensmode voor huisdieren, gezellige interieurs, reizen en wellness-inspiratie."
+        "Seizoensmode voor huisdieren, gezellige interieurs en wellness-inspiratie."
     },
     cta: {
       submit: "Stuur je huisdier in",
@@ -492,7 +492,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "JUŻ WKRÓTCE",
       title: "Wydanie 02 — Jesień 2026",
       description:
-        "Kolejne wydanie PETS & DOGUE przyniesie nowe gwiazdy okładki, luksusowe historie o zwierzętach, modę, dobrostan, podróże i piękne materiały redakcyjne z całego świata."
+        "Kolejne wydanie PETS & DOGUE przyniesie nowe gwiazdy okładki, luksusowe historie o zwierzętach, modę, dobrostan i piękne materiały redakcyjne z całego świata."
     },
     cover: {
       title: "PETS & DOGUE — WYDANIE 02"
@@ -506,7 +506,7 @@ window.PetsDogueTranslations.issue02 = {
         "Pupile zgłoszone przez czytelników mogą zostać wybrane do artykułów i sesji redakcyjnych.",
       autumnTitle: "🍂 Jesienny luksus",
       autumnDescription:
-        "Sezonowa moda dla zwierząt, przytulne wnętrza, podróże i inspiracje wellness."
+        "Sezonowa moda dla zwierząt, przytulne wnętrza i inspiracje wellness."
     },
     cta: {
       submit: "Zgłoś swojego pupila",
@@ -544,7 +544,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "JIŽ BRZY",
       title: "Vydání 02 — Podzim 2026",
       description:
-        "Další vydání PETS & DOGUE přinese nové hvězdy obálky, luxusní příběhy o zvířatech, módu, pohodu, cestování a krásné editorialy z celého světa."
+        "Další vydání PETS & DOGUE přinese nové hvězdy obálky, luxusní příběhy o zvířatech, módu, pohodu a krásné editorialy z celého světa."
     },
     cover: {
       title: "PETS & DOGUE — VYDÁNÍ 02"
@@ -558,7 +558,7 @@ window.PetsDogueTranslations.issue02 = {
         "Mazlíčci zaslaní čtenáři mohou být vybráni pro články a editorialy.",
       autumnTitle: "🍂 Podzimní luxus",
       autumnDescription:
-        "Sezónní zvířecí móda, útulné interiéry, cestování a inspirace pro pohodu."
+        "Sezónní zvířecí móda, útulné interiéry a inspirace pro pohodu."
     },
     cta: {
       submit: "Přidat svého mazlíčka",
@@ -596,7 +596,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "UŽ ČOSKORO",
       title: "Vydanie 02 — Jeseň 2026",
       description:
-        "Ďalšie vydanie PETS & DOGUE prinesie nové hviezdy obálky, luxusné príbehy o zvieratách, módu, pohodu, cestovanie a krásne editorialy z celého sveta."
+        "Ďalšie vydanie PETS & DOGUE prinesie nové hviezdy obálky, luxusné príbehy o zvieratách, módu, pohodu a krásne editorialy z celého sveta."
     },
     cover: {
       title: "PETS & DOGUE — VYDANIE 02"
@@ -610,7 +610,7 @@ window.PetsDogueTranslations.issue02 = {
         "Miláčikovia zaslaní čitateľmi môžu byť vybraní do článkov a editorialov.",
       autumnTitle: "🍂 Jesenný luxus",
       autumnDescription:
-        "Sezónna móda pre zvieratá, útulné interiéry, cestovanie a wellness inšpirácia."
+        "Sezónna móda pre zvieratá, útulné interiéry a wellness inšpirácia."
     },
     cta: {
       submit: "Pridať svojho miláčika",
@@ -625,7 +625,7 @@ window.PetsDogueTranslations.issue02 = {
       contact: "Kontakt",
       advertise: "Reklama"
     }
-  }   ,
+  },
 
   hu: {
     meta: {
@@ -648,7 +648,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "HAMAROSAN",
       title: "02. kiadás — 2026 ősz",
       description:
-        "A PETS & DOGUE következő kiadása új címlapsztárokat, luxus állattörténeteket, divatot, jóllétet, utazást és gyönyörű nemzetközi editorialokat hoz."
+        "A PETS & DOGUE következő kiadása új címlapsztárokat, luxus állattörténeteket, divatot, jóllétet és gyönyörű nemzetközi editorialokat hoz."
     },
     cover: {
       title: "PETS & DOGUE — 02. KIADÁS"
@@ -662,7 +662,7 @@ window.PetsDogueTranslations.issue02 = {
         "Az olvasók által beküldött kedvencek megjelenhetnek cikkekben és editorialokban.",
       autumnTitle: "🍂 Őszi luxus",
       autumnDescription:
-        "Szezonális állatdivat, meghitt enteriőrök, utazás és jólléti inspiráció."
+        "Szezonális állatdivat, meghitt enteriőrök és jólléti inspiráció."
     },
     cta: {
       submit: "Küldje be kedvencét",
@@ -700,7 +700,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "ÎN CURÂND",
       title: "Ediția 02 — Toamna 2026",
       description:
-        "Următoarea ediție PETS & DOGUE va aduce noi vedete de copertă, povești de lux despre animale, modă, bunăstare, călătorii și editoriale frumoase din întreaga lume."
+        "Următoarea ediție PETS & DOGUE va aduce noi vedete de copertă, povești de lux despre animale, modă, bunăstare și editoriale frumoase din întreaga lume."
     },
     cover: {
       title: "PETS & DOGUE — EDIȚIA 02"
@@ -714,7 +714,7 @@ window.PetsDogueTranslations.issue02 = {
         "Animalele trimise de cititori pot fi selectate pentru articole și editoriale.",
       autumnTitle: "🍂 Lux de toamnă",
       autumnDescription:
-        "Modă sezonieră pentru animale, interioare confortabile, călătorii și inspirație pentru bunăstare."
+        "Modă sezonieră pentru animale, interioare confortabile și inspirație pentru bunăstare."
     },
     cta: {
       submit: "Înscrie animalul tău",
@@ -752,7 +752,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "ОЧАКВАЙТЕ СКОРО",
       title: "Брой 02 — Есен 2026",
       description:
-        "Следващият брой на PETS & DOGUE ще представи нови звезди на корицата, луксозни истории за животни, мода, благополучие, пътувания и красиви редакционни материали от цял свят."
+        "Следващият брой на PETS & DOGUE ще представи нови звезди на корицата, луксозни истории за животни, мода, благополучие и красиви редакционни материали от цял свят."
     },
     cover: {
       title: "PETS & DOGUE — БРОЙ 02"
@@ -766,7 +766,7 @@ window.PetsDogueTranslations.issue02 = {
         "Любимци, изпратени от читатели, могат да бъдат избрани за публикации и редакционни материали.",
       autumnTitle: "🍂 Есенен лукс",
       autumnDescription:
-        "Сезонна мода за животни, уютни интериори, пътувания и вдъхновение за благополучие."
+        "Сезонна мода за животни, уютни интериори и вдъхновение за благополучие."
     },
     cta: {
       submit: "Добави своя любимец",
@@ -804,7 +804,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "ΣΥΝΤΟΜΑ",
       title: "Τεύχος 02 — Φθινόπωρο 2026",
       description:
-        "Το επόμενο τεύχος του PETS & DOGUE θα παρουσιάσει νέα αστέρια εξωφύλλου, πολυτελείς ιστορίες ζώων, μόδα, ευεξία, ταξίδια και όμορφα editorial από όλο τον κόσμο."
+        "Το επόμενο τεύχος του PETS & DOGUE θα παρουσιάσει νέα αστέρια εξωφύλλου, πολυτελείς ιστορίες ζώων, μόδα, ευεξία και όμορφα editorial από όλο τον κόσμο."
     },
     cover: {
       title: "PETS & DOGUE — ΤΕΥΧΟΣ 02"
@@ -818,7 +818,7 @@ window.PetsDogueTranslations.issue02 = {
         "Κατοικίδια που υποβάλλονται από αναγνώστες μπορεί να επιλεγούν για άρθρα και editorial.",
       autumnTitle: "🍂 Φθινοπωρινή πολυτέλεια",
       autumnDescription:
-        "Εποχιακή μόδα για ζώα, ζεστοί εσωτερικοί χώροι, ταξίδια και έμπνευση ευεξίας."
+        "Εποχιακή μόδα για ζώα, ζεστοί εσωτερικοί χώροι και έμπνευση ευεξίας."
     },
     cta: {
       submit: "Υποβάλετε το κατοικίδιό σας",
@@ -856,7 +856,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "KOMMER SNART",
       title: "Utgåva 02 — Hösten 2026",
       description:
-        "Nästa PETS & DOGUE-utgåva kommer med nya omslagsstjärnor, lyxiga djurberättelser, mode, välmående, resor och vackra editorial från hela världen."
+        "Nästa PETS & DOGUE-utgåva kommer med nya omslagsstjärnor, lyxiga djurberättelser, mode, välmående och vackra editorial från hela världen."
     },
     cover: {
       title: "PETS & DOGUE — UTGÅVA 02"
@@ -870,7 +870,7 @@ window.PetsDogueTranslations.issue02 = {
         "Djur som skickas in av läsare kan väljas ut till reportage och editorial.",
       autumnTitle: "🍂 Höstlyx",
       autumnDescription:
-        "Säsongsmode för djur, mysiga interiörer, resor och inspiration för välmående."
+        "Säsongsmode för djur, mysiga interiörer och inspiration för välmående."
     },
     cta: {
       submit: "Skicka in ditt djur",
@@ -908,7 +908,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "KOMMER SNART",
       title: "Udgave 02 — Efterår 2026",
       description:
-        "Næste PETS & DOGUE-udgave vil bringe nye forsidestjerner, luksuriøse dyrehistorier, mode, velvære, rejser og smukke editorials fra hele verden."
+        "Næste PETS & DOGUE-udgave vil bringe nye forsidestjerner, luksuriøse dyrehistorier, mode, velvære og smukke editorials fra hele verden."
     },
     cover: {
       title: "PETS & DOGUE — UDGAVE 02"
@@ -922,7 +922,7 @@ window.PetsDogueTranslations.issue02 = {
         "Kæledyr indsendt af læsere kan blive udvalgt til artikler og editorials.",
       autumnTitle: "🍂 Efterårsluksus",
       autumnDescription:
-        "Sæsonmode til dyr, hyggelige interiører, rejser og inspiration til velvære."
+        "Sæsonmode til dyr, hyggelige interiører og inspiration til velvære."
     },
     cta: {
       submit: "Indsend dit kæledyr",
@@ -937,7 +937,7 @@ window.PetsDogueTranslations.issue02 = {
       contact: "Kontakt",
       advertise: "Annoncer"
     }
-  }   ,
+  },
 
   no: {
     meta: {
@@ -960,7 +960,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "KOMMER SNART",
       title: "Utgave 02 — Høsten 2026",
       description:
-        "Neste PETS & DOGUE-utgave vil bringe nye forsidestjerner, luksuriøse dyrehistorier, mote, velvære, reiser og vakre redaksjonelle historier fra hele verden."
+        "Neste PETS & DOGUE-utgave vil bringe nye forsidestjerner, luksuriøse dyrehistorier, mote, velvære og vakre redaksjonelle historier fra hele verden."
     },
     cover: {
       title: "PETS & DOGUE — UTGAVE 02"
@@ -974,7 +974,7 @@ window.PetsDogueTranslations.issue02 = {
         "Kjæledyr sendt inn av leserne kan bli valgt til artikler og redaksjonelle saker.",
       autumnTitle: "🍂 Høstluksus",
       autumnDescription:
-        "Sesongmote for dyr, lune interiører, reiser og inspirasjon til velvære."
+        "Sesongmote for dyr, lune interiører og inspirasjon til velvære."
     },
     cta: {
       submit: "Send inn kjæledyret ditt",
@@ -1012,7 +1012,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "TULOSSA PIAN",
       title: "Numero 02 — Syksy 2026",
       description:
-        "Seuraava PETS & DOGUE -numero tuo uusia kansitähtiä, ylellisiä eläintarinoita, muotia, hyvinvointia, matkailua ja kauniita toimituksellisia kokonaisuuksia eri puolilta maailmaa."
+        "Seuraava PETS & DOGUE -numero tuo uusia kansitähtiä, ylellisiä eläintarinoita, muotia, hyvinvointia ja kauniita toimituksellisia kokonaisuuksia eri puolilta maailmaa."
     },
     cover: {
       title: "PETS & DOGUE — NUMERO 02"
@@ -1026,7 +1026,7 @@ window.PetsDogueTranslations.issue02 = {
         "Lukijoiden lähettämiä lemmikkejä voidaan valita juttuihin ja toimituksellisiin kuvauksiin.",
       autumnTitle: "🍂 Syksyn luksus",
       autumnDescription:
-        "Sesongin lemmikkimuotia, viihtyisiä sisustuksia, matkailua ja hyvinvointi-inspiraatiota."
+        "Sesongin lemmikkimuotia, viihtyisiä sisustuksia ja hyvinvointi-inspiraatiota."
     },
     cta: {
       submit: "Lähetä lemmikkisi",
@@ -1064,7 +1064,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "YAKINDA",
       title: "Sayı 02 — Sonbahar 2026",
       description:
-        "Bir sonraki PETS & DOGUE sayısı yeni kapak yıldızları, lüks hayvan hikâyeleri, moda, sağlık, seyahat ve dünyanın dört bir yanından güzel editoryal içerikler sunacak."
+        "Bir sonraki PETS & DOGUE sayısı yeni kapak yıldızları, lüks hayvan hikâyeleri, moda, sağlık ve dünyanın dört bir yanından güzel editoryal içerikler sunacak."
     },
     cover: {
       title: "PETS & DOGUE — SAYI 02"
@@ -1078,7 +1078,7 @@ window.PetsDogueTranslations.issue02 = {
         "Okuyucuların gönderdiği evcil hayvanlar özel içerikler ve editoryal çalışmalar için değerlendirilebilir.",
       autumnTitle: "🍂 Sonbahar lüksü",
       autumnDescription:
-        "Mevsimlik evcil hayvan modası, rahat iç mekânlar, seyahat ve sağlık ilhamı."
+        "Mevsimlik evcil hayvan modası, rahat iç mekânlar ve sağlık ilhamı."
     },
     cta: {
       submit: "Evcil hayvanını gönder",
@@ -1116,7 +1116,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "قريبًا",
       title: "العدد 02 — خريف 2026",
       description:
-        "سيقدم العدد القادم من PETS & DOGUE نجوم غلاف جددًا وقصصًا فاخرة عن الحيوانات والموضة والعافية والسفر ومواد تحريرية جميلة من جميع أنحاء العالم."
+        "سيقدم العدد القادم من PETS & DOGUE نجوم غلاف جددًا وقصصًا فاخرة عن الحيوانات والموضة والعافية ومواد تحريرية جميلة من جميع أنحاء العالم."
     },
     cover: {
       title: "PETS & DOGUE — العدد 02"
@@ -1130,7 +1130,7 @@ window.PetsDogueTranslations.issue02 = {
         "قد يتم اختيار الحيوانات التي يرسلها القراء للظهور في القصص والمواد التحريرية.",
       autumnTitle: "🍂 فخامة الخريف",
       autumnDescription:
-        "موضة موسمية للحيوانات وديكورات دافئة وسفر وإلهام للعافية."
+        "موضة موسمية للحيوانات وديكورات دافئة وإلهام للعافية."
     },
     cta: {
       submit: "أرسل حيوانك الأليف",
@@ -1168,7 +1168,7 @@ window.PetsDogueTranslations.issue02 = {
       label: "जल्द आ रहा है",
       title: "अंक 02 — शरद 2026",
       description:
-        "PETS & DOGUE का अगला अंक नए कवर स्टार्स, लक्ज़री पशु कहानियाँ, पेट फैशन, वेलनेस, यात्रा और दुनिया भर से खूबसूरत संपादकीय सामग्री लेकर आएगा।"
+        "PETS & DOGUE का अगला अंक नए कवर स्टार्स, लक्ज़री पशु कहानियाँ, पेट फैशन, वेलनेस और दुनिया भर से खूबसूरत संपादकीय सामग्री लेकर आएगा।"
     },
     cover: {
       title: "PETS & DOGUE — अंक 02"
@@ -1182,7 +1182,7 @@ window.PetsDogueTranslations.issue02 = {
         "पाठकों द्वारा भेजे गए पेट्स को फीचर और संपादकीय सामग्री के लिए चुना जा सकता है।",
       autumnTitle: "🍂 शरद की लक्ज़री",
       autumnDescription:
-        "मौसमी पेट फैशन, आरामदायक इंटीरियर, यात्रा और वेलनेस प्रेरणा।"
+        "मौसमी पेट फैशन, आरामदायक इंटीरियर और वेलनेस प्रेरणा।"
     },
     cta: {
       submit: "अपना पेट भेजें",
