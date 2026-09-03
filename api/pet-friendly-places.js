@@ -411,11 +411,6 @@ function normalizeLanguageCode(
 
   }
 
-  /*
-  PETS & DOGUE currently uses simple language codes,
-  all of which are valid BCP-47 language tags.
-  */
-
   if(
     !/^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/i.test(
       language
@@ -475,13 +470,6 @@ function normalizeSessionToken(
 
   }
 
-  /*
-  Keep the token opaque.
-
-  We only remove control characters before passing it
-  to Google.
-  */
-
   return token.replace(
     /[\u0000-\u001F\u007F]/g,
     ""
@@ -513,16 +501,6 @@ function getPhotoProxyUrl(
     return "";
 
   }
-
-  /*
-  Always prefer a relative URL.
-
-  This is safe across:
-  - production domain
-  - Vercel previews
-  - custom domain
-  - www / non-www
-  */
 
   return (
     "/api/pet-friendly-places?photo=" +
@@ -716,11 +694,6 @@ function detectCategoryFromTypes(
       place
     );
 
-
-  /*
-  VETERINARY
-  */
-
   if(
     hasExactType(
       types,
@@ -736,11 +709,6 @@ function detectCategoryFromTypes(
 
   }
 
-
-  /*
-  PET SHOP
-  */
-
   if(
     hasExactType(
       types,
@@ -755,11 +723,6 @@ function detectCategoryFromTypes(
 
   }
 
-
-  /*
-  DOG PARK
-  */
-
   if(
     hasExactType(
       types,
@@ -773,11 +736,6 @@ function detectCategoryFromTypes(
 
   }
 
-
-  /*
-  BEACH
-  */
-
   if(
     hasExactType(
       types,
@@ -790,11 +748,6 @@ function detectCategoryFromTypes(
     return "beach";
 
   }
-
-
-  /*
-  HOTEL
-  */
 
   if(
     hasExactType(
@@ -819,11 +772,6 @@ function detectCategoryFromTypes(
 
   }
 
-
-  /*
-  RESTAURANT
-  */
-
   if(
     hasExactType(
       types,
@@ -845,11 +793,6 @@ function detectCategoryFromTypes(
 
   }
 
-
-  /*
-  CAFE
-  */
-
   if(
     hasExactType(
       types,
@@ -870,11 +813,6 @@ function detectCategoryFromTypes(
 
   }
 
-
-  /*
-  PARK
-  */
-
   if(
     hasExactType(
       types,
@@ -888,11 +826,6 @@ function detectCategoryFromTypes(
 
   }
 
-
-  /*
-  EVENT
-  */
-
   if(
     hasExactType(
       types,
@@ -905,7 +838,6 @@ function detectCategoryFromTypes(
     return "events";
 
   }
-
 
   return "other";
 
@@ -1066,34 +998,45 @@ function getPhotos(
 }
 
 
-function getPrimaryPhoto(
-  request,
-  place
-){
-
-  const photos =
-    getPhotos(
-      request,
-      place
-    );
-
-  return photos.length
-    ? photos[0]
-    : null;
-
-}
-
-
 /* =========================================================
    PET-FRIENDLY DETECTION
 ========================================================= */
+
+function getExplicitDogAccess(
+  place
+){
+
+  if(
+    place?.allowsDogs ===
+    true
+  ){
+
+    return true;
+
+  }
+
+  if(
+    place?.allowsDogs ===
+    false
+  ){
+
+    return false;
+
+  }
+
+  return null;
+
+}
+
 
 function isExplicitlyDogFriendly(
   place
 ){
 
   return (
-    place?.allowsDogs ===
+    getExplicitDogAccess(
+      place
+    ) ===
     true
   );
 
@@ -1197,10 +1140,18 @@ function normalizeGooglePlace(
       ? photos[0]
       : null;
 
-  const explicitDogFriendly =
-    isExplicitlyDogFriendly(
+  const explicitDogAccess =
+    getExplicitDogAccess(
       place
     );
+
+  const explicitDogFriendly =
+    explicitDogAccess ===
+    true;
+
+  const explicitDogNotFriendly =
+    explicitDogAccess ===
+    false;
 
   const naturallyPetRelevant =
     categoryNaturallyPetRelevant(
@@ -1208,8 +1159,13 @@ function normalizeGooglePlace(
     );
 
   const petFriendly =
-    explicitDogFriendly ||
-    naturallyPetRelevant;
+    explicitDogFriendly
+      ? true
+      : explicitDogNotFriendly
+        ? false
+        : naturallyPetRelevant
+          ? true
+          : null;
 
   return {
 
@@ -1307,7 +1263,7 @@ function normalizeGooglePlace(
       ),
 
     allowsDogs:
-      explicitDogFriendly,
+      explicitDogAccess,
 
     photo,
 
@@ -1319,14 +1275,17 @@ function normalizeGooglePlace(
         petFriendly,
 
       verified:
-        explicitDogFriendly,
+        explicitDogAccess !==
+        null,
 
       source:
         explicitDogFriendly
           ? "google_allows_dogs"
-          : naturallyPetRelevant
-            ? "google_place_type"
-            : "google_search"
+          : explicitDogNotFriendly
+            ? "google_disallows_dogs"
+            : naturallyPetRelevant
+              ? "google_place_type"
+              : "google_search"
 
     }
 
@@ -2474,10 +2433,6 @@ function mergePlaceRecords(
   let fallback =
     incoming;
 
-  /*
-  Prefer the record that already contains a real photograph.
-  */
-
   if(
     !existingHasPhoto &&
     incomingHasPhoto
@@ -2497,11 +2452,6 @@ function mergePlaceRecords(
       fallback,
       preferred
     );
-
-  /*
-  Preserve important fields if the preferred record
-  happens to have an empty value.
-  */
 
   if(
     !cleanString(
@@ -2808,13 +2758,6 @@ function sortSearchResults(
             b.distance
           );
 
-        /*
-        Distance remains the primary signal.
-
-        When places are less than about 750 metres apart,
-        prefer a result with a real Google photograph.
-        */
-
         if(
           Math.abs(
             distanceDifference
@@ -3065,15 +3008,6 @@ function validPhotoResource(
       value,
       1600
     );
-
-  /*
-  Google photo resources currently look similar to:
-
-  places/PLACE_ID/photos/PHOTO_REFERENCE
-
-  Keep validation flexible enough for Google resource IDs
-  while preventing malformed paths.
-  */
 
   return (
     photoName.startsWith(
@@ -3481,11 +3415,6 @@ async function proxyGooglePhoto(
   let image =
     null;
 
-  /*
-  Attempt 1:
-  Direct Google media request.
-  */
-
   try{
 
     image =
@@ -3505,11 +3434,6 @@ async function proxyGooglePhoto(
       directError?.message ||
       directError
     );
-
-    /*
-    Attempt 2:
-    Google metadata -> temporary photoUri.
-    */
 
     try{
 
@@ -4014,10 +3938,6 @@ async function handleSearch(
 
   }
 
-  /*
-  Never send broken coordinate records to the browser.
-  */
-
   places =
     safeArray(
       places
@@ -4109,12 +4029,6 @@ async function handlePost(
     )
       .toLowerCase();
 
-  /*
-  ---------------------------------------------------------
-  GOOGLE AUTOCOMPLETE
-  ---------------------------------------------------------
-  */
-
   if(
     action ===
     "autocomplete"
@@ -4127,13 +4041,6 @@ async function handlePost(
 
   }
 
-
-  /*
-  ---------------------------------------------------------
-  GOOGLE PLACE DETAILS
-  ---------------------------------------------------------
-  */
-
   if(
     action ===
     "details"
@@ -4145,25 +4052,6 @@ async function handlePost(
     );
 
   }
-
-
-  /*
-  ---------------------------------------------------------
-  EXISTING NEARBY SEARCH
-
-  No action is required here.
-
-  This keeps the existing frontend contract working:
-
-  {
-    latitude,
-    longitude,
-    radius,
-    category,
-    maxResults
-  }
-  ---------------------------------------------------------
-  */
 
   return handleSearch(
     request,
@@ -4187,13 +4075,6 @@ module.exports =
       response
     );
 
-
-    /*
-    =======================================================
-    CORS PREFLIGHT
-    =======================================================
-    */
-
     if(
       request.method ===
       "OPTIONS"
@@ -4206,13 +4087,6 @@ module.exports =
         .end();
 
     }
-
-
-    /*
-    =======================================================
-    GOOGLE API KEY
-    =======================================================
-    */
 
     if(
       !GOOGLE_API_KEY
@@ -4234,15 +4108,7 @@ module.exports =
 
     }
 
-
     try{
-
-
-      /*
-      =====================================================
-      GET PHOTO
-      =====================================================
-      */
 
       if(
         request.method ===
@@ -4256,13 +4122,6 @@ module.exports =
         );
 
       }
-
-
-      /*
-      =====================================================
-      GET SERVICE STATUS
-      =====================================================
-      */
 
       if(
         request.method ===
@@ -4308,20 +4167,6 @@ module.exports =
 
       }
 
-
-      /*
-      =====================================================
-      POST
-      =====================================================
-
-      Supported:
-
-      action:"autocomplete"
-      action:"details"
-
-      or the existing nearby/category search request.
-      */
-
       if(
         request.method ===
         "POST"
@@ -4333,13 +4178,6 @@ module.exports =
         );
 
       }
-
-
-      /*
-      =====================================================
-      UNSUPPORTED METHOD
-      =====================================================
-      */
 
       response.setHeader(
         "Allow",
@@ -4355,7 +4193,6 @@ module.exports =
           error:
             "Method not allowed."
         });
-
 
     }catch(
       error
@@ -4374,11 +4211,6 @@ module.exports =
           error?.status
         );
 
-
-      /*
-      Google validation / bad request
-      */
-
       if(
         upstreamStatus ===
         400
@@ -4388,11 +4220,6 @@ module.exports =
           400;
 
       }
-
-
-      /*
-      Google resource not found
-      */
 
       if(
         upstreamStatus ===
@@ -4404,11 +4231,6 @@ module.exports =
 
       }
 
-
-      /*
-      Google quota / rate limit
-      */
-
       if(
         upstreamStatus ===
         429
@@ -4418,14 +4240,6 @@ module.exports =
           429;
 
       }
-
-
-      /*
-      Authentication / Google API configuration errors.
-
-      Do not expose Google credentials or internal details
-      to the browser.
-      */
 
       if(
         upstreamStatus ===
@@ -4439,11 +4253,6 @@ module.exports =
 
       }
 
-
-      /*
-      Other upstream Google errors
-      */
-
       if(
         upstreamStatus >=
           500 &&
@@ -4455,7 +4264,6 @@ module.exports =
           502;
 
       }
-
 
       return response
         .status(
