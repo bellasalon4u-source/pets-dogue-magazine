@@ -13,7 +13,8 @@ window.PetsDogueTranslations.about = {
       home: "Home",
       latestIssue: "Latest Issue",
       archive: "Archive",
-      about: "About"
+      about: "About",
+      advertise: "Advertise"
     },
     hero: {
       title: "About PETS & DOGUE",
@@ -25,7 +26,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE was created with one simple idea: animals deserve the same admiration, attention and elegance that the fashion world gives to people.",
       p2:
-        "Every issue showcases extraordinary pets, beautiful photography, inspiring stories, travel, wellness and luxury lifestyle."
+        "Every issue showcases extraordinary pets, beautiful photography, inspiring stories, wellness, style and responsible luxury."
     },
     mission: {
       title: "Our Mission",
@@ -37,7 +38,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "Advertising opportunities, partnerships and editorial collaborations will be available through PETS & DOGUE.",
       p2:
-        "Future editions will feature exclusive interviews, international cover stars and luxury pet destinations."
+        "Future editions will feature exclusive interviews, international cover stars, exceptional animal stories and inspiring global communities."
     }
   },
 
@@ -51,7 +52,8 @@ window.PetsDogueTranslations.about = {
       home: "Головна",
       latestIssue: "Останній випуск",
       archive: "Архів",
-      about: "Про нас"
+      about: "Про нас",
+      advertise: "Реклама"
     },
     hero: {
       title: "Про PETS & DOGUE",
@@ -63,7 +65,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE був створений з однією простою ідеєю: тварини заслуговують на таке саме захоплення, увагу та елегантність, які світ моди дарує людям.",
       p2:
-        "Кожен випуск представляє надзвичайних улюбленців, красиву фотографію, надихаючі історії, подорожі, добробут і люксовий стиль життя."
+        "Кожен випуск представляє надзвичайних улюбленців, красиву фотографію, надихаючі історії, добробут, стиль і відповідальну розкіш."
     },
     mission: {
       title: "Наша місія",
@@ -75,7 +77,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "Рекламні можливості, партнерства та редакційні співпраці будуть доступні через PETS & DOGUE.",
       p2:
-        "Майбутні випуски міститимуть ексклюзивні інтерв’ю, міжнародних зірок обкладинки та люксові напрямки для подорожей з тваринами."
+        "Майбутні випуски міститимуть ексклюзивні інтерв’ю, міжнародних зірок обкладинки, особливі історії про тварин і надихаючі спільноти з усього світу."
     }
   },
 
@@ -89,7 +91,8 @@ window.PetsDogueTranslations.about = {
       home: "Главная",
       latestIssue: "Последний выпуск",
       archive: "Архив",
-      about: "О нас"
+      about: "О нас",
+      advertise: "Реклама"
     },
     hero: {
       title: "О PETS & DOGUE",
@@ -101,7 +104,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE был создан с одной простой идеей: животные заслуживают такого же восхищения, внимания и элегантности, которые мир моды дарит людям.",
       p2:
-        "Каждый выпуск представляет необыкновенных питомцев, красивую фотографию, вдохновляющие истории, путешествия, благополучие и люксовый образ жизни."
+        "Каждый выпуск представляет необыкновенных питомцев, красивую фотографию, вдохновляющие истории, благополучие, стиль и ответственную роскошь."
     },
     mission: {
       title: "Наша миссия",
@@ -113,7 +116,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "Рекламные возможности, партнёрства и редакционные сотрудничества будут доступны через PETS & DOGUE.",
       p2:
-        "В будущих выпусках появятся эксклюзивные интервью, международные звёзды обложки и люксовые направления для путешествий с питомцами."
+        "В будущих выпусках появятся эксклюзивные интервью, международные звёзды обложки, особенные истории о животных и вдохновляющие сообщества со всего мира."
     }
   },
 
@@ -127,7 +130,8 @@ window.PetsDogueTranslations.about = {
       home: "Accueil",
       latestIssue: "Dernier numéro",
       archive: "Archives",
-      about: "À propos"
+      about: "À propos",
+      advertise: "Publicité"
     },
     hero: {
       title: "À propos de PETS & DOGUE",
@@ -139,7 +143,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE est né d’une idée simple : les animaux méritent la même admiration, la même attention et la même élégance que le monde de la mode accorde aux humains.",
       p2:
-        "Chaque numéro met en lumière des animaux extraordinaires, de magnifiques photographies, des histoires inspirantes, les voyages, le bien-être et un art de vivre luxueux."
+        "Chaque numéro met en lumière des animaux extraordinaires, de magnifiques photographies, des histoires inspirantes, le bien-être, le style et un luxe responsable."
     },
     mission: {
       title: "Notre mission",
@@ -151,7 +155,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "Des opportunités publicitaires, partenariats et collaborations éditoriales seront proposés par PETS & DOGUE.",
       p2:
-        "Les prochains numéros présenteront des interviews exclusives, des stars internationales de couverture et des destinations de luxe adaptées aux animaux."
+        "Les prochains numéros présenteront des interviews exclusives, des stars internationales de couverture, des histoires animales exceptionnelles et des communautés inspirantes du monde entier."
     }
   },
 
@@ -165,7 +169,8 @@ window.PetsDogueTranslations.about = {
       home: "Startseite",
       latestIssue: "Neueste Ausgabe",
       archive: "Archiv",
-      about: "Über uns"
+      about: "Über uns",
+      advertise: "Werben"
     },
     hero: {
       title: "Über PETS & DOGUE",
@@ -177,7 +182,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE entstand aus einer einfachen Idee: Tiere verdienen dieselbe Bewunderung, Aufmerksamkeit und Eleganz, die die Modewelt den Menschen schenkt.",
       p2:
-        "Jede Ausgabe präsentiert außergewöhnliche Tiere, wunderschöne Fotografie, inspirierende Geschichten, Reisen, Wohlbefinden und luxuriösen Lifestyle."
+        "Jede Ausgabe präsentiert außergewöhnliche Tiere, wunderschöne Fotografie, inspirierende Geschichten, Wohlbefinden, Stil und verantwortungsvollen Luxus."
     },
     mission: {
       title: "Unsere Mission",
@@ -189,9 +194,11 @@ window.PetsDogueTranslations.about = {
       p1:
         "Werbemöglichkeiten, Partnerschaften und redaktionelle Kooperationen werden über PETS & DOGUE verfügbar sein.",
       p2:
-        "Künftige Ausgaben werden exklusive Interviews, internationale Coverstars und luxuriöse Reiseziele für Haustiere präsentieren."
+        "Künftige Ausgaben werden exklusive Interviews, internationale Coverstars, außergewöhnliche Tiergeschichten und inspirierende Gemeinschaften aus aller Welt präsentieren."
     }
-  },  es: {
+  },
+
+  es: {
     meta: {
       title: "Acerca de — PETS & DOGUE",
       description:
@@ -201,7 +208,8 @@ window.PetsDogueTranslations.about = {
       home: "Inicio",
       latestIssue: "Último número",
       archive: "Archivo",
-      about: "Acerca de"
+      about: "Acerca de",
+      advertise: "Publicidad"
     },
     hero: {
       title: "Acerca de PETS & DOGUE",
@@ -213,7 +221,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE nació de una idea sencilla: los animales merecen la misma admiración, atención y elegancia que el mundo de la moda ofrece a las personas.",
       p2:
-        "Cada número presenta mascotas extraordinarias, fotografía hermosa, historias inspiradoras, viajes, bienestar y un estilo de vida de lujo."
+        "Cada número presenta mascotas extraordinarias, fotografía hermosa, historias inspiradoras, bienestar, estilo y lujo responsable."
     },
     mission: {
       title: "Nuestra misión",
@@ -225,7 +233,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE ofrecerá oportunidades publicitarias, asociaciones y colaboraciones editoriales.",
       p2:
-        "Las futuras ediciones incluirán entrevistas exclusivas, estrellas internacionales de portada y destinos de lujo para mascotas."
+        "Las futuras ediciones incluirán entrevistas exclusivas, estrellas internacionales de portada, historias extraordinarias de animales y comunidades inspiradoras de todo el mundo."
     }
   },
 
@@ -239,7 +247,8 @@ window.PetsDogueTranslations.about = {
       home: "Home",
       latestIssue: "Ultimo numero",
       archive: "Archivio",
-      about: "Chi siamo"
+      about: "Chi siamo",
+      advertise: "Pubblicità"
     },
     hero: {
       title: "Chi siamo — PETS & DOGUE",
@@ -251,7 +260,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE nasce da un’idea semplice: gli animali meritano la stessa ammirazione, attenzione ed eleganza che il mondo della moda dedica alle persone.",
       p2:
-        "Ogni numero presenta animali straordinari, splendida fotografia, storie ispiratrici, viaggi, benessere e lifestyle di lusso."
+        "Ogni numero presenta animali straordinari, splendida fotografia, storie ispiratrici, benessere, stile e lusso responsabile."
     },
     mission: {
       title: "La nostra missione",
@@ -263,7 +272,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE offrirà opportunità pubblicitarie, partnership e collaborazioni editoriali.",
       p2:
-        "Le future edizioni presenteranno interviste esclusive, star internazionali di copertina e destinazioni luxury per animali."
+        "Le future edizioni presenteranno interviste esclusive, star internazionali di copertina, storie straordinarie di animali e comunità ispiratrici da tutto il mondo."
     }
   },
 
@@ -277,7 +286,8 @@ window.PetsDogueTranslations.about = {
       home: "Início",
       latestIssue: "Última edição",
       archive: "Arquivo",
-      about: "Sobre"
+      about: "Sobre",
+      advertise: "Publicidade"
     },
     hero: {
       title: "Sobre PETS & DOGUE",
@@ -289,7 +299,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE nasceu de uma ideia simples: os animais merecem a mesma admiração, atenção e elegância que o mundo da moda oferece às pessoas.",
       p2:
-        "Cada edição apresenta animais extraordinários, fotografia deslumbrante, histórias inspiradoras, viagens, bem-estar e lifestyle de luxo."
+        "Cada edição apresenta animais extraordinários, fotografia deslumbrante, histórias inspiradoras, bem-estar, estilo e luxo responsável."
     },
     mission: {
       title: "A nossa missão",
@@ -301,7 +311,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE disponibilizará oportunidades de publicidade, parcerias e colaborações editoriais.",
       p2:
-        "As futuras edições apresentarão entrevistas exclusivas, estrelas internacionais de capa e destinos de luxo para animais."
+        "As futuras edições apresentarão entrevistas exclusivas, estrelas internacionais de capa, histórias extraordinárias de animais e comunidades inspiradoras de todo o mundo."
     }
   },
 
@@ -315,7 +325,8 @@ window.PetsDogueTranslations.about = {
       home: "Home",
       latestIssue: "Nieuwste editie",
       archive: "Archief",
-      about: "Over ons"
+      about: "Over ons",
+      advertise: "Adverteren"
     },
     hero: {
       title: "Over PETS & DOGUE",
@@ -327,7 +338,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE is ontstaan vanuit één eenvoudig idee: dieren verdienen dezelfde bewondering, aandacht en elegantie die de modewereld aan mensen geeft.",
       p2:
-        "Elke editie toont bijzondere huisdieren, prachtige fotografie, inspirerende verhalen, reizen, welzijn en een luxe levensstijl."
+        "Elke editie toont bijzondere huisdieren, prachtige fotografie, inspirerende verhalen, welzijn, stijl en verantwoorde luxe."
     },
     mission: {
       title: "Onze missie",
@@ -339,7 +350,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "Advertentiemogelijkheden, partnerschappen en redactionele samenwerkingen zullen beschikbaar zijn via PETS & DOGUE.",
       p2:
-        "Toekomstige edities bevatten exclusieve interviews, internationale coversterren en luxe bestemmingen voor huisdieren."
+        "Toekomstige edities bevatten exclusieve interviews, internationale coversterren, bijzondere dierenverhalen en inspirerende gemeenschappen van over de hele wereld."
     }
   },
 
@@ -353,7 +364,8 @@ window.PetsDogueTranslations.about = {
       home: "Strona główna",
       latestIssue: "Najnowsze wydanie",
       archive: "Archiwum",
-      about: "O nas"
+      about: "O nas",
+      advertise: "Reklama"
     },
     hero: {
       title: "O PETS & DOGUE",
@@ -365,7 +377,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE powstał z jednej prostej idei: zwierzęta zasługują na taki sam podziw, uwagę i elegancję, jakie świat mody poświęca ludziom.",
       p2:
-        "Każde wydanie prezentuje niezwykłe zwierzęta, piękną fotografię, inspirujące historie, podróże, dobrostan i luksusowy styl życia."
+        "Każde wydanie prezentuje niezwykłe zwierzęta, piękną fotografię, inspirujące historie, dobrostan, styl i odpowiedzialny luksus."
     },
     mission: {
       title: "Nasza misja",
@@ -377,7 +389,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE będzie oferować możliwości reklamowe, partnerstwa oraz współpracę redakcyjną.",
       p2:
-        "Przyszłe wydania będą zawierały ekskluzywne wywiady, międzynarodowe gwiazdy okładki i luksusowe kierunki przyjazne zwierzętom."
+        "Przyszłe wydania będą zawierały ekskluzywne wywiady, międzynarodowe gwiazdy okładki, wyjątkowe historie zwierząt i inspirujące społeczności z całego świata."
     }
   },
 
@@ -391,7 +403,8 @@ window.PetsDogueTranslations.about = {
       home: "Domů",
       latestIssue: "Nejnovější vydání",
       archive: "Archiv",
-      about: "O nás"
+      about: "O nás",
+      advertise: "Inzerce"
     },
     hero: {
       title: "O PETS & DOGUE",
@@ -403,7 +416,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE vznikl z jednoduché myšlenky: zvířata si zaslouží stejný obdiv, pozornost a eleganci, jakou svět módy věnuje lidem.",
       p2:
-        "Každé vydání představuje výjimečná zvířata, krásnou fotografii, inspirativní příběhy, cestování, pohodu a luxusní životní styl."
+        "Každé vydání představuje výjimečná zvířata, krásnou fotografii, inspirativní příběhy, pohodu, styl a odpovědný luxus."
     },
     mission: {
       title: "Naše poslání",
@@ -415,7 +428,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE nabídne reklamní příležitosti, partnerství a redakční spolupráce.",
       p2:
-        "Budoucí vydání přinesou exkluzivní rozhovory, mezinárodní hvězdy obálky a luxusní destinace pro domácí mazlíčky."
+        "Budoucí vydání přinesou exkluzivní rozhovory, mezinárodní hvězdy obálky, výjimečné příběhy zvířat a inspirativní komunity z celého světa."
     }
   },
 
@@ -429,7 +442,8 @@ window.PetsDogueTranslations.about = {
       home: "Domov",
       latestIssue: "Najnovšie vydanie",
       archive: "Archív",
-      about: "O nás"
+      about: "O nás",
+      advertise: "Reklama"
     },
     hero: {
       title: "O PETS & DOGUE",
@@ -441,7 +455,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE vznikol z jednoduchej myšlienky: zvieratá si zaslúžia rovnaký obdiv, pozornosť a eleganciu, akú svet módy venuje ľuďom.",
       p2:
-        "Každé vydanie predstavuje výnimočné zvieratá, krásnu fotografiu, inšpiratívne príbehy, cestovanie, pohodu a luxusný životný štýl."
+        "Každé vydanie predstavuje výnimočné zvieratá, krásnu fotografiu, inšpiratívne príbehy, pohodu, štýl a zodpovedný luxus."
     },
     mission: {
       title: "Naše poslanie",
@@ -453,9 +467,11 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE ponúkne reklamné príležitosti, partnerstvá a redakčné spolupráce.",
       p2:
-        "Budúce vydania prinesú exkluzívne rozhovory, medzinárodné hviezdy obálky a luxusné destinácie pre domácich miláčikov."
+        "Budúce vydania prinesú exkluzívne rozhovory, medzinárodné hviezdy obálky, výnimočné príbehy zvierat a inšpiratívne komunity z celého sveta."
     }
-  },  hu: {
+  },
+
+  hu: {
     meta: {
       title: "Rólunk — PETS & DOGUE",
       description:
@@ -465,7 +481,8 @@ window.PetsDogueTranslations.about = {
       home: "Kezdőlap",
       latestIssue: "Legújabb kiadás",
       archive: "Archívum",
-      about: "Rólunk"
+      about: "Rólunk",
+      advertise: "Hirdetés"
     },
     hero: {
       title: "A PETS & DOGUE-ról",
@@ -477,7 +494,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "A PETS & DOGUE egy egyszerű gondolatból született: az állatok ugyanazt a csodálatot, figyelmet és eleganciát érdemlik, amelyet a divatvilág az embereknek ad.",
       p2:
-        "Minden kiadás különleges állatokat, gyönyörű fotókat, inspiráló történeteket, utazást, jóllétet és luxus életmódot mutat be."
+        "Minden kiadás különleges állatokat, gyönyörű fotókat, inspiráló történeteket, jóllétet, stílust és felelős luxust mutat be."
     },
     mission: {
       title: "Küldetésünk",
@@ -489,7 +506,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "A PETS & DOGUE hirdetési lehetőségeket, partnerségeket és szerkesztőségi együttműködéseket kínál majd.",
       p2:
-        "A jövőbeli kiadások exkluzív interjúkat, nemzetközi címlapsztárokat és luxus állatbarát úti célokat mutatnak be."
+        "A jövőbeli kiadások exkluzív interjúkat, nemzetközi címlapsztárokat, különleges állattörténeteket és inspiráló közösségeket mutatnak be a világ minden tájáról."
     }
   },
 
@@ -503,7 +520,8 @@ window.PetsDogueTranslations.about = {
       home: "Acasă",
       latestIssue: "Ultima ediție",
       archive: "Arhivă",
-      about: "Despre noi"
+      about: "Despre noi",
+      advertise: "Publicitate"
     },
     hero: {
       title: "Despre PETS & DOGUE",
@@ -515,7 +533,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE a fost creată pornind de la o idee simplă: animalele merită aceeași admirație, atenție și eleganță pe care lumea modei le acordă oamenilor.",
       p2:
-        "Fiecare ediție prezintă animale extraordinare, fotografie frumoasă, povești inspiraționale, călătorii, bunăstare și lifestyle de lux."
+        "Fiecare ediție prezintă animale extraordinare, fotografie frumoasă, povești inspiraționale, bunăstare, stil și lux responsabil."
     },
     mission: {
       title: "Misiunea noastră",
@@ -527,7 +545,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE va oferi oportunități de publicitate, parteneriate și colaborări editoriale.",
       p2:
-        "Edițiile viitoare vor include interviuri exclusive, vedete internaționale de copertă și destinații de lux pentru animale."
+        "Edițiile viitoare vor include interviuri exclusive, vedete internaționale de copertă, povești extraordinare despre animale și comunități inspiraționale din întreaga lume."
     }
   },
 
@@ -541,7 +559,8 @@ window.PetsDogueTranslations.about = {
       home: "Начало",
       latestIssue: "Последен брой",
       archive: "Архив",
-      about: "За нас"
+      about: "За нас",
+      advertise: "Реклама"
     },
     hero: {
       title: "За PETS & DOGUE",
@@ -553,7 +572,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE е създадено с една проста идея: животните заслужават същото възхищение, внимание и елегантност, които модният свят отдава на хората.",
       p2:
-        "Всеки брой представя необикновени животни, красива фотография, вдъхновяващи истории, пътувания, благополучие и луксозен начин на живот."
+        "Всеки брой представя необикновени животни, красива фотография, вдъхновяващи истории, благополучие, стил и отговорен лукс."
     },
     mission: {
       title: "Нашата мисия",
@@ -565,7 +584,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE ще предлага рекламни възможности, партньорства и редакционни сътрудничества.",
       p2:
-        "Бъдещите броеве ще включват ексклузивни интервюта, международни звезди на корицата и луксозни дестинации за животни."
+        "Бъдещите броеве ще включват ексклузивни интервюта, международни звезди на корицата, изключителни истории за животни и вдъхновяващи общности от цял свят."
     }
   },
 
@@ -579,7 +598,8 @@ window.PetsDogueTranslations.about = {
       home: "Αρχική",
       latestIssue: "Τελευταίο τεύχος",
       archive: "Αρχείο",
-      about: "Σχετικά"
+      about: "Σχετικά",
+      advertise: "Διαφήμιση"
     },
     hero: {
       title: "Σχετικά με το PETS & DOGUE",
@@ -591,7 +611,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "Το PETS & DOGUE δημιουργήθηκε με μία απλή ιδέα: τα ζώα αξίζουν τον ίδιο θαυμασμό, την ίδια προσοχή και κομψότητα που ο κόσμος της μόδας προσφέρει στους ανθρώπους.",
       p2:
-        "Κάθε τεύχος παρουσιάζει εξαιρετικά ζώα, όμορφη φωτογραφία, εμπνευσμένες ιστορίες, ταξίδια, ευεξία και πολυτελή τρόπο ζωής."
+        "Κάθε τεύχος παρουσιάζει εξαιρετικά ζώα, όμορφη φωτογραφία, εμπνευσμένες ιστορίες, ευεξία, στυλ και υπεύθυνη πολυτέλεια."
     },
     mission: {
       title: "Η αποστολή μας",
@@ -603,7 +623,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "Το PETS & DOGUE θα προσφέρει ευκαιρίες διαφήμισης, συνεργασίες και editorial συνεργασίες.",
       p2:
-        "Τα μελλοντικά τεύχη θα περιλαμβάνουν αποκλειστικές συνεντεύξεις, διεθνή αστέρια εξωφύλλου και πολυτελείς προορισμούς για κατοικίδια."
+        "Τα μελλοντικά τεύχη θα περιλαμβάνουν αποκλειστικές συνεντεύξεις, διεθνή αστέρια εξωφύλλου, ξεχωριστές ιστορίες ζώων και εμπνευσμένες κοινότητες από όλο τον κόσμο."
     }
   },
 
@@ -617,7 +637,8 @@ window.PetsDogueTranslations.about = {
       home: "Hem",
       latestIssue: "Senaste utgåvan",
       archive: "Arkiv",
-      about: "Om oss"
+      about: "Om oss",
+      advertise: "Annonsera"
     },
     hero: {
       title: "Om PETS & DOGUE",
@@ -629,7 +650,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE skapades utifrån en enkel idé: djur förtjänar samma beundran, uppmärksamhet och elegans som modevärlden ger människor.",
       p2:
-        "Varje utgåva presenterar extraordinära djur, vacker fotografi, inspirerande berättelser, resor, välmående och lyxig livsstil."
+        "Varje utgåva presenterar extraordinära djur, vacker fotografi, inspirerande berättelser, välmående, stil och ansvarsfull lyx."
     },
     mission: {
       title: "Vårt uppdrag",
@@ -641,7 +662,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE kommer att erbjuda annonseringsmöjligheter, partnerskap och redaktionella samarbeten.",
       p2:
-        "Framtida utgåvor kommer att innehålla exklusiva intervjuer, internationella omslagsstjärnor och lyxiga djurvänliga destinationer."
+        "Framtida utgåvor kommer att innehålla exklusiva intervjuer, internationella omslagsstjärnor, extraordinära djurberättelser och inspirerande gemenskaper från hela världen."
     }
   },
 
@@ -655,7 +676,8 @@ window.PetsDogueTranslations.about = {
       home: "Forside",
       latestIssue: "Seneste udgave",
       archive: "Arkiv",
-      about: "Om os"
+      about: "Om os",
+      advertise: "Annoncér"
     },
     hero: {
       title: "Om PETS & DOGUE",
@@ -667,7 +689,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE blev skabt ud fra én enkel idé: dyr fortjener den samme beundring, opmærksomhed og elegance, som modeverdenen giver mennesker.",
       p2:
-        "Hver udgave præsenterer ekstraordinære dyr, smuk fotografi, inspirerende historier, rejser, velvære og luksuriøs livsstil."
+        "Hver udgave præsenterer ekstraordinære dyr, smuk fotografi, inspirerende historier, velvære, stil og ansvarlig luksus."
     },
     mission: {
       title: "Vores mission",
@@ -679,7 +701,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE vil tilbyde annonceringsmuligheder, partnerskaber og redaktionelle samarbejder.",
       p2:
-        "Fremtidige udgaver vil byde på eksklusive interviews, internationale forsidestjerner og luksuriøse rejsemål for kæledyr."
+        "Fremtidige udgaver vil byde på eksklusive interviews, internationale forsidestjerner, enestående dyrehistorier og inspirerende fællesskaber fra hele verden."
     }
   },
 
@@ -693,7 +715,8 @@ window.PetsDogueTranslations.about = {
       home: "Hjem",
       latestIssue: "Nyeste utgave",
       archive: "Arkiv",
-      about: "Om oss"
+      about: "Om oss",
+      advertise: "Annonser"
     },
     hero: {
       title: "Om PETS & DOGUE",
@@ -705,7 +728,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE ble skapt med én enkel idé: dyr fortjener den samme beundringen, oppmerksomheten og elegansen som moteverdenen gir mennesker.",
       p2:
-        "Hver utgave presenterer ekstraordinære dyr, vakker fotografi, inspirerende historier, reiser, velvære og luksuriøs livsstil."
+        "Hver utgave presenterer ekstraordinære dyr, vakker fotografi, inspirerende historier, velvære, stil og ansvarlig luksus."
     },
     mission: {
       title: "Vårt oppdrag",
@@ -717,7 +740,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE vil tilby annonseringsmuligheter, partnerskap og redaksjonelle samarbeid.",
       p2:
-        "Fremtidige utgaver vil inneholde eksklusive intervjuer, internasjonale forsidestjerner og luksuriøse reisemål for kjæledyr."
+        "Fremtidige utgaver vil inneholde eksklusive intervjuer, internasjonale forsidestjerner, enestående dyrehistorier og inspirerende fellesskap fra hele verden."
     }
   },
 
@@ -731,7 +754,8 @@ window.PetsDogueTranslations.about = {
       home: "Etusivu",
       latestIssue: "Uusin numero",
       archive: "Arkisto",
-      about: "Tietoa meistä"
+      about: "Tietoa meistä",
+      advertise: "Mainosta"
     },
     hero: {
       title: "Tietoa PETS & DOGUEsta",
@@ -743,7 +767,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE syntyi yhdestä yksinkertaisesta ajatuksesta: eläimet ansaitsevat saman ihailun, huomion ja eleganssin, jota muotimaailma antaa ihmisille.",
       p2:
-        "Jokainen numero esittelee poikkeuksellisia eläimiä, kaunista valokuvausta, inspiroivia tarinoita, matkailua, hyvinvointia ja luksuselämäntyyliä."
+        "Jokainen numero esittelee poikkeuksellisia eläimiä, kaunista valokuvausta, inspiroivia tarinoita, hyvinvointia, tyyliä ja vastuullista ylellisyyttä."
     },
     mission: {
       title: "Tehtävämme",
@@ -755,9 +779,11 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE tarjoaa tulevaisuudessa mainosmahdollisuuksia, kumppanuuksia ja toimituksellisia yhteistyömahdollisuuksia.",
       p2:
-        "Tulevat numerot sisältävät eksklusiivisia haastatteluja, kansainvälisiä kansitähtiä ja ylellisiä lemmikkiystävällisiä matkakohteita."
+        "Tulevat numerot sisältävät eksklusiivisia haastatteluja, kansainvälisiä kansitähtiä, poikkeuksellisia eläintarinoita ja inspiroivia yhteisöjä eri puolilta maailmaa."
     }
-  },  tr: {
+  },
+
+  tr: {
     meta: {
       title: "Hakkımızda — PETS & DOGUE",
       description:
@@ -767,7 +793,8 @@ window.PetsDogueTranslations.about = {
       home: "Ana sayfa",
       latestIssue: "Son sayı",
       archive: "Arşiv",
-      about: "Hakkımızda"
+      about: "Hakkımızda",
+      advertise: "Reklam"
     },
     hero: {
       title: "PETS & DOGUE Hakkında",
@@ -779,7 +806,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE tek bir basit fikirle yaratıldı: hayvanlar, moda dünyasının insanlara gösterdiği aynı hayranlığı, ilgiyi ve zarafeti hak ediyor.",
       p2:
-        "Her sayı sıra dışı hayvanları, güzel fotoğrafları, ilham veren hikâyeleri, seyahati, sağlığı ve lüks yaşam tarzını öne çıkarıyor."
+        "Her sayı sıra dışı hayvanları, güzel fotoğrafları, ilham veren hikâyeleri, sağlığı, stili ve sorumlu lüksü öne çıkarıyor."
     },
     mission: {
       title: "Misyonumuz",
@@ -791,7 +818,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE üzerinden reklam fırsatları, ortaklıklar ve editoryal iş birlikleri sunulacaktır.",
       p2:
-        "Gelecek sayılarda özel röportajlar, uluslararası kapak yıldızları ve lüks hayvan dostu destinasyonlar yer alacak."
+        "Gelecek sayılarda özel röportajlar, uluslararası kapak yıldızları, sıra dışı hayvan hikâyeleri ve dünyanın dört bir yanından ilham veren topluluklar yer alacak."
     }
   },
 
@@ -805,7 +832,8 @@ window.PetsDogueTranslations.about = {
       home: "الرئيسية",
       latestIssue: "أحدث عدد",
       archive: "الأرشيف",
-      about: "عن المجلة"
+      about: "عن المجلة",
+      advertise: "الإعلان"
     },
     hero: {
       title: "عن PETS & DOGUE",
@@ -817,7 +845,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "تأسست PETS & DOGUE على فكرة بسيطة: الحيوانات تستحق القدر نفسه من الإعجاب والاهتمام والأناقة الذي يمنحه عالم الموضة للبشر.",
       p2:
-        "يقدم كل عدد حيوانات استثنائية وتصويرًا جميلًا وقصصًا ملهمة وسفرًا وعافية وأسلوب حياة فاخر."
+        "يقدم كل عدد حيوانات استثنائية وتصويرًا جميلًا وقصصًا ملهمة وعافية وأناقة وفخامة مسؤولة."
     },
     mission: {
       title: "رسالتنا",
@@ -829,7 +857,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "ستوفر PETS & DOGUE فرصًا للإعلان والشراكات والتعاون التحريري.",
       p2:
-        "ستتضمن الأعداد القادمة مقابلات حصرية ونجوم غلاف عالميين ووجهات فاخرة صديقة للحيوانات."
+        "ستتضمن الأعداد القادمة مقابلات حصرية ونجوم غلاف عالميين وقصصًا استثنائية عن الحيوانات ومجتمعات ملهمة من جميع أنحاء العالم."
     }
   },
 
@@ -843,7 +871,8 @@ window.PetsDogueTranslations.about = {
       home: "होम",
       latestIssue: "नवीनतम अंक",
       archive: "आर्काइव",
-      about: "हमारे बारे में"
+      about: "हमारे बारे में",
+      advertise: "विज्ञापन"
     },
     hero: {
       title: "PETS & DOGUE के बारे में",
@@ -855,7 +884,7 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE एक सरल विचार से बनाई गई थी: जानवर भी उतनी ही प्रशंसा, ध्यान और एलिगेंस के हकदार हैं जितनी फैशन की दुनिया लोगों को देती है।",
       p2:
-        "हर अंक में असाधारण पेट्स, खूबसूरत फोटोग्राफी, प्रेरणादायक कहानियाँ, यात्रा, वेलनेस और लक्ज़री लाइफ़स्टाइल शामिल हैं।"
+        "हर अंक में असाधारण पेट्स, खूबसूरत फोटोग्राफी, प्रेरणादायक कहानियाँ, वेलनेस, स्टाइल और जिम्मेदार लक्ज़री शामिल हैं।"
     },
     mission: {
       title: "हमारा मिशन",
@@ -867,7 +896,8 @@ window.PetsDogueTranslations.about = {
       p1:
         "PETS & DOGUE के माध्यम से विज्ञापन अवसर, पार्टनरशिप और संपादकीय सहयोग उपलब्ध होंगे।",
       p2:
-        "भविष्य के अंकों में विशेष इंटरव्यू, अंतरराष्ट्रीय कवर स्टार्स और लक्ज़री पेट-फ्रेंडली डेस्टिनेशन शामिल होंगे।"
+        "भविष्य के अंकों में विशेष इंटरव्यू, अंतरराष्ट्रीय कवर स्टार्स, असाधारण जानवरों की कहानियाँ और दुनिया भर के प्रेरणादायक समुदाय शामिल होंगे।"
     }
   }
+
 };
