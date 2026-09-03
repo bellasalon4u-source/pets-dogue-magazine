@@ -19,7 +19,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "SUMMER 2026",
       title: "Issue 01",
       description:
-        "The debut luxury animal issue starring Miso, cover stars, summer style, travel, wellness and the beginning of PETS & DOGUE."
+        "The debut luxury animal issue starring Miso, cover stars, summer style, wellness, community and the beginning of PETS & DOGUE."
     },
 
     intro: {
@@ -35,7 +35,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso Cover Story",
       summer: "Icons Of Summer",
       fashion: "Pet Fashion",
-      travelWellness: "Travel & Wellness",
+      wellness: "Health & Wellness",
       community: "Community"
     },
 
@@ -74,18 +74,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Shop Partners"
     },
 
-    travel: {
-      imageAlt: "Pet Travel",
-      badge: "TRAVEL",
-      title: "Pet-Friendly Summer",
-      p1:
-        "Inspired by Santorini, Capri and the Côte d’Azur, this issue imagines a future where travel with pets is elegant, easy and beautifully designed.",
-      p2:
-        "Future PETS & DOGUE issues will explore hotels, cafés, beaches, villas and destinations where pets are truly welcome.",
-      guide: "Travel Guide",
-      places: "Friendly Places"
-    },
-
     rescue: {
       imageAlt: "Pets In Need",
       badge: "PETS IN NEED",
@@ -104,7 +92,7 @@ window.PetsDogueTranslations.issue01 = {
         "Future PETS & DOGUE issues will include partner shopping links, member discounts and luxury recommendations for products and services.",
       collars: "Luxury Collars",
       fashion: "Pet Fashion",
-      travelAccessories: "Travel Accessories",
+      accessories: "Premium Accessories",
       grooming: "Grooming Offers",
       hotels: "Pet-Friendly Hotels",
       discounts: "Member Discounts",
@@ -143,7 +131,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "ЛІТО 2026",
       title: "Випуск 01",
       description:
-        "Дебютний люксовий випуск про тварин із Miso, зірками обкладинки, літнім стилем, подорожами, добробутом і початком PETS & DOGUE."
+        "Дебютний люксовий випуск про тварин із Miso, зірками обкладинки, літнім стилем, здоров’ям, спільнотою та початком PETS & DOGUE."
     },
 
     intro: {
@@ -159,7 +147,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Історія Miso на обкладинці",
       summer: "Ікони літа",
       fashion: "Мода для тварин",
-      travelWellness: "Подорожі та добробут",
+      wellness: "Здоров’я та добробут",
       community: "Спільнота"
     },
 
@@ -198,18 +186,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Пропозиції партнерів"
     },
 
-    travel: {
-      imageAlt: "Подорожі з тваринами",
-      badge: "ПОДОРОЖІ",
-      title: "Літо pet-friendly",
-      p1:
-        "Натхнений Санторіні, Капрі та Лазуровим узбережжям, цей випуск уявляє майбутнє, де подорожі з тваринами елегантні, прості та красиво організовані.",
-      p2:
-        "Майбутні випуски PETS & DOGUE досліджуватимуть готелі, кафе, пляжі, вілли та напрямки, де тваринам справді раді.",
-      guide: "Путівник",
-      places: "Pet-friendly місця"
-    },
-
     rescue: {
       imageAlt: "Тварини, яким потрібна допомога",
       badge: "ТВАРИНИ В ПОТРЕБІ",
@@ -228,7 +204,7 @@ window.PetsDogueTranslations.issue01 = {
         "Майбутні випуски PETS & DOGUE включатимуть партнерські посилання, знижки для учасників і преміальні рекомендації товарів та послуг.",
       collars: "Люксові нашийники",
       fashion: "Мода для тварин",
-      travelAccessories: "Аксесуари для подорожей",
+      accessories: "Преміальні аксесуари",
       grooming: "Пропозиції з грумінгу",
       hotels: "Pet-friendly готелі",
       discounts: "Знижки для учасників",
@@ -267,7 +243,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "ЛЕТО 2026",
       title: "Выпуск 01",
       description:
-        "Дебютный люксовый выпуск о животных с Miso, звёздами обложки, летним стилем, путешествиями, благополучием и началом PETS & DOGUE."
+        "Дебютный люксовый выпуск о животных с Miso, звёздами обложки, летним стилем, здоровьем, сообществом и началом PETS & DOGUE."
     },
 
     intro: {
@@ -283,7 +259,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "История Miso на обложке",
       summer: "Иконы лета",
       fashion: "Мода для животных",
-      travelWellness: "Путешествия и здоровье",
+      wellness: "Здоровье и благополучие",
       community: "Сообщество"
     },
 
@@ -322,18 +298,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Предложения партнёров"
     },
 
-    travel: {
-      imageAlt: "Путешествия с животными",
-      badge: "ПУТЕШЕСТВИЯ",
-      title: "Pet-friendly лето",
-      p1:
-        "Вдохновлённый Санторини, Капри и Лазурным берегом, этот выпуск представляет будущее, где путешествия с животными элегантны, просты и красиво организованы.",
-      p2:
-        "Будущие выпуски PETS & DOGUE будут рассказывать об отелях, кафе, пляжах, виллах и направлениях, где животным действительно рады.",
-      guide: "Гид по путешествиям",
-      places: "Pet-friendly места"
-    },
-
     rescue: {
       imageAlt: "Животные, которым нужна помощь",
       badge: "ЖИВОТНЫЕ В БЕДЕ",
@@ -352,7 +316,7 @@ window.PetsDogueTranslations.issue01 = {
         "Будущие выпуски PETS & DOGUE будут включать партнёрские ссылки, скидки для участников и премиальные рекомендации товаров и услуг.",
       collars: "Люксовые ошейники",
       fashion: "Мода для животных",
-      travelAccessories: "Аксессуары для путешествий",
+      accessories: "Премиальные аксессуары",
       grooming: "Предложения по грумингу",
       hotels: "Pet-friendly отели",
       discounts: "Скидки для участников",
@@ -391,7 +355,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "ÉTÉ 2026",
       title: "Numéro 01",
       description:
-        "Le premier numéro luxe dédié aux animaux avec Miso, les stars de couverture, le style d’été, les voyages, le bien-être et les débuts de PETS & DOGUE."
+        "Le premier numéro luxe dédié aux animaux avec Miso, les stars de couverture, le style d’été, le bien-être, la communauté et les débuts de PETS & DOGUE."
     },
 
     intro: {
@@ -407,7 +371,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso En Couverture",
       summer: "Icônes De L’Été",
       fashion: "Mode Animale",
-      travelWellness: "Voyages & Bien-Être",
+      wellness: "Santé & Bien-Être",
       community: "Communauté"
     },
 
@@ -446,18 +410,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Voir Les Partenaires"
     },
 
-    travel: {
-      imageAlt: "Voyages avec animaux",
-      badge: "VOYAGES",
-      title: "Un Été Pet-Friendly",
-      p1:
-        "Inspiré de Santorin, Capri et de la Côte d’Azur, ce numéro imagine un avenir où voyager avec son animal est élégant, simple et magnifiquement organisé.",
-      p2:
-        "Les prochains numéros de PETS & DOGUE exploreront hôtels, cafés, plages, villas et destinations où les animaux sont réellement les bienvenus.",
-      guide: "Guide De Voyage",
-      places: "Lieux Pet-Friendly"
-    },
-
     rescue: {
       imageAlt: "Animaux à aider",
       badge: "ANIMAUX À AIDER",
@@ -476,7 +428,7 @@ window.PetsDogueTranslations.issue01 = {
         "Les prochains numéros de PETS & DOGUE incluront des liens partenaires, des réductions pour les membres et des recommandations haut de gamme de produits et services.",
       collars: "Colliers De Luxe",
       fashion: "Mode Animale",
-      travelAccessories: "Accessoires De Voyage",
+      accessories: "Accessoires Premium",
       grooming: "Offres De Toilettage",
       hotels: "Hôtels Pet-Friendly",
       discounts: "Réductions Membres",
@@ -515,7 +467,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "SOMMER 2026",
       title: "Ausgabe 01",
       description:
-        "Die erste luxuriöse Tierausgabe mit Miso, Coverstars, Sommerstil, Reisen, Wohlbefinden und dem Beginn von PETS & DOGUE."
+        "Die erste luxuriöse Tierausgabe mit Miso, Coverstars, Sommerstil, Gesundheit, Community und dem Beginn von PETS & DOGUE."
     },
 
     intro: {
@@ -531,7 +483,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso Coverstory",
       summer: "Ikonen Des Sommers",
       fashion: "Tiermode",
-      travelWellness: "Reisen & Wohlbefinden",
+      wellness: "Gesundheit & Wohlbefinden",
       community: "Community"
     },
 
@@ -570,18 +522,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partnerangebote"
     },
 
-    travel: {
-      imageAlt: "Reisen mit Tieren",
-      badge: "REISEN",
-      title: "Tierfreundlicher Sommer",
-      p1:
-        "Inspiriert von Santorin, Capri und der Côte d’Azur stellt sich diese Ausgabe eine Zukunft vor, in der Reisen mit Tieren elegant, einfach und wunderschön gestaltet ist.",
-      p2:
-        "Künftige PETS & DOGUE-Ausgaben werden Hotels, Cafés, Strände, Villen und Reiseziele vorstellen, an denen Tiere wirklich willkommen sind.",
-      guide: "Reiseführer",
-      places: "Tierfreundliche Orte"
-    },
-
     rescue: {
       imageAlt: "Tiere in Not",
       badge: "TIERE IN NOT",
@@ -600,7 +540,7 @@ window.PetsDogueTranslations.issue01 = {
         "Künftige PETS & DOGUE-Ausgaben werden Partnerlinks, Mitgliederrabatte und hochwertige Empfehlungen für Produkte und Dienstleistungen enthalten.",
       collars: "Luxus-Halsbänder",
       fashion: "Tiermode",
-      travelAccessories: "Reisezubehör",
+      accessories: "Premium-Accessoires",
       grooming: "Pflegeangebote",
       hotels: "Tierfreundliche Hotels",
       discounts: "Mitgliederrabatte",
@@ -621,7 +561,9 @@ window.PetsDogueTranslations.issue01 = {
       archive: "Archiv",
       issue02: "Ausgabe 02"
     }
-  },  es: {
+  },
+
+  es: {
     meta: {
       title: "Número 01 — PETS & DOGUE",
       description: "El primer número de PETS & DOGUE."
@@ -637,7 +579,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "VERANO 2026",
       title: "Número 01",
       description:
-        "El primer número de lujo dedicado a los animales, protagonizado por Miso, estrellas de portada, estilo de verano, viajes, bienestar y el comienzo de PETS & DOGUE."
+        "El primer número de lujo dedicado a los animales, protagonizado por Miso, estrellas de portada, estilo de verano, bienestar, comunidad y el comienzo de PETS & DOGUE."
     },
 
     intro: {
@@ -653,7 +595,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Historia De Portada De Miso",
       summer: "Iconos Del Verano",
       fashion: "Moda Para Mascotas",
-      travelWellness: "Viajes Y Bienestar",
+      wellness: "Salud Y Bienestar",
       community: "Comunidad"
     },
 
@@ -692,18 +634,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Ver Socios"
     },
 
-    travel: {
-      imageAlt: "Viajes con mascotas",
-      badge: "VIAJES",
-      title: "Verano Pet-Friendly",
-      p1:
-        "Inspirado en Santorini, Capri y la Costa Azul, este número imagina un futuro en el que viajar con mascotas sea elegante, fácil y bellamente diseñado.",
-      p2:
-        "Los próximos números de PETS & DOGUE explorarán hoteles, cafés, playas, villas y destinos donde las mascotas sean realmente bienvenidas.",
-      guide: "Guía De Viaje",
-      places: "Lugares Pet-Friendly"
-    },
-
     rescue: {
       imageAlt: "Animales que necesitan ayuda",
       badge: "ANIMALES QUE NECESITAN AYUDA",
@@ -722,7 +652,7 @@ window.PetsDogueTranslations.issue01 = {
         "Los próximos números de PETS & DOGUE incluirán enlaces de socios, descuentos para miembros y recomendaciones de lujo de productos y servicios.",
       collars: "Collares De Lujo",
       fashion: "Moda Para Mascotas",
-      travelAccessories: "Accesorios De Viaje",
+      accessories: "Accesorios Premium",
       grooming: "Ofertas De Grooming",
       hotels: "Hoteles Pet-Friendly",
       discounts: "Descuentos Para Miembros",
@@ -761,7 +691,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "ESTATE 2026",
       title: "Numero 01",
       description:
-        "Il primo numero luxury dedicato agli animali con Miso, star di copertina, stile estivo, viaggi, benessere e l’inizio di PETS & DOGUE."
+        "Il primo numero luxury dedicato agli animali con Miso, star di copertina, stile estivo, benessere, community e l’inizio di PETS & DOGUE."
     },
 
     intro: {
@@ -777,7 +707,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "La Storia Di Copertina Di Miso",
       summer: "Icone Dell’Estate",
       fashion: "Moda Per Animali",
-      travelWellness: "Viaggi E Benessere",
+      wellness: "Salute E Benessere",
       community: "Community"
     },
 
@@ -816,18 +746,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Scopri I Partner"
     },
 
-    travel: {
-      imageAlt: "Viaggi con animali",
-      badge: "VIAGGI",
-      title: "Estate Pet-Friendly",
-      p1:
-        "Ispirato a Santorini, Capri e alla Costa Azzurra, questo numero immagina un futuro in cui viaggiare con gli animali sia elegante, semplice e splendidamente organizzato.",
-      p2:
-        "I prossimi numeri di PETS & DOGUE esploreranno hotel, caffè, spiagge, ville e destinazioni dove gli animali sono davvero benvenuti.",
-      guide: "Guida Di Viaggio",
-      places: "Luoghi Pet-Friendly"
-    },
-
     rescue: {
       imageAlt: "Animali in difficoltà",
       badge: "ANIMALI IN DIFFICOLTÀ",
@@ -846,7 +764,7 @@ window.PetsDogueTranslations.issue01 = {
         "I futuri numeri di PETS & DOGUE includeranno link dei partner, sconti per i membri e raccomandazioni luxury per prodotti e servizi.",
       collars: "Collari Di Lusso",
       fashion: "Moda Per Animali",
-      travelAccessories: "Accessori Da Viaggio",
+      accessories: "Accessori Premium",
       grooming: "Offerte Grooming",
       hotels: "Hotel Pet-Friendly",
       discounts: "Sconti Per I Membri",
@@ -885,7 +803,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "VERÃO 2026",
       title: "Edição 01",
       description:
-        "A edição de estreia de luxo dedicada aos animais, com Miso, estrelas de capa, estilo de verão, viagens, bem-estar e o início da PETS & DOGUE."
+        "A edição de estreia de luxo dedicada aos animais, com Miso, estrelas de capa, estilo de verão, bem-estar, comunidade e o início da PETS & DOGUE."
     },
 
     intro: {
@@ -901,7 +819,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "História De Capa De Miso",
       summer: "Ícones Do Verão",
       fashion: "Moda Animal",
-      travelWellness: "Viagens E Bem-Estar",
+      wellness: "Saúde E Bem-Estar",
       community: "Comunidade"
     },
 
@@ -940,18 +858,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Ver Parceiros"
     },
 
-    travel: {
-      imageAlt: "Viagens com animais",
-      badge: "VIAGENS",
-      title: "Verão Pet-Friendly",
-      p1:
-        "Inspirada em Santorini, Capri e na Côte d’Azur, esta edição imagina um futuro em que viajar com animais seja elegante, simples e cuidadosamente pensado.",
-      p2:
-        "As futuras edições da PETS & DOGUE irão explorar hotéis, cafés, praias, villas e destinos onde os animais são verdadeiramente bem-vindos.",
-      guide: "Guia De Viagem",
-      places: "Locais Pet-Friendly"
-    },
-
     rescue: {
       imageAlt: "Animais em necessidade",
       badge: "ANIMAIS EM NECESSIDADE",
@@ -970,7 +876,7 @@ window.PetsDogueTranslations.issue01 = {
         "As futuras edições da PETS & DOGUE incluirão links de parceiros, descontos para membros e recomendações premium de produtos e serviços.",
       collars: "Coleiras De Luxo",
       fashion: "Moda Animal",
-      travelAccessories: "Acessórios De Viagem",
+      accessories: "Acessórios Premium",
       grooming: "Ofertas De Grooming",
       hotels: "Hotéis Pet-Friendly",
       discounts: "Descontos Para Membros",
@@ -1009,7 +915,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "ZOMER 2026",
       title: "Editie 01",
       description:
-        "De eerste luxe diereneditie met Miso, coversterren, zomerstijl, reizen, welzijn en het begin van PETS & DOGUE."
+        "De eerste luxe diereneditie met Miso, coversterren, zomerstijl, welzijn, community en het begin van PETS & DOGUE."
     },
 
     intro: {
@@ -1025,7 +931,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso Coververhaal",
       summer: "Iconen Van De Zomer",
       fashion: "Dierenmode",
-      travelWellness: "Reizen & Welzijn",
+      wellness: "Gezondheid & Welzijn",
       community: "Community"
     },
 
@@ -1064,18 +970,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Bekijk Partners"
     },
 
-    travel: {
-      imageAlt: "Reizen met dieren",
-      badge: "REIZEN",
-      title: "Dierenvriendelijke Zomer",
-      p1:
-        "Geïnspireerd door Santorini, Capri en de Côte d’Azur stelt deze editie zich een toekomst voor waarin reizen met dieren elegant, eenvoudig en prachtig ontworpen is.",
-      p2:
-        "Toekomstige PETS & DOGUE-edities verkennen hotels, cafés, stranden, villa’s en bestemmingen waar dieren echt welkom zijn.",
-      guide: "Reisgids",
-      places: "Dierenvriendelijke Plekken"
-    },
-
     rescue: {
       imageAlt: "Dieren in nood",
       badge: "DIEREN IN NOOD",
@@ -1094,7 +988,7 @@ window.PetsDogueTranslations.issue01 = {
         "Toekomstige PETS & DOGUE-edities bevatten partnerlinks, ledenkortingen en luxe aanbevelingen voor producten en diensten.",
       collars: "Luxe Halsbanden",
       fashion: "Dierenmode",
-      travelAccessories: "Reisaccessoires",
+      accessories: "Premium Accessoires",
       grooming: "Verzorgingsaanbiedingen",
       hotels: "Dierenvriendelijke Hotels",
       discounts: "Ledenkortingen",
@@ -1133,11 +1027,11 @@ window.PetsDogueTranslations.issue01 = {
       season: "LATO 2026",
       title: "Wydanie 01",
       description:
-        "Debiutanckie luksusowe wydanie o zwierzętach z Miso, gwiazdami okładki, letnim stylem, podróżami, dobrostanem i początkiem PETS & DOGUE."
+        "Debiutanckie luksusowe wydanie o zwierzętach z Miso, gwiazdami okładki, letnim stylem, dobrostanem, społecznością i początkiem PETS & DOGUE."
     },
 
     intro: {
-      kicker: "WYDAŃIE DEBIUTANCKIE",
+      kicker: "WYDANIE DEBIUTANCKIE",
       title: "Nowy Luksusowy Magazyn Dla Miłośników Zwierząt",
       description:
         "PETS & DOGUE zaczyna się od jednej idei: zwierzęta zasługują na piękno, historie, kulturę, widoczność i swoje miejsce w świecie luksusowych magazynów."
@@ -1149,7 +1043,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Historia Okładkowa Miso",
       summer: "Ikony Lata",
       fashion: "Moda Dla Zwierząt",
-      travelWellness: "Podróże I Dobrostan",
+      wellness: "Zdrowie I Dobrostan",
       community: "Społeczność"
     },
 
@@ -1188,18 +1082,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Oferty Partnerów"
     },
 
-    travel: {
-      imageAlt: "Podróże ze zwierzętami",
-      badge: "PODRÓŻE",
-      title: "Lato Przyjazne Zwierzętom",
-      p1:
-        "Zainspirowane Santorini, Capri i Lazurowym Wybrzeżem wydanie wyobraża przyszłość, w której podróżowanie ze zwierzętami jest eleganckie, proste i pięknie zaplanowane.",
-      p2:
-        "Przyszłe wydania PETS & DOGUE będą przedstawiać hotele, kawiarnie, plaże, wille i miejsca, gdzie zwierzęta są naprawdę mile widziane.",
-      guide: "Przewodnik Podróżniczy",
-      places: "Miejsca Przyjazne Zwierzętom"
-    },
-
     rescue: {
       imageAlt: "Zwierzęta w potrzebie",
       badge: "ZWIERZĘTA W POTRZEBIE",
@@ -1218,7 +1100,7 @@ window.PetsDogueTranslations.issue01 = {
         "Przyszłe wydania PETS & DOGUE będą zawierały linki partnerskie, rabaty dla członków oraz luksusowe rekomendacje produktów i usług.",
       collars: "Luksusowe Obroże",
       fashion: "Moda Dla Zwierząt",
-      travelAccessories: "Akcesoria Podróżne",
+      accessories: "Akcesoria Premium",
       grooming: "Oferty Groomingowe",
       hotels: "Hotele Przyjazne Zwierzętom",
       discounts: "Rabaty Dla Członków",
@@ -1257,7 +1139,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "LÉTO 2026",
       title: "Vydání 01",
       description:
-        "První luxusní vydání o zvířatech s Miso, hvězdami obálky, letním stylem, cestováním, pohodou a začátkem PETS & DOGUE."
+        "První luxusní vydání o zvířatech s Miso, hvězdami obálky, letním stylem, zdravím, komunitou a začátkem PETS & DOGUE."
     },
 
     intro: {
@@ -1273,7 +1155,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Příběh Miso Na Obálce",
       summer: "Ikony Léta",
       fashion: "Móda Pro Zvířata",
-      travelWellness: "Cestování A Pohoda",
+      wellness: "Zdraví A Pohoda",
       community: "Komunita"
     },
 
@@ -1312,18 +1194,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partnerské Nabídky"
     },
 
-    travel: {
-      imageAlt: "Cestování se zvířaty",
-      badge: "CESTOVÁNÍ",
-      title: "Léto Přátelské Ke Zvířatům",
-      p1:
-        "Inspirováno Santorini, Capri a Azurovým pobřežím si toto vydání představuje budoucnost, kde je cestování se zvířaty elegantní, snadné a krásně navržené.",
-      p2:
-        "Budoucí vydání PETS & DOGUE představí hotely, kavárny, pláže, vily a destinace, kde jsou zvířata skutečně vítána.",
-      guide: "Cestovní Průvodce",
-      places: "Místa Přátelská Ke Zvířatům"
-    },
-
     rescue: {
       imageAlt: "Zvířata v nouzi",
       badge: "ZVÍŘATA V NOUZI",
@@ -1342,7 +1212,7 @@ window.PetsDogueTranslations.issue01 = {
         "Budoucí vydání PETS & DOGUE budou obsahovat partnerské odkazy, členské slevy a luxusní doporučení produktů a služeb.",
       collars: "Luxusní Obojky",
       fashion: "Móda Pro Zvířata",
-      travelAccessories: "Cestovní Doplňky",
+      accessories: "Prémiové Doplňky",
       grooming: "Nabídky Péče",
       hotels: "Hotely Přátelské Ke Zvířatům",
       discounts: "Členské Slevy",
@@ -1381,7 +1251,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "LETO 2026",
       title: "Vydanie 01",
       description:
-        "Prvé luxusné vydanie o zvieratách s Miso, hviezdami obálky, letným štýlom, cestovaním, pohodou a začiatkom PETS & DOGUE."
+        "Prvé luxusné vydanie o zvieratách s Miso, hviezdami obálky, letným štýlom, zdravím, komunitou a začiatkom PETS & DOGUE."
     },
 
     intro: {
@@ -1397,7 +1267,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Príbeh Miso Na Obálke",
       summer: "Ikony Leta",
       fashion: "Móda Pre Zvieratá",
-      travelWellness: "Cestovanie A Pohoda",
+      wellness: "Zdravie A Pohoda",
       community: "Komunita"
     },
 
@@ -1436,18 +1306,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partnerské Ponuky"
     },
 
-    travel: {
-      imageAlt: "Cestovanie so zvieratami",
-      badge: "CESTOVANIE",
-      title: "Leto Priateľské K Zvieratám",
-      p1:
-        "Inšpirované Santorini, Capri a Azúrovým pobrežím si toto vydanie predstavuje budúcnosť, kde je cestovanie so zvieratami elegantné, jednoduché a krásne navrhnuté.",
-      p2:
-        "Budúce vydania PETS & DOGUE predstavia hotely, kaviarne, pláže, vily a destinácie, kde sú zvieratá skutočne vítané.",
-      guide: "Cestovný Sprievodca",
-      places: "Miesta Priateľské K Zvieratám"
-    },
-
     rescue: {
       imageAlt: "Zvieratá v núdzi",
       badge: "ZVIERATÁ V NÚDZI",
@@ -1466,7 +1324,7 @@ window.PetsDogueTranslations.issue01 = {
         "Budúce vydania PETS & DOGUE budú obsahovať partnerské odkazy, členské zľavy a luxusné odporúčania produktov a služieb.",
       collars: "Luxusné Obojky",
       fashion: "Móda Pre Zvieratá",
-      travelAccessories: "Cestovné Doplnky",
+      accessories: "Prémiové Doplnky",
       grooming: "Ponuky Starostlivosti",
       hotels: "Hotely Priateľské K Zvieratám",
       discounts: "Členské Zľavy",
@@ -1487,7 +1345,9 @@ window.PetsDogueTranslations.issue01 = {
       archive: "Archív",
       issue02: "Vydanie 02"
     }
-  },  hu: {
+  },
+
+  hu: {
     meta: {
       title: "01. kiadás — PETS & DOGUE",
       description: "A PETS & DOGUE bemutatkozó kiadása."
@@ -1503,7 +1363,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "2026 NYÁR",
       title: "01. kiadás",
       description:
-        "A PETS & DOGUE első luxus állatmagazinja Miso főszereplésével, címlapsztárokkal, nyári stílussal, utazással és jólléttel."
+        "A PETS & DOGUE első luxus állatmagazinja Miso főszereplésével, címlapsztárokkal, nyári stílussal, jólléttel, közösséggel és a PETS & DOGUE kezdetével."
     },
 
     intro: {
@@ -1519,7 +1379,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso Címlaptörténete",
       summer: "A Nyár Ikonjai",
       fashion: "Állatdivat",
-      travelWellness: "Utazás És Jóllét",
+      wellness: "Egészség És Jóllét",
       community: "Közösség"
     },
 
@@ -1558,18 +1418,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partnerajánlatok"
     },
 
-    travel: {
-      imageAlt: "Utazás állatokkal",
-      badge: "UTAZÁS",
-      title: "Állatbarát Nyár",
-      p1:
-        "Santorini, Capri és a Côte d’Azur ihlette ezt a kiadást, amely olyan jövőt képzel el, ahol az állatokkal való utazás elegáns, egyszerű és gyönyörűen megtervezett.",
-      p2:
-        "A PETS & DOGUE jövőbeli kiadásai szállodákat, kávézókat, strandokat, villákat és olyan úti célokat mutatnak be, ahol az állatokat valóban szívesen látják.",
-      guide: "Utazási Útmutató",
-      places: "Állatbarát Helyek"
-    },
-
     rescue: {
       imageAlt: "Segítségre szoruló állatok",
       badge: "SEGÍTSÉGRE SZORULÓ ÁLLATOK",
@@ -1588,7 +1436,7 @@ window.PetsDogueTranslations.issue01 = {
         "A PETS & DOGUE jövőbeli kiadásai partnerlinkeket, tagi kedvezményeket és prémium termék- és szolgáltatásajánlásokat kínálnak.",
       collars: "Luxus Nyakörvek",
       fashion: "Állatdivat",
-      travelAccessories: "Utazási Kiegészítők",
+      accessories: "Prémium Kiegészítők",
       grooming: "Ápolási Ajánlatok",
       hotels: "Állatbarát Szállodák",
       discounts: "Tagi Kedvezmények",
@@ -1627,7 +1475,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "VARĂ 2026",
       title: "Ediția 01",
       description:
-        "Ediția de debut de lux dedicată animalelor, cu Miso, vedete de copertă, stil de vară, călătorii, bunăstare și începutul PETS & DOGUE."
+        "Ediția de debut de lux dedicată animalelor, cu Miso, vedete de copertă, stil de vară, bunăstare, comunitate și începutul PETS & DOGUE."
     },
 
     intro: {
@@ -1643,7 +1491,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Povestea De Copertă A Lui Miso",
       summer: "Iconurile Verii",
       fashion: "Moda Pentru Animale",
-      travelWellness: "Călătorii Și Bunăstare",
+      wellness: "Sănătate Și Bunăstare",
       community: "Comunitate"
     },
 
@@ -1682,18 +1530,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Ofertele Partenerilor"
     },
 
-    travel: {
-      imageAlt: "Călătorii cu animale",
-      badge: "CĂLĂTORII",
-      title: "Vară Pet-Friendly",
-      p1:
-        "Inspirată de Santorini, Capri și Côte d’Azur, această ediție imaginează un viitor în care călătoriile cu animalele sunt elegante, simple și frumos organizate.",
-      p2:
-        "Viitoarele ediții PETS & DOGUE vor explora hoteluri, cafenele, plaje, vile și destinații unde animalele sunt cu adevărat binevenite.",
-      guide: "Ghid De Călătorie",
-      places: "Locuri Pet-Friendly"
-    },
-
     rescue: {
       imageAlt: "Animale care au nevoie de ajutor",
       badge: "ANIMALE ÎN NEVOIE",
@@ -1712,7 +1548,7 @@ window.PetsDogueTranslations.issue01 = {
         "Viitoarele ediții PETS & DOGUE vor include linkuri ale partenerilor, reduceri pentru membri și recomandări premium de produse și servicii.",
       collars: "Zgărzi De Lux",
       fashion: "Moda Pentru Animale",
-      travelAccessories: "Accesorii De Călătorie",
+      accessories: "Accesorii Premium",
       grooming: "Oferte De Grooming",
       hotels: "Hoteluri Pet-Friendly",
       discounts: "Reduceri Pentru Membri",
@@ -1751,7 +1587,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "ЛЯТО 2026",
       title: "Брой 01",
       description:
-        "Дебютният луксозен брой за животни с Miso, звезди на корицата, летен стил, пътувания, благополучие и началото на PETS & DOGUE."
+        "Дебютният луксозен брой за животни с Miso, звезди на корицата, летен стил, здраве, общност и началото на PETS & DOGUE."
     },
 
     intro: {
@@ -1767,7 +1603,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Историята На Miso От Корицата",
       summer: "Икони На Лятото",
       fashion: "Мода За Животни",
-      travelWellness: "Пътувания И Благополучие",
+      wellness: "Здраве И Благополучие",
       community: "Общност"
     },
 
@@ -1806,18 +1642,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Оферти От Партньори"
     },
 
-    travel: {
-      imageAlt: "Пътувания с животни",
-      badge: "ПЪТУВАНИЯ",
-      title: "Pet-Friendly Лято",
-      p1:
-        "Вдъхновен от Санторини, Капри и Лазурния бряг, този брой си представя бъдеще, в което пътуването с животни е елегантно, лесно и красиво организирано.",
-      p2:
-        "Бъдещите броеве на PETS & DOGUE ще представят хотели, кафенета, плажове, вили и дестинации, където животните са истински добре дошли.",
-      guide: "Пътеводител",
-      places: "Pet-Friendly Места"
-    },
-
     rescue: {
       imageAlt: "Животни в нужда",
       badge: "ЖИВОТНИ В НУЖДА",
@@ -1836,7 +1660,7 @@ window.PetsDogueTranslations.issue01 = {
         "Бъдещите броеве на PETS & DOGUE ще включват партньорски връзки, отстъпки за членове и луксозни препоръки за продукти и услуги.",
       collars: "Луксозни Нашийници",
       fashion: "Мода За Животни",
-      travelAccessories: "Аксесоари За Пътуване",
+      accessories: "Премиум Аксесоари",
       grooming: "Оферти За Груминг",
       hotels: "Pet-Friendly Хотели",
       discounts: "Отстъпки За Членове",
@@ -1875,7 +1699,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "ΚΑΛΟΚΑΙΡΙ 2026",
       title: "Τεύχος 01",
       description:
-        "Το πρώτο πολυτελές τεύχος για ζώα με τη Miso, αστέρια εξωφύλλου, καλοκαιρινό στυλ, ταξίδια, ευεξία και την αρχή του PETS & DOGUE."
+        "Το πρώτο πολυτελές τεύχος για ζώα με τη Miso, αστέρια εξωφύλλου, καλοκαιρινό στυλ, ευεξία, κοινότητα και την αρχή του PETS & DOGUE."
     },
 
     intro: {
@@ -1891,7 +1715,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Η Ιστορία Εξωφύλλου Της Miso",
       summer: "Εικόνες Του Καλοκαιριού",
       fashion: "Μόδα Για Ζώα",
-      travelWellness: "Ταξίδια Και Ευεξία",
+      wellness: "Υγεία Και Ευεξία",
       community: "Κοινότητα"
     },
 
@@ -1930,18 +1754,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Προσφορές Συνεργατών"
     },
 
-    travel: {
-      imageAlt: "Ταξίδια με ζώα",
-      badge: "ΤΑΞΙΔΙΑ",
-      title: "Καλοκαίρι Pet-Friendly",
-      p1:
-        "Εμπνευσμένο από τη Σαντορίνη, το Κάπρι και την Κυανή Ακτή, αυτό το τεύχος φαντάζεται ένα μέλλον όπου τα ταξίδια με ζώα είναι κομψά, εύκολα και όμορφα οργανωμένα.",
-      p2:
-        "Τα επόμενα τεύχη του PETS & DOGUE θα παρουσιάσουν ξενοδοχεία, καφέ, παραλίες, βίλες και προορισμούς όπου τα ζώα είναι πραγματικά ευπρόσδεκτα.",
-      guide: "Ταξιδιωτικός Οδηγός",
-      places: "Pet-Friendly Μέρη"
-    },
-
     rescue: {
       imageAlt: "Ζώα σε ανάγκη",
       badge: "ΖΩΑ ΣΕ ΑΝΑΓΚΗ",
@@ -1960,7 +1772,7 @@ window.PetsDogueTranslations.issue01 = {
         "Τα μελλοντικά τεύχη του PETS & DOGUE θα περιλαμβάνουν συνδέσμους συνεργατών, εκπτώσεις μελών και premium προτάσεις προϊόντων και υπηρεσιών.",
       collars: "Πολυτελή Περιλαίμια",
       fashion: "Μόδα Για Ζώα",
-      travelAccessories: "Αξεσουάρ Ταξιδιού",
+      accessories: "Premium Αξεσουάρ",
       grooming: "Προσφορές Περιποίησης",
       hotels: "Pet-Friendly Ξενοδοχεία",
       discounts: "Εκπτώσεις Μελών",
@@ -1999,7 +1811,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "SOMMAR 2026",
       title: "Utgåva 01",
       description:
-        "Den första lyxiga djurutgåvan med Miso, omslagsstjärnor, sommarstil, resor, välmående och början på PETS & DOGUE."
+        "Den första lyxiga djurutgåvan med Miso, omslagsstjärnor, sommarstil, välmående, community och början på PETS & DOGUE."
     },
 
     intro: {
@@ -2015,7 +1827,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso På Omslaget",
       summer: "Sommarens Ikoner",
       fashion: "Djurmode",
-      travelWellness: "Resor Och Välmående",
+      wellness: "Hälsa Och Välmående",
       community: "Community"
     },
 
@@ -2054,18 +1866,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partnererbjudanden"
     },
 
-    travel: {
-      imageAlt: "Resor med djur",
-      badge: "RESOR",
-      title: "Djurvänlig Sommar",
-      p1:
-        "Inspirerad av Santorini, Capri och Côte d’Azur föreställer sig den här utgåvan en framtid där resor med djur är eleganta, enkla och vackert planerade.",
-      p2:
-        "Framtida PETS & DOGUE-utgåvor kommer att utforska hotell, kaféer, stränder, villor och destinationer där djur verkligen är välkomna.",
-      guide: "Reseguide",
-      places: "Djurvänliga Platser"
-    },
-
     rescue: {
       imageAlt: "Djur i behov",
       badge: "DJUR I BEHOV",
@@ -2084,7 +1884,7 @@ window.PetsDogueTranslations.issue01 = {
         "Framtida PETS & DOGUE-utgåvor kommer att innehålla partnerlänkar, medlemsrabatter och lyxiga rekommendationer för produkter och tjänster.",
       collars: "Lyxiga Halsband",
       fashion: "Djurmode",
-      travelAccessories: "Resetillbehör",
+      accessories: "Premiumaccessoarer",
       grooming: "Pälsvårdserbjudanden",
       hotels: "Djurvänliga Hotell",
       discounts: "Medlemsrabatter",
@@ -2123,7 +1923,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "SOMMER 2026",
       title: "Udgave 01",
       description:
-        "Den første luksuriøse dyreudgave med Miso, forsidestjerner, sommerstil, rejser, velvære og begyndelsen på PETS & DOGUE."
+        "Den første luksuriøse dyreudgave med Miso, forsidestjerner, sommerstil, velvære, fællesskab og begyndelsen på PETS & DOGUE."
     },
 
     intro: {
@@ -2139,7 +1939,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso På Forsiden",
       summer: "Sommerens Ikoner",
       fashion: "Mode Til Dyr",
-      travelWellness: "Rejser Og Velvære",
+      wellness: "Sundhed Og Velvære",
       community: "Fællesskab"
     },
 
@@ -2178,18 +1978,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partnerfordele"
     },
 
-    travel: {
-      imageAlt: "Rejser med dyr",
-      badge: "REJSER",
-      title: "Kæledyrsvenlig Sommer",
-      p1:
-        "Inspireret af Santorini, Capri og Côte d’Azur forestiller denne udgave sig en fremtid, hvor rejser med dyr er elegante, nemme og smukt planlagte.",
-      p2:
-        "Fremtidige PETS & DOGUE-udgaver vil udforske hoteller, caféer, strande, villaer og destinationer, hvor dyr virkelig er velkomne.",
-      guide: "Rejseguide",
-      places: "Kæledyrsvenlige Steder"
-    },
-
     rescue: {
       imageAlt: "Dyr i nød",
       badge: "DYR I NØD",
@@ -2208,7 +1996,7 @@ window.PetsDogueTranslations.issue01 = {
         "Fremtidige PETS & DOGUE-udgaver vil indeholde partnerlinks, medlemsrabatter og luksuriøse anbefalinger af produkter og tjenester.",
       collars: "Luksus Halsbånd",
       fashion: "Mode Til Dyr",
-      travelAccessories: "Rejsetilbehør",
+      accessories: "Premium Accessories",
       grooming: "Plejetilbud",
       hotels: "Kæledyrsvenlige Hoteller",
       discounts: "Medlemsrabatter",
@@ -2247,7 +2035,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "SOMMER 2026",
       title: "Utgave 01",
       description:
-        "Den første luksuriøse dyreutgaven med Miso, forsidestjerner, sommerstil, reiser, velvære og starten på PETS & DOGUE."
+        "Den første luksuriøse dyreutgaven med Miso, forsidestjerner, sommerstil, velvære, fellesskap og starten på PETS & DOGUE."
     },
 
     intro: {
@@ -2263,7 +2051,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso På Forsiden",
       summer: "Sommerens Ikoner",
       fashion: "Dyremote",
-      travelWellness: "Reiser Og Velvære",
+      wellness: "Helse Og Velvære",
       community: "Fellesskap"
     },
 
@@ -2302,18 +2090,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partnertilbud"
     },
 
-    travel: {
-      imageAlt: "Reiser med dyr",
-      badge: "REISER",
-      title: "Kjæledyrvennlig Sommer",
-      p1:
-        "Inspirert av Santorini, Capri og Côte d’Azur forestiller denne utgaven seg en fremtid der reiser med dyr er elegante, enkle og vakkert planlagt.",
-      p2:
-        "Fremtidige PETS & DOGUE-utgaver vil utforske hoteller, kafeer, strender, villaer og destinasjoner der dyr virkelig er velkomne.",
-      guide: "Reiseguide",
-      places: "Kjæledyrvennlige Steder"
-    },
-
     rescue: {
       imageAlt: "Dyr i nød",
       badge: "DYR I NØD",
@@ -2332,7 +2108,7 @@ window.PetsDogueTranslations.issue01 = {
         "Fremtidige PETS & DOGUE-utgaver vil inkludere partnerlenker, medlemsrabatter og luksuriøse anbefalinger for produkter og tjenester.",
       collars: "Luksus Halsbånd",
       fashion: "Dyremote",
-      travelAccessories: "Reisetilbehør",
+      accessories: "Premiumtilbehør",
       grooming: "Stelltilbud",
       hotels: "Kjæledyrvennlige Hoteller",
       discounts: "Medlemsrabatter",
@@ -2371,7 +2147,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "KESÄ 2026",
       title: "Numero 01",
       description:
-        "Ensimmäinen ylellinen eläinaiheinen numero, jossa ovat mukana Miso, kansitähdet, kesätyyli, matkailu, hyvinvointi ja PETS & DOGUE -lehden alku."
+        "Ensimmäinen ylellinen eläinaiheinen numero, jossa ovat mukana Miso, kansitähdet, kesätyyli, hyvinvointi, yhteisö ja PETS & DOGUE -lehden alku."
     },
 
     intro: {
@@ -2387,7 +2163,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Mison Kansitarina",
       summer: "Kesän Ikonit",
       fashion: "Lemmikkimuoti",
-      travelWellness: "Matkailu Ja Hyvinvointi",
+      wellness: "Terveys Ja Hyvinvointi",
       community: "Yhteisö"
     },
 
@@ -2426,18 +2202,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Kumppanitarjoukset"
     },
 
-    travel: {
-      imageAlt: "Matkailu eläinten kanssa",
-      badge: "MATKAILU",
-      title: "Lemmikkiystävällinen Kesä",
-      p1:
-        "Santorinin, Caprin ja Côte d’Azurin inspiroimana tämä numero kuvittelee tulevaisuuden, jossa matkustaminen eläinten kanssa on eleganttia, helppoa ja kauniisti suunniteltua.",
-      p2:
-        "Tulevat PETS & DOGUE -numerot esittelevät hotelleja, kahviloita, rantoja, huviloita ja kohteita, joissa eläimet ovat aidosti tervetulleita.",
-      guide: "Matkaopas",
-      places: "Lemmikkiystävälliset Paikat"
-    },
-
     rescue: {
       imageAlt: "Apua tarvitsevat eläimet",
       badge: "APUA TARVITSEVAT ELÄIMET",
@@ -2456,7 +2220,7 @@ window.PetsDogueTranslations.issue01 = {
         "Tulevat PETS & DOGUE -numerot sisältävät kumppanilinkkejä, jäsenalennuksia ja luksustason suosituksia tuotteista ja palveluista.",
       collars: "Luksuskaulapannat",
       fashion: "Lemmikkimuoti",
-      travelAccessories: "Matkatarvikkeet",
+      accessories: "Premium-tarvikkeet",
       grooming: "Hoitoedut",
       hotels: "Lemmikkiystävälliset Hotellit",
       discounts: "Jäsenalennukset",
@@ -2477,7 +2241,9 @@ window.PetsDogueTranslations.issue01 = {
       archive: "Arkisto",
       issue02: "Numero 02"
     }
-  },  tr: {
+  },
+
+  tr: {
     meta: {
       title: "Sayı 01 — PETS & DOGUE",
       description: "PETS & DOGUE'un ilk sayısı."
@@ -2493,7 +2259,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "YAZ 2026",
       title: "Sayı 01",
       description:
-        "Miso, kapak yıldızları, yaz stili, seyahat, sağlık ve PETS & DOGUE'un başlangıcını içeren ilk lüks hayvan sayısı."
+        "Miso, kapak yıldızları, yaz stili, sağlık, topluluk ve PETS & DOGUE'un başlangıcını içeren ilk lüks hayvan sayısı."
     },
 
     intro: {
@@ -2509,7 +2275,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso Kapak Hikâyesi",
       summer: "Yazın İkonları",
       fashion: "Evcil Hayvan Modası",
-      travelWellness: "Seyahat ve Sağlık",
+      wellness: "Sağlık Ve İyi Yaşam",
       community: "Topluluk"
     },
 
@@ -2548,18 +2314,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "Partner Teklifleri"
     },
 
-    travel: {
-      imageAlt: "Evcil hayvanlarla seyahat",
-      badge: "SEYAHAT",
-      title: "Evcil Hayvan Dostu Yaz",
-      p1:
-        "Santorini, Capri ve Côte d’Azur'dan ilham alan bu sayı, hayvanlarla seyahatin zarif, kolay ve güzel tasarlanmış olduğu bir gelecek hayal ediyor.",
-      p2:
-        "Gelecekteki PETS & DOGUE sayıları, hayvanların gerçekten hoş karşılandığı otelleri, kafeleri, plajları, villaları ve destinasyonları keşfedecek.",
-      guide: "Seyahat Rehberi",
-      places: "Evcil Hayvan Dostu Yerler"
-    },
-
     rescue: {
       imageAlt: "Yardıma ihtiyacı olan hayvanlar",
       badge: "YARDIMA İHTİYACI OLAN HAYVANLAR",
@@ -2578,7 +2332,7 @@ window.PetsDogueTranslations.issue01 = {
         "Gelecekteki PETS & DOGUE sayılarında partner bağlantıları, üye indirimleri ve ürün ve hizmetler için lüks öneriler yer alacak.",
       collars: "Lüks Tasmalar",
       fashion: "Evcil Hayvan Modası",
-      travelAccessories: "Seyahat Aksesuarları",
+      accessories: "Premium Aksesuarlar",
       grooming: "Bakım Teklifleri",
       hotels: "Evcil Hayvan Dostu Oteller",
       discounts: "Üye İndirimleri",
@@ -2617,7 +2371,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "صيف 2026",
       title: "العدد 01",
       description:
-        "العدد الفاخر الأول عن الحيوانات، بطولة Miso ونجوم الغلاف وأسلوب الصيف والسفر والعافية وبداية PETS & DOGUE."
+        "العدد الفاخر الأول عن الحيوانات، بطولة Miso ونجوم الغلاف وأسلوب الصيف والعافية والمجتمع وبداية PETS & DOGUE."
     },
 
     intro: {
@@ -2633,7 +2387,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "قصة Miso على الغلاف",
       summer: "أيقونات الصيف",
       fashion: "موضة الحيوانات",
-      travelWellness: "السفر والعافية",
+      wellness: "الصحة والعافية",
       community: "المجتمع"
     },
 
@@ -2672,18 +2426,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "عروض الشركاء"
     },
 
-    travel: {
-      imageAlt: "السفر مع الحيوانات",
-      badge: "السفر",
-      title: "صيف صديق للحيوانات",
-      p1:
-        "مستوحى من سانتوريني وكابري والريفيرا الفرنسية، يتخيل هذا العدد مستقبلًا يكون فيه السفر مع الحيوانات أنيقًا وسهلًا ومصممًا بعناية.",
-      p2:
-        "ستستكشف أعداد PETS & DOGUE القادمة الفنادق والمقاهي والشواطئ والفلل والوجهات التي ترحب بالحيوانات حقًا.",
-      guide: "دليل السفر",
-      places: "أماكن صديقة للحيوانات"
-    },
-
     rescue: {
       imageAlt: "حيوانات تحتاج إلى المساعدة",
       badge: "حيوانات تحتاج إلى المساعدة",
@@ -2702,7 +2444,7 @@ window.PetsDogueTranslations.issue01 = {
         "ستتضمن أعداد PETS & DOGUE القادمة روابط شركاء وخصومات للأعضاء وتوصيات فاخرة للمنتجات والخدمات.",
       collars: "أطواق فاخرة",
       fashion: "موضة الحيوانات",
-      travelAccessories: "إكسسوارات السفر",
+      accessories: "إكسسوارات مميزة",
       grooming: "عروض العناية",
       hotels: "فنادق صديقة للحيوانات",
       discounts: "خصومات الأعضاء",
@@ -2741,7 +2483,7 @@ window.PetsDogueTranslations.issue01 = {
       season: "गर्मी 2026",
       title: "अंक 01",
       description:
-        "Miso, कवर स्टार्स, समर स्टाइल, यात्रा, वेलनेस और PETS & DOGUE की शुरुआत के साथ पहला लक्ज़री एनिमल अंक।"
+        "Miso, कवर स्टार्स, समर स्टाइल, वेलनेस, समुदाय और PETS & DOGUE की शुरुआत के साथ पहला लक्ज़री एनिमल अंक।"
     },
 
     intro: {
@@ -2757,7 +2499,7 @@ window.PetsDogueTranslations.issue01 = {
       miso: "Miso कवर स्टोरी",
       summer: "गर्मी के आइकॉन",
       fashion: "पेट फैशन",
-      travelWellness: "यात्रा और वेलनेस",
+      wellness: "स्वास्थ्य और वेलनेस",
       community: "समुदाय"
     },
 
@@ -2796,18 +2538,6 @@ window.PetsDogueTranslations.issue01 = {
       partners: "पार्टनर ऑफ़र"
     },
 
-    travel: {
-      imageAlt: "पेट के साथ यात्रा",
-      badge: "यात्रा",
-      title: "पेट-फ्रेंडली समर",
-      p1:
-        "सैंटोरिनी, कैप्री और Côte d’Azur से प्रेरित यह अंक ऐसे भविष्य की कल्पना करता है जहाँ पेट के साथ यात्रा करना एलिगेंट, आसान और खूबसूरती से डिज़ाइन किया गया हो।",
-      p2:
-        "भविष्य के PETS & DOGUE अंक ऐसे होटल, कैफ़े, समुद्र तट, विला और गंतव्य दिखाएँगे जहाँ जानवरों का सच में स्वागत हो।",
-      guide: "ट्रैवल गाइड",
-      places: "पेट-फ्रेंडली स्थान"
-    },
-
     rescue: {
       imageAlt: "मदद की ज़रूरत वाले जानवर",
       badge: "मदद की ज़रूरत वाले जानवर",
@@ -2826,7 +2556,7 @@ window.PetsDogueTranslations.issue01 = {
         "भविष्य के PETS & DOGUE अंकों में पार्टनर लिंक, मेंबर डिस्काउंट और उत्पादों व सेवाओं के लिए लक्ज़री सिफारिशें शामिल होंगी।",
       collars: "लक्ज़री कॉलर",
       fashion: "पेट फैशन",
-      travelAccessories: "ट्रैवल एक्सेसरीज़",
+      accessories: "प्रीमियम एक्सेसरीज़",
       grooming: "ग्रूमिंग ऑफ़र",
       hotels: "पेट-फ्रेंडली होटल",
       discounts: "मेंबर डिस्काउंट",
@@ -2848,4 +2578,5 @@ window.PetsDogueTranslations.issue01 = {
       issue02: "अंक 02"
     }
   }
+
 };
