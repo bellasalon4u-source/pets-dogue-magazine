@@ -1392,27 +1392,6 @@ Portraits, galleries and visual stories.
 
 <a
 class="menu-item"
-href="pet-travel.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
-alt="Travel"
->
-
-<div>
-<h3 data-i18n="common.menu.travel">
-Travel
-</h3>
-<p data-i18n="common.menu.travelDescription">
-Hotels, beaches and pet-friendly journeys.
-</p>
-</div>
-
-</a>
-
-<a
-class="menu-item"
 href="pet-fashion.html"
 >
 
@@ -1687,13 +1666,6 @@ PHOTOS
 </a>
 
 <a
-data-i18n="common.navigation.travel"
-href="pet-travel.html"
->
-TRAVEL
-</a>
-
-<a
 data-i18n="common.navigation.fashion"
 href="pet-fashion.html"
 >
@@ -1889,13 +1861,6 @@ Fashion
 </option>
 
 <option
-value="Travel"
-data-i18n="photos.categories.travel"
->
-Travel
-</option>
-
-<option
 value="Rescue"
 data-i18n="photos.categories.rescue"
 >
@@ -1975,15 +1940,6 @@ onclick="setCategory('Fashion',this)"
 data-i18n="photos.categoryButtons.fashion"
 >
 Fashion
-</button>
-
-<button
-class="category-button"
-data-category="Travel"
-onclick="setCategory('Travel',this)"
-data-i18n="photos.categoryButtons.travel"
->
-Travel
 </button>
 
 <button
@@ -2568,9 +2524,6 @@ const map = {
 "Fashion":
 "categories.fashion",
 
-"Travel":
-"categories.travel",
-
 "Rescue":
 "categories.rescue",
 
@@ -2725,7 +2678,22 @@ error
 publicPhotos = [
 ...cmsPhotos,
 ...fallbackPhotos
-];
+]
+.filter(
+function(photo){
+
+return (
+String(
+photo.category ||
+""
+)
+.trim()
+.toLowerCase() !==
+"travel"
+);
+
+}
+);
 
 renderPhotos();
 
@@ -3571,6 +3539,15 @@ attributeFilter:[
 ]
 }
 );
+
+}
+);
+
+window.addEventListener(
+"pageshow",
+function(){
+
+refreshPhotoLanguage();
 
 }
 );
