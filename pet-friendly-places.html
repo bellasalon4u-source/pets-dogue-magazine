@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Discover pet-friendly cafes, restaurants, hotels, parks, beaches, veterinary clinics, pet shops and animal events with PETS & DOGUE.">
+<meta name="description" content="Discover pet-friendly cafes, restaurants, pubs, pizzerias, hotels, parks, beaches, veterinary clinics, pet shops, grooming and animal events with PETS & DOGUE.">
 <title>Pet-Friendly | PETS & DOGUE</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
@@ -200,6 +200,16 @@ html[dir="rtl"] .heart{right:auto;left:14px}
 <span data-t="catRestaurant">
 </span>
 </button>
+<button class="cat" data-cat="pub">
+<i>♨</i>
+<span data-t="catPub">
+</span>
+</button>
+<button class="cat" data-cat="pizzeria">
+<i>◉</i>
+<span data-t="catPizzeria">
+</span>
+</button>
 <button class="cat" data-cat="hotel">
 <i>⌂</i>
 <span data-t="catHotel">
@@ -223,6 +233,11 @@ html[dir="rtl"] .heart{right:auto;left:14px}
 <button class="cat" data-cat="pet-shop">
 <i>▢</i>
 <span data-t="catShop">
+</span>
+</button>
+<button class="cat" data-cat="grooming">
+<i>✂</i>
+<span data-t="catGrooming">
 </span>
 </button>
 <button class="cat" data-cat="events">
@@ -284,6 +299,10 @@ html[dir="rtl"] .heart{right:auto;left:14px}
 </option>
 <option value="restaurant" data-t="catRestaurant">
 </option>
+<option value="pub" data-t="catPub">
+</option>
+<option value="pizzeria" data-t="catPizzeria">
+</option>
 <option value="hotel" data-t="catHotel">
 </option>
 <option value="park" data-t="catPark">
@@ -293,6 +312,8 @@ html[dir="rtl"] .heart{right:auto;left:14px}
 <option value="veterinary" data-t="catVet">
 </option>
 <option value="pet-shop" data-t="catShop">
+</option>
+<option value="grooming" data-t="catGrooming">
 </option>
 <option value="events" data-t="catEvents">
 </option>
@@ -426,10 +447,12 @@ const KEYS=
   "searchPlaceholder",
   "useLocation",
   "addPlace",
-  "radius",
-  "catAll",
+  "radius",  "catAll",
   "catCafe",
   "catRestaurant",
+  "catPub",
+  "catPizzeria",
+  "catGrooming",
   "catHotel",
   "catPark",
   "catBeach",
@@ -483,6 +506,9 @@ const WORDS=
     "All categories",
     "Cafes",
     "Restaurants",
+    "Pubs",
+    "Pizzerias",
+    "Grooming",
     "Hotels",
     "Parks",
     "Beaches",
@@ -534,6 +560,9 @@ const WORDS=
     "Усі категорії",
     "Кафе",
     "Ресторани",
+    "Паби",
+    "Піцерії",
+    "Грумінг",
     "Готелі",
     "Парки",
     "Пляжі",
@@ -585,6 +614,9 @@ const WORDS=
     "Все категории",
     "Кафе",
     "Рестораны",
+    "Пабы",
+    "Пиццерии",
+    "Груминг",
     "Отели",
     "Парки",
     "Пляжи",
@@ -636,6 +668,9 @@ const WORDS=
     "Toutes les catégories",
     "Cafés",
     "Restaurants",
+    "Pubs",
+    "Pizzerias",
+    "Toilettage",
     "Hôtels",
     "Parcs",
     "Plages",
@@ -687,6 +722,9 @@ const WORDS=
     "Alle Kategorien",
     "Cafés",
     "Restaurants",
+    "Pubs",
+    "Pizzerien",
+    "Tierpflege",
     "Hotels",
     "Parks",
     "Strände",
@@ -738,6 +776,9 @@ const WORDS=
     "Todas las categorías",
     "Cafés",
     "Restaurantes",
+    "Pubs",
+    "Pizzerías",
+    "Peluquería para mascotas",
     "Hoteles",
     "Parques",
     "Playas",
@@ -789,6 +830,9 @@ const WORDS=
     "Tutte le categorie",
     "Caffè",
     "Ristoranti",
+    "Pub",
+    "Pizzerie",
+    "Toelettatura",
     "Hotel",
     "Parchi",
     "Spiagge",
@@ -840,6 +884,9 @@ const WORDS=
     "Todas as categorias",
     "Cafés",
     "Restaurantes",
+    "Pubs",
+    "Pizzarias",
+    "Estética animal",
     "Hotéis",
     "Parques",
     "Praias",
@@ -849,8 +896,7 @@ const WORDS=
     "Guardados",
     "Mais próximos",
     "Melhor avaliação",
-    "Encontrados",
-    "locais",
+    "Encontrados",    "locais",
     "A procurar no Google Places…",
     "A verificar OpenStreetMap…",
     "A procurar a sua localização…",
@@ -891,6 +937,9 @@ const WORDS=
     "Alle categorieën",
     "Cafés",
     "Restaurants",
+    "Pubs",
+    "Pizzeria’s",
+    "Trimsalons",
     "Hotels",
     "Parken",
     "Stranden",
@@ -942,6 +991,9 @@ const WORDS=
     "Wszystkie kategorie",
     "Kawiarnie",
     "Restauracje",
+    "Puby",
+    "Pizzerie",
+    "Salony pielęgnacji",
     "Hotele",
     "Parki",
     "Plaże",
@@ -993,6 +1045,9 @@ const WORDS=
     "Všechny kategorie",
     "Kavárny",
     "Restaurace",
+    "Hospody",
+    "Pizzerie",
+    "Salony pro mazlíčky",
     "Hotely",
     "Parky",
     "Pláže",
@@ -1044,6 +1099,9 @@ const WORDS=
     "Všetky kategórie",
     "Kaviarne",
     "Reštaurácie",
+    "Puby",
+    "Pizzerie",
+    "Salóny pre zvieratá",
     "Hotely",
     "Parky",
     "Pláže",
@@ -1064,7 +1122,7 @@ const WORDS=
     "Skúste inú kategóriu, väčší okruh alebo blízke mesto.",
     "Zatiaľ nemáte uložené miesta.",
     "Klepnutím na srdce miesto uložíte.",
-    "Pravidla pre zvieratá nie sú potvrdené",
+    "Pravidlá pre zvieratá nie sú potvrdené",
     "Zvieratá vítané vnútri aj vonku",
     "Iba terasa / vonkajší priestor",
     "Iba záhrada / areál",
@@ -1095,6 +1153,9 @@ const WORDS=
     "Minden kategória",
     "Kávézók",
     "Éttermek",
+    "Pubok",
+    "Pizzériák",
+    "Kisállatkozmetika",
     "Szállodák",
     "Parkok",
     "Strandok",
@@ -1146,6 +1207,9 @@ const WORDS=
     "Toate categoriile",
     "Cafenele",
     "Restaurante",
+    "Pub-uri",
+    "Pizzerii",
+    "Toaletaj animale",
     "Hoteluri",
     "Parcuri",
     "Plaje",
@@ -1186,8 +1250,7 @@ const WORDS=
     "Adresă",
     "Salvează locul",
     "Alege navigația"
-  ],
-  "bg": [
+  ],  "bg": [
     "Намерете места, където вашият любимец е добре дошъл",
     "Кафенета, ресторанти, хотели, плажове, паркове, ветеринари, зоомагазини и събития наблизо.",
     "Град, пощенски код или район",
@@ -1197,6 +1260,9 @@ const WORDS=
     "Всички категории",
     "Кафенета",
     "Ресторанти",
+    "Пъбове",
+    "Пицарии",
+    "Груминг",
     "Хотели",
     "Паркове",
     "Плажове",
@@ -1248,6 +1314,9 @@ const WORDS=
     "Όλες οι κατηγορίες",
     "Καφέ",
     "Εστιατόρια",
+    "Παμπ",
+    "Πιτσαρίες",
+    "Περιποίηση κατοικιδίων",
     "Ξενοδοχεία",
     "Πάρκα",
     "Παραλίες",
@@ -1299,6 +1368,9 @@ const WORDS=
     "Alla kategorier",
     "Caféer",
     "Restauranger",
+    "Pubar",
+    "Pizzerior",
+    "Djurtrim",
     "Hotell",
     "Parker",
     "Stränder",
@@ -1350,6 +1422,9 @@ const WORDS=
     "Alle kategorier",
     "Caféer",
     "Restauranter",
+    "Pubber",
+    "Pizzeriaer",
+    "Kæledyrspleje",
     "Hoteller",
     "Parker",
     "Strande",
@@ -1401,6 +1476,9 @@ const WORDS=
     "Alle kategorier",
     "Kafeer",
     "Restauranter",
+    "Puber",
+    "Pizzeriaer",
+    "Kjæledyrpleie",
     "Hoteller",
     "Parker",
     "Strender",
@@ -1452,6 +1530,9 @@ const WORDS=
     "Kaikki kategoriat",
     "Kahvilat",
     "Ravintolat",
+    "Pubit",
+    "Pizzeriat",
+    "Lemmikkien trimmaus",
     "Hotellit",
     "Puistot",
     "Rannat",
@@ -1503,6 +1584,9 @@ const WORDS=
     "Tüm kategoriler",
     "Kafeler",
     "Restoranlar",
+    "Publar",
+    "Pizzacılar",
+    "Evcil hayvan bakımı",
     "Oteller",
     "Parklar",
     "Plajlar",
@@ -1554,6 +1638,9 @@ const WORDS=
     "كل الفئات",
     "المقاهي",
     "المطاعم",
+    "حانات",
+    "مطاعم بيتزا",
+    "العناية بالحيوانات",
     "الفنادق",
     "الحدائق",
     "الشواطئ",
@@ -1605,6 +1692,9 @@ const WORDS=
     "सभी श्रेणियाँ",
     "कैफ़े",
     "रेस्तराँ",
+    "पब",
+    "पिज़्ज़ेरिया",
+    "पालतू ग्रूमिंग",
     "होटल",
     "पार्क",
     "समुद्र तट",
@@ -1647,47 +1737,2569 @@ const WORDS=
     "नेविगेशन चुनें"
   ]
 };
+
 const IDX=Object.fromEntries(KEYS.map((k,i)=>[k,i]));
-const supported=Object.keys(WORDS),aliases={ua:"uk",cz:"cs",gr:"el",se:"sv",dk:"da"};
-let lang="en",cat="all",radius=15,center={lat:50.8225,lng:-0.1372,label:"Brighton"},places=[],limit=12,activePlaceKey="",map,mapLayer,userMarker,fullMap,fullLayer,routePlace,policyPlace,addGooglePlace,searchTimer,addTimer,languageWatcher;
-const SAVED="pets_dogue_saved_places_v2",SNAPS="pets_dogue_saved_place_snapshots_v1",ADDED="pets_dogue_added_places_v2",POLICY="pets_dogue_pet_place_rules_v1";
-function read(k,d){try{const x=JSON.parse(localStorage.getItem(k));return x??d}catch{return d}}function write(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
-function detectLang(){let v="";for(const k of ["pets_dogue_language","petsDogueLanguage","pd_language","pd_lang","selectedLanguage","language","lang","i18nextLng"]){try{v=localStorage.getItem(k)||"";if(v)break}catch{}}v=v.toLowerCase().replace("_","-").split("-")[0];v=aliases[v]||v;return supported.includes(v)?v:"en"}function t(k){const i=IDX[k];return i===undefined?k:(WORDS[lang]?.[i]||WORDS.en[i]||k)}
-function applyLang(){lang=detectLang();document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll("[data-t]").forEach(e=>e.textContent=t(e.dataset.t));document.querySelectorAll("[data-ph]").forEach(e=>e.placeholder=t(e.dataset.ph));render()}
-function esc(v){return String(v??"").replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#39;"}[c]))}function num(v){const n=Number(v);return Number.isFinite(n)?n:null}function cleanUrl(v){try{const u=new URL(String(v||""),location.origin);return ["http:","https:"].includes(u.protocol)?u.href:""}catch{return ""}}
-function normCat(v,types=[]){v=String(v||"").toLowerCase();const a={cafes:"cafe",coffee:"cafe",coffee_shop:"cafe",restaurants:"restaurant",hotels:"hotel",lodging:"hotel",guest_house:"hotel",hostel:"hotel",motel:"hotel",dog_park:"park",veterinary_care:"veterinary",pet_store:"pet-shop",event_venue:"events"};if(a[v])return a[v];if(["cafe","restaurant","hotel","park","beach","veterinary","pet-shop","events"].includes(v))return v;const s=new Set(types.map(x=>String(x).toLowerCase()));if(s.has("veterinary_care")||s.has("animal_hospital"))return"veterinary";if(s.has("pet_store"))return"pet-shop";if(s.has("dog_park")||s.has("park"))return"park";if(s.has("beach"))return"beach";if(s.has("hotel")||s.has("lodging"))return"hotel";if(s.has("restaurant")||s.has("bar")||s.has("pub"))return"restaurant";if(s.has("cafe")||s.has("coffee_shop"))return"cafe";return"other"}
-function photo(v){if(typeof v==="string")return v.trim();if(v&&typeof v==="object")return String(v.url||v.photoUrl||v.name||"").trim();return""}function photoUrl(p){const x=photo(p.photo)||photo(p.photos?.[0]);if(!x)return"";if(/^https?:\/\//.test(x)||x.startsWith("/"))return x;if(x.startsWith("places/")&&x.includes("/photos/"))return API+"?photo="+encodeURIComponent(x)+"&width=1000";return""}
-function norm(raw,source="google",hint=""){if(!raw||typeof raw!=="object")return null;const lat=num(raw.location?.lat??raw.location?.latitude??raw.lat??raw.latitude),lng=num(raw.location?.lng??raw.location?.longitude??raw.lng??raw.lon??raw.longitude);if(lat===null||lng===null)return null;const types=Array.isArray(raw.types)?raw.types:[],category=normCat(hint||raw.category||raw.primaryType,types),pics=(Array.isArray(raw.photos)?raw.photos:[]).map(photo).filter(Boolean);const one=photo(raw.photo||raw.photoUrl||raw.image);if(one&&!pics.includes(one))pics.unshift(one);let dogs=null;if(typeof raw.allowsDogs==="boolean")dogs=raw.allowsDogs;else if(typeof raw.petFriendly?.allowed==="boolean")dogs=raw.petFriendly.allowed;const opening=raw.openingHours||raw.currentOpeningHours||raw.regularOpeningHours||null;return{id:String(raw.providerId||raw.placeId||raw.id||`${source}-${lat}-${lng}`),providerId:String(raw.providerId||raw.placeId||raw.id||""),source,name:String(raw.name||raw.displayName?.text||raw.displayName||"Pet-friendly place"),category,address:String(raw.address||raw.formattedAddress||""),location:{lat,lng},rating:num(raw.rating),ratingCount:num(raw.ratingCount??raw.userRatingCount)||0,website:cleanUrl(raw.website||raw.websiteUri),phone:String(raw.phone||raw.nationalPhoneNumber||raw.internationalPhoneNumber||""),googleMapsUrl:cleanUrl(raw.googleMapsUrl||raw.googleMapsUri),photos:pics,photo:pics[0]||"",allowsDogs:dogs,openNow:typeof raw.openNow==="boolean"?raw.openNow:typeof opening?.openNow==="boolean"?opening.openNow:null}}
-function dist(a,b,c,d){const R=6371,r=x=>x*Math.PI/180,A=r(c-a),B=r(d-b),q=Math.sin(A/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(B/2)**2;return R*2*Math.atan2(Math.sqrt(q),Math.sqrt(1-q))}function withDist(p){return{...p,distance:dist(center.lat,center.lng,p.location.lat,p.location.lng)}}function key(p){return p.providerId?"g:"+p.providerId:`${p.name.toLowerCase().replace(/\W+/g,"")}|${p.location.lat.toFixed(4)}|${p.location.lng.toFixed(4)}`}
-function merge(groups){const m=new Map;groups.flat().filter(Boolean).forEach(x=>{const p=withDist(x),k=key(p);if(!m.has(k))m.set(k,p);else{const a=m.get(k),best=photoUrl(a)?a:p,other=best===a?p:a;m.set(k,{...other,...best,photo:best.photo||other.photo,photos:best.photos?.length?best.photos:other.photos,rating:best.rating??other.rating,ratingCount:Math.max(best.ratingCount||0,other.ratingCount||0),allowsDogs:best.allowsDogs===true||other.allowsDogs===true?true:best.allowsDogs===false&&other.allowsDogs===false?false:null})}});return[...m.values()].filter(p=>p.distance<=radius+1).filter(p=>p.allowsDogs!==false)}
-function savedSet(){return new Set(read(SAVED,[]))}function snapshots(){return Object.values(read(SNAPS,{})||{}).map(x=>norm(x,x.source||"saved",x.category)).filter(Boolean)}function added(){return(read(ADDED,[])||[]).map(x=>norm(x,"local",x.category)).filter(Boolean)}function toggleSave(p){const s=savedSet(),sn=read(SNAPS,{})||{},k=key(p);if(s.has(k)){s.delete(k);delete sn[k]}else{s.add(k);sn[k]=p}write(SAVED,[...s]);write(SNAPS,sn);render()}
-function policy(p){const q=read(POLICY,{})||{},v=q[key(p)]||q[p.providerId];if(v)return v;if(p.allowsDogs===true)return"inside_outside";if(p.allowsDogs===false)return"restrictions";return"unknown"}function policyText(v){return t(v==="inside_outside"?"policyInside":v==="terrace"?"policyTerrace":v==="garden"?"policyGarden":v==="restrictions"?"policyRestrictions":"policyUnknown")}function policyClass(v){return v==="terrace"?"terrace":v==="restrictions"?"restrict":v==="unknown"?"unknown":""}
-const catLabel=c=>t({all:"catAll",cafe:"catCafe",restaurant:"catRestaurant",hotel:"catHotel",park:"catPark",beach:"catBeach",veterinary:"catVet","pet-shop":"catShop",events:"catEvents",saved:"catSaved"}[c]||"catAll");
-function showChosenPlace(p){if(!p)return;const input=document.getElementById("locationInput");if(input&&p.name)input.value=p.name}
-function mapsPlaceUrl(p){if(p?.googleMapsUrl)return p.googleMapsUrl;const q=[p?.name,p?.address].filter(Boolean).join(", "),u=new URL("https://www.google.com/maps/search/");u.searchParams.set("api","1");u.searchParams.set("query",q||`${p.location.lat},${p.location.lng}`);return u.toString()}
-function primaryInfoUrl(p){return p.website||mapsPlaceUrl(p)}
-function primaryInfoLabel(p){return p.website?t("website"):"Google Maps"}
-function bookingUrl(p){const u=new URL("https://www.booking.com/searchresults.html"),q=[p?.name,p?.address].filter(Boolean).join(", ");u.searchParams.set("ss",q);if(p?.location){u.searchParams.set("latitude",String(p.location.lat));u.searchParams.set("longitude",String(p.location.lng))}return u.toString()}
-function canBook(p){return p?.category==="hotel"}
-function detectActivePlace(list){const n=[...list].filter(p=>Number.isFinite(p.distance)).sort((a,b)=>(a.distance??9999)-(b.distance??9999))[0]||null;if(!n||n.distance>.12){activePlaceKey="";return}activePlaceKey=key(n);center.label=n.name||center.label;showChosenPlace(n);const ok=document.getElementById("locationOk");if(ok)ok.textContent="◆ "+(n.name||center.label||t("locationFound"))}
-function isPolicyConfirmed(p){return policy(p)!=="unknown"}function current(){let a=cat==="saved"?[...places,...snapshots(),...added()].filter((p,i,x)=>x.findIndex(z=>key(z)===key(p))===i).filter(p=>savedSet().has(key(p))):places.filter(p=>cat==="all"||p.category===cat);const mode=document.getElementById("sort").value;a.sort((x,y)=>{const xc=isPolicyConfirmed(x),yc=isPolicyConfirmed(y);if(xc!==yc)return xc?-1:1;const xa=activePlaceKey&&key(x)===activePlaceKey,ya=activePlaceKey&&key(y)===activePlaceKey;if(xa&&!ya)return-1;if(ya&&!xa)return 1;if(mode==="rating"){const ratingDiff=(y.rating||0)-(x.rating||0);if(ratingDiff!==0)return ratingDiff}const distanceDiff=(x.distance??9999)-(y.distance??9999);if(distanceDiff!==0)return distanceDiff;return(y.rating||0)-(x.rating||0)});return a}
-function render(){const box=document.getElementById("cards");if(!box)return;const a=current(),s=savedSet();document.getElementById("count").textContent=`${t("found")}: ${a.length} ${t("places")}`;if(!a.length){box.innerHTML=`<div class="empty"><h2>${esc(cat==="saved"?t("savedEmpty"):t("noPlaces"))}</h2><p>${esc(cat==="saved"?t("savedEmptyText"):t("tryAnother"))}</p></div>`;document.getElementById("more").hidden=true;markers([]);return}const show=a.slice(0,limit);box.innerHTML=show.map(p=>{const k=key(p),ph=photoUrl(p),pol=policy(p),infoUrl=primaryInfoUrl(p),infoLabel=primaryInfoLabel(p),meta=[];if(Number.isFinite(p.distance))meta.push(`${p.distance.toFixed(p.distance<10?1:0)} km`);if(p.ratingCount)meta.push(`(${p.ratingCount})`);meta.push(p.source==="google"?"Google":p.source==="osm"?"OpenStreetMap":"PETS & DOGUE");return`<article class="card" data-open="${esc(k)}"><div class="card-bg"></div>${ph?`<img src="${esc(ph)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none'">`:""}<button class="heart ${s.has(k)?"on":""}" data-save="${esc(k)}">${s.has(k)?"♥":"♡"}</button><div class="card-body"><div class="card-top"><span class="badge">${esc(catLabel(p.category))}</span><span class="rating">${p.rating?`★ ${Number(p.rating).toFixed(1)}`:""}</span></div><h2>${esc(p.name)}</h2><p class="address">${esc(p.address)}</p><div class="pet-row"><span class="pet ${policyClass(pol)}">${esc(policyText(pol))}</span>${p.openNow===true?`<span>${esc(t("open"))}</span>`:p.openNow===false?`<span>${esc(t("closed"))}</span>`:""}</div><div class="meta">${esc(meta.join(" · "))}</div><div class="actions"><button class="dark" data-rules="${esc(k)}">${esc(t("petPolicy"))}</button><button class="dark" data-route="${esc(k)}">${esc(t("route"))}</button>${infoUrl?`<button class="${p.website?"":"maps"}" data-site="${esc(k)}">${esc(infoLabel)}</button>`:""}${canBook(p)?`<button class="booking" data-book="${esc(k)}">Booking</button>`:""}${p.phone?`<button data-call="${esc(k)}">${esc(t("call"))}</button>`:""}</div></div></article>`}).join("");document.getElementById("more").hidden=show.length>=a.length;bindCards();markers(a)}
-function find(k){return[...places,...snapshots(),...added()].find(p=>key(p)===k)||null}function bindCards(){document.querySelectorAll("[data-save]").forEach(b=>b.onclick=e=>{e.stopPropagation();const p=find(b.dataset.save);if(p)toggleSave(p)});document.querySelectorAll("[data-rules]").forEach(b=>b.onclick=e=>{e.stopPropagation();const p=find(b.dataset.rules);if(p)openPolicy(p)});document.querySelectorAll("[data-route]").forEach(b=>b.onclick=e=>{e.stopPropagation();const p=find(b.dataset.route);if(p)openRoute(p)});document.querySelectorAll("[data-site]").forEach(b=>b.onclick=e=>{e.stopPropagation();const p=find(b.dataset.site),u=p?primaryInfoUrl(p):"";if(u)window.open(u,"_blank","noopener")});document.querySelectorAll("[data-book]").forEach(b=>b.onclick=e=>{e.stopPropagation();const p=find(b.dataset.book);if(p&&canBook(p))window.open(bookingUrl(p),"_blank","noopener")});document.querySelectorAll("[data-call]").forEach(b=>b.onclick=e=>{e.stopPropagation();const p=find(b.dataset.call);if(p?.phone)location.href="tel:"+p.phone.replace(/[^+0-9]/g,"")});document.querySelectorAll("[data-open]").forEach(c=>c.onclick=e=>{if(e.target.closest("button"))return;const p=find(c.dataset.open);if(p){activePlaceKey=key(p);showChosenPlace(p);openDetail(p)}})}
-function setStatus(x){document.getElementById("status").textContent=x||""}function markerIcon(c){return L.divIcon({className:"",html:`<div class="marker">${({cafe:"☕",restaurant:"⌑",hotel:"⌂",park:"♧",beach:"≈",veterinary:"✚","pet-shop":"▢",events:"★"}[c]||"•")}</div>`,iconSize:[34,34],iconAnchor:[17,17]})}function initMap(){map=L.map("map",{zoomControl:true}).setView([center.lat,center.lng],12);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap"}).addTo(map);mapLayer=L.layerGroup().addTo(map);userMarker=L.marker([center.lat,center.lng],{icon:L.divIcon({className:"",html:'<div class="userdot"></div>',iconSize:[23,23],iconAnchor:[11,11]})}).addTo(map)}function updateUser(){if(userMarker)userMarker.remove();userMarker=L.marker([center.lat,center.lng],{icon:L.divIcon({className:"",html:'<div class="userdot"></div>',iconSize:[23,23],iconAnchor:[11,11]})}).addTo(map)}function markers(a){if(!mapLayer)return;mapLayer.clearLayers();a.slice(0,80).forEach(p=>L.marker([p.location.lat,p.location.lng],{icon:markerIcon(p.category)}).addTo(mapLayer).on("click",()=>openDetail(p)))}
-async function google(){if(cat==="saved")return[];const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({latitude:center.lat,longitude:center.lng,radius:Math.round(radius*1000),category:cat,maxResults:20,language:lang})});const d=await r.json().catch(()=>({}));if(!r.ok||d.ok!==true)throw Error(d.error||"Google Places error");return(d.places||[]).map(p=>norm(p,"google",cat==="all"?"":cat)).filter(Boolean)}
-function osmQuery(){const a=`(around:${Math.round(radius*1000)},${center.lat},${center.lng})`,dog='["dog"~"^(yes|leashed|designated)$",i]';const q={cafe:[`nwr["amenity"="cafe"]${dog}${a};`],restaurant:[`nwr["amenity"="restaurant"]${dog}${a};`],hotel:[`nwr["tourism"~"^(hotel|guest_house|hostel|motel)$"]${dog}${a};`],park:[`nwr["leisure"="dog_park"]${a};`,`nwr["leisure"="park"]${dog}${a};`],beach:[`nwr["natural"="beach"]${dog}${a};`],veterinary:[`nwr["amenity"="veterinary"]${a};`],"pet-shop":[`nwr["shop"="pet"]${a};`],events:[`nwr["amenity"="events_venue"]${dog}${a};`]};const lines=cat==="all"?[...q.park,...q.beach,...q.veterinary,...q["pet-shop"]]:(q[cat]||[]);return lines.length?`[out:json][timeout:15];(${lines.join("")});out center tags;`:""}function normOsm(e){const g=e.tags||{},lat=num(e.lat??e.center?.lat),lng=num(e.lon??e.center?.lon);if(lat===null||lng===null)return null;let c=normCat(g.amenity||g.tourism||g.leisure||g.natural||g.shop);const dv=String(g.dog||g.dogs||"").toLowerCase();let dogs=["yes","leashed","designated"].includes(dv)||g.leisure==="dog_park"||c==="veterinary"||c==="pet-shop"?true:dv==="no"?false:null;return norm({id:`osm-${e.type}-${e.id}`,name:g.name||g.brand||"Pet-friendly place",address:[g["addr:housenumber"],g["addr:street"],g["addr:city"]].filter(Boolean).join(" "),category:c,lat,lng,website:g.website||g["contact:website"],phone:g.phone||g["contact:phone"],allowsDogs:dogs},"osm",c)}async function osm(){const q=osmQuery();if(!q)return[];const r=await fetch(OVP,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:new URLSearchParams({data:q})});if(!r.ok)throw Error("OSM");const d=await r.json();return(d.elements||[]).map(normOsm).filter(Boolean)}
-async function search(){limit=12;if(cat==="saved"){render();setStatus("");return}setStatus(t("googleSearching"));const local=added().filter(p=>cat==="all"||p.category===cat);let g=[];try{g=await google()}catch(e){console.warn(e)}places=merge([g,local]);detectActivePlace(places);render();setStatus(t("osmSearching"));let o=[];try{o=await Promise.race([osm(),new Promise(r=>setTimeout(()=>r([]),7000))])}catch(e){console.warn(e)}places=merge([g,o,local]);detectActivePlace(places);render();setStatus("")}
-async function geocode(q){const u=new URL(NOM);u.searchParams.set("format","jsonv2");u.searchParams.set("q",q);u.searchParams.set("limit","5");u.searchParams.set("addressdetails","1");u.searchParams.set("accept-language",lang);const r=await fetch(u,{headers:{Accept:"application/json"}});return r.ok?await r.json():[]}function showSuggestions(a){const b=document.getElementById("suggestions");if(!a.length){b.hidden=true;return}b.innerHTML=a.map((x,i)=>`<button class="suggestion" data-geo="${i}"><strong>${esc(String(x.display_name||"").split(",")[0])}</strong><small>${esc(x.display_name||"")}</small></button>`).join("");b.hidden=false;b.querySelectorAll("[data-geo]").forEach(x=>x.onclick=async()=>{const p=a[+x.dataset.geo];activePlaceKey="";center={lat:+p.lat,lng:+p.lon,label:p.display_name||""};document.getElementById("locationInput").value=center.label;b.hidden=true;locationUI();map.setView([center.lat,center.lng],13);updateUser();await search()})}function locationUI(){document.getElementById("locationOk").textContent="◆ "+(center.label||t("locationFound"))}function locate(){setStatus(t("locationSearching"));if(!navigator.geolocation){setStatus(t("locationFail"));return}navigator.geolocation.getCurrentPosition(async p=>{activePlaceKey="";center={lat:p.coords.latitude,lng:p.coords.longitude,label:t("locationFound")};locationUI();map.setView([center.lat,center.lng],13);updateUser();await search()},()=>setStatus(t("locationFail")),{enableHighAccuracy:true,timeout:12000,maximumAge:300000})}
-function openOverlay(id){document.getElementById(id).classList.add("open");document.body.classList.add("lock")}function closeOverlay(id){document.getElementById(id).classList.remove("open");if(!document.querySelector(".overlay.open"))document.body.classList.remove("lock")}
-function openPolicy(p){policyPlace=p;document.getElementById("policyName").textContent=p.name;const v=policy(p);document.querySelectorAll('input[name="editPolicy"]').forEach(x=>x.checked=x.value===v);openOverlay("policyOverlay")}function openRoute(p){routePlace=p;openOverlay("routeOverlay")}function openDetail(p){activePlaceKey=key(p);showChosenPlace(p);document.getElementById("detailName").textContent=p.name;document.getElementById("detailAddress").textContent=p.address;document.getElementById("detailPolicy").textContent=policyText(policy(p));const im=document.getElementById("detailPhoto"),ph=photoUrl(p),infoUrl=primaryInfoUrl(p),infoLabel=primaryInfoLabel(p);im.src=ph||"";im.style.display=ph?"block":"none";im.onerror=()=>im.style.display="none";document.getElementById("detailActions").innerHTML=`<button class="dark" id="dRoute">${esc(t("route"))}</button>${infoUrl?`<button id="dSite" class="${p.website?"":"maps"}">${esc(infoLabel)}</button>`:""}${canBook(p)?`<button id="dBook" class="booking">Booking</button>`:""}${p.phone?`<button id="dCall">${esc(t("call"))}</button>`:""}`;document.getElementById("dRoute").onclick=()=>openRoute(p);if(infoUrl)document.getElementById("dSite").onclick=()=>window.open(infoUrl,"_blank","noopener");if(canBook(p))document.getElementById("dBook").onclick=()=>window.open(bookingUrl(p),"_blank","noopener");if(p.phone)document.getElementById("dCall").onclick=()=>location.href="tel:"+p.phone.replace(/[^+0-9]/g,"");openOverlay("detailOverlay")}
-async function autocomplete(q){const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"autocomplete",query:q,language:lang,latitude:center.lat,longitude:center.lng,radius:Math.round(radius*1000),regionCode:"uk",sessionToken:"pd-"+Date.now()})});const d=await r.json();return d.suggestions||[]}async function details(id){const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"details",placeId:id,language:lang,regionCode:"uk"})});const d=await r.json();return norm(d.place||{},"google")}
-function addSuggest(a){const b=document.getElementById("addSuggestions");if(!a.length){b.hidden=true;return}b.innerHTML=a.map((x,i)=>`<button type="button" class="suggestion" data-add="${i}"><strong>${esc(x.name||x.text||"")}</strong><small>${esc(x.address||x.text||"")}</small></button>`).join("");b.hidden=false;b.querySelectorAll("[data-add]").forEach(x=>x.onclick=async()=>{const p=await details(a[+x.dataset.add].placeId);if(!p)return;addGooglePlace=p;document.getElementById("addName").value=p.name;document.getElementById("addAddress").value=p.address;document.getElementById("addCategory").value=["cafe","restaurant","hotel","park","beach","veterinary","pet-shop","events"].includes(p.category)?p.category:"cafe";b.hidden=true})}
-function initFull(){if(fullMap){fullMap.remove()}fullMap=L.map("fullMap").setView([center.lat,center.lng],12);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap"}).addTo(fullMap);fullLayer=L.layerGroup().addTo(fullMap);current().forEach(p=>L.marker([p.location.lat,p.location.lng],{icon:markerIcon(p.category)}).addTo(fullLayer).on("click",()=>openDetail(p)))}
-function bind(){document.querySelectorAll(".cat").forEach(b=>b.onclick=async()=>{cat=b.dataset.cat;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===b));await search()});document.getElementById("sort").onchange=render;document.getElementById("radius").oninput=e=>{radius=+e.target.value;document.getElementById("radiusValue").textContent=radius+" km"};document.getElementById("radius").onchange=search;document.getElementById("more").onclick=()=>{limit+=12;render()};document.getElementById("locBtn").onclick=locate;document.getElementById("addTop").onclick=document.getElementById("addMap").onclick=()=>openOverlay("addOverlay");document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeOverlay(b.dataset.close));document.querySelectorAll(".overlay").forEach(o=>o.onclick=e=>{if(e.target===o)closeOverlay(o.id)});document.getElementById("policySave").onclick=()=>{if(!policyPlace)return;const v=document.querySelector('input[name="editPolicy"]:checked')?.value||"unknown",q=read(POLICY,{})||{};q[key(policyPlace)]=v;if(policyPlace.providerId)q[policyPlace.providerId]=v;write(POLICY,q);closeOverlay("policyOverlay");render()};document.getElementById("addForm").onsubmit=e=>{e.preventDefault();const name=document.getElementById("addName").value.trim(),address=document.getElementById("addAddress").value.trim(),category=document.getElementById("addCategory").value,pol=document.querySelector('input[name="addPolicy"]:checked')?.value||"inside_outside";if(!name||!address)return;const base=addGooglePlace||{location:{...center}};const raw={...base,id:base.id||"local-"+Date.now(),providerId:base.providerId||"",source:"local",name,address,category,location:base.location,allowsDogs:pol==="restrictions"?null:true};const a=read(ADDED,[])||[];a.unshift(raw);write(ADDED,a.slice(0,250));const p=norm(raw,"local",category),q=read(POLICY,{})||{};q[key(p)]=pol;write(POLICY,q);closeOverlay("addOverlay");e.target.reset();addGooglePlace=null;search()};document.getElementById("locationInput").oninput=e=>{clearTimeout(searchTimer);const q=e.target.value.trim();if(q.length<2){document.getElementById("suggestions").hidden=true;return}searchTimer=setTimeout(async()=>showSuggestions(await geocode(q)),350)};document.getElementById("addSearch").oninput=e=>{clearTimeout(addTimer);const q=e.target.value.trim();if(q.length<2){document.getElementById("addSuggestions").hidden=true;return}addTimer=setTimeout(async()=>{try{addSuggest(await autocomplete(q))}catch{}},300)};document.getElementById("mapFull").onclick=()=>{document.getElementById("fullOverlay").classList.add("open");document.body.classList.add("lock");setTimeout(initFull,60)};document.getElementById("fullClose").onclick=()=>{document.getElementById("fullOverlay").classList.remove("open");document.body.classList.remove("lock");if(fullMap){fullMap.remove();fullMap=null}};document.getElementById("goGoogle").onclick=()=>{if(routePlace)window.open(routePlace.googleMapsUrl||`https://www.google.com/maps/dir/?api=1&destination=${routePlace.location.lat},${routePlace.location.lng}`,"_blank","noopener")};document.getElementById("goWaze").onclick=()=>{if(routePlace)window.open(`https://www.waze.com/ul?ll=${routePlace.location.lat}%2C${routePlace.location.lng}&navigate=yes`,"_blank","noopener")};document.getElementById("goApple").onclick=()=>{if(routePlace)window.open(`https://maps.apple.com/?daddr=${routePlace.location.lat},${routePlace.location.lng}`,"_blank","noopener")};window.addEventListener("storage",e=>{if(["pets_dogue_language","petsDogueLanguage","pets-dogue-language","pd_language","pd_lang","selectedLanguage","selected_language","language","lang","i18nextLng"].includes(e.key)){syncLiveLanguage()}})}
-function syncLiveLanguage(){const next=detectLang();if(next!==lang)applyLang()}
-function startLanguageWatcher(){if(languageWatcher)clearInterval(languageWatcher);languageWatcher=setInterval(syncLiveLanguage,250);window.addEventListener("focus",syncLiveLanguage);window.addEventListener("pageshow",syncLiveLanguage);document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncLiveLanguage()})}
-async function init(){lang=detectLang();applyLang();locationUI();initMap();bind();startLanguageWatcher();await search();locate()}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+const supported=Object.keys(WORDS);
+const aliases={ua:"uk",cz:"cs",gr:"el",se:"sv",dk:"da"};
+
+let lang="en";
+let cat="all";
+let radius=15;
+
+let center={
+lat:50.8225,
+lng:-0.1372,
+label:"Brighton"
+};
+
+let places=[];
+let limit=12;
+let activePlaceKey="";
+
+let map;
+let mapLayer;
+let userMarker;
+let fullMap;
+let fullLayer;
+
+let routePlace;
+let policyPlace;
+let addGooglePlace;
+
+let searchTimer;
+let addTimer;
+let languageWatcher;
+
+const SAVED="pets_dogue_saved_places_v2";
+const SNAPS="pets_dogue_saved_place_snapshots_v1";
+const ADDED="pets_dogue_added_places_v2";
+const POLICY="pets_dogue_pet_place_rules_v1";
+
+function read(k,d){
+try{
+const x=JSON.parse(localStorage.getItem(k));
+return x??d;
+}catch{
+return d;
+}
+}
+
+function write(k,v){
+try{
+localStorage.setItem(k,JSON.stringify(v));
+}catch{}
+}
+
+function detectLang(){
+let v="";
+
+for(const k of [
+"pets_dogue_language",
+"petsDogueLanguage",
+"pd_language",
+"pd_lang",
+"selectedLanguage",
+"language",
+"lang",
+"i18nextLng"
+]){
+try{
+v=localStorage.getItem(k)||"";
+if(v){break;}
+}catch{}
+}
+
+v=v.toLowerCase().replace("_","-").split("-")[0];
+v=aliases[v]||v;
+
+return supported.includes(v)?v:"en";
+}
+
+function t(k){
+const i=IDX[k];
+return i===undefined?k:(WORDS[lang]?.[i]||WORDS.en[i]||k);
+}
+
+function applyLang(){
+lang=detectLang();
+
+document.documentElement.lang=lang;
+document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+document.querySelectorAll("[data-t]").forEach(
+e=>e.textContent=t(e.dataset.t)
+);
+
+document.querySelectorAll("[data-ph]").forEach(
+e=>e.placeholder=t(e.dataset.ph)
+);
+
+render();
+}
+
+function esc(v){
+return String(v??"").replace(
+/[&<>\"']/g,
+c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"\"":"&quot;",
+"'":"&#39;"
+}[c])
+);
+}
+
+function num(v){
+const n=Number(v);
+return Number.isFinite(n)?n:null;
+}
+
+function cleanUrl(v){
+try{
+const u=new URL(String(v||""),location.origin);
+return ["http:","https:"].includes(u.protocol)?u.href:"";
+}catch{
+return "";
+}
+}
+
+function normCat(v,types=[]){
+v=String(v||"").toLowerCase();
+
+const a={
+cafes:"cafe",
+coffee:"cafe",
+coffee_shop:"cafe",
+
+restaurants:"restaurant",
+
+pubs:"pub",
+gastropub:"pub",
+brewpub:"pub",
+beer_garden:"pub",
+irish_pub:"pub",
+
+pizza:"pizzeria",
+pizzas:"pizzeria",
+pizzerias:"pizzeria",
+pizza_restaurant:"pizzeria",
+
+hotels:"hotel",
+lodging:"hotel",
+guest_house:"hotel",
+hostel:"hotel",
+motel:"hotel",
+
+dog_park:"park",
+
+veterinary_care:"veterinary",
+
+pet_store:"pet-shop",
+
+pet_care:"grooming",
+pet_grooming:"grooming",
+
+event_venue:"events"
+};
+
+if(a[v]){
+return a[v];
+}
+
+if([
+"cafe",
+"restaurant",
+"pub",
+"pizzeria",
+"hotel",
+"park",
+"beach",
+"veterinary",
+"pet-shop",
+"grooming",
+"events"
+].includes(v)){
+return v;
+}
+
+const s=new Set(types.map(x=>String(x).toLowerCase()));
+
+if(
+s.has("veterinary_care")||
+s.has("animal_hospital")
+){
+return "veterinary";
+}
+
+if(s.has("pet_store")){
+return "pet-shop";
+}
+
+if(
+s.has("pet_care")||
+s.has("pet_grooming")
+){
+return "grooming";
+}
+
+if(
+s.has("dog_park")||
+s.has("park")
+){
+return "park";
+}
+
+if(s.has("beach")){
+return "beach";
+}
+
+if(
+s.has("hotel")||
+s.has("lodging")
+){
+return "hotel";
+}
+
+if(s.has("pizza_restaurant")){
+return "pizzeria";
+}
+
+if(
+s.has("pub")||
+s.has("gastropub")||
+s.has("brewpub")||
+s.has("beer_garden")||
+s.has("irish_pub")
+){
+return "pub";
+}
+
+if(
+s.has("restaurant")||
+s.has("bar_and_grill")||
+s.has("buffet_restaurant")
+){
+return "restaurant";
+}
+
+if(
+s.has("cafe")||
+s.has("coffee_shop")||
+s.has("dog_cafe")||
+s.has("cat_cafe")
+){
+return "cafe";
+}
+
+return "other";
+}
+
+function photo(v){
+if(typeof v==="string"){
+return v.trim();
+}
+
+if(v&&typeof v==="object"){
+return String(v.url||v.photoUrl||v.name||"").trim();
+}
+
+return "";
+}
+
+function photoUrl(p){
+const x=photo(p.photo)||photo(p.photos?.[0]);
+
+if(!x){
+return "";
+}
+
+if(/^https?:\/\//.test(x)||x.startsWith("/")){
+return x;
+}
+
+if(x.startsWith("places/")&&x.includes("/photos/")){
+return API+"?photo="+encodeURIComponent(x)+"&width=1000";
+}
+
+return "";
+}
+
+function norm(raw,source="google",hint=""){
+if(!raw||typeof raw!=="object"){
+return null;
+}
+
+const lat=num(
+raw.location?.lat??
+raw.location?.latitude??
+raw.lat??
+raw.latitude
+);
+
+const lng=num(
+raw.location?.lng??
+raw.location?.longitude??
+raw.lng??
+raw.lon??
+raw.longitude
+);
+
+if(lat===null||lng===null){
+return null;
+}
+
+const types=Array.isArray(raw.types)?raw.types:[];
+
+const category=normCat(
+hint||
+raw.category||
+raw.primaryType,
+types
+);
+
+const pics=(
+Array.isArray(raw.photos)?
+raw.photos:
+[]
+)
+.map(photo)
+.filter(Boolean);
+
+const one=photo(
+raw.photo||
+raw.photoUrl||
+raw.image
+);
+
+if(one&&!pics.includes(one)){
+pics.unshift(one);
+}
+
+let dogs=null;
+
+if(typeof raw.allowsDogs==="boolean"){
+dogs=raw.allowsDogs;
+}else if(typeof raw.petFriendly?.allowed==="boolean"){
+dogs=raw.petFriendly.allowed;
+}
+
+const opening=
+raw.openingHours||
+raw.currentOpeningHours||
+raw.regularOpeningHours||
+null;
+
+return{
+id:String(
+raw.providerId||
+raw.placeId||
+raw.id||
+`${source}-${lat}-${lng}`
+),
+
+providerId:String(
+raw.providerId||
+raw.placeId||
+raw.id||
+""
+),
+
+source,
+
+name:String(
+raw.name||
+raw.displayName?.text||
+raw.displayName||
+"Pet-friendly place"
+),
+
+category,
+
+address:String(
+raw.address||
+raw.formattedAddress||
+""
+),
+
+location:{
+lat,
+lng
+},
+
+rating:num(raw.rating),
+
+ratingCount:num(
+raw.ratingCount??
+raw.userRatingCount
+)||0,
+
+website:cleanUrl(
+raw.website||
+raw.websiteUri
+),
+
+phone:String(
+raw.phone||
+raw.nationalPhoneNumber||
+raw.internationalPhoneNumber||
+""
+),
+
+googleMapsUrl:cleanUrl(
+raw.googleMapsUrl||
+raw.googleMapsUri
+),
+
+photos:pics,
+
+photo:pics[0]||"",
+
+allowsDogs:dogs,
+
+openNow:
+typeof raw.openNow==="boolean"
+?raw.openNow
+:typeof opening?.openNow==="boolean"
+?opening.openNow
+:null
+};
+}
+
+function dist(a,b,c,d){
+const R=6371;
+const r=x=>x*Math.PI/180;
+
+const A=r(c-a);
+const B=r(d-b);
+
+const q=
+Math.sin(A/2)**2+
+Math.cos(r(a))*
+Math.cos(r(c))*
+Math.sin(B/2)**2;
+
+return R*2*Math.atan2(
+Math.sqrt(q),
+Math.sqrt(1-q)
+);
+}
+
+function withDist(p){
+return{
+...p,
+distance:dist(
+center.lat,
+center.lng,
+p.location.lat,
+p.location.lng
+)
+};
+}
+
+function key(p){
+return p.providerId
+?"g:"+p.providerId
+:`${p.name.toLowerCase().replace(/\W+/g,"")}|${p.location.lat.toFixed(4)}|${p.location.lng.toFixed(4)}`;
+}
+
+function merge(groups){
+const m=new Map();
+
+groups
+.flat()
+.filter(Boolean)
+.forEach(x=>{
+const p=withDist(x);
+const k=key(p);
+
+if(!m.has(k)){
+m.set(k,p);
+return;
+}
+
+const a=m.get(k);
+const best=photoUrl(a)?a:p;
+const other=best===a?p:a;
+
+m.set(k,{
+...other,
+...best,
+
+photo:best.photo||other.photo,
+
+photos:
+best.photos?.length?
+best.photos:
+other.photos,
+
+rating:
+best.rating??
+other.rating,
+
+ratingCount:
+Math.max(
+best.ratingCount||0,
+other.ratingCount||0
+),
+
+allowsDogs:
+best.allowsDogs===true||
+other.allowsDogs===true
+?true
+:best.allowsDogs===false&&
+other.allowsDogs===false
+?false
+:null
+});
+});
+
+return[
+...m.values()
+]
+.filter(
+p=>p.distance<=radius+1
+)
+.filter(
+p=>p.allowsDogs!==false
+);
+}
+
+function savedSet(){
+return new Set(
+read(SAVED,[])
+);
+}
+
+function snapshots(){
+return Object.values(
+read(SNAPS,{})||{}
+)
+.map(
+x=>norm(
+x,
+x.source||"saved",
+x.category
+)
+)
+.filter(Boolean);
+}
+
+function added(){
+return(
+read(ADDED,[])||[]
+)
+.map(
+x=>norm(
+x,
+"local",
+x.category
+)
+)
+.filter(Boolean);
+}
+
+function toggleSave(p){
+const s=savedSet();
+const sn=read(SNAPS,{})||{};
+const k=key(p);
+
+if(s.has(k)){
+s.delete(k);
+delete sn[k];
+}else{
+s.add(k);
+sn[k]=p;
+}
+
+write(
+SAVED,
+[...s]
+);
+
+write(
+SNAPS,
+sn
+);
+
+render();
+}
+
+function policy(p){
+const q=read(POLICY,{})||{};
+const v=q[key(p)]||q[p.providerId];
+
+if(v){
+return v;
+}
+
+if(p.allowsDogs===true){
+return "inside_outside";
+}
+
+if(p.allowsDogs===false){
+return "restrictions";
+}
+
+return "unknown";
+}
+
+function policyText(v){
+return t(
+v==="inside_outside"
+?"policyInside"
+:v==="terrace"
+?"policyTerrace"
+:v==="garden"
+?"policyGarden"
+:v==="restrictions"
+?"policyRestrictions"
+:"policyUnknown"
+);
+}
+
+function policyClass(v){
+return v==="terrace"
+?"terrace"
+:v==="restrictions"
+?"restrict"
+:v==="unknown"
+?"unknown"
+:"";
+}
+
+const catLabel=c=>t(
+{
+all:"catAll",
+cafe:"catCafe",
+restaurant:"catRestaurant",
+pub:"catPub",
+pizzeria:"catPizzeria",
+hotel:"catHotel",
+park:"catPark",
+beach:"catBeach",
+veterinary:"catVet",
+"pet-shop":"catShop",
+grooming:"catGrooming",
+events:"catEvents",
+saved:"catSaved"
+}[c]||
+"catAll"
+);
+
+function showChosenPlace(p){
+if(!p){
+return;
+}
+
+const input=document.getElementById(
+"locationInput"
+);
+
+if(input&&p.name){
+input.value=p.name;
+}
+}
+
+function mapsPlaceUrl(p){
+if(p?.googleMapsUrl){
+return p.googleMapsUrl;
+}
+
+const q=[
+p?.name,
+p?.address
+]
+.filter(Boolean)
+.join(", ");
+
+const u=new URL(
+"https://www.google.com/maps/search/"
+);
+
+u.searchParams.set(
+"api",
+"1"
+);
+
+u.searchParams.set(
+"query",
+q||
+`${p.location.lat},${p.location.lng}`
+);
+
+return u.toString();
+}
+
+function primaryInfoUrl(p){
+return p.website||
+mapsPlaceUrl(p);
+}
+
+function primaryInfoLabel(p){
+return p.website
+?t("website")
+:"Google Maps";
+}
+
+function bookingUrl(p){
+const u=new URL(
+"https://www.booking.com/searchresults.html"
+);
+
+const q=[
+p?.name,
+p?.address
+]
+.filter(Boolean)
+.join(", ");
+
+u.searchParams.set(
+"ss",
+q
+);
+
+if(p?.location){
+u.searchParams.set(
+"latitude",
+String(p.location.lat)
+);
+
+u.searchParams.set(
+"longitude",
+String(p.location.lng)
+);
+}
+
+return u.toString();
+}
+
+function canBook(p){
+return p?.category==="hotel";
+}
+
+function detectActivePlace(list){
+const n=[
+...list
+]
+.filter(
+p=>Number.isFinite(p.distance)
+)
+.sort(
+(a,b)=>
+(a.distance??9999)-
+(b.distance??9999)
+)[0]||
+null;
+
+if(!n||n.distance>.12){
+activePlaceKey="";
+return;
+}
+
+activePlaceKey=key(n);
+
+center.label=
+n.name||
+center.label;
+
+showChosenPlace(n);
+
+const ok=document.getElementById(
+"locationOk"
+);
+
+if(ok){
+ok.textContent=
+"◆ "+
+(
+n.name||
+center.label||
+t("locationFound")
+);
+}
+}
+
+function isPolicyConfirmed(p){
+return policy(p)!=="unknown";
+}
+
+function current(){
+let a=
+cat==="saved"
+?[
+...places,
+...snapshots(),
+...added()
+]
+.filter(
+(p,i,x)=>
+x.findIndex(
+z=>key(z)===key(p)
+)===i
+)
+.filter(
+p=>savedSet().has(key(p))
+)
+:places.filter(
+p=>
+cat==="all"||
+p.category===cat
+);
+
+if(cat==="all"){
+a=a.filter(isPolicyConfirmed);
+}
+
+const mode=document.getElementById(
+"sort"
+).value;
+
+a.sort((x,y)=>{
+const xc=isPolicyConfirmed(x);
+const yc=isPolicyConfirmed(y);
+
+if(xc!==yc){
+return xc?-1:1;
+}
+
+const xa=
+activePlaceKey&&
+key(x)===activePlaceKey;
+
+const ya=
+activePlaceKey&&
+key(y)===activePlaceKey;
+
+if(xa&&!ya){
+return -1;
+}
+
+if(ya&&!xa){
+return 1;
+}
+
+if(mode==="rating"){
+const ratingDiff=
+(y.rating||0)-
+(x.rating||0);
+
+if(ratingDiff!==0){
+return ratingDiff;
+}
+}
+
+const distanceDiff=
+(x.distance??9999)-
+(y.distance??9999);
+
+if(distanceDiff!==0){
+return distanceDiff;
+}
+
+return(
+y.rating||0
+)-
+(
+x.rating||0
+);
+});
+
+return a;
+}
+
+function render(){
+const box=document.getElementById(
+"cards"
+);
+
+if(!box){
+return;
+}
+
+const a=current();
+const s=savedSet();
+
+document.getElementById(
+"count"
+).textContent=
+`${t("found")}: ${a.length} ${t("places")}`;
+
+if(!a.length){
+box.innerHTML=
+`<div class="empty"><h2>${esc(cat==="saved"?t("savedEmpty"):t("noPlaces"))}</h2><p>${esc(cat==="saved"?t("savedEmptyText"):t("tryAnother"))}</p></div>`;
+
+document.getElementById(
+"more"
+).hidden=true;
+
+markers([]);
+
+return;
+}
+
+const show=a.slice(
+0,
+limit
+);
+
+box.innerHTML=
+show.map(p=>{
+const k=key(p);
+const ph=photoUrl(p);
+const pol=policy(p);
+const infoUrl=primaryInfoUrl(p);
+const infoLabel=primaryInfoLabel(p);
+const meta=[];
+
+if(Number.isFinite(p.distance)){
+meta.push(
+`${p.distance.toFixed(p.distance<10?1:0)} km`
+);
+}
+
+if(p.ratingCount){
+meta.push(
+`(${p.ratingCount})`
+);
+}
+
+meta.push(
+p.source==="google"
+?"Google"
+:p.source==="osm"
+?"OpenStreetMap"
+:"PETS & DOGUE"
+);
+
+return`
+<article class="card" data-open="${esc(k)}">
+
+<div class="card-bg"></div>
+
+${ph?`<img src="${esc(ph)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none'">`:""}
+
+<button class="heart ${s.has(k)?"on":""}" data-save="${esc(k)}">
+${s.has(k)?"♥":"♡"}
+</button>
+
+<div class="card-body">
+
+<div class="card-top">
+
+<span class="badge">
+${esc(catLabel(p.category))}
+</span>
+
+<span class="rating">
+${p.rating?`★ ${Number(p.rating).toFixed(1)}`:""}
+</span>
+
+</div>
+
+<h2>
+${esc(p.name)}
+</h2>
+
+<p class="address">
+${esc(p.address)}
+</p>
+
+<div class="pet-row">
+
+<span class="pet ${policyClass(pol)}">
+${esc(policyText(pol))}
+</span>
+
+${p.openNow===true?`<span>${esc(t("open"))}</span>`:p.openNow===false?`<span>${esc(t("closed"))}</span>`:""}
+
+</div>
+
+<div class="meta">
+${esc(meta.join(" · "))}
+</div>
+
+<div class="actions">
+
+<button
+class="dark"
+data-rules="${esc(k)}"
+>
+${esc(t("petPolicy"))}
+</button>
+
+<button
+class="dark"
+data-route="${esc(k)}"
+>
+${esc(t("route"))}
+</button>
+
+${infoUrl?`<button class="${p.website?"":"maps"}" data-site="${esc(k)}">${esc(infoLabel)}</button>`:""}
+
+${canBook(p)?`<button class="booking" data-book="${esc(k)}">Booking</button>`:""}
+
+${p.phone?`<button data-call="${esc(k)}">${esc(t("call"))}</button>`:""}
+
+</div>
+
+</div>
+
+</article>
+`;
+})
+.join("");
+
+document.getElementById(
+"more"
+).hidden=
+show.length>=a.length;
+
+bindCards();
+markers(a);
+}
+
+function find(k){
+return[
+...places,
+...snapshots(),
+...added()
+]
+.find(
+p=>key(p)===k
+)||
+null;
+}
+
+function bindCards(){
+document
+.querySelectorAll("[data-save]")
+.forEach(
+b=>b.onclick=e=>{
+e.stopPropagation();
+
+const p=find(
+b.dataset.save
+);
+
+if(p){
+toggleSave(p);
+}
+}
+);
+
+document
+.querySelectorAll("[data-rules]")
+.forEach(
+b=>b.onclick=e=>{
+e.stopPropagation();
+
+const p=find(
+b.dataset.rules
+);
+
+if(p){
+openPolicy(p);
+}
+}
+);
+
+document
+.querySelectorAll("[data-route]")
+.forEach(
+b=>b.onclick=e=>{
+e.stopPropagation();
+
+const p=find(
+b.dataset.route
+);
+
+if(p){
+openRoute(p);
+}
+}
+);
+
+document
+.querySelectorAll("[data-site]")
+.forEach(
+b=>b.onclick=e=>{
+e.stopPropagation();
+
+const p=find(
+b.dataset.site
+);
+
+const u=
+p?
+primaryInfoUrl(p):
+"";
+
+if(u){
+window.open(
+u,
+"_blank",
+"noopener"
+);
+}
+}
+);
+
+document
+.querySelectorAll("[data-book]")
+.forEach(
+b=>b.onclick=e=>{
+e.stopPropagation();
+
+const p=find(
+b.dataset.book
+);
+
+if(p&&canBook(p)){
+window.open(
+bookingUrl(p),
+"_blank",
+"noopener"
+);
+}
+}
+);
+
+document
+.querySelectorAll("[data-call]")
+.forEach(
+b=>b.onclick=e=>{
+e.stopPropagation();
+
+const p=find(
+b.dataset.call
+);
+
+if(p?.phone){
+location.href=
+"tel:"+
+p.phone.replace(
+/[^+0-9]/g,
+""
+);
+}
+}
+);
+
+document
+.querySelectorAll("[data-open]")
+.forEach(
+c=>c.onclick=e=>{
+if(e.target.closest("button")){
+return;
+}
+
+const p=find(
+c.dataset.open
+);
+
+if(p){
+activePlaceKey=key(p);
+showChosenPlace(p);
+openDetail(p);
+}
+}
+);
+}
+
+function setStatus(x){
+document.getElementById(
+"status"
+).textContent=
+x||
+"";
+}
+
+function markerIcon(c){
+return L.divIcon({
+className:"",
+html:
+`<div class="marker">${
+({
+cafe:"☕",
+restaurant:"⌑",
+pub:"♨",
+pizzeria:"◉",
+hotel:"⌂",
+park:"♧",
+beach:"≈",
+veterinary:"✚",
+"pet-shop":"▢",
+grooming:"✂",
+events:"★"
+}[c]||"•")
+}</div>`,
+iconSize:[
+34,
+34
+],
+iconAnchor:[
+17,
+17
+]
+});
+}
+
+function initMap(){
+map=L.map(
+"map",
+{
+zoomControl:true
+}
+)
+.setView(
+[
+center.lat,
+center.lng
+],
+12
+);
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:"&copy; OpenStreetMap"
+}
+)
+.addTo(map);
+
+mapLayer=L.layerGroup()
+.addTo(map);
+
+userMarker=L.marker(
+[
+center.lat,
+center.lng
+],
+{
+icon:L.divIcon({
+className:"",
+html:'<div class="userdot"></div>',
+iconSize:[23,23],
+iconAnchor:[11,11]
+})
+}
+)
+.addTo(map);
+}
+
+function updateUser(){
+if(userMarker){
+userMarker.remove();
+}
+
+userMarker=L.marker(
+[
+center.lat,
+center.lng
+],
+{
+icon:L.divIcon({
+className:"",
+html:'<div class="userdot"></div>',
+iconSize:[23,23],
+iconAnchor:[11,11]
+})
+}
+)
+.addTo(map);
+}
+
+function markers(a){
+if(!mapLayer){
+return;
+}
+
+mapLayer.clearLayers();
+
+a.slice(
+0,
+80
+)
+.forEach(
+p=>
+L.marker(
+[
+p.location.lat,
+p.location.lng
+],
+{
+icon:markerIcon(p.category)
+}
+)
+.addTo(mapLayer)
+.on(
+"click",
+()=>openDetail(p)
+)
+);
+}
+
+async function google(){
+if(cat==="saved"){
+return[];
+}
+
+const r=await fetch(
+API,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+Accept:"application/json"
+},
+
+body:JSON.stringify({
+latitude:center.lat,
+longitude:center.lng,
+radius:Math.round(radius*1000),
+category:cat,
+maxResults:60,
+language:lang
+})
+}
+);
+
+const d=await r
+.json()
+.catch(
+()=>({})
+);
+
+if(!r.ok||d.ok!==true){
+throw Error(
+d.error||
+"Google Places error"
+);
+}
+
+return(
+d.places||
+[]
+)
+.map(
+p=>norm(
+p,
+"google",
+cat==="all"?"":cat
+)
+)
+.filter(Boolean);
+}
+
+function osmQuery(){
+const a=
+`(around:${Math.round(radius*1000)},${center.lat},${center.lng})`;
+
+const dog=
+'["dog"~"^(yes|leashed|designated)$",i]';
+
+const q={
+cafe:[
+`nwr["amenity"="cafe"]${dog}${a};`
+],
+
+restaurant:[
+`nwr["amenity"="restaurant"]${dog}${a};`
+],
+
+pub:[
+`nwr["amenity"="pub"]${dog}${a};`
+],
+
+pizzeria:[
+`nwr["amenity"="restaurant"]["cuisine"~"pizza",i]${dog}${a};`
+],
+
+hotel:[
+`nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment|camp_site|caravan_site)$"]${dog}${a};`
+],
+
+park:[
+`nwr["leisure"="dog_park"]${a};`,
+`nwr["leisure"="park"]${dog}${a};`
+],
+
+beach:[
+`nwr["natural"="beach"]${dog}${a};`
+],
+
+veterinary:[
+`nwr["amenity"="veterinary"]${a};`
+],
+
+"pet-shop":[
+`nwr["shop"="pet"]${a};`
+],
+
+grooming:[
+`nwr["shop"="pet_grooming"]${a};`
+],
+
+events:[
+`nwr["amenity"="events_venue"]${dog}${a};`
+]
+};
+
+const lines=
+cat==="all"
+?Object.values(q).flat()
+:(q[cat]||[]);
+
+return lines.length
+?`[out:json][timeout:15];(${lines.join("")});out center tags;`
+:"";
+}
+
+function normOsm(e){
+const g=e.tags||{};
+
+const lat=num(
+e.lat??
+e.center?.lat
+);
+
+const lng=num(
+e.lon??
+e.center?.lon
+);
+
+if(lat===null||lng===null){
+return null;
+}
+
+let c=normCat(
+g.amenity||
+g.tourism||
+g.leisure||
+g.natural||
+g.shop
+);
+
+if(
+String(g.cuisine||"")
+.toLowerCase()
+.includes("pizza")&&
+g.amenity==="restaurant"
+){
+c="pizzeria";
+}
+
+if(g.amenity==="pub"){
+c="pub";
+}
+
+if(g.shop==="pet_grooming"){
+c="grooming";
+}
+
+const dv=String(
+g.dog||
+g.dogs||
+""
+)
+.toLowerCase();
+
+let dogs=
+[
+"yes",
+"leashed",
+"designated"
+]
+.includes(dv)||
+g.leisure==="dog_park"||
+c==="veterinary"||
+c==="pet-shop"||
+c==="grooming"
+?true
+:dv==="no"
+?false
+:null;
+
+return norm(
+{
+id:`osm-${e.type}-${e.id}`,
+
+name:
+g.name||
+g.brand||
+"Pet-friendly place",
+
+address:[
+g["addr:housenumber"],
+g["addr:street"],
+g["addr:city"]
+]
+.filter(Boolean)
+.join(" "),
+
+category:c,
+
+lat,
+lng,
+
+website:
+g.website||
+g["contact:website"],
+
+phone:
+g.phone||
+g["contact:phone"],
+
+allowsDogs:dogs
+},
+"osm",
+c
+);
+}
+
+async function osm(){
+const q=osmQuery();
+
+if(!q){
+return[];
+}
+
+const r=await fetch(
+OVP,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
+},
+
+body:new URLSearchParams({
+data:q
+})
+}
+);
+
+if(!r.ok){
+throw Error("OSM");
+}
+
+const d=await r.json();
+
+return(
+d.elements||
+[]
+)
+.map(normOsm)
+.filter(Boolean);
+}
+
+async function search(){
+limit=12;
+
+if(cat==="saved"){
+render();
+setStatus("");
+return;
+}
+
+setStatus(
+t("googleSearching")
+);
+
+const local=added()
+.filter(
+p=>
+cat==="all"||
+p.category===cat
+);
+
+let g=[];
+
+try{
+g=await google();
+}catch(e){
+console.warn(e);
+}
+
+places=merge([
+g,
+local
+]);
+
+detectActivePlace(places);
+render();
+
+setStatus(
+t("osmSearching")
+);
+
+let o=[];
+
+try{
+o=await Promise.race([
+osm(),
+
+new Promise(
+r=>setTimeout(
+()=>r([]),
+7000
+)
+)
+]);
+}catch(e){
+console.warn(e);
+}
+
+places=merge([
+g,
+o,
+local
+]);
+
+detectActivePlace(places);
+render();
+
+setStatus("");
+}
+
+async function geocode(q){
+const u=new URL(NOM);
+
+u.searchParams.set(
+"format",
+"jsonv2"
+);
+
+u.searchParams.set(
+"q",
+q
+);
+
+u.searchParams.set(
+"limit",
+"5"
+);
+
+u.searchParams.set(
+"addressdetails",
+"1"
+);
+
+u.searchParams.set(
+"accept-language",
+lang
+);
+
+const r=await fetch(
+u,
+{
+headers:{
+Accept:"application/json"
+}
+}
+);
+
+return r.ok
+?await r.json()
+:[];
+}
+
+function showSuggestions(a){
+const b=document.getElementById(
+"suggestions"
+);
+
+if(!a.length){
+b.hidden=true;
+return;
+}
+
+b.innerHTML=
+a.map(
+(x,i)=>
+`<button class="suggestion" data-geo="${i}"><strong>${esc(String(x.display_name||"").split(",")[0])}</strong><small>${esc(x.display_name||"")}</small></button>`
+)
+.join("");
+
+b.hidden=false;
+
+b
+.querySelectorAll("[data-geo]")
+.forEach(
+x=>x.onclick=async()=>{
+const p=a[
++x.dataset.geo
+];
+
+activePlaceKey="";
+
+center={
+lat:+p.lat,
+lng:+p.lon,
+label:p.display_name||""
+};
+
+document.getElementById(
+"locationInput"
+).value=center.label;
+
+b.hidden=true;
+
+locationUI();
+
+map.setView(
+[
+center.lat,
+center.lng
+],
+13
+);
+
+updateUser();
+
+await search();
+}
+);
+}
+
+function locationUI(){
+document.getElementById(
+"locationOk"
+).textContent=
+"◆ "+
+(
+center.label||
+t("locationFound")
+);
+}
+
+function locate(){
+setStatus(
+t("locationSearching")
+);
+
+if(!navigator.geolocation){
+setStatus(
+t("locationFail")
+);
+return;
+}
+
+navigator.geolocation.getCurrentPosition(
+
+async p=>{
+activePlaceKey="";
+
+center={
+lat:p.coords.latitude,
+lng:p.coords.longitude,
+label:t("locationFound")
+};
+
+locationUI();
+
+map.setView(
+[
+center.lat,
+center.lng
+],
+13
+);
+
+updateUser();
+
+await search();
+},
+
+()=>{
+setStatus(
+t("locationFail")
+);
+},
+
+{
+enableHighAccuracy:true,
+timeout:12000,
+maximumAge:300000
+}
+
+);
+}
+
+function openOverlay(id){
+document.getElementById(id)
+.classList.add("open");
+
+document.body.classList.add("lock");
+}
+
+function closeOverlay(id){
+document.getElementById(id)
+.classList.remove("open");
+
+if(!document.querySelector(".overlay.open")){
+document.body.classList.remove("lock");
+}
+}
+
+function openPolicy(p){
+policyPlace=p;
+
+document.getElementById(
+"policyName"
+).textContent=p.name;
+
+const v=policy(p);
+
+document
+.querySelectorAll(
+'input[name="editPolicy"]'
+)
+.forEach(
+x=>x.checked=x.value===v
+);
+
+openOverlay(
+"policyOverlay"
+);
+}
+
+function openRoute(p){
+routePlace=p;
+
+openOverlay(
+"routeOverlay"
+);
+}
+
+function openDetail(p){
+activePlaceKey=key(p);
+
+showChosenPlace(p);
+
+document.getElementById(
+"detailName"
+).textContent=p.name;
+
+document.getElementById(
+"detailAddress"
+).textContent=p.address;
+
+document.getElementById(
+"detailPolicy"
+).textContent=
+policyText(
+policy(p)
+);
+
+const im=document.getElementById(
+"detailPhoto"
+);
+
+const ph=photoUrl(p);
+
+const infoUrl=primaryInfoUrl(p);
+const infoLabel=primaryInfoLabel(p);
+
+im.src=ph||"";
+
+im.style.display=
+ph
+?"block"
+:"none";
+
+im.onerror=
+()=>im.style.display="none";
+
+document.getElementById(
+"detailActions"
+).innerHTML=
+`<button class="dark" id="dRoute">${esc(t("route"))}</button>${infoUrl?`<button id="dSite" class="${p.website?"":"maps"}">${esc(infoLabel)}</button>`:""}${canBook(p)?`<button id="dBook" class="booking">Booking</button>`:""}${p.phone?`<button id="dCall">${esc(t("call"))}</button>`:""}`;
+
+document.getElementById(
+"dRoute"
+).onclick=
+()=>openRoute(p);
+
+if(infoUrl){
+document.getElementById(
+"dSite"
+).onclick=
+()=>window.open(
+infoUrl,
+"_blank",
+"noopener"
+);
+}
+
+if(canBook(p)){
+document.getElementById(
+"dBook"
+).onclick=
+()=>window.open(
+bookingUrl(p),
+"_blank",
+"noopener"
+);
+}
+
+if(p.phone){
+document.getElementById(
+"dCall"
+).onclick=
+()=>location.href=
+"tel:"+
+p.phone.replace(
+/[^+0-9]/g,
+""
+);
+}
+
+openOverlay(
+"detailOverlay"
+);
+}
+
+async function autocomplete(q){
+const r=await fetch(
+API,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+action:"autocomplete",
+query:q,
+language:lang,
+latitude:center.lat,
+longitude:center.lng,
+radius:Math.round(radius*1000),
+regionCode:"uk",
+sessionToken:"pd-"+Date.now()
+})
+}
+);
+
+const d=await r.json();
+
+return d.suggestions||[];
+}
+
+async function details(id){
+const r=await fetch(
+API,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+action:"details",
+placeId:id,
+language:lang,
+regionCode:"uk"
+})
+}
+);
+
+const d=await r.json();
+
+return norm(
+d.place||{},
+"google"
+);
+}
+
+function addSuggest(a){
+const b=document.getElementById(
+"addSuggestions"
+);
+
+if(!a.length){
+b.hidden=true;
+return;
+}
+
+b.innerHTML=
+a.map(
+(x,i)=>
+`<button type="button" class="suggestion" data-add="${i}"><strong>${esc(x.name||x.text||"")}</strong><small>${esc(x.address||x.text||"")}</small></button>`
+)
+.join("");
+
+b.hidden=false;
+
+b
+.querySelectorAll("[data-add]")
+.forEach(
+x=>x.onclick=async()=>{
+const p=await details(
+a[
++x.dataset.add
+].placeId
+);
+
+if(!p){
+return;
+}
+
+addGooglePlace=p;
+
+document.getElementById(
+"addName"
+).value=p.name;
+
+document.getElementById(
+"addAddress"
+).value=p.address;
+
+document.getElementById(
+"addCategory"
+).value=
+[
+"cafe",
+"restaurant",
+"pub",
+"pizzeria",
+"hotel",
+"park",
+"beach",
+"veterinary",
+"pet-shop",
+"grooming",
+"events"
+]
+.includes(p.category)
+?p.category
+:"cafe";
+
+b.hidden=true;
+}
+);
+}
+
+function initFull(){
+if(fullMap){
+fullMap.remove();
+}
+
+fullMap=L.map(
+"fullMap"
+)
+.setView(
+[
+center.lat,
+center.lng
+],
+12
+);
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:"&copy; OpenStreetMap"
+}
+)
+.addTo(fullMap);
+
+fullLayer=L.layerGroup()
+.addTo(fullMap);
+
+current()
+.forEach(
+p=>
+L.marker(
+[
+p.location.lat,
+p.location.lng
+],
+{
+icon:markerIcon(p.category)
+}
+)
+.addTo(fullLayer)
+.on(
+"click",
+()=>openDetail(p)
+)
+);
+}
+
+function bind(){
+document
+.querySelectorAll(".cat")
+.forEach(
+b=>b.onclick=async()=>{
+cat=b.dataset.cat;
+
+document
+.querySelectorAll(".cat")
+.forEach(
+x=>x.classList.toggle(
+"active",
+x===b
+)
+);
+
+await search();
+}
+);
+
+document.getElementById(
+"sort"
+).onchange=
+render;
+
+document.getElementById(
+"radius"
+).oninput=
+e=>{
+radius=+e.target.value;
+
+document.getElementById(
+"radiusValue"
+).textContent=
+radius+
+" km";
+};
+
+document.getElementById(
+"radius"
+).onchange=
+search;
+
+document.getElementById(
+"more"
+).onclick=
+()=>{
+limit+=12;
+render();
+};
+
+document.getElementById(
+"locBtn"
+).onclick=
+locate;
+
+document.getElementById(
+"addTop"
+).onclick=
+document.getElementById(
+"addMap"
+).onclick=
+()=>{
+openOverlay(
+"addOverlay"
+);
+};
+
+document
+.querySelectorAll("[data-close]")
+.forEach(
+b=>b.onclick=
+()=>{
+closeOverlay(
+b.dataset.close
+);
+}
+);
+
+document
+.querySelectorAll(".overlay")
+.forEach(
+o=>o.onclick=
+e=>{
+if(e.target===o){
+closeOverlay(o.id);
+}
+}
+);
+
+document.getElementById(
+"policySave"
+).onclick=
+()=>{
+if(!policyPlace){
+return;
+}
+
+const v=document.querySelector(
+'input[name="editPolicy"]:checked'
+)?.value||
+"unknown";
+
+const q=read(
+POLICY,
+{}
+)||
+{};
+
+q[
+key(policyPlace)
+]=v;
+
+if(policyPlace.providerId){
+q[
+policyPlace.providerId
+]=v;
+}
+
+write(
+POLICY,
+q
+);
+
+closeOverlay(
+"policyOverlay"
+);
+
+render();
+};
+
+document.getElementById(
+"addForm"
+).onsubmit=
+e=>{
+e.preventDefault();
+
+const name=document.getElementById(
+"addName"
+).value.trim();
+
+const address=document.getElementById(
+"addAddress"
+).value.trim();
+
+const category=document.getElementById(
+"addCategory"
+).value;
+
+const pol=document.querySelector(
+'input[name="addPolicy"]:checked'
+)?.value||
+"inside_outside";
+
+if(!name||!address){
+return;
+}
+
+const base=
+addGooglePlace||
+{
+location:{
+...center
+}
+};
+
+const raw={
+...base,
+
+id:
+base.id||
+"local-"+
+Date.now(),
+
+providerId:
+base.providerId||
+"",
+
+source:"local",
+
+name,
+
+address,
+
+category,
+
+location:
+base.location,
+
+allowsDogs:
+pol==="restrictions"
+?null
+:true
+};
+
+const a=read(
+ADDED,
+[]
+)||
+[];
+
+a.unshift(raw);
+
+write(
+ADDED,
+a.slice(
+0,
+250
+)
+);
+
+const p=norm(
+raw,
+"local",
+category
+);
+
+const q=read(
+POLICY,
+{}
+)||
+{};
+
+q[
+key(p)
+]=pol;
+
+write(
+POLICY,
+q
+);
+
+closeOverlay(
+"addOverlay"
+);
+
+e.target.reset();
+
+addGooglePlace=null;
+
+search();
+};
+
+document.getElementById(
+"locationInput"
+).oninput=
+e=>{
+clearTimeout(
+searchTimer
+);
+
+const q=e.target.value.trim();
+
+if(q.length<2){
+document.getElementById(
+"suggestions"
+).hidden=true;
+
+return;
+}
+
+searchTimer=setTimeout(
+async()=>{
+showSuggestions(
+await geocode(q)
+);
+},
+350
+);
+};
+
+document.getElementById(
+"addSearch"
+).oninput=
+e=>{
+clearTimeout(
+addTimer
+);
+
+const q=e.target.value.trim();
+
+if(q.length<2){
+document.getElementById(
+"addSuggestions"
+).hidden=true;
+
+return;
+}
+
+addTimer=setTimeout(
+async()=>{
+try{
+addSuggest(
+await autocomplete(q)
+);
+}catch{}
+},
+300
+);
+};
+
+document.getElementById(
+"mapFull"
+).onclick=
+()=>{
+document.getElementById(
+"fullOverlay"
+).classList.add("open");
+
+document.body.classList.add("lock");
+
+setTimeout(
+initFull,
+60
+);
+};
+
+document.getElementById(
+"fullClose"
+).onclick=
+()=>{
+document.getElementById(
+"fullOverlay"
+).classList.remove("open");
+
+document.body.classList.remove("lock");
+
+if(fullMap){
+fullMap.remove();
+fullMap=null;
+}
+};
+
+document.getElementById(
+"goGoogle"
+).onclick=
+()=>{
+if(routePlace){
+window.open(
+routePlace.googleMapsUrl||
+`https://www.google.com/maps/dir/?api=1&destination=${routePlace.location.lat},${routePlace.location.lng}`,
+"_blank",
+"noopener"
+);
+}
+};
+
+document.getElementById(
+"goWaze"
+).onclick=
+()=>{
+if(routePlace){
+window.open(
+`https://www.waze.com/ul?ll=${routePlace.location.lat}%2C${routePlace.location.lng}&navigate=yes`,
+"_blank",
+"noopener"
+);
+}
+};
+
+document.getElementById(
+"goApple"
+).onclick=
+()=>{
+if(routePlace){
+window.open(
+`https://maps.apple.com/?daddr=${routePlace.location.lat},${routePlace.location.lng}`,
+"_blank",
+"noopener"
+);
+}
+};
+
+window.addEventListener(
+"storage",
+e=>{
+if(
+[
+"pets_dogue_language",
+"petsDogueLanguage",
+"pets-dogue-language",
+"pd_language",
+"pd_lang",
+"selectedLanguage",
+"selected_language",
+"language",
+"lang",
+"i18nextLng"
+]
+.includes(e.key)
+){
+syncLiveLanguage();
+}
+}
+);
+}
+
+function syncLiveLanguage(){
+const next=detectLang();
+
+if(next!==lang){
+applyLang();
+}
+}
+
+function startLanguageWatcher(){
+if(languageWatcher){
+clearInterval(
+languageWatcher
+);
+}
+
+languageWatcher=setInterval(
+syncLiveLanguage,
+250
+);
+
+window.addEventListener(
+"focus",
+syncLiveLanguage
+);
+
+window.addEventListener(
+"pageshow",
+syncLiveLanguage
+);
+
+document.addEventListener(
+"visibilitychange",
+()=>{
+if(!document.hidden){
+syncLiveLanguage();
+}
+}
+);
+}
+
+async function init(){
+lang=detectLang();
+
+applyLang();
+
+locationUI();
+
+initMap();
+
+bind();
+
+startLanguageWatcher();
+
+await search();
+
+locate();
+}
+
+if(document.readyState==="loading"){
+document.addEventListener(
+"DOMContentLoaded",
+init
+);
+}else{
+init();
+}
 </script>
+
 <script src="pets-dogue-shell.js?v=20260903-petfriendly-card-restore-2"></script>
+
 </body>
 </html>
