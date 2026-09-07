@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 
@@ -8,7 +8,9 @@ name="viewport"
 content="width=device-width,initial-scale=1,viewport-fit=cover"
 >
 
-<title id="pageTitle">
+<title
+data-i18n="issue01.meta.title"
+>
 PETS &amp; DOGUE Issue 01 | Luxury Pet Magazine, Fashion &amp; Wellness
 </title>
 
@@ -16,6 +18,7 @@ PETS &amp; DOGUE Issue 01 | Luxury Pet Magazine, Fashion &amp; Wellness
 id="pageDescription"
 name="description"
 content="Explore PETS & DOGUE Issue 01, the debut luxury pet magazine featuring cover star Miso, pet fashion, health and wellness, rescue stories, photography and animal lifestyle."
+data-i18n-attr="content:issue01.meta.description"
 >
 
 <meta
@@ -79,13 +82,11 @@ content="PETS & DOGUE"
 >
 
 <meta
-id="ogTitle"
 property="og:title"
 content="PETS & DOGUE Issue 01 | Luxury Pet Magazine, Fashion & Wellness"
 >
 
 <meta
-id="ogDescription"
 property="og:description"
 content="Explore PETS & DOGUE Issue 01, the debut luxury pet magazine featuring cover star Miso, pet fashion, health and wellness, rescue stories, photography and animal lifestyle."
 >
@@ -106,7 +107,6 @@ content="PETS & DOGUE Issue 01 magazine cover"
 >
 
 <meta
-id="ogLocale"
 property="og:locale"
 content="en_GB"
 >
@@ -117,13 +117,11 @@ content="summary_large_image"
 >
 
 <meta
-id="twitterTitle"
 name="twitter:title"
 content="PETS & DOGUE Issue 01 | Luxury Pet Magazine, Fashion & Wellness"
 >
 
 <meta
-id="twitterDescription"
 name="twitter:description"
 content="Explore PETS & DOGUE Issue 01, the debut luxury pet magazine featuring cover star Miso, pet fashion, health and wellness, rescue stories, photography and animal lifestyle."
 >
@@ -304,7 +302,7 @@ cursor:pointer;
 
 img{
 display:block;
-max-width:100%;
+width:100%;
 }
 
 /* =========================================================
@@ -783,15 +781,6 @@ border:2px solid #111;
 border-radius:28px;
 padding:22px;
 text-align:center;
-display:block;
-transition:
-transform .18s ease,
-box-shadow .18s ease;
-}
-
-.toc-card:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .toc-card span{
@@ -810,7 +799,6 @@ margin-top:8px;
 max-width:1200px;
 margin:90px auto;
 padding:0 20px;
-scroll-margin-top:160px;
 }
 
 .editorial{
@@ -885,7 +873,6 @@ line-height:1.5;
 max-width:1400px;
 margin:90px auto;
 padding:0 20px;
-scroll-margin-top:160px;
 }
 
 .full-card{
@@ -976,7 +963,6 @@ background:#c89b3c;
 max-width:1200px;
 margin:90px auto;
 padding:0 20px;
-scroll-margin-top:160px;
 }
 
 .shop-box{
@@ -1392,20 +1378,6 @@ select:focus-visible{
 outline:3px solid var(--green);
 outline-offset:3px;
 }
-
-@media(prefers-reduced-motion:reduce){
-
-*{
-scroll-behavior:auto!important;
-}
-
-.side-menu,
-.menu-overlay,
-.toc-card{
-transition:none!important;
-}
-
-}
 </style>
 </head>
 
@@ -1419,7 +1391,6 @@ id="menuOverlay"
 <aside
 class="side-menu"
 id="sideMenu"
-aria-hidden="true"
 >
 
 <div class="side-menu-head">
@@ -1465,10 +1436,7 @@ SUBSCRIBE
 LANGUAGE
 </label>
 
-<select
-id="shellLanguageSelect"
-aria-label="Language"
->
+<select id="shellLanguageSelect">
 
 <option value="en">🇬🇧 EN — English</option>
 <option value="uk">🇺🇦 UA — Українська</option>
@@ -1501,101 +1469,7 @@ aria-label="Language"
 <nav
 class="menu-list"
 id="shellMenuList"
-aria-label="PETS & DOGUE sections"
->
-
-<a
-class="menu-item active"
-href="issue-01.html"
->
-Magazine
-</a>
-
-<a
-class="menu-item"
-href="members-gallery.html"
->
-Cover Stars
-</a>
-
-<a
-class="menu-item"
-href="special-offers.html"
->
-Discounts
-</a>
-
-<a
-class="menu-item"
-href="pet-friendly-places.html"
->
-Pet-Friendly Places
-</a>
-
-<a
-class="menu-item"
-href="articles.html"
->
-Articles
-</a>
-
-<a
-class="menu-item"
-href="photos.html"
->
-Photos
-</a>
-
-<a
-class="menu-item"
-href="pet-fashion.html"
->
-Fashion
-</a>
-
-<a
-class="menu-item"
-href="wellness.html"
->
-Health
-</a>
-
-<a
-class="menu-item"
-href="local-community.html"
->
-Community
-</a>
-
-<a
-class="menu-item"
-href="contests.html"
->
-Contests
-</a>
-
-<a
-class="menu-item"
-href="pets-in-need.html"
->
-Help
-</a>
-
-<a
-class="menu-item"
-href="pet-marketplace.html"
->
-Marketplace
-</a>
-
-<a
-class="menu-item"
-href="partners.html"
->
-Partners
-</a>
-
-</nav>
+></nav>
 
 </aside>
 
@@ -1618,7 +1492,6 @@ aria-label="Open menu"
 class="brand notranslate"
 translate="no"
 href="index.html"
-aria-label="PETS & DOGUE home"
 >
 
 <div class="brand-small">
@@ -1653,66 +1526,7 @@ aria-hidden="true"
 <nav
 class="primary-nav"
 id="primaryNav"
-aria-label="PETS & DOGUE main sections"
->
-
-<a
-href="issue-01.html"
-class="active"
-aria-current="page"
->
-MAGAZINE
-</a>
-
-<a href="members-gallery.html">
-COVER STARS
-</a>
-
-<a href="special-offers.html">
-DISCOUNTS
-</a>
-
-<a href="pet-friendly-places.html">
-PET-FRIENDLY PLACES
-</a>
-
-<a href="articles.html">
-ARTICLES
-</a>
-
-<a href="photos.html">
-PHOTOS
-</a>
-
-<a href="pet-fashion.html">
-FASHION
-</a>
-
-<a href="wellness.html">
-HEALTH
-</a>
-
-<a href="local-community.html">
-COMMUNITY
-</a>
-
-<a href="contests.html">
-CONTESTS
-</a>
-
-<a href="pets-in-need.html">
-HELP
-</a>
-
-<a href="pet-marketplace.html">
-MARKETPLACE
-</a>
-
-<a href="partners.html">
-PARTNERS
-</a>
-
-</nav>
+></nav>
 
 </header>
 
@@ -1725,10 +1539,9 @@ PARTNERS
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="PETS & DOGUE Issue 01 luxury pet magazine cover"
+alt="PETS & DOGUE Issue 01"
 data-i18n-attr="alt:issue01.hero.imageAlt"
 fetchpriority="high"
-decoding="async"
 >
 
 <div class="cover-text">
@@ -1746,7 +1559,6 @@ The debut luxury animal issue starring Miso, cover stars, summer style, wellness
 </p>
 
 </div>
-
 </div>
 
 </section>
@@ -1780,83 +1592,60 @@ Inside This Issue
 
 <div class="toc-grid">
 
-<a
-class="toc-card"
-href="#editors-letter"
->
+<div class="toc-card">
 <span>01</span>
 <h3 data-i18n="issue01.toc.editorLetter">
 Editor’s Letter
 </h3>
-</a>
+</div>
 
-<a
-class="toc-card"
-href="#miso-cover-story"
->
+<div class="toc-card">
 <span>02</span>
 <h3 data-i18n="issue01.toc.miso">
 Miso Cover Story
 </h3>
-</a>
+</div>
 
-<a
-class="toc-card"
-href="#pet-fashion"
->
+<div class="toc-card">
 <span>03</span>
 <h3 data-i18n="issue01.toc.summer">
 Icons Of Summer
 </h3>
-</a>
+</div>
 
-<a
-class="toc-card"
-href="#pet-fashion"
->
+<div class="toc-card">
 <span>04</span>
 <h3 data-i18n="issue01.toc.fashion">
 Pet Fashion
 </h3>
-</a>
+</div>
 
-<a
-class="toc-card"
-href="#health-wellness"
->
+<div class="toc-card">
 <span>05</span>
 <h3 data-i18n="issue01.toc.wellness">
 Health &amp; Wellness
 </h3>
-</a>
+</div>
 
-<a
-class="toc-card"
-href="#community-purpose"
->
+<div class="toc-card">
 <span>06</span>
 <h3 data-i18n="issue01.toc.community">
 Community
 </h3>
-</a>
-
 </div>
 
+</div>
 </section>
 
 
-<section
-class="page"
-id="editors-letter"
->
+<section class="page">
 
 <div class="editorial">
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="Miso, PETS & DOGUE Issue 01 cover star"
+alt="Miso"
 loading="lazy"
-decoding="async"
 >
 
 <div class="text">
@@ -1898,19 +1687,15 @@ From cover stars to local communities, PETS & DOGUE is more than a magazine. It 
 </section>
 
 
-<section
-class="full-page"
-id="miso-cover-story"
->
+<section class="full-page">
 
 <div class="full-card">
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="Miso, the first PETS & DOGUE cover star"
+alt="Miso Cover Star"
 data-i18n-attr="alt:issue01.cover.imageAlt"
 loading="lazy"
-decoding="async"
 >
 
 <div class="full-content">
@@ -1957,19 +1742,15 @@ Become A Cover Star
 </section>
 
 
-<section
-class="page"
-id="pet-fashion"
->
+<section class="page">
 
 <div class="editorial reverse">
 
 <img
 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
-alt="Stylish dog representing PETS & DOGUE pet fashion"
+alt="Pet Fashion"
 data-i18n-attr="alt:issue01.fashion.imageAlt"
 loading="lazy"
-decoding="async"
 >
 
 <div class="text">
@@ -2020,18 +1801,14 @@ Shop Partners
 </section>
 
 
-<section
-class="page"
-id="health-wellness"
->
+<section class="page">
 
 <div class="editorial">
 
 <img
 src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1200&q=80"
-alt="Pet veterinary care and animal wellness"
+alt="Pet Health and Wellness"
 loading="lazy"
-decoding="async"
 >
 
 <div class="text">
@@ -2077,19 +1854,15 @@ Read Articles
 </section>
 
 
-<section
-class="page"
-id="community-purpose"
->
+<section class="page">
 
 <div class="editorial reverse">
 
 <img
 src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80"
-alt="Rescue pet representing PETS & DOGUE Pets In Need"
+alt="Pets In Need"
 data-i18n-attr="alt:issue01.rescue.imageAlt"
 loading="lazy"
-decoding="async"
 >
 
 <div class="text">
@@ -2140,10 +1913,7 @@ Volunteer
 </section>
 
 
-<section
-class="shop-strip"
-id="shop-the-issue"
->
+<section class="shop-strip">
 
 <div class="shop-box">
 
@@ -2272,7 +2042,7 @@ Join Club
 
 <footer>
 
-<h2 class="notranslate" translate="no">
+<h2>
 PETS &amp; DOGUE
 </h2>
 
@@ -2297,6 +2067,12 @@ Cover Stars
 </a>
 
 <a
+href="special-offers.html"
+>
+Discounts
+</a>
+
+<a
 href="articles.html"
 data-i18n="common.footer.articles"
 >
@@ -2314,7 +2090,7 @@ Photos
 href="pet-friendly-places.html"
 data-i18n="common.footer.places"
 >
-Pet-Friendly Places
+Places
 </a>
 
 <a
@@ -2359,9 +2135,9 @@ Admin
 
 
 <!-- PETS & DOGUE UNIFIED 23-LANGUAGE SYSTEM -->
-<script src="i18n/common.js?v=2"></script>
-<script src="i18n/issue-01.js?v=2"></script>
-<script src="i18n/engine.js?v=3"></script>
+<script src="i18n/common.js"></script>
+<script src="i18n/issue-01.js"></script>
+<script src="i18n/engine.js"></script>
 
 <script>
 "use strict";
@@ -2952,198 +2728,6 @@ partners:"पार्टनर"
 
 };
 
-/* =========================================================
-SEO FOR ALL 23 LANGUAGES
-========================================================= */
-
-const ISSUE_SEO = {
-
-en:{
-title:"PETS & DOGUE Issue 01 | Luxury Pet Magazine, Fashion & Wellness",
-description:"Explore PETS & DOGUE Issue 01, the debut luxury pet magazine featuring cover star Miso, pet fashion, health and wellness, rescue stories, photography and animal lifestyle.",
-locale:"en_GB"
-},
-
-uk:{
-title:"PETS & DOGUE Випуск 01 | Журнал про тварин, моду та здоров’я",
-description:"Відкрийте перший випуск PETS & DOGUE з Miso на обкладинці, модою для тварин, здоров’ям, добробутом, історіями порятунку та lifestyle.",
-locale:"uk_UA"
-},
-
-ru:{
-title:"PETS & DOGUE Выпуск 01 | Журнал о питомцах, моде и здоровье",
-description:"Откройте первый выпуск PETS & DOGUE с Miso на обложке, модой для питомцев, здоровьем, wellness, историями спасения и lifestyle.",
-locale:"ru_RU"
-},
-
-fr:{
-title:"PETS & DOGUE Numéro 01 | Magazine animaux, mode et bien-être",
-description:"Découvrez le premier numéro de PETS & DOGUE avec Miso, mode animale, bien-être, santé, histoires de sauvetage et lifestyle.",
-locale:"fr_FR"
-},
-
-de:{
-title:"PETS & DOGUE Ausgabe 01 | Haustiermagazin, Mode & Gesundheit",
-description:"Entdecken Sie PETS & DOGUE Ausgabe 01 mit Cover Star Miso, Tiermode, Gesundheit, Wellness, Rettungsgeschichten und Lifestyle.",
-locale:"de_DE"
-},
-
-es:{
-title:"PETS & DOGUE Número 01 | Revista de mascotas, moda y bienestar",
-description:"Descubre el primer número de PETS & DOGUE con Miso, moda para mascotas, salud, bienestar, historias de rescate y lifestyle.",
-locale:"es_ES"
-},
-
-it:{
-title:"PETS & DOGUE Numero 01 | Rivista pet, moda e benessere",
-description:"Scopri il primo numero di PETS & DOGUE con Miso, moda per animali, salute, benessere, storie di salvataggio e lifestyle.",
-locale:"it_IT"
-},
-
-pt:{
-title:"PETS & DOGUE Edição 01 | Revista pet, moda e bem-estar",
-description:"Descubra a primeira edição da PETS & DOGUE com Miso, moda pet, saúde, bem-estar, histórias de resgate e lifestyle.",
-locale:"pt_PT"
-},
-
-nl:{
-title:"PETS & DOGUE Editie 01 | Huisdierenmagazine, mode & wellness",
-description:"Ontdek PETS & DOGUE Editie 01 met coverster Miso, huisdierenmode, gezondheid, wellness, reddingsverhalen en lifestyle.",
-locale:"nl_NL"
-},
-
-pl:{
-title:"PETS & DOGUE Wydanie 01 | Magazyn o zwierzętach, modzie i zdrowiu",
-description:"Poznaj pierwsze wydanie PETS & DOGUE z Miso, modą dla zwierząt, zdrowiem, wellness, historiami ratunkowymi i lifestyle.",
-locale:"pl_PL"
-},
-
-cs:{
-title:"PETS & DOGUE Vydání 01 | Magazín o mazlíčcích, módě a zdraví",
-description:"Objevte první vydání PETS & DOGUE s Miso, módou pro mazlíčky, zdravím, wellness, záchrannými příběhy a lifestyle.",
-locale:"cs_CZ"
-},
-
-sk:{
-title:"PETS & DOGUE Vydanie 01 | Magazín o miláčikoch, móde a zdraví",
-description:"Objavte prvé vydanie PETS & DOGUE s Miso, módou pre miláčikov, zdravím, wellness, záchrannými príbehmi a lifestyle.",
-locale:"sk_SK"
-},
-
-hu:{
-title:"PETS & DOGUE 01. szám | Kisállatmagazin, divat és wellness",
-description:"Fedezze fel a PETS & DOGUE első számát Misóval, kisállatdivattal, egészséggel, wellnesszel, mentési történetekkel és lifestyle témákkal.",
-locale:"hu_HU"
-},
-
-ro:{
-title:"PETS & DOGUE Numărul 01 | Revistă pentru animale, modă și wellness",
-description:"Descoperă primul număr PETS & DOGUE cu Miso, modă pentru animale, sănătate, wellness, povești de salvare și lifestyle.",
-locale:"ro_RO"
-},
-
-bg:{
-title:"PETS & DOGUE Брой 01 | Списание за любимци, мода и здраве",
-description:"Открийте първия брой на PETS & DOGUE с Miso, мода за любимци, здраве, wellness, спасителни истории и lifestyle.",
-locale:"bg_BG"
-},
-
-el:{
-title:"PETS & DOGUE Τεύχος 01 | Περιοδικό κατοικιδίων, μόδα και ευεξία",
-description:"Ανακαλύψτε το πρώτο τεύχος του PETS & DOGUE με τη Miso, μόδα κατοικιδίων, υγεία, ευεξία, διασώσεις και lifestyle.",
-locale:"el_GR"
-},
-
-sv:{
-title:"PETS & DOGUE Nummer 01 | Husdjursmagasin, mode & hälsa",
-description:"Upptäck PETS & DOGUE Nummer 01 med Miso, husdjursmode, hälsa, wellness, räddningsberättelser och lifestyle.",
-locale:"sv_SE"
-},
-
-da:{
-title:"PETS & DOGUE Nummer 01 | Kæledyrsmagasin, mode & sundhed",
-description:"Oplev PETS & DOGUE Nummer 01 med Miso, kæledyrsmode, sundhed, wellness, redningshistorier og lifestyle.",
-locale:"da_DK"
-},
-
-no:{
-title:"PETS & DOGUE Utgave 01 | Kjæledyrmagasin, mote & helse",
-description:"Oppdag PETS & DOGUE Utgave 01 med Miso, kjæledyrmote, helse, wellness, redningshistorier og lifestyle.",
-locale:"nb_NO"
-},
-
-fi:{
-title:"PETS & DOGUE Numero 01 | Lemmikkilehti, muoti ja hyvinvointi",
-description:"Tutustu PETS & DOGUE -lehden ensimmäiseen numeroon: Miso, lemmikkimuoti, terveys, hyvinvointi, pelastustarinat ja lifestyle.",
-locale:"fi_FI"
-},
-
-tr:{
-title:"PETS & DOGUE Sayı 01 | Evcil hayvan dergisi, moda ve sağlık",
-description:"Miso, evcil hayvan modası, sağlık, wellness, kurtarma hikâyeleri ve lifestyle içeren PETS & DOGUE ilk sayısını keşfedin.",
-locale:"tr_TR"
-},
-
-ar:{
-title:"PETS & DOGUE العدد 01 | مجلة الحيوانات والموضة والعافية",
-description:"اكتشف العدد الأول من PETS & DOGUE مع Miso وموضة الحيوانات والصحة والعافية وقصص الإنقاذ ونمط الحياة.",
-locale:"ar_SA"
-},
-
-hi:{
-title:"PETS & DOGUE अंक 01 | पेट मैगज़ीन, फ़ैशन और वेलनेस",
-description:"Miso, पेट फ़ैशन, स्वास्थ्य, वेलनेस, रेस्क्यू कहानियों और lifestyle के साथ PETS & DOGUE का पहला अंक देखें।",
-locale:"hi_IN"
-}
-
-};
-
-function normalizeShellLanguage(
-value
-){
-
-let language =
-String(
-value ||
-""
-)
-.trim()
-.toLowerCase();
-
-if(
-language.includes("-")
-){
-
-language =
-language.split("-")[0];
-
-}
-
-if(
-language.includes("_")
-){
-
-language =
-language.split("_")[0];
-
-}
-
-if(
-language === "ua"
-){
-
-language = "uk";
-
-}
-
-return SHELL_T[
-language
-]
-?language
-:"en";
-
-}
-
 function getShellLanguage(){
 
 const saved =
@@ -3153,121 +2737,9 @@ SHELL_LANGUAGE_KEY
 document.documentElement.lang ||
 "en";
 
-return normalizeShellLanguage(
-saved
-);
-
-}
-
-function updateIssueSeo(){
-
-const language =
-getShellLanguage();
-
-const seo =
-ISSUE_SEO[
-language
-] ||
-ISSUE_SEO.en;
-
-document.title =
-seo.title;
-
-const pageDescription =
-document.getElementById(
-"pageDescription"
-);
-
-if(
-pageDescription
-){
-
-pageDescription.setAttribute(
-"content",
-seo.description
-);
-
-}
-
-const ogTitle =
-document.getElementById(
-"ogTitle"
-);
-
-if(
-ogTitle
-){
-
-ogTitle.setAttribute(
-"content",
-seo.title
-);
-
-}
-
-const ogDescription =
-document.getElementById(
-"ogDescription"
-);
-
-if(
-ogDescription
-){
-
-ogDescription.setAttribute(
-"content",
-seo.description
-);
-
-}
-
-const ogLocale =
-document.getElementById(
-"ogLocale"
-);
-
-if(
-ogLocale
-){
-
-ogLocale.setAttribute(
-"content",
-seo.locale
-);
-
-}
-
-const twitterTitle =
-document.getElementById(
-"twitterTitle"
-);
-
-if(
-twitterTitle
-){
-
-twitterTitle.setAttribute(
-"content",
-seo.title
-);
-
-}
-
-const twitterDescription =
-document.getElementById(
-"twitterDescription"
-);
-
-if(
-twitterDescription
-){
-
-twitterDescription.setAttribute(
-"content",
-seo.description
-);
-
-}
+return SHELL_T[saved]
+? saved
+: "en";
 
 }
 
@@ -3277,17 +2749,7 @@ const language =
 getShellLanguage();
 
 const tr =
-SHELL_T[
-language
-];
-
-document.documentElement.lang =
-language;
-
-document.documentElement.dir =
-language === "ar"
-?"rtl"
-:"ltr";
+SHELL_T[language];
 
 document.getElementById(
 "shellMenuTitle"
@@ -3351,8 +2813,6 @@ ${tr.nav[item.key]}
 )
 .join("");
 
-updateIssueSeo();
-
 requestAnimationFrame(
 ()=>{
 
@@ -3387,13 +2847,6 @@ document.getElementById(
 );
 
 document.getElementById(
-"sideMenu"
-).setAttribute(
-"aria-hidden",
-"false"
-);
-
-document.getElementById(
 "menuOverlay"
 ).classList.add(
 "show"
@@ -3411,13 +2864,6 @@ document.getElementById(
 "sideMenu"
 ).classList.remove(
 "open"
-);
-
-document.getElementById(
-"sideMenu"
-).setAttribute(
-"aria-hidden",
-"true"
 );
 
 document.getElementById(
@@ -3495,33 +2941,6 @@ event.key === SHELL_LANGUAGE_KEY
 renderShell();
 
 }
-
-}
-);
-
-window.addEventListener(
-"languagechange",
-()=>{
-
-renderShell();
-
-}
-);
-
-window.addEventListener(
-"petsdogue:languagechange",
-()=>{
-
-renderShell();
-
-}
-);
-
-window.addEventListener(
-"pageshow",
-()=>{
-
-updateIssueSeo();
 
 }
 );
