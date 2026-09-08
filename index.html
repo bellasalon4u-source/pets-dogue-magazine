@@ -15,7 +15,7 @@ PETS & DOGUE SEO
 <meta
 id="metaDescription"
 name="description"
-content="PETS & DOGUE is an international pet lifestyle magazine featuring pet-friendly places, health, fashion, photography, stories, contests, community and more."
+content="PETS & DOGUE is a digital world for pets and the people who love them — bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace and member benefits in one place."
 >
 
 <meta
@@ -48,12 +48,14 @@ name="color-scheme"
 content="dark"
 >
 
-<title>PETS & DOGUE | Pet Magazine, Pet-Friendly Places & Lifestyle</title>
+<title>
+PETS &amp; DOGUE | Digital World for Pets &amp; Pet Lovers
+</title>
 
 <link
 id="canonicalLink"
 rel="canonical"
-href="./"
+href="https://www.petsanddogue.com/"
 >
 
 <meta
@@ -69,25 +71,30 @@ content="PETS & DOGUE"
 <meta
 id="ogTitle"
 property="og:title"
-content="PETS & DOGUE | Pet Magazine, Pet-Friendly Places & Lifestyle"
+content="PETS & DOGUE | Digital World for Pets & Pet Lovers"
 >
 
 <meta
 id="ogDescription"
 property="og:description"
-content="International pet lifestyle magazine featuring pet-friendly places, health, fashion, photography, stories, contests and community."
+content="Stories, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace and member benefits — all in one digital world."
 >
 
 <meta
 id="ogUrl"
 property="og:url"
-content="./"
+content="https://www.petsanddogue.com/"
 >
 
 <meta
 id="ogImage"
 property="og:image"
-content="file_00000000a9d471fda9b4629589be22a9.png"
+content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
+>
+
+<meta
+property="og:image:alt"
+content="PETS & DOGUE"
 >
 
 <meta
@@ -104,19 +111,19 @@ content="summary_large_image"
 <meta
 id="twitterTitle"
 name="twitter:title"
-content="PETS & DOGUE | Pet Magazine, Pet-Friendly Places & Lifestyle"
+content="PETS & DOGUE | Digital World for Pets & Pet Lovers"
 >
 
 <meta
 id="twitterDescription"
 name="twitter:description"
-content="International pet lifestyle magazine featuring pet-friendly places, health, fashion, photography, stories, contests and community."
+content="Stories, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace and member benefits — all in one digital world."
 >
 
 <meta
 id="twitterImage"
 name="twitter:image"
-content="file_00000000a9d471fda9b4629589be22a9.png"
+content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
 >
 
 <link
@@ -208,8 +215,6 @@ image-rendering:auto;
 
 /* =========================================================
 HEADER
-ONE MASTER VISUAL:
-MENU / LOGO / HOME
 ========================================================= */
 
 .site-header{
@@ -300,8 +305,6 @@ stroke-linejoin:round;
 
 /* =========================================================
 TOP NAV
-FIXED ORDER
-NEVER REBUILT IN ANOTHER ORDER
 ========================================================= */
 
 .primary-nav{
@@ -353,26 +356,6 @@ hyphens:none;
 .primary-nav a:hover,
 .primary-nav a:focus{
 color:var(--gold-light);
-}
-
-.primary-nav a.active{
-color:var(--gold-light);
-}
-
-.primary-nav a.active:after{
-content:"";
-position:absolute;
-left:17px;
-right:17px;
-bottom:0;
-height:3px;
-background:
-linear-gradient(
-90deg,
-#8c6011,
-#f5dc8b,
-#9b6a12
-);
 }
 
 /* =========================================================
@@ -659,7 +642,7 @@ text-transform:uppercase;
 }
 
 /* =========================================================
-SECTION TITLE
+WORLD HEADING
 ========================================================= */
 
 section.visual-world{
@@ -687,15 +670,15 @@ line-height:.94;
 }
 
 .world-heading p{
-max-width:470px;
+max-width:650px;
 font-size:11px;
-line-height:1.5;
+line-height:1.55;
 font-weight:700;
 text-align:right;
 }
 
 /* =========================================================
-MAGAZINE MOSAIC
+MAGAZINE / DIGITAL WORLD MOSAIC
 ========================================================= */
 
 .magazine-grid{
@@ -800,7 +783,7 @@ color:#eee;
 }
 
 /* =========================================================
-PARTNER END CARD
+PARTNERS
 ========================================================= */
 
 .partner-end{
@@ -897,9 +880,10 @@ color:var(--gold);
 }
 
 .footer-tagline{
-font-size:10px;
-color:#aaa;
-margin-top:9px;
+font-family:var(--serif);
+font-size:16px;
+color:#ddd;
+margin-top:10px;
 }
 
 .footer-links{
@@ -920,6 +904,17 @@ font-weight:800;
 font-size:8px;
 color:#666;
 margin-top:27px;
+}
+
+/* =========================================================
+ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible{
+outline:3px solid var(--green);
+outline-offset:3px;
 }
 
 /* =========================================================
@@ -1088,12 +1083,6 @@ height:46px !important;
 padding:0 14px !important;
 font-size:10.5px !important;
 letter-spacing:.35px !important;
-}
-
-.primary-nav a.active:after{
-left:13px;
-right:13px;
-height:3px;
 }
 
 .intro-grid{
@@ -1333,6 +1322,10 @@ scroll-behavior:auto;
 transition:none;
 }
 
+.side-menu{
+transition:none;
+}
+
 }
 </style>
 </head>
@@ -1347,6 +1340,7 @@ id="menuOverlay"
 <aside
 class="side-menu"
 id="sideMenu"
+aria-hidden="true"
 >
 
 <div class="side-menu-head">
@@ -1392,7 +1386,10 @@ SUBSCRIBE
 LANGUAGE
 </label>
 
-<select id="languageSelect">
+<select
+id="languageSelect"
+aria-label="Language"
+>
 
 <option value="en">🇬🇧 EN — English</option>
 <option value="uk">🇺🇦 UA — Українська</option>
@@ -1487,96 +1484,55 @@ id="primaryNav"
 aria-label="PETS & DOGUE main sections"
 >
 
-<a
-href="issue-01.html"
-data-nav="magazine"
-class="active"
-aria-current="page"
->
+<a href="issue-01.html" data-nav="magazine">
 Magazine
 </a>
 
-<a
-href="members-gallery.html"
-data-nav="coverStars"
->
+<a href="members-gallery.html" data-nav="coverStars">
 Cover Stars
 </a>
 
-<a
-href="special-offers.html"
-data-nav="offers"
->
+<a href="special-offers.html" data-nav="offers">
 Discounts
 </a>
 
-<a
-href="pet-friendly-places.html"
-data-nav="places"
->
+<a href="pet-friendly-places.html" data-nav="places">
 Pet-Friendly Places
 </a>
 
-<a
-href="articles.html"
-data-nav="articles"
->
+<a href="articles.html" data-nav="articles">
 Articles
 </a>
 
-<a
-href="photos.html"
-data-nav="photos"
->
+<a href="photos.html" data-nav="photos">
 Photos
 </a>
 
-<a
-href="pet-fashion.html"
-data-nav="fashion"
->
+<a href="pet-fashion.html" data-nav="fashion">
 Fashion
 </a>
 
-<a
-href="wellness.html"
-data-nav="wellness"
->
+<a href="wellness.html" data-nav="wellness">
 Health
 </a>
 
-<a
-href="local-community.html"
-data-nav="community"
->
+<a href="local-community.html" data-nav="community">
 Community
 </a>
 
-<a
-href="contests.html"
-data-nav="contests"
->
+<a href="contests.html" data-nav="contests">
 Contests
 </a>
 
-<a
-href="pets-in-need.html"
-data-nav="rescue"
->
+<a href="pets-in-need.html" data-nav="rescue">
 Help
 </a>
 
-<a
-href="pet-marketplace.html"
-data-nav="marketplace"
->
+<a href="pet-marketplace.html" data-nav="marketplace">
 Marketplace
 </a>
 
-<a
-href="partners.html"
-data-nav="partners"
->
+<a href="partners.html" data-nav="partners">
 Partners
 </a>
 
@@ -1597,7 +1553,7 @@ href="issue-01.html"
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="PETS & DOGUE latest issue"
+alt="PETS & DOGUE latest magazine issue"
 loading="eager"
 fetchpriority="high"
 decoding="async"
@@ -1613,11 +1569,11 @@ LATEST ISSUE
 </span>
 
 <h1 id="latestTitle">
-Miso: the first PETS & DOGUE cover star
+Miso: the first PETS &amp; DOGUE cover star
 </h1>
 
 <p id="latestText">
-Open Issue 01 and enter the visual world of PETS & DOGUE.
+Discover Issue 01 — one part of the PETS &amp; DOGUE digital world.
 </p>
 
 <strong
@@ -1638,7 +1594,7 @@ href="special-offers.html"
 
 <img
 src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=92"
-alt="PETS & DOGUE Club offers"
+alt="PETS & DOGUE Club member benefits"
 loading="eager"
 decoding="async"
 >
@@ -1649,7 +1605,7 @@ decoding="async"
 class="editorial-eyebrow"
 id="offersLabel"
 >
-CLUB OFFERS
+MEMBER BENEFITS
 </span>
 
 <h2 id="offersTitle">
@@ -1657,14 +1613,14 @@ Discover your benefits
 </h2>
 
 <p id="offersText">
-Member discounts from selected pet-friendly partners.
+Special offers and benefits for PETS & DOGUE Club members.
 </p>
 
 <strong
 class="editorial-arrow"
 id="offersAction"
 >
-SEE OFFERS →
+SEE BENEFITS →
 </strong>
 
 </div>
@@ -1678,7 +1634,7 @@ href="members-gallery.html"
 
 <img
 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1600&q=92"
-alt="Next PETS & DOGUE cover star"
+alt="PETS & DOGUE Cover Stars"
 loading="eager"
 decoding="async"
 >
@@ -1697,7 +1653,7 @@ Choose the next cover star
 </h2>
 
 <p id="starText">
-Meet the pets, read their stories and tap the heart.
+Meet the pets, discover their stories and vote for your favourite.
 </p>
 
 <strong
@@ -1719,12 +1675,15 @@ VOTE NOW →
 
 <div class="world-heading">
 
-<h2 id="worldTitle">
-Inside PETS &amp; DOGUE
+<h2
+class="notranslate"
+translate="no"
+>
+One world. Every pet.
 </h2>
 
 <p id="worldText">
-Stories, style, health, community and everything that makes life with animals extraordinary.
+PETS & DOGUE brings original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace and member benefits together in one digital world.
 </p>
 
 </div>
@@ -1738,7 +1697,7 @@ href="articles.html"
 
 <img
 src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1800&q=92"
-alt="PETS & DOGUE articles"
+alt="PETS & DOGUE pet stories and articles"
 loading="lazy"
 decoding="async"
 >
@@ -1753,11 +1712,11 @@ Articles
 </span>
 
 <h3 id="articlesFeatureTitle">
-Stories worth stopping for
+Stories worth discovering
 </h3>
 
 <p id="articlesFeatureText">
-Editorial stories about animals, people, culture and life together.
+Original stories, useful guides and ideas for life with animals.
 </p>
 
 </div>
@@ -1771,7 +1730,7 @@ href="photos.html"
 
 <img
 src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1300&q=92"
-alt="PETS & DOGUE photography"
+alt="PETS & DOGUE pet photography"
 loading="lazy"
 decoding="async"
 >
@@ -1786,7 +1745,7 @@ Photos
 </span>
 
 <h3 id="photosFeatureTitle">
-Visual stories
+Pets through the lens
 </h3>
 
 </div>
@@ -1800,7 +1759,7 @@ href="pet-fashion.html"
 
 <img
 src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1300&q=92"
-alt="Pet fashion"
+alt="Pet fashion and accessories"
 loading="lazy"
 decoding="async"
 >
@@ -1829,7 +1788,7 @@ href="wellness.html"
 
 <img
 src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1800&q=92"
-alt="Pet wellness"
+alt="Pet health and care"
 loading="lazy"
 decoding="async"
 >
@@ -1844,7 +1803,7 @@ Health
 </span>
 
 <h3 id="wellnessFeatureTitle">
-Care for every day
+Health, care and everyday wellbeing
 </h3>
 
 </div>
@@ -1858,7 +1817,7 @@ href="pet-friendly-places.html"
 
 <img
 src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1300&q=92"
-alt="Pet-friendly places"
+alt="Pet-friendly restaurants hotels and places"
 loading="lazy"
 decoding="async"
 >
@@ -1873,7 +1832,7 @@ Pet-Friendly Places
 </span>
 
 <h3 id="placesFeatureTitle">
-Places worth discovering
+Find places where pets are welcome
 </h3>
 
 </div>
@@ -1887,7 +1846,7 @@ href="contests.html"
 
 <img
 src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1300&q=92"
-alt="PETS & DOGUE contests"
+alt="PETS & DOGUE pet contests"
 loading="lazy"
 decoding="async"
 >
@@ -1902,7 +1861,7 @@ Contests
 </span>
 
 <h3 id="contestsFeatureTitle">
-Play. Enter. Win.
+Enter. Vote. Win.
 </h3>
 
 </div>
@@ -1916,7 +1875,7 @@ href="local-community.html"
 
 <img
 src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1800&q=92"
-alt="Local pet community"
+alt="PETS & DOGUE pet community"
 loading="lazy"
 decoding="async"
 >
@@ -1931,7 +1890,7 @@ Community
 </span>
 
 <h3 id="communityFeatureTitle">
-Everything interesting happening near you
+Connect with pet people near you
 </h3>
 
 </div>
@@ -1945,7 +1904,7 @@ href="pets-in-need.html"
 
 <img
 src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1300&q=92"
-alt="Help animals"
+alt="Animals in need and pet rescue"
 loading="lazy"
 decoding="async"
 >
@@ -1960,7 +1919,7 @@ Help
 </span>
 
 <h3 id="rescueFeatureTitle">
-Help or ask for help
+Help animals who need it
 </h3>
 
 </div>
@@ -1974,7 +1933,7 @@ href="pet-marketplace.html"
 
 <img
 src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1300&q=92"
-alt="PETS & DOGUE marketplace"
+alt="PETS & DOGUE pet marketplace"
 loading="lazy"
 decoding="async"
 >
@@ -1989,7 +1948,7 @@ Marketplace
 </span>
 
 <h3 id="marketFeatureTitle">
-Find what you need
+Find, sell and discover
 </h3>
 
 </div>
@@ -2045,19 +2004,19 @@ decoding="async"
 <div class="partner-end-copy">
 
 <span>
-PETS &amp; DOGUE · B2B
+PETS &amp; DOGUE · PARTNERS
 </span>
 
 <h2 id="partnerTitle">
-Work with PETS & DOGUE
+Grow with PETS & DOGUE
 </h2>
 
 <p id="partnerText">
-Advertising, editorial stories, news, Club discounts, brand features and collaborations.
+Connect your brand with the PETS & DOGUE world through partnerships, member benefits, stories, features and collaborations.
 </p>
 
 <strong id="partnerAction">
-PARTNER WITH US →
+WORK WITH US →
 </strong>
 
 </div>
@@ -2076,102 +2035,63 @@ PETS &amp; DOGUE
 </div>
 
 <p
-class="footer-tagline"
-id="footerTagline"
+class="footer-tagline notranslate"
+translate="no"
 >
-The International Luxury Animal Magazine
+One world. Every pet.
 </p>
 
 <div class="footer-links">
 
-<a
-href="issue-01.html"
-data-footer-key="magazine"
->
+<a href="issue-01.html" data-footer-key="magazine">
 Magazine
 </a>
 
-<a
-href="members-gallery.html"
-data-footer-key="coverStars"
->
+<a href="members-gallery.html" data-footer-key="coverStars">
 Cover Stars
 </a>
 
-<a
-href="special-offers.html"
-data-footer-key="offers"
->
+<a href="special-offers.html" data-footer-key="offers">
 Discounts
 </a>
 
-<a
-href="pet-friendly-places.html"
-data-footer-key="places"
->
+<a href="pet-friendly-places.html" data-footer-key="places">
 Pet-Friendly Places
 </a>
 
-<a
-href="articles.html"
-data-footer-key="articles"
->
+<a href="articles.html" data-footer-key="articles">
 Articles
 </a>
 
-<a
-href="photos.html"
-data-footer-key="photos"
->
+<a href="photos.html" data-footer-key="photos">
 Photos
 </a>
 
-<a
-href="pet-fashion.html"
-data-footer-key="fashion"
->
+<a href="pet-fashion.html" data-footer-key="fashion">
 Fashion
 </a>
 
-<a
-href="wellness.html"
-data-footer-key="wellness"
->
+<a href="wellness.html" data-footer-key="wellness">
 Health
 </a>
 
-<a
-href="local-community.html"
-data-footer-key="community"
->
+<a href="local-community.html" data-footer-key="community">
 Community
 </a>
 
-<a
-href="contests.html"
-data-footer-key="contests"
->
+<a href="contests.html" data-footer-key="contests">
 Contests
 </a>
 
-<a
-href="pets-in-need.html"
-data-footer-key="rescue"
->
+<a href="pets-in-need.html" data-footer-key="rescue">
 Help
 </a>
 
-<a
-href="pet-marketplace.html"
-data-footer-key="marketplace"
->
+<a href="pet-marketplace.html" data-footer-key="marketplace">
 Marketplace
 </a>
 
-<a
-href="partners.html"
-data-footer-key="partners"
->
+<a href="partners.html" data-footer-key="partners">
 Partners
 </a>
 
@@ -2186,37 +2106,11 @@ Partners
 <script>
 "use strict";
 
-/* =========================================================
-PETS & DOGUE HOME
-
-SEO + VISUAL RULES:
-- PETS & DOGUE remains the permanent brand name
-- Google receives clear section links
-- navigation order never changes
-- selected language updates page metadata
-- structured data describes the magazine and its sections
-- no obsolete SearchAction / sitelinks search box markup
-========================================================= */
-
 const LANGUAGE_KEY =
 "pets_dogue_language";
 
 /* =========================================================
-MASTER GLOBAL NAVIGATION ORDER
-
-1. Magazine
-2. Cover Stars
-3. Discounts
-4. Pet-Friendly Places
-5. Articles
-6. Photos
-7. Fashion
-8. Health
-9. Community
-10. Contests
-11. Help
-12. Marketplace
-13. Partners
+GLOBAL NAVIGATION
 ========================================================= */
 
 const NAV_ITEMS = [
@@ -2302,131 +2196,129 @@ image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&
 ];
 
 /* =========================================================
-SEO TRANSLATIONS
-ALL SUPPORTED LANGUAGES
+SEO — ALL 23 LANGUAGES
 ========================================================= */
 
 const SEO_T = {
 
 en:{
-title:"PETS & DOGUE | Pet Magazine, Pet-Friendly Places & Lifestyle",
-description:"PETS & DOGUE is an international pet lifestyle magazine featuring pet-friendly places, health, fashion, photography, stories, contests, community and more."
+title:"PETS & DOGUE | Digital World for Pets & Pet Lovers",
+description:"PETS & DOGUE is a digital world for pets and the people who love them — bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace and member benefits in one place."
 },
 
 uk:{
-title:"PETS & DOGUE | Журнал про улюбленців, Pet-Friendly місця та стиль",
-description:"PETS & DOGUE — міжнародний журнал про улюбленців: pet-friendly місця, здоров’я, мода, фото, історії, конкурси, спільнота та стиль життя."
+title:"PETS & DOGUE | Цифровий світ для тварин та їхніх людей",
+description:"PETS & DOGUE — цифровий світ для тварин і людей, які їх люблять: історії, корисні поради, pet-friendly місця, здоров’я, мода, фото, спільнота, конкурси, допомога, маркетплейс і переваги клубу."
 },
 
 ru:{
-title:"PETS & DOGUE | Журнал о питомцах, Pet-Friendly местах и стиле",
-description:"PETS & DOGUE — международный журнал о питомцах: pet-friendly места, здоровье, мода, фото, истории, конкурсы, сообщество и стиль жизни."
+title:"PETS & DOGUE | Цифровой мир для питомцев и их людей",
+description:"PETS & DOGUE — цифровой мир для животных и людей, которые их любят: истории, полезные материалы, pet-friendly места, здоровье, мода, фото, сообщество, конкурсы, помощь, маркетплейс и преимущества клуба."
 },
 
 fr:{
-title:"PETS & DOGUE | Magazine animalier, lieux pet-friendly & lifestyle",
-description:"PETS & DOGUE est un magazine international dédié aux animaux : lieux pet-friendly, santé, mode, photographie, histoires, concours et communauté."
+title:"PETS & DOGUE | Un univers digital pour les animaux",
+description:"PETS & DOGUE réunit dans un même univers digital histoires, conseils, lieux pet-friendly, santé, mode, photographie, communauté, concours, sauvetage, marketplace et avantages membres."
 },
 
 de:{
-title:"PETS & DOGUE | Haustiermagazin, Pet-Friendly Orte & Lifestyle",
-description:"PETS & DOGUE ist ein internationales Haustiermagazin über pet-friendly Orte, Gesundheit, Mode, Fotografie, Geschichten, Wettbewerbe und Community."
+title:"PETS & DOGUE | Die digitale Welt für Haustiere",
+description:"PETS & DOGUE vereint Geschichten, praktische Ratgeber, tierfreundliche Orte, Gesundheit, Mode, Fotografie, Community, Wettbewerbe, Tierschutz, Marketplace und Mitgliedervorteile in einer digitalen Welt."
 },
 
 es:{
-title:"PETS & DOGUE | Revista de mascotas, lugares pet-friendly y estilo",
-description:"PETS & DOGUE es una revista internacional de mascotas con lugares pet-friendly, salud, moda, fotografía, historias, concursos y comunidad."
+title:"PETS & DOGUE | El mundo digital para mascotas",
+description:"PETS & DOGUE reúne historias, guías prácticas, lugares pet-friendly, salud, moda, fotografía, comunidad, concursos, rescate, marketplace y beneficios para miembros en un solo mundo digital."
 },
 
 it:{
-title:"PETS & DOGUE | Rivista pet, luoghi pet-friendly e lifestyle",
-description:"PETS & DOGUE è una rivista internazionale dedicata agli animali con luoghi pet-friendly, salute, moda, fotografia, storie, concorsi e community."
+title:"PETS & DOGUE | Il mondo digitale per gli animali",
+description:"PETS & DOGUE riunisce storie, guide utili, luoghi pet-friendly, salute, moda, fotografia, community, concorsi, rescue, marketplace e vantaggi per i membri in un unico mondo digitale."
 },
 
 pt:{
-title:"PETS & DOGUE | Revista pet, lugares pet-friendly e lifestyle",
-description:"PETS & DOGUE é uma revista internacional sobre animais com lugares pet-friendly, saúde, moda, fotografia, histórias, concursos e comunidade."
+title:"PETS & DOGUE | O mundo digital para animais",
+description:"PETS & DOGUE reúne histórias, guias úteis, locais pet-friendly, saúde, moda, fotografia, comunidade, concursos, resgate, marketplace e benefícios para membros num só mundo digital."
 },
 
 nl:{
-title:"PETS & DOGUE | Huisdierenmagazine, pet-friendly plekken & lifestyle",
-description:"PETS & DOGUE is een internationaal huisdierenmagazine over pet-friendly plekken, gezondheid, mode, fotografie, verhalen, wedstrijden en community."
+title:"PETS & DOGUE | De digitale wereld voor huisdieren",
+description:"PETS & DOGUE brengt verhalen, praktische gidsen, huisdiervriendelijke plekken, gezondheid, mode, fotografie, community, wedstrijden, dierenhulp, marketplace en ledenvoordelen samen."
 },
 
 pl:{
-title:"PETS & DOGUE | Magazyn o zwierzętach, miejsca pet-friendly i styl",
-description:"PETS & DOGUE to międzynarodowy magazyn o zwierzętach: miejsca pet-friendly, zdrowie, moda, fotografia, historie, konkursy i społeczność."
+title:"PETS & DOGUE | Cyfrowy świat dla zwierząt",
+description:"PETS & DOGUE łączy historie, praktyczne poradniki, miejsca przyjazne zwierzętom, zdrowie, modę, fotografię, społeczność, konkursy, pomoc, marketplace i korzyści klubowe."
 },
 
 cs:{
-title:"PETS & DOGUE | Magazín o mazlíčcích, pet-friendly místa a styl",
-description:"PETS & DOGUE je mezinárodní magazín o mazlíčcích: pet-friendly místa, zdraví, móda, fotografie, příběhy, soutěže a komunita."
+title:"PETS & DOGUE | Digitální svět pro mazlíčky",
+description:"PETS & DOGUE spojuje příběhy, praktické průvodce, pet-friendly místa, zdraví, módu, fotografii, komunitu, soutěže, pomoc zvířatům, marketplace a členské výhody."
 },
 
 sk:{
-title:"PETS & DOGUE | Magazín o miláčikoch, pet-friendly miesta a štýl",
-description:"PETS & DOGUE je medzinárodný magazín o miláčikoch: pet-friendly miesta, zdravie, móda, fotografie, príbehy, súťaže a komunita."
+title:"PETS & DOGUE | Digitálny svet pre miláčikov",
+description:"PETS & DOGUE spája príbehy, praktické rady, pet-friendly miesta, zdravie, módu, fotografie, komunitu, súťaže, pomoc zvieratám, marketplace a členské výhody."
 },
 
 hu:{
-title:"PETS & DOGUE | Kisállatmagazin, pet-friendly helyek és életstílus",
-description:"A PETS & DOGUE nemzetközi kisállatmagazin pet-friendly helyekkel, egészséggel, divattal, fotókkal, történetekkel, versenyekkel és közösséggel."
+title:"PETS & DOGUE | Digitális világ kisállatoknak",
+description:"A PETS & DOGUE történeteket, hasznos útmutatókat, állatbarát helyeket, egészséget, divatot, fotózást, közösséget, versenyeket, állatmentést, piacteret és tagsági előnyöket egyesít."
 },
 
 ro:{
-title:"PETS & DOGUE | Revistă pentru animale, locuri pet-friendly și stil",
-description:"PETS & DOGUE este o revistă internațională despre animale: locuri pet-friendly, sănătate, modă, fotografie, povești, concursuri și comunitate."
+title:"PETS & DOGUE | Lumea digitală pentru animale",
+description:"PETS & DOGUE aduce împreună povești, ghiduri utile, locuri pet-friendly, sănătate, modă, fotografie, comunitate, concursuri, salvare, marketplace și beneficii pentru membri."
 },
 
 bg:{
-title:"PETS & DOGUE | Списание за любимци, pet-friendly места и стил",
-description:"PETS & DOGUE е международно списание за домашни любимци: pet-friendly места, здраве, мода, фотография, истории, конкурси и общност."
+title:"PETS & DOGUE | Дигиталният свят за домашни любимци",
+description:"PETS & DOGUE събира на едно място истории, полезни съвети, pet-friendly места, здраве, мода, фотография, общност, конкурси, помощ за животни, маркетплейс и клубни предимства."
 },
 
 el:{
-title:"PETS & DOGUE | Περιοδικό κατοικιδίων, pet-friendly μέρη & lifestyle",
-description:"Το PETS & DOGUE είναι διεθνές περιοδικό για κατοικίδια με pet-friendly μέρη, υγεία, μόδα, φωτογραφία, ιστορίες, διαγωνισμούς και κοινότητα."
+title:"PETS & DOGUE | Ο ψηφιακός κόσμος για κατοικίδια",
+description:"Το PETS & DOGUE συνδυάζει ιστορίες, πρακτικούς οδηγούς, pet-friendly μέρη, υγεία, μόδα, φωτογραφία, κοινότητα, διαγωνισμούς, διάσωση, marketplace και προνόμια μελών."
 },
 
 sv:{
-title:"PETS & DOGUE | Husdjursmagasin, pet-friendly platser & lifestyle",
-description:"PETS & DOGUE är ett internationellt husdjursmagasin om pet-friendly platser, hälsa, mode, fotografi, berättelser, tävlingar och community."
+title:"PETS & DOGUE | Den digitala världen för husdjur",
+description:"PETS & DOGUE samlar berättelser, praktiska guider, husdjursvänliga platser, hälsa, mode, fotografi, community, tävlingar, djurhjälp, marketplace och medlemsförmåner."
 },
 
 da:{
-title:"PETS & DOGUE | Kæledyrsmagasin, pet-friendly steder & lifestyle",
-description:"PETS & DOGUE er et internationalt kæledyrsmagasin om pet-friendly steder, sundhed, mode, fotografi, historier, konkurrencer og community."
+title:"PETS & DOGUE | Den digitale verden for kæledyr",
+description:"PETS & DOGUE samler historier, praktiske guides, kæledyrsvenlige steder, sundhed, mode, fotografi, community, konkurrencer, dyrehjælp, marketplace og medlemsfordele."
 },
 
 no:{
-title:"PETS & DOGUE | Kjæledyrmagasin, pet-friendly steder & livsstil",
-description:"PETS & DOGUE er et internasjonalt kjæledyrmagasin om pet-friendly steder, helse, mote, fotografi, historier, konkurranser og fellesskap."
+title:"PETS & DOGUE | Den digitale verden for kjæledyr",
+description:"PETS & DOGUE samler historier, praktiske guider, kjæledyrvennlige steder, helse, mote, fotografi, fellesskap, konkurranser, dyrehjelp, marketplace og medlemsfordeler."
 },
 
 fi:{
-title:"PETS & DOGUE | Lemmikkilehti, pet-friendly paikat & lifestyle",
-description:"PETS & DOGUE on kansainvälinen lemmikkilehti pet-friendly paikoista, terveydestä, muodista, valokuvauksesta, tarinoista, kilpailuista ja yhteisöstä."
+title:"PETS & DOGUE | Digitaalinen maailma lemmikeille",
+description:"PETS & DOGUE kokoaa yhteen tarinat, käytännön oppaat, lemmikkiystävälliset paikat, terveyden, muodin, valokuvauksen, yhteisön, kilpailut, eläinavun, marketplace-palvelun ja jäsenedut."
 },
 
 tr:{
-title:"PETS & DOGUE | Evcil hayvan dergisi, pet-friendly yerler & yaşam",
-description:"PETS & DOGUE; pet-friendly yerler, sağlık, moda, fotoğraf, hikâyeler, yarışmalar ve topluluk sunan uluslararası bir evcil hayvan dergisidir."
+title:"PETS & DOGUE | Evcil hayvanların dijital dünyası",
+description:"PETS & DOGUE; hikâyeleri, pratik rehberleri, pet-friendly mekanları, sağlık, moda, fotoğraf, topluluk, yarışmalar, hayvan yardımı, marketplace ve üye avantajlarını tek bir dijital dünyada buluşturur."
 },
 
 ar:{
-title:"PETS & DOGUE | مجلة الحيوانات والأماكن الصديقة للحيوانات ونمط الحياة",
-description:"PETS & DOGUE مجلة دولية للحيوانات الأليفة تشمل الأماكن الصديقة للحيوانات والصحة والموضة والتصوير والقصص والمسابقات والمجتمع."
+title:"PETS & DOGUE | العالم الرقمي للحيوانات الأليفة",
+description:"يجمع PETS & DOGUE القصص والأدلة العملية والأماكن الصديقة للحيوانات والصحة والموضة والتصوير والمجتمع والمسابقات والإنقاذ والسوق ومزايا الأعضاء في عالم رقمي واحد."
 },
 
 hi:{
-title:"PETS & DOGUE | पेट मैगज़ीन, pet-friendly जगहें और लाइफस्टाइल",
-description:"PETS & DOGUE एक अंतरराष्ट्रीय पेट लाइफस्टाइल मैगज़ीन है जिसमें pet-friendly जगहें, स्वास्थ्य, फैशन, फ़ोटोग्राफ़ी, कहानियाँ, प्रतियोगिताएँ और समुदाय शामिल हैं।"
+title:"PETS & DOGUE | पालतू जानवरों की डिजिटल दुनिया",
+description:"PETS & DOGUE कहानियों, उपयोगी गाइड, pet-friendly जगहों, स्वास्थ्य, फ़ैशन, फ़ोटोग्राफ़ी, समुदाय, प्रतियोगिताओं, पशु सहायता, मार्केटप्लेस और सदस्य लाभों को एक डिजिटल दुनिया में लाता है।"
 }
 
 };
 
 const SEO_LOCALES = {
-
 en:"en_GB",
 uk:"uk_UA",
 ru:"ru_RU",
@@ -2450,11 +2342,10 @@ fi:"fi_FI",
 tr:"tr_TR",
 ar:"ar_SA",
 hi:"hi_IN"
-
 };
 
 /* =========================================================
-TRANSLATIONS
+INTERFACE TRANSLATIONS
 ========================================================= */
 
 const T = {
@@ -2464,7 +2355,6 @@ menu:"Contents",
 profile:"Profile",
 subscribe:"Subscribe",
 language:"Language",
-
 nav:{
 magazine:"Magazine",
 coverStars:"Cover Stars",
@@ -2480,109 +2370,34 @@ rescue:"Help",
 marketplace:"Marketplace",
 partners:"Partners"
 },
-
 latestLabel:"Latest issue",
 latestTitle:"Miso: the first PETS & DOGUE cover star",
-latestText:"Open Issue 01 and enter the visual world of PETS & DOGUE.",
+latestText:"Discover Issue 01 — one part of the PETS & DOGUE digital world.",
 latestAction:"Open the magazine →",
-
-offersLabel:"Club discounts",
+offersLabel:"Member benefits",
 offersTitle:"Discover your benefits",
-offersText:"Member discounts from selected pet-friendly partners.",
-offersAction:"See discounts →",
-
+offersText:"Special offers and benefits for PETS & DOGUE Club members.",
+offersAction:"See benefits →",
 starLabel:"Your vote",
 starTitle:"Choose the next cover star",
-starText:"Meet the pets, read their stories and tap the heart.",
+starText:"Meet the pets, discover their stories and vote for your favourite.",
 starAction:"Vote now →",
-
-worldTitle:"Inside PETS & DOGUE",
-worldText:"Stories, style, health, community and everything that makes life with animals extraordinary.",
-
-articlesTitle:"Stories worth stopping for",
-articlesText:"Editorial stories about animals, people, culture and life together.",
-
-photosTitle:"Visual stories",
+worldText:"PETS & DOGUE brings original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace and member benefits together in one digital world.",
+articlesTitle:"Stories worth discovering",
+articlesText:"Original stories, useful guides and ideas for life with animals.",
+photosTitle:"Pets through the lens",
 fashionTitle:"Style with personality",
-wellnessTitle:"Care for every day",
-
-placesTitle:"Places worth discovering",
-placesDescription:"Discover pet-friendly restaurants, hotels, cafés and places where animals are welcome, with maps, routes and contacts.",
-
-contestsTitle:"Play. Enter. Win.",
-communityTitle:"Everything interesting happening near you",
-rescueTitle:"Help or ask for help",
-marketTitle:"Find what you need",
+wellnessTitle:"Health, care and everyday wellbeing",
+placesTitle:"Find places where pets are welcome",
+placesDescription:"Discover pet-friendly restaurants, hotels, cafés and other places with maps, routes and useful information.",
+contestsTitle:"Enter. Vote. Win.",
+communityTitle:"Connect with pet people near you",
+rescueTitle:"Help animals who need it",
+marketTitle:"Find, sell and discover",
 clubTitle:"More for members",
-
-partnerTitle:"Work with PETS & DOGUE",
-partnerText:"Advertising, editorial stories, news, Club discounts, brand features and collaborations.",
-partnerAction:"Partner with us →",
-
-tagline:"The International Luxury Animal Magazine"
-},
-
-ru:{
-menu:"Содержание",
-profile:"Профиль",
-subscribe:"Подписка",
-language:"Язык",
-
-nav:{
-magazine:"Журнал",
-coverStars:"Звёзды обложки",
-offers:"Скидки",
-places:"Pet-Friendly места",
-articles:"Статьи",
-photos:"Фото",
-fashion:"Мода",
-wellness:"Здоровье",
-community:"Сообщество",
-contests:"Конкурсы",
-rescue:"Помощь",
-marketplace:"Маркетплейс",
-partners:"Партнёры"
-},
-
-latestLabel:"Последний выпуск",
-latestTitle:"Мисо: первая звезда обложки PETS & DOGUE",
-latestText:"Откройте выпуск №1 и погрузитесь в визуальный мир PETS & DOGUE.",
-latestAction:"Открыть журнал →",
-
-offersLabel:"Скидки Club",
-offersTitle:"Откройте свои преимущества",
-offersText:"Специальные скидки от выбранных pet-friendly партнёров.",
-offersAction:"Смотреть скидки →",
-
-starLabel:"Ваш голос",
-starTitle:"Выберите следующую звезду обложки",
-starText:"Знакомьтесь с питомцами, читайте их истории и нажимайте сердечко.",
-starAction:"Голосовать →",
-
-worldTitle:"Внутри PETS & DOGUE",
-worldText:"Истории, стиль, здоровье, сообщество и всё, что делает жизнь с животными особенной.",
-
-articlesTitle:"Истории, на которых хочется остановиться",
-articlesText:"Редакционные истории о животных, людях, культуре и жизни вместе.",
-
-photosTitle:"Визуальные истории",
-fashionTitle:"Стиль с характером",
-wellnessTitle:"Забота каждый день",
-
-placesTitle:"Места, где питомцам рады",
-placesDescription:"Находите pet-friendly рестораны, отели, кафе и другие места, где рады питомцам, с картами, маршрутами и контактами.",
-
-contestsTitle:"Участвуйте. Играйте. Побеждайте.",
-communityTitle:"Всё интересное, что происходит рядом с вами",
-rescueTitle:"Помочь или попросить помощи",
-marketTitle:"Найдите то, что нужно",
-clubTitle:"Больше для участников",
-
-partnerTitle:"Сотрудничайте с PETS & DOGUE",
-partnerText:"Реклама, редакционные статьи, новости, скидки Club, бренды и коллаборации.",
-partnerAction:"Стать партнёром →",
-
-tagline:"Международный журнал класса люкс о животных"
+partnerTitle:"Grow with PETS & DOGUE",
+partnerText:"Connect your brand with the PETS & DOGUE world through partnerships, member benefits, stories, features and collaborations.",
+partnerAction:"Work with us →"
 },
 
 uk:{
@@ -2590,7 +2405,6 @@ menu:"Зміст",
 profile:"Профіль",
 subscribe:"Підписка",
 language:"Мова",
-
 nav:{
 magazine:"Журнал",
 coverStars:"Зірки обкладинки",
@@ -2606,46 +2420,84 @@ rescue:"Допомога",
 marketplace:"Маркетплейс",
 partners:"Партнери"
 },
-
 latestLabel:"Останній випуск",
 latestTitle:"Місо: перша зірка обкладинки PETS & DOGUE",
-latestText:"Відкрийте випуск №1 і пориньте у візуальний світ PETS & DOGUE.",
+latestText:"Відкрийте випуск №1 — одну з частин цифрового світу PETS & DOGUE.",
 latestAction:"Відкрити журнал →",
-
-offersLabel:"Знижки Club",
+offersLabel:"Переваги учасників",
 offersTitle:"Відкрийте свої переваги",
-offersText:"Спеціальні знижки від вибраних pet-friendly партнерів.",
-offersAction:"Дивитися знижки →",
-
+offersText:"Спеціальні пропозиції та переваги для учасників PETS & DOGUE Club.",
+offersAction:"Дивитися переваги →",
 starLabel:"Ваш голос",
 starTitle:"Оберіть наступну зірку обкладинки",
-starText:"Знайомтеся з улюбленцями, читайте їхні історії та натискайте сердечко.",
+starText:"Знайомтеся з улюбленцями, відкривайте їхні історії та голосуйте за фаворита.",
 starAction:"Голосувати →",
-
-worldTitle:"Усередині PETS & DOGUE",
-worldText:"Історії, стиль, здоров’я, спільнота та все, що робить життя з тваринами особливим.",
-
-articlesTitle:"Історії, біля яких хочеться зупинитися",
-articlesText:"Редакційні історії про тварин, людей, культуру та спільне життя.",
-
-photosTitle:"Візуальні історії",
+worldText:"PETS & DOGUE об’єднує авторські історії, корисні матеріали, pet-friendly місця, здоров’я, моду, фотографію, спільноту, конкурси, допомогу тваринам, маркетплейс і переваги клубу в одному цифровому світі.",
+articlesTitle:"Історії, які варто відкрити",
+articlesText:"Авторські історії, корисні матеріали та ідеї для життя з тваринами.",
+photosTitle:"Тварини в об’єктиві",
 fashionTitle:"Стиль із характером",
-wellnessTitle:"Турбота щодня",
-
-placesTitle:"Місця, де улюбленцям раді",
-placesDescription:"Знаходьте pet-friendly ресторани, готелі, кафе та інші місця з картами, маршрутами й контактами.",
-
-contestsTitle:"Беріть участь. Грайте. Перемагайте.",
-communityTitle:"Усе цікаве, що відбувається поруч із вами",
-rescueTitle:"Допомогти або попросити допомоги",
-marketTitle:"Знайдіть те, що потрібно",
+wellnessTitle:"Здоров’я, турбота та щоденне благополуччя",
+placesTitle:"Знайдіть місця, де тваринам раді",
+placesDescription:"Відкривайте pet-friendly ресторани, готелі, кафе та інші місця з картами, маршрутами й корисною інформацією.",
+contestsTitle:"Беріть участь. Голосуйте. Перемагайте.",
+communityTitle:"Спілкуйтеся з людьми з тваринами поруч",
+rescueTitle:"Допомагайте тваринам, які цього потребують",
+marketTitle:"Знаходьте, продавайте та відкривайте",
 clubTitle:"Більше для учасників",
+partnerTitle:"Розвивайтеся разом із PETS & DOGUE",
+partnerText:"Об’єднайте свій бренд зі світом PETS & DOGUE через партнерства, переваги для учасників, історії, публікації та колаборації.",
+partnerAction:"Співпрацювати з нами →"
+},
 
-partnerTitle:"Співпрацюйте з PETS & DOGUE",
-partnerText:"Реклама, редакційні статті, новини, знижки Club, бренди та колаборації.",
-partnerAction:"Стати партнером →",
-
-tagline:"Міжнародний люксовий журнал про тварин"
+ru:{
+menu:"Содержание",
+profile:"Профиль",
+subscribe:"Подписка",
+language:"Язык",
+nav:{
+magazine:"Журнал",
+coverStars:"Звёзды обложки",
+offers:"Скидки",
+places:"Pet-Friendly места",
+articles:"Статьи",
+photos:"Фото",
+fashion:"Мода",
+wellness:"Здоровье",
+community:"Сообщество",
+contests:"Конкурсы",
+rescue:"Помощь",
+marketplace:"Маркетплейс",
+partners:"Партнёры"
+},
+latestLabel:"Последний выпуск",
+latestTitle:"Мисо: первая звезда обложки PETS & DOGUE",
+latestText:"Откройте выпуск №1 — одну из частей цифрового мира PETS & DOGUE.",
+latestAction:"Открыть журнал →",
+offersLabel:"Преимущества участников",
+offersTitle:"Откройте свои преимущества",
+offersText:"Специальные предложения и преимущества для участников PETS & DOGUE Club.",
+offersAction:"Смотреть преимущества →",
+starLabel:"Ваш голос",
+starTitle:"Выберите следующую звезду обложки",
+starText:"Знакомьтесь с питомцами, узнавайте их истории и голосуйте за любимца.",
+starAction:"Голосовать →",
+worldText:"PETS & DOGUE объединяет авторские истории, полезные материалы, pet-friendly места, здоровье, моду, фотографию, сообщество, конкурсы, помощь животным, маркетплейс и преимущества клуба в одном цифровом мире.",
+articlesTitle:"Истории, которые стоит открыть",
+articlesText:"Авторские истории, полезные материалы и идеи для жизни с животными.",
+photosTitle:"Животные в объективе",
+fashionTitle:"Стиль с характером",
+wellnessTitle:"Здоровье, забота и ежедневное благополучие",
+placesTitle:"Найдите места, где питомцам рады",
+placesDescription:"Открывайте pet-friendly рестораны, отели, кафе и другие места с картами, маршрутами и полезной информацией.",
+contestsTitle:"Участвуйте. Голосуйте. Побеждайте.",
+communityTitle:"Общайтесь с владельцами животных рядом",
+rescueTitle:"Помогайте животным, которым это нужно",
+marketTitle:"Находите, продавайте и открывайте",
+clubTitle:"Больше для участников",
+partnerTitle:"Развивайтесь вместе с PETS & DOGUE",
+partnerText:"Объедините свой бренд с миром PETS & DOGUE через партнёрства, преимущества для участников, истории, публикации и коллаборации.",
+partnerAction:"Сотрудничать с нами →"
 },
 
 fr:{
@@ -2667,7 +2519,35 @@ contests:"Concours",
 rescue:"Aide",
 marketplace:"Marketplace",
 partners:"Partenaires"
-}
+},
+latestLabel:"Dernier numéro",
+latestTitle:"Miso : la première star de couverture PETS & DOGUE",
+latestText:"Découvrez le numéro 01, une partie de l’univers digital PETS & DOGUE.",
+latestAction:"Ouvrir le magazine →",
+offersLabel:"Avantages membres",
+offersTitle:"Découvrez vos avantages",
+offersText:"Offres et avantages spéciaux pour les membres du PETS & DOGUE Club.",
+offersAction:"Voir les avantages →",
+starLabel:"Votre vote",
+starTitle:"Choisissez la prochaine star de couverture",
+starText:"Découvrez les animaux, leurs histoires et votez pour votre favori.",
+starAction:"Voter →",
+worldText:"PETS & DOGUE réunit histoires originales, conseils pratiques, lieux pet-friendly, santé, mode, photographie, communauté, concours, sauvetage, marketplace et avantages membres dans un même univers digital.",
+articlesTitle:"Des histoires à découvrir",
+articlesText:"Histoires originales, guides utiles et idées pour mieux vivre avec les animaux.",
+photosTitle:"Les animaux à travers l’objectif",
+fashionTitle:"Un style plein de personnalité",
+wellnessTitle:"Santé, soins et bien-être au quotidien",
+placesTitle:"Trouvez des lieux où les animaux sont bienvenus",
+placesDescription:"Découvrez restaurants, hôtels, cafés et autres lieux pet-friendly avec cartes, itinéraires et informations utiles.",
+contestsTitle:"Participez. Votez. Gagnez.",
+communityTitle:"Rencontrez les amoureux des animaux près de chez vous",
+rescueTitle:"Aidez les animaux qui en ont besoin",
+marketTitle:"Trouvez, vendez et découvrez",
+clubTitle:"Encore plus pour les membres",
+partnerTitle:"Grandissez avec PETS & DOGUE",
+partnerText:"Associez votre marque à l’univers PETS & DOGUE grâce aux partenariats, avantages membres, histoires, contenus et collaborations.",
+partnerAction:"Travailler avec nous →"
 },
 
 de:{
@@ -2679,7 +2559,7 @@ nav:{
 magazine:"Magazin",
 coverStars:"Cover Stars",
 offers:"Rabatte",
-places:"Pet-Friendly Orte",
+places:"Tierfreundliche Orte",
 articles:"Artikel",
 photos:"Fotos",
 fashion:"Mode",
@@ -2689,7 +2569,35 @@ contests:"Wettbewerbe",
 rescue:"Hilfe",
 marketplace:"Marktplatz",
 partners:"Partner"
-}
+},
+latestLabel:"Aktuelle Ausgabe",
+latestTitle:"Miso: der erste PETS & DOGUE Cover Star",
+latestText:"Entdecken Sie Ausgabe 01 als Teil der digitalen Welt von PETS & DOGUE.",
+latestAction:"Magazin öffnen →",
+offersLabel:"Mitgliedervorteile",
+offersTitle:"Entdecken Sie Ihre Vorteile",
+offersText:"Besondere Angebote und Vorteile für PETS & DOGUE Club-Mitglieder.",
+offersAction:"Vorteile ansehen →",
+starLabel:"Ihre Stimme",
+starTitle:"Wählen Sie den nächsten Cover Star",
+starText:"Lernen Sie die Tiere und ihre Geschichten kennen und stimmen Sie ab.",
+starAction:"Jetzt abstimmen →",
+worldText:"PETS & DOGUE vereint Geschichten, praktische Ratgeber, tierfreundliche Orte, Gesundheit, Mode, Fotografie, Community, Wettbewerbe, Tierschutz, Marketplace und Mitgliedervorteile in einer digitalen Welt.",
+articlesTitle:"Geschichten zum Entdecken",
+articlesText:"Originalgeschichten, hilfreiche Ratgeber und Ideen für das Leben mit Tieren.",
+photosTitle:"Tiere durch die Linse",
+fashionTitle:"Stil mit Persönlichkeit",
+wellnessTitle:"Gesundheit, Pflege und tägliches Wohlbefinden",
+placesTitle:"Orte finden, an denen Tiere willkommen sind",
+placesDescription:"Entdecken Sie tierfreundliche Restaurants, Hotels, Cafés und weitere Orte mit Karten, Routen und nützlichen Informationen.",
+contestsTitle:"Mitmachen. Abstimmen. Gewinnen.",
+communityTitle:"Menschen mit Haustieren in Ihrer Nähe finden",
+rescueTitle:"Tieren helfen, die Unterstützung brauchen",
+marketTitle:"Finden, verkaufen und entdecken",
+clubTitle:"Mehr für Mitglieder",
+partnerTitle:"Mit PETS & DOGUE wachsen",
+partnerText:"Verbinden Sie Ihre Marke durch Partnerschaften, Mitgliedervorteile, Geschichten, Features und Kooperationen mit PETS & DOGUE.",
+partnerAction:"Mit uns arbeiten →"
 },
 
 es:{
@@ -2711,7 +2619,35 @@ contests:"Concursos",
 rescue:"Ayuda",
 marketplace:"Marketplace",
 partners:"Socios"
-}
+},
+latestLabel:"Último número",
+latestTitle:"Miso: la primera estrella de portada de PETS & DOGUE",
+latestText:"Descubre el número 01, una parte del mundo digital de PETS & DOGUE.",
+latestAction:"Abrir la revista →",
+offersLabel:"Beneficios para miembros",
+offersTitle:"Descubre tus beneficios",
+offersText:"Ofertas y ventajas especiales para miembros de PETS & DOGUE Club.",
+offersAction:"Ver beneficios →",
+starLabel:"Tu voto",
+starTitle:"Elige la próxima estrella de portada",
+starText:"Conoce a las mascotas, descubre sus historias y vota por tu favorita.",
+starAction:"Votar ahora →",
+worldText:"PETS & DOGUE reúne historias originales, guías útiles, lugares pet-friendly, salud, moda, fotografía, comunidad, concursos, rescate, marketplace y beneficios para miembros en un solo mundo digital.",
+articlesTitle:"Historias por descubrir",
+articlesText:"Historias originales, guías útiles e ideas para la vida con animales.",
+photosTitle:"Mascotas a través del objetivo",
+fashionTitle:"Estilo con personalidad",
+wellnessTitle:"Salud, cuidados y bienestar diario",
+placesTitle:"Encuentra lugares donde las mascotas son bienvenidas",
+placesDescription:"Descubre restaurantes, hoteles, cafés y otros lugares pet-friendly con mapas, rutas e información útil.",
+contestsTitle:"Participa. Vota. Gana.",
+communityTitle:"Conecta con amantes de los animales cerca de ti",
+rescueTitle:"Ayuda a los animales que lo necesitan",
+marketTitle:"Encuentra, vende y descubre",
+clubTitle:"Más para miembros",
+partnerTitle:"Crece con PETS & DOGUE",
+partnerText:"Conecta tu marca con PETS & DOGUE mediante colaboraciones, beneficios para miembros, historias y contenidos.",
+partnerAction:"Trabaja con nosotros →"
 },
 
 it:{
@@ -2733,7 +2669,35 @@ contests:"Concorsi",
 rescue:"Aiuto",
 marketplace:"Marketplace",
 partners:"Partner"
-}
+},
+latestLabel:"Ultimo numero",
+latestTitle:"Miso: la prima cover star di PETS & DOGUE",
+latestText:"Scopri il numero 01, una parte del mondo digitale PETS & DOGUE.",
+latestAction:"Apri la rivista →",
+offersLabel:"Vantaggi membri",
+offersTitle:"Scopri i tuoi vantaggi",
+offersText:"Offerte e vantaggi speciali per i membri del PETS & DOGUE Club.",
+offersAction:"Vedi i vantaggi →",
+starLabel:"Il tuo voto",
+starTitle:"Scegli la prossima cover star",
+starText:"Conosci gli animali, scopri le loro storie e vota il tuo preferito.",
+starAction:"Vota ora →",
+worldText:"PETS & DOGUE riunisce storie originali, guide utili, luoghi pet-friendly, salute, moda, fotografia, community, concorsi, rescue, marketplace e vantaggi per i membri in un unico mondo digitale.",
+articlesTitle:"Storie da scoprire",
+articlesText:"Storie originali, guide utili e idee per vivere con gli animali.",
+photosTitle:"Animali attraverso l’obiettivo",
+fashionTitle:"Stile con personalità",
+wellnessTitle:"Salute, cura e benessere quotidiano",
+placesTitle:"Trova luoghi dove gli animali sono i benvenuti",
+placesDescription:"Scopri ristoranti, hotel, caffè e altri luoghi pet-friendly con mappe, percorsi e informazioni utili.",
+contestsTitle:"Partecipa. Vota. Vinci.",
+communityTitle:"Connettiti con gli amanti degli animali vicino a te",
+rescueTitle:"Aiuta gli animali che ne hanno bisogno",
+marketTitle:"Trova, vendi e scopri",
+clubTitle:"Più vantaggi per i membri",
+partnerTitle:"Cresci con PETS & DOGUE",
+partnerText:"Collega il tuo brand al mondo PETS & DOGUE attraverso partnership, vantaggi membri, storie, contenuti e collaborazioni.",
+partnerAction:"Lavora con noi →"
 },
 
 pt:{
@@ -2745,7 +2709,7 @@ nav:{
 magazine:"Revista",
 coverStars:"Estrelas da capa",
 offers:"Descontos",
-places:"Lugares pet-friendly",
+places:"Locais pet-friendly",
 articles:"Artigos",
 photos:"Fotos",
 fashion:"Moda",
@@ -2755,7 +2719,35 @@ contests:"Concursos",
 rescue:"Ajuda",
 marketplace:"Marketplace",
 partners:"Parceiros"
-}
+},
+latestLabel:"Última edição",
+latestTitle:"Miso: a primeira estrela de capa da PETS & DOGUE",
+latestText:"Descubra a edição 01, uma parte do mundo digital PETS & DOGUE.",
+latestAction:"Abrir revista →",
+offersLabel:"Benefícios para membros",
+offersTitle:"Descubra os seus benefícios",
+offersText:"Ofertas e benefícios especiais para membros do PETS & DOGUE Club.",
+offersAction:"Ver benefícios →",
+starLabel:"O seu voto",
+starTitle:"Escolha a próxima estrela de capa",
+starText:"Conheça os animais, descubra as suas histórias e vote no seu favorito.",
+starAction:"Votar agora →",
+worldText:"PETS & DOGUE reúne histórias originais, guias úteis, locais pet-friendly, saúde, moda, fotografia, comunidade, concursos, resgate, marketplace e benefícios para membros num único mundo digital.",
+articlesTitle:"Histórias para descobrir",
+articlesText:"Histórias originais, guias úteis e ideias para viver com animais.",
+photosTitle:"Animais através da lente",
+fashionTitle:"Estilo com personalidade",
+wellnessTitle:"Saúde, cuidados e bem-estar diário",
+placesTitle:"Encontre lugares onde os animais são bem-vindos",
+placesDescription:"Descubra restaurantes, hotéis, cafés e outros locais pet-friendly com mapas, rotas e informação útil.",
+contestsTitle:"Participe. Vote. Ganhe.",
+communityTitle:"Conecte-se com pessoas que adoram animais perto de si",
+rescueTitle:"Ajude animais que precisam",
+marketTitle:"Encontre, venda e descubra",
+clubTitle:"Mais para membros",
+partnerTitle:"Cresça com PETS & DOGUE",
+partnerText:"Ligue a sua marca ao mundo PETS & DOGUE através de parcerias, benefícios, histórias, conteúdos e colaborações.",
+partnerAction:"Trabalhe connosco →"
 },
 
 nl:{
@@ -2767,7 +2759,7 @@ nav:{
 magazine:"Magazine",
 coverStars:"Coversterren",
 offers:"Kortingen",
-places:"Pet-friendly plekken",
+places:"Huisdiervriendelijke plekken",
 articles:"Artikelen",
 photos:"Foto's",
 fashion:"Mode",
@@ -2777,7 +2769,35 @@ contests:"Wedstrijden",
 rescue:"Hulp",
 marketplace:"Marktplaats",
 partners:"Partners"
-}
+},
+latestLabel:"Nieuwste editie",
+latestTitle:"Miso: de eerste PETS & DOGUE coverster",
+latestText:"Ontdek Issue 01 als onderdeel van de digitale wereld van PETS & DOGUE.",
+latestAction:"Open magazine →",
+offersLabel:"Ledenvoordelen",
+offersTitle:"Ontdek je voordelen",
+offersText:"Speciale aanbiedingen en voordelen voor PETS & DOGUE Club-leden.",
+offersAction:"Bekijk voordelen →",
+starLabel:"Jouw stem",
+starTitle:"Kies de volgende coverster",
+starText:"Ontmoet de huisdieren, ontdek hun verhalen en stem op je favoriet.",
+starAction:"Stem nu →",
+worldText:"PETS & DOGUE brengt verhalen, praktische gidsen, huisdiervriendelijke plekken, gezondheid, mode, fotografie, community, wedstrijden, dierenhulp, marketplace en ledenvoordelen samen in één digitale wereld.",
+articlesTitle:"Verhalen om te ontdekken",
+articlesText:"Originele verhalen, nuttige gidsen en ideeën voor het leven met dieren.",
+photosTitle:"Huisdieren door de lens",
+fashionTitle:"Stijl met persoonlijkheid",
+wellnessTitle:"Gezondheid, verzorging en dagelijks welzijn",
+placesTitle:"Vind plekken waar huisdieren welkom zijn",
+placesDescription:"Ontdek huisdiervriendelijke restaurants, hotels, cafés en andere plekken met kaarten, routes en informatie.",
+contestsTitle:"Doe mee. Stem. Win.",
+communityTitle:"Maak contact met dierenliefhebbers bij jou in de buurt",
+rescueTitle:"Help dieren die hulp nodig hebben",
+marketTitle:"Vind, verkoop en ontdek",
+clubTitle:"Meer voor leden",
+partnerTitle:"Groei met PETS & DOGUE",
+partnerText:"Verbind je merk met PETS & DOGUE via partnerships, ledenvoordelen, verhalen, features en samenwerkingen.",
+partnerAction:"Werk met ons →"
 },
 
 pl:{
@@ -2789,7 +2809,7 @@ nav:{
 magazine:"Magazyn",
 coverStars:"Gwiazdy okładki",
 offers:"Zniżki",
-places:"Miejsca pet-friendly",
+places:"Miejsca przyjazne zwierzętom",
 articles:"Artykuły",
 photos:"Zdjęcia",
 fashion:"Moda",
@@ -2799,7 +2819,35 @@ contests:"Konkursy",
 rescue:"Pomoc",
 marketplace:"Marketplace",
 partners:"Partnerzy"
-}
+},
+latestLabel:"Najnowsze wydanie",
+latestTitle:"Miso: pierwsza gwiazda okładki PETS & DOGUE",
+latestText:"Odkryj wydanie 01 — część cyfrowego świata PETS & DOGUE.",
+latestAction:"Otwórz magazyn →",
+offersLabel:"Korzyści członkowskie",
+offersTitle:"Poznaj swoje korzyści",
+offersText:"Specjalne oferty i korzyści dla członków PETS & DOGUE Club.",
+offersAction:"Zobacz korzyści →",
+starLabel:"Twój głos",
+starTitle:"Wybierz następną gwiazdę okładki",
+starText:"Poznaj zwierzęta, ich historie i zagłosuj na swojego faworyta.",
+starAction:"Głosuj →",
+worldText:"PETS & DOGUE łączy historie, praktyczne poradniki, miejsca przyjazne zwierzętom, zdrowie, modę, fotografię, społeczność, konkursy, pomoc zwierzętom, marketplace i korzyści klubowe w jednym cyfrowym świecie.",
+articlesTitle:"Historie warte odkrycia",
+articlesText:"Oryginalne historie, przydatne poradniki i pomysły na życie ze zwierzętami.",
+photosTitle:"Zwierzęta w obiektywie",
+fashionTitle:"Styl z charakterem",
+wellnessTitle:"Zdrowie, opieka i codzienny dobrostan",
+placesTitle:"Znajdź miejsca przyjazne zwierzętom",
+placesDescription:"Odkrywaj restauracje, hotele, kawiarnie i inne miejsca z mapami, trasami i przydatnymi informacjami.",
+contestsTitle:"Dołącz. Głosuj. Wygrywaj.",
+communityTitle:"Poznaj miłośników zwierząt w swojej okolicy",
+rescueTitle:"Pomagaj zwierzętom w potrzebie",
+marketTitle:"Znajdź, sprzedaj i odkrywaj",
+clubTitle:"Więcej dla członków",
+partnerTitle:"Rozwijaj się z PETS & DOGUE",
+partnerText:"Połącz swoją markę ze światem PETS & DOGUE poprzez partnerstwa, korzyści członkowskie, historie i współpracę.",
+partnerAction:"Współpracuj z nami →"
 },
 
 cs:{
@@ -2811,7 +2859,7 @@ nav:{
 magazine:"Magazín",
 coverStars:"Hvězdy obálky",
 offers:"Slevy",
-places:"Pet-friendly místa",
+places:"Místa přátelská ke zvířatům",
 articles:"Články",
 photos:"Fotografie",
 fashion:"Móda",
@@ -2821,7 +2869,35 @@ contests:"Soutěže",
 rescue:"Pomoc",
 marketplace:"Marketplace",
 partners:"Partneři"
-}
+},
+latestLabel:"Nejnovější vydání",
+latestTitle:"Miso: první hvězda obálky PETS & DOGUE",
+latestText:"Objevte vydání 01 jako součást digitálního světa PETS & DOGUE.",
+latestAction:"Otevřít magazín →",
+offersLabel:"Výhody členství",
+offersTitle:"Objevte své výhody",
+offersText:"Speciální nabídky a výhody pro členy PETS & DOGUE Club.",
+offersAction:"Zobrazit výhody →",
+starLabel:"Váš hlas",
+starTitle:"Vyberte další hvězdu obálky",
+starText:"Poznejte mazlíčky, jejich příběhy a hlasujte pro svého favorita.",
+starAction:"Hlasovat →",
+worldText:"PETS & DOGUE spojuje příběhy, praktické rady, pet-friendly místa, zdraví, módu, fotografii, komunitu, soutěže, pomoc zvířatům, marketplace a členské výhody v jednom digitálním světě.",
+articlesTitle:"Příběhy, které stojí za objevování",
+articlesText:"Originální příběhy, užitečné rady a nápady pro život se zvířaty.",
+photosTitle:"Mazlíčci objektivem",
+fashionTitle:"Styl s osobností",
+wellnessTitle:"Zdraví, péče a každodenní pohoda",
+placesTitle:"Najděte místa, kde jsou mazlíčci vítáni",
+placesDescription:"Objevujte restaurace, hotely, kavárny a další pet-friendly místa s mapami a trasami.",
+contestsTitle:"Zapojte se. Hlasujte. Vyhrajte.",
+communityTitle:"Spojte se s milovníky zvířat ve svém okolí",
+rescueTitle:"Pomáhejte zvířatům, která to potřebují",
+marketTitle:"Najděte, prodejte a objevujte",
+clubTitle:"Více pro členy",
+partnerTitle:"Rostete s PETS & DOGUE",
+partnerText:"Propojte svou značku se světem PETS & DOGUE prostřednictvím partnerství, výhod, příběhů a spoluprací.",
+partnerAction:"Spolupracujte s námi →"
 },
 
 sk:{
@@ -2833,7 +2909,7 @@ nav:{
 magazine:"Magazín",
 coverStars:"Hviezdy obálky",
 offers:"Zľavy",
-places:"Pet-friendly miesta",
+places:"Miesta priateľské k zvieratám",
 articles:"Články",
 photos:"Fotografie",
 fashion:"Móda",
@@ -2843,7 +2919,35 @@ contests:"Súťaže",
 rescue:"Pomoc",
 marketplace:"Marketplace",
 partners:"Partneri"
-}
+},
+latestLabel:"Najnovšie vydanie",
+latestTitle:"Miso: prvá hviezda obálky PETS & DOGUE",
+latestText:"Objavte vydanie 01 ako súčasť digitálneho sveta PETS & DOGUE.",
+latestAction:"Otvoriť magazín →",
+offersLabel:"Členské výhody",
+offersTitle:"Objavte svoje výhody",
+offersText:"Špeciálne ponuky a výhody pre členov PETS & DOGUE Club.",
+offersAction:"Pozrieť výhody →",
+starLabel:"Váš hlas",
+starTitle:"Vyberte ďalšiu hviezdu obálky",
+starText:"Spoznajte miláčikov, ich príbehy a hlasujte za svojho favorita.",
+starAction:"Hlasovať →",
+worldText:"PETS & DOGUE spája príbehy, praktické rady, pet-friendly miesta, zdravie, módu, fotografie, komunitu, súťaže, pomoc zvieratám, marketplace a členské výhody v jednom digitálnom svete.",
+articlesTitle:"Príbehy, ktoré stojí za to objaviť",
+articlesText:"Originálne príbehy, užitočné rady a nápady pre život so zvieratami.",
+photosTitle:"Miláčikovia objektívom",
+fashionTitle:"Štýl s osobnosťou",
+wellnessTitle:"Zdravie, starostlivosť a každodenná pohoda",
+placesTitle:"Nájdite miesta, kde sú zvieratá vítané",
+placesDescription:"Objavujte reštaurácie, hotely, kaviarne a ďalšie pet-friendly miesta s mapami a trasami.",
+contestsTitle:"Zapojte sa. Hlasujte. Vyhrajte.",
+communityTitle:"Spojte sa s milovníkmi zvierat vo svojom okolí",
+rescueTitle:"Pomáhajte zvieratám, ktoré to potrebujú",
+marketTitle:"Nájdite, predajte a objavujte",
+clubTitle:"Viac pre členov",
+partnerTitle:"Rastiete s PETS & DOGUE",
+partnerText:"Prepojte svoju značku so svetom PETS & DOGUE prostredníctvom partnerstiev, výhod, príbehov a spoluprác.",
+partnerAction:"Spolupracujte s nami →"
 },
 
 hu:{
@@ -2855,7 +2959,7 @@ nav:{
 magazine:"Magazin",
 coverStars:"Címlapsztárok",
 offers:"Kedvezmények",
-places:"Pet-friendly helyek",
+places:"Állatbarát helyek",
 articles:"Cikkek",
 photos:"Fotók",
 fashion:"Divat",
@@ -2865,7 +2969,35 @@ contests:"Versenyek",
 rescue:"Segítség",
 marketplace:"Piactér",
 partners:"Partnerek"
-}
+},
+latestLabel:"Legújabb szám",
+latestTitle:"Miso: a PETS & DOGUE első címlapsztárja",
+latestText:"Fedezd fel az első számot, a PETS & DOGUE digitális világának egyik részét.",
+latestAction:"Magazin megnyitása →",
+offersLabel:"Tagsági előnyök",
+offersTitle:"Fedezd fel az előnyeidet",
+offersText:"Különleges ajánlatok és előnyök a PETS & DOGUE Club tagjainak.",
+offersAction:"Előnyök megtekintése →",
+starLabel:"A te szavazatod",
+starTitle:"Válaszd ki a következő címlapsztárt",
+starText:"Ismerd meg a kisállatokat, történeteiket, és szavazz a kedvencedre.",
+starAction:"Szavazás →",
+worldText:"A PETS & DOGUE történeteket, hasznos útmutatókat, állatbarát helyeket, egészséget, divatot, fotózást, közösséget, versenyeket, állatmentést, piacteret és tagsági előnyöket egyesít egy digitális világban.",
+articlesTitle:"Felfedezésre váró történetek",
+articlesText:"Eredeti történetek, hasznos útmutatók és ötletek az állatokkal való élethez.",
+photosTitle:"Kisállatok a lencsén keresztül",
+fashionTitle:"Stílus egyéniséggel",
+wellnessTitle:"Egészség, gondoskodás és mindennapi jóllét",
+placesTitle:"Találj helyeket, ahol szívesen látják az állatokat",
+placesDescription:"Fedezz fel állatbarát éttermeket, hoteleket, kávézókat térképekkel és útvonalakkal.",
+contestsTitle:"Nevezz. Szavazz. Nyerj.",
+communityTitle:"Kapcsolódj a közeledben élő állatbarátokhoz",
+rescueTitle:"Segíts a rászoruló állatoknak",
+marketTitle:"Találj, adj el és fedezz fel",
+clubTitle:"Több a tagoknak",
+partnerTitle:"Növekedj a PETS & DOGUE-gal",
+partnerText:"Kapcsold össze márkádat a PETS & DOGUE világával partnerségeken, előnyökön, történeteken és együttműködéseken keresztül.",
+partnerAction:"Dolgozz velünk →"
 },
 
 ro:{
@@ -2887,7 +3019,35 @@ contests:"Concursuri",
 rescue:"Ajutor",
 marketplace:"Marketplace",
 partners:"Parteneri"
-}
+},
+latestLabel:"Ultimul număr",
+latestTitle:"Miso: prima vedetă de copertă PETS & DOGUE",
+latestText:"Descoperă numărul 01, parte din lumea digitală PETS & DOGUE.",
+latestAction:"Deschide revista →",
+offersLabel:"Beneficii pentru membri",
+offersTitle:"Descoperă beneficiile tale",
+offersText:"Oferte și beneficii speciale pentru membrii PETS & DOGUE Club.",
+offersAction:"Vezi beneficiile →",
+starLabel:"Votul tău",
+starTitle:"Alege următoarea vedetă de copertă",
+starText:"Descoperă animalele, poveștile lor și votează favoritul.",
+starAction:"Votează →",
+worldText:"PETS & DOGUE aduce împreună povești, ghiduri utile, locuri pet-friendly, sănătate, modă, fotografie, comunitate, concursuri, salvare, marketplace și beneficii pentru membri într-o singură lume digitală.",
+articlesTitle:"Povești care merită descoperite",
+articlesText:"Povești originale, ghiduri utile și idei pentru viața alături de animale.",
+photosTitle:"Animale prin obiectiv",
+fashionTitle:"Stil cu personalitate",
+wellnessTitle:"Sănătate, îngrijire și bunăstare zilnică",
+placesTitle:"Găsește locuri unde animalele sunt binevenite",
+placesDescription:"Descoperă restaurante, hoteluri, cafenele și alte locuri pet-friendly cu hărți și trasee.",
+contestsTitle:"Participă. Votează. Câștigă.",
+communityTitle:"Conectează-te cu iubitorii de animale din apropiere",
+rescueTitle:"Ajută animalele care au nevoie",
+marketTitle:"Găsește, vinde și descoperă",
+clubTitle:"Mai mult pentru membri",
+partnerTitle:"Crește alături de PETS & DOGUE",
+partnerText:"Conectează-ți brandul cu lumea PETS & DOGUE prin parteneriate, beneficii, povești și colaborări.",
+partnerAction:"Lucrează cu noi →"
 },
 
 bg:{
@@ -2909,7 +3069,35 @@ contests:"Конкурси",
 rescue:"Помощ",
 marketplace:"Маркетплейс",
 partners:"Партньори"
-}
+},
+latestLabel:"Последен брой",
+latestTitle:"Miso: първата звезда на корицата на PETS & DOGUE",
+latestText:"Открийте брой 01 — част от дигиталния свят на PETS & DOGUE.",
+latestAction:"Отвори списанието →",
+offersLabel:"Предимства за членове",
+offersTitle:"Открийте своите предимства",
+offersText:"Специални предложения и предимства за членовете на PETS & DOGUE Club.",
+offersAction:"Виж предимствата →",
+starLabel:"Вашият глас",
+starTitle:"Изберете следващата звезда на корицата",
+starText:"Запознайте се с любимците, техните истории и гласувайте.",
+starAction:"Гласувай →",
+worldText:"PETS & DOGUE събира истории, полезни съвети, pet-friendly места, здраве, мода, фотография, общност, конкурси, помощ за животни, маркетплейс и клубни предимства в един дигитален свят.",
+articlesTitle:"Истории, които си струва да откриете",
+articlesText:"Оригинални истории, полезни материали и идеи за живота с животни.",
+photosTitle:"Любимци през обектива",
+fashionTitle:"Стил с характер",
+wellnessTitle:"Здраве, грижа и ежедневен комфорт",
+placesTitle:"Намерете места, където животните са добре дошли",
+placesDescription:"Открийте pet-friendly ресторанти, хотели, кафенета и други места с карти и маршрути.",
+contestsTitle:"Участвай. Гласувай. Спечели.",
+communityTitle:"Свържете се с любители на животни близо до вас",
+rescueTitle:"Помогнете на животни в нужда",
+marketTitle:"Намерете, продайте и открийте",
+clubTitle:"Повече за членовете",
+partnerTitle:"Развивайте се с PETS & DOGUE",
+partnerText:"Свържете бранда си със света на PETS & DOGUE чрез партньорства, предимства, истории и колаборации.",
+partnerAction:"Работете с нас →"
 },
 
 el:{
@@ -2931,7 +3119,35 @@ contests:"Διαγωνισμοί",
 rescue:"Βοήθεια",
 marketplace:"Marketplace",
 partners:"Συνεργάτες"
-}
+},
+latestLabel:"Τελευταίο τεύχος",
+latestTitle:"Miso: το πρώτο αστέρι εξωφύλλου του PETS & DOGUE",
+latestText:"Ανακαλύψτε το τεύχος 01, μέρος του ψηφιακού κόσμου PETS & DOGUE.",
+latestAction:"Άνοιγμα περιοδικού →",
+offersLabel:"Προνόμια μελών",
+offersTitle:"Ανακαλύψτε τα προνόμιά σας",
+offersText:"Ειδικές προσφορές και προνόμια για τα μέλη του PETS & DOGUE Club.",
+offersAction:"Δείτε τα προνόμια →",
+starLabel:"Η ψήφος σας",
+starTitle:"Επιλέξτε το επόμενο αστέρι εξωφύλλου",
+starText:"Γνωρίστε τα κατοικίδια, τις ιστορίες τους και ψηφίστε το αγαπημένο σας.",
+starAction:"Ψηφίστε τώρα →",
+worldText:"Το PETS & DOGUE συνδυάζει ιστορίες, πρακτικούς οδηγούς, pet-friendly μέρη, υγεία, μόδα, φωτογραφία, κοινότητα, διαγωνισμούς, διάσωση, marketplace και προνόμια μελών σε έναν ψηφιακό κόσμο.",
+articlesTitle:"Ιστορίες που αξίζει να ανακαλύψετε",
+articlesText:"Πρωτότυπες ιστορίες, χρήσιμοι οδηγοί και ιδέες για τη ζωή με ζώα.",
+photosTitle:"Κατοικίδια μέσα από τον φακό",
+fashionTitle:"Στυλ με προσωπικότητα",
+wellnessTitle:"Υγεία, φροντίδα και καθημερινή ευεξία",
+placesTitle:"Βρείτε μέρη όπου τα κατοικίδια είναι ευπρόσδεκτα",
+placesDescription:"Ανακαλύψτε pet-friendly εστιατόρια, ξενοδοχεία, καφέ και άλλα μέρη με χάρτες και διαδρομές.",
+contestsTitle:"Συμμετέχετε. Ψηφίστε. Κερδίστε.",
+communityTitle:"Συνδεθείτε με ανθρώπους που αγαπούν τα ζώα κοντά σας",
+rescueTitle:"Βοηθήστε ζώα που το χρειάζονται",
+marketTitle:"Βρείτε, πουλήστε και ανακαλύψτε",
+clubTitle:"Περισσότερα για τα μέλη",
+partnerTitle:"Αναπτυχθείτε με το PETS & DOGUE",
+partnerText:"Συνδέστε το brand σας με τον κόσμο PETS & DOGUE μέσω συνεργασιών, προνομίων, ιστοριών και περιεχομένου.",
+partnerAction:"Συνεργαστείτε μαζί μας →"
 },
 
 sv:{
@@ -2943,7 +3159,7 @@ nav:{
 magazine:"Magasin",
 coverStars:"Omslagsstjärnor",
 offers:"Rabatter",
-places:"Pet-friendly platser",
+places:"Husdjursvänliga platser",
 articles:"Artiklar",
 photos:"Foton",
 fashion:"Mode",
@@ -2953,7 +3169,35 @@ contests:"Tävlingar",
 rescue:"Hjälp",
 marketplace:"Marknadsplats",
 partners:"Partners"
-}
+},
+latestLabel:"Senaste numret",
+latestTitle:"Miso: PETS & DOGUEs första omslagsstjärna",
+latestText:"Upptäck Issue 01 som en del av PETS & DOGUEs digitala värld.",
+latestAction:"Öppna magasinet →",
+offersLabel:"Medlemsförmåner",
+offersTitle:"Upptäck dina förmåner",
+offersText:"Specialerbjudanden och förmåner för PETS & DOGUE Club-medlemmar.",
+offersAction:"Se förmåner →",
+starLabel:"Din röst",
+starTitle:"Välj nästa omslagsstjärna",
+starText:"Möt husdjuren, upptäck deras berättelser och rösta på din favorit.",
+starAction:"Rösta nu →",
+worldText:"PETS & DOGUE samlar berättelser, praktiska guider, husdjursvänliga platser, hälsa, mode, fotografi, community, tävlingar, djurhjälp, marketplace och medlemsförmåner i en digital värld.",
+articlesTitle:"Berättelser värda att upptäcka",
+articlesText:"Originalberättelser, användbara guider och idéer för livet med djur.",
+photosTitle:"Husdjur genom linsen",
+fashionTitle:"Stil med personlighet",
+wellnessTitle:"Hälsa, omsorg och vardagligt välbefinnande",
+placesTitle:"Hitta platser där husdjur är välkomna",
+placesDescription:"Upptäck husdjursvänliga restauranger, hotell, kaféer och andra platser med kartor och rutter.",
+contestsTitle:"Delta. Rösta. Vinn.",
+communityTitle:"Hitta andra djurälskare nära dig",
+rescueTitle:"Hjälp djur som behöver det",
+marketTitle:"Hitta, sälj och upptäck",
+clubTitle:"Mer för medlemmar",
+partnerTitle:"Väx med PETS & DOGUE",
+partnerText:"Koppla ditt varumärke till PETS & DOGUE genom partnerskap, medlemsförmåner, berättelser och samarbeten.",
+partnerAction:"Arbeta med oss →"
 },
 
 da:{
@@ -2965,7 +3209,7 @@ nav:{
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
 offers:"Rabatter",
-places:"Pet-friendly steder",
+places:"Kæledyrsvenlige steder",
 articles:"Artikler",
 photos:"Fotos",
 fashion:"Mode",
@@ -2975,7 +3219,35 @@ contests:"Konkurrencer",
 rescue:"Hjælp",
 marketplace:"Marketplace",
 partners:"Partnere"
-}
+},
+latestLabel:"Seneste udgave",
+latestTitle:"Miso: PETS & DOGUEs første forsidestjerne",
+latestText:"Oplev Issue 01 som en del af PETS & DOGUEs digitale verden.",
+latestAction:"Åbn magasinet →",
+offersLabel:"Medlemsfordele",
+offersTitle:"Oplev dine fordele",
+offersText:"Særlige tilbud og fordele til PETS & DOGUE Club-medlemmer.",
+offersAction:"Se fordele →",
+starLabel:"Din stemme",
+starTitle:"Vælg den næste forsidestjerne",
+starText:"Mød kæledyrene, lær deres historier at kende og stem på din favorit.",
+starAction:"Stem nu →",
+worldText:"PETS & DOGUE samler historier, praktiske guides, kæledyrsvenlige steder, sundhed, mode, fotografi, community, konkurrencer, dyrehjælp, marketplace og medlemsfordele i én digital verden.",
+articlesTitle:"Historier værd at opdage",
+articlesText:"Originale historier, nyttige guides og idéer til livet med dyr.",
+photosTitle:"Kæledyr gennem linsen",
+fashionTitle:"Stil med personlighed",
+wellnessTitle:"Sundhed, omsorg og dagligt velvære",
+placesTitle:"Find steder hvor kæledyr er velkomne",
+placesDescription:"Oplev kæledyrsvenlige restauranter, hoteller, caféer og andre steder med kort og ruter.",
+contestsTitle:"Deltag. Stem. Vind.",
+communityTitle:"Mød andre dyrevenner i nærheden",
+rescueTitle:"Hjælp dyr der har brug for det",
+marketTitle:"Find, sælg og opdag",
+clubTitle:"Mere til medlemmer",
+partnerTitle:"Voks med PETS & DOGUE",
+partnerText:"Forbind dit brand med PETS & DOGUE gennem partnerskaber, medlemsfordele, historier og samarbejder.",
+partnerAction:"Arbejd med os →"
 },
 
 no:{
@@ -2987,7 +3259,7 @@ nav:{
 magazine:"Magasin",
 coverStars:"Forsidestjerner",
 offers:"Rabatter",
-places:"Pet-friendly steder",
+places:"Kjæledyrvennlige steder",
 articles:"Artikler",
 photos:"Bilder",
 fashion:"Mote",
@@ -2997,7 +3269,35 @@ contests:"Konkurranser",
 rescue:"Hjelp",
 marketplace:"Markedsplass",
 partners:"Partnere"
-}
+},
+latestLabel:"Nyeste utgave",
+latestTitle:"Miso: PETS & DOGUEs første forsidestjerne",
+latestText:"Oppdag Issue 01 som en del av PETS & DOGUEs digitale verden.",
+latestAction:"Åpne magasinet →",
+offersLabel:"Medlemsfordeler",
+offersTitle:"Oppdag fordelene dine",
+offersText:"Spesialtilbud og fordeler for PETS & DOGUE Club-medlemmer.",
+offersAction:"Se fordeler →",
+starLabel:"Din stemme",
+starTitle:"Velg den neste forsidestjernen",
+starText:"Møt kjæledyrene, oppdag historiene deres og stem på favoritten.",
+starAction:"Stem nå →",
+worldText:"PETS & DOGUE samler historier, praktiske guider, kjæledyrvennlige steder, helse, mote, fotografi, fellesskap, konkurranser, dyrehjelp, marketplace og medlemsfordeler i én digital verden.",
+articlesTitle:"Historier verdt å oppdage",
+articlesText:"Originale historier, nyttige guider og ideer for livet med dyr.",
+photosTitle:"Kjæledyr gjennom linsen",
+fashionTitle:"Stil med personlighet",
+wellnessTitle:"Helse, omsorg og daglig velvære",
+placesTitle:"Finn steder der kjæledyr er velkomne",
+placesDescription:"Oppdag kjæledyrvennlige restauranter, hoteller, kafeer og andre steder med kart og ruter.",
+contestsTitle:"Delta. Stem. Vinn.",
+communityTitle:"Finn andre dyreelskere i nærheten",
+rescueTitle:"Hjelp dyr som trenger det",
+marketTitle:"Finn, selg og oppdag",
+clubTitle:"Mer for medlemmer",
+partnerTitle:"Voks med PETS & DOGUE",
+partnerText:"Koble merkevaren din til PETS & DOGUE gjennom partnerskap, medlemsfordeler, historier og samarbeid.",
+partnerAction:"Jobb med oss →"
 },
 
 fi:{
@@ -3009,7 +3309,7 @@ nav:{
 magazine:"Lehti",
 coverStars:"Kansitähdet",
 offers:"Alennukset",
-places:"Pet-friendly paikat",
+places:"Lemmikkiystävälliset paikat",
 articles:"Artikkelit",
 photos:"Kuvat",
 fashion:"Muoti",
@@ -3019,7 +3319,35 @@ contests:"Kilpailut",
 rescue:"Apu",
 marketplace:"Marketplace",
 partners:"Kumppanit"
-}
+},
+latestLabel:"Uusin numero",
+latestTitle:"Miso: PETS & DOGUEn ensimmäinen kansitähti",
+latestText:"Tutustu Issue 01:een osana PETS & DOGUEn digitaalista maailmaa.",
+latestAction:"Avaa lehti →",
+offersLabel:"Jäsenedut",
+offersTitle:"Tutustu etuihisi",
+offersText:"Erikoistarjouksia ja etuja PETS & DOGUE Clubin jäsenille.",
+offersAction:"Katso edut →",
+starLabel:"Sinun äänesi",
+starTitle:"Valitse seuraava kansitähti",
+starText:"Tutustu lemmikkeihin ja niiden tarinoihin ja äänestä suosikkiasi.",
+starAction:"Äänestä nyt →",
+worldText:"PETS & DOGUE kokoaa yhteen tarinat, hyödylliset oppaat, lemmikkiystävälliset paikat, terveyden, muodin, valokuvauksen, yhteisön, kilpailut, eläinavun, marketplacen ja jäsenedut.",
+articlesTitle:"Tarinoita löydettäväksi",
+articlesText:"Alkuperäisiä tarinoita, hyödyllisiä oppaita ja ideoita elämään eläinten kanssa.",
+photosTitle:"Lemmikit linssin läpi",
+fashionTitle:"Tyyliä persoonallisuudella",
+wellnessTitle:"Terveys, hoiva ja arjen hyvinvointi",
+placesTitle:"Löydä paikkoja, joissa lemmikit ovat tervetulleita",
+placesDescription:"Löydä lemmikkiystävällisiä ravintoloita, hotelleja, kahviloita ja muita paikkoja karttoineen ja reitteineen.",
+contestsTitle:"Osallistu. Äänestä. Voita.",
+communityTitle:"Löydä muita eläinten ystäviä läheltäsi",
+rescueTitle:"Auta apua tarvitsevia eläimiä",
+marketTitle:"Löydä, myy ja tutustu",
+clubTitle:"Enemmän jäsenille",
+partnerTitle:"Kasva PETS & DOGUEn kanssa",
+partnerText:"Yhdistä brändisi PETS & DOGUEen kumppanuuksien, jäsenetujen, tarinoiden ja yhteistyön kautta.",
+partnerAction:"Tee yhteistyötä kanssamme →"
 },
 
 tr:{
@@ -3031,7 +3359,7 @@ nav:{
 magazine:"Dergi",
 coverStars:"Kapak yıldızları",
 offers:"İndirimler",
-places:"Pet-friendly yerler",
+places:"Evcil hayvan dostu mekanlar",
 articles:"Makaleler",
 photos:"Fotoğraflar",
 fashion:"Moda",
@@ -3041,7 +3369,35 @@ contests:"Yarışmalar",
 rescue:"Yardım",
 marketplace:"Pazar",
 partners:"Ortaklar"
-}
+},
+latestLabel:"Son sayı",
+latestTitle:"Miso: PETS & DOGUE'un ilk kapak yıldızı",
+latestText:"PETS & DOGUE dijital dünyasının bir parçası olan Issue 01'i keşfedin.",
+latestAction:"Dergiyi aç →",
+offersLabel:"Üye avantajları",
+offersTitle:"Avantajlarınızı keşfedin",
+offersText:"PETS & DOGUE Club üyelerine özel teklifler ve avantajlar.",
+offersAction:"Avantajları gör →",
+starLabel:"Sizin oyunuz",
+starTitle:"Bir sonraki kapak yıldızını seçin",
+starText:"Evcil hayvanlarla tanışın, hikâyelerini keşfedin ve favorinize oy verin.",
+starAction:"Şimdi oy ver →",
+worldText:"PETS & DOGUE; hikâyeleri, pratik rehberleri, pet-friendly mekanları, sağlık, moda, fotoğraf, topluluk, yarışmalar, hayvan yardımı, marketplace ve üye avantajlarını tek bir dijital dünyada buluşturur.",
+articlesTitle:"Keşfedilmeye değer hikâyeler",
+articlesText:"Hayvanlarla yaşam için özgün hikâyeler, faydalı rehberler ve fikirler.",
+photosTitle:"Objektiften evcil hayvanlar",
+fashionTitle:"Kişilik sahibi stil",
+wellnessTitle:"Sağlık, bakım ve günlük yaşam",
+placesTitle:"Evcil hayvanların hoş karşılandığı yerleri bulun",
+placesDescription:"Haritalar ve rotalarla pet-friendly restoranları, otelleri, kafeleri ve diğer mekanları keşfedin.",
+contestsTitle:"Katıl. Oy ver. Kazan.",
+communityTitle:"Yakınınızdaki hayvanseverlerle bağlantı kurun",
+rescueTitle:"İhtiyacı olan hayvanlara yardım edin",
+marketTitle:"Bul, sat ve keşfet",
+clubTitle:"Üyeler için daha fazlası",
+partnerTitle:"PETS & DOGUE ile büyüyün",
+partnerText:"Markanızı ortaklıklar, üye avantajları, hikâyeler ve iş birlikleriyle PETS & DOGUE dünyasına bağlayın.",
+partnerAction:"Bizimle çalışın →"
 },
 
 ar:{
@@ -3063,7 +3419,35 @@ contests:"المسابقات",
 rescue:"المساعدة",
 marketplace:"السوق",
 partners:"الشركاء"
-}
+},
+latestLabel:"أحدث إصدار",
+latestTitle:"Miso: أول نجمة غلاف لـ PETS & DOGUE",
+latestText:"اكتشف العدد 01 كجزء من العالم الرقمي لـ PETS & DOGUE.",
+latestAction:"افتح المجلة ←",
+offersLabel:"مزايا الأعضاء",
+offersTitle:"اكتشف مزاياك",
+offersText:"عروض ومزايا خاصة لأعضاء PETS & DOGUE Club.",
+offersAction:"عرض المزايا ←",
+starLabel:"صوتك",
+starTitle:"اختر نجم الغلاف القادم",
+starText:"تعرف على الحيوانات وقصصها وصوّت لمفضلتك.",
+starAction:"صوّت الآن ←",
+worldText:"يجمع PETS & DOGUE القصص والأدلة العملية والأماكن الصديقة للحيوانات والصحة والموضة والتصوير والمجتمع والمسابقات والإنقاذ والسوق ومزايا الأعضاء في عالم رقمي واحد.",
+articlesTitle:"قصص تستحق الاكتشاف",
+articlesText:"قصص أصلية وأدلة مفيدة وأفكار للحياة مع الحيوانات.",
+photosTitle:"الحيوانات عبر العدسة",
+fashionTitle:"أناقة بشخصية",
+wellnessTitle:"الصحة والرعاية والرفاه اليومي",
+placesTitle:"اعثر على أماكن ترحب بالحيوانات",
+placesDescription:"اكتشف المطاعم والفنادق والمقاهي والأماكن الصديقة للحيوانات مع الخرائط والمسارات.",
+contestsTitle:"شارك. صوّت. اربح.",
+communityTitle:"تواصل مع محبي الحيوانات بالقرب منك",
+rescueTitle:"ساعد الحيوانات التي تحتاج إلى الدعم",
+marketTitle:"اعثر وبِع واكتشف",
+clubTitle:"المزيد للأعضاء",
+partnerTitle:"انمُ مع PETS & DOGUE",
+partnerText:"اربط علامتك بعالم PETS & DOGUE من خلال الشراكات ومزايا الأعضاء والقصص والتعاون.",
+partnerAction:"اعمل معنا ←"
 },
 
 hi:{
@@ -3085,37 +3469,55 @@ contests:"प्रतियोगिताएँ",
 rescue:"मदद",
 marketplace:"मार्केटप्लेस",
 partners:"पार्टनर"
-}
+},
+latestLabel:"नवीनतम अंक",
+latestTitle:"Miso: PETS & DOGUE की पहली कवर स्टार",
+latestText:"PETS & DOGUE की डिजिटल दुनिया के एक हिस्से के रूप में Issue 01 देखें।",
+latestAction:"पत्रिका खोलें →",
+offersLabel:"सदस्य लाभ",
+offersTitle:"अपने लाभ देखें",
+offersText:"PETS & DOGUE Club सदस्यों के लिए विशेष ऑफ़र और लाभ।",
+offersAction:"लाभ देखें →",
+starLabel:"आपका वोट",
+starTitle:"अगली कवर स्टार चुनें",
+starText:"पालतू जानवरों और उनकी कहानियों को जानें और अपने पसंदीदा को वोट दें।",
+starAction:"अभी वोट दें →",
+worldText:"PETS & DOGUE कहानियों, उपयोगी गाइड, pet-friendly जगहों, स्वास्थ्य, फ़ैशन, फ़ोटोग्राफ़ी, समुदाय, प्रतियोगिताओं, पशु सहायता, मार्केटप्लेस और सदस्य लाभों को एक डिजिटल दुनिया में लाता है।",
+articlesTitle:"खोजने लायक कहानियाँ",
+articlesText:"जानवरों के साथ जीवन के लिए मौलिक कहानियाँ, उपयोगी गाइड और विचार।",
+photosTitle:"लेंस के माध्यम से पालतू जानवर",
+fashionTitle:"व्यक्तित्व के साथ स्टाइल",
+wellnessTitle:"स्वास्थ्य, देखभाल और रोज़मर्रा की भलाई",
+placesTitle:"ऐसी जगहें खोजें जहाँ पालतू जानवरों का स्वागत है",
+placesDescription:"नक्शों और रास्तों के साथ pet-friendly रेस्तरां, होटल, कैफ़े और दूसरी जगहें खोजें।",
+contestsTitle:"भाग लें. वोट दें. जीतें.",
+communityTitle:"अपने आसपास के पशु प्रेमियों से जुड़ें",
+rescueTitle:"ज़रूरतमंद जानवरों की मदद करें",
+marketTitle:"खोजें, बेचें और जानें",
+clubTitle:"सदस्यों के लिए और अधिक",
+partnerTitle:"PETS & DOGUE के साथ आगे बढ़ें",
+partnerText:"पार्टनरशिप, सदस्य लाभ, कहानियों और सहयोग के माध्यम से अपने ब्रांड को PETS & DOGUE से जोड़ें।",
+partnerAction:"हमारे साथ काम करें →"
 }
 
 };
 
 /* =========================================================
-FALLBACK
+LANGUAGES WITH FULL NAV + SAFE ENGLISH FALLBACK COPY
 ========================================================= */
+
+const NAV_ONLY = {
+
+};
 
 function bundle(
 language
 ){
 
-const base =
+return T[
+language
+] ||
 T.en;
-
-const local =
-T[language] ||
-{};
-
-return{
-
-...base,
-...local,
-
-nav:{
-...base.nav,
-...(local.nav || {})
-}
-
-};
 
 }
 
@@ -3125,19 +3527,7 @@ SEO
 
 function getHomeUrl(){
 
-const url =
-new URL(
-"./",
-window.location.href
-);
-
-url.search =
-"";
-
-url.hash =
-"";
-
-return url.href;
+return "https://www.petsanddogue.com/";
 
 }
 
@@ -3151,10 +3541,7 @@ const homeUrl =
 getHomeUrl();
 
 const coverImage =
-new URL(
-"file_00000000a9d471fda9b4629589be22a9.png",
-homeUrl
-).href;
+"https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png";
 
 const sectionItems =
 NAV_ITEMS.map(
@@ -3182,10 +3569,7 @@ const data = {
 "@id":homeUrl + "#website",
 url:homeUrl,
 name:"PETS & DOGUE",
-alternateName:[
-"PETS AND DOGUE",
-"PETS & DOGUE Magazine"
-],
+alternateName:"PETS AND DOGUE",
 description:seo.description,
 inLanguage:language,
 publisher:{
@@ -3197,9 +3581,10 @@ publisher:{
 "@type":"Organization",
 "@id":homeUrl + "#organization",
 name:"PETS & DOGUE",
-alternateName:"PETS & DOGUE Magazine",
+alternateName:"PETS AND DOGUE",
 url:homeUrl,
-description:"PETS & DOGUE is an international pet lifestyle and animal magazine.",
+description:"PETS & DOGUE is a digital world for pets and the people who love them.",
+slogan:"One world. Every pet.",
 image:coverImage
 },
 
@@ -3228,12 +3613,17 @@ about:[
 
 {
 "@type":"Thing",
+name:"Pet stories and guides"
+},
+
+{
+"@type":"Thing",
 name:"Pet-friendly places"
 },
 
 {
 "@type":"Thing",
-name:"Pet health and wellness"
+name:"Pet health"
 },
 
 {
@@ -3248,17 +3638,27 @@ name:"Pet photography"
 
 {
 "@type":"Thing",
-name:"Animal stories"
-},
-
-{
-"@type":"Thing",
 name:"Pet community"
 },
 
 {
 "@type":"Thing",
+name:"Pet contests"
+},
+
+{
+"@type":"Thing",
+name:"Animal rescue"
+},
+
+{
+"@type":"Thing",
 name:"Pet marketplace"
+},
+
+{
+"@type":"Thing",
+name:"Member benefits"
 }
 
 ],
@@ -3290,17 +3690,16 @@ tr
 ){
 
 const seo =
-SEO_T[language] ||
+SEO_T[
+language
+] ||
 SEO_T.en;
 
 const homeUrl =
 getHomeUrl();
 
 const coverImage =
-new URL(
-"file_00000000a9d471fda9b4629589be22a9.png",
-homeUrl
-).href;
+"https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png";
 
 document.title =
 seo.title;
@@ -3351,7 +3750,9 @@ document.getElementById(
 "ogLocale"
 ).setAttribute(
 "content",
-SEO_LOCALES[language] ||
+SEO_LOCALES[
+language
+] ||
 SEO_LOCALES.en
 );
 
@@ -3405,20 +3806,19 @@ offers:
 tr.offersText,
 
 places:
-tr.placesDescription ||
-tr.worldText,
+tr.placesDescription,
 
 articles:
 tr.articlesText,
 
 photos:
-tr.worldText,
+tr.photosTitle,
 
 fashion:
-tr.worldText,
+tr.fashionTitle,
 
 wellness:
-tr.worldText,
+tr.wellnessTitle,
 
 community:
 tr.communityTitle,
@@ -3438,14 +3838,16 @@ tr.partnerText
 };
 
 return(
-descriptions[key] ||
+descriptions[
+key
+] ||
 tr.worldText
 );
 
 }
 
 /* =========================================================
-MENU + TOP NAV
+NAVIGATION
 ========================================================= */
 
 function renderNavigation(
@@ -3472,8 +3874,6 @@ item =>`
 <a
 href="${item.url}"
 data-nav="${item.key}"
-class="${item.key === "magazine" ? "active" : ""}"
-${item.key === "magazine" ? 'aria-current="page"' : ""}
 >
 ${tr.nav[item.key]}
 </a>
@@ -3568,18 +3968,92 @@ previousScroll;
 LANGUAGE
 ========================================================= */
 
+function normalizeLanguage(
+language
+){
+
+language =
+String(
+language ||
+"en"
+)
+.toLowerCase()
+.trim();
+
+if(
+language.includes("-")
+){
+
+language =
+language.split("-")[0];
+
+}
+
+if(
+language.includes("_")
+){
+
+language =
+language.split("_")[0];
+
+}
+
+if(
+language === "ua"
+){
+
+language = "uk";
+
+}
+
+if(
+language === "cz"
+){
+
+language = "cs";
+
+}
+
+if(
+language === "gr"
+){
+
+language = "el";
+
+}
+
+if(
+language === "se"
+){
+
+language = "sv";
+
+}
+
+if(
+language === "dk"
+){
+
+language = "da";
+
+}
+
+return T[
+language
+]
+? language
+: "en";
+
+}
+
 function applyLanguage(
 language
 ){
 
-if(
-!T[language]
-){
-
 language =
-"en";
-
-}
+normalizeLanguage(
+language
+);
 
 const tr =
 bundle(
@@ -3685,11 +4159,6 @@ document.getElementById(
 tr.starAction;
 
 document.getElementById(
-"worldTitle"
-).textContent =
-tr.worldTitle;
-
-document.getElementById(
 "worldText"
 ).textContent =
 tr.worldText;
@@ -3764,11 +4233,6 @@ document.getElementById(
 ).textContent =
 tr.partnerAction;
 
-document.getElementById(
-"footerTagline"
-).textContent =
-tr.tagline;
-
 renderNavigation(
 language
 );
@@ -3781,7 +4245,7 @@ tr
 }
 
 /* =========================================================
-OPEN / CLOSE MENU
+MENU
 ========================================================= */
 
 function openMenu(){
@@ -3792,6 +4256,14 @@ document.getElementById(
 .classList
 .add(
 "open"
+);
+
+document.getElementById(
+"sideMenu"
+)
+.setAttribute(
+"aria-hidden",
+"false"
 );
 
 document.getElementById(
@@ -3818,6 +4290,14 @@ document.getElementById(
 .classList
 .remove(
 "open"
+);
+
+document.getElementById(
+"sideMenu"
+)
+.setAttribute(
+"aria-hidden",
+"true"
 );
 
 document.getElementById(
@@ -3890,7 +4370,7 @@ closeMenu();
 );
 
 /* =========================================================
-SYNC LANGUAGE BETWEEN TABS
+SYNC LANGUAGE
 ========================================================= */
 
 window.addEventListener(
@@ -3906,14 +4386,9 @@ return;
 
 }
 
-const language =
-event.newValue ||
-"en";
-
 applyLanguage(
-T[language]
-? language
-: "en"
+event.newValue ||
+"en"
 );
 
 }
@@ -3930,9 +4405,7 @@ LANGUAGE_KEY
 "en";
 
 applyLanguage(
-T[savedLanguage]
-? savedLanguage
-: "en"
+savedLanguage
 );
 
 </script>
