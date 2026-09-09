@@ -109,65 +109,71 @@ type="application/ld+json"
 id="contestStructuredData"
 >
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context":"https://schema.org",
+  "@graph":[
     {
-      "@type": "CollectionPage",
-      "@id": "https://www.petsanddogue.com/contests.html#page",
-      "url": "https://www.petsanddogue.com/contests.html",
-      "name": "Pet Contests, Prizes & Cover Star Competitions | PETS & DOGUE",
-      "description": "PETS & DOGUE pet contests, photo competitions, Cover Star challenges, community voting, prizes and competition winners.",
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://www.petsanddogue.com/#website",
-        "url": "https://www.petsanddogue.com/",
-        "name": "PETS & DOGUE"
+      "@type":"WebSite",
+      "@id":"https://www.petsanddogue.com/#website",
+      "url":"https://www.petsanddogue.com/",
+      "name":"PETS & DOGUE",
+      "alternateName":"PETS AND DOGUE",
+      "description":"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them."
+    },
+    {
+      "@type":"Organization",
+      "@id":"https://www.petsanddogue.com/#organization",
+      "name":"PETS & DOGUE",
+      "url":"https://www.petsanddogue.com/",
+      "description":"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them.",
+      "slogan":"One world. Every pet."
+    },
+    {
+      "@type":"CollectionPage",
+      "@id":"https://www.petsanddogue.com/contests.html#page",
+      "url":"https://www.petsanddogue.com/contests.html",
+      "name":"Pet Contests, Prizes & Cover Star Competitions | PETS & DOGUE",
+      "description":"Enter PETS & DOGUE pet contests, photo competitions and Cover Star challenges. Discover community voting, prizes, winners and upcoming competitions.",
+      "inLanguage":"en",
+      "isPartOf":{
+        "@id":"https://www.petsanddogue.com/#website"
       },
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://www.petsanddogue.com/#organization",
-        "name": "PETS & DOGUE",
-        "url": "https://www.petsanddogue.com/"
+      "publisher":{
+        "@id":"https://www.petsanddogue.com/#organization"
       },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
+      "mainEntity":{
+        "@type":"ItemList",
+        "name":"PETS & DOGUE competitions",
+        "itemListElement":[
           {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Pet Contests & Prizes",
-            "url": "https://www.petsanddogue.com/contests.html"
+            "@type":"ListItem",
+            "position":1,
+            "name":"Pet Contests & Prizes",
+            "url":"https://www.petsanddogue.com/contests.html"
           },
           {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Cover Star Competitions",
-            "url": "https://www.petsanddogue.com/members-gallery.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Competition Winners & Hall Of Fame",
-            "url": "https://www.petsanddogue.com/hall-of-fame.html"
+            "@type":"ListItem",
+            "position":2,
+            "name":"Cover Star Competitions",
+            "url":"https://www.petsanddogue.com/members-gallery.html"
           }
         ]
       }
     },
     {
-      "@type": "BreadcrumbList",
-      "@id": "https://www.petsanddogue.com/contests.html#breadcrumbs",
-      "itemListElement": [
+      "@type":"BreadcrumbList",
+      "@id":"https://www.petsanddogue.com/contests.html#breadcrumbs",
+      "itemListElement":[
         {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "PETS & DOGUE",
-          "item": "https://www.petsanddogue.com/"
+          "@type":"ListItem",
+          "position":1,
+          "name":"PETS & DOGUE",
+          "item":"https://www.petsanddogue.com/"
         },
         {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Contests & Prizes",
-          "item": "https://www.petsanddogue.com/contests.html"
+          "@type":"ListItem",
+          "position":2,
+          "name":"Contests",
+          "item":"https://www.petsanddogue.com/contests.html"
         }
       ]
     }
@@ -248,6 +254,18 @@ width:100%;
 display:none!important;
 }
 
+.sr-only{
+position:absolute!important;
+width:1px!important;
+height:1px!important;
+padding:0!important;
+margin:-1px!important;
+overflow:hidden!important;
+clip:rect(0,0,0,0)!important;
+white-space:nowrap!important;
+border:0!important;
+}
+
 .metallic{
 background:var(--gold-metal);
 background-size:220% 100%;
@@ -267,6 +285,85 @@ background-position:100% 50%;
 100%{
 background-position:-80% 50%;
 }
+}
+
+/* =========================================================
+SPEAK BUTTON
+========================================================= */
+
+.speak-button{
+width:43px;
+height:43px;
+flex:none;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+border:1.5px solid currentColor;
+border-radius:50%;
+background:#fff;
+color:#111;
+transition:
+transform .15s ease,
+background .15s ease,
+color .15s ease;
+}
+
+.speak-button svg{
+width:21px;
+height:21px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
+pointer-events:none;
+}
+
+.speak-button:hover{
+transform:scale(1.04);
+}
+
+.speak-button.speaking{
+background:var(--green);
+color:#111;
+border-color:var(--green);
+}
+
+.speak-button.dark{
+background:rgba(0,0,0,.72);
+color:#fff;
+border-color:rgba(255,255,255,.85);
+backdrop-filter:blur(5px);
+}
+
+.speak-button.dark.speaking{
+background:var(--green);
+color:#111;
+border-color:var(--green);
+}
+
+.speech-row{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.speech-row.center{
+justify-content:center;
+margin-top:18px;
+}
+
+.speech-row.right{
+justify-content:flex-end;
+}
+
+.card-speak{
+width:39px;
+height:39px;
+}
+
+.modal-speak{
+margin-top:14px;
 }
 
 /* =========================================================
@@ -577,7 +674,7 @@ rgba(0,0,0,.04) 72%
 position:absolute;
 z-index:2;
 left:50%;
-bottom:43px;
+bottom:36px;
 transform:translateX(-50%);
 width:min(1000px,91%);
 text-align:center;
@@ -746,6 +843,13 @@ border-bottom:3px solid #111;
 
 .section-head h2{
 font:normal 51px/.95 Georgia,"Times New Roman",serif;
+}
+
+.section-head-copy{
+max-width:560px;
+display:flex;
+align-items:flex-end;
+gap:13px;
 }
 
 .section-head p{
@@ -970,6 +1074,7 @@ margin-bottom:11px;
 display:flex;
 gap:7px;
 flex-wrap:wrap;
+align-items:center;
 margin-top:auto;
 }
 
@@ -1150,10 +1255,10 @@ margin-top:13px;
 }
 
 /* =========================================================
-HALL OF FAME
+COVER STARS CTA
 ========================================================= */
 
-.hall-cta{
+.cover-cta{
 display:grid;
 grid-template-columns:1fr 1fr;
 margin-top:8px;
@@ -1162,18 +1267,18 @@ min-height:420px;
 overflow:hidden;
 }
 
-.hall-image{
+.cover-image{
 position:relative;
 }
 
-.hall-image img{
+.cover-image img{
 position:absolute;
 inset:0;
 height:100%;
 object-fit:cover;
 }
 
-.hall-image:after{
+.cover-image:after{
 content:"";
 position:absolute;
 inset:0;
@@ -1185,7 +1290,7 @@ transparent 62%
 );
 }
 
-.hall-copy{
+.cover-copy{
 background:#111;
 color:#fff;
 padding:45px;
@@ -1194,7 +1299,7 @@ flex-direction:column;
 justify-content:center;
 }
 
-.hall-copy>span{
+.cover-copy>span{
 font-size:10px;
 font-weight:bold;
 letter-spacing:2.4px;
@@ -1202,13 +1307,13 @@ color:var(--gold-light);
 margin-bottom:11px;
 }
 
-.hall-copy h2{
+.cover-copy h2{
 font:normal 46px/.98 Georgia,"Times New Roman",serif;
 color:var(--gold-light);
 margin-bottom:12px;
 }
 
-.hall-copy p{
+.cover-copy p{
 font-size:14px;
 line-height:1.6;
 color:#ccc;
@@ -1234,8 +1339,15 @@ letter-spacing:3px;
 }
 
 .footer-subtitle{
-color:#aaa;
-margin:10px 0 28px;
+color:#ddd;
+margin-top:10px;
+font-size:14px;
+}
+
+.footer-slogan{
+color:var(--gold-light);
+margin:6px 0 28px;
+font:italic 15px Georgia,"Times New Roman",serif;
 }
 
 .footer-links{
@@ -1388,11 +1500,11 @@ grid-template-columns:1fr 1fr;
 grid-column:1/-1;
 }
 
-.hall-cta{
+.cover-cta{
 grid-template-columns:1fr;
 }
 
-.hall-image{
+.cover-image{
 min-height:420px;
 }
 
@@ -1429,7 +1541,7 @@ font-size:12px;
 }
 
 .hero{
-height:430px;
+height:445px;
 }
 
 .hero h1{
@@ -1441,7 +1553,7 @@ font-size:16px;
 }
 
 .hero-content{
-bottom:28px;
+bottom:24px;
 }
 
 main{
@@ -1449,7 +1561,7 @@ padding:10px 10px 45px;
 }
 
 .intro-photo{
-min-height:360px;
+min-height:380px;
 }
 
 .intro-copy{
@@ -1493,8 +1605,14 @@ margin-top:34px;
 font-size:41px;
 }
 
+.section-head-copy{
+width:100%;
+align-items:center;
+}
+
 .section-head p{
 text-align:left;
+flex:1;
 }
 
 .contest-toolbar{
@@ -1568,11 +1686,11 @@ padding:23px 17px;
 font-size:35px;
 }
 
-.hall-copy{
+.cover-copy{
 padding:34px 21px;
 }
 
-.hall-copy h2{
+.cover-copy h2{
 font-size:39px;
 }
 
@@ -1605,7 +1723,7 @@ font-size:34px;
 }
 
 .hero{
-height:405px;
+height:420px;
 }
 
 .grid{
@@ -1638,12 +1756,17 @@ padding:15px 8px;
 font-size:11px;
 }
 
-.hall-image{
+.cover-image{
 min-height:350px;
 }
 
 .how-grid{
 grid-template-columns:1fr;
+}
+
+.speak-button{
+width:40px;
+height:40px;
 }
 
 }
@@ -1675,6 +1798,13 @@ transition:none;
 </head>
 
 <body>
+
+<div
+id="speechStatus"
+class="sr-only"
+role="status"
+aria-live="polite"
+></div>
 
 <div
 class="menu-overlay"
@@ -1732,7 +1862,10 @@ id="languageLabel"
 LANGUAGE
 </span>
 
-<select id="languageSelect">
+<select
+id="languageSelect"
+aria-label="Language"
+>
 
 <option value="en">EN — English</option>
 <option value="uk">UA — Українська</option>
@@ -1764,21 +1897,42 @@ LANGUAGE
 
 <div class="menu-list">
 
-<a class="menu-item" href="index.html">
+<a class="menu-item" href="issue-01.html">
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="PETS & DOGUE magazine homepage"
+alt="PETS & DOGUE Edition 01"
 >
 
 <div>
 
-<h3 data-i18n="common.menu.home">
-Home
+<h3 id="menuEdition">
+Edition
 </h3>
 
-<p data-i18n="common.menu.homeDescription">
-Return to the PETS & DOGUE homepage.
+<p data-i18n="common.menu.latestIssueDescription">
+Open the latest digital edition of PETS & DOGUE.
+</p>
+
+</div>
+
+</a>
+
+<a class="menu-item" href="members-gallery.html">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+alt="PETS & DOGUE Cover Star competition"
+>
+
+<div>
+
+<h3 data-i18n="common.menu.coverStar">
+Cover Star
+</h3>
+
+<p data-i18n="common.menu.coverStarDescription">
+Enter your pet into the next cover competition.
 </p>
 
 </div>
@@ -1806,21 +1960,84 @@ PETS &amp; DOGUE CLUB
 
 </a>
 
-<a class="menu-item" href="members-gallery.html">
+<a class="menu-item" href="pet-friendly-places.html">
 
 <img
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
-alt="PETS & DOGUE Cover Star competition"
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
+alt="Pet-friendly places"
 >
 
 <div>
 
-<h3 data-i18n="common.menu.coverStar">
-Cover Star
+<h3 id="menuPlaces">
+Pet-Friendly
 </h3>
 
-<p data-i18n="common.menu.coverStarDescription">
-Enter your pet into the next cover competition.
+<p data-i18n="common.menu.placesDescription">
+Search real places, maps, routes and contacts.
+</p>
+
+</div>
+
+</a>
+
+<a class="menu-item" href="pet-marketplace.html">
+
+<img
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+alt="PETS & DOGUE pet marketplace"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.marketplace">
+Marketplace
+</h3>
+
+<p data-i18n="common.menu.marketplaceDescription">
+Community listings, services and accessories.
+</p>
+
+</div>
+
+</a>
+
+<a class="menu-item" href="pet-fashion.html">
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
+alt="Pet fashion"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.fashion">
+Fashion
+</h3>
+
+<p data-i18n="common.menu.fashionDescription">
+Style, accessories and editorial looks.
+</p>
+
+</div>
+
+</a>
+
+<a class="menu-item" href="wellness.html">
+
+<img
+src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80"
+alt="Pet health"
+>
+
+<div>
+
+<h3 data-i18n="common.menu.wellness">
+Health
+</h3>
+
+<p data-i18n="common.menu.wellnessDescription">
+Health, care and everyday wellbeing.
 </p>
 
 </div>
@@ -1869,84 +2086,21 @@ Portraits, galleries and visual stories.
 
 </a>
 
-<a class="menu-item" href="pet-fashion.html">
+<a class="menu-item" href="local-community.html">
 
 <img
-src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
-alt="Pet fashion"
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+alt="PETS & DOGUE pet community"
 >
 
 <div>
 
-<h3 data-i18n="common.menu.fashion">
-Fashion
+<h3 data-i18n="common.navigation.community">
+Community
 </h3>
 
-<p data-i18n="common.menu.fashionDescription">
-Luxury style, shopping and editorial looks.
-</p>
-
-</div>
-
-</a>
-
-<a class="menu-item" href="pet-travel.html">
-
-<img
-src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=500&q=80"
-alt="Pet travel"
->
-
-<div>
-
-<h3 data-i18n="common.menu.travel">
-Travel
-</h3>
-
-<p data-i18n="common.menu.travelDescription">
-Hotels, beaches and pet-friendly journeys.
-</p>
-
-</div>
-
-</a>
-
-<a class="menu-item" href="wellness.html">
-
-<img
-src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80"
-alt="Pet health and wellness"
->
-
-<div>
-
-<h3 data-i18n="common.menu.wellness">
-Wellness
-</h3>
-
-<p data-i18n="common.menu.wellnessDescription">
-Care, grooming, health and everyday wellbeing.
-</p>
-
-</div>
-
-</a>
-
-<a class="menu-item" href="pet-friendly-places.html">
-
-<img
-src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
-alt="Pet friendly places"
->
-
-<div>
-
-<h3 data-i18n="common.menu.places">
-Places
-</h3>
-
-<p data-i18n="common.menu.placesDescription">
-Pet-friendly hotels, cafés and destinations.
+<p class="notranslate" translate="no">
+PETS &amp; DOGUE LOCAL
 </p>
 
 </div>
@@ -1974,63 +2128,21 @@ Competitions, votes and prizes.
 
 </a>
 
-<a class="menu-item" href="local-community.html">
-
-<img
-src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
-alt="Pet community"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.community">
-Community
-</h3>
-
-<p class="notranslate" translate="no">
-PETS &amp; DOGUE LOCAL
-</p>
-
-</div>
-
-</a>
-
 <a class="menu-item" href="pets-in-need.html">
 
 <img
 src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
-alt="Animal rescue and adoption"
+alt="Animals in need"
 >
 
 <div>
 
-<h3 data-i18n="common.navigation.rescue">
-Rescue
+<h3 id="menuHelp">
+Help
 </h3>
 
 <p data-i18n="common.menu.rescueDescription">
-Rescue, adoption and stories that need visibility.
-</p>
-
-</div>
-
-</a>
-
-<a class="menu-item" href="pet-marketplace.html">
-
-<img
-src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
-alt="Pet marketplace"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.marketplace">
-Marketplace
-</h3>
-
-<p class="notranslate" translate="no">
-PETS &amp; DOGUE MARKETPLACE
+Rescue, adoption and community support.
 </p>
 
 </div>
@@ -2127,7 +2239,7 @@ href="index.html"
 aria-label="Home"
 >
 
-<svg viewBox="0 0 24 24">
+<svg viewBox="0 0 24 24" aria-hidden="true">
 <path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
 <path d="M9 21v-7h6v7"></path>
 </svg>
@@ -2139,13 +2251,21 @@ aria-label="Home"
 <nav
 class="category-nav"
 id="categoryNav"
+aria-label="PETS & DOGUE sections"
 >
 
 <a
-data-i18n="common.navigation.magazine"
+id="topEdition"
 href="issue-01.html"
 >
-MAGAZINE
+EDITION
+</a>
+
+<a
+data-i18n="common.navigation.coverStars"
+href="members-gallery.html"
+>
+COVER STARS
 </a>
 
 <a
@@ -2156,10 +2276,31 @@ DISCOUNTS
 </a>
 
 <a
-data-i18n="common.navigation.coverStars"
-href="members-gallery.html"
+id="topPlaces"
+href="pet-friendly-places.html"
 >
-COVER STARS
+PET-FRIENDLY
+</a>
+
+<a
+data-i18n="common.navigation.marketplace"
+href="pet-marketplace.html"
+>
+MARKETPLACE
+</a>
+
+<a
+data-i18n="common.navigation.fashion"
+href="pet-fashion.html"
+>
+FASHION
+</a>
+
+<a
+data-i18n="common.menu.wellness"
+href="wellness.html"
+>
+HEALTH
 </a>
 
 <a
@@ -2177,42 +2318,6 @@ PHOTOS
 </a>
 
 <a
-data-i18n="common.navigation.fashion"
-href="pet-fashion.html"
->
-FASHION
-</a>
-
-<a
-data-i18n="common.navigation.travel"
-href="pet-travel.html"
->
-TRAVEL
-</a>
-
-<a
-data-i18n="common.navigation.wellness"
-href="wellness.html"
->
-WELLNESS
-</a>
-
-<a
-data-i18n="common.navigation.places"
-href="pet-friendly-places.html"
->
-PLACES
-</a>
-
-<a
-class="active"
-data-i18n="common.navigation.contests"
-href="contests.html"
->
-CONTESTS
-</a>
-
-<a
 data-i18n="common.navigation.community"
 href="local-community.html"
 >
@@ -2220,17 +2325,19 @@ COMMUNITY
 </a>
 
 <a
-data-i18n="common.navigation.rescue"
-href="pets-in-need.html"
+class="active"
+data-i18n="common.navigation.contests"
+href="contests.html"
+aria-current="page"
 >
-RESCUE
+CONTESTS
 </a>
 
 <a
-data-i18n="common.navigation.marketplace"
-href="pet-marketplace.html"
+id="topHelp"
+href="pets-in-need.html"
 >
-MARKETPLACE
+HELP
 </a>
 
 <a
@@ -2244,7 +2351,10 @@ PARTNERS
 
 </header>
 
-<section class="hero">
+<section
+class="hero"
+id="heroSpeech"
+>
 
 <img
 src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1800&q=85"
@@ -2266,8 +2376,26 @@ Contests &amp; Prizes
 </h1>
 
 <p data-i18n="contests.hero.description">
-Photo contests, cover star challenges, community votes and monthly prizes for unforgettable pets.
+Photo contests, Cover Star challenges, community votes and prizes for unforgettable pets.
 </p>
+
+<div class="speech-row center">
+
+<button
+class="speak-button dark"
+type="button"
+data-speak-target="heroSpeech"
+onclick="speakTarget('heroSpeech',this)"
+aria-label="Listen"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
 
 </div>
 
@@ -2277,11 +2405,14 @@ Photo contests, cover star challenges, community votes and monthly prizes for un
 
 <section class="intro-grid">
 
-<div class="intro-photo">
+<div
+class="intro-photo"
+id="introSpeech"
+>
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="PETS & DOGUE Cover Star pet competition"
+alt="PETS & DOGUE Cover Star competition"
 >
 
 <div class="intro-copy">
@@ -2297,15 +2428,36 @@ PETS &amp; DOGUE · COVER STAR
 Make Your Pet The Next Star
 </h2>
 
-<p data-i18n="contests.intro.description">
-Discover current PETS & DOGUE competitions, submit your pet, support community favourites and follow winners selected for future magazine features.
+<p id="introDescription">
+Discover current PETS & DOGUE competitions, submit your pet, support community favourites and follow pets selected for future PETS & DOGUE features.
 </p>
 
+<div class="speech-row">
+
+<button
+class="speak-button dark"
+type="button"
+data-speak-target="introSpeech"
+onclick="speakTarget('introSpeech',this)"
+aria-label="Listen"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
+
 </div>
 
 </div>
 
-<div class="how">
+<div
+class="how"
+id="howSpeech"
+>
 
 <span
 class="notranslate"
@@ -2354,11 +2506,29 @@ Readers can support favourites with hearts and votes.
 
 <b>4</b>
 
-<span data-i18n="contests.rules.four">
-Winners may be featured in the magazine, Photos, Hall Of Fame or future covers.
+<span class="ruleFour">
+Winners may be featured across PETS & DOGUE, Photos, Cover Stars and future editorial features.
 </span>
 
 </div>
+
+</div>
+
+<div class="speech-row">
+
+<button
+class="speak-button dark"
+type="button"
+data-speak-target="howSpeech"
+onclick="speakTarget('howSpeech',this)"
+aria-label="Listen"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
 
 </div>
 
@@ -2366,15 +2536,36 @@ Winners may be featured in the magazine, Photos, Hall Of Fame or future covers.
 
 </section>
 
-<div class="section-head">
+<div
+class="section-head"
+id="currentSpeech"
+>
 
 <h2 data-i18n="contests.current.title">
 Current Competitions
 </h2>
 
+<div class="section-head-copy">
+
 <p data-i18n="contests.hero.description">
-Photo contests, cover star challenges, community votes and monthly prizes for unforgettable pets.
+Photo contests, Cover Star challenges, community votes and prizes for unforgettable pets.
 </p>
+
+<button
+class="speak-button"
+type="button"
+data-speak-target="currentSpeech"
+onclick="speakTarget('currentSpeech',this)"
+aria-label="Listen"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
 
 </div>
 
@@ -2386,11 +2577,13 @@ type="search"
 placeholder="Search by competition, prize, winner or status..."
 data-i18n-placeholder="contests.search.placeholder"
 oninput="renderContests()"
+aria-label="Search competitions"
 >
 
 <select
 id="contestStatusFilter"
 onchange="selectStatusFromDropdown()"
+aria-label="Competition status"
 >
 
 <option
@@ -2445,6 +2638,7 @@ Search
 
 <button
 class="filter-button active"
+type="button"
 data-status="All"
 onclick="setStatusFilter('All',this)"
 data-i18n="contests.filters.all"
@@ -2454,6 +2648,7 @@ All
 
 <button
 class="filter-button"
+type="button"
 data-status="Open"
 onclick="setStatusFilter('Open',this)"
 data-i18n="contests.filters.open"
@@ -2463,6 +2658,7 @@ Open Now
 
 <button
 class="filter-button"
+type="button"
 data-status="Draft"
 onclick="setStatusFilter('Draft',this)"
 data-i18n="contests.filters.upcoming"
@@ -2472,6 +2668,7 @@ Upcoming
 
 <button
 class="filter-button"
+type="button"
 data-status="Voting Closed"
 onclick="setStatusFilter('Voting Closed',this)"
 data-i18n="contests.filters.votingClosed"
@@ -2481,6 +2678,7 @@ Voting Closed
 
 <button
 class="filter-button"
+type="button"
 data-status="Completed"
 onclick="setStatusFilter('Completed',this)"
 data-i18n="contests.filters.completed"
@@ -2511,7 +2709,10 @@ Try another status or search term.
 
 </div>
 
-<section class="prize-box">
+<section
+class="prize-box"
+id="prizesSpeech"
+>
 
 <span
 class="notranslate"
@@ -2521,12 +2722,30 @@ PETS &amp; DOGUE CLUB
 </span>
 
 <h2 data-i18n="contests.prizes.title">
-Monthly PETS & DOGUE Prizes
+PETS & DOGUE Prizes
 </h2>
 
-<p data-i18n="contests.prizes.description">
-Competitions may include partner gifts, pet fashion accessories, grooming vouchers, hotel discounts, photography sessions and premium magazine features.
+<p id="prizesDescription">
+Competitions may include partner gifts, pet fashion accessories, grooming vouchers, partner benefits, photography sessions and PETS & DOGUE editorial features.
 </p>
+
+<div class="speech-row center">
+
+<button
+class="speak-button dark"
+type="button"
+data-speak-target="prizesSpeech"
+onclick="speakTarget('prizesSpeech',this)"
+aria-label="Listen"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
 
 <div class="prizes">
 
@@ -2555,7 +2774,7 @@ data-i18n="contests.prizes.grooming"
 class="prize"
 data-i18n="contests.prizes.partner"
 >
-🏨 Partner Discounts
+🏨 Partner Benefits
 </div>
 
 <div
@@ -2567,16 +2786,19 @@ data-i18n="contests.prizes.photo"
 
 <div
 class="prize"
-data-i18n="contests.prizes.hall"
+id="prizeRecognition"
 >
-🏆 Hall Of Fame Place
+🏆 PETS &amp; DOGUE Recognition
 </div>
 
 </div>
 
 </section>
 
-<section class="rules">
+<section
+class="rules"
+id="rulesSpeech"
+>
 
 <span
 class="notranslate"
@@ -2588,6 +2810,24 @@ PETS &amp; DOGUE · RULES
 <h2 data-i18n="contests.rules.title">
 How It Works
 </h2>
+
+<div class="speech-row right">
+
+<button
+class="speak-button"
+type="button"
+data-speak-target="rulesSpeech"
+onclick="speakTarget('rulesSpeech',this)"
+aria-label="Listen"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
 
 <ul>
 
@@ -2603,8 +2843,8 @@ Selected entries may appear in PETS & DOGUE competitions and public voting.
 Readers can support favourites with hearts and votes.
 </li>
 
-<li data-i18n="contests.rules.four">
-Winners may be featured in the magazine, Photos, Hall Of Fame or future covers.
+<li class="ruleFour">
+Winners may be featured across PETS & DOGUE, Photos, Cover Stars and future editorial features.
 </li>
 
 </ul>
@@ -2635,51 +2875,66 @@ All Rules +
 
 </section>
 
-<a
-class="hall-cta"
-href="hall-of-fame.html"
+<section
+class="cover-cta"
+id="coverSpeech"
 >
 
-<div class="hall-image">
+<div class="cover-image">
 
 <img
 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1300&q=85"
-alt="PETS & DOGUE competition winners Hall Of Fame"
+alt="PETS & DOGUE Cover Stars"
 >
 
 </div>
 
-<div class="hall-copy">
+<div class="cover-copy">
 
 <span
 class="notranslate"
 translate="no"
 >
-PETS &amp; DOGUE · WINNERS
+PETS &amp; DOGUE · COVER STARS
 </span>
 
-<h2 id="hallTitle">
-Hall Of Fame
+<h2 id="coverCtaTitle">
+Meet The Cover Stars
 </h2>
 
-<p id="hallDescription">
-Meet memorable competition winners and pets selected for PETS & DOGUE recognition.
+<p id="coverCtaDescription">
+Discover pets selected by the PETS & DOGUE community and explore Cover Star opportunities.
 </p>
 
-<div>
+<div class="speech-row">
 
-<span
-class="btn gold"
-id="hallButton"
+<button
+class="speak-button dark"
+type="button"
+data-speak-target="coverSpeech"
+onclick="speakTarget('coverSpeech',this)"
+aria-label="Listen"
 >
-View Winners →
-</span>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
 
-</div>
-
-</div>
-
+<a
+class="btn gold"
+href="members-gallery.html"
+id="coverCtaButton"
+>
+Explore Cover Stars →
 </a>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
@@ -2693,26 +2948,33 @@ PETS &amp; DOGUE
 </div>
 
 <p
-class="footer-subtitle"
-data-i18n="common.footer.subtitle"
+class="footer-subtitle notranslate"
+translate="no"
 >
-The International Luxury Animal Magazine
+Digital lifestyle platform
+</p>
+
+<p
+class="footer-slogan notranslate"
+translate="no"
+>
+One world. Every pet.
 </p>
 
 <div class="footer-links">
 
 <a
-href="index.html"
-data-i18n="common.footer.home"
+href="issue-01.html"
+id="footerEdition"
 >
-Home
+Edition
 </a>
 
 <a
-href="issue-01.html"
-data-i18n="common.footer.latestIssue"
+href="members-gallery.html"
+data-i18n="common.footer.coverStars"
 >
-Latest Issue
+Cover Stars
 </a>
 
 <a
@@ -2723,10 +2985,31 @@ Discounts
 </a>
 
 <a
-href="members-gallery.html"
-data-i18n="common.footer.coverStars"
+href="pet-friendly-places.html"
+id="footerPlaces"
 >
-Cover Stars
+Pet-Friendly
+</a>
+
+<a
+href="pet-marketplace.html"
+data-i18n="common.navigation.marketplace"
+>
+Marketplace
+</a>
+
+<a
+href="pet-fashion.html"
+data-i18n="common.navigation.fashion"
+>
+Fashion
+</a>
+
+<a
+href="wellness.html"
+data-i18n="common.menu.wellness"
+>
+Health
 </a>
 
 <a
@@ -2744,31 +3027,10 @@ Photos
 </a>
 
 <a
-href="pet-fashion.html"
-data-i18n="common.navigation.fashion"
+href="local-community.html"
+data-i18n="common.navigation.community"
 >
-Fashion
-</a>
-
-<a
-href="pet-travel.html"
-data-i18n="common.navigation.travel"
->
-Travel
-</a>
-
-<a
-href="wellness.html"
-data-i18n="common.navigation.wellness"
->
-Wellness
-</a>
-
-<a
-href="pet-friendly-places.html"
-data-i18n="common.footer.places"
->
-Places
+Community
 </a>
 
 <a
@@ -2779,38 +3041,10 @@ Contests
 </a>
 
 <a
-href="local-community.html"
-data-i18n="common.navigation.community"
->
-Community
-</a>
-
-<a
 href="pets-in-need.html"
-data-i18n="common.navigation.rescue"
+id="footerHelp"
 >
-Rescue
-</a>
-
-<a
-href="pet-marketplace.html"
-data-i18n="common.navigation.marketplace"
->
-Marketplace
-</a>
-
-<a
-href="hall-of-fame.html"
-id="footerHall"
->
-Hall Of Fame
-</a>
-
-<a
-href="club.html"
-data-i18n="common.footer.club"
->
-Club
+Help
 </a>
 
 <a
@@ -2818,6 +3052,20 @@ href="partners.html"
 data-i18n="common.footer.partners"
 >
 Partners
+</a>
+
+<a
+href="index.html"
+data-i18n="common.footer.home"
+>
+Home
+</a>
+
+<a
+href="club.html"
+data-i18n="common.footer.club"
+>
+Club
 </a>
 
 <a
@@ -2877,7 +3125,10 @@ alt="PETS & DOGUE competition"
 data-i18n-attr="alt:contests.modal.imageAlt"
 >
 
-<div class="modal-content">
+<div
+class="modal-content"
+id="modalSpeech"
+>
 
 <span
 class="badge"
@@ -2904,7 +3155,21 @@ hidden
 
 <p id="modalRules"></p>
 
-<br>
+<div class="actions modal-speak">
+
+<button
+class="speak-button"
+type="button"
+data-speak-target="modalSpeech"
+onclick="speakTarget('modalSpeech',this)"
+aria-label="Listen"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
 
 <a
 href="members-gallery.html"
@@ -2913,6 +3178,8 @@ id="modalJoinButton"
 >
 Join Competition
 </a>
+
+</div>
 
 </div>
 
@@ -3032,6 +3299,12 @@ document.getElementById("twitterTitle");
 const twitterDescription =
 document.getElementById("twitterDescription");
 
+const structuredData =
+document.getElementById("contestStructuredData");
+
+const speechStatus =
+document.getElementById("speechStatus");
+
 /* =========================================================
 STATE
 ========================================================= */
@@ -3051,266 +3324,1220 @@ let contestVotes =
 let votedContests =
 {};
 
+let activeSpeechButton =
+null;
+
+let activeSpeechKey =
+"";
+
 /* =========================================================
-LOCAL UI — ALL 23 LANGUAGES
+LOCAL PLATFORM UI — 23 LANGUAGES
 ========================================================= */
 
 const LOCAL_UI = {
 
 en:{
+edition:"Edition",
 discounts:"Discounts",
+places:"Pet-Friendly",
+help:"Help",
 language:"Language",
 menuContest:"Competitions, votes and prizes.",
-hallTitle:"Hall Of Fame",
-hallDescription:"Meet memorable competition winners and pets selected for PETS & DOGUE recognition.",
-hallButton:"View Winners →",
+recognition:"🏆 PETS & DOGUE Recognition",
+coverTitle:"Meet The Cover Stars",
+coverDescription:"Discover pets selected by the PETS & DOGUE community and explore Cover Star opportunities.",
+coverButton:"Explore Cover Stars →",
+intro:"Discover current PETS & DOGUE competitions, submit your pet, support community favourites and follow pets selected for future PETS & DOGUE features.",
+ruleFour:"Winners may be featured across PETS & DOGUE, Photos, Cover Stars and future editorial features.",
+prizes:"Competitions may include partner gifts, pet fashion accessories, grooming vouchers, partner benefits, photography sessions and PETS & DOGUE editorial features.",
 rulesAll:"All Rules +",
-rulesHide:"Hide Rules −"
+rulesHide:"Hide Rules −",
+read:"Listen to this section",
+stop:"Stop reading",
+reading:"Reading aloud."
 },
 
 uk:{
+edition:"Видання",
 discounts:"Знижки",
+places:"Місця для тварин",
+help:"Допомога",
 language:"Мова",
 menuContest:"Конкурси, голосування та призи.",
-hallTitle:"Зала слави",
-hallDescription:"Познайомтеся з незабутніми переможцями конкурсів і тваринами, відзначеними PETS & DOGUE.",
-hallButton:"Дивитися переможців →",
+recognition:"🏆 Відзнака PETS & DOGUE",
+coverTitle:"Познайомтеся із зірками обкладинки",
+coverDescription:"Відкрийте улюбленців, яких відзначила спільнота PETS & DOGUE, та можливості стати зіркою обкладинки.",
+coverButton:"Дивитися зірок обкладинки →",
+intro:"Переглядайте актуальні конкурси PETS & DOGUE, подавайте свого улюбленця, підтримуйте фаворитів спільноти та стежте за тваринами, обраними для майбутніх матеріалів PETS & DOGUE.",
+ruleFour:"Переможці можуть з’являтися в PETS & DOGUE, розділі Photos, серед Cover Stars та в майбутніх редакційних матеріалах.",
+prizes:"Конкурси можуть включати подарунки партнерів, аксесуари, ваучери на грумінг, партнерські переваги, фотосесії та редакційні матеріали PETS & DOGUE.",
 rulesAll:"Усі правила +",
-rulesHide:"Сховати правила −"
+rulesHide:"Сховати правила −",
+read:"Прослухати цей розділ",
+stop:"Зупинити читання",
+reading:"Текст читається вголос."
 },
 
 ru:{
+edition:"Издание",
 discounts:"Скидки",
+places:"Места с питомцами",
+help:"Помощь",
 language:"Язык",
 menuContest:"Конкурсы, голосования и призы.",
-hallTitle:"Зал славы",
-hallDescription:"Познакомьтесь с яркими победителями конкурсов и питомцами, отмеченными PETS & DOGUE.",
-hallButton:"Смотреть победителей →",
+recognition:"🏆 Признание PETS & DOGUE",
+coverTitle:"Познакомьтесь со звёздами обложки",
+coverDescription:"Откройте питомцев, выбранных сообществом PETS & DOGUE, и возможности стать звездой обложки.",
+coverButton:"Смотреть звёзд обложки →",
+intro:"Смотрите актуальные конкурсы PETS & DOGUE, отправляйте своего питомца, поддерживайте фаворитов сообщества и следите за питомцами, выбранными для будущих материалов PETS & DOGUE.",
+ruleFour:"Победители могут появляться в PETS & DOGUE, разделе Photos, среди Cover Stars и в будущих редакционных материалах.",
+prizes:"Конкурсы могут включать подарки партнёров, аксессуары для питомцев, ваучеры на груминг, партнёрские преимущества, фотосессии и редакционные материалы PETS & DOGUE.",
 rulesAll:"Все правила +",
-rulesHide:"Скрыть правила −"
+rulesHide:"Скрыть правила −",
+read:"Прослушать этот раздел",
+stop:"Остановить чтение",
+reading:"Текст читается вслух."
 },
 
 fr:{
+edition:"Édition",
 discounts:"Réductions",
+places:"Lieux pet-friendly",
+help:"Aide",
 language:"Langue",
 menuContest:"Concours, votes et prix.",
-hallTitle:"Temple de la renommée",
-hallDescription:"Découvrez les gagnants mémorables et les animaux distingués par PETS & DOGUE.",
-hallButton:"Voir les gagnants →",
+recognition:"🏆 Reconnaissance PETS & DOGUE",
+coverTitle:"Découvrez les stars de couverture",
+coverDescription:"Découvrez les animaux sélectionnés par la communauté PETS & DOGUE et les opportunités Cover Star.",
+coverButton:"Découvrir les Cover Stars →",
+intro:"Découvrez les concours PETS & DOGUE, inscrivez votre animal, soutenez les favoris de la communauté et suivez les animaux sélectionnés pour de futurs contenus PETS & DOGUE.",
+ruleFour:"Les gagnants peuvent apparaître sur PETS & DOGUE, dans Photos, Cover Stars et de futurs contenus éditoriaux.",
+prizes:"Les concours peuvent inclure des cadeaux partenaires, des accessoires, des bons de toilettage, des avantages partenaires, des séances photo et des contenus éditoriaux PETS & DOGUE.",
 rulesAll:"Toutes les règles +",
-rulesHide:"Masquer les règles −"
+rulesHide:"Masquer les règles −",
+read:"Écouter cette section",
+stop:"Arrêter la lecture",
+reading:"Lecture à voix haute."
 },
 
 de:{
+edition:"Edition",
 discounts:"Rabatte",
+places:"Tierfreundliche Orte",
+help:"Hilfe",
 language:"Sprache",
 menuContest:"Wettbewerbe, Abstimmungen und Preise.",
-hallTitle:"Hall of Fame",
-hallDescription:"Entdecken Sie unvergessliche Gewinner und Tiere, die von PETS & DOGUE ausgezeichnet wurden.",
-hallButton:"Gewinner ansehen →",
+recognition:"🏆 PETS & DOGUE Auszeichnung",
+coverTitle:"Entdecken Sie die Cover Stars",
+coverDescription:"Entdecken Sie von der PETS & DOGUE Community ausgewählte Tiere und Cover-Star-Möglichkeiten.",
+coverButton:"Cover Stars entdecken →",
+intro:"Entdecken Sie aktuelle PETS & DOGUE Wettbewerbe, reichen Sie Ihr Tier ein, unterstützen Sie Community-Favoriten und verfolgen Sie Tiere für zukünftige PETS & DOGUE Features.",
+ruleFour:"Gewinner können bei PETS & DOGUE, in Photos, unter Cover Stars und in zukünftigen redaktionellen Features erscheinen.",
+prizes:"Wettbewerbe können Partnergeschenke, Tieraccessoires, Grooming-Gutscheine, Partnervorteile, Fotoshootings und redaktionelle PETS & DOGUE Features umfassen.",
 rulesAll:"Alle Regeln +",
-rulesHide:"Regeln ausblenden −"
+rulesHide:"Regeln ausblenden −",
+read:"Diesen Abschnitt anhören",
+stop:"Vorlesen stoppen",
+reading:"Text wird vorgelesen."
 },
 
 es:{
+edition:"Edición",
 discounts:"Descuentos",
+places:"Lugares pet-friendly",
+help:"Ayuda",
 language:"Idioma",
 menuContest:"Concursos, votaciones y premios.",
-hallTitle:"Salón de la fama",
-hallDescription:"Conoce a ganadores inolvidables y mascotas reconocidas por PETS & DOGUE.",
-hallButton:"Ver ganadores →",
+recognition:"🏆 Reconocimiento PETS & DOGUE",
+coverTitle:"Conoce a las estrellas de portada",
+coverDescription:"Descubre mascotas seleccionadas por la comunidad PETS & DOGUE y oportunidades para ser Cover Star.",
+coverButton:"Ver Cover Stars →",
+intro:"Descubre los concursos actuales de PETS & DOGUE, presenta a tu mascota, apoya a los favoritos y sigue a las mascotas seleccionadas para futuros contenidos PETS & DOGUE.",
+ruleFour:"Los ganadores pueden aparecer en PETS & DOGUE, Photos, Cover Stars y futuros contenidos editoriales.",
+prizes:"Los concursos pueden incluir regalos de socios, accesorios, vales de peluquería, ventajas de socios, sesiones de fotografía y contenidos editoriales PETS & DOGUE.",
 rulesAll:"Todas las reglas +",
-rulesHide:"Ocultar reglas −"
+rulesHide:"Ocultar reglas −",
+read:"Escuchar esta sección",
+stop:"Detener lectura",
+reading:"Lectura en voz alta."
 },
 
 it:{
+edition:"Edizione",
 discounts:"Sconti",
+places:"Luoghi pet-friendly",
+help:"Aiuto",
 language:"Lingua",
 menuContest:"Concorsi, votazioni e premi.",
-hallTitle:"Hall of Fame",
-hallDescription:"Scopri i vincitori memorabili e gli animali premiati da PETS & DOGUE.",
-hallButton:"Vedi vincitori →",
+recognition:"🏆 Riconoscimento PETS & DOGUE",
+coverTitle:"Scopri le Cover Stars",
+coverDescription:"Scopri gli animali scelti dalla community PETS & DOGUE e le opportunità per diventare Cover Star.",
+coverButton:"Scopri le Cover Stars →",
+intro:"Scopri i concorsi PETS & DOGUE, iscrivi il tuo animale, sostieni i preferiti della community e segui gli animali scelti per futuri contenuti PETS & DOGUE.",
+ruleFour:"I vincitori possono apparire su PETS & DOGUE, Photos, Cover Stars e futuri contenuti editoriali.",
+prizes:"I concorsi possono includere regali dei partner, accessori, voucher grooming, vantaggi partner, servizi fotografici e contenuti editoriali PETS & DOGUE.",
 rulesAll:"Tutte le regole +",
-rulesHide:"Nascondi regole −"
+rulesHide:"Nascondi regole −",
+read:"Ascolta questa sezione",
+stop:"Interrompi lettura",
+reading:"Lettura ad alta voce."
 },
 
 pt:{
+edition:"Edição",
 discounts:"Descontos",
+places:"Locais pet-friendly",
+help:"Ajuda",
 language:"Idioma",
 menuContest:"Concursos, votações e prémios.",
-hallTitle:"Hall of Fame",
-hallDescription:"Conheça vencedores memoráveis e animais reconhecidos pela PETS & DOGUE.",
-hallButton:"Ver vencedores →",
+recognition:"🏆 Reconhecimento PETS & DOGUE",
+coverTitle:"Conheça as estrelas de capa",
+coverDescription:"Descubra animais escolhidos pela comunidade PETS & DOGUE e oportunidades Cover Star.",
+coverButton:"Ver Cover Stars →",
+intro:"Descubra os concursos PETS & DOGUE, inscreva o seu animal, apoie os favoritos da comunidade e acompanhe animais selecionados para futuros conteúdos PETS & DOGUE.",
+ruleFour:"Os vencedores podem aparecer na PETS & DOGUE, em Photos, Cover Stars e futuros conteúdos editoriais.",
+prizes:"Os concursos podem incluir presentes de parceiros, acessórios, vouchers de grooming, benefícios de parceiros, sessões fotográficas e conteúdos editoriais PETS & DOGUE.",
 rulesAll:"Todas as regras +",
-rulesHide:"Ocultar regras −"
+rulesHide:"Ocultar regras −",
+read:"Ouvir esta secção",
+stop:"Parar leitura",
+reading:"Leitura em voz alta."
 },
 
 nl:{
+edition:"Editie",
 discounts:"Kortingen",
+places:"Huisdiervriendelijke plekken",
+help:"Hulp",
 language:"Taal",
 menuContest:"Wedstrijden, stemmen en prijzen.",
-hallTitle:"Hall of Fame",
-hallDescription:"Ontdek bijzondere winnaars en huisdieren die door PETS & DOGUE zijn erkend.",
-hallButton:"Bekijk winnaars →",
+recognition:"🏆 PETS & DOGUE-erkenning",
+coverTitle:"Ontdek de Cover Stars",
+coverDescription:"Ontdek huisdieren die door de PETS & DOGUE-community zijn geselecteerd en Cover Star-mogelijkheden.",
+coverButton:"Bekijk Cover Stars →",
+intro:"Ontdek actuele PETS & DOGUE-wedstrijden, meld je huisdier aan, steun communityfavorieten en volg dieren die zijn geselecteerd voor toekomstige PETS & DOGUE-content.",
+ruleFour:"Winnaars kunnen verschijnen op PETS & DOGUE, in Photos, bij Cover Stars en in toekomstige redactionele content.",
+prizes:"Wedstrijden kunnen partnergeschenken, accessoires, trimsalonvouchers, partnervoordelen, fotosessies en redactionele PETS & DOGUE-content bevatten.",
 rulesAll:"Alle regels +",
-rulesHide:"Regels verbergen −"
+rulesHide:"Regels verbergen −",
+read:"Deze sectie beluisteren",
+stop:"Voorlezen stoppen",
+reading:"Tekst wordt voorgelezen."
 },
 
 pl:{
+edition:"Edycja",
 discounts:"Rabaty",
+places:"Miejsca przyjazne zwierzętom",
+help:"Pomoc",
 language:"Język",
 menuContest:"Konkursy, głosowania i nagrody.",
-hallTitle:"Galeria sław",
-hallDescription:"Poznaj wyjątkowych zwycięzców konkursów i zwierzęta wyróżnione przez PETS & DOGUE.",
-hallButton:"Zobacz zwycięzców →",
+recognition:"🏆 Wyróżnienie PETS & DOGUE",
+coverTitle:"Poznaj gwiazdy okładki",
+coverDescription:"Poznaj zwierzęta wybrane przez społeczność PETS & DOGUE i możliwości zostania Cover Star.",
+coverButton:"Zobacz Cover Stars →",
+intro:"Odkrywaj aktualne konkursy PETS & DOGUE, zgłaszaj swojego pupila, wspieraj ulubieńców społeczności i śledź zwierzęta wybrane do przyszłych materiałów PETS & DOGUE.",
+ruleFour:"Zwycięzcy mogą pojawić się w PETS & DOGUE, Photos, Cover Stars i przyszłych materiałach redakcyjnych.",
+prizes:"Konkursy mogą obejmować prezenty partnerów, akcesoria, vouchery groomingowe, korzyści partnerskie, sesje zdjęciowe i materiały redakcyjne PETS & DOGUE.",
 rulesAll:"Wszystkie zasady +",
-rulesHide:"Ukryj zasady −"
+rulesHide:"Ukryj zasady −",
+read:"Posłuchaj tej sekcji",
+stop:"Zatrzymaj czytanie",
+reading:"Tekst jest czytany na głos."
 },
 
 cs:{
+edition:"Vydání",
 discounts:"Slevy",
+places:"Místa přátelská ke zvířatům",
+help:"Pomoc",
 language:"Jazyk",
 menuContest:"Soutěže, hlasování a ceny.",
-hallTitle:"Síň slávy",
-hallDescription:"Poznejte nezapomenutelné vítěze a zvířata oceněná PETS & DOGUE.",
-hallButton:"Zobrazit vítěze →",
+recognition:"🏆 Ocenění PETS & DOGUE",
+coverTitle:"Poznejte hvězdy obálky",
+coverDescription:"Objevte mazlíčky vybrané komunitou PETS & DOGUE a možnosti stát se Cover Star.",
+coverButton:"Zobrazit Cover Stars →",
+intro:"Objevte aktuální soutěže PETS & DOGUE, přihlaste svého mazlíčka, podpořte favority komunity a sledujte zvířata vybraná pro budoucí obsah PETS & DOGUE.",
+ruleFour:"Vítězové se mohou objevit v PETS & DOGUE, Photos, Cover Stars a budoucím redakčním obsahu.",
+prizes:"Soutěže mohou zahrnovat partnerské dárky, doplňky, groomingové poukazy, partnerské výhody, focení a redakční obsah PETS & DOGUE.",
 rulesAll:"Všechna pravidla +",
-rulesHide:"Skrýt pravidla −"
+rulesHide:"Skrýt pravidla −",
+read:"Poslechnout tuto sekci",
+stop:"Zastavit čtení",
+reading:"Text se předčítá."
 },
 
 sk:{
+edition:"Vydanie",
 discounts:"Zľavy",
+places:"Miesta priateľské k zvieratám",
+help:"Pomoc",
 language:"Jazyk",
 menuContest:"Súťaže, hlasovania a ceny.",
-hallTitle:"Sieň slávy",
-hallDescription:"Spoznajte nezabudnuteľných víťazov a zvieratá ocenené PETS & DOGUE.",
-hallButton:"Zobraziť víťazov →",
+recognition:"🏆 Ocenenie PETS & DOGUE",
+coverTitle:"Spoznajte hviezdy obálky",
+coverDescription:"Objavte miláčikov vybraných komunitou PETS & DOGUE a možnosti stať sa Cover Star.",
+coverButton:"Zobraziť Cover Stars →",
+intro:"Objavte aktuálne súťaže PETS & DOGUE, prihláste svojho miláčika, podporte favoritov komunity a sledujte zvieratá vybrané pre budúci obsah PETS & DOGUE.",
+ruleFour:"Víťazi sa môžu objaviť v PETS & DOGUE, Photos, Cover Stars a budúcom redakčnom obsahu.",
+prizes:"Súťaže môžu zahŕňať partnerské darčeky, doplnky, groomingové poukazy, partnerské výhody, fotenia a redakčný obsah PETS & DOGUE.",
 rulesAll:"Všetky pravidlá +",
-rulesHide:"Skryť pravidlá −"
+rulesHide:"Skryť pravidlá −",
+read:"Vypočuť túto sekciu",
+stop:"Zastaviť čítanie",
+reading:"Text sa číta nahlas."
 },
 
 hu:{
+edition:"Kiadás",
 discounts:"Kedvezmények",
+places:"Állatbarát helyek",
+help:"Segítség",
 language:"Nyelv",
 menuContest:"Versenyek, szavazások és díjak.",
-hallTitle:"Hírességek csarnoka",
-hallDescription:"Ismerje meg a versenyek emlékezetes győzteseit és a PETS & DOGUE által elismert kedvenceket.",
-hallButton:"Győztesek megtekintése →",
+recognition:"🏆 PETS & DOGUE elismerés",
+coverTitle:"Ismerje meg a Cover Stars kedvenceit",
+coverDescription:"Fedezze fel a PETS & DOGUE közösség által kiválasztott kedvenceket és a Cover Star lehetőségeket.",
+coverButton:"Cover Stars megtekintése →",
+intro:"Fedezze fel az aktuális PETS & DOGUE versenyeket, nevezze kedvencét, támogassa a közösség kedvenceit és kövesse a jövőbeli PETS & DOGUE tartalmakra kiválasztott állatokat.",
+ruleFour:"A győztesek megjelenhetnek a PETS & DOGUE, Photos, Cover Stars és jövőbeli szerkesztőségi tartalmakban.",
+prizes:"A versenyek partnerajándékokat, kiegészítőket, grooming utalványokat, partnerelőnyöket, fotózásokat és PETS & DOGUE szerkesztőségi megjelenéseket tartalmazhatnak.",
 rulesAll:"Minden szabály +",
-rulesHide:"Szabályok elrejtése −"
+rulesHide:"Szabályok elrejtése −",
+read:"Szakasz meghallgatása",
+stop:"Felolvasás leállítása",
+reading:"A szöveg felolvasása folyamatban."
 },
 
 ro:{
+edition:"Ediție",
 discounts:"Reduceri",
+places:"Locuri pet-friendly",
+help:"Ajutor",
 language:"Limbă",
 menuContest:"Concursuri, voturi și premii.",
-hallTitle:"Galeria celebrităților",
-hallDescription:"Descoperiți câștigători memorabili și animale recunoscute de PETS & DOGUE.",
-hallButton:"Vezi câștigătorii →",
+recognition:"🏆 Recunoaștere PETS & DOGUE",
+coverTitle:"Descoperă vedetele de copertă",
+coverDescription:"Descoperă animalele selectate de comunitatea PETS & DOGUE și oportunitățile Cover Star.",
+coverButton:"Vezi Cover Stars →",
+intro:"Descoperă concursurile PETS & DOGUE, înscrie animalul, susține favoriții comunității și urmărește animalele selectate pentru viitoare materiale PETS & DOGUE.",
+ruleFour:"Câștigătorii pot apărea în PETS & DOGUE, Photos, Cover Stars și viitoare materiale editoriale.",
+prizes:"Concursurile pot include cadouri de la parteneri, accesorii, vouchere de grooming, beneficii ale partenerilor, sesiuni foto și materiale editoriale PETS & DOGUE.",
 rulesAll:"Toate regulile +",
-rulesHide:"Ascunde regulile −"
+rulesHide:"Ascunde regulile −",
+read:"Ascultă această secțiune",
+stop:"Oprește citirea",
+reading:"Textul este citit cu voce tare."
 },
 
 bg:{
+edition:"Издание",
 discounts:"Отстъпки",
+places:"Места за любимци",
+help:"Помощ",
 language:"Език",
 menuContest:"Конкурси, гласуване и награди.",
-hallTitle:"Зала на славата",
-hallDescription:"Запознайте се с незабравими победители и любимци, отличени от PETS & DOGUE.",
-hallButton:"Вижте победителите →",
+recognition:"🏆 Отличие PETS & DOGUE",
+coverTitle:"Запознайте се със звездите на корицата",
+coverDescription:"Открийте любимците, избрани от общността PETS & DOGUE, и възможностите за Cover Star.",
+coverButton:"Вижте Cover Stars →",
+intro:"Открийте актуалните конкурси на PETS & DOGUE, кандидатствайте с вашия любимец, подкрепете фаворитите и следете животните, избрани за бъдещи материали на PETS & DOGUE.",
+ruleFour:"Победителите могат да бъдат представени в PETS & DOGUE, Photos, Cover Stars и бъдещи редакционни материали.",
+prizes:"Конкурсите могат да включват партньорски подаръци, аксесоари, ваучери за груминг, партньорски предимства, фотосесии и редакционни материали на PETS & DOGUE.",
 rulesAll:"Всички правила +",
-rulesHide:"Скрий правилата −"
+rulesHide:"Скрий правилата −",
+read:"Прослушайте този раздел",
+stop:"Спри четенето",
+reading:"Текстът се чете на глас."
 },
 
 el:{
+edition:"Έκδοση",
 discounts:"Εκπτώσεις",
+places:"Pet-friendly μέρη",
+help:"Βοήθεια",
 language:"Γλώσσα",
 menuContest:"Διαγωνισμοί, ψηφοφορίες και βραβεία.",
-hallTitle:"Αίθουσα Δόξας",
-hallDescription:"Γνωρίστε αξέχαστους νικητές και κατοικίδια που ξεχώρισε το PETS & DOGUE.",
-hallButton:"Δείτε τους νικητές →",
+recognition:"🏆 Αναγνώριση PETS & DOGUE",
+coverTitle:"Γνωρίστε τα Cover Stars",
+coverDescription:"Ανακαλύψτε κατοικίδια που επέλεξε η κοινότητα PETS & DOGUE και ευκαιρίες Cover Star.",
+coverButton:"Δείτε τα Cover Stars →",
+intro:"Ανακαλύψτε τους τρέχοντες διαγωνισμούς PETS & DOGUE, δηλώστε το κατοικίδιό σας, στηρίξτε τα αγαπημένα της κοινότητας και ακολουθήστε ζώα που επιλέχθηκαν για μελλοντικό περιεχόμενο PETS & DOGUE.",
+ruleFour:"Οι νικητές μπορούν να εμφανίζονται στο PETS & DOGUE, στο Photos, στα Cover Stars και σε μελλοντικό συντακτικό περιεχόμενο.",
+prizes:"Οι διαγωνισμοί μπορεί να περιλαμβάνουν δώρα συνεργατών, αξεσουάρ, κουπόνια grooming, προνόμια συνεργατών, φωτογραφήσεις και συντακτικό περιεχόμενο PETS & DOGUE.",
 rulesAll:"Όλοι οι κανόνες +",
-rulesHide:"Απόκρυψη κανόνων −"
+rulesHide:"Απόκρυψη κανόνων −",
+read:"Ακούστε αυτήν την ενότητα",
+stop:"Διακοπή ανάγνωσης",
+reading:"Το κείμενο διαβάζεται δυνατά."
 },
 
 sv:{
+edition:"Utgåva",
 discounts:"Rabatter",
+places:"Djurvänliga platser",
+help:"Hjälp",
 language:"Språk",
 menuContest:"Tävlingar, omröstningar och priser.",
-hallTitle:"Hall of Fame",
-hallDescription:"Möt minnesvärda vinnare och husdjur som uppmärksammats av PETS & DOGUE.",
-hallButton:"Se vinnarna →",
+recognition:"🏆 PETS & DOGUE-utmärkelse",
+coverTitle:"Möt Cover Stars",
+coverDescription:"Upptäck husdjur som valts ut av PETS & DOGUE-communityn och möjligheter att bli Cover Star.",
+coverButton:"Utforska Cover Stars →",
+intro:"Upptäck aktuella PETS & DOGUE-tävlingar, anmäl ditt husdjur, stöd communityns favoriter och följ djur som valts ut för framtida PETS & DOGUE-innehåll.",
+ruleFour:"Vinnare kan synas på PETS & DOGUE, i Photos, Cover Stars och framtida redaktionellt innehåll.",
+prizes:"Tävlingar kan innehålla partnergåvor, tillbehör, groomingkuponger, partnerförmåner, fotograferingar och redaktionellt PETS & DOGUE-innehåll.",
 rulesAll:"Alla regler +",
-rulesHide:"Dölj regler −"
+rulesHide:"Dölj regler −",
+read:"Lyssna på denna sektion",
+stop:"Stoppa uppläsning",
+reading:"Texten läses upp."
 },
 
 da:{
+edition:"Udgave",
 discounts:"Rabatter",
+places:"Kæledyrsvenlige steder",
+help:"Hjælp",
 language:"Sprog",
 menuContest:"Konkurrencer, afstemninger og præmier.",
-hallTitle:"Hall of Fame",
-hallDescription:"Mød mindeværdige vindere og kæledyr udvalgt af PETS & DOGUE.",
-hallButton:"Se vinderne →",
+recognition:"🏆 PETS & DOGUE-anerkendelse",
+coverTitle:"Mød Cover Stars",
+coverDescription:"Oplev kæledyr udvalgt af PETS & DOGUE-fællesskabet og muligheder for at blive Cover Star.",
+coverButton:"Se Cover Stars →",
+intro:"Oplev aktuelle PETS & DOGUE-konkurrencer, tilmeld dit kæledyr, støt fællesskabets favoritter og følg dyr udvalgt til fremtidigt PETS & DOGUE-indhold.",
+ruleFour:"Vindere kan blive vist på PETS & DOGUE, i Photos, Cover Stars og fremtidigt redaktionelt indhold.",
+prizes:"Konkurrencer kan omfatte partnergaver, tilbehør, grooming-vouchers, partnerfordele, fotosessioner og redaktionelt PETS & DOGUE-indhold.",
 rulesAll:"Alle regler +",
-rulesHide:"Skjul regler −"
+rulesHide:"Skjul regler −",
+read:"Lyt til dette afsnit",
+stop:"Stop oplæsning",
+reading:"Teksten læses højt."
 },
 
 no:{
+edition:"Utgave",
 discounts:"Rabatter",
+places:"Kjæledyrvennlige steder",
+help:"Hjelp",
 language:"Språk",
 menuContest:"Konkurranser, avstemninger og premier.",
-hallTitle:"Hall of Fame",
-hallDescription:"Møt minneverdige vinnere og kjæledyr som er fremhevet av PETS & DOGUE.",
-hallButton:"Se vinnerne →",
+recognition:"🏆 PETS & DOGUE-anerkjennelse",
+coverTitle:"Møt Cover Stars",
+coverDescription:"Oppdag kjæledyr valgt av PETS & DOGUE-fellesskapet og muligheter til å bli Cover Star.",
+coverButton:"Se Cover Stars →",
+intro:"Oppdag aktuelle PETS & DOGUE-konkurranser, meld på kjæledyret ditt, støtt fellesskapets favoritter og følg dyr valgt til fremtidig PETS & DOGUE-innhold.",
+ruleFour:"Vinnere kan vises på PETS & DOGUE, i Photos, Cover Stars og fremtidig redaksjonelt innhold.",
+prizes:"Konkurranser kan inkludere partnergaver, tilbehør, groomingkuponger, partnerfordeler, fotosesjoner og redaksjonelt PETS & DOGUE-innhold.",
 rulesAll:"Alle regler +",
-rulesHide:"Skjul regler −"
+rulesHide:"Skjul regler −",
+read:"Lytt til denne delen",
+stop:"Stopp opplesning",
+reading:"Teksten leses høyt."
 },
 
 fi:{
+edition:"Julkaisu",
 discounts:"Alennukset",
+places:"Lemmikkiystävälliset paikat",
+help:"Apua",
 language:"Kieli",
 menuContest:"Kilpailut, äänestykset ja palkinnot.",
-hallTitle:"Hall of Fame",
-hallDescription:"Tutustu ikimuistoisiin voittajiin ja PETS & DOGUE -lehden huomioimiin lemmikkeihin.",
-hallButton:"Katso voittajat →",
+recognition:"🏆 PETS & DOGUE -tunnustus",
+coverTitle:"Tutustu Cover Stars -lemmikkeihin",
+coverDescription:"Tutustu PETS & DOGUE -yhteisön valitsemiin lemmikkeihin ja Cover Star -mahdollisuuksiin.",
+coverButton:"Katso Cover Stars →",
+intro:"Tutustu ajankohtaisiin PETS & DOGUE -kilpailuihin, ilmoita lemmikkisi, tue yhteisön suosikkeja ja seuraa tulevaan PETS & DOGUE -sisältöön valittuja eläimiä.",
+ruleFour:"Voittajat voivat näkyä PETS & DOGUE -palvelussa, Photos-osiossa, Cover Stars -sisällössä ja tulevissa toimituksellisissa julkaisuissa.",
+prizes:"Kilpailuihin voi kuulua kumppanilahjoja, tarvikkeita, trimmauslahjakortteja, kumppanietuja, valokuvauksia ja PETS & DOGUE -toimituksellista sisältöä.",
 rulesAll:"Kaikki säännöt +",
-rulesHide:"Piilota säännöt −"
+rulesHide:"Piilota säännöt −",
+read:"Kuuntele tämä osio",
+stop:"Lopeta lukeminen",
+reading:"Teksti luetaan ääneen."
 },
 
 tr:{
+edition:"Edisyon",
 discounts:"İndirimler",
+places:"Evcil hayvan dostu yerler",
+help:"Yardım",
 language:"Dil",
 menuContest:"Yarışmalar, oylamalar ve ödüller.",
-hallTitle:"Şöhretler Salonu",
-hallDescription:"Unutulmaz yarışma kazananlarını ve PETS & DOGUE tarafından öne çıkarılan evcil hayvanları keşfedin.",
-hallButton:"Kazananları gör →",
+recognition:"🏆 PETS & DOGUE takdiri",
+coverTitle:"Cover Stars ile tanışın",
+coverDescription:"PETS & DOGUE topluluğu tarafından seçilen evcil hayvanları ve Cover Star fırsatlarını keşfedin.",
+coverButton:"Cover Stars'ı keşfet →",
+intro:"Güncel PETS & DOGUE yarışmalarını keşfedin, evcil hayvanınızı gönderin, topluluk favorilerini destekleyin ve gelecekteki PETS & DOGUE içerikleri için seçilen hayvanları takip edin.",
+ruleFour:"Kazananlar PETS & DOGUE, Photos, Cover Stars ve gelecekteki editoryal içeriklerde yer alabilir.",
+prizes:"Yarışmalar partner hediyeleri, aksesuarlar, grooming kuponları, partner avantajları, fotoğraf çekimleri ve PETS & DOGUE editoryal içeriklerini içerebilir.",
 rulesAll:"Tüm kurallar +",
-rulesHide:"Kuralları gizle −"
+rulesHide:"Kuralları gizle −",
+read:"Bu bölümü dinle",
+stop:"Okumayı durdur",
+reading:"Metin sesli okunuyor."
 },
 
 ar:{
+edition:"الإصدار",
 discounts:"الخصومات",
+places:"أماكن صديقة للحيوانات",
+help:"المساعدة",
 language:"اللغة",
 menuContest:"المسابقات والتصويت والجوائز.",
-hallTitle:"قاعة المشاهير",
-hallDescription:"تعرّف على الفائزين المميزين والحيوانات التي اختارتها PETS & DOGUE للتكريم.",
-hallButton:"عرض الفائزين ←",
+recognition:"🏆 تكريم PETS & DOGUE",
+coverTitle:"تعرّف على نجوم الغلاف",
+coverDescription:"اكتشف الحيوانات التي اختارها مجتمع PETS & DOGUE وفرص الظهور كنجم غلاف.",
+coverButton:"استكشف نجوم الغلاف ←",
+intro:"اكتشف مسابقات PETS & DOGUE الحالية، وشارك حيوانك الأليف، وادعم مفضلات المجتمع، وتابع الحيوانات المختارة لمحتوى PETS & DOGUE المستقبلي.",
+ruleFour:"قد يظهر الفائزون عبر PETS & DOGUE وفي Photos وCover Stars والمحتوى التحريري المستقبلي.",
+prizes:"قد تشمل المسابقات هدايا الشركاء والإكسسوارات وقسائم العناية ومزايا الشركاء وجلسات التصوير والمحتوى التحريري من PETS & DOGUE.",
 rulesAll:"كل القواعد +",
-rulesHide:"إخفاء القواعد −"
+rulesHide:"إخفاء القواعد −",
+read:"استمع إلى هذا القسم",
+stop:"إيقاف القراءة",
+reading:"تتم قراءة النص بصوت عالٍ."
 },
 
 hi:{
+edition:"संस्करण",
 discounts:"छूट",
+places:"पालतू-अनुकूल स्थान",
+help:"मदद",
 language:"भाषा",
 menuContest:"प्रतियोगिताएँ, मतदान और पुरस्कार।",
-hallTitle:"हॉल ऑफ फेम",
-hallDescription:"यादगार प्रतियोगिता विजेताओं और PETS & DOGUE द्वारा सम्मानित पालतू जानवरों से मिलें।",
-hallButton:"विजेता देखें →",
+recognition:"🏆 PETS & DOGUE सम्मान",
+coverTitle:"Cover Stars से मिलें",
+coverDescription:"PETS & DOGUE समुदाय द्वारा चुने गए पालतू जानवर देखें और Cover Star बनने के अवसर खोजें।",
+coverButton:"Cover Stars देखें →",
+intro:"मौजूदा PETS & DOGUE प्रतियोगिताएँ देखें, अपने पालतू को शामिल करें, समुदाय के पसंदीदा पालतू जानवरों का समर्थन करें और भविष्य के PETS & DOGUE कंटेंट के लिए चुने गए पालतू जानवरों को देखें।",
+ruleFour:"विजेता PETS & DOGUE, Photos, Cover Stars और भविष्य के संपादकीय कंटेंट में दिखाई दे सकते हैं।",
+prizes:"प्रतियोगिताओं में पार्टनर उपहार, पेट एक्सेसरीज़, ग्रूमिंग वाउचर, पार्टनर लाभ, फोटो सेशन और PETS & DOGUE संपादकीय फीचर शामिल हो सकते हैं।",
 rulesAll:"सभी नियम +",
-rulesHide:"नियम छिपाएँ −"
+rulesHide:"नियम छिपाएँ −",
+read:"यह सेक्शन सुनें",
+stop:"पढ़ना बंद करें",
+reading:"टेक्स्ट ज़ोर से पढ़ा जा रहा है।"
 }
 
 };
+
+/* =========================================================
+LOCALES
+========================================================= */
+
+const contestLocaleMap = {
+en:"en-GB",
+uk:"uk-UA",
+ru:"ru-RU",
+fr:"fr-FR",
+de:"de-DE",
+es:"es-ES",
+it:"it-IT",
+pt:"pt-PT",
+nl:"nl-NL",
+pl:"pl-PL",
+cs:"cs-CZ",
+sk:"sk-SK",
+hu:"hu-HU",
+ro:"ro-RO",
+bg:"bg-BG",
+el:"el-GR",
+sv:"sv-SE",
+da:"da-DK",
+no:"nb-NO",
+fi:"fi-FI",
+tr:"tr-TR",
+ar:"ar-SA",
+hi:"hi-IN"
+};
+
+/* =========================================================
+LANGUAGE
+========================================================= */
+
+function normalizeLanguage(value){
+
+let language =
+String(value || "")
+.trim()
+.toLowerCase();
+
+if(language.includes("-")){
+language =
+language.split("-")[0];
+}
+
+if(language.includes("_")){
+language =
+language.split("_")[0];
+}
+
+const aliases = {
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+language =
+aliases[language] ||
+language;
+
+return LOCAL_UI[language]
+? language
+: "";
+
+}
+
+function getContestLanguage(){
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.getCurrentLanguage ===
+"function"
+){
+
+try{
+
+const value =
+window.PetsDogueLanguage.getCurrentLanguage();
+
+if(typeof value === "string"){
+
+const normalized =
+normalizeLanguage(value);
+
+if(normalized){
+return normalized;
+}
+
+}
+
+if(
+value &&
+typeof value === "object"
+){
+
+const normalized =
+normalizeLanguage(
+value.code ||
+value.language ||
+value.lang
+);
+
+if(normalized){
+return normalized;
+}
+
+}
+
+}catch(error){
+
+console.warn(
+"Unable to read current PETS & DOGUE language.",
+error
+);
+
+}
+
+}
+
+for(
+const key
+of LANGUAGE_KEYS
+){
+
+const normalized =
+normalizeLanguage(
+localStorage.getItem(key)
+);
+
+if(normalized){
+return normalized;
+}
+
+}
+
+return "en";
+
+}
+
+function localWords(){
+
+const language =
+getContestLanguage();
+
+return (
+LOCAL_UI[language] ||
+LOCAL_UI.en
+);
+
+}
+
+function getContestBundle(){
+
+const root =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.contests;
+
+if(!root){
+return null;
+}
+
+const language =
+getContestLanguage();
+
+return (
+root[language] ||
+root.en ||
+null
+);
+
+}
+
+function contestT(
+path,
+fallback=""
+){
+
+let value =
+getContestBundle();
+
+if(!value){
+return fallback;
+}
+
+path
+.split(".")
+.forEach(
+key=>{
+
+value =
+value &&
+Object.prototype.hasOwnProperty.call(
+value,
+key
+)
+? value[key]
+: undefined;
+
+}
+);
+
+return typeof value === "string"
+? value
+: fallback;
+
+}
+
+function setText(
+id,
+value
+){
+
+const element =
+document.getElementById(id);
+
+if(element){
+element.textContent = value;
+}
+
+}
+
+function applyLocalUi(){
+
+const words =
+localWords();
+
+const language =
+getContestLanguage();
+
+document.documentElement.lang =
+language;
+
+document.documentElement.dir =
+language === "ar"
+? "rtl"
+: "ltr";
+
+if(
+languageSelect &&
+languageSelect.value !== language
+){
+
+languageSelect.value =
+language;
+
+}
+
+setText(
+"languageLabel",
+words.language
+);
+
+setText(
+"topEdition",
+words.edition
+);
+
+setText(
+"menuEdition",
+words.edition
+);
+
+setText(
+"footerEdition",
+words.edition
+);
+
+setText(
+"topDiscounts",
+words.discounts
+);
+
+setText(
+"menuDiscounts",
+words.discounts
+);
+
+setText(
+"footerDiscounts",
+words.discounts
+);
+
+setText(
+"topPlaces",
+words.places
+);
+
+setText(
+"menuPlaces",
+words.places
+);
+
+setText(
+"footerPlaces",
+words.places
+);
+
+setText(
+"topHelp",
+words.help
+);
+
+setText(
+"menuHelp",
+words.help
+);
+
+setText(
+"footerHelp",
+words.help
+);
+
+setText(
+"menuContestDescription",
+words.menuContest
+);
+
+setText(
+"coverCtaTitle",
+words.coverTitle
+);
+
+setText(
+"coverCtaDescription",
+words.coverDescription
+);
+
+setText(
+"coverCtaButton",
+words.coverButton
+);
+
+setText(
+"prizeRecognition",
+words.recognition
+);
+
+setText(
+"introDescription",
+words.intro
+);
+
+setText(
+"prizesDescription",
+words.prizes
+);
+
+document
+.querySelectorAll(
+".ruleFour"
+)
+.forEach(
+element=>{
+
+element.textContent =
+words.ruleFour;
+
+}
+);
+
+updateRulesButton();
+
+localizeSpeakButtons();
+
+}
+
+/* =========================================================
+SPEECH / ACCESSIBILITY
+========================================================= */
+
+function speakerSvg(){
+
+return `
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+`;
+
+}
+
+function speechLanguage(){
+
+const language =
+getContestLanguage();
+
+return (
+contestLocaleMap[language] ||
+"en-GB"
+);
+
+}
+
+function localizeSpeakButtons(){
+
+const words =
+localWords();
+
+document
+.querySelectorAll(
+".speak-button"
+)
+.forEach(
+button=>{
+
+button.setAttribute(
+"aria-label",
+button.classList.contains("speaking")
+? words.stop
+: words.read
+);
+
+button.setAttribute(
+"title",
+button.classList.contains("speaking")
+? words.stop
+: words.read
+);
+
+}
+);
+
+}
+
+function cleanSpeechText(element){
+
+if(!element){
+return "";
+}
+
+const clone =
+element.cloneNode(true);
+
+clone
+.querySelectorAll(
+"button,script,style,.sr-only"
+)
+.forEach(
+node=>node.remove()
+);
+
+return clone
+.textContent
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+function getPreferredVoice(){
+
+if(
+!("speechSynthesis" in window)
+){
+
+return null;
+
+}
+
+const requested =
+speechLanguage()
+.toLowerCase();
+
+const base =
+requested.split("-")[0];
+
+const voices =
+window.speechSynthesis
+.getVoices();
+
+return (
+voices.find(
+voice =>
+String(voice.lang || "")
+.toLowerCase() ===
+requested
+) ||
+voices.find(
+voice =>
+String(voice.lang || "")
+.toLowerCase()
+.startsWith(base)
+) ||
+null
+);
+
+}
+
+function stopSpeech(){
+
+if(
+"speechSynthesis" in window
+){
+
+window.speechSynthesis.cancel();
+
+}
+
+if(activeSpeechButton){
+
+activeSpeechButton
+.classList
+.remove("speaking");
+
+}
+
+activeSpeechButton =
+null;
+
+activeSpeechKey =
+"";
+
+localizeSpeakButtons();
+
+}
+
+function speakText(
+text,
+button,
+key=""
+){
+
+const content =
+String(text || "")
+.replace(/\s+/g," ")
+.trim();
+
+if(!content){
+return;
+}
+
+if(
+!("speechSynthesis" in window) ||
+typeof SpeechSynthesisUtterance ===
+"undefined"
+){
+
+const unsupported =
+contestT(
+"system.narrationUnsupported",
+"Article narration is not supported by this browser."
+);
+
+if(speechStatus){
+
+speechStatus.textContent =
+unsupported;
+
+}
+
+return;
+
+}
+
+if(
+activeSpeechKey === key &&
+window.speechSynthesis.speaking
+){
+
+stopSpeech();
+return;
+
+}
+
+stopSpeech();
+
+const utterance =
+new SpeechSynthesisUtterance(
+content
+);
+
+utterance.lang =
+speechLanguage();
+
+utterance.rate =
+1;
+
+utterance.pitch =
+1;
+
+const voice =
+getPreferredVoice();
+
+if(voice){
+
+utterance.voice =
+voice;
+
+}
+
+activeSpeechButton =
+button ||
+null;
+
+activeSpeechKey =
+key;
+
+if(activeSpeechButton){
+
+activeSpeechButton
+.classList
+.add("speaking");
+
+}
+
+localizeSpeakButtons();
+
+if(speechStatus){
+
+speechStatus.textContent =
+localWords().reading;
+
+}
+
+utterance.onend =
+()=>{
+
+stopSpeech();
+
+};
+
+utterance.onerror =
+()=>{
+
+stopSpeech();
+
+};
+
+window.speechSynthesis.speak(
+utterance
+);
+
+}
+
+function speakTarget(
+targetId,
+button
+){
+
+const target =
+document.getElementById(
+targetId
+);
+
+const text =
+cleanSpeechText(
+target
+);
+
+speakText(
+text,
+button,
+"target:" + targetId
+);
+
+}
+
+function speakContest(
+id,
+button
+){
+
+const contest =
+publicContests.find(
+item =>
+String(item.id) ===
+String(id)
+);
+
+if(!contest){
+return;
+}
+
+const status =
+effectiveStatus(
+contest
+);
+
+const parts = [
+getContestTitle(contest),
+translateStatus(status),
+formatContestDates(
+contest.start,
+contest.end
+),
+getContestRules(contest),
+contestT(
+"dynamic.prize",
+"Prize"
+) +
+": " +
+getContestPrize(contest)
+];
+
+if(contest.winner){
+
+parts.push(
+contestT(
+"dynamic.winner",
+"Winner"
+) +
+": " +
+contest.winner
+);
+
+}
+
+speakText(
+parts.join(". "),
+button,
+"contest:" + String(id)
+);
+
+}
 
 /* =========================================================
 STORAGE
@@ -3365,348 +4592,18 @@ votedContests = {};
 }
 
 /* =========================================================
-FALLBACK CONTESTS
-========================================================= */
-
-const fallbackContests = [
-
-{
-id:"fallback-cover-star",
-titleKey:"fallback.cover.title",
-prizeKey:"fallback.cover.prize",
-start:"2026-07-01",
-end:"2026-07-31",
-status:"Open",
-winner:"",
-rulesKey:"fallback.cover.rules",
-votes:245,
-image:"file_00000000a9d471fda9b4629589be22a9.png",
-joinLink:"members-gallery.html"
-},
-
-{
-id:"fallback-best-photo",
-titleKey:"fallback.photo.title",
-prizeKey:"fallback.photo.prize",
-start:"2026-07-05",
-end:"2026-08-05",
-status:"Open",
-winner:"",
-rulesKey:"fallback.photo.rules",
-votes:189,
-image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
-joinLink:"members-gallery.html"
-},
-
-{
-id:"fallback-rescue",
-titleKey:"fallback.rescue.title",
-prizeKey:"fallback.rescue.prize",
-start:"2026-08-01",
-end:"2026-08-31",
-status:"Draft",
-winner:"",
-rulesKey:"fallback.rescue.rules",
-votes:132,
-image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1200&q=80",
-joinLink:"contact.html"
-}
-
-];
-
-/* =========================================================
-LOCALES
-========================================================= */
-
-const contestLocaleMap = {
-en:"en-GB",
-uk:"uk-UA",
-ru:"ru-RU",
-fr:"fr-FR",
-de:"de-DE",
-es:"es-ES",
-it:"it-IT",
-pt:"pt-PT",
-nl:"nl-NL",
-pl:"pl-PL",
-cs:"cs-CZ",
-sk:"sk-SK",
-hu:"hu-HU",
-ro:"ro-RO",
-bg:"bg-BG",
-el:"el-GR",
-sv:"sv-SE",
-da:"da-DK",
-no:"nb-NO",
-fi:"fi-FI",
-tr:"tr-TR",
-ar:"ar-SA",
-hi:"hi-IN"
-};
-
-/* =========================================================
-LANGUAGE
-========================================================= */
-
-function normalizeLanguage(
-value
-){
-
-let language =
-String(value || "")
-.trim()
-.toLowerCase();
-
-if(
-language.includes("-")
-){
-
-language =
-language.split("-")[0];
-
-}
-
-if(
-language.includes("_")
-){
-
-language =
-language.split("_")[0];
-
-}
-
-const aliases = {
-ua:"uk",
-cz:"cs",
-gr:"el",
-se:"sv",
-dk:"da"
-};
-
-language =
-aliases[language] ||
-language;
-
-return LOCAL_UI[language]
-?language
-:"";
-
-}
-
-function getContestLanguage(){
-
-if(
-window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage.getCurrentLanguage ===
-"function"
-){
-
-const value =
-window.PetsDogueLanguage.getCurrentLanguage();
-
-if(
-typeof value === "string"
-){
-
-const normalized =
-normalizeLanguage(value);
-
-if(normalized){
-return normalized;
-}
-
-}
-
-if(
-value &&
-value.code
-){
-
-const normalized =
-normalizeLanguage(value.code);
-
-if(normalized){
-return normalized;
-}
-
-}
-
-}
-
-for(
-const key
-of LANGUAGE_KEYS
-){
-
-const normalized =
-normalizeLanguage(
-localStorage.getItem(key)
-);
-
-if(normalized){
-return normalized;
-}
-
-}
-
-return "en";
-
-}
-
-function getContestBundle(){
-
-const root =
-window.PetsDogueTranslations &&
-window.PetsDogueTranslations.contests;
-
-if(!root){
-return null;
-}
-
-const language =
-getContestLanguage();
-
-return (
-root[language] ||
-root.en ||
-null
-);
-
-}
-
-function contestT(
-path,
-fallback=""
-){
-
-let value =
-getContestBundle();
-
-if(!value){
-return fallback;
-}
-
-path
-.split(".")
-.forEach(
-key=>{
-
-value =
-value &&
-Object.prototype.hasOwnProperty.call(
-value,
-key
-)
-?value[key]
-:undefined;
-
-}
-);
-
-return typeof value === "string"
-?value
-:fallback;
-
-}
-
-function localWords(){
-
-const language =
-getContestLanguage();
-
-return (
-LOCAL_UI[language] ||
-LOCAL_UI.en
-);
-
-}
-
-function applyLocalUi(){
-
-const words =
-localWords();
-
-const topDiscounts =
-document.getElementById("topDiscounts");
-
-const menuDiscounts =
-document.getElementById("menuDiscounts");
-
-const footerDiscounts =
-document.getElementById("footerDiscounts");
-
-const languageLabel =
-document.getElementById("languageLabel");
-
-const menuContestDescription =
-document.getElementById("menuContestDescription");
-
-const hallTitle =
-document.getElementById("hallTitle");
-
-const hallDescription =
-document.getElementById("hallDescription");
-
-const hallButton =
-document.getElementById("hallButton");
-
-const footerHall =
-document.getElementById("footerHall");
-
-if(topDiscounts){
-topDiscounts.textContent = words.discounts;
-}
-
-if(menuDiscounts){
-menuDiscounts.textContent = words.discounts;
-}
-
-if(footerDiscounts){
-footerDiscounts.textContent = words.discounts;
-}
-
-if(languageLabel){
-languageLabel.textContent = words.language;
-}
-
-if(menuContestDescription){
-menuContestDescription.textContent =
-words.menuContest;
-}
-
-if(hallTitle){
-hallTitle.textContent =
-words.hallTitle;
-}
-
-if(hallDescription){
-hallDescription.textContent =
-words.hallDescription;
-}
-
-if(hallButton){
-hallButton.textContent =
-words.hallButton;
-}
-
-if(footerHall){
-footerHall.textContent =
-words.hallTitle;
-}
-
-updateRulesButton();
-
-}
-
-/* =========================================================
 MENU
 ========================================================= */
 
 function openMenu(){
 
-sideMenu.classList.add("open");
+sideMenu.classList.add(
+"open"
+);
 
-menuOverlay.classList.add("show");
+menuOverlay.classList.add(
+"show"
+);
 
 sideMenu.setAttribute(
 "aria-hidden",
@@ -3721,9 +4618,13 @@ document.body.classList.add(
 
 function closeMenu(){
 
-sideMenu.classList.remove("open");
+sideMenu.classList.remove(
+"open"
+);
 
-menuOverlay.classList.remove("show");
+menuOverlay.classList.remove(
+"show"
+);
 
 sideMenu.setAttribute(
 "aria-hidden",
@@ -3731,7 +4632,9 @@ sideMenu.setAttribute(
 );
 
 if(
-!contestModal.classList.contains("open")
+!contestModal.classList.contains(
+"open"
+)
 ){
 
 document.body.classList.remove(
@@ -3746,9 +4649,7 @@ document.body.classList.remove(
 HELPERS
 ========================================================= */
 
-function escapeHTML(
-value
-){
+function escapeHTML(value){
 
 return String(
 value || ""
@@ -3761,9 +4662,63 @@ value || ""
 
 }
 
-function translateStatus(
-status
+function safeHref(value){
+
+const href =
+String(
+value || ""
+)
+.trim();
+
+if(!href){
+
+return "members-gallery.html";
+
+}
+
+if(
+/^[a-z0-9][a-z0-9\-_/?.=&%#]*\.html(?:[?#].*)?$/i
+.test(href)
 ){
+
+return href;
+
+}
+
+if(
+/^[a-z0-9][a-z0-9\-_/?.=&%#]*$/i
+.test(href) &&
+!href.toLowerCase().startsWith("javascript:")
+){
+
+return href;
+
+}
+
+try{
+
+const url =
+new URL(
+href,
+window.location.origin
+);
+
+if(
+url.protocol === "https:" ||
+url.protocol === "http:"
+){
+
+return url.href;
+
+}
+
+}catch{}
+
+return "members-gallery.html";
+
+}
+
+function translateStatus(status){
 
 const map = {
 "Open":"status.open",
@@ -3783,16 +4738,14 @@ contestT(
 
 }
 
-function getContestTitle(
-contest
-){
+function getContestTitle(contest){
 
 return contest.titleKey
-?contestT(
+? contestT(
 contest.titleKey,
 contest.title || ""
 )
-:contest.title ||
+: contest.title ||
 contestT(
 "dynamic.untitled",
 "Untitled Contest"
@@ -3800,16 +4753,14 @@ contestT(
 
 }
 
-function getContestPrize(
-contest
-){
+function getContestPrize(contest){
 
 return contest.prizeKey
-?contestT(
+? contestT(
 contest.prizeKey,
 contest.prize || ""
 )
-:contest.prize ||
+: contest.prize ||
 contestT(
 "dynamic.defaultPrize",
 "PETS & DOGUE feature"
@@ -3817,16 +4768,14 @@ contestT(
 
 }
 
-function getContestRules(
-contest
-){
+function getContestRules(contest){
 
 return contest.rulesKey
-?contestT(
+? contestT(
 contest.rulesKey,
 contest.rules || ""
 )
-:contest.rules ||
+: contest.rules ||
 contestT(
 "dynamic.detailsSoon",
 "Competition details will be announced soon."
@@ -3834,9 +4783,7 @@ contestT(
 
 }
 
-function selectContestImage(
-title
-){
+function selectContestImage(title){
 
 const text =
 String(title || "")
@@ -3873,6 +4820,69 @@ return "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format
 }
 
 /* =========================================================
+STATUS DATES
+========================================================= */
+
+function parseDateEnd(value){
+
+if(!value){
+return null;
+}
+
+const parts =
+String(value)
+.split("-");
+
+if(parts.length !== 3){
+return null;
+}
+
+const date =
+new Date(
+Number(parts[0]),
+Number(parts[1]) - 1,
+Number(parts[2]),
+23,
+59,
+59,
+999
+);
+
+return Number.isNaN(
+date.getTime()
+)
+? null
+: date;
+
+}
+
+function effectiveStatus(contest){
+
+const status =
+contest.status ||
+"Draft";
+
+const end =
+parseDateEnd(
+contest.end
+);
+
+if(
+status === "Open" &&
+end &&
+end.getTime() <
+Date.now()
+){
+
+return "Completed";
+
+}
+
+return status;
+
+}
+
+/* =========================================================
 LOAD CONTESTS
 ========================================================= */
 
@@ -3896,7 +4906,7 @@ Array.isArray(cms.contests)
 cmsContests =
 cms.contests
 .filter(
-contest=>
+contest =>
 contest.status !== "Draft" ||
 contest.start
 )
@@ -3929,41 +4939,8 @@ error
 
 }
 
-const merged =
-new Map();
-
-[
-...cmsContests,
-...fallbackContests
-]
-.forEach(
-contest=>{
-
-const key =
-String(
-contest.id ||
-contest.title ||
-Date.now()
-);
-
-if(
-!merged.has(key)
-){
-
-merged.set(
-key,
-contest
-);
-
-}
-
-}
-);
-
 publicContests =
-Array.from(
-merged.values()
-);
+cmsContests;
 
 renderContests();
 
@@ -3986,7 +4963,7 @@ document
 ".filter-button"
 )
 .forEach(
-item=>
+item =>
 item.classList.remove(
 "active"
 )
@@ -4046,8 +5023,9 @@ return publicContests.filter(
 contest=>{
 
 const status =
-contest.status ||
-"Draft";
+effectiveStatus(
+contest
+);
 
 const searchable = [
 getContestTitle(contest),
@@ -4091,19 +5069,23 @@ contestGrid.innerHTML =
 
 emptyMessage.style.display =
 contests.length
-?"none"
-:"block";
+? "none"
+: "block";
 
 contests.forEach(
 contest=>{
 
 contestGrid.insertAdjacentHTML(
 "beforeend",
-createContestCard(contest)
+createContestCard(
+contest
+)
 );
 
 }
 );
+
+localizeSpeakButtons();
 
 }
 
@@ -4111,17 +5093,15 @@ createContestCard(contest)
 CARD
 ========================================================= */
 
-function createContestCard(
-contest
-){
+function createContestCard(contest){
 
 const id =
 String(contest.id);
 
 const initial =
 contestVotes[id] !== undefined
-?Number(contestVotes[id])
-:Number(contest.votes || 0);
+? Number(contestVotes[id])
+: Number(contest.votes || 0);
 
 const voted =
 Boolean(
@@ -4129,15 +5109,14 @@ votedContests[id]
 );
 
 const status =
-contest.status ||
-"Draft";
+effectiveStatus(
+contest
+);
 
 let statusClass =
 "upcoming";
 
-if(
-status === "Open"
-){
+if(status === "Open"){
 
 statusClass =
 "open";
@@ -4201,8 +5180,10 @@ status === "Open"
 ?`
 <a
 href="${escapeHTML(
+safeHref(
 contest.joinLink ||
 "members-gallery.html"
+)
 )}"
 class="btn green"
 >
@@ -4225,6 +5206,7 @@ return `
 src="${escapeHTML(image)}"
 alt="${escapeHTML(title)}"
 loading="lazy"
+decoding="async"
 >
 
 <span class="status-label ${statusClass}">
@@ -4290,6 +5272,16 @@ contestT(
 "View Details"
 )
 )}
+</button>
+
+<button
+type="button"
+class="speak-button card-speak"
+onclick="speakContest('${escapeHTML(id)}',this)"
+aria-label="${escapeHTML(localWords().read)}"
+title="${escapeHTML(localWords().read)}"
+>
+${speakerSvg()}
 </button>
 
 </div>
@@ -4380,9 +5372,7 @@ formatDate(end)
 
 }
 
-function formatDate(
-value
-){
+function formatDate(value){
 
 if(!value){
 return "";
@@ -4458,7 +5448,7 @@ button
 
 const contest =
 publicContests.find(
-item=>
+item =>
 String(item.id) ===
 String(id)
 );
@@ -4469,8 +5459,8 @@ return;
 
 const current =
 contestVotes[id] !== undefined
-?Number(contestVotes[id])
-:Number(contest.votes || 0);
+? Number(contestVotes[id])
+: Number(contest.votes || 0);
 
 if(
 votedContests[id]
@@ -4504,7 +5494,9 @@ button.classList.add(
 }
 
 const count =
-button.querySelector("span");
+button.querySelector(
+"span"
+);
 
 if(count){
 
@@ -4533,13 +5525,11 @@ votedContests
 MODAL
 ========================================================= */
 
-function openContest(
-id
-){
+function openContest(id){
 
 const contest =
 publicContests.find(
-item=>
+item =>
 String(item.id) ===
 String(id)
 );
@@ -4553,6 +5543,11 @@ id;
 
 const title =
 getContestTitle(
+contest
+);
+
+const status =
+effectiveStatus(
 contest
 );
 
@@ -4570,8 +5565,7 @@ title;
 
 modalStatus.textContent =
 translateStatus(
-contest.status ||
-"Draft"
+status
 );
 
 modalMeta.textContent =
@@ -4621,8 +5615,10 @@ modalWinner.textContent =
 }
 
 modalJoinButton.href =
+safeHref(
 contest.joinLink ||
-"members-gallery.html";
+"members-gallery.html"
+);
 
 modalJoinButton.textContent =
 contestT(
@@ -4631,9 +5627,9 @@ contestT(
 );
 
 modalJoinButton.style.display =
-contest.status === "Open"
-?"inline-flex"
-:"none";
+status === "Open"
+? "inline-flex"
+: "none";
 
 contestModal.classList.add(
 "open"
@@ -4643,9 +5639,13 @@ document.body.classList.add(
 "menu-open"
 );
 
+localizeSpeakButtons();
+
 }
 
 function closeContest(){
+
+stopSpeech();
 
 contestModal.classList.remove(
 "open"
@@ -4655,7 +5655,9 @@ currentContestId =
 null;
 
 if(
-!sideMenu.classList.contains("open")
+!sideMenu.classList.contains(
+"open"
+)
 ){
 
 document.body.classList.remove(
@@ -4666,9 +5668,7 @@ document.body.classList.remove(
 
 }
 
-function closeContestFromOverlay(
-event
-){
+function closeContestFromOverlay(event){
 
 if(
 event.target ===
@@ -4694,8 +5694,8 @@ rulesButton.textContent =
 rulesExtra.classList.contains(
 "open"
 )
-?words.rulesHide
-:words.rulesAll;
+? words.rulesHide
+: words.rulesAll;
 
 }
 
@@ -4730,7 +5730,71 @@ value;
 
 }
 
+function updateContestStructuredData(
+title,
+description,
+language
+){
+
+if(!structuredData){
+return;
+}
+
+try{
+
+const data =
+JSON.parse(
+structuredData.textContent
+);
+
+if(
+Array.isArray(
+data["@graph"]
+)
+){
+
+const page =
+data["@graph"].find(
+item =>
+item["@type"] ===
+"CollectionPage"
+);
+
+if(page){
+
+page.name =
+title;
+
+page.description =
+description;
+
+page.inLanguage =
+language;
+
+}
+
+}
+
+structuredData.textContent =
+JSON.stringify(
+data
+);
+
+}catch(error){
+
+console.warn(
+"Unable to update contest structured data.",
+error
+);
+
+}
+
+}
+
 function updateContestMeta(){
+
+const language =
+getContestLanguage();
 
 const title =
 contestT(
@@ -4750,17 +5814,21 @@ document.title =
 title;
 
 if(ogTitle){
+
 ogTitle.setAttribute(
 "content",
 title
 );
+
 }
 
 if(twitterTitle){
+
 twitterTitle.setAttribute(
 "content",
 title
 );
+
 }
 
 }
@@ -4773,20 +5841,30 @@ description
 );
 
 if(ogDescription){
+
 ogDescription.setAttribute(
 "content",
 description
 );
+
 }
 
 if(twitterDescription){
+
 twitterDescription.setAttribute(
 "content",
 description
 );
+
 }
 
 }
+
+updateContestStructuredData(
+title,
+description,
+language
+);
 
 }
 
@@ -4837,6 +5915,8 @@ LANGUAGE REFRESH
 
 function refreshContestLanguage(){
 
+stopSpeech();
+
 applyLocalUi();
 
 refreshContestPlaceholder();
@@ -4873,6 +5953,8 @@ event=>{
 if(
 event.key === "Escape"
 ){
+
+stopSpeech();
 
 closeContest();
 
@@ -4947,7 +6029,7 @@ event.key
 
 setTimeout(
 refreshContestLanguage,
-0
+80
 );
 
 }
@@ -4961,7 +6043,7 @@ window.addEventListener(
 
 setTimeout(
 refreshContestLanguage,
-0
+80
 );
 
 }
@@ -4973,7 +6055,7 @@ window.addEventListener(
 
 setTimeout(
 refreshContestLanguage,
-0
+80
 );
 
 }
@@ -4988,9 +6070,55 @@ refreshContestLanguage();
 }
 );
 
+window.addEventListener(
+"beforeunload",
+()=>{
+
+stopSpeech();
+
+}
+);
+
+if(
+"speechSynthesis" in window
+){
+
+window.speechSynthesis.onvoiceschanged =
+()=>{
+
+localizeSpeakButtons();
+
+};
+
+}
+
+/* =========================================================
+INITIALISE
+========================================================= */
+
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
+
+const language =
+getContestLanguage();
+
+document.documentElement.lang =
+language;
+
+document.documentElement.dir =
+language === "ar"
+? "rtl"
+: "ltr";
+
+if(
+LOCAL_UI[language]
+){
+
+languageSelect.value =
+language;
+
+}
 
 loadContests();
 
@@ -4998,17 +6126,40 @@ refreshContestPlaceholder();
 
 updateContestMeta();
 
+setTimeout(
+()=>{
+
 applyLocalUi();
+
+renderContests();
+
+},
+80
+);
 
 keepContestVisible();
 
-languageSelect?.addEventListener(
+languageSelect
+?.addEventListener(
 "change",
-()=>{
+event=>{
+
+const selected =
+normalizeLanguage(
+event.target.value
+) ||
+"en";
+
+localStorage.setItem(
+LANGUAGE_KEY,
+selected
+);
+
+stopSpeech();
 
 setTimeout(
 refreshContestLanguage,
-50
+80
 );
 
 }
@@ -5020,7 +6171,7 @@ mutations=>{
 
 if(
 mutations.some(
-item=>
+item =>
 item.type === "attributes" &&
 (
 item.attributeName === "lang" ||
@@ -5031,7 +6182,7 @@ item.attributeName === "dir"
 
 setTimeout(
 refreshContestLanguage,
-0
+80
 );
 
 }
@@ -5052,6 +6203,7 @@ attributeFilter:[
 
 }
 );
+
 </script>
 
 </body>
