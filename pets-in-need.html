@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 
 <meta charset="UTF-8">
@@ -16,7 +16,7 @@ Pet Rescue, Adoption &amp; Animals in Need | PETS &amp; DOGUE
 <meta
 id="pageDescription"
 name="description"
-content="Discover animals in need through PETS & DOGUE — rescue stories, pet adoption, veterinary support, volunteer opportunities and community help for dogs and cats."
+content="Discover animals in need through PETS & DOGUE — rescue, adoption, veterinary support, volunteers and community help for dogs, cats and other pets."
 data-i18n-attr="content:petsInNeed.meta.description"
 >
 
@@ -82,7 +82,7 @@ content="Pet Rescue, Adoption & Animals in Need | PETS & DOGUE"
 
 <meta
 property="og:description"
-content="Discover rescue stories, pet adoption, veterinary support, volunteer opportunities and animals needing community help with PETS & DOGUE."
+content="Discover rescue, adoption, veterinary support, volunteer opportunities and community help for animals with PETS & DOGUE."
 >
 
 <meta
@@ -97,7 +97,7 @@ content="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=forma
 
 <meta
 property="og:image:alt"
-content="Rescue pet featured in PETS & DOGUE Pets In Need"
+content="Animals in need and pet rescue support on PETS & DOGUE"
 >
 
 <meta
@@ -117,7 +117,7 @@ content="Pet Rescue, Adoption & Animals in Need | PETS & DOGUE"
 
 <meta
 name="twitter:description"
-content="Discover rescue stories, pet adoption, veterinary support, volunteer opportunities and animals needing community help with PETS & DOGUE."
+content="Discover rescue, adoption, veterinary support, volunteers and community help for animals with PETS & DOGUE."
 >
 
 <meta
@@ -125,7 +125,10 @@ name="twitter:image"
 content="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1600&q=88"
 >
 
-<script type="application/ld+json">
+<script
+type="application/ld+json"
+id="structuredData"
+>
 {
   "@context":"https://schema.org",
   "@graph":[
@@ -133,20 +136,25 @@ content="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=forma
       "@type":"WebSite",
       "@id":"https://www.petsanddogue.com/#website",
       "url":"https://www.petsanddogue.com/",
-      "name":"PETS & DOGUE"
+      "name":"PETS & DOGUE",
+      "alternateName":"PETS AND DOGUE",
+      "description":"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them."
     },
     {
       "@type":"Organization",
       "@id":"https://www.petsanddogue.com/#organization",
       "name":"PETS & DOGUE",
-      "url":"https://www.petsanddogue.com/"
+      "url":"https://www.petsanddogue.com/",
+      "description":"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them.",
+      "slogan":"One world. Every pet."
     },
     {
       "@type":"CollectionPage",
       "@id":"https://www.petsanddogue.com/pets-in-need.html#webpage",
       "url":"https://www.petsanddogue.com/pets-in-need.html",
       "name":"Pet Rescue, Adoption & Animals in Need | PETS & DOGUE",
-      "description":"PETS & DOGUE Pets In Need highlights animals requiring care, adoption, visibility, volunteer help and community support.",
+      "description":"Discover rescue, adoption, veterinary support, volunteer opportunities and community help for animals with PETS & DOGUE.",
+      "inLanguage":"en",
       "isPartOf":{
         "@id":"https://www.petsanddogue.com/#website"
       },
@@ -176,7 +184,7 @@ content="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=forma
         },
         {
           "@type":"Thing",
-          "name":"Animal community support"
+          "name":"Community support for animals"
         }
       ],
       "mainEntity":{
@@ -186,22 +194,23 @@ content="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=forma
     {
       "@type":"ItemList",
       "@id":"https://www.petsanddogue.com/pets-in-need.html#help-list",
-      "name":"Animals and rescue projects needing help",
+      "name":"Ways to help animals through PETS & DOGUE",
+      "numberOfItems":3,
       "itemListElement":[
         {
           "@type":"ListItem",
           "position":1,
-          "name":"Bella — veterinary and temporary care support"
+          "name":"Veterinary and urgent care support"
         },
         {
           "@type":"ListItem",
           "position":2,
-          "name":"Luna — looking for an adoptive home"
+          "name":"Pet adoption and responsible rehoming"
         },
         {
           "@type":"ListItem",
           "position":3,
-          "name":"Shelter Weekend — volunteer support"
+          "name":"Volunteer, foster and practical rescue support"
         }
       ]
     },
@@ -292,6 +301,18 @@ display:block;
 width:100%;
 }
 
+.sr-only{
+position:absolute!important;
+width:1px!important;
+height:1px!important;
+padding:0!important;
+margin:-1px!important;
+overflow:hidden!important;
+clip:rect(0,0,0,0)!important;
+white-space:nowrap!important;
+border:0!important;
+}
+
 .metallic{
 background:var(--gold-metal);
 background-size:220% 100%;
@@ -311,6 +332,77 @@ background-position:100%;
 background-position:-80%;
 }
 
+}
+
+/* =========================================================
+NARRATION
+========================================================= */
+
+.speak-button{
+width:43px;
+height:43px;
+border:1.5px solid currentColor;
+border-radius:50%;
+background:#fff;
+color:#111;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+flex:none;
+transition:
+transform .15s ease,
+background .15s ease,
+color .15s ease;
+}
+
+.speak-button:hover{
+transform:scale(1.04);
+}
+
+.speak-button svg{
+width:21px;
+height:21px;
+fill:none;
+stroke:currentColor;
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
+pointer-events:none;
+}
+
+.speak-button.dark{
+background:rgba(0,0,0,.68);
+color:#fff;
+border-color:rgba(255,255,255,.86);
+backdrop-filter:blur(5px);
+}
+
+.speak-button.speaking{
+background:var(--green);
+color:#111;
+border-color:var(--green);
+}
+
+.speech-row{
+display:flex;
+align-items:center;
+gap:9px;
+margin-top:15px;
+}
+
+.speech-row.center{
+justify-content:center;
+}
+
+.section-speech{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.card-speak{
+width:39px;
+height:39px;
 }
 
 /* =========================================================
@@ -598,7 +690,7 @@ HERO
 ========================================================= */
 
 .hero{
-height:545px;
+height:555px;
 position:relative;
 overflow:hidden;
 background:#111;
@@ -626,7 +718,7 @@ rgba(0,0,0,.08) 68%
 position:absolute;
 z-index:2;
 left:50%;
-bottom:42px;
+bottom:34px;
 transform:translateX(-50%);
 width:min(1000px,90%);
 text-align:center;
@@ -659,7 +751,7 @@ display:flex;
 justify-content:center;
 gap:8px;
 flex-wrap:wrap;
-margin-top:20px;
+margin-top:18px;
 }
 
 /* =========================================================
@@ -667,7 +759,9 @@ BUTTONS
 ========================================================= */
 
 .btn{
-display:inline-block;
+display:inline-flex;
+align-items:center;
+justify-content:center;
 width:max-content;
 border:0;
 border-radius:999px;
@@ -718,7 +812,7 @@ border-bottom:3px solid #111;
 font:normal 51px/.95 Georgia,serif;
 }
 
-.section-head span{
+.section-label{
 font-size:10px;
 font-weight:bold;
 letter-spacing:2px;
@@ -776,6 +870,7 @@ height:100%;
 .badge{
 display:inline-block;
 width:max-content;
+max-width:100%;
 background:var(--gold-metal);
 color:#111;
 padding:7px 11px;
@@ -811,6 +906,7 @@ margin-bottom:15px;
 
 .actions{
 display:flex;
+align-items:center;
 gap:7px;
 flex-wrap:wrap;
 margin-top:auto;
@@ -882,13 +978,14 @@ text-align:center;
 }
 
 .stat h3{
-font:normal 37px Georgia,serif;
+font:normal 26px Georgia,serif;
 color:var(--gold-dark);
-margin-bottom:5px;
+margin-bottom:7px;
 }
 
 .stat p{
 font-size:10px;
+line-height:1.45;
 color:#666;
 }
 
@@ -961,8 +1058,15 @@ letter-spacing:3px;
 }
 
 .footer-subtitle{
-color:#aaa;
-margin:10px 0 28px;
+color:#ddd;
+margin-top:10px;
+font-size:14px;
+}
+
+.footer-slogan{
+color:var(--gold-light);
+margin:6px 0 28px;
+font:italic 15px Georgia,serif;
 }
 
 .footer-links{
@@ -1078,7 +1182,7 @@ font-size:12px;
 }
 
 .hero{
-height:430px;
+height:460px;
 }
 
 .hero h1{
@@ -1090,7 +1194,7 @@ font-size:16px;
 }
 
 .hero-content{
-bottom:28px;
+bottom:23px;
 }
 
 main{
@@ -1105,6 +1209,11 @@ margin-top:30px;
 
 .section-head h2{
 font-size:40px;
+}
+
+.section-speech{
+width:100%;
+justify-content:space-between;
 }
 
 .grid{
@@ -1176,7 +1285,7 @@ font-size:34px;
 }
 
 .hero{
-height:410px;
+height:445px;
 }
 
 .card-image{
@@ -1197,6 +1306,11 @@ font-size:30px;
 
 .stats{
 grid-template-columns:1fr;
+}
+
+.speak-button{
+width:40px;
+height:40px;
 }
 
 }
@@ -1230,6 +1344,13 @@ transition:none;
 </head>
 
 <body>
+
+<div
+id="speechStatus"
+class="sr-only"
+role="status"
+aria-live="polite"
+></div>
 
 <div
 class="menu-overlay"
@@ -1282,6 +1403,7 @@ Join Club
 <span
 class="notranslate"
 translate="no"
+id="languageLabel"
 >
 LANGUAGE
 </span>
@@ -1328,45 +1450,19 @@ href="issue-01.html"
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="PETS & DOGUE latest magazine issue"
+alt="PETS & DOGUE Edition 01"
 loading="lazy"
 decoding="async"
 >
 
 <div>
 
-<h3 data-i18n="common.menu.latestIssue">
-Latest Issue
+<h3 id="menuEdition">
+Edition
 </h3>
 
 <p data-i18n="common.menu.latestIssueDescription">
-Open the newest PETS & DOGUE digital magazine.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="special-offers.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
-alt="PETS & DOGUE member discounts"
-loading="lazy"
-decoding="async"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.offers">
-Discounts
-</h3>
-
-<p>
-PETS &amp; DOGUE CLUB
+Open the latest PETS & DOGUE digital edition.
 </p>
 
 </div>
@@ -1393,6 +1489,136 @@ Cover Star
 
 <p data-i18n="common.menu.coverStarDescription">
 Enter your pet into the next cover competition.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="special-offers.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
+alt="PETS & DOGUE member discounts"
+loading="lazy"
+decoding="async"
+>
+
+<div>
+
+<h3 id="menuDiscounts">
+Discounts
+</h3>
+
+<p class="notranslate" translate="no">
+PETS &amp; DOGUE CLUB
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="pet-friendly-places.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
+alt="Pet-friendly places"
+loading="lazy"
+decoding="async"
+>
+
+<div>
+
+<h3 id="menuPlaces">
+Pet-Friendly
+</h3>
+
+<p data-i18n="common.menu.placesDescription">
+Search real places, maps, routes and contacts.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="pet-marketplace.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+alt="PETS & DOGUE pet marketplace"
+loading="lazy"
+decoding="async"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.marketplace">
+Marketplace
+</h3>
+
+<p>
+PETS &amp; DOGUE MARKETPLACE
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="pet-fashion.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
+alt="Pet fashion"
+loading="lazy"
+decoding="async"
+>
+
+<div>
+
+<h3 data-i18n="common.navigation.fashion">
+Fashion
+</h3>
+
+<p data-i18n="common.menu.fashionDescription">
+Style, accessories and editorial looks.
+</p>
+
+</div>
+
+</a>
+
+<a
+class="menu-item"
+href="wellness.html"
+>
+
+<img
+src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80"
+alt="Pet health"
+loading="lazy"
+decoding="async"
+>
+
+<div>
+
+<h3 id="menuHealth">
+Health
+</h3>
+
+<p data-i18n="common.menu.wellnessDescription">
+Care, health and everyday wellbeing.
 </p>
 
 </div>
@@ -1453,76 +1679,24 @@ Portraits, galleries and visual stories.
 
 <a
 class="menu-item"
-href="pet-fashion.html"
+href="local-community.html"
 >
 
 <img
-src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80"
-alt="PETS & DOGUE pet fashion"
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+alt="PETS & DOGUE pet community"
 loading="lazy"
 decoding="async"
 >
 
 <div>
 
-<h3 data-i18n="common.menu.fashion">
-Fashion
+<h3 data-i18n="common.navigation.community">
+Community
 </h3>
 
-<p data-i18n="common.menu.fashionDescription">
-Luxury style, shopping and editorial looks.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="wellness.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80"
-alt="Pet health and wellness"
-loading="lazy"
-decoding="async"
->
-
-<div>
-
-<h3 data-i18n="common.menu.wellness">
-Wellness
-</h3>
-
-<p data-i18n="common.menu.wellnessDescription">
-Care, grooming, health and everyday wellbeing.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="pet-friendly-places.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
-alt="Pet-friendly places"
-loading="lazy"
-decoding="async"
->
-
-<div>
-
-<h3 data-i18n="common.menu.places">
-Places
-</h3>
-
-<p data-i18n="common.menu.placesDescription">
-Pet-friendly hotels, cafés and destinations.
+<p data-i18n="common.menu.communityDescription">
+Local posts, animals and people helping animals.
 </p>
 
 </div>
@@ -1556,32 +1730,6 @@ PETS &amp; DOGUE COMMUNITY
 </a>
 
 <a
-class="menu-item"
-href="local-community.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
-alt="PETS & DOGUE local pet community"
-loading="lazy"
-decoding="async"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.community">
-Community
-</h3>
-
-<p data-i18n="common.menu.communityDescription">
-Local stories, recommendations and pet people.
-</p>
-
-</div>
-
-</a>
-
-<a
 class="menu-item active"
 href="pets-in-need.html"
 aria-current="page"
@@ -1589,45 +1737,19 @@ aria-current="page"
 
 <img
 src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
-alt="Rescue pets and animals in need"
+alt="Animals in need"
 loading="lazy"
 decoding="async"
 >
 
 <div>
 
-<h3 data-i18n="common.navigation.rescue">
-Rescue
+<h3 id="menuHelp">
+Help
 </h3>
 
 <p data-i18n="common.menu.rescueDescription">
 Rescue, adoption and stories that need visibility.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="pet-marketplace.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
-alt="PETS & DOGUE pet marketplace"
-loading="lazy"
-decoding="async"
->
-
-<div>
-
-<h3 data-i18n="common.navigation.marketplace">
-Marketplace
-</h3>
-
-<p>
-PETS &amp; DOGUE MARKETPLACE
 </p>
 
 </div>
@@ -1654,32 +1776,6 @@ Partners
 
 <p data-i18n="common.menu.partnersDescription">
 Discover selected brands and member offers.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="menu-item"
-href="local-community.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=80"
-alt="Pet rescue volunteers and community support"
-loading="lazy"
-decoding="async"
->
-
-<div>
-
-<h3 data-i18n="petsInNeed.footer.volunteers">
-Volunteer Network
-</h3>
-
-<p data-i18n="common.menu.rescueDescription">
-Rescue, adoption and stories that need visibility.
 </p>
 
 </div>
@@ -1784,17 +1880,10 @@ aria-label="PETS & DOGUE sections"
 >
 
 <a
-data-i18n="common.navigation.magazine"
+id="navEdition"
 href="issue-01.html"
 >
-MAGAZINE
-</a>
-
-<a
-data-i18n="common.navigation.offers"
-href="special-offers.html"
->
-DISCOUNTS
+EDITION
 </a>
 
 <a
@@ -1802,6 +1891,41 @@ data-i18n="common.navigation.coverStars"
 href="members-gallery.html"
 >
 COVER STARS
+</a>
+
+<a
+id="navDiscounts"
+href="special-offers.html"
+>
+DISCOUNTS
+</a>
+
+<a
+id="navPlaces"
+href="pet-friendly-places.html"
+>
+PET-FRIENDLY
+</a>
+
+<a
+data-i18n="common.navigation.marketplace"
+href="pet-marketplace.html"
+>
+MARKETPLACE
+</a>
+
+<a
+data-i18n="common.navigation.fashion"
+href="pet-fashion.html"
+>
+FASHION
+</a>
+
+<a
+id="navHealth"
+href="wellness.html"
+>
+HEALTH
 </a>
 
 <a
@@ -1819,24 +1943,10 @@ PHOTOS
 </a>
 
 <a
-data-i18n="common.navigation.fashion"
-href="pet-fashion.html"
+data-i18n="common.navigation.community"
+href="local-community.html"
 >
-FASHION
-</a>
-
-<a
-data-i18n="common.navigation.wellness"
-href="wellness.html"
->
-WELLNESS
-</a>
-
-<a
-data-i18n="common.navigation.places"
-href="pet-friendly-places.html"
->
-PLACES
+COMMUNITY
 </a>
 
 <a
@@ -1847,26 +1957,12 @@ CONTESTS
 </a>
 
 <a
-data-i18n="common.navigation.community"
-href="local-community.html"
->
-COMMUNITY
-</a>
-
-<a
 class="active"
-data-i18n="common.navigation.rescue"
+id="navHelp"
 href="pets-in-need.html"
 aria-current="page"
 >
-RESCUE
-</a>
-
-<a
-data-i18n="common.navigation.marketplace"
-href="pet-marketplace.html"
->
-MARKETPLACE
+HELP
 </a>
 
 <a
@@ -1880,11 +1976,14 @@ PARTNERS
 
 </header>
 
-<section class="hero">
+<section
+class="hero"
+id="heroSpeech"
+>
 
 <img
 src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1800&q=85"
-alt="Rescue dog featured in PETS & DOGUE Pets In Need"
+alt="Animals in need and community support on PETS & DOGUE"
 fetchpriority="high"
 decoding="async"
 >
@@ -1895,7 +1994,7 @@ decoding="async"
 class="hero-kicker notranslate"
 translate="no"
 >
-PETS &amp; DOGUE · RESCUE
+PETS &amp; DOGUE · HELP
 </span>
 
 <h1 data-i18n="petsInNeed.hero.title">
@@ -1906,30 +2005,44 @@ Pets In Need
 A PETS & DOGUE section dedicated to animals who need help, care, adoption, visibility and love.
 </p>
 
-<div class="hero-actions">
+<div class="speech-row center">
+
+<button
+class="speak-button dark"
+type="button"
+data-speech-target="heroSpeech"
+data-speech-ignore
+onclick="readSection('heroSpeech',this)"
+aria-label="Listen to this section"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
+
+<div
+class="hero-actions"
+data-speech-ignore
+>
 
 <a
 href="#help-now"
 class="btn green"
-data-i18n="petsInNeed.helpNow.title"
+id="heroHelpButton"
 >
-Help Right Now
+See Ways To Help
 </a>
 
 <a
 href="local-community.html"
 class="btn gold"
-data-i18n="petsInNeed.actions.volunteer"
+data-i18n="common.navigation.community"
 >
-Volunteer
-</a>
-
-<a
-href="local-community.html"
-class="btn light"
-data-i18n="petsInNeed.footer.community"
->
-Local Community
+Community
 </a>
 
 </div>
@@ -1945,7 +2058,10 @@ id="help-now"
 aria-labelledby="helpNowTitle"
 >
 
-<div class="section-head">
+<div
+class="section-head"
+id="helpHeadingSpeech"
+>
 
 <h2
 id="helpNowTitle"
@@ -1954,25 +2070,46 @@ data-i18n="petsInNeed.helpNow.title"
 Help Right Now
 </h2>
 
+<div class="section-speech">
+
 <span
-class="notranslate"
+class="section-label notranslate"
 translate="no"
 >
-PETS &amp; DOGUE · RESCUE
+PETS &amp; DOGUE · HELP
 </span>
+
+<button
+class="speak-button"
+type="button"
+data-speech-target="helpHeadingSpeech"
+data-speech-ignore
+onclick="readSection('helpHeadingSpeech',this)"
+aria-label="Listen to this section"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
 
 </div>
 
 <div class="grid">
 
-<article class="card">
+<article
+class="card"
+id="vetSpeech"
+>
 
 <div class="card-image">
 
 <img
 src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1400&q=85"
-alt="Rescue dog Bella needing veterinary and temporary care"
-data-i18n-attr="alt:petsInNeed.bella.alt"
+alt="Dog representing veterinary and urgent pet support"
 loading="lazy"
 decoding="async"
 >
@@ -1983,43 +2120,60 @@ decoding="async"
 
 <span
 class="badge"
-data-i18n="petsInNeed.bella.badge"
+id="vetBadge"
 >
-URGENT HELP
+VETERINARY SUPPORT
 </span>
 
-<h3>
-Bella
+<h3 id="vetTitle">
+Urgent Care &amp; Veterinary Help
 </h3>
 
 <div
 class="meta"
-data-i18n="petsInNeed.bella.meta"
+id="vetMeta"
 >
-📍 London · Medical care needed
+Community posts needing medical support
 </div>
 
-<p data-i18n="petsInNeed.bella.description">
-Bella was rescued and needs support for veterinary treatment, food and temporary care.
+<p id="vetDescription">
+Find community posts about animals that need urgent veterinary care, temporary support or practical help.
 </p>
 
-<div class="actions">
-
-<a
-href="contact.html"
-class="btn gold"
-data-i18n="petsInNeed.actions.donate"
+<div
+class="actions"
+data-speech-ignore
 >
-Donate
-</a>
 
 <a
 href="local-community.html"
-class="btn"
-data-i18n="petsInNeed.actions.discuss"
+class="btn gold"
+data-i18n="common.navigation.community"
 >
-Discuss
+Community
 </a>
+
+<a
+href="contact.html"
+class="btn"
+data-i18n="common.footer.contact"
+>
+Contact
+</a>
+
+<button
+class="speak-button card-speak"
+type="button"
+data-speech-target="vetSpeech"
+onclick="readSection('vetSpeech',this)"
+aria-label="Listen to this section"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
 
 </div>
 
@@ -2027,14 +2181,16 @@ Discuss
 
 </article>
 
-<article class="card">
+<article
+class="card"
+id="adoptionSpeech"
+>
 
 <div class="card-image">
 
 <img
 src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1200&q=85"
-alt="Rescue cat Luna looking for an adoptive home"
-data-i18n-attr="alt:petsInNeed.luna.alt"
+alt="Cat representing pet adoption and responsible rehoming"
 loading="lazy"
 decoding="async"
 >
@@ -2045,43 +2201,52 @@ decoding="async"
 
 <span
 class="badge"
-data-i18n="petsInNeed.luna.badge"
+id="adoptionBadge"
 >
-ADOPTION
+ADOPTION &amp; REHOMING
 </span>
 
-<h3>
-Luna
+<h3 id="adoptionTitle">
+Looking For A Safe Home
 </h3>
 
 <div
 class="meta"
-data-i18n="petsInNeed.luna.meta"
+id="adoptionMeta"
 >
-📍 Bournemouth · Looking for home
+Responsible adoption and rehoming posts
 </div>
 
-<p data-i18n="petsInNeed.luna.description">
-Luna is looking for a safe and loving home. She is gentle, quiet and ready for adoption.
+<p id="adoptionDescription">
+Discover community posts from animals seeking safe, responsible homes and connect through the PETS & DOGUE community.
 </p>
 
-<div class="actions">
-
-<a
-href="contact.html"
-class="btn gold"
-data-i18n="petsInNeed.actions.adopt"
+<div
+class="actions"
+data-speech-ignore
 >
-Adopt
-</a>
 
 <a
 href="local-community.html"
-class="btn"
-data-i18n="petsInNeed.actions.comment"
+class="btn gold"
+data-i18n="common.navigation.community"
 >
-Comment
+Community
 </a>
+
+<button
+class="speak-button card-speak"
+type="button"
+data-speech-target="adoptionSpeech"
+onclick="readSection('adoptionSpeech',this)"
+aria-label="Listen to this section"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
 
 </div>
 
@@ -2089,14 +2254,16 @@ Comment
 
 </article>
 
-<article class="card">
+<article
+class="card"
+id="volunteerSpeech"
+>
 
 <div class="card-image">
 
 <img
 src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1200&q=85"
-alt="Shelter dog representing a volunteer rescue project"
-data-i18n-attr="alt:petsInNeed.shelter.alt"
+alt="Dog representing rescue volunteers and practical community help"
 loading="lazy"
 decoding="async"
 >
@@ -2107,43 +2274,52 @@ decoding="async"
 
 <span
 class="badge"
-data-i18n="petsInNeed.shelter.badge"
+id="volunteerBadge"
 >
-VOLUNTEERS
+VOLUNTEER SUPPORT
 </span>
 
-<h3 data-i18n="petsInNeed.shelter.title">
-Shelter Weekend
+<h3 id="volunteerTitle">
+Rescue Volunteers
 </h3>
 
 <div
 class="meta"
-data-i18n="petsInNeed.shelter.meta"
+id="volunteerMeta"
 >
-📍 Manchester · Volunteers needed
+Local volunteer, foster and practical help
 </div>
 
-<p data-i18n="petsInNeed.shelter.description">
-A local shelter needs volunteers for walking dogs, cleaning rooms and taking new adoption photos.
+<p id="volunteerDescription">
+Find local requests for foster care, transport, dog walking, photography and other practical support for animals.
 </p>
 
-<div class="actions">
+<div
+class="actions"
+data-speech-ignore
+>
 
 <a
 href="local-community.html"
 class="btn gold"
-data-i18n="petsInNeed.actions.volunteer"
+data-i18n="common.navigation.community"
 >
-Volunteer
+Community
 </a>
 
-<a
-href="local-community.html"
-class="btn"
-data-i18n="petsInNeed.actions.join"
+<button
+class="speak-button card-speak"
+type="button"
+data-speech-target="volunteerSpeech"
+onclick="readSection('volunteerSpeech',this)"
+aria-label="Listen to this section"
 >
-Join
-</a>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
 
 </div>
 
@@ -2155,13 +2331,16 @@ Join
 
 </section>
 
-<section class="impact">
+<section
+class="impact"
+id="impactSpeech"
+>
 
 <div class="impact-image">
 
 <img
 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1300&q=85"
-alt="Dogs representing PETS & DOGUE rescue and community impact"
+alt="Dogs representing community support for animals"
 loading="lazy"
 decoding="async"
 >
@@ -2174,51 +2353,70 @@ decoding="async"
 class="notranslate"
 translate="no"
 >
-PETS &amp; DOGUE CLUB
+PETS &amp; DOGUE · COMMUNITY
 </span>
 
-<h2 data-i18n="petsInNeed.impact.title">
-Every Membership Can Help
+<h2 id="impactTitle">
+Visibility Can Make A Difference
 </h2>
 
-<p data-i18n="petsInNeed.impact.description">
-PETS & DOGUE CLUB will connect luxury magazine culture with real impact: member support, partner donations, rescue visibility and community action.
+<p id="impactDescription">
+PETS & DOGUE helps bring rescue, adoption and community-support posts into one visible space so people can discover where help is needed.
 </p>
+
+<div class="speech-row">
+
+<button
+class="speak-button dark"
+type="button"
+data-speech-target="impactSpeech"
+data-speech-ignore
+onclick="readSection('impactSpeech',this)"
+aria-label="Listen to this section"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
+
+</div>
 
 <div class="stats">
 
 <div class="stat">
 
-<h3>
-127
+<h3 id="statOneTitle">
+Visibility
 </h3>
 
-<p data-i18n="petsInNeed.impact.animals">
-Animals To Help
+<p id="statOneText">
+Give urgent posts a place to be seen.
 </p>
 
 </div>
 
 <div class="stat">
 
-<h3>
-38
+<h3 id="statTwoTitle">
+Community
 </h3>
 
-<p data-i18n="petsInNeed.impact.volunteers">
-Volunteer Requests
+<p id="statTwoText">
+Connect people who can help locally.
 </p>
 
 </div>
 
 <div class="stat">
 
-<h3>
-12
+<h3 id="statThreeTitle">
+Action
 </h3>
 
-<p data-i18n="petsInNeed.impact.adoptions">
-Adoption Stories
+<p id="statThreeText">
+Move from awareness to practical support.
 </p>
 
 </div>
@@ -2229,7 +2427,10 @@ Adoption Stories
 
 </section>
 
-<section class="rescue-cta">
+<section
+class="rescue-cta"
+id="communitySpeech"
+>
 
 <div class="rescue-copy">
 
@@ -2240,31 +2441,48 @@ translate="no"
 PETS &amp; DOGUE · COMMUNITY
 </span>
 
-<h2 data-i18n="petsInNeed.impact.title">
-Every Membership Can Help
+<h2 id="communityTitle">
+See Current Community Requests
 </h2>
 
-<p data-i18n="petsInNeed.hero.description">
-A PETS & DOGUE section dedicated to animals who need help, care, adoption, visibility and love.
+<p id="communityDescription">
+Open the Community section to find current local posts, lost and found pets, adoption requests, volunteers and other ways to help.
 </p>
 
-<div class="actions">
+<div
+class="actions"
+data-speech-ignore
+>
 
 <a
 href="local-community.html"
 class="btn green"
-data-i18n="petsInNeed.actions.volunteer"
+data-i18n="common.navigation.community"
 >
-Volunteer
+Community
 </a>
 
 <a
-href="local-community.html"
+href="contact.html"
 class="btn gold"
-data-i18n="petsInNeed.actions.join"
+data-i18n="common.footer.contact"
 >
-Join
+Contact
 </a>
+
+<button
+class="speak-button"
+type="button"
+data-speech-target="communitySpeech"
+onclick="readSection('communitySpeech',this)"
+aria-label="Listen to this section"
+>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 10v4h4l5 4V6L9 10H5Z"></path>
+<path d="M17 9c1.2 1.2 1.2 4.8 0 6"></path>
+<path d="M19.5 6.5c3 3 3 8 0 11"></path>
+</svg>
+</button>
 
 </div>
 
@@ -2274,7 +2492,7 @@ Join
 
 <img
 src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1300&q=85"
-alt="Rescue cat representing pet adoption"
+alt="Cat representing adoption and community help"
 loading="lazy"
 decoding="async"
 >
@@ -2295,33 +2513,26 @@ PETS &amp; DOGUE
 </div>
 
 <p
-class="footer-subtitle"
-data-i18n="common.footer.subtitle"
+class="footer-subtitle notranslate"
+translate="no"
 >
-The International Luxury Animal Magazine
+Digital lifestyle platform
+</p>
+
+<p
+class="footer-slogan notranslate"
+translate="no"
+>
+One world. Every pet.
 </p>
 
 <div class="footer-links">
 
 <a
-href="index.html"
-data-i18n="common.footer.home"
->
-Home
-</a>
-
-<a
 href="issue-01.html"
-data-i18n="common.footer.latestIssue"
+id="footerEdition"
 >
-Latest Issue
-</a>
-
-<a
-href="special-offers.html"
-data-i18n="common.navigation.offers"
->
-Discounts
+Edition
 </a>
 
 <a
@@ -2329,6 +2540,41 @@ href="members-gallery.html"
 data-i18n="common.footer.coverStars"
 >
 Cover Stars
+</a>
+
+<a
+href="special-offers.html"
+id="footerDiscounts"
+>
+Discounts
+</a>
+
+<a
+href="pet-friendly-places.html"
+id="footerPlaces"
+>
+Pet-Friendly
+</a>
+
+<a
+href="pet-marketplace.html"
+data-i18n="common.navigation.marketplace"
+>
+Marketplace
+</a>
+
+<a
+href="pet-fashion.html"
+data-i18n="common.navigation.fashion"
+>
+Fashion
+</a>
+
+<a
+href="wellness.html"
+id="footerHealth"
+>
+Health
 </a>
 
 <a
@@ -2346,24 +2592,10 @@ Photos
 </a>
 
 <a
-href="pet-fashion.html"
-data-i18n="common.navigation.fashion"
+href="local-community.html"
+data-i18n="common.navigation.community"
 >
-Fashion
-</a>
-
-<a
-href="wellness.html"
-data-i18n="common.navigation.wellness"
->
-Wellness
-</a>
-
-<a
-href="pet-friendly-places.html"
-data-i18n="common.footer.places"
->
-Places
+Community
 </a>
 
 <a
@@ -2374,38 +2606,10 @@ Contests
 </a>
 
 <a
-href="local-community.html"
-data-i18n="common.navigation.community"
->
-Community
-</a>
-
-<a
 href="pets-in-need.html"
-data-i18n="common.navigation.rescue"
+id="footerHelp"
 >
-Rescue
-</a>
-
-<a
-href="pet-marketplace.html"
-data-i18n="common.navigation.marketplace"
->
-Marketplace
-</a>
-
-<a
-href="local-community.html"
-data-i18n="petsInNeed.footer.volunteers"
->
-Volunteer Network
-</a>
-
-<a
-href="club.html"
-data-i18n="common.footer.club"
->
-Club
+Help
 </a>
 
 <a
@@ -2413,6 +2617,20 @@ href="partners.html"
 data-i18n="common.footer.partners"
 >
 Partners
+</a>
+
+<a
+href="index.html"
+data-i18n="common.footer.home"
+>
+Home
+</a>
+
+<a
+href="club.html"
+data-i18n="common.footer.club"
+>
+Club
 </a>
 
 <a
@@ -2451,22 +2669,1253 @@ Admin
 <script src="/i18n/common.js?v=2"></script>
 <script src="/i18n/pets-in-need.js?v=2"></script>
 <script src="/i18n/engine.js?v=3"></script>
+<script src="/pd-accessibility.js?v=20260909-1"></script>
 
 <script>
 "use strict";
 
-const $=
-id=>
+const LANGUAGE_KEY =
+"pets_dogue_language";
+
+const $ =
+id =>
 document.getElementById(id);
 
-const sideMenu=
+const sideMenu =
 $("sideMenu");
 
-const menuOverlay=
+const menuOverlay =
 $("menuOverlay");
 
-const categoryNav=
+const categoryNav =
 $("categoryNav");
+
+const languageSelect =
+$("languageSelect");
+
+const speechStatus =
+$("speechStatus");
+
+let activeSpeechTarget =
+"";
+
+let speechMonitor =
+null;
+
+const CONTENT_UI = {
+
+en:{
+language:"LANGUAGE",
+edition:"Edition",
+discounts:"Discounts",
+places:"Pet-Friendly",
+health:"Health",
+help:"Help",
+heroHelp:"See Ways To Help",
+vetBadge:"VETERINARY SUPPORT",
+vetTitle:"Urgent Care & Veterinary Help",
+vetMeta:"Community posts needing medical support",
+vetDescription:"Find community posts about animals that need urgent veterinary care, temporary support or practical help.",
+adoptionBadge:"ADOPTION & REHOMING",
+adoptionTitle:"Looking For A Safe Home",
+adoptionMeta:"Responsible adoption and rehoming posts",
+adoptionDescription:"Discover community posts from animals seeking safe, responsible homes and connect through the PETS & DOGUE community.",
+volunteerBadge:"VOLUNTEER SUPPORT",
+volunteerTitle:"Rescue Volunteers",
+volunteerMeta:"Local volunteer, foster and practical help",
+volunteerDescription:"Find local requests for foster care, transport, dog walking, photography and other practical support for animals.",
+impactTitle:"Visibility Can Make A Difference",
+impactDescription:"PETS & DOGUE helps bring rescue, adoption and community-support posts into one visible space so people can discover where help is needed.",
+statOneTitle:"Visibility",
+statOneText:"Give urgent posts a place to be seen.",
+statTwoTitle:"Community",
+statTwoText:"Connect people who can help locally.",
+statThreeTitle:"Action",
+statThreeText:"Move from awareness to practical support.",
+communityTitle:"See Current Community Requests",
+communityDescription:"Open the Community section to find current local posts, lost and found pets, adoption requests, volunteers and other ways to help.",
+read:"Listen to this section",
+stop:"Stop reading",
+unsupported:"Text-to-speech is not supported by this browser."
+},
+
+uk:{
+language:"МОВА",
+edition:"Видання",
+discounts:"Знижки",
+places:"Місця для тварин",
+health:"Здоров’я",
+help:"Допомога",
+heroHelp:"Як допомогти",
+vetBadge:"ВЕТЕРИНАРНА ДОПОМОГА",
+vetTitle:"Термінова ветеринарна допомога",
+vetMeta:"Дописи спільноти про необхідність медичної допомоги",
+vetDescription:"Знаходьте дописи про тварин, яким потрібна термінова ветеринарна допомога, тимчасова підтримка або практична допомога.",
+adoptionBadge:"АДОПЦІЯ ТА ПРИЛАШТУВАННЯ",
+adoptionTitle:"У пошуках безпечного дому",
+adoptionMeta:"Відповідальна адопція та прилаштування",
+adoptionDescription:"Знаходьте дописи про тварин, які шукають безпечний і відповідальний дім, та зв’язуйтеся через спільноту PETS & DOGUE.",
+volunteerBadge:"ВОЛОНТЕРСЬКА ДОПОМОГА",
+volunteerTitle:"Волонтери для тварин",
+volunteerMeta:"Місцева допомога, перетримка та практична підтримка",
+volunteerDescription:"Знаходьте місцеві запити на перетримку, транспорт, вигул собак, фотографування та іншу практичну допомогу тваринам.",
+impactTitle:"Видимість може змінити ситуацію",
+impactDescription:"PETS & DOGUE допомагає зібрати дописи про порятунок, адопцію та допомогу спільноти в одному помітному просторі, щоб люди бачили, де потрібна допомога.",
+statOneTitle:"Видимість",
+statOneText:"Допомагаємо важливим дописам бути поміченими.",
+statTwoTitle:"Спільнота",
+statTwoText:"Об’єднуємо людей, які можуть допомогти поруч.",
+statThreeTitle:"Дія",
+statThreeText:"Перетворюємо увагу на практичну допомогу.",
+communityTitle:"Переглянути актуальні запити спільноти",
+communityDescription:"Відкрийте розділ Community, щоб знайти актуальні місцеві дописи, загублених і знайдених тварин, запити на адопцію, волонтерів та інші способи допомоги.",
+read:"Прослухати цей розділ",
+stop:"Зупинити читання",
+unsupported:"Ваш браузер не підтримує читання тексту вголос."
+},
+
+ru:{
+language:"ЯЗЫК",
+edition:"Издание",
+discounts:"Скидки",
+places:"Места с питомцами",
+health:"Здоровье",
+help:"Помощь",
+heroHelp:"Как помочь",
+vetBadge:"ВЕТЕРИНАРНАЯ ПОМОЩЬ",
+vetTitle:"Срочная ветеринарная помощь",
+vetMeta:"Публикации сообщества о необходимой медицинской помощи",
+vetDescription:"Находите публикации о животных, которым нужна срочная ветеринарная помощь, временная поддержка или практическая помощь.",
+adoptionBadge:"ПРИСТРОЙСТВО И НОВЫЙ ДОМ",
+adoptionTitle:"В поиске безопасного дома",
+adoptionMeta:"Ответственное пристройство животных",
+adoptionDescription:"Находите публикации о животных, которые ищут безопасный и ответственный дом, и связывайтесь через сообщество PETS & DOGUE.",
+volunteerBadge:"ПОМОЩЬ ВОЛОНТЁРОВ",
+volunteerTitle:"Волонтёры для животных",
+volunteerMeta:"Местная помощь, передержка и практическая поддержка",
+volunteerDescription:"Находите местные запросы на передержку, транспорт, выгул собак, фотографии и другую практическую помощь животным.",
+impactTitle:"Видимость может изменить ситуацию",
+impactDescription:"PETS & DOGUE помогает собрать публикации о спасении, пристройстве и помощи сообщества в одном заметном пространстве, чтобы люди могли увидеть, где нужна помощь.",
+statOneTitle:"Видимость",
+statOneText:"Помогаем важным публикациям быть замеченными.",
+statTwoTitle:"Сообщество",
+statTwoText:"Соединяем людей, которые могут помочь рядом.",
+statThreeTitle:"Действие",
+statThreeText:"Превращаем внимание в практическую помощь.",
+communityTitle:"Посмотреть актуальные запросы сообщества",
+communityDescription:"Откройте Community, чтобы увидеть актуальные местные публикации, потерянных и найденных животных, запросы на пристройство, волонтёров и другие способы помочь.",
+read:"Прослушать этот раздел",
+stop:"Остановить чтение",
+unsupported:"Ваш браузер не поддерживает чтение текста вслух."
+},
+
+fr:{
+language:"LANGUE",
+edition:"Édition",
+discounts:"Réductions",
+places:"Lieux pet-friendly",
+health:"Santé",
+help:"Aide",
+heroHelp:"Comment aider",
+vetBadge:"SOUTIEN VÉTÉRINAIRE",
+vetTitle:"Soins urgents et aide vétérinaire",
+vetMeta:"Publications communautaires nécessitant une aide médicale",
+vetDescription:"Trouvez des publications concernant des animaux ayant besoin de soins vétérinaires urgents, d’un soutien temporaire ou d’une aide pratique.",
+adoptionBadge:"ADOPTION & REPLACEMENT",
+adoptionTitle:"À la recherche d’un foyer sûr",
+adoptionMeta:"Adoption et placement responsables",
+adoptionDescription:"Découvrez des animaux recherchant un foyer sûr et responsable et entrez en contact via la communauté PETS & DOGUE.",
+volunteerBadge:"SOUTIEN BÉNÉVOLE",
+volunteerTitle:"Bénévoles pour le sauvetage",
+volunteerMeta:"Aide locale, accueil temporaire et soutien pratique",
+volunteerDescription:"Trouvez des demandes locales pour l’accueil, le transport, les promenades, la photographie et d’autres formes d’aide pratique.",
+impactTitle:"La visibilité peut faire la différence",
+impactDescription:"PETS & DOGUE rassemble les publications de sauvetage, d’adoption et d’aide communautaire afin que chacun puisse voir où une aide est nécessaire.",
+statOneTitle:"Visibilité",
+statOneText:"Donner aux publications urgentes une chance d’être vues.",
+statTwoTitle:"Communauté",
+statTwoText:"Mettre en relation les personnes pouvant aider localement.",
+statThreeTitle:"Action",
+statThreeText:"Transformer l’attention en aide concrète.",
+communityTitle:"Voir les demandes actuelles de la communauté",
+communityDescription:"Ouvrez Community pour découvrir les publications locales, les animaux perdus et retrouvés, les demandes d’adoption, les bénévoles et d’autres façons d’aider.",
+read:"Écouter cette section",
+stop:"Arrêter la lecture",
+unsupported:"La lecture à voix haute n’est pas prise en charge par ce navigateur."
+},
+
+de:{
+language:"SPRACHE",
+edition:"Edition",
+discounts:"Rabatte",
+places:"Tierfreundliche Orte",
+health:"Gesundheit",
+help:"Hilfe",
+heroHelp:"Möglichkeiten zu helfen",
+vetBadge:"TIERÄRZTLICHE HILFE",
+vetTitle:"Dringende Versorgung & tierärztliche Hilfe",
+vetMeta:"Community-Beiträge mit medizinischem Unterstützungsbedarf",
+vetDescription:"Finden Sie Beiträge über Tiere, die dringend tierärztliche Versorgung, vorübergehende Unterstützung oder praktische Hilfe benötigen.",
+adoptionBadge:"ADOPTION & VERMITTLUNG",
+adoptionTitle:"Auf der Suche nach einem sicheren Zuhause",
+adoptionMeta:"Verantwortungsvolle Adoption und Vermittlung",
+adoptionDescription:"Entdecken Sie Tiere, die ein sicheres und verantwortungsvolles Zuhause suchen, und vernetzen Sie sich über die PETS & DOGUE Community.",
+volunteerBadge:"FREIWILLIGENHILFE",
+volunteerTitle:"Helfer für Tierrettung",
+volunteerMeta:"Lokale Hilfe, Pflegestellen und praktische Unterstützung",
+volunteerDescription:"Finden Sie lokale Anfragen für Pflegestellen, Transport, Gassigehen, Fotografie und andere praktische Hilfe.",
+impactTitle:"Sichtbarkeit kann etwas verändern",
+impactDescription:"PETS & DOGUE bringt Beiträge zu Rettung, Adoption und Community-Hilfe an einem sichtbaren Ort zusammen, damit Menschen sehen können, wo Hilfe benötigt wird.",
+statOneTitle:"Sichtbarkeit",
+statOneText:"Dringenden Beiträgen Aufmerksamkeit geben.",
+statTwoTitle:"Community",
+statTwoText:"Menschen verbinden, die vor Ort helfen können.",
+statThreeTitle:"Handeln",
+statThreeText:"Aufmerksamkeit in praktische Hilfe verwandeln.",
+communityTitle:"Aktuelle Community-Anfragen ansehen",
+communityDescription:"Öffnen Sie Community, um aktuelle lokale Beiträge, vermisste und gefundene Tiere, Adoptionen, Freiwillige und weitere Hilfsmöglichkeiten zu entdecken.",
+read:"Diesen Abschnitt anhören",
+stop:"Vorlesen stoppen",
+unsupported:"Dieser Browser unterstützt keine Sprachausgabe."
+},
+
+es:{
+language:"IDIOMA",
+edition:"Edición",
+discounts:"Descuentos",
+places:"Lugares pet-friendly",
+health:"Salud",
+help:"Ayuda",
+heroHelp:"Formas de ayudar",
+vetBadge:"APOYO VETERINARIO",
+vetTitle:"Atención urgente y ayuda veterinaria",
+vetMeta:"Publicaciones comunitarias que necesitan apoyo médico",
+vetDescription:"Encuentra publicaciones sobre animales que necesitan atención veterinaria urgente, apoyo temporal o ayuda práctica.",
+adoptionBadge:"ADOPCIÓN Y REUBICACIÓN",
+adoptionTitle:"Buscando un hogar seguro",
+adoptionMeta:"Adopción y reubicación responsables",
+adoptionDescription:"Descubre animales que buscan hogares seguros y responsables y conecta a través de la comunidad PETS & DOGUE.",
+volunteerBadge:"APOYO VOLUNTARIO",
+volunteerTitle:"Voluntarios de rescate",
+volunteerMeta:"Ayuda local, acogida y apoyo práctico",
+volunteerDescription:"Encuentra solicitudes locales de acogida, transporte, paseos, fotografía y otras formas de ayuda práctica.",
+impactTitle:"La visibilidad puede marcar la diferencia",
+impactDescription:"PETS & DOGUE reúne publicaciones de rescate, adopción y ayuda comunitaria en un espacio visible para que las personas descubran dónde se necesita ayuda.",
+statOneTitle:"Visibilidad",
+statOneText:"Dar a las publicaciones urgentes un lugar donde ser vistas.",
+statTwoTitle:"Comunidad",
+statTwoText:"Conectar a personas que pueden ayudar localmente.",
+statThreeTitle:"Acción",
+statThreeText:"Convertir la atención en apoyo práctico.",
+communityTitle:"Ver solicitudes actuales de la comunidad",
+communityDescription:"Abre Community para encontrar publicaciones locales, mascotas perdidas y encontradas, adopciones, voluntarios y otras formas de ayudar.",
+read:"Escuchar esta sección",
+stop:"Detener lectura",
+unsupported:"Este navegador no admite lectura de texto en voz alta."
+},
+
+it:{
+language:"LINGUA",
+edition:"Edizione",
+discounts:"Sconti",
+places:"Luoghi pet-friendly",
+health:"Salute",
+help:"Aiuto",
+heroHelp:"Come aiutare",
+vetBadge:"SUPPORTO VETERINARIO",
+vetTitle:"Cure urgenti e aiuto veterinario",
+vetMeta:"Post della community che richiedono supporto medico",
+vetDescription:"Trova post su animali che hanno bisogno di cure veterinarie urgenti, supporto temporaneo o aiuto pratico.",
+adoptionBadge:"ADOZIONE E RICOLLOCAZIONE",
+adoptionTitle:"Alla ricerca di una casa sicura",
+adoptionMeta:"Adozione e ricollocazione responsabili",
+adoptionDescription:"Scopri animali che cercano una casa sicura e responsabile e mettiti in contatto tramite la community PETS & DOGUE.",
+volunteerBadge:"SUPPORTO VOLONTARI",
+volunteerTitle:"Volontari per il soccorso",
+volunteerMeta:"Aiuto locale, stallo e supporto pratico",
+volunteerDescription:"Trova richieste locali per stallo, trasporto, passeggiate, fotografia e altre forme di supporto pratico.",
+impactTitle:"La visibilità può fare la differenza",
+impactDescription:"PETS & DOGUE riunisce post su soccorso, adozione e aiuto della community in uno spazio visibile, così le persone possono capire dove serve aiuto.",
+statOneTitle:"Visibilità",
+statOneText:"Dare ai post urgenti uno spazio in cui essere visti.",
+statTwoTitle:"Community",
+statTwoText:"Mettere in contatto persone che possono aiutare localmente.",
+statThreeTitle:"Azione",
+statThreeText:"Trasformare l’attenzione in aiuto concreto.",
+communityTitle:"Guarda le richieste attuali della community",
+communityDescription:"Apri Community per trovare post locali, animali smarriti e ritrovati, richieste di adozione, volontari e altri modi per aiutare.",
+read:"Ascolta questa sezione",
+stop:"Interrompi lettura",
+unsupported:"Questo browser non supporta la lettura ad alta voce."
+},
+
+pt:{
+language:"IDIOMA",
+edition:"Edição",
+discounts:"Descontos",
+places:"Locais pet-friendly",
+health:"Saúde",
+help:"Ajuda",
+heroHelp:"Como ajudar",
+vetBadge:"APOIO VETERINÁRIO",
+vetTitle:"Cuidados urgentes e ajuda veterinária",
+vetMeta:"Publicações da comunidade que necessitam de apoio médico",
+vetDescription:"Encontre publicações sobre animais que precisam de cuidados veterinários urgentes, apoio temporário ou ajuda prática.",
+adoptionBadge:"ADOÇÃO E REALOJAMENTO",
+adoptionTitle:"À procura de um lar seguro",
+adoptionMeta:"Adoção e realojamento responsáveis",
+adoptionDescription:"Descubra animais que procuram lares seguros e responsáveis e estabeleça contacto através da comunidade PETS & DOGUE.",
+volunteerBadge:"APOIO DE VOLUNTÁRIOS",
+volunteerTitle:"Voluntários de resgate",
+volunteerMeta:"Ajuda local, acolhimento e apoio prático",
+volunteerDescription:"Encontre pedidos locais para acolhimento, transporte, passeios, fotografia e outras formas de apoio prático.",
+impactTitle:"A visibilidade pode fazer a diferença",
+impactDescription:"PETS & DOGUE reúne publicações de resgate, adoção e ajuda comunitária num espaço visível para que as pessoas descubram onde é necessária ajuda.",
+statOneTitle:"Visibilidade",
+statOneText:"Dar às publicações urgentes um lugar onde possam ser vistas.",
+statTwoTitle:"Comunidade",
+statTwoText:"Ligar pessoas que podem ajudar localmente.",
+statThreeTitle:"Ação",
+statThreeText:"Transformar atenção em apoio prático.",
+communityTitle:"Ver pedidos atuais da comunidade",
+communityDescription:"Abra Community para encontrar publicações locais, animais perdidos e encontrados, pedidos de adoção, voluntários e outras formas de ajudar.",
+read:"Ouvir esta secção",
+stop:"Parar leitura",
+unsupported:"Este navegador não suporta leitura de texto em voz alta."
+},
+
+nl:{
+language:"TAAL",
+edition:"Editie",
+discounts:"Kortingen",
+places:"Huisdiervriendelijke plekken",
+health:"Gezondheid",
+help:"Hulp",
+heroHelp:"Manieren om te helpen",
+vetBadge:"DIERGENEESKUNDIGE HULP",
+vetTitle:"Spoedzorg en veterinaire hulp",
+vetMeta:"Communityberichten die medische hulp nodig hebben",
+vetDescription:"Vind berichten over dieren die dringend veterinaire zorg, tijdelijke ondersteuning of praktische hulp nodig hebben.",
+adoptionBadge:"ADOPTIE & HERPLAATSING",
+adoptionTitle:"Op zoek naar een veilig thuis",
+adoptionMeta:"Verantwoorde adoptie en herplaatsing",
+adoptionDescription:"Ontdek dieren die een veilig en verantwoord thuis zoeken en kom in contact via de PETS & DOGUE-community.",
+volunteerBadge:"VRIJWILLIGERSONDERSTEUNING",
+volunteerTitle:"Vrijwilligers voor dierenhulp",
+volunteerMeta:"Lokale hulp, opvang en praktische ondersteuning",
+volunteerDescription:"Vind lokale verzoeken voor opvang, vervoer, honden uitlaten, fotografie en andere praktische hulp.",
+impactTitle:"Zichtbaarheid kan het verschil maken",
+impactDescription:"PETS & DOGUE brengt berichten over redding, adoptie en communityhulp samen op één zichtbare plek, zodat mensen kunnen ontdekken waar hulp nodig is.",
+statOneTitle:"Zichtbaarheid",
+statOneText:"Geef urgente berichten een plek om gezien te worden.",
+statTwoTitle:"Community",
+statTwoText:"Verbind mensen die lokaal kunnen helpen.",
+statThreeTitle:"Actie",
+statThreeText:"Zet aandacht om in praktische hulp.",
+communityTitle:"Bekijk actuele communityverzoeken",
+communityDescription:"Open Community voor lokale berichten, vermiste en gevonden dieren, adoptieverzoeken, vrijwilligers en andere manieren om te helpen.",
+read:"Deze sectie beluisteren",
+stop:"Voorlezen stoppen",
+unsupported:"Deze browser ondersteunt geen tekst-naar-spraak."
+},
+
+pl:{
+language:"JĘZYK",
+edition:"Edycja",
+discounts:"Rabaty",
+places:"Miejsca przyjazne zwierzętom",
+health:"Zdrowie",
+help:"Pomoc",
+heroHelp:"Jak pomóc",
+vetBadge:"POMOC WETERYNARYJNA",
+vetTitle:"Pilna opieka i pomoc weterynaryjna",
+vetMeta:"Posty społeczności wymagające wsparcia medycznego",
+vetDescription:"Znajdź posty o zwierzętach potrzebujących pilnej pomocy weterynaryjnej, tymczasowego wsparcia lub praktycznej pomocy.",
+adoptionBadge:"ADOPCJA I ODPOWIEDZIALNE PRZEKAZANIE",
+adoptionTitle:"W poszukiwaniu bezpiecznego domu",
+adoptionMeta:"Odpowiedzialna adopcja i znalezienie domu",
+adoptionDescription:"Poznaj zwierzęta szukające bezpiecznego i odpowiedzialnego domu i skontaktuj się przez społeczność PETS & DOGUE.",
+volunteerBadge:"POMOC WOLONTARIUSZY",
+volunteerTitle:"Wolontariusze dla zwierząt",
+volunteerMeta:"Lokalna pomoc, dom tymczasowy i praktyczne wsparcie",
+volunteerDescription:"Znajdź lokalne prośby o dom tymczasowy, transport, spacery, zdjęcia i inne formy praktycznej pomocy.",
+impactTitle:"Widoczność może coś zmienić",
+impactDescription:"PETS & DOGUE łączy posty o ratowaniu, adopcji i pomocy społeczności w jednym widocznym miejscu, aby łatwiej było zobaczyć, gdzie potrzebna jest pomoc.",
+statOneTitle:"Widoczność",
+statOneText:"Pomagamy pilnym postom zostać zauważonymi.",
+statTwoTitle:"Społeczność",
+statTwoText:"Łączymy ludzi, którzy mogą pomóc lokalnie.",
+statThreeTitle:"Działanie",
+statThreeText:"Zamieniamy uwagę w praktyczne wsparcie.",
+communityTitle:"Zobacz aktualne prośby społeczności",
+communityDescription:"Otwórz Community, aby znaleźć lokalne posty, zaginione i znalezione zwierzęta, adopcje, wolontariuszy i inne sposoby pomocy.",
+read:"Posłuchaj tej sekcji",
+stop:"Zatrzymaj czytanie",
+unsupported:"Ta przeglądarka nie obsługuje czytania tekstu na głos."
+},
+
+cs:{
+language:"JAZYK",
+edition:"Vydání",
+discounts:"Slevy",
+places:"Místa přátelská ke zvířatům",
+health:"Zdraví",
+help:"Pomoc",
+heroHelp:"Jak pomoci",
+vetBadge:"VETERINÁRNÍ POMOC",
+vetTitle:"Urgentní péče a veterinární pomoc",
+vetMeta:"Komunitní příspěvky vyžadující zdravotní pomoc",
+vetDescription:"Najděte příspěvky o zvířatech, která potřebují urgentní veterinární péči, dočasnou podporu nebo praktickou pomoc.",
+adoptionBadge:"ADOPCE A NOVÝ DOMOV",
+adoptionTitle:"Hledá bezpečný domov",
+adoptionMeta:"Odpovědná adopce a umístění",
+adoptionDescription:"Objevte zvířata hledající bezpečný a odpovědný domov a spojte se prostřednictvím komunity PETS & DOGUE.",
+volunteerBadge:"POMOC DOBROVOLNÍKŮ",
+volunteerTitle:"Dobrovolníci pro zvířata",
+volunteerMeta:"Místní pomoc, dočasná péče a praktická podpora",
+volunteerDescription:"Najděte místní žádosti o dočasnou péči, dopravu, venčení, fotografování a další praktickou pomoc.",
+impactTitle:"Viditelnost může něco změnit",
+impactDescription:"PETS & DOGUE spojuje příspěvky o záchraně, adopci a komunitní pomoci na jednom viditelném místě, aby lidé mohli zjistit, kde je pomoc potřeba.",
+statOneTitle:"Viditelnost",
+statOneText:"Pomáháme urgentním příspěvkům být vidět.",
+statTwoTitle:"Komunita",
+statTwoText:"Propojujeme lidi, kteří mohou pomoci místně.",
+statThreeTitle:"Akce",
+statThreeText:"Měníme pozornost v praktickou pomoc.",
+communityTitle:"Zobrazit aktuální žádosti komunity",
+communityDescription:"Otevřete Community a najděte místní příspěvky, ztracená a nalezená zvířata, adopce, dobrovolníky a další možnosti pomoci.",
+read:"Poslechnout tuto sekci",
+stop:"Zastavit čtení",
+unsupported:"Tento prohlížeč nepodporuje předčítání textu."
+},
+
+sk:{
+language:"JAZYK",
+edition:"Vydanie",
+discounts:"Zľavy",
+places:"Miesta priateľské k zvieratám",
+health:"Zdravie",
+help:"Pomoc",
+heroHelp:"Ako pomôcť",
+vetBadge:"VETERINÁRNA POMOC",
+vetTitle:"Urgentná starostlivosť a veterinárna pomoc",
+vetMeta:"Komunitné príspevky vyžadujúce zdravotnú pomoc",
+vetDescription:"Nájdite príspevky o zvieratách, ktoré potrebujú urgentnú veterinárnu starostlivosť, dočasnú podporu alebo praktickú pomoc.",
+adoptionBadge:"ADOPCIA A NOVÝ DOMOV",
+adoptionTitle:"Hľadá bezpečný domov",
+adoptionMeta:"Zodpovedná adopcia a umiestnenie",
+adoptionDescription:"Objavte zvieratá hľadajúce bezpečný a zodpovedný domov a spojte sa cez komunitu PETS & DOGUE.",
+volunteerBadge:"POMOC DOBROVOĽNÍKOV",
+volunteerTitle:"Dobrovoľníci pre zvieratá",
+volunteerMeta:"Miestna pomoc, dočasná starostlivosť a praktická podpora",
+volunteerDescription:"Nájdite miestne žiadosti o dočasnú starostlivosť, dopravu, venčenie, fotografovanie a inú praktickú pomoc.",
+impactTitle:"Viditeľnosť môže niečo zmeniť",
+impactDescription:"PETS & DOGUE spája príspevky o záchrane, adopcii a komunitnej pomoci na jednom viditeľnom mieste, aby ľudia mohli zistiť, kde je pomoc potrebná.",
+statOneTitle:"Viditeľnosť",
+statOneText:"Pomáhame urgentným príspevkom byť videné.",
+statTwoTitle:"Komunita",
+statTwoText:"Spájame ľudí, ktorí môžu pomôcť miestne.",
+statThreeTitle:"Akcia",
+statThreeText:"Meníme pozornosť na praktickú pomoc.",
+communityTitle:"Zobraziť aktuálne žiadosti komunity",
+communityDescription:"Otvorte Community a nájdite miestne príspevky, stratené a nájdené zvieratá, adopcie, dobrovoľníkov a ďalšie možnosti pomoci.",
+read:"Vypočuť túto sekciu",
+stop:"Zastaviť čítanie",
+unsupported:"Tento prehliadač nepodporuje čítanie textu nahlas."
+},
+
+hu:{
+language:"NYELV",
+edition:"Kiadás",
+discounts:"Kedvezmények",
+places:"Állatbarát helyek",
+health:"Egészség",
+help:"Segítség",
+heroHelp:"Hogyan segíthetsz",
+vetBadge:"ÁLLATORVOSI SEGÍTSÉG",
+vetTitle:"Sürgős ellátás és állatorvosi segítség",
+vetMeta:"Orvosi segítséget igénylő közösségi bejegyzések",
+vetDescription:"Találj bejegyzéseket sürgős állatorvosi ellátásra, ideiglenes támogatásra vagy gyakorlati segítségre szoruló állatokról.",
+adoptionBadge:"ÖRÖKBEFOGADÁS ÉS ÚJ OTTHON",
+adoptionTitle:"Biztonságos otthont keres",
+adoptionMeta:"Felelős örökbefogadás és elhelyezés",
+adoptionDescription:"Fedezz fel biztonságos és felelős otthont kereső állatokat, és lépj kapcsolatba a PETS & DOGUE közösségen keresztül.",
+volunteerBadge:"ÖNKÉNTES SEGÍTSÉG",
+volunteerTitle:"Állatmentő önkéntesek",
+volunteerMeta:"Helyi segítség, ideiglenes befogadás és gyakorlati támogatás",
+volunteerDescription:"Találj helyi kéréseket ideiglenes befogadásra, szállításra, kutyasétáltatásra, fotózásra és egyéb segítségre.",
+impactTitle:"A láthatóság változást hozhat",
+impactDescription:"A PETS & DOGUE egy látható helyre gyűjti az állatmentéssel, örökbefogadással és közösségi segítséggel kapcsolatos bejegyzéseket, hogy könnyebb legyen megtalálni, hol van szükség segítségre.",
+statOneTitle:"Láthatóság",
+statOneText:"Segítünk, hogy a sürgős bejegyzéseket észrevegyék.",
+statTwoTitle:"Közösség",
+statTwoText:"Összekötjük a helyben segíteni tudó embereket.",
+statThreeTitle:"Cselekvés",
+statThreeText:"A figyelmet gyakorlati segítséggé alakítjuk.",
+communityTitle:"Aktuális közösségi kérések",
+communityDescription:"Nyisd meg a Community részt helyi bejegyzésekért, elveszett és megtalált állatokért, örökbefogadásért, önkéntesekért és további segítségnyújtási lehetőségekért.",
+read:"Szakasz meghallgatása",
+stop:"Felolvasás leállítása",
+unsupported:"Ez a böngésző nem támogatja a szövegfelolvasást."
+},
+
+ro:{
+language:"LIMBĂ",
+edition:"Ediție",
+discounts:"Reduceri",
+places:"Locuri pet-friendly",
+health:"Sănătate",
+help:"Ajutor",
+heroHelp:"Cum poți ajuta",
+vetBadge:"AJUTOR VETERINAR",
+vetTitle:"Îngrijire urgentă și ajutor veterinar",
+vetMeta:"Postări comunitare care necesită sprijin medical",
+vetDescription:"Găsește postări despre animale care au nevoie de îngrijire veterinară urgentă, sprijin temporar sau ajutor practic.",
+adoptionBadge:"ADOPȚIE ȘI RELOCARE",
+adoptionTitle:"În căutarea unei case sigure",
+adoptionMeta:"Adopție și relocare responsabile",
+adoptionDescription:"Descoperă animale care caută un cămin sigur și responsabil și conectează-te prin comunitatea PETS & DOGUE.",
+volunteerBadge:"AJUTOR VOLUNTARI",
+volunteerTitle:"Voluntari pentru salvarea animalelor",
+volunteerMeta:"Ajutor local, găzduire temporară și sprijin practic",
+volunteerDescription:"Găsește solicitări locale pentru găzduire, transport, plimbarea câinilor, fotografie și alte forme de sprijin practic.",
+impactTitle:"Vizibilitatea poate face diferența",
+impactDescription:"PETS & DOGUE reunește postările despre salvare, adopție și ajutor comunitar într-un spațiu vizibil, astfel încât oamenii să descopere unde este nevoie de ajutor.",
+statOneTitle:"Vizibilitate",
+statOneText:"Oferim postărilor urgente șansa de a fi văzute.",
+statTwoTitle:"Comunitate",
+statTwoText:"Conectăm oamenii care pot ajuta local.",
+statThreeTitle:"Acțiune",
+statThreeText:"Transformăm atenția în ajutor practic.",
+communityTitle:"Vezi solicitările actuale ale comunității",
+communityDescription:"Deschide Community pentru postări locale, animale pierdute și găsite, adopții, voluntari și alte moduri de a ajuta.",
+read:"Ascultă această secțiune",
+stop:"Oprește citirea",
+unsupported:"Acest browser nu acceptă citirea textului cu voce tare."
+},
+
+bg:{
+language:"ЕЗИК",
+edition:"Издание",
+discounts:"Отстъпки",
+places:"Места за любимци",
+health:"Здраве",
+help:"Помощ",
+heroHelp:"Как да помогнете",
+vetBadge:"ВЕТЕРИНАРНА ПОМОЩ",
+vetTitle:"Спешна грижа и ветеринарна помощ",
+vetMeta:"Публикации от общността с нужда от медицинска помощ",
+vetDescription:"Намерете публикации за животни, които се нуждаят от спешна ветеринарна грижа, временна подкрепа или практическа помощ.",
+adoptionBadge:"ОСИНОВЯВАНЕ И НОВ ДОМ",
+adoptionTitle:"Търси безопасен дом",
+adoptionMeta:"Отговорно осиновяване и намиране на дом",
+adoptionDescription:"Открийте животни, които търсят безопасен и отговорен дом, и се свържете чрез общността PETS & DOGUE.",
+volunteerBadge:"ПОМОЩ ОТ ДОБРОВОЛЦИ",
+volunteerTitle:"Доброволци за животни",
+volunteerMeta:"Местна помощ, временен дом и практическа подкрепа",
+volunteerDescription:"Намерете местни заявки за временен дом, транспорт, разходки, фотографиране и друга практическа помощ.",
+impactTitle:"Видимостта може да промени нещо",
+impactDescription:"PETS & DOGUE събира публикации за спасяване, осиновяване и помощ от общността на едно видимо място, за да може хората да виждат къде е нужна помощ.",
+statOneTitle:"Видимост",
+statOneText:"Помагаме спешните публикации да бъдат забелязани.",
+statTwoTitle:"Общност",
+statTwoText:"Свързваме хора, които могат да помогнат на местно ниво.",
+statThreeTitle:"Действие",
+statThreeText:"Превръщаме вниманието в практическа помощ.",
+communityTitle:"Вижте актуалните заявки на общността",
+communityDescription:"Отворете Community за местни публикации, изгубени и намерени животни, осиновяване, доброволци и други начини да помогнете.",
+read:"Прослушайте този раздел",
+stop:"Спри четенето",
+unsupported:"Този браузър не поддържа четене на текст на глас."
+},
+
+el:{
+language:"ΓΛΩΣΣΑ",
+edition:"Έκδοση",
+discounts:"Εκπτώσεις",
+places:"Pet-friendly μέρη",
+health:"Υγεία",
+help:"Βοήθεια",
+heroHelp:"Τρόποι βοήθειας",
+vetBadge:"ΚΤΗΝΙΑΤΡΙΚΗ ΥΠΟΣΤΗΡΙΞΗ",
+vetTitle:"Επείγουσα φροντίδα και κτηνιατρική βοήθεια",
+vetMeta:"Αναρτήσεις κοινότητας που χρειάζονται ιατρική υποστήριξη",
+vetDescription:"Βρείτε αναρτήσεις για ζώα που χρειάζονται επείγουσα κτηνιατρική φροντίδα, προσωρινή υποστήριξη ή πρακτική βοήθεια.",
+adoptionBadge:"ΥΙΟΘΕΣΙΑ ΚΑΙ ΝΕΟ ΣΠΙΤΙ",
+adoptionTitle:"Αναζητά ασφαλές σπίτι",
+adoptionMeta:"Υπεύθυνη υιοθεσία και επανένταξη",
+adoptionDescription:"Ανακαλύψτε ζώα που αναζητούν ασφαλές και υπεύθυνο σπίτι και συνδεθείτε μέσω της κοινότητας PETS & DOGUE.",
+volunteerBadge:"ΕΘΕΛΟΝΤΙΚΗ ΥΠΟΣΤΗΡΙΞΗ",
+volunteerTitle:"Εθελοντές για ζώα",
+volunteerMeta:"Τοπική βοήθεια, φιλοξενία και πρακτική υποστήριξη",
+volunteerDescription:"Βρείτε τοπικά αιτήματα για φιλοξενία, μεταφορά, βόλτες σκύλων, φωτογράφιση και άλλη πρακτική βοήθεια.",
+impactTitle:"Η προβολή μπορεί να κάνει τη διαφορά",
+impactDescription:"Το PETS & DOGUE συγκεντρώνει αναρτήσεις διάσωσης, υιοθεσίας και κοινοτικής βοήθειας σε έναν ορατό χώρο, ώστε οι άνθρωποι να βλέπουν πού χρειάζεται βοήθεια.",
+statOneTitle:"Προβολή",
+statOneText:"Δίνουμε στις επείγουσες αναρτήσεις χώρο για να φανούν.",
+statTwoTitle:"Κοινότητα",
+statTwoText:"Συνδέουμε ανθρώπους που μπορούν να βοηθήσουν τοπικά.",
+statThreeTitle:"Δράση",
+statThreeText:"Μετατρέπουμε την προσοχή σε πρακτική υποστήριξη.",
+communityTitle:"Δείτε τα τρέχοντα αιτήματα της κοινότητας",
+communityDescription:"Ανοίξτε το Community για τοπικές αναρτήσεις, χαμένα και βρεμένα ζώα, υιοθεσίες, εθελοντές και άλλους τρόπους βοήθειας.",
+read:"Ακούστε αυτήν την ενότητα",
+stop:"Διακοπή ανάγνωσης",
+unsupported:"Αυτό το πρόγραμμα περιήγησης δεν υποστηρίζει ανάγνωση κειμένου."
+},
+
+sv:{
+language:"SPRÅK",
+edition:"Utgåva",
+discounts:"Rabatter",
+places:"Djurvänliga platser",
+health:"Hälsa",
+help:"Hjälp",
+heroHelp:"Sätt att hjälpa",
+vetBadge:"VETERINÄRT STÖD",
+vetTitle:"Akut vård och veterinärhjälp",
+vetMeta:"Communityinlägg som behöver medicinskt stöd",
+vetDescription:"Hitta inlägg om djur som behöver akut veterinärvård, tillfälligt stöd eller praktisk hjälp.",
+adoptionBadge:"ADOPTION OCH NYTT HEM",
+adoptionTitle:"Söker ett tryggt hem",
+adoptionMeta:"Ansvarsfull adoption och omplacering",
+adoptionDescription:"Upptäck djur som söker trygga och ansvarsfulla hem och ta kontakt genom PETS & DOGUE-communityn.",
+volunteerBadge:"VOLONTÄRSTÖD",
+volunteerTitle:"Volontärer för djur",
+volunteerMeta:"Lokal hjälp, jourhem och praktiskt stöd",
+volunteerDescription:"Hitta lokala önskemål om jourhem, transport, hundpromenader, fotografering och annan praktisk hjälp.",
+impactTitle:"Synlighet kan göra skillnad",
+impactDescription:"PETS & DOGUE samlar inlägg om räddning, adoption och communityhjälp på en synlig plats så att människor kan se var hjälp behövs.",
+statOneTitle:"Synlighet",
+statOneText:"Ge brådskande inlägg en plats där de kan ses.",
+statTwoTitle:"Community",
+statTwoText:"Koppla samman människor som kan hjälpa lokalt.",
+statThreeTitle:"Handling",
+statThreeText:"Gör uppmärksamhet till praktisk hjälp.",
+communityTitle:"Se aktuella communityförfrågningar",
+communityDescription:"Öppna Community för lokala inlägg, försvunna och hittade djur, adoptioner, volontärer och andra sätt att hjälpa.",
+read:"Lyssna på denna sektion",
+stop:"Stoppa uppläsning",
+unsupported:"Den här webbläsaren stöder inte textuppläsning."
+},
+
+da:{
+language:"SPROG",
+edition:"Udgave",
+discounts:"Rabatter",
+places:"Kæledyrsvenlige steder",
+health:"Sundhed",
+help:"Hjælp",
+heroHelp:"Måder at hjælpe",
+vetBadge:"DYRLÆGEHJÆLP",
+vetTitle:"Akut pleje og dyrlægehjælp",
+vetMeta:"Community-opslag med behov for medicinsk støtte",
+vetDescription:"Find opslag om dyr, der har brug for akut dyrlægehjælp, midlertidig støtte eller praktisk hjælp.",
+adoptionBadge:"ADOPTION OG NYT HJEM",
+adoptionTitle:"Søger et sikkert hjem",
+adoptionMeta:"Ansvarlig adoption og omplacering",
+adoptionDescription:"Opdag dyr, der søger sikre og ansvarlige hjem, og kom i kontakt gennem PETS & DOGUE-fællesskabet.",
+volunteerBadge:"FRIVILLIG HJÆLP",
+volunteerTitle:"Frivillige for dyr",
+volunteerMeta:"Lokal hjælp, plejehjem og praktisk støtte",
+volunteerDescription:"Find lokale anmodninger om plejehjem, transport, hundeluftning, fotografering og anden praktisk støtte.",
+impactTitle:"Synlighed kan gøre en forskel",
+impactDescription:"PETS & DOGUE samler opslag om redning, adoption og fællesskabshjælp ét synligt sted, så folk kan se, hvor der er brug for hjælp.",
+statOneTitle:"Synlighed",
+statOneText:"Giv akutte opslag et sted, hvor de kan blive set.",
+statTwoTitle:"Fællesskab",
+statTwoText:"Forbind mennesker, der kan hjælpe lokalt.",
+statThreeTitle:"Handling",
+statThreeText:"Omsæt opmærksomhed til praktisk hjælp.",
+communityTitle:"Se aktuelle fællesskabsforespørgsler",
+communityDescription:"Åbn Community for lokale opslag, forsvundne og fundne dyr, adoptioner, frivillige og andre måder at hjælpe.",
+read:"Lyt til dette afsnit",
+stop:"Stop oplæsning",
+unsupported:"Denne browser understøtter ikke tekst-til-tale."
+},
+
+no:{
+language:"SPRÅK",
+edition:"Utgave",
+discounts:"Rabatter",
+places:"Kjæledyrvennlige steder",
+health:"Helse",
+help:"Hjelp",
+heroHelp:"Måter å hjelpe",
+vetBadge:"VETERINÆR HJELP",
+vetTitle:"Akutt omsorg og veterinærhjelp",
+vetMeta:"Community-innlegg med behov for medisinsk støtte",
+vetDescription:"Finn innlegg om dyr som trenger akutt veterinærbehandling, midlertidig støtte eller praktisk hjelp.",
+adoptionBadge:"ADOPSJON OG NYTT HJEM",
+adoptionTitle:"Søker et trygt hjem",
+adoptionMeta:"Ansvarlig adopsjon og omplassering",
+adoptionDescription:"Oppdag dyr som søker trygge og ansvarlige hjem, og ta kontakt gjennom PETS & DOGUE-fellesskapet.",
+volunteerBadge:"FRIVILLIG HJELP",
+volunteerTitle:"Frivillige for dyr",
+volunteerMeta:"Lokal hjelp, fosterhjem og praktisk støtte",
+volunteerDescription:"Finn lokale forespørsler om fosterhjem, transport, hundelufting, fotografering og annen praktisk hjelp.",
+impactTitle:"Synlighet kan gjøre en forskjell",
+impactDescription:"PETS & DOGUE samler innlegg om redning, adopsjon og fellesskapshjelp på ett synlig sted, slik at folk kan se hvor hjelp trengs.",
+statOneTitle:"Synlighet",
+statOneText:"Gi hastesaker et sted der de kan bli sett.",
+statTwoTitle:"Fellesskap",
+statTwoText:"Koble mennesker som kan hjelpe lokalt.",
+statThreeTitle:"Handling",
+statThreeText:"Gjør oppmerksomhet om til praktisk hjelp.",
+communityTitle:"Se aktuelle forespørsler fra fellesskapet",
+communityDescription:"Åpne Community for lokale innlegg, savnede og funne dyr, adopsjoner, frivillige og andre måter å hjelpe.",
+read:"Lytt til denne delen",
+stop:"Stopp opplesning",
+unsupported:"Denne nettleseren støtter ikke tekst-til-tale."
+},
+
+fi:{
+language:"KIELI",
+edition:"Julkaisu",
+discounts:"Alennukset",
+places:"Lemmikkiystävälliset paikat",
+health:"Terveys",
+help:"Apua",
+heroHelp:"Tapoja auttaa",
+vetBadge:"ELÄINLÄÄKÄRIAPU",
+vetTitle:"Kiireellinen hoito ja eläinlääkäriapu",
+vetMeta:"Yhteisöjulkaisut, joissa tarvitaan lääketieteellistä tukea",
+vetDescription:"Löydä julkaisuja eläimistä, jotka tarvitsevat kiireellistä eläinlääkärinhoitoa, väliaikaista tukea tai käytännön apua.",
+adoptionBadge:"ADOPTIO JA UUSI KOTI",
+adoptionTitle:"Etsii turvallista kotia",
+adoptionMeta:"Vastuullinen adoptio ja uudelleensijoitus",
+adoptionDescription:"Tutustu turvallista ja vastuullista kotia etsiviin eläimiin ja ota yhteyttä PETS & DOGUE -yhteisön kautta.",
+volunteerBadge:"VAPAAEHTOISTUKI",
+volunteerTitle:"Eläinten auttajat",
+volunteerMeta:"Paikallinen apu, sijaiskoti ja käytännön tuki",
+volunteerDescription:"Löydä paikallisia pyyntöjä sijaiskodista, kuljetuksesta, koiran ulkoilutuksesta, valokuvauksesta ja muusta käytännön avusta.",
+impactTitle:"Näkyvyys voi vaikuttaa",
+impactDescription:"PETS & DOGUE kokoaa pelastus-, adoptio- ja yhteisöapua koskevat julkaisut näkyvään paikkaan, jotta ihmiset näkevät, missä apua tarvitaan.",
+statOneTitle:"Näkyvyys",
+statOneText:"Autamme kiireellisiä julkaisuja tulemaan nähdyiksi.",
+statTwoTitle:"Yhteisö",
+statTwoText:"Yhdistämme ihmiset, jotka voivat auttaa paikallisesti.",
+statThreeTitle:"Toiminta",
+statThreeText:"Muutamme huomion käytännön avuksi.",
+communityTitle:"Katso ajankohtaiset yhteisön avunpyynnöt",
+communityDescription:"Avaa Community nähdäksesi paikalliset julkaisut, kadonneet ja löytyneet eläimet, adoptiot, vapaaehtoiset ja muut tavat auttaa.",
+read:"Kuuntele tämä osio",
+stop:"Lopeta lukeminen",
+unsupported:"Tämä selain ei tue tekstin lukemista ääneen."
+},
+
+tr:{
+language:"DİL",
+edition:"Edisyon",
+discounts:"İndirimler",
+places:"Evcil hayvan dostu yerler",
+health:"Sağlık",
+help:"Yardım",
+heroHelp:"Yardım etme yolları",
+vetBadge:"VETERİNER DESTEĞİ",
+vetTitle:"Acil bakım ve veteriner yardımı",
+vetMeta:"Tıbbi desteğe ihtiyaç duyan topluluk gönderileri",
+vetDescription:"Acil veteriner bakımı, geçici destek veya pratik yardıma ihtiyaç duyan hayvanlarla ilgili gönderileri bulun.",
+adoptionBadge:"SAHİPLENDİRME VE YENİ YUVA",
+adoptionTitle:"Güvenli bir yuva arıyor",
+adoptionMeta:"Sorumlu sahiplendirme ve yeniden yuvalandırma",
+adoptionDescription:"Güvenli ve sorumlu yuvalar arayan hayvanları keşfedin ve PETS & DOGUE topluluğu üzerinden bağlantı kurun.",
+volunteerBadge:"GÖNÜLLÜ DESTEĞİ",
+volunteerTitle:"Hayvan kurtarma gönüllüleri",
+volunteerMeta:"Yerel yardım, geçici yuva ve pratik destek",
+volunteerDescription:"Geçici yuva, ulaşım, köpek gezdirme, fotoğraf çekimi ve diğer pratik destek taleplerini bulun.",
+impactTitle:"Görünürlük fark yaratabilir",
+impactDescription:"PETS & DOGUE kurtarma, sahiplendirme ve topluluk yardımı gönderilerini görünür tek bir alanda bir araya getirerek insanların nerede yardım gerektiğini görmesini sağlar.",
+statOneTitle:"Görünürlük",
+statOneText:"Acil gönderilerin görülmesini sağlayın.",
+statTwoTitle:"Topluluk",
+statTwoText:"Yerelde yardım edebilecek insanları buluşturun.",
+statThreeTitle:"Eylem",
+statThreeText:"Farkındalığı pratik desteğe dönüştürün.",
+communityTitle:"Güncel topluluk taleplerini görün",
+communityDescription:"Yerel gönderiler, kayıp ve bulunan hayvanlar, sahiplendirme talepleri, gönüllüler ve diğer yardım yolları için Community bölümünü açın.",
+read:"Bu bölümü dinle",
+stop:"Okumayı durdur",
+unsupported:"Bu tarayıcı metin okuma özelliğini desteklemiyor."
+},
+
+ar:{
+language:"اللغة",
+edition:"الإصدار",
+discounts:"الخصومات",
+places:"أماكن صديقة للحيوانات",
+health:"الصحة",
+help:"المساعدة",
+heroHelp:"طرق المساعدة",
+vetBadge:"الدعم البيطري",
+vetTitle:"الرعاية العاجلة والمساعدة البيطرية",
+vetMeta:"منشورات المجتمع التي تحتاج إلى دعم طبي",
+vetDescription:"اعثر على منشورات عن الحيوانات التي تحتاج إلى رعاية بيطرية عاجلة أو دعم مؤقت أو مساعدة عملية.",
+adoptionBadge:"التبني وإيجاد منزل جديد",
+adoptionTitle:"يبحث عن منزل آمن",
+adoptionMeta:"التبني المسؤول وإعادة التسكين",
+adoptionDescription:"اكتشف الحيوانات التي تبحث عن منازل آمنة ومسؤولة وتواصل عبر مجتمع PETS & DOGUE.",
+volunteerBadge:"دعم المتطوعين",
+volunteerTitle:"متطوعون لمساعدة الحيوانات",
+volunteerMeta:"مساعدة محلية واستضافة مؤقتة ودعم عملي",
+volunteerDescription:"اعثر على طلبات محلية للاستضافة المؤقتة والنقل وتمشية الكلاب والتصوير وغيرها من أشكال الدعم العملي.",
+impactTitle:"الظهور يمكن أن يصنع فرقًا",
+impactDescription:"يجمع PETS & DOGUE منشورات الإنقاذ والتبني ومساعدة المجتمع في مساحة واضحة حتى يتمكن الناس من معرفة أين توجد حاجة إلى المساعدة.",
+statOneTitle:"الظهور",
+statOneText:"منح المنشورات العاجلة فرصة للظهور.",
+statTwoTitle:"المجتمع",
+statTwoText:"ربط الأشخاص الذين يمكنهم المساعدة محليًا.",
+statThreeTitle:"العمل",
+statThreeText:"تحويل الاهتمام إلى دعم عملي.",
+communityTitle:"عرض طلبات المجتمع الحالية",
+communityDescription:"افتح Community للعثور على المنشورات المحلية والحيوانات المفقودة والموجودة وطلبات التبني والمتطوعين وطرق أخرى للمساعدة.",
+read:"استمع إلى هذا القسم",
+stop:"إيقاف القراءة",
+unsupported:"هذا المتصفح لا يدعم قراءة النص بصوت عالٍ."
+},
+
+hi:{
+language:"भाषा",
+edition:"संस्करण",
+discounts:"छूट",
+places:"पालतू-अनुकूल स्थान",
+health:"स्वास्थ्य",
+help:"मदद",
+heroHelp:"मदद करने के तरीके",
+vetBadge:"पशु चिकित्सा सहायता",
+vetTitle:"तत्काल देखभाल और पशु चिकित्सा सहायता",
+vetMeta:"चिकित्सा सहायता की ज़रूरत वाले समुदाय पोस्ट",
+vetDescription:"उन जानवरों के पोस्ट देखें जिन्हें तत्काल पशु चिकित्सा, अस्थायी सहायता या व्यावहारिक मदद की ज़रूरत है।",
+adoptionBadge:"गोद लेना और नया घर",
+adoptionTitle:"सुरक्षित घर की तलाश",
+adoptionMeta:"जिम्मेदार गोद लेना और नया घर ढूँढना",
+adoptionDescription:"सुरक्षित और जिम्मेदार घर खोज रहे जानवरों को देखें और PETS & DOGUE समुदाय के माध्यम से संपर्क करें।",
+volunteerBadge:"स्वयंसेवक सहायता",
+volunteerTitle:"पशु बचाव स्वयंसेवक",
+volunteerMeta:"स्थानीय मदद, अस्थायी घर और व्यावहारिक सहायता",
+volunteerDescription:"अस्थायी घर, परिवहन, कुत्ते घुमाने, फोटोग्राफी और अन्य व्यावहारिक सहायता के स्थानीय अनुरोध देखें।",
+impactTitle:"दिखाई देना बदलाव ला सकता है",
+impactDescription:"PETS & DOGUE बचाव, गोद लेने और सामुदायिक सहायता से जुड़े पोस्ट को एक दिखाई देने वाली जगह पर लाता है ताकि लोग जान सकें कि मदद कहाँ चाहिए।",
+statOneTitle:"दृश्यता",
+statOneText:"ज़रूरी पोस्ट को लोगों तक पहुँचने में मदद करें।",
+statTwoTitle:"समुदाय",
+statTwoText:"स्थानीय रूप से मदद कर सकने वाले लोगों को जोड़ें।",
+statThreeTitle:"कार्रवाई",
+statThreeText:"जागरूकता को व्यावहारिक सहायता में बदलें।",
+communityTitle:"मौजूदा समुदाय अनुरोध देखें",
+communityDescription:"स्थानीय पोस्ट, खोए और मिले जानवर, गोद लेने के अनुरोध, स्वयंसेवक और मदद के अन्य तरीके देखने के लिए Community खोलें।",
+read:"यह सेक्शन सुनें",
+stop:"पढ़ना बंद करें",
+unsupported:"यह ब्राउज़र टेक्स्ट को ज़ोर से पढ़ने का समर्थन नहीं करता।"
+}
+
+};
+
+function normalizeLanguage(value){
+
+if(!value){
+return "en";
+}
+
+let code =
+String(value)
+.trim()
+.toLowerCase();
+
+if(code.includes("-")){
+code =
+code.split("-")[0];
+}
+
+if(code.includes("_")){
+code =
+code.split("_")[0];
+}
+
+const aliases = {
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+return aliases[code] ||
+code ||
+"en";
+
+}
+
+function currentLanguage(){
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.getCurrentLanguage ===
+"function"
+){
+
+try{
+
+const value =
+window.PetsDogueLanguage
+.getCurrentLanguage();
+
+if(typeof value === "string"){
+
+return normalizeLanguage(
+value
+);
+
+}
+
+if(
+value &&
+typeof value === "object"
+){
+
+return normalizeLanguage(
+value.code ||
+value.language ||
+value.lang
+);
+
+}
+
+}catch(error){
+
+console.warn(
+"Unable to read current language.",
+error
+);
+
+}
+
+}
+
+return normalizeLanguage(
+localStorage.getItem(
+LANGUAGE_KEY
+) ||
+document.documentElement.lang ||
+"en"
+);
+
+}
+
+function words(){
+
+const language =
+currentLanguage();
+
+return CONTENT_UI[language] ||
+CONTENT_UI.en;
+
+}
+
+function setText(
+id,
+value
+){
+
+const element =
+$(id);
+
+if(element){
+element.textContent =
+value;
+}
+
+}
+
+function applyLocalContent(){
+
+const language =
+currentLanguage();
+
+const t =
+CONTENT_UI[language] ||
+CONTENT_UI.en;
+
+document.documentElement.lang =
+language;
+
+document.documentElement.dir =
+language === "ar"
+? "rtl"
+: "ltr";
+
+if(
+languageSelect &&
+CONTENT_UI[language]
+){
+
+languageSelect.value =
+language;
+
+}
+
+setText(
+"languageLabel",
+t.language
+);
+
+setText(
+"menuEdition",
+t.edition
+);
+
+setText(
+"navEdition",
+t.edition
+);
+
+setText(
+"footerEdition",
+t.edition
+);
+
+setText(
+"menuDiscounts",
+t.discounts
+);
+
+setText(
+"navDiscounts",
+t.discounts
+);
+
+setText(
+"footerDiscounts",
+t.discounts
+);
+
+setText(
+"menuPlaces",
+t.places
+);
+
+setText(
+"navPlaces",
+t.places
+);
+
+setText(
+"footerPlaces",
+t.places
+);
+
+setText(
+"menuHealth",
+t.health
+);
+
+setText(
+"navHealth",
+t.health
+);
+
+setText(
+"footerHealth",
+t.health
+);
+
+setText(
+"menuHelp",
+t.help
+);
+
+setText(
+"navHelp",
+t.help
+);
+
+setText(
+"footerHelp",
+t.help
+);
+
+setText(
+"heroHelpButton",
+t.heroHelp
+);
+
+setText(
+"vetBadge",
+t.vetBadge
+);
+
+setText(
+"vetTitle",
+t.vetTitle
+);
+
+setText(
+"vetMeta",
+t.vetMeta
+);
+
+setText(
+"vetDescription",
+t.vetDescription
+);
+
+setText(
+"adoptionBadge",
+t.adoptionBadge
+);
+
+setText(
+"adoptionTitle",
+t.adoptionTitle
+);
+
+setText(
+"adoptionMeta",
+t.adoptionMeta
+);
+
+setText(
+"adoptionDescription",
+t.adoptionDescription
+);
+
+setText(
+"volunteerBadge",
+t.volunteerBadge
+);
+
+setText(
+"volunteerTitle",
+t.volunteerTitle
+);
+
+setText(
+"volunteerMeta",
+t.volunteerMeta
+);
+
+setText(
+"volunteerDescription",
+t.volunteerDescription
+);
+
+setText(
+"impactTitle",
+t.impactTitle
+);
+
+setText(
+"impactDescription",
+t.impactDescription
+);
+
+setText(
+"statOneTitle",
+t.statOneTitle
+);
+
+setText(
+"statOneText",
+t.statOneText
+);
+
+setText(
+"statTwoTitle",
+t.statTwoTitle
+);
+
+setText(
+"statTwoText",
+t.statTwoText
+);
+
+setText(
+"statThreeTitle",
+t.statThreeTitle
+);
+
+setText(
+"statThreeText",
+t.statThreeText
+);
+
+setText(
+"communityTitle",
+t.communityTitle
+);
+
+setText(
+"communityDescription",
+t.communityDescription
+);
+
+updateSpeakerLabels();
+
+updateStructuredLanguage(
+language
+);
+
+}
+
+function updateStructuredLanguage(
+language
+){
+
+const script =
+$("structuredData");
+
+if(!script){
+return;
+}
+
+try{
+
+const data =
+JSON.parse(
+script.textContent
+);
+
+if(
+Array.isArray(
+data["@graph"]
+)
+){
+
+const page =
+data["@graph"].find(
+item =>
+item["@type"] ===
+"CollectionPage"
+);
+
+if(page){
+
+page.inLanguage =
+language;
+
+}
+
+}
+
+script.textContent =
+JSON.stringify(
+data
+);
+
+}catch(error){
+
+console.warn(
+"Unable to update structured data language.",
+error
+);
+
+}
+
+}
+
+/* =========================================================
+MENU
+========================================================= */
 
 function openMenu(){
 
@@ -2510,23 +3959,347 @@ document.body.classList.remove(
 
 }
 
-function keepActiveRubricVisible(){
+/* =========================================================
+SECTION NARRATION
+========================================================= */
 
-const active=
-categoryNav?.querySelector(
-".active"
-);
-
-if(
-!active
+function cleanSpeechText(
+element
 ){
 
+if(!element){
+return "";
+}
+
+const clone =
+element.cloneNode(
+true
+);
+
+clone
+.querySelectorAll(
+"button,a,script,style,.sr-only,[data-speech-ignore]"
+)
+.forEach(
+node =>
+node.remove()
+);
+
+return clone
+.textContent
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+function resetSpeechButtons(){
+
+document
+.querySelectorAll(
+".speak-button"
+)
+.forEach(
+button =>{
+
+button.classList.remove(
+"speaking"
+);
+
+}
+);
+
+activeSpeechTarget =
+"";
+
+updateSpeakerLabels();
+
+}
+
+function stopReading(){
+
+if(
+window.PetsDogueNarration &&
+typeof window.PetsDogueNarration.stop ===
+"function"
+){
+
+window.PetsDogueNarration.stop();
+
+}else if(
+"speechSynthesis" in window
+){
+
+window.speechSynthesis.cancel();
+
+}
+
+if(speechMonitor){
+
+clearInterval(
+speechMonitor
+);
+
+speechMonitor =
+null;
+
+}
+
+resetSpeechButtons();
+
+}
+
+function fallbackSpeak(
+text
+){
+
+if(
+!("speechSynthesis" in window) ||
+typeof SpeechSynthesisUtterance ===
+"undefined"
+){
+
+speechStatus.textContent =
+words().unsupported;
+
+return false;
+
+}
+
+window.speechSynthesis.cancel();
+
+const utterance =
+new SpeechSynthesisUtterance(
+text
+);
+
+const locales = {
+en:"en-GB",
+uk:"uk-UA",
+ru:"ru-RU",
+fr:"fr-FR",
+de:"de-DE",
+es:"es-ES",
+it:"it-IT",
+pt:"pt-PT",
+nl:"nl-NL",
+pl:"pl-PL",
+cs:"cs-CZ",
+sk:"sk-SK",
+hu:"hu-HU",
+ro:"ro-RO",
+bg:"bg-BG",
+el:"el-GR",
+sv:"sv-SE",
+da:"da-DK",
+no:"nb-NO",
+fi:"fi-FI",
+tr:"tr-TR",
+ar:"ar-SA",
+hi:"hi-IN"
+};
+
+utterance.lang =
+locales[
+currentLanguage()
+] ||
+"en-GB";
+
+utterance.onend =
+resetSpeechButtons;
+
+utterance.onerror =
+resetSpeechButtons;
+
+window.speechSynthesis.speak(
+utterance
+);
+
+return true;
+
+}
+
+function narrationIsSpeaking(){
+
+if(
+window.PetsDogueNarration &&
+typeof window.PetsDogueNarration.isSpeaking ===
+"function"
+){
+
+return window.PetsDogueNarration
+.isSpeaking();
+
+}
+
+return Boolean(
+window.speechSynthesis &&
+window.speechSynthesis.speaking
+);
+
+}
+
+function readSection(
+targetId,
+button
+){
+
+const target =
+$(targetId);
+
+if(!target){
+return;
+}
+
+if(
+activeSpeechTarget ===
+targetId &&
+narrationIsSpeaking()
+){
+
+stopReading();
 return;
 
 }
 
+stopReading();
+
+const text =
+cleanSpeechText(
+target
+);
+
+if(!text){
+return;
+}
+
+activeSpeechTarget =
+targetId;
+
+button.classList.add(
+"speaking"
+);
+
+updateSpeakerLabels();
+
+let started =
+false;
+
+if(
+window.PetsDogueNarration &&
+typeof window.PetsDogueNarration.speak ===
+"function"
+){
+
+window.PetsDogueNarration.speak(
+text
+);
+
+started =
+true;
+
+}else{
+
+started =
+fallbackSpeak(
+text
+);
+
+}
+
+if(!started){
+
+resetSpeechButtons();
+return;
+
+}
+
+speechMonitor =
+setInterval(
+()=>{
+
+if(
+!narrationIsSpeaking()
+){
+
+clearInterval(
+speechMonitor
+);
+
+speechMonitor =
+null;
+
+resetSpeechButtons();
+
+}
+
+},
+350
+);
+
+}
+
+function updateSpeakerLabels(){
+
+const t =
+words();
+
+document
+.querySelectorAll(
+".speak-button"
+)
+.forEach(
+button =>{
+
+const label =
+button.classList.contains(
+"speaking"
+)
+? t.stop
+: t.read;
+
+button.setAttribute(
+"aria-label",
+label
+);
+
+button.setAttribute(
+"title",
+label
+);
+
+}
+);
+
+}
+
+/* =========================================================
+ACTIVE NAV
+========================================================= */
+
+function keepActiveRubricVisible(){
+
+const active =
+categoryNav
+?.querySelector(
+".active"
+);
+
+if(!active){
+return;
+}
+
 requestAnimationFrame(
 ()=>{
+
+try{
+
+active.scrollIntoView({
+behavior:"instant",
+inline:"center",
+block:"nearest"
+});
+
+}catch{
 
 active.scrollIntoView({
 behavior:"auto",
@@ -2535,17 +4308,26 @@ block:"nearest"
 });
 
 }
+
+}
 );
 
 }
 
+/* =========================================================
+EVENTS
+========================================================= */
+
 document.addEventListener(
 "keydown",
-event=>{
+event =>{
 
 if(
-event.key==="Escape"
+event.key ===
+"Escape"
 ){
+
+stopReading();
 
 closeMenu();
 
@@ -2555,13 +4337,133 @@ closeMenu();
 );
 
 window.addEventListener(
-"load",
-keepActiveRubricVisible
+"storage",
+event =>{
+
+if(
+event.key ===
+LANGUAGE_KEY
+){
+
+stopReading();
+
+setTimeout(
+applyLocalContent,
+80
+);
+
+}
+
+}
+);
+
+window.addEventListener(
+"languagechange",
+()=>{
+
+stopReading();
+
+setTimeout(
+applyLocalContent,
+80
+);
+
+}
+);
+
+window.addEventListener(
+"petsdogue:languagechange",
+()=>{
+
+stopReading();
+
+setTimeout(
+applyLocalContent,
+80
+);
+
+}
 );
 
 window.addEventListener(
 "pageshow",
-keepActiveRubricVisible
+()=>{
+
+applyLocalContent();
+
+keepActiveRubricVisible();
+
+}
+);
+
+window.addEventListener(
+"beforeunload",
+stopReading
+);
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+applyLocalContent();
+
+keepActiveRubricVisible();
+
+languageSelect
+?.addEventListener(
+"change",
+()=>{
+
+stopReading();
+
+setTimeout(
+applyLocalContent,
+100
+);
+
+}
+);
+
+const observer =
+new MutationObserver(
+mutations =>{
+
+if(
+mutations.some(
+item =>
+item.type ===
+"attributes" &&
+(
+item.attributeName ===
+"lang" ||
+item.attributeName ===
+"dir"
+)
+)
+){
+
+setTimeout(
+applyLocalContent,
+80
+);
+
+}
+
+}
+);
+
+observer.observe(
+document.documentElement,
+{
+attributes:true,
+attributeFilter:[
+"lang",
+"dir"
+]
+}
+);
+
+}
 );
 
 </script>
