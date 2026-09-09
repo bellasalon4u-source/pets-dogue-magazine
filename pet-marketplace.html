@@ -7211,6 +7211,1360 @@ keepMarketplaceVisible();
 );
 
 </script>
+</script>
+
+<script>
+"use strict";
+
+/* =========================================================
+PETS & DOGUE — SCOPED ACCESSIBILITY NARRATION
+Each marketplace topic / listing can be read separately.
+The selected PETS & DOGUE language is used automatically.
+========================================================= */
+
+(function(){
+
+const $ =
+id =>
+document.getElementById(id);
+
+function currentSpeechLanguage(){
+
+const aliases = {
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+let language =
+"en";
+
+try{
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.getCurrentLanguage ===
+"function"
+){
+
+const value =
+window.PetsDogueLanguage.getCurrentLanguage();
+
+language =
+typeof value === "string"
+? value
+: value?.code ||
+value?.language ||
+value?.lang ||
+"en";
+
+}else{
+
+language =
+localStorage.getItem(
+"pets_dogue_language"
+) ||
+document.documentElement.lang ||
+"en";
+
+}
+
+}catch(error){
+
+language =
+document.documentElement.lang ||
+"en";
+
+}
+
+language =
+String(language)
+.trim()
+.toLowerCase()
+.split("-")[0]
+.split("_")[0];
+
+return aliases[language] ||
+language ||
+"en";
+
+}
+
+
+const SPEECH_LABELS = {
+
+en:"Listen to this section",
+
+uk:"Прослухати цей розділ",
+
+ru:"Прослушать этот раздел",
+
+fr:"Écouter cette section",
+
+de:"Diesen Abschnitt anhören",
+
+es:"Escuchar esta sección",
+
+it:"Ascolta questa sezione",
+
+pt:"Ouvir esta secção",
+
+nl:"Luister naar dit gedeelte",
+
+pl:"Posłuchaj tej sekcji",
+
+cs:"Poslechnout tuto sekci",
+
+sk:"Vypočuť túto sekciu",
+
+hu:"Szakasz meghallgatása",
+
+ro:"Ascultă această secțiune",
+
+bg:"Прослушай този раздел",
+
+el:"Ακούστε αυτή την ενότητα",
+
+sv:"Lyssna på detta avsnitt",
+
+da:"Lyt til dette afsnit",
+
+no:"Lytt til denne delen",
+
+fi:"Kuuntele tämä osio",
+
+tr:"Bu bölümü dinle",
+
+ar:"استمع إلى هذا القسم",
+
+hi:"इस अनुभाग को सुनें"
+
+};
+
+
+function speechLabel(){
+
+return (
+SPEECH_LABELS[
+currentSpeechLanguage()
+] ||
+SPEECH_LABELS.en
+);
+
+}
+
+
+function createSpeechButton(
+className =
+""
+){
+
+const button =
+document.createElement(
+"button"
+);
+
+button.type =
+"button";
+
+button.className =
+"pd-section-speech " +
+className;
+
+button.setAttribute(
+"data-pd-section-speech",
+""
+);
+
+button.setAttribute(
+"data-pd-speech-ignore",
+""
+);
+
+button.setAttribute(
+"aria-label",
+speechLabel()
+);
+
+button.title =
+speechLabel();
+
+button.innerHTML =
+`
+<svg
+viewBox="0 0 24 24"
+aria-hidden="true"
+focusable="false"
+>
+<path
+d="M5 9v6h4l5 4V5L9 9H5Z"
+></path>
+<path
+d="M17 8.5c1.4 1.8 1.4 5.2 0 7"
+></path>
+<path
+d="M19.5 6c3 3.4 3 8.6 0 12"
+></path>
+</svg>
+`;
+
+return button;
+
+}
+
+
+function cleanSpeechText(
+element
+){
+
+if(
+!element
+){
+
+return "";
+
+}
+
+const clone =
+element.cloneNode(
+true
+);
+
+clone
+.querySelectorAll(
+[
+"script",
+"style",
+"button",
+"input",
+"select",
+"textarea",
+"svg",
+"[hidden]",
+"[aria-hidden='true']",
+"[data-pd-speech-ignore]",
+".pd-section-speech"
+].join(",")
+)
+.forEach(
+item =>
+item.remove()
+);
+
+clone
+.querySelectorAll(
+"[style]"
+)
+.forEach(
+item =>{
+
+const style =
+String(
+item.getAttribute(
+"style"
+) ||
+""
+)
+.toLowerCase();
+
+if(
+style.includes(
+"display: none"
+) ||
+style.includes(
+"display:none"
+)
+){
+
+item.remove();
+
+}
+
+}
+);
+
+return String(
+clone.textContent ||
+""
+)
+.replace(
+/\s+/g,
+" "
+)
+.trim();
+
+}
+
+
+function nativeSpeak(
+text
+){
+
+if(
+!(
+"speechSynthesis" in window
+) ||
+!(
+"SpeechSynthesisUtterance" in window
+)
+){
+
+return;
+
+}
+
+window.speechSynthesis.cancel();
+
+const utterance =
+new SpeechSynthesisUtterance(
+text
+);
+
+const language =
+currentSpeechLanguage();
+
+const localeMap = {
+
+en:"en-GB",
+uk:"uk-UA",
+ru:"ru-RU",
+fr:"fr-FR",
+de:"de-DE",
+es:"es-ES",
+it:"it-IT",
+pt:"pt-PT",
+nl:"nl-NL",
+pl:"pl-PL",
+cs:"cs-CZ",
+sk:"sk-SK",
+hu:"hu-HU",
+ro:"ro-RO",
+bg:"bg-BG",
+el:"el-GR",
+sv:"sv-SE",
+da:"da-DK",
+no:"nb-NO",
+fi:"fi-FI",
+tr:"tr-TR",
+ar:"ar-SA",
+hi:"hi-IN"
+
+};
+
+utterance.lang =
+localeMap[
+language
+] ||
+"en-GB";
+
+window.speechSynthesis.speak(
+utterance
+);
+
+}
+
+
+function stopCurrentSpeech(){
+
+if(
+window.PetsDogueNarration &&
+typeof window.PetsDogueNarration.stop ===
+"function"
+){
+
+window.PetsDogueNarration.stop();
+
+}
+
+if(
+"speechSynthesis" in window
+){
+
+window.speechSynthesis.cancel();
+
+}
+
+document
+.querySelectorAll(
+"[data-pd-section-speech]"
+)
+.forEach(
+button =>{
+
+button.classList.remove(
+"is-reading"
+);
+
+button.removeAttribute(
+"data-reading"
+);
+
+}
+);
+
+}
+
+
+function isSpeaking(){
+
+if(
+window.PetsDogueNarration &&
+typeof window.PetsDogueNarration.isSpeaking ===
+"function"
+){
+
+return Boolean(
+window.PetsDogueNarration.isSpeaking()
+);
+
+}
+
+return Boolean(
+window.speechSynthesis &&
+window.speechSynthesis.speaking
+);
+
+}
+
+
+function speakElement(
+button,
+element
+){
+
+if(
+!button ||
+!element
+){
+
+return;
+
+}
+
+if(
+button.dataset.reading ===
+"true" &&
+isSpeaking()
+){
+
+stopCurrentSpeech();
+
+return;
+
+}
+
+stopCurrentSpeech();
+
+const text =
+cleanSpeechText(
+element
+);
+
+if(
+!text
+){
+
+return;
+
+}
+
+button.dataset.reading =
+"true";
+
+button.classList.add(
+"is-reading"
+);
+
+if(
+window.PetsDogueNarration &&
+typeof window.PetsDogueNarration.speak ===
+"function"
+){
+
+window.PetsDogueNarration.speak(
+text
+);
+
+}else{
+
+nativeSpeak(
+text
+);
+
+}
+
+}
+
+
+function addIntroSpeaker(){
+
+const intro =
+document.querySelector(
+".market-intro"
+);
+
+if(
+!intro ||
+intro.querySelector(
+".pd-intro-speech"
+)
+){
+
+return;
+
+}
+
+const button =
+createSpeechButton(
+"pd-intro-speech"
+);
+
+button.addEventListener(
+"click",
+event =>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+speakElement(
+button,
+intro
+);
+
+}
+);
+
+intro.appendChild(
+button
+);
+
+}
+
+
+function addSectionSpeaker(
+heading,
+content
+){
+
+if(
+!heading ||
+!content
+){
+
+return;
+
+}
+
+if(
+heading.parentElement
+?.querySelector(
+":scope > .pd-section-speech"
+)
+){
+
+return;
+
+}
+
+const button =
+createSpeechButton(
+"pd-heading-speech"
+);
+
+button.addEventListener(
+"click",
+event =>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+const container =
+document.createElement(
+"div"
+);
+
+container.appendChild(
+heading.cloneNode(
+true
+)
+);
+
+container.appendChild(
+content.cloneNode(
+true
+)
+);
+
+speakElement(
+button,
+container
+);
+
+}
+);
+
+heading.parentElement
+?.appendChild(
+button
+);
+
+}
+
+
+function addBrowseSpeaker(){
+
+const browseGrid =
+document.querySelector(
+".browse-grid"
+);
+
+if(
+!browseGrid
+){
+
+return;
+
+}
+
+const heading =
+browseGrid
+.previousElementSibling;
+
+if(
+!heading ||
+!heading.classList.contains(
+"section-head"
+)
+){
+
+return;
+
+}
+
+if(
+heading.querySelector(
+".pd-heading-speech"
+)
+){
+
+return;
+
+}
+
+const button =
+createSpeechButton(
+"pd-heading-speech"
+);
+
+button.addEventListener(
+"click",
+event =>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+const wrapper =
+document.createElement(
+"div"
+);
+
+wrapper.appendChild(
+heading.cloneNode(
+true
+)
+);
+
+wrapper.appendChild(
+browseGrid.cloneNode(
+true
+)
+);
+
+speakElement(
+button,
+wrapper
+);
+
+}
+);
+
+heading.appendChild(
+button
+);
+
+}
+
+
+function addListingsSpeaker(){
+
+const listingGrid =
+$("listingGrid");
+
+if(
+!listingGrid
+){
+
+return;
+
+}
+
+const heading =
+document.querySelector(
+".listings-head"
+);
+
+if(
+!heading ||
+heading.querySelector(
+".pd-heading-speech"
+)
+){
+
+return;
+
+}
+
+const button =
+createSpeechButton(
+"pd-heading-speech"
+);
+
+button.addEventListener(
+"click",
+event =>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+const wrapper =
+document.createElement(
+"div"
+);
+
+wrapper.appendChild(
+heading.cloneNode(
+true
+)
+);
+
+const visibleListings =
+document.createElement(
+"div"
+);
+
+document
+.querySelectorAll(
+".listing-card"
+)
+.forEach(
+card =>{
+
+if(
+card.style.display !==
+"none"
+){
+
+visibleListings.appendChild(
+card.cloneNode(
+true
+)
+);
+
+}
+
+}
+);
+
+wrapper.appendChild(
+visibleListings
+);
+
+speakElement(
+button,
+wrapper
+);
+
+}
+);
+
+heading.appendChild(
+button
+);
+
+}
+
+
+function addListingSpeakers(){
+
+document
+.querySelectorAll(
+".listing-card"
+)
+.forEach(
+card =>{
+
+if(
+card.querySelector(
+".pd-listing-speech"
+)
+){
+
+return;
+
+}
+
+const listingCopy =
+card.querySelector(
+".listing-copy"
+);
+
+if(
+!listingCopy
+){
+
+return;
+
+}
+
+const button =
+createSpeechButton(
+"pd-listing-speech"
+);
+
+button.addEventListener(
+"click",
+event =>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+speakElement(
+button,
+card
+);
+
+}
+);
+
+listingCopy.appendChild(
+button
+);
+
+}
+);
+
+}
+
+
+function addPublishSpeaker(){
+
+const section =
+document.querySelector(
+".publish-strip"
+);
+
+if(
+!section ||
+section.querySelector(
+".pd-publish-speech"
+)
+){
+
+return;
+
+}
+
+const button =
+createSpeechButton(
+"pd-publish-speech"
+);
+
+button.addEventListener(
+"click",
+event =>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+speakElement(
+button,
+section
+);
+
+}
+);
+
+section.insertBefore(
+button,
+section.querySelector(
+".publish-main-btn"
+)
+);
+
+}
+
+
+function addDetailSpeaker(){
+
+const modal =
+$("detailsModal");
+
+if(
+!modal ||
+modal.querySelector(
+".pd-detail-speech"
+)
+){
+
+return;
+
+}
+
+const sheet =
+modal.querySelector(
+".modal-sheet"
+);
+
+if(
+!sheet
+){
+
+return;
+
+}
+
+const button =
+createSpeechButton(
+"pd-detail-speech"
+);
+
+button.addEventListener(
+"click",
+event =>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+speakElement(
+button,
+sheet
+);
+
+}
+);
+
+const closeButton =
+sheet.querySelector(
+".modal-close"
+);
+
+if(
+closeButton
+){
+
+closeButton.insertAdjacentElement(
+"afterend",
+button
+);
+
+}else{
+
+sheet.prepend(
+button
+);
+
+}
+
+}
+
+
+function refreshSpeechLabels(){
+
+const label =
+speechLabel();
+
+document
+.querySelectorAll(
+"[data-pd-section-speech]"
+)
+.forEach(
+button =>{
+
+button.setAttribute(
+"aria-label",
+label
+);
+
+button.title =
+label;
+
+}
+);
+
+}
+
+
+function addStyles(){
+
+if(
+document.getElementById(
+"pdMarketplaceSpeechStyles"
+)
+){
+
+return;
+
+}
+
+const style =
+document.createElement(
+"style"
+);
+
+style.id =
+"pdMarketplaceSpeechStyles";
+
+style.textContent =
+`
+
+.pd-section-speech{
+width:42px;
+height:42px;
+min-width:42px;
+border:1px solid #111;
+border-radius:50%;
+background:#fff;
+color:#111;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:
+transform .18s ease,
+background .18s ease,
+color .18s ease;
+z-index:12;
+}
+
+.pd-section-speech:hover{
+transform:scale(1.05);
+}
+
+.pd-section-speech.is-reading{
+background:#111;
+color:#fff;
+}
+
+.pd-section-speech svg{
+width:21px;
+height:21px;
+fill:currentColor;
+stroke:currentColor;
+stroke-width:1.6;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+.market-intro{
+position:relative;
+}
+
+.pd-intro-speech{
+position:absolute;
+right:0;
+top:0;
+}
+
+html[dir="rtl"] .pd-intro-speech{
+right:auto;
+left:0;
+}
+
+.section-head{
+position:relative;
+padding-right:52px;
+}
+
+html[dir="rtl"] .section-head{
+padding-right:0;
+padding-left:52px;
+}
+
+.pd-heading-speech{
+position:absolute;
+right:0;
+bottom:0;
+}
+
+html[dir="rtl"] .pd-heading-speech{
+right:auto;
+left:0;
+}
+
+.listing-copy{
+position:relative;
+padding-right:53px;
+}
+
+html[dir="rtl"] .listing-copy{
+padding-right:4px;
+padding-left:53px;
+}
+
+.pd-listing-speech{
+position:absolute;
+right:4px;
+top:8px;
+width:41px;
+height:41px;
+min-width:41px;
+}
+
+html[dir="rtl"] .pd-listing-speech{
+right:auto;
+left:4px;
+}
+
+.publish-strip{
+position:relative;
+}
+
+.pd-publish-speech{
+margin-top:17px;
+background:#fff;
+color:#111;
+border-color:#fff;
+}
+
+.pd-publish-speech.is-reading{
+background:var(--gold-light);
+color:#111;
+}
+
+.pd-detail-speech{
+margin-top:12px;
+margin-left:auto;
+display:flex;
+}
+
+html[dir="rtl"] .pd-detail-speech{
+margin-left:0;
+margin-right:auto;
+}
+
+.pd-section-speech:focus-visible{
+outline:3px solid var(--green);
+outline-offset:3px;
+}
+
+@media(max-width:720px){
+
+.pd-intro-speech{
+top:2px;
+right:2px;
+}
+
+html[dir="rtl"] .pd-intro-speech{
+right:auto;
+left:2px;
+}
+
+.market-intro{
+padding-right:50px;
+}
+
+html[dir="rtl"] .market-intro{
+padding-right:0;
+padding-left:50px;
+}
+
+.section-head{
+padding-right:48px;
+}
+
+html[dir="rtl"] .section-head{
+padding-right:0;
+padding-left:48px;
+}
+
+.pd-heading-speech{
+width:39px;
+height:39px;
+min-width:39px;
+}
+
+.listing-copy{
+padding-right:47px;
+}
+
+html[dir="rtl"] .listing-copy{
+padding-right:4px;
+padding-left:47px;
+}
+
+.pd-listing-speech{
+width:38px;
+height:38px;
+min-width:38px;
+}
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+.pd-section-speech{
+transition:none;
+}
+
+}
+
+`;
+
+document.head.appendChild(
+style
+);
+
+}
+
+
+function buildMarketplaceNarration(){
+
+addStyles();
+
+addIntroSpeaker();
+
+addBrowseSpeaker();
+
+addListingsSpeaker();
+
+addListingSpeakers();
+
+addPublishSpeaker();
+
+addDetailSpeaker();
+
+refreshSpeechLabels();
+
+}
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+buildMarketplaceNarration();
+
+}
+);
+
+
+window.addEventListener(
+"pageshow",
+()=>{
+
+buildMarketplaceNarration();
+
+refreshSpeechLabels();
+
+}
+);
+
+
+window.addEventListener(
+"languagechange",
+()=>{
+
+setTimeout(
+refreshSpeechLabels,
+0
+);
+
+}
+);
+
+
+window.addEventListener(
+"petsdogue:languagechange",
+()=>{
+
+setTimeout(
+refreshSpeechLabels,
+0
+);
+
+}
+);
+
+
+window.addEventListener(
+"storage",
+event =>{
+
+if(
+event.key ===
+"pets_dogue_language"
+){
+
+setTimeout(
+refreshSpeechLabels,
+0
+);
+
+}
+
+}
+);
+
+
+const observer =
+new MutationObserver(
+()=>{
+
+addListingSpeakers();
+
+refreshSpeechLabels();
+
+}
+);
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+const grid =
+$("listingGrid");
+
+if(
+grid
+){
+
+observer.observe(
+grid,
+{
+childList:true,
+subtree:true
+}
+);
+
+}
+
+}
+);
+
+})();
+</script>
+
+<script src="/pd-accessibility.js?v=20260909-marketplace-sections-1"></script>
 
 </body>
 </html>
