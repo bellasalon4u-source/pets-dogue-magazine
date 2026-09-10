@@ -15,7 +15,7 @@ Pet Cover Stars &amp; Cover Star Voting | PETS &amp; DOGUE
 <meta
 id="pageDescription"
 name="description"
-content="Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE magazine cover."
+content="Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE cover."
 >
 
 <meta
@@ -82,7 +82,7 @@ content="Pet Cover Stars & Cover Star Voting | PETS & DOGUE"
 <meta
 id="ogDescription"
 property="og:description"
-content="Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE magazine cover."
+content="Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE cover."
 >
 
 <meta
@@ -97,7 +97,7 @@ content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
 
 <meta
 property="og:image:alt"
-content="PETS & DOGUE magazine Cover Star"
+content="PETS & DOGUE Cover Star"
 >
 
 <meta
@@ -119,7 +119,7 @@ content="Pet Cover Stars & Cover Star Voting | PETS & DOGUE"
 <meta
 id="twitterDescription"
 name="twitter:description"
-content="Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE magazine cover."
+content="Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE cover."
 >
 
 <meta
@@ -141,14 +141,16 @@ content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
       "@type":"Organization",
       "@id":"https://www.petsanddogue.com/#organization",
       "name":"PETS & DOGUE",
-      "url":"https://www.petsanddogue.com/"
+      "url":"https://www.petsanddogue.com/",
+      "description":"Digital lifestyle platform for pets and the people who love them.",
+      "slogan":"One world. Every pet."
     },
     {
       "@type":"CollectionPage",
       "@id":"https://www.petsanddogue.com/members-gallery.html#webpage",
       "url":"https://www.petsanddogue.com/members-gallery.html",
       "name":"Pet Cover Stars & Cover Star Voting | PETS & DOGUE",
-      "description":"Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE magazine cover.",
+      "description":"Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE cover.",
       "isPartOf":{
         "@id":"https://www.petsanddogue.com/#website"
       },
@@ -403,17 +405,18 @@ background:linear-gradient(90deg,#8d6012,#f0d47a,#916113);
 }
 
 /* =========================================================
-SIDE MENU
+UNIFIED SIDE MENU
 ========================================================= */
 
 .menu-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.78);
 z-index:9000;
+background:rgba(0,0,0,.68);
+backdrop-filter:blur(3px);
 opacity:0;
 visibility:hidden;
-transition:.25s;
+transition:.22s;
 }
 
 .menu-overlay.show{
@@ -425,13 +428,18 @@ visibility:visible;
 position:fixed;
 left:0;
 top:0;
-bottom:0;
 z-index:9100;
-width:min(550px,88vw);
-background:#f8f5ee;
-transform:translateX(-103%);
-transition:.28s ease;
-overflow:auto;
+width:min(78vw,390px);
+min-width:286px;
+height:100dvh;
+background:#f7f4ed;
+color:#111;
+transform:translateX(-102%);
+transition:transform .24s ease;
+box-shadow:20px 0 55px rgba(0,0,0,.28);
+overflow:hidden;
+display:flex;
+flex-direction:column;
 }
 
 .side-menu.open{
@@ -439,77 +447,142 @@ transform:translateX(0);
 }
 
 .side-menu-head{
-position:sticky;
-top:0;
-z-index:4;
-height:115px;
-background:#080808;
+height:86px;
+flex:none;
+background:#070707;
 color:#fff;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:20px 25px;
+padding:0 17px;
 }
 
 .side-menu-head h2{
 font-family:var(--serif);
-font-size:44px;
+font-size:31px;
+line-height:1;
 font-weight:400;
 }
 
 .close-menu{
-width:55px;
-height:55px;
-border:0;
+width:43px;
+height:43px;
+border:1px solid #555;
 border-radius:50%;
+background:transparent;
+color:#fff;
+font-size:27px;
+line-height:1;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.side-menu-scroll{
+overflow-y:auto;
+padding:12px 11px 24px;
+}
+
+.side-account-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-bottom:12px;
+}
+
+.side-account-button{
+height:48px;
+border-radius:999px;
+border:2px solid #171717;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0 10px;
+font-size:12px;
+font-weight:900;
 background:#fff;
-font-size:36px;
+text-align:center;
 }
 
-.language-box{
-margin:16px;
-border:2px solid #111;
-padding:12px;
+.side-account-button.club{
+background:var(--green);
+border-color:var(--green);
 }
 
-.language-box label{
+.language-label{
 display:block;
 font-size:9px;
 font-weight:900;
-letter-spacing:1.5px;
+letter-spacing:1.6px;
 color:#777;
-margin-bottom:6px;
+text-transform:uppercase;
+margin:0 3px 6px;
 }
 
-.language-box select{
+.language-select{
 width:100%;
-height:42px;
-border:0;
-background:transparent;
+height:51px;
+border:2px solid #1b1b1b;
+border-radius:999px;
+background:#fff;
+padding:0 15px;
 font-weight:800;
+margin-bottom:12px;
 outline:0;
 }
 
 .side-links{
 display:grid;
 gap:7px;
-padding:0 16px 25px;
 }
 
-.side-links a{
-min-height:55px;
-border:2px solid #111;
+.side-card{
+display:grid;
+grid-template-columns:82px minmax(0,1fr);
+min-height:82px;
+border:2px solid #191919;
+border-radius:18px;
 background:#fff;
-display:flex;
-align-items:center;
-padding:10px 15px;
-font-family:var(--serif);
-font-size:20px;
+overflow:hidden;
 }
 
-.side-links a.active{
-background:#111;
+.side-card.active{
+background:#0b0b0b;
+color:#fff;
+}
+
+.side-card-image{
+width:82px;
+height:100%;
+min-height:82px;
+object-fit:cover;
+}
+
+.side-card-copy{
+padding:10px 11px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+min-width:0;
+}
+
+.side-card-title{
+font:700 19px/1 var(--serif);
+}
+
+.side-card.active .side-card-title{
 color:var(--gold-light);
+}
+
+.side-card-description{
+margin-top:4px;
+font-size:11px;
+line-height:1.25;
+color:#706c66;
+}
+
+.side-card.active .side-card-description{
+color:#ddd;
 }
 
 /* =========================================================
@@ -1121,7 +1194,7 @@ direction:rtl;
 html[dir="rtl"] .side-menu{
 left:auto;
 right:0;
-transform:translateX(103%);
+transform:translateX(102%);
 }
 
 html[dir="rtl"] .side-menu.open{
@@ -1349,6 +1422,11 @@ outline-offset:3px;
 scroll-behavior:auto!important;
 }
 
+.side-menu,
+.menu-overlay{
+transition:none;
+}
+
 }
 </style>
 </head>
@@ -1383,16 +1461,41 @@ aria-label="Close menu"
 
 </div>
 
-<div class="language-box">
+<div class="side-menu-scroll">
+
+<div class="side-account-row">
+
+<a
+class="side-account-button"
+href="/account.html"
+id="signInButton"
+>
+Sign In
+</a>
+
+<a
+class="side-account-button club"
+href="/club.html"
+id="joinMenuButton"
+>
+Join Club
+</a>
+
+</div>
 
 <label
+class="language-label"
 id="languageLabel"
 for="languageSelect"
 >
 Language
 </label>
 
-<select id="languageSelect">
+<select
+class="language-select"
+id="languageSelect"
+aria-label="Language"
+>
 
 <option value="en">🇬🇧 EN — English</option>
 <option value="uk">🇺🇦 UA — Українська</option>
@@ -1420,71 +1523,13 @@ Language
 
 </select>
 
-</div>
-
 <nav
 class="side-links"
 id="sideLinks"
 aria-label="PETS & DOGUE sections"
->
+></nav>
 
-<a href="issue-01.html">
-Magazine
-</a>
-
-<a href="special-offers.html">
-Discounts
-</a>
-
-<a
-href="members-gallery.html"
-class="active"
-aria-current="page"
->
-Cover Stars
-</a>
-
-<a href="articles.html">
-Articles
-</a>
-
-<a href="photos.html">
-Photos
-</a>
-
-<a href="pet-fashion.html">
-Fashion
-</a>
-
-<a href="wellness.html">
-Wellness
-</a>
-
-<a href="pet-friendly-places.html">
-Places
-</a>
-
-<a href="contests.html">
-Contests
-</a>
-
-<a href="local-community.html">
-Community
-</a>
-
-<a href="pets-in-need.html">
-Help
-</a>
-
-<a href="pet-marketplace.html">
-Marketplace
-</a>
-
-<a href="partners.html">
-Partners
-</a>
-
-</nav>
+</div>
 
 </aside>
 
@@ -1536,65 +1581,7 @@ aria-label="Home"
 class="primary-nav"
 id="primaryNav"
 aria-label="PETS & DOGUE main navigation"
->
-
-<a href="issue-01.html">
-Magazine
-</a>
-
-<a href="special-offers.html">
-Discounts
-</a>
-
-<a
-href="members-gallery.html"
-class="active"
-aria-current="page"
->
-Cover Stars
-</a>
-
-<a href="articles.html">
-Articles
-</a>
-
-<a href="photos.html">
-Photos
-</a>
-
-<a href="pet-fashion.html">
-Fashion
-</a>
-
-<a href="wellness.html">
-Wellness
-</a>
-
-<a href="pet-friendly-places.html">
-Places
-</a>
-
-<a href="contests.html">
-Contests
-</a>
-
-<a href="local-community.html">
-Community
-</a>
-
-<a href="pets-in-need.html">
-Help
-</a>
-
-<a href="pet-marketplace.html">
-Marketplace
-</a>
-
-<a href="partners.html">
-Partners
-</a>
-
-</nav>
+></nav>
 
 </header>
 
@@ -1608,7 +1595,7 @@ Partners
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="Miso, current PETS & DOGUE magazine Cover Star"
+alt="Miso, current PETS & DOGUE Cover Star"
 fetchpriority="high"
 decoding="async"
 >
@@ -1677,138 +1664,73 @@ Five pets whose stories and personalities earned a place on the PETS & DOGUE cov
 <div class="winners-strip">
 
 <article class="winner-card">
-
 <img
 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=88"
 alt="Miso, PETS & DOGUE Cover Star"
 loading="lazy"
 decoding="async"
 >
-
 <div class="winner-copy">
-
-<div class="winner-number">
-01
+<div class="winner-number">01</div>
+<h3>Miso</h3>
+<small>Pomeranian</small>
 </div>
-
-<h3>
-Miso
-</h3>
-
-<small>
-Pomeranian
-</small>
-
-</div>
-
 </article>
 
 <article class="winner-card">
-
 <img
 src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=700&q=88"
 alt="Max, PETS & DOGUE Cover Star"
 loading="lazy"
 decoding="async"
 >
-
 <div class="winner-copy">
-
-<div class="winner-number">
-02
+<div class="winner-number">02</div>
+<h3>Max</h3>
+<small>Corgi</small>
 </div>
-
-<h3>
-Max
-</h3>
-
-<small>
-Corgi
-</small>
-
-</div>
-
 </article>
 
 <article class="winner-card">
-
 <img
 src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=700&q=88"
 alt="Luna, PETS & DOGUE Cover Star"
 loading="lazy"
 decoding="async"
 >
-
 <div class="winner-copy">
-
-<div class="winner-number">
-03
+<div class="winner-number">03</div>
+<h3>Luna</h3>
+<small>British Shorthair</small>
 </div>
-
-<h3>
-Luna
-</h3>
-
-<small>
-British Shorthair
-</small>
-
-</div>
-
 </article>
 
 <article class="winner-card">
-
 <img
 src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=88"
 alt="Leo, PETS & DOGUE Cover Star"
 loading="lazy"
 decoding="async"
 >
-
 <div class="winner-copy">
-
-<div class="winner-number">
-04
+<div class="winner-number">04</div>
+<h3>Leo</h3>
+<small>French Bulldog</small>
 </div>
-
-<h3>
-Leo
-</h3>
-
-<small>
-French Bulldog
-</small>
-
-</div>
-
 </article>
 
 <article class="winner-card">
-
 <img
 src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=88"
 alt="Bella, PETS & DOGUE Cover Star"
 loading="lazy"
 decoding="async"
 >
-
 <div class="winner-copy">
-
-<div class="winner-number">
-05
+<div class="winner-number">05</div>
+<h3>Bella</h3>
+<small>Golden Retriever</small>
 </div>
-
-<h3>
-Bella
-</h3>
-
-<small>
-Golden Retriever
-</small>
-
-</div>
-
 </article>
 
 </div>
@@ -1820,63 +1742,26 @@ Golden Retriever
 <div class="how-inner">
 
 <div class="how-title">
-
-<small>
-PETS &amp; DOGUE
-</small>
-
-<h2 id="howTitle">
-How it works
-</h2>
-
+<small>PETS &amp; DOGUE</small>
+<h2 id="howTitle">How it works</h2>
 </div>
 
 <article class="step">
-
-<div class="step-number">
-1
-</div>
-
-<strong id="step1Title">
-Discover the candidates
-</strong>
-
-<p id="step1Text">
-Meet every pet and open their story.
-</p>
-
+<div class="step-number">1</div>
+<strong id="step1Title">Discover the candidates</strong>
+<p id="step1Text">Meet every pet and open their story.</p>
 </article>
 
 <article class="step">
-
-<div class="step-number">
-2
-</div>
-
-<strong id="step2Title">
-Tap the heart
-</strong>
-
-<p id="step2Text">
-Give your vote to the pets that move you.
-</p>
-
+<div class="step-number">2</div>
+<strong id="step2Title">Tap the heart</strong>
+<p id="step2Text">Give your vote to the pets that move you.</p>
 </article>
 
 <article class="step">
-
-<div class="step-number">
-3
-</div>
-
-<strong id="step3Title">
-The votes decide
-</strong>
-
-<p id="step3Text">
-The highest verified vote total determines the winner.
-</p>
-
+<div class="step-number">3</div>
+<strong id="step3Title">The votes decide</strong>
+<p id="step3Text">The highest verified vote total determines the winner.</p>
 </article>
 
 </div>
@@ -1907,225 +1792,7 @@ Photo, name, species and breed — then open the story if you want to know more.
 <div
 class="nominee-list"
 id="nomineeList"
->
-
-<article class="nominee">
-
-<img
-src="https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?auto=format&fit=crop&w=1300&q=88"
-alt="Bella, Pomeranian Cover Star candidate"
-loading="lazy"
-decoding="async"
->
-
-<button
-class="vote-button"
-type="button"
-aria-label="Vote for Bella"
->
-
-<span class="heart">
-♥
-</span>
-
-<span>
-0
-</span>
-
-</button>
-
-<div class="nominee-copy">
-
-<span class="nominee-type">
-Dog
-</span>
-
-<h3>
-Bella
-</h3>
-
-<div class="pet-meta">
-Dog · Pomeranian
-</div>
-
-<p class="pet-preview">
-Small in size, enormous in personality.
-</p>
-
-<button
-class="story-button"
-type="button"
->
-Story →
-</button>
-
-</div>
-
-</article>
-
-<article class="nominee">
-
-<img
-src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1300&q=88"
-alt="Oliver, British Shorthair Cover Star candidate"
-loading="lazy"
-decoding="async"
->
-
-<button
-class="vote-button"
-type="button"
-aria-label="Vote for Oliver"
->
-
-<span class="heart">
-♥
-</span>
-
-<span>
-0
-</span>
-
-</button>
-
-<div class="nominee-copy">
-
-<span class="nominee-type">
-Cat
-</span>
-
-<h3>
-Oliver
-</h3>
-
-<div class="pet-meta">
-Cat · British Shorthair
-</div>
-
-<p class="pet-preview">
-Quiet elegance with a very independent point of view.
-</p>
-
-<button
-class="story-button"
-type="button"
->
-Story →
-</button>
-
-</div>
-
-</article>
-
-<article class="nominee">
-
-<img
-src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1300&q=88"
-alt="Milo, French Bulldog Cover Star candidate"
-loading="lazy"
-decoding="async"
->
-
-<button
-class="vote-button"
-type="button"
-aria-label="Vote for Milo"
->
-
-<span class="heart">
-♥
-</span>
-
-<span>
-0
-</span>
-
-</button>
-
-<div class="nominee-copy">
-
-<span class="nominee-type">
-Dog
-</span>
-
-<h3>
-Milo
-</h3>
-
-<div class="pet-meta">
-Dog · French Bulldog
-</div>
-
-<p class="pet-preview">
-A playful city dog with impeccable confidence.
-</p>
-
-<button
-class="story-button"
-type="button"
->
-Story →
-</button>
-
-</div>
-
-</article>
-
-<article class="nominee">
-
-<img
-src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=1300&q=88"
-alt="Rio, Green Parrot Cover Star candidate"
-loading="lazy"
-decoding="async"
->
-
-<button
-class="vote-button"
-type="button"
-aria-label="Vote for Rio"
->
-
-<span class="heart">
-♥
-</span>
-
-<span>
-0
-</span>
-
-</button>
-
-<div class="nominee-copy">
-
-<span class="nominee-type">
-Bird
-</span>
-
-<h3>
-Rio
-</h3>
-
-<div class="pet-meta">
-Bird · Green Parrot
-</div>
-
-<p class="pet-preview">
-Colour, curiosity and plenty of opinions.
-</p>
-
-<button
-class="story-button"
-type="button"
->
-Story →
-</button>
-
-</div>
-
-</article>
-
-</div>
+></div>
 
 </section>
 
@@ -2175,12 +1842,10 @@ aria-label="Close story"
 </button>
 
 <div class="story-image">
-
 <img
 id="storyImage"
 alt=""
 >
-
 </div>
 
 <div class="story-content">
@@ -2220,14 +1885,8 @@ const LANGUAGE_KEY =
 const VOTE_KEY =
 "pets_dogue_cover_votes";
 
-const STATIC_SEO_TITLE =
-"Pet Cover Stars & Cover Star Voting | PETS & DOGUE";
-
-const STATIC_SEO_DESCRIPTION =
-"Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE magazine cover.";
-
 const NAV = [
-["magazine","issue-01.html"],
+["edition","issue-01.html"],
 ["offers","special-offers.html"],
 ["coverStars","members-gallery.html"],
 ["articles","articles.html"],
@@ -2242,23 +1901,72 @@ const NAV = [
 ["partners","partners.html"]
 ];
 
+const SIDE_ORDER = [
+"edition",
+"coverStars",
+"offers",
+"places",
+"marketplace",
+"fashion",
+"wellness",
+"articles",
+"photos",
+"community",
+"contests",
+"rescue",
+"partners"
+];
+
+const SIDE_IMAGES = {
+edition:"file_00000000a9d471fda9b4629589be22a9.png",
+coverStars:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82",
+offers:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=82",
+places:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82",
+marketplace:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82",
+fashion:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=82",
+wellness:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=82",
+articles:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=82",
+photos:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=82",
+community:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=82",
+contests:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82",
+rescue:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=82",
+partners:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82"
+};
+
 const BASE = {
 menu:"Contents",
 language:"Language",
+signIn:"Sign In",
+joinMenu:"Join Club",
 nav:{
-magazine:"Magazine",
+edition:"Edition",
 offers:"Discounts",
 coverStars:"Cover Stars",
 articles:"Articles",
 photos:"Photos",
 fashion:"Fashion",
-wellness:"Wellness",
-places:"Places",
+wellness:"Health",
+places:"Pet-Friendly",
 contests:"Contests",
 community:"Community",
 rescue:"Help",
 marketplace:"Marketplace",
 partners:"Partners"
+},
+sideDescriptions:{
+edition:"Open the latest PETS & DOGUE digital edition.",
+coverStars:"Meet the stars and vote for the next cover.",
+offers:"Member offers, discounts and benefits.",
+places:"Find places where pets are welcome.",
+marketplace:"Listings, products and pet services.",
+fashion:"Pet style, accessories and fashion.",
+wellness:"Health, care and practical guidance.",
+articles:"Original stories, guides and interviews.",
+photos:"Pet photography and visual stories.",
+community:"Connect with pet people near you.",
+contests:"Competitions, voting and prizes.",
+rescue:"Support animals that need care and love.",
+partners:"Partners and collaborations."
 },
 currentCover:"Current cover",
 coverTitle:"Meet our current cover star",
@@ -2295,20 +2003,37 @@ ru:{
 ...BASE,
 menu:"Содержание",
 language:"Язык",
+signIn:"Войти",
+joinMenu:"Вступить в клуб",
 nav:{
-magazine:"Журнал",
+edition:"Выпуск",
 offers:"Скидки",
 coverStars:"Звёзды обложки",
 articles:"Статьи",
 photos:"Фото",
 fashion:"Мода",
 wellness:"Здоровье",
-places:"Места",
+places:"Питомцам рады",
 contests:"Конкурсы",
 community:"Сообщество",
 rescue:"Помощь",
 marketplace:"Маркетплейс",
 partners:"Партнёры"
+},
+sideDescriptions:{
+edition:"Откройте последний цифровой выпуск PETS & DOGUE.",
+coverStars:"Знакомьтесь со звёздами и выбирайте следующую.",
+offers:"Скидки, предложения и преимущества клуба.",
+places:"Места, где вашим питомцам рады.",
+marketplace:"Объявления, товары и услуги для питомцев.",
+fashion:"Стиль, аксессуары и мода для питомцев.",
+wellness:"Здоровье, уход и полезные рекомендации.",
+articles:"Оригинальные истории, гиды и интервью.",
+photos:"Фотографии питомцев и визуальные истории.",
+community:"Общение с владельцами питомцев рядом.",
+contests:"Конкурсы, голосования и призы.",
+rescue:"Помощь животным, которым нужна забота.",
+partners:"Партнёры и сотрудничество."
 },
 currentCover:"Текущая обложка",
 coverTitle:"Познакомьтесь с нашей звездой обложки",
@@ -2341,20 +2066,37 @@ uk:{
 ...BASE,
 menu:"Зміст",
 language:"Мова",
+signIn:"Увійти",
+joinMenu:"Вступити до клубу",
 nav:{
-magazine:"Журнал",
+edition:"Випуск",
 offers:"Знижки",
 coverStars:"Зірки обкладинки",
 articles:"Статті",
 photos:"Фото",
 fashion:"Мода",
 wellness:"Здоров’я",
-places:"Місця",
+places:"Тут раді улюбленцям",
 contests:"Конкурси",
 community:"Спільнота",
 rescue:"Допомога",
 marketplace:"Маркетплейс",
 partners:"Партнери"
+},
+sideDescriptions:{
+edition:"Відкрийте останній цифровий випуск PETS & DOGUE.",
+coverStars:"Знайомтеся із зірками та обирайте наступну.",
+offers:"Знижки, пропозиції та переваги клубу.",
+places:"Місця, де вашим улюбленцям раді.",
+marketplace:"Оголошення, товари та послуги.",
+fashion:"Стиль, аксесуари та мода для улюбленців.",
+wellness:"Здоров’я, догляд і практичні поради.",
+articles:"Оригінальні історії, гіди та інтерв’ю.",
+photos:"Фото улюбленців та візуальні історії.",
+community:"Спілкування з власниками улюбленців поруч.",
+contests:"Конкурси, голосування та призи.",
+rescue:"Допомога тваринам, яким потрібна турбота.",
+partners:"Партнери та співпраця."
 },
 currentCover:"Поточна обкладинка",
 coverTitle:"Познайомтеся з нашою зіркою обкладинки",
@@ -2387,7 +2129,9 @@ fr:{
 ...BASE,
 menu:"Sommaire",
 language:"Langue",
-nav:{magazine:"Magazine",offers:"Réductions",coverStars:"Stars de couverture",articles:"Articles",photos:"Photos",fashion:"Mode",wellness:"Bien-être",places:"Adresses",contests:"Concours",community:"Communauté",rescue:"Aide",marketplace:"Marketplace",partners:"Partenaires"},
+signIn:"Se connecter",
+joinMenu:"Rejoindre le Club",
+nav:{edition:"Édition",offers:"Réductions",coverStars:"Stars de couverture",articles:"Articles",photos:"Photos",fashion:"Mode",wellness:"Santé",places:"Adresses pet-friendly",contests:"Concours",community:"Communauté",rescue:"Aide",marketplace:"Marketplace",partners:"Partenaires"},
 currentCover:"Couverture actuelle",
 coverTitle:"Découvrez notre star de couverture",
 pastTitle:"Anciennes stars de couverture",
@@ -2405,7 +2149,9 @@ de:{
 ...BASE,
 menu:"Inhalt",
 language:"Sprache",
-nav:{magazine:"Magazin",offers:"Rabatte",coverStars:"Cover Stars",articles:"Artikel",photos:"Fotos",fashion:"Mode",wellness:"Gesundheit",places:"Orte",contests:"Wettbewerbe",community:"Community",rescue:"Hilfe",marketplace:"Marktplatz",partners:"Partner"},
+signIn:"Anmelden",
+joinMenu:"Club beitreten",
+nav:{edition:"Edition",offers:"Rabatte",coverStars:"Cover Stars",articles:"Artikel",photos:"Fotos",fashion:"Mode",wellness:"Gesundheit",places:"Tierfreundliche Orte",contests:"Wettbewerbe",community:"Community",rescue:"Hilfe",marketplace:"Marktplatz",partners:"Partner"},
 currentCover:"Aktuelles Cover",
 coverTitle:"Lernen Sie unseren Cover Star kennen",
 pastTitle:"Frühere Cover Stars",
@@ -2423,7 +2169,9 @@ es:{
 ...BASE,
 menu:"Contenido",
 language:"Idioma",
-nav:{magazine:"Revista",offers:"Descuentos",coverStars:"Estrellas de portada",articles:"Artículos",photos:"Fotos",fashion:"Moda",wellness:"Bienestar",places:"Lugares",contests:"Concursos",community:"Comunidad",rescue:"Ayuda",marketplace:"Marketplace",partners:"Socios"},
+signIn:"Iniciar sesión",
+joinMenu:"Unirse al Club",
+nav:{edition:"Edición",offers:"Descuentos",coverStars:"Estrellas de portada",articles:"Artículos",photos:"Fotos",fashion:"Moda",wellness:"Salud",places:"Lugares pet-friendly",contests:"Concursos",community:"Comunidad",rescue:"Ayuda",marketplace:"Marketplace",partners:"Socios"},
 currentCover:"Portada actual",
 coverTitle:"Conoce a nuestra estrella de portada",
 pastTitle:"Ganadores anteriores",
@@ -2441,7 +2189,9 @@ it:{
 ...BASE,
 menu:"Contenuti",
 language:"Lingua",
-nav:{magazine:"Rivista",offers:"Sconti",coverStars:"Cover Star",articles:"Articoli",photos:"Foto",fashion:"Moda",wellness:"Benessere",places:"Luoghi",contests:"Concorsi",community:"Community",rescue:"Aiuto",marketplace:"Marketplace",partners:"Partner"},
+signIn:"Accedi",
+joinMenu:"Entra nel Club",
+nav:{edition:"Edizione",offers:"Sconti",coverStars:"Cover Star",articles:"Articoli",photos:"Foto",fashion:"Moda",wellness:"Salute",places:"Luoghi pet-friendly",contests:"Concorsi",community:"Community",rescue:"Aiuto",marketplace:"Marketplace",partners:"Partner"},
 currentCover:"Copertina attuale",
 coverTitle:"Conosci la nostra cover star",
 pastTitle:"Vincitori precedenti",
@@ -2459,7 +2209,9 @@ pt:{
 ...BASE,
 menu:"Conteúdo",
 language:"Idioma",
-nav:{magazine:"Revista",offers:"Descontos",coverStars:"Estrelas da capa",articles:"Artigos",photos:"Fotos",fashion:"Moda",wellness:"Bem-estar",places:"Lugares",contests:"Concursos",community:"Comunidade",rescue:"Ajuda",marketplace:"Marketplace",partners:"Parceiros"},
+signIn:"Entrar",
+joinMenu:"Entrar no Club",
+nav:{edition:"Edição",offers:"Descontos",coverStars:"Estrelas da capa",articles:"Artigos",photos:"Fotos",fashion:"Moda",wellness:"Saúde",places:"Locais pet-friendly",contests:"Concursos",community:"Comunidade",rescue:"Ajuda",marketplace:"Marketplace",partners:"Parceiros"},
 currentCover:"Capa atual",
 coverTitle:"Conheça a nossa estrela da capa",
 pastTitle:"Vencedores anteriores",
@@ -2477,7 +2229,9 @@ nl:{
 ...BASE,
 menu:"Inhoud",
 language:"Taal",
-nav:{magazine:"Magazine",offers:"Kortingen",coverStars:"Coversterren",articles:"Artikelen",photos:"Foto's",fashion:"Mode",wellness:"Wellness",places:"Plaatsen",contests:"Wedstrijden",community:"Community",rescue:"Hulp",marketplace:"Marktplaats",partners:"Partners"},
+signIn:"Inloggen",
+joinMenu:"Word lid",
+nav:{edition:"Editie",offers:"Kortingen",coverStars:"Coversterren",articles:"Artikelen",photos:"Foto's",fashion:"Mode",wellness:"Gezondheid",places:"Diervriendelijke plekken",contests:"Wedstrijden",community:"Community",rescue:"Hulp",marketplace:"Marktplaats",partners:"Partners"},
 currentCover:"Huidige cover",
 coverTitle:"Ontmoet onze coverster",
 pastTitle:"Eerdere winnaars",
@@ -2495,7 +2249,9 @@ pl:{
 ...BASE,
 menu:"Spis treści",
 language:"Język",
-nav:{magazine:"Magazyn",offers:"Rabaty",coverStars:"Gwiazdy okładki",articles:"Artykuły",photos:"Zdjęcia",fashion:"Moda",wellness:"Zdrowie",places:"Miejsca",contests:"Konkursy",community:"Społeczność",rescue:"Pomoc",marketplace:"Marketplace",partners:"Partnerzy"},
+signIn:"Zaloguj się",
+joinMenu:"Dołącz do Club",
+nav:{edition:"Wydanie",offers:"Rabaty",coverStars:"Gwiazdy okładki",articles:"Artykuły",photos:"Zdjęcia",fashion:"Moda",wellness:"Zdrowie",places:"Miejsca przyjazne zwierzętom",contests:"Konkursy",community:"Społeczność",rescue:"Pomoc",marketplace:"Marketplace",partners:"Partnerzy"},
 currentCover:"Aktualna okładka",
 coverTitle:"Poznaj naszą gwiazdę okładki",
 pastTitle:"Poprzedni zwycięzcy",
@@ -2513,7 +2269,9 @@ cs:{
 ...BASE,
 menu:"Obsah",
 language:"Jazyk",
-nav:{magazine:"Magazín",offers:"Slevy",coverStars:"Hvězdy obálky",articles:"Články",photos:"Fotografie",fashion:"Móda",wellness:"Zdraví",places:"Místa",contests:"Soutěže",community:"Komunita",rescue:"Pomoc",marketplace:"Marketplace",partners:"Partneři"},
+signIn:"Přihlásit se",
+joinMenu:"Vstoupit do Club",
+nav:{edition:"Vydání",offers:"Slevy",coverStars:"Hvězdy obálky",articles:"Články",photos:"Fotografie",fashion:"Móda",wellness:"Zdraví",places:"Pet-friendly místa",contests:"Soutěže",community:"Komunita",rescue:"Pomoc",marketplace:"Marketplace",partners:"Partneři"},
 currentCover:"Aktuální obálka",
 coverTitle:"Poznejte naši hvězdu obálky",
 pastTitle:"Předchozí vítězové",
@@ -2531,7 +2289,9 @@ sk:{
 ...BASE,
 menu:"Obsah",
 language:"Jazyk",
-nav:{magazine:"Magazín",offers:"Zľavy",coverStars:"Hviezdy obálky",articles:"Články",photos:"Fotografie",fashion:"Móda",wellness:"Zdravie",places:"Miesta",contests:"Súťaže",community:"Komunita",rescue:"Pomoc",marketplace:"Marketplace",partners:"Partneri"},
+signIn:"Prihlásiť sa",
+joinMenu:"Vstúpiť do Club",
+nav:{edition:"Vydanie",offers:"Zľavy",coverStars:"Hviezdy obálky",articles:"Články",photos:"Fotografie",fashion:"Móda",wellness:"Zdravie",places:"Pet-friendly miesta",contests:"Súťaže",community:"Komunita",rescue:"Pomoc",marketplace:"Marketplace",partners:"Partneri"},
 currentCover:"Aktuálna obálka",
 coverTitle:"Spoznajte našu hviezdu obálky",
 pastTitle:"Predchádzajúci víťazi",
@@ -2549,7 +2309,9 @@ hu:{
 ...BASE,
 menu:"Tartalom",
 language:"Nyelv",
-nav:{magazine:"Magazin",offers:"Kedvezmények",coverStars:"Címlapsztárok",articles:"Cikkek",photos:"Fotók",fashion:"Divat",wellness:"Egészség",places:"Helyek",contests:"Versenyek",community:"Közösség",rescue:"Segítség",marketplace:"Piactér",partners:"Partnerek"},
+signIn:"Bejelentkezés",
+joinMenu:"Csatlakozás",
+nav:{edition:"Kiadás",offers:"Kedvezmények",coverStars:"Címlapsztárok",articles:"Cikkek",photos:"Fotók",fashion:"Divat",wellness:"Egészség",places:"Állatbarát helyek",contests:"Versenyek",community:"Közösség",rescue:"Segítség",marketplace:"Piactér",partners:"Partnerek"},
 currentCover:"Aktuális címlap",
 coverTitle:"Ismerje meg címlapsztárunkat",
 pastTitle:"Korábbi győztesek",
@@ -2567,7 +2329,9 @@ ro:{
 ...BASE,
 menu:"Conținut",
 language:"Limbă",
-nav:{magazine:"Revistă",offers:"Reduceri",coverStars:"Vedete de copertă",articles:"Articole",photos:"Fotografii",fashion:"Modă",wellness:"Sănătate",places:"Locuri",contests:"Concursuri",community:"Comunitate",rescue:"Ajutor",marketplace:"Marketplace",partners:"Parteneri"},
+signIn:"Autentificare",
+joinMenu:"Intră în Club",
+nav:{edition:"Ediție",offers:"Reduceri",coverStars:"Vedete de copertă",articles:"Articole",photos:"Fotografii",fashion:"Modă",wellness:"Sănătate",places:"Locuri pet-friendly",contests:"Concursuri",community:"Comunitate",rescue:"Ajutor",marketplace:"Marketplace",partners:"Parteneri"},
 currentCover:"Coperta actuală",
 coverTitle:"Cunoaște vedeta noastră de copertă",
 pastTitle:"Câștigători anteriori",
@@ -2585,7 +2349,9 @@ bg:{
 ...BASE,
 menu:"Съдържание",
 language:"Език",
-nav:{magazine:"Списание",offers:"Отстъпки",coverStars:"Звезди на корицата",articles:"Статии",photos:"Снимки",fashion:"Мода",wellness:"Здраве",places:"Места",contests:"Конкурси",community:"Общност",rescue:"Помощ",marketplace:"Маркетплейс",partners:"Партньори"},
+signIn:"Вход",
+joinMenu:"Влезте в Club",
+nav:{edition:"Издание",offers:"Отстъпки",coverStars:"Звезди на корицата",articles:"Статии",photos:"Снимки",fashion:"Мода",wellness:"Здраве",places:"Места за любимци",contests:"Конкурси",community:"Общност",rescue:"Помощ",marketplace:"Маркетплейс",partners:"Партньори"},
 currentCover:"Текуща корица",
 coverTitle:"Запознайте се с нашата звезда на корицата",
 pastTitle:"Предишни победители",
@@ -2603,7 +2369,9 @@ el:{
 ...BASE,
 menu:"Περιεχόμενα",
 language:"Γλώσσα",
-nav:{magazine:"Περιοδικό",offers:"Εκπτώσεις",coverStars:"Αστέρια εξωφύλλου",articles:"Άρθρα",photos:"Φωτογραφίες",fashion:"Μόδα",wellness:"Υγεία",places:"Μέρη",contests:"Διαγωνισμοί",community:"Κοινότητα",rescue:"Βοήθεια",marketplace:"Marketplace",partners:"Συνεργάτες"},
+signIn:"Σύνδεση",
+joinMenu:"Εγγραφή στο Club",
+nav:{edition:"Έκδοση",offers:"Εκπτώσεις",coverStars:"Αστέρια εξωφύλλου",articles:"Άρθρα",photos:"Φωτογραφίες",fashion:"Μόδα",wellness:"Υγεία",places:"Pet-friendly μέρη",contests:"Διαγωνισμοί",community:"Κοινότητα",rescue:"Βοήθεια",marketplace:"Marketplace",partners:"Συνεργάτες"},
 currentCover:"Τρέχον εξώφυλλο",
 coverTitle:"Γνωρίστε το αστέρι του εξωφύλλου",
 pastTitle:"Προηγούμενοι νικητές",
@@ -2621,7 +2389,9 @@ sv:{
 ...BASE,
 menu:"Innehåll",
 language:"Språk",
-nav:{magazine:"Magasin",offers:"Rabatter",coverStars:"Omslagsstjärnor",articles:"Artiklar",photos:"Foton",fashion:"Mode",wellness:"Hälsa",places:"Platser",contests:"Tävlingar",community:"Community",rescue:"Hjälp",marketplace:"Marknadsplats",partners:"Partners"},
+signIn:"Logga in",
+joinMenu:"Gå med i Club",
+nav:{edition:"Utgåva",offers:"Rabatter",coverStars:"Omslagsstjärnor",articles:"Artiklar",photos:"Foton",fashion:"Mode",wellness:"Hälsa",places:"Djurvänliga platser",contests:"Tävlingar",community:"Community",rescue:"Hjälp",marketplace:"Marknadsplats",partners:"Partners"},
 currentCover:"Aktuellt omslag",
 coverTitle:"Möt vår omslagsstjärna",
 pastTitle:"Tidigare vinnare",
@@ -2639,7 +2409,9 @@ da:{
 ...BASE,
 menu:"Indhold",
 language:"Sprog",
-nav:{magazine:"Magasin",offers:"Rabatter",coverStars:"Forsidestjerner",articles:"Artikler",photos:"Fotos",fashion:"Mode",wellness:"Sundhed",places:"Steder",contests:"Konkurrencer",community:"Community",rescue:"Hjælp",marketplace:"Marketplace",partners:"Partnere"},
+signIn:"Log ind",
+joinMenu:"Bliv medlem",
+nav:{edition:"Udgave",offers:"Rabatter",coverStars:"Forsidestjerner",articles:"Artikler",photos:"Fotos",fashion:"Mode",wellness:"Sundhed",places:"Kæledyrsvenlige steder",contests:"Konkurrencer",community:"Community",rescue:"Hjælp",marketplace:"Marketplace",partners:"Partnere"},
 currentCover:"Aktuel forside",
 coverTitle:"Mød vores forsidestjerne",
 pastTitle:"Tidligere vindere",
@@ -2657,7 +2429,9 @@ no:{
 ...BASE,
 menu:"Innhold",
 language:"Språk",
-nav:{magazine:"Magasin",offers:"Rabatter",coverStars:"Forsidestjerner",articles:"Artikler",photos:"Bilder",fashion:"Mote",wellness:"Helse",places:"Steder",contests:"Konkurranser",community:"Fellesskap",rescue:"Hjelp",marketplace:"Markedsplass",partners:"Partnere"},
+signIn:"Logg inn",
+joinMenu:"Bli med i Club",
+nav:{edition:"Utgave",offers:"Rabatter",coverStars:"Forsidestjerner",articles:"Artikler",photos:"Bilder",fashion:"Mote",wellness:"Helse",places:"Dyrevennlige steder",contests:"Konkurranser",community:"Fellesskap",rescue:"Hjelp",marketplace:"Markedsplass",partners:"Partnere"},
 currentCover:"Aktuelt omslag",
 coverTitle:"Møt vår forsidestjerne",
 pastTitle:"Tidligere vinnere",
@@ -2675,7 +2449,9 @@ fi:{
 ...BASE,
 menu:"Sisältö",
 language:"Kieli",
-nav:{magazine:"Lehti",offers:"Alennukset",coverStars:"Kansitähdet",articles:"Artikkelit",photos:"Kuvat",fashion:"Muoti",wellness:"Hyvinvointi",places:"Paikat",contests:"Kilpailut",community:"Yhteisö",rescue:"Apu",marketplace:"Marketplace",partners:"Kumppanit"},
+signIn:"Kirjaudu",
+joinMenu:"Liity Clubiin",
+nav:{edition:"Julkaisu",offers:"Alennukset",coverStars:"Kansitähdet",articles:"Artikkelit",photos:"Kuvat",fashion:"Muoti",wellness:"Terveys",places:"Lemmikkiystävälliset paikat",contests:"Kilpailut",community:"Yhteisö",rescue:"Apu",marketplace:"Marketplace",partners:"Kumppanit"},
 currentCover:"Nykyinen kansi",
 coverTitle:"Tapaa kansitähtemme",
 pastTitle:"Aiemmat voittajat",
@@ -2693,7 +2469,9 @@ tr:{
 ...BASE,
 menu:"İçindekiler",
 language:"Dil",
-nav:{magazine:"Dergi",offers:"İndirimler",coverStars:"Kapak yıldızları",articles:"Makaleler",photos:"Fotoğraflar",fashion:"Moda",wellness:"Sağlık",places:"Mekanlar",contests:"Yarışmalar",community:"Topluluk",rescue:"Yardım",marketplace:"Pazar",partners:"Ortaklar"},
+signIn:"Giriş yap",
+joinMenu:"Club'a katıl",
+nav:{edition:"Sayı",offers:"İndirimler",coverStars:"Kapak yıldızları",articles:"Makaleler",photos:"Fotoğraflar",fashion:"Moda",wellness:"Sağlık",places:"Evcil hayvan dostu mekanlar",contests:"Yarışmalar",community:"Topluluk",rescue:"Yardım",marketplace:"Pazar",partners:"Ortaklar"},
 currentCover:"Güncel kapak",
 coverTitle:"Kapak yıldızımızla tanışın",
 pastTitle:"Önceki kazananlar",
@@ -2711,7 +2489,9 @@ ar:{
 ...BASE,
 menu:"المحتويات",
 language:"اللغة",
-nav:{magazine:"المجلة",offers:"الخصومات",coverStars:"نجوم الغلاف",articles:"المقالات",photos:"الصور",fashion:"الموضة",wellness:"الصحة",places:"الأماكن",contests:"المسابقات",community:"المجتمع",rescue:"المساعدة",marketplace:"السوق",partners:"الشركاء"},
+signIn:"تسجيل الدخول",
+joinMenu:"الانضمام إلى النادي",
+nav:{edition:"الإصدار",offers:"الخصومات",coverStars:"نجوم الغلاف",articles:"المقالات",photos:"الصور",fashion:"الموضة",wellness:"الصحة",places:"أماكن صديقة للحيوانات",contests:"المسابقات",community:"المجتمع",rescue:"المساعدة",marketplace:"السوق",partners:"الشركاء"},
 currentCover:"الغلاف الحالي",
 coverTitle:"تعرّف على نجم الغلاف",
 pastTitle:"الفائزون السابقون",
@@ -2729,7 +2509,9 @@ hi:{
 ...BASE,
 menu:"सामग्री",
 language:"भाषा",
-nav:{magazine:"पत्रिका",offers:"छूट",coverStars:"कवर स्टार",articles:"लेख",photos:"फ़ोटो",fashion:"फ़ैशन",wellness:"स्वास्थ्य",places:"स्थान",contests:"प्रतियोगिताएँ",community:"समुदाय",rescue:"मदद",marketplace:"मार्केटप्लेस",partners:"पार्टनर"},
+signIn:"साइन इन",
+joinMenu:"Club में शामिल हों",
+nav:{edition:"संस्करण",offers:"छूट",coverStars:"कवर स्टार",articles:"लेख",photos:"फ़ोटो",fashion:"फ़ैशन",wellness:"स्वास्थ्य",places:"पेट-फ्रेंडली स्थान",contests:"प्रतियोगिताएँ",community:"समुदाय",rescue:"मदद",marketplace:"मार्केटप्लेस",partners:"पार्टनर"},
 currentCover:"वर्तमान कवर",
 coverTitle:"हमारे कवर स्टार से मिलें",
 pastTitle:"पिछले विजेता",
@@ -2745,15 +2527,11 @@ clubButton:"PETS & DOGUE Club में शामिल हों"
 
 };
 
-/* =========================================================
-SEO LANGUAGES
-========================================================= */
-
 const SEO = {
 
 en:{
 title:"Pet Cover Stars & Cover Star Voting | PETS & DOGUE",
-description:"Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE magazine cover."
+description:"Meet PETS & DOGUE Cover Stars, discover previous winners and vote for the next pet to appear on a PETS & DOGUE cover."
 },
 
 uk:{
@@ -2763,7 +2541,7 @@ description:"Знайомтеся із зірками обкладинки PETS 
 
 ru:{
 title:"Звёзды обложки и голосование | PETS & DOGUE",
-description:"Познакомьтесь со звёздами обложки PETS & DOGUE, смотрите прошлых победителей и голосуйте за следующего питомца для обложки журнала."
+description:"Познакомьтесь со звёздами обложки PETS & DOGUE, смотрите прошлых победителей и голосуйте за следующего питомца для обложки."
 },
 
 fr:{
@@ -2773,7 +2551,7 @@ description:"Découvrez les stars de couverture PETS & DOGUE, les anciens gagnan
 
 de:{
 title:"Cover Stars & Abstimmung | PETS & DOGUE",
-description:"Entdecken Sie die PETS & DOGUE Cover Stars, frühere Gewinner und stimmen Sie für das nächste Tier auf dem Magazincover ab."
+description:"Entdecken Sie die PETS & DOGUE Cover Stars, frühere Gewinner und stimmen Sie für das nächste Tier auf dem Cover ab."
 },
 
 es:{
@@ -2788,7 +2566,7 @@ description:"Scopri le Cover Star PETS & DOGUE, i vincitori precedenti e vota il
 
 pt:{
 title:"Estrelas da capa e votação | PETS & DOGUE",
-description:"Conheça as estrelas da capa PETS & DOGUE, vencedores anteriores e vote no próximo animal para a capa da revista."
+description:"Conheça as estrelas da capa PETS & DOGUE, vencedores anteriores e vote no próximo animal para a capa."
 },
 
 nl:{
@@ -2838,7 +2616,7 @@ description:"Möt PETS & DOGUE omslagsstjärnor, tidigare vinnare och rösta på
 
 da:{
 title:"Forsidestjerner og afstemning | PETS & DOGUE",
-description:"Mød PETS & DOGUE forsidestjerner, tidligere vindere og stem på det næste kæledyr til magasinets forside."
+description:"Mød PETS & DOGUE forsidestjerner, tidligere vindere og stem på det næste kæledyr til forsiden."
 },
 
 no:{
@@ -2867,10 +2645,6 @@ description:"PETS & DOGUE के कवर स्टार और पिछल�
 }
 
 };
-
-/* =========================================================
-FALLBACK NOMINEES
-========================================================= */
 
 const FALLBACK_NOMINEES = [
 
@@ -2920,10 +2694,6 @@ story:"Rio is sociable, clever and fascinated by everything his family does. He 
 
 ];
 
-/* =========================================================
-STATE
-========================================================= */
-
 let language =
 normalizeLanguage(
 localStorage.getItem(
@@ -2939,10 +2709,6 @@ item=>({...item})
 
 let votedIds =
 new Set();
-
-/* =========================================================
-LANGUAGE HELPERS
-========================================================= */
 
 function normalizeLanguage(value){
 
@@ -2997,9 +2763,18 @@ return String(value ?? "")
 
 }
 
-/* =========================================================
-SEO
-========================================================= */
+function navUrl(key){
+
+const found =
+NAV.find(
+item=>item[0] === key
+);
+
+return found
+?found[1]
+:"#";
+
+}
 
 function applySeo(){
 
@@ -3010,81 +2785,52 @@ SEO.en;
 document.title =
 seo.title;
 
-const pageDescription =
-document.getElementById(
+document
+.getElementById(
 "pageDescription"
-);
-
-if(pageDescription){
-
-pageDescription.setAttribute(
+)
+?.setAttribute(
 "content",
 seo.description
 );
 
-}
-
-const ogTitle =
-document.getElementById(
+document
+.getElementById(
 "ogTitle"
-);
-
-if(ogTitle){
-
-ogTitle.setAttribute(
+)
+?.setAttribute(
 "content",
 seo.title
 );
 
-}
-
-const ogDescription =
-document.getElementById(
+document
+.getElementById(
 "ogDescription"
-);
-
-if(ogDescription){
-
-ogDescription.setAttribute(
+)
+?.setAttribute(
 "content",
 seo.description
 );
 
-}
-
-const twitterTitle =
-document.getElementById(
+document
+.getElementById(
 "twitterTitle"
-);
-
-if(twitterTitle){
-
-twitterTitle.setAttribute(
+)
+?.setAttribute(
 "content",
 seo.title
 );
 
-}
-
-const twitterDescription =
-document.getElementById(
+document
+.getElementById(
 "twitterDescription"
-);
-
-if(twitterDescription){
-
-twitterDescription.setAttribute(
+)
+?.setAttribute(
 "content",
 seo.description
 );
 
 }
-
-}
-
-/* =========================================================
-VOTES
-========================================================= */
 
 function loadLocalVotes(){
 
@@ -3099,9 +2845,7 @@ VOTE_KEY
 );
 
 if(
-Array.isArray(
-parsed
-)
+Array.isArray(parsed)
 ){
 
 votedIds =
@@ -3131,10 +2875,6 @@ JSON.stringify(
 
 }
 
-/* =========================================================
-NAV
-========================================================= */
-
 function renderNav(){
 
 const tr =
@@ -3153,25 +2893,7 @@ data-key="${key}"
 class="${key === "coverStars" ? "active" : ""}"
 ${key === "coverStars" ? 'aria-current="page"' : ""}
 >
-${escapeHtml(tr.nav[key])}
-</a>
-`
-)
-.join("");
-
-document
-.getElementById(
-"sideLinks"
-)
-.innerHTML =
-NAV.map(
-([key,url])=>`
-<a
-href="${url}"
-class="${key === "coverStars" ? "active" : ""}"
-${key === "coverStars" ? 'aria-current="page"' : ""}
->
-${escapeHtml(tr.nav[key])}
+${escapeHtml(tr.nav[key] || BASE.nav[key] || key)}
 </a>
 `
 )
@@ -3212,9 +2934,73 @@ block:"nearest"
 
 }
 
-/* =========================================================
-LANGUAGE
-========================================================= */
+function renderSideMenu(){
+
+const tr =
+text();
+
+document
+.getElementById(
+"sideLinks"
+)
+.innerHTML =
+SIDE_ORDER.map(
+key=>{
+
+const active =
+key ===
+"coverStars";
+
+const label =
+tr.nav[key] ||
+BASE.nav[key] ||
+key;
+
+const description =
+(
+tr.sideDescriptions &&
+tr.sideDescriptions[key]
+)
+||
+BASE.sideDescriptions[key]
+||
+"";
+
+return `
+<a
+href="${navUrl(key)}"
+class="side-card ${active ? "active" : ""}"
+${active ? 'aria-current="page"' : ""}
+>
+
+<img
+class="side-card-image"
+src="${escapeHtml(SIDE_IMAGES[key])}"
+alt=""
+loading="lazy"
+decoding="async"
+>
+
+<span class="side-card-copy">
+
+<span class="side-card-title">
+${escapeHtml(label)}
+</span>
+
+<span class="side-card-description">
+${escapeHtml(description)}
+</span>
+
+</span>
+
+</a>
+`;
+
+}
+)
+.join("");
+
+}
 
 function applyLanguage(nextLanguage){
 
@@ -3233,8 +3019,8 @@ language;
 
 document.documentElement.dir =
 language === "ar"
-? "rtl"
-: "ltr";
+?"rtl"
+:"ltr";
 
 document
 .getElementById(
@@ -3259,6 +3045,22 @@ document
 )
 .textContent =
 tr.language;
+
+document
+.getElementById(
+"signInButton"
+)
+.textContent =
+tr.signIn ||
+BASE.signIn;
+
+document
+.getElementById(
+"joinMenuButton"
+)
+.textContent =
+tr.joinMenu ||
+BASE.joinMenu;
 
 document
 .getElementById(
@@ -3404,13 +3206,11 @@ applySeo();
 
 renderNav();
 
+renderSideMenu();
+
 renderNominees();
 
 }
-
-/* =========================================================
-NOMINEES
-========================================================= */
 
 function renderNominees(){
 
@@ -3530,10 +3330,6 @@ button.dataset.vote
 
 }
 
-/* =========================================================
-STORY
-========================================================= */
-
 function openStory(id){
 
 const pet =
@@ -3609,10 +3405,6 @@ document.body
 .remove("modal-open");
 
 }
-
-/* =========================================================
-VOTE
-========================================================= */
 
 async function voteForPet(id){
 
@@ -3709,10 +3501,6 @@ text().voteSuccess
 }
 
 }
-
-/* =========================================================
-LOAD LIVE NOMINEES
-========================================================= */
 
 async function loadNominees(){
 
@@ -3813,10 +3601,6 @@ renderNominees();
 
 }
 
-/* =========================================================
-TOAST
-========================================================= */
-
 let toastTimer =
 null;
 
@@ -3851,10 +3635,6 @@ toast.classList.remove(
 );
 
 }
-
-/* =========================================================
-MENU
-========================================================= */
 
 function openMenu(){
 
@@ -3944,9 +3724,24 @@ document
 "languageSelect"
 )
 .onchange =
-event=>applyLanguage(
+event=>{
+
+applyLanguage(
 event.target.value
 );
+
+window.dispatchEvent(
+new CustomEvent(
+"petsdogue:languagechange",
+{
+detail:{
+language
+}
+}
+)
+);
+
+};
 
 document
 .getElementById(
@@ -3993,10 +3788,6 @@ closeStory();
 }
 );
 
-/* =========================================================
-GLOBAL LANGUAGE EVENTS
-========================================================= */
-
 window.addEventListener(
 "storage",
 event=>{
@@ -4032,21 +3823,28 @@ language
 
 window.addEventListener(
 "petsdogue:languagechange",
-()=>{
+event=>{
 
-applyLanguage(
+const nextLanguage =
+event?.detail?.language ||
 localStorage.getItem(
 LANGUAGE_KEY
 ) ||
+language;
+
+if(
+normalizeLanguage(nextLanguage) !==
 language
+){
+
+applyLanguage(
+nextLanguage
 );
 
 }
-);
 
-/* =========================================================
-START
-========================================================= */
+}
+);
 
 loadLocalVotes();
 
@@ -4058,7 +3856,7 @@ loadNominees();
 
 </script>
 
-<script src="/pets-dogue-shell.js?v=20260907-cover-stars-seo-1"></script>
+<script src="/pets-dogue-shell.js?v=20260910-unified-menu-1"></script>
 
 </body>
 </html>
