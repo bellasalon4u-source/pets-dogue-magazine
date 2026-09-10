@@ -3,27 +3,34 @@
 /*
 =========================================================
 PETS & DOGUE
-PROTECTED OFFLINE CLUB VOUCHER
+PROTECTED CLUB MEMBER DISCOUNT
 =========================================================
 
-Purpose:
+This endpoint:
 
-- Return an offline voucher only to a verified
-  PETS & DOGUE Club member
-- Verify signed HttpOnly Club cookie
-- Re-check the real Stripe subscription
-- Allow only active / trialing membership
-- Load private promo code from Supabase
-- Check offer availability and dates
-- Check voucher stock
-- Check whether this member already redeemed the offer
+- verifies the signed HttpOnly Club cookie
+- re-checks the real Stripe subscription
+- allows only active / trialing Club membership
+- loads the requested offer from Supabase
+- supports BOTH:
+    1. online promo codes
+    2. in-store member barcodes
+- checks offer dates and stock
+- checks whether the member already redeemed the offer
+- never exposes member email inside the barcode
+- never marks an offer redeemed just by opening it
 
 IMPORTANT:
 
-Opening/showing the voucher does NOT mark it as redeemed.
+ONLINE
+Returns the protected partner promo code.
 
-A voucher becomes REDEEMED only after confirmed
-partner redemption / scan in a later protected endpoint.
+IN STORE
+Creates a member-specific signed barcode token.
+The barcode token expires automatically and can later
+be checked by a protected merchant scan endpoint.
+
+Opening/showing a voucher does NOT count as redemption.
 =========================================================
 */
 
@@ -52,8 +59,14 @@ const VALID_PLANS =
     "annual"
   ]);
 
+const VALID_REDEMPTION_TYPES =
+  new Set([
+    "online",
+    "offline"
+  ]);
+
 /* =========================================================
-   RESPONSE
+RESPONSE
 ========================================================= */
 
 function sendJson(
@@ -80,6 +93,11 @@ function sendJson(
     "no-cache"
   );
 
+  res.setHeader(
+    "X-Content-Type-Options",
+    "nosniff"
+  );
+
   res.end(
     JSON.stringify(
       payload
@@ -89,7 +107,7 @@ function sendJson(
 }
 
 /* =========================================================
-   CLEAN VALUES
+VALUES
 ========================================================= */
 
 function cleanString(
@@ -98,7 +116,8 @@ function cleanString(
 ) {
 
   if (
-    typeof value !== "string"
+    typeof value !==
+      "string"
   ) {
 
     return "";
@@ -121,8 +140,10 @@ function validEmail(
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     .test(
       String(
-        value || ""
-      ).trim()
+        value ||
+        ""
+      )
+      .trim()
     );
 
 }
@@ -134,14 +155,15 @@ function isUuid(
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
     .test(
       String(
-        value || ""
+        value ||
+        ""
       )
     );
 
 }
 
 /* =========================================================
-   BODY
+REQUEST BODY
 ========================================================= */
 
 async function readRequestBody(
@@ -150,7 +172,8 @@ async function readRequestBody(
 
   if (
     req.body &&
-    typeof req.body === "object"
+    typeof req.body ===
+      "object"
   ) {
 
     return req.body;
@@ -158,7 +181,8 @@ async function readRequestBody(
   }
 
   if (
-    typeof req.body === "string" &&
+    typeof req.body ===
+      "string" &&
     req.body.trim()
   ) {
 
@@ -236,7 +260,7 @@ async function readRequestBody(
 }
 
 /* =========================================================
-   COOKIES
+COOKIES
 ========================================================= */
 
 function parseCookies(
@@ -309,7 +333,7 @@ function parseCookies(
 }
 
 /* =========================================================
-   COOKIE SECRET
+SESSION SECRET
 ========================================================= */
 
 function getCookieSecret(
@@ -346,7 +370,49 @@ function getCookieSecret(
 }
 
 /* =========================================================
-   COOKIE SIGNATURE
+VOUCHER SECRET
+========================================================= */
+
+function getVoucherSecret(
+  stripeSecretKey
+) {
+
+  const configured =
+    cleanString(
+      process.env
+        .PETS_DOGUE_VOUCHER_SECRET ||
+      "",
+      1000
+    );
+
+  if (
+    configured.length >= 32
+  ) {
+
+    return configured;
+
+  }
+
+  const sessionSecret =
+    getCookieSecret(
+      stripeSecretKey
+    );
+
+  return crypto
+    .createHash(
+      "sha256"
+    )
+    .update(
+      `pets-dogue-voucher:${sessionSecret}`
+    )
+    .digest(
+      "hex"
+    );
+
+}
+
+/* =========================================================
+COOKIE SIGNATURE
 ========================================================= */
 
 function signCookiePayload(
@@ -376,20 +442,22 @@ function safeEqual(
   const a =
     Buffer.from(
       String(
-        first || ""
+        first ||
+        ""
       )
     );
 
   const b =
     Buffer.from(
       String(
-        second || ""
+        second ||
+        ""
       )
     );
 
   if (
     a.length !==
-    b.length
+      b.length
   ) {
 
     return false;
@@ -405,7 +473,7 @@ function safeEqual(
 }
 
 /* =========================================================
-   VERIFY CLUB COOKIE
+VERIFY CLUB COOKIE
 ========================================================= */
 
 function verifyClubCookie(
@@ -422,7 +490,8 @@ function verifyClubCookie(
     cleanString(
       cookies[
         CLUB_COOKIE_NAME
-      ] || "",
+      ] ||
+      "",
       12000
     );
 
@@ -460,7 +529,7 @@ function verifyClubCookie(
 
   if (
     version !==
-    COOKIE_VERSION
+      COOKIE_VERSION
   ) {
 
     return {
@@ -527,14 +596,16 @@ function verifyClubCookie(
       payload?.email ||
       "",
       254
-    ).toLowerCase();
+    )
+    .toLowerCase();
 
   const plan =
     cleanString(
       payload?.plan ||
       "",
       30
-    ).toLowerCase();
+    )
+    .toLowerCase();
 
   const expiresAt =
     Number(
@@ -543,9 +614,10 @@ function verifyClubCookie(
     );
 
   if (
-    !subscriptionId.startsWith(
-      "sub_"
-    )
+    !subscriptionId
+      .startsWith(
+        "sub_"
+      )
   ) {
 
     return {
@@ -615,7 +687,7 @@ function verifyClubCookie(
 }
 
 /* =========================================================
-   CLEAR COOKIE
+CLEAR COOKIE
 ========================================================= */
 
 function clearClubCookie(
@@ -637,7 +709,7 @@ function clearClubCookie(
 }
 
 /* =========================================================
-   STRIPE
+STRIPE
 ========================================================= */
 
 async function stripeRequest(
@@ -700,7 +772,7 @@ async function stripeRequest(
 }
 
 /* =========================================================
-   PLAN CONFIG
+EXPECTED PLAN
 ========================================================= */
 
 function getExpectedPlan(
@@ -745,7 +817,7 @@ function getExpectedPlan(
 }
 
 /* =========================================================
-   VERIFY STRIPE MEMBERSHIP
+VERIFY STRIPE MEMBERSHIP
 ========================================================= */
 
 async function verifyStripeMembership(
@@ -815,7 +887,8 @@ async function verifyStripeMembership(
       subscription.status ||
       "",
       50
-    ).toLowerCase();
+    )
+    .toLowerCase();
 
   if (
     !ACTIVE_MEMBERSHIP_STATUSES.has(
@@ -824,8 +897,12 @@ async function verifyStripeMembership(
   ) {
 
     return {
-      active: false,
+
+      active:
+        false,
+
       status
+
     };
 
   }
@@ -835,7 +912,8 @@ async function verifyStripeMembership(
       metadata.membership_plan ||
       "",
       30
-    ).toLowerCase();
+    )
+    .toLowerCase();
 
   if (
     plan !==
@@ -853,7 +931,8 @@ async function verifyStripeMembership(
       metadata.member_email ||
       "",
       254
-    ).toLowerCase();
+    )
+    .toLowerCase();
 
   if (
     !validEmail(
@@ -894,16 +973,7 @@ async function verifyStripeMembership(
   if (
     !price ||
     price.object !==
-      "price"
-  ) {
-
-    return {
-      active: false
-    };
-
-  }
-
-  if (
+      "price" ||
     price.active !==
       true
   ) {
@@ -918,7 +988,8 @@ async function verifyStripeMembership(
     String(
       price.currency ||
       ""
-    ).toLowerCase() !==
+    )
+    .toLowerCase() !==
       "gbp"
   ) {
 
@@ -949,7 +1020,8 @@ async function verifyStripeMembership(
       price.recurring
         .interval_count ||
       1
-    ) !== 1
+    ) !==
+      1
   ) {
 
     return {
@@ -966,6 +1038,9 @@ async function verifyStripeMembership(
     email:
       memberEmail,
 
+    subscriptionId:
+      cookie.subscriptionId,
+
     status,
 
     plan
@@ -975,7 +1050,7 @@ async function verifyStripeMembership(
 }
 
 /* =========================================================
-   SUPABASE
+SUPABASE
 ========================================================= */
 
 function getSupabaseConfig() {
@@ -989,10 +1064,10 @@ function getSupabaseConfig() {
         "",
         1000
       )
-        .replace(
-          /\/+$/,
-          ""
-        ),
+      .replace(
+        /\/+$/,
+        ""
+      ),
 
     secret:
       cleanString(
@@ -1044,6 +1119,9 @@ async function supabaseRequest(
             `Bearer ${secret}`,
 
           "Content-Type":
+            "application/json",
+
+          Accept:
             "application/json"
 
         }
@@ -1095,7 +1173,7 @@ async function supabaseRequest(
 }
 
 /* =========================================================
-   LOAD OFFER
+LOAD OFFER
 ========================================================= */
 
 async function getOffer(
@@ -1149,7 +1227,7 @@ async function getOffer(
 }
 
 /* =========================================================
-   REDEMPTION CHECK
+REDEMPTION CHECK
 ========================================================= */
 
 async function hasAlreadyRedeemed(
@@ -1173,10 +1251,8 @@ async function hasAlreadyRedeemed(
     rows.length > 0
   );
 
-}
-
-/* =========================================================
-   OFFER VALIDATION
+} /* =========================================================
+OFFER VALIDATION
 ========================================================= */
 
 function validateOffer(
@@ -1188,35 +1264,73 @@ function validateOffer(
   ) {
 
     return {
-      ok: false,
-      status: 404,
-      error: "Offer not found."
+
+      ok:
+        false,
+
+      status:
+        404,
+
+      error:
+        "Offer not found."
+
     };
 
   }
 
+  const status =
+    cleanString(
+      offer.status ||
+      "",
+      40
+    )
+    .toLowerCase();
+
   if (
-    offer.status !==
+    status !==
       "active"
   ) {
 
     return {
-      ok: false,
-      status: 410,
-      error: "This offer is not active."
+
+      ok:
+        false,
+
+      status:
+        410,
+
+      error:
+        "This offer is not active."
+
     };
 
   }
 
+  const redemptionType =
+    cleanString(
+      offer.redemption_type ||
+      "",
+      30
+    )
+    .toLowerCase();
+
   if (
-    offer.redemption_type !==
-      "offline"
+    !VALID_REDEMPTION_TYPES.has(
+      redemptionType
+    )
   ) {
 
     return {
-      ok: false,
-      status: 400,
-      error: "This is not an offline voucher."
+
+      ok:
+        false,
+
+      status:
+        400,
+
+      error:
+        "This offer cannot be redeemed."
+
     };
 
   }
@@ -1227,9 +1341,16 @@ function validateOffer(
   ) {
 
     return {
-      ok: false,
-      status: 403,
-      error: "This offer is not available to this membership."
+
+      ok:
+        false,
+
+      status:
+        403,
+
+      error:
+        "This offer is not available to this membership."
+
     };
 
   }
@@ -1240,12 +1361,14 @@ function validateOffer(
   const starts =
     new Date(
       offer.starts_at
-    ).getTime();
+    )
+    .getTime();
 
   const ends =
     new Date(
       offer.ends_at
-    ).getTime();
+    )
+    .getTime();
 
   if (
     !Number.isFinite(
@@ -1257,33 +1380,56 @@ function validateOffer(
   ) {
 
     return {
-      ok: false,
-      status: 410,
-      error: "Offer dates are invalid."
+
+      ok:
+        false,
+
+      status:
+        410,
+
+      error:
+        "Offer dates are invalid."
+
     };
 
   }
 
   if (
-    now < starts
+    now <
+      starts
   ) {
 
     return {
-      ok: false,
-      status: 403,
-      error: "This offer has not started yet."
+
+      ok:
+        false,
+
+      status:
+        403,
+
+      error:
+        "This offer has not started yet."
+
     };
 
   }
 
   if (
-    now > ends
+    now >
+      ends
   ) {
 
     return {
-      ok: false,
-      status: 410,
-      error: "This offer has expired."
+
+      ok:
+        false,
+
+      status:
+        410,
+
+      error:
+        "This offer has expired."
+
     };
 
   }
@@ -1303,7 +1449,8 @@ function validateOffer(
     );
 
   if (
-    maximum !== null &&
+    maximum !==
+      null &&
     Number.isFinite(
       maximum
     ) &&
@@ -1313,40 +1460,223 @@ function validateOffer(
   ) {
 
     return {
-      ok: false,
-      status: 410,
-      error: "All vouchers for this offer have been used."
+
+      ok:
+        false,
+
+      status:
+        410,
+
+      error:
+        "All discounts for this offer have been used."
+
     };
 
   }
 
-  const promoCode =
-    cleanString(
-      offer.promo_code ||
-      "",
-      150
-    );
-
   if (
-    !promoCode
+    redemptionType ===
+      "online"
   ) {
 
-    return {
-      ok: false,
-      status: 410,
-      error: "Voucher code is unavailable."
-    };
+    const promoCode =
+      cleanString(
+        offer.promo_code ||
+        "",
+        150
+      );
+
+    if (
+      !promoCode
+    ) {
+
+      return {
+
+        ok:
+          false,
+
+        status:
+          410,
+
+        error:
+          "Online discount code is unavailable."
+
+      };
+
+    }
 
   }
 
   return {
-    ok: true
+
+    ok:
+      true,
+
+    redemptionType,
+
+    startsAt:
+      starts,
+
+    endsAt:
+      ends
+
   };
 
 }
 
 /* =========================================================
-   HANDLER
+PERSONAL MEMBER BARCODE
+========================================================= */
+
+function createMemberBarcode(
+  offer,
+  membership,
+  voucherSecret
+) {
+
+  const offerId =
+    cleanString(
+      offer.id ||
+      "",
+      100
+    );
+
+  const email =
+    cleanString(
+      membership.email ||
+      "",
+      254
+    )
+    .toLowerCase();
+
+  const subscriptionId =
+    cleanString(
+      membership.subscriptionId ||
+      "",
+      300
+    );
+
+  const nowSeconds =
+    Math.floor(
+      Date.now() /
+      1000
+    );
+
+  const offerEndSeconds =
+    Math.floor(
+      new Date(
+        offer.ends_at
+      )
+      .getTime() /
+      1000
+    );
+
+  /*
+  Barcode is refreshed at least every 24 hours.
+  It will never outlive the offer itself.
+  */
+
+  const expiresAt =
+    Math.min(
+      offerEndSeconds,
+      nowSeconds +
+        86400
+    );
+
+  const offerPrefix =
+    offerId
+      .replace(
+        /-/g,
+        ""
+      )
+      .slice(
+        0,
+        12
+      )
+      .toUpperCase();
+
+  /*
+  Member fingerprint contains no email
+  and cannot be reversed back to the email.
+  */
+
+  const memberFingerprint =
+    crypto
+      .createHash(
+        "sha256"
+      )
+      .update(
+        `${email}|${subscriptionId}`
+      )
+      .digest(
+        "hex"
+      )
+      .slice(
+        0,
+        10
+      )
+      .toUpperCase();
+
+  const expiryCode =
+    expiresAt
+      .toString(
+        36
+      )
+      .toUpperCase();
+
+  const signature =
+    crypto
+      .createHmac(
+        "sha256",
+        voucherSecret
+      )
+      .update(
+        [
+          offerId,
+          email,
+          subscriptionId,
+          expiresAt
+        ].join("|")
+      )
+      .digest(
+        "hex"
+      )
+      .slice(
+        0,
+        16
+      )
+      .toUpperCase();
+
+  const barcodeValue =
+    [
+      "PD1",
+      offerPrefix,
+      memberFingerprint,
+      expiryCode,
+      signature
+    ]
+    .join("-");
+
+  return {
+
+    value:
+      barcodeValue,
+
+    expiresAt,
+
+    expiresAtIso:
+      new Date(
+        expiresAt *
+        1000
+      )
+      .toISOString()
+
+  };
+
+}
+
+/* =========================================================
+HANDLER
 ========================================================= */
 
 module.exports =
@@ -1467,7 +1797,7 @@ async function handler(
   }
 
   /* =======================================================
-     COOKIE
+  VERIFY SIGNED CLUB COOKIE
   ======================================================= */
 
   const cookieSecret =
@@ -1512,7 +1842,7 @@ async function handler(
   }
 
   /* =======================================================
-     STRIPE MEMBERSHIP
+  VERIFY REAL STRIPE MEMBERSHIP
   ======================================================= */
 
   let membership;
@@ -1530,7 +1860,7 @@ async function handler(
   ) {
 
     console.error(
-      "PETS & DOGUE voucher Stripe verification:",
+      "PETS & DOGUE discount Stripe verification:",
       error
     );
 
@@ -1541,6 +1871,9 @@ async function handler(
 
         ok:
           false,
+
+        temporary:
+          true,
 
         error:
           "Unable to verify Club membership right now."
@@ -1578,7 +1911,7 @@ async function handler(
   }
 
   /* =======================================================
-     OFFER
+  LOAD OFFER
   ======================================================= */
 
   let offer;
@@ -1595,7 +1928,7 @@ async function handler(
   ) {
 
     console.error(
-      "PETS & DOGUE voucher offer lookup:",
+      "PETS & DOGUE discount offer lookup:",
       error
     );
 
@@ -1608,7 +1941,7 @@ async function handler(
           false,
 
         error:
-          "Unable to load this voucher."
+          "Unable to load this offer."
 
       }
     );
@@ -1641,7 +1974,7 @@ async function handler(
   }
 
   /* =======================================================
-     ALREADY REDEEMED
+  CHECK PREVIOUS REDEMPTION
   ======================================================= */
 
   if (
@@ -1664,7 +1997,7 @@ async function handler(
     ) {
 
       console.error(
-        "PETS & DOGUE voucher redemption lookup:",
+        "PETS & DOGUE redemption lookup:",
         error
       );
 
@@ -1676,8 +2009,11 @@ async function handler(
           ok:
             false,
 
+          temporary:
+            true,
+
           error:
-            "Unable to verify this voucher right now."
+            "Unable to verify this discount right now."
 
         }
       );
@@ -1710,10 +2046,112 @@ async function handler(
   }
 
   /* =======================================================
-     SAFE VOUCHER RESPONSE
-
-     Viewing this response does NOT mark the voucher used.
+  ONLINE DISCOUNT
   ======================================================= */
+
+  if (
+    validation.redemptionType ===
+      "online"
+  ) {
+
+    const promoCode =
+      cleanString(
+        offer.promo_code ||
+        "",
+        150
+      );
+
+    return sendJson(
+      res,
+      200,
+      {
+
+        ok:
+          true,
+
+        voucher: {
+
+          offerId:
+            offer.id,
+
+          redemptionType:
+            "online",
+
+          businessName:
+            cleanString(
+              offer.business_name ||
+              "",
+              200
+            ),
+
+          title:
+            cleanString(
+              offer.title ||
+              "",
+              220
+            ),
+
+          promoCode,
+
+          barcodeValue:
+            null,
+
+          instructions:
+            "",
+
+          validUntil:
+            offer.ends_at ||
+            null,
+
+          location: {
+
+            scope:
+              offer.location_scope ||
+              "international",
+
+            countryCode:
+              offer.country_code ||
+              null,
+
+            countryName:
+              offer.country_name ||
+              null,
+
+            city:
+              offer.city ||
+              null
+
+          },
+
+          oneUsePerSubscriber:
+            offer.one_use_per_subscriber !==
+            false,
+
+          redeemed:
+            false
+
+        }
+
+      }
+    );
+
+  }
+
+  /* =======================================================
+  IN-STORE MEMBER BARCODE
+  ======================================================= */
+
+  const voucherSecret =
+    getVoucherSecret(
+      stripeSecretKey
+    );
+
+  const memberBarcode =
+    createMemberBarcode(
+      offer,
+      membership,
+      voucherSecret
+    );
 
   return sendJson(
     res,
@@ -1727,6 +2165,9 @@ async function handler(
 
         offerId:
           offer.id,
+
+        redemptionType:
+          "offline",
 
         businessName:
           cleanString(
@@ -1742,19 +2183,22 @@ async function handler(
             220
           ),
 
+        /*
+        Important:
+        offline promoCode is intentionally null.
+
+        The frontend will therefore use barcodeValue,
+        which is the protected personal member token.
+        */
+
         promoCode:
-          cleanString(
-            offer.promo_code ||
-            "",
-            150
-          ),
+          null,
 
         barcodeValue:
-          cleanString(
-            offer.promo_code ||
-            "",
-            150
-          ),
+          memberBarcode.value,
+
+        barcodeExpiresAt:
+          memberBarcode.expiresAtIso,
 
         instructions:
           cleanString(
