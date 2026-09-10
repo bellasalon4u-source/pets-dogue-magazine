@@ -9,32 +9,28 @@ PROTECTED PARTNER OFFER REDEMPTION
 Purpose:
 
 - redeem an IN-STORE PETS & DOGUE Club discount
-- accept a protected member barcode
-- require protected partner/server authorization
-- verify the barcode signature
+- accept a protected PD2 member barcode
+- authenticate the partner with a signed HttpOnly session
+- optionally allow direct server-to-server secret auth
+- verify barcode signature and expiry
 - re-check the real Stripe subscription
-- verify that the Club membership is active / trialing
-- verify the offer in Supabase
+- verify active / trialing Club membership
+- verify offer status, dates and availability
 - prevent repeat redemption where required
-- mark the offer as redeemed only after confirmed scan
+- mark the offer redeemed only after confirmed scan
 
-IMPORTANT:
+PARTNER SESSION:
 
-This endpoint is NOT for public browser use.
+pets_dogue_partner_redeem_session
 
-A partner scanner / merchant portal will call this endpoint
-through protected server-side authorization.
-
-The barcode itself contains:
-- no email
-- no name
-- no payment details
-
-Expected new barcode format:
+PD2 BARCODE:
 
 PD2-<HEX_SUBSCRIPTION_ID>-<EXPIRY_BASE36>-<SIGNATURE>
 
-The offer ID is sent separately by the merchant scanner.
+The barcode contains:
+- no member email
+- no member name
+- no payment information
 
 =========================================================
 */
@@ -44,6 +40,12 @@ const crypto =
 
 const STRIPE_API_BASE =
   "https://api.stripe.com/v1";
+
+const PARTNER_COOKIE_NAME =
+  "pets_dogue_partner_redeem_session";
+
+const PARTNER_COOKIE_VERSION =
+  "v1";
 
 const ACTIVE_MEMBERSHIP_STATUSES =
   new Set([
@@ -334,7 +336,80 @@ async function readRequestBody(
 }
 
 /* =========================================================
-PARTNER REDEMPTION SECRET
+COOKIES
+========================================================= */
+
+function parseCookies(
+  req
+) {
+
+  const raw =
+    cleanString(
+      req.headers?.cookie ||
+      "",
+      12000
+    );
+
+  const result =
+    {};
+
+  if (
+    !raw
+  ) {
+
+    return result;
+
+  }
+
+  raw
+    .split(";")
+    .forEach(
+      part => {
+
+        const index =
+          part.indexOf("=");
+
+        if (
+          index < 1
+        ) {
+
+          return;
+
+        }
+
+        const key =
+          part
+            .slice(
+              0,
+              index
+            )
+            .trim();
+
+        const value =
+          part
+            .slice(
+              index + 1
+            )
+            .trim();
+
+        if (
+          key
+        ) {
+
+          result[key] =
+            value;
+
+        }
+
+      }
+    );
+
+  return result;
+
+}
+
+/* =========================================================
+REDEEM SECRET
 ========================================================= */
 
 function getRedeemSecret() {
@@ -348,108 +423,32 @@ function getRedeemSecret() {
 
 }
 
-function readAuthorizationSecret(
-  req
+/* =========================================================
+SESSION SECRET
+========================================================= */
+
+function getPartnerCookieSecret(
+  redeemSecret
 ) {
 
-  const authorization =
-    cleanString(
-      req.headers?.authorization ||
-      "",
-      2200
+  return crypto
+    .createHash(
+      "sha256"
+    )
+    .update(
+      `pets-dogue-partner-session:${redeemSecret}`
+    )
+    .digest(
+      "hex"
     );
-
-  if (
-    authorization
-      .toLowerCase()
-      .startsWith(
-        "bearer "
-      )
-  ) {
-
-    return authorization
-      .slice(
-        7
-      )
-      .trim();
-
-  }
-
-  return cleanString(
-    req.headers?.[
-      "x-pets-dogue-redeem-key"
-    ] ||
-    "",
-    2000
-  );
-
-}
-
-function verifyPartnerAuthorization(
-  req
-) {
-
-  const configured =
-    getRedeemSecret();
-
-  if (
-    configured.length <
-      32
-  ) {
-
-    return {
-
-      ok:
-        false,
-
-      configured:
-        false
-
-    };
-
-  }
-
-  const supplied =
-    readAuthorizationSecret(
-      req
-    );
-
-  if (
-    !supplied
-  ) {
-
-    return {
-
-      ok:
-        false,
-
-      configured:
-        true
-
-    };
-
-  }
-
-  return {
-
-    ok:
-      safeEqual(
-        supplied,
-        configured
-      ),
-
-    configured:
-      true
-
-  };
 
 }
 
 /* =========================================================
-SESSION / VOUCHER SECRET
+VOUCHER SECRET
 ========================================================= */
 
-function getCookieSecret(
+function getClubSessionSecret(
   stripeSecretKey
 ) {
 
@@ -505,7 +504,7 @@ function getVoucherSecret(
   }
 
   const sessionSecret =
-    getCookieSecret(
+    getClubSessionSecret(
       stripeSecretKey
     );
 
@@ -523,6 +522,423 @@ function getVoucherSecret(
 }
 
 /* =========================================================
+PARTNER SESSION SIGNATURE
+========================================================= */
+
+function signPartnerPayload(
+  encodedPayload,
+  secret
+) {
+
+  return crypto
+    .createHmac(
+      "sha256",
+      secret
+    )
+    .update(
+      encodedPayload
+    )
+    .digest(
+      "base64url"
+    );
+
+}
+
+/* =========================================================
+VERIFY PARTNER COOKIE
+========================================================= */
+
+function verifyPartnerCookie(
+  req,
+  redeemSecret
+) {
+
+  const cookies =
+    parseCookies(
+      req
+    );
+
+  const raw =
+    cleanString(
+      cookies[
+        PARTNER_COOKIE_NAME
+      ] ||
+      "",
+      12000
+    );
+
+  if (
+    !raw
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "missing"
+
+    };
+
+  }
+
+  const parts =
+    raw.split(".");
+
+  if (
+    parts.length !==
+      3
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "invalid"
+
+    };
+
+  }
+
+  const [
+    version,
+    encodedPayload,
+    signature
+  ] =
+    parts;
+
+  if (
+    version !==
+      PARTNER_COOKIE_VERSION
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "version"
+
+    };
+
+  }
+
+  const secret =
+    getPartnerCookieSecret(
+      redeemSecret
+    );
+
+  const expected =
+    signPartnerPayload(
+      encodedPayload,
+      secret
+    );
+
+  if (
+    !safeEqual(
+      signature,
+      expected
+    )
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "signature"
+
+    };
+
+  }
+
+  let payload;
+
+  try {
+
+    payload =
+      JSON.parse(
+        Buffer
+          .from(
+            encodedPayload,
+            "base64url"
+          )
+          .toString(
+            "utf8"
+          )
+      );
+
+  } catch {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "payload"
+
+    };
+
+  }
+
+  if (
+    payload?.role !==
+      "partner_redeem"
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "role"
+
+    };
+
+  }
+
+  const expiresAt =
+    Number(
+      payload?.exp ||
+      0
+    );
+
+  const issuedAt =
+    Number(
+      payload?.iat ||
+      0
+    );
+
+  const now =
+    Math.floor(
+      Date.now() /
+      1000
+    );
+
+  if (
+    !Number.isFinite(
+      expiresAt
+    ) ||
+    !Number.isFinite(
+      issuedAt
+    ) ||
+    expiresAt <=
+      now
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "expired"
+
+    };
+
+  }
+
+  if (
+    issuedAt >
+      now + 300
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "issued"
+
+    };
+
+  }
+
+  return {
+
+    ok:
+      true,
+
+    expiresAt
+
+  };
+
+}
+
+/* =========================================================
+DIRECT SERVER AUTH
+
+Kept for future server-to-server partner integrations.
+The browser scanner will use the HttpOnly cookie instead.
+========================================================= */
+
+function readAuthorizationSecret(
+  req
+) {
+
+  const authorization =
+    cleanString(
+      req.headers?.authorization ||
+      "",
+      2200
+    );
+
+  if (
+    authorization
+      .toLowerCase()
+      .startsWith(
+        "bearer "
+      )
+  ) {
+
+    return authorization
+      .slice(
+        7
+      )
+      .trim();
+
+  }
+
+  return cleanString(
+    req.headers?.[
+      "x-pets-dogue-redeem-key"
+    ] ||
+    "",
+    2000
+  );
+
+}
+
+function verifyDirectSecret(
+  req,
+  redeemSecret
+) {
+
+  const supplied =
+    readAuthorizationSecret(
+      req
+    );
+
+  if (
+    !supplied
+  ) {
+
+    return false;
+
+  }
+
+  return safeEqual(
+    supplied,
+    redeemSecret
+  );
+
+}
+
+/* =========================================================
+PARTNER AUTHORIZATION
+========================================================= */
+
+function verifyPartnerAuthorization(
+  req
+) {
+
+  const redeemSecret =
+    getRedeemSecret();
+
+  if (
+    redeemSecret.length <
+      32
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      configured:
+        false,
+
+      method:
+        null
+
+    };
+
+  }
+
+  const cookie =
+    verifyPartnerCookie(
+      req,
+      redeemSecret
+    );
+
+  if (
+    cookie.ok
+  ) {
+
+    return {
+
+      ok:
+        true,
+
+      configured:
+        true,
+
+      method:
+        "session"
+
+    };
+
+  }
+
+  if (
+    verifyDirectSecret(
+      req,
+      redeemSecret
+    )
+  ) {
+
+    return {
+
+      ok:
+        true,
+
+      configured:
+        true,
+
+      method:
+        "secret"
+
+    };
+
+  }
+
+  return {
+
+    ok:
+      false,
+
+    configured:
+      true,
+
+    method:
+      null,
+
+    reason:
+      cookie.reason
+
+  };
+
+}
+
+/* =========================================================
 BARCODE
 ========================================================= */
 
@@ -533,7 +949,7 @@ function decodeSubscriptionIdHex(
   const hex =
     cleanString(
       value,
-      300
+      500
     )
     .toUpperCase();
 
@@ -575,6 +991,15 @@ function decodeSubscriptionIdHex(
 
     }
 
+    if (
+      subscriptionId.length >
+        300
+    ) {
+
+      return "";
+
+    }
+
     return subscriptionId;
 
   } catch {
@@ -592,7 +1017,7 @@ function parseBarcode(
   const barcode =
     cleanString(
       value,
-      600
+      800
     )
     .toUpperCase();
 
@@ -662,12 +1087,15 @@ function parseBarcode(
 
   }
 
+  const now =
+    Math.floor(
+      Date.now() /
+      1000
+    );
+
   if (
     expiresAt <=
-      Math.floor(
-        Date.now() /
-        1000
-      )
+      now
   ) {
 
     return {
@@ -684,6 +1112,29 @@ function parseBarcode(
 
   }
 
+  /*
+  A valid PETS & DOGUE PD2 barcode should never
+  be valid for an unreasonable amount of time.
+  */
+
+  if (
+    expiresAt >
+      now +
+        90000
+  ) {
+
+    return {
+
+      ok:
+        false,
+
+      reason:
+        "expiry"
+
+    };
+
+  }
+
   return {
 
     ok:
@@ -694,7 +1145,10 @@ function parseBarcode(
     expiresAt,
 
     signature:
-      match[3]
+      match[3],
+
+    raw:
+      barcode
 
   };
 
@@ -717,7 +1171,8 @@ function createExpectedBarcodeSignature(
         offerId,
         subscriptionId,
         expiresAt
-      ].join("|")
+      ]
+      .join("|")
     )
     .digest(
       "hex"
@@ -1094,7 +1549,7 @@ async function verifyStripeMembership(
 }
 
 /* =========================================================
-SUPABASE CONFIG
+SUPABASE
 ========================================================= */
 
 function getSupabaseConfig() {
@@ -1324,7 +1779,9 @@ async function getExistingRedemption(
 
   return rows[0];
 
-} /* =========================================================
+}
+
+/* =========================================================
 OFFER VALIDATION
 ========================================================= */
 
@@ -1520,7 +1977,8 @@ function validateOffer(
     Number.isFinite(
       maximum
     ) &&
-    maximum > 0 &&
+    maximum >
+      0 &&
     redeemed >=
       maximum
   ) {
@@ -1543,11 +2001,7 @@ function validateOffer(
   return {
 
     ok:
-      true,
-
-    redeemed,
-
-    maximum
+      true
 
   };
 
@@ -1562,19 +2016,6 @@ async function createRedemption(
   membership
 ) {
 
-  const body = {
-
-    offer_id:
-      offer.id,
-
-    subscriber_email:
-      membership.email,
-
-    status:
-      "redeemed"
-
-  };
-
   const rows =
     await supabaseFetch(
       "offer_redemptions",
@@ -1586,7 +2027,18 @@ async function createRedemption(
         prefer:
           "return=representation",
 
-        body
+        body: {
+
+          offer_id:
+            offer.id,
+
+          subscriber_email:
+            membership.email,
+
+          status:
+            "redeemed"
+
+        }
 
       }
     );
@@ -1653,11 +2105,8 @@ async function updateOfferRedemptionCount(
   ) {
 
     /*
-    The redemption itself has already succeeded.
-
-    We do not roll it back if the cached counter update fails.
-    The redemption table remains the source of truth for
-    member-level redemption checks.
+    Redemption already exists in offer_redemptions.
+    The counter is secondary and may be reconciled later.
     */
 
     console.error(
@@ -1709,13 +2158,13 @@ async function handler(
   PARTNER AUTHORIZATION
   ======================================================= */
 
-  const partnerAuthorization =
+  const authorization =
     verifyPartnerAuthorization(
       req
     );
 
   if (
-    !partnerAuthorization
+    !authorization
       .configured
   ) {
 
@@ -1739,7 +2188,7 @@ async function handler(
   }
 
   if (
-    !partnerAuthorization.ok
+    !authorization.ok
   ) {
 
     return sendJson(
@@ -1750,8 +2199,11 @@ async function handler(
         ok:
           false,
 
+        partnerLoginRequired:
+          true,
+
         error:
-          "Partner authorization is required."
+          "Partner login is required."
 
       }
     );
@@ -1834,13 +2286,11 @@ async function handler(
         req
       );
 
-  } catch (
-    error
-  ) {
+  } catch {
 
     return sendJson(
       res,
-      413,
+      400,
       {
 
         ok:
@@ -1866,7 +2316,7 @@ async function handler(
       body?.barcodeValue ||
       body?.barcode ||
       "",
-      600
+      800
     );
 
   if (
@@ -1954,7 +2404,7 @@ async function handler(
   }
 
   /* =======================================================
-  VERIFY SIGNATURE
+  VERIFY BARCODE SIGNATURE
   ======================================================= */
 
   const voucherSecret =
@@ -1962,15 +2412,12 @@ async function handler(
       stripeSecretKey
     );
 
-  const signatureValid =
-    verifyBarcodeSignature(
+  if (
+    !verifyBarcodeSignature(
       parsedBarcode,
       offerId,
       voucherSecret
-    );
-
-  if (
-    !signatureValid
+    )
   ) {
 
     return sendJson(
@@ -2124,7 +2571,7 @@ async function handler(
   }
 
   /* =======================================================
-  CHECK IF ALREADY REDEEMED
+  CHECK PREVIOUS REDEMPTION
   ======================================================= */
 
   if (
@@ -2202,9 +2649,7 @@ async function handler(
   }
 
   /* =======================================================
-  FINAL EXPIRY CHECK
-
-  We check again immediately before writing.
+  FINAL BARCODE EXPIRY CHECK
   ======================================================= */
 
   if (
@@ -2260,12 +2705,6 @@ async function handler(
       error
     );
 
-    /*
-    A database uniqueness rule may later return an error here
-    if two scans happen at almost exactly the same time.
-    That is safer than issuing the same one-use discount twice.
-    */
-
     return sendJson(
       res,
       409,
@@ -2291,9 +2730,9 @@ async function handler(
       .toISOString();
 
   /* =======================================================
-  SAFE SUCCESS RESPONSE
+  SUCCESS
 
-  Do not return the member's email to the merchant client.
+  Member email is deliberately NOT returned.
   ======================================================= */
 
   return sendJson(
@@ -2311,6 +2750,9 @@ async function handler(
         true,
 
       membershipActive:
+        true,
+
+      partnerAuthenticated:
         true,
 
       redemption: {
