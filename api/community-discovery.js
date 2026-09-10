@@ -2,42 +2,59 @@
 
 /* =========================================================
 PETS & DOGUE
-LOCAL COMMUNITY — LIVE DISCOVERY AGGREGATOR
-Vercel Serverless Function
+LOCAL COMMUNITY — FREE DISCOVERY
 
-Finds fresh LOCAL animal/community information for the
-selected place and radius:
-- events, meetups, group walks, breed meetups
-- dog/cat shows, exhibitions, festivals, adoption days
-- lost / seen / found pets
-- help, volunteers, foster, adoption
-- local animal news
+FREE PUBLIC SOURCES ONLY:
+- Google News RSS
+- GDELT
+- Reddit public RSS
+- OpenStreetMap / Overpass
+- OpenStreetMap / Nominatim
 
-No extra npm packages required.
+NO:
+- SerpApi
+- Serper
+- Brave
+- Bing
+- NewsAPI
+- DeepL
+- paid search API
 
-Optional environment variables:
-SERPAPI_API_KEY=
-SERPER_API_KEY=
-BRAVE_SEARCH_API_KEY=
-BING_SEARCH_API_KEY=
-TICKETMASTER_API_KEY=
-NEWSAPI_API_KEY=
-DEEPL_API_KEY=
+CATEGORIES:
+- lost
+- seen
+- found
+- event
+- group
+- help
+- volunteers
+- foster
+- adoption
+- news
 ========================================================= */
 
-const DEFAULT_LIMIT = 32;
+
+/* =========================================================
+CONFIG
+========================================================= */
+
+const DEFAULT_LIMIT = 40;
 const MAX_LIMIT = 60;
+
 const DEFAULT_RADIUS_KM = 15;
 const MAX_RADIUS_KM = 100;
-const REQUEST_TIMEOUT = 5200;
-const MAX_PROVIDER_RESULTS = 10;
-const CACHE_SECONDS = 180;
+
+const REQUEST_TIMEOUT = 6500;
+const OVERPASS_TIMEOUT = 9000;
+
+const CACHE_SECONDS = 600;
 
 const CATEGORIES = [
-  "event",
   "lost",
   "seen",
   "found",
+  "event",
+  "group",
   "help",
   "volunteers",
   "foster",
@@ -45,382 +62,1026 @@ const CATEGORIES = [
   "news"
 ];
 
-const WEIGHTS = {
-  event:3,
-  lost:2,
-  seen:1,
-  found:1,
-  help:1,
-  volunteers:1,
-  foster:1,
-  adoption:2,
-  news:1
-};
-
-const LANGUAGES = new Set([
-  "en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
-  "hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+const SUPPORTED_LANGUAGES = new Set([
+  "en",
+  "uk",
+  "ru",
+  "fr",
+  "de",
+  "es",
+  "it",
+  "pt",
+  "nl",
+  "pl",
+  "cs",
+  "sk",
+  "hu",
+  "ro",
+  "bg",
+  "el",
+  "sv",
+  "da",
+  "no",
+  "fi",
+  "tr",
+  "ar",
+  "hi"
 ]);
 
 const LANGUAGE_ALIASES = {
-  ua:"uk",
-  cz:"cs",
-  gr:"el",
-  se:"sv",
-  dk:"da"
+  ua: "uk",
+  cz: "cs",
+  gr: "el",
+  se: "sv",
+  dk: "da"
 };
 
-const EVENT_HINTS = {
-  en:"pet events dog meetups group dog walks dog shows cat shows pet festivals adoption events",
-  uk:"події для тварин зустрічі собак прогулянки виставки фестивалі адопція",
-  ru:"мероприятия для животных встречи собак прогулки выставки фестивали пристройство",
-  fr:"événements animaux rencontres chiens promenades expositions festivals adoption",
-  de:"Tierveranstaltungen Hundetreffen Spaziergänge Ausstellungen Festivals Adoption",
-  es:"eventos mascotas encuentros perros paseos exposiciones festivales adopción",
-  it:"eventi animali raduni cani passeggiate mostre festival adozioni",
-  pt:"eventos animais encontros cães passeios exposições festivais adoção",
-  nl:"dierenevenementen hondenmeetups wandelingen shows festivals adoptie",
-  pl:"wydarzenia dla zwierząt spotkania psów spacery wystawy festiwale adopcja",
-  cs:"zvířecí akce setkání psů procházky výstavy festivaly adopce",
-  sk:"zvieracie podujatia stretnutia psov prechádzky výstavy festivaly adopcia",
-  hu:"állatos események kutyatalálkozók séták kiállítások fesztiválok örökbefogadás",
-  ro:"evenimente animale întâlniri câini plimbări expoziții festivaluri adopție",
-  bg:"събития за животни срещи кучета разходки изложби фестивали осиновяване",
-  el:"εκδηλώσεις ζώων συναντήσεις σκύλων βόλτες εκθέσεις φεστιβάλ υιοθεσία",
-  sv:"djurevenemang hundträffar promenader utställningar festivaler adoption",
-  da:"dyrearrangementer hundetræf gåture udstillinger festivaler adoption",
-  no:"dyrearrangementer hundetreff turer utstillinger festivaler adopsjon",
-  fi:"eläintapahtumat koiratapaamiset kävelyt näyttelyt festivaalit adoptio",
-  tr:"evcil hayvan etkinlikleri köpek buluşmaları yürüyüşler gösteriler festivaller sahiplendirme",
-  ar:"فعاليات الحيوانات لقاءات الكلاب نزهات عروض مهرجانات تبني",
-  hi:"पालतू कार्यक्रम डॉग मीटअप वॉक शो उत्सव गोद लेना"
-};
 
-const TERMS = {
-  event:[
-    "pet event","dog event","dog meetup","breed meetup","group dog walk",
-    "puppy social","dog show","cat show","pet exhibition","pet festival",
-    "animal festival","adoption event","shelter open day","pet charity event",
-    "dog agility event","dog training workshop"
+/* =========================================================
+SEARCH WORDS
+========================================================= */
+
+const SEARCH_TERMS = {
+
+  lost: [
+    "lost dog",
+    "lost cat",
+    "missing pet",
+    "missing dog",
+    "missing cat"
   ],
-  lost:["lost dog","lost cat","missing pet","missing dog","missing cat"],
-  seen:["lost dog sighting","lost cat sighting","stray pet sighting","dog seen roaming"],
-  found:["lost pet found","lost dog found","lost cat found","pet reunited"],
-  help:["animal rescue needs help","animal shelter needs help","urgent animal help","pet fundraiser"],
-  volunteers:["animal shelter volunteers","animal rescue volunteers","dog rescue volunteers"],
-  foster:["animal foster home needed","dog foster needed","cat foster needed"],
-  adoption:["dog adoption","cat adoption","pet adoption","animal needs home","pet looking for family"],
-  news:["local animal news","local pet news","animal welfare news","dog news","cat news"]
+
+  seen: [
+    "lost dog sighting",
+    "lost cat sighting",
+    "missing pet sighting",
+    "dog seen roaming",
+    "cat seen roaming"
+  ],
+
+  found: [
+    "lost dog found",
+    "lost cat found",
+    "missing pet found",
+    "pet reunited",
+    "owner found"
+  ],
+
+  event: [
+    "pet event",
+    "dog event",
+    "dog meetup",
+    "cat meetup",
+    "breed meetup",
+    "group dog walk",
+    "dog walking event",
+    "dog show",
+    "cat show",
+    "pet show",
+    "pet exhibition",
+    "pet festival",
+    "animal festival",
+    "adoption event",
+    "shelter event",
+    "dog agility event"
+  ],
+
+  group: [
+    "dog club",
+    "cat club",
+    "pet club",
+    "breed club",
+    "kennel club",
+    "dog owners group",
+    "cat owners group",
+    "pet owners group",
+    "dog lovers group",
+    "cat lovers group",
+    "dog walking group",
+    "pet community group",
+    "neighbourhood pet group",
+    "neighborhood pet group",
+    "animal association",
+    "dog society",
+    "cat society"
+  ],
+
+  help: [
+    "animal rescue help",
+    "pet rescue appeal",
+    "animal shelter needs help",
+    "animal fundraiser",
+    "pet fundraiser"
+  ],
+
+  volunteers: [
+    "animal shelter volunteers",
+    "animal rescue volunteers",
+    "dog rescue volunteers",
+    "cat rescue volunteers"
+  ],
+
+  foster: [
+    "dog foster needed",
+    "cat foster needed",
+    "animal foster needed",
+    "temporary foster pet"
+  ],
+
+  adoption: [
+    "dog adoption",
+    "cat adoption",
+    "pet adoption",
+    "animal needs home",
+    "pet looking for family"
+  ],
+
+  news: [
+    "local animal news",
+    "local pet news",
+    "animal welfare news",
+    "dog news",
+    "cat news"
+  ]
+
 };
+
+
+/* =========================================================
+LOCAL LANGUAGE HINTS
+========================================================= */
+
+const LOCAL_HINTS = {
+
+  en: {
+    event: "pet event dog meetup",
+    group: "dog club cat club pet group",
+    lost: "lost pet",
+    seen: "lost pet sighting",
+    found: "pet found",
+    help: "animal rescue help",
+    volunteers: "animal volunteers",
+    foster: "pet foster",
+    adoption: "pet adoption",
+    news: "local animal news"
+  },
+
+  uk: {
+    event: "події для тварин зустріч собак",
+    group: "клуб собак клуб котів група власників тварин",
+    lost: "загублена тварина",
+    seen: "помітили загублену тварину",
+    found: "тварину знайдено",
+    help: "допомога тваринам",
+    volunteers: "волонтери для тварин",
+    foster: "перетримка тварин",
+    adoption: "тварина шукає родину",
+    news: "місцеві новини про тварин"
+  },
+
+  ru: {
+    event: "мероприятия для животных встреча собак",
+    group: "клуб собак клуб кошек группа владельцев животных",
+    lost: "пропало животное",
+    seen: "видели пропавшее животное",
+    found: "животное найдено",
+    help: "помощь животным",
+    volunteers: "волонтеры для животных",
+    foster: "передержка животных",
+    adoption: "животное ищет семью",
+    news: "местные новости животных"
+  },
+
+  fr: {
+    event: "événement animaux rencontre chiens",
+    group: "club chiens club chats groupe animaux"
+  },
+
+  de: {
+    event: "Tierveranstaltung Hundetreffen",
+    group: "Hundeverein Katzenverein Tiergruppe"
+  },
+
+  es: {
+    event: "evento mascotas encuentro perros",
+    group: "club perros club gatos grupo mascotas"
+  },
+
+  it: {
+    event: "evento animali raduno cani",
+    group: "club cani club gatti gruppo animali"
+  },
+
+  pt: {
+    event: "evento animais encontro cães",
+    group: "clube cães clube gatos grupo animais"
+  },
+
+  nl: {
+    event: "dierenevenement honden meetup",
+    group: "hondenclub kattenclub dierengroep"
+  },
+
+  pl: {
+    event: "wydarzenie dla zwierząt spotkanie psów",
+    group: "klub psów klub kotów grupa zwierząt"
+  },
+
+  cs: {
+    event: "zvířecí akce setkání psů",
+    group: "klub psů klub koček skupina zvířat"
+  },
+
+  sk: {
+    event: "zvieracie podujatie stretnutie psov",
+    group: "klub psov klub mačiek skupina zvierat"
+  },
+
+  hu: {
+    event: "állatos esemény kutyás találkozó",
+    group: "kutyaklub macskaklub állatos csoport"
+  },
+
+  ro: {
+    event: "eveniment animale întâlnire câini",
+    group: "club câini club pisici grup animale"
+  },
+
+  bg: {
+    event: "събитие за животни среща кучета",
+    group: "клуб кучета клуб котки група животни"
+  },
+
+  el: {
+    event: "εκδήλωση ζώων συνάντηση σκύλων",
+    group: "λέσχη σκύλων λέσχη γατών ομάδα ζώων"
+  },
+
+  sv: {
+    event: "djurevent hundträff",
+    group: "hundklubb kattklubb djurgrupp"
+  },
+
+  da: {
+    event: "dyrearrangement hundetræf",
+    group: "hundeklub katteklub dyregruppe"
+  },
+
+  no: {
+    event: "dyrearrangement hundetreff",
+    group: "hundeklubb katteklubb dyregruppe"
+  },
+
+  fi: {
+    event: "eläintapahtuma koiratapaaminen",
+    group: "koirakerho kissakerho eläinryhmä"
+  },
+
+  tr: {
+    event: "evcil hayvan etkinliği köpek buluşması",
+    group: "köpek kulübü kedi kulübü hayvan grubu"
+  },
+
+  ar: {
+    event: "فعالية حيوانات لقاء كلاب",
+    group: "نادي كلاب نادي قطط مجموعة حيوانات"
+  },
+
+  hi: {
+    event: "पालतू कार्यक्रम डॉग मीटअप",
+    group: "डॉग क्लब कैट क्लब पालतू समूह"
+  }
+
+};
+
+
+/* =========================================================
+CLASSIFICATION
+========================================================= */
 
 const KEYWORDS = {
-  found:["found","reunited","returned home","back home","owner found","найден","нашёлся","знайден","retrouvé","gefunden","encontrado","ritrovato","gevonden","odnalezion","nalezen","nájden","megtalált","găsit","намерен","βρέθηκε","hittad","fundet","funnet","löytynyt","bulundu","تم العثور","मिला"],
-  lost:["lost dog","lost cat","missing dog","missing cat","missing pet","lost pet","пропала собака","пропал кот","пропала кошка","потерялся","загубився","chien perdu","chat perdu","hund vermisst","katze vermisst","perro perdido","gato perdido","cane smarrito","gatto smarrito","cão perdido","hond vermist","kat vermist","zaginął pies","ztracený pes","stratený pes","elveszett kutya","câine pierdut","изгубено куче","χαμένος σκύλος","försvunnen hund","savnet hund","kadonnut koira","kayıp köpek","كلب مفقود","खोया कुत्ता"],
-  seen:["sighted","sighting","seen roaming","spotted","видели","заметили","бачили","gesichtet","aperçu","avistado","avvistato","widziano","viděn","videný","látták","văzut","видяно","εθεάθη","sedd","set","nähty","görüldü","شوهد","देखा गया"],
-  event:["event","meetup","meet up","meeting","group walk","dog walk","breed meetup","puppy social","dog show","cat show","pet show","animal show","exhibition","expo","festival","pet fair","adoption day","adoption event","open day","charity event","fundraising event","training event","workshop","agility","competition","parade","мероприятие","встреча","выставка","прогулка","фестиваль","подія","зустріч","виставка","прогулянка"],
-  volunteers:["volunteer","volunteers","volunteering","волонтер","волонтёр","bénévole","freiwillige","voluntario","volontari","wolontariusz","dobrovolník","önkéntes","voluntar","εθελον","frivillig","vapaaehtois","gönüllü","متطوع","स्वयंसेव"],
-  foster:["foster","foster home","temporary foster","передерж","перетрим","famille d'accueil","pflegestelle","acogida","stallo","acolhimento","opvanggezin","dom tymczasowy","dočasná péče","dočasná starostlivosť","ideiglenes befogadó","găzduire temporară","временен дом","φιλοξενία","jourhem","plejehjem","fosterhjem","sijaiskoti","geçici yuva","استضافة مؤقتة","अस्थायी घर"],
-  adoption:["adopt","adoption","adoptable","needs a home","looking for home","looking for family","forever home","ищет дом","ищет семью","шукає дім","adopter","zuhause gesucht","adopción","adozione","adoção","adoptie","adopcji","k adopci","adopciu","örökbefogadás","adopție","осиновяване","υιοθεσία","adopsjon","adoptoitavaksi","sahiplendirme","للتبني","गोद"],
-  help:["help needed","needs help","urgent help","appeal","fundraiser","donation","rescue appeal","нужна помощь","потрібна допомога","besoin d'aide","braucht hilfe","necesita ayuda","serve aiuto","precisa ajuda","hulp nodig","potrzebuje pomocy","potřebuje pomoc","potrebuje pomoc","segítség","nevoie ajutor","нужда помощ","χρειάζεται βοήθεια","behöver hjälp","trenger hjelp","tarvitsee apua","yardım","يحتاج مساعدة","मदद चाहिए"]
+
+  found: [
+    "found",
+    "reunited",
+    "returned home",
+    "back home",
+    "owner found",
+    "safe home",
+    "найден",
+    "нашёлся",
+    "нашлась",
+    "знайден",
+    "retrouvé",
+    "gefunden",
+    "encontrado",
+    "ritrovato",
+    "gevonden",
+    "odnalezion",
+    "nalezen",
+    "nájden",
+    "hittad",
+    "fundet",
+    "funnet",
+    "löytynyt",
+    "bulundu"
+  ],
+
+  lost: [
+    "lost dog",
+    "lost cat",
+    "missing dog",
+    "missing cat",
+    "missing pet",
+    "lost pet",
+    "пропала собака",
+    "пропал кот",
+    "пропала кошка",
+    "потерялся",
+    "потерялась",
+    "загубився",
+    "загубилася",
+    "chien perdu",
+    "chat perdu",
+    "hund vermisst",
+    "katze vermisst",
+    "perro perdido",
+    "gato perdido",
+    "cane smarrito",
+    "gatto smarrito"
+  ],
+
+  seen: [
+    "sighting",
+    "sighted",
+    "spotted",
+    "seen roaming",
+    "stray seen",
+    "видели",
+    "заметили",
+    "бачили",
+    "gesichtet",
+    "aperçu",
+    "avistado",
+    "avvistato",
+    "widziano",
+    "nähty",
+    "görüldü"
+  ],
+
+  event: [
+    "event",
+    "events",
+    "meetup",
+    "meet up",
+    "meet-up",
+    "festival",
+    "dog show",
+    "cat show",
+    "pet show",
+    "animal show",
+    "exhibition",
+    "expo",
+    "pet fair",
+    "dog fair",
+    "adoption day",
+    "adoption event",
+    "open day",
+    "charity event",
+    "fundraising event",
+    "agility",
+    "competition",
+    "мероприятие",
+    "событие",
+    "встреча",
+    "выставка",
+    "фестиваль",
+    "подія",
+    "зустріч",
+    "виставка"
+  ],
+
+  group: [
+    "dog club",
+    "cat club",
+    "pet club",
+    "breed club",
+    "kennel club",
+    "dog society",
+    "cat society",
+    "animal association",
+    "dog owners group",
+    "cat owners group",
+    "pet owners group",
+    "dog lovers group",
+    "cat lovers group",
+    "walking group",
+    "dog walking group",
+    "pet community group",
+    "neighbourhood pet group",
+    "neighborhood pet group",
+    "клуб собак",
+    "клуб кошек",
+    "группа любителей собак",
+    "группа любителей кошек",
+    "группа владельцев собак",
+    "группа владельцев кошек",
+    "кинологический клуб",
+    "кінологічний клуб",
+    "група власників собак",
+    "група власників котів",
+    "hundeverein",
+    "katzenverein",
+    "club perros",
+    "club cani",
+    "hondenclub",
+    "kattenclub",
+    "klub psów",
+    "klub koček",
+    "klub psov",
+    "hundklubb",
+    "hundeklub",
+    "koirakerho",
+    "köpek kulübü"
+  ],
+
+  volunteers: [
+    "volunteer",
+    "volunteers",
+    "volunteering",
+    "волонтер",
+    "волонтёр",
+    "добровол",
+    "bénévole",
+    "freiwillige",
+    "voluntario",
+    "volontari",
+    "wolontariusz",
+    "dobrovolník",
+    "frivillig",
+    "vapaaehtois",
+    "gönüllü"
+  ],
+
+  foster: [
+    "foster",
+    "foster home",
+    "temporary foster",
+    "temporary home",
+    "передерж",
+    "перетрим",
+    "famille d'accueil",
+    "pflegestelle",
+    "acogida",
+    "stallo",
+    "acolhimento",
+    "opvanggezin",
+    "dom tymczasowy",
+    "dočasná péče",
+    "jourhem",
+    "plejehjem",
+    "fosterhjem",
+    "sijaiskoti"
+  ],
+
+  adoption: [
+    "adopt",
+    "adoption",
+    "adoptable",
+    "needs a home",
+    "looking for home",
+    "looking for family",
+    "forever home",
+    "ищет дом",
+    "ищет семью",
+    "шукає дім",
+    "шукає родину",
+    "adopter",
+    "zuhause gesucht",
+    "adopción",
+    "adozione",
+    "adoção",
+    "adoptie",
+    "adopcji",
+    "k adopci",
+    "adopsjon"
+  ],
+
+  help: [
+    "help needed",
+    "needs help",
+    "urgent help",
+    "appeal",
+    "fundraiser",
+    "donation",
+    "rescue appeal",
+    "нужна помощь",
+    "нужна допомога",
+    "потрібна допомога",
+    "besoin d'aide",
+    "braucht hilfe",
+    "necesita ayuda",
+    "serve aiuto",
+    "hulp nodig",
+    "potrzebuje pomocy",
+    "trenger hjelp",
+    "tarvitsee apua"
+  ]
+
 };
 
-const TRUSTED = [
-  "rspca.org.uk","bluecross.org.uk","dogstrust.org.uk","cats.org.uk",
-  "eventbrite.","meetup.com","allevents.in","ticketmaster.",
-  "thekennelclub.org.uk","gov.",".gov","facebook.com","instagram.com"
-];
 
-const BLOCKED = ["pinterest.com","quora.com","tiktok.com"];
+/* =========================================================
+UTILITIES
+========================================================= */
 
-function normalizeLanguage(value){
-  let code = String(value || "en").trim().toLowerCase().split(/[-_]/)[0];
-  code = LANGUAGE_ALIASES[code] || code;
-  return LANGUAGES.has(code) ? code : "en";
+function normalizeLanguage(value) {
+
+  let language = String(value || "en")
+    .trim()
+    .toLowerCase()
+    .split(/[-_]/)[0];
+
+  language =
+    LANGUAGE_ALIASES[language] ||
+    language;
+
+  return SUPPORTED_LANGUAGES.has(language)
+    ? language
+    : "en";
 }
 
-function cleanText(value){
+
+function cleanText(value) {
+
   return String(value || "")
-    .replace(/<script[\s\S]*?<\/script>/gi," ")
-    .replace(/<style[\s\S]*?<\/style>/gi," ")
-    .replace(/<[^>]+>/g," ")
-    .replace(/&nbsp;/g," ")
-    .replace(/&amp;/g,"&")
-    .replace(/&quot;/g,'"')
-    .replace(/&#39;|&#x27;/g,"'")
-    .replace(/&lt;/g,"<")
-    .replace(/&gt;/g,">")
-    .replace(/\s+/g," ")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&#x27;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
-function safeUrl(value){
-  try{
-    const url = new URL(String(value || ""));
-    return ["http:","https:"].includes(url.protocol) ? url.toString() : "";
-  }catch{
-    return "";
-  }
-}
 
-function hostname(value){
-  try{
-    return new URL(value).hostname.toLowerCase().replace(/^www\./,"");
-  }catch{
-    return "";
-  }
-}
+function safeUrl(value) {
 
-function stripTracking(value){
-  try{
-    const url = new URL(value);
-    ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","fbclid","gclid"].forEach(key=>url.searchParams.delete(key));
+  try {
+
+    const url = new URL(
+      String(value || "")
+    );
+
+    if (
+      url.protocol !== "http:" &&
+      url.protocol !== "https:"
+    ) {
+      return "";
+    }
+
     return url.toString();
-  }catch{
+
+  } catch {
+    return "";
+  }
+}
+
+
+function hostname(value) {
+
+  try {
+
+    return new URL(value)
+      .hostname
+      .toLowerCase()
+      .replace(/^www\./, "");
+
+  } catch {
+    return "";
+  }
+}
+
+
+function stripTracking(value) {
+
+  try {
+
+    const url = new URL(value);
+
+    [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+      "fbclid",
+      "gclid",
+      "mc_cid",
+      "mc_eid"
+    ].forEach(
+      key => url.searchParams.delete(key)
+    );
+
+    return url.toString();
+
+  } catch {
     return value;
   }
 }
 
-function isBlocked(value){
-  const host = hostname(value);
-  return BLOCKED.some(domain=>host===domain || host.endsWith("."+domain));
+
+function unique(values) {
+
+  return [
+    ...new Set(
+      values.filter(Boolean)
+    )
+  ];
 }
 
-function unique(values){
-  return [...new Set(values.filter(Boolean))];
+
+function clamp(value, min, max) {
+
+  return Math.min(
+    Math.max(
+      Number(value) || 0,
+      min
+    ),
+    max
+  );
 }
 
-function clamp(value,min,max){
-  return Math.min(Math.max(Number(value)||0,min),max);
+
+function numberOrNull(value) {
+
+  const number =
+    Number(value);
+
+  return Number.isFinite(number)
+    ? number
+    : null;
 }
 
-function numberOrNull(value){
-  const n = Number(value);
-  return Number.isFinite(n) ? n : null;
-}
 
-function normalizeDate(value){
-  if(!value) return null;
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date.toISOString();
-}
+function normalizeDate(value) {
 
-function daysUntil(value){
-  if(!value) return null;
-  const ms = new Date(value).getTime();
-  return Number.isNaN(ms) ? null : (ms-Date.now())/86400000;
-}
-
-function ageDays(value){
-  if(!value) return 999;
-  const ms = new Date(value).getTime();
-  return Number.isNaN(ms) ? 999 : (Date.now()-ms)/86400000;
-}
-
-function includesAny(text,words){
-  const value = String(text || "").toLowerCase();
-  return words.some(word=>value.includes(String(word).toLowerCase()));
-}
-
-function idFor(value){
-  let hash = 2166136261;
-  for(const char of String(value || "")){
-    hash ^= char.charCodeAt(0);
-    hash = Math.imul(hash,16777619);
-  }
-  return "community-"+(hash>>>0).toString(36);
-}
-
-function xmlTag(block,tag){
-  const match = String(block||"").match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`,`i`));
-  return match ? cleanText(match[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,"$1")) : "";
-}
-
-function quote(value){
-  return `"${String(value || "").replace(/"/g,"")}"`;
-}
-
-function parseDateFromText(text){
-  const value = String(text || "");
-
-  const iso = value.match(/\b(20\d{2})-(\d{2})-(\d{2})(?:[T\s](\d{1,2}):(\d{2}))?/);
-  if(iso){
-    const d = new Date(Number(iso[1]),Number(iso[2])-1,Number(iso[3]),Number(iso[4]||12),Number(iso[5]||0));
-    if(!Number.isNaN(d.getTime())) return d.toISOString();
-  }
-
-  const numeric = value.match(/\b(\d{1,2})[\/.](\d{1,2})[\/.](20\d{2})\b/);
-  if(numeric){
-    const d = new Date(Number(numeric[3]),Number(numeric[2])-1,Number(numeric[1]),12,0);
-    if(!Number.isNaN(d.getTime())) return d.toISOString();
-  }
-
-  const months = {
-    jan:0,january:0,
-    feb:1,february:1,
-    mar:2,march:2,
-    apr:3,april:3,
-    may:4,
-    jun:5,june:5,
-    jul:6,july:6,
-    aug:7,august:7,
-    sep:8,sept:8,september:8,
-    oct:9,october:9,
-    nov:10,november:10,
-    dec:11,december:11
-  };
-
-  const named = value.match(/\b(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(\d{1,2})(?:,?\s+(20\d{2}))?/i);
-
-  if(named){
-    const key = named[1].toLowerCase();
-    const month = months[key];
-
-    if(Number.isInteger(month)){
-      const now = new Date();
-      let year = Number(named[3] || now.getFullYear());
-      let d = new Date(year,month,Number(named[2]),12,0);
-
-      if(!named[3] && d.getTime()<Date.now()-21*86400000){
-        d = new Date(year+1,month,Number(named[2]),12,0);
-      }
-
-      if(!Number.isNaN(d.getTime())){
-        return d.toISOString();
-      }
-    }
-  }
-
-  return null;
-}
-
-function haversine(lat1,lng1,lat2,lng2){
-  if(![lat1,lng1,lat2,lng2].every(Number.isFinite)){
+  if (!value) {
     return null;
   }
 
-  const toRad = d=>d*Math.PI/180;
-  const dLat = toRad(lat2-lat1);
-  const dLng = toRad(lng2-lng1);
+  const date =
+    new Date(value);
 
-  const a =
-  Math.sin(dLat/2)**2 +
-  Math.cos(toRad(lat1)) *
-  Math.cos(toRad(lat2)) *
-  Math.sin(dLng/2)**2;
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return null;
+  }
 
-  return 6371*2*Math.atan2(
-    Math.sqrt(a),
-    Math.sqrt(1-a)
+  return date.toISOString();
+}
+
+
+function ageDays(value) {
+
+  if (!value) {
+    return 999;
+  }
+
+  const time =
+    new Date(value).getTime();
+
+  if (
+    Number.isNaN(time)
+  ) {
+    return 999;
+  }
+
+  return (
+    Date.now() -
+    time
+  ) / 86400000;
+}
+
+
+function daysUntil(value) {
+
+  if (!value) {
+    return null;
+  }
+
+  const time =
+    new Date(value).getTime();
+
+  if (
+    Number.isNaN(time)
+  ) {
+    return null;
+  }
+
+  return (
+    time -
+    Date.now()
+  ) / 86400000;
+}
+
+
+function includesAny(
+  text,
+  keywords
+) {
+
+  const normalized =
+    String(text || "")
+      .toLowerCase();
+
+  return keywords.some(
+    keyword =>
+      normalized.includes(
+        String(keyword)
+          .toLowerCase()
+      )
   );
 }
 
-async function fetchTimeout(
-  url,
-  options={},
-  timeout=REQUEST_TIMEOUT
-){
-  const controller = new AbortController();
-  const timer = setTimeout(
-    ()=>controller.abort(),
-    timeout
-  );
 
-  try{
+function createId(value) {
+
+  let hash =
+    2166136261;
+
+  for (
+    const character of
+    String(value || "")
+  ) {
+
+    hash ^=
+      character.charCodeAt(0);
+
+    hash =
+      Math.imul(
+        hash,
+        16777619
+      );
+  }
+
+  return (
+    "community-" +
+    (hash >>> 0)
+      .toString(36)
+  );
+}
+
+
+/* =========================================================
+XML
+========================================================= */
+
+function xmlTag(
+  block,
+  tag
+) {
+
+  const regex =
+    new RegExp(
+      `<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`,
+      "i"
+    );
+
+  const match =
+    String(block || "")
+      .match(regex);
+
+  if (!match) {
+    return "";
+  }
+
+  return cleanText(
+    match[1]
+      .replace(
+        /<!\[CDATA\[([\s\S]*?)\]\]>/g,
+        "$1"
+      )
+  );
+}
+
+
+function xmlAttribute(
+  block,
+  tag,
+  attribute
+) {
+
+  const regex =
+    new RegExp(
+      `<${tag}[^>]*${attribute}=["']([^"']+)["'][^>]*>`,
+      "i"
+    );
+
+  const match =
+    String(block || "")
+      .match(regex);
+
+  return match
+    ? cleanText(match[1])
+    : "";
+}
+
+
+/* =========================================================
+FETCH
+========================================================= */
+
+async function fetchWithTimeout(
+  url,
+  options = {},
+  timeout = REQUEST_TIMEOUT
+) {
+
+  const controller =
+    new AbortController();
+
+  const timer =
+    setTimeout(
+      () => controller.abort(),
+      timeout
+    );
+
+  try {
+
     return await fetch(
       url,
       {
         ...options,
-        signal:controller.signal
+        signal: controller.signal
       }
     );
-  }finally{
+
+  } finally {
+
     clearTimeout(timer);
   }
 }
 
-function readQuery(req){
-  const query = req.query || {};
-  const category = String(query.category || "").toLowerCase();
+
+/* =========================================================
+REQUEST
+========================================================= */
+
+function readQuery(req) {
+
+  const query =
+    req.query || {};
+
+  const category =
+    String(
+      query.category ||
+      ""
+    )
+      .trim()
+      .toLowerCase();
 
   return {
-    language:normalizeLanguage(query.lang),
-    location:cleanText(query.location || "").slice(0,180),
-    latitude:Number(query.lat),
-    longitude:Number(query.lng),
-    radius:clamp(
-      query.radius || DEFAULT_RADIUS_KM,
-      1,
-      MAX_RADIUS_KM
-    ),
-    limit:Math.round(
+
+    language:
+      normalizeLanguage(
+        query.lang
+      ),
+
+    location:
+      cleanText(
+        query.location ||
+        ""
+      ).slice(0, 180),
+
+    latitude:
+      Number(
+        query.lat
+      ),
+
+    longitude:
+      Number(
+        query.lng
+      ),
+
+    radius:
       clamp(
-        query.limit || DEFAULT_LIMIT,
+        query.radius ||
+        DEFAULT_RADIUS_KM,
         1,
-        MAX_LIMIT
+        MAX_RADIUS_KM
+      ),
+
+    limit:
+      Math.round(
+        clamp(
+          query.limit ||
+          DEFAULT_LIMIT,
+          1,
+          MAX_LIMIT
+        )
+      ),
+
+    category:
+      CATEGORIES.includes(
+        category
       )
-    ),
-    category:CATEGORIES.includes(category)
-    ? category
-    : ""
+        ? category
+        : ""
   };
 }
 
-function validate(params){
-  if(
+
+function validateRequest(params) {
+
+  if (
     !params.location &&
     (
-      !Number.isFinite(params.latitude) ||
-      !Number.isFinite(params.longitude)
+      !Number.isFinite(
+        params.latitude
+      ) ||
+      !Number.isFinite(
+        params.longitude
+      )
     )
-  ){
+  ) {
     return "location or coordinates are required";
   }
 
-  if(
-    Number.isFinite(params.latitude) &&
+  if (
+    Number.isFinite(
+      params.latitude
+    ) &&
     (
       params.latitude < -90 ||
       params.latitude > 90
     )
-  ){
+  ) {
     return "invalid latitude";
   }
 
-  if(
-    Number.isFinite(params.longitude) &&
+  if (
+    Number.isFinite(
+      params.longitude
+    ) &&
     (
       params.longitude < -180 ||
       params.longitude > 180
     )
-  ){
+  ) {
     return "invalid longitude";
   }
 
   return null;
 }
 
+
+/* =========================================================
+NOMINATIM
+========================================================= */
+
 async function reverseLocation(
-  lat,
-  lng,
+  latitude,
+  longitude,
   language
-){
-  try{
+) {
+
+  try {
+
     const url =
-    `https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=12&addressdetails=1&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}`;
+      "https://nominatim.openstreetmap.org/reverse" +
+      "?format=jsonv2" +
+      "&zoom=12" +
+      "&addressdetails=1" +
+      "&lat=" +
+      encodeURIComponent(latitude) +
+      "&lon=" +
+      encodeURIComponent(longitude);
 
     const response =
-    await fetchTimeout(
-      url,
-      {
-        headers:{
-          "Accept-Language":language,
-          "User-Agent":"PETS-DOGUE-Community/3.0"
-        }
-      },
-      4200
-    );
+      await fetchWithTimeout(
+        url,
+        {
+          headers: {
+            "Accept-Language":
+              language,
 
-    if(!response.ok){
+            "User-Agent":
+              "PETS-DOGUE-Community/4.0"
+          }
+        },
+        5000
+      );
+
+    if (!response.ok) {
       return null;
     }
 
@@ -428,312 +1089,1612 @@ async function reverseLocation(
       await response.json()
     );
 
-  }catch{
+  } catch {
     return null;
   }
 }
+
 
 async function forwardLocation(
   location,
   language
-){
-  try{
+) {
+
+  try {
+
     const url =
-    `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=1&q=${encodeURIComponent(location)}`;
+      "https://nominatim.openstreetmap.org/search" +
+      "?format=jsonv2" +
+      "&limit=1" +
+      "&addressdetails=1" +
+      "&q=" +
+      encodeURIComponent(location);
 
     const response =
-    await fetchTimeout(
-      url,
-      {
-        headers:{
-          "Accept-Language":language,
-          "User-Agent":"PETS-DOGUE-Community/3.0"
-        }
-      },
-      4200
-    );
+      await fetchWithTimeout(
+        url,
+        {
+          headers: {
+            "Accept-Language":
+              language,
 
-    if(!response.ok){
+            "User-Agent":
+              "PETS-DOGUE-Community/4.0"
+          }
+        },
+        5000
+      );
+
+    if (!response.ok) {
       return null;
     }
 
-    const data = await response.json();
+    const results =
+      await response.json();
 
-    return (
-      Array.isArray(data) &&
-      data.length
-    )
-    ? normalizeLocation(data[0])
-    : null;
+    if (
+      !Array.isArray(results) ||
+      !results.length
+    ) {
+      return null;
+    }
 
-  }catch{
+    return normalizeLocation(
+      results[0]
+    );
+
+  } catch {
     return null;
   }
 }
 
-function normalizeLocation(data){
-  const a = data?.address || {};
+
+function normalizeLocation(data) {
+
+  const address =
+    data?.address || {};
 
   const city =
-  a.city ||
-  a.town ||
-  a.village ||
-  a.municipality ||
-  a.hamlet ||
-  a.suburb ||
-  "";
+    address.city ||
+    address.town ||
+    address.village ||
+    address.municipality ||
+    address.hamlet ||
+    "";
 
   const district =
-  a.city_district ||
-  a.suburb ||
-  a.borough ||
-  "";
+    address.city_district ||
+    address.suburb ||
+    address.borough ||
+    "";
 
   const county =
-  a.county ||
-  a.state_district ||
-  "";
+    address.county ||
+    address.state_district ||
+    "";
 
   const state =
-  a.state ||
-  a.region ||
-  "";
+    address.state ||
+    address.region ||
+    "";
 
   const country =
-  a.country ||
-  "";
+    address.country ||
+    "";
 
   return {
+
     name:
-    unique([
-      city,
-      county,
-      state,
-      country
-    ])
-    .slice(0,3)
-    .join(", ") ||
-    cleanText(data.display_name),
+      unique([
+        city,
+        county,
+        state,
+        country
+      ])
+        .slice(0, 3)
+        .join(", ") ||
+      cleanText(
+        data.display_name
+      ),
 
     displayName:
-    cleanText(data.display_name),
+      cleanText(
+        data.display_name
+      ),
 
     city,
+
     district,
+
     county,
+
     state,
+
     country,
 
     countryCode:
-    String(
-      a.country_code ||
-      ""
-    )
-    .toLowerCase(),
+      String(
+        address.country_code ||
+        ""
+      ).toLowerCase(),
 
     latitude:
-    numberOrNull(data.lat),
+      numberOrNull(
+        data.lat
+      ),
 
     longitude:
-    numberOrNull(data.lon)
+      numberOrNull(
+        data.lon
+      )
   };
 }
 
-function localityName(
+
+/* =========================================================
+LOCATION
+========================================================= */
+
+function mainLocationName(
   requested,
   resolved
-){
+) {
+
   return cleanText(
     resolved?.city ||
     resolved?.district ||
-    String(requested || "")
-    .split(",")[0] ||
+    String(
+      requested ||
+      ""
+    ).split(",")[0] ||
     resolved?.county ||
     requested ||
     ""
   );
 }
 
-function locationContext(
+
+function locationQueryText(
   requested,
   resolved
-){
+) {
+
   return unique([
-    localityName(
+    mainLocationName(
       requested,
       resolved
     ),
+    resolved?.district,
     resolved?.county,
-    resolved?.state,
-    resolved?.country
+    resolved?.state
   ])
-  .filter(Boolean)
-  .slice(0,4)
-  .join(", ");
+    .filter(Boolean)
+    .slice(0, 3)
+    .join(" ");
 }
 
-function localityTokens(
+
+function strongLocationTokens(
   requested,
   resolved
-){
-  const candidates =
-  unique([
-    String(requested || "")
-    .split(",")[0],
-    resolved?.city,
-    resolved?.district,
-    resolved?.county
-  ])
-  .filter(Boolean);
+) {
 
-  const stop =
-  new Set([
-    "city",
-    "district",
-    "county",
-    "region",
-    "borough",
-    "greater",
-    "metropolitan",
-    "municipality"
+  const values = unique([
+    String(
+      requested ||
+      ""
+    ).split(",")[0],
+
+    resolved?.city,
+
+    resolved?.district,
+
+    resolved?.county
   ]);
 
   return unique(
-    candidates
-    .flatMap(
-      value=>
-      String(value)
-      .toLowerCase()
-      .normalize("NFKD")
-      .replace(
-        /[^\p{L}\p{N}\s-]+/gu,
-        " "
+    values
+      .flatMap(
+        value =>
+          String(value)
+            .toLowerCase()
+            .normalize("NFKD")
+            .replace(
+              /[^\p{L}\p{N}\s-]+/gu,
+              " "
+            )
+            .split(/[\s-]+/)
       )
-      .split(/[\s-]+/)
-    )
-    .filter(
-      token=>
-      token.length>=3 &&
-      !stop.has(token)
-    )
-  )
-  .slice(0,10);
+      .filter(
+        token =>
+          token.length >= 3
+      )
+  );
 }
 
+
 function localityEvidence(
-  raw,
+  item,
   requested,
   resolved
-){
-  const tokens =
-  localityTokens(
-    requested,
-    resolved
-  );
+) {
 
-  const text =
-  [
-    raw.title,
-    raw.description,
-    raw.venue,
-    raw.address,
-    raw.location,
-    raw.url
+  const tokens =
+    strongLocationTokens(
+      requested,
+      resolved
+    );
+
+  if (!tokens.length) {
+
+    return {
+      matches: 0,
+      score: 0
+    };
+  }
+
+  const text = [
+    item.title,
+    item.description,
+    item.venue,
+    item.address,
+    item.location,
+    item.url
   ]
-  .join(" ")
-  .toLowerCase();
+    .join(" ")
+    .toLowerCase();
 
   let matches = 0;
 
-  tokens.forEach(
-    token=>{
-      if(text.includes(token)){
-        matches++;
-      }
+  for (
+    const token of
+    tokens
+  ) {
+
+    if (
+      text.includes(token)
+    ) {
+      matches++;
     }
-  );
+  }
 
   return {
     matches,
     score:
-    tokens.length
-    ? matches/tokens.length
-    : 0
+      matches /
+      tokens.length
   };
 }
+
+
+/* =========================================================
+DISTANCE
+========================================================= */
+
+function haversineKm(
+  lat1,
+  lng1,
+  lat2,
+  lng2
+) {
+
+  if (
+    ![
+      lat1,
+      lng1,
+      lat2,
+      lng2
+    ].every(
+      Number.isFinite
+    )
+  ) {
+    return null;
+  }
+
+  const toRadians =
+    degrees =>
+      degrees *
+      Math.PI /
+      180;
+
+  const dLat =
+    toRadians(
+      lat2 - lat1
+    );
+
+  const dLng =
+    toRadians(
+      lng2 - lng1
+    );
+
+  const first =
+    toRadians(lat1);
+
+  const second =
+    toRadians(lat2);
+
+  const a =
+    Math.sin(
+      dLat / 2
+    ) ** 2 +
+    Math.cos(first) *
+    Math.cos(second) *
+    Math.sin(
+      dLng / 2
+    ) ** 2;
+
+  return (
+    6371 *
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    )
+  );
+}
+
+
+/* =========================================================
+DATES
+========================================================= */
+
+function parseDateFromText(text) {
+
+  const value =
+    String(text || "");
+
+  const iso =
+    value.match(
+      /\b(20\d{2})-(\d{2})-(\d{2})(?:[T\s](\d{1,2}):(\d{2}))?/
+    );
+
+  if (iso) {
+
+    const date =
+      new Date(
+        Number(iso[1]),
+        Number(iso[2]) - 1,
+        Number(iso[3]),
+        Number(
+          iso[4] ||
+          12
+        ),
+        Number(
+          iso[5] ||
+          0
+        )
+      );
+
+    if (
+      !Number.isNaN(
+        date.getTime()
+      )
+    ) {
+      return date.toISOString();
+    }
+  }
+
+  const numeric =
+    value.match(
+      /\b(\d{1,2})[\/.](\d{1,2})[\/.](20\d{2})\b/
+    );
+
+  if (numeric) {
+
+    const date =
+      new Date(
+        Number(numeric[3]),
+        Number(numeric[2]) - 1,
+        Number(numeric[1]),
+        12,
+        0
+      );
+
+    if (
+      !Number.isNaN(
+        date.getTime()
+      )
+    ) {
+      return date.toISOString();
+    }
+  }
+
+  const monthNames = {
+    january: 0,
+    jan: 0,
+    february: 1,
+    feb: 1,
+    march: 2,
+    mar: 2,
+    april: 3,
+    apr: 3,
+    may: 4,
+    june: 5,
+    jun: 5,
+    july: 6,
+    jul: 6,
+    august: 7,
+    aug: 7,
+    september: 8,
+    sept: 8,
+    sep: 8,
+    october: 9,
+    oct: 9,
+    november: 10,
+    nov: 10,
+    december: 11,
+    dec: 11
+  };
+
+  const named =
+    value.match(
+      /\b(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(\d{1,2})(?:,?\s+(20\d{2}))?/i
+    );
+
+  if (named) {
+
+    const month =
+      monthNames[
+        named[1]
+          .toLowerCase()
+      ];
+
+    if (
+      Number.isInteger(month)
+    ) {
+
+      const current =
+        new Date();
+
+      let year =
+        Number(
+          named[3] ||
+          current.getFullYear()
+        );
+
+      let date =
+        new Date(
+          year,
+          month,
+          Number(named[2]),
+          12,
+          0
+        );
+
+      if (
+        !named[3] &&
+        date.getTime() <
+        Date.now() -
+        21 * 86400000
+      ) {
+
+        date =
+          new Date(
+            year + 1,
+            month,
+            Number(named[2]),
+            12,
+            0
+          );
+      }
+
+      if (
+        !Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return date.toISOString();
+      }
+    }
+  }
+
+  return null;
+}
+
+
+/* =========================================================
+QUERY BUILDING
+========================================================= */
+
+function quoteTerm(value) {
+
+  return (
+    '"' +
+    String(value || "")
+      .replace(/"/g, "") +
+    '"'
+  );
+}
+
+
+function searchTermsFor(
+  category,
+  language
+) {
+
+  const local =
+    LOCAL_HINTS[
+      language
+    ]?.[
+      category
+    ];
+
+  return unique([
+    local,
+    ...(
+      SEARCH_TERMS[
+        category
+      ] ||
+      []
+    )
+  ])
+    .filter(Boolean)
+    .slice(0, 7);
+}
+
 
 function buildQuery(
   category,
   location,
   resolved,
   language
-){
-  const context =
-  locationContext(
-    location,
-    resolved
-  );
+) {
 
   const terms =
-  unique(
-    TERMS[category] ||
-    []
-  )
-  .slice(
-    0,
-    category==="event"
-    ? 9
-    : 5
-  )
-  .map(quote);
+    searchTermsFor(
+      category,
+      language
+    );
 
-  const localHint =
-  category==="event"
-  ? String(
-    EVENT_HINTS[language] ||
-    ""
-  )
-  .trim()
-  : "";
-
-  const localPart =
-  localHint
-  ? `(${localHint}) OR `
-  : "";
+  const local =
+    locationQueryText(
+      location,
+      resolved
+    );
 
   return (
-    `(${localPart}${terms.join(" OR ")}) ${quote(context)}`
+    "(" +
+    terms
+      .map(quoteTerm)
+      .join(" OR ") +
+    ") " +
+    quoteTerm(local)
   );
 }
 
-function buildEventPlatformQuery(
+
+/* =========================================================
+GOOGLE NEWS
+========================================================= */
+
+function googleNewsLocale(
+  language
+) {
+
+  const locales = {
+
+    en: {
+      hl: "en-GB",
+      gl: "GB",
+      ceid: "GB:en"
+    },
+
+    uk: {
+      hl: "uk",
+      gl: "UA",
+      ceid: "UA:uk"
+    },
+
+    ru: {
+      hl: "ru",
+      gl: "GB",
+      ceid: "GB:ru"
+    },
+
+    fr: {
+      hl: "fr",
+      gl: "FR",
+      ceid: "FR:fr"
+    },
+
+    de: {
+      hl: "de",
+      gl: "DE",
+      ceid: "DE:de"
+    },
+
+    es: {
+      hl: "es",
+      gl: "ES",
+      ceid: "ES:es"
+    },
+
+    it: {
+      hl: "it",
+      gl: "IT",
+      ceid: "IT:it"
+    },
+
+    pt: {
+      hl: "pt-PT",
+      gl: "PT",
+      ceid: "PT:pt-150"
+    },
+
+    nl: {
+      hl: "nl",
+      gl: "NL",
+      ceid: "NL:nl"
+    },
+
+    pl: {
+      hl: "pl",
+      gl: "PL",
+      ceid: "PL:pl"
+    },
+
+    cs: {
+      hl: "cs",
+      gl: "CZ",
+      ceid: "CZ:cs"
+    },
+
+    sk: {
+      hl: "sk",
+      gl: "SK",
+      ceid: "SK:sk"
+    },
+
+    hu: {
+      hl: "hu",
+      gl: "HU",
+      ceid: "HU:hu"
+    },
+
+    ro: {
+      hl: "ro",
+      gl: "RO",
+      ceid: "RO:ro"
+    },
+
+    bg: {
+      hl: "bg",
+      gl: "BG",
+      ceid: "BG:bg"
+    },
+
+    el: {
+      hl: "el",
+      gl: "GR",
+      ceid: "GR:el"
+    },
+
+    sv: {
+      hl: "sv",
+      gl: "SE",
+      ceid: "SE:sv"
+    },
+
+    da: {
+      hl: "da",
+      gl: "DK",
+      ceid: "DK:da"
+    },
+
+    no: {
+      hl: "no",
+      gl: "NO",
+      ceid: "NO:no"
+    },
+
+    fi: {
+      hl: "fi",
+      gl: "FI",
+      ceid: "FI:fi"
+    },
+
+    tr: {
+      hl: "tr",
+      gl: "TR",
+      ceid: "TR:tr"
+    },
+
+    ar: {
+      hl: "ar",
+      gl: "AE",
+      ceid: "AE:ar"
+    },
+
+    hi: {
+      hl: "hi",
+      gl: "IN",
+      ceid: "IN:hi"
+    }
+  };
+
+  return (
+    locales[language] ||
+    locales.en
+  );
+}
+
+
+async function googleNewsSearch(
+  query,
+  category,
+  language
+) {
+
+  try {
+
+    const locale =
+      googleNewsLocale(
+        language
+      );
+
+    const url =
+      "https://news.google.com/rss/search" +
+      "?q=" +
+      encodeURIComponent(query) +
+      "&hl=" +
+      encodeURIComponent(
+        locale.hl
+      ) +
+      "&gl=" +
+      encodeURIComponent(
+        locale.gl
+      ) +
+      "&ceid=" +
+      encodeURIComponent(
+        locale.ceid
+      );
+
+    const response =
+      await fetchWithTimeout(
+        url,
+        {
+          headers: {
+            "User-Agent":
+              "PETS-DOGUE-Community/4.0"
+          }
+        },
+        5500
+      );
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const xml =
+      await response.text();
+
+    const blocks =
+      xml.match(
+        /<item>[\s\S]*?<\/item>/gi
+      ) || [];
+
+    return blocks
+      .slice(0, 15)
+      .map(
+        block => {
+
+          const title =
+            xmlTag(
+              block,
+              "title"
+            );
+
+          const description =
+            xmlTag(
+              block,
+              "description"
+            );
+
+          const link =
+            xmlTag(
+              block,
+              "link"
+            );
+
+          const pubDate =
+            xmlTag(
+              block,
+              "pubDate"
+            );
+
+          const source =
+            xmlTag(
+              block,
+              "source"
+            );
+
+          return {
+
+            provider:
+              "google-news",
+
+            category,
+
+            title,
+
+            description,
+
+            url:
+              safeUrl(link),
+
+            image: "",
+
+            publishedAt:
+              normalizeDate(
+                pubDate
+              ),
+
+            eventStart:
+              category === "event"
+                ? parseDateFromText(
+                    title +
+                    " " +
+                    description
+                  )
+                : null,
+
+            source:
+              source ||
+              hostname(link),
+
+            language,
+
+            location: "",
+
+            venue: "",
+
+            address: "",
+
+            latitude: null,
+
+            longitude: null
+          };
+        }
+      )
+      .filter(
+        item =>
+          item.title &&
+          item.url
+      );
+
+  } catch {
+    return [];
+  }
+}
+
+
+/* =========================================================
+GDELT
+========================================================= */
+
+function parseGdeltDate(value) {
+
+  const text =
+    String(value || "");
+
+  const match =
+    text.match(
+      /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/
+    );
+
+  if (!match) {
+    return normalizeDate(value);
+  }
+
+  return new Date(
+    Date.UTC(
+      Number(match[1]),
+      Number(match[2]) - 1,
+      Number(match[3]),
+      Number(match[4]),
+      Number(match[5]),
+      Number(match[6])
+    )
+  ).toISOString();
+}
+
+
+async function gdeltSearch(
+  query,
+  category,
+  language
+) {
+
+  try {
+
+    const url =
+      "https://api.gdeltproject.org/api/v2/doc/doc" +
+      "?query=" +
+      encodeURIComponent(query) +
+      "&mode=ArtList" +
+      "&maxrecords=18" +
+      "&format=json" +
+      "&sort=HybridRel";
+
+    const response =
+      await fetchWithTimeout(
+        url,
+        {
+          headers: {
+            "User-Agent":
+              "PETS-DOGUE-Community/4.0"
+          }
+        },
+        5500
+      );
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const data =
+      await response.json();
+
+    const articles =
+      Array.isArray(
+        data.articles
+      )
+        ? data.articles
+        : [];
+
+    return articles.map(
+      article => {
+
+        const title =
+          cleanText(
+            article.title
+          );
+
+        const description =
+          cleanText(
+            article.description
+          );
+
+        return {
+
+          provider:
+            "gdelt",
+
+          category,
+
+          title,
+
+          description,
+
+          url:
+            safeUrl(
+              article.url
+            ),
+
+          image:
+            safeUrl(
+              article.socialimage
+            ),
+
+          publishedAt:
+            parseGdeltDate(
+              article.seendate
+            ),
+
+          eventStart:
+            category === "event"
+              ? parseDateFromText(
+                  title +
+                  " " +
+                  description
+                )
+              : null,
+
+          source:
+            cleanText(
+              article.domain ||
+              hostname(
+                article.url
+              )
+            ),
+
+          language:
+            normalizeLanguage(
+              article.language ||
+              language
+            ),
+
+          location: "",
+
+          venue: "",
+
+          address: "",
+
+          latitude: null,
+
+          longitude: null
+        };
+      }
+    );
+
+  } catch {
+    return [];
+  }
+}
+
+
+/* =========================================================
+REDDIT RSS
+========================================================= */
+
+async function redditSearch(
+  query,
+  category,
+  language
+) {
+
+  try {
+
+    const url =
+      "https://www.reddit.com/search.rss" +
+      "?q=" +
+      encodeURIComponent(query) +
+      "&sort=new" +
+      "&t=year";
+
+    const response =
+      await fetchWithTimeout(
+        url,
+        {
+          headers: {
+            "User-Agent":
+              "PETS-DOGUE-Community/4.0"
+          }
+        },
+        5500
+      );
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const xml =
+      await response.text();
+
+    const blocks =
+      xml.match(
+        /<entry>[\s\S]*?<\/entry>/gi
+      ) || [];
+
+    return blocks
+      .slice(0, 12)
+      .map(
+        block => {
+
+          const title =
+            xmlTag(
+              block,
+              "title"
+            );
+
+          const content =
+            xmlTag(
+              block,
+              "content"
+            );
+
+          const updated =
+            xmlTag(
+              block,
+              "updated"
+            );
+
+          const link =
+            xmlAttribute(
+              block,
+              "link",
+              "href"
+            );
+
+          const authorBlock =
+            block.match(
+              /<author>[\s\S]*?<\/author>/i
+            )?.[0] || "";
+
+          const author =
+            xmlTag(
+              authorBlock,
+              "name"
+            );
+
+          return {
+
+            provider:
+              "reddit",
+
+            category,
+
+            title,
+
+            description:
+              content,
+
+            url:
+              safeUrl(link),
+
+            image: "",
+
+            publishedAt:
+              normalizeDate(
+                updated
+              ),
+
+            eventStart:
+              category === "event"
+                ? parseDateFromText(
+                    title +
+                    " " +
+                    content
+                  )
+                : null,
+
+            source:
+              author
+                ? "Reddit · " +
+                  author
+                : "Reddit",
+
+            language,
+
+            location: "",
+
+            venue: "",
+
+            address: "",
+
+            latitude: null,
+
+            longitude: null
+          };
+        }
+      )
+      .filter(
+        item =>
+          item.title &&
+          item.url
+      );
+
+  } catch {
+    return [];
+  }
+}
+
+
+/* =========================================================
+OPENSTREETMAP — CLUBS / GROUPS
+========================================================= */
+
+async function osmGroups(
+  latitude,
+  longitude,
+  radiusKm,
+  language
+) {
+
+  if (
+    !Number.isFinite(latitude) ||
+    !Number.isFinite(longitude)
+  ) {
+    return [];
+  }
+
+  const radiusMeters =
+    Math.min(
+      100000,
+      Math.max(
+        1000,
+        Math.round(
+          radiusKm *
+          1000
+        )
+      )
+    );
+
+  const query = `
+[out:json][timeout:12];
+(
+  nwr["club"](around:${radiusMeters},${latitude},${longitude});
+  nwr["office"="association"]["name"~"dog|cat|pet|animal|kennel|canine|feline|breed",i](around:${radiusMeters},${latitude},${longitude});
+  nwr["name"~"dog club|cat club|pet club|kennel club|canine club|feline club|breed club|dog society|cat society|animal association",i](around:${radiusMeters},${latitude},${longitude});
+);
+out center tags;
+`;
+
+  try {
+
+    const response =
+      await fetchWithTimeout(
+        "https://overpass-api.de/api/interpreter",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/x-www-form-urlencoded; charset=UTF-8",
+
+            "User-Agent":
+              "PETS-DOGUE-Community/4.0"
+          },
+
+          body:
+            "data=" +
+            encodeURIComponent(query)
+        },
+        OVERPASS_TIMEOUT
+      );
+
+    if (!response.ok) {
+      return [];
+    }
+
+    const data =
+      await response.json();
+
+    const elements =
+      Array.isArray(
+        data.elements
+      )
+        ? data.elements
+        : [];
+
+    return elements
+      .slice(0, 40)
+      .map(
+        element => {
+
+          const tags =
+            element.tags || {};
+
+          const title =
+            cleanText(
+              tags.name ||
+              tags["name:en"] ||
+              ""
+            );
+
+          if (!title) {
+            return null;
+          }
+
+          const itemLat =
+            numberOrNull(
+              element.lat ??
+              element.center?.lat
+            );
+
+          const itemLng =
+            numberOrNull(
+              element.lon ??
+              element.center?.lon
+            );
+
+          const website =
+            safeUrl(
+              tags.website ||
+              tags["contact:website"] ||
+              tags.url ||
+              ""
+            );
+
+          const facebook =
+            safeUrl(
+              tags.facebook ||
+              tags["contact:facebook"] ||
+              ""
+            );
+
+          const osmUrl =
+            `https://www.openstreetmap.org/${element.type}/${element.id}`;
+
+          const address =
+            cleanText(
+              [
+                tags["addr:housenumber"],
+                tags["addr:street"],
+                tags["addr:city"],
+                tags["addr:postcode"]
+              ]
+                .filter(Boolean)
+                .join(" ")
+            );
+
+          const description =
+            cleanText(
+              [
+                tags.description,
+                tags.club
+                  ? "Club"
+                  : "",
+                tags.office === "association"
+                  ? "Association"
+                  : "",
+                tags.sport,
+                tags.community_centre,
+                facebook
+                  ? "Community group"
+                  : ""
+              ]
+                .filter(Boolean)
+                .join(" · ")
+            );
+
+          return {
+
+            provider:
+              "openstreetmap",
+
+            category:
+              "group",
+
+            title,
+
+            description:
+              description ||
+              "Local pet club, group or animal association.",
+
+            url:
+              website ||
+              facebook ||
+              osmUrl,
+
+            image: "",
+
+            publishedAt: null,
+
+            eventStart: null,
+
+            source:
+              "OpenStreetMap",
+
+            language,
+
+            location:
+              tags["addr:city"] ||
+              "",
+
+            venue:
+              title,
+
+            address,
+
+            latitude:
+              itemLat,
+
+            longitude:
+              itemLng
+          };
+        }
+      )
+      .filter(Boolean);
+
+  } catch {
+    return [];
+  }
+}
+
+
+/* =========================================================
+FREE SEARCH
+========================================================= */
+
+async function searchFreeSources(
+  query,
+  category,
+  language,
+  includeReddit = false
+) {
+
+  const jobs = [
+
+    googleNewsSearch(
+      query,
+      category,
+      language
+    ),
+
+    gdeltSearch(
+      query,
+      category,
+      language
+    )
+  ];
+
+  if (includeReddit) {
+
+    jobs.push(
+      redditSearch(
+        query,
+        category,
+        language
+      )
+    );
+  }
+
+  const settled =
+    await Promise.allSettled(
+      jobs
+    );
+
+  return settled.flatMap(
+    result =>
+      result.status ===
+      "fulfilled" &&
+      Array.isArray(
+        result.value
+      )
+        ? result.value
+        : []
+  );
+}
+
+
+/* =========================================================
+SEARCH CATEGORY
+========================================================= */
+
+async function searchCategory(
+  category,
   location,
-  resolved
-){
-  const context =
-  locationContext(
-    location,
-    resolved
-  );
+  resolved,
+  language
+) {
 
-  return (
-    `("dog" OR "pet" OR "cat" OR "puppy") ` +
-    `("event" OR "meetup" OR "walk" OR "show" OR "festival" OR "exhibition" OR "adoption") ` +
-    `(site:eventbrite.com OR site:meetup.com OR site:allevents.in OR site:facebook.com/events) ` +
-    `${quote(context)}`
+  const query =
+    buildQuery(
+      category,
+      location,
+      resolved,
+      language
+    );
+
+  const includeReddit =
+    [
+      "lost",
+      "seen",
+      "found",
+      "event",
+      "group",
+      "help",
+      "adoption"
+    ].includes(
+      category
+    );
+
+  return searchFreeSources(
+    query,
+    category,
+    language,
+    includeReddit
   );
 }
 
-function classify(
+
+/* =========================================================
+SEARCH EVERYTHING
+========================================================= */
+
+async function searchEverything(
+  params,
+  resolved
+) {
+
+  const {
+    location,
+    language,
+    radius,
+    category
+  } = params;
+
+  if (category) {
+
+    const results =
+      await searchCategory(
+        category,
+        location,
+        resolved,
+        language
+      );
+
+    if (
+      category ===
+      "group"
+    ) {
+
+      const groups =
+        await osmGroups(
+          params.latitude,
+          params.longitude,
+          radius,
+          language
+        );
+
+      results.push(
+        ...groups
+      );
+    }
+
+    return results;
+  }
+
+
+  /*
+  Full Community screen:
+  categories are searched in parallel.
+
+  No paid API calls.
+  */
+
+  const settled =
+    await Promise.allSettled(
+      CATEGORIES.map(
+        categoryName =>
+          searchCategory(
+            categoryName,
+            location,
+            resolved,
+            language
+          )
+      )
+    );
+
+  const results =
+    settled.flatMap(
+      result =>
+        result.status ===
+        "fulfilled" &&
+        Array.isArray(
+          result.value
+        )
+          ? result.value
+          : []
+    );
+
+
+  const groups =
+    await osmGroups(
+      params.latitude,
+      params.longitude,
+      radius,
+      language
+    );
+
+  results.push(
+    ...groups
+  );
+
+  return results;
+}
+
+
+/* =========================================================
+CLASSIFY
+========================================================= */
+
+function classifyItem(
   title,
   description,
-  suggested
-){
-  const text =
-  `${title} ${description}`
-  .toLowerCase();
+  suggestedCategory
+) {
 
-  if(
+  const text =
+    (
+      String(title || "") +
+      " " +
+      String(description || "")
+    ).toLowerCase();
+
+
+  if (
     includesAny(
       text,
       KEYWORDS.found
@@ -743,1884 +2704,764 @@ function classify(
         text,
         KEYWORDS.lost
       ) ||
-      suggested==="found"
+      suggestedCategory ===
+      "found"
     )
-  ){
+  ) {
+
     return {
-      type:"found",
-      status:"found"
+      type: "found",
+      status: "found"
     };
   }
 
-  if(
+
+  if (
     includesAny(
       text,
       KEYWORDS.lost
     )
-  ){
+  ) {
+
     return {
-      type:"lost",
-      status:"active"
+      type: "lost",
+      status: "active"
     };
   }
 
-  if(
+
+  if (
     includesAny(
       text,
       KEYWORDS.seen
     )
-  ){
+  ) {
+
     return {
-      type:"seen",
-      status:"active"
+      type: "seen",
+      status: "active"
     };
   }
 
-  if(
+
+  if (
+    suggestedCategory ===
+    "group" ||
+    includesAny(
+      text,
+      KEYWORDS.group
+    )
+  ) {
+
+    return {
+      type: "group",
+      status: "active"
+    };
+  }
+
+
+  if (
+    suggestedCategory ===
+    "event" ||
     includesAny(
       text,
       KEYWORDS.event
     )
-  ){
+  ) {
+
     return {
-      type:"event",
-      status:"active"
+      type: "event",
+      status: "active"
     };
   }
 
-  if(
+
+  if (
     includesAny(
       text,
       KEYWORDS.volunteers
     )
-  ){
+  ) {
+
     return {
-      type:"volunteers",
-      status:"active"
+      type: "volunteers",
+      status: "active"
     };
   }
 
-  if(
+
+  if (
     includesAny(
       text,
       KEYWORDS.foster
     )
-  ){
+  ) {
+
     return {
-      type:"foster",
-      status:"active"
+      type: "foster",
+      status: "active"
     };
   }
 
-  if(
+
+  if (
     includesAny(
       text,
       KEYWORDS.adoption
     )
-  ){
+  ) {
+
     return {
-      type:"adoption",
-      status:"active"
+      type: "adoption",
+      status: "active"
     };
   }
 
-  if(
+
+  if (
     includesAny(
       text,
       KEYWORDS.help
     )
-  ){
+  ) {
+
     return {
-      type:"help",
-      status:"active"
+      type: "help",
+      status: "active"
     };
   }
 
+
+  if (
+    CATEGORIES.includes(
+      suggestedCategory
+    )
+  ) {
+
+    return {
+      type:
+        suggestedCategory,
+      status:
+        "active"
+    };
+  }
+
+
   return {
-    type:
-    CATEGORIES.includes(suggested)
-    ? suggested
-    : "news",
-    status:"active"
+    type: "news",
+    status: "active"
   };
 }
 
-function maxAge(type){
-  return ({
-    lost:60,
-    seen:30,
-    found:120,
-    event:240,
-    help:90,
-    volunteers:180,
-    foster:180,
-    adoption:180,
-    news:60
-  })[type] || 60;
-}
 
-function fresh(item){
-  if(
-    item.type==="event" &&
-    item.eventStart
-  ){
-    const d =
-    daysUntil(
-      item.eventStart
-    );
+/* =========================================================
+FRESHNESS
+========================================================= */
 
-    return (
-      d===null ||
-      (
-        d>=-1.5 &&
-        d<=365
-      )
-    );
+function passesFreshness(item) {
+
+  if (
+    item.type ===
+    "group"
+  ) {
+    return true;
   }
+
+
+  if (
+    item.type ===
+    "event"
+  ) {
+
+    if (
+      item.eventStart
+    ) {
+
+      const until =
+        daysUntil(
+          item.eventStart
+        );
+
+      if (
+        until !== null &&
+        until < -1.5
+      ) {
+        return false;
+      }
+
+      if (
+        until !== null &&
+        until > 365
+      ) {
+        return false;
+      }
+    }
+
+    if (
+      item.publishedAt &&
+      ageDays(
+        item.publishedAt
+      ) > 120
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+
+  if (
+    !item.publishedAt
+  ) {
+    return true;
+  }
+
+
+  const maximumAge = {
+
+    lost: 60,
+
+    seen: 30,
+
+    found: 120,
+
+    help: 90,
+
+    volunteers: 180,
+
+    foster: 180,
+
+    adoption: 240,
+
+    news: 45
+  };
+
 
   return (
-    !item.publishedAt ||
     ageDays(
       item.publishedAt
-    )<=maxAge(item.type)
-  );
-}
-
-function countryCode(resolved){
-  const code =
-  String(
-    resolved?.countryCode ||
-    ""
-  )
-  .toLowerCase();
-
-  return code==="gb"
-  ? "uk"
-  : (
-    code ||
-    "uk"
-  );
-}
-
-function googleNewsLocale(language){
-  const map = {
-    en:{hl:"en-GB",gl:"GB",ceid:"GB:en"},
-    uk:{hl:"uk",gl:"UA",ceid:"UA:uk"},
-    ru:{hl:"ru",gl:"GB",ceid:"GB:ru"},
-    fr:{hl:"fr",gl:"FR",ceid:"FR:fr"},
-    de:{hl:"de",gl:"DE",ceid:"DE:de"},
-    es:{hl:"es",gl:"ES",ceid:"ES:es"},
-    it:{hl:"it",gl:"IT",ceid:"IT:it"},
-    pt:{hl:"pt-PT",gl:"PT",ceid:"PT:pt-150"},
-    nl:{hl:"nl",gl:"NL",ceid:"NL:nl"},
-    pl:{hl:"pl",gl:"PL",ceid:"PL:pl"},
-    cs:{hl:"cs",gl:"CZ",ceid:"CZ:cs"},
-    sk:{hl:"sk",gl:"SK",ceid:"SK:sk"},
-    hu:{hl:"hu",gl:"HU",ceid:"HU:hu"},
-    ro:{hl:"ro",gl:"RO",ceid:"RO:ro"},
-    bg:{hl:"bg",gl:"BG",ceid:"BG:bg"},
-    el:{hl:"el",gl:"GR",ceid:"GR:el"},
-    sv:{hl:"sv",gl:"SE",ceid:"SE:sv"},
-    da:{hl:"da",gl:"DK",ceid:"DK:da"},
-    no:{hl:"no",gl:"NO",ceid:"NO:no"},
-    fi:{hl:"fi",gl:"FI",ceid:"FI:fi"},
-    tr:{hl:"tr",gl:"TR",ceid:"TR:tr"},
-    ar:{hl:"ar",gl:"AE",ceid:"AE:ar"},
-    hi:{hl:"hi",gl:"IN",ceid:"IN:hi"}
-  };
-
-  return map[language] ||
-  map.en;
-}
-
-async function braveSearch(
-  query,
-  category,
-  language
-){
-  const key =
-  process.env.BRAVE_SEARCH_API_KEY;
-
-  if(!key){
-    return [];
-  }
-
-  try{
-    const freshness =
-    [
-      "event",
-      "adoption",
-      "volunteers",
-      "foster"
-    ]
-    .includes(category)
-    ? "py"
-    : "pm";
-
-    const url =
-    `https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=${MAX_PROVIDER_RESULTS}&safesearch=moderate&text_decorations=false&spellcheck=true&freshness=${freshness}`;
-
-    const response =
-    await fetchTimeout(
-      url,
-      {
-        headers:{
-          Accept:"application/json",
-          "X-Subscription-Token":key
-        }
-      }
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const data =
-    await response.json();
-
-    return (
-      data.web?.results ||
-      []
-    )
-    .map(
-      r=>({
-        provider:"brave",
-        category,
-        title:cleanText(r.title),
-        description:cleanText(r.description),
-        url:safeUrl(r.url),
-        image:safeUrl(
-          r.thumbnail?.src ||
-          ""
-        ),
-        publishedAt:
-        normalizeDate(
-          r.page_age ||
-          r.age
-        ),
-        eventStart:
-        parseDateFromText(
-          `${r.title || ""} ${r.description || ""}`
-        ),
-        source:hostname(r.url),
-        language
-      })
-    );
-
-  }catch{
-    return [];
-  }
-}
-
-async function serperSearch(
-  query,
-  category,
-  language,
-  resolved
-){
-  const key =
-  process.env.SERPER_API_KEY;
-
-  if(!key){
-    return [];
-  }
-
-  try{
-    const response =
-    await fetchTimeout(
-      "https://google.serper.dev/search",
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-          "X-API-KEY":key
-        },
-        body:
-        JSON.stringify({
-          q:query,
-          num:MAX_PROVIDER_RESULTS,
-          hl:language,
-          gl:countryCode(resolved),
-          location:
-          localityName(
-            "",
-            resolved
-          ) || undefined,
-          tbs:
-          category==="event"
-          ? "qdr:y"
-          : "qdr:m"
-        })
-      }
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const data =
-    await response.json();
-
-    const output =
+    ) <=
     (
-      data.organic ||
-      []
-    )
-    .map(
-      r=>({
-        provider:"serper",
-        category,
-        title:cleanText(r.title),
-        description:cleanText(r.snippet),
-        url:safeUrl(r.link),
-        image:"",
-        publishedAt:
-        normalizeDate(r.date),
-        eventStart:
-        parseDateFromText(
-          `${r.title || ""} ${r.snippet || ""} ${r.date || ""}`
-        ),
-        source:hostname(r.link),
-        language
-      })
-    );
-
-    for(
-      const event of
-      Array.isArray(data.events)
-      ? data.events
-      : []
-    ){
-      const address =
-      Array.isArray(event.address)
-      ? event.address.join(", ")
-      : cleanText(
-        event.address ||
-        event.venue ||
-        ""
-      );
-
-      output.push({
-        provider:"serper-event",
-        category:"event",
-        title:
-        cleanText(event.title),
-        description:
-        cleanText(event.description),
-        url:
-        safeUrl(
-          event.link ||
-          event.url
-        ),
-        image:
-        safeUrl(
-          event.thumbnail ||
-          ""
-        ),
-        publishedAt:null,
-        eventStart:
-        parseDateFromText(
-          `${event.date?.start_date || ""} ${event.date?.when || ""}`
-        ),
-        source:
-        cleanText(
-          event.source ||
-          hostname(
-            event.link ||
-            event.url
-          )
-        ),
-        language,
-        venue:
-        cleanText(event.venue),
-        address,
-        localityGuaranteed:true
-      });
-    }
-
-    return output;
-
-  }catch{
-    return [];
-  }
-}
-
-async function serpApiSearch(
-  query,
-  category,
-  language,
-  resolved
-){
-  const key =
-  process.env.SERPAPI_API_KEY ||
-  process.env.SERPAPI_KEY;
-
-  if(!key){
-    return [];
-  }
-
-  try{
-    const params =
-    new URLSearchParams({
-      engine:"google",
-      q:query,
-      api_key:key,
-      hl:language,
-      gl:countryCode(resolved),
-      num:String(
-        MAX_PROVIDER_RESULTS
-      )
-    });
-
-    if(category==="event"){
-      params.set(
-        "tbs",
-        "qdr:y"
-      );
-    }
-
-    const local =
-    localityName(
-      "",
-      resolved
-    );
-
-    if(local){
-      params.set(
-        "location",
-        local
-      );
-    }
-
-    const response =
-    await fetchTimeout(
-      "https://serpapi.com/search.json?" +
-      params.toString(),
-      {},
-      6000
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const data =
-    await response.json();
-
-    const output =
-    (
-      Array.isArray(
-        data.organic_results
-      )
-      ? data.organic_results
-      : []
-    )
-    .map(
-      r=>({
-        provider:"serpapi",
-        category,
-        title:
-        cleanText(r.title),
-        description:
-        cleanText(r.snippet),
-        url:
-        safeUrl(r.link),
-        image:
-        safeUrl(
-          r.thumbnail ||
-          ""
-        ),
-        publishedAt:
-        normalizeDate(r.date),
-        eventStart:
-        parseDateFromText(
-          `${r.title || ""} ${r.snippet || ""} ${r.date || ""}`
-        ),
-        source:
-        hostname(r.link),
-        language
-      })
-    );
-
-    for(
-      const event of
-      Array.isArray(
-        data.events_results
-      )
-      ? data.events_results
-      : []
-    ){
-      const address =
-      Array.isArray(event.address)
-      ? event.address.join(", ")
-      : cleanText(
-        event.address ||
-        ""
-      );
-
-      const link =
-      safeUrl(
-        event.link ||
-        event.ticket_info?.[0]?.link ||
-        ""
-      );
-
-      output.push({
-        provider:"serpapi-event",
-        category:"event",
-        title:
-        cleanText(event.title),
-        description:
-        cleanText(event.description),
-        url:link,
-        image:
-        safeUrl(
-          event.thumbnail ||
-          event.image ||
-          ""
-        ),
-        publishedAt:null,
-        eventStart:
-        parseDateFromText(
-          `${event.date?.start_date || ""} ${event.date?.when || ""} ${event.time || ""}`
-        ),
-        source:
-        cleanText(
-          event.ticket_info?.[0]?.source ||
-          hostname(link)
-        ),
-        language,
-        venue:
-        cleanText(
-          event.venue?.name ||
-          event.venue ||
-          ""
-        ),
-        address,
-        localityGuaranteed:true
-      });
-    }
-
-    return output;
-
-  }catch{
-    return [];
-  }
-}
-
-async function bingSearch(
-  query,
-  category,
-  language
-){
-  const key =
-  process.env.BING_SEARCH_API_KEY;
-
-  if(!key){
-    return [];
-  }
-
-  try{
-    const market =
-    ({
-      en:"en-GB",
-      uk:"uk-UA",
-      ru:"ru-RU",
-      fr:"fr-FR",
-      de:"de-DE",
-      es:"es-ES",
-      it:"it-IT",
-      pt:"pt-PT",
-      nl:"nl-NL",
-      pl:"pl-PL",
-      cs:"cs-CZ",
-      sk:"sk-SK",
-      hu:"hu-HU",
-      ro:"ro-RO",
-      bg:"bg-BG",
-      el:"el-GR",
-      sv:"sv-SE",
-      da:"da-DK",
-      no:"nb-NO",
-      fi:"fi-FI",
-      tr:"tr-TR",
-      ar:"ar-SA",
-      hi:"hi-IN"
-    })[language] ||
-    "en-GB";
-
-    const freshness =
-    category==="event"
-    ? "Year"
-    : "Month";
-
-    const url =
-    `https://api.bing.microsoft.com/v7.0/search?q=${encodeURIComponent(query)}&count=${MAX_PROVIDER_RESULTS}&responseFilter=Webpages&safeSearch=Moderate&mkt=${encodeURIComponent(market)}&freshness=${freshness}`;
-
-    const response =
-    await fetchTimeout(
-      url,
-      {
-        headers:{
-          "Ocp-Apim-Subscription-Key":
-          key
-        }
-      }
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const data =
-    await response.json();
-
-    return (
-      data.webPages?.value ||
-      []
-    )
-    .map(
-      r=>({
-        provider:"bing",
-        category,
-        title:
-        cleanText(r.name),
-        description:
-        cleanText(r.snippet),
-        url:
-        safeUrl(r.url),
-        image:"",
-        publishedAt:
-        normalizeDate(
-          r.dateLastCrawled
-        ),
-        eventStart:
-        parseDateFromText(
-          `${r.name || ""} ${r.snippet || ""}`
-        ),
-        source:
-        hostname(r.url),
-        language
-      })
-    );
-
-  }catch{
-    return [];
-  }
-}
-
-async function googleNewsSearch(
-  query,
-  category,
-  language
-){
-  try{
-    const locale =
-    googleNewsLocale(
-      language
-    );
-
-    const url =
-    `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=${encodeURIComponent(locale.hl)}&gl=${encodeURIComponent(locale.gl)}&ceid=${encodeURIComponent(locale.ceid)}`;
-
-    const response =
-    await fetchTimeout(
-      url,
-      {
-        headers:{
-          "User-Agent":
-          "PETS-DOGUE-Community/3.0"
-        }
-      },
-      4500
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const xml =
-    await response.text();
-
-    return (
-      xml.match(
-        /<item>[\s\S]*?<\/item>/gi
-      ) ||
-      []
-    )
-    .slice(
-      0,
-      MAX_PROVIDER_RESULTS
-    )
-    .map(
-      block=>{
-        const title =
-        xmlTag(
-          block,
-          "title"
-        );
-
-        const description =
-        xmlTag(
-          block,
-          "description"
-        );
-
-        const link =
-        xmlTag(
-          block,
-          "link"
-        );
-
-        return {
-          provider:"google-news",
-          category,
-          title,
-          description,
-          url:safeUrl(link),
-          image:"",
-          publishedAt:
-          normalizeDate(
-            xmlTag(
-              block,
-              "pubDate"
-            )
-          ),
-          eventStart:
-          parseDateFromText(
-            `${title} ${description}`
-          ),
-          source:
-          xmlTag(
-            block,
-            "source"
-          ) ||
-          hostname(link),
-          language
-        };
-      }
-    )
-    .filter(
-      item=>
-      item.title &&
-      item.url
-    );
-
-  }catch{
-    return [];
-  }
-}
-
-function gdeltDate(value){
-  const text =
-  String(value || "");
-
-  const match =
-  text.match(
-    /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/
-  );
-
-  if(!match){
-    return normalizeDate(value);
-  }
-
-  return new Date(
-    Date.UTC(
-      Number(match[1]),
-      Number(match[2])-1,
-      Number(match[3]),
-      Number(match[4]),
-      Number(match[5]),
-      Number(match[6])
-    )
-  )
-  .toISOString();
-}
-
-async function gdeltSearch(
-  query,
-  category,
-  language
-){
-  try{
-    const url =
-    `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(query)}&mode=ArtList&maxrecords=${MAX_PROVIDER_RESULTS}&format=json&sort=HybridRel`;
-
-    const response =
-    await fetchTimeout(
-      url,
-      {
-        headers:{
-          "User-Agent":
-          "PETS-DOGUE-Community/3.0"
-        }
-      },
-      4500
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const data =
-    await response.json();
-
-    return (
-      Array.isArray(
-        data.articles
-      )
-      ? data.articles
-      : []
-    )
-    .map(
-      a=>({
-        provider:"gdelt",
-        category,
-        title:
-        cleanText(a.title),
-        description:
-        cleanText(a.description),
-        url:
-        safeUrl(a.url),
-        image:
-        safeUrl(a.socialimage),
-        publishedAt:
-        gdeltDate(a.seendate),
-        eventStart:
-        parseDateFromText(
-          `${a.title || ""} ${a.description || ""}`
-        ),
-        source:
-        cleanText(
-          a.domain ||
-          hostname(a.url)
-        ),
-        language:
-        a.language ||
-        language
-      })
-    );
-
-  }catch{
-    return [];
-  }
-}
-
-async function newsApiSearch(
-  query,
-  category,
-  language
-){
-  const key =
-  process.env.NEWSAPI_API_KEY;
-
-  if(!key){
-    return [];
-  }
-
-  try{
-    const url =
-    `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&sortBy=publishedAt&pageSize=${MAX_PROVIDER_RESULTS}&apiKey=${encodeURIComponent(key)}`;
-
-    const response =
-    await fetchTimeout(
-      url,
-      {
-        headers:{
-          "User-Agent":
-          "PETS-DOGUE-Community/3.0"
-        }
-      }
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const data =
-    await response.json();
-
-    return (
-      Array.isArray(data.articles)
-      ? data.articles
-      : []
-    )
-    .map(
-      a=>({
-        provider:"newsapi",
-        category,
-        title:
-        cleanText(a.title),
-        description:
-        cleanText(
-          a.description ||
-          a.content
-        ),
-        url:
-        safeUrl(a.url),
-        image:
-        safeUrl(a.urlToImage),
-        publishedAt:
-        normalizeDate(
-          a.publishedAt
-        ),
-        eventStart:
-        parseDateFromText(
-          `${a.title || ""} ${a.description || ""}`
-        ),
-        source:
-        cleanText(
-          a.source?.name ||
-          hostname(a.url)
-        ),
-        language
-      })
-    );
-
-  }catch{
-    return [];
-  }
-}
-
-function ticketDate(date){
-  return date
-  .toISOString()
-  .replace(
-    /\.\d{3}Z$/,
-    "Z"
-  );
-}
-
-async function ticketmasterKeyword(
-  keyword,
-  resolved,
-  radius,
-  language
-){
-  const key =
-  process.env.TICKETMASTER_API_KEY;
-
-  if(
-    !key ||
-    !Number.isFinite(
-      resolved?.latitude
-    ) ||
-    !Number.isFinite(
-      resolved?.longitude
-    )
-  ){
-    return [];
-  }
-
-  try{
-    const now =
-    new Date();
-
-    const future =
-    new Date(
-      now.getTime() +
-      365*86400000
-    );
-
-    const params =
-    new URLSearchParams({
-      apikey:key,
-      latlong:
-      `${resolved.latitude},${resolved.longitude}`,
-      radius:
-      String(
-        Math.max(
-          1,
-          Math.round(radius)
-        )
-      ),
-      unit:"km",
-      size:"30",
-      sort:"date,asc",
-      keyword,
-      startDateTime:
-      ticketDate(now),
-      endDateTime:
-      ticketDate(future)
-    });
-
-    const response =
-    await fetchTimeout(
-      "https://app.ticketmaster.com/discovery/v2/events.json?" +
-      params.toString(),
-      {},
-      6000
-    );
-
-    if(!response.ok){
-      return [];
-    }
-
-    const data =
-    await response.json();
-
-    return (
-      data._embedded?.events ||
-      []
-    )
-    .map(
-      event=>{
-        const venue =
-        event._embedded?.venues?.[0] ||
-        {};
-
-        const image =
-        Array.isArray(event.images)
-        ? (
-          [...event.images]
-          .sort(
-            (a,b)=>
-            (Number(b.width)||0) -
-            (Number(a.width)||0)
-          )[0]?.url ||
-          ""
-        )
-        : "";
-
-        const address =
-        [
-          venue.address?.line1,
-          venue.city?.name,
-          venue.state?.name,
-          venue.country?.name
-        ]
-        .filter(Boolean)
-        .join(", ");
-
-        return {
-          provider:"ticketmaster",
-          category:"event",
-
-          title:
-          cleanText(
-            event.name
-          ),
-
-          description:
-          cleanText(
-            event.info ||
-            event.pleaseNote ||
-            event.description ||
-            ""
-          ),
-
-          url:
-          safeUrl(
-            event.url
-          ),
-
-          image:
-          safeUrl(image),
-
-          publishedAt:null,
-
-          eventStart:
-          normalizeDate(
-            event.dates?.start?.dateTime ||
-            event.dates?.start?.localDate
-          ),
-
-          source:
-          "Ticketmaster",
-
-          language,
-
-          venue:
-          cleanText(
-            venue.name
-          ),
-
-          address,
-
-          location:
-          cleanText(
-            venue.city?.name ||
-            ""
-          ),
-
-          latitude:
-          numberOrNull(
-            venue.location?.latitude
-          ),
-
-          longitude:
-          numberOrNull(
-            venue.location?.longitude
-          ),
-
-          official:true,
-
-          localityGuaranteed:true
-        };
-      }
-    )
-    .filter(
-      event=>
-      includesAny(
-        `${event.title} ${event.description}`,
-        [
-          "dog",
-          "pet",
-          "cat",
-          "puppy",
-          "animal",
-          "adoption",
-          ...KEYWORDS.event
-        ]
-      )
-    );
-
-  }catch{
-    return [];
-  }
-}
-
-async function ticketmasterEvents(
-  resolved,
-  radius,
-  language
-){
-  if(
-    !process.env.TICKETMASTER_API_KEY
-  ){
-    return [];
-  }
-
-  const settled =
-  await Promise.allSettled(
-    [
-      "dog",
-      "pet",
-      "cat",
-      "animal"
-    ]
-    .map(
-      keyword=>
-      ticketmasterKeyword(
-        keyword,
-        resolved,
-        radius,
-        language
-      )
+      maximumAge[
+        item.type
+      ] ||
+      90
     )
   );
-
-  return settled.flatMap(
-    result=>
-    result.status==="fulfilled" &&
-    Array.isArray(result.value)
-    ? result.value
-    : []
-  );
 }
 
-function broadAvailable(){
-  return Boolean(
-    process.env.SERPAPI_API_KEY ||
-    process.env.SERPAPI_KEY ||
-    process.env.SERPER_API_KEY ||
-    process.env.BRAVE_SEARCH_API_KEY ||
-    process.env.BING_SEARCH_API_KEY
-  );
-}
 
-async function broadSearch(
-  query,
-  category,
-  language,
-  resolved
-){
-  const tasks = [];
-
-  if(
-    process.env.SERPAPI_API_KEY ||
-    process.env.SERPAPI_KEY
-  ){
-    tasks.push(
-      serpApiSearch(
-        query,
-        category,
-        language,
-        resolved
-      )
-    );
-  }
-
-  if(
-    process.env.SERPER_API_KEY
-  ){
-    tasks.push(
-      serperSearch(
-        query,
-        category,
-        language,
-        resolved
-      )
-    );
-  }
-
-  if(
-    process.env.BRAVE_SEARCH_API_KEY
-  ){
-    tasks.push(
-      braveSearch(
-        query,
-        category,
-        language
-      )
-    );
-  }
-
-  if(
-    process.env.BING_SEARCH_API_KEY
-  ){
-    tasks.push(
-      bingSearch(
-        query,
-        category,
-        language
-      )
-    );
-  }
-
-  const settled =
-  await Promise.allSettled(
-    tasks.slice(0,3)
-  );
-
-  return settled.flatMap(
-    result=>
-    result.status==="fulfilled" &&
-    Array.isArray(result.value)
-    ? result.value
-    : []
-  );
-}
-
-async function fallbackSearch(
-  query,
-  category,
-  language
-){
-  const tasks = [
-    googleNewsSearch(
-      query,
-      category,
-      language
-    )
-  ];
-
-  if(
-    !broadAvailable() ||
-    [
-      "event",
-      "lost",
-      "found",
-      "help",
-      "news"
-    ]
-    .includes(category)
-  ){
-    tasks.push(
-      gdeltSearch(
-        query,
-        category,
-        language
-      )
-    );
-  }
-
-  if(
-    process.env.NEWSAPI_API_KEY &&
-    [
-      "event",
-      "lost",
-      "found",
-      "help",
-      "news"
-    ]
-    .includes(category)
-  ){
-    tasks.push(
-      newsApiSearch(
-        query,
-        category,
-        language
-      )
-    );
-  }
-
-  const settled =
-  await Promise.allSettled(
-    tasks
-  );
-
-  return settled.flatMap(
-    result=>
-    result.status==="fulfilled" &&
-    Array.isArray(result.value)
-    ? result.value
-    : []
-  );
-}
-
-async function searchCategory(
-  category,
-  location,
-  resolved,
-  language,
-  focused
-){
-  const queries = [
-    buildQuery(
-      category,
-      location,
-      resolved,
-      language
-    )
-  ];
-
-  if(
-    category==="event" &&
-    focused
-  ){
-    queries.push(
-      buildEventPlatformQuery(
-        location,
-        resolved
-      )
-    );
-  }
-
-  const settled =
-  await Promise.allSettled(
-    queries.map(
-      async query=>{
-        const providers =
-        await Promise.allSettled([
-          broadSearch(
-            query,
-            category,
-            language,
-            resolved
-          ),
-          fallbackSearch(
-            query,
-            category,
-            language
-          )
-        ]);
-
-        return providers.flatMap(
-          result=>
-          result.status==="fulfilled" &&
-          Array.isArray(result.value)
-          ? result.value
-          : []
-        );
-      }
-    )
-  );
-
-  return settled.flatMap(
-    result=>
-    result.status==="fulfilled" &&
-    Array.isArray(result.value)
-    ? result.value
-    : []
-  );
-}
-
-async function searchEverything(
-  location,
-  resolved,
-  language,
-  radius,
-  category
-){
-  if(category){
-    const direct =
-    await searchCategory(
-      category,
-      location,
-      resolved,
-      language,
-      true
-    );
-
-    if(category==="event"){
-      direct.push(
-        ...await ticketmasterEvents(
-          resolved,
-          radius,
-          language
-        )
-      );
-    }
-
-    return direct;
-  }
-
-  const settled =
-  await Promise.allSettled(
-    CATEGORIES.map(
-      type=>
-      searchCategory(
-        type,
-        location,
-        resolved,
-        language,
-        false
-      )
-    )
-  );
-
-  const results =
-  settled.flatMap(
-    result=>
-    result.status==="fulfilled" &&
-    Array.isArray(result.value)
-    ? result.value
-    : []
-  );
-
-  results.push(
-    ...await ticketmasterEvents(
-      resolved,
-      radius,
-      language
-    )
-  );
-
-  return results;
-}
+/* =========================================================
+NORMALIZE RESULTS
+========================================================= */
 
 function normalizeItems(
   rawItems,
-  requested,
+  location,
   resolved,
-  coords,
+  coordinates,
   radius
-){
+) {
+
   const output = [];
 
-  for(const raw of rawItems){
-    const url =
-    stripTracking(
-      safeUrl(raw.url)
-    );
 
-    if(
-      !url ||
-      isBlocked(url)
-    ){
+  for (
+    const raw of
+    rawItems
+  ) {
+
+    const url =
+      stripTracking(
+        safeUrl(
+          raw.url
+        )
+      );
+
+    if (!url) {
       continue;
     }
+
 
     const title =
-    cleanText(raw.title);
+      cleanText(
+        raw.title
+      );
 
     const description =
-    cleanText(
-      raw.description
-    );
+      cleanText(
+        raw.description
+      );
 
-    if(
+
+    if (
       !title ||
-      title.length<5
-    ){
+      title.length < 4
+    ) {
       continue;
     }
+
 
     const classification =
-    classify(
-      title,
-      description,
-      raw.category
-    );
-
-    const lat =
-    numberOrNull(
-      raw.latitude ??
-      raw.lat
-    );
-
-    const lng =
-    numberOrNull(
-      raw.longitude ??
-      raw.lng
-    );
-
-    const distance =
-    haversine(
-      coords.latitude,
-      coords.longitude,
-      lat,
-      lng
-    );
-
-    if(
-      distance!==null &&
-      distance>radius*1.25
-    ){
-      continue;
-    }
-
-    const locality =
-    localityEvidence(
-      {
+      classifyItem(
         title,
         description,
-        venue:raw.venue,
-        address:raw.address,
-        location:raw.location,
-        url
-      },
-      requested,
-      resolved
-    );
+        raw.category
+      );
 
-    if(
-      distance===null &&
-      locality.matches===0 &&
-      raw.localityGuaranteed!==true
-    ){
+
+    const latitude =
+      numberOrNull(
+        raw.latitude ??
+        raw.lat
+      );
+
+    const longitude =
+      numberOrNull(
+        raw.longitude ??
+        raw.lng
+      );
+
+
+    const distance =
+      haversineKm(
+        coordinates.latitude,
+        coordinates.longitude,
+        latitude,
+        longitude
+      );
+
+
+    if (
+      distance !== null &&
+      distance >
+      radius * 1.35
+    ) {
       continue;
     }
 
+
+    const evidence =
+      localityEvidence(
+        {
+          title,
+          description,
+          venue:
+            raw.venue,
+          address:
+            raw.address,
+          location:
+            raw.location,
+          url
+        },
+        location,
+        resolved
+      );
+
+
+    /*
+    Internet result without coordinates
+    must contain local evidence.
+
+    OpenStreetMap results have coordinates,
+    so they do not need text locality evidence.
+    */
+
+    if (
+      distance === null &&
+      raw.provider !==
+      "openstreetmap" &&
+      evidence.matches === 0
+    ) {
+      continue;
+    }
+
+
     const eventStart =
-    normalizeDate(
-      raw.eventStart
-    ) ||
-    (
-      classification.type==="event"
-      ? parseDateFromText(
-        `${title} ${description}`
-      )
-      : null
-    );
+      classification.type ===
+      "event"
+        ? (
+            normalizeDate(
+              raw.eventStart
+            ) ||
+            parseDateFromText(
+              title +
+              " " +
+              description
+            )
+          )
+        : null;
+
 
     const item = {
+
       id:
-      idFor(
-        `${url}|${title}`
-      ),
+        createId(
+          url +
+          "|" +
+          title
+        ),
 
       type:
-      classification.type,
+        classification.type,
 
       status:
-      classification.status,
+        classification.status,
 
       title,
 
       description:
-      description ||
-      title,
+        description ||
+        title,
 
       url,
 
       image:
-      safeUrl(
-        raw.image
-      ),
+        safeUrl(
+          raw.image
+        ),
 
       source:
-      cleanText(
-        raw.source ||
-        hostname(url)
-      ),
+        cleanText(
+          raw.source ||
+          hostname(url)
+        ),
 
       provider:
-      raw.provider ||
-      "web",
+        raw.provider ||
+        "free-web",
 
       publishedAt:
-      normalizeDate(
-        raw.publishedAt
-      ),
+        normalizeDate(
+          raw.publishedAt
+        ),
 
       eventStart,
 
       language:
-      normalizeLanguage(
-        raw.language
-      ),
+        normalizeLanguage(
+          raw.language
+        ),
 
       location:
-      cleanText(
-        raw.location ||
-        raw.venue ||
-        localityName(
-          requested,
-          resolved
-        ) ||
-        requested
-      ),
+        cleanText(
+          raw.location ||
+          mainLocationName(
+            location,
+            resolved
+          )
+        ),
 
       venue:
-      cleanText(
-        raw.venue
-      ),
+        cleanText(
+          raw.venue
+        ),
 
       address:
-      cleanText(
-        raw.address
-      ),
+        cleanText(
+          raw.address
+        ),
 
-      lat,
-      lng,
+      lat:
+        latitude,
+
+      lng:
+        longitude,
 
       distanceKm:
-      distance,
-
-      official:
-      Boolean(
-        raw.official
-      ),
-
-      localityGuaranteed:
-      Boolean(
-        raw.localityGuaranteed
-      ),
+        distance,
 
       relevance:
-      locality.score,
+        evidence.score,
 
       localityMatches:
-      locality.matches
+        evidence.matches
     };
 
-    if(
-      fresh(item)
-    ){
-      output.push(item);
+
+    if (
+      passesFreshness(
+        item
+      )
+    ) {
+
+      output.push(
+        item
+      );
     }
   }
+
 
   return output;
 }
 
-function normalizeForDuplicate(value){
+
+/* =========================================================
+DUPLICATES
+========================================================= */
+
+function duplicateText(value) {
+
   return String(
     value ||
     ""
   )
-  .toLowerCase()
-  .normalize("NFKD")
-  .replace(
-    /[^\p{L}\p{N}]+/gu,
-    " "
-  )
-  .replace(
-    /\s+/g,
-    " "
-  )
-  .trim();
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(
+      /[^\p{L}\p{N}]+/gu,
+      " "
+    )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
 }
 
-function similarity(a,b){
-  const one =
-  new Set(
-    normalizeForDuplicate(a)
-    .split(" ")
-    .filter(
-      word=>
-      word.length>=4
-    )
-  );
 
-  const two =
-  new Set(
-    normalizeForDuplicate(b)
-    .split(" ")
-    .filter(
-      word=>
-      word.length>=4
-    )
-  );
+function similarity(
+  first,
+  second
+) {
 
-  if(
-    !one.size ||
-    !two.size
-  ){
+  const a =
+    new Set(
+      duplicateText(
+        first
+      )
+        .split(" ")
+        .filter(
+          word =>
+            word.length >= 4
+        )
+    );
+
+  const b =
+    new Set(
+      duplicateText(
+        second
+      )
+        .split(" ")
+        .filter(
+          word =>
+            word.length >= 4
+        )
+    );
+
+  if (
+    !a.size ||
+    !b.size
+  ) {
     return 0;
   }
 
   let common = 0;
 
-  one.forEach(
-    word=>{
-      if(two.has(word)){
-        common++;
-      }
+  for (
+    const word of
+    a
+  ) {
+
+    if (
+      b.has(word)
+    ) {
+      common++;
     }
-  );
+  }
 
   return (
     common /
     Math.min(
-      one.size,
-      two.size
+      a.size,
+      b.size
     )
   );
 }
 
-function sourceBoost(url){
-  const host =
-  hostname(url);
 
-  return TRUSTED.some(
-    hint=>
-    host.includes(hint) ||
-    String(url || "")
-    .includes(hint)
-  )
-  ? 8
-  : 0;
-}
+/* =========================================================
+SCORING
+========================================================= */
 
-function score(item){
-  let value =
-  Math.min(
-    item.relevance*45,
-    45
-  ) +
-  Math.min(
-    (item.localityMatches || 0)*8,
-    24
-  );
+function scoreItem(item) {
 
-  if(
-    item.localityGuaranteed
-  ){
-    value += 12;
-  }
+  let score = 0;
 
-  if(item.publishedAt){
-    value +=
-    Math.max(
-      0,
-      28 -
-      Math.min(
-        Math.max(
-          0,
-          ageDays(
-            item.publishedAt
-          )
-        ),
-        28
-      )
-    );
-  }
 
-  if(item.type==="event"){
-    value += 12;
-
-    const until =
-    daysUntil(
-      item.eventStart
+  score +=
+    Math.min(
+      item.relevance *
+      50,
+      50
     );
 
-    if(
-      until!==null &&
-      until>=0
-    ){
-      value +=
+
+  score +=
+    Math.min(
+      (
+        item.localityMatches ||
+        0
+      ) *
+      9,
+      27
+    );
+
+
+  if (
+    item.publishedAt
+  ) {
+
+    score +=
       Math.max(
-        4,
+        0,
         28 -
         Math.min(
-          until,
-          24
+          Math.max(
+            0,
+            ageDays(
+              item.publishedAt
+            )
+          ),
+          28
         )
       );
+  }
+
+
+  if (
+    item.type ===
+    "event"
+  ) {
+
+    score += 16;
+
+    if (
+      item.eventStart
+    ) {
+
+      const until =
+        daysUntil(
+          item.eventStart
+        );
+
+      if (
+        until !== null &&
+        until >= 0
+      ) {
+
+        score +=
+          Math.max(
+            4,
+            30 -
+            Math.min(
+              until,
+              26
+            )
+          );
+      }
     }
   }
 
-  if(item.image){
-    value += 7;
+
+  if (
+    item.type ===
+    "group"
+  ) {
+
+    score += 18;
   }
 
-  if(
-    item.description?.length>=55
-  ){
-    value += 5;
+
+  if (
+    item.provider ===
+    "openstreetmap"
+  ) {
+
+    score += 14;
   }
 
-  if(item.official){
-    value += 10;
+
+  if (
+    item.provider ===
+    "google-news"
+  ) {
+
+    score += 6;
   }
 
-  if(
-    [
-      "serpapi-event",
-      "serper-event",
-      "ticketmaster"
-    ]
-    .includes(
-      item.provider
-    )
-  ){
-    value += 10;
-  }else if(
-    [
-      "serpapi",
-      "serper",
-      "brave",
-      "bing"
-    ]
-    .includes(
-      item.provider
-    )
-  ){
-    value += 5;
+
+  if (
+    item.provider ===
+    "reddit"
+  ) {
+
+    score += 5;
   }
 
-  if(
-    item.distanceKm!==null
-  ){
-    value +=
-    Math.max(
-      0,
-      14 -
-      Math.min(
-        item.distanceKm,
-        14
-      )
-    );
+
+  if (
+    item.image
+  ) {
+
+    score += 5;
   }
 
-  return (
-    value +
-    sourceBoost(
-      item.url
-    )
-  );
+
+  if (
+    item.description &&
+    item.description.length >= 60
+  ) {
+
+    score += 4;
+  }
+
+
+  if (
+    item.distanceKm !== null
+  ) {
+
+    score +=
+      Math.max(
+        0,
+        15 -
+        Math.min(
+          item.distanceKm,
+          15
+        )
+      );
+  }
+
+
+  return score;
 }
 
-function deduplicate(items){
+
+function deduplicate(items) {
+
   const byUrl =
-  new Map();
+    new Map();
 
-  for(const item of items){
+
+  for (
+    const item of
+    items
+  ) {
+
     const key =
-    stripTracking(
-      item.url
-    );
+      stripTracking(
+        item.url
+      );
 
-    const old =
-    byUrl.get(key);
+    const existing =
+      byUrl.get(key);
 
-    if(
-      !old ||
-      score(item)>score(old)
-    ){
+    if (
+      !existing ||
+      scoreItem(item) >
+      scoreItem(existing)
+    ) {
+
       byUrl.set(
         key,
         item
@@ -2628,509 +3469,507 @@ function deduplicate(items){
     }
   }
 
+
   const sorted =
-  [...byUrl.values()]
-  .sort(
-    (a,b)=>
-    score(b)-score(a)
-  );
+    [
+      ...byUrl.values()
+    ]
+      .sort(
+        (a, b) =>
+          scoreItem(b) -
+          scoreItem(a)
+      );
+
 
   const output = [];
 
-  for(const item of sorted){
-    if(
-      !output.some(
-        old=>
-        old.type===item.type &&
-        similarity(
-          old.title,
-          item.title
-        )>=.76
-      )
-    ){
-      output.push(item);
+
+  for (
+    const item of
+    sorted
+  ) {
+
+    const duplicate =
+      output.some(
+        existing =>
+          existing.type ===
+          item.type &&
+          similarity(
+            existing.title,
+            item.title
+          ) >= 0.78
+      );
+
+    if (!duplicate) {
+
+      output.push(
+        item
+      );
     }
   }
+
 
   return output;
 }
 
-function balance(
+
+/* =========================================================
+BALANCE
+========================================================= */
+
+function balanceItems(
   items,
   limit,
-  category
-){
-  if(category){
-    return [...items]
-    .sort(
-      (a,b)=>
-      score(b)-score(a)
-    )
-    .slice(
-      0,
-      limit
+  requestedCategory
+) {
+
+  if (
+    requestedCategory
+  ) {
+
+    return [
+      ...items
+    ]
+      .sort(
+        (a, b) =>
+          scoreItem(b) -
+          scoreItem(a)
+      )
+      .slice(
+        0,
+        limit
+      );
+  }
+
+
+  const weights = {
+
+    lost: 2,
+
+    seen: 1,
+
+    found: 1,
+
+    event: 4,
+
+    group: 4,
+
+    help: 1,
+
+    volunteers: 1,
+
+    foster: 1,
+
+    adoption: 2,
+
+    news: 2
+  };
+
+
+  const buckets = {};
+
+
+  for (
+    const category of
+    CATEGORIES
+  ) {
+
+    buckets[
+      category
+    ] = [];
+  }
+
+
+  for (
+    const item of
+    items
+  ) {
+
+    const type =
+      CATEGORIES.includes(
+        item.type
+      )
+        ? item.type
+        : "news";
+
+    buckets[
+      type
+    ].push(
+      item
     );
   }
 
-  const buckets =
-  Object.fromEntries(
-    CATEGORIES.map(
-      type=>[
-        type,
-        []
-      ]
-    )
-  );
-
-  items.forEach(
-    item=>
-    (
-      buckets[item.type] ||
-      buckets.news
-    )
-    .push(item)
-  );
 
   Object.values(
     buckets
   )
-  .forEach(
-    bucket=>
-    bucket.sort(
-      (a,b)=>
-      score(b)-score(a)
-    )
-  );
+    .forEach(
+      bucket =>
+        bucket.sort(
+          (a, b) =>
+            scoreItem(b) -
+            scoreItem(a)
+        )
+    );
+
 
   const output = [];
 
   let progress = true;
 
-  while(
-    output.length<limit &&
+
+  while (
+    output.length <
+    limit &&
     progress
-  ){
+  ) {
+
     progress = false;
 
-    for(const type of CATEGORIES){
-      for(
-        let i=0;
-        i<(WEIGHTS[type] || 1) &&
-        output.length<limit;
-        i++
-      ){
-        const next =
-        buckets[type]
-        .shift();
 
-        if(next){
-          output.push(next);
+    for (
+      const category of
+      CATEGORIES
+    ) {
+
+      const amount =
+        weights[
+          category
+        ] || 1;
+
+
+      for (
+        let index = 0;
+        index < amount;
+        index++
+      ) {
+
+        if (
+          output.length >=
+          limit
+        ) {
+          break;
+        }
+
+
+        const item =
+          buckets[
+            category
+          ].shift();
+
+
+        if (item) {
+
+          output.push(
+            item
+          );
+
           progress = true;
         }
       }
     }
   }
 
+
   return output;
 }
 
-function counts(items){
-  const result = {
-    all:items.length,
-    lost:0,
-    seen:0,
-    found:0,
-    event:0,
-    help:0,
-    volunteers:0,
-    foster:0,
-    adoption:0,
-    news:0
-  };
 
-  items.forEach(
-    item=>{
-      if(
-        Object.prototype
+/* =========================================================
+COUNTS
+========================================================= */
+
+function emptyCounts() {
+
+  return {
+
+    all: 0,
+
+    lost: 0,
+
+    seen: 0,
+
+    found: 0,
+
+    event: 0,
+
+    group: 0,
+
+    help: 0,
+
+    volunteers: 0,
+
+    foster: 0,
+
+    adoption: 0,
+
+    news: 0
+  };
+}
+
+
+function buildCounts(items) {
+
+  const counts =
+    emptyCounts();
+
+  counts.all =
+    items.length;
+
+
+  for (
+    const item of
+    items
+  ) {
+
+    if (
+      Object.prototype
         .hasOwnProperty
         .call(
-          result,
+          counts,
           item.type
         )
-      ){
-        result[item.type]++;
-      }
+    ) {
+
+      counts[
+        item.type
+      ]++;
     }
-  );
-
-  return result;
-}
-
-const DEEPL_CODES = {
-  en:"EN",
-  uk:"UK",
-  ru:"RU",
-  fr:"FR",
-  de:"DE",
-  es:"ES",
-  it:"IT",
-  pt:"PT-PT",
-  nl:"NL",
-  pl:"PL",
-  cs:"CS",
-  sk:"SK",
-  hu:"HU",
-  ro:"RO",
-  bg:"BG",
-  el:"EL",
-  sv:"SV",
-  da:"DA",
-  no:"NB",
-  fi:"FI",
-  tr:"TR"
-};
-
-async function translateItems(
-  items,
-  language
-){
-  const key =
-  process.env.DEEPL_API_KEY;
-
-  const target =
-  DEEPL_CODES[language];
-
-  if(
-    language==="en" ||
-    !key ||
-    !target ||
-    !items.length
-  ){
-    return items;
   }
 
-  const selected =
-  items.slice(0,24);
 
-  const body =
-  new URLSearchParams();
-
-  selected.forEach(
-    item=>{
-      body.append(
-        "text",
-        item.title
-      );
-
-      body.append(
-        "text",
-        item.description
-      );
-    }
-  );
-
-  body.append(
-    "target_lang",
-    target
-  );
-
-  const endpoint =
-  key.endsWith(":fx")
-  ? "https://api-free.deepl.com/v2/translate"
-  : "https://api.deepl.com/v2/translate";
-
-  try{
-    const response =
-    await fetchTimeout(
-      endpoint,
-      {
-        method:"POST",
-        headers:{
-          Authorization:
-          "DeepL-Auth-Key " +
-          key,
-
-          "Content-Type":
-          "application/x-www-form-urlencoded"
-        },
-        body:
-        body.toString()
-      },
-      7000
-    );
-
-    if(!response.ok){
-      return items;
-    }
-
-    const data =
-    await response.json();
-
-    if(
-      !Array.isArray(
-        data.translations
-      ) ||
-      data.translations.length !==
-      selected.length*2
-    ){
-      return items;
-    }
-
-    let index = 0;
-
-    const map =
-    new Map();
-
-    selected.forEach(
-      item=>
-      map.set(
-        item.id,
-        {
-          title:
-          cleanText(
-            data.translations[index++].text
-          ),
-
-          description:
-          cleanText(
-            data.translations[index++].text
-          )
-        }
-      )
-    );
-
-    return items.map(
-      item=>{
-        const translated =
-        map.get(
-          item.id
-        );
-
-        return translated
-        ? {
-          ...item,
-
-          originalTitle:
-          item.title,
-
-          originalDescription:
-          item.description,
-
-          title:
-          translated.title ||
-          item.title,
-
-          description:
-          translated.description ||
-          item.description,
-
-          translated:true
-        }
-        : item;
-      }
-    );
-
-  }catch{
-    return items;
-  }
+  return counts;
 }
 
-function eventStatus(value){
-  const diff =
-  daysUntil(value);
 
-  if(diff===null){
+/* =========================================================
+EVENT STATUS
+========================================================= */
+
+function eventStatus(
+  eventStart
+) {
+
+  const difference =
+    daysUntil(
+      eventStart
+    );
+
+
+  if (
+    difference === null
+  ) {
     return null;
   }
 
-  if(diff<-1){
+
+  if (
+    difference < -1
+  ) {
     return "past";
   }
 
-  if(diff<1){
+
+  if (
+    difference < 1
+  ) {
     return "today";
   }
 
-  if(diff<2){
+
+  if (
+    difference < 2
+  ) {
     return "tomorrow";
   }
 
-  if(diff<=7){
+
+  if (
+    difference <= 7
+  ) {
     return "this_week";
   }
+
 
   return "upcoming";
 }
 
-function providerStatus(){
-  return {
-    serpApi:
-    Boolean(
-      process.env.SERPAPI_API_KEY ||
-      process.env.SERPAPI_KEY
-    ),
 
-    serper:
-    Boolean(
-      process.env.SERPER_API_KEY
-    ),
-
-    brave:
-    Boolean(
-      process.env.BRAVE_SEARCH_API_KEY
-    ),
-
-    bing:
-    Boolean(
-      process.env.BING_SEARCH_API_KEY
-    ),
-
-    gdelt:true,
-
-    googleNews:true,
-
-    newsApi:
-    Boolean(
-      process.env.NEWSAPI_API_KEY
-    ),
-
-    ticketmaster:
-    Boolean(
-      process.env.TICKETMASTER_API_KEY
-    ),
-
-    deepl:
-    Boolean(
-      process.env.DEEPL_API_KEY
-    )
-  };
-}
+/* =========================================================
+PUBLIC ITEM
+========================================================= */
 
 function publicItem(
   item,
-  coords
-){
+  coordinates
+) {
+
   return {
-    id:item.id,
 
-    type:item.type,
+    id:
+      item.id,
 
-    status:item.status,
+    type:
+      item.type,
+
+    status:
+      item.status,
 
     eventStatus:
-    item.type==="event"
-    ? eventStatus(
-      item.eventStart
-    )
-    : null,
+      item.type ===
+      "event"
+        ? eventStatus(
+            item.eventStart
+          )
+        : null,
 
-    title:item.title,
+    title:
+      item.title,
 
     description:
-    item.description,
+      item.description,
 
     originalTitle:
-    item.originalTitle ||
-    null,
+      null,
 
     originalDescription:
-    item.originalDescription ||
-    null,
+      null,
 
     translated:
-    Boolean(
-      item.translated
-    ),
+      false,
 
-    url:item.url,
+    url:
+      item.url,
 
     image:
-    item.image ||
-    "",
+      item.image ||
+      "",
 
     source:
-    item.source ||
-    hostname(
-      item.url
-    ),
+      item.source ||
+      hostname(
+        item.url
+      ),
 
     provider:
-    item.provider,
+      item.provider,
 
     publishedAt:
-    item.publishedAt,
+      item.publishedAt,
 
     eventStart:
-    item.eventStart ||
-    null,
+      item.eventStart ||
+      null,
 
     language:
-    item.language,
+      item.language,
 
     location:
-    item.location,
+      item.location,
 
     venue:
-    item.venue ||
-    "",
+      item.venue ||
+      "",
 
     address:
-    item.address ||
-    "",
+      item.address ||
+      "",
 
     lat:
-    Number.isFinite(
-      item.lat
-    )
-    ? item.lat
-    : null,
+      Number.isFinite(
+        item.lat
+      )
+        ? item.lat
+        : null,
 
     lng:
-    Number.isFinite(
-      item.lng
-    )
-    ? item.lng
-    : null,
+      Number.isFinite(
+        item.lng
+      )
+        ? item.lng
+        : null,
 
     searchLat:
-    Number.isFinite(
-      coords.latitude
-    )
-    ? coords.latitude
-    : null,
+      Number.isFinite(
+        coordinates.latitude
+      )
+        ? coordinates.latitude
+        : null,
 
     searchLng:
-    Number.isFinite(
-      coords.longitude
-    )
-    ? coords.longitude
-    : null,
+      Number.isFinite(
+        coordinates.longitude
+      )
+        ? coordinates.longitude
+        : null,
 
     distanceKm:
-    typeof item.distanceKm ===
-    "number"
-    ? Number(
-      item.distanceKm
-      .toFixed(1)
-    )
-    : null,
+      typeof item.distanceKm ===
+      "number"
+        ? Number(
+            item.distanceKm
+              .toFixed(1)
+          )
+        : null,
 
     official:
-    Boolean(
-      item.official
-    ),
+      false,
 
-    isLive:true
+    isLive:
+      true
   };
 }
+
+
+/* =========================================================
+PROVIDERS
+========================================================= */
+
+function providerStatus() {
+
+  return {
+
+    freeOnly: true,
+
+    googleNews: true,
+
+    gdelt: true,
+
+    reddit: true,
+
+    openStreetMap: true,
+
+    nominatim: true,
+
+    serpApi: false,
+
+    serper: false,
+
+    brave: false,
+
+    bing: false,
+
+    newsApi: false,
+
+    ticketmaster: false,
+
+    deepl: false
+  };
+}
+
+
+/* =========================================================
+RESPONSE
+========================================================= */
 
 function sendJson(
   res,
   status,
   payload
-){
+) {
+
   res.statusCode =
-  status;
+    status;
 
   res.setHeader(
     "Content-Type",
@@ -3139,7 +3978,7 @@ function sendJson(
 
   res.setHeader(
     "Cache-Control",
-    `public, s-maxage=${CACHE_SECONDS}, stale-while-revalidate=600`
+    `public, s-maxage=${CACHE_SECONDS}, stale-while-revalidate=1800`
   );
 
   res.setHeader(
@@ -3158,17 +3997,30 @@ function sendJson(
   );
 
   res.end(
-    JSON.stringify(payload)
+    JSON.stringify(
+      payload
+    )
   );
 }
+
+
+/* =========================================================
+HANDLER
+========================================================= */
 
 module.exports =
 async function handler(
   req,
   res
-){
-  if(req.method==="OPTIONS"){
-    res.statusCode = 204;
+) {
+
+  if (
+    req.method ===
+    "OPTIONS"
+  ) {
+
+    res.statusCode =
+      204;
 
     res.setHeader(
       "Access-Control-Allow-Origin",
@@ -3190,229 +4042,348 @@ async function handler(
     return;
   }
 
-  if(req.method!=="GET"){
+
+  if (
+    req.method !==
+    "GET"
+  ) {
+
     sendJson(
       res,
       405,
       {
-        ok:false,
-        error:"Method not allowed"
+        ok: false,
+        error:
+          "Method not allowed"
       }
     );
 
     return;
   }
 
+
   const startedAt =
-  Date.now();
+    Date.now();
 
   const params =
-  readQuery(req);
+    readQuery(req);
 
-  const error =
-  validate(params);
+  const validationError =
+    validateRequest(
+      params
+    );
 
-  if(error){
+
+  if (
+    validationError
+  ) {
+
     sendJson(
       res,
       400,
       {
-        ok:false,
-        error
+        ok: false,
+        error:
+          validationError
       }
     );
 
     return;
   }
 
-  try{
-    let resolved = null;
 
-    let lat =
-    Number.isFinite(
-      params.latitude
-    )
-    ? params.latitude
-    : null;
+  try {
 
-    let lng =
-    Number.isFinite(
-      params.longitude
-    )
-    ? params.longitude
-    : null;
+    let resolvedLocation =
+      null;
+
+    let latitude =
+      Number.isFinite(
+        params.latitude
+      )
+        ? params.latitude
+        : null;
+
+    let longitude =
+      Number.isFinite(
+        params.longitude
+      )
+        ? params.longitude
+        : null;
 
     let location =
-    params.location;
+      params.location;
 
-    if(
+
+    /* =====================================================
+    RESOLVE LOCATION
+    ===================================================== */
+
+    if (
       Number.isFinite(
         params.latitude
       ) &&
       Number.isFinite(
         params.longitude
       )
-    ){
-      resolved =
-      await reverseLocation(
-        params.latitude,
-        params.longitude,
-        params.language
-      );
+    ) {
 
-      if(!location){
+      resolvedLocation =
+        await reverseLocation(
+          params.latitude,
+          params.longitude,
+          params.language
+        );
+
+      if (!location) {
+
         location =
-        resolved?.name ||
-        resolved?.displayName ||
-        "";
+          resolvedLocation?.name ||
+          resolvedLocation?.displayName ||
+          "";
       }
 
-    }else{
-      resolved =
-      await forwardLocation(
-        location,
-        params.language
-      );
+    } else if (
+      location
+    ) {
 
-      if(resolved){
-        lat =
-        resolved.latitude;
+      resolvedLocation =
+        await forwardLocation(
+          location,
+          params.language
+        );
 
-        lng =
-        resolved.longitude;
+      if (
+        resolvedLocation
+      ) {
+
+        latitude =
+          resolvedLocation.latitude;
+
+        longitude =
+          resolvedLocation.longitude;
       }
     }
 
-    if(!location){
+
+    if (!location) {
+
       sendJson(
         res,
         400,
         {
-          ok:false,
+          ok: false,
           error:
-          "Could not resolve location"
+            "Could not resolve location"
         }
       );
 
       return;
     }
 
-    const raw =
-    await searchEverything(
-      location,
-      resolved,
-      params.language,
-      params.radius,
-      params.category
-    );
 
-    let items =
-    normalizeItems(
-      raw,
-      location,
-      resolved,
-      {
-        latitude:lat,
-        longitude:lng
-      },
-      params.radius
-    );
+    /*
+    Use resolved coordinates for OSM and radius checks.
+    */
 
-    items =
-    deduplicate(items);
+    if (
+      !Number.isFinite(
+        latitude
+      ) &&
+      Number.isFinite(
+        resolvedLocation?.latitude
+      )
+    ) {
 
-    if(params.category){
-      items =
-      items.filter(
-        item=>
-        item.type===
-        params.category
-      );
+      latitude =
+        resolvedLocation.latitude;
     }
 
-    const allCounts =
-    counts(items);
+
+    if (
+      !Number.isFinite(
+        longitude
+      ) &&
+      Number.isFinite(
+        resolvedLocation?.longitude
+      )
+    ) {
+
+      longitude =
+        resolvedLocation.longitude;
+    }
+
+
+    const searchParams = {
+
+      ...params,
+
+      location,
+
+      latitude,
+
+      longitude
+    };
+
+
+    /* =====================================================
+    SEARCH
+    ===================================================== */
+
+    const rawResults =
+      await searchEverything(
+        searchParams,
+        resolvedLocation
+      );
+
+
+    /* =====================================================
+    NORMALIZE
+    ===================================================== */
+
+    let items =
+      normalizeItems(
+        rawResults,
+        location,
+        resolvedLocation,
+        {
+          latitude,
+          longitude
+        },
+        params.radius
+      );
+
+
+    /* =====================================================
+    DEDUPLICATE
+    ===================================================== */
 
     items =
-    balance(
-      items,
-      params.limit,
+      deduplicate(
+        items
+      );
+
+
+    /* =====================================================
+    CATEGORY
+    ===================================================== */
+
+    if (
       params.category
-    );
+    ) {
 
-    items =
-    await translateItems(
-      items,
-      params.language
-    );
+      items =
+        items.filter(
+          item =>
+            item.type ===
+            params.category
+        );
+    }
+
+
+    /*
+    Counts are calculated BEFORE visual result limit,
+    so filter counters remain correct.
+    */
+
+    const counts =
+      buildCounts(
+        items
+      );
+
+
+    /* =====================================================
+    BALANCE
+    ===================================================== */
+
+    const visibleItems =
+      balanceItems(
+        items,
+        params.limit,
+        params.category
+      );
+
+
+    /* =====================================================
+    RESPONSE
+    ===================================================== */
 
     sendJson(
       res,
       200,
       {
-        ok:true,
 
-        live:true,
+        ok: true,
+
+        live: true,
+
+        freeOnly: true,
 
         generatedAt:
-        new Date()
-        .toISOString(),
+          new Date()
+            .toISOString(),
 
         tookMs:
-        Date.now() -
-        startedAt,
+          Date.now() -
+          startedAt,
 
-        query:{
+        query: {
+
           location:
-          cleanText(location),
+            cleanText(
+              location
+            ),
 
           canonicalLocation:
-          cleanText(
-            resolved?.name ||
-            location
-          ),
+            cleanText(
+              resolvedLocation?.name ||
+              location
+            ),
 
-          lat,
-          lng,
+          lat:
+            latitude,
+
+          lng:
+            longitude,
 
           radiusKm:
-          params.radius,
+            params.radius,
 
           language:
-          params.language,
+            params.language,
 
           category:
-          params.category ||
-          "all",
+            params.category ||
+            "all",
 
           limit:
-          params.limit
+            params.limit
         },
 
-        resolvedLocation:
-        resolved,
+        resolvedLocation,
 
         providers:
-        providerStatus(),
+          providerStatus(),
 
-        counts:
-        allCounts,
+        counts,
 
         items:
-        items.map(
-          item=>
-          publicItem(
-            item,
-            {
-              latitude:lat,
-              longitude:lng
-            }
+          visibleItems.map(
+            item =>
+              publicItem(
+                item,
+                {
+                  latitude,
+                  longitude
+                }
+              )
           )
-        )
       }
     );
 
-  }catch(error){
+
+  } catch (error) {
+
     console.error(
       "PETS & DOGUE Community Discovery error:",
       error
@@ -3422,34 +4393,27 @@ async function handler(
       res,
       500,
       {
-        ok:false,
 
-        live:false,
+        ok: false,
+
+        live: false,
+
+        freeOnly: true,
 
         generatedAt:
-        new Date()
-        .toISOString(),
+          new Date()
+            .toISOString(),
 
         error:
-        "Community discovery temporarily unavailable",
+          "Community discovery temporarily unavailable",
 
         providers:
-        providerStatus(),
+          providerStatus(),
 
-        counts:{
-          all:0,
-          lost:0,
-          seen:0,
-          found:0,
-          event:0,
-          help:0,
-          volunteers:0,
-          foster:0,
-          adoption:0,
-          news:0
-        },
+        counts:
+          emptyCounts(),
 
-        items:[]
+        items: []
       }
     );
   }
