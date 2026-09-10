@@ -1,0 +1,2763 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<title>
+Create a Special Offer | PETS & DOGUE for Business
+</title>
+
+<meta
+name="description"
+content="Create a PETS & DOGUE special offer for Club members."
+>
+
+<meta
+name="robots"
+content="noindex,nofollow"
+>
+
+<meta
+name="theme-color"
+content="#070707"
+>
+
+<style>
+
+:root{
+--black:#070707;
+--white:#fff;
+--cream:#f5f0e6;
+--cream2:#ece3d5;
+--gold:#c99a2e;
+--gold-light:#efd783;
+--green:#65e51f;
+--red:#d93838;
+--grey:#716d66;
+--line:#d7ccbc;
+--serif:Georgia,"Times New Roman",serif;
+--sans:Arial,Helvetica,sans-serif;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+background:var(--cream);
+}
+
+body{
+background:var(--cream);
+color:#111;
+font-family:var(--sans);
+min-height:100vh;
+}
+
+a{
+color:inherit;
+text-decoration:none;
+}
+
+button,
+input,
+textarea,
+select{
+font:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+.topbar{
+height:70px;
+background:#070707;
+color:#fff;
+display:grid;
+grid-template-columns:70px 1fr 70px;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:1px solid #252525;
+}
+
+.back{
+width:44px;
+height:44px;
+margin:auto;
+border:1px solid #444;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+}
+
+.brand{
+font-family:var(--serif);
+text-align:center;
+color:var(--gold);
+font-size:24px;
+letter-spacing:2px;
+}
+
+.lang{
+margin:auto;
+width:48px;
+height:35px;
+border:1px solid #444;
+background:#111;
+color:#fff;
+border-radius:999px;
+font-size:9px;
+text-align:center;
+}
+
+.business-strip{
+background:#111;
+color:#ddd;
+text-align:center;
+font-size:8px;
+font-weight:900;
+letter-spacing:1.5px;
+padding:8px;
+}
+
+.hero{
+background:
+radial-gradient(circle at 10% 15%,rgba(255,105,180,.28),transparent 25%),
+radial-gradient(circle at 90% 20%,rgba(101,229,31,.25),transparent 25%),
+linear-gradient(135deg,#fff,#f8f0e5);
+padding:48px 18px 41px;
+text-align:center;
+border-bottom:1px solid var(--line);
+}
+
+.hero-tag{
+display:inline-block;
+border:1px solid #111;
+border-radius:999px;
+padding:7px 12px;
+font-size:8px;
+font-weight:900;
+letter-spacing:1.2px;
+}
+
+.hero h1{
+font-family:var(--serif);
+font-weight:400;
+font-size:clamp(39px,7vw,68px);
+line-height:1;
+margin:15px auto 12px;
+}
+
+.hero p{
+max-width:650px;
+margin:auto;
+color:#5b5751;
+font-size:13px;
+line-height:1.7;
+}
+
+.price-rule{
+display:flex;
+justify-content:center;
+gap:7px;
+flex-wrap:wrap;
+margin-top:18px;
+}
+
+.price-pill{
+background:#111;
+color:#fff;
+font-size:8px;
+font-weight:900;
+border-radius:999px;
+padding:8px 11px;
+}
+
+.price-pill.free{
+background:var(--green);
+color:#111;
+}
+
+.progress-shell{
+max-width:920px;
+margin:24px auto 0;
+padding:0 14px;
+}
+
+.progress{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:5px;
+}
+
+.progress-item{
+height:5px;
+background:#d5ccbf;
+border-radius:99px;
+}
+
+.progress-item.active{
+background:var(--gold);
+}
+
+.progress-labels{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+font-size:7px;
+font-weight:900;
+color:#847d73;
+margin-top:6px;
+text-align:center;
+}
+
+.layout{
+max-width:1150px;
+margin:25px auto 60px;
+padding:0 12px;
+display:grid;
+grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);
+gap:17px;
+align-items:start;
+}
+
+.panel{
+background:#fff;
+border:1px solid var(--line);
+padding:22px;
+}
+
+.form-step{
+display:none;
+}
+
+.form-step.active{
+display:block;
+}
+
+.step-label{
+font-size:8px;
+font-weight:900;
+letter-spacing:1.5px;
+color:#946a1d;
+margin-bottom:6px;
+}
+
+.form-step h2{
+font-family:var(--serif);
+font-size:32px;
+font-weight:400;
+margin-bottom:6px;
+}
+
+.step-intro{
+font-size:11px;
+color:#6f6b64;
+line-height:1.65;
+margin-bottom:22px;
+}
+
+.grid2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.field{
+margin-bottom:15px;
+}
+
+.field.full{
+grid-column:1/-1;
+}
+
+label,
+.label{
+display:block;
+font-size:9px;
+font-weight:900;
+margin-bottom:7px;
+}
+
+.required{
+color:#b12828;
+}
+
+input,
+textarea,
+select{
+width:100%;
+border:1px solid #bcb5aa;
+background:#fff;
+min-height:48px;
+padding:11px 12px;
+border-radius:0;
+outline:none;
+font-size:12px;
+color:#111;
+}
+
+textarea{
+min-height:110px;
+resize:vertical;
+line-height:1.55;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+border-color:#111;
+box-shadow:0 0 0 1px #111;
+}
+
+.help{
+font-size:8px;
+line-height:1.55;
+color:#827c73;
+margin-top:5px;
+}
+
+.offer-type-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:20px;
+}
+
+.type-card{
+position:relative;
+border:2px solid #ccc;
+padding:16px;
+cursor:pointer;
+}
+
+.type-card.selected{
+border-color:#111;
+background:#fff9e6;
+}
+
+.type-card input{
+position:absolute;
+opacity:0;
+pointer-events:none;
+}
+
+.type-card strong{
+font-family:var(--serif);
+font-size:21px;
+display:block;
+margin-bottom:5px;
+}
+
+.type-card p{
+font-size:9px;
+line-height:1.5;
+color:#6d6962;
+}
+
+.checkbox-row{
+display:flex;
+align-items:flex-start;
+gap:9px;
+margin:10px 0;
+font-size:10px;
+line-height:1.5;
+}
+
+.checkbox-row input{
+width:18px;
+height:18px;
+min-height:auto;
+flex:0 0 18px;
+margin-top:1px;
+}
+
+.photo-upload{
+border:2px dashed #aaa;
+background:#faf8f4;
+padding:25px 14px;
+text-align:center;
+position:relative;
+}
+
+.photo-upload input{
+position:absolute;
+inset:0;
+opacity:0;
+cursor:pointer;
+}
+
+.photo-icon{
+font-size:34px;
+margin-bottom:7px;
+}
+
+.photo-upload strong{
+display:block;
+font-size:12px;
+margin-bottom:5px;
+}
+
+.photo-upload p{
+font-size:9px;
+color:#777;
+}
+
+.photo-preview-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:12px;
+}
+
+.photo-preview{
+aspect-ratio:1/1;
+background:#eee;
+position:relative;
+overflow:hidden;
+display:none;
+}
+
+.photo-preview.show{
+display:block;
+}
+
+.photo-preview img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.remove-photo{
+position:absolute;
+top:5px;
+right:5px;
+width:25px;
+height:25px;
+border:0;
+border-radius:50%;
+background:rgba(0,0,0,.75);
+color:#fff;
+font-size:13px;
+}
+
+.actions{
+display:flex;
+gap:9px;
+justify-content:space-between;
+margin-top:25px;
+padding-top:18px;
+border-top:1px solid #eee;
+}
+
+.btn{
+height:48px;
+border:0;
+padding:0 20px;
+font-size:9px;
+font-weight:900;
+letter-spacing:.5px;
+}
+
+.btn.back-btn{
+background:#eee8df;
+color:#111;
+}
+
+.btn.next{
+background:#111;
+color:#fff;
+margin-left:auto;
+}
+
+.btn.submit{
+background:var(--green);
+color:#111;
+width:100%;
+}
+
+.preview-column{
+position:sticky;
+top:94px;
+}
+
+.preview-title{
+font-size:8px;
+font-weight:900;
+letter-spacing:1.3px;
+margin-bottom:8px;
+color:#6f6960;
+}
+
+.offer-preview{
+background:#fff;
+border:2px solid #111;
+overflow:hidden;
+}
+
+.preview-image{
+height:230px;
+background:
+radial-gradient(circle at 80% 20%,rgba(101,229,31,.75),transparent 28%),
+radial-gradient(circle at 15% 80%,rgba(255,105,180,.65),transparent 30%),
+linear-gradient(135deg,#ddd5c8,#111);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+font-size:11px;
+font-weight:900;
+position:relative;
+overflow:hidden;
+}
+
+.preview-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:none;
+}
+
+.preview-image img.visible{
+display:block;
+}
+
+.preview-content{
+padding:17px;
+}
+
+.preview-badge{
+display:inline-block;
+background:#111;
+color:#fff;
+font-size:7px;
+font-weight:900;
+padding:6px 8px;
+margin-bottom:9px;
+}
+
+.preview-business{
+font-size:9px;
+font-weight:900;
+color:#856221;
+margin-bottom:5px;
+}
+
+.preview-content h3{
+font-family:var(--serif);
+font-weight:400;
+font-size:29px;
+line-height:1.05;
+margin-bottom:7px;
+}
+
+.preview-discount{
+font-size:26px;
+font-weight:900;
+color:#111;
+margin:10px 0;
+}
+
+.preview-description{
+font-size:10px;
+color:#666;
+line-height:1.55;
+}
+
+.preview-date{
+margin-top:11px;
+font-size:8px;
+font-weight:900;
+color:#777;
+}
+
+.member-barcode{
+margin-top:15px;
+padding:11px;
+background:#f5f0e6;
+}
+
+.barcode-lines{
+height:34px;
+background:
+repeating-linear-gradient(
+90deg,
+#111 0 2px,
+transparent 2px 4px,
+#111 4px 6px,
+transparent 6px 9px
+);
+}
+
+.barcode-label{
+text-align:center;
+font-size:7px;
+font-weight:900;
+margin-top:4px;
+}
+
+.price-summary{
+margin-top:12px;
+background:#111;
+color:#fff;
+padding:16px;
+}
+
+.price-row{
+display:flex;
+justify-content:space-between;
+gap:10px;
+font-size:9px;
+margin-bottom:8px;
+}
+
+.price-row strong{
+color:var(--gold-light);
+}
+
+.price-total{
+border-top:1px solid #444;
+padding-top:10px;
+margin-top:10px;
+display:flex;
+align-items:end;
+justify-content:space-between;
+}
+
+.price-total span{
+font-size:8px;
+font-weight:900;
+}
+
+.price-total strong{
+font-family:var(--serif);
+font-size:29px;
+font-weight:400;
+color:var(--green);
+}
+
+.security-note{
+margin-top:11px;
+border:1px solid #cabf9f;
+background:#fff8df;
+padding:12px;
+font-size:8px;
+line-height:1.55;
+}
+
+.review{
+display:grid;
+gap:10px;
+}
+
+.review-box{
+background:#f8f5ef;
+border:1px solid #ddd3c5;
+padding:13px;
+}
+
+.review-box small{
+display:block;
+font-size:7px;
+font-weight:900;
+color:#8b7c65;
+margin-bottom:5px;
+}
+
+.review-box strong{
+font-size:11px;
+line-height:1.45;
+}
+
+.legal{
+background:#fff7dd;
+border:1px solid #dec67c;
+padding:13px;
+margin-top:15px;
+font-size:9px;
+line-height:1.55;
+}
+
+.status{
+display:none;
+padding:14px;
+margin-top:12px;
+font-size:10px;
+line-height:1.55;
+}
+
+.status.show{
+display:block;
+}
+
+.status.error{
+background:#fff0f0;
+border:1px solid #da8c8c;
+}
+
+.status.success{
+background:#efffe8;
+border:1px solid var(--green);
+}
+
+@media(max-width:850px){
+
+.layout{
+grid-template-columns:1fr;
+}
+
+.preview-column{
+position:relative;
+top:auto;
+}
+
+}
+
+@media(max-width:560px){
+
+.grid2,
+.offer-type-grid{
+grid-template-columns:1fr;
+}
+
+.panel{
+padding:17px 13px;
+}
+
+.hero{
+padding:34px 13px;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.progress-labels{
+font-size:6px;
+}
+
+.preview-image{
+height:205px;
+}
+
+}
+
+html[dir="rtl"] .actions,
+html[dir="rtl"] .price-row,
+html[dir="rtl"] .price-total{
+direction:rtl;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+<a
+class="back"
+href="/partners.html"
+aria-label="Back"
+>
+←
+</a>
+
+<a
+class="brand"
+href="/"
+translate="no"
+>
+PETS &amp; DOGUE
+</a>
+
+<select
+class="lang"
+id="languageSelect"
+aria-label="Language"
+>
+
+<option value="en">EN</option>
+<option value="uk">UA</option>
+<option value="ru">RU</option>
+<option value="fr">FR</option>
+<option value="de">DE</option>
+<option value="es">ES</option>
+<option value="it">IT</option>
+<option value="pt">PT</option>
+<option value="nl">NL</option>
+<option value="pl">PL</option>
+<option value="cs">CZ</option>
+<option value="sk">SK</option>
+<option value="hu">HU</option>
+<option value="ro">RO</option>
+<option value="bg">BG</option>
+<option value="el">GR</option>
+<option value="sv">SE</option>
+<option value="da">DK</option>
+<option value="no">NO</option>
+<option value="fi">FI</option>
+<option value="tr">TR</option>
+<option value="ar">AR</option>
+<option value="hi">HI</option>
+
+</select>
+
+</header>
+
+<div class="business-strip">
+PETS &amp; DOGUE FOR BUSINESS · SPECIAL OFFER
+</div>
+
+<section class="hero">
+
+<div class="hero-tag" data-t="heroTag">
+SELF-SERVICE
+</div>
+
+<h1 data-t="heroTitle">
+Create your special offer
+</h1>
+
+<p data-t="heroText">
+Add your business details, offer, photos and dates. PETS & DOGUE will prepare the offer for Club members.
+</p>
+
+<div class="price-rule">
+
+<div class="price-pill free" data-t="firstFree">
+1ST PLACEMENT FREE
+</div>
+
+<div class="price-pill" data-t="normalPrice">
+£5 PER PLACEMENT
+</div>
+
+<div class="price-pill free" data-t="tenthFree">
+EVERY 10TH FREE
+</div>
+
+</div>
+
+</section>
+
+<div class="progress-shell">
+
+<div class="progress">
+<div class="progress-item active" data-progress="1"></div>
+<div class="progress-item" data-progress="2"></div>
+<div class="progress-item" data-progress="3"></div>
+<div class="progress-item" data-progress="4"></div>
+</div>
+
+<div class="progress-labels">
+<span data-t="progressBusiness">Business</span>
+<span data-t="progressOffer">Offer</span>
+<span data-t="progressPhotos">Photos</span>
+<span data-t="progressReview">Review</span>
+</div>
+
+</div>
+
+<div class="layout">
+
+<section class="panel">
+
+<form id="offerForm" novalidate>
+
+<div class="form-step active" data-step="1">
+
+<div class="step-label">
+STEP 1 OF 4
+</div>
+
+<h2 data-t="businessTitle">
+Your business
+</h2>
+
+<p class="step-intro" data-t="businessIntro">
+Enter the business details that will be connected to this offer.
+</p>
+
+<div class="grid2">
+
+<div class="field">
+
+<label for="businessName">
+<span data-t="businessName">Business name</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="businessName"
+name="businessName"
+autocomplete="organization"
+maxlength="120"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label for="legalName">
+<span data-t="legalName">Legal business name</span>
+</label>
+
+<input
+id="legalName"
+name="legalName"
+autocomplete="organization"
+maxlength="160"
+>
+
+<div class="help" data-t="legalHelp">
+Used for business records and future invoices.
+</div>
+
+</div>
+
+<div class="field">
+
+<label for="companyNumber">
+<span data-t="companyNumber">UK company number</span>
+</label>
+
+<input
+id="companyNumber"
+name="companyNumber"
+maxlength="20"
+autocomplete="off"
+>
+
+<div class="help" data-t="companyOptional">
+Optional if you are a sole trader.
+</div>
+
+</div>
+
+<div class="field">
+
+<label for="businessEmail">
+<span data-t="email">Business email</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="businessEmail"
+name="businessEmail"
+type="email"
+autocomplete="email"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label for="phone">
+<span data-t="phone">Phone</span>
+</label>
+
+<input
+id="phone"
+name="phone"
+type="tel"
+autocomplete="tel"
+>
+
+</div>
+
+<div class="field">
+
+<label for="website">
+<span data-t="website">Website or business page</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="website"
+name="website"
+type="url"
+placeholder="https://"
+required
+>
+
+</div>
+
+<div class="field full">
+
+<label for="billingAddress">
+<span data-t="billingAddress">Billing / business address</span>
+</label>
+
+<textarea
+id="billingAddress"
+name="billingAddress"
+autocomplete="street-address"
+maxlength="400"
+></textarea>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<a
+class="btn back-btn"
+href="/partners.html"
+data-t="cancel"
+>
+CANCEL
+</a>
+
+<button
+class="btn next"
+type="button"
+onclick="nextStep(2)"
+data-t="continue"
+>
+CONTINUE →
+</button>
+
+</div>
+
+</div>
+
+<div class="form-step" data-step="2">
+
+<div class="step-label">
+STEP 2 OF 4
+</div>
+
+<h2 data-t="offerTitle">
+Your special offer
+</h2>
+
+<p class="step-intro" data-t="offerIntro">
+Tell Club members exactly what you are offering and where they can use it.
+</p>
+
+<div class="offer-type-grid">
+
+<label class="type-card selected" id="offlineCard">
+
+<input
+type="radio"
+name="redemptionType"
+value="offline"
+checked
+>
+
+<strong data-t="inStore">
+In store
+</strong>
+
+<p data-t="inStoreHelp">
+Members show a secure PETS & DOGUE barcode at your business.
+</p>
+
+</label>
+
+<label class="type-card" id="onlineCard">
+
+<input
+type="radio"
+name="redemptionType"
+value="online"
+>
+
+<strong data-t="online">
+Online
+</strong>
+
+<p data-t="onlineHelp">
+Members receive the protected code or online redemption method.
+</p>
+
+</label>
+
+</div>
+
+<div class="grid2">
+
+<div class="field">
+
+<label for="offerTitle">
+<span data-t="offerName">Offer title</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="offerTitle"
+name="offerTitle"
+maxlength="90"
+placeholder="15% off grooming"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label for="discount">
+<span data-t="discount">Discount / benefit</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="discount"
+name="discount"
+maxlength="50"
+placeholder="15% OFF"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label for="category">
+<span data-t="category">Business category</span>
+<span class="required">*</span>
+</label>
+
+<select
+id="category"
+name="category"
+required
+>
+
+<option value="">Choose</option>
+<option value="grooming">Grooming</option>
+<option value="veterinary">Veterinary</option>
+<option value="pet-shop">Pet shop</option>
+<option value="fashion">Pet fashion</option>
+<option value="photography">Photography</option>
+<option value="training">Training</option>
+<option value="food">Pet food</option>
+<option value="hotel">Pet-friendly accommodation</option>
+<option value="cafe">Café / restaurant</option>
+<option value="insurance">Insurance</option>
+<option value="services">Pet services</option>
+<option value="other">Other</option>
+
+</select>
+
+</div>
+
+<div class="field">
+
+<label for="city">
+<span data-t="city">City / coverage</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="city"
+name="city"
+maxlength="100"
+placeholder="London / UK online"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label for="startDate">
+<span data-t="startDate">Start date</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="startDate"
+name="startDate"
+type="date"
+required
+>
+
+</div>
+
+<div class="field">
+
+<label for="endDate">
+<span data-t="endDate">End date</span>
+<span class="required">*</span>
+</label>
+
+<input
+id="endDate"
+name="endDate"
+type="date"
+required
+>
+
+</div>
+
+<div class="field full">
+
+<label for="description">
+<span data-t="description">Offer description</span>
+<span class="required">*</span>
+</label>
+
+<textarea
+id="description"
+name="description"
+maxlength="650"
+placeholder="Explain the offer clearly..."
+required
+></textarea>
+
+</div>
+
+<div class="field full">
+
+<label for="terms">
+<span data-t="terms">Conditions</span>
+<span class="required">*</span>
+</label>
+
+<textarea
+id="terms"
+name="terms"
+maxlength="650"
+placeholder="Example: one use per Club member, appointment required..."
+required
+></textarea>
+
+</div>
+
+<div class="field" id="promoField" hidden>
+
+<label for="promoCode">
+<span data-t="promoCode">Online promo code</span>
+</label>
+
+<input
+id="promoCode"
+name="promoCode"
+maxlength="40"
+autocomplete="off"
+>
+
+</div>
+
+<div class="field">
+
+<label for="maxRedemptions">
+<span data-t="maxUses">Maximum uses</span>
+</label>
+
+<input
+id="maxRedemptions"
+name="maxRedemptions"
+type="number"
+min="1"
+max="1000000"
+placeholder="Optional"
+>
+
+</div>
+
+</div>
+
+<label class="checkbox-row">
+
+<input
+id="oneUse"
+name="oneUse"
+type="checkbox"
+checked
+>
+
+<span data-t="oneUse">
+Limit this offer to one redemption per Club member.
+</span>
+
+</label>
+
+<div class="actions">
+
+<button
+class="btn back-btn"
+type="button"
+onclick="nextStep(1)"
+data-t="back"
+>
+← BACK
+</button>
+
+<button
+class="btn next"
+type="button"
+onclick="nextStep(3)"
+data-t="continue"
+>
+CONTINUE →
+</button>
+
+</div>
+
+</div>
+
+<div class="form-step" data-step="3">
+
+<div class="step-label">
+STEP 3 OF 4
+</div>
+
+<h2 data-t="photosTitle">
+Add your photos
+</h2>
+
+<p class="step-intro" data-t="photosIntro">
+Upload clear, professional images. The first image becomes the main photo of your offer.
+</p>
+
+<div class="photo-upload">
+
+<input
+id="photoInput"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+multiple
+>
+
+<div class="photo-icon">
+＋
+</div>
+
+<strong data-t="uploadPhotos">
+ADD PHOTOS
+</strong>
+
+<p data-t="photoRules">
+Up to 3 JPG, PNG or WEBP images.
+</p>
+
+</div>
+
+<div class="photo-preview-grid" id="photoPreviewGrid">
+
+<div class="photo-preview">
+<img alt="">
+<button class="remove-photo" type="button">×</button>
+</div>
+
+<div class="photo-preview">
+<img alt="">
+<button class="remove-photo" type="button">×</button>
+</div>
+
+<div class="photo-preview">
+<img alt="">
+<button class="remove-photo" type="button">×</button>
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+class="btn back-btn"
+type="button"
+onclick="nextStep(2)"
+data-t="back"
+>
+← BACK
+</button>
+
+<button
+class="btn next"
+type="button"
+onclick="nextStep(4)"
+data-t="review"
+>
+REVIEW →
+</button>
+
+</div>
+
+</div>
+
+<div class="form-step" data-step="4">
+
+<div class="step-label">
+STEP 4 OF 4
+</div>
+
+<h2 data-t="reviewTitle">
+Review your offer
+</h2>
+
+<p class="step-intro" data-t="reviewIntro">
+Check the information before continuing to secure submission and payment.
+</p>
+
+<div class="review">
+
+<div class="review-box">
+<small data-t="reviewBusiness">BUSINESS</small>
+<strong id="reviewBusinessValue">—</strong>
+</div>
+
+<div class="review-box">
+<small data-t="reviewOffer">OFFER</small>
+<strong id="reviewOfferValue">—</strong>
+</div>
+
+<div class="review-box">
+<small data-t="reviewDates">DATES</small>
+<strong id="reviewDatesValue">—</strong>
+</div>
+
+<div class="review-box">
+<small data-t="reviewMethod">REDEMPTION</small>
+<strong id="reviewMethodValue">—</strong>
+</div>
+
+</div>
+
+<div class="legal">
+
+<label class="checkbox-row">
+
+<input
+id="accuracy"
+type="checkbox"
+required
+>
+
+<span data-t="accuracy">
+I confirm that the business and offer information is accurate and that I am authorised to publish this promotion.
+</span>
+
+</label>
+
+<label class="checkbox-row">
+
+<input
+id="termsAgree"
+type="checkbox"
+required
+>
+
+<span data-t="agreeTerms">
+I agree that PETS & DOGUE may review the offer before publication and reject misleading, unsafe or unlawful promotions.
+</span>
+
+</label>
+
+</div>
+
+<div class="status error" id="formError"></div>
+<div class="status success" id="formSuccess"></div>
+
+<div class="actions">
+
+<button
+class="btn back-btn"
+type="button"
+onclick="nextStep(3)"
+data-t="back"
+>
+← BACK
+</button>
+
+<button
+class="btn submit"
+id="submitButton"
+type="submit"
+data-t="submit"
+>
+CONTINUE TO SECURE SUBMISSION →
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+</section>
+
+<aside class="preview-column">
+
+<div class="preview-title" data-t="livePreview">
+LIVE PREVIEW
+</div>
+
+<article class="offer-preview">
+
+<div class="preview-image">
+
+<span id="previewImagePlaceholder">
+YOUR PHOTO
+</span>
+
+<img
+id="mainPreviewImage"
+alt="Offer preview"
+>
+
+</div>
+
+<div class="preview-content">
+
+<div class="preview-badge" data-t="clubOffer">
+PETS & DOGUE CLUB OFFER
+</div>
+
+<div class="preview-business" id="previewBusiness">
+YOUR BUSINESS
+</div>
+
+<h3 id="previewTitle">
+Your special offer
+</h3>
+
+<div class="preview-discount" id="previewDiscount">
+SPECIAL OFFER
+</div>
+
+<p class="preview-description" id="previewDescription">
+Your description will appear here.
+</p>
+
+<div class="preview-date" id="previewDate">
+Choose campaign dates
+</div>
+
+<div class="member-barcode" id="barcodePreview">
+
+<div class="barcode-lines"></div>
+
+<div class="barcode-label" data-t="secureBarcode">
+SECURE MEMBER BARCODE
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+<div class="price-summary">
+
+<div class="price-row">
+<span data-t="standardFee">
+Standard placement
+</span>
+<strong>£5</strong>
+</div>
+
+<div class="price-row">
+<span data-t="freeRule">
+1st / every 10th
+</span>
+<strong data-t="automatic">
+Automatic
+</strong>
+</div>
+
+<div class="price-total">
+<span data-t="yourPrice">
+YOUR PRICE
+</span>
+<strong id="priceValue">
+CALCULATED
+</strong>
+</div>
+
+</div>
+
+<div class="security-note" data-t="securityNote">
+The final price must be calculated by PETS & DOGUE securely from the advertiser's real placement history. It cannot be changed from this page.
+</div>
+
+</aside>
+
+</div> <script>
+
+"use strict";
+
+const LANGUAGE_KEY =
+"pets_dogue_language";
+
+let currentStep=1;
+let selectedPhotos=[];
+
+const COPY={
+
+en:{
+heroTag:"SELF-SERVICE",
+heroTitle:"Create your special offer",
+heroText:"Add your business details, offer, photos and dates. PETS & DOGUE will prepare the offer for Club members.",
+firstFree:"1ST PLACEMENT FREE",
+normalPrice:"£5 PER PLACEMENT",
+tenthFree:"EVERY 10TH FREE",
+progressBusiness:"Business",
+progressOffer:"Offer",
+progressPhotos:"Photos",
+progressReview:"Review",
+businessTitle:"Your business",
+businessIntro:"Enter the business details that will be connected to this offer.",
+businessName:"Business name",
+legalName:"Legal business name",
+legalHelp:"Used for business records and future invoices.",
+companyNumber:"UK company number",
+companyOptional:"Optional if you are a sole trader.",
+email:"Business email",
+phone:"Phone",
+website:"Website or business page",
+billingAddress:"Billing / business address",
+cancel:"CANCEL",
+continue:"CONTINUE →",
+offerTitle:"Your special offer",
+offerIntro:"Tell Club members exactly what you are offering and where they can use it.",
+inStore:"In store",
+inStoreHelp:"Members show a secure PETS & DOGUE barcode at your business.",
+online:"Online",
+onlineHelp:"Members receive the protected code or online redemption method.",
+offerName:"Offer title",
+discount:"Discount / benefit",
+category:"Business category",
+city:"City / coverage",
+startDate:"Start date",
+endDate:"End date",
+description:"Offer description",
+terms:"Conditions",
+promoCode:"Online promo code",
+maxUses:"Maximum uses",
+oneUse:"Limit this offer to one redemption per Club member.",
+back:"← BACK",
+photosTitle:"Add your photos",
+photosIntro:"Upload clear, professional images. The first image becomes the main photo of your offer.",
+uploadPhotos:"ADD PHOTOS",
+photoRules:"Up to 3 JPG, PNG or WEBP images.",
+review:"REVIEW →",
+reviewTitle:"Review your offer",
+reviewIntro:"Check the information before continuing to secure submission and payment.",
+reviewBusiness:"BUSINESS",
+reviewOffer:"OFFER",
+reviewDates:"DATES",
+reviewMethod:"REDEMPTION",
+accuracy:"I confirm that the business and offer information is accurate and that I am authorised to publish this promotion.",
+agreeTerms:"I agree that PETS & DOGUE may review the offer before publication and reject misleading, unsafe or unlawful promotions.",
+submit:"CONTINUE TO SECURE SUBMISSION →",
+livePreview:"LIVE PREVIEW",
+clubOffer:"PETS & DOGUE CLUB OFFER",
+secureBarcode:"SECURE MEMBER BARCODE",
+standardFee:"Standard placement",
+freeRule:"1st / every 10th",
+automatic:"Automatic",
+yourPrice:"YOUR PRICE",
+securityNote:"The final price must be calculated by PETS & DOGUE securely from the advertiser's real placement history. It cannot be changed from this page.",
+required:"Please complete all required fields.",
+datesError:"The end date must be after the start date.",
+photoError:"You can upload up to 3 images.",
+fileError:"Please use JPG, PNG or WEBP images.",
+agreeError:"Please confirm both declarations.",
+offline:"In store",
+onlineMethod:"Online"
+},
+
+ru:{
+heroTag:"САМОСТОЯТЕЛЬНО",
+heroTitle:"Создайте своё спецпредложение",
+heroText:"Добавьте данные бизнеса, предложение, фотографии и даты. PETS & DOGUE подготовит его для участников Club.",
+firstFree:"1-Е РАЗМЕЩЕНИЕ БЕСПЛАТНО",
+normalPrice:"£5 ЗА РАЗМЕЩЕНИЕ",
+tenthFree:"КАЖДОЕ 10-Е БЕСПЛАТНО",
+progressBusiness:"Бизнес",
+progressOffer:"Предложение",
+progressPhotos:"Фото",
+progressReview:"Проверка",
+businessTitle:"Ваш бизнес",
+businessIntro:"Укажите данные бизнеса, к которому относится предложение.",
+businessName:"Название бизнеса",
+legalName:"Юридическое название",
+legalHelp:"Используется для бизнес-записей и будущих счетов.",
+companyNumber:"Номер компании UK",
+companyOptional:"Необязательно для sole trader.",
+email:"Рабочий email",
+phone:"Телефон",
+website:"Сайт или страница бизнеса",
+billingAddress:"Адрес бизнеса / для счетов",
+cancel:"ОТМЕНА",
+continue:"ПРОДОЛЖИТЬ →",
+offerTitle:"Ваше спецпредложение",
+offerIntro:"Укажите, что именно получают участники Club и где действует предложение.",
+inStore:"В заведении",
+inStoreHelp:"Участник показывает защищённый штрихкод PETS & DOGUE.",
+online:"Онлайн",
+onlineHelp:"Участник получает защищённый промокод или онлайн-способ использования.",
+offerName:"Название предложения",
+discount:"Скидка / преимущество",
+category:"Категория бизнеса",
+city:"Город / территория",
+startDate:"Дата начала",
+endDate:"Дата окончания",
+description:"Описание предложения",
+terms:"Условия",
+promoCode:"Промокод для онлайн",
+maxUses:"Максимальное количество использований",
+oneUse:"Разрешить одному участнику Club использовать предложение только один раз.",
+back:"← НАЗАД",
+photosTitle:"Добавьте фотографии",
+photosIntro:"Загрузите чёткие профессиональные изображения. Первое фото будет главным.",
+uploadPhotos:"ДОБАВИТЬ ФОТО",
+photoRules:"До 3 изображений JPG, PNG или WEBP.",
+review:"ПРОВЕРИТЬ →",
+reviewTitle:"Проверьте предложение",
+reviewIntro:"Проверьте данные перед безопасной отправкой и оплатой.",
+reviewBusiness:"БИЗНЕС",
+reviewOffer:"ПРЕДЛОЖЕНИЕ",
+reviewDates:"ДАТЫ",
+reviewMethod:"ИСПОЛЬЗОВАНИЕ",
+accuracy:"Я подтверждаю правильность данных и имею право размещать это предложение.",
+agreeTerms:"Я согласен, что PETS & DOGUE может проверить предложение перед публикацией и отклонить вводящую в заблуждение, небезопасную или незаконную рекламу.",
+submit:"ПЕРЕЙТИ К БЕЗОПАСНОЙ ОТПРАВКЕ →",
+livePreview:"ПРЕДВАРИТЕЛЬНЫЙ ВИД",
+clubOffer:"ПРЕДЛОЖЕНИЕ PETS & DOGUE CLUB",
+secureBarcode:"ЗАЩИЩЁННЫЙ ШТРИХКОД УЧАСТНИКА",
+standardFee:"Обычная стоимость",
+freeRule:"1-е / каждое 10-е",
+automatic:"Автоматически",
+yourPrice:"ВАША ЦЕНА",
+securityNote:"Окончательная цена рассчитывается сервером PETS & DOGUE по реальной истории размещений рекламодателя и не может быть изменена на этой странице.",
+required:"Заполните все обязательные поля.",
+datesError:"Дата окончания должна быть позже даты начала.",
+photoError:"Можно загрузить максимум 3 изображения.",
+fileError:"Используйте изображения JPG, PNG или WEBP.",
+agreeError:"Подтвердите оба пункта.",
+offline:"В заведении",
+onlineMethod:"Онлайн"
+},
+
+uk:{
+heroTag:"САМОСТІЙНО",
+heroTitle:"Створіть свою спецпропозицію",
+heroText:"Додайте дані бізнесу, пропозицію, фотографії та дати. PETS & DOGUE підготує її для учасників Club.",
+firstFree:"1-ШЕ РОЗМІЩЕННЯ БЕЗКОШТОВНО",
+normalPrice:"£5 ЗА РОЗМІЩЕННЯ",
+tenthFree:"КОЖНЕ 10-ТЕ БЕЗКОШТОВНО",
+progressBusiness:"Бізнес",
+progressOffer:"Пропозиція",
+progressPhotos:"Фото",
+progressReview:"Перевірка",
+businessTitle:"Ваш бізнес",
+businessIntro:"Вкажіть дані бізнесу, до якого належить пропозиція.",
+businessName:"Назва бізнесу",
+legalName:"Юридична назва",
+legalHelp:"Використовується для бізнес-записів і майбутніх рахунків.",
+companyNumber:"Номер компанії UK",
+companyOptional:"Необов'язково для sole trader.",
+email:"Робочий email",
+phone:"Телефон",
+website:"Сайт або сторінка бізнесу",
+billingAddress:"Адреса бізнесу / для рахунків",
+cancel:"СКАСУВАТИ",
+continue:"ПРОДОВЖИТИ →",
+offerTitle:"Ваша спецпропозиція",
+offerIntro:"Вкажіть, що отримують учасники Club і де діє пропозиція.",
+inStore:"У закладі",
+inStoreHelp:"Учасник показує захищений штрихкод PETS & DOGUE.",
+online:"Онлайн",
+onlineHelp:"Учасник отримує захищений промокод або онлайн-спосіб використання.",
+offerName:"Назва пропозиції",
+discount:"Знижка / перевага",
+category:"Категорія бізнесу",
+city:"Місто / територія",
+startDate:"Дата початку",
+endDate:"Дата завершення",
+description:"Опис пропозиції",
+terms:"Умови",
+promoCode:"Онлайн промокод",
+maxUses:"Максимальна кількість використань",
+oneUse:"Дозволити одному учаснику Club використати пропозицію лише один раз.",
+back:"← НАЗАД",
+photosTitle:"Додайте фотографії",
+photosIntro:"Завантажте якісні зображення. Перше фото буде головним.",
+uploadPhotos:"ДОДАТИ ФОТО",
+photoRules:"До 3 зображень JPG, PNG або WEBP.",
+review:"ПЕРЕВІРИТИ →",
+reviewTitle:"Перевірте пропозицію",
+reviewIntro:"Перевірте інформацію перед безпечним надсиланням і оплатою.",
+reviewBusiness:"БІЗНЕС",
+reviewOffer:"ПРОПОЗИЦІЯ",
+reviewDates:"ДАТИ",
+reviewMethod:"ВИКОРИСТАННЯ",
+accuracy:"Я підтверджую правильність даних та маю право публікувати цю пропозицію.",
+agreeTerms:"Я погоджуюся, що PETS & DOGUE може перевірити пропозицію перед публікацією та відхилити незаконну, небезпечну або оманливу рекламу.",
+submit:"ПЕРЕЙТИ ДО БЕЗПЕЧНОГО НАДСИЛАННЯ →",
+livePreview:"ПОПЕРЕДНІЙ ВИГЛЯД",
+clubOffer:"ПРОПОЗИЦІЯ PETS & DOGUE CLUB",
+secureBarcode:"ЗАХИЩЕНИЙ ШТРИХКОД УЧАСНИКА",
+standardFee:"Звичайна вартість",
+freeRule:"1-ше / кожне 10-те",
+automatic:"Автоматично",
+yourPrice:"ВАША ЦІНА",
+securityNote:"Остаточна ціна розраховується сервером PETS & DOGUE за реальною історією розміщень рекламодавця.",
+required:"Заповніть усі обов'язкові поля.",
+datesError:"Дата завершення має бути пізніше дати початку.",
+photoError:"Можна завантажити максимум 3 зображення.",
+fileError:"Використовуйте JPG, PNG або WEBP.",
+agreeError:"Підтвердьте обидва пункти.",
+offline:"У закладі",
+onlineMethod:"Онлайн"
+}
+
+};
+
+function language(){
+
+let value="en";
+
+try{
+value=
+localStorage.getItem(LANGUAGE_KEY)||
+navigator.language||
+"en";
+}catch(error){}
+
+value=
+String(value)
+.toLowerCase()
+.split(/[-_]/)[0];
+
+const aliases={
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+return aliases[value]||value;
+
+}
+
+function text(){
+return COPY[language()]||COPY.en;
+}
+
+function applyLanguage(code){
+
+const aliases={
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+code=aliases[code]||code;
+
+if(!document.querySelector(
+`#languageSelect option[value="${code}"]`
+)){
+code="en";
+}
+
+try{
+localStorage.setItem(
+LANGUAGE_KEY,
+code
+);
+}catch(error){}
+
+document.documentElement.lang=code;
+
+document.documentElement.dir=
+code==="ar"
+?"rtl"
+:"ltr";
+
+document.getElementById(
+"languageSelect"
+).value=code;
+
+const selected=
+COPY[code]||
+COPY.en;
+
+document
+.querySelectorAll("[data-t]")
+.forEach(element=>{
+
+const key=
+element.dataset.t;
+
+if(selected[key]){
+element.textContent=
+selected[key];
+}else if(COPY.en[key]){
+element.textContent=
+COPY.en[key];
+}
+
+});
+
+updatePreview();
+
+}
+
+function setError(message){
+
+const box=
+document.getElementById(
+"formError"
+);
+
+box.textContent=message;
+box.classList.add("show");
+
+document
+.getElementById("formSuccess")
+.classList.remove("show");
+
+}
+
+function clearStatus(){
+
+document
+.getElementById("formError")
+.classList.remove("show");
+
+document
+.getElementById("formSuccess")
+.classList.remove("show");
+
+}
+
+function validateStep(step){
+
+const t=text();
+
+if(step===1){
+
+const fields=[
+"businessName",
+"businessEmail",
+"website"
+];
+
+for(const id of fields){
+
+const element=
+document.getElementById(id);
+
+if(!element.value.trim()){
+
+setError(t.required);
+element.focus();
+return false;
+
+}
+
+if(!element.checkValidity()){
+
+setError(t.required);
+element.focus();
+return false;
+
+}
+
+}
+
+}
+
+if(step===2){
+
+const fields=[
+"offerTitle",
+"discount",
+"category",
+"city",
+"startDate",
+"endDate",
+"description",
+"terms"
+];
+
+for(const id of fields){
+
+const element=
+document.getElementById(id);
+
+if(!element.value.trim()){
+
+setError(t.required);
+element.focus();
+return false;
+
+}
+
+}
+
+const start=
+new Date(
+document.getElementById("startDate").value+
+"T00:00:00"
+);
+
+const end=
+new Date(
+document.getElementById("endDate").value+
+"T00:00:00"
+);
+
+if(end<start){
+
+setError(t.datesError);
+
+document
+.getElementById("endDate")
+.focus();
+
+return false;
+
+}
+
+}
+
+return true;
+
+}
+
+function nextStep(step){
+
+clearStatus();
+
+if(
+step>currentStep &&
+!validateStep(currentStep)
+){
+return;
+}
+
+currentStep=step;
+
+document
+.querySelectorAll(".form-step")
+.forEach(element=>{
+
+element.classList.toggle(
+"active",
+Number(element.dataset.step)===step
+);
+
+});
+
+document
+.querySelectorAll(".progress-item")
+.forEach(element=>{
+
+element.classList.toggle(
+"active",
+Number(element.dataset.progress)<=step
+);
+
+});
+
+if(step===4){
+updateReview();
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+function redemptionType(){
+
+return (
+document.querySelector(
+'input[name="redemptionType"]:checked'
+)?.value||
+"offline"
+);
+
+}
+
+function updateRedemptionUI(){
+
+const online=
+redemptionType()==="online";
+
+document
+.getElementById("offlineCard")
+.classList.toggle(
+"selected",
+!online
+);
+
+document
+.getElementById("onlineCard")
+.classList.toggle(
+"selected",
+online
+);
+
+document
+.getElementById("promoField")
+.hidden=!online;
+
+document
+.getElementById("barcodePreview")
+.style.display=
+online
+?"none"
+:"block";
+
+updatePreview();
+
+}
+
+function updatePreview(){
+
+const t=text();
+
+const business=
+document.getElementById("businessName")
+?.value.trim();
+
+const title=
+document.getElementById("offerTitle")
+?.value.trim();
+
+const discount=
+document.getElementById("discount")
+?.value.trim();
+
+const description=
+document.getElementById("description")
+?.value.trim();
+
+const start=
+document.getElementById("startDate")
+?.value;
+
+const end=
+document.getElementById("endDate")
+?.value;
+
+document.getElementById(
+"previewBusiness"
+).textContent=
+business||
+"YOUR BUSINESS";
+
+document.getElementById(
+"previewTitle"
+).textContent=
+title||
+t.offerName;
+
+document.getElementById(
+"previewDiscount"
+).textContent=
+discount||
+"SPECIAL OFFER";
+
+document.getElementById(
+"previewDescription"
+).textContent=
+description||
+(
+language()==="ru"
+?"Описание вашего предложения появится здесь."
+:
+language()==="uk"
+?"Опис вашої пропозиції з’явиться тут."
+:
+"Your description will appear here."
+);
+
+document.getElementById(
+"previewDate"
+).textContent=
+start&&end
+?`${start} — ${end}`
+:
+(
+language()==="ru"
+?"Выберите даты действия"
+:
+language()==="uk"
+?"Оберіть дати дії"
+:
+"Choose campaign dates"
+);
+
+}
+
+function updateReview(){
+
+const t=text();
+
+document.getElementById(
+"reviewBusinessValue"
+).textContent=
+document.getElementById(
+"businessName"
+).value||
+"—";
+
+document.getElementById(
+"reviewOfferValue"
+).textContent=
+(
+document.getElementById(
+"offerTitle"
+).value||
+"—"
+)+
+" · "+
+(
+document.getElementById(
+"discount"
+).value||
+""
+);
+
+document.getElementById(
+"reviewDatesValue"
+).textContent=
+(
+document.getElementById(
+"startDate"
+).value||
+"—"
+)+
+" → "+
+(
+document.getElementById(
+"endDate"
+).value||
+"—"
+);
+
+document.getElementById(
+"reviewMethodValue"
+).textContent=
+redemptionType()==="online"
+?t.onlineMethod
+:t.offline;
+
+}
+
+document
+.querySelectorAll(
+'input[name="redemptionType"]'
+)
+.forEach(input=>{
+
+input.addEventListener(
+"change",
+updateRedemptionUI
+);
+
+});
+
+[
+"businessName",
+"offerTitle",
+"discount",
+"description",
+"startDate",
+"endDate"
+]
+.forEach(id=>{
+
+document
+.getElementById(id)
+.addEventListener(
+"input",
+updatePreview
+);
+
+});
+
+document
+.getElementById("photoInput")
+.addEventListener(
+"change",
+event=>{
+
+const t=text();
+
+const incoming=
+Array.from(
+event.target.files||
+[]
+);
+
+if(
+selectedPhotos.length+
+incoming.length>
+3
+){
+
+setError(t.photoError);
+
+event.target.value="";
+return;
+
+}
+
+for(const file of incoming){
+
+if(
+![
+"image/jpeg",
+"image/png",
+"image/webp"
+].includes(file.type)
+){
+
+setError(t.fileError);
+
+event.target.value="";
+return;
+
+}
+
+selectedPhotos.push(file);
+
+}
+
+event.target.value="";
+
+renderPhotos();
+
+});
+
+function renderPhotos(){
+
+const boxes=
+Array.from(
+document.querySelectorAll(
+".photo-preview"
+)
+);
+
+boxes.forEach(
+(box,index)=>{
+
+const file=
+selectedPhotos[index];
+
+const image=
+box.querySelector("img");
+
+if(!file){
+
+box.classList.remove("show");
+
+image.removeAttribute("src");
+
+return;
+
+}
+
+box.classList.add("show");
+
+const url=
+URL.createObjectURL(file);
+
+image.src=url;
+
+box
+.querySelector(".remove-photo")
+.onclick=()=>{
+
+selectedPhotos.splice(
+index,
+1
+);
+
+renderPhotos();
+
+};
+
+});
+
+const main=
+document.getElementById(
+"mainPreviewImage"
+);
+
+const placeholder=
+document.getElementById(
+"previewImagePlaceholder"
+);
+
+if(selectedPhotos[0]){
+
+main.src=
+URL.createObjectURL(
+selectedPhotos[0]
+);
+
+main.classList.add(
+"visible"
+);
+
+placeholder.style.display=
+"none";
+
+}else{
+
+main.classList.remove(
+"visible"
+);
+
+placeholder.style.display=
+"block";
+
+}
+
+}
+
+document
+.getElementById("offerForm")
+.addEventListener(
+"submit",
+async event=>{
+
+event.preventDefault();
+
+clearStatus();
+
+const t=text();
+
+if(!validateStep(1)){
+
+nextStep(1);
+return;
+
+}
+
+if(!validateStep(2)){
+
+nextStep(2);
+return;
+
+}
+
+if(
+!document.getElementById(
+"accuracy"
+).checked||
+!document.getElementById(
+"termsAgree"
+).checked
+){
+
+setError(t.agreeError);
+
+return;
+
+}
+
+const button=
+document.getElementById(
+"submitButton"
+);
+
+button.disabled=true;
+
+const oldText=
+button.textContent;
+
+button.textContent=
+language()==="ru"
+?"ОТПРАВЛЯЕМ..."
+:
+language()==="uk"
+?"НАДСИЛАЄМО..."
+:
+"SUBMITTING...";
+
+try{
+
+const payload=
+new FormData();
+
+payload.append(
+"businessName",
+document.getElementById(
+"businessName"
+).value.trim()
+);
+
+payload.append(
+"legalName",
+document.getElementById(
+"legalName"
+).value.trim()
+);
+
+payload.append(
+"companyNumber",
+document.getElementById(
+"companyNumber"
+).value.trim()
+);
+
+payload.append(
+"businessEmail",
+document.getElementById(
+"businessEmail"
+).value.trim()
+);
+
+payload.append(
+"phone",
+document.getElementById(
+"phone"
+).value.trim()
+);
+
+payload.append(
+"website",
+document.getElementById(
+"website"
+).value.trim()
+);
+
+payload.append(
+"billingAddress",
+document.getElementById(
+"billingAddress"
+).value.trim()
+);
+
+payload.append(
+"redemptionType",
+redemptionType()
+);
+
+payload.append(
+"offerTitle",
+document.getElementById(
+"offerTitle"
+).value.trim()
+);
+
+payload.append(
+"discount",
+document.getElementById(
+"discount"
+).value.trim()
+);
+
+payload.append(
+"category",
+document.getElementById(
+"category"
+).value
+);
+
+payload.append(
+"city",
+document.getElementById(
+"city"
+).value.trim()
+);
+
+payload.append(
+"startDate",
+document.getElementById(
+"startDate"
+).value
+);
+
+payload.append(
+"endDate",
+document.getElementById(
+"endDate"
+).value
+);
+
+payload.append(
+"description",
+document.getElementById(
+"description"
+).value.trim()
+);
+
+payload.append(
+"terms",
+document.getElementById(
+"terms"
+).value.trim()
+);
+
+payload.append(
+"promoCode",
+document.getElementById(
+"promoCode"
+).value.trim()
+);
+
+payload.append(
+"maxRedemptions",
+document.getElementById(
+"maxRedemptions"
+).value
+);
+
+payload.append(
+"oneUse",
+document.getElementById(
+"oneUse"
+).checked
+?"true"
+:"false"
+);
+
+selectedPhotos.forEach(
+(file,index)=>{
+
+payload.append(
+`photo${index+1}`,
+file
+);
+
+});
+
+const response=
+await fetch(
+"/api/partner-special-offer",
+{
+method:"POST",
+body:payload,
+credentials:"same-origin"
+}
+);
+
+const data=
+await response.json()
+.catch(()=>({}));
+
+if(!response.ok){
+
+throw new Error(
+data.error||
+"Unable to submit the offer."
+);
+
+}
+
+if(data.checkoutUrl){
+
+window.location.href=
+data.checkoutUrl;
+
+return;
+
+}
+
+if(data.redirectUrl){
+
+window.location.href=
+data.redirectUrl;
+
+return;
+
+}
+
+const success=
+document.getElementById(
+"formSuccess"
+);
+
+success.textContent=
+language()==="ru"
+?"Предложение успешно отправлено."
+:
+language()==="uk"
+?"Пропозицію успішно надіслано."
+:
+"Your offer has been submitted successfully.";
+
+success.classList.add("show");
+
+}catch(error){
+
+setError(
+error.message||
+"Unable to submit the offer."
+);
+
+}finally{
+
+button.disabled=false;
+button.textContent=oldText;
+
+}
+
+});
+
+document
+.getElementById("languageSelect")
+.addEventListener(
+"change",
+event=>{
+
+applyLanguage(
+event.target.value
+);
+
+});
+
+const today=
+new Date();
+
+const minDate=
+today.toISOString()
+.slice(0,10);
+
+document.getElementById(
+"startDate"
+).min=
+minDate;
+
+document.getElementById(
+"endDate"
+).min=
+minDate;
+
+applyLanguage(
+language()
+);
+
+updateRedemptionUI();
+updatePreview();
+
+</script>
+
+</body>
+</html>
