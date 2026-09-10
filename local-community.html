@@ -14,7 +14,7 @@ content="width=device-width,initial-scale=1.0,viewport-fit=cover"
 <meta
 id="pageDescription"
 name="description"
-content="Find lost and found pets, local sightings, pet events, group walks, volunteers, foster and adoption posts, help requests and animal news near you with PETS & DOGUE."
+content="Find lost and found pets, local sightings, pet events, clubs, groups, group walks, volunteers, foster and adoption posts, help requests and animal news near you with PETS & DOGUE."
 >
 
 <meta
@@ -66,7 +66,7 @@ content="Pet Community Near You | Lost & Found Pets, Events & Adoption | PETS & 
 <meta
 id="ogDescription"
 property="og:description"
-content="Find lost and found pets, local sightings, pet events, group walks, volunteers, foster and adoption posts, help requests and animal news near you with PETS & DOGUE."
+content="Find lost and found pets, local events, pet clubs, neighbourhood groups, volunteers, adoption posts and animal news near you with PETS & DOGUE."
 >
 
 <meta
@@ -81,7 +81,7 @@ content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
 
 <meta
 property="og:image:alt"
-content="PETS & DOGUE pet community"
+content="PETS & DOGUE local pet community"
 >
 
 <meta
@@ -97,13 +97,13 @@ content="summary_large_image"
 <meta
 id="twitterTitle"
 name="twitter:title"
-content="Pet Community Near You | Lost & Found Pets, Events & Adoption | PETS & DOGUE"
+content="Pet Community Near You | PETS & DOGUE"
 >
 
 <meta
 id="twitterDescription"
 name="twitter:description"
-content="Find lost and found pets, local sightings, pet events, volunteers, foster and adoption posts, help requests and animal news near you."
+content="Discover local pet events, clubs, groups, lost pets, adoption, volunteering and animal news near you."
 >
 
 <meta
@@ -155,55 +155,15 @@ type="application/ld+json"
       "@type":"CollectionPage",
       "@id":"https://www.petsanddogue.com/local-community.html#webpage",
       "url":"https://www.petsanddogue.com/local-community.html",
-      "name":"Pet Community Near You | Lost & Found Pets, Events & Adoption | PETS & DOGUE",
-      "description":"Find lost and found pets, local sightings, pet events, group walks, volunteers, foster and adoption posts, help requests and animal news near you with PETS & DOGUE.",
+      "name":"Pet Community Near You | PETS & DOGUE",
+      "description":"Find local pet events, clubs, neighbourhood groups, lost and found pets, adoption, volunteering and animal news near you.",
       "inLanguage":"en",
       "isPartOf":{
         "@id":"https://www.petsanddogue.com/#website"
       },
       "publisher":{
         "@id":"https://www.petsanddogue.com/#organization"
-      },
-      "about":[
-        {
-          "@type":"Thing",
-          "name":"Lost and found pets"
-        },
-        {
-          "@type":"Thing",
-          "name":"Pet events"
-        },
-        {
-          "@type":"Thing",
-          "name":"Pet adoption"
-        },
-        {
-          "@type":"Thing",
-          "name":"Animal volunteering"
-        },
-        {
-          "@type":"Thing",
-          "name":"Local pet community"
-        }
-      ]
-    },
-    {
-      "@type":"BreadcrumbList",
-      "@id":"https://www.petsanddogue.com/local-community.html#breadcrumb",
-      "itemListElement":[
-        {
-          "@type":"ListItem",
-          "position":1,
-          "name":"PETS & DOGUE",
-          "item":"https://www.petsanddogue.com/"
-        },
-        {
-          "@type":"ListItem",
-          "position":2,
-          "name":"Community",
-          "item":"https://www.petsanddogue.com/local-community.html"
-        }
-      ]
+      }
     }
   ]
 }
@@ -224,6 +184,7 @@ type="application/ld+json"
 --purple:#8e64dc;
 --orange:#ec941e;
 --found:#278137;
+--group:#ad8529;
 --border:#d3cdc1;
 --grey:#747474;
 }
@@ -236,6 +197,8 @@ padding:0;
 
 html{
 scroll-behavior:smooth;
+width:100%;
+overflow-x:hidden;
 }
 
 body{
@@ -245,7 +208,8 @@ font-family:Arial,Helvetica,sans-serif;
 overflow-x:hidden;
 }
 
-body.locked{
+body.locked,
+body.menu-open{
 overflow:hidden;
 }
 
@@ -278,6 +242,7 @@ textarea{
 -webkit-tap-highlight-color:transparent;
 }
 
+
 /* =========================================================
 HEADER
 ========================================================= */
@@ -289,21 +254,28 @@ z-index:1800;
 background:var(--black);
 color:#fff;
 border-bottom:1px solid #303030;
+transform:translateY(0);
+transition:transform .24s ease;
+will-change:transform;
+}
+
+.site-header.header-hidden{
+transform:translateY(-101%);
 }
 
 .header-main{
-height:108px;
+height:76px;
 max-width:1550px;
 margin:auto;
-padding:0 18px;
+padding:0 13px;
 display:grid;
-grid-template-columns:76px minmax(0,1fr) 76px;
+grid-template-columns:60px minmax(0,1fr) 60px;
 align-items:center;
 }
 
 .icon-button{
-width:52px;
-height:52px;
+width:48px;
+height:48px;
 border:0;
 background:transparent;
 color:#fff;
@@ -315,7 +287,7 @@ justify-content:center;
 .menu-lines{
 width:31px;
 display:grid;
-gap:7px;
+gap:6px;
 }
 
 .menu-lines span{
@@ -331,20 +303,20 @@ line-height:.87;
 }
 
 .brand-small{
-font:14px Georgia,serif;
-letter-spacing:1.7px;
+font:12px Georgia,serif;
+letter-spacing:1.6px;
 color:var(--gold-light);
 }
 
 .brand-big{
-font:normal 58px Georgia,serif;
-letter-spacing:4px;
+font:normal 43px Georgia,serif;
+letter-spacing:3px;
 color:var(--gold);
 }
 
 .home-icon svg{
-width:32px;
-height:32px;
+width:31px;
+height:31px;
 stroke:#fff;
 stroke-width:2;
 fill:none;
@@ -352,9 +324,9 @@ fill:none;
 
 .category-nav{
 display:flex;
-gap:31px;
+gap:25px;
 overflow-x:auto;
-padding:16px 24px 14px;
+padding:12px 17px 11px;
 border-top:1px solid #292929;
 scrollbar-width:none;
 }
@@ -367,10 +339,10 @@ display:none;
 position:relative;
 flex:none;
 white-space:nowrap;
-padding-bottom:8px;
-font-size:14px;
+padding-bottom:7px;
+font-size:12px;
 font-weight:800;
-letter-spacing:.7px;
+letter-spacing:.5px;
 text-transform:uppercase;
 }
 
@@ -393,14 +365,15 @@ background:linear-gradient(
 );
 }
 
+
 /* =========================================================
-SIDE MENU
+UNIFIED SIDE MENU
 ========================================================= */
 
 .menu-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.73);
+background:rgba(0,0,0,.74);
 display:none;
 z-index:2500;
 }
@@ -413,13 +386,17 @@ display:block;
 position:fixed;
 top:0;
 left:-100%;
-width:min(430px,94%);
+width:min(78vw,390px);
+min-width:286px;
+max-width:92vw;
 height:100dvh;
-overflow-y:auto;
 background:#fff;
+color:#111;
 z-index:2600;
+overflow-y:auto;
+overflow-x:hidden;
 border-right:2px solid #111;
-transition:left .3s ease;
+transition:left .28s ease;
 }
 
 .side-menu.open{
@@ -427,15 +404,16 @@ left:0;
 }
 
 .side-menu-head{
-position:sticky;
-top:0;
-z-index:3;
+height:86px;
+padding:0 16px 0 18px;
 background:#111;
 color:#fff;
-padding:21px;
 display:flex;
 align-items:center;
 justify-content:space-between;
+position:sticky;
+top:0;
+z-index:4;
 }
 
 .side-menu-head h2{
@@ -443,28 +421,36 @@ font:normal 31px Georgia,serif;
 }
 
 .side-menu-head button{
-width:44px;
-height:44px;
+width:43px;
+height:43px;
 border:0;
-border-radius:50%;
 background:#fff;
+color:#111;
+border-radius:50%;
 font-size:25px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .menu-account{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:9px;
-padding:17px;
+gap:8px;
+padding:12px 11px 9px;
 }
 
 .menu-account a{
-border:2px solid #111;
+height:48px;
+border:2px solid #191919;
 border-radius:999px;
-padding:12px;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
-font-size:13px;
-font-weight:800;
+font-size:12px;
+font-weight:900;
+text-transform:uppercase;
 }
 
 .menu-account a:last-child{
@@ -473,43 +459,106 @@ border-color:var(--green);
 }
 
 .menu-language{
-padding:0 17px 17px;
+padding:0 11px 11px;
 border-bottom:1px solid #ddd;
 }
 
 .menu-language label{
 display:block;
-font-size:10px;
-font-weight:bold;
-letter-spacing:1.5px;
-color:#777;
-margin-bottom:7px;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.4px;
+color:#747474;
+margin:0 4px 6px;
 }
 
 .menu-language select{
 width:100%;
-height:48px;
-border:2px solid #111;
+height:51px;
+border:2px solid #191919;
 border-radius:999px;
 background:#faf8f3;
-padding:0 15px;
+padding:0 14px;
+font-size:13px;
+font-weight:700;
 }
 
 .menu-links{
-padding:17px;
+padding:12px 11px 24px;
 display:grid;
-gap:9px;
+gap:7px;
 }
 
-.menu-links a{
-border:1.5px solid #111;
+.menu-item{
+min-width:0;
+display:grid;
+grid-template-columns:82px minmax(0,1fr);
+align-items:center;
+min-height:82px;
+border:2px solid #191919;
 border-radius:18px;
-padding:15px;
-font-weight:800;
+background:#faf8f3;
+overflow:hidden;
 }
+
+.menu-item img{
+width:82px;
+height:82px;
+object-fit:cover;
+}
+
+.menu-item-copy{
+min-width:0;
+padding:9px 9px 9px 11px;
+}
+
+.menu-item h3{
+font:normal 19px/1.05 Georgia,serif;
+margin-bottom:5px;
+overflow-wrap:anywhere;
+}
+
+.menu-item p{
+font-size:10px;
+line-height:1.35;
+color:#666;
+overflow-wrap:anywhere;
+}
+
+.menu-item.active{
+background:#111;
+color:#fff;
+}
+
+.menu-item.active h3{
+color:var(--gold-light);
+}
+
+.menu-item.active p{
+color:#d4d4d4;
+}
+
+.menu-bottom{
+padding:17px 13px 24px;
+background:#f4f0e7;
+border-top:1px solid #ddd;
+}
+
+.menu-bottom div{
+display:flex;
+flex-wrap:wrap;
+gap:13px 18px;
+}
+
+.menu-bottom a{
+font-size:11px;
+font-weight:800;
+color:#666;
+}
+
 
 /* =========================================================
-MAIN SEARCH AREA
+MAIN
 ========================================================= */
 
 .community-shell{
@@ -558,8 +607,9 @@ line-height:1.55;
 color:#5f5f5f;
 }
 
+
 /* =========================================================
-LOCATION SEARCH
+LOCATION
 ========================================================= */
 
 .location-row{
@@ -715,6 +765,7 @@ color:var(--gold-dark);
 font-size:14px;
 }
 
+
 /* =========================================================
 RADIUS
 ========================================================= */
@@ -745,6 +796,7 @@ width:100%;
 margin-top:15px;
 accent-color:var(--green);
 }
+
 
 /* =========================================================
 FILTERS
@@ -796,6 +848,7 @@ opacity:.58;
 .mobile-filters{
 display:none;
 }
+
 
 /* =========================================================
 MAP
@@ -874,7 +927,9 @@ border-radius:50%;
 .legend-dot.seen{background:var(--blue);}
 .legend-dot.found{background:var(--found);}
 .legend-dot.event{background:var(--purple);}
+.legend-dot.group{background:var(--group);}
 .legend-dot.help{background:var(--orange);}
+
 
 /* =========================================================
 RESULT BAR
@@ -907,6 +962,7 @@ border-radius:999px;
 background:transparent;
 padding:0 17px;
 }
+
 
 /* =========================================================
 RESULTS
@@ -1049,8 +1105,9 @@ font-weight:900;
 color:var(--gold-light);
 }
 
+
 /* =========================================================
-COMMUNITY NOTE
+NOTE
 ========================================================= */
 
 .community-note{
@@ -1099,6 +1156,7 @@ font-size:12px;
 line-height:1.5;
 color:#ccc;
 }
+
 
 /* =========================================================
 FOOTER
@@ -1150,6 +1208,7 @@ font-size:10px;
 letter-spacing:1.2px;
 color:#666;
 }
+
 
 /* =========================================================
 MODALS
@@ -1275,6 +1334,7 @@ background:var(--green);
 color:#111;
 }
 
+
 /* =========================================================
 ADD
 ========================================================= */
@@ -1355,6 +1415,7 @@ color:#fff;
 background:var(--green);
 }
 
+
 /* =========================================================
 MAP MARKERS
 ========================================================= */
@@ -1377,6 +1438,7 @@ box-shadow:0 3px 10px rgba(0,0,0,.34);
 .community-marker.seen{background:var(--blue);}
 .community-marker.found{background:var(--found);}
 .community-marker.event{background:var(--purple);}
+.community-marker.group{background:var(--group);}
 
 .community-marker.help,
 .community-marker.volunteers,
@@ -1395,6 +1457,7 @@ background:#408fdf;
 box-shadow:0 2px 9px rgba(0,0,0,.35);
 }
 
+
 /* =========================================================
 RTL
 ========================================================= */
@@ -1404,11 +1467,16 @@ left:auto;
 right:-100%;
 border-right:0;
 border-left:2px solid #111;
-transition:right .3s ease;
+transition:right .28s ease;
 }
 
 html[dir="rtl"] .side-menu.open{
 right:0;
+left:auto;
+}
+
+html[dir="rtl"] .menu-item-copy{
+padding:9px 11px 9px 9px;
 }
 
 html[dir="rtl"] .location-option,
@@ -1428,6 +1496,7 @@ html[dir="rtl"] select{
 text-align:right;
 }
 
+
 /* =========================================================
 TABLET
 ========================================================= */
@@ -1444,6 +1513,7 @@ grid-template-columns:repeat(2,minmax(0,1fr));
 
 }
 
+
 /* =========================================================
 MOBILE
 ========================================================= */
@@ -1451,13 +1521,13 @@ MOBILE
 @media(max-width:760px){
 
 .header-main{
-height:86px;
+height:68px;
 grid-template-columns:52px minmax(0,1fr) 52px;
-padding:0 8px;
+padding:0 7px;
 }
 
 .brand-big{
-font-size:38px;
+font-size:36px;
 letter-spacing:2px;
 }
 
@@ -1466,12 +1536,12 @@ font-size:10px;
 }
 
 .category-nav{
-padding:13px 0 12px 15px;
-gap:24px;
+padding:11px 0 10px 13px;
+gap:22px;
 }
 
 .category-nav a{
-font-size:11px;
+font-size:10px;
 }
 
 .community-shell{
@@ -1786,10 +1856,14 @@ grid-template-columns:1fr;
 scroll-behavior:auto!important;
 }
 
+.site-header,
+.side-menu{
+transition:none!important;
+}
+
 }
 
 </style>
-
 </head>
 
 <body>
@@ -1800,9 +1874,11 @@ id="menuOverlay"
 onclick="closeMenu()"
 ></div>
 
+
 <aside
 class="side-menu"
 id="sideMenu"
+aria-hidden="true"
 >
 
 <div class="side-menu-head">
@@ -1821,13 +1897,14 @@ aria-label="Close menu"
 
 </div>
 
+
 <div class="menu-account">
 
 <a
 href="account.html"
 id="menuProfile"
 >
-Profile
+Sign In
 </a>
 
 <a
@@ -1839,109 +1916,293 @@ Join Club
 
 </div>
 
+
 <div class="menu-language">
 
 <label
 for="languageSelect"
-class="notranslate"
-translate="no"
+id="menuLanguageLabel"
 >
 LANGUAGE
 </label>
 
-<select id="languageSelect">
+<select
+id="languageSelect"
+aria-label="Language"
+>
 
-<option value="en">EN — English</option>
-<option value="uk">UA — Українська</option>
-<option value="ru">RU — Русский</option>
-<option value="fr">FR — Français</option>
-<option value="de">DE — Deutsch</option>
-<option value="es">ES — Español</option>
-<option value="it">IT — Italiano</option>
-<option value="pt">PT — Português</option>
-<option value="nl">NL — Nederlands</option>
-<option value="pl">PL — Polski</option>
-<option value="cs">CZ — Čeština</option>
-<option value="sk">SK — Slovenčina</option>
-<option value="hu">HU — Magyar</option>
-<option value="ro">RO — Română</option>
-<option value="bg">BG — Български</option>
-<option value="el">GR — Ελληνικά</option>
-<option value="sv">SE — Svenska</option>
-<option value="da">DK — Dansk</option>
-<option value="no">NO — Norsk</option>
-<option value="fi">FI — Suomi</option>
-<option value="tr">TR — Türkçe</option>
-<option value="ar">AR — العربية</option>
-<option value="hi">HI — हिन्दी</option>
+<option value="en">🇬🇧 EN — English</option>
+<option value="uk">🇺🇦 UA — Українська</option>
+<option value="ru">🇷🇺 RU — Русский</option>
+<option value="fr">🇫🇷 FR — Français</option>
+<option value="de">🇩🇪 DE — Deutsch</option>
+<option value="es">🇪🇸 ES — Español</option>
+<option value="it">🇮🇹 IT — Italiano</option>
+<option value="pt">🇵🇹 PT — Português</option>
+<option value="nl">🇳🇱 NL — Nederlands</option>
+<option value="pl">🇵🇱 PL — Polski</option>
+<option value="cs">🇨🇿 CZ — Čeština</option>
+<option value="sk">🇸🇰 SK — Slovenčina</option>
+<option value="hu">🇭🇺 HU — Magyar</option>
+<option value="ro">🇷🇴 RO — Română</option>
+<option value="bg">🇧🇬 BG — Български</option>
+<option value="el">🇬🇷 GR — Ελληνικά</option>
+<option value="sv">🇸🇪 SE — Svenska</option>
+<option value="da">🇩🇰 DK — Dansk</option>
+<option value="no">🇳🇴 NO — Norsk</option>
+<option value="fi">🇫🇮 FI — Suomi</option>
+<option value="tr">🇹🇷 TR — Türkçe</option>
+<option value="ar">🇸🇦 AR — العربية</option>
+<option value="hi">🇮🇳 HI — हिन्दी</option>
 
 </select>
 
 </div>
 
+
 <div class="menu-links">
 
-<a href="issue-01.html" id="menuMagazine">
-Edition
+<a class="menu-item" href="issue-01.html">
+
+<img
+src="/file_00000000a9d471fda9b4629589be22a9.png"
+alt="PETS & DOGUE Edition"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuMagazine">Edition</h3>
+<p>PETS &amp; DOGUE · EDITION</p>
+</div>
+
 </a>
 
-<a href="members-gallery.html" id="menuCover">
-Cover Stars
+
+<a class="menu-item" href="members-gallery.html">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+alt="Cover Stars"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuCover">Cover Stars</h3>
+<p>PETS &amp; DOGUE · COVER STARS</p>
+</div>
+
 </a>
 
-<a href="special-offers.html" id="menuDiscounts">
-Discounts
+
+<a class="menu-item" href="special-offers.html">
+
+<img
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+alt="Discounts"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuDiscounts">Discounts</h3>
+<p>PETS &amp; DOGUE · CLUB</p>
+</div>
+
 </a>
 
-<a href="pet-friendly-places.html" id="menuPlaces">
-Pet-Friendly Places
+
+<a class="menu-item" href="pet-friendly-places.html">
+
+<img
+src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
+alt="Pet-Friendly Places"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuPlaces">Pet-Friendly Places</h3>
+<p>PETS &amp; DOGUE · PLACES</p>
+</div>
+
 </a>
 
-<a href="pet-marketplace.html" id="menuMarketplace">
-Marketplace
+
+<a class="menu-item" href="pet-marketplace.html">
+
+<img
+src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+alt="Marketplace"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuMarketplace">Marketplace</h3>
+<p>PETS &amp; DOGUE · MARKETPLACE</p>
+</div>
+
 </a>
 
-<a href="pet-fashion.html" id="menuFashion">
-Fashion
+
+<a class="menu-item" href="pet-fashion.html">
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+alt="Fashion"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuFashion">Fashion</h3>
+<p>PETS &amp; DOGUE · FASHION</p>
+</div>
+
 </a>
 
-<a href="wellness.html" id="menuHealth">
-Health
+
+<a class="menu-item" href="wellness.html">
+
+<img
+src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80"
+alt="Health"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuHealth">Health</h3>
+<p>PETS &amp; DOGUE · HEALTH</p>
+</div>
+
 </a>
 
-<a href="articles.html" id="menuArticles">
-Articles
+
+<a class="menu-item" href="articles.html">
+
+<img
+src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
+alt="Articles"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuArticles">Articles</h3>
+<p>PETS &amp; DOGUE · STORIES</p>
+</div>
+
 </a>
 
-<a href="photos.html" id="menuPhotos">
-Photos
+
+<a class="menu-item" href="photos.html">
+
+<img
+src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
+alt="Photos"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuPhotos">Photos</h3>
+<p>PETS &amp; DOGUE · PHOTOS</p>
+</div>
+
 </a>
 
-<a href="local-community.html" id="menuCommunity">
-Community
+
+<a
+class="menu-item active"
+href="local-community.html"
+aria-current="page"
+>
+
+<img
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+alt="Community"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuCommunity">Community</h3>
+<p>PETS &amp; DOGUE · LOCAL COMMUNITY</p>
+</div>
+
 </a>
 
-<a href="contests.html" id="menuContests">
-Contests
+
+<a class="menu-item" href="contests.html">
+
+<img
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
+alt="Contests"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuContests">Contests</h3>
+<p>PETS &amp; DOGUE · CONTESTS</p>
+</div>
+
 </a>
 
-<a href="pets-in-need.html" id="menuHelp">
-Help
+
+<a class="menu-item" href="pets-in-need.html">
+
+<img
+src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
+alt="Help"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuHelp">Help</h3>
+<p>PETS &amp; DOGUE · PETS IN NEED</p>
+</div>
+
 </a>
 
-<a href="partners.html" id="menuPartners">
-Partners
+
+<a class="menu-item" href="partners.html">
+
+<img
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
+alt="Partners"
+loading="lazy"
+>
+
+<div class="menu-item-copy">
+<h3 id="menuPartners">Partners</h3>
+<p>PETS &amp; DOGUE · PARTNERS</p>
+</div>
+
 </a>
+
+</div>
+
+
+<div class="menu-bottom">
+
+<div>
 
 <a href="contact.html" id="menuContact">
 Contact
 </a>
 
+<a href="privacy.html">
+Privacy
+</a>
+
+<a href="terms.html">
+Terms
+</a>
+
+</div>
+
 </div>
 
 </aside>
 
-<header class="site-header">
+
+<header
+class="site-header"
+id="siteHeader"
+>
 
 <div class="header-main">
 
@@ -1990,6 +2251,7 @@ aria-label="Home"
 </a>
 
 </div>
+
 
 <nav
 class="category-nav"
@@ -2058,6 +2320,7 @@ PARTNERS
 
 </header>
 
+
 <main>
 
 <section class="community-shell">
@@ -2083,10 +2346,11 @@ Find the pet community near you
 </h1>
 
 <p id="heroText">
-Discover current lost and found pets, sightings, exhibitions, meetups, group walks, volunteers, adoption, help requests and local animal news.
+Discover lost and found pets, local events, meetups, pet clubs, neighbourhood groups, group walks, volunteers, adoption, help requests and animal news near you.
 </p>
 
 </div>
+
 
 <div class="location-row">
 
@@ -2131,6 +2395,7 @@ id="locationSuggestions"
 
 </div>
 
+
 <button
 class="geo-button"
 type="button"
@@ -2151,6 +2416,7 @@ aria-label="Use my location"
 
 </div>
 
+
 <div class="selected-location">
 
 <b>◆</b>
@@ -2160,6 +2426,7 @@ Select a location
 </span>
 
 </div>
+
 
 <div class="radius-box">
 
@@ -2189,6 +2456,7 @@ aria-label="Search radius"
 >
 
 </div>
+
 
 <div
 class="mobile-filters"
@@ -2243,6 +2511,15 @@ onclick="selectFilter('event')"
 <button
 class="mobile-filter"
 type="button"
+data-filter="group"
+onclick="selectFilter('group')"
+>
+<span id="mGroups">Clubs &amp; groups</span>
+</button>
+
+<button
+class="mobile-filter"
+type="button"
 data-filter="help"
 onclick="selectFilter('help')"
 >
@@ -2287,6 +2564,7 @@ onclick="selectFilter('news')"
 
 </div>
 
+
 <div class="map-shell">
 
 <div id="communityMap"></div>
@@ -2304,6 +2582,7 @@ Add
 </span>
 
 </button>
+
 
 <div class="map-legend">
 
@@ -2328,6 +2607,11 @@ Add
 </span>
 
 <span class="legend">
+<i class="legend-dot group"></i>
+<span id="legendGroup">Groups</span>
+</span>
+
+<span class="legend">
 <i class="legend-dot help"></i>
 <span id="legendHelp">Help</span>
 </span>
@@ -2338,6 +2622,7 @@ Add
 
 </div>
 
+
 <aside class="filter-panel">
 
 <h2
@@ -2346,6 +2631,7 @@ id="filterTitle"
 >
 What are you looking for?
 </h2>
+
 
 <button
 class="community-filter active"
@@ -2358,6 +2644,7 @@ onclick="selectFilter('all')"
 <span class="filter-count" data-count="all">0</span>
 </button>
 
+
 <button
 class="community-filter"
 type="button"
@@ -2368,6 +2655,7 @@ onclick="selectFilter('lost')"
 <span id="fLost">Lost pets</span>
 <span class="filter-count" data-count="lost">0</span>
 </button>
+
 
 <button
 class="community-filter"
@@ -2380,6 +2668,7 @@ onclick="selectFilter('seen')"
 <span class="filter-count" data-count="seen">0</span>
 </button>
 
+
 <button
 class="community-filter"
 type="button"
@@ -2390,6 +2679,7 @@ onclick="selectFilter('found')"
 <span id="fFound">Found</span>
 <span class="filter-count" data-count="found">0</span>
 </button>
+
 
 <button
 class="community-filter"
@@ -2402,6 +2692,19 @@ onclick="selectFilter('event')"
 <span class="filter-count" data-count="event">0</span>
 </button>
 
+
+<button
+class="community-filter"
+type="button"
+data-filter="group"
+onclick="selectFilter('group')"
+>
+<span class="filter-icon">♣</span>
+<span id="fGroups">Clubs &amp; groups</span>
+<span class="filter-count" data-count="group">0</span>
+</button>
+
+
 <button
 class="community-filter"
 type="button"
@@ -2412,6 +2715,7 @@ onclick="selectFilter('help')"
 <span id="fHelp">Help</span>
 <span class="filter-count" data-count="help">0</span>
 </button>
+
 
 <button
 class="community-filter"
@@ -2424,6 +2728,7 @@ onclick="selectFilter('volunteers')"
 <span class="filter-count" data-count="volunteers">0</span>
 </button>
 
+
 <button
 class="community-filter"
 type="button"
@@ -2435,6 +2740,7 @@ onclick="selectFilter('foster')"
 <span class="filter-count" data-count="foster">0</span>
 </button>
 
+
 <button
 class="community-filter"
 type="button"
@@ -2445,6 +2751,7 @@ onclick="selectFilter('adoption')"
 <span id="fAdoption">Looking for family</span>
 <span class="filter-count" data-count="adoption">0</span>
 </button>
+
 
 <button
 class="community-filter"
@@ -2463,6 +2770,7 @@ onclick="selectFilter('news')"
 
 </section>
 
+
 <section class="results-bar">
 
 <div class="results-count">
@@ -2476,6 +2784,7 @@ Found:
 </strong>
 
 </div>
+
 
 <select
 class="sort-select"
@@ -2509,6 +2818,7 @@ Oldest first
 
 </section>
 
+
 <section class="results-section">
 
 <div
@@ -2540,6 +2850,7 @@ data-pd-narration-ready="true"
 
 </section>
 
+
 <section class="community-note">
 
 <div
@@ -2569,6 +2880,7 @@ PETS & DOGUE combines available public sources and keeps the original source lin
 
 </main>
 
+
 <footer class="site-footer">
 
 <div
@@ -2594,69 +2906,22 @@ One world. Every pet.
 
 <div class="footer-links">
 
-<a href="issue-01.html" id="footerEdition">
-Edition
-</a>
-
-<a href="members-gallery.html" id="footerCover">
-Cover Stars
-</a>
-
-<a href="special-offers.html" id="footerDiscounts">
-Discounts
-</a>
-
-<a href="pet-friendly-places.html" id="footerPlaces">
-Pet-Friendly Places
-</a>
-
-<a href="pet-marketplace.html" id="footerMarketplace">
-Marketplace
-</a>
-
-<a href="pet-fashion.html" id="footerFashion">
-Fashion
-</a>
-
-<a href="wellness.html" id="footerHealth">
-Health
-</a>
-
-<a href="articles.html" id="footerArticles">
-Articles
-</a>
-
-<a href="photos.html" id="footerPhotos">
-Photos
-</a>
-
-<a href="local-community.html" id="footerCommunity">
-Community
-</a>
-
-<a href="contests.html" id="footerContests">
-Contests
-</a>
-
-<a href="pets-in-need.html" id="footerHelp">
-Help
-</a>
-
-<a href="partners.html" id="footerPartners">
-Partners
-</a>
-
-<a href="club.html">
-Club
-</a>
-
-<a href="index.html">
-Home
-</a>
-
-<a href="contact.html" id="footerContact">
-Contact
-</a>
+<a href="issue-01.html" id="footerEdition">Edition</a>
+<a href="members-gallery.html" id="footerCover">Cover Stars</a>
+<a href="special-offers.html" id="footerDiscounts">Discounts</a>
+<a href="pet-friendly-places.html" id="footerPlaces">Pet-Friendly Places</a>
+<a href="pet-marketplace.html" id="footerMarketplace">Marketplace</a>
+<a href="pet-fashion.html" id="footerFashion">Fashion</a>
+<a href="wellness.html" id="footerHealth">Health</a>
+<a href="articles.html" id="footerArticles">Articles</a>
+<a href="photos.html" id="footerPhotos">Photos</a>
+<a href="local-community.html" id="footerCommunity">Community</a>
+<a href="contests.html" id="footerContests">Contests</a>
+<a href="pets-in-need.html" id="footerHelp">Help</a>
+<a href="partners.html" id="footerPartners">Partners</a>
+<a href="club.html">Club</a>
+<a href="index.html">Home</a>
+<a href="contact.html" id="footerContact">Contact</a>
 
 </div>
 
@@ -2668,6 +2933,7 @@ translate="no"
 </div>
 
 </footer>
+
 
 <div
 class="modal-overlay"
@@ -2702,6 +2968,7 @@ id="detailBody"
 </div>
 
 </div>
+
 
 <div
 class="modal-overlay"
@@ -2747,6 +3014,11 @@ aria-label="Close"
 <span id="addEvent">Event or meetup</span>
 </button>
 
+<button class="add-type" type="button" onclick="chooseAddType('group')">
+<b>♣</b>
+<span id="addGroup">Club or group</span>
+</button>
+
 <button class="add-type" type="button" onclick="chooseAddType('help')">
 <b>+</b>
 <span id="addHelp">Help needed</span>
@@ -2779,6 +3051,7 @@ aria-label="Close"
 </div>
 
 </div>
+
 
 <div
 class="modal-overlay"
@@ -2825,6 +3098,7 @@ type="text"
 
 </div>
 
+
 <div class="form-field">
 
 <label
@@ -2841,6 +3115,7 @@ type="text"
 
 </div>
 
+
 <div class="form-field">
 
 <label
@@ -2853,6 +3128,7 @@ Short description
 <textarea id="formText"></textarea>
 
 </div>
+
 
 <div class="form-field">
 
@@ -2870,6 +3146,7 @@ type="datetime-local"
 
 </div>
 
+
 <div class="form-field">
 
 <label
@@ -2885,6 +3162,7 @@ type="url"
 >
 
 </div>
+
 
 <div class="form-actions">
 
@@ -2914,10 +3192,12 @@ Publish
 
 </div>
 
+
 <script
 src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 crossorigin=""
 ></script>
+
 
 <script>
 "use strict";
@@ -2936,7 +3216,7 @@ const STATIC_SEO_TITLE =
 "Pet Community Near You | Lost & Found Pets, Events & Adoption | PETS & DOGUE";
 
 const STATIC_SEO_DESCRIPTION =
-"Find lost and found pets, local sightings, pet events, group walks, volunteers, foster and adoption posts, help requests and animal news near you with PETS & DOGUE.";
+"Find lost and found pets, local events, clubs, groups, group walks, volunteers, foster and adoption posts, help requests and animal news near you with PETS & DOGUE.";
 
 const $ =
 id =>
@@ -2964,18 +3244,8 @@ let localPosts =
 let activeResults =
 [];
 
-let currentCounts = {
-all:0,
-lost:0,
-seen:0,
-found:0,
-event:0,
-help:0,
-volunteers:0,
-foster:0,
-adoption:0,
-news:0
-};
+let currentCounts =
+emptyCounts();
 
 let map =
 null;
@@ -2998,23 +3268,190 @@ null;
 let selectedAddType =
 "lost";
 
+
 /* =========================================================
-23 LANGUAGE UI
+MENU UI
+========================================================= */
+
+const MENU_UI = {
+
+en:{
+contents:"Contents",
+signIn:"Sign In",
+join:"Join Club",
+language:"Language"
+},
+
+uk:{
+contents:"Зміст",
+signIn:"Увійти",
+join:"Вступити до клубу",
+language:"Мова"
+},
+
+ru:{
+contents:"Содержание",
+signIn:"Войти",
+join:"Вступить в клуб",
+language:"Язык"
+},
+
+fr:{
+contents:"Sommaire",
+signIn:"Se connecter",
+join:"Rejoindre le Club",
+language:"Langue"
+},
+
+de:{
+contents:"Inhalt",
+signIn:"Anmelden",
+join:"Club beitreten",
+language:"Sprache"
+},
+
+es:{
+contents:"Contenido",
+signIn:"Iniciar sesión",
+join:"Unirse al Club",
+language:"Idioma"
+},
+
+it:{
+contents:"Contenuti",
+signIn:"Accedi",
+join:"Entra nel Club",
+language:"Lingua"
+},
+
+pt:{
+contents:"Conteúdo",
+signIn:"Entrar",
+join:"Entrar no Club",
+language:"Idioma"
+},
+
+nl:{
+contents:"Inhoud",
+signIn:"Inloggen",
+join:"Word lid",
+language:"Taal"
+},
+
+pl:{
+contents:"Spis treści",
+signIn:"Zaloguj",
+join:"Dołącz do Clubu",
+language:"Język"
+},
+
+cs:{
+contents:"Obsah",
+signIn:"Přihlásit",
+join:"Připojit se",
+language:"Jazyk"
+},
+
+sk:{
+contents:"Obsah",
+signIn:"Prihlásiť",
+join:"Pridať sa",
+language:"Jazyk"
+},
+
+hu:{
+contents:"Tartalom",
+signIn:"Belépés",
+join:"Csatlakozás",
+language:"Nyelv"
+},
+
+ro:{
+contents:"Cuprins",
+signIn:"Autentificare",
+join:"Intră în Club",
+language:"Limbă"
+},
+
+bg:{
+contents:"Съдържание",
+signIn:"Вход",
+join:"Влез в клуба",
+language:"Език"
+},
+
+el:{
+contents:"Περιεχόμενα",
+signIn:"Σύνδεση",
+join:"Εγγραφή στο Club",
+language:"Γλώσσα"
+},
+
+sv:{
+contents:"Innehåll",
+signIn:"Logga in",
+join:"Gå med i klubben",
+language:"Språk"
+},
+
+da:{
+contents:"Indhold",
+signIn:"Log ind",
+join:"Bliv medlem",
+language:"Sprog"
+},
+
+no:{
+contents:"Innhold",
+signIn:"Logg inn",
+join:"Bli med",
+language:"Språk"
+},
+
+fi:{
+contents:"Sisältö",
+signIn:"Kirjaudu",
+join:"Liity klubiin",
+language:"Kieli"
+},
+
+tr:{
+contents:"İçerik",
+signIn:"Giriş",
+join:"Kulübe katıl",
+language:"Dil"
+},
+
+ar:{
+contents:"المحتويات",
+signIn:"تسجيل الدخول",
+join:"انضم إلى النادي",
+language:"اللغة"
+},
+
+hi:{
+contents:"सामग्री",
+signIn:"साइन इन",
+join:"क्लब में शामिल हों",
+language:"भाषा"
+}
+
+};
+
+
+/* =========================================================
+23 LANGUAGE PAGE UI
 ========================================================= */
 
 const UI = {
 
 en:{
-menu:"Contents",
-profile:"Profile",
-club:"Join Club",
 magazine:"Edition",
 cover:"Cover Stars",
 discounts:"Discounts",
 places:"Pet-Friendly Places",
 articles:"Articles",
 photos:"Photos",
-travel:"Travel",
 fashion:"Fashion",
 health:"Health",
 community:"Community",
@@ -3024,7 +3461,7 @@ marketplace:"Marketplace",
 partners:"Partners",
 contact:"Contact",
 heroTitle:"Find the pet community near you",
-heroText:"Discover current lost and found pets, sightings, exhibitions, meetups, group walks, volunteers, adoption, help requests and local animal news.",
+heroText:"Discover lost and found pets, local events, meetups, pet clubs, neighbourhood groups, group walks, volunteers, adoption, help requests and animal news near you.",
 locationPlaceholder:"City, district or postcode...",
 selectLocation:"Select a location",
 selectedLocation:"Selected location: {location}",
@@ -3035,6 +3472,7 @@ lost:"Lost",
 seen:"Seen",
 found:"Found",
 events:"Events",
+groups:"Clubs & groups",
 help:"Help",
 volunteers:"Volunteers",
 foster:"Foster",
@@ -3054,6 +3492,7 @@ whatAdd:"What would you like to add?",
 addLost:"Lost pet",
 addSeen:"Saw a pet",
 addEvent:"Event or meetup",
+addGroup:"Club or group",
 addHelp:"Help needed",
 addVolunteers:"Volunteers needed",
 addFoster:"Foster needed",
@@ -3090,16 +3529,12 @@ geoError:"Your location could not be accessed."
 },
 
 uk:{
-menu:"Розділи",
-profile:"Профіль",
-club:"Приєднатися до клубу",
 magazine:"Випуск",
 cover:"Зірки обкладинки",
 discounts:"Знижки",
 places:"Pet-friendly місця",
 articles:"Статті",
 photos:"Фото",
-travel:"Подорожі",
 fashion:"Мода",
 health:"Здоров’я",
 community:"Спільнота",
@@ -3109,7 +3544,7 @@ marketplace:"Маркетплейс",
 partners:"Партнери",
 contact:"Контакти",
 heroTitle:"Знайдіть спільноту любителів тварин поруч",
-heroText:"Знаходьте актуальні оголошення про загублених і знайдених тварин, спостереження, виставки, зустрічі, прогулянки, волонтерів, адопцію та місцеві новини.",
+heroText:"Знаходьте загублених і знайдених тварин, місцеві події, зустрічі, клуби, районні групи, спільні прогулянки, волонтерів, адопцію та місцеві новини.",
 locationPlaceholder:"Місто, район або поштовий індекс...",
 selectLocation:"Оберіть місце",
 selectedLocation:"Обране місце: {location}",
@@ -3120,6 +3555,7 @@ lost:"Загублені",
 seen:"Помічені",
 found:"Знайдені",
 events:"Події",
+groups:"Клуби та групи",
 help:"Допомога",
 volunteers:"Волонтери",
 foster:"Перетримка",
@@ -3134,11 +3570,12 @@ loading:"Завантажуємо актуальну інформацію...",
 empty:"У цій категорії актуальної інформації не знайдено.",
 error:"Актуальна інформація тимчасово недоступна.",
 sourceTitle:"Актуальні публічні джерела",
-sourceText:"PETS & DOGUE об’єднує доступні публічні джерела та зберігає посилання на оригінальне джерело.",
+sourceText:"PETS & DOGUE об’єднує доступні публічні джерела та зберігає посилання на оригінал.",
 whatAdd:"Що ви хочете додати?",
 addLost:"Загублена тварина",
 addSeen:"Я бачив тварину",
 addEvent:"Подія або зустріч",
+addGroup:"Клуб або група",
 addHelp:"Потрібна допомога",
 addVolunteers:"Потрібні волонтери",
 addFoster:"Потрібна перетримка",
@@ -3175,16 +3612,12 @@ geoError:"Не вдалося отримати ваше місцезнаходж
 },
 
 ru:{
-menu:"Разделы",
-profile:"Профиль",
-club:"Вступить в клуб",
 magazine:"Выпуск",
 cover:"Звёзды обложки",
 discounts:"Скидки",
 places:"Pet-friendly места",
 articles:"Статьи",
 photos:"Фото",
-travel:"Путешествия",
 fashion:"Мода",
 health:"Здоровье",
 community:"Сообщество",
@@ -3194,7 +3627,7 @@ marketplace:"Маркетплейс",
 partners:"Партнёры",
 contact:"Контакты",
 heroTitle:"Найдите сообщество владельцев животных рядом",
-heroText:"Актуальные потерянные и найденные животные, встречи, наблюдения, выставки, прогулки, волонтёры, пристройство, просьбы о помощи и местные новости.",
+heroText:"Находите потерянных и найденных животных, местные события, встречи, клубы любителей собак и кошек, районные группы, совместные прогулки, волонтёров, пристройство и местные новости.",
 locationPlaceholder:"Город, район или почтовый индекс...",
 selectLocation:"Выберите место",
 selectedLocation:"Выбранное место: {location}",
@@ -3205,6 +3638,7 @@ lost:"Потеряны",
 seen:"Замечены",
 found:"Найдены",
 events:"События",
+groups:"Клубы и группы",
 help:"Помощь",
 volunteers:"Волонтёры",
 foster:"Передержка",
@@ -3224,6 +3658,7 @@ whatAdd:"Что вы хотите добавить?",
 addLost:"Потерянное животное",
 addSeen:"Я видел животное",
 addEvent:"Событие или встреча",
+addGroup:"Клуб или группа",
 addHelp:"Нужна помощь",
 addVolunteers:"Нужны волонтёры",
 addFoster:"Нужна передержка",
@@ -3260,106 +3695,107 @@ geoError:"Не удалось получить ваше местоположен
 },
 
 fr:{
-menu:"Sections",profile:"Profil",club:"Rejoindre le Club",magazine:"Édition",cover:"Stars de couverture",discounts:"Réductions",places:"Lieux pet-friendly",articles:"Articles",photos:"Photos",travel:"Voyages",fashion:"Mode",health:"Santé",community:"Communauté",contests:"Concours",helpNav:"Aide",marketplace:"Marketplace",partners:"Partenaires",contact:"Contact",
-heroTitle:"Trouvez la communauté animale près de chez vous",heroText:"Animaux perdus et retrouvés, observations, expositions, rencontres, promenades, bénévoles, adoption et actualités animales locales.",locationPlaceholder:"Ville, quartier ou code postal...",selectLocation:"Choisissez un lieu",selectedLocation:"Lieu sélectionné : {location}",radius:"Rayon de recherche",filterTitle:"Que recherchez-vous ?",all:"Tout",lost:"Perdus",seen:"Aperçus",found:"Retrouvés",events:"Événements",help:"Aide",volunteers:"Bénévoles",foster:"Famille d’accueil",adoption:"Cherche une famille",news:"Actualités",add:"Ajouter",foundLabel:"Trouvé :",sortRelevant:"Plus pertinents",sortNewest:"Plus récents",sortOldest:"Plus anciens",loading:"Chargement des informations actuelles...",empty:"Aucune information actuelle trouvée dans cette catégorie.",error:"Les informations en direct sont temporairement indisponibles.",sourceTitle:"Sources publiques actuelles",sourceText:"PETS & DOGUE combine des sources publiques disponibles et conserve le lien d’origine.",whatAdd:"Que souhaitez-vous ajouter ?",addLost:"Animal perdu",addSeen:"J’ai vu un animal",addEvent:"Événement ou rencontre",addHelp:"Aide nécessaire",addVolunteers:"Bénévoles recherchés",addFoster:"Famille d’accueil recherchée",addAdoption:"Animal cherche une famille",addNews:"Actualité animale locale",addPost:"Ajouter une publication",location:"Lieu",title:"Titre",description:"Courte description",date:"Date / heure",photo:"URL de la photo (facultatif)",cancel:"Annuler",publish:"Publier",source:"Source",original:"Ouvrir la source originale",showMap:"Afficher sur la carte",markFound:"Marquer comme retrouvé",published:"Publié",eventDate:"Date de l’événement",venue:"Lieu",distance:"Distance",today:"Aujourd’hui",tomorrow:"Demain",thisWeek:"Cette semaine",upcoming:"À venir",lostStatus:"PERDU",seenStatus:"APERÇU",foundStatus:"RETROUVÉ",activeStatus:"ACTIF",yourPost:"Votre publication",validation:"Ajoutez un lieu, un titre et une description.",locationError:"Lieu introuvable.",geoError:"Impossible d’accéder à votre position."
+magazine:"Édition",cover:"Stars de couverture",discounts:"Réductions",places:"Lieux pet-friendly",articles:"Articles",photos:"Photos",fashion:"Mode",health:"Santé",community:"Communauté",contests:"Concours",helpNav:"Aide",marketplace:"Marketplace",partners:"Partenaires",contact:"Contact",
+heroTitle:"Trouvez la communauté animale près de chez vous",heroText:"Découvrez animaux perdus et retrouvés, événements, rencontres, clubs, groupes de quartier, promenades, bénévoles, adoption et actualités locales.",locationPlaceholder:"Ville, quartier ou code postal...",selectLocation:"Choisissez un lieu",selectedLocation:"Lieu sélectionné : {location}",radius:"Rayon de recherche",filterTitle:"Que recherchez-vous ?",all:"Tout",lost:"Perdus",seen:"Aperçus",found:"Retrouvés",events:"Événements",groups:"Clubs et groupes",help:"Aide",volunteers:"Bénévoles",foster:"Famille d’accueil",adoption:"Cherche une famille",news:"Actualités",add:"Ajouter",foundLabel:"Trouvé :",sortRelevant:"Plus pertinents",sortNewest:"Plus récents",sortOldest:"Plus anciens",loading:"Chargement des informations actuelles...",empty:"Aucune information actuelle trouvée dans cette catégorie.",error:"Les informations en direct sont temporairement indisponibles.",sourceTitle:"Sources publiques actuelles",sourceText:"PETS & DOGUE combine des sources publiques disponibles et conserve le lien d’origine.",whatAdd:"Que souhaitez-vous ajouter ?",addLost:"Animal perdu",addSeen:"J’ai vu un animal",addEvent:"Événement ou rencontre",addGroup:"Club ou groupe",addHelp:"Aide nécessaire",addVolunteers:"Bénévoles recherchés",addFoster:"Famille d’accueil recherchée",addAdoption:"Animal cherche une famille",addNews:"Actualité animale locale",addPost:"Ajouter une publication",location:"Lieu",title:"Titre",description:"Courte description",date:"Date / heure",photo:"URL de la photo (facultatif)",cancel:"Annuler",publish:"Publier",source:"Source",original:"Ouvrir la source originale",showMap:"Afficher sur la carte",markFound:"Marquer comme retrouvé",published:"Publié",eventDate:"Date de l’événement",venue:"Lieu",distance:"Distance",today:"Aujourd’hui",tomorrow:"Demain",thisWeek:"Cette semaine",upcoming:"À venir",lostStatus:"PERDU",seenStatus:"APERÇU",foundStatus:"RETROUVÉ",activeStatus:"ACTIF",yourPost:"Votre publication",validation:"Ajoutez un lieu, un titre et une description.",locationError:"Lieu introuvable.",geoError:"Impossible d’accéder à votre position."
 },
 
 de:{
-menu:"Bereiche",profile:"Profil",club:"Club beitreten",magazine:"Edition",cover:"Cover Stars",discounts:"Rabatte",places:"Tierfreundliche Orte",articles:"Artikel",photos:"Fotos",travel:"Reisen",fashion:"Mode",health:"Gesundheit",community:"Community",contests:"Wettbewerbe",helpNav:"Hilfe",marketplace:"Marktplatz",partners:"Partner",contact:"Kontakt",
-heroTitle:"Finde die Tier-Community in deiner Nähe",heroText:"Vermisste und gefundene Tiere, Sichtungen, Ausstellungen, Treffen, Spaziergänge, Helfer, Adoption und lokale Tiernachrichten.",locationPlaceholder:"Stadt, Bezirk oder Postleitzahl...",selectLocation:"Ort auswählen",selectedLocation:"Ausgewählter Ort: {location}",radius:"Suchradius",filterTitle:"Wonach suchst du?",all:"Alle",lost:"Vermisst",seen:"Gesehen",found:"Gefunden",events:"Events",help:"Hilfe",volunteers:"Freiwillige",foster:"Pflegestelle",adoption:"Sucht Familie",news:"Nachrichten",add:"Hinzufügen",foundLabel:"Gefunden:",sortRelevant:"Relevanteste",sortNewest:"Neueste zuerst",sortOldest:"Älteste zuerst",loading:"Aktuelle Informationen werden geladen...",empty:"In dieser Kategorie wurden keine aktuellen Informationen gefunden.",error:"Live-Informationen sind vorübergehend nicht verfügbar.",sourceTitle:"Aktuelle öffentliche Quellen",sourceText:"PETS & DOGUE kombiniert verfügbare öffentliche Quellen und behält den Originallink bei.",whatAdd:"Was möchtest du hinzufügen?",addLost:"Vermisstes Tier",addSeen:"Tier gesehen",addEvent:"Event oder Treffen",addHelp:"Hilfe benötigt",addVolunteers:"Freiwillige gesucht",addFoster:"Pflegestelle gesucht",addAdoption:"Tier sucht Familie",addNews:"Lokale Tiernachricht",addPost:"Community-Beitrag hinzufügen",location:"Ort",title:"Titel",description:"Kurze Beschreibung",date:"Datum / Uhrzeit",photo:"Foto-URL (optional)",cancel:"Abbrechen",publish:"Veröffentlichen",source:"Quelle",original:"Originalquelle öffnen",showMap:"Auf Karte zeigen",markFound:"Als gefunden markieren",published:"Veröffentlicht",eventDate:"Veranstaltungsdatum",venue:"Ort",distance:"Entfernung",today:"Heute",tomorrow:"Morgen",thisWeek:"Diese Woche",upcoming:"Demnächst",lostStatus:"VERMISST",seenStatus:"GESEHEN",foundStatus:"GEFUNDEN",activeStatus:"AKTIV",yourPost:"Dein Beitrag",validation:"Bitte Ort, Titel und Beschreibung angeben.",locationError:"Ort wurde nicht gefunden.",geoError:"Standort konnte nicht abgerufen werden."
+magazine:"Edition",cover:"Cover Stars",discounts:"Rabatte",places:"Tierfreundliche Orte",articles:"Artikel",photos:"Fotos",fashion:"Mode",health:"Gesundheit",community:"Community",contests:"Wettbewerbe",helpNav:"Hilfe",marketplace:"Marktplatz",partners:"Partner",contact:"Kontakt",
+heroTitle:"Finde die Tier-Community in deiner Nähe",heroText:"Finde vermisste Tiere, lokale Events, Treffen, Clubs, Nachbarschaftsgruppen, Spaziergänge, Helfer, Adoptionen und Tiernachrichten.",locationPlaceholder:"Stadt, Bezirk oder Postleitzahl...",selectLocation:"Ort auswählen",selectedLocation:"Ausgewählter Ort: {location}",radius:"Suchradius",filterTitle:"Wonach suchst du?",all:"Alle",lost:"Vermisst",seen:"Gesehen",found:"Gefunden",events:"Events",groups:"Clubs & Gruppen",help:"Hilfe",volunteers:"Freiwillige",foster:"Pflegestelle",adoption:"Sucht Familie",news:"Nachrichten",add:"Hinzufügen",foundLabel:"Gefunden:",sortRelevant:"Relevanteste",sortNewest:"Neueste zuerst",sortOldest:"Älteste zuerst",loading:"Aktuelle Informationen werden geladen...",empty:"In dieser Kategorie wurden keine aktuellen Informationen gefunden.",error:"Live-Informationen sind vorübergehend nicht verfügbar.",sourceTitle:"Aktuelle öffentliche Quellen",sourceText:"PETS & DOGUE kombiniert verfügbare öffentliche Quellen und behält den Originallink bei.",whatAdd:"Was möchtest du hinzufügen?",addLost:"Vermisstes Tier",addSeen:"Tier gesehen",addEvent:"Event oder Treffen",addGroup:"Club oder Gruppe",addHelp:"Hilfe benötigt",addVolunteers:"Freiwillige gesucht",addFoster:"Pflegestelle gesucht",addAdoption:"Tier sucht Familie",addNews:"Lokale Tiernachricht",addPost:"Community-Beitrag hinzufügen",location:"Ort",title:"Titel",description:"Kurze Beschreibung",date:"Datum / Uhrzeit",photo:"Foto-URL (optional)",cancel:"Abbrechen",publish:"Veröffentlichen",source:"Quelle",original:"Originalquelle öffnen",showMap:"Auf Karte zeigen",markFound:"Als gefunden markieren",published:"Veröffentlicht",eventDate:"Veranstaltungsdatum",venue:"Ort",distance:"Entfernung",today:"Heute",tomorrow:"Morgen",thisWeek:"Diese Woche",upcoming:"Demnächst",lostStatus:"VERMISST",seenStatus:"GESEHEN",foundStatus:"GEFUNDEN",activeStatus:"AKTIV",yourPost:"Dein Beitrag",validation:"Bitte Ort, Titel und Beschreibung angeben.",locationError:"Ort wurde nicht gefunden.",geoError:"Standort konnte nicht abgerufen werden."
 },
 
 es:{
-menu:"Secciones",profile:"Perfil",club:"Unirse al Club",magazine:"Edición",cover:"Estrellas de portada",discounts:"Descuentos",places:"Lugares pet-friendly",articles:"Artículos",photos:"Fotos",travel:"Viajes",fashion:"Moda",health:"Salud",community:"Comunidad",contests:"Concursos",helpNav:"Ayuda",marketplace:"Marketplace",partners:"Socios",contact:"Contacto",
-heroTitle:"Encuentra la comunidad de mascotas cerca de ti",heroText:"Mascotas perdidas y encontradas, avistamientos, exposiciones, encuentros, paseos, voluntarios, adopción y noticias locales.",locationPlaceholder:"Ciudad, zona o código postal...",selectLocation:"Selecciona una ubicación",selectedLocation:"Ubicación seleccionada: {location}",radius:"Radio de búsqueda",filterTitle:"¿Qué buscas?",all:"Todo",lost:"Perdidos",seen:"Vistos",found:"Encontrados",events:"Eventos",help:"Ayuda",volunteers:"Voluntarios",foster:"Acogida",adoption:"Busca familia",news:"Noticias",add:"Añadir",foundLabel:"Encontrados:",sortRelevant:"Más relevantes",sortNewest:"Más recientes",sortOldest:"Más antiguos",loading:"Cargando información actual...",empty:"No se encontró información actual en esta categoría.",error:"La información en directo no está disponible temporalmente.",sourceTitle:"Fuentes públicas actuales",sourceText:"PETS & DOGUE combina fuentes públicas disponibles y conserva el enlace original.",whatAdd:"¿Qué deseas añadir?",addLost:"Mascota perdida",addSeen:"Vi una mascota",addEvent:"Evento o encuentro",addHelp:"Se necesita ayuda",addVolunteers:"Se necesitan voluntarios",addFoster:"Se necesita acogida",addAdoption:"Mascota busca familia",addNews:"Noticia local sobre animales",addPost:"Añadir publicación",location:"Ubicación",title:"Título",description:"Descripción breve",date:"Fecha / hora",photo:"URL de foto (opcional)",cancel:"Cancelar",publish:"Publicar",source:"Fuente",original:"Abrir fuente original",showMap:"Mostrar en el mapa",markFound:"Marcar como encontrado",published:"Publicado",eventDate:"Fecha del evento",venue:"Lugar",distance:"Distancia",today:"Hoy",tomorrow:"Mañana",thisWeek:"Esta semana",upcoming:"Próximamente",lostStatus:"PERDIDO",seenStatus:"VISTO",foundStatus:"ENCONTRADO",activeStatus:"ACTIVO",yourPost:"Tu publicación",validation:"Añade ubicación, título y descripción.",locationError:"No se encontró la ubicación.",geoError:"No se pudo acceder a tu ubicación."
+magazine:"Edición",cover:"Estrellas de portada",discounts:"Descuentos",places:"Lugares pet-friendly",articles:"Artículos",photos:"Fotos",fashion:"Moda",health:"Salud",community:"Comunidad",contests:"Concursos",helpNav:"Ayuda",marketplace:"Marketplace",partners:"Socios",contact:"Contacto",
+heroTitle:"Encuentra la comunidad de mascotas cerca de ti",heroText:"Descubre mascotas perdidas, eventos, encuentros, clubes, grupos vecinales, paseos, voluntarios, adopciones y noticias locales.",locationPlaceholder:"Ciudad, zona o código postal...",selectLocation:"Selecciona una ubicación",selectedLocation:"Ubicación seleccionada: {location}",radius:"Radio de búsqueda",filterTitle:"¿Qué buscas?",all:"Todo",lost:"Perdidos",seen:"Vistos",found:"Encontrados",events:"Eventos",groups:"Clubes y grupos",help:"Ayuda",volunteers:"Voluntarios",foster:"Acogida",adoption:"Busca familia",news:"Noticias",add:"Añadir",foundLabel:"Encontrados:",sortRelevant:"Más relevantes",sortNewest:"Más recientes",sortOldest:"Más antiguos",loading:"Cargando información actual...",empty:"No se encontró información actual en esta categoría.",error:"La información en directo no está disponible temporalmente.",sourceTitle:"Fuentes públicas actuales",sourceText:"PETS & DOGUE combina fuentes públicas disponibles y conserva el enlace original.",whatAdd:"¿Qué deseas añadir?",addLost:"Mascota perdida",addSeen:"Vi una mascota",addEvent:"Evento o encuentro",addGroup:"Club o grupo",addHelp:"Se necesita ayuda",addVolunteers:"Se necesitan voluntarios",addFoster:"Se necesita acogida",addAdoption:"Mascota busca familia",addNews:"Noticia local sobre animales",addPost:"Añadir publicación",location:"Ubicación",title:"Título",description:"Descripción breve",date:"Fecha / hora",photo:"URL de foto (opcional)",cancel:"Cancelar",publish:"Publicar",source:"Fuente",original:"Abrir fuente original",showMap:"Mostrar en el mapa",markFound:"Marcar como encontrado",published:"Publicado",eventDate:"Fecha del evento",venue:"Lugar",distance:"Distancia",today:"Hoy",tomorrow:"Mañana",thisWeek:"Esta semana",upcoming:"Próximamente",lostStatus:"PERDIDO",seenStatus:"VISTO",foundStatus:"ENCONTRADO",activeStatus:"ACTIVO",yourPost:"Tu publicación",validation:"Añade ubicación, título y descripción.",locationError:"No se encontró la ubicación.",geoError:"No se pudo acceder a tu ubicación."
 },
 
 it:{
-menu:"Sezioni",profile:"Profilo",club:"Entra nel Club",magazine:"Edizione",cover:"Cover Stars",discounts:"Sconti",places:"Luoghi pet-friendly",articles:"Articoli",photos:"Foto",travel:"Viaggi",fashion:"Moda",health:"Salute",community:"Community",contests:"Concorsi",helpNav:"Aiuto",marketplace:"Marketplace",partners:"Partner",contact:"Contatti",
-heroTitle:"Trova la community degli animali vicino a te",heroText:"Animali smarriti e ritrovati, avvistamenti, mostre, incontri, passeggiate, volontari, adozioni e notizie locali.",locationPlaceholder:"Città, zona o CAP...",selectLocation:"Seleziona una località",selectedLocation:"Località selezionata: {location}",radius:"Raggio di ricerca",filterTitle:"Cosa stai cercando?",all:"Tutto",lost:"Smarriti",seen:"Avvistati",found:"Ritrovati",events:"Eventi",help:"Aiuto",volunteers:"Volontari",foster:"Stallo",adoption:"Cerca famiglia",news:"Notizie",add:"Aggiungi",foundLabel:"Trovati:",sortRelevant:"Più rilevanti",sortNewest:"Più recenti",sortOldest:"Più vecchi",loading:"Caricamento delle informazioni attuali...",empty:"Nessuna informazione attuale trovata in questa categoria.",error:"Le informazioni live non sono temporaneamente disponibili.",sourceTitle:"Fonti pubbliche attuali",sourceText:"PETS & DOGUE combina fonti pubbliche disponibili e mantiene il link originale.",whatAdd:"Cosa vuoi aggiungere?",addLost:"Animale smarrito",addSeen:"Ho visto un animale",addEvent:"Evento o incontro",addHelp:"Serve aiuto",addVolunteers:"Servono volontari",addFoster:"Serve uno stallo",addAdoption:"Animale cerca famiglia",addNews:"Notizia locale sugli animali",addPost:"Aggiungi post",location:"Località",title:"Titolo",description:"Breve descrizione",date:"Data / ora",photo:"URL foto (opzionale)",cancel:"Annulla",publish:"Pubblica",source:"Fonte",original:"Apri fonte originale",showMap:"Mostra sulla mappa",markFound:"Segna come ritrovato",published:"Pubblicato",eventDate:"Data evento",venue:"Luogo",distance:"Distanza",today:"Oggi",tomorrow:"Domani",thisWeek:"Questa settimana",upcoming:"In arrivo",lostStatus:"SMARRITO",seenStatus:"AVVISTATO",foundStatus:"RITROVATO",activeStatus:"ATTIVO",yourPost:"Il tuo post",validation:"Aggiungi località, titolo e descrizione.",locationError:"Località non trovata.",geoError:"Impossibile accedere alla tua posizione."
+magazine:"Edizione",cover:"Cover Stars",discounts:"Sconti",places:"Luoghi pet-friendly",articles:"Articoli",photos:"Foto",fashion:"Moda",health:"Salute",community:"Community",contests:"Concorsi",helpNav:"Aiuto",marketplace:"Marketplace",partners:"Partner",contact:"Contatti",
+heroTitle:"Trova la community degli animali vicino a te",heroText:"Scopri animali smarriti, eventi, incontri, club, gruppi di quartiere, passeggiate, volontari, adozioni e notizie locali.",locationPlaceholder:"Città, zona o CAP...",selectLocation:"Seleziona una località",selectedLocation:"Località selezionata: {location}",radius:"Raggio di ricerca",filterTitle:"Cosa stai cercando?",all:"Tutto",lost:"Smarriti",seen:"Avvistati",found:"Ritrovati",events:"Eventi",groups:"Club e gruppi",help:"Aiuto",volunteers:"Volontari",foster:"Stallo",adoption:"Cerca famiglia",news:"Notizie",add:"Aggiungi",foundLabel:"Trovati:",sortRelevant:"Più rilevanti",sortNewest:"Più recenti",sortOldest:"Più vecchi",loading:"Caricamento delle informazioni attuali...",empty:"Nessuna informazione attuale trovata in questa categoria.",error:"Le informazioni live sono temporaneamente non disponibili.",sourceTitle:"Fonti pubbliche attuali",sourceText:"PETS & DOGUE combina fonti pubbliche disponibili e mantiene il link originale.",whatAdd:"Cosa vuoi aggiungere?",addLost:"Animale smarrito",addSeen:"Ho visto un animale",addEvent:"Evento o incontro",addGroup:"Club o gruppo",addHelp:"Serve aiuto",addVolunteers:"Servono volontari",addFoster:"Serve uno stallo",addAdoption:"Animale cerca famiglia",addNews:"Notizia locale sugli animali",addPost:"Aggiungi post",location:"Località",title:"Titolo",description:"Breve descrizione",date:"Data / ora",photo:"URL foto (opzionale)",cancel:"Annulla",publish:"Pubblica",source:"Fonte",original:"Apri fonte originale",showMap:"Mostra sulla mappa",markFound:"Segna come ritrovato",published:"Pubblicato",eventDate:"Data evento",venue:"Luogo",distance:"Distanza",today:"Oggi",tomorrow:"Domani",thisWeek:"Questa settimana",upcoming:"In arrivo",lostStatus:"SMARRITO",seenStatus:"AVVISTATO",foundStatus:"RITROVATO",activeStatus:"ATTIVO",yourPost:"Il tuo post",validation:"Aggiungi località, titolo e descrizione.",locationError:"Località non trovata.",geoError:"Impossibile accedere alla tua posizione."
 },
 
 pt:{
-menu:"Secções",profile:"Perfil",club:"Entrar no Club",magazine:"Edição",cover:"Estrelas da capa",discounts:"Descontos",places:"Locais pet-friendly",articles:"Artigos",photos:"Fotos",travel:"Viagens",fashion:"Moda",health:"Saúde",community:"Comunidade",contests:"Concursos",helpNav:"Ajuda",marketplace:"Marketplace",partners:"Parceiros",contact:"Contacto",
-heroTitle:"Encontre a comunidade de animais perto de si",heroText:"Animais perdidos e encontrados, avistamentos, exposições, encontros, passeios, voluntários, adoção e notícias locais.",locationPlaceholder:"Cidade, zona ou código postal...",selectLocation:"Escolha uma localização",selectedLocation:"Localização selecionada: {location}",radius:"Raio de pesquisa",filterTitle:"O que procura?",all:"Todos",lost:"Perdidos",seen:"Vistos",found:"Encontrados",events:"Eventos",help:"Ajuda",volunteers:"Voluntários",foster:"Acolhimento",adoption:"Procura família",news:"Notícias",add:"Adicionar",foundLabel:"Encontrados:",sortRelevant:"Mais relevantes",sortNewest:"Mais recentes",sortOldest:"Mais antigos",loading:"A carregar informação atual...",empty:"Não foi encontrada informação atual nesta categoria.",error:"A informação em tempo real está temporariamente indisponível.",sourceTitle:"Fontes públicas atuais",sourceText:"PETS & DOGUE combina fontes públicas disponíveis e mantém a ligação original.",whatAdd:"O que pretende adicionar?",addLost:"Animal perdido",addSeen:"Vi um animal",addEvent:"Evento ou encontro",addHelp:"É necessária ajuda",addVolunteers:"São necessários voluntários",addFoster:"É necessário acolhimento",addAdoption:"Animal procura família",addNews:"Notícia local sobre animais",addPost:"Adicionar publicação",location:"Localização",title:"Título",description:"Descrição curta",date:"Data / hora",photo:"URL da fotografia (opcional)",cancel:"Cancelar",publish:"Publicar",source:"Fonte",original:"Abrir fonte original",showMap:"Mostrar no mapa",markFound:"Marcar como encontrado",published:"Publicado",eventDate:"Data do evento",venue:"Local",distance:"Distância",today:"Hoje",tomorrow:"Amanhã",thisWeek:"Esta semana",upcoming:"Em breve",lostStatus:"PERDIDO",seenStatus:"VISTO",foundStatus:"ENCONTRADO",activeStatus:"ATIVO",yourPost:"A sua publicação",validation:"Adicione localização, título e descrição.",locationError:"Localização não encontrada.",geoError:"Não foi possível aceder à sua localização."
+magazine:"Edição",cover:"Estrelas da capa",discounts:"Descontos",places:"Locais pet-friendly",articles:"Artigos",photos:"Fotos",fashion:"Moda",health:"Saúde",community:"Comunidade",contests:"Concursos",helpNav:"Ajuda",marketplace:"Marketplace",partners:"Parceiros",contact:"Contacto",
+heroTitle:"Encontre a comunidade de animais perto de si",heroText:"Descubra animais perdidos, eventos, encontros, clubes, grupos locais, passeios, voluntários, adoção e notícias próximas.",locationPlaceholder:"Cidade, zona ou código postal...",selectLocation:"Escolha uma localização",selectedLocation:"Localização selecionada: {location}",radius:"Raio de pesquisa",filterTitle:"O que procura?",all:"Todos",lost:"Perdidos",seen:"Vistos",found:"Encontrados",events:"Eventos",groups:"Clubes e grupos",help:"Ajuda",volunteers:"Voluntários",foster:"Acolhimento",adoption:"Procura família",news:"Notícias",add:"Adicionar",foundLabel:"Encontrados:",sortRelevant:"Mais relevantes",sortNewest:"Mais recentes",sortOldest:"Mais antigos",loading:"A carregar informação atual...",empty:"Não foi encontrada informação atual nesta categoria.",error:"A informação em tempo real está temporariamente indisponível.",sourceTitle:"Fontes públicas atuais",sourceText:"PETS & DOGUE combina fontes públicas disponíveis e mantém a ligação original.",whatAdd:"O que pretende adicionar?",addLost:"Animal perdido",addSeen:"Vi um animal",addEvent:"Evento ou encontro",addGroup:"Clube ou grupo",addHelp:"É necessária ajuda",addVolunteers:"São necessários voluntários",addFoster:"É necessário acolhimento",addAdoption:"Animal procura família",addNews:"Notícia local sobre animais",addPost:"Adicionar publicação",location:"Localização",title:"Título",description:"Descrição curta",date:"Data / hora",photo:"URL da fotografia (opcional)",cancel:"Cancelar",publish:"Publicar",source:"Fonte",original:"Abrir fonte original",showMap:"Mostrar no mapa",markFound:"Marcar como encontrado",published:"Publicado",eventDate:"Data do evento",venue:"Local",distance:"Distância",today:"Hoje",tomorrow:"Amanhã",thisWeek:"Esta semana",upcoming:"Em breve",lostStatus:"PERDIDO",seenStatus:"VISTO",foundStatus:"ENCONTRADO",activeStatus:"ATIVO",yourPost:"A sua publicação",validation:"Adicione localização, título e descrição.",locationError:"Localização não encontrada.",geoError:"Não foi possível aceder à sua localização."
 },
 
 nl:{
-menu:"Secties",profile:"Profiel",club:"Word lid van Club",magazine:"Editie",cover:"Coversterren",discounts:"Kortingen",places:"Huisdiervriendelijke plekken",articles:"Artikelen",photos:"Foto's",travel:"Reizen",fashion:"Mode",health:"Gezondheid",community:"Community",contests:"Wedstrijden",helpNav:"Hulp",marketplace:"Marktplaats",partners:"Partners",contact:"Contact",
-heroTitle:"Vind de dierencommunity bij jou in de buurt",heroText:"Vermiste en gevonden dieren, waarnemingen, tentoonstellingen, ontmoetingen, wandelingen, vrijwilligers, adoptie en lokaal dierennieuws.",locationPlaceholder:"Stad, gebied of postcode...",selectLocation:"Selecteer een locatie",selectedLocation:"Geselecteerde locatie: {location}",radius:"Zoekradius",filterTitle:"Waar ben je naar op zoek?",all:"Alles",lost:"Vermist",seen:"Gezien",found:"Gevonden",events:"Evenementen",help:"Hulp",volunteers:"Vrijwilligers",foster:"Opvang",adoption:"Zoekt familie",news:"Nieuws",add:"Toevoegen",foundLabel:"Gevonden:",sortRelevant:"Meest relevant",sortNewest:"Nieuwste eerst",sortOldest:"Oudste eerst",loading:"Actuele informatie laden...",empty:"Geen actuele informatie gevonden in deze categorie.",error:"Live-informatie is tijdelijk niet beschikbaar.",sourceTitle:"Actuele openbare bronnen",sourceText:"PETS & DOGUE combineert beschikbare openbare bronnen en behoudt de oorspronkelijke link.",whatAdd:"Wat wil je toevoegen?",addLost:"Vermist huisdier",addSeen:"Ik zag een huisdier",addEvent:"Evenement of ontmoeting",addHelp:"Hulp nodig",addVolunteers:"Vrijwilligers nodig",addFoster:"Opvang nodig",addAdoption:"Dier zoekt familie",addNews:"Lokaal dierennieuws",addPost:"Communitybericht toevoegen",location:"Locatie",title:"Titel",description:"Korte beschrijving",date:"Datum / tijd",photo:"Foto-URL (optioneel)",cancel:"Annuleren",publish:"Publiceren",source:"Bron",original:"Originele bron openen",showMap:"Op kaart tonen",markFound:"Markeren als gevonden",published:"Gepubliceerd",eventDate:"Datum evenement",venue:"Locatie",distance:"Afstand",today:"Vandaag",tomorrow:"Morgen",thisWeek:"Deze week",upcoming:"Binnenkort",lostStatus:"VERMIST",seenStatus:"GEZIEN",foundStatus:"GEVONDEN",activeStatus:"ACTIEF",yourPost:"Jouw bericht",validation:"Voeg locatie, titel en beschrijving toe.",locationError:"Locatie niet gevonden.",geoError:"Je locatie kon niet worden opgehaald."
+magazine:"Editie",cover:"Coversterren",discounts:"Kortingen",places:"Huisdiervriendelijke plekken",articles:"Artikelen",photos:"Foto's",fashion:"Mode",health:"Gezondheid",community:"Community",contests:"Wedstrijden",helpNav:"Hulp",marketplace:"Marktplaats",partners:"Partners",contact:"Contact",
+heroTitle:"Vind de dierencommunity bij jou in de buurt",heroText:"Vind vermiste dieren, lokale evenementen, ontmoetingen, clubs, buurtgroepen, wandelgroepen, vrijwilligers, adoptie en nieuws.",locationPlaceholder:"Stad, gebied of postcode...",selectLocation:"Selecteer een locatie",selectedLocation:"Geselecteerde locatie: {location}",radius:"Zoekradius",filterTitle:"Waar ben je naar op zoek?",all:"Alles",lost:"Vermist",seen:"Gezien",found:"Gevonden",events:"Evenementen",groups:"Clubs & groepen",help:"Hulp",volunteers:"Vrijwilligers",foster:"Opvang",adoption:"Zoekt familie",news:"Nieuws",add:"Toevoegen",foundLabel:"Gevonden:",sortRelevant:"Meest relevant",sortNewest:"Nieuwste eerst",sortOldest:"Oudste eerst",loading:"Actuele informatie laden...",empty:"Geen actuele informatie gevonden in deze categorie.",error:"Live-informatie is tijdelijk niet beschikbaar.",sourceTitle:"Actuele openbare bronnen",sourceText:"PETS & DOGUE combineert beschikbare openbare bronnen en behoudt de oorspronkelijke link.",whatAdd:"Wat wil je toevoegen?",addLost:"Vermist huisdier",addSeen:"Ik zag een huisdier",addEvent:"Evenement of ontmoeting",addGroup:"Club of groep",addHelp:"Hulp nodig",addVolunteers:"Vrijwilligers nodig",addFoster:"Opvang nodig",addAdoption:"Dier zoekt familie",addNews:"Lokaal dierennieuws",addPost:"Communitybericht toevoegen",location:"Locatie",title:"Titel",description:"Korte beschrijving",date:"Datum / tijd",photo:"Foto-URL (optioneel)",cancel:"Annuleren",publish:"Publiceren",source:"Bron",original:"Originele bron openen",showMap:"Op kaart tonen",markFound:"Markeren als gevonden",published:"Gepubliceerd",eventDate:"Datum evenement",venue:"Locatie",distance:"Afstand",today:"Vandaag",tomorrow:"Morgen",thisWeek:"Deze week",upcoming:"Binnenkort",lostStatus:"VERMIST",seenStatus:"GEZIEN",foundStatus:"GEVONDEN",activeStatus:"ACTIEF",yourPost:"Jouw bericht",validation:"Voeg locatie, titel en beschrijving toe.",locationError:"Locatie niet gevonden.",geoError:"Je locatie kon niet worden opgehaald."
 },
 
 pl:{
-menu:"Sekcje",profile:"Profil",club:"Dołącz do Clubu",magazine:"Edycja",cover:"Gwiazdy okładki",discounts:"Rabaty",places:"Miejsca przyjazne zwierzętom",articles:"Artykuły",photos:"Zdjęcia",travel:"Podróże",fashion:"Moda",health:"Zdrowie",community:"Społeczność",contests:"Konkursy",helpNav:"Pomoc",marketplace:"Marketplace",partners:"Partnerzy",contact:"Kontakt",
-heroTitle:"Znajdź społeczność miłośników zwierząt w pobliżu",heroText:"Zaginione i znalezione zwierzęta, obserwacje, wystawy, spotkania, spacery, wolontariusze, adopcje i lokalne wiadomości.",locationPlaceholder:"Miasto, dzielnica lub kod pocztowy...",selectLocation:"Wybierz lokalizację",selectedLocation:"Wybrana lokalizacja: {location}",radius:"Promień wyszukiwania",filterTitle:"Czego szukasz?",all:"Wszystko",lost:"Zaginione",seen:"Widziane",found:"Znalezione",events:"Wydarzenia",help:"Pomoc",volunteers:"Wolontariusze",foster:"Dom tymczasowy",adoption:"Szukają rodziny",news:"Wiadomości",add:"Dodaj",foundLabel:"Znaleziono:",sortRelevant:"Najbardziej trafne",sortNewest:"Najnowsze",sortOldest:"Najstarsze",loading:"Ładowanie aktualnych informacji...",empty:"Nie znaleziono aktualnych informacji w tej kategorii.",error:"Informacje na żywo są chwilowo niedostępne.",sourceTitle:"Aktualne źródła publiczne",sourceText:"PETS & DOGUE łączy dostępne źródła publiczne i zachowuje link do oryginału.",whatAdd:"Co chcesz dodać?",addLost:"Zaginione zwierzę",addSeen:"Widziałem zwierzę",addEvent:"Wydarzenie lub spotkanie",addHelp:"Potrzebna pomoc",addVolunteers:"Potrzebni wolontariusze",addFoster:"Potrzebny dom tymczasowy",addAdoption:"Zwierzę szuka rodziny",addNews:"Lokalna wiadomość o zwierzętach",addPost:"Dodaj post",location:"Lokalizacja",title:"Tytuł",description:"Krótki opis",date:"Data / godzina",photo:"URL zdjęcia (opcjonalnie)",cancel:"Anuluj",publish:"Opublikuj",source:"Źródło",original:"Otwórz oryginalne źródło",showMap:"Pokaż na mapie",markFound:"Oznacz jako znalezione",published:"Opublikowano",eventDate:"Data wydarzenia",venue:"Miejsce",distance:"Odległość",today:"Dziś",tomorrow:"Jutro",thisWeek:"W tym tygodniu",upcoming:"Wkrótce",lostStatus:"ZAGINIONE",seenStatus:"WIDZIANE",foundStatus:"ZNALEZIONE",activeStatus:"AKTYWNE",yourPost:"Twój post",validation:"Dodaj lokalizację, tytuł i opis.",locationError:"Nie znaleziono lokalizacji.",geoError:"Nie udało się uzyskać lokalizacji."
+magazine:"Edycja",cover:"Gwiazdy okładki",discounts:"Rabaty",places:"Miejsca przyjazne zwierzętom",articles:"Artykuły",photos:"Zdjęcia",fashion:"Moda",health:"Zdrowie",community:"Społeczność",contests:"Konkursy",helpNav:"Pomoc",marketplace:"Marketplace",partners:"Partnerzy",contact:"Kontakt",
+heroTitle:"Znajdź społeczność miłośników zwierząt w pobliżu",heroText:"Znajdź zaginione zwierzęta, wydarzenia, spotkania, kluby, grupy lokalne, spacery, wolontariat, adopcje i wiadomości.",locationPlaceholder:"Miasto, dzielnica lub kod pocztowy...",selectLocation:"Wybierz lokalizację",selectedLocation:"Wybrana lokalizacja: {location}",radius:"Promień wyszukiwania",filterTitle:"Czego szukasz?",all:"Wszystko",lost:"Zaginione",seen:"Widziane",found:"Znalezione",events:"Wydarzenia",groups:"Kluby i grupy",help:"Pomoc",volunteers:"Wolontariusze",foster:"Dom tymczasowy",adoption:"Szukają rodziny",news:"Wiadomości",add:"Dodaj",foundLabel:"Znaleziono:",sortRelevant:"Najbardziej trafne",sortNewest:"Najnowsze",sortOldest:"Najstarsze",loading:"Ładowanie aktualnych informacji...",empty:"Nie znaleziono aktualnych informacji w tej kategorii.",error:"Informacje na żywo są chwilowo niedostępne.",sourceTitle:"Aktualne źródła publiczne",sourceText:"PETS & DOGUE łączy dostępne źródła publiczne i zachowuje link do oryginału.",whatAdd:"Co chcesz dodać?",addLost:"Zaginione zwierzę",addSeen:"Widziałem zwierzę",addEvent:"Wydarzenie lub spotkanie",addGroup:"Klub lub grupa",addHelp:"Potrzebna pomoc",addVolunteers:"Potrzebni wolontariusze",addFoster:"Potrzebny dom tymczasowy",addAdoption:"Zwierzę szuka rodziny",addNews:"Lokalna wiadomość o zwierzętach",addPost:"Dodaj post",location:"Lokalizacja",title:"Tytuł",description:"Krótki opis",date:"Data / godzina",photo:"URL zdjęcia (opcjonalnie)",cancel:"Anuluj",publish:"Opublikuj",source:"Źródło",original:"Otwórz oryginalne źródło",showMap:"Pokaż na mapie",markFound:"Oznacz jako znalezione",published:"Opublikowano",eventDate:"Data wydarzenia",venue:"Miejsce",distance:"Odległość",today:"Dziś",tomorrow:"Jutro",thisWeek:"W tym tygodniu",upcoming:"Wkrótce",lostStatus:"ZAGINIONE",seenStatus:"WIDZIANE",foundStatus:"ZNALEZIONE",activeStatus:"AKTYWNE",yourPost:"Twój post",validation:"Dodaj lokalizację, tytuł i opis.",locationError:"Nie znaleziono lokalizacji.",geoError:"Nie udało się uzyskać lokalizacji."
 },
 
 cs:{
-menu:"Sekce",profile:"Profil",club:"Připojit se ke Clubu",magazine:"Vydání",cover:"Hvězdy obálky",discounts:"Slevy",places:"Místa přátelská ke zvířatům",articles:"Články",photos:"Fotografie",travel:"Cestování",fashion:"Móda",health:"Zdraví",community:"Komunita",contests:"Soutěže",helpNav:"Pomoc",marketplace:"Marketplace",partners:"Partneři",contact:"Kontakt",
-heroTitle:"Najděte komunitu milovníků zvířat ve svém okolí",heroText:"Ztracená a nalezená zvířata, pozorování, výstavy, setkání, procházky, dobrovolníci, adopce a místní zprávy.",locationPlaceholder:"Město, oblast nebo PSČ...",selectLocation:"Vyberte místo",selectedLocation:"Vybrané místo: {location}",radius:"Poloměr hledání",filterTitle:"Co hledáte?",all:"Vše",lost:"Ztracení",seen:"Vidění",found:"Nalezení",events:"Události",help:"Pomoc",volunteers:"Dobrovolníci",foster:"Dočasná péče",adoption:"Hledají rodinu",news:"Zprávy",add:"Přidat",foundLabel:"Nalezeno:",sortRelevant:"Nejrelevantnější",sortNewest:"Nejnovější",sortOldest:"Nejstarší",loading:"Načítáme aktuální informace...",empty:"V této kategorii nebyly nalezeny aktuální informace.",error:"Živé informace jsou dočasně nedostupné.",sourceTitle:"Aktuální veřejné zdroje",sourceText:"PETS & DOGUE kombinuje dostupné veřejné zdroje a zachovává odkaz na originál.",whatAdd:"Co chcete přidat?",addLost:"Ztracené zvíře",addSeen:"Viděl/a jsem zvíře",addEvent:"Událost nebo setkání",addHelp:"Potřeba pomoci",addVolunteers:"Hledají se dobrovolníci",addFoster:"Potřeba dočasné péče",addAdoption:"Zvíře hledá rodinu",addNews:"Místní zpráva o zvířatech",addPost:"Přidat příspěvek",location:"Místo",title:"Název",description:"Krátký popis",date:"Datum / čas",photo:"URL fotografie (volitelné)",cancel:"Zrušit",publish:"Publikovat",source:"Zdroj",original:"Otevřít původní zdroj",showMap:"Ukázat na mapě",markFound:"Označit jako nalezené",published:"Publikováno",eventDate:"Datum události",venue:"Místo",distance:"Vzdálenost",today:"Dnes",tomorrow:"Zítra",thisWeek:"Tento týden",upcoming:"Nadcházející",lostStatus:"ZTRACENO",seenStatus:"VIDĚNO",foundStatus:"NALEZENO",activeStatus:"AKTIVNÍ",yourPost:"Váš příspěvek",validation:"Přidejte místo, název a popis.",locationError:"Místo nebylo nalezeno.",geoError:"Polohu nebylo možné získat."
+magazine:"Vydání",cover:"Hvězdy obálky",discounts:"Slevy",places:"Místa přátelská ke zvířatům",articles:"Články",photos:"Fotografie",fashion:"Móda",health:"Zdraví",community:"Komunita",contests:"Soutěže",helpNav:"Pomoc",marketplace:"Marketplace",partners:"Partneři",contact:"Kontakt",
+heroTitle:"Najděte komunitu milovníků zvířat ve svém okolí",heroText:"Najděte ztracená zvířata, místní akce, setkání, kluby, sousedské skupiny, procházky, dobrovolníky, adopce a zprávy.",locationPlaceholder:"Město, oblast nebo PSČ...",selectLocation:"Vyberte místo",selectedLocation:"Vybrané místo: {location}",radius:"Poloměr hledání",filterTitle:"Co hledáte?",all:"Vše",lost:"Ztracení",seen:"Vidění",found:"Nalezení",events:"Události",groups:"Kluby a skupiny",help:"Pomoc",volunteers:"Dobrovolníci",foster:"Dočasná péče",adoption:"Hledají rodinu",news:"Zprávy",add:"Přidat",foundLabel:"Nalezeno:",sortRelevant:"Nejrelevantnější",sortNewest:"Nejnovější",sortOldest:"Nejstarší",loading:"Načítáme aktuální informace...",empty:"V této kategorii nebyly nalezeny aktuální informace.",error:"Živé informace jsou dočasně nedostupné.",sourceTitle:"Aktuální veřejné zdroje",sourceText:"PETS & DOGUE kombinuje dostupné veřejné zdroje a zachovává odkaz na originál.",whatAdd:"Co chcete přidat?",addLost:"Ztracené zvíře",addSeen:"Viděl/a jsem zvíře",addEvent:"Událost nebo setkání",addGroup:"Klub nebo skupina",addHelp:"Potřeba pomoci",addVolunteers:"Hledají se dobrovolníci",addFoster:"Potřeba dočasné péče",addAdoption:"Zvíře hledá rodinu",addNews:"Místní zpráva o zvířatech",addPost:"Přidat příspěvek",location:"Místo",title:"Název",description:"Krátký popis",date:"Datum / čas",photo:"URL fotografie (volitelné)",cancel:"Zrušit",publish:"Publikovat",source:"Zdroj",original:"Otevřít původní zdroj",showMap:"Ukázat na mapě",markFound:"Označit jako nalezené",published:"Publikováno",eventDate:"Datum události",venue:"Místo",distance:"Vzdálenost",today:"Dnes",tomorrow:"Zítra",thisWeek:"Tento týden",upcoming:"Nadcházející",lostStatus:"ZTRACENO",seenStatus:"VIDĚNO",foundStatus:"NALEZENO",activeStatus:"AKTIVNÍ",yourPost:"Váš příspěvek",validation:"Přidejte místo, název a popis.",locationError:"Místo nebylo nalezeno.",geoError:"Polohu nebylo možné získat."
 },
 
 sk:{
-menu:"Sekcie",profile:"Profil",club:"Pridať sa do Clubu",magazine:"Vydanie",cover:"Hviezdy obálky",discounts:"Zľavy",places:"Miesta priateľské k zvieratám",articles:"Články",photos:"Fotografie",travel:"Cestovanie",fashion:"Móda",health:"Zdravie",community:"Komunita",contests:"Súťaže",helpNav:"Pomoc",marketplace:"Marketplace",partners:"Partneri",contact:"Kontakt",
-heroTitle:"Nájdite komunitu milovníkov zvierat vo svojom okolí",heroText:"Stratené a nájdené zvieratá, pozorovania, výstavy, stretnutia, prechádzky, dobrovoľníci, adopcie a miestne správy.",locationPlaceholder:"Mesto, oblasť alebo PSČ...",selectLocation:"Vyberte miesto",selectedLocation:"Vybrané miesto: {location}",radius:"Polomer vyhľadávania",filterTitle:"Čo hľadáte?",all:"Všetko",lost:"Stratené",seen:"Videné",found:"Nájdené",events:"Udalosti",help:"Pomoc",volunteers:"Dobrovoľníci",foster:"Dočasná starostlivosť",adoption:"Hľadajú rodinu",news:"Správy",add:"Pridať",foundLabel:"Nájdené:",sortRelevant:"Najrelevantnejšie",sortNewest:"Najnovšie",sortOldest:"Najstaršie",loading:"Načítavame aktuálne informácie...",empty:"V tejto kategórii sa nenašli aktuálne informácie.",error:"Živé informácie sú dočasne nedostupné.",sourceTitle:"Aktuálne verejné zdroje",sourceText:"PETS & DOGUE kombinuje dostupné verejné zdroje a zachováva pôvodný odkaz.",whatAdd:"Čo chcete pridať?",addLost:"Stratené zviera",addSeen:"Videl/a som zviera",addEvent:"Udalosť alebo stretnutie",addHelp:"Potrebná pomoc",addVolunteers:"Potrební dobrovoľníci",addFoster:"Potrebná dočasná starostlivosť",addAdoption:"Zviera hľadá rodinu",addNews:"Miestna správa o zvieratách",addPost:"Pridať príspevok",location:"Miesto",title:"Názov",description:"Krátky opis",date:"Dátum / čas",photo:"URL fotografie (voliteľné)",cancel:"Zrušiť",publish:"Publikovať",source:"Zdroj",original:"Otvoriť pôvodný zdroj",showMap:"Ukázať na mape",markFound:"Označiť ako nájdené",published:"Publikované",eventDate:"Dátum udalosti",venue:"Miesto",distance:"Vzdialenosť",today:"Dnes",tomorrow:"Zajtra",thisWeek:"Tento týždeň",upcoming:"Nadchádzajúce",lostStatus:"STRATENÉ",seenStatus:"VIDENÉ",foundStatus:"NÁJDENÉ",activeStatus:"AKTÍVNE",yourPost:"Váš príspevok",validation:"Pridajte miesto, názov a opis.",locationError:"Miesto sa nenašlo.",geoError:"Polohu sa nepodarilo získať."
+magazine:"Vydanie",cover:"Hviezdy obálky",discounts:"Zľavy",places:"Miesta priateľské k zvieratám",articles:"Články",photos:"Fotografie",fashion:"Móda",health:"Zdravie",community:"Komunita",contests:"Súťaže",helpNav:"Pomoc",marketplace:"Marketplace",partners:"Partneri",contact:"Kontakt",
+heroTitle:"Nájdite komunitu milovníkov zvierat vo svojom okolí",heroText:"Nájdite stratené zvieratá, miestne podujatia, stretnutia, kluby, susedské skupiny, prechádzky, dobrovoľníkov, adopcie a správy.",locationPlaceholder:"Mesto, oblasť alebo PSČ...",selectLocation:"Vyberte miesto",selectedLocation:"Vybrané miesto: {location}",radius:"Polomer vyhľadávania",filterTitle:"Čo hľadáte?",all:"Všetko",lost:"Stratené",seen:"Videné",found:"Nájdené",events:"Udalosti",groups:"Kluby a skupiny",help:"Pomoc",volunteers:"Dobrovoľníci",foster:"Dočasná starostlivosť",adoption:"Hľadajú rodinu",news:"Správy",add:"Pridať",foundLabel:"Nájdené:",sortRelevant:"Najrelevantnejšie",sortNewest:"Najnovšie",sortOldest:"Najstaršie",loading:"Načítavame aktuálne informácie...",empty:"V tejto kategórii sa nenašli aktuálne informácie.",error:"Živé informácie sú dočasne nedostupné.",sourceTitle:"Aktuálne verejné zdroje",sourceText:"PETS & DOGUE kombinuje dostupné verejné zdroje a zachováva pôvodný odkaz.",whatAdd:"Čo chcete pridať?",addLost:"Stratené zviera",addSeen:"Videl/a som zviera",addEvent:"Udalosť alebo stretnutie",addGroup:"Klub alebo skupina",addHelp:"Potrebná pomoc",addVolunteers:"Potrební dobrovoľníci",addFoster:"Potrebná dočasná starostlivosť",addAdoption:"Zviera hľadá rodinu",addNews:"Miestna správa o zvieratách",addPost:"Pridať príspevok",location:"Miesto",title:"Názov",description:"Krátky opis",date:"Dátum / čas",photo:"URL fotografie (voliteľné)",cancel:"Zrušiť",publish:"Publikovať",source:"Zdroj",original:"Otvoriť pôvodný zdroj",showMap:"Ukázať na mape",markFound:"Označiť ako nájdené",published:"Publikované",eventDate:"Dátum udalosti",venue:"Miesto",distance:"Vzdialenosť",today:"Dnes",tomorrow:"Zajtra",thisWeek:"Tento týždeň",upcoming:"Nadchádzajúce",lostStatus:"STRATENÉ",seenStatus:"VIDENÉ",foundStatus:"NÁJDENÉ",activeStatus:"AKTÍVNE",yourPost:"Váš príspevok",validation:"Pridajte miesto, názov a opis.",locationError:"Miesto sa nenašlo.",geoError:"Polohu sa nepodarilo získať."
 },
 
 hu:{
-menu:"Szekciók",profile:"Profil",club:"Csatlakozás a klubhoz",magazine:"Kiadás",cover:"Címlapsztárok",discounts:"Kedvezmények",places:"Állatbarát helyek",articles:"Cikkek",photos:"Fotók",travel:"Utazás",fashion:"Divat",health:"Egészség",community:"Közösség",contests:"Versenyek",helpNav:"Segítség",marketplace:"Piactér",partners:"Partnerek",contact:"Kapcsolat",
-heroTitle:"Találd meg az állatos közösséget a közeledben",heroText:"Eltűnt és megtalált állatok, észlelések, kiállítások, találkozók, séták, önkéntesek, örökbefogadás és helyi hírek.",locationPlaceholder:"Város, kerület vagy irányítószám...",selectLocation:"Válassz helyet",selectedLocation:"Kiválasztott hely: {location}",radius:"Keresési sugár",filterTitle:"Mit keresel?",all:"Mind",lost:"Eltűnt",seen:"Látták",found:"Megtalált",events:"Események",help:"Segítség",volunteers:"Önkéntesek",foster:"Ideiglenes befogadás",adoption:"Családot keres",news:"Hírek",add:"Hozzáadás",foundLabel:"Találat:",sortRelevant:"Legrelevánsabb",sortNewest:"Legújabb",sortOldest:"Legrégebbi",loading:"Aktuális információk betöltése...",empty:"Ebben a kategóriában nincs aktuális információ.",error:"Az élő információ ideiglenesen nem érhető el.",sourceTitle:"Aktuális nyilvános források",sourceText:"A PETS & DOGUE elérhető nyilvános forrásokat egyesít, és megtartja az eredeti linket.",whatAdd:"Mit szeretnél hozzáadni?",addLost:"Eltűnt állat",addSeen:"Állatot láttam",addEvent:"Esemény vagy találkozó",addHelp:"Segítség kell",addVolunteers:"Önkéntesek kellenek",addFoster:"Ideiglenes otthon kell",addAdoption:"Állat családot keres",addNews:"Helyi állathír",addPost:"Közösségi bejegyzés hozzáadása",location:"Hely",title:"Cím",description:"Rövid leírás",date:"Dátum / idő",photo:"Fotó URL (opcionális)",cancel:"Mégse",publish:"Közzététel",source:"Forrás",original:"Eredeti forrás megnyitása",showMap:"Mutatás térképen",markFound:"Megtaláltként jelölés",published:"Közzétéve",eventDate:"Esemény dátuma",venue:"Helyszín",distance:"Távolság",today:"Ma",tomorrow:"Holnap",thisWeek:"Ezen a héten",upcoming:"Hamarosan",lostStatus:"ELTŰNT",seenStatus:"LÁTTÁK",foundStatus:"MEGTALÁLT",activeStatus:"AKTÍV",yourPost:"Saját bejegyzés",validation:"Adj meg helyet, címet és leírást.",locationError:"A hely nem található.",geoError:"A helyzet nem érhető el."
+magazine:"Kiadás",cover:"Címlapsztárok",discounts:"Kedvezmények",places:"Állatbarát helyek",articles:"Cikkek",photos:"Fotók",fashion:"Divat",health:"Egészség",community:"Közösség",contests:"Versenyek",helpNav:"Segítség",marketplace:"Piactér",partners:"Partnerek",contact:"Kapcsolat",
+heroTitle:"Találd meg az állatos közösséget a közeledben",heroText:"Találj elveszett állatokat, helyi eseményeket, találkozókat, klubokat, környékbeli csoportokat, sétákat, önkénteseket és híreket.",locationPlaceholder:"Város, kerület vagy irányítószám...",selectLocation:"Válassz helyet",selectedLocation:"Kiválasztott hely: {location}",radius:"Keresési sugár",filterTitle:"Mit keresel?",all:"Mind",lost:"Eltűnt",seen:"Látták",found:"Megtalált",events:"Események",groups:"Klubok és csoportok",help:"Segítség",volunteers:"Önkéntesek",foster:"Ideiglenes befogadás",adoption:"Családot keres",news:"Hírek",add:"Hozzáadás",foundLabel:"Találat:",sortRelevant:"Legrelevánsabb",sortNewest:"Legújabb",sortOldest:"Legrégebbi",loading:"Aktuális információk betöltése...",empty:"Ebben a kategóriában nincs aktuális információ.",error:"Az élő információ ideiglenesen nem érhető el.",sourceTitle:"Aktuális nyilvános források",sourceText:"A PETS & DOGUE elérhető nyilvános forrásokat egyesít, és megtartja az eredeti linket.",whatAdd:"Mit szeretnél hozzáadni?",addLost:"Eltűnt állat",addSeen:"Állatot láttam",addEvent:"Esemény vagy találkozó",addGroup:"Klub vagy csoport",addHelp:"Segítség kell",addVolunteers:"Önkéntesek kellenek",addFoster:"Ideiglenes otthon kell",addAdoption:"Állat családot keres",addNews:"Helyi állathír",addPost:"Közösségi bejegyzés hozzáadása",location:"Hely",title:"Cím",description:"Rövid leírás",date:"Dátum / idő",photo:"Fotó URL (opcionális)",cancel:"Mégse",publish:"Közzététel",source:"Forrás",original:"Eredeti forrás megnyitása",showMap:"Mutatás térképen",markFound:"Megtaláltként jelölés",published:"Közzétéve",eventDate:"Esemény dátuma",venue:"Helyszín",distance:"Távolság",today:"Ma",tomorrow:"Holnap",thisWeek:"Ezen a héten",upcoming:"Hamarosan",lostStatus:"ELTŰNT",seenStatus:"LÁTTÁK",foundStatus:"MEGTALÁLT",activeStatus:"AKTÍV",yourPost:"Saját bejegyzés",validation:"Adj meg helyet, címet és leírást.",locationError:"A hely nem található.",geoError:"A helyzet nem érhető el."
 },
 
 ro:{
-menu:"Secțiuni",profile:"Profil",club:"Intră în Club",magazine:"Ediție",cover:"Vedete de copertă",discounts:"Reduceri",places:"Locuri pet-friendly",articles:"Articole",photos:"Fotografii",travel:"Călătorii",fashion:"Modă",health:"Sănătate",community:"Comunitate",contests:"Concursuri",helpNav:"Ajutor",marketplace:"Piață",partners:"Parteneri",contact:"Contact",
-heroTitle:"Găsește comunitatea de animale din apropiere",heroText:"Animale pierdute și găsite, observații, expoziții, întâlniri, plimbări, voluntari, adopții și știri locale.",locationPlaceholder:"Oraș, cartier sau cod poștal...",selectLocation:"Alege o locație",selectedLocation:"Locație selectată: {location}",radius:"Raza de căutare",filterTitle:"Ce cauți?",all:"Toate",lost:"Pierdute",seen:"Văzute",found:"Găsite",events:"Evenimente",help:"Ajutor",volunteers:"Voluntari",foster:"Găzduire",adoption:"Caută familie",news:"Știri",add:"Adaugă",foundLabel:"Găsite:",sortRelevant:"Cele mai relevante",sortNewest:"Cele mai noi",sortOldest:"Cele mai vechi",loading:"Se încarcă informațiile actuale...",empty:"Nu s-au găsit informații actuale în această categorie.",error:"Informațiile live sunt temporar indisponibile.",sourceTitle:"Surse publice actuale",sourceText:"PETS & DOGUE combină surse publice disponibile și păstrează linkul original.",whatAdd:"Ce dorești să adaugi?",addLost:"Animal pierdut",addSeen:"Am văzut un animal",addEvent:"Eveniment sau întâlnire",addHelp:"Este nevoie de ajutor",addVolunteers:"Sunt necesari voluntari",addFoster:"Este nevoie de găzduire",addAdoption:"Animal caută familie",addNews:"Știre locală despre animale",addPost:"Adaugă postare",location:"Locație",title:"Titlu",description:"Descriere scurtă",date:"Data / ora",photo:"URL fotografie (opțional)",cancel:"Anulează",publish:"Publică",source:"Sursă",original:"Deschide sursa originală",showMap:"Arată pe hartă",markFound:"Marchează ca găsit",published:"Publicat",eventDate:"Data evenimentului",venue:"Loc",distance:"Distanță",today:"Astăzi",tomorrow:"Mâine",thisWeek:"Săptămâna aceasta",upcoming:"În curând",lostStatus:"PIERDUT",seenStatus:"VĂZUT",foundStatus:"GĂSIT",activeStatus:"ACTIV",yourPost:"Postarea ta",validation:"Adaugă locația, titlul și descrierea.",locationError:"Locația nu a putut fi găsită.",geoError:"Locația curentă nu a putut fi accesată."
+magazine:"Ediție",cover:"Vedete de copertă",discounts:"Reduceri",places:"Locuri pet-friendly",articles:"Articole",photos:"Fotografii",fashion:"Modă",health:"Sănătate",community:"Comunitate",contests:"Concursuri",helpNav:"Ajutor",marketplace:"Piață",partners:"Parteneri",contact:"Contact",
+heroTitle:"Găsește comunitatea de animale din apropiere",heroText:"Găsește animale pierdute, evenimente, întâlniri, cluburi, grupuri locale, plimbări, voluntari, adopții și știri.",locationPlaceholder:"Oraș, cartier sau cod poștal...",selectLocation:"Alege o locație",selectedLocation:"Locație selectată: {location}",radius:"Raza de căutare",filterTitle:"Ce cauți?",all:"Toate",lost:"Pierdute",seen:"Văzute",found:"Găsite",events:"Evenimente",groups:"Cluburi și grupuri",help:"Ajutor",volunteers:"Voluntari",foster:"Găzduire",adoption:"Caută familie",news:"Știri",add:"Adaugă",foundLabel:"Găsite:",sortRelevant:"Cele mai relevante",sortNewest:"Cele mai noi",sortOldest:"Cele mai vechi",loading:"Se încarcă informațiile actuale...",empty:"Nu s-au găsit informații actuale în această categorie.",error:"Informațiile live sunt temporar indisponibile.",sourceTitle:"Surse publice actuale",sourceText:"PETS & DOGUE combină surse publice disponibile și păstrează linkul original.",whatAdd:"Ce dorești să adaugi?",addLost:"Animal pierdut",addSeen:"Am văzut un animal",addEvent:"Eveniment sau întâlnire",addGroup:"Club sau grup",addHelp:"Este nevoie de ajutor",addVolunteers:"Sunt necesari voluntari",addFoster:"Este nevoie de găzduire",addAdoption:"Animal caută familie",addNews:"Știre locală despre animale",addPost:"Adaugă postare",location:"Locație",title:"Titlu",description:"Descriere scurtă",date:"Data / ora",photo:"URL fotografie (opțional)",cancel:"Anulează",publish:"Publică",source:"Sursă",original:"Deschide sursa originală",showMap:"Arată pe hartă",markFound:"Marchează ca găsit",published:"Publicat",eventDate:"Data evenimentului",venue:"Loc",distance:"Distanță",today:"Astăzi",tomorrow:"Mâine",thisWeek:"Săptămâna aceasta",upcoming:"În curând",lostStatus:"PIERDUT",seenStatus:"VĂZUT",foundStatus:"GĂSIT",activeStatus:"ACTIV",yourPost:"Postarea ta",validation:"Adaugă locația, titlul și descrierea.",locationError:"Locația nu a putut fi găsită.",geoError:"Locația curentă nu a putut fi accesată."
 },
 
 bg:{
-menu:"Раздели",profile:"Профил",club:"Влез в клуба",magazine:"Издание",cover:"Звезди от корицата",discounts:"Отстъпки",places:"Pet-friendly места",articles:"Статии",photos:"Снимки",travel:"Пътуване",fashion:"Мода",health:"Здраве",community:"Общност",contests:"Конкурси",helpNav:"Помощ",marketplace:"Пазар",partners:"Партньори",contact:"Контакт",
-heroTitle:"Намерете общността за животни близо до вас",heroText:"Изгубени и намерени любимци, наблюдения, изложби, срещи, разходки, доброволци, осиновяване и местни новини.",locationPlaceholder:"Град, пощенски код или район...",selectLocation:"Изберете местоположение",selectedLocation:"Избрано място: {location}",radius:"Радиус на търсене",filterTitle:"Какво търсите?",all:"Всички",lost:"Изгубени",seen:"Видени",found:"Намерени",events:"Събития",help:"Помощ",volunteers:"Доброволци",foster:"Временен дом",adoption:"Търсят семейство",news:"Новини",add:"Добави",foundLabel:"Намерени:",sortRelevant:"Най-подходящи",sortNewest:"Най-нови",sortOldest:"Най-стари",loading:"Зареждаме актуална информация...",empty:"Не е намерена актуална информация в тази категория.",error:"Актуалната информация временно не е достъпна.",sourceTitle:"Актуални публични източници",sourceText:"PETS & DOGUE комбинира достъпни публични източници и запазва оригиналната връзка.",whatAdd:"Какво искате да добавите?",addLost:"Изгубен любимец",addSeen:"Видях любимец",addEvent:"Събитие или среща",addHelp:"Нужна е помощ",addVolunteers:"Нужни са доброволци",addFoster:"Нужен е временен дом",addAdoption:"Любимец търси семейство",addNews:"Местна новина за животни",addPost:"Добави публикация",location:"Местоположение",title:"Заглавие",description:"Кратко описание",date:"Дата / час",photo:"URL на снимка (по избор)",cancel:"Отказ",publish:"Публикувай",source:"Източник",original:"Отвори оригиналния източник",showMap:"Покажи на картата",markFound:"Маркирай като намерено",published:"Публикувано",eventDate:"Дата на събитието",venue:"Място",distance:"Разстояние",today:"Днес",tomorrow:"Утре",thisWeek:"Тази седмица",upcoming:"Предстоящо",lostStatus:"ИЗГУБЕН",seenStatus:"ВИДЯН",foundStatus:"НАМЕРЕН",activeStatus:"АКТИВЕН",yourPost:"Вашата публикация",validation:"Добавете местоположение, заглавие и описание.",locationError:"Мястото не беше намерено.",geoError:"Не може да се получи местоположение."
+magazine:"Издание",cover:"Звезди от корицата",discounts:"Отстъпки",places:"Pet-friendly места",articles:"Статии",photos:"Снимки",fashion:"Мода",health:"Здраве",community:"Общност",contests:"Конкурси",helpNav:"Помощ",marketplace:"Пазар",partners:"Партньори",contact:"Контакт",
+heroTitle:"Намерете общността за животни близо до вас",heroText:"Намерете изгубени животни, местни събития, срещи, клубове, квартални групи, разходки, доброволци, осиновяване и новини.",locationPlaceholder:"Град, пощенски код или район...",selectLocation:"Изберете местоположение",selectedLocation:"Избрано място: {location}",radius:"Радиус на търсене",filterTitle:"Какво търсите?",all:"Всички",lost:"Изгубени",seen:"Видени",found:"Намерени",events:"Събития",groups:"Клубове и групи",help:"Помощ",volunteers:"Доброволци",foster:"Временен дом",adoption:"Търсят семейство",news:"Новини",add:"Добави",foundLabel:"Намерени:",sortRelevant:"Най-подходящи",sortNewest:"Най-нови",sortOldest:"Най-стари",loading:"Зареждаме актуална информация...",empty:"Не е намерена актуална информация в тази категория.",error:"Актуалната информация временно не е достъпна.",sourceTitle:"Актуални публични източници",sourceText:"PETS & DOGUE комбинира достъпни публични източници и запазва оригиналната връзка.",whatAdd:"Какво искате да добавите?",addLost:"Изгубен любимец",addSeen:"Видях любимец",addEvent:"Събитие или среща",addGroup:"Клуб или група",addHelp:"Нужна е помощ",addVolunteers:"Нужни са доброволци",addFoster:"Нужен е временен дом",addAdoption:"Любимец търси семейство",addNews:"Местна новина за животни",addPost:"Добави публикация",location:"Местоположение",title:"Заглавие",description:"Кратко описание",date:"Дата / час",photo:"URL на снимка (по избор)",cancel:"Отказ",publish:"Публикувай",source:"Източник",original:"Отвори оригиналния източник",showMap:"Покажи на картата",markFound:"Маркирай като намерено",published:"Публикувано",eventDate:"Дата на събитието",venue:"Място",distance:"Разстояние",today:"Днес",tomorrow:"Утре",thisWeek:"Тази седмица",upcoming:"Предстоящо",lostStatus:"ИЗГУБЕН",seenStatus:"ВИДЯН",foundStatus:"НАМЕРЕН",activeStatus:"АКТИВЕН",yourPost:"Вашата публикация",validation:"Добавете местоположение, заглавие и описание.",locationError:"Мястото не беше намерено.",geoError:"Не може да се получи местоположение."
 },
 
 el:{
-menu:"Ενότητες",profile:"Προφίλ",club:"Εγγραφή στο Club",magazine:"Έκδοση",cover:"Αστέρια εξωφύλλου",discounts:"Εκπτώσεις",places:"Pet-friendly μέρη",articles:"Άρθρα",photos:"Φωτογραφίες",travel:"Ταξίδια",fashion:"Μόδα",health:"Υγεία",community:"Κοινότητα",contests:"Διαγωνισμοί",helpNav:"Βοήθεια",marketplace:"Αγορά",partners:"Συνεργάτες",contact:"Επικοινωνία",
-heroTitle:"Βρείτε την κοινότητα ζώων κοντά σας",heroText:"Χαμένα και βρεμένα κατοικίδια, θεάσεις, εκθέσεις, συναντήσεις, βόλτες, εθελοντές, υιοθεσίες και τοπικά νέα.",locationPlaceholder:"Πόλη, περιοχή ή ταχυδρομικός κώδικας...",selectLocation:"Επιλέξτε τοποθεσία",selectedLocation:"Επιλεγμένη τοποθεσία: {location}",radius:"Ακτίνα αναζήτησης",filterTitle:"Τι ψάχνετε;",all:"Όλα",lost:"Χαμένα",seen:"Εθεάθησαν",found:"Βρέθηκαν",events:"Εκδηλώσεις",help:"Βοήθεια",volunteers:"Εθελοντές",foster:"Προσωρινή φιλοξενία",adoption:"Ψάχνουν οικογένεια",news:"Νέα",add:"Προσθήκη",foundLabel:"Βρέθηκαν:",sortRelevant:"Πιο σχετικά",sortNewest:"Νεότερα πρώτα",sortOldest:"Παλαιότερα πρώτα",loading:"Φόρτωση τρεχουσών πληροφοριών...",empty:"Δεν βρέθηκαν τρέχουσες πληροφορίες σε αυτήν την κατηγορία.",error:"Οι ζωντανές πληροφορίες δεν είναι προσωρινά διαθέσιμες.",sourceTitle:"Τρέχουσες δημόσιες πηγές",sourceText:"Το PETS & DOGUE συνδυάζει διαθέσιμες δημόσιες πηγές και διατηρεί τον αρχικό σύνδεσμο.",whatAdd:"Τι θέλετε να προσθέσετε;",addLost:"Χαμένο κατοικίδιο",addSeen:"Είδα κατοικίδιο",addEvent:"Εκδήλωση ή συνάντηση",addHelp:"Χρειάζεται βοήθεια",addVolunteers:"Χρειάζονται εθελοντές",addFoster:"Χρειάζεται φιλοξενία",addAdoption:"Κατοικίδιο ψάχνει οικογένεια",addNews:"Τοπικά νέα ζώων",addPost:"Προσθήκη δημοσίευσης",location:"Τοποθεσία",title:"Τίτλος",description:"Σύντομη περιγραφή",date:"Ημερομηνία / ώρα",photo:"URL φωτογραφίας (προαιρετικό)",cancel:"Ακύρωση",publish:"Δημοσίευση",source:"Πηγή",original:"Άνοιγμα αρχικής πηγής",showMap:"Εμφάνιση στον χάρτη",markFound:"Σήμανση ως βρέθηκε",published:"Δημοσιεύτηκε",eventDate:"Ημερομηνία εκδήλωσης",venue:"Χώρος",distance:"Απόσταση",today:"Σήμερα",tomorrow:"Αύριο",thisWeek:"Αυτή την εβδομάδα",upcoming:"Προσεχώς",lostStatus:"ΧΑΜΕΝΟ",seenStatus:"ΕΘΕΑΘΗ",foundStatus:"ΒΡΕΘΗΚΕ",activeStatus:"ΕΝΕΡΓΟ",yourPost:"Η δημοσίευσή σας",validation:"Προσθέστε τοποθεσία, τίτλο και περιγραφή.",locationError:"Η τοποθεσία δεν βρέθηκε.",geoError:"Δεν ήταν δυνατή η πρόσβαση στην τοποθεσία."
+magazine:"Έκδοση",cover:"Αστέρια εξωφύλλου",discounts:"Εκπτώσεις",places:"Pet-friendly μέρη",articles:"Άρθρα",photos:"Φωτογραφίες",fashion:"Μόδα",health:"Υγεία",community:"Κοινότητα",contests:"Διαγωνισμοί",helpNav:"Βοήθεια",marketplace:"Αγορά",partners:"Συνεργάτες",contact:"Επικοινωνία",
+heroTitle:"Βρείτε την κοινότητα ζώων κοντά σας",heroText:"Βρείτε χαμένα ζώα, τοπικές εκδηλώσεις, συναντήσεις, λέσχες, ομάδες γειτονιάς, βόλτες, εθελοντές, υιοθεσίες και νέα.",locationPlaceholder:"Πόλη, περιοχή ή ταχυδρομικός κώδικας...",selectLocation:"Επιλέξτε τοποθεσία",selectedLocation:"Επιλεγμένη τοποθεσία: {location}",radius:"Ακτίνα αναζήτησης",filterTitle:"Τι ψάχνετε;",all:"Όλα",lost:"Χαμένα",seen:"Εθεάθησαν",found:"Βρέθηκαν",events:"Εκδηλώσεις",groups:"Λέσχες και ομάδες",help:"Βοήθεια",volunteers:"Εθελοντές",foster:"Προσωρινή φιλοξενία",adoption:"Ψάχνουν οικογένεια",news:"Νέα",add:"Προσθήκη",foundLabel:"Βρέθηκαν:",sortRelevant:"Πιο σχετικά",sortNewest:"Νεότερα πρώτα",sortOldest:"Παλαιότερα πρώτα",loading:"Φόρτωση τρεχουσών πληροφοριών...",empty:"Δεν βρέθηκαν τρέχουσες πληροφορίες σε αυτήν την κατηγορία.",error:"Οι ζωντανές πληροφορίες δεν είναι προσωρινά διαθέσιμες.",sourceTitle:"Τρέχουσες δημόσιες πηγές",sourceText:"Το PETS & DOGUE συνδυάζει διαθέσιμες δημόσιες πηγές και διατηρεί τον αρχικό σύνδεσμο.",whatAdd:"Τι θέλετε να προσθέσετε;",addLost:"Χαμένο κατοικίδιο",addSeen:"Είδα κατοικίδιο",addEvent:"Εκδήλωση ή συνάντηση",addGroup:"Λέσχη ή ομάδα",addHelp:"Χρειάζεται βοήθεια",addVolunteers:"Χρειάζονται εθελοντές",addFoster:"Χρειάζεται φιλοξενία",addAdoption:"Κατοικίδιο ψάχνει οικογένεια",addNews:"Τοπικά νέα ζώων",addPost:"Προσθήκη δημοσίευσης",location:"Τοποθεσία",title:"Τίτλος",description:"Σύντομη περιγραφή",date:"Ημερομηνία / ώρα",photo:"URL φωτογραφίας (προαιρετικό)",cancel:"Ακύρωση",publish:"Δημοσίευση",source:"Πηγή",original:"Άνοιγμα αρχικής πηγής",showMap:"Εμφάνιση στον χάρτη",markFound:"Σήμανση ως βρέθηκε",published:"Δημοσιεύτηκε",eventDate:"Ημερομηνία εκδήλωσης",venue:"Χώρος",distance:"Απόσταση",today:"Σήμερα",tomorrow:"Αύριο",thisWeek:"Αυτή την εβδομάδα",upcoming:"Προσεχώς",lostStatus:"ΧΑΜΕΝΟ",seenStatus:"ΕΘΕΑΘΗ",foundStatus:"ΒΡΕΘΗΚΕ",activeStatus:"ΕΝΕΡΓΟ",yourPost:"Η δημοσίευσή σας",validation:"Προσθέστε τοποθεσία, τίτλο και περιγραφή.",locationError:"Η τοποθεσία δεν βρέθηκε.",geoError:"Δεν ήταν δυνατή η πρόσβαση στην τοποθεσία."
 },
 
 sv:{
-menu:"Sektioner",profile:"Profil",club:"Gå med i klubben",magazine:"Utgåva",cover:"Omslagsstjärnor",discounts:"Rabatter",places:"Djurvänliga platser",articles:"Artiklar",photos:"Foton",travel:"Resor",fashion:"Mode",health:"Hälsa",community:"Community",contests:"Tävlingar",helpNav:"Hjälp",marketplace:"Marknad",partners:"Partners",contact:"Kontakt",
-heroTitle:"Hitta djurcommunityn nära dig",heroText:"Försvunna och hittade djur, observationer, utställningar, träffar, promenader, volontärer, adoption och lokala djurnyheter.",locationPlaceholder:"Stad, område eller postnummer...",selectLocation:"Välj en plats",selectedLocation:"Vald plats: {location}",radius:"Sökradie",filterTitle:"Vad letar du efter?",all:"Alla",lost:"Försvunna",seen:"Sedda",found:"Hittade",events:"Evenemang",help:"Hjälp",volunteers:"Volontärer",foster:"Jourhem",adoption:"Söker familj",news:"Nyheter",add:"Lägg till",foundLabel:"Hittade:",sortRelevant:"Mest relevanta",sortNewest:"Nyaste först",sortOldest:"Äldsta först",loading:"Laddar aktuell information...",empty:"Ingen aktuell information hittades i denna kategori.",error:"Live-information är tillfälligt otillgänglig.",sourceTitle:"Aktuella offentliga källor",sourceText:"PETS & DOGUE kombinerar tillgängliga offentliga källor och behåller originallänken.",whatAdd:"Vad vill du lägga till?",addLost:"Försvunnet djur",addSeen:"Jag såg ett djur",addEvent:"Evenemang eller träff",addHelp:"Hjälp behövs",addVolunteers:"Volontärer behövs",addFoster:"Jourhem behövs",addAdoption:"Djur söker familj",addNews:"Lokal djurnyhet",addPost:"Lägg till inlägg",location:"Plats",title:"Rubrik",description:"Kort beskrivning",date:"Datum / tid",photo:"Foto-URL (valfritt)",cancel:"Avbryt",publish:"Publicera",source:"Källa",original:"Öppna originalkälla",showMap:"Visa på karta",markFound:"Markera som hittad",published:"Publicerat",eventDate:"Evenemangsdatum",venue:"Plats",distance:"Avstånd",today:"Idag",tomorrow:"Imorgon",thisWeek:"Den här veckan",upcoming:"Kommande",lostStatus:"FÖRSVUNNEN",seenStatus:"SEDD",foundStatus:"HITTAD",activeStatus:"AKTIV",yourPost:"Ditt inlägg",validation:"Lägg till plats, rubrik och beskrivning.",locationError:"Platsen hittades inte.",geoError:"Kunde inte hämta din position."
+magazine:"Utgåva",cover:"Omslagsstjärnor",discounts:"Rabatter",places:"Djurvänliga platser",articles:"Artiklar",photos:"Foton",fashion:"Mode",health:"Hälsa",community:"Community",contests:"Tävlingar",helpNav:"Hjälp",marketplace:"Marknad",partners:"Partners",contact:"Kontakt",
+heroTitle:"Hitta djurcommunityn nära dig",heroText:"Hitta försvunna djur, lokala evenemang, träffar, klubbar, områdesgrupper, promenader, volontärer, adoption och nyheter.",locationPlaceholder:"Stad, område eller postnummer...",selectLocation:"Välj en plats",selectedLocation:"Vald plats: {location}",radius:"Sökradie",filterTitle:"Vad letar du efter?",all:"Alla",lost:"Försvunna",seen:"Sedda",found:"Hittade",events:"Evenemang",groups:"Klubbar och grupper",help:"Hjälp",volunteers:"Volontärer",foster:"Jourhem",adoption:"Söker familj",news:"Nyheter",add:"Lägg till",foundLabel:"Hittade:",sortRelevant:"Mest relevanta",sortNewest:"Nyaste först",sortOldest:"Äldsta först",loading:"Laddar aktuell information...",empty:"Ingen aktuell information hittades i denna kategori.",error:"Live-information är tillfälligt otillgänglig.",sourceTitle:"Aktuella offentliga källor",sourceText:"PETS & DOGUE kombinerar tillgängliga offentliga källor och behåller originallänken.",whatAdd:"Vad vill du lägga till?",addLost:"Försvunnet djur",addSeen:"Jag såg ett djur",addEvent:"Evenemang eller träff",addGroup:"Klubb eller grupp",addHelp:"Hjälp behövs",addVolunteers:"Volontärer behövs",addFoster:"Jourhem behövs",addAdoption:"Djur söker familj",addNews:"Lokal djurnyhet",addPost:"Lägg till inlägg",location:"Plats",title:"Rubrik",description:"Kort beskrivning",date:"Datum / tid",photo:"Foto-URL (valfritt)",cancel:"Avbryt",publish:"Publicera",source:"Källa",original:"Öppna originalkälla",showMap:"Visa på karta",markFound:"Markera som hittad",published:"Publicerat",eventDate:"Evenemangsdatum",venue:"Plats",distance:"Avstånd",today:"Idag",tomorrow:"Imorgon",thisWeek:"Den här veckan",upcoming:"Kommande",lostStatus:"FÖRSVUNNEN",seenStatus:"SEDD",foundStatus:"HITTAD",activeStatus:"AKTIV",yourPost:"Ditt inlägg",validation:"Lägg till plats, rubrik och beskrivning.",locationError:"Platsen hittades inte.",geoError:"Kunde inte hämta din position."
 },
 
 da:{
-menu:"Sektioner",profile:"Profil",club:"Bliv medlem",magazine:"Udgave",cover:"Forsidestjerner",discounts:"Rabatter",places:"Kæledyrsvenlige steder",articles:"Artikler",photos:"Fotos",travel:"Rejser",fashion:"Mode",health:"Sundhed",community:"Fællesskab",contests:"Konkurrencer",helpNav:"Hjælp",marketplace:"Marked",partners:"Partnere",contact:"Kontakt",
-heroTitle:"Find dyrefællesskabet nær dig",heroText:"Forsvundne og fundne dyr, observationer, udstillinger, møder, gåture, frivillige, adoption og lokale dyrenyheder.",locationPlaceholder:"By, postnummer eller område...",selectLocation:"Vælg et sted",selectedLocation:"Valgt sted: {location}",radius:"Søgeradius",filterTitle:"Hvad leder du efter?",all:"Alle",lost:"Forsvundne",seen:"Set",found:"Fundet",events:"Begivenheder",help:"Hjælp",volunteers:"Frivillige",foster:"Plejehjem",adoption:"Søger familie",news:"Nyheder",add:"Tilføj",foundLabel:"Fundet:",sortRelevant:"Mest relevante",sortNewest:"Nyeste først",sortOldest:"Ældste først",loading:"Indlæser aktuelle oplysninger...",empty:"Ingen aktuelle oplysninger fundet i denne kategori.",error:"Live-information er midlertidigt utilgængelig.",sourceTitle:"Aktuelle offentlige kilder",sourceText:"PETS & DOGUE kombinerer tilgængelige offentlige kilder og bevarer det originale link.",whatAdd:"Hvad vil du tilføje?",addLost:"Forsvundet kæledyr",addSeen:"Jeg så et kæledyr",addEvent:"Event eller møde",addHelp:"Hjælp søges",addVolunteers:"Frivillige søges",addFoster:"Plejehjem søges",addAdoption:"Dyr søger familie",addNews:"Lokal dyrenyhed",addPost:"Tilføj opslag",location:"Sted",title:"Titel",description:"Kort beskrivelse",date:"Dato / tid",photo:"Foto-URL (valgfrit)",cancel:"Annuller",publish:"Udgiv",source:"Kilde",original:"Åbn original kilde",showMap:"Vis på kort",markFound:"Markér som fundet",published:"Udgivet",eventDate:"Dato for begivenhed",venue:"Sted",distance:"Afstand",today:"I dag",tomorrow:"I morgen",thisWeek:"Denne uge",upcoming:"Kommende",lostStatus:"FORSVUNDET",seenStatus:"SET",foundStatus:"FUNDET",activeStatus:"AKTIV",yourPost:"Dit opslag",validation:"Tilføj sted, titel og beskrivelse.",locationError:"Stedet kunne ikke findes.",geoError:"Kunne ikke hente din placering."
+magazine:"Udgave",cover:"Forsidestjerner",discounts:"Rabatter",places:"Kæledyrsvenlige steder",articles:"Artikler",photos:"Fotos",fashion:"Mode",health:"Sundhed",community:"Fællesskab",contests:"Konkurrencer",helpNav:"Hjælp",marketplace:"Marked",partners:"Partnere",contact:"Kontakt",
+heroTitle:"Find dyrefællesskabet nær dig",heroText:"Find forsvundne dyr, lokale events, møder, klubber, lokale grupper, gåture, frivillige, adoption og nyheder.",locationPlaceholder:"By, postnummer eller område...",selectLocation:"Vælg et sted",selectedLocation:"Valgt sted: {location}",radius:"Søgeradius",filterTitle:"Hvad leder du efter?",all:"Alle",lost:"Forsvundne",seen:"Set",found:"Fundet",events:"Begivenheder",groups:"Klubber og grupper",help:"Hjælp",volunteers:"Frivillige",foster:"Plejehjem",adoption:"Søger familie",news:"Nyheder",add:"Tilføj",foundLabel:"Fundet:",sortRelevant:"Mest relevante",sortNewest:"Nyeste først",sortOldest:"Ældste først",loading:"Indlæser aktuelle oplysninger...",empty:"Ingen aktuelle oplysninger fundet i denne kategori.",error:"Live-information er midlertidigt utilgængelig.",sourceTitle:"Aktuelle offentlige kilder",sourceText:"PETS & DOGUE kombinerer tilgængelige offentlige kilder og bevarer det originale link.",whatAdd:"Hvad vil du tilføje?",addLost:"Forsvundet kæledyr",addSeen:"Jeg så et kæledyr",addEvent:"Event eller møde",addGroup:"Klub eller gruppe",addHelp:"Hjælp søges",addVolunteers:"Frivillige søges",addFoster:"Plejehjem søges",addAdoption:"Dyr søger familie",addNews:"Lokal dyrenyhed",addPost:"Tilføj opslag",location:"Sted",title:"Titel",description:"Kort beskrivelse",date:"Dato / tid",photo:"Foto-URL (valgfrit)",cancel:"Annuller",publish:"Udgiv",source:"Kilde",original:"Åbn original kilde",showMap:"Vis på kort",markFound:"Markér som fundet",published:"Udgivet",eventDate:"Dato for begivenhed",venue:"Sted",distance:"Afstand",today:"I dag",tomorrow:"I morgen",thisWeek:"Denne uge",upcoming:"Kommende",lostStatus:"FORSVUNDET",seenStatus:"SET",foundStatus:"FUNDET",activeStatus:"AKTIV",yourPost:"Dit opslag",validation:"Tilføj sted, titel og beskrivelse.",locationError:"Stedet kunne ikke findes.",geoError:"Kunne ikke hente din placering."
 },
 
 no:{
-menu:"Seksjoner",profile:"Profil",club:"Bli med i klubben",magazine:"Utgave",cover:"Forsidestjerner",discounts:"Rabatter",places:"Kjæledyrvennlige steder",articles:"Artikler",photos:"Bilder",travel:"Reiser",fashion:"Mote",health:"Helse",community:"Fellesskap",contests:"Konkurranser",helpNav:"Hjelp",marketplace:"Marked",partners:"Partnere",contact:"Kontakt",
-heroTitle:"Finn dyrefellesskapet nær deg",heroText:"Savnete og funne dyr, observasjoner, utstillinger, treff, turer, frivillige, adopsjon og lokale dyrenyheter.",locationPlaceholder:"By, postnummer eller område...",selectLocation:"Velg et sted",selectedLocation:"Valgt sted: {location}",radius:"Søkeradius",filterTitle:"Hva leter du etter?",all:"Alle",lost:"Savnet",seen:"Sett",found:"Funnet",events:"Arrangementer",help:"Hjelp",volunteers:"Frivillige",foster:"Fosterhjem",adoption:"Søker familie",news:"Nyheter",add:"Legg til",foundLabel:"Funnet:",sortRelevant:"Mest relevante",sortNewest:"Nyeste først",sortOldest:"Eldste først",loading:"Laster aktuell informasjon...",empty:"Ingen aktuell informasjon funnet i denne kategorien.",error:"Live-informasjon er midlertidig utilgjengelig.",sourceTitle:"Aktuelle offentlige kilder",sourceText:"PETS & DOGUE kombinerer tilgjengelige offentlige kilder og beholder original lenke.",whatAdd:"Hva vil du legge til?",addLost:"Savnet kjæledyr",addSeen:"Jeg så et kjæledyr",addEvent:"Arrangement eller treff",addHelp:"Hjelp trengs",addVolunteers:"Frivillige trengs",addFoster:"Fosterhjem trengs",addAdoption:"Dyr søker familie",addNews:"Lokal dyrenyhet",addPost:"Legg til innlegg",location:"Sted",title:"Tittel",description:"Kort beskrivelse",date:"Dato / tid",photo:"Foto-URL (valgfritt)",cancel:"Avbryt",publish:"Publiser",source:"Kilde",original:"Åpne originalkilde",showMap:"Vis på kart",markFound:"Marker som funnet",published:"Publisert",eventDate:"Dato for arrangement",venue:"Sted",distance:"Avstand",today:"I dag",tomorrow:"I morgen",thisWeek:"Denne uken",upcoming:"Kommende",lostStatus:"SAVNET",seenStatus:"SETT",foundStatus:"FUNNET",activeStatus:"AKTIV",yourPost:"Ditt innlegg",validation:"Legg til sted, tittel og beskrivelse.",locationError:"Stedet ble ikke funnet.",geoError:"Kunne ikke hente posisjonen din."
+magazine:"Utgave",cover:"Forsidestjerner",discounts:"Rabatter",places:"Kjæledyrvennlige steder",articles:"Artikler",photos:"Bilder",fashion:"Mote",health:"Helse",community:"Fellesskap",contests:"Konkurranser",helpNav:"Hjelp",marketplace:"Marked",partners:"Partnere",contact:"Kontakt",
+heroTitle:"Finn dyrefellesskapet nær deg",heroText:"Finn savnede dyr, lokale arrangementer, møter, klubber, nabolagsgrupper, turer, frivillige, adopsjon og nyheter.",locationPlaceholder:"By, postnummer eller område...",selectLocation:"Velg et sted",selectedLocation:"Valgt sted: {location}",radius:"Søkeradius",filterTitle:"Hva leter du etter?",all:"Alle",lost:"Savnet",seen:"Sett",found:"Funnet",events:"Arrangementer",groups:"Klubber og grupper",help:"Hjelp",volunteers:"Frivillige",foster:"Fosterhjem",adoption:"Søker familie",news:"Nyheter",add:"Legg til",foundLabel:"Funnet:",sortRelevant:"Mest relevante",sortNewest:"Nyeste først",sortOldest:"Eldste først",loading:"Laster aktuell informasjon...",empty:"Ingen aktuell informasjon funnet i denne kategorien.",error:"Live-informasjon er midlertidig utilgjengelig.",sourceTitle:"Aktuelle offentlige kilder",sourceText:"PETS & DOGUE kombinerer tilgjengelige offentlige kilder og beholder original lenke.",whatAdd:"Hva vil du legge til?",addLost:"Savnet kjæledyr",addSeen:"Jeg så et kjæledyr",addEvent:"Arrangement eller treff",addGroup:"Klubb eller gruppe",addHelp:"Hjelp trengs",addVolunteers:"Frivillige trengs",addFoster:"Fosterhjem trengs",addAdoption:"Dyr søker familie",addNews:"Lokal dyrenyhet",addPost:"Legg til innlegg",location:"Sted",title:"Tittel",description:"Kort beskrivelse",date:"Dato / tid",photo:"Foto-URL (valgfritt)",cancel:"Avbryt",publish:"Publiser",source:"Kilde",original:"Åpne originalkilde",showMap:"Vis på kart",markFound:"Marker som funnet",published:"Publisert",eventDate:"Dato for arrangement",venue:"Sted",distance:"Avstand",today:"I dag",tomorrow:"I morgen",thisWeek:"Denne uken",upcoming:"Kommende",lostStatus:"SAVNET",seenStatus:"SETT",foundStatus:"FUNNET",activeStatus:"AKTIV",yourPost:"Ditt innlegg",validation:"Legg til sted, tittel og beskrivelse.",locationError:"Stedet ble ikke funnet.",geoError:"Kunne ikke hente posisjonen din."
 },
 
 fi:{
-menu:"Osiot",profile:"Profiili",club:"Liity klubiin",magazine:"Julkaisu",cover:"Kansitähdet",discounts:"Alennukset",places:"Lemmikkiystävälliset paikat",articles:"Artikkelit",photos:"Kuvat",travel:"Matkailu",fashion:"Muoti",health:"Terveys",community:"Yhteisö",contests:"Kilpailut",helpNav:"Apua",marketplace:"Markkinapaikka",partners:"Kumppanit",contact:"Yhteystiedot",
-heroTitle:"Löydä eläinyhteisö läheltäsi",heroText:"Kadonneet ja löytyneet eläimet, havainnot, näyttelyt, tapaamiset, kävelyt, vapaaehtoiset, adoptio ja paikalliset eläinuutiset.",locationPlaceholder:"Kaupunki, postinumero tai alue...",selectLocation:"Valitse sijainti",selectedLocation:"Valittu sijainti: {location}",radius:"Hakusäde",filterTitle:"Mitä etsit?",all:"Kaikki",lost:"Kadonneet",seen:"Nähty",found:"Löydetty",events:"Tapahtumat",help:"Apua",volunteers:"Vapaaehtoiset",foster:"Sijaiskoti",adoption:"Etsivät perhettä",news:"Uutiset",add:"Lisää",foundLabel:"Löydetty:",sortRelevant:"Osuvimmat",sortNewest:"Uusimmat",sortOldest:"Vanhimmat",loading:"Ladataan ajankohtaisia tietoja...",empty:"Tästä kategoriasta ei löytynyt ajankohtaista tietoa.",error:"Ajankohtaiset tiedot eivät ole tilapäisesti saatavilla.",sourceTitle:"Ajankohtaiset julkiset lähteet",sourceText:"PETS & DOGUE yhdistää saatavilla olevia julkisia lähteitä ja säilyttää alkuperäisen linkin.",whatAdd:"Mitä haluat lisätä?",addLost:"Kadonnut lemmikki",addSeen:"Näin lemmikin",addEvent:"Tapahtuma tai tapaaminen",addHelp:"Apua tarvitaan",addVolunteers:"Vapaaehtoisia tarvitaan",addFoster:"Sijaiskoti tarvitaan",addAdoption:"Eläin etsii perhettä",addNews:"Paikallinen eläinuutinen",addPost:"Lisää julkaisu",location:"Sijainti",title:"Otsikko",description:"Lyhyt kuvaus",date:"Päivä / aika",photo:"Kuvan URL (valinnainen)",cancel:"Peruuta",publish:"Julkaise",source:"Lähde",original:"Avaa alkuperäinen lähde",showMap:"Näytä kartalla",markFound:"Merkitse löytyneeksi",published:"Julkaistu",eventDate:"Tapahtuman päivä",venue:"Paikka",distance:"Etäisyys",today:"Tänään",tomorrow:"Huomenna",thisWeek:"Tällä viikolla",upcoming:"Tulossa",lostStatus:"KADONNUT",seenStatus:"NÄHTY",foundStatus:"LÖYTYNYT",activeStatus:"AKTIIVINEN",yourPost:"Julkaisusi",validation:"Lisää sijainti, otsikko ja kuvaus.",locationError:"Sijaintia ei löytynyt.",geoError:"Sijaintiasi ei voitu hakea."
+magazine:"Julkaisu",cover:"Kansitähdet",discounts:"Alennukset",places:"Lemmikkiystävälliset paikat",articles:"Artikkelit",photos:"Kuvat",fashion:"Muoti",health:"Terveys",community:"Yhteisö",contests:"Kilpailut",helpNav:"Apua",marketplace:"Markkinapaikka",partners:"Kumppanit",contact:"Yhteystiedot",
+heroTitle:"Löydä eläinyhteisö läheltäsi",heroText:"Löydä kadonneita eläimiä, paikallisia tapahtumia, tapaamisia, klubeja, alueellisia ryhmiä, kävelyitä, vapaaehtoisia ja uutisia.",locationPlaceholder:"Kaupunki, postinumero tai alue...",selectLocation:"Valitse sijainti",selectedLocation:"Valittu sijainti: {location}",radius:"Hakusäde",filterTitle:"Mitä etsit?",all:"Kaikki",lost:"Kadonneet",seen:"Nähty",found:"Löydetty",events:"Tapahtumat",groups:"Klubit ja ryhmät",help:"Apua",volunteers:"Vapaaehtoiset",foster:"Sijaiskoti",adoption:"Etsivät perhettä",news:"Uutiset",add:"Lisää",foundLabel:"Löydetty:",sortRelevant:"Osuvimmat",sortNewest:"Uusimmat",sortOldest:"Vanhimmat",loading:"Ladataan ajankohtaisia tietoja...",empty:"Tästä kategoriasta ei löytynyt ajankohtaista tietoa.",error:"Ajankohtaiset tiedot eivät ole tilapäisesti saatavilla.",sourceTitle:"Ajankohtaiset julkiset lähteet",sourceText:"PETS & DOGUE yhdistää saatavilla olevia julkisia lähteitä ja säilyttää alkuperäisen linkin.",whatAdd:"Mitä haluat lisätä?",addLost:"Kadonnut lemmikki",addSeen:"Näin lemmikin",addEvent:"Tapahtuma tai tapaaminen",addGroup:"Klubi tai ryhmä",addHelp:"Apua tarvitaan",addVolunteers:"Vapaaehtoisia tarvitaan",addFoster:"Sijaiskoti tarvitaan",addAdoption:"Eläin etsii perhettä",addNews:"Paikallinen eläinuutinen",addPost:"Lisää julkaisu",location:"Sijainti",title:"Otsikko",description:"Lyhyt kuvaus",date:"Päivä / aika",photo:"Kuvan URL (valinnainen)",cancel:"Peruuta",publish:"Julkaise",source:"Lähde",original:"Avaa alkuperäinen lähde",showMap:"Näytä kartalla",markFound:"Merkitse löytyneeksi",published:"Julkaistu",eventDate:"Tapahtuman päivä",venue:"Paikka",distance:"Etäisyys",today:"Tänään",tomorrow:"Huomenna",thisWeek:"Tällä viikolla",upcoming:"Tulossa",lostStatus:"KADONNUT",seenStatus:"NÄHTY",foundStatus:"LÖYTYNYT",activeStatus:"AKTIIVINEN",yourPost:"Julkaisusi",validation:"Lisää sijainti, otsikko ja kuvaus.",locationError:"Sijaintia ei löytynyt.",geoError:"Sijaintiasi ei voitu hakea."
 },
 
 tr:{
-menu:"Bölümler",profile:"Profil",club:"Kulübe Katıl",magazine:"Edisyon",cover:"Kapak Yıldızları",discounts:"İndirimler",places:"Evcil hayvan dostu yerler",articles:"Makaleler",photos:"Fotoğraflar",travel:"Seyahat",fashion:"Moda",health:"Sağlık",community:"Topluluk",contests:"Yarışmalar",helpNav:"Yardım",marketplace:"Pazar",partners:"Ortaklar",contact:"İletişim",
-heroTitle:"Yakınınızdaki hayvan topluluğunu bulun",heroText:"Kayıp ve bulunan hayvanlar, görülenler, sergiler, buluşmalar, yürüyüşler, gönüllüler, sahiplendirme ve yerel haberler.",locationPlaceholder:"Şehir, bölge veya posta kodu...",selectLocation:"Bir konum seçin",selectedLocation:"Seçilen konum: {location}",radius:"Arama yarıçapı",filterTitle:"Ne arıyorsunuz?",all:"Tümü",lost:"Kayıp",seen:"Görüldü",found:"Bulundu",events:"Etkinlikler",help:"Yardım",volunteers:"Gönüllüler",foster:"Geçici yuva",adoption:"Aile arıyor",news:"Haberler",add:"Ekle",foundLabel:"Bulundu:",sortRelevant:"En ilgili",sortNewest:"En yeni",sortOldest:"En eski",loading:"Güncel bilgiler yükleniyor...",empty:"Bu kategoride güncel bilgi bulunamadı.",error:"Canlı bilgi geçici olarak kullanılamıyor.",sourceTitle:"Güncel kamu kaynakları",sourceText:"PETS & DOGUE mevcut kamu kaynaklarını birleştirir ve orijinal bağlantıyı korur.",whatAdd:"Ne eklemek istersiniz?",addLost:"Kayıp evcil hayvan",addSeen:"Bir evcil hayvan gördüm",addEvent:"Etkinlik veya buluşma",addHelp:"Yardım gerekiyor",addVolunteers:"Gönüllü gerekiyor",addFoster:"Geçici yuva gerekiyor",addAdoption:"Hayvan aile arıyor",addNews:"Yerel hayvan haberi",addPost:"Topluluk gönderisi ekle",location:"Konum",title:"Başlık",description:"Kısa açıklama",date:"Tarih / saat",photo:"Fotoğraf URL'si (isteğe bağlı)",cancel:"İptal",publish:"Yayınla",source:"Kaynak",original:"Orijinal kaynağı aç",showMap:"Haritada göster",markFound:"Bulundu olarak işaretle",published:"Yayınlandı",eventDate:"Etkinlik tarihi",venue:"Yer",distance:"Mesafe",today:"Bugün",tomorrow:"Yarın",thisWeek:"Bu hafta",upcoming:"Yakında",lostStatus:"KAYIP",seenStatus:"GÖRÜLDÜ",foundStatus:"BULUNDU",activeStatus:"AKTİF",yourPost:"Gönderiniz",validation:"Konum, başlık ve açıklama ekleyin.",locationError:"Konum bulunamadı.",geoError:"Konumunuza erişilemedi."
+magazine:"Edisyon",cover:"Kapak Yıldızları",discounts:"İndirimler",places:"Evcil hayvan dostu yerler",articles:"Makaleler",photos:"Fotoğraflar",fashion:"Moda",health:"Sağlık",community:"Topluluk",contests:"Yarışmalar",helpNav:"Yardım",marketplace:"Pazar",partners:"Ortaklar",contact:"İletişim",
+heroTitle:"Yakınınızdaki hayvan topluluğunu bulun",heroText:"Kayıp hayvanlar, yerel etkinlikler, buluşmalar, kulüpler, mahalle grupları, yürüyüşler, gönüllüler, sahiplendirme ve haberleri bulun.",locationPlaceholder:"Şehir, bölge veya posta kodu...",selectLocation:"Bir konum seçin",selectedLocation:"Seçilen konum: {location}",radius:"Arama yarıçapı",filterTitle:"Ne arıyorsunuz?",all:"Tümü",lost:"Kayıp",seen:"Görüldü",found:"Bulundu",events:"Etkinlikler",groups:"Kulüpler ve gruplar",help:"Yardım",volunteers:"Gönüllüler",foster:"Geçici yuva",adoption:"Aile arıyor",news:"Haberler",add:"Ekle",foundLabel:"Bulundu:",sortRelevant:"En ilgili",sortNewest:"En yeni",sortOldest:"En eski",loading:"Güncel bilgiler yükleniyor...",empty:"Bu kategoride güncel bilgi bulunamadı.",error:"Canlı bilgi geçici olarak kullanılamıyor.",sourceTitle:"Güncel kamu kaynakları",sourceText:"PETS & DOGUE mevcut kamu kaynaklarını birleştirir ve orijinal bağlantıyı korur.",whatAdd:"Ne eklemek istersiniz?",addLost:"Kayıp evcil hayvan",addSeen:"Bir evcil hayvan gördüm",addEvent:"Etkinlik veya buluşma",addGroup:"Kulüp veya grup",addHelp:"Yardım gerekiyor",addVolunteers:"Gönüllü gerekiyor",addFoster:"Geçici yuva gerekiyor",addAdoption:"Hayvan aile arıyor",addNews:"Yerel hayvan haberi",addPost:"Topluluk gönderisi ekle",location:"Konum",title:"Başlık",description:"Kısa açıklama",date:"Tarih / saat",photo:"Fotoğraf URL'si (isteğe bağlı)",cancel:"İptal",publish:"Yayınla",source:"Kaynak",original:"Orijinal kaynağı aç",showMap:"Haritada göster",markFound:"Bulundu olarak işaretle",published:"Yayınlandı",eventDate:"Etkinlik tarihi",venue:"Yer",distance:"Mesafe",today:"Bugün",tomorrow:"Yarın",thisWeek:"Bu hafta",upcoming:"Yakında",lostStatus:"KAYIP",seenStatus:"GÖRÜLDÜ",foundStatus:"BULUNDU",activeStatus:"AKTİF",yourPost:"Gönderiniz",validation:"Konum, başlık ve açıklama ekleyin.",locationError:"Konum bulunamadı.",geoError:"Konumunuza erişilemedi."
 },
 
 ar:{
-menu:"الأقسام",profile:"الملف الشخصي",club:"انضم إلى النادي",magazine:"الإصدار",cover:"نجوم الغلاف",discounts:"الخصومات",places:"أماكن صديقة للحيوانات",articles:"المقالات",photos:"الصور",travel:"السفر",fashion:"الموضة",health:"الصحة",community:"المجتمع",contests:"المسابقات",helpNav:"المساعدة",marketplace:"السوق",partners:"الشركاء",contact:"اتصل بنا",
-heroTitle:"اعثر على مجتمع الحيوانات بالقرب منك",heroText:"حيوانات مفقودة وعُثر عليها، مشاهدات، معارض، لقاءات، نزهات، متطوعون، تبنٍ وأخبار محلية.",locationPlaceholder:"المدينة أو المنطقة أو الرمز البريدي...",selectLocation:"اختر موقعًا",selectedLocation:"الموقع المحدد: {location}",radius:"نطاق البحث",filterTitle:"ما الذي تبحث عنه؟",all:"الكل",lost:"مفقودة",seen:"شوهدت",found:"عُثر عليها",events:"فعاليات",help:"مساعدة",volunteers:"متطوعون",foster:"استضافة مؤقتة",adoption:"تبحث عن عائلة",news:"أخبار",add:"إضافة",foundLabel:"تم العثور:",sortRelevant:"الأكثر صلة",sortNewest:"الأحدث أولاً",sortOldest:"الأقدم أولاً",loading:"جارٍ تحميل المعلومات الحالية...",empty:"لم يتم العثور على معلومات حالية في هذه الفئة.",error:"المعلومات المباشرة غير متاحة مؤقتًا.",sourceTitle:"المصادر العامة الحالية",sourceText:"يجمع PETS & DOGUE المصادر العامة المتاحة ويحافظ على رابط المصدر الأصلي.",whatAdd:"ماذا تريد أن تضيف؟",addLost:"حيوان أليف مفقود",addSeen:"رأيت حيوانًا أليفًا",addEvent:"فعالية أو لقاء",addHelp:"مطلوب مساعدة",addVolunteers:"مطلوب متطوعون",addFoster:"مطلوب استضافة مؤقتة",addAdoption:"حيوان يبحث عن عائلة",addNews:"خبر محلي عن الحيوانات",addPost:"إضافة منشور",location:"الموقع",title:"العنوان",description:"وصف قصير",date:"التاريخ / الوقت",photo:"رابط الصورة (اختياري)",cancel:"إلغاء",publish:"نشر",source:"المصدر",original:"فتح المصدر الأصلي",showMap:"إظهار على الخريطة",markFound:"وضع علامة تم العثور عليه",published:"نُشر",eventDate:"تاريخ الفعالية",venue:"المكان",distance:"المسافة",today:"اليوم",tomorrow:"غدًا",thisWeek:"هذا الأسبوع",upcoming:"قريبًا",lostStatus:"مفقود",seenStatus:"شوهد",foundStatus:"تم العثور",activeStatus:"نشط",yourPost:"منشورك",validation:"أضف الموقع والعنوان والوصف.",locationError:"تعذر العثور على الموقع.",geoError:"تعذر الوصول إلى موقعك."
+magazine:"الإصدار",cover:"نجوم الغلاف",discounts:"الخصومات",places:"أماكن صديقة للحيوانات",articles:"المقالات",photos:"الصور",fashion:"الموضة",health:"الصحة",community:"المجتمع",contests:"المسابقات",helpNav:"المساعدة",marketplace:"السوق",partners:"الشركاء",contact:"اتصل بنا",
+heroTitle:"اعثر على مجتمع الحيوانات بالقرب منك",heroText:"اعثر على الحيوانات المفقودة والفعاليات المحلية واللقاءات والنوادي ومجموعات الأحياء والمشي والمتطوعين والتبني والأخبار.",locationPlaceholder:"المدينة أو المنطقة أو الرمز البريدي...",selectLocation:"اختر موقعًا",selectedLocation:"الموقع المحدد: {location}",radius:"نطاق البحث",filterTitle:"ما الذي تبحث عنه؟",all:"الكل",lost:"مفقودة",seen:"شوهدت",found:"عُثر عليها",events:"فعاليات",groups:"النوادي والمجموعات",help:"مساعدة",volunteers:"متطوعون",foster:"استضافة مؤقتة",adoption:"تبحث عن عائلة",news:"أخبار",add:"إضافة",foundLabel:"تم العثور:",sortRelevant:"الأكثر صلة",sortNewest:"الأحدث أولاً",sortOldest:"الأقدم أولاً",loading:"جارٍ تحميل المعلومات الحالية...",empty:"لم يتم العثور على معلومات حالية في هذه الفئة.",error:"المعلومات المباشرة غير متاحة مؤقتًا.",sourceTitle:"المصادر العامة الحالية",sourceText:"يجمع PETS & DOGUE المصادر العامة المتاحة ويحافظ على رابط المصدر الأصلي.",whatAdd:"ماذا تريد أن تضيف؟",addLost:"حيوان أليف مفقود",addSeen:"رأيت حيوانًا أليفًا",addEvent:"فعالية أو لقاء",addGroup:"نادٍ أو مجموعة",addHelp:"مطلوب مساعدة",addVolunteers:"مطلوب متطوعون",addFoster:"مطلوب استضافة مؤقتة",addAdoption:"حيوان يبحث عن عائلة",addNews:"خبر محلي عن الحيوانات",addPost:"إضافة منشور",location:"الموقع",title:"العنوان",description:"وصف قصير",date:"التاريخ / الوقت",photo:"رابط الصورة (اختياري)",cancel:"إلغاء",publish:"نشر",source:"المصدر",original:"فتح المصدر الأصلي",showMap:"إظهار على الخريطة",markFound:"وضع علامة تم العثور عليه",published:"نُشر",eventDate:"تاريخ الفعالية",venue:"المكان",distance:"المسافة",today:"اليوم",tomorrow:"غدًا",thisWeek:"هذا الأسبوع",upcoming:"قريبًا",lostStatus:"مفقود",seenStatus:"شوهد",foundStatus:"تم العثور",activeStatus:"نشط",yourPost:"منشورك",validation:"أضف الموقع والعنوان والوصف.",locationError:"تعذر العثور على الموقع.",geoError:"تعذر الوصول إلى موقعك."
 },
 
 hi:{
-menu:"अनुभाग",profile:"प्रोफ़ाइल",club:"क्लब में शामिल हों",magazine:"संस्करण",cover:"कवर स्टार्स",discounts:"छूट",places:"पालतू-अनुकूल स्थान",articles:"लेख",photos:"फ़ोटो",travel:"यात्रा",fashion:"फ़ैशन",health:"स्वास्थ्य",community:"समुदाय",contests:"प्रतियोगिताएँ",helpNav:"मदद",marketplace:"बाज़ार",partners:"साझेदार",contact:"संपर्क",
-heroTitle:"अपने पास पालतू समुदाय खोजें",heroText:"खोए और मिले पालतू, देखे गए जानवर, प्रदर्शनियाँ, मीटअप, वॉक, स्वयंसेवक, गोद लेना और स्थानीय पशु समाचार.",locationPlaceholder:"शहर, क्षेत्र या पोस्टकोड...",selectLocation:"स्थान चुनें",selectedLocation:"चुना गया स्थान: {location}",radius:"खोज दायरा",filterTitle:"आप क्या खोज रहे हैं?",all:"सभी",lost:"खोए हुए",seen:"देखे गए",found:"मिले",events:"कार्यक्रम",help:"मदद",volunteers:"स्वयंसेवक",foster:"अस्थायी घर",adoption:"परिवार खोज रहे",news:"समाचार",add:"जोड़ें",foundLabel:"मिले:",sortRelevant:"सबसे प्रासंगिक",sortNewest:"नए पहले",sortOldest:"पुराने पहले",loading:"ताज़ा जानकारी लोड हो रही है...",empty:"इस श्रेणी में कोई ताज़ा जानकारी नहीं मिली.",error:"लाइव जानकारी अभी उपलब्ध नहीं है.",sourceTitle:"वर्तमान सार्वजनिक स्रोत",sourceText:"PETS & DOGUE उपलब्ध सार्वजनिक स्रोतों को जोड़ता है और मूल लिंक रखता है.",whatAdd:"आप क्या जोड़ना चाहते हैं?",addLost:"खोया पालतू",addSeen:"पालतू देखा",addEvent:"कार्यक्रम या मीटअप",addHelp:"मदद चाहिए",addVolunteers:"स्वयंसेवक चाहिए",addFoster:"अस्थायी घर चाहिए",addAdoption:"पालतू परिवार खोज रहा",addNews:"स्थानीय पशु समाचार",addPost:"समुदाय पोस्ट जोड़ें",location:"स्थान",title:"शीर्षक",description:"संक्षिप्त विवरण",date:"तारीख / समय",photo:"फ़ोटो URL (वैकल्पिक)",cancel:"रद्द करें",publish:"प्रकाशित करें",source:"स्रोत",original:"मूल स्रोत खोलें",showMap:"मानचित्र पर दिखाएँ",markFound:"मिला हुआ चिह्नित करें",published:"प्रकाशित",eventDate:"कार्यक्रम की तारीख",venue:"स्थान",distance:"दूरी",today:"आज",tomorrow:"कल",thisWeek:"इस सप्ताह",upcoming:"आगामी",lostStatus:"खोया",seenStatus:"देखा गया",foundStatus:"मिला",activeStatus:"सक्रिय",yourPost:"आपकी पोस्ट",validation:"स्थान, शीर्षक और विवरण जोड़ें.",locationError:"स्थान नहीं मिला.",geoError:"आपका स्थान नहीं मिल सका."
+magazine:"संस्करण",cover:"कवर स्टार्स",discounts:"छूट",places:"पालतू-अनुकूल स्थान",articles:"लेख",photos:"फ़ोटो",fashion:"फ़ैशन",health:"स्वास्थ्य",community:"समुदाय",contests:"प्रतियोगिताएँ",helpNav:"मदद",marketplace:"बाज़ार",partners:"साझेदार",contact:"संपर्क",
+heroTitle:"अपने पास पालतू समुदाय खोजें",heroText:"खोए पालतू, स्थानीय कार्यक्रम, मीटअप, क्लब, पड़ोस समूह, वॉक, स्वयंसेवक, गोद लेने और स्थानीय पशु समाचार खोजें.",locationPlaceholder:"शहर, क्षेत्र या पोस्टकोड...",selectLocation:"स्थान चुनें",selectedLocation:"चुना गया स्थान: {location}",radius:"खोज दायरा",filterTitle:"आप क्या खोज रहे हैं?",all:"सभी",lost:"खोए हुए",seen:"देखे गए",found:"मिले",events:"कार्यक्रम",groups:"क्लब और समूह",help:"मदद",volunteers:"स्वयंसेवक",foster:"अस्थायी घर",adoption:"परिवार खोज रहे",news:"समाचार",add:"जोड़ें",foundLabel:"मिले:",sortRelevant:"सबसे प्रासंगिक",sortNewest:"नए पहले",sortOldest:"पुराने पहले",loading:"ताज़ा जानकारी लोड हो रही है...",empty:"इस श्रेणी में कोई ताज़ा जानकारी नहीं मिली.",error:"लाइव जानकारी अभी उपलब्ध नहीं है.",sourceTitle:"वर्तमान सार्वजनिक स्रोत",sourceText:"PETS & DOGUE उपलब्ध सार्वजनिक स्रोतों को जोड़ता है और मूल लिंक रखता है.",whatAdd:"आप क्या जोड़ना चाहते हैं?",addLost:"खोया पालतू",addSeen:"पालतू देखा",addEvent:"कार्यक्रम या मीटअप",addGroup:"क्लब या समूह",addHelp:"मदद चाहिए",addVolunteers:"स्वयंसेवक चाहिए",addFoster:"अस्थायी घर चाहिए",addAdoption:"पालतू परिवार खोज रहा",addNews:"स्थानीय पशु समाचार",addPost:"समुदाय पोस्ट जोड़ें",location:"स्थान",title:"शीर्षक",description:"संक्षिप्त विवरण",date:"तारीख / समय",photo:"फ़ोटो URL (वैकल्पिक)",cancel:"रद्द करें",publish:"प्रकाशित करें",source:"स्रोत",original:"मूल स्रोत खोलें",showMap:"मानचित्र पर दिखाएँ",markFound:"मिला हुआ चिह्नित करें",published:"प्रकाशित",eventDate:"कार्यक्रम की तारीख",venue:"स्थान",distance:"दूरी",today:"आज",tomorrow:"कल",thisWeek:"इस सप्ताह",upcoming:"आगामी",lostStatus:"खोया",seenStatus:"देखा गया",foundStatus:"मिला",activeStatus:"सक्रिय",yourPost:"आपकी पोस्ट",validation:"स्थान, शीर्षक और विवरण जोड़ें.",locationError:"स्थान नहीं मिला.",geoError:"आपका स्थान नहीं मिल सका."
 }
 
 };
+
 
 /* =========================================================
 LANGUAGE
@@ -3392,9 +3828,16 @@ se:"sv",
 dk:"da"
 };
 
-return aliases[code] || code;
+code =
+aliases[code] ||
+code;
+
+return UI[code]
+? code
+: "en";
 
 }
+
 
 function currentLanguage(){
 
@@ -3408,6 +3851,7 @@ document.documentElement.lang ||
 
 }
 
+
 function words(){
 
 return UI[
@@ -3417,15 +3861,29 @@ UI.en;
 
 }
 
+
+function menuWords(){
+
+return MENU_UI[
+currentLanguage()
+] ||
+MENU_UI.en;
+
+}
+
+
 function setText(id,value){
 
-const element = $(id);
+const element =
+$(id);
 
 if(element){
-element.textContent = value;
+element.textContent =
+value;
 }
 
 }
+
 
 function setMetaContent(
 id,
@@ -3445,6 +3903,7 @@ value
 }
 
 }
+
 
 function updateStructuredData(
 language,
@@ -3508,9 +3967,14 @@ error
 
 }
 
+
 function applyLanguage(){
 
-const t = words();
+const t =
+words();
+
+const m =
+menuWords();
 
 const language =
 currentLanguage();
@@ -3533,9 +3997,25 @@ language;
 
 }
 
-setText("menuTitle",t.menu);
-setText("menuProfile",t.profile);
-setText("menuClub",t.club);
+setText(
+"menuTitle",
+m.contents
+);
+
+setText(
+"menuProfile",
+m.signIn
+);
+
+setText(
+"menuClub",
+m.join
+);
+
+setText(
+"menuLanguageLabel",
+m.language.toUpperCase()
+);
 
 setText("menuMagazine",t.magazine);
 setText("menuCover",t.cover);
@@ -3596,6 +4076,7 @@ setText("fLost",t.lost);
 setText("fSeen",t.seen);
 setText("fFound",t.found);
 setText("fEvents",t.events);
+setText("fGroups",t.groups);
 setText("fHelp",t.help);
 setText("fVolunteers",t.volunteers);
 setText("fFoster",t.foster);
@@ -3607,6 +4088,7 @@ setText("mLost",t.lost);
 setText("mSeen",t.seen);
 setText("mFound",t.found);
 setText("mEvents",t.events);
+setText("mGroups",t.groups);
 setText("mHelp",t.help);
 setText("mVolunteers",t.volunteers);
 setText("mFoster",t.foster);
@@ -3617,6 +4099,7 @@ setText("legendLost",t.lost);
 setText("legendSeen",t.seen);
 setText("legendFound",t.found);
 setText("legendEvent",t.events);
+setText("legendGroup",t.groups);
 setText("legendHelp",t.help);
 
 setText("foundLabel",t.foundLabel);
@@ -3635,6 +4118,7 @@ setText("addTypeTitle",t.whatAdd);
 setText("addLost",t.addLost);
 setText("addSeen",t.addSeen);
 setText("addEvent",t.addEvent);
+setText("addGroup",t.addGroup);
 setText("addHelp",t.addHelp);
 setText("addVolunteers",t.addVolunteers);
 setText("addFoster",t.addFoster);
@@ -3709,8 +4193,9 @@ refreshNarration();
 
 }
 
+
 /* =========================================================
-ACCESSIBILITY / NARRATION REFRESH
+ACCESSIBILITY REFRESH
 ========================================================= */
 
 function refreshNarration(){
@@ -3750,15 +4235,140 @@ new CustomEvent(
 
 }
 
+
+/* =========================================================
+HEADER HIDE / SHOW
+========================================================= */
+
+let lastScrollY =
+window.scrollY;
+
+let scrollTicking =
+false;
+
+
+function showHeader(){
+
+$("siteHeader")
+?.classList
+.remove(
+"header-hidden"
+);
+
+}
+
+
+function hideHeader(){
+
+if(
+document.body
+.classList
+.contains(
+"menu-open"
+)
+){
+
+return;
+}
+
+$("siteHeader")
+?.classList
+.add(
+"header-hidden"
+);
+
+}
+
+
+function handleHeaderScroll(){
+
+const current =
+Math.max(
+0,
+window.scrollY
+);
+
+if(current <= 8){
+
+showHeader();
+
+lastScrollY =
+current;
+
+scrollTicking =
+false;
+
+return;
+
+}
+
+const delta =
+current -
+lastScrollY;
+
+if(
+delta > 7 &&
+current > 95
+){
+
+hideHeader();
+
+}else if(
+delta < -5
+){
+
+showHeader();
+
+}
+
+lastScrollY =
+current;
+
+scrollTicking =
+false;
+
+}
+
+
+window.addEventListener(
+"scroll",
+()=>{
+
+if(scrollTicking){
+return;
+}
+
+scrollTicking =
+true;
+
+requestAnimationFrame(
+handleHeaderScroll
+);
+
+},
+{
+passive:true
+}
+);
+
+
 /* =========================================================
 MENU
 ========================================================= */
 
 function openMenu(){
 
+showHeader();
+
 $("sideMenu")
 .classList
 .add("open");
+
+$("sideMenu")
+.setAttribute(
+"aria-hidden",
+"false"
+);
 
 $("menuOverlay")
 .classList
@@ -3766,9 +4376,12 @@ $("menuOverlay")
 
 document.body
 .classList
-.add("locked");
+.add(
+"menu-open"
+);
 
 }
+
 
 function closeMenu(){
 
@@ -3776,18 +4389,27 @@ $("sideMenu")
 .classList
 .remove("open");
 
+$("sideMenu")
+.setAttribute(
+"aria-hidden",
+"true"
+);
+
 $("menuOverlay")
 .classList
 .remove("show");
 
 document.body
 .classList
-.remove("locked");
+.remove(
+"menu-open"
+);
 
 }
 
+
 /* =========================================================
-LOCATION AUTOCOMPLETE
+LOCATION
 ========================================================= */
 
 $("locationInput")
@@ -3807,11 +4429,16 @@ $("clearLocation")
 Boolean(value)
 );
 
-clearTimeout(searchTimer);
+clearTimeout(
+searchTimer
+);
 
-if(value.length < 2){
+if(
+value.length < 2
+){
 
 hideSuggestions();
+
 return;
 
 }
@@ -3824,6 +4451,7 @@ setTimeout(
 
 }
 );
+
 
 $("locationInput")
 .addEventListener(
@@ -3844,6 +4472,7 @@ $("locationSuggestions")
 }
 );
 
+
 document.addEventListener(
 "click",
 event =>{
@@ -3861,10 +4490,15 @@ hideSuggestions();
 }
 );
 
+
 async function searchLocations(query){
 
-if(searchAbortController){
+if(
+searchAbortController
+){
+
 searchAbortController.abort();
+
 }
 
 searchAbortController =
@@ -3894,30 +4528,43 @@ searchAbortController.signal
 );
 
 if(!response.ok){
-throw new Error("location search failed");
+
+throw new Error(
+"location search failed"
+);
+
 }
 
 const results =
 await response.json();
 
-renderSuggestions(results);
+renderSuggestions(
+results
+);
 
 }catch(error){
 
-if(error.name !== "AbortError"){
+if(
+error.name !==
+"AbortError"
+){
+
 hideSuggestions();
-}
 
 }
 
 }
+
+}
+
 
 function renderSuggestions(results){
 
 const container =
 $("locationSuggestions");
 
-container.innerHTML = "";
+container.innerHTML =
+"";
 
 if(
 !Array.isArray(results) ||
@@ -3925,6 +4572,7 @@ if(
 ){
 
 hideSuggestions();
+
 return;
 
 }
@@ -3933,7 +4581,8 @@ results.forEach(
 result =>{
 
 const address =
-result.address || {};
+result.address ||
+{};
 
 const primary =
 address.city ||
@@ -3942,11 +4591,16 @@ address.village ||
 address.municipality ||
 address.suburb ||
 result.name ||
-String(result.display_name || "")
+String(
+result.display_name ||
+""
+)
 .split(",")[0];
 
 const button =
-document.createElement("button");
+document.createElement(
+"button"
+);
 
 button.type =
 "button";
@@ -3979,14 +4633,18 @@ primary
 )
 );
 
-container.appendChild(button);
+container.appendChild(
+button
+);
 
 }
 );
 
-container.classList.add("show");
+container.classList
+.add("show");
 
 }
+
 
 function selectLocationResult(
 result,
@@ -3994,6 +4652,7 @@ primary
 ){
 
 selectedLocation = {
+
 name:
 primary,
 
@@ -4001,10 +4660,15 @@ displayName:
 result.display_name,
 
 lat:
-Number(result.lat),
+Number(
+result.lat
+),
 
 lng:
-Number(result.lon)
+Number(
+result.lon
+)
+
 };
 
 $("locationInput").value =
@@ -4026,6 +4690,7 @@ loadAllDiscovery();
 
 }
 
+
 function hideSuggestions(){
 
 $("locationSuggestions")
@@ -4034,9 +4699,11 @@ $("locationSuggestions")
 
 }
 
+
 function clearLocationInput(){
 
-$("locationInput").value = "";
+$("locationInput").value =
+"";
 
 $("clearLocation")
 .classList
@@ -4044,9 +4711,11 @@ $("clearLocation")
 
 hideSuggestions();
 
-$("locationInput").focus();
+$("locationInput")
+.focus();
 
 }
+
 
 /* =========================================================
 MY LOCATION
@@ -4054,14 +4723,21 @@ MY LOCATION
 
 function useMyLocation(){
 
-if(!navigator.geolocation){
+if(
+!navigator.geolocation
+){
 
-alert(words().geoError);
+alert(
+words().geoError
+);
+
 return;
 
 }
 
-navigator.geolocation.getCurrentPosition(
+navigator.geolocation
+.getCurrentPosition(
+
 async position =>{
 
 const lat =
@@ -4090,14 +4766,19 @@ currentLanguage()
 );
 
 if(!response.ok){
-throw new Error("reverse geocoding failed");
+
+throw new Error(
+"reverse geocoding failed"
+);
+
 }
 
 const result =
 await response.json();
 
 const address =
-result.address || {};
+result.address ||
+{};
 
 const primary =
 address.city ||
@@ -4109,12 +4790,18 @@ result.display_name ||
 "Current location";
 
 selectedLocation = {
-name:primary,
+
+name:
+primary,
+
 displayName:
 result.display_name ||
 primary,
+
 lat,
+
 lng
+
 };
 
 $("locationInput").value =
@@ -4124,7 +4811,8 @@ $("clearLocation")
 .classList
 .add("show");
 
-categoryCache = {};
+categoryCache =
+{};
 
 updateSelectedLocationText();
 
@@ -4134,20 +4822,28 @@ loadAllDiscovery();
 
 }catch(error){
 
-alert(words().geoError);
+alert(
+words().geoError
+);
 
 }
 
 },
-()=>alert(words().geoError),
+
+()=>alert(
+words().geoError
+),
+
 {
 enableHighAccuracy:true,
 timeout:10000,
 maximumAge:120000
 }
+
 );
 
 }
+
 
 /* =========================================================
 LOCATION LABEL
@@ -4155,7 +4851,9 @@ LOCATION LABEL
 
 function updateSelectedLocationText(){
 
-if(!selectedLocation){
+if(
+!selectedLocation
+){
 
 setText(
 "selectedLocationText",
@@ -4178,6 +4876,7 @@ selectedLocation.name
 
 }
 
+
 /* =========================================================
 RADIUS
 ========================================================= */
@@ -4196,17 +4895,20 @@ $("radiusInput").value +
 }
 );
 
+
 $("radiusInput")
 .addEventListener(
 "change",
 ()=>{
 
-categoryCache = {};
+categoryCache =
+{};
 
 loadAllDiscovery();
 
 }
 );
+
 
 /* =========================================================
 MAP
@@ -4233,11 +4935,14 @@ maxZoom:19,
 attribution:"&copy; OpenStreetMap"
 }
 )
-.addTo(map);
+.addTo(
+map
+);
 
 moveMapToLocation();
 
 }
+
 
 function moveMapToLocation(){
 
@@ -4253,8 +4958,14 @@ selectedLocation.lng
 12
 );
 
-if(centerMarker){
-map.removeLayer(centerMarker);
+if(
+centerMarker
+){
+
+map.removeLayer(
+centerMarker
+);
+
 }
 
 const icon =
@@ -4272,27 +4983,40 @@ L.marker(
 selectedLocation.lat,
 selectedLocation.lng
 ],
-{icon}
+{
+icon
+}
 )
-.addTo(map);
+.addTo(
+map
+);
 
 }
+
 
 function clearResultMarkers(){
 
 resultMarkers.forEach(
 marker =>{
 
-if(map){
-map.removeLayer(marker);
+if(
+map
+){
+
+map.removeLayer(
+marker
+);
+
 }
 
 }
 );
 
-resultMarkers = [];
+resultMarkers =
+[];
 
 }
+
 
 function renderMapMarkers(items){
 
@@ -4328,19 +5052,24 @@ item.type
 )
 }
 )
-.addTo(map);
+.addTo(
+map
+);
 
 marker.on(
 "click",
 ()=>openDetail(item)
 );
 
-resultMarkers.push(marker);
+resultMarkers.push(
+marker
+);
 
 }
 );
 
 }
+
 
 function itemCoordinates(
 item,
@@ -4386,32 +5115,44 @@ radius
 
 }
 
+
 function markerIcon(type){
 
 const normalized =
-normalizeType(type);
+normalizeType(
+type
+);
 
 const symbols = {
+
 lost:"!",
 seen:"◉",
 found:"✓",
 event:"★",
+group:"♣",
 help:"+",
 volunteers:"♧",
 foster:"⌂",
 adoption:"♡",
 news:"◫"
+
 };
 
 return L.divIcon({
+
 className:"",
+
 html:
 `<div class="community-marker ${escapeHTML(normalized)}">${escapeHTML(symbols[normalized] || "•")}</div>`,
+
 iconSize:[39,39],
+
 iconAnchor:[19,19]
+
 });
 
 }
+
 
 /* =========================================================
 LOCAL POSTS
@@ -4436,23 +5177,28 @@ Array.isArray(parsed)
 
 }catch(error){
 
-localPosts = [];
+localPosts =
+[];
 
 }
 
 }
+
 
 function saveLocalPosts(){
 
 localStorage.setItem(
 LOCAL_POSTS_KEY,
-JSON.stringify(localPosts)
+JSON.stringify(
+localPosts
+)
 );
 
 }
 
+
 /* =========================================================
-API URL
+API
 ========================================================= */
 
 function discoveryUrl(category=""){
@@ -4482,11 +5228,15 @@ currentLanguage()
 ) +
 "&limit=60";
 
-if(category){
+if(
+category
+){
 
 url +=
 "&category=" +
-encodeURIComponent(category);
+encodeURIComponent(
+category
+);
 
 }
 
@@ -4494,14 +5244,19 @@ return url;
 
 }
 
+
 /* =========================================================
 LOAD ALL
 ========================================================= */
 
 async function loadAllDiscovery(){
 
-if(discoveryAbortController){
+if(
+discoveryAbortController
+){
+
 discoveryAbortController.abort();
+
 }
 
 discoveryAbortController =
@@ -4535,8 +5290,12 @@ const data =
 await response.json();
 
 allLiveItems =
-Array.isArray(data.items)
-? data.items.map(normalizeApiItem)
+Array.isArray(
+data.items
+)
+? data.items.map(
+normalizeApiItem
+)
 : [];
 
 currentCounts =
@@ -4553,13 +5312,21 @@ renderCurrentResults();
 
 }catch(error){
 
-if(error.name === "AbortError"){
+if(
+error.name ===
+"AbortError"
+){
+
 return;
+
 }
 
-console.error(error);
+console.error(
+error
+);
 
-allLiveItems = [];
+allLiveItems =
+[];
 
 currentCounts =
 emptyCounts();
@@ -4576,6 +5343,7 @@ hideLoading();
 
 }
 
+
 /* =========================================================
 CATEGORY REQUEST
 ========================================================= */
@@ -4583,21 +5351,26 @@ CATEGORY REQUEST
 async function loadCategory(category){
 
 if(
-category === "all"
+category ===
+"all"
 ){
 
 renderCurrentResults();
+
 return;
 
 }
 
 if(
 Array.isArray(
-categoryCache[category]
+categoryCache[
+category
+]
 )
 ){
 
 renderCurrentResults();
+
 return;
 
 }
@@ -4608,7 +5381,9 @@ try{
 
 const response =
 await fetch(
-discoveryUrl(category),
+discoveryUrl(
+category
+),
 {
 headers:{
 Accept:"application/json"
@@ -4627,18 +5402,37 @@ throw new Error(
 const data =
 await response.json();
 
-categoryCache[category] =
-Array.isArray(data.items)
-? data.items.map(normalizeApiItem)
+categoryCache[
+category
+] =
+Array.isArray(
+data.items
+)
+? data.items
+.map(
+normalizeApiItem
+)
+.filter(
+item =>
+normalizeType(
+item.type
+) ===
+category
+)
 : [];
 
 renderCurrentResults();
 
 }catch(error){
 
-console.error(error);
+console.error(
+error
+);
 
-categoryCache[category] = [];
+categoryCache[
+category
+] =
+[];
 
 renderCurrentResults();
 
@@ -4650,6 +5444,7 @@ hideLoading();
 
 }
 
+
 /* =========================================================
 API NORMALISATION
 ========================================================= */
@@ -4657,6 +5452,7 @@ API NORMALISATION
 function normalizeApiItem(item){
 
 return {
+
 id:
 item.id ||
 createId(),
@@ -4726,27 +5522,39 @@ typeof item.distanceKm ===
 
 lat:
 Number.isFinite(
-Number(item.lat)
+Number(
+item.lat
 )
-? Number(item.lat)
+)
+? Number(
+item.lat
+)
 : null,
 
 lng:
 Number.isFinite(
-Number(item.lng)
+Number(
+item.lng
 )
-? Number(item.lng)
+)
+? Number(
+item.lng
+)
 : null,
 
 official:
-Boolean(item.official),
+Boolean(
+item.official
+),
 
 isLive:true,
 
 isLocal:false
+
 };
 
 }
+
 
 /* =========================================================
 COUNTS
@@ -4755,35 +5563,47 @@ COUNTS
 function emptyCounts(){
 
 return {
+
 all:0,
 lost:0,
 seen:0,
 found:0,
 event:0,
+group:0,
 help:0,
 volunteers:0,
 foster:0,
 adoption:0,
 news:0
+
 };
 
 }
+
 
 function normalizeCounts(counts){
 
 const output =
 emptyCounts();
 
-if(!counts){
+if(
+!counts
+){
+
 return output;
+
 }
 
-Object.keys(output)
+Object.keys(
+output
+)
 .forEach(
 key =>{
 
 output[key] =
-Number(counts[key]) ||
+Number(
+counts[key]
+) ||
 0;
 
 }
@@ -4792,6 +5612,7 @@ Number(counts[key]) ||
 return output;
 
 }
+
 
 function mergedCounts(){
 
@@ -4810,7 +5631,9 @@ post.type
 );
 
 if(
-Object.prototype.hasOwnProperty.call(
+Object.prototype
+.hasOwnProperty
+.call(
 counts,
 type
 )
@@ -4827,12 +5650,15 @@ return counts;
 
 }
 
+
 function renderCounts(){
 
 const counts =
 mergedCounts();
 
-Object.entries(counts)
+Object.entries(
+counts
+)
 .forEach(
 ([
 key,
@@ -4857,6 +5683,7 @@ value;
 
 }
 
+
 /* =========================================================
 FILTER
 ========================================================= */
@@ -4875,18 +5702,24 @@ button =>{
 
 button.classList.toggle(
 "active",
-button.dataset.filter === filter
+button.dataset.filter ===
+filter
 );
 
 }
 );
 
 if(
-filter !== "all" &&
-!categoryCache[filter]
+filter !==
+"all" &&
+!categoryCache[
+filter
+]
 ){
 
-loadCategory(filter);
+loadCategory(
+filter
+);
 
 }else{
 
@@ -4896,13 +5729,17 @@ renderCurrentResults();
 
 }
 
+
 /* =========================================================
 CURRENT ITEMS
 ========================================================= */
 
 function sourceItemsForFilter(){
 
-if(currentFilter === "all"){
+if(
+currentFilter ===
+"all"
+){
 
 return allLiveItems;
 
@@ -4910,37 +5747,59 @@ return allLiveItems;
 
 if(
 Array.isArray(
-categoryCache[currentFilter]
+categoryCache[
+currentFilter
+]
 )
 ){
 
-return categoryCache[currentFilter];
-
-}
-
-return allLiveItems.filter(
+return categoryCache[
+currentFilter
+]
+.filter(
 item =>
-normalizeType(item.type) ===
+normalizeType(
+item.type
+) ===
 currentFilter
 );
 
 }
 
+return allLiveItems
+.filter(
+item =>
+normalizeType(
+item.type
+) ===
+currentFilter
+);
+
+}
+
+
 function localItemsForFilter(){
 
-if(currentFilter === "all"){
+if(
+currentFilter ===
+"all"
+){
 
 return localPosts;
 
 }
 
-return localPosts.filter(
+return localPosts
+.filter(
 item =>
-normalizeType(item.type) ===
+normalizeType(
+item.type
+) ===
 currentFilter
 );
 
 }
+
 
 /* =========================================================
 RENDER RESULTS
@@ -4956,10 +5815,14 @@ let items = [
 ];
 
 const sort =
-$("sortSelect")?.value ||
+$("sortSelect")
+?.value ||
 "relevance";
 
-if(sort === "newest"){
+if(
+sort ===
+"newest"
+){
 
 items.sort(
 (a,b) =>
@@ -4975,7 +5838,10 @@ a.publishedAt
 
 }
 
-if(sort === "oldest"){
+if(
+sort ===
+"oldest"
+){
 
 items.sort(
 (a,b) =>
@@ -4996,19 +5862,24 @@ items;
 
 setText(
 "visibleCount",
-String(items.length)
+String(
+items.length
+)
 );
 
 const grid =
 $("resultsGrid");
 
-grid.innerHTML = "";
+grid.innerHTML =
+"";
 
 items.forEach(
 item =>{
 
 grid.appendChild(
-createCard(item)
+createCard(
+item
+)
 );
 
 }
@@ -5027,11 +5898,14 @@ items.length === 0 &&
 .contains("show")
 );
 
-renderMapMarkers(items);
+renderMapMarkers(
+items
+);
 
 refreshNarration();
 
 }
+
 
 /* =========================================================
 CARD
@@ -5040,7 +5914,9 @@ CARD
 function createCard(item){
 
 const article =
-document.createElement("article");
+document.createElement(
+"article"
+);
 
 article.className =
 "result-card";
@@ -5060,10 +5936,14 @@ item.type
 
 const image =
 item.image ||
-fallbackImage(type);
+fallbackImage(
+type
+);
 
 const eventBadge =
-eventTimeLabel(item);
+eventTimeLabel(
+item
+);
 
 article.innerHTML =
 `
@@ -5170,7 +6050,9 @@ return;
 
 }
 
-openDetail(item);
+openDetail(
+item
+);
 
 }
 );
@@ -5180,7 +6062,8 @@ article.addEventListener(
 event =>{
 
 if(
-event.target !== article
+event.target !==
+article
 ){
 
 return;
@@ -5188,12 +6071,17 @@ return;
 }
 
 if(
-event.key === "Enter" ||
-event.key === " "
+event.key ===
+"Enter" ||
+event.key ===
+" "
 ){
 
 event.preventDefault();
-openDetail(item);
+
+openDetail(
+item
+);
 
 }
 
@@ -5204,8 +6092,9 @@ return article;
 
 }
 
+
 /* =========================================================
-DETAIL MODAL
+DETAIL
 ========================================================= */
 
 function openDetail(item){
@@ -5217,7 +6106,9 @@ item.type
 
 const image =
 item.image ||
-fallbackImage(type);
+fallbackImage(
+type
+);
 
 const originalButton =
 item.url
@@ -5235,10 +6126,14 @@ ${escapeHTML(words().original)}
 
 const mapButton =
 Number.isFinite(
-Number(item.lat)
+Number(
+item.lat
+)
 ) &&
 Number.isFinite(
-Number(item.lng)
+Number(
+item.lng
+)
 )
 ?`
 <button
@@ -5253,7 +6148,9 @@ ${escapeHTML(words().showMap)}
 
 const foundButton =
 item.isLocal &&
-normalizeType(item.type) ===
+normalizeType(
+item.type
+) ===
 "lost"
 ?`
 <button
@@ -5357,7 +6254,9 @@ ${foundButton}
 
 setText(
 "detailHeading",
-typeLabel(type)
+typeLabel(
+type
+)
 );
 
 $("detailOverlay")
@@ -5372,6 +6271,7 @@ refreshNarration();
 
 }
 
+
 function closeDetailModal(){
 
 $("detailOverlay")
@@ -5384,12 +6284,20 @@ document.body
 
 }
 
-function showExactMap(lat,lng){
+
+function showExactMap(
+lat,
+lng
+){
 
 closeDetailModal();
 
-if(!map){
+if(
+!map
+){
+
 return;
+
 }
 
 map.setView(
@@ -5401,13 +6309,16 @@ lng
 );
 
 document
-.querySelector(".map-shell")
+.querySelector(
+".map-shell"
+)
 .scrollIntoView({
 behavior:"smooth",
 block:"center"
 });
 
 }
+
 
 /* =========================================================
 ADD POST
@@ -5425,6 +6336,7 @@ document.body
 
 }
 
+
 function closeAddTypeModal(){
 
 $("addTypeOverlay")
@@ -5437,20 +6349,30 @@ document.body
 
 }
 
+
 function chooseAddType(type){
 
 selectedAddType =
-normalizeType(type);
+normalizeType(
+type
+);
 
 closeAddTypeModal();
 
 $("formLocation").value =
 selectedLocation.name;
 
-$("formTitle").value = "";
-$("formText").value = "";
-$("formDate").value = "";
-$("formImage").value = "";
+$("formTitle").value =
+"";
+
+$("formText").value =
+"";
+
+$("formDate").value =
+"";
+
+$("formImage").value =
+"";
 
 $("addFormOverlay")
 .classList
@@ -5461,6 +6383,7 @@ document.body
 .add("locked");
 
 }
+
 
 function closeAddFormModal(){
 
@@ -5473,6 +6396,7 @@ document.body
 .remove("locked");
 
 }
+
 
 function publishLocalPost(){
 
@@ -5506,18 +6430,25 @@ if(
 !description
 ){
 
-alert(words().validation);
+alert(
+words().validation
+);
+
 return;
 
 }
 
 const post = {
-id:createId(),
 
-type:selectedAddType,
+id:
+createId(),
+
+type:
+selectedAddType,
 
 status:
-selectedAddType === "found"
+selectedAddType ===
+"found"
 ? "found"
 : "active",
 
@@ -5529,18 +6460,23 @@ url:"",
 
 image,
 
-source:"PETS & DOGUE",
+source:
+"PETS & DOGUE",
 
-provider:"local",
+provider:
+"local",
 
 publishedAt:
 new Date()
 .toISOString(),
 
 eventStart:
-selectedAddType === "event" &&
+selectedAddType ===
+"event" &&
 date
-? new Date(date).toISOString()
+? new Date(
+date
+).toISOString()
 : null,
 
 location,
@@ -5551,16 +6487,21 @@ address:"",
 
 distanceKm:null,
 
-lat:selectedLocation.lat,
+lat:
+selectedLocation.lat,
 
-lng:selectedLocation.lng,
+lng:
+selectedLocation.lng,
 
 isLive:false,
 
 isLocal:true
+
 };
 
-localPosts.unshift(post);
+localPosts.unshift(
+post
+);
 
 saveLocalPosts();
 
@@ -5589,17 +6530,26 @@ renderCurrentResults();
 
 }
 
+
 function markPostFound(id){
 
 const post =
 localPosts.find(
 item =>
-String(item.id) ===
-String(id)
+String(
+item.id
+) ===
+String(
+id
+)
 );
 
-if(!post){
+if(
+!post
+){
+
 return;
+
 }
 
 post.type =
@@ -5615,6 +6565,7 @@ closeDetailModal();
 renderCurrentResults();
 
 }
+
 
 /* =========================================================
 STATUS
@@ -5636,6 +6587,7 @@ $("errorMessage")
 
 }
 
+
 function hideLoading(){
 
 $("loadingMessage")
@@ -5643,6 +6595,7 @@ $("loadingMessage")
 .remove("show");
 
 }
+
 
 function showError(){
 
@@ -5656,6 +6609,7 @@ $("errorMessage")
 
 }
 
+
 function hideError(){
 
 $("errorMessage")
@@ -5664,6 +6618,7 @@ $("errorMessage")
 
 }
 
+
 /* =========================================================
 TYPE / STATUS
 ========================================================= */
@@ -5671,50 +6626,97 @@ TYPE / STATUS
 function normalizeType(value){
 
 const type =
-String(value || "news")
+String(
+value ||
+"news"
+)
 .toLowerCase();
 
 const aliases = {
+
 events:"event",
+
+club:"group",
+
+clubs:"group",
+
+groups:"group",
+
+"group club":"group",
+
+community_group:"group",
+
+neighbourhood:"group",
+
+neighborhood:"group",
+
 volunteer:"volunteers",
+
 sighting:"seen",
+
 sightings:"seen",
+
 adopt:"adoption",
+
 "lost & found":"lost",
+
 lostfound:"lost"
+
 };
 
-return aliases[type] || type;
+return aliases[
+type
+] ||
+type;
 
 }
+
 
 function typeLabel(type){
 
 const t =
 words();
 
-const map = {
+const labels = {
+
 lost:t.lost,
+
 seen:t.seen,
+
 found:t.found,
+
 event:t.events,
+
+group:t.groups,
+
 help:t.help,
+
 volunteers:t.volunteers,
+
 foster:t.foster,
+
 adoption:t.adoption,
+
 news:t.news
+
 };
 
-return map[type] ||
+return labels[
+type
+] ||
 t.community;
 
 }
 
+
 function statusClass(item){
 
 return (
-item.status === "found" ||
-normalizeType(item.type) ===
+item.status ===
+"found" ||
+normalizeType(
+item.type
+) ===
 "found"
 )
 ? "found"
@@ -5722,39 +6724,57 @@ normalizeType(item.type) ===
 
 }
 
+
 function statusLabel(item){
 
 const t =
 words();
 
 const type =
-normalizeType(item.type);
+normalizeType(
+item.type
+);
 
 if(
-item.status === "found" ||
-type === "found"
+item.status ===
+"found" ||
+type ===
+"found"
 ){
 
 return t.foundStatus;
 
 }
 
-if(type === "lost"){
+if(
+type ===
+"lost"
+){
+
 return t.lostStatus;
+
 }
 
-if(type === "seen"){
+if(
+type ===
+"seen"
+){
+
 return t.seenStatus;
+
 }
 
 return t.activeStatus;
 
 }
 
+
 function eventTimeLabel(item){
 
 if(
-normalizeType(item.type) !==
+normalizeType(
+item.type
+) !==
 "event"
 ){
 
@@ -5768,46 +6788,89 @@ words();
 const status =
 item.eventStatus;
 
-if(status === "today"){
+if(
+status ===
+"today"
+){
+
 return t.today;
+
 }
 
-if(status === "tomorrow"){
+if(
+status ===
+"tomorrow"
+){
+
 return t.tomorrow;
+
 }
 
-if(status === "this_week"){
+if(
+status ===
+"this_week"
+){
+
 return t.thisWeek;
+
 }
 
-if(status === "upcoming"){
+if(
+status ===
+"upcoming"
+){
+
 return t.upcoming;
+
 }
 
-if(item.eventStart){
+if(
+item.eventStart
+){
 
 const days =
 (
-new Date(item.eventStart)
+new Date(
+item.eventStart
+)
 .getTime() -
 Date.now()
 ) /
 86400000;
 
-if(days >= 0 && days < 1){
+if(
+days >= 0 &&
+days < 1
+){
+
 return t.today;
+
 }
 
-if(days >= 1 && days < 2){
+if(
+days >= 1 &&
+days < 2
+){
+
 return t.tomorrow;
+
 }
 
-if(days >= 2 && days <= 7){
+if(
+days >= 2 &&
+days <= 7
+){
+
 return t.thisWeek;
+
 }
 
-if(days > 7){
+if(
+days > 7
+){
+
 return t.upcoming;
+
 }
 
 }
@@ -5816,6 +6879,7 @@ return t.activeStatus;
 
 }
 
+
 /* =========================================================
 DATE
 ========================================================= */
@@ -5823,26 +6887,44 @@ DATE
 function dateValue(value){
 
 const time =
-new Date(value || 0)
+new Date(
+value ||
+0
+)
 .getTime();
 
-return Number.isNaN(time)
+return Number.isNaN(
+time
+)
 ? 0
 : time;
 
 }
 
+
 function formatDate(value){
 
-if(!value){
+if(
+!value
+){
+
 return "";
+
 }
 
 const date =
-new Date(value);
+new Date(
+value
+);
 
-if(Number.isNaN(date.getTime())){
+if(
+Number.isNaN(
+date.getTime()
+)
+){
+
 return "";
+
 }
 
 try{
@@ -5855,27 +6937,43 @@ month:"short",
 year:"numeric"
 }
 )
-.format(date);
+.format(
+date
+);
 
 }catch(error){
 
-return date.toLocaleDateString();
+return date
+.toLocaleDateString();
 
 }
 
 }
+
 
 function formatDateTime(value){
 
-if(!value){
+if(
+!value
+){
+
 return "";
+
 }
 
 const date =
-new Date(value);
+new Date(
+value
+);
 
-if(Number.isNaN(date.getTime())){
+if(
+Number.isNaN(
+date.getTime()
+)
+){
+
 return "";
+
 }
 
 try{
@@ -5890,20 +6988,26 @@ hour:"2-digit",
 minute:"2-digit"
 }
 )
-.format(date);
+.format(
+date
+);
 
 }catch(error){
 
-return date.toLocaleString();
+return date
+.toLocaleString();
 
 }
 
 }
+
 
 function formatDistance(value){
 
 return (
-Number(value)
+Number(
+value
+)
 .toFixed(
 value < 10
 ? 1
@@ -5913,6 +7017,7 @@ value < 10
 );
 
 }
+
 
 /* =========================================================
 FALLBACK PHOTOS
@@ -5934,6 +7039,9 @@ found:
 event:
 "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=82",
 
+group:
+"https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=82",
+
 help:
 "https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=900&q=82",
 
@@ -5951,10 +7059,13 @@ news:
 
 };
 
-return images[type] ||
+return images[
+type
+] ||
 images.news;
 
 }
+
 
 /* =========================================================
 UTILITIES
@@ -5962,14 +7073,33 @@ UTILITIES
 
 function escapeHTML(value){
 
-return String(value || "")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+return String(
+value ||
+""
+)
+.replaceAll(
+"&",
+"&amp;"
+)
+.replaceAll(
+"<",
+"&lt;"
+)
+.replaceAll(
+">",
+"&gt;"
+)
+.replaceAll(
+'"',
+"&quot;"
+)
+.replaceAll(
+"'",
+"&#039;"
+);
 
 }
+
 
 function createId(){
 
@@ -5979,10 +7109,14 @@ Date.now()
 "-" +
 Math.random()
 .toString(36)
-.slice(2,10)
+.slice(
+2,
+10
+)
 );
 
 }
+
 
 /* =========================================================
 OVERLAYS
@@ -5993,8 +7127,13 @@ event,
 id
 ){
 
-if(event.target.id !== id){
+if(
+event.target.id !==
+id
+){
+
 return;
+
 }
 
 $(id)
@@ -6007,6 +7146,7 @@ document.body
 
 }
 
+
 /* =========================================================
 ESCAPE
 ========================================================= */
@@ -6015,8 +7155,13 @@ document.addEventListener(
 "keydown",
 event =>{
 
-if(event.key !== "Escape"){
+if(
+event.key !==
+"Escape"
+){
+
 return;
+
 }
 
 if(
@@ -6026,6 +7171,7 @@ $("detailOverlay")
 ){
 
 closeDetailModal();
+
 return;
 
 }
@@ -6037,6 +7183,7 @@ $("addFormOverlay")
 ){
 
 closeAddFormModal();
+
 return;
 
 }
@@ -6048,6 +7195,7 @@ $("addTypeOverlay")
 ){
 
 closeAddTypeModal();
+
 return;
 
 }
@@ -6057,8 +7205,9 @@ closeMenu();
 }
 );
 
+
 /* =========================================================
-LANGUAGE SELECT
+LANGUAGE
 ========================================================= */
 
 $("languageSelect")
@@ -6078,22 +7227,28 @@ language
 
 applyLanguage();
 
-categoryCache = {};
+categoryCache =
+{};
 
 loadAllDiscovery();
 
 }
 );
+
 
 window.addEventListener(
 "storage",
 event =>{
 
-if(event.key === LANGUAGE_KEY){
+if(
+event.key ===
+LANGUAGE_KEY
+){
 
 applyLanguage();
 
-categoryCache = {};
+categoryCache =
+{};
 
 loadAllDiscovery();
 
@@ -6101,6 +7256,7 @@ loadAllDiscovery();
 
 }
 );
+
 
 window.addEventListener(
 "languagechange",
@@ -6108,12 +7264,14 @@ window.addEventListener(
 
 applyLanguage();
 
-categoryCache = {};
+categoryCache =
+{};
 
 loadAllDiscovery();
 
 }
 );
+
 
 window.addEventListener(
 "petsdogue:languagechange",
@@ -6121,12 +7279,14 @@ window.addEventListener(
 
 applyLanguage();
 
-categoryCache = {};
+categoryCache =
+{};
 
 loadAllDiscovery();
 
 }
 );
+
 
 /* =========================================================
 INITIALISE
@@ -6143,13 +7303,20 @@ document.documentElement.lang =
 language;
 
 document.documentElement.dir =
-language === "ar"
+language ===
+"ar"
 ? "rtl"
 : "ltr";
 
-if(UI[language]){
+if(
+UI[
+language
+]
+){
+
 $("languageSelect").value =
 language;
+
 }
 
 $("locationInput").value =
@@ -6177,9 +7344,11 @@ requestAnimationFrame(
 ()=>{
 
 $("topNav")
-.querySelector(".active")
+.querySelector(
+".active"
+)
 ?.scrollIntoView({
-behavior:"instant",
+behavior:"auto",
 inline:"center",
 block:"nearest"
 });
@@ -6190,9 +7359,20 @@ block:"nearest"
 }
 );
 
+
+window.addEventListener(
+"pageshow",
+()=>{
+
+applyLanguage();
+
+showHeader();
+
+}
+);
+
 </script>
 
-<script src="/pets-dogue-shell.js?v=20260909-community-platform-1"></script>
 
 <script src="/pd-accessibility.js?v=20260909-community-reading-1"></script>
 
