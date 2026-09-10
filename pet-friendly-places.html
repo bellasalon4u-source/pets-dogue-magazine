@@ -25,7 +25,7 @@ content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-
 >
 
 <title>
-Pet-Friendly Places Near You | PETS & DOGUE
+Pet-Friendly Places Near You | PETS &amp; DOGUE
 </title>
 
 <link
@@ -67,7 +67,7 @@ content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
 
 <meta
 property="og:image:alt"
-content="PETS & DOGUE — The International Luxury Animal Magazine"
+content="PETS & DOGUE digital lifestyle platform — pet-friendly places"
 >
 
 <meta
@@ -116,42 +116,15 @@ crossorigin=""
 "name":"PETS & DOGUE"
 },
 "about":[
-{
-"@type":"Thing",
-"name":"Pet-friendly cafes"
-},
-{
-"@type":"Thing",
-"name":"Pet-friendly restaurants"
-},
-{
-"@type":"Thing",
-"name":"Pet-friendly hotels"
-},
-{
-"@type":"Thing",
-"name":"Dog-friendly parks"
-},
-{
-"@type":"Thing",
-"name":"Pet-friendly beaches"
-},
-{
-"@type":"Thing",
-"name":"Veterinary clinics"
-},
-{
-"@type":"Thing",
-"name":"Pet shops"
-},
-{
-"@type":"Thing",
-"name":"Pet grooming"
-},
-{
-"@type":"Thing",
-"name":"Animal events"
-}
+{"@type":"Thing","name":"Pet-friendly cafes"},
+{"@type":"Thing","name":"Pet-friendly restaurants"},
+{"@type":"Thing","name":"Pet-friendly hotels"},
+{"@type":"Thing","name":"Dog-friendly parks"},
+{"@type":"Thing","name":"Pet-friendly beaches"},
+{"@type":"Thing","name":"Veterinary clinics"},
+{"@type":"Thing","name":"Pet shops"},
+{"@type":"Thing","name":"Pet grooming"},
+{"@type":"Thing","name":"Animal events"}
 ]
 },
 {
@@ -177,151 +150,1442 @@ crossorigin=""
 </script>
 
 <style>
-:root{--black:#070707;--cream:#f4efe4;--white:#fff;--gold:#c99729;--green:#54ef0b;--green-dark:#24641c;--soft:#d9f8ca;--line:#cfc7b8;--grey:#777269;--yellow:#ffd75b;--shadow:0 18px 45px rgba(0,0,0,.10)}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--cream);color:#111;font-family:Arial,Helvetica,sans-serif}
-body.lock{overflow:hidden}
-button,input,select{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
-.page{max-width:1180px;margin:auto;padding:28px 26px 70px}
-.discovery{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(270px,.85fr);gap:28px}
-.copy h1{max-width:680px;margin:0 0 12px;font:400 clamp(37px,5vw,65px)/.94 Georgia,serif;letter-spacing:-2px}
-.copy p{max-width:630px;margin:0;color:#555047;font-size:17px;line-height:1.48}
-.search{position:relative}
-.search-row{display:grid;grid-template-columns:1fr 62px 62px;gap:10px;margin-top:20px}
-.search-box{height:60px;display:flex;align-items:center;gap:12px;padding:0 17px;border:1px solid var(--line);border-radius:17px;background:#fbf8f1}
-.search-box input{width:100%;border:0;outline:0;background:transparent;font-size:17px}
-.icon-btn{height:60px;border:0;border-radius:17px;background:var(--green);font-size:29px;font-weight:900}
-.icon-btn.add{background:#111;color:#fff}
-.suggestions{position:absolute;z-index:1500;top:67px;left:0;right:134px;max-height:330px;overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.16)}
-.suggestion{width:100%;padding:13px 15px;border:0;border-bottom:1px solid #eee;background:#fff;text-align:left}
-.suggestion strong,.suggestion small{display:block}
-.suggestion small{margin-top:3px;color:#777}
-.location-ok{margin-top:9px;color:var(--green-dark);font-size:12px;font-weight:900}
-.radius{margin-top:15px;padding:15px 6px 9px;border-top:1px solid var(--line)}
-.radius-top{display:flex;justify-content:space-between;align-items:center}
-.radius-top span{color:var(--grey);font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
-.radius-top strong{font-size:18px}
-.radius input{width:100%;margin-top:11px;accent-color:var(--green)}
-.map-shell{position:relative;margin-top:14px;overflow:hidden;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
-#map{height:250px}
-.map-add,.map-full{position:absolute;z-index:600;border:0;box-shadow:0 7px 20px rgba(0,0,0,.2)}
-.map-add{top:14px;right:14px;min-height:38px;padding:0 14px;border-radius:99px;background:#111;color:#fff;font-weight:900}
-.map-full{left:14px;bottom:14px;width:42px;height:42px;border-radius:50%;background:#fff;font-size:20px}
-.categories{display:grid;gap:8px}
-.cat{min-height:51px;width:100%;display:flex;align-items:center;gap:13px;padding:0 20px;border:1px solid var(--line);border-radius:999px;background:transparent;text-align:left;font-weight:900}
-.cat.active{background:#090909;color:#fff;border-color:#090909}
-.cat.saved{background:var(--soft);color:#173b13}
-.cat.saved.active{background:var(--green);color:#071007}
-.cat i{width:25px;font-style:normal;text-align:center;font-size:20px}
-.results-head{margin-top:26px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.count{font-size:18px;font-weight:900}
-.sort{min-height:48px;padding:0 17px;border:1px solid var(--line);border-radius:999px;background:#fbf8f1}
-.status{min-height:28px;margin:10px 0;color:var(--green-dark);font-weight:800}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.card{position:relative;min-height:390px;overflow:hidden;border-radius:18px;background:#111;box-shadow:var(--shadow);isolation:isolate}
-.card-bg,.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.card-bg{z-index:-4;background:linear-gradient(145deg,#1a2317,#070707)}
-.card img{z-index:-3}
-.card:after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(to bottom,rgba(0,0,0,.05) 15%,rgba(0,0,0,.18) 40%,rgba(0,0,0,.94) 100%)}
-.heart{position:absolute;z-index:3;top:14px;right:14px;width:48px;height:48px;border:0;border-radius:50%;background:rgba(0,0,0,.62);color:#fff;font-size:30px}
-.heart.on{color:#ff5b7f}
-.card-body{position:absolute;left:0;right:0;bottom:0;padding:18px;color:#fff}
-.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.badge{display:inline-flex;min-height:29px;align-items:center;padding:0 11px;border-radius:99px;background:var(--gold);color:#111;font-size:12px;font-weight:900}
-.rating{font-size:13px;font-weight:900}
-.card h2{margin:10px 0 7px;font:400 29px/1 Georgia,serif}
-.address{margin:0;color:rgba(255,255,255,.82);font-size:13px;line-height:1.35}
-.pet-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:11px}
-.pet{display:inline-flex;min-height:29px;align-items:center;padding:0 10px;border-radius:99px;background:var(--green);color:#0b1e06;font-size:11px;font-weight:900}
-.pet.unknown{background:#eee;color:#222}
-.pet.terrace{background:var(--yellow)}
-.pet.restrict{background:#eee;color:#222}
-.meta{margin-top:9px;font-size:11px}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.actions button{min-height:34px;padding:0 12px;border:1px solid rgba(255,255,255,.65);border-radius:99px;background:rgba(0,0,0,.5);color:#fff;font-size:10px;font-weight:900}
-.empty{grid-column:1/-1;padding:55px 20px;border:1px solid var(--line);border-radius:20px;background:#fbf8f1;text-align:center}
-.more{display:block;margin:22px auto 0;min-height:48px;padding:0 24px;border:0;border-radius:99px;background:#111;color:#fff;font-weight:900}
-.overlay{position:fixed;inset:0;z-index:12000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72)}
-.overlay.open{display:flex}
-.modal{width:min(560px,100%);max-height:90vh;overflow:auto;padding:22px;border-radius:22px;background:var(--cream);box-shadow:0 25px 70px rgba(0,0,0,.35)}
-.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.modal h2{margin:0;font:400 34px/1 Georgia,serif}
-.close{width:42px;height:42px;border:0;border-radius:50%;background:#111;color:#fff;font-size:25px}
-.field{margin-top:15px}
-.field label{display:block;margin-bottom:7px;font-size:12px;font-weight:900;text-transform:uppercase}
-.field input,.field select{width:100%;height:50px;padding:0 13px;border:1px solid var(--line);border-radius:13px;background:#fff}
-.submit{width:100%;min-height:50px;margin-top:16px;border:0;border-radius:13px;background:var(--green);font-weight:900}
-.policy-grid{display:grid;gap:8px;margin-top:15px}
-.policy-choice{display:flex;gap:9px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;font-weight:800}
-.policy-choice input{width:20px;height:20px;accent-color:var(--green)}
-.detail-photo{width:100%;height:220px;object-fit:cover;border-radius:15px;background:#111}
-.detail-meta{margin-top:10px;color:#666}
-.detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.detail-actions button{min-height:42px;padding:0 14px;border:1px solid #111;border-radius:99px;background:#fff;font-weight:900}
-.detail-actions .dark{background:#111;color:#fff}
-.actions button.booking,.detail-actions button.booking{background:var(--gold);border-color:var(--gold);color:#111}
-.actions button.maps,.detail-actions button.maps{background:#fff;color:#111;border-color:#fff}
-.route-app{width:100%;min-height:60px;display:flex;align-items:center;gap:14px;justify-content:flex-start;padding:0 20px;border:0;border-radius:16px;font-size:17px;font-weight:900}
-.route-app+.route-app{margin-top:12px}
-.route-app .route-logo{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.25);font-size:22px;flex:0 0 38px}
-.route-google{background:#4285f4;color:#fff}
-.route-waze{background:#33ccff;color:#07324a}
-.route-apple{background:#111;color:#fff}
-.fullmap{position:fixed;inset:0;z-index:11000;display:none;background:#fff}
-.fullmap.open{display:block}
-#fullMap{position:absolute;inset:0}
-.fullbar{position:absolute;z-index:800;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:calc(env(safe-area-inset-top) + 12px) 14px 20px;background:linear-gradient(#000,transparent);color:#fff;font-weight:900}
-.fullbar button{width:44px;height:44px;border:0;border-radius:50%;background:#fff;font-size:25px}
-.full-locate{position:absolute;z-index:850;right:18px;bottom:calc(env(safe-area-inset-bottom) + 24px);width:56px;height:56px;display:grid;place-items:center;border:0;border-radius:50%;background:#fff;color:#111;box-shadow:0 7px 22px rgba(0,0,0,.28);font-size:30px;font-weight:900}
-.marker{width:34px;height:34px;display:grid;place-items:center;border:3px solid #fff;border-radius:50%;background:var(--green);box-shadow:0 3px 12px rgba(0,0,0,.28)}
-.marker.veterinary{background:#e53935;color:#fff}
-.cat[data-cat="veterinary"] i{color:#e53935}
-.userdot{width:23px;height:23px;border:4px solid #fff;border-radius:50%;background:#2f82ef;box-shadow:0 0 0 8px rgba(47,130,239,.16),0 2px 10px rgba(0,0,0,.3)}
-html[dir="rtl"] .cat,html[dir="rtl"] .suggestion{text-align:right}
-html[dir="rtl"] .heart{right:auto;left:14px}
+:root{
+--black:#070707;
+--cream:#f4efe4;
+--white:#fff;
+--gold:#c99729;
+--gold-light:#efd47a;
+--green:#54ef0b;
+--green-dark:#24641c;
+--soft:#d9f8ca;
+--line:#cfc7b8;
+--grey:#777269;
+--yellow:#ffd75b;
+--shadow:0 18px 45px rgba(0,0,0,.10);
+--serif:Georgia,"Times New Roman",serif;
+}
+
+*{
+box-sizing:border-box;
+}
+
+html,
+body{
+margin:0;
+background:var(--cream);
+color:#111;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body.lock,
+body.menu-open{
+overflow:hidden;
+}
+
+button,
+input,
+select{
+font:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+a{
+color:inherit;
+text-decoration:none;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.site-header{
+position:sticky;
+top:0;
+z-index:7000;
+height:68px;
+background:#070707;
+color:#fff;
+border-bottom:1px solid #262626;
+display:grid;
+grid-template-columns:52px minmax(0,1fr) auto;
+align-items:center;
+padding:0 8px;
+transition:transform .22s ease;
+will-change:transform;
+}
+
+.site-header.header-hidden{
+transform:translateY(-100%);
+}
+
+.menu-button{
+width:42px;
+height:42px;
+border:0;
+background:none;
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap:5px;
+padding:7px;
+}
+
+.menu-button span{
+display:block;
+width:27px;
+height:2px;
+background:#fff;
+border-radius:20px;
+}
+
+.brand{
+justify-self:center;
+text-align:center;
+font-family:var(--serif);
+color:var(--gold);
+line-height:.86;
+min-width:0;
+}
+
+.brand small{
+display:block;
+font-size:8px;
+letter-spacing:3px;
+}
+
+.brand strong{
+display:block;
+font-size:25px;
+font-weight:400;
+letter-spacing:2px;
+margin-top:5px;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.home-button{
+width:38px;
+height:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+border:1px solid #3e3e3e;
+border-radius:12px;
+background:#111;
+color:#fff;
+font-size:22px;
+}
+
+.header-language{
+height:38px;
+min-width:70px;
+padding:0 5px;
+border:1px solid #444;
+background:#111;
+color:#fff;
+font-size:8px;
+font-weight:900;
+}
+
+/* =========================================================
+UNIFIED SIDE MENU
+========================================================= */
+
+.pd-menu-overlay{
+position:fixed;
+inset:0;
+z-index:15000;
+background:rgba(0,0,0,.68);
+backdrop-filter:blur(3px);
+opacity:0;
+visibility:hidden;
+transition:.22s;
+}
+
+.pd-menu-overlay.open{
+opacity:1;
+visibility:visible;
+}
+
+.pd-drawer{
+position:fixed;
+left:0;
+top:0;
+z-index:15100;
+width:min(78vw,390px);
+min-width:286px;
+height:100dvh;
+background:#f7f4ed;
+color:#111;
+transform:translateX(-102%);
+transition:transform .24s ease;
+box-shadow:20px 0 55px rgba(0,0,0,.28);
+overflow:hidden;
+display:flex;
+flex-direction:column;
+}
+
+.pd-drawer.open{
+transform:translateX(0);
+}
+
+html[dir="rtl"] .pd-drawer{
+left:auto;
+right:0;
+transform:translateX(102%);
+}
+
+html[dir="rtl"] .pd-drawer.open{
+transform:translateX(0);
+}
+
+.pd-drawer-head{
+height:86px;
+flex:none;
+background:#070707;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 17px;
+}
+
+.pd-drawer-title{
+font:normal 31px/1 var(--serif);
+margin:0;
+}
+
+.pd-drawer-close{
+width:43px;
+height:43px;
+border:1px solid #555;
+border-radius:50%;
+background:transparent;
+color:#fff;
+font-size:27px;
+line-height:1;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.pd-drawer-scroll{
+overflow-y:auto;
+padding:12px 11px 24px;
+}
+
+.pd-account-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-bottom:12px;
+}
+
+.pd-account-button{
+height:48px;
+border-radius:999px;
+border:2px solid #171717;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0 10px;
+font-size:12px;
+font-weight:900;
+background:#fff;
+text-align:center;
+}
+
+.pd-account-button.club{
+background:#65e51f;
+border-color:#65e51f;
+color:#111;
+}
+
+.pd-language-label{
+display:block;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.6px;
+color:#777;
+text-transform:uppercase;
+margin:0 3px 6px;
+}
+
+.pd-language-select{
+width:100%;
+height:51px;
+border:2px solid #1b1b1b;
+border-radius:999px;
+background:#fff;
+color:#111;
+padding:0 15px;
+font-weight:800;
+margin-bottom:12px;
+outline:0;
+}
+
+.pd-drawer-list{
+display:grid;
+gap:7px;
+}
+
+.pd-drawer-card{
+display:grid;
+grid-template-columns:82px minmax(0,1fr);
+min-height:82px;
+border:2px solid #191919;
+border-radius:18px;
+background:#fff;
+overflow:hidden;
+}
+
+.pd-drawer-card.active{
+background:#0b0b0b;
+color:#fff;
+}
+
+.pd-drawer-card img{
+display:block;
+width:82px;
+height:100%;
+min-height:82px;
+object-fit:cover;
+}
+
+.pd-drawer-copy{
+padding:10px 11px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+min-width:0;
+}
+
+.pd-drawer-name{
+font:700 19px/1 var(--serif);
+}
+
+.pd-drawer-card.active .pd-drawer-name{
+color:var(--gold-light);
+}
+
+.pd-drawer-desc{
+margin-top:4px;
+font-size:11px;
+line-height:1.25;
+color:#706c66;
+}
+
+.pd-drawer-card.active .pd-drawer-desc{
+color:#ddd;
+}
+
+/* =========================================================
+PAGE
+========================================================= */
+
+.page{
+max-width:1180px;
+margin:auto;
+padding:28px 26px 70px;
+}
+
+.discovery{
+display:grid;
+grid-template-columns:minmax(0,1.55fr) minmax(270px,.85fr);
+gap:28px;
+}
+
+.copy h1{
+max-width:680px;
+margin:0 0 12px;
+font:400 clamp(37px,5vw,65px)/.94 Georgia,serif;
+letter-spacing:-2px;
+}
+
+.copy p{
+max-width:630px;
+margin:0;
+color:#555047;
+font-size:17px;
+line-height:1.48;
+}
+
+.search{
+position:relative;
+}
+
+.search-row{
+display:grid;
+grid-template-columns:1fr 62px 62px;
+gap:10px;
+margin-top:20px;
+}
+
+.search-box{
+height:60px;
+display:flex;
+align-items:center;
+gap:12px;
+padding:0 17px;
+border:1px solid var(--line);
+border-radius:17px;
+background:#fbf8f1;
+}
+
+.search-box input{
+width:100%;
+border:0;
+outline:0;
+background:transparent;
+font-size:17px;
+}
+
+.icon-btn{
+height:60px;
+border:0;
+border-radius:17px;
+background:var(--green);
+font-size:29px;
+font-weight:900;
+}
+
+.icon-btn.add{
+background:#111;
+color:#fff;
+}
+
+.suggestions{
+position:absolute;
+z-index:1500;
+top:67px;
+left:0;
+right:134px;
+max-height:330px;
+overflow:auto;
+border:1px solid var(--line);
+border-radius:16px;
+background:#fff;
+box-shadow:0 18px 40px rgba(0,0,0,.16);
+}
+
+.suggestion{
+width:100%;
+padding:13px 15px;
+border:0;
+border-bottom:1px solid #eee;
+background:#fff;
+text-align:left;
+}
+
+.suggestion strong,
+.suggestion small{
+display:block;
+}
+
+.suggestion small{
+margin-top:3px;
+color:#777;
+}
+
+.location-ok{
+margin-top:9px;
+color:var(--green-dark);
+font-size:12px;
+font-weight:900;
+}
+
+.radius{
+margin-top:15px;
+padding:15px 6px 9px;
+border-top:1px solid var(--line);
+}
+
+.radius-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.radius-top span{
+color:var(--grey);
+font-size:12px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+.radius-top strong{
+font-size:18px;
+}
+
+.radius input{
+width:100%;
+margin-top:11px;
+accent-color:var(--green);
+}
+
+.map-shell{
+position:relative;
+margin-top:14px;
+overflow:hidden;
+border:1px solid var(--line);
+border-radius:20px;
+box-shadow:var(--shadow);
+}
+
+#map{
+height:250px;
+}
+
+.map-add,
+.map-full{
+position:absolute;
+z-index:600;
+border:0;
+box-shadow:0 7px 20px rgba(0,0,0,.2);
+}
+
+.map-add{
+top:14px;
+right:14px;
+min-height:38px;
+padding:0 14px;
+border-radius:99px;
+background:#111;
+color:#fff;
+font-weight:900;
+}
+
+.map-full{
+left:14px;
+bottom:14px;
+width:42px;
+height:42px;
+border-radius:50%;
+background:#fff;
+font-size:20px;
+}
+
+.categories{
+display:grid;
+gap:8px;
+}
+
+.cat{
+min-height:51px;
+width:100%;
+display:flex;
+align-items:center;
+gap:13px;
+padding:0 20px;
+border:1px solid var(--line);
+border-radius:999px;
+background:transparent;
+text-align:left;
+font-weight:900;
+}
+
+.cat.active{
+background:#090909;
+color:#fff;
+border-color:#090909;
+}
+
+.cat.saved{
+background:var(--soft);
+color:#173b13;
+}
+
+.cat.saved.active{
+background:var(--green);
+color:#071007;
+}
+
+.cat i{
+width:25px;
+font-style:normal;
+text-align:center;
+font-size:20px;
+}
+
+.results-head{
+margin-top:26px;
+padding-top:22px;
+border-top:1px solid var(--line);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+}
+
+.count{
+font-size:18px;
+font-weight:900;
+}
+
+.sort{
+min-height:48px;
+padding:0 17px;
+border:1px solid var(--line);
+border-radius:999px;
+background:#fbf8f1;
+}
+
+.status{
+min-height:28px;
+margin:10px 0;
+color:var(--green-dark);
+font-weight:800;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px;
+}
+
+.card{
+position:relative;
+min-height:390px;
+overflow:hidden;
+border-radius:18px;
+background:#111;
+box-shadow:var(--shadow);
+isolation:isolate;
+}
+
+.card-bg,
+.card img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.card-bg{
+z-index:-4;
+background:linear-gradient(145deg,#1a2317,#070707);
+}
+
+.card img{
+z-index:-3;
+}
+
+.card:after{
+content:"";
+position:absolute;
+inset:0;
+z-index:-2;
+background:linear-gradient(to bottom,rgba(0,0,0,.05) 15%,rgba(0,0,0,.18) 40%,rgba(0,0,0,.94) 100%);
+}
+
+.heart{
+position:absolute;
+z-index:3;
+top:14px;
+right:14px;
+width:48px;
+height:48px;
+border:0;
+border-radius:50%;
+background:rgba(0,0,0,.62);
+color:#fff;
+font-size:30px;
+}
+
+.heart.on{
+color:#ff5b7f;
+}
+
+.card-body{
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+padding:18px;
+color:#fff;
+}
+
+.card-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+}
+
+.badge{
+display:inline-flex;
+min-height:29px;
+align-items:center;
+padding:0 11px;
+border-radius:99px;
+background:var(--gold);
+color:#111;
+font-size:12px;
+font-weight:900;
+}
+
+.rating{
+font-size:13px;
+font-weight:900;
+}
+
+.card h2{
+margin:10px 0 7px;
+font:400 29px/1 Georgia,serif;
+}
+
+.address{
+margin:0;
+color:rgba(255,255,255,.82);
+font-size:13px;
+line-height:1.35;
+}
+
+.pet-row{
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+gap:8px;
+margin-top:11px;
+}
+
+.pet{
+display:inline-flex;
+min-height:29px;
+align-items:center;
+padding:0 10px;
+border-radius:99px;
+background:var(--green);
+color:#0b1e06;
+font-size:11px;
+font-weight:900;
+}
+
+.pet.unknown{
+background:#eee;
+color:#222;
+}
+
+.pet.terrace{
+background:var(--yellow);
+}
+
+.pet.restrict{
+background:#eee;
+color:#222;
+}
+
+.meta{
+margin-top:9px;
+font-size:11px;
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:12px;
+}
+
+.actions button{
+min-height:34px;
+padding:0 12px;
+border:1px solid rgba(255,255,255,.65);
+border-radius:99px;
+background:rgba(0,0,0,.5);
+color:#fff;
+font-size:10px;
+font-weight:900;
+}
+
+.empty{
+grid-column:1/-1;
+padding:55px 20px;
+border:1px solid var(--line);
+border-radius:20px;
+background:#fbf8f1;
+text-align:center;
+}
+
+.more{
+display:block;
+margin:22px auto 0;
+min-height:48px;
+padding:0 24px;
+border:0;
+border-radius:99px;
+background:#111;
+color:#fff;
+font-weight:900;
+}
+
+/* =========================================================
+MODALS
+========================================================= */
+
+.overlay{
+position:fixed;
+inset:0;
+z-index:12000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+background:rgba(0,0,0,.72);
+}
+
+.overlay.open{
+display:flex;
+}
+
+.modal{
+width:min(560px,100%);
+max-height:90vh;
+overflow:auto;
+padding:22px;
+border-radius:22px;
+background:var(--cream);
+box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.modal-head{
+display:flex;
+justify-content:space-between;
+gap:12px;
+align-items:flex-start;
+}
+
+.modal h2{
+margin:0;
+font:400 34px/1 Georgia,serif;
+}
+
+.close{
+width:42px;
+height:42px;
+border:0;
+border-radius:50%;
+background:#111;
+color:#fff;
+font-size:25px;
+}
+
+.field{
+margin-top:15px;
+}
+
+.field label{
+display:block;
+margin-bottom:7px;
+font-size:12px;
+font-weight:900;
+text-transform:uppercase;
+}
+
+.field input,
+.field select{
+width:100%;
+height:50px;
+padding:0 13px;
+border:1px solid var(--line);
+border-radius:13px;
+background:#fff;
+}
+
+.submit{
+width:100%;
+min-height:50px;
+margin-top:16px;
+border:0;
+border-radius:13px;
+background:var(--green);
+font-weight:900;
+}
+
+.policy-grid{
+display:grid;
+gap:8px;
+margin-top:15px;
+}
+
+.policy-choice{
+display:flex;
+gap:9px;
+align-items:center;
+padding:12px;
+border:1px solid var(--line);
+border-radius:13px;
+background:#fff;
+font-weight:800;
+}
+
+.policy-choice input{
+width:20px;
+height:20px;
+accent-color:var(--green);
+}
+
+.detail-photo{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:15px;
+background:#111;
+}
+
+.detail-meta{
+margin-top:10px;
+color:#666;
+}
+
+.detail-actions{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-top:16px;
+}
+
+.detail-actions button{
+min-height:42px;
+padding:0 14px;
+border:1px solid #111;
+border-radius:99px;
+background:#fff;
+font-weight:900;
+}
+
+.detail-actions .dark{
+background:#111;
+color:#fff;
+}
+
+.actions button.booking,
+.detail-actions button.booking{
+background:var(--gold);
+border-color:var(--gold);
+color:#111;
+}
+
+.actions button.maps,
+.detail-actions button.maps{
+background:#fff;
+color:#111;
+border-color:#fff;
+}
+
+.route-app{
+width:100%;
+min-height:60px;
+display:flex;
+align-items:center;
+gap:14px;
+justify-content:flex-start;
+padding:0 20px;
+border:0;
+border-radius:16px;
+font-size:17px;
+font-weight:900;
+}
+
+.route-app+.route-app{
+margin-top:12px;
+}
+
+.route-app .route-logo{
+width:38px;
+height:38px;
+display:grid;
+place-items:center;
+border-radius:50%;
+background:rgba(255,255,255,.25);
+font-size:22px;
+flex:0 0 38px;
+}
+
+.route-google{
+background:#4285f4;
+color:#fff;
+}
+
+.route-waze{
+background:#33ccff;
+color:#07324a;
+}
+
+.route-apple{
+background:#111;
+color:#fff;
+}
+
+.fullmap{
+position:fixed;
+inset:0;
+z-index:11000;
+display:none;
+background:#fff;
+}
+
+.fullmap.open{
+display:block;
+}
+
+#fullMap{
+position:absolute;
+inset:0;
+}
+
+.fullbar{
+position:absolute;
+z-index:800;
+top:0;
+left:0;
+right:0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:calc(env(safe-area-inset-top) + 12px) 14px 20px;
+background:linear-gradient(#000,transparent);
+color:#fff;
+font-weight:900;
+}
+
+.fullbar button{
+width:44px;
+height:44px;
+border:0;
+border-radius:50%;
+background:#fff;
+font-size:25px;
+}
+
+.full-locate{
+position:absolute;
+z-index:850;
+right:18px;
+bottom:calc(env(safe-area-inset-bottom) + 24px);
+width:56px;
+height:56px;
+display:grid;
+place-items:center;
+border:0;
+border-radius:50%;
+background:#fff;
+color:#111;
+box-shadow:0 7px 22px rgba(0,0,0,.28);
+font-size:30px;
+font-weight:900;
+}
+
+.marker{
+width:34px;
+height:34px;
+display:grid;
+place-items:center;
+border:3px solid #fff;
+border-radius:50%;
+background:var(--green);
+box-shadow:0 3px 12px rgba(0,0,0,.28);
+}
+
+.marker.veterinary{
+background:#e53935;
+color:#fff;
+}
+
+.cat[data-cat="veterinary"] i{
+color:#e53935;
+}
+
+.userdot{
+width:23px;
+height:23px;
+border:4px solid #fff;
+border-radius:50%;
+background:#2f82ef;
+box-shadow:0 0 0 8px rgba(47,130,239,.16),0 2px 10px rgba(0,0,0,.3);
+}
+
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] body{
+direction:rtl;
+}
+
+html[dir="rtl"] .cat,
+html[dir="rtl"] .suggestion{
+text-align:right;
+}
+
+html[dir="rtl"] .heart{
+right:auto;
+left:14px;
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
 
 @media(max-width:850px){
-.page{padding:22px 18px 55px}
-.discovery{grid-template-columns:minmax(0,1.45fr) minmax(190px,.8fr);gap:15px}
-.copy h1{font-size:37px}
-.copy p{font-size:14px}
-.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{min-height:360px}
+
+.page{
+padding:22px 18px 55px;
+}
+
+.discovery{
+grid-template-columns:minmax(0,1.45fr) minmax(190px,.8fr);
+gap:15px;
+}
+
+.copy h1{
+font-size:37px;
+}
+
+.copy p{
+font-size:14px;
+}
+
+.cards{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+}
+
+.card{
+min-height:360px;
+}
+
 }
 
 @media(max-width:610px){
-.page{padding:20px 14px 55px}
-.discovery{grid-template-columns:minmax(0,1.45fr) minmax(135px,.72fr);gap:10px}
-.copy h1{font-size:31px}
-.copy p{font-size:13px}
-.search-row{grid-template-columns:1fr 50px}
-.icon-btn{height:50px}
-.icon-btn.add{display:none}
-.search-box{height:50px}
-.categories{gap:6px}
-.cat{min-height:40px;padding:0 10px;gap:7px;font-size:11px}
-.cat i{width:17px;font-size:14px}
-#map{height:185px}
-.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.card{min-height:330px;border-radius:15px}
-.card-body{padding:13px}
-.card h2{font-size:20px}
-.address{font-size:10px}
-.badge,.pet{font-size:9px}
-.meta{font-size:9px}
-.actions{gap:6px}
-.actions button{min-height:30px;padding:0 9px;font-size:9px}
-.heart{width:40px;height:40px;font-size:24px}
-.sort{max-width:160px;font-size:12px}
-.count{font-size:14px}
-.suggestions{right:60px}
+
+.page{
+padding:20px 14px 55px;
+}
+
+.discovery{
+grid-template-columns:minmax(0,1.45fr) minmax(135px,.72fr);
+gap:10px;
+}
+
+.copy h1{
+font-size:31px;
+}
+
+.copy p{
+font-size:13px;
+}
+
+.search-row{
+grid-template-columns:1fr 50px;
+}
+
+.icon-btn{
+height:50px;
+}
+
+.icon-btn.add{
+display:none;
+}
+
+.search-box{
+height:50px;
+}
+
+.categories{
+gap:6px;
+}
+
+.cat{
+min-height:40px;
+padding:0 10px;
+gap:7px;
+font-size:11px;
+}
+
+.cat i{
+width:17px;
+font-size:14px;
+}
+
+#map{
+height:185px;
+}
+
+.cards{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:9px;
+}
+
+.card{
+min-height:330px;
+border-radius:15px;
+}
+
+.card-body{
+padding:13px;
+}
+
+.card h2{
+font-size:20px;
+}
+
+.address{
+font-size:10px;
+}
+
+.badge,
+.pet{
+font-size:9px;
+}
+
+.meta{
+font-size:9px;
+}
+
+.actions{
+gap:6px;
+}
+
+.actions button{
+min-height:30px;
+padding:0 9px;
+font-size:9px;
+}
+
+.heart{
+width:40px;
+height:40px;
+font-size:24px;
+}
+
+.sort{
+max-width:160px;
+font-size:12px;
+}
+
+.count{
+font-size:14px;
+}
+
+.suggestions{
+right:60px;
+}
+
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible{
+outline:3px solid var(--green);
+outline-offset:3px;
+}
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+scroll-behavior:auto!important;
+}
+
+.site-header,
+.pd-drawer,
+.pd-menu-overlay{
+transition:none;
+}
+
 }
 </style>
 </head>
 
 <body>
+
+<header
+class="site-header"
+id="siteHeader"
+>
+
+<button
+class="menu-button"
+id="menuButton"
+type="button"
+aria-label="Open menu"
+>
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+<a
+href="/index.html"
+class="brand notranslate"
+translate="no"
+aria-label="PETS & DOGUE home"
+>
+<small>PETS &amp;</small>
+<strong>DOGUE</strong>
+</a>
+
+<div class="header-right">
+
+<a
+href="/index.html"
+class="home-button"
+aria-label="Home"
+>
+⌂
+</a>
+
+<select
+class="header-language"
+id="headerLanguageSelect"
+aria-label="Language"
+>
+<option value="en">🇬🇧 EN</option>
+<option value="uk">🇺🇦 UA</option>
+<option value="ru">🇷🇺 RU</option>
+<option value="fr">🇫🇷 FR</option>
+<option value="de">🇩🇪 DE</option>
+<option value="es">🇪🇸 ES</option>
+<option value="it">🇮🇹 IT</option>
+<option value="pt">🇵🇹 PT</option>
+<option value="nl">🇳🇱 NL</option>
+<option value="pl">🇵🇱 PL</option>
+<option value="cs">🇨🇿 CZ</option>
+<option value="sk">🇸🇰 SK</option>
+<option value="hu">🇭🇺 HU</option>
+<option value="ro">🇷🇴 RO</option>
+<option value="bg">🇧🇬 BG</option>
+<option value="el">🇬🇷 GR</option>
+<option value="sv">🇸🇪 SE</option>
+<option value="da">🇩🇰 DK</option>
+<option value="no">🇳🇴 NO</option>
+<option value="fi">🇫🇮 FI</option>
+<option value="tr">🇹🇷 TR</option>
+<option value="ar">🇸🇦 AR</option>
+<option value="hi">🇮🇳 HI</option>
+</select>
+
+</div>
+
+</header>
+
+<div
+class="pd-menu-overlay"
+id="pdMenuOverlay"
+></div>
+
+<aside
+class="pd-drawer"
+id="pdDrawer"
+aria-hidden="true"
+>
+
+<div class="pd-drawer-head">
+
+<h2
+class="pd-drawer-title"
+id="pdDrawerTitle"
+>
+Contents
+</h2>
+
+<button
+class="pd-drawer-close"
+id="pdDrawerClose"
+type="button"
+aria-label="Close menu"
+>
+×
+</button>
+
+</div>
+
+<div class="pd-drawer-scroll">
+
+<div class="pd-account-row">
+
+<a
+class="pd-account-button"
+href="/account.html"
+id="pdSignInButton"
+>
+Sign In
+</a>
+
+<a
+class="pd-account-button club"
+href="/club.html"
+id="pdJoinButton"
+>
+Join Club
+</a>
+
+</div>
+
+<label
+class="pd-language-label"
+id="pdLanguageLabel"
+for="pdLanguageSelect"
+>
+Language
+</label>
+
+<select
+class="pd-language-select"
+id="pdLanguageSelect"
+aria-label="Language"
+>
+
+<option value="en">🇬🇧 EN — English</option>
+<option value="uk">🇺🇦 UA — Українська</option>
+<option value="ru">🇷🇺 RU — Русский</option>
+<option value="fr">🇫🇷 FR — Français</option>
+<option value="de">🇩🇪 DE — Deutsch</option>
+<option value="es">🇪🇸 ES — Español</option>
+<option value="it">🇮🇹 IT — Italiano</option>
+<option value="pt">🇵🇹 PT — Português</option>
+<option value="nl">🇳🇱 NL — Nederlands</option>
+<option value="pl">🇵🇱 PL — Polski</option>
+<option value="cs">🇨🇿 CZ — Čeština</option>
+<option value="sk">🇸🇰 SK — Slovenčina</option>
+<option value="hu">🇭🇺 HU — Magyar</option>
+<option value="ro">🇷🇴 RO — Română</option>
+<option value="bg">🇧🇬 BG — Български</option>
+<option value="el">🇬🇷 GR — Ελληνικά</option>
+<option value="sv">🇸🇪 SE — Svenska</option>
+<option value="da">🇩🇰 DK — Dansk</option>
+<option value="no">🇳🇴 NO — Norsk</option>
+<option value="fi">🇫🇮 FI — Suomi</option>
+<option value="tr">🇹🇷 TR — Türkçe</option>
+<option value="ar">🇸🇦 AR — العربية</option>
+<option value="hi">🇮🇳 HI — हिन्दी</option>
+
+</select>
+
+<nav
+class="pd-drawer-list"
+id="pdDrawerList"
+aria-label="PETS & DOGUE menu"
+></nav>
+
+</div>
+
+</aside>
 
 <main class="page">
 
@@ -429,6 +1693,8 @@ Add place
 <button
 class="map-full"
 id="mapFull"
+type="button"
+aria-label="Open full map"
 >
 ⛶
 </button>
@@ -442,134 +1708,69 @@ class="categories"
 id="categories"
 >
 
-<button
-class="cat active"
-data-cat="all"
->
+<button class="cat active" data-cat="all">
 <i>✦</i>
-<span data-t="catAll">
-All categories
-</span>
+<span data-t="catAll">All categories</span>
 </button>
 
-<button
-class="cat"
-data-cat="cafe"
->
+<button class="cat" data-cat="cafe">
 <i>☕</i>
-<span data-t="catCafe">
-Cafes
-</span>
+<span data-t="catCafe">Cafes</span>
 </button>
 
-<button
-class="cat"
-data-cat="restaurant"
->
+<button class="cat" data-cat="restaurant">
 <i>⌑</i>
-<span data-t="catRestaurant">
-Restaurants
-</span>
+<span data-t="catRestaurant">Restaurants</span>
 </button>
 
-<button
-class="cat"
-data-cat="pub"
->
+<button class="cat" data-cat="pub">
 <i>♨</i>
-<span data-t="catPub">
-Pubs
-</span>
+<span data-t="catPub">Pubs</span>
 </button>
 
-<button
-class="cat"
-data-cat="pizzeria"
->
+<button class="cat" data-cat="pizzeria">
 <i>◉</i>
-<span data-t="catPizzeria">
-Pizzerias
-</span>
+<span data-t="catPizzeria">Pizzerias</span>
 </button>
 
-<button
-class="cat"
-data-cat="hotel"
->
+<button class="cat" data-cat="hotel">
 <i>⌂</i>
-<span data-t="catHotel">
-Hotels
-</span>
+<span data-t="catHotel">Hotels</span>
 </button>
 
-<button
-class="cat"
-data-cat="park"
->
+<button class="cat" data-cat="park">
 <i>♧</i>
-<span data-t="catPark">
-Parks
-</span>
+<span data-t="catPark">Parks</span>
 </button>
 
-<button
-class="cat"
-data-cat="beach"
->
+<button class="cat" data-cat="beach">
 <i>≈</i>
-<span data-t="catBeach">
-Beaches
-</span>
+<span data-t="catBeach">Beaches</span>
 </button>
 
-<button
-class="cat"
-data-cat="veterinary"
->
+<button class="cat" data-cat="veterinary">
 <i>✚</i>
-<span data-t="catVet">
-Veterinary
-</span>
+<span data-t="catVet">Veterinary</span>
 </button>
 
-<button
-class="cat"
-data-cat="pet-shop"
->
+<button class="cat" data-cat="pet-shop">
 <i>▢</i>
-<span data-t="catShop">
-Pet shops
-</span>
+<span data-t="catShop">Pet shops</span>
 </button>
 
-<button
-class="cat"
-data-cat="grooming"
->
+<button class="cat" data-cat="grooming">
 <i>✂</i>
-<span data-t="catGrooming">
-Grooming
-</span>
+<span data-t="catGrooming">Grooming</span>
 </button>
 
-<button
-class="cat"
-data-cat="events"
->
+<button class="cat" data-cat="events">
 <i>★</i>
-<span data-t="catEvents">
-Events &amp; shows
-</span>
+<span data-t="catEvents">Events &amp; shows</span>
 </button>
 
-<button
-class="cat saved"
-data-cat="saved"
->
+<button class="cat saved" data-cat="saved">
 <i>♡</i>
-<span data-t="catSaved">
-Saved
-</span>
+<span data-t="catSaved">Saved</span>
 </button>
 
 </aside>
@@ -591,17 +1792,11 @@ id="sort"
 class="sort"
 >
 
-<option
-value="distance"
-data-t="sortNearest"
->
+<option value="distance" data-t="sortNearest">
 Nearest first
 </option>
 
-<option
-value="rating"
-data-t="sortRating"
->
+<option value="rating" data-t="sortRating">
 Highest rated
 </option>
 
@@ -647,10 +1842,7 @@ class="overlay"
 Add a pet-friendly place
 </h2>
 
-<button
-class="close"
-data-close="addOverlay"
->
+<button class="close" data-close="addOverlay">
 ×
 </button>
 
@@ -701,49 +1893,17 @@ Category
 
 <select id="addCategory">
 
-<option value="cafe" data-t="catCafe">
-Cafes
-</option>
-
-<option value="restaurant" data-t="catRestaurant">
-Restaurants
-</option>
-
-<option value="pub" data-t="catPub">
-Pubs
-</option>
-
-<option value="pizzeria" data-t="catPizzeria">
-Pizzerias
-</option>
-
-<option value="hotel" data-t="catHotel">
-Hotels
-</option>
-
-<option value="park" data-t="catPark">
-Parks
-</option>
-
-<option value="beach" data-t="catBeach">
-Beaches
-</option>
-
-<option value="veterinary" data-t="catVet">
-Veterinary
-</option>
-
-<option value="pet-shop" data-t="catShop">
-Pet shops
-</option>
-
-<option value="grooming" data-t="catGrooming">
-Grooming
-</option>
-
-<option value="events" data-t="catEvents">
-Events &amp; shows
-</option>
+<option value="cafe" data-t="catCafe">Cafes</option>
+<option value="restaurant" data-t="catRestaurant">Restaurants</option>
+<option value="pub" data-t="catPub">Pubs</option>
+<option value="pizzeria" data-t="catPizzeria">Pizzerias</option>
+<option value="hotel" data-t="catHotel">Hotels</option>
+<option value="park" data-t="catPark">Parks</option>
+<option value="beach" data-t="catBeach">Beaches</option>
+<option value="veterinary" data-t="catVet">Veterinary</option>
+<option value="pet-shop" data-t="catShop">Pet shops</option>
+<option value="grooming" data-t="catGrooming">Grooming</option>
+<option value="events" data-t="catEvents">Events &amp; shows</option>
 
 </select>
 
@@ -777,33 +1937,21 @@ Pets welcome inside and outside
 </label>
 
 <label class="policy-choice">
-<input
-type="radio"
-name="addPolicy"
-value="terrace"
->
+<input type="radio" name="addPolicy" value="terrace">
 <span data-t="policyTerrace">
 Terrace / outdoor area only
 </span>
 </label>
 
 <label class="policy-choice">
-<input
-type="radio"
-name="addPolicy"
-value="garden"
->
+<input type="radio" name="addPolicy" value="garden">
 <span data-t="policyGarden">
 Garden / grounds only
 </span>
 </label>
 
 <label class="policy-choice">
-<input
-type="radio"
-name="addPolicy"
-value="restrictions"
->
+<input type="radio" name="addPolicy" value="restrictions">
 <span data-t="policyRestrictions">
 Pet-friendly with restrictions
 </span>
@@ -838,53 +1986,39 @@ class="overlay"
 Pet policy
 </h2>
 
-<button
-class="close"
-data-close="policyOverlay"
->
+<button class="close" data-close="policyOverlay">
 ×
 </button>
 
 </div>
 
-<h3 id="policyName">
-</h3>
+<h3 id="policyName"></h3>
 
 <div class="policy-grid">
 
 <label class="policy-choice">
 <input type="radio" name="editPolicy" value="inside_outside">
-<span data-t="policyInside">
-Pets welcome inside and outside
-</span>
+<span data-t="policyInside">Pets welcome inside and outside</span>
 </label>
 
 <label class="policy-choice">
 <input type="radio" name="editPolicy" value="terrace">
-<span data-t="policyTerrace">
-Terrace / outdoor area only
-</span>
+<span data-t="policyTerrace">Terrace / outdoor area only</span>
 </label>
 
 <label class="policy-choice">
 <input type="radio" name="editPolicy" value="garden">
-<span data-t="policyGarden">
-Garden / grounds only
-</span>
+<span data-t="policyGarden">Garden / grounds only</span>
 </label>
 
 <label class="policy-choice">
 <input type="radio" name="editPolicy" value="restrictions">
-<span data-t="policyRestrictions">
-Pet-friendly with restrictions
-</span>
+<span data-t="policyRestrictions">Pet-friendly with restrictions</span>
 </label>
 
 <label class="policy-choice">
 <input type="radio" name="editPolicy" value="unknown">
-<span data-t="policyUnknown">
-Pet policy not confirmed
-</span>
+<span data-t="policyUnknown">Pet policy not confirmed</span>
 </label>
 
 </div>
@@ -910,13 +2044,9 @@ class="overlay"
 
 <div class="modal-head">
 
-<h2 id="detailName">
-</h2>
+<h2 id="detailName"></h2>
 
-<button
-class="close"
-data-close="detailOverlay"
->
+<button class="close" data-close="detailOverlay">
 ×
 </button>
 
@@ -963,10 +2093,7 @@ class="overlay"
 Choose navigation
 </h2>
 
-<button
-class="close"
-data-close="routeOverlay"
->
+<button class="close" data-close="routeOverlay">
 ×
 </button>
 
@@ -1008,8 +2135,7 @@ id="fullOverlay"
 class="fullmap"
 >
 
-<div id="fullMap">
-</div>
+<div id="fullMap"></div>
 
 <div class="fullbar">
 
@@ -1034,6 +2160,8 @@ aria-label="Find my location"
 
 </div>
 
+<script src="/i18n/common.js?v=2"></script>
+
 <script
 src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 crossorigin=""
@@ -1045,9 +2173,9 @@ crossorigin=""
 const API="/api/pet-friendly-places";
 const NOM="https://nominatim.openstreetmap.org/search";
 const OVP="https://overpass-api.de/api/interpreter";
+const LANGUAGE_KEY="pets_dogue_language";
 
-const KEYS=
-[
+const KEYS=[
 "heroTitle",
 "heroText",
 "searchPlaceholder",
@@ -1102,10 +2230,9 @@ const KEYS=
 "routeTitle"
 ];
 
-const WORDS=
-{
+const WORDS={
 
-"en":[
+en:[
 "Find places that welcome your pet",
 "Cafes, restaurants, hotels, beaches, parks, veterinary clinics, pet shops and animal events near you.",
 "City, postcode or area",
@@ -1160,7 +2287,7 @@ const WORDS=
 "Choose navigation"
 ],
 
-"uk":[
+uk:[
 "Знайдіть місця, де раді вашому улюбленцю",
 "Кафе, ресторани, готелі, пляжі, парки, ветеринарні клініки, зоомагазини та події поруч.",
 "Місто, поштовий індекс або район",
@@ -1215,7 +2342,7 @@ const WORDS=
 "Оберіть навігацію"
 ],
 
-"ru":[
+ru:[
 "Найдите места, где рады вашему питомцу",
 "Кафе, рестораны, отели, пляжи, парки, ветеринарные клиники, зоомагазины и события рядом.",
 "Город, индекс или район",
@@ -1270,7 +2397,7 @@ const WORDS=
 "Выберите навигацию"
 ],
 
-"fr":[
+fr:[
 "Trouvez des lieux où votre animal est le bienvenu",
 "Cafés, restaurants, hôtels, plages, parcs, cliniques vétérinaires, animaleries et événements près de vous.",
 "Ville, code postal ou quartier",
@@ -1325,7 +2452,7 @@ const WORDS=
 "Choisir la navigation"
 ],
 
-"de":[
+de:[
 "Finde Orte, an denen dein Haustier willkommen ist",
 "Cafés, Restaurants, Hotels, Strände, Parks, Tierarztpraxen, Tierläden und Veranstaltungen in deiner Nähe.",
 "Stadt, Postleitzahl oder Gebiet",
@@ -1380,7 +2507,7 @@ const WORDS=
 "Navigation wählen"
 ],
 
-"es":[
+es:[
 "Encuentra lugares donde tu mascota sea bienvenida",
 "Cafés, restaurantes, hoteles, playas, parques, veterinarios, tiendas y eventos cerca de ti.",
 "Ciudad, código postal o zona",
@@ -1435,7 +2562,7 @@ const WORDS=
 "Elegir navegación"
 ],
 
-"it":[
+it:[
 "Trova luoghi dove il tuo animale è benvenuto",
 "Caffè, ristoranti, hotel, spiagge, parchi, veterinari, negozi e eventi vicino a te.",
 "Città, CAP o zona",
@@ -1490,7 +2617,7 @@ const WORDS=
 "Scegli navigazione"
 ],
 
-"pt":[
+pt:[
 "Encontre lugares onde o seu animal é bem-vindo",
 "Cafés, restaurantes, hotéis, praias, parques, veterinários, lojas e eventos perto de si.",
 "Cidade, código postal ou zona",
@@ -1545,7 +2672,7 @@ const WORDS=
 "Escolher navegação"
 ],
 
-"nl":[
+nl:[
 "Vind plekken waar je huisdier welkom is",
 "Cafés, restaurants, hotels, stranden, parken, dierenartsen, dierenwinkels en evenementen bij jou in de buurt.",
 "Stad, postcode of gebied",
@@ -1600,7 +2727,7 @@ const WORDS=
 "Navigatie kiezen"
 ],
 
-"pl":[
+pl:[
 "Znajdź miejsca, w których Twój pupil jest mile widziany",
 "Kawiarnie, restauracje, hotele, plaże, parki, weterynarze, sklepy zoologiczne i wydarzenia w pobliżu.",
 "Miasto, kod pocztowy lub okolica",
@@ -1655,7 +2782,7 @@ const WORDS=
 "Wybierz nawigację"
 ],
 
-"cs":[
+cs:[
 "Najděte místa, kde je váš mazlíček vítán",
 "Kavárny, restaurace, hotely, pláže, parky, veterináři, chovatelské potřeby a akce ve vašem okolí.",
 "Město, PSČ nebo oblast",
@@ -1710,7 +2837,7 @@ const WORDS=
 "Vybrat navigaci"
 ],
 
-"sk":[
+sk:[
 "Nájdite miesta, kde je váš miláčik vítaný",
 "Kaviarne, reštaurácie, hotely, pláže, parky, veterinári, chovateľské potreby a podujatia vo vašom okolí.",
 "Mesto, PSČ alebo oblasť",
@@ -1765,7 +2892,7 @@ const WORDS=
 "Vybrať navigáciu"
 ],
 
-"hu":[
+hu:[
 "Találjon helyeket, ahol kedvencét szívesen látják",
 "Kávézók, éttermek, szállodák, strandok, parkok, állatorvosok, állatboltok és események a közelben.",
 "Város, irányítószám vagy környék",
@@ -1820,7 +2947,7 @@ const WORDS=
 "Navigáció választása"
 ],
 
-"ro":[
+ro:[
 "Găsiți locuri unde animalul dvs. este binevenit",
 "Cafenele, restaurante, hoteluri, plaje, parcuri, veterinari, magazine și evenimente în apropiere.",
 "Oraș, cod poștal sau zonă",
@@ -1875,7 +3002,7 @@ const WORDS=
 "Alege navigația"
 ],
 
-"bg":[
+bg:[
 "Намерете места, където вашият любимец е добре дошъл",
 "Кафенета, ресторанти, хотели, плажове, паркове, ветеринари, зоомагазини и събития наблизо.",
 "Град, пощенски код или район",
@@ -1930,7 +3057,7 @@ const WORDS=
 "Избери навигация"
 ],
 
-"el":[
+el:[
 "Βρείτε μέρη όπου το κατοικίδιό σας είναι ευπρόσδεκτο",
 "Καφέ, εστιατόρια, ξενοδοχεία, παραλίες, πάρκα, κτηνίατροι, pet shops και εκδηλώσεις κοντά σας.",
 "Πόλη, ταχυδρομικός κώδικας ή περιοχή",
@@ -1985,7 +3112,7 @@ const WORDS=
 "Επιλογή πλοήγησης"
 ],
 
-"sv":[
+sv:[
 "Hitta platser där ditt husdjur är välkommet",
 "Caféer, restauranger, hotell, stränder, parker, veterinärer, djurbutiker och evenemang nära dig.",
 "Stad, postnummer eller område",
@@ -2040,7 +3167,7 @@ const WORDS=
 "Välj navigation"
 ],
 
-"da":[
+da:[
 "Find steder, hvor dit kæledyr er velkomment",
 "Caféer, restauranter, hoteller, strande, parker, dyrlæger, dyrebutikker og events nær dig.",
 "By, postnummer eller område",
@@ -2095,7 +3222,7 @@ const WORDS=
 "Vælg navigation"
 ],
 
-"no":[
+no:[
 "Finn steder der kjæledyret ditt er velkommen",
 "Kafeer, restauranter, hoteller, strender, parker, veterinærer, dyrebutikker og arrangementer nær deg.",
 "By, postnummer eller område",
@@ -2150,7 +3277,7 @@ const WORDS=
 "Velg navigasjon"
 ],
 
-"fi":[
+fi:[
 "Löydä paikkoja, joissa lemmikkisi on tervetullut",
 "Kahvilat, ravintolat, hotellit, rannat, puistot, eläinlääkärit, lemmikkikaupat ja tapahtumat lähelläsi.",
 "Kaupunki, postinumero tai alue",
@@ -2205,7 +3332,7 @@ const WORDS=
 "Valitse navigointi"
 ],
 
-"tr":[
+tr:[
 "Evcil hayvanınızın hoş karşılandığı yerleri bulun",
 "Yakınınızdaki kafeler, restoranlar, oteller, plajlar, parklar, veterinerler, pet shoplar ve etkinlikler.",
 "Şehir, posta kodu veya bölge",
@@ -2260,7 +3387,7 @@ const WORDS=
 "Navigasyon seç"
 ],
 
-"ar":[
+ar:[
 "اعثر على أماكن ترحب بحيوانك الأليف",
 "مقاهٍ ومطاعم وفنادق وشواطئ وحدائق وعيادات بيطرية ومتاجر وفعاليات بالقرب منك.",
 "المدينة أو الرمز البريدي أو المنطقة",
@@ -2315,7 +3442,7 @@ const WORDS=
 "اختر تطبيق الملاحة"
 ],
 
-"hi":[
+hi:[
 "ऐसी जगहें खोजें जहाँ आपका पालतू स्वागत योग्य हो",
 "आपके पास कैफ़े, रेस्तराँ, होटल, समुद्र तट, पार्क, पशु चिकित्सक, पालतू दुकानें और कार्यक्रम।",
 "शहर, पिन कोड या क्षेत्र",
@@ -2375,17 +3502,13 @@ const WORDS=
 const IDX=
 Object.fromEntries(
 KEYS.map(
-(k,i)=>[
-k,
-i
-]
+(k,i)=>[k,i]
 )
 );
 
-const supported=
-Object.keys(
-WORDS
-);
+const supported=[
+"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk","hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+];
 
 const aliases={
 ua:"uk",
@@ -2395,47 +3518,204 @@ se:"sv",
 dk:"da"
 };
 
-let lang="en",
-cat="all",
-radius=15,
-center={
+const MENU_UI={
+
+en:{contents:"Contents",signIn:"Sign In",joinClub:"Join Club",language:"Language"},
+uk:{contents:"Зміст",signIn:"Увійти",joinClub:"Вступити до клубу",language:"Мова"},
+ru:{contents:"Содержание",signIn:"Войти",joinClub:"Вступить в клуб",language:"Язык"},
+fr:{contents:"Sommaire",signIn:"Se connecter",joinClub:"Rejoindre le Club",language:"Langue"},
+de:{contents:"Inhalt",signIn:"Anmelden",joinClub:"Club beitreten",language:"Sprache"},
+es:{contents:"Contenido",signIn:"Iniciar sesión",joinClub:"Unirse al Club",language:"Idioma"},
+it:{contents:"Contenuti",signIn:"Accedi",joinClub:"Entra nel Club",language:"Lingua"},
+pt:{contents:"Conteúdo",signIn:"Entrar",joinClub:"Entrar no Club",language:"Idioma"},
+nl:{contents:"Inhoud",signIn:"Inloggen",joinClub:"Word lid",language:"Taal"},
+pl:{contents:"Spis treści",signIn:"Zaloguj się",joinClub:"Dołącz do Club",language:"Język"},
+cs:{contents:"Obsah",signIn:"Přihlásit se",joinClub:"Vstoupit do Club",language:"Jazyk"},
+sk:{contents:"Obsah",signIn:"Prihlásiť sa",joinClub:"Vstúpiť do Club",language:"Jazyk"},
+hu:{contents:"Tartalom",signIn:"Bejelentkezés",joinClub:"Csatlakozás",language:"Nyelv"},
+ro:{contents:"Conținut",signIn:"Autentificare",joinClub:"Intră în Club",language:"Limbă"},
+bg:{contents:"Съдържание",signIn:"Вход",joinClub:"Влезте в Club",language:"Език"},
+el:{contents:"Περιεχόμενα",signIn:"Σύνδεση",joinClub:"Εγγραφή στο Club",language:"Γλώσσα"},
+sv:{contents:"Innehåll",signIn:"Logga in",joinClub:"Gå med i Club",language:"Språk"},
+da:{contents:"Indhold",signIn:"Log ind",joinClub:"Bliv medlem",language:"Sprog"},
+no:{contents:"Innhold",signIn:"Logg inn",joinClub:"Bli med i Club",language:"Språk"},
+fi:{contents:"Sisältö",signIn:"Kirjaudu",joinClub:"Liity Clubiin",language:"Kieli"},
+tr:{contents:"İçindekiler",signIn:"Giriş yap",joinClub:"Club'a katıl",language:"Dil"},
+ar:{contents:"المحتويات",signIn:"تسجيل الدخول",joinClub:"الانضمام إلى النادي",language:"اللغة"},
+hi:{contents:"विषय सूची",signIn:"साइन इन",joinClub:"Club में शामिल हों",language:"भाषा"}
+
+};
+
+const MENU_ITEMS=[
+
+{
+key:"edition",
+href:"/issue-01.html",
+image:"file_00000000a9d471fda9b4629589be22a9.png",
+labelPath:"common.navigation.magazine",
+descriptionPath:"common.menu.latestIssueDescription",
+fallbackLabel:"Edition",
+fallbackDescription:"Open the latest PETS & DOGUE digital edition."
+},
+
+{
+key:"coverStars",
+href:"/members-gallery.html",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.coverStars",
+descriptionPath:"common.menu.coverStarDescription",
+fallbackLabel:"Cover Stars",
+fallbackDescription:"Meet the stars and vote for the next cover."
+},
+
+{
+key:"offers",
+href:"/special-offers.html",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.offers",
+descriptionPath:"common.menu.partnersDescription",
+fallbackLabel:"Discounts",
+fallbackDescription:"Member offers, discounts and benefits."
+},
+
+{
+key:"places",
+href:"/pet-friendly-places.html",
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.places",
+descriptionPath:"common.menu.placesDescription",
+fallbackLabel:"Pet-Friendly",
+fallbackDescription:"Find places where pets are welcome."
+},
+
+{
+key:"marketplace",
+href:"/pet-marketplace.html",
+image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.marketplace",
+descriptionPath:"common.menu.marketplaceDescription",
+fallbackLabel:"Marketplace",
+fallbackDescription:"Listings, products and pet services."
+},
+
+{
+key:"fashion",
+href:"/pet-fashion.html",
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.fashion",
+descriptionPath:"common.menu.fashionDescription",
+fallbackLabel:"Fashion",
+fallbackDescription:"Pet style, accessories and fashion."
+},
+
+{
+key:"wellness",
+href:"/wellness.html",
+image:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.wellness",
+descriptionPath:"common.menu.wellnessDescription",
+fallbackLabel:"Health",
+fallbackDescription:"Health, care and practical guidance."
+},
+
+{
+key:"articles",
+href:"/articles.html",
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.articles",
+descriptionPath:"common.menu.articlesDescription",
+fallbackLabel:"Articles",
+fallbackDescription:"Original stories, guides and interviews."
+},
+
+{
+key:"photos",
+href:"/photos.html",
+image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.photos",
+descriptionPath:"common.menu.photosDescription",
+fallbackLabel:"Photos",
+fallbackDescription:"Pet photography and visual stories."
+},
+
+{
+key:"community",
+href:"/local-community.html",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.community",
+descriptionPath:"common.menu.communityDescription",
+fallbackLabel:"Community",
+fallbackDescription:"Connect with pet people near you."
+},
+
+{
+key:"contests",
+href:"/contests.html",
+image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.contests",
+descriptionPath:"common.menu.coverStarDescription",
+fallbackLabel:"Contests",
+fallbackDescription:"Competitions, voting and prizes."
+},
+
+{
+key:"rescue",
+href:"/pets-in-need.html",
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.rescue",
+descriptionPath:"common.menu.rescueDescription",
+fallbackLabel:"Help",
+fallbackDescription:"Support animals that need care and love."
+},
+
+{
+key:"partners",
+href:"/partners.html",
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=82",
+labelPath:"common.navigation.partners",
+descriptionPath:"common.menu.partnersDescription",
+fallbackLabel:"Partners",
+fallbackDescription:"Partners and collaborations."
+}
+
+];
+
+let lang="en";
+let cat="all";
+let radius=15;
+
+let center={
 lat:50.8225,
 lng:-0.1372,
 label:"Brighton"
-},
-places=[],
-limit=12,
-activePlaceKey="",
-map,
-mapLayer,
-userMarker,
-userAccuracyCircle,
-fullMap,
-fullLayer,
-fullUserMarker,
-fullAccuracyCircle,
-userPosition=null,
-userAccuracy=null,
-geoWatchId=null,
-followUser=false,
-routePlace,
-policyPlace,
-addGooglePlace,
-searchTimer,
-addTimer,
-languageWatcher;
+};
 
-const SAVED=
-"pets_dogue_saved_places_v2";
+let places=[];
+let limit=12;
+let activePlaceKey="";
+let map;
+let mapLayer;
+let userMarker;
+let userAccuracyCircle;
+let fullMap;
+let fullLayer;
+let fullUserMarker;
+let fullAccuracyCircle;
+let userPosition=null;
+let userAccuracy=null;
+let geoWatchId=null;
+let followUser=false;
+let routePlace;
+let policyPlace;
+let addGooglePlace;
+let searchTimer;
+let addTimer;
+let languageWatcher;
 
-const SNAPS=
-"pets_dogue_saved_place_snapshots_v1";
-
-const ADDED=
-"pets_dogue_added_places_v2";
-
-const POLICY=
-"pets_dogue_pet_place_rules_v1";
+const SAVED="pets_dogue_saved_places_v2";
+const SNAPS="pets_dogue_saved_place_snapshots_v1";
+const ADDED="pets_dogue_added_places_v2";
+const POLICY="pets_dogue_pet_place_rules_v1";
 
 function read(k,d){
 
@@ -2516,6 +3796,52 @@ return supported.includes(v)
 
 }
 
+function setSiteLanguage(value){
+
+let next=
+String(value||"en")
+.toLowerCase()
+.replace("_","-")
+.split("-")[0];
+
+next=
+aliases[next]||
+next;
+
+if(
+!supported.includes(next)
+){
+
+next="en";
+
+}
+
+try{
+
+localStorage.setItem(
+LANGUAGE_KEY,
+next
+);
+
+}catch{}
+
+lang=next;
+
+applyLang();
+
+window.dispatchEvent(
+new CustomEvent(
+"petsdogue:languagechange",
+{
+detail:{
+language:next
+}
+}
+)
+);
+
+}
+
 function t(k){
 
 const i=
@@ -2527,6 +3853,226 @@ return i===undefined
 WORDS[lang]?.[i]||
 WORDS.en[i]||
 k
+);
+
+}
+
+function commonT(path,fallback){
+
+let root=
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.common;
+
+if(!root){
+
+return fallback;
+
+}
+
+let value=
+root[lang]||
+root.en||
+null;
+
+if(!value){
+
+return fallback;
+
+}
+
+const cleanPath=
+String(path||"")
+.replace(
+/^common\./,
+""
+);
+
+cleanPath
+.split(".")
+.forEach(
+key=>{
+
+if(
+value &&
+Object.prototype.hasOwnProperty.call(
+value,
+key
+)
+){
+
+value=value[key];
+
+}else{
+
+value=undefined;
+
+}
+
+}
+);
+
+return typeof value==="string"
+?value
+:fallback;
+
+}
+
+function renderUnifiedMenu(){
+
+const menuWords=
+MENU_UI[lang]||
+MENU_UI.en;
+
+document.getElementById(
+"pdDrawerTitle"
+).textContent=
+menuWords.contents;
+
+document.getElementById(
+"pdSignInButton"
+).textContent=
+menuWords.signIn;
+
+document.getElementById(
+"pdJoinButton"
+).textContent=
+menuWords.joinClub;
+
+document.getElementById(
+"pdLanguageLabel"
+).textContent=
+menuWords.language;
+
+document.getElementById(
+"pdLanguageSelect"
+).value=
+lang;
+
+document.getElementById(
+"headerLanguageSelect"
+).value=
+lang;
+
+document.getElementById(
+"pdDrawerList"
+).innerHTML=
+MENU_ITEMS.map(
+item=>{
+
+const active=
+item.key==="places";
+
+const label=
+commonT(
+item.labelPath,
+item.fallbackLabel
+);
+
+const description=
+commonT(
+item.descriptionPath,
+item.fallbackDescription
+);
+
+return `
+<a
+class="pd-drawer-card ${active?"active":""}"
+href="${esc(item.href)}"
+${active?'aria-current="page"':""}
+>
+
+<img
+src="${esc(item.image)}"
+alt=""
+loading="lazy"
+decoding="async"
+>
+
+<span class="pd-drawer-copy">
+
+<span class="pd-drawer-name">
+${esc(label)}
+</span>
+
+<span class="pd-drawer-desc">
+${esc(description)}
+</span>
+
+</span>
+
+</a>
+`;
+
+}
+)
+.join("");
+
+}
+
+function openUnifiedMenu(){
+
+const drawer=
+document.getElementById(
+"pdDrawer"
+);
+
+const overlay=
+document.getElementById(
+"pdMenuOverlay"
+);
+
+document.getElementById(
+"siteHeader"
+).classList.remove(
+"header-hidden"
+);
+
+drawer.classList.add(
+"open"
+);
+
+overlay.classList.add(
+"open"
+);
+
+drawer.setAttribute(
+"aria-hidden",
+"false"
+);
+
+document.body.classList.add(
+"menu-open"
+);
+
+}
+
+function closeUnifiedMenu(){
+
+const drawer=
+document.getElementById(
+"pdDrawer"
+);
+
+const overlay=
+document.getElementById(
+"pdMenuOverlay"
+);
+
+drawer.classList.remove(
+"open"
+);
+
+overlay.classList.remove(
+"open"
+);
+
+drawer.setAttribute(
+"aria-hidden",
+"true"
+);
+
+document.body.classList.remove(
+"menu-open"
 );
 
 }
@@ -2652,6 +4198,8 @@ t(
 e.dataset.ph
 )
 );
+
+renderUnifiedMenu();
 
 updateSeo();
 
@@ -3825,31 +5373,109 @@ p.source==="google"
 
 return`
 <article class="card" data-open="${esc(k)}">
+
 <div class="card-bg"></div>
+
 ${ph?`<img src="${esc(ph)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none'">`:""}
-<button class="heart ${s.has(k)?"on":""}" data-save="${esc(k)}">${s.has(k)?"♥":"♡"}</button>
+
+<button
+class="heart ${s.has(k)?"on":""}"
+data-save="${esc(k)}"
+type="button"
+>
+${s.has(k)?"♥":"♡"}
+</button>
+
 <div class="card-body">
+
 <div class="card-top">
-<span class="badge">${esc(catLabel(p.category))}</span>
-<span class="rating">${p.rating?`★ ${Number(p.rating).toFixed(1)}`:""}</span>
+
+<span class="badge">
+${esc(catLabel(p.category))}
+</span>
+
+<span class="rating">
+${p.rating?`★ ${Number(p.rating).toFixed(1)}`:""}
+</span>
+
 </div>
-<h2>${esc(p.name)}</h2>
-<p class="address">${esc(p.address)}</p>
+
+<h2>
+${esc(p.name)}
+</h2>
+
+<p class="address">
+${esc(p.address)}
+</p>
+
 <div class="pet-row">
-<span class="pet ${policyClass(pol)}">${esc(policyText(pol))}</span>
+
+<span class="pet ${policyClass(pol)}">
+${esc(policyText(pol))}
+</span>
+
 ${p.openNow===true?`<span>${esc(t("open"))}</span>`:p.openNow===false?`<span>${esc(t("closed"))}</span>`:""}
+
 </div>
-<div class="meta">${esc(meta.join(" · "))}</div>
+
+<div class="meta">
+${esc(meta.join(" · "))}
+</div>
+
 <div class="actions">
-<button class="dark" data-rules="${esc(k)}">${esc(t("petPolicy"))}</button>
-<button class="dark" data-route="${esc(k)}">${esc(t("route"))}</button>
-${infoUrl?`<button class="${p.website?"":"maps"}" data-site="${esc(k)}">${esc(infoLabel)}</button>`:""}
-${canBook(p)?`<button class="booking" data-book="${esc(k)}">Booking</button>`:""}
-${p.phone?`<button data-call="${esc(k)}">${esc(t("call"))}</button>`:""}
+
+<button
+class="dark"
+data-rules="${esc(k)}"
+type="button"
+>
+${esc(t("petPolicy"))}
+</button>
+
+<button
+class="dark"
+data-route="${esc(k)}"
+type="button"
+>
+${esc(t("route"))}
+</button>
+
+${infoUrl?`
+<button
+class="${p.website?"":"maps"}"
+data-site="${esc(k)}"
+type="button"
+>
+${esc(infoLabel)}
+</button>
+`:""}
+
+${canBook(p)?`
+<button
+class="booking"
+data-book="${esc(k)}"
+type="button"
+>
+Booking
+</button>
+`:""}
+
+${p.phone?`
+<button
+data-call="${esc(k)}"
+type="button"
+>
+${esc(t("call"))}
+</button>
+`:""}
+
 </div>
+
 </div>
+
 </article>
 `;
+
 }
 )
 .join("");
@@ -4194,8 +5820,7 @@ fullAccuracyCircle=
 L.circle(
 point,
 {
-radius:
-userAccuracy||0,
+radius:userAccuracy||0,
 weight:1,
 opacity:.35,
 fillOpacity:.08,
@@ -4247,8 +5872,7 @@ userAccuracyCircle=
 L.circle(
 point,
 {
-radius:
-userAccuracy||0,
+radius:userAccuracy||0,
 weight:1,
 opacity:.35,
 fillOpacity:.08,
@@ -4278,10 +5902,8 @@ return;
 }
 
 userPosition={
-lat:
-position.coords.latitude,
-lng:
-position.coords.longitude
+lat:position.coords.latitude,
+lng:position.coords.longitude
 };
 
 userAccuracy=
@@ -4921,7 +6543,7 @@ return;
 b.innerHTML=
 a.map(
 (x,i)=>
-`<button class="suggestion" data-geo="${i}"><strong>${esc(String(x.display_name||"").split(",")[0])}</strong><small>${esc(x.display_name||"")}</small></button>`
+`<button class="suggestion" type="button" data-geo="${i}"><strong>${esc(String(x.display_name||"").split(",")[0])}</strong><small>${esc(x.display_name||"")}</small></button>`
 )
 .join("");
 
@@ -5530,7 +7152,162 @@ startGeoWatch();
 
 }
 
+function bindHeader(){
+
+const menuButton=
+document.getElementById(
+"menuButton"
+);
+
+const drawerClose=
+document.getElementById(
+"pdDrawerClose"
+);
+
+const menuOverlay=
+document.getElementById(
+"pdMenuOverlay"
+);
+
+const headerLanguage=
+document.getElementById(
+"headerLanguageSelect"
+);
+
+const drawerLanguage=
+document.getElementById(
+"pdLanguageSelect"
+);
+
+menuButton.onclick=
+openUnifiedMenu;
+
+drawerClose.onclick=
+closeUnifiedMenu;
+
+menuOverlay.onclick=
+closeUnifiedMenu;
+
+headerLanguage.onchange=
+function(){
+
+setSiteLanguage(
+this.value
+);
+
+};
+
+drawerLanguage.onchange=
+function(){
+
+setSiteLanguage(
+this.value
+);
+
+};
+
+document.addEventListener(
+"keydown",
+event=>{
+
+if(
+event.key==="Escape"
+){
+
+closeUnifiedMenu();
+
+}
+
+}
+);
+
+let lastScroll=
+window.scrollY;
+
+let ticking=
+false;
+
+window.addEventListener(
+"scroll",
+()=>{
+
+if(ticking){
+return;
+}
+
+ticking=true;
+
+requestAnimationFrame(
+()=>{
+
+const header=
+document.getElementById(
+"siteHeader"
+);
+
+const now=
+Math.max(
+0,
+window.scrollY
+);
+
+const delta=
+now-
+lastScroll;
+
+if(
+!document.body.classList.contains(
+"menu-open"
+)
+){
+
+if(
+now<=8
+){
+
+header.classList.remove(
+"header-hidden"
+);
+
+}else if(
+delta>8
+){
+
+header.classList.add(
+"header-hidden"
+);
+
+}else if(
+delta<-5
+){
+
+header.classList.remove(
+"header-hidden"
+);
+
+}
+
+}
+
+lastScroll=
+now;
+
+ticking=false;
+
+}
+);
+
+},
+{
+passive:true
+}
+);
+
+}
+
 function bind(){
+
+bindHeader();
 
 document
 .querySelectorAll(
@@ -6113,6 +7890,27 @@ syncLiveLanguage();
 }
 );
 
+window.addEventListener(
+"petsdogue:languagechange",
+event=>{
+
+const next=
+event?.detail?.language;
+
+if(
+next &&
+next!==lang
+){
+
+lang=next;
+
+applyLang();
+
+}
+
+}
+);
+
 }
 
 function syncLiveLanguage(){
@@ -6145,7 +7943,7 @@ languageWatcher
 languageWatcher=
 setInterval(
 syncLiveLanguage,
-250
+500
 );
 
 window.addEventListener(
@@ -6211,8 +8009,6 @@ init();
 
 }
 </script>
-
-<script src="pets-dogue-shell.js?v=20260906-petfriendly-seo-1"></script>
 
 </body>
 </html>
