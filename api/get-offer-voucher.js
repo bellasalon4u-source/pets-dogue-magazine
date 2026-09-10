@@ -6,31 +6,20 @@ PETS & DOGUE
 PROTECTED CLUB MEMBER DISCOUNT
 =========================================================
 
-This endpoint:
+- verifies signed HttpOnly Club session
+- re-checks real Stripe membership
+- supports online and in-store offers
+- online: returns protected promo code
+- offline: generates personal PD2 member barcode
+- barcode contains no email or name
+- opening voucher does NOT mark it redeemed
 
-- verifies the signed HttpOnly Club cookie
-- re-checks the real Stripe subscription
-- allows only active / trialing Club membership
-- loads the requested offer from Supabase
-- supports BOTH:
-    1. online promo codes
-    2. in-store member barcodes
-- checks offer dates and stock
-- checks whether the member already redeemed the offer
-- never exposes member email inside the barcode
-- never marks an offer redeemed just by opening it
+PD2 FORMAT:
 
-IMPORTANT:
+PD2-<HEX_SUBSCRIPTION_ID>-<EXPIRY_BASE36>-<SIGNATURE>
 
-ONLINE
-Returns the protected partner promo code.
-
-IN STORE
-Creates a member-specific signed barcode token.
-The barcode token expires automatically and can later
-be checked by a protected merchant scan endpoint.
-
-Opening/showing a voucher does NOT count as redemption.
+The merchant redemption endpoint receives offerId separately
+and verifies the barcode before redemption.
 =========================================================
 */
 
@@ -107,7 +96,7 @@ function sendJson(
 }
 
 /* =========================================================
-VALUES
+HELPERS
 ========================================================= */
 
 function cleanString(
@@ -162,8 +151,46 @@ function isUuid(
 
 }
 
+function safeEqual(
+  first,
+  second
+) {
+
+  const a =
+    Buffer.from(
+      String(
+        first ||
+        ""
+      )
+    );
+
+  const b =
+    Buffer.from(
+      String(
+        second ||
+        ""
+      )
+    );
+
+  if (
+    a.length !==
+      b.length
+  ) {
+
+    return false;
+
+  }
+
+  return crypto
+    .timingSafeEqual(
+      a,
+      b
+    );
+
+}
+
 /* =========================================================
-REQUEST BODY
+BODY
 ========================================================= */
 
 async function readRequestBody(
@@ -182,9 +209,27 @@ async function readRequestBody(
 
   if (
     typeof req.body ===
-      "string" &&
-    req.body.trim()
+      "string"
   ) {
+
+    if (
+      req.body.length >
+        20000
+    ) {
+
+      throw new Error(
+        "Request body is too large."
+      );
+
+    }
+
+    if (
+      !req.body.trim()
+    ) {
+
+      return {};
+
+    }
 
     try {
 
@@ -203,18 +248,38 @@ async function readRequestBody(
   const chunks =
     [];
 
+  let total =
+    0;
+
   for await (
     const chunk of req
   ) {
 
-    chunks.push(
+    const buffer =
       Buffer.isBuffer(
         chunk
       )
         ? chunk
         : Buffer.from(
             chunk
-          )
+          );
+
+    total +=
+      buffer.length;
+
+    if (
+      total >
+        20000
+    ) {
+
+      throw new Error(
+        "Request body is too large."
+      );
+
+    }
+
+    chunks.push(
+      buffer
     );
 
   }
@@ -349,7 +414,8 @@ function getCookieSecret(
     );
 
   if (
-    configured.length >= 32
+    configured.length >=
+      32
   ) {
 
     return configured;
@@ -386,7 +452,8 @@ function getVoucherSecret(
     );
 
   if (
-    configured.length >= 32
+    configured.length >=
+      32
   ) {
 
     return configured;
@@ -434,44 +501,6 @@ function signCookiePayload(
 
 }
 
-function safeEqual(
-  first,
-  second
-) {
-
-  const a =
-    Buffer.from(
-      String(
-        first ||
-        ""
-      )
-    );
-
-  const b =
-    Buffer.from(
-      String(
-        second ||
-        ""
-      )
-    );
-
-  if (
-    a.length !==
-      b.length
-  ) {
-
-    return false;
-
-  }
-
-  return crypto
-    .timingSafeEqual(
-      a,
-      b
-    );
-
-}
-
 /* =========================================================
 VERIFY CLUB COOKIE
 ========================================================= */
@@ -510,7 +539,8 @@ function verifyClubCookie(
     raw.split(".");
 
   if (
-    parts.length !== 3
+    parts.length !==
+      3
   ) {
 
     return {
@@ -539,7 +569,7 @@ function verifyClubCookie(
 
   }
 
-  const expectedSignature =
+  const expected =
     signCookiePayload(
       encodedPayload,
       secret
@@ -548,7 +578,7 @@ function verifyClubCookie(
   if (
     !safeEqual(
       signature,
-      expectedSignature
+      expected
     )
   ) {
 
@@ -772,7 +802,7 @@ async function stripeRequest(
 }
 
 /* =========================================================
-EXPECTED PLAN
+PLAN
 ========================================================= */
 
 function getExpectedPlan(
@@ -780,8 +810,10 @@ function getExpectedPlan(
 ) {
 
   if (
-    plan === "free" ||
-    plan === "monthly"
+    plan ===
+      "free" ||
+    plan ===
+      "monthly"
   ) {
 
     return {
@@ -797,7 +829,8 @@ function getExpectedPlan(
   }
 
   if (
-    plan === "annual"
+    plan ===
+      "annual"
   ) {
 
     return {
@@ -817,7 +850,7 @@ function getExpectedPlan(
 }
 
 /* =========================================================
-VERIFY STRIPE MEMBERSHIP
+VERIFY REAL STRIPE MEMBERSHIP
 ========================================================= */
 
 async function verifyStripeMembership(
@@ -1039,7 +1072,7 @@ async function verifyStripeMembership(
       memberEmail,
 
     subscriptionId:
-      cookie.subscriptionId,
+      subscription.id,
 
     status,
 
@@ -1227,7 +1260,7 @@ async function getOffer(
 }
 
 /* =========================================================
-REDEMPTION CHECK
+ALREADY REDEEMED
 ========================================================= */
 
 async function hasAlreadyRedeemed(
@@ -1248,10 +1281,13 @@ async function hasAlreadyRedeemed(
     Array.isArray(
       rows
     ) &&
-    rows.length > 0
+    rows.length >
+      0
   );
 
-} /* =========================================================
+}
+
+/* =========================================================
 OFFER VALIDATION
 ========================================================= */
 
@@ -1278,16 +1314,13 @@ function validateOffer(
 
   }
 
-  const status =
+  if (
     cleanString(
       offer.status ||
       "",
-      40
+      30
     )
-    .toLowerCase();
-
-  if (
-    status !==
+    .toLowerCase() !==
       "active"
   ) {
 
@@ -1454,7 +1487,8 @@ function validateOffer(
     Number.isFinite(
       maximum
     ) &&
-    maximum > 0 &&
+    maximum >
+      0 &&
     redeemed >=
       maximum
   ) {
@@ -1514,9 +1548,6 @@ function validateOffer(
 
     redemptionType,
 
-    startsAt:
-      starts,
-
     endsAt:
       ends
 
@@ -1525,7 +1556,7 @@ function validateOffer(
 }
 
 /* =========================================================
-PERSONAL MEMBER BARCODE
+PD2 PERSONAL MEMBER BARCODE
 ========================================================= */
 
 function createMemberBarcode(
@@ -1540,14 +1571,6 @@ function createMemberBarcode(
       "",
       100
     );
-
-  const email =
-    cleanString(
-      membership.email ||
-      "",
-      254
-    )
-    .toLowerCase();
 
   const subscriptionId =
     cleanString(
@@ -1572,8 +1595,8 @@ function createMemberBarcode(
     );
 
   /*
-  Barcode is refreshed at least every 24 hours.
-  It will never outlive the offer itself.
+  Barcode lifetime is maximum 24 hours,
+  but never longer than the offer itself.
   */
 
   const expiresAt =
@@ -1583,37 +1606,21 @@ function createMemberBarcode(
         86400
     );
 
-  const offerPrefix =
-    offerId
-      .replace(
-        /-/g,
-        ""
-      )
-      .slice(
-        0,
-        12
-      )
-      .toUpperCase();
-
   /*
-  Member fingerprint contains no email
-  and cannot be reversed back to the email.
+  Convert Stripe subscription ID to hexadecimal.
+
+  This keeps the barcode compatible with Code 39
+  characters used by the frontend.
   */
 
-  const memberFingerprint =
-    crypto
-      .createHash(
-        "sha256"
+  const subscriptionHex =
+    Buffer
+      .from(
+        subscriptionId,
+        "utf8"
       )
-      .update(
-        `${email}|${subscriptionId}`
-      )
-      .digest(
+      .toString(
         "hex"
-      )
-      .slice(
-        0,
-        10
       )
       .toUpperCase();
 
@@ -1624,6 +1631,10 @@ function createMemberBarcode(
       )
       .toUpperCase();
 
+  /*
+  Signature format MUST match api/redeem-offer.js
+  */
+
   const signature =
     crypto
       .createHmac(
@@ -1633,7 +1644,6 @@ function createMemberBarcode(
       .update(
         [
           offerId,
-          email,
           subscriptionId,
           expiresAt
         ].join("|")
@@ -1643,15 +1653,14 @@ function createMemberBarcode(
       )
       .slice(
         0,
-        16
+        24
       )
       .toUpperCase();
 
   const barcodeValue =
     [
-      "PD1",
-      offerPrefix,
-      memberFingerprint,
+      "PD2",
+      subscriptionHex,
       expiryCode,
       signature
     ]
@@ -1667,7 +1676,7 @@ function createMemberBarcode(
     expiresAtIso:
       new Date(
         expiresAt *
-        1000
+          1000
       )
       .toISOString()
 
@@ -1725,7 +1734,7 @@ async function handler(
 
     return sendJson(
       res,
-      500,
+      503,
       {
 
         ok:
@@ -1797,7 +1806,7 @@ async function handler(
   }
 
   /* =======================================================
-  VERIFY SIGNED CLUB COOKIE
+  VERIFY CLUB SESSION
   ======================================================= */
 
   const cookieSecret =
@@ -1842,7 +1851,7 @@ async function handler(
   }
 
   /* =======================================================
-  VERIFY REAL STRIPE MEMBERSHIP
+  VERIFY STRIPE MEMBERSHIP
   ======================================================= */
 
   let membership;
@@ -1860,7 +1869,7 @@ async function handler(
   ) {
 
     console.error(
-      "PETS & DOGUE discount Stripe verification:",
+      "PETS & DOGUE voucher Stripe verification:",
       error
     );
 
@@ -1928,17 +1937,20 @@ async function handler(
   ) {
 
     console.error(
-      "PETS & DOGUE discount offer lookup:",
+      "PETS & DOGUE voucher offer lookup:",
       error
     );
 
     return sendJson(
       res,
-      500,
+      503,
       {
 
         ok:
           false,
+
+        temporary:
+          true,
 
         error:
           "Unable to load this offer."
@@ -1974,7 +1986,7 @@ async function handler(
   }
 
   /* =======================================================
-  CHECK PREVIOUS REDEMPTION
+  CHECK PREVIOUS USE
   ======================================================= */
 
   if (
@@ -1997,7 +2009,7 @@ async function handler(
     ) {
 
       console.error(
-        "PETS & DOGUE redemption lookup:",
+        "PETS & DOGUE voucher redemption lookup:",
         error
       );
 
@@ -2046,7 +2058,7 @@ async function handler(
   }
 
   /* =======================================================
-  ONLINE DISCOUNT
+  ONLINE
   ======================================================= */
 
   if (
@@ -2096,6 +2108,9 @@ async function handler(
           barcodeValue:
             null,
 
+          barcodeExpiresAt:
+            null,
+
           instructions:
             "",
 
@@ -2125,7 +2140,7 @@ async function handler(
 
           oneUsePerSubscriber:
             offer.one_use_per_subscriber !==
-            false,
+              false,
 
           redeemed:
             false
@@ -2138,7 +2153,7 @@ async function handler(
   }
 
   /* =======================================================
-  IN-STORE MEMBER BARCODE
+  OFFLINE PD2 BARCODE
   ======================================================= */
 
   const voucherSecret =
@@ -2183,14 +2198,6 @@ async function handler(
             220
           ),
 
-        /*
-        Important:
-        offline promoCode is intentionally null.
-
-        The frontend will therefore use barcodeValue,
-        which is the protected personal member token.
-        */
-
         promoCode:
           null,
 
@@ -2233,7 +2240,7 @@ async function handler(
 
         oneUsePerSubscriber:
           offer.one_use_per_subscriber !==
-          false,
+            false,
 
         redeemed:
           false
