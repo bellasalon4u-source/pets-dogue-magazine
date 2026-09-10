@@ -1,32 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta id="pageDescription" name="description" content="PETS & DOGUE — digital lifestyle platform for pets and the people who love them.">
-<title>PETS & DOGUE</title>
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0,viewport-fit=cover"
+>
+
+<title>
+PETS & DOGUE | Digital Lifestyle Platform for Pets
+</title>
+
+<meta
+id="pageDescription"
+name="description"
+content="PETS & DOGUE is a digital lifestyle platform for pets and the people who love them — bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace, member benefits and useful services in one place."
+>
+
+<meta
+name="robots"
+content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+>
+
+<meta
+name="theme-color"
+content="#070707"
+>
+
+<link
+rel="canonical"
+href="https://www.petsanddogue.com/"
+>
+
+<meta
+property="og:type"
+content="website"
+>
+
+<meta
+property="og:site_name"
+content="PETS & DOGUE"
+>
+
+<meta
+property="og:title"
+content="PETS & DOGUE | Digital Lifestyle Platform for Pets"
+>
+
+<meta
+property="og:description"
+content="One world for pets and the people who love them — stories, places, health, fashion, photography, community, contests, rescue, marketplace and member benefits."
+>
+
+<meta
+property="og:url"
+content="https://www.petsanddogue.com/"
+>
+
+<meta
+property="og:image"
+content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
+>
+
+<meta
+name="twitter:card"
+content="summary_large_image"
+>
+
+<meta
+name="twitter:title"
+content="PETS & DOGUE | Digital Lifestyle Platform for Pets"
+>
+
+<meta
+name="twitter:description"
+content="One world. Every pet."
+>
+
+<meta
+name="twitter:image"
+content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
+>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebSite",
+      "@id":"https://www.petsanddogue.com/#website",
+      "url":"https://www.petsanddogue.com/",
+      "name":"PETS & DOGUE",
+      "description":"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them."
+    },
+    {
+      "@type":"Organization",
+      "@id":"https://www.petsanddogue.com/#organization",
+      "name":"PETS & DOGUE",
+      "url":"https://www.petsanddogue.com/",
+      "description":"Digital lifestyle platform for pets and the people who love them.",
+      "slogan":"One world. Every pet."
+    },
+    {
+      "@type":"CollectionPage",
+      "@id":"https://www.petsanddogue.com/#homepage",
+      "url":"https://www.petsanddogue.com/",
+      "name":"PETS & DOGUE",
+      "isPartOf":{
+        "@id":"https://www.petsanddogue.com/#website"
+      },
+      "publisher":{
+        "@id":"https://www.petsanddogue.com/#organization"
+      }
+    }
+  ]
+}
+</script>
 
 <style>
+
 :root{
 --black:#070707;
---black-soft:#121212;
+--black-2:#101010;
 --white:#ffffff;
---cream:#f2efe8;
---cream-2:#ebe6dc;
---line:#d4cdc0;
+--cream:#f4f0e8;
+--cream-2:#ece6da;
+--text:#141414;
+--muted:#706a61;
+--line:#d6cec0;
 --gold:#c89b3c;
+--gold-dark:#8b6419;
 --gold-light:#efd38c;
---gold-metal:linear-gradient(100deg,#8a6419 0%,#b98625 22%,#f7e3a0 46%,#fff4bf 50%,#d39b2e 66%,#8e6418 100%);
---green:#66ef19;
---green-dark:#0f4a20;
---text:#161616;
---muted:#66605a;
---shadow:0 12px 36px rgba(0,0,0,.12);
---radius-xl:28px;
---radius-lg:22px;
---radius-md:18px;
---radius-sm:14px;
---content:1180px;
+--green:#65e51f;
+
+--gold-metal:
+linear-gradient(
+100deg,
+#75500d 0%,
+#b67d17 18%,
+#f0cb62 39%,
+#fff0a6 50%,
+#d59a24 66%,
+#80580f 100%
+);
+
+--content:1100px;
 }
 
 *{
@@ -37,22 +156,19 @@ padding:0;
 
 html{
 scroll-behavior:smooth;
+background:var(--cream);
 }
 
 body{
-font-family:Arial,Helvetica,sans-serif;
+margin:0;
 background:var(--cream);
 color:var(--text);
-line-height:1.45;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
 }
 
 body.drawer-open{
 overflow:hidden;
-}
-
-img{
-display:block;
-max-width:100%;
 }
 
 a{
@@ -65,620 +181,541 @@ select{
 font:inherit;
 }
 
-.pd-shell{
-min-height:100vh;
+button{
+cursor:pointer;
 }
+
+img{
+display:block;
+width:100%;
+}
+
+[hidden]{
+display:none!important;
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
 
 .pd-topbar{
 position:sticky;
 top:0;
-z-index:80;
-background:rgba(7,7,7,.98);
-backdrop-filter:blur(12px);
-border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.pd-header{
-max-width:var(--content);
-margin:0 auto;
-padding:18px 18px 16px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:16px;
-}
-
-.pd-header-btn{
-width:54px;
-height:54px;
-border:1px solid rgba(255,255,255,.12);
-border-radius:18px;
-background:transparent;
-color:var(--white);
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-flex:0 0 auto;
-}
-
-.pd-header-btn:focus-visible,
-.pd-cta:focus-visible,
-.pd-drawer-action:focus-visible,
-.pd-language-select:focus-visible,
-.pd-card-link:focus-visible,
-.pd-rail-card:focus-visible,
-.pd-hero-link:focus-visible{
-outline:3px solid var(--green);
-outline-offset:3px;
-}
-
-.pd-logo{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:3px;
-min-width:0;
-text-align:center;
-}
-
-.pd-logo-small{
-font-family:Georgia,"Times New Roman",serif;
-font-size:14px;
-letter-spacing:.26em;
-text-transform:uppercase;
-color:var(--gold-light);
-}
-
-.pd-logo-main{
-font-family:Georgia,"Times New Roman",serif;
-font-size:42px;
-line-height:.95;
-letter-spacing:.04em;
-color:var(--gold);
-text-transform:uppercase;
-}
-
-.pd-home-link{
-display:flex;
-align-items:center;
-justify-content:center;
-width:54px;
-height:54px;
-border:1px solid rgba(255,255,255,.12);
-border-radius:18px;
-flex:0 0 auto;
-}
-
-.pd-main-nav{
-max-width:var(--content);
-margin:0 auto;
-padding:0 18px 18px;
-display:grid;
-gap:10px;
-}
-
-.pd-priority-grid{
-display:grid;
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:10px;
-}
-
-.pd-priority-link{
-position:relative;
-border:1px solid rgba(255,255,255,.1);
-border-radius:18px;
-overflow:hidden;
-min-height:86px;
-background:var(--black-soft);
-color:var(--white);
-box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
-}
-
-.pd-priority-link::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.72) 100%),
-var(--bg-image) center/cover no-repeat;
-}
-
-.pd-priority-link::after{
-content:"";
-position:absolute;
-left:0;
-right:0;
-bottom:0;
-height:3px;
-background:var(--gold-metal);
-opacity:.9;
-}
-
-.pd-priority-content{
-position:relative;
-z-index:1;
-padding:12px 14px;
-display:flex;
-height:100%;
-flex-direction:column;
-justify-content:flex-end;
-gap:3px;
-}
-
-.pd-priority-title{
-font-weight:800;
-font-size:16px;
-line-height:1.1;
-}
-
-.pd-priority-sub{
-font-size:12px;
-color:rgba(255,255,255,.78);
-}
-
-.pd-secondary-rail{
-display:flex;
-gap:10px;
-overflow-x:auto;
-padding-bottom:2px;
-scrollbar-width:none;
-}
-
-.pd-secondary-rail::-webkit-scrollbar{
-display:none;
-}
-
-.pd-rail-card{
-position:relative;
-min-width:150px;
-max-width:150px;
-border-radius:16px;
-overflow:hidden;
-background:var(--black-soft);
-color:var(--white);
-border:1px solid rgba(255,255,255,.08);
-}
-
-.pd-rail-card::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(180deg,rgba(0,0,0,.08) 10%,rgba(0,0,0,.75) 100%),
-var(--bg-image) center/cover no-repeat;
-}
-
-.pd-rail-inner{
-position:relative;
-z-index:1;
-padding:12px;
-min-height:104px;
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-gap:2px;
-}
-
-.pd-rail-kicker{
-font-size:10px;
-font-weight:700;
-letter-spacing:.16em;
-text-transform:uppercase;
-color:var(--gold-light);
-}
-
-.pd-rail-title{
-font-size:14px;
-font-weight:800;
-line-height:1.15;
-}
-
-.pd-main{
-max-width:var(--content);
-margin:0 auto;
-padding:18px 18px 64px;
-display:grid;
-gap:28px;
-}
-
-.pd-hero{
-display:grid;
-grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
-gap:16px;
-align-items:stretch;
-}
-
-.pd-hero-cover{
-position:relative;
-border-radius:30px;
-overflow:hidden;
-min-height:560px;
-background:#dcd4c7;
-box-shadow:var(--shadow);
-}
-
-.pd-hero-cover img{
+z-index:1600;
 width:100%;
-height:100%;
-object-fit:cover;
+background:#070707;
+color:#fff;
+border-bottom:1px solid #292929;
+transform:translateY(0);
+transition:
+transform .24s ease,
+box-shadow .24s ease;
+will-change:transform;
 }
 
-.pd-hero-badge{
-position:absolute;
-left:18px;
-top:18px;
-display:inline-flex;
-align-items:center;
-gap:8px;
-padding:10px 16px;
-border-radius:999px;
-background:rgba(7,7,7,.86);
-color:var(--white);
-font-size:12px;
-font-weight:700;
-letter-spacing:.14em;
-text-transform:uppercase;
+.pd-topbar.hidden-by-scroll{
+transform:translateY(-105%);
 }
 
-.pd-hero-panel{
+.pd-brand-row{
+height:76px;
+max-width:var(--content);
+margin:auto;
+padding:0 17px;
 display:grid;
-gap:16px;
+grid-template-columns:50px minmax(0,1fr) 50px;
+align-items:center;
+gap:10px;
 }
 
-.pd-hero-copy{
-background:var(--white);
-border:1px solid var(--line);
-border-radius:30px;
-padding:26px 24px;
-box-shadow:var(--shadow);
+.pd-header-button{
+width:46px;
+height:46px;
+border:0;
+background:transparent;
+color:#fff;
 display:flex;
-flex-direction:column;
-justify-content:space-between;
-gap:20px;
-}
-
-.pd-kicker{
-font-size:13px;
-font-weight:800;
-letter-spacing:.22em;
-text-transform:uppercase;
-color:#a6852d;
-}
-
-.pd-hero-title{
-font-family:Georgia,"Times New Roman",serif;
-font-size:clamp(40px,7vw,78px);
-line-height:.95;
-letter-spacing:-.03em;
-}
-
-.pd-hero-text{
-font-size:18px;
-color:var(--muted);
-max-width:42ch;
-}
-
-.pd-hero-actions{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-}
-
-.pd-cta{
-display:inline-flex;
 align-items:center;
 justify-content:center;
-padding:15px 20px;
-border-radius:18px;
-font-weight:800;
-border:1px solid transparent;
-cursor:pointer;
+border-radius:50%;
 }
 
-.pd-cta.primary{
-background:var(--black);
-color:var(--white);
-}
-
-.pd-cta.secondary{
-background:transparent;
-color:var(--black);
-border-color:var(--line);
-}
-
-.pd-hero-mini-grid{
+.pd-menu-lines{
+width:30px;
 display:grid;
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:16px;
-}
-
-.pd-hero-mini{
-position:relative;
-overflow:hidden;
-border-radius:26px;
-min-height:190px;
-background:var(--black);
-color:var(--white);
-box-shadow:var(--shadow);
-}
-
-.pd-hero-mini::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(180deg,rgba(0,0,0,.14) 0%,rgba(0,0,0,.82) 100%),
-var(--bg-image) center/cover no-repeat;
-}
-
-.pd-hero-mini-content{
-position:relative;
-z-index:1;
-padding:18px;
-display:flex;
-height:100%;
-flex-direction:column;
-justify-content:flex-end;
 gap:6px;
 }
 
-.pd-hero-mini-label{
-font-size:11px;
-letter-spacing:.18em;
-font-weight:800;
-text-transform:uppercase;
+.pd-menu-lines span{
+height:2px;
+display:block;
+background:#fff;
+border-radius:999px;
+}
+
+.pd-brand{
+min-width:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+line-height:.86;
+}
+
+.pd-brand-small{
+font:12px Georgia,"Times New Roman",serif;
+letter-spacing:3px;
 color:var(--gold-light);
 }
 
-.pd-hero-mini-title{
-font-size:24px;
-font-family:Georgia,"Times New Roman",serif;
-line-height:1;
-}
-
-.pd-hero-mini-text{
-font-size:14px;
-color:rgba(255,255,255,.82);
-}
-
-.pd-section-head{
-display:flex;
-align-items:flex-end;
-justify-content:space-between;
-gap:16px;
-}
-
-.pd-section-copy{
-display:grid;
-gap:8px;
-max-width:56ch;
-}
-
-.pd-section-title{
-font-family:Georgia,"Times New Roman",serif;
-font-size:clamp(34px,6vw,54px);
-line-height:.96;
-}
-
-.pd-section-text{
-font-size:16px;
-color:var(--muted);
-}
-
-.pd-link-minimal{
-font-weight:800;
-font-size:14px;
-letter-spacing:.12em;
-text-transform:uppercase;
-color:var(--black);
-border-bottom:2px solid var(--gold);
-padding-bottom:3px;
-white-space:nowrap;
-}
-
-.pd-card-grid{
-display:grid;
-grid-template-columns:repeat(4,minmax(0,1fr));
-gap:16px;
-}
-
-.pd-card-link{
-position:relative;
-border-radius:24px;
-overflow:hidden;
-min-height:268px;
-background:var(--black);
-color:var(--white);
-box-shadow:var(--shadow);
-}
-
-.pd-card-link::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(180deg,rgba(0,0,0,.12) 10%,rgba(0,0,0,.85) 100%),
-var(--bg-image) center/cover no-repeat;
-transition:transform .28s ease;
-}
-
-.pd-card-link:hover::before{
-transform:scale(1.03);
-}
-
-.pd-card-link.primary-card{
-min-height:320px;
-}
-
-.pd-card-content{
-position:relative;
-z-index:1;
-padding:18px;
-display:flex;
-height:100%;
-flex-direction:column;
-justify-content:space-between;
-gap:12px;
-}
-
-.pd-card-tag{
-display:inline-flex;
-align-self:flex-start;
-padding:8px 12px;
-border-radius:999px;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(8px);
-font-size:11px;
-font-weight:800;
-letter-spacing:.15em;
-text-transform:uppercase;
-color:var(--white);
-}
-
-.pd-card-title{
-font-family:Georgia,"Times New Roman",serif;
-font-size:32px;
-line-height:.95;
-max-width:9ch;
-}
-
-.pd-card-text{
-font-size:15px;
-color:rgba(255,255,255,.82);
-max-width:26ch;
-}
-
-.pd-card-arrow{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-width:42px;
-height:42px;
-border-radius:50%;
-background:var(--white);
-color:var(--black);
-font-size:22px;
-font-weight:700;
-}
-
-.pd-editorial-grid{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:16px;
-}
-
-.pd-editorial-grid .pd-card-link:nth-child(1){
-grid-column:span 2;
-min-height:250px;
-}
-
-.pd-editorial-grid .pd-card-link:nth-child(4){
-grid-column:span 2;
-}
-
-.pd-live-grid{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:16px;
-}
-
-.pd-club{
-background:var(--black);
-color:var(--white);
-border-radius:32px;
-overflow:hidden;
-display:grid;
-grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
-gap:0;
-box-shadow:var(--shadow);
-}
-
-.pd-club-copy{
-padding:30px 26px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-gap:14px;
-}
-
-.pd-club-title{
-font-family:Georgia,"Times New Roman",serif;
-font-size:clamp(32px,6vw,54px);
-line-height:.96;
-}
-
-.pd-club-text{
-font-size:17px;
-color:rgba(255,255,255,.78);
-max-width:30ch;
-}
-
-.pd-club-image{
-position:relative;
-min-height:360px;
-}
-
-.pd-club-image::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.48) 100%),
-url("https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
-}
-
-.pd-footer{
-background:var(--black);
-color:var(--white);
-padding:34px 18px 40px;
-margin-top:20px;
-}
-
-.pd-footer-inner{
-max-width:var(--content);
-margin:0 auto;
-display:grid;
-gap:18px;
-}
-
-.pd-footer-brand{
-display:grid;
-gap:8px;
-}
-
-.pd-footer-logo{
-font-family:Georgia,"Times New Roman",serif;
-font-size:54px;
-line-height:.9;
-text-transform:uppercase;
-letter-spacing:.04em;
+.pd-brand-main{
+font:normal 42px Georgia,"Times New Roman",serif;
+letter-spacing:3px;
 color:var(--gold);
 }
 
-.pd-footer-sub{
-font-size:24px;
-font-style:italic;
-color:rgba(255,255,255,.74);
+.pd-home-icon{
+width:29px;
+height:29px;
+fill:none;
+stroke:#fff;
+stroke-width:2.1;
+}
+
+
+/* =========================================================
+PRIMARY NAV
+========================================================= */
+
+.pd-primary-nav{
+border-top:1px solid #282828;
+border-bottom:1px solid #292929;
+}
+
+.pd-primary-inner{
+max-width:var(--content);
+margin:auto;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+}
+
+.pd-primary-item{
+min-width:0;
+height:74px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:6px;
+color:#fff;
+position:relative;
+border-right:1px solid #292929;
+padding:5px 4px;
+text-align:center;
+}
+
+.pd-primary-item:last-child{
+border-right:0;
+}
+
+.pd-primary-item svg{
+width:27px;
+height:27px;
+fill:none;
+stroke:var(--gold-light);
+stroke-width:1.9;
+stroke-linecap:round;
+stroke-linejoin:round;
+flex:none;
+}
+
+.pd-primary-label{
+font-size:12px;
+font-weight:800;
+line-height:1.05;
+max-width:100%;
+}
+
+.pd-primary-item:hover,
+.pd-primary-item:focus-visible{
+background:#111;
+}
+
+
+/* =========================================================
+SECONDARY NAV
+========================================================= */
+
+.pd-secondary-nav{
+max-width:var(--content);
+margin:auto;
+display:flex;
+overflow-x:auto;
+overflow-y:hidden;
+scrollbar-width:none;
+-webkit-overflow-scrolling:touch;
+}
+
+.pd-secondary-nav::-webkit-scrollbar{
+display:none;
+}
+
+.pd-secondary-item{
+flex:0 0 100px;
+height:64px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:4px;
+position:relative;
+color:#fff;
+border-right:1px solid #252525;
+text-align:center;
+padding:4px;
+}
+
+.pd-secondary-item svg{
+width:21px;
+height:21px;
+fill:none;
+stroke:#fff;
+stroke-width:1.8;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+.pd-secondary-label{
+font-size:10px;
+font-weight:800;
+line-height:1.05;
+white-space:normal;
+}
+
+.pd-secondary-item.active{
+color:var(--gold-light);
+}
+
+.pd-secondary-item.active svg{
+stroke:var(--gold-light);
+}
+
+.pd-secondary-item.active:after{
+content:"";
+position:absolute;
+left:8px;
+right:8px;
+bottom:0;
+height:3px;
+background:var(--gold-metal);
+}
+
+.pd-secondary-item.emphasis svg{
+stroke:var(--gold-light);
+}
+
+.pd-secondary-item.emphasis{
+border-left:1px solid rgba(200,155,60,.38);
+border-right:1px solid rgba(200,155,60,.38);
+}
+
+
+/* =========================================================
+MAIN
+========================================================= */
+
+main{
+max-width:var(--content);
+margin:auto;
+padding:16px 15px 55px;
+}
+
+
+/* =========================================================
+COVER
+========================================================= */
+
+.pd-cover-shell{
+max-width:780px;
+margin:0 auto;
+}
+
+.pd-cover{
+display:block;
+position:relative;
+width:100%;
+overflow:hidden;
+border-radius:24px;
+background:#111;
+box-shadow:0 12px 34px rgba(0,0,0,.14);
+}
+
+.pd-cover img{
+width:100%;
+height:auto;
+object-fit:cover;
+}
+
+.pd-cover-bottom{
+background:#0a0a0a;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:17px;
+}
+
+.pd-season-button{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:13px;
+min-width:205px;
+height:52px;
+padding:0 26px;
+border-radius:999px;
+background:var(--gold-metal);
+color:#111;
+font-weight:900;
+font-size:15px;
+box-shadow:
+inset 0 0 0 1px rgba(255,255,255,.32),
+0 5px 18px rgba(0,0,0,.2);
+}
+
+.pd-season-button svg{
+width:17px;
+height:17px;
+fill:none;
+stroke:#111;
+stroke-width:2.4;
+}
+
+
+/* =========================================================
+PHOTO BOARD
+========================================================= */
+
+.pd-board{
+margin-top:15px;
+columns:4 220px;
+column-gap:8px;
+}
+
+.pd-photo-card{
+position:relative;
+display:block;
+width:100%;
+margin:0 0 8px;
+break-inside:avoid;
+overflow:hidden;
+border-radius:18px;
+background:#111;
+box-shadow:0 7px 20px rgba(0,0,0,.1);
+}
+
+.pd-photo-card img{
+width:100%;
+height:auto;
+min-height:190px;
+object-fit:cover;
+}
+
+.pd-photo-card.tall img{
+aspect-ratio:.76;
+}
+
+.pd-photo-card.medium img{
+aspect-ratio:1;
+}
+
+.pd-photo-card.wide img{
+aspect-ratio:1.28;
+}
+
+.pd-photo-shade{
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.91) 0%,
+rgba(0,0,0,.32) 42%,
+rgba(0,0,0,.02) 72%
+);
+pointer-events:none;
+}
+
+.pd-photo-copy{
+position:absolute;
+z-index:2;
+left:14px;
+right:14px;
+bottom:13px;
+color:#fff;
+}
+
+.pd-photo-kicker{
+display:block;
+color:var(--gold-light);
+font-size:9px;
+font-weight:900;
+letter-spacing:1.7px;
+text-transform:uppercase;
+margin-bottom:4px;
+}
+
+.pd-photo-title{
+font:normal 25px/1 Georgia,"Times New Roman",serif;
+}
+
+.pd-photo-arrow{
+position:absolute;
+z-index:3;
+top:11px;
+right:11px;
+width:37px;
+height:37px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:rgba(7,7,7,.75);
+border:1px solid rgba(255,255,255,.8);
+color:#fff;
+font-size:19px;
+backdrop-filter:blur(5px);
+}
+
+
+/* =========================================================
+CLUB
+========================================================= */
+
+.pd-club-card{
+position:relative;
+margin-top:8px;
+min-height:240px;
+overflow:hidden;
+border-radius:22px;
+background:#111;
+color:#fff;
+box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+
+.pd-club-card:before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+90deg,
+rgba(0,0,0,.92) 0%,
+rgba(0,0,0,.67) 48%,
+rgba(0,0,0,.18) 100%
+),
+url("https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1500&q=85")
+center/cover no-repeat;
+}
+
+.pd-club-content{
+position:relative;
+z-index:2;
+min-height:240px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:flex-start;
+padding:27px;
+max-width:570px;
+}
+
+.pd-club-kicker{
+font-size:10px;
+font-weight:900;
+letter-spacing:2.2px;
+color:var(--gold-light);
+margin-bottom:8px;
+}
+
+.pd-club-title{
+font:normal 40px/1 Georgia,"Times New Roman",serif;
+margin-bottom:14px;
+}
+
+.pd-club-button{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+height:48px;
+padding:0 23px;
+border-radius:999px;
+background:var(--green);
+color:#111;
+font-size:13px;
+font-weight:900;
+}
+
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+footer{
+background:#050505;
+color:#fff;
+text-align:center;
+padding:44px 20px 50px;
+}
+
+.pd-footer-logo{
+font:normal 46px Georgia,"Times New Roman",serif;
+letter-spacing:3px;
+color:var(--gold);
+}
+
+.pd-footer-platform{
+font-size:14px;
+font-weight:800;
+margin-top:8px;
+}
+
+.pd-footer-slogan{
+margin-top:7px;
+font:italic 19px Georgia,"Times New Roman",serif;
+color:var(--gold-light);
 }
 
 .pd-footer-links{
+max-width:900px;
+margin:24px auto 0;
 display:flex;
+justify-content:center;
+align-items:center;
 flex-wrap:wrap;
-gap:12px 20px;
-font-size:15px;
-color:rgba(255,255,255,.82);
+gap:12px 19px;
 }
+
+.pd-footer-links a{
+font-size:13px;
+color:#ccc;
+}
+
+
+/* =========================================================
+DRAWER
+========================================================= */
 
 .pd-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.52);
+z-index:3000;
+background:rgba(0,0,0,.68);
+backdrop-filter:blur(3px);
 opacity:0;
 visibility:hidden;
-transition:opacity .22s ease,visibility .22s ease;
-z-index:140;
+transition:.22s;
 }
 
 .pd-overlay.open{
@@ -688,17 +725,20 @@ visibility:visible;
 
 .pd-drawer{
 position:fixed;
-top:0;
 left:0;
-width:min(92vw,520px);
-height:100vh;
-background:var(--cream);
-transform:translateX(-100%);
+top:0;
+z-index:3100;
+width:min(78vw,390px);
+min-width:286px;
+height:100dvh;
+background:#f7f4ed;
+color:#111;
+transform:translateX(-102%);
 transition:transform .24s ease;
-z-index:150;
+box-shadow:20px 0 55px rgba(0,0,0,.28);
+overflow:hidden;
 display:flex;
 flex-direction:column;
-box-shadow:0 24px 60px rgba(0,0,0,.34);
 }
 
 .pd-drawer.open{
@@ -708,7 +748,7 @@ transform:translateX(0);
 html[dir="rtl"] .pd-drawer{
 left:auto;
 right:0;
-transform:translateX(100%);
+transform:translateX(102%);
 }
 
 html[dir="rtl"] .pd-drawer.open{
@@ -716,451 +756,687 @@ transform:translateX(0);
 }
 
 .pd-drawer-head{
-background:var(--black);
-color:var(--white);
-padding:24px 18px 18px;
+height:86px;
+flex:none;
+background:#070707;
+color:#fff;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:16px;
+padding:0 17px;
 }
 
 .pd-drawer-title{
-font-family:Georgia,"Times New Roman",serif;
-font-size:32px;
+font:normal 31px Georgia,"Times New Roman",serif;
+}
+
+.pd-drawer-close{
+width:43px;
+height:43px;
+border:1px solid #555;
+border-radius:50%;
+background:transparent;
+color:#fff;
+font-size:27px;
 line-height:1;
 }
 
-.pd-close{
-width:54px;
-height:54px;
-border-radius:50%;
-border:1px solid rgba(255,255,255,.16);
-background:transparent;
-color:var(--white);
+.pd-drawer-scroll{
+overflow-y:auto;
+padding:12px 11px 24px;
+}
+
+.pd-account-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-bottom:12px;
+}
+
+.pd-account-button{
+height:48px;
+border-radius:999px;
+border:2px solid #171717;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:28px;
-cursor:pointer;
-flex:0 0 auto;
+font-size:12px;
+font-weight:900;
+background:#fff;
 }
 
-.pd-drawer-scroll{
-padding:18px;
-overflow:auto;
-display:grid;
-gap:14px;
-}
-
-.pd-drawer-actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
-
-.pd-drawer-action{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-min-height:62px;
-padding:10px 16px;
-border-radius:999px;
-font-weight:800;
-border:2px solid #1c1c1c;
-background:transparent;
-color:var(--black);
-}
-
-.pd-drawer-action.primary{
+.pd-account-button.club{
 background:var(--green);
 border-color:var(--green);
-color:var(--black);
-}
-
-.pd-language-wrap{
-display:grid;
-gap:8px;
 }
 
 .pd-language-label{
-font-size:12px;
-font-weight:800;
-letter-spacing:.16em;
+display:block;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.6px;
+color:#777;
 text-transform:uppercase;
-color:#777066;
+margin:0 3px 6px;
 }
 
 .pd-language-select{
 width:100%;
-min-height:68px;
-padding:0 18px;
+height:51px;
+border:2px solid #1b1b1b;
 border-radius:999px;
-border:2px solid #1c1c1c;
-background:var(--cream);
-color:var(--text);
+background:#fff;
+padding:0 15px;
+font-weight:800;
+margin-bottom:12px;
 }
 
-.pd-menu-list{
+.pd-drawer-list{
 display:grid;
-gap:12px;
+gap:7px;
 }
 
-.pd-menu-card{
+.pd-drawer-card{
 display:grid;
-grid-template-columns:112px 1fr;
-min-height:108px;
-border-radius:26px;
+grid-template-columns:82px minmax(0,1fr);
+min-height:82px;
+border:2px solid #191919;
+border-radius:18px;
+background:#fff;
 overflow:hidden;
-border:2px solid #1c1c1c;
-background:#f6f2ea;
 }
 
-.pd-menu-card.active{
-background:var(--black);
-color:var(--white);
+.pd-drawer-card.active{
+background:#0b0b0b;
+color:#fff;
 }
 
-.pd-menu-thumb{
+.pd-drawer-card img{
+width:82px;
 height:100%;
-background:var(--thumb-image) center/cover no-repeat;
+min-height:82px;
+object-fit:cover;
 }
 
-.pd-menu-copy{
-padding:14px 16px;
+.pd-drawer-copy{
+padding:10px 11px;
 display:flex;
 flex-direction:column;
 justify-content:center;
-gap:4px;
+min-width:0;
 }
 
-.pd-menu-title{
-font-family:Georgia,"Times New Roman",serif;
-font-size:22px;
-line-height:1;
-font-weight:700;
+.pd-drawer-name{
+font:700 19px/1 Georgia,"Times New Roman",serif;
 }
 
-.pd-menu-card.active .pd-menu-title{
+.pd-drawer-card.active .pd-drawer-name{
 color:var(--gold-light);
 }
 
-.pd-menu-desc{
-font-size:14px;
-color:var(--muted);
+.pd-drawer-desc{
+margin-top:4px;
+font-size:11px;
+line-height:1.25;
+color:#706c66;
 }
 
-.pd-menu-card.active .pd-menu-desc{
-color:rgba(255,255,255,.74);
+.pd-drawer-card.active .pd-drawer-desc{
+color:#ddd;
 }
 
-.pd-sr-only{
-position:absolute!important;
-width:1px!important;
-height:1px!important;
-padding:0!important;
-margin:-1px!important;
-overflow:hidden!important;
-clip:rect(0,0,0,0)!important;
-white-space:nowrap!important;
-border:0!important;
+
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] .pd-photo-arrow{
+right:auto;
+left:11px;
 }
 
-@media(max-width:1080px){
 
-.pd-hero{
-grid-template-columns:1fr;
-}
-
-.pd-card-grid{
-grid-template-columns:repeat(2,minmax(0,1fr));
-}
-
-.pd-editorial-grid,
-.pd-live-grid{
-grid-template-columns:repeat(2,minmax(0,1fr));
-}
-
-.pd-editorial-grid .pd-card-link:nth-child(1),
-.pd-editorial-grid .pd-card-link:nth-child(4){
-grid-column:auto;
-}
-
-.pd-club{
-grid-template-columns:1fr;
-}
-
-}
+/* =========================================================
+MOBILE
+========================================================= */
 
 @media(max-width:720px){
 
-.pd-header{
-padding:16px 16px 14px;
+.pd-brand-row{
+height:68px;
+padding:0 13px;
+grid-template-columns:46px minmax(0,1fr) 46px;
 }
 
-.pd-logo-main{
+.pd-header-button{
+width:44px;
+height:44px;
+}
+
+.pd-brand-small{
+font-size:10px;
+letter-spacing:2.5px;
+}
+
+.pd-brand-main{
 font-size:34px;
+letter-spacing:2px;
 }
 
-.pd-header-btn,
-.pd-home-link{
-width:50px;
-height:50px;
-border-radius:16px;
+.pd-primary-item{
+height:60px;
+gap:3px;
+padding:3px 2px;
 }
 
-.pd-main-nav{
-padding:0 16px 16px;
+.pd-primary-item svg{
+width:22px;
+height:22px;
 }
 
-.pd-main{
-padding:16px 16px 52px;
-gap:24px;
+.pd-primary-label{
+font-size:10px;
+line-height:1.05;
 }
 
-.pd-priority-link{
-min-height:84px;
+.pd-secondary-item{
+flex-basis:82px;
+height:53px;
+gap:2px;
 }
 
-.pd-hero-cover{
-min-height:440px;
-border-radius:26px;
+.pd-secondary-item svg{
+width:18px;
+height:18px;
 }
 
-.pd-hero-copy{
-border-radius:26px;
-padding:22px 20px;
+.pd-secondary-label{
+font-size:8.5px;
+line-height:1;
 }
 
-.pd-hero-text{
-font-size:16px;
+main{
+padding:12px 10px 42px;
 }
 
-.pd-hero-mini-grid{
-grid-template-columns:1fr;
+.pd-cover{
+border-radius:19px;
 }
 
-.pd-section-head{
-flex-direction:column;
-align-items:flex-start;
+.pd-cover-bottom{
+padding:13px;
 }
 
-.pd-card-grid,
-.pd-editorial-grid,
-.pd-live-grid{
-grid-template-columns:1fr;
+.pd-season-button{
+height:46px;
+min-width:180px;
+font-size:14px;
 }
 
-.pd-card-link,
-.pd-card-link.primary-card{
-min-height:280px;
+.pd-board{
+margin-top:9px;
+columns:2;
+column-gap:6px;
 }
 
-.pd-card-title{
-font-size:28px;
+.pd-photo-card{
+margin-bottom:6px;
+border-radius:14px;
 }
 
-.pd-drawer{
-width:calc(100vw - 34px);
+.pd-photo-copy{
+left:10px;
+right:10px;
+bottom:10px;
 }
 
-.pd-menu-card{
-grid-template-columns:110px 1fr;
+.pd-photo-kicker{
+font-size:7px;
+letter-spacing:1.3px;
 }
 
-}
-
-@media(max-width:520px){
-
-.pd-priority-grid{
-grid-template-columns:1fr;
-}
-
-.pd-drawer-actions{
-grid-template-columns:1fr 1fr;
-}
-
-.pd-menu-card{
-grid-template-columns:96px 1fr;
-min-height:102px;
-}
-
-.pd-menu-title{
+.pd-photo-title{
 font-size:20px;
 }
 
+.pd-photo-arrow{
+width:32px;
+height:32px;
+top:8px;
+right:8px;
+font-size:16px;
 }
+
+html[dir="rtl"] .pd-photo-arrow{
+right:auto;
+left:8px;
+}
+
+.pd-club-card,
+.pd-club-content{
+min-height:205px;
+}
+
+.pd-club-content{
+padding:22px 18px;
+}
+
+.pd-club-title{
+font-size:33px;
+max-width:8ch;
+}
+
+.pd-footer-logo{
+font-size:38px;
+}
+
+}
+
+
+@media(max-width:390px){
+
+.pd-primary-label{
+font-size:9px;
+}
+
+.pd-secondary-item{
+flex-basis:78px;
+}
+
+.pd-secondary-label{
+font-size:8px;
+}
+
+.pd-photo-title{
+font-size:18px;
+}
+
+}
+
+
+/* =========================================================
+ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible{
+outline:3px solid var(--green);
+outline-offset:2px;
+}
+
+@media(prefers-reduced-motion:reduce){
+
+html{
+scroll-behavior:auto;
+}
+
+.pd-topbar,
+.pd-drawer,
+.pd-overlay{
+transition:none;
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="pd-shell">
 
-<header class="pd-topbar">
-<div class="pd-header">
-<button class="pd-header-btn" id="openDrawerBtn" type="button" aria-label="Open menu">
-<svg width="28" height="22" viewBox="0 0 28 22" fill="none" aria-hidden="true">
-<path d="M1.5 2h25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-<path d="M1.5 11h25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-<path d="M1.5 20h25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-</svg>
+<header
+class="pd-topbar"
+id="pdTopbar"
+>
+
+<div class="pd-brand-row">
+
+<button
+class="pd-header-button"
+id="openDrawer"
+type="button"
+aria-label="Open menu"
+>
+
+<span class="pd-menu-lines">
+<span></span>
+<span></span>
+<span></span>
+</span>
+
 </button>
 
-<a class="pd-logo" href="/index.html" aria-label="PETS & DOGUE home">
-<span class="pd-logo-small">PETS &amp;</span>
-<span class="pd-logo-main">DOGUE</span>
+
+<a
+class="pd-brand notranslate"
+translate="no"
+href="/index.html"
+aria-label="PETS & DOGUE home"
+>
+
+<span class="pd-brand-small">
+PETS &amp;
+</span>
+
+<span class="pd-brand-main">
+DOGUE
+</span>
+
 </a>
 
-<a class="pd-home-link" href="/index.html" aria-label="Home">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-<path d="M3 10.5L12 3l9 7.5V21h-6v-6H9v6H3v-10.5Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+
+<a
+class="pd-header-button"
+href="/index.html"
+aria-label="Home"
+>
+
+<svg
+class="pd-home-icon"
+viewBox="0 0 24 24"
+aria-hidden="true"
+>
+<path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/>
 </svg>
+
 </a>
+
 </div>
 
-<nav class="pd-main-nav" aria-label="Primary site navigation">
-<div class="pd-priority-grid" id="priorityGrid"></div>
-<div class="pd-secondary-rail" id="secondaryRail"></div>
+
+<nav
+class="pd-primary-nav"
+aria-label="Main PETS & DOGUE services"
+>
+
+<div
+class="pd-primary-inner"
+id="primaryNavigation"
+></div>
+
 </nav>
+
+
+<nav
+class="pd-secondary-nav"
+id="secondaryNavigation"
+aria-label="PETS & DOGUE sections"
+></nav>
+
 </header>
 
-<main class="pd-main">
 
-<section class="pd-hero">
-<div class="pd-hero-cover">
-<img
-src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1400&q=80"
-alt="Featured PETS & DOGUE cover"
-id="heroImage"
+<main>
+
+
+<section class="pd-cover-shell">
+
+<a
+class="pd-cover"
+href="/issue-01.html"
+aria-label="Open PETS & DOGUE Edition 01"
 >
-<div class="pd-hero-badge" id="heroBadge">Summer 2026</div>
+
+<img
+src="file_00000000a9d471fda9b4629589be22a9.png"
+alt="PETS & DOGUE Edition 01"
+fetchpriority="high"
+decoding="async"
+>
+
+<div class="pd-cover-bottom">
+
+<span
+class="pd-season-button"
+id="seasonButton"
+>
+
+<span id="seasonText">
+Summer 2026
+</span>
+
+<svg
+viewBox="0 0 24 24"
+aria-hidden="true"
+>
+<path d="m9 4 8 8-8 8"/>
+</svg>
+
+</span>
+
 </div>
 
-<div class="pd-hero-panel">
-<div class="pd-hero-copy">
-<div class="pd-copy-stack">
-<div class="pd-kicker" id="heroKicker">PETS &amp; DOGUE</div>
-<h1 class="pd-hero-title" id="heroTitle">A brighter world for pets and their people</h1>
-<p class="pd-hero-text" id="heroText">
-Original stories, practical help, stylish inspiration, pet-friendly places and a living community — all in one clear visual home.
-</p>
-</div>
+</a>
 
-<div class="pd-hero-actions">
-<a class="pd-cta primary pd-hero-link" id="heroPrimaryLink" href="/cover-stars.html">Explore cover stars</a>
-<a class="pd-cta secondary pd-hero-link" id="heroSecondaryLink" href="/community.html">Open community</a>
-</div>
-</div>
-
-<div class="pd-hero-mini-grid" id="heroMiniGrid"></div>
-</div>
 </section>
 
-<section>
-<div class="pd-section-head">
-<div class="pd-section-copy">
-<div class="pd-kicker" id="worldsKicker">Main directions</div>
-<h2 class="pd-section-title" id="worldsTitle">Everything people use most — first</h2>
-<p class="pd-section-text" id="worldsText">
-The homepage now starts with the most practical sections, while editorial rubrics stay visible but lighter and cleaner below.
-</p>
-</div>
-<a class="pd-link-minimal" href="/community.html" id="worldsLink">See all</a>
+
+<section
+class="pd-board"
+id="photoBoard"
+aria-label="PETS & DOGUE sections"
+></section>
+
+
+<section class="pd-club-card">
+
+<div class="pd-club-content">
+
+<div
+class="pd-club-kicker notranslate"
+translate="no"
+>
+PETS &amp; DOGUE CLUB
 </div>
 
-<div class="pd-card-grid" id="primaryCards"></div>
+<h2
+class="pd-club-title"
+id="clubTitle"
+>
+PETS &amp; DOGUE Club
+</h2>
+
+<a
+class="pd-club-button"
+href="/club.html"
+id="clubButton"
+>
+Club
+</a>
+
+</div>
+
 </section>
 
-<section>
-<div class="pd-section-head">
-<div class="pd-section-copy">
-<div class="pd-kicker" id="editorialKicker">Editorial</div>
-<h2 class="pd-section-title" id="editorialTitle">Visual stories with more photos and less clutter</h2>
-<p class="pd-section-text" id="editorialText">
-Magazine content stays bold and luxurious, but the layout is clearer, lighter and easier to scan on mobile.
-</p>
-</div>
-<a class="pd-link-minimal" href="/articles.html" id="editorialLink">See all</a>
-</div>
-
-<div class="pd-editorial-grid" id="editorialCards"></div>
-</section>
-
-<section>
-<div class="pd-section-head">
-<div class="pd-section-copy">
-<div class="pd-kicker" id="liveKicker">Live now</div>
-<h2 class="pd-section-title" id="liveTitle">Useful sections that move every day</h2>
-<p class="pd-section-text" id="liveText">
-Fresh updates, real places, active listings and community activity — all reachable without wasting screen space.
-</p>
-</div>
-<a class="pd-link-minimal" href="/marketplace.html" id="liveLink">See all</a>
-</div>
-
-<div class="pd-live-grid" id="liveCards"></div>
-</section>
-
-<section class="pd-club">
-<div class="pd-club-copy">
-<div class="pd-kicker" id="clubKicker">Club &amp; benefits</div>
-<h2 class="pd-club-title" id="clubTitle">Join PETS &amp; DOGUE Club</h2>
-<p class="pd-club-text" id="clubText">
-Member discounts, contests, marketplace visibility, cover-star moments and pet-friendly discoveries in one bright subscription space.
-</p>
-<a class="pd-cta primary" href="/club.html" id="clubButton">Join the club</a>
-</div>
-<div class="pd-club-image" aria-hidden="true"></div>
-</section>
 
 </main>
 
-<footer class="pd-footer">
-<div class="pd-footer-inner">
-<div class="pd-footer-brand">
-<div class="pd-footer-logo">PETS &amp; DOGUE</div>
-<div id="footerLine1">Digital lifestyle platform</div>
-<div class="pd-footer-sub" id="footerLine2">One world. Every pet.</div>
+
+<footer>
+
+<div
+class="pd-footer-logo notranslate"
+translate="no"
+>
+PETS &amp; DOGUE
 </div>
 
-<nav class="pd-footer-links" id="footerLinks" aria-label="Footer links"></nav>
+<div
+class="pd-footer-platform notranslate"
+translate="no"
+>
+Digital lifestyle platform
 </div>
+
+<div
+class="pd-footer-slogan notranslate"
+translate="no"
+>
+One world. Every pet.
+</div>
+
+<nav
+class="pd-footer-links"
+id="footerLinks"
+aria-label="Footer"
+></nav>
+
 </footer>
 
-</div>
 
-<div class="pd-overlay" id="drawerOverlay"></div>
+<div
+class="pd-overlay"
+id="drawerOverlay"
+></div>
 
-<aside class="pd-drawer" id="drawerMenu" aria-hidden="true">
+
+<aside
+class="pd-drawer"
+id="drawer"
+aria-hidden="true"
+>
+
 <div class="pd-drawer-head">
-<h2 class="pd-drawer-title" id="drawerTitle">Contents</h2>
-<button class="pd-close" id="closeDrawerBtn" type="button" aria-label="Close menu">×</button>
+
+<h2
+class="pd-drawer-title"
+id="drawerTitle"
+>
+Contents
+</h2>
+
+<button
+class="pd-drawer-close"
+id="closeDrawer"
+type="button"
+aria-label="Close menu"
+>
+×
+</button>
+
 </div>
+
 
 <div class="pd-drawer-scroll">
-<div class="pd-drawer-actions">
-<a class="pd-drawer-action" href="/login.html" id="loginBtn">Log in</a>
-<a class="pd-drawer-action primary" href="/club.html" id="joinBtn">Join club</a>
+
+<div class="pd-account-row">
+
+<a
+class="pd-account-button"
+href="/account.html"
+id="loginButton"
+>
+Sign In
+</a>
+
+<a
+class="pd-account-button club"
+href="/club.html"
+id="joinButton"
+>
+Join Club
+</a>
+
 </div>
 
-<div class="pd-language-wrap">
-<label class="pd-language-label" for="siteLanguage" id="languageLabel">Language</label>
-<select class="pd-language-select" id="siteLanguage" aria-label="Language selector"></select>
+
+<label
+class="pd-language-label"
+id="languageLabel"
+for="languageSelect"
+>
+Language
+</label>
+
+<select
+class="pd-language-select"
+id="languageSelect"
+aria-label="Language"
+>
+
+<option value="en">EN — English</option>
+<option value="uk">UA — Українська</option>
+<option value="ru">RU — Русский</option>
+<option value="fr">FR — Français</option>
+<option value="de">DE — Deutsch</option>
+<option value="es">ES — Español</option>
+<option value="it">IT — Italiano</option>
+<option value="pt">PT — Português</option>
+<option value="nl">NL — Nederlands</option>
+<option value="pl">PL — Polski</option>
+<option value="cs">CZ — Čeština</option>
+<option value="sk">SK — Slovenčina</option>
+<option value="hu">HU — Magyar</option>
+<option value="ro">RO — Română</option>
+<option value="bg">BG — Български</option>
+<option value="el">GR — Ελληνικά</option>
+<option value="sv">SE — Svenska</option>
+<option value="da">DK — Dansk</option>
+<option value="no">NO — Norsk</option>
+<option value="fi">FI — Suomi</option>
+<option value="tr">TR — Türkçe</option>
+<option value="ar">AR — العربية</option>
+<option value="hi">HI — हिन्दी</option>
+
+</select>
+
+
+<nav
+class="pd-drawer-list"
+id="drawerList"
+aria-label="PETS & DOGUE menu"
+></nav>
+
 </div>
 
-<nav class="pd-menu-list" id="drawerCardList" aria-label="Side menu"></nav>
-</div>
 </aside>
+
+
+<script src="/i18n/common.js?v=2"></script>
+<script src="/i18n/engine.js?v=3"></script>
+
 
 <script>
 (function(){
+
 "use strict";
 
-const LANGUAGE_KEY = "pets_dogue_language";
+
+/* =========================================================
+CONFIG
+========================================================= */
+
+const LANGUAGE_KEY =
+"pets_dogue_language";
+
 
 const SUPPORTED_LANGUAGES = [
-"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk","hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+"en",
+"uk",
+"ru",
+"fr",
+"de",
+"es",
+"it",
+"pt",
+"nl",
+"pl",
+"cs",
+"sk",
+"hu",
+"ro",
+"bg",
+"el",
+"sv",
+"da",
+"no",
+"fi",
+"tr",
+"ar",
+"hi"
 ];
+
 
 const LANGUAGE_ALIASES = {
 ua:"uk",
@@ -1170,672 +1446,1656 @@ se:"sv",
 dk:"da"
 };
 
-const LANGUAGE_NAMES = {
-en:"English",
-uk:"Українська",
-ru:"Русский",
-fr:"Français",
-de:"Deutsch",
-es:"Español",
-it:"Italiano",
-pt:"Português",
-nl:"Nederlands",
-pl:"Polski",
-cs:"Čeština",
-sk:"Slovenčina",
-hu:"Magyar",
-ro:"Română",
-bg:"Български",
-el:"Ελληνικά",
-sv:"Svenska",
-da:"Dansk",
-no:"Norsk",
-fi:"Suomi",
-tr:"Türkçe",
-ar:"العربية",
-hi:"हिन्दी"
-};
 
-const COPY = {
+const SIMPLE_UI = {
+
 en:{
-pageDescription:"PETS & DOGUE — digital lifestyle platform for pets and the people who love them.",
-drawerTitle:"Contents",
-login:"Log in",
-joinClub:"Join club",
+contents:"Contents",
+signIn:"Sign In",
+joinClub:"Join Club",
 language:"Language",
-heroBadge:"Summer 2026",
-heroKicker:"PETS & DOGUE",
-heroTitle:"A brighter world for pets and their people",
-heroText:"Original stories, practical help, stylish inspiration, pet-friendly places and a living community — all in one clear visual home.",
-heroPrimary:"Explore cover stars",
-heroSecondary:"Open community",
-worldsKicker:"Main directions",
-worldsTitle:"Everything people use most — first",
-worldsText:"The homepage now starts with the most practical sections, while editorial rubrics stay visible but lighter and cleaner below.",
-editorialKicker:"Editorial",
-editorialTitle:"Visual stories with more photos and less clutter",
-editorialText:"Magazine content stays bold and luxurious, but the layout is clearer, lighter and easier to scan on mobile.",
-liveKicker:"Live now",
-liveTitle:"Useful sections that move every day",
-liveText:"Fresh updates, real places, active listings and community activity — all reachable without wasting screen space.",
-clubKicker:"Club & benefits",
-clubTitle:"Join PETS & DOGUE Club",
-clubText:"Member discounts, contests, marketplace visibility, cover-star moments and pet-friendly discoveries in one bright subscription space.",
-clubButton:"Join the club",
-seeAll:"See all",
-footerLine1:"Digital lifestyle platform",
-footerLine2:"One world. Every pet."
+season:"Summer 2026",
+edition:"Edition",
+help:"Help",
+club:"Join Club"
 },
-ru:{
-pageDescription:"PETS & DOGUE — цифровая lifestyle-платформа для питомцев и людей, которые их любят.",
-drawerTitle:"Содержание",
-login:"Войти",
-joinClub:"Вступить в клуб",
-language:"Язык",
-heroBadge:"Лето 2026",
-heroKicker:"PETS & DOGUE",
-heroTitle:"Новый цифровой мир для людей, которые любят животных",
-heroText:"Оригинальные истории, практическая помощь, стильное вдохновение, pet-friendly места и живое сообщество — в одном понятном визуальном пространстве.",
-heroPrimary:"Открыть звёзды обложки",
-heroSecondary:"Открыть сообщество",
-worldsKicker:"Главные направления",
-worldsTitle:"Сначала — то, чем пользуются чаще всего",
-worldsText:"Главная страница начинается с самых нужных разделов, а редакционные рубрики остаются заметными, но становятся легче и чище.",
-editorialKicker:"Редакция",
-editorialTitle:"Больше фото, меньше визуального шума",
-editorialText:"Контент остаётся ярким и люксовым, но главная страница становится удобнее, понятнее и быстрее для просмотра на телефоне.",
-liveKicker:"Сейчас актуально",
-liveTitle:"Полезные разделы, которые живут каждый день",
-liveText:"Свежие обновления, реальные места, активные объявления и жизнь сообщества — всё под рукой и без лишней нагрузки на экран.",
-clubKicker:"Клуб и преимущества",
-clubTitle:"Присоединяйтесь к PETS & DOGUE Club",
-clubText:"Скидки партнёров, конкурсы, лучшая видимость в маркетплейсе, шанс попасть в звёзды обложки и удобный доступ к pet-friendly миру.",
-clubButton:"Вступить в клуб",
-seeAll:"Смотреть все",
-footerLine1:"Digital lifestyle platform",
-footerLine2:"One world. Every pet."
-},
+
 uk:{
-pageDescription:"PETS & DOGUE — цифрова lifestyle-платформа для улюбленців і людей, які їх люблять.",
-drawerTitle:"Зміст",
-login:"Увійти",
+contents:"Зміст",
+signIn:"Увійти",
 joinClub:"Вступити до клубу",
 language:"Мова",
-heroBadge:"Літо 2026",
-heroKicker:"PETS & DOGUE",
-heroTitle:"Новий цифровий світ для людей, які люблять тварин",
-heroText:"Оригінальні історії, практична допомога, стильне натхнення, pet-friendly місця та жива спільнота — в одному зрозумілому візуальному просторі.",
-heroPrimary:"Відкрити зірок обкладинки",
-heroSecondary:"Відкрити спільноту",
-worldsKicker:"Головні напрямки",
-worldsTitle:"Спочатку — те, чим користуються найчастіше",
-worldsText:"Головна сторінка починається з найпотрібніших розділів, а редакційні рубрики залишаються помітними, але стають легшими та чистішими.",
-editorialKicker:"Редакція",
-editorialTitle:"Більше фото, менше візуального шуму",
-editorialText:"Контент залишається яскравим і люксовим, але головна сторінка стає зручнішою, зрозумілішою та швидшою для перегляду на телефоні.",
-liveKicker:"Актуально зараз",
-liveTitle:"Корисні розділи, які живуть щодня",
-liveText:"Свіжі оновлення, реальні місця, активні оголошення та життя спільноти — усе під рукою без зайвого навантаження на екран.",
-clubKicker:"Клуб і переваги",
-clubTitle:"Приєднуйтеся до PETS & DOGUE Club",
-clubText:"Знижки партнерів, конкурси, краща видимість у маркетплейсі, шанс потрапити до зірок обкладинки та зручний доступ до pet-friendly світу.",
-clubButton:"Вступити до клубу",
-seeAll:"Дивитися все",
-footerLine1:"Digital lifestyle platform",
-footerLine2:"One world. Every pet."
+season:"Літо 2026",
+edition:"Випуск",
+help:"Допомога",
+club:"Вступити до клубу"
+},
+
+ru:{
+contents:"Содержание",
+signIn:"Войти",
+joinClub:"Вступить в клуб",
+language:"Язык",
+season:"Лето 2026",
+edition:"Выпуск",
+help:"Помощь",
+club:"Вступить в клуб"
+},
+
+fr:{
+contents:"Sommaire",
+signIn:"Se connecter",
+joinClub:"Rejoindre le Club",
+language:"Langue",
+season:"Été 2026",
+edition:"Édition",
+help:"Aide",
+club:"Rejoindre le Club"
+},
+
+de:{
+contents:"Inhalt",
+signIn:"Anmelden",
+joinClub:"Club beitreten",
+language:"Sprache",
+season:"Sommer 2026",
+edition:"Edition",
+help:"Hilfe",
+club:"Club beitreten"
+},
+
+es:{
+contents:"Contenido",
+signIn:"Iniciar sesión",
+joinClub:"Unirse al Club",
+language:"Idioma",
+season:"Verano 2026",
+edition:"Edición",
+help:"Ayuda",
+club:"Unirse al Club"
+},
+
+it:{
+contents:"Contenuti",
+signIn:"Accedi",
+joinClub:"Entra nel Club",
+language:"Lingua",
+season:"Estate 2026",
+edition:"Edizione",
+help:"Aiuto",
+club:"Entra nel Club"
+},
+
+pt:{
+contents:"Conteúdo",
+signIn:"Entrar",
+joinClub:"Entrar no Club",
+language:"Idioma",
+season:"Verão 2026",
+edition:"Edição",
+help:"Ajuda",
+club:"Entrar no Club"
+},
+
+nl:{
+contents:"Inhoud",
+signIn:"Inloggen",
+joinClub:"Word lid",
+language:"Taal",
+season:"Zomer 2026",
+edition:"Editie",
+help:"Hulp",
+club:"Word lid"
+},
+
+pl:{
+contents:"Spis treści",
+signIn:"Zaloguj się",
+joinClub:"Dołącz do Club",
+language:"Język",
+season:"Lato 2026",
+edition:"Wydanie",
+help:"Pomoc",
+club:"Dołącz do Club"
+},
+
+cs:{
+contents:"Obsah",
+signIn:"Přihlásit se",
+joinClub:"Vstoupit do Club",
+language:"Jazyk",
+season:"Léto 2026",
+edition:"Vydání",
+help:"Pomoc",
+club:"Vstoupit do Club"
+},
+
+sk:{
+contents:"Obsah",
+signIn:"Prihlásiť sa",
+joinClub:"Vstúpiť do Club",
+language:"Jazyk",
+season:"Leto 2026",
+edition:"Vydanie",
+help:"Pomoc",
+club:"Vstúpiť do Club"
+},
+
+hu:{
+contents:"Tartalom",
+signIn:"Bejelentkezés",
+joinClub:"Csatlakozás",
+language:"Nyelv",
+season:"2026 nyara",
+edition:"Kiadás",
+help:"Segítség",
+club:"Csatlakozás"
+},
+
+ro:{
+contents:"Conținut",
+signIn:"Autentificare",
+joinClub:"Intră în Club",
+language:"Limbă",
+season:"Vara 2026",
+edition:"Ediție",
+help:"Ajutor",
+club:"Intră în Club"
+},
+
+bg:{
+contents:"Съдържание",
+signIn:"Вход",
+joinClub:"Влезте в Club",
+language:"Език",
+season:"Лято 2026",
+edition:"Издание",
+help:"Помощ",
+club:"Влезте в Club"
+},
+
+el:{
+contents:"Περιεχόμενα",
+signIn:"Σύνδεση",
+joinClub:"Εγγραφή στο Club",
+language:"Γλώσσα",
+season:"Καλοκαίρι 2026",
+edition:"Έκδοση",
+help:"Βοήθεια",
+club:"Εγγραφή στο Club"
+},
+
+sv:{
+contents:"Innehåll",
+signIn:"Logga in",
+joinClub:"Gå med i Club",
+language:"Språk",
+season:"Sommar 2026",
+edition:"Utgåva",
+help:"Hjälp",
+club:"Gå med i Club"
+},
+
+da:{
+contents:"Indhold",
+signIn:"Log ind",
+joinClub:"Bliv medlem",
+language:"Sprog",
+season:"Sommer 2026",
+edition:"Udgave",
+help:"Hjælp",
+club:"Bliv medlem"
+},
+
+no:{
+contents:"Innhold",
+signIn:"Logg inn",
+joinClub:"Bli med i Club",
+language:"Språk",
+season:"Sommer 2026",
+edition:"Utgave",
+help:"Hjelp",
+club:"Bli med i Club"
+},
+
+fi:{
+contents:"Sisältö",
+signIn:"Kirjaudu",
+joinClub:"Liity Clubiin",
+language:"Kieli",
+season:"Kesä 2026",
+edition:"Julkaisu",
+help:"Apua",
+club:"Liity Clubiin"
+},
+
+tr:{
+contents:"İçindekiler",
+signIn:"Giriş yap",
+joinClub:"Club'a katıl",
+language:"Dil",
+season:"Yaz 2026",
+edition:"Sayı",
+help:"Yardım",
+club:"Club'a katıl"
+},
+
+ar:{
+contents:"المحتويات",
+signIn:"تسجيل الدخول",
+joinClub:"الانضمام إلى النادي",
+language:"اللغة",
+season:"صيف 2026",
+edition:"الإصدار",
+help:"المساعدة",
+club:"الانضمام إلى النادي"
+},
+
+hi:{
+contents:"विषय सूची",
+signIn:"साइन इन",
+joinClub:"Club में शामिल हों",
+language:"भाषा",
+season:"ग्रीष्म 2026",
+edition:"संस्करण",
+help:"सहायता",
+club:"Club में शामिल हों"
 }
+
 };
 
-const LABELS = {
-issue:{en:"Issue",ru:"Выпуск",uk:"Випуск"},
-coverStars:{en:"Cover stars",ru:"Звёзды обложки",uk:"Зірки обкладинки"},
-discounts:{en:"Discounts",ru:"Скидки",uk:"Знижки"},
-petFriendly:{en:"Pet-friendly places",ru:"Питомцам рады",uk:"Тут раді улюбленцям"},
-marketplace:{en:"Marketplace",ru:"Маркетплейс",uk:"Маркетплейс"},
-fashion:{en:"Fashion",ru:"Мода",uk:"Мода"},
-health:{en:"Health",ru:"Здоровье",uk:"Здоров’я"},
-articles:{en:"Articles",ru:"Статьи",uk:"Статті"},
-photos:{en:"Photos",ru:"Фото",uk:"Фото"},
-community:{en:"Community",ru:"Сообщество",uk:"Спільнота"},
-contests:{en:"Contests",ru:"Конкурсы",uk:"Конкурси"},
-help:{en:"Help",ru:"Помощь",uk:"Допомога"},
-partners:{en:"Partners",ru:"Партнёры",uk:"Партнери"},
-club:{en:"Club",ru:"Club",uk:"Club"}
-};
 
-const DESCRIPTIONS = {
-issue:{
-en:"Read the latest PETS & DOGUE issue.",
-ru:"Читайте последний выпуск PETS & DOGUE.",
-uk:"Читайте останній випуск PETS & DOGUE."
-},
-coverStars:{
-en:"Meet the stars and enter your pet.",
-ru:"Знакомьтесь со звёздами и заявляйте питомца.",
-uk:"Знайомтеся із зірками та подавайте свого улюбленця."
-},
-discounts:{
-en:"Exclusive offers and Club benefits.",
-ru:"Эксклюзивные предложения и преимущества Club.",
-uk:"Ексклюзивні пропозиції та переваги Club."
-},
-petFriendly:{
-en:"Places where pets are always welcome.",
-ru:"Места, где вашим питомцам всегда рады.",
-uk:"Місця, де вашим улюбленцям завжди раді."
-},
-marketplace:{
-en:"Buy, sell and find services.",
-ru:"Покупайте, продавайте и находите услуги.",
-uk:"Купуйте, продавайте та знаходьте послуги."
-},
-fashion:{
-en:"Style, accessories and fashion for pets.",
-ru:"Стиль, аксессуары и мода для питомцев.",
-uk:"Стиль, аксесуари та мода для улюбленців."
-},
-health:{
-en:"Care, wellbeing and practical guidance.",
-ru:"Забота, здоровье и полезные рекомендации.",
-uk:"Догляд, здоров’я та корисні поради."
-},
-articles:{
-en:"Original stories, guides and interviews.",
-ru:"Оригинальные истории, гиды и интервью.",
-uk:"Оригінальні історії, гіди та інтерв’ю."
-},
-photos:{
-en:"Pet photography and visual stories.",
-ru:"Фотографии питомцев и визуальные истории.",
-uk:"Фото улюбленців та візуальні історії."
-},
-community:{
-en:"Nearby owners, updates and shared life.",
-ru:"Владельцы рядом, события и общение.",
-uk:"Власники поруч, події та спілкування."
-},
-contests:{
-en:"Competitions, votes and monthly prizes.",
-ru:"Конкурсы, голосование и ежемесячные призы.",
-uk:"Конкурси, голосування та щомісячні призи."
-},
-help:{
-en:"Support for pets that need care and love.",
-ru:"Помощь животным, которым нужны забота и любовь.",
-uk:"Допомога тваринам, яким потрібні турбота та любов."
-},
-partners:{
-en:"Partner programmes and collaborations.",
-ru:"Партнёрские программы и сотрудничество.",
-uk:"Партнерські програми та співпраця."
-},
-club:{
-en:"Members, benefits and subscriptions.",
-ru:"Подписка, преимущества и привилегии.",
-uk:"Підписка, переваги та привілеї."
-}
-};
+/* =========================================================
+SECTIONS
+========================================================= */
 
 const ITEMS = [
+
 {
-key:"issue",
-href:"/index.html",
-image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80"
+key:"edition",
+href:"/issue-01.html",
+image:"file_00000000a9d471fda9b4629589be22a9.png",
+labelPath:"common.navigation.magazine",
+descriptionPath:"common.menu.latestIssueDescription"
 },
+
 {
 key:"coverStars",
-href:"/cover-stars.html",
-image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80"
+href:"/members-gallery.html",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.coverStars",
+descriptionPath:"common.menu.coverStarDescription"
 },
+
 {
 key:"discounts",
-href:"/discounts.html",
-image:"https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80"
+href:"/special-offers.html",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.offers",
+descriptionPath:"common.menu.partnersDescription"
 },
+
 {
-key:"petFriendly",
+key:"places",
 href:"/pet-friendly-places.html",
-image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.places",
+descriptionPath:"common.menu.placesDescription"
 },
+
 {
 key:"marketplace",
-href:"/marketplace.html",
-image:"https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=900&q=80"
+href:"/pet-marketplace.html",
+image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.marketplace",
+descriptionPath:"common.menu.marketplaceDescription"
 },
+
 {
 key:"fashion",
-href:"/fashion.html",
-image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=80"
+href:"/pet-fashion.html",
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.fashion",
+descriptionPath:"common.menu.fashionDescription"
 },
+
 {
 key:"health",
-href:"/health.html",
-image:"https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=900&q=80"
+href:"/wellness.html",
+image:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.wellness",
+descriptionPath:"common.menu.wellnessDescription"
 },
+
 {
 key:"articles",
 href:"/articles.html",
-image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.articles",
+descriptionPath:"common.menu.articlesDescription"
 },
+
 {
 key:"photos",
 href:"/photos.html",
-image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.photos",
+descriptionPath:"common.menu.photosDescription"
 },
+
 {
 key:"community",
-href:"/community.html",
-image:"https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=900&q=80"
+href:"/local-community.html",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.community",
+descriptionPath:"common.menu.communityDescription"
 },
+
 {
 key:"contests",
 href:"/contests.html",
-image:"https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.contests",
+descriptionPath:"common.menu.coverStarDescription"
 },
+
 {
 key:"help",
-href:"/help.html",
-image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80"
+href:"/pets-in-need.html",
+image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.rescue",
+descriptionPath:"common.menu.rescueDescription"
 },
+
 {
 key:"partners",
 href:"/partners.html",
-image:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=85",
+labelPath:"common.navigation.partners",
+descriptionPath:"common.menu.partnersDescription"
 }
+
 ];
 
-const PRIMARY_KEYS = ["petFriendly","marketplace","community","help"];
-const SECONDARY_KEYS = ["issue","coverStars","discounts","articles","photos","fashion","health","contests","partners"];
-const HERO_MINI_KEYS = ["petFriendly","marketplace","help","community"];
-const EDITORIAL_KEYS = ["issue","coverStars","articles","photos","fashion"];
-const LIVE_KEYS = ["petFriendly","marketplace","community"];
-const FOOTER_KEYS = ["issue","coverStars","discounts","petFriendly","marketplace","fashion","health","articles","photos","community","contests","help","partners","club"];
+
+const PRIMARY_KEYS = [
+"places",
+"marketplace",
+"community",
+"help"
+];
+
+
+const SECONDARY_KEYS = [
+"edition",
+"coverStars",
+"discounts",
+"articles",
+"photos",
+"fashion",
+"health",
+"contests",
+"partners"
+];
+
+
+const BOARD_KEYS = [
+"coverStars",
+"places",
+"fashion",
+"marketplace",
+"photos",
+"health",
+"community",
+"discounts",
+"contests",
+"articles",
+"help",
+"partners"
+];
+
+
+const CARD_SIZES = [
+"tall",
+"medium",
+"medium",
+"wide",
+"tall",
+"medium",
+"wide",
+"medium",
+"tall",
+"medium",
+"wide",
+"medium"
+];
+
+
+/* =========================================================
+HELPERS
+========================================================= */
 
 function normalizeLanguage(value){
-let code = String(value || "en").toLowerCase().trim();
-if(code.includes("-")) code = code.split("-")[0];
-if(code.includes("_")) code = code.split("_")[0];
-code = LANGUAGE_ALIASES[code] || code;
-return SUPPORTED_LANGUAGES.includes(code) ? code : "en";
+
+let code =
+String(
+value ||
+"en"
+)
+.trim()
+.toLowerCase();
+
+if(
+code.includes("-")
+){
+code =
+code.split("-")[0];
 }
+
+if(
+code.includes("_")
+){
+code =
+code.split("_")[0];
+}
+
+code =
+LANGUAGE_ALIASES[code] ||
+code;
+
+return SUPPORTED_LANGUAGES.includes(
+code
+)
+?code
+:"en";
+
+}
+
 
 function getCurrentLanguage(){
+
 try{
-const saved = localStorage.getItem(LANGUAGE_KEY);
-if(saved) return normalizeLanguage(saved);
-}catch(error){}
-if(document.documentElement.lang){
-return normalizeLanguage(document.documentElement.lang);
-}
-return "en";
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.getCurrentLanguage ===
+"function"
+){
+
+const value =
+window.PetsDogueLanguage
+.getCurrentLanguage();
+
+if(
+typeof value === "string"
+){
+return normalizeLanguage(value);
 }
 
-function getCopy(language){
-return COPY[language] || COPY.en;
+if(
+value &&
+value.code
+){
+return normalizeLanguage(value.code);
 }
 
-function getLabel(key, language){
-const group = LABELS[key] || {};
-return group[language] || group.en || key;
 }
 
-function getDescription(key, language){
-const group = DESCRIPTIONS[key] || {};
-return group[language] || group.en || "";
+}catch(error){
 }
+
+
+try{
+
+const saved =
+localStorage.getItem(
+LANGUAGE_KEY
+);
+
+if(saved){
+return normalizeLanguage(saved);
+}
+
+}catch(error){
+}
+
+
+return normalizeLanguage(
+document.documentElement.lang ||
+"en"
+);
+
+}
+
+
+function ui(){
+
+const language =
+getCurrentLanguage();
+
+return SIMPLE_UI[language] ||
+SIMPLE_UI.en;
+
+}
+
+
+function commonT(
+path,
+fallback
+){
+
+const language =
+getCurrentLanguage();
+
+let root =
+window.PetsDogueTranslations &&
+window.PetsDogueTranslations.common;
+
+if(!root){
+return fallback;
+}
+
+let value =
+root[language] ||
+root.en ||
+null;
+
+if(!value){
+return fallback;
+}
+
+const cleanPath =
+String(path || "")
+.replace(/^common\./,"");
+
+cleanPath
+.split(".")
+.forEach(
+function(key){
+
+if(
+value &&
+Object.prototype.hasOwnProperty.call(
+value,
+key
+)
+){
+
+value =
+value[key];
+
+}else{
+
+value =
+undefined;
+
+}
+
+}
+);
+
+return typeof value === "string"
+?value
+:fallback;
+
+}
+
 
 function itemByKey(key){
-return ITEMS.find(function(item){ return item.key === key; });
+
+return ITEMS.find(
+function(item){
+
+return item.key ===
+key;
+
+}
+);
+
 }
 
-function setText(id, value){
-const element = document.getElementById(id);
-if(element) element.textContent = value;
+
+function getLabel(item){
+
+if(
+item.key ===
+"edition"
+){
+
+return ui().edition;
+
 }
 
-function setLinkText(id, value){
-const element = document.getElementById(id);
-if(element) element.textContent = value;
+if(
+item.key ===
+"help"
+){
+
+return ui().help;
+
 }
 
-function renderPriorityGrid(language){
-const grid = document.getElementById("priorityGrid");
-if(!grid) return;
+const fallback = {
 
-grid.innerHTML = "";
+coverStars:"Cover Stars",
+discounts:"Discounts",
+places:"Pet-Friendly",
+marketplace:"Marketplace",
+fashion:"Fashion",
+health:"Health",
+articles:"Articles",
+photos:"Photos",
+community:"Community",
+contests:"Contests",
+partners:"Partners"
 
-PRIMARY_KEYS.forEach(function(key){
-const item = itemByKey(key);
-if(!item) return;
+};
 
-const link = document.createElement("a");
-link.href = item.href;
-link.className = "pd-priority-link";
-link.style.setProperty("--bg-image",'url("' + item.image + '")');
+return commonT(
+item.labelPath,
+fallback[item.key] ||
+item.key
+);
 
-link.innerHTML = [
-'<div class="pd-priority-content">',
-'<div class="pd-priority-title">' + escapeHtml(getLabel(key,language)) + '</div>',
-'<div class="pd-priority-sub">' + escapeHtml(getDescription(key,language)) + '</div>',
-'</div>'
-].join("");
-
-grid.appendChild(link);
-});
 }
 
-function renderSecondaryRail(language){
-const rail = document.getElementById("secondaryRail");
-if(!rail) return;
 
-rail.innerHTML = "";
+function getDescription(item){
 
-SECONDARY_KEYS.forEach(function(key){
-const item = itemByKey(key);
-if(!item) return;
+const fallback = {
 
-const link = document.createElement("a");
-link.href = item.href;
-link.className = "pd-rail-card";
-link.style.setProperty("--bg-image",'url("' + item.image + '")');
-link.innerHTML = [
-'<div class="pd-rail-inner">',
-'<div class="pd-rail-kicker">PETS &amp; DOGUE</div>',
-'<div class="pd-rail-title">' + escapeHtml(getLabel(key,language)) + '</div>',
-'</div>'
-].join("");
-rail.appendChild(link);
-});
+edition:"Open the latest PETS & DOGUE digital edition.",
+coverStars:"Meet the stars and enter your pet.",
+discounts:"Member offers and benefits.",
+places:"Pet-friendly places and destinations.",
+marketplace:"Listings, rehoming, products and services.",
+fashion:"Style and fashion for pets.",
+health:"Health, care and practical guidance.",
+articles:"Original stories, guides and interviews.",
+photos:"Photography and visual stories.",
+community:"Local pet people, stories and updates.",
+contests:"Competitions, voting and prizes.",
+help:"Animals needing care, adoption and visibility.",
+partners:"Selected partners and collaborations."
+
+};
+
+return commonT(
+item.descriptionPath,
+fallback[item.key] ||
+""
+);
+
 }
 
-function renderHeroMiniGrid(language){
-const shell = document.getElementById("heroMiniGrid");
-if(!shell) return;
 
-shell.innerHTML = "";
+function escapeHTML(value){
 
-HERO_MINI_KEYS.forEach(function(key){
-const item = itemByKey(key);
-if(!item) return;
+return String(
+value ||
+""
+)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
-const card = document.createElement("a");
-card.href = item.href;
-card.className = "pd-hero-mini";
-card.style.setProperty("--bg-image",'url("' + item.image + '")');
-card.innerHTML = [
-'<div class="pd-hero-mini-content">',
-'<div class="pd-hero-mini-label">PETS &amp; DOGUE</div>',
-'<div class="pd-hero-mini-title">' + escapeHtml(getLabel(key,language)) + '</div>',
-'<div class="pd-hero-mini-text">' + escapeHtml(getDescription(key,language)) + '</div>',
-'</div>'
-].join("");
-shell.appendChild(card);
-});
 }
 
-function createBigCard(item,key,language,primaryTag){
-const card = document.createElement("a");
-card.href = item.href;
-card.className = "pd-card-link primary-card";
-card.style.setProperty("--bg-image",'url("' + item.image + '")');
-card.innerHTML = [
-'<div class="pd-card-content">',
-'<div class="pd-card-tag">' + escapeHtml(primaryTag) + '</div>',
-'<div>',
-'<h3 class="pd-card-title">' + escapeHtml(getLabel(key,language)) + '</h3>',
-'<p class="pd-card-text">' + escapeHtml(getDescription(key,language)) + '</p>',
-'</div>',
-'<span class="pd-card-arrow" aria-hidden="true">↗</span>',
-'</div>'
-].join("");
-return card;
+
+/* =========================================================
+ICONS
+========================================================= */
+
+function iconSvg(key){
+
+const icons = {
+
+places:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<circle cx="11" cy="8" r="3"></circle>
+<circle cx="21" cy="8" r="3"></circle>
+<circle cx="6" cy="15" r="2.7"></circle>
+<circle cx="26" cy="15" r="2.7"></circle>
+<path d="M10 24c0-5 3-8 6-8s6 3 6 8c0 3-2 5-6 5s-6-2-6-5z"></path>
+</svg>
+`,
+
+marketplace:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M8 11h16l2 17H6z"></path>
+<path d="M12 11V8a4 4 0 0 1 8 0v3"></path>
+</svg>
+`,
+
+community:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<circle cx="16" cy="9" r="4"></circle>
+<circle cx="7" cy="12" r="3"></circle>
+<circle cx="25" cy="12" r="3"></circle>
+<path d="M9 27v-3c0-4 3-7 7-7s7 3 7 7v3"></path>
+<path d="M2 26v-2c0-3 2-6 5-6"></path>
+<path d="M30 26v-2c0-3-2-6-5-6"></path>
+</svg>
+`,
+
+help:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M16 27S5 20 5 11a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 9-11 16-11 16z"></path>
+</svg>
+`,
+
+edition:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M5 7c4-2 8-2 11 1v19c-3-3-7-3-11-1z"></path>
+<path d="M27 7c-4-2-8-2-11 1v19c3-3 7-3 11-1z"></path>
+</svg>
+`,
+
+coverStars:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="m16 4 3.4 7 7.6 1.1-5.5 5.3 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6L5 12.1l7.6-1.1z"></path>
+</svg>
+`,
+
+discounts:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M5 11a4 4 0 0 0 4-4h14v5a4 4 0 0 0 0 8v5H9a4 4 0 0 0-4-4z"></path>
+<path d="m12 21 8-10"></path>
+<circle cx="12" cy="12" r="1.4"></circle>
+<circle cx="20" cy="20" r="1.4"></circle>
+</svg>
+`,
+
+articles:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<rect x="7" y="4" width="18" height="24"></rect>
+<path d="M11 10h10M11 15h10M11 20h7"></path>
+</svg>
+`,
+
+photos:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<rect x="4" y="9" width="24" height="18" rx="2"></rect>
+<path d="m10 9 2-4h8l2 4"></path>
+<circle cx="16" cy="18" r="5"></circle>
+</svg>
+`,
+
+fashion:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M16 6a4 4 0 0 1 4 4c0 2-1 3-4 5"></path>
+<path d="m16 15-11 9h22z"></path>
+</svg>
+`,
+
+health:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M12 4h8v8h8v8h-8v8h-8v-8H4v-8h8z"></path>
+</svg>
+`,
+
+contests:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="M10 5h12v6c0 6-2 9-6 9s-6-3-6-9z"></path>
+<path d="M10 8H5c0 5 2 8 6 8"></path>
+<path d="M22 8h5c0 5-2 8-6 8"></path>
+<path d="M16 20v5"></path>
+<path d="M10 28h12"></path>
+</svg>
+`,
+
+partners:
+`
+<svg viewBox="0 0 32 32" aria-hidden="true">
+<path d="m4 13 7-5 5 4 5-4 7 5-7 10-5-4-5 4z"></path>
+<path d="m11 8 5 4 5-4"></path>
+</svg>
+`
+
+};
+
+return icons[key] ||
+icons.articles;
+
 }
 
-function createEditorialCard(item,key,language){
-const card = document.createElement("a");
-card.href = item.href;
-card.className = "pd-card-link";
-card.style.setProperty("--bg-image",'url("' + item.image + '")');
-card.innerHTML = [
-'<div class="pd-card-content">',
-'<div class="pd-card-tag">PETS &amp; DOGUE</div>',
-'<div>',
-'<h3 class="pd-card-title">' + escapeHtml(getLabel(key,language)) + '</h3>',
-'<p class="pd-card-text">' + escapeHtml(getDescription(key,language)) + '</p>',
-'</div>',
-'<span class="pd-card-arrow" aria-hidden="true">↗</span>',
-'</div>'
-].join("");
-return card;
+
+/* =========================================================
+RENDER TOP NAV
+========================================================= */
+
+function renderPrimary(){
+
+const shell =
+document.getElementById(
+"primaryNavigation"
+);
+
+if(!shell){
+return;
 }
 
-function renderPrimaryCards(language){
-const shell = document.getElementById("primaryCards");
-if(!shell) return;
+shell.innerHTML =
+"";
 
-shell.innerHTML = "";
+PRIMARY_KEYS.forEach(
+function(key){
 
-PRIMARY_KEYS.forEach(function(key){
-const item = itemByKey(key);
-if(!item) return;
-shell.appendChild(createBigCard(item,key,language,getCopy(language).worldsKicker));
-});
+const item =
+itemByKey(key);
+
+if(!item){
+return;
 }
 
-function renderEditorialCards(language){
-const shell = document.getElementById("editorialCards");
-if(!shell) return;
+const link =
+document.createElement(
+"a"
+);
 
-shell.innerHTML = "";
+link.className =
+"pd-primary-item";
 
-EDITORIAL_KEYS.forEach(function(key){
-const item = itemByKey(key);
-if(!item) return;
-shell.appendChild(createEditorialCard(item,key,language));
-});
+link.href =
+item.href;
+
+link.innerHTML =
+iconSvg(key) +
+`
+<span class="pd-primary-label">
+${escapeHTML(
+getLabel(item)
+)}
+</span>
+`;
+
+shell.appendChild(
+link
+);
+
+}
+);
+
 }
 
-function renderLiveCards(language){
-const shell = document.getElementById("liveCards");
-if(!shell) return;
 
-shell.innerHTML = "";
+function renderSecondary(){
 
-LIVE_KEYS.forEach(function(key){
-const item = itemByKey(key);
-if(!item) return;
-shell.appendChild(createEditorialCard(item,key,language));
-});
+const shell =
+document.getElementById(
+"secondaryNavigation"
+);
+
+if(!shell){
+return;
 }
 
-function renderFooterLinks(language){
-const shell = document.getElementById("footerLinks");
-if(!shell) return;
+shell.innerHTML =
+"";
 
-shell.innerHTML = "";
+SECONDARY_KEYS.forEach(
+function(key){
 
-FOOTER_KEYS.forEach(function(key){
-const link = document.createElement("a");
-link.href = key === "club" ? "/club.html" : (itemByKey(key) ? itemByKey(key).href : "#");
-link.textContent = getLabel(key,language);
-shell.appendChild(link);
-});
+const item =
+itemByKey(key);
+
+if(!item){
+return;
 }
 
-function renderDrawerCards(language){
-const shell = document.getElementById("drawerCardList");
-if(!shell) return;
+const link =
+document.createElement(
+"a"
+);
 
-shell.innerHTML = "";
+link.href =
+item.href;
 
-ITEMS.forEach(function(item){
-const active = item.key === "coverStars";
-const link = document.createElement("a");
-link.href = item.href;
-link.className = "pd-menu-card" + (active ? " active" : "");
-link.innerHTML = [
-'<div class="pd-menu-thumb" style="--thumb-image:url(\'' + item.image + '\');background-image:url(\'' + item.image + '\')"></div>',
-'<div class="pd-menu-copy">',
-'<div class="pd-menu-title">' + escapeHtml(getLabel(item.key,language)) + '</div>',
-'<div class="pd-menu-desc">' + escapeHtml(getDescription(item.key,language)) + '</div>',
-'</div>'
-].join("");
-shell.appendChild(link);
-});
+link.dataset.key =
+key;
+
+link.className =
+"pd-secondary-item";
+
+if(
+key === "edition"
+){
+link.classList.add(
+"active"
+);
 }
 
-function populateLanguageSelect(currentLanguage){
-const select = document.getElementById("siteLanguage");
-if(!select) return;
-
-select.innerHTML = "";
-SUPPORTED_LANGUAGES.forEach(function(code){
-const option = document.createElement("option");
-option.value = code;
-option.textContent = LANGUAGE_NAMES[code] || code;
-if(code === currentLanguage){
-option.selected = true;
-}
-select.appendChild(option);
-});
+if(
+key === "contests" ||
+key === "partners"
+){
+link.classList.add(
+"emphasis"
+);
 }
 
-function applyLanguage(language){
-const lang = normalizeLanguage(language);
-const copy = getCopy(lang);
+link.innerHTML =
+iconSvg(key) +
+`
+<span class="pd-secondary-label">
+${escapeHTML(
+getLabel(item)
+)}
+</span>
+`;
 
-document.documentElement.lang = lang;
-document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+shell.appendChild(
+link
+);
 
-try{
-localStorage.setItem(LANGUAGE_KEY, lang);
-}catch(error){}
+}
+);
 
-document.title = "PETS & DOGUE";
-const meta = document.getElementById("pageDescription");
-if(meta){
-meta.setAttribute("content", copy.pageDescription);
 }
 
-setText("drawerTitle", copy.drawerTitle);
-setText("loginBtn", copy.login);
-setText("joinBtn", copy.joinClub);
-setText("languageLabel", copy.language);
 
-setText("heroBadge", copy.heroBadge);
-setText("heroKicker", copy.heroKicker);
-setText("heroTitle", copy.heroTitle);
-setText("heroText", copy.heroText);
-setLinkText("heroPrimaryLink", copy.heroPrimary);
-setLinkText("heroSecondaryLink", copy.heroSecondary);
+/* =========================================================
+PHOTO BOARD
+========================================================= */
 
-setText("worldsKicker", copy.worldsKicker);
-setText("worldsTitle", copy.worldsTitle);
-setText("worldsText", copy.worldsText);
-setLinkText("worldsLink", copy.seeAll);
+function renderPhotoBoard(){
 
-setText("editorialKicker", copy.editorialKicker);
-setText("editorialTitle", copy.editorialTitle);
-setText("editorialText", copy.editorialText);
-setLinkText("editorialLink", copy.seeAll);
+const shell =
+document.getElementById(
+"photoBoard"
+);
 
-setText("liveKicker", copy.liveKicker);
-setText("liveTitle", copy.liveTitle);
-setText("liveText", copy.liveText);
-setLinkText("liveLink", copy.seeAll);
-
-setText("clubKicker", copy.clubKicker);
-setText("clubTitle", copy.clubTitle);
-setText("clubText", copy.clubText);
-setLinkText("clubButton", copy.clubButton);
-
-setText("footerLine1", copy.footerLine1);
-setText("footerLine2", copy.footerLine2);
-
-populateLanguageSelect(lang);
-renderPriorityGrid(lang);
-renderSecondaryRail(lang);
-renderHeroMiniGrid(lang);
-renderPrimaryCards(lang);
-renderEditorialCards(lang);
-renderLiveCards(lang);
-renderFooterLinks(lang);
-renderDrawerCards(lang);
+if(!shell){
+return;
 }
+
+shell.innerHTML =
+"";
+
+BOARD_KEYS.forEach(
+function(
+key,
+index
+){
+
+const item =
+itemByKey(key);
+
+if(!item){
+return;
+}
+
+const card =
+document.createElement(
+"a"
+);
+
+card.href =
+item.href;
+
+card.className =
+"pd-photo-card " +
+CARD_SIZES[
+index %
+CARD_SIZES.length
+];
+
+card.innerHTML =
+`
+<img
+src="${escapeHTML(item.image)}"
+alt="${escapeHTML(getLabel(item))}"
+loading="lazy"
+decoding="async"
+>
+
+<span class="pd-photo-shade"></span>
+
+<span class="pd-photo-arrow" aria-hidden="true">
+›
+</span>
+
+<span class="pd-photo-copy">
+
+<span class="pd-photo-kicker notranslate" translate="no">
+PETS &amp; DOGUE
+</span>
+
+<span class="pd-photo-title">
+${escapeHTML(
+getLabel(item)
+)}
+</span>
+
+</span>
+`;
+
+shell.appendChild(
+card
+);
+
+}
+);
+
+}
+
+
+/* =========================================================
+DRAWER
+========================================================= */
+
+function renderDrawer(){
+
+const shell =
+document.getElementById(
+"drawerList"
+);
+
+if(!shell){
+return;
+}
+
+shell.innerHTML =
+"";
+
+ITEMS.forEach(
+function(item){
+
+const link =
+document.createElement(
+"a"
+);
+
+link.href =
+item.href;
+
+link.className =
+"pd-drawer-card";
+
+link.innerHTML =
+`
+<img
+src="${escapeHTML(item.image)}"
+alt=""
+loading="lazy"
+decoding="async"
+>
+
+<span class="pd-drawer-copy">
+
+<span class="pd-drawer-name">
+${escapeHTML(
+getLabel(item)
+)}
+</span>
+
+<span class="pd-drawer-desc">
+${escapeHTML(
+getDescription(item)
+)}
+</span>
+
+</span>
+`;
+
+shell.appendChild(
+link
+);
+
+}
+);
+
+}
+
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+function renderFooter(){
+
+const shell =
+document.getElementById(
+"footerLinks"
+);
+
+if(!shell){
+return;
+}
+
+shell.innerHTML =
+"";
+
+const keys = [
+"edition",
+"coverStars",
+"discounts",
+"places",
+"marketplace",
+"fashion",
+"health",
+"articles",
+"photos",
+"community",
+"contests",
+"help",
+"partners"
+];
+
+keys.forEach(
+function(key){
+
+const item =
+itemByKey(key);
+
+if(!item){
+return;
+}
+
+const link =
+document.createElement(
+"a"
+);
+
+link.href =
+item.href;
+
+link.textContent =
+getLabel(item);
+
+shell.appendChild(
+link
+);
+
+}
+);
+
+
+const club =
+document.createElement(
+"a"
+);
+
+club.href =
+"/club.html";
+
+club.textContent =
+"Club";
+
+shell.appendChild(
+club
+);
+
+}
+
+
+/* =========================================================
+LANGUAGE
+========================================================= */
+
+function applyLanguage(){
+
+const language =
+getCurrentLanguage();
+
+const words =
+ui();
+
+document.documentElement.lang =
+language;
+
+document.documentElement.dir =
+language === "ar"
+?"rtl"
+:"ltr";
+
+
+const select =
+document.getElementById(
+"languageSelect"
+);
+
+if(
+select &&
+select.value !==
+language
+){
+
+select.value =
+language;
+
+}
+
+
+document.getElementById(
+"drawerTitle"
+).textContent =
+words.contents;
+
+
+document.getElementById(
+"loginButton"
+).textContent =
+words.signIn;
+
+
+document.getElementById(
+"joinButton"
+).textContent =
+words.joinClub;
+
+
+document.getElementById(
+"languageLabel"
+).textContent =
+words.language;
+
+
+document.getElementById(
+"seasonText"
+).textContent =
+words.season;
+
+
+document.getElementById(
+"clubButton"
+).textContent =
+words.club;
+
+
+renderPrimary();
+
+renderSecondary();
+
+renderPhotoBoard();
+
+renderDrawer();
+
+renderFooter();
+
+}
+
+
+/* =========================================================
+DRAWER EVENTS
+========================================================= */
+
+const drawer =
+document.getElementById(
+"drawer"
+);
+
+const overlay =
+document.getElementById(
+"drawerOverlay"
+);
+
+const topbar =
+document.getElementById(
+"pdTopbar"
+);
+
 
 function openDrawer(){
-document.body.classList.add("drawer-open");
-document.getElementById("drawerMenu").classList.add("open");
-document.getElementById("drawerOverlay").classList.add("open");
-document.getElementById("drawerMenu").setAttribute("aria-hidden","false");
+
+topbar.classList.remove(
+"hidden-by-scroll"
+);
+
+drawer.classList.add(
+"open"
+);
+
+overlay.classList.add(
+"open"
+);
+
+drawer.setAttribute(
+"aria-hidden",
+"false"
+);
+
+document.body.classList.add(
+"drawer-open"
+);
+
 }
+
 
 function closeDrawer(){
-document.body.classList.remove("drawer-open");
-document.getElementById("drawerMenu").classList.remove("open");
-document.getElementById("drawerOverlay").classList.remove("open");
-document.getElementById("drawerMenu").setAttribute("aria-hidden","true");
+
+drawer.classList.remove(
+"open"
+);
+
+overlay.classList.remove(
+"open"
+);
+
+drawer.setAttribute(
+"aria-hidden",
+"true"
+);
+
+document.body.classList.remove(
+"drawer-open"
+);
+
 }
 
-function escapeHtml(value){
-return String(value || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#39;");
+
+document.getElementById(
+"openDrawer"
+)
+.addEventListener(
+"click",
+openDrawer
+);
+
+
+document.getElementById(
+"closeDrawer"
+)
+.addEventListener(
+"click",
+closeDrawer
+);
+
+
+overlay.addEventListener(
+"click",
+closeDrawer
+);
+
+
+/* =========================================================
+FACEBOOK-STYLE HEADER HIDE / SHOW
+========================================================= */
+
+let lastScrollY =
+window.scrollY;
+
+let scrollLock =
+false;
+
+
+function handleScroll(){
+
+if(scrollLock){
+return;
 }
 
-function bindEvents(){
-const openBtn = document.getElementById("openDrawerBtn");
-const closeBtn = document.getElementById("closeDrawerBtn");
-const overlay = document.getElementById("drawerOverlay");
-const select = document.getElementById("siteLanguage");
+scrollLock =
+true;
 
-if(openBtn){
-openBtn.addEventListener("click", openDrawer);
-}
-if(closeBtn){
-closeBtn.addEventListener("click", closeDrawer);
-}
-if(overlay){
-overlay.addEventListener("click", closeDrawer);
-}
-if(select){
-select.addEventListener("change", function(){
-const value = normalizeLanguage(select.value);
-applyLanguage(value);
-window.dispatchEvent(new CustomEvent("petsdogue:languagechange",{detail:{language:value}}));
-});
+
+requestAnimationFrame(
+function(){
+
+const current =
+Math.max(
+0,
+window.scrollY
+);
+
+
+if(
+drawer.classList.contains(
+"open"
+)
+){
+
+topbar.classList.remove(
+"hidden-by-scroll"
+);
+
+lastScrollY =
+current;
+
+scrollLock =
+false;
+
+return;
+
 }
 
-document.addEventListener("keydown", function(event){
-if(event.key === "Escape"){
+
+if(
+current <=
+35
+){
+
+topbar.classList.remove(
+"hidden-by-scroll"
+);
+
+}else if(
+current >
+lastScrollY +
+6 &&
+current >
+120
+){
+
+topbar.classList.add(
+"hidden-by-scroll"
+);
+
+}else if(
+current <
+lastScrollY -
+5
+){
+
+topbar.classList.remove(
+"hidden-by-scroll"
+);
+
+}
+
+
+lastScrollY =
+current;
+
+scrollLock =
+false;
+
+}
+);
+
+}
+
+
+window.addEventListener(
+"scroll",
+handleScroll,
+{
+passive:true
+}
+);
+
+
+/* =========================================================
+LANGUAGE SELECT
+========================================================= */
+
+document.getElementById(
+"languageSelect"
+)
+.addEventListener(
+"change",
+function(event){
+
+const language =
+normalizeLanguage(
+event.target.value
+);
+
+
+try{
+
+localStorage.setItem(
+LANGUAGE_KEY,
+language
+);
+
+}catch(error){
+}
+
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.setLanguage ===
+"function"
+){
+
+try{
+
+window.PetsDogueLanguage
+.setLanguage(
+language
+);
+
+}catch(error){
+}
+
+}
+
+
+document.documentElement.lang =
+language;
+
+document.documentElement.dir =
+language === "ar"
+?"rtl"
+:"ltr";
+
+
+window.dispatchEvent(
+new CustomEvent(
+"petsdogue:languagechange",
+{
+detail:{
+language
+}
+}
+)
+);
+
+
+setTimeout(
+applyLanguage,
+20
+);
+
+}
+);
+
+
+/* =========================================================
+OTHER LANGUAGE CHANGES
+========================================================= */
+
+window.addEventListener(
+"petsdogue:languagechange",
+function(){
+
+setTimeout(
+applyLanguage,
+40
+);
+
+}
+);
+
+
+window.addEventListener(
+"storage",
+function(event){
+
+if(
+event.key ===
+LANGUAGE_KEY
+){
+
+setTimeout(
+applyLanguage,
+20
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+KEYBOARD
+========================================================= */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key ===
+"Escape"
+){
+
 closeDrawer();
-}
-});
 
-window.addEventListener("storage", function(event){
-if(event.key === LANGUAGE_KEY){
-applyLanguage(getCurrentLanguage());
 }
-});
+
 }
+);
+
+
+/* =========================================================
+INIT
+========================================================= */
 
 function init(){
-bindEvents();
-applyLanguage(getCurrentLanguage());
+
+applyLanguage();
+
 }
 
-if(document.readyState === "loading"){
-document.addEventListener("DOMContentLoaded", init, {once:true});
-}else{
-init();
+
+if(
+document.readyState ===
+"loading"
+){
+
+document.addEventListener(
+"DOMContentLoaded",
+init,
+{
+once:true
 }
+);
+
+}else{
+
+init();
+
+}
+
 })();
 </script>
-
-<script src="/pd-accessibility.js?v=20260910"></script>
 
 </body>
 </html>
