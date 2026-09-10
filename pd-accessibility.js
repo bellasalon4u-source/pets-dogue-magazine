@@ -2,18 +2,13 @@
 
 /*
 =========================================================
-PETS & DOGUE
-GLOBAL MULTILINGUAL ACCESSIBILITY NARRATION
+PETS & DOGUE — ACCESSIBLE MULTILINGUAL NARRATION
 =========================================================
-
-- one speaker per topic
-- no duplicate speakers
-- one central click handler
-- fixes Android/Chrome silent speech after cancel()
-- reads the currently selected language
-- English words inside Cyrillic/Arabic/Hindi text use English voice
-- meaningful symbols are spoken logically
-- dynamic cards are supported
+Single narration engine.
+Exactly one speaker per readable topic.
+Old/manual speaker controls are removed to prevent duplicates.
+The first utterance starts directly from the user's tap for
+reliable Android/Chrome playback.
 =========================================================
 */
 
@@ -21,21 +16,14 @@ GLOBAL MULTILINGUAL ACCESSIBILITY NARRATION
 
 "use strict";
 
+const LANGUAGE_KEY = "pets_dogue_language";
 
-/* =========================================================
-CONFIG
-========================================================= */
-
-const LANGUAGE_KEY =
-"pets_dogue_language";
-
-const SUPPORTED_LANGUAGES = [
-"en","uk","ru","fr","de","es","it","pt","nl","pl",
-"cs","sk","hu","ro","bg","el","sv","da","no","fi",
-"tr","ar","hi"
+const SUPPORTED = [
+"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
+"hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
 ];
 
-const LANGUAGE_ALIASES = {
+const ALIASES = {
 ua:"uk",
 cz:"cs",
 gr:"el",
@@ -43,7 +31,7 @@ se:"sv",
 dk:"da"
 };
 
-const SPEECH_LOCALES = {
+const LOCALES = {
 en:"en-GB",
 uk:"uk-UA",
 ru:"ru-RU",
@@ -69,22 +57,7 @@ ar:"ar-SA",
 hi:"hi-IN"
 };
 
-const NON_LATIN_LANGUAGES =
-new Set([
-"ru",
-"uk",
-"bg",
-"el",
-"ar",
-"hi"
-]);
-
-
-/* =========================================================
-ACCESSIBILITY LABELS
-========================================================= */
-
-const LABELS = {
+const UI = {
 
 en:{
 listen:"Listen to this topic",
@@ -134,7 +107,7 @@ unsupported:"Dieser Browser unterstützt keine Sprachausgabe."
 es:{
 listen:"Escuchar este contenido",
 stop:"Detener lectura",
-reading:"Este contenido se está leyendo.",
+reading:"Este contenido se está leyendo en voz alta.",
 stopped:"Lectura detenida.",
 empty:"No hay texto para leer.",
 unsupported:"Este navegador no admite lectura de texto."
@@ -143,7 +116,7 @@ unsupported:"Este navegador no admite lectura de texto."
 it:{
 listen:"Ascolta questo contenuto",
 stop:"Interrompi lettura",
-reading:"Questo contenuto viene letto.",
+reading:"Questo contenuto viene letto ad alta voce.",
 stopped:"Lettura interrotta.",
 empty:"Nessun testo da leggere.",
 unsupported:"Questo browser non supporta la lettura vocale."
@@ -152,7 +125,7 @@ unsupported:"Questo browser non supporta la lettura vocale."
 pt:{
 listen:"Ouvir este conteúdo",
 stop:"Parar leitura",
-reading:"Este conteúdo está a ser lido.",
+reading:"Este conteúdo está a ser lido em voz alta.",
 stopped:"Leitura parada.",
 empty:"Não existe texto para ler.",
 unsupported:"Este navegador não suporta leitura de texto."
@@ -206,7 +179,7 @@ unsupported:"A böngésző nem támogatja a felolvasást."
 ro:{
 listen:"Ascultă acest conținut",
 stop:"Oprește citirea",
-reading:"Conținutul este citit cu voce tare.",
+reading:"Acest conținut este citit cu voce tare.",
 stopped:"Citirea a fost oprită.",
 empty:"Nu există text de citit.",
 unsupported:"Browserul nu acceptă citirea textului."
@@ -296,11 +269,7 @@ unsupported:"ब्राउज़र टेक्स्ट-टू-स्पी�
 };
 
 
-/* =========================================================
-MEANINGFUL SYMBOLS
-========================================================= */
-
-const SEMANTICS = {
+const TERMS = {
 
 en:{
 location:"Location",
@@ -310,7 +279,6 @@ email:"Email",
 website:"Website",
 winner:"Winner",
 prize:"Prize",
-home:"Home",
 date:"Date",
 time:"Time",
 distance:"Distance",
@@ -326,7 +294,6 @@ email:"Електронна пошта",
 website:"Вебсайт",
 winner:"Переможець",
 prize:"Приз",
-home:"Дім",
 date:"Дата",
 time:"Час",
 distance:"Відстань",
@@ -342,7 +309,6 @@ email:"Электронная почта",
 website:"Веб-сайт",
 winner:"Победитель",
 prize:"Приз",
-home:"Дом",
 date:"Дата",
 time:"Время",
 distance:"Расстояние",
@@ -358,7 +324,6 @@ email:"Adresse e-mail",
 website:"Site internet",
 winner:"Gagnant",
 prize:"Prix",
-home:"Domicile",
 date:"Date",
 time:"Heure",
 distance:"Distance",
@@ -374,7 +339,6 @@ email:"E-Mail",
 website:"Webseite",
 winner:"Gewinner",
 prize:"Preis",
-home:"Zuhause",
 date:"Datum",
 time:"Uhrzeit",
 distance:"Entfernung",
@@ -390,7 +354,6 @@ email:"Correo electrónico",
 website:"Sitio web",
 winner:"Ganador",
 prize:"Premio",
-home:"Hogar",
 date:"Fecha",
 time:"Hora",
 distance:"Distancia",
@@ -406,7 +369,6 @@ email:"Email",
 website:"Sito web",
 winner:"Vincitore",
 prize:"Premio",
-home:"Casa",
 date:"Data",
 time:"Ora",
 distance:"Distanza",
@@ -422,7 +384,6 @@ email:"Email",
 website:"Website",
 winner:"Vencedor",
 prize:"Prémio",
-home:"Casa",
 date:"Data",
 time:"Hora",
 distance:"Distância",
@@ -438,7 +399,6 @@ email:"E-mail",
 website:"Website",
 winner:"Winnaar",
 prize:"Prijs",
-home:"Thuis",
 date:"Datum",
 time:"Tijd",
 distance:"Afstand",
@@ -454,7 +414,6 @@ email:"E-mail",
 website:"Strona internetowa",
 winner:"Zwycięzca",
 prize:"Nagroda",
-home:"Dom",
 date:"Data",
 time:"Czas",
 distance:"Odległość",
@@ -470,7 +429,6 @@ email:"E-mail",
 website:"Webová stránka",
 winner:"Vítěz",
 prize:"Cena",
-home:"Domov",
 date:"Datum",
 time:"Čas",
 distance:"Vzdálenost",
@@ -486,7 +444,6 @@ email:"E-mail",
 website:"Webová stránka",
 winner:"Víťaz",
 prize:"Cena",
-home:"Domov",
 date:"Dátum",
 time:"Čas",
 distance:"Vzdialenosť",
@@ -502,7 +459,6 @@ email:"E-mail",
 website:"Weboldal",
 winner:"Győztes",
 prize:"Díj",
-home:"Otthon",
 date:"Dátum",
 time:"Idő",
 distance:"Távolság",
@@ -518,7 +474,6 @@ email:"E-mail",
 website:"Site web",
 winner:"Câștigător",
 prize:"Premiu",
-home:"Casă",
 date:"Dată",
 time:"Oră",
 distance:"Distanță",
@@ -534,7 +489,6 @@ email:"Имейл",
 website:"Уебсайт",
 winner:"Победител",
 prize:"Награда",
-home:"Дом",
 date:"Дата",
 time:"Час",
 distance:"Разстояние",
@@ -550,7 +504,6 @@ email:"Email",
 website:"Ιστότοπος",
 winner:"Νικητής",
 prize:"Βραβείο",
-home:"Σπίτι",
 date:"Ημερομηνία",
 time:"Ώρα",
 distance:"Απόσταση",
@@ -566,7 +519,6 @@ email:"E-post",
 website:"Webbplats",
 winner:"Vinnare",
 prize:"Pris",
-home:"Hem",
 date:"Datum",
 time:"Tid",
 distance:"Avstånd",
@@ -582,7 +534,6 @@ email:"E-mail",
 website:"Hjemmeside",
 winner:"Vinder",
 prize:"Præmie",
-home:"Hjem",
 date:"Dato",
 time:"Tid",
 distance:"Afstand",
@@ -598,7 +549,6 @@ email:"E-post",
 website:"Nettside",
 winner:"Vinner",
 prize:"Premie",
-home:"Hjem",
 date:"Dato",
 time:"Tid",
 distance:"Avstand",
@@ -614,7 +564,6 @@ email:"Sähköposti",
 website:"Verkkosivusto",
 winner:"Voittaja",
 prize:"Palkinto",
-home:"Koti",
 date:"Päivämäärä",
 time:"Aika",
 distance:"Etäisyys",
@@ -630,7 +579,6 @@ email:"E-posta",
 website:"Web sitesi",
 winner:"Kazanan",
 prize:"Ödül",
-home:"Ev",
 date:"Tarih",
 time:"Saat",
 distance:"Mesafe",
@@ -646,7 +594,6 @@ email:"البريد الإلكتروني",
 website:"الموقع الإلكتروني",
 winner:"الفائز",
 prize:"الجائزة",
-home:"المنزل",
 date:"التاريخ",
 time:"الوقت",
 distance:"المسافة",
@@ -662,7 +609,6 @@ email:"ईमेल",
 website:"वेबसाइट",
 winner:"विजेता",
 prize:"पुरस्कार",
-home:"घर",
 date:"तारीख",
 time:"समय",
 distance:"दूरी",
@@ -673,23 +619,11 @@ pounds:"पाउंड"
 };
 
 
-/* =========================================================
-SELECTORS
-========================================================= */
-
-const SPEAKER_SELECTOR = [
-"[data-pd-speech-toggle]",
-"[data-read-aloud]",
-".speaker-button",
-".speaker-btn",
-".listen-button",
-".read-aloud-button",
-".pd-local-speaker"
-].join(",");
-
-const READABLE_SELECTOR = [
+const READABLE_SELECTORS = [
 
 "[data-pd-readable]",
+
+".hero-content",
 
 "main article",
 
@@ -700,8 +634,6 @@ const READABLE_SELECTOR = [
 "main .feature-card",
 
 "main .editorial-card",
-
-"main .magazine-card",
 
 "main .content-card",
 
@@ -717,7 +649,13 @@ const READABLE_SELECTOR = [
 
 "main .listing-card",
 
-"main .community-note-inner",
+"main .intro-photo",
+
+"main .how",
+
+"main .prize-box",
+
+"main .rules",
 
 "main .impact-copy",
 
@@ -725,47 +663,63 @@ const READABLE_SELECTOR = [
 
 "main .publish-strip",
 
-".hero-content"
+"main .community-note-inner"
 
 ].join(",");
 
-const SECTION_SELECTOR =
-"main > section";
+
+const OLD_SPEAKER_SELECTORS = [
+
+"[data-pd-speech-toggle]",
+
+"[data-read-aloud]",
+
+"[data-speech-toggle]",
+
+"[data-speech-target]",
+
+".pd-local-speaker",
+
+".speaker-button",
+
+".speaker-btn",
+
+".listen-button",
+
+".read-aloud-button",
+
+".speech-button",
+
+".speech-btn",
+
+".tts-button",
+
+".tts-btn",
+
+".narration-button",
+
+".narration-btn",
+
+".audio-reader-button"
+
+].join(",");
 
 
-/* =========================================================
-STATE
-========================================================= */
+let activeButton = null;
 
-let activeButton =
-null;
+let activeUtterance = null;
 
-let activeElement =
-null;
+let queue = [];
 
-let activeUtterance =
-null;
+let queueIndex = 0;
 
-let speechQueue =
-[];
+let isReading = false;
 
-let speechIndex =
-0;
+let manuallyStopped = false;
 
-let speaking =
-false;
+let idCounter = 0;
 
-let stopped =
-false;
-
-let readableCounter =
-0;
-
-let refreshTimer =
-null;
-
-let startTimer =
-null;
+let refreshTimer = null;
 
 
 /* =========================================================
@@ -801,19 +755,17 @@ code.split("_")[0];
 }
 
 code =
-LANGUAGE_ALIASES[code] ||
+ALIASES[code] ||
 code;
 
-return SUPPORTED_LANGUAGES.includes(
-code
-)
+return SUPPORTED.includes(code)
 ?code
 :"en";
 
 }
 
 
-function getCurrentLanguage(){
+function currentLanguage(){
 
 try{
 
@@ -823,29 +775,29 @@ typeof window.PetsDogueLanguage.getCurrentLanguage ===
 "function"
 ){
 
-const result =
+const value =
 window.PetsDogueLanguage
 .getCurrentLanguage();
 
 if(
-typeof result ===
+typeof value ===
 "string"
 ){
 
 return normalizeLanguage(
-result
+value
 );
 
 }
 
 if(
-result &&
-typeof result.code ===
+value &&
+typeof value.code ===
 "string"
 ){
 
 return normalizeLanguage(
-result.code
+value.code
 );
 
 }
@@ -883,87 +835,89 @@ document.documentElement.lang ||
 }
 
 
-function getLocale(){
+function labels(){
 
-return SPEECH_LOCALES[
-getCurrentLanguage()
+return UI[
+currentLanguage()
+] ||
+UI.en;
+
+}
+
+
+function locale(){
+
+return LOCALES[
+currentLanguage()
 ] ||
 "en-GB";
 
 }
 
 
-function getLabels(){
+function terms(){
 
-return LABELS[
-getCurrentLanguage()
+return TERMS[
+currentLanguage()
 ] ||
-LABELS.en;
-
-}
-
-
-function getSemantics(){
-
-return SEMANTICS[
-getCurrentLanguage()
-] ||
-SEMANTICS.en;
+TERMS.en;
 
 }
 
 
 /* =========================================================
-SCREEN READER STATUS
+LIVE REGION
 ========================================================= */
 
 function ensureLiveRegion(){
 
-let element =
+let el =
 document.getElementById(
 "pdNarrationStatus"
 );
 
-if(element){
-return element;
+if(el){
+
+return el;
+
 }
 
-element =
+el =
 document.createElement(
 "div"
 );
 
-element.id =
+el.id =
 "pdNarrationStatus";
 
-element.className =
-"pd-sr-only";
+el.className =
+"pd-a11y-sr-only";
 
-element.setAttribute(
+el.setAttribute(
 "role",
 "status"
 );
 
-element.setAttribute(
+el.setAttribute(
 "aria-live",
 "polite"
 );
 
-element.setAttribute(
+el.setAttribute(
 "aria-atomic",
 "true"
 );
 
-element.setAttribute(
+el.setAttribute(
 "data-pd-speech-ignore",
 "true"
 );
 
 document.body.appendChild(
-element
+el
 );
 
-return element;
+return el;
 
 }
 
@@ -976,8 +930,8 @@ ensureLiveRegion();
 region.textContent =
 "";
 
-window.setTimeout(
-function(){
+setTimeout(
+()=>{
 
 region.textContent =
 text;
@@ -997,11 +951,12 @@ function addStyles(){
 
 if(
 document.getElementById(
-"pdNarrationStyles"
+"pdNarrationStylesV4"
 )
 ){
 
 return;
+
 }
 
 const style =
@@ -1010,7 +965,7 @@ document.createElement(
 );
 
 style.id =
-"pdNarrationStyles";
+"pdNarrationStylesV4";
 
 style.setAttribute(
 "data-pd-speech-ignore",
@@ -1019,7 +974,7 @@ style.setAttribute(
 
 style.textContent = `
 
-.pd-sr-only{
+.pd-a11y-sr-only{
 position:absolute!important;
 width:1px!important;
 height:1px!important;
@@ -1031,11 +986,11 @@ white-space:nowrap!important;
 border:0!important;
 }
 
-.pd-readable-block{
-position:relative;
+.pd-a11y-readable{
+position:relative!important;
 }
 
-.pd-local-speaker{
+.pd-a11y-speaker{
 position:absolute;
 top:14px;
 right:14px;
@@ -1048,20 +1003,20 @@ padding:0;
 margin:0;
 border:2px solid #c89b3c;
 border-radius:50%;
-background:rgba(7,7,7,.92);
+background:rgba(7,7,7,.94);
 color:#fff;
 cursor:pointer;
-z-index:40;
+z-index:60;
 box-shadow:0 4px 16px rgba(0,0,0,.2);
 -webkit-tap-highlight-color:transparent;
 }
 
-html[dir="rtl"] .pd-local-speaker{
+html[dir="rtl"] .pd-a11y-speaker{
 right:auto;
 left:14px;
 }
 
-.pd-local-speaker svg{
+.pd-a11y-speaker svg{
 display:block;
 width:23px;
 height:23px;
@@ -1073,19 +1028,19 @@ stroke-linejoin:round;
 pointer-events:none;
 }
 
-.pd-local-speaker:focus-visible{
+.pd-a11y-speaker:focus-visible{
 outline:3px solid #65e51f;
 outline-offset:3px;
 }
 
-.pd-local-speaker[data-speaking="true"]{
+.pd-a11y-speaker[data-speaking="true"]{
 border-color:#65e51f;
 box-shadow:
-0 0 0 4px rgba(101,229,31,.16),
+0 0 0 4px rgba(101,229,31,.18),
 0 4px 18px rgba(0,0,0,.28);
 }
 
-.pd-local-speaker[data-speaking="true"]::after{
+.pd-a11y-speaker[data-speaking="true"]:after{
 content:"";
 position:absolute;
 top:-1px;
@@ -1098,26 +1053,26 @@ border:2px solid #070707;
 }
 
 html[dir="rtl"]
-.pd-local-speaker[data-speaking="true"]::after{
+.pd-a11y-speaker[data-speaking="true"]:after{
 right:auto;
 left:-1px;
 }
 
 @media(max-width:700px){
 
-.pd-local-speaker{
+.pd-a11y-speaker{
 width:39px;
 height:39px;
 top:10px;
 right:10px;
 }
 
-html[dir="rtl"] .pd-local-speaker{
+html[dir="rtl"] .pd-a11y-speaker{
 right:auto;
 left:10px;
 }
 
-.pd-local-speaker svg{
+.pd-a11y-speaker svg{
 width:21px;
 height:21px;
 }
@@ -1137,7 +1092,7 @@ style
 ICON
 ========================================================= */
 
-function speakerSvg(){
+function icon(){
 
 return `
 <svg
@@ -1155,41 +1110,171 @@ aria-hidden="true"
 
 
 /* =========================================================
-VISIBLE TEXT
+REMOVE ALL OLD SPEAKERS
 ========================================================= */
 
-function elementVisible(element){
+function looksLikeOldSpeaker(button){
 
 if(
-!element ||
-element.nodeType !== 1
+!button ||
+button.nodeType !== 1
 ){
 
 return false;
+
+}
+
+if(
+button.matches(
+".pd-a11y-speaker,[data-pd-a11y-speaker='1']"
+)
+){
+
+return false;
+
+}
+
+if(
+button.matches(
+OLD_SPEAKER_SELECTORS
+)
+){
+
+return true;
+
+}
+
+if(
+button.tagName !== "BUTTON" &&
+button.tagName !== "A"
+){
+
+return false;
+
+}
+
+const signature = [
+
+button.className,
+
+button.id,
+
+button.getAttribute(
+"aria-label"
+),
+
+button.getAttribute(
+"title"
+),
+
+button.getAttribute(
+"onclick"
+),
+
+button.getAttribute(
+"data-action"
+)
+
+]
+.filter(Boolean)
+.join(" ")
+.toLowerCase();
+
+return /(speaker|speech|speak|listen|read.?aloud|narrat|text.?to.?speech|tts|озвуч|прослуш|слушать|читать вслух|голос)/i
+.test(
+signature
+);
+
+}
+
+
+function removeOldSpeakers(){
+
+document
+.querySelectorAll(
+OLD_SPEAKER_SELECTORS
+)
+.forEach(
+el=>{
+
+if(
+!el.matches(
+".pd-a11y-speaker,[data-pd-a11y-speaker='1']"
+)
+){
+
+el.remove();
+
+}
+
+}
+);
+
+document
+.querySelectorAll(
+"button,a"
+)
+.forEach(
+el=>{
+
+if(
+looksLikeOldSpeaker(
+el
+)
+){
+
+el.remove();
+
+}
+
+}
+);
+
+}
+
+
+/* =========================================================
+READ VISIBLE TEXT
+========================================================= */
+
+function visible(el){
+
+if(
+!el ||
+el.nodeType !== 1
+){
+
+return false;
+
 }
 
 const style =
-window.getComputedStyle(
-element
+getComputedStyle(
+el
 );
 
-return !(
-style.display === "none" ||
-style.visibility === "hidden" ||
-style.visibility === "collapse"
+return (
+style.display !==
+"none" &&
+style.visibility !==
+"hidden" &&
+style.visibility !==
+"collapse"
 );
 
 }
 
 
-function excludedTextNode(element){
+function excluded(parent){
 
-if(!element){
+if(!parent){
+
 return true;
+
 }
 
 return Boolean(
-element.closest(
+parent.closest(
 [
 "script",
 "style",
@@ -1206,8 +1291,8 @@ element.closest(
 "[hidden]",
 '[aria-hidden="true"]',
 "[data-pd-speech-ignore]",
-".pd-local-speaker",
-".pd-sr-only"
+".pd-a11y-speaker",
+".pd-a11y-sr-only"
 ].join(",")
 )
 );
@@ -1215,17 +1300,23 @@ element.closest(
 }
 
 
-function getTextFromElement(element){
+function textOf(element){
 
 if(!element){
+
 return "";
+
 }
 
 const walker =
 document.createTreeWalker(
+
 element,
+
 NodeFilter.SHOW_TEXT,
+
 {
+
 acceptNode(node){
 
 const text =
@@ -1237,7 +1328,9 @@ node.nodeValue ||
 .trim();
 
 if(!text){
+
 return NodeFilter.FILTER_REJECT;
+
 }
 
 const parent =
@@ -1245,25 +1338,23 @@ node.parentElement;
 
 if(
 !parent ||
-excludedTextNode(
-parent
-) ||
-!elementVisible(
-parent
-)
+excluded(parent) ||
+!visible(parent)
 ){
 
 return NodeFilter.FILTER_REJECT;
+
 }
 
 return NodeFilter.FILTER_ACCEPT;
 
 }
+
 }
+
 );
 
-const parts =
-[];
+const parts = [];
 
 let node;
 
@@ -1283,7 +1374,11 @@ node.nodeValue ||
 .trim();
 
 if(value){
-parts.push(value);
+
+parts.push(
+value
+);
+
 }
 
 }
@@ -1297,13 +1392,13 @@ return parts
 
 
 /* =========================================================
-SEMANTIC TEXT PREPARATION
+SEMANTIC SYMBOLS
 ========================================================= */
 
-function prepareSemanticText(text){
+function semanticText(text){
 
-const s =
-getSemantics();
+const t =
+terms();
 
 let value =
 String(
@@ -1313,137 +1408,103 @@ text ||
 
 value =
 value.replace(
-/💳|🏦/gu,
-` ${s.card}: `
+/📍|📌|🗺️?/gu,
+` ${t.location}: `
 );
 
 value =
 value.replace(
 /📞|☎️?|📱/gu,
-` ${s.phone}: `
+` ${t.phone}: `
+);
+
+value =
+value.replace(
+/💳|🏦/gu,
+` ${t.card}: `
 );
 
 value =
 value.replace(
 /📧|✉️?/gu,
-` ${s.email}: `
+` ${t.email}: `
 );
 
 value =
 value.replace(
 /🌐|🔗/gu,
-` ${s.website}: `
-);
-
-value =
-value.replace(
-/📍|🗺️?/gu,
-` ${s.location}: `
+` ${t.website}: `
 );
 
 value =
 value.replace(
 /🏆/gu,
-` ${s.winner}: `
+` ${t.winner}: `
 );
 
 value =
 value.replace(
 /🎁/gu,
-` ${s.prize}: `
-);
-
-value =
-value.replace(
-/🏠|⌂/gu,
-` ${s.home}: `
+` ${t.prize}: `
 );
 
 value =
 value.replace(
 /📅|🗓️?/gu,
-` ${s.date}: `
+` ${t.date}: `
 );
 
 value =
 value.replace(
 /⏰|🕒/gu,
-` ${s.time}: `
+` ${t.time}: `
 );
 
 value =
 value.replace(
 /📏/gu,
-` ${s.distance}: `
+` ${t.distance}: `
 );
 
 value =
 value.replace(
 /❤️|♥|♡/gu,
-` ${s.favourite}: `
+` ${t.favourite}: `
 );
 
 value =
 value.replace(
 /£\s*([0-9]+(?:[.,][0-9]+)?)/g,
-function(
-match,
+(
+_,
 amount
-){
-
-return ` ${amount} ${s.pounds} `;
-
-}
+)=>
+` ${amount} ${t.pounds} `
 );
-
-
-/*
-Bank card style numbers.
-*/
 
 value =
 value.replace(
 /\b(?:\d{4}[\s-]?){3}\d{4}\b/g,
-function(number){
-
-const digits =
+number=>
+`${t.card}: ${
 number
 .replace(/\D/g,"")
 .split("")
-.join(" ");
-
-return ` ${s.card}: ${digits} `;
-
-}
+.join(" ")
+}`
 );
-
-
-/*
-Long telephone numbers.
-Speak digits separately.
-*/
 
 value =
 value.replace(
 /(?:\+\s*)?\d[\d\s().-]{7,}\d/g,
-function(number){
-
-const digits =
+number=>
+`${t.phone}: ${
 number
 .replace(/\D/g,"")
 .split("")
-.join(" ");
-
-return ` ${s.phone}: ${digits} `;
-
-}
+.join(" ")
+}`
 );
-
-
-/*
-Decorative symbols must not be announced as
-"black diamond", "office pen", etc.
-*/
 
 value =
 value.replace(
@@ -1459,78 +1520,277 @@ value.replace(
 
 value =
 value.replace(
-/\s+[+＋]\s+/gu,
+/\s*[·•]\s*/g,
 ", "
 );
 
 value =
 value.replace(
-/\s*·\s*/g,
+/\s+\/\s+/g,
 ", "
 );
 
 value =
 value.replace(
-/\s*•\s*/g,
-", "
-);
-
-value =
-value.replace(
-/\s*\/\s*/g,
-", "
-);
-
-value =
-value.replace(
-(/\s+/g),
+/\s+/g,
 " "
-);
-
-value =
-value.replace(
+)
+.replace(
 /\s+([,.!?;:])/g,
 "$1"
-);
+)
+.trim();
 
-return value.trim();
+return localiseCommonWords(
+value
+);
 
 }
 
 
 /* =========================================================
-TEXT CHUNKS
+COMMON ENGLISH UI WORDS
 ========================================================= */
 
-function splitLongText(
-text,
-maxLength
+function localiseCommonWords(text){
+
+const lang =
+currentLanguage();
+
+if(
+lang ===
+"ru"
 ){
 
-const words =
-text.split(/\s+/);
+return text
 
-const output =
-[];
+.replace(
+/\b1\s+year\b/gi,
+"1 год"
+)
+
+.replace(
+/\b([2-4])\s+years\b/gi,
+"$1 года"
+)
+
+.replace(
+/\b(\d+)\s+years\b/gi,
+"$1 лет"
+)
+
+.replace(
+/\b1\s+month\b/gi,
+"1 месяц"
+)
+
+.replace(
+/\b(\d+)\s+months\b/gi,
+"$1 месяцев"
+)
+
+.replace(
+/\b1\s+week\b/gi,
+"1 неделя"
+)
+
+.replace(
+/\b(\d+)\s+weeks\b/gi,
+"$1 недель"
+)
+
+.replace(
+/\bFemale\b/gi,
+"Самка"
+)
+
+.replace(
+/\bMale\b/gi,
+"Самец"
+)
+
+.replace(
+/\bFREE\b/gi,
+"Бесплатно"
+)
+
+.replace(
+/\bREHOME\b/gi,
+"Ищет дом"
+)
+
+.replace(
+/\bFOR SALE\b/gi,
+"Продажа"
+)
+
+.replace(
+/\bSERVICE\b/gi,
+"Услуга"
+);
+
+}
+
+
+if(
+lang ===
+"uk"
+){
+
+return text
+
+.replace(
+/\b1\s+year\b/gi,
+"1 рік"
+)
+
+.replace(
+/\b([2-4])\s+years\b/gi,
+"$1 роки"
+)
+
+.replace(
+/\b(\d+)\s+years\b/gi,
+"$1 років"
+)
+
+.replace(
+/\b1\s+month\b/gi,
+"1 місяць"
+)
+
+.replace(
+/\b(\d+)\s+months\b/gi,
+"$1 місяців"
+)
+
+.replace(
+/\b1\s+week\b/gi,
+"1 тиждень"
+)
+
+.replace(
+/\b(\d+)\s+weeks\b/gi,
+"$1 тижнів"
+)
+
+.replace(
+/\bFemale\b/gi,
+"Самка"
+)
+
+.replace(
+/\bMale\b/gi,
+"Самець"
+)
+
+.replace(
+/\bFREE\b/gi,
+"Безкоштовно"
+)
+
+.replace(
+/\bREHOME\b/gi,
+"Шукає дім"
+)
+
+.replace(
+/\bFOR SALE\b/gi,
+"Продаж"
+)
+
+.replace(
+/\bSERVICE\b/gi,
+"Послуга"
+);
+
+}
+
+return text;
+
+}
+
+
+/* =========================================================
+SPLIT TEXT
+========================================================= */
+
+function splitChunks(
+text,
+max=190
+){
+
+const clean =
+String(
+text ||
+""
+)
+.replace(/\s+/g," ")
+.trim();
+
+if(!clean){
+
+return [];
+
+}
+
+const sentences =
+clean.match(
+/[^.!?。！？…]+[.!?。！？…]+|[^.!?。！？…]+$/g
+) ||
+[
+clean
+];
+
+const out = [];
+
+for(
+const sentence
+of sentences
+){
+
+const s =
+sentence.trim();
+
+if(!s){
+
+continue;
+
+}
+
+if(
+s.length <=
+max
+){
+
+out.push(
+s
+);
+
+continue;
+
+}
 
 let current =
 "";
 
-words.forEach(
-function(word){
+for(
+const word
+of s.split(/\s+/)
+){
 
-const candidate =
+const test =
 current
 ?current + " " + word
 :word;
 
 if(
-candidate.length >
-maxLength &&
+test.length >
+max &&
 current
 ){
 
-output.push(
+out.push(
 current
 );
 
@@ -1540,100 +1800,35 @@ word;
 }else{
 
 current =
-candidate;
+test;
+
 }
 
 }
-);
 
 if(current){
-output.push(current);
-}
 
-return output;
-
-}
-
-
-function makeChunks(text){
-
-const MAX_LENGTH =
-220;
-
-const clean =
-String(
-text ||
-""
-)
-.replace(/\s+/g," ")
-.trim();
-
-if(!clean){
-return [];
-}
-
-const sentences =
-clean.match(
-/[^.!?。！？…]+[.!?。！？…]+|[^.!?。！？…]+$/g
-) ||
-[clean];
-
-const result =
-[];
-
-sentences.forEach(
-function(sentence){
-
-const value =
-sentence.trim();
-
-if(!value){
-return;
-}
-
-if(
-value.length >
-MAX_LENGTH
-){
-
-splitLongText(
-value,
-MAX_LENGTH
-)
-.forEach(
-function(part){
-
-result.push(
-part
-);
-
-}
-);
-
-}else{
-
-result.push(
-value
+out.push(
+current
 );
 
 }
 
 }
-);
 
-return result;
+return out;
 
 }
 
 
 /* =========================================================
-MULTILINGUAL VOICE SEGMENTS
+MULTILINGUAL SEGMENTS
 ========================================================= */
 
-function addQueueItem(
-queue,
+function pushSegment(
+result,
 text,
-locale
+lang
 ){
 
 const clean =
@@ -1644,52 +1839,50 @@ text ||
 .replace(/\s+/g," ")
 .trim();
 
-if(!clean){
-return;
-}
+if(clean){
 
-queue.push({
+result.push({
 text:clean,
-locale
+lang
 });
 
 }
 
+}
 
-function segmentChunk(
-text
-){
 
-const language =
-getCurrentLanguage();
+function splitByLanguage(text){
+
+const selected =
+currentLanguage();
 
 const selectedLocale =
-getLocale();
+LOCALES[selected] ||
+"en-GB";
 
-const queue =
-[];
+const result = [];
 
+const nonLatin =
+new Set([
+"ru",
+"uk",
+"bg",
+"el",
+"ar",
+"hi"
+]);
 
-/*
-For Russian, Ukrainian, Bulgarian, Greek,
-Arabic and Hindi pages:
-Latin words such as British Shorthair,
-Pomeranian, London, PETS & DOGUE
-are spoken with an English voice instead
-of being read as phonetic local-language text.
-*/
 
 if(
-NON_LATIN_LANGUAGES.has(
-language
+!nonLatin.has(
+selected
 )
 ){
 
 const regex =
-/(?:PETS\s*&\s*DOGUE|[A-Za-z][A-Za-z0-9'’&.-]*(?:\s+[A-Za-z][A-Za-z0-9'’&.-]*)*)/g;
+/PETS\s*&\s*DOGUE/gi;
 
-let lastIndex =
-0;
+let last = 0;
 
 let match;
 
@@ -1702,13 +1895,13 @@ regex.exec(text)
 
 if(
 match.index >
-lastIndex
+last
 ){
 
-addQueueItem(
-queue,
+pushSegment(
+result,
 text.slice(
-lastIndex,
+last,
 match.index
 ),
 selectedLocale
@@ -1716,149 +1909,143 @@ selectedLocale
 
 }
 
-addQueueItem(
-queue,
+pushSegment(
+result,
 match[0],
 "en-GB"
 );
 
-lastIndex =
+last =
 regex.lastIndex;
 
 }
 
 if(
-lastIndex <
+last <
 text.length
 ){
 
-addQueueItem(
-queue,
-text.slice(
-lastIndex
-),
+pushSegment(
+result,
+text.slice(last),
 selectedLocale
 );
-
-}
-
-return queue;
-
-}
-
-
-/*
-For Latin languages keep the selected language,
-but PETS & DOGUE remains the English brand.
-*/
-
-const brandRegex =
-/PETS\s*&\s*DOGUE/gi;
-
-let lastIndex =
-0;
-
-let match;
-
-while(
-(
-match =
-brandRegex.exec(text)
-)
-){
-
-if(
-match.index >
-lastIndex
-){
-
-addQueueItem(
-queue,
-text.slice(
-lastIndex,
-match.index
-),
-selectedLocale
-);
-
-}
-
-addQueueItem(
-queue,
-match[0],
-"en-GB"
-);
-
-lastIndex =
-brandRegex.lastIndex;
 
 }
 
 if(
-lastIndex <
-text.length
+!result.length
 ){
 
-addQueueItem(
-queue,
-text.slice(
-lastIndex
-),
-selectedLocale
-);
-
-}
-
-if(!queue.length){
-
-addQueueItem(
-queue,
+pushSegment(
+result,
 text,
 selectedLocale
 );
 
 }
 
-return queue;
+return result;
 
 }
 
 
-function buildSpeechQueue(text){
+const regex =
+/(?:PETS\s*&\s*DOGUE|[A-Za-z][A-Za-z'’.-]*(?:\s+[A-Za-z][A-Za-z'’.-]*)*)/g;
 
-const prepared =
-prepareSemanticText(
-text
-);
+let last = 0;
 
-const chunks =
-makeChunks(
-prepared
-);
+let match;
 
-const queue =
-[];
-
-chunks.forEach(
-function(chunk){
-
-segmentChunk(
-chunk
+while(
+(
+match =
+regex.exec(text)
 )
-.forEach(
-function(item){
+){
 
-queue.push(
-item
+if(
+match.index >
+last
+){
+
+pushSegment(
+result,
+text.slice(
+last,
+match.index
+),
+selectedLocale
 );
 
 }
+
+pushSegment(
+result,
+match[0],
+"en-GB"
+);
+
+last =
+regex.lastIndex;
+
+}
+
+if(
+last <
+text.length
+){
+
+pushSegment(
+result,
+text.slice(last),
+selectedLocale
 );
 
 }
+
+if(
+!result.length
+){
+
+pushSegment(
+result,
+text,
+selectedLocale
 );
 
-return queue;
+}
+
+return result;
+
+}
+
+
+function buildQueue(text){
+
+const result = [];
+
+for(
+const chunk
+of splitChunks(
+semanticText(text)
+)
+){
+
+for(
+const segment
+of splitByLanguage(chunk)
+){
+
+result.push(
+segment
+);
+
+}
+
+}
+
+return result;
 
 }
 
@@ -1867,7 +2054,7 @@ return queue;
 VOICE
 ========================================================= */
 
-function chooseVoice(locale){
+function chooseVoice(lang){
 
 if(
 !(
@@ -1876,106 +2063,107 @@ if(
 ){
 
 return null;
+
 }
 
 const voices =
-window.speechSynthesis
+speechSynthesis
 .getVoices();
 
-if(!voices.length){
+if(
+!voices.length
+){
+
 return null;
+
 }
 
 const wanted =
 String(
-locale
+lang ||
+""
 )
 .toLowerCase();
 
-const exact =
-voices.find(
-function(voice){
+return (
 
-return String(
+voices.find(
+voice=>
+String(
 voice.lang ||
 ""
 )
 .toLowerCase() ===
-wanted;
+wanted
+)
 
-}
-);
+||
 
-if(exact){
-return exact;
-}
-
-const language =
-wanted.split("-")[0];
-
-return voices.find(
-function(voice){
-
-return String(
+voices.find(
+voice=>
+String(
 voice.lang ||
 ""
 )
 .toLowerCase()
 .startsWith(
-language
-);
+wanted.split("-")[0]
+)
+)
 
-}
-) ||
-null;
+||
+
+null
+
+);
 
 }
 
 
 /* =========================================================
-BUTTON LABELS
+BUTTON STATE
 ========================================================= */
 
-function updateAllButtonLabels(){
+function updateButtons(){
 
-const labels =
-getLabels();
+const l =
+labels();
 
 document
 .querySelectorAll(
-SPEAKER_SELECTOR
+".pd-a11y-speaker"
 )
 .forEach(
-function(button){
+button=>{
 
-const isActive =
-button === activeButton &&
-speaking;
-
-const label =
-isActive
-?labels.stop
-:labels.listen;
+const active =
+button ===
+activeButton &&
+isReading;
 
 button.setAttribute(
 "aria-label",
-label
+active
+?l.stop
+:l.listen
 );
 
 button.setAttribute(
 "title",
-label
+active
+?l.stop
+:l.listen
 );
 
 button.setAttribute(
 "aria-pressed",
-isActive
+active
 ?"true"
 :"false"
 );
 
 button.dataset.speaking =
-isActive
+active
 ?"true"
 :"false";
 
@@ -1989,61 +2177,54 @@ isActive
 STOP
 ========================================================= */
 
-function stopSpeech(
-withAnnouncement
+function stopReading(
+shouldAnnounce=false
 ){
 
-stopped =
+manuallyStopped =
 true;
 
-speaking =
+isReading =
 false;
 
-speechQueue =
+queue =
 [];
 
-speechIndex =
+queueIndex =
 0;
 
 activeUtterance =
 null;
 
-activeElement =
+activeButton =
 null;
-
-if(startTimer){
-
-window.clearTimeout(
-startTimer
-);
-
-startTimer =
-null;
-
-}
-
-if(
-"speechSynthesis" in window
-){
 
 try{
 
-window.speechSynthesis.cancel();
+if(
+"speechSynthesis" in window &&
+(
+speechSynthesis.speaking ||
+speechSynthesis.pending ||
+speechSynthesis.paused
+)
+){
+
+speechSynthesis.cancel();
+
+}
 
 }catch(error){
 }
 
-}
+updateButtons();
 
-activeButton =
-null;
-
-updateAllButtonLabels();
-
-if(withAnnouncement){
+if(
+shouldAnnounce
+){
 
 announce(
-getLabels().stopped
+labels().stopped
 );
 
 }
@@ -2052,47 +2233,43 @@ getLabels().stopped
 
 
 /* =========================================================
-SPEAK QUEUE
+SPEAK
 ========================================================= */
 
 function speakNext(){
 
 if(
-stopped ||
-!speaking
+manuallyStopped ||
+!isReading
 ){
 
 return;
+
 }
 
 if(
-speechIndex >=
-speechQueue.length
+queueIndex >=
+queue.length
 ){
 
-speaking =
+isReading =
 false;
-
-stopped =
-false;
-
-activeButton =
-null;
-
-activeElement =
-null;
 
 activeUtterance =
 null;
 
-updateAllButtonLabels();
+activeButton =
+null;
+
+updateButtons();
 
 return;
+
 }
 
 const item =
-speechQueue[
-speechIndex
+queue[
+queueIndex
 ];
 
 const utterance =
@@ -2104,10 +2281,10 @@ activeUtterance =
 utterance;
 
 utterance.lang =
-item.locale;
+item.lang;
 
 utterance.rate =
-0.96;
+0.94;
 
 utterance.pitch =
 1;
@@ -2117,7 +2294,7 @@ utterance.volume =
 
 const voice =
 chooseVoice(
-item.locale
+item.lang
 );
 
 if(voice){
@@ -2128,61 +2305,59 @@ voice;
 }
 
 utterance.onend =
-function(){
+()=>{
 
-if(stopped){
+if(
+manuallyStopped
+){
+
 return;
+
 }
 
-speechIndex +=
+queueIndex +=
 1;
 
-window.setTimeout(
-speakNext,
-35
-);
+speakNext();
 
 };
 
 utterance.onerror =
-function(event){
+event=>{
 
 if(
-stopped ||
-event.error === "canceled" ||
-event.error === "interrupted"
+manuallyStopped ||
+event.error ===
+"canceled" ||
+event.error ===
+"interrupted"
 ){
 
 return;
+
 }
 
-speechIndex +=
+queueIndex +=
 1;
 
-window.setTimeout(
-speakNext,
-35
-);
+speakNext();
 
 };
 
 try{
 
-window.speechSynthesis.resume();
+speechSynthesis.resume();
 
-window.speechSynthesis.speak(
+speechSynthesis.speak(
 utterance
 );
 
 }catch(error){
 
-speechIndex +=
+queueIndex +=
 1;
 
-window.setTimeout(
-speakNext,
-50
-);
+speakNext();
 
 }
 
@@ -2190,456 +2365,188 @@ speakNext,
 
 
 /* =========================================================
-START READING
+START
 ========================================================= */
 
-function speakElement(
+function startReading(
 element,
 button
 ){
 
-const labels =
-getLabels();
+const l =
+labels();
 
 if(
 !(
 "speechSynthesis" in window
 ) ||
-typeof window.SpeechSynthesisUtterance ===
+typeof SpeechSynthesisUtterance ===
 "undefined"
 ){
 
 announce(
-labels.unsupported
+l.unsupported
 );
 
 return;
+
 }
 
-
-/*
-Press same speaker = stop.
-*/
-
 if(
-speaking &&
-activeButton === button
+isReading &&
+activeButton ===
+button
 ){
 
-stopSpeech(
+stopReading(
 true
 );
 
 return;
+
 }
 
+if(
+isReading ||
+speechSynthesis.speaking ||
+speechSynthesis.pending
+){
 
-/*
-Stop previous topic.
-*/
+try{
 
-stopSpeech(
-false
-);
+speechSynthesis.cancel();
+
+}catch(error){
+}
+
+}
 
 const text =
-getTextFromElement(
+textOf(
 element
 );
 
 if(!text){
 
 announce(
-labels.empty
+l.empty
 );
 
 return;
+
 }
 
-const queue =
-buildSpeechQueue(
+const prepared =
+buildQueue(
 text
 );
 
-if(!queue.length){
+if(
+!prepared.length
+){
 
 announce(
-labels.empty
+l.empty
 );
 
 return;
+
 }
 
-speechQueue =
-queue;
+queue =
+prepared;
 
-speechIndex =
+queueIndex =
 0;
 
-stopped =
+manuallyStopped =
 false;
 
-speaking =
+isReading =
 true;
 
 activeButton =
 button;
 
-activeElement =
-element;
-
-updateAllButtonLabels();
+updateButtons();
 
 announce(
-labels.reading
+l.reading
 );
 
 
 /*
-Important Android Chrome fix:
-speechSynthesis.cancel() followed immediately by speak()
-can produce a green active button but no audio.
-
-Small delay after cancel fixes that.
+IMPORTANT:
+Speech begins immediately inside the real user click.
+Do not move this into setTimeout.
+This fixes silent playback on Android/Chrome.
 */
-
-startTimer =
-window.setTimeout(
-function(){
-
-startTimer =
-null;
-
-if(
-!stopped &&
-speaking
-){
-
-try{
-
-window.speechSynthesis.resume();
-
-}catch(error){
-}
 
 speakNext();
 
 }
 
-},
-90
-);
-
-}
-
 
 /* =========================================================
-TARGET RESOLUTION
+CREATE ONE SPEAKER
 ========================================================= */
 
-function resolveTarget(button){
-
-if(!button){
-return null;
-}
-
-const selector =
-button.getAttribute(
-"data-pd-speech-target"
-);
-
-if(selector){
-
-try{
-
-const target =
-document.querySelector(
-selector
-);
-
-if(target){
-return target;
-}
-
-}catch(error){
-}
-
-}
-
-const controls =
-button.getAttribute(
-"aria-controls"
-);
-
-if(controls){
-
-const target =
-document.getElementById(
-controls
-);
-
-if(target){
-return target;
-}
-
-}
-
-return button.closest(
-[
-"[data-pd-readable]",
-"article",
-".article-card",
-".story-card",
-".feature-card",
-".editorial-card",
-".magazine-card",
-".content-card",
-".world-card",
-".category-card",
-".rubric-card",
-".topic-card",
-".card",
-".listing-card",
-".community-note-inner",
-".impact-copy",
-".rescue-copy",
-".publish-strip",
-".hero-content",
-"section"
-].join(",")
-);
-
-}
-
-
-/* =========================================================
-BUTTON NORMALISATION
-========================================================= */
-
-function prepareExistingSpeaker(
-button
-){
-
-if(!button){
-return;
-}
-
-button.setAttribute(
-"data-pd-speech-toggle",
-"true"
-);
-
-if(
-button.tagName ===
-"BUTTON"
-){
-
-button.type =
-"button";
-
-}
-
-}
-
-
-/* =========================================================
-FIND EXISTING SPEAKER
-========================================================= */
-
-function findExistingSpeaker(
-element
-){
-
-if(!element){
-return null;
-}
-
-const direct =
-Array.from(
-element.children
-)
-.find(
-function(child){
-
-return child.matches &&
-child.matches(
-SPEAKER_SELECTOR
-);
-
-}
-);
-
-if(direct){
-return direct;
-}
-
-const descendants =
-Array.from(
-element.querySelectorAll(
-SPEAKER_SELECTOR
-)
-);
-
-if(!descendants.length){
-return null;
-}
-
-
-/*
-If this exact block already contains a speaker,
-reuse it instead of generating another one.
-*/
-
-for(
-const button
-of descendants
-){
-
-const targetSelector =
-button.getAttribute(
-"data-pd-speech-target"
-);
-
-const controls =
-button.getAttribute(
-"aria-controls"
-);
-
-if(
-element.id &&
-(
-targetSelector ===
-"#" + element.id ||
-controls ===
-element.id
-)
-){
-
-return button;
-}
-
-}
-
-
-/*
-For explicitly readable blocks,
-a speaker somewhere inside is considered its speaker.
-*/
-
-if(
-element.hasAttribute(
-"data-pd-readable"
-)
-){
-
-return descendants[0];
-}
-
-return null;
-
-}
-
-
-/* =========================================================
-CREATE SPEAKER
-========================================================= */
-
-function createSpeakerForElement(
-element
-){
+function createButton(element){
 
 if(
 !element ||
-element.dataset.pdNarrationReady ===
-"true"
+element.nodeType !==
+1
 ){
 
 return;
+
 }
 
-
-/*
-Never place a button inside another interactive control.
-*/
-
 if(
-[
-"BUTTON",
-"A",
-"INPUT",
-"SELECT",
-"TEXTAREA"
-]
-.includes(
-element.tagName
+element.matches(
+"button,a,input,select,textarea"
 )
 ){
 
 return;
+
 }
 
-const readableText =
-getTextFromElement(
-element
-);
-
 if(
-readableText.length <
+textOf(element).length <
 35
 ){
 
 return;
-}
-
-element.dataset.pdNarrationReady =
-"true";
-
-element.classList.add(
-"pd-readable-block"
-);
-
-if(!element.id){
-
-readableCounter +=
-1;
-
-element.id =
-"pd-readable-" +
-readableCounter;
 
 }
-
-const existing =
-findExistingSpeaker(
-element
-);
-
-if(existing){
-
-prepareExistingSpeaker(
-existing
-);
 
 if(
-!existing.getAttribute(
-"data-pd-speech-target"
+element.querySelector(
+":scope > .pd-a11y-speaker"
 )
 ){
 
-existing.setAttribute(
-"data-pd-speech-target",
-"#" +
-element.id
-);
+return;
 
 }
 
-existing.setAttribute(
-"aria-controls",
-element.id
+element.classList.add(
+"pd-a11y-readable"
 );
 
-return;
+if(
+!element.id
+){
+
+idCounter +=
+1;
+
+element.id =
+"pd-a11y-topic-" +
+idCounter;
+
 }
 
 const button =
@@ -2651,22 +2558,16 @@ button.type =
 "button";
 
 button.className =
-"pd-local-speaker";
+"pd-a11y-speaker";
 
 button.setAttribute(
-"data-pd-generated",
-"true"
+"data-pd-a11y-speaker",
+"1"
 );
 
 button.setAttribute(
-"data-pd-speech-toggle",
+"data-pd-speech-ignore",
 "true"
-);
-
-button.setAttribute(
-"data-pd-speech-target",
-"#" +
-element.id
 );
 
 button.setAttribute(
@@ -2679,13 +2580,26 @@ button.setAttribute(
 "false"
 );
 
-button.setAttribute(
-"data-pd-speech-ignore",
-"true"
+button.innerHTML =
+icon();
+
+button.addEventListener(
+"click",
+event=>{
+
+event.preventDefault();
+
+event.stopPropagation();
+
+event.stopImmediatePropagation();
+
+startReading(
+element,
+button
 );
 
-button.innerHTML =
-speakerSvg();
+}
+);
 
 element.appendChild(
 button
@@ -2695,160 +2609,122 @@ button
 
 
 /* =========================================================
-REMOVE DUPLICATES
+COLLECT TOPICS
 ========================================================= */
 
-function cleanupDuplicateSpeakers(){
+function collectTopics(){
+
+const candidates =
+new Set();
+
+document
+.querySelectorAll(
+READABLE_SELECTORS
+)
+.forEach(
+element=>{
+
+candidates.add(
+element
+);
+
+}
+);
+
 
 /*
-Remove duplicated generated speakers when a block
-already contains its own speaker.
+Top-level section is added only when it is
+a real single topic, not a container holding
+several smaller readable cards.
 */
 
 document
 .querySelectorAll(
-".pd-local-speaker"
+"main > section"
 )
 .forEach(
-function(button){
+section=>{
 
-const parent =
-button.parentElement;
+const nested =
+Array.from(
+section.querySelectorAll(
+READABLE_SELECTORS
+)
+)
+.some(
+element=>
+element !==
+section
+);
 
-if(!parent){
-return;
+if(
+!nested &&
+textOf(section).length >=
+70
+){
+
+candidates.add(
+section
+);
+
 }
 
-const others =
-Array.from(
-parent.querySelectorAll(
-SPEAKER_SELECTOR
-)
+}
+);
+
+
+return Array
+.from(
+candidates
 )
 .filter(
-function(other){
-
-return other !== button;
-
-}
-);
+element=>{
 
 if(
-others.length &&
-button.getAttribute(
-"data-pd-generated"
-) ===
-"true"
-){
-
-button.remove();
-
-}
-
-}
-);
-
-
-/*
-If two buttons point to exactly the same target,
-prefer the existing/manual one.
-*/
-
-const groups =
-new Map();
-
-document
-.querySelectorAll(
-SPEAKER_SELECTOR
-)
-.forEach(
-function(button){
-
-prepareExistingSpeaker(
-button
-);
-
-const target =
-resolveTarget(
-button
-);
-
-if(!target){
-return;
-}
-
-if(
-!groups.has(
-target
+element.hasAttribute(
+"data-pd-readable"
 )
 ){
 
-groups.set(
-target,
-[]
-);
+return true;
 
 }
 
-groups.get(
-target
+const nestedCandidate =
+Array.from(
+element.querySelectorAll(
+READABLE_SELECTORS
 )
-.push(
-button
-);
-
-}
-);
-
-groups.forEach(
-function(buttons){
-
-if(
-buttons.length <=
-1
-){
-
-return;
-}
-
-let keep =
-buttons.find(
-function(button){
-
-return button.getAttribute(
-"data-pd-generated"
-) !==
-"true";
-
-}
-) ||
-buttons[0];
-
-buttons.forEach(
-function(button){
-
-if(
-button === keep
-){
-
-return;
-}
-
-if(
-button.getAttribute(
-"data-pd-generated"
-) ===
-"true" ||
-button.classList.contains(
-"pd-local-speaker"
 )
-){
+.some(
+child=>
+child !==
+element
+);
 
-button.remove();
+return (
 
-}
+!nestedCandidate
 
-}
+||
+
+element.matches(
+[
+".hero-content",
+".intro-photo",
+".how",
+".prize-box",
+".rules",
+".impact-copy",
+".rescue-copy",
+".publish-strip",
+".community-note-inner",
+"article",
+".card",
+".listing-card"
+].join(",")
+)
+
 );
 
 }
@@ -2861,190 +2737,69 @@ button.remove();
 INSTALL
 ========================================================= */
 
-function installLocalSpeakers(){
+function install(){
 
 /*
-First recognise all speakers already present
-inside page code.
+First remove every speaker made by older
+page-level narration systems.
+*/
+
+removeOldSpeakers();
+
+
+/*
+Safety: this version itself may never show
+more than one direct speaker in one topic.
 */
 
 document
 .querySelectorAll(
-SPEAKER_SELECTOR
+".pd-a11y-speaker"
 )
 .forEach(
-prepareExistingSpeaker
+button=>{
+
+const parent =
+button.parentElement;
+
+if(!parent){
+
+return;
+
+}
+
+const siblings =
+parent.querySelectorAll(
+":scope > .pd-a11y-speaker"
 );
 
-const elements =
-new Set();
+if(
+siblings.length >
+1 &&
+button !==
+siblings[0]
+){
 
-document
-.querySelectorAll(
-READABLE_SELECTOR
-)
-.forEach(
-function(element){
+button.remove();
 
-elements.add(
+}
+
+}
+);
+
+
+for(
+const element
+of collectTopics()
+){
+
+createButton(
 element
 );
 
 }
-);
 
-
-/*
-Top-level section receives its own speaker only if
-it is genuinely one topic.
-
-If the section already contains another readable card
-or speaker, no extra section-level icon is created.
-
-This removes the two-speaker problem.
-*/
-
-document
-.querySelectorAll(
-SECTION_SELECTOR
-)
-.forEach(
-function(section){
-
-const nestedSpeaker =
-section.querySelector(
-SPEAKER_SELECTOR
-);
-
-const nestedReadable =
-Array.from(
-section.querySelectorAll(
-READABLE_SELECTOR
-)
-)
-.some(
-function(element){
-
-return element !==
-section;
-
-}
-);
-
-if(
-nestedSpeaker ||
-nestedReadable
-){
-
-return;
-}
-
-const text =
-getTextFromElement(
-section
-);
-
-if(
-text.length >=
-70
-){
-
-elements.add(
-section
-);
-
-}
-
-}
-);
-
-elements.forEach(
-function(element){
-
-createSpeakerForElement(
-element
-);
-
-}
-);
-
-cleanupDuplicateSpeakers();
-
-updateAllButtonLabels();
-
-}
-
-
-/* =========================================================
-ONE CENTRAL CLICK HANDLER
-========================================================= */
-
-/*
-Capture phase is intentional.
-
-Some old pages have their own previous narration click
-handlers. Those handlers were causing:
-
-1. speaker turns green
-2. one handler starts audio
-3. another handler immediately cancels it
-
-We intercept the speaker click before the old handler,
-so only this global narration engine runs.
-*/
-
-function handleSpeakerClick(
-event
-){
-
-const target =
-event.target;
-
-if(
-!target ||
-!target.closest
-){
-
-return;
-}
-
-const button =
-target.closest(
-SPEAKER_SELECTOR
-);
-
-if(!button){
-return;
-}
-
-event.preventDefault();
-
-event.stopPropagation();
-
-event.stopImmediatePropagation();
-
-prepareExistingSpeaker(
-button
-);
-
-const element =
-resolveTarget(
-button
-);
-
-if(!element){
-
-announce(
-getLabels().empty
-);
-
-return;
-}
-
-speakElement(
-element,
-button
-);
+updateButtons();
 
 }
 
@@ -3055,23 +2810,25 @@ LANGUAGE CHANGE
 
 function onLanguageChange(){
 
-if(speaking){
+if(
+isReading
+){
 
-stopSpeech(
+stopReading(
 false
 );
 
 }
 
-window.setTimeout(
-function(){
+setTimeout(
+()=>{
 
-installLocalSpeakers();
+install();
 
-updateAllButtonLabels();
+updateButtons();
 
 },
-80
+60
 );
 
 }
@@ -3083,37 +2840,29 @@ DYNAMIC CONTENT
 
 const observer =
 new MutationObserver(
-function(mutations){
+mutations=>{
 
-const changed =
-mutations.some(
-function(mutation){
-
-return (
+if(
+!mutations.some(
+mutation=>
 mutation.type ===
 "childList" &&
 mutation.addedNodes.length
-);
+)
+){
 
-}
-);
-
-if(!changed){
 return;
+
 }
 
-window.clearTimeout(
+clearTimeout(
 refreshTimer
 );
 
 refreshTimer =
-window.setTimeout(
-function(){
-
-installLocalSpeakers();
-
-},
-150
+setTimeout(
+install,
+120
 );
 
 }
@@ -3141,32 +2890,27 @@ element
 }
 
 if(!element){
+
 return false;
+
 }
 
-createSpeakerForElement(
+createButton(
 element
 );
 
-let button =
+const button =
 element.querySelector(
-":scope > [data-pd-speech-toggle]"
+":scope > .pd-a11y-speaker"
 );
 
 if(!button){
 
-button =
-findExistingSpeaker(
-element
-);
-
-}
-
-if(!button){
 return false;
+
 }
 
-speakElement(
+startReading(
 element,
 button
 );
@@ -3178,77 +2922,62 @@ return true;
 
 speak(text){
 
-if(!text){
-return false;
-}
-
 if(
+!text ||
 !(
 "speechSynthesis" in window
 )
 ){
 
-announce(
-getLabels().unsupported
-);
-
 return false;
+
 }
 
-stopSpeech(
-false
-);
+if(
+isReading ||
+speechSynthesis.speaking ||
+speechSynthesis.pending
+){
 
-speechQueue =
-buildSpeechQueue(
+try{
+
+speechSynthesis.cancel();
+
+}catch(error){
+}
+
+}
+
+queue =
+buildQueue(
 text
 );
 
 if(
-!speechQueue.length
+!queue.length
 ){
 
 return false;
+
 }
 
-speechIndex =
+queueIndex =
 0;
 
-stopped =
+manuallyStopped =
 false;
 
-speaking =
+isReading =
 true;
 
 activeButton =
 null;
 
-activeElement =
-null;
-
 announce(
-getLabels().reading
+labels().reading
 );
-
-startTimer =
-window.setTimeout(
-function(){
-
-startTimer =
-null;
-
-try{
-
-window.speechSynthesis.resume();
-
-}catch(error){
-}
 
 speakNext();
-
-},
-90
-);
 
 return true;
 
@@ -3257,7 +2986,7 @@ return true;
 
 stop(){
 
-stopSpeech(
+stopReading(
 true
 );
 
@@ -3266,14 +2995,14 @@ true
 
 isSpeaking(){
 
-return speaking;
+return isReading;
 
 },
 
 
 refresh(){
 
-installLocalSpeakers();
+install();
 
 }
 
@@ -3283,12 +3012,6 @@ installLocalSpeakers();
 /* =========================================================
 EVENTS
 ========================================================= */
-
-document.addEventListener(
-"click",
-handleSpeakerClick,
-true
-);
 
 window.addEventListener(
 "petsdogue:languagechange",
@@ -3302,7 +3025,7 @@ onLanguageChange
 
 window.addEventListener(
 "storage",
-function(event){
+event=>{
 
 if(
 event.key ===
@@ -3318,14 +3041,14 @@ onLanguageChange();
 
 document.addEventListener(
 "visibilitychange",
-function(){
+()=>{
 
 if(
 document.hidden &&
-speaking
+isReading
 ){
 
-stopSpeech(
+stopReading(
 false
 );
 
@@ -3336,9 +3059,9 @@ false
 
 window.addEventListener(
 "beforeunload",
-function(){
+()=>{
 
-stopSpeech(
+stopReading(
 false
 );
 
@@ -3356,7 +3079,7 @@ addStyles();
 
 ensureLiveRegion();
 
-installLocalSpeakers();
+install();
 
 if(
 "speechSynthesis" in window
@@ -3364,26 +3087,16 @@ if(
 
 try{
 
-window.speechSynthesis.getVoices();
-
-window.speechSynthesis.addEventListener(
-"voiceschanged",
-function(){
-
-updateAllButtonLabels();
-
-},
-{
-once:true
-}
-);
+speechSynthesis.getVoices();
 
 }catch(error){
 }
 
 }
 
-if(document.body){
+if(
+document.body
+){
 
 observer.observe(
 document.body,
