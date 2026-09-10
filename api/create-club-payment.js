@@ -3,35 +3,38 @@
 /*
 =========================================================
 PETS & DOGUE CLUB
-Custom Stripe Checkout Session for embedded Elements
+Stripe recurring subscription checkout
 =========================================================
 
-PLANS
+ACCESS:
+Every active PETS & DOGUE Club subscription receives
+the same Club benefits and Special Offers access.
+
+PLANS:
 
 free
 - £0 today
-- 30-day free trial
-- then £1/month
-- automatic renewal
+- 30 day free trial
+- then £1 every month
+- renews automatically until cancelled
 
 monthly
 - £1 today
-- £1/month
-- automatic renewal
+- £1 every month
+- renews automatically until cancelled
 
 annual
 - £10 today
-- £10/year
-- automatic renewal
+- £10 every year
+- renews automatically until cancelled
 
-REQUIRED VERCEL ENVIRONMENT VARIABLES
+REQUIRED ENVIRONMENT VARIABLES:
 
 STRIPE_SECRET_KEY
-STRIPE_PUBLISHABLE_KEY
 STRIPE_PRICE_MONTHLY
 STRIPE_PRICE_ANNUAL
 
-OPTIONAL
+OPTIONAL:
 
 PUBLIC_SITE_URL
 SITE_URL
@@ -75,9 +78,8 @@ const VALID_LANGUAGES =
     "hi"
   ]);
 
-
 /* =========================================================
-RESPONSE
+   RESPONSE
 ========================================================= */
 
 function sendJson(
@@ -112,9 +114,8 @@ function sendJson(
 
 }
 
-
 /* =========================================================
-CLEAN STRING
+   CLEAN VALUES
 ========================================================= */
 
 function cleanString(
@@ -125,7 +126,6 @@ function cleanString(
   if (
     typeof value !== "string"
   ) {
-
     return "";
   }
 
@@ -137,11 +137,6 @@ function cleanString(
     );
 
 }
-
-
-/* =========================================================
-EMAIL
-========================================================= */
 
 function validEmail(
   value
@@ -156,9 +151,8 @@ function validEmail(
 
 }
 
-
 /* =========================================================
-REQUEST BODY
+   BODY
 ========================================================= */
 
 async function readRequestBody(
@@ -169,7 +163,6 @@ async function readRequestBody(
     req.body &&
     typeof req.body === "object"
   ) {
-
     return req.body;
   }
 
@@ -213,7 +206,6 @@ async function readRequestBody(
   if (
     !chunks.length
   ) {
-
     return {};
   }
 
@@ -230,7 +222,6 @@ async function readRequestBody(
   if (
     !raw
   ) {
-
     return {};
   }
 
@@ -247,9 +238,8 @@ async function readRequestBody(
 
 }
 
-
 /* =========================================================
-WEBSITE ORIGIN
+   SITE ORIGIN
 ========================================================= */
 
 function getOrigin(
@@ -295,7 +285,6 @@ function getOrigin(
   if (
     !host
   ) {
-
     return "";
   }
 
@@ -303,9 +292,8 @@ function getOrigin(
 
 }
 
-
 /* =========================================================
-STRIPE REQUEST
+   STRIPE REQUEST
 ========================================================= */
 
 async function stripeRequest(
@@ -315,20 +303,14 @@ async function stripeRequest(
 ) {
 
   const method =
-    options.method ||
-    "GET";
+    options.method || "GET";
 
   const fetchOptions = {
-
     method,
-
     headers: {
-
       Authorization:
         `Bearer ${secretKey}`
-
     }
-
   };
 
   if (
@@ -363,6 +345,7 @@ async function stripeRequest(
 
     data =
       null;
+
   }
 
   if (
@@ -381,14 +364,6 @@ async function stripeRequest(
     error.status =
       response.status;
 
-    error.stripeCode =
-      data?.error?.code ||
-      "";
-
-    error.stripeType =
-      data?.error?.type ||
-      "";
-
     throw error;
   }
 
@@ -396,9 +371,8 @@ async function stripeRequest(
 
 }
 
-
 /* =========================================================
-STRIPE LOCALE
+   STRIPE LANGUAGE
 ========================================================= */
 
 function stripeLocale(
@@ -407,51 +381,74 @@ function stripeLocale(
 
   const locales = {
 
-    en:"en",
+    en:
+      "en",
 
-    uk:"auto",
+    uk:
+      "auto",
 
-    ru:"ru",
+    ru:
+      "ru",
 
-    fr:"fr",
+    fr:
+      "fr",
 
-    de:"de",
+    de:
+      "de",
 
-    es:"es",
+    es:
+      "es",
 
-    it:"it",
+    it:
+      "it",
 
-    pt:"pt",
+    pt:
+      "pt-BR",
 
-    nl:"nl",
+    nl:
+      "nl",
 
-    pl:"pl",
+    pl:
+      "pl",
 
-    cs:"cs",
+    cs:
+      "cs",
 
-    sk:"auto",
+    sk:
+      "auto",
 
-    hu:"hu",
+    hu:
+      "hu",
 
-    ro:"ro",
+    ro:
+      "ro",
 
-    bg:"bg",
+    bg:
+      "bg",
 
-    el:"el",
+    el:
+      "el",
 
-    sv:"sv",
+    sv:
+      "sv",
 
-    da:"da",
+    da:
+      "da",
 
-    no:"nb",
+    no:
+      "nb",
 
-    fi:"fi",
+    fi:
+      "fi",
 
-    tr:"tr",
+    tr:
+      "tr",
 
-    ar:"auto",
+    ar:
+      "auto",
 
-    hi:"auto"
+    hi:
+      "auto"
 
   };
 
@@ -461,9 +458,8 @@ function stripeLocale(
 
 }
 
-
 /* =========================================================
-PLAN CONFIG
+   PLAN
 ========================================================= */
 
 function getPlanConfig(
@@ -498,22 +494,20 @@ function getPlanConfig(
       priceId:
         monthlyPriceId,
 
-      amount:
-        0,
-
-      recurringAmount:
+      expectedAmount:
         100,
 
-      interval:
+      expectedInterval:
         "month",
 
       trialDays:
         30,
 
       billingLabel:
-        "£0 today · £1/month after 30-day trial"
+        "£1/month after 30-day trial"
 
     };
+
   }
 
   if (
@@ -528,13 +522,10 @@ function getPlanConfig(
       priceId:
         monthlyPriceId,
 
-      amount:
+      expectedAmount:
         100,
 
-      recurringAmount:
-        100,
-
-      interval:
+      expectedInterval:
         "month",
 
       trialDays:
@@ -544,6 +535,7 @@ function getPlanConfig(
         "£1/month"
 
     };
+
   }
 
   if (
@@ -558,13 +550,10 @@ function getPlanConfig(
       priceId:
         annualPriceId,
 
-      amount:
+      expectedAmount:
         1000,
 
-      recurringAmount:
-        1000,
-
-      interval:
+      expectedInterval:
         "year",
 
       trialDays:
@@ -574,15 +563,21 @@ function getPlanConfig(
         "£10/year"
 
     };
+
   }
 
   return null;
 
 }
 
-
 /* =========================================================
-VALIDATE PRICE
+   VALIDATE STRIPE PRICE
+
+   This prevents an accidental Stripe configuration such as:
+   - monthly price configured as one-time
+   - annual price configured as monthly
+   - wrong amount
+   - wrong currency
 ========================================================= */
 
 async function validateRecurringPrice(
@@ -635,7 +630,7 @@ async function validateRecurringPrice(
   ) {
 
     throw new Error(
-      "PETS & DOGUE Club prices must use GBP."
+      "Membership price must use GBP."
     );
   }
 
@@ -643,7 +638,7 @@ async function validateRecurringPrice(
     Number(
       price.unit_amount
     ) !==
-    config.recurringAmount
+    config.expectedAmount
   ) {
 
     throw new Error(
@@ -656,13 +651,13 @@ async function validateRecurringPrice(
   ) {
 
     throw new Error(
-      "PETS & DOGUE Club Stripe Price must be recurring."
+      "Membership Stripe Price must be recurring."
     );
   }
 
   if (
     price.recurring.interval !==
-    config.interval
+    config.expectedInterval
   ) {
 
     throw new Error(
@@ -672,12 +667,13 @@ async function validateRecurringPrice(
 
   if (
     Number(
-      price.recurring.interval_count || 1
+      price.recurring
+        .interval_count || 1
     ) !== 1
   ) {
 
     throw new Error(
-      "Membership must renew every single billing period."
+      "Membership billing interval must renew every single billing period."
     );
   }
 
@@ -685,9 +681,8 @@ async function validateRecurringPrice(
 
 }
 
-
 /* =========================================================
-METADATA
+   METADATA
 ========================================================= */
 
 function appendMetadata(
@@ -707,7 +702,6 @@ function appendMetadata(
         value === null ||
         value === undefined
       ) {
-
         return;
       }
 
@@ -723,9 +717,8 @@ function appendMetadata(
 
 }
 
-
 /* =========================================================
-HANDLER
+   HANDLER
 ========================================================= */
 
 module.exports =
@@ -747,35 +740,22 @@ async function handler(
       res,
       405,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
           "Method not allowed."
-
       }
     );
+
   }
-
-
-  /* =======================================================
-  STRIPE CONFIG
-  ======================================================= */
 
   const secretKey =
     cleanString(
       process.env
         .STRIPE_SECRET_KEY ||
       "",
-      500
-    );
-
-  const publishableKey =
-    cleanString(
-      process.env
-        .STRIPE_PUBLISHABLE_KEY ||
-      "",
-      500
+      300
     );
 
   if (
@@ -790,42 +770,15 @@ async function handler(
       res,
       500,
       {
-
-        ok:false,
-
-        error:
-          "Stripe secret key is not configured."
-
-      }
-    );
-  }
-
-  if (
-    !publishableKey
-  ) {
-
-    console.error(
-      "PETS & DOGUE: STRIPE_PUBLISHABLE_KEY is missing."
-    );
-
-    return sendJson(
-      res,
-      500,
-      {
-
-        ok:false,
+        ok:
+          false,
 
         error:
-          "Stripe publishable key is not configured."
-
+          "Stripe Checkout is not configured."
       }
     );
+
   }
-
-
-  /* =======================================================
-  BODY
-  ======================================================= */
 
   let body =
     {};
@@ -843,19 +796,18 @@ async function handler(
       res,
       400,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
           "Invalid request."
-
       }
     );
+
   }
 
-
   /* =======================================================
-  PLAN
+     PLAN
   ======================================================= */
 
   const plan =
@@ -875,14 +827,14 @@ async function handler(
       res,
       400,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
           "Invalid membership plan."
-
       }
     );
+
   }
 
   const planConfig =
@@ -899,19 +851,18 @@ async function handler(
       res,
       500,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
-          "This membership plan is not configured."
-
+          "This membership plan is not configured yet."
       }
     );
+
   }
 
-
   /* =======================================================
-  MEMBER
+     MEMBER
   ======================================================= */
 
   const firstName =
@@ -942,14 +893,14 @@ async function handler(
       res,
       400,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
           "First name is required."
-
       }
     );
+
   }
 
   if (
@@ -962,14 +913,14 @@ async function handler(
       res,
       400,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
           "A valid email address is required."
-
       }
     );
+
   }
 
   if (
@@ -980,19 +931,18 @@ async function handler(
       res,
       400,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
           "Country is required."
-
       }
     );
+
   }
 
-
   /* =======================================================
-  LANGUAGE
+     LANGUAGE
   ======================================================= */
 
   let language =
@@ -1002,32 +952,6 @@ async function handler(
     )
     .toLowerCase();
 
-  const aliases = {
-
-    ua:"uk",
-
-    cz:"cs",
-
-    gr:"el",
-
-    se:"sv",
-
-    dk:"da"
-
-  };
-
-  if (
-    aliases[
-      language
-    ]
-  ) {
-
-    language =
-      aliases[
-        language
-      ];
-  }
-
   if (
     !VALID_LANGUAGES.has(
       language
@@ -1036,11 +960,11 @@ async function handler(
 
     language =
       "en";
+
   }
 
-
   /* =======================================================
-  OPTIONAL PET DATA
+     OPTIONAL PET DETAILS
   ======================================================= */
 
   const petName =
@@ -1067,9 +991,8 @@ async function handler(
       150
     );
 
-
   /* =======================================================
-  WEBSITE
+     ORIGIN
   ======================================================= */
 
   const origin =
@@ -1085,21 +1008,21 @@ async function handler(
       res,
       500,
       {
-
-        ok:false,
+        ok:
+          false,
 
         error:
-          "Unable to determine PETS & DOGUE website address."
-
+          "Unable to determine the website address."
       }
     );
-  }
 
+  }
 
   try {
 
     /* =====================================================
-    VERIFY STRIPE PRICE
+       SECURITY CHECK:
+       VERIFY REAL STRIPE RECURRING PRICE
     ===================================================== */
 
     const stripePrice =
@@ -1109,9 +1032,15 @@ async function handler(
         secretKey
       );
 
-
     /* =====================================================
-    MEMBERSHIP METADATA
+       SHARED CLUB ACCESS
+
+       IMPORTANT:
+       Monthly and annual subscribers receive exactly
+       the same benefits.
+
+       "free" is simply a monthly subscription with
+       a 30-day introductory trial.
     ===================================================== */
 
     const metadata = {
@@ -1132,7 +1061,7 @@ async function handler(
         "true",
 
       billing_interval:
-        planConfig.interval,
+        planConfig.expectedInterval,
 
       billing_label:
         planConfig.billingLabel,
@@ -1171,58 +1100,45 @@ async function handler(
 
     };
 
-
     /* =====================================================
-    CREATE CUSTOM CHECKOUT SESSION
-
-    IMPORTANT:
-    We intentionally DO NOT set payment_method_types.
-
-    Stripe therefore uses payment methods enabled and
-    eligible in the Stripe Dashboard.
-
-    This allows compatible methods such as:
-    - Cards
-    - Apple Pay
-    - Google Pay
-    - PayPal
-    - Link
-
-    depending on Stripe account approval, browser,
-    device, country and payment-method availability.
+       CREATE CHECKOUT SESSION
     ===================================================== */
 
     const params =
       new URLSearchParams();
 
+    /*
+    Recurring subscription.
+
+    This is the key Stripe setting that makes:
+    monthly → monthly renewal
+    annual  → annual renewal
+    */
 
     params.append(
       "mode",
       "subscription"
     );
 
-
-    params.append(
-      "ui_mode",
-      "custom"
-    );
-
+    /*
+    Use the verified recurring Stripe Price.
+    */
 
     params.append(
       "line_items[0][price]",
       stripePrice.id
     );
 
-
     params.append(
       "line_items[0][quantity]",
       "1"
     );
 
-
     /*
-    Collect a payment method even when today's
-    payment is £0 during the 30-day trial.
+    Payment method is saved for recurring charges.
+
+    This is especially important for:
+    £0 today → £1/month after trial.
     */
 
     params.append(
@@ -1230,9 +1146,29 @@ async function handler(
       "always"
     );
 
+    /*
+    IMPORTANT:
+
+    payment_method_types is intentionally NOT specified.
+
+    Stripe Dynamic Payment Methods will automatically
+    display the payment methods enabled and eligible
+    for this customer, device, country, currency and
+    recurring subscription.
+
+    This allows Stripe to show supported methods such as:
+    - card
+    - Apple Pay
+    - Google Pay
+    - PayPal
+    - other eligible Stripe payment methods
+
+    depending on Stripe Dashboard configuration and
+    customer eligibility.
+    */
 
     /*
-    Existing email from the membership form.
+    Known member email.
     */
 
     params.append(
@@ -1240,9 +1176,8 @@ async function handler(
       email
     );
 
-
     /*
-    Stripe language.
+    Localised Stripe Checkout.
     */
 
     params.append(
@@ -1252,34 +1187,26 @@ async function handler(
       )
     );
 
+    params.append(
+      "billing_address_collection",
+      "auto"
+    );
 
     /*
-    Promotion-code support can remain available
-    for future PETS & DOGUE campaigns.
+    Do not automatically cancel.
+    Stripe subscriptions continue renewing until
+    the member cancels them.
     */
 
     params.append(
-      "allow_promotion_codes",
+      "subscription_data[metadata][auto_renew]",
       "true"
     );
 
-
     /*
-    Return after redirect-based methods,
-    authentication, PayPal, etc.
-    */
-
-    params.append(
-      "return_url",
-      `${origin}/club.html?club_return=1&plan=${encodeURIComponent(
-        plan
-      )}&session_id={CHECKOUT_SESSION_ID}`
-    );
-
-
-    /*
-    Store membership details on both
-    Checkout Session and Subscription.
+    Store our full metadata on both:
+    Checkout Session
+    Subscription
     */
 
     appendMetadata(
@@ -1288,18 +1215,17 @@ async function handler(
       metadata
     );
 
-
     appendMetadata(
       params,
       "subscription_data[metadata]",
       metadata
     );
 
-
     /*
-    FREE PLAN:
-    same £1/month subscription,
-    but first 30 days are free.
+    30-day free introductory period.
+
+    This is still a normal MONTHLY recurring
+    subscription. Only the first 30 days are free.
     */
 
     if (
@@ -1313,142 +1239,152 @@ async function handler(
         )
       );
 
-
       /*
-      Do not continue paid membership after trial
-      if Stripe has no usable payment method.
+      If the future payment fails after the trial,
+      Stripe cancels instead of allowing unlimited
+      unpaid Club access.
       */
 
       params.append(
         "subscription_data[trial_settings][end_behavior][missing_payment_method]",
         "cancel"
       );
+
     }
 
+    /*
+    Stripe Checkout can display promotion-code field
+    if PETS & DOGUE later decides to create subscription
+    promotions.
+    */
+
+    params.append(
+      "allow_promotion_codes",
+      "true"
+    );
+
+    /*
+    Return from Stripe.
+    */
+
+    params.append(
+      "success_url",
+      `${origin}/club.html?membership=success&plan=${encodeURIComponent(
+        plan
+      )}&session_id={CHECKOUT_SESSION_ID}`
+    );
+
+    params.append(
+      "cancel_url",
+      `${origin}/club.html?membership=cancelled&plan=${encodeURIComponent(
+        plan
+      )}`
+    );
 
     const checkout =
       await stripeRequest(
         "/checkout/sessions",
         secretKey,
         {
-
           method:
             "POST",
 
           params
-
         }
       );
-
 
     if (
       !checkout ||
       !checkout.id ||
-      !checkout.client_secret
+      !checkout.url
     ) {
 
       throw new Error(
-        "Stripe did not return a valid custom Checkout Session."
+        "Stripe did not return a valid Checkout Session."
       );
+
     }
-
-
-    /* =====================================================
-    SUCCESS
-    ===================================================== */
 
     return sendJson(
       res,
       200,
       {
 
-        ok:true,
-
-        flow:
-          "checkout",
+        ok:
+          true,
 
         sessionId:
           checkout.id,
 
-        clientSecret:
-          checkout.client_secret,
-
-        publishableKey:
-          publishableKey,
+        checkoutUrl:
+          checkout.url,
 
         plan:
           plan,
-
-        trialDays:
-          planConfig.trialDays,
-
-        dueToday:
-          planConfig.amount,
-
-        recurringAmount:
-          planConfig.recurringAmount,
-
-        billingInterval:
-          planConfig.interval,
-
-        currency:
-          "gbp",
-
-        recurring:
-          true,
 
         access:
           "all_club_benefits",
 
         specialOffersAccess:
-          "all"
+          "all",
+
+        recurring:
+          true,
+
+        trialDays:
+          planConfig.trialDays,
+
+        billingInterval:
+          planConfig.expectedInterval,
+
+        billingAmount:
+          planConfig.expectedAmount,
+
+        currency:
+          "gbp",
+
+        renewal:
+          planConfig.expectedInterval === "year"
+            ? "automatic_yearly"
+            : "automatic_monthly"
 
       }
     );
-
 
   } catch (
     error
   ) {
 
     console.error(
-      "PETS & DOGUE custom Club Checkout error:",
-      {
-
-        message:
-          error?.message || "",
-
-        status:
-          error?.status || null,
-
-        stripeCode:
-          error?.stripeCode || "",
-
-        stripeType:
-          error?.stripeType || ""
-
-      }
+      "PETS & DOGUE Stripe Checkout error:",
+      error
     );
 
+    let status =
+      500;
 
-    const status =
+    if (
       Number(
-        error?.status
+        error.status
       ) === 400
-        ? 400
-        : 500;
+    ) {
 
+      status =
+        400;
+
+    }
 
     return sendJson(
       res,
       status,
       {
 
-        ok:false,
+        ok:
+          false,
 
         error:
           error?.message ||
-          "Unable to prepare PETS & DOGUE Club payment."
+          "Unable to create membership checkout."
 
       }
     );
