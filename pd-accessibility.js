@@ -5,10 +5,15 @@
 PETS & DOGUE
 GLOBAL MULTILINGUAL ACCESSIBILITY NARRATION
 =========================================================
-One topic = one speaker.
-No duplicate speakers.
-Mixed-language pronunciation.
-Semantic reading of icons and common symbols.
+
+- one speaker per topic
+- no duplicate speakers
+- one central click handler
+- fixes Android/Chrome silent speech after cancel()
+- reads the currently selected language
+- English words inside Cyrillic/Arabic/Hindi text use English voice
+- meaningful symbols are spoken logically
+- dynamic cards are supported
 =========================================================
 */
 
@@ -16,28 +21,19 @@ Semantic reading of icons and common symbols.
 
 "use strict";
 
-/* Prevent the file from installing twice */
-if(window.__PETS_DOGUE_NARRATION_V4__){
-
-if(
-window.PetsDogueNarration &&
-typeof window.PetsDogueNarration.refresh === "function"
-){
-window.PetsDogueNarration.refresh();
-}
-
-return;
-}
-
-window.__PETS_DOGUE_NARRATION_V4__ = true;
-
 
 /* =========================================================
-LANGUAGES
+CONFIG
 ========================================================= */
 
 const LANGUAGE_KEY =
 "pets_dogue_language";
+
+const SUPPORTED_LANGUAGES = [
+"en","uk","ru","fr","de","es","it","pt","nl","pl",
+"cs","sk","hu","ro","bg","el","sv","da","no","fi",
+"tr","ar","hi"
+];
 
 const LANGUAGE_ALIASES = {
 ua:"uk",
@@ -73,12 +69,19 @@ ar:"ar-SA",
 hi:"hi-IN"
 };
 
-const SUPPORTED_LANGUAGES =
-Object.keys(SPEECH_LOCALES);
+const NON_LATIN_LANGUAGES =
+new Set([
+"ru",
+"uk",
+"bg",
+"el",
+"ar",
+"hi"
+]);
 
 
 /* =========================================================
-BUTTON LABELS
+ACCESSIBILITY LABELS
 ========================================================= */
 
 const LABELS = {
@@ -113,9 +116,9 @@ unsupported:"Этот браузер не поддерживает озвучи�
 fr:{
 listen:"Écouter ce contenu",
 stop:"Arrêter la lecture",
-reading:"Lecture en cours.",
+reading:"Lecture de ce contenu en cours.",
 stopped:"Lecture arrêtée.",
-empty:"Il n’y a aucun texte à lire.",
+empty:"Aucun texte à lire.",
 unsupported:"La lecture vocale n’est pas prise en charge."
 },
 
@@ -125,34 +128,34 @@ stop:"Vorlesen stoppen",
 reading:"Dieser Inhalt wird vorgelesen.",
 stopped:"Vorlesen gestoppt.",
 empty:"Kein Text zum Vorlesen.",
-unsupported:"Sprachausgabe wird nicht unterstützt."
+unsupported:"Dieser Browser unterstützt keine Sprachausgabe."
 },
 
 es:{
 listen:"Escuchar este contenido",
 stop:"Detener lectura",
-reading:"Leyendo este contenido.",
+reading:"Este contenido se está leyendo.",
 stopped:"Lectura detenida.",
 empty:"No hay texto para leer.",
-unsupported:"La lectura de texto no está disponible."
+unsupported:"Este navegador no admite lectura de texto."
 },
 
 it:{
 listen:"Ascolta questo contenuto",
 stop:"Interrompi lettura",
-reading:"Lettura in corso.",
+reading:"Questo contenuto viene letto.",
 stopped:"Lettura interrotta.",
-empty:"Non c’è testo da leggere.",
-unsupported:"La lettura vocale non è supportata."
+empty:"Nessun testo da leggere.",
+unsupported:"Questo browser non supporta la lettura vocale."
 },
 
 pt:{
 listen:"Ouvir este conteúdo",
 stop:"Parar leitura",
-reading:"Leitura em curso.",
+reading:"Este conteúdo está a ser lido.",
 stopped:"Leitura parada.",
 empty:"Não existe texto para ler.",
-unsupported:"A leitura de texto não é suportada."
+unsupported:"Este navegador não suporta leitura de texto."
 },
 
 nl:{
@@ -161,52 +164,52 @@ stop:"Voorlezen stoppen",
 reading:"Deze inhoud wordt voorgelezen.",
 stopped:"Voorlezen gestopt.",
 empty:"Geen tekst om voor te lezen.",
-unsupported:"Tekst-naar-spraak wordt niet ondersteund."
+unsupported:"Deze browser ondersteunt geen tekst-naar-spraak."
 },
 
 pl:{
 listen:"Posłuchaj tej treści",
 stop:"Zatrzymaj czytanie",
-reading:"Treść jest czytana.",
+reading:"Ta treść jest czytana na głos.",
 stopped:"Czytanie zatrzymane.",
 empty:"Brak tekstu do odczytania.",
-unsupported:"Odczytywanie tekstu nie jest obsługiwane."
+unsupported:"Ta przeglądarka nie obsługuje odczytywania tekstu."
 },
 
 cs:{
 listen:"Poslechnout tento obsah",
 stop:"Zastavit čtení",
-reading:"Obsah se čte nahlas.",
+reading:"Tento obsah se čte nahlas.",
 stopped:"Čtení zastaveno.",
 empty:"Není zde text ke čtení.",
-unsupported:"Převod textu na řeč není podporován."
+unsupported:"Prohlížeč nepodporuje převod textu na řeč."
 },
 
 sk:{
 listen:"Vypočuť tento obsah",
 stop:"Zastaviť čítanie",
-reading:"Obsah sa číta nahlas.",
+reading:"Tento obsah sa číta nahlas.",
 stopped:"Čítanie zastavené.",
 empty:"Nie je tu text na čítanie.",
-unsupported:"Čítanie textu nie je podporované."
+unsupported:"Prehliadač nepodporuje čítanie textu."
 },
 
 hu:{
 listen:"A tartalom meghallgatása",
 stop:"Felolvasás leállítása",
-reading:"Felolvasás folyamatban.",
-stopped:"Felolvasás leállt.",
+reading:"A tartalom felolvasása folyamatban.",
+stopped:"A felolvasás leállt.",
 empty:"Nincs felolvasható szöveg.",
-unsupported:"A szövegfelolvasás nem támogatott."
+unsupported:"A böngésző nem támogatja a felolvasást."
 },
 
 ro:{
 listen:"Ascultă acest conținut",
 stop:"Oprește citirea",
-reading:"Conținutul este citit.",
+reading:"Conținutul este citit cu voce tare.",
 stopped:"Citirea a fost oprită.",
 empty:"Nu există text de citit.",
-unsupported:"Citirea textului nu este acceptată."
+unsupported:"Browserul nu acceptă citirea textului."
 },
 
 bg:{
@@ -215,16 +218,16 @@ stop:"Спрете четенето",
 reading:"Темата се чете на глас.",
 stopped:"Четенето е спряно.",
 empty:"Няма текст за четене.",
-unsupported:"Озвучаването не се поддържа."
+unsupported:"Браузърът не поддържа озвучаване."
 },
 
 el:{
 listen:"Ακούστε αυτό το περιεχόμενο",
 stop:"Διακοπή ανάγνωσης",
-reading:"Το περιεχόμενο διαβάζεται.",
+reading:"Το περιεχόμενο διαβάζεται δυνατά.",
 stopped:"Η ανάγνωση σταμάτησε.",
-empty:"Δεν υπάρχει κείμενο για ανάγνωση.",
-unsupported:"Η ανάγνωση κειμένου δεν υποστηρίζεται."
+empty:"Δεν υπάρχει κείμενο.",
+unsupported:"Δεν υποστηρίζεται η φωνητική ανάγνωση."
 },
 
 sv:{
@@ -233,7 +236,7 @@ stop:"Stoppa uppläsningen",
 reading:"Innehållet läses upp.",
 stopped:"Uppläsningen stoppades.",
 empty:"Det finns ingen text att läsa.",
-unsupported:"Textuppläsning stöds inte."
+unsupported:"Webbläsaren stöder inte textuppläsning."
 },
 
 da:{
@@ -242,7 +245,7 @@ stop:"Stop oplæsning",
 reading:"Indholdet læses højt.",
 stopped:"Oplæsningen er stoppet.",
 empty:"Der er ingen tekst at læse.",
-unsupported:"Tekst-til-tale understøttes ikke."
+unsupported:"Browseren understøtter ikke tekst-til-tale."
 },
 
 no:{
@@ -251,7 +254,7 @@ stop:"Stopp opplesing",
 reading:"Innholdet leses høyt.",
 stopped:"Opplesingen er stoppet.",
 empty:"Det finnes ingen tekst å lese.",
-unsupported:"Tekst-til-tale støttes ikke."
+unsupported:"Nettleseren støtter ikke tekst-til-tale."
 },
 
 fi:{
@@ -260,87 +263,59 @@ stop:"Lopeta lukeminen",
 reading:"Sisältöä luetaan ääneen.",
 stopped:"Lukeminen lopetettiin.",
 empty:"Ei luettavaa tekstiä.",
-unsupported:"Tekstistä puheeksi -toimintoa ei tueta."
+unsupported:"Selain ei tue tekstin puheeksi muuntamista."
 },
 
 tr:{
 listen:"Bu içeriği dinle",
 stop:"Okumayı durdur",
-reading:"İçerik sesli okunuyor.",
+reading:"Bu içerik sesli okunuyor.",
 stopped:"Okuma durduruldu.",
 empty:"Okunabilir metin yok.",
-unsupported:"Metinden sese özelliği desteklenmiyor."
+unsupported:"Tarayıcı metinden sese özelliğini desteklemiyor."
 },
 
 ar:{
 listen:"استمع إلى هذا المحتوى",
 stop:"إيقاف القراءة",
-reading:"تتم قراءة المحتوى بصوت عالٍ.",
+reading:"تتم قراءة هذا المحتوى بصوت عالٍ.",
 stopped:"تم إيقاف القراءة.",
 empty:"لا يوجد نص قابل للقراءة.",
-unsupported:"تحويل النص إلى كلام غير مدعوم."
+unsupported:"المتصفح لا يدعم تحويل النص إلى كلام."
 },
 
 hi:{
 listen:"इस विषय को सुनें",
 stop:"पढ़ना बंद करें",
-reading:"विषय को पढ़ा जा रहा है।",
+reading:"इस विषय को आवाज़ में पढ़ा जा रहा है।",
 stopped:"पढ़ना बंद कर दिया गया।",
 empty:"पढ़ने योग्य टेक्स्ट नहीं है।",
-unsupported:"टेक्स्ट-टू-स्पीच उपलब्ध नहीं है।"
+unsupported:"ब्राउज़र टेक्स्ट-टू-स्पीच का समर्थन नहीं करता।"
 }
 
 };
 
 
 /* =========================================================
-SEMANTIC WORDS
+MEANINGFUL SYMBOLS
 ========================================================= */
 
-const SEMANTIC = {
+const SEMANTICS = {
 
 en:{
 location:"Location",
-phone:"Telephone number",
+phone:"Phone number",
 card:"Bank card",
 email:"Email",
 website:"Website",
-heart:"Favourite",
+winner:"Winner",
+prize:"Prize",
 home:"Home",
-confirmed:"Confirmed",
-star:"Star",
-information:"Information",
-pound:"pound",
-pounds:"pounds",
-year:"year",
-years:"years",
-month:"month",
-months:"months",
-kilometre:"kilometre",
-kilometres:"kilometres",
-percent:"percent"
-},
-
-ru:{
-location:"Местоположение",
-phone:"Номер телефона",
-card:"Банковская карта",
-email:"Электронная почта",
-website:"Сайт",
-heart:"Избранное",
-home:"Дом",
-confirmed:"Подтверждено",
-star:"Звезда",
-information:"Информация",
-pound:"фунт",
-pounds:"фунтов",
-year:"год",
-years:"лет",
-month:"месяц",
-months:"месяцев",
-kilometre:"километр",
-kilometres:"километров",
-percent:"процентов"
+date:"Date",
+time:"Time",
+distance:"Distance",
+favourite:"Favourite",
+pounds:"pounds"
 },
 
 uk:{
@@ -348,43 +323,47 @@ location:"Місцезнаходження",
 phone:"Номер телефону",
 card:"Банківська картка",
 email:"Електронна пошта",
-website:"Сайт",
-heart:"Обране",
+website:"Вебсайт",
+winner:"Переможець",
+prize:"Приз",
 home:"Дім",
-confirmed:"Підтверджено",
-star:"Зірка",
-information:"Інформація",
-pound:"фунт",
-pounds:"фунтів",
-year:"рік",
-years:"років",
-month:"місяць",
-months:"місяців",
-kilometre:"кілометр",
-kilometres:"кілометрів",
-percent:"відсотків"
+date:"Дата",
+time:"Час",
+distance:"Відстань",
+favourite:"Обране",
+pounds:"фунтів стерлінгів"
+},
+
+ru:{
+location:"Местоположение",
+phone:"Номер телефона",
+card:"Банковская карта",
+email:"Электронная почта",
+website:"Веб-сайт",
+winner:"Победитель",
+prize:"Приз",
+home:"Дом",
+date:"Дата",
+time:"Время",
+distance:"Расстояние",
+favourite:"Избранное",
+pounds:"фунтов стерлингов"
 },
 
 fr:{
 location:"Localisation",
 phone:"Numéro de téléphone",
 card:"Carte bancaire",
-email:"E-mail",
+email:"Adresse e-mail",
 website:"Site internet",
-heart:"Favori",
-home:"Accueil",
-confirmed:"Confirmé",
-star:"Étoile",
-information:"Information",
-pound:"livre",
-pounds:"livres",
-year:"an",
-years:"ans",
-month:"mois",
-months:"mois",
-kilometre:"kilomètre",
-kilometres:"kilomètres",
-percent:"pour cent"
+winner:"Gagnant",
+prize:"Prix",
+home:"Domicile",
+date:"Date",
+time:"Heure",
+distance:"Distance",
+favourite:"Favori",
+pounds:"livres sterling"
 },
 
 de:{
@@ -392,21 +371,15 @@ location:"Standort",
 phone:"Telefonnummer",
 card:"Bankkarte",
 email:"E-Mail",
-website:"Website",
-heart:"Favorit",
+website:"Webseite",
+winner:"Gewinner",
+prize:"Preis",
 home:"Zuhause",
-confirmed:"Bestätigt",
-star:"Stern",
-information:"Information",
-pound:"Pfund",
-pounds:"Pfund",
-year:"Jahr",
-years:"Jahre",
-month:"Monat",
-months:"Monate",
-kilometre:"Kilometer",
-kilometres:"Kilometer",
-percent:"Prozent"
+date:"Datum",
+time:"Uhrzeit",
+distance:"Entfernung",
+favourite:"Favorit",
+pounds:"Pfund"
 },
 
 es:{
@@ -415,20 +388,14 @@ phone:"Número de teléfono",
 card:"Tarjeta bancaria",
 email:"Correo electrónico",
 website:"Sitio web",
-heart:"Favorito",
+winner:"Ganador",
+prize:"Premio",
 home:"Hogar",
-confirmed:"Confirmado",
-star:"Estrella",
-information:"Información",
-pound:"libra",
-pounds:"libras",
-year:"año",
-years:"años",
-month:"mes",
-months:"meses",
-kilometre:"kilómetro",
-kilometres:"kilómetros",
-percent:"por ciento"
+date:"Fecha",
+time:"Hora",
+distance:"Distancia",
+favourite:"Favorito",
+pounds:"libras"
 },
 
 it:{
@@ -437,42 +404,30 @@ phone:"Numero di telefono",
 card:"Carta bancaria",
 email:"Email",
 website:"Sito web",
-heart:"Preferito",
+winner:"Vincitore",
+prize:"Premio",
 home:"Casa",
-confirmed:"Confermato",
-star:"Stella",
-information:"Informazione",
-pound:"sterlina",
-pounds:"sterline",
-year:"anno",
-years:"anni",
-month:"mese",
-months:"mesi",
-kilometre:"chilometro",
-kilometres:"chilometri",
-percent:"percento"
+date:"Data",
+time:"Ora",
+distance:"Distanza",
+favourite:"Preferito",
+pounds:"sterline"
 },
 
 pt:{
 location:"Localização",
 phone:"Número de telefone",
 card:"Cartão bancário",
-email:"E-mail",
+email:"Email",
 website:"Website",
-heart:"Favorito",
+winner:"Vencedor",
+prize:"Prémio",
 home:"Casa",
-confirmed:"Confirmado",
-star:"Estrela",
-information:"Informação",
-pound:"libra",
-pounds:"libras",
-year:"ano",
-years:"anos",
-month:"mês",
-months:"meses",
-kilometre:"quilómetro",
-kilometres:"quilómetros",
-percent:"por cento"
+date:"Data",
+time:"Hora",
+distance:"Distância",
+favourite:"Favorito",
+pounds:"libras"
 },
 
 nl:{
@@ -481,20 +436,14 @@ phone:"Telefoonnummer",
 card:"Bankkaart",
 email:"E-mail",
 website:"Website",
-heart:"Favoriet",
+winner:"Winnaar",
+prize:"Prijs",
 home:"Thuis",
-confirmed:"Bevestigd",
-star:"Ster",
-information:"Informatie",
-pound:"pond",
-pounds:"pond",
-year:"jaar",
-years:"jaar",
-month:"maand",
-months:"maanden",
-kilometre:"kilometer",
-kilometres:"kilometer",
-percent:"procent"
+date:"Datum",
+time:"Tijd",
+distance:"Afstand",
+favourite:"Favoriet",
+pounds:"pond"
 },
 
 pl:{
@@ -503,20 +452,14 @@ phone:"Numer telefonu",
 card:"Karta bankowa",
 email:"E-mail",
 website:"Strona internetowa",
-heart:"Ulubione",
+winner:"Zwycięzca",
+prize:"Nagroda",
 home:"Dom",
-confirmed:"Potwierdzone",
-star:"Gwiazda",
-information:"Informacja",
-pound:"funt",
-pounds:"funtów",
-year:"rok",
-years:"lat",
-month:"miesiąc",
-months:"miesięcy",
-kilometre:"kilometr",
-kilometres:"kilometrów",
-percent:"procent"
+date:"Data",
+time:"Czas",
+distance:"Odległość",
+favourite:"Ulubione",
+pounds:"funtów"
 },
 
 cs:{
@@ -524,21 +467,15 @@ location:"Poloha",
 phone:"Telefonní číslo",
 card:"Bankovní karta",
 email:"E-mail",
-website:"Web",
-heart:"Oblíbené",
+website:"Webová stránka",
+winner:"Vítěz",
+prize:"Cena",
 home:"Domov",
-confirmed:"Potvrzeno",
-star:"Hvězda",
-information:"Informace",
-pound:"libra",
-pounds:"liber",
-year:"rok",
-years:"let",
-month:"měsíc",
-months:"měsíců",
-kilometre:"kilometr",
-kilometres:"kilometrů",
-percent:"procent"
+date:"Datum",
+time:"Čas",
+distance:"Vzdálenost",
+favourite:"Oblíbené",
+pounds:"liber"
 },
 
 sk:{
@@ -546,21 +483,15 @@ location:"Poloha",
 phone:"Telefónne číslo",
 card:"Banková karta",
 email:"E-mail",
-website:"Web",
-heart:"Obľúbené",
+website:"Webová stránka",
+winner:"Víťaz",
+prize:"Cena",
 home:"Domov",
-confirmed:"Potvrdené",
-star:"Hviezda",
-information:"Informácia",
-pound:"libra",
-pounds:"libier",
-year:"rok",
-years:"rokov",
-month:"mesiac",
-months:"mesiacov",
-kilometre:"kilometer",
-kilometres:"kilometrov",
-percent:"percent"
+date:"Dátum",
+time:"Čas",
+distance:"Vzdialenosť",
+favourite:"Obľúbené",
+pounds:"libier"
 },
 
 hu:{
@@ -569,20 +500,14 @@ phone:"Telefonszám",
 card:"Bankkártya",
 email:"E-mail",
 website:"Weboldal",
-heart:"Kedvenc",
+winner:"Győztes",
+prize:"Díj",
 home:"Otthon",
-confirmed:"Megerősítve",
-star:"Csillag",
-information:"Információ",
-pound:"font",
-pounds:"font",
-year:"év",
-years:"év",
-month:"hónap",
-months:"hónap",
-kilometre:"kilométer",
-kilometres:"kilométer",
-percent:"százalék"
+date:"Dátum",
+time:"Idő",
+distance:"Távolság",
+favourite:"Kedvenc",
+pounds:"font"
 },
 
 ro:{
@@ -590,21 +515,15 @@ location:"Locație",
 phone:"Număr de telefon",
 card:"Card bancar",
 email:"E-mail",
-website:"Site",
-heart:"Favorit",
-home:"Acasă",
-confirmed:"Confirmat",
-star:"Stea",
-information:"Informație",
-pound:"liră",
-pounds:"lire",
-year:"an",
-years:"ani",
-month:"lună",
-months:"luni",
-kilometre:"kilometru",
-kilometres:"kilometri",
-percent:"la sută"
+website:"Site web",
+winner:"Câștigător",
+prize:"Premiu",
+home:"Casă",
+date:"Dată",
+time:"Oră",
+distance:"Distanță",
+favourite:"Favorit",
+pounds:"lire"
 },
 
 bg:{
@@ -613,20 +532,14 @@ phone:"Телефонен номер",
 card:"Банкова карта",
 email:"Имейл",
 website:"Уебсайт",
-heart:"Любимо",
+winner:"Победител",
+prize:"Награда",
 home:"Дом",
-confirmed:"Потвърдено",
-star:"Звезда",
-information:"Информация",
-pound:"паунд",
-pounds:"паунда",
-year:"година",
-years:"години",
-month:"месец",
-months:"месеца",
-kilometre:"километър",
-kilometres:"километра",
-percent:"процента"
+date:"Дата",
+time:"Час",
+distance:"Разстояние",
+favourite:"Любимо",
+pounds:"паунда"
 },
 
 el:{
@@ -635,20 +548,14 @@ phone:"Αριθμός τηλεφώνου",
 card:"Τραπεζική κάρτα",
 email:"Email",
 website:"Ιστότοπος",
-heart:"Αγαπημένο",
+winner:"Νικητής",
+prize:"Βραβείο",
 home:"Σπίτι",
-confirmed:"Επιβεβαιωμένο",
-star:"Αστέρι",
-information:"Πληροφορία",
-pound:"λίρα",
-pounds:"λίρες",
-year:"έτος",
-years:"έτη",
-month:"μήνας",
-months:"μήνες",
-kilometre:"χιλιόμετρο",
-kilometres:"χιλιόμετρα",
-percent:"τοις εκατό"
+date:"Ημερομηνία",
+time:"Ώρα",
+distance:"Απόσταση",
+favourite:"Αγαπημένο",
+pounds:"λίρες"
 },
 
 sv:{
@@ -657,20 +564,14 @@ phone:"Telefonnummer",
 card:"Bankkort",
 email:"E-post",
 website:"Webbplats",
-heart:"Favorit",
+winner:"Vinnare",
+prize:"Pris",
 home:"Hem",
-confirmed:"Bekräftat",
-star:"Stjärna",
-information:"Information",
-pound:"pund",
-pounds:"pund",
-year:"år",
-years:"år",
-month:"månad",
-months:"månader",
-kilometre:"kilometer",
-kilometres:"kilometer",
-percent:"procent"
+date:"Datum",
+time:"Tid",
+distance:"Avstånd",
+favourite:"Favorit",
+pounds:"pund"
 },
 
 da:{
@@ -678,21 +579,15 @@ location:"Placering",
 phone:"Telefonnummer",
 card:"Bankkort",
 email:"E-mail",
-website:"Websted",
-heart:"Favorit",
+website:"Hjemmeside",
+winner:"Vinder",
+prize:"Præmie",
 home:"Hjem",
-confirmed:"Bekræftet",
-star:"Stjerne",
-information:"Information",
-pound:"pund",
-pounds:"pund",
-year:"år",
-years:"år",
-month:"måned",
-months:"måneder",
-kilometre:"kilometer",
-kilometres:"kilometer",
-percent:"procent"
+date:"Dato",
+time:"Tid",
+distance:"Afstand",
+favourite:"Favorit",
+pounds:"pund"
 },
 
 no:{
@@ -700,21 +595,15 @@ location:"Sted",
 phone:"Telefonnummer",
 card:"Bankkort",
 email:"E-post",
-website:"Nettsted",
-heart:"Favoritt",
+website:"Nettside",
+winner:"Vinner",
+prize:"Premie",
 home:"Hjem",
-confirmed:"Bekreftet",
-star:"Stjerne",
-information:"Informasjon",
-pound:"pund",
-pounds:"pund",
-year:"år",
-years:"år",
-month:"måned",
-months:"måneder",
-kilometre:"kilometer",
-kilometres:"kilometer",
-percent:"prosent"
+date:"Dato",
+time:"Tid",
+distance:"Avstand",
+favourite:"Favoritt",
+pounds:"pund"
 },
 
 fi:{
@@ -723,20 +612,14 @@ phone:"Puhelinnumero",
 card:"Pankkikortti",
 email:"Sähköposti",
 website:"Verkkosivusto",
-heart:"Suosikki",
+winner:"Voittaja",
+prize:"Palkinto",
 home:"Koti",
-confirmed:"Vahvistettu",
-star:"Tähti",
-information:"Tietoa",
-pound:"punta",
-pounds:"puntaa",
-year:"vuosi",
-years:"vuotta",
-month:"kuukausi",
-months:"kuukautta",
-kilometre:"kilometri",
-kilometres:"kilometriä",
-percent:"prosenttia"
+date:"Päivämäärä",
+time:"Aika",
+distance:"Etäisyys",
+favourite:"Suosikki",
+pounds:"puntaa"
 },
 
 tr:{
@@ -745,20 +628,14 @@ phone:"Telefon numarası",
 card:"Banka kartı",
 email:"E-posta",
 website:"Web sitesi",
-heart:"Favori",
+winner:"Kazanan",
+prize:"Ödül",
 home:"Ev",
-confirmed:"Onaylandı",
-star:"Yıldız",
-information:"Bilgi",
-pound:"sterlin",
-pounds:"sterlin",
-year:"yıl",
-years:"yıl",
-month:"ay",
-months:"ay",
-kilometre:"kilometre",
-kilometres:"kilometre",
-percent:"yüzde"
+date:"Tarih",
+time:"Saat",
+distance:"Mesafe",
+favourite:"Favori",
+pounds:"sterlin"
 },
 
 ar:{
@@ -767,20 +644,14 @@ phone:"رقم الهاتف",
 card:"بطاقة بنكية",
 email:"البريد الإلكتروني",
 website:"الموقع الإلكتروني",
-heart:"المفضلة",
+winner:"الفائز",
+prize:"الجائزة",
 home:"المنزل",
-confirmed:"تم التأكيد",
-star:"نجمة",
-information:"معلومات",
-pound:"جنيه",
-pounds:"جنيهات",
-year:"سنة",
-years:"سنوات",
-month:"شهر",
-months:"أشهر",
-kilometre:"كيلومتر",
-kilometres:"كيلومترات",
-percent:"بالمئة"
+date:"التاريخ",
+time:"الوقت",
+distance:"المسافة",
+favourite:"المفضلة",
+pounds:"جنيه إسترليني"
 },
 
 hi:{
@@ -789,66 +660,156 @@ phone:"फ़ोन नंबर",
 card:"बैंक कार्ड",
 email:"ईमेल",
 website:"वेबसाइट",
-heart:"पसंदीदा",
+winner:"विजेता",
+prize:"पुरस्कार",
 home:"घर",
-confirmed:"पुष्टि की गई",
-star:"सितारा",
-information:"जानकारी",
-pound:"पाउंड",
-pounds:"पाउंड",
-year:"वर्ष",
-years:"वर्ष",
-month:"महीना",
-months:"महीने",
-kilometre:"किलोमीटर",
-kilometres:"किलोमीटर",
-percent:"प्रतिशत"
+date:"तारीख",
+time:"समय",
+distance:"दूरी",
+favourite:"पसंदीदा",
+pounds:"पाउंड"
 }
 
 };
 
 
 /* =========================================================
-STATE
+SELECTORS
 ========================================================= */
 
-let activeButton = null;
-let speaking = false;
-let stopped = false;
+const SPEAKER_SELECTOR = [
+"[data-pd-speech-toggle]",
+"[data-read-aloud]",
+".speaker-button",
+".speaker-btn",
+".listen-button",
+".read-aloud-button",
+".pd-local-speaker"
+].join(",");
 
-let speechQueue = [];
-let speechIndex = 0;
+const READABLE_SELECTOR = [
 
-let readableCounter = 0;
-let updateTimer = null;
+"[data-pd-readable]",
+
+"main article",
+
+"main .article-card",
+
+"main .story-card",
+
+"main .feature-card",
+
+"main .editorial-card",
+
+"main .magazine-card",
+
+"main .content-card",
+
+"main .world-card",
+
+"main .category-card",
+
+"main .rubric-card",
+
+"main .topic-card",
+
+"main .card",
+
+"main .listing-card",
+
+"main .community-note-inner",
+
+"main .impact-copy",
+
+"main .rescue-copy",
+
+"main .publish-strip",
+
+".hero-content"
+
+].join(",");
+
+const SECTION_SELECTOR =
+"main > section";
 
 
 /* =========================================================
-LANGUAGE HELPERS
+STATE
+========================================================= */
+
+let activeButton =
+null;
+
+let activeElement =
+null;
+
+let activeUtterance =
+null;
+
+let speechQueue =
+[];
+
+let speechIndex =
+0;
+
+let speaking =
+false;
+
+let stopped =
+false;
+
+let readableCounter =
+0;
+
+let refreshTimer =
+null;
+
+let startTimer =
+null;
+
+
+/* =========================================================
+LANGUAGE
 ========================================================= */
 
 function normalizeLanguage(value){
 
 let code =
-String(value || "en")
+String(
+value ||
+"en"
+)
 .trim()
 .toLowerCase();
 
-if(code.includes("-")){
-code = code.split("-")[0];
+if(
+code.includes("-")
+){
+
+code =
+code.split("-")[0];
+
 }
 
-if(code.includes("_")){
-code = code.split("_")[0];
+if(
+code.includes("_")
+){
+
+code =
+code.split("_")[0];
+
 }
 
 code =
 LANGUAGE_ALIASES[code] ||
 code;
 
-return SUPPORTED_LANGUAGES.includes(code)
-? code
-: "en";
+return SUPPORTED_LANGUAGES.includes(
+code
+)
+?code
+:"en";
+
 }
 
 
@@ -858,18 +819,35 @@ try{
 
 if(
 window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage.getCurrentLanguage === "function"
+typeof window.PetsDogueLanguage.getCurrentLanguage ===
+"function"
 ){
 
 const result =
-window.PetsDogueLanguage.getCurrentLanguage();
+window.PetsDogueLanguage
+.getCurrentLanguage();
 
-if(typeof result === "string"){
-return normalizeLanguage(result);
+if(
+typeof result ===
+"string"
+){
+
+return normalizeLanguage(
+result
+);
+
 }
 
-if(result && typeof result.code === "string"){
-return normalizeLanguage(result.code);
+if(
+result &&
+typeof result.code ===
+"string"
+){
+
+return normalizeLanguage(
+result.code
+);
+
 }
 
 }
@@ -881,10 +859,16 @@ return normalizeLanguage(result.code);
 try{
 
 const saved =
-localStorage.getItem(LANGUAGE_KEY);
+localStorage.getItem(
+LANGUAGE_KEY
+);
 
 if(saved){
-return normalizeLanguage(saved);
+
+return normalizeLanguage(
+saved
+);
+
 }
 
 }catch(error){
@@ -895,70 +879,92 @@ return normalizeLanguage(
 document.documentElement.lang ||
 "en"
 );
+
+}
+
+
+function getLocale(){
+
+return SPEECH_LOCALES[
+getCurrentLanguage()
+] ||
+"en-GB";
+
 }
 
 
 function getLabels(){
 
-return LABELS[getCurrentLanguage()] ||
+return LABELS[
+getCurrentLanguage()
+] ||
 LABELS.en;
+
 }
 
 
-function getSemantic(){
+function getSemantics(){
 
-return SEMANTIC[getCurrentLanguage()] ||
-SEMANTIC.en;
+return SEMANTICS[
+getCurrentLanguage()
+] ||
+SEMANTICS.en;
+
 }
 
 
 /* =========================================================
-LIVE REGION
+SCREEN READER STATUS
 ========================================================= */
 
 function ensureLiveRegion(){
 
-let region =
+let element =
 document.getElementById(
 "pdNarrationStatus"
 );
 
-if(region){
-return region;
+if(element){
+return element;
 }
 
-region =
-document.createElement("div");
+element =
+document.createElement(
+"div"
+);
 
-region.id =
+element.id =
 "pdNarrationStatus";
 
-region.className =
+element.className =
 "pd-sr-only";
 
-region.setAttribute(
+element.setAttribute(
 "role",
 "status"
 );
 
-region.setAttribute(
+element.setAttribute(
 "aria-live",
 "polite"
 );
 
-region.setAttribute(
+element.setAttribute(
 "aria-atomic",
 "true"
 );
 
-region.setAttribute(
+element.setAttribute(
 "data-pd-speech-ignore",
 "true"
 );
 
-document.body.appendChild(region);
+document.body.appendChild(
+element
+);
 
-return region;
+return element;
+
 }
 
 
@@ -967,11 +973,15 @@ function announce(text){
 const region =
 ensureLiveRegion();
 
-region.textContent = "";
+region.textContent =
+"";
 
-setTimeout(
-()=>{
-region.textContent = text;
+window.setTimeout(
+function(){
+
+region.textContent =
+text;
+
 },
 20
 );
@@ -990,14 +1000,22 @@ document.getElementById(
 "pdNarrationStyles"
 )
 ){
+
 return;
 }
 
 const style =
-document.createElement("style");
+document.createElement(
+"style"
+);
 
 style.id =
 "pdNarrationStyles";
+
+style.setAttribute(
+"data-pd-speech-ignore",
+"true"
+);
 
 style.textContent = `
 
@@ -1014,60 +1032,57 @@ border:0!important;
 }
 
 .pd-readable-block{
-position:relative!important;
+position:relative;
 }
 
 .pd-local-speaker{
-position:absolute!important;
-top:14px!important;
-right:14px!important;
-width:44px!important;
-height:44px!important;
-min-width:44px!important;
-min-height:44px!important;
-display:flex!important;
-align-items:center!important;
-justify-content:center!important;
-padding:0!important;
-margin:0!important;
-border:2px solid #c99a2e!important;
-border-radius:50%!important;
-background:rgba(7,7,7,.94)!important;
-color:#fff!important;
-cursor:pointer!important;
-z-index:999!important;
-box-shadow:0 4px 16px rgba(0,0,0,.28)!important;
-pointer-events:auto!important;
--webkit-tap-highlight-color:transparent!important;
+position:absolute;
+top:14px;
+right:14px;
+width:42px;
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:0;
+margin:0;
+border:2px solid #c89b3c;
+border-radius:50%;
+background:rgba(7,7,7,.92);
+color:#fff;
+cursor:pointer;
+z-index:40;
+box-shadow:0 4px 16px rgba(0,0,0,.2);
+-webkit-tap-highlight-color:transparent;
 }
 
 html[dir="rtl"] .pd-local-speaker{
-right:auto!important;
-left:14px!important;
+right:auto;
+left:14px;
 }
 
 .pd-local-speaker svg{
-display:block!important;
-width:24px!important;
-height:24px!important;
-fill:none!important;
-stroke:currentColor!important;
-stroke-width:2.1!important;
-stroke-linecap:round!important;
-stroke-linejoin:round!important;
-pointer-events:none!important;
+display:block;
+width:23px;
+height:23px;
+fill:none;
+stroke:currentColor;
+stroke-width:2.1;
+stroke-linecap:round;
+stroke-linejoin:round;
+pointer-events:none;
 }
 
 .pd-local-speaker:focus-visible{
-outline:3px solid #65e51f!important;
-outline-offset:3px!important;
+outline:3px solid #65e51f;
+outline-offset:3px;
 }
 
 .pd-local-speaker[data-speaking="true"]{
-border-color:#65e51f!important;
+border-color:#65e51f;
 box-shadow:
-0 0 0 4px rgba(101,229,31,.17),
-0 4px 18px rgba(0,0,0,.3)!important;
+0 0 0 4px rgba(101,229,31,.16),
+0 4px 18px rgba(0,0,0,.28);
 }
 
 .pd-local-speaker[data-speaking="true"]::after{
@@ -1082,43 +1097,44 @@ background:#65e51f;
 border:2px solid #070707;
 }
 
-.listing-card > .pd-local-speaker,
-.result-card > .pd-local-speaker{
-top:62px!important;
+html[dir="rtl"]
+.pd-local-speaker[data-speaking="true"]::after{
+right:auto;
+left:-1px;
 }
 
 @media(max-width:700px){
 
 .pd-local-speaker{
-top:10px!important;
-right:10px!important;
-width:40px!important;
-height:40px!important;
-min-width:40px!important;
-min-height:40px!important;
+width:39px;
+height:39px;
+top:10px;
+right:10px;
 }
 
 html[dir="rtl"] .pd-local-speaker{
-right:auto!important;
-left:10px!important;
+right:auto;
+left:10px;
 }
 
-.listing-card > .pd-local-speaker,
-.result-card > .pd-local-speaker{
-top:57px!important;
+.pd-local-speaker svg{
+width:21px;
+height:21px;
 }
 
 }
 
 `;
 
-document.head.appendChild(style);
+document.head.appendChild(
+style
+);
 
 }
 
 
 /* =========================================================
-SPEAKER ICON
+ICON
 ========================================================= */
 
 function speakerSvg(){
@@ -1139,36 +1155,40 @@ aria-hidden="true"
 
 
 /* =========================================================
-TEXT COLLECTION
+VISIBLE TEXT
 ========================================================= */
 
-function isVisible(element){
+function elementVisible(element){
 
-if(!element){
+if(
+!element ||
+element.nodeType !== 1
+){
+
 return false;
 }
 
 const style =
-getComputedStyle(element);
+window.getComputedStyle(
+element
+);
 
 return !(
 style.display === "none" ||
 style.visibility === "hidden" ||
 style.visibility === "collapse"
 );
+
 }
 
 
-function shouldIgnoreNode(
-element,
-root
-){
+function excludedTextNode(element){
 
 if(!element){
 return true;
 }
 
-const ignored =
+return Boolean(
 element.closest(
 [
 "script",
@@ -1177,30 +1197,21 @@ element.closest(
 "template",
 "svg",
 "canvas",
+"button",
 "input",
 "select",
 "textarea",
 "form",
 "nav",
-"aside",
-"footer",
 "[hidden]",
 '[aria-hidden="true"]',
 "[data-pd-speech-ignore]",
 ".pd-local-speaker",
 ".pd-sr-only"
 ].join(",")
+)
 );
 
-if(!ignored){
-return false;
-}
-
-/*
-Allow text if the root itself happens to be an article,
-but do not read unrelated controls.
-*/
-return ignored !== root;
 }
 
 
@@ -1217,12 +1228,15 @@ NodeFilter.SHOW_TEXT,
 {
 acceptNode(node){
 
-const value =
-String(node.nodeValue || "")
+const text =
+String(
+node.nodeValue ||
+""
+)
 .replace(/\s+/g," ")
 .trim();
 
-if(!value){
+if(!text){
 return NodeFilter.FILTER_REJECT;
 }
 
@@ -1231,27 +1245,40 @@ node.parentElement;
 
 if(
 !parent ||
-!isVisible(parent) ||
-shouldIgnoreNode(parent,element)
+excludedTextNode(
+parent
+) ||
+!elementVisible(
+parent
+)
 ){
+
 return NodeFilter.FILTER_REJECT;
 }
 
 return NodeFilter.FILTER_ACCEPT;
+
 }
 }
 );
 
-const parts = [];
+const parts =
+[];
 
 let node;
 
 while(
-(node = walker.nextNode())
+(
+node =
+walker.nextNode()
+)
 ){
 
 const value =
-String(node.nodeValue || "")
+String(
+node.nodeValue ||
+""
+)
 .replace(/\s+/g," ")
 .trim();
 
@@ -1265,146 +1292,7 @@ return parts
 .join(" ")
 .replace(/\s+/g," ")
 .trim();
-}
 
-
-/* =========================================================
-RUSSIAN / UKRAINIAN WORD FORMS
-========================================================= */
-
-function slavicForm(
-number,
-one,
-few,
-many
-){
-
-const n =
-Math.abs(
-Math.trunc(Number(number))
-);
-
-const n10 =
-n % 10;
-
-const n100 =
-n % 100;
-
-if(
-n10 === 1 &&
-n100 !== 11
-){
-return one;
-}
-
-if(
-n10 >= 2 &&
-n10 <= 4 &&
-!(
-n100 >= 12 &&
-n100 <= 14
-)
-){
-return few;
-}
-
-return many;
-}
-
-
-function poundWord(number){
-
-const lang =
-getCurrentLanguage();
-
-if(lang === "ru"){
-return slavicForm(
-number,
-"фунт",
-"фунта",
-"фунтов"
-);
-}
-
-if(lang === "uk"){
-return slavicForm(
-number,
-"фунт",
-"фунти",
-"фунтів"
-);
-}
-
-const s =
-getSemantic();
-
-return Number(number) === 1
-? s.pound
-: s.pounds;
-}
-
-
-function yearWord(number){
-
-const lang =
-getCurrentLanguage();
-
-if(lang === "ru"){
-return slavicForm(
-number,
-"год",
-"года",
-"лет"
-);
-}
-
-if(lang === "uk"){
-return slavicForm(
-number,
-"рік",
-"роки",
-"років"
-);
-}
-
-const s =
-getSemantic();
-
-return Number(number) === 1
-? s.year
-: s.years;
-}
-
-
-function monthWord(number){
-
-const lang =
-getCurrentLanguage();
-
-if(lang === "ru"){
-return slavicForm(
-number,
-"месяц",
-"месяца",
-"месяцев"
-);
-}
-
-if(lang === "uk"){
-return slavicForm(
-number,
-"місяць",
-"місяці",
-"місяців"
-);
-}
-
-const s =
-getSemantic();
-
-return Number(number) === 1
-? s.month
-: s.months;
 }
 
 
@@ -1415,18 +1303,18 @@ SEMANTIC TEXT PREPARATION
 function prepareSemanticText(text){
 
 const s =
-getSemantic();
+getSemantics();
 
 let value =
-String(text || "");
-
-
-/* Important symbols */
+String(
+text ||
+""
+);
 
 value =
 value.replace(
-/📍|📌|🗺️?/gu,
-` ${s.location}: `
+/💳|🏦/gu,
+` ${s.card}: `
 );
 
 value =
@@ -1437,13 +1325,7 @@ value.replace(
 
 value =
 value.replace(
-/💳|💳️/gu,
-` ${s.card}. `
-);
-
-value =
-value.replace(
-/📧|✉️?|📨/gu,
+/📧|✉️?/gu,
 ` ${s.email}: `
 );
 
@@ -1455,396 +1337,234 @@ value.replace(
 
 value =
 value.replace(
-/❤️|❤|♥|♡/gu,
-` ${s.heart}. `
+/📍|🗺️?/gu,
+` ${s.location}: `
 );
 
 value =
 value.replace(
-/🏠|🏡|⌂/gu,
-` ${s.home}. `
+/🏆/gu,
+` ${s.winner}: `
 );
 
 value =
 value.replace(
-/✅|✓|✔/gu,
-` ${s.confirmed}. `
+/🎁/gu,
+` ${s.prize}: `
 );
 
 value =
 value.replace(
-/⭐|★/gu,
-` ${s.star}. `
+/🏠|⌂/gu,
+` ${s.home}: `
 );
 
 value =
 value.replace(
-/ℹ️|ⓘ/gu,
-` ${s.information}. `
-);
-
-
-/* Currency */
-
-value =
-value.replace(
-/£\s*(\d+(?:[.,]\d+)?)/g,
-function(match,number){
-
-const clean =
-number.replace(",",".");
-
-return (
-clean +
-" " +
-poundWord(clean)
-);
-
-}
+/📅|🗓️?/gu,
+` ${s.date}: `
 );
 
 value =
 value.replace(
-/(\d+(?:[.,]\d+)?)\s*£/g,
-function(match,number){
-
-const clean =
-number.replace(",",".");
-
-return (
-clean +
-" " +
-poundWord(clean)
+/⏰|🕒/gu,
+` ${s.time}: `
 );
+
+value =
+value.replace(
+/📏/gu,
+` ${s.distance}: `
+);
+
+value =
+value.replace(
+/❤️|♥|♡/gu,
+` ${s.favourite}: `
+);
+
+value =
+value.replace(
+/£\s*([0-9]+(?:[.,][0-9]+)?)/g,
+function(
+match,
+amount
+){
+
+return ` ${amount} ${s.pounds} `;
 
 }
 );
 
 
-/* English units inside translated pages */
+/*
+Bank card style numbers.
+*/
 
 value =
 value.replace(
-/\b(\d+)\s*(?:years?|yrs?)\b/gi,
-function(match,number){
+/\b(?:\d{4}[\s-]?){3}\d{4}\b/g,
+function(number){
 
-return (
-number +
-" " +
-yearWord(number)
-);
+const digits =
+number
+.replace(/\D/g,"")
+.split("")
+.join(" ");
+
+return ` ${s.card}: ${digits} `;
 
 }
 );
 
+
+/*
+Long telephone numbers.
+Speak digits separately.
+*/
+
 value =
 value.replace(
-/\b(\d+)\s*(?:months?|mos?)\b/gi,
-function(match,number){
+/(?:\+\s*)?\d[\d\s().-]{7,}\d/g,
+function(number){
 
-return (
-number +
-" " +
-monthWord(number)
-);
+const digits =
+number
+.replace(/\D/g,"")
+.split("")
+.join(" ");
+
+return ` ${s.phone}: ${digits} `;
 
 }
 );
 
+
+/*
+Decorative symbols must not be announced as
+"black diamond", "office pen", etc.
+*/
+
 value =
 value.replace(
-/\b(\d+(?:[.,]\d+)?)\s*km\b/gi,
-function(match,number){
-
-return (
-number +
-" " +
-(
-Number(
-String(number).replace(",",".")
-) === 1
-? s.kilometre
-: s.kilometres
-)
-);
-
-}
+/[◆◇♦♢✦✧●○◉⌘♧✓✔︎✅]/gu,
+" "
 );
 
 value =
 value.replace(
-/(\d+(?:[.,]\d+)?)\s*%/g,
-`$1 ${s.percent}`
+/[→←↑↓►◄]/gu,
+" "
 );
-
-
-/* Brand ampersand should sound naturally */
 
 value =
 value.replace(
-/PETS\s*&\s*DOGUE/gi,
-"PETS and DOGUE"
-);
-
-
-/* Separators become natural pauses */
-
-value =
-value.replace(
-(/\s*[·•●▪■◆◇]\s*/g),
+/\s+[+＋]\s+/gu,
 ", "
 );
 
 value =
 value.replace(
-(/\s*[|]\s*/g),
+/\s*·\s*/g,
 ", "
 );
 
 value =
 value.replace(
-(/[→←↗↘]/g),
-". "
+/\s*•\s*/g,
+", "
 );
 
 value =
 value.replace(
-(/\s*[-–—]\s*/g),
+/\s*\/\s*/g,
 ", "
 );
 
-
-/* Remove repeated punctuation */
+value =
+value.replace(
+(/\s+/g),
+" "
+);
 
 value =
-value
-.replace(/\s+,/g,",")
-.replace(/,{2,}/g,",")
-.replace(/\s+\./g,".")
-.replace(/\.{2,}/g,".")
-.replace(/\s+/g," ")
-.trim();
+value.replace(
+/\s+([,.!?;:])/g,
+"$1"
+);
 
-return value;
+return value.trim();
+
 }
 
 
 /* =========================================================
-MIXED LANGUAGE
+TEXT CHUNKS
 ========================================================= */
 
-const ENGLISH_PHRASES = [
-"PETS and DOGUE",
-"British Shorthair",
-"Pomeranian",
-"Cockapoo",
-"Golden Retriever",
-"French Bulldog",
-"Labrador Retriever",
-"German Shepherd",
-"Yorkshire Terrier",
-"Jack Russell",
-"Chihuahua",
-"Shih Tzu",
-"Maine Coon",
-"Sphynx",
-"Ragdoll",
-"Bengal",
-"Border Collie",
-"Cavalier King Charles Spaniel"
-];
-
-
-function isNonLatinSiteLanguage(language){
-
-return [
-"ru",
-"uk",
-"bg",
-"el",
-"ar",
-"hi"
-].includes(language);
-}
-
-
-function protectEnglishPhrases(text){
-
-let value =
-text;
-
-const protectedItems = [];
-
-ENGLISH_PHRASES
-.sort(
-(a,b)=>b.length-a.length
-)
-.forEach(
-phrase=>{
-
-const expression =
-new RegExp(
-phrase.replace(
-/[-/\\^$*+?.()|[\]{}]/g,
-"\\$&"
-),
-"gi"
-);
-
-value =
-value.replace(
-expression,
-match=>{
-
-const key =
-`@@PDEN${protectedItems.length}@@`;
-
-protectedItems.push(match);
-
-return key;
-}
-);
-
-}
-);
-
-return {
-value,
-protectedItems
-};
-}
-
-
-function splitMixedLanguage(text){
-
-const language =
-getCurrentLanguage();
-
-const normalLocale =
-SPEECH_LOCALES[language] ||
-"en-GB";
-
-if(language === "en"){
-
-return [{
+function splitLongText(
 text,
-locale:"en-GB"
-}];
-
-}
-
-const protectedResult =
-protectEnglishPhrases(text);
-
-let value =
-protectedResult.value;
-
-const pieces = [];
-
-const tokenRegex =
-/@@PDEN\d+@@|[A-Za-z][A-Za-z0-9'’.]*(?:\s+[A-Za-z][A-Za-z0-9'’.]*)*/g;
-
-let lastIndex = 0;
-let match;
-
-while(
-(match = tokenRegex.exec(value))
+maxLength
 ){
 
-if(match.index > lastIndex){
+const words =
+text.split(/\s+/);
 
-const before =
-value
-.slice(lastIndex,match.index)
-.trim();
+const output =
+[];
 
-if(before){
+let current =
+"";
 
-pieces.push({
-text:before,
-locale:normalLocale
-});
+words.forEach(
+function(word){
 
-}
+const candidate =
+current
+?current + " " + word
+:word;
 
-}
+if(
+candidate.length >
+maxLength &&
+current
+){
 
-let token =
-match[0];
-
-const protectedMatch =
-token.match(
-/@@PDEN(\d+)@@/
+output.push(
+current
 );
 
-if(protectedMatch){
-
-token =
-protectedResult.protectedItems[
-Number(protectedMatch[1])
-] ||
-token;
-
-pieces.push({
-text:token,
-locale:"en-GB"
-});
-
-}else if(
-isNonLatinSiteLanguage(language)
-){
-
-pieces.push({
-text:token,
-locale:"en-GB"
-});
+current =
+word;
 
 }else{
 
-pieces.push({
-text:token,
-locale:normalLocale
-});
-
-}
-
-lastIndex =
-tokenRegex.lastIndex;
-
-}
-
-if(lastIndex < value.length){
-
-const after =
-value
-.slice(lastIndex)
-.trim();
-
-if(after){
-
-pieces.push({
-text:after,
-locale:normalLocale
-});
-
+current =
+candidate;
 }
 
 }
-
-return pieces.filter(
-item=>item.text.trim()
 );
+
+if(current){
+output.push(current);
+}
+
+return output;
+
 }
 
 
-/* =========================================================
-SENTENCE CHUNKS
-========================================================= */
+function makeChunks(text){
 
-function splitText(text,maxLength=180){
+const MAX_LENGTH =
+220;
 
 const clean =
-String(text || "")
+String(
+text ||
+""
+)
 .replace(/\s+/g," ")
 .trim();
 
@@ -1855,12 +1575,14 @@ return [];
 const sentences =
 clean.match(
 /[^.!?。！？…]+[.!?。！？…]+|[^.!?。！？…]+$/g
-) || [clean];
+) ||
+[clean];
 
-const result = [];
-let current = "";
+const result =
+[];
 
-sentences.forEach(sentence=>{
+sentences.forEach(
+function(sentence){
 
 const value =
 sentence.trim();
@@ -1869,67 +1591,275 @@ if(!value){
 return;
 }
 
-const candidate =
-current
-? current + " " + value
-: value;
-
 if(
-candidate.length > maxLength &&
-current
+value.length >
+MAX_LENGTH
 ){
 
-result.push(current);
-current = value;
+splitLongText(
+value,
+MAX_LENGTH
+)
+.forEach(
+function(part){
+
+result.push(
+part
+);
+
+}
+);
 
 }else{
 
-current = candidate;
+result.push(
+value
+);
 
 }
 
-});
-
-if(current){
-result.push(current);
 }
+);
 
 return result;
+
+}
+
+
+/* =========================================================
+MULTILINGUAL VOICE SEGMENTS
+========================================================= */
+
+function addQueueItem(
+queue,
+text,
+locale
+){
+
+const clean =
+String(
+text ||
+""
+)
+.replace(/\s+/g," ")
+.trim();
+
+if(!clean){
+return;
+}
+
+queue.push({
+text:clean,
+locale
+});
+
+}
+
+
+function segmentChunk(
+text
+){
+
+const language =
+getCurrentLanguage();
+
+const selectedLocale =
+getLocale();
+
+const queue =
+[];
+
+
+/*
+For Russian, Ukrainian, Bulgarian, Greek,
+Arabic and Hindi pages:
+Latin words such as British Shorthair,
+Pomeranian, London, PETS & DOGUE
+are spoken with an English voice instead
+of being read as phonetic local-language text.
+*/
+
+if(
+NON_LATIN_LANGUAGES.has(
+language
+)
+){
+
+const regex =
+/(?:PETS\s*&\s*DOGUE|[A-Za-z][A-Za-z0-9'’&.-]*(?:\s+[A-Za-z][A-Za-z0-9'’&.-]*)*)/g;
+
+let lastIndex =
+0;
+
+let match;
+
+while(
+(
+match =
+regex.exec(text)
+)
+){
+
+if(
+match.index >
+lastIndex
+){
+
+addQueueItem(
+queue,
+text.slice(
+lastIndex,
+match.index
+),
+selectedLocale
+);
+
+}
+
+addQueueItem(
+queue,
+match[0],
+"en-GB"
+);
+
+lastIndex =
+regex.lastIndex;
+
+}
+
+if(
+lastIndex <
+text.length
+){
+
+addQueueItem(
+queue,
+text.slice(
+lastIndex
+),
+selectedLocale
+);
+
+}
+
+return queue;
+
+}
+
+
+/*
+For Latin languages keep the selected language,
+but PETS & DOGUE remains the English brand.
+*/
+
+const brandRegex =
+/PETS\s*&\s*DOGUE/gi;
+
+let lastIndex =
+0;
+
+let match;
+
+while(
+(
+match =
+brandRegex.exec(text)
+)
+){
+
+if(
+match.index >
+lastIndex
+){
+
+addQueueItem(
+queue,
+text.slice(
+lastIndex,
+match.index
+),
+selectedLocale
+);
+
+}
+
+addQueueItem(
+queue,
+match[0],
+"en-GB"
+);
+
+lastIndex =
+brandRegex.lastIndex;
+
+}
+
+if(
+lastIndex <
+text.length
+){
+
+addQueueItem(
+queue,
+text.slice(
+lastIndex
+),
+selectedLocale
+);
+
+}
+
+if(!queue.length){
+
+addQueueItem(
+queue,
+text,
+selectedLocale
+);
+
+}
+
+return queue;
+
 }
 
 
 function buildSpeechQueue(text){
 
-const semanticText =
-prepareSemanticText(text);
-
-const chunks =
-splitText(
-semanticText,
-180
+const prepared =
+prepareSemanticText(
+text
 );
 
-const queue = [];
+const chunks =
+makeChunks(
+prepared
+);
 
-chunks.forEach(chunk=>{
+const queue =
+[];
 
-splitMixedLanguage(chunk)
-.forEach(part=>{
+chunks.forEach(
+function(chunk){
 
-if(part.text.trim()){
+segmentChunk(
+chunk
+)
+.forEach(
+function(item){
 
-queue.push({
-text:part.text.trim(),
-locale:part.locale
-});
+queue.push(
+item
+);
 
 }
+);
 
-});
-
-});
+}
+);
 
 return queue;
+
 }
 
 
@@ -1940,68 +1870,92 @@ VOICE
 function chooseVoice(locale){
 
 if(
-!("speechSynthesis" in window)
+!(
+"speechSynthesis" in window
+)
 ){
+
 return null;
 }
 
 const voices =
-speechSynthesis.getVoices();
+window.speechSynthesis
+.getVoices();
 
 if(!voices.length){
 return null;
 }
 
+const wanted =
+String(
+locale
+)
+.toLowerCase();
+
 const exact =
 voices.find(
-voice=>
-String(voice.lang)
+function(voice){
+
+return String(
+voice.lang ||
+""
+)
 .toLowerCase() ===
-String(locale)
-.toLowerCase()
+wanted;
+
+}
 );
 
 if(exact){
 return exact;
 }
 
-const prefix =
-String(locale)
-.split("-")[0]
-.toLowerCase();
+const language =
+wanted.split("-")[0];
 
 return voices.find(
-voice=>
-String(voice.lang)
+function(voice){
+
+return String(
+voice.lang ||
+""
+)
 .toLowerCase()
-.startsWith(prefix)
-) || null;
+.startsWith(
+language
+);
+
+}
+) ||
+null;
+
 }
 
 
 /* =========================================================
-BUTTON STATE
+BUTTON LABELS
 ========================================================= */
 
-function updateButtons(){
+function updateAllButtonLabels(){
 
 const labels =
 getLabels();
 
 document
 .querySelectorAll(
-"[data-pd-speech-toggle]"
+SPEAKER_SELECTOR
 )
-.forEach(button=>{
+.forEach(
+function(button){
 
-const active =
+const isActive =
 button === activeButton &&
 speaking;
 
 const label =
-active
-? labels.stop
-: labels.listen;
+isActive
+?labels.stop
+:labels.listen;
 
 button.setAttribute(
 "aria-label",
@@ -2015,13 +1969,19 @@ label
 
 button.setAttribute(
 "aria-pressed",
-active ? "true" : "false"
+isActive
+?"true"
+:"false"
 );
 
 button.dataset.speaking =
-active ? "true" : "false";
+isActive
+?"true"
+:"false";
 
-});
+}
+);
+
 }
 
 
@@ -2029,29 +1989,65 @@ active ? "true" : "false";
 STOP
 ========================================================= */
 
-function stopSpeech(announceStop=false){
+function stopSpeech(
+withAnnouncement
+){
 
-stopped = true;
-speaking = false;
+stopped =
+true;
 
-speechQueue = [];
-speechIndex = 0;
+speaking =
+false;
+
+speechQueue =
+[];
+
+speechIndex =
+0;
+
+activeUtterance =
+null;
+
+activeElement =
+null;
+
+if(startTimer){
+
+window.clearTimeout(
+startTimer
+);
+
+startTimer =
+null;
+
+}
 
 if(
 "speechSynthesis" in window
 ){
-speechSynthesis.cancel();
+
+try{
+
+window.speechSynthesis.cancel();
+
+}catch(error){
 }
 
-activeButton = null;
+}
 
-updateButtons();
+activeButton =
+null;
 
-if(announceStop){
+updateAllButtonLabels();
+
+if(withAnnouncement){
+
 announce(
 getLabels().stopped
 );
+
 }
+
 }
 
 
@@ -2065,35 +2061,53 @@ if(
 stopped ||
 !speaking
 ){
+
 return;
 }
 
 if(
-speechIndex >= speechQueue.length
+speechIndex >=
+speechQueue.length
 ){
 
-speaking = false;
-stopped = false;
-activeButton = null;
+speaking =
+false;
 
-updateButtons();
+stopped =
+false;
+
+activeButton =
+null;
+
+activeElement =
+null;
+
+activeUtterance =
+null;
+
+updateAllButtonLabels();
 
 return;
 }
 
 const item =
-speechQueue[speechIndex];
+speechQueue[
+speechIndex
+];
 
 const utterance =
 new SpeechSynthesisUtterance(
 item.text
 );
 
+activeUtterance =
+utterance;
+
 utterance.lang =
 item.locale;
 
 utterance.rate =
-0.94;
+0.96;
 
 utterance.pitch =
 1;
@@ -2107,52 +2121,76 @@ item.locale
 );
 
 if(voice){
-utterance.voice = voice;
+
+utterance.voice =
+voice;
+
 }
 
 utterance.onend =
-()=>{
+function(){
 
 if(stopped){
 return;
 }
 
-speechIndex += 1;
+speechIndex +=
+1;
 
-setTimeout(
+window.setTimeout(
 speakNext,
-45
+35
 );
 
 };
 
 utterance.onerror =
-event=>{
+function(event){
 
 if(
+stopped ||
 event.error === "canceled" ||
 event.error === "interrupted"
 ){
+
 return;
 }
 
-speechIndex += 1;
+speechIndex +=
+1;
 
-setTimeout(
+window.setTimeout(
 speakNext,
-60
+35
 );
 
 };
 
-speechSynthesis.speak(
+try{
+
+window.speechSynthesis.resume();
+
+window.speechSynthesis.speak(
 utterance
 );
+
+}catch(error){
+
+speechIndex +=
+1;
+
+window.setTimeout(
+speakNext,
+50
+);
+
+}
+
 }
 
 
 /* =========================================================
-READ ONE BLOCK
+START READING
 ========================================================= */
 
 function speakElement(
@@ -2164,8 +2202,11 @@ const labels =
 getLabels();
 
 if(
-!("speechSynthesis" in window) ||
-typeof SpeechSynthesisUtterance === "undefined"
+!(
+"speechSynthesis" in window
+) ||
+typeof window.SpeechSynthesisUtterance ===
+"undefined"
 ){
 
 announce(
@@ -2176,29 +2217,37 @@ return;
 }
 
 
-/* Same button = stop */
+/*
+Press same speaker = stop.
+*/
 
 if(
 speaking &&
 activeButton === button
 ){
 
-stopSpeech(true);
+stopSpeech(
+true
+);
+
 return;
 }
 
 
-/* Stop previous topic */
+/*
+Stop previous topic.
+*/
 
-stopSpeech(false);
+stopSpeech(
+false
+);
 
-
-const rawText =
+const text =
 getTextFromElement(
 element
 );
 
-if(!rawText){
+if(!text){
 
 announce(
 labels.empty
@@ -2207,28 +2256,39 @@ labels.empty
 return;
 }
 
+const queue =
+buildSpeechQueue(
+text
+);
+
+if(!queue.length){
+
+announce(
+labels.empty
+);
+
+return;
+}
 
 speechQueue =
-buildSpeechQueue(
-rawText
-);
+queue;
 
-if(!speechQueue.length){
+speechIndex =
+0;
 
-announce(
-labels.empty
-);
+stopped =
+false;
 
-return;
-}
+speaking =
+true;
 
+activeButton =
+button;
 
-speechIndex = 0;
-stopped = false;
-speaking = true;
-activeButton = button;
+activeElement =
+element;
 
-updateButtons();
+updateAllButtonLabels();
 
 announce(
 labels.reading
@@ -2236,23 +2296,52 @@ labels.reading
 
 
 /*
-Android Chrome behaves more reliably when speech starts
-slightly after cancel().
+Important Android Chrome fix:
+speechSynthesis.cancel() followed immediately by speak()
+can produce a green active button but no audio.
+
+Small delay after cancel fixes that.
 */
 
-setTimeout(
-speakNext,
-70
+startTimer =
+window.setTimeout(
+function(){
+
+startTimer =
+null;
+
+if(
+!stopped &&
+speaking
+){
+
+try{
+
+window.speechSynthesis.resume();
+
+}catch(error){
+}
+
+speakNext();
+
+}
+
+},
+90
 );
 
 }
 
 
 /* =========================================================
-TARGET
+TARGET RESOLUTION
 ========================================================= */
 
 function resolveTarget(button){
+
+if(!button){
+return null;
+}
 
 const selector =
 button.getAttribute(
@@ -2277,7 +2366,6 @@ return target;
 
 }
 
-
 const controls =
 button.getAttribute(
 "aria-controls"
@@ -2296,70 +2384,158 @@ return target;
 
 }
 
-
 return button.closest(
 [
 "[data-pd-readable]",
 "article",
-".community-copy",
-".hero",
-".intro-photo",
-".how",
+".article-card",
+".story-card",
+".feature-card",
+".editorial-card",
+".magazine-card",
+".content-card",
+".world-card",
+".category-card",
+".rubric-card",
+".topic-card",
+".card",
+".listing-card",
+".community-note-inner",
 ".impact-copy",
 ".rescue-copy",
-".community-note-inner",
-".prize-box",
-".rules",
+".publish-strip",
+".hero-content",
 "section"
 ].join(",")
 );
+
 }
 
 
 /* =========================================================
-BIND BUTTON
+BUTTON NORMALISATION
 ========================================================= */
 
-function bindButton(button){
+function prepareExistingSpeaker(
+button
+){
+
+if(!button){
+return;
+}
+
+button.setAttribute(
+"data-pd-speech-toggle",
+"true"
+);
 
 if(
-!button ||
-button.dataset.pdSpeechBound === "true"
+button.tagName ===
+"BUTTON"
 ){
-return;
+
+button.type =
+"button";
+
 }
 
-button.dataset.pdSpeechBound =
-"true";
-
-button.addEventListener(
-"click",
-event=>{
-
-event.preventDefault();
-event.stopPropagation();
-event.stopImmediatePropagation();
-
-const target =
-resolveTarget(button);
-
-if(!target){
-
-announce(
-getLabels().empty
-);
-
-return;
 }
 
-speakElement(
-target,
-button
+
+/* =========================================================
+FIND EXISTING SPEAKER
+========================================================= */
+
+function findExistingSpeaker(
+element
+){
+
+if(!element){
+return null;
+}
+
+const direct =
+Array.from(
+element.children
+)
+.find(
+function(child){
+
+return child.matches &&
+child.matches(
+SPEAKER_SELECTOR
 );
 
-},
-true
+}
 );
+
+if(direct){
+return direct;
+}
+
+const descendants =
+Array.from(
+element.querySelectorAll(
+SPEAKER_SELECTOR
+)
+);
+
+if(!descendants.length){
+return null;
+}
+
+
+/*
+If this exact block already contains a speaker,
+reuse it instead of generating another one.
+*/
+
+for(
+const button
+of descendants
+){
+
+const targetSelector =
+button.getAttribute(
+"data-pd-speech-target"
+);
+
+const controls =
+button.getAttribute(
+"aria-controls"
+);
+
+if(
+element.id &&
+(
+targetSelector ===
+"#" + element.id ||
+controls ===
+element.id
+)
+){
+
+return button;
+}
+
+}
+
+
+/*
+For explicitly readable blocks,
+a speaker somewhere inside is considered its speaker.
+*/
+
+if(
+element.hasAttribute(
+"data-pd-readable"
+)
+){
+
+return descendants[0];
+}
+
+return null;
 
 }
 
@@ -2368,34 +2544,55 @@ true
 CREATE SPEAKER
 ========================================================= */
 
-function createSpeaker(element){
+function createSpeakerForElement(
+element
+){
 
 if(
 !element ||
-element.closest(
-"nav,aside,footer,.modal,.contest-modal"
-)
+element.dataset.pdNarrationReady ===
+"true"
 ){
+
 return;
 }
+
+
+/*
+Never place a button inside another interactive control.
+*/
 
 if(
-element.tagName === "BUTTON" ||
-element.tagName === "INPUT" ||
-element.tagName === "SELECT" ||
-element.tagName === "TEXTAREA"
+[
+"BUTTON",
+"A",
+"INPUT",
+"SELECT",
+"TEXTAREA"
+]
+.includes(
+element.tagName
+)
 ){
+
 return;
 }
 
-const text =
+const readableText =
 getTextFromElement(
 element
 );
 
-if(text.length < 35){
+if(
+readableText.length <
+35
+){
+
 return;
 }
+
+element.dataset.pdNarrationReady =
+"true";
 
 element.classList.add(
 "pd-readable-block"
@@ -2403,52 +2600,49 @@ element.classList.add(
 
 if(!element.id){
 
-readableCounter += 1;
+readableCounter +=
+1;
 
 element.id =
 "pd-readable-" +
 readableCounter;
+
 }
 
-
-/*
-Exactly ONE direct speaker per readable block.
-*/
-
-const directButtons =
-Array.from(
-element.children
-)
-.filter(
-child=>
-child.matches &&
-child.matches(
-"[data-pd-speech-toggle]"
-)
+const existing =
+findExistingSpeaker(
+element
 );
 
-let button =
-directButtons[0] ||
-null;
+if(existing){
 
-directButtons
-.slice(1)
-.forEach(extra=>{
+prepareExistingSpeaker(
+existing
+);
 
 if(
-extra.classList.contains(
-"pd-local-speaker"
+!existing.getAttribute(
+"data-pd-speech-target"
 )
 ){
-extra.remove();
+
+existing.setAttribute(
+"data-pd-speech-target",
+"#" +
+element.id
+);
+
 }
 
-});
+existing.setAttribute(
+"aria-controls",
+element.id
+);
 
+return;
+}
 
-if(!button){
-
-button =
+const button =
 document.createElement(
 "button"
 );
@@ -2459,27 +2653,20 @@ button.type =
 button.className =
 "pd-local-speaker";
 
-button.dataset.pdGenerated =
-"true";
+button.setAttribute(
+"data-pd-generated",
+"true"
+);
 
 button.setAttribute(
 "data-pd-speech-toggle",
 "true"
 );
 
-button.innerHTML =
-speakerSvg() +
-'<span class="pd-sr-only pd-speaker-label"></span>';
-
-element.appendChild(
-button
-);
-}
-
-
 button.setAttribute(
 "data-pd-speech-target",
-"#" + element.id
+"#" +
+element.id
 );
 
 button.setAttribute(
@@ -2497,178 +2684,176 @@ button.setAttribute(
 "true"
 );
 
-bindButton(button);
+button.innerHTML =
+speakerSvg();
+
+element.appendChild(
+button
+);
 
 }
 
 
 /* =========================================================
-CANDIDATES
+REMOVE DUPLICATES
 ========================================================= */
 
-function collectCandidates(){
+function cleanupDuplicateSpeakers(){
 
-const selector = [
+/*
+Remove duplicated generated speakers when a block
+already contains its own speaker.
+*/
 
-"[data-pd-readable]",
-
-".hero",
-
-"main article",
-
-"main .article-card",
-"main .story-card",
-"main .feature-card",
-"main .editorial-card",
-"main .magazine-card",
-"main .content-card",
-"main .world-card",
-"main .category-card",
-"main .rubric-card",
-"main .topic-card",
-
-"main .result-card",
-"main .listing-card",
-
-"main .community-copy",
-"main .intro-photo",
-"main .how",
-"main .impact-copy",
-"main .rescue-copy",
-"main .community-note-inner",
-"main .prize-box",
-"main .rules",
-
-"main > section"
-
-].join(",");
-
-const raw =
-Array.from(
-document.querySelectorAll(
-selector
+document
+.querySelectorAll(
+".pd-local-speaker"
 )
+.forEach(
+function(button){
+
+const parent =
+button.parentElement;
+
+if(!parent){
+return;
+}
+
+const others =
+Array.from(
+parent.querySelectorAll(
+SPEAKER_SELECTOR
+)
+)
+.filter(
+function(other){
+
+return other !== button;
+
+}
 );
 
-const unique =
-Array.from(
-new Set(raw)
+if(
+others.length &&
+button.getAttribute(
+"data-pd-generated"
+) ===
+"true"
+){
+
+button.remove();
+
+}
+
+}
 );
 
 
 /*
-A broad section does not receive another speaker
-when it already contains smaller readable topics.
-This prevents the double speakers seen in Community.
+If two buttons point to exactly the same target,
+prefer the existing/manual one.
 */
 
-return unique.filter(
-element=>{
-
-if(
-element.closest(
-"nav,aside,footer,.modal,.contest-modal"
-)
-){
-return false;
-}
-
-const isBroadSection =
-element.matches(
-"main > section"
-);
-
-if(isBroadSection){
-
-const hasNestedCandidate =
-unique.some(
-other=>
-other !== element &&
-element.contains(other) &&
-!other.matches("main > section")
-);
-
-if(hasNestedCandidate){
-return false;
-}
-
-}
-
-const explicit =
-element.hasAttribute(
-"data-pd-readable"
-);
-
-if(explicit){
-
-const nestedExplicit =
-unique.some(
-other=>
-other !== element &&
-other.hasAttribute(
-"data-pd-readable"
-) &&
-element.contains(other)
-);
-
-if(nestedExplicit){
-return false;
-}
-
-}
-
-return true;
-});
-}
-
-
-/* =========================================================
-REMOVE OLD DUPLICATE GENERATED BUTTONS
-========================================================= */
-
-function cleanOldGeneratedSpeakers(){
-
-const speakers =
-Array.from(
-document.querySelectorAll(
-".pd-local-speaker"
-)
-);
-
-const grouped =
+const groups =
 new Map();
 
-speakers.forEach(button=>{
+document
+.querySelectorAll(
+SPEAKER_SELECTOR
+)
+.forEach(
+function(button){
+
+prepareExistingSpeaker(
+button
+);
 
 const target =
-button.getAttribute(
-"data-pd-speech-target"
-) ||
-button.getAttribute(
-"aria-controls"
-) ||
-"no-target-" +
-Math.random();
+resolveTarget(
+button
+);
 
-if(!grouped.has(target)){
-grouped.set(target,[]);
+if(!target){
+return;
 }
 
-grouped.get(target)
-.push(button);
+if(
+!groups.has(
+target
+)
+){
 
-});
+groups.set(
+target,
+[]
+);
 
+}
 
-grouped.forEach(buttons=>{
+groups.get(
+target
+)
+.push(
+button
+);
 
-buttons
-.slice(1)
-.forEach(button=>{
+}
+);
+
+groups.forEach(
+function(buttons){
+
+if(
+buttons.length <=
+1
+){
+
+return;
+}
+
+let keep =
+buttons.find(
+function(button){
+
+return button.getAttribute(
+"data-pd-generated"
+) !==
+"true";
+
+}
+) ||
+buttons[0];
+
+buttons.forEach(
+function(button){
+
+if(
+button === keep
+){
+
+return;
+}
+
+if(
+button.getAttribute(
+"data-pd-generated"
+) ===
+"true" ||
+button.classList.contains(
+"pd-local-speaker"
+)
+){
+
 button.remove();
-});
 
-});
+}
+
+}
+);
+
+}
+);
+
 }
 
 
@@ -2678,24 +2863,189 @@ INSTALL
 
 function installLocalSpeakers(){
 
-cleanOldGeneratedSpeakers();
-
-const candidates =
-collectCandidates();
-
-candidates.forEach(
-element=>createSpeaker(element)
-);
+/*
+First recognise all speakers already present
+inside page code.
+*/
 
 document
 .querySelectorAll(
-"[data-pd-speech-toggle]"
+SPEAKER_SELECTOR
 )
 .forEach(
-button=>bindButton(button)
+prepareExistingSpeaker
 );
 
-updateButtons();
+const elements =
+new Set();
+
+document
+.querySelectorAll(
+READABLE_SELECTOR
+)
+.forEach(
+function(element){
+
+elements.add(
+element
+);
+
+}
+);
+
+
+/*
+Top-level section receives its own speaker only if
+it is genuinely one topic.
+
+If the section already contains another readable card
+or speaker, no extra section-level icon is created.
+
+This removes the two-speaker problem.
+*/
+
+document
+.querySelectorAll(
+SECTION_SELECTOR
+)
+.forEach(
+function(section){
+
+const nestedSpeaker =
+section.querySelector(
+SPEAKER_SELECTOR
+);
+
+const nestedReadable =
+Array.from(
+section.querySelectorAll(
+READABLE_SELECTOR
+)
+)
+.some(
+function(element){
+
+return element !==
+section;
+
+}
+);
+
+if(
+nestedSpeaker ||
+nestedReadable
+){
+
+return;
+}
+
+const text =
+getTextFromElement(
+section
+);
+
+if(
+text.length >=
+70
+){
+
+elements.add(
+section
+);
+
+}
+
+}
+);
+
+elements.forEach(
+function(element){
+
+createSpeakerForElement(
+element
+);
+
+}
+);
+
+cleanupDuplicateSpeakers();
+
+updateAllButtonLabels();
+
+}
+
+
+/* =========================================================
+ONE CENTRAL CLICK HANDLER
+========================================================= */
+
+/*
+Capture phase is intentional.
+
+Some old pages have their own previous narration click
+handlers. Those handlers were causing:
+
+1. speaker turns green
+2. one handler starts audio
+3. another handler immediately cancels it
+
+We intercept the speaker click before the old handler,
+so only this global narration engine runs.
+*/
+
+function handleSpeakerClick(
+event
+){
+
+const target =
+event.target;
+
+if(
+!target ||
+!target.closest
+){
+
+return;
+}
+
+const button =
+target.closest(
+SPEAKER_SELECTOR
+);
+
+if(!button){
+return;
+}
+
+event.preventDefault();
+
+event.stopPropagation();
+
+event.stopImmediatePropagation();
+
+prepareExistingSpeaker(
+button
+);
+
+const element =
+resolveTarget(
+button
+);
+
+if(!element){
+
+announce(
+getLabels().empty
+);
+
+return;
+}
+
+speakElement(
+element,
+button
+);
+
 }
 
 
@@ -2706,15 +3056,24 @@ LANGUAGE CHANGE
 function onLanguageChange(){
 
 if(speaking){
-stopSpeech(false);
+
+stopSpeech(
+false
+);
+
 }
 
-updateButtons();
+window.setTimeout(
+function(){
 
-setTimeout(
-installLocalSpeakers,
-120
+installLocalSpeakers();
+
+updateAllButtonLabels();
+
+},
+80
 );
+
 }
 
 
@@ -2724,27 +3083,37 @@ DYNAMIC CONTENT
 
 const observer =
 new MutationObserver(
-mutations=>{
+function(mutations){
 
 const changed =
 mutations.some(
-mutation=>
-mutation.type === "childList" &&
+function(mutation){
+
+return (
+mutation.type ===
+"childList" &&
 mutation.addedNodes.length
+);
+
+}
 );
 
 if(!changed){
 return;
 }
 
-clearTimeout(
-updateTimer
+window.clearTimeout(
+refreshTimer
 );
 
-updateTimer =
-setTimeout(
-installLocalSpeakers,
-180
+refreshTimer =
+window.setTimeout(
+function(){
+
+installLocalSpeakers();
+
+},
+150
 );
 
 }
@@ -2759,7 +3128,10 @@ window.PetsDogueNarration = {
 
 speakElement(element){
 
-if(typeof element === "string"){
+if(
+typeof element ===
+"string"
+){
 
 element =
 document.querySelector(
@@ -2772,19 +3144,23 @@ if(!element){
 return false;
 }
 
-createSpeaker(element);
-
-const button =
-Array.from(
-element.children
-)
-.find(
-child=>
-child.matches &&
-child.matches(
-"[data-pd-speech-toggle]"
-)
+createSpeakerForElement(
+element
 );
+
+let button =
+element.querySelector(
+":scope > [data-pd-speech-toggle]"
+);
+
+if(!button){
+
+button =
+findExistingSpeaker(
+element
+);
+
+}
 
 if(!button){
 return false;
@@ -2796,6 +3172,7 @@ button
 );
 
 return true;
+
 },
 
 
@@ -2806,39 +3183,83 @@ return false;
 }
 
 if(
-!("speechSynthesis" in window)
+!(
+"speechSynthesis" in window
+)
 ){
+
+announce(
+getLabels().unsupported
+);
+
 return false;
 }
 
-stopSpeech(false);
+stopSpeech(
+false
+);
 
 speechQueue =
 buildSpeechQueue(
 text
 );
 
-if(!speechQueue.length){
+if(
+!speechQueue.length
+){
+
 return false;
 }
 
-speechIndex = 0;
-stopped = false;
-speaking = true;
-activeButton = null;
+speechIndex =
+0;
 
-setTimeout(
-speakNext,
-70
+stopped =
+false;
+
+speaking =
+true;
+
+activeButton =
+null;
+
+activeElement =
+null;
+
+announce(
+getLabels().reading
+);
+
+startTimer =
+window.setTimeout(
+function(){
+
+startTimer =
+null;
+
+try{
+
+window.speechSynthesis.resume();
+
+}catch(error){
+}
+
+speakNext();
+
+},
+90
 );
 
 return true;
+
 },
 
 
 stop(){
 
-stopSpeech(true);
+stopSpeech(
+true
+);
 
 },
 
@@ -2863,6 +3284,12 @@ installLocalSpeakers();
 EVENTS
 ========================================================= */
 
+document.addEventListener(
+"click",
+handleSpeakerClick,
+true
+);
+
 window.addEventListener(
 "petsdogue:languagechange",
 onLanguageChange
@@ -2875,10 +3302,15 @@ onLanguageChange
 
 window.addEventListener(
 "storage",
-event=>{
+function(event){
 
-if(event.key === LANGUAGE_KEY){
+if(
+event.key ===
+LANGUAGE_KEY
+){
+
 onLanguageChange();
+
 }
 
 }
@@ -2886,13 +3318,17 @@ onLanguageChange();
 
 document.addEventListener(
 "visibilitychange",
-()=>{
+function(){
 
 if(
 document.hidden &&
 speaking
 ){
-stopSpeech(false);
+
+stopSpeech(
+false
+);
+
 }
 
 }
@@ -2900,12 +3336,18 @@ stopSpeech(false);
 
 window.addEventListener(
 "beforeunload",
-()=>stopSpeech(false)
+function(){
+
+stopSpeech(
+false
+);
+
+}
 );
 
 
 /* =========================================================
-INITIALISE
+INIT
 ========================================================= */
 
 function init(){
@@ -2914,14 +3356,32 @@ addStyles();
 
 ensureLiveRegion();
 
-/*
-Remove duplicates left by the previous version
-before rebuilding the speakers.
-*/
-
-cleanOldGeneratedSpeakers();
-
 installLocalSpeakers();
+
+if(
+"speechSynthesis" in window
+){
+
+try{
+
+window.speechSynthesis.getVoices();
+
+window.speechSynthesis.addEventListener(
+"voiceschanged",
+function(){
+
+updateAllButtonLabels();
+
+},
+{
+once:true
+}
+);
+
+}catch(error){
+}
+
+}
 
 if(document.body){
 
@@ -2939,7 +3399,8 @@ subtree:true
 
 
 if(
-document.readyState === "loading"
+document.readyState ===
+"loading"
 ){
 
 document.addEventListener(
