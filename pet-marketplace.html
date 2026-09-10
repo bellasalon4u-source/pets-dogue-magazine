@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 
@@ -8,9 +8,7 @@ name="viewport"
 content="width=device-width,initial-scale=1,viewport-fit=cover"
 >
 
-<title>
-Pet Marketplace, Rehoming &amp; Services | PETS &amp; DOGUE
-</title>
+<title>Pet Marketplace, Rehoming &amp; Services | PETS &amp; DOGUE</title>
 
 <meta
 id="pageDescription"
@@ -28,50 +26,21 @@ name="googlebot"
 content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
 >
 
-<meta
-name="author"
-content="PETS & DOGUE"
->
-
-<meta
-name="application-name"
-content="PETS & DOGUE"
->
-
-<meta
-name="theme-color"
-content="#070707"
->
-
-<meta
-name="color-scheme"
-content="light"
->
+<meta name="author" content="PETS & DOGUE">
+<meta name="application-name" content="PETS & DOGUE">
+<meta name="theme-color" content="#070707">
+<meta name="color-scheme" content="light">
 
 <link
 rel="canonical"
 href="https://www.petsanddogue.com/pet-marketplace.html"
 >
 
-<link
-rel="preconnect"
-href="https://images.unsplash.com"
->
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="dns-prefetch" href="//images.unsplash.com">
 
-<link
-rel="dns-prefetch"
-href="//images.unsplash.com"
->
-
-<meta
-property="og:type"
-content="website"
->
-
-<meta
-property="og:site_name"
-content="PETS & DOGUE"
->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PETS & DOGUE">
 
 <meta
 id="ogTitle"
@@ -106,10 +75,7 @@ property="og:locale"
 content="en_GB"
 >
 
-<meta
-name="twitter:card"
-content="summary_large_image"
->
+<meta name="twitter:card" content="summary_large_image">
 
 <meta
 id="twitterTitle"
@@ -284,77 +250,87 @@ display:none!important
 
 
 /* =========================================================
-HEADER
+GLOBAL HEADER
 ========================================================= */
 
 .site-header{
 position:sticky;
 top:0;
-z-index:1800;
+z-index:5000;
 width:100%;
-max-width:100vw;
-overflow:hidden;
 background:#050505;
 color:#fff;
-border-bottom:1px solid #272727
+border-bottom:1px solid #292929;
+transform:translateY(0);
+transition:transform .20s ease;
+will-change:transform
+}
+
+.site-header.shell-hidden{
+transform:translateY(-105%)
 }
 
 .header-main{
-height:108px;
-width:100%;
-max-width:1550px;
-margin:auto;
-padding:0 18px;
+height:68px;
 display:grid;
-grid-template-columns:80px minmax(0,1fr) 80px;
-align-items:center
+grid-template-columns:58px minmax(0,1fr) 58px;
+align-items:center;
+padding:0 10px;
+border-bottom:1px solid #272727
 }
 
-.icon-btn{
-width:50px;
-height:50px;
+.header-menu{
+width:48px;
+height:48px;
 border:0;
 background:transparent;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%
-}
-
-.menu-lines{
-width:30px;
 display:grid;
-gap:6px
+align-content:center;
+gap:6px;
+padding:8px
 }
 
-.menu-lines span{
+.header-menu span{
 display:block;
-height:2px;
+height:3px;
 background:#fff;
 border-radius:999px
 }
 
 .brand{
-min-width:0;
+justify-self:center;
 text-align:center;
-line-height:.88
+font-family:var(--serif);
+line-height:.85;
+color:var(--gold)
 }
 
-.brand-small{
-font:14px Georgia,serif;
-letter-spacing:1.5px;
-color:var(--gold-light)
+.brand small{
+display:block;
+font-size:10px;
+letter-spacing:3px;
+font-weight:400
 }
 
-.brand-big{
-font:normal 58px Georgia,serif;
-letter-spacing:4px
+.brand strong{
+display:block;
+font-size:35px;
+font-weight:400;
+letter-spacing:3px;
+margin-top:5px
+}
+
+.header-home{
+justify-self:end;
+width:48px;
+height:48px;
+display:grid;
+place-items:center
 }
 
 .home-svg{
-width:30px;
-height:30px;
+width:32px;
+height:32px;
 fill:none;
 stroke:#fff;
 stroke-width:2
@@ -362,133 +338,217 @@ stroke-width:2
 
 
 /* =========================================================
-NAV
+TOP SERVICE NAVIGATION
 ========================================================= */
 
-.nav-strip{
-width:100%;
-max-width:100%;
-display:flex;
-gap:30px;
-overflow-x:auto;
-overflow-y:hidden;
-padding:16px 24px;
-border-top:1px solid #292929;
-border-bottom:1px solid #303030;
-scrollbar-width:none;
-scroll-behavior:smooth;
--webkit-overflow-scrolling:touch
+.service-nav{
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+height:112px;
+border-bottom:1px solid #2b2b2b
 }
 
-.nav-strip::-webkit-scrollbar{
-display:none
-}
-
-.nav-strip a{
+.service-nav a{
 position:relative;
-flex:none;
-white-space:nowrap;
-font-size:14px;
-font-weight:bold;
-letter-spacing:.7px;
-padding-bottom:7px;
-text-transform:uppercase
+min-width:0;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:7px;
+padding:8px 4px;
+border-right:1px solid #2a2a2a;
+text-align:center;
+font-size:11px;
+font-weight:900;
+line-height:1.08;
+text-transform:uppercase;
+overflow-wrap:anywhere
 }
 
-.nav-strip a.active{
+.service-nav a:last-child{
+border-right:0
+}
+
+.service-nav a.active{
 color:var(--gold-light)
 }
 
-.nav-strip a.active:after{
+.service-nav a.active:after{
 content:"";
 position:absolute;
-left:0;
-right:0;
+left:14%;
+right:14%;
 bottom:0;
-height:2px;
+height:3px;
 background:linear-gradient(
 90deg,
-#8d6716,
-#f3d77a,
-#9f761c
+#8f6417,
+#f1d477,
+#8f6417
 )
+}
+
+.service-icon{
+height:31px;
+display:grid;
+place-items:center;
+font-size:28px;
+line-height:1;
+color:var(--gold-light)
 }
 
 
 /* =========================================================
-SIDE MENU
+EDITORIAL NAVIGATION
+========================================================= */
+
+.editorial-nav{
+height:100px;
+display:flex;
+overflow-x:auto;
+overflow-y:hidden;
+scrollbar-width:none;
+-webkit-overflow-scrolling:touch;
+border-bottom:1px solid #2a2a2a
+}
+
+.editorial-nav::-webkit-scrollbar{
+display:none
+}
+
+.editorial-nav a{
+position:relative;
+flex:0 0 118px;
+min-width:118px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:7px;
+padding:7px 5px;
+border-right:1px solid #2b2b2b;
+font-size:10px;
+font-weight:900;
+line-height:1.08;
+text-align:center;
+text-transform:uppercase
+}
+
+.editorial-nav a.active{
+color:var(--gold-light)
+}
+
+.editorial-nav a.active:after{
+content:"";
+position:absolute;
+left:14px;
+right:14px;
+bottom:0;
+height:3px;
+background:linear-gradient(
+90deg,
+#8f6417,
+#f1d477,
+#8f6417
+)
+}
+
+.editorial-icon{
+font-size:24px;
+line-height:1;
+color:#fff
+}
+
+.editorial-nav a.active .editorial-icon{
+color:var(--gold-light)
+}
+
+
+/* =========================================================
+GLOBAL SIDE MENU
 ========================================================= */
 
 .menu-overlay{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.74);
-display:none;
-z-index:2500
+z-index:9000;
+background:rgba(0,0,0,.76);
+opacity:0;
+visibility:hidden;
+transition:.22s ease
 }
 
 .menu-overlay.show{
-display:block
+opacity:1;
+visibility:visible
 }
 
 .side-menu{
 position:fixed;
 top:0;
-left:-100%;
-width:min(430px,94%);
-max-width:94vw;
-height:100vh;
-background:#fff;
+bottom:0;
+left:0;
+z-index:9100;
+width:min(82vw,380px);
+min-width:286px;
+background:#f8f5ee;
 color:#111;
-z-index:2600;
 overflow-y:auto;
 overflow-x:hidden;
-transition:.35s;
-border-right:2px solid #111
+transform:translateX(-103%);
+transition:transform .24s ease
 }
 
 .side-menu.open{
-left:0
+transform:translateX(0)
 }
 
 .side-menu-header{
-background:#111;
+position:sticky;
+top:0;
+z-index:4;
+height:76px;
+background:#080808;
 color:#fff;
-padding:24px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-position:sticky;
-top:0;
-z-index:3
+padding:12px 16px
 }
 
 .side-menu-header h2{
-font:normal 32px Georgia,serif
+font:400 29px/1 var(--serif)
 }
 
-.side-menu-header button{
-width:43px;
-height:43px;
+.side-menu-close{
+width:45px;
+height:45px;
 border:0;
-background:#fff;
 border-radius:50%;
-font-size:24px
+background:#fff;
+color:#111;
+font-size:30px;
+line-height:1
 }
 
 .menu-account{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:10px;
-padding:18px 18px 12px
+gap:8px;
+padding:13px 13px 8px
 }
 
 .menu-account a{
-padding:12px;
-text-align:center;
+height:42px;
+display:flex;
+align-items:center;
+justify-content:center;
 border:2px solid #111;
 border-radius:999px;
-font-weight:bold
+font-size:11px;
+font-weight:900;
+text-align:center
 }
 
 .menu-account a:last-child{
@@ -497,81 +557,101 @@ border-color:var(--green)
 }
 
 .menu-language{
-padding:0 18px 18px;
-border-bottom:1px solid #ddd
+padding:5px 13px 12px
 }
 
-.menu-language span{
+.menu-language label{
 display:block;
-font-size:10px;
-font-weight:bold;
-letter-spacing:1.5px;
-color:#777;
-margin:5px 0 8px
+margin-bottom:6px;
+font-size:9px;
+font-weight:900;
+letter-spacing:1.4px;
+color:#777
 }
 
 .menu-language select{
 width:100%;
-height:48px;
+height:46px;
 border:2px solid #111;
 border-radius:999px;
-background:#faf8f3;
-padding:0 15px
+background:#fff;
+padding:0 13px;
+font-size:13px;
+font-weight:800;
+outline:0
 }
 
 .menu-list{
-padding:18px;
 display:grid;
-gap:10px
+gap:7px;
+padding:0 13px 18px
 }
 
 .menu-item{
 min-width:0;
+min-height:76px;
 display:grid;
-grid-template-columns:82px minmax(0,1fr);
+grid-template-columns:72px minmax(0,1fr);
 align-items:center;
-gap:14px;
+gap:11px;
 border:2px solid #111;
-background:#faf8f3;
-border-radius:18px;
+border-radius:15px;
+background:#fff;
 overflow:hidden
 }
 
+.menu-item.active{
+background:#111;
+color:#fff
+}
+
 .menu-item img{
-width:82px;
-height:82px;
+width:72px;
+height:72px;
 object-fit:cover
 }
 
-.menu-item h3{
-font:21px Georgia,serif;
-margin-bottom:4px
+.menu-item-copy{
+min-width:0;
+padding:7px 8px 7px 0
 }
 
-.menu-item p{
-min-width:0;
-font-size:12px;
-line-height:1.45;
-color:#666;
-padding-right:9px;
+.menu-item h3{
+font:400 18px/1.05 var(--serif);
 overflow-wrap:anywhere
 }
 
+.menu-item.active h3{
+color:var(--gold-light)
+}
+
+.menu-item p{
+margin-top:4px;
+font-size:9px;
+line-height:1.28;
+color:#6d6d6d;
+overflow-wrap:anywhere
+}
+
+.menu-item.active p{
+color:#d6d6d6
+}
+
 .menu-bottom{
-padding:18px;
-background:#f4f0e7;
-border-top:1px solid #ddd
+padding:13px 15px 23px;
+border-top:1px solid #d9d2c6;
+background:#f2ede3
 }
 
 .menu-bottom div{
 display:flex;
 flex-wrap:wrap;
-gap:13px 20px
+gap:12px 17px
 }
 
 .menu-bottom a{
-font-size:12px;
-font-weight:bold;
+font-size:11px;
+font-weight:800;
 color:#666
 }
 
@@ -949,10 +1029,6 @@ margin-top:10px;
 padding:10px 14px;
 box-shadow:0 8px 19px rgba(174,130,31,.18);
 text-align:center
-}
-
-.market-post-main:hover{
-filter:brightness(1.03)
 }
 
 .post-plus{
@@ -1414,7 +1490,7 @@ MODALS
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.72);
-z-index:3000;
+z-index:10000;
 display:none;
 align-items:flex-end;
 justify-content:center
@@ -1579,19 +1655,16 @@ RTL
 
 html[dir="rtl"] .side-menu{
 left:auto;
-right:-100%;
-border-right:0;
-border-left:2px solid #111
+right:0;
+transform:translateX(103%)
 }
 
 html[dir="rtl"] .side-menu.open{
-right:0;
-left:auto
+transform:translateX(0)
 }
 
-html[dir="rtl"] .menu-item p{
-padding-right:0;
-padding-left:9px
+html[dir="rtl"] .menu-item-copy{
+padding:7px 0 7px 8px
 }
 
 html[dir="rtl"] .location-main,
@@ -1639,47 +1712,43 @@ text-align:right
 
 
 /* =========================================================
-TABLET / MOBILE
+MOBILE
 ========================================================= */
 
 @media(max-width:720px){
 
 .header-main{
-height:87px;
-grid-template-columns:55px minmax(0,1fr) 55px;
-padding:0 8px
+height:68px
 }
 
-.icon-btn{
-width:48px;
-height:48px
+.brand strong{
+font-size:34px
 }
 
-.brand-big{
-font-size:39px;
-letter-spacing:2px
+.brand small{
+font-size:9px
 }
 
-.brand-small{
-font-size:11px
+.service-nav{
+height:112px
 }
 
-.menu-lines{
-width:30px
+.service-nav a{
+font-size:10px
 }
 
-.home-svg{
-width:30px;
-height:30px
+.service-icon{
+font-size:27px
 }
 
-.nav-strip{
-padding:14px 15px;
-gap:22px
+.editorial-nav{
+height:100px
 }
 
-.nav-strip a{
-font-size:12px
+.editorial-nav a{
+flex-basis:118px;
+min-width:118px;
+font-size:10px
 }
 
 .market-shell{
@@ -1816,10 +1885,7 @@ gap:4px
 grid-row:1/3
 }
 
-.browse-card:nth-child(4){
-grid-column:1/3
-}
-
+.browse-card:nth-child(4),
 .browse-card:nth-child(5){
 grid-column:1/3
 }
@@ -1838,14 +1904,6 @@ letter-spacing:1.4px
 .browse-copy h3{
 font-size:23px;
 line-height:1.02
-}
-
-.listings-head{
-align-items:flex-end
-}
-
-.listing-count{
-font-size:12px
 }
 
 .listings{
@@ -1995,17 +2053,17 @@ font-size:11px
 font-size:12px
 }
 
+.side-menu{
+width:min(82vw,355px)
+}
+
 }
 
 
 @media(max-width:410px){
 
-.brand-big{
-font-size:34px
-}
-
-.brand-small{
-font-size:10px
+.brand strong{
+font-size:31px
 }
 
 .market-title{
@@ -2038,17 +2096,17 @@ margin-left:0;
 justify-content:flex-end
 }
 
+.service-nav a{
+font-size:9.5px
+}
+
 }
 
 
 @media(max-width:360px){
 
-.header-main{
-grid-template-columns:50px minmax(0,1fr) 50px
-}
-
-.brand-big{
-font-size:31px
+.brand strong{
+font-size:29px
 }
 
 .market-title{
@@ -2068,17 +2126,29 @@ font-size:12px;
 padding:9px 13px
 }
 
+.service-nav a{
+font-size:9px
+}
+
+.editorial-nav a{
+min-width:108px;
+flex-basis:108px
+}
+
 }
 
 
 @media(prefers-reduced-motion:reduce){
 
-.browse-card img{
-transition:none
+*{
+scroll-behavior:auto!important
 }
 
-.side-menu{
-transition:none
+.site-header,
+.side-menu,
+.menu-overlay,
+.browse-card img{
+transition:none!important
 }
 
 }
@@ -2101,16 +2171,18 @@ outline-offset:3px
 
 <body>
 
+
 <div
 class="menu-overlay"
 id="menuOverlay"
-onclick="closeMenu()">
-</div>
+></div>
+
 
 <aside
 class="side-menu"
 id="sideMenu"
-aria-hidden="true">
+aria-hidden="true"
+>
 
 <div class="side-menu-header">
 
@@ -2119,290 +2191,448 @@ Contents
 </h2>
 
 <button
+class="side-menu-close"
+id="closeMenu"
 type="button"
-onclick="closeMenu()"
-aria-label="Close menu">
+aria-label="Close menu"
+>
 ×
 </button>
 
 </div>
 
+
 <div class="menu-account">
 
 <a
 href="account.html"
-data-i18n="common.menu.signIn">
+data-i18n="common.menu.signIn"
+>
 Sign In
 </a>
 
 <a
 href="club.html"
-data-i18n="common.menu.joinClub">
+data-i18n="common.menu.joinClub"
+>
 Join Club
 </a>
 
 </div>
 
+
 <div class="menu-language">
 
-<span
-class="notranslate"
-translate="no">
-LANGUAGE
-</span>
+<label
+for="languageSelect"
+data-i18n="common.menu.language"
+>
+Language
+</label>
 
 <select
 id="languageSelect"
-aria-label="Language">
+aria-label="Language"
+>
 
-<option value="en">EN — English</option>
-<option value="uk">UA — Українська</option>
-<option value="ru">RU — Русский</option>
-<option value="fr">FR — Français</option>
-<option value="de">DE — Deutsch</option>
-<option value="es">ES — Español</option>
-<option value="it">IT — Italiano</option>
-<option value="pt">PT — Português</option>
-<option value="nl">NL — Nederlands</option>
-<option value="pl">PL — Polski</option>
-<option value="cs">CZ — Čeština</option>
-<option value="sk">SK — Slovenčina</option>
-<option value="hu">HU — Magyar</option>
-<option value="ro">RO — Română</option>
-<option value="bg">BG — Български</option>
-<option value="el">GR — Ελληνικά</option>
-<option value="sv">SE — Svenska</option>
-<option value="da">DK — Dansk</option>
-<option value="no">NO — Norsk</option>
-<option value="fi">FI — Suomi</option>
-<option value="tr">TR — Türkçe</option>
-<option value="ar">AR — العربية</option>
-<option value="hi">HI — हिन्दी</option>
+<option value="en">🇬🇧 EN — English</option>
+<option value="uk">🇺🇦 UA — Українська</option>
+<option value="ru">🇷🇺 RU — Русский</option>
+<option value="fr">🇫🇷 FR — Français</option>
+<option value="de">🇩🇪 DE — Deutsch</option>
+<option value="es">🇪🇸 ES — Español</option>
+<option value="it">🇮🇹 IT — Italiano</option>
+<option value="pt">🇵🇹 PT — Português</option>
+<option value="nl">🇳🇱 NL — Nederlands</option>
+<option value="pl">🇵🇱 PL — Polski</option>
+<option value="cs">🇨🇿 CZ — Čeština</option>
+<option value="sk">🇸🇰 SK — Slovenčina</option>
+<option value="hu">🇭🇺 HU — Magyar</option>
+<option value="ro">🇷🇴 RO — Română</option>
+<option value="bg">🇧🇬 BG — Български</option>
+<option value="el">🇬🇷 GR — Ελληνικά</option>
+<option value="sv">🇸🇪 SE — Svenska</option>
+<option value="da">🇩🇰 DK — Dansk</option>
+<option value="no">🇳🇴 NO — Norsk</option>
+<option value="fi">🇫🇮 FI — Suomi</option>
+<option value="tr">🇹🇷 TR — Türkçe</option>
+<option value="ar">🇸🇦 AR — العربية</option>
+<option value="hi">🇮🇳 HI — हिन्दी</option>
 
 </select>
 
 </div>
 
-<div class="menu-list">
 
-<a class="menu-item" href="issue-01.html">
+<nav
+class="menu-list"
+aria-label="PETS & DOGUE sections"
+>
+
+<a
+class="menu-item"
+href="issue-01.html"
+>
 
 <img
 src="file_00000000a9d471fda9b4629589be22a9.png"
 alt="PETS & DOGUE Edition 01"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 id="sideEditionLabel">Edition 01</h3>
-<p>PETS &amp; DOGUE</p>
+<div class="menu-item-copy">
+
+<h3 id="sideEditionLabel">
+Edition 01
+</h3>
+
+<p>
+PETS &amp; DOGUE
+</p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="members-gallery.html">
+
+<a
+class="menu-item"
+href="members-gallery.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
 alt="Cover Stars"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.menu.coverStar">Cover Star</h3>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.coverStar">
+Cover Stars
+</h3>
+
 <p data-i18n="common.menu.coverStarDescription">
 Enter your pet into the next cover competition.
 </p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="special-offers.html">
+
+<a
+class="menu-item"
+href="special-offers.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
-alt="Member discounts"
-loading="lazy">
+alt="Discounts"
+loading="lazy"
+>
 
-<div>
-<h3 id="sideDiscountsLabel">Discounts</h3>
-<p>PETS &amp; DOGUE CLUB</p>
+<div class="menu-item-copy">
+
+<h3 id="sideDiscountsLabel">
+Discounts
+</h3>
+
+<p>
+PETS &amp; DOGUE CLUB
+</p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="pet-friendly-places.html">
+
+<a
+class="menu-item"
+href="pet-friendly-places.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=500&q=80"
 alt="Pet-friendly places"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.menu.places">Places</h3>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.places">
+Pet-Friendly Places
+</h3>
+
 <p data-i18n="common.menu.placesDescription">
-Pet-friendly hotels, cafés and destinations.
+Pet-friendly cafés, hotels, parks and more.
 </p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="pet-marketplace.html">
+
+<a
+class="menu-item active"
+href="pet-marketplace.html"
+aria-current="page"
+>
 
 <img
 src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
 alt="Marketplace"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.navigation.marketplace">Marketplace</h3>
-<p>PETS &amp; DOGUE MARKETPLACE</p>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.navigation.marketplace">
+Marketplace
+</h3>
+
+<p>
+PETS &amp; DOGUE MARKETPLACE
+</p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="pet-fashion.html">
+
+<a
+class="menu-item"
+href="pet-fashion.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
 alt="Pet fashion"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.navigation.fashion">Fashion</h3>
-<p>PETS &amp; DOGUE EDIT</p>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.navigation.fashion">
+Fashion
+</h3>
+
+<p>
+PETS &amp; DOGUE EDIT
+</p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="wellness.html">
+
+<a
+class="menu-item"
+href="wellness.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80"
 alt="Pet health"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 id="sideHealthLabel">Health</h3>
+<div class="menu-item-copy">
+
+<h3 id="sideHealthLabel">
+Health
+</h3>
+
 <p data-i18n="common.menu.wellnessDescription">
 Care, grooming, health and everyday wellbeing.
 </p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="articles.html">
+
+<a
+class="menu-item"
+href="articles.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80"
 alt="Articles"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.menu.articles">Articles</h3>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.articles">
+Articles
+</h3>
+
 <p data-i18n="common.menu.articlesDescription">
-Read and listen to editorial stories.
+Editorial stories and practical guides.
 </p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="photos.html">
+
+<a
+class="menu-item"
+href="photos.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=500&q=80"
 alt="Pet photography"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.menu.photos">Photos</h3>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.photos">
+Photos
+</h3>
+
 <p data-i18n="common.menu.photosDescription">
 Portraits, galleries and visual stories.
 </p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="local-community.html">
+
+<a
+class="menu-item"
+href="local-community.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
-alt="Pet community"
-loading="lazy">
+alt="Community"
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.menu.community">Community</h3>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.community">
+Community
+</h3>
+
 <p data-i18n="common.menu.communityDescription">
-Local stories, recommendations and pet people.
+Pet people, recommendations and local stories.
 </p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="contests.html">
+
+<a
+class="menu-item"
+href="contests.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=500&q=80"
-alt="Pet contests"
-loading="lazy">
+alt="Contests"
+loading="lazy"
+>
 
-<div>
-<h3 id="sideContestsLabel">Contests</h3>
-<p>PETS &amp; DOGUE COMMUNITY</p>
+<div class="menu-item-copy">
+
+<h3 id="sideContestsLabel">
+Contests
+</h3>
+
+<p>
+PETS &amp; DOGUE COMMUNITY
+</p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="pets-in-need.html">
+
+<a
+class="menu-item"
+href="pets-in-need.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=500&q=80"
-alt="Animals in need"
-loading="lazy">
+alt="Pets in need"
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.menu.rescue">Pets In Need</h3>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.rescue">
+Help
+</h3>
+
 <p data-i18n="common.menu.rescueDescription">
-Rescue, adoption and stories that need visibility.
+Rescue, adoption and animals that need visibility.
 </p>
+
 </div>
 
 </a>
 
-<a class="menu-item" href="partners.html">
+
+<a
+class="menu-item"
+href="partners.html"
+>
 
 <img
 src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80"
 alt="Partners"
-loading="lazy">
+loading="lazy"
+>
 
-<div>
-<h3 data-i18n="common.menu.partners">Partners</h3>
+<div class="menu-item-copy">
+
+<h3 data-i18n="common.menu.partners">
+Partners
+</h3>
+
 <p data-i18n="common.menu.partnersDescription">
-Discover selected brands and member offers.
+Brands, businesses and member benefits.
 </p>
+
 </div>
 
 </a>
 
-</div>
+</nav>
+
 
 <div class="menu-bottom">
 
 <div>
 
-<a href="contact.html" data-i18n="common.footer.contact">
+<a
+href="contact.html"
+data-i18n="common.footer.contact"
+>
 Contact
 </a>
 
-<a href="privacy.html" data-i18n="common.footer.privacy">
+<a
+href="privacy.html"
+data-i18n="common.footer.privacy"
+>
 Privacy
 </a>
 
-<a href="terms.html" data-i18n="common.footer.terms">
+<a
+href="terms.html"
+data-i18n="common.footer.terms"
+>
 Terms
-</a>
-
-<a href="admin.html" data-i18n="common.footer.admin">
-Admin
 </a>
 
 </div>
@@ -2412,49 +2642,57 @@ Admin
 </aside>
 
 
-<header class="site-header">
+<header
+class="site-header"
+id="siteHeader"
+>
+
 
 <div class="header-main">
 
 <button
-class="icon-btn"
+class="header-menu"
+id="menuButton"
 type="button"
-onclick="openMenu()"
-aria-label="Open menu">
+aria-label="Open menu"
+>
 
-<span class="menu-lines">
 <span></span>
 <span></span>
 <span></span>
-</span>
 
 </button>
+
 
 <a
 class="brand notranslate"
 translate="no"
 href="index.html"
-aria-label="PETS & DOGUE home">
+aria-label="PETS & DOGUE home"
+>
 
-<div class="brand-small">
+<small>
 PETS &amp;
-</div>
+</small>
 
-<div class="brand-big">
+<strong>
 DOGUE
-</div>
+</strong>
 
 </a>
 
+
 <a
-class="icon-btn"
+class="header-home"
 href="index.html"
-aria-label="Home">
+aria-label="Home"
+>
 
 <svg
 class="home-svg"
 viewBox="0 0 24 24"
-aria-hidden="true">
+aria-hidden="true"
+>
 
 <path d="M3 10.5 12 3l9 7.5V21H3Z"></path>
 <path d="M9 21v-7h6v7"></path>
@@ -2465,89 +2703,211 @@ aria-hidden="true">
 
 </div>
 
+
 <nav
-class="nav-strip"
-id="categoryNav"
-aria-label="PETS & DOGUE sections">
-
-<a
-href="issue-01.html"
-id="editionNav">
-EDITION
-</a>
-
-<a
-href="members-gallery.html"
-data-i18n="common.navigation.coverStars">
-COVER STARS
-</a>
-
-<a
-href="special-offers.html"
-id="discountsNav">
-DISCOUNTS
-</a>
+class="service-nav"
+aria-label="PETS & DOGUE services"
+>
 
 <a
 href="pet-friendly-places.html"
-data-i18n="common.navigation.places">
-PET-FRIENDLY
+>
+
+<span
+class="service-icon"
+aria-hidden="true"
+>
+♧
+</span>
+
+<span data-i18n="common.navigation.places">
+Pet-Friendly Places
+</span>
+
 </a>
+
 
 <a
 class="active"
 href="pet-marketplace.html"
-data-i18n="common.navigation.marketplace"
-aria-current="page">
-MARKETPLACE
+aria-current="page"
+>
+
+<span
+class="service-icon"
+aria-hidden="true"
+>
+▱
+</span>
+
+<span data-i18n="common.navigation.marketplace">
+Marketplace
+</span>
+
 </a>
 
-<a
-href="pet-fashion.html"
-data-i18n="common.navigation.fashion">
-FASHION
-</a>
-
-<a
-href="wellness.html"
-id="healthNav">
-HEALTH
-</a>
-
-<a
-href="articles.html"
-data-i18n="common.navigation.articles">
-ARTICLES
-</a>
-
-<a
-href="photos.html"
-data-i18n="common.navigation.photos">
-PHOTOS
-</a>
 
 <a
 href="local-community.html"
-data-i18n="common.navigation.community">
-COMMUNITY
+>
+
+<span
+class="service-icon"
+aria-hidden="true"
+>
+◎
+</span>
+
+<span data-i18n="common.navigation.community">
+Community
+</span>
+
 </a>
 
-<a
-href="contests.html"
-data-i18n="common.navigation.contests">
-CONTESTS
-</a>
 
 <a
 href="pets-in-need.html"
-data-i18n="common.navigation.rescue">
-HELP
+>
+
+<span
+class="service-icon"
+aria-hidden="true"
+>
+♡
+</span>
+
+<span data-i18n="common.navigation.rescue">
+Help
+</span>
+
 </a>
+
+</nav>
+
+
+<nav
+class="editorial-nav"
+id="categoryNav"
+aria-label="PETS & DOGUE editorial sections"
+>
+
+<a
+href="issue-01.html"
+>
+
+<span class="editorial-icon">
+▭
+</span>
+
+<span id="editionNav">
+Edition
+</span>
+
+</a>
+
+
+<a
+href="members-gallery.html"
+>
+
+<span class="editorial-icon">
+☆
+</span>
+
+<span data-i18n="common.navigation.coverStars">
+Cover Stars
+</span>
+
+</a>
+
+
+<a
+href="articles.html"
+>
+
+<span class="editorial-icon">
+▤
+</span>
+
+<span data-i18n="common.navigation.articles">
+Articles
+</span>
+
+</a>
+
+
+<a
+href="photos.html"
+>
+
+<span class="editorial-icon">
+▣
+</span>
+
+<span data-i18n="common.navigation.photos">
+Photos
+</span>
+
+</a>
+
+
+<a
+href="pet-fashion.html"
+>
+
+<span class="editorial-icon">
+◇
+</span>
+
+<span data-i18n="common.navigation.fashion">
+Fashion
+</span>
+
+</a>
+
+
+<a
+href="wellness.html"
+>
+
+<span class="editorial-icon">
+♡
+</span>
+
+<span id="healthNav">
+Health
+</span>
+
+</a>
+
+
+<a
+href="contests.html"
+>
+
+<span class="editorial-icon">
+♛
+</span>
+
+<span id="contestsNav">
+Contests
+</span>
+
+</a>
+
 
 <a
 href="partners.html"
-data-i18n="common.navigation.partners">
-PARTNERS
+>
+
+<span class="editorial-icon">
+○
+</span>
+
+<span data-i18n="common.navigation.partners">
+Partners
+</span>
+
 </a>
 
 </nav>
@@ -2563,13 +2923,15 @@ PARTNERS
 
 <div
 class="eyebrow notranslate"
-translate="no">
+translate="no"
+>
 PETS &amp; DOGUE MARKETPLACE
 </div>
 
 <h1
 class="market-title"
-data-i18n="marketplace.page.heroTitle">
+data-i18n="marketplace.page.heroTitle"
+>
 Pet Marketplace
 </h1>
 
@@ -2579,7 +2941,8 @@ Pet Marketplace
 class="saved-link"
 id="savedLink"
 type="button"
-onclick="showSavedOnly()">
+onclick="showSavedOnly()"
+>
 
 ♡ <span id="savedText">Saved</span>
 
@@ -2598,20 +2961,23 @@ onclick="showSavedOnly()">
 id="currentLocationLabel"
 class="location-main"
 type="button"
-onclick="openLocationPanel()">
+onclick="openLocationPanel()"
+>
 Anywhere
 </button>
 
 <span
 id="distanceLabel"
-class="location-distance">
+class="location-distance"
+>
 </span>
 
 <button
 class="location-edit"
 type="button"
 onclick="openLocationPanel()"
-aria-label="Change location">
+aria-label="Change location"
+>
 ⌄
 </button>
 
@@ -2624,7 +2990,8 @@ aria-label="Change location">
 
 <div
 class="search-symbol"
-aria-hidden="true">
+aria-hidden="true"
+>
 ⌕
 </div>
 
@@ -2634,13 +3001,15 @@ type="search"
 placeholder="Search pets, breed, city or service..."
 data-i18n-attr="placeholder:marketplace.page.searchPlaceholder"
 autocomplete="off"
-oninput="applyFilters()">
+oninput="applyFilters()"
+>
 
 <button
 class="filter-toggle"
 type="button"
 onclick="openLocationPanel()"
-aria-label="Location filters">
+aria-label="Location filters"
+>
 
 <span></span>
 <span></span>
@@ -2653,7 +3022,8 @@ aria-label="Location filters">
 
 <div
 class="location-panel"
-id="locationPanel">
+id="locationPanel"
+>
 
 <div class="location-panel-head">
 
@@ -2663,13 +3033,15 @@ id="locationPanel">
 
 <div
 class="location-panel-current"
-id="locationPanelCurrent">
+id="locationPanelCurrent"
+>
 Anywhere
 </div>
 
 <div
 class="location-panel-distance"
-id="locationPanelDistance">
+id="locationPanelDistance"
+>
 </div>
 
 <div class="location-panel-actions">
@@ -2678,7 +3050,8 @@ id="locationPanelDistance">
 class="location-done"
 id="locationDone"
 type="button"
-onclick="closeLocationPanel()">
+onclick="closeLocationPanel()"
+>
 ✓ Done
 </button>
 
@@ -2686,7 +3059,8 @@ onclick="closeLocationPanel()">
 class="location-close"
 type="button"
 onclick="closeLocationPanel()"
-aria-label="Close">
+aria-label="Close"
+>
 ×
 </button>
 
@@ -2697,7 +3071,8 @@ aria-label="Close">
 <label
 class="location-label"
 id="locationChangeLabel"
-for="locationInput">
+for="locationInput"
+>
 Change location
 </label>
 
@@ -2709,9 +3084,14 @@ id="locationInput"
 type="text"
 placeholder="Search any city, region or country..."
 autocomplete="off"
-oninput="queueLocationSearch()">
+oninput="queueLocationSearch()"
+>
 
-<div class="location-results" id="locationResults"></div>
+<div
+class="location-results"
+id="locationResults"
+>
+</div>
 
 </div>
 
@@ -2719,13 +3099,15 @@ oninput="queueLocationSearch()">
 class="near-btn"
 id="nearBtn"
 type="button"
-onclick="useMyLocation()">
+onclick="useMyLocation()"
+>
 ◎ Near me
 </button>
 
 <div
 class="radius-box"
-id="radiusBox">
+id="radiusBox"
+>
 
 <div class="radius-row">
 
@@ -2746,7 +3128,8 @@ min="1"
 max="500"
 step="1"
 value="25"
-oninput="updateRadius()">
+oninput="updateRadius()"
+>
 
 </div>
 
@@ -2758,7 +3141,8 @@ oninput="updateRadius()">
 <button
 class="market-post-main"
 type="button"
-onclick="openPublish()">
+onclick="openPublish()"
+>
 
 <span class="post-plus">
 ＋
@@ -2781,7 +3165,8 @@ Publish A Listing
 class="quick active"
 data-filter="all"
 onclick="setQuickFilter(this,'all')"
-data-i18n="marketplace.page.all">
+data-i18n="marketplace.page.all"
+>
 All
 </button>
 
@@ -2789,7 +3174,8 @@ All
 class="quick"
 id="filterSale"
 data-filter="sale"
-onclick="setQuickFilter(this,'sale')">
+onclick="setQuickFilter(this,'sale')"
+>
 For sale
 </button>
 
@@ -2797,7 +3183,8 @@ For sale
 class="quick"
 id="filterFree"
 data-filter="free"
-onclick="setQuickFilter(this,'free')">
+onclick="setQuickFilter(this,'free')"
+>
 Free / Rehome
 </button>
 
@@ -2805,7 +3192,8 @@ Free / Rehome
 class="quick"
 data-filter="service"
 onclick="setQuickFilter(this,'service')"
-data-i18n="marketplace.page.accessoriesServices">
+data-i18n="marketplace.page.accessoriesServices"
+>
 Accessories &amp; Services
 </button>
 
@@ -2816,7 +3204,8 @@ Accessories &amp; Services
 
 <h2
 class="section-title"
-id="browseHeading">
+id="browseHeading"
+>
 Browse
 </h2>
 
@@ -2824,7 +3213,8 @@ Browse
 class="view-all"
 id="viewAllButton"
 type="button"
-onclick="setBrowse('all')">
+onclick="setBrowse('all')"
+>
 View all
 </button>
 
@@ -2833,18 +3223,21 @@ View all
 
 <section
 class="browse-grid"
-aria-label="Marketplace categories">
+aria-label="Marketplace categories"
+>
 
 <button
 class="browse-card"
 type="button"
-onclick="setBrowse('dogs')">
+onclick="setBrowse('dogs')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1000&q=85"
 alt="Dogs"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <span class="browse-shade"></span>
 
@@ -2866,13 +3259,15 @@ Dog
 <button
 class="browse-card"
 type="button"
-onclick="setBrowse('cats')">
+onclick="setBrowse('cats')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=85"
 alt="Cats"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <span class="browse-shade"></span>
 
@@ -2894,13 +3289,15 @@ Cat
 <button
 class="browse-card"
 type="button"
-onclick="setBrowse('puppies')">
+onclick="setBrowse('puppies')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=85"
 alt="Puppies and kittens"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <span class="browse-shade"></span>
 
@@ -2922,13 +3319,15 @@ Puppies &amp; Kittens
 <button
 class="browse-card"
 type="button"
-onclick="setBrowse('rehome')">
+onclick="setBrowse('rehome')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=85"
 alt="Responsible pet rehoming"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <span class="browse-shade"></span>
 
@@ -2950,13 +3349,15 @@ Find A Home
 <button
 class="browse-card"
 type="button"
-onclick="setBrowse('services')">
+onclick="setBrowse('services')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1000&q=85"
 alt="Pet services and accessories"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <span class="browse-shade"></span>
 
@@ -2983,13 +3384,15 @@ Accessories &amp; Services
 
 <div
 class="eyebrow"
-id="discoverLabel">
+id="discoverLabel"
+>
 DISCOVER
 </div>
 
 <h2
 class="section-title"
-data-i18n="marketplace.page.listingsTitle">
+data-i18n="marketplace.page.listingsTitle"
+>
 Marketplace Listings
 </h2>
 
@@ -2997,7 +3400,8 @@ Marketplace Listings
 
 <span
 class="listing-count"
-id="listingCount">
+id="listingCount"
+>
 </span>
 
 </div>
@@ -3006,7 +3410,8 @@ id="listingCount">
 <section
 class="listings"
 id="listingGrid"
-aria-label="Marketplace listings">
+aria-label="Marketplace listings"
+>
 
 
 <article
@@ -3016,23 +3421,27 @@ data-type="sale"
 data-animal="dogs"
 data-lat="51.5074"
 data-lng="-0.1278"
-data-search="milo pomeranian dog london sale">
+data-search="milo pomeranian dog london sale"
+>
 
 <div
 class="listing-photo"
-onclick="openDetails('milo-01')">
+onclick="openDetails('milo-01')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?auto=format&fit=crop&w=1000&q=85"
 alt="Pomeranian dog Milo"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <button
 class="heart"
 type="button"
 onclick="toggleSaved(event,'milo-01',this)"
-aria-label="Save">
+aria-label="Save"
+>
 ♡
 </button>
 
@@ -3042,7 +3451,8 @@ aria-label="Save">
 
 <span
 class="tag"
-data-listing-tag="sale">
+data-listing-tag="sale"
+>
 FOR SALE
 </span>
 
@@ -3066,7 +3476,8 @@ Pomeranian · 2 years
 class="contact-small"
 type="button"
 onclick="openDetails('milo-01')"
-data-i18n="marketplace.page.contactOwner">
+data-i18n="marketplace.page.contactOwner"
+>
 Contact Owner
 </button>
 
@@ -3082,23 +3493,27 @@ data-type="free"
 data-animal="cats"
 data-lat="51.4545"
 data-lng="-2.5879"
-data-search="luna british shorthair cat bristol free rehome">
+data-search="luna british shorthair cat bristol free rehome"
+>
 
 <div
 class="listing-photo"
-onclick="openDetails('cat-01')">
+onclick="openDetails('cat-01')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=1000&q=85"
 alt="British Shorthair cat Luna"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <button
 class="heart"
 type="button"
 onclick="toggleSaved(event,'cat-01',this)"
-aria-label="Save">
+aria-label="Save"
+>
 ♡
 </button>
 
@@ -3108,7 +3523,8 @@ FREE
 
 <span
 class="tag"
-data-listing-tag="free">
+data-listing-tag="free"
+>
 REHOME
 </span>
 
@@ -3132,7 +3548,8 @@ British Shorthair · Female
 class="contact-small"
 type="button"
 onclick="openDetails('cat-01')"
-data-i18n="marketplace.page.contactOwner">
+data-i18n="marketplace.page.contactOwner"
+>
 Contact Owner
 </button>
 
@@ -3148,23 +3565,27 @@ data-type="sale"
 data-animal="puppies"
 data-lat="53.4808"
 data-lng="-2.2426"
-data-search="teddy cockapoo puppy manchester sale">
+data-search="teddy cockapoo puppy manchester sale"
+>
 
 <div
 class="listing-photo"
-onclick="openDetails('puppy-01')">
+onclick="openDetails('puppy-01')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1000&q=85"
 alt="Cockapoo puppy Teddy"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <button
 class="heart"
 type="button"
 onclick="toggleSaved(event,'puppy-01',this)"
-aria-label="Save">
+aria-label="Save"
+>
 ♡
 </button>
 
@@ -3174,7 +3595,8 @@ aria-label="Save">
 
 <span
 class="tag"
-data-listing-tag="sale">
+data-listing-tag="sale"
+>
 FOR SALE
 </span>
 
@@ -3198,7 +3620,8 @@ Cockapoo · 12 weeks
 class="contact-small"
 type="button"
 onclick="openDetails('puppy-01')"
-data-i18n="marketplace.page.contactOwner">
+data-i18n="marketplace.page.contactOwner"
+>
 Contact Owner
 </button>
 
@@ -3214,23 +3637,27 @@ data-type="service"
 data-animal="services"
 data-lat="51.5413"
 data-lng="-0.1420"
-data-search="pet grooming studio styling london service">
+data-search="pet grooming studio styling london service"
+>
 
 <div
 class="listing-photo"
-onclick="openDetails('groom-01')">
+onclick="openDetails('groom-01')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1000&q=85"
 alt="Pet grooming service"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <button
 class="heart"
 type="button"
 onclick="toggleSaved(event,'groom-01',this)"
-aria-label="Save">
+aria-label="Save"
+>
 ♡
 </button>
 
@@ -3240,7 +3667,8 @@ FROM £35
 
 <span
 class="tag"
-data-listing-tag="service">
+data-listing-tag="service"
+>
 SERVICE
 </span>
 
@@ -3264,7 +3692,8 @@ Grooming &amp; styling
 class="contact-small"
 type="button"
 onclick="openDetails('groom-01')"
-data-i18n="marketplace.page.contactSeller">
+data-i18n="marketplace.page.contactSeller"
+>
 Contact Seller
 </button>
 
@@ -3280,23 +3709,27 @@ data-type="free"
 data-animal="other"
 data-lat="50.8225"
 data-lng="-0.1372"
-data-search="snow rabbit brighton free rehome">
+data-search="snow rabbit brighton free rehome"
+>
 
 <div
 class="listing-photo"
-onclick="openDetails('rabbit-01')">
+onclick="openDetails('rabbit-01')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=1000&q=85"
 alt="Rabbit Snow"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <button
 class="heart"
 type="button"
 onclick="toggleSaved(event,'rabbit-01',this)"
-aria-label="Save">
+aria-label="Save"
+>
 ♡
 </button>
 
@@ -3306,7 +3739,8 @@ FREE
 
 <span
 class="tag"
-data-listing-tag="free">
+data-listing-tag="free"
+>
 REHOME
 </span>
 
@@ -3330,7 +3764,8 @@ Rabbit · 1 year
 class="contact-small"
 type="button"
 onclick="openDetails('rabbit-01')"
-data-i18n="marketplace.page.contactOwner">
+data-i18n="marketplace.page.contactOwner"
+>
 Contact Owner
 </button>
 
@@ -3346,23 +3781,27 @@ data-type="service"
 data-animal="services"
 data-lat="51.5155"
 data-lng="-0.0922"
-data-search="pet portrait studio photography london service">
+data-search="pet portrait studio photography london service"
+>
 
 <div
 class="listing-photo"
-onclick="openDetails('photo-01')">
+onclick="openDetails('photo-01')"
+>
 
 <img
 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1000&q=85"
 alt="Pet portrait photography service"
 loading="lazy"
-decoding="async">
+decoding="async"
+>
 
 <button
 class="heart"
 type="button"
 onclick="toggleSaved(event,'photo-01',this)"
-aria-label="Save">
+aria-label="Save"
+>
 ♡
 </button>
 
@@ -3372,7 +3811,8 @@ FROM £60
 
 <span
 class="tag"
-data-listing-tag="service">
+data-listing-tag="service"
+>
 SERVICE
 </span>
 
@@ -3396,7 +3836,8 @@ Photography
 class="contact-small"
 type="button"
 onclick="openDetails('photo-01')"
-data-i18n="marketplace.page.contactSeller">
+data-i18n="marketplace.page.contactSeller"
+>
 Contact Seller
 </button>
 
@@ -3410,7 +3851,8 @@ Contact Seller
 <div
 class="empty-market"
 id="emptyMarket"
-hidden>
+hidden
+>
 
 <h3 id="emptyTitle">
 No listings found
@@ -3436,7 +3878,8 @@ Members Can Publish
 <button
 class="publish-main-btn"
 type="button"
-onclick="openPublish()">
+onclick="openPublish()"
+>
 
 ＋
 <span data-i18n="marketplace.page.publishTitle">
@@ -3455,19 +3898,22 @@ Publish A Listing
 
 <h2
 class="notranslate"
-translate="no">
+translate="no"
+>
 PETS &amp; DOGUE
 </h2>
 
 <div
 class="footer-platform notranslate"
-translate="no">
+translate="no"
+>
 Digital lifestyle platform
 </div>
 
 <div
 class="footer-slogan notranslate"
-translate="no">
+translate="no"
+>
 One world. Every pet.
 </div>
 
@@ -3475,27 +3921,36 @@ One world. Every pet.
 
 <a
 href="index.html"
-data-i18n="common.footer.home">
+data-i18n="common.footer.home"
+>
 Home
 </a>
 
-<a href="issue-01.html" id="footerEditionLabel">
+<a
+href="issue-01.html"
+id="footerEditionLabel"
+>
 Edition
 </a>
 
 <a
 href="members-gallery.html"
-data-i18n="common.footer.coverStars">
+data-i18n="common.footer.coverStars"
+>
 Cover Stars
 </a>
 
-<a href="special-offers.html" id="footerDiscountsLabel">
+<a
+href="special-offers.html"
+id="footerDiscountsLabel"
+>
 Discounts
 </a>
 
 <a
 href="pet-friendly-places.html"
-data-i18n="common.footer.places">
+data-i18n="common.footer.places"
+>
 Places
 </a>
 
@@ -3505,37 +3960,43 @@ Marketplace
 
 <a
 href="articles.html"
-data-i18n="common.footer.articles">
+data-i18n="common.footer.articles"
+>
 Articles
 </a>
 
 <a
 href="photos.html"
-data-i18n="common.footer.photos">
+data-i18n="common.footer.photos"
+>
 Photos
 </a>
 
 <a
 href="club.html"
-data-i18n="common.footer.club">
+data-i18n="common.footer.club"
+>
 Club
 </a>
 
 <a
 href="privacy.html"
-data-i18n="common.footer.privacy">
+data-i18n="common.footer.privacy"
+>
 Privacy
 </a>
 
 <a
 href="terms.html"
-data-i18n="common.footer.terms">
+data-i18n="common.footer.terms"
+>
 Terms
 </a>
 
 <a
 href="contact.html"
-data-i18n="common.footer.contact">
+data-i18n="common.footer.contact"
+>
 Contact
 </a>
 
@@ -3547,7 +4008,8 @@ Contact
 <button
 class="floating-post"
 type="button"
-onclick="openPublish()">
+onclick="openPublish()"
+>
 
 <span>＋</span>
 <span id="floatingPostText">POST</span>
@@ -3559,7 +4021,8 @@ onclick="openPublish()">
 <div
 class="modal"
 id="detailsModal"
-onclick="closeOnBackdrop(event,'detailsModal')">
+onclick="closeOnBackdrop(event,'detailsModal')"
+>
 
 <div class="modal-sheet">
 
@@ -3567,33 +4030,39 @@ onclick="closeOnBackdrop(event,'detailsModal')">
 class="modal-close"
 type="button"
 onclick="closeModal('detailsModal')"
-aria-label="Close">
+aria-label="Close"
+>
 ×
 </button>
 
 <img
 class="detail-image"
 id="detailImage"
-alt="">
+alt=""
+>
 
 <div
 class="detail-tag"
-id="detailTag">
+id="detailTag"
+>
 </div>
 
 <h2
 class="detail-title"
-id="detailTitle">
+id="detailTitle"
+>
 </h2>
 
 <div
 class="detail-meta"
-id="detailMeta">
+id="detailMeta"
+>
 </div>
 
 <p
 class="detail-description"
-id="detailDescription">
+id="detailDescription"
+>
 </p>
 
 <div class="contact-box">
@@ -3604,7 +4073,8 @@ Contact
 
 <div
 class="contact-value"
-id="detailContact">
+id="detailContact"
+>
 </div>
 
 </div>
@@ -3617,7 +4087,8 @@ id="detailContact">
 <div
 class="modal"
 id="publishModal"
-onclick="closeOnBackdrop(event,'publishModal')">
+onclick="closeOnBackdrop(event,'publishModal')"
+>
 
 <div class="modal-sheet publish-form">
 
@@ -3625,13 +4096,15 @@ onclick="closeOnBackdrop(event,'publishModal')">
 class="modal-close"
 type="button"
 onclick="closeModal('publishModal')"
-aria-label="Close">
+aria-label="Close"
+>
 ×
 </button>
 
 <div
 class="eyebrow notranslate"
-translate="no">
+translate="no"
+>
 PETS &amp; DOGUE MARKETPLACE
 </div>
 
@@ -3641,7 +4114,8 @@ Publish A Listing
 
 <div
 class="fee-note"
-id="feeNote">
+id="feeNote"
+>
 Publishing fee: £1 per listing
 </div>
 
@@ -3652,19 +4126,22 @@ Publishing fee: £1 per listing
 
 <option
 value="sale"
-id="publishSaleOption">
+id="publishSaleOption"
+>
 For sale
 </option>
 
 <option
 value="free"
-id="publishFreeOption">
+id="publishFreeOption"
+>
 Free / Rehome
 </option>
 
 <option
 value="service"
-data-i18n="marketplace.page.accessoriesServices">
+data-i18n="marketplace.page.accessoriesServices"
+>
 Accessories &amp; Services
 </option>
 
@@ -3675,31 +4152,36 @@ Accessories &amp; Services
 
 <option
 value="dogs"
-data-i18n="marketplace.page.dog">
+data-i18n="marketplace.page.dog"
+>
 Dog
 </option>
 
 <option
 value="cats"
-data-i18n="marketplace.page.cat">
+data-i18n="marketplace.page.cat"
+>
 Cat
 </option>
 
 <option
 value="puppies"
-data-i18n="marketplace.page.puppiesKittens">
+data-i18n="marketplace.page.puppiesKittens"
+>
 Puppies &amp; Kittens
 </option>
 
 <option
 value="other"
-id="otherAnimalOption">
+id="otherAnimalOption"
+>
 Other animal
 </option>
 
 <option
 value="services"
-data-i18n="marketplace.page.accessoriesServices">
+data-i18n="marketplace.page.accessoriesServices"
+>
 Accessories &amp; Services
 </option>
 
@@ -3710,27 +4192,31 @@ Accessories &amp; Services
 id="newTitle"
 type="text"
 placeholder="Pet name / service name"
-data-i18n-attr="placeholder:marketplace.page.petName">
+data-i18n-attr="placeholder:marketplace.page.petName"
+>
 
 
 <input
 id="newBreed"
 type="text"
 placeholder="Breed / product type"
-data-i18n-attr="placeholder:marketplace.page.breedType">
+data-i18n-attr="placeholder:marketplace.page.breedType"
+>
 
 
 <input
 id="newLocation"
 type="text"
 placeholder="Location"
-data-i18n-attr="placeholder:marketplace.page.location">
+data-i18n-attr="placeholder:marketplace.page.location"
+>
 
 
 <input
 id="newPrice"
 type="text"
-placeholder="Price, FREE or FROM £...">
+placeholder="Price, FREE or FROM £..."
+>
 
 
 <input
@@ -3738,14 +4224,16 @@ id="newContact"
 class="form-full"
 type="text"
 placeholder="Contact email or phone"
-data-i18n-attr="placeholder:marketplace.page.contact">
+data-i18n-attr="placeholder:marketplace.page.contact"
+>
 
 
 <input
 id="newPhoto"
 class="form-full photo-input"
 type="file"
-accept="image/*">
+accept="image/*"
+>
 
 </div>
 
@@ -3753,14 +4241,16 @@ accept="image/*">
 <textarea
 id="newDescription"
 placeholder="Write a short description, story, details or conditions..."
-data-i18n-attr="placeholder:marketplace.page.story">
+data-i18n-attr="placeholder:marketplace.page.story"
+>
 </textarea>
 
 
 <button
 class="form-submit"
 type="button"
-onclick="createLocalListing()">
+onclick="createLocalListing()"
+>
 
 <span data-i18n="marketplace.page.publishListing">
 Publish Listing
@@ -3773,7 +4263,8 @@ Publish Listing
 
 <p
 class="tiny-note"
-id="checkoutNote">
+id="checkoutNote"
+>
 The £1 checkout will be connected to the payment backend.
 </p>
 
@@ -3849,7 +4340,6 @@ required:"Please add name, location, contact and a photo.",
 created:"Listing preview created. £1 checkout connection is the next backend step.",
 contactButton:"View & contact",
 defaultDescription:"Marketplace listing.",
-contact:"Contact",
 free:"FREE",
 from:"FROM",
 rehome:"REHOME",
@@ -3901,7 +4391,6 @@ required:"Додайте назву, локацію, контакт і фото.
 created:"Попередній перегляд оголошення створено. Наступний крок — підключення оплати £1.",
 contactButton:"Переглянути й зв’язатися",
 defaultDescription:"Оголошення Marketplace.",
-contact:"Контакт",
 free:"БЕЗКОШТОВНО",
 from:"ВІД",
 rehome:"НОВИЙ ДІМ",
@@ -3953,7 +4442,6 @@ required:"Добавьте название, локацию, контакт и �
 created:"Предпросмотр объявления создан. Следующий шаг — подключение оплаты £1.",
 contactButton:"Посмотреть и связаться",
 defaultDescription:"Объявление Marketplace.",
-contact:"Контакт",
 free:"БЕСПЛАТНО",
 from:"ОТ",
 rehome:"ИЩЕТ ДОМ",
@@ -4005,7 +4493,6 @@ required:"Ajoutez un nom, un lieu, un contact et une photo.",
 created:"Aperçu de l’annonce créé. Prochaine étape : paiement de £1.",
 contactButton:"Voir et contacter",
 defaultDescription:"Annonce Marketplace.",
-contact:"Contact",
 free:"GRATUIT",
 from:"DÈS",
 rehome:"ADOPTION",
@@ -4057,7 +4544,6 @@ required:"Bitte Name, Ort, Kontakt und Foto hinzufügen.",
 created:"Anzeigenvorschau erstellt. Als Nächstes wird die £1-Zahlung angebunden.",
 contactButton:"Ansehen & kontaktieren",
 defaultDescription:"Marketplace-Anzeige.",
-contact:"Kontakt",
 free:"KOSTENLOS",
 from:"AB",
 rehome:"NEUES ZUHAUSE",
@@ -4109,7 +4595,6 @@ required:"Añade nombre, ubicación, contacto y foto.",
 created:"Vista previa creada. El siguiente paso es conectar el pago de £1.",
 contactButton:"Ver y contactar",
 defaultDescription:"Anuncio Marketplace.",
-contact:"Contacto",
 free:"GRATIS",
 from:"DESDE",
 rehome:"NUEVO HOGAR",
@@ -4161,7 +4646,6 @@ required:"Aggiungi nome, località, contatto e foto.",
 created:"Anteprima annuncio creata. Il prossimo passo è collegare il pagamento di £1.",
 contactButton:"Visualizza e contatta",
 defaultDescription:"Annuncio Marketplace.",
-contact:"Contatto",
 free:"GRATIS",
 from:"DA",
 rehome:"NUOVA CASA",
@@ -4213,7 +4697,6 @@ required:"Adicione nome, localização, contacto e foto.",
 created:"Pré-visualização criada. O próximo passo é ligar o pagamento de £1.",
 contactButton:"Ver e contactar",
 defaultDescription:"Anúncio Marketplace.",
-contact:"Contacto",
 free:"GRÁTIS",
 from:"DESDE",
 rehome:"NOVO LAR",
@@ -4265,7 +4748,6 @@ required:"Voeg naam, locatie, contact en foto toe.",
 created:"Advertentievoorbeeld gemaakt. De volgende stap is de £1-betaling.",
 contactButton:"Bekijken & contact",
 defaultDescription:"Marketplace-advertentie.",
-contact:"Contact",
 free:"GRATIS",
 from:"VANAF",
 rehome:"NIEUW THUIS",
@@ -4317,7 +4799,6 @@ required:"Dodaj nazwę, lokalizację, kontakt i zdjęcie.",
 created:"Podgląd ogłoszenia utworzony. Następny krok to płatność £1.",
 contactButton:"Zobacz i skontaktuj się",
 defaultDescription:"Ogłoszenie Marketplace.",
-contact:"Kontakt",
 free:"ZA DARMO",
 from:"OD",
 rehome:"NOWY DOM",
@@ -4369,7 +4850,6 @@ required:"Přidejte název, místo, kontakt a fotografii.",
 created:"Náhled inzerátu byl vytvořen. Dalším krokem je platba £1.",
 contactButton:"Zobrazit a kontaktovat",
 defaultDescription:"Inzerát Marketplace.",
-contact:"Kontakt",
 free:"ZDARMA",
 from:"OD",
 rehome:"NOVÝ DOMOV",
@@ -4421,7 +4901,6 @@ required:"Pridajte názov, miesto, kontakt a fotografiu.",
 created:"Náhľad inzerátu bol vytvorený. Ďalším krokom je platba £1.",
 contactButton:"Zobraziť a kontaktovať",
 defaultDescription:"Inzerát Marketplace.",
-contact:"Kontakt",
 free:"ZADARMO",
 from:"OD",
 rehome:"NOVÝ DOMOV",
@@ -4473,7 +4952,6 @@ required:"Adjon meg nevet, helyet, elérhetőséget és fotót.",
 created:"A hirdetés előnézete elkészült. Következő lépés az £1 fizetés.",
 contactButton:"Megtekintés és kapcsolat",
 defaultDescription:"Marketplace hirdetés.",
-contact:"Kapcsolat",
 free:"INGYENES",
 from:"TÓL",
 rehome:"ÚJ OTTHON",
@@ -4525,7 +5003,6 @@ required:"Adăugați nume, locație, contact și fotografie.",
 created:"Previzualizarea anunțului a fost creată. Urmează plata de £1.",
 contactButton:"Vezi și contactează",
 defaultDescription:"Anunț Marketplace.",
-contact:"Contact",
 free:"GRATUIT",
 from:"DE LA",
 rehome:"CASĂ NOUĂ",
@@ -4577,7 +5054,6 @@ required:"Добавете име, място, контакт и снимка.",
 created:"Прегледът на обявата е създаден. Следва плащането от £1.",
 contactButton:"Виж и се свържи",
 defaultDescription:"Marketplace обява.",
-contact:"Контакт",
 free:"БЕЗПЛАТНО",
 from:"ОТ",
 rehome:"НОВ ДОМ",
@@ -4629,7 +5105,6 @@ required:"Προσθέστε όνομα, τοποθεσία, επαφή και �
 created:"Η προεπισκόπηση δημιουργήθηκε. Επόμενο βήμα η πληρωμή £1.",
 contactButton:"Προβολή και επικοινωνία",
 defaultDescription:"Αγγελία Marketplace.",
-contact:"Επικοινωνία",
 free:"ΔΩΡΕΑΝ",
 from:"ΑΠΟ",
 rehome:"ΝΕΟ ΣΠΙΤΙ",
@@ -4681,7 +5156,6 @@ required:"Lägg till namn, plats, kontakt och foto.",
 created:"Förhandsvisning skapad. Nästa steg är betalning på £1.",
 contactButton:"Visa och kontakta",
 defaultDescription:"Marketplace-annons.",
-contact:"Kontakt",
 free:"GRATIS",
 from:"FRÅN",
 rehome:"NYTT HEM",
@@ -4733,7 +5207,6 @@ required:"Tilføj navn, placering, kontakt og foto.",
 created:"Annoncevisning oprettet. Næste trin er betaling på £1.",
 contactButton:"Se og kontakt",
 defaultDescription:"Marketplace-annonce.",
-contact:"Kontakt",
 free:"GRATIS",
 from:"FRA",
 rehome:"NYT HJEM",
@@ -4785,7 +5258,6 @@ required:"Legg til navn, sted, kontakt og bilde.",
 created:"Forhåndsvisningen er opprettet. Neste steg er betaling på £1.",
 contactButton:"Se og kontakt",
 defaultDescription:"Marketplace-annonse.",
-contact:"Kontakt",
 free:"GRATIS",
 from:"FRA",
 rehome:"NYTT HJEM",
@@ -4837,7 +5309,6 @@ required:"Lisää nimi, sijainti, yhteystieto ja kuva.",
 created:"Ilmoituksen esikatselu luotu. Seuraava vaihe on £1 maksu.",
 contactButton:"Näytä ja ota yhteyttä",
 defaultDescription:"Marketplace-ilmoitus.",
-contact:"Yhteystieto",
 free:"ILMAINEN",
 from:"ALKAEN",
 rehome:"UUSI KOTI",
@@ -4889,7 +5360,6 @@ required:"Ad, konum, iletişim ve fotoğraf ekleyin.",
 created:"İlan önizlemesi oluşturuldu. Sonraki adım £1 ödeme bağlantısıdır.",
 contactButton:"Görüntüle ve iletişim kur",
 defaultDescription:"Marketplace ilanı.",
-contact:"İletişim",
 free:"ÜCRETSİZ",
 from:"BAŞLAYAN",
 rehome:"YENİ YUVA",
@@ -4941,7 +5411,6 @@ required:"أضف الاسم والموقع ووسيلة الاتصال والص�
 created:"تم إنشاء معاينة الإعلان. الخطوة التالية هي ربط دفع £1.",
 contactButton:"عرض وتواصل",
 defaultDescription:"إعلان Marketplace.",
-contact:"التواصل",
 free:"مجاناً",
 from:"من",
 rehome:"منزل جديد",
@@ -4993,7 +5462,6 @@ required:"नाम, स्थान, संपर्क और फोटो ज
 created:"लिस्टिंग पूर्वावलोकन बन गया। अगला कदम £1 भुगतान जोड़ना है।",
 contactButton:"देखें और संपर्क करें",
 defaultDescription:"Marketplace लिस्टिंग।",
-contact:"संपर्क",
 free:"मुफ़्त",
 from:"से",
 rehome:"नया घर",
@@ -5149,29 +5617,14 @@ locale:"hi_IN"
 };
 
 
-let activeFilter=
-"all";
-
-let browseFilter=
-"all";
-
-let savedOnly=
-false;
-
-let selectedPosition=
-null;
-
-let selectedLocationName=
-"";
-
-let locationTimer=
-null;
-
-let locationAbortController=
-null;
-
-let currentDetailId=
-null;
+let activeFilter="all";
+let browseFilter="all";
+let savedOnly=false;
+let selectedPosition=null;
+let selectedLocationName="";
+let locationTimer=null;
+let locationAbortController=null;
+let currentDetailId=null;
 
 
 const DETAILS={
@@ -5233,35 +5686,6 @@ image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&
 };
 
 
-function currentLanguage(){
-
-if(
-window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage.getCurrentLanguage==="function"
-){
-
-const value=
-window.PetsDogueLanguage.getCurrentLanguage();
-
-if(typeof value==="string"){
-return normalizeLanguage(value);
-}
-
-if(value&&value.code){
-return normalizeLanguage(value.code);
-}
-
-}
-
-return normalizeLanguage(
-localStorage.getItem(LANGUAGE_KEY)||
-$("languageSelect")?.value||
-"en"
-);
-
-}
-
-
 function normalizeLanguage(value){
 
 let code=
@@ -5285,13 +5709,46 @@ se:"sv",
 dk:"da"
 };
 
-if(aliases[code]){
-code=aliases[code];
-}
+code=
+aliases[code]||
+code;
 
 return LOCAL_UI[code]
 ?code
 :"en";
+
+}
+
+
+function currentLanguage(){
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.getCurrentLanguage==="function"
+){
+
+try{
+
+const value=
+window.PetsDogueLanguage.getCurrentLanguage();
+
+if(typeof value==="string"){
+return normalizeLanguage(value);
+}
+
+if(value&&value.code){
+return normalizeLanguage(value.code);
+}
+
+}catch(error){}
+
+}
+
+return normalizeLanguage(
+localStorage.getItem(LANGUAGE_KEY)||
+$("languageSelect")?.value||
+"en"
+);
 
 }
 
@@ -5376,6 +5833,21 @@ return ui("serviceUpper");
 
 function applyLocalLanguage(){
 
+const lang=
+currentLanguage();
+
+document.documentElement.lang=
+lang;
+
+document.documentElement.dir=
+lang==="ar"
+?"rtl"
+:"ltr";
+
+if($("languageSelect")){
+$("languageSelect").value=lang;
+}
+
 $("editionNav").textContent=
 ui("edition").toUpperCase();
 
@@ -5384,9 +5856,6 @@ ui("edition")+" 01";
 
 $("footerEditionLabel").textContent=
 ui("edition");
-
-$("discountsNav").textContent=
-ui("discounts").toUpperCase();
 
 $("sideDiscountsLabel").textContent=
 ui("discounts");
@@ -5399,6 +5868,9 @@ ui("health").toUpperCase();
 
 $("sideHealthLabel").textContent=
 ui("health");
+
+$("contestsNav").textContent=
+ui("contests").toUpperCase();
 
 $("sideContestsLabel").textContent=
 ui("contests");
@@ -5493,9 +5965,7 @@ element.dataset.listingTag
 }
 );
 
-if(
-!selectedPosition
-){
+if(!selectedPosition){
 
 $("currentLocationLabel").textContent=
 ui("anywhere");
@@ -5503,9 +5973,7 @@ ui("anywhere");
 $("locationPanelCurrent").textContent=
 ui("anywhere");
 
-}else if(
-selectedLocationName
-){
+}else if(selectedLocationName){
 
 $("currentLocationLabel").textContent=
 selectedLocationName;
@@ -5520,13 +5988,57 @@ refreshOpenDetail();
 }
 
 applySeoLanguage();
-
 applyFilters();
 
 }
 
 
+function setSiteLanguage(value){
+
+const lang=
+normalizeLanguage(value);
+
+localStorage.setItem(
+LANGUAGE_KEY,
+lang
+);
+
+document.documentElement.lang=
+lang;
+
+document.documentElement.dir=
+lang==="ar"
+?"rtl"
+:"ltr";
+
+if(
+window.PetsDogueLanguage &&
+typeof window.PetsDogueLanguage.setLanguage==="function"
+){
+
+try{
+
+window.PetsDogueLanguage.setLanguage(
+lang
+);
+
+}catch(error){}
+
+}
+
+setTimeout(
+applyLocalLanguage,
+30
+);
+
+}
+
+
 function openMenu(){
+
+$("siteHeader")
+?.classList
+.remove("shell-hidden");
 
 $("sideMenu")
 .classList
@@ -5739,12 +6251,8 @@ ${escapeHTML(ui("locationUnavailable"))}
 function chooseWorldLocation(button){
 
 selectedPosition={
-lat:Number(
-button.dataset.lat
-),
-lng:Number(
-button.dataset.lng
-)
+lat:Number(button.dataset.lat),
+lng:Number(button.dataset.lng)
 };
 
 selectedLocationName=
@@ -5768,7 +6276,6 @@ $("radiusBox")
 .add("show");
 
 persistLocation();
-
 updateRadius();
 
 }
@@ -5794,10 +6301,8 @@ navigator.geolocation.getCurrentPosition(
 async position=>{
 
 selectedPosition={
-lat:
-position.coords.latitude,
-lng:
-position.coords.longitude
+lat:position.coords.latitude,
+lng:position.coords.longitude
 };
 
 $("radiusBox")
@@ -5879,16 +6384,13 @@ $("locationPanelCurrent").textContent=
 placeName;
 
 persistLocation();
-
 updateRadius();
 
 },
 
 ()=>{
 
-selectedPosition=
-null;
-
+selectedPosition=null;
 selectedLocationName="";
 
 $("currentLocationLabel").textContent=
@@ -5941,7 +6443,6 @@ $("locationPanelDistance").textContent="";
 }
 
 persistLocation();
-
 applyFilters();
 
 }
@@ -5954,12 +6455,9 @@ try{
 localStorage.setItem(
 MARKET_LOCATION_KEY,
 JSON.stringify({
-position:
-selectedPosition,
-name:
-selectedLocationName,
-radius:
-Number(
+position:selectedPosition,
+name:selectedLocationName,
+radius:Number(
 $("radiusSlider").value
 )
 })
@@ -5992,24 +6490,16 @@ MARKET_LOCATION_KEY
 if(
 saved?.position &&
 Number.isFinite(
-Number(
-saved.position.lat
-)
+Number(saved.position.lat)
 ) &&
 Number.isFinite(
-Number(
-saved.position.lng
-)
+Number(saved.position.lng)
 )
 ){
 
 selectedPosition={
-lat:Number(
-saved.position.lat
-),
-lng:Number(
-saved.position.lng
-)
+lat:Number(saved.position.lat),
+lng:Number(saved.position.lng)
 };
 
 selectedLocationName=
@@ -6025,9 +6515,7 @@ $("radiusBox")
 
 if(
 Number.isFinite(
-Number(
-saved?.radius
-)
+Number(saved?.radius)
 )
 ){
 
@@ -6036,9 +6524,7 @@ Math.min(
 500,
 Math.max(
 1,
-Number(
-saved.radius
-)
+Number(saved.radius)
 )
 );
 
@@ -6061,8 +6547,7 @@ lat2,
 lng2
 ){
 
-const R=
-6371;
+const R=6371;
 
 const dLat=
 (
@@ -6188,9 +6673,15 @@ block:"start"
 
 function applyFilters(){
 
+const searchInput=
+$("mainSearch");
+
+if(!searchInput){
+return;
+}
+
 const query=
-$("mainSearch")
-.value
+searchInput.value
 .toLowerCase()
 .trim();
 
@@ -6208,8 +6699,7 @@ Number(
 $("radiusSlider").value
 );
 
-let visible=
-0;
+let visible=0;
 
 cards.forEach(
 card=>{
@@ -6794,11 +7284,9 @@ prepend
 
 DETAILS[listing.id]={
 
-title:
-listing.title,
+title:listing.title,
 
-tagType:
-listing.type,
+tagType:listing.type,
 
 meta:
 (
@@ -6840,26 +7328,18 @@ listing.animal;
 
 if(
 Number.isFinite(
-Number(
-listing.lat
-)
+Number(listing.lat)
 ) &&
 Number.isFinite(
-Number(
-listing.lng
-)
+Number(listing.lng)
 )
 ){
 
 article.dataset.lat=
-String(
-listing.lat
-);
+String(listing.lat);
 
 article.dataset.lng=
-String(
-listing.lng
-);
+String(listing.lng);
 
 }
 
@@ -6955,26 +7435,13 @@ $("newType").value=
 $("newAnimal").value=
 "dogs";
 
-$("newTitle").value=
-"";
-
-$("newBreed").value=
-"";
-
-$("newLocation").value=
-"";
-
-$("newPrice").value=
-"";
-
-$("newContact").value=
-"";
-
-$("newPhoto").value=
-"";
-
-$("newDescription").value=
-"";
+$("newTitle").value="";
+$("newBreed").value="";
+$("newLocation").value="";
+$("newPrice").value="";
+$("newContact").value="";
+$("newPhoto").value="";
+$("newDescription").value="";
 
 }
 
@@ -6985,55 +7452,139 @@ return String(
 value||
 ""
 )
-.replaceAll(
-"&",
-"&amp;"
-)
-.replaceAll(
-"<",
-"&lt;"
-)
-.replaceAll(
-">",
-"&gt;"
-)
-.replaceAll(
-'"',
-"&quot;"
-)
-.replaceAll(
-"'",
-"&#039;"
-);
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
 
-function keepMarketplaceVisible(){
+/* =========================================================
+HEADER HIDE / SHOW
+========================================================= */
 
-const active=
-$("categoryNav")
-?.querySelector(
-".active"
-);
+let lastScrollY=
+window.scrollY;
 
-if(!active){
+let scrollTicking=
+false;
+
+function updateHeaderOnScroll(){
+
+const header=
+$("siteHeader");
+
+if(!header){
 return;
 }
 
-requestAnimationFrame(
-()=>{
+const current=
+Math.max(
+0,
+window.scrollY
+);
 
-active.scrollIntoView({
-behavior:"auto",
-inline:"center",
-block:"nearest"
-});
+const menuOpen=
+$("sideMenu")
+?.classList
+.contains("open");
 
-}
+if(
+menuOpen||
+current<=35
+){
+
+header.classList.remove(
+"shell-hidden"
+);
+
+}else if(
+current>
+lastScrollY+6 &&
+current>70
+){
+
+header.classList.add(
+"shell-hidden"
+);
+
+}else if(
+current<
+lastScrollY-5
+){
+
+header.classList.remove(
+"shell-hidden"
 );
 
 }
+
+lastScrollY=
+current;
+
+scrollTicking=
+false;
+
+}
+
+
+window.addEventListener(
+"scroll",
+()=>{
+
+if(scrollTicking){
+return;
+}
+
+scrollTicking=
+true;
+
+requestAnimationFrame(
+updateHeaderOnScroll
+);
+
+},
+{
+passive:true
+}
+);
+
+
+/* =========================================================
+EVENTS
+========================================================= */
+
+$("menuButton")
+.addEventListener(
+"click",
+openMenu
+);
+
+$("closeMenu")
+.addEventListener(
+"click",
+closeMenu
+);
+
+$("menuOverlay")
+.addEventListener(
+"click",
+closeMenu
+);
+
+$("languageSelect")
+.addEventListener(
+"change",
+event=>{
+
+setSiteLanguage(
+event.target.value
+);
+
+}
+);
 
 
 document.addEventListener(
@@ -7117,19 +7668,27 @@ applyLocalLanguage,
 
 window.addEventListener(
 "languagechange",
-()=>setTimeout(
+()=>{
+
+setTimeout(
 applyLocalLanguage,
 0
-)
+);
+
+}
 );
 
 
 window.addEventListener(
 "petsdogue:languagechange",
-()=>setTimeout(
+()=>{
+
+setTimeout(
 applyLocalLanguage,
 0
-)
+);
+
+}
 );
 
 
@@ -7146,17 +7705,6 @@ applyLocalLanguage();
 updateSavedButtons();
 
 updateRadius();
-
-keepMarketplaceVisible();
-
-$("languageSelect")
-?.addEventListener(
-"change",
-()=>setTimeout(
-applyLocalLanguage,
-50
-)
-);
 
 const observer=
 new MutationObserver(
@@ -7205,1366 +7753,11 @@ window.addEventListener(
 applyLocalLanguage();
 updateSavedButtons();
 applyFilters();
-keepMarketplaceVisible();
 
 }
 );
 
 </script>
-</script>
-
-<script>
-"use strict";
-
-/* =========================================================
-PETS & DOGUE — SCOPED ACCESSIBILITY NARRATION
-Each marketplace topic / listing can be read separately.
-The selected PETS & DOGUE language is used automatically.
-========================================================= */
-
-(function(){
-
-const $ =
-id =>
-document.getElementById(id);
-
-function currentSpeechLanguage(){
-
-const aliases = {
-ua:"uk",
-cz:"cs",
-gr:"el",
-se:"sv",
-dk:"da"
-};
-
-let language =
-"en";
-
-try{
-
-if(
-window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage.getCurrentLanguage ===
-"function"
-){
-
-const value =
-window.PetsDogueLanguage.getCurrentLanguage();
-
-language =
-typeof value === "string"
-? value
-: value?.code ||
-value?.language ||
-value?.lang ||
-"en";
-
-}else{
-
-language =
-localStorage.getItem(
-"pets_dogue_language"
-) ||
-document.documentElement.lang ||
-"en";
-
-}
-
-}catch(error){
-
-language =
-document.documentElement.lang ||
-"en";
-
-}
-
-language =
-String(language)
-.trim()
-.toLowerCase()
-.split("-")[0]
-.split("_")[0];
-
-return aliases[language] ||
-language ||
-"en";
-
-}
-
-
-const SPEECH_LABELS = {
-
-en:"Listen to this section",
-
-uk:"Прослухати цей розділ",
-
-ru:"Прослушать этот раздел",
-
-fr:"Écouter cette section",
-
-de:"Diesen Abschnitt anhören",
-
-es:"Escuchar esta sección",
-
-it:"Ascolta questa sezione",
-
-pt:"Ouvir esta secção",
-
-nl:"Luister naar dit gedeelte",
-
-pl:"Posłuchaj tej sekcji",
-
-cs:"Poslechnout tuto sekci",
-
-sk:"Vypočuť túto sekciu",
-
-hu:"Szakasz meghallgatása",
-
-ro:"Ascultă această secțiune",
-
-bg:"Прослушай този раздел",
-
-el:"Ακούστε αυτή την ενότητα",
-
-sv:"Lyssna på detta avsnitt",
-
-da:"Lyt til dette afsnit",
-
-no:"Lytt til denne delen",
-
-fi:"Kuuntele tämä osio",
-
-tr:"Bu bölümü dinle",
-
-ar:"استمع إلى هذا القسم",
-
-hi:"इस अनुभाग को सुनें"
-
-};
-
-
-function speechLabel(){
-
-return (
-SPEECH_LABELS[
-currentSpeechLanguage()
-] ||
-SPEECH_LABELS.en
-);
-
-}
-
-
-function createSpeechButton(
-className =
-""
-){
-
-const button =
-document.createElement(
-"button"
-);
-
-button.type =
-"button";
-
-button.className =
-"pd-section-speech " +
-className;
-
-button.setAttribute(
-"data-pd-section-speech",
-""
-);
-
-button.setAttribute(
-"data-pd-speech-ignore",
-""
-);
-
-button.setAttribute(
-"aria-label",
-speechLabel()
-);
-
-button.title =
-speechLabel();
-
-button.innerHTML =
-`
-<svg
-viewBox="0 0 24 24"
-aria-hidden="true"
-focusable="false"
->
-<path
-d="M5 9v6h4l5 4V5L9 9H5Z"
-></path>
-<path
-d="M17 8.5c1.4 1.8 1.4 5.2 0 7"
-></path>
-<path
-d="M19.5 6c3 3.4 3 8.6 0 12"
-></path>
-</svg>
-`;
-
-return button;
-
-}
-
-
-function cleanSpeechText(
-element
-){
-
-if(
-!element
-){
-
-return "";
-
-}
-
-const clone =
-element.cloneNode(
-true
-);
-
-clone
-.querySelectorAll(
-[
-"script",
-"style",
-"button",
-"input",
-"select",
-"textarea",
-"svg",
-"[hidden]",
-"[aria-hidden='true']",
-"[data-pd-speech-ignore]",
-".pd-section-speech"
-].join(",")
-)
-.forEach(
-item =>
-item.remove()
-);
-
-clone
-.querySelectorAll(
-"[style]"
-)
-.forEach(
-item =>{
-
-const style =
-String(
-item.getAttribute(
-"style"
-) ||
-""
-)
-.toLowerCase();
-
-if(
-style.includes(
-"display: none"
-) ||
-style.includes(
-"display:none"
-)
-){
-
-item.remove();
-
-}
-
-}
-);
-
-return String(
-clone.textContent ||
-""
-)
-.replace(
-/\s+/g,
-" "
-)
-.trim();
-
-}
-
-
-function nativeSpeak(
-text
-){
-
-if(
-!(
-"speechSynthesis" in window
-) ||
-!(
-"SpeechSynthesisUtterance" in window
-)
-){
-
-return;
-
-}
-
-window.speechSynthesis.cancel();
-
-const utterance =
-new SpeechSynthesisUtterance(
-text
-);
-
-const language =
-currentSpeechLanguage();
-
-const localeMap = {
-
-en:"en-GB",
-uk:"uk-UA",
-ru:"ru-RU",
-fr:"fr-FR",
-de:"de-DE",
-es:"es-ES",
-it:"it-IT",
-pt:"pt-PT",
-nl:"nl-NL",
-pl:"pl-PL",
-cs:"cs-CZ",
-sk:"sk-SK",
-hu:"hu-HU",
-ro:"ro-RO",
-bg:"bg-BG",
-el:"el-GR",
-sv:"sv-SE",
-da:"da-DK",
-no:"nb-NO",
-fi:"fi-FI",
-tr:"tr-TR",
-ar:"ar-SA",
-hi:"hi-IN"
-
-};
-
-utterance.lang =
-localeMap[
-language
-] ||
-"en-GB";
-
-window.speechSynthesis.speak(
-utterance
-);
-
-}
-
-
-function stopCurrentSpeech(){
-
-if(
-window.PetsDogueNarration &&
-typeof window.PetsDogueNarration.stop ===
-"function"
-){
-
-window.PetsDogueNarration.stop();
-
-}
-
-if(
-"speechSynthesis" in window
-){
-
-window.speechSynthesis.cancel();
-
-}
-
-document
-.querySelectorAll(
-"[data-pd-section-speech]"
-)
-.forEach(
-button =>{
-
-button.classList.remove(
-"is-reading"
-);
-
-button.removeAttribute(
-"data-reading"
-);
-
-}
-);
-
-}
-
-
-function isSpeaking(){
-
-if(
-window.PetsDogueNarration &&
-typeof window.PetsDogueNarration.isSpeaking ===
-"function"
-){
-
-return Boolean(
-window.PetsDogueNarration.isSpeaking()
-);
-
-}
-
-return Boolean(
-window.speechSynthesis &&
-window.speechSynthesis.speaking
-);
-
-}
-
-
-function speakElement(
-button,
-element
-){
-
-if(
-!button ||
-!element
-){
-
-return;
-
-}
-
-if(
-button.dataset.reading ===
-"true" &&
-isSpeaking()
-){
-
-stopCurrentSpeech();
-
-return;
-
-}
-
-stopCurrentSpeech();
-
-const text =
-cleanSpeechText(
-element
-);
-
-if(
-!text
-){
-
-return;
-
-}
-
-button.dataset.reading =
-"true";
-
-button.classList.add(
-"is-reading"
-);
-
-if(
-window.PetsDogueNarration &&
-typeof window.PetsDogueNarration.speak ===
-"function"
-){
-
-window.PetsDogueNarration.speak(
-text
-);
-
-}else{
-
-nativeSpeak(
-text
-);
-
-}
-
-}
-
-
-function addIntroSpeaker(){
-
-const intro =
-document.querySelector(
-".market-intro"
-);
-
-if(
-!intro ||
-intro.querySelector(
-".pd-intro-speech"
-)
-){
-
-return;
-
-}
-
-const button =
-createSpeechButton(
-"pd-intro-speech"
-);
-
-button.addEventListener(
-"click",
-event =>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-speakElement(
-button,
-intro
-);
-
-}
-);
-
-intro.appendChild(
-button
-);
-
-}
-
-
-function addSectionSpeaker(
-heading,
-content
-){
-
-if(
-!heading ||
-!content
-){
-
-return;
-
-}
-
-if(
-heading.parentElement
-?.querySelector(
-":scope > .pd-section-speech"
-)
-){
-
-return;
-
-}
-
-const button =
-createSpeechButton(
-"pd-heading-speech"
-);
-
-button.addEventListener(
-"click",
-event =>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-const container =
-document.createElement(
-"div"
-);
-
-container.appendChild(
-heading.cloneNode(
-true
-)
-);
-
-container.appendChild(
-content.cloneNode(
-true
-)
-);
-
-speakElement(
-button,
-container
-);
-
-}
-);
-
-heading.parentElement
-?.appendChild(
-button
-);
-
-}
-
-
-function addBrowseSpeaker(){
-
-const browseGrid =
-document.querySelector(
-".browse-grid"
-);
-
-if(
-!browseGrid
-){
-
-return;
-
-}
-
-const heading =
-browseGrid
-.previousElementSibling;
-
-if(
-!heading ||
-!heading.classList.contains(
-"section-head"
-)
-){
-
-return;
-
-}
-
-if(
-heading.querySelector(
-".pd-heading-speech"
-)
-){
-
-return;
-
-}
-
-const button =
-createSpeechButton(
-"pd-heading-speech"
-);
-
-button.addEventListener(
-"click",
-event =>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-const wrapper =
-document.createElement(
-"div"
-);
-
-wrapper.appendChild(
-heading.cloneNode(
-true
-)
-);
-
-wrapper.appendChild(
-browseGrid.cloneNode(
-true
-)
-);
-
-speakElement(
-button,
-wrapper
-);
-
-}
-);
-
-heading.appendChild(
-button
-);
-
-}
-
-
-function addListingsSpeaker(){
-
-const listingGrid =
-$("listingGrid");
-
-if(
-!listingGrid
-){
-
-return;
-
-}
-
-const heading =
-document.querySelector(
-".listings-head"
-);
-
-if(
-!heading ||
-heading.querySelector(
-".pd-heading-speech"
-)
-){
-
-return;
-
-}
-
-const button =
-createSpeechButton(
-"pd-heading-speech"
-);
-
-button.addEventListener(
-"click",
-event =>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-const wrapper =
-document.createElement(
-"div"
-);
-
-wrapper.appendChild(
-heading.cloneNode(
-true
-)
-);
-
-const visibleListings =
-document.createElement(
-"div"
-);
-
-document
-.querySelectorAll(
-".listing-card"
-)
-.forEach(
-card =>{
-
-if(
-card.style.display !==
-"none"
-){
-
-visibleListings.appendChild(
-card.cloneNode(
-true
-)
-);
-
-}
-
-}
-);
-
-wrapper.appendChild(
-visibleListings
-);
-
-speakElement(
-button,
-wrapper
-);
-
-}
-);
-
-heading.appendChild(
-button
-);
-
-}
-
-
-function addListingSpeakers(){
-
-document
-.querySelectorAll(
-".listing-card"
-)
-.forEach(
-card =>{
-
-if(
-card.querySelector(
-".pd-listing-speech"
-)
-){
-
-return;
-
-}
-
-const listingCopy =
-card.querySelector(
-".listing-copy"
-);
-
-if(
-!listingCopy
-){
-
-return;
-
-}
-
-const button =
-createSpeechButton(
-"pd-listing-speech"
-);
-
-button.addEventListener(
-"click",
-event =>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-speakElement(
-button,
-card
-);
-
-}
-);
-
-listingCopy.appendChild(
-button
-);
-
-}
-);
-
-}
-
-
-function addPublishSpeaker(){
-
-const section =
-document.querySelector(
-".publish-strip"
-);
-
-if(
-!section ||
-section.querySelector(
-".pd-publish-speech"
-)
-){
-
-return;
-
-}
-
-const button =
-createSpeechButton(
-"pd-publish-speech"
-);
-
-button.addEventListener(
-"click",
-event =>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-speakElement(
-button,
-section
-);
-
-}
-);
-
-section.insertBefore(
-button,
-section.querySelector(
-".publish-main-btn"
-)
-);
-
-}
-
-
-function addDetailSpeaker(){
-
-const modal =
-$("detailsModal");
-
-if(
-!modal ||
-modal.querySelector(
-".pd-detail-speech"
-)
-){
-
-return;
-
-}
-
-const sheet =
-modal.querySelector(
-".modal-sheet"
-);
-
-if(
-!sheet
-){
-
-return;
-
-}
-
-const button =
-createSpeechButton(
-"pd-detail-speech"
-);
-
-button.addEventListener(
-"click",
-event =>{
-
-event.preventDefault();
-
-event.stopPropagation();
-
-speakElement(
-button,
-sheet
-);
-
-}
-);
-
-const closeButton =
-sheet.querySelector(
-".modal-close"
-);
-
-if(
-closeButton
-){
-
-closeButton.insertAdjacentElement(
-"afterend",
-button
-);
-
-}else{
-
-sheet.prepend(
-button
-);
-
-}
-
-}
-
-
-function refreshSpeechLabels(){
-
-const label =
-speechLabel();
-
-document
-.querySelectorAll(
-"[data-pd-section-speech]"
-)
-.forEach(
-button =>{
-
-button.setAttribute(
-"aria-label",
-label
-);
-
-button.title =
-label;
-
-}
-);
-
-}
-
-
-function addStyles(){
-
-if(
-document.getElementById(
-"pdMarketplaceSpeechStyles"
-)
-){
-
-return;
-
-}
-
-const style =
-document.createElement(
-"style"
-);
-
-style.id =
-"pdMarketplaceSpeechStyles";
-
-style.textContent =
-`
-
-.pd-section-speech{
-width:42px;
-height:42px;
-min-width:42px;
-border:1px solid #111;
-border-radius:50%;
-background:#fff;
-color:#111;
-display:inline-flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-transition:
-transform .18s ease,
-background .18s ease,
-color .18s ease;
-z-index:12;
-}
-
-.pd-section-speech:hover{
-transform:scale(1.05);
-}
-
-.pd-section-speech.is-reading{
-background:#111;
-color:#fff;
-}
-
-.pd-section-speech svg{
-width:21px;
-height:21px;
-fill:currentColor;
-stroke:currentColor;
-stroke-width:1.6;
-stroke-linecap:round;
-stroke-linejoin:round;
-}
-
-.market-intro{
-position:relative;
-}
-
-.pd-intro-speech{
-position:absolute;
-right:0;
-top:0;
-}
-
-html[dir="rtl"] .pd-intro-speech{
-right:auto;
-left:0;
-}
-
-.section-head{
-position:relative;
-padding-right:52px;
-}
-
-html[dir="rtl"] .section-head{
-padding-right:0;
-padding-left:52px;
-}
-
-.pd-heading-speech{
-position:absolute;
-right:0;
-bottom:0;
-}
-
-html[dir="rtl"] .pd-heading-speech{
-right:auto;
-left:0;
-}
-
-.listing-copy{
-position:relative;
-padding-right:53px;
-}
-
-html[dir="rtl"] .listing-copy{
-padding-right:4px;
-padding-left:53px;
-}
-
-.pd-listing-speech{
-position:absolute;
-right:4px;
-top:8px;
-width:41px;
-height:41px;
-min-width:41px;
-}
-
-html[dir="rtl"] .pd-listing-speech{
-right:auto;
-left:4px;
-}
-
-.publish-strip{
-position:relative;
-}
-
-.pd-publish-speech{
-margin-top:17px;
-background:#fff;
-color:#111;
-border-color:#fff;
-}
-
-.pd-publish-speech.is-reading{
-background:var(--gold-light);
-color:#111;
-}
-
-.pd-detail-speech{
-margin-top:12px;
-margin-left:auto;
-display:flex;
-}
-
-html[dir="rtl"] .pd-detail-speech{
-margin-left:0;
-margin-right:auto;
-}
-
-.pd-section-speech:focus-visible{
-outline:3px solid var(--green);
-outline-offset:3px;
-}
-
-@media(max-width:720px){
-
-.pd-intro-speech{
-top:2px;
-right:2px;
-}
-
-html[dir="rtl"] .pd-intro-speech{
-right:auto;
-left:2px;
-}
-
-.market-intro{
-padding-right:50px;
-}
-
-html[dir="rtl"] .market-intro{
-padding-right:0;
-padding-left:50px;
-}
-
-.section-head{
-padding-right:48px;
-}
-
-html[dir="rtl"] .section-head{
-padding-right:0;
-padding-left:48px;
-}
-
-.pd-heading-speech{
-width:39px;
-height:39px;
-min-width:39px;
-}
-
-.listing-copy{
-padding-right:47px;
-}
-
-html[dir="rtl"] .listing-copy{
-padding-right:4px;
-padding-left:47px;
-}
-
-.pd-listing-speech{
-width:38px;
-height:38px;
-min-width:38px;
-}
-
-}
-
-@media(prefers-reduced-motion:reduce){
-
-.pd-section-speech{
-transition:none;
-}
-
-}
-
-`;
-
-document.head.appendChild(
-style
-);
-
-}
-
-
-function buildMarketplaceNarration(){
-
-addStyles();
-
-addIntroSpeaker();
-
-addBrowseSpeaker();
-
-addListingsSpeaker();
-
-addListingSpeakers();
-
-addPublishSpeaker();
-
-addDetailSpeaker();
-
-refreshSpeechLabels();
-
-}
-
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-buildMarketplaceNarration();
-
-}
-);
-
-
-window.addEventListener(
-"pageshow",
-()=>{
-
-buildMarketplaceNarration();
-
-refreshSpeechLabels();
-
-}
-);
-
-
-window.addEventListener(
-"languagechange",
-()=>{
-
-setTimeout(
-refreshSpeechLabels,
-0
-);
-
-}
-);
-
-
-window.addEventListener(
-"petsdogue:languagechange",
-()=>{
-
-setTimeout(
-refreshSpeechLabels,
-0
-);
-
-}
-);
-
-
-window.addEventListener(
-"storage",
-event =>{
-
-if(
-event.key ===
-"pets_dogue_language"
-){
-
-setTimeout(
-refreshSpeechLabels,
-0
-);
-
-}
-
-}
-);
-
-
-const observer =
-new MutationObserver(
-()=>{
-
-addListingSpeakers();
-
-refreshSpeechLabels();
-
-}
-);
-
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-const grid =
-$("listingGrid");
-
-if(
-grid
-){
-
-observer.observe(
-grid,
-{
-childList:true,
-subtree:true
-}
-);
-
-}
-
-}
-);
-
-})();
-</script>
-
-<script src="/pd-accessibility.js?v=20260909-marketplace-sections-1"></script>
 
 </body>
 </html>
