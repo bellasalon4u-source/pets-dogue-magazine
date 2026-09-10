@@ -3,28 +3,37 @@
 /*
 =========================================================
 PETS & DOGUE
-GLOBAL ACCESSIBILITY + LOCAL TEXT NARRATION
+GLOBAL ACCESSIBILITY + SMART LOCAL NARRATION
 =========================================================
 
-Every article, story, card or editorial section can have
-its own speaker button.
+Each article, card, rubric or topic can have its own
+speaker button.
 
-Press speaker:
-- reads only that article / topic / section
-- uses the currently selected site language
-- keeps English words / brand names in English
-- converts common icons into their meaning
-- press again to stop
-- pressing another speaker switches to that topic
+SMART NARRATION:
+- reads only the selected block
+- follows the selected PETS & DOGUE language
+- recognises mixed-language text
+- English words inside Russian/Ukrainian/etc are spoken
+  with an English voice instead of Russian transcription
+- converts visual symbols into meaningful words
+- location pin = location
+- phone icon/number = phone number
+- card number = bank card number
+- email = email
+- website = website
+- prices such as £1 are spoken naturally
+- ages such as "2 years" are adapted to the chosen language
+- decorative symbols are not read as strange object names
 
-Existing buttons are supported with:
+Ignore narration:
+data-pd-speech-ignore
 
+Explicit readable block:
+data-pd-readable
+
+Explicit speaker:
 data-pd-speech-toggle
 data-pd-speech-target="#elementId"
-
-Elements that must not be spoken:
-
-data-pd-speech-ignore
 =========================================================
 */
 
@@ -32,16 +41,21 @@ data-pd-speech-ignore
 
 "use strict";
 
+
 /* =========================================================
 SETTINGS
 ========================================================= */
 
-const LANGUAGE_KEY = "pets_dogue_language";
+const LANGUAGE_KEY =
+"pets_dogue_language";
+
 
 const SUPPORTED_LANGUAGES = [
-"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
-"hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+"en","uk","ru","fr","de","es","it","pt","nl","pl",
+"cs","sk","hu","ro","bg","el","sv","da","no","fi",
+"tr","ar","hi"
 ];
+
 
 const LANGUAGE_ALIASES = {
 ua:"uk",
@@ -50,6 +64,7 @@ gr:"el",
 se:"sv",
 dk:"da"
 };
+
 
 const SPEECH_LOCALES = {
 en:"en-GB",
@@ -77,13 +92,15 @@ ar:"ar-SA",
 hi:"hi-IN"
 };
 
-const LATIN_SITE_LANGUAGES = new Set([
-"en","fr","de","es","it","pt","nl","pl","cs","sk","hu","ro",
-"sv","da","no","fi","tr"
+
+const LATIN_LANGUAGES = new Set([
+"en","fr","de","es","it","pt","nl","pl",
+"cs","sk","hu","ro","sv","da","no","fi","tr"
 ]);
 
+
 /* =========================================================
-ACCESSIBILITY TEXT
+BUTTON / SCREEN READER LABELS
 ========================================================= */
 
 const LABELS = {
@@ -297,436 +314,616 @@ unsupported:"यह ब्राउज़र टेक्स्ट-टू-स्
 
 };
 
+
 /* =========================================================
-SEMANTIC WORDS FOR ICONS / SYMBOLS
+SEMANTIC WORDS
 ========================================================= */
 
-const SEMANTIC_LABELS = {
+const SEMANTIC = {
 
 en:{
 location:"Location",
 phone:"Phone number",
-bankCard:"Bank card",
+card:"Bank card number",
 email:"Email",
 website:"Website",
-address:"Address",
-date:"Date",
-time:"Time",
-price:"Price",
-pounds:"pounds",
-euros:"euros",
-dollars:"dollars",
-and:"and"
+home:"Home",
+prize:"Prize",
+winner:"Winner",
+and:"and",
+or:"or",
+plus:"plus",
+male:"Male",
+female:"Female"
 },
 
 uk:{
 location:"Місцезнаходження",
 phone:"Номер телефону",
-bankCard:"Банківська картка",
+card:"Номер банківської картки",
 email:"Електронна пошта",
 website:"Вебсайт",
-address:"Адреса",
-date:"Дата",
-time:"Час",
-price:"Ціна",
-pounds:"фунтів",
-euros:"євро",
-dollars:"доларів",
-and:"і"
+home:"Дім",
+prize:"Приз",
+winner:"Переможець",
+and:"і",
+or:"або",
+plus:"плюс",
+male:"Самець",
+female:"Самка"
 },
 
 ru:{
 location:"Местоположение",
 phone:"Номер телефона",
-bankCard:"Банковская карта",
+card:"Номер банковской карты",
 email:"Электронная почта",
 website:"Веб-сайт",
-address:"Адрес",
-date:"Дата",
-time:"Время",
-price:"Цена",
-pounds:"фунтов",
-euros:"евро",
-dollars:"долларов",
-and:"и"
+home:"Дом",
+prize:"Приз",
+winner:"Победитель",
+and:"и",
+or:"или",
+plus:"плюс",
+male:"Самец",
+female:"Самка"
 },
 
 fr:{
 location:"Localisation",
 phone:"Numéro de téléphone",
-bankCard:"Carte bancaire",
-email:"E-mail",
+card:"Numéro de carte bancaire",
+email:"Adresse e-mail",
 website:"Site web",
-address:"Adresse",
-date:"Date",
-time:"Heure",
-price:"Prix",
-pounds:"livres",
-euros:"euros",
-dollars:"dollars",
-and:"et"
+home:"Domicile",
+prize:"Prix",
+winner:"Gagnant",
+and:"et",
+or:"ou",
+plus:"plus",
+male:"Mâle",
+female:"Femelle"
 },
 
 de:{
 location:"Standort",
 phone:"Telefonnummer",
-bankCard:"Bankkarte",
+card:"Bankkartennummer",
 email:"E-Mail",
 website:"Webseite",
-address:"Adresse",
-date:"Datum",
-time:"Uhrzeit",
-price:"Preis",
-pounds:"Pfund",
-euros:"Euro",
-dollars:"Dollar",
-and:"und"
+home:"Zuhause",
+prize:"Preis",
+winner:"Gewinner",
+and:"und",
+or:"oder",
+plus:"plus",
+male:"Männlich",
+female:"Weiblich"
 },
 
 es:{
 location:"Ubicación",
 phone:"Número de teléfono",
-bankCard:"Tarjeta bancaria",
+card:"Número de tarjeta bancaria",
 email:"Correo electrónico",
 website:"Sitio web",
-address:"Dirección",
-date:"Fecha",
-time:"Hora",
-price:"Precio",
-pounds:"libras",
-euros:"euros",
-dollars:"dólares",
-and:"y"
+home:"Hogar",
+prize:"Premio",
+winner:"Ganador",
+and:"y",
+or:"o",
+plus:"más",
+male:"Macho",
+female:"Hembra"
 },
 
 it:{
 location:"Posizione",
 phone:"Numero di telefono",
-bankCard:"Carta bancaria",
-email:"E-mail",
+card:"Numero della carta bancaria",
+email:"Email",
 website:"Sito web",
-address:"Indirizzo",
-date:"Data",
-time:"Ora",
-price:"Prezzo",
-pounds:"sterline",
-euros:"euro",
-dollars:"dollari",
-and:"e"
+home:"Casa",
+prize:"Premio",
+winner:"Vincitore",
+and:"e",
+or:"o",
+plus:"più",
+male:"Maschio",
+female:"Femmina"
 },
 
 pt:{
 location:"Localização",
 phone:"Número de telefone",
-bankCard:"Cartão bancário",
-email:"E-mail",
-website:"Site",
-address:"Endereço",
-date:"Data",
-time:"Hora",
-price:"Preço",
-pounds:"libras",
-euros:"euros",
-dollars:"dólares",
-and:"e"
+card:"Número do cartão bancário",
+email:"Email",
+website:"Website",
+home:"Casa",
+prize:"Prémio",
+winner:"Vencedor",
+and:"e",
+or:"ou",
+plus:"mais",
+male:"Macho",
+female:"Fêmea"
 },
 
 nl:{
 location:"Locatie",
 phone:"Telefoonnummer",
-bankCard:"Bankkaart",
+card:"Bankkaartnummer",
 email:"E-mail",
 website:"Website",
-address:"Adres",
-date:"Datum",
-time:"Tijd",
-price:"Prijs",
-pounds:"pond",
-euros:"euro",
-dollars:"dollar",
-and:"en"
+home:"Thuis",
+prize:"Prijs",
+winner:"Winnaar",
+and:"en",
+or:"of",
+plus:"plus",
+male:"Mannelijk",
+female:"Vrouwelijk"
 },
 
 pl:{
 location:"Lokalizacja",
 phone:"Numer telefonu",
-bankCard:"Karta bankowa",
+card:"Numer karty bankowej",
 email:"E-mail",
 website:"Strona internetowa",
-address:"Adres",
-date:"Data",
-time:"Czas",
-price:"Cena",
-pounds:"funtów",
-euros:"euro",
-dollars:"dolarów",
-and:"i"
+home:"Dom",
+prize:"Nagroda",
+winner:"Zwycięzca",
+and:"i",
+or:"lub",
+plus:"plus",
+male:"Samiec",
+female:"Samica"
 },
 
 cs:{
 location:"Poloha",
 phone:"Telefonní číslo",
-bankCard:"Bankovní karta",
+card:"Číslo bankovní karty",
 email:"E-mail",
 website:"Web",
-address:"Adresa",
-date:"Datum",
-time:"Čas",
-price:"Cena",
-pounds:"liber",
-euros:"eur",
-dollars:"dolarů",
-and:"a"
+home:"Domov",
+prize:"Cena",
+winner:"Vítěz",
+and:"a",
+or:"nebo",
+plus:"plus",
+male:"Samec",
+female:"Samice"
 },
 
 sk:{
 location:"Poloha",
 phone:"Telefónne číslo",
-bankCard:"Banková karta",
+card:"Číslo bankovej karty",
 email:"E-mail",
 website:"Web",
-address:"Adresa",
-date:"Dátum",
-time:"Čas",
-price:"Cena",
-pounds:"libier",
-euros:"eur",
-dollars:"dolárov",
-and:"a"
+home:"Domov",
+prize:"Cena",
+winner:"Víťaz",
+and:"a",
+or:"alebo",
+plus:"plus",
+male:"Samec",
+female:"Samica"
 },
 
 hu:{
 location:"Hely",
 phone:"Telefonszám",
-bankCard:"Bankkártya",
+card:"Bankkártyaszám",
 email:"E-mail",
 website:"Weboldal",
-address:"Cím",
-date:"Dátum",
-time:"Idő",
-price:"Ár",
-pounds:"font",
-euros:"euró",
-dollars:"dollár",
-and:"és"
+home:"Otthon",
+prize:"Díj",
+winner:"Győztes",
+and:"és",
+or:"vagy",
+plus:"plusz",
+male:"Hím",
+female:"Nőstény"
 },
 
 ro:{
 location:"Locație",
 phone:"Număr de telefon",
-bankCard:"Card bancar",
+card:"Număr card bancar",
 email:"E-mail",
 website:"Site web",
-address:"Adresă",
-date:"Dată",
-time:"Oră",
-price:"Preț",
-pounds:"lire",
-euros:"euro",
-dollars:"dolari",
-and:"și"
+home:"Acasă",
+prize:"Premiu",
+winner:"Câștigător",
+and:"și",
+or:"sau",
+plus:"plus",
+male:"Mascul",
+female:"Femelă"
 },
 
 bg:{
 location:"Местоположение",
 phone:"Телефонен номер",
-bankCard:"Банкова карта",
+card:"Номер на банкова карта",
 email:"Имейл",
 website:"Уебсайт",
-address:"Адрес",
-date:"Дата",
-time:"Час",
-price:"Цена",
-pounds:"паунда",
-euros:"евро",
-dollars:"долара",
-and:"и"
+home:"Дом",
+prize:"Награда",
+winner:"Победител",
+and:"и",
+or:"или",
+plus:"плюс",
+male:"Мъжки",
+female:"Женски"
 },
 
 el:{
 location:"Τοποθεσία",
 phone:"Αριθμός τηλεφώνου",
-bankCard:"Τραπεζική κάρτα",
-email:"Ηλεκτρονικό ταχυδρομείο",
+card:"Αριθμός τραπεζικής κάρτας",
+email:"Email",
 website:"Ιστότοπος",
-address:"Διεύθυνση",
-date:"Ημερομηνία",
-time:"Ώρα",
-price:"Τιμή",
-pounds:"λίρες",
-euros:"ευρώ",
-dollars:"δολάρια",
-and:"και"
+home:"Σπίτι",
+prize:"Βραβείο",
+winner:"Νικητής",
+and:"και",
+or:"ή",
+plus:"συν",
+male:"Αρσενικό",
+female:"Θηλυκό"
 },
 
 sv:{
 location:"Plats",
 phone:"Telefonnummer",
-bankCard:"Bankkort",
+card:"Bankkortsnummer",
 email:"E-post",
 website:"Webbplats",
-address:"Adress",
-date:"Datum",
-time:"Tid",
-price:"Pris",
-pounds:"pund",
-euros:"euro",
-dollars:"dollar",
-and:"och"
+home:"Hem",
+prize:"Pris",
+winner:"Vinnare",
+and:"och",
+or:"eller",
+plus:"plus",
+male:"Hane",
+female:"Hona"
 },
 
 da:{
 location:"Placering",
 phone:"Telefonnummer",
-bankCard:"Bankkort",
+card:"Bankkortnummer",
 email:"E-mail",
-website:"Websted",
-address:"Adresse",
-date:"Dato",
-time:"Tid",
-price:"Pris",
-pounds:"pund",
-euros:"euro",
-dollars:"dollar",
-and:"og"
+website:"Website",
+home:"Hjem",
+prize:"Præmie",
+winner:"Vinder",
+and:"og",
+or:"eller",
+plus:"plus",
+male:"Han",
+female:"Hun"
 },
 
 no:{
 location:"Sted",
 phone:"Telefonnummer",
-bankCard:"Bankkort",
+card:"Bankkortnummer",
 email:"E-post",
 website:"Nettsted",
-address:"Adresse",
-date:"Dato",
-time:"Tid",
-price:"Pris",
-pounds:"pund",
-euros:"euro",
-dollars:"dollar",
-and:"og"
+home:"Hjem",
+prize:"Premie",
+winner:"Vinner",
+and:"og",
+or:"eller",
+plus:"pluss",
+male:"Hann",
+female:"Hunn"
 },
 
 fi:{
 location:"Sijainti",
 phone:"Puhelinnumero",
-bankCard:"Pankkikortti",
+card:"Pankkikortin numero",
 email:"Sähköposti",
 website:"Verkkosivusto",
-address:"Osoite",
-date:"Päivämäärä",
-time:"Aika",
-price:"Hinta",
-pounds:"puntaa",
-euros:"euroa",
-dollars:"dollaria",
-and:"ja"
+home:"Koti",
+prize:"Palkinto",
+winner:"Voittaja",
+and:"ja",
+or:"tai",
+plus:"plus",
+male:"Uros",
+female:"Naaras"
 },
 
 tr:{
 location:"Konum",
 phone:"Telefon numarası",
-bankCard:"Banka kartı",
+card:"Banka kartı numarası",
 email:"E-posta",
 website:"Web sitesi",
-address:"Adres",
-date:"Tarih",
-time:"Saat",
-price:"Fiyat",
-pounds:"sterlin",
-euros:"avro",
-dollars:"dolar",
-and:"ve"
+home:"Ev",
+prize:"Ödül",
+winner:"Kazanan",
+and:"ve",
+or:"veya",
+plus:"artı",
+male:"Erkek",
+female:"Dişi"
 },
 
 ar:{
 location:"الموقع",
 phone:"رقم الهاتف",
-bankCard:"بطاقة مصرفية",
+card:"رقم البطاقة البنكية",
 email:"البريد الإلكتروني",
 website:"الموقع الإلكتروني",
-address:"العنوان",
-date:"التاريخ",
-time:"الوقت",
-price:"السعر",
-pounds:"جنيهات",
-euros:"يورو",
-dollars:"دولارات",
-and:"و"
+home:"المنزل",
+prize:"الجائزة",
+winner:"الفائز",
+and:"و",
+or:"أو",
+plus:"زائد",
+male:"ذكر",
+female:"أنثى"
 },
 
 hi:{
 location:"स्थान",
 phone:"फ़ोन नंबर",
-bankCard:"बैंक कार्ड",
+card:"बैंक कार्ड नंबर",
 email:"ईमेल",
 website:"वेबसाइट",
-address:"पता",
-date:"तारीख",
-time:"समय",
-price:"कीमत",
-pounds:"पाउंड",
-euros:"यूरो",
-dollars:"डॉलर",
-and:"और"
+home:"घर",
+prize:"पुरस्कार",
+winner:"विजेता",
+and:"और",
+or:"या",
+plus:"प्लस",
+male:"नर",
+female:"मादा"
 }
 
 };
 
+
 /* =========================================================
-ENGLISH WORDS THAT MUST STAY ENGLISH
+COUNT UNITS
 ========================================================= */
 
-const ENGLISH_TERMS = [
-"PETS AND DOGUE",
-"PETS & DOGUE",
-"Digital lifestyle platform",
-"One world Every pet",
-"One world. Every pet.",
-"Pet Friendly Places",
-"Pet Friendly",
-"Cover Stars",
-"Cover Star",
-"Hall Of Fame",
-"Marketplace",
-"Edition",
-"Issue",
-"Club",
-"Fashion",
-"Health",
-"Photos",
-"Articles",
-"Community",
-"Contests",
-"Partners",
-"Rescue",
-"Pomeranian",
-"Cockapoo",
-"British Shorthair"
-];
+const COUNT_UNITS = {
 
-const ENGLISH_TERMS_REGEX = new RegExp(
-"(" +
-ENGLISH_TERMS
-.slice()
-.sort(function(a,b){
-return b.length-a.length;
-})
-.map(function(term){
-return term.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-})
-.join("|") +
-")",
-"gi"
-);
+en:{
+year:["year","years"],
+week:["week","weeks"],
+month:["month","months"],
+day:["day","days"],
+pound:["pound","pounds"]
+},
+
+uk:{
+year:["рік","роки","років"],
+week:["тиждень","тижні","тижнів"],
+month:["місяць","місяці","місяців"],
+day:["день","дні","днів"],
+pound:["фунт","фунти","фунтів"]
+},
+
+ru:{
+year:["год","года","лет"],
+week:["неделя","недели","недель"],
+month:["месяц","месяца","месяцев"],
+day:["день","дня","дней"],
+pound:["фунт","фунта","фунтов"]
+},
+
+bg:{
+year:["година","години"],
+week:["седмица","седмици"],
+month:["месец","месеца"],
+day:["ден","дни"],
+pound:["паунд","паунда"]
+},
+
+fr:{
+year:["an","ans"],
+week:["semaine","semaines"],
+month:["mois","mois"],
+day:["jour","jours"],
+pound:["livre sterling","livres sterling"]
+},
+
+de:{
+year:["Jahr","Jahre"],
+week:["Woche","Wochen"],
+month:["Monat","Monate"],
+day:["Tag","Tage"],
+pound:["Pfund","Pfund"]
+},
+
+es:{
+year:["año","años"],
+week:["semana","semanas"],
+month:["mes","meses"],
+day:["día","días"],
+pound:["libra","libras"]
+},
+
+it:{
+year:["anno","anni"],
+week:["settimana","settimane"],
+month:["mese","mesi"],
+day:["giorno","giorni"],
+pound:["sterlina","sterline"]
+},
+
+pt:{
+year:["ano","anos"],
+week:["semana","semanas"],
+month:["mês","meses"],
+day:["dia","dias"],
+pound:["libra","libras"]
+},
+
+nl:{
+year:["jaar","jaar"],
+week:["week","weken"],
+month:["maand","maanden"],
+day:["dag","dagen"],
+pound:["pond","pond"]
+},
+
+pl:{
+year:["rok","lata"],
+week:["tydzień","tygodnie"],
+month:["miesiąc","miesiące"],
+day:["dzień","dni"],
+pound:["funt","funty"]
+},
+
+cs:{
+year:["rok","roky"],
+week:["týden","týdny"],
+month:["měsíc","měsíce"],
+day:["den","dny"],
+pound:["libra","libry"]
+},
+
+sk:{
+year:["rok","roky"],
+week:["týždeň","týždne"],
+month:["mesiac","mesiace"],
+day:["deň","dni"],
+pound:["libra","libry"]
+},
+
+hu:{
+year:["év","év"],
+week:["hét","hét"],
+month:["hónap","hónap"],
+day:["nap","nap"],
+pound:["font","font"]
+},
+
+ro:{
+year:["an","ani"],
+week:["săptămână","săptămâni"],
+month:["lună","luni"],
+day:["zi","zile"],
+pound:["liră","lire"]
+},
+
+el:{
+year:["έτος","έτη"],
+week:["εβδομάδα","εβδομάδες"],
+month:["μήνας","μήνες"],
+day:["ημέρα","ημέρες"],
+pound:["λίρα","λίρες"]
+},
+
+sv:{
+year:["år","år"],
+week:["vecka","veckor"],
+month:["månad","månader"],
+day:["dag","dagar"],
+pound:["pund","pund"]
+},
+
+da:{
+year:["år","år"],
+week:["uge","uger"],
+month:["måned","måneder"],
+day:["dag","dage"],
+pound:["pund","pund"]
+},
+
+no:{
+year:["år","år"],
+week:["uke","uker"],
+month:["måned","måneder"],
+day:["dag","dager"],
+pound:["pund","pund"]
+},
+
+fi:{
+year:["vuosi","vuotta"],
+week:["viikko","viikkoa"],
+month:["kuukausi","kuukautta"],
+day:["päivä","päivää"],
+pound:["punta","puntaa"]
+},
+
+tr:{
+year:["yıl","yıl"],
+week:["hafta","hafta"],
+month:["ay","ay"],
+day:["gün","gün"],
+pound:["sterlin","sterlin"]
+},
+
+ar:{
+year:["سنة","سنوات"],
+week:["أسبوع","أسابيع"],
+month:["شهر","أشهر"],
+day:["يوم","أيام"],
+pound:["جنيه إسترليني","جنيهات إسترلينية"]
+},
+
+hi:{
+year:["वर्ष","वर्ष"],
+week:["सप्ताह","सप्ताह"],
+month:["महीना","महीने"],
+day:["दिन","दिन"],
+pound:["पाउंड","पाउंड"]
+}
+
+};
+
+
+/* =========================================================
+COMMON ENGLISH WORDS
+========================================================= */
+
+const ENGLISH_HINT_WORDS = new Set([
+"pets",
+"dogue",
+"marketplace",
+"pomeranian",
+"cockapoo",
+"british",
+"shorthair",
+"grooming",
+"styling",
+"photography",
+"rabbit",
+"london",
+"bristol",
+"manchester",
+"brighton",
+"bournemouth",
+"edition",
+"cover",
+"star",
+"club",
+"editorial"
+]);
+
 
 /* =========================================================
 READABLE BLOCKS
 ========================================================= */
 
 const READABLE_SELECTOR = [
+
 "[data-pd-readable]",
+
 "main article",
+
 "main .article-card",
 "main .story-card",
 "main .feature-card",
@@ -736,11 +933,37 @@ const READABLE_SELECTOR = [
 "main .world-card",
 "main .category-card",
 "main .rubric-card",
-"main .topic-card"
+"main .topic-card",
+
+"main .market-intro",
+"main .section-head",
+"main .browse-card",
+"main .listing-card",
+"main .publish-strip",
+
+"main .community-copy",
+"main .result-card",
+"main .community-note-inner",
+
+"main .intro-photo",
+"main .how",
+"main .prize-box",
+"main .rules",
+"main .hall-cta",
+
+"main .impact",
+"main .rescue-cta",
+
+".modal-sheet",
+".modal-content",
+".detail-description"
+
 ].join(",");
+
 
 const SECTION_SELECTOR =
 "main > section";
+
 
 /* =========================================================
 STATE
@@ -755,10 +978,10 @@ null;
 let activeUtterance =
 null;
 
-let speechParts =
+let speechQueue =
 [];
 
-let speechPartIndex =
+let queueIndex =
 0;
 
 let speaking =
@@ -769,6 +992,10 @@ false;
 
 let readableCounter =
 0;
+
+let updateTimer =
+null;
+
 
 /* =========================================================
 LANGUAGE
@@ -784,6 +1011,7 @@ value ||
 .toLowerCase()
 .trim();
 
+
 if(
 code.includes("-")
 ){
@@ -792,6 +1020,7 @@ code =
 code.split("-")[0];
 
 }
+
 
 if(
 code.includes("_")
@@ -802,11 +1031,13 @@ code.split("_")[0];
 
 }
 
+
 code =
 LANGUAGE_ALIASES[
 code
 ] ||
 code;
+
 
 return SUPPORTED_LANGUAGES.includes(
 code
@@ -815,6 +1046,7 @@ code
 : "en";
 
 }
+
 
 function getCurrentLanguage(){
 
@@ -830,6 +1062,7 @@ const result =
 window.PetsDogueLanguage
 .getCurrentLanguage();
 
+
 if(
 typeof result ===
 "string"
@@ -840,6 +1073,7 @@ result
 );
 
 }
+
 
 if(
 result &&
@@ -858,12 +1092,14 @@ result.code
 }catch(error){
 }
 
+
 try{
 
 const saved =
 localStorage.getItem(
 LANGUAGE_KEY
 );
+
 
 if(
 saved
@@ -878,61 +1114,37 @@ saved
 }catch(error){
 }
 
-if(
-document.documentElement.lang
-){
 
 return normalizeLanguage(
-document.documentElement.lang
+document.documentElement.lang ||
+"en"
 );
 
 }
 
-return "en";
-
-}
-
-function getLocale(language){
-
-const code =
-normalizeLanguage(
-language ||
-getCurrentLanguage()
-);
-
-return SPEECH_LOCALES[
-code
-] ||
-SPEECH_LOCALES.en;
-
-}
 
 function getLabels(){
 
-const language =
-getCurrentLanguage();
-
 return LABELS[
-language
+getCurrentLanguage()
 ] ||
 LABELS.en;
 
 }
 
-function getSemanticLabels(){
 
-const language =
-getCurrentLanguage();
+function getSemantic(){
 
-return SEMANTIC_LABELS[
-language
+return SEMANTIC[
+getCurrentLanguage()
 ] ||
-SEMANTIC_LABELS.en;
+SEMANTIC.en;
 
 }
 
+
 /* =========================================================
-SCREEN READER STATUS
+LIVE REGION
 ========================================================= */
 
 function ensureLiveRegion(){
@@ -942,6 +1154,7 @@ document.getElementById(
 "pdNarrationStatus"
 );
 
+
 if(
 element
 ){
@@ -950,52 +1163,64 @@ return element;
 
 }
 
+
 element =
 document.createElement(
 "div"
 );
 
+
 element.id =
 "pdNarrationStatus";
+
 
 element.setAttribute(
 "role",
 "status"
 );
 
+
 element.setAttribute(
 "aria-live",
 "polite"
 );
+
 
 element.setAttribute(
 "aria-atomic",
 "true"
 );
 
+
 element.setAttribute(
 "data-pd-speech-ignore",
 "true"
 );
 
+
 element.className =
 "pd-sr-only";
+
 
 document.body.appendChild(
 element
 );
 
+
 return element;
 
 }
+
 
 function announce(text){
 
 const region =
 ensureLiveRegion();
 
+
 region.textContent =
 "";
+
 
 window.setTimeout(
 function(){
@@ -1008,6 +1233,7 @@ text;
 );
 
 }
+
 
 /* =========================================================
 STYLES
@@ -1025,18 +1251,22 @@ return;
 
 }
 
+
 const style =
 document.createElement(
 "style"
 );
 
+
 style.id =
 "pdNarrationStyles";
+
 
 style.setAttribute(
 "data-pd-speech-ignore",
 "true"
 );
+
 
 style.textContent = `
 
@@ -1072,9 +1302,10 @@ border-radius:50%;
 background:rgba(7,7,7,.92);
 color:#fff;
 cursor:pointer;
-z-index:20;
-box-shadow:0 4px 16px rgba(0,0,0,.2);
+z-index:30;
+box-shadow:0 4px 16px rgba(0,0,0,.22);
 -webkit-tap-highlight-color:transparent;
+user-select:none;
 }
 
 html[dir="rtl"] .pd-local-speaker{
@@ -1159,43 +1390,34 @@ transition:none!important;
 
 `;
 
+
 document.head.appendChild(
 style
 );
 
 }
 
+
 /* =========================================================
-BUTTON ICON
+ICON
 ========================================================= */
 
 function speakerSvg(){
 
 return `
-
 <svg
 viewBox="0 0 32 32"
 focusable="false"
 aria-hidden="true"
 >
-
-<path
-d="M5 13h6l7-6v18l-7-6H5z"
-></path>
-
-<path
-d="M22 11c2 1.5 3 3.1 3 5s-1 3.5-3 5"
-></path>
-
-<path
-d="M25 7c3.3 2.5 5 5.5 5 9s-1.7 6.5-5 9"
-></path>
-
+<path d="M5 13h6l7-6v18l-7-6H5z"></path>
+<path d="M22 11c2 1.5 3 3.1 3 5s-1 3.5-3 5"></path>
+<path d="M25 7c3.3 2.5 5 5.5 5 9s-1.7 6.5-5 9"></path>
 </svg>
-
 `;
 
 }
+
 
 /* =========================================================
 VISIBLE TEXT
@@ -1212,29 +1434,26 @@ return false;
 
 }
 
+
 const style =
 window.getComputedStyle(
 element
 );
 
-if(
-style.display ===
-"none" ||
-style.visibility ===
-"hidden" ||
-style.visibility ===
-"collapse"
+
+return !(
+style.display === "none" ||
+style.visibility === "hidden" ||
+style.visibility === "collapse"
+);
+
+}
+
+
+function excludedTextNode(
+element,
+root
 ){
-
-return false;
-
-}
-
-return true;
-
-}
-
-function excludedTextNode(element){
 
 if(
 !element
@@ -1244,7 +1463,8 @@ return true;
 
 }
 
-return Boolean(
+
+if(
 element.closest(
 [
 "script",
@@ -1253,12 +1473,6 @@ element.closest(
 "template",
 "svg",
 "canvas",
-"button",
-"input",
-"select",
-"textarea",
-"form",
-"nav",
 "[hidden]",
 '[aria-hidden="true"]',
 "[data-pd-speech-ignore]",
@@ -1266,9 +1480,60 @@ element.closest(
 ".pd-sr-only"
 ].join(",")
 )
-);
+){
+
+return true;
 
 }
+
+
+const interactive =
+element.closest(
+"button,input,select,textarea,form"
+);
+
+
+if(
+interactive &&
+interactive !== root &&
+!root.contains(interactive)
+){
+
+return true;
+
+}
+
+
+if(
+interactive &&
+interactive !== root
+){
+
+return true;
+
+}
+
+
+const navigation =
+element.closest(
+"nav"
+);
+
+
+if(
+navigation &&
+navigation !== root
+){
+
+return true;
+
+}
+
+
+return false;
+
+}
+
 
 function getTextFromElement(element){
 
@@ -1279,6 +1544,7 @@ if(
 return "";
 
 }
+
 
 const walker =
 document.createTreeWalker(
@@ -1299,6 +1565,7 @@ node.nodeValue ||
 .replace(/\s+/g," ")
 .trim();
 
+
 if(
 !text
 ){
@@ -1307,13 +1574,16 @@ return NodeFilter.FILTER_REJECT;
 
 }
 
+
 const parent =
 node.parentElement;
+
 
 if(
 !parent ||
 excludedTextNode(
-parent
+parent,
+element
 ) ||
 !elementVisible(
 parent
@@ -1324,6 +1594,7 @@ return NodeFilter.FILTER_REJECT;
 
 }
 
+
 return NodeFilter.FILTER_ACCEPT;
 
 }
@@ -1332,10 +1603,12 @@ return NodeFilter.FILTER_ACCEPT;
 
 );
 
-const textParts =
+
+const parts =
 [];
 
 let node;
+
 
 while(
 (
@@ -1344,7 +1617,7 @@ walker.nextNode()
 )
 ){
 
-const text =
+const value =
 String(
 node.nodeValue ||
 ""
@@ -1352,241 +1625,848 @@ node.nodeValue ||
 .replace(/\s+/g," ")
 .trim();
 
+
 if(
-text
+value
 ){
 
-textParts.push(
-text
+parts.push(
+value
 );
 
 }
 
 }
 
-return textParts
+
+return parts
 .join(" ")
 .replace(/\s+/g," ")
 .trim();
 
 }
 
+
 /* =========================================================
-SEMANTIC TEXT PREPARATION
+PLURAL FORMS
 ========================================================= */
 
-function replaceToken(
-text,
-pattern,
-replacement
+function slavicForm(
+number,
+forms
 ){
 
-return text.replace(
-pattern,
-function(){
+const value =
+Math.abs(
+Number(number)
+);
 
-return " " +
-replacement +
-": ";
+
+const lastTwo =
+value % 100;
+
+
+const last =
+value % 10;
+
+
+if(
+lastTwo >= 11 &&
+lastTwo <= 14
+){
+
+return forms[2] ||
+forms[1];
 
 }
+
+
+if(
+last === 1
+){
+
+return forms[0];
+
+}
+
+
+if(
+last >= 2 &&
+last <= 4
+){
+
+return forms[1];
+
+}
+
+
+return forms[2] ||
+forms[1];
+
+}
+
+
+function countUnit(
+number,
+unit,
+language
+){
+
+const table =
+COUNT_UNITS[
+language
+] ||
+COUNT_UNITS.en;
+
+
+const forms =
+table[
+unit
+] ||
+COUNT_UNITS.en[
+unit
+];
+
+
+if(
+["ru","uk"].includes(
+language
+)
+){
+
+return slavicForm(
+number,
+forms
 );
 
 }
 
-function prepareSemanticText(text){
 
-const t =
-getSemanticLabels();
-
-let value =
-String(
-text ||
-""
-);
-
-/*
-Keep the PETS & DOGUE brand English.
-*/
-
-value =
-value.replace(
-/PETS\s*&\s*DOGUE/gi,
-"PETS AND DOGUE"
-);
-
-/*
-Meaningful icons.
-*/
-
-value =
-replaceToken(
-value,
-/📍/gu,
-t.location
-);
-
-value =
-replaceToken(
-value,
-/(?:📞|☎️?|📱)/gu,
-t.phone
-);
-
-value =
-replaceToken(
-value,
-/💳/gu,
-t.bankCard
-);
-
-value =
-replaceToken(
-value,
-/(?:📧|✉️?|📩)/gu,
-t.email
-);
-
-value =
-replaceToken(
-value,
-/(?:🌐|🔗)/gu,
-t.website
-);
-
-value =
-replaceToken(
-value,
-/(?:🏠|🏡)/gu,
-t.address
-);
-
-value =
-replaceToken(
-value,
-/(?:📅|🗓️?)/gu,
-t.date
-);
-
-value =
-replaceToken(
-value,
-/(?:🕒|🕐|🕑|🕓|🕔|🕕|🕖|🕗|🕘|🕙|🕚|🕛|⏰)/gu,
-t.time
-);
-
-value =
-replaceToken(
-value,
-/💰/gu,
-t.price
-);
-
-/*
-Currency.
-*/
-
-value =
-value.replace(
-/£\s*([0-9][0-9.,]*)/g,
-"$1 " +
-t.pounds
-);
-
-value =
-value.replace(
-/€\s*([0-9][0-9.,]*)/g,
-"$1 " +
-t.euros
-);
-
-value =
-value.replace(
-/\$\s*([0-9][0-9.,]*)/g,
-"$1 " +
-t.dollars
-);
-
-/*
-Ampersand becomes natural language.
-PETS & DOGUE was already protected above.
-*/
-
-value =
-value.replace(
-/\s+&\s+/g,
-" " +
-t.and +
-" "
-);
-
-/*
-Decorative symbols become pauses or disappear.
-They must not be spoken as strange system names.
-*/
-
-value =
-value
-.replace(
-/[•·|¦]+/g,
-", "
-)
-.replace(
-/[→←↔↗↘↙↖]+/g,
-" "
-)
-.replace(
-/[◆◇♦◊✦✧★☆✓✔✅☑⌘◉●○■□▪▫]+/gu,
-" "
-)
-.replace(
-/[♡♥❤❤️]+/gu,
-""
-);
-
-/*
-Remove remaining unrecognised pictographic emoji.
-Known useful icons have already been converted above.
-*/
-
-try{
-
-value =
-value.replace(
-/\p{Extended_Pictographic}/gu,
-" "
-);
-
-}catch(error){
-}
-
-/*
-Punctuation remains as a natural pause.
-It is not explicitly pronounced.
-*/
-
-value =
-value
-.replace(
-/\s*([,;:])\s*/g,
-"$1 "
-)
-.replace(
-/\s*([.!?])\s*/g,
-"$1 "
-)
-.replace(
-/\s+/g,
-" "
-)
-.trim();
-
-return value;
+return Number(number) === 1
+? forms[0]
+: forms[1];
 
 }
+
 
 /* =========================================================
-TEXT SPLITTING
+SMART TEXT NORMALISATION
+========================================================= */
+
+function normalizeSemanticText(
+rawText
+){
+
+const language =
+getCurrentLanguage();
+
+
+const semantic =
+SEMANTIC[
+language
+] ||
+SEMANTIC.en;
+
+
+let text =
+String(
+rawText ||
+""
+);
+
+
+/*
+Location and contact icons.
+*/
+
+text =
+text.replace(
+/📍/g,
+" " +
+semantic.location +
+": "
+);
+
+
+text =
+text.replace(
+/(?:☎️?|📞|📱)/g,
+" " +
+semantic.phone +
+": "
+);
+
+
+text =
+text.replace(
+/(?:💳|💳️)/g,
+" " +
+semantic.card +
+": "
+);
+
+
+text =
+text.replace(
+/(?:📧|✉️?|✉)/g,
+" " +
+semantic.email +
+": "
+);
+
+
+text =
+text.replace(
+/(?:🌐|🔗)/g,
+" " +
+semantic.website +
+": "
+);
+
+
+text =
+text.replace(
+/(?:🏠|🏡)/g,
+" " +
+semantic.home +
+": "
+);
+
+
+text =
+text.replace(
+/🎁/g,
+" " +
+semantic.prize +
+": "
+);
+
+
+text =
+text.replace(
+/🏆/g,
+" " +
+semantic.winner +
+": "
+);
+
+
+/*
+Remove decorative visual symbols.
+*/
+
+text =
+text
+.replace(/[◆◇◈✦✧★☆♧⌘◉●○]/g," ")
+.replace(/[♡♥❤❤️]+/g," ")
+.replace(/[→←↗↘↑↓⇢➜➝]+/g,", ")
+.replace(/[＋+](?=\s*[A-Za-zА-Яа-яІіЇїЄєҐґ])/g," ")
+.replace(/·/g,", ")
+.replace(/\s+[|]\s+/g,", ");
+
+
+/*
+Ampersand and slash become meaningful conjunctions.
+*/
+
+text =
+text.replace(
+/\s*&\s*/g,
+" " +
+semantic.and +
+" "
+);
+
+
+text =
+text.replace(
+/\s+\/\s+/g,
+" " +
+semantic.or +
+" "
+);
+
+
+/*
+Gender words.
+*/
+
+text =
+text.replace(
+/\bFemale\b/gi,
+semantic.female
+);
+
+
+text =
+text.replace(
+/\bMale\b/gi,
+semantic.male
+);
+
+
+/*
+English age units are converted to the selected language.
+Example:
+2 years -> 2 года
+12 weeks -> 12 недель
+*/
+
+text =
+text.replace(
+/\b(\d+)\s*(years?|yrs?)\b/gi,
+function(
+match,
+number
+){
+
+return number +
+" " +
+countUnit(
+number,
+"year",
+language
+);
+
+}
+);
+
+
+text =
+text.replace(
+/\b(\d+)\s*(weeks?|wks?)\b/gi,
+function(
+match,
+number
+){
+
+return number +
+" " +
+countUnit(
+number,
+"week",
+language
+);
+
+}
+);
+
+
+text =
+text.replace(
+/\b(\d+)\s*(months?|mos?)\b/gi,
+function(
+match,
+number
+){
+
+return number +
+" " +
+countUnit(
+number,
+"month",
+language
+);
+
+}
+);
+
+
+text =
+text.replace(
+/\b(\d+)\s*(days?)\b/gi,
+function(
+match,
+number
+){
+
+return number +
+" " +
+countUnit(
+number,
+"day",
+language
+);
+
+}
+);
+
+
+/*
+British pounds.
+*/
+
+text =
+text.replace(
+/£\s*(\d+)(?![\d.,])/g,
+function(
+match,
+number
+){
+
+return number +
+" " +
+countUnit(
+number,
+"pound",
+language
+);
+
+}
+);
+
+
+/*
+Bank card numbers.
+Detect 13–19 digits, including spaces or hyphens.
+*/
+
+text =
+text.replace(
+/(?:\b(?:\d[ -]?){13,19}\b)/g,
+function(match){
+
+const digits =
+match.replace(
+/\D/g,
+""
+);
+
+
+if(
+digits.length < 13 ||
+digits.length > 19
+){
+
+return match;
+
+}
+
+
+return (
+semantic.card +
+": " +
+digits
+.split("")
+.join(" ")
+);
+
+}
+);
+
+
+/*
+Phone numbers.
+Numbers are separated digit by digit for clarity.
+*/
+
+text =
+text.replace(
+/(?:\+\d[\d\s().-]{7,}\d)/g,
+function(match){
+
+const digits =
+match.replace(
+/\D/g,
+""
+);
+
+
+if(
+digits.length < 8
+){
+
+return match;
+
+}
+
+
+return (
+semantic.phone +
+": " +
+semantic.plus +
+" " +
+digits
+.split("")
+.join(" ")
+);
+
+}
+);
+
+
+/*
+Email.
+*/
+
+text =
+text.replace(
+/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi,
+function(match){
+
+return (
+semantic.email +
+": " +
+match
+);
+
+}
+);
+
+
+/*
+URLs.
+*/
+
+text =
+text.replace(
+/https?:\/\/[^\s]+/gi,
+function(match){
+
+return (
+semantic.website +
+": " +
+match
+);
+
+}
+);
+
+
+/*
+Clean spaces while keeping punctuation for natural pauses.
+*/
+
+text =
+text
+.replace(/\s+([,.!?;:])/g,"$1")
+.replace(/([,.!?;:])(?=[^\s])/g,"$1 ")
+.replace(/\s+/g," ")
+.trim();
+
+
+return text;
+
+}
+
+
+/* =========================================================
+SCRIPT DETECTION
+========================================================= */
+
+function scriptOfCharacter(
+character
+){
+
+if(
+/[A-Za-zÀ-ÖØ-öø-ÿĀ-ž]/.test(
+character
+)
+){
+
+return "latin";
+
+}
+
+
+if(
+/[\u0400-\u052F]/.test(
+character
+)
+){
+
+return "cyrillic";
+
+}
+
+
+if(
+/[\u0370-\u03FF\u1F00-\u1FFF]/.test(
+character
+)
+){
+
+return "greek";
+
+}
+
+
+if(
+/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(
+character
+)
+){
+
+return "arabic";
+
+}
+
+
+if(
+/[\u0900-\u097F]/.test(
+character
+)
+){
+
+return "devanagari";
+
+}
+
+
+return "neutral";
+
+}
+
+
+function localeForScript(
+script,
+selectedLanguage,
+text=""
+){
+
+if(
+script === "cyrillic"
+){
+
+if(
+selectedLanguage === "uk"
+){
+
+return SPEECH_LOCALES.uk;
+
+}
+
+
+if(
+selectedLanguage === "bg"
+){
+
+return SPEECH_LOCALES.bg;
+
+}
+
+
+return SPEECH_LOCALES.ru;
+
+}
+
+
+if(
+script === "greek"
+){
+
+return SPEECH_LOCALES.el;
+
+}
+
+
+if(
+script === "arabic"
+){
+
+return SPEECH_LOCALES.ar;
+
+}
+
+
+if(
+script === "devanagari"
+){
+
+return SPEECH_LOCALES.hi;
+
+}
+
+
+if(
+script === "latin"
+){
+
+if(
+!LATIN_LANGUAGES.has(
+selectedLanguage
+)
+){
+
+return SPEECH_LOCALES.en;
+
+}
+
+
+const words =
+String(
+text
+)
+.toLowerCase()
+.match(
+/[a-zà-öø-ÿā-ž]+/g
+) ||
+[];
+
+
+const strongEnglish =
+words.some(
+word =>
+ENGLISH_HINT_WORDS.has(
+word
+)
+);
+
+
+if(
+strongEnglish
+){
+
+return SPEECH_LOCALES.en;
+
+}
+
+
+return SPEECH_LOCALES[
+selectedLanguage
+] ||
+SPEECH_LOCALES.en;
+
+}
+
+
+return SPEECH_LOCALES[
+selectedLanguage
+] ||
+SPEECH_LOCALES.en;
+
+}
+
+
+/* =========================================================
+SPLIT TEXT BY WRITING SYSTEM
+========================================================= */
+
+function splitByScript(
+text
+){
+
+const selectedLanguage =
+getCurrentLanguage();
+
+
+const segments =
+[];
+
+let currentText =
+"";
+
+let currentScript =
+null;
+
+
+function flush(){
+
+const clean =
+currentText
+.replace(/\s+/g," ")
+.trim();
+
+
+if(
+clean
+){
+
+segments.push({
+text:clean,
+lang:
+localeForScript(
+currentScript ||
+"neutral",
+selectedLanguage,
+clean
+)
+});
+
+}
+
+
+currentText =
+"";
+
+currentScript =
+null;
+
+}
+
+
+for(
+const character
+of text
+){
+
+const script =
+scriptOfCharacter(
+character
+);
+
+
+if(
+script === "neutral"
+){
+
+currentText +=
+character;
+
+continue;
+
+}
+
+
+if(
+!currentScript
+){
+
+currentScript =
+script;
+
+currentText +=
+character;
+
+continue;
+
+}
+
+
+if(
+script === currentScript
+){
+
+currentText +=
+character;
+
+continue;
+
+}
+
+
+flush();
+
+
+currentScript =
+script;
+
+currentText =
+character;
+
+}
+
+
+flush();
+
+
+return segments;
+
+}
+
+
+/* =========================================================
+TEXT CHUNKS
 ========================================================= */
 
 function splitLongText(
@@ -1595,9 +2475,9 @@ maxLength
 ){
 
 const words =
-text.split(
-/\s+/
-);
+String(text)
+.split(/\s+/);
+
 
 const output =
 [];
@@ -1605,15 +2485,15 @@ const output =
 let current =
 "";
 
+
 words.forEach(
 function(word){
 
 const candidate =
 current
-? current +
-" " +
-word
+? current + " " + word
 : word;
+
 
 if(
 candidate.length >
@@ -1624,6 +2504,7 @@ current
 output.push(
 current
 );
+
 
 current =
 word;
@@ -1638,6 +2519,7 @@ candidate;
 }
 );
 
+
 if(
 current
 ){
@@ -1648,50 +2530,59 @@ current
 
 }
 
+
 return output;
 
 }
 
-function makeChunks(text){
 
-const MAX_LENGTH =
-230;
+function makeSpeechQueue(
+text
+){
 
-const clean =
-String(
-text ||
-""
-)
-.replace(/\s+/g," ")
-.trim();
+const normalized =
+normalizeSemanticText(
+text
+);
+
 
 if(
-!clean
+!normalized
 ){
 
 return [];
 
 }
 
+
+const scriptSegments =
+splitByScript(
+normalized
+);
+
+
+const output =
+[];
+
+
+scriptSegments.forEach(
+function(segment){
+
 const sentences =
-clean.match(
+segment.text.match(
 /[^.!?。！？…]+[.!?。！？…]+|[^.!?。！？…]+$/g
 ) ||
 [
-clean
+segment.text
 ];
 
-const result =
-[];
-
-let current =
-"";
 
 sentences.forEach(
 function(sentence){
 
 const value =
 sentence.trim();
+
 
 if(
 !value
@@ -1701,528 +2592,23 @@ return;
 
 }
 
-if(
-value.length >
-MAX_LENGTH
-){
-
-if(
-current
-){
-
-result.push(
-current
-);
-
-current =
-"";
-
-}
 
 splitLongText(
 value,
-MAX_LENGTH
+220
 )
 .forEach(
 function(part){
 
-result.push(
-part
-);
-
-}
-);
-
-return;
-
-}
-
-const candidate =
-current
-? current +
-" " +
-value
-: value;
-
 if(
-candidate.length >
-MAX_LENGTH
+part.trim()
 ){
 
-if(
-current
-){
-
-result.push(
-current
-);
-
-}
-
-current =
-value;
-
-}else{
-
-current =
-candidate;
-
-}
-
-}
-);
-
-if(
-current
-){
-
-result.push(
-current
-);
-
-}
-
-return result;
-
-}
-
-/* =========================================================
-MIXED-LANGUAGE SPEECH
-========================================================= */
-
-function charScript(character){
-
-if(
-!character
-){
-
-return "common";
-
-}
-
-try{
-
-if(
-/\p{Script=Cyrillic}/u.test(
-character
-)
-){
-
-return "cyrillic";
-
-}
-
-if(
-/\p{Script=Greek}/u.test(
-character
-)
-){
-
-return "greek";
-
-}
-
-if(
-/\p{Script=Arabic}/u.test(
-character
-)
-){
-
-return "arabic";
-
-}
-
-if(
-/\p{Script=Devanagari}/u.test(
-character
-)
-){
-
-return "devanagari";
-
-}
-
-if(
-/\p{Script=Latin}/u.test(
-character
-)
-){
-
-return "latin";
-
-}
-
-}catch(error){
-}
-
-return "common";
-
-}
-
-function localeForScript(
-script,
-selectedLanguage
-){
-
-const selectedLocale =
-getLocale(
-selectedLanguage
-);
-
-if(
-script ===
-"latin"
-){
-
-return LATIN_SITE_LANGUAGES.has(
-selectedLanguage
-)
-? selectedLocale
-: SPEECH_LOCALES.en;
-
-}
-
-if(
-script ===
-"cyrillic"
-){
-
-if(
-[
-"uk",
-"ru",
-"bg"
-]
-.includes(
-selectedLanguage
-)
-){
-
-return selectedLocale;
-
-}
-
-return SPEECH_LOCALES.ru;
-
-}
-
-if(
-script ===
-"greek"
-){
-
-return SPEECH_LOCALES.el;
-
-}
-
-if(
-script ===
-"arabic"
-){
-
-return SPEECH_LOCALES.ar;
-
-}
-
-if(
-script ===
-"devanagari"
-){
-
-return SPEECH_LOCALES.hi;
-
-}
-
-return selectedLocale;
-
-}
-
-function splitByScript(
-text,
-selectedLanguage,
-forcedLocale
-){
-
-if(
-forcedLocale
-){
-
-return [
-{
-text,
-locale:forcedLocale
-}
-];
-
-}
-
-const result =
-[];
-
-let currentText =
-"";
-
-let currentLocale =
-null;
-
-let lastLetterLocale =
-getLocale(
-selectedLanguage
-);
-
-for(
-const character
-of Array.from(
-text
-)
-){
-
-const script =
-charScript(
-character
-);
-
-let locale;
-
-if(
-script ===
-"common"
-){
-
-locale =
-currentLocale ||
-lastLetterLocale;
-
-}else{
-
-locale =
-localeForScript(
-script,
-selectedLanguage
-);
-
-lastLetterLocale =
-locale;
-
-}
-
-if(
-currentLocale ===
-null
-){
-
-currentLocale =
-locale;
-
-currentText =
-character;
-
-continue;
-
-}
-
-if(
-locale ===
-currentLocale ||
-script ===
-"common"
-){
-
-currentText +=
-character;
-
-continue;
-
-}
-
-if(
-currentText.trim()
-){
-
-result.push({
-text:currentText,
-locale:currentLocale
-});
-
-}
-
-currentText =
-character;
-
-currentLocale =
-locale;
-
-}
-
-if(
-currentText.trim()
-){
-
-result.push({
-text:currentText,
-locale:
-currentLocale ||
-getLocale(
-selectedLanguage
-)
-});
-
-}
-
-return result;
-
-}
-
-function splitKnownEnglishTerms(
-text,
-selectedLanguage
-){
-
-/*
-For Russian, Ukrainian, Bulgarian, Greek,
-Arabic and Hindi every Latin run is automatically
-spoken with an English voice.
-
-For Latin-script languages we additionally protect
-common PETS & DOGUE English names and terms.
-*/
-
-if(
-!LATIN_SITE_LANGUAGES.has(
-selectedLanguage
-) ||
-selectedLanguage ===
-"en"
-){
-
-return splitByScript(
-text,
-selectedLanguage,
-null
-);
-
-}
-
-const result =
-[];
-
-let lastIndex =
-0;
-
-ENGLISH_TERMS_REGEX.lastIndex =
-0;
-
-let match;
-
-while(
-(
-match =
-ENGLISH_TERMS_REGEX.exec(
-text
-)
-)
-){
-
-if(
-match.index >
-lastIndex
-){
-
-result.push(
-...splitByScript(
-text.slice(
-lastIndex,
-match.index
-),
-selectedLanguage,
-null
-)
-);
-
-}
-
-result.push({
-text:match[0],
-locale:SPEECH_LOCALES.en
-});
-
-lastIndex =
-match.index +
-match[0].length;
-
-}
-
-if(
-lastIndex <
-text.length
-){
-
-result.push(
-...splitByScript(
-text.slice(
-lastIndex
-),
-selectedLanguage,
-null
-)
-);
-
-}
-
-return result;
-
-}
-
-function mergeSpeechSegments(
-segments
-){
-
-const merged =
-[];
-
-segments.forEach(
-function(segment){
-
-const text =
-String(
-segment.text ||
-""
-)
-.replace(/\s+/g," ");
-
-if(
-!text.trim()
-){
-
-return;
-
-}
-
-const previous =
-merged[
-merged.length -
-1
-];
-
-if(
-previous &&
-previous.locale ===
-segment.locale
-){
-
-previous.text =
-(
-previous.text +
-" " +
-text
-)
-.replace(/\s+/g," ");
-
-}else{
-
-merged.push({
-text:text.trim(),
-locale:segment.locale
+output.push({
+text:
+part.trim(),
+lang:
+segment.lang
 });
 
 }
@@ -2230,66 +2616,17 @@ locale:segment.locale
 }
 );
 
-return merged;
-
-}
-
-function buildSpeechParts(text){
-
-const selectedLanguage =
-getCurrentLanguage();
-
-const semanticText =
-prepareSemanticText(
-text
-);
-
-if(
-!semanticText
-){
-
-return [];
-
-}
-
-const languageSegments =
-mergeSpeechSegments(
-splitKnownEnglishTerms(
-semanticText,
-selectedLanguage
-)
-);
-
-const parts =
-[];
-
-languageSegments.forEach(
-function(segment){
-
-makeChunks(
-segment.text
-)
-.forEach(
-function(chunk){
-
-parts.push({
-text:chunk,
-locale:
-segment.locale ||
-getLocale(
-selectedLanguage
-)
-});
-
 }
 );
 
 }
 );
 
-return parts;
+
+return output;
 
 }
+
 
 /* =========================================================
 VOICE
@@ -2307,9 +2644,11 @@ return null;
 
 }
 
+
 const voices =
 window.speechSynthesis
 .getVoices();
+
 
 if(
 !voices.length
@@ -2319,21 +2658,25 @@ return null;
 
 }
 
-const exact =
-voices.find(
-function(voice){
 
-return String(
-voice.lang
-)
-.toLowerCase() ===
+const requested =
 String(
-locale
+locale ||
+""
 )
 .toLowerCase();
 
-}
+
+const exact =
+voices.find(
+voice =>
+String(
+voice.lang
+)
+.toLowerCase() ===
+requested
 );
+
 
 if(
 exact
@@ -2343,29 +2686,26 @@ return exact;
 
 }
 
+
 const language =
-String(
-locale
-)
-.split("-")[0]
-.toLowerCase();
+requested
+.split("-")[0];
+
 
 return voices.find(
-function(voice){
-
-return String(
+voice =>
+String(
 voice.lang
 )
 .toLowerCase()
 .startsWith(
 language
-);
-
-}
+)
 ) ||
 null;
 
 }
+
 
 /* =========================================================
 BUTTON STATE
@@ -2376,6 +2716,7 @@ function updateAllButtonLabels(){
 const labels =
 getLabels();
 
+
 document
 .querySelectorAll(
 "[data-pd-speech-toggle]"
@@ -2383,42 +2724,48 @@ document
 .forEach(
 function(button){
 
-const isActive =
-button ===
-activeButton &&
+const active =
+button === activeButton &&
 speaking;
 
+
 const label =
-isActive
+active
 ? labels.stop
 : labels.listen;
+
 
 button.setAttribute(
 "aria-label",
 label
 );
 
+
 button.setAttribute(
 "title",
 label
 );
 
+
 button.setAttribute(
 "aria-pressed",
-isActive
+active
 ? "true"
 : "false"
 );
 
+
 button.dataset.speaking =
-isActive
+active
 ? "true"
 : "false";
+
 
 const hidden =
 button.querySelector(
 ".pd-speaker-label"
 );
+
 
 if(
 hidden
@@ -2434,6 +2781,7 @@ label;
 
 }
 
+
 /* =========================================================
 STOP
 ========================================================= */
@@ -2448,10 +2796,10 @@ true;
 speaking =
 false;
 
-speechParts =
+speechQueue =
 [];
 
-speechPartIndex =
+queueIndex =
 0;
 
 activeUtterance =
@@ -2459,6 +2807,7 @@ null;
 
 activeElement =
 null;
+
 
 if(
 "speechSynthesis" in window
@@ -2468,10 +2817,13 @@ window.speechSynthesis.cancel();
 
 }
 
+
 activeButton =
 null;
 
+
 updateAllButtonLabels();
+
 
 if(
 withAnnouncement
@@ -2485,8 +2837,9 @@ getLabels().stopped
 
 }
 
+
 /* =========================================================
-SPEAK NEXT PART
+READ QUEUE
 ========================================================= */
 
 function speakNext(){
@@ -2500,9 +2853,10 @@ return;
 
 }
 
+
 if(
-speechPartIndex >=
-speechParts.length
+queueIndex >=
+speechQueue.length
 ){
 
 speaking =
@@ -2520,45 +2874,52 @@ null;
 activeButton =
 null;
 
+
 updateAllButtonLabels();
+
 
 return;
 
 }
 
-const part =
-speechParts[
-speechPartIndex
+
+const item =
+speechQueue[
+queueIndex
 ];
 
-const locale =
-part.locale ||
-getLocale();
 
 const utterance =
 new SpeechSynthesisUtterance(
-part.text
+item.text
 );
+
 
 activeUtterance =
 utterance;
 
+
 utterance.lang =
-locale;
+item.lang;
+
 
 utterance.rate =
-1;
+0.96;
+
 
 utterance.pitch =
 1;
 
+
 utterance.volume =
 1;
 
+
 const voice =
 chooseVoice(
-locale
+item.lang
 );
+
 
 if(
 voice
@@ -2568,6 +2929,7 @@ utterance.voice =
 voice;
 
 }
+
 
 utterance.onend =
 function(){
@@ -2580,39 +2942,43 @@ return;
 
 }
 
-speechPartIndex +=
+
+queueIndex +=
 1;
+
 
 window.setTimeout(
 speakNext,
-20
+35
 );
 
 };
+
 
 utterance.onerror =
 function(event){
 
 if(
-event.error ===
-"canceled" ||
-event.error ===
-"interrupted"
+event.error === "canceled" ||
+event.error === "interrupted"
 ){
 
 return;
 
 }
 
-speechPartIndex +=
+
+queueIndex +=
 1;
+
 
 window.setTimeout(
 speakNext,
-20
+35
 );
 
 };
+
 
 window.speechSynthesis.speak(
 utterance
@@ -2620,8 +2986,9 @@ utterance
 
 }
 
+
 /* =========================================================
-START READING ONE BLOCK
+READ ONE BLOCK
 ========================================================= */
 
 function speakElement(
@@ -2631,6 +2998,7 @@ button
 
 const labels =
 getLabels();
+
 
 if(
 !(
@@ -2644,40 +3012,37 @@ announce(
 labels.unsupported
 );
 
+
 return;
 
 }
 
-/*
-Press the same button again = stop.
-*/
 
 if(
 speaking &&
-activeButton ===
-button
+activeButton === button
 ){
 
 stopSpeech(
 true
 );
 
+
 return;
 
 }
 
-/*
-Another topic stops the previous topic.
-*/
 
 stopSpeech(
 false
 );
 
+
 const text =
 getTextFromElement(
 element
 );
+
 
 if(
 !text
@@ -2687,14 +3052,17 @@ announce(
 labels.empty
 );
 
+
 return;
 
 }
 
+
 const prepared =
-buildSpeechParts(
+makeSpeechQueue(
 text
 );
+
 
 if(
 !prepared.length
@@ -2704,40 +3072,51 @@ announce(
 labels.empty
 );
 
+
 return;
 
 }
 
-speechParts =
+
+speechQueue =
 prepared;
 
-speechPartIndex =
+
+queueIndex =
 0;
+
 
 stopped =
 false;
 
+
 speaking =
 true;
+
 
 activeButton =
 button;
 
+
 activeElement =
 element;
 
+
 updateAllButtonLabels();
+
 
 announce(
 labels.reading
 );
 
+
 speakNext();
 
 }
 
+
 /* =========================================================
-TARGET RESOLUTION
+TARGET
 ========================================================= */
 
 function resolveTarget(button){
@@ -2746,6 +3125,7 @@ const selector =
 button.getAttribute(
 "data-pd-speech-target"
 );
+
 
 if(
 selector
@@ -2757,6 +3137,7 @@ const target =
 document.querySelector(
 selector
 );
+
 
 if(
 target
@@ -2771,10 +3152,12 @@ return target;
 
 }
 
+
 const controls =
 button.getAttribute(
 "aria-controls"
 );
+
 
 if(
 controls
@@ -2784,6 +3167,7 @@ const target =
 document.getElementById(
 controls
 );
+
 
 if(
 target
@@ -2795,6 +3179,7 @@ return target;
 
 }
 
+
 return button.closest(
 [
 "[data-pd-readable]",
@@ -2803,20 +3188,26 @@ return button.closest(
 ".story-card",
 ".feature-card",
 ".editorial-card",
-".magazine-card",
 ".content-card",
 ".world-card",
 ".category-card",
 ".rubric-card",
 ".topic-card",
+".listing-card",
+".browse-card",
+".result-card",
+".publish-strip",
+".impact",
+".rescue-cta",
 "section"
 ].join(",")
 );
 
 }
 
+
 /* =========================================================
-CREATE BUTTON
+CREATE SPEAKER
 ========================================================= */
 
 function createSpeakerForElement(
@@ -2833,26 +3224,31 @@ return;
 
 }
 
+
 const readableText =
 getTextFromElement(
 element
 );
 
+
 if(
 readableText.length <
-35
+25
 ){
 
 return;
 
 }
 
+
 element.dataset.pdNarrationReady =
 "true";
+
 
 element.classList.add(
 "pd-readable-block"
 );
+
 
 if(
 !element.id
@@ -2861,26 +3257,25 @@ if(
 readableCounter +=
 1;
 
+
 element.id =
 "pd-readable-" +
 readableCounter;
 
 }
 
+
 const existing =
 Array.from(
 element.children
-)
-.find(
-function(child){
-
-return child.matches &&
+).find(
+child =>
+child.matches &&
 child.matches(
 "[data-pd-speech-toggle]"
+)
 );
 
-}
-);
 
 if(
 existing
@@ -2892,52 +3287,99 @@ existing.setAttribute(
 element.id
 );
 
+
+existing.setAttribute(
+"aria-controls",
+element.id
+);
+
+
 bindButton(
 existing
 );
+
 
 return;
 
 }
 
-const button =
-document.createElement(
+
+/*
+Buttons and links must not contain another real button.
+For those blocks we use an accessible span role=button.
+*/
+
+const isInteractiveRoot =
+element.matches(
+"button,a"
+);
+
+
+const control =
+isInteractiveRoot
+? document.createElement("span")
+: document.createElement("button");
+
+
+if(
+isInteractiveRoot
+){
+
+control.setAttribute(
+"role",
 "button"
 );
 
-button.type =
+
+control.setAttribute(
+"tabindex",
+"0"
+);
+
+}else{
+
+control.type =
 "button";
 
-button.className =
+}
+
+
+control.className =
 "pd-local-speaker";
 
-button.setAttribute(
+
+control.setAttribute(
 "data-pd-speech-toggle",
 "true"
 );
 
-button.setAttribute(
+
+control.setAttribute(
 "data-pd-speech-target",
 "#" +
 element.id
 );
 
-button.setAttribute(
+
+control.setAttribute(
 "aria-controls",
 element.id
 );
 
-button.setAttribute(
+
+control.setAttribute(
 "aria-pressed",
 "false"
 );
 
-button.setAttribute(
+
+control.setAttribute(
 "data-pd-speech-ignore",
 "true"
 );
 
-button.innerHTML =
+
+control.innerHTML =
 speakerSvg() +
 `
 <span
@@ -2945,18 +3387,21 @@ class="pd-sr-only pd-speaker-label"
 ></span>
 `;
 
+
 element.appendChild(
-button
+control
 );
 
+
 bindButton(
-button
+control
 );
 
 }
 
+
 /* =========================================================
-BIND EXISTING BUTTON
+BIND BUTTON
 ========================================================= */
 
 function bindButton(button){
@@ -2971,8 +3416,10 @@ return;
 
 }
 
+
 button.dataset.pdSpeechBound =
 "true";
+
 
 button.addEventListener(
 "click",
@@ -2982,10 +3429,12 @@ event.preventDefault();
 
 event.stopPropagation();
 
+
 const target =
 resolveTarget(
 button
 );
+
 
 if(
 !target
@@ -2995,9 +3444,11 @@ announce(
 getLabels().empty
 );
 
+
 return;
 
 }
+
 
 speakElement(
 target,
@@ -3007,24 +3458,58 @@ button
 }
 );
 
+
+if(
+button.getAttribute(
+"role"
+) === "button"
+){
+
+button.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key === "Enter" ||
+event.key === " "
+){
+
+event.preventDefault();
+
+event.stopPropagation();
+
+button.click();
+
+}
+
+}
+);
+
+}
+
+
 updateAllButtonLabels();
 
 }
 
+
 /* =========================================================
-LEGACY SPEAKER SUPPORT
+LEGACY BUTTONS
 ========================================================= */
 
 function bindLegacyButtons(){
 
 const selector = [
+
 "[data-pd-speech-toggle]",
 "[data-read-aloud]",
 ".speaker-button",
 ".speaker-btn",
 ".listen-button",
 ".read-aloud-button"
+
 ].join(",");
+
 
 document
 .querySelectorAll(
@@ -3046,6 +3531,7 @@ button.setAttribute(
 
 }
 
+
 bindButton(
 button
 );
@@ -3055,8 +3541,9 @@ button
 
 }
 
+
 /* =========================================================
-ADD SPEAKERS TO CONTENT
+INSTALL SPEAKERS
 ========================================================= */
 
 function installLocalSpeakers(){
@@ -3064,19 +3551,22 @@ function installLocalSpeakers(){
 const elements =
 new Set();
 
+
 document
 .querySelectorAll(
 READABLE_SELECTOR
 )
 .forEach(
-function(element){
-
+element =>
 elements.add(
 element
+)
 );
 
-}
-);
+
+/*
+Top-level rubrics.
+*/
 
 document
 .querySelectorAll(
@@ -3090,9 +3580,10 @@ getTextFromElement(
 section
 );
 
+
 if(
 text.length >=
-70
+50
 ){
 
 elements.add(
@@ -3104,6 +3595,7 @@ section
 }
 );
 
+
 elements.forEach(
 function(element){
 
@@ -3114,11 +3606,14 @@ element
 }
 );
 
+
 bindLegacyButtons();
+
 
 updateAllButtonLabels();
 
 }
+
 
 /* =========================================================
 LANGUAGE CHANGE
@@ -3136,28 +3631,29 @@ false
 
 }
 
+
 updateAllButtonLabels();
+
 
 window.setTimeout(
 installLocalSpeakers,
-50
+80
 );
 
 }
+
 
 /* =========================================================
 DYNAMIC CONTENT
 ========================================================= */
 
-let updateTimer =
-null;
-
 const observer =
 new MutationObserver(
 function(mutations){
 
-let contentChanged =
+let changed =
 false;
+
 
 for(
 const mutation
@@ -3170,7 +3666,7 @@ mutation.type ===
 mutation.addedNodes.length
 ){
 
-contentChanged =
+changed =
 true;
 
 break;
@@ -3179,17 +3675,20 @@ break;
 
 }
 
+
 if(
-!contentChanged
+!changed
 ){
 
 return;
 
 }
 
+
 window.clearTimeout(
 updateTimer
 );
+
 
 updateTimer =
 window.setTimeout(
@@ -3204,11 +3703,13 @@ installLocalSpeakers();
 }
 );
 
+
 /* =========================================================
 PUBLIC API
 ========================================================= */
 
 window.PetsDogueNarration = {
+
 
 speakElement(element){
 
@@ -3224,6 +3725,7 @@ element
 
 }
 
+
 if(
 !element
 ){
@@ -3232,10 +3734,12 @@ return false;
 
 }
 
+
 let button =
 element.querySelector(
 ":scope > [data-pd-speech-toggle]"
 );
+
 
 if(
 !button
@@ -3245,12 +3749,14 @@ createSpeakerForElement(
 element
 );
 
+
 button =
 element.querySelector(
 ":scope > [data-pd-speech-toggle]"
 );
 
 }
+
 
 if(
 button
@@ -3261,13 +3767,16 @@ element,
 button
 );
 
+
 return true;
 
 }
 
+
 return false;
 
 },
+
 
 speak(text){
 
@@ -3279,43 +3788,44 @@ return false;
 
 }
 
-const labels =
-getLabels();
 
 if(
 !(
 "speechSynthesis" in window
-) ||
-typeof window.SpeechSynthesisUtterance ===
-"undefined"
+)
 ){
 
 announce(
-labels.unsupported
+getLabels().unsupported
 );
+
 
 return false;
 
 }
+
 
 stopSpeech(
 false
 );
 
-speechParts =
-buildSpeechParts(
+
+speechQueue =
+makeSpeechQueue(
 text
 );
 
+
 if(
-!speechParts.length
+!speechQueue.length
 ){
 
 return false;
 
 }
 
-speechPartIndex =
+
+queueIndex =
 0;
 
 stopped =
@@ -3330,15 +3840,19 @@ null;
 activeElement =
 null;
 
+
 announce(
-labels.reading
+getLabels().reading
 );
 
+
 speakNext();
+
 
 return true;
 
 },
+
 
 stop(){
 
@@ -3348,11 +3862,13 @@ true
 
 },
 
+
 isSpeaking(){
 
 return speaking;
 
 },
+
 
 refresh(){
 
@@ -3362,6 +3878,7 @@ installLocalSpeakers();
 
 };
 
+
 /* =========================================================
 EVENTS
 ========================================================= */
@@ -3370,6 +3887,13 @@ window.addEventListener(
 "petsdogue:languagechange",
 onLanguageChange
 );
+
+
+window.addEventListener(
+"languagechange",
+onLanguageChange
+);
+
 
 window.addEventListener(
 "storage",
@@ -3386,6 +3910,7 @@ onLanguageChange();
 
 }
 );
+
 
 document.addEventListener(
 "visibilitychange",
@@ -3405,6 +3930,7 @@ false
 }
 );
 
+
 window.addEventListener(
 "beforeunload",
 function(){
@@ -3416,6 +3942,27 @@ false
 }
 );
 
+
+/* =========================================================
+VOICES READY
+========================================================= */
+
+if(
+"speechSynthesis" in window
+){
+
+window.speechSynthesis.addEventListener?.(
+"voiceschanged",
+function(){
+
+updateAllButtonLabels();
+
+}
+);
+
+}
+
+
 /* =========================================================
 INITIALIZE
 ========================================================= */
@@ -3424,9 +3971,12 @@ function init(){
 
 addStyles();
 
+
 ensureLiveRegion();
 
+
 installLocalSpeakers();
+
 
 if(
 document.body
@@ -3443,6 +3993,7 @@ subtree:true
 }
 
 }
+
 
 if(
 document.readyState ===
