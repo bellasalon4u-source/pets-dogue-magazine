@@ -3,37 +3,12 @@
 /*
 =========================================================
 PETS & DOGUE
-GLOBAL ACCESSIBILITY + SMART LOCAL NARRATION
+GLOBAL MULTILINGUAL ACCESSIBILITY NARRATION
 =========================================================
-
-Each article, card, rubric or topic can have its own
-speaker button.
-
-SMART NARRATION:
-- reads only the selected block
-- follows the selected PETS & DOGUE language
-- recognises mixed-language text
-- English words inside Russian/Ukrainian/etc are spoken
-  with an English voice instead of Russian transcription
-- converts visual symbols into meaningful words
-- location pin = location
-- phone icon/number = phone number
-- card number = bank card number
-- email = email
-- website = website
-- prices such as £1 are spoken naturally
-- ages such as "2 years" are adapted to the chosen language
-- decorative symbols are not read as strange object names
-
-Ignore narration:
-data-pd-speech-ignore
-
-Explicit readable block:
-data-pd-readable
-
-Explicit speaker:
-data-pd-speech-toggle
-data-pd-speech-target="#elementId"
+One topic = one speaker.
+No duplicate speakers.
+Mixed-language pronunciation.
+Semantic reading of icons and common symbols.
 =========================================================
 */
 
@@ -41,21 +16,28 @@ data-pd-speech-target="#elementId"
 
 "use strict";
 
+/* Prevent the file from installing twice */
+if(window.__PETS_DOGUE_NARRATION_V4__){
+
+if(
+window.PetsDogueNarration &&
+typeof window.PetsDogueNarration.refresh === "function"
+){
+window.PetsDogueNarration.refresh();
+}
+
+return;
+}
+
+window.__PETS_DOGUE_NARRATION_V4__ = true;
+
 
 /* =========================================================
-SETTINGS
+LANGUAGES
 ========================================================= */
 
 const LANGUAGE_KEY =
 "pets_dogue_language";
-
-
-const SUPPORTED_LANGUAGES = [
-"en","uk","ru","fr","de","es","it","pt","nl","pl",
-"cs","sk","hu","ro","bg","el","sv","da","no","fi",
-"tr","ar","hi"
-];
-
 
 const LANGUAGE_ALIASES = {
 ua:"uk",
@@ -64,7 +46,6 @@ gr:"el",
 se:"sv",
 dk:"da"
 };
-
 
 const SPEECH_LOCALES = {
 en:"en-GB",
@@ -92,15 +73,12 @@ ar:"ar-SA",
 hi:"hi-IN"
 };
 
-
-const LATIN_LANGUAGES = new Set([
-"en","fr","de","es","it","pt","nl","pl",
-"cs","sk","hu","ro","sv","da","no","fi","tr"
-]);
+const SUPPORTED_LANGUAGES =
+Object.keys(SPEECH_LOCALES);
 
 
 /* =========================================================
-BUTTON / SCREEN READER LABELS
+BUTTON LABELS
 ========================================================= */
 
 const LABELS = {
@@ -135,10 +113,10 @@ unsupported:"Этот браузер не поддерживает озвучи�
 fr:{
 listen:"Écouter ce contenu",
 stop:"Arrêter la lecture",
-reading:"Lecture de ce contenu en cours.",
+reading:"Lecture en cours.",
 stopped:"Lecture arrêtée.",
-empty:"Il n’y a aucun texte à lire dans ce contenu.",
-unsupported:"La lecture vocale n’est pas prise en charge par ce navigateur."
+empty:"Il n’y a aucun texte à lire.",
+unsupported:"La lecture vocale n’est pas prise en charge."
 },
 
 de:{
@@ -146,35 +124,35 @@ listen:"Diesen Inhalt anhören",
 stop:"Vorlesen stoppen",
 reading:"Dieser Inhalt wird vorgelesen.",
 stopped:"Vorlesen gestoppt.",
-empty:"In diesem Inhalt gibt es keinen vorlesbaren Text.",
-unsupported:"Dieser Browser unterstützt keine Sprachausgabe."
+empty:"Kein Text zum Vorlesen.",
+unsupported:"Sprachausgabe wird nicht unterstützt."
 },
 
 es:{
 listen:"Escuchar este contenido",
 stop:"Detener lectura",
-reading:"Este contenido se está leyendo en voz alta.",
+reading:"Leyendo este contenido.",
 stopped:"Lectura detenida.",
-empty:"No hay texto para leer en este contenido.",
-unsupported:"Este navegador no admite la lectura de texto."
+empty:"No hay texto para leer.",
+unsupported:"La lectura de texto no está disponible."
 },
 
 it:{
 listen:"Ascolta questo contenuto",
 stop:"Interrompi lettura",
-reading:"Questo contenuto viene letto ad alta voce.",
+reading:"Lettura in corso.",
 stopped:"Lettura interrotta.",
-empty:"Non c’è testo da leggere in questo contenuto.",
-unsupported:"Questo browser non supporta la lettura vocale."
+empty:"Non c’è testo da leggere.",
+unsupported:"La lettura vocale non è supportata."
 },
 
 pt:{
 listen:"Ouvir este conteúdo",
 stop:"Parar leitura",
-reading:"Este conteúdo está a ser lido em voz alta.",
+reading:"Leitura em curso.",
 stopped:"Leitura parada.",
-empty:"Não existe texto para ler neste conteúdo.",
-unsupported:"Este navegador não suporta leitura de texto."
+empty:"Não existe texto para ler.",
+unsupported:"A leitura de texto não é suportada."
 },
 
 nl:{
@@ -182,53 +160,53 @@ listen:"Deze inhoud beluisteren",
 stop:"Voorlezen stoppen",
 reading:"Deze inhoud wordt voorgelezen.",
 stopped:"Voorlezen gestopt.",
-empty:"Er is geen leesbare tekst in deze inhoud.",
-unsupported:"Deze browser ondersteunt geen tekst-naar-spraak."
+empty:"Geen tekst om voor te lezen.",
+unsupported:"Tekst-naar-spraak wordt niet ondersteund."
 },
 
 pl:{
 listen:"Posłuchaj tej treści",
 stop:"Zatrzymaj czytanie",
-reading:"Ta treść jest czytana na głos.",
+reading:"Treść jest czytana.",
 stopped:"Czytanie zatrzymane.",
-empty:"W tej treści nie ma tekstu do odczytania.",
-unsupported:"Ta przeglądarka nie obsługuje odczytywania tekstu."
+empty:"Brak tekstu do odczytania.",
+unsupported:"Odczytywanie tekstu nie jest obsługiwane."
 },
 
 cs:{
 listen:"Poslechnout tento obsah",
 stop:"Zastavit čtení",
-reading:"Tento obsah se čte nahlas.",
+reading:"Obsah se čte nahlas.",
 stopped:"Čtení zastaveno.",
-empty:"V tomto obsahu není text ke čtení.",
-unsupported:"Tento prohlížeč nepodporuje převod textu na řeč."
+empty:"Není zde text ke čtení.",
+unsupported:"Převod textu na řeč není podporován."
 },
 
 sk:{
 listen:"Vypočuť tento obsah",
 stop:"Zastaviť čítanie",
-reading:"Tento obsah sa číta nahlas.",
+reading:"Obsah sa číta nahlas.",
 stopped:"Čítanie zastavené.",
-empty:"V tomto obsahu nie je text na čítanie.",
-unsupported:"Tento prehliadač nepodporuje čítanie textu."
+empty:"Nie je tu text na čítanie.",
+unsupported:"Čítanie textu nie je podporované."
 },
 
 hu:{
 listen:"A tartalom meghallgatása",
 stop:"Felolvasás leállítása",
-reading:"A tartalom felolvasása folyamatban.",
-stopped:"A felolvasás leállt.",
-empty:"Ebben a tartalomban nincs felolvasható szöveg.",
-unsupported:"Ez a böngésző nem támogatja a szövegfelolvasást."
+reading:"Felolvasás folyamatban.",
+stopped:"Felolvasás leállt.",
+empty:"Nincs felolvasható szöveg.",
+unsupported:"A szövegfelolvasás nem támogatott."
 },
 
 ro:{
 listen:"Ascultă acest conținut",
 stop:"Oprește citirea",
-reading:"Acest conținut este citit cu voce tare.",
+reading:"Conținutul este citit.",
 stopped:"Citirea a fost oprită.",
-empty:"Nu există text de citit în acest conținut.",
-unsupported:"Acest browser nu acceptă citirea textului."
+empty:"Nu există text de citit.",
+unsupported:"Citirea textului nu este acceptată."
 },
 
 bg:{
@@ -236,17 +214,17 @@ listen:"Прослушайте тази тема",
 stop:"Спрете четенето",
 reading:"Темата се чете на глас.",
 stopped:"Четенето е спряно.",
-empty:"В тази тема няма текст за четене.",
-unsupported:"Този браузър не поддържа озвучаване на текст."
+empty:"Няма текст за четене.",
+unsupported:"Озвучаването не се поддържа."
 },
 
 el:{
 listen:"Ακούστε αυτό το περιεχόμενο",
 stop:"Διακοπή ανάγνωσης",
-reading:"Το περιεχόμενο διαβάζεται δυνατά.",
+reading:"Το περιεχόμενο διαβάζεται.",
 stopped:"Η ανάγνωση σταμάτησε.",
 empty:"Δεν υπάρχει κείμενο για ανάγνωση.",
-unsupported:"Αυτό το πρόγραμμα περιήγησης δεν υποστηρίζει ανάγνωση κειμένου."
+unsupported:"Η ανάγνωση κειμένου δεν υποστηρίζεται."
 },
 
 sv:{
@@ -254,8 +232,8 @@ listen:"Lyssna på detta innehåll",
 stop:"Stoppa uppläsningen",
 reading:"Innehållet läses upp.",
 stopped:"Uppläsningen stoppades.",
-empty:"Det finns ingen text att läsa här.",
-unsupported:"Den här webbläsaren stöder inte textuppläsning."
+empty:"Det finns ingen text att läsa.",
+unsupported:"Textuppläsning stöds inte."
 },
 
 da:{
@@ -263,8 +241,8 @@ listen:"Lyt til dette indhold",
 stop:"Stop oplæsning",
 reading:"Indholdet læses højt.",
 stopped:"Oplæsningen er stoppet.",
-empty:"Der er ingen tekst at læse her.",
-unsupported:"Denne browser understøtter ikke tekst-til-tale."
+empty:"Der er ingen tekst at læse.",
+unsupported:"Tekst-til-tale understøttes ikke."
 },
 
 no:{
@@ -272,8 +250,8 @@ listen:"Lytt til dette innholdet",
 stop:"Stopp opplesing",
 reading:"Innholdet leses høyt.",
 stopped:"Opplesingen er stoppet.",
-empty:"Det finnes ingen tekst å lese her.",
-unsupported:"Denne nettleseren støtter ikke tekst-til-tale."
+empty:"Det finnes ingen tekst å lese.",
+unsupported:"Tekst-til-tale støttes ikke."
 },
 
 fi:{
@@ -281,35 +259,35 @@ listen:"Kuuntele tämä sisältö",
 stop:"Lopeta lukeminen",
 reading:"Sisältöä luetaan ääneen.",
 stopped:"Lukeminen lopetettiin.",
-empty:"Tässä sisällössä ei ole luettavaa tekstiä.",
-unsupported:"Tämä selain ei tue tekstin puheeksi muuntamista."
+empty:"Ei luettavaa tekstiä.",
+unsupported:"Tekstistä puheeksi -toimintoa ei tueta."
 },
 
 tr:{
 listen:"Bu içeriği dinle",
 stop:"Okumayı durdur",
-reading:"Bu içerik sesli okunuyor.",
+reading:"İçerik sesli okunuyor.",
 stopped:"Okuma durduruldu.",
-empty:"Bu içerikte okunabilir metin yok.",
-unsupported:"Bu tarayıcı metinden sese özelliğini desteklemiyor."
+empty:"Okunabilir metin yok.",
+unsupported:"Metinden sese özelliği desteklenmiyor."
 },
 
 ar:{
 listen:"استمع إلى هذا المحتوى",
 stop:"إيقاف القراءة",
-reading:"تتم قراءة هذا المحتوى بصوت عالٍ.",
+reading:"تتم قراءة المحتوى بصوت عالٍ.",
 stopped:"تم إيقاف القراءة.",
-empty:"لا يوجد نص قابل للقراءة في هذا المحتوى.",
-unsupported:"هذا المتصفح لا يدعم تحويل النص إلى كلام."
+empty:"لا يوجد نص قابل للقراءة.",
+unsupported:"تحويل النص إلى كلام غير مدعوم."
 },
 
 hi:{
 listen:"इस विषय को सुनें",
 stop:"पढ़ना बंद करें",
-reading:"इस विषय को आवाज़ में पढ़ा जा रहा है।",
+reading:"विषय को पढ़ा जा रहा है।",
 stopped:"पढ़ना बंद कर दिया गया।",
-empty:"इस विषय में पढ़ने योग्य टेक्स्ट नहीं है।",
-unsupported:"यह ब्राउज़र टेक्स्ट-टू-स्पीच का समर्थन नहीं करता।"
+empty:"पढ़ने योग्य टेक्स्ट नहीं है।",
+unsupported:"टेक्स्ट-टू-स्पीच उपलब्ध नहीं है।"
 }
 
 };
@@ -323,728 +301,554 @@ const SEMANTIC = {
 
 en:{
 location:"Location",
-phone:"Phone number",
-card:"Bank card number",
+phone:"Telephone number",
+card:"Bank card",
 email:"Email",
 website:"Website",
+heart:"Favourite",
 home:"Home",
-prize:"Prize",
-winner:"Winner",
-and:"and",
-or:"or",
-plus:"plus",
-male:"Male",
-female:"Female"
-},
-
-uk:{
-location:"Місцезнаходження",
-phone:"Номер телефону",
-card:"Номер банківської картки",
-email:"Електронна пошта",
-website:"Вебсайт",
-home:"Дім",
-prize:"Приз",
-winner:"Переможець",
-and:"і",
-or:"або",
-plus:"плюс",
-male:"Самець",
-female:"Самка"
+confirmed:"Confirmed",
+star:"Star",
+information:"Information",
+pound:"pound",
+pounds:"pounds",
+year:"year",
+years:"years",
+month:"month",
+months:"months",
+kilometre:"kilometre",
+kilometres:"kilometres",
+percent:"percent"
 },
 
 ru:{
 location:"Местоположение",
 phone:"Номер телефона",
-card:"Номер банковской карты",
+card:"Банковская карта",
 email:"Электронная почта",
-website:"Веб-сайт",
+website:"Сайт",
+heart:"Избранное",
 home:"Дом",
-prize:"Приз",
-winner:"Победитель",
-and:"и",
-or:"или",
-plus:"плюс",
-male:"Самец",
-female:"Самка"
+confirmed:"Подтверждено",
+star:"Звезда",
+information:"Информация",
+pound:"фунт",
+pounds:"фунтов",
+year:"год",
+years:"лет",
+month:"месяц",
+months:"месяцев",
+kilometre:"километр",
+kilometres:"километров",
+percent:"процентов"
+},
+
+uk:{
+location:"Місцезнаходження",
+phone:"Номер телефону",
+card:"Банківська картка",
+email:"Електронна пошта",
+website:"Сайт",
+heart:"Обране",
+home:"Дім",
+confirmed:"Підтверджено",
+star:"Зірка",
+information:"Інформація",
+pound:"фунт",
+pounds:"фунтів",
+year:"рік",
+years:"років",
+month:"місяць",
+months:"місяців",
+kilometre:"кілометр",
+kilometres:"кілометрів",
+percent:"відсотків"
 },
 
 fr:{
 location:"Localisation",
 phone:"Numéro de téléphone",
-card:"Numéro de carte bancaire",
-email:"Adresse e-mail",
-website:"Site web",
-home:"Domicile",
-prize:"Prix",
-winner:"Gagnant",
-and:"et",
-or:"ou",
-plus:"plus",
-male:"Mâle",
-female:"Femelle"
+card:"Carte bancaire",
+email:"E-mail",
+website:"Site internet",
+heart:"Favori",
+home:"Accueil",
+confirmed:"Confirmé",
+star:"Étoile",
+information:"Information",
+pound:"livre",
+pounds:"livres",
+year:"an",
+years:"ans",
+month:"mois",
+months:"mois",
+kilometre:"kilomètre",
+kilometres:"kilomètres",
+percent:"pour cent"
 },
 
 de:{
 location:"Standort",
 phone:"Telefonnummer",
-card:"Bankkartennummer",
+card:"Bankkarte",
 email:"E-Mail",
-website:"Webseite",
+website:"Website",
+heart:"Favorit",
 home:"Zuhause",
-prize:"Preis",
-winner:"Gewinner",
-and:"und",
-or:"oder",
-plus:"plus",
-male:"Männlich",
-female:"Weiblich"
+confirmed:"Bestätigt",
+star:"Stern",
+information:"Information",
+pound:"Pfund",
+pounds:"Pfund",
+year:"Jahr",
+years:"Jahre",
+month:"Monat",
+months:"Monate",
+kilometre:"Kilometer",
+kilometres:"Kilometer",
+percent:"Prozent"
 },
 
 es:{
 location:"Ubicación",
 phone:"Número de teléfono",
-card:"Número de tarjeta bancaria",
+card:"Tarjeta bancaria",
 email:"Correo electrónico",
 website:"Sitio web",
+heart:"Favorito",
 home:"Hogar",
-prize:"Premio",
-winner:"Ganador",
-and:"y",
-or:"o",
-plus:"más",
-male:"Macho",
-female:"Hembra"
+confirmed:"Confirmado",
+star:"Estrella",
+information:"Información",
+pound:"libra",
+pounds:"libras",
+year:"año",
+years:"años",
+month:"mes",
+months:"meses",
+kilometre:"kilómetro",
+kilometres:"kilómetros",
+percent:"por ciento"
 },
 
 it:{
 location:"Posizione",
 phone:"Numero di telefono",
-card:"Numero della carta bancaria",
+card:"Carta bancaria",
 email:"Email",
 website:"Sito web",
+heart:"Preferito",
 home:"Casa",
-prize:"Premio",
-winner:"Vincitore",
-and:"e",
-or:"o",
-plus:"più",
-male:"Maschio",
-female:"Femmina"
+confirmed:"Confermato",
+star:"Stella",
+information:"Informazione",
+pound:"sterlina",
+pounds:"sterline",
+year:"anno",
+years:"anni",
+month:"mese",
+months:"mesi",
+kilometre:"chilometro",
+kilometres:"chilometri",
+percent:"percento"
 },
 
 pt:{
 location:"Localização",
 phone:"Número de telefone",
-card:"Número do cartão bancário",
-email:"Email",
+card:"Cartão bancário",
+email:"E-mail",
 website:"Website",
+heart:"Favorito",
 home:"Casa",
-prize:"Prémio",
-winner:"Vencedor",
-and:"e",
-or:"ou",
-plus:"mais",
-male:"Macho",
-female:"Fêmea"
+confirmed:"Confirmado",
+star:"Estrela",
+information:"Informação",
+pound:"libra",
+pounds:"libras",
+year:"ano",
+years:"anos",
+month:"mês",
+months:"meses",
+kilometre:"quilómetro",
+kilometres:"quilómetros",
+percent:"por cento"
 },
 
 nl:{
 location:"Locatie",
 phone:"Telefoonnummer",
-card:"Bankkaartnummer",
+card:"Bankkaart",
 email:"E-mail",
 website:"Website",
+heart:"Favoriet",
 home:"Thuis",
-prize:"Prijs",
-winner:"Winnaar",
-and:"en",
-or:"of",
-plus:"plus",
-male:"Mannelijk",
-female:"Vrouwelijk"
+confirmed:"Bevestigd",
+star:"Ster",
+information:"Informatie",
+pound:"pond",
+pounds:"pond",
+year:"jaar",
+years:"jaar",
+month:"maand",
+months:"maanden",
+kilometre:"kilometer",
+kilometres:"kilometer",
+percent:"procent"
 },
 
 pl:{
 location:"Lokalizacja",
 phone:"Numer telefonu",
-card:"Numer karty bankowej",
+card:"Karta bankowa",
 email:"E-mail",
 website:"Strona internetowa",
+heart:"Ulubione",
 home:"Dom",
-prize:"Nagroda",
-winner:"Zwycięzca",
-and:"i",
-or:"lub",
-plus:"plus",
-male:"Samiec",
-female:"Samica"
+confirmed:"Potwierdzone",
+star:"Gwiazda",
+information:"Informacja",
+pound:"funt",
+pounds:"funtów",
+year:"rok",
+years:"lat",
+month:"miesiąc",
+months:"miesięcy",
+kilometre:"kilometr",
+kilometres:"kilometrów",
+percent:"procent"
 },
 
 cs:{
 location:"Poloha",
 phone:"Telefonní číslo",
-card:"Číslo bankovní karty",
+card:"Bankovní karta",
 email:"E-mail",
 website:"Web",
+heart:"Oblíbené",
 home:"Domov",
-prize:"Cena",
-winner:"Vítěz",
-and:"a",
-or:"nebo",
-plus:"plus",
-male:"Samec",
-female:"Samice"
+confirmed:"Potvrzeno",
+star:"Hvězda",
+information:"Informace",
+pound:"libra",
+pounds:"liber",
+year:"rok",
+years:"let",
+month:"měsíc",
+months:"měsíců",
+kilometre:"kilometr",
+kilometres:"kilometrů",
+percent:"procent"
 },
 
 sk:{
 location:"Poloha",
 phone:"Telefónne číslo",
-card:"Číslo bankovej karty",
+card:"Banková karta",
 email:"E-mail",
 website:"Web",
+heart:"Obľúbené",
 home:"Domov",
-prize:"Cena",
-winner:"Víťaz",
-and:"a",
-or:"alebo",
-plus:"plus",
-male:"Samec",
-female:"Samica"
+confirmed:"Potvrdené",
+star:"Hviezda",
+information:"Informácia",
+pound:"libra",
+pounds:"libier",
+year:"rok",
+years:"rokov",
+month:"mesiac",
+months:"mesiacov",
+kilometre:"kilometer",
+kilometres:"kilometrov",
+percent:"percent"
 },
 
 hu:{
 location:"Hely",
 phone:"Telefonszám",
-card:"Bankkártyaszám",
+card:"Bankkártya",
 email:"E-mail",
 website:"Weboldal",
+heart:"Kedvenc",
 home:"Otthon",
-prize:"Díj",
-winner:"Győztes",
-and:"és",
-or:"vagy",
-plus:"plusz",
-male:"Hím",
-female:"Nőstény"
+confirmed:"Megerősítve",
+star:"Csillag",
+information:"Információ",
+pound:"font",
+pounds:"font",
+year:"év",
+years:"év",
+month:"hónap",
+months:"hónap",
+kilometre:"kilométer",
+kilometres:"kilométer",
+percent:"százalék"
 },
 
 ro:{
 location:"Locație",
 phone:"Număr de telefon",
-card:"Număr card bancar",
+card:"Card bancar",
 email:"E-mail",
-website:"Site web",
+website:"Site",
+heart:"Favorit",
 home:"Acasă",
-prize:"Premiu",
-winner:"Câștigător",
-and:"și",
-or:"sau",
-plus:"plus",
-male:"Mascul",
-female:"Femelă"
+confirmed:"Confirmat",
+star:"Stea",
+information:"Informație",
+pound:"liră",
+pounds:"lire",
+year:"an",
+years:"ani",
+month:"lună",
+months:"luni",
+kilometre:"kilometru",
+kilometres:"kilometri",
+percent:"la sută"
 },
 
 bg:{
 location:"Местоположение",
 phone:"Телефонен номер",
-card:"Номер на банкова карта",
+card:"Банкова карта",
 email:"Имейл",
 website:"Уебсайт",
+heart:"Любимо",
 home:"Дом",
-prize:"Награда",
-winner:"Победител",
-and:"и",
-or:"или",
-plus:"плюс",
-male:"Мъжки",
-female:"Женски"
+confirmed:"Потвърдено",
+star:"Звезда",
+information:"Информация",
+pound:"паунд",
+pounds:"паунда",
+year:"година",
+years:"години",
+month:"месец",
+months:"месеца",
+kilometre:"километър",
+kilometres:"километра",
+percent:"процента"
 },
 
 el:{
 location:"Τοποθεσία",
 phone:"Αριθμός τηλεφώνου",
-card:"Αριθμός τραπεζικής κάρτας",
+card:"Τραπεζική κάρτα",
 email:"Email",
 website:"Ιστότοπος",
+heart:"Αγαπημένο",
 home:"Σπίτι",
-prize:"Βραβείο",
-winner:"Νικητής",
-and:"και",
-or:"ή",
-plus:"συν",
-male:"Αρσενικό",
-female:"Θηλυκό"
+confirmed:"Επιβεβαιωμένο",
+star:"Αστέρι",
+information:"Πληροφορία",
+pound:"λίρα",
+pounds:"λίρες",
+year:"έτος",
+years:"έτη",
+month:"μήνας",
+months:"μήνες",
+kilometre:"χιλιόμετρο",
+kilometres:"χιλιόμετρα",
+percent:"τοις εκατό"
 },
 
 sv:{
 location:"Plats",
 phone:"Telefonnummer",
-card:"Bankkortsnummer",
+card:"Bankkort",
 email:"E-post",
 website:"Webbplats",
+heart:"Favorit",
 home:"Hem",
-prize:"Pris",
-winner:"Vinnare",
-and:"och",
-or:"eller",
-plus:"plus",
-male:"Hane",
-female:"Hona"
+confirmed:"Bekräftat",
+star:"Stjärna",
+information:"Information",
+pound:"pund",
+pounds:"pund",
+year:"år",
+years:"år",
+month:"månad",
+months:"månader",
+kilometre:"kilometer",
+kilometres:"kilometer",
+percent:"procent"
 },
 
 da:{
 location:"Placering",
 phone:"Telefonnummer",
-card:"Bankkortnummer",
+card:"Bankkort",
 email:"E-mail",
-website:"Website",
+website:"Websted",
+heart:"Favorit",
 home:"Hjem",
-prize:"Præmie",
-winner:"Vinder",
-and:"og",
-or:"eller",
-plus:"plus",
-male:"Han",
-female:"Hun"
+confirmed:"Bekræftet",
+star:"Stjerne",
+information:"Information",
+pound:"pund",
+pounds:"pund",
+year:"år",
+years:"år",
+month:"måned",
+months:"måneder",
+kilometre:"kilometer",
+kilometres:"kilometer",
+percent:"procent"
 },
 
 no:{
 location:"Sted",
 phone:"Telefonnummer",
-card:"Bankkortnummer",
+card:"Bankkort",
 email:"E-post",
 website:"Nettsted",
+heart:"Favoritt",
 home:"Hjem",
-prize:"Premie",
-winner:"Vinner",
-and:"og",
-or:"eller",
-plus:"pluss",
-male:"Hann",
-female:"Hunn"
+confirmed:"Bekreftet",
+star:"Stjerne",
+information:"Informasjon",
+pound:"pund",
+pounds:"pund",
+year:"år",
+years:"år",
+month:"måned",
+months:"måneder",
+kilometre:"kilometer",
+kilometres:"kilometer",
+percent:"prosent"
 },
 
 fi:{
 location:"Sijainti",
 phone:"Puhelinnumero",
-card:"Pankkikortin numero",
+card:"Pankkikortti",
 email:"Sähköposti",
 website:"Verkkosivusto",
+heart:"Suosikki",
 home:"Koti",
-prize:"Palkinto",
-winner:"Voittaja",
-and:"ja",
-or:"tai",
-plus:"plus",
-male:"Uros",
-female:"Naaras"
+confirmed:"Vahvistettu",
+star:"Tähti",
+information:"Tietoa",
+pound:"punta",
+pounds:"puntaa",
+year:"vuosi",
+years:"vuotta",
+month:"kuukausi",
+months:"kuukautta",
+kilometre:"kilometri",
+kilometres:"kilometriä",
+percent:"prosenttia"
 },
 
 tr:{
 location:"Konum",
 phone:"Telefon numarası",
-card:"Banka kartı numarası",
+card:"Banka kartı",
 email:"E-posta",
 website:"Web sitesi",
+heart:"Favori",
 home:"Ev",
-prize:"Ödül",
-winner:"Kazanan",
-and:"ve",
-or:"veya",
-plus:"artı",
-male:"Erkek",
-female:"Dişi"
+confirmed:"Onaylandı",
+star:"Yıldız",
+information:"Bilgi",
+pound:"sterlin",
+pounds:"sterlin",
+year:"yıl",
+years:"yıl",
+month:"ay",
+months:"ay",
+kilometre:"kilometre",
+kilometres:"kilometre",
+percent:"yüzde"
 },
 
 ar:{
 location:"الموقع",
 phone:"رقم الهاتف",
-card:"رقم البطاقة البنكية",
+card:"بطاقة بنكية",
 email:"البريد الإلكتروني",
 website:"الموقع الإلكتروني",
+heart:"المفضلة",
 home:"المنزل",
-prize:"الجائزة",
-winner:"الفائز",
-and:"و",
-or:"أو",
-plus:"زائد",
-male:"ذكر",
-female:"أنثى"
+confirmed:"تم التأكيد",
+star:"نجمة",
+information:"معلومات",
+pound:"جنيه",
+pounds:"جنيهات",
+year:"سنة",
+years:"سنوات",
+month:"شهر",
+months:"أشهر",
+kilometre:"كيلومتر",
+kilometres:"كيلومترات",
+percent:"بالمئة"
 },
 
 hi:{
 location:"स्थान",
 phone:"फ़ोन नंबर",
-card:"बैंक कार्ड नंबर",
+card:"बैंक कार्ड",
 email:"ईमेल",
 website:"वेबसाइट",
+heart:"पसंदीदा",
 home:"घर",
-prize:"पुरस्कार",
-winner:"विजेता",
-and:"और",
-or:"या",
-plus:"प्लस",
-male:"नर",
-female:"मादा"
+confirmed:"पुष्टि की गई",
+star:"सितारा",
+information:"जानकारी",
+pound:"पाउंड",
+pounds:"पाउंड",
+year:"वर्ष",
+years:"वर्ष",
+month:"महीना",
+months:"महीने",
+kilometre:"किलोमीटर",
+kilometres:"किलोमीटर",
+percent:"प्रतिशत"
 }
 
 };
-
-
-/* =========================================================
-COUNT UNITS
-========================================================= */
-
-const COUNT_UNITS = {
-
-en:{
-year:["year","years"],
-week:["week","weeks"],
-month:["month","months"],
-day:["day","days"],
-pound:["pound","pounds"]
-},
-
-uk:{
-year:["рік","роки","років"],
-week:["тиждень","тижні","тижнів"],
-month:["місяць","місяці","місяців"],
-day:["день","дні","днів"],
-pound:["фунт","фунти","фунтів"]
-},
-
-ru:{
-year:["год","года","лет"],
-week:["неделя","недели","недель"],
-month:["месяц","месяца","месяцев"],
-day:["день","дня","дней"],
-pound:["фунт","фунта","фунтов"]
-},
-
-bg:{
-year:["година","години"],
-week:["седмица","седмици"],
-month:["месец","месеца"],
-day:["ден","дни"],
-pound:["паунд","паунда"]
-},
-
-fr:{
-year:["an","ans"],
-week:["semaine","semaines"],
-month:["mois","mois"],
-day:["jour","jours"],
-pound:["livre sterling","livres sterling"]
-},
-
-de:{
-year:["Jahr","Jahre"],
-week:["Woche","Wochen"],
-month:["Monat","Monate"],
-day:["Tag","Tage"],
-pound:["Pfund","Pfund"]
-},
-
-es:{
-year:["año","años"],
-week:["semana","semanas"],
-month:["mes","meses"],
-day:["día","días"],
-pound:["libra","libras"]
-},
-
-it:{
-year:["anno","anni"],
-week:["settimana","settimane"],
-month:["mese","mesi"],
-day:["giorno","giorni"],
-pound:["sterlina","sterline"]
-},
-
-pt:{
-year:["ano","anos"],
-week:["semana","semanas"],
-month:["mês","meses"],
-day:["dia","dias"],
-pound:["libra","libras"]
-},
-
-nl:{
-year:["jaar","jaar"],
-week:["week","weken"],
-month:["maand","maanden"],
-day:["dag","dagen"],
-pound:["pond","pond"]
-},
-
-pl:{
-year:["rok","lata"],
-week:["tydzień","tygodnie"],
-month:["miesiąc","miesiące"],
-day:["dzień","dni"],
-pound:["funt","funty"]
-},
-
-cs:{
-year:["rok","roky"],
-week:["týden","týdny"],
-month:["měsíc","měsíce"],
-day:["den","dny"],
-pound:["libra","libry"]
-},
-
-sk:{
-year:["rok","roky"],
-week:["týždeň","týždne"],
-month:["mesiac","mesiace"],
-day:["deň","dni"],
-pound:["libra","libry"]
-},
-
-hu:{
-year:["év","év"],
-week:["hét","hét"],
-month:["hónap","hónap"],
-day:["nap","nap"],
-pound:["font","font"]
-},
-
-ro:{
-year:["an","ani"],
-week:["săptămână","săptămâni"],
-month:["lună","luni"],
-day:["zi","zile"],
-pound:["liră","lire"]
-},
-
-el:{
-year:["έτος","έτη"],
-week:["εβδομάδα","εβδομάδες"],
-month:["μήνας","μήνες"],
-day:["ημέρα","ημέρες"],
-pound:["λίρα","λίρες"]
-},
-
-sv:{
-year:["år","år"],
-week:["vecka","veckor"],
-month:["månad","månader"],
-day:["dag","dagar"],
-pound:["pund","pund"]
-},
-
-da:{
-year:["år","år"],
-week:["uge","uger"],
-month:["måned","måneder"],
-day:["dag","dage"],
-pound:["pund","pund"]
-},
-
-no:{
-year:["år","år"],
-week:["uke","uker"],
-month:["måned","måneder"],
-day:["dag","dager"],
-pound:["pund","pund"]
-},
-
-fi:{
-year:["vuosi","vuotta"],
-week:["viikko","viikkoa"],
-month:["kuukausi","kuukautta"],
-day:["päivä","päivää"],
-pound:["punta","puntaa"]
-},
-
-tr:{
-year:["yıl","yıl"],
-week:["hafta","hafta"],
-month:["ay","ay"],
-day:["gün","gün"],
-pound:["sterlin","sterlin"]
-},
-
-ar:{
-year:["سنة","سنوات"],
-week:["أسبوع","أسابيع"],
-month:["شهر","أشهر"],
-day:["يوم","أيام"],
-pound:["جنيه إسترليني","جنيهات إسترلينية"]
-},
-
-hi:{
-year:["वर्ष","वर्ष"],
-week:["सप्ताह","सप्ताह"],
-month:["महीना","महीने"],
-day:["दिन","दिन"],
-pound:["पाउंड","पाउंड"]
-}
-
-};
-
-
-/* =========================================================
-COMMON ENGLISH WORDS
-========================================================= */
-
-const ENGLISH_HINT_WORDS = new Set([
-"pets",
-"dogue",
-"marketplace",
-"pomeranian",
-"cockapoo",
-"british",
-"shorthair",
-"grooming",
-"styling",
-"photography",
-"rabbit",
-"london",
-"bristol",
-"manchester",
-"brighton",
-"bournemouth",
-"edition",
-"cover",
-"star",
-"club",
-"editorial"
-]);
-
-
-/* =========================================================
-READABLE BLOCKS
-========================================================= */
-
-const READABLE_SELECTOR = [
-
-"[data-pd-readable]",
-
-"main article",
-
-"main .article-card",
-"main .story-card",
-"main .feature-card",
-"main .editorial-card",
-"main .magazine-card",
-"main .content-card",
-"main .world-card",
-"main .category-card",
-"main .rubric-card",
-"main .topic-card",
-
-"main .market-intro",
-"main .section-head",
-"main .browse-card",
-"main .listing-card",
-"main .publish-strip",
-
-"main .community-copy",
-"main .result-card",
-"main .community-note-inner",
-
-"main .intro-photo",
-"main .how",
-"main .prize-box",
-"main .rules",
-"main .hall-cta",
-
-"main .impact",
-"main .rescue-cta",
-
-".modal-sheet",
-".modal-content",
-".detail-description"
-
-].join(",");
-
-
-const SECTION_SELECTOR =
-"main > section";
 
 
 /* =========================================================
 STATE
 ========================================================= */
 
-let activeButton =
-null;
+let activeButton = null;
+let speaking = false;
+let stopped = false;
 
-let activeElement =
-null;
+let speechQueue = [];
+let speechIndex = 0;
 
-let activeUtterance =
-null;
-
-let speechQueue =
-[];
-
-let queueIndex =
-0;
-
-let speaking =
-false;
-
-let stopped =
-false;
-
-let readableCounter =
-0;
-
-let updateTimer =
-null;
+let readableCounter = 0;
+let updateTimer = null;
 
 
 /* =========================================================
-LANGUAGE
+LANGUAGE HELPERS
 ========================================================= */
 
 function normalizeLanguage(value){
 
 let code =
-String(
-value ||
-"en"
-)
-.toLowerCase()
-.trim();
+String(value || "en")
+.trim()
+.toLowerCase();
 
-
-if(
-code.includes("-")
-){
-
-code =
-code.split("-")[0];
-
+if(code.includes("-")){
+code = code.split("-")[0];
 }
 
-
-if(
-code.includes("_")
-){
-
-code =
-code.split("_")[0];
-
+if(code.includes("_")){
+code = code.split("_")[0];
 }
 
-
 code =
-LANGUAGE_ALIASES[
-code
-] ||
+LANGUAGE_ALIASES[code] ||
 code;
 
-
-return SUPPORTED_LANGUAGES.includes(
-code
-)
+return SUPPORTED_LANGUAGES.includes(code)
 ? code
 : "en";
-
 }
 
 
@@ -1054,37 +858,18 @@ try{
 
 if(
 window.PetsDogueLanguage &&
-typeof window.PetsDogueLanguage.getCurrentLanguage ===
-"function"
+typeof window.PetsDogueLanguage.getCurrentLanguage === "function"
 ){
 
 const result =
-window.PetsDogueLanguage
-.getCurrentLanguage();
+window.PetsDogueLanguage.getCurrentLanguage();
 
-
-if(
-typeof result ===
-"string"
-){
-
-return normalizeLanguage(
-result
-);
-
+if(typeof result === "string"){
+return normalizeLanguage(result);
 }
 
-
-if(
-result &&
-typeof result.code ===
-"string"
-){
-
-return normalizeLanguage(
-result.code
-);
-
+if(result && typeof result.code === "string"){
+return normalizeLanguage(result.code);
 }
 
 }
@@ -1096,19 +881,10 @@ result.code
 try{
 
 const saved =
-localStorage.getItem(
-LANGUAGE_KEY
-);
+localStorage.getItem(LANGUAGE_KEY);
 
-
-if(
-saved
-){
-
-return normalizeLanguage(
-saved
-);
-
+if(saved){
+return normalizeLanguage(saved);
 }
 
 }catch(error){
@@ -1119,27 +895,20 @@ return normalizeLanguage(
 document.documentElement.lang ||
 "en"
 );
-
 }
 
 
 function getLabels(){
 
-return LABELS[
-getCurrentLanguage()
-] ||
+return LABELS[getCurrentLanguage()] ||
 LABELS.en;
-
 }
 
 
 function getSemantic(){
 
-return SEMANTIC[
-getCurrentLanguage()
-] ||
+return SEMANTIC[getCurrentLanguage()] ||
 SEMANTIC.en;
-
 }
 
 
@@ -1149,66 +918,47 @@ LIVE REGION
 
 function ensureLiveRegion(){
 
-let element =
+let region =
 document.getElementById(
 "pdNarrationStatus"
 );
 
-
-if(
-element
-){
-
-return element;
-
+if(region){
+return region;
 }
 
+region =
+document.createElement("div");
 
-element =
-document.createElement(
-"div"
-);
-
-
-element.id =
+region.id =
 "pdNarrationStatus";
 
+region.className =
+"pd-sr-only";
 
-element.setAttribute(
+region.setAttribute(
 "role",
 "status"
 );
 
-
-element.setAttribute(
+region.setAttribute(
 "aria-live",
 "polite"
 );
 
-
-element.setAttribute(
+region.setAttribute(
 "aria-atomic",
 "true"
 );
 
-
-element.setAttribute(
+region.setAttribute(
 "data-pd-speech-ignore",
 "true"
 );
 
+document.body.appendChild(region);
 
-element.className =
-"pd-sr-only";
-
-
-document.body.appendChild(
-element
-);
-
-
-return element;
-
+return region;
 }
 
 
@@ -1217,17 +967,11 @@ function announce(text){
 const region =
 ensureLiveRegion();
 
+region.textContent = "";
 
-region.textContent =
-"";
-
-
-window.setTimeout(
-function(){
-
-region.textContent =
-text;
-
+setTimeout(
+()=>{
+region.textContent = text;
 },
 20
 );
@@ -1246,27 +990,14 @@ document.getElementById(
 "pdNarrationStyles"
 )
 ){
-
 return;
-
 }
 
-
 const style =
-document.createElement(
-"style"
-);
-
+document.createElement("style");
 
 style.id =
 "pdNarrationStyles";
-
-
-style.setAttribute(
-"data-pd-speech-ignore",
-"true"
-);
-
 
 style.textContent = `
 
@@ -1283,62 +1014,60 @@ border:0!important;
 }
 
 .pd-readable-block{
-position:relative;
+position:relative!important;
 }
 
 .pd-local-speaker{
-position:absolute;
-top:14px;
-right:14px;
-width:42px;
-height:42px;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:0;
-margin:0;
-border:2px solid #c89b3c;
-border-radius:50%;
-background:rgba(7,7,7,.92);
-color:#fff;
-cursor:pointer;
-z-index:30;
-box-shadow:0 4px 16px rgba(0,0,0,.22);
--webkit-tap-highlight-color:transparent;
-user-select:none;
+position:absolute!important;
+top:14px!important;
+right:14px!important;
+width:44px!important;
+height:44px!important;
+min-width:44px!important;
+min-height:44px!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+padding:0!important;
+margin:0!important;
+border:2px solid #c99a2e!important;
+border-radius:50%!important;
+background:rgba(7,7,7,.94)!important;
+color:#fff!important;
+cursor:pointer!important;
+z-index:999!important;
+box-shadow:0 4px 16px rgba(0,0,0,.28)!important;
+pointer-events:auto!important;
+-webkit-tap-highlight-color:transparent!important;
 }
 
 html[dir="rtl"] .pd-local-speaker{
-right:auto;
-left:14px;
+right:auto!important;
+left:14px!important;
 }
 
 .pd-local-speaker svg{
-display:block;
-width:23px;
-height:23px;
-fill:none;
-stroke:currentColor;
-stroke-width:2.1;
-stroke-linecap:round;
-stroke-linejoin:round;
-pointer-events:none;
-}
-
-.pd-local-speaker:hover{
-transform:translateY(-1px);
+display:block!important;
+width:24px!important;
+height:24px!important;
+fill:none!important;
+stroke:currentColor!important;
+stroke-width:2.1!important;
+stroke-linecap:round!important;
+stroke-linejoin:round!important;
+pointer-events:none!important;
 }
 
 .pd-local-speaker:focus-visible{
-outline:3px solid #65e51f;
-outline-offset:3px;
+outline:3px solid #65e51f!important;
+outline-offset:3px!important;
 }
 
 .pd-local-speaker[data-speaking="true"]{
-border-color:#65e51f;
+border-color:#65e51f!important;
 box-shadow:
-0 0 0 4px rgba(101,229,31,.16),
-0 4px 18px rgba(0,0,0,.28);
+0 0 0 4px rgba(101,229,31,.17),
+0 4px 18px rgba(0,0,0,.3)!important;
 }
 
 .pd-local-speaker[data-speaking="true"]::after{
@@ -1353,53 +1082,43 @@ background:#65e51f;
 border:2px solid #070707;
 }
 
-html[dir="rtl"]
-.pd-local-speaker[data-speaking="true"]::after{
-right:auto;
-left:-1px;
+.listing-card > .pd-local-speaker,
+.result-card > .pd-local-speaker{
+top:62px!important;
 }
 
 @media(max-width:700px){
 
 .pd-local-speaker{
-width:39px;
-height:39px;
-top:10px;
-right:10px;
+top:10px!important;
+right:10px!important;
+width:40px!important;
+height:40px!important;
+min-width:40px!important;
+min-height:40px!important;
 }
 
 html[dir="rtl"] .pd-local-speaker{
-right:auto;
-left:10px;
+right:auto!important;
+left:10px!important;
 }
 
-.pd-local-speaker svg{
-width:21px;
-height:21px;
-}
-
-}
-
-@media(prefers-reduced-motion:reduce){
-
-.pd-local-speaker{
-transition:none!important;
+.listing-card > .pd-local-speaker,
+.result-card > .pd-local-speaker{
+top:57px!important;
 }
 
 }
 
 `;
 
-
-document.head.appendChild(
-style
-);
+document.head.appendChild(style);
 
 }
 
 
 /* =========================================================
-ICON
+SPEAKER ICON
 ========================================================= */
 
 function speakerSvg(){
@@ -1420,51 +1139,36 @@ aria-hidden="true"
 
 
 /* =========================================================
-VISIBLE TEXT
+TEXT COLLECTION
 ========================================================= */
 
-function elementVisible(element){
+function isVisible(element){
 
-if(
-!element ||
-element.nodeType !== 1
-){
-
+if(!element){
 return false;
-
 }
 
-
 const style =
-window.getComputedStyle(
-element
-);
-
+getComputedStyle(element);
 
 return !(
 style.display === "none" ||
 style.visibility === "hidden" ||
 style.visibility === "collapse"
 );
-
 }
 
 
-function excludedTextNode(
+function shouldIgnoreNode(
 element,
 root
 ){
 
-if(
-!element
-){
-
+if(!element){
 return true;
-
 }
 
-
-if(
+const ignored =
 element.closest(
 [
 "script",
@@ -1473,1158 +1177,759 @@ element.closest(
 "template",
 "svg",
 "canvas",
+"input",
+"select",
+"textarea",
+"form",
+"nav",
+"aside",
+"footer",
 "[hidden]",
 '[aria-hidden="true"]',
 "[data-pd-speech-ignore]",
 ".pd-local-speaker",
 ".pd-sr-only"
 ].join(",")
-)
-){
-
-return true;
-
-}
-
-
-const interactive =
-element.closest(
-"button,input,select,textarea,form"
 );
 
-
-if(
-interactive &&
-interactive !== root &&
-!root.contains(interactive)
-){
-
-return true;
-
-}
-
-
-if(
-interactive &&
-interactive !== root
-){
-
-return true;
-
-}
-
-
-const navigation =
-element.closest(
-"nav"
-);
-
-
-if(
-navigation &&
-navigation !== root
-){
-
-return true;
-
-}
-
-
+if(!ignored){
 return false;
+}
 
+/*
+Allow text if the root itself happens to be an article,
+but do not read unrelated controls.
+*/
+return ignored !== root;
 }
 
 
 function getTextFromElement(element){
 
-if(
-!element
-){
-
+if(!element){
 return "";
-
 }
-
 
 const walker =
 document.createTreeWalker(
-
 element,
-
 NodeFilter.SHOW_TEXT,
-
 {
-
 acceptNode(node){
 
-const text =
-String(
-node.nodeValue ||
-""
-)
+const value =
+String(node.nodeValue || "")
 .replace(/\s+/g," ")
 .trim();
 
-
-if(
-!text
-){
-
+if(!value){
 return NodeFilter.FILTER_REJECT;
-
 }
-
 
 const parent =
 node.parentElement;
 
-
 if(
 !parent ||
-excludedTextNode(
-parent,
-element
-) ||
-!elementVisible(
-parent
-)
+!isVisible(parent) ||
+shouldIgnoreNode(parent,element)
 ){
-
 return NodeFilter.FILTER_REJECT;
-
 }
-
 
 return NodeFilter.FILTER_ACCEPT;
-
 }
-
 }
-
 );
 
-
-const parts =
-[];
+const parts = [];
 
 let node;
 
-
 while(
-(
-node =
-walker.nextNode()
-)
+(node = walker.nextNode())
 ){
 
 const value =
-String(
-node.nodeValue ||
-""
-)
+String(node.nodeValue || "")
 .replace(/\s+/g," ")
 .trim();
 
-
-if(
-value
-){
-
-parts.push(
-value
-);
-
+if(value){
+parts.push(value);
 }
 
 }
-
 
 return parts
 .join(" ")
 .replace(/\s+/g," ")
 .trim();
-
 }
 
 
 /* =========================================================
-PLURAL FORMS
+RUSSIAN / UKRAINIAN WORD FORMS
 ========================================================= */
 
 function slavicForm(
 number,
-forms
+one,
+few,
+many
 ){
 
-const value =
+const n =
 Math.abs(
-Number(number)
+Math.trunc(Number(number))
 );
 
+const n10 =
+n % 10;
 
-const lastTwo =
-value % 100;
-
-
-const last =
-value % 10;
-
+const n100 =
+n % 100;
 
 if(
-lastTwo >= 11 &&
-lastTwo <= 14
+n10 === 1 &&
+n100 !== 11
 ){
-
-return forms[2] ||
-forms[1];
-
+return one;
 }
-
 
 if(
-last === 1
-){
-
-return forms[0];
-
-}
-
-
-if(
-last >= 2 &&
-last <= 4
-){
-
-return forms[1];
-
-}
-
-
-return forms[2] ||
-forms[1];
-
-}
-
-
-function countUnit(
-number,
-unit,
-language
-){
-
-const table =
-COUNT_UNITS[
-language
-] ||
-COUNT_UNITS.en;
-
-
-const forms =
-table[
-unit
-] ||
-COUNT_UNITS.en[
-unit
-];
-
-
-if(
-["ru","uk"].includes(
-language
+n10 >= 2 &&
+n10 <= 4 &&
+!(
+n100 >= 12 &&
+n100 <= 14
 )
 ){
+return few;
+}
 
-return slavicForm(
-number,
-forms
-);
-
+return many;
 }
 
 
-return Number(number) === 1
-? forms[0]
-: forms[1];
+function poundWord(number){
 
+const lang =
+getCurrentLanguage();
+
+if(lang === "ru"){
+return slavicForm(
+number,
+"фунт",
+"фунта",
+"фунтов"
+);
+}
+
+if(lang === "uk"){
+return slavicForm(
+number,
+"фунт",
+"фунти",
+"фунтів"
+);
+}
+
+const s =
+getSemantic();
+
+return Number(number) === 1
+? s.pound
+: s.pounds;
+}
+
+
+function yearWord(number){
+
+const lang =
+getCurrentLanguage();
+
+if(lang === "ru"){
+return slavicForm(
+number,
+"год",
+"года",
+"лет"
+);
+}
+
+if(lang === "uk"){
+return slavicForm(
+number,
+"рік",
+"роки",
+"років"
+);
+}
+
+const s =
+getSemantic();
+
+return Number(number) === 1
+? s.year
+: s.years;
+}
+
+
+function monthWord(number){
+
+const lang =
+getCurrentLanguage();
+
+if(lang === "ru"){
+return slavicForm(
+number,
+"месяц",
+"месяца",
+"месяцев"
+);
+}
+
+if(lang === "uk"){
+return slavicForm(
+number,
+"місяць",
+"місяці",
+"місяців"
+);
+}
+
+const s =
+getSemantic();
+
+return Number(number) === 1
+? s.month
+: s.months;
 }
 
 
 /* =========================================================
-SMART TEXT NORMALISATION
+SEMANTIC TEXT PREPARATION
 ========================================================= */
 
-function normalizeSemanticText(
-rawText
-){
+function prepareSemanticText(text){
+
+const s =
+getSemantic();
+
+let value =
+String(text || "");
+
+
+/* Important symbols */
+
+value =
+value.replace(
+/📍|📌|🗺️?/gu,
+` ${s.location}: `
+);
+
+value =
+value.replace(
+/📞|☎️?|📱/gu,
+` ${s.phone}: `
+);
+
+value =
+value.replace(
+/💳|💳️/gu,
+` ${s.card}. `
+);
+
+value =
+value.replace(
+/📧|✉️?|📨/gu,
+` ${s.email}: `
+);
+
+value =
+value.replace(
+/🌐|🔗/gu,
+` ${s.website}: `
+);
+
+value =
+value.replace(
+/❤️|❤|♥|♡/gu,
+` ${s.heart}. `
+);
+
+value =
+value.replace(
+/🏠|🏡|⌂/gu,
+` ${s.home}. `
+);
+
+value =
+value.replace(
+/✅|✓|✔/gu,
+` ${s.confirmed}. `
+);
+
+value =
+value.replace(
+/⭐|★/gu,
+` ${s.star}. `
+);
+
+value =
+value.replace(
+/ℹ️|ⓘ/gu,
+` ${s.information}. `
+);
+
+
+/* Currency */
+
+value =
+value.replace(
+/£\s*(\d+(?:[.,]\d+)?)/g,
+function(match,number){
+
+const clean =
+number.replace(",",".");
+
+return (
+clean +
+" " +
+poundWord(clean)
+);
+
+}
+);
+
+value =
+value.replace(
+/(\d+(?:[.,]\d+)?)\s*£/g,
+function(match,number){
+
+const clean =
+number.replace(",",".");
+
+return (
+clean +
+" " +
+poundWord(clean)
+);
+
+}
+);
+
+
+/* English units inside translated pages */
+
+value =
+value.replace(
+/\b(\d+)\s*(?:years?|yrs?)\b/gi,
+function(match,number){
+
+return (
+number +
+" " +
+yearWord(number)
+);
+
+}
+);
+
+value =
+value.replace(
+/\b(\d+)\s*(?:months?|mos?)\b/gi,
+function(match,number){
+
+return (
+number +
+" " +
+monthWord(number)
+);
+
+}
+);
+
+value =
+value.replace(
+/\b(\d+(?:[.,]\d+)?)\s*km\b/gi,
+function(match,number){
+
+return (
+number +
+" " +
+(
+Number(
+String(number).replace(",",".")
+) === 1
+? s.kilometre
+: s.kilometres
+)
+);
+
+}
+);
+
+value =
+value.replace(
+/(\d+(?:[.,]\d+)?)\s*%/g,
+`$1 ${s.percent}`
+);
+
+
+/* Brand ampersand should sound naturally */
+
+value =
+value.replace(
+/PETS\s*&\s*DOGUE/gi,
+"PETS and DOGUE"
+);
+
+
+/* Separators become natural pauses */
+
+value =
+value.replace(
+(/\s*[·•●▪■◆◇]\s*/g),
+", "
+);
+
+value =
+value.replace(
+(/\s*[|]\s*/g),
+", "
+);
+
+value =
+value.replace(
+(/[→←↗↘]/g),
+". "
+);
+
+value =
+value.replace(
+(/\s*[-–—]\s*/g),
+", "
+);
+
+
+/* Remove repeated punctuation */
+
+value =
+value
+.replace(/\s+,/g,",")
+.replace(/,{2,}/g,",")
+.replace(/\s+\./g,".")
+.replace(/\.{2,}/g,".")
+.replace(/\s+/g," ")
+.trim();
+
+return value;
+}
+
+
+/* =========================================================
+MIXED LANGUAGE
+========================================================= */
+
+const ENGLISH_PHRASES = [
+"PETS and DOGUE",
+"British Shorthair",
+"Pomeranian",
+"Cockapoo",
+"Golden Retriever",
+"French Bulldog",
+"Labrador Retriever",
+"German Shepherd",
+"Yorkshire Terrier",
+"Jack Russell",
+"Chihuahua",
+"Shih Tzu",
+"Maine Coon",
+"Sphynx",
+"Ragdoll",
+"Bengal",
+"Border Collie",
+"Cavalier King Charles Spaniel"
+];
+
+
+function isNonLatinSiteLanguage(language){
+
+return [
+"ru",
+"uk",
+"bg",
+"el",
+"ar",
+"hi"
+].includes(language);
+}
+
+
+function protectEnglishPhrases(text){
+
+let value =
+text;
+
+const protectedItems = [];
+
+ENGLISH_PHRASES
+.sort(
+(a,b)=>b.length-a.length
+)
+.forEach(
+phrase=>{
+
+const expression =
+new RegExp(
+phrase.replace(
+/[-/\\^$*+?.()|[\]{}]/g,
+"\\$&"
+),
+"gi"
+);
+
+value =
+value.replace(
+expression,
+match=>{
+
+const key =
+`@@PDEN${protectedItems.length}@@`;
+
+protectedItems.push(match);
+
+return key;
+}
+);
+
+}
+);
+
+return {
+value,
+protectedItems
+};
+}
+
+
+function splitMixedLanguage(text){
 
 const language =
 getCurrentLanguage();
 
+const normalLocale =
+SPEECH_LOCALES[language] ||
+"en-GB";
 
-const semantic =
-SEMANTIC[
-language
-] ||
-SEMANTIC.en;
+if(language === "en"){
 
+return [{
+text,
+locale:"en-GB"
+}];
 
-let text =
-String(
-rawText ||
-""
-);
+}
 
+const protectedResult =
+protectEnglishPhrases(text);
 
-/*
-Location and contact icons.
-*/
+let value =
+protectedResult.value;
 
-text =
-text.replace(
-/📍/g,
-" " +
-semantic.location +
-": "
-);
+const pieces = [];
 
+const tokenRegex =
+/@@PDEN\d+@@|[A-Za-z][A-Za-z0-9'’.]*(?:\s+[A-Za-z][A-Za-z0-9'’.]*)*/g;
 
-text =
-text.replace(
-/(?:☎️?|📞|📱)/g,
-" " +
-semantic.phone +
-": "
-);
+let lastIndex = 0;
+let match;
 
-
-text =
-text.replace(
-/(?:💳|💳️)/g,
-" " +
-semantic.card +
-": "
-);
-
-
-text =
-text.replace(
-/(?:📧|✉️?|✉)/g,
-" " +
-semantic.email +
-": "
-);
-
-
-text =
-text.replace(
-/(?:🌐|🔗)/g,
-" " +
-semantic.website +
-": "
-);
-
-
-text =
-text.replace(
-/(?:🏠|🏡)/g,
-" " +
-semantic.home +
-": "
-);
-
-
-text =
-text.replace(
-/🎁/g,
-" " +
-semantic.prize +
-": "
-);
-
-
-text =
-text.replace(
-/🏆/g,
-" " +
-semantic.winner +
-": "
-);
-
-
-/*
-Remove decorative visual symbols.
-*/
-
-text =
-text
-.replace(/[◆◇◈✦✧★☆♧⌘◉●○]/g," ")
-.replace(/[♡♥❤❤️]+/g," ")
-.replace(/[→←↗↘↑↓⇢➜➝]+/g,", ")
-.replace(/[＋+](?=\s*[A-Za-zА-Яа-яІіЇїЄєҐґ])/g," ")
-.replace(/·/g,", ")
-.replace(/\s+[|]\s+/g,", ");
-
-
-/*
-Ampersand and slash become meaningful conjunctions.
-*/
-
-text =
-text.replace(
-/\s*&\s*/g,
-" " +
-semantic.and +
-" "
-);
-
-
-text =
-text.replace(
-/\s+\/\s+/g,
-" " +
-semantic.or +
-" "
-);
-
-
-/*
-Gender words.
-*/
-
-text =
-text.replace(
-/\bFemale\b/gi,
-semantic.female
-);
-
-
-text =
-text.replace(
-/\bMale\b/gi,
-semantic.male
-);
-
-
-/*
-English age units are converted to the selected language.
-Example:
-2 years -> 2 года
-12 weeks -> 12 недель
-*/
-
-text =
-text.replace(
-/\b(\d+)\s*(years?|yrs?)\b/gi,
-function(
-match,
-number
+while(
+(match = tokenRegex.exec(value))
 ){
 
-return number +
-" " +
-countUnit(
-number,
-"year",
-language
-);
+if(match.index > lastIndex){
 
-}
-);
-
-
-text =
-text.replace(
-/\b(\d+)\s*(weeks?|wks?)\b/gi,
-function(
-match,
-number
-){
-
-return number +
-" " +
-countUnit(
-number,
-"week",
-language
-);
-
-}
-);
-
-
-text =
-text.replace(
-/\b(\d+)\s*(months?|mos?)\b/gi,
-function(
-match,
-number
-){
-
-return number +
-" " +
-countUnit(
-number,
-"month",
-language
-);
-
-}
-);
-
-
-text =
-text.replace(
-/\b(\d+)\s*(days?)\b/gi,
-function(
-match,
-number
-){
-
-return number +
-" " +
-countUnit(
-number,
-"day",
-language
-);
-
-}
-);
-
-
-/*
-British pounds.
-*/
-
-text =
-text.replace(
-/£\s*(\d+)(?![\d.,])/g,
-function(
-match,
-number
-){
-
-return number +
-" " +
-countUnit(
-number,
-"pound",
-language
-);
-
-}
-);
-
-
-/*
-Bank card numbers.
-Detect 13–19 digits, including spaces or hyphens.
-*/
-
-text =
-text.replace(
-/(?:\b(?:\d[ -]?){13,19}\b)/g,
-function(match){
-
-const digits =
-match.replace(
-/\D/g,
-""
-);
-
-
-if(
-digits.length < 13 ||
-digits.length > 19
-){
-
-return match;
-
-}
-
-
-return (
-semantic.card +
-": " +
-digits
-.split("")
-.join(" ")
-);
-
-}
-);
-
-
-/*
-Phone numbers.
-Numbers are separated digit by digit for clarity.
-*/
-
-text =
-text.replace(
-/(?:\+\d[\d\s().-]{7,}\d)/g,
-function(match){
-
-const digits =
-match.replace(
-/\D/g,
-""
-);
-
-
-if(
-digits.length < 8
-){
-
-return match;
-
-}
-
-
-return (
-semantic.phone +
-": " +
-semantic.plus +
-" " +
-digits
-.split("")
-.join(" ")
-);
-
-}
-);
-
-
-/*
-Email.
-*/
-
-text =
-text.replace(
-/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi,
-function(match){
-
-return (
-semantic.email +
-": " +
-match
-);
-
-}
-);
-
-
-/*
-URLs.
-*/
-
-text =
-text.replace(
-/https?:\/\/[^\s]+/gi,
-function(match){
-
-return (
-semantic.website +
-": " +
-match
-);
-
-}
-);
-
-
-/*
-Clean spaces while keeping punctuation for natural pauses.
-*/
-
-text =
-text
-.replace(/\s+([,.!?;:])/g,"$1")
-.replace(/([,.!?;:])(?=[^\s])/g,"$1 ")
-.replace(/\s+/g," ")
+const before =
+value
+.slice(lastIndex,match.index)
 .trim();
 
-
-return text;
-
-}
-
-
-/* =========================================================
-SCRIPT DETECTION
-========================================================= */
-
-function scriptOfCharacter(
-character
-){
-
-if(
-/[A-Za-zÀ-ÖØ-öø-ÿĀ-ž]/.test(
-character
-)
-){
-
-return "latin";
-
-}
-
-
-if(
-/[\u0400-\u052F]/.test(
-character
-)
-){
-
-return "cyrillic";
-
-}
-
-
-if(
-/[\u0370-\u03FF\u1F00-\u1FFF]/.test(
-character
-)
-){
-
-return "greek";
-
-}
-
-
-if(
-/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/.test(
-character
-)
-){
-
-return "arabic";
-
-}
-
-
-if(
-/[\u0900-\u097F]/.test(
-character
-)
-){
-
-return "devanagari";
-
-}
-
-
-return "neutral";
-
-}
-
-
-function localeForScript(
-script,
-selectedLanguage,
-text=""
-){
-
-if(
-script === "cyrillic"
-){
-
-if(
-selectedLanguage === "uk"
-){
-
-return SPEECH_LOCALES.uk;
-
-}
-
-
-if(
-selectedLanguage === "bg"
-){
-
-return SPEECH_LOCALES.bg;
-
-}
-
-
-return SPEECH_LOCALES.ru;
-
-}
-
-
-if(
-script === "greek"
-){
-
-return SPEECH_LOCALES.el;
-
-}
-
-
-if(
-script === "arabic"
-){
-
-return SPEECH_LOCALES.ar;
-
-}
-
-
-if(
-script === "devanagari"
-){
-
-return SPEECH_LOCALES.hi;
-
-}
-
-
-if(
-script === "latin"
-){
-
-if(
-!LATIN_LANGUAGES.has(
-selectedLanguage
-)
-){
-
-return SPEECH_LOCALES.en;
-
-}
-
-
-const words =
-String(
-text
-)
-.toLowerCase()
-.match(
-/[a-zà-öø-ÿā-ž]+/g
-) ||
-[];
-
-
-const strongEnglish =
-words.some(
-word =>
-ENGLISH_HINT_WORDS.has(
-word
-)
-);
-
-
-if(
-strongEnglish
-){
-
-return SPEECH_LOCALES.en;
-
-}
-
-
-return SPEECH_LOCALES[
-selectedLanguage
-] ||
-SPEECH_LOCALES.en;
-
-}
-
-
-return SPEECH_LOCALES[
-selectedLanguage
-] ||
-SPEECH_LOCALES.en;
-
-}
-
-
-/* =========================================================
-SPLIT TEXT BY WRITING SYSTEM
-========================================================= */
-
-function splitByScript(
-text
-){
-
-const selectedLanguage =
-getCurrentLanguage();
-
-
-const segments =
-[];
-
-let currentText =
-"";
-
-let currentScript =
-null;
-
-
-function flush(){
-
-const clean =
-currentText
-.replace(/\s+/g," ")
-.trim();
-
-
-if(
-clean
-){
-
-segments.push({
-text:clean,
-lang:
-localeForScript(
-currentScript ||
-"neutral",
-selectedLanguage,
-clean
-)
+if(before){
+
+pieces.push({
+text:before,
+locale:normalLocale
 });
 
 }
 
-
-currentText =
-"";
-
-currentScript =
-null;
-
 }
 
+let token =
+match[0];
 
-for(
-const character
-of text
-){
-
-const script =
-scriptOfCharacter(
-character
+const protectedMatch =
+token.match(
+/@@PDEN(\d+)@@/
 );
 
+if(protectedMatch){
 
-if(
-script === "neutral"
+token =
+protectedResult.protectedItems[
+Number(protectedMatch[1])
+] ||
+token;
+
+pieces.push({
+text:token,
+locale:"en-GB"
+});
+
+}else if(
+isNonLatinSiteLanguage(language)
 ){
 
-currentText +=
-character;
+pieces.push({
+text:token,
+locale:"en-GB"
+});
 
-continue;
+}else{
 
-}
-
-
-if(
-!currentScript
-){
-
-currentScript =
-script;
-
-currentText +=
-character;
-
-continue;
+pieces.push({
+text:token,
+locale:normalLocale
+});
 
 }
 
-
-if(
-script === currentScript
-){
-
-currentText +=
-character;
-
-continue;
+lastIndex =
+tokenRegex.lastIndex;
 
 }
 
+if(lastIndex < value.length){
 
-flush();
+const after =
+value
+.slice(lastIndex)
+.trim();
 
+if(after){
 
-currentScript =
-script;
-
-currentText =
-character;
+pieces.push({
+text:after,
+locale:normalLocale
+});
 
 }
 
+}
 
-flush();
-
-
-return segments;
-
+return pieces.filter(
+item=>item.text.trim()
+);
 }
 
 
 /* =========================================================
-TEXT CHUNKS
+SENTENCE CHUNKS
 ========================================================= */
 
-function splitLongText(
-text,
-maxLength
-){
+function splitText(text,maxLength=180){
 
-const words =
-String(text)
-.split(/\s+/);
+const clean =
+String(text || "")
+.replace(/\s+/g," ")
+.trim();
 
-
-const output =
-[];
-
-let current =
-"";
-
-
-words.forEach(
-function(word){
-
-const candidate =
-current
-? current + " " + word
-: word;
-
-
-if(
-candidate.length >
-maxLength &&
-current
-){
-
-output.push(
-current
-);
-
-
-current =
-word;
-
-}else{
-
-current =
-candidate;
-
-}
-
-}
-);
-
-
-if(
-current
-){
-
-output.push(
-current
-);
-
-}
-
-
-return output;
-
-}
-
-
-function makeSpeechQueue(
-text
-){
-
-const normalized =
-normalizeSemanticText(
-text
-);
-
-
-if(
-!normalized
-){
-
+if(!clean){
 return [];
-
 }
-
-
-const scriptSegments =
-splitByScript(
-normalized
-);
-
-
-const output =
-[];
-
-
-scriptSegments.forEach(
-function(segment){
 
 const sentences =
-segment.text.match(
+clean.match(
 /[^.!?。！？…]+[.!?。！？…]+|[^.!?。！？…]+$/g
-) ||
-[
-segment.text
-];
+) || [clean];
 
+const result = [];
+let current = "";
 
-sentences.forEach(
-function(sentence){
+sentences.forEach(sentence=>{
 
 const value =
 sentence.trim();
 
+if(!value){
+return;
+}
+
+const candidate =
+current
+? current + " " + value
+: value;
 
 if(
-!value
+candidate.length > maxLength &&
+current
 ){
 
-return;
+result.push(current);
+current = value;
+
+}else{
+
+current = candidate;
 
 }
 
+});
 
-splitLongText(
-value,
-220
-)
-.forEach(
-function(part){
+if(current){
+result.push(current);
+}
 
-if(
-part.trim()
-){
+return result;
+}
 
-output.push({
-text:
-part.trim(),
-lang:
-segment.lang
+
+function buildSpeechQueue(text){
+
+const semanticText =
+prepareSemanticText(text);
+
+const chunks =
+splitText(
+semanticText,
+180
+);
+
+const queue = [];
+
+chunks.forEach(chunk=>{
+
+splitMixedLanguage(chunk)
+.forEach(part=>{
+
+if(part.text.trim()){
+
+queue.push({
+text:part.text.trim(),
+locale:part.locale
 });
 
 }
 
-}
-);
+});
 
-}
-);
+});
 
-}
-);
-
-
-return output;
-
+return queue;
 }
 
 
@@ -2635,75 +1940,42 @@ VOICE
 function chooseVoice(locale){
 
 if(
-!(
-"speechSynthesis" in window
-)
+!("speechSynthesis" in window)
 ){
-
 return null;
-
 }
-
 
 const voices =
-window.speechSynthesis
-.getVoices();
+speechSynthesis.getVoices();
 
-
-if(
-!voices.length
-){
-
+if(!voices.length){
 return null;
-
 }
-
-
-const requested =
-String(
-locale ||
-""
-)
-.toLowerCase();
-
 
 const exact =
 voices.find(
-voice =>
-String(
-voice.lang
-)
+voice=>
+String(voice.lang)
 .toLowerCase() ===
-requested
+String(locale)
+.toLowerCase()
 );
 
-
-if(
-exact
-){
-
+if(exact){
 return exact;
-
 }
 
-
-const language =
-requested
-.split("-")[0];
-
+const prefix =
+String(locale)
+.split("-")[0]
+.toLowerCase();
 
 return voices.find(
-voice =>
-String(
-voice.lang
-)
+voice=>
+String(voice.lang)
 .toLowerCase()
-.startsWith(
-language
-)
-) ||
-null;
-
+.startsWith(prefix)
+) || null;
 }
 
 
@@ -2711,74 +1983,45 @@ null;
 BUTTON STATE
 ========================================================= */
 
-function updateAllButtonLabels(){
+function updateButtons(){
 
 const labels =
 getLabels();
-
 
 document
 .querySelectorAll(
 "[data-pd-speech-toggle]"
 )
-.forEach(
-function(button){
+.forEach(button=>{
 
 const active =
 button === activeButton &&
 speaking;
-
 
 const label =
 active
 ? labels.stop
 : labels.listen;
 
-
 button.setAttribute(
 "aria-label",
 label
 );
-
 
 button.setAttribute(
 "title",
 label
 );
 
-
 button.setAttribute(
 "aria-pressed",
-active
-? "true"
-: "false"
+active ? "true" : "false"
 );
-
 
 button.dataset.speaking =
-active
-? "true"
-: "false";
+active ? "true" : "false";
 
-
-const hidden =
-button.querySelector(
-".pd-speaker-label"
-);
-
-
-if(
-hidden
-){
-
-hidden.textContent =
-label;
-
-}
-
-}
-);
-
+});
 }
 
 
@@ -2786,60 +2029,34 @@ label;
 STOP
 ========================================================= */
 
-function stopSpeech(
-withAnnouncement
-){
+function stopSpeech(announceStop=false){
 
-stopped =
-true;
+stopped = true;
+speaking = false;
 
-speaking =
-false;
-
-speechQueue =
-[];
-
-queueIndex =
-0;
-
-activeUtterance =
-null;
-
-activeElement =
-null;
-
+speechQueue = [];
+speechIndex = 0;
 
 if(
 "speechSynthesis" in window
 ){
-
-window.speechSynthesis.cancel();
-
+speechSynthesis.cancel();
 }
 
+activeButton = null;
 
-activeButton =
-null;
+updateButtons();
 
-
-updateAllButtonLabels();
-
-
-if(
-withAnnouncement
-){
-
+if(announceStop){
 announce(
 getLabels().stopped
 );
-
 }
-
 }
 
 
 /* =========================================================
-READ QUEUE
+SPEAK QUEUE
 ========================================================= */
 
 function speakNext(){
@@ -2848,142 +2065,89 @@ if(
 stopped ||
 !speaking
 ){
-
 return;
-
 }
-
 
 if(
-queueIndex >=
-speechQueue.length
+speechIndex >= speechQueue.length
 ){
 
-speaking =
-false;
+speaking = false;
+stopped = false;
+activeButton = null;
 
-stopped =
-false;
-
-activeUtterance =
-null;
-
-activeElement =
-null;
-
-activeButton =
-null;
-
-
-updateAllButtonLabels();
-
+updateButtons();
 
 return;
-
 }
 
-
 const item =
-speechQueue[
-queueIndex
-];
-
+speechQueue[speechIndex];
 
 const utterance =
 new SpeechSynthesisUtterance(
 item.text
 );
 
-
-activeUtterance =
-utterance;
-
-
 utterance.lang =
-item.lang;
-
+item.locale;
 
 utterance.rate =
-0.96;
-
+0.94;
 
 utterance.pitch =
 1;
 
-
 utterance.volume =
 1;
 
-
 const voice =
 chooseVoice(
-item.lang
+item.locale
 );
 
-
-if(
-voice
-){
-
-utterance.voice =
-voice;
-
+if(voice){
+utterance.voice = voice;
 }
-
 
 utterance.onend =
-function(){
+()=>{
 
-if(
-stopped
-){
-
+if(stopped){
 return;
-
 }
 
+speechIndex += 1;
 
-queueIndex +=
-1;
-
-
-window.setTimeout(
+setTimeout(
 speakNext,
-35
+45
 );
 
 };
 
-
 utterance.onerror =
-function(event){
+event=>{
 
 if(
 event.error === "canceled" ||
 event.error === "interrupted"
 ){
-
 return;
-
 }
 
+speechIndex += 1;
 
-queueIndex +=
-1;
-
-
-window.setTimeout(
+setTimeout(
 speakNext,
-35
+60
 );
 
 };
 
-
-window.speechSynthesis.speak(
+speechSynthesis.speak(
 utterance
 );
-
 }
 
 
@@ -2999,118 +2163,87 @@ button
 const labels =
 getLabels();
 
-
 if(
-!(
-"speechSynthesis" in window
-) ||
-typeof window.SpeechSynthesisUtterance ===
-"undefined"
+!("speechSynthesis" in window) ||
+typeof SpeechSynthesisUtterance === "undefined"
 ){
 
 announce(
 labels.unsupported
 );
 
-
 return;
-
 }
 
+
+/* Same button = stop */
 
 if(
 speaking &&
 activeButton === button
 ){
 
-stopSpeech(
-true
-);
-
-
+stopSpeech(true);
 return;
-
 }
 
 
-stopSpeech(
-false
-);
+/* Stop previous topic */
+
+stopSpeech(false);
 
 
-const text =
+const rawText =
 getTextFromElement(
 element
 );
 
-
-if(
-!text
-){
+if(!rawText){
 
 announce(
 labels.empty
 );
 
-
 return;
-
-}
-
-
-const prepared =
-makeSpeechQueue(
-text
-);
-
-
-if(
-!prepared.length
-){
-
-announce(
-labels.empty
-);
-
-
-return;
-
 }
 
 
 speechQueue =
-prepared;
+buildSpeechQueue(
+rawText
+);
+
+if(!speechQueue.length){
+
+announce(
+labels.empty
+);
+
+return;
+}
 
 
-queueIndex =
-0;
+speechIndex = 0;
+stopped = false;
+speaking = true;
+activeButton = button;
 
-
-stopped =
-false;
-
-
-speaking =
-true;
-
-
-activeButton =
-button;
-
-
-activeElement =
-element;
-
-
-updateAllButtonLabels();
-
+updateButtons();
 
 announce(
 labels.reading
 );
 
 
-speakNext();
+/*
+Android Chrome behaves more reliably when speech starts
+slightly after cancel().
+*/
+
+setTimeout(
+speakNext,
+70
+);
 
 }
 
@@ -3126,10 +2259,7 @@ button.getAttribute(
 "data-pd-speech-target"
 );
 
-
-if(
-selector
-){
+if(selector){
 
 try{
 
@@ -3138,13 +2268,8 @@ document.querySelector(
 selector
 );
 
-
-if(
-target
-){
-
+if(target){
 return target;
-
 }
 
 }catch(error){
@@ -3158,23 +2283,15 @@ button.getAttribute(
 "aria-controls"
 );
 
-
-if(
-controls
-){
+if(controls){
 
 const target =
 document.getElementById(
 controls
 );
 
-
-if(
-target
-){
-
+if(target){
 return target;
-
 }
 
 }
@@ -3184,219 +2301,18 @@ return button.closest(
 [
 "[data-pd-readable]",
 "article",
-".article-card",
-".story-card",
-".feature-card",
-".editorial-card",
-".content-card",
-".world-card",
-".category-card",
-".rubric-card",
-".topic-card",
-".listing-card",
-".browse-card",
-".result-card",
-".publish-strip",
-".impact",
-".rescue-cta",
+".community-copy",
+".hero",
+".intro-photo",
+".how",
+".impact-copy",
+".rescue-copy",
+".community-note-inner",
+".prize-box",
+".rules",
 "section"
 ].join(",")
 );
-
-}
-
-
-/* =========================================================
-CREATE SPEAKER
-========================================================= */
-
-function createSpeakerForElement(
-element
-){
-
-if(
-!element ||
-element.dataset.pdNarrationReady ===
-"true"
-){
-
-return;
-
-}
-
-
-const readableText =
-getTextFromElement(
-element
-);
-
-
-if(
-readableText.length <
-25
-){
-
-return;
-
-}
-
-
-element.dataset.pdNarrationReady =
-"true";
-
-
-element.classList.add(
-"pd-readable-block"
-);
-
-
-if(
-!element.id
-){
-
-readableCounter +=
-1;
-
-
-element.id =
-"pd-readable-" +
-readableCounter;
-
-}
-
-
-const existing =
-Array.from(
-element.children
-).find(
-child =>
-child.matches &&
-child.matches(
-"[data-pd-speech-toggle]"
-)
-);
-
-
-if(
-existing
-){
-
-existing.setAttribute(
-"data-pd-speech-target",
-"#" +
-element.id
-);
-
-
-existing.setAttribute(
-"aria-controls",
-element.id
-);
-
-
-bindButton(
-existing
-);
-
-
-return;
-
-}
-
-
-/*
-Buttons and links must not contain another real button.
-For those blocks we use an accessible span role=button.
-*/
-
-const isInteractiveRoot =
-element.matches(
-"button,a"
-);
-
-
-const control =
-isInteractiveRoot
-? document.createElement("span")
-: document.createElement("button");
-
-
-if(
-isInteractiveRoot
-){
-
-control.setAttribute(
-"role",
-"button"
-);
-
-
-control.setAttribute(
-"tabindex",
-"0"
-);
-
-}else{
-
-control.type =
-"button";
-
-}
-
-
-control.className =
-"pd-local-speaker";
-
-
-control.setAttribute(
-"data-pd-speech-toggle",
-"true"
-);
-
-
-control.setAttribute(
-"data-pd-speech-target",
-"#" +
-element.id
-);
-
-
-control.setAttribute(
-"aria-controls",
-element.id
-);
-
-
-control.setAttribute(
-"aria-pressed",
-"false"
-);
-
-
-control.setAttribute(
-"data-pd-speech-ignore",
-"true"
-);
-
-
-control.innerHTML =
-speakerSvg() +
-`
-<span
-class="pd-sr-only pd-speaker-label"
-></span>
-`;
-
-
-element.appendChild(
-control
-);
-
-
-bindButton(
-control
-);
-
 }
 
 
@@ -3408,210 +2324,378 @@ function bindButton(button){
 
 if(
 !button ||
-button.dataset.pdSpeechBound ===
-"true"
+button.dataset.pdSpeechBound === "true"
 ){
-
 return;
-
 }
-
 
 button.dataset.pdSpeechBound =
 "true";
 
-
 button.addEventListener(
 "click",
-function(event){
+event=>{
 
 event.preventDefault();
-
 event.stopPropagation();
-
+event.stopImmediatePropagation();
 
 const target =
-resolveTarget(
-button
-);
+resolveTarget(button);
 
-
-if(
-!target
-){
+if(!target){
 
 announce(
 getLabels().empty
 );
 
-
 return;
-
 }
-
 
 speakElement(
 target,
 button
 );
 
-}
+},
+true
 );
-
-
-if(
-button.getAttribute(
-"role"
-) === "button"
-){
-
-button.addEventListener(
-"keydown",
-function(event){
-
-if(
-event.key === "Enter" ||
-event.key === " "
-){
-
-event.preventDefault();
-
-event.stopPropagation();
-
-button.click();
-
-}
-
-}
-);
-
-}
-
-
-updateAllButtonLabels();
 
 }
 
 
 /* =========================================================
-LEGACY BUTTONS
+CREATE SPEAKER
 ========================================================= */
 
-function bindLegacyButtons(){
-
-const selector = [
-
-"[data-pd-speech-toggle]",
-"[data-read-aloud]",
-".speaker-button",
-".speaker-btn",
-".listen-button",
-".read-aloud-button"
-
-].join(",");
-
-
-document
-.querySelectorAll(
-selector
-)
-.forEach(
-function(button){
+function createSpeaker(element){
 
 if(
-!button.hasAttribute(
-"data-pd-speech-toggle"
+!element ||
+element.closest(
+"nav,aside,footer,.modal,.contest-modal"
 )
 ){
+return;
+}
+
+if(
+element.tagName === "BUTTON" ||
+element.tagName === "INPUT" ||
+element.tagName === "SELECT" ||
+element.tagName === "TEXTAREA"
+){
+return;
+}
+
+const text =
+getTextFromElement(
+element
+);
+
+if(text.length < 35){
+return;
+}
+
+element.classList.add(
+"pd-readable-block"
+);
+
+if(!element.id){
+
+readableCounter += 1;
+
+element.id =
+"pd-readable-" +
+readableCounter;
+}
+
+
+/*
+Exactly ONE direct speaker per readable block.
+*/
+
+const directButtons =
+Array.from(
+element.children
+)
+.filter(
+child=>
+child.matches &&
+child.matches(
+"[data-pd-speech-toggle]"
+)
+);
+
+let button =
+directButtons[0] ||
+null;
+
+directButtons
+.slice(1)
+.forEach(extra=>{
+
+if(
+extra.classList.contains(
+"pd-local-speaker"
+)
+){
+extra.remove();
+}
+
+});
+
+
+if(!button){
+
+button =
+document.createElement(
+"button"
+);
+
+button.type =
+"button";
+
+button.className =
+"pd-local-speaker";
+
+button.dataset.pdGenerated =
+"true";
 
 button.setAttribute(
 "data-pd-speech-toggle",
 "true"
 );
 
-}
+button.innerHTML =
+speakerSvg() +
+'<span class="pd-sr-only pd-speaker-label"></span>';
 
-
-bindButton(
+element.appendChild(
 button
 );
-
 }
+
+
+button.setAttribute(
+"data-pd-speech-target",
+"#" + element.id
 );
+
+button.setAttribute(
+"aria-controls",
+element.id
+);
+
+button.setAttribute(
+"aria-pressed",
+"false"
+);
+
+button.setAttribute(
+"data-pd-speech-ignore",
+"true"
+);
+
+bindButton(button);
 
 }
 
 
 /* =========================================================
-INSTALL SPEAKERS
+CANDIDATES
 ========================================================= */
 
-function installLocalSpeakers(){
+function collectCandidates(){
 
-const elements =
-new Set();
+const selector = [
 
+"[data-pd-readable]",
 
-document
-.querySelectorAll(
-READABLE_SELECTOR
+".hero",
+
+"main article",
+
+"main .article-card",
+"main .story-card",
+"main .feature-card",
+"main .editorial-card",
+"main .magazine-card",
+"main .content-card",
+"main .world-card",
+"main .category-card",
+"main .rubric-card",
+"main .topic-card",
+
+"main .result-card",
+"main .listing-card",
+
+"main .community-copy",
+"main .intro-photo",
+"main .how",
+"main .impact-copy",
+"main .rescue-copy",
+"main .community-note-inner",
+"main .prize-box",
+"main .rules",
+
+"main > section"
+
+].join(",");
+
+const raw =
+Array.from(
+document.querySelectorAll(
+selector
 )
-.forEach(
-element =>
-elements.add(
-element
-)
+);
+
+const unique =
+Array.from(
+new Set(raw)
 );
 
 
 /*
-Top-level rubrics.
+A broad section does not receive another speaker
+when it already contains smaller readable topics.
+This prevents the double speakers seen in Community.
 */
+
+return unique.filter(
+element=>{
+
+if(
+element.closest(
+"nav,aside,footer,.modal,.contest-modal"
+)
+){
+return false;
+}
+
+const isBroadSection =
+element.matches(
+"main > section"
+);
+
+if(isBroadSection){
+
+const hasNestedCandidate =
+unique.some(
+other=>
+other !== element &&
+element.contains(other) &&
+!other.matches("main > section")
+);
+
+if(hasNestedCandidate){
+return false;
+}
+
+}
+
+const explicit =
+element.hasAttribute(
+"data-pd-readable"
+);
+
+if(explicit){
+
+const nestedExplicit =
+unique.some(
+other=>
+other !== element &&
+other.hasAttribute(
+"data-pd-readable"
+) &&
+element.contains(other)
+);
+
+if(nestedExplicit){
+return false;
+}
+
+}
+
+return true;
+});
+}
+
+
+/* =========================================================
+REMOVE OLD DUPLICATE GENERATED BUTTONS
+========================================================= */
+
+function cleanOldGeneratedSpeakers(){
+
+const speakers =
+Array.from(
+document.querySelectorAll(
+".pd-local-speaker"
+)
+);
+
+const grouped =
+new Map();
+
+speakers.forEach(button=>{
+
+const target =
+button.getAttribute(
+"data-pd-speech-target"
+) ||
+button.getAttribute(
+"aria-controls"
+) ||
+"no-target-" +
+Math.random();
+
+if(!grouped.has(target)){
+grouped.set(target,[]);
+}
+
+grouped.get(target)
+.push(button);
+
+});
+
+
+grouped.forEach(buttons=>{
+
+buttons
+.slice(1)
+.forEach(button=>{
+button.remove();
+});
+
+});
+}
+
+
+/* =========================================================
+INSTALL
+========================================================= */
+
+function installLocalSpeakers(){
+
+cleanOldGeneratedSpeakers();
+
+const candidates =
+collectCandidates();
+
+candidates.forEach(
+element=>createSpeaker(element)
+);
 
 document
 .querySelectorAll(
-SECTION_SELECTOR
+"[data-pd-speech-toggle]"
 )
 .forEach(
-function(section){
-
-const text =
-getTextFromElement(
-section
+button=>bindButton(button)
 );
 
-
-if(
-text.length >=
-50
-){
-
-elements.add(
-section
-);
-
-}
-
-}
-);
-
-
-elements.forEach(
-function(element){
-
-createSpeakerForElement(
-element
-);
-
-}
-);
-
-
-bindLegacyButtons();
-
-
-updateAllButtonLabels();
-
+updateButtons();
 }
 
 
@@ -3621,25 +2705,16 @@ LANGUAGE CHANGE
 
 function onLanguageChange(){
 
-if(
-speaking
-){
-
-stopSpeech(
-false
-);
-
+if(speaking){
+stopSpeech(false);
 }
 
+updateButtons();
 
-updateAllButtonLabels();
-
-
-window.setTimeout(
+setTimeout(
 installLocalSpeakers,
-80
+120
 );
-
 }
 
 
@@ -3649,55 +2724,27 @@ DYNAMIC CONTENT
 
 const observer =
 new MutationObserver(
-function(mutations){
+mutations=>{
 
-let changed =
-false;
-
-
-for(
-const mutation
-of mutations
-){
-
-if(
-mutation.type ===
-"childList" &&
+const changed =
+mutations.some(
+mutation=>
+mutation.type === "childList" &&
 mutation.addedNodes.length
-){
+);
 
-changed =
-true;
-
-break;
-
-}
-
-}
-
-
-if(
-!changed
-){
-
+if(!changed){
 return;
-
 }
 
-
-window.clearTimeout(
+clearTimeout(
 updateTimer
 );
 
-
 updateTimer =
-window.setTimeout(
-function(){
-
-installLocalSpeakers();
-
-},
-120
+setTimeout(
+installLocalSpeakers,
+180
 );
 
 }
@@ -3710,13 +2757,9 @@ PUBLIC API
 
 window.PetsDogueNarration = {
 
-
 speakElement(element){
 
-if(
-typeof element ===
-"string"
-){
+if(typeof element === "string"){
 
 element =
 document.querySelector(
@@ -3725,140 +2768,77 @@ element
 
 }
 
-
-if(
-!element
-){
-
+if(!element){
 return false;
-
 }
 
+createSpeaker(element);
 
-let button =
-element.querySelector(
-":scope > [data-pd-speech-toggle]"
+const button =
+Array.from(
+element.children
+)
+.find(
+child=>
+child.matches &&
+child.matches(
+"[data-pd-speech-toggle]"
+)
 );
 
-
-if(
-!button
-){
-
-createSpeakerForElement(
-element
-);
-
-
-button =
-element.querySelector(
-":scope > [data-pd-speech-toggle]"
-);
-
+if(!button){
+return false;
 }
-
-
-if(
-button
-){
 
 speakElement(
 element,
 button
 );
 
-
 return true;
-
-}
-
-
-return false;
-
 },
 
 
 speak(text){
 
-if(
-!text
-){
-
+if(!text){
 return false;
-
 }
 
-
 if(
-!(
-"speechSynthesis" in window
-)
+!("speechSynthesis" in window)
 ){
-
-announce(
-getLabels().unsupported
-);
-
-
 return false;
-
 }
 
-
-stopSpeech(
-false
-);
-
+stopSpeech(false);
 
 speechQueue =
-makeSpeechQueue(
+buildSpeechQueue(
 text
 );
 
-
-if(
-!speechQueue.length
-){
-
+if(!speechQueue.length){
 return false;
-
 }
 
+speechIndex = 0;
+stopped = false;
+speaking = true;
+activeButton = null;
 
-queueIndex =
-0;
-
-stopped =
-false;
-
-speaking =
-true;
-
-activeButton =
-null;
-
-activeElement =
-null;
-
-
-announce(
-getLabels().reading
+setTimeout(
+speakNext,
+70
 );
 
-
-speakNext();
-
-
 return true;
-
 },
 
 
 stop(){
 
-stopSpeech(
-true
-);
+stopSpeech(true);
 
 },
 
@@ -3888,99 +2868,62 @@ window.addEventListener(
 onLanguageChange
 );
 
-
 window.addEventListener(
 "languagechange",
 onLanguageChange
 );
 
-
 window.addEventListener(
 "storage",
-function(event){
+event=>{
 
-if(
-event.key ===
-LANGUAGE_KEY
-){
-
+if(event.key === LANGUAGE_KEY){
 onLanguageChange();
-
 }
 
 }
 );
 
-
 document.addEventListener(
 "visibilitychange",
-function(){
+()=>{
 
 if(
 document.hidden &&
 speaking
 ){
-
-stopSpeech(
-false
-);
-
+stopSpeech(false);
 }
 
 }
 );
-
 
 window.addEventListener(
 "beforeunload",
-function(){
-
-stopSpeech(
-false
-);
-
-}
+()=>stopSpeech(false)
 );
 
 
 /* =========================================================
-VOICES READY
-========================================================= */
-
-if(
-"speechSynthesis" in window
-){
-
-window.speechSynthesis.addEventListener?.(
-"voiceschanged",
-function(){
-
-updateAllButtonLabels();
-
-}
-);
-
-}
-
-
-/* =========================================================
-INITIALIZE
+INITIALISE
 ========================================================= */
 
 function init(){
 
 addStyles();
 
-
 ensureLiveRegion();
 
+/*
+Remove duplicates left by the previous version
+before rebuilding the speakers.
+*/
+
+cleanOldGeneratedSpeakers();
 
 installLocalSpeakers();
 
-
-if(
-document.body
-){
+if(document.body){
 
 observer.observe(
 document.body,
@@ -3996,8 +2939,7 @@ subtree:true
 
 
 if(
-document.readyState ===
-"loading"
+document.readyState === "loading"
 ){
 
 document.addEventListener(
