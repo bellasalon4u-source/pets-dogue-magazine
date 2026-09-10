@@ -2,172 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1,viewport-fit=cover"
->
-
-<!-- =========================================================
-PETS & DOGUE SEO
-========================================================= -->
-
-<meta
-id="metaDescription"
-name="description"
-content="PETS & DOGUE is a digital lifestyle platform for pets and the people who love them — bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace, member benefits and useful services in one place."
->
-
-<meta
-name="robots"
-content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
->
-
-<meta
-name="googlebot"
-content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
->
-
-<meta
-name="author"
-content="PETS & DOGUE"
->
-
-<meta
-name="application-name"
-content="PETS & DOGUE"
->
-
-<meta
-name="theme-color"
-content="#070707"
->
-
-<meta
-name="color-scheme"
-content="dark"
->
-
-<title>
-PETS &amp; DOGUE | Digital Lifestyle Platform for Pets
-</title>
-
-<link
-id="canonicalLink"
-rel="canonical"
-href="https://www.petsanddogue.com/"
->
-
-<meta
-property="og:type"
-content="website"
->
-
-<meta
-property="og:site_name"
-content="PETS & DOGUE"
->
-
-<meta
-id="ogTitle"
-property="og:title"
-content="PETS & DOGUE | Digital Lifestyle Platform for Pets"
->
-
-<meta
-id="ogDescription"
-property="og:description"
-content="Stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace, member benefits and useful services in one digital lifestyle platform."
->
-
-<meta
-id="ogUrl"
-property="og:url"
-content="https://www.petsanddogue.com/"
->
-
-<meta
-id="ogImage"
-property="og:image"
-content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
->
-
-<meta
-property="og:image:alt"
-content="PETS & DOGUE digital lifestyle platform"
->
-
-<meta
-id="ogLocale"
-property="og:locale"
-content="en_GB"
->
-
-<meta
-name="twitter:card"
-content="summary_large_image"
->
-
-<meta
-id="twitterTitle"
-name="twitter:title"
-content="PETS & DOGUE | Digital Lifestyle Platform for Pets"
->
-
-<meta
-id="twitterDescription"
-name="twitter:description"
-content="Stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace, member benefits and useful services in one digital lifestyle platform."
->
-
-<meta
-id="twitterImage"
-name="twitter:image"
-content="https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png"
->
-
-<link
-rel="preconnect"
-href="https://images.unsplash.com"
->
-
-<link
-rel="dns-prefetch"
-href="//images.unsplash.com"
->
-
-<link
-rel="preload"
-as="image"
-href="file_00000000a9d471fda9b4629589be22a9.png"
-fetchpriority="high"
->
-
-<link
-rel="stylesheet"
-href="visual-system.css?v=1"
->
-
-<script
-id="structuredData"
-type="application/ld+json"
-></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta id="pageDescription" name="description" content="PETS & DOGUE — digital lifestyle platform for pets and the people who love them.">
+<title>PETS & DOGUE</title>
 
 <style>
 :root{
 --black:#070707;
---black2:#111;
---cream:#f5f0e6;
---white:#fff;
---gold:#c89a32;
---gold-light:#f0d27a;
---green:#5ee719;
---line:#292929;
---serif:Georgia,"Times New Roman",serif;
---sans:Arial,Helvetica,sans-serif;
-
---home-header-height:88px;
---home-nav-height:50px;
+--black-soft:#121212;
+--white:#ffffff;
+--cream:#f2efe8;
+--cream-2:#ebe6dc;
+--line:#d4cdc0;
+--gold:#c89b3c;
+--gold-light:#efd38c;
+--gold-metal:linear-gradient(100deg,#8a6419 0%,#b98625 22%,#f7e3a0 46%,#fff4bf 50%,#d39b2e 66%,#8e6418 100%);
+--green:#66ef19;
+--green-dark:#0f4a20;
+--text:#161616;
+--muted:#66605a;
+--shadow:0 12px 36px rgba(0,0,0,.12);
+--radius-xl:28px;
+--radius-lg:22px;
+--radius-md:18px;
+--radius-sm:14px;
+--content:1180px;
 }
 
 *{
@@ -178,18 +37,22 @@ padding:0;
 
 html{
 scroll-behavior:smooth;
--webkit-text-size-adjust:100%;
 }
 
 body{
-background:var(--black);
-color:#fff;
-font-family:var(--sans);
-overflow-x:hidden;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--cream);
+color:var(--text);
+line-height:1.45;
 }
 
-body.menu-open{
+body.drawer-open{
 overflow:hidden;
+}
+
+img{
+display:block;
+max-width:100%;
 }
 
 a{
@@ -202,4230 +65,1777 @@ select{
 font:inherit;
 }
 
-button{
+.pd-shell{
+min-height:100vh;
+}
+
+.pd-topbar{
+position:sticky;
+top:0;
+z-index:80;
+background:rgba(7,7,7,.98);
+backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.pd-header{
+max-width:var(--content);
+margin:0 auto;
+padding:18px 18px 16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+}
+
+.pd-header-btn{
+width:54px;
+height:54px;
+border:1px solid rgba(255,255,255,.12);
+border-radius:18px;
+background:transparent;
+color:var(--white);
+display:flex;
+align-items:center;
+justify-content:center;
 cursor:pointer;
-}
-
-img{
-display:block;
-width:100%;
-height:auto;
-image-rendering:auto;
-}
-
-/* =========================================================
-HEADER
-========================================================= */
-
-.site-header{
-position:sticky;
-top:0;
-z-index:5000;
-width:100%;
-background:#050505;
-border-bottom:1px solid #272727;
-}
-
-.header-main{
-height:var(--home-header-height);
-min-height:var(--home-header-height);
-display:grid;
-grid-template-columns:58px minmax(0,1fr) 58px;
-align-items:center;
-gap:10px;
-padding:0 18px;
-max-width:1600px;
-margin:auto;
-}
-
-.menu-button{
-width:46px;
-height:46px;
-border:0;
-background:transparent;
-display:grid;
-align-content:center;
-gap:6px;
-padding:7px;
-}
-
-.menu-button span{
-display:block;
-width:100%;
-height:2px;
-background:#fff;
-border-radius:999px;
-}
-
-.brand{
-text-align:center;
-font-family:var(--serif);
-line-height:.83;
-justify-self:center;
-white-space:nowrap;
-}
-
-.brand-small{
-font-size:10px;
-letter-spacing:2px;
-color:var(--gold);
-text-transform:uppercase;
-}
-
-.brand-big{
-font-size:39px;
-font-weight:400;
-letter-spacing:3px;
-color:var(--gold);
-margin-top:6px;
-}
-
-.home-button{
-justify-self:end;
-width:46px;
-height:46px;
-display:flex;
-align-items:center;
-justify-content:center;
-border:0;
-background:transparent;
-color:#fff;
-}
-
-.home-button svg{
-display:block;
-width:31px;
-height:31px;
-fill:none;
-stroke:currentColor;
-stroke-width:2.4;
-stroke-linecap:round;
-stroke-linejoin:round;
-}
-
-/* =========================================================
-TOP NAV
-========================================================= */
-
-.primary-nav{
-width:100%;
-height:var(--home-nav-height);
-min-height:var(--home-nav-height);
-display:flex;
-align-items:stretch;
-gap:0;
-padding:0 8px;
-margin:0;
-overflow-x:auto;
-overflow-y:hidden;
-background:#070707;
-border-top:1px solid #262626;
-border-bottom:1px solid #262626;
-scrollbar-width:none;
-scroll-behavior:auto;
-overscroll-behavior-x:contain;
--webkit-overflow-scrolling:touch;
-overflow-anchor:none;
-scroll-snap-type:none;
-}
-
-.primary-nav::-webkit-scrollbar{
-display:none;
-}
-
-.primary-nav a{
-position:relative;
 flex:0 0 auto;
-min-width:max-content;
-height:var(--home-nav-height);
-padding:0 18px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:12px;
-font-weight:900;
-letter-spacing:.55px;
-line-height:1;
-text-transform:uppercase;
-white-space:nowrap;
-word-break:normal;
-overflow-wrap:normal;
-hyphens:none;
 }
 
-.primary-nav a:hover,
-.primary-nav a:focus{
-color:var(--gold-light);
-}
-
-/* =========================================================
-SIDE MENU
-========================================================= */
-
-.menu-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.74);
-z-index:9000;
-opacity:0;
-visibility:hidden;
-transition:.25s;
-backdrop-filter:blur(2px);
--webkit-backdrop-filter:blur(2px);
-}
-
-.menu-overlay.show{
-opacity:1;
-visibility:visible;
-}
-
-.side-menu{
-position:fixed;
-top:0;
-left:0;
-bottom:0;
-width:min(520px,88vw);
-max-width:520px;
-background:#f8f5ee;
-color:#111;
-z-index:9100;
-transform:translateX(-103%);
-transition:.3s ease;
-overflow-y:auto;
-}
-
-.side-menu.open{
-transform:translateX(0);
-}
-
-.side-menu-head{
-position:sticky;
-top:0;
-z-index:5;
-height:88px;
-min-height:88px;
-background:#080808;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:16px 22px;
-}
-
-.side-menu-head h2{
-font-family:var(--serif);
-font-size:37px;
-font-weight:400;
-line-height:1;
-}
-
-.close-menu{
-width:45px;
-height:45px;
-border-radius:50%;
-border:0;
-background:#fff;
-color:#111;
-font-size:29px;
-line-height:1;
-}
-
-.menu-tools{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:9px;
-padding:15px;
-border-bottom:1px solid #d3cdc1;
-}
-
-.menu-tool{
-height:49px;
-border:2px solid #111;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:11px;
-font-weight:900;
-text-transform:uppercase;
-}
-
-.menu-tool.club{
-background:var(--green);
-border-color:var(--green);
-}
-
-.language-box{
-margin:0 15px 14px;
-border:2px solid #111;
-padding:10px 13px 11px;
-}
-
-.language-box label{
-display:block;
-font-size:9px;
-font-weight:900;
-letter-spacing:2px;
-color:#777;
-margin-bottom:7px;
-}
-
-.language-box select{
-width:100%;
-height:39px;
-background:transparent;
-border:0;
-outline:0;
-font-size:14px;
-font-weight:800;
-}
-
-.menu-list{
-display:grid;
-gap:7px;
-padding:7px 15px 25px;
-}
-
-.menu-item{
-min-height:84px;
-display:grid;
-grid-template-columns:94px 1fr;
-border:2px solid #111;
-overflow:hidden;
-background:#fff;
-}
-
-.menu-item img{
-width:94px;
-height:100%;
-min-height:80px;
-object-fit:cover;
-object-position:center;
-}
-
-.menu-item-copy{
-padding:10px 14px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
-
-.menu-item-copy h3{
-font-family:var(--serif);
-font-size:21px;
-line-height:1;
-font-weight:400;
-}
-
-.menu-item-copy p{
-font-size:10px;
-line-height:1.35;
-color:#6c6c6c;
-margin-top:5px;
-}
-
-/* =========================================================
-EDITORIAL INTRO
-========================================================= */
-
-.editorial-intro{
-max-width:1600px;
-margin:auto;
-background:#080808;
-}
-
-.intro-grid{
-display:grid;
-grid-template-columns:1.48fr .72fr;
-grid-template-rows:330px 330px;
-gap:4px;
-background:#070707;
-}
-
-.editorial-card{
-position:relative;
-overflow:hidden;
-background:#191919;
-color:#fff;
-min-width:0;
-}
-
-.editorial-card img{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center;
-transition:transform .45s ease;
-}
-
-.editorial-card:hover img{
-transform:scale(1.025);
-}
-
-.editorial-card:after{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(
-to top,
-rgba(0,0,0,.91) 0%,
-rgba(0,0,0,.43) 37%,
-rgba(0,0,0,.02) 74%
-);
-}
-
-.editorial-card.cover{
-grid-row:1 / 3;
-}
-
-.editorial-card.cover img{
-object-position:center 36%;
-}
-
-.editorial-copy{
-position:absolute;
-left:28px;
-right:28px;
-bottom:27px;
-z-index:2;
-}
-
-.editorial-eyebrow{
-display:inline-flex;
-align-items:center;
-gap:7px;
-background:rgba(8,8,8,.91);
-border-left:4px solid var(--gold);
-padding:7px 11px;
-font-size:9px;
-font-weight:900;
-letter-spacing:1.6px;
-text-transform:uppercase;
-}
-
-.editorial-copy h1,
-.editorial-copy h2{
-font-family:var(--serif);
-font-weight:400;
-line-height:.96;
-margin-top:12px;
-text-wrap:balance;
-}
-
-.editorial-copy h1{
-font-size:52px;
-max-width:720px;
-}
-
-.editorial-copy h2{
-font-size:34px;
-}
-
-.editorial-copy p{
-max-width:680px;
-font-family:var(--serif);
-font-size:16px;
-line-height:1.43;
-margin-top:9px;
-color:#eee;
-}
-
-.editorial-arrow{
-display:inline-block;
-margin-top:12px;
-font-size:10px;
-font-weight:900;
-letter-spacing:1px;
-text-transform:uppercase;
-}
-
-/* =========================================================
-PLATFORM HEADING
-========================================================= */
-
-section.visual-world{
-max-width:1600px;
-margin:auto;
-background:#080808;
-padding:0 0 4px;
-}
-
-.world-heading{
-display:flex;
-align-items:flex-end;
-justify-content:space-between;
-gap:20px;
-padding:28px 24px 18px;
-background:var(--cream);
-color:#111;
-}
-
-.world-heading h2{
-font-family:var(--serif);
-font-size:46px;
-font-weight:400;
-line-height:.94;
-}
-
-.world-heading p{
-max-width:650px;
-font-size:11px;
-line-height:1.55;
-font-weight:700;
-text-align:right;
-}
-
-/* =========================================================
-DIGITAL LIFESTYLE PLATFORM MOSAIC
-========================================================= */
-
-.magazine-grid{
-display:grid;
-grid-template-columns:repeat(4,minmax(0,1fr));
-grid-auto-rows:255px;
-gap:4px;
-background:#080808;
-}
-
-.magazine-card{
-position:relative;
-overflow:hidden;
-background:#222;
-color:#fff;
-min-width:0;
-}
-
-.magazine-card.large{
-grid-column:span 2;
-grid-row:span 2;
-}
-
-.magazine-card.wide{
-grid-column:span 2;
-}
-
-.magazine-card.tall{
-grid-row:span 2;
-}
-
-.magazine-card img{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center;
-transition:transform .45s ease;
-}
-
-.magazine-card:hover img{
-transform:scale(1.03);
-}
-
-.magazine-card:after{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(
-to top,
-rgba(0,0,0,.9) 0%,
-rgba(0,0,0,.34) 40%,
-transparent 75%
-);
-}
-
-.card-copy{
-position:absolute;
-z-index:2;
-left:18px;
-right:18px;
-bottom:18px;
-}
-
-.card-label{
-display:inline-block;
-background:rgba(8,8,8,.92);
-border-left:3px solid var(--gold);
-padding:6px 9px;
-font-size:8px;
-font-weight:900;
-letter-spacing:1.2px;
-text-transform:uppercase;
-}
-
-.card-copy h3{
-font-family:var(--serif);
-font-size:27px;
-font-weight:400;
-line-height:1;
-margin-top:9px;
-text-wrap:balance;
-}
-
-.magazine-card.large .card-copy h3{
-font-size:46px;
-max-width:620px;
-}
-
-.magazine-card.tall .card-copy h3{
-font-size:35px;
-}
-
-.card-copy p{
-font-size:10px;
-line-height:1.4;
-margin-top:7px;
-max-width:470px;
-color:#eee;
-}
-
-/* =========================================================
-PARTNERS
-========================================================= */
-
-.partner-end{
-max-width:1600px;
-margin:auto;
-display:grid;
-grid-template-columns:1.28fr .72fr;
-min-height:360px;
-background:#090909;
-border-top:4px solid #090909;
-}
-
-.partner-end-image{
-position:relative;
-overflow:hidden;
-}
-
-.partner-end-image img{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-object-position:center;
-}
-
-.partner-end-image:after{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(
-to right,
-transparent 40%,
-#090909 100%
-);
-}
-
-.partner-end-copy{
-padding:39px 38px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
-
-.partner-end-copy span{
-font-size:9px;
-font-weight:900;
-letter-spacing:2.3px;
-color:var(--gold-light);
-}
-
-.partner-end-copy h2{
-font-family:var(--serif);
-font-size:42px;
-font-weight:400;
-line-height:.95;
-color:var(--gold-light);
-margin-top:10px;
-}
-
-.partner-end-copy p{
-font-size:12px;
-line-height:1.6;
-color:#ccc;
-margin-top:14px;
-}
-
-.partner-end-copy strong{
-display:inline-block;
-margin-top:19px;
-font-size:10px;
-letter-spacing:1px;
-color:#fff;
-}
-
-/* =========================================================
-FOOTER
-========================================================= */
-
-footer{
-background:#050505;
-color:#fff;
-text-align:center;
-padding:43px 18px 33px;
-border-top:1px solid #292929;
-}
-
-.footer-brand{
-font-family:var(--serif);
-font-size:39px;
-letter-spacing:5px;
-color:var(--gold);
-}
-
-.footer-platform{
-font-size:9px;
-font-weight:900;
-letter-spacing:2px;
-text-transform:uppercase;
-color:var(--gold-light);
-margin-top:9px;
-}
-
-.footer-tagline{
-font-family:var(--serif);
-font-size:16px;
-color:#ddd;
-margin-top:8px;
-}
-
-.footer-links{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:15px 23px;
-margin:25px auto 0;
-max-width:900px;
-}
-
-.footer-links a{
-font-size:10px;
-font-weight:800;
-}
-
-.footer-copy{
-font-size:8px;
-color:#666;
-margin-top:27px;
-}
-
-/* =========================================================
-ACCESSIBILITY
-========================================================= */
-
-button:focus-visible,
-a:focus-visible,
-select:focus-visible{
+.pd-header-btn:focus-visible,
+.pd-cta:focus-visible,
+.pd-drawer-action:focus-visible,
+.pd-language-select:focus-visible,
+.pd-card-link:focus-visible,
+.pd-rail-card:focus-visible,
+.pd-hero-link:focus-visible{
 outline:3px solid var(--green);
 outline-offset:3px;
 }
 
-/* =========================================================
-RTL
-========================================================= */
-
-html[dir="rtl"] body{
-direction:rtl;
+.pd-logo{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:3px;
+min-width:0;
+text-align:center;
 }
 
-html[dir="rtl"] .side-menu{
-left:auto;
-right:0;
-transform:translateX(103%);
+.pd-logo-small{
+font-family:Georgia,"Times New Roman",serif;
+font-size:14px;
+letter-spacing:.26em;
+text-transform:uppercase;
+color:var(--gold-light);
 }
 
-html[dir="rtl"] .side-menu.open{
-transform:translateX(0);
+.pd-logo-main{
+font-family:Georgia,"Times New Roman",serif;
+font-size:42px;
+line-height:.95;
+letter-spacing:.04em;
+color:var(--gold);
+text-transform:uppercase;
 }
 
-html[dir="rtl"] .card-label,
-html[dir="rtl"] .editorial-eyebrow{
-border-left:0;
-border-right:3px solid var(--gold);
+.pd-home-link{
+display:flex;
+align-items:center;
+justify-content:center;
+width:54px;
+height:54px;
+border:1px solid rgba(255,255,255,.12);
+border-radius:18px;
+flex:0 0 auto;
 }
 
-html[dir="rtl"] .partner-end-image:after{
-background:
-linear-gradient(
-to left,
-transparent 40%,
-#090909 100%
-);
-}
-
-html[dir="rtl"] .world-heading p{
-text-align:left;
-}
-
-/* =========================================================
-TABLET
-========================================================= */
-
-@media(max-width:1000px){
-
-.header-main{
-height:84px;
-min-height:84px;
-grid-template-columns:54px minmax(0,1fr) 54px;
-padding:0 13px;
-}
-
-.brand-big{
-font-size:37px;
-}
-
-.brand-small{
-font-size:9px;
-}
-
-.home-button{
-width:42px;
-height:42px;
-}
-
-.home-button svg{
-width:29px;
-height:29px;
-}
-
-.primary-nav{
-height:48px;
-min-height:48px;
-}
-
-.primary-nav a{
-height:48px;
-padding:0 17px;
-font-size:11.5px;
-}
-
-.intro-grid{
-grid-template-columns:1.2fr .8fr;
-grid-template-rows:310px 310px;
-}
-
-.editorial-copy h1{
-font-size:45px;
-}
-
-.magazine-grid{
-grid-template-columns:repeat(3,minmax(0,1fr));
-}
-
-}
-
-/* =========================================================
-MOBILE
-========================================================= */
-
-@media(max-width:700px){
-
-:root{
---home-header-height:78px;
---home-nav-height:46px;
-}
-
-.site-header{
-position:sticky;
-top:0;
-}
-
-.header-main{
-height:78px !important;
-min-height:78px !important;
-grid-template-columns:48px minmax(0,1fr) 48px !important;
-gap:5px;
-padding:0 10px !important;
-}
-
-.menu-button{
-width:43px !important;
-height:43px !important;
-padding:7px 5px;
-gap:5px;
-}
-
-.menu-button span{
-height:2px;
-}
-
-.brand{
-max-width:100%;
-}
-
-.brand-small{
-font-size:8px !important;
-letter-spacing:1.65px !important;
-}
-
-.brand-big{
-font-size:31px !important;
-letter-spacing:1.8px !important;
-margin-top:5px !important;
-}
-
-.home-button{
-width:43px !important;
-height:43px !important;
-}
-
-.home-button svg{
-width:29px;
-height:29px;
-}
-
-.primary-nav{
-height:46px !important;
-min-height:46px !important;
-padding:0 3px !important;
-gap:0 !important;
-}
-
-.primary-nav a{
-height:46px !important;
-padding:0 14px !important;
-font-size:10.5px !important;
-letter-spacing:.35px !important;
-}
-
-.intro-grid{
+.pd-main-nav{
+max-width:var(--content);
+margin:0 auto;
+padding:0 18px 18px;
 display:grid;
-grid-template-columns:1fr 1fr;
-grid-template-rows:490px 265px;
+gap:10px;
+}
+
+.pd-priority-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px;
+}
+
+.pd-priority-link{
+position:relative;
+border:1px solid rgba(255,255,255,.1);
+border-radius:18px;
+overflow:hidden;
+min-height:86px;
+background:var(--black-soft);
+color:var(--white);
+box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.pd-priority-link::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.72) 100%),
+var(--bg-image) center/cover no-repeat;
+}
+
+.pd-priority-link::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+height:3px;
+background:var(--gold-metal);
+opacity:.9;
+}
+
+.pd-priority-content{
+position:relative;
+z-index:1;
+padding:12px 14px;
+display:flex;
+height:100%;
+flex-direction:column;
+justify-content:flex-end;
 gap:3px;
 }
 
-.editorial-card.cover{
-grid-column:1 / 3;
-grid-row:1;
+.pd-priority-title{
+font-weight:800;
+font-size:16px;
+line-height:1.1;
 }
 
-.editorial-card:not(.cover){
-grid-row:2;
+.pd-priority-sub{
+font-size:12px;
+color:rgba(255,255,255,.78);
 }
 
-.editorial-card.cover img{
-object-position:center 32%;
+.pd-secondary-rail{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:2px;
+scrollbar-width:none;
 }
 
-.editorial-copy{
-left:16px;
-right:16px;
-bottom:18px;
+.pd-secondary-rail::-webkit-scrollbar{
+display:none;
 }
 
-.editorial-copy h1{
-font-size:36px;
+.pd-rail-card{
+position:relative;
+min-width:150px;
+max-width:150px;
+border-radius:16px;
+overflow:hidden;
+background:var(--black-soft);
+color:var(--white);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.pd-rail-card::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(180deg,rgba(0,0,0,.08) 10%,rgba(0,0,0,.75) 100%),
+var(--bg-image) center/cover no-repeat;
+}
+
+.pd-rail-inner{
+position:relative;
+z-index:1;
+padding:12px;
+min-height:104px;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+gap:2px;
+}
+
+.pd-rail-kicker{
+font-size:10px;
+font-weight:700;
+letter-spacing:.16em;
+text-transform:uppercase;
+color:var(--gold-light);
+}
+
+.pd-rail-title{
+font-size:14px;
+font-weight:800;
+line-height:1.15;
+}
+
+.pd-main{
+max-width:var(--content);
+margin:0 auto;
+padding:18px 18px 64px;
+display:grid;
+gap:28px;
+}
+
+.pd-hero{
+display:grid;
+grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
+gap:16px;
+align-items:stretch;
+}
+
+.pd-hero-cover{
+position:relative;
+border-radius:30px;
+overflow:hidden;
+min-height:560px;
+background:#dcd4c7;
+box-shadow:var(--shadow);
+}
+
+.pd-hero-cover img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.pd-hero-badge{
+position:absolute;
+left:18px;
+top:18px;
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:10px 16px;
+border-radius:999px;
+background:rgba(7,7,7,.86);
+color:var(--white);
+font-size:12px;
+font-weight:700;
+letter-spacing:.14em;
+text-transform:uppercase;
+}
+
+.pd-hero-panel{
+display:grid;
+gap:16px;
+}
+
+.pd-hero-copy{
+background:var(--white);
+border:1px solid var(--line);
+border-radius:30px;
+padding:26px 24px;
+box-shadow:var(--shadow);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+gap:20px;
+}
+
+.pd-kicker{
+font-size:13px;
+font-weight:800;
+letter-spacing:.22em;
+text-transform:uppercase;
+color:#a6852d;
+}
+
+.pd-hero-title{
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(40px,7vw,78px);
+line-height:.95;
+letter-spacing:-.03em;
+}
+
+.pd-hero-text{
+font-size:18px;
+color:var(--muted);
+max-width:42ch;
+}
+
+.pd-hero-actions{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.pd-cta{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:15px 20px;
+border-radius:18px;
+font-weight:800;
+border:1px solid transparent;
+cursor:pointer;
+}
+
+.pd-cta.primary{
+background:var(--black);
+color:var(--white);
+}
+
+.pd-cta.secondary{
+background:transparent;
+color:var(--black);
+border-color:var(--line);
+}
+
+.pd-hero-mini-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:16px;
+}
+
+.pd-hero-mini{
+position:relative;
+overflow:hidden;
+border-radius:26px;
+min-height:190px;
+background:var(--black);
+color:var(--white);
+box-shadow:var(--shadow);
+}
+
+.pd-hero-mini::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(180deg,rgba(0,0,0,.14) 0%,rgba(0,0,0,.82) 100%),
+var(--bg-image) center/cover no-repeat;
+}
+
+.pd-hero-mini-content{
+position:relative;
+z-index:1;
+padding:18px;
+display:flex;
+height:100%;
+flex-direction:column;
+justify-content:flex-end;
+gap:6px;
+}
+
+.pd-hero-mini-label{
+font-size:11px;
+letter-spacing:.18em;
+font-weight:800;
+text-transform:uppercase;
+color:var(--gold-light);
+}
+
+.pd-hero-mini-title{
+font-size:24px;
+font-family:Georgia,"Times New Roman",serif;
+line-height:1;
+}
+
+.pd-hero-mini-text{
+font-size:14px;
+color:rgba(255,255,255,.82);
+}
+
+.pd-section-head{
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:16px;
+}
+
+.pd-section-copy{
+display:grid;
+gap:8px;
+max-width:56ch;
+}
+
+.pd-section-title{
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(34px,6vw,54px);
 line-height:.96;
 }
 
-.editorial-copy h2{
-font-size:22px;
+.pd-section-text{
+font-size:16px;
+color:var(--muted);
 }
 
-.editorial-copy p{
-font-size:13px;
-line-height:1.38;
+.pd-link-minimal{
+font-weight:800;
+font-size:14px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--black);
+border-bottom:2px solid var(--gold);
+padding-bottom:3px;
+white-space:nowrap;
 }
 
-.editorial-card:not(.cover) .editorial-copy p{
-display:none;
+.pd-card-grid{
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+gap:16px;
 }
 
-.editorial-eyebrow{
-font-size:7px;
-padding:6px 8px;
+.pd-card-link{
+position:relative;
+border-radius:24px;
+overflow:hidden;
+min-height:268px;
+background:var(--black);
+color:var(--white);
+box-shadow:var(--shadow);
 }
 
-.editorial-arrow{
-font-size:8px;
-margin-top:9px;
-}
-
-.world-heading{
-padding:21px 16px 16px;
-align-items:flex-start;
-}
-
-.world-heading h2{
-font-size:35px;
-}
-
-.world-heading p{
-display:none;
-}
-
-.magazine-grid{
-grid-template-columns:1fr 1fr;
-grid-auto-rows:235px;
-gap:3px;
-}
-
-.magazine-card.large{
-grid-column:1 / 3;
-grid-row:span 2;
-}
-
-.magazine-card.wide{
-grid-column:1 / 3;
-}
-
-.magazine-card.tall{
-grid-row:span 2;
-}
-
-.card-copy{
-left:13px;
-right:13px;
-bottom:13px;
-}
-
-.card-copy h3{
-font-size:22px;
-}
-
-.magazine-card.large .card-copy h3{
-font-size:36px;
-}
-
-.magazine-card.tall .card-copy h3{
-font-size:28px;
-}
-
-.card-copy p{
-font-size:9px;
-}
-
-.magazine-card.large .card-copy p{
-font-size:10px;
-}
-
-.partner-end{
-grid-template-columns:1fr;
-min-height:0;
-}
-
-.partner-end-image{
-height:255px;
-}
-
-.partner-end-image:after{
+.pd-card-link::before{
+content:"";
+position:absolute;
+inset:0;
 background:
-linear-gradient(
-to top,
-#090909 0%,
-transparent 70%
-);
+linear-gradient(180deg,rgba(0,0,0,.12) 10%,rgba(0,0,0,.85) 100%),
+var(--bg-image) center/cover no-repeat;
+transition:transform .28s ease;
 }
 
-.partner-end-copy{
-padding:21px 19px 29px;
+.pd-card-link:hover::before{
+transform:scale(1.03);
 }
 
-.partner-end-copy h2{
+.pd-card-link.primary-card{
+min-height:320px;
+}
+
+.pd-card-content{
+position:relative;
+z-index:1;
+padding:18px;
+display:flex;
+height:100%;
+flex-direction:column;
+justify-content:space-between;
+gap:12px;
+}
+
+.pd-card-tag{
+display:inline-flex;
+align-self:flex-start;
+padding:8px 12px;
+border-radius:999px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(8px);
+font-size:11px;
+font-weight:800;
+letter-spacing:.15em;
+text-transform:uppercase;
+color:var(--white);
+}
+
+.pd-card-title{
+font-family:Georgia,"Times New Roman",serif;
+font-size:32px;
+line-height:.95;
+max-width:9ch;
+}
+
+.pd-card-text{
+font-size:15px;
+color:rgba(255,255,255,.82);
+max-width:26ch;
+}
+
+.pd-card-arrow{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:42px;
+height:42px;
+border-radius:50%;
+background:var(--white);
+color:var(--black);
+font-size:22px;
+font-weight:700;
+}
+
+.pd-editorial-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px;
+}
+
+.pd-editorial-grid .pd-card-link:nth-child(1){
+grid-column:span 2;
+min-height:250px;
+}
+
+.pd-editorial-grid .pd-card-link:nth-child(4){
+grid-column:span 2;
+}
+
+.pd-live-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px;
+}
+
+.pd-club{
+background:var(--black);
+color:var(--white);
+border-radius:32px;
+overflow:hidden;
+display:grid;
+grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+gap:0;
+box-shadow:var(--shadow);
+}
+
+.pd-club-copy{
+padding:30px 26px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap:14px;
+}
+
+.pd-club-title{
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(32px,6vw,54px);
+line-height:.96;
+}
+
+.pd-club-text{
+font-size:17px;
+color:rgba(255,255,255,.78);
+max-width:30ch;
+}
+
+.pd-club-image{
+position:relative;
+min-height:360px;
+}
+
+.pd-club-image::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.48) 100%),
+url("https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+}
+
+.pd-footer{
+background:var(--black);
+color:var(--white);
+padding:34px 18px 40px;
+margin-top:20px;
+}
+
+.pd-footer-inner{
+max-width:var(--content);
+margin:0 auto;
+display:grid;
+gap:18px;
+}
+
+.pd-footer-brand{
+display:grid;
+gap:8px;
+}
+
+.pd-footer-logo{
+font-family:Georgia,"Times New Roman",serif;
+font-size:54px;
+line-height:.9;
+text-transform:uppercase;
+letter-spacing:.04em;
+color:var(--gold);
+}
+
+.pd-footer-sub{
+font-size:24px;
+font-style:italic;
+color:rgba(255,255,255,.74);
+}
+
+.pd-footer-links{
+display:flex;
+flex-wrap:wrap;
+gap:12px 20px;
+font-size:15px;
+color:rgba(255,255,255,.82);
+}
+
+.pd-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.52);
+opacity:0;
+visibility:hidden;
+transition:opacity .22s ease,visibility .22s ease;
+z-index:140;
+}
+
+.pd-overlay.open{
+opacity:1;
+visibility:visible;
+}
+
+.pd-drawer{
+position:fixed;
+top:0;
+left:0;
+width:min(92vw,520px);
+height:100vh;
+background:var(--cream);
+transform:translateX(-100%);
+transition:transform .24s ease;
+z-index:150;
+display:flex;
+flex-direction:column;
+box-shadow:0 24px 60px rgba(0,0,0,.34);
+}
+
+.pd-drawer.open{
+transform:translateX(0);
+}
+
+html[dir="rtl"] .pd-drawer{
+left:auto;
+right:0;
+transform:translateX(100%);
+}
+
+html[dir="rtl"] .pd-drawer.open{
+transform:translateX(0);
+}
+
+.pd-drawer-head{
+background:var(--black);
+color:var(--white);
+padding:24px 18px 18px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+}
+
+.pd-drawer-title{
+font-family:Georgia,"Times New Roman",serif;
+font-size:32px;
+line-height:1;
+}
+
+.pd-close{
+width:54px;
+height:54px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.16);
+background:transparent;
+color:var(--white);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+cursor:pointer;
+flex:0 0 auto;
+}
+
+.pd-drawer-scroll{
+padding:18px;
+overflow:auto;
+display:grid;
+gap:14px;
+}
+
+.pd-drawer-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.pd-drawer-action{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:62px;
+padding:10px 16px;
+border-radius:999px;
+font-weight:800;
+border:2px solid #1c1c1c;
+background:transparent;
+color:var(--black);
+}
+
+.pd-drawer-action.primary{
+background:var(--green);
+border-color:var(--green);
+color:var(--black);
+}
+
+.pd-language-wrap{
+display:grid;
+gap:8px;
+}
+
+.pd-language-label{
+font-size:12px;
+font-weight:800;
+letter-spacing:.16em;
+text-transform:uppercase;
+color:#777066;
+}
+
+.pd-language-select{
+width:100%;
+min-height:68px;
+padding:0 18px;
+border-radius:999px;
+border:2px solid #1c1c1c;
+background:var(--cream);
+color:var(--text);
+}
+
+.pd-menu-list{
+display:grid;
+gap:12px;
+}
+
+.pd-menu-card{
+display:grid;
+grid-template-columns:112px 1fr;
+min-height:108px;
+border-radius:26px;
+overflow:hidden;
+border:2px solid #1c1c1c;
+background:#f6f2ea;
+}
+
+.pd-menu-card.active{
+background:var(--black);
+color:var(--white);
+}
+
+.pd-menu-thumb{
+height:100%;
+background:var(--thumb-image) center/cover no-repeat;
+}
+
+.pd-menu-copy{
+padding:14px 16px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap:4px;
+}
+
+.pd-menu-title{
+font-family:Georgia,"Times New Roman",serif;
+font-size:22px;
+line-height:1;
+font-weight:700;
+}
+
+.pd-menu-card.active .pd-menu-title{
+color:var(--gold-light);
+}
+
+.pd-menu-desc{
+font-size:14px;
+color:var(--muted);
+}
+
+.pd-menu-card.active .pd-menu-desc{
+color:rgba(255,255,255,.74);
+}
+
+.pd-sr-only{
+position:absolute!important;
+width:1px!important;
+height:1px!important;
+padding:0!important;
+margin:-1px!important;
+overflow:hidden!important;
+clip:rect(0,0,0,0)!important;
+white-space:nowrap!important;
+border:0!important;
+}
+
+@media(max-width:1080px){
+
+.pd-hero{
+grid-template-columns:1fr;
+}
+
+.pd-card-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.pd-editorial-grid,
+.pd-live-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.pd-editorial-grid .pd-card-link:nth-child(1),
+.pd-editorial-grid .pd-card-link:nth-child(4){
+grid-column:auto;
+}
+
+.pd-club{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:720px){
+
+.pd-header{
+padding:16px 16px 14px;
+}
+
+.pd-logo-main{
 font-size:34px;
 }
 
-.side-menu{
-width:min(92vw,500px) !important;
+.pd-header-btn,
+.pd-home-link{
+width:50px;
+height:50px;
+border-radius:16px;
 }
 
-.side-menu-head{
-height:78px !important;
-min-height:78px !important;
-padding:14px 18px !important;
+.pd-main-nav{
+padding:0 16px 16px;
 }
 
-.side-menu-head h2{
-font-size:33px !important;
+.pd-main{
+padding:16px 16px 52px;
+gap:24px;
 }
 
-.close-menu{
-width:42px;
-height:42px;
-font-size:27px;
+.pd-priority-link{
+min-height:84px;
 }
 
-.menu-item{
-grid-template-columns:94px 1fr;
-min-height:82px;
+.pd-hero-cover{
+min-height:440px;
+border-radius:26px;
 }
 
-.menu-item img{
-width:94px;
+.pd-hero-copy{
+border-radius:26px;
+padding:22px 20px;
 }
 
-footer{
-padding-top:35px;
+.pd-hero-text{
+font-size:16px;
 }
 
-.footer-brand{
-font-size:33px;
-letter-spacing:3px;
+.pd-hero-mini-grid{
+grid-template-columns:1fr;
+}
+
+.pd-section-head{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.pd-card-grid,
+.pd-editorial-grid,
+.pd-live-grid{
+grid-template-columns:1fr;
+}
+
+.pd-card-link,
+.pd-card-link.primary-card{
+min-height:280px;
+}
+
+.pd-card-title{
+font-size:28px;
+}
+
+.pd-drawer{
+width:calc(100vw - 34px);
+}
+
+.pd-menu-card{
+grid-template-columns:110px 1fr;
 }
 
 }
 
-@media(max-width:390px){
+@media(max-width:520px){
 
-.header-main{
-grid-template-columns:45px minmax(0,1fr) 45px !important;
-padding-left:8px !important;
-padding-right:8px !important;
+.pd-priority-grid{
+grid-template-columns:1fr;
 }
 
-.brand-big{
-font-size:29px !important;
+.pd-drawer-actions{
+grid-template-columns:1fr 1fr;
 }
 
-.intro-grid{
-grid-template-rows:455px 245px;
+.pd-menu-card{
+grid-template-columns:96px 1fr;
+min-height:102px;
 }
 
-.editorial-copy h1{
-font-size:33px;
-}
-
-.editorial-copy h2{
+.pd-menu-title{
 font-size:20px;
-}
-
-.magazine-grid{
-grid-auto-rows:220px;
-}
-
-.magazine-card.large .card-copy h3{
-font-size:33px;
-}
-
-}
-
-@media(max-width:350px){
-
-.brand-big{
-font-size:27px !important;
-}
-
-.primary-nav a{
-padding-left:12px !important;
-padding-right:12px !important;
-font-size:10px !important;
-}
-
-}
-
-@media(prefers-reduced-motion:reduce){
-
-html{
-scroll-behavior:auto;
-}
-
-.editorial-card img,
-.magazine-card img{
-transition:none;
-}
-
-.side-menu{
-transition:none;
 }
 
 }
 </style>
 </head>
-
 <body>
 
-<div
-class="menu-overlay"
-id="menuOverlay"
-></div>
+<div class="pd-shell">
 
-<aside
-class="side-menu"
-id="sideMenu"
-aria-hidden="true"
->
-
-<div class="side-menu-head">
-
-<h2 id="menuTitle">
-Contents
-</h2>
-
-<button
-class="close-menu"
-id="closeMenuButton"
-type="button"
-aria-label="Close menu"
->
-×
-</button>
-
-</div>
-
-<div class="menu-tools">
-
-<a
-class="menu-tool"
-href="account.html"
-id="menuProfile"
->
-PROFILE
-</a>
-
-<a
-class="menu-tool club"
-href="club.html"
-id="menuSubscribe"
->
-SUBSCRIBE
-</a>
-
-</div>
-
-<div class="language-box">
-
-<label id="languageLabel">
-LANGUAGE
-</label>
-
-<select
-id="languageSelect"
-aria-label="Language"
->
-
-<option value="en">🇬🇧 EN — English</option>
-<option value="uk">🇺🇦 UA — Українська</option>
-<option value="ru">🇷🇺 RU — Русский</option>
-<option value="fr">🇫🇷 FR — Français</option>
-<option value="de">🇩🇪 DE — Deutsch</option>
-<option value="es">🇪🇸 ES — Español</option>
-<option value="it">🇮🇹 IT — Italiano</option>
-<option value="pt">🇵🇹 PT — Português</option>
-<option value="nl">🇳🇱 NL — Nederlands</option>
-<option value="pl">🇵🇱 PL — Polski</option>
-<option value="cs">🇨🇿 CZ — Čeština</option>
-<option value="sk">🇸🇰 SK — Slovenčina</option>
-<option value="hu">🇭🇺 HU — Magyar</option>
-<option value="ro">🇷🇴 RO — Română</option>
-<option value="bg">🇧🇬 BG — Български</option>
-<option value="el">🇬🇷 GR — Ελληνικά</option>
-<option value="sv">🇸🇪 SE — Svenska</option>
-<option value="da">🇩🇰 DK — Dansk</option>
-<option value="no">🇳🇴 NO — Norsk</option>
-<option value="fi">🇫🇮 FI — Suomi</option>
-<option value="tr">🇹🇷 TR — Türkçe</option>
-<option value="ar">🇸🇦 AR — العربية</option>
-<option value="hi">🇮🇳 HI — हिन्दी</option>
-
-</select>
-
-</div>
-
-<nav
-class="menu-list"
-id="sideMenuList"
-aria-label="PETS & DOGUE sections"
-></nav>
-
-</aside>
-
-<header class="site-header">
-
-<div class="header-main">
-
-<button
-class="menu-button"
-id="menuButton"
-type="button"
-aria-label="Open menu"
->
-<span></span>
-<span></span>
-<span></span>
-</button>
-
-<a
-class="brand notranslate"
-translate="no"
-href="index.html"
-aria-label="PETS & DOGUE home"
->
-
-<div class="brand-small">
-PETS &amp;
-</div>
-
-<div class="brand-big">
-DOGUE
-</div>
-
-</a>
-
-<a
-class="home-button"
-href="index.html"
-aria-label="Home"
->
-
-<svg
-viewBox="0 0 32 32"
-aria-hidden="true"
->
-<path d="M4 14.5 16 4l12 10.5"></path>
-<path d="M7 13v15h18V13"></path>
-<path d="M13 28V18h6v10"></path>
+<header class="pd-topbar">
+<div class="pd-header">
+<button class="pd-header-btn" id="openDrawerBtn" type="button" aria-label="Open menu">
+<svg width="28" height="22" viewBox="0 0 28 22" fill="none" aria-hidden="true">
+<path d="M1.5 2h25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M1.5 11h25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M1.5 20h25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
 </svg>
+</button>
 
+<a class="pd-logo" href="/index.html" aria-label="PETS & DOGUE home">
+<span class="pd-logo-small">PETS &amp;</span>
+<span class="pd-logo-main">DOGUE</span>
 </a>
 
+<a class="pd-home-link" href="/index.html" aria-label="Home">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+<path d="M3 10.5L12 3l9 7.5V21h-6v-6H9v6H3v-10.5Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+</svg>
+</a>
 </div>
 
-<nav
-class="primary-nav"
-id="primaryNav"
-aria-label="PETS & DOGUE main sections"
->
-
-<a href="issue-01.html" data-nav="magazine">
-Edition
-</a>
-
-<a href="members-gallery.html" data-nav="coverStars">
-Cover Stars
-</a>
-
-<a href="special-offers.html" data-nav="offers">
-Discounts
-</a>
-
-<a href="pet-friendly-places.html" data-nav="places">
-Pet-Friendly Places
-</a>
-
-<a href="articles.html" data-nav="articles">
-Articles
-</a>
-
-<a href="photos.html" data-nav="photos">
-Photos
-</a>
-
-<a href="pet-fashion.html" data-nav="fashion">
-Fashion
-</a>
-
-<a href="wellness.html" data-nav="wellness">
-Health
-</a>
-
-<a href="local-community.html" data-nav="community">
-Community
-</a>
-
-<a href="contests.html" data-nav="contests">
-Contests
-</a>
-
-<a href="pets-in-need.html" data-nav="rescue">
-Help
-</a>
-
-<a href="pet-marketplace.html" data-nav="marketplace">
-Marketplace
-</a>
-
-<a href="partners.html" data-nav="partners">
-Partners
-</a>
-
+<nav class="pd-main-nav" aria-label="Primary site navigation">
+<div class="pd-priority-grid" id="priorityGrid"></div>
+<div class="pd-secondary-rail" id="secondaryRail"></div>
 </nav>
-
 </header>
 
-<main>
+<main class="pd-main">
 
-<section class="editorial-intro">
-
-<div class="intro-grid">
-
-<a
-class="editorial-card cover"
-href="issue-01.html"
->
-
+<section class="pd-hero">
+<div class="pd-hero-cover">
 <img
-src="file_00000000a9d471fda9b4629589be22a9.png"
-alt="PETS & DOGUE Edition 01"
-loading="eager"
-fetchpriority="high"
-decoding="async"
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1400&q=80"
+alt="Featured PETS & DOGUE cover"
+id="heroImage"
 >
+<div class="pd-hero-badge" id="heroBadge">Summer 2026</div>
+</div>
 
-<div class="editorial-copy">
-
-<span
-class="editorial-eyebrow"
-id="latestLabel"
->
-LATEST EDITION
-</span>
-
-<h1 id="latestTitle">
-Miso: the first PETS &amp; DOGUE cover star
-</h1>
-
-<p id="latestText">
-Discover Edition 01 — part of the PETS &amp; DOGUE digital lifestyle platform.
+<div class="pd-hero-panel">
+<div class="pd-hero-copy">
+<div class="pd-copy-stack">
+<div class="pd-kicker" id="heroKicker">PETS &amp; DOGUE</div>
+<h1 class="pd-hero-title" id="heroTitle">A brighter world for pets and their people</h1>
+<p class="pd-hero-text" id="heroText">
+Original stories, practical help, stylish inspiration, pet-friendly places and a living community — all in one clear visual home.
 </p>
-
-<strong
-class="editorial-arrow"
-id="latestAction"
->
-OPEN EDITION 01 →
-</strong>
-
 </div>
 
-</a>
-
-<a
-class="editorial-card"
-href="special-offers.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=92"
-alt="PETS & DOGUE Club member benefits"
-loading="eager"
-decoding="async"
->
-
-<div class="editorial-copy">
-
-<span
-class="editorial-eyebrow"
-id="offersLabel"
->
-MEMBER BENEFITS
-</span>
-
-<h2 id="offersTitle">
-Discover your benefits
-</h2>
-
-<p id="offersText">
-Special offers and benefits for PETS & DOGUE Club members.
-</p>
-
-<strong
-class="editorial-arrow"
-id="offersAction"
->
-SEE BENEFITS →
-</strong>
-
+<div class="pd-hero-actions">
+<a class="pd-cta primary pd-hero-link" id="heroPrimaryLink" href="/cover-stars.html">Explore cover stars</a>
+<a class="pd-cta secondary pd-hero-link" id="heroSecondaryLink" href="/community.html">Open community</a>
+</div>
 </div>
 
-</a>
-
-<a
-class="editorial-card"
-href="members-gallery.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1600&q=92"
-alt="PETS & DOGUE Cover Stars"
-loading="eager"
-decoding="async"
->
-
-<div class="editorial-copy">
-
-<span
-class="editorial-eyebrow"
-id="starLabel"
->
-YOUR VOTE
-</span>
-
-<h2 id="starTitle">
-Choose the next cover star
-</h2>
-
-<p id="starText">
-Meet the pets, discover their stories and vote for your favourite.
-</p>
-
-<strong
-class="editorial-arrow"
-id="starAction"
->
-VOTE NOW →
-</strong>
-
+<div class="pd-hero-mini-grid" id="heroMiniGrid"></div>
 </div>
-
-</a>
-
-</div>
-
 </section>
 
-<section class="visual-world">
-
-<div class="world-heading">
-
-<h2
-class="notranslate"
-translate="no"
->
-One world. Every pet.
-</h2>
-
-<p id="worldText">
-PETS & DOGUE is a digital lifestyle platform bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace, member benefits and useful services.
+<section>
+<div class="pd-section-head">
+<div class="pd-section-copy">
+<div class="pd-kicker" id="worldsKicker">Main directions</div>
+<h2 class="pd-section-title" id="worldsTitle">Everything people use most — first</h2>
+<p class="pd-section-text" id="worldsText">
+The homepage now starts with the most practical sections, while editorial rubrics stay visible but lighter and cleaner below.
 </p>
-
+</div>
+<a class="pd-link-minimal" href="/community.html" id="worldsLink">See all</a>
 </div>
 
-<div class="magazine-grid">
-
-<a
-class="magazine-card large"
-href="articles.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1800&q=92"
-alt="PETS & DOGUE pet stories and articles"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="articles"
->
-Articles
-</span>
-
-<h3 id="articlesFeatureTitle">
-Stories worth discovering
-</h3>
-
-<p id="articlesFeatureText">
-Original stories, useful guides and ideas for life with animals.
-</p>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card tall"
-href="photos.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1300&q=92"
-alt="PETS & DOGUE pet photography"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="photos"
->
-Photos
-</span>
-
-<h3 id="photosFeatureTitle">
-Pets through the lens
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card"
-href="pet-fashion.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=1300&q=92"
-alt="Pet fashion and accessories"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="fashion"
->
-Fashion
-</span>
-
-<h3 id="fashionFeatureTitle">
-Style with personality
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card wide"
-href="wellness.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1800&q=92"
-alt="Pet health and care"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="wellness"
->
-Health
-</span>
-
-<h3 id="wellnessFeatureTitle">
-Health, care and everyday wellbeing
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card"
-href="pet-friendly-places.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1300&q=92"
-alt="Pet-friendly restaurants hotels and places"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="places"
->
-Pet-Friendly Places
-</span>
-
-<h3 id="placesFeatureTitle">
-Find places where pets are welcome
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card"
-href="contests.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1300&q=92"
-alt="PETS & DOGUE pet contests"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="contests"
->
-Contests
-</span>
-
-<h3 id="contestsFeatureTitle">
-Enter. Vote. Win.
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card wide"
-href="local-community.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1800&q=92"
-alt="PETS & DOGUE pet community"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="community"
->
-Community
-</span>
-
-<h3 id="communityFeatureTitle">
-Connect with pet people near you
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card tall"
-href="pets-in-need.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=1300&q=92"
-alt="Animals in need and pet rescue"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="rescue"
->
-Help
-</span>
-
-<h3 id="rescueFeatureTitle">
-Help animals who need it
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card"
-href="pet-marketplace.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1300&q=92"
-alt="PETS & DOGUE pet marketplace"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span
-class="card-label"
-data-nav-key="marketplace"
->
-Marketplace
-</span>
-
-<h3 id="marketFeatureTitle">
-Find, sell and discover
-</h3>
-
-</div>
-
-</a>
-
-<a
-class="magazine-card"
-href="club.html"
->
-
-<img
-src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1300&q=92"
-alt="PETS & DOGUE Club"
-loading="lazy"
-decoding="async"
->
-
-<div class="card-copy">
-
-<span class="card-label">
-PETS &amp; DOGUE CLUB
-</span>
-
-<h3 id="clubFeatureTitle">
-More for members
-</h3>
-
-</div>
-
-</a>
-
-</div>
-
+<div class="pd-card-grid" id="primaryCards"></div>
 </section>
 
-<a
-class="partner-end"
-href="partners.html"
->
-
-<div class="partner-end-image">
-
-<img
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1800&q=92"
-alt="PETS & DOGUE partnerships"
-loading="lazy"
-decoding="async"
->
-
-</div>
-
-<div class="partner-end-copy">
-
-<span>
-PETS &amp; DOGUE · PARTNERS
-</span>
-
-<h2 id="partnerTitle">
-Grow with PETS & DOGUE
-</h2>
-
-<p id="partnerText">
-Connect your brand with the PETS & DOGUE digital lifestyle platform through partnerships, member benefits, stories, features and collaborations.
+<section>
+<div class="pd-section-head">
+<div class="pd-section-copy">
+<div class="pd-kicker" id="editorialKicker">Editorial</div>
+<h2 class="pd-section-title" id="editorialTitle">Visual stories with more photos and less clutter</h2>
+<p class="pd-section-text" id="editorialText">
+Magazine content stays bold and luxurious, but the layout is clearer, lighter and easier to scan on mobile.
 </p>
-
-<strong id="partnerAction">
-WORK WITH US →
-</strong>
-
+</div>
+<a class="pd-link-minimal" href="/articles.html" id="editorialLink">See all</a>
 </div>
 
-</a>
+<div class="pd-editorial-grid" id="editorialCards"></div>
+</section>
+
+<section>
+<div class="pd-section-head">
+<div class="pd-section-copy">
+<div class="pd-kicker" id="liveKicker">Live now</div>
+<h2 class="pd-section-title" id="liveTitle">Useful sections that move every day</h2>
+<p class="pd-section-text" id="liveText">
+Fresh updates, real places, active listings and community activity — all reachable without wasting screen space.
+</p>
+</div>
+<a class="pd-link-minimal" href="/marketplace.html" id="liveLink">See all</a>
+</div>
+
+<div class="pd-live-grid" id="liveCards"></div>
+</section>
+
+<section class="pd-club">
+<div class="pd-club-copy">
+<div class="pd-kicker" id="clubKicker">Club &amp; benefits</div>
+<h2 class="pd-club-title" id="clubTitle">Join PETS &amp; DOGUE Club</h2>
+<p class="pd-club-text" id="clubText">
+Member discounts, contests, marketplace visibility, cover-star moments and pet-friendly discoveries in one bright subscription space.
+</p>
+<a class="pd-cta primary" href="/club.html" id="clubButton">Join the club</a>
+</div>
+<div class="pd-club-image" aria-hidden="true"></div>
+</section>
 
 </main>
 
-<footer>
-
-<div
-class="footer-brand notranslate"
-translate="no"
->
-PETS &amp; DOGUE
+<footer class="pd-footer">
+<div class="pd-footer-inner">
+<div class="pd-footer-brand">
+<div class="pd-footer-logo">PETS &amp; DOGUE</div>
+<div id="footerLine1">Digital lifestyle platform</div>
+<div class="pd-footer-sub" id="footerLine2">One world. Every pet.</div>
 </div>
 
-<div
-class="footer-platform notranslate"
-translate="no"
->
-Digital lifestyle platform
+<nav class="pd-footer-links" id="footerLinks" aria-label="Footer links"></nav>
 </div>
-
-<p
-class="footer-tagline notranslate"
-translate="no"
->
-One world. Every pet.
-</p>
-
-<div class="footer-links">
-
-<a href="issue-01.html" data-footer-key="magazine">
-Edition
-</a>
-
-<a href="members-gallery.html" data-footer-key="coverStars">
-Cover Stars
-</a>
-
-<a href="special-offers.html" data-footer-key="offers">
-Discounts
-</a>
-
-<a href="pet-friendly-places.html" data-footer-key="places">
-Pet-Friendly Places
-</a>
-
-<a href="articles.html" data-footer-key="articles">
-Articles
-</a>
-
-<a href="photos.html" data-footer-key="photos">
-Photos
-</a>
-
-<a href="pet-fashion.html" data-footer-key="fashion">
-Fashion
-</a>
-
-<a href="wellness.html" data-footer-key="wellness">
-Health
-</a>
-
-<a href="local-community.html" data-footer-key="community">
-Community
-</a>
-
-<a href="contests.html" data-footer-key="contests">
-Contests
-</a>
-
-<a href="pets-in-need.html" data-footer-key="rescue">
-Help
-</a>
-
-<a href="pet-marketplace.html" data-footer-key="marketplace">
-Marketplace
-</a>
-
-<a href="partners.html" data-footer-key="partners">
-Partners
-</a>
-
-</div>
-
-<div class="footer-copy">
-© PETS &amp; DOGUE
-</div>
-
 </footer>
 
-<script>
-"use strict";
-
-const LANGUAGE_KEY =
-"pets_dogue_language";
-
-/* =========================================================
-GLOBAL NAVIGATION
-========================================================= */
-
-const NAV_ITEMS = [
-
-{
-key:"magazine",
-url:"issue-01.html",
-image:"file_00000000a9d471fda9b4629589be22a9.png"
-},
-
-{
-key:"coverStars",
-url:"members-gallery.html",
-image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"offers",
-url:"special-offers.html",
-image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"places",
-url:"pet-friendly-places.html",
-image:"https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"articles",
-url:"articles.html",
-image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"photos",
-url:"photos.html",
-image:"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"fashion",
-url:"pet-fashion.html",
-image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"wellness",
-url:"wellness.html",
-image:"https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"community",
-url:"local-community.html",
-image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"contests",
-url:"contests.html",
-image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"rescue",
-url:"pets-in-need.html",
-image:"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"marketplace",
-url:"pet-marketplace.html",
-image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=700&q=90"
-},
-
-{
-key:"partners",
-url:"partners.html",
-image:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=90"
-}
-
-];
-
-/* =========================================================
-SEO — ALL 23 LANGUAGES
-========================================================= */
-
-const SEO_T = {
-
-en:{
-title:"PETS & DOGUE | Digital Lifestyle Platform for Pets",
-description:"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them — bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace, member benefits and useful services in one place."
-},
-
-uk:{
-title:"PETS & DOGUE | Цифрова lifestyle-платформа для тварин",
-description:"PETS & DOGUE — цифрова lifestyle-платформа для тварин і людей, які їх люблять, що об’єднує авторські історії, практичні поради, pet-friendly місця, здоров’я, моду, фотографію, спільноту, конкурси, допомогу тваринам, маркетплейс, переваги клубу та корисні сервіси."
-},
-
-ru:{
-title:"PETS & DOGUE | Цифровая lifestyle-платформа для питомцев",
-description:"PETS & DOGUE — цифровая lifestyle-платформа для животных и людей, которые их любят, объединяющая авторские истории, практические материалы, pet-friendly места, здоровье, моду, фотографию, сообщество, конкурсы, помощь животным, маркетплейс, преимущества клуба и полезные сервисы."
-},
-
-fr:{
-title:"PETS & DOGUE | Plateforme lifestyle digitale pour animaux",
-description:"PETS & DOGUE est une plateforme lifestyle digitale pour les animaux et ceux qui les aiment, réunissant histoires originales, conseils pratiques, lieux pet-friendly, santé, mode, photographie, communauté, concours, sauvetage, marketplace, avantages membres et services utiles."
-},
-
-de:{
-title:"PETS & DOGUE | Digitale Lifestyle-Plattform für Haustiere",
-description:"PETS & DOGUE ist eine digitale Lifestyle-Plattform für Haustiere und Tierliebhaber mit Geschichten, praktischen Ratgebern, tierfreundlichen Orten, Gesundheit, Mode, Fotografie, Community, Wettbewerben, Tierschutz, Marketplace, Mitgliedervorteilen und nützlichen Services."
-},
-
-es:{
-title:"PETS & DOGUE | Plataforma digital lifestyle para mascotas",
-description:"PETS & DOGUE es una plataforma digital lifestyle para mascotas y quienes las aman, con historias originales, guías prácticas, lugares pet-friendly, salud, moda, fotografía, comunidad, concursos, rescate, marketplace, beneficios para miembros y servicios útiles."
-},
-
-it:{
-title:"PETS & DOGUE | Piattaforma lifestyle digitale per animali",
-description:"PETS & DOGUE è una piattaforma lifestyle digitale per animali e per chi li ama, con storie originali, guide pratiche, luoghi pet-friendly, salute, moda, fotografia, community, concorsi, rescue, marketplace, vantaggi per i membri e servizi utili."
-},
-
-pt:{
-title:"PETS & DOGUE | Plataforma digital lifestyle para animais",
-description:"PETS & DOGUE é uma plataforma digital lifestyle para animais e para quem os ama, reunindo histórias originais, guias úteis, locais pet-friendly, saúde, moda, fotografia, comunidade, concursos, resgate, marketplace, benefícios para membros e serviços úteis."
-},
-
-nl:{
-title:"PETS & DOGUE | Digitaal lifestyleplatform voor huisdieren",
-description:"PETS & DOGUE is een digitaal lifestyleplatform voor huisdieren en dierenliefhebbers met verhalen, praktische gidsen, huisdiervriendelijke plekken, gezondheid, mode, fotografie, community, wedstrijden, dierenhulp, marketplace, ledenvoordelen en nuttige diensten."
-},
-
-pl:{
-title:"PETS & DOGUE | Cyfrowa platforma lifestyle dla zwierząt",
-description:"PETS & DOGUE to cyfrowa platforma lifestyle dla zwierząt i ludzi, którzy je kochają, łącząca historie, praktyczne poradniki, miejsca przyjazne zwierzętom, zdrowie, modę, fotografię, społeczność, konkursy, pomoc, marketplace, korzyści klubowe i przydatne usługi."
-},
-
-cs:{
-title:"PETS & DOGUE | Digitální lifestyle platforma pro mazlíčky",
-description:"PETS & DOGUE je digitální lifestyle platforma pro mazlíčky a jejich lidi, která spojuje příběhy, praktické rady, pet-friendly místa, zdraví, módu, fotografii, komunitu, soutěže, pomoc zvířatům, marketplace, členské výhody a užitečné služby."
-},
-
-sk:{
-title:"PETS & DOGUE | Digitálna lifestyle platforma pre miláčikov",
-description:"PETS & DOGUE je digitálna lifestyle platforma pre miláčikov a ľudí, ktorí ich milujú, spájajúca príbehy, praktické rady, pet-friendly miesta, zdravie, módu, fotografie, komunitu, súťaže, pomoc zvieratám, marketplace, členské výhody a užitočné služby."
-},
-
-hu:{
-title:"PETS & DOGUE | Digitális lifestyle platform kisállatoknak",
-description:"A PETS & DOGUE digitális lifestyle platform kisállatoknak és az őket szerető embereknek, történetekkel, hasznos útmutatókkal, állatbarát helyekkel, egészséggel, divattal, fotózással, közösséggel, versenyekkel, állatmentéssel, piactérrel, tagsági előnyökkel és hasznos szolgáltatásokkal."
-},
-
-ro:{
-title:"PETS & DOGUE | Platformă lifestyle digitală pentru animale",
-description:"PETS & DOGUE este o platformă lifestyle digitală pentru animale și oamenii care le iubesc, reunind povești, ghiduri utile, locuri pet-friendly, sănătate, modă, fotografie, comunitate, concursuri, salvare, marketplace, beneficii pentru membri și servicii utile."
-},
-
-bg:{
-title:"PETS & DOGUE | Дигитална lifestyle платформа за любимци",
-description:"PETS & DOGUE е дигитална lifestyle платформа за домашни любимци и хората, които ги обичат, събираща истории, полезни съвети, pet-friendly места, здраве, мода, фотография, общност, конкурси, помощ за животни, маркетплейс, клубни предимства и полезни услуги."
-},
-
-el:{
-title:"PETS & DOGUE | Ψηφιακή lifestyle πλατφόρμα για κατοικίδια",
-description:"Το PETS & DOGUE είναι μια ψηφιακή lifestyle πλατφόρμα για κατοικίδια και ανθρώπους που τα αγαπούν, με ιστορίες, πρακτικούς οδηγούς, pet-friendly μέρη, υγεία, μόδα, φωτογραφία, κοινότητα, διαγωνισμούς, διάσωση, marketplace, προνόμια μελών και χρήσιμες υπηρεσίες."
-},
-
-sv:{
-title:"PETS & DOGUE | Digital lifestyleplattform för husdjur",
-description:"PETS & DOGUE är en digital lifestyleplattform för husdjur och djurälskare med berättelser, praktiska guider, husdjursvänliga platser, hälsa, mode, fotografi, community, tävlingar, djurhjälp, marketplace, medlemsförmåner och användbara tjänster."
-},
-
-da:{
-title:"PETS & DOGUE | Digital lifestyleplatform for kæledyr",
-description:"PETS & DOGUE er en digital lifestyleplatform for kæledyr og dyreelskere med historier, praktiske guides, kæledyrsvenlige steder, sundhed, mode, fotografi, community, konkurrencer, dyrehjælp, marketplace, medlemsfordele og nyttige tjenester."
-},
-
-no:{
-title:"PETS & DOGUE | Digital lifestyleplattform for kjæledyr",
-description:"PETS & DOGUE er en digital lifestyleplattform for kjæledyr og dyreelskere med historier, praktiske guider, kjæledyrvennlige steder, helse, mote, fotografi, fellesskap, konkurranser, dyrehjelp, marketplace, medlemsfordeler og nyttige tjenester."
-},
-
-fi:{
-title:"PETS & DOGUE | Digitaalinen lifestyle-alusta lemmikeille",
-description:"PETS & DOGUE on digitaalinen lifestyle-alusta lemmikeille ja eläinten ystäville, joka kokoaa yhteen tarinat, käytännön oppaat, lemmikkiystävälliset paikat, terveyden, muodin, valokuvauksen, yhteisön, kilpailut, eläinavun, marketplacen, jäsenedut ja hyödylliset palvelut."
-},
-
-tr:{
-title:"PETS & DOGUE | Evcil hayvanlar için dijital lifestyle platformu",
-description:"PETS & DOGUE, evcil hayvanlar ve onları seven insanlar için hikâyeleri, pratik rehberleri, pet-friendly mekanları, sağlık, moda, fotoğraf, topluluk, yarışmalar, hayvan yardımı, marketplace, üye avantajları ve faydalı hizmetleri bir araya getiren dijital lifestyle platformudur."
-},
-
-ar:{
-title:"PETS & DOGUE | منصة رقمية لنمط حياة الحيوانات الأليفة",
-description:"PETS & DOGUE منصة رقمية لنمط حياة الحيوانات الأليفة ومحبيها، تجمع القصص والأدلة العملية والأماكن الصديقة للحيوانات والصحة والموضة والتصوير والمجتمع والمسابقات والإنقاذ والسوق ومزايا الأعضاء والخدمات المفيدة."
-},
-
-hi:{
-title:"PETS & DOGUE | पालतू जानवरों के लिए डिजिटल लाइफ़स्टाइल प्लेटफ़ॉर्म",
-description:"PETS & DOGUE पालतू जानवरों और उनसे प्यार करने वाले लोगों के लिए एक डिजिटल लाइफ़स्टाइल प्लेटफ़ॉर्म है, जो कहानियों, उपयोगी गाइड, pet-friendly जगहों, स्वास्थ्य, फ़ैशन, फ़ोटोग्राफ़ी, समुदाय, प्रतियोगिताओं, पशु सहायता, मार्केटप्लेस, सदस्य लाभ और उपयोगी सेवाओं को एक साथ लाता है।"
-}
-
-};
-
-const SEO_LOCALES = {
-en:"en_GB",
-uk:"uk_UA",
-ru:"ru_RU",
-fr:"fr_FR",
-de:"de_DE",
-es:"es_ES",
-it:"it_IT",
-pt:"pt_PT",
-nl:"nl_NL",
-pl:"pl_PL",
-cs:"cs_CZ",
-sk:"sk_SK",
-hu:"hu_HU",
-ro:"ro_RO",
-bg:"bg_BG",
-el:"el_GR",
-sv:"sv_SE",
-da:"da_DK",
-no:"nb_NO",
-fi:"fi_FI",
-tr:"tr_TR",
-ar:"ar_SA",
-hi:"hi_IN"
-};
-
-/* =========================================================
-INTERFACE TRANSLATIONS
-========================================================= */
-
-const T = {
-
-en:{
-menu:"Contents",
-profile:"Profile",
-subscribe:"Subscribe",
-language:"Language",
-nav:{
-magazine:"Edition",
-coverStars:"Cover Stars",
-offers:"Discounts",
-places:"Pet-Friendly Places",
-articles:"Articles",
-photos:"Photos",
-fashion:"Fashion",
-wellness:"Health",
-community:"Community",
-contests:"Contests",
-rescue:"Help",
-marketplace:"Marketplace",
-partners:"Partners"
-},
-latestLabel:"Latest edition",
-latestTitle:"Miso: the first PETS & DOGUE cover star",
-latestText:"Discover Edition 01 — part of the PETS & DOGUE digital lifestyle platform.",
-latestAction:"Open Edition 01 →",
-offersLabel:"Member benefits",
-offersTitle:"Discover your benefits",
-offersText:"Special offers and benefits for PETS & DOGUE Club members.",
-offersAction:"See benefits →",
-starLabel:"Your vote",
-starTitle:"Choose the next cover star",
-starText:"Meet the pets, discover their stories and vote for your favourite.",
-starAction:"Vote now →",
-worldText:"PETS & DOGUE is a digital lifestyle platform bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, marketplace, member benefits and useful services.",
-articlesTitle:"Stories worth discovering",
-articlesText:"Original stories, useful guides and ideas for life with animals.",
-photosTitle:"Pets through the lens",
-fashionTitle:"Style with personality",
-wellnessTitle:"Health, care and everyday wellbeing",
-placesTitle:"Find places where pets are welcome",
-placesDescription:"Discover pet-friendly restaurants, hotels, cafés and other places with maps, routes and useful information.",
-contestsTitle:"Enter. Vote. Win.",
-communityTitle:"Connect with pet people near you",
-rescueTitle:"Help animals who need it",
-marketTitle:"Find, sell and discover",
-clubTitle:"More for members",
-partnerTitle:"Grow with PETS & DOGUE",
-partnerText:"Connect your brand with the PETS & DOGUE digital lifestyle platform through partnerships, member benefits, stories, features and collaborations.",
-partnerAction:"Work with us →"
-},
-
-uk:{
-menu:"Зміст",
-profile:"Профіль",
-subscribe:"Підписка",
-language:"Мова",
-nav:{
-magazine:"Видання",
-coverStars:"Зірки обкладинки",
-offers:"Знижки",
-places:"Pet-Friendly місця",
-articles:"Статті",
-photos:"Фото",
-fashion:"Мода",
-wellness:"Здоров’я",
-community:"Спільнота",
-contests:"Конкурси",
-rescue:"Допомога",
-marketplace:"Маркетплейс",
-partners:"Партнери"
-},
-latestLabel:"Останнє видання",
-latestTitle:"Місо: перша зірка обкладинки PETS & DOGUE",
-latestText:"Відкрийте Edition 01 — частину цифрової lifestyle-платформи PETS & DOGUE.",
-latestAction:"Відкрити Edition 01 →",
-offersLabel:"Переваги учасників",
-offersTitle:"Відкрийте свої переваги",
-offersText:"Спеціальні пропозиції та переваги для учасників PETS & DOGUE Club.",
-offersAction:"Дивитися переваги →",
-starLabel:"Ваш голос",
-starTitle:"Оберіть наступну зірку обкладинки",
-starText:"Знайомтеся з улюбленцями, відкривайте їхні історії та голосуйте за фаворита.",
-starAction:"Голосувати →",
-worldText:"PETS & DOGUE — цифрова lifestyle-платформа, що об’єднує авторські історії, практичні поради, pet-friendly місця, здоров’я, моду, фотографію, спільноту, конкурси, допомогу тваринам, маркетплейс, переваги клубу та корисні сервіси.",
-articlesTitle:"Історії, які варто відкрити",
-articlesText:"Авторські історії, корисні матеріали та ідеї для життя з тваринами.",
-photosTitle:"Тварини в об’єктиві",
-fashionTitle:"Стиль із характером",
-wellnessTitle:"Здоров’я, турбота та щоденне благополуччя",
-placesTitle:"Знайдіть місця, де тваринам раді",
-placesDescription:"Відкривайте pet-friendly ресторани, готелі, кафе та інші місця з картами, маршрутами й корисною інформацією.",
-contestsTitle:"Беріть участь. Голосуйте. Перемагайте.",
-communityTitle:"Спілкуйтеся з людьми з тваринами поруч",
-rescueTitle:"Допомагайте тваринам, які цього потребують",
-marketTitle:"Знаходьте, продавайте та відкривайте",
-clubTitle:"Більше для учасників",
-partnerTitle:"Розвивайтеся разом із PETS & DOGUE",
-partnerText:"Об’єднайте свій бренд із цифровою lifestyle-платформою PETS & DOGUE через партнерства, переваги для учасників, історії, публікації та колаборації.",
-partnerAction:"Співпрацювати з нами →"
-},
-
-ru:{
-menu:"Содержание",
-profile:"Профиль",
-subscribe:"Подписка",
-language:"Язык",
-nav:{
-magazine:"Издание",
-coverStars:"Звёзды обложки",
-offers:"Скидки",
-places:"Pet-Friendly места",
-articles:"Статьи",
-photos:"Фото",
-fashion:"Мода",
-wellness:"Здоровье",
-community:"Сообщество",
-contests:"Конкурсы",
-rescue:"Помощь",
-marketplace:"Маркетплейс",
-partners:"Партнёры"
-},
-latestLabel:"Последнее издание",
-latestTitle:"Мисо: первая звезда обложки PETS & DOGUE",
-latestText:"Откройте Edition 01 — часть цифровой lifestyle-платформы PETS & DOGUE.",
-latestAction:"Открыть Edition 01 →",
-offersLabel:"Преимущества участников",
-offersTitle:"Откройте свои преимущества",
-offersText:"Специальные предложения и преимущества для участников PETS & DOGUE Club.",
-offersAction:"Смотреть преимущества →",
-starLabel:"Ваш голос",
-starTitle:"Выберите следующую звезду обложки",
-starText:"Знакомьтесь с питомцами, узнавайте их истории и голосуйте за любимца.",
-starAction:"Голосовать →",
-worldText:"PETS & DOGUE — цифровая lifestyle-платформа, объединяющая авторские истории, практические материалы, pet-friendly места, здоровье, моду, фотографию, сообщество, конкурсы, помощь животным, маркетплейс, преимущества клуба и полезные сервисы.",
-articlesTitle:"Истории, которые стоит открыть",
-articlesText:"Авторские истории, полезные материалы и идеи для жизни с животными.",
-photosTitle:"Животные в объективе",
-fashionTitle:"Стиль с характером",
-wellnessTitle:"Здоровье, забота и ежедневное благополучие",
-placesTitle:"Найдите места, где питомцам рады",
-placesDescription:"Открывайте pet-friendly рестораны, отели, кафе и другие места с картами, маршрутами и полезной информацией.",
-contestsTitle:"Участвуйте. Голосуйте. Побеждайте.",
-communityTitle:"Общайтесь с владельцами животных рядом",
-rescueTitle:"Помогайте животным, которым это нужно",
-marketTitle:"Находите, продавайте и открывайте",
-clubTitle:"Больше для участников",
-partnerTitle:"Развивайтесь вместе с PETS & DOGUE",
-partnerText:"Объедините свой бренд с цифровой lifestyle-платформой PETS & DOGUE через партнёрства, преимущества для участников, истории, публикации и коллаборации.",
-partnerAction:"Сотрудничать с нами →"
-},
-
-fr:{
-menu:"Sommaire",
-profile:"Profil",
-subscribe:"Abonnement",
-language:"Langue",
-nav:{
-magazine:"Édition",
-coverStars:"Stars de couverture",
-offers:"Réductions",
-places:"Lieux pet-friendly",
-articles:"Articles",
-photos:"Photos",
-fashion:"Mode",
-wellness:"Santé",
-community:"Communauté",
-contests:"Concours",
-rescue:"Aide",
-marketplace:"Marketplace",
-partners:"Partenaires"
-},
-latestLabel:"Dernière édition",
-latestTitle:"Miso : la première star de couverture PETS & DOGUE",
-latestText:"Découvrez Edition 01, une partie de la plateforme lifestyle digitale PETS & DOGUE.",
-latestAction:"Ouvrir Edition 01 →",
-offersLabel:"Avantages membres",
-offersTitle:"Découvrez vos avantages",
-offersText:"Offres et avantages spéciaux pour les membres du PETS & DOGUE Club.",
-offersAction:"Voir les avantages →",
-starLabel:"Votre vote",
-starTitle:"Choisissez la prochaine star de couverture",
-starText:"Découvrez les animaux, leurs histoires et votez pour votre favori.",
-starAction:"Voter →",
-worldText:"PETS & DOGUE est une plateforme lifestyle digitale réunissant histoires originales, conseils pratiques, lieux pet-friendly, santé, mode, photographie, communauté, concours, sauvetage, marketplace, avantages membres et services utiles.",
-articlesTitle:"Des histoires à découvrir",
-articlesText:"Histoires originales, guides utiles et idées pour mieux vivre avec les animaux.",
-photosTitle:"Les animaux à travers l’objectif",
-fashionTitle:"Un style plein de personnalité",
-wellnessTitle:"Santé, soins et bien-être au quotidien",
-placesTitle:"Trouvez des lieux où les animaux sont bienvenus",
-placesDescription:"Découvrez restaurants, hôtels, cafés et autres lieux pet-friendly avec cartes, itinéraires et informations utiles.",
-contestsTitle:"Participez. Votez. Gagnez.",
-communityTitle:"Rencontrez les amoureux des animaux près de chez vous",
-rescueTitle:"Aidez les animaux qui en ont besoin",
-marketTitle:"Trouvez, vendez et découvrez",
-clubTitle:"Encore plus pour les membres",
-partnerTitle:"Grandissez avec PETS & DOGUE",
-partnerText:"Associez votre marque à la plateforme lifestyle digitale PETS & DOGUE grâce aux partenariats, avantages membres, histoires, contenus et collaborations.",
-partnerAction:"Travailler avec nous →"
-},
-
-de:{
-menu:"Inhalt",
-profile:"Profil",
-subscribe:"Abo",
-language:"Sprache",
-nav:{
-magazine:"Edition",
-coverStars:"Cover Stars",
-offers:"Rabatte",
-places:"Tierfreundliche Orte",
-articles:"Artikel",
-photos:"Fotos",
-fashion:"Mode",
-wellness:"Gesundheit",
-community:"Community",
-contests:"Wettbewerbe",
-rescue:"Hilfe",
-marketplace:"Marktplatz",
-partners:"Partner"
-},
-latestLabel:"Aktuelle Edition",
-latestTitle:"Miso: der erste PETS & DOGUE Cover Star",
-latestText:"Entdecken Sie Edition 01 als Teil der digitalen Lifestyle-Plattform PETS & DOGUE.",
-latestAction:"Edition 01 öffnen →",
-offersLabel:"Mitgliedervorteile",
-offersTitle:"Entdecken Sie Ihre Vorteile",
-offersText:"Besondere Angebote und Vorteile für PETS & DOGUE Club-Mitglieder.",
-offersAction:"Vorteile ansehen →",
-starLabel:"Ihre Stimme",
-starTitle:"Wählen Sie den nächsten Cover Star",
-starText:"Lernen Sie die Tiere und ihre Geschichten kennen und stimmen Sie ab.",
-starAction:"Jetzt abstimmen →",
-worldText:"PETS & DOGUE ist eine digitale Lifestyle-Plattform mit Geschichten, praktischen Ratgebern, tierfreundlichen Orten, Gesundheit, Mode, Fotografie, Community, Wettbewerben, Tierschutz, Marketplace, Mitgliedervorteilen und nützlichen Services.",
-articlesTitle:"Geschichten zum Entdecken",
-articlesText:"Originalgeschichten, hilfreiche Ratgeber und Ideen für das Leben mit Tieren.",
-photosTitle:"Tiere durch die Linse",
-fashionTitle:"Stil mit Persönlichkeit",
-wellnessTitle:"Gesundheit, Pflege und tägliches Wohlbefinden",
-placesTitle:"Orte finden, an denen Tiere willkommen sind",
-placesDescription:"Entdecken Sie tierfreundliche Restaurants, Hotels, Cafés und weitere Orte mit Karten, Routen und nützlichen Informationen.",
-contestsTitle:"Mitmachen. Abstimmen. Gewinnen.",
-communityTitle:"Menschen mit Haustieren in Ihrer Nähe finden",
-rescueTitle:"Tieren helfen, die Unterstützung brauchen",
-marketTitle:"Finden, verkaufen und entdecken",
-clubTitle:"Mehr für Mitglieder",
-partnerTitle:"Mit PETS & DOGUE wachsen",
-partnerText:"Verbinden Sie Ihre Marke durch Partnerschaften, Mitgliedervorteile, Geschichten, Features und Kooperationen mit der digitalen Lifestyle-Plattform PETS & DOGUE.",
-partnerAction:"Mit uns arbeiten →"
-},
-
-es:{
-menu:"Contenido",
-profile:"Perfil",
-subscribe:"Suscripción",
-language:"Idioma",
-nav:{
-magazine:"Edición",
-coverStars:"Estrellas de portada",
-offers:"Descuentos",
-places:"Lugares pet-friendly",
-articles:"Artículos",
-photos:"Fotos",
-fashion:"Moda",
-wellness:"Salud",
-community:"Comunidad",
-contests:"Concursos",
-rescue:"Ayuda",
-marketplace:"Marketplace",
-partners:"Socios"
-},
-latestLabel:"Última edición",
-latestTitle:"Miso: la primera estrella de portada de PETS & DOGUE",
-latestText:"Descubre Edition 01, parte de la plataforma digital lifestyle PETS & DOGUE.",
-latestAction:"Abrir Edition 01 →",
-offersLabel:"Beneficios para miembros",
-offersTitle:"Descubre tus beneficios",
-offersText:"Ofertas y ventajas especiales para miembros de PETS & DOGUE Club.",
-offersAction:"Ver beneficios →",
-starLabel:"Tu voto",
-starTitle:"Elige la próxima estrella de portada",
-starText:"Conoce a las mascotas, descubre sus historias y vota por tu favorita.",
-starAction:"Votar ahora →",
-worldText:"PETS & DOGUE es una plataforma digital lifestyle que reúne historias originales, guías útiles, lugares pet-friendly, salud, moda, fotografía, comunidad, concursos, rescate, marketplace, beneficios para miembros y servicios útiles.",
-articlesTitle:"Historias por descubrir",
-articlesText:"Historias originales, guías útiles e ideas para la vida con animales.",
-photosTitle:"Mascotas a través del objetivo",
-fashionTitle:"Estilo con personalidad",
-wellnessTitle:"Salud, cuidados y bienestar diario",
-placesTitle:"Encuentra lugares donde las mascotas son bienvenidas",
-placesDescription:"Descubre restaurantes, hoteles, cafés y otros lugares pet-friendly con mapas, rutas e información útil.",
-contestsTitle:"Participa. Vota. Gana.",
-communityTitle:"Conecta con amantes de los animales cerca de ti",
-rescueTitle:"Ayuda a los animales que lo necesitan",
-marketTitle:"Encuentra, vende y descubre",
-clubTitle:"Más para miembros",
-partnerTitle:"Crece con PETS & DOGUE",
-partnerText:"Conecta tu marca con la plataforma digital lifestyle PETS & DOGUE mediante colaboraciones, beneficios para miembros, historias y contenidos.",
-partnerAction:"Trabaja con nosotros →"
-},
-
-it:{
-menu:"Contenuti",
-profile:"Profilo",
-subscribe:"Abbonamento",
-language:"Lingua",
-nav:{
-magazine:"Edizione",
-coverStars:"Cover Star",
-offers:"Sconti",
-places:"Luoghi pet-friendly",
-articles:"Articoli",
-photos:"Foto",
-fashion:"Moda",
-wellness:"Salute",
-community:"Community",
-contests:"Concorsi",
-rescue:"Aiuto",
-marketplace:"Marketplace",
-partners:"Partner"
-},
-latestLabel:"Ultima edizione",
-latestTitle:"Miso: la prima cover star di PETS & DOGUE",
-latestText:"Scopri Edition 01, parte della piattaforma lifestyle digitale PETS & DOGUE.",
-latestAction:"Apri Edition 01 →",
-offersLabel:"Vantaggi membri",
-offersTitle:"Scopri i tuoi vantaggi",
-offersText:"Offerte e vantaggi speciali per i membri del PETS & DOGUE Club.",
-offersAction:"Vedi i vantaggi →",
-starLabel:"Il tuo voto",
-starTitle:"Scegli la prossima cover star",
-starText:"Conosci gli animali, scopri le loro storie e vota il tuo preferito.",
-starAction:"Vota ora →",
-worldText:"PETS & DOGUE è una piattaforma lifestyle digitale che riunisce storie originali, guide utili, luoghi pet-friendly, salute, moda, fotografia, community, concorsi, rescue, marketplace, vantaggi per i membri e servizi utili.",
-articlesTitle:"Storie da scoprire",
-articlesText:"Storie originali, guide utili e idee per vivere con gli animali.",
-photosTitle:"Animali attraverso l’obiettivo",
-fashionTitle:"Stile con personalità",
-wellnessTitle:"Salute, cura e benessere quotidiano",
-placesTitle:"Trova luoghi dove gli animali sono i benvenuti",
-placesDescription:"Scopri ristoranti, hotel, caffè e altri luoghi pet-friendly con mappe, percorsi e informazioni utili.",
-contestsTitle:"Partecipa. Vota. Vinci.",
-communityTitle:"Connettiti con gli amanti degli animali vicino a te",
-rescueTitle:"Aiuta gli animali che ne hanno bisogno",
-marketTitle:"Trova, vendi e scopri",
-clubTitle:"Più vantaggi per i membri",
-partnerTitle:"Cresci con PETS & DOGUE",
-partnerText:"Collega il tuo brand alla piattaforma lifestyle digitale PETS & DOGUE attraverso partnership, vantaggi membri, storie, contenuti e collaborazioni.",
-partnerAction:"Lavora con noi →"
-},
-
-pt:{
-menu:"Conteúdo",
-profile:"Perfil",
-subscribe:"Assinatura",
-language:"Idioma",
-nav:{
-magazine:"Edição",
-coverStars:"Estrelas da capa",
-offers:"Descontos",
-places:"Locais pet-friendly",
-articles:"Artigos",
-photos:"Fotos",
-fashion:"Moda",
-wellness:"Saúde",
-community:"Comunidade",
-contests:"Concursos",
-rescue:"Ajuda",
-marketplace:"Marketplace",
-partners:"Parceiros"
-},
-latestLabel:"Última edição",
-latestTitle:"Miso: a primeira estrela de capa da PETS & DOGUE",
-latestText:"Descubra Edition 01, parte da plataforma digital lifestyle PETS & DOGUE.",
-latestAction:"Abrir Edition 01 →",
-offersLabel:"Benefícios para membros",
-offersTitle:"Descubra os seus benefícios",
-offersText:"Ofertas e benefícios especiais para membros do PETS & DOGUE Club.",
-offersAction:"Ver benefícios →",
-starLabel:"O seu voto",
-starTitle:"Escolha a próxima estrela de capa",
-starText:"Conheça os animais, descubra as suas histórias e vote no seu favorito.",
-starAction:"Votar agora →",
-worldText:"PETS & DOGUE é uma plataforma digital lifestyle que reúne histórias originais, guias úteis, locais pet-friendly, saúde, moda, fotografia, comunidade, concursos, resgate, marketplace, benefícios para membros e serviços úteis.",
-articlesTitle:"Histórias para descobrir",
-articlesText:"Histórias originais, guias úteis e ideias para viver com animais.",
-photosTitle:"Animais através da lente",
-fashionTitle:"Estilo com personalidade",
-wellnessTitle:"Saúde, cuidados e bem-estar diário",
-placesTitle:"Encontre lugares onde os animais são bem-vindos",
-placesDescription:"Descubra restaurantes, hotéis, cafés e outros locais pet-friendly com mapas, rotas e informação útil.",
-contestsTitle:"Participe. Vote. Ganhe.",
-communityTitle:"Conecte-se com pessoas que adoram animais perto de si",
-rescueTitle:"Ajude animais que precisam",
-marketTitle:"Encontre, venda e descubra",
-clubTitle:"Mais para membros",
-partnerTitle:"Cresça com PETS & DOGUE",
-partnerText:"Ligue a sua marca à plataforma digital lifestyle PETS & DOGUE através de parcerias, benefícios, histórias, conteúdos e colaborações.",
-partnerAction:"Trabalhe connosco →"
-},
-
-nl:{
-menu:"Inhoud",
-profile:"Profiel",
-subscribe:"Abonnement",
-language:"Taal",
-nav:{
-magazine:"Editie",
-coverStars:"Coversterren",
-offers:"Kortingen",
-places:"Huisdiervriendelijke plekken",
-articles:"Artikelen",
-photos:"Foto's",
-fashion:"Mode",
-wellness:"Gezondheid",
-community:"Community",
-contests:"Wedstrijden",
-rescue:"Hulp",
-marketplace:"Marktplaats",
-partners:"Partners"
-},
-latestLabel:"Nieuwste editie",
-latestTitle:"Miso: de eerste PETS & DOGUE coverster",
-latestText:"Ontdek Edition 01 als onderdeel van het digitale lifestyleplatform PETS & DOGUE.",
-latestAction:"Open Edition 01 →",
-offersLabel:"Ledenvoordelen",
-offersTitle:"Ontdek je voordelen",
-offersText:"Speciale aanbiedingen en voordelen voor PETS & DOGUE Club-leden.",
-offersAction:"Bekijk voordelen →",
-starLabel:"Jouw stem",
-starTitle:"Kies de volgende coverster",
-starText:"Ontmoet de huisdieren, ontdek hun verhalen en stem op je favoriet.",
-starAction:"Stem nu →",
-worldText:"PETS & DOGUE is een digitaal lifestyleplatform met verhalen, praktische gidsen, huisdiervriendelijke plekken, gezondheid, mode, fotografie, community, wedstrijden, dierenhulp, marketplace, ledenvoordelen en nuttige diensten.",
-articlesTitle:"Verhalen om te ontdekken",
-articlesText:"Originele verhalen, nuttige gidsen en ideeën voor het leven met dieren.",
-photosTitle:"Huisdieren door de lens",
-fashionTitle:"Stijl met persoonlijkheid",
-wellnessTitle:"Gezondheid, verzorging en dagelijks welzijn",
-placesTitle:"Vind plekken waar huisdieren welkom zijn",
-placesDescription:"Ontdek huisdiervriendelijke restaurants, hotels, cafés en andere plekken met kaarten, routes en informatie.",
-contestsTitle:"Doe mee. Stem. Win.",
-communityTitle:"Maak contact met dierenliefhebbers bij jou in de buurt",
-rescueTitle:"Help dieren die hulp nodig hebben",
-marketTitle:"Vind, verkoop en ontdek",
-clubTitle:"Meer voor leden",
-partnerTitle:"Groei met PETS & DOGUE",
-partnerText:"Verbind je merk met het digitale lifestyleplatform PETS & DOGUE via partnerships, ledenvoordelen, verhalen, features en samenwerkingen.",
-partnerAction:"Werk met ons →"
-},
-
-pl:{
-menu:"Spis treści",
-profile:"Profil",
-subscribe:"Subskrypcja",
-language:"Język",
-nav:{
-magazine:"Edycja",
-coverStars:"Gwiazdy okładki",
-offers:"Zniżki",
-places:"Miejsca przyjazne zwierzętom",
-articles:"Artykuły",
-photos:"Zdjęcia",
-fashion:"Moda",
-wellness:"Zdrowie",
-community:"Społeczność",
-contests:"Konkursy",
-rescue:"Pomoc",
-marketplace:"Marketplace",
-partners:"Partnerzy"
-},
-latestLabel:"Najnowsza edycja",
-latestTitle:"Miso: pierwsza gwiazda okładki PETS & DOGUE",
-latestText:"Odkryj Edition 01 — część cyfrowej platformy lifestyle PETS & DOGUE.",
-latestAction:"Otwórz Edition 01 →",
-offersLabel:"Korzyści członkowskie",
-offersTitle:"Poznaj swoje korzyści",
-offersText:"Specjalne oferty i korzyści dla członków PETS & DOGUE Club.",
-offersAction:"Zobacz korzyści →",
-starLabel:"Twój głos",
-starTitle:"Wybierz następną gwiazdę okładki",
-starText:"Poznaj zwierzęta, ich historie i zagłosuj na swojego faworyta.",
-starAction:"Głosuj →",
-worldText:"PETS & DOGUE to cyfrowa platforma lifestyle łącząca historie, praktyczne poradniki, miejsca przyjazne zwierzętom, zdrowie, modę, fotografię, społeczność, konkursy, pomoc zwierzętom, marketplace, korzyści klubowe i przydatne usługi.",
-articlesTitle:"Historie warte odkrycia",
-articlesText:"Oryginalne historie, przydatne poradniki i pomysły na życie ze zwierzętami.",
-photosTitle:"Zwierzęta w obiektywie",
-fashionTitle:"Styl z charakterem",
-wellnessTitle:"Zdrowie, opieka i codzienny dobrostan",
-placesTitle:"Znajdź miejsca przyjazne zwierzętom",
-placesDescription:"Odkrywaj restauracje, hotele, kawiarnie i inne miejsca z mapami, trasami i przydatnymi informacjami.",
-contestsTitle:"Dołącz. Głosuj. Wygrywaj.",
-communityTitle:"Poznaj miłośników zwierząt w swojej okolicy",
-rescueTitle:"Pomagaj zwierzętom w potrzebie",
-marketTitle:"Znajdź, sprzedaj i odkrywaj",
-clubTitle:"Więcej dla członków",
-partnerTitle:"Rozwijaj się z PETS & DOGUE",
-partnerText:"Połącz swoją markę z cyfrową platformą lifestyle PETS & DOGUE poprzez partnerstwa, korzyści członkowskie, historie i współpracę.",
-partnerAction:"Współpracuj z nami →"
-},
-
-cs:{
-menu:"Obsah",
-profile:"Profil",
-subscribe:"Předplatné",
-language:"Jazyk",
-nav:{
-magazine:"Vydání",
-coverStars:"Hvězdy obálky",
-offers:"Slevy",
-places:"Místa přátelská ke zvířatům",
-articles:"Články",
-photos:"Fotografie",
-fashion:"Móda",
-wellness:"Zdraví",
-community:"Komunita",
-contests:"Soutěže",
-rescue:"Pomoc",
-marketplace:"Marketplace",
-partners:"Partneři"
-},
-latestLabel:"Nejnovější vydání",
-latestTitle:"Miso: první hvězda obálky PETS & DOGUE",
-latestText:"Objevte Edition 01 jako součást digitální lifestyle platformy PETS & DOGUE.",
-latestAction:"Otevřít Edition 01 →",
-offersLabel:"Výhody členství",
-offersTitle:"Objevte své výhody",
-offersText:"Speciální nabídky a výhody pro členy PETS & DOGUE Club.",
-offersAction:"Zobrazit výhody →",
-starLabel:"Váš hlas",
-starTitle:"Vyberte další hvězdu obálky",
-starText:"Poznejte mazlíčky, jejich příběhy a hlasujte pro svého favorita.",
-starAction:"Hlasovat →",
-worldText:"PETS & DOGUE je digitální lifestyle platforma, která spojuje příběhy, praktické rady, pet-friendly místa, zdraví, módu, fotografii, komunitu, soutěže, pomoc zvířatům, marketplace, členské výhody a užitečné služby.",
-articlesTitle:"Příběhy, které stojí za objevování",
-articlesText:"Originální příběhy, užitečné rady a nápady pro život se zvířaty.",
-photosTitle:"Mazlíčci objektivem",
-fashionTitle:"Styl s osobností",
-wellnessTitle:"Zdraví, péče a každodenní pohoda",
-placesTitle:"Najděte místa, kde jsou mazlíčci vítáni",
-placesDescription:"Objevujte restaurace, hotely, kavárny a další pet-friendly místa s mapami a trasami.",
-contestsTitle:"Zapojte se. Hlasujte. Vyhrajte.",
-communityTitle:"Spojte se s milovníky zvířat ve svém okolí",
-rescueTitle:"Pomáhejte zvířatům, která to potřebují",
-marketTitle:"Najděte, prodejte a objevujte",
-clubTitle:"Více pro členy",
-partnerTitle:"Rostete s PETS & DOGUE",
-partnerText:"Propojte svou značku s digitální lifestyle platformou PETS & DOGUE prostřednictvím partnerství, výhod, příběhů a spoluprací.",
-partnerAction:"Spolupracujte s námi →"
-},
-
-sk:{
-menu:"Obsah",
-profile:"Profil",
-subscribe:"Predplatné",
-language:"Jazyk",
-nav:{
-magazine:"Vydanie",
-coverStars:"Hviezdy obálky",
-offers:"Zľavy",
-places:"Miesta priateľské k zvieratám",
-articles:"Články",
-photos:"Fotografie",
-fashion:"Móda",
-wellness:"Zdravie",
-community:"Komunita",
-contests:"Súťaže",
-rescue:"Pomoc",
-marketplace:"Marketplace",
-partners:"Partneri"
-},
-latestLabel:"Najnovšie vydanie",
-latestTitle:"Miso: prvá hviezda obálky PETS & DOGUE",
-latestText:"Objavte Edition 01 ako súčasť digitálnej lifestyle platformy PETS & DOGUE.",
-latestAction:"Otvoriť Edition 01 →",
-offersLabel:"Členské výhody",
-offersTitle:"Objavte svoje výhody",
-offersText:"Špeciálne ponuky a výhody pre členov PETS & DOGUE Club.",
-offersAction:"Pozrieť výhody →",
-starLabel:"Váš hlas",
-starTitle:"Vyberte ďalšiu hviezdu obálky",
-starText:"Spoznajte miláčikov, ich príbehy a hlasujte za svojho favorita.",
-starAction:"Hlasovať →",
-worldText:"PETS & DOGUE je digitálna lifestyle platforma spájajúca príbehy, praktické rady, pet-friendly miesta, zdravie, módu, fotografie, komunitu, súťaže, pomoc zvieratám, marketplace, členské výhody a užitočné služby.",
-articlesTitle:"Príbehy, ktoré stojí za to objaviť",
-articlesText:"Originálne príbehy, užitočné rady a nápady pre život so zvieratami.",
-photosTitle:"Miláčikovia objektívom",
-fashionTitle:"Štýl s osobnosťou",
-wellnessTitle:"Zdravie, starostlivosť a každodenná pohoda",
-placesTitle:"Nájdite miesta, kde sú zvieratá vítané",
-placesDescription:"Objavujte reštaurácie, hotely, kaviarne a ďalšie pet-friendly miesta s mapami a trasami.",
-contestsTitle:"Zapojte sa. Hlasujte. Vyhrajte.",
-communityTitle:"Spojte sa s milovníkmi zvierat vo svojom okolí",
-rescueTitle:"Pomáhajte zvieratám, ktoré to potrebujú",
-marketTitle:"Nájdite, predajte a objavujte",
-clubTitle:"Viac pre členov",
-partnerTitle:"Rastiete s PETS & DOGUE",
-partnerText:"Prepojte svoju značku s digitálnou lifestyle platformou PETS & DOGUE prostredníctvom partnerstiev, výhod, príbehov a spoluprác.",
-partnerAction:"Spolupracujte s nami →"
-},
-
-hu:{
-menu:"Tartalom",
-profile:"Profil",
-subscribe:"Előfizetés",
-language:"Nyelv",
-nav:{
-magazine:"Kiadás",
-coverStars:"Címlapsztárok",
-offers:"Kedvezmények",
-places:"Állatbarát helyek",
-articles:"Cikkek",
-photos:"Fotók",
-fashion:"Divat",
-wellness:"Egészség",
-community:"Közösség",
-contests:"Versenyek",
-rescue:"Segítség",
-marketplace:"Piactér",
-partners:"Partnerek"
-},
-latestLabel:"Legújabb kiadás",
-latestTitle:"Miso: a PETS & DOGUE első címlapsztárja",
-latestText:"Fedezd fel az Edition 01-et a PETS & DOGUE digitális lifestyle platform részeként.",
-latestAction:"Edition 01 megnyitása →",
-offersLabel:"Tagsági előnyök",
-offersTitle:"Fedezd fel az előnyeidet",
-offersText:"Különleges ajánlatok és előnyök a PETS & DOGUE Club tagjainak.",
-offersAction:"Előnyök megtekintése →",
-starLabel:"A te szavazatod",
-starTitle:"Válaszd ki a következő címlapsztárt",
-starText:"Ismerd meg a kisállatokat, történeteiket, és szavazz a kedvencedre.",
-starAction:"Szavazás →",
-worldText:"A PETS & DOGUE digitális lifestyle platform, amely történeteket, hasznos útmutatókat, állatbarát helyeket, egészséget, divatot, fotózást, közösséget, versenyeket, állatmentést, piacteret, tagsági előnyöket és hasznos szolgáltatásokat egyesít.",
-articlesTitle:"Felfedezésre váró történetek",
-articlesText:"Eredeti történetek, hasznos útmutatók és ötletek az állatokkal való élethez.",
-photosTitle:"Kisállatok a lencsén keresztül",
-fashionTitle:"Stílus egyéniséggel",
-wellnessTitle:"Egészség, gondoskodás és mindennapi jóllét",
-placesTitle:"Találj helyeket, ahol szívesen látják az állatokat",
-placesDescription:"Fedezz fel állatbarát éttermeket, hoteleket, kávézókat térképekkel és útvonalakkal.",
-contestsTitle:"Nevezz. Szavazz. Nyerj.",
-communityTitle:"Kapcsolódj a közeledben élő állatbarátokhoz",
-rescueTitle:"Segíts a rászoruló állatoknak",
-marketTitle:"Találj, adj el és fedezz fel",
-clubTitle:"Több a tagoknak",
-partnerTitle:"Növekedj a PETS & DOGUE-gal",
-partnerText:"Kapcsold össze márkádat a PETS & DOGUE digitális lifestyle platformmal partnerségeken, előnyökön, történeteken és együttműködéseken keresztül.",
-partnerAction:"Dolgozz velünk →"
-},
-
-ro:{
-menu:"Conținut",
-profile:"Profil",
-subscribe:"Abonament",
-language:"Limbă",
-nav:{
-magazine:"Ediție",
-coverStars:"Vedete de copertă",
-offers:"Reduceri",
-places:"Locuri pet-friendly",
-articles:"Articole",
-photos:"Fotografii",
-fashion:"Modă",
-wellness:"Sănătate",
-community:"Comunitate",
-contests:"Concursuri",
-rescue:"Ajutor",
-marketplace:"Marketplace",
-partners:"Parteneri"
-},
-latestLabel:"Cea mai nouă ediție",
-latestTitle:"Miso: prima vedetă de copertă PETS & DOGUE",
-latestText:"Descoperă Edition 01 ca parte a platformei lifestyle digitale PETS & DOGUE.",
-latestAction:"Deschide Edition 01 →",
-offersLabel:"Beneficii pentru membri",
-offersTitle:"Descoperă beneficiile tale",
-offersText:"Oferte și beneficii speciale pentru membrii PETS & DOGUE Club.",
-offersAction:"Vezi beneficiile →",
-starLabel:"Votul tău",
-starTitle:"Alege următoarea vedetă de copertă",
-starText:"Descoperă animalele, poveștile lor și votează favoritul.",
-starAction:"Votează →",
-worldText:"PETS & DOGUE este o platformă lifestyle digitală care aduce împreună povești, ghiduri utile, locuri pet-friendly, sănătate, modă, fotografie, comunitate, concursuri, salvare, marketplace, beneficii pentru membri și servicii utile.",
-articlesTitle:"Povești care merită descoperite",
-articlesText:"Povești originale, ghiduri utile și idei pentru viața alături de animale.",
-photosTitle:"Animale prin obiectiv",
-fashionTitle:"Stil cu personalitate",
-wellnessTitle:"Sănătate, îngrijire și bunăstare zilnică",
-placesTitle:"Găsește locuri unde animalele sunt binevenite",
-placesDescription:"Descoperă restaurante, hoteluri, cafenele și alte locuri pet-friendly cu hărți și trasee.",
-contestsTitle:"Participă. Votează. Câștigă.",
-communityTitle:"Conectează-te cu iubitorii de animale din apropiere",
-rescueTitle:"Ajută animalele care au nevoie",
-marketTitle:"Găsește, vinde și descoperă",
-clubTitle:"Mai mult pentru membri",
-partnerTitle:"Crește alături de PETS & DOGUE",
-partnerText:"Conectează-ți brandul cu platforma lifestyle digitală PETS & DOGUE prin parteneriate, beneficii, povești și colaborări.",
-partnerAction:"Lucrează cu noi →"
-},
-
-bg:{
-menu:"Съдържание",
-profile:"Профил",
-subscribe:"Абонамент",
-language:"Език",
-nav:{
-magazine:"Издание",
-coverStars:"Звезди на корицата",
-offers:"Отстъпки",
-places:"Pet-friendly места",
-articles:"Статии",
-photos:"Снимки",
-fashion:"Мода",
-wellness:"Здраве",
-community:"Общност",
-contests:"Конкурси",
-rescue:"Помощ",
-marketplace:"Маркетплейс",
-partners:"Партньори"
-},
-latestLabel:"Последно издание",
-latestTitle:"Miso: първата звезда на корицата на PETS & DOGUE",
-latestText:"Открийте Edition 01 — част от дигиталната lifestyle платформа PETS & DOGUE.",
-latestAction:"Отвори Edition 01 →",
-offersLabel:"Предимства за членове",
-offersTitle:"Открийте своите предимства",
-offersText:"Специални предложения и предимства за членовете на PETS & DOGUE Club.",
-offersAction:"Виж предимствата →",
-starLabel:"Вашият глас",
-starTitle:"Изберете следващата звезда на корицата",
-starText:"Запознайте се с любимците, техните истории и гласувайте.",
-starAction:"Гласувай →",
-worldText:"PETS & DOGUE е дигитална lifestyle платформа, която събира истории, полезни съвети, pet-friendly места, здраве, мода, фотография, общност, конкурси, помощ за животни, маркетплейс, клубни предимства и полезни услуги.",
-articlesTitle:"Истории, които си струва да откриете",
-articlesText:"Оригинални истории, полезни материали и идеи за живота с животни.",
-photosTitle:"Любимци през обектива",
-fashionTitle:"Стил с характер",
-wellnessTitle:"Здраве, грижа и ежедневен комфорт",
-placesTitle:"Намерете места, където животните са добре дошли",
-placesDescription:"Открийте pet-friendly ресторанти, хотели, кафенета и други места с карти и маршрути.",
-contestsTitle:"Участвай. Гласувай. Спечели.",
-communityTitle:"Свържете се с любители на животни близо до вас",
-rescueTitle:"Помогнете на животни в нужда",
-marketTitle:"Намерете, продайте и открийте",
-clubTitle:"Повече за членовете",
-partnerTitle:"Развивайте се с PETS & DOGUE",
-partnerText:"Свържете бранда си с дигиталната lifestyle платформа PETS & DOGUE чрез партньорства, предимства, истории и колаборации.",
-partnerAction:"Работете с нас →"
-},
-
-el:{
-menu:"Περιεχόμενα",
-profile:"Προφίλ",
-subscribe:"Συνδρομή",
-language:"Γλώσσα",
-nav:{
-magazine:"Έκδοση",
-coverStars:"Αστέρια εξωφύλλου",
-offers:"Εκπτώσεις",
-places:"Pet-friendly μέρη",
-articles:"Άρθρα",
-photos:"Φωτογραφίες",
-fashion:"Μόδα",
-wellness:"Υγεία",
-community:"Κοινότητα",
-contests:"Διαγωνισμοί",
-rescue:"Βοήθεια",
-marketplace:"Marketplace",
-partners:"Συνεργάτες"
-},
-latestLabel:"Τελευταία έκδοση",
-latestTitle:"Miso: το πρώτο αστέρι εξωφύλλου του PETS & DOGUE",
-latestText:"Ανακαλύψτε το Edition 01 ως μέρος της ψηφιακής lifestyle πλατφόρμας PETS & DOGUE.",
-latestAction:"Άνοιγμα Edition 01 →",
-offersLabel:"Προνόμια μελών",
-offersTitle:"Ανακαλύψτε τα προνόμιά σας",
-offersText:"Ειδικές προσφορές και προνόμια για τα μέλη του PETS & DOGUE Club.",
-offersAction:"Δείτε τα προνόμια →",
-starLabel:"Η ψήφος σας",
-starTitle:"Επιλέξτε το επόμενο αστέρι εξωφύλλου",
-starText:"Γνωρίστε τα κατοικίδια, τις ιστορίες τους και ψηφίστε το αγαπημένο σας.",
-starAction:"Ψηφίστε τώρα →",
-worldText:"Το PETS & DOGUE είναι μια ψηφιακή lifestyle πλατφόρμα που συνδυάζει ιστορίες, πρακτικούς οδηγούς, pet-friendly μέρη, υγεία, μόδα, φωτογραφία, κοινότητα, διαγωνισμούς, διάσωση, marketplace, προνόμια μελών και χρήσιμες υπηρεσίες.",
-articlesTitle:"Ιστορίες που αξίζει να ανακαλύψετε",
-articlesText:"Πρωτότυπες ιστορίες, χρήσιμοι οδηγοί και ιδέες για τη ζωή με ζώα.",
-photosTitle:"Κατοικίδια μέσα από τον φακό",
-fashionTitle:"Στυλ με προσωπικότητα",
-wellnessTitle:"Υγεία, φροντίδα και καθημερινή ευεξία",
-placesTitle:"Βρείτε μέρη όπου τα κατοικίδια είναι ευπρόσδεκτα",
-placesDescription:"Ανακαλύψτε pet-friendly εστιατόρια, ξενοδοχεία, καφέ και άλλα μέρη με χάρτες και διαδρομές.",
-contestsTitle:"Συμμετέχετε. Ψηφίστε. Κερδίστε.",
-communityTitle:"Συνδεθείτε με ανθρώπους που αγαπούν τα ζώα κοντά σας",
-rescueTitle:"Βοηθήστε ζώα που το χρειάζονται",
-marketTitle:"Βρείτε, πουλήστε και ανακαλύψτε",
-clubTitle:"Περισσότερα για τα μέλη",
-partnerTitle:"Αναπτυχθείτε με το PETS & DOGUE",
-partnerText:"Συνδέστε το brand σας με την ψηφιακή lifestyle πλατφόρμα PETS & DOGUE μέσω συνεργασιών, προνομίων, ιστοριών και περιεχομένου.",
-partnerAction:"Συνεργαστείτε μαζί μας →"
-},
-
-sv:{
-menu:"Innehåll",
-profile:"Profil",
-subscribe:"Prenumeration",
-language:"Språk",
-nav:{
-magazine:"Utgåva",
-coverStars:"Omslagsstjärnor",
-offers:"Rabatter",
-places:"Husdjursvänliga platser",
-articles:"Artiklar",
-photos:"Foton",
-fashion:"Mode",
-wellness:"Hälsa",
-community:"Community",
-contests:"Tävlingar",
-rescue:"Hjälp",
-marketplace:"Marknadsplats",
-partners:"Partners"
-},
-latestLabel:"Senaste utgåvan",
-latestTitle:"Miso: PETS & DOGUEs första omslagsstjärna",
-latestText:"Upptäck Edition 01 som en del av PETS & DOGUEs digitala lifestyleplattform.",
-latestAction:"Öppna Edition 01 →",
-offersLabel:"Medlemsförmåner",
-offersTitle:"Upptäck dina förmåner",
-offersText:"Specialerbjudanden och förmåner för PETS & DOGUE Club-medlemmar.",
-offersAction:"Se förmåner →",
-starLabel:"Din röst",
-starTitle:"Välj nästa omslagsstjärna",
-starText:"Möt husdjuren, upptäck deras berättelser och rösta på din favorit.",
-starAction:"Rösta nu →",
-worldText:"PETS & DOGUE är en digital lifestyleplattform med berättelser, praktiska guider, husdjursvänliga platser, hälsa, mode, fotografi, community, tävlingar, djurhjälp, marketplace, medlemsförmåner och användbara tjänster.",
-articlesTitle:"Berättelser värda att upptäcka",
-articlesText:"Originalberättelser, användbara guider och idéer för livet med djur.",
-photosTitle:"Husdjur genom linsen",
-fashionTitle:"Stil med personlighet",
-wellnessTitle:"Hälsa, omsorg och vardagligt välbefinnande",
-placesTitle:"Hitta platser där husdjur är välkomna",
-placesDescription:"Upptäck husdjursvänliga restauranger, hotell, kaféer och andra platser med kartor och rutter.",
-contestsTitle:"Delta. Rösta. Vinn.",
-communityTitle:"Hitta andra djurälskare nära dig",
-rescueTitle:"Hjälp djur som behöver det",
-marketTitle:"Hitta, sälj och upptäck",
-clubTitle:"Mer för medlemmar",
-partnerTitle:"Väx med PETS & DOGUE",
-partnerText:"Koppla ditt varumärke till PETS & DOGUEs digitala lifestyleplattform genom partnerskap, medlemsförmåner, berättelser och samarbeten.",
-partnerAction:"Arbeta med oss →"
-},
-
-da:{
-menu:"Indhold",
-profile:"Profil",
-subscribe:"Abonnement",
-language:"Sprog",
-nav:{
-magazine:"Udgave",
-coverStars:"Forsidestjerner",
-offers:"Rabatter",
-places:"Kæledyrsvenlige steder",
-articles:"Artikler",
-photos:"Fotos",
-fashion:"Mode",
-wellness:"Sundhed",
-community:"Community",
-contests:"Konkurrencer",
-rescue:"Hjælp",
-marketplace:"Marketplace",
-partners:"Partnere"
-},
-latestLabel:"Seneste udgave",
-latestTitle:"Miso: PETS & DOGUEs første forsidestjerne",
-latestText:"Oplev Edition 01 som en del af PETS & DOGUEs digitale lifestyleplatform.",
-latestAction:"Åbn Edition 01 →",
-offersLabel:"Medlemsfordele",
-offersTitle:"Oplev dine fordele",
-offersText:"Særlige tilbud og fordele til PETS & DOGUE Club-medlemmer.",
-offersAction:"Se fordele →",
-starLabel:"Din stemme",
-starTitle:"Vælg den næste forsidestjerne",
-starText:"Mød kæledyrene, lær deres historier at kende og stem på din favorit.",
-starAction:"Stem nu →",
-worldText:"PETS & DOGUE er en digital lifestyleplatform med historier, praktiske guides, kæledyrsvenlige steder, sundhed, mode, fotografi, community, konkurrencer, dyrehjælp, marketplace, medlemsfordele og nyttige tjenester.",
-articlesTitle:"Historier værd at opdage",
-articlesText:"Originale historier, nyttige guides og idéer til livet med dyr.",
-photosTitle:"Kæledyr gennem linsen",
-fashionTitle:"Stil med personlighed",
-wellnessTitle:"Sundhed, omsorg og dagligt velvære",
-placesTitle:"Find steder hvor kæledyr er velkomne",
-placesDescription:"Oplev kæledyrsvenlige restauranter, hoteller, caféer og andre steder med kort og ruter.",
-contestsTitle:"Deltag. Stem. Vind.",
-communityTitle:"Mød andre dyrevenner i nærheden",
-rescueTitle:"Hjælp dyr der har brug for det",
-marketTitle:"Find, sælg og opdag",
-clubTitle:"Mere til medlemmer",
-partnerTitle:"Voks med PETS & DOGUE",
-partnerText:"Forbind dit brand med PETS & DOGUEs digitale lifestyleplatform gennem partnerskaber, medlemsfordele, historier og samarbejder.",
-partnerAction:"Arbejd med os →"
-},
-
-no:{
-menu:"Innhold",
-profile:"Profil",
-subscribe:"Abonnement",
-language:"Språk",
-nav:{
-magazine:"Utgave",
-coverStars:"Forsidestjerner",
-offers:"Rabatter",
-places:"Kjæledyrvennlige steder",
-articles:"Artikler",
-photos:"Bilder",
-fashion:"Mote",
-wellness:"Helse",
-community:"Fellesskap",
-contests:"Konkurranser",
-rescue:"Hjelp",
-marketplace:"Markedsplass",
-partners:"Partnere"
-},
-latestLabel:"Nyeste utgave",
-latestTitle:"Miso: PETS & DOGUEs første forsidestjerne",
-latestText:"Oppdag Edition 01 som en del av PETS & DOGUEs digitale lifestyleplattform.",
-latestAction:"Åpne Edition 01 →",
-offersLabel:"Medlemsfordeler",
-offersTitle:"Oppdag fordelene dine",
-offersText:"Spesialtilbud og fordeler for PETS & DOGUE Club-medlemmer.",
-offersAction:"Se fordeler →",
-starLabel:"Din stemme",
-starTitle:"Velg den neste forsidestjernen",
-starText:"Møt kjæledyrene, oppdag historiene deres og stem på favoritten.",
-starAction:"Stem nå →",
-worldText:"PETS & DOGUE er en digital lifestyleplattform med historier, praktiske guider, kjæledyrvennlige steder, helse, mote, fotografi, fellesskap, konkurranser, dyrehjelp, marketplace, medlemsfordeler og nyttige tjenester.",
-articlesTitle:"Historier verdt å oppdage",
-articlesText:"Originale historier, nyttige guider og ideer for livet med dyr.",
-photosTitle:"Kjæledyr gjennom linsen",
-fashionTitle:"Stil med personlighet",
-wellnessTitle:"Helse, omsorg og daglig velvære",
-placesTitle:"Finn steder der kjæledyr er velkomne",
-placesDescription:"Oppdag kjæledyrvennlige restauranter, hoteller, kafeer og andre steder med kart og ruter.",
-contestsTitle:"Delta. Stem. Vinn.",
-communityTitle:"Finn andre dyreelskere i nærheten",
-rescueTitle:"Hjelp dyr som trenger det",
-marketTitle:"Finn, selg og oppdag",
-clubTitle:"Mer for medlemmer",
-partnerTitle:"Voks med PETS & DOGUE",
-partnerText:"Koble merkevaren din til PETS & DOGUEs digitale lifestyleplattform gjennom partnerskap, medlemsfordeler, historier og samarbeid.",
-partnerAction:"Jobb med oss →"
-},
-
-fi:{
-menu:"Sisältö",
-profile:"Profiili",
-subscribe:"Tilaus",
-language:"Kieli",
-nav:{
-magazine:"Julkaisu",
-coverStars:"Kansitähdet",
-offers:"Alennukset",
-places:"Lemmikkiystävälliset paikat",
-articles:"Artikkelit",
-photos:"Kuvat",
-fashion:"Muoti",
-wellness:"Terveys",
-community:"Yhteisö",
-contests:"Kilpailut",
-rescue:"Apu",
-marketplace:"Marketplace",
-partners:"Kumppanit"
-},
-latestLabel:"Uusin julkaisu",
-latestTitle:"Miso: PETS & DOGUEn ensimmäinen kansitähti",
-latestText:"Tutustu Edition 01:een osana PETS & DOGUEn digitaalista lifestyle-alustaa.",
-latestAction:"Avaa Edition 01 →",
-offersLabel:"Jäsenedut",
-offersTitle:"Tutustu etuihisi",
-offersText:"Erikoistarjouksia ja etuja PETS & DOGUE Clubin jäsenille.",
-offersAction:"Katso edut →",
-starLabel:"Sinun äänesi",
-starTitle:"Valitse seuraava kansitähti",
-starText:"Tutustu lemmikkeihin ja niiden tarinoihin ja äänestä suosikkiasi.",
-starAction:"Äänestä nyt →",
-worldText:"PETS & DOGUE on digitaalinen lifestyle-alusta, joka kokoaa yhteen tarinat, käytännön oppaat, lemmikkiystävälliset paikat, terveyden, muodin, valokuvauksen, yhteisön, kilpailut, eläinavun, marketplacen, jäsenedut ja hyödylliset palvelut.",
-articlesTitle:"Tarinoita löydettäväksi",
-articlesText:"Alkuperäisiä tarinoita, hyödyllisiä oppaita ja ideoita elämään eläinten kanssa.",
-photosTitle:"Lemmikit linssin läpi",
-fashionTitle:"Tyyliä persoonallisuudella",
-wellnessTitle:"Terveys, hoiva ja arjen hyvinvointi",
-placesTitle:"Löydä paikkoja, joissa lemmikit ovat tervetulleita",
-placesDescription:"Löydä lemmikkiystävällisiä ravintoloita, hotelleja, kahviloita ja muita paikkoja karttoineen ja reitteineen.",
-contestsTitle:"Osallistu. Äänestä. Voita.",
-communityTitle:"Löydä muita eläinten ystäviä läheltäsi",
-rescueTitle:"Auta apua tarvitsevia eläimiä",
-marketTitle:"Löydä, myy ja tutustu",
-clubTitle:"Enemmän jäsenille",
-partnerTitle:"Kasva PETS & DOGUEn kanssa",
-partnerText:"Yhdistä brändisi PETS & DOGUEn digitaaliseen lifestyle-alustaan kumppanuuksien, jäsenetujen, tarinoiden ja yhteistyön kautta.",
-partnerAction:"Tee yhteistyötä kanssamme →"
-},
-
-tr:{
-menu:"İçindekiler",
-profile:"Profil",
-subscribe:"Abonelik",
-language:"Dil",
-nav:{
-magazine:"Edisyon",
-coverStars:"Kapak yıldızları",
-offers:"İndirimler",
-places:"Evcil hayvan dostu mekanlar",
-articles:"Makaleler",
-photos:"Fotoğraflar",
-fashion:"Moda",
-wellness:"Sağlık",
-community:"Topluluk",
-contests:"Yarışmalar",
-rescue:"Yardım",
-marketplace:"Pazar",
-partners:"Ortaklar"
-},
-latestLabel:"Son edisyon",
-latestTitle:"Miso: PETS & DOGUE'un ilk kapak yıldızı",
-latestText:"Edition 01'i PETS & DOGUE dijital lifestyle platformunun bir parçası olarak keşfedin.",
-latestAction:"Edition 01'i aç →",
-offersLabel:"Üye avantajları",
-offersTitle:"Avantajlarınızı keşfedin",
-offersText:"PETS & DOGUE Club üyelerine özel teklifler ve avantajlar.",
-offersAction:"Avantajları gör →",
-starLabel:"Sizin oyunuz",
-starTitle:"Bir sonraki kapak yıldızını seçin",
-starText:"Evcil hayvanlarla tanışın, hikâyelerini keşfedin ve favorinize oy verin.",
-starAction:"Şimdi oy ver →",
-worldText:"PETS & DOGUE; hikâyeleri, pratik rehberleri, pet-friendly mekanları, sağlık, moda, fotoğraf, topluluk, yarışmalar, hayvan yardımı, marketplace, üye avantajları ve faydalı hizmetleri bir araya getiren dijital lifestyle platformudur.",
-articlesTitle:"Keşfedilmeye değer hikâyeler",
-articlesText:"Hayvanlarla yaşam için özgün hikâyeler, faydalı rehberler ve fikirler.",
-photosTitle:"Objektiften evcil hayvanlar",
-fashionTitle:"Kişilik sahibi stil",
-wellnessTitle:"Sağlık, bakım ve günlük yaşam",
-placesTitle:"Evcil hayvanların hoş karşılandığı yerleri bulun",
-placesDescription:"Haritalar ve rotalarla pet-friendly restoranları, otelleri, kafeleri ve diğer mekanları keşfedin.",
-contestsTitle:"Katıl. Oy ver. Kazan.",
-communityTitle:"Yakınınızdaki hayvanseverlerle bağlantı kurun",
-rescueTitle:"İhtiyacı olan hayvanlara yardım edin",
-marketTitle:"Bul, sat ve keşfet",
-clubTitle:"Üyeler için daha fazlası",
-partnerTitle:"PETS & DOGUE ile büyüyün",
-partnerText:"Markanızı ortaklıklar, üye avantajları, hikâyeler ve iş birlikleriyle PETS & DOGUE dijital lifestyle platformuna bağlayın.",
-partnerAction:"Bizimle çalışın →"
-},
-
-ar:{
-menu:"المحتويات",
-profile:"الملف الشخصي",
-subscribe:"الاشتراك",
-language:"اللغة",
-nav:{
-magazine:"الإصدار",
-coverStars:"نجوم الغلاف",
-offers:"الخصومات",
-places:"أماكن صديقة للحيوانات",
-articles:"المقالات",
-photos:"الصور",
-fashion:"الموضة",
-wellness:"الصحة",
-community:"المجتمع",
-contests:"المسابقات",
-rescue:"المساعدة",
-marketplace:"السوق",
-partners:"الشركاء"
-},
-latestLabel:"أحدث إصدار",
-latestTitle:"Miso: أول نجمة غلاف لـ PETS & DOGUE",
-latestText:"اكتشف Edition 01 كجزء من منصة PETS & DOGUE الرقمية لنمط حياة الحيوانات الأليفة.",
-latestAction:"افتح Edition 01 ←",
-offersLabel:"مزايا الأعضاء",
-offersTitle:"اكتشف مزاياك",
-offersText:"عروض ومزايا خاصة لأعضاء PETS & DOGUE Club.",
-offersAction:"عرض المزايا ←",
-starLabel:"صوتك",
-starTitle:"اختر نجم الغلاف القادم",
-starText:"تعرف على الحيوانات وقصصها وصوّت لمفضلتك.",
-starAction:"صوّت الآن ←",
-worldText:"PETS & DOGUE منصة رقمية لنمط حياة الحيوانات الأليفة تجمع القصص والأدلة العملية والأماكن الصديقة للحيوانات والصحة والموضة والتصوير والمجتمع والمسابقات والإنقاذ والسوق ومزايا الأعضاء والخدمات المفيدة.",
-articlesTitle:"قصص تستحق الاكتشاف",
-articlesText:"قصص أصلية وأدلة مفيدة وأفكار للحياة مع الحيوانات.",
-photosTitle:"الحيوانات عبر العدسة",
-fashionTitle:"أناقة بشخصية",
-wellnessTitle:"الصحة والرعاية والرفاه اليومي",
-placesTitle:"اعثر على أماكن ترحب بالحيوانات",
-placesDescription:"اكتشف المطاعم والفنادق والمقاهي والأماكن الصديقة للحيوانات مع الخرائط والمسارات.",
-contestsTitle:"شارك. صوّت. اربح.",
-communityTitle:"تواصل مع محبي الحيوانات بالقرب منك",
-rescueTitle:"ساعد الحيوانات التي تحتاج إلى الدعم",
-marketTitle:"اعثر وبِع واكتشف",
-clubTitle:"المزيد للأعضاء",
-partnerTitle:"انمُ مع PETS & DOGUE",
-partnerText:"اربط علامتك بمنصة PETS & DOGUE الرقمية لنمط حياة الحيوانات الأليفة من خلال الشراكات ومزايا الأعضاء والقصص والتعاون.",
-partnerAction:"اعمل معنا ←"
-},
-
-hi:{
-menu:"सामग्री",
-profile:"प्रोफ़ाइल",
-subscribe:"सदस्यता",
-language:"भाषा",
-nav:{
-magazine:"संस्करण",
-coverStars:"कवर स्टार",
-offers:"छूट",
-places:"Pet-friendly जगहें",
-articles:"लेख",
-photos:"फ़ोटो",
-fashion:"फ़ैशन",
-wellness:"स्वास्थ्य",
-community:"समुदाय",
-contests:"प्रतियोगिताएँ",
-rescue:"मदद",
-marketplace:"मार्केटप्लेस",
-partners:"पार्टनर"
-},
-latestLabel:"नवीनतम संस्करण",
-latestTitle:"Miso: PETS & DOGUE की पहली कवर स्टार",
-latestText:"Edition 01 को PETS & DOGUE डिजिटल लाइफ़स्टाइल प्लेटफ़ॉर्म के हिस्से के रूप में देखें।",
-latestAction:"Edition 01 खोलें →",
-offersLabel:"सदस्य लाभ",
-offersTitle:"अपने लाभ देखें",
-offersText:"PETS & DOGUE Club सदस्यों के लिए विशेष ऑफ़र और लाभ।",
-offersAction:"लाभ देखें →",
-starLabel:"आपका वोट",
-starTitle:"अगली कवर स्टार चुनें",
-starText:"पालतू जानवरों और उनकी कहानियों को जानें और अपने पसंदीदा को वोट दें।",
-starAction:"अभी वोट दें →",
-worldText:"PETS & DOGUE एक डिजिटल लाइफ़स्टाइल प्लेटफ़ॉर्म है जो कहानियों, उपयोगी गाइड, pet-friendly जगहों, स्वास्थ्य, फ़ैशन, फ़ोटोग्राफ़ी, समुदाय, प्रतियोगिताओं, पशु सहायता, मार्केटप्लेस, सदस्य लाभ और उपयोगी सेवाओं को एक साथ लाता है।",
-articlesTitle:"खोजने लायक कहानियाँ",
-articlesText:"जानवरों के साथ जीवन के लिए मौलिक कहानियाँ, उपयोगी गाइड और विचार।",
-photosTitle:"लेंस के माध्यम से पालतू जानवर",
-fashionTitle:"व्यक्तित्व के साथ स्टाइल",
-wellnessTitle:"स्वास्थ्य, देखभाल और रोज़मर्रा की भलाई",
-placesTitle:"ऐसी जगहें खोजें जहाँ पालतू जानवरों का स्वागत है",
-placesDescription:"नक्शों और रास्तों के साथ pet-friendly रेस्तरां, होटल, कैफ़े और दूसरी जगहें खोजें।",
-contestsTitle:"भाग लें. वोट दें. जीतें.",
-communityTitle:"अपने आसपास के पशु प्रेमियों से जुड़ें",
-rescueTitle:"ज़रूरतमंद जानवरों की मदद करें",
-marketTitle:"खोजें, बेचें और जानें",
-clubTitle:"सदस्यों के लिए और अधिक",
-partnerTitle:"PETS & DOGUE के साथ आगे बढ़ें",
-partnerText:"पार्टनरशिप, सदस्य लाभ, कहानियों और सहयोग के माध्यम से अपने ब्रांड को PETS & DOGUE डिजिटल लाइफ़स्टाइल प्लेटफ़ॉर्म से जोड़ें।",
-partnerAction:"हमारे साथ काम करें →"
-}
-
-};
-
-/* =========================================================
-HELPERS
-========================================================= */
-
-function bundle(
-language
-){
-
-return T[
-language
-] ||
-T.en;
-
-}
-
-/* =========================================================
-SEO
-========================================================= */
-
-function getHomeUrl(){
-
-return "https://www.petsanddogue.com/";
-
-}
-
-function updateStructuredData(
-language,
-tr,
-seo
-){
-
-const homeUrl =
-getHomeUrl();
-
-const coverImage =
-"https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png";
-
-const sectionItems =
-NAV_ITEMS.map(
-(item,index)=>({
-
-"@type":"ListItem",
-position:index + 1,
-name:tr.nav[item.key],
-url:new URL(
-item.url,
-homeUrl
-).href
-
-})
-);
-
-const data = {
-
-"@context":"https://schema.org",
-
-"@graph":[
-
-{
-"@type":"WebSite",
-"@id":homeUrl + "#website",
-url:homeUrl,
-name:"PETS & DOGUE",
-alternateName:"PETS AND DOGUE",
-description:seo.description,
-inLanguage:language,
-publisher:{
-"@id":homeUrl + "#organization"
-}
-},
-
-{
-"@type":"Organization",
-"@id":homeUrl + "#organization",
-name:"PETS & DOGUE",
-alternateName:"PETS AND DOGUE",
-url:homeUrl,
-description:"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them.",
-slogan:"One world. Every pet.",
-image:coverImage
-},
-
-{
-"@type":"CollectionPage",
-"@id":homeUrl + "#homepage",
-url:homeUrl,
-name:seo.title,
-description:seo.description,
-inLanguage:language,
-
-isPartOf:{
-"@id":homeUrl + "#website"
-},
-
-publisher:{
-"@id":homeUrl + "#organization"
-},
-
-primaryImageOfPage:{
-"@type":"ImageObject",
-url:coverImage
-},
-
-about:[
-
-{
-"@type":"Thing",
-name:"Pet stories and guides"
-},
-
-{
-"@type":"Thing",
-name:"Pet-friendly places"
-},
-
-{
-"@type":"Thing",
-name:"Pet health"
-},
-
-{
-"@type":"Thing",
-name:"Pet fashion"
-},
-
-{
-"@type":"Thing",
-name:"Pet photography"
-},
-
-{
-"@type":"Thing",
-name:"Pet community"
-},
-
-{
-"@type":"Thing",
-name:"Pet contests"
-},
-
-{
-"@type":"Thing",
-name:"Animal rescue"
-},
-
-{
-"@type":"Thing",
-name:"Pet marketplace"
-},
-
-{
-"@type":"Thing",
-name:"Member benefits"
-},
-
-{
-"@type":"Thing",
-name:"Useful pet services"
-}
-
-],
-
-mainEntity:{
-"@type":"ItemList",
-name:"PETS & DOGUE sections",
-itemListElement:sectionItems
-}
-
-}
-
-]
-
-};
-
-document.getElementById(
-"structuredData"
-).textContent =
-JSON.stringify(
-data
-);
-
-}
-
-function updateSEO(
-language,
-tr
-){
-
-const seo =
-SEO_T[
-language
-] ||
-SEO_T.en;
-
-const homeUrl =
-getHomeUrl();
-
-const coverImage =
-"https://www.petsanddogue.com/file_00000000a9d471fda9b4629589be22a9.png";
-
-document.title =
-seo.title;
-
-document.getElementById(
-"metaDescription"
-).setAttribute(
-"content",
-seo.description
-);
-
-document.getElementById(
-"canonicalLink"
-).setAttribute(
-"href",
-homeUrl
-);
-
-document.getElementById(
-"ogTitle"
-).setAttribute(
-"content",
-seo.title
-);
-
-document.getElementById(
-"ogDescription"
-).setAttribute(
-"content",
-seo.description
-);
-
-document.getElementById(
-"ogUrl"
-).setAttribute(
-"content",
-homeUrl
-);
-
-document.getElementById(
-"ogImage"
-).setAttribute(
-"content",
-coverImage
-);
-
-document.getElementById(
-"ogLocale"
-).setAttribute(
-"content",
-SEO_LOCALES[
-language
-] ||
-SEO_LOCALES.en
-);
-
-document.getElementById(
-"twitterTitle"
-).setAttribute(
-"content",
-seo.title
-);
-
-document.getElementById(
-"twitterDescription"
-).setAttribute(
-"content",
-seo.description
-);
-
-document.getElementById(
-"twitterImage"
-).setAttribute(
-"content",
-coverImage
-);
-
-updateStructuredData(
-language,
-tr,
-seo
-);
-
-}
-
-/* =========================================================
-SIDE MENU DESCRIPTION
-========================================================= */
-
-function getMenuDescription(
-key,
-tr
-){
-
-const descriptions={
-
-magazine:
-tr.latestText,
-
-coverStars:
-tr.starText,
-
-offers:
-tr.offersText,
-
-places:
-tr.placesDescription,
-
-articles:
-tr.articlesText,
-
-photos:
-tr.photosTitle,
-
-fashion:
-tr.fashionTitle,
-
-wellness:
-tr.wellnessTitle,
-
-community:
-tr.communityTitle,
-
-contests:
-tr.contestsTitle,
-
-rescue:
-tr.rescueTitle,
-
-marketplace:
-tr.marketTitle,
-
-partners:
-tr.partnerText
-
-};
-
-return(
-descriptions[
-key
-] ||
-tr.worldText
-);
-
-}
-
-/* =========================================================
-NAVIGATION
-========================================================= */
-
-function renderNavigation(
-language
-){
-
-const tr =
-bundle(
-language
-);
-
-const primaryNav =
-document.getElementById(
-"primaryNav"
-);
-
-const previousScroll =
-primaryNav.scrollLeft;
-
-primaryNav.innerHTML =
-NAV_ITEMS
-.map(
-item =>`
-<a
-href="${item.url}"
-data-nav="${item.key}"
->
-${tr.nav[item.key]}
-</a>
-`
-)
-.join("");
-
-document.getElementById(
-"sideMenuList"
-).innerHTML =
-NAV_ITEMS
-.map(
-item =>`
-<a
-class="menu-item"
-href="${item.url}"
->
-
-<img
-src="${item.image}"
-alt="${tr.nav[item.key]}"
-loading="lazy"
-decoding="async"
->
-
-<div class="menu-item-copy">
-
-<h3>
-${tr.nav[item.key]}
-</h3>
-
-<p>
-${getMenuDescription(
-item.key,
-tr
-)}
-</p>
-
 </div>
 
-</a>
-`
-)
-.join("");
+<div class="pd-overlay" id="drawerOverlay"></div>
 
-document
-.querySelectorAll(
-"[data-nav-key]"
-)
-.forEach(
-element =>{
+<aside class="pd-drawer" id="drawerMenu" aria-hidden="true">
+<div class="pd-drawer-head">
+<h2 class="pd-drawer-title" id="drawerTitle">Contents</h2>
+<button class="pd-close" id="closeDrawerBtn" type="button" aria-label="Close menu">×</button>
+</div>
 
-const key =
-element.dataset.navKey;
+<div class="pd-drawer-scroll">
+<div class="pd-drawer-actions">
+<a class="pd-drawer-action" href="/login.html" id="loginBtn">Log in</a>
+<a class="pd-drawer-action primary" href="/club.html" id="joinBtn">Join club</a>
+</div>
 
-element.textContent =
-tr.nav[key] ||
-key;
+<div class="pd-language-wrap">
+<label class="pd-language-label" for="siteLanguage" id="languageLabel">Language</label>
+<select class="pd-language-select" id="siteLanguage" aria-label="Language selector"></select>
+</div>
 
+<nav class="pd-menu-list" id="drawerCardList" aria-label="Side menu"></nav>
+</div>
+</aside>
+
+<script>
+(function(){
+"use strict";
+
+const LANGUAGE_KEY = "pets_dogue_language";
+
+const SUPPORTED_LANGUAGES = [
+"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk","hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+];
+
+const LANGUAGE_ALIASES = {
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+const LANGUAGE_NAMES = {
+en:"English",
+uk:"Українська",
+ru:"Русский",
+fr:"Français",
+de:"Deutsch",
+es:"Español",
+it:"Italiano",
+pt:"Português",
+nl:"Nederlands",
+pl:"Polski",
+cs:"Čeština",
+sk:"Slovenčina",
+hu:"Magyar",
+ro:"Română",
+bg:"Български",
+el:"Ελληνικά",
+sv:"Svenska",
+da:"Dansk",
+no:"Norsk",
+fi:"Suomi",
+tr:"Türkçe",
+ar:"العربية",
+hi:"हिन्दी"
+};
+
+const COPY = {
+en:{
+pageDescription:"PETS & DOGUE — digital lifestyle platform for pets and the people who love them.",
+drawerTitle:"Contents",
+login:"Log in",
+joinClub:"Join club",
+language:"Language",
+heroBadge:"Summer 2026",
+heroKicker:"PETS & DOGUE",
+heroTitle:"A brighter world for pets and their people",
+heroText:"Original stories, practical help, stylish inspiration, pet-friendly places and a living community — all in one clear visual home.",
+heroPrimary:"Explore cover stars",
+heroSecondary:"Open community",
+worldsKicker:"Main directions",
+worldsTitle:"Everything people use most — first",
+worldsText:"The homepage now starts with the most practical sections, while editorial rubrics stay visible but lighter and cleaner below.",
+editorialKicker:"Editorial",
+editorialTitle:"Visual stories with more photos and less clutter",
+editorialText:"Magazine content stays bold and luxurious, but the layout is clearer, lighter and easier to scan on mobile.",
+liveKicker:"Live now",
+liveTitle:"Useful sections that move every day",
+liveText:"Fresh updates, real places, active listings and community activity — all reachable without wasting screen space.",
+clubKicker:"Club & benefits",
+clubTitle:"Join PETS & DOGUE Club",
+clubText:"Member discounts, contests, marketplace visibility, cover-star moments and pet-friendly discoveries in one bright subscription space.",
+clubButton:"Join the club",
+seeAll:"See all",
+footerLine1:"Digital lifestyle platform",
+footerLine2:"One world. Every pet."
+},
+ru:{
+pageDescription:"PETS & DOGUE — цифровая lifestyle-платформа для питомцев и людей, которые их любят.",
+drawerTitle:"Содержание",
+login:"Войти",
+joinClub:"Вступить в клуб",
+language:"Язык",
+heroBadge:"Лето 2026",
+heroKicker:"PETS & DOGUE",
+heroTitle:"Новый цифровой мир для людей, которые любят животных",
+heroText:"Оригинальные истории, практическая помощь, стильное вдохновение, pet-friendly места и живое сообщество — в одном понятном визуальном пространстве.",
+heroPrimary:"Открыть звёзды обложки",
+heroSecondary:"Открыть сообщество",
+worldsKicker:"Главные направления",
+worldsTitle:"Сначала — то, чем пользуются чаще всего",
+worldsText:"Главная страница начинается с самых нужных разделов, а редакционные рубрики остаются заметными, но становятся легче и чище.",
+editorialKicker:"Редакция",
+editorialTitle:"Больше фото, меньше визуального шума",
+editorialText:"Контент остаётся ярким и люксовым, но главная страница становится удобнее, понятнее и быстрее для просмотра на телефоне.",
+liveKicker:"Сейчас актуально",
+liveTitle:"Полезные разделы, которые живут каждый день",
+liveText:"Свежие обновления, реальные места, активные объявления и жизнь сообщества — всё под рукой и без лишней нагрузки на экран.",
+clubKicker:"Клуб и преимущества",
+clubTitle:"Присоединяйтесь к PETS & DOGUE Club",
+clubText:"Скидки партнёров, конкурсы, лучшая видимость в маркетплейсе, шанс попасть в звёзды обложки и удобный доступ к pet-friendly миру.",
+clubButton:"Вступить в клуб",
+seeAll:"Смотреть все",
+footerLine1:"Digital lifestyle platform",
+footerLine2:"One world. Every pet."
+},
+uk:{
+pageDescription:"PETS & DOGUE — цифрова lifestyle-платформа для улюбленців і людей, які їх люблять.",
+drawerTitle:"Зміст",
+login:"Увійти",
+joinClub:"Вступити до клубу",
+language:"Мова",
+heroBadge:"Літо 2026",
+heroKicker:"PETS & DOGUE",
+heroTitle:"Новий цифровий світ для людей, які люблять тварин",
+heroText:"Оригінальні історії, практична допомога, стильне натхнення, pet-friendly місця та жива спільнота — в одному зрозумілому візуальному просторі.",
+heroPrimary:"Відкрити зірок обкладинки",
+heroSecondary:"Відкрити спільноту",
+worldsKicker:"Головні напрямки",
+worldsTitle:"Спочатку — те, чим користуються найчастіше",
+worldsText:"Головна сторінка починається з найпотрібніших розділів, а редакційні рубрики залишаються помітними, але стають легшими та чистішими.",
+editorialKicker:"Редакція",
+editorialTitle:"Більше фото, менше візуального шуму",
+editorialText:"Контент залишається яскравим і люксовим, але головна сторінка стає зручнішою, зрозумілішою та швидшою для перегляду на телефоні.",
+liveKicker:"Актуально зараз",
+liveTitle:"Корисні розділи, які живуть щодня",
+liveText:"Свіжі оновлення, реальні місця, активні оголошення та життя спільноти — усе під рукою без зайвого навантаження на екран.",
+clubKicker:"Клуб і переваги",
+clubTitle:"Приєднуйтеся до PETS & DOGUE Club",
+clubText:"Знижки партнерів, конкурси, краща видимість у маркетплейсі, шанс потрапити до зірок обкладинки та зручний доступ до pet-friendly світу.",
+clubButton:"Вступити до клубу",
+seeAll:"Дивитися все",
+footerLine1:"Digital lifestyle platform",
+footerLine2:"One world. Every pet."
 }
-);
+};
 
-document
-.querySelectorAll(
-"[data-footer-key]"
-)
-.forEach(
-element =>{
+const LABELS = {
+issue:{en:"Issue",ru:"Выпуск",uk:"Випуск"},
+coverStars:{en:"Cover stars",ru:"Звёзды обложки",uk:"Зірки обкладинки"},
+discounts:{en:"Discounts",ru:"Скидки",uk:"Знижки"},
+petFriendly:{en:"Pet-friendly places",ru:"Питомцам рады",uk:"Тут раді улюбленцям"},
+marketplace:{en:"Marketplace",ru:"Маркетплейс",uk:"Маркетплейс"},
+fashion:{en:"Fashion",ru:"Мода",uk:"Мода"},
+health:{en:"Health",ru:"Здоровье",uk:"Здоров’я"},
+articles:{en:"Articles",ru:"Статьи",uk:"Статті"},
+photos:{en:"Photos",ru:"Фото",uk:"Фото"},
+community:{en:"Community",ru:"Сообщество",uk:"Спільнота"},
+contests:{en:"Contests",ru:"Конкурсы",uk:"Конкурси"},
+help:{en:"Help",ru:"Помощь",uk:"Допомога"},
+partners:{en:"Partners",ru:"Партнёры",uk:"Партнери"},
+club:{en:"Club",ru:"Club",uk:"Club"}
+};
 
-const key =
-element.dataset.footerKey;
-
-element.textContent =
-tr.nav[key] ||
-key;
-
+const DESCRIPTIONS = {
+issue:{
+en:"Read the latest PETS & DOGUE issue.",
+ru:"Читайте последний выпуск PETS & DOGUE.",
+uk:"Читайте останній випуск PETS & DOGUE."
+},
+coverStars:{
+en:"Meet the stars and enter your pet.",
+ru:"Знакомьтесь со звёздами и заявляйте питомца.",
+uk:"Знайомтеся із зірками та подавайте свого улюбленця."
+},
+discounts:{
+en:"Exclusive offers and Club benefits.",
+ru:"Эксклюзивные предложения и преимущества Club.",
+uk:"Ексклюзивні пропозиції та переваги Club."
+},
+petFriendly:{
+en:"Places where pets are always welcome.",
+ru:"Места, где вашим питомцам всегда рады.",
+uk:"Місця, де вашим улюбленцям завжди раді."
+},
+marketplace:{
+en:"Buy, sell and find services.",
+ru:"Покупайте, продавайте и находите услуги.",
+uk:"Купуйте, продавайте та знаходьте послуги."
+},
+fashion:{
+en:"Style, accessories and fashion for pets.",
+ru:"Стиль, аксессуары и мода для питомцев.",
+uk:"Стиль, аксесуари та мода для улюбленців."
+},
+health:{
+en:"Care, wellbeing and practical guidance.",
+ru:"Забота, здоровье и полезные рекомендации.",
+uk:"Догляд, здоров’я та корисні поради."
+},
+articles:{
+en:"Original stories, guides and interviews.",
+ru:"Оригинальные истории, гиды и интервью.",
+uk:"Оригінальні історії, гіди та інтерв’ю."
+},
+photos:{
+en:"Pet photography and visual stories.",
+ru:"Фотографии питомцев и визуальные истории.",
+uk:"Фото улюбленців та візуальні історії."
+},
+community:{
+en:"Nearby owners, updates and shared life.",
+ru:"Владельцы рядом, события и общение.",
+uk:"Власники поруч, події та спілкування."
+},
+contests:{
+en:"Competitions, votes and monthly prizes.",
+ru:"Конкурсы, голосование и ежемесячные призы.",
+uk:"Конкурси, голосування та щомісячні призи."
+},
+help:{
+en:"Support for pets that need care and love.",
+ru:"Помощь животным, которым нужны забота и любовь.",
+uk:"Допомога тваринам, яким потрібні турбота та любов."
+},
+partners:{
+en:"Partner programmes and collaborations.",
+ru:"Партнёрские программы и сотрудничество.",
+uk:"Партнерські програми та співпраця."
+},
+club:{
+en:"Members, benefits and subscriptions.",
+ru:"Подписка, преимущества и привилегии.",
+uk:"Підписка, переваги та привілеї."
 }
-);
+};
 
-requestAnimationFrame(
-()=>{
-
-primaryNav.scrollLeft =
-previousScroll;
-
+const ITEMS = [
+{
+key:"issue",
+href:"/index.html",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"coverStars",
+href:"/cover-stars.html",
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"discounts",
+href:"/discounts.html",
+image:"https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"petFriendly",
+href:"/pet-friendly-places.html",
+image:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"marketplace",
+href:"/marketplace.html",
+image:"https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"fashion",
+href:"/fashion.html",
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"health",
+href:"/health.html",
+image:"https://images.unsplash.com/photo-1511044568932-338cba0ad803?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"articles",
+href:"/articles.html",
+image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"photos",
+href:"/photos.html",
+image:"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"community",
+href:"/community.html",
+image:"https://images.unsplash.com/photo-1548681528-6a5c45b66b42?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"contests",
+href:"/contests.html",
+image:"https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"help",
+href:"/help.html",
+image:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80"
+},
+{
+key:"partners",
+href:"/partners.html",
+image:"https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=900&q=80"
 }
-);
-
-}
-
-/* =========================================================
-LANGUAGE
-========================================================= */
-
-function normalizeLanguage(
-language
-){
-
-language =
-String(
-language ||
-"en"
-)
-.toLowerCase()
-.trim();
-
-if(
-language.includes("-")
-){
-
-language =
-language.split("-")[0];
-
-}
-
-if(
-language.includes("_")
-){
-
-language =
-language.split("_")[0];
-
-}
-
-if(
-language === "ua"
-){
-
-language = "uk";
-
-}
-
-if(
-language === "cz"
-){
-
-language = "cs";
-
-}
-
-if(
-language === "gr"
-){
-
-language = "el";
-
-}
-
-if(
-language === "se"
-){
-
-language = "sv";
-
-}
-
-if(
-language === "dk"
-){
-
-language = "da";
-
-}
-
-return T[
-language
-]
-? language
-: "en";
-
-}
-
-function applyLanguage(
-language
-){
-
-language =
-normalizeLanguage(
-language
-);
-
-const tr =
-bundle(
-language
-);
-
-localStorage.setItem(
-LANGUAGE_KEY,
-language
-);
-
-document.documentElement.lang =
-language;
-
-document.documentElement.dir =
-language === "ar"
-? "rtl"
-: "ltr";
-
-document.getElementById(
-"languageSelect"
-).value =
-language;
-
-document.getElementById(
-"menuTitle"
-).textContent =
-tr.menu;
-
-document.getElementById(
-"menuProfile"
-).textContent =
-tr.profile;
-
-document.getElementById(
-"menuSubscribe"
-).textContent =
-tr.subscribe;
-
-document.getElementById(
-"languageLabel"
-).textContent =
-tr.language;
-
-document.getElementById(
-"latestLabel"
-).textContent =
-tr.latestLabel;
-
-document.getElementById(
-"latestTitle"
-).textContent =
-tr.latestTitle;
-
-document.getElementById(
-"latestText"
-).textContent =
-tr.latestText;
-
-document.getElementById(
-"latestAction"
-).textContent =
-tr.latestAction;
-
-document.getElementById(
-"offersLabel"
-).textContent =
-tr.offersLabel;
-
-document.getElementById(
-"offersTitle"
-).textContent =
-tr.offersTitle;
-
-document.getElementById(
-"offersText"
-).textContent =
-tr.offersText;
-
-document.getElementById(
-"offersAction"
-).textContent =
-tr.offersAction;
-
-document.getElementById(
-"starLabel"
-).textContent =
-tr.starLabel;
-
-document.getElementById(
-"starTitle"
-).textContent =
-tr.starTitle;
-
-document.getElementById(
-"starText"
-).textContent =
-tr.starText;
-
-document.getElementById(
-"starAction"
-).textContent =
-tr.starAction;
-
-document.getElementById(
-"worldText"
-).textContent =
-tr.worldText;
-
-document.getElementById(
-"articlesFeatureTitle"
-).textContent =
-tr.articlesTitle;
-
-document.getElementById(
-"articlesFeatureText"
-).textContent =
-tr.articlesText;
-
-document.getElementById(
-"photosFeatureTitle"
-).textContent =
-tr.photosTitle;
-
-document.getElementById(
-"fashionFeatureTitle"
-).textContent =
-tr.fashionTitle;
-
-document.getElementById(
-"wellnessFeatureTitle"
-).textContent =
-tr.wellnessTitle;
-
-document.getElementById(
-"placesFeatureTitle"
-).textContent =
-tr.placesTitle;
-
-document.getElementById(
-"contestsFeatureTitle"
-).textContent =
-tr.contestsTitle;
-
-document.getElementById(
-"communityFeatureTitle"
-).textContent =
-tr.communityTitle;
-
-document.getElementById(
-"rescueFeatureTitle"
-).textContent =
-tr.rescueTitle;
-
-document.getElementById(
-"marketFeatureTitle"
-).textContent =
-tr.marketTitle;
-
-document.getElementById(
-"clubFeatureTitle"
-).textContent =
-tr.clubTitle;
-
-document.getElementById(
-"partnerTitle"
-).textContent =
-tr.partnerTitle;
-
-document.getElementById(
-"partnerText"
-).textContent =
-tr.partnerText;
-
-document.getElementById(
-"partnerAction"
-).textContent =
-tr.partnerAction;
-
-renderNavigation(
-language
-);
-
-updateSEO(
-language,
-tr
-);
-
-}
-
-/* =========================================================
-MENU
-========================================================= */
-
-function openMenu(){
-
-document.getElementById(
-"sideMenu"
-)
-.classList
-.add(
-"open"
-);
-
-document.getElementById(
-"sideMenu"
-)
-.setAttribute(
-"aria-hidden",
-"false"
-);
-
-document.getElementById(
-"menuOverlay"
-)
-.classList
-.add(
-"show"
-);
-
-document.body
-.classList
-.add(
-"menu-open"
-);
-
+];
+
+const PRIMARY_KEYS = ["petFriendly","marketplace","community","help"];
+const SECONDARY_KEYS = ["issue","coverStars","discounts","articles","photos","fashion","health","contests","partners"];
+const HERO_MINI_KEYS = ["petFriendly","marketplace","help","community"];
+const EDITORIAL_KEYS = ["issue","coverStars","articles","photos","fashion"];
+const LIVE_KEYS = ["petFriendly","marketplace","community"];
+const FOOTER_KEYS = ["issue","coverStars","discounts","petFriendly","marketplace","fashion","health","articles","photos","community","contests","help","partners","club"];
+
+function normalizeLanguage(value){
+let code = String(value || "en").toLowerCase().trim();
+if(code.includes("-")) code = code.split("-")[0];
+if(code.includes("_")) code = code.split("_")[0];
+code = LANGUAGE_ALIASES[code] || code;
+return SUPPORTED_LANGUAGES.includes(code) ? code : "en";
 }
 
-function closeMenu(){
-
-document.getElementById(
-"sideMenu"
-)
-.classList
-.remove(
-"open"
-);
-
-document.getElementById(
-"sideMenu"
-)
-.setAttribute(
-"aria-hidden",
-"true"
-);
-
-document.getElementById(
-"menuOverlay"
-)
-.classList
-.remove(
-"show"
-);
-
-document.body
-.classList
-.remove(
-"menu-open"
-);
-
+function getCurrentLanguage(){
+try{
+const saved = localStorage.getItem(LANGUAGE_KEY);
+if(saved) return normalizeLanguage(saved);
+}catch(error){}
+if(document.documentElement.lang){
+return normalizeLanguage(document.documentElement.lang);
+}
+return "en";
 }
 
-document.getElementById(
-"menuButton"
-)
-.addEventListener(
-"click",
-openMenu
-);
-
-document.getElementById(
-"closeMenuButton"
-)
-.addEventListener(
-"click",
-closeMenu
-);
-
-document.getElementById(
-"menuOverlay"
-)
-.addEventListener(
-"click",
-closeMenu
-);
-
-document.getElementById(
-"languageSelect"
-)
-.addEventListener(
-"change",
-event =>{
-
-applyLanguage(
-event.target.value
-);
-
-}
-);
-
-document.addEventListener(
-"keydown",
-event =>{
-
-if(
-event.key === "Escape"
-){
-
-closeMenu();
-
+function getCopy(language){
+return COPY[language] || COPY.en;
 }
 
-}
-);
-
-/* =========================================================
-SYNC LANGUAGE
-========================================================= */
-
-window.addEventListener(
-"storage",
-event =>{
-
-if(
-event.key !==
-LANGUAGE_KEY
-){
-
-return;
-
+function getLabel(key, language){
+const group = LABELS[key] || {};
+return group[language] || group.en || key;
 }
 
-applyLanguage(
-event.newValue ||
-"en"
-);
-
+function getDescription(key, language){
+const group = DESCRIPTIONS[key] || {};
+return group[language] || group.en || "";
 }
-);
 
-/* =========================================================
-START
-========================================================= */
+function itemByKey(key){
+return ITEMS.find(function(item){ return item.key === key; });
+}
 
-const savedLanguage =
-localStorage.getItem(
-LANGUAGE_KEY
-) ||
-"en";
+function setText(id, value){
+const element = document.getElementById(id);
+if(element) element.textContent = value;
+}
 
-applyLanguage(
-savedLanguage
-);
+function setLinkText(id, value){
+const element = document.getElementById(id);
+if(element) element.textContent = value;
+}
 
+function renderPriorityGrid(language){
+const grid = document.getElementById("priorityGrid");
+if(!grid) return;
+
+grid.innerHTML = "";
+
+PRIMARY_KEYS.forEach(function(key){
+const item = itemByKey(key);
+if(!item) return;
+
+const link = document.createElement("a");
+link.href = item.href;
+link.className = "pd-priority-link";
+link.style.setProperty("--bg-image",'url("' + item.image + '")');
+
+link.innerHTML = [
+'<div class="pd-priority-content">',
+'<div class="pd-priority-title">' + escapeHtml(getLabel(key,language)) + '</div>',
+'<div class="pd-priority-sub">' + escapeHtml(getDescription(key,language)) + '</div>',
+'</div>'
+].join("");
+
+grid.appendChild(link);
+});
+}
+
+function renderSecondaryRail(language){
+const rail = document.getElementById("secondaryRail");
+if(!rail) return;
+
+rail.innerHTML = "";
+
+SECONDARY_KEYS.forEach(function(key){
+const item = itemByKey(key);
+if(!item) return;
+
+const link = document.createElement("a");
+link.href = item.href;
+link.className = "pd-rail-card";
+link.style.setProperty("--bg-image",'url("' + item.image + '")');
+link.innerHTML = [
+'<div class="pd-rail-inner">',
+'<div class="pd-rail-kicker">PETS &amp; DOGUE</div>',
+'<div class="pd-rail-title">' + escapeHtml(getLabel(key,language)) + '</div>',
+'</div>'
+].join("");
+rail.appendChild(link);
+});
+}
+
+function renderHeroMiniGrid(language){
+const shell = document.getElementById("heroMiniGrid");
+if(!shell) return;
+
+shell.innerHTML = "";
+
+HERO_MINI_KEYS.forEach(function(key){
+const item = itemByKey(key);
+if(!item) return;
+
+const card = document.createElement("a");
+card.href = item.href;
+card.className = "pd-hero-mini";
+card.style.setProperty("--bg-image",'url("' + item.image + '")');
+card.innerHTML = [
+'<div class="pd-hero-mini-content">',
+'<div class="pd-hero-mini-label">PETS &amp; DOGUE</div>',
+'<div class="pd-hero-mini-title">' + escapeHtml(getLabel(key,language)) + '</div>',
+'<div class="pd-hero-mini-text">' + escapeHtml(getDescription(key,language)) + '</div>',
+'</div>'
+].join("");
+shell.appendChild(card);
+});
+}
+
+function createBigCard(item,key,language,primaryTag){
+const card = document.createElement("a");
+card.href = item.href;
+card.className = "pd-card-link primary-card";
+card.style.setProperty("--bg-image",'url("' + item.image + '")');
+card.innerHTML = [
+'<div class="pd-card-content">',
+'<div class="pd-card-tag">' + escapeHtml(primaryTag) + '</div>',
+'<div>',
+'<h3 class="pd-card-title">' + escapeHtml(getLabel(key,language)) + '</h3>',
+'<p class="pd-card-text">' + escapeHtml(getDescription(key,language)) + '</p>',
+'</div>',
+'<span class="pd-card-arrow" aria-hidden="true">↗</span>',
+'</div>'
+].join("");
+return card;
+}
+
+function createEditorialCard(item,key,language){
+const card = document.createElement("a");
+card.href = item.href;
+card.className = "pd-card-link";
+card.style.setProperty("--bg-image",'url("' + item.image + '")');
+card.innerHTML = [
+'<div class="pd-card-content">',
+'<div class="pd-card-tag">PETS &amp; DOGUE</div>',
+'<div>',
+'<h3 class="pd-card-title">' + escapeHtml(getLabel(key,language)) + '</h3>',
+'<p class="pd-card-text">' + escapeHtml(getDescription(key,language)) + '</p>',
+'</div>',
+'<span class="pd-card-arrow" aria-hidden="true">↗</span>',
+'</div>'
+].join("");
+return card;
+}
+
+function renderPrimaryCards(language){
+const shell = document.getElementById("primaryCards");
+if(!shell) return;
+
+shell.innerHTML = "";
+
+PRIMARY_KEYS.forEach(function(key){
+const item = itemByKey(key);
+if(!item) return;
+shell.appendChild(createBigCard(item,key,language,getCopy(language).worldsKicker));
+});
+}
+
+function renderEditorialCards(language){
+const shell = document.getElementById("editorialCards");
+if(!shell) return;
+
+shell.innerHTML = "";
+
+EDITORIAL_KEYS.forEach(function(key){
+const item = itemByKey(key);
+if(!item) return;
+shell.appendChild(createEditorialCard(item,key,language));
+});
+}
+
+function renderLiveCards(language){
+const shell = document.getElementById("liveCards");
+if(!shell) return;
+
+shell.innerHTML = "";
+
+LIVE_KEYS.forEach(function(key){
+const item = itemByKey(key);
+if(!item) return;
+shell.appendChild(createEditorialCard(item,key,language));
+});
+}
+
+function renderFooterLinks(language){
+const shell = document.getElementById("footerLinks");
+if(!shell) return;
+
+shell.innerHTML = "";
+
+FOOTER_KEYS.forEach(function(key){
+const link = document.createElement("a");
+link.href = key === "club" ? "/club.html" : (itemByKey(key) ? itemByKey(key).href : "#");
+link.textContent = getLabel(key,language);
+shell.appendChild(link);
+});
+}
+
+function renderDrawerCards(language){
+const shell = document.getElementById("drawerCardList");
+if(!shell) return;
+
+shell.innerHTML = "";
+
+ITEMS.forEach(function(item){
+const active = item.key === "coverStars";
+const link = document.createElement("a");
+link.href = item.href;
+link.className = "pd-menu-card" + (active ? " active" : "");
+link.innerHTML = [
+'<div class="pd-menu-thumb" style="--thumb-image:url(\'' + item.image + '\');background-image:url(\'' + item.image + '\')"></div>',
+'<div class="pd-menu-copy">',
+'<div class="pd-menu-title">' + escapeHtml(getLabel(item.key,language)) + '</div>',
+'<div class="pd-menu-desc">' + escapeHtml(getDescription(item.key,language)) + '</div>',
+'</div>'
+].join("");
+shell.appendChild(link);
+});
+}
+
+function populateLanguageSelect(currentLanguage){
+const select = document.getElementById("siteLanguage");
+if(!select) return;
+
+select.innerHTML = "";
+SUPPORTED_LANGUAGES.forEach(function(code){
+const option = document.createElement("option");
+option.value = code;
+option.textContent = LANGUAGE_NAMES[code] || code;
+if(code === currentLanguage){
+option.selected = true;
+}
+select.appendChild(option);
+});
+}
+
+function applyLanguage(language){
+const lang = normalizeLanguage(language);
+const copy = getCopy(lang);
+
+document.documentElement.lang = lang;
+document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+try{
+localStorage.setItem(LANGUAGE_KEY, lang);
+}catch(error){}
+
+document.title = "PETS & DOGUE";
+const meta = document.getElementById("pageDescription");
+if(meta){
+meta.setAttribute("content", copy.pageDescription);
+}
+
+setText("drawerTitle", copy.drawerTitle);
+setText("loginBtn", copy.login);
+setText("joinBtn", copy.joinClub);
+setText("languageLabel", copy.language);
+
+setText("heroBadge", copy.heroBadge);
+setText("heroKicker", copy.heroKicker);
+setText("heroTitle", copy.heroTitle);
+setText("heroText", copy.heroText);
+setLinkText("heroPrimaryLink", copy.heroPrimary);
+setLinkText("heroSecondaryLink", copy.heroSecondary);
+
+setText("worldsKicker", copy.worldsKicker);
+setText("worldsTitle", copy.worldsTitle);
+setText("worldsText", copy.worldsText);
+setLinkText("worldsLink", copy.seeAll);
+
+setText("editorialKicker", copy.editorialKicker);
+setText("editorialTitle", copy.editorialTitle);
+setText("editorialText", copy.editorialText);
+setLinkText("editorialLink", copy.seeAll);
+
+setText("liveKicker", copy.liveKicker);
+setText("liveTitle", copy.liveTitle);
+setText("liveText", copy.liveText);
+setLinkText("liveLink", copy.seeAll);
+
+setText("clubKicker", copy.clubKicker);
+setText("clubTitle", copy.clubTitle);
+setText("clubText", copy.clubText);
+setLinkText("clubButton", copy.clubButton);
+
+setText("footerLine1", copy.footerLine1);
+setText("footerLine2", copy.footerLine2);
+
+populateLanguageSelect(lang);
+renderPriorityGrid(lang);
+renderSecondaryRail(lang);
+renderHeroMiniGrid(lang);
+renderPrimaryCards(lang);
+renderEditorialCards(lang);
+renderLiveCards(lang);
+renderFooterLinks(lang);
+renderDrawerCards(lang);
+}
+
+function openDrawer(){
+document.body.classList.add("drawer-open");
+document.getElementById("drawerMenu").classList.add("open");
+document.getElementById("drawerOverlay").classList.add("open");
+document.getElementById("drawerMenu").setAttribute("aria-hidden","false");
+}
+
+function closeDrawer(){
+document.body.classList.remove("drawer-open");
+document.getElementById("drawerMenu").classList.remove("open");
+document.getElementById("drawerOverlay").classList.remove("open");
+document.getElementById("drawerMenu").setAttribute("aria-hidden","true");
+}
+
+function escapeHtml(value){
+return String(value || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#39;");
+}
+
+function bindEvents(){
+const openBtn = document.getElementById("openDrawerBtn");
+const closeBtn = document.getElementById("closeDrawerBtn");
+const overlay = document.getElementById("drawerOverlay");
+const select = document.getElementById("siteLanguage");
+
+if(openBtn){
+openBtn.addEventListener("click", openDrawer);
+}
+if(closeBtn){
+closeBtn.addEventListener("click", closeDrawer);
+}
+if(overlay){
+overlay.addEventListener("click", closeDrawer);
+}
+if(select){
+select.addEventListener("change", function(){
+const value = normalizeLanguage(select.value);
+applyLanguage(value);
+window.dispatchEvent(new CustomEvent("petsdogue:languagechange",{detail:{language:value}}));
+});
+}
+
+document.addEventListener("keydown", function(event){
+if(event.key === "Escape"){
+closeDrawer();
+}
+});
+
+window.addEventListener("storage", function(event){
+if(event.key === LANGUAGE_KEY){
+applyLanguage(getCurrentLanguage());
+}
+});
+}
+
+function init(){
+bindEvents();
+applyLanguage(getCurrentLanguage());
+}
+
+if(document.readyState === "loading"){
+document.addEventListener("DOMContentLoaded", init, {once:true});
+}else{
+init();
+}
+})();
 </script>
-<script src="pd-accessibility.js"></script>
+
+<script src="/pd-accessibility.js?v=20260910"></script>
+
 </body>
 </html>
