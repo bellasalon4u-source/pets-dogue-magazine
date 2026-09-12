@@ -1,23 +1,18 @@
 "use strict";
 
 /* =========================================================
-PETS & DOGUE
-MASTER GLOBAL SHELL
+PETS & DOGUE — MASTER GLOBAL SHELL
 
-PURPOSE
-- ONE INTERNAL-PAGE HEADER
-- ONE SIDE MENU
-- ONE LANGUAGE STATE
-- ONE ACTIVE RUBRIC STATE
-- PROFILE ACCESS NEXT TO HOME
-
-IMPORTANT
-- PAGE CONTENT AND PAGE-SPECIFIC FUNCTIONS ARE NOT REBUILT HERE.
-- LANGUAGE REMAINS AVAILABLE INSIDE THE SIDE MENU.
-- THE INTERNAL HEADER CONTAINS ONLY:
-  MENU / BRAND / HOME / PROFILE.
-- PROFILE OPENS SIGN IN + JOIN CLUB.
-- ARABIC USES RTL.
+GLOBAL STANDARD
+- Same header on every connected page.
+- Header row 1: Pet-Friendly / Discounts / Help / Community / Marketplace.
+- Header row 2: Partners / Edition / Cover / Contests / Articles / Photos / Fashion / Health.
+- Partners stays first in row 2 and is always scarlet.
+- Header rows never horizontally scroll or change order.
+- Full names stay available in the side menu.
+- Scroll down: header hides. Scroll up: header returns.
+- Language persists across pages; Arabic uses RTL.
+- Existing page content and page-specific accessibility/TTS are not removed.
 ========================================================= */
 
 (function(){
@@ -212,990 +207,134 @@ const HEADER_BOTTOM_ITEMS=[
   "health"
 ];
 
+const HEADER_SHORT_INDEX={
+  petFriendly:0,
+  discounts:1,
+  animalHelp:2,
+  community:3,
+  marketplace:4,
+  partners:5,
+  magazine:6,
+  coverStars:7,
+  contests:8,
+  articles:9,
+  photos:10,
+  fashion:11,
+  health:12
+};
+
 const HEADER_ICONS={
   petFriendly:"🐾",
   discounts:"%",
   animalHelp:"♥",
-  community:"👥",
+  community:"●●",
   marketplace:"🛍",
   partners:"◆",
   magazine:"▤",
   coverStars:"★",
-  contests:"🏆",
+  contests:"♛",
   articles:"Aa",
   photos:"▣",
   fashion:"✦",
   health:"+"
 };
 
-const TRAVEL_TEXT={
-  en:{name:"Travel",desc:"Pet-friendly travel, routes, stays and useful trip planning."},
-  uk:{name:"Подорожі",desc:"Подорожі з тваринами, маршрути, проживання та корисне планування."},
-  ru:{name:"Путешествия",desc:"Путешествия с питомцами, маршруты, проживание и полезное планирование."},
-  fr:{name:"Voyage",desc:"Voyages avec animaux, itinéraires, hébergements et conseils pratiques."},
-  de:{name:"Reisen",desc:"Tierfreundliche Reisen, Routen, Unterkünfte und praktische Planung."},
-  es:{name:"Viajes",desc:"Viajes con mascotas, rutas, alojamientos y planificación útil."},
-  it:{name:"Viaggi",desc:"Viaggi con animali, percorsi, soggiorni e pianificazione utile."},
-  pt:{name:"Viagens",desc:"Viagens com animais, rotas, alojamentos e planeamento útil."},
-  nl:{name:"Reizen",desc:"Reizen met huisdieren, routes, verblijven en handige reisplanning."},
-  pl:{name:"Podróże",desc:"Podróże ze zwierzętami, trasy, noclegi i przydatne planowanie."},
-  cs:{name:"Cestování",desc:"Cestování se zvířaty, trasy, ubytování a užitečné plánování."},
-  sk:{name:"Cestovanie",desc:"Cestovanie so zvieratami, trasy, ubytovanie a užitočné plánovanie."},
-  hu:{name:"Utazás",desc:"Kisállatbarát utazás, útvonalak, szállások és hasznos tervezés."},
-  ro:{name:"Călătorii",desc:"Călătorii cu animale, rute, cazare și planificare utilă."},
-  bg:{name:"Пътуване",desc:"Пътувания с домашни любимци, маршрути, места за престой и полезно планиране."},
-  el:{name:"Ταξίδια",desc:"Ταξίδια με κατοικίδια, διαδρομές, διαμονή και χρήσιμος σχεδιασμός."},
-  sv:{name:"Resor",desc:"Resor med husdjur, rutter, boenden och praktisk planering."},
-  da:{name:"Rejser",desc:"Rejser med kæledyr, ruter, ophold og praktisk planlægning."},
-  no:{name:"Reiser",desc:"Reiser med kjæledyr, ruter, opphold og nyttig planlegging."},
-  fi:{name:"Matkailu",desc:"Lemmikkiystävällinen matkailu, reitit, majoitukset ja hyödyllinen suunnittelu."},
-  tr:{name:"Seyahat",desc:"Evcil hayvanlarla seyahat, rotalar, konaklama ve yararlı planlama."},
-  ar:{name:"السفر",desc:"السفر مع الحيوانات الأليفة والمسارات والإقامة والتخطيط المفيد."},
-  hi:{name:"यात्रा",desc:"पालतू जानवरों के साथ यात्रा, मार्ग, ठहरने की जगहें और उपयोगी योजना।"}
+const HEADER_SHORT={
+  "en":["Pet-Friendly","Discounts","Help","Community","Market","Partners","Edition","Cover","Contests","Articles","Photos","Fashion","Health"],
+  "uk":["Pet-Friendly","Знижки","Допомога","Спільнота","Маркет","Партнери","Видання","Обкладинка","Конкурси","Статті","Фото","Мода","Здоров’я"],
+  "ru":["Pet-Friendly","Скидки","Помощь","Сообщество","Маркет","Партнёры","Издание","Обложка","Конкурсы","Статьи","Фото","Мода","Здоровье"],
+  "fr":["Pet-Friendly","Réductions","Aide","Communauté","Marché","Partenaires","Édition","Couverture","Concours","Articles","Photos","Mode","Santé"],
+  "de":["Tierfreundlich","Rabatte","Hilfe","Community","Markt","Partner","Ausgabe","Cover","Wettbewerbe","Artikel","Fotos","Mode","Gesundheit"],
+  "es":["Pet-Friendly","Descuentos","Ayuda","Comunidad","Mercado","Socios","Edición","Portada","Concursos","Artículos","Fotos","Moda","Salud"],
+  "it":["Pet-Friendly","Sconti","Aiuto","Community","Mercato","Partner","Edizione","Copertina","Concorsi","Articoli","Foto","Moda","Salute"],
+  "pt":["Pet-Friendly","Descontos","Ajuda","Comunidade","Mercado","Parceiros","Edição","Capa","Concursos","Artigos","Fotos","Moda","Saúde"],
+  "nl":["Pet-Friendly","Kortingen","Hulp","Community","Markt","Partners","Editie","Cover","Wedstrijden","Artikelen","Foto’s","Mode","Gezondheid"],
+  "pl":["Pet-Friendly","Zniżki","Pomoc","Społeczność","Market","Partnerzy","Wydanie","Okładka","Konkursy","Artykuły","Zdjęcia","Moda","Zdrowie"],
+  "cs":["Pet-Friendly","Slevy","Pomoc","Komunita","Trh","Partneři","Vydání","Obálka","Soutěže","Články","Fotky","Móda","Zdraví"],
+  "sk":["Pet-Friendly","Zľavy","Pomoc","Komunita","Trh","Partneri","Vydanie","Obálka","Súťaže","Články","Fotky","Móda","Zdravie"],
+  "hu":["Állatbarát","Kedvezmény","Segítség","Közösség","Piac","Partnerek","Kiadás","Címlap","Versenyek","Cikkek","Fotók","Divat","Egészség"],
+  "ro":["Pet-Friendly","Reduceri","Ajutor","Comunitate","Piață","Parteneri","Ediție","Copertă","Concursuri","Articole","Foto","Modă","Sănătate"],
+  "bg":["Pet-Friendly","Отстъпки","Помощ","Общност","Пазар","Партньори","Издание","Корица","Конкурси","Статии","Снимки","Мода","Здраве"],
+  "el":["Pet-Friendly","Εκπτώσεις","Βοήθεια","Κοινότητα","Αγορά","Συνεργάτες","Έκδοση","Εξώφυλλο","Διαγωνισμοί","Άρθρα","Φωτογραφίες","Μόδα","Υγεία"],
+  "sv":["Djurvänligt","Rabatter","Hjälp","Community","Marknad","Partners","Utgåva","Omslag","Tävlingar","Artiklar","Foton","Mode","Hälsa"],
+  "da":["Kæledyr","Rabatter","Hjælp","Fællesskab","Marked","Partnere","Udgave","Forside","Konkurrencer","Artikler","Fotos","Mode","Sundhed"],
+  "no":["Dyrevennlig","Rabatter","Hjelp","Fellesskap","Marked","Partnere","Utgave","Forside","Konkurranser","Artikler","Bilder","Mote","Helse"],
+  "fi":["Lemmikit","Alennukset","Apua","Yhteisö","Market","Kumppanit","Numero","Kansi","Kilpailut","Artikkelit","Kuvat","Muoti","Terveys"],
+  "tr":["Pet-Friendly","İndirim","Yardım","Topluluk","Pazar","Ortaklar","Sürüm","Kapak","Yarışmalar","Makaleler","Fotoğraflar","Moda","Sağlık"],
+  "ar":["صديق للحيوانات","الخصومات","مساعدة","المجتمع","السوق","الشركاء","الإصدار","الغلاف","المسابقات","المقالات","الصور","الموضة","الصحة"],
+  "hi":["Pet-Friendly","छूट","मदद","समुदाय","बाज़ार","पार्टनर्स","एडिशन","कवर","प्रतियोगिताएँ","लेख","फ़ोटो","फैशन","स्वास्थ्य"]
 };
 
-const TEXT={
-  "en": {
-    "menu": "Contents",
-    "signIn": "Sign In",
-    "joinClub": "Join Club",
-    "language": "Language",
-    "contact": "Contact us",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
-    "home": "Home",
-    "profile": "Profile",
-    "nav": [
-      "Edition",
-      "Cover Stars",
-      "Discounts",
-      "Pet-Friendly Places",
-      "Marketplace",
-      "Fashion",
-      "Health",
-      "Articles",
-      "Photos",
-      "Community",
-      "Contests",
-      "Pets in Need",
-      "Partners"
-    ],
-    "desc": [
-      "Open PETS & DOGUE Edition 01 — the latest curated digital edition.",
-      "Enter your pet and compete for the next cover.",
-      "Discover member discounts and special offers.",
-      "Discover pet-friendly places with maps, routes, contacts and useful information.",
-      "Buy, sell and discover pet products and services.",
-      "Style, accessories and pet fashion.",
-      "Health, grooming and everyday pet care.",
-      "Editorial stories, interviews and practical guides.",
-      "Portraits, galleries and visual stories.",
-      "Connect with pet lovers, places and local events.",
-      "Take part in PETS & DOGUE competitions.",
-      "Rescue, adoption and help for animals in need.",
-      "Selected brands, services and PETS & DOGUE partners."
-    ]
-  },
-  "uk": {
-    "menu": "Зміст",
-    "signIn": "Увійти",
-    "joinClub": "Вступити до клубу",
-    "language": "Мова",
-    "contact": "Зв’язатися з нами",
-    "openMenu": "Відкрити меню",
-    "closeMenu": "Закрити меню",
-    "home": "Головна",
-    "profile": "Профіль",
-    "nav": [
-      "Видання",
-      "Зірки обкладинки",
-      "Знижки",
-      "Місця Pet-Friendly",
-      "Маркетплейс",
-      "Мода",
-      "Здоров’я",
-      "Статті",
-      "Фото",
-      "Спільнота",
-      "Конкурси",
-      "Допомога тваринам",
-      "Партнери"
-    ],
-    "desc": [
-      "Відкрийте PETS & DOGUE Edition 01 — найновіше цифрове видання.",
-      "Подайте свого улюбленця та змагайтеся за наступну обкладинку.",
-      "Відкривайте знижки для учасників і спеціальні пропозиції.",
-      "Знаходьте місця, дружні до тварин, з картами, маршрутами й контактами.",
-      "Купуйте, продавайте та знаходьте товари й послуги для тварин.",
-      "Стиль, аксесуари та мода для улюбленців.",
-      "Здоров’я, грумінг і щоденний догляд.",
-      "Редакційні історії, інтерв’ю та практичні поради.",
-      "Портрети, галереї та візуальні історії.",
-      "Спілкуйтеся з любителями тварин і знаходьте місцеві події.",
-      "Беріть участь у конкурсах PETS & DOGUE.",
-      "Порятунок, адопція та допомога тваринам.",
-      "Відібрані бренди, послуги та партнери PETS & DOGUE."
-    ]
-  },
-  "ru": {
-    "menu": "Содержание",
-    "signIn": "Войти",
-    "joinClub": "Вступить в клуб",
-    "language": "Язык",
-    "contact": "Связаться с нами",
-    "openMenu": "Открыть меню",
-    "closeMenu": "Закрыть меню",
-    "home": "Главная",
-    "profile": "Профиль",
-    "nav": [
-      "Издание",
-      "Звёзды обложки",
-      "Скидки",
-      "Pet-Friendly места",
-      "Маркетплейс",
-      "Мода",
-      "Здоровье",
-      "Статьи",
-      "Фото",
-      "Сообщество",
-      "Конкурсы",
-      "Помощь животным",
-      "Партнёры"
-    ],
-    "desc": [
-      "Откройте PETS & DOGUE Edition 01 — наше актуальное цифровое издание.",
-      "Заявите своего питомца и поборитесь за следующую обложку.",
-      "Открывайте скидки для подписчиков и специальные предложения.",
-      "Находите pet-friendly места с картами, маршрутами и контактами.",
-      "Покупайте, продавайте и находите товары и услуги для питомцев.",
-      "Стиль, аксессуары и мода для питомцев.",
-      "Здоровье, груминг и ежедневный уход.",
-      "Редакционные истории, интервью и практические гиды.",
-      "Портреты, галереи и визуальные истории.",
-      "Общайтесь с любителями животных и находите местные события.",
-      "Участвуйте в конкурсах PETS & DOGUE.",
-      "Спасение, поиск дома и помощь животным.",
-      "Отобранные бренды, услуги и партнёры PETS & DOGUE."
-    ]
-  },
-  "fr": {
-    "menu": "Sommaire",
-    "signIn": "Connexion",
-    "joinClub": "Rejoindre le Club",
-    "language": "Langue",
-    "contact": "Nous contacter",
-    "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu",
-    "home": "Accueil",
-    "profile": "Profil",
-    "nav": [
-      "Édition",
-      "Stars de couverture",
-      "Réductions",
-      "Lieux Pet-Friendly",
-      "Marketplace",
-      "Mode",
-      "Santé",
-      "Articles",
-      "Photos",
-      "Communauté",
-      "Concours",
-      "Aide aux animaux",
-      "Partenaires"
-    ],
-    "desc": [
-      "Ouvrez PETS & DOGUE Edition 01, notre dernière édition numérique.",
-      "Inscrivez votre animal pour tenter la prochaine couverture.",
-      "Découvrez les réductions membres et les offres spéciales.",
-      "Trouvez des lieux pet-friendly avec cartes, itinéraires et contacts.",
-      "Achetez, vendez et découvrez des produits et services pour animaux.",
-      "Style, accessoires et mode pour animaux.",
-      "Santé, toilettage et soins quotidiens.",
-      "Histoires, interviews et guides pratiques.",
-      "Portraits, galeries et histoires visuelles.",
-      "Rejoignez les amoureux des animaux et les événements locaux.",
-      "Participez aux concours PETS & DOGUE.",
-      "Sauvetage, adoption et aide aux animaux.",
-      "Marques, services et partenaires PETS & DOGUE sélectionnés."
-    ]
-  },
-  "de": {
-    "menu": "Inhalt",
-    "signIn": "Anmelden",
-    "joinClub": "Club beitreten",
-    "language": "Sprache",
-    "contact": "Kontakt",
-    "openMenu": "Menü öffnen",
-    "closeMenu": "Menü schließen",
-    "home": "Startseite",
-    "profile": "Profil",
-    "nav": [
-      "Ausgabe",
-      "Cover Stars",
-      "Rabatte",
-      "Tierfreundliche Orte",
-      "Marktplatz",
-      "Mode",
-      "Gesundheit",
-      "Artikel",
-      "Fotos",
-      "Community",
-      "Wettbewerbe",
-      "Hilfe für Tiere",
-      "Partner"
-    ],
-    "desc": [
-      "Öffnen Sie PETS & DOGUE Edition 01, die aktuelle digitale Ausgabe.",
-      "Melden Sie Ihr Tier für das nächste Cover an.",
-      "Entdecken Sie Mitgliederrabatte und Sonderangebote.",
-      "Finden Sie tierfreundliche Orte mit Karten, Routen und Kontakten.",
-      "Kaufen, verkaufen und entdecken Sie Produkte und Services für Tiere.",
-      "Stil, Accessoires und Tiermode.",
-      "Gesundheit, Pflege und tägliche Betreuung.",
-      "Editorials, Interviews und praktische Ratgeber.",
-      "Porträts, Galerien und visuelle Geschichten.",
-      "Vernetzen Sie sich mit Tierfreunden und lokalen Events.",
-      "Nehmen Sie an PETS & DOGUE Wettbewerben teil.",
-      "Rettung, Adoption und Hilfe für Tiere.",
-      "Ausgewählte Marken, Services und PETS & DOGUE Partner."
-    ]
-  },
-  "es": {
-    "menu": "Contenido",
-    "signIn": "Iniciar sesión",
-    "joinClub": "Únete al Club",
-    "language": "Idioma",
-    "contact": "Contáctanos",
-    "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú",
-    "home": "Inicio",
-    "profile": "Perfil",
-    "nav": [
-      "Edición",
-      "Estrellas de portada",
-      "Descuentos",
-      "Lugares Pet-Friendly",
-      "Marketplace",
-      "Moda",
-      "Salud",
-      "Artículos",
-      "Fotos",
-      "Comunidad",
-      "Concursos",
-      "Ayuda a animales",
-      "Socios"
-    ],
-    "desc": [
-      "Abre PETS & DOGUE Edition 01, la edición digital más reciente.",
-      "Inscribe a tu mascota y compite por la próxima portada.",
-      "Descubre descuentos para miembros y ofertas especiales.",
-      "Encuentra lugares pet-friendly con mapas, rutas y contactos.",
-      "Compra, vende y descubre productos y servicios para mascotas.",
-      "Estilo, accesorios y moda para mascotas.",
-      "Salud, peluquería y cuidados diarios.",
-      "Historias, entrevistas y guías prácticas.",
-      "Retratos, galerías e historias visuales.",
-      "Conecta con amantes de los animales y eventos locales.",
-      "Participa en concursos PETS & DOGUE.",
-      "Rescate, adopción y ayuda para animales.",
-      "Marcas, servicios y socios PETS & DOGUE seleccionados."
-    ]
-  },
-  "it": {
-    "menu": "Contenuti",
-    "signIn": "Accedi",
-    "joinClub": "Unisciti al Club",
-    "language": "Lingua",
-    "contact": "Contattaci",
-    "openMenu": "Apri menu",
-    "closeMenu": "Chiudi menu",
-    "home": "Home",
-    "profile": "Profilo",
-    "nav": [
-      "Edizione",
-      "Cover Stars",
-      "Sconti",
-      "Luoghi Pet-Friendly",
-      "Marketplace",
-      "Moda",      "Salute",
-      "Articoli",
-      "Foto",
-      "Community",
-      "Concorsi",
-      "Aiuto agli animali",
-      "Partner"
-    ],
-    "desc": [
-      "Apri PETS & DOGUE Edition 01, l’ultima edizione digitale.",
-      "Iscrivi il tuo animale e concorri per la prossima copertina.",
-      "Scopri sconti per i membri e offerte speciali.",
-      "Trova luoghi pet-friendly con mappe, percorsi e contatti.",
-      "Compra, vendi e scopri prodotti e servizi per animali.",
-      "Stile, accessori e moda per animali.",
-      "Salute, toelettatura e cura quotidiana.",
-      "Storie, interviste e guide pratiche.",
-      "Ritratti, gallerie e storie visive.",
-      "Connettiti con chi ama gli animali e con gli eventi locali.",
-      "Partecipa ai concorsi PETS & DOGUE.",
-      "Salvataggio, adozione e aiuto agli animali.",
-      "Brand, servizi e partner PETS & DOGUE selezionati."
-    ]
-  },
-  "pt": {
-    "menu": "Conteúdo",
-    "signIn": "Entrar",
-    "joinClub": "Entrar no Club",
-    "language": "Idioma",
-    "contact": "Contacte-nos",
-    "openMenu": "Abrir menu",
-    "closeMenu": "Fechar menu",
-    "home": "Início",
-    "profile": "Perfil",
-    "nav": [
-      "Edição",
-      "Estrelas da capa",
-      "Descontos",
-      "Locais Pet-Friendly",
-      "Marketplace",
-      "Moda",
-      "Saúde",
-      "Artigos",
-      "Fotos",
-      "Comunidade",
-      "Concursos",
-      "Ajuda aos animais",
-      "Parceiros"
-    ],
-    "desc": [
-      "Abra a PETS & DOGUE Edition 01, a edição digital mais recente.",
-      "Inscreva o seu animal e concorra à próxima capa.",
-      "Descubra descontos para membros e ofertas especiais.",
-      "Encontre locais pet-friendly com mapas, rotas e contactos.",
-      "Compre, venda e descubra produtos e serviços para animais.",
-      "Estilo, acessórios e moda para animais.",
-      "Saúde, grooming e cuidados diários.",
-      "Histórias, entrevistas e guias práticos.",
-      "Retratos, galerias e histórias visuais.",
-      "Ligue-se a amantes de animais e eventos locais.",
-      "Participe nos concursos PETS & DOGUE.",
-      "Resgate, adoção e ajuda aos animais.",
-      "Marcas, serviços e parceiros PETS & DOGUE selecionados."
-    ]
-  },
-  "nl": {
-    "menu": "Inhoud",
-    "signIn": "Inloggen",
-    "joinClub": "Word lid",
-    "language": "Taal",
-    "contact": "Contact",
-    "openMenu": "Menu openen",
-    "closeMenu": "Menu sluiten",
-    "home": "Home",
-    "profile": "Profiel",
-    "nav": [
-      "Editie",
-      "Coversterren",
-      "Kortingen",
-      "Huisdiervriendelijke plekken",
-      "Marktplaats",
-      "Mode",
-      "Gezondheid",
-      "Artikelen",
-      "Foto's",
-      "Community",
-      "Wedstrijden",
-      "Hulp voor dieren",
-      "Partners"
-    ],
-    "desc": [
-      "Open PETS & DOGUE Edition 01, de nieuwste digitale editie.",
-      "Meld je huisdier aan voor de volgende cover.",
-      "Ontdek ledenkortingen en speciale aanbiedingen.",
-      "Vind huisdiervriendelijke plekken met kaarten, routes en contacten.",
-      "Koop, verkoop en ontdek producten en diensten voor huisdieren.",
-      "Stijl, accessoires en mode voor huisdieren.",
-      "Gezondheid, verzorging en dagelijkse zorg.",
-      "Verhalen, interviews en praktische gidsen.",
-      "Portretten, galerijen en visuele verhalen.",
-      "Kom in contact met dierenliefhebbers en lokale evenementen.",
-      "Doe mee aan PETS & DOGUE wedstrijden.",
-      "Redding, adoptie en hulp voor dieren.",
-      "Geselecteerde merken, diensten en PETS & DOGUE partners."
-    ]
-  },
-  "pl": {
-    "menu": "Spis treści",
-    "signIn": "Zaloguj się",
-    "joinClub": "Dołącz do klubu",
-    "language": "Język",
-    "contact": "Kontakt",
-    "openMenu": "Otwórz menu",
-    "closeMenu": "Zamknij menu",
-    "home": "Strona główna",
-    "profile": "Profil",
-    "nav": [
-      "Wydanie",
-      "Gwiazdy okładki",
-      "Zniżki",
-      "Miejsca Pet-Friendly",
-      "Marketplace",
-      "Moda",
-      "Zdrowie",
-      "Artykuły",
-      "Zdjęcia",
-      "Społeczność",
-      "Konkursy",
-      "Pomoc zwierzętom",
-      "Partnerzy"
-    ],
-    "desc": [
-      "Otwórz PETS & DOGUE Edition 01, najnowsze wydanie cyfrowe.",
-      "Zgłoś pupila i zawalcz o następną okładkę.",
-      "Odkrywaj zniżki członkowskie i oferty specjalne.",
-      "Znajduj miejsca pet-friendly z mapami, trasami i kontaktami.",
-      "Kupuj, sprzedawaj i odkrywaj produkty oraz usługi dla zwierząt.",
-      "Styl, akcesoria i moda dla zwierząt.",
-      "Zdrowie, pielęgnacja i codzienna opieka.",
-      "Historie, wywiady i praktyczne poradniki.",
-      "Portrety, galerie i historie wizualne.",
-      "Poznawaj miłośników zwierząt i lokalne wydarzenia.",
-      "Bierz udział w konkursach PETS & DOGUE.",
-      "Ratowanie, adopcja i pomoc zwierzętom.",
-      "Wybrane marki, usługi i partnerzy PETS & DOGUE."
-    ]
-  },
-  "cs": {
-    "menu": "Obsah",
-    "signIn": "Přihlásit se",
-    "joinClub": "Vstoupit do klubu",
-    "language": "Jazyk",
-    "contact": "Kontaktujte nás",
-    "openMenu": "Otevřít menu",
-    "closeMenu": "Zavřít menu",
-    "home": "Domů",
-    "profile": "Profil",
-    "nav": [
-      "Vydání",
-      "Hvězdy obálky",
-      "Slevy",
-      "Pet-Friendly místa",
-      "Marketplace",
-      "Móda",
-      "Zdraví",
-      "Články",
-      "Fotografie",
-      "Komunita",
-      "Soutěže",
-      "Pomoc zvířatům",
-      "Partneři"
-    ],
-    "desc": [
-      "Otevřete PETS & DOGUE Edition 01, nejnovější digitální vydání.",
-      "Přihlaste svého mazlíčka na příští obálku.",
-      "Objevte členské slevy a speciální nabídky.",
-      "Najděte pet-friendly místa s mapami, trasami a kontakty.",
-      "Nakupujte, prodávejte a objevujte produkty a služby pro zvířata.",
-      "Styl, doplňky a móda pro zvířata.",
-      "Zdraví, péče a každodenní starostlivost.",
-      "Příběhy, rozhovory a praktické průvodce.",
-      "Portréty, galerie a vizuální příběhy.",
-      "Spojte se s milovníky zvířat a místními akcemi.",
-      "Zapojte se do soutěží PETS & DOGUE.",
-      "Záchrana, adopce a pomoc zvířatům.",
-      "Vybrané značky, služby a partneři PETS & DOGUE."
-    ]
-  },
-  "sk": {
-    "menu": "Obsah",
-    "signIn": "Prihlásiť sa",
-    "joinClub": "Vstúpiť do klubu",
-    "language": "Jazyk",
-    "contact": "Kontaktujte nás",
-    "openMenu": "Otvoriť menu",
-    "closeMenu": "Zavrieť menu",
-    "home": "Domov",
-    "profile": "Profil",
-    "nav": [
-      "Vydanie",
-      "Hviezdy obálky",
-      "Zľavy",
-      "Pet-Friendly miesta",
-      "Marketplace",
-      "Móda",
-      "Zdravie",
-      "Články",
-      "Fotografie",
-      "Komunita",
-      "Súťaže",
-      "Pomoc zvieratám",
-      "Partneri"
-    ],
-    "desc": [
-      "Otvorte PETS & DOGUE Edition 01, najnovšie digitálne vydanie.",
-      "Prihláste svojho miláčika na ďalšiu obálku.",
-      "Objavte členské zľavy a špeciálne ponuky.",
-      "Nájdite pet-friendly miesta s mapami, trasami a kontaktmi.",
-      "Nakupujte, predávajte a objavujte produkty a služby pre zvieratá.",
-      "Štýl, doplnky a móda pre zvieratá.",
-      "Zdravie, starostlivosť a každodenná péče.",
-      "Príbehy, rozhovory a praktickí sprievodcovia.",
-      "Portréty, galérie a vizuálne príbehy.",
-      "Spojte sa s milovníkmi zvierat a miestnymi podujatiami.",
-      "Zapojte sa do súťaží PETS & DOGUE.",
-      "Záchrana, adopcia a pomoc zvieratám.",
-      "Vybrané značky, služby a partneri PETS & DOGUE."
-    ]
-  },
-  "hu": {
-    "menu": "Tartalom",
-    "signIn": "Belépés",
-    "joinClub": "Csatlakozás",
-    "language": "Nyelv",
-    "contact": "Kapcsolat",
-    "openMenu": "Menü megnyitása",
-    "closeMenu": "Menü bezárása",
-    "home": "Kezdőlap",
-    "profile": "Profil",
-    "nav": [
-      "Kiadás",
-      "Címlapsztárok",
-      "Kedvezmények",
-      "Állatbarát helyek",
-      "Piactér",
-      "Divat",
-      "Egészség",
-      "Cikkek",
-      "Fotók",
-      "Közösség",
-      "Versenyek",
-      "Állatsegítés",
-      "Partnerek"
-    ],
-    "desc": [
-      "Nyissa meg a PETS & DOGUE Edition 01 legújabb digitális kiadását.",
-      "Nevezze kedvencét a következő címlapra.",
-      "Fedezze fel a tagi kedvezményeket és különleges ajánlatokat.",
-      "Találjon állatbarát helyeket térképekkel, útvonalakkal és elérhetőségekkel.",
-      "Vásároljon, adjon el és fedezzen fel kisállat-termékeket és szolgáltatásokat.",
-      "Stílus, kiegészítők és kisállatdivat.",
-      "Egészség, ápolás és mindennapi gondozás.",
-      "Történetek, interjúk és gyakorlati útmutatók.",
-      "Portrék, galériák és vizuális történetek.",
-      "Kapcsolódjon állatbarátokhoz és helyi eseményekhez.",
-      "Vegyen részt PETS & DOGUE versenyeken.",
-      "Mentés, örökbefogadás és segítség az állatoknak.",
-      "Válogatott márkák, szolgáltatások és PETS & DOGUE partnerek."
-    ]
-  },
-  "ro": {
-    "menu": "Conținut",
-    "signIn": "Autentificare",
-    "joinClub": "Intră în Club",
-    "language": "Limbă",
-    "contact": "Contactați-ne",
-    "openMenu": "Deschide meniul",
-    "closeMenu": "Închide meniul",
-    "home": "Acasă",
-    "profile": "Profil",
-    "nav": [
-      "Ediție",
-      "Vedete de copertă",
-      "Reduceri",
-      "Locuri Pet-Friendly",
-      "Marketplace",
-      "Modă",
-      "Sănătate",
-      "Articole",
-      "Fotografii",
-      "Comunitate",
-      "Concursuri",
-      "Ajutor pentru animale",
-      "Parteneri"
-    ],
-    "desc": [
-      "Deschide PETS & DOGUE Edition 01, cea mai nouă ediție digitală.",
-      "Înscrie animalul pentru următoarea copertă.",
-      "Descoperă reduceri pentru membri și oferte speciale.",
-      "Găsește locuri pet-friendly cu hărți, rute și contacte.",
-      "Cumpără, vinde și descoperă produse și servicii pentru animale.",
-      "Stil, accesorii și modă pentru animale.",
-      "Sănătate, grooming și îngrijire zilnică.",
-      "Povești, interviuri și ghiduri practice.",
-      "Portrete, galerii și povești vizuale.",
-      "Conectează-te cu iubitori de animale și evenimente locale.",
-      "Participă la concursurile PETS & DOGUE.",
-      "Salvare, adopție și ajutor pentru animale.",
-      "Branduri, servicii și parteneri PETS & DOGUE selectați."
-    ]
-  },
-  "bg": {
-    "menu": "Съдържание",
-    "signIn": "Вход",
-    "joinClub": "Влезте в клуба",
-    "language": "Език",
-    "contact": "Свържете се с нас",
-    "openMenu": "Отвори менюто",
-    "closeMenu": "Затвори менюто",
-    "home": "Начало",
-    "profile": "Профил",
-    "nav": [
-      "Издание",
-      "Звезди на корицата",
-      "Отстъпки",
-      "Pet-Friendly места",
-      "Маркетплейс",
-      "Мода",
-      "Здраве",
-      "Статии",
-      "Снимки",
-      "Общност",
-      "Конкурси",
-      "Помощ за животни",
-      "Партньори"
-    ],
-    "desc": [
-      "Отворете PETS & DOGUE Edition 01, най-новото дигитално издание.",
-      "Запишете любимеца си за следващата корица.",
-      "Открийте отстъпки за членове и специални предложения.",
-      "Намерете pet-friendly места с карти, маршрути и контакти.",
-      "Купувайте, продавайте и откривайте продукти и услуги за животни.",
-      "Стил, аксесоари и мода за животни.",
-      "Здраве, груминг и ежедневна грижа.",
-      "Истории, интервюта и практични ръководства.",
-      "Портрети, галерии и визуални истории.",
-      "Свържете се с любители на животни и местни събития.",
-      "Участвайте в конкурсите на PETS & DOGUE.",
-      "Спасяване, осиновяване и помощ за животни.",
-      "Подбрани марки, услуги и партньори на PETS & DOGUE."
-    ]
-  },
-  "el": {
-    "menu": "Περιεχόμενα",
-    "signIn": "Σύνδεση",
-    "joinClub": "Εγγραφή στο Club",
-    "language": "Γλώσσα",
-    "contact": "Επικοινωνία",
-    "openMenu": "Άνοιγμα μενού",
-    "closeMenu": "Κλείσιμο μενού",
-    "home": "Αρχική",
-    "profile": "Προφίλ",
-    "nav": [
-      "Έκδοση",
-      "Αστέρια εξωφύλλου",
-      "Εκπτώσεις",
-      "Pet-Friendly μέρη",
-      "Marketplace",
-      "Μόδα",
-      "Υγεία",
-      "Άρθρα",
-      "Φωτογραφίες",
-      "Κοινότητα",
-      "Διαγωνισμοί",
-      "Βοήθεια ζώων",
-      "Συνεργάτες"
-    ],
-    "desc": [
-      "Ανοίξτε το PETS & DOGUE Edition 01, την πιο πρόσφατη ψηφιακή έκδοση.",
-      "Δηλώστε το κατοικίδιό σας για το επόμενο εξώφυλλο.",
-      "Ανακαλύψτε εκπτώσεις μελών και ειδικές προσφορές.",
-      "Βρείτε pet-friendly μέρη με χάρτες, διαδρομές και επαφές.",
-      "Αγοράστε, πουλήστε και ανακαλύψτε προϊόντα και υπηρεσίες για κατοικίδια.",
-      "Στυλ, αξεσουάρ και μόδα για κατοικίδια.",
-      "Υγεία, περιποίηση και καθημερινή φροντίδα.",
-      "Ιστορίες, συνεντεύξεις και πρακτικοί οδηγοί.",
-      "Πορτρέτα, γκαλερί και οπτικές ιστορίες.",
-      "Συνδεθείτε με φίλους των ζώων και τοπικές εκδηλώσεις.",
-      "Λάβετε μέρος στους διαγωνισμούς PETS & DOGUE.",
-      "Διάσωση, υιοθεσία και βοήθεια για ζώα.",
-      "Επιλεγμένες μάρκες, υπηρεσίες και συνεργάτες PETS & DOGUE."
-    ]
-  },
-  "sv": {
-    "menu": "Innehåll",
-    "signIn": "Logga in",
-    "joinClub": "Gå med i klubben",
-    "language": "Språk",
-    "contact": "Kontakta oss",
-    "openMenu": "Öppna meny",
-    "closeMenu": "Stäng meny",
-    "home": "Hem",
-    "profile": "Profil",
-    "nav": [
-      "Utgåva",
-      "Omslagsstjärnor",
-      "Rabatter",
-      "Djurvänliga platser",
-      "Marknadsplats",
-      "Mode",
-      "Hälsa",
-      "Artiklar",
-      "Foton",
-      "Community",
-      "Tävlingar",
-      "Hjälp för djur",
-      "Partners"
-    ],
-    "desc": [
-      "Öppna PETS & DOGUE Edition 01, den senaste digitala utgåvan.",
-      "Anmäl ditt husdjur till nästa omslag.",
-      "Upptäck medlemsrabatter och specialerbjudanden.",
-      "Hitta djurvänliga platser med kartor, rutter och kontakter.",
-      "Köp, sälj och upptäck produkter och tjänster för husdjur.",
-      "Stil, accessoarer och husdjursmode.",
-      "Hälsa, pälsvård och daglig omsorg.",
-      "Berättelser, intervjuer och praktiska guider.",
-      "Porträtt, gallerier och visuella berättelser.",
-      "Träffa djurvänner och hitta lokala evenemang.",
-      "Delta i PETS & DOGUE-tävlingar.",
-      "Räddning, adoption och hjälp för djur.",
-      "Utvalda varumärken, tjänster och PETS & DOGUE-partners."
-    ]
-  },
-  "da": {
-    "menu": "Indhold",
-    "signIn": "Log ind",
-    "joinClub": "Bliv medlem",
-    "language": "Sprog",
-    "contact": "Kontakt os",
-    "openMenu": "Åbn menu",
-    "closeMenu": "Luk menu",
-    "home": "Hjem",
-    "profile": "Profil",
-    "nav": [
-      "Udgave",
-      "Forsidestjerner",
-      "Rabatter",
-      "Kæledyrsvenlige steder",
-      "Markedsplads",
-      "Mode",
-      "Sundhed",
-      "Artikler",
-      "Fotos",
-      "Fællesskab",
-      "Konkurrencer",
-      "Hjælp til dyr",
-      "Partnere"
-    ],
-    "desc": [
-      "Åbn PETS & DOGUE Edition 01, den nyeste digitale udgave.",
-      "Tilmeld dit kæledyr til den næste forside.",
-      "Opdag medlemsrabatter og særlige tilbud.",
-      "Find kæledyrsvenlige steder med kort, ruter og kontakter.",
-      "Køb, sælg og opdag produkter og tjenester til kæledyr.",
-      "Stil, tilbehør og mode til kæledyr.",
-      "Sundhed, pleje og daglig omsorg.",
-      "Historier, interviews og praktiske guider.",
-      "Portrætter, gallerier og visuelle historier.",
-      "Mød dyrevenner og find lokale arrangementer.",
-      "Deltag i PETS & DOGUE-konkurrencer.",
-      "Redning, adoption og hjælp til dyr.",
-      "Udvalgte brands, tjenester og PETS & DOGUE-partnere."
-    ]
-  },
-  "no": {
-    "menu": "Innhold",
-    "signIn": "Logg inn",
-    "joinClub": "Bli med i klubben",
-    "language": "Språk",
-    "contact": "Kontakt oss",
-    "openMenu": "Åpne meny",
-    "closeMenu": "Lukk meny",
-    "home": "Hjem",
-    "profile": "Profil",
-    "nav": [
-      "Utgave",
-      "Forsidestjerner",
-      "Rabatter",
-      "Dyrevennlige steder",
-      "Markedsplass",
-      "Mote",
-      "Helse",
-      "Artikler",
-      "Bilder",
-      "Fellesskap",
-      "Konkurranser",
-      "Hjelp til dyr",
-      "Partnere"
-    ],
-    "desc": [
-      "Åpne PETS & DOGUE Edition 01, den nyeste digitale utgaven.",
-      "Meld på kjæledyret ditt til neste forside.",
-      "Oppdag medlemsrabatter og spesialtilbud.",
-      "Finn dyrevennlige steder med kart, ruter og kontakter.",
-      "Kjøp, selg og oppdag produkter og tjenester for kjæledyr.",
-      "Stil, tilbehør og kjæledyrsmote.",
-      "Helse, stell og daglig omsorg.",
-      "Historier, intervjuer og praktiske guider.",
-      "Portretter, gallerier og visuelle historier.",
-      "Møt dyrevenner og finn lokale arrangementer.",
-      "Delta i PETS & DOGUE-konkurranser.",
-      "Redning, adopsjon og hjelp til dyr.",
-      "Utvalgte merkevarer, tjenester og PETS & DOGUE-partnere."
-    ]
-  },
-  "fi": {
-    "menu": "Sisältö",
-    "signIn": "Kirjaudu",
-    "joinClub": "Liity klubiin",    "language": "Kieli",
-    "contact": "Ota yhteyttä",
-    "openMenu": "Avaa valikko",
-    "closeMenu": "Sulje valikko",
-    "home": "Etusivu",
-    "profile": "Profiili",
-    "nav": [
-      "Numero",
-      "Kansitähdet",
-      "Alennukset",
-      "Lemmikkiystävälliset paikat",
-      "Markkinapaikka",
-      "Muoti",
-      "Terveys",
-      "Artikkelit",
-      "Kuvat",
-      "Yhteisö",
-      "Kilpailut",
-      "Apua eläimille",
-      "Kumppanit"
-    ],
-    "desc": [
-      "Avaa PETS & DOGUE Edition 01, uusin digitaalinen numero.",
-      "Ilmoita lemmikkisi seuraavan kannen kilpailuun.",
-      "Tutustu jäsenalennuksiin ja erikoistarjouksiin.",
-      "Löydä lemmikkiystävällisiä paikkoja karttoineen, reitteineen ja yhteystietoineen.",
-      "Osta, myy ja löydä lemmikkituotteita ja palveluita.",
-      "Tyyliä, asusteita ja lemmikkimuotia.",
-      "Terveys, trimmaus ja päivittäinen hoito.",
-      "Tarinoita, haastatteluja ja käytännön oppaita.",
-      "Muotokuvia, gallerioita ja visuaalisia tarinoita.",
-      "Tapaa eläinystäviä ja löydä paikallisia tapahtumia.",
-      "Osallistu PETS & DOGUE -kilpailuihin.",
-      "Pelastus, adoptio ja apu eläimille.",
-      "Valitut brändit, palvelut ja PETS & DOGUE -kumppanit."
-    ]
-  },
-  "tr": {
-    "menu": "İçindekiler",
-    "signIn": "Giriş yap",
-    "joinClub": "Kulübe katıl",
-    "language": "Dil",
-    "contact": "Bize ulaşın",
-    "openMenu": "Menüyü aç",
-    "closeMenu": "Menüyü kapat",
-    "home": "Ana sayfa",
-    "profile": "Profil",
-    "nav": [
-      "Sürüm",
-      "Kapak yıldızları",
-      "İndirimler",
-      "Pet-Friendly yerler",
-      "Pazar yeri",
-      "Moda",
-      "Sağlık",
-      "Makaleler",
-      "Fotoğraflar",
-      "Topluluk",
-      "Yarışmalar",
-      "Hayvanlara yardım",
-      "Ortaklar"
-    ],
-    "desc": [
-      "En yeni dijital sayı olan PETS & DOGUE Edition 01’i açın.",
-      "Evcil hayvanınızı bir sonraki kapak için aday gösterin.",
-      "Üye indirimlerini ve özel teklifleri keşfedin.",
-      "Haritalar, rotalar ve iletişim bilgileriyle pet-friendly yerler bulun.",
-      "Evcil hayvan ürünleri ve hizmetleri alın, satın ve keşfedin.",
-      "Stil, aksesuarlar ve evcil hayvan modası.",
-      "Sağlık, bakım ve günlük bakım.",
-      "Hikâyeler, röportajlar ve pratik rehberler.",
-      "Portreler, galeriler ve görsel hikâyeler.",
-      "Hayvanseverlerle bağlantı kurun ve yerel etkinlikleri bulun.",
-      "PETS & DOGUE yarışmalarına katılın.",
-      "Kurtarma, sahiplendirme ve hayvanlara yardım.",
-      "Seçilmiş markalar, hizmetler ve PETS & DOGUE ortakları."
-    ]
-  },
-  "ar": {
-    "menu": "المحتويات",
-    "signIn": "تسجيل الدخول",
-    "joinClub": "انضم إلى النادي",
-    "language": "اللغة",
-    "contact": "اتصل بنا",
-    "openMenu": "فتح القائمة",
-    "closeMenu": "إغلاق القائمة",
-    "home": "الرئيسية",
-    "profile": "الملف الشخصي",
-    "nav": [
-      "الإصدار",
-      "نجوم الغلاف",
-      "الخصومات",
-      "أماكن صديقة للحيوانات",
-      "السوق",
-      "الموضة",
-      "الصحة",
-      "المقالات",
-      "الصور",
-      "المجتمع",
-      "المسابقات",
-      "مساعدة الحيوانات",
-      "الشركاء"
-    ],
-    "desc": [
-      "افتح PETS & DOGUE Edition 01، أحدث إصدار رقمي.",
-      "رشّح حيوانك الأليف للظهور على الغلاف القادم.",
-      "اكتشف خصومات الأعضاء والعروض الخاصة.",
-      "اعثر على أماكن صديقة للحيوانات مع الخرائط والمسارات وبيانات الاتصال.",
-      "اشترِ وبِع واكتشف منتجات وخدمات الحيوانات الأليفة.",
-      "الأناقة والإكسسوارات وموضة الحيوانات الأليفة.",
-      "الصحة والعناية اليومية والتجميل.",
-      "قصص ومقابلات وأدلة عملية.",
-      "صور شخصية ومعارض وقصص بصرية.",
-      "تواصل مع محبي الحيوانات واكتشف الفعاليات المحلية.",
-      "شارك في مسابقات PETS & DOGUE.",
-      "الإنقاذ والتبنّي ومساعدة الحيوانات المحتاجة.",
-      "علامات تجارية وخدمات وشركاء مختارون من PETS & DOGUE."
-    ]
-  },
-  "hi": {
-    "menu": "विषय-सूची",
-    "signIn": "लॉग इन",
-    "joinClub": "क्लब से जुड़ें",
-    "language": "भाषा",
-    "contact": "संपर्क करें",
-    "openMenu": "मेनू खोलें",
-    "closeMenu": "मेनू बंद करें",
-    "home": "होम",
-    "profile": "प्रोफ़ाइल",
-    "nav": [
-      "एडिशन",
-      "कवर स्टार्स",
-      "छूट",
-      "Pet-Friendly स्थान",
-      "मार्केटप्लेस",
-      "फैशन",
-      "स्वास्थ्य",
-      "लेख",
-      "फ़ोटो",
-      "समुदाय",
-      "प्रतियोगिताएँ",
-      "ज़रूरतमंद पशु",
-      "पार्टनर्स"
-    ],
-    "desc": [
-      "PETS & DOGUE Edition 01 खोलें — नवीनतम डिजिटल संस्करण।",
-      "अपने पालतू को अगली कवर प्रतियोगिता में शामिल करें।",
-      "सदस्य छूट और विशेष ऑफ़र खोजें।",
-      "मैप, रूट और संपर्क जानकारी के साथ pet-friendly स्थान खोजें।",
-      "पालतू उत्पाद और सेवाएँ खरीदें, बेचें और खोजें।",
-      "स्टाइल, एक्सेसरीज़ और पालतू फैशन।",
-      "स्वास्थ्य, ग्रूमिंग और रोज़मर्रा की देखभाल।",
-      "कहानियाँ, इंटरव्यू और उपयोगी गाइड।",
-      "पोर्ट्रेट, गैलरी और विज़ुअल स्टोरीज़।",
-      "पालतू प्रेमियों से जुड़ें और स्थानीय कार्यक्रम खोजें।",
-      "PETS & DOGUE प्रतियोगिताओं में भाग लें।",
-      "रेस्क्यू, गोद लेना और ज़रूरतमंद पशुओं की मदद।",
-      "चुने हुए ब्रांड, सेवाएँ और PETS & DOGUE पार्टनर्स।"
-    ]
-  }
+const TRAVEL_TEXT={
+  "en":{"name":"Travel","desc":"Pet-friendly travel, routes, stays and useful trip planning."},
+  "uk":{"name":"Подорожі","desc":"Подорожі з тваринами, маршрути, проживання та корисне планування."},
+  "ru":{"name":"Путешествия","desc":"Путешествия с питомцами, маршруты, проживание и полезное планирование."},
+  "fr":{"name":"Voyage","desc":"Voyages avec animaux, itinéraires, hébergements et conseils pratiques."},
+  "de":{"name":"Reisen","desc":"Tierfreundliche Reisen, Routen, Unterkünfte und praktische Planung."},
+  "es":{"name":"Viajes","desc":"Viajes con mascotas, rutas, alojamientos y planificación útil."},
+  "it":{"name":"Viaggi","desc":"Viaggi con animali, percorsi, soggiorni e pianificazione utile."},
+  "pt":{"name":"Viagens","desc":"Viagens com animais, rotas, alojamentos e planeamento útil."},
+  "nl":{"name":"Reizen","desc":"Reizen met huisdieren, routes, verblijven en handige reisplanning."},
+  "pl":{"name":"Podróże","desc":"Podróże ze zwierzętami, trasy, noclegi i przydatne planowanie."},
+  "cs":{"name":"Cestování","desc":"Cestování se zvířaty, trasy, ubytování a užitečné plánování."},
+  "sk":{"name":"Cestovanie","desc":"Cestovanie so zvieratami, trasy, ubytovanie a užitočné plánovanie."},
+  "hu":{"name":"Utazás","desc":"Kisállatbarát utazás, útvonalak, szállások és hasznos tervezés."},
+  "ro":{"name":"Călătorii","desc":"Călătorii cu animale, rute, cazare și planificare utilă."},
+  "bg":{"name":"Пътуване","desc":"Пътувания с домашни любимци, маршрути, места за престой и полезно планиране."},
+  "el":{"name":"Ταξίδια","desc":"Ταξίδια με κατοικίδια, διαδρομές, διαμονή και χρήσιμος σχεδιασμός."},
+  "sv":{"name":"Resor","desc":"Resor med husdjur, rutter, boenden och praktisk planering."},
+  "da":{"name":"Rejser","desc":"Rejser med kæledyr, ruter, ophold og praktisk planlægning."},
+  "no":{"name":"Reiser","desc":"Reiser med kjæledyr, ruter, opphold og nyttig planlegging."},
+  "fi":{"name":"Matkailu","desc":"Lemmikkiystävällinen matkailu, reitit, majoitukset ja hyödyllinen suunnittelu."},
+  "tr":{"name":"Seyahat","desc":"Evcil hayvanlarla seyahat, rotalar, konaklama ve yararlı planlama."},
+  "ar":{"name":"السفر","desc":"السفر مع الحيوانات الأليفة والمسارات والإقامة والتخطيط المفيد."},
+  "hi":{"name":"यात्रा","desc":"पालतू जानवरों के साथ यात्रा, मार्ग, ठहरने की जगहें और उपयोगी योजना।"}
+};const TEXT={
+  "en":{"menu":"Contents","signIn":"Sign In","joinClub":"Join Club","language":"Language","contact":"Contact us","openMenu":"Open menu","closeMenu":"Close menu","home":"Home","profile":"Profile","nav":["Edition","Cover Stars","Discounts","Pet-Friendly Places","Marketplace","Fashion","Health","Articles","Photos","Community","Contests","Pets in Need","Partners"],"desc":["Open PETS & DOGUE Edition 01 — the latest curated digital edition.","Enter your pet and compete for the next cover.","Discover member discounts and special offers.","Discover pet-friendly places with maps, routes, contacts and useful information.","Buy, sell and discover pet products and services.","Style, accessories and pet fashion.","Health, grooming and everyday pet care.","Editorial stories, interviews and practical guides.","Portraits, galleries and visual stories.","Connect with pet lovers, places and local events.","Take part in PETS & DOGUE competitions.","Rescue, adoption and help for animals in need.","Selected brands, services and PETS & DOGUE partners."]},
+
+  "uk":{"menu":"Зміст","signIn":"Увійти","joinClub":"Вступити до клубу","language":"Мова","contact":"Зв’язатися з нами","openMenu":"Відкрити меню","closeMenu":"Закрити меню","home":"Головна","profile":"Профіль","nav":["Видання","Зірки обкладинки","Знижки","Місця Pet-Friendly","Маркетплейс","Мода","Здоров’я","Статті","Фото","Спільнота","Конкурси","Допомога тваринам","Партнери"],"desc":["Відкрийте PETS & DOGUE Edition 01 — найновіше цифрове видання.","Подайте свого улюбленця та змагайтеся за наступну обкладинку.","Відкривайте знижки для учасників і спеціальні пропозиції.","Знаходьте місця, дружні до тварин, з картами, маршрутами й контактами.","Купуйте, продавайте та знаходьте товари й послуги для тварин.","Стиль, аксесуари та мода для улюбленців.","Здоров’я, грумінг і щоденний догляд.","Редакційні історії, інтерв’ю та практичні поради.","Портрети, галереї та візуальні історії.","Спілкуйтеся з любителями тварин і знаходьте місцеві події.","Беріть участь у конкурсах PETS & DOGUE.","Порятунок, адопція та допомога тваринам.","Відібрані бренди, послуги та партнери PETS & DOGUE."]},
+
+  "ru":{"menu":"Содержание","signIn":"Войти","joinClub":"Вступить в клуб","language":"Язык","contact":"Связаться с нами","openMenu":"Открыть меню","closeMenu":"Закрыть меню","home":"Главная","profile":"Профиль","nav":["Издание","Звёзды обложки","Скидки","Pet-Friendly места","Маркетплейс","Мода","Здоровье","Статьи","Фото","Сообщество","Конкурсы","Помощь животным","Партнёры"],"desc":["Откройте PETS & DOGUE Edition 01 — наше актуальное цифровое издание.","Заявите своего питомца и поборитесь за следующую обложку.","Открывайте скидки для подписчиков и специальные предложения.","Находите pet-friendly места с картами, маршрутами и контактами.","Покупайте, продавайте и находите товары и услуги для питомцев.","Стиль, аксессуары и мода для питомцев.","Здоровье, груминг и ежедневный уход.","Редакционные истории, интервью и практические гиды.","Портреты, галереи и визуальные истории.","Общайтесь с любителями животных и находите местные события.","Участвуйте в конкурсах PETS & DOGUE.","Спасение, поиск дома и помощь животным.","Отобранные бренды, услуги и партнёры PETS & DOGUE."]},
+
+  "fr":{"menu":"Sommaire","signIn":"Connexion","joinClub":"Rejoindre le Club","language":"Langue","contact":"Nous contacter","openMenu":"Ouvrir le menu","closeMenu":"Fermer le menu","home":"Accueil","profile":"Profil","nav":["Édition","Stars de couverture","Réductions","Lieux Pet-Friendly","Marketplace","Mode","Santé","Articles","Photos","Communauté","Concours","Aide aux animaux","Partenaires"],"desc":["Ouvrez PETS & DOGUE Edition 01, notre dernière édition numérique.","Inscrivez votre animal pour tenter la prochaine couverture.","Découvrez les réductions membres et les offres spéciales.","Trouvez des lieux pet-friendly avec cartes, itinéraires et contacts.","Achetez, vendez et découvrez des produits et services pour animaux.","Style, accessoires et mode pour animaux.","Santé, toilettage et soins quotidiens.","Histoires, interviews et guides pratiques.","Portraits, galeries et histoires visuelles.","Rejoignez les amoureux des animaux et les événements locaux.","Participez aux concours PETS & DOGUE.","Sauvetage, adoption et aide aux animaux.","Marques, services et partenaires PETS & DOGUE sélectionnés."]},
+
+  "de":{"menu":"Inhalt","signIn":"Anmelden","joinClub":"Club beitreten","language":"Sprache","contact":"Kontakt","openMenu":"Menü öffnen","closeMenu":"Menü schließen","home":"Startseite","profile":"Profil","nav":["Ausgabe","Cover Stars","Rabatte","Tierfreundliche Orte","Marktplatz","Mode","Gesundheit","Artikel","Fotos","Community","Wettbewerbe","Hilfe für Tiere","Partner"],"desc":["Öffnen Sie PETS & DOGUE Edition 01, die aktuelle digitale Ausgabe.","Melden Sie Ihr Tier für das nächste Cover an.","Entdecken Sie Mitgliederrabatte und Sonderangebote.","Finden Sie tierfreundliche Orte mit Karten, Routen und Kontakten.","Kaufen, verkaufen und entdecken Sie Produkte und Services für Tiere.","Stil, Accessoires und Tiermode.","Gesundheit, Pflege und tägliche Betreuung.","Editorials, Interviews und praktische Ratgeber.","Porträts, Galerien und visuelle Geschichten.","Vernetzen Sie sich mit Tierfreunden und lokalen Events.","Nehmen Sie an PETS & DOGUE Wettbewerben teil.","Rettung, Adoption und Hilfe für Tiere.","Ausgewählte Marken, Services und PETS & DOGUE Partner."]},
+
+  "es":{"menu":"Contenido","signIn":"Iniciar sesión","joinClub":"Únete al Club","language":"Idioma","contact":"Contáctanos","openMenu":"Abrir menú","closeMenu":"Cerrar menú","home":"Inicio","profile":"Perfil","nav":["Edición","Estrellas de portada","Descuentos","Lugares Pet-Friendly","Marketplace","Moda","Salud","Artículos","Fotos","Comunidad","Concursos","Ayuda a animales","Socios"],"desc":["Abre PETS & DOGUE Edition 01, la edición digital más reciente.","Inscribe a tu mascota y compite por la próxima portada.","Descubre descuentos para miembros y ofertas especiales.","Encuentra lugares pet-friendly con mapas, rutas y contactos.","Compra, vende y descubre productos y servicios para mascotas.","Estilo, accesorios y moda para mascotas.","Salud, peluquería y cuidados diarios.","Historias, entrevistas y guías prácticas.","Retratos, galerías e historias visuales.","Conecta con amantes de los animales y eventos locales.","Participa en concursos PETS & DOGUE.","Rescate, adopción y ayuda para animales.","Marcas, servicios y socios PETS & DOGUE seleccionados."]},
+
+  "it":{"menu":"Contenuti","signIn":"Accedi","joinClub":"Unisciti al Club","language":"Lingua","contact":"Contattaci","openMenu":"Apri menu","closeMenu":"Chiudi menu","home":"Home","profile":"Profilo","nav":["Edizione","Cover Stars","Sconti","Luoghi Pet-Friendly","Marketplace","Moda","Salute","Articoli","Foto","Community","Concorsi","Aiuto agli animali","Partner"],"desc":["Apri PETS & DOGUE Edition 01, l’ultima edizione digitale.","Iscrivi il tuo animale e concorri per la prossima copertina.","Scopri sconti per i membri e offerte speciali.","Trova luoghi pet-friendly con mappe, percorsi e contatti.","Compra, vendi e scopri prodotti e servizi per animali.","Stile, accessori e moda per animali.","Salute, toelettatura e cura quotidiana.","Storie, interviste e guide pratiche.","Ritratti, gallerie e storie visive.","Connettiti con chi ama gli animali e con gli eventi locali.","Partecipa ai concorsi PETS & DOGUE.","Salvataggio, adozione e aiuto agli animali.","Brand, servizi e partner PETS & DOGUE selezionati."]},
+
+  "pt":{"menu":"Conteúdo","signIn":"Entrar","joinClub":"Entrar no Club","language":"Idioma","contact":"Contacte-nos","openMenu":"Abrir menu","closeMenu":"Fechar menu","home":"Início","profile":"Perfil","nav":["Edição","Estrelas da capa","Descontos","Locais Pet-Friendly","Marketplace","Moda","Saúde","Artigos","Fotos","Comunidade","Concursos","Ajuda aos animais","Parceiros"],"desc":["Abra a PETS & DOGUE Edition 01, a edição digital mais recente.","Inscreva o seu animal e concorra à próxima capa.","Descubra descontos para membros e ofertas especiais.","Encontre locais pet-friendly com mapas, rotas e contactos.","Compre, venda e descubra produtos e serviços para animais.","Estilo, acessórios e moda para animais.","Saúde, grooming e cuidados diários.","Histórias, entrevistas e guias práticos.","Retratos, galerias e histórias visuais.","Ligue-se a amantes de animais e eventos locais.","Participe nos concursos PETS & DOGUE.","Resgate, adoção e ajuda aos animais.","Marcas, serviços e parceiros PETS & DOGUE selecionados."]},
+
+  "nl":{"menu":"Inhoud","signIn":"Inloggen","joinClub":"Word lid","language":"Taal","contact":"Contact","openMenu":"Menu openen","closeMenu":"Menu sluiten","home":"Home","profile":"Profiel","nav":["Editie","Coversterren","Kortingen","Huisdiervriendelijke plekken","Marktplaats","Mode","Gezondheid","Artikelen","Foto's","Community","Wedstrijden","Hulp voor dieren","Partners"],"desc":["Open PETS & DOGUE Edition 01, de nieuwste digitale editie.","Meld je huisdier aan voor de volgende cover.","Ontdek ledenkortingen en speciale aanbiedingen.","Vind huisdiervriendelijke plekken met kaarten, routes en contacten.","Koop, verkoop en ontdek producten en diensten voor huisdieren.","Stijl, accessoires en mode voor huisdieren.","Gezondheid, verzorging en dagelijkse zorg.","Verhalen, interviews en praktische gidsen.","Portretten, galerijen en visuele verhalen.","Kom in contact met dierenliefhebbers en lokale evenementen.","Doe mee aan PETS & DOGUE wedstrijden.","Redding, adoptie en hulp voor dieren.","Geselecteerde merken, diensten en PETS & DOGUE partners."]},
+
+  "pl":{"menu":"Spis treści","signIn":"Zaloguj się","joinClub":"Dołącz do klubu","language":"Język","contact":"Kontakt","openMenu":"Otwórz menu","closeMenu":"Zamknij menu","home":"Strona główna","profile":"Profil","nav":["Wydanie","Gwiazdy okładki","Zniżki","Miejsca Pet-Friendly","Marketplace","Moda","Zdrowie","Artykuły","Zdjęcia","Społeczność","Konkursy","Pomoc zwierzętom","Partnerzy"],"desc":["Otwórz PETS & DOGUE Edition 01, najnowsze wydanie cyfrowe.","Zgłoś pupila i zawalcz o następną okładkę.","Odkrywaj zniżki członkowskie i oferty specjalne.","Znajduj miejsca pet-friendly z mapami, trasami i kontaktami.","Kupuj, sprzedawaj i odkrywaj produkty oraz usługi dla zwierząt.","Styl, akcesoria i moda dla zwierząt.","Zdrowie, pielęgnacja i codzienna opieka.","Historie, wywiady i praktyczne poradniki.","Portrety, galerie i historie wizualne.","Poznawaj miłośników zwierząt i lokalne wydarzenia.","Bierz udział w konkursach PETS & DOGUE.","Ratowanie, adopcja i pomoc zwierzętom.","Wybrane marki, usługi i partnerzy PETS & DOGUE."]},
+
+  "cs":{"menu":"Obsah","signIn":"Přihlásit se","joinClub":"Vstoupit do klubu","language":"Jazyk","contact":"Kontaktujte nás","openMenu":"Otevřít menu","closeMenu":"Zavřít menu","home":"Domů","profile":"Profil","nav":["Vydání","Hvězdy obálky","Slevy","Pet-Friendly místa","Marketplace","Móda","Zdraví","Články","Fotografie","Komunita","Soutěže","Pomoc zvířatům","Partneři"],"desc":["Otevřete PETS & DOGUE Edition 01, nejnovější digitální vydání.","Přihlaste svého mazlíčka na příští obálku.","Objevte členské slevy a speciální nabídky.","Najděte pet-friendly místa s mapami, trasami a kontakty.","Nakupujte, prodávejte a objevujte produkty a služby pro zvířata.","Styl, doplňky a móda pro zvířata.","Zdraví, péče a každodenní starostlivost.","Příběhy, rozhovory a praktické průvodce.","Portréty, galerie a vizuální příběhy.","Spojte se s milovníky zvířat a místními akcemi.","Zapojte se do soutěží PETS & DOGUE.","Záchrana, adopce a pomoc zvířatům.","Vybrané značky, služby a partneři PETS & DOGUE."]},
+
+  "sk":{"menu":"Obsah","signIn":"Prihlásiť sa","joinClub":"Vstúpiť do klubu","language":"Jazyk","contact":"Kontaktujte nás","openMenu":"Otvoriť menu","closeMenu":"Zavrieť menu","home":"Domov","profile":"Profil","nav":["Vydanie","Hviezdy obálky","Zľavy","Pet-Friendly miesta","Marketplace","Móda","Zdravie","Články","Fotografie","Komunita","Súťaže","Pomoc zvieratám","Partneri"],"desc":["Otvorte PETS & DOGUE Edition 01, najnovšie digitálne vydanie.","Prihláste svojho miláčika na ďalšiu obálku.","Objavte členské zľavy a špeciálne ponuky.","Nájdite pet-friendly miesta s mapami, trasami a kontaktmi.","Nakupujte, predávajte a objavujte produkty a služby pre zvieratá.","Štýl, doplnky a móda pre zvieratá.","Zdravie, starostlivosť a každodenná péče.","Príbehy, rozhovory a praktickí sprievodcovia.","Portréty, galérie a vizuálne príbehy.","Spojte sa s milovníkmi zvierat a miestnymi podujatiami.","Zapojte sa do súťaží PETS & DOGUE.","Záchrana, adopcia a pomoc zvieratám.","Vybrané značky, služby a partneri PETS & DOGUE."]},
+
+  "hu":{"menu":"Tartalom","signIn":"Belépés","joinClub":"Csatlakozás","language":"Nyelv","contact":"Kapcsolat","openMenu":"Menü megnyitása","closeMenu":"Menü bezárása","home":"Kezdőlap","profile":"Profil","nav":["Kiadás","Címlapsztárok","Kedvezmények","Állatbarát helyek","Piactér","Divat","Egészség","Cikkek","Fotók","Közösség","Versenyek","Állatsegítés","Partnerek"],"desc":["Nyissa meg a PETS & DOGUE Edition 01 legújabb digitális kiadását.","Nevezze kedvencét a következő címlapra.","Fedezze fel a tagi kedvezményeket és különleges ajánlatokat.","Találjon állatbarát helyeket térképekkel, útvonalakkal és elérhetőségekkel.","Vásároljon, adjon el és fedezzen fel kisállat-termékeket és szolgáltatásokat.","Stílus, kiegészítők és kisállatdivat.","Egészség, ápolás és mindennapi gondozás.","Történetek, interjúk és gyakorlati útmutatók.","Portrék, galériák és vizuális történetek.","Kapcsolódjon állatbarátokhoz és helyi eseményekhez.","Vegyen részt PETS & DOGUE versenyeken.","Mentés, örökbefogadás és segítség az állatoknak.","Válogatott márkák, szolgáltatások és PETS & DOGUE partnerek."]},
+
+  "ro":{"menu":"Conținut","signIn":"Autentificare","joinClub":"Intră în Club","language":"Limbă","contact":"Contactați-ne","openMenu":"Deschide meniul","closeMenu":"Închide meniul","home":"Acasă","profile":"Profil","nav":["Ediție","Vedete de copertă","Reduceri","Locuri Pet-Friendly","Marketplace","Modă","Sănătate","Articole","Fotografii","Comunitate","Concursuri","Ajutor pentru animale","Parteneri"],"desc":["Deschide PETS & DOGUE Edition 01, cea mai nouă ediție digitală.","Înscrie animalul pentru următoarea copertă.","Descoperă reduceri pentru membri și oferte speciale.","Găsește locuri pet-friendly cu hărți, rute și contacte.","Cumpără, vinde și descoperă produse și servicii pentru animale.","Stil, accesorii și modă pentru animale.","Sănătate, grooming și îngrijire zilnică.","Povești, interviuri și ghiduri practice.","Portrete, galerii și povești vizuale.","Conectează-te cu iubitori de animale și evenimente locale.","Participă la concursurile PETS & DOGUE.","Salvare, adopție și ajutor pentru animale.","Branduri, servicii și parteneri PETS & DOGUE selectați."]},
+
+  "bg":{"menu":"Съдържание","signIn":"Вход","joinClub":"Влезте в клуба","language":"Език","contact":"Свържете се с нас","openMenu":"Отвори менюто","closeMenu":"Затвори менюто","home":"Начало","profile":"Профил","nav":["Издание","Звезди на корицата","Отстъпки","Pet-Friendly места","Маркетплейс","Мода","Здраве","Статии","Снимки","Общност","Конкурси","Помощ за животни","Партньори"],"desc":["Отворете PETS & DOGUE Edition 01, най-новото дигитално издание.","Запишете любимеца си за следващата корица.","Открийте отстъпки за членове и специални предложения.","Намерете pet-friendly места с карти, маршрути и контакти.","Купувайте, продавайте и откривайте продукти и услуги за животни.","Стил, аксесоари и мода за животни.","Здраве, груминг и ежедневна грижа.","Истории, интервюта и практични ръководства.","Портрети, галерии и визуални истории.","Свържете се с любители на животни и местни събития.","Участвайте в конкурсите на PETS & DOGUE.","Спасяване, осиновяване и помощ за животни.","Подбрани марки, услуги и партньори на PETS & DOGUE."]},
+
+  "el":{"menu":"Περιεχόμενα","signIn":"Σύνδεση","joinClub":"Εγγραφή στο Club","language":"Γλώσσα","contact":"Επικοινωνία","openMenu":"Άνοιγμα μενού","closeMenu":"Κλείσιμο μενού","home":"Αρχική","profile":"Προφίλ","nav":["Έκδοση","Αστέρια εξωφύλλου","Εκπτώσεις","Pet-Friendly μέρη","Marketplace","Μόδα","Υγεία","Άρθρα","Φωτογραφίες","Κοινότητα","Διαγωνισμοί","Βοήθεια ζώων","Συνεργάτες"],"desc":["Ανοίξτε το PETS & DOGUE Edition 01, την πιο πρόσφατη ψηφιακή έκδοση.","Δηλώστε το κατοικίδιό σας για το επόμενο εξώφυλλο.","Ανακαλύψτε εκπτώσεις μελών και ειδικές προσφορές.","Βρείτε pet-friendly μέρη με χάρτες, διαδρομές και επαφές.","Αγοράστε, πουλήστε και ανακαλύψτε προϊόντα και υπηρεσίες για κατοικίδια.","Στυλ, αξεσουάρ και μόδα για κατοικίδια.","Υγεία, περιποίηση και καθημερινή φροντίδα.","Ιστορίες, συνεντεύξεις και πρακτικοί οδηγοί.","Πορτρέτα, γκαλερί και οπτικές ιστορίες.","Συνδεθείτε με φίλους των ζώων και τοπικές εκδηλώσεις.","Λάβετε μέρος στους διαγωνισμούς PETS & DOGUE.","Διάσωση, υιοθεσία και βοήθεια για ζώα.","Επιλεγμένες μάρκες, υπηρεσίες και συνεργάτες PETS & DOGUE."]},
+
+  "sv":{"menu":"Innehåll","signIn":"Logga in","joinClub":"Gå med i klubben","language":"Språk","contact":"Kontakta oss","openMenu":"Öppna meny","closeMenu":"Stäng meny","home":"Hem","profile":"Profil","nav":["Utgåva","Omslagsstjärnor","Rabatter","Djurvänliga platser","Marknadsplats","Mode","Hälsa","Artiklar","Foton","Community","Tävlingar","Hjälp för djur","Partners"],"desc":["Öppna PETS & DOGUE Edition 01, den senaste digitala utgåvan.","Anmäl ditt husdjur till nästa omslag.","Upptäck medlemsrabatter och specialerbjudanden.","Hitta djurvänliga platser med kartor, rutter och kontakter.","Köp, sälj och upptäck produkter och tjänster för husdjur.","Stil, accessoarer och husdjursmode.","Hälsa, pälsvård och daglig omsorg.","Berättelser, intervjuer och praktiska guider.","Porträtt, gallerier och visuella berättelser.","Träffa djurvänner och hitta lokala evenemang.","Delta i PETS & DOGUE-tävlingar.","Räddning, adoption och hjälp för djur.","Utvalda varumärken, tjänster och PETS & DOGUE-partners."]},
+
+  "da":{"menu":"Indhold","signIn":"Log ind","joinClub":"Bliv medlem","language":"Sprog","contact":"Kontakt os","openMenu":"Åbn menu","closeMenu":"Luk menu","home":"Hjem","profile":"Profil","nav":["Udgave","Forsidestjerner","Rabatter","Kæledyrsvenlige steder","Markedsplads","Mode","Sundhed","Artikler","Fotos","Fællesskab","Konkurrencer","Hjælp til dyr","Partnere"],"desc":["Åbn PETS & DOGUE Edition 01, den nyeste digitale udgave.","Tilmeld dit kæledyr til den næste forside.","Opdag medlemsrabatter og særlige tilbud.","Find kæledyrsvenlige steder med kort, ruter og kontakter.","Køb, sælg og opdag produkter og tjenester til kæledyr.","Stil, tilbehør og mode til kæledyr.","Sundhed, pleje og daglig omsorg.","Historier, interviews og praktiske guider.","Portrætter, gallerier og visuelle historier.","Mød dyrevenner og find lokale arrangementer.","Deltag i PETS & DOGUE-konkurrencer.","Redning, adoption og hjælp til dyr.","Udvalgte brands, tjenester og PETS & DOGUE-partnere."]},
+
+  "no":{"menu":"Innhold","signIn":"Logg inn","joinClub":"Bli med i klubben","language":"Språk","contact":"Kontakt oss","openMenu":"Åpne meny","closeMenu":"Lukk meny","home":"Hjem","profile":"Profil","nav":["Utgave","Forsidestjerner","Rabatter","Dyrevennlige steder","Markedsplass","Mote","Helse","Artikler","Bilder","Fellesskap","Konkurranser","Hjelp til dyr","Partnere"],"desc":["Åpne PETS & DOGUE Edition 01, den nyeste digitale utgaven.","Meld på kjæledyret ditt til neste forside.","Oppdag medlemsrabatter og spesialtilbud.","Finn dyrevennlige steder med kart, ruter og kontakter.","Kjøp, selg og oppdag produkter og tjenester for kjæledyr.","Stil, tilbehør og kjæledyrsmote.","Helse, stell og daglig omsorg.","Historier, intervjuer og praktiske guider.","Portretter, gallerier og visuelle historier.","Møt dyrevenner og finn lokale arrangementer.","Delta i PETS & DOGUE-konkurranser.","Redning, adopsjon og hjelp til dyr.","Utvalgte merkevarer, tjenester og PETS & DOGUE-partnere."]},
+
+  "fi":{"menu":"Sisältö","signIn":"Kirjaudu","joinClub":"Liity klubiin","language":"Kieli","contact":"Ota yhteyttä","openMenu":"Avaa valikko","closeMenu":"Sulje valikko","home":"Etusivu","profile":"Profiili","nav":["Numero","Kansitähdet","Alennukset","Lemmikkiystävälliset paikat","Markkinapaikka","Muoti","Terveys","Artikkelit","Kuvat","Yhteisö","Kilpailut","Apua eläimille","Kumppanit"],"desc":["Avaa PETS & DOGUE Edition 01, uusin digitaalinen numero.","Ilmoita lemmikkisi seuraavan kannen kilpailuun.","Tutustu jäsenalennuksiin ja erikoistarjouksiin.","Löydä lemmikkiystävällisiä paikkoja karttoineen, reitteineen ja yhteystietoineen.","Osta, myy ja löydä lemmikkituotteita ja palveluita.","Tyyliä, asusteita ja lemmikkimuotia.","Terveys, trimmaus ja päivittäinen hoito.","Tarinoita, haastatteluja ja käytännön oppaita.","Muotokuvia, gallerioita ja visuaalisia tarinoita.","Tapaa eläinystäviä ja löydä paikallisia tapahtumia.","Osallistu PETS & DOGUE -kilpailuihin.","Pelastus, adoptio ja apu eläimille.","Valitut brändit, palvelut ja PETS & DOGUE -kumppanit."]},
+
+  "tr":{"menu":"İçindekiler","signIn":"Giriş yap","joinClub":"Kulübe katıl","language":"Dil","contact":"Bize ulaşın","openMenu":"Menüyü aç","closeMenu":"Menüyü kapat","home":"Ana sayfa","profile":"Profil","nav":["Sürüm","Kapak yıldızları","İndirimler","Pet-Friendly yerler","Pazar yeri","Moda","Sağlık","Makaleler","Fotoğraflar","Topluluk","Yarışmalar","Hayvanlara yardım","Ortaklar"],"desc":["En yeni dijital sayı olan PETS & DOGUE Edition 01’i açın.","Evcil hayvanınızı bir sonraki kapak için aday gösterin.","Üye indirimlerini ve özel teklifleri keşfedin.","Haritalar, rotalar ve iletişim bilgileriyle pet-friendly yerler bulun.","Evcil hayvan ürünleri ve hizmetleri alın, satın ve keşfedin.","Stil, aksesuarlar ve evcil hayvan modası.","Sağlık, bakım ve günlük bakım.","Hikâyeler, röportajlar ve pratik rehberler.","Portreler, galeriler ve görsel hikâyeler.","Hayvanseverlerle bağlantı kurun ve yerel etkinlikleri bulun.","PETS & DOGUE yarışmalarına katılın.","Kurtarma, sahiplendirme ve hayvanlara yardım.","Seçilmiş markalar, hizmetler ve PETS & DOGUE ortakları."]},
+
+  "ar":{"menu":"المحتويات","signIn":"تسجيل الدخول","joinClub":"انضم إلى النادي","language":"اللغة","contact":"اتصل بنا","openMenu":"فتح القائمة","closeMenu":"إغلاق القائمة","home":"الرئيسية","profile":"الملف الشخصي","nav":["الإصدار","نجوم الغلاف","الخصومات","أماكن صديقة للحيوانات","السوق","الموضة","الصحة","المقالات","الصور","المجتمع","المسابقات","مساعدة الحيوانات","الشركاء"],"desc":["افتح PETS & DOGUE Edition 01، أحدث إصدار رقمي.","رشّح حيوانك الأليف للظهور على الغلاف القادم.","اكتشف خصومات الأعضاء والعروض الخاصة.","اعثر على أماكن صديقة للحيوانات مع الخرائط والمسارات وبيانات الاتصال.","اشترِ وبِع واكتشف منتجات وخدمات الحيوانات الأليفة.","الأناقة والإكسسوارات وموضة الحيوانات الأليفة.","الصحة والعناية اليومية والتجميل.","قصص ومقابلات وأدلة عملية.","صور شخصية ومعارض وقصص بصرية.","تواصل مع محبي الحيوانات واكتشف الفعاليات المحلية.","شارك في مسابقات PETS & DOGUE.","الإنقاذ والتبنّي ومساعدة الحيوانات المحتاجة.","علامات تجارية وخدمات وشركاء مختارون من PETS & DOGUE."]},
+
+  "hi":{"menu":"विषय-सूची","signIn":"लॉग इन","joinClub":"क्लब से जुड़ें","language":"भाषा","contact":"संपर्क करें","openMenu":"मेनू खोलें","closeMenu":"मेनू बंद करें","home":"होम","profile":"प्रोफ़ाइल","nav":["एडिशन","कवर स्टार्स","छूट","Pet-Friendly स्थान","मार्केटप्लेस","फैशन","स्वास्थ्य","लेख","फ़ोटो","समुदाय","प्रतियोगिताएँ","ज़रूरतमंद पशु","पार्टनर्स"],"desc":["PETS & DOGUE Edition 01 खोलें — नवीनतम डिजिटल संस्करण।","अपने पालतू को अगली कवर प्रतियोगिता में शामिल करें।","सदस्य छूट और विशेष ऑफ़र खोजें।","मैप, रूट और संपर्क जानकारी के साथ pet-friendly स्थान खोजें।","पालतू उत्पाद और सेवाएँ खरीदें, बेचें और खोजें।","स्टाइल, एक्सेसरीज़ और पालतू फैशन।","स्वास्थ्य, ग्रूमिंग और रोज़मर्रा की देखभाल।","कहानियाँ, इंटरव्यू और उपयोगी गाइड।","पोर्ट्रेट, गैलरी और विज़ुअल स्टोरीज़।","पालतू प्रेमियों से जुड़ें और स्थानीय कार्यक्रम खोजें।","PETS & DOGUE प्रतियोगिताओं में भाग लें।","रेस्क्यू, गोद लेना और ज़रूरतमंद पशुओं की मदद।","चुने हुए ब्रांड, सेवाएँ और PETS & DOGUE पार्टनर्स।"]}
 };
 
 let shellLanguage="en";
@@ -1203,14 +342,24 @@ let activeKey="";
 let legacyObserver=null;
 let internalLanguageChange=false;
 
+let lastScrollY=Math.max(
+  0,
+  window.scrollY||0
+);
+
+let lastScrollDirection=0;
+let scrollDistance=0;
+let scrollTicking=false;
+
 function normalizeLanguage(value){
+
   const raw=String(value||"")
     .trim()
     .toLowerCase()
     .replace("_","-");
 
   if(!raw){
-    return"";
+    return "";
   }
 
   const base=raw.split("-")[0];
@@ -1219,6 +368,7 @@ function normalizeLanguage(value){
 }
 
 function supportedLanguage(value){
+
   return Object.prototype.hasOwnProperty.call(
     TEXT,
     normalizeLanguage(value)
@@ -1226,31 +376,51 @@ function supportedLanguage(value){
 }
 
 function currentFile(){
+
   const path=window.location.pathname||"";
-  const file=path.split("/").filter(Boolean).pop()||"index.html";
-  return file.toLowerCase();
+
+  return(
+    path
+      .split("/")
+      .filter(Boolean)
+      .pop()
+    ||
+    "index.html"
+  ).toLowerCase();
 }
 
 function detectActiveKey(){
+
   const file=currentFile();
 
   if(PAGE_KEYS[file]){
     return PAGE_KEYS[file];
   }
 
-  const path=(window.location.pathname||"").toLowerCase();
+  const path=
+    (window.location.pathname||"")
+      .toLowerCase();
 
-  for(const [name,key] of Object.entries(PAGE_KEYS)){
-    const short=name.replace(".html","");
-    if(path.includes(short)){
+  for(
+    const [name,key]
+    of Object.entries(PAGE_KEYS)
+  ){
+
+    if(
+      path.includes(
+        name.replace(".html","")
+      )
+    ){
       return key;
     }
+
   }
 
-  return"";
+  return "";
 }
 
 function findExistingLanguageSelect(){
+
   const selectors=[
     "#pdLanguageSelect",
     "#headerLanguageSelect",
@@ -1263,50 +433,77 @@ function findExistingLanguageSelect(){
   ];
 
   for(const selector of selectors){
-    const select=document.querySelector(selector);
+
+    const el=
+      document.querySelector(selector);
 
     if(
-      select &&
-      select.id!=="pdGlobalLanguage"
+      el &&
+      el.id!=="pdGlobalLanguage"
     ){
-      return select;
+      return el;
     }
+
   }
 
   return null;
 }
 
 function detectInitialLanguage(){
-  const stored=normalizeLanguage(
-    localStorage.getItem(LANGUAGE_KEY)||""
-  );
 
-  if(stored&&supportedLanguage(stored)){
+  let stored="";
+
+  try{
+
+    stored=normalizeLanguage(
+      localStorage.getItem(
+        LANGUAGE_KEY
+      )
+      ||
+      ""
+    );
+
+  }catch(error){}
+
+  if(
+    stored &&
+    supportedLanguage(stored)
+  ){
     return stored;
   }
 
-  const existing=findExistingLanguageSelect();
-  const fromSelect=existing
-    ?normalizeLanguage(existing.value)
-    :"";
+  const existing=
+    findExistingLanguageSelect();
 
-  if(fromSelect&&supportedLanguage(fromSelect)){
-    return fromSelect;
+  const selected=
+    existing
+      ?normalizeLanguage(existing.value)
+      :"";
+
+  if(
+    selected &&
+    supportedLanguage(selected)
+  ){
+    return selected;
   }
 
-  const htmlLang=normalizeLanguage(
-    document.documentElement.lang||""
-  );
+  const htmlLang=
+    normalizeLanguage(
+      document.documentElement.lang||""
+    );
 
-  if(htmlLang&&supportedLanguage(htmlLang)){
-    return htmlLang;
-  }
-
-  return"en";
+  return(
+    htmlLang &&
+    supportedLanguage(htmlLang)
+  )
+    ?htmlLang
+    :"en";
 }
 
 function persistLanguage(language){
-  const code=normalizeLanguage(language);
+
+  const code=
+    normalizeLanguage(language);
 
   if(!supportedLanguage(code)){
     return;
@@ -1315,18 +512,23 @@ function persistLanguage(language){
   shellLanguage=code;
 
   try{
+
     localStorage.setItem(
       LANGUAGE_KEY,
       code
     );
+
   }catch(error){
+
     console.warn(
       "PETS & DOGUE language storage:",
       error
     );
+
   }
 
   document.documentElement.lang=code;
+
   document.documentElement.dir=
     code==="ar"
       ?"rtl"
@@ -1334,6 +536,7 @@ function persistLanguage(language){
 }
 
 function escapeHTML(value){
+
   return String(value??"")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
@@ -1343,53 +546,119 @@ function escapeHTML(value){
 }
 
 function shellCopy(){
+
   return TEXT[shellLanguage]||TEXT.en;
 }
 
+function navItemByKey(key){
+
+  return NAV_ITEMS.find(
+    item=>item.key===key
+  )
+  ||
+  null;
+}
+
 function navName(item){
+
   if(item.key==="travel"){
-    return TRAVEL_TEXT[shellLanguage]?.name||TRAVEL_TEXT.en.name;
+
+    return(
+      TRAVEL_TEXT[shellLanguage]?.name
+      ||
+      TRAVEL_TEXT.en.name
+    );
+
   }
 
+  const index=
+    NAV_INDEX[item.key];
+
   const copy=shellCopy();
-  const index=NAV_INDEX[item.key];
-  return copy.nav[index]||TEXT.en.nav[index]||item.key;
+
+  return(
+    copy.nav[index]
+    ||
+    TEXT.en.nav[index]
+    ||
+    item.key
+  );
 }
 
 function navDescription(item){
+
   if(item.key==="travel"){
-    return TRAVEL_TEXT[shellLanguage]?.desc||TRAVEL_TEXT.en.desc;
+
+    return(
+      TRAVEL_TEXT[shellLanguage]?.desc
+      ||
+      TRAVEL_TEXT.en.desc
+    );
+
   }
 
+  const index=
+    NAV_INDEX[item.key];
+
   const copy=shellCopy();
-  const index=NAV_INDEX[item.key];
-  return copy.desc[index]||TEXT.en.desc[index]||"";
+
+  return(
+    copy.desc[index]
+    ||
+    TEXT.en.desc[index]
+    ||
+    ""
+  );
 }
 
-function navItemByKey(key){
-  return NAV_ITEMS.find(item=>item.key===key)||null;
+function headerShortLabel(key){
+
+  const index=
+    HEADER_SHORT_INDEX[key];
+
+  const pack=
+    HEADER_SHORT[shellLanguage]
+    ||
+    HEADER_SHORT.en;
+
+  return(
+    pack[index]
+    ||
+    HEADER_SHORT.en[index]
+    ||
+    key
+  );
 }
 
-function headerNavLabel(key){
+function headerFullLabel(key){
+
   const item=navItemByKey(key);
-  return item?navName(item):key;
+
+  return item
+    ?navName(item)
+    :headerShortLabel(key);
 }
 
-function headerNavUrl(key){
+function headerUrl(key){
+
   const item=navItemByKey(key);
-  return item?item.url:"index.html";
+
+  return item
+    ?item.url
+    :"index.html";
 }
 
 function installStyles(){
-  const previous=document.getElementById(
-    "pdGlobalShellStyles"
-  );
 
-  if(previous){
-    previous.remove();
-  }
+  document
+    .getElementById(
+      "pdGlobalShellStyles"
+    )
+    ?.remove();
 
-  const style=document.createElement("style");
+  const style=
+    document.createElement("style");
+
   style.id="pdGlobalShellStyles";
 
   style.textContent=`
@@ -1397,8 +666,9 @@ function installStyles(){
     --pd-shell-black:#070707;
     --pd-shell-cream:#f7f4ed;
     --pd-shell-gold:#c99729;
-    --pd-shell-gold-light:#efd47a;
+    --pd-shell-gold-light:#f0d77c;
     --pd-shell-green:#65e51f;
+    --pd-shell-scarlet:#ff3347;
     --pd-shell-serif:Georgia,"Times New Roman",serif;
     --pd-shell-sans:Arial,Helvetica,sans-serif;
   }
@@ -1411,8 +681,7 @@ function installStyles(){
     overflow:hidden!important;
   }
 
-  #pdGlobalHeader{
-    position:fixed;
+  #pdGlobalHeader{     position:fixed;
     top:0;
     left:0;
     right:0;
@@ -1420,16 +689,19 @@ function installStyles(){
     width:100%;
     background:var(--pd-shell-black);
     color:#fff;
-    border-bottom:1px solid #262626;
+    border-bottom:1px solid #252525;
     font-family:var(--pd-shell-sans);
-    transform:translateY(0);
-    transition:transform .24s ease;
-    will-change:transform;
     direction:ltr;
+    transform:translateY(0);
+    transition:
+      transform .25s cubic-bezier(.2,.75,.2,1);
+    will-change:transform;
+    box-shadow:
+      0 5px 14px rgba(0,0,0,.12);
   }
 
   #pdGlobalHeader.pd-global-header-hidden{
-    transform:translateY(-100%);
+    transform:translateY(-101%);
   }
 
   #pdGlobalHeaderSpacer{
@@ -1442,111 +714,33 @@ function installStyles(){
     width:100%;
     height:62px;
     display:grid;
-    grid-template-columns:52px minmax(0,1fr) auto;
+    grid-template-columns:
+      52px minmax(0,1fr) auto;
     align-items:center;
     padding:0 8px;
-    margin:0 auto;
     background:#070707;
   }
 
-  #pdGlobalHeaderNav{
-    width:100%;
-    border-top:1px solid #242424;
-    background:#090909;
-  }
-
-  .pd-global-header-row{
-    width:100%;
-    display:grid;
-    overflow:hidden;
-    border-bottom:1px solid #222;
-  }
-
-  #pdGlobalHeaderTopNav{
-    grid-template-columns:repeat(5,minmax(0,1fr));
-  }
-
-  #pdGlobalHeaderBottomNav{
-    grid-template-columns:repeat(8,minmax(0,1fr));
-  }
-
-  .pd-global-header-nav-link{
-    min-width:0;
-    min-height:42px;
-    padding:4px 2px 5px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:2px;
-    border-right:1px solid #1f1f1f;
-    background:#0b0b0b;
-    color:#fff;
-    text-decoration:none;
-    text-align:center;
-    overflow:hidden;
-  }
-
-  .pd-global-header-nav-link:last-child{
-    border-right:0;
-  }
-
-  .pd-global-header-nav-link .pd-global-header-icon{
-    display:block;
-    min-height:15px;
-    font-size:14px;
-    line-height:1;
-    font-weight:900;
-  }
-
-  .pd-global-header-nav-link .pd-global-header-label{
-    display:block;
-    width:100%;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    font-size:9px;
-    line-height:1.05;
-    font-weight:900;
-    letter-spacing:.1px;
-  }
-
-  .pd-global-header-nav-link.active{
-    color:var(--pd-shell-gold-light);
-    background:#17130b;
-    box-shadow:inset 0 -3px 0 var(--pd-shell-gold);
-  }
-
-  .pd-global-header-nav-link.pd-partners-link{
-    background:#ff2d2d;
-    color:#fff;
-  }
-
-  .pd-global-header-nav-link.pd-partners-link.active{
-    background:#ff2d2d;
-    color:#fff;
-    box-shadow:inset 0 -3px 0 #fff;
-  }
-
   #pdGlobalMenuButton{
-    width:42px;
-    height:42px;
+    width:44px;
+    height:44px;
     border:0;
     background:transparent;
     display:flex;
     flex-direction:column;
     justify-content:center;
-    gap:5px;
+    gap:6px;
     padding:7px;
     cursor:pointer;
+    color:#fff;
   }
 
   #pdGlobalMenuButton span{
     display:block;
-    width:27px;
+    width:28px;
     height:2px;
     background:#fff;
-    border-radius:20px;
+    border-radius:999px;
   }
 
   #pdGlobalBrand{
@@ -1555,7 +749,8 @@ function installStyles(){
     text-align:center;
     font-family:var(--pd-shell-serif);
     color:var(--pd-shell-gold);
-    line-height:.86;    text-decoration:none;
+    line-height:.86;
+    text-decoration:none;
     white-space:nowrap;
   }
 
@@ -1580,18 +775,18 @@ function installStyles(){
     display:flex;
     align-items:center;
     justify-content:flex-end;
-    gap:6px;
+    gap:7px;
   }
 
   #pdGlobalHome,
   #pdGlobalProfile{
-    width:38px;
-    height:38px;
-    flex:0 0 38px;
+    width:40px;
+    height:40px;
+    flex:0 0 40px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid #3e3e3e;
+    border:1px solid #404040;
     border-radius:12px;
     background:#111;
     color:#fff;
@@ -1605,8 +800,8 @@ function installStyles(){
 
   #pdGlobalHome svg,
   #pdGlobalProfile svg{
-    width:22px;
-    height:22px;
+    width:23px;
+    height:23px;
     fill:none;
     stroke:currentColor;
     stroke-width:2;
@@ -1618,17 +813,144 @@ function installStyles(){
     border-color:var(--pd-shell-green);
   }
 
+  #pdGlobalHeaderNav{
+    width:100%;
+    background:#080808;
+    border-top:1px solid #222;
+  }
+
+  .pd-global-header-row{
+    width:100%;
+    display:grid;
+    overflow:hidden;
+    background:#0a0a0a;
+  }
+
+  #pdGlobalHeaderTopNav{
+    grid-template-columns:
+      repeat(5,minmax(0,1fr));
+    border-bottom:1px solid #292929;
+  }
+
+  #pdGlobalHeaderBottomNav{
+    grid-template-columns:
+      repeat(8,minmax(0,1fr));
+  }
+
+  .pd-global-header-nav-link{
+    min-width:0;
+    min-height:58px;
+    padding:6px 2px 5px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    border-right:1px solid #242424;
+    background:#0a0a0a;
+    color:#fff;
+    text-decoration:none;
+    text-align:center;
+  }
+
+  #pdGlobalHeaderBottomNav
+  .pd-global-header-nav-link{
+    min-height:54px;
+    padding-top:5px;
+    padding-bottom:4px;
+    gap:3px;
+  }
+
+  .pd-global-header-nav-link:last-child{
+    border-right:0;
+  }
+
+  .pd-global-header-icon{
+    display:block;
+    min-height:17px;
+    font-size:17px;
+    line-height:1;
+    font-weight:900;
+    color:#f3f3f3;
+  }
+
+  #pdGlobalHeaderBottomNav
+  .pd-global-header-icon{
+    font-size:15px;
+    min-height:15px;
+  }
+
+  .pd-global-header-label{
+    display:-webkit-box;
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    white-space:normal;
+    word-break:normal;
+    overflow-wrap:anywhere;
+    direction:auto;
+    unicode-bidi:plaintext;
+    color:#fff;
+    font-size:11px;
+    line-height:1.05;
+    font-weight:800;
+    letter-spacing:0;
+  }
+
+  #pdGlobalHeaderBottomNav
+  .pd-global-header-label{
+    font-size:9.8px;
+    line-height:1.04;
+    font-weight:800;
+  }
+
+  .pd-global-header-nav-link.active{
+    background:#17130b;
+    color:var(--pd-shell-gold-light);
+    box-shadow:
+      inset 0 -3px 0
+      var(--pd-shell-gold);
+  }
+
+  .pd-global-header-nav-link.active
+  .pd-global-header-label,
+  .pd-global-header-nav-link.active
+  .pd-global-header-icon{
+    color:var(--pd-shell-gold-light);
+  }
+
+  .pd-global-header-nav-link.pd-partners-link{
+    background:var(--pd-shell-scarlet);
+    color:#fff;
+  }
+
+  .pd-global-header-nav-link.pd-partners-link
+  .pd-global-header-label,
+  .pd-global-header-nav-link.pd-partners-link
+  .pd-global-header-icon{
+    color:#fff;
+  }
+
+  .pd-global-header-nav-link.pd-partners-link.active{
+    background:var(--pd-shell-scarlet);
+    box-shadow:
+      inset 0 -4px 0 #fff;
+  }
+
   #pdGlobalProfileMenu{
     position:absolute;
-    top:46px;
+    top:48px;
     right:0;
     z-index:14200;
-    width:210px;
+    width:218px;
     padding:10px;
-    border:1px solid #2f2f2f;
+    border:1px solid #303030;
     border-radius:16px;
     background:#0b0b0b;
-    box-shadow:0 18px 42px rgba(0,0,0,.34);
+    box-shadow:
+      0 18px 42px rgba(0,0,0,.34);
     opacity:0;
     visibility:hidden;
     transform:translateY(-5px);
@@ -1667,7 +989,9 @@ function installStyles(){
     text-decoration:none;
   }
 
-  .pd-global-profile-link + .pd-global-profile-link{
+  .pd-global-profile-link
+  +
+  .pd-global-profile-link{
     margin-top:7px;
   }
 
@@ -1710,7 +1034,8 @@ function installStyles(){
     color:#111;
     transform:translateX(-102%);
     transition:transform .24s ease;
-    box-shadow:20px 0 55px rgba(0,0,0,.28);
+    box-shadow:
+      20px 0 55px rgba(0,0,0,.28);
     overflow:hidden;
     display:flex;
     flex-direction:column;
@@ -1721,17 +1046,20 @@ function installStyles(){
     transform:translateX(0);
   }
 
-  html[dir="rtl"] #pdGlobalMenu{
+  html[dir="rtl"]
+  #pdGlobalMenu{
     left:auto;
     right:0;
     transform:translateX(102%);
   }
 
-  html[dir="rtl"] #pdGlobalMenu.open{
+  html[dir="rtl"]
+  #pdGlobalMenu.open{
     transform:translateX(0);
   }
 
-  html[dir="rtl"] #pdGlobalProfileMenu{
+  html[dir="rtl"]
+  #pdGlobalProfileMenu{
     right:auto;
     left:0;
   }
@@ -1750,7 +1078,9 @@ function installStyles(){
 
   .pd-global-menu-head h2{
     margin:0;
-    font:normal 31px/1 var(--pd-shell-serif);
+    font:
+      normal 31px/1
+      var(--pd-shell-serif);
   }
 
   #pdGlobalClose{
@@ -1846,7 +1176,8 @@ function installStyles(){
     min-width:0;
     min-height:82px;
     display:grid;
-    grid-template-columns:82px minmax(0,1fr);
+    grid-template-columns:
+      82px minmax(0,1fr);
     border:2px solid #191919;
     border-radius:18px;
     background:#fff;
@@ -1886,7 +1217,9 @@ function installStyles(){
 
   .pd-global-menu-card h3{
     margin:0;
-    font:700 19px/1 var(--pd-shell-serif);
+    font:
+      700 19px/1
+      var(--pd-shell-serif);
   }
 
   .pd-global-menu-card.active h3{
@@ -1919,72 +1252,25 @@ function installStyles(){
     font-size:12px;
     font-weight:900;
     text-decoration:none;
-  }
-
-  #pdGlobalMenuButton:focus-visible,
+  }   #pdGlobalMenuButton:focus-visible,
   #pdGlobalClose:focus-visible,
   #pdGlobalHome:focus-visible,
   #pdGlobalProfile:focus-visible,
   #pdGlobalLanguage:focus-visible,
   #pdGlobalMenu a:focus-visible,
-  #pdGlobalProfileMenu a:focus-visible{
+  #pdGlobalProfileMenu a:focus-visible,
+  .pd-global-header-nav-link:focus-visible{
     outline:3px solid var(--pd-shell-green);
-    outline-offset:3px;
-  }
-
-  @media(max-width:360px){
-    #pdGlobalHeaderMain{
-      grid-template-columns:46px minmax(0,1fr) auto;
-      padding-left:5px;
-      padding-right:5px;
-    }
-
-    #pdGlobalHeaderActions{
-      gap:4px;
-    }
-
-    #pdGlobalHome,
-    #pdGlobalProfile{
-      width:35px;
-      height:35px;
-      flex-basis:35px;
-      border-radius:10px;
-    }
-
-    #pdGlobalBrandSmall{
-      font-size:7px;
-      letter-spacing:2px;
-    }
-
-    #pdGlobalBrandBig{
-      font-size:22px;
-      letter-spacing:1.4px;
-    }
-
-    #pdGlobalMenu{
-      width:86vw;
-      min-width:270px;
-    }
-  }
-
-  @media(min-width:900px){
-    #pdGlobalHeaderMain{
-      max-width:1500px;
-      padding-left:18px;
-      padding-right:18px;
-    }
-
-    #pdGlobalMenu{
-      width:390px;
-      max-width:390px;
-    }
+    outline-offset:2px;
   }
 
   @media(max-width:620px){
+
     #pdGlobalHeaderMain{
       height:58px;
-      grid-template-columns:46px minmax(0,1fr) auto;
-      padding:0 5px;
+      grid-template-columns:
+        46px minmax(0,1fr) auto;
+      padding:0 6px;
     }
 
     #pdGlobalBrandSmall{
@@ -1993,8 +1279,65 @@ function installStyles(){
     }
 
     #pdGlobalBrandBig{
-      font-size:20px;
-      letter-spacing:1.4px;
+      font-size:21px;
+      letter-spacing:1.5px;
+    }
+
+    #pdGlobalHome,
+    #pdGlobalProfile{
+      width:36px;
+      height:36px;
+      flex-basis:36px;
+      border-radius:10px;
+    }
+
+    #pdGlobalHeaderActions{
+      gap:5px;
+    }
+
+    .pd-global-header-nav-link{
+      min-height:56px;
+      padding:5px 2px 4px;
+      gap:3px;
+    }
+
+    #pdGlobalHeaderBottomNav
+    .pd-global-header-nav-link{
+      min-height:52px;
+      padding:4px 1px;
+      gap:2px;
+    }
+
+    .pd-global-header-icon{
+      font-size:16px;
+      min-height:16px;
+    }
+
+    #pdGlobalHeaderBottomNav
+    .pd-global-header-icon{
+      font-size:13px;
+      min-height:13px;
+    }
+
+    .pd-global-header-label{
+      font-size:10.4px;
+      line-height:1.04;
+    }
+
+    #pdGlobalHeaderBottomNav
+    .pd-global-header-label{
+      font-size:9.2px;
+      line-height:1.02;
+    }
+
+  }
+
+  @media(max-width:390px){
+
+    #pdGlobalHeaderMain{
+      grid-template-columns:
+        45px minmax(0,1fr) auto;
+      padding:0 5px;
     }
 
     #pdGlobalHome,
@@ -2002,55 +1345,81 @@ function installStyles(){
       width:35px;
       height:35px;
       flex-basis:35px;
-      border-radius:10px;
     }
 
-    .pd-global-header-nav-link{
-      min-height:39px;
-      padding:3px 1px 4px;
+    .pd-global-header-label{
+      font-size:10px;
     }
 
-    .pd-global-header-nav-link .pd-global-header-icon{
-      font-size:12px;
-      min-height:13px;
-    }
-
-    .pd-global-header-nav-link .pd-global-header-label{
-      font-size:7.7px;
+    #pdGlobalHeaderBottomNav
+    .pd-global-header-label{
+      font-size:8.7px;
       letter-spacing:-.1px;
     }
+
+    #pdGlobalHeaderBottomNav
+    .pd-global-header-icon{
+      font-size:12px;
+    }
+
+    #pdGlobalMenu{
+      width:90vw;
+      min-width:270px;
+    }
+
   }
 
-  @media(max-width:380px){
-    .pd-global-header-nav-link .pd-global-header-label{
-      font-size:7px;
+  @media(max-width:350px){
+
+    #pdGlobalHeaderBottomNav
+    .pd-global-header-label{
+      font-size:8.1px;
     }
 
-    .pd-global-header-nav-link .pd-global-header-icon{
-      font-size:11px;
+    .pd-global-header-label{
+      font-size:9.4px;
     }
+
+  }
+
+  @media(min-width:900px){
+
+    #pdGlobalHeaderMain{
+      max-width:1500px;
+      padding-left:18px;
+      padding-right:18px;
+      margin:auto;
+    }
+
+    #pdGlobalHeaderTopNav,
+    #pdGlobalHeaderBottomNav{
+      max-width:1500px;
+      margin:auto;
+    }
+
   }
 
   @media(prefers-reduced-motion:reduce){
+
     #pdGlobalHeader,
     #pdGlobalMenu,
     #pdGlobalOverlay,
     #pdGlobalProfileMenu{
       transition:none;
     }
+
   }
-  `;
+`;
 
   document.head.appendChild(style);
 }
 
 function hideExistingShell(){
+
   const selectors=[
     "body > .account-bar",
     "body > header:not(#pdGlobalHeader)",
-    "body > header.site-header",
     "body > .site-header",
-    "body > header.pd-topbar",
     "body > .pd-topbar",
     "#pdMasterHeader",
     ".pd-master-header",
@@ -2071,12 +1440,17 @@ function hideExistingShell(){
   ];
 
   selectors.forEach(selector=>{
+
     document
       .querySelectorAll(selector)
       .forEach(element=>{
-        if(          element.id==="pdGlobalHeader"||
-          element.id==="pdGlobalMenu"||
-          element.id==="pdGlobalOverlay"
+
+        if(
+          [
+            "pdGlobalHeader",
+            "pdGlobalMenu",
+            "pdGlobalOverlay"
+          ].includes(element.id)
         ){
           return;
         }
@@ -2084,18 +1458,22 @@ function hideExistingShell(){
         element.classList.add(
           "pd-global-old-shell-hidden"
         );
+
       });
+
   });
 }
 
 function watchForLegacyShell(){
+
   if(legacyObserver){
     return;
   }
 
-  legacyObserver=new MutationObserver(
-    ()=>hideExistingShell()
-  );
+  legacyObserver=
+    new MutationObserver(
+      ()=>hideExistingShell()
+    );
 
   legacyObserver.observe(
     document.body,
@@ -2107,12 +1485,20 @@ function watchForLegacyShell(){
 }
 
 function createHeader(){
-  if(document.getElementById("pdGlobalHeader")){
+
+  if(
+    document.getElementById(
+      "pdGlobalHeader"
+    )
+  ){
     return;
   }
 
   const copy=shellCopy();
-  const header=document.createElement("header");
+
+  const header=
+    document.createElement("header");
+
   header.id="pdGlobalHeader";
 
   header.innerHTML=`
@@ -2157,7 +1543,9 @@ function createHeader(){
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
-            <path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"></path>
+            <path
+              d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"
+            ></path>
           </svg>
         </a>
 
@@ -2172,8 +1560,15 @@ function createHeader(){
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
-            <circle cx="12" cy="8" r="4"></circle>
-            <path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path>
+            <circle
+              cx="12"
+              cy="8"
+              r="4"
+            ></circle>
+
+            <path
+              d="M4.5 21a7.5 7.5 0 0 1 15 0"
+            ></path>
           </svg>
         </button>
 
@@ -2181,29 +1576,32 @@ function createHeader(){
           id="pdGlobalProfileMenu"
           role="menu"
           aria-hidden="true"
-        >
-        </div>
+        ></div>
 
       </div>
 
     </div>
 
     <div id="pdGlobalHeaderNav">
+
       <nav
         id="pdGlobalHeaderTopNav"
         class="pd-global-header-row"
-        aria-label="Primary PETS & DOGUE navigation"
+        aria-label="PETS & DOGUE primary sections"
       ></nav>
 
       <nav
         id="pdGlobalHeaderBottomNav"
         class="pd-global-header-row"
-        aria-label="Secondary PETS & DOGUE navigation"
+        aria-label="PETS & DOGUE editorial sections"
       ></nav>
+
     </div>
   `;
 
-  const spacer=document.createElement("div");
+  const spacer=
+    document.createElement("div");
+
   spacer.id="pdGlobalHeaderSpacer";
 
   document.body.insertBefore(
@@ -2217,474 +1615,155 @@ function createHeader(){
   );
 
   document
-    .getElementById("pdGlobalMenuButton")
+    .getElementById(
+      "pdGlobalMenuButton"
+    )
     ?.addEventListener(
       "click",
       openMenu
     );
 
   document
-    .getElementById("pdGlobalProfile")
+    .getElementById(
+      "pdGlobalProfile"
+    )
     ?.addEventListener(
       "click",
       event=>{
+
         event.stopPropagation();
+
         toggleProfileMenu();
+
       }
     );
 
   renderProfileMenu();
   renderHeaderNav();
-  syncHeaderSpacer();
+
+  requestAnimationFrame(
+    syncHeaderSpacer
+  );
 }
 
 function renderHeaderNav(){
-  const top=document.getElementById("pdGlobalHeaderTopNav");
-  const bottom=document.getElementById("pdGlobalHeaderBottomNav");
+
+  const top=
+    document.getElementById(
+      "pdGlobalHeaderTopNav"
+    );
+
+  const bottom=
+    document.getElementById(
+      "pdGlobalHeaderBottomNav"
+    );
 
   if(!top||!bottom){
     return;
   }
 
-  const renderRow=(keys)=>
-    keys.map(key=>{
-      const active=key===activeKey;
-      const partners=key==="partners";
+  const row=
+    keys=>keys
+      .map(key=>{
 
-      return`
-        <a
-          class="pd-global-header-nav-link${active?" active":""}${partners?" pd-partners-link":""}"
-          href="${escapeHTML(headerNavUrl(key))}"
-          data-pd-nav="${escapeHTML(key)}"
-          ${active?'aria-current="page"':""}
-        >
-          <span class="pd-global-header-icon" aria-hidden="true">
-            ${escapeHTML(HEADER_ICONS[key]||"•")}
-          </span>
-          <span class="pd-global-header-label">
-            ${escapeHTML(headerNavLabel(key))}
-          </span>
-        </a>
-      `;
-    }).join("");
+        const active=
+          key===activeKey;
 
-  top.innerHTML=renderRow(HEADER_TOP_ITEMS);
-  bottom.innerHTML=renderRow(HEADER_BOTTOM_ITEMS);
+        const partners=
+          key==="partners";
+
+        return`
+          <a
+            class="pd-global-header-nav-link${active?" active":""}${partners?" pd-partners-link":""}"
+            href="${escapeHTML(headerUrl(key))}"
+            data-pd-nav="${escapeHTML(key)}"
+            aria-label="${escapeHTML(headerFullLabel(key))}"
+            ${active?'aria-current="page"':""}
+          >
+            <span
+              class="pd-global-header-icon"
+              aria-hidden="true"
+            >
+              ${escapeHTML(
+                HEADER_ICONS[key]||"•"
+              )}
+            </span>
+
+            <span
+              class="pd-global-header-label"
+            >
+              ${escapeHTML(
+                headerShortLabel(key)
+              )}
+            </span>
+          </a>
+        `;
+
+      })
+      .join("");
+
+  top.innerHTML=
+    row(HEADER_TOP_ITEMS);
+
+  bottom.innerHTML=
+    row(HEADER_BOTTOM_ITEMS);
 }
 
 function syncHeaderSpacer(){
-  const header=document.getElementById("pdGlobalHeader");
-  const spacer=document.getElementById("pdGlobalHeaderSpacer");
 
-  if(!header||!spacer){
-    return;
+  const header=
+    document.getElementById(
+      "pdGlobalHeader"
+    );
+
+  const spacer=
+    document.getElementById(
+      "pdGlobalHeaderSpacer"
+    );
+
+  if(
+    header &&
+    spacer
+  ){
+
+    spacer.style.height=
+      `${Math.ceil(
+        header
+          .getBoundingClientRect()
+          .height
+      )}px`;
+
   }
-
-  spacer.style.height=`${Math.ceil(header.getBoundingClientRect().height)}px`;
 }
 
-let pdLastScrollY=window.scrollY||0;
-let pdHeaderScrollTicking=false;
-
 function showGlobalHeader(){
-  document.getElementById("pdGlobalHeader")?.classList.remove("pd-global-header-hidden");
+
+  document
+    .getElementById(
+      "pdGlobalHeader"
+    )
+    ?.classList
+    .remove(
+      "pd-global-header-hidden"
+    );
 }
 
 function hideGlobalHeader(){
-  document.getElementById("pdGlobalHeader")?.classList.add("pd-global-header-hidden");
-}
-
-function handleGlobalHeaderScroll(){
-  if(pdHeaderScrollTicking){
-    return;
-  }
-
-  pdHeaderScrollTicking=true;
-
-  requestAnimationFrame(()=>{
-    const current=Math.max(0,window.scrollY||0);
-    const delta=current-pdLastScrollY;
-    const menuOpen=document.getElementById("pdGlobalMenu")?.classList.contains("open");
-    const profileOpen=document.getElementById("pdGlobalProfileMenu")?.classList.contains("open");
-
-    if(current<=8||menuOpen||profileOpen){
-      showGlobalHeader();
-    }else if(delta>7){
-      hideGlobalHeader();
-    }else if(delta<-7){
-      showGlobalHeader();
-    }
-
-    pdLastScrollY=current;
-    pdHeaderScrollTicking=false;
-  });
-}
-
-function createSideMenu(){
-  if(document.getElementById("pdGlobalMenu")){
-    return;
-  }
-
-  const overlay=document.createElement("div");
-  overlay.id="pdGlobalOverlay";
-
-  const menu=document.createElement("aside");
-  menu.id="pdGlobalMenu";
-  menu.setAttribute(
-    "aria-hidden",
-    "true"
-  );
-
-  document.body.appendChild(overlay);
-  document.body.appendChild(menu);
-
-  overlay.addEventListener(
-    "click",
-    closeMenu
-  );
-}
-
-function renderProfileMenu(){
-  const menu=document.getElementById(
-    "pdGlobalProfileMenu"
-  );
-
-  if(!menu){
-    return;
-  }
-
-  const copy=shellCopy();
-  const wasOpen=menu.classList.contains("open");
-
-  menu.innerHTML=`
-    <div class="pd-global-profile-title">
-      ${escapeHTML(copy.profile)}
-    </div>
-
-    <a
-      class="pd-global-profile-link"
-      href="account.html"
-      role="menuitem"
-    >
-      ${escapeHTML(copy.signIn)}
-    </a>
-
-    <a
-      class="pd-global-profile-link club"
-      href="club.html"
-      role="menuitem"
-    >
-      ${escapeHTML(copy.joinClub)}
-    </a>
-  `;
-
-  if(wasOpen){
-    menu.classList.add("open");
-    menu.setAttribute("aria-hidden","false");
-  }
-}
-
-function openProfileMenu(){
-  showGlobalHeader();
-
-  const menu=document.getElementById(
-    "pdGlobalProfileMenu"
-  );
-  const button=document.getElementById(
-    "pdGlobalProfile"
-  );
-
-  if(!menu||!button){
-    return;
-  }
-
-  menu.classList.add("open");
-  menu.setAttribute("aria-hidden","false");
-  button.setAttribute("aria-expanded","true");
-}
-
-function closeProfileMenu(){
-  const menu=document.getElementById(
-    "pdGlobalProfileMenu"
-  );
-  const button=document.getElementById(
-    "pdGlobalProfile"
-  );
-
-  if(!menu||!button){
-    return;
-  }
-
-  menu.classList.remove("open");
-  menu.setAttribute("aria-hidden","true");
-  button.setAttribute("aria-expanded","false");
-}
-
-function toggleProfileMenu(){
-  const menu=document.getElementById(
-    "pdGlobalProfileMenu"
-  );
-
-  if(!menu){
-    return;
-  }
-
-  if(menu.classList.contains("open")){
-    closeProfileMenu();
-  }else{
-    openProfileMenu();
-  }
-}
-
-function openMenu(){
-  showGlobalHeader();
-
-  const menu=document.getElementById(
-    "pdGlobalMenu"
-  );
-  const overlay=document.getElementById(
-    "pdGlobalOverlay"
-  );
-  const button=document.getElementById(
-    "pdGlobalMenuButton"
-  );
-
-  if(!menu||!overlay){
-    return;
-  }
-
-  closeProfileMenu();
-
-  menu.classList.add("open");
-  overlay.classList.add("open");
-  menu.setAttribute("aria-hidden","false");
-  button?.setAttribute("aria-expanded","true");
-
-  document.body.classList.add(
-    "pd-global-menu-open"
-  );
-}
-
-function closeMenu(){
-  const menu=document.getElementById(
-    "pdGlobalMenu"
-  );
-  const overlay=document.getElementById(
-    "pdGlobalOverlay"
-  );
-  const button=document.getElementById(
-    "pdGlobalMenuButton"
-  );
-
-  if(!menu||!overlay){
-    return;
-  }
-
-  menu.classList.remove("open");
-  overlay.classList.remove("open");
-  menu.setAttribute("aria-hidden","true");
-  button?.setAttribute("aria-expanded","false");
-
-  document.body.classList.remove(
-    "pd-global-menu-open"
-  );
-}
-
-function renderSideMenu(){
-  const menu=document.getElementById(
-    "pdGlobalMenu"
-  );
-
-  if(!menu){
-    return;
-  }
-
-  const copy=shellCopy();
-  const oldScroll=
-    menu.querySelector(".pd-global-menu-scroll")?.scrollTop||0;
-  const wasOpen=
-    menu.classList.contains("open");
-
-  const cards=NAV_ITEMS
-    .map(item=>{
-      const active=
-        item.key===activeKey;
-
-      return`
-        <a
-          class="pd-global-menu-card ${active?"active":""}"
-          href="${item.url}"
-          data-pd-nav="${item.key}"
-          ${active?'aria-current="page"':""}
-        >
-          <span class="pd-global-menu-card-image">
-            <img
-              src="${item.image}"
-              alt=""
-              loading="lazy"
-              decoding="async"
-              referrerpolicy="no-referrer"
-            >
-          </span>
-
-          <span class="pd-global-menu-card-copy">
-            <h3>
-              ${escapeHTML(navName(item))}
-            </h3>
-
-            <p>
-              ${escapeHTML(navDescription(item))}
-            </p>
-          </span>
-        </a>
-      `;
-    })
-    .join("");
-
-  menu.innerHTML=`
-    <div class="pd-global-menu-head">
-
-      <h2>
-        ${escapeHTML(copy.menu)}
-      </h2>
-
-      <button
-        id="pdGlobalClose"
-        type="button"
-        aria-label="${escapeHTML(copy.closeMenu)}"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div class="pd-global-menu-scroll">
-
-      <div class="pd-global-account">
-
-        <a href="account.html">
-          ${escapeHTML(copy.signIn)}
-        </a>
-
-        <a
-          class="club"
-          href="club.html"
-        >
-          ${escapeHTML(copy.joinClub)}
-        </a>
-
-      </div>
-
-      <label
-        class="pd-global-language-label"
-        for="pdGlobalLanguage"
-      >
-        ${escapeHTML(copy.language)}
-      </label>
-
-      <select
-        id="pdGlobalLanguage"
-        aria-label="${escapeHTML(copy.language)}"
-      >
-        ${LANGUAGE_OPTIONS
-          .map(option=>`
-            <option
-              value="${option[0]}"
-              ${option[0]===shellLanguage?"selected":""}
-            >
-              ${option[1]}
-            </option>          `)
-          .join("")}
-      </select>
-
-      <nav
-        id="pdGlobalMenuList"
-        aria-label="PETS & DOGUE"
-      >
-        ${cards}
-      </nav>
-
-      <div class="pd-global-menu-footer">
-        <a href="contact.html">
-          ${escapeHTML(copy.contact)}
-        </a>
-      </div>
-
-    </div>
-  `;
 
   document
-    .getElementById("pdGlobalClose")
-    ?.addEventListener(
-      "click",
-      closeMenu
+    .getElementById(
+      "pdGlobalHeader"
+    )
+    ?.classList
+    .add(
+      "pd-global-header-hidden"
     );
-
-  document
-    .getElementById("pdGlobalLanguage")
-    ?.addEventListener(
-      "change",
-      event=>{
-        applyLanguage(
-          event.target.value,
-          {
-            syncPage:true,
-            announce:true
-          }
-        );
-      }
-    );
-
-  if(wasOpen){
-    menu.classList.add("open");
-    menu.setAttribute("aria-hidden","false");
-
-    requestAnimationFrame(()=>{
-      const scroll=menu.querySelector(
-        ".pd-global-menu-scroll"
-      );
-
-      if(scroll){
-        scroll.scrollTop=oldScroll;
-      }
-    });
-  }
-}
-
-function updateHeaderLanguage(){
-  const copy=shellCopy();
-
-  document
-    .getElementById("pdGlobalMenuButton")
-    ?.setAttribute(
-      "aria-label",
-      copy.openMenu
-    );
-
-  document
-    .getElementById("pdGlobalHome")
-    ?.setAttribute(
-      "aria-label",
-      copy.home
-    );
-
-  document
-    .getElementById("pdGlobalProfile")
-    ?.setAttribute(
-      "aria-label",
-      copy.profile
-    );
-
-  renderProfileMenu();
-  renderHeaderNav();
-  syncHeaderSpacer();
-}
-
-function valueForExistingSelect(
+} function valueForExistingSelect(
   select,
   language
 ){
-  const reverseAliases={
+
+  const reverse={
     uk:"ua",
     cs:"cz",
     el:"gr",
@@ -2694,34 +1773,54 @@ function valueForExistingSelect(
 
   const candidates=[
     language,
-    reverseAliases[language]
+    reverse[language]
   ].filter(Boolean);
 
-  for(const candidate of candidates){
-    const exact=Array
-      .from(select.options||[])
-      .find(option=>
-        option.value===candidate
-      );
+  for(
+    const candidate
+    of candidates
+  ){
+
+    const exact=
+      Array
+        .from(
+          select.options||[]
+        )
+        .find(
+          option=>
+            option.value===
+            candidate
+        );
 
     if(exact){
       return exact.value;
     }
+
   }
 
-  const normalized=Array
-    .from(select.options||[])
-    .find(option=>
-      normalizeLanguage(option.value)===language
-    );
+  const normalized=
+    Array
+      .from(
+        select.options||[]
+      )
+      .find(
+        option=>
+          normalizeLanguage(
+            option.value
+          )===language
+      );
 
   return normalized
     ?normalized.value
     :"";
 }
 
-function syncExistingPageLanguage(language){
-  const code=normalizeLanguage(language);
+function syncExistingPageLanguage(
+  language
+){
+
+  const code=
+    normalizeLanguage(language);
 
   if(!supportedLanguage(code)){
     return false;
@@ -2730,59 +1829,91 @@ function syncExistingPageLanguage(language){
   let handled=false;
 
   if(window.PetsDogueLanguage){
+
     const controller=
       window.PetsDogueLanguage;
 
-    for(const setter of[
-      "setLanguage",
-      "changeLanguage",
-      "selectLanguage"
-    ]){
-      if(typeof controller[setter]==="function"){
+    for(
+      const setter
+      of[
+        "setLanguage",
+        "changeLanguage",
+        "selectLanguage"
+      ]
+    ){
+
+      if(
+        typeof controller[setter]
+        ===
+        "function"
+      ){
+
         try{
+
           controller[setter](code);
+
           handled=true;
+
         }catch(error){
+
           console.warn(
             "PETS & DOGUE language controller:",
             error
           );
+
         }
 
         break;
       }
+
     }
+
   }
 
   if(
     !handled &&
-    typeof window.renderLanguage==="function"
+    typeof window.renderLanguage
+    ===
+    "function"
   ){
+
     try{
+
       window.renderLanguage(code);
+
       handled=true;
+
     }catch(error){
+
       console.warn(
         "PETS & DOGUE renderLanguage:",
         error
       );
+
     }
+
   }
 
-  const existing=findExistingLanguageSelect();
+  const existing=
+    findExistingLanguageSelect();
 
   if(existing){
-    const value=valueForExistingSelect(
-      existing,
-      code
-    );
+
+    const value=
+      valueForExistingSelect(
+        existing,
+        code
+      );
 
     if(
       value &&
       existing.value!==value
     ){
+
       try{
+
         existing.value=value;
+
         existing.dispatchEvent(
           new Event(
             "change",
@@ -2793,21 +1924,26 @@ function syncExistingPageLanguage(language){
         );
 
         handled=true;
+
       }catch(error){
+
         console.warn(
           "PETS & DOGUE existing language select:",
           error
         );
+
       }
+
     }
+
   }
 
   return handled;
 }
 
 function refreshShellLanguage(){
+
   updateHeaderLanguage();
-  renderProfileMenu();
   renderSideMenu();
 }
 
@@ -2818,22 +1954,30 @@ function applyLanguage(
     announce=true
   }={}
 ){
-  const code=normalizeLanguage(language);
+
+  const code=
+    normalizeLanguage(language);
 
   if(!supportedLanguage(code)){
     return;
   }
 
   internalLanguageChange=true;
+
   persistLanguage(code);
 
   if(syncPage){
-    syncExistingPageLanguage(code);
+
+    syncExistingPageLanguage(
+      code
+    );
+
   }
 
   refreshShellLanguage();
 
   if(announce){
+
     window.dispatchEvent(
       new CustomEvent(
         "petsdogue:languagechange",
@@ -2845,153 +1989,222 @@ function applyLanguage(
         }
       )
     );
+
   }
 
-  setTimeout(()=>{
-    internalLanguageChange=false;
-  },0);
+  setTimeout(
+    ()=>{
+      internalLanguageChange=false;
+    },
+    0
+  );
 }
 
-function preserveLanguageBeforeNavigation(event){
-  const link=event.target.closest(
-    "a[data-pd-nav]"
-  );
+function preserveLanguageBeforeNavigation(
+  event
+){
+
+  const link=
+    event.target.closest(
+      "a[data-pd-nav]"
+    );
 
   if(!link){
     return;
   }
 
   try{
+
     localStorage.setItem(
       LANGUAGE_KEY,
       shellLanguage
     );
-  }catch(error){
-    console.warn(
-      "PETS & DOGUE language storage:",
-      error
-    );
-  }
+
+  }catch(error){}
 }
 
-function handleDocumentClick(event){
-  const profileMenu=document.getElementById(
-    "pdGlobalProfileMenu"
-  );
-  const profileButton=document.getElementById(
-    "pdGlobalProfile"
-  );
+function handleDocumentClick(
+  event
+){
+
+  const menu=
+    document.getElementById(
+      "pdGlobalProfileMenu"
+    );
+
+  const button=
+    document.getElementById(
+      "pdGlobalProfile"
+    );
 
   if(
-    profileMenu?.classList.contains("open") &&
-    !profileMenu.contains(event.target) &&
-    !profileButton?.contains(event.target)
+    menu?.classList.contains(
+      "open"
+    )
+    &&
+    !menu.contains(event.target)
+    &&
+    !button?.contains(event.target)
   ){
+
     closeProfileMenu();
+
   }
 }
 
 function handleEscape(event){
+
   if(event.key!=="Escape"){
     return;
   }
 
   closeProfileMenu();
 
-  const menu=document.getElementById(
-    "pdGlobalMenu"
-  );
+  if(
+    document
+      .getElementById(
+        "pdGlobalMenu"
+      )
+      ?.classList
+      .contains("open")
+  ){
 
-  if(menu?.classList.contains("open")){
     closeMenu();
+
   }
 }
 
 function listenForExternalLanguageChanges(){
+
   window.addEventListener(
     "petsdogue:languagechange",
     event=>{
+
       if(internalLanguageChange){
         return;
       }
 
-      const code=normalizeLanguage(
-        event?.detail?.language||""
-      );
+      const code=
+        normalizeLanguage(
+          event?.detail?.language
+          ||
+          ""
+        );
 
       if(
         code &&
-        supportedLanguage(code) &&
+        supportedLanguage(code)
+        &&
         code!==shellLanguage
       ){
+
         persistLanguage(code);
         refreshShellLanguage();
+
       }
+
     }
   );
 
   window.addEventListener(
     "storage",
     event=>{
-      if(event.key!==LANGUAGE_KEY){
+
+      if(
+        event.key!==
+        LANGUAGE_KEY
+      ){
         return;
       }
 
-      const code=normalizeLanguage(
-        event.newValue||""
-      );
+      const code=
+        normalizeLanguage(
+          event.newValue||""
+        );
 
       if(
         code &&
-        supportedLanguage(code) &&
+        supportedLanguage(code)
+        &&
         code!==shellLanguage
       ){
+
         persistLanguage(code);
         refreshShellLanguage();
+
       }
+
     }
   );
 }
 
 function init(){
+
   if(
-    document.documentElement.dataset
-      .petsDogueGlobalShell==="1"
+    document.documentElement
+      .dataset
+      .petsDogueGlobalShell
+    ===
+    "1"
   ){
     return;
   }
 
-  document.documentElement.dataset
-    .petsDogueGlobalShell="1";
+  document.documentElement
+    .dataset
+    .petsDogueGlobalShell=
+    "1";
 
-  activeKey=detectActiveKey();
-  shellLanguage=detectInitialLanguage();
+  activeKey=
+    detectActiveKey();
 
-  persistLanguage(shellLanguage);
+  shellLanguage=
+    detectInitialLanguage();
+
+  persistLanguage(
+    shellLanguage
+  );
+
   installStyles();
+
   hideExistingShell();
+
   createHeader();
+
   createSideMenu();
+
   renderSideMenu();
-  refreshShellLanguage();
+
+  updateHeaderLanguage();
+
   watchForLegacyShell();
+
   listenForExternalLanguageChanges();
+
   showGlobalHeader();
+
   syncHeaderSpacer();
 
   window.addEventListener(
     "scroll",
     handleGlobalHeaderScroll,
-    {passive:true}
+    {
+      passive:true
+    }
   );
 
   window.addEventListener(
     "resize",
     ()=>{
+
       syncHeaderSpacer();
+
       showGlobalHeader();
+
     },
-    {passive:true}
+    {
+      passive:true
+    }
   );
 
   document.addEventListener(
@@ -3010,11 +2223,15 @@ function init(){
   );
 
   window.PetsDogueShell={
+
     getLanguage(){
+
       return shellLanguage;
+
     },
 
     setLanguage(language){
+
       applyLanguage(
         language,
         {
@@ -3022,17 +2239,34 @@ function init(){
           announce:true
         }
       );
+
     },
 
     openMenu,
+
     closeMenu,
-    showHeader:showGlobalHeader,
-    openProfile:openProfileMenu,
-    closeProfile:closeProfileMenu
+
+    showHeader:
+      showGlobalHeader,
+
+    hideHeader:
+      hideGlobalHeader,
+
+    openProfile:
+      openProfileMenu,
+
+    closeProfile:
+      closeProfileMenu
+
   };
 }
 
-if(document.readyState==="loading"){
+if(
+  document.readyState
+  ===
+  "loading"
+){
+
   document.addEventListener(
     "DOMContentLoaded",
     init,
@@ -3040,8 +2274,11 @@ if(document.readyState==="loading"){
       once:true
     }
   );
+
 }else{
+
   init();
+
 }
 
 })();
