@@ -183,15 +183,75 @@ const NAV_INDEX={
   discounts:2,
   petFriendly:3,
   marketplace:4,
-  travel:5,
-  fashion:6,
-  health:7,
-  articles:8,
-  photos:9,
-  community:10,
-  contests:11,
-  animalHelp:12,
-  partners:13
+  fashion:5,
+  health:6,
+  articles:7,
+  photos:8,
+  community:9,
+  contests:10,
+  animalHelp:11,
+  partners:12
+};
+
+const HEADER_TOP_ITEMS=[
+  "petFriendly",
+  "discounts",
+  "animalHelp",
+  "community",
+  "marketplace"
+];
+
+const HEADER_BOTTOM_ITEMS=[
+  "partners",
+  "magazine",
+  "coverStars",
+  "contests",
+  "articles",
+  "photos",
+  "fashion",
+  "health"
+];
+
+const HEADER_ICONS={
+  petFriendly:"🐾",
+  discounts:"%",
+  animalHelp:"♥",
+  community:"👥",
+  marketplace:"🛍",
+  partners:"◆",
+  magazine:"▤",
+  coverStars:"★",
+  contests:"🏆",
+  articles:"Aa",
+  photos:"▣",
+  fashion:"✦",
+  health:"+"
+};
+
+const TRAVEL_TEXT={
+  en:{name:"Travel",desc:"Pet-friendly travel, routes, stays and useful trip planning."},
+  uk:{name:"Подорожі",desc:"Подорожі з тваринами, маршрути, проживання та корисне планування."},
+  ru:{name:"Путешествия",desc:"Путешествия с питомцами, маршруты, проживание и полезное планирование."},
+  fr:{name:"Voyage",desc:"Voyages avec animaux, itinéraires, hébergements et conseils pratiques."},
+  de:{name:"Reisen",desc:"Tierfreundliche Reisen, Routen, Unterkünfte und praktische Planung."},
+  es:{name:"Viajes",desc:"Viajes con mascotas, rutas, alojamientos y planificación útil."},
+  it:{name:"Viaggi",desc:"Viaggi con animali, percorsi, soggiorni e pianificazione utile."},
+  pt:{name:"Viagens",desc:"Viagens com animais, rotas, alojamentos e planeamento útil."},
+  nl:{name:"Reizen",desc:"Reizen met huisdieren, routes, verblijven en handige reisplanning."},
+  pl:{name:"Podróże",desc:"Podróże ze zwierzętami, trasy, noclegi i przydatne planowanie."},
+  cs:{name:"Cestování",desc:"Cestování se zvířaty, trasy, ubytování a užitečné plánování."},
+  sk:{name:"Cestovanie",desc:"Cestovanie so zvieratami, trasy, ubytovanie a užitočné plánovanie."},
+  hu:{name:"Utazás",desc:"Kisállatbarát utazás, útvonalak, szállások és hasznos tervezés."},
+  ro:{name:"Călătorii",desc:"Călătorii cu animale, rute, cazare și planificare utilă."},
+  bg:{name:"Пътуване",desc:"Пътувания с домашни любимци, маршрути, места за престой и полезно планиране."},
+  el:{name:"Ταξίδια",desc:"Ταξίδια με κατοικίδια, διαδρομές, διαμονή και χρήσιμος σχεδιασμός."},
+  sv:{name:"Resor",desc:"Resor med husdjur, rutter, boenden och praktisk planering."},
+  da:{name:"Rejser",desc:"Rejser med kæledyr, ruter, ophold og praktisk planlægning."},
+  no:{name:"Reiser",desc:"Reiser med kjæledyr, ruter, opphold og nyttig planlegging."},
+  fi:{name:"Matkailu",desc:"Lemmikkiystävällinen matkailu, reitit, majoitukset ja hyödyllinen suunnittelu."},
+  tr:{name:"Seyahat",desc:"Evcil hayvanlarla seyahat, rotalar, konaklama ve yararlı planlama."},
+  ar:{name:"السفر",desc:"السفر مع الحيوانات الأليفة والمسارات والإقامة والتخطيط المفيد."},
+  hi:{name:"यात्रा",desc:"पालतू जानवरों के साथ यात्रा, मार्ग, ठहरने की जगहें और उपयोगी योजना।"}
 };
 
 const TEXT={
@@ -211,7 +271,6 @@ const TEXT={
       "Discounts",
       "Pet-Friendly Places",
       "Marketplace",
-      "Travel",
       "Fashion",
       "Health",
       "Articles",
@@ -227,7 +286,6 @@ const TEXT={
       "Discover member discounts and special offers.",
       "Discover pet-friendly places with maps, routes, contacts and useful information.",
       "Buy, sell and discover pet products and services.",
-      "Pet-friendly travel, routes, stays and useful trip planning.",
       "Style, accessories and pet fashion.",
       "Health, grooming and everyday pet care.",
       "Editorial stories, interviews and practical guides.",
@@ -254,7 +312,6 @@ const TEXT={
       "Знижки",
       "Місця Pet-Friendly",
       "Маркетплейс",
-      "Подорожі",
       "Мода",
       "Здоров’я",
       "Статті",
@@ -270,7 +327,6 @@ const TEXT={
       "Відкривайте знижки для учасників і спеціальні пропозиції.",
       "Знаходьте місця, дружні до тварин, з картами, маршрутами й контактами.",
       "Купуйте, продавайте та знаходьте товари й послуги для тварин.",
-      "Подорожі з тваринами, маршрути, проживання та корисне планування.",
       "Стиль, аксесуари та мода для улюбленців.",
       "Здоров’я, грумінг і щоденний догляд.",
       "Редакційні історії, інтерв’ю та практичні поради.",
@@ -297,7 +353,6 @@ const TEXT={
       "Скидки",
       "Pet-Friendly места",
       "Маркетплейс",
-      "Путешествия",
       "Мода",
       "Здоровье",
       "Статьи",
@@ -313,7 +368,6 @@ const TEXT={
       "Открывайте скидки для подписчиков и специальные предложения.",
       "Находите pet-friendly места с картами, маршрутами и контактами.",
       "Покупайте, продавайте и находите товары и услуги для питомцев.",
-      "Путешествия с питомцами, маршруты, проживание и полезное планирование.",
       "Стиль, аксессуары и мода для питомцев.",
       "Здоровье, груминг и ежедневный уход.",
       "Редакционные истории, интервью и практические гиды.",
@@ -340,7 +394,6 @@ const TEXT={
       "Réductions",
       "Lieux Pet-Friendly",
       "Marketplace",
-      "Voyage",
       "Mode",
       "Santé",
       "Articles",
@@ -356,7 +409,6 @@ const TEXT={
       "Découvrez les réductions membres et les offres spéciales.",
       "Trouvez des lieux pet-friendly avec cartes, itinéraires et contacts.",
       "Achetez, vendez et découvrez des produits et services pour animaux.",
-      "Voyages avec animaux, itinéraires, hébergements et conseils pratiques.",
       "Style, accessoires et mode pour animaux.",
       "Santé, toilettage et soins quotidiens.",
       "Histoires, interviews et guides pratiques.",
@@ -383,7 +435,6 @@ const TEXT={
       "Rabatte",
       "Tierfreundliche Orte",
       "Marktplatz",
-      "Reisen",
       "Mode",
       "Gesundheit",
       "Artikel",
@@ -399,7 +450,6 @@ const TEXT={
       "Entdecken Sie Mitgliederrabatte und Sonderangebote.",
       "Finden Sie tierfreundliche Orte mit Karten, Routen und Kontakten.",
       "Kaufen, verkaufen und entdecken Sie Produkte und Services für Tiere.",
-      "Tierfreundliche Reisen, Routen, Unterkünfte und praktische Planung.",
       "Stil, Accessoires und Tiermode.",
       "Gesundheit, Pflege und tägliche Betreuung.",
       "Editorials, Interviews und praktische Ratgeber.",
@@ -426,7 +476,6 @@ const TEXT={
       "Descuentos",
       "Lugares Pet-Friendly",
       "Marketplace",
-      "Viajes",
       "Moda",
       "Salud",
       "Artículos",
@@ -442,7 +491,6 @@ const TEXT={
       "Descubre descuentos para miembros y ofertas especiales.",
       "Encuentra lugares pet-friendly con mapas, rutas y contactos.",
       "Compra, vende y descubre productos y servicios para mascotas.",
-      "Viajes con mascotas, rutas, alojamientos y planificación útil.",
       "Estilo, accesorios y moda para mascotas.",
       "Salud, peluquería y cuidados diarios.",
       "Historias, entrevistas y guías prácticas.",
@@ -469,9 +517,7 @@ const TEXT={
       "Sconti",
       "Luoghi Pet-Friendly",
       "Marketplace",
-      "Viaggi",
-      "Moda",
-      "Salute",
+      "Moda",      "Salute",
       "Articoli",
       "Foto",
       "Community",
@@ -485,7 +531,6 @@ const TEXT={
       "Scopri sconti per i membri e offerte speciali.",
       "Trova luoghi pet-friendly con mappe, percorsi e contatti.",
       "Compra, vendi e scopri prodotti e servizi per animali.",
-      "Viaggi con animali, percorsi, soggiorni e pianificazione utile.",
       "Stile, accessori e moda per animali.",
       "Salute, toelettatura e cura quotidiana.",
       "Storie, interviste e guide pratiche.",
@@ -496,7 +541,9 @@ const TEXT={
       "Brand, servizi e partner PETS & DOGUE selezionati."
     ]
   },
-  "pt": {     "signIn": "Entrar",
+  "pt": {
+    "menu": "Conteúdo",
+    "signIn": "Entrar",
     "joinClub": "Entrar no Club",
     "language": "Idioma",
     "contact": "Contacte-nos",
@@ -510,7 +557,6 @@ const TEXT={
       "Descontos",
       "Locais Pet-Friendly",
       "Marketplace",
-      "Viagens",
       "Moda",
       "Saúde",
       "Artigos",
@@ -526,7 +572,6 @@ const TEXT={
       "Descubra descontos para membros e ofertas especiais.",
       "Encontre locais pet-friendly com mapas, rotas e contactos.",
       "Compre, venda e descubra produtos e serviços para animais.",
-      "Viagens com animais, rotas, alojamentos e planeamento útil.",
       "Estilo, acessórios e moda para animais.",
       "Saúde, grooming e cuidados diários.",
       "Histórias, entrevistas e guias práticos.",
@@ -553,7 +598,6 @@ const TEXT={
       "Kortingen",
       "Huisdiervriendelijke plekken",
       "Marktplaats",
-      "Reizen",
       "Mode",
       "Gezondheid",
       "Artikelen",
@@ -569,7 +613,6 @@ const TEXT={
       "Ontdek ledenkortingen en speciale aanbiedingen.",
       "Vind huisdiervriendelijke plekken met kaarten, routes en contacten.",
       "Koop, verkoop en ontdek producten en diensten voor huisdieren.",
-      "Reizen met huisdieren, routes, verblijven en handige reisplanning.",
       "Stijl, accessoires en mode voor huisdieren.",
       "Gezondheid, verzorging en dagelijkse zorg.",
       "Verhalen, interviews en praktische gidsen.",
@@ -596,7 +639,6 @@ const TEXT={
       "Zniżki",
       "Miejsca Pet-Friendly",
       "Marketplace",
-      "Podróże",
       "Moda",
       "Zdrowie",
       "Artykuły",
@@ -612,7 +654,6 @@ const TEXT={
       "Odkrywaj zniżki członkowskie i oferty specjalne.",
       "Znajduj miejsca pet-friendly z mapami, trasami i kontaktami.",
       "Kupuj, sprzedawaj i odkrywaj produkty oraz usługi dla zwierząt.",
-      "Podróże ze zwierzętami, trasy, noclegi i przydatne planowanie.",
       "Styl, akcesoria i moda dla zwierząt.",
       "Zdrowie, pielęgnacja i codzienna opieka.",
       "Historie, wywiady i praktyczne poradniki.",
@@ -639,7 +680,6 @@ const TEXT={
       "Slevy",
       "Pet-Friendly místa",
       "Marketplace",
-      "Cestování",
       "Móda",
       "Zdraví",
       "Články",
@@ -655,7 +695,6 @@ const TEXT={
       "Objevte členské slevy a speciální nabídky.",
       "Najděte pet-friendly místa s mapami, trasami a kontakty.",
       "Nakupujte, prodávejte a objevujte produkty a služby pro zvířata.",
-      "Cestování se zvířaty, trasy, ubytování a užitečné plánování.",
       "Styl, doplňky a móda pro zvířata.",
       "Zdraví, péče a každodenní starostlivost.",
       "Příběhy, rozhovory a praktické průvodce.",
@@ -682,7 +721,6 @@ const TEXT={
       "Zľavy",
       "Pet-Friendly miesta",
       "Marketplace",
-      "Cestovanie",
       "Móda",
       "Zdravie",
       "Články",
@@ -698,7 +736,6 @@ const TEXT={
       "Objavte členské zľavy a špeciálne ponuky.",
       "Nájdite pet-friendly miesta s mapami, trasami a kontaktmi.",
       "Nakupujte, predávajte a objavujte produkty a služby pre zvieratá.",
-      "Cestovanie so zvieratami, trasy, ubytovanie a užitočné plánovanie.",
       "Štýl, doplnky a móda pre zvieratá.",
       "Zdravie, starostlivosť a každodenná péče.",
       "Príbehy, rozhovory a praktickí sprievodcovia.",
@@ -725,7 +762,6 @@ const TEXT={
       "Kedvezmények",
       "Állatbarát helyek",
       "Piactér",
-      "Utazás",
       "Divat",
       "Egészség",
       "Cikkek",
@@ -741,7 +777,6 @@ const TEXT={
       "Fedezze fel a tagi kedvezményeket és különleges ajánlatokat.",
       "Találjon állatbarát helyeket térképekkel, útvonalakkal és elérhetőségekkel.",
       "Vásároljon, adjon el és fedezzen fel kisállat-termékeket és szolgáltatásokat.",
-      "Kisállatbarát utazás, útvonalak, szállások és hasznos tervezés.",
       "Stílus, kiegészítők és kisállatdivat.",
       "Egészség, ápolás és mindennapi gondozás.",
       "Történetek, interjúk és gyakorlati útmutatók.",
@@ -768,7 +803,6 @@ const TEXT={
       "Reduceri",
       "Locuri Pet-Friendly",
       "Marketplace",
-      "Călătorii",
       "Modă",
       "Sănătate",
       "Articole",
@@ -784,7 +818,6 @@ const TEXT={
       "Descoperă reduceri pentru membri și oferte speciale.",
       "Găsește locuri pet-friendly cu hărți, rute și contacte.",
       "Cumpără, vinde și descoperă produse și servicii pentru animale.",
-      "Călătorii cu animale, rute, cazare și planificare utilă.",
       "Stil, accesorii și modă pentru animale.",
       "Sănătate, grooming și îngrijire zilnică.",
       "Povești, interviuri și ghiduri practice.",
@@ -811,7 +844,6 @@ const TEXT={
       "Отстъпки",
       "Pet-Friendly места",
       "Маркетплейс",
-      "Пътуване",
       "Мода",
       "Здраве",
       "Статии",
@@ -827,7 +859,6 @@ const TEXT={
       "Открийте отстъпки за членове и специални предложения.",
       "Намерете pet-friendly места с карти, маршрути и контакти.",
       "Купувайте, продавайте и откривайте продукти и услуги за животни.",
-      "Пътувания с домашни любимци, маршрути, места за престой и полезно планиране.",
       "Стил, аксесоари и мода за животни.",
       "Здраве, груминг и ежедневна грижа.",
       "Истории, интервюта и практични ръководства.",
@@ -854,7 +885,6 @@ const TEXT={
       "Εκπτώσεις",
       "Pet-Friendly μέρη",
       "Marketplace",
-      "Ταξίδια",
       "Μόδα",
       "Υγεία",
       "Άρθρα",
@@ -870,7 +900,6 @@ const TEXT={
       "Ανακαλύψτε εκπτώσεις μελών και ειδικές προσφορές.",
       "Βρείτε pet-friendly μέρη με χάρτες, διαδρομές και επαφές.",
       "Αγοράστε, πουλήστε και ανακαλύψτε προϊόντα και υπηρεσίες για κατοικίδια.",
-      "Ταξίδια με κατοικίδια, διαδρομές, διαμονή και χρήσιμος σχεδιασμός.",
       "Στυλ, αξεσουάρ και μόδα για κατοικίδια.",
       "Υγεία, περιποίηση και καθημερινή φροντίδα.",
       "Ιστορίες, συνεντεύξεις και πρακτικοί οδηγοί.",
@@ -897,7 +926,6 @@ const TEXT={
       "Rabatter",
       "Djurvänliga platser",
       "Marknadsplats",
-      "Resor",
       "Mode",
       "Hälsa",
       "Artiklar",
@@ -913,7 +941,6 @@ const TEXT={
       "Upptäck medlemsrabatter och specialerbjudanden.",
       "Hitta djurvänliga platser med kartor, rutter och kontakter.",
       "Köp, sälj och upptäck produkter och tjänster för husdjur.",
-      "Resor med husdjur, rutter, boenden och praktisk planering.",
       "Stil, accessoarer och husdjursmode.",
       "Hälsa, pälsvård och daglig omsorg.",
       "Berättelser, intervjuer och praktiska guider.",
@@ -940,7 +967,6 @@ const TEXT={
       "Rabatter",
       "Kæledyrsvenlige steder",
       "Markedsplads",
-      "Rejser",
       "Mode",
       "Sundhed",
       "Artikler",
@@ -956,7 +982,6 @@ const TEXT={
       "Opdag medlemsrabatter og særlige tilbud.",
       "Find kæledyrsvenlige steder med kort, ruter og kontakter.",
       "Køb, sælg og opdag produkter og tjenester til kæledyr.",
-      "Rejser med kæledyr, ruter, ophold og praktisk planlægning.",
       "Stil, tilbehør og mode til kæledyr.",
       "Sundhed, pleje og daglig omsorg.",
       "Historier, interviews og praktiske guider.",
@@ -983,7 +1008,6 @@ const TEXT={
       "Rabatter",
       "Dyrevennlige steder",
       "Markedsplass",
-      "Reiser",
       "Mote",
       "Helse",
       "Artikler",
@@ -995,10 +1019,10 @@ const TEXT={
     ],
     "desc": [
       "Åpne PETS & DOGUE Edition 01, den nyeste digitale utgaven.",
-      "Meld på kjæledyret ditt til neste forside.",      "Oppdag medlemsrabatter og spesialtilbud.",
+      "Meld på kjæledyret ditt til neste forside.",
+      "Oppdag medlemsrabatter og spesialtilbud.",
       "Finn dyrevennlige steder med kart, ruter og kontakter.",
       "Kjøp, selg og oppdag produkter og tjenester for kjæledyr.",
-      "Reiser med kjæledyr, ruter, opphold og nyttig planlegging.",
       "Stil, tilbehør og kjæledyrsmote.",
       "Helse, stell og daglig omsorg.",
       "Historier, intervjuer og praktiske guider.",
@@ -1012,8 +1036,7 @@ const TEXT={
   "fi": {
     "menu": "Sisältö",
     "signIn": "Kirjaudu",
-    "joinClub": "Liity klubiin",
-    "language": "Kieli",
+    "joinClub": "Liity klubiin",    "language": "Kieli",
     "contact": "Ota yhteyttä",
     "openMenu": "Avaa valikko",
     "closeMenu": "Sulje valikko",
@@ -1025,7 +1048,6 @@ const TEXT={
       "Alennukset",
       "Lemmikkiystävälliset paikat",
       "Markkinapaikka",
-      "Matkailu",
       "Muoti",
       "Terveys",
       "Artikkelit",
@@ -1041,7 +1063,6 @@ const TEXT={
       "Tutustu jäsenalennuksiin ja erikoistarjouksiin.",
       "Löydä lemmikkiystävällisiä paikkoja karttoineen, reitteineen ja yhteystietoineen.",
       "Osta, myy ja löydä lemmikkituotteita ja palveluita.",
-      "Lemmikkiystävällinen matkailu, reitit, majoitukset ja hyödyllinen suunnittelu.",
       "Tyyliä, asusteita ja lemmikkimuotia.",
       "Terveys, trimmaus ja päivittäinen hoito.",
       "Tarinoita, haastatteluja ja käytännön oppaita.",
@@ -1068,7 +1089,6 @@ const TEXT={
       "İndirimler",
       "Pet-Friendly yerler",
       "Pazar yeri",
-      "Seyahat",
       "Moda",
       "Sağlık",
       "Makaleler",
@@ -1084,7 +1104,6 @@ const TEXT={
       "Üye indirimlerini ve özel teklifleri keşfedin.",
       "Haritalar, rotalar ve iletişim bilgileriyle pet-friendly yerler bulun.",
       "Evcil hayvan ürünleri ve hizmetleri alın, satın ve keşfedin.",
-      "Evcil hayvanlarla seyahat, rotalar, konaklama ve yararlı planlama.",
       "Stil, aksesuarlar ve evcil hayvan modası.",
       "Sağlık, bakım ve günlük bakım.",
       "Hikâyeler, röportajlar ve pratik rehberler.",
@@ -1111,7 +1130,6 @@ const TEXT={
       "الخصومات",
       "أماكن صديقة للحيوانات",
       "السوق",
-      "السفر",
       "الموضة",
       "الصحة",
       "المقالات",
@@ -1127,7 +1145,6 @@ const TEXT={
       "اكتشف خصومات الأعضاء والعروض الخاصة.",
       "اعثر على أماكن صديقة للحيوانات مع الخرائط والمسارات وبيانات الاتصال.",
       "اشترِ وبِع واكتشف منتجات وخدمات الحيوانات الأليفة.",
-      "السفر مع الحيوانات الأليفة والمسارات والإقامة والتخطيط المفيد.",
       "الأناقة والإكسسوارات وموضة الحيوانات الأليفة.",
       "الصحة والعناية اليومية والتجميل.",
       "قصص ومقابلات وأدلة عملية.",
@@ -1154,7 +1171,6 @@ const TEXT={
       "छूट",
       "Pet-Friendly स्थान",
       "मार्केटप्लेस",
-      "यात्रा",
       "फैशन",
       "स्वास्थ्य",
       "लेख",
@@ -1170,7 +1186,6 @@ const TEXT={
       "सदस्य छूट और विशेष ऑफ़र खोजें।",
       "मैप, रूट और संपर्क जानकारी के साथ pet-friendly स्थान खोजें।",
       "पालतू उत्पाद और सेवाएँ खरीदें, बेचें और खोजें।",
-      "पालतू जानवरों के साथ यात्रा, मार्ग, ठहरने की जगहें और उपयोगी योजना।",
       "स्टाइल, एक्सेसरीज़ और पालतू फैशन।",
       "स्वास्थ्य, ग्रूमिंग और रोज़मर्रा की देखभाल।",
       "कहानियाँ, इंटरव्यू और उपयोगी गाइड।",
@@ -1332,15 +1347,37 @@ function shellCopy(){
 }
 
 function navName(item){
+  if(item.key==="travel"){
+    return TRAVEL_TEXT[shellLanguage]?.name||TRAVEL_TEXT.en.name;
+  }
+
   const copy=shellCopy();
   const index=NAV_INDEX[item.key];
   return copy.nav[index]||TEXT.en.nav[index]||item.key;
 }
 
 function navDescription(item){
+  if(item.key==="travel"){
+    return TRAVEL_TEXT[shellLanguage]?.desc||TRAVEL_TEXT.en.desc;
+  }
+
   const copy=shellCopy();
   const index=NAV_INDEX[item.key];
   return copy.desc[index]||TEXT.en.desc[index]||"";
+}
+
+function navItemByKey(key){
+  return NAV_ITEMS.find(item=>item.key===key)||null;
+}
+
+function headerNavLabel(key){
+  const item=navItemByKey(key);
+  return item?navName(item):key;
+}
+
+function headerNavUrl(key){
+  const item=navItemByKey(key);
+  return item?item.url:"index.html";
 }
 
 function installStyles(){
@@ -1375,25 +1412,120 @@ function installStyles(){
   }
 
   #pdGlobalHeader{
-    position:sticky;
+    position:fixed;
     top:0;
+    left:0;
+    right:0;
     z-index:14000;
     width:100%;
-    height:68px;
     background:var(--pd-shell-black);
     color:#fff;
     border-bottom:1px solid #262626;
     font-family:var(--pd-shell-sans);
+    transform:translateY(0);
+    transition:transform .24s ease;
+    will-change:transform;
+    direction:ltr;
+  }
+
+  #pdGlobalHeader.pd-global-header-hidden{
+    transform:translateY(-100%);
+  }
+
+  #pdGlobalHeaderSpacer{
+    width:100%;
+    height:0;
+    pointer-events:none;
   }
 
   #pdGlobalHeaderMain{
     width:100%;
-    height:68px;
+    height:62px;
     display:grid;
     grid-template-columns:52px minmax(0,1fr) auto;
     align-items:center;
     padding:0 8px;
     margin:0 auto;
+    background:#070707;
+  }
+
+  #pdGlobalHeaderNav{
+    width:100%;
+    border-top:1px solid #242424;
+    background:#090909;
+  }
+
+  .pd-global-header-row{
+    width:100%;
+    display:grid;
+    overflow:hidden;
+    border-bottom:1px solid #222;
+  }
+
+  #pdGlobalHeaderTopNav{
+    grid-template-columns:repeat(5,minmax(0,1fr));
+  }
+
+  #pdGlobalHeaderBottomNav{
+    grid-template-columns:repeat(8,minmax(0,1fr));
+  }
+
+  .pd-global-header-nav-link{
+    min-width:0;
+    min-height:42px;
+    padding:4px 2px 5px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    border-right:1px solid #1f1f1f;
+    background:#0b0b0b;
+    color:#fff;
+    text-decoration:none;
+    text-align:center;
+    overflow:hidden;
+  }
+
+  .pd-global-header-nav-link:last-child{
+    border-right:0;
+  }
+
+  .pd-global-header-nav-link .pd-global-header-icon{
+    display:block;
+    min-height:15px;
+    font-size:14px;
+    line-height:1;
+    font-weight:900;
+  }
+
+  .pd-global-header-nav-link .pd-global-header-label{
+    display:block;
+    width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:9px;
+    line-height:1.05;
+    font-weight:900;
+    letter-spacing:.1px;
+  }
+
+  .pd-global-header-nav-link.active{
+    color:var(--pd-shell-gold-light);
+    background:#17130b;
+    box-shadow:inset 0 -3px 0 var(--pd-shell-gold);
+  }
+
+  .pd-global-header-nav-link.pd-partners-link{
+    background:#ff2d2d;
+    color:#fff;
+  }
+
+  .pd-global-header-nav-link.pd-partners-link.active{
+    background:#ff2d2d;
+    color:#fff;
+    box-shadow:inset 0 -3px 0 #fff;
   }
 
   #pdGlobalMenuButton{
@@ -1423,8 +1555,7 @@ function installStyles(){
     text-align:center;
     font-family:var(--pd-shell-serif);
     color:var(--pd-shell-gold);
-    line-height:.86;
-    text-decoration:none;
+    line-height:.86;    text-decoration:none;
     white-space:nowrap;
   }
 
@@ -1494,7 +1625,8 @@ function installStyles(){
     z-index:14200;
     width:210px;
     padding:10px;
-    border:1px solid #2f2f2f;    border-radius:16px;
+    border:1px solid #2f2f2f;
+    border-radius:16px;
     background:#0b0b0b;
     box-shadow:0 18px 42px rgba(0,0,0,.34);
     opacity:0;
@@ -1848,179 +1980,63 @@ function installStyles(){
     }
   }
 
+  @media(max-width:620px){
+    #pdGlobalHeaderMain{
+      height:58px;
+      grid-template-columns:46px minmax(0,1fr) auto;
+      padding:0 5px;
+    }
+
+    #pdGlobalBrandSmall{
+      font-size:6px;
+      letter-spacing:2px;
+    }
+
+    #pdGlobalBrandBig{
+      font-size:20px;
+      letter-spacing:1.4px;
+    }
+
+    #pdGlobalHome,
+    #pdGlobalProfile{
+      width:35px;
+      height:35px;
+      flex-basis:35px;
+      border-radius:10px;
+    }
+
+    .pd-global-header-nav-link{
+      min-height:39px;
+      padding:3px 1px 4px;
+    }
+
+    .pd-global-header-nav-link .pd-global-header-icon{
+      font-size:12px;
+      min-height:13px;
+    }
+
+    .pd-global-header-nav-link .pd-global-header-label{
+      font-size:7.7px;
+      letter-spacing:-.1px;
+    }
+  }
+
+  @media(max-width:380px){
+    .pd-global-header-nav-link .pd-global-header-label{
+      font-size:7px;
+    }
+
+    .pd-global-header-nav-link .pd-global-header-icon{
+      font-size:11px;
+    }
+  }
+
   @media(prefers-reduced-motion:reduce){
+    #pdGlobalHeader,
     #pdGlobalMenu,
     #pdGlobalOverlay,
     #pdGlobalProfileMenu{
       transition:none;
-    }
-  }
-
-  /* PET-FRIENDLY MENU VISUAL STANDARD */
-  #pdGlobalMenu{
-    width:min(552px,88vw);
-    max-width:552px;
-  }
-
-  .pd-global-menu-head{
-    height:157px;
-    min-height:157px;
-    padding:35px 29px 28px;
-  }
-
-  .pd-global-menu-head h2{
-    font-size:51px;
-  }
-
-  #pdGlobalClose{
-    width:78px;
-    height:78px;
-    flex-basis:78px;
-    font-size:35px;
-  }
-
-  .pd-global-menu-scroll{
-    padding:23px 20px 34px;
-  }
-
-  .pd-global-account{
-    gap:14px;
-    margin-bottom:21px;
-  }
-
-  .pd-global-account a{
-    min-height:88px;
-    height:auto;
-    border-width:3px;
-    padding:12px 16px;
-    font-size:20px;
-  }
-
-  .pd-global-language-label{
-    margin:0 5px 11px;
-    font-size:15px;
-    letter-spacing:2.7px;
-  }
-
-  #pdGlobalLanguage{
-    min-height:94px;
-    height:94px;
-    margin-bottom:22px;
-    padding:0 35px;
-    border-width:3px;
-    font-size:22px;
-  }
-
-  #pdGlobalMenuList{
-    gap:14px;
-  }
-
-  .pd-global-menu-card{
-    min-height:204px;
-    grid-template-columns:154px minmax(0,1fr);
-    border-width:3px;
-    border-radius:32px;
-  }
-
-  .pd-global-menu-card-image{
-    width:154px;
-    min-height:198px;
-  }
-
-  .pd-global-menu-card img{
-    width:154px;
-    min-height:198px;
-  }
-
-  .pd-global-menu-card-copy{
-    padding:23px 18px 19px 20px;
-  }
-
-  .pd-global-menu-card h3{
-    font-size:31px;
-    line-height:.96;
-    text-transform:uppercase;
-  }
-
-  .pd-global-menu-card p{
-    margin-top:8px;
-    font-size:18px;
-    line-height:1.25;
-  }
-
-  .pd-global-menu-footer a{
-    min-height:60px;
-    font-size:16px;
-  }
-
-  @media(max-width:430px){
-    #pdGlobalMenu{
-      width:92vw;
-      max-width:92vw;
-    }
-
-    .pd-global-menu-head{
-      height:138px;
-      min-height:138px;
-      padding:25px 18px;
-    }
-
-    .pd-global-menu-head h2{
-      font-size:43px;
-    }
-
-    #pdGlobalClose{
-      width:66px;
-      height:66px;
-      flex-basis:66px;
-      font-size:31px;
-    }
-
-    .pd-global-menu-scroll{
-      padding:19px 17px 28px;
-    }
-
-    .pd-global-account{
-      gap:10px;
-    }
-
-    .pd-global-account a{
-      min-height:76px;
-      font-size:16px;
-    }
-
-    #pdGlobalLanguage{
-      min-height:82px;
-      height:82px;
-      padding:0 25px;
-      font-size:18px;    }
-
-    .pd-global-menu-card{
-      min-height:176px;
-      grid-template-columns:125px minmax(0,1fr);
-      border-radius:28px;
-    }
-
-    .pd-global-menu-card-image{
-      width:125px;
-      min-height:170px;
-    }
-
-    .pd-global-menu-card img{
-      width:125px;
-      min-height:170px;
-    }
-
-    .pd-global-menu-card-copy{
-      padding:17px 12px 16px 16px;
-    }
-
-    .pd-global-menu-card h3{
-      font-size:24px;
-    }
-
-    .pd-global-menu-card p{
-      font-size:15px;
     }
   }
   `;
@@ -2058,8 +2074,7 @@ function hideExistingShell(){
     document
       .querySelectorAll(selector)
       .forEach(element=>{
-        if(
-          element.id==="pdGlobalHeader"||
+        if(          element.id==="pdGlobalHeader"||
           element.id==="pdGlobalMenu"||
           element.id==="pdGlobalOverlay"
         ){
@@ -2172,11 +2187,33 @@ function createHeader(){
       </div>
 
     </div>
+
+    <div id="pdGlobalHeaderNav">
+      <nav
+        id="pdGlobalHeaderTopNav"
+        class="pd-global-header-row"
+        aria-label="Primary PETS & DOGUE navigation"
+      ></nav>
+
+      <nav
+        id="pdGlobalHeaderBottomNav"
+        class="pd-global-header-row"
+        aria-label="Secondary PETS & DOGUE navigation"
+      ></nav>
+    </div>
   `;
+
+  const spacer=document.createElement("div");
+  spacer.id="pdGlobalHeaderSpacer";
+
+  document.body.insertBefore(
+    spacer,
+    document.body.firstChild
+  );
 
   document.body.insertBefore(
     header,
-    document.body.firstChild
+    spacer
   );
 
   document
@@ -2197,6 +2234,90 @@ function createHeader(){
     );
 
   renderProfileMenu();
+  renderHeaderNav();
+  syncHeaderSpacer();
+}
+
+function renderHeaderNav(){
+  const top=document.getElementById("pdGlobalHeaderTopNav");
+  const bottom=document.getElementById("pdGlobalHeaderBottomNav");
+
+  if(!top||!bottom){
+    return;
+  }
+
+  const renderRow=(keys)=>
+    keys.map(key=>{
+      const active=key===activeKey;
+      const partners=key==="partners";
+
+      return`
+        <a
+          class="pd-global-header-nav-link${active?" active":""}${partners?" pd-partners-link":""}"
+          href="${escapeHTML(headerNavUrl(key))}"
+          data-pd-nav="${escapeHTML(key)}"
+          ${active?'aria-current="page"':""}
+        >
+          <span class="pd-global-header-icon" aria-hidden="true">
+            ${escapeHTML(HEADER_ICONS[key]||"•")}
+          </span>
+          <span class="pd-global-header-label">
+            ${escapeHTML(headerNavLabel(key))}
+          </span>
+        </a>
+      `;
+    }).join("");
+
+  top.innerHTML=renderRow(HEADER_TOP_ITEMS);
+  bottom.innerHTML=renderRow(HEADER_BOTTOM_ITEMS);
+}
+
+function syncHeaderSpacer(){
+  const header=document.getElementById("pdGlobalHeader");
+  const spacer=document.getElementById("pdGlobalHeaderSpacer");
+
+  if(!header||!spacer){
+    return;
+  }
+
+  spacer.style.height=`${Math.ceil(header.getBoundingClientRect().height)}px`;
+}
+
+let pdLastScrollY=window.scrollY||0;
+let pdHeaderScrollTicking=false;
+
+function showGlobalHeader(){
+  document.getElementById("pdGlobalHeader")?.classList.remove("pd-global-header-hidden");
+}
+
+function hideGlobalHeader(){
+  document.getElementById("pdGlobalHeader")?.classList.add("pd-global-header-hidden");
+}
+
+function handleGlobalHeaderScroll(){
+  if(pdHeaderScrollTicking){
+    return;
+  }
+
+  pdHeaderScrollTicking=true;
+
+  requestAnimationFrame(()=>{
+    const current=Math.max(0,window.scrollY||0);
+    const delta=current-pdLastScrollY;
+    const menuOpen=document.getElementById("pdGlobalMenu")?.classList.contains("open");
+    const profileOpen=document.getElementById("pdGlobalProfileMenu")?.classList.contains("open");
+
+    if(current<=8||menuOpen||profileOpen){
+      showGlobalHeader();
+    }else if(delta>7){
+      hideGlobalHeader();
+    }else if(delta<-7){
+      showGlobalHeader();
+    }
+
+    pdLastScrollY=current;
+    pdHeaderScrollTicking=false;
+  });
 }
 
 function createSideMenu(){
@@ -2264,6 +2385,8 @@ function renderProfileMenu(){
 }
 
 function openProfileMenu(){
+  showGlobalHeader();
+
   const menu=document.getElementById(
     "pdGlobalProfileMenu"
   );
@@ -2314,6 +2437,8 @@ function toggleProfileMenu(){
 }
 
 function openMenu(){
+  showGlobalHeader();
+
   const menu=document.getElementById(
     "pdGlobalMenu"
   );
@@ -2468,8 +2593,7 @@ function renderSideMenu(){
               ${option[0]===shellLanguage?"selected":""}
             >
               ${option[1]}
-            </option>
-          `)
+            </option>          `)
           .join("")}
       </select>
 
@@ -2492,7 +2616,8 @@ function renderSideMenu(){
   document
     .getElementById("pdGlobalClose")
     ?.addEventListener(
-      "click",      closeMenu
+      "click",
+      closeMenu
     );
 
   document
@@ -2549,6 +2674,10 @@ function updateHeaderLanguage(){
       "aria-label",
       copy.profile
     );
+
+  renderProfileMenu();
+  renderHeaderNav();
+  syncHeaderSpacer();
 }
 
 function valueForExistingSelect(
@@ -2847,6 +2976,23 @@ function init(){
   refreshShellLanguage();
   watchForLegacyShell();
   listenForExternalLanguageChanges();
+  showGlobalHeader();
+  syncHeaderSpacer();
+
+  window.addEventListener(
+    "scroll",
+    handleGlobalHeaderScroll,
+    {passive:true}
+  );
+
+  window.addEventListener(
+    "resize",
+    ()=>{
+      syncHeaderSpacer();
+      showGlobalHeader();
+    },
+    {passive:true}
+  );
 
   document.addEventListener(
     "click",
@@ -2880,6 +3026,7 @@ function init(){
 
     openMenu,
     closeMenu,
+    showHeader:showGlobalHeader,
     openProfile:openProfileMenu,
     closeProfile:closeProfileMenu
   };
