@@ -2,7 +2,9 @@
 
 (function () {
   const LANGUAGE_KEY = "pets_dogue_language";
-  const HOME_MASTHEAD_FILE = "pets-dogue-header.png?v=20260912-3";
+  const HOME_MASTHEAD_FILE = "pets-dogue-header.png?v=20260912-4";
+  const PET_FRIENDLY_MANIFEST = "pet-friendly.webmanifest?v=1";
+  const PET_FRIENDLY_SW = "pet-friendly-sw.js?v=1";
 
   const LANGUAGE_ALIASES = {
     ua: "uk",
@@ -145,6 +147,12 @@
       language: "Language",
       signIn: "Sign In",
       joinClub: "Join Club",
+      installCta: "Add Pet-Friendly to Home Screen",
+      installTitle: "Keep Pet-Friendly close",
+      installText: "Add Pet-Friendly Places to your home screen so it is always one tap away.",
+      installNow: "Add now",
+      later: "Later",
+      iosHint: "On iPhone: tap Share, then choose Add to Home Screen.",
       labels: {
         petFriendly: "Pet-Friendly Places",
         discounts: "Discounts",
@@ -169,6 +177,12 @@
       language: "Мова",
       signIn: "Увійти",
       joinClub: "Вступити до клубу",
+      installCta: "Додати Pet-Friendly на головний екран",
+      installTitle: "Тримайте Pet-Friendly під рукою",
+      installText: "Додайте Pet-Friendly Places на головний екран, щоб відкривати його одним дотиком.",
+      installNow: "Додати",
+      later: "Пізніше",
+      iosHint: "На iPhone: натисніть Share, потім Add to Home Screen.",
       labels: {
         petFriendly: "Pet-Friendly Places",
         discounts: "Знижки",
@@ -193,6 +207,12 @@
       language: "Язык",
       signIn: "Войти",
       joinClub: "Подписаться",
+      installCta: "Добавить Pet-Friendly на главный экран",
+      installTitle: "Держите Pet-Friendly под рукой",
+      installText: "Добавьте Pet-Friendly Places на главный экран, чтобы открывать раздел в один тап.",
+      installNow: "Добавить",
+      later: "Позже",
+      iosHint: "На iPhone: нажмите Share, затем Add to Home Screen.",
       labels: {
         petFriendly: "Pet-Friendly Places",
         discounts: "Скидки",
@@ -207,486 +227,6 @@
         fashion: "Мода",
         health: "Здоровье"
       }
-    },
-    fr: {
-      openMenu: "Ouvrir le menu",
-      closeMenu: "Fermer le menu",
-      contents: "Sommaire",
-      profile: "Profil",
-      advertise: "Annoncez chez nous",
-      language: "Langue",
-      signIn: "Connexion",
-      joinClub: "Rejoindre le Club",
-      labels: {
-        petFriendly: "Lieux pet-friendly",
-        discounts: "Réductions",
-        help: "Aide",
-        community: "Communauté",
-        marketplace: "Marketplace",
-        edition: "Édition",
-        coverStars: "Stars de couverture",
-        contests: "Concours",
-        articles: "Articles",
-        photos: "Photos",
-        fashion: "Mode",
-        health: "Santé"
-      }
-    },
-    de: {
-      openMenu: "Menü öffnen",
-      closeMenu: "Menü schließen",
-      contents: "Inhalt",
-      profile: "Profil",
-      advertise: "Werben Sie bei uns",
-      language: "Sprache",
-      signIn: "Anmelden",
-      joinClub: "Club beitreten",
-      labels: {
-        petFriendly: "Pet-Friendly Orte",
-        discounts: "Rabatte",
-        help: "Hilfe",
-        community: "Community",
-        marketplace: "Marktplatz",
-        edition: "Ausgabe",
-        coverStars: "Cover Stars",
-        contests: "Wettbewerbe",
-        articles: "Artikel",
-        photos: "Fotos",
-        fashion: "Mode",
-        health: "Gesundheit"
-      }
-    },
-    es: {
-      openMenu: "Abrir menú",
-      closeMenu: "Cerrar menú",
-      contents: "Contenido",
-      profile: "Perfil",
-      advertise: "Anúnciate con nosotros",
-      language: "Idioma",
-      signIn: "Iniciar sesión",
-      joinClub: "Únete al Club",
-      labels: {
-        petFriendly: "Lugares pet-friendly",
-        discounts: "Descuentos",
-        help: "Ayuda",
-        community: "Comunidad",
-        marketplace: "Marketplace",
-        edition: "Edición",
-        coverStars: "Estrellas de portada",
-        contests: "Concursos",
-        articles: "Artículos",
-        photos: "Fotos",
-        fashion: "Moda",
-        health: "Salud"
-      }
-    },
-    it: {
-      openMenu: "Apri menu",
-      closeMenu: "Chiudi menu",
-      contents: "Contenuti",
-      profile: "Profilo",
-      advertise: "Pubblicizza con noi",
-      language: "Lingua",
-      signIn: "Accedi",
-      joinClub: "Unisciti al Club",
-      labels: {
-        petFriendly: "Luoghi pet-friendly",
-        discounts: "Sconti",
-        help: "Aiuto",
-        community: "Community",
-        marketplace: "Marketplace",
-        edition: "Edizione",
-        coverStars: "Cover Stars",
-        contests: "Concorsi",
-        articles: "Articoli",
-        photos: "Foto",
-        fashion: "Moda",
-        health: "Salute"
-      }
-    },
-    pt: {
-      openMenu: "Abrir menu",
-      closeMenu: "Fechar menu",
-      contents: "Conteúdo",
-      profile: "Perfil",
-      advertise: "Anuncie connosco",
-      language: "Idioma",
-      signIn: "Entrar",
-      joinClub: "Entrar no Clube",
-      labels: {
-        petFriendly: "Locais pet-friendly",
-        discounts: "Descontos",
-        help: "Ajuda",
-        community: "Comunidade",
-        marketplace: "Marketplace",
-        edition: "Edição",
-        coverStars: "Estrelas da capa",
-        contests: "Concursos",
-        articles: "Artigos",
-        photos: "Fotos",
-        fashion: "Moda",
-        health: "Saúde"
-      }
-    },
-    nl: {
-      openMenu: "Menu openen",
-      closeMenu: "Menu sluiten",
-      contents: "Inhoud",
-      profile: "Profiel",
-      advertise: "Adverteer bij ons",
-      language: "Taal",
-      signIn: "Inloggen",
-      joinClub: "Word lid",
-      labels: {
-        petFriendly: "Pet-friendly plekken",
-        discounts: "Kortingen",
-        help: "Hulp",
-        community: "Community",
-        marketplace: "Marktplaats",
-        edition: "Editie",
-        coverStars: "Coversterren",
-        contests: "Wedstrijden",
-        articles: "Artikelen",
-        photos: "Foto’s",
-        fashion: "Mode",
-        health: "Gezondheid"
-      }
-    },
-    pl: {
-      openMenu: "Otwórz menu",
-      closeMenu: "Zamknij menu",
-      contents: "Spis treści",
-      profile: "Profil",
-      advertise: "Reklamuj się u nas",
-      language: "Język",
-      signIn: "Zaloguj się",
-      joinClub: "Dołącz do klubu",
-      labels: {
-        petFriendly: "Miejsca pet-friendly",
-        discounts: "Zniżki",
-        help: "Pomoc",
-        community: "Społeczność",
-        marketplace: "Marketplace",
-        edition: "Wydanie",
-        coverStars: "Gwiazdy okładki",
-        contests: "Konkursy",
-        articles: "Artykuły",
-        photos: "Zdjęcia",
-        fashion: "Moda",
-        health: "Zdrowie"
-      }
-    },
-    cs: {
-      openMenu: "Otevřít menu",
-      closeMenu: "Zavřít menu",
-      contents: "Obsah",
-      profile: "Profil",
-      advertise: "Inzerujte u nás",
-      language: "Jazyk",
-      signIn: "Přihlásit se",
-      joinClub: "Vstoupit do klubu",
-      labels: {
-        petFriendly: "Pet-friendly místa",
-        discounts: "Slevy",
-        help: "Pomoc",
-        community: "Komunita",
-        marketplace: "Marketplace",
-        edition: "Vydání",
-        coverStars: "Hvězdy obálky",
-        contests: "Soutěže",
-        articles: "Články",
-        photos: "Fotografie",
-        fashion: "Móda",
-        health: "Zdraví"
-      }
-    },
-    sk: {
-      openMenu: "Otvoriť menu",
-      closeMenu: "Zavrieť menu",
-      contents: "Obsah",
-      profile: "Profil",
-      advertise: "Inzerujte u nás",
-      language: "Jazyk",
-      signIn: "Prihlásiť sa",
-      joinClub: "Vstúpiť do klubu",
-      labels: {
-        petFriendly: "Pet-friendly miesta",
-        discounts: "Zľavy",
-        help: "Pomoc",
-        community: "Komunita",
-        marketplace: "Marketplace",
-        edition: "Vydanie",
-        coverStars: "Hviezdy obálky",
-        contests: "Súťaže",
-        articles: "Články",
-        photos: "Fotografie",
-        fashion: "Móda",
-        health: "Zdravie"
-      }
-    },
-    hu: {
-      openMenu: "Menü megnyitása",
-      closeMenu: "Menü bezárása",
-      contents: "Tartalom",
-      profile: "Profil",
-      advertise: "Hirdessen nálunk",
-      language: "Nyelv",
-      signIn: "Belépés",
-      joinClub: "Csatlakozás",
-      labels: {
-        petFriendly: "Állatbarát helyek",
-        discounts: "Kedvezmények",
-        help: "Segítség",
-        community: "Közösség",
-        marketplace: "Piactér",
-        edition: "Kiadás",
-        coverStars: "Címlapsztárok",
-        contests: "Versenyek",
-        articles: "Cikkek",
-        photos: "Fotók",
-        fashion: "Divat",
-        health: "Egészség"
-      }
-    },
-    ro: {
-      openMenu: "Deschide meniul",
-      closeMenu: "Închide meniul",
-      contents: "Conținut",
-      profile: "Profil",
-      advertise: "Promovați-vă la noi",
-      language: "Limbă",
-      signIn: "Autentificare",
-      joinClub: "Intră în Club",
-      labels: {
-        petFriendly: "Locuri pet-friendly",
-        discounts: "Reduceri",
-        help: "Ajutor",
-        community: "Comunitate",
-        marketplace: "Marketplace",
-        edition: "Ediție",
-        coverStars: "Vedete de copertă",
-        contests: "Concursuri",
-        articles: "Articole",
-        photos: "Fotografii",
-        fashion: "Modă",
-        health: "Sănătate"
-      }
-    },
-    bg: {
-      openMenu: "Отвори менюто",
-      closeMenu: "Затвори менюто",
-      contents: "Съдържание",
-      profile: "Профил",
-      advertise: "Рекламирайте при нас",
-      language: "Език",
-      signIn: "Вход",
-      joinClub: "Влезте в клуба",
-      labels: {
-        petFriendly: "Pet-friendly места",
-        discounts: "Отстъпки",
-        help: "Помощ",
-        community: "Общност",
-        marketplace: "Маркетплейс",
-        edition: "Издание",
-        coverStars: "Звезди на корицата",
-        contests: "Конкурси",
-        articles: "Статии",
-        photos: "Снимки",
-        fashion: "Мода",
-        health: "Здраве"
-      }
-    },
-    el: {
-      openMenu: "Άνοιγμα μενού",
-      closeMenu: "Κλείσιμο μενού",
-      contents: "Περιεχόμενα",
-      profile: "Προφίλ",
-      advertise: "Διαφημιστείτε μαζί μας",
-      language: "Γλώσσα",
-      signIn: "Σύνδεση",
-      joinClub: "Εγγραφή στο Club",
-      labels: {
-        petFriendly: "Pet-friendly μέρη",
-        discounts: "Εκπτώσεις",
-        help: "Βοήθεια",
-        community: "Κοινότητα",
-        marketplace: "Marketplace",
-        edition: "Έκδοση",
-        coverStars: "Αστέρια εξωφύλλου",
-        contests: "Διαγωνισμοί",
-        articles: "Άρθρα",
-        photos: "Φωτογραφίες",
-        fashion: "Μόδα",
-        health: "Υγεία"
-      }
-    },
-    sv: {
-      openMenu: "Öppna meny",
-      closeMenu: "Stäng meny",
-      contents: "Innehåll",
-      profile: "Profil",
-      advertise: "Annonsera hos oss",
-      language: "Språk",
-      signIn: "Logga in",
-      joinClub: "Gå med i klubben",
-      labels: {
-        petFriendly: "Pet-friendly platser",
-        discounts: "Rabatter",
-        help: "Hjälp",
-        community: "Community",
-        marketplace: "Marknadsplats",
-        edition: "Utgåva",
-        coverStars: "Omslagsstjärnor",
-        contests: "Tävlingar",
-        articles: "Artiklar",
-        photos: "Foton",
-        fashion: "Mode",
-        health: "Hälsa"
-      }
-    },
-    da: {
-      openMenu: "Åbn menu",
-      closeMenu: "Luk menu",
-      contents: "Indhold",
-      profile: "Profil",
-      advertise: "Annoncér hos os",
-      language: "Sprog",
-      signIn: "Log ind",
-      joinClub: "Bliv medlem",
-      labels: {
-        petFriendly: "Pet-friendly steder",
-        discounts: "Rabatter",
-        help: "Hjælp",
-        community: "Fællesskab",
-        marketplace: "Markedsplads",
-        edition: "Udgave",
-        coverStars: "Forsidestjerner",
-        contests: "Konkurrencer",
-        articles: "Artikler",
-        photos: "Fotos",
-        fashion: "Mode",
-        health: "Sundhed"
-      }
-    },
-    no: {
-      openMenu: "Åpne meny",
-      closeMenu: "Lukk meny",
-      contents: "Innhold",
-      profile: "Profil",
-      advertise: "Annonser hos oss",
-      language: "Språk",
-      signIn: "Logg inn",
-      joinClub: "Bli med i klubben",
-      labels: {
-        petFriendly: "Pet-friendly steder",
-        discounts: "Rabatter",
-        help: "Hjelp",
-        community: "Fellesskap",
-        marketplace: "Markedsplass",
-        edition: "Utgave",
-        coverStars: "Forsidestjerner",
-        contests: "Konkurranser",
-        articles: "Artikler",
-        photos: "Bilder",
-        fashion: "Mote",
-        health: "Helse"
-      }
-    },
-    fi: {
-      openMenu: "Avaa valikko",
-      closeMenu: "Sulje valikko",
-      contents: "Sisältö",
-      profile: "Profiili",
-      advertise: "Mainosta אצל meillä",
-      language: "Kieli",
-      signIn: "Kirjaudu",
-      joinClub: "Liity klubiin",
-      labels: {
-        petFriendly: "Pet-friendly paikat",
-        discounts: "Alennukset",
-        help: "Apua",
-        community: "Yhteisö",
-        marketplace: "Markkinapaikka",
-        edition: "Numero",
-        coverStars: "Kansitähdet",
-        contests: "Kilpailut",
-        articles: "Artikkelit",
-        photos: "Kuvat",
-        fashion: "Muoti",
-        health: "Terveys"
-      }
-    },
-    tr: {
-      openMenu: "Menüyü aç",
-      closeMenu: "Menüyü kapat",
-      contents: "İçerik",
-      profile: "Profil",
-      advertise: "Bizimle reklam verin",
-      language: "Dil",
-      signIn: "Giriş yap",
-      joinClub: "Kulübe katıl",
-      labels: {
-        petFriendly: "Pet-Friendly yerler",
-        discounts: "İndirimler",
-        help: "Yardım",
-        community: "Topluluk",
-        marketplace: "Pazar yeri",
-        edition: "Sürüm",
-        coverStars: "Kapak yıldızları",
-        contests: "Yarışmalar",
-        articles: "Makaleler",
-        photos: "Fotoğraflar",
-        fashion: "Moda",
-        health: "Sağlık"
-      }
-    },
-    ar: {
-      openMenu: "فتح القائمة",
-      closeMenu: "إغلاق القائمة",
-      contents: "المحتويات",
-      profile: "الملف الشخصي",
-      advertise: "أعلن معنا",
-      language: "اللغة",
-      signIn: "تسجيل الدخول",
-      joinClub: "انضم إلى النادي",
-      labels: {
-        petFriendly: "أماكن صديقة للحيوانات",
-        discounts: "الخصومات",
-        help: "المساعدة",
-        community: "المجتمع",
-        marketplace: "السوق",
-        edition: "الإصدار",
-        coverStars: "نجوم الغلاف",
-        contests: "المسابقات",
-        articles: "المقالات",
-        photos: "الصور",
-        fashion: "الموضة",
-        health: "الصحة"
-      }
-    },
-    hi: {
-      openMenu: "मेनू खोलें",
-      closeMenu: "मेनू बंद करें",
-      contents: "विषय-सूची",
-      profile: "प्रोफ़ाइल",
-      advertise: "हमारे साथ विज्ञापन दें",
-      language: "भाषा",
-      signIn: "लॉग इन",
-      joinClub: "क्लब से जुड़ें",
-      labels: {
-        petFriendly: "Pet-Friendly Places",
-        discounts: "छूट",
-        help: "मदद",
-        community: "समुदाय",
-        marketplace: "मार्केटप्लेस",
-        edition: "एडिशन",
-        coverStars: "कवर स्टार्स",
-        contests: "प्रतियोगिताएँ",
-        articles: "लेख",
-        photos: "फ़ोटो",
-        fashion: "फैशन",
-        health: "स्वास्थ्य"
-      }
     }
   };
 
@@ -697,6 +237,7 @@
   let lastDirection = 0;
   let accumulated = 0;
   let ticking = false;
+  let deferredInstallPrompt = null;
 
   function normalizeLanguage(value) {
     const raw = String(value || "").trim().toLowerCase().replace("_", "-");
@@ -706,7 +247,8 @@
   }
 
   function supportedLanguage(value) {
-    return Object.prototype.hasOwnProperty.call(COPY, normalizeLanguage(value));
+    const code = normalizeLanguage(value);
+    return Object.prototype.hasOwnProperty.call(COPY, code);
   }
 
   function currentFile() {
@@ -716,6 +258,10 @@
 
   function isHome() {
     return currentFile() === "index.html";
+  }
+
+  function isPetFriendlyPage() {
+    return detectActiveKey() === "petFriendly";
   }
 
   function detectActiveKey() {
@@ -763,7 +309,7 @@
     return supportedLanguage(htmlLang) ? htmlLang : "en";
   }
 
-  function t() {
+  function copy() {
     return COPY[language] || COPY.en;
   }
 
@@ -776,18 +322,20 @@
       .replaceAll("'", "&#039;");
   }
 
+  function installTextValue(key) {
+    return (COPY[language] && COPY[language][key]) || COPY.en[key] || "";
+  }
+
   function persistLanguage(code) {
     const normalized = normalizeLanguage(code);
-    if (!supportedLanguage(normalized)) return;
-
-    language = normalized;
+    language = supportedLanguage(normalized) ? normalized : "en";
 
     try {
-      localStorage.setItem(LANGUAGE_KEY, normalized);
+      localStorage.setItem(LANGUAGE_KEY, language);
     } catch (error) {}
 
-    document.documentElement.lang = normalized;
-    document.documentElement.dir = normalized === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
   }
 
   function installStyles() {
@@ -798,7 +346,6 @@
     style.textContent = `
       :root{
         --pdh-black:#050505;
-        --pdh-black-soft:#0a0a0a;
         --pdh-white:#ffffff;
         --pdh-cream:#f6f1e8;
         --pdh-gold:#c69b45;
@@ -806,7 +353,6 @@
         --pdh-gold-line:rgba(198,155,69,.86);
         --pdh-green:#65e51f;
         --pdh-red:#db2e2e;
-        --pdh-border:rgba(255,255,255,.14);
         --pdh-shadow:0 12px 34px rgba(0,0,0,.22);
         --pdh-serif:Georgia,"Times New Roman",serif;
         --pdh-sans:Arial,Helvetica,sans-serif;
@@ -1053,6 +599,7 @@
         text-decoration:none;
         font-family:var(--pdh-serif);
         font-size:11.5px;
+        border-radius:999px;
       }
 
       .pd-luxury-row-link.active{
@@ -1070,20 +617,17 @@
         box-shadow:0 0 5px rgba(224,184,94,.38);
       }
 
+      .pd-luxury-row-link.petfriendly-outline{
+        border:1px solid rgba(101,229,31,.95);
+        box-shadow:0 0 0 1px rgba(101,229,31,.14) inset;
+      }
+
       .pd-inline-emoji{
         display:inline-flex;
         align-items:center;
         justify-content:center;
         font-size:12px;
         line-height:1;
-      }
-
-      .pd-inline-emoji.paw{
-        filter:saturate(1.2);
-      }
-
-      .pd-inline-emoji.heart{
-        filter:saturate(1.2);
       }
 
       #pdShellOverlay{
@@ -1250,6 +794,11 @@
         box-shadow:inset 0 0 0 1px rgba(219,46,46,.18);
       }
 
+      .pd-shell-card.petfriendly-card{
+        border-color:rgba(101,229,31,.95);
+        box-shadow:inset 0 0 0 1px rgba(101,229,31,.18);
+      }
+
       .pd-shell-card.active h3{
         color:var(--pdh-gold-light);
       }
@@ -1287,6 +836,100 @@
         align-items:center;
       }
 
+      #pdInstallLauncher{
+        position:fixed;
+        right:14px;
+        bottom:16px;
+        z-index:14890;
+        max-width:min(88vw,330px);
+        min-height:46px;
+        padding:10px 16px;
+        border:1px solid rgba(101,229,31,.95);
+        border-radius:999px;
+        background:#0b0b0b;
+        color:#fff;
+        box-shadow:0 12px 26px rgba(0,0,0,.28);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        font-size:12px;
+        font-weight:900;
+        cursor:pointer;
+      }
+
+      #pdInstallLauncher.show{
+        display:flex;
+      }
+
+      #pdInstallSheet{
+        position:fixed;
+        inset:0;
+        z-index:14995;
+        background:rgba(0,0,0,.62);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:opacity .18s ease, visibility .18s ease;
+      }
+
+      #pdInstallSheet.open{
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+      }
+
+      .pd-install-card{
+        position:absolute;
+        left:50%;
+        bottom:18px;
+        transform:translateX(-50%) translateY(12px);
+        width:min(92vw,420px);
+        padding:18px 16px 14px;
+        border-radius:24px;
+        background:#fff;
+        color:#111;
+        box-shadow:0 18px 42px rgba(0,0,0,.35);
+        transition:transform .18s ease;
+      }
+
+      #pdInstallSheet.open .pd-install-card{
+        transform:translateX(-50%) translateY(0);
+      }
+
+      .pd-install-card h3{
+        margin:0 0 8px;
+        font:700 22px/1.08 var(--pdh-serif);
+      }
+
+      .pd-install-card p{
+        margin:0 0 12px;
+        font-size:14px;
+        line-height:1.45;
+      }
+
+      .pd-install-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+      }
+
+      .pd-install-actions button{
+        min-height:46px;
+        border-radius:999px;
+        border:2px solid #181818;
+        background:#fff;
+        color:#111;
+        font-size:12px;
+        font-weight:900;
+        cursor:pointer;
+      }
+
+      .pd-install-actions button.primary{
+        border-color:var(--pdh-green);
+        background:var(--pdh-green);
+      }
+
       #pdLuxuryMenuButton:focus-visible,
       #pdLuxuryAdvertise:focus-visible,
       #pdLuxuryProfileButton:focus-visible,
@@ -1295,7 +938,9 @@
       .pd-shell-account a:focus-visible,
       #pdShellClose:focus-visible,
       #pdShellLanguage:focus-visible,
-      .pd-shell-card:focus-visible{
+      .pd-shell-card:focus-visible,
+      #pdInstallLauncher:focus-visible,
+      .pd-install-actions button:focus-visible{
         outline:3px solid var(--pdh-green);
         outline-offset:2px;
       }
@@ -1358,13 +1003,13 @@
         #pdLuxuryProfileMenu,
         .pd-luxury-row,
         #pdShellOverlay,
-        #pdShellMenu{
+        #pdShellMenu,
+        #pdInstallSheet{
           transition:none;
           scroll-behavior:auto;
         }
       }
     `;
-
     document.head.appendChild(style);
   }
 
@@ -1394,7 +1039,7 @@
 
     selectors.forEach((selector) => {
       document.querySelectorAll(selector).forEach((element) => {
-        if (!["pdLuxuryHeader", "pdShellMenu", "pdShellOverlay"].includes(element.id)) {
+        if (!["pdLuxuryHeader", "pdShellMenu", "pdShellOverlay", "pdInstallLauncher", "pdInstallSheet"].includes(element.id)) {
           element.classList.add("pd-header-old-hidden");
         }
       });
@@ -1425,7 +1070,6 @@
     img.alt = "PETS & DOGUE";
     img.decoding = "async";
     img.fetchPriority = "high";
-
     const fallback = getFallbackImage();
     img.src = window.PETS_DOGUE_HOME_MASTHEAD_SRC || HOME_MASTHEAD_FILE;
 
@@ -1443,14 +1087,13 @@
   }
 
   function specialIcon(key) {
-    if (key === "petFriendly") return `<span class="pd-inline-emoji paw" aria-hidden="true">🐾</span>`;
-    if (key === "help") return `<span class="pd-inline-emoji heart" aria-hidden="true">❤️</span>`;
+    if (key === "petFriendly") return `<span class="pd-inline-emoji" aria-hidden="true">🐾</span>`;
+    if (key === "help") return `<span class="pd-inline-emoji" aria-hidden="true">❤️</span>`;
     return "";
   }
 
-  function specialLabelHTML(key) {
-    const label = t().labels[key] || COPY.en.labels[key] || key;
-    return `${specialIcon(key)}<span>${esc(label)}</span>`;
+  function navLabel(key) {
+    return copy().labels[key] || COPY.en.labels[key] || key;
   }
 
   function renderRows() {
@@ -1459,20 +1102,20 @@
     if (!top || !bottom) return;
 
     const build = (keys) =>
-      keys
-        .map(
-          (key) => `
+      keys.map((key) => {
+        const petFriendlyClass = key === "petFriendly" ? " petfriendly-outline" : "";
+        return `
           <a
-            class="pd-luxury-row-link${key === activeKey ? " active" : ""}"
+            class="pd-luxury-row-link${key === activeKey ? " active" : ""}${petFriendlyClass}"
             href="${esc(ROUTES[key])}"
             data-pd-header-link="${esc(key)}"
             ${key === activeKey ? 'aria-current="page"' : ""}
           >
-            ${specialLabelHTML(key)}
+            ${specialIcon(key)}
+            <span>${esc(navLabel(key))}</span>
           </a>
-        `
-        )
-        .join("");
+        `;
+      }).join("");
 
     top.innerHTML = build(TOP_KEYS);
     bottom.innerHTML = build(BOTTOM_KEYS);
@@ -1490,13 +1133,13 @@
     const menu = document.getElementById("pdLuxuryProfileMenu");
     if (!menu) return;
 
-    const copy = t();
+    const text = copy();
     const wasOpen = menu.classList.contains("open");
 
     menu.innerHTML = `
-      <div class="pd-luxury-profile-title">${esc(copy.profile)}</div>
-      <a class="pd-luxury-profile-link" href="account.html">${esc(copy.signIn)}</a>
-      <a class="pd-luxury-profile-link club" href="club.html">${esc(copy.joinClub)}</a>
+      <div class="pd-luxury-profile-title">${esc(text.profile)}</div>
+      <a class="pd-luxury-profile-link" href="account.html">${esc(text.signIn)}</a>
+      <a class="pd-luxury-profile-link club" href="club.html">${esc(text.joinClub)}</a>
     `;
 
     if (wasOpen) {
@@ -1508,13 +1151,13 @@
   function createHeader() {
     if (document.getElementById("pdLuxuryHeader")) return;
 
-    const copy = t();
+    const text = copy();
     const header = document.createElement("header");
     header.id = "pdLuxuryHeader";
 
     header.innerHTML = `
       <div id="pdLuxuryMainBar">
-        <button id="pdLuxuryMenuButton" type="button" aria-label="${esc(copy.openMenu)}">
+        <button id="pdLuxuryMenuButton" type="button" aria-label="${esc(text.openMenu)}">
           <span></span><span></span><span></span>
         </button>
 
@@ -1529,14 +1172,14 @@
         </a>
 
         <a id="pdLuxuryAdvertise" href="${esc(ROUTES.advertise)}">
-          ${esc(copy.advertise)}
+          ${esc(text.advertise)}
         </a>
 
         <div id="pdLuxuryProfileWrap">
           <button
             id="pdLuxuryProfileButton"
             type="button"
-            aria-label="${esc(copy.profile)}"
+            aria-label="${esc(text.profile)}"
             aria-controls="pdLuxuryProfileMenu"
             aria-expanded="false"
           >
@@ -1544,7 +1187,7 @@
               <circle cx="12" cy="8" r="4"></circle>
               <path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path>
             </svg>
-            <span class="pd-luxury-profile-label">${esc(copy.profile)}</span>
+            <span class="pd-luxury-profile-label">${esc(text.profile)}</span>
           </button>
 
           <div id="pdLuxuryProfileMenu" role="menu" aria-hidden="true"></div>
@@ -1582,13 +1225,17 @@
     const menu = document.getElementById("pdShellMenu");
     if (!menu) return;
 
-    const copy = t();
+    const text = copy();
+
     const cards = MENU_KEYS.map((key) => {
       const active = key === activeKey;
       const advertiseClass = key === "advertise" ? " advertise" : "";
+      const petFriendlyClass = key === "petFriendly" ? " petfriendly-card" : "";
+      const label = key === "advertise" ? text.advertise : navLabel(key);
+
       return `
         <a
-          class="pd-shell-card${active ? " active" : ""}${advertiseClass}"
+          class="pd-shell-card${active ? " active" : ""}${advertiseClass}${petFriendlyClass}"
           href="${esc(ROUTES[key])}"
           ${active ? 'aria-current="page"' : ""}
         >
@@ -1596,9 +1243,7 @@
             <img src="${esc(MENU_IMAGES[key] || "")}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">
           </span>
           <span class="pd-shell-card-copy">
-            <h3>
-              <span class="inline">${specialIcon(key)}<span>${esc(key === "advertise" ? copy.advertise : copy.labels[key] || COPY.en.labels[key] || key)}</span></span>
-            </h3>
+            <h3><span class="inline">${specialIcon(key)}<span>${esc(label)}</span></span></h3>
           </span>
         </a>
       `;
@@ -1606,18 +1251,18 @@
 
     menu.innerHTML = `
       <div class="pd-shell-menu-head">
-        <h2>${esc(copy.contents)}</h2>
-        <button id="pdShellClose" type="button" aria-label="${esc(copy.closeMenu)}">×</button>
+        <h2>${esc(text.contents)}</h2>
+        <button id="pdShellClose" type="button" aria-label="${esc(text.closeMenu)}">×</button>
       </div>
 
       <div class="pd-shell-menu-scroll">
         <div class="pd-shell-account">
-          <a href="account.html">${esc(copy.signIn)}</a>
-          <a class="club" href="club.html">${esc(copy.joinClub)}</a>
+          <a href="account.html">${esc(text.signIn)}</a>
+          <a class="club" href="club.html">${esc(text.joinClub)}</a>
         </div>
 
-        <label class="pd-shell-language-label" for="pdShellLanguage">${esc(copy.language)}</label>
-        <select id="pdShellLanguage" aria-label="${esc(copy.language)}">
+        <label class="pd-shell-language-label" for="pdShellLanguage">${esc(text.language)}</label>
+        <select id="pdShellLanguage" aria-label="${esc(text.language)}">
           ${LANGUAGE_OPTIONS.map(([code, label]) => `
             <option value="${esc(code)}" ${language === code ? "selected" : ""}>${esc(label)}</option>
           `).join("")}
@@ -1707,6 +1352,7 @@
 
   function syncExistingLanguageController(code) {
     const existing = pageLanguageSelect();
+
     if (existing) {
       const reverse = { uk: "ua", cs: "cz", el: "gr", sv: "se", da: "dk" };
       const candidate = [code, reverse[code]].find((value) =>
@@ -1736,37 +1382,35 @@
   }
 
   function applyLanguage(code) {
-    const normalized = normalizeLanguage(code);
-    if (!supportedLanguage(normalized)) return;
-
-    persistLanguage(normalized);
-    syncExistingLanguageController(normalized);
+    persistLanguage(code);
+    syncExistingLanguageController(language);
     refreshText();
 
     window.dispatchEvent(
       new CustomEvent("petsdogue:languagechange", {
-        detail: { language: normalized, source: "header" }
+        detail: { language, source: "header" }
       })
     );
   }
 
   function refreshText() {
-    const copy = t();
+    const text = copy();
 
-    document.getElementById("pdLuxuryMenuButton")?.setAttribute("aria-label", copy.openMenu);
+    document.getElementById("pdLuxuryMenuButton")?.setAttribute("aria-label", text.openMenu);
 
     const advertise = document.getElementById("pdLuxuryAdvertise");
-    if (advertise) advertise.textContent = copy.advertise;
+    if (advertise) advertise.textContent = text.advertise;
 
     const profileButton = document.getElementById("pdLuxuryProfileButton");
-    profileButton?.setAttribute("aria-label", copy.profile);
+    profileButton?.setAttribute("aria-label", text.profile);
 
     const profileLabel = profileButton?.querySelector(".pd-luxury-profile-label");
-    if (profileLabel) profileLabel.textContent = copy.profile;
+    if (profileLabel) profileLabel.textContent = text.profile;
 
     renderRows();
     renderProfile();
     renderSideMenu();
+    renderInstallUI();
   }
 
   function showHeader() {
@@ -1832,6 +1476,7 @@
     if (event.key === "Escape") {
       closeProfile();
       closeSideMenu();
+      closeInstallSheet();
     }
   }
 
@@ -1846,18 +1491,185 @@
 
     window.addEventListener("storage", (event) => {
       if (event.key === LANGUAGE_KEY) {
-        const code = normalizeLanguage(event.newValue || "");
-        if (code && supportedLanguage(code)) {
-          persistLanguage(code);
-          refreshText();
-        }
+        persistLanguage(event.newValue || "en");
+        refreshText();
       }
     });
   }
 
+  function isIos() {
+    return /iphone|ipad|ipod/i.test(window.navigator.userAgent || "");
+  }
+
+  function ensureManifestLink() {
+    if (!isPetFriendlyPage()) return;
+
+    let manifest = document.querySelector('link[rel="manifest"]');
+    if (!manifest) {
+      manifest = document.createElement("link");
+      manifest.rel = "manifest";
+      document.head.appendChild(manifest);
+    }
+    manifest.href = PET_FRIENDLY_MANIFEST;
+
+    let theme = document.querySelector('meta[name="theme-color"]');
+    if (!theme) {
+      theme = document.createElement("meta");
+      theme.name = "theme-color";
+      document.head.appendChild(theme);
+    }
+    theme.content = "#65e51f";
+
+    let apple = document.querySelector('meta[name="apple-mobile-web-app-capable"]');
+    if (!apple) {
+      apple = document.createElement("meta");
+      apple.name = "apple-mobile-web-app-capable";
+      document.head.appendChild(apple);
+    }
+    apple.content = "yes";
+
+    let status = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+    if (!status) {
+      status = document.createElement("meta");
+      status.name = "apple-mobile-web-app-status-bar-style";
+      document.head.appendChild(status);
+    }
+    status.content = "default";
+  }
+
+  function registerPetFriendlySW() {
+    if (!isPetFriendlyPage()) return;
+    if (!("serviceWorker" in navigator)) return;
+
+    navigator.serviceWorker.register(PET_FRIENDLY_SW).catch(() => {});
+  }
+
+  function createInstallUI() {
+    if (!isPetFriendlyPage()) return;
+
+    if (!document.getElementById("pdInstallLauncher")) {
+      const launcher = document.createElement("button");
+      launcher.id = "pdInstallLauncher";
+      launcher.type = "button";
+      launcher.addEventListener("click", onInstallTap);
+      document.body.appendChild(launcher);
+    }
+
+    if (!document.getElementById("pdInstallSheet")) {
+      const sheet = document.createElement("div");
+      sheet.id = "pdInstallSheet";
+      sheet.innerHTML = `
+        <div class="pd-install-card" role="dialog" aria-modal="true">
+          <h3 id="pdInstallTitle"></h3>
+          <p id="pdInstallText"></p>
+          <div class="pd-install-actions">
+            <button id="pdInstallPrimary" class="primary" type="button"></button>
+            <button id="pdInstallLater" type="button"></button>
+          </div>
+        </div>
+      `;
+
+      sheet.addEventListener("click", (event) => {
+        if (event.target === sheet) {
+          closeInstallSheet();
+        }
+      });
+
+      document.body.appendChild(sheet);
+
+      document.getElementById("pdInstallPrimary")?.addEventListener("click", triggerInstallFlow);
+      document.getElementById("pdInstallLater")?.addEventListener("click", closeInstallSheet);
+    }
+
+    renderInstallUI();
+  }
+
+  function renderInstallUI() {
+    if (!isPetFriendlyPage()) return;
+
+    const launcher = document.getElementById("pdInstallLauncher");
+    const title = document.getElementById("pdInstallTitle");
+    const text = document.getElementById("pdInstallText");
+    const primary = document.getElementById("pdInstallPrimary");
+    const later = document.getElementById("pdInstallLater");
+
+    if (launcher) launcher.textContent = installTextValue("installCta");
+    if (title) title.textContent = installTextValue("installTitle");
+    if (text) text.textContent = deferredInstallPrompt ? installTextValue("installText") : installTextValue("iosHint");
+    if (primary) primary.textContent = deferredInstallPrompt ? installTextValue("installNow") : installTextValue("installNow");
+    if (later) later.textContent = installTextValue("later");
+
+    updateInstallVisibility();
+  }
+
+  function updateInstallVisibility() {
+    const launcher = document.getElementById("pdInstallLauncher");
+    if (!launcher) return;
+
+    const standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+    if (standalone) {
+      launcher.classList.remove("show");
+      return;
+    }
+
+    if (deferredInstallPrompt || isIos()) {
+      launcher.classList.add("show");
+    } else {
+      launcher.classList.remove("show");
+    }
+  }
+
+  function openInstallSheet() {
+    document.getElementById("pdInstallSheet")?.classList.add("open");
+  }
+
+  function closeInstallSheet() {
+    document.getElementById("pdInstallSheet")?.classList.remove("open");
+  }
+
+  function onInstallTap() {
+    renderInstallUI();
+    openInstallSheet();
+  }
+
+  async function triggerInstallFlow() {
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      try {
+        await deferredInstallPrompt.userChoice;
+      } catch (error) {}
+      deferredInstallPrompt = null;
+      closeInstallSheet();
+      updateInstallVisibility();
+      return;
+    }
+
+    closeInstallSheet();
+  }
+
+  function preparePetFriendlyInstall() {
+    if (!isPetFriendlyPage()) return;
+
+    ensureManifestLink();
+    registerPetFriendlySW();
+    createInstallUI();
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      renderInstallUI();
+    });
+
+    window.addEventListener("appinstalled", () => {
+      deferredInstallPrompt = null;
+      updateInstallVisibility();
+      closeInstallSheet();
+    });
+  }
+
   function init() {
-    if (document.documentElement.dataset.petsDogueHeaderOnly === "5") return;
-    document.documentElement.dataset.petsDogueHeaderOnly = "5";
+    if (document.documentElement.dataset.petsDogueHeaderOnly === "6") return;
+    document.documentElement.dataset.petsDogueHeaderOnly = "6";
 
     persistLanguage(detectLanguage());
     activeKey = detectActiveKey();
@@ -1867,6 +1679,8 @@
     createHomeImage();
     createHeader();
     createSideMenu();
+    createInstallUI();
+    preparePetFriendlyInstall();
     watchLegacy();
     listenLanguage();
     showHeader();
