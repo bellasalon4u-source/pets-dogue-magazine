@@ -1203,20 +1203,82 @@ color:#66615a;
 
 .payment-method-message{
 margin-top:19px;
-padding:15px;
+padding:17px;
 background:#f6f1e8;
 border:1px solid #d9d0c1;
 }
 
-.payment-method-message strong{
+.payment-method-message > strong{
 display:block;
-margin-bottom:6px;
+margin-bottom:4px;
 font-family:var(--serif);
-font-size:16px;
+font-size:17px;
 font-weight:400;
 }
 
-.payment-method-message span{
+.payment-method-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px;
+margin:14px 0 12px;
+}
+
+.payment-method-item{
+min-height:62px;
+padding:9px 8px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+border:1px solid #cdc6bb;
+border-radius:9px;
+background:#fff;
+box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.payment-method-icon{
+width:38px;
+height:38px;
+min-width:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:8px;
+background:#111;
+color:#fff;
+font-size:21px;
+font-weight:900;
+line-height:1;
+}
+
+.payment-method-icon.card-icon{
+font-size:21px;
+}
+
+.payment-method-icon.google-icon{
+font-family:Arial,Helvetica,sans-serif;
+font-size:22px;
+}
+
+.payment-method-icon.apple-icon{
+font-family:Arial,Helvetica,sans-serif;
+font-size:25px;
+}
+
+.payment-method-icon.paypal-icon{
+font-family:Arial,Helvetica,sans-serif;
+font-size:22px;
+font-style:italic;
+}
+
+.payment-method-name{
+font-size:12px;
+font-weight:900;
+color:#111;
+white-space:nowrap;
+}
+
+.payment-method-message > span{
 display:block;
 font-size:9px;
 line-height:1.55;
@@ -1614,6 +1676,24 @@ padding:23px 19px 21px;
 font-size:25px;
 }
 
+.payment-method-grid{
+gap:8px;
+}
+
+.payment-method-item{
+min-height:59px;
+}
+
+.payment-method-icon{
+width:36px;
+height:36px;
+min-width:36px;
+}
+
+.payment-method-name{
+font-size:11px;
+}
+
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -1966,10 +2046,7 @@ PARTNERS
 
 <section class="club-intro">
 
-<div
-class="kicker"
-id="clubKicker"
->
+<div class="kicker" id="clubKicker">
 PETS &amp; DOGUE CLUB
 </div>
 
@@ -1987,10 +2064,7 @@ Cover opportunities, member benefits, pet health, pet-friendly places, community
 
 <div class="section-heading">
 
-<div
-class="kicker"
-id="benefitsKicker"
->
+<div class="kicker" id="benefitsKicker">
 CLUB BENEFITS
 </div>
 
@@ -2000,10 +2074,7 @@ What you get
 
 </div>
 
-<div
-class="carousel-track"
-id="carouselTrack"
->
+<div class="carousel-track" id="carouselTrack">
 
 <article class="club-card active">
 
@@ -2016,10 +2087,7 @@ decoding="async"
 
 <div class="card-content">
 
-<div
-class="card-number"
-id="card1Number"
->
+<div class="card-number" id="card1Number">
 01 · COVER STAR
 </div>
 
@@ -2046,10 +2114,7 @@ decoding="async"
 
 <div class="card-content">
 
-<div
-class="card-number"
-id="card2Number"
->
+<div class="card-number" id="card2Number">
 02 · MEMBER BENEFITS
 </div>
 
@@ -2076,10 +2141,7 @@ decoding="async"
 
 <div class="card-content">
 
-<div
-class="card-number"
-id="card3Number"
->
+<div class="card-number" id="card3Number">
 03 · STORIES &amp; PHOTOS
 </div>
 
@@ -2106,10 +2168,7 @@ decoding="async"
 
 <div class="card-content">
 
-<div
-class="card-number"
-id="card4Number"
->
+<div class="card-number" id="card4Number">
 04 · PET HEALTH
 </div>
 
@@ -2136,10 +2195,7 @@ decoding="async"
 
 <div class="card-content">
 
-<div
-class="card-number"
-id="card5Number"
->
+<div class="card-number" id="card5Number">
 05 · CARE
 </div>
 
@@ -2166,10 +2222,7 @@ decoding="async"
 
 <div class="card-content">
 
-<div
-class="card-number"
-id="card6Number"
->
+<div class="card-number" id="card6Number">
 06 · PET-FRIENDLY LIFE
 </div>
 
@@ -2200,47 +2253,12 @@ aria-label="Previous benefit"
 
 <div class="carousel-dots">
 
-<button
-class="carousel-dot active"
-data-dot="0"
-type="button"
-aria-label="Benefit 1"
-></button>
-
-<button
-class="carousel-dot"
-data-dot="1"
-type="button"
-aria-label="Benefit 2"
-></button>
-
-<button
-class="carousel-dot"
-data-dot="2"
-type="button"
-aria-label="Benefit 3"
-></button>
-
-<button
-class="carousel-dot"
-data-dot="3"
-type="button"
-aria-label="Benefit 4"
-></button>
-
-<button
-class="carousel-dot"
-data-dot="4"
-type="button"
-aria-label="Benefit 5"
-></button>
-
-<button
-class="carousel-dot"
-data-dot="5"
-type="button"
-aria-label="Benefit 6"
-></button>
+<button class="carousel-dot active" data-dot="0" type="button" aria-label="Benefit 1"></button>
+<button class="carousel-dot" data-dot="1" type="button" aria-label="Benefit 2"></button>
+<button class="carousel-dot" data-dot="2" type="button" aria-label="Benefit 3"></button>
+<button class="carousel-dot" data-dot="3" type="button" aria-label="Benefit 4"></button>
+<button class="carousel-dot" data-dot="4" type="button" aria-label="Benefit 5"></button>
+<button class="carousel-dot" data-dot="5" type="button" aria-label="Benefit 6"></button>
 
 </div>
 
@@ -2263,10 +2281,7 @@ aria-label="Next benefit"
 
 <div class="plans-heading">
 
-<div
-class="kicker"
-id="plansKicker"
->
+<div class="kicker" id="plansKicker">
 MEMBERSHIP
 </div>
 
@@ -2290,10 +2305,7 @@ type="button"
 
 <div class="plan-top">
 
-<span
-class="plan-badge free"
-id="freeBadge"
->
+<span class="plan-badge free" id="freeBadge">
 30 DAYS FREE
 </span>
 
@@ -2303,24 +2315,15 @@ id="freeBadge"
 £0
 </div>
 
-<div
-class="plan-period"
-id="freePeriod"
->
+<div class="plan-period" id="freePeriod">
 first 30 days
 </div>
 
-<div
-class="plan-note"
-id="freeNote"
->
+<div class="plan-note" id="freeNote">
 £0 today · then £1/month
 </div>
 
-<div
-class="plan-action"
-id="freeAction"
->
+<div class="plan-action" id="freeAction">
 START FREE →
 </div>
 
@@ -2338,24 +2341,15 @@ type="button"
 £1
 </div>
 
-<div
-class="plan-period"
-id="monthlyPeriod"
->
+<div class="plan-period" id="monthlyPeriod">
 per month
 </div>
 
-<div
-class="plan-note"
-id="monthlyNote"
->
+<div class="plan-note" id="monthlyNote">
 £1 charged today
 </div>
 
-<div
-class="plan-action"
-id="monthlyAction"
->
+<div class="plan-action" id="monthlyAction">
 CHOOSE MONTHLY →
 </div>
 
@@ -2369,10 +2363,7 @@ type="button"
 
 <div class="plan-top">
 
-<span
-class="plan-badge best"
-id="annualBadge"
->
+<span class="plan-badge best" id="annualBadge">
 BEST VALUE
 </span>
 
@@ -2382,24 +2373,15 @@ BEST VALUE
 £10
 </div>
 
-<div
-class="plan-period"
-id="annualPeriod"
->
+<div class="plan-period" id="annualPeriod">
 per year
 </div>
 
-<div
-class="plan-note"
-id="annualNote"
->
+<div class="plan-note" id="annualNote">
 £10 charged today
 </div>
 
-<div
-class="plan-action"
-id="annualAction"
->
+<div class="plan-action" id="annualAction">
 CHOOSE ANNUAL →
 </div>
 
@@ -2407,10 +2389,7 @@ CHOOSE ANNUAL →
 
 </div>
 
-<p
-class="plans-smallprint"
-id="plansSmallprint"
->
+<p class="plans-smallprint" id="plansSmallprint">
 The 30-day free trial applies to the £1 monthly membership. Annual membership is £10 per year.
 </p>
 
@@ -2422,28 +2401,19 @@ The 30-day free trial applies to the £1 monthly membership. Annual membership i
 
 <footer class="club-footer">
 
-<strong
-class="notranslate"
-translate="no"
->
+<strong class="notranslate" translate="no">
 PETS &amp; DOGUE
 </strong>
 
-<span
-class="footer-platform notranslate"
-translate="no"
->
+<span class="footer-platform notranslate" translate="no">
 Digital lifestyle platform
 </span>
 
-<span
-class="footer-slogan notranslate"
-translate="no"
->
+<span class="footer-slogan notranslate" translate="no">
 One world. Every pet.
 </span>
 
-</footer> <div
+</footer><div
 class="membership-overlay"
 id="membershipOverlay"
 >
@@ -2465,17 +2435,11 @@ aria-label="Close"
 ×
 </button>
 
-<section
-class="membership-step active"
-id="questionStep"
->
+<section class="membership-step active" id="questionStep">
 
 <div class="step-head">
 
-<div
-class="step-kicker"
-id="questionKicker"
->
+<div class="step-kicker" id="questionKicker">
 PETS &amp; DOGUE CLUB
 </div>
 
@@ -2493,10 +2457,7 @@ Only your basic member details are required. Pet details are optional.
 
 <div>
 
-<span
-class="summary-label"
-id="selectedPlanLabel"
->
+<span class="summary-label" id="selectedPlanLabel">
 SELECTED PLAN
 </span>
 
@@ -2504,10 +2465,7 @@ SELECTED PLAN
 
 </div>
 
-<span
-class="summary-price"
-id="selectedPlanPrice"
-></span>
+<span class="summary-price" id="selectedPlanPrice"></span>
 
 </div>
 
@@ -2517,10 +2475,7 @@ id="questionForm"
 novalidate
 >
 
-<div
-class="field"
-id="firstNameBlock"
->
+<div class="field" id="firstNameBlock">
 
 <label for="firstName">
 
@@ -2539,19 +2494,13 @@ id="firstName"
 autocomplete="given-name"
 >
 
-<div
-class="field-error"
-id="requiredError1"
->
+<div class="field-error" id="requiredError1">
 Please answer this question.
 </div>
 
 </div>
 
-<div
-class="field"
-id="memberEmailBlock"
->
+<div class="field" id="memberEmailBlock">
 
 <label for="memberEmail">
 
@@ -2571,19 +2520,13 @@ type="email"
 autocomplete="email"
 >
 
-<div
-class="field-error"
-id="emailError"
->
+<div class="field-error" id="emailError">
 Please enter a valid email address.
 </div>
 
 </div>
 
-<div
-class="field"
-id="countryBlock"
->
+<div class="field" id="countryBlock">
 
 <label for="memberCountry">
 
@@ -2599,10 +2542,7 @@ Country
 
 <select id="memberCountry">
 
-<option
-value=""
-id="countryPlaceholder"
->
+<option value="" id="countryPlaceholder">
 Choose your country
 </option>
 
@@ -2632,26 +2572,17 @@ Choose your country
 
 </select>
 
-<div
-class="field-error"
-id="requiredError2"
->
+<div class="field-error" id="requiredError2">
 Please answer this question.
 </div>
 
 </div>
 
-<h3
-class="pet-title"
-id="petTitle"
->
+<h3 class="pet-title" id="petTitle">
 Your pet
 </h3>
 
-<p
-class="pet-note"
-id="petNote"
->
+<p class="pet-note" id="petNote">
 Optional — you can add these details now or later.
 </p>
 
@@ -2663,10 +2594,7 @@ Optional — you can add these details now or later.
 Pet's name
 </span>
 
-<span
-class="optional-label"
-id="optional1"
->
+<span class="optional-label" id="optional1">
 OPTIONAL
 </span>
 
@@ -2687,10 +2615,7 @@ autocomplete="off"
 Type of pet
 </span>
 
-<span
-class="optional-label"
-id="optional2"
->
+<span class="optional-label" id="optional2">
 OPTIONAL
 </span>
 
@@ -2698,36 +2623,16 @@ OPTIONAL
 
 <select id="petType">
 
-<option
-value=""
-id="petTypePlaceholder"
->
+<option value="" id="petTypePlaceholder">
 Choose one
 </option>
 
-<option value="dog" id="petDog">
-Dog
-</option>
-
-<option value="cat" id="petCat">
-Cat
-</option>
-
-<option value="bird" id="petBird">
-Bird
-</option>
-
-<option value="horse" id="petHorse">
-Horse
-</option>
-
-<option value="small" id="petSmall">
-Small animal
-</option>
-
-<option value="other" id="petOther">
-Other
-</option>
+<option value="dog" id="petDog">Dog</option>
+<option value="cat" id="petCat">Cat</option>
+<option value="bird" id="petBird">Bird</option>
+<option value="horse" id="petHorse">Horse</option>
+<option value="small" id="petSmall">Small animal</option>
+<option value="other" id="petOther">Other</option>
 
 </select>
 
@@ -2741,10 +2646,7 @@ Other
 Breed
 </span>
 
-<span
-class="optional-label"
-id="optional3"
->
+<span class="optional-label" id="optional3">
 OPTIONAL
 </span>
 
@@ -2777,10 +2679,7 @@ NEXT
 
 </section>
 
-<section
-class="membership-step"
-id="checkoutStep"
->
+<section class="membership-step" id="checkoutStep">
 
 <div class="payment-top">
 
@@ -2794,10 +2693,7 @@ type="button"
 ← BACK
 </button>
 
-<span
-class="payment-secure"
-id="paymentSecure"
->
+<span class="payment-secure" id="paymentSecure">
 SECURE PAYMENT
 </span>
 
@@ -2807,10 +2703,7 @@ SECURE PAYMENT
 PETS &amp; DOGUE CLUB
 </div>
 
-<h2
-class="payment-title"
-id="paymentTitle"
->
+<h2 class="payment-title" id="paymentTitle">
 Complete your membership
 </h2>
 
@@ -2875,8 +2768,75 @@ Continue to the secure payment page to complete your PETS & DOGUE Club membershi
 Available payment methods
 </strong>
 
+<div
+class="payment-method-grid"
+aria-label="Supported payment methods"
+>
+
+<div class="payment-method-item">
+
+<span
+class="payment-method-icon card-icon"
+aria-hidden="true"
+>
+💳
+</span>
+
+<span class="payment-method-name">
+Card
+</span>
+
+</div>
+
+<div class="payment-method-item">
+
+<span
+class="payment-method-icon google-icon"
+aria-hidden="true"
+>
+G
+</span>
+
+<span class="payment-method-name">
+Google Pay
+</span>
+
+</div>
+
+<div class="payment-method-item">
+
+<span
+class="payment-method-icon apple-icon"
+aria-hidden="true"
+>
+
+</span>
+
+<span class="payment-method-name">
+Apple Pay
+</span>
+
+</div>
+
+<div class="payment-method-item">
+
+<span
+class="payment-method-icon paypal-icon"
+aria-hidden="true"
+>
+P
+</span>
+
+<span class="payment-method-name">
+PayPal
+</span>
+
+</div>
+
+</div>
+
 <span id="paymentMethodsNote">
-The payment methods available for your device, country and membership will be shown on the next step.
+Available options are confirmed on the secure payment page for your device, country and membership.
 </span>
 
 </div>
@@ -2894,17 +2854,11 @@ type="checkbox"
 By subscribing, you agree to our
 </span>
 
-<a
-href="terms.html"
-id="termsLink"
->
+<a href="terms.html" id="termsLink">
 terms and conditions
 </a>,
 
-<a
-href="privacy.html"
-id="privacyLink"
->
+<a href="privacy.html" id="privacyLink">
 privacy policy
 </a>
 
@@ -2950,10 +2904,7 @@ Your payment details are entered on the secure payment page. PETS & DOGUE does n
 
 </section>
 
-<section
-class="membership-step"
-id="verifyStep"
->
+<section class="membership-step" id="verifyStep">
 
 <div class="verify-wrap">
 
@@ -2971,10 +2922,7 @@ Please wait while PETS & DOGUE confirms your membership.
 
 </section>
 
-<section
-class="membership-step"
-id="successStep"
->
+<section class="membership-step" id="successStep">
 
 <div class="success-wrap">
 
@@ -2986,10 +2934,7 @@ id="successStep"
 Welcome to PETS &amp; DOGUE Club
 </h2>
 
-<p
-class="success-intro"
-id="successIntro"
->
+<p class="success-intro" id="successIntro">
 Your membership is now active.
 </p>
 
@@ -3052,10 +2997,7 @@ BACK TO PETS &amp; DOGUE
 
 </section>
 
-<section
-class="membership-step"
-id="failureStep"
->
+<section class="membership-step" id="failureStep">
 
 <div class="failure-wrap">
 
@@ -3255,14 +3197,7 @@ petName:"Pet's name",
 petType:"Type of pet",
 choosePet:"Choose one",
 
-pets:[
-"Dog",
-"Cat",
-"Bird",
-"Horse",
-"Small animal",
-"Other"
-],
+pets:["Dog","Cat","Bird","Horse","Small animal","Other"],
 
 breed:"Breed",
 optional:"OPTIONAL",
@@ -3286,7 +3221,7 @@ checkoutTitle:"Secure payment",
 checkoutLead:"Continue to the secure payment page to complete your PETS & DOGUE Club membership.",
 
 methodsTitle:"Available payment methods",
-methodsNote:"The payment methods available for your device, country and membership will be shown on the next step.",
+methodsNote:"Available options are confirmed on the secure payment page for your device, country and membership.",
 
 consentBefore:"By subscribing, you agree to our",
 terms:"terms and conditions",
@@ -3395,14 +3330,7 @@ petName:"Имя питомца",
 petType:"Тип животного",
 choosePet:"Выберите",
 
-pets:[
-"Собака",
-"Кошка",
-"Птица",
-"Лошадь",
-"Маленькое животное",
-"Другое"
-],
+pets:["Собака","Кошка","Птица","Лошадь","Маленькое животное","Другое"],
 
 breed:"Порода",
 optional:"НЕОБЯЗАТЕЛЬНО",
@@ -3428,7 +3356,7 @@ checkoutTitle:"Безопасная оплата",
 checkoutLead:"Перейдите на защищённую страницу оплаты, чтобы завершить оформление PETS & DOGUE Club.",
 
 methodsTitle:"Доступные способы оплаты",
-methodsNote:"На следующем шаге будут показаны способы оплаты, доступные для вашего устройства, страны и выбранного членства.",
+methodsNote:"Доступные способы будут окончательно определены на защищённой странице оплаты с учётом вашего устройства, страны и членства.",
 
 consentBefore:"Оформляя подписку, вы соглашаетесь с",
 terms:"условиями",
@@ -3536,14 +3464,7 @@ petName:"Ім’я улюбленця",
 petType:"Тип тварини",
 choosePet:"Оберіть",
 
-pets:[
-"Собака",
-"Кішка",
-"Птах",
-"Кінь",
-"Маленька тварина",
-"Інше"
-],
+pets:["Собака","Кішка","Птах","Кінь","Маленька тварина","Інше"],
 
 breed:"Порода",
 optional:"НЕОБОВ’ЯЗКОВО",
@@ -3569,7 +3490,7 @@ checkoutTitle:"Безпечна оплата",
 checkoutLead:"Перейдіть на захищену сторінку оплати, щоб завершити оформлення PETS & DOGUE Club.",
 
 methodsTitle:"Доступні способи оплати",
-methodsNote:"На наступному кроці будуть показані способи оплати, доступні для вашого пристрою, країни та членства.",
+methodsNote:"Доступні способи буде остаточно визначено на захищеній сторінці оплати з урахуванням вашого пристрою, країни та членства.",
 
 consentBefore:"Оформлюючи підписку, ви погоджуєтеся з",
 terms:"умовами",
@@ -3616,305 +3537,45 @@ ttsStop:"Зупинити читання"
 
 const LOCAL = {
 
-fr:[
-"Sommaire","Profil","S’abonner","Langue","Nous contacter","Confidentialité","Conditions",
-"Plus pour vous et votre animal.","Ce que vous obtenez",
-"Choisissez votre formule","Touchez une formule pour continuer.",
-"30 JOURS GRATUITS","30 premiers jours","£0 aujourd’hui · puis £1/mois","COMMENCER GRATUITEMENT →",
-"par mois","£1 aujourd’hui","CHOISIR MENSUEL →",
-"MEILLEURE OFFRE","par an","£10 aujourd’hui","CHOISIR ANNUEL →",
-"Parlez-nous de vous","Votre prénom","Adresse e-mail","Pays","Choisissez votre pays",
-"Votre animal","Nom de l’animal","Type d’animal","Choisissez","Race","FACULTATIF","SUIVANT",
-"PAIEMENT SÉCURISÉ","Finalisez votre adhésion","À payer aujourd’hui","Paiement sécurisé",
-"CONTINUER VERS LE PAIEMENT SÉCURISÉ",
-"Bienvenue au PETS & DOGUE Club","Votre adhésion est active.","ACCÉDER À MON PROFIL","RETOUR À PETS & DOGUE",
-"Lire la page à voix haute","Arrêter la lecture"
-],
+fr:["Sommaire","Profil","S’abonner","Langue","Nous contacter","Confidentialité","Conditions","Plus pour vous et votre animal.","Ce que vous obtenez","Choisissez votre formule","Touchez une formule pour continuer.","30 JOURS GRATUITS","30 premiers jours","£0 aujourd’hui · puis £1/mois","COMMENCER GRATUITEMENT →","par mois","£1 aujourd’hui","CHOISIR MENSUEL →","MEILLEURE OFFRE","par an","£10 aujourd’hui","CHOISIR ANNUEL →","Parlez-nous de vous","Votre prénom","Adresse e-mail","Pays","Choisissez votre pays","Votre animal","Nom de l’animal","Type d’animal","Choisissez","Race","FACULTATIF","SUIVANT","PAIEMENT SÉCURISÉ","Finalisez votre adhésion","À payer aujourd’hui","Paiement sécurisé","CONTINUER VERS LE PAIEMENT SÉCURISÉ","Bienvenue au PETS & DOGUE Club","Votre adhésion est active.","ACCÉDER À MON PROFIL","RETOUR À PETS & DOGUE","Lire la page à voix haute","Arrêter la lecture"],
 
-de:[
-"Inhalt","Profil","Abonnieren","Sprache","Kontakt","Datenschutz","Bedingungen",
-"Mehr für Sie und Ihr Haustier.","Ihre Vorteile",
-"Wählen Sie Ihren Plan","Tippen Sie auf einen Plan, um fortzufahren.",
-"30 TAGE GRATIS","erste 30 Tage","£0 heute · danach £1/Monat","KOSTENLOS STARTEN →",
-"pro Monat","£1 heute","MONATLICH WÄHLEN →",
-"BESTER PREIS","pro Jahr","£10 heute","JÄHRLICH WÄHLEN →",
-"Erzählen Sie uns von sich","Ihr Vorname","E-Mail-Adresse","Land","Land auswählen",
-"Ihr Haustier","Name des Haustiers","Tierart","Auswählen","Rasse","OPTIONAL","WEITER",
-"SICHERE ZAHLUNG","Mitgliedschaft abschließen","Heute fällig","Sichere Zahlung",
-"WEITER ZUR SICHEREN ZAHLUNG",
-"Willkommen im PETS & DOGUE Club","Ihre Mitgliedschaft ist aktiv.","ZU MEINEM PROFIL","ZURÜCK ZU PETS & DOGUE",
-"Seite vorlesen","Vorlesen stoppen"
-],
+de:["Inhalt","Profil","Abonnieren","Sprache","Kontakt","Datenschutz","Bedingungen","Mehr für Sie und Ihr Haustier.","Ihre Vorteile","Wählen Sie Ihren Plan","Tippen Sie auf einen Plan, um fortzufahren.","30 TAGE GRATIS","erste 30 Tage","£0 heute · danach £1/Monat","KOSTENLOS STARTEN →","pro Monat","£1 heute","MONATLICH WÄHLEN →","BESTER PREIS","pro Jahr","£10 heute","JÄHRLICH WÄHLEN →","Erzählen Sie uns von sich","Ihr Vorname","E-Mail-Adresse","Land","Land auswählen","Ihr Haustier","Name des Haustiers","Tierart","Auswählen","Rasse","OPTIONAL","WEITER","SICHERE ZAHLUNG","Mitgliedschaft abschließen","Heute fällig","Sichere Zahlung","WEITER ZUR SICHEREN ZAHLUNG","Willkommen im PETS & DOGUE Club","Ihre Mitgliedschaft ist aktiv.","ZU MEINEM PROFIL","ZURÜCK ZU PETS & DOGUE","Seite vorlesen","Vorlesen stoppen"],
 
-es:[
-"Contenido","Perfil","Suscribirse","Idioma","Contacto","Privacidad","Condiciones",
-"Más para ti y tu mascota.","Lo que obtienes",
-"Elige tu plan","Toca un plan para continuar.",
-"30 DÍAS GRATIS","primeros 30 días","£0 hoy · después £1/mes","EMPEZAR GRATIS →",
-"al mes","£1 hoy","ELEGIR MENSUAL →",
-"MEJOR VALOR","al año","£10 hoy","ELEGIR ANUAL →",
-"Cuéntanos sobre ti","Tu nombre","Correo electrónico","País","Elige tu país",
-"Tu mascota","Nombre de la mascota","Tipo de mascota","Elige","Raza","OPCIONAL","SIGUIENTE",
-"PAGO SEGURO","Completa tu membresía","A pagar hoy","Pago seguro",
-"CONTINUAR AL PAGO SEGURO",
-"Bienvenido a PETS & DOGUE Club","Tu membresía está activa.","IR A MI PERFIL","VOLVER A PETS & DOGUE",
-"Leer la página en voz alta","Detener lectura"
-],
+es:["Contenido","Perfil","Suscribirse","Idioma","Contacto","Privacidad","Condiciones","Más para ti y tu mascota.","Lo que obtienes","Elige tu plan","Toca un plan para continuar.","30 DÍAS GRATIS","primeros 30 días","£0 hoy · después £1/mes","EMPEZAR GRATIS →","al mes","£1 hoy","ELEGIR MENSUAL →","MEJOR VALOR","al año","£10 hoy","ELEGIR ANUAL →","Cuéntanos sobre ti","Tu nombre","Correo electrónico","País","Elige tu país","Tu mascota","Nombre de la mascota","Tipo de mascota","Elige","Raza","OPCIONAL","SIGUIENTE","PAGO SEGURO","Completa tu membresía","A pagar hoy","Pago seguro","CONTINUAR AL PAGO SEGURO","Bienvenido a PETS & DOGUE Club","Tu membresía está activa.","IR A MI PERFIL","VOLVER A PETS & DOGUE","Leer la página en voz alta","Detener lectura"],
 
-it:[
-"Contenuti","Profilo","Abbonati","Lingua","Contattaci","Privacy","Condizioni",
-"Di più per te e il tuo animale.","Cosa ottieni",
-"Scegli il tuo piano","Tocca un piano per continuare.",
-"30 GIORNI GRATIS","primi 30 giorni","£0 oggi · poi £1/mese","INIZIA GRATIS →",
-"al mese","£1 oggi","SCEGLI MENSILE →",
-"MIGLIOR VALORE","all’anno","£10 oggi","SCEGLI ANNUALE →",
-"Parlaci di te","Il tuo nome","Indirizzo email","Paese","Scegli il paese",
-"Il tuo animale","Nome dell’animale","Tipo di animale","Scegli","Razza","FACOLTATIVO","AVANTI",
-"PAGAMENTO SICURO","Completa la tua iscrizione","Da pagare oggi","Pagamento sicuro",
-"CONTINUA AL PAGAMENTO SICURO",
-"Benvenuto nel PETS & DOGUE Club","La tua iscrizione è attiva.","VAI AL MIO PROFILO","TORNA A PETS & DOGUE",
-"Leggi la pagina ad alta voce","Interrompi lettura"
-],
+it:["Contenuti","Profilo","Abbonati","Lingua","Contattaci","Privacy","Condizioni","Di più per te e il tuo animale.","Cosa ottieni","Scegli il tuo piano","Tocca un piano per continuare.","30 GIORNI GRATIS","primi 30 giorni","£0 oggi · poi £1/mese","INIZIA GRATIS →","al mese","£1 oggi","SCEGLI MENSILE →","MIGLIOR VALORE","all’anno","£10 oggi","SCEGLI ANNUALE →","Parlaci di te","Il tuo nome","Indirizzo email","Paese","Scegli il paese","Il tuo animale","Nome dell’animale","Tipo di animale","Scegli","Razza","FACOLTATIVO","AVANTI","PAGAMENTO SICURO","Completa la tua iscrizione","Da pagare oggi","Pagamento sicuro","CONTINUA AL PAGAMENTO SICURO","Benvenuto nel PETS & DOGUE Club","La tua iscrizione è attiva.","VAI AL MIO PROFILO","TORNA A PETS & DOGUE","Leggi la pagina ad alta voce","Interrompi lettura"],
 
-pt:[
-"Conteúdo","Perfil","Assinar","Idioma","Contacte-nos","Privacidade","Termos",
-"Mais para si e para o seu animal.","O que recebe",
-"Escolha o seu plano","Toque num plano para continuar.",
-"30 DIAS GRÁTIS","primeiros 30 dias","£0 hoje · depois £1/mês","COMEÇAR GRÁTIS →",
-"por mês","£1 hoje","ESCOLHER MENSAL →",
-"MELHOR VALOR","por ano","£10 hoje","ESCOLHER ANUAL →",
-"Fale-nos sobre si","O seu nome","Endereço de email","País","Escolha o país",
-"O seu animal","Nome do animal","Tipo de animal","Escolher","Raça","OPCIONAL","SEGUINTE",
-"PAGAMENTO SEGURO","Conclua a sua adesão","A pagar hoje","Pagamento seguro",
-"CONTINUAR PARA PAGAMENTO SEGURO",
-"Bem-vindo ao PETS & DOGUE Club","A sua adesão está ativa.","IR PARA O MEU PERFIL","VOLTAR À PETS & DOGUE",
-"Ler página em voz alta","Parar leitura"
-],
+pt:["Conteúdo","Perfil","Assinar","Idioma","Contacte-nos","Privacidade","Termos","Mais para si e para o seu animal.","O que recebe","Escolha o seu plano","Toque num plano para continuar.","30 DIAS GRÁTIS","primeiros 30 dias","£0 hoje · depois £1/mês","COMEÇAR GRÁTIS →","por mês","£1 hoje","ESCOLHER MENSAL →","MELHOR VALOR","por ano","£10 hoje","ESCOLHER ANUAL →","Fale-nos sobre si","O seu nome","Endereço de email","País","Escolha o país","O seu animal","Nome do animal","Tipo de animal","Escolher","Raça","OPCIONAL","SEGUINTE","PAGAMENTO SEGURO","Conclua a sua adesão","A pagar hoje","Pagamento seguro","CONTINUAR PARA PAGAMENTO SEGURO","Bem-vindo ao PETS & DOGUE Club","A sua adesão está ativa.","IR PARA O MEU PERFIL","VOLTAR À PETS & DOGUE","Ler página em voz alta","Parar leitura"],
 
-nl:[
-"Inhoud","Profiel","Abonneren","Taal","Contact","Privacy","Voorwaarden",
-"Meer voor jou en je huisdier.","Wat je krijgt",
-"Kies je plan","Tik op een plan om verder te gaan.",
-"30 DAGEN GRATIS","eerste 30 dagen","£0 vandaag · daarna £1/maand","GRATIS STARTEN →",
-"per maand","£1 vandaag","KIES MAANDELIJKS →",
-"BESTE WAARDE","per jaar","£10 vandaag","KIES JAARLIJKS →",
-"Vertel ons over jezelf","Je voornaam","E-mailadres","Land","Kies je land",
-"Je huisdier","Naam van huisdier","Soort huisdier","Kies","Ras","OPTIONEEL","VOLGENDE",
-"VEILIGE BETALING","Rond je lidmaatschap af","Vandaag te betalen","Veilige betaling",
-"DOORGAAN NAAR VEILIGE BETALING",
-"Welkom bij PETS & DOGUE Club","Je lidmaatschap is actief.","NAAR MIJN PROFIEL","TERUG NAAR PETS & DOGUE",
-"Pagina voorlezen","Voorlezen stoppen"
-],
+nl:["Inhoud","Profiel","Abonneren","Taal","Contact","Privacy","Voorwaarden","Meer voor jou en je huisdier.","Wat je krijgt","Kies je plan","Tik op een plan om verder te gaan.","30 DAGEN GRATIS","eerste 30 dagen","£0 vandaag · daarna £1/maand","GRATIS STARTEN →","per maand","£1 vandaag","KIES MAANDELIJKS →","BESTE WAARDE","per jaar","£10 vandaag","KIES JAARLIJKS →","Vertel ons over jezelf","Je voornaam","E-mailadres","Land","Kies je land","Je huisdier","Naam van huisdier","Soort huisdier","Kies","Ras","OPTIONEEL","VOLGENDE","VEILIGE BETALING","Rond je lidmaatschap af","Vandaag te betalen","Veilige betaling","DOORGAAN NAAR VEILIGE BETALING","Welkom bij PETS & DOGUE Club","Je lidmaatschap is actief.","NAAR MIJN PROFIEL","TERUG NAAR PETS & DOGUE","Pagina voorlezen","Voorlezen stoppen"],
 
-pl:[
-"Spis treści","Profil","Subskrypcja","Język","Kontakt","Prywatność","Warunki",
-"Więcej dla Ciebie i Twojego zwierzaka.","Co otrzymujesz",
-"Wybierz plan","Dotknij planu, aby kontynuować.",
-"30 DNI GRATIS","pierwsze 30 dni","£0 dziś · potem £1/mies.","ZACZNIJ ZA DARMO →",
-"miesięcznie","£1 dziś","WYBIERZ MIESIĘCZNY →",
-"NAJLEPSZA WARTOŚĆ","rocznie","£10 dziś","WYBIERZ ROCZNY →",
-"Opowiedz nam o sobie","Twoje imię","Adres e-mail","Kraj","Wybierz kraj",
-"Twój zwierzak","Imię zwierzaka","Rodzaj zwierzęcia","Wybierz","Rasa","OPCJONALNE","DALEJ",
-"BEZPIECZNA PŁATNOŚĆ","Dokończ członkostwo","Do zapłaty dziś","Bezpieczna płatność",
-"PRZEJDŹ DO BEZPIECZNEJ PŁATNOŚCI",
-"Witamy w PETS & DOGUE Club","Twoje członkostwo jest aktywne.","PRZEJDŹ DO PROFILU","WRÓĆ DO PETS & DOGUE",
-"Czytaj stronę na głos","Zatrzymaj czytanie"
-],
+pl:["Spis treści","Profil","Subskrypcja","Język","Kontakt","Prywatność","Warunki","Więcej dla Ciebie i Twojego zwierzaka.","Co otrzymujesz","Wybierz plan","Dotknij planu, aby kontynuować.","30 DNI GRATIS","pierwsze 30 dni","£0 dziś · potem £1/mies.","ZACZNIJ ZA DARMO →","miesięcznie","£1 dziś","WYBIERZ MIESIĘCZNY →","NAJLEPSZA WARTOŚĆ","rocznie","£10 dziś","WYBIERZ ROCZNY →","Opowiedz nam o sobie","Twoje imię","Adres e-mail","Kraj","Wybierz kraj","Twój zwierzak","Imię zwierzaka","Rodzaj zwierzęcia","Wybierz","Rasa","OPCJONALNE","DALEJ","BEZPIECZNA PŁATNOŚĆ","Dokończ członkostwo","Do zapłaty dziś","Bezpieczna płatność","PRZEJDŹ DO BEZPIECZNEJ PŁATNOŚCI","Witamy w PETS & DOGUE Club","Twoje członkostwo jest aktywne.","PRZEJDŹ DO PROFILU","WRÓĆ DO PETS & DOGUE","Czytaj stronę na głos","Zatrzymaj czytanie"],
 
-cs:[
-"Obsah","Profil","Předplatit","Jazyk","Kontakt","Soukromí","Podmínky",
-"Více pro vás a vašeho mazlíčka.","Co získáte",
-"Vyberte plán","Klepněte na plán a pokračujte.",
-"30 DNÍ ZDARMA","prvních 30 dní","£0 dnes · poté £1/měsíc","ZAČÍT ZDARMA →",
-"měsíčně","£1 dnes","VYBRAT MĚSÍČNÍ →",
-"NEJLEPŠÍ HODNOTA","ročně","£10 dnes","VYBRAT ROČNÍ →",
-"Řekněte nám o sobě","Vaše jméno","E-mail","Země","Vyberte zemi",
-"Váš mazlíček","Jméno mazlíčka","Druh zvířete","Vyberte","Plemeno","VOLITELNÉ","DALŠÍ",
-"BEZPEČNÁ PLATBA","Dokončete členství","Dnes k úhradě","Bezpečná platba",
-"POKRAČOVAT K BEZPEČNÉ PLATBĚ",
-"Vítejte v PETS & DOGUE Club","Vaše členství je aktivní.","PŘEJÍT NA PROFIL","ZPĚT NA PETS & DOGUE",
-"Přečíst stránku nahlas","Zastavit čtení"
-],
+cs:["Obsah","Profil","Předplatit","Jazyk","Kontakt","Soukromí","Podmínky","Více pro vás a vašeho mazlíčka.","Co získáte","Vyberte plán","Klepněte na plán a pokračujte.","30 DNÍ ZDARMA","prvních 30 dní","£0 dnes · poté £1/měsíc","ZAČÍT ZDARMA →","měsíčně","£1 dnes","VYBRAT MĚSÍČNÍ →","NEJLEPŠÍ HODNOTA","ročně","£10 dnes","VYBRAT ROČNÍ →","Řekněte nám o sobě","Vaše jméno","E-mail","Země","Vyberte zemi","Váš mazlíček","Jméno mazlíčka","Druh zvířete","Vyberte","Plemeno","VOLITELNÉ","DALŠÍ","BEZPEČNÁ PLATBA","Dokončete členství","Dnes k úhradě","Bezpečná platba","POKRAČOVAT K BEZPEČNÉ PLATBĚ","Vítejte v PETS & DOGUE Club","Vaše členství je aktivní.","PŘEJÍT NA PROFIL","ZPĚT NA PETS & DOGUE","Přečíst stránku nahlas","Zastavit čtení"],
 
-sk:[
-"Obsah","Profil","Predplatné","Jazyk","Kontakt","Súkromie","Podmienky",
-"Viac pre vás a vášho miláčika.","Čo získate",
-"Vyberte plán","Klepnite na plán a pokračujte.",
-"30 DNÍ ZADARMO","prvých 30 dní","£0 dnes · potom £1/mesiac","ZAČAŤ ZADARMO →",
-"mesačne","£1 dnes","VYBRAŤ MESAČNÝ →",
-"NAJLEPŠIA HODNOTA","ročne","£10 dnes","VYBRAŤ ROČNÝ →",
-"Povedzte nám o sebe","Vaše meno","E-mail","Krajina","Vyberte krajinu",
-"Váš miláčik","Meno miláčika","Druh zvieraťa","Vyberte","Plemeno","VOLITEĽNÉ","ĎALEJ",
-"BEZPEČNÁ PLATBA","Dokončite členstvo","Dnes na úhradu","Bezpečná platba",
-"POKRAČOVAŤ K BEZPEČNEJ PLATBE",
-"Vitajte v PETS & DOGUE Club","Vaše členstvo je aktívne.","PREJSŤ NA PROFIL","SPÄŤ NA PETS & DOGUE",
-"Čítať stránku nahlas","Zastaviť čítanie"
-],
+sk:["Obsah","Profil","Predplatné","Jazyk","Kontakt","Súkromie","Podmienky","Viac pre vás a vášho miláčika.","Čo získate","Vyberte plán","Klepnite na plán a pokračujte.","30 DNÍ ZADARMO","prvých 30 dní","£0 dnes · potom £1/mesiac","ZAČAŤ ZADARMO →","mesačne","£1 dnes","VYBRAŤ MESAČNÝ →","NAJLEPŠIA HODNOTA","ročne","£10 dnes","VYBRAŤ ROČNÝ →","Povedzte nám o sebe","Vaše meno","E-mail","Krajina","Vyberte krajinu","Váš miláčik","Meno miláčika","Druh zvieraťa","Vyberte","Plemeno","VOLITEĽNÉ","ĎALEJ","BEZPEČNÁ PLATBA","Dokončite členstvo","Dnes na úhradu","Bezpečná platba","POKRAČOVAŤ K BEZPEČNEJ PLATBE","Vitajte v PETS & DOGUE Club","Vaše členstvo je aktívne.","PREJSŤ NA PROFIL","SPÄŤ NA PETS & DOGUE","Čítať stránku nahlas","Zastaviť čítanie"],
 
-hu:[
-"Tartalom","Profil","Előfizetés","Nyelv","Kapcsolat","Adatvédelem","Feltételek",
-"Több Önnek és kedvencének.","Amit kap",
-"Válasszon csomagot","Érintsen meg egy csomagot a folytatáshoz.",
-"30 NAP INGYEN","első 30 nap","£0 ma · utána £1/hó","INGYENES KEZDÉS →",
-"havonta","£1 ma","HAVI CSOMAG →",
-"LEGJOBB ÉRTÉK","évente","£10 ma","ÉVES CSOMAG →",
-"Meséljen magáról","Keresztnév","E-mail cím","Ország","Válasszon országot",
-"Kedvence","Kedvenc neve","Állat típusa","Válasszon","Fajta","NEM KÖTELEZŐ","TOVÁBB",
-"BIZTONSÁGOS FIZETÉS","Fejezze be a tagságot","Ma fizetendő","Biztonságos fizetés",
-"TOVÁBB A BIZTONSÁGOS FIZETÉSHEZ",
-"Üdvözöljük a PETS & DOGUE Clubban","Tagsága aktív.","PROFIL MEGNYITÁSA","VISSZA A PETS & DOGUE-RA",
-"Oldal felolvasása","Felolvasás leállítása"
-],
+hu:["Tartalom","Profil","Előfizetés","Nyelv","Kapcsolat","Adatvédelem","Feltételek","Több Önnek és kedvencének.","Amit kap","Válasszon csomagot","Érintsen meg egy csomagot a folytatáshoz.","30 NAP INGYEN","első 30 nap","£0 ma · utána £1/hó","INGYENES KEZDÉS →","havonta","£1 ma","HAVI CSOMAG →","LEGJOBB ÉRTÉK","évente","£10 ma","ÉVES CSOMAG →","Meséljen magáról","Keresztnév","E-mail cím","Ország","Válasszon országot","Kedvence","Kedvenc neve","Állat típusa","Válasszon","Fajta","NEM KÖTELEZŐ","TOVÁBB","BIZTONSÁGOS FIZETÉS","Fejezze be a tagságot","Ma fizetendő","Biztonságos fizetés","TOVÁBB A BIZTONSÁGOS FIZETÉSHEZ","Üdvözöljük a PETS & DOGUE Clubban","Tagsága aktív.","PROFIL MEGNYITÁSA","VISSZA A PETS & DOGUE-RA","Oldal felolvasása","Felolvasás leállítása"],
 
-ro:[
-"Cuprins","Profil","Abonare","Limbă","Contact","Confidențialitate","Termeni",
-"Mai mult pentru tine și animalul tău.","Ce primești",
-"Alege planul","Apasă un plan pentru a continua.",
-"30 DE ZILE GRATUIT","primele 30 de zile","£0 azi · apoi £1/lună","ÎNCEPE GRATUIT →",
-"pe lună","£1 azi","ALEGE LUNAR →",
-"CEA MAI BUNĂ VALOARE","pe an","£10 azi","ALEGE ANUAL →",
-"Spune-ne despre tine","Prenumele tău","Adresa de email","Țara","Alege țara",
-"Animalul tău","Numele animalului","Tipul animalului","Alege","Rasa","OPȚIONAL","URMĂTORUL",
-"PLATĂ SECURIZATĂ","Finalizează abonamentul","De plată astăzi","Plată securizată",
-"CONTINUĂ LA PLATA SECURIZATĂ",
-"Bine ai venit în PETS & DOGUE Club","Abonamentul tău este activ.","MERGI LA PROFIL","ÎNAPOI LA PETS & DOGUE",
-"Citește pagina cu voce tare","Oprește citirea"
-],
+ro:["Cuprins","Profil","Abonare","Limbă","Contact","Confidențialitate","Termeni","Mai mult pentru tine și animalul tău.","Ce primești","Alege planul","Apasă un plan pentru a continua.","30 DE ZILE GRATUIT","primele 30 de zile","£0 azi · apoi £1/lună","ÎNCEPE GRATUIT →","pe lună","£1 azi","ALEGE LUNAR →","CEA MAI BUNĂ VALOARE","pe an","£10 azi","ALEGE ANUAL →","Spune-ne despre tine","Prenumele tău","Adresa de email","Țara","Alege țara","Animalul tău","Numele animalului","Tipul animalului","Alege","Rasa","OPȚIONAL","URMĂTORUL","PLATĂ SECURIZATĂ","Finalizează abonamentul","De plată astăzi","Plată securizată","CONTINUĂ LA PLATA SECURIZATĂ","Bine ai venit în PETS & DOGUE Club","Abonamentul tău este activ.","MERGI LA PROFIL","ÎNAPOI LA PETS & DOGUE","Citește pagina cu voce tare","Oprește citirea"],
 
-bg:[
-"Съдържание","Профил","Абонамент","Език","Контакт","Поверителност","Условия",
-"Повече за вас и вашия любимец.","Какво получавате",
-"Изберете план","Докоснете план, за да продължите.",
-"30 ДНИ БЕЗПЛАТНО","първите 30 дни","£0 днес · после £1/месец","ЗАПОЧНИ БЕЗПЛАТНО →",
-"на месец","£1 днес","ИЗБЕРИ МЕСЕЧЕН →",
-"НАЙ-ДОБРА СТОЙНОСТ","на година","£10 днес","ИЗБЕРИ ГОДИШЕН →",
-"Разкажете ни за себе си","Вашето име","Имейл адрес","Държава","Изберете държава",
-"Вашият любимец","Име на любимеца","Вид животно","Изберете","Порода","НЕЗАДЪЛЖИТЕЛНО","НАПРЕД",
-"СИГУРНО ПЛАЩАНЕ","Завършете членството","Дължимо днес","Сигурно плащане",
-"ПРОДЪЛЖИ КЪМ СИГУРНО ПЛАЩАНЕ",
-"Добре дошли в PETS & DOGUE Club","Членството ви е активно.","КЪМ ПРОФИЛА","ОБРАТНО КЪМ PETS & DOGUE",
-"Прочети страницата на глас","Спри четенето"
-],
+bg:["Съдържание","Профил","Абонамент","Език","Контакт","Поверителност","Условия","Повече за вас и вашия любимец.","Какво получавате","Изберете план","Докоснете план, за да продължите.","30 ДНИ БЕЗПЛАТНО","първите 30 дни","£0 днес · после £1/месец","ЗАПОЧНИ БЕЗПЛАТНО →","на месец","£1 днес","ИЗБЕРИ МЕСЕЧЕН →","НАЙ-ДОБРА СТОЙНОСТ","на година","£10 днес","ИЗБЕРИ ГОДИШЕН →","Разкажете ни за себе си","Вашето име","Имейл адрес","Държава","Изберете държава","Вашият любимец","Име на любимеца","Вид животно","Изберете","Порода","НЕЗАДЪЛЖИТЕЛНО","НАПРЕД","СИГУРНО ПЛАЩАНЕ","Завършете членството","Дължимо днес","Сигурно плащане","ПРОДЪЛЖИ КЪМ СИГУРНО ПЛАЩАНЕ","Добре дошли в PETS & DOGUE Club","Членството ви е активно.","КЪМ ПРОФИЛА","ОБРАТНО КЪМ PETS & DOGUE","Прочети страницата на глас","Спри четенето"],
 
-el:[
-"Περιεχόμενα","Προφίλ","Συνδρομή","Γλώσσα","Επικοινωνία","Απόρρητο","Όροι",
-"Περισσότερα για εσάς και το κατοικίδιό σας.","Τι λαμβάνετε",
-"Επιλέξτε πρόγραμμα","Πατήστε ένα πρόγραμμα για να συνεχίσετε.",
-"30 ΗΜΕΡΕΣ ΔΩΡΕΑΝ","πρώτες 30 ημέρες","£0 σήμερα · μετά £1/μήνα","ΞΕΚΙΝΗΣΤΕ ΔΩΡΕΑΝ →",
-"ανά μήνα","£1 σήμερα","ΜΗΝΙΑΙΑ ΕΠΙΛΟΓΗ →",
-"ΚΑΛΥΤΕΡΗ ΑΞΙΑ","ανά έτος","£10 σήμερα","ΕΤΗΣΙΑ ΕΠΙΛΟΓΗ →",
-"Πείτε μας για εσάς","Το όνομά σας","Email","Χώρα","Επιλέξτε χώρα",
-"Το κατοικίδιό σας","Όνομα κατοικίδιου","Τύπος ζώου","Επιλέξτε","Ράτσα","ΠΡΟΑΙΡΕΤΙΚΟ","ΕΠΟΜΕΝΟ",
-"ΑΣΦΑΛΗΣ ΠΛΗΡΩΜΗ","Ολοκληρώστε τη συνδρομή","Πληρωτέο σήμερα","Ασφαλής πληρωμή",
-"ΣΥΝΕΧΕΙΑ ΣΤΗΝ ΑΣΦΑΛΗ ΠΛΗΡΩΜΗ",
-"Καλώς ήρθατε στο PETS & DOGUE Club","Η συνδρομή σας είναι ενεργή.","ΜΕΤΑΒΑΣΗ ΣΤΟ ΠΡΟΦΙΛ","ΠΙΣΩ ΣΤΟ PETS & DOGUE",
-"Ανάγνωση σελίδας","Διακοπή ανάγνωσης"
-],
+el:["Περιεχόμενα","Προφίλ","Συνδρομή","Γλώσσα","Επικοινωνία","Απόρρητο","Όροι","Περισσότερα για εσάς και το κατοικίδιό σας.","Τι λαμβάνετε","Επιλέξτε πρόγραμμα","Πατήστε ένα πρόγραμμα για να συνεχίσετε.","30 ΗΜΕΡΕΣ ΔΩΡΕΑΝ","πρώτες 30 ημέρες","£0 σήμερα · μετά £1/μήνα","ΞΕΚΙΝΗΣΤΕ ΔΩΡΕΑΝ →","ανά μήνα","£1 σήμερα","ΜΗΝΙΑΙΑ ΕΠΙΛΟΓΗ →","ΚΑΛΥΤΕΡΗ ΑΞΙΑ","ανά έτος","£10 σήμερα","ΕΤΗΣΙΑ ΕΠΙΛΟΓΗ →","Πείτε μας για εσάς","Το όνομά σας","Email","Χώρα","Επιλέξτε χώρα","Το κατοικίδιό σας","Όνομα κατοικίδιου","Τύπος ζώου","Επιλέξτε","Ράτσα","ΠΡΟΑΙΡΕΤΙΚΟ","ΕΠΟΜΕΝΟ","ΑΣΦΑΛΗΣ ΠΛΗΡΩΜΗ","Ολοκληρώστε τη συνδρομή","Πληρωτέο σήμερα","Ασφαλής πληρωμή","ΣΥΝΕΧΕΙΑ ΣΤΗΝ ΑΣΦΑΛΗ ΠΛΗΡΩΜΗ","Καλώς ήρθατε στο PETS & DOGUE Club","Η συνδρομή σας είναι ενεργή.","ΜΕΤΑΒΑΣΗ ΣΤΟ ΠΡΟΦΙΛ","ΠΙΣΩ ΣΤΟ PETS & DOGUE","Ανάγνωση σελίδας","Διακοπή ανάγνωσης"],
 
-sv:[
-"Innehåll","Profil","Prenumerera","Språk","Kontakt","Integritet","Villkor",
-"Mer för dig och ditt husdjur.","Det här får du",
-"Välj din plan","Tryck på en plan för att fortsätta.",
-"30 DAGAR GRATIS","första 30 dagarna","£0 idag · sedan £1/månad","BÖRJA GRATIS →",
-"per månad","£1 idag","VÄLJ MÅNAD →",
-"BÄSTA VÄRDE","per år","£10 idag","VÄLJ ÅR →",
-"Berätta om dig","Ditt förnamn","E-postadress","Land","Välj land",
-"Ditt husdjur","Husdjurets namn","Typ av djur","Välj","Ras","VALFRITT","NÄSTA",
-"SÄKER BETALNING","Slutför ditt medlemskap","Att betala idag","Säker betalning",
-"FORTSÄTT TILL SÄKER BETALNING",
-"Välkommen till PETS & DOGUE Club","Ditt medlemskap är aktivt.","GÅ TILL MIN PROFIL","TILLBAKA TILL PETS & DOGUE",
-"Läs sidan högt","Stoppa uppläsning"
-],
+sv:["Innehåll","Profil","Prenumerera","Språk","Kontakt","Integritet","Villkor","Mer för dig och ditt husdjur.","Det här får du","Välj din plan","Tryck på en plan för att fortsätta.","30 DAGAR GRATIS","första 30 dagarna","£0 idag · sedan £1/månad","BÖRJA GRATIS →","per månad","£1 idag","VÄLJ MÅNAD →","BÄSTA VÄRDE","per år","£10 idag","VÄLJ ÅR →","Berätta om dig","Ditt förnamn","E-postadress","Land","Välj land","Ditt husdjur","Husdjurets namn","Typ av djur","Välj","Ras","VALFRITT","NÄSTA","SÄKER BETALNING","Slutför ditt medlemskap","Att betala idag","Säker betalning","FORTSÄTT TILL SÄKER BETALNING","Välkommen till PETS & DOGUE Club","Ditt medlemskap är aktivt.","GÅ TILL MIN PROFIL","TILLBAKA TILL PETS & DOGUE","Läs sidan högt","Stoppa uppläsning"],
 
-da:[
-"Indhold","Profil","Abonner","Sprog","Kontakt","Privatliv","Vilkår",
-"Mere til dig og dit kæledyr.","Det får du",
-"Vælg din plan","Tryk på en plan for at fortsætte.",
-"30 DAGE GRATIS","første 30 dage","£0 i dag · derefter £1/måned","START GRATIS →",
-"pr. måned","£1 i dag","VÆLG MÅNEDLIG →",
-"BEDSTE VÆRDI","pr. år","£10 i dag","VÆLG ÅRLIG →",
-"Fortæl os om dig","Dit fornavn","E-mailadresse","Land","Vælg land",
-"Dit kæledyr","Kæledyrets navn","Dyretype","Vælg","Race","VALGFRIT","NÆSTE",
-"SIKKER BETALING","Gennemfør medlemskabet","Til betaling i dag","Sikker betaling",
-"FORTSÆT TIL SIKKER BETALING",
-"Velkommen til PETS & DOGUE Club","Dit medlemskab er aktivt.","GÅ TIL MIN PROFIL","TILBAGE TIL PETS & DOGUE",
-"Læs siden højt","Stop oplæsning"
-],
+da:["Indhold","Profil","Abonner","Sprog","Kontakt","Privatliv","Vilkår","Mere til dig og dit kæledyr.","Det får du","Vælg din plan","Tryk på en plan for at fortsætte.","30 DAGE GRATIS","første 30 dage","£0 i dag · derefter £1/måned","START GRATIS →","pr. måned","£1 i dag","VÆLG MÅNEDLIG →","BEDSTE VÆRDI","pr. år","£10 i dag","VÆLG ÅRLIG →","Fortæl os om dig","Dit fornavn","E-mailadresse","Land","Vælg land","Dit kæledyr","Kæledyrets navn","Dyretype","Vælg","Race","VALGFRIT","NÆSTE","SIKKER BETALING","Gennemfør medlemskabet","Til betaling i dag","Sikker betaling","FORTSÆT TIL SIKKER BETALING","Velkommen til PETS & DOGUE Club","Dit medlemskab er aktivt.","GÅ TIL MIN PROFIL","TILBAGE TIL PETS & DOGUE","Læs siden højt","Stop oplæsning"],
 
-no:[
-"Innhold","Profil","Abonner","Språk","Kontakt","Personvern","Vilkår",
-"Mer for deg og kjæledyret ditt.","Dette får du",
-"Velg planen din","Trykk på en plan for å fortsette.",
-"30 DAGER GRATIS","første 30 dager","£0 i dag · deretter £1/måned","START GRATIS →",
-"per måned","£1 i dag","VELG MÅNEDLIG →",
-"BEST VERDI","per år","£10 i dag","VELG ÅRLIG →",
-"Fortell oss om deg","Fornavn","E-postadresse","Land","Velg land",
-"Kjæledyret ditt","Kjæledyrets navn","Dyretype","Velg","Rase","VALGFRITT","NESTE",
-"SIKKER BETALING","Fullfør medlemskapet","Å betale i dag","Sikker betaling",
-"FORTSETT TIL SIKKER BETALING",
-"Velkommen til PETS & DOGUE Club","Medlemskapet ditt er aktivt.","GÅ TIL MIN PROFIL","TILBAKE TIL PETS & DOGUE",
-"Les siden høyt","Stopp opplesning"
-],
+no:["Innhold","Profil","Abonner","Språk","Kontakt","Personvern","Vilkår","Mer for deg og kjæledyret ditt.","Dette får du","Velg planen din","Trykk på en plan for å fortsette.","30 DAGER GRATIS","første 30 dager","£0 i dag · deretter £1/måned","START GRATIS →","per måned","£1 i dag","VELG MÅNEDLIG →","BEST VERDI","per år","£10 i dag","VELG ÅRLIG →","Fortell oss om deg","Fornavn","E-postadresse","Land","Velg land","Kjæledyret ditt","Kjæledyrets navn","Dyretype","Velg","Rase","VALGFRITT","NESTE","SIKKER BETALING","Fullfør medlemskapet","Å betale i dag","Sikker betaling","FORTSETT TIL SIKKER BETALING","Velkommen til PETS & DOGUE Club","Medlemskapet ditt er aktivt.","GÅ TIL MIN PROFIL","TILBAKE TIL PETS & DOGUE","Les siden høyt","Stopp opplesning"],
 
-fi:[
-"Sisältö","Profiili","Tilaa","Kieli","Yhteystiedot","Tietosuoja","Ehdot",
-"Enemmän sinulle ja lemmikillesi.","Mitä saat",
-"Valitse jäsenyys","Jatka napauttamalla jäsenyyttä.",
-"30 PÄIVÄÄ ILMAISEKSI","ensimmäiset 30 päivää","£0 tänään · sitten £1/kk","ALOITA ILMAISEKSI →",
-"kuukaudessa","£1 tänään","VALITSE KUUKAUSI →",
-"PARAS ARVO","vuodessa","£10 tänään","VALITSE VUOSI →",
-"Kerro meille itsestäsi","Etunimi","Sähköpostiosoite","Maa","Valitse maa",
-"Lemmikkisi","Lemmikin nimi","Eläintyyppi","Valitse","Rotu","VALINNAINEN","SEURAAVA",
-"TURVALLINEN MAKSU","Viimeistele jäsenyys","Maksettava tänään","Turvallinen maksu",
-"JATKA TURVALLISEEN MAKSUUN",
-"Tervetuloa PETS & DOGUE Clubiin","Jäsenyytesi on aktiivinen.","OMAAN PROFIILIIN","TAKAISIN PETS & DOGUEEN",
-"Lue sivu ääneen","Lopeta lukeminen"
-],
+fi:["Sisältö","Profiili","Tilaa","Kieli","Yhteystiedot","Tietosuoja","Ehdot","Enemmän sinulle ja lemmikillesi.","Mitä saat","Valitse jäsenyys","Jatka napauttamalla jäsenyyttä.","30 PÄIVÄÄ ILMAISEKSI","ensimmäiset 30 päivää","£0 tänään · sitten £1/kk","ALOITA ILMAISEKSI →","kuukaudessa","£1 tänään","VALITSE KUUKAUSI →","PARAS ARVO","vuodessa","£10 tänään","VALITSE VUOSI →","Kerro meille itsestäsi","Etunimi","Sähköpostiosoite","Maa","Valitse maa","Lemmikkisi","Lemmikin nimi","Eläintyyppi","Valitse","Rotu","VALINNAINEN","SEURAAVA","TURVALLINEN MAKSU","Viimeistele jäsenyys","Maksettava tänään","Turvallinen maksu","JATKA TURVALLISEEN MAKSUUN","Tervetuloa PETS & DOGUE Clubiin","Jäsenyytesi on aktiivinen.","OMAAN PROFIILIIN","TAKAISIN PETS & DOGUEEN","Lue sivu ääneen","Lopeta lukeminen"],
 
-tr:[
-"İçindekiler","Profil","Abone Ol","Dil","İletişim","Gizlilik","Koşullar",
-"Siz ve evcil hayvanınız için daha fazlası.","Neler kazanırsınız",
-"Planınızı seçin","Devam etmek için bir plana dokunun.",
-"30 GÜN ÜCRETSİZ","ilk 30 gün","Bugün £0 · sonra £1/ay","ÜCRETSİZ BAŞLA →",
-"aylık","Bugün £1","AYLIK SEÇ →",
-"EN İYİ DEĞER","yıllık","Bugün £10","YILLIK SEÇ →",
-"Bize kendinizden bahsedin","Adınız","E-posta adresi","Ülke","Ülkenizi seçin",
-"Evcil hayvanınız","Evcil hayvanın adı","Hayvan türü","Seçin","Irk","İSTEĞE BAĞLI","İLERİ",
-"GÜVENLİ ÖDEME","Üyeliğinizi tamamlayın","Bugün ödenecek","Güvenli ödeme",
-"GÜVENLİ ÖDEMEYE DEVAM ET",
-"PETS & DOGUE Club'a hoş geldiniz","Üyeliğiniz aktif.","PROFİLİME GİT","PETS & DOGUE'A DÖN",
-"Sayfayı sesli oku","Okumayı durdur"
-],
+tr:["İçindekiler","Profil","Abone Ol","Dil","İletişim","Gizlilik","Koşullar","Siz ve evcil hayvanınız için daha fazlası.","Neler kazanırsınız","Planınızı seçin","Devam etmek için bir plana dokunun.","30 GÜN ÜCRETSİZ","ilk 30 gün","Bugün £0 · sonra £1/ay","ÜCRETSİZ BAŞLA →","aylık","Bugün £1","AYLIK SEÇ →","EN İYİ DEĞER","yıllık","Bugün £10","YILLIK SEÇ →","Bize kendinizden bahsedin","Adınız","E-posta adresi","Ülke","Ülkenizi seçin","Evcil hayvanınız","Evcil hayvanın adı","Hayvan türü","Seçin","Irk","İSTEĞE BAĞLI","İLERİ","GÜVENLİ ÖDEME","Üyeliğinizi tamamlayın","Bugün ödenecek","Güvenli ödeme","GÜVENLİ ÖDEMEYE DEVAM ET","PETS & DOGUE Club'a hoş geldiniz","Üyeliğiniz aktif.","PROFİLİME GİT","PETS & DOGUE'A DÖN","Sayfayı sesli oku","Okumayı durdur"],
 
-ar:[
-"المحتويات","الملف الشخصي","اشترك","اللغة","اتصل بنا","الخصوصية","الشروط",
-"المزيد لك ولحيوانك الأليف.","ما الذي تحصل عليه",
-"اختر خطتك","اضغط على الخطة للمتابعة.",
-"30 يوماً مجاناً","أول 30 يوماً","£0 اليوم · ثم £1 شهرياً","ابدأ مجاناً",
-"شهرياً","£1 اليوم","اختر الشهري",
-"أفضل قيمة","سنوياً","£10 اليوم","اختر السنوي",
-"أخبرنا عنك","اسمك الأول","البريد الإلكتروني","البلد","اختر بلدك",
-"حيوانك الأليف","اسم الحيوان","نوع الحيوان","اختر","السلالة","اختياري","التالي",
-"دفع آمن","أكمل عضويتك","المستحق اليوم","دفع آمن",
-"المتابعة إلى الدفع الآمن",
-"مرحباً بك في PETS & DOGUE Club","عضويتك نشطة الآن.","الذهاب إلى ملفي","العودة إلى PETS & DOGUE",
-"قراءة الصفحة بصوت عالٍ","إيقاف القراءة"
-],
+ar:["المحتويات","الملف الشخصي","اشترك","اللغة","اتصل بنا","الخصوصية","الشروط","المزيد لك ولحيوانك الأليف.","ما الذي تحصل عليه","اختر خطتك","اضغط على الخطة للمتابعة.","30 يوماً مجاناً","أول 30 يوماً","£0 اليوم · ثم £1 شهرياً","ابدأ مجاناً","شهرياً","£1 اليوم","اختر الشهري","أفضل قيمة","سنوياً","£10 اليوم","اختر السنوي","أخبرنا عنك","اسمك الأول","البريد الإلكتروني","البلد","اختر بلدك","حيوانك الأليف","اسم الحيوان","نوع الحيوان","اختر","السلالة","اختياري","التالي","دفع آمن","أكمل عضويتك","المستحق اليوم","دفع آمن","المتابعة إلى الدفع الآمن","مرحباً بك في PETS & DOGUE Club","عضويتك نشطة الآن.","الذهاب إلى ملفي","العودة إلى PETS & DOGUE","قراءة الصفحة بصوت عالٍ","إيقاف القراءة"],
 
-hi:[
-"विषय सूची","प्रोफ़ाइल","सदस्यता","भाषा","संपर्क करें","गोपनीयता","शर्तें",
-"आप और आपके पालतू के लिए और भी बहुत कुछ।","आपको क्या मिलता है",
-"अपना प्लान चुनें","आगे बढ़ने के लिए प्लान चुनें।",
-"30 दिन मुफ़्त","पहले 30 दिन","आज £0 · फिर £1/माह","मुफ़्त शुरू करें →",
-"प्रति माह","आज £1","मासिक चुनें →",
-"सर्वोत्तम मूल्य","प्रति वर्ष","आज £10","वार्षिक चुनें →",
-"अपने बारे में बताएं","आपका नाम","ईमेल पता","देश","अपना देश चुनें",
-"आपका पालतू","पालतू का नाम","पालतू का प्रकार","चुनें","नस्ल","वैकल्पिक","आगे",
-"सुरक्षित भुगतान","अपनी सदस्यता पूरी करें","आज देय","सुरक्षित भुगतान",
-"सुरक्षित भुगतान पर जाएँ",
-"PETS & DOGUE Club में आपका स्वागत है","आपकी सदस्यता सक्रिय है।","मेरी प्रोफ़ाइल पर जाएँ","PETS & DOGUE पर वापस जाएँ",
-"पेज को ज़ोर से पढ़ें","पढ़ना बंद करें"
-]
+hi:["विषय सूची","प्रोफ़ाइल","सदस्यता","भाषा","संपर्क करें","गोपनीयता","शर्तें","आप और आपके पालतू के लिए और भी बहुत कुछ।","आपको क्या मिलता है","अपना प्लान चुनें","आगे बढ़ने के लिए प्लान चुनें।","30 दिन मुफ़्त","पहले 30 दिन","आज £0 · फिर £1/माह","मुफ़्त शुरू करें →","प्रति माह","आज £1","मासिक चुनें →","सर्वोत्तम मूल्य","प्रति वर्ष","आज £10","वार्षिक चुनें →","अपने बारे में बताएं","आपका नाम","ईमेल पता","देश","अपना देश चुनें","आपका पालतू","पालतू का नाम","पालतू का प्रकार","चुनें","नस्ल","वैकल्पिक","आगे","सुरक्षित भुगतान","अपनी सदस्यता पूरी करें","आज देय","सुरक्षित भुगतान","सुरक्षित भुगतान पर जाएँ","PETS & DOGUE Club में आपका स्वागत है","आपकी सदस्यता सक्रिय है।","मेरी प्रोफ़ाइल पर जाएँ","PETS & DOGUE पर वापस जाएँ","पेज को ज़ोर से पढ़ें","पढ़ना बंद करें"]
 
 };
 
@@ -3927,28 +3588,6 @@ uk:UK
 };
 
 function createLocale(code,a){
-
-const genericCards = {
-
-fr:[
-["01 · COVER STAR","Devenez une Cover Star","Participez aux concours PETS & DOGUE et donnez à votre animal une chance d’apparaître sur une couverture."],
-["02 · AVANTAGES","Réductions membres","Découvrez les offres et avantages réservés aux membres."],
-["03 · HISTOIRES & PHOTOS","Votre animal dans PETS & DOGUE","Partagez ses photos et ses histoires avec notre communauté."],
-["04 · SANTÉ","Santé animale","Découvrez des informations utiles sur la santé et les soins."],
-["05 · SOINS","Beauté & toilettage","Découvrez le toilettage, les soins et le style."],
-["06 · PET-FRIENDLY","Lieux & communauté","Découvrez des lieux, recommandations et expériences pet-friendly."]
-],
-
-de:[
-["01 · COVER STAR","Cover Star werden","Nehmen Sie an PETS & DOGUE Wettbewerben teil und geben Sie Ihrem Tier die Chance auf ein Cover."],
-["02 · VORTEILE","Mitgliederrabatte","Entdecken Sie ausgewählte Angebote und Vorteile für Mitglieder."],
-["03 · STORIES & FOTOS","Ihr Tier bei PETS & DOGUE","Teilen Sie Fotos und Geschichten mit unserer Community."],
-["04 · GESUNDHEIT","Tiergesundheit","Entdecken Sie hilfreiche Gesundheits- und Pflegetipps."],
-["05 · PFLEGE","Beauty & Grooming","Entdecken Sie Pflege, Grooming und Stil."],
-["06 · PET-FRIENDLY","Orte & Community","Entdecken Sie tierfreundliche Orte und Empfehlungen."]
-]
-
-};
 
 return{
 
@@ -3964,14 +3603,6 @@ terms:a[6],
 
 clubTitle:a[7],
 benefitsTitle:a[8],
-
-cards:
-genericCards[code] ||
-BASE_EN.cards.map((card)=>[
-card[0],
-card[1],
-card[2]
-]),
 
 plansTitle:a[9],
 plansIntro:a[10],
@@ -4069,23 +3700,11 @@ hi:["30 दिन मुफ़्त","मासिक सदस्यता","�
 
 const SEO = {
 
-en:[
-"PETS & DOGUE Club | Pet Member Benefits & Offers",
-"Join PETS & DOGUE Club for member benefits, partner offers, Cover Star opportunities, pet health, pet-friendly places, community features and useful services.",
-"en_GB"
-],
+en:["PETS & DOGUE Club | Pet Member Benefits & Offers","Join PETS & DOGUE Club for member benefits, partner offers, Cover Star opportunities, pet health, pet-friendly places, community features and useful services.","en_GB"],
 
-uk:[
-"PETS & DOGUE Club | Переваги для власників тварин",
-"Приєднуйтеся до PETS & DOGUE Club: переваги для учасників, партнерські пропозиції, Cover Star, здоров’я, pet-friendly місця та корисні сервіси.",
-"uk_UA"
-],
+uk:["PETS & DOGUE Club | Переваги для власників тварин","Приєднуйтеся до PETS & DOGUE Club: переваги для учасників, партнерські пропозиції, Cover Star, здоров’я, pet-friendly місця та корисні сервіси.","uk_UA"],
 
-ru:[
-"PETS & DOGUE Club | Преимущества для владельцев питомцев",
-"Присоединяйтесь к PETS & DOGUE Club: преимущества для участников, предложения партнёров, Cover Star, здоровье, pet-friendly места и полезные сервисы.",
-"ru_RU"
-],
+ru:["PETS & DOGUE Club | Преимущества для владельцев питомцев","Присоединяйтесь к PETS & DOGUE Club: преимущества для участников, предложения партнёров, Cover Star, здоровье, pet-friendly места и полезные сервисы.","ru_RU"],
 
 fr:["PETS & DOGUE Club | Avantages membres","Découvrez les avantages et services du PETS & DOGUE Club.","fr_FR"],
 de:["PETS & DOGUE Club | Mitgliedervorteile","Entdecken Sie Vorteile und Services des PETS & DOGUE Club.","de_DE"],
@@ -4323,7 +3942,7 @@ translated;
 
 }
 
-/* LANGUAGE RENDER */
+/* LANGUAGE */
 
 function renderLanguage(code){
 
@@ -4444,18 +4063,10 @@ txt("secureCheckoutLead",x.pay.checkoutLead);
 txt("paymentMethodsTitle",x.pay.methodsTitle);
 txt("paymentMethodsNote",x.pay.methodsNote);
 
-txt(
-"consentBefore",
-`${x.pay.consentBefore} `
-);
-
+txt("consentBefore",`${x.pay.consentBefore} `);
 txt("termsLink",x.pay.terms);
 txt("privacyLink",x.pay.privacy);
-
-txt(
-"consentAfter",
-` ${x.pay.consentAfter}`
-);
+txt("consentAfter",` ${x.pay.consentAfter}`);
 
 txt("paymentSubmit",x.pay.continuePay);
 txt("paymentSecurityText",x.pay.security);
@@ -4466,11 +4077,7 @@ txt("verifyText",x.verifyText);
 
 txt("successTitle",x.successTitle);
 txt("successIntro",x.successIntro);
-
-txt(
-"successMembershipLabel",
-x.pay.membership
-);
+txt("successMembershipLabel",x.pay.membership);
 
 txt("paidLabel",x.paid);
 txt("startLabel",x.start);
@@ -4516,35 +4123,14 @@ function updatePlanSummary(){
 const plan =
 planData();
 
-txt(
-"selectedPlanName",
-plan.name
-);
+txt("selectedPlanName",plan.name);
+txt("selectedPlanPrice",plan.price);
 
-txt(
-"selectedPlanPrice",
-plan.price
-);
+txt("paymentPlanName",plan.name);
+txt("paymentPlanPrice",plan.price);
 
-txt(
-"paymentPlanName",
-plan.name
-);
-
-txt(
-"paymentPlanPrice",
-plan.price
-);
-
-txt(
-"dueTodayValue",
-plan.price
-);
-
-txt(
-"paymentRenewalText",
-renewalText()
-);
+txt("dueTodayValue",plan.price);
+txt("paymentRenewalText",renewalText());
 
 }
 
@@ -4559,53 +4145,34 @@ $("sideMenu").setAttribute(
 "false"
 );
 
-$("menuOverlay").classList.add(
-"show"
-);
+$("menuOverlay").classList.add("show");
 
-document.body.classList.add(
-"locked"
-);
+document.body.classList.add("locked");
 
 }
 
 function closeMenu(){
 
-$("sideMenu").classList.remove(
-"open"
-);
+$("sideMenu").classList.remove("open");
 
 $("sideMenu").setAttribute(
 "aria-hidden",
 "true"
 );
 
-$("menuOverlay").classList.remove(
-"show"
-);
+$("menuOverlay").classList.remove("show");
 
 if(
-!$("membershipOverlay")
-.classList
-.contains("open")
+!$("membershipOverlay").classList.contains("open")
 ){
-
-document.body.classList.remove(
-"locked"
-);
-
+document.body.classList.remove("locked");
 }
 
 }
 
-$("menuOpen").onclick =
-openMenu;
-
-$("menuClose").onclick =
-closeMenu;
-
-$("menuOverlay").onclick =
-closeMenu;
+$("menuOpen").onclick = openMenu;
+$("menuClose").onclick = closeMenu;
+$("menuOverlay").onclick = closeMenu;
 
 /* CAROUSEL */
 
@@ -4613,15 +4180,11 @@ const track =
 $("carouselTrack");
 
 const cards = [
-...document.querySelectorAll(
-".club-card"
-)
+...document.querySelectorAll(".club-card")
 ];
 
 const dots = [
-...document.querySelectorAll(
-".carousel-dot"
-)
+...document.querySelectorAll(".carousel-dot")
 ];
 
 function setActiveSlide(index){
@@ -4634,8 +4197,7 @@ if(index >= cards.length){
 index = 0;
 }
 
-activeSlide =
-index;
+activeSlide = index;
 
 cards.forEach((card,i)=>{
 
@@ -4723,9 +4285,7 @@ nearest = index;
 
 });
 
-setActiveSlide(
-nearest
-);
+setActiveSlide(nearest);
 
 }
 
@@ -4736,9 +4296,7 @@ track.addEventListener(
 ()=>{
 
 if(carouselFrame){
-cancelAnimationFrame(
-carouselFrame
-);
+cancelAnimationFrame(carouselFrame);
 }
 
 carouselFrame =
@@ -4753,22 +4311,16 @@ passive:true
 );
 
 $("carouselPrev").onclick =
-()=>centerCard(
-activeSlide - 1
-);
+()=>centerCard(activeSlide - 1);
 
 $("carouselNext").onclick =
-()=>centerCard(
-activeSlide + 1
-);
+()=>centerCard(activeSlide + 1);
 
 dots.forEach(dot=>{
 
 dot.onclick =
 ()=>centerCard(
-Number(
-dot.dataset.dot
-)
+Number(dot.dataset.dot)
 );
 
 });
@@ -4778,20 +4330,14 @@ dot.dataset.dot
 function showStep(id){
 
 document
-.querySelectorAll(
-".membership-step"
-)
+.querySelectorAll(".membership-step")
 .forEach(step=>{
 
-step.classList.remove(
-"active"
-);
+step.classList.remove("active");
 
 });
 
-$(id).classList.add(
-"active"
-);
+$(id).classList.add("active");
 
 $("membershipShell").scrollTo({
 top:0,
@@ -4802,54 +4348,32 @@ behavior:"smooth"
 
 function openMembership(plan){
 
-selectedPlan =
-plan;
-
-checkoutBusy =
-false;
+selectedPlan = plan;
+checkoutBusy = false;
 
 updatePlanSummary();
 
-$("paymentConsent").checked =
-false;
+$("paymentConsent").checked = false;
+$("paymentSubmit").disabled = true;
 
-$("paymentSubmit").disabled =
-true;
+$("paymentError").classList.remove("show");
 
-$("paymentError")
-.classList
-.remove("show");
+$("membershipOverlay").classList.add("open");
+document.body.classList.add("locked");
 
-$("membershipOverlay")
-.classList
-.add("open");
-
-document.body.classList.add(
-"locked"
-);
-
-showStep(
-"questionStep"
-);
+showStep("questionStep");
 
 }
 
 function closeMembership(){
 
-$("membershipOverlay")
-.classList
-.remove("open");
-
-document.body.classList.remove(
-"locked"
-);
+$("membershipOverlay").classList.remove("open");
+document.body.classList.remove("locked");
 
 }
 
 document
-.querySelectorAll(
-"[data-plan]"
-)
+.querySelectorAll("[data-plan]")
 .forEach(button=>{
 
 button.onclick =
@@ -4863,9 +4387,7 @@ $("membershipClose").onclick =
 closeMembership;
 
 $("checkoutBack").onclick =
-()=>showStep(
-"questionStep"
-);
+()=>showStep("questionStep");
 
 $("failureClose").onclick =
 closeMembership;
@@ -4906,23 +4428,17 @@ email.value
 const countryBad =
 !country.value;
 
-$("firstNameBlock")
-.classList
-.toggle(
+$("firstNameBlock").classList.toggle(
 "error",
 firstBad
 );
 
-$("memberEmailBlock")
-.classList
-.toggle(
+$("memberEmailBlock").classList.toggle(
 "error",
 emailBad
 );
 
-$("countryBlock")
-.classList
-.toggle(
+$("countryBlock").classList.toggle(
 "error",
 countryBad
 );
@@ -4939,45 +4455,25 @@ localStorage.setItem(
 "petsDogueClubQuestionnaire",
 JSON.stringify({
 
-firstName:
-first.value.trim(),
-
-email:
-email.value.trim(),
-
-country:
-country.value,
-
-petName:
-$("petName").value.trim(),
-
-petType:
-$("petType").value,
-
-breed:
-$("petBreed").value.trim(),
-
-breedId:
-$("petBreedId").value
+firstName:first.value.trim(),
+email:email.value.trim(),
+country:country.value,
+petName:$("petName").value.trim(),
+petType:$("petType").value,
+breed:$("petBreed").value.trim(),
+breedId:$("petBreedId").value
 
 })
 );
 
-$("paymentConsent").checked =
-false;
+$("paymentConsent").checked = false;
+$("paymentSubmit").disabled = true;
 
-$("paymentSubmit").disabled =
-true;
-
-$("paymentError")
-.classList
-.remove("show");
+$("paymentError").classList.remove("show");
 
 updatePlanSummary();
 
-showStep(
-"checkoutStep"
-);
+showStep("checkoutStep");
 
 };
 
@@ -4989,18 +4485,14 @@ $("paymentError").textContent =
 message ||
 t().pay.generic;
 
-$("paymentError")
-.classList
-.add("show");
+$("paymentError").classList.add("show");
 
 }
 
 $("paymentConsent").onchange =
 ()=>{
 
-$("paymentError")
-.classList
-.remove("show");
+$("paymentError").classList.remove("show");
 
 $("paymentSubmit").disabled =
 !$("paymentConsent").checked ||
@@ -5047,17 +4539,14 @@ member = {};
 
 checkoutBusy = true;
 
-$("paymentSubmit").disabled =
-true;
+$("paymentSubmit").disabled = true;
 
 txt(
 "paymentSubmit",
 t().pay.processing
 );
 
-$("paymentError")
-.classList
-.remove("show");
+$("paymentError").classList.remove("show");
 
 try{
 
@@ -5075,11 +4564,8 @@ headers:{
 body:
 JSON.stringify({
 
-plan:
-selectedPlan,
-
-language:
-currentLanguage,
+plan:selectedPlan,
+language:currentLanguage,
 
 firstName:
 member.firstName || "",
@@ -5286,9 +4772,7 @@ membership
 )
 );
 
-showStep(
-"successStep"
-);
+showStep("successStep");
 
 }
 
@@ -5356,14 +4840,10 @@ window.location.search
 );
 
 const state =
-params.get(
-"membership"
-);
+params.get("membership");
 
 const returnedPlan =
-params.get(
-"plan"
-);
+params.get("plan");
 
 if(
 [
@@ -5406,25 +4886,16 @@ if(
 state === "cancelled"
 ){
 
-$("membershipOverlay")
-.classList
-.add("open");
+$("membershipOverlay").classList.add("open");
 
-document.body.classList.add(
-"locked"
-);
+document.body.classList.add("locked");
 
-$("paymentConsent").checked =
-false;
-
-$("paymentSubmit").disabled =
-true;
+$("paymentConsent").checked = false;
+$("paymentSubmit").disabled = true;
 
 updatePlanSummary();
 
-showStep(
-"checkoutStep"
-);
+showStep("checkoutStep");
 
 showPaymentError(
 t().pay.cancelled
@@ -5447,27 +4918,17 @@ return;
 }
 
 const sessionId =
-params.get(
-"session_id"
-);
+params.get("session_id");
 
-$("membershipOverlay")
-.classList
-.add("open");
+$("membershipOverlay").classList.add("open");
 
-document.body.classList.add(
-"locked"
-);
+document.body.classList.add("locked");
 
-showStep(
-"verifyStep"
-);
+showStep("verifyStep");
 
 if(
 !sessionId ||
-!sessionId.startsWith(
-"cs_"
-)
+!sessionId.startsWith("cs_")
 ){
 
 txt(
@@ -5475,9 +4936,7 @@ txt(
 t().pay.generic
 );
 
-showStep(
-"failureStep"
-);
+showStep("failureStep");
 
 return;
 
@@ -5512,9 +4971,7 @@ error.message ||
 t().failureText
 );
 
-showStep(
-"failureStep"
-);
+showStep("failureStep");
 
 }
 
@@ -5525,24 +4982,17 @@ $("failureRetry").onclick =
 
 checkoutBusy = false;
 
-$("paymentConsent").checked =
-false;
+$("paymentConsent").checked = false;
+$("paymentSubmit").disabled = true;
 
-$("paymentSubmit").disabled =
-true;
-
-$("paymentError")
-.classList
-.remove("show");
+$("paymentError").classList.remove("show");
 
 txt(
 "paymentSubmit",
 t().pay.continuePay
 );
 
-showStep(
-"checkoutStep"
-);
+showStep("checkoutStep");
 
 };
 
