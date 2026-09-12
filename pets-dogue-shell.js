@@ -1,8 +1,9 @@
 "use strict";
+
 (function(){
 
 const LANGUAGE_KEY="pets_dogue_language";
-const HOME_MASTHEAD_FILE="pets-dogue-header.png";
+const HOME_MASTHEAD_FILE="pets-dogue-header.png?v=20260912-2";
 
 const LANGUAGE_ALIASES={
 ua:"uk",
@@ -563,7 +564,9 @@ photos:"Kuvat",
 fashion:"Muoti",
 health:"Terveys"
 }
-}, tr:{
+},
+
+tr:{
 menu:"Menüyü aç",
 profile:"Profil",
 partners:"Ortaklar",
@@ -643,26 +646,33 @@ let accumulated=0;
 let ticking=false;
 
 function normalizeLanguage(v){
+
 const raw=String(v||"")
 .trim()
 .toLowerCase()
 .replace("_","-");
 
-if(!raw)return"";
+if(!raw){
+return"";
+}
 
 const base=raw.split("-")[0];
 
 return LANGUAGE_ALIASES[base]||base;
+
 }
 
 function supportedLanguage(v){
+
 return Object.prototype.hasOwnProperty.call(
 COPY,
 normalizeLanguage(v)
 );
+
 }
 
 function currentFile(){
+
 const p=window.location.pathname||"";
 
 return(
@@ -672,13 +682,17 @@ p.split("/")
 ||
 "index.html"
 ).toLowerCase();
+
 }
 
 function isHome(){
+
 return currentFile()==="index.html";
+
 }
 
 function detectActiveKey(){
+
 const f=currentFile();
 
 if(PAGE_KEYS[f]){
@@ -688,17 +702,26 @@ return PAGE_KEYS[f];
 const p=(window.location.pathname||"").toLowerCase();
 
 for(const [name,key] of Object.entries(PAGE_KEYS)){
-if(p.includes(name.replace(".html",""))){
+
+if(
+p.includes(
+name.replace(".html","")
+)
+){
+
 return key;
+
 }
+
 }
 
 return"";
+
 }
 
 function pageLanguageSelect(){
 
-for(const s of[
+for(const selector of[
 "#pdGlobalLanguage",
 "#pdLanguageSelect",
 "#headerLanguageSelect",
@@ -709,27 +732,40 @@ for(const s of[
 "select[name='language']",
 "select[name='lang']"
 ]){
-const el=document.querySelector(s);
 
-if(el){
-return el;
+const element=document.querySelector(
+selector
+);
+
+if(element){
+return element;
 }
+
 }
 
 return null;
+
 }
 
 function detectLanguage(){
 
 try{
+
 const saved=normalizeLanguage(
 localStorage.getItem(LANGUAGE_KEY)||""
 );
 
-if(saved&&supportedLanguage(saved)){
+if(
+saved
+&&
+supportedLanguage(saved)
+){
+
 return saved;
+
 }
-}catch(e){}
+
+}catch(error){}
 
 const select=pageLanguageSelect();
 
@@ -737,37 +773,48 @@ const fromSelect=normalizeLanguage(
 select?.value||""
 );
 
-if(fromSelect&&supportedLanguage(fromSelect)){
+if(
+fromSelect
+&&
+supportedLanguage(fromSelect)
+){
+
 return fromSelect;
+
 }
 
-const htmlLang=normalizeLanguage(
+const htmlLanguage=normalizeLanguage(
 document.documentElement.lang||""
 );
 
-return supportedLanguage(htmlLang)
-?htmlLang
+return supportedLanguage(htmlLanguage)
+?htmlLanguage
 :"en";
+
 }
 
 function t(){
+
 return COPY[language]||COPY.en;
+
 }
 
 function esc(v){
+
 return String(v??"")
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 }
 
 function installStyles(){
 
-document.getElementById(
-"pdHeaderOnlyStyles"
-)?.remove();
+document
+.getElementById("pdHeaderOnlyStyles")
+?.remove();
 
 const style=document.createElement("style");
 
@@ -781,7 +828,7 @@ style.textContent=`
 --pdh-gold:#c69b45;
 --pdh-gold-light:#ecd28a;
 --pdh-green:#65e51f;
---pdh-line:rgba(255,255,255,.18);
+--pdh-line:rgba(198,155,69,.68);
 --pdh-serif:Georgia,"Times New Roman",serif;
 --pdh-sans:Arial,Helvetica,sans-serif;
 }
@@ -807,7 +854,7 @@ display:block;
 width:100%;
 height:100%;
 object-fit:cover;
-object-position:center 42%;
+object-position:center center;
 }
 
 #pdLuxuryHeader{
@@ -985,7 +1032,7 @@ background:#080808;
 .pd-luxury-row-shell{
 position:relative;
 overflow:hidden;
-border-bottom:1px solid var(--pdh-line);
+border-bottom:1px solid rgba(198,155,69,.78);
 }
 
 .pd-luxury-row{
@@ -997,6 +1044,7 @@ scrollbar-width:none;
 -ms-overflow-style:none;
 -webkit-overflow-scrolling:touch;
 scroll-behavior:smooth;
+overscroll-behavior-x:contain;
 }
 
 .pd-luxury-row::-webkit-scrollbar{
@@ -1011,7 +1059,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 padding:0 16px;
-border-right:1px solid rgba(255,255,255,.08);
+border-right:1px solid rgba(198,155,69,.62);
 color:#f7f7f7;
 text-decoration:none;
 font-family:var(--pdh-serif);
@@ -1029,11 +1077,12 @@ color:var(--pdh-gold-light);
 .pd-luxury-row-link.active:after{
 content:"";
 position:absolute;
-left:13px;
-right:13px;
+left:10px;
+right:10px;
 bottom:0;
 height:2px;
-background:var(--pdh-gold);
+background:#e0b85e;
+box-shadow:0 0 5px rgba(224,184,94,.38);
 }
 
 .pd-luxury-row-shell:after{
@@ -1052,6 +1101,18 @@ pointer-events:none;
 background:
 linear-gradient(
 90deg,
+rgba(8,8,8,0),
+#080808 58%
+);
+}
+
+html[dir="rtl"] .pd-luxury-row-shell:after{
+content:"‹";
+right:auto;
+left:0;
+background:
+linear-gradient(
+270deg,
 rgba(8,8,8,0),
 #080808 58%
 );
@@ -1080,6 +1141,15 @@ border-radius:999px!important;
 background:#fff!important;
 color:#111!important;
 font:800 13px/1 var(--pdh-sans)!important;
+}
+
+#pdLuxuryMenuButton:focus-visible,
+#pdLuxuryPartners:focus-visible,
+#pdLuxuryProfileButton:focus-visible,
+.pd-luxury-row-link:focus-visible,
+#pdLuxuryProfileMenu a:focus-visible{
+outline:3px solid var(--pdh-green);
+outline-offset:2px;
 }
 
 @media(max-width:390px){
@@ -1131,6 +1201,18 @@ grid-template-columns:
 
 }
 
+@media(min-width:900px){
+
+#pdLuxuryMainBar,
+#pdLuxuryRows,
+#pdHomeHeaderImage{
+max-width:1500px;
+margin-left:auto;
+margin-right:auto;
+}
+
+}
+
 @media(prefers-reduced-motion:reduce){
 
 #pdLuxuryHeader,
@@ -1145,6 +1227,7 @@ scroll-behavior:auto;
 `;
 
 document.head.appendChild(style);
+
 }
 
 function hideLegacy(){
@@ -1168,12 +1251,16 @@ for(const selector of[
 
 document
 .querySelectorAll(selector)
-.forEach(el=>{
+.forEach(element=>{
 
-if(el.id!=="pdLuxuryHeader"){
-el.classList.add(
+if(
+element.id!=="pdLuxuryHeader"
+){
+
+element.classList.add(
 "pd-header-old-hidden"
 );
+
 }
 
 });
@@ -1184,12 +1271,16 @@ el.classList.add(
 
 function watchLegacy(){
 
-if(observer)return;
+if(observer){
+return;
+}
 
 observer=new MutationObserver(
 ()=>{
+
 hideLegacy();
 ensureLanguageInSideMenu();
+
 }
 );
 
@@ -1253,15 +1344,19 @@ img.addEventListener(
 if(
 fallback
 &&
-img.src!==fallback
+img.dataset.fallbackDone!=="1"
 ){
+
+img.dataset.fallbackDone="1";
 img.src=fallback;
+
 }else{
+
 holder.style.display="none";
+
 }
 
-},
-{once:true}
+}
 );
 
 holder.appendChild(img);
@@ -1271,7 +1366,9 @@ holder,
 document.body.firstChild
 );
 
-} function renderRows(){
+}
+
+function renderRows(){
 
 const top=document.getElementById(
 "pdLuxuryTopRow"
@@ -1281,7 +1378,13 @@ const bottom=document.getElementById(
 "pdLuxuryBottomRow"
 );
 
-if(!top||!bottom)return;
+if(
+!top
+||
+!bottom
+){
+return;
+}
 
 const labels=t().labels;
 
@@ -1291,6 +1394,7 @@ key=>`
 <a
 class="pd-luxury-row-link${key===activeKey?" active":""}"
 href="${esc(ROUTES[key])}"
+data-pd-header-link="${esc(key)}"
 ${key===activeKey?'aria-current="page"':""}
 >
 ${esc(labels[key]||COPY.en.labels[key]||key)}
@@ -1303,13 +1407,17 @@ bottom.innerHTML=build(BOTTOM_KEYS);
 
 requestAnimationFrame(
 ()=>{
-document
-.querySelector(".pd-luxury-row-link.active")
-?.scrollIntoView({
+
+const active=document.querySelector(
+".pd-luxury-row-link.active"
+);
+
+active?.scrollIntoView({
 block:"nearest",
 inline:"center",
 behavior:"auto"
 });
+
 }
 );
 
@@ -1321,39 +1429,47 @@ const menu=document.getElementById(
 "pdLuxuryProfileMenu"
 );
 
-if(!menu)return;
+if(!menu){
+return;
+}
 
-const c=t();
+const copy=t();
 
-const open=menu.classList.contains("open");
+const wasOpen=menu.classList.contains(
+"open"
+);
 
 menu.innerHTML=`
+
 <div class="pd-luxury-profile-title">
-${esc(c.profile)}
+${esc(copy.profile)}
 </div>
 
 <a
 class="pd-luxury-profile-link"
 href="account.html"
 >
-${esc(c.signIn)}
+${esc(copy.signIn)}
 </a>
 
 <a
 class="pd-luxury-profile-link club"
 href="club.html"
 >
-${esc(c.joinClub)}
+${esc(copy.joinClub)}
 </a>
+
 `;
 
-if(open){
+if(wasOpen){
+
 menu.classList.add("open");
 
 menu.setAttribute(
 "aria-hidden",
 "false"
 );
+
 }
 
 }
@@ -1368,7 +1484,7 @@ document.getElementById(
 return;
 }
 
-const c=t();
+const copy=t();
 
 const header=document.createElement(
 "header"
@@ -1383,7 +1499,7 @@ header.innerHTML=`
 <button
 id="pdLuxuryMenuButton"
 type="button"
-aria-label="${esc(c.menu)}"
+aria-label="${esc(copy.menu)}"
 >
 <span></span>
 <span></span>
@@ -1403,8 +1519,9 @@ PETS &amp; DOGUE
 <a
 id="pdLuxuryPartners"
 href="partners.html"
+data-pd-header-link="partners"
 >
-${esc(c.partners)}
+${esc(copy.partners)}
 </a>
 
 <div id="pdLuxuryProfileWrap">
@@ -1412,7 +1529,7 @@ ${esc(c.partners)}
 <button
 id="pdLuxuryProfileButton"
 type="button"
-aria-label="${esc(c.profile)}"
+aria-label="${esc(copy.profile)}"
 aria-controls="pdLuxuryProfileMenu"
 aria-expanded="false"
 >
@@ -1433,7 +1550,7 @@ d="M4.5 21a7.5 7.5 0 0 1 15 0"
 </svg>
 
 <span class="pd-luxury-profile-label">
-${esc(c.profile)}
+${esc(copy.profile)}
 </span>
 
 </button>
@@ -1455,6 +1572,7 @@ aria-hidden="true"
 <nav
 id="pdLuxuryTopRow"
 class="pd-luxury-row"
+aria-label="PETS & DOGUE primary sections"
 ></nav>
 
 </div>
@@ -1464,6 +1582,7 @@ class="pd-luxury-row"
 <nav
 id="pdLuxuryBottomRow"
 class="pd-luxury-row"
+aria-label="PETS & DOGUE editorial sections"
 ></nav>
 
 </div>
@@ -1493,19 +1612,23 @@ document.body.firstChild
 }
 
 document
-.getElementById("pdLuxuryMenuButton")
+.getElementById(
+"pdLuxuryMenuButton"
+)
 ?.addEventListener(
 "click",
 openExistingMenu
 );
 
 document
-.getElementById("pdLuxuryProfileButton")
+.getElementById(
+"pdLuxuryProfileButton"
+)
 ?.addEventListener(
 "click",
-e=>{
+event=>{
 
-e.stopPropagation();
+event.stopPropagation();
 
 toggleProfile();
 
@@ -1529,7 +1652,9 @@ function ensureLanguageInSideMenu(){
 
 const menu=sideMenu();
 
-if(!menu)return;
+if(!menu){
+return;
+}
 
 let select=pageLanguageSelect();
 
@@ -1541,7 +1666,10 @@ select=document.createElement(
 
 select.id="pdHeaderLanguageSelect";
 
-for(const [code,label] of LANGUAGE_OPTIONS){
+for(
+const [code,label]
+of LANGUAGE_OPTIONS
+){
 
 const option=document.createElement(
 "option"
@@ -1558,12 +1686,20 @@ select.value=language;
 
 select.addEventListener(
 "change",
-()=>applyLanguage(select.value)
+()=>{
+
+applyLanguage(
+select.value
+);
+
+}
 );
 
 }
 
-if(menu.contains(select)){
+if(
+menu.contains(select)
+){
 return;
 }
 
@@ -1613,18 +1749,22 @@ function applyLanguage(code){
 
 code=normalizeLanguage(code);
 
-if(!supportedLanguage(code)){
+if(
+!supportedLanguage(code)
+){
 return;
 }
 
 language=code;
 
 try{
+
 localStorage.setItem(
 LANGUAGE_KEY,
 code
 );
-}catch(e){}
+
+}catch(error){}
 
 document.documentElement.lang=code;
 
@@ -1668,7 +1808,9 @@ existing.value=candidate;
 existing.dispatchEvent(
 new Event(
 "change",
-{bubbles:true}
+{
+bubbles:true
+}
 )
 );
 
@@ -1676,23 +1818,31 @@ new Event(
 
 }
 
-if(window.PetsDogueLanguage){
+if(
+window.PetsDogueLanguage
+){
 
-for(const fn of[
+for(const functionName of[
 "setLanguage",
 "changeLanguage",
 "selectLanguage"
 ]){
 
 if(
-typeof window.PetsDogueLanguage[fn]
+typeof window.PetsDogueLanguage[
+functionName
+]
 ===
 "function"
 ){
 
 try{
-window.PetsDogueLanguage[fn](code);
-}catch(e){}
+
+window.PetsDogueLanguage[
+functionName
+](code);
+
+}catch(error){}
 
 break;
 
@@ -1707,8 +1857,10 @@ typeof window.renderLanguage
 ){
 
 try{
+
 window.renderLanguage(code);
-}catch(e){}
+
+}catch(error){}
 
 }
 
@@ -1750,7 +1902,39 @@ ensureLanguageInSideMenu,
 
 return;
 
-}catch(e){}
+}catch(error){}
+
+}
+
+for(const functionName of[
+"openSideMenu",
+"showMenu"
+]){
+
+const candidate=window[
+functionName
+];
+
+if(
+typeof candidate
+===
+"function"
+){
+
+try{
+
+candidate();
+
+setTimeout(
+ensureLanguageInSideMenu,
+0
+);
+
+return;
+
+}catch(error){}
+
+}
 
 }
 
@@ -1806,9 +1990,17 @@ const button=document.getElementById(
 "pdLuxuryProfileButton"
 );
 
-if(!menu||!button)return;
+if(
+!menu
+||
+!button
+){
+return;
+}
 
-menu.classList.add("open");
+menu.classList.add(
+"open"
+);
 
 menu.setAttribute(
 "aria-hidden",
@@ -1832,9 +2024,17 @@ const button=document.getElementById(
 "pdLuxuryProfileButton"
 );
 
-if(!menu||!button)return;
+if(
+!menu
+||
+!button
+){
+return;
+}
 
-menu.classList.remove("open");
+menu.classList.remove(
+"open"
+);
 
 menu.setAttribute(
 "aria-hidden",
@@ -1851,8 +2051,12 @@ button.setAttribute(
 function toggleProfile(){
 
 document
-.getElementById("pdLuxuryProfileMenu")
-?.classList.contains("open")
+.getElementById(
+"pdLuxuryProfileMenu"
+)
+?.classList.contains(
+"open"
+)
 ?
 closeProfile()
 :
@@ -1863,7 +2067,9 @@ openProfile();
 function showHeader(){
 
 document
-.getElementById("pdLuxuryHeader")
+.getElementById(
+"pdLuxuryHeader"
+)
 ?.classList.remove(
 "pd-header-hidden"
 );
@@ -1873,7 +2079,9 @@ document
 function hideHeader(){
 
 document
-.getElementById("pdLuxuryHeader")
+.getElementById(
+"pdLuxuryHeader"
+)
 ?.classList.add(
 "pd-header-hidden"
 );
@@ -1884,17 +2092,25 @@ function menuOpen(){
 
 const menu=sideMenu();
 
-return !!(
+return Boolean(
 menu
 &&
 (
-menu.classList.contains("open")
+menu.classList.contains(
+"open"
+)
 ||
-menu.classList.contains("active")
+menu.classList.contains(
+"active"
+)
 ||
-menu.classList.contains("show")
+menu.classList.contains(
+"show"
+)
 ||
-menu.getAttribute("aria-hidden")
+menu.getAttribute(
+"aria-hidden"
+)
 ===
 "false"
 )
@@ -1904,7 +2120,9 @@ menu.getAttribute("aria-hidden")
 
 function handleScroll(){
 
-if(ticking)return;
+if(ticking){
+return;
+}
 
 ticking=true;
 
@@ -1918,7 +2136,7 @@ window.scrollY||0
 
 const delta=y-lastY;
 
-const dir=
+const direction=
 delta>0
 ?1
 :delta<0
@@ -1930,7 +2148,9 @@ document
 .getElementById(
 "pdLuxuryProfileMenu"
 )
-?.classList.contains("open");
+?.classList.contains(
+"open"
+);
 
 if(
 y<=8
@@ -1943,16 +2163,22 @@ profileOpen
 showHeader();
 accumulated=0;
 
-}else if(dir){
-
-if(dir!==lastDirection){
-accumulated=0;
-}
-
-accumulated+=Math.abs(delta);
+}else if(direction){
 
 if(
-dir>0
+direction!==lastDirection
+){
+
+accumulated=0;
+
+}
+
+accumulated+=Math.abs(
+delta
+);
+
+if(
+direction>0
 &&
 accumulated>=16
 ){
@@ -1961,7 +2187,7 @@ hideHeader();
 accumulated=0;
 
 }else if(
-dir<0
+direction<0
 &&
 accumulated>=8
 ){
@@ -1971,7 +2197,7 @@ accumulated=0;
 
 }
 
-lastDirection=dir;
+lastDirection=direction;
 
 }
 
@@ -1985,7 +2211,7 @@ ticking=false;
 
 function refreshText(){
 
-const c=t();
+const copy=t();
 
 document
 .getElementById(
@@ -1993,7 +2219,7 @@ document
 )
 ?.setAttribute(
 "aria-label",
-c.menu
+copy.menu
 );
 
 const partners=document.getElementById(
@@ -2001,7 +2227,10 @@ const partners=document.getElementById(
 );
 
 if(partners){
-partners.textContent=c.partners;
+
+partners.textContent=
+copy.partners;
+
 }
 
 const profileButton=
@@ -2011,7 +2240,7 @@ document.getElementById(
 
 profileButton?.setAttribute(
 "aria-label",
-c.profile
+copy.profile
 );
 
 const profileLabel=
@@ -2020,7 +2249,10 @@ profileButton?.querySelector(
 );
 
 if(profileLabel){
-profileLabel.textContent=c.profile;
+
+profileLabel.textContent=
+copy.profile;
+
 }
 
 renderRows();
@@ -2032,7 +2264,10 @@ document.querySelector(
 );
 
 if(languageLabel){
-languageLabel.textContent=c.language;
+
+languageLabel.textContent=
+copy.language;
+
 }
 
 }
@@ -2041,10 +2276,10 @@ function listenLanguage(){
 
 window.addEventListener(
 "petsdogue:languagechange",
-e=>{
+event=>{
 
 const code=normalizeLanguage(
-e?.detail?.language||""
+event?.detail?.language||""
 );
 
 if(
@@ -2056,6 +2291,7 @@ code!==language
 ){
 
 language=code;
+
 refreshText();
 
 }
@@ -2065,12 +2301,14 @@ refreshText();
 
 window.addEventListener(
 "storage",
-e=>{
+event=>{
 
-if(e.key===LANGUAGE_KEY){
+if(
+event.key===LANGUAGE_KEY
+){
 
 const code=normalizeLanguage(
-e.newValue||""
+event.newValue||""
 );
 
 if(
@@ -2080,6 +2318,7 @@ supportedLanguage(code)
 ){
 
 language=code;
+
 refreshText();
 
 }
@@ -2091,20 +2330,20 @@ refreshText();
 
 document.addEventListener(
 "change",
-e=>{
+event=>{
 
-const el=e.target;
+const element=event.target;
 
 if(
-el instanceof HTMLSelectElement
+element instanceof HTMLSelectElement
 &&
-el.matches(
+element.matches(
 "#pdGlobalLanguage,#pdLanguageSelect,#headerLanguageSelect,#languageSelect,#language,#langSelect,#pdHeaderLanguageSelect,select[data-language-select],select[name='language'],select[name='lang']"
 )
 ){
 
 const code=normalizeLanguage(
-el.value
+element.value
 );
 
 if(
@@ -2116,11 +2355,13 @@ supportedLanguage(code)
 language=code;
 
 try{
+
 localStorage.setItem(
 LANGUAGE_KEY,
 code
 );
-}catch(err){}
+
+}catch(error){}
 
 refreshText();
 
@@ -2133,19 +2374,61 @@ refreshText();
 
 }
 
+function handleDocumentClick(event){
+
+const menu=document.getElementById(
+"pdLuxuryProfileMenu"
+);
+
+const button=document.getElementById(
+"pdLuxuryProfileButton"
+);
+
+if(
+menu?.classList.contains(
+"open"
+)
+&&
+!menu.contains(
+event.target
+)
+&&
+!button?.contains(
+event.target
+)
+){
+
+closeProfile();
+
+}
+
+}
+
+function handleEscape(event){
+
+if(
+event.key==="Escape"
+){
+
+closeProfile();
+
+}
+
+}
+
 function init(){
 
 if(
 document.documentElement.dataset
 .petsDogueHeaderOnly
 ===
-"3"
+"4"
 ){
 return;
 }
 
 document.documentElement.dataset
-.petsDogueHeaderOnly="3";
+.petsDogueHeaderOnly="4";
 
 language=detectLanguage();
 
@@ -2170,45 +2453,27 @@ showHeader();
 window.addEventListener(
 "scroll",
 handleScroll,
-{passive:true}
+{
+passive:true
+}
+);
+
+window.addEventListener(
+"resize",
+showHeader,
+{
+passive:true
+}
 );
 
 document.addEventListener(
 "click",
-e=>{
-
-const menu=document.getElementById(
-"pdLuxuryProfileMenu"
-);
-
-const button=document.getElementById(
-"pdLuxuryProfileButton"
-);
-
-if(
-menu?.classList.contains("open")
-&&
-!menu.contains(e.target)
-&&
-!button?.contains(e.target)
-){
-
-closeProfile();
-
-}
-
-}
+handleDocumentClick
 );
 
 document.addEventListener(
 "keydown",
-e=>{
-
-if(e.key==="Escape"){
-closeProfile();
-}
-
-}
+handleEscape
 );
 
 window.PetsDogueHeader={
@@ -2229,7 +2494,9 @@ document.readyState
 document.addEventListener(
 "DOMContentLoaded",
 init,
-{once:true}
+{
+once:true
+}
 );
 
 }else{
