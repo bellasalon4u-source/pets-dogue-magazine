@@ -62,7 +62,7 @@ const NAV_ITEMS=[
   {
     key:"magazine",
     url:"issue-01.html",
-    image:"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=82"
+    image:"file_00000000a9d471fda9b4629589be22a9.png"
   },
   {
     key:"coverStars",
@@ -86,7 +86,7 @@ const NAV_ITEMS=[
   },
   {
     key:"travel",
-    url:"travel.html",
+    url:"pet-travel.html",
     image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=82"
   },
   {
@@ -149,8 +149,8 @@ const PAGE_KEYS={
 
   "pet-marketplace.html":"marketplace",
 
-  "travel.html":"travel",
   "pet-travel.html":"travel",
+  "travel.html":"travel",
 
   "pet-fashion.html":"fashion",
 
@@ -195,17 +195,17 @@ const NAV_INDEX={
 };
 
 const TEXT={
-  "en":{
-    "menu":"Contents",
-    "signIn":"Sign In",
-    "joinClub":"Join Club",
-    "language":"Language",
-    "contact":"Contact us",
-    "openMenu":"Open menu",
-    "closeMenu":"Close menu",
-    "home":"Home",
-    "profile":"Profile",
-    "nav":[
+  "en": {
+    "menu": "Contents",
+    "signIn": "Sign In",
+    "joinClub": "Join Club",
+    "language": "Language",
+    "contact": "Contact us",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
+    "profile": "Profile",
+    "nav": [
       "Edition",
       "Cover Stars",
       "Discounts",
@@ -221,7 +221,7 @@ const TEXT={
       "Pets in Need",
       "Partners"
     ],
-    "desc":[
+    "desc": [
       "Open PETS & DOGUE Edition 01 — the latest curated digital edition.",
       "Enter your pet and compete for the next cover.",
       "Discover member discounts and special offers.",
@@ -238,18 +238,17 @@ const TEXT={
       "Selected brands, services and PETS & DOGUE partners."
     ]
   },
-
-  "uk":{
-    "menu":"Зміст",
-    "signIn":"Увійти",
-    "joinClub":"Вступити до клубу",
-    "language":"Мова",
-    "contact":"Зв’язатися з нами",
-    "openMenu":"Відкрити меню",
-    "closeMenu":"Закрити меню",
-    "home":"Головна",
-    "profile":"Профіль",
-    "nav":[
+  "uk": {
+    "menu": "Зміст",
+    "signIn": "Увійти",
+    "joinClub": "Вступити до клубу",
+    "language": "Мова",
+    "contact": "Зв’язатися з нами",
+    "openMenu": "Відкрити меню",
+    "closeMenu": "Закрити меню",
+    "home": "Головна",
+    "profile": "Профіль",
+    "nav": [
       "Видання",
       "Зірки обкладинки",
       "Знижки",
@@ -265,7 +264,7 @@ const TEXT={
       "Допомога тваринам",
       "Партнери"
     ],
-    "desc":[
+    "desc": [
       "Відкрийте PETS & DOGUE Edition 01 — найновіше цифрове видання.",
       "Подайте свого улюбленця та змагайтеся за наступну обкладинку.",
       "Відкривайте знижки для учасників і спеціальні пропозиції.",
@@ -282,18 +281,17 @@ const TEXT={
       "Відібрані бренди, послуги та партнери PETS & DOGUE."
     ]
   },
-
-  "ru":{
-    "menu":"Содержание",
-    "signIn":"Войти",
-    "joinClub":"Вступить в клуб",
-    "language":"Язык",
-    "contact":"Связаться с нами",
-    "openMenu":"Открыть меню",
-    "closeMenu":"Закрыть меню",
-    "home":"Главная",
-    "profile":"Профиль",
-    "nav":[
+  "ru": {
+    "menu": "Содержание",
+    "signIn": "Войти",
+    "joinClub": "Вступить в клуб",
+    "language": "Язык",
+    "contact": "Связаться с нами",
+    "openMenu": "Открыть меню",
+    "closeMenu": "Закрыть меню",
+    "home": "Главная",
+    "profile": "Профиль",
+    "nav": [
       "Издание",
       "Звёзды обложки",
       "Скидки",
@@ -309,7 +307,7 @@ const TEXT={
       "Помощь животным",
       "Партнёры"
     ],
-    "desc":[
+    "desc": [
       "Откройте PETS & DOGUE Edition 01 — наше актуальное цифровое издание.",
       "Заявите своего питомца и поборитесь за следующую обложку.",
       "Открывайте скидки для подписчиков и специальные предложения.",
@@ -326,18 +324,17 @@ const TEXT={
       "Отобранные бренды, услуги и партнёры PETS & DOGUE."
     ]
   },
-
-  "fr":{
-    "menu":"Sommaire",
-    "signIn":"Connexion",
-    "joinClub":"Rejoindre le Club",
-    "language":"Langue",
-    "contact":"Nous contacter",
-    "openMenu":"Ouvrir le menu",
-    "closeMenu":"Fermer le menu",
-    "home":"Accueil",
-    "profile":"Profil",
-    "nav":[
+  "fr": {
+    "menu": "Sommaire",
+    "signIn": "Connexion",
+    "joinClub": "Rejoindre le Club",
+    "language": "Langue",
+    "contact": "Nous contacter",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "home": "Accueil",
+    "profile": "Profil",
+    "nav": [
       "Édition",
       "Stars de couverture",
       "Réductions",
@@ -353,7 +350,7 @@ const TEXT={
       "Aide aux animaux",
       "Partenaires"
     ],
-    "desc":[
+    "desc": [
       "Ouvrez PETS & DOGUE Edition 01, notre dernière édition numérique.",
       "Inscrivez votre animal pour tenter la prochaine couverture.",
       "Découvrez les réductions membres et les offres spéciales.",
@@ -370,18 +367,17 @@ const TEXT={
       "Marques, services et partenaires PETS & DOGUE sélectionnés."
     ]
   },
-
-  "de":{
-    "menu":"Inhalt",
-    "signIn":"Anmelden",
-    "joinClub":"Club beitreten",
-    "language":"Sprache",
-    "contact":"Kontakt",
-    "openMenu":"Menü öffnen",
-    "closeMenu":"Menü schließen",
-    "home":"Startseite",
-    "profile":"Profil",
-    "nav":[
+  "de": {
+    "menu": "Inhalt",
+    "signIn": "Anmelden",
+    "joinClub": "Club beitreten",
+    "language": "Sprache",
+    "contact": "Kontakt",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "home": "Startseite",
+    "profile": "Profil",
+    "nav": [
       "Ausgabe",
       "Cover Stars",
       "Rabatte",
@@ -397,7 +393,7 @@ const TEXT={
       "Hilfe für Tiere",
       "Partner"
     ],
-    "desc":[
+    "desc": [
       "Öffnen Sie PETS & DOGUE Edition 01, die aktuelle digitale Ausgabe.",
       "Melden Sie Ihr Tier für das nächste Cover an.",
       "Entdecken Sie Mitgliederrabatte und Sonderangebote.",
@@ -413,19 +409,18 @@ const TEXT={
       "Rettung, Adoption und Hilfe für Tiere.",
       "Ausgewählte Marken, Services und PETS & DOGUE Partner."
     ]
-  } ,
-
-  "es":{
-    "menu":"Contenido",
-    "signIn":"Iniciar sesión",
-    "joinClub":"Unirse al Club",
-    "language":"Idioma",
-    "contact":"Contáctanos",
-    "openMenu":"Abrir menú",
-    "closeMenu":"Cerrar menú",
-    "home":"Inicio",
-    "profile":"Perfil",
-    "nav":[
+  },
+  "es": {
+    "menu": "Contenido",
+    "signIn": "Iniciar sesión",
+    "joinClub": "Únete al Club",
+    "language": "Idioma",
+    "contact": "Contáctanos",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "home": "Inicio",
+    "profile": "Perfil",
+    "nav": [
       "Edición",
       "Estrellas de portada",
       "Descuentos",
@@ -441,35 +436,34 @@ const TEXT={
       "Ayuda a animales",
       "Socios"
     ],
-    "desc":[
-      "Abre PETS & DOGUE Edition 01, nuestra edición digital más reciente.",
-      "Inscribe a tu mascota y compite por aparecer en la próxima portada.",
+    "desc": [
+      "Abre PETS & DOGUE Edition 01, la edición digital más reciente.",
+      "Inscribe a tu mascota y compite por la próxima portada.",
       "Descubre descuentos para miembros y ofertas especiales.",
-      "Encuentra lugares pet-friendly con mapas, rutas, contactos e información útil.",
+      "Encuentra lugares pet-friendly con mapas, rutas y contactos.",
       "Compra, vende y descubre productos y servicios para mascotas.",
       "Viajes con mascotas, rutas, alojamientos y planificación útil.",
       "Estilo, accesorios y moda para mascotas.",
-      "Salud, peluquería y cuidados diarios para mascotas.",
-      "Historias editoriales, entrevistas y guías prácticas.",
+      "Salud, peluquería y cuidados diarios.",
+      "Historias, entrevistas y guías prácticas.",
       "Retratos, galerías e historias visuales.",
-      "Conecta con amantes de los animales y descubre eventos locales.",
-      "Participa en los concursos de PETS & DOGUE.",
-      "Rescate, adopción y ayuda para animales que lo necesitan.",
-      "Marcas, servicios y socios seleccionados de PETS & DOGUE."
+      "Conecta con amantes de los animales y eventos locales.",
+      "Participa en concursos PETS & DOGUE.",
+      "Rescate, adopción y ayuda para animales.",
+      "Marcas, servicios y socios PETS & DOGUE seleccionados."
     ]
   },
-
-  "it":{
-    "menu":"Contenuti",
-    "signIn":"Accedi",
-    "joinClub":"Entra nel Club",
-    "language":"Lingua",
-    "contact":"Contattaci",
-    "openMenu":"Apri menu",
-    "closeMenu":"Chiudi menu",
-    "home":"Home",
-    "profile":"Profilo",
-    "nav":[
+  "it": {
+    "menu": "Contenuti",
+    "signIn": "Accedi",
+    "joinClub": "Unisciti al Club",
+    "language": "Lingua",
+    "contact": "Contattaci",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "home": "Home",
+    "profile": "Profilo",
+    "nav": [
       "Edizione",
       "Cover Stars",
       "Sconti",
@@ -485,35 +479,32 @@ const TEXT={
       "Aiuto agli animali",
       "Partner"
     ],
-    "desc":[
-      "Apri PETS & DOGUE Edition 01, la nostra più recente edizione digitale.",
-      "Iscrivi il tuo animale e partecipa per conquistare la prossima copertina.",
+    "desc": [
+      "Apri PETS & DOGUE Edition 01, l’ultima edizione digitale.",
+      "Iscrivi il tuo animale e concorri per la prossima copertina.",
       "Scopri sconti per i membri e offerte speciali.",
-      "Trova luoghi pet-friendly con mappe, percorsi, contatti e informazioni utili.",
+      "Trova luoghi pet-friendly con mappe, percorsi e contatti.",
       "Compra, vendi e scopri prodotti e servizi per animali.",
       "Viaggi con animali, percorsi, soggiorni e pianificazione utile.",
       "Stile, accessori e moda per animali.",
       "Salute, toelettatura e cura quotidiana.",
-      "Storie editoriali, interviste e guide pratiche.",
+      "Storie, interviste e guide pratiche.",
       "Ritratti, gallerie e storie visive.",
-      "Connettiti con gli amanti degli animali e scopri eventi locali.",
+      "Connettiti con chi ama gli animali e con gli eventi locali.",
       "Partecipa ai concorsi PETS & DOGUE.",
-      "Salvataggio, adozione e aiuto per gli animali in difficoltà.",
-      "Brand, servizi e partner selezionati di PETS & DOGUE."
+      "Salvataggio, adozione e aiuto agli animali.",
+      "Brand, servizi e partner PETS & DOGUE selezionati."
     ]
   },
-
-  "pt":{
-    "menu":"Conteúdo",
-    "signIn":"Entrar",
-    "joinClub":"Entrar no Clube",
-    "language":"Idioma",
-    "contact":"Contacte-nos",
-    "openMenu":"Abrir menu",
-    "closeMenu":"Fechar menu",
-    "home":"Início",
-    "profile":"Perfil",
-    "nav":[
+  "pt": {     "signIn": "Entrar",
+    "joinClub": "Entrar no Club",
+    "language": "Idioma",
+    "contact": "Contacte-nos",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "home": "Início",
+    "profile": "Perfil",
+    "nav": [
       "Edição",
       "Estrelas da capa",
       "Descontos",
@@ -529,40 +520,39 @@ const TEXT={
       "Ajuda aos animais",
       "Parceiros"
     ],
-    "desc":[
-      "Abra PETS & DOGUE Edition 01, a nossa edição digital mais recente.",
-      "Inscreva o seu animal e concorra para a próxima capa.",
+    "desc": [
+      "Abra a PETS & DOGUE Edition 01, a edição digital mais recente.",
+      "Inscreva o seu animal e concorra à próxima capa.",
       "Descubra descontos para membros e ofertas especiais.",
-      "Encontre locais pet-friendly com mapas, rotas, contactos e informação útil.",
+      "Encontre locais pet-friendly com mapas, rotas e contactos.",
       "Compre, venda e descubra produtos e serviços para animais.",
       "Viagens com animais, rotas, alojamentos e planeamento útil.",
       "Estilo, acessórios e moda para animais.",
       "Saúde, grooming e cuidados diários.",
-      "Histórias editoriais, entrevistas e guias práticos.",
+      "Histórias, entrevistas e guias práticos.",
       "Retratos, galerias e histórias visuais.",
-      "Ligue-se a amantes de animais e descubra eventos locais.",
+      "Ligue-se a amantes de animais e eventos locais.",
       "Participe nos concursos PETS & DOGUE.",
-      "Resgate, adoção e ajuda a animais que precisam.",
-      "Marcas, serviços e parceiros selecionados de PETS & DOGUE."
+      "Resgate, adoção e ajuda aos animais.",
+      "Marcas, serviços e parceiros PETS & DOGUE selecionados."
     ]
   },
-
-  "nl":{
-    "menu":"Inhoud",
-    "signIn":"Inloggen",
-    "joinClub":"Word lid",
-    "language":"Taal",
-    "contact":"Neem contact op",
-    "openMenu":"Menu openen",
-    "closeMenu":"Menu sluiten",
-    "home":"Home",
-    "profile":"Profiel",
-    "nav":[
+  "nl": {
+    "menu": "Inhoud",
+    "signIn": "Inloggen",
+    "joinClub": "Word lid",
+    "language": "Taal",
+    "contact": "Contact",
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten",
+    "home": "Home",
+    "profile": "Profiel",
+    "nav": [
       "Editie",
-      "Cover Stars",
+      "Coversterren",
       "Kortingen",
-      "Pet-Friendly plaatsen",
-      "Marketplace",
+      "Huisdiervriendelijke plekken",
+      "Marktplaats",
       "Reizen",
       "Mode",
       "Gezondheid",
@@ -570,38 +560,37 @@ const TEXT={
       "Foto's",
       "Community",
       "Wedstrijden",
-      "Dieren in nood",
+      "Hulp voor dieren",
       "Partners"
     ],
-    "desc":[
-      "Open PETS & DOGUE Edition 01, onze nieuwste digitale editie.",
-      "Meld je huisdier aan en maak kans op de volgende cover.",
+    "desc": [
+      "Open PETS & DOGUE Edition 01, de nieuwste digitale editie.",
+      "Meld je huisdier aan voor de volgende cover.",
       "Ontdek ledenkortingen en speciale aanbiedingen.",
-      "Vind pet-friendly plaatsen met kaarten, routes, contacten en nuttige informatie.",
+      "Vind huisdiervriendelijke plekken met kaarten, routes en contacten.",
       "Koop, verkoop en ontdek producten en diensten voor huisdieren.",
       "Reizen met huisdieren, routes, verblijven en handige reisplanning.",
       "Stijl, accessoires en mode voor huisdieren.",
       "Gezondheid, verzorging en dagelijkse zorg.",
-      "Redactionele verhalen, interviews en praktische gidsen.",
+      "Verhalen, interviews en praktische gidsen.",
       "Portretten, galerijen en visuele verhalen.",
-      "Kom in contact met dierenliefhebbers en ontdek lokale evenementen.",
+      "Kom in contact met dierenliefhebbers en lokale evenementen.",
       "Doe mee aan PETS & DOGUE wedstrijden.",
-      "Redding, adoptie en hulp voor dieren in nood.",
+      "Redding, adoptie en hulp voor dieren.",
       "Geselecteerde merken, diensten en PETS & DOGUE partners."
     ]
   },
-
-  "pl":{
-    "menu":"Spis treści",
-    "signIn":"Zaloguj się",
-    "joinClub":"Dołącz do Klubu",
-    "language":"Język",
-    "contact":"Skontaktuj się z nami",
-    "openMenu":"Otwórz menu",
-    "closeMenu":"Zamknij menu",
-    "home":"Strona główna",
-    "profile":"Profil",
-    "nav":[
+  "pl": {
+    "menu": "Spis treści",
+    "signIn": "Zaloguj się",
+    "joinClub": "Dołącz do klubu",
+    "language": "Język",
+    "contact": "Kontakt",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu",
+    "home": "Strona główna",
+    "profile": "Profil",
+    "nav": [
       "Wydanie",
       "Gwiazdy okładki",
       "Zniżki",
@@ -617,35 +606,34 @@ const TEXT={
       "Pomoc zwierzętom",
       "Partnerzy"
     ],
-    "desc":[
-      "Otwórz PETS & DOGUE Edition 01, nasze najnowsze wydanie cyfrowe.",
-      "Zgłoś swojego pupila i zawalcz o miejsce na kolejnej okładce.",
-      "Odkrywaj zniżki dla członków i oferty specjalne.",
-      "Znajduj miejsca pet-friendly z mapami, trasami, kontaktami i przydatnymi informacjami.",
+    "desc": [
+      "Otwórz PETS & DOGUE Edition 01, najnowsze wydanie cyfrowe.",
+      "Zgłoś pupila i zawalcz o następną okładkę.",
+      "Odkrywaj zniżki członkowskie i oferty specjalne.",
+      "Znajduj miejsca pet-friendly z mapami, trasami i kontaktami.",
       "Kupuj, sprzedawaj i odkrywaj produkty oraz usługi dla zwierząt.",
       "Podróże ze zwierzętami, trasy, noclegi i przydatne planowanie.",
       "Styl, akcesoria i moda dla zwierząt.",
       "Zdrowie, pielęgnacja i codzienna opieka.",
-      "Historie redakcyjne, wywiady i praktyczne poradniki.",
+      "Historie, wywiady i praktyczne poradniki.",
       "Portrety, galerie i historie wizualne.",
-      "Łącz się z miłośnikami zwierząt i odkrywaj lokalne wydarzenia.",
+      "Poznawaj miłośników zwierząt i lokalne wydarzenia.",
       "Bierz udział w konkursach PETS & DOGUE.",
-      "Ratowanie, adopcja i pomoc zwierzętom w potrzebie.",
+      "Ratowanie, adopcja i pomoc zwierzętom.",
       "Wybrane marki, usługi i partnerzy PETS & DOGUE."
     ]
-  } ,
-
-  "cs":{
-    "menu":"Obsah",
-    "signIn":"Přihlásit se",
-    "joinClub":"Vstoupit do klubu",
-    "language":"Jazyk",
-    "contact":"Kontaktujte nás",
-    "openMenu":"Otevřít menu",
-    "closeMenu":"Zavřít menu",
-    "home":"Domů",
-    "profile":"Profil",
-    "nav":[
+  },
+  "cs": {
+    "menu": "Obsah",
+    "signIn": "Přihlásit se",
+    "joinClub": "Vstoupit do klubu",
+    "language": "Jazyk",
+    "contact": "Kontaktujte nás",
+    "openMenu": "Otevřít menu",
+    "closeMenu": "Zavřít menu",
+    "home": "Domů",
+    "profile": "Profil",
+    "nav": [
       "Vydání",
       "Hvězdy obálky",
       "Slevy",
@@ -661,7 +649,7 @@ const TEXT={
       "Pomoc zvířatům",
       "Partneři"
     ],
-    "desc":[
+    "desc": [
       "Otevřete PETS & DOGUE Edition 01, nejnovější digitální vydání.",
       "Přihlaste svého mazlíčka na příští obálku.",
       "Objevte členské slevy a speciální nabídky.",
@@ -678,18 +666,17 @@ const TEXT={
       "Vybrané značky, služby a partneři PETS & DOGUE."
     ]
   },
-
-  "sk":{
-    "menu":"Obsah",
-    "signIn":"Prihlásiť sa",
-    "joinClub":"Vstúpiť do klubu",
-    "language":"Jazyk",
-    "contact":"Kontaktujte nás",
-    "openMenu":"Otvoriť menu",
-    "closeMenu":"Zavrieť menu",
-    "home":"Domov",
-    "profile":"Profil",
-    "nav":[
+  "sk": {
+    "menu": "Obsah",
+    "signIn": "Prihlásiť sa",
+    "joinClub": "Vstúpiť do klubu",
+    "language": "Jazyk",
+    "contact": "Kontaktujte nás",
+    "openMenu": "Otvoriť menu",
+    "closeMenu": "Zavrieť menu",
+    "home": "Domov",
+    "profile": "Profil",
+    "nav": [
       "Vydanie",
       "Hviezdy obálky",
       "Zľavy",
@@ -705,7 +692,7 @@ const TEXT={
       "Pomoc zvieratám",
       "Partneri"
     ],
-    "desc":[
+    "desc": [
       "Otvorte PETS & DOGUE Edition 01, najnovšie digitálne vydanie.",
       "Prihláste svojho miláčika na ďalšiu obálku.",
       "Objavte členské zľavy a špeciálne ponuky.",
@@ -722,18 +709,17 @@ const TEXT={
       "Vybrané značky, služby a partneri PETS & DOGUE."
     ]
   },
-
-  "hu":{
-    "menu":"Tartalom",
-    "signIn":"Belépés",
-    "joinClub":"Csatlakozás",
-    "language":"Nyelv",
-    "contact":"Kapcsolat",
-    "openMenu":"Menü megnyitása",
-    "closeMenu":"Menü bezárása",
-    "home":"Kezdőlap",
-    "profile":"Profil",
-    "nav":[
+  "hu": {
+    "menu": "Tartalom",
+    "signIn": "Belépés",
+    "joinClub": "Csatlakozás",
+    "language": "Nyelv",
+    "contact": "Kapcsolat",
+    "openMenu": "Menü megnyitása",
+    "closeMenu": "Menü bezárása",
+    "home": "Kezdőlap",
+    "profile": "Profil",
+    "nav": [
       "Kiadás",
       "Címlapsztárok",
       "Kedvezmények",
@@ -749,7 +735,7 @@ const TEXT={
       "Állatsegítés",
       "Partnerek"
     ],
-    "desc":[
+    "desc": [
       "Nyissa meg a PETS & DOGUE Edition 01 legújabb digitális kiadását.",
       "Nevezze kedvencét a következő címlapra.",
       "Fedezze fel a tagi kedvezményeket és különleges ajánlatokat.",
@@ -766,18 +752,17 @@ const TEXT={
       "Válogatott márkák, szolgáltatások és PETS & DOGUE partnerek."
     ]
   },
-
-  "ro":{
-    "menu":"Conținut",
-    "signIn":"Autentificare",
-    "joinClub":"Intră în Club",
-    "language":"Limbă",
-    "contact":"Contactați-ne",
-    "openMenu":"Deschide meniul",
-    "closeMenu":"Închide meniul",
-    "home":"Acasă",
-    "profile":"Profil",
-    "nav":[
+  "ro": {
+    "menu": "Conținut",
+    "signIn": "Autentificare",
+    "joinClub": "Intră în Club",
+    "language": "Limbă",
+    "contact": "Contactați-ne",
+    "openMenu": "Deschide meniul",
+    "closeMenu": "Închide meniul",
+    "home": "Acasă",
+    "profile": "Profil",
+    "nav": [
       "Ediție",
       "Vedete de copertă",
       "Reduceri",
@@ -793,7 +778,7 @@ const TEXT={
       "Ajutor pentru animale",
       "Parteneri"
     ],
-    "desc":[
+    "desc": [
       "Deschide PETS & DOGUE Edition 01, cea mai nouă ediție digitală.",
       "Înscrie animalul pentru următoarea copertă.",
       "Descoperă reduceri pentru membri și oferte speciale.",
@@ -810,18 +795,17 @@ const TEXT={
       "Branduri, servicii și parteneri PETS & DOGUE selectați."
     ]
   },
-
-  "bg":{
-    "menu":"Съдържание",
-    "signIn":"Вход",
-    "joinClub":"Влезте в клуба",
-    "language":"Език",
-    "contact":"Свържете се с нас",
-    "openMenu":"Отвори менюто",
-    "closeMenu":"Затвори менюто",
-    "home":"Начало",
-    "profile":"Профил",
-    "nav":[
+  "bg": {
+    "menu": "Съдържание",
+    "signIn": "Вход",
+    "joinClub": "Влезте в клуба",
+    "language": "Език",
+    "contact": "Свържете се с нас",
+    "openMenu": "Отвори менюто",
+    "closeMenu": "Затвори менюто",
+    "home": "Начало",
+    "profile": "Профил",
+    "nav": [
       "Издание",
       "Звезди на корицата",
       "Отстъпки",
@@ -837,7 +821,7 @@ const TEXT={
       "Помощ за животни",
       "Партньори"
     ],
-    "desc":[
+    "desc": [
       "Отворете PETS & DOGUE Edition 01, най-новото дигитално издание.",
       "Запишете любимеца си за следващата корица.",
       "Открийте отстъпки за членове и специални предложения.",
@@ -854,18 +838,17 @@ const TEXT={
       "Подбрани марки, услуги и партньори на PETS & DOGUE."
     ]
   },
-
-  "el":{
-    "menu":"Περιεχόμενα",
-    "signIn":"Σύνδεση",
-    "joinClub":"Εγγραφή στο Club",
-    "language":"Γλώσσα",
-    "contact":"Επικοινωνία",
-    "openMenu":"Άνοιγμα μενού",
-    "closeMenu":"Κλείσιμο μενού",
-    "home":"Αρχική",
-    "profile":"Προφίλ",
-    "nav":[
+  "el": {
+    "menu": "Περιεχόμενα",
+    "signIn": "Σύνδεση",
+    "joinClub": "Εγγραφή στο Club",
+    "language": "Γλώσσα",
+    "contact": "Επικοινωνία",
+    "openMenu": "Άνοιγμα μενού",
+    "closeMenu": "Κλείσιμο μενού",
+    "home": "Αρχική",
+    "profile": "Προφίλ",
+    "nav": [
       "Έκδοση",
       "Αστέρια εξωφύλλου",
       "Εκπτώσεις",
@@ -881,7 +864,7 @@ const TEXT={
       "Βοήθεια ζώων",
       "Συνεργάτες"
     ],
-    "desc":[
+    "desc": [
       "Ανοίξτε το PETS & DOGUE Edition 01, την πιο πρόσφατη ψηφιακή έκδοση.",
       "Δηλώστε το κατοικίδιό σας για το επόμενο εξώφυλλο.",
       "Ανακαλύψτε εκπτώσεις μελών και ειδικές προσφορές.",
@@ -898,18 +881,17 @@ const TEXT={
       "Επιλεγμένες μάρκες, υπηρεσίες και συνεργάτες PETS & DOGUE."
     ]
   },
-
-  "sv":{
-    "menu":"Innehåll",
-    "signIn":"Logga in",
-    "joinClub":"Gå med i klubben",
-    "language":"Språk",
-    "contact":"Kontakta oss",
-    "openMenu":"Öppna meny",
-    "closeMenu":"Stäng meny",
-    "home":"Hem",
-    "profile":"Profil",
-    "nav":[
+  "sv": {
+    "menu": "Innehåll",
+    "signIn": "Logga in",
+    "joinClub": "Gå med i klubben",
+    "language": "Språk",
+    "contact": "Kontakta oss",
+    "openMenu": "Öppna meny",
+    "closeMenu": "Stäng meny",
+    "home": "Hem",
+    "profile": "Profil",
+    "nav": [
       "Utgåva",
       "Omslagsstjärnor",
       "Rabatter",
@@ -925,7 +907,7 @@ const TEXT={
       "Hjälp för djur",
       "Partners"
     ],
-    "desc":[
+    "desc": [
       "Öppna PETS & DOGUE Edition 01, den senaste digitala utgåvan.",
       "Anmäl ditt husdjur till nästa omslag.",
       "Upptäck medlemsrabatter och specialerbjudanden.",
@@ -942,22 +924,21 @@ const TEXT={
       "Utvalda varumärken, tjänster och PETS & DOGUE-partners."
     ]
   },
-
-  "da":{
-    "menu":"Indhold",
-    "signIn":"Log ind",
-    "joinClub":"Bliv medlem",
-    "language":"Sprog",
-    "contact":"Kontakt os",
-    "openMenu":"Åbn menu",
-    "closeMenu":"Luk menu",
-    "home":"Hjem",
-    "profile":"Profil",
-    "nav":[
+  "da": {
+    "menu": "Indhold",
+    "signIn": "Log ind",
+    "joinClub": "Bliv medlem",
+    "language": "Sprog",
+    "contact": "Kontakt os",
+    "openMenu": "Åbn menu",
+    "closeMenu": "Luk menu",
+    "home": "Hjem",
+    "profile": "Profil",
+    "nav": [
       "Udgave",
       "Forsidestjerner",
       "Rabatter",
-      "Dyrevenlige steder",
+      "Kæledyrsvenlige steder",
       "Markedsplads",
       "Rejser",
       "Mode",
@@ -969,14 +950,14 @@ const TEXT={
       "Hjælp til dyr",
       "Partnere"
     ],
-    "desc":[
+    "desc": [
       "Åbn PETS & DOGUE Edition 01, den nyeste digitale udgave.",
       "Tilmeld dit kæledyr til den næste forside.",
       "Opdag medlemsrabatter og særlige tilbud.",
-      "Find dyrevenlige steder med kort, ruter og kontaktoplysninger.",
+      "Find kæledyrsvenlige steder med kort, ruter og kontakter.",
       "Køb, sælg og opdag produkter og tjenester til kæledyr.",
       "Rejser med kæledyr, ruter, ophold og praktisk planlægning.",
-      "Stil, tilbehør og kæledyrsmode.",
+      "Stil, tilbehør og mode til kæledyr.",
       "Sundhed, pleje og daglig omsorg.",
       "Historier, interviews og praktiske guider.",
       "Portrætter, gallerier og visuelle historier.",
@@ -986,18 +967,17 @@ const TEXT={
       "Udvalgte brands, tjenester og PETS & DOGUE-partnere."
     ]
   },
-
-  "no":{
-    "menu":"Innhold",
-    "signIn":"Logg inn",
-    "joinClub":"Bli med i klubben",
-    "language":"Språk",
-    "contact":"Kontakt oss",
-    "openMenu":"Åpne meny",
-    "closeMenu":"Lukk meny",
-    "home":"Hjem",
-    "profile":"Profil",
-    "nav":[
+  "no": {
+    "menu": "Innhold",
+    "signIn": "Logg inn",
+    "joinClub": "Bli med i klubben",
+    "language": "Språk",
+    "contact": "Kontakt oss",
+    "openMenu": "Åpne meny",
+    "closeMenu": "Lukk meny",
+    "home": "Hjem",
+    "profile": "Profil",
+    "nav": [
       "Utgave",
       "Forsidestjerner",
       "Rabatter",
@@ -1013,10 +993,9 @@ const TEXT={
       "Hjelp til dyr",
       "Partnere"
     ],
-    "desc":[
+    "desc": [
       "Åpne PETS & DOGUE Edition 01, den nyeste digitale utgaven.",
-      "Meld på kjæledyret ditt til neste forside.",
-      "Oppdag medlemsrabatter og spesialtilbud.",
+      "Meld på kjæledyret ditt til neste forside.",      "Oppdag medlemsrabatter og spesialtilbud.",
       "Finn dyrevennlige steder med kart, ruter og kontakter.",
       "Kjøp, selg og oppdag produkter og tjenester for kjæledyr.",
       "Reiser med kjæledyr, ruter, opphold og nyttig planlegging.",
@@ -1030,18 +1009,17 @@ const TEXT={
       "Utvalgte merkevarer, tjenester og PETS & DOGUE-partnere."
     ]
   },
-
-  "fi":{
-    "menu":"Sisältö",
-    "signIn":"Kirjaudu",
-    "joinClub":"Liity klubiin",
-    "language":"Kieli",
-    "contact":"Ota yhteyttä",
-    "openMenu":"Avaa valikko",
-    "closeMenu":"Sulje valikko",
-    "home":"Etusivu",
-    "profile":"Profiili",
-    "nav":[
+  "fi": {
+    "menu": "Sisältö",
+    "signIn": "Kirjaudu",
+    "joinClub": "Liity klubiin",
+    "language": "Kieli",
+    "contact": "Ota yhteyttä",
+    "openMenu": "Avaa valikko",
+    "closeMenu": "Sulje valikko",
+    "home": "Etusivu",
+    "profile": "Profiili",
+    "nav": [
       "Numero",
       "Kansitähdet",
       "Alennukset",
@@ -1057,7 +1035,7 @@ const TEXT={
       "Apua eläimille",
       "Kumppanit"
     ],
-    "desc":[
+    "desc": [
       "Avaa PETS & DOGUE Edition 01, uusin digitaalinen numero.",
       "Ilmoita lemmikkisi seuraavan kannen kilpailuun.",
       "Tutustu jäsenalennuksiin ja erikoistarjouksiin.",
@@ -1074,18 +1052,17 @@ const TEXT={
       "Valitut brändit, palvelut ja PETS & DOGUE -kumppanit."
     ]
   },
-
-  "tr":{
-    "menu":"İçindekiler",
-    "signIn":"Giriş yap",
-    "joinClub":"Kulübe katıl",
-    "language":"Dil",
-    "contact":"Bize ulaşın",
-    "openMenu":"Menüyü aç",
-    "closeMenu":"Menüyü kapat",
-    "home":"Ana sayfa",
-    "profile":"Profil",
-    "nav":[
+  "tr": {
+    "menu": "İçindekiler",
+    "signIn": "Giriş yap",
+    "joinClub": "Kulübe katıl",
+    "language": "Dil",
+    "contact": "Bize ulaşın",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "home": "Ana sayfa",
+    "profile": "Profil",
+    "nav": [
       "Sürüm",
       "Kapak yıldızları",
       "İndirimler",
@@ -1101,7 +1078,7 @@ const TEXT={
       "Hayvanlara yardım",
       "Ortaklar"
     ],
-    "desc":[
+    "desc": [
       "En yeni dijital sayı olan PETS & DOGUE Edition 01’i açın.",
       "Evcil hayvanınızı bir sonraki kapak için aday gösterin.",
       "Üye indirimlerini ve özel teklifleri keşfedin.",
@@ -1118,18 +1095,17 @@ const TEXT={
       "Seçilmiş markalar, hizmetler ve PETS & DOGUE ortakları."
     ]
   },
-
-  "ar":{
-    "menu":"المحتويات",
-    "signIn":"تسجيل الدخول",
-    "joinClub":"انضم إلى النادي",
-    "language":"اللغة",
-    "contact":"اتصل بنا",
-    "openMenu":"فتح القائمة",
-    "closeMenu":"إغلاق القائمة",
-    "home":"الرئيسية",
-    "profile":"الملف الشخصي",
-    "nav":[
+  "ar": {
+    "menu": "المحتويات",
+    "signIn": "تسجيل الدخول",
+    "joinClub": "انضم إلى النادي",
+    "language": "اللغة",
+    "contact": "اتصل بنا",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "home": "الرئيسية",
+    "profile": "الملف الشخصي",
+    "nav": [
       "الإصدار",
       "نجوم الغلاف",
       "الخصومات",
@@ -1145,7 +1121,7 @@ const TEXT={
       "مساعدة الحيوانات",
       "الشركاء"
     ],
-    "desc":[
+    "desc": [
       "افتح PETS & DOGUE Edition 01، أحدث إصدار رقمي.",
       "رشّح حيوانك الأليف للظهور على الغلاف القادم.",
       "اكتشف خصومات الأعضاء والعروض الخاصة.",
@@ -1162,18 +1138,17 @@ const TEXT={
       "علامات تجارية وخدمات وشركاء مختارون من PETS & DOGUE."
     ]
   },
-
-  "hi":{
-    "menu":"विषय-सूची",
-    "signIn":"लॉग इन",
-    "joinClub":"क्लब से जुड़ें",
-    "language":"भाषा",
-    "contact":"संपर्क करें",
-    "openMenu":"मेनू खोलें",
-    "closeMenu":"मेनू बंद करें",
-    "home":"होम",
-    "profile":"प्रोफ़ाइल",
-    "nav":[
+  "hi": {
+    "menu": "विषय-सूची",
+    "signIn": "लॉग इन",
+    "joinClub": "क्लब से जुड़ें",
+    "language": "भाषा",
+    "contact": "संपर्क करें",
+    "openMenu": "मेनू खोलें",
+    "closeMenu": "मेनू बंद करें",
+    "home": "होम",
+    "profile": "प्रोफ़ाइल",
+    "nav": [
       "एडिशन",
       "कवर स्टार्स",
       "छूट",
@@ -1189,7 +1164,7 @@ const TEXT={
       "ज़रूरतमंद पशु",
       "पार्टनर्स"
     ],
-    "desc":[
+    "desc": [
       "PETS & DOGUE Edition 01 खोलें — नवीनतम डिजिटल संस्करण।",
       "अपने पालतू को अगली कवर प्रतियोगिता में शामिल करें।",
       "सदस्य छूट और विशेष ऑफ़र खोजें।",
@@ -1220,10 +1195,11 @@ function normalizeLanguage(value){
     .replace("_","-");
 
   if(!raw){
-    return "";
+    return"";
   }
 
   const base=raw.split("-")[0];
+
   return LANGUAGE_ALIASES[base]||base;
 }
 
@@ -1236,7 +1212,8 @@ function supportedLanguage(value){
 
 function currentFile(){
   const path=window.location.pathname||"";
-  return path.split("/").filter(Boolean).pop()?.toLowerCase()||"index.html";
+  const file=path.split("/").filter(Boolean).pop()||"index.html";
+  return file.toLowerCase();
 }
 
 function detectActiveKey(){
@@ -1249,12 +1226,13 @@ function detectActiveKey(){
   const path=(window.location.pathname||"").toLowerCase();
 
   for(const [name,key] of Object.entries(PAGE_KEYS)){
-    if(path.includes(name.replace(".html",""))){
+    const short=name.replace(".html","");
+    if(path.includes(short)){
       return key;
     }
   }
 
-  return "";
+  return"";
 }
 
 function findExistingLanguageSelect(){
@@ -1270,10 +1248,13 @@ function findExistingLanguageSelect(){
   ];
 
   for(const selector of selectors){
-    const found=document.querySelector(selector);
+    const select=document.querySelector(selector);
 
-    if(found && found.id!=="pdGlobalLanguage"){
-      return found;
+    if(
+      select &&
+      select.id!=="pdGlobalLanguage"
+    ){
+      return select;
     }
   }
 
@@ -1285,29 +1266,28 @@ function detectInitialLanguage(){
     localStorage.getItem(LANGUAGE_KEY)||""
   );
 
-  if(stored && supportedLanguage(stored)){
+  if(stored&&supportedLanguage(stored)){
     return stored;
   }
 
   const existing=findExistingLanguageSelect();
+  const fromSelect=existing
+    ?normalizeLanguage(existing.value)
+    :"";
 
-  if(existing){
-    const fromSelect=normalizeLanguage(existing.value);
-
-    if(supportedLanguage(fromSelect)){
-      return fromSelect;
-    }
+  if(fromSelect&&supportedLanguage(fromSelect)){
+    return fromSelect;
   }
 
   const htmlLang=normalizeLanguage(
     document.documentElement.lang||""
   );
 
-  if(supportedLanguage(htmlLang)){
+  if(htmlLang&&supportedLanguage(htmlLang)){
     return htmlLang;
   }
 
-  return "en";
+  return"en";
 }
 
 function persistLanguage(language){
@@ -1320,13 +1300,22 @@ function persistLanguage(language){
   shellLanguage=code;
 
   try{
-    localStorage.setItem(LANGUAGE_KEY,code);
+    localStorage.setItem(
+      LANGUAGE_KEY,
+      code
+    );
   }catch(error){
-    console.warn("PETS & DOGUE language storage:",error);
+    console.warn(
+      "PETS & DOGUE language storage:",
+      error
+    );
   }
 
   document.documentElement.lang=code;
-  document.documentElement.dir=code==="ar"?"rtl":"ltr";
+  document.documentElement.dir=
+    code==="ar"
+      ?"rtl"
+      :"ltr";
 }
 
 function escapeHTML(value){
@@ -1343,636 +1332,697 @@ function shellCopy(){
 }
 
 function navName(item){
-  const index=NAV_INDEX[item.key];
   const copy=shellCopy();
-
-  return copy.nav[index]
-    ||TEXT.en.nav[index]
-    ||item.key;
+  const index=NAV_INDEX[item.key];
+  return copy.nav[index]||TEXT.en.nav[index]||item.key;
 }
 
 function navDescription(item){
-  const index=NAV_INDEX[item.key];
   const copy=shellCopy();
+  const index=NAV_INDEX[item.key];
+  return copy.desc[index]||TEXT.en.desc[index]||"";
+}
 
-  return copy.desc[index]
-    ||TEXT.en.desc[index]
-    ||"";
-} function installStyles(){
-  const old=document.getElementById("pdGlobalShellStyles");
+function installStyles(){
+  const previous=document.getElementById(
+    "pdGlobalShellStyles"
+  );
 
-  if(old){
-    old.remove();
+  if(previous){
+    previous.remove();
   }
 
   const style=document.createElement("style");
   style.id="pdGlobalShellStyles";
 
   style.textContent=`
-    :root{
-      --pd-black:#070707;
-      --pd-cream:#f6f2e9;
-      --pd-white:#ffffff;
-      --pd-gold:#c99a35;
-      --pd-gold-light:#efd88e;
-      --pd-green:#65e51f;
-      --pd-line:#1b1b1b;
-      --pd-grey:#716f6a;
-      --pd-serif:Georgia,"Times New Roman",serif;
-      --pd-sans:Arial,Helvetica,sans-serif;
-    }
+  :root{
+    --pd-shell-black:#070707;
+    --pd-shell-cream:#f7f4ed;
+    --pd-shell-gold:#c99729;
+    --pd-shell-gold-light:#efd47a;
+    --pd-shell-green:#65e51f;
+    --pd-shell-serif:Georgia,"Times New Roman",serif;
+    --pd-shell-sans:Arial,Helvetica,sans-serif;
+  }
 
-    .pd-global-old-shell-hidden{
-      display:none!important;
-    }
+  .pd-global-old-shell-hidden{
+    display:none!important;
+  }
 
-    body.pd-global-menu-open{
-      overflow:hidden!important;
-    }
+  body.pd-global-menu-open{
+    overflow:hidden!important;
+  }
 
-    #pdGlobalHeader{
-      position:sticky;
-      top:0;
-      z-index:14000;
-      width:100%;
-      height:68px;
-      background:var(--pd-black);
-      color:#fff;
-      border-bottom:1px solid #222;
-      font-family:var(--pd-sans);
-      direction:ltr;
-    }
+  #pdGlobalHeader{
+    position:sticky;
+    top:0;
+    z-index:14000;
+    width:100%;
+    height:68px;
+    background:var(--pd-shell-black);
+    color:#fff;
+    border-bottom:1px solid #262626;
+    font-family:var(--pd-shell-sans);
+  }
 
+  #pdGlobalHeaderMain{
+    width:100%;
+    height:68px;
+    display:grid;
+    grid-template-columns:52px minmax(0,1fr) auto;
+    align-items:center;
+    padding:0 8px;
+    margin:0 auto;
+  }
+
+  #pdGlobalMenuButton{
+    width:42px;
+    height:42px;
+    border:0;
+    background:transparent;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    padding:7px;
+    cursor:pointer;
+  }
+
+  #pdGlobalMenuButton span{
+    display:block;
+    width:27px;
+    height:2px;
+    background:#fff;
+    border-radius:20px;
+  }
+
+  #pdGlobalBrand{
+    justify-self:center;
+    min-width:0;
+    text-align:center;
+    font-family:var(--pd-shell-serif);
+    color:var(--pd-shell-gold);
+    line-height:.86;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+
+  #pdGlobalBrandSmall{
+    display:block;
+    font-size:8px;
+    font-weight:400;
+    letter-spacing:3px;
+    text-transform:uppercase;
+  }
+
+  #pdGlobalBrandBig{
+    display:block;
+    margin-top:5px;
+    font-size:25px;
+    font-weight:400;
+    letter-spacing:2px;
+  }
+
+  #pdGlobalHeaderActions{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:6px;
+  }
+
+  #pdGlobalHome,
+  #pdGlobalProfile{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #3e3e3e;
+    border-radius:12px;
+    background:#111;
+    color:#fff;
+    text-decoration:none;
+  }
+
+  #pdGlobalProfile{
+    padding:0;
+    cursor:pointer;
+  }
+
+  #pdGlobalHome svg,
+  #pdGlobalProfile svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+
+  #pdGlobalProfile[aria-expanded="true"]{
+    border-color:var(--pd-shell-green);
+  }
+
+  #pdGlobalProfileMenu{
+    position:absolute;
+    top:46px;
+    right:0;
+    z-index:14200;
+    width:210px;
+    padding:10px;
+    border:1px solid #2f2f2f;    border-radius:16px;
+    background:#0b0b0b;
+    box-shadow:0 18px 42px rgba(0,0,0,.34);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-5px);
+    transition:
+      opacity .18s ease,
+      transform .18s ease,
+      visibility .18s ease;
+  }
+
+  #pdGlobalProfileMenu.open{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+
+  .pd-global-profile-title{
+    padding:4px 4px 9px;
+    color:#fff;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.9px;
+    text-transform:uppercase;
+  }
+
+  .pd-global-profile-link{
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1.5px solid #fff;
+    border-radius:999px;
+    background:#fff;
+    color:#111;
+    font-size:12px;
+    font-weight:900;
+    text-decoration:none;
+  }
+
+  .pd-global-profile-link + .pd-global-profile-link{
+    margin-top:7px;
+  }
+
+  .pd-global-profile-link.club{
+    border-color:var(--pd-shell-green);
+    background:var(--pd-shell-green);
+  }
+
+  #pdGlobalOverlay{
+    position:fixed;
+    inset:0;
+    z-index:15000;
+    background:rgba(0,0,0,.68);
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:
+      opacity .22s ease,
+      visibility .22s ease;
+  }
+
+  #pdGlobalOverlay.open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+  }
+
+  #pdGlobalMenu{
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:15100;
+    width:min(78vw,390px);
+    min-width:286px;
+    max-width:390px;
+    height:100dvh;
+    background:var(--pd-shell-cream);
+    color:#111;
+    transform:translateX(-102%);
+    transition:transform .24s ease;
+    box-shadow:20px 0 55px rgba(0,0,0,.28);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    font-family:var(--pd-shell-sans);
+  }
+
+  #pdGlobalMenu.open{
+    transform:translateX(0);
+  }
+
+  html[dir="rtl"] #pdGlobalMenu{
+    left:auto;
+    right:0;
+    transform:translateX(102%);
+  }
+
+  html[dir="rtl"] #pdGlobalMenu.open{
+    transform:translateX(0);
+  }
+
+  html[dir="rtl"] #pdGlobalProfileMenu{
+    right:auto;
+    left:0;
+  }
+
+  .pd-global-menu-head{
+    height:86px;
+    min-height:86px;
+    flex:none;
+    background:var(--pd-shell-black);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 17px;
+  }
+
+  .pd-global-menu-head h2{
+    margin:0;
+    font:normal 31px/1 var(--pd-shell-serif);
+  }
+
+  #pdGlobalClose{
+    width:43px;
+    height:43px;
+    flex:0 0 43px;
+    border:1px solid #555;
+    border-radius:50%;
+    background:transparent;
+    color:#fff;
+    font-size:27px;
+    font-weight:300;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    cursor:pointer;
+  }
+
+  .pd-global-menu-scroll{
+    min-height:0;
+    flex:1 1 auto;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding:12px 11px 24px;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+  }
+
+  .pd-global-account{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:12px;
+  }
+
+  .pd-global-account a{
+    height:48px;
+    min-width:0;
+    border-radius:999px;
+    border:2px solid #171717;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 10px;
+    background:#fff;
+    color:#111;
+    font-size:12px;
+    font-weight:900;
+    line-height:1.1;
+    text-align:center;
+    text-decoration:none;
+  }
+
+  .pd-global-account a.club{
+    background:var(--pd-shell-green);
+    border-color:var(--pd-shell-green);
+  }
+
+  .pd-global-language-label{
+    display:block;
+    margin:0 3px 6px;
+    color:#777;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1.6px;
+    text-transform:uppercase;
+  }
+
+  #pdGlobalLanguage{
+    width:100%;
+    height:51px;
+    margin:0 0 12px;
+    padding:0 15px;
+    border:2px solid #1b1b1b;
+    border-radius:999px;
+    outline:0;
+    background:#fff;
+    color:#111;
+    font-family:var(--pd-shell-sans);
+    font-size:14px;
+    font-weight:800;
+  }
+
+  #pdGlobalMenuList{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+
+  .pd-global-menu-card{
+    min-width:0;
+    min-height:82px;
+    display:grid;
+    grid-template-columns:82px minmax(0,1fr);
+    border:2px solid #191919;
+    border-radius:18px;
+    background:#fff;
+    color:#111;
+    overflow:hidden;
+    text-decoration:none;
+  }
+
+  .pd-global-menu-card.active{
+    background:#0b0b0b;
+    color:#fff;
+  }
+
+  .pd-global-menu-card-image{
+    display:block;
+    width:82px;
+    min-height:82px;
+    overflow:hidden;
+    background:#ddd;
+  }
+
+  .pd-global-menu-card img{
+    display:block;
+    width:82px;
+    height:100%;
+    min-height:82px;
+    object-fit:cover;
+  }
+
+  .pd-global-menu-card-copy{
+    min-width:0;
+    padding:10px 11px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .pd-global-menu-card h3{
+    margin:0;
+    font:700 19px/1 var(--pd-shell-serif);
+  }
+
+  .pd-global-menu-card.active h3{
+    color:var(--pd-shell-gold-light);
+  }
+
+  .pd-global-menu-card p{
+    margin:4px 0 0;
+    color:#706c66;
+    font-size:11px;
+    line-height:1.25;
+  }
+
+  .pd-global-menu-card.active p{
+    color:#ddd;
+  }
+
+  .pd-global-menu-footer{
+    padding:14px 2px 0;
+    text-align:center;
+  }
+
+  .pd-global-menu-footer a{
+    display:inline-flex;
+    align-items:center;
+    min-height:38px;
+    padding:0 16px;
+    border-bottom:1px solid #111;
+    color:#111;
+    font-size:12px;
+    font-weight:900;
+    text-decoration:none;
+  }
+
+  #pdGlobalMenuButton:focus-visible,
+  #pdGlobalClose:focus-visible,
+  #pdGlobalHome:focus-visible,
+  #pdGlobalProfile:focus-visible,
+  #pdGlobalLanguage:focus-visible,
+  #pdGlobalMenu a:focus-visible,
+  #pdGlobalProfileMenu a:focus-visible{
+    outline:3px solid var(--pd-shell-green);
+    outline-offset:3px;
+  }
+
+  @media(max-width:360px){
     #pdGlobalHeaderMain{
-      width:100%;
-      height:68px;
-      display:grid;
-      grid-template-columns:52px minmax(0,1fr) auto;
-      align-items:center;
-      padding:0 8px;
-    }
-
-    #pdGlobalMenuButton{
-      width:44px;
-      height:44px;
-      border:0;
-      background:transparent;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap:6px;
-      padding:0;
-      cursor:pointer;
-    }
-
-    #pdGlobalMenuButton span{
-      display:block;
-      width:27px;
-      height:2px;
-      border-radius:20px;
-      background:#fff;
-    }
-
-    #pdGlobalBrand{
-      justify-self:center;
-      text-decoration:none;
-      color:var(--pd-gold);
-      text-align:center;
-      font-family:var(--pd-serif);
-      line-height:.9;
-      white-space:nowrap;
-    }
-
-    #pdGlobalBrandSmall{
-      display:block;
-      font-size:7px;
-      letter-spacing:3px;
-      text-transform:uppercase;
-    }
-
-    #pdGlobalBrandBig{
-      display:block;
-      margin-top:5px;
-      font-size:25px;
-      letter-spacing:2px;
+      grid-template-columns:46px minmax(0,1fr) auto;
+      padding-left:5px;
+      padding-right:5px;
     }
 
     #pdGlobalHeaderActions{
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap:7px;
+      gap:4px;
     }
 
     #pdGlobalHome,
     #pdGlobalProfile{
-      width:39px;
-      height:39px;
-      flex:0 0 39px;
-      border:1px solid #404040;
-      border-radius:11px;
-      background:#111;
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-decoration:none;
+      width:35px;
+      height:35px;
+      flex-basis:35px;
+      border-radius:10px;
     }
 
-    #pdGlobalProfile{
-      padding:0;
-      cursor:pointer;
+    #pdGlobalBrandSmall{
+      font-size:7px;
+      letter-spacing:2px;
     }
 
-    #pdGlobalHome svg,
-    #pdGlobalProfile svg{
-      width:22px;
-      height:22px;
-      fill:none;
-      stroke:currentColor;
-      stroke-width:2;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-    }
-
-    #pdGlobalProfile[aria-expanded="true"]{
-      border-color:var(--pd-green);
-    }
-
-    #pdGlobalProfileMenu{
-      position:absolute;
-      top:47px;
-      right:0;
-      z-index:14200;
-      width:220px;
-      padding:11px;
-      border:1px solid #333;
-      border-radius:16px;
-      background:#0a0a0a;
-      box-shadow:0 18px 42px rgba(0,0,0,.38);
-      opacity:0;
-      visibility:hidden;
-      transform:translateY(-5px);
-      transition:.18s ease;
-    }
-
-    #pdGlobalProfileMenu.open{
-      opacity:1;
-      visibility:visible;
-      transform:translateY(0);
-    }
-
-    .pd-global-profile-title{
-      margin:0 0 9px;
-      padding:2px 3px;
-      color:#fff;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.9px;
-      text-transform:uppercase;
-    }
-
-    .pd-global-profile-link{
-      min-height:43px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border:2px solid #fff;
-      border-radius:999px;
-      background:#fff;
-      color:#111;
-      font-size:12px;
-      font-weight:900;
-      text-decoration:none;
-    }
-
-    .pd-global-profile-link + .pd-global-profile-link{
-      margin-top:8px;
-    }
-
-    .pd-global-profile-link.club{
-      border-color:var(--pd-green);
-      background:var(--pd-green);
-    }
-
-    #pdGlobalOverlay{
-      position:fixed;
-      inset:0;
-      z-index:15000;
-      background:rgba(0,0,0,.68);
-      opacity:0;
-      visibility:hidden;
-      transition:
-        opacity .22s ease,
-        visibility .22s ease;
-    }
-
-    #pdGlobalOverlay.open{
-      opacity:1;
-      visibility:visible;
+    #pdGlobalBrandBig{
+      font-size:22px;
+      letter-spacing:1.4px;
     }
 
     #pdGlobalMenu{
-      position:fixed;
-      top:0;
-      left:0;
-      bottom:0;
-      z-index:15100;
-      width:min(552px,88vw);
-      max-width:100%;
-      background:var(--pd-cream);
-      color:#111;
-      overflow-y:auto;
-      overscroll-behavior:contain;
-      transform:translateX(-102%);
-      transition:transform .26s ease;
-      box-shadow:16px 0 38px rgba(0,0,0,.24);
-      font-family:var(--pd-sans);
-      -webkit-overflow-scrolling:touch;
+      width:86vw;
+      min-width:270px;
+    }
+  }
+
+  @media(min-width:900px){
+    #pdGlobalHeaderMain{
+      max-width:1500px;
+      padding-left:18px;
+      padding-right:18px;
     }
 
-    #pdGlobalMenu.open{
-      transform:translateX(0);
+    #pdGlobalMenu{
+      width:390px;
+      max-width:390px;
+    }
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    #pdGlobalMenu,
+    #pdGlobalOverlay,
+    #pdGlobalProfileMenu{
+      transition:none;
+    }
+  }
+
+  /* PET-FRIENDLY MENU VISUAL STANDARD */
+  #pdGlobalMenu{
+    width:min(552px,88vw);
+    max-width:552px;
+  }
+
+  .pd-global-menu-head{
+    height:157px;
+    min-height:157px;
+    padding:35px 29px 28px;
+  }
+
+  .pd-global-menu-head h2{
+    font-size:51px;
+  }
+
+  #pdGlobalClose{
+    width:78px;
+    height:78px;
+    flex-basis:78px;
+    font-size:35px;
+  }
+
+  .pd-global-menu-scroll{
+    padding:23px 20px 34px;
+  }
+
+  .pd-global-account{
+    gap:14px;
+    margin-bottom:21px;
+  }
+
+  .pd-global-account a{
+    min-height:88px;
+    height:auto;
+    border-width:3px;
+    padding:12px 16px;
+    font-size:20px;
+  }
+
+  .pd-global-language-label{
+    margin:0 5px 11px;
+    font-size:15px;
+    letter-spacing:2.7px;
+  }
+
+  #pdGlobalLanguage{
+    min-height:94px;
+    height:94px;
+    margin-bottom:22px;
+    padding:0 35px;
+    border-width:3px;
+    font-size:22px;
+  }
+
+  #pdGlobalMenuList{
+    gap:14px;
+  }
+
+  .pd-global-menu-card{
+    min-height:204px;
+    grid-template-columns:154px minmax(0,1fr);
+    border-width:3px;
+    border-radius:32px;
+  }
+
+  .pd-global-menu-card-image{
+    width:154px;
+    min-height:198px;
+  }
+
+  .pd-global-menu-card img{
+    width:154px;
+    min-height:198px;
+  }
+
+  .pd-global-menu-card-copy{
+    padding:23px 18px 19px 20px;
+  }
+
+  .pd-global-menu-card h3{
+    font-size:31px;
+    line-height:.96;
+    text-transform:uppercase;
+  }
+
+  .pd-global-menu-card p{
+    margin-top:8px;
+    font-size:18px;
+    line-height:1.25;
+  }
+
+  .pd-global-menu-footer a{
+    min-height:60px;
+    font-size:16px;
+  }
+
+  @media(max-width:430px){
+    #pdGlobalMenu{
+      width:92vw;
+      max-width:92vw;
     }
 
-    #pdGlobalMenuTop{
-      min-height:157px;
-      padding:35px 29px 28px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      background:#050505;
-      color:#fff;
+    .pd-global-menu-head{
+      height:138px;
+      min-height:138px;
+      padding:25px 18px;
     }
 
-    #pdGlobalMenuTitle{
-      margin:0;
-      font-family:var(--pd-serif);
-      font-size:51px;
-      line-height:1;
-      font-weight:400;
+    .pd-global-menu-head h2{
+      font-size:43px;
     }
 
-    #pdGlobalMenuClose{
-      width:78px;
-      height:78px;
-      flex:0 0 78px;
-      border:1px solid #5d5d5d;
-      border-radius:50%;
-      background:transparent;
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
+    #pdGlobalClose{
+      width:66px;
+      height:66px;
+      flex-basis:66px;
+      font-size:31px;
     }
 
-    #pdGlobalMenuClose svg{
-      width:32px;
-      height:32px;
-      fill:none;
-      stroke:currentColor;
-      stroke-width:2.4;
-      stroke-linecap:round;
+    .pd-global-menu-scroll{
+      padding:19px 17px 28px;
     }
 
-    #pdGlobalMenuBody{
-      padding:23px 20px 34px;
+    .pd-global-account{
+      gap:10px;
     }
 
-    #pdGlobalMemberActions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-bottom:21px;
-    }
-
-    .pd-global-member-button{
-      min-height:88px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border:3px solid #1b1b1b;
-      border-radius:999px;
-      background:#fff;
-      color:#111;
-      font-size:20px;
-      font-weight:900;
-      text-decoration:none;
-      text-align:center;
-      padding:12px 16px;
-    }
-
-    .pd-global-member-button.join{
-      border-color:var(--pd-green);
-      background:var(--pd-green);
-    }
-
-    #pdGlobalLanguageLabel{
-      display:block;
-      margin:0 5px 11px;
-      color:#77736b;
-      font-size:15px;
-      line-height:1;
-      font-weight:900;
-      letter-spacing:2.7px;
-      text-transform:uppercase;
-    }
-
-    #pdGlobalLanguageWrap{
-      position:relative;
-      margin-bottom:22px;
+    .pd-global-account a{
+      min-height:76px;
+      font-size:16px;
     }
 
     #pdGlobalLanguage{
-      width:100%;
-      min-height:94px;
-      appearance:none;
-      -webkit-appearance:none;
-      border:3px solid #1b1b1b;
-      border-radius:999px;
-      background:#fff;
-      color:#111;
-      padding:0 62px 0 35px;
-      font-size:22px;
-      font-weight:800;
-      outline:none;
+      min-height:82px;
+      height:82px;
+      padding:0 25px;
+      font-size:18px;    }
+
+    .pd-global-menu-card{
+      min-height:176px;
+      grid-template-columns:125px minmax(0,1fr);
+      border-radius:28px;
     }
 
-    #pdGlobalLanguageChevron{
-      position:absolute;
-      right:25px;
-      top:50%;
-      width:13px;
-      height:13px;
-      border-right:1.8px solid #111;
-      border-bottom:1.8px solid #111;
-      transform:translateY(-68%) rotate(45deg);
-      pointer-events:none;
+    .pd-global-menu-card-image{
+      width:125px;
+      min-height:170px;
     }
 
-    #pdGlobalCards{
-      display:grid;
-      gap:14px;
+    .pd-global-menu-card img{
+      width:125px;
+      min-height:170px;
     }
 
-    .pd-global-card{
-      min-height:204px;
-      display:grid;
-      grid-template-columns:154px minmax(0,1fr);
-      overflow:hidden;
-      border:3px solid #191919;
-      border-radius:32px;
-      background:#fff;
-      color:#111;
-      text-decoration:none;
+    .pd-global-menu-card-copy{
+      padding:17px 12px 16px 16px;
     }
 
-    .pd-global-card-image{
-      width:100%;
-      height:100%;
-      min-height:198px;
-      object-fit:cover;
-      display:block;
+    .pd-global-menu-card h3{
+      font-size:24px;
     }
 
-    .pd-global-card-copy{
-      min-width:0;
-      padding:23px 18px 19px 20px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
+    .pd-global-menu-card p{
+      font-size:15px;
     }
-
-    .pd-global-card-title{
-      margin:0 0 8px;
-      font-family:var(--pd-serif);
-      font-size:31px;
-      line-height:.96;
-      font-weight:700;
-      text-transform:uppercase;
-    }
-
-    .pd-global-card-description{
-      margin:0;
-      color:#6c6963;
-      font-size:18px;
-      line-height:1.25;
-      font-weight:400;
-    }
-
-    .pd-global-card.active{
-      background:#070707;
-      color:var(--pd-gold-light);
-    }
-
-    .pd-global-card.active .pd-global-card-description{
-      color:#fff;
-    }
-
-    #pdGlobalContact{
-      min-height:60px;
-      margin-top:18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border:2px solid #111;
-      border-radius:999px;
-      color:#111;
-      background:transparent;
-      text-decoration:none;
-      font-weight:900;
-    }
-
-    html[dir="rtl"] #pdGlobalMenuBody{
-      direction:rtl;
-    }
-
-    html[dir="rtl"] #pdGlobalLanguage{
-      padding-left:62px;
-      padding-right:35px;
-    }
-
-    html[dir="rtl"] #pdGlobalLanguageChevron{
-      right:auto;
-      left:25px;
-    }
-
-    html[dir="rtl"] .pd-global-card-copy{
-      text-align:right;
-    }
-
-    @media(max-width:620px){
-      #pdGlobalHeader{
-        height:64px;
-      }
-
-      #pdGlobalHeaderMain{
-        height:64px;
-        grid-template-columns:47px minmax(0,1fr) auto;
-        padding:0 7px;
-      }
-
-      #pdGlobalBrandSmall{
-        font-size:6px;
-        letter-spacing:2.4px;
-      }
-
-      #pdGlobalBrandBig{
-        font-size:22px;
-        letter-spacing:1.7px;
-      }
-
-      #pdGlobalHome,
-      #pdGlobalProfile{
-        width:36px;
-        height:36px;
-        flex-basis:36px;
-        border-radius:10px;
-      }
-
-      #pdGlobalHome svg,
-      #pdGlobalProfile svg{
-        width:20px;
-        height:20px;
-      }
-
-      #pdGlobalHeaderActions{
-        gap:5px;
-      }
-
-      #pdGlobalMenu{
-        width:min(552px,90vw);
-      }
-
-      #pdGlobalMenuTop{
-        min-height:156px;
-        padding:31px 20px 26px;
-      }
-
-      #pdGlobalMenuTitle{
-        font-size:49px;
-      }
-
-      #pdGlobalMenuClose{
-        width:78px;
-        height:78px;
-        flex-basis:78px;
-      }
-
-      #pdGlobalMenuBody{
-        padding:22px 20px 32px;
-      }
-
-      #pdGlobalMemberActions{
-        gap:12px;
-      }
-
-      .pd-global-member-button{
-        min-height:87px;
-        font-size:18px;
-      }
-
-      #pdGlobalLanguage{
-        min-height:94px;
-        font-size:20px;
-      }
-
-      .pd-global-card{
-        min-height:202px;
-        grid-template-columns:153px minmax(0,1fr);
-        border-radius:31px;
-      }
-
-      .pd-global-card-image{
-        min-height:196px;
-      }
-
-      .pd-global-card-copy{
-        padding:20px 15px 18px 19px;
-      }
-
-      .pd-global-card-title{
-        font-size:29px;
-      }
-
-      .pd-global-card-description{
-        font-size:17px;
-      }
-    }
-
-    @media(max-width:430px){
-      #pdGlobalBrandBig{
-        font-size:19px;
-      }
-
-      #pdGlobalBrandSmall{
-        font-size:5.5px;
-      }
-
-      #pdGlobalMenu{
-        width:92vw;
-      }
-
-      #pdGlobalMenuTop{
-        min-height:138px;
-        padding:25px 18px;
-      }
-
-      #pdGlobalMenuTitle{
-        font-size:43px;
-      }
-
-      #pdGlobalMenuClose{
-        width:66px;
-        height:66px;
-        flex-basis:66px;
-      }
-
-      #pdGlobalMenuBody{
-        padding:19px 17px 28px;
-      }
-
-      #pdGlobalMemberActions{
-        gap:10px;
-      }
-
-      .pd-global-member-button{
-        min-height:76px;
-        font-size:16px;
-      }
-
-      #pdGlobalLanguage{
-        min-height:82px;
-        font-size:18px;
-        padding-left:25px;
-      }
-
-      .pd-global-card{
-        grid-template-columns:125px minmax(0,1fr);
-        min-height:176px;
-        border-radius:28px;
-      }
-
-      .pd-global-card-image{
-        min-height:170px;
-      }
-
-      .pd-global-card-copy{
-        padding:17px 12px 16px 16px;
-      }
-
-      .pd-global-card-title{
-        font-size:24px;
-      }
-
-      .pd-global-card-description{
-        font-size:15px;
-      }
-    }
+  }
   `;
 
   document.head.appendChild(style);
@@ -1980,6 +2030,8 @@ function navDescription(item){
 
 function hideExistingShell(){
   const selectors=[
+    "body > .account-bar",
+    "body > header:not(#pdGlobalHeader)",
     "body > header.site-header",
     "body > .site-header",
     "body > header.pd-topbar",
@@ -2003,17 +2055,21 @@ function hideExistingShell(){
   ];
 
   selectors.forEach(selector=>{
-    document.querySelectorAll(selector).forEach(element=>{
-      if(
-        element.id==="pdGlobalHeader"||
-        element.id==="pdGlobalMenu"||
-        element.id==="pdGlobalOverlay"
-      ){
-        return;
-      }
+    document
+      .querySelectorAll(selector)
+      .forEach(element=>{
+        if(
+          element.id==="pdGlobalHeader"||
+          element.id==="pdGlobalMenu"||
+          element.id==="pdGlobalOverlay"
+        ){
+          return;
+        }
 
-      element.classList.add("pd-global-old-shell-hidden");
-    });
+        element.classList.add(
+          "pd-global-old-shell-hidden"
+        );
+      });
   });
 }
 
@@ -2022,15 +2078,20 @@ function watchForLegacyShell(){
     return;
   }
 
-  legacyObserver=new MutationObserver(()=>{
-    hideExistingShell();
-  });
+  legacyObserver=new MutationObserver(
+    ()=>hideExistingShell()
+  );
 
-  legacyObserver.observe(document.body,{
-    childList:true,
-    subtree:true
-  });
-} function createHeader(){
+  legacyObserver.observe(
+    document.body,
+    {
+      childList:true,
+      subtree:true
+    }
+  );
+}
+
+function createHeader(){
   if(document.getElementById("pdGlobalHeader")){
     return;
   }
@@ -2056,11 +2117,18 @@ function watchForLegacyShell(){
 
       <a
         id="pdGlobalBrand"
+        class="notranslate"
         href="index.html"
+        translate="no"
         aria-label="PETS & DOGUE"
       >
-        <span id="pdGlobalBrandSmall">PETS &</span>
-        <span id="pdGlobalBrandBig">DOGUE</span>
+        <span id="pdGlobalBrandSmall">
+          PETS &amp;
+        </span>
+
+        <span id="pdGlobalBrandBig">
+          DOGUE
+        </span>
       </a>
 
       <div id="pdGlobalHeaderActions">
@@ -2069,12 +2137,12 @@ function watchForLegacyShell(){
           id="pdGlobalHome"
           href="index.html"
           aria-label="${escapeHTML(copy.home)}"
-          title="${escapeHTML(copy.home)}"
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 10.5 12 3l9 7.5"></path>
-            <path d="M5 9.5V21h14V9.5"></path>
-            <path d="M9 21v-7h6v7"></path>
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"></path>
           </svg>
         </a>
 
@@ -2082,38 +2150,51 @@ function watchForLegacyShell(){
           id="pdGlobalProfile"
           type="button"
           aria-label="${escapeHTML(copy.profile)}"
-          title="${escapeHTML(copy.profile)}"
-          aria-haspopup="true"
+          aria-controls="pdGlobalProfileMenu"
           aria-expanded="false"
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
             <circle cx="12" cy="8" r="4"></circle>
-            <path d="M4.5 21c.7-4.2 3.3-6.5 7.5-6.5s6.8 2.3 7.5 6.5"></path>
+            <path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path>
           </svg>
         </button>
 
         <div
           id="pdGlobalProfileMenu"
+          role="menu"
           aria-hidden="true"
-        ></div>
+        >
+        </div>
 
       </div>
 
     </div>
   `;
 
-  document.body.prepend(header);
+  document.body.insertBefore(
+    header,
+    document.body.firstChild
+  );
 
   document
     .getElementById("pdGlobalMenuButton")
-    .addEventListener("click",openMenu);
+    ?.addEventListener(
+      "click",
+      openMenu
+    );
 
   document
     .getElementById("pdGlobalProfile")
-    .addEventListener("click",event=>{
-      event.stopPropagation();
-      toggleProfileMenu();
-    });
+    ?.addEventListener(
+      "click",
+      event=>{
+        event.stopPropagation();
+        toggleProfileMenu();
+      }
+    );
 
   renderProfileMenu();
 }
@@ -2125,101 +2206,34 @@ function createSideMenu(){
 
   const overlay=document.createElement("div");
   overlay.id="pdGlobalOverlay";
-  overlay.setAttribute("aria-hidden","true");
 
   const menu=document.createElement("aside");
   menu.id="pdGlobalMenu";
-  menu.setAttribute("aria-hidden","true");
-
-  menu.innerHTML=`
-    <div id="pdGlobalMenuTop">
-      <h2 id="pdGlobalMenuTitle"></h2>
-
-      <button
-        id="pdGlobalMenuClose"
-        type="button"
-        aria-label=""
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 5 19 19"></path>
-          <path d="M19 5 5 19"></path>
-        </svg>
-      </button>
-    </div>
-
-    <div id="pdGlobalMenuBody">
-
-      <div id="pdGlobalMemberActions">
-        <a
-          class="pd-global-member-button"
-          id="pdGlobalSignIn"
-          href="club.html#signin"
-        ></a>
-
-        <a
-          class="pd-global-member-button join"
-          id="pdGlobalJoinClub"
-          href="club.html#join"
-        ></a>
-      </div>
-
-      <label
-        id="pdGlobalLanguageLabel"
-        for="pdGlobalLanguage"
-      ></label>
-
-      <div id="pdGlobalLanguageWrap">
-        <select
-          id="pdGlobalLanguage"
-          aria-label="Language"
-        ></select>
-
-        <span
-          id="pdGlobalLanguageChevron"
-          aria-hidden="true"
-        ></span>
-      </div>
-
-      <nav
-        id="pdGlobalCards"
-        aria-label="PETS & DOGUE sections"
-      ></nav>
-
-      <a
-        id="pdGlobalContact"
-        href="contact.html"
-      ></a>
-
-    </div>
-  `;
+  menu.setAttribute(
+    "aria-hidden",
+    "true"
+  );
 
   document.body.appendChild(overlay);
   document.body.appendChild(menu);
 
-  overlay.addEventListener("click",closeMenu);
-
-  document
-    .getElementById("pdGlobalMenuClose")
-    .addEventListener("click",closeMenu);
-
-  document
-    .getElementById("pdGlobalLanguage")
-    .addEventListener("change",event=>{
-      applyLanguage(event.target.value,{
-        syncPage:true,
-        announce:true
-      });
-    });
+  overlay.addEventListener(
+    "click",
+    closeMenu
+  );
 }
 
 function renderProfileMenu(){
-  const menu=document.getElementById("pdGlobalProfileMenu");
+  const menu=document.getElementById(
+    "pdGlobalProfileMenu"
+  );
 
   if(!menu){
     return;
   }
 
   const copy=shellCopy();
+  const wasOpen=menu.classList.contains("open");
 
   menu.innerHTML=`
     <div class="pd-global-profile-title">
@@ -2228,29 +2242,38 @@ function renderProfileMenu(){
 
     <a
       class="pd-global-profile-link"
-      href="club.html#signin"
+      href="account.html"
+      role="menuitem"
     >
       ${escapeHTML(copy.signIn)}
     </a>
 
     <a
       class="pd-global-profile-link club"
-      href="club.html#join"
+      href="club.html"
+      role="menuitem"
     >
       ${escapeHTML(copy.joinClub)}
     </a>
   `;
+
+  if(wasOpen){
+    menu.classList.add("open");
+    menu.setAttribute("aria-hidden","false");
+  }
 }
 
 function openProfileMenu(){
-  const button=document.getElementById("pdGlobalProfile");
-  const menu=document.getElementById("pdGlobalProfileMenu");
+  const menu=document.getElementById(
+    "pdGlobalProfileMenu"
+  );
+  const button=document.getElementById(
+    "pdGlobalProfile"
+  );
 
-  if(!button||!menu){
+  if(!menu||!button){
     return;
   }
-
-  closeMenu();
 
   menu.classList.add("open");
   menu.setAttribute("aria-hidden","false");
@@ -2258,10 +2281,14 @@ function openProfileMenu(){
 }
 
 function closeProfileMenu(){
-  const button=document.getElementById("pdGlobalProfile");
-  const menu=document.getElementById("pdGlobalProfileMenu");
+  const menu=document.getElementById(
+    "pdGlobalProfileMenu"
+  );
+  const button=document.getElementById(
+    "pdGlobalProfile"
+  );
 
-  if(!button||!menu){
+  if(!menu||!button){
     return;
   }
 
@@ -2271,7 +2298,9 @@ function closeProfileMenu(){
 }
 
 function toggleProfileMenu(){
-  const menu=document.getElementById("pdGlobalProfileMenu");
+  const menu=document.getElementById(
+    "pdGlobalProfileMenu"
+  );
 
   if(!menu){
     return;
@@ -2285,9 +2314,15 @@ function toggleProfileMenu(){
 }
 
 function openMenu(){
-  const menu=document.getElementById("pdGlobalMenu");
-  const overlay=document.getElementById("pdGlobalOverlay");
-  const button=document.getElementById("pdGlobalMenuButton");
+  const menu=document.getElementById(
+    "pdGlobalMenu"
+  );
+  const overlay=document.getElementById(
+    "pdGlobalOverlay"
+  );
+  const button=document.getElementById(
+    "pdGlobalMenuButton"
+  );
 
   if(!menu||!overlay){
     return;
@@ -2295,177 +2330,314 @@ function openMenu(){
 
   closeProfileMenu();
 
-  document.body.classList.add("pd-global-menu-open");
-
   menu.classList.add("open");
   overlay.classList.add("open");
-
   menu.setAttribute("aria-hidden","false");
-  overlay.setAttribute("aria-hidden","false");
+  button?.setAttribute("aria-expanded","true");
 
-  if(button){
-    button.setAttribute("aria-expanded","true");
-  }
+  document.body.classList.add(
+    "pd-global-menu-open"
+  );
 }
 
 function closeMenu(){
-  const menu=document.getElementById("pdGlobalMenu");
-  const overlay=document.getElementById("pdGlobalOverlay");
-  const button=document.getElementById("pdGlobalMenuButton");
+  const menu=document.getElementById(
+    "pdGlobalMenu"
+  );
+  const overlay=document.getElementById(
+    "pdGlobalOverlay"
+  );
+  const button=document.getElementById(
+    "pdGlobalMenuButton"
+  );
 
-  document.body.classList.remove("pd-global-menu-open");
-
-  if(menu){
-    menu.classList.remove("open");
-    menu.setAttribute("aria-hidden","true");
+  if(!menu||!overlay){
+    return;
   }
 
-  if(overlay){
-    overlay.classList.remove("open");
-    overlay.setAttribute("aria-hidden","true");
-  }
+  menu.classList.remove("open");
+  overlay.classList.remove("open");
+  menu.setAttribute("aria-hidden","true");
+  button?.setAttribute("aria-expanded","false");
 
-  if(button){
-    button.setAttribute("aria-expanded","false");
-  }
+  document.body.classList.remove(
+    "pd-global-menu-open"
+  );
 }
 
 function renderSideMenu(){
+  const menu=document.getElementById(
+    "pdGlobalMenu"
+  );
+
+  if(!menu){
+    return;
+  }
+
   const copy=shellCopy();
+  const oldScroll=
+    menu.querySelector(".pd-global-menu-scroll")?.scrollTop||0;
+  const wasOpen=
+    menu.classList.contains("open");
 
-  const title=document.getElementById("pdGlobalMenuTitle");
-  const close=document.getElementById("pdGlobalMenuClose");
-  const signIn=document.getElementById("pdGlobalSignIn");
-  const join=document.getElementById("pdGlobalJoinClub");
-  const languageLabel=document.getElementById("pdGlobalLanguageLabel");
-  const select=document.getElementById("pdGlobalLanguage");
-  const cards=document.getElementById("pdGlobalCards");
-  const contact=document.getElementById("pdGlobalContact");
+  const cards=NAV_ITEMS
+    .map(item=>{
+      const active=
+        item.key===activeKey;
 
-  if(title){
-    title.textContent=copy.menu;
-  }
-
-  if(close){
-    close.setAttribute("aria-label",copy.closeMenu);
-  }
-
-  if(signIn){
-    signIn.textContent=copy.signIn;
-  }
-
-  if(join){
-    join.textContent=copy.joinClub;
-  }
-
-  if(languageLabel){
-    languageLabel.textContent=copy.language;
-  }
-
-  if(contact){
-    contact.textContent=copy.contact;
-  }
-
-  if(select){
-    select.innerHTML=LANGUAGE_OPTIONS
-      .map(([code,label])=>`
-        <option
-          value="${escapeHTML(code)}"
-          ${code===shellLanguage?"selected":""}
+      return`
+        <a
+          class="pd-global-menu-card ${active?"active":""}"
+          href="${item.url}"
+          data-pd-nav="${item.key}"
+          ${active?'aria-current="page"':""}
         >
-          ${escapeHTML(label)}
-        </option>
-      `)
-      .join("");
-
-    select.setAttribute("aria-label",copy.language);
-  }
-
-  if(cards){
-    cards.innerHTML=NAV_ITEMS
-      .map(item=>{
-        const active=item.key===activeKey;
-
-        return `
-          <a
-            class="pd-global-card${active?" active":""}"
-            href="${escapeHTML(item.url)}"
-            ${active?'aria-current="page"':""}
-          >
+          <span class="pd-global-menu-card-image">
             <img
-              class="pd-global-card-image"
-              src="${escapeHTML(item.image)}"
+              src="${item.image}"
               alt=""
               loading="lazy"
+              decoding="async"
+              referrerpolicy="no-referrer"
             >
+          </span>
 
-            <span class="pd-global-card-copy">
-              <strong class="pd-global-card-title">
-                ${escapeHTML(navName(item))}
-              </strong>
+          <span class="pd-global-menu-card-copy">
+            <h3>
+              ${escapeHTML(navName(item))}
+            </h3>
 
-              <span class="pd-global-card-description">
-                ${escapeHTML(navDescription(item))}
-              </span>
-            </span>
-          </a>
-        `;
-      })
-      .join("");
+            <p>
+              ${escapeHTML(navDescription(item))}
+            </p>
+          </span>
+        </a>
+      `;
+    })
+    .join("");
+
+  menu.innerHTML=`
+    <div class="pd-global-menu-head">
+
+      <h2>
+        ${escapeHTML(copy.menu)}
+      </h2>
+
+      <button
+        id="pdGlobalClose"
+        type="button"
+        aria-label="${escapeHTML(copy.closeMenu)}"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="pd-global-menu-scroll">
+
+      <div class="pd-global-account">
+
+        <a href="account.html">
+          ${escapeHTML(copy.signIn)}
+        </a>
+
+        <a
+          class="club"
+          href="club.html"
+        >
+          ${escapeHTML(copy.joinClub)}
+        </a>
+
+      </div>
+
+      <label
+        class="pd-global-language-label"
+        for="pdGlobalLanguage"
+      >
+        ${escapeHTML(copy.language)}
+      </label>
+
+      <select
+        id="pdGlobalLanguage"
+        aria-label="${escapeHTML(copy.language)}"
+      >
+        ${LANGUAGE_OPTIONS
+          .map(option=>`
+            <option
+              value="${option[0]}"
+              ${option[0]===shellLanguage?"selected":""}
+            >
+              ${option[1]}
+            </option>
+          `)
+          .join("")}
+      </select>
+
+      <nav
+        id="pdGlobalMenuList"
+        aria-label="PETS & DOGUE"
+      >
+        ${cards}
+      </nav>
+
+      <div class="pd-global-menu-footer">
+        <a href="contact.html">
+          ${escapeHTML(copy.contact)}
+        </a>
+      </div>
+
+    </div>
+  `;
+
+  document
+    .getElementById("pdGlobalClose")
+    ?.addEventListener(
+      "click",      closeMenu
+    );
+
+  document
+    .getElementById("pdGlobalLanguage")
+    ?.addEventListener(
+      "change",
+      event=>{
+        applyLanguage(
+          event.target.value,
+          {
+            syncPage:true,
+            announce:true
+          }
+        );
+      }
+    );
+
+  if(wasOpen){
+    menu.classList.add("open");
+    menu.setAttribute("aria-hidden","false");
+
+    requestAnimationFrame(()=>{
+      const scroll=menu.querySelector(
+        ".pd-global-menu-scroll"
+      );
+
+      if(scroll){
+        scroll.scrollTop=oldScroll;
+      }
+    });
   }
 }
 
 function updateHeaderLanguage(){
   const copy=shellCopy();
 
-  const menuButton=document.getElementById("pdGlobalMenuButton");
-  const home=document.getElementById("pdGlobalHome");
-  const profile=document.getElementById("pdGlobalProfile");
-
-  if(menuButton){
-    menuButton.setAttribute("aria-label",copy.openMenu);
-  }
-
-  if(home){
-    home.setAttribute("aria-label",copy.home);
-    home.setAttribute("title",copy.home);
-  }
-
-  if(profile){
-    profile.setAttribute("aria-label",copy.profile);
-    profile.setAttribute("title",copy.profile);
-  }
-
-  renderProfileMenu();
-} function valueForExistingSelect(select,language){
-  if(!select){
-    return "";
-  }
-
-  const wanted=normalizeLanguage(language);
-
-  for(const option of Array.from(select.options||[])){
-    const optionValue=normalizeLanguage(option.value);
-
-    if(optionValue===wanted){
-      return option.value;
-    }
-
-    const optionCode=normalizeLanguage(
-      option.getAttribute("data-lang")||""
+  document
+    .getElementById("pdGlobalMenuButton")
+    ?.setAttribute(
+      "aria-label",
+      copy.openMenu
     );
 
-    if(optionCode===wanted){
-      return option.value;
+  document
+    .getElementById("pdGlobalHome")
+    ?.setAttribute(
+      "aria-label",
+      copy.home
+    );
+
+  document
+    .getElementById("pdGlobalProfile")
+    ?.setAttribute(
+      "aria-label",
+      copy.profile
+    );
+}
+
+function valueForExistingSelect(
+  select,
+  language
+){
+  const reverseAliases={
+    uk:"ua",
+    cs:"cz",
+    el:"gr",
+    sv:"se",
+    da:"dk"
+  };
+
+  const candidates=[
+    language,
+    reverseAliases[language]
+  ].filter(Boolean);
+
+  for(const candidate of candidates){
+    const exact=Array
+      .from(select.options||[])
+      .find(option=>
+        option.value===candidate
+      );
+
+    if(exact){
+      return exact.value;
     }
   }
 
-  return "";
+  const normalized=Array
+    .from(select.options||[])
+    .find(option=>
+      normalizeLanguage(option.value)===language
+    );
+
+  return normalized
+    ?normalized.value
+    :"";
 }
 
 function syncExistingPageLanguage(language){
-  if(internalLanguageChange){
-    return;
+  const code=normalizeLanguage(language);
+
+  if(!supportedLanguage(code)){
+    return false;
+  }
+
+  let handled=false;
+
+  if(window.PetsDogueLanguage){
+    const controller=
+      window.PetsDogueLanguage;
+
+    for(const setter of[
+      "setLanguage",
+      "changeLanguage",
+      "selectLanguage"
+    ]){
+      if(typeof controller[setter]==="function"){
+        try{
+          controller[setter](code);
+          handled=true;
+        }catch(error){
+          console.warn(
+            "PETS & DOGUE language controller:",
+            error
+          );
+        }
+
+        break;
+      }
+    }
+  }
+
+  if(
+    !handled &&
+    typeof window.renderLanguage==="function"
+  ){
+    try{
+      window.renderLanguage(code);
+      handled=true;
+    }catch(error){
+      console.warn(
+        "PETS & DOGUE renderLanguage:",
+        error
+      );
+    }
   }
 
   const existing=findExistingLanguageSelect();
@@ -2473,52 +2645,49 @@ function syncExistingPageLanguage(language){
   if(existing){
     const value=valueForExistingSelect(
       existing,
-      language
+      code
     );
 
-    if(value && existing.value!==value){
-      internalLanguageChange=true;
+    if(
+      value &&
+      existing.value!==value
+    ){
+      try{
+        existing.value=value;
+        existing.dispatchEvent(
+          new Event(
+            "change",
+            {
+              bubbles:true
+            }
+          )
+        );
 
-      existing.value=value;
-
-      existing.dispatchEvent(
-        new Event("input",{
-          bubbles:true
-        })
-      );
-
-      existing.dispatchEvent(
-        new Event("change",{
-          bubbles:true
-        })
-      );
-
-      internalLanguageChange=false;
+        handled=true;
+      }catch(error){
+        console.warn(
+          "PETS & DOGUE existing language select:",
+          error
+        );
+      }
     }
   }
 
-  document.dispatchEvent(
-    new CustomEvent(
-      "pets-dogue-language-change",
-      {
-        detail:{
-          language:normalizeLanguage(language),
-          source:"global-shell"
-        }
-      }
-    )
-  );
+  return handled;
 }
 
 function refreshShellLanguage(){
-  persistLanguage(shellLanguage);
   updateHeaderLanguage();
+  renderProfileMenu();
   renderSideMenu();
 }
 
 function applyLanguage(
   language,
-  options={}
+  {
+    syncPage=true,
+    announce=true
+  }={}
 ){
   const code=normalizeLanguage(language);
 
@@ -2526,35 +2695,38 @@ function applyLanguage(
     return;
   }
 
-  const changed=code!==shellLanguage;
-
+  internalLanguageChange=true;
   persistLanguage(code);
-  updateHeaderLanguage();
-  renderSideMenu();
 
-  if(options.syncPage!==false){
+  if(syncPage){
     syncExistingPageLanguage(code);
   }
 
-  if(
-    changed &&
-    options.announce!==false
-  ){
+  refreshShellLanguage();
+
+  if(announce){
     window.dispatchEvent(
       new CustomEvent(
-        "pets-dogue-global-language",
+        "petsdogue:languagechange",
         {
           detail:{
-            language:code
+            language:code,
+            source:"global-shell"
           }
         }
       )
     );
   }
+
+  setTimeout(()=>{
+    internalLanguageChange=false;
+  },0);
 }
 
 function preserveLanguageBeforeNavigation(event){
-  const link=event.target.closest("a");
+  const link=event.target.closest(
+    "a[data-pd-nav]"
+  );
 
   if(!link){
     return;
@@ -2577,16 +2749,14 @@ function handleDocumentClick(event){
   const profileMenu=document.getElementById(
     "pdGlobalProfileMenu"
   );
-
   const profileButton=document.getElementById(
     "pdGlobalProfile"
   );
 
   if(
-    profileMenu &&
-    profileButton &&
+    profileMenu?.classList.contains("open") &&
     !profileMenu.contains(event.target) &&
-    !profileButton.contains(event.target)
+    !profileButton?.contains(event.target)
   ){
     closeProfileMenu();
   }
@@ -2598,85 +2768,57 @@ function handleEscape(event){
   }
 
   closeProfileMenu();
-  closeMenu();
+
+  const menu=document.getElementById(
+    "pdGlobalMenu"
+  );
+
+  if(menu?.classList.contains("open")){
+    closeMenu();
+  }
 }
 
 function listenForExternalLanguageChanges(){
-  document.addEventListener(
-    "change",
+  window.addEventListener(
+    "petsdogue:languagechange",
     event=>{
       if(internalLanguageChange){
         return;
       }
 
-      const target=event.target;
+      const code=normalizeLanguage(
+        event?.detail?.language||""
+      );
 
       if(
-        !target ||
-        target.tagName!=="SELECT" ||
-        target.id==="pdGlobalLanguage"
-      ){
-        return;
-      }
-
-      const selectors=[
-        "#pdLanguageSelect",
-        "#headerLanguageSelect",
-        "#languageSelect",
-        "#language",
-        "#langSelect",
-        "select[data-language-select]",
-        "select[name='language']",
-        "select[name='lang']"
-      ];
-
-      if(
-        !selectors.some(selector=>{
-          try{
-            return target.matches(selector);
-          }catch(error){
-            return false;
-          }
-        })
-      ){
-        return;
-      }
-
-      const code=normalizeLanguage(target.value);
-
-      if(
+        code &&
         supportedLanguage(code) &&
         code!==shellLanguage
       ){
-        applyLanguage(code,{
-          syncPage:false,
-          announce:false
-        });
+        persistLanguage(code);
+        refreshShellLanguage();
       }
     }
   );
 
-  document.addEventListener(
-    "pets-dogue-language-change",
+  window.addEventListener(
+    "storage",
     event=>{
-      const source=event.detail?.source;
-
-      if(source==="global-shell"){
+      if(event.key!==LANGUAGE_KEY){
         return;
       }
 
       const code=normalizeLanguage(
-        event.detail?.language||""
+        event.newValue||""
       );
 
       if(
+        code &&
         supportedLanguage(code) &&
         code!==shellLanguage
       ){
-        applyLanguage(code,{
-          syncPage:false,
-          announce:false
-        });
+        persistLanguage(code);
+        refreshShellLanguage();
       }
     }
   );
@@ -2697,16 +2839,12 @@ function init(){
   shellLanguage=detectInitialLanguage();
 
   persistLanguage(shellLanguage);
-
   installStyles();
   hideExistingShell();
-
   createHeader();
   createSideMenu();
-
   renderSideMenu();
-  updateHeaderLanguage();
-
+  refreshShellLanguage();
   watchForLegacyShell();
   listenForExternalLanguageChanges();
 
@@ -2731,15 +2869,17 @@ function init(){
     },
 
     setLanguage(language){
-      applyLanguage(language,{
-        syncPage:true,
-        announce:true
-      });
+      applyLanguage(
+        language,
+        {
+          syncPage:true,
+          announce:true
+        }
+      );
     },
 
     openMenu,
     closeMenu,
-
     openProfile:openProfileMenu,
     closeProfile:closeProfileMenu
   };
