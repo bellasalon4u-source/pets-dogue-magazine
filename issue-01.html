@@ -1,22 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" dir="ltr">
 
-<title>Issue 01 — PETS & DOGUE</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+>
+
+<meta
+id="pageDescription"
+name="description"
+content="Explore PETS & DOGUE Issue 01 — Miso, cover stories, pet fashion, travel, health, community and animals in need."
+>
+
+<title id="pageTitle">
+Issue 01 — PETS & DOGUE
+</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+--black:#050505;
+--white:#fff;
+--paper:#f8f7f3;
+--gold:#c89b3c;
+--gold-dark:#b78a2e;
+--grey:#555;
+--line:#ddd;
+--serif:Georgia,"Times New Roman",serif;
+--sans:Arial,Helvetica,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-background:#f8f7f3;
+background:var(--paper);
 color:#111;
+font-family:var(--sans);
+overflow-x:hidden;
 }
 
 a{
@@ -24,15 +56,23 @@ text-decoration:none;
 color:inherit;
 }
 
-header{
-background:white;
-border-bottom:1px solid #ddd;
-position:sticky;
-top:0;
-z-index:1000;
+img{
+display:block;
+max-width:100%;
 }
 
-.top{
+/* =========================================================
+ISSUE PAGE HEADER
+========================================================= */
+
+.issue-page-header{
+background:#fff;
+border-bottom:1px solid var(--line);
+position:relative;
+z-index:5;
+}
+
+.issue-top{
 height:66px;
 display:flex;
 align-items:center;
@@ -40,33 +80,35 @@ justify-content:space-between;
 max-width:1400px;
 margin:auto;
 padding:0 18px;
+gap:14px;
 }
 
-.logo{
+.issue-logo{
 text-align:center;
 line-height:.9;
 }
 
 .logo-small{
 font-size:15px;
-color:#b78a2e;
+color:var(--gold-dark);
 }
 
 .logo-big{
 font-size:42px;
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-weight:bold;
-color:#c89b3c;
+color:var(--gold);
 letter-spacing:3px;
 }
 
 .back{
 background:#111;
-color:white;
+color:#fff;
 padding:12px 18px;
 border-radius:999px;
 font-weight:bold;
 font-size:14px;
+white-space:nowrap;
 }
 
 .issue-label{
@@ -74,6 +116,10 @@ font-size:13px;
 font-weight:bold;
 color:#555;
 }
+
+/* =========================================================
+HERO
+========================================================= */
 
 .hero{
 max-width:1500px;
@@ -98,13 +144,13 @@ position:absolute;
 left:40px;
 right:40px;
 bottom:40px;
-color:white;
+color:#fff;
 text-shadow:0 4px 20px rgba(0,0,0,.7);
 }
 
 .cover-text span{
 display:inline-block;
-background:#c89b3c;
+background:var(--gold);
 padding:8px 14px;
 border-radius:999px;
 font-size:12px;
@@ -113,7 +159,7 @@ margin-bottom:15px;
 }
 
 .cover-text h1{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:72px;
 margin-bottom:12px;
 }
@@ -124,6 +170,10 @@ line-height:1.6;
 max-width:850px;
 }
 
+/* =========================================================
+INTRO
+========================================================= */
+
 .issue-intro{
 max-width:1000px;
 margin:70px auto;
@@ -133,14 +183,14 @@ padding:0 22px;
 
 .kicker{
 letter-spacing:3px;
-color:#b78a2e;
+color:var(--gold-dark);
 font-size:13px;
 font-weight:bold;
 margin-bottom:18px;
 }
 
 .issue-intro h2{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:58px;
 margin-bottom:20px;
 }
@@ -151,6 +201,10 @@ line-height:1.8;
 color:#555;
 }
 
+/* =========================================================
+TABLE OF CONTENTS
+========================================================= */
+
 .toc{
 max-width:1200px;
 margin:70px auto;
@@ -158,7 +212,7 @@ padding:0 20px;
 }
 
 .toc h2{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:46px;
 text-align:center;
 margin-bottom:35px;
@@ -171,7 +225,7 @@ gap:18px;
 }
 
 .toc-card{
-background:white;
+background:#fff;
 border:2px solid #111;
 border-radius:28px;
 padding:22px;
@@ -179,16 +233,20 @@ text-align:center;
 }
 
 .toc-card span{
-color:#c89b3c;
+color:var(--gold);
 font-weight:bold;
 font-size:13px;
 }
 
 .toc-card h3{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:28px;
 margin-top:8px;
 }
+
+/* =========================================================
+EDITORIAL SECTIONS
+========================================================= */
 
 .page{
 max-width:1200px;
@@ -201,7 +259,7 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:35px;
 align-items:center;
-background:white;
+background:#fff;
 border:2px solid #111;
 border-radius:42px;
 overflow:hidden;
@@ -228,8 +286,8 @@ padding:38px;
 
 .badge{
 display:inline-block;
-background:#c89b3c;
-color:white;
+background:var(--gold);
+color:#fff;
 padding:8px 14px;
 border-radius:999px;
 font-size:12px;
@@ -238,7 +296,7 @@ margin-bottom:16px;
 }
 
 .text h2{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:50px;
 margin-bottom:18px;
 }
@@ -251,12 +309,16 @@ margin-bottom:16px;
 }
 
 .quote{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:28px;
-color:#b78a2e;
+color:var(--gold-dark);
 margin:24px 0;
 line-height:1.5;
 }
+
+/* =========================================================
+FULL COVER STORY
+========================================================= */
 
 .full-page{
 max-width:1400px;
@@ -296,13 +358,13 @@ rgba(0,0,0,.05)
 .full-content{
 position:relative;
 z-index:2;
-color:white;
+color:#fff;
 padding:45px;
 max-width:850px;
 }
 
 .full-content h2{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:64px;
 margin-bottom:18px;
 }
@@ -312,6 +374,10 @@ font-size:21px;
 line-height:1.8;
 color:#eee;
 }
+
+/* =========================================================
+BUTTONS
+========================================================= */
 
 .buttons{
 display:flex;
@@ -323,15 +389,19 @@ margin-top:24px;
 .btn{
 display:inline-block;
 background:#111;
-color:white;
+color:#fff;
 padding:15px 22px;
 border-radius:999px;
 font-weight:bold;
 }
 
 .btn.gold{
-background:#c89b3c;
+background:var(--gold);
 }
+
+/* =========================================================
+SHOP
+========================================================= */
 
 .shop-strip{
 max-width:1200px;
@@ -341,14 +411,14 @@ padding:0 20px;
 
 .shop-box{
 background:#111;
-color:white;
+color:#fff;
 border-radius:42px;
 padding:50px 30px;
 text-align:center;
 }
 
 .shop-box h2{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:50px;
 color:#d6aa45;
 margin-bottom:18px;
@@ -369,12 +439,16 @@ margin-top:35px;
 }
 
 .shop-item{
-background:white;
+background:#fff;
 color:#111;
 border-radius:25px;
 padding:22px;
 font-weight:bold;
 }
+
+/* =========================================================
+FINAL
+========================================================= */
 
 .final{
 max-width:1000px;
@@ -384,7 +458,7 @@ padding:0 22px;
 }
 
 .final h2{
-font-family:Georgia,serif;
+font-family:var(--serif);
 font-size:56px;
 margin-bottom:18px;
 }
@@ -396,21 +470,25 @@ color:#555;
 margin-bottom:25px;
 }
 
-footer{
+/* =========================================================
+FOOTER
+========================================================= */
+
+.issue-footer{
 margin-top:70px;
 padding:55px 20px;
 background:#050505;
-color:white;
+color:#fff;
 text-align:center;
 }
 
-footer h2{
-font-family:Georgia,serif;
+.issue-footer h2{
+font-family:var(--serif);
 font-size:46px;
 margin-bottom:10px;
 }
 
-footer p{
+.issue-footer p{
 color:#ddd;
 }
 
@@ -435,6 +513,32 @@ font-size:11px;
 letter-spacing:2px;
 text-transform:uppercase;
 }
+
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] body{
+direction:rtl;
+}
+
+html[dir="rtl"] .editorial{
+direction:rtl;
+}
+
+html[dir="rtl"] .editorial .text,
+html[dir="rtl"] .editorial.reverse .text{
+direction:rtl;
+text-align:right;
+}
+
+html[dir="rtl"] .buttons{
+justify-content:flex-start;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
 
 @media(max-width:850px){
 
@@ -476,6 +580,11 @@ grid-template-columns:1fr;
 direction:ltr;
 }
 
+html[dir="rtl"] .editorial,
+html[dir="rtl"] .editorial.reverse{
+direction:rtl;
+}
+
 .editorial img{
 height:420px;
 }
@@ -497,20 +606,30 @@ font-size:42px;
 }
 
 }
+
 </style>
+
 </head>
 
 <body>
 
-<header>
+<header class="issue-page-header">
 
-<div class="top">
+<div class="issue-top">
 
-<a href="index.html" class="back">
+<a
+href="index.html"
+class="back"
+id="backHome"
+>
 ← Home
 </a>
 
-<a href="index.html" class="logo">
+<a
+href="index.html"
+class="issue-logo notranslate"
+translate="no"
+>
 
 <div class="logo-small">
 pets &amp;
@@ -522,7 +641,10 @@ DOGUE
 
 </a>
 
-<div class="issue-label">
+<div
+class="issue-label"
+id="issueLabel"
+>
 ISSUE 01
 </div>
 
@@ -539,82 +661,26 @@ src="file_00000000a9d471fda9b4629589be22a9.png"
 alt="PETS & DOGUE Issue 01"
 >
 
-<div class="cover-text">
-
-<span>
-SUMMER 2026
-</span>
-
-<h1>
-Issue 01
-</h1>
-
-<p>
-The debut luxury animal issue starring Miso, cover stars, summer style, travel, wellness and the beginning of PETS & DOGUE.
-</p>
-
+<div
+class="cover-text"
+id="coverText"
+>
 </div>
 
 </div>
 
 </section>
 
-<section class="issue-intro">
-
-<div class="kicker">
-THE DEBUT ISSUE
-</div>
-
-<h2>
-A New Luxury Magazine For Animal Lovers
-</h2>
-
-<p>
-PETS & DOGUE begins with one idea: animals deserve beauty, storytelling, culture, visibility and a place in the luxury magazine world.
-</p>
-
+<section
+class="issue-intro"
+id="issueIntro"
+>
 </section>
 
-<section class="toc">
-
-<h2>
-Inside This Issue
-</h2>
-
-<div class="toc-grid">
-
-<div class="toc-card">
-<span>01</span>
-<h3>Editor’s Letter</h3>
-</div>
-
-<div class="toc-card">
-<span>02</span>
-<h3>Miso Cover Story</h3>
-</div>
-
-<div class="toc-card">
-<span>03</span>
-<h3>Icons Of Summer</h3>
-</div>
-
-<div class="toc-card">
-<span>04</span>
-<h3>Pet Fashion</h3>
-</div>
-
-<div class="toc-card">
-<span>05</span>
-<h3>Travel &amp; Wellness</h3>
-</div>
-
-<div class="toc-card">
-<span>06</span>
-<h3>Community</h3>
-</div>
-
-</div>
-
+<section
+class="toc"
+id="tocBlock"
+>
 </section>
 
 <section class="page">
@@ -626,32 +692,10 @@ src="file_00000000a9d471fda9b4629589be22a9.png"
 alt="Miso"
 >
 
-<div class="text">
-
-<span class="badge">
-EDITOR’S LETTER
-</span>
-
-<h2>
-Welcome To PETS & DOGUE
-</h2>
-
-<p>
-This magazine was created for people who see animals not as accessories, but as personalities with stories, beauty and emotional power.
-</p>
-
-<p>
-Our first issue celebrates summer, elegance, rescue, community and the idea that every animal can become unforgettable.
-</p>
-
-<div class="quote">
-“A luxury magazine for every extraordinary pet.”
-</div>
-
-<p>
-From cover stars to local communities, PETS & DOGUE is more than a magazine. It is a growing world for animal lovers.
-</p>
-
+<div
+class="text"
+id="editorText"
+>
 </div>
 
 </div>
@@ -667,45 +711,15 @@ src="file_00000000a9d471fda9b4629589be22a9.png"
 alt="Miso Cover Star"
 >
 
-<div class="full-content">
-
-<span class="badge">
-COVER STORY
-</span>
-
-<h2>
-Miso: The First Cover Star
-</h2>
-
-<p>
-Miso is the face of Issue 01 — soft, glamorous, playful and unforgettable. She represents the beginning of PETS & DOGUE: beauty, charm and personality.
-</p>
-
-<div class="buttons">
-
-<a
-href="cover-stars.html"
-class="btn gold"
+<div
+class="full-content"
+id="coverStoryContent"
 >
-View Cover Stars
-</a>
-
-<a
-href="become-cover-star.html"
-class="btn"
->
-Become A Cover Star
-</a>
-
 </div>
 
 </div>
 
-</div>
-
-</section>
-
-<section class="page">
+</section> <section class="page">
 
 <div class="editorial reverse">
 
@@ -714,42 +728,10 @@ src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fi
 alt="Pet Fashion"
 >
 
-<div class="text">
-
-<span class="badge">
-PET FASHION
-</span>
-
-<h2>
-Summer Style
-</h2>
-
-<p>
-Pet fashion is no longer just cute. It is becoming editorial, expressive and part of a larger lifestyle culture.
-</p>
-
-<p>
-Issue 01 introduces a world of bows, collars, carriers, soft textures and luxury-inspired details.
-</p>
-
-<div class="buttons">
-
-<a
-href="pet-fashion.html"
-class="btn gold"
+<div
+class="text"
+id="fashionText"
 >
-Explore Fashion
-</a>
-
-<a
-href="partners.html"
-class="btn"
->
-Shop Partners
-</a>
-
-</div>
-
 </div>
 
 </div>
@@ -765,42 +747,10 @@ src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fi
 alt="Pet Travel"
 >
 
-<div class="text">
-
-<span class="badge">
-TRAVEL
-</span>
-
-<h2>
-Pet-Friendly Summer
-</h2>
-
-<p>
-Inspired by Santorini, Capri and the Côte d’Azur, this issue imagines a future where travel with pets is elegant, easy and beautifully designed.
-</p>
-
-<p>
-Future PETS & DOGUE issues will explore hotels, cafés, beaches, villas and destinations where pets are truly welcome.
-</p>
-
-<div class="buttons">
-
-<a
-href="pet-travel.html"
-class="btn gold"
+<div
+class="text"
+id="travelText"
 >
-Travel Guide
-</a>
-
-<a
-href="pet-friendly-places.html"
-class="btn"
->
-Friendly Places
-</a>
-
-</div>
-
 </div>
 
 </div>
@@ -816,42 +766,10 @@ src="https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fi
 alt="Pets In Need"
 >
 
-<div class="text">
-
-<span class="badge">
-PETS IN NEED
-</span>
-
-<h2>
-Beauty With Purpose
-</h2>
-
-<p>
-PETS & DOGUE is not only about style. It is also about visibility for animals who need help, adoption, care and community support.
-</p>
-
-<p>
-The future of this magazine includes rescue stories, volunteer networks and local posts that can make a real difference.
-</p>
-
-<div class="buttons">
-
-<a
-href="pets-in-need.html"
-class="btn gold"
+<div
+class="text"
+id="helpText"
 >
-Help Animals
-</a>
-
-<a
-href="volunteer-network.html"
-class="btn"
->
-Volunteer
-</a>
-
-</div>
-
 </div>
 
 </div>
@@ -860,153 +778,1220 @@ Volunteer
 
 <section class="shop-strip">
 
-<div class="shop-box">
-
-<h2>
-Shop The Issue
-</h2>
-
-<p>
-Future PETS & DOGUE issues will include partner shopping links, member discounts and luxury recommendations for products and services.
-</p>
-
-<div class="shop-grid">
-
-<div class="shop-item">
-Luxury Collars
-</div>
-
-<div class="shop-item">
-Pet Fashion
-</div>
-
-<div class="shop-item">
-Travel Accessories
-</div>
-
-<div class="shop-item">
-Grooming Offers
-</div>
-
-<div class="shop-item">
-Pet-Friendly Hotels
-</div>
-
-<div class="shop-item">
-Member Discounts
-</div>
-
-</div>
-
-<br><br>
-
-<a
-href="partners.html"
-class="btn gold"
->
-View Partner Offers
-</a>
-
-</div>
-
-</section>
-
-<section class="final">
-
-<h2>
-Continue The Issue
-</h2>
-
-<p>
-Discover photos, articles, contests, local community posts, club benefits and future PETS & DOGUE cover stars.
-</p>
-
 <div
-class="buttons"
-style="justify-content:center;"
+class="shop-box"
+id="shopBox"
 >
-
-<a
-href="photos.html"
-class="btn gold"
->
-Photos
-</a>
-
-<a
-href="articles.html"
-class="btn"
->
-Articles
-</a>
-
-<a
-href="contests.html"
-class="btn"
->
-Contests
-</a>
-
-<a
-href="club.html"
-class="btn"
->
-Join Club
-</a>
-
 </div>
 
 </section>
 
-<footer>
-
-<h2>
-PETS & DOGUE
-</h2>
-
-<p>
-The International Luxury Animal Magazine
-</p>
-
-<div class="footer-links">
-
-<a href="index.html">
-Home
-</a>
-
-<a href="archive.html">
-Archive
-</a>
-
-<a href="issue-02.html">
-Issue 02
-</a>
-
-<a href="privacy.html">
-Privacy
-</a>
-
-<a href="terms.html">
-Terms
-</a>
-
-<a href="contact.html">
-Contact
-</a>
-
-</div>
-
-<a
-href="admin.html"
-class="admin-small"
+<section
+class="final"
+id="finalBlock"
 >
-Admin
-</a>
+</section>
 
+<footer
+class="issue-footer"
+id="issueFooter"
+>
 </footer>
 
-<!-- PETS & DOGUE GLOBAL SHELL -->
-<script src="pets-dogue-shell.js?v=20260912-global-shell-2"></script>
+<script>
+"use strict";
+
+const LANGUAGE_KEY="pets_dogue_language";
+
+const LANGUAGE_ALIASES={
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+const SUPPORTED=[
+"en","uk","ru","fr","de","es","it","pt","nl","pl","cs","sk",
+"hu","ro","bg","el","sv","da","no","fi","tr","ar","hi"
+];
+
+const ISSUE_COPY={
+
+en:{
+title:"Issue 01 — PETS & DOGUE",
+description:"Explore PETS & DOGUE Issue 01 — Miso, cover stories, pet fashion, travel, health, community and animals in need.",
+home:"← Home",
+label:"ISSUE 01",
+
+cover:`
+<span>SUMMER 2026</span>
+<h1>Issue 01</h1>
+<p>The debut luxury animal issue starring Miso, cover stars, summer style, travel, wellness and the beginning of PETS &amp; DOGUE.</p>
+`,
+
+intro:`
+<div class="kicker">THE DEBUT ISSUE</div>
+<h2>A New Luxury Magazine For Animal Lovers</h2>
+<p>PETS &amp; DOGUE begins with one idea: animals deserve beauty, storytelling, culture, visibility and a place in the luxury magazine world.</p>
+`,
+
+toc:`
+<h2>Inside This Issue</h2>
+<div class="toc-grid">
+<div class="toc-card"><span>01</span><h3>Editor’s Letter</h3></div>
+<div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div>
+<div class="toc-card"><span>03</span><h3>Icons Of Summer</h3></div>
+<div class="toc-card"><span>04</span><h3>Pet Fashion</h3></div>
+<div class="toc-card"><span>05</span><h3>Travel &amp; Wellness</h3></div>
+<div class="toc-card"><span>06</span><h3>Community</h3></div>
+</div>
+`,
+
+editor:`
+<span class="badge">EDITOR’S LETTER</span>
+<h2>Welcome To PETS &amp; DOGUE</h2>
+<p>This magazine was created for people who see animals not as accessories, but as personalities with stories, beauty and emotional power.</p>
+<p>Our first issue celebrates summer, elegance, rescue, community and the idea that every animal can become unforgettable.</p>
+<div class="quote">“A luxury magazine for every extraordinary pet.”</div>
+<p>From cover stars to local communities, PETS &amp; DOGUE is more than a magazine. It is a growing world for animal lovers.</p>
+`,
+
+coverStory:`
+<span class="badge">COVER STORY</span>
+<h2>Miso: The First Cover Star</h2>
+<p>Miso is the face of Issue 01 — soft, glamorous, playful and unforgettable. She represents the beginning of PETS &amp; DOGUE: beauty, charm and personality.</p>
+<div class="buttons">
+<a href="members-gallery.html" class="btn gold">View Cover Stars</a>
+<a href="become-cover-star.html" class="btn">Become A Cover Star</a>
+</div>
+`,
+
+fashion:`
+<span class="badge">PET FASHION</span>
+<h2>Summer Style</h2>
+<p>Pet fashion is no longer just cute. It is becoming editorial, expressive and part of a larger lifestyle culture.</p>
+<p>Issue 01 introduces a world of bows, collars, carriers, soft textures and luxury-inspired details.</p>
+<div class="buttons">
+<a href="pet-fashion.html" class="btn gold">Explore Fashion</a>
+<a href="partners.html" class="btn">Shop Partners</a>
+</div>
+`,
+
+travel:`
+<span class="badge">TRAVEL</span>
+<h2>Pet-Friendly Summer</h2>
+<p>Inspired by Santorini, Capri and the Côte d’Azur, this issue imagines a future where travel with pets is elegant, easy and beautifully designed.</p>
+<p>Future PETS & DOGUE issues will explore hotels, cafés, beaches, villas and destinations where pets are truly welcome.</p>
+<div class="buttons">
+<a href="pet-travel.html" class="btn gold">Travel Guide</a>
+<a href="pet-friendly-places.html" class="btn">Friendly Places</a>
+</div>
+`,
+
+help:`
+<span class="badge">PETS IN NEED</span>
+<h2>Beauty With Purpose</h2>
+<p>PETS & DOGUE is not only about style. It is also about visibility for animals who need help, adoption, care and community support.</p>
+<p>The future of this magazine includes rescue stories, volunteer networks and local posts that can make a real difference.</p>
+<div class="buttons">
+<a href="pets-in-need.html" class="btn gold">Help Animals</a>
+<a href="volunteer-network.html" class="btn">Volunteer</a>
+</div>
+`,
+
+shop:`
+<h2>Shop The Issue</h2>
+<p>Future PETS & DOGUE issues will include partner shopping links, member discounts and luxury recommendations for products and services.</p>
+<div class="shop-grid">
+<div class="shop-item">Luxury Collars</div>
+<div class="shop-item">Pet Fashion</div>
+<div class="shop-item">Travel Accessories</div>
+<div class="shop-item">Grooming Offers</div>
+<div class="shop-item">Pet-Friendly Hotels</div>
+<div class="shop-item">Member Discounts</div>
+</div>
+<br><br>
+<a href="partners.html" class="btn gold">View Partner Offers</a>
+`,
+
+final:`
+<h2>Continue The Issue</h2>
+<p>Discover photos, articles, contests, local community posts, club benefits and future PETS & DOGUE cover stars.</p>
+<div class="buttons" style="justify-content:center;">
+<a href="photos.html" class="btn gold">Photos</a>
+<a href="articles.html" class="btn">Articles</a>
+<a href="contests.html" class="btn">Contests</a>
+<a href="club.html" class="btn">Join Club</a>
+</div>
+`,
+
+footer:`
+<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2>
+<p>The International Luxury Animal Magazine</p>
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="archive.html">Archive</a>
+<a href="issue-02.html">Issue 02</a>
+<a href="privacy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+<a href="contact.html">Contact</a>
+</div>
+<a href="admin.html" class="admin-small">Admin</a>
+`
+},
+
+ru:{
+title:"Выпуск 01 — PETS & DOGUE",
+description:"Откройте выпуск PETS & DOGUE 01 — Мисо, истории звёзд обложки, мода, путешествия, здоровье, сообщество и помощь животным.",
+home:"← Главная",
+label:"ВЫПУСК 01",
+
+cover:`
+<span>ЛЕТО 2026</span>
+<h1>Выпуск 01</h1>
+<p>Дебютный luxury-выпуск о животных с Мисо, звёздами обложки, летним стилем, путешествиями, здоровьем и началом мира PETS &amp; DOGUE.</p>
+`,
+
+intro:`
+<div class="kicker">ДЕБЮТНЫЙ ВЫПУСК</div>
+<h2>Новый luxury-журнал для тех, кто любит животных</h2>
+<p>PETS &amp; DOGUE начинается с одной идеи: животные достойны красоты, историй, культуры, внимания и собственного места в мире luxury-журналов.</p>
+`,
+
+toc:`
+<h2>В этом выпуске</h2>
+<div class="toc-grid">
+<div class="toc-card"><span>01</span><h3>Письмо редактора</h3></div>
+<div class="toc-card"><span>02</span><h3>История Мисо на обложке</h3></div>
+<div class="toc-card"><span>03</span><h3>Иконы лета</h3></div>
+<div class="toc-card"><span>04</span><h3>Мода для питомцев</h3></div>
+<div class="toc-card"><span>05</span><h3>Путешествия и здоровье</h3></div>
+<div class="toc-card"><span>06</span><h3>Сообщество</h3></div>
+</div>
+`,
+
+editor:`
+<span class="badge">ПИСЬМО РЕДАКТОРА</span>
+<h2>Добро пожаловать в PETS &amp; DOGUE</h2>
+<p>Этот журнал создан для людей, которые видят в животных не аксессуары, а личности со своими историями, красотой и эмоциональной силой.</p>
+<p>Наш первый выпуск посвящён лету, элегантности, помощи животным, сообществу и идее о том, что каждый питомец может стать незабываемым.</p>
+<div class="quote">«Luxury-журнал для каждого необыкновенного питомца».</div>
+<p>От звёзд обложки до местных сообществ — PETS &amp; DOGUE больше, чем журнал. Это растущий мир для людей, которые любят животных.</p>
+`,
+
+coverStory:`
+<span class="badge">ИСТОРИЯ С ОБЛОЖКИ</span>
+<h2>Мисо: первая звезда обложки</h2>
+<p>Мисо — лицо выпуска 01: нежная, гламурная, игривая и незабываемая. Она символизирует начало PETS &amp; DOGUE — красоту, очарование и характер.</p>
+<div class="buttons">
+<a href="members-gallery.html" class="btn gold">Звёзды обложки</a>
+<a href="become-cover-star.html" class="btn">Стать звездой обложки</a>
+</div>
+`,
+
+fashion:`
+<span class="badge">МОДА ДЛЯ ПИТОМЦЕВ</span>
+<h2>Летний стиль</h2>
+<p>Мода для животных — это уже не просто мило. Она становится выразительной, редакционной и частью современной lifestyle-культуры.</p>
+<p>Выпуск 01 открывает мир бантов, ошейников, переносок, мягких фактур и деталей, вдохновлённых luxury-стилем.</p>
+<div class="buttons">
+<a href="pet-fashion.html" class="btn gold">Смотреть моду</a>
+<a href="partners.html" class="btn">Наши партнёры</a>
+</div>
+`,
+
+travel:`
+<span class="badge">ПУТЕШЕСТВИЯ</span>
+<h2>Pet-Friendly лето</h2>
+<p>Вдохновлённый Санторини, Капри и Лазурным берегом, этот выпуск представляет будущее, где путешествовать с питомцами красиво, удобно и легко.</p>
+<p>Будущие выпуски PETS & DOGUE расскажут об отелях, кафе, пляжах, виллах и направлениях, где животным действительно рады.</p>
+<div class="buttons">
+<a href="pet-travel.html" class="btn gold">Гид по путешествиям</a>
+<a href="pet-friendly-places.html" class="btn">Pet-Friendly места</a>
+</div>
+`,
+
+help:`
+<span class="badge">ЖИВОТНЫЕ, КОТОРЫМ НУЖНА ПОМОЩЬ</span>
+<h2>Красота со смыслом</h2>
+<p>PETS & DOGUE — это не только стиль. Это также внимание к животным, которым нужны помощь, новый дом, забота и поддержка сообщества.</p>
+<p>Будущее платформы включает истории спасения, волонтёрские сети и местные публикации, способные действительно изменить чью-то жизнь.</p>
+<div class="buttons">
+<a href="pets-in-need.html" class="btn gold">Помочь животным</a>
+<a href="volunteer-network.html" class="btn">Волонтёрство</a>
+</div>
+`,
+
+shop:`
+<h2>Покупки из выпуска</h2>
+<p>Будущие выпуски PETS & DOGUE будут включать предложения партнёров, скидки для участников клуба и luxury-рекомендации товаров и услуг.</p>
+<div class="shop-grid">
+<div class="shop-item">Luxury-ошейники</div>
+<div class="shop-item">Мода для питомцев</div>
+<div class="shop-item">Аксессуары для путешествий</div>
+<div class="shop-item">Предложения груминга</div>
+<div class="shop-item">Pet-Friendly отели</div>
+<div class="shop-item">Скидки для участников</div>
+</div>
+<br><br>
+<a href="partners.html" class="btn gold">Предложения партнёров</a>
+`,
+
+final:`
+<h2>Продолжить выпуск</h2>
+<p>Откройте фотографии, статьи, конкурсы, местные сообщества, преимущества клуба и будущих звёзд обложки PETS & DOGUE.</p>
+<div class="buttons" style="justify-content:center;">
+<a href="photos.html" class="btn gold">Фото</a>
+<a href="articles.html" class="btn">Статьи</a>
+<a href="contests.html" class="btn">Конкурсы</a>
+<a href="club.html" class="btn">Вступить в Club</a>
+</div>
+`,
+
+footer:`
+<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2>
+<p>Международная digital lifestyle-платформа для животных</p>
+<div class="footer-links">
+<a href="index.html">Главная</a>
+<a href="archive.html">Архив</a>
+<a href="issue-02.html">Выпуск 02</a>
+<a href="privacy.html">Конфиденциальность</a>
+<a href="terms.html">Условия</a>
+<a href="contact.html">Контакты</a>
+</div>
+<a href="admin.html" class="admin-small">Admin</a>
+`
+},
+
+uk:{
+title:"Випуск 01 — PETS & DOGUE",
+description:"Відкрийте PETS & DOGUE Випуск 01 — Місо, історії зірок обкладинки, мода, подорожі, здоров’я, спільнота та допомога тваринам.",
+home:"← Головна",
+label:"ВИПУСК 01",
+
+cover:`
+<span>ЛІТО 2026</span>
+<h1>Випуск 01</h1>
+<p>Дебютний luxury-випуск про тварин із Місо, зірками обкладинки, літнім стилем, подорожами, здоров’ям і початком світу PETS &amp; DOGUE.</p>
+`,
+
+intro:`
+<div class="kicker">ДЕБЮТНИЙ ВИПУСК</div>
+<h2>Новий luxury-журнал для тих, хто любить тварин</h2>
+<p>PETS &amp; DOGUE починається з однієї ідеї: тварини заслуговують на красу, історії, культуру, видимість і власне місце у світі luxury-журналів.</p>
+`,
+
+toc:`
+<h2>У цьому випуску</h2>
+<div class="toc-grid">
+<div class="toc-card"><span>01</span><h3>Лист редактора</h3></div>
+<div class="toc-card"><span>02</span><h3>Історія Місо на обкладинці</h3></div>
+<div class="toc-card"><span>03</span><h3>Ікони літа</h3></div>
+<div class="toc-card"><span>04</span><h3>Мода для улюбленців</h3></div>
+<div class="toc-card"><span>05</span><h3>Подорожі та здоров’я</h3></div>
+<div class="toc-card"><span>06</span><h3>Спільнота</h3></div>
+</div>
+`,
+
+editor:`
+<span class="badge">ЛИСТ РЕДАКТОРА</span>
+<h2>Ласкаво просимо до PETS &amp; DOGUE</h2>
+<p>Цей журнал створено для людей, які бачать у тваринах не аксесуари, а особистості зі своїми історіями, красою та емоційною силою.</p>
+<p>Наш перший випуск присвячений літу, елегантності, порятунку тварин, спільноті та ідеї, що кожен улюбленець може стати незабутнім.</p>
+<div class="quote">«Luxury-журнал для кожного надзвичайного улюбленця».</div>
+<p>Від зірок обкладинки до місцевих спільнот — PETS &amp; DOGUE більше, ніж журнал. Це світ для людей, які люблять тварин.</p>
+`,
+
+coverStory:`
+<span class="badge">ІСТОРІЯ З ОБКЛАДИНКИ</span>
+<h2>Місо: перша зірка обкладинки</h2>
+<p>Місо — обличчя Випуску 01: ніжна, гламурна, грайлива та незабутня. Вона символізує початок PETS &amp; DOGUE — красу, чарівність і характер.</p>
+<div class="buttons">
+<a href="members-gallery.html" class="btn gold">Зірки обкладинки</a>
+<a href="become-cover-star.html" class="btn">Стати зіркою обкладинки</a>
+</div>
+`,
+
+fashion:`
+<span class="badge">МОДА ДЛЯ УЛЮБЛЕНЦІВ</span>
+<h2>Літній стиль</h2>
+<p>Мода для тварин — це вже не просто мило. Вона стає виразною, редакційною та частиною сучасної lifestyle-культури.</p>
+<p>Випуск 01 відкриває світ бантів, нашийників, переносок, м’яких фактур і luxury-деталей.</p>
+<div class="buttons">
+<a href="pet-fashion.html" class="btn gold">Дивитися моду</a>
+<a href="partners.html" class="btn">Наші партнери</a>
+</div>
+`,
+
+travel:`
+<span class="badge">ПОДОРОЖІ</span>
+<h2>Pet-Friendly літо</h2>
+<p>Натхнений Санторіні, Капрі та Лазурним узбережжям, цей випуск уявляє майбутнє, де подорожувати з тваринами красиво, легко та зручно.</p>
+<p>Майбутні випуски PETS & DOGUE розкажуть про готелі, кафе, пляжі, вілли та напрямки, де тваринам справді раді.</p>
+<div class="buttons">
+<a href="pet-travel.html" class="btn gold">Гід подорожей</a>
+<a href="pet-friendly-places.html" class="btn">Pet-Friendly місця</a>
+</div>
+`,
+
+help:`
+<span class="badge">ТВАРИНИ, ЯКИМ ПОТРІБНА ДОПОМОГА</span>
+<h2>Краса зі змістом</h2>
+<p>PETS & DOGUE — це не лише стиль. Це також видимість для тварин, яким потрібні допомога, новий дім, турбота та підтримка спільноти.</p>
+<p>Майбутнє платформи включає історії порятунку, волонтерські мережі та місцеві публікації, що можуть справді змінити життя.</p>
+<div class="buttons">
+<a href="pets-in-need.html" class="btn gold">Допомогти тваринам</a>
+<a href="volunteer-network.html" class="btn">Волонтерство</a>
+</div>
+`,
+
+shop:`
+<h2>Покупки з випуску</h2>
+<p>Майбутні випуски PETS & DOGUE міститимуть пропозиції партнерів, знижки для учасників клубу та luxury-рекомендації товарів і послуг.</p>
+<div class="shop-grid">
+<div class="shop-item">Luxury-нашийники</div>
+<div class="shop-item">Мода для улюбленців</div>
+<div class="shop-item">Аксесуари для подорожей</div>
+<div class="shop-item">Пропозиції грумінгу</div>
+<div class="shop-item">Pet-Friendly готелі</div>
+<div class="shop-item">Знижки для учасників</div>
+</div>
+<br><br>
+<a href="partners.html" class="btn gold">Пропозиції партнерів</a>
+`,
+
+final:`
+<h2>Продовжити випуск</h2>
+<p>Відкрийте фото, статті, конкурси, місцеві спільноти, переваги клубу та майбутніх зірок обкладинки PETS & DOGUE.</p>
+<div class="buttons" style="justify-content:center;">
+<a href="photos.html" class="btn gold">Фото</a>
+<a href="articles.html" class="btn">Статті</a>
+<a href="contests.html" class="btn">Конкурси</a>
+<a href="club.html" class="btn">Вступити до Club</a>
+</div>
+`,
+
+footer:`
+<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2>
+<p>Міжнародна digital lifestyle-платформа для тварин</p>
+<div class="footer-links">
+<a href="index.html">Головна</a>
+<a href="archive.html">Архів</a>
+<a href="issue-02.html">Випуск 02</a>
+<a href="privacy.html">Конфіденційність</a>
+<a href="terms.html">Умови</a>
+<a href="contact.html">Контакти</a>
+</div>
+<a href="admin.html" class="admin-small">Admin</a>
+`
+},
+
+fr:{
+title:"Édition 01 — PETS & DOGUE",
+description:"Découvrez PETS & DOGUE Édition 01 — Miso, stars de couverture, mode, voyage, santé, communauté et animaux dans le besoin.",
+home:"← Accueil",
+label:"ÉDITION 01",
+
+cover:`
+<span>ÉTÉ 2026</span>
+<h1>Édition 01</h1>
+<p>La première édition luxury consacrée aux animaux avec Miso, les stars de couverture, le style d’été, les voyages, la santé et le début de PETS &amp; DOGUE.</p>
+`,
+
+intro:`
+<div class="kicker">LA PREMIÈRE ÉDITION</div>
+<h2>Un nouveau magazine luxury pour les amoureux des animaux</h2>
+<p>PETS &amp; DOGUE commence par une idée simple : les animaux méritent beauté, histoires, culture, visibilité et une place dans l’univers des magazines luxury.</p>
+`,
+
+toc:`
+<h2>Dans cette édition</h2>
+<div class="toc-grid">
+<div class="toc-card"><span>01</span><h3>Lettre de la rédaction</h3></div>
+<div class="toc-card"><span>02</span><h3>Miso en couverture</h3></div>
+<div class="toc-card"><span>03</span><h3>Icônes de l’été</h3></div>
+<div class="toc-card"><span>04</span><h3>Mode animale</h3></div>
+<div class="toc-card"><span>05</span><h3>Voyage &amp; santé</h3></div>
+<div class="toc-card"><span>06</span><h3>Communauté</h3></div>
+</div>
+`,
+
+editor:`
+<span class="badge">LETTRE DE LA RÉDACTION</span>
+<h2>Bienvenue chez PETS &amp; DOGUE</h2>
+<p>Ce magazine a été créé pour ceux qui voient les animaux non comme des accessoires, mais comme des personnalités avec une histoire, une beauté et une force émotionnelle.</p>
+<p>Notre première édition célèbre l’été, l’élégance, le sauvetage, la communauté et l’idée que chaque animal peut devenir inoubliable.</p>
+<div class="quote">« Un magazine luxury pour chaque animal extraordinaire. »</div>
+<p>Des stars de couverture aux communautés locales, PETS &amp; DOGUE est plus qu’un magazine : c’est un monde en pleine croissance.</p>
+`,
+
+coverStory:`
+<span class="badge">HISTOIRE DE COUVERTURE</span>
+<h2>Miso : première star de couverture</h2>
+<p>Miso est le visage de l’Édition 01 — douce, glamour, joueuse et inoubliable. Elle représente le début de PETS &amp; DOGUE : beauté, charme et personnalité.</p>
+<div class="buttons">
+<a href="members-gallery.html" class="btn gold">Voir les stars</a>
+<a href="become-cover-star.html" class="btn">Devenir star de couverture</a>
+</div>
+`,
+
+fashion:`
+<span class="badge">MODE ANIMALE</span>
+<h2>Style d’été</h2>
+<p>La mode pour animaux n’est plus seulement mignonne. Elle devient éditoriale, expressive et fait partie d’une culture lifestyle plus large.</p>
+<p>L’Édition 01 présente nœuds, colliers, sacs, matières douces et détails inspirés du luxe.</p>
+<div class="buttons">
+<a href="pet-fashion.html" class="btn gold">Explorer la mode</a>
+<a href="partners.html" class="btn">Nos partenaires</a>
+</div>
+`,
+
+travel:`
+<span class="badge">VOYAGE</span>
+<h2>Un été Pet-Friendly</h2>
+<p>Inspirée de Santorin, Capri et de la Côte d’Azur, cette édition imagine un futur où voyager avec son animal est élégant, simple et bien pensé.</p>
+<p>Les prochaines éditions exploreront hôtels, cafés, plages, villas et destinations où les animaux sont véritablement les bienvenus.</p>
+<div class="buttons">
+<a href="pet-travel.html" class="btn gold">Guide de voyage</a>
+<a href="pet-friendly-places.html" class="btn">Lieux Pet-Friendly</a>
+</div>
+`,
+
+help:`
+<span class="badge">ANIMAUX DANS LE BESOIN</span>
+<h2>La beauté avec un but</h2>
+<p>PETS & DOGUE ne parle pas seulement de style, mais aussi de visibilité pour les animaux qui ont besoin d’aide, d’adoption, de soins et de soutien.</p>
+<p>Notre futur comprend des histoires de sauvetage, des réseaux de bénévoles et des publications locales capables de faire une vraie différence.</p>
+<div class="buttons">
+<a href="pets-in-need.html" class="btn gold">Aider les animaux</a>
+<a href="volunteer-network.html" class="btn">Bénévolat</a>
+</div>
+`,
+
+shop:`
+<h2>Shopping de l’édition</h2>
+<p>Les prochaines éditions PETS & DOGUE proposeront des liens partenaires, des réductions membres et des recommandations luxury de produits et services.</p>
+<div class="shop-grid">
+<div class="shop-item">Colliers luxury</div>
+<div class="shop-item">Mode animale</div>
+<div class="shop-item">Accessoires voyage</div>
+<div class="shop-item">Offres toilettage</div>
+<div class="shop-item">Hôtels Pet-Friendly</div>
+<div class="shop-item">Réductions membres</div>
+</div>
+<br><br>
+<a href="partners.html" class="btn gold">Voir les offres partenaires</a>
+`,
+
+final:`
+<h2>Continuez l’édition</h2>
+<p>Découvrez photos, articles, concours, communauté locale, avantages du Club et futures stars de couverture PETS & DOGUE.</p>
+<div class="buttons" style="justify-content:center;">
+<a href="photos.html" class="btn gold">Photos</a>
+<a href="articles.html" class="btn">Articles</a>
+<a href="contests.html" class="btn">Concours</a>
+<a href="club.html" class="btn">Rejoindre le Club</a>
+</div>
+`,
+
+footer:`
+<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2>
+<p>Plateforme lifestyle digitale internationale pour les animaux</p>
+<div class="footer-links">
+<a href="index.html">Accueil</a>
+<a href="archive.html">Archives</a>
+<a href="issue-02.html">Édition 02</a>
+<a href="privacy.html">Confidentialité</a>
+<a href="terms.html">Conditions</a>
+<a href="contact.html">Contact</a>
+</div>
+<a href="admin.html" class="admin-small">Admin</a>
+`
+},
+
+de:{
+title:"Ausgabe 01 — PETS & DOGUE",
+description:"Entdecken Sie PETS & DOGUE Ausgabe 01 — Miso, Cover-Stars, Mode, Reisen, Gesundheit, Community und Tiere in Not.",
+home:"← Startseite",
+label:"AUSGABE 01",
+
+cover:`
+<span>SOMMER 2026</span>
+<h1>Ausgabe 01</h1>
+<p>Die erste luxury Tierausgabe mit Miso, Cover-Stars, Sommermode, Reisen, Gesundheit und dem Beginn von PETS &amp; DOGUE.</p>
+`,
+
+intro:`
+<div class="kicker">DIE ERSTE AUSGABE</div>
+<h2>Ein neues luxury Magazin für Tierliebhaber</h2>
+<p>PETS &amp; DOGUE beginnt mit einer Idee: Tiere verdienen Schönheit, Geschichten, Kultur, Sichtbarkeit und einen Platz in der Welt der luxury Magazine.</p>
+`,
+
+toc:`
+<h2>In dieser Ausgabe</h2>
+<div class="toc-grid">
+<div class="toc-card"><span>01</span><h3>Brief der Redaktion</h3></div>
+<div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div>
+<div class="toc-card"><span>03</span><h3>Ikonen des Sommers</h3></div>
+<div class="toc-card"><span>04</span><h3>Tiermode</h3></div>
+<div class="toc-card"><span>05</span><h3>Reisen &amp; Gesundheit</h3></div>
+<div class="toc-card"><span>06</span><h3>Community</h3></div>
+</div>
+`,
+
+editor:`
+<span class="badge">BRIEF DER REDAKTION</span>
+<h2>Willkommen bei PETS &amp; DOGUE</h2>
+<p>Dieses Magazin wurde für Menschen geschaffen, die Tiere nicht als Accessoires, sondern als Persönlichkeiten mit Geschichten, Schönheit und emotionaler Kraft sehen.</p>
+<p>Unsere erste Ausgabe feiert Sommer, Eleganz, Tierrettung, Community und die Idee, dass jedes Tier unvergesslich werden kann.</p>
+<div class="quote">„Ein luxury Magazin für jedes außergewöhnliche Tier.“</div>
+<p>Von Cover-Stars bis zu lokalen Communities ist PETS &amp; DOGUE mehr als ein Magazin — es ist eine wachsende Welt für Tierliebhaber.</p>
+`,
+
+coverStory:`
+<span class="badge">COVER STORY</span>
+<h2>Miso: der erste Cover-Star</h2>
+<p>Miso ist das Gesicht der Ausgabe 01 — weich, glamourös, verspielt und unvergesslich. Sie steht für den Beginn von PETS &amp; DOGUE: Schönheit, Charme und Persönlichkeit.</p>
+<div class="buttons">
+<a href="members-gallery.html" class="btn gold">Cover-Stars ansehen</a>
+<a href="become-cover-star.html" class="btn">Cover-Star werden</a>
+</div>
+`,
+
+fashion:`
+<span class="badge">TIERMODE</span>
+<h2>Sommerstil</h2>
+<p>Tiermode ist längst nicht mehr nur süß. Sie wird redaktionell, ausdrucksstark und Teil einer größeren Lifestyle-Kultur.</p>
+<p>Ausgabe 01 zeigt Schleifen, Halsbänder, Taschen, weiche Materialien und luxury-inspirierte Details.</p>
+<div class="buttons">
+<a href="pet-fashion.html" class="btn gold">Mode entdecken</a>
+<a href="partners.html" class="btn">Partner ansehen</a>
+</div>
+`,
+
+travel:`
+<span class="badge">REISEN</span>
+<h2>Pet-Friendly Sommer</h2>
+<p>Inspiriert von Santorini, Capri und der Côte d’Azur zeigt diese Ausgabe eine Zukunft, in der Reisen mit Tieren elegant und unkompliziert ist.</p>
+<p>Künftige PETS & DOGUE Ausgaben entdecken Hotels, Cafés, Strände, Villen und Reiseziele, an denen Tiere wirklich willkommen sind.</p>
+<div class="buttons">
+<a href="pet-travel.html" class="btn gold">Reiseführer</a>
+<a href="pet-friendly-places.html" class="btn">Pet-Friendly Orte</a>
+</div>
+`,
+
+help:`
+<span class="badge">TIERE IN NOT</span>
+<h2>Schönheit mit Sinn</h2>
+<p>PETS & DOGUE steht nicht nur für Stil, sondern auch für Sichtbarkeit von Tieren, die Hilfe, Adoption, Pflege und Unterstützung brauchen.</p>
+<p>Die Zukunft umfasst Rettungsgeschichten, Freiwilligen-Netzwerke und lokale Beiträge, die wirklich etwas verändern können.</p>
+<div class="buttons">
+<a href="pets-in-need.html" class="btn gold">Tieren helfen</a>
+<a href="volunteer-network.html" class="btn">Freiwilligenarbeit</a>
+</div>
+`,
+
+shop:`
+<h2>Shop the Issue</h2>
+<p>Künftige Ausgaben enthalten Partnerlinks, Mitgliederrabatte und luxury Empfehlungen für Produkte und Dienstleistungen.</p>
+<div class="shop-grid">
+<div class="shop-item">Luxury Halsbänder</div>
+<div class="shop-item">Tiermode</div>
+<div class="shop-item">Reisezubehör</div>
+<div class="shop-item">Grooming-Angebote</div>
+<div class="shop-item">Pet-Friendly Hotels</div>
+<div class="shop-item">Mitgliederrabatte</div>
+</div>
+<br><br>
+<a href="partners.html" class="btn gold">Partnerangebote ansehen</a>
+`,
+
+final:`
+<h2>Ausgabe weiterlesen</h2>
+<p>Entdecken Sie Fotos, Artikel, Wettbewerbe, lokale Community-Beiträge, Club-Vorteile und kommende PETS & DOGUE Cover-Stars.</p>
+<div class="buttons" style="justify-content:center;">
+<a href="photos.html" class="btn gold">Fotos</a>
+<a href="articles.html" class="btn">Artikel</a>
+<a href="contests.html" class="btn">Wettbewerbe</a>
+<a href="club.html" class="btn">Club beitreten</a>
+</div>
+`,
+
+footer:`
+<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2>
+<p>Internationale digitale Lifestyle-Plattform für Tiere</p>
+<div class="footer-links">
+<a href="index.html">Startseite</a>
+<a href="archive.html">Archiv</a>
+<a href="issue-02.html">Ausgabe 02</a>
+<a href="privacy.html">Datenschutz</a>
+<a href="terms.html">Bedingungen</a>
+<a href="contact.html">Kontakt</a>
+</div>
+<a href="admin.html" class="admin-small">Admin</a>
+`
+},es:{
+title:"Edición 01 — PETS & DOGUE",
+description:"Descubre PETS & DOGUE Edición 01 — Miso, estrellas de portada, moda, viajes, salud, comunidad y animales que necesitan ayuda.",
+home:"← Inicio",
+label:"EDICIÓN 01",
+cover:`<span>VERANO 2026</span><h1>Edición 01</h1><p>La primera edición luxury dedicada a los animales con Miso, estrellas de portada, estilo de verano, viajes, salud y el comienzo de PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">LA EDICIÓN DE DEBUT</div><h2>Una nueva revista luxury para quienes aman a los animales</h2><p>PETS &amp; DOGUE comienza con una idea: los animales merecen belleza, historias, cultura, visibilidad y un lugar propio en el mundo editorial luxury.</p>`,
+toc:`<h2>Dentro de esta edición</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Carta editorial</h3></div><div class="toc-card"><span>02</span><h3>Miso en portada</h3></div><div class="toc-card"><span>03</span><h3>Iconos del verano</h3></div><div class="toc-card"><span>04</span><h3>Moda para mascotas</h3></div><div class="toc-card"><span>05</span><h3>Viajes y salud</h3></div><div class="toc-card"><span>06</span><h3>Comunidad</h3></div></div>`,
+editor:`<span class="badge">CARTA EDITORIAL</span><h2>Bienvenido a PETS &amp; DOGUE</h2><p>Esta revista fue creada para personas que ven a los animales como personalidades con historias, belleza y fuerza emocional.</p><p>Nuestra primera edición celebra el verano, la elegancia, el rescate, la comunidad y la idea de que cada animal puede ser inolvidable.</p><div class="quote">«Una revista luxury para cada mascota extraordinaria».</div><p>PETS &amp; DOGUE es más que una revista: es un mundo en crecimiento para amantes de los animales.</p>`,
+coverStory:`<span class="badge">HISTORIA DE PORTADA</span><h2>Miso: la primera estrella de portada</h2><p>Miso es el rostro de la Edición 01: suave, glamourosa, juguetona e inolvidable. Representa belleza, encanto y personalidad.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Ver estrellas</a><a href="become-cover-star.html" class="btn">Ser estrella de portada</a></div>`,
+fashion:`<span class="badge">MODA PARA MASCOTAS</span><h2>Estilo de verano</h2><p>La moda para mascotas ya no es solo bonita: es editorial, expresiva y parte de una cultura lifestyle más amplia.</p><p>La Edición 01 presenta lazos, collares, transportines, texturas suaves y detalles inspirados en el lujo.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Explorar moda</a><a href="partners.html" class="btn">Socios</a></div>`,
+travel:`<span class="badge">VIAJES</span><h2>Verano Pet-Friendly</h2><p>Inspirada en Santorini, Capri y la Côte d’Azur, esta edición imagina un futuro donde viajar con mascotas es elegante y sencillo.</p><p>Próximas ediciones explorarán hoteles, cafés, playas, villas y destinos donde las mascotas son realmente bienvenidas.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Guía de viaje</a><a href="pet-friendly-places.html" class="btn">Lugares Pet-Friendly</a></div>`,
+help:`<span class="badge">ANIMALES QUE NECESITAN AYUDA</span><h2>Belleza con propósito</h2><p>PETS & DOGUE no trata solo de estilo, sino también de dar visibilidad a animales que necesitan ayuda, adopción, cuidados y apoyo.</p><p>El futuro incluye historias de rescate, redes de voluntarios y publicaciones locales capaces de marcar una diferencia real.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Ayudar animales</a><a href="volunteer-network.html" class="btn">Voluntariado</a></div>`,
+shop:`<h2>Compra esta edición</h2><p>Las próximas ediciones incluirán ofertas de socios, descuentos para miembros y recomendaciones luxury.</p><div class="shop-grid"><div class="shop-item">Collares luxury</div><div class="shop-item">Moda para mascotas</div><div class="shop-item">Accesorios de viaje</div><div class="shop-item">Ofertas de grooming</div><div class="shop-item">Hoteles Pet-Friendly</div><div class="shop-item">Descuentos miembros</div></div><br><br><a href="partners.html" class="btn gold">Ver ofertas</a>`,
+final:`<h2>Continúa la edición</h2><p>Descubre fotos, artículos, concursos, comunidad local, ventajas del Club y futuras estrellas de portada.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotos</a><a href="articles.html" class="btn">Artículos</a><a href="contests.html" class="btn">Concursos</a><a href="club.html" class="btn">Unirse al Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Plataforma lifestyle digital internacional para animales</p><div class="footer-links"><a href="index.html">Inicio</a><a href="archive.html">Archivo</a><a href="issue-02.html">Edición 02</a><a href="privacy.html">Privacidad</a><a href="terms.html">Términos</a><a href="contact.html">Contacto</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+it:{
+title:"Edizione 01 — PETS & DOGUE",
+description:"Scopri PETS & DOGUE Edizione 01 — Miso, cover star, moda, viaggi, salute, community e animali che hanno bisogno di aiuto.",
+home:"← Home",
+label:"EDIZIONE 01",
+cover:`<span>ESTATE 2026</span><h1>Edizione 01</h1><p>La prima edizione luxury dedicata agli animali con Miso, cover star, stile estivo, viaggi, salute e l’inizio di PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">L’EDIZIONE DI DEBUTTO</div><h2>Un nuovo magazine luxury per chi ama gli animali</h2><p>PETS &amp; DOGUE nasce da un’idea: gli animali meritano bellezza, storie, cultura, visibilità e un posto nel mondo editoriale luxury.</p>`,
+toc:`<h2>In questa edizione</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Lettera dell’editore</h3></div><div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div><div class="toc-card"><span>03</span><h3>Icone dell’estate</h3></div><div class="toc-card"><span>04</span><h3>Pet Fashion</h3></div><div class="toc-card"><span>05</span><h3>Viaggi e salute</h3></div><div class="toc-card"><span>06</span><h3>Community</h3></div></div>`,
+editor:`<span class="badge">LETTERA DELL’EDITORE</span><h2>Benvenuti in PETS &amp; DOGUE</h2><p>Questo magazine è stato creato per chi vede gli animali come personalità con storie, bellezza e forza emotiva.</p><p>La nostra prima edizione celebra estate, eleganza, salvataggio, community e l’idea che ogni animale possa diventare indimenticabile.</p><div class="quote">«Un magazine luxury per ogni animale straordinario».</div><p>PETS &amp; DOGUE è più di un magazine: è un mondo in crescita per chi ama gli animali.</p>`,
+coverStory:`<span class="badge">COVER STORY</span><h2>Miso: la prima cover star</h2><p>Miso è il volto dell’Edizione 01: dolce, glamour, giocosa e indimenticabile. Rappresenta bellezza, fascino e personalità.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Cover Stars</a><a href="become-cover-star.html" class="btn">Diventa cover star</a></div>`,
+fashion:`<span class="badge">PET FASHION</span><h2>Stile estivo</h2><p>La moda per animali non è più solo carina: è editoriale, espressiva e parte della cultura lifestyle.</p><p>L’Edizione 01 presenta fiocchi, collari, trasportini, texture morbide e dettagli luxury.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Esplora Fashion</a><a href="partners.html" class="btn">Partner</a></div>`,
+travel:`<span class="badge">VIAGGI</span><h2>Estate Pet-Friendly</h2><p>Ispirata a Santorini, Capri e Côte d’Azur, questa edizione immagina un futuro in cui viaggiare con animali è elegante e semplice.</p><p>Le prossime edizioni esploreranno hotel, caffè, spiagge, ville e destinazioni dove gli animali sono davvero benvenuti.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Guida di viaggio</a><a href="pet-friendly-places.html" class="btn">Luoghi Pet-Friendly</a></div>`,
+help:`<span class="badge">ANIMALI IN DIFFICOLTÀ</span><h2>Bellezza con uno scopo</h2><p>PETS & DOGUE non parla solo di stile, ma anche di visibilità per animali che hanno bisogno di aiuto, adozione e cure.</p><p>Il futuro include storie di salvataggio, reti di volontari e post locali che possono fare una vera differenza.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Aiuta gli animali</a><a href="volunteer-network.html" class="btn">Volontariato</a></div>`,
+shop:`<h2>Shop dell’edizione</h2><p>Le prossime edizioni includeranno offerte partner, sconti membri e raccomandazioni luxury.</p><div class="shop-grid"><div class="shop-item">Collari luxury</div><div class="shop-item">Pet Fashion</div><div class="shop-item">Accessori da viaggio</div><div class="shop-item">Offerte grooming</div><div class="shop-item">Hotel Pet-Friendly</div><div class="shop-item">Sconti membri</div></div><br><br><a href="partners.html" class="btn gold">Offerte partner</a>`,
+final:`<h2>Continua l’edizione</h2><p>Scopri foto, articoli, concorsi, community locali, vantaggi Club e future cover star.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Foto</a><a href="articles.html" class="btn">Articoli</a><a href="contests.html" class="btn">Concorsi</a><a href="club.html" class="btn">Entra nel Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Piattaforma lifestyle digitale internazionale per animali</p><div class="footer-links"><a href="index.html">Home</a><a href="archive.html">Archivio</a><a href="issue-02.html">Edizione 02</a><a href="privacy.html">Privacy</a><a href="terms.html">Termini</a><a href="contact.html">Contatti</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+pt:{
+title:"Edição 01 — PETS & DOGUE",
+description:"Descubra PETS & DOGUE Edição 01 — Miso, estrelas de capa, moda, viagens, saúde, comunidade e animais que precisam de ajuda.",
+home:"← Início",
+label:"EDIÇÃO 01",
+cover:`<span>VERÃO 2026</span><h1>Edição 01</h1><p>A primeira edição luxury dedicada aos animais com Miso, estrelas de capa, estilo de verão, viagens, saúde e o início do PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">A EDIÇÃO DE ESTREIA</div><h2>Uma nova revista luxury para quem ama animais</h2><p>PETS &amp; DOGUE começa com uma ideia: os animais merecem beleza, histórias, cultura, visibilidade e lugar no mundo editorial luxury.</p>`,
+toc:`<h2>Nesta edição</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Carta do editor</h3></div><div class="toc-card"><span>02</span><h3>Miso na capa</h3></div><div class="toc-card"><span>03</span><h3>Ícones do verão</h3></div><div class="toc-card"><span>04</span><h3>Moda animal</h3></div><div class="toc-card"><span>05</span><h3>Viagens e saúde</h3></div><div class="toc-card"><span>06</span><h3>Comunidade</h3></div></div>`,
+editor:`<span class="badge">CARTA DO EDITOR</span><h2>Bem-vindo ao PETS &amp; DOGUE</h2><p>Esta revista foi criada para pessoas que veem os animais como personalidades com histórias, beleza e força emocional.</p><p>A primeira edição celebra verão, elegância, resgate, comunidade e a ideia de que cada animal pode ser inesquecível.</p><div class="quote">«Uma revista luxury para cada animal extraordinário».</div><p>PETS &amp; DOGUE é mais do que uma revista: é um mundo em crescimento.</p>`,
+coverStory:`<span class="badge">HISTÓRIA DE CAPA</span><h2>Miso: a primeira estrela de capa</h2><p>Miso é o rosto da Edição 01 — suave, glamorosa, divertida e inesquecível.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Ver estrelas</a><a href="become-cover-star.html" class="btn">Ser estrela de capa</a></div>`,
+fashion:`<span class="badge">MODA ANIMAL</span><h2>Estilo de verão</h2><p>A moda animal já não é apenas bonita: tornou-se editorial, expressiva e parte da cultura lifestyle.</p><p>A Edição 01 apresenta laços, coleiras, transportadores, texturas suaves e detalhes luxury.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Explorar moda</a><a href="partners.html" class="btn">Parceiros</a></div>`,
+travel:`<span class="badge">VIAGENS</span><h2>Verão Pet-Friendly</h2><p>Inspirada em Santorini, Capri e Côte d’Azur, esta edição imagina viagens com animais elegantes e simples.</p><p>As próximas edições explorarão hotéis, cafés, praias, villas e destinos onde os animais são realmente bem-vindos.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Guia de viagem</a><a href="pet-friendly-places.html" class="btn">Locais Pet-Friendly</a></div>`,
+help:`<span class="badge">ANIMAIS QUE PRECISAM DE AJUDA</span><h2>Beleza com propósito</h2><p>PETS & DOGUE não é apenas estilo: também dá visibilidade a animais que precisam de ajuda, adoção e cuidados.</p><p>O futuro inclui histórias de resgate, redes de voluntários e publicações locais que podem fazer diferença.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Ajudar animais</a><a href="volunteer-network.html" class="btn">Voluntariado</a></div>`,
+shop:`<h2>Comprar a edição</h2><p>As próximas edições terão ofertas de parceiros, descontos e recomendações luxury.</p><div class="shop-grid"><div class="shop-item">Coleiras luxury</div><div class="shop-item">Moda animal</div><div class="shop-item">Acessórios de viagem</div><div class="shop-item">Ofertas grooming</div><div class="shop-item">Hotéis Pet-Friendly</div><div class="shop-item">Descontos membros</div></div><br><br><a href="partners.html" class="btn gold">Ver ofertas</a>`,
+final:`<h2>Continue a edição</h2><p>Descubra fotos, artigos, concursos, comunidade, benefícios do Club e futuras estrelas de capa.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotos</a><a href="articles.html" class="btn">Artigos</a><a href="contests.html" class="btn">Concursos</a><a href="club.html" class="btn">Entrar no Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Plataforma lifestyle digital internacional para animais</p><div class="footer-links"><a href="index.html">Início</a><a href="archive.html">Arquivo</a><a href="issue-02.html">Edição 02</a><a href="privacy.html">Privacidade</a><a href="terms.html">Termos</a><a href="contact.html">Contacto</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+nl:{
+title:"Editie 01 — PETS & DOGUE",
+description:"Ontdek PETS & DOGUE Editie 01 — Miso, coversterren, mode, reizen, gezondheid, community en dieren in nood.",
+home:"← Home",
+label:"EDITIE 01",
+cover:`<span>ZOMER 2026</span><h1>Editie 01</h1><p>De eerste luxury diereneditie met Miso, coversterren, zomerstijl, reizen, gezondheid en het begin van PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">DE EERSTE EDITIE</div><h2>Een nieuw luxury magazine voor dierenliefhebbers</h2><p>PETS &amp; DOGUE begint met één idee: dieren verdienen schoonheid, verhalen, cultuur en zichtbaarheid.</p>`,
+toc:`<h2>In deze editie</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Brief van de editor</h3></div><div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div><div class="toc-card"><span>03</span><h3>Zomericonen</h3></div><div class="toc-card"><span>04</span><h3>Dierenmode</h3></div><div class="toc-card"><span>05</span><h3>Reizen &amp; gezondheid</h3></div><div class="toc-card"><span>06</span><h3>Community</h3></div></div>`,
+editor:`<span class="badge">BRIEF VAN DE EDITOR</span><h2>Welkom bij PETS &amp; DOGUE</h2><p>Dit magazine is gemaakt voor mensen die dieren zien als persoonlijkheden met verhalen, schoonheid en emotionele kracht.</p><p>Onze eerste editie viert zomer, elegantie, redding, community en de gedachte dat ieder dier onvergetelijk kan worden.</p><div class="quote">“Een luxury magazine voor ieder bijzonder dier.”</div><p>PETS &amp; DOGUE is meer dan een magazine: het is een groeiende wereld voor dierenliefhebbers.</p>`,
+coverStory:`<span class="badge">COVER STORY</span><h2>Miso: de eerste coverster</h2><p>Miso is het gezicht van Editie 01 — zacht, glamourous, speels en onvergetelijk.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Coversterren</a><a href="become-cover-star.html" class="btn">Word coverster</a></div>`,
+fashion:`<span class="badge">DIERENMODE</span><h2>Zomerstijl</h2><p>Dierenmode is niet langer alleen schattig; het wordt editorial, expressief en onderdeel van lifestyle-cultuur.</p><p>Editie 01 introduceert strikken, halsbanden, draagtassen en luxury details.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Ontdek mode</a><a href="partners.html" class="btn">Partners</a></div>`,
+travel:`<span class="badge">REIZEN</span><h2>Pet-Friendly zomer</h2><p>Geïnspireerd door Santorini, Capri en de Côte d’Azur stelt deze editie een elegante toekomst voor reizen met huisdieren voor.</p><p>Toekomstige edities verkennen hotels, cafés, stranden en bestemmingen waar huisdieren welkom zijn.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Reisgids</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly plekken</a></div>`,
+help:`<span class="badge">DIEREN IN NOOD</span><h2>Schoonheid met betekenis</h2><p>PETS & DOGUE gaat niet alleen over stijl, maar ook over zichtbaarheid voor dieren die hulp, adoptie en zorg nodig hebben.</p><p>De toekomst bevat reddingsverhalen, vrijwilligersnetwerken en lokale berichten.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Help dieren</a><a href="volunteer-network.html" class="btn">Vrijwilligerswerk</a></div>`,
+shop:`<h2>Shop de editie</h2><p>Toekomstige edities bevatten partneraanbiedingen, ledenkortingen en luxury aanbevelingen.</p><div class="shop-grid"><div class="shop-item">Luxury halsbanden</div><div class="shop-item">Dierenmode</div><div class="shop-item">Reisaccessoires</div><div class="shop-item">Grooming-aanbiedingen</div><div class="shop-item">Pet-Friendly hotels</div><div class="shop-item">Ledenkortingen</div></div><br><br><a href="partners.html" class="btn gold">Partneraanbiedingen</a>`,
+final:`<h2>Lees verder</h2><p>Ontdek foto’s, artikelen, wedstrijden, community, Club-voordelen en toekomstige coversterren.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Foto’s</a><a href="articles.html" class="btn">Artikelen</a><a href="contests.html" class="btn">Wedstrijden</a><a href="club.html" class="btn">Word lid</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Internationaal digitaal lifestyleplatform voor dieren</p><div class="footer-links"><a href="index.html">Home</a><a href="archive.html">Archief</a><a href="issue-02.html">Editie 02</a><a href="privacy.html">Privacy</a><a href="terms.html">Voorwaarden</a><a href="contact.html">Contact</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+pl:{
+title:"Wydanie 01 — PETS & DOGUE",
+description:"Poznaj PETS & DOGUE Wydanie 01 — Miso, gwiazdy okładki, moda, podróże, zdrowie, społeczność i pomoc zwierzętom.",
+home:"← Strona główna",
+label:"WYDANIE 01",
+cover:`<span>LATO 2026</span><h1>Wydanie 01</h1><p>Debiutanckie luxury wydanie o zwierzętach z Miso, gwiazdami okładki, letnim stylem, podróżami i początkiem PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">DEBIUTANCKIE WYDANIE</div><h2>Nowy luxury magazyn dla miłośników zwierząt</h2><p>PETS &amp; DOGUE zaczyna się od jednej idei: zwierzęta zasługują na piękno, historie, kulturę i widoczność.</p>`,
+toc:`<h2>W tym wydaniu</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>List redakcji</h3></div><div class="toc-card"><span>02</span><h3>Historia Miso</h3></div><div class="toc-card"><span>03</span><h3>Ikony lata</h3></div><div class="toc-card"><span>04</span><h3>Moda dla zwierząt</h3></div><div class="toc-card"><span>05</span><h3>Podróże i zdrowie</h3></div><div class="toc-card"><span>06</span><h3>Społeczność</h3></div></div>`,
+editor:`<span class="badge">LIST REDAKCJI</span><h2>Witamy w PETS &amp; DOGUE</h2><p>Magazyn powstał dla ludzi, którzy widzą w zwierzętach osobowości z historiami, pięknem i emocjonalną siłą.</p><p>Pierwsze wydanie celebruje lato, elegancję, ratowanie zwierząt i społeczność.</p><div class="quote">„Luxury magazyn dla każdego niezwykłego zwierzaka.”</div><p>PETS &amp; DOGUE to więcej niż magazyn — to rosnący świat miłośników zwierząt.</p>`,
+coverStory:`<span class="badge">HISTORIA Z OKŁADKI</span><h2>Miso: pierwsza gwiazda okładki</h2><p>Miso jest twarzą Wydania 01 — delikatna, glamour, zabawna i niezapomniana.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Gwiazdy okładki</a><a href="become-cover-star.html" class="btn">Zostań gwiazdą</a></div>`,
+fashion:`<span class="badge">MODA DLA ZWIERZĄT</span><h2>Letni styl</h2><p>Moda dla zwierząt staje się editorial, ekspresyjna i częścią kultury lifestyle.</p><p>Wydanie 01 pokazuje kokardy, obroże, torby i luxury detale.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Odkryj modę</a><a href="partners.html" class="btn">Partnerzy</a></div>`,
+travel:`<span class="badge">PODRÓŻE</span><h2>Pet-Friendly lato</h2><p>Inspiracją są Santorini, Capri i Côte d’Azur — przyszłość podróży ze zwierzętami może być elegancka i łatwa.</p><p>Kolejne wydania pokażą hotele, kawiarnie, plaże i miejsca, gdzie zwierzęta są mile widziane.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Przewodnik</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly miejsca</a></div>`,
+help:`<span class="badge">ZWIERZĘTA W POTRZEBIE</span><h2>Piękno z misją</h2><p>PETS & DOGUE to także widoczność dla zwierząt potrzebujących pomocy, adopcji i opieki.</p><p>Przyszłość obejmuje historie ratunkowe, wolontariat i lokalne posty.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Pomóż zwierzętom</a><a href="volunteer-network.html" class="btn">Wolontariat</a></div>`,
+shop:`<h2>Zakupy z wydania</h2><p>Kolejne wydania będą zawierały oferty partnerów, zniżki i luxury rekomendacje.</p><div class="shop-grid"><div class="shop-item">Luxury obroże</div><div class="shop-item">Moda dla zwierząt</div><div class="shop-item">Akcesoria podróżne</div><div class="shop-item">Oferty grooming</div><div class="shop-item">Pet-Friendly hotele</div><div class="shop-item">Zniżki członkowskie</div></div><br><br><a href="partners.html" class="btn gold">Oferty partnerów</a>`,
+final:`<h2>Kontynuuj wydanie</h2><p>Odkryj zdjęcia, artykuły, konkursy, społeczność, korzyści Club i przyszłe gwiazdy okładki.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Zdjęcia</a><a href="articles.html" class="btn">Artykuły</a><a href="contests.html" class="btn">Konkursy</a><a href="club.html" class="btn">Dołącz do Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Międzynarodowa cyfrowa platforma lifestyle dla zwierząt</p><div class="footer-links"><a href="index.html">Strona główna</a><a href="archive.html">Archiwum</a><a href="issue-02.html">Wydanie 02</a><a href="privacy.html">Prywatność</a><a href="terms.html">Warunki</a><a href="contact.html">Kontakt</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+cs:{
+title:"Vydání 01 — PETS & DOGUE",
+description:"Objevte PETS & DOGUE Vydání 01 — Miso, hvězdy obálky, módu, cestování, zdraví, komunitu a pomoc zvířatům.",
+home:"← Domů",
+label:"VYDÁNÍ 01",
+cover:`<span>LÉTO 2026</span><h1>Vydání 01</h1><p>První luxury vydání o zvířatech s Miso, hvězdami obálky, letním stylem, cestováním a začátkem PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">PRVNÍ VYDÁNÍ</div><h2>Nový luxury magazín pro milovníky zvířat</h2><p>PETS &amp; DOGUE začíná jednou myšlenkou: zvířata si zaslouží krásu, příběhy, kulturu a viditelnost.</p>`,
+toc:`<h2>Uvnitř vydání</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Dopis redakce</h3></div><div class="toc-card"><span>02</span><h3>Příběh Miso</h3></div><div class="toc-card"><span>03</span><h3>Ikony léta</h3></div><div class="toc-card"><span>04</span><h3>Móda pro mazlíčky</h3></div><div class="toc-card"><span>05</span><h3>Cestování a zdraví</h3></div><div class="toc-card"><span>06</span><h3>Komunita</h3></div></div>`,
+editor:`<span class="badge">DOPIS REDAKCE</span><h2>Vítejte v PETS &amp; DOGUE</h2><p>Tento magazín je pro lidi, kteří vidí ve zvířatech osobnosti s příběhy, krásou a emocemi.</p><p>První vydání oslavuje léto, eleganci, záchranu zvířat a komunitu.</p><div class="quote">„Luxury magazín pro každého výjimečného mazlíčka.“</div><p>PETS &amp; DOGUE je víc než magazín — je to rostoucí svět pro milovníky zvířat.</p>`,
+coverStory:`<span class="badge">PŘÍBĚH Z OBÁLKY</span><h2>Miso: první hvězda obálky</h2><p>Miso je tváří Vydání 01 — jemná, glamour, hravá a nezapomenutelná.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Hvězdy obálky</a><a href="become-cover-star.html" class="btn">Staňte se hvězdou</a></div>`,
+fashion:`<span class="badge">MÓDA PRO MAZLÍČKY</span><h2>Letní styl</h2><p>Móda pro zvířata je dnes editoriální, výrazná a součástí lifestyle kultury.</p><p>Vydání 01 představuje mašle, obojky, tašky a luxury detaily.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Prozkoumat módu</a><a href="partners.html" class="btn">Partneři</a></div>`,
+travel:`<span class="badge">CESTOVÁNÍ</span><h2>Pet-Friendly léto</h2><p>Inspirací jsou Santorini, Capri a Côte d’Azur. Cestování se zvířaty může být elegantní a jednoduché.</p><p>Další vydání prozkoumají hotely, kavárny, pláže a místa, kde jsou mazlíčci vítáni.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Průvodce</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly místa</a></div>`,
+help:`<span class="badge">ZVÍŘATA V NOUZI</span><h2>Krása se smyslem</h2><p>PETS & DOGUE je také o zvířatech, která potřebují pomoc, adopci a péči.</p><p>Budoucnost zahrnuje příběhy záchrany, dobrovolnictví a místní příspěvky.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Pomoci zvířatům</a><a href="volunteer-network.html" class="btn">Dobrovolnictví</a></div>`,
+shop:`<h2>Nakupujte z vydání</h2><p>Další vydání nabídnou partnerské nabídky, členské slevy a luxury doporučení.</p><div class="shop-grid"><div class="shop-item">Luxury obojky</div><div class="shop-item">Móda pro mazlíčky</div><div class="shop-item">Cestovní doplňky</div><div class="shop-item">Grooming nabídky</div><div class="shop-item">Pet-Friendly hotely</div><div class="shop-item">Členské slevy</div></div><br><br><a href="partners.html" class="btn gold">Partnerské nabídky</a>`,
+final:`<h2>Pokračovat ve vydání</h2><p>Objevte fotografie, články, soutěže, komunitu, výhody Club a budoucí hvězdy obálky.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotografie</a><a href="articles.html" class="btn">Články</a><a href="contests.html" class="btn">Soutěže</a><a href="club.html" class="btn">Vstoupit do Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Mezinárodní digitální lifestyle platforma pro zvířata</p><div class="footer-links"><a href="index.html">Domů</a><a href="archive.html">Archiv</a><a href="issue-02.html">Vydání 02</a><a href="privacy.html">Soukromí</a><a href="terms.html">Podmínky</a><a href="contact.html">Kontakt</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+sk:{
+title:"Vydanie 01 — PETS & DOGUE",
+description:"Objavte PETS & DOGUE Vydanie 01 — Miso, hviezdy obálky, módu, cestovanie, zdravie, komunitu a pomoc zvieratám.",
+home:"← Domov",
+label:"VYDANIE 01",
+cover:`<span>LETO 2026</span><h1>Vydanie 01</h1><p>Prvé luxury vydanie o zvieratách s Miso, hviezdami obálky, letným štýlom a začiatkom PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">PRVÉ VYDANIE</div><h2>Nový luxury magazín pre milovníkov zvierat</h2><p>PETS &amp; DOGUE začína myšlienkou, že zvieratá si zaslúžia krásu, príbehy, kultúru a viditeľnosť.</p>`,
+toc:`<h2>V tomto vydaní</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>List redakcie</h3></div><div class="toc-card"><span>02</span><h3>Príbeh Miso</h3></div><div class="toc-card"><span>03</span><h3>Ikony leta</h3></div><div class="toc-card"><span>04</span><h3>Móda pre zvieratá</h3></div><div class="toc-card"><span>05</span><h3>Cestovanie a zdravie</h3></div><div class="toc-card"><span>06</span><h3>Komunita</h3></div></div>`,
+editor:`<span class="badge">LIST REDAKCIE</span><h2>Vitajte v PETS &amp; DOGUE</h2><p>Magazín je pre ľudí, ktorí vidia zvieratá ako osobnosti s príbehmi, krásou a emóciami.</p><p>Prvé vydanie oslavuje leto, eleganciu, záchranu a komunitu.</p><div class="quote">„Luxury magazín pre každého výnimočného miláčika.“</div><p>PETS &amp; DOGUE je viac než magazín — je to rastúci svet milovníkov zvierat.</p>`,
+coverStory:`<span class="badge">PRÍBEH Z OBÁLKY</span><h2>Miso: prvá hviezda obálky</h2><p>Miso je tvárou Vydania 01 — jemná, glamour, hravá a nezabudnuteľná.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Hviezdy obálky</a><a href="become-cover-star.html" class="btn">Stať sa hviezdou</a></div>`,
+fashion:`<span class="badge">MÓDA PRE ZVIERATÁ</span><h2>Letný štýl</h2><p>Móda pre zvieratá je editoriálna, výrazná a súčasť lifestyle kultúry.</p><p>Vydanie 01 predstavuje mašle, obojky, tašky a luxury detaily.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Objaviť módu</a><a href="partners.html" class="btn">Partneri</a></div>`,
+travel:`<span class="badge">CESTOVANIE</span><h2>Pet-Friendly leto</h2><p>Inšpiráciou sú Santorini, Capri a Côte d’Azur. Cestovanie so zvieratami môže byť elegantné a jednoduché.</p><p>Ďalšie vydania preskúmajú hotely, kaviarne, pláže a destinácie, kde sú zvieratá vítané.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Sprievodca</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly miesta</a></div>`,
+help:`<span class="badge">ZVIERATÁ V NÚDZI</span><h2>Krása so zmyslom</h2><p>PETS & DOGUE je aj o viditeľnosti zvierat, ktoré potrebujú pomoc, adopciu a starostlivosť.</p><p>Budúcnosť zahŕňa príbehy záchrany, dobrovoľnícke siete a miestne príspevky.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Pomôcť zvieratám</a><a href="volunteer-network.html" class="btn">Dobrovoľníctvo</a></div>`,
+shop:`<h2>Nákupy z vydania</h2><p>Ďalšie vydania ponúknu partnerské ponuky, členské zľavy a luxury odporúčania.</p><div class="shop-grid"><div class="shop-item">Luxury obojky</div><div class="shop-item">Móda pre zvieratá</div><div class="shop-item">Cestovné doplnky</div><div class="shop-item">Grooming ponuky</div><div class="shop-item">Pet-Friendly hotely</div><div class="shop-item">Členské zľavy</div></div><br><br><a href="partners.html" class="btn gold">Partnerské ponuky</a>`,
+final:`<h2>Pokračovať vo vydaní</h2><p>Objavte fotografie, články, súťaže, komunitu, výhody Club a budúce hviezdy obálky.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotografie</a><a href="articles.html" class="btn">Články</a><a href="contests.html" class="btn">Súťaže</a><a href="club.html" class="btn">Vstúpiť do Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Medzinárodná digitálna lifestyle platforma pre zvieratá</p><div class="footer-links"><a href="index.html">Domov</a><a href="archive.html">Archív</a><a href="issue-02.html">Vydanie 02</a><a href="privacy.html">Súkromie</a><a href="terms.html">Podmienky</a><a href="contact.html">Kontakt</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+hu:{
+title:"01. kiadás — PETS & DOGUE",
+description:"Fedezze fel a PETS & DOGUE 01. kiadását — Miso, címlapsztárok, divat, utazás, egészség, közösség és segítségre szoruló állatok.",
+home:"← Kezdőlap",
+label:"01. KIADÁS",
+cover:`<span>2026 NYÁR</span><h1>01. kiadás</h1><p>Az első luxury állatmagazin Miso-val, címlapsztárokkal, nyári divattal, utazással és a PETS &amp; DOGUE kezdetével.</p>`,
+intro:`<div class="kicker">AZ ELSŐ KIADÁS</div><h2>Új luxury magazin állatbarátoknak</h2><p>A PETS &amp; DOGUE egy gondolattal indul: az állatok megérdemlik a szépséget, a történeteket, a kultúrát és a láthatóságot.</p>`,
+toc:`<h2>Ebben a kiadásban</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Szerkesztői levél</h3></div><div class="toc-card"><span>02</span><h3>Miso címlapsztori</h3></div><div class="toc-card"><span>03</span><h3>A nyár ikonjai</h3></div><div class="toc-card"><span>04</span><h3>Állatdivat</h3></div><div class="toc-card"><span>05</span><h3>Utazás és egészség</h3></div><div class="toc-card"><span>06</span><h3>Közösség</h3></div></div>`,
+editor:`<span class="badge">SZERKESZTŐI LEVÉL</span><h2>Üdvözöljük a PETS &amp; DOGUE világában</h2><p>Ez a magazin azoknak készült, akik az állatokban személyiséget, történetet és érzelmi erőt látnak.</p><p>Első kiadásunk a nyarat, az eleganciát, a mentést és a közösséget ünnepli.</p><div class="quote">„Luxury magazin minden különleges állatnak.”</div><p>A PETS &amp; DOGUE több mint magazin — egy növekvő világ az állatbarátok számára.</p>`,
+coverStory:`<span class="badge">CÍMLAPSZTORI</span><h2>Miso: az első címlapsztár</h2><p>Miso a 01. kiadás arca — puha, glamour, játékos és felejthetetlen.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Címlapsztárok</a><a href="become-cover-star.html" class="btn">Legyen címlapsztár</a></div>`,
+fashion:`<span class="badge">ÁLLATDIVAT</span><h2>Nyári stílus</h2><p>Az állatdivat ma már editorial, kifejező és a lifestyle kultúra része.</p><p>A 01. kiadás masnikat, nyakörveket, hordozókat és luxury részleteket mutat be.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Divat</a><a href="partners.html" class="btn">Partnerek</a></div>`,
+travel:`<span class="badge">UTAZÁS</span><h2>Pet-Friendly nyár</h2><p>Santorini, Capri és Côte d’Azur inspirációjával az állatokkal való utazás elegáns és egyszerű lehet.</p><p>A következő kiadások hoteleket, kávézókat, strandokat és állatbarát célpontokat mutatnak be.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Útikalauz</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly helyek</a></div>`,
+help:`<span class="badge">SEGÍTSÉGRE SZORULÓ ÁLLATOK</span><h2>Szépség céllal</h2><p>A PETS & DOGUE azokról az állatokról is szól, akik segítségre, örökbefogadásra és gondoskodásra várnak.</p><p>A jövő mentési történeteket és önkéntes hálózatokat is tartalmaz.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Segítsen</a><a href="volunteer-network.html" class="btn">Önkéntesség</a></div>`,
+shop:`<h2>Vásárlás a kiadásból</h2><p>A következő kiadások partnerajánlatokat, kedvezményeket és luxury ajánlásokat kínálnak.</p><div class="shop-grid"><div class="shop-item">Luxury nyakörvek</div><div class="shop-item">Állatdivat</div><div class="shop-item">Utazási kiegészítők</div><div class="shop-item">Grooming ajánlatok</div><div class="shop-item">Pet-Friendly hotelek</div><div class="shop-item">Tagi kedvezmények</div></div><br><br><a href="partners.html" class="btn gold">Partnerajánlatok</a>`,
+final:`<h2>Folytassa a kiadást</h2><p>Fedezzen fel fotókat, cikkeket, versenyeket, közösségi tartalmakat és Club-előnyöket.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotók</a><a href="articles.html" class="btn">Cikkek</a><a href="contests.html" class="btn">Versenyek</a><a href="club.html" class="btn">Csatlakozás</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Nemzetközi digitális lifestyle platform állatoknak</p><div class="footer-links"><a href="index.html">Kezdőlap</a><a href="archive.html">Archívum</a><a href="issue-02.html">02. kiadás</a><a href="privacy.html">Adatvédelem</a><a href="terms.html">Feltételek</a><a href="contact.html">Kapcsolat</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+ro:{
+title:"Ediția 01 — PETS & DOGUE",
+description:"Descoperă PETS & DOGUE Ediția 01 — Miso, vedete de copertă, modă, călătorii, sănătate, comunitate și animale care au nevoie de ajutor.",
+home:"← Acasă",
+label:"EDIȚIA 01",
+cover:`<span>VARĂ 2026</span><h1>Ediția 01</h1><p>Prima ediție luxury despre animale, cu Miso, vedete de copertă, stil de vară, călătorii și începutul PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">EDIȚIA DE DEBUT</div><h2>O nouă revistă luxury pentru iubitorii de animale</h2><p>PETS &amp; DOGUE pornește de la o idee: animalele merită frumusețe, povești, cultură și vizibilitate.</p>`,
+toc:`<h2>În această ediție</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Scrisoarea editorului</h3></div><div class="toc-card"><span>02</span><h3>Povestea lui Miso</h3></div><div class="toc-card"><span>03</span><h3>Iconurile verii</h3></div><div class="toc-card"><span>04</span><h3>Modă pentru animale</h3></div><div class="toc-card"><span>05</span><h3>Călătorii și sănătate</h3></div><div class="toc-card"><span>06</span><h3>Comunitate</h3></div></div>`,
+editor:`<span class="badge">SCRISOAREA EDITORULUI</span><h2>Bine ai venit la PETS &amp; DOGUE</h2><p>Revista este creată pentru cei care văd animalele ca personalități cu povești, frumusețe și forță emoțională.</p><p>Prima ediție celebrează vara, eleganța, salvarea și comunitatea.</p><div class="quote">„O revistă luxury pentru fiecare animal extraordinar.”</div><p>PETS &amp; DOGUE este mai mult decât o revistă — este o lume în creștere.</p>`,
+coverStory:`<span class="badge">POVESTEA DE COPERTĂ</span><h2>Miso: prima vedetă de copertă</h2><p>Miso este chipul Ediției 01 — delicată, glamour, jucăușă și memorabilă.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Vedete de copertă</a><a href="become-cover-star.html" class="btn">Devino vedetă</a></div>`,
+fashion:`<span class="badge">MODĂ PENTRU ANIMALE</span><h2>Stil de vară</h2><p>Moda pentru animale devine editorială, expresivă și parte a culturii lifestyle.</p><p>Ediția 01 prezintă funde, zgărzi, genți și detalii luxury.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Explorează moda</a><a href="partners.html" class="btn">Parteneri</a></div>`,
+travel:`<span class="badge">CĂLĂTORII</span><h2>Vară Pet-Friendly</h2><p>Inspirată de Santorini, Capri și Côte d’Azur, această ediție imaginează călătorii elegante cu animale.</p><p>Edițiile viitoare vor explora hoteluri, cafenele, plaje și destinații pet-friendly.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Ghid de călătorie</a><a href="pet-friendly-places.html" class="btn">Locuri Pet-Friendly</a></div>`,
+help:`<span class="badge">ANIMALE CARE AU NEVOIE DE AJUTOR</span><h2>Frumusețe cu scop</h2><p>PETS & DOGUE înseamnă și vizibilitate pentru animalele care au nevoie de ajutor, adopție și îngrijire.</p><p>Viitorul include povești de salvare și rețele de voluntari.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Ajută animale</a><a href="volunteer-network.html" class="btn">Voluntariat</a></div>`,
+shop:`<h2>Cumpără din ediție</h2><p>Edițiile viitoare vor include oferte, reduceri și recomandări luxury.</p><div class="shop-grid"><div class="shop-item">Zgărzi luxury</div><div class="shop-item">Modă pentru animale</div><div class="shop-item">Accesorii de călătorie</div><div class="shop-item">Oferte grooming</div><div class="shop-item">Hoteluri Pet-Friendly</div><div class="shop-item">Reduceri membri</div></div><br><br><a href="partners.html" class="btn gold">Oferte parteneri</a>`,
+final:`<h2>Continuă ediția</h2><p>Descoperă fotografii, articole, concursuri, comunitatea și beneficiile Club.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotografii</a><a href="articles.html" class="btn">Articole</a><a href="contests.html" class="btn">Concursuri</a><a href="club.html" class="btn">Intră în Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Platformă lifestyle digitală internațională pentru animale</p><div class="footer-links"><a href="index.html">Acasă</a><a href="archive.html">Arhivă</a><a href="issue-02.html">Ediția 02</a><a href="privacy.html">Confidențialitate</a><a href="terms.html">Termeni</a><a href="contact.html">Contact</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},bg:{
+title:"Издание 01 — PETS & DOGUE",
+description:"Открийте PETS & DOGUE Издание 01 — Miso, звезди на корицата, мода, пътувания, здраве, общност и помощ за животни.",
+home:"← Начало",
+label:"ИЗДАНИЕ 01",
+cover:`<span>ЛЯТО 2026</span><h1>Издание 01</h1><p>Първото luxury издание за животни с Miso, звезди на корицата, летен стил, пътувания и началото на PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">ДЕБЮТНОТО ИЗДАНИЕ</div><h2>Ново luxury списание за любителите на животни</h2><p>PETS &amp; DOGUE започва с идеята, че животните заслужават красота, истории, култура и видимост.</p>`,
+toc:`<h2>В това издание</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Писмо от редактора</h3></div><div class="toc-card"><span>02</span><h3>Историята на Miso</h3></div><div class="toc-card"><span>03</span><h3>Икони на лятото</h3></div><div class="toc-card"><span>04</span><h3>Мода за любимци</h3></div><div class="toc-card"><span>05</span><h3>Пътувания и здраве</h3></div><div class="toc-card"><span>06</span><h3>Общност</h3></div></div>`,
+editor:`<span class="badge">ПИСМО ОТ РЕДАКТОРА</span><h2>Добре дошли в PETS &amp; DOGUE</h2><p>Списанието е създадено за хора, които виждат животните като личности с истории, красота и емоционална сила.</p><p>Първото издание празнува лятото, елегантността, спасяването и общността.</p><div class="quote">„Luxury списание за всеки необикновен любимец.“</div><p>PETS &amp; DOGUE е повече от списание — това е растящ свят.</p>`,
+coverStory:`<span class="badge">ИСТОРИЯ ОТ КОРИЦАТА</span><h2>Miso: първата звезда на корицата</h2><p>Miso е лицето на Издание 01 — нежна, glamour, игрива и незабравима.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Звезди на корицата</a><a href="become-cover-star.html" class="btn">Стани звезда</a></div>`,
+fashion:`<span class="badge">МОДА ЗА ЛЮБИМЦИ</span><h2>Летен стил</h2><p>Модата за животни става редакционна, изразителна и част от lifestyle културата.</p><p>Издание 01 представя панделки, нашийници, чанти и luxury детайли.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Разгледай модата</a><a href="partners.html" class="btn">Партньори</a></div>`,
+travel:`<span class="badge">ПЪТУВАНИЯ</span><h2>Pet-Friendly лято</h2><p>Вдъхновено от Санторини, Капри и Côte d’Azur, изданието си представя елегантно пътуване с животни.</p><p>Следващите издания ще разглеждат хотели, кафенета, плажове и pet-friendly дестинации.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Пътеводител</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly места</a></div>`,
+help:`<span class="badge">ЖИВОТНИ В НУЖДА</span><h2>Красота с цел</h2><p>PETS & DOGUE дава видимост и на животни, които имат нужда от помощ, осиновяване и грижи.</p><p>Бъдещето включва спасителни истории и доброволчески мрежи.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Помогни на животни</a><a href="volunteer-network.html" class="btn">Доброволчество</a></div>`,
+shop:`<h2>Пазарувай от изданието</h2><p>Следващите издания ще съдържат партньорски оферти, отстъпки и luxury препоръки.</p><div class="shop-grid"><div class="shop-item">Luxury нашийници</div><div class="shop-item">Мода за любимци</div><div class="shop-item">Аксесоари за пътуване</div><div class="shop-item">Grooming оферти</div><div class="shop-item">Pet-Friendly хотели</div><div class="shop-item">Отстъпки за членове</div></div><br><br><a href="partners.html" class="btn gold">Оферти на партньори</a>`,
+final:`<h2>Продължи изданието</h2><p>Открийте снимки, статии, конкурси, общност, Club предимства и бъдещи звезди на корицата.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Снимки</a><a href="articles.html" class="btn">Статии</a><a href="contests.html" class="btn">Конкурси</a><a href="club.html" class="btn">Влез в Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Международна дигитална lifestyle платформа за животни</p><div class="footer-links"><a href="index.html">Начало</a><a href="archive.html">Архив</a><a href="issue-02.html">Издание 02</a><a href="privacy.html">Поверителност</a><a href="terms.html">Условия</a><a href="contact.html">Контакт</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+el:{
+title:"Έκδοση 01 — PETS & DOGUE",
+description:"Ανακαλύψτε το PETS & DOGUE Έκδοση 01 — Miso, αστέρια εξωφύλλου, μόδα, ταξίδια, υγεία, κοινότητα και ζώα που χρειάζονται βοήθεια.",
+home:"← Αρχική",
+label:"ΕΚΔΟΣΗ 01",
+cover:`<span>ΚΑΛΟΚΑΙΡΙ 2026</span><h1>Έκδοση 01</h1><p>Η πρώτη luxury έκδοση για ζώα με τη Miso, αστέρια εξωφύλλου, καλοκαιρινό στιλ και την αρχή του PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">Η ΠΡΩΤΗ ΕΚΔΟΣΗ</div><h2>Ένα νέο luxury περιοδικό για όσους αγαπούν τα ζώα</h2><p>Το PETS &amp; DOGUE ξεκινά με την ιδέα ότι τα ζώα αξίζουν ομορφιά, ιστορίες, πολιτισμό και ορατότητα.</p>`,
+toc:`<h2>Σε αυτή την έκδοση</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Επιστολή συντάκτη</h3></div><div class="toc-card"><span>02</span><h3>Η ιστορία της Miso</h3></div><div class="toc-card"><span>03</span><h3>Εικόνες του καλοκαιριού</h3></div><div class="toc-card"><span>04</span><h3>Μόδα κατοικιδίων</h3></div><div class="toc-card"><span>05</span><h3>Ταξίδια &amp; υγεία</h3></div><div class="toc-card"><span>06</span><h3>Κοινότητα</h3></div></div>`,
+editor:`<span class="badge">ΕΠΙΣΤΟΛΗ ΣΥΝΤΑΚΤΗ</span><h2>Καλώς ήρθατε στο PETS &amp; DOGUE</h2><p>Το περιοδικό δημιουργήθηκε για ανθρώπους που βλέπουν τα ζώα ως προσωπικότητες με ιστορίες και συναισθηματική δύναμη.</p><p>Η πρώτη έκδοση γιορτάζει το καλοκαίρι, την κομψότητα, τη διάσωση και την κοινότητα.</p><div class="quote">«Ένα luxury περιοδικό για κάθε ξεχωριστό κατοικίδιο.»</div><p>Το PETS &amp; DOGUE είναι ένας αναπτυσσόμενος κόσμος για τους φιλόζωους.</p>`,
+coverStory:`<span class="badge">ΙΣΤΟΡΙΑ ΕΞΩΦΥΛΛΟΥ</span><h2>Miso: το πρώτο αστέρι εξωφύλλου</h2><p>Η Miso είναι το πρόσωπο της Έκδοσης 01 — απαλή, glamour, παιχνιδιάρα και αξέχαστη.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Αστέρια εξωφύλλου</a><a href="become-cover-star.html" class="btn">Γίνετε αστέρι</a></div>`,
+fashion:`<span class="badge">ΜΟΔΑ ΚΑΤΟΙΚΙΔΙΩΝ</span><h2>Καλοκαιρινό στιλ</h2><p>Η μόδα κατοικιδίων γίνεται editorial, εκφραστική και μέρος της lifestyle κουλτούρας.</p><p>Η Έκδοση 01 παρουσιάζει φιόγκους, κολάρα, τσάντες και luxury λεπτομέρειες.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Μόδα</a><a href="partners.html" class="btn">Συνεργάτες</a></div>`,
+travel:`<span class="badge">ΤΑΞΙΔΙΑ</span><h2>Pet-Friendly καλοκαίρι</h2><p>Με έμπνευση από Σαντορίνη, Κάπρι και Côte d’Azur, τα ταξίδια με κατοικίδια μπορούν να είναι κομψά και εύκολα.</p><p>Επόμενες εκδόσεις θα εξερευνήσουν ξενοδοχεία, καφέ, παραλίες και pet-friendly προορισμούς.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Οδηγός ταξιδιού</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly μέρη</a></div>`,
+help:`<span class="badge">ΖΩΑ ΠΟΥ ΧΡΕΙΑΖΟΝΤΑΙ ΒΟΗΘΕΙΑ</span><h2>Ομορφιά με σκοπό</h2><p>Το PETS & DOGUE δίνει ορατότητα σε ζώα που χρειάζονται βοήθεια, υιοθεσία και φροντίδα.</p><p>Το μέλλον περιλαμβάνει ιστορίες διάσωσης και δίκτυα εθελοντών.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Βοηθήστε ζώα</a><a href="volunteer-network.html" class="btn">Εθελοντισμός</a></div>`,
+shop:`<h2>Αγορές από την έκδοση</h2><p>Οι επόμενες εκδόσεις θα έχουν προσφορές συνεργατών, εκπτώσεις και luxury προτάσεις.</p><div class="shop-grid"><div class="shop-item">Luxury κολάρα</div><div class="shop-item">Μόδα κατοικιδίων</div><div class="shop-item">Αξεσουάρ ταξιδιού</div><div class="shop-item">Grooming προσφορές</div><div class="shop-item">Pet-Friendly ξενοδοχεία</div><div class="shop-item">Εκπτώσεις μελών</div></div><br><br><a href="partners.html" class="btn gold">Προσφορές συνεργατών</a>`,
+final:`<h2>Συνεχίστε την έκδοση</h2><p>Ανακαλύψτε φωτογραφίες, άρθρα, διαγωνισμούς, κοινότητα και οφέλη Club.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Φωτογραφίες</a><a href="articles.html" class="btn">Άρθρα</a><a href="contests.html" class="btn">Διαγωνισμοί</a><a href="club.html" class="btn">Εγγραφή στο Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Διεθνής ψηφιακή lifestyle πλατφόρμα για ζώα</p><div class="footer-links"><a href="index.html">Αρχική</a><a href="archive.html">Αρχείο</a><a href="issue-02.html">Έκδοση 02</a><a href="privacy.html">Απόρρητο</a><a href="terms.html">Όροι</a><a href="contact.html">Επικοινωνία</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+sv:{
+title:"Utgåva 01 — PETS & DOGUE",
+description:"Upptäck PETS & DOGUE Utgåva 01 — Miso, omslagsstjärnor, mode, resor, hälsa, community och djur i behov.",
+home:"← Hem",
+label:"UTGÅVA 01",
+cover:`<span>SOMMAR 2026</span><h1>Utgåva 01</h1><p>Den första luxury-utgåvan om djur med Miso, omslagsstjärnor, sommarstil, resor och början på PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">DEBUTUTGÅVAN</div><h2>Ett nytt luxury-magasin för djurälskare</h2><p>PETS &amp; DOGUE börjar med idén att djur förtjänar skönhet, berättelser, kultur och synlighet.</p>`,
+toc:`<h2>I denna utgåva</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Redaktörens brev</h3></div><div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div><div class="toc-card"><span>03</span><h3>Sommarens ikoner</h3></div><div class="toc-card"><span>04</span><h3>Husdjursmode</h3></div><div class="toc-card"><span>05</span><h3>Resor &amp; hälsa</h3></div><div class="toc-card"><span>06</span><h3>Community</h3></div></div>`,
+editor:`<span class="badge">REDAKTÖRENS BREV</span><h2>Välkommen till PETS &amp; DOGUE</h2><p>Magasinet är skapat för människor som ser djur som personligheter med berättelser, skönhet och känslomässig kraft.</p><p>Första utgåvan firar sommaren, elegans, räddning och community.</p><div class="quote">“Ett luxury-magasin för varje extraordinärt husdjur.”</div><p>PETS &amp; DOGUE är mer än ett magasin — det är en växande värld.</p>`,
+coverStory:`<span class="badge">COVER STORY</span><h2>Miso: första omslagsstjärnan</h2><p>Miso är ansiktet för Utgåva 01 — mjuk, glamourös, lekfull och oförglömlig.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Omslagsstjärnor</a><a href="become-cover-star.html" class="btn">Bli omslagsstjärna</a></div>`,
+fashion:`<span class="badge">HUSDJURSMODE</span><h2>Sommarstil</h2><p>Husdjursmode blir editorial, uttrycksfullt och en del av lifestyle-kulturen.</p><p>Utgåva 01 presenterar rosetter, halsband, väskor och luxury-detaljer.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Utforska mode</a><a href="partners.html" class="btn">Partners</a></div>`,
+travel:`<span class="badge">RESOR</span><h2>Pet-Friendly sommar</h2><p>Inspirerad av Santorini, Capri och Côte d’Azur visar utgåvan eleganta resor med djur.</p><p>Kommande utgåvor utforskar hotell, caféer, stränder och pet-friendly destinationer.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Reseguide</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly platser</a></div>`,
+help:`<span class="badge">DJUR I BEHOV</span><h2>Skönhet med mening</h2><p>PETS & DOGUE ger även synlighet åt djur som behöver hjälp, adoption och vård.</p><p>Framtiden innehåller räddningshistorier och volontärnätverk.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Hjälp djur</a><a href="volunteer-network.html" class="btn">Volontär</a></div>`,
+shop:`<h2>Shoppa utgåvan</h2><p>Kommande utgåvor innehåller partnererbjudanden, medlemsrabatter och luxury rekommendationer.</p><div class="shop-grid"><div class="shop-item">Luxury halsband</div><div class="shop-item">Husdjursmode</div><div class="shop-item">Resetillbehör</div><div class="shop-item">Grooming-erbjudanden</div><div class="shop-item">Pet-Friendly hotell</div><div class="shop-item">Medlemsrabatter</div></div><br><br><a href="partners.html" class="btn gold">Partnererbjudanden</a>`,
+final:`<h2>Fortsätt utgåvan</h2><p>Upptäck foton, artiklar, tävlingar, community och Club-förmåner.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Foton</a><a href="articles.html" class="btn">Artiklar</a><a href="contests.html" class="btn">Tävlingar</a><a href="club.html" class="btn">Gå med i Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Internationell digital lifestyleplattform för djur</p><div class="footer-links"><a href="index.html">Hem</a><a href="archive.html">Arkiv</a><a href="issue-02.html">Utgåva 02</a><a href="privacy.html">Integritet</a><a href="terms.html">Villkor</a><a href="contact.html">Kontakt</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+da:{
+title:"Udgave 01 — PETS & DOGUE",
+description:"Oplev PETS & DOGUE Udgave 01 — Miso, forsidestjerner, mode, rejser, sundhed, community og dyr i nød.",
+home:"← Hjem",
+label:"UDGAVE 01",
+cover:`<span>SOMMER 2026</span><h1>Udgave 01</h1><p>Den første luxury-udgave om dyr med Miso, forsidestjerner, sommerstil, rejser og starten på PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">DEBUTUDGAVEN</div><h2>Et nyt luxury-magasin for dyreelskere</h2><p>PETS &amp; DOGUE starter med idéen om, at dyr fortjener skønhed, historier, kultur og synlighed.</p>`,
+toc:`<h2>I denne udgave</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Redaktørens brev</h3></div><div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div><div class="toc-card"><span>03</span><h3>Sommerens ikoner</h3></div><div class="toc-card"><span>04</span><h3>Kæledyrsmode</h3></div><div class="toc-card"><span>05</span><h3>Rejser &amp; sundhed</h3></div><div class="toc-card"><span>06</span><h3>Community</h3></div></div>`,
+editor:`<span class="badge">REDAKTØRENS BREV</span><h2>Velkommen til PETS &amp; DOGUE</h2><p>Magasinet er skabt til mennesker, der ser dyr som personligheder med historier, skønhed og følelsesmæssig kraft.</p><p>Første udgave fejrer sommer, elegance, redning og community.</p><div class="quote">“Et luxury-magasin for hvert ekstraordinært kæledyr.”</div><p>PETS &amp; DOGUE er mere end et magasin — det er en voksende verden.</p>`,
+coverStory:`<span class="badge">COVER STORY</span><h2>Miso: den første forsidestjerne</h2><p>Miso er ansigtet på Udgave 01 — blød, glamourøs, legende og uforglemmelig.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Forsidestjerner</a><a href="become-cover-star.html" class="btn">Bliv forsidestjerne</a></div>`,
+fashion:`<span class="badge">KÆLEDYRSMODE</span><h2>Sommerstil</h2><p>Kæledyrsmode bliver editorial, udtryksfuld og en del af lifestyle-kulturen.</p><p>Udgave 01 viser sløjfer, halsbånd, tasker og luxury-detaljer.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Udforsk mode</a><a href="partners.html" class="btn">Partnere</a></div>`,
+travel:`<span class="badge">REJSER</span><h2>Pet-Friendly sommer</h2><p>Inspireret af Santorini, Capri og Côte d’Azur viser udgaven elegante rejser med dyr.</p><p>Kommende udgaver udforsker hoteller, caféer, strande og pet-friendly destinationer.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Rejseguide</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly steder</a></div>`,
+help:`<span class="badge">DYR I NØD</span><h2>Skønhed med formål</h2><p>PETS & DOGUE giver også synlighed til dyr, der har brug for hjælp, adoption og pleje.</p><p>Fremtiden inkluderer redningshistorier og frivillignetværk.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Hjælp dyr</a><a href="volunteer-network.html" class="btn">Frivillig</a></div>`,
+shop:`<h2>Shop udgaven</h2><p>Kommende udgaver inkluderer partnertilbud, medlemsrabatter og luxury anbefalinger.</p><div class="shop-grid"><div class="shop-item">Luxury halsbånd</div><div class="shop-item">Kæledyrsmode</div><div class="shop-item">Rejsetilbehør</div><div class="shop-item">Grooming-tilbud</div><div class="shop-item">Pet-Friendly hoteller</div><div class="shop-item">Medlemsrabatter</div></div><br><br><a href="partners.html" class="btn gold">Partnertilbud</a>`,
+final:`<h2>Fortsæt udgaven</h2><p>Oplev fotos, artikler, konkurrencer, community og Club-fordele.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotos</a><a href="articles.html" class="btn">Artikler</a><a href="contests.html" class="btn">Konkurrencer</a><a href="club.html" class="btn">Bliv medlem</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>International digital lifestyleplatform for dyr</p><div class="footer-links"><a href="index.html">Hjem</a><a href="archive.html">Arkiv</a><a href="issue-02.html">Udgave 02</a><a href="privacy.html">Privatliv</a><a href="terms.html">Vilkår</a><a href="contact.html">Kontakt</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+no:{
+title:"Utgave 01 — PETS & DOGUE",
+description:"Oppdag PETS & DOGUE Utgave 01 — Miso, forsidestjerner, mote, reiser, helse, community og dyr i nød.",
+home:"← Hjem",
+label:"UTGAVE 01",
+cover:`<span>SOMMER 2026</span><h1>Utgave 01</h1><p>Den første luxury-utgaven om dyr med Miso, forsidestjerner, sommerstil, reiser og starten på PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">DEBUTUTGAVEN</div><h2>Et nytt luxury-magasin for dyreelskere</h2><p>PETS &amp; DOGUE starter med ideen om at dyr fortjener skjønnhet, historier, kultur og synlighet.</p>`,
+toc:`<h2>I denne utgaven</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Redaktørens brev</h3></div><div class="toc-card"><span>02</span><h3>Miso Cover Story</h3></div><div class="toc-card"><span>03</span><h3>Sommerens ikoner</h3></div><div class="toc-card"><span>04</span><h3>Kjæledyrmote</h3></div><div class="toc-card"><span>05</span><h3>Reiser &amp; helse</h3></div><div class="toc-card"><span>06</span><h3>Community</h3></div></div>`,
+editor:`<span class="badge">REDAKTØRENS BREV</span><h2>Velkommen til PETS &amp; DOGUE</h2><p>Magasinet er laget for mennesker som ser dyr som personligheter med historier, skjønnhet og emosjonell kraft.</p><p>Første utgave feirer sommer, eleganse, redning og community.</p><div class="quote">“Et luxury-magasin for hvert ekstraordinære kjæledyr.”</div><p>PETS &amp; DOGUE er mer enn et magasin — det er en voksende verden.</p>`,
+coverStory:`<span class="badge">COVER STORY</span><h2>Miso: den første forsidestjernen</h2><p>Miso er ansiktet til Utgave 01 — myk, glamorøs, leken og uforglemmelig.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Forsidestjerner</a><a href="become-cover-star.html" class="btn">Bli forsidestjerne</a></div>`,
+fashion:`<span class="badge">KJÆLEDYRMOTE</span><h2>Sommerstil</h2><p>Kjæledyrmote blir editorial, uttrykksfull og en del av lifestyle-kulturen.</p><p>Utgave 01 viser sløyfer, halsbånd, vesker og luxury-detaljer.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Utforsk mote</a><a href="partners.html" class="btn">Partnere</a></div>`,
+travel:`<span class="badge">REISER</span><h2>Pet-Friendly sommer</h2><p>Inspirert av Santorini, Capri og Côte d’Azur viser utgaven elegante reiser med dyr.</p><p>Kommende utgaver utforsker hoteller, kaféer, strender og pet-friendly reisemål.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Reiseguide</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly steder</a></div>`,
+help:`<span class="badge">DYR I NØD</span><h2>Skjønnhet med mening</h2><p>PETS & DOGUE gir også synlighet til dyr som trenger hjelp, adopsjon og omsorg.</p><p>Fremtiden inkluderer redningshistorier og frivillignettverk.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Hjelp dyr</a><a href="volunteer-network.html" class="btn">Frivillig</a></div>`,
+shop:`<h2>Shop utgaven</h2><p>Kommende utgaver inneholder partnertilbud, medlemsrabatter og luxury anbefalinger.</p><div class="shop-grid"><div class="shop-item">Luxury halsbånd</div><div class="shop-item">Kjæledyrmote</div><div class="shop-item">Reisetilbehør</div><div class="shop-item">Grooming-tilbud</div><div class="shop-item">Pet-Friendly hoteller</div><div class="shop-item">Medlemsrabatter</div></div><br><br><a href="partners.html" class="btn gold">Partnertilbud</a>`,
+final:`<h2>Fortsett utgaven</h2><p>Oppdag bilder, artikler, konkurranser, community og Club-fordeler.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Bilder</a><a href="articles.html" class="btn">Artikler</a><a href="contests.html" class="btn">Konkurranser</a><a href="club.html" class="btn">Bli med i Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Internasjonal digital lifestyleplattform for dyr</p><div class="footer-links"><a href="index.html">Hjem</a><a href="archive.html">Arkiv</a><a href="issue-02.html">Utgave 02</a><a href="privacy.html">Personvern</a><a href="terms.html">Vilkår</a><a href="contact.html">Kontakt</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+fi:{
+title:"Numero 01 — PETS & DOGUE",
+description:"Tutustu PETS & DOGUE Numero 01:een — Miso, kansitähdet, muoti, matkailu, terveys, yhteisö ja apua tarvitsevat eläimet.",
+home:"← Koti",
+label:"NUMERO 01",
+cover:`<span>KESÄ 2026</span><h1>Numero 01</h1><p>Ensimmäinen luxury-eläinjulkaisu, jossa ovat Miso, kansitähdet, kesätyyli, matkailu ja PETS &amp; DOGUE -maailman alku.</p>`,
+intro:`<div class="kicker">ENSIMMÄINEN JULKAISU</div><h2>Uusi luxury-lehti eläinten ystäville</h2><p>PETS &amp; DOGUE alkaa ajatuksesta, että eläimet ansaitsevat kauneutta, tarinoita, kulttuuria ja näkyvyyttä.</p>`,
+toc:`<h2>Tässä numerossa</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Päätoimittajan kirje</h3></div><div class="toc-card"><span>02</span><h3>Mison kansitarina</h3></div><div class="toc-card"><span>03</span><h3>Kesän ikonit</h3></div><div class="toc-card"><span>04</span><h3>Lemmikkimuoti</h3></div><div class="toc-card"><span>05</span><h3>Matkailu ja terveys</h3></div><div class="toc-card"><span>06</span><h3>Yhteisö</h3></div></div>`,
+editor:`<span class="badge">PÄÄTOIMITTAJAN KIRJE</span><h2>Tervetuloa PETS &amp; DOGUE -maailmaan</h2><p>Lehti on luotu ihmisille, jotka näkevät eläimet persoonina, joilla on tarinoita, kauneutta ja tunnetta.</p><p>Ensimmäinen numero juhlistaa kesää, eleganssia, pelastustyötä ja yhteisöä.</p><div class="quote">“Luxury-lehti jokaiselle poikkeukselliselle lemmikille.”</div><p>PETS &amp; DOGUE on enemmän kuin lehti — se on kasvava maailma.</p>`,
+coverStory:`<span class="badge">KANSITARINA</span><h2>Miso: ensimmäinen kansitähti</h2><p>Miso on Numeron 01 kasvot — pehmeä, glamour, leikkisä ja unohtumaton.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Kansitähdet</a><a href="become-cover-star.html" class="btn">Kansitähdeksi</a></div>`,
+fashion:`<span class="badge">LEMMIKKIMUOTI</span><h2>Kesätyyli</h2><p>Lemmikkimuoti on editorial, ilmeikäs ja osa lifestyle-kulttuuria.</p><p>Numero 01 esittelee rusetteja, kaulapantoja, laukkuja ja luxury-yksityiskohtia.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Tutustu muotiin</a><a href="partners.html" class="btn">Kumppanit</a></div>`,
+travel:`<span class="badge">MATKAILU</span><h2>Pet-Friendly kesä</h2><p>Santorinin, Caprin ja Côte d’Azurin inspiroimana matkailu lemmikkien kanssa voi olla eleganttia ja helppoa.</p><p>Tulevat numerot esittelevät hotelleja, kahviloita, rantoja ja pet-friendly kohteita.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Matkaopas</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly paikat</a></div>`,
+help:`<span class="badge">APUA TARVITSEVAT ELÄIMET</span><h2>Kauneutta tarkoituksella</h2><p>PETS & DOGUE antaa näkyvyyttä myös eläimille, jotka tarvitsevat apua, adoptiota ja hoitoa.</p><p>Tulevaisuuteen kuuluvat pelastustarinat ja vapaaehtoisverkostot.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Auta eläimiä</a><a href="volunteer-network.html" class="btn">Vapaaehtoiseksi</a></div>`,
+shop:`<h2>Osta numerosta</h2><p>Tulevat numerot sisältävät kumppanitarjouksia, jäsenalennuksia ja luxury-suosituksia.</p><div class="shop-grid"><div class="shop-item">Luxury kaulapannat</div><div class="shop-item">Lemmikkimuoti</div><div class="shop-item">Matkatarvikkeet</div><div class="shop-item">Grooming-tarjoukset</div><div class="shop-item">Pet-Friendly hotellit</div><div class="shop-item">Jäsenalennukset</div></div><br><br><a href="partners.html" class="btn gold">Kumppanitarjoukset</a>`,
+final:`<h2>Jatka numeroa</h2><p>Tutustu kuviin, artikkeleihin, kilpailuihin, yhteisöön ja Club-etuihin.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Kuvat</a><a href="articles.html" class="btn">Artikkelit</a><a href="contests.html" class="btn">Kilpailut</a><a href="club.html" class="btn">Liity Clubiin</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Kansainvälinen digitaalinen lifestyle-alusta eläimille</p><div class="footer-links"><a href="index.html">Koti</a><a href="archive.html">Arkisto</a><a href="issue-02.html">Numero 02</a><a href="privacy.html">Tietosuoja</a><a href="terms.html">Ehdot</a><a href="contact.html">Yhteystiedot</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+tr:{
+title:"Sayı 01 — PETS & DOGUE",
+description:"PETS & DOGUE Sayı 01'i keşfedin — Miso, kapak yıldızları, moda, seyahat, sağlık, topluluk ve yardıma ihtiyacı olan hayvanlar.",
+home:"← Ana sayfa",
+label:"SAYI 01",
+cover:`<span>YAZ 2026</span><h1>Sayı 01</h1><p>Miso, kapak yıldızları, yaz stili, seyahat ve PETS &amp; DOGUE dünyasının başlangıcını içeren ilk luxury hayvan sayısı.</p>`,
+intro:`<div class="kicker">İLK SAYI</div><h2>Hayvanseverler için yeni bir luxury dergi</h2><p>PETS &amp; DOGUE, hayvanların güzelliği, hikâyeleri, kültürü ve görünürlüğü hak ettiği fikriyle başlıyor.</p>`,
+toc:`<h2>Bu sayıda</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>Editörün mektubu</h3></div><div class="toc-card"><span>02</span><h3>Miso kapak hikâyesi</h3></div><div class="toc-card"><span>03</span><h3>Yaz ikonları</h3></div><div class="toc-card"><span>04</span><h3>Evcil hayvan modası</h3></div><div class="toc-card"><span>05</span><h3>Seyahat ve sağlık</h3></div><div class="toc-card"><span>06</span><h3>Topluluk</h3></div></div>`,
+editor:`<span class="badge">EDİTÖRÜN MEKTUBU</span><h2>PETS &amp; DOGUE'a hoş geldiniz</h2><p>Dergi, hayvanları hikâyeleri, güzellikleri ve duygusal güçleri olan kişilikler olarak görenler için yaratıldı.</p><p>İlk sayımız yazı, zarafeti, kurtarmayı ve topluluğu kutluyor.</p><div class="quote">“Her sıra dışı evcil hayvan için bir luxury dergi.”</div><p>PETS &amp; DOGUE bir dergiden fazlasıdır — büyüyen bir dünyadır.</p>`,
+coverStory:`<span class="badge">KAPAK HİKÂYESİ</span><h2>Miso: ilk kapak yıldızı</h2><p>Miso Sayı 01'in yüzü — yumuşak, glamour, oyuncu ve unutulmaz.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">Kapak yıldızları</a><a href="become-cover-star.html" class="btn">Kapak yıldızı ol</a></div>`,
+fashion:`<span class="badge">EVCİL HAYVAN MODASI</span><h2>Yaz stili</h2><p>Evcil hayvan modası editorial, etkileyici ve lifestyle kültürünün bir parçası haline geliyor.</p><p>Sayı 01 fiyonklar, tasmalar, taşıma çantaları ve luxury detaylar sunuyor.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">Modayı keşfet</a><a href="partners.html" class="btn">Partnerler</a></div>`,
+travel:`<span class="badge">SEYAHAT</span><h2>Pet-Friendly yaz</h2><p>Santorini, Capri ve Côte d’Azur'dan ilham alan bu sayı, hayvanlarla zarif seyahati hayal ediyor.</p><p>Gelecek sayılar otelleri, kafeleri, plajları ve pet-friendly destinasyonları keşfedecek.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">Seyahat rehberi</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly yerler</a></div>`,
+help:`<span class="badge">YARDIMA İHTİYACI OLAN HAYVANLAR</span><h2>Amaçlı güzellik</h2><p>PETS & DOGUE yardım, sahiplenme ve bakıma ihtiyacı olan hayvanlara görünürlük de sağlar.</p><p>Gelecek kurtarma hikâyeleri ve gönüllü ağlarını içerir.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">Hayvanlara yardım et</a><a href="volunteer-network.html" class="btn">Gönüllü ol</a></div>`,
+shop:`<h2>Sayıdan alışveriş</h2><p>Gelecek sayılar partner teklifleri, üye indirimleri ve luxury önerileri sunacak.</p><div class="shop-grid"><div class="shop-item">Luxury tasmalar</div><div class="shop-item">Evcil hayvan modası</div><div class="shop-item">Seyahat aksesuarları</div><div class="shop-item">Grooming teklifleri</div><div class="shop-item">Pet-Friendly oteller</div><div class="shop-item">Üye indirimleri</div></div><br><br><a href="partners.html" class="btn gold">Partner teklifleri</a>`,
+final:`<h2>Sayıya devam edin</h2><p>Fotoğrafları, makaleleri, yarışmaları, topluluğu ve Club avantajlarını keşfedin.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">Fotoğraflar</a><a href="articles.html" class="btn">Makaleler</a><a href="contests.html" class="btn">Yarışmalar</a><a href="club.html" class="btn">Club'a katıl</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>Hayvanlar için uluslararası dijital lifestyle platformu</p><div class="footer-links"><a href="index.html">Ana sayfa</a><a href="archive.html">Arşiv</a><a href="issue-02.html">Sayı 02</a><a href="privacy.html">Gizlilik</a><a href="terms.html">Şartlar</a><a href="contact.html">İletişim</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+ar:{
+title:"الإصدار 01 — PETS & DOGUE",
+description:"اكتشف الإصدار 01 من PETS & DOGUE مع Miso ونجوم الغلاف والموضة والسفر والصحة والمجتمع والحيوانات المحتاجة.",
+home:"الرئيسية →",
+label:"الإصدار 01",
+cover:`<span>صيف 2026</span><h1>الإصدار 01</h1><p>الإصدار luxury الأول للحيوانات مع Miso ونجوم الغلاف وأسلوب الصيف والسفر وبداية عالم PETS &amp; DOGUE.</p>`,
+intro:`<div class="kicker">الإصدار الأول</div><h2>مجلة luxury جديدة لمحبي الحيوانات</h2><p>تبدأ PETS &amp; DOGUE بفكرة واحدة: الحيوانات تستحق الجمال والقصص والثقافة والظهور.</p>`,
+toc:`<h2>داخل هذا الإصدار</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>رسالة المحرر</h3></div><div class="toc-card"><span>02</span><h3>قصة Miso على الغلاف</h3></div><div class="toc-card"><span>03</span><h3>أيقونات الصيف</h3></div><div class="toc-card"><span>04</span><h3>موضة الحيوانات</h3></div><div class="toc-card"><span>05</span><h3>السفر والصحة</h3></div><div class="toc-card"><span>06</span><h3>المجتمع</h3></div></div>`,
+editor:`<span class="badge">رسالة المحرر</span><h2>مرحباً بكم في PETS &amp; DOGUE</h2><p>تم إنشاء هذه المجلة لمن يرون الحيوانات كشخصيات لها قصص وجمال وقوة عاطفية.</p><p>يحتفل الإصدار الأول بالصيف والأناقة والإنقاذ والمجتمع.</p><div class="quote">«مجلة luxury لكل حيوان استثنائي».</div><p>PETS &amp; DOGUE أكثر من مجلة، إنها عالم متنامٍ لمحبي الحيوانات.</p>`,
+coverStory:`<span class="badge">قصة الغلاف</span><h2>Miso: أول نجمة غلاف</h2><p>Miso هي وجه الإصدار 01 — ناعمة، glamour، مرحة ولا تُنسى.</p><div class="buttons"><a href="members-gallery.html" class="btn gold">نجوم الغلاف</a><a href="become-cover-star.html" class="btn">كن نجم غلاف</a></div>`,
+fashion:`<span class="badge">موضة الحيوانات</span><h2>أسلوب الصيف</h2><p>أصبحت موضة الحيوانات أكثر تعبيراً وجزءاً من ثقافة lifestyle.</p><p>يقدم الإصدار 01 الشرائط والأطواق والحقائب وتفاصيل luxury.</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">اكتشف الموضة</a><a href="partners.html" class="btn">الشركاء</a></div>`,
+travel:`<span class="badge">السفر</span><h2>صيف Pet-Friendly</h2><p>بإلهام من سانتوريني وكابري وCôte d’Azur، يتخيل هذا الإصدار سفراً أنيقاً وسهلاً مع الحيوانات.</p><p>ستستكشف الإصدارات القادمة الفنادق والمقاهي والشواطئ والوجهات الصديقة للحيوانات.</p><div class="buttons"><a href="pet-travel.html" class="btn gold">دليل السفر</a><a href="pet-friendly-places.html" class="btn">أماكن Pet-Friendly</a></div>`,
+help:`<span class="badge">حيوانات تحتاج للمساعدة</span><h2>جمال له هدف</h2><p>PETS & DOGUE تمنح أيضاً مساحة للحيوانات التي تحتاج إلى المساعدة والتبني والرعاية.</p><p>المستقبل يشمل قصص الإنقاذ وشبكات المتطوعين.</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">ساعد الحيوانات</a><a href="volunteer-network.html" class="btn">تطوع</a></div>`,
+shop:`<h2>تسوق من الإصدار</h2><p>ستتضمن الإصدارات القادمة عروض الشركاء وخصومات الأعضاء وتوصيات luxury.</p><div class="shop-grid"><div class="shop-item">أطواق luxury</div><div class="shop-item">موضة الحيوانات</div><div class="shop-item">إكسسوارات السفر</div><div class="shop-item">عروض العناية</div><div class="shop-item">فنادق Pet-Friendly</div><div class="shop-item">خصومات الأعضاء</div></div><br><br><a href="partners.html" class="btn gold">عروض الشركاء</a>`,
+final:`<h2>تابع الإصدار</h2><p>اكتشف الصور والمقالات والمسابقات والمجتمع ومزايا Club.</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">الصور</a><a href="articles.html" class="btn">المقالات</a><a href="contests.html" class="btn">المسابقات</a><a href="club.html" class="btn">انضم إلى Club</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>منصة lifestyle رقمية عالمية للحيوانات</p><div class="footer-links"><a href="index.html">الرئيسية</a><a href="archive.html">الأرشيف</a><a href="issue-02.html">الإصدار 02</a><a href="privacy.html">الخصوصية</a><a href="terms.html">الشروط</a><a href="contact.html">اتصل بنا</a></div><a href="admin.html" class="admin-small">Admin</a>`
+},
+
+hi:{
+title:"अंक 01 — PETS & DOGUE",
+description:"PETS & DOGUE अंक 01 देखें — Miso, कवर स्टार, फैशन, यात्रा, स्वास्थ्य, समुदाय और मदद की ज़रूरत वाले जानवर।",
+home:"← होम",
+label:"अंक 01",
+cover:`<span>गर्मी 2026</span><h1>अंक 01</h1><p>Miso, कवर स्टार, समर स्टाइल, यात्रा और PETS &amp; DOGUE की शुरुआत वाला पहला luxury पशु अंक।</p>`,
+intro:`<div class="kicker">पहला अंक</div><h2>पशु प्रेमियों के लिए नया luxury मैगज़ीन</h2><p>PETS &amp; DOGUE इस विचार से शुरू होता है कि जानवर सुंदरता, कहानियों, संस्कृति और पहचान के हकदार हैं।</p>`,
+toc:`<h2>इस अंक में</h2><div class="toc-grid"><div class="toc-card"><span>01</span><h3>संपादक का पत्र</h3></div><div class="toc-card"><span>02</span><h3>Miso कवर स्टोरी</h3></div><div class="toc-card"><span>03</span><h3>गर्मी के आइकन</h3></div><div class="toc-card"><span>04</span><h3>पेट फैशन</h3></div><div class="toc-card"><span>05</span><h3>यात्रा और स्वास्थ्य</h3></div><div class="toc-card"><span>06</span><h3>समुदाय</h3></div></div>`,
+editor:`<span class="badge">संपादक का पत्र</span><h2>PETS &amp; DOGUE में आपका स्वागत है</h2><p>यह मैगज़ीन उन लोगों के लिए है जो जानवरों को कहानियों, सुंदरता और भावनात्मक शक्ति वाली शख्सियत मानते हैं।</p><p>पहला अंक गर्मी, सुंदरता, बचाव और समुदाय का उत्सव है।</p><div class="quote">“हर असाधारण पालतू के लिए एक luxury मैगज़ीन।”</div><p>PETS &amp; DOGUE सिर्फ मैगज़ीन नहीं, बल्कि पशु प्रेमियों की बढ़ती दुनिया है।</p>`,
+coverStory:`<span class="badge">कवर स्टोरी</span><h2>Miso: पहली कवर स्टार</h2><p>Miso अंक 01 का चेहरा है — मुलायम, glamour, चंचल और यादगार।</p><div class="buttons"><a href="members-gallery.html" class="btn gold">कवर स्टार</a><a href="become-cover-star.html" class="btn">कवर स्टार बनें</a></div>`,
+fashion:`<span class="badge">पेट फैशन</span><h2>समर स्टाइल</h2><p>पेट फैशन अब editorial, expressive और lifestyle संस्कृति का हिस्सा है।</p><p>अंक 01 में बो, कॉलर, कैरियर और luxury डिटेल्स हैं।</p><div class="buttons"><a href="pet-fashion.html" class="btn gold">फैशन देखें</a><a href="partners.html" class="btn">पार्टनर</a></div>`,
+travel:`<span class="badge">यात्रा</span><h2>Pet-Friendly गर्मी</h2><p>Santorini, Capri और Côte d’Azur से प्रेरित यह अंक पालतुओं के साथ आसान और खूबसूरत यात्रा की कल्पना करता है।</p><p>आने वाले अंक होटल, कैफ़े, समुद्र तट और pet-friendly जगहों को दिखाएँगे।</p><div class="buttons"><a href="pet-travel.html" class="btn gold">यात्रा गाइड</a><a href="pet-friendly-places.html" class="btn">Pet-Friendly जगहें</a></div>`,
+help:`<span class="badge">मदद की ज़रूरत वाले जानवर</span><h2>उद्देश्य के साथ सुंदरता</h2><p>PETS & DOGUE उन जानवरों को भी पहचान देता है जिन्हें मदद, गोद लेने और देखभाल की ज़रूरत है।</p><p>भविष्य में बचाव की कहानियाँ और स्वयंसेवी नेटवर्क शामिल होंगे।</p><div class="buttons"><a href="pets-in-need.html" class="btn gold">जानवरों की मदद करें</a><a href="volunteer-network.html" class="btn">स्वयंसेवा</a></div>`,
+shop:`<h2>इस अंक से खरीदें</h2><p>आने वाले अंकों में पार्टनर ऑफ़र, सदस्य छूट और luxury सुझाव होंगे।</p><div class="shop-grid"><div class="shop-item">Luxury कॉलर</div><div class="shop-item">पेट फैशन</div><div class="shop-item">यात्रा एक्सेसरीज़</div><div class="shop-item">Grooming ऑफ़र</div><div class="shop-item">Pet-Friendly होटल</div><div class="shop-item">सदस्य छूट</div></div><br><br><a href="partners.html" class="btn gold">पार्टनर ऑफ़र</a>`,
+final:`<h2>अंक जारी रखें</h2><p>फोटो, लेख, प्रतियोगिताएँ, समुदाय और Club लाभ देखें।</p><div class="buttons" style="justify-content:center;"><a href="photos.html" class="btn gold">फोटो</a><a href="articles.html" class="btn">लेख</a><a href="contests.html" class="btn">प्रतियोगिताएँ</a><a href="club.html" class="btn">Club में शामिल हों</a></div>`,
+footer:`<h2 class="notranslate" translate="no">PETS &amp; DOGUE</h2><p>जानवरों के लिए अंतरराष्ट्रीय डिजिटल lifestyle प्लेटफ़ॉर्म</p><div class="footer-links"><a href="index.html">होम</a><a href="archive.html">आर्काइव</a><a href="issue-02.html">अंक 02</a><a href="privacy.html">गोपनीयता</a><a href="terms.html">शर्तें</a><a href="contact.html">संपर्क</a></div><a href="admin.html" class="admin-small">Admin</a>`
+}
+
+};
+
+/*
+For languages where a dedicated editorial translation is not yet different
+from the English copy, we still keep the selected language active.
+The global shell remains translated and the page falls back safely.
+*/
+["sv","da","no","fi","tr","ar","hi","bg","el","hu","ro","sk","cs","pl","nl","pt","it","es","de","fr","ru","uk","en"]
+.forEach(
+code=>{
+if(!ISSUE_COPY[code]){
+ISSUE_COPY[code]=ISSUE_COPY.en;
+}
+}
+);
+
+function normalizeLanguage(value){
+
+let code=
+String(value||"")
+.trim()
+.toLowerCase()
+.replace("_","-")
+.split("-")[0];
+
+code=
+LANGUAGE_ALIASES[code]||
+code;
+
+return SUPPORTED.includes(code)
+?code
+:"en";
+
+}
+
+function detectLanguage(){
+
+try{
+
+const saved=
+normalizeLanguage(
+localStorage.getItem(
+LANGUAGE_KEY
+)
+);
+
+if(saved){
+return saved;
+}
+
+}catch{}
+
+return normalizeLanguage(
+document.documentElement.lang||
+navigator.language||
+"en"
+);
+
+}
+
+function renderIssue(language){
+
+const lang=
+normalizeLanguage(language);
+
+const copy=
+ISSUE_COPY[lang]||
+ISSUE_COPY.en;
+
+document.documentElement.lang=
+lang;
+
+document.documentElement.dir=
+lang==="ar"
+?"rtl"
+:"ltr";
+
+document.title=
+copy.title;
+
+document
+.getElementById(
+"pageDescription"
+)
+?.setAttribute(
+"content",
+copy.description
+);
+
+document.getElementById(
+"backHome"
+).textContent=
+copy.home;
+
+document.getElementById(
+"issueLabel"
+).textContent=
+copy.label;
+
+document.getElementById(
+"coverText"
+).innerHTML=
+copy.cover;
+
+document.getElementById(
+"issueIntro"
+).innerHTML=
+copy.intro;
+
+document.getElementById(
+"tocBlock"
+).innerHTML=
+copy.toc;
+
+document.getElementById(
+"editorText"
+).innerHTML=
+copy.editor;
+
+document.getElementById(
+"coverStoryContent"
+).innerHTML=
+copy.coverStory;
+
+document.getElementById(
+"fashionText"
+).innerHTML=
+copy.fashion;
+
+document.getElementById(
+"travelText"
+).innerHTML=
+copy.travel;
+
+document.getElementById(
+"helpText"
+).innerHTML=
+copy.help;
+
+document.getElementById(
+"shopBox"
+).innerHTML=
+copy.shop;
+
+document.getElementById(
+"finalBlock"
+).innerHTML=
+copy.final;
+
+document.getElementById(
+"issueFooter"
+).innerHTML=
+copy.footer;
+
+}
+
+function setIssueLanguage(language){
+
+const lang=
+normalizeLanguage(language);
+
+try{
+
+localStorage.setItem(
+LANGUAGE_KEY,
+lang
+);
+
+}catch{}
+
+renderIssue(
+lang
+);
+
+}
+
+window.addEventListener(
+"petsdogue:languagechange",
+event=>{
+
+const language=
+event?.detail?.language;
+
+if(language){
+
+renderIssue(
+language
+);
+
+}
+
+}
+);
+
+window.addEventListener(
+"storage",
+event=>{
+
+if(
+event.key===
+LANGUAGE_KEY
+){
+
+renderIssue(
+event.newValue||
+"en"
+);
+
+}
+
+}
+);
+
+window.addEventListener(
+"pageshow",
+()=>{
+
+renderIssue(
+detectLanguage()
+);
+
+}
+);
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+renderIssue(
+detectLanguage()
+);
+
+}
+);
+
+</script>
+
+<!-- PETS & DOGUE GLOBAL HEADER + CONTENTS MENU -->
+<script src="/pets-dogue-shell.js?v=20260913-global-shell-home-2"></script>
 
 </body>
 </html>
