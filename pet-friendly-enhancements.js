@@ -4,9 +4,22 @@
    PETS & DOGUE
    PET-FRIENDLY ENHANCEMENTS
 
+   SEARCH STACK
+   1. Geoapify confirmed dog-friendly
+   2. Geoapify broad category search
+   3. OSM confirmed dog-friendly
+   4. OSM broad discovery
+   5. Community confirmations stay above unknown places
+
+   ALSO
    - Better venue photos
    - Search race protection
-   - Does not modify global header or page design
+   - Exact coordinates passed to photo resolver
+
+   IMPORTANT
+   - Does not modify global header
+   - Does not modify map design
+   - Does not modify community pet-policy system
 ========================================================= */
 
 const PD_PHOTO_API =
@@ -284,7 +297,34 @@ async function pdProviderSearch(
 
 
 /* =========================================================
-   OSM QUERY
+   OSM SEARCH HELPERS
+========================================================= */
+
+function pdAround(
+  snapshot
+){
+
+  return (
+    `(around:${Math.round(
+      snapshot.radiusKm *
+      1000
+    )},${snapshot.latitude},${snapshot.longitude})`
+  );
+
+}
+
+
+function pdDogCondition(){
+
+  return (
+    '["dog"~"^(yes|leashed|designated|permissive|outside|limited|conditional|customers)$",i]'
+  );
+
+}
+
+
+/* =========================================================
+   OSM DUAL SEARCH
 ========================================================= */
 
 function pdOsmQuery(
@@ -292,83 +332,173 @@ function pdOsmQuery(
 ){
 
   const around =
-    `(around:${Math.round(
-      snapshot.radiusKm *
-      1000
-    )},${snapshot.latitude},${snapshot.longitude})`;
+    pdAround(
+      snapshot
+    );
 
 
   const dog =
-    '["dog"~"^(yes|leashed|designated|permissive|outside|limited|conditional)$",i]';
+    pdDogCondition();
 
 
   const queries = {
 
     cafe:[
-      `nwr["amenity"="cafe"]${dog}${around};`
+
+      `nwr["amenity"="cafe"]${dog}${around};`,
+
+      `nwr["amenity"="cafe"]${around};`
+
     ],
 
     restaurant:[
-      `nwr["amenity"="restaurant"]${dog}${around};`
+
+      `nwr["amenity"="restaurant"]${dog}${around};`,
+
+      `nwr["amenity"="restaurant"]${around};`
+
     ],
 
     pub:[
+
       `nwr["amenity"="pub"]${dog}${around};`,
-      `nwr["amenity"="bar"]${dog}${around};`
+
+      `nwr["amenity"="bar"]${dog}${around};`,
+
+      `nwr["amenity"="biergarten"]${dog}${around};`,
+
+      `nwr["amenity"="pub"]${around};`,
+
+      `nwr["amenity"="bar"]${around};`,
+
+      `nwr["amenity"="biergarten"]${around};`
+
     ],
 
     pizzeria:[
-      `nwr["amenity"="restaurant"]["cuisine"~"pizza",i]${dog}${around};`
+
+      `nwr["amenity"="restaurant"]["cuisine"~"(^|;|,)[ ]*pizza([ ]*;|[ ]*,|$)",i]${dog}${around};`,
+
+      `nwr["amenity"="fast_food"]["cuisine"~"(^|;|,)[ ]*pizza([ ]*;|[ ]*,|$)",i]${dog}${around};`,
+
+      `nwr["amenity"~"^(restaurant|fast_food)$"]["name"~"pizza|pizzeria|pizz",i]${dog}${around};`,
+
+      `nwr["amenity"="restaurant"]["cuisine"~"pizza",i]${around};`,
+
+      `nwr["amenity"="fast_food"]["cuisine"~"pizza",i]${around};`,
+
+      `nwr["amenity"~"^(restaurant|fast_food)$"]["name"~"pizza|pizzeria|pizz",i]${around};`
+
     ],
 
     hotel:[
-      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment|camp_site|caravan_site)$"]${dog}${around};`
+
+      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment|camp_site|caravan_site)$"]${dog}${around};`,
+
+      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment|camp_site|caravan_site)$"]${around};`
+
     ],
 
     park:[
+
       `nwr["leisure"="dog_park"]${around};`,
-      `nwr["leisure"="park"]${dog}${around};`
+
+      `nwr["leisure"="park"]${dog}${around};`,
+
+      `nwr["leisure"="park"]${around};`
+
     ],
 
     beach:[
-      `nwr["natural"="beach"]${dog}${around};`
+
+      `nwr["natural"="beach"]${dog}${around};`,
+
+      `nwr["natural"="beach"]${around};`
+
     ],
 
     veterinary:[
+
       `nwr["amenity"="veterinary"]${around};`
+
     ],
 
     "pet-shop":[
-      `nwr["shop"="pet"]${around};`
+
+      `nwr["shop"="pet"]${around};`,
+
+      `nwr["shop"="pet_food"]${around};`
+
     ],
 
     grooming:[
-      `nwr["shop"="pet_grooming"]${around};`
+
+      `nwr["shop"="pet_grooming"]${around};`,
+
+      `nwr["shop"="pet"]["service:pet_grooming"="yes"]${around};`,
+
+      `nwr["shop"="pet"]["pet_grooming"="yes"]${around};`,
+
+      `nwr["name"~"groom|grooming|dog wash|pet salon",i]${around};`
+
     ],
 
     events:[
-      `nwr["amenity"="events_venue"]${dog}${around};`
+
+      `nwr["amenity"="events_venue"]${dog}${around};`,
+
+      `nwr["amenity"="events_venue"]${around};`
+
     ]
 
   };
 
 
-  const lines =
+  let lines = [];
+
+
+  if(
     snapshot.category ===
     "all"
+  ){
 
-      ? Object
-          .values(
-            queries
-          )
-          .flat()
+    lines = [
 
-      : (
-          queries[
-            snapshot.category
-          ] ||
-          []
-        );
+      `nwr["amenity"="cafe"]${dog}${around};`,
+
+      `nwr["amenity"="restaurant"]${dog}${around};`,
+
+      `nwr["amenity"="pub"]${dog}${around};`,
+
+      `nwr["amenity"="bar"]${dog}${around};`,
+
+      `nwr["amenity"="biergarten"]${dog}${around};`,
+
+      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment)$"]${dog}${around};`,
+
+      `nwr["natural"="beach"]${dog}${around};`,
+
+      `nwr["leisure"="dog_park"]${around};`,
+
+      `nwr["leisure"="park"]${dog}${around};`,
+
+      `nwr["amenity"="veterinary"]${around};`,
+
+      `nwr["shop"="pet"]${around};`,
+
+      `nwr["shop"="pet_grooming"]${around};`
+
+    ];
+
+  }else{
+
+    lines =
+      queries[
+        snapshot.category
+      ] ||
+      [];
+
+  }
 
 
   if(
@@ -381,10 +511,92 @@ function pdOsmQuery(
 
 
   return (
-    "[out:json][timeout:16];(" +
+    "[out:json][timeout:20];(" +
     lines.join("") +
-    ");out center tags;"
+    ");out center tags 350;"
   );
+
+}
+
+
+/* =========================================================
+   OSM CATEGORY NORMALISATION
+========================================================= */
+
+function pdNormOsm(
+  element,
+  snapshot
+){
+
+  const place =
+    normOsm(
+      element
+    );
+
+
+  if(!place){
+
+    return null;
+
+  }
+
+
+  if(
+    snapshot.category ===
+    "pizzeria"
+  ){
+
+    place.category =
+      "pizzeria";
+
+  }
+
+
+  if(
+    snapshot.category ===
+    "hotel"
+  ){
+
+    place.category =
+      "hotel";
+
+  }
+
+
+  if(
+    snapshot.category ===
+    "cafe"
+  ){
+
+    place.category =
+      "cafe";
+
+  }
+
+
+  if(
+    snapshot.category ===
+    "restaurant"
+  ){
+
+    place.category =
+      "restaurant";
+
+  }
+
+
+  if(
+    snapshot.category ===
+    "pub"
+  ){
+
+    place.category =
+      "pub";
+
+  }
+
+
+  return place;
 
 }
 
@@ -450,9 +662,18 @@ async function pdOsmSearch(
     []
   )
   .map(
-    normOsm
+    element=>
+      pdNormOsm(
+        element,
+        snapshot
+      )
   )
-  .filter(Boolean);
+  .filter(Boolean)
+  .filter(
+    place=>
+      place.allowsDogs !==
+      false
+  );
 
 }
 
@@ -635,7 +856,7 @@ async function(){
           resolve=>
             setTimeout(
               ()=>resolve([]),
-              7000
+              9000
             )
         )
 
@@ -721,6 +942,10 @@ function pdRefreshVisiblePhotos(){
 
 }
 
+
+/* =========================================================
+   INITIAL PHOTO REFRESH
+========================================================= */
 
 if(
   document.readyState ===
