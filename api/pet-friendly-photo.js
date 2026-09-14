@@ -4,19 +4,27 @@
    PETS & DOGUE
    FREE VENUE PHOTO RESOLVER
 
-   Search order:
-   1. Official website og:image
-   2. Official website twitter:image
-   3. Official website regular <img>
-   4. Official website lazy-load images
-   5. Official website srcset images
-   6. Wikimedia Commons
+   FREE PHOTO ORDER:
+   1. OpenStreetMap / Nominatim metadata
+   2. Wikidata P18 image
+   3. Wikipedia page image
+   4. Official website image
+   5. Wikimedia Commons search
 
-   No Google Places photo API.
+   No Google Places Photos.
 ========================================================= */
+
+const NOMINATIM_URL =
+  "https://nominatim.openstreetmap.org/search";
+
+const WIKIDATA_ENTITY_URL =
+  "https://www.wikidata.org/wiki/Special:EntityData/";
 
 const WIKIMEDIA_API =
   "https://commons.wikimedia.org/w/api.php";
+
+const WIKIPEDIA_API =
+  "https://en.wikipedia.org/w/api.php";
 
 const TIMEOUT =
   7000;
@@ -78,7 +86,7 @@ function send(
 
 
 /* =========================================================
-   BASIC HELPERS
+   HELPERS
 ========================================================= */
 
 function text(
@@ -96,6 +104,18 @@ function text(
     0,
     max
   );
+
+}
+
+
+function numberOrNull(value){
+
+  const number =
+    Number(value);
+
+  return Number.isFinite(number)
+    ? number
+    : null;
 
 }
 
@@ -149,6 +169,89 @@ function safeHttpUrl(value){
   }catch{
 
     return "";
+
+  }
+
+}
+
+
+function commonsFileUrl(filename){
+
+  const raw =
+    text(
+      filename,
+      1000
+    )
+    .replace(
+      /^File:/i,
+      ""
+    )
+    .trim();
+
+  if(!raw){
+
+    return "";
+
+  }
+
+  return (
+    "https://commons.wikimedia.org/wiki/Special:FilePath/"
+    +
+    encodeURIComponent(raw)
+    +
+    "?width=1200"
+  );
+
+}
+
+
+/* =========================================================
+   FETCH JSON
+========================================================= */
+
+async function fetchJson(
+  url,
+  options = {}
+){
+
+  const controller =
+    new AbortController();
+
+  const timer =
+    setTimeout(
+      ()=>controller.abort(),
+      TIMEOUT
+    );
+
+  try{
+
+    const response =
+      await fetch(
+        url,
+        {
+          ...options,
+          signal:
+            controller.signal
+        }
+      );
+
+    if(!response.ok){
+
+      return null;
+
+    }
+
+    return await response.json();
+
+  }catch{
+
+    return null;
+
+  }finally{
+
+    clearTimeout(
+      timer
+    );
 
   }
 
@@ -285,7 +388,7 @@ async function hostnameIsSafe(hostname){
 
 
 /* =========================================================
-   SAFE HTML FETCH
+   SAFE WEBSITE FETCH
 ========================================================= */
 
 async function fetchHtml(startUrl){
@@ -372,10 +475,7 @@ async function fetchHtml(startUrl){
 
         if(!location){
 
-          return{
-            html:"",
-            finalUrl:""
-          };
+          break;
 
         }
 
@@ -391,10 +491,7 @@ async function fetchHtml(startUrl){
 
       if(!response.ok){
 
-        return{
-          html:"",
-          finalUrl:""
-        };
+        break;
 
       }
 
@@ -413,10 +510,7 @@ async function fetchHtml(startUrl){
         )
       ){
 
-        return{
-          html:"",
-          finalUrl:""
-        };
+        break;
 
       }
 
@@ -436,10 +530,7 @@ async function fetchHtml(startUrl){
 
     }catch{
 
-      return{
-        html:"",
-        finalUrl:""
-      };
+      break;
 
     }finally{
 
@@ -515,10 +606,10 @@ function metaContent(
 
 
 /* =========================================================
-   IMAGE FILTERS
+   WEBSITE IMAGE EXTRACTION
 ========================================================= */
 
-function badImageCandidate(value){
+function badImage(value){
 
   const url =
     String(
@@ -527,13 +618,8 @@ function badImageCandidate(value){
     )
     .toLowerCase();
 
-  if(!url){
-
-    return true;
-
-  }
-
   return (
+    !url ||
     url.startsWith("data:") ||
     url.includes("logo") ||
     url.includes("favicon") ||
@@ -550,7 +636,7 @@ function badImageCandidate(value){
 }
 
 
-function resolveImageUrl(
+function resolveImage(
   value,
   pageUrl
 ){
@@ -562,8 +648,7 @@ function resolveImageUrl(
     .trim();
 
   if(
-    !candidate ||
-    badImageCandidate(
+    badImage(
       candidate
     )
   ){
@@ -581,160 +666,20 @@ function resolveImageUrl(
       );
 
     if(
-      url.protocol !== "https:" &&
-      url.protocol !== "http:"
+      url.protocol === "https:" ||
+      url.protocol === "http:"
     ){
 
-      return "";
+      return url.href;
 
     }
 
-    return url.href;
+  }catch{}
 
-  }catch{
-
-    return "";
-
-  }
+  return "";
 
 }
 
-
-/* =========================================================
-   EXTRACT NORMAL IMAGES
-========================================================= */
-
-function imageCandidates(
-  html,
-  pageUrl
-){
-
-  const results =
-    [];
-
-  function add(value){
-
-    const url =
-      resolveImageUrl(
-        value,
-        pageUrl
-      );
-
-    if(
-      url &&
-      !results.includes(url)
-    ){
-
-      results.push(
-        url
-      );
-
-    }
-
-  }
-
-
-  /*
-     Standard src
-  */
-
-  const imgRegex =
-    /<img\b[^>]*>/gi;
-
-  const tags =
-    html.match(
-      imgRegex
-    ) || [];
-
-
-  for(
-    const tag of tags
-  ){
-
-    const attrs = [
-
-      /(?:src)=["']([^"']+)["']/i,
-
-      /(?:data-src)=["']([^"']+)["']/i,
-
-      /(?:data-lazy-src)=["']([^"']+)["']/i,
-
-      /(?:data-original)=["']([^"']+)["']/i
-
-    ];
-
-
-    for(
-      const regex of attrs
-    ){
-
-      const match =
-        tag.match(
-          regex
-        );
-
-      if(
-        match?.[1]
-      ){
-
-        add(
-          match[1]
-        );
-
-      }
-
-    }
-
-
-    /*
-       srcset:
-       choose largest / last candidate
-    */
-
-    const srcsetMatch =
-      tag.match(
-        /(?:srcset|data-srcset)=["']([^"']+)["']/i
-      );
-
-
-    if(
-      srcsetMatch?.[1]
-    ){
-
-      const items =
-        srcsetMatch[1]
-        .split(",")
-        .map(
-          item=>
-            item
-            .trim()
-            .split(/\s+/)[0]
-        )
-        .filter(Boolean);
-
-
-      if(
-        items.length
-      ){
-
-        add(
-          items[
-            items.length-1
-          ]
-        );
-
-      }
-
-    }
-
-  }
-
-
-  return results;
-
-}/* =========================================================
-   WEBSITE PHOTO
-========================================================= */
 
 function websitePhoto(
   html,
@@ -750,8 +695,7 @@ function websitePhoto(
 
   }
 
-
-  const metaCandidates = [
+  const meta = [
 
     metaContent(
       html,
@@ -775,13 +719,12 @@ function websitePhoto(
 
   ];
 
-
   for(
-    const candidate of metaCandidates
+    const candidate of meta
   ){
 
     const url =
-      resolveImageUrl(
+      resolveImage(
         candidate,
         pageUrl
       );
@@ -795,23 +738,101 @@ function websitePhoto(
   }
 
 
-  /*
-     No social preview image?
-     Use a real image from the official page.
-  */
-
-  const normalImages =
-    imageCandidates(
-      html,
-      pageUrl
-    );
+  const tags =
+    html.match(
+      /<img\b[^>]*>/gi
+    ) || [];
 
 
-  if(
-    normalImages.length
+  for(
+    const tag of tags
   ){
 
-    return normalImages[0];
+    const attributes = [
+
+      /(?:data-src)=["']([^"']+)["']/i,
+
+      /(?:data-lazy-src)=["']([^"']+)["']/i,
+
+      /(?:data-original)=["']([^"']+)["']/i,
+
+      /(?:src)=["']([^"']+)["']/i
+
+    ];
+
+
+    for(
+      const attribute of attributes
+    ){
+
+      const match =
+        tag.match(
+          attribute
+        );
+
+      if(
+        match?.[1]
+      ){
+
+        const url =
+          resolveImage(
+            match[1],
+            pageUrl
+          );
+
+        if(url){
+
+          return url;
+
+        }
+
+      }
+
+    }
+
+
+    const srcset =
+      tag.match(
+        /(?:srcset|data-srcset)=["']([^"']+)["']/i
+      );
+
+
+    if(
+      srcset?.[1]
+    ){
+
+      const candidates =
+        srcset[1]
+        .split(",")
+        .map(
+          item=>
+            item
+            .trim()
+            .split(/\s+/)[0]
+        )
+        .filter(Boolean)
+        .reverse();
+
+
+      for(
+        const candidate of candidates
+      ){
+
+        const url =
+          resolveImage(
+            candidate,
+            pageUrl
+          );
+
+        if(url){
+
+          return url;
+
+        }
+
+      }
+
+    }
 
   }
 
@@ -822,7 +843,421 @@ function websitePhoto(
 
 
 /* =========================================================
-   WIKIMEDIA FALLBACK
+   OSM / NOMINATIM LOOKUP
+========================================================= */
+
+async function osmMetadata(
+  name,
+  address,
+  latitude,
+  longitude
+){
+
+  const query =
+    [
+      name,
+      address
+    ]
+    .filter(Boolean)
+    .join(", ");
+
+
+  if(
+    query.length < 3
+  ){
+
+    return null;
+
+  }
+
+
+  const url =
+    new URL(
+      NOMINATIM_URL
+    );
+
+
+  url.searchParams.set(
+    "format",
+    "jsonv2"
+  );
+
+  url.searchParams.set(
+    "q",
+    query
+  );
+
+  url.searchParams.set(
+    "limit",
+    "5"
+  );
+
+  url.searchParams.set(
+    "addressdetails",
+    "1"
+  );
+
+  url.searchParams.set(
+    "extratags",
+    "1"
+  );
+
+  url.searchParams.set(
+    "namedetails",
+    "1"
+  );
+
+
+  if(
+    latitude !== null &&
+    longitude !== null
+  ){
+
+    const delta =
+      0.03;
+
+    url.searchParams.set(
+      "viewbox",
+      [
+        longitude-delta,
+        latitude+delta,
+        longitude+delta,
+        latitude-delta
+      ].join(",")
+    );
+
+    url.searchParams.set(
+      "bounded",
+      "1"
+    );
+
+  }
+
+
+  const data =
+    await fetchJson(
+      url.toString(),
+      {
+        headers:{
+          Accept:
+            "application/json",
+
+          "User-Agent":
+            "PETS-DOGUE/1.0 petsanddogue.com"
+        }
+      }
+    );
+
+
+  if(
+    !Array.isArray(data) ||
+    !data.length
+  ){
+
+    return null;
+
+  }
+
+
+  const targetName =
+    String(name)
+    .toLowerCase();
+
+
+  const best =
+    data.find(
+      item=>
+        String(
+          item.display_name ||
+          ""
+        )
+        .toLowerCase()
+        .includes(
+          targetName
+        )
+    )
+    ||
+    data[0];
+
+
+  return best;
+
+}/* =========================================================
+   OSM DIRECT IMAGE
+========================================================= */
+
+function osmDirectImage(osm){
+
+  const extra =
+    osm?.extratags ||
+    {};
+
+  const candidates = [
+
+    extra.image,
+
+    extra["contact:image"],
+
+    extra.wikimedia_commons,
+
+    extra["wikimedia_commons:image"]
+
+  ];
+
+
+  for(
+    const value of candidates
+  ){
+
+    if(!value){
+      continue;
+    }
+
+
+    if(
+      /^https?:\/\//i
+        .test(value)
+    ){
+
+      const url =
+        safeHttpUrl(
+          value
+        );
+
+      if(url){
+
+        return url;
+
+      }
+
+    }
+
+
+    if(
+      String(value)
+        .toLowerCase()
+        .startsWith(
+          "file:"
+        )
+    ){
+
+      return commonsFileUrl(
+        value
+      );
+
+    }
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =========================================================
+   WIKIDATA P18
+========================================================= */
+
+async function wikidataPhoto(qid){
+
+  const clean =
+    text(
+      qid,
+      50
+    );
+
+
+  if(
+    !/^Q\d+$/i.test(
+      clean
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  const url =
+    WIKIDATA_ENTITY_URL
+    +
+    encodeURIComponent(
+      clean
+    )
+    +
+    ".json";
+
+
+  const data =
+    await fetchJson(
+      url
+    );
+
+
+  const entity =
+    data?.entities?.[
+      clean
+    ];
+
+
+  const claims =
+    entity?.claims ||
+    {};
+
+
+  const imageClaim =
+    claims?.P18?.[0];
+
+
+  const filename =
+    imageClaim
+      ?.mainsnak
+      ?.datavalue
+      ?.value;
+
+
+  if(!filename){
+
+    return "";
+
+  }
+
+
+  return commonsFileUrl(
+    filename
+  );
+
+}
+
+
+/* =========================================================
+   WIKIPEDIA PAGE IMAGE
+========================================================= */
+
+async function wikipediaPhoto(
+  wikipediaTag
+){
+
+  const raw =
+    text(
+      wikipediaTag,
+      500
+    );
+
+
+  if(!raw){
+
+    return "";
+
+  }
+
+
+  let language =
+    "en";
+
+  let title =
+    raw;
+
+
+  if(
+    raw.includes(":")
+  ){
+
+    const parts =
+      raw.split(":");
+
+    if(
+      /^[a-z]{2,3}$/i.test(
+        parts[0]
+      )
+    ){
+
+      language =
+        parts.shift();
+
+      title =
+        parts.join(":");
+
+    }
+
+  }
+
+
+  const endpoint =
+    `https://${language}.wikipedia.org/w/api.php`;
+
+
+  const url =
+    new URL(
+      endpoint
+    );
+
+
+  url.searchParams.set(
+    "action",
+    "query"
+  );
+
+  url.searchParams.set(
+    "format",
+    "json"
+  );
+
+  url.searchParams.set(
+    "prop",
+    "pageimages"
+  );
+
+  url.searchParams.set(
+    "piprop",
+    "original|thumbnail"
+  );
+
+  url.searchParams.set(
+    "pithumbsize",
+    "1200"
+  );
+
+  url.searchParams.set(
+    "titles",
+    title
+  );
+
+  url.searchParams.set(
+    "origin",
+    "*"
+  );
+
+
+  const data =
+    await fetchJson(
+      url.toString()
+    );
+
+
+  const pages =
+    Object.values(
+      data?.query?.pages ||
+      {}
+    );
+
+
+  const page =
+    pages[0];
+
+
+  return safeHttpUrl(
+    page?.original?.source ||
+    page?.thumbnail?.source ||
+    ""
+  );
+
+}
+
+
+/* =========================================================
+   WIKIMEDIA SEARCH
 ========================================================= */
 
 async function wikimediaPhoto(
@@ -836,6 +1271,7 @@ async function wikimediaPhoto(
       200
     );
 
+
   if(
     venue.length < 3
   ){
@@ -844,104 +1280,92 @@ async function wikimediaPhoto(
 
   }
 
-  const locality =
+
+  const area =
     text(
       address,
-      300
+      350
     )
     .split(",")
     .slice(
       0,
-      3
+      4
     )
     .join(" ");
 
-  const query =
-    [
-      `"${venue}"`,
-      locality
-    ]
-    .filter(Boolean)
-    .join(" ");
 
-  const url =
-    new URL(
-      WIKIMEDIA_API
-    );
+  const searches = [
 
-  url.searchParams.set(
-    "action",
-    "query"
-  );
+    `"${venue}" ${area}`,
 
-  url.searchParams.set(
-    "format",
-    "json"
-  );
+    `${venue} London`,
 
-  url.searchParams.set(
-    "generator",
-    "search"
-  );
+    venue
 
-  url.searchParams.set(
-    "gsrsearch",
-    query
-  );
+  ];
 
-  url.searchParams.set(
-    "gsrnamespace",
-    "6"
-  );
 
-  url.searchParams.set(
-    "gsrlimit",
-    "6"
-  );
+  for(
+    const searchText of searches
+  ){
 
-  url.searchParams.set(
-    "prop",
-    "imageinfo"
-  );
-
-  url.searchParams.set(
-    "iiprop",
-    "url"
-  );
-
-  url.searchParams.set(
-    "iiurlwidth",
-    "1200"
-  );
-
-  const controller =
-    new AbortController();
-
-  const timer =
-    setTimeout(
-      ()=>controller.abort(),
-      TIMEOUT
-    );
-
-  try{
-
-    const response =
-      await fetch(
-        url,
-        {
-          signal:
-            controller.signal
-        }
+    const url =
+      new URL(
+        WIKIMEDIA_API
       );
 
-    if(!response.ok){
 
-      return "";
+    url.searchParams.set(
+      "action",
+      "query"
+    );
 
-    }
+    url.searchParams.set(
+      "format",
+      "json"
+    );
+
+    url.searchParams.set(
+      "generator",
+      "search"
+    );
+
+    url.searchParams.set(
+      "gsrsearch",
+      searchText
+    );
+
+    url.searchParams.set(
+      "gsrnamespace",
+      "6"
+    );
+
+    url.searchParams.set(
+      "gsrlimit",
+      "8"
+    );
+
+    url.searchParams.set(
+      "prop",
+      "imageinfo"
+    );
+
+    url.searchParams.set(
+      "iiprop",
+      "url"
+    );
+
+    url.searchParams.set(
+      "iiurlwidth",
+      "1200"
+    );
+
 
     const data =
-      await response.json();
+      await fetchJson(
+        url.toString()
+      );
+
 
     const pages =
       Object.values(
@@ -949,8 +1373,9 @@ async function wikimediaPhoto(
         {}
       );
 
+
     const blocked =
-      /logo|icon|map|flag|coat of arms|diagram|svg|poster|menu/i;
+      /logo|icon|map|flag|coat of arms|diagram|svg|poster|menu|symbol/i;
 
 
     for(
@@ -963,6 +1388,7 @@ async function wikimediaPhoto(
           ""
         );
 
+
       if(
         blocked.test(
           title
@@ -973,39 +1399,27 @@ async function wikimediaPhoto(
 
       }
 
-      const candidate =
-        page?.imageinfo?.[0]?.thumburl
-        ||
-        page?.imageinfo?.[0]?.url
-        ||
-        "";
 
-      const safe =
+      const image =
         safeHttpUrl(
-          candidate
+          page?.imageinfo?.[0]?.thumburl ||
+          page?.imageinfo?.[0]?.url ||
+          ""
         );
 
-      if(safe){
 
-        return safe;
+      if(image){
+
+        return image;
 
       }
 
     }
 
-    return "";
-
-  }catch{
-
-    return "";
-
-  }finally{
-
-    clearTimeout(
-      timer
-    );
-
   }
+
+
+  return "";
 
 }
 
@@ -1018,15 +1432,18 @@ function bodyOf(req){
 
   if(
     req.body &&
-    typeof req.body === "object"
+    typeof req.body ===
+    "object"
   ){
 
     return req.body;
 
   }
 
+
   if(
-    typeof req.body === "string"
+    typeof req.body ===
+    "string"
   ){
 
     try{
@@ -1043,13 +1460,14 @@ function bodyOf(req){
 
   }
 
+
   return {};
 
 }
 
 
 /* =========================================================
-   MAIN HANDLER
+   MAIN
 ========================================================= */
 
 module.exports =
@@ -1064,7 +1482,8 @@ async function handler(
 
 
   if(
-    req.method === "OPTIONS"
+    req.method ===
+    "OPTIONS"
   ){
 
     res
@@ -1077,7 +1496,8 @@ async function handler(
 
 
   if(
-    req.method !== "POST"
+    req.method !==
+    "POST"
   ){
 
     return send(
@@ -1119,6 +1539,18 @@ async function handler(
     );
 
 
+  const latitude =
+    numberOrNull(
+      body.latitude
+    );
+
+
+  const longitude =
+    numberOrNull(
+      body.longitude
+    );
+
+
   if(!name){
 
     return send(
@@ -1135,7 +1567,110 @@ async function handler(
 
 
   /* =====================================================
-     OFFICIAL WEBSITE
+     1. OPENSTREETMAP / NOMINATIM
+  ===================================================== */
+
+  const osm =
+    await osmMetadata(
+      name,
+      address,
+      latitude,
+      longitude
+    );
+
+
+  if(osm){
+
+    const direct =
+      osmDirectImage(
+        osm
+      );
+
+
+    if(direct){
+
+      return send(
+        res,
+        200,
+        {
+          ok:true,
+          source:
+            "openstreetmap",
+          photo:
+            direct
+        }
+      );
+
+    }
+
+
+    const extra =
+      osm.extratags ||
+      {};
+
+
+    if(
+      extra.wikidata
+    ){
+
+      const image =
+        await wikidataPhoto(
+          extra.wikidata
+        );
+
+
+      if(image){
+
+        return send(
+          res,
+          200,
+          {
+            ok:true,
+            source:
+              "wikidata",
+            photo:
+              image
+          }
+        );
+
+      }
+
+    }
+
+
+    if(
+      extra.wikipedia
+    ){
+
+      const image =
+        await wikipediaPhoto(
+          extra.wikipedia
+        );
+
+
+      if(image){
+
+        return send(
+          res,
+          200,
+          {
+            ok:true,
+            source:
+              "wikipedia",
+            photo:
+              image
+          }
+        );
+
+      }
+
+    }
+
+  }
+
+
+  /* =====================================================
+     2. OFFICIAL WEBSITE
   ===================================================== */
 
   if(website){
@@ -1146,14 +1681,14 @@ async function handler(
       );
 
 
-    const photo =
+    const image =
       websitePhoto(
         page.html,
         page.finalUrl
       );
 
 
-    if(photo){
+    if(image){
 
       return send(
         res,
@@ -1162,7 +1697,8 @@ async function handler(
           ok:true,
           source:
             "official-website",
-          photo
+          photo:
+            image
         }
       );
 
@@ -1172,7 +1708,7 @@ async function handler(
 
 
   /* =====================================================
-     WIKIMEDIA
+     3. WIKIMEDIA COMMONS SEARCH
   ===================================================== */
 
   const commons =
