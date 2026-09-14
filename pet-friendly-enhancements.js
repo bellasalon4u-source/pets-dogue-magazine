@@ -60,6 +60,7 @@ async function(place){
 
           body:
             JSON.stringify({
+
               name:
                 place.name,
 
@@ -67,7 +68,14 @@ async function(place){
                 place.address,
 
               website:
-                place.website || ""
+                place.website || "",
+
+              latitude:
+                place.location?.lat ?? null,
+
+              longitude:
+                place.location?.lng ?? null
+
             })
         }
       );
@@ -145,6 +153,7 @@ async function(place){
 function pdSearchSnapshot(){
 
   return{
+
     category:
       cat,
 
@@ -165,6 +174,7 @@ function pdSearchSnapshot(){
 
     language:
       lang
+
   };
 
 }
@@ -204,6 +214,7 @@ async function pdProviderSearch(
 
         body:
           JSON.stringify({
+
             latitude:
               snapshot.latitude,
 
@@ -224,6 +235,7 @@ async function pdProviderSearch(
 
             language:
               snapshot.language
+
           })
       }
     );
@@ -718,10 +730,12 @@ if(
   document.addEventListener(
     "DOMContentLoaded",
     ()=>{
+
       setTimeout(
         pdRefreshVisiblePhotos,
         1200
       );
+
     },
     {
       once:true
