@@ -139,11 +139,6 @@
     "health"
   ];
 
-  /*
-  Пока сохраняем те же изображения, которые уже используются
-  в Contents. Позже заменим их на наши PETS & DOGUE изображения.
-  */
-
   const MENU_IMAGES = {
 
     petFriendly:
@@ -186,37 +181,6 @@
     "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=900&q=82"
 
   };
-
-  /*
-  Array order:
-  0 openMenu
-  1 closeMenu
-  2 contents
-  3 profile
-  4 advertise
-  5 language
-  6 signIn
-  7 joinClub
-  8 home
-  9 installCta
-  10 installTitle
-  11 installText
-  12 installNow
-  13 later
-  14 iosHint
-  15 petFriendly
-  16 discounts
-  17 help
-  18 community
-  19 marketplace
-  20 edition
-  21 coverStars
-  22 contests
-  23 articles
-  24 photos
-  25 fashion
-  26 health
-  */
 
   const STRINGS = {
 
@@ -910,7 +874,6 @@
 
   };
 
-
   const DISCOVER_TEXT = {
 
     en:"Discover every section",
@@ -939,7 +902,6 @@
 
   };
 
-
   let language = "en";
   let activeKey = "";
   let observer = null;
@@ -955,7 +917,6 @@
   let ticking = false;
 
   let deferredInstallPrompt = null;
-
 
   function normalizeLanguage(value){
 
@@ -979,7 +940,6 @@
 
   }
 
-
   function supportedLanguage(value){
 
     return SUPPORTED_LANGUAGES.has(
@@ -987,7 +947,6 @@
     );
 
   }
-
 
   function currentFile(){
 
@@ -1006,7 +965,6 @@
 
   }
 
-
   function isHome(){
 
     return (
@@ -1015,7 +973,6 @@
     );
 
   }
-
 
   function detectActiveKey(){
 
@@ -1058,7 +1015,6 @@
 
   }
 
-
   function isPetFriendlyPage(){
 
     return (
@@ -1067,7 +1023,6 @@
     );
 
   }
-
 
   function pageLanguageSelect(){
 
@@ -1111,7 +1066,6 @@
     return null;
 
   }
-
 
   function detectLanguage(){
 
@@ -1164,7 +1118,6 @@
 
   }
 
-
   function arr(){
 
     return (
@@ -1173,7 +1126,6 @@
     );
 
   }
-
 
   function copy(){
 
@@ -1218,7 +1170,6 @@
 
   }
 
-
   function esc(value){
 
     return String(
@@ -1232,7 +1183,6 @@
     .replaceAll("'","&#039;");
 
   }
-
 
   function persistLanguage(code){
 
@@ -1302,10 +1252,6 @@ overflow:hidden!important;
 touch-action:none;
 }
 
-/* =========================================================
-HOME IMAGE
-========================================================= */
-
 #pdHomeHeaderImage{
 position:relative;
 width:100%;
@@ -1321,10 +1267,6 @@ height:100%;
 object-fit:cover;
 object-position:center center;
 }
-
-/* =========================================================
-GLOBAL HEADER
-========================================================= */
 
 #pdLuxuryHeader{
 position:sticky;
@@ -1535,10 +1477,6 @@ border-color:var(--pdh-green);
 background:var(--pdh-green);
 }
 
-/* =========================================================
-NAVIGATION ROWS
-========================================================= */
-
 #pdLuxuryRows{
 background:#080808;
 border-bottom:1px solid var(--pdh-gold-line);
@@ -1625,10 +1563,6 @@ justify-content:center;
 font-size:12px;
 line-height:1;
 }
-
-/* =========================================================
-NEW GLOBAL CONTENTS TICKER
-========================================================= */
 
 #pdContentsTicker{
 position:relative;
@@ -1749,10 +1683,6 @@ transform:translate3d(0,0,0);
 
 }
 
-/* =========================================================
-CONTENTS OVERLAY
-========================================================= */
-
 #pdShellOverlay{
 position:fixed;
 inset:0;
@@ -1771,10 +1701,6 @@ opacity:1;
 visibility:visible;
 pointer-events:auto;
 }
-
-/* =========================================================
-GLOBAL CONTENTS MENU
-========================================================= */
 
 #pdShellMenu{
 position:fixed;
@@ -1821,10 +1747,6 @@ html[dir="rtl"]
 transform:translateX(0);
 }
 
-/* =========================================================
-CONTENTS HEAD
-========================================================= */
-
 .pd-shell-menu-head{
 min-height:82px;
 padding:0 16px;
@@ -1867,10 +1789,6 @@ padding:12px 11px 20px;
 -webkit-overflow-scrolling:touch;
 }
 
-/* =========================================================
-ACCOUNT
-========================================================= */
-
 .pd-shell-account{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -1899,10 +1817,6 @@ border-color:var(--pdh-green);
 background:var(--pdh-green);
 }
 
-/* =========================================================
-LANGUAGE
-========================================================= */
-
 .pd-shell-language-label{
 display:block;
 margin:0 3px 6px;
@@ -1926,10 +1840,6 @@ font-size:13px;
 font-weight:800;
 }
 
-/* =========================================================
-NEW EDITORIAL CONTENTS GRID
-========================================================= */
-
 #pdShellCards{
 display:grid;
 grid-template-columns:
@@ -1939,10 +1849,6 @@ minmax(0,1fr)
 );
 gap:4px;
 }
-
-/* =========================================================
-EDITORIAL CONTENT CARD
-========================================================= */
 
 .pd-shell-card{
 position:relative;
@@ -2108,10 +2014,6 @@ padding:
 text-align:right;
 }
 
-/* =========================================================
-PET FRIENDLY INSTALL
-========================================================= */
-
 #pdInstallLauncher{
 position:fixed;
 right:14px;
@@ -2228,10 +2130,6 @@ border-color:var(--pdh-green);
 background:var(--pdh-green);
 }
 
-/* =========================================================
-FOCUS
-========================================================= */
-
 #pdLuxuryMenuButton:focus-visible,
 #pdLuxuryBrand:focus-visible,
 #pdLuxuryHome:focus-visible,
@@ -2251,10 +2149,6 @@ outline:
 var(--pdh-green);
 outline-offset:2px;
 }
-
-/* =========================================================
-MOBILE
-========================================================= */
 
 @media(max-width:600px){
 
@@ -2423,7 +2317,6 @@ animation-duration:48s;
 
   }
 
-
   function hideLegacy(){
 
     const selectors = [
@@ -2493,7 +2386,6 @@ animation-duration:48s;
 
   }
 
-
   function watchLegacy(){
 
     if(observer){
@@ -2514,7 +2406,6 @@ animation-duration:48s;
     );
 
   }
-
 
   function getFallbackImage(){
 
@@ -2545,7 +2436,6 @@ animation-duration:48s;
     );
 
   }
-
 
   function createHomeImage(){
 
@@ -2627,7 +2517,6 @@ animation-duration:48s;
 
   }
 
-
   function specialIcon(key){
 
     if(
@@ -2656,7 +2545,6 @@ animation-duration:48s;
 
   }
 
-
   function navLabel(key){
 
     return (
@@ -2668,7 +2556,6 @@ animation-duration:48s;
     );
 
   }
-
 
   function englishLabel(key){
 
@@ -2780,7 +2667,6 @@ ${specialIcon(key)}
 
   }
 
-
   function renderProfile(){
 
     const menu =
@@ -2840,7 +2726,6 @@ ${esc(text.joinClub)}
     }
 
   }
-
 
   function createHeader(){
 
@@ -3022,7 +2907,6 @@ aria-label="PETS & DOGUE editorial sections"
 
   }
 
-
   function tickerPiece(){
 
     const text =
@@ -3033,9 +2917,96 @@ aria-label="PETS & DOGUE editorial sections"
       ||
       DISCOVER_TEXT.en;
 
+    const chooseLanguage = {
+
+      en:"Choose language",
+      uk:"Оберіть мову",
+      ru:"Выберите язык",
+      fr:"Choisissez la langue",
+      de:"Sprache wählen",
+      es:"Elige idioma",
+      it:"Scegli la lingua",
+      pt:"Escolha o idioma",
+      nl:"Kies taal",
+      pl:"Wybierz język",
+      cs:"Vyberte jazyk",
+      sk:"Vyberte jazyk",
+      hu:"Válasszon nyelvet",
+      ro:"Alege limba",
+      bg:"Изберете език",
+      el:"Επιλέξτε γλώσσα",
+      sv:"Välj språk",
+      da:"Vælg sprog",
+      no:"Velg språk",
+      fi:"Valitse kieli",
+      tr:"Dil seçin",
+      ar:"اختر اللغة",
+      hi:"भाषा चुनें"
+
+    };
+
+    const languageCode = {
+
+      en:"EN",
+      uk:"UA",
+      ru:"RU",
+      fr:"FR",
+      de:"DE",
+      es:"ES",
+      it:"IT",
+      pt:"PT",
+      nl:"NL",
+      pl:"PL",
+      cs:"CZ",
+      sk:"SK",
+      hu:"HU",
+      ro:"RO",
+      bg:"BG",
+      el:"GR",
+      sv:"SE",
+      da:"DK",
+      no:"NO",
+      fi:"FI",
+      tr:"TR",
+      ar:"AR",
+      hi:"HI"
+
+    };
+
     return `
 
 <span class="pd-ticker-piece">
+
+<span aria-hidden="true">
+🇬🇧 🇺🇦 🇸🇦
+</span>
+
+<span>
+${esc(
+  chooseLanguage[language]
+  ||
+  chooseLanguage.en
+)}
+</span>
+
+<span aria-hidden="true">
+🌐 A·文·ع
+</span>
+
+<span class="pd-ticker-title">
+${esc(
+  languageCode[language]
+  ||
+  "EN"
+)}
+</span>
+
+<span
+class="pd-ticker-separator"
+aria-hidden="true"
+>
+|
+</span>
 
 <span class="pd-ticker-title">
 ${esc(text.contents)}
@@ -3064,7 +3035,6 @@ aria-hidden="true"
 `;
 
   }
-
 
   function renderTicker(){
 
@@ -3124,7 +3094,6 @@ ${group}
     );
 
   }
-
 
   function createTicker(){
 
@@ -3206,7 +3175,6 @@ ${group}
     renderTicker();
 
   }
-
 
   function renderSideMenu(){
 
@@ -3394,7 +3362,6 @@ ${cards}
 
   }
 
-
   function createSideMenu(){
 
     if(
@@ -3451,7 +3418,6 @@ ${cards}
 
   }
 
-
   function openSideMenu(){
 
     closeProfile();
@@ -3502,7 +3468,6 @@ ${cards}
 
   }
 
-
   function closeSideMenu(){
 
     const menu =
@@ -3549,7 +3514,6 @@ ${cards}
 
   }
 
-
   function openProfile(){
 
     showHeader();
@@ -3591,7 +3555,6 @@ ${cards}
 
   }
 
-
   function closeProfile(){
 
     const menu =
@@ -3630,7 +3593,6 @@ ${cards}
     );
 
   }
-
 
   function toggleProfile(){
 
@@ -3767,7 +3729,6 @@ ${cards}
 
   }
 
-
   function applyLanguage(code){
 
     persistLanguage(
@@ -3793,7 +3754,6 @@ ${cards}
     );
 
   }
-
 
   function refreshText(){
 
@@ -3866,7 +3826,6 @@ ${cards}
 
   }
 
-
   function showHeader(){
 
     document
@@ -3879,7 +3838,6 @@ ${cards}
     );
 
   }
-
 
   function hideHeader(){
 
@@ -3894,7 +3852,6 @@ ${cards}
 
   }
 
-
   function sideMenuOpen(){
 
     return document
@@ -3907,7 +3864,6 @@ ${cards}
     );
 
   }
-
 
   function handleScroll(){
 
@@ -3972,12 +3928,6 @@ ${cards}
               delta
             );
 
-          /*
-          Finger moves UP:
-          page scrollY increases.
-          Header disappears.
-          */
-
           if(
             direction > 0 &&
             accumulated >= 16
@@ -3988,12 +3938,6 @@ ${cards}
             accumulated = 0;
 
           }
-
-          /*
-          Finger moves DOWN:
-          page scrollY decreases.
-          Header returns.
-          */
 
           else if(
             direction < 0 &&
@@ -4021,7 +3965,6 @@ ${cards}
     );
 
   }
-
 
   function handleDocumentClick(event){
 
@@ -4058,7 +4001,6 @@ ${cards}
 
   }
 
-
   function handleEscape(event){
 
     if(
@@ -4075,7 +4017,6 @@ ${cards}
     }
 
   }
-
 
   function listenLanguage(){
 
@@ -4132,7 +4073,6 @@ ${cards}
 
   }
 
-
   function isIos(){
 
     return (
@@ -4144,7 +4084,6 @@ ${cards}
     );
 
   }
-
 
   function ensureManifestLink(){
 
@@ -4254,7 +4193,6 @@ ${cards}
 
   }
 
-
   function registerPetFriendlySW(){
 
     if(
@@ -4280,7 +4218,6 @@ ${cards}
     );
 
   }
-
 
   function createInstallUI(){
 
@@ -4409,7 +4346,6 @@ type="button"
 
   }
 
-
   function renderInstallUI(){
 
     if(
@@ -4489,7 +4425,6 @@ type="button"
 
   }
 
-
   function updateInstallVisibility(){
 
     const launcher =
@@ -4536,7 +4471,6 @@ type="button"
 
   }
 
-
   function openInstallSheet(){
 
     document
@@ -4549,7 +4483,6 @@ type="button"
     );
 
   }
-
 
   function closeInstallSheet(){
 
@@ -4564,7 +4497,6 @@ type="button"
 
   }
 
-
   function onInstallTap(){
 
     renderInstallUI();
@@ -4572,7 +4504,6 @@ type="button"
     openInstallSheet();
 
   }
-
 
   async function triggerInstallFlow(){
 
@@ -4604,7 +4535,6 @@ type="button"
     closeInstallSheet();
 
   }
-
 
   function preparePetFriendlyInstall(){
 
@@ -4651,7 +4581,6 @@ type="button"
     );
 
   }
-
 
   function init(){
 
@@ -4744,7 +4673,6 @@ type="button"
     };
 
   }
-
 
   if(
     document.readyState ===
