@@ -2060,6 +2060,870 @@ getAvailableVoices();
 
 <!-- PETS & DOGUE GLOBAL SHELL -->
 <script src="pets-dogue-shell.js?v=20260912-global-shell-1"></script>
+<!-- =========================================================
+PETS & DOGUE — CONTENTS EDITORIAL ENHANCEMENT
+Adds:
+1. Multilingual "Contents · Discover every section" ticker
+2. Editorial two-column visual design for the EXISTING Contents menu
+IMPORTANT: DOES NOT REPLACE OR MODIFY THE GLOBAL HEADER
+========================================================= -->
 
+<style>
+
+/* =========================================================
+CONTENTS TICKER
+========================================================= */
+
+#pdContentsTicker{
+position:relative;
+z-index:1600;
+width:100%;
+height:46px;
+display:flex;
+align-items:center;
+overflow:hidden;
+border-top:1px solid #c89b3c;
+border-bottom:1px solid #c89b3c;
+background:#f6f2e9;
+color:#111;
+cursor:pointer;
+}
+
+#pdContentsTicker:hover{
+background:#fff;
+}
+
+.pd-contents-ticker-track{
+display:flex;
+align-items:center;
+width:max-content;
+min-width:200%;
+white-space:nowrap;
+animation:pdContentsTickerMove 20s linear infinite;
+}
+
+#pdContentsTicker:hover .pd-contents-ticker-track{
+animation-play-state:paused;
+}
+
+.pd-contents-ticker-item{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:0 28px;
+font-family:Georgia,"Times New Roman",serif;
+font-size:17px;
+line-height:1;
+}
+
+.pd-contents-ticker-book{
+font-size:20px;
+}
+
+.pd-contents-ticker-title{
+font-weight:700;
+}
+
+.pd-contents-ticker-dot{
+color:#c89b3c;
+}
+
+.pd-contents-ticker-arrow{
+font-family:Arial,Helvetica,sans-serif;
+font-size:20px;
+}
+
+@keyframes pdContentsTickerMove{
+
+from{
+transform:translateX(0);
+}
+
+to{
+transform:translateX(-50%);
+}
+
+}
+
+/* =========================================================
+EXISTING CONTENTS WINDOW — EDITORIAL VISUAL ONLY
+Header/account/language functionality remains untouched.
+========================================================= */
+
+/* Works with our newer shared drawer */
+.pd-drawer{
+width:min(94vw,720px)!important;
+}
+
+/* Works with the older index Contents drawer if present */
+.side-menu{
+width:min(94vw,720px)!important;
+}
+
+/* Keep top black Contents area */
+.pd-drawer-head,
+.side-menu-header{
+background:#070707!important;
+color:#fff!important;
+}
+
+/* Make cards feel like an editorial magazine contents page */
+.pd-drawer-list,
+.menu-items{
+display:grid!important;
+grid-template-columns:repeat(2,minmax(0,1fr))!important;
+gap:5px!important;
+padding:8px!important;
+}
+
+/* NEW GLOBAL DRAWER CARDS */
+.pd-drawer-card{
+position:relative!important;
+display:block!important;
+min-height:150px!important;
+border:0!important;
+border-radius:0!important;
+overflow:hidden!important;
+background:#111!important;
+color:#fff!important;
+isolation:isolate!important;
+}
+
+.pd-drawer-card img{
+position:absolute!important;
+inset:0!important;
+width:100%!important;
+height:100%!important;
+min-height:0!important;
+object-fit:cover!important;
+z-index:-3!important;
+transition:transform .45s ease!important;
+}
+
+.pd-drawer-card::after{
+content:""!important;
+position:absolute!important;
+inset:0!important;
+z-index:-2!important;
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.88) 0%,
+rgba(0,0,0,.42) 47%,
+rgba(0,0,0,.08) 100%
+)!important;
+}
+
+.pd-drawer-card:hover img{
+transform:scale(1.045)!important;
+}
+
+.pd-drawer-copy{
+position:absolute!important;
+left:0!important;
+right:0!important;
+bottom:0!important;
+z-index:2!important;
+padding:15px 14px!important;
+display:block!important;
+}
+
+.pd-drawer-name{
+display:block!important;
+font-family:Georgia,"Times New Roman",serif!important;
+font-size:25px!important;
+font-weight:400!important;
+line-height:.98!important;
+color:#fff!important;
+text-shadow:0 2px 12px rgba(0,0,0,.65)!important;
+}
+
+.pd-drawer-desc{
+display:block!important;
+margin-top:7px!important;
+font-family:Arial,Helvetica,sans-serif!important;
+font-size:9px!important;
+font-weight:800!important;
+line-height:1.25!important;
+letter-spacing:1.1px!important;
+text-transform:uppercase!important;
+color:rgba(255,255,255,.9)!important;
+max-width:85%!important;
+}
+
+/* Small editorial arrow */
+.pd-drawer-card::before{
+content:"→"!important;
+position:absolute!important;
+right:11px!important;
+bottom:11px!important;
+z-index:4!important;
+width:34px!important;
+height:34px!important;
+display:grid!important;
+place-items:center!important;
+border:1px solid #d4a43d!important;
+border-radius:50%!important;
+background:rgba(5,5,5,.55)!important;
+color:#fff!important;
+font-size:18px!important;
+}
+
+/* Do not turn active page into a black blank tile */
+.pd-drawer-card.active{
+background:#111!important;
+color:#fff!important;
+}
+
+.pd-drawer-card.active .pd-drawer-name{
+color:#fff!important;
+}
+
+/* OLD INDEX MENU CARDS */
+.menu-item{
+position:relative!important;
+display:block!important;
+min-height:150px!important;
+border:0!important;
+border-radius:0!important;
+overflow:hidden!important;
+background:#111!important;
+color:#fff!important;
+isolation:isolate!important;
+}
+
+.menu-item img{
+position:absolute!important;
+inset:0!important;
+width:100%!important;
+height:100%!important;
+object-fit:cover!important;
+z-index:-3!important;
+transition:transform .45s ease!important;
+}
+
+.menu-item::after{
+content:""!important;
+position:absolute!important;
+inset:0!important;
+z-index:-2!important;
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.9) 0%,
+rgba(0,0,0,.42) 48%,
+rgba(0,0,0,.06) 100%
+)!important;
+}
+
+.menu-item:hover img{
+transform:scale(1.045)!important;
+}
+
+.menu-item > div{
+position:absolute!important;
+left:0!important;
+right:0!important;
+bottom:0!important;
+z-index:2!important;
+padding:15px 14px!important;
+}
+
+.menu-item h3{
+font-family:Georgia,"Times New Roman",serif!important;
+font-size:25px!important;
+font-weight:400!important;
+line-height:.98!important;
+color:#fff!important;
+margin:0!important;
+text-shadow:0 2px 12px rgba(0,0,0,.65)!important;
+}
+
+.menu-item p{
+margin-top:7px!important;
+padding:0!important;
+font-family:Arial,Helvetica,sans-serif!important;
+font-size:9px!important;
+font-weight:800!important;
+line-height:1.25!important;
+letter-spacing:1.1px!important;
+text-transform:uppercase!important;
+color:rgba(255,255,255,.9)!important;
+max-width:85%!important;
+}
+
+.menu-item::before{
+content:"→"!important;
+position:absolute!important;
+right:11px!important;
+bottom:11px!important;
+z-index:4!important;
+width:34px!important;
+height:34px!important;
+display:grid!important;
+place-items:center!important;
+border:1px solid #d4a43d!important;
+border-radius:50%!important;
+background:rgba(5,5,5,.55)!important;
+color:#fff!important;
+font-size:18px!important;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+#pdContentsTicker{
+height:42px;
+}
+
+.pd-contents-ticker-item{
+padding:0 20px;
+font-size:15px;
+}
+
+.pd-drawer,
+.side-menu{
+width:94vw!important;
+max-width:none!important;
+}
+
+.pd-drawer-list,
+.menu-items{
+grid-template-columns:repeat(2,minmax(0,1fr))!important;
+gap:4px!important;
+padding:6px!important;
+}
+
+.pd-drawer-card,
+.menu-item{
+min-height:128px!important;
+}
+
+.pd-drawer-name,
+.menu-item h3{
+font-size:20px!important;
+}
+
+.pd-drawer-desc,
+.menu-item p{
+font-size:8px!important;
+letter-spacing:.8px!important;
+}
+
+}
+
+/* Very narrow phones */
+@media(max-width:365px){
+
+.pd-drawer-card,
+.menu-item{
+min-height:118px!important;
+}
+
+.pd-drawer-name,
+.menu-item h3{
+font-size:18px!important;
+}
+
+}
+
+/* Arabic RTL */
+html[dir="rtl"] .pd-contents-ticker-item{
+direction:rtl;
+}
+
+html[dir="rtl"] .pd-drawer-card::before,
+html[dir="rtl"] .menu-item::before{
+right:auto!important;
+left:11px!important;
+content:"←"!important;
+}
+
+/* Accessibility */
+#pdContentsTicker:focus-visible{
+outline:3px solid #65e51f;
+outline-offset:-3px;
+}
+
+@media(prefers-reduced-motion:reduce){
+
+.pd-contents-ticker-track{
+animation:none!important;
+}
+
+}
+
+</style>
+
+<script>
+(function(){
+
+"use strict";
+
+const PD_CONTENTS_TICKER_TEXT={
+
+en:{
+title:"Contents",
+text:"Discover every section"
+},
+
+uk:{
+title:"Зміст",
+text:"Відкрийте для себе всі рубрики"
+},
+
+ru:{
+title:"Содержание",
+text:"Откройте для себя все рубрики"
+},
+
+fr:{
+title:"Sommaire",
+text:"Découvrez toutes les rubriques"
+},
+
+de:{
+title:"Inhalt",
+text:"Entdecken Sie alle Bereiche"
+},
+
+es:{
+title:"Contenido",
+text:"Descubre todas las secciones"
+},
+
+it:{
+title:"Contenuti",
+text:"Scopri tutte le sezioni"
+},
+
+pt:{
+title:"Conteúdo",
+text:"Descubra todas as secções"
+},
+
+nl:{
+title:"Inhoud",
+text:"Ontdek alle rubrieken"
+},
+
+pl:{
+title:"Spis treści",
+text:"Odkryj wszystkie sekcje"
+},
+
+cs:{
+title:"Obsah",
+text:"Objevte všechny rubriky"
+},
+
+sk:{
+title:"Obsah",
+text:"Objavte všetky rubriky"
+},
+
+hu:{
+title:"Tartalom",
+text:"Fedezze fel az összes rovatot"
+},
+
+ro:{
+title:"Conținut",
+text:"Descoperă toate secțiunile"
+},
+
+bg:{
+title:"Съдържание",
+text:"Открийте всички рубрики"
+},
+
+el:{
+title:"Περιεχόμενα",
+text:"Ανακαλύψτε όλες τις ενότητες"
+},
+
+sv:{
+title:"Innehåll",
+text:"Upptäck alla sektioner"
+},
+
+da:{
+title:"Indhold",
+text:"Oplev alle sektioner"
+},
+
+no:{
+title:"Innhold",
+text:"Oppdag alle seksjoner"
+},
+
+fi:{
+title:"Sisältö",
+text:"Tutustu kaikkiin osioihin"
+},
+
+tr:{
+title:"İçindekiler",
+text:"Tüm bölümleri keşfedin"
+},
+
+ar:{
+title:"المحتويات",
+text:"اكتشف جميع الأقسام"
+},
+
+hi:{
+title:"विषय सूची",
+text:"सभी अनुभाग खोजें"
+}
+
+};
+
+const PD_LANGUAGE_ALIASES={
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+function pdNormalizeLanguage(value){
+
+let code=
+String(value||"")
+.toLowerCase()
+.replace("_","-")
+.split("-")[0];
+
+code=
+PD_LANGUAGE_ALIASES[code]||
+code;
+
+return PD_CONTENTS_TICKER_TEXT[code]
+?code
+:"en";
+
+}
+
+function pdDetectLanguage(){
+
+const keys=[
+"pets_dogue_language",
+"petsDogueLanguage",
+"pd_language",
+"pd_lang",
+"selectedLanguage",
+"language",
+"lang",
+"i18nextLng"
+];
+
+for(const key of keys){
+
+try{
+
+const value=
+localStorage.getItem(key);
+
+if(value){
+
+return pdNormalizeLanguage(value);
+
+}
+
+}catch(error){}
+
+}
+
+return pdNormalizeLanguage(
+document.documentElement.lang||
+"en"
+);
+
+}
+
+function pdTickerHTML(language){
+
+const words=
+PD_CONTENTS_TICKER_TEXT[language]||
+PD_CONTENTS_TICKER_TEXT.en;
+
+const item=`
+<span class="pd-contents-ticker-item">
+<span class="pd-contents-ticker-book" aria-hidden="true">▣</span>
+<span class="pd-contents-ticker-title">${words.title}</span>
+<span class="pd-contents-ticker-dot">·</span>
+<span>${words.text}</span>
+<span class="pd-contents-ticker-arrow" aria-hidden="true">→</span>
+</span>
+`;
+
+return `
+<div class="pd-contents-ticker-track">
+${item}
+${item}
+${item}
+${item}
+${item}
+${item}
+</div>
+`;
+
+}
+
+function pdOpenExistingContents(){
+
+/*
+Do not create a second menu.
+Open the menu that already exists.
+*/
+
+if(
+typeof window.openUnifiedMenu==="function"
+){
+
+window.openUnifiedMenu();
+return;
+
+}
+
+if(
+typeof window.openMenu==="function"
+){
+
+window.openMenu();
+return;
+
+}
+
+/* Current shared header button */
+const button=
+document.querySelector(
+"#pdGlobalHeader button[aria-label*='menu' i],"+
+"#pdGlobalHeader button[aria-label*='contents' i],"+
+".menu-button,"+
+".pd-menu-button,"+
+".site-header button[aria-label*='menu' i]"
+);
+
+if(button){
+
+button.click();
+
+}
+
+}
+
+function pdFindHeader(){
+
+return(
+document.getElementById("pdGlobalHeader")||
+document.querySelector(".site-header")
+);
+
+}
+
+function pdInstallTicker(){
+
+if(
+document.getElementById(
+"pdContentsTicker"
+)
+){
+return true;
+}
+
+const header=
+pdFindHeader();
+
+if(!header){
+return false;
+}
+
+const ticker=
+document.createElement(
+"div"
+);
+
+ticker.id=
+"pdContentsTicker";
+
+ticker.setAttribute(
+"role",
+"button"
+);
+
+ticker.setAttribute(
+"tabindex",
+"0"
+);
+
+ticker.setAttribute(
+"aria-label",
+"Open contents"
+);
+
+ticker.innerHTML=
+pdTickerHTML(
+pdDetectLanguage()
+);
+
+ticker.addEventListener(
+"click",
+pdOpenExistingContents
+);
+
+ticker.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key==="Enter"||
+event.key===" "
+){
+
+event.preventDefault();
+pdOpenExistingContents();
+
+}
+
+}
+);
+
+header.insertAdjacentElement(
+"afterend",
+ticker
+);
+
+return true;
+
+}
+
+function pdUpdateTickerLanguage(){
+
+const ticker=
+document.getElementById(
+"pdContentsTicker"
+);
+
+if(!ticker){
+return;
+}
+
+ticker.innerHTML=
+pdTickerHTML(
+pdDetectLanguage()
+);
+
+}
+
+function pdBoot(){
+
+if(
+pdInstallTicker()
+){
+
+pdUpdateTickerLanguage();
+
+}else{
+
+/*
+The shared header may be injected after index.html loads.
+Wait for it without changing it.
+*/
+
+const observer=
+new MutationObserver(
+function(){
+
+if(
+pdInstallTicker()
+){
+
+observer.disconnect();
+
+}
+
+}
+);
+
+observer.observe(
+document.body,
+{
+childList:true,
+subtree:true
+}
+);
+
+setTimeout(
+function(){
+
+observer.disconnect();
+
+},
+8000
+);
+
+}
+
+}
+
+window.addEventListener(
+"petsdogue:languagechange",
+function(){
+
+setTimeout(
+pdUpdateTickerLanguage,
+0
+);
+
+}
+);
+
+window.addEventListener(
+"storage",
+function(event){
+
+if(
+event.key&&
+event.key.toLowerCase().includes("lang")
+){
+
+pdUpdateTickerLanguage();
+
+}
+
+}
+);
+
+setInterval(
+function(){
+
+pdUpdateTickerLanguage();
+
+},
+900
+);
+
+if(
+document.readyState==="loading"
+){
+
+document.addEventListener(
+"DOMContentLoaded",
+pdBoot
+);
+
+}else{
+
+pdBoot();
+
+}
+
+})();
+</script>
 </body>
 </html>
