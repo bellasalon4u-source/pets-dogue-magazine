@@ -4,17 +4,18 @@
    PETS & DOGUE
    PET-FRIENDLY PLACES API
 
-   FREE / LOW-COST DISCOVERY STACK
-   - Geoapify
-   - OpenStreetMap fallback in browser
-   - Wikimedia Commons photo fallback
+   SEARCH STACK
+   - Geoapify confirmed dog-friendly search
+   - Geoapify broad category search
+   - OpenStreetMap remains browser-side enrichment
+   - Wikimedia free photo fallback
 
    IMPORTANT
-   - No Google Places API
-   - One broad Geoapify request per category
-   - "All" uses broad lifestyle + pet services
-   - Confirmed dog-friendly places are detected and prioritised
-     by the frontend
+   - No Google Places API required
+   - Confirmed places first
+   - Unknown places remain visible
+   - Explicit dogs=no places are removed
+   - Designed to stay low-cost / free-tier friendly
 ========================================================= */
 
 
@@ -42,9 +43,11 @@ const NOMINATIM_SEARCH_URL =
 const WIKIMEDIA_API_URL =
   "https://commons.wikimedia.org/w/api.php";
 
-const MAX_RESULTS = 60;
+const MAX_RESULTS =
+  60;
 
-const DEFAULT_RESULTS = 60;
+const DEFAULT_RESULTS =
+  60;
 
 const MAX_RADIUS_METERS =
   50000;
@@ -57,7 +60,7 @@ const REQUEST_TIMEOUT =
 
 
 /* =========================================================
-   CATEGORY CONFIG
+   CATEGORIES
 ========================================================= */
 
 const CATEGORY_CONFIG = {
@@ -66,23 +69,23 @@ const CATEGORY_CONFIG = {
     geo:[
       "catering.cafe"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   },
 
   restaurant:{
     geo:[
       "catering.restaurant"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   },
 
   pub:{
     geo:[
       "catering.pub",
-      "catering.biergarten",
-      "catering.bar"
+      "catering.bar",
+      "catering.biergarten"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   },
 
   pizzeria:{
@@ -90,7 +93,7 @@ const CATEGORY_CONFIG = {
       "catering.fast_food.pizza",
       "catering.restaurant"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   },
 
   hotel:{
@@ -100,7 +103,7 @@ const CATEGORY_CONFIG = {
       "accommodation.hostel",
       "accommodation.motel"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   },
 
   park:{
@@ -108,48 +111,57 @@ const CATEGORY_CONFIG = {
       "pet.dog_park",
       "leisure.park"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   },
 
   beach:{
     geo:[
       "beach"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   },
 
   veterinary:{
     geo:[
       "pet.veterinary"
     ],
-    intrinsicPetFriendly:true
+    fallback:[
+      "pet"
+    ],
+    intrinsic:true
   },
 
   "pet-shop":{
     geo:[
       "pet.shop"
     ],
-    intrinsicPetFriendly:true
+    fallback:[
+      "pet"
+    ],
+    intrinsic:true
   },
 
   grooming:{
     geo:[
       "pet.service"
     ],
-    intrinsicPetFriendly:true
+    fallback:[
+      "pet"
+    ],
+    intrinsic:true
   },
 
   events:{
     geo:[
       "activity.events_venue"
     ],
-    intrinsicPetFriendly:false
+    intrinsic:false
   }
 
 };
 
 
-const ALL_LIFESTYLE_CATEGORIES = [
+const ALL_LIFESTYLE = [
 
   "catering.cafe",
 
@@ -157,9 +169,9 @@ const ALL_LIFESTYLE_CATEGORIES = [
 
   "catering.pub",
 
-  "catering.biergarten",
-
   "catering.bar",
+
+  "catering.biergarten",
 
   "catering.fast_food.pizza",
 
@@ -180,7 +192,7 @@ const ALL_LIFESTYLE_CATEGORIES = [
 ];
 
 
-const ALL_PET_SERVICE_CATEGORIES = [
+const ALL_PET_SERVICES = [
 
   "pet.dog_park",
 
@@ -197,26 +209,24 @@ const ALL_PET_SERVICE_CATEGORIES = [
    RESPONSE
 ========================================================= */
 
-function setCommonHeaders(
-  response
-){
+function setHeaders(res){
 
-  response.setHeader(
+  res.setHeader(
     "Access-Control-Allow-Origin",
     "*"
   );
 
-  response.setHeader(
+  res.setHeader(
     "Access-Control-Allow-Methods",
     "POST,OPTIONS"
   );
 
-  response.setHeader(
+  res.setHeader(
     "Access-Control-Allow-Headers",
     "Content-Type"
   );
 
-  response.setHeader(
+  res.setHeader(
     "X-Content-Type-Options",
     "nosniff"
   );
@@ -225,25 +235,25 @@ function setCommonHeaders(
 
 
 function sendJson(
-  response,
+  res,
   status,
   payload,
   cache = false
 ){
 
-  response.setHeader(
+  res.setHeader(
     "Content-Type",
     "application/json; charset=utf-8"
   );
 
-  response.setHeader(
+  res.setHeader(
     "Cache-Control",
     cache
       ? "public, s-maxage=300, stale-while-revalidate=900"
       : "no-store"
   );
 
-  response
+  res
     .status(status)
     .json(payload);
 
@@ -251,7 +261,7 @@ function sendJson(
 
 
 /* =========================================================
-   GENERAL HELPERS
+   HELPERS
 ========================================================= */
 
 function cleanString(
@@ -288,7 +298,7 @@ function safeArray(value){
 }
 
 
-function numberOrNull(value){
+function num(value){
 
   const number =
     Number(value);
@@ -329,6 +339,41 @@ function unique(values){
 }
 
 
+function safeUrl(value){
+
+  const raw =
+    cleanString(
+      value,
+      2000
+    );
+
+  if(!raw){
+
+    return "";
+
+  }
+
+  try{
+
+    const url =
+      new URL(raw);
+
+    if(
+      url.protocol === "https:" ||
+      url.protocol === "http:"
+    ){
+
+      return url.href;
+
+    }
+
+  }catch{}
+
+  return "";
+
+}
+
+
 function normalizeLanguage(value){
 
   const raw =
@@ -337,10 +382,7 @@ function normalizeLanguage(value){
       20
     )
     .toLowerCase()
-    .replace(
-      "_",
-      "-"
-    );
+    .replace("_","-");
 
   const base =
     raw.split("-")[0];
@@ -388,8 +430,6 @@ function normalizeCategory(value){
     coffee:"cafe",
 
     coffeeshop:"cafe",
-
-    coffee_shop:"cafe",
 
     restaurants:"restaurant",
 
@@ -471,41 +511,6 @@ function normalizeCategory(value){
 }
 
 
-function safeUrl(value){
-
-  const raw =
-    cleanString(
-      value,
-      2000
-    );
-
-  if(!raw){
-
-    return "";
-
-  }
-
-  try{
-
-    const url =
-      new URL(raw);
-
-    if(
-      url.protocol === "https:" ||
-      url.protocol === "http:"
-    ){
-
-      return url.href;
-
-    }
-
-  }catch(error){}
-
-  return "";
-
-}
-
-
 /* =========================================================
    FETCH
 ========================================================= */
@@ -521,9 +526,7 @@ async function fetchJson(
 
   const timer =
     setTimeout(
-      ()=>{
-        controller.abort();
-      },
+      ()=>controller.abort(),
       timeout
     );
 
@@ -601,21 +604,13 @@ function distanceKm(
     );
 
   const a =
-    Math.sin(
-      dLat/2
-    ) ** 2
+    Math.sin(dLat/2) ** 2
     +
-    Math.cos(
-      rad(lat1)
-    )
+    Math.cos(rad(lat1))
     *
-    Math.cos(
-      rad(lat2)
-    )
+    Math.cos(rad(lat2))
     *
-    Math.sin(
-      dLon/2
-    ) ** 2;
+    Math.sin(dLon/2) ** 2;
 
   return (
     R *
@@ -634,18 +629,28 @@ function distanceKm(
 ========================================================= */
 
 function detectCategory(
-  categories,
-  properties = {},
-  name = ""
+  properties,
+  hint = ""
 ){
 
-  const list =
-    safeArray(categories)
-      .map(
-        item=>
-          String(item)
-            .toLowerCase()
-      );
+  if(
+    hint &&
+    hint !== "all"
+  ){
+
+    return hint;
+
+  }
+
+  const categories =
+    safeArray(
+      properties?.categories
+    )
+    .map(
+      value=>
+        String(value)
+          .toLowerCase()
+    );
 
   const raw =
     properties?.datasource?.raw ||
@@ -653,7 +658,7 @@ function detectCategory(
 
   const text =
     [
-      name,
+      properties?.name,
       raw.amenity,
       raw.shop,
       raw.tourism,
@@ -666,12 +671,15 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "pet.veterinary"
         )
     )
+    ||
+    /veterinary|veterinarian|animal hospital|\bvet\b/i
+      .test(text)
   ){
 
     return "veterinary";
@@ -680,12 +688,15 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "pet.shop"
         )
     )
+    ||
+    /pet shop|pet store|pet supplies/i
+      .test(text)
   ){
 
     return "pet-shop";
@@ -694,12 +705,15 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "pet.service"
         )
     )
+    ||
+    /groom|grooming|dog wash|pet salon/i
+      .test(text)
   ){
 
     return "grooming";
@@ -708,9 +722,9 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "pet.dog_park"
         )
     )
@@ -722,10 +736,10 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item === "beach" ||
-        item.startsWith(
+    categories.some(
+      value=>
+        value === "beach" ||
+        value.startsWith(
           "beach."
         )
     )
@@ -737,9 +751,9 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "accommodation"
         )
     )
@@ -751,9 +765,9 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "activity.events_venue"
         )
     )
@@ -765,9 +779,9 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "leisure.park"
         )
     )
@@ -779,9 +793,9 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.includes(
+    categories.some(
+      value=>
+        value.includes(
           "pizza"
         )
     )
@@ -796,18 +810,18 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "catering.pub"
         )
         ||
-        item.startsWith(
-          "catering.biergarten"
+        value.startsWith(
+          "catering.bar"
         )
         ||
-        item.startsWith(
-          "catering.bar"
+        value.startsWith(
+          "catering.biergarten"
         )
     )
   ){
@@ -818,9 +832,9 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "catering.restaurant"
         )
     )
@@ -832,9 +846,9 @@ function detectCategory(
 
 
   if(
-    list.some(
-      item=>
-        item.startsWith(
+    categories.some(
+      value=>
+        value.startsWith(
           "catering.cafe"
         )
     )
@@ -847,17 +861,22 @@ function detectCategory(
 
   return "other";
 
-}
-
-
-/* =========================================================
-   PET-FRIENDLY DETECTION
+}/* =========================================================
+   DOG / PET POLICY DETECTION
 ========================================================= */
 
 function detectAllowsDogs(
   properties,
-  category
+  category,
+  forceConfirmed = false
 ){
+
+  if(forceConfirmed){
+
+    return true;
+
+  }
+
 
   if(
     category === "veterinary" ||
@@ -875,16 +894,16 @@ function detectAllowsDogs(
       properties?.categories
     )
     .map(
-      item=>
-        String(item)
+      value=>
+        String(value)
           .toLowerCase()
     );
 
 
   if(
     categories.some(
-      item=>
-        item.startsWith(
+      value=>
+        value.startsWith(
           "pet.dog_park"
         )
     )
@@ -900,17 +919,17 @@ function detectAllowsDogs(
       properties?.conditions
     )
     .map(
-      item=>
-        String(item)
+      value=>
+        String(value)
           .toLowerCase()
     );
 
 
   if(
     conditions.some(
-      item=>
-        item === "no-dogs" ||
-        item.startsWith(
+      value=>
+        value === "no-dogs" ||
+        value.startsWith(
           "no-dogs."
         )
     )
@@ -923,9 +942,9 @@ function detectAllowsDogs(
 
   if(
     conditions.some(
-      item=>
-        item === "dogs" ||
-        item.startsWith(
+      value=>
+        value === "dogs" ||
+        value.startsWith(
           "dogs."
         )
     )
@@ -941,7 +960,7 @@ function detectAllowsDogs(
     {};
 
 
-  const dogValue =
+  const dog =
     String(
       raw.dog ||
       raw.dogs ||
@@ -956,10 +975,9 @@ function detectAllowsDogs(
   if(
     [
       "no",
-      "private",
-      "customers:no"
+      "private"
     ]
-    .includes(dogValue)
+    .includes(dog)
   ){
 
     return false;
@@ -973,10 +991,13 @@ function detectAllowsDogs(
       "leashed",
       "designated",
       "permissive",
+      "outside",
+      "limited",
+      "conditional",
       "customers",
       "allowed"
     ]
-    .includes(dogValue)
+    .includes(dog)
   ){
 
     return true;
@@ -984,7 +1005,7 @@ function detectAllowsDogs(
   }
 
 
-  const description =
+  const notes =
     [
       raw.description,
       raw.note,
@@ -998,7 +1019,7 @@ function detectAllowsDogs(
 
   if(
     /\b(no dogs|dogs prohibited|dogs not allowed)\b/i
-      .test(description)
+      .test(notes)
   ){
 
     return false;
@@ -1008,7 +1029,7 @@ function detectAllowsDogs(
 
   if(
     /\b(dog friendly|dogs welcome|dogs allowed|pet friendly|pets welcome)\b/i
-      .test(description)
+      .test(notes)
   ){
 
     return true;
@@ -1022,7 +1043,7 @@ function detectAllowsDogs(
 
 
 /* =========================================================
-   IMAGE HELPERS
+   PHOTO EXTRACTION
 ========================================================= */
 
 function commonsFileUrl(value){
@@ -1052,10 +1073,7 @@ function commonsFileUrl(value){
 
   const filename =
     raw
-      .replace(
-        /^file:/i,
-        ""
-      )
+      .replace(/^file:/i,"")
       .trim();
 
 
@@ -1069,7 +1087,9 @@ function commonsFileUrl(value){
   return (
     "https://commons.wikimedia.org/wiki/Special:FilePath/"
     +
-    encodeURIComponent(filename)
+    encodeURIComponent(
+      filename
+    )
   );
 
 }
@@ -1081,7 +1101,7 @@ function extractPhotos(properties){
     properties?.datasource?.raw ||
     {};
 
-  const wiki =
+  const media =
     properties?.wiki_and_media ||
     {};
 
@@ -1093,9 +1113,9 @@ function extractPhotos(properties){
 
     properties?.photo,
 
-    wiki?.image,
+    media?.image,
 
-    wiki?.image_url,
+    media?.image_url,
 
     raw.image,
 
@@ -1119,17 +1139,19 @@ function extractPhotos(properties){
   candidates
     .filter(Boolean)
     .forEach(
-      value=>{
+      candidate=>{
 
-        const photo =
-          commonsFileUrl(value);
+        const url =
+          commonsFileUrl(
+            candidate
+          );
 
         if(
-          photo &&
-          !photos.includes(photo)
+          url &&
+          !photos.includes(url)
         ){
 
-          photos.push(photo);
+          photos.push(url);
 
         }
 
@@ -1143,13 +1165,14 @@ function extractPhotos(properties){
 
 
 /* =========================================================
-   NORMALIZE GEOAPIFY PLACE
+   NORMALISE PLACE
 ========================================================= */
 
-function normalizeGeoFeature(
+function normalizeFeature(
   feature,
-  center = null,
-  categoryHint = ""
+  center,
+  hint = "",
+  forceConfirmed = false
 ){
 
   const properties =
@@ -1162,7 +1185,7 @@ function normalizeGeoFeature(
 
 
   const longitude =
-    numberOrNull(
+    num(
       coordinates[0] ??
       properties.lon ??
       properties.longitude
@@ -1170,7 +1193,7 @@ function normalizeGeoFeature(
 
 
   const latitude =
-    numberOrNull(
+    num(
       coordinates[1] ??
       properties.lat ??
       properties.latitude
@@ -1190,9 +1213,8 @@ function normalizeGeoFeature(
   const providerId =
     cleanString(
       properties.place_id ||
-      properties.datasource?.raw?.osm_id ||
-      properties.osm_id ||
       feature.id ||
+      properties.osm_id ||
       `${latitude},${longitude}`,
       500
     );
@@ -1209,14 +1231,10 @@ function normalizeGeoFeature(
 
 
   const category =
-    categoryHint &&
-    categoryHint !== "all"
-      ? categoryHint
-      : detectCategory(
-          properties.categories,
-          properties,
-          name
-        );
+    detectCategory(
+      properties,
+      hint
+    );
 
 
   const address =
@@ -1248,7 +1266,7 @@ function normalizeGeoFeature(
       properties.datasource?.raw?.phone ||
       properties.datasource?.raw?.["contact:phone"] ||
       "",
-      150
+      160
     );
 
 
@@ -1261,38 +1279,26 @@ function normalizeGeoFeature(
   const allowsDogs =
     detectAllowsDogs(
       properties,
-      category
+      category,
+      forceConfirmed
     );
 
 
-  let openNow =
-    null;
-
-
-  if(
-    typeof properties.opening_hours?.open_now ===
-    "boolean"
-  ){
-
-    openNow =
-      properties.opening_hours.open_now;
-
-  }
-
-
   const distance =
-
-    center &&
-    Number.isFinite(center.lat) &&
-    Number.isFinite(center.lng)
-
+    center
       ? distanceKm(
           center.lat,
           center.lng,
           latitude,
           longitude
         )
+      : null;
 
+
+  const openNow =
+    typeof properties?.opening_hours?.open_now ===
+    "boolean"
+      ? properties.opening_hours.open_now
       : null;
 
 
@@ -1314,8 +1320,10 @@ function normalizeGeoFeature(
     address,
 
     location:{
-      lat:latitude,
-      lng:longitude
+      lat:
+        latitude,
+      lng:
+        longitude
     },
 
     distance,
@@ -1328,8 +1336,7 @@ function normalizeGeoFeature(
 
     phone,
 
-    googleMapsUrl:
-      "",
+    googleMapsUrl:"",
 
     photos,
 
@@ -1347,10 +1354,213 @@ function normalizeGeoFeature(
 
 
 /* =========================================================
-   GEOAPIFY REQUEST
+   IDENTITY / MERGE
 ========================================================= */
 
-async function geoapifyPlacesRequest({
+function identity(place){
+
+  const name =
+    cleanString(
+      place?.name,
+      300
+    )
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(
+      /[^\p{L}\p{N}]+/gu,
+      ""
+    );
+
+
+  const address =
+    cleanString(
+      place?.address,
+      500
+    )
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(
+      /[^\p{L}\p{N}]+/gu,
+      ""
+    );
+
+
+  if(
+    name &&
+    address
+  ){
+
+    return (
+      name +
+      "|" +
+      address
+    );
+
+  }
+
+
+  return [
+    name,
+    Number(
+      place?.location?.lat ||
+      0
+    ).toFixed(4),
+    Number(
+      place?.location?.lng ||
+      0
+    ).toFixed(4)
+  ]
+  .join("|");
+
+}
+
+
+function mergePlaces(
+  groups,
+  maxResults = MAX_RESULTS
+){
+
+  const map =
+    new Map();
+
+
+  safeArray(groups)
+    .flat()
+    .filter(Boolean)
+    .forEach(
+      place=>{
+
+        if(
+          place.allowsDogs ===
+          false
+        ){
+
+          return;
+
+        }
+
+
+        const key =
+          identity(
+            place
+          );
+
+
+        if(
+          !map.has(key)
+        ){
+
+          map.set(
+            key,
+            place
+          );
+
+          return;
+
+        }
+
+
+        const existing =
+          map.get(key);
+
+
+        const confirmed =
+          existing.allowsDogs === true ||
+          place.allowsDogs === true;
+
+
+        map.set(
+          key,
+          {
+
+            ...existing,
+
+            ...place,
+
+            website:
+              place.website ||
+              existing.website ||
+              "",
+
+            phone:
+              place.phone ||
+              existing.phone ||
+              "",
+
+            photo:
+              place.photo ||
+              existing.photo ||
+              "",
+
+            photos:
+              place.photos?.length
+                ? place.photos
+                : existing.photos ||
+                  [],
+
+            allowsDogs:
+              confirmed
+                ? true
+                : null,
+
+            distance:
+              Math.min(
+                existing.distance ??
+                999999,
+                place.distance ??
+                999999
+              )
+
+          }
+        );
+
+      }
+    );
+
+
+  return [
+    ...map.values()
+  ]
+  .sort(
+    (a,b)=>{
+
+      const ac =
+        a.allowsDogs === true;
+
+      const bc =
+        b.allowsDogs === true;
+
+
+      if(ac !== bc){
+
+        return ac
+          ? -1
+          : 1;
+
+      }
+
+
+      return (
+        (a.distance ?? 999999)
+        -
+        (b.distance ?? 999999)
+      );
+
+    }
+  )
+  .slice(
+    0,
+    maxResults
+  );
+
+}
+
+
+/* =========================================================
+   GEOAPIFY PLACES REQUEST
+========================================================= */
+
+async function geoapifyPlaces({
 
   latitude,
 
@@ -1359,6 +1569,8 @@ async function geoapifyPlacesRequest({
   radius,
 
   categories,
+
+  conditions = "",
 
   language,
 
@@ -1421,6 +1633,16 @@ async function geoapifyPlacesRequest({
   );
 
 
+  if(conditions){
+
+    url.searchParams.set(
+      "conditions",
+      conditions
+    );
+
+  }
+
+
   url.searchParams.set(
     "apiKey",
     GEOAPIFY_API_KEY
@@ -1447,21 +1669,16 @@ async function geoapifyPlacesRequest({
 
 
 /* =========================================================
-   SINGLE CATEGORY SEARCH
+   CATEGORY SEARCH
 
-   IMPORTANT:
-   We intentionally request ALL nearby places in the selected
-   category, not only places already tagged "dogs".
+   TWO SEARCHES:
+   1. confirmed dog-friendly
+   2. broad category
 
-   The frontend then sorts:
-   1. confirmed pet-friendly
-   2. unconfirmed
-
-   This fixes the problem where useful venues disappear only
-   because Geoapify/OSM has no dog tag yet.
+   This restores the useful behaviour we had before.
 ========================================================= */
 
-async function searchSingleCategory({
+async function searchCategory({
 
   latitude,
 
@@ -1490,105 +1707,221 @@ async function searchSingleCategory({
   }
 
 
-  const features =
-    await geoapifyPlacesRequest({
-
-      latitude,
-
-      longitude,
-
-      radius,
-
-      categories:
-        config.geo,
-
-      language,
-
-      limit:
-        maxResults
-
-    });
-
-
   const center = {
-    lat:latitude,
-    lng:longitude
+    lat:
+      latitude,
+    lng:
+      longitude
   };
 
 
-  return features
-
-    .map(
-      feature=>
-        normalizeGeoFeature(
-          feature,
-          center,
-          category
-        )
-    )
-
-    .filter(Boolean)
-
-    .filter(
-      place=>
-        place.allowsDogs !== false
-    )
-
-    .sort(
-      (a,b)=>{
-
-        const aConfirmed =
-          a.allowsDogs === true;
-
-        const bConfirmed =
-          b.allowsDogs === true;
+  const [
+    confirmedResult,
+    broadResult
+  ] =
+    await Promise.allSettled([
 
 
-        if(
-          aConfirmed !==
-          bConfirmed
-        ){
+      config.intrinsic
 
-          return aConfirmed
-            ? -1
-            : 1;
+        ? Promise.resolve([])
 
-        }
+        : geoapifyPlaces({
+
+            latitude,
+
+            longitude,
+
+            radius,
+
+            categories:
+              config.geo,
+
+            conditions:
+              "dogs",
+
+            language,
+
+            limit:
+              Math.min(
+                40,
+                MAX_RESULTS
+              )
+
+          }),
 
 
-        return (
-          (a.distance ?? 999999)
-          -
-          (b.distance ?? 999999)
+      geoapifyPlaces({
+
+        latitude,
+
+        longitude,
+
+        radius,
+
+        categories:
+          config.geo,
+
+        language,
+
+        limit:
+          MAX_RESULTS
+
+      })
+
+
+    ]);
+
+
+  const confirmedFeatures =
+    confirmedResult.status ===
+    "fulfilled"
+      ? confirmedResult.value
+      : [];
+
+
+  const broadFeatures =
+    broadResult.status ===
+    "fulfilled"
+      ? broadResult.value
+      : [];
+
+
+  const confirmed =
+    confirmedFeatures
+      .map(
+        feature=>
+          normalizeFeature(
+            feature,
+            center,
+            category,
+            true
+          )
+      )
+      .filter(Boolean);
+
+
+  let broad =
+    broadFeatures
+      .map(
+        feature=>
+          normalizeFeature(
+            feature,
+            center,
+            category,
+            config.intrinsic
+          )
+      )
+      .filter(Boolean)
+      .filter(
+        place=>
+          place.allowsDogs !==
+          false
+      );
+
+
+  /*
+     EXTRA PET-SERVICE FALLBACK
+
+     Some areas return little or nothing from:
+     pet.veterinary
+     pet.shop
+     pet.service
+
+     In that case search parent "pet" category,
+     then keep only the requested category.
+  */
+
+  if(
+    config.fallback?.length &&
+    broad.length < 8
+  ){
+
+    try{
+
+      const fallbackFeatures =
+        await geoapifyPlaces({
+
+          latitude,
+
+          longitude,
+
+          radius,
+
+          categories:
+            config.fallback,
+
+          language,
+
+          limit:
+            MAX_RESULTS
+
+        });
+
+
+      const fallback =
+        fallbackFeatures
+          .map(
+            feature=>
+              normalizeFeature(
+                feature,
+                center,
+                "",
+                false
+              )
+          )
+          .filter(Boolean)
+          .filter(
+            place=>
+              place.category ===
+              category
+          )
+          .map(
+            place=>({
+              ...place,
+              allowsDogs:true
+            })
+          );
+
+
+      broad =
+        mergePlaces(
+          [
+            broad,
+            fallback
+          ],
+          MAX_RESULTS
         );
 
-      }
-    )
+    }catch(error){
 
-    .slice(
-      0,
-      maxResults
-    );
+      console.warn(
+        "Pet parent fallback:",
+        error?.message
+      );
 
-}
+    }
+
+  }
 
 
-/* =========================================================
+  return mergePlaces(
+    [
+      confirmed,
+      broad
+    ],
+    maxResults
+  );
+
+}/* =========================================================
    ALL CATEGORIES
 
-   OLD LOGIC:
-   Geoapify conditions=dogs
-   → too few places
-
-   NEW LOGIC:
-   1. Broad lifestyle discovery
-   2. Pet services discovery
-   3. Detect confirmed pet-friendly data where available
-   4. Keep unknown places too
-   5. Remove explicit "dogs not allowed"
+   Confirmed dog-friendly lifestyle places are fetched
+   separately from broad places so they cannot disappear
+   behind the first 60 ordinary venues.
 ========================================================= */
 
-async function searchAllCategories({
+async function searchAll({
 
   latitude,
 
@@ -1603,22 +1936,22 @@ async function searchAllCategories({
 }){
 
   const center = {
-    lat:latitude,
-    lng:longitude
+    lat:
+      latitude,
+    lng:
+      longitude
   };
 
 
   const [
-
-    lifestyleResult,
-
-    petResult
-
+    confirmedLifestyleResult,
+    broadLifestyleResult,
+    petServicesResult
   ] =
     await Promise.allSettled([
 
 
-      geoapifyPlacesRequest({
+      geoapifyPlaces({
 
         latitude,
 
@@ -1627,17 +1960,20 @@ async function searchAllCategories({
         radius,
 
         categories:
-          ALL_LIFESTYLE_CATEGORIES,
+          ALL_LIFESTYLE,
+
+        conditions:
+          "dogs",
 
         language,
 
         limit:
-          MAX_RESULTS
+          40
 
       }),
 
 
-      geoapifyPlacesRequest({
+      geoapifyPlaces({
 
         latitude,
 
@@ -1646,15 +1982,31 @@ async function searchAllCategories({
         radius,
 
         categories:
-          ALL_PET_SERVICE_CATEGORIES,
+          ALL_LIFESTYLE,
 
         language,
 
         limit:
-          Math.min(
-            30,
-            MAX_RESULTS
-          )
+          60
+
+      }),
+
+
+      geoapifyPlaces({
+
+        latitude,
+
+        longitude,
+
+        radius,
+
+        categories:
+          ALL_PET_SERVICES,
+
+        language,
+
+        limit:
+          30
 
       })
 
@@ -1662,194 +2014,105 @@ async function searchAllCategories({
     ]);
 
 
-  const lifestyleFeatures =
+  const confirmedLifestyle =
+    (
+      confirmedLifestyleResult.status ===
+      "fulfilled"
+        ? confirmedLifestyleResult.value
+        : []
+    )
+    .map(
+      feature=>
+        normalizeFeature(
+          feature,
+          center,
+          "",
+          true
+        )
+    )
+    .filter(Boolean);
 
-    lifestyleResult.status ===
-    "fulfilled"
 
-      ? lifestyleResult.value
-
-      : [];
-
-
-  const petFeatures =
-
-    petResult.status ===
-    "fulfilled"
-
-      ? petResult.value
-
-      : [];
-
-
-  const lifestyle =
-
-    lifestyleFeatures
-
-      .map(
-        feature=>
-          normalizeGeoFeature(
-            feature,
-            center,
-            ""
-          )
-      )
-
-      .filter(Boolean)
-
-      .filter(
-        place=>
-          place.allowsDogs !== false
-      );
+  const broadLifestyle =
+    (
+      broadLifestyleResult.status ===
+      "fulfilled"
+        ? broadLifestyleResult.value
+        : []
+    )
+    .map(
+      feature=>
+        normalizeFeature(
+          feature,
+          center,
+          "",
+          false
+        )
+    )
+    .filter(Boolean)
+    .filter(
+      place=>
+        place.allowsDogs !==
+        false
+    );
 
 
   const petServices =
-
-    petFeatures
-
-      .map(
-        feature=>
-          normalizeGeoFeature(
-            feature,
-            center,
-            ""
-          )
-      )
-
-      .filter(Boolean)
-
-      .map(
-        place=>({
-          ...place,
-          allowsDogs:true
-        })
-      );
-
-
-  const map =
-    new Map();
-
-
-  [
-    ...lifestyle,
-    ...petServices
-  ]
-  .forEach(
-    place=>{
-
-      const key =
-        place.providerId ||
-        `${place.name}|${place.location.lat}|${place.location.lng}`;
-
-
-      const existing =
-        map.get(key);
-
-
-      if(!existing){
-
-        map.set(
-          key,
-          place
-        );
-
-        return;
-
-      }
-
-
-      map.set(
-        key,
-        {
-
-          ...existing,
-
-          ...place,
-
-          photo:
-            place.photo ||
-            existing.photo ||
-            "",
-
-          photos:
-            place.photos?.length
-              ? place.photos
-              : existing.photos ||
-                [],
-
-          website:
-            place.website ||
-            existing.website ||
-            "",
-
-          phone:
-            place.phone ||
-            existing.phone ||
-            "",
-
-          allowsDogs:
-            (
-              place.allowsDogs === true ||
-              existing.allowsDogs === true
-            )
-              ? true
-              : null
-
-        }
-      );
-
-    }
-  );
-
-
-  return Array.from(
-    map.values()
-  )
-
-    .sort(
-      (a,b)=>{
-
-        const aConfirmed =
-          a.allowsDogs === true;
-
-        const bConfirmed =
-          b.allowsDogs === true;
-
-
-        if(
-          aConfirmed !==
-          bConfirmed
-        ){
-
-          return aConfirmed
-            ? -1
-            : 1;
-
-        }
-
-
-        return (
-          (a.distance ?? 999999)
-          -
-          (b.distance ?? 999999)
-        );
-
-      }
+    (
+      petServicesResult.status ===
+      "fulfilled"
+        ? petServicesResult.value
+        : []
     )
+    .map(
+      feature=>
+        normalizeFeature(
+          feature,
+          center,
+          "",
+          false
+        )
+    )
+    .filter(Boolean)
+    .map(
+      place=>({
 
-    .slice(
-      0,
-      maxResults
+        ...place,
+
+        allowsDogs:
+          [
+            "veterinary",
+            "pet-shop",
+            "grooming",
+            "park"
+          ]
+          .includes(
+            place.category
+          )
+            ? true
+            : place.allowsDogs
+
+      })
     );
+
+
+  return mergePlaces(
+    [
+      confirmedLifestyle,
+      petServices,
+      broadLifestyle
+    ],
+    maxResults
+  );
 
 }
 
 
 /* =========================================================
-   AUTOCOMPLETE — GEOAPIFY
+   AUTOCOMPLETE
 ========================================================= */
 
-async function geoapifyAutocomplete({
+async function geoAutocomplete({
 
   query,
 
@@ -1921,85 +2184,73 @@ async function geoapifyAutocomplete({
 
   const data =
     await fetchJson(
-      url.toString(),
-      {
-        headers:{
-          Accept:
-            "application/json"
-        }
-      }
+      url.toString()
     );
 
 
   return safeArray(
     data?.results
   )
+  .map(
+    item=>({
 
-    .map(
-      item=>({
+      placeId:
+        cleanString(
+          item.place_id,
+          500
+        ),
 
-        placeId:
-          cleanString(
-            item.place_id,
-            500
-          ),
+      name:
+        cleanString(
+          item.name ||
+          item.address_line1 ||
+          item.formatted ||
+          "",
+          300
+        ),
 
-        name:
-          cleanString(
-            item.name ||
-            item.address_line1 ||
-            item.formatted ||
-            "",
-            300
-          ),
+      address:
+        cleanString(
+          item.formatted ||
+          [
+            item.address_line1,
+            item.address_line2
+          ]
+          .filter(Boolean)
+          .join(", "),
+          1000
+        ),
 
-        address:
-          cleanString(
-            item.formatted ||
-            [
-              item.address_line1,
-              item.address_line2
-            ]
-            .filter(Boolean)
-            .join(", "),
-            1000
-          ),
+      text:
+        cleanString(
+          item.formatted ||
+          item.name ||
+          "",
+          1000
+        ),
 
-        text:
-          cleanString(
-            item.formatted ||
-            item.name ||
-            "",
-            1000
-          ),
+      latitude:
+        num(
+          item.lat
+        ),
 
-        latitude:
-          numberOrNull(
-            item.lat
-          ),
+      longitude:
+        num(
+          item.lon
+        ),
 
-        longitude:
-          numberOrNull(
-            item.lon
-          ),
+      source:
+        "geoapify"
 
-        source:
-          "geoapify"
-
-      })
-    )
-
-    .filter(
-      item=>
-        item.placeId
-    );
+    })
+  )
+  .filter(
+    item=>
+      item.placeId
+  );
 
 }
 
-
-/* =========================================================
-   AUTOCOMPLETE — NOMINATIM FALLBACK
-========================================================= */
 
 async function nominatimAutocomplete({
 
@@ -2063,28 +2314,16 @@ async function nominatimAutocomplete({
 
 
   return safeArray(data)
-
     .map(
       item=>{
-
-        const latitude =
-          numberOrNull(
-            item.lat
-          );
-
-        const longitude =
-          numberOrNull(
-            item.lon
-          );
-
 
         const payload = {
 
           lat:
-            latitude,
+            num(item.lat),
 
           lon:
-            longitude,
+            num(item.lon),
 
           name:
             cleanString(
@@ -2133,9 +2372,11 @@ async function nominatimAutocomplete({
           text:
             payload.address,
 
-          latitude,
+          latitude:
+            payload.lat,
 
-          longitude,
+          longitude:
+            payload.lon,
 
           source:
             "osm"
@@ -2152,7 +2393,7 @@ async function nominatimAutocomplete({
    DETAILS
 ========================================================= */
 
-async function geoapifyDetails(
+async function geoDetails(
   placeId,
   language
 ){
@@ -2212,24 +2453,21 @@ async function geoapifyDetails(
   }
 
 
-  return normalizeGeoFeature(
+  return normalizeFeature(
     feature,
     null,
-    ""
+    "",
+    false
   );
 
 }
 
 
-function nominatimDetails(
-  placeId
-){
+function nomDetails(placeId){
 
   if(
     !String(placeId)
-      .startsWith(
-        "nom:"
-      )
+      .startsWith("nom:")
   ){
 
     return null;
@@ -2247,21 +2485,15 @@ function nominatimDetails(
               .slice(4),
             "base64url"
           )
-          .toString(
-            "utf8"
-          )
+          .toString("utf8")
       );
 
 
     const latitude =
-      numberOrNull(
-        payload.lat
-      );
+      num(payload.lat);
 
     const longitude =
-      numberOrNull(
-        payload.lon
-      );
+      num(payload.lon);
 
 
     if(
@@ -2328,7 +2560,7 @@ function nominatimDetails(
 
     };
 
-  }catch(error){
+  }catch{
 
     return null;
 
@@ -2339,9 +2571,6 @@ function nominatimDetails(
 
 /* =========================================================
    WIKIMEDIA PHOTO FALLBACK
-
-   Used only when the frontend asks for a missing photo.
-   No paid image API is required.
 ========================================================= */
 
 async function wikimediaPhoto({
@@ -2378,7 +2607,7 @@ async function wikimediaPhoto({
     .join(" ");
 
 
-  const query =
+  const searchText =
     [
       `"${cleanName}"`,
       locality
@@ -2413,7 +2642,7 @@ async function wikimediaPhoto({
 
   url.searchParams.set(
     "gsrsearch",
-    query
+    searchText
   );
 
 
@@ -2476,15 +2705,13 @@ async function wikimediaPhoto({
             ""
           );
 
-
-        const url =
+        const image =
           page?.imageinfo?.[0]?.thumburl ||
           page?.imageinfo?.[0]?.url ||
           "";
 
-
         return (
-          url &&
+          image &&
           !blocked.test(title)
         );
 
@@ -2505,31 +2732,31 @@ async function wikimediaPhoto({
    BODY
 ========================================================= */
 
-async function getBody(request){
+async function bodyOf(req){
 
   if(
-    request.body &&
-    typeof request.body ===
+    req.body &&
+    typeof req.body ===
     "object"
   ){
 
-    return request.body;
+    return req.body;
 
   }
 
 
   if(
-    typeof request.body ===
+    typeof req.body ===
     "string"
   ){
 
     try{
 
       return JSON.parse(
-        request.body
+        req.body
       );
 
-    }catch(error){
+    }catch{
 
       return {};
 
@@ -2544,26 +2771,24 @@ async function getBody(request){
 
 
 /* =========================================================
-   MAIN HANDLER
+   HANDLER
 ========================================================= */
 
 module.exports =
 async function handler(
-  request,
-  response
+  req,
+  res
 ){
 
-  setCommonHeaders(
-    response
-  );
+  setHeaders(res);
 
 
   if(
-    request.method ===
+    req.method ===
     "OPTIONS"
   ){
 
-    response
+    res
       .status(204)
       .end();
 
@@ -2573,12 +2798,12 @@ async function handler(
 
 
   if(
-    request.method !==
+    req.method !==
     "POST"
   ){
 
     return sendJson(
-      response,
+      res,
       405,
       {
         ok:false,
@@ -2593,9 +2818,7 @@ async function handler(
   try{
 
     const body =
-      await getBody(
-        request
-      );
+      await bodyOf(req);
 
 
     const action =
@@ -2612,9 +2835,9 @@ async function handler(
       );
 
 
-    /* =====================================================
-       PHOTO FALLBACK
-    ===================================================== */
+    /* -------------------------
+       PHOTO
+    ------------------------- */
 
     if(
       action ===
@@ -2637,7 +2860,7 @@ async function handler(
 
 
       return sendJson(
-        response,
+        res,
         200,
         {
           ok:true,
@@ -2649,9 +2872,9 @@ async function handler(
     }
 
 
-    /* =====================================================
+    /* -------------------------
        AUTOCOMPLETE
-    ===================================================== */
+    ------------------------- */
 
     if(
       action ===
@@ -2670,7 +2893,7 @@ async function handler(
       ){
 
         return sendJson(
-          response,
+          res,
           200,
           {
             ok:true,
@@ -2682,13 +2905,12 @@ async function handler(
 
 
       const latitude =
-        numberOrNull(
+        num(
           body.latitude
         );
 
-
       const longitude =
-        numberOrNull(
+        num(
           body.longitude
         );
 
@@ -2700,7 +2922,7 @@ async function handler(
       try{
 
         suggestions =
-          await geoapifyAutocomplete({
+          await geoAutocomplete({
 
             query,
 
@@ -2722,9 +2944,7 @@ async function handler(
       }
 
 
-      if(
-        !suggestions.length
-      ){
+      if(!suggestions.length){
 
         try{
 
@@ -2750,7 +2970,7 @@ async function handler(
 
 
       return sendJson(
-        response,
+        res,
         200,
         {
           ok:true,
@@ -2762,9 +2982,9 @@ async function handler(
     }
 
 
-    /* =====================================================
+    /* -------------------------
        DETAILS
-    ===================================================== */
+    ------------------------- */
 
     if(
       action ===
@@ -2789,7 +3009,7 @@ async function handler(
       ){
 
         place =
-          nominatimDetails(
+          nomDetails(
             placeId
           );
 
@@ -2798,7 +3018,7 @@ async function handler(
         try{
 
           place =
-            await geoapifyDetails(
+            await geoDetails(
               placeId,
               language
             );
@@ -2816,7 +3036,7 @@ async function handler(
 
 
       return sendJson(
-        response,
+        res,
         200,
         {
           ok:true,
@@ -2831,18 +3051,17 @@ async function handler(
     }
 
 
-    /* =====================================================
+    /* -------------------------
        NEARBY SEARCH
-    ===================================================== */
+    ------------------------- */
 
     const latitude =
-      numberOrNull(
+      num(
         body.latitude
       );
 
-
     const longitude =
-      numberOrNull(
+      num(
         body.longitude
       );
 
@@ -2853,7 +3072,7 @@ async function handler(
     ){
 
       return sendJson(
-        response,
+        res,
         400,
         {
           ok:false,
@@ -2899,12 +3118,13 @@ async function handler(
     ){
 
       return sendJson(
-        response,
+        res,
         200,
         {
           ok:true,
           provider:
             "local",
+          count:0,
           places:[]
         }
       );
@@ -2912,17 +3132,16 @@ async function handler(
     }
 
 
-    if(
-      !GEOAPIFY_API_KEY
-    ){
+    if(!GEOAPIFY_API_KEY){
 
       return sendJson(
-        response,
+        res,
         200,
         {
           ok:true,
           provider:
             "openstreetmap-fallback",
+          count:0,
           places:[]
         }
       );
@@ -2940,7 +3159,7 @@ async function handler(
     ){
 
       places =
-        await searchAllCategories({
+        await searchAll({
 
           latitude,
 
@@ -2957,7 +3176,7 @@ async function handler(
     }else{
 
       places =
-        await searchSingleCategory({
+        await searchCategory({
 
           latitude,
 
@@ -2977,12 +3196,13 @@ async function handler(
 
 
     return sendJson(
-      response,
+      res,
       200,
       {
         ok:true,
         provider:
           "geoapify",
+        category,
         count:
           places.length,
         places
@@ -3000,7 +3220,7 @@ async function handler(
 
 
     return sendJson(
-      response,
+      res,
       500,
       {
         ok:false,
