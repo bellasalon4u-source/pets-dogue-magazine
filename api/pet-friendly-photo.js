@@ -4,11 +4,13 @@
    PETS & DOGUE
    FREE VENUE PHOTO RESOLVER
 
-   Order:
-   1. Official venue website:
-      og:image
-      twitter:image
-   2. Wikimedia Commons fallback
+   Search order:
+   1. Official website og:image
+   2. Official website twitter:image
+   3. Official website regular <img>
+   4. Official website lazy-load images
+   5. Official website srcset images
+   6. Wikimedia Commons
 
    No Google Places photo API.
 ========================================================= */
@@ -17,10 +19,10 @@ const WIKIMEDIA_API =
   "https://commons.wikimedia.org/w/api.php";
 
 const TIMEOUT =
-  6500;
+  7000;
 
 const MAX_HTML_BYTES =
-  900000;
+  1200000;
 
 
 /* =========================================================
@@ -81,7 +83,7 @@ function send(
 
 function text(
   value,
-  max = 2000
+  max = 3000
 ){
 
   return String(
@@ -98,12 +100,28 @@ function text(
 }
 
 
+function decodeHtml(value){
+
+  return String(
+    value ||
+    ""
+  )
+  .replace(/&amp;/gi,"&")
+  .replace(/&quot;/gi,'"')
+  .replace(/&#39;/gi,"'")
+  .replace(/&apos;/gi,"'")
+  .replace(/&lt;/gi,"<")
+  .replace(/&gt;/gi,">");
+
+}
+
+
 function safeHttpUrl(value){
 
   const raw =
     text(
       value,
-      3000
+      4000
     );
 
   if(!raw){
@@ -137,23 +155,8 @@ function safeHttpUrl(value){
 }
 
 
-function htmlDecode(value){
-
-  return String(
-    value ||
-    ""
-  )
-  .replace(/&amp;/gi,"&")
-  .replace(/&quot;/gi,'"')
-  .replace(/&#39;/gi,"'")
-  .replace(/&lt;/gi,"<")
-  .replace(/&gt;/gi,">");
-
-}
-
-
 /* =========================================================
-   SSRF PROTECTION
+   PRIVATE NETWORK PROTECTION
 ========================================================= */
 
 function blockedHostname(hostname){
@@ -178,7 +181,6 @@ function blockedHostname(hostname){
 
   }
 
-
   if(
     /^127\./.test(host) ||
     /^10\./.test(host) ||
@@ -190,7 +192,6 @@ function blockedHostname(hostname){
     return true;
 
   }
-
 
   const match172 =
     host.match(
@@ -206,7 +207,6 @@ function blockedHostname(hostname){
     return true;
 
   }
-
 
   if(
     host === "::1" ||
@@ -236,13 +236,11 @@ async function hostnameIsSafe(hostname){
 
   }
 
-
   try{
 
     const dns =
       require("node:dns")
         .promises;
-
 
     const addresses =
       await dns.lookup(
@@ -253,15 +251,11 @@ async function hostnameIsSafe(hostname){
         }
       );
 
-
-    if(
-      !addresses.length
-    ){
+    if(!addresses.length){
 
       return false;
 
     }
-
 
     for(
       const item of addresses
@@ -279,7 +273,6 @@ async function hostnameIsSafe(hostname){
 
     }
 
-
     return true;
 
   }catch{
@@ -292,22 +285,19 @@ async function hostnameIsSafe(hostname){
 
 
 /* =========================================================
-   SAFE WEBSITE FETCH
+   SAFE HTML FETCH
 ========================================================= */
 
-async function fetchHtml(
-  startUrl
-){
+async function fetchHtml(startUrl){
 
   let current =
     safeHttpUrl(
       startUrl
     );
 
-
   for(
-    let redirect = 0;
-    redirect < 4;
+    let redirect=0;
+    redirect<4;
     redirect++
   ){
 
@@ -320,20 +310,16 @@ async function fetchHtml(
 
     }
 
-
     const parsed =
       new URL(
         current
       );
 
-
-    const allowed =
-      await hostnameIsSafe(
+    if(
+      !await hostnameIsSafe(
         parsed.hostname
-      );
-
-
-    if(!allowed){
+      )
+    ){
 
       return{
         html:"",
@@ -342,17 +328,14 @@ async function fetchHtml(
 
     }
 
-
     const controller =
       new AbortController();
-
 
     const timer =
       setTimeout(
         ()=>controller.abort(),
         TIMEOUT
       );
-
 
     try{
 
@@ -368,18 +351,14 @@ async function fetchHtml(
               controller.signal,
 
             headers:{
-
               "User-Agent":
                 "Mozilla/5.0 PETS-DOGUE/1.0",
 
               Accept:
                 "text/html,application/xhtml+xml"
-
             }
-
           }
         );
-
 
       if(
         response.status >= 300 &&
@@ -391,7 +370,6 @@ async function fetchHtml(
             "location"
           );
 
-
         if(!location){
 
           return{
@@ -401,18 +379,15 @@ async function fetchHtml(
 
         }
 
-
         current =
           new URL(
             location,
             current
           ).href;
 
-
         continue;
 
       }
-
 
       if(!response.ok){
 
@@ -423,7 +398,6 @@ async function fetchHtml(
 
       }
 
-
       const type =
         String(
           response.headers.get(
@@ -432,7 +406,6 @@ async function fetchHtml(
           ""
         )
         .toLowerCase();
-
 
       if(
         !type.includes(
@@ -447,13 +420,10 @@ async function fetchHtml(
 
       }
 
-
       const html =
         await response.text();
 
-
       return{
-
         html:
           html.slice(
             0,
@@ -462,7 +432,6 @@ async function fetchHtml(
 
         finalUrl:
           current
-
       };
 
     }catch{
@@ -482,7 +451,6 @@ async function fetchHtml(
 
   }
 
-
   return{
     html:"",
     finalUrl:""
@@ -492,7 +460,7 @@ async function fetchHtml(
 
 
 /* =========================================================
-   META IMAGE PARSER
+   META IMAGE
 ========================================================= */
 
 function metaContent(
@@ -505,7 +473,6 @@ function metaContent(
       /[.*+?^${}()|[\]\\]/g,
       "\\$&"
     );
-
 
   const patterns = [
 
@@ -521,7 +488,6 @@ function metaContent(
 
   ];
 
-
   for(
     const pattern of patterns
   ){
@@ -531,12 +497,11 @@ function metaContent(
         pattern
       );
 
-
     if(
       match?.[1]
     ){
 
-      return htmlDecode(
+      return decodeHtml(
         match[1]
       );
 
@@ -544,13 +509,234 @@ function metaContent(
 
   }
 
-
   return "";
 
 }
 
 
-function websiteImage(
+/* =========================================================
+   IMAGE FILTERS
+========================================================= */
+
+function badImageCandidate(value){
+
+  const url =
+    String(
+      value ||
+      ""
+    )
+    .toLowerCase();
+
+  if(!url){
+
+    return true;
+
+  }
+
+  return (
+    url.startsWith("data:") ||
+    url.includes("logo") ||
+    url.includes("favicon") ||
+    url.includes("icon") ||
+    url.includes("sprite") ||
+    url.includes("avatar") ||
+    url.includes("placeholder") ||
+    url.includes("tracking") ||
+    url.includes("pixel") ||
+    url.includes("badge") ||
+    url.endsWith(".svg")
+  );
+
+}
+
+
+function resolveImageUrl(
+  value,
+  pageUrl
+){
+
+  const candidate =
+    decodeHtml(
+      value
+    )
+    .trim();
+
+  if(
+    !candidate ||
+    badImageCandidate(
+      candidate
+    )
+  ){
+
+    return "";
+
+  }
+
+  try{
+
+    const url =
+      new URL(
+        candidate,
+        pageUrl
+      );
+
+    if(
+      url.protocol !== "https:" &&
+      url.protocol !== "http:"
+    ){
+
+      return "";
+
+    }
+
+    return url.href;
+
+  }catch{
+
+    return "";
+
+  }
+
+}
+
+
+/* =========================================================
+   EXTRACT NORMAL IMAGES
+========================================================= */
+
+function imageCandidates(
+  html,
+  pageUrl
+){
+
+  const results =
+    [];
+
+  function add(value){
+
+    const url =
+      resolveImageUrl(
+        value,
+        pageUrl
+      );
+
+    if(
+      url &&
+      !results.includes(url)
+    ){
+
+      results.push(
+        url
+      );
+
+    }
+
+  }
+
+
+  /*
+     Standard src
+  */
+
+  const imgRegex =
+    /<img\b[^>]*>/gi;
+
+  const tags =
+    html.match(
+      imgRegex
+    ) || [];
+
+
+  for(
+    const tag of tags
+  ){
+
+    const attrs = [
+
+      /(?:src)=["']([^"']+)["']/i,
+
+      /(?:data-src)=["']([^"']+)["']/i,
+
+      /(?:data-lazy-src)=["']([^"']+)["']/i,
+
+      /(?:data-original)=["']([^"']+)["']/i
+
+    ];
+
+
+    for(
+      const regex of attrs
+    ){
+
+      const match =
+        tag.match(
+          regex
+        );
+
+      if(
+        match?.[1]
+      ){
+
+        add(
+          match[1]
+        );
+
+      }
+
+    }
+
+
+    /*
+       srcset:
+       choose largest / last candidate
+    */
+
+    const srcsetMatch =
+      tag.match(
+        /(?:srcset|data-srcset)=["']([^"']+)["']/i
+      );
+
+
+    if(
+      srcsetMatch?.[1]
+    ){
+
+      const items =
+        srcsetMatch[1]
+        .split(",")
+        .map(
+          item=>
+            item
+            .trim()
+            .split(/\s+/)[0]
+        )
+        .filter(Boolean);
+
+
+      if(
+        items.length
+      ){
+
+        add(
+          items[
+            items.length-1
+          ]
+        );
+
+      }
+
+    }
+
+  }
+
+
+  return results;
+
+}/* =========================================================
+   WEBSITE PHOTO
+========================================================= */
+
+function websitePhoto(
   html,
   pageUrl
 ){
@@ -565,54 +751,69 @@ function websiteImage(
   }
 
 
-  const candidate =
+  const metaCandidates = [
+
     metaContent(
       html,
       "og:image"
-    )
-    ||
+    ),
+
     metaContent(
       html,
       "og:image:url"
-    )
-    ||
+    ),
+
     metaContent(
       html,
       "twitter:image"
-    )
-    ||
+    ),
+
     metaContent(
       html,
       "twitter:image:src"
-    );
+    )
+
+  ];
 
 
-  if(!candidate){
+  for(
+    const candidate of metaCandidates
+  ){
 
-    return "";
-
-  }
-
-
-  try{
-
-    const resolved =
-      new URL(
+    const url =
+      resolveImageUrl(
         candidate,
         pageUrl
       );
 
+    if(url){
 
-    if(
-      resolved.protocol === "https:" ||
-      resolved.protocol === "http:"
-    ){
-
-      return resolved.href;
+      return url;
 
     }
 
-  }catch{}
+  }
+
+
+  /*
+     No social preview image?
+     Use a real image from the official page.
+  */
+
+  const normalImages =
+    imageCandidates(
+      html,
+      pageUrl
+    );
+
+
+  if(
+    normalImages.length
+  ){
+
+    return normalImages[0];
+
+  }
 
 
   return "";
@@ -621,7 +822,7 @@ function websiteImage(
 
 
 /* =========================================================
-   WIKIMEDIA
+   WIKIMEDIA FALLBACK
 ========================================================= */
 
 async function wikimediaPhoto(
@@ -635,7 +836,6 @@ async function wikimediaPhoto(
       200
     );
 
-
   if(
     venue.length < 3
   ){
@@ -643,7 +843,6 @@ async function wikimediaPhoto(
     return "";
 
   }
-
 
   const locality =
     text(
@@ -657,7 +856,6 @@ async function wikimediaPhoto(
     )
     .join(" ");
 
-
   const query =
     [
       `"${venue}"`,
@@ -666,12 +864,10 @@ async function wikimediaPhoto(
     .filter(Boolean)
     .join(" ");
 
-
   const url =
     new URL(
       WIKIMEDIA_API
     );
-
 
   url.searchParams.set(
     "action",
@@ -718,17 +914,14 @@ async function wikimediaPhoto(
     "1200"
   );
 
-
   const controller =
     new AbortController();
-
 
   const timer =
     setTimeout(
       ()=>controller.abort(),
       TIMEOUT
     );
-
 
   try{
 
@@ -741,24 +934,20 @@ async function wikimediaPhoto(
         }
       );
 
-
     if(!response.ok){
 
       return "";
 
     }
 
-
     const data =
       await response.json();
-
 
     const pages =
       Object.values(
         data?.query?.pages ||
         {}
       );
-
 
     const blocked =
       /logo|icon|map|flag|coat of arms|diagram|svg|poster|menu/i;
@@ -774,7 +963,6 @@ async function wikimediaPhoto(
           ""
         );
 
-
       if(
         blocked.test(
           title
@@ -785,20 +973,17 @@ async function wikimediaPhoto(
 
       }
 
-
-      const image =
+      const candidate =
         page?.imageinfo?.[0]?.thumburl
         ||
         page?.imageinfo?.[0]?.url
         ||
         "";
 
-
       const safe =
         safeHttpUrl(
-          image
+          candidate
         );
-
 
       if(safe){
 
@@ -807,7 +992,6 @@ async function wikimediaPhoto(
       }
 
     }
-
 
     return "";
 
@@ -841,7 +1025,6 @@ function bodyOf(req){
 
   }
 
-
   if(
     typeof req.body === "string"
   ){
@@ -860,14 +1043,13 @@ function bodyOf(req){
 
   }
 
-
   return {};
 
 }
 
 
 /* =========================================================
-   MAIN
+   MAIN HANDLER
 ========================================================= */
 
 module.exports =
@@ -903,7 +1085,8 @@ async function handler(
       405,
       {
         ok:false,
-        error:"Method not allowed."
+        error:
+          "Method not allowed."
       }
     );
 
@@ -943,16 +1126,17 @@ async function handler(
       400,
       {
         ok:false,
-        error:"Place name is required."
+        error:
+          "Place name is required."
       }
     );
 
   }
 
 
-  /* -------------------------
-     1. OFFICIAL WEBSITE
-  ------------------------- */
+  /* =====================================================
+     OFFICIAL WEBSITE
+  ===================================================== */
 
   if(website){
 
@@ -963,7 +1147,7 @@ async function handler(
 
 
     const photo =
-      websiteImage(
+      websitePhoto(
         page.html,
         page.finalUrl
       );
@@ -976,7 +1160,8 @@ async function handler(
         200,
         {
           ok:true,
-          source:"website",
+          source:
+            "official-website",
           photo
         }
       );
@@ -986,9 +1171,9 @@ async function handler(
   }
 
 
-  /* -------------------------
-     2. WIKIMEDIA
-  ------------------------- */
+  /* =====================================================
+     WIKIMEDIA
+  ===================================================== */
 
   const commons =
     await wikimediaPhoto(
@@ -1004,7 +1189,8 @@ async function handler(
       200,
       {
         ok:true,
-        source:"wikimedia",
+        source:
+          "wikimedia",
         photo:
           commons
       }
@@ -1013,16 +1199,17 @@ async function handler(
   }
 
 
-  /* -------------------------
+  /* =====================================================
      NOTHING FOUND
-  ------------------------- */
+  ===================================================== */
 
   return send(
     res,
     200,
     {
       ok:true,
-      source:"fallback",
+      source:
+        "fallback",
       photo:""
     }
   );
