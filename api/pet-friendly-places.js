@@ -7,7 +7,8 @@
    SEARCH STACK
    - Geoapify confirmed dog-friendly search
    - Geoapify broad category search
-   - OpenStreetMap remains browser-side enrichment
+   - OpenStreetMap browser-side enrichment
+   - Community confirmations handled on frontend
    - Wikimedia free photo fallback
 
    IMPORTANT
@@ -61,6 +62,10 @@ const REQUEST_TIMEOUT =
 
 /* =========================================================
    CATEGORIES
+
+   IMPORTANT:
+   Pizzeria now uses real pizza categories instead of
+   the generic catering.restaurant category.
 ========================================================= */
 
 const CATEGORY_CONFIG = {
@@ -90,8 +95,8 @@ const CATEGORY_CONFIG = {
 
   pizzeria:{
     geo:[
-      "catering.fast_food.pizza",
-      "catering.restaurant"
+      "catering.restaurant.pizza",
+      "catering.fast_food.pizza"
     ],
     intrinsic:false
   },
@@ -101,7 +106,8 @@ const CATEGORY_CONFIG = {
       "accommodation.hotel",
       "accommodation.guest_house",
       "accommodation.hostel",
-      "accommodation.motel"
+      "accommodation.motel",
+      "accommodation.apartment"
     ],
     intrinsic:false
   },
@@ -167,13 +173,15 @@ const ALL_LIFESTYLE = [
 
   "catering.restaurant",
 
+  "catering.restaurant.pizza",
+
+  "catering.fast_food.pizza",
+
   "catering.pub",
 
   "catering.bar",
 
   "catering.biergarten",
-
-  "catering.fast_food.pizza",
 
   "accommodation.hotel",
 
@@ -182,6 +190,8 @@ const ALL_LIFESTYLE = [
   "accommodation.hostel",
 
   "accommodation.motel",
+
+  "accommodation.apartment",
 
   "leisure.park",
 
@@ -448,6 +458,8 @@ function normalizeCategory(value){
     hotels:"hotel",
 
     lodging:"hotel",
+
+    accommodation:"hotel",
 
     parks:"park",
 
@@ -861,7 +873,10 @@ function detectCategory(
 
   return "other";
 
-}/* =========================================================
+}
+
+
+/* =========================================================
    DOG / PET POLICY DETECTION
 ========================================================= */
 
@@ -1675,7 +1690,7 @@ async function geoapifyPlaces({
    1. confirmed dog-friendly
    2. broad category
 
-   This restores the useful behaviour we had before.
+   Confirmed first, unknown second.
 ========================================================= */
 
 async function searchCategory({
@@ -1820,17 +1835,14 @@ async function searchCategory({
       );
 
 
-  /*
-     EXTRA PET-SERVICE FALLBACK
+  /* =====================================================
+     PET SERVICE FALLBACK
 
-     Some areas return little or nothing from:
-     pet.veterinary
-     pet.shop
-     pet.service
+     Geoapify can sometimes have fewer objects under the
+     exact pet subcategory.
 
-     In that case search parent "pet" category,
-     then keep only the requested category.
-  */
+     Then use parent "pet" and filter the category ourselves.
+  ===================================================== */
 
   if(
     config.fallback?.length &&
@@ -1913,12 +1925,14 @@ async function searchCategory({
     maxResults
   );
 
-}/* =========================================================
+}
+
+
+/* =========================================================
    ALL CATEGORIES
 
    Confirmed dog-friendly lifestyle places are fetched
-   separately from broad places so they cannot disappear
-   behind the first 60 ordinary venues.
+   separately so they cannot disappear behind ordinary venues.
 ========================================================= */
 
 async function searchAll({
@@ -2835,9 +2849,9 @@ async function handler(
       );
 
 
-    /* -------------------------
+    /* =====================================================
        PHOTO
-    ------------------------- */
+    ===================================================== */
 
     if(
       action ===
@@ -2872,9 +2886,9 @@ async function handler(
     }
 
 
-    /* -------------------------
+    /* =====================================================
        AUTOCOMPLETE
-    ------------------------- */
+    ===================================================== */
 
     if(
       action ===
@@ -2982,9 +2996,9 @@ async function handler(
     }
 
 
-    /* -------------------------
+    /* =====================================================
        DETAILS
-    ------------------------- */
+    ===================================================== */
 
     if(
       action ===
@@ -3051,9 +3065,9 @@ async function handler(
     }
 
 
-    /* -------------------------
+    /* =====================================================
        NEARBY SEARCH
-    ------------------------- */
+    ===================================================== */
 
     const latitude =
       num(
