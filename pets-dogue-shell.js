@@ -4694,3 +4694,61 @@ type="button"
   }
 
 })();
+/* =========================================================
+   PETS & DOGUE — GLOBAL MISO HELP
+   Loads the independent Help / FAQ assistant on every page
+   that already uses pets-dogue-shell.js.
+   ========================================================= */
+
+(function () {
+  "use strict";
+
+  if (window.__PETS_DOGUE_HELP_LOADER__) {
+    return;
+  }
+
+  window.__PETS_DOGUE_HELP_LOADER__ = true;
+
+  function loadPetsDogueHelp() {
+
+    if (
+      document.querySelector(
+        'script[data-pets-dogue-help="true"]'
+      )
+    ) {
+      return;
+    }
+
+    const script = document.createElement("script");
+
+    script.src =
+      "pets-dogue-help.js?v=20260915-global-help-1";
+
+    script.defer = true;
+
+    script.dataset.petsDogueHelp = "true";
+
+    script.addEventListener("error", function () {
+      console.warn(
+        "PETS & DOGUE Help could not be loaded."
+      );
+    });
+
+    document.head.appendChild(script);
+  }
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      loadPetsDogueHelp,
+      { once: true }
+    );
+
+  } else {
+
+    loadPetsDogueHelp();
+
+  }
+
+})();
