@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="PETS &amp; DOGUE — digital lifestyle platform for pets and the people who love them." name="description"/>
+<meta
+content="PETS &amp; DOGUE — digital lifestyle platform and magazine for pets and the people who love them. One world. Every pet."
+name="description"
+/>
 <title>PETS &amp; DOGUE — One world. Every pet.</title>
 
 <style>
@@ -57,7 +60,7 @@ cursor:pointer;
 }
 
 /* =========================================================
-   EXISTING ACCOUNT BAR — KEEP
+   ACCOUNT BAR
 ========================================================= */
 
 .account-bar{
@@ -140,7 +143,7 @@ max-width:190px;
 }
 
 /* =========================================================
-   EXISTING HEADER — KEEP
+   HEADER
 ========================================================= */
 
 .site-header{
@@ -243,7 +246,7 @@ color:var(--gold-light);
 }
 
 /* =========================================================
-   EXISTING SIDE MENU — KEEP
+   SIDE MENU
 ========================================================= */
 
 .menu-overlay{
@@ -360,7 +363,7 @@ padding-right:8px;
 }
 
 /* =========================================================
-   SEARCH — KEEP
+   SEARCH
 ========================================================= */
 
 .search-overlay{
@@ -442,11 +445,12 @@ font-size:13px;
 }
 
 /* =========================================================
-   NEW HOMEPAGE CONTENT
+   HOMEPAGE — NEW VISUAL SYSTEM
 ========================================================= */
 
 .home-main{
 overflow:hidden;
+background:white;
 }
 
 .home-section{
@@ -458,17 +462,17 @@ padding:90px 22px;
 .eyebrow{
 font-size:12px;
 font-weight:900;
-letter-spacing:2.5px;
+letter-spacing:2.4px;
 text-transform:uppercase;
-margin-bottom:14px;
+margin-bottom:15px;
 }
 
 .display-title{
 font-family:Georgia,serif;
-font-size:clamp(52px,7vw,112px);
+font-size:clamp(58px,8vw,126px);
 font-weight:normal;
-line-height:.87;
-letter-spacing:-3px;
+line-height:.84;
+letter-spacing:-4px;
 }
 
 .display-title em{
@@ -476,8 +480,8 @@ font-style:italic;
 }
 
 .big-copy{
-font-size:clamp(17px,2vw,24px);
-line-height:1.5;
+font-size:clamp(18px,2vw,24px);
+line-height:1.55;
 max-width:720px;
 }
 
@@ -485,14 +489,16 @@ max-width:720px;
 display:inline-flex;
 align-items:center;
 justify-content:center;
-min-height:55px;
-padding:0 26px;
+min-height:56px;
+padding:0 27px;
 border-radius:999px;
 font-weight:900;
 font-size:13px;
 letter-spacing:.6px;
 text-transform:uppercase;
-transition:.25s;
+transition:
+transform .22s ease,
+box-shadow .22s ease;
 }
 
 .action-button:hover{
@@ -507,7 +513,7 @@ color:white;
 .action-green{
 background:var(--green);
 color:#111;
-box-shadow:0 8px 30px rgba(101,229,31,.32);
+box-shadow:0 10px 30px rgba(101,229,31,.32);
 }
 
 .action-yellow{
@@ -530,16 +536,17 @@ background:white;
 color:#111;
 }
 
-/* INTRO */
+/* =========================================================
+   INTRO
+========================================================= */
 
 .platform-intro{
-background:white;
-padding:0;
+background:#111;
 }
 
 .intro-visual{
 position:relative;
-min-height:min(790px,85vh);
+min-height:min(820px,88vh);
 overflow:hidden;
 background:#111;
 }
@@ -558,17 +565,26 @@ content:"";
 position:absolute;
 inset:0;
 background:
-linear-gradient(90deg,rgba(0,0,0,.8),rgba(0,0,0,.15) 60%),
-linear-gradient(to top,rgba(0,0,0,.58),transparent 55%);
+linear-gradient(
+90deg,
+rgba(0,0,0,.84) 0%,
+rgba(0,0,0,.52) 34%,
+rgba(0,0,0,.08) 76%
+),
+linear-gradient(
+to top,
+rgba(0,0,0,.58),
+transparent 55%
+);
 }
 
 .intro-content{
 position:absolute;
 z-index:2;
 left:max(25px,calc((100vw - 1450px)/2));
-bottom:70px;
+bottom:72px;
 color:white;
-width:min(790px,88%);
+width:min(850px,90%);
 }
 
 .intro-content .eyebrow{
@@ -578,8 +594,8 @@ color:var(--yellow);
 .intro-content p{
 font-size:clamp(18px,2vw,25px);
 line-height:1.5;
-margin:25px 0 30px;
-max-width:680px;
+margin:25px 0 31px;
+max-width:700px;
 }
 
 .intro-actions{
@@ -588,7 +604,9 @@ gap:10px;
 flex-wrap:wrap;
 }
 
-/* WHAT IS P&D */
+/* =========================================================
+   IDENTITY
+========================================================= */
 
 .identity{
 background:var(--cream);
@@ -597,33 +615,39 @@ background:var(--cream);
 .identity-grid{
 display:grid;
 grid-template-columns:.85fr 1.15fr;
-gap:60px;
+gap:65px;
 align-items:center;
 }
 
 .identity-copy h2{
 font-family:Georgia,serif;
-font-size:clamp(45px,5vw,82px);
+font-size:clamp(50px,6vw,90px);
 font-weight:normal;
-line-height:.94;
-margin-bottom:25px;
+line-height:.91;
+margin-bottom:27px;
 }
 
 .identity-copy p{
-font-size:19px;
+font-size:20px;
 line-height:1.7;
-max-width:630px;
-}
-
-.identity-copy strong{
-font-weight:900;
+max-width:650px;
 }
 
 .identity-images{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:1.15fr .85fr;
 gap:8px;
-height:640px;
+height:650px;
+}
+
+.identity-images figure{
+position:relative;
+overflow:hidden;
+background:#ddd;
+}
+
+.identity-images figure:first-child{
+margin-top:65px;
 }
 
 .identity-images img{
@@ -632,12 +656,22 @@ height:100%;
 object-fit:cover;
 }
 
-.identity-images img:first-child{
-margin-top:70px;
-height:570px;
+.image-tag{
+position:absolute;
+left:17px;
+bottom:17px;
+background:white;
+color:#111;
+padding:10px 14px;
+font-size:11px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
 }
 
-/* BENEFITS */
+/* =========================================================
+   BENEFIT STRIP
+========================================================= */
 
 .benefit-strip{
 background:#111;
@@ -652,8 +686,8 @@ grid-template-columns:repeat(4,1fr);
 }
 
 .benefit{
-padding:42px 28px;
-border-right:1px solid #333;
+padding:45px 30px;
+border-right:1px solid #343434;
 }
 
 .benefit:last-child{
@@ -662,35 +696,37 @@ border-right:none;
 
 .benefit-number{
 font-family:Georgia,serif;
-font-size:50px;
+font-size:54px;
+line-height:1;
 color:var(--yellow);
-margin-bottom:13px;
+margin-bottom:16px;
 }
 
 .benefit h3{
 font-family:Georgia,serif;
-font-size:29px;
+font-size:31px;
 font-weight:normal;
-margin-bottom:8px;
+margin-bottom:9px;
 }
 
 .benefit p{
 font-size:14px;
-line-height:1.55;
-color:#bbb;
+line-height:1.6;
+color:#c5c5c5;
 }
 
-/* PET FRIENDLY */
+/* =========================================================
+   PET FRIENDLY
+========================================================= */
 
 .places-section{
 background:var(--blue);
-padding:0;
 }
 
 .places-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
-min-height:720px;
+grid-template-columns:1.05fr .95fr;
+min-height:730px;
 }
 
 .places-photo{
@@ -705,6 +741,20 @@ height:100%;
 object-fit:cover;
 }
 
+.dachshund-title{
+position:absolute;
+left:0;
+right:0;
+bottom:28px;
+padding:0 28px;
+font-family:Georgia,serif;
+font-size:clamp(34px,5vw,74px);
+line-height:.9;
+font-weight:normal;
+color:white;
+text-shadow:0 3px 22px rgba(0,0,0,.65);
+}
+
 .places-copy{
 display:flex;
 flex-direction:column;
@@ -715,18 +765,18 @@ padding:70px clamp(30px,6vw,95px);
 .places-copy .eyebrow{
 background:white;
 align-self:flex-start;
-padding:8px 12px;
+padding:9px 13px;
 }
 
 .places-copy h2{
 font-family:Georgia,serif;
-font-size:clamp(54px,6vw,94px);
+font-size:clamp(58px,7vw,105px);
 font-weight:normal;
-line-height:.88;
-margin-bottom:25px;
+line-height:.84;
+margin-bottom:26px;
 }
 
-.places-copy p{
+.places-copy>p{
 font-size:20px;
 line-height:1.6;
 max-width:620px;
@@ -734,18 +784,34 @@ margin-bottom:28px;
 }
 
 .phone-feature{
-display:flex;
-gap:12px;
-align-items:flex-start;
-font-weight:bold;
-margin-bottom:30px;
+display:grid;
+grid-template-columns:54px 1fr;
+gap:15px;
+align-items:center;
+background:white;
+padding:18px;
+margin-bottom:28px;
+max-width:610px;
 }
 
-.phone-feature span{
-font-size:29px;
+.phone-icon{
+font-size:37px;
 }
 
-/* MARKETPLACE */
+.phone-feature strong{
+display:block;
+font-size:17px;
+margin-bottom:4px;
+}
+
+.phone-feature p{
+font-size:14px;
+line-height:1.5;
+}
+
+/* =========================================================
+   MARKETPLACE
+========================================================= */
 
 .market-section{
 background:var(--yellow);
@@ -753,23 +819,23 @@ background:var(--yellow);
 
 .market-grid{
 display:grid;
-grid-template-columns:.9fr 1.1fr;
-gap:40px;
+grid-template-columns:.88fr 1.12fr;
+gap:48px;
 align-items:center;
 }
 
 .market-copy h2{
 font-family:Georgia,serif;
-font-size:clamp(55px,7vw,105px);
+font-size:clamp(60px,8vw,116px);
 font-weight:normal;
-line-height:.85;
-margin-bottom:25px;
+line-height:.82;
+margin-bottom:27px;
 }
 
 .market-copy p{
 font-size:20px;
 line-height:1.6;
-max-width:600px;
+max-width:610px;
 margin-bottom:25px;
 }
 
@@ -777,16 +843,18 @@ margin-bottom:25px;
 display:inline-block;
 background:#111;
 color:white;
-padding:13px 18px;
+padding:14px 19px;
 font-size:17px;
 font-weight:900;
-margin-bottom:27px;
+margin-bottom:28px;
 transform:rotate(-1deg);
 }
 
 .market-image{
-height:680px;
+position:relative;
+height:700px;
 overflow:hidden;
+background:#ddd;
 }
 
 .market-image img{
@@ -795,11 +863,22 @@ height:100%;
 object-fit:cover;
 }
 
-/* HELP */
+.market-image-label{
+position:absolute;
+right:22px;
+bottom:22px;
+background:var(--green);
+padding:13px 17px;
+font-weight:900;
+}
+
+/* =========================================================
+   HELP
+========================================================= */
 
 .help-section{
 position:relative;
-min-height:780px;
+min-height:800px;
 background:#111;
 color:white;
 overflow:hidden;
@@ -818,8 +897,17 @@ content:"";
 position:absolute;
 inset:0;
 background:
-linear-gradient(90deg,rgba(0,0,0,.9),rgba(0,0,0,.15)),
-linear-gradient(to top,rgba(0,0,0,.7),transparent);
+linear-gradient(
+90deg,
+rgba(0,0,0,.94) 0%,
+rgba(0,0,0,.68) 36%,
+rgba(0,0,0,.08) 76%
+),
+linear-gradient(
+to top,
+rgba(0,0,0,.68),
+transparent 60%
+);
 }
 
 .help-content{
@@ -827,21 +915,21 @@ position:relative;
 z-index:2;
 max-width:1500px;
 margin:auto;
-padding:110px 25px;
+padding:115px 25px;
 }
 
 .help-content .eyebrow{
-color:var(--red);
+color:#ff5c62;
 font-size:14px;
 }
 
 .help-content h2{
 font-family:Georgia,serif;
-font-size:clamp(58px,8vw,125px);
+font-size:clamp(62px,9vw,135px);
 font-weight:normal;
-line-height:.82;
-max-width:900px;
-margin-bottom:28px;
+line-height:.79;
+max-width:970px;
+margin-bottom:31px;
 }
 
 .help-content h2 span{
@@ -851,39 +939,42 @@ color:var(--red);
 .help-content p{
 font-size:21px;
 line-height:1.55;
-max-width:600px;
-margin-bottom:30px;
+max-width:620px;
+margin-bottom:31px;
 }
 
-/* COMMUNITY */
+/* =========================================================
+   COMMUNITY / EVERY PET
+========================================================= */
 
 .community-section{
 background:white;
 }
 
 .community-heading{
-max-width:900px;
-margin-bottom:40px;
+max-width:940px;
+margin-bottom:43px;
 }
 
 .community-heading h2{
 font-family:Georgia,serif;
-font-size:clamp(50px,6vw,92px);
+font-size:clamp(54px,7vw,102px);
 font-weight:normal;
-line-height:.9;
-margin-bottom:20px;
+line-height:.86;
+margin-bottom:22px;
 }
 
 .community-photos{
 display:grid;
 grid-template-columns:1.2fr .8fr;
-grid-template-rows:320px 320px;
+grid-template-rows:330px 330px;
 gap:7px;
 }
 
 .community-card{
 position:relative;
 overflow:hidden;
+background:#ddd;
 }
 
 .community-card:first-child{
@@ -898,7 +989,7 @@ transition:.5s;
 }
 
 .community-card:hover img{
-transform:scale(1.04);
+transform:scale(1.035);
 }
 
 .community-label{
@@ -908,9 +999,13 @@ bottom:20px;
 background:white;
 padding:12px 17px;
 font-weight:900;
+font-size:12px;
+letter-spacing:.8px;
 }
 
-/* COVER STAR */
+/* =========================================================
+   COVER STAR / MISO
+========================================================= */
 
 .star-section{
 background:#111;
@@ -919,14 +1014,15 @@ color:white;
 
 .star-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:1.05fr .95fr;
 align-items:stretch;
-min-height:720px;
+min-height:740px;
 }
 
 .star-image{
 position:relative;
 overflow:hidden;
+background:#222;
 }
 
 .star-image img{
@@ -941,7 +1037,11 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 background:
-radial-gradient(circle at 85% 20%,rgba(255,229,0,.23),transparent 26%),
+radial-gradient(
+circle at 85% 20%,
+rgba(255,229,0,.24),
+transparent 27%
+),
 #111;
 }
 
@@ -951,20 +1051,22 @@ color:var(--yellow);
 
 .star-copy h2{
 font-family:Georgia,serif;
-font-size:clamp(55px,6vw,96px);
+font-size:clamp(58px,7vw,105px);
 font-weight:normal;
-line-height:.87;
-margin-bottom:25px;
+line-height:.83;
+margin-bottom:27px;
 }
 
 .star-copy p{
 font-size:19px;
-line-height:1.6;
-max-width:580px;
-margin-bottom:30px;
+line-height:1.65;
+max-width:590px;
+margin-bottom:31px;
 }
 
-/* CLUB */
+/* =========================================================
+   MEMBERSHIP
+========================================================= */
 
 .club-section{
 background:var(--green);
@@ -972,23 +1074,23 @@ background:var(--green);
 
 .club-grid{
 display:grid;
-grid-template-columns:1fr .85fr;
-gap:60px;
+grid-template-columns:1fr .82fr;
+gap:65px;
 align-items:center;
 }
 
 .club-copy h2{
 font-family:Georgia,serif;
-font-size:clamp(55px,7vw,108px);
+font-size:clamp(58px,8vw,118px);
 font-weight:normal;
-line-height:.84;
-margin-bottom:25px;
+line-height:.81;
+margin-bottom:29px;
 }
 
 .club-price{
 font-family:Georgia,serif;
-font-size:clamp(75px,9vw,140px);
-line-height:.8;
+font-size:clamp(84px,10vw,150px);
+line-height:.78;
 }
 
 .club-price small{
@@ -1000,9 +1102,9 @@ letter-spacing:1px;
 
 .club-copy>p{
 font-size:19px;
-line-height:1.6;
-margin:28px 0;
-max-width:630px;
+line-height:1.65;
+margin:30px 0;
+max-width:640px;
 }
 
 .club-benefits{
@@ -1013,14 +1115,17 @@ gap:10px;
 
 .club-benefit{
 background:white;
-padding:18px;
+padding:20px;
 font-weight:900;
-min-height:70px;
+min-height:82px;
 display:flex;
 align-items:center;
+font-size:15px;
 }
 
-/* ADVERTISERS */
+/* =========================================================
+   BUSINESS
+========================================================= */
 
 .business-section{
 background:white;
@@ -1028,14 +1133,15 @@ background:white;
 
 .business-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:50px;
+grid-template-columns:1.05fr .95fr;
+gap:55px;
 align-items:center;
 }
 
 .business-image{
-height:650px;
+height:680px;
 overflow:hidden;
+background:#ddd;
 }
 
 .business-image img{
@@ -1050,39 +1156,41 @@ color:var(--red);
 
 .business-copy h2{
 font-family:Georgia,serif;
-font-size:clamp(50px,6vw,90px);
+font-size:clamp(54px,7vw,100px);
 font-weight:normal;
-line-height:.9;
-margin-bottom:25px;
+line-height:.86;
+margin-bottom:27px;
 }
 
 .business-copy p{
 font-size:19px;
 line-height:1.65;
-max-width:600px;
-margin-bottom:27px;
+max-width:610px;
+margin-bottom:29px;
 }
 
 .business-points{
 display:flex;
 flex-wrap:wrap;
 gap:8px;
-margin-bottom:30px;
+margin-bottom:31px;
 }
 
 .business-points span{
 border:2px solid #111;
 border-radius:999px;
-padding:10px 15px;
+padding:11px 16px;
 font-size:12px;
 font-weight:900;
 }
 
-/* FINAL */
+/* =========================================================
+   FINAL WORLD
+========================================================= */
 
 .final-section{
 position:relative;
-min-height:760px;
+min-height:780px;
 display:flex;
 align-items:flex-end;
 color:white;
@@ -1102,7 +1210,12 @@ object-fit:cover;
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.86),rgba(0,0,0,.05) 70%);
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.9),
+rgba(0,0,0,.08) 72%
+);
 }
 
 .final-content{
@@ -1111,50 +1224,58 @@ z-index:2;
 width:100%;
 max-width:1500px;
 margin:auto;
-padding:80px 25px;
+padding:85px 25px;
 }
 
 .final-content h2{
 font-family:Georgia,serif;
-font-size:clamp(60px,9vw,145px);
+font-size:clamp(65px,10vw,155px);
 font-weight:normal;
-line-height:.82;
-margin-bottom:24px;
+line-height:.78;
+margin-bottom:27px;
 }
 
 .final-content p{
 font-size:21px;
 line-height:1.55;
-max-width:650px;
-margin-bottom:30px;
+max-width:680px;
+margin-bottom:31px;
 }
 
-/* ACCESSIBILITY */
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+[data-speech-section]{
+position:relative;
+}
 
 .home-listen{
 position:absolute;
 z-index:5;
 top:20px;
 right:20px;
-width:48px;
-height:48px;
+width:50px;
+height:50px;
 border:none;
 border-radius:50%;
 background:white;
 color:#111;
 font-size:20px;
-box-shadow:0 5px 20px rgba(0,0,0,.18);
+box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
 
 .home-listen.speaking{
 background:var(--green);
 }
 
-/* NEWSLETTER */
+/* =========================================================
+   NEWSLETTER
+========================================================= */
 
 .newsletter{
 background:var(--cream);
-padding:70px 20px;
+padding:75px 20px;
 }
 
 .newsletter-inner{
@@ -1165,15 +1286,16 @@ text-align:center;
 
 .newsletter-inner h2{
 font-family:Georgia,serif;
-font-size:clamp(42px,5vw,70px);
+font-size:clamp(45px,6vw,78px);
 font-weight:normal;
-margin-bottom:14px;
+line-height:.95;
+margin-bottom:17px;
 }
 
 .newsletter-inner p{
 font-size:17px;
 line-height:1.6;
-margin-bottom:25px;
+margin-bottom:27px;
 }
 
 .newsletter-form{
@@ -1188,6 +1310,7 @@ width:min(430px,100%);
 border:2px solid #111;
 border-radius:999px;
 padding:16px 20px;
+background:white;
 }
 
 .newsletter-form button{
@@ -1199,7 +1322,9 @@ padding:16px 27px;
 font-weight:900;
 }
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer{
 background:#050505;
@@ -1257,7 +1382,7 @@ text-transform:uppercase;
 }
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:1000px){
@@ -1280,12 +1405,12 @@ height:600px;
 }
 
 .identity-images{
-height:520px;
+height:540px;
 }
 
 .market-image,
 .business-image{
-height:560px;
+height:570px;
 }
 
 .benefit-strip-inner{
@@ -1370,7 +1495,7 @@ font-size:13px;
 }
 
 .home-section{
-padding:65px 16px;
+padding:68px 16px;
 }
 
 .intro-visual{
@@ -1379,24 +1504,23 @@ min-height:700px;
 
 .intro-content{
 left:20px;
-bottom:45px;
+bottom:46px;
 }
 
 .display-title{
-letter-spacing:-1.5px;
+letter-spacing:-2px;
 }
 
 .identity-grid{
-gap:35px;
+gap:37px;
 }
 
 .identity-images{
-height:470px;
+height:480px;
 }
 
-.identity-images img:first-child{
+.identity-images figure:first-child{
 margin-top:45px;
-height:425px;
 }
 
 .benefit-strip-inner{
@@ -1409,34 +1533,34 @@ border-right:none;
 
 .places-photo,
 .star-image{
-height:500px;
+height:510px;
 }
 
 .places-copy,
 .star-copy{
-padding:55px 20px;
+padding:58px 20px;
 }
 
 .market-grid{
-gap:30px;
+gap:32px;
 }
 
 .market-image,
 .business-image{
-height:480px;
+height:490px;
 }
 
 .help-section{
-min-height:720px;
+min-height:730px;
 }
 
 .help-content{
-padding:80px 20px;
+padding:85px 20px;
 }
 
 .community-photos{
 grid-template-columns:1fr 1fr;
-grid-template-rows:390px 210px;
+grid-template-rows:400px 220px;
 }
 
 .community-card:first-child{
@@ -1445,7 +1569,7 @@ grid-row:auto;
 }
 
 .club-grid{
-gap:35px;
+gap:38px;
 }
 
 .club-benefits{
@@ -1453,7 +1577,7 @@ grid-template-columns:1fr;
 }
 
 .final-section{
-min-height:690px;
+min-height:700px;
 }
 
 .footer-brand{
@@ -1469,7 +1593,7 @@ font-size:35px;
 }
 
 .intro-visual{
-min-height:660px;
+min-height:670px;
 }
 
 .intro-content p{
@@ -1481,23 +1605,19 @@ width:100%;
 }
 
 .identity-images{
-height:390px;
-}
-
-.identity-images img:first-child{
-height:345px;
+height:410px;
 }
 
 .places-photo,
 .star-image,
 .market-image,
 .business-image{
-height:430px;
+height:440px;
 }
 
 .community-photos{
 grid-template-columns:1fr;
-grid-template-rows:400px 230px 230px;
+grid-template-rows:410px 235px 235px;
 }
 
 .community-card:first-child{
@@ -1509,10 +1629,6 @@ grid-column:auto;
 </head>
 
 <body>
-
-<!-- ======================================================
-     EXISTING TOP BAR
-====================================================== -->
 
 <div class="account-bar">
 
@@ -1566,10 +1682,6 @@ JOIN CLUB
 </div>
 
 </div>
-
-<!-- ======================================================
-     EXISTING SIDE MENU
-====================================================== -->
 
 <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
@@ -1678,17 +1790,13 @@ JOIN CLUB
 </div>
 </aside>
 
-<!-- ======================================================
-     EXISTING SEARCH
-====================================================== -->
-
 <div class="search-overlay" id="searchOverlay">
 
 <div class="search-modal">
 
 <div class="search-top">
 <h2 data-i18n="common.search.title">Search PETS &amp; DOGUE</h2>
-<button onclick="closeSearch()">×</button>
+<button aria-label="Close search" onclick="closeSearch()">×</button>
 </div>
 
 <div class="search-field">
@@ -1698,7 +1806,7 @@ id="siteSearchInput"
 placeholder="Search articles, places, pets..."
 type="search"
 />
-<button onclick="runSiteSearch()">⌕</button>
+<button aria-label="Search" onclick="runSiteSearch()">⌕</button>
 </div>
 
 <div class="search-suggestions">
@@ -1712,10 +1820,6 @@ type="search"
 
 </div>
 </div>
-
-<!-- ======================================================
-     EXISTING HEADER
-====================================================== -->
 
 <header class="site-header">
 
@@ -1758,13 +1862,11 @@ type="search"
 
 </header>
 
-<!-- ======================================================
-     NEW SCROLLABLE HOMEPAGE STARTS HERE
-====================================================== -->
-
 <main class="home-main">
 
-<!-- ONE WORLD -->
+<!-- CONTINUES IN PART 2 --><!-- ======================================================
+     INTRO — ONE WORLD. EVERY PET.
+====================================================== -->
 
 <section class="platform-intro" data-speech-section>
 
@@ -1802,11 +1904,19 @@ together in one modern digital world.
 
 <div class="intro-actions">
 
-<a class="action-button action-yellow" href="club.html" data-i18n="homeNew.intro.join">
+<a
+class="action-button action-yellow"
+href="club.html"
+data-i18n="homeNew.intro.join"
+>
 JOIN THE WORLD →
 </a>
 
-<a class="action-button action-white" href="issue-01.html" data-i18n="homeNew.intro.issue">
+<a
+class="action-button action-white"
+href="issue-01.html"
+data-i18n="homeNew.intro.issue"
+>
 OPEN THE EDITION
 </a>
 
@@ -1818,11 +1928,21 @@ OPEN THE EDITION
 
 </section>
 
-<!-- WHO WE ARE -->
+<!-- ======================================================
+     WHAT PETS & DOGUE IS
+====================================================== -->
 
 <section class="identity">
 
 <div class="home-section identity-grid" data-speech-section>
+
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
 
 <div class="identity-copy">
 
@@ -1838,83 +1958,160 @@ Everything your pet world needs.
 <strong>PETS &amp; DOGUE is a digital lifestyle platform for pets and the people who love them.</strong>
 Discover original stories, practical guides, places to go together,
 community recommendations, useful services, contests, rescue,
-shopping and member benefits — without jumping between dozens of different platforms.
+shopping and member benefits — without jumping between dozens
+of different platforms.
 </p>
 
 </div>
 
 <div class="identity-images">
 
+<figure>
+
 <img
-alt="Stylish pet portrait"
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&amp;fit=crop&amp;w=1000&amp;q=90"
+alt="Stylish dog portrait"
+src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&amp;fit=crop&amp;w=1100&amp;q=90"
 />
+
+<div class="image-tag" data-i18n="homeNew.identity.tagOne">
+STORIES &amp; PERSONALITY
+</div>
+
+</figure>
+
+<figure>
 
 <img
 alt="Cat portrait"
 src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&amp;fit=crop&amp;w=1000&amp;q=90"
 />
 
+<div class="image-tag" data-i18n="homeNew.identity.tagTwo">
+EVERY PET BELONGS
+</div>
+
+</figure>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- FOUR SIMPLE BENEFITS -->
+<!-- ======================================================
+     FOUR CORE BENEFITS
+====================================================== -->
 
-<section class="benefit-strip">
+<section class="benefit-strip" data-speech-section>
+
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
 
 <div class="benefit-strip-inner">
 
 <div class="benefit">
-<div class="benefit-number">01</div>
-<h3 data-i18n="homeNew.benefits.discoverTitle">Discover</h3>
+
+<div class="benefit-number">
+01
+</div>
+
+<h3 data-i18n="homeNew.benefits.discoverTitle">
+Discover
+</h3>
+
 <p data-i18n="homeNew.benefits.discoverCopy">
 Stories, ideas, places and experiences for life with animals.
 </p>
+
 </div>
 
 <div class="benefit">
-<div class="benefit-number">02</div>
-<h3 data-i18n="homeNew.benefits.connectTitle">Connect</h3>
+
+<div class="benefit-number">
+02
+</div>
+
+<h3 data-i18n="homeNew.benefits.connectTitle">
+Connect
+</h3>
+
 <p data-i18n="homeNew.benefits.connectCopy">
 Local people, recommendations, communities and shared experiences.
 </p>
+
 </div>
 
 <div class="benefit">
-<div class="benefit-number">03</div>
-<h3 data-i18n="homeNew.benefits.saveTitle">Save</h3>
+
+<div class="benefit-number">
+03
+</div>
+
+<h3 data-i18n="homeNew.benefits.saveTitle">
+Save
+</h3>
+
 <p data-i18n="homeNew.benefits.saveCopy">
 Member discounts and special offers from pet-friendly businesses.
 </p>
+
 </div>
 
 <div class="benefit">
-<div class="benefit-number">04</div>
-<h3 data-i18n="homeNew.benefits.helpTitle">Help</h3>
+
+<div class="benefit-number">
+04
+</div>
+
+<h3 data-i18n="homeNew.benefits.helpTitle">
+Help
+</h3>
+
 <p data-i18n="homeNew.benefits.helpCopy">
 Give animals in need more visibility, support and a chance to be found.
 </p>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- PET FRIENDLY -->
+<!-- ======================================================
+     PET-FRIENDLY
+====================================================== -->
 
 <section class="places-section">
 
 <div class="places-grid" data-speech-section>
 
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
+
 <div class="places-photo">
 
 <img
-alt="Long dachshund representing Pet-Friendly Places"
-src="https://images.unsplash.com/photo-1612195583950-b8fd34c87093?auto=format&amp;fit=crop&amp;w=1400&amp;q=90"
+alt="Dachshund representing PETS & DOGUE Pet-Friendly Places"
+src="https://images.unsplash.com/photo-1612195583950-b8fd34c87093?auto=format&amp;fit=crop&amp;w=1500&amp;q=90"
 />
+
+<div
+class="dachshund-title"
+data-i18n="homeNew.places.photoTitle"
+>
+The world is better<br/>
+when they come too.
+</div>
 
 </div>
 
@@ -1930,18 +2127,36 @@ Go together.
 
 <p data-i18n="homeNew.places.copy">
 Find pet-friendly cafés, restaurants, hotels, parks, beaches,
-services and more. See places near you, open the map and get a route.
+services and more. See places near you, open the map and get
+a route directly from PETS &amp; DOGUE.
 </p>
 
 <div class="phone-feature">
-<span>📱</span>
-<div data-i18n="homeNew.places.phone">
-Add PETS &amp; DOGUE Pet-Friendly directly to your phone's Home Screen
-for fast access whenever you are out with your pet.
-</div>
+
+<div class="phone-icon" aria-hidden="true">
+📱
 </div>
 
-<a class="action-button action-black" href="pet-friendly-places.html" data-i18n="homeNew.places.button">
+<div>
+
+<strong data-i18n="homeNew.places.phoneTitle">
+Keep Pet-Friendly on your phone
+</strong>
+
+<p data-i18n="homeNew.places.phone">
+Add PETS &amp; DOGUE Pet-Friendly directly to your Home Screen
+for fast access whenever you are out with your pet.
+</p>
+
+</div>
+
+</div>
+
+<a
+class="action-button action-black"
+href="pet-friendly-places.html"
+data-i18n="homeNew.places.button"
+>
 FIND PET-FRIENDLY PLACES →
 </a>
 
@@ -1951,11 +2166,21 @@ FIND PET-FRIENDLY PLACES →
 
 </section>
 
-<!-- MARKETPLACE -->
+<!-- ======================================================
+     MARKETPLACE
+====================================================== -->
 
 <section class="market-section">
 
 <div class="home-section market-grid" data-speech-section>
+
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
 
 <div class="market-copy">
 
@@ -1964,21 +2189,30 @@ PETS &amp; DOGUE MARKETPLACE
 </div>
 
 <h2 data-i18n="homeNew.market.title">
-Buy. Sell.<br/>Discover.
+Buy. Sell.<br/>
+Discover.
 </h2>
 
 <p data-i18n="homeNew.market.copy">
 A pet-focused marketplace for useful products, accessories,
-services and community listings.
+services and community listings — built around the things
+pet people actually need.
 </p>
 
-<div class="market-highlight" data-i18n="homeNew.market.member">
+<div
+class="market-highlight"
+data-i18n="homeNew.market.member"
+>
 MEMBERS CAN POST UP TO 50 FREE ADS
 </div>
 
 <br/>
 
-<a class="action-button action-black" href="pet-marketplace.html" data-i18n="homeNew.market.button">
+<a
+class="action-button action-black"
+href="pet-marketplace.html"
+data-i18n="homeNew.market.button"
+>
 OPEN MARKETPLACE →
 </a>
 
@@ -1987,9 +2221,16 @@ OPEN MARKETPLACE →
 <div class="market-image">
 
 <img
-alt="Pets and lifestyle products"
-src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&amp;fit=crop&amp;w=1400&amp;q=90"
+alt="Pet lifestyle and marketplace"
+src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&amp;fit=crop&amp;w=1500&amp;q=90"
 />
+
+<div
+class="market-image-label"
+data-i18n="homeNew.market.imageLabel"
+>
+MADE FOR PET PEOPLE
+</div>
 
 </div>
 
@@ -1997,7 +2238,9 @@ src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&am
 
 </section>
 
-<!-- PETS IN NEED -->
+<!-- ======================================================
+     PETS IN NEED — IMPORTANT CORE MISSION
+====================================================== -->
 
 <section class="help-section" data-speech-section>
 
@@ -2027,12 +2270,17 @@ Real help.<br/>
 </h2>
 
 <p data-i18n="homeNew.help.copy">
-Some animals need more than a story.
-They need to be seen. PETS &amp; DOGUE gives rescue cases,
-adoption posts and animals needing support a place to reach more people.
+Some animals need more than a story. They need to be seen.
+PETS &amp; DOGUE gives rescue cases, adoption posts and animals
+needing urgent support a dedicated place where more people
+can discover them, share them and help.
 </p>
 
-<a class="action-button action-red" href="pets-in-need.html" data-i18n="homeNew.help.button">
+<a
+class="action-button action-red"
+href="pets-in-need.html"
+data-i18n="homeNew.help.button"
+>
 HELP ANIMALS →
 </a>
 
@@ -2040,11 +2288,21 @@ HELP ANIMALS →
 
 </section>
 
-<!-- COMMUNITY -->
+<!-- ======================================================
+     COMMUNITY
+====================================================== -->
 
 <section class="community-section">
 
 <div class="home-section" data-speech-section>
+
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
 
 <div class="community-heading">
 
@@ -2053,46 +2311,78 @@ LOCAL COMMUNITY
 </div>
 
 <h2 data-i18n="homeNew.community.title">
-People and pets.<br/>Closer together.
+People and pets.<br/>
+Closer together.
 </h2>
 
-<p class="big-copy" data-i18n="homeNew.community.copy">
-Ask, recommend, discover and help. Find useful information from people
-living with pets around you.
+<p
+class="big-copy"
+data-i18n="homeNew.community.copy"
+>
+Ask, recommend, discover and help. Find useful information
+from people living with pets around you and share what
+you know with your local pet community.
 </p>
 
 </div>
 
 <div class="community-photos">
 
-<a class="community-card" href="local-community.html">
+<a
+class="community-card"
+href="local-community.html"
+>
+
 <img
-alt="Pets together"
-src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&amp;fit=crop&amp;w=1400&amp;q=90"
+alt="Dogs together in the local community"
+src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&amp;fit=crop&amp;w=1500&amp;q=90"
 />
-<div class="community-label" data-i18n="homeNew.community.local">
+
+<div
+class="community-label"
+data-i18n="homeNew.community.local"
+>
 LOCAL CONNECTIONS
 </div>
+
 </a>
 
-<a class="community-card" href="photos.html">
+<a
+class="community-card"
+href="photos.html"
+>
+
 <img
-alt="Bird"
-src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&amp;fit=crop&amp;w=900&amp;q=90"
+alt="Bird representing every kind of pet"
+src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&amp;fit=crop&amp;w=1000&amp;q=90"
 />
-<div class="community-label" data-i18n="homeNew.community.everyPet">
+
+<div
+class="community-label"
+data-i18n="homeNew.community.everyPet"
+>
 EVERY PET
 </div>
+
 </a>
 
-<a class="community-card" href="local-community.html">
+<a
+class="community-card"
+href="local-community.html"
+>
+
 <img
-alt="Cat"
-src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&amp;fit=crop&amp;w=900&amp;q=90"
+alt="Cat representing community stories"
+src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&amp;fit=crop&amp;w=1000&amp;q=90"
 />
-<div class="community-label" data-i18n="homeNew.community.everyStory">
+
+<div
+class="community-label"
+data-i18n="homeNew.community.everyStory"
+>
 EVERY STORY
 </div>
+
 </a>
 
 </div>
@@ -2101,16 +2391,26 @@ EVERY STORY
 
 </section>
 
-<!-- COVER STAR / MISO -->
+<!-- CONTINUES IN PART 3 --><!-- ======================================================
+     COVER STAR — MISO
+====================================================== -->
 
 <section class="star-section">
 
 <div class="star-grid" data-speech-section>
 
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
+
 <div class="star-image">
 
 <img
-alt="Miso — PETS & DOGUE cover star"
+alt="Miso — PETS & DOGUE Cover Star"
 src="file_00000000a9d471fda9b4629589be22a9.png"
 />
 
@@ -2118,7 +2418,10 @@ src="file_00000000a9d471fda9b4629589be22a9.png"
 
 <div class="star-copy">
 
-<div class="eyebrow" data-i18n="homeNew.star.eyebrow">
+<div
+class="eyebrow"
+data-i18n="homeNew.star.eyebrow"
+>
 COVER STAR
 </div>
 
@@ -2128,12 +2431,16 @@ Your pet could be next.
 </h2>
 
 <p data-i18n="homeNew.star.copy">
-PETS &amp; DOGUE celebrates personality, character and the extraordinary
-animals sharing our lives. Enter your pet for a chance to become part
-of a future cover.
+PETS &amp; DOGUE celebrates personality, character and
+the extraordinary animals sharing our lives. Enter your pet
+for a chance to become part of a future PETS &amp; DOGUE cover.
 </p>
 
-<a class="action-button action-yellow" href="members-gallery.html" data-i18n="homeNew.star.button">
+<a
+class="action-button action-yellow"
+href="members-gallery.html"
+data-i18n="homeNew.star.button"
+>
 ENTER YOUR PET →
 </a>
 
@@ -2143,33 +2450,54 @@ ENTER YOUR PET →
 
 </section>
 
-<!-- CLUB -->
+<!-- ======================================================
+     MEMBERSHIP
+====================================================== -->
 
 <section class="club-section">
 
 <div class="home-section club-grid" data-speech-section>
 
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
+
 <div class="club-copy">
 
-<div class="eyebrow" data-i18n="homeNew.club.eyebrow">
+<div
+class="eyebrow"
+data-i18n="homeNew.club.eyebrow"
+>
 PETS &amp; DOGUE MEMBERSHIP
 </div>
 
 <h2 data-i18n="homeNew.club.title">
-A whole year.<br/>One tiny price.
+A whole year.<br/>
+One tiny price.
 </h2>
 
 <div class="club-price">
 £10
-<small data-i18n="homeNew.club.year">/ YEAR</small>
+<small data-i18n="homeNew.club.year">
+/ YEAR
+</small>
 </div>
 
 <p data-i18n="homeNew.club.copy">
-Join for member discounts, special offers, competitions and
-Marketplace benefits — while becoming part of the PETS &amp; DOGUE world.
+Join for member discounts, special offers, competitions
+and Marketplace benefits — while becoming part of
+the PETS &amp; DOGUE world.
 </p>
 
-<a class="action-button action-black" href="club.html" data-i18n="homeNew.club.button">
+<a
+class="action-button action-black"
+href="club.html"
+data-i18n="homeNew.club.button"
+>
 JOIN FOR £10 A YEAR →
 </a>
 
@@ -2177,27 +2505,45 @@ JOIN FOR £10 A YEAR →
 
 <div class="club-benefits">
 
-<div class="club-benefit" data-i18n="homeNew.club.discount">
+<div
+class="club-benefit"
+data-i18n="homeNew.club.discount"
+>
 ✓ Member discounts
 </div>
 
-<div class="club-benefit" data-i18n="homeNew.club.offers">
+<div
+class="club-benefit"
+data-i18n="homeNew.club.offers"
+>
 ✓ Special offers
 </div>
 
-<div class="club-benefit" data-i18n="homeNew.club.market">
+<div
+class="club-benefit"
+data-i18n="homeNew.club.market"
+>
 ✓ Up to 50 free Marketplace ads
 </div>
 
-<div class="club-benefit" data-i18n="homeNew.club.contests">
+<div
+class="club-benefit"
+data-i18n="homeNew.club.contests"
+>
 ✓ Contests &amp; opportunities
 </div>
 
-<div class="club-benefit" data-i18n="homeNew.club.cover">
+<div
+class="club-benefit"
+data-i18n="homeNew.club.cover"
+>
 ✓ Cover Star participation
 </div>
 
-<div class="club-benefit" data-i18n="homeNew.club.world">
+<div
+class="club-benefit"
+data-i18n="homeNew.club.world"
+>
 ✓ PETS &amp; DOGUE member benefits
 </div>
 
@@ -2207,24 +2553,37 @@ JOIN FOR £10 A YEAR →
 
 </section>
 
-<!-- BUSINESS -->
+<!-- ======================================================
+     FOR BRANDS & BUSINESSES
+====================================================== -->
 
 <section class="business-section">
 
 <div class="home-section business-grid" data-speech-section>
 
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
+
 <div class="business-image">
 
 <img
-alt="Pet-friendly business"
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&amp;fit=crop&amp;w=1400&amp;q=90"
+alt="Pet-friendly lifestyle business"
+src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&amp;fit=crop&amp;w=1500&amp;q=90"
 />
 
 </div>
 
 <div class="business-copy">
 
-<div class="eyebrow" data-i18n="homeNew.business.eyebrow">
+<div
+class="eyebrow"
+data-i18n="homeNew.business.eyebrow"
+>
 FOR BRANDS &amp; BUSINESSES
 </div>
 
@@ -2233,19 +2592,37 @@ Be where pet people are.
 </h2>
 
 <p data-i18n="homeNew.business.copy">
-Reach an audience that travels, shops, discovers services and makes
-everyday decisions with their animals in mind. PETS &amp; DOGUE connects
-editorial visibility with useful real-world discovery.
+Reach an audience that travels, shops, discovers services
+and makes everyday decisions with their animals in mind.
+PETS &amp; DOGUE connects editorial visibility with useful
+real-world discovery.
 </p>
 
 <div class="business-points">
-<span>ADVERTISING</span>
-<span>MEMBER OFFERS</span>
-<span>PET-FRIENDLY DISCOVERY</span>
-<span>EDITORIAL VISIBILITY</span>
+
+<span data-i18n="homeNew.business.advertising">
+ADVERTISING
+</span>
+
+<span data-i18n="homeNew.business.offers">
+MEMBER OFFERS
+</span>
+
+<span data-i18n="homeNew.business.discovery">
+PET-FRIENDLY DISCOVERY
+</span>
+
+<span data-i18n="homeNew.business.visibility">
+EDITORIAL VISIBILITY
+</span>
+
 </div>
 
-<a class="action-button action-red" href="partners.html" data-i18n="homeNew.business.button">
+<a
+class="action-button action-red"
+href="partners.html"
+data-i18n="homeNew.business.button"
+>
 ADVERTISE WITH US →
 </a>
 
@@ -2255,7 +2632,9 @@ ADVERTISE WITH US →
 
 </section>
 
-<!-- FINAL -->
+<!-- ======================================================
+     FINAL BRAND STATEMENT
+====================================================== -->
 
 <section class="final-section" data-speech-section>
 
@@ -2274,7 +2653,7 @@ onclick="listenToSection(this)"
 
 <div class="final-content">
 
-<div class="eyebrow">
+<div class="eyebrow notranslate" translate="no">
 PETS &amp; DOGUE
 </div>
 
@@ -2289,7 +2668,11 @@ Things to find. Animals to help.
 Everything connected in one world.
 </p>
 
-<a class="action-button action-green" href="club.html" data-i18n="homeNew.final.button">
+<a
+class="action-button action-green"
+href="club.html"
+data-i18n="homeNew.final.button"
+>
 JOIN PETS &amp; DOGUE →
 </a>
 
@@ -2299,11 +2682,21 @@ JOIN PETS &amp; DOGUE →
 
 </main>
 
-<!-- NEWSLETTER -->
+<!-- ======================================================
+     NEWSLETTER
+====================================================== -->
 
 <section class="newsletter">
 
-<div class="newsletter-inner">
+<div class="newsletter-inner" data-speech-section>
+
+<button
+class="home-listen"
+aria-label="Listen to this section"
+onclick="listenToSection(this)"
+>
+🔊
+</button>
 
 <h2 data-i18n="home.newsletter.heading">
 Stay close to the PETS &amp; DOGUE world
@@ -2335,95 +2728,268 @@ SUBSCRIBE
 
 </section>
 
-<!-- FOOTER -->
+<!-- ======================================================
+     FOOTER
+====================================================== -->
 
 <footer>
 
-<div class="footer-brand notranslate" translate="no">
+<div
+class="footer-brand notranslate"
+translate="no"
+>
 PETS &amp; DOGUE
 </div>
 
-<p class="footer-subtitle">
+<p
+class="footer-subtitle"
+data-i18n="homeNew.footer.subtitle"
+>
 Digital lifestyle platform
 </p>
 
 <div class="footer-links">
-<a href="index.html">Home</a>
-<a href="issue-01.html">Edition</a>
-<a href="articles.html">Articles</a>
-<a href="photos.html">Photos</a>
-<a href="members-gallery.html">Cover Star</a>
-<a href="pet-friendly-places.html">Pet-Friendly</a>
-<a href="pets-in-need.html">Help</a>
-<a href="pet-marketplace.html">Marketplace</a>
-<a href="club.html">Club</a>
-<a href="partners.html">Advertise with us</a>
-<a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
+
+<a
+href="index.html"
+data-i18n="homeNew.footer.home"
+>
+Home
+</a>
+
+<a
+href="issue-01.html"
+data-i18n="homeNew.footer.edition"
+>
+Edition
+</a>
+
+<a
+href="articles.html"
+data-i18n="homeNew.footer.articles"
+>
+Articles
+</a>
+
+<a
+href="photos.html"
+data-i18n="homeNew.footer.photos"
+>
+Photos
+</a>
+
+<a
+href="members-gallery.html"
+data-i18n="homeNew.footer.cover"
+>
+Cover Star
+</a>
+
+<a
+href="pet-friendly-places.html"
+data-i18n="homeNew.footer.places"
+>
+Pet-Friendly
+</a>
+
+<a
+href="pets-in-need.html"
+data-i18n="homeNew.footer.help"
+>
+Help
+</a>
+
+<a
+href="pet-marketplace.html"
+data-i18n="homeNew.footer.market"
+>
+Marketplace
+</a>
+
+<a
+href="club.html"
+data-i18n="homeNew.footer.club"
+>
+Club
+</a>
+
+<a
+href="partners.html"
+data-i18n="homeNew.footer.advertise"
+>
+Advertise with us
+</a>
+
+<a
+href="contact.html"
+data-i18n="homeNew.footer.contact"
+>
+Contact
+</a>
+
+<a
+href="privacy.html"
+data-i18n="homeNew.footer.privacy"
+>
+Privacy
+</a>
+
+<a
+href="terms.html"
+data-i18n="homeNew.footer.terms"
+>
+Terms
+</a>
+
 </div>
 
 <div class="footer-social">
-<a aria-label="Instagram" href="#">◎</a>
-<a aria-label="TikTok" href="#">♪</a>
-<a aria-label="YouTube" href="#">▶</a>
-<a aria-label="Pinterest" href="#">P</a>
+
+<a
+aria-label="Instagram"
+href="#"
+>
+◎
+</a>
+
+<a
+aria-label="TikTok"
+href="#"
+>
+♪
+</a>
+
+<a
+aria-label="YouTube"
+href="#"
+>
+▶
+</a>
+
+<a
+aria-label="Pinterest"
+href="#"
+>
+P
+</a>
+
 </div>
 
-<a class="admin-link" href="admin.html">
+<a
+class="admin-link"
+href="admin.html"
+>
 Admin
 </a>
 
 </footer>
 
-<script>
+<!-- CONTINUES IN PART 4 --><script>
 
 let activeSpeechButton = null;
 
-/* EXISTING MENU */
+/* =========================================================
+   SIDE MENU
+========================================================= */
 
 function openMenu(){
 
-document.getElementById("sideMenu").classList.add("open");
-document.getElementById("menuOverlay").classList.add("show");
+const sideMenu =
+document.getElementById("sideMenu");
+
+const overlay =
+document.getElementById("menuOverlay");
+
+if(sideMenu){
+sideMenu.classList.add("open");
+}
+
+if(overlay){
+overlay.classList.add("show");
+}
+
 document.body.classList.add("menu-open");
 
 }
 
 function closeMenu(){
 
-document.getElementById("sideMenu").classList.remove("open");
-document.getElementById("menuOverlay").classList.remove("show");
+const sideMenu =
+document.getElementById("sideMenu");
+
+const overlay =
+document.getElementById("menuOverlay");
+
+if(sideMenu){
+sideMenu.classList.remove("open");
+}
+
+if(overlay){
+overlay.classList.remove("show");
+}
+
 document.body.classList.remove("menu-open");
 
 }
 
-/* SEARCH */
+/* =========================================================
+   SEARCH
+========================================================= */
 
 function openSearch(){
 
-document.getElementById("searchOverlay").classList.add("open");
+const overlay =
+document.getElementById("searchOverlay");
+
+if(!overlay){
+return;
+}
+
+overlay.classList.add("open");
 document.body.classList.add("menu-open");
 
-setTimeout(() => {
+setTimeout(
+() => {
 
-document.getElementById("siteSearchInput").focus();
+const input =
+document.getElementById("siteSearchInput");
 
-},100);
+if(input){
+input.focus();
+}
+
+},
+100
+);
 
 }
 
 function closeSearch(){
 
-document.getElementById("searchOverlay").classList.remove("open");
+const overlay =
+document.getElementById("searchOverlay");
+
+if(overlay){
+overlay.classList.remove("open");
+}
+
 document.body.classList.remove("menu-open");
 
 }
 
 function runSiteSearch(){
 
+const input =
+document.getElementById("siteSearchInput");
+
+if(!input){
+return;
+}
+
 const query =
-document.getElementById("siteSearchInput").value.trim().toLowerCase();
+input.value
+.trim()
+.toLowerCase();
 
 if(!query){
 return;
@@ -2432,48 +2998,142 @@ return;
 const routes = [
 
 {
-terms:["place","places","cafe","hotel","park","beach","vet","groomer"],
+terms:[
+"place",
+"places",
+"pet friendly",
+"pet-friendly",
+"cafe",
+"restaurant",
+"hotel",
+"park",
+"beach",
+"vet",
+"groomer"
+],
 url:"pet-friendly-places.html"
 },
 
 {
-terms:["cover","star","competition","pet model"],
+terms:[
+"cover",
+"cover star",
+"star",
+"competition",
+"pet model"
+],
 url:"members-gallery.html"
 },
 
 {
-terms:["photo","photos","gallery","portrait"],
+terms:[
+"photo",
+"photos",
+"gallery",
+"portrait"
+],
 url:"photos.html"
 },
 
 {
-terms:["travel","holiday"],
+terms:[
+"travel",
+"holiday",
+"trip"
+],
 url:"pet-travel.html"
 },
 
 {
-terms:["rescue","adoption","help","need"],
+terms:[
+"rescue",
+"adoption",
+"help",
+"need",
+"pets in need"
+],
 url:"pets-in-need.html"
 },
 
 {
-terms:["fashion","style","accessories"],
+terms:[
+"fashion",
+"style",
+"accessories"
+],
 url:"pet-fashion.html"
 },
 
 {
-terms:["club","discount","member"],
+terms:[
+"health",
+"wellness",
+"wellbeing"
+],
+url:"wellness.html"
+},
+
+{
+terms:[
+"club",
+"discount",
+"member",
+"membership"
+],
 url:"club.html"
 },
 
 {
-terms:["market","marketplace","listing","service"],
+terms:[
+"market",
+"marketplace",
+"listing",
+"service",
+"sell",
+"buy"
+],
 url:"pet-marketplace.html"
 },
 
 {
-terms:["article","story","interview"],
+terms:[
+"community",
+"local",
+"recommendation"
+],
+url:"local-community.html"
+},
+
+{
+terms:[
+"contest",
+"contests",
+"vote",
+"prize"
+],
+url:"contests.html"
+},
+
+{
+terms:[
+"article",
+"articles",
+"story",
+"interview",
+"guide"
+],
 url:"articles.html"
+},
+
+{
+terms:[
+"advertise",
+"advertising",
+"business",
+"brand",
+"partner"
+],
+url:"partners.html"
 }
 
 ];
@@ -2482,7 +3142,8 @@ const route =
 routes.find(
 item =>
 item.terms.some(
-term => query.includes(term)
+term =>
+query.includes(term)
 )
 );
 
@@ -2493,17 +3154,20 @@ route
 
 }
 
-/* ACCESSIBILITY / SPEECH */
+/* =========================================================
+   ACCESSIBILITY — TEXT TO SPEECH
+========================================================= */
 
 function getNarrationLanguage(){
 
 const language =
 window.PetsDogueLanguage &&
-window.PetsDogueLanguage.getCurrentLanguage
+typeof window.PetsDogueLanguage.getCurrentLanguage === "function"
 ? window.PetsDogueLanguage.getCurrentLanguage()
 : null;
 
 const languageMap = {
+
 en:"en-GB",
 uk:"uk-UA",
 ru:"ru-RU",
@@ -2527,41 +3191,64 @@ fi:"fi-FI",
 tr:"tr-TR",
 ar:"ar-SA",
 hi:"hi-IN"
+
 };
 
-return languageMap[language?.code] || "en-GB";
+const code =
+typeof language === "string"
+? language
+: language?.code;
+
+return languageMap[code] || "en-GB";
 
 }
 
 function chooseVoice(languageCode){
 
+if(!window.speechSynthesis){
+return null;
+}
+
 const voices =
-window.speechSynthesis
-? window.speechSynthesis.getVoices()
-: [];
+window.speechSynthesis.getVoices();
 
-const prefix =
-String(languageCode)
-.toLowerCase()
-.split("-")[0];
+const normalized =
+String(languageCode || "en-GB")
+.toLowerCase();
 
-return (
+const exact =
 voices.find(
 voice =>
-voice.lang &&
-voice.lang.toLowerCase().startsWith(prefix)
-)
-||
-voices[0]
-||
-null
+String(voice.lang || "")
+.toLowerCase() === normalized
 );
+
+if(exact){
+return exact;
+}
+
+const prefix =
+normalized.split("-")[0];
+
+const sameLanguage =
+voices.find(
+voice =>
+String(voice.lang || "")
+.toLowerCase()
+.startsWith(prefix)
+);
+
+return sameLanguage || voices[0] || null;
 
 }
 
 function listenToSection(button){
 
-if(!window.speechSynthesis){
+if(
+!button ||
+!window.speechSynthesis ||
+typeof SpeechSynthesisUtterance === "undefined"
+){
 return;
 }
 
@@ -2585,8 +3272,13 @@ const clone =
 section.cloneNode(true);
 
 clone
-.querySelectorAll("button,img")
-.forEach(element => element.remove());
+.querySelectorAll(
+"button,img,script,style,input,select"
+)
+.forEach(
+element =>
+element.remove()
+);
 
 const text =
 clone.innerText
@@ -2615,22 +3307,45 @@ utterance.voice = voice;
 
 utterance.rate = 1;
 utterance.pitch = 1;
+utterance.volume = 1;
 
 button.classList.add("speaking");
 button.textContent = "■";
-activeSpeechButton = button;
+button.setAttribute(
+"aria-label",
+"Stop listening"
+);
 
-utterance.onend =
-utterance.onerror =
+activeSpeechButton =
+button;
+
+const finishSpeech =
 () => {
+
+if(activeSpeechButton === button){
 
 button.classList.remove("speaking");
 button.textContent = "🔊";
+button.setAttribute(
+"aria-label",
+"Listen to this section"
+);
+
 activeSpeechButton = null;
+
+}
 
 };
 
-window.speechSynthesis.speak(utterance);
+utterance.onend =
+finishSpeech;
+
+utterance.onerror =
+finishSpeech;
+
+window.speechSynthesis.speak(
+utterance
+);
 
 }
 
@@ -2642,25 +3357,49 @@ window.speechSynthesis.cancel();
 
 if(activeSpeechButton){
 
-activeSpeechButton.classList.remove("speaking");
-activeSpeechButton.textContent = "🔊";
+activeSpeechButton.classList.remove(
+"speaking"
+);
+
+activeSpeechButton.textContent =
+"🔊";
+
+activeSpeechButton.setAttribute(
+"aria-label",
+"Listen to this section"
+);
+
 activeSpeechButton = null;
 
 }
 
 }
 
-/* NEWSLETTER */
+/* =========================================================
+   NEWSLETTER
+========================================================= */
 
 function subscribeNewsletter(){
 
-const email =
-document.getElementById("newsletterEmail").value.trim();
+const input =
+document.getElementById(
+"newsletterEmail"
+);
 
-if(!email || !email.includes("@")){
+if(!input){
+return;
+}
+
+const email =
+input.value.trim();
+
+const emailPattern =
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(!emailPattern.test(email)){
 
 alert(
-window.PetsDogueLanguage?.translate(
+window.PetsDogueLanguage?.translate?.(
 "common.system.invalidEmail"
 )
 ||
@@ -2677,7 +3416,11 @@ try{
 
 subscribers =
 JSON.parse(
-localStorage.getItem("pets_dogue_newsletter") || "[]"
+localStorage.getItem(
+"pets_dogue_newsletter"
+)
+||
+"[]"
 );
 
 if(!Array.isArray(subscribers)){
@@ -2690,19 +3433,42 @@ subscribers = [];
 
 }
 
-if(!subscribers.includes(email)){
+const normalizedEmail =
+email.toLowerCase();
+
+const alreadyExists =
+subscribers.some(
+subscriber =>
+String(subscriber)
+.toLowerCase() === normalizedEmail
+);
+
+if(!alreadyExists){
+
 subscribers.push(email);
+
 }
+
+try{
 
 localStorage.setItem(
 "pets_dogue_newsletter",
 JSON.stringify(subscribers)
 );
 
-document.getElementById("newsletterEmail").value = "";
+}catch(error){
+
+console.warn(
+"PETS & DOGUE newsletter storage unavailable.",
+error
+);
+
+}
+
+input.value = "";
 
 alert(
-window.PetsDogueLanguage?.translate(
+window.PetsDogueLanguage?.translate?.(
 "common.system.newsletterSuccess"
 )
 ||
@@ -2711,7 +3477,9 @@ window.PetsDogueLanguage?.translate(
 
 }
 
-/* KEYBOARD */
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+========================================================= */
 
 document.addEventListener(
 "keydown",
@@ -2728,9 +3496,14 @@ stopNarration();
 }
 );
 
-document
-.getElementById("siteSearchInput")
-.addEventListener(
+const siteSearchInput =
+document.getElementById(
+"siteSearchInput"
+);
+
+if(siteSearchInput){
+
+siteSearchInput.addEventListener(
 "keydown",
 event => {
 
@@ -2741,20 +3514,62 @@ runSiteSearch();
 }
 );
 
+}
+
 window.addEventListener(
 "beforeunload",
 stopNarration
 );
 
+/* =========================================================
+   SPEECH VOICES
+========================================================= */
+
+if(
+window.speechSynthesis &&
+typeof window.speechSynthesis.getVoices === "function"
+){
+
+window.speechSynthesis.getVoices();
+
+}
+
+/* =========================================================
+   LANGUAGE SELECT
+   Existing engine remains the source of truth.
+========================================================= */
+
+const languageSelect =
+document.getElementById(
+"languageSelect"
+);
+
+if(languageSelect){
+
+languageSelect.addEventListener(
+"change",
+() => {
+
+stopNarration();
+
+}
+);
+
+}
+
 </script>
 
-<!-- EXISTING TRANSLATION SYSTEM -->
+<!-- ======================================================
+     EXISTING TRANSLATION SYSTEM
+====================================================== -->
 
 <script src="i18n/common.js"></script>
 <script src="i18n/home.js"></script>
 <script src="i18n/engine.js"></script>
 
-<!-- EXISTING GLOBAL SHELL — DO NOT REMOVE -->
+<!-- ======================================================
+     EXISTING GLOBAL SHELL — DO NOT REMOVE
+====================================================== -->
 
 <script src="pets-dogue-shell.js?v=20260914-global-shell-language-1"></script>
 
