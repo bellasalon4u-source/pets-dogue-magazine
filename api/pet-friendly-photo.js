@@ -2,16 +2,20 @@
 
 /* =========================================================
    PETS & DOGUE
-   FREE VENUE PHOTO RESOLVER
+   VERIFIED FREE VENUE PHOTO RESOLVER
 
-   FREE PHOTO ORDER:
-   1. OpenStreetMap / Nominatim metadata
-   2. Wikidata P18 image
-   3. Wikipedia page image
-   4. Official website image
-   5. Wikimedia Commons search
+   PHOTO PRIORITY:
+   1. Exact OSM / Nominatim venue metadata
+   2. OSM-linked Wikidata P18
+   3. OSM-linked Wikipedia image
+   4. Official venue website
+   5. Wikimedia Commons only with strong venue match
+   6. No uncertain image -> PETS & DOGUE frontend fallback
 
-   No Google Places Photos.
+   IMPORTANT:
+   - No Google Places Photos.
+   - Never intentionally use a random image from another venue.
+   - Accuracy is more important than filling every card.
 ========================================================= */
 
 const NOMINATIM_URL =
@@ -23,14 +27,14 @@ const WIKIDATA_ENTITY_URL =
 const WIKIMEDIA_API =
   "https://commons.wikimedia.org/w/api.php";
 
-const WIKIPEDIA_API =
-  "https://en.wikipedia.org/w/api.php";
-
 const TIMEOUT =
   7000;
 
 const MAX_HTML_BYTES =
   1200000;
+
+const MAX_NOMINATIM_RESULTS =
+  8;
 
 
 /* =========================================================
@@ -86,7 +90,7 @@ function send(
 
 
 /* =========================================================
-   HELPERS
+   BASIC HELPERS
 ========================================================= */
 
 function text(
@@ -98,7 +102,10 @@ function text(
     value ??
     ""
   )
-  .replace(/\u0000/g,"")
+  .replace(
+    /\u0000/g,
+    ""
+  )
   .trim()
   .slice(
     0,
@@ -113,7 +120,9 @@ function numberOrNull(value){
   const number =
     Number(value);
 
-  return Number.isFinite(number)
+  return Number.isFinite(
+    number
+  )
     ? number
     : null;
 
@@ -131,7 +140,8 @@ function decodeHtml(value){
   .replace(/&#39;/gi,"'")
   .replace(/&apos;/gi,"'")
   .replace(/&lt;/gi,"<")
-  .replace(/&gt;/gi,">");
+  .replace(/&gt;/gi,">")
+  .replace(/&#x2F;/gi,"/");
 
 }
 
@@ -153,7 +163,9 @@ function safeHttpUrl(value){
   try{
 
     const url =
-      new URL(raw);
+      new URL(
+        raw
+      );
 
     if(
       url.protocol !== "https:" &&
@@ -171,6 +183,331 @@ function safeHttpUrl(value){
     return "";
 
   }
+
+}
+
+
+function normalizeWords(value){
+
+  return String(
+    value ||
+    ""
+  )
+  .normalize("NFKD")
+  .replace(
+    /[\u0300-\u036f]/g,
+    ""
+  )
+  .toLowerCase()
+  .replace(
+    /&/g,
+    " and "
+  )
+  .replace(
+    /['’]/g,
+    ""
+  )
+  .replace(
+    /[^a-z0-9]+/g,
+    " "
+  )
+  .replace(
+    /\s+/g,
+    " "
+  )
+  .trim();
+
+}
+
+
+function meaningfulWords(value){
+
+  const ignored =
+    new Set([
+      "the",
+      "a",
+      "an",
+      "and",
+      "of",
+      "at",
+      "in",
+      "on",
+      "hotel",
+      "restaurant",
+      "cafe",
+      "coffee",
+      "bar",
+      "pub",
+      "ltd",
+      "limited",
+      "uk",
+      "united",
+      "kingdom"
+    ]);
+
+  return normalizeWords(
+    value
+  )
+  .split(" ")
+  .filter(
+    word=>
+      word.length >= 2 &&
+      !ignored.has(
+        word
+      )
+  );
+
+}
+
+
+function tokenOverlap(
+  first,
+  second
+){
+
+  const a =
+    meaningfulWords(
+      first
+    );
+
+  const b =
+    new Set(
+      meaningfulWords(
+        second
+      )
+    );
+
+  if(
+    !a.length ||
+    !b.size
+  ){
+
+    return 0;
+
+  }
+
+  let matches =
+    0;
+
+  for(
+    const word of a
+  ){
+
+    if(
+      b.has(
+        word
+      )
+    ){
+
+      matches += 1;
+
+    }
+
+  }
+
+  return (
+    matches /
+    a.length
+  );
+
+}
+
+
+function nameMatchScore(
+  target,
+  candidate
+){
+
+  const a =
+    normalizeWords(
+      target
+    );
+
+  const b =
+    normalizeWords(
+      candidate
+    );
+
+  if(
+    !a ||
+    !b
+  ){
+
+    return 0;
+
+  }
+
+  if(
+    a === b
+  ){
+
+    return 1;
+
+  }
+
+  if(
+    b.includes(a) ||
+    a.includes(b)
+  ){
+
+    return 0.92;
+
+  }
+
+  return tokenOverlap(
+    a,
+    b
+  );
+
+}
+
+
+function addressParts(value){
+
+  return normalizeWords(
+    value
+  )
+  .split(" ")
+  .filter(
+    part=>
+      part.length >= 3
+  );
+
+}
+
+
+function addressMatchScore(
+  target,
+  candidate
+){
+
+  const a =
+    addressParts(
+      target
+    );
+
+  const b =
+    new Set(
+      addressParts(
+        candidate
+      )
+    );
+
+  if(
+    !a.length ||
+    !b.size
+  ){
+
+    return 0;
+
+  }
+
+  let matches =
+    0;
+
+  for(
+    const word of a
+  ){
+
+    if(
+      b.has(
+        word
+      )
+    ){
+
+      matches += 1;
+
+    }
+
+  }
+
+  return Math.min(
+    1,
+    matches /
+    Math.min(
+      a.length,
+      6
+    )
+  );
+
+}
+
+
+function distanceKm(
+  lat1,
+  lng1,
+  lat2,
+  lng2
+){
+
+  if(
+    ![
+      lat1,
+      lng1,
+      lat2,
+      lng2
+    ]
+    .every(
+      Number.isFinite
+    )
+  ){
+
+    return null;
+
+  }
+
+  const radians =
+    value=>
+      value *
+      Math.PI /
+      180;
+
+  const earth =
+    6371;
+
+  const dLat =
+    radians(
+      lat2 -
+      lat1
+    );
+
+  const dLng =
+    radians(
+      lng2 -
+      lng1
+    );
+
+  const a =
+    Math.sin(
+      dLat / 2
+    ) ** 2
+    +
+    Math.cos(
+      radians(
+        lat1
+      )
+    )
+    *
+    Math.cos(
+      radians(
+        lat2
+      )
+    )
+    *
+    Math.sin(
+      dLng / 2
+    ) ** 2;
+
+  return (
+    earth *
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(
+        1 - a
+      )
+    )
+  );
 
 }
 
@@ -197,7 +534,9 @@ function commonsFileUrl(filename){
   return (
     "https://commons.wikimedia.org/wiki/Special:FilePath/"
     +
-    encodeURIComponent(raw)
+    encodeURIComponent(
+      raw
+    )
     +
     "?width=1200"
   );
@@ -230,12 +569,15 @@ async function fetchJson(
         url,
         {
           ...options,
+
           signal:
             controller.signal
         }
       );
 
-    if(!response.ok){
+    if(
+      !response.ok
+    ){
 
       return null;
 
@@ -259,7 +601,7 @@ async function fetchJson(
 
 
 /* =========================================================
-   PRIVATE NETWORK PROTECTION
+   PRIVATE NETWORK / SSRF PROTECTION
 ========================================================= */
 
 function blockedHostname(hostname){
@@ -275,9 +617,15 @@ function blockedHostname(hostname){
   if(
     !host ||
     host === "localhost" ||
-    host.endsWith(".localhost") ||
-    host.endsWith(".local") ||
-    host.endsWith(".internal")
+    host.endsWith(
+      ".localhost"
+    ) ||
+    host.endsWith(
+      ".local"
+    ) ||
+    host.endsWith(
+      ".internal"
+    )
   ){
 
     return true;
@@ -303,8 +651,12 @@ function blockedHostname(hostname){
 
   if(
     match172 &&
-    Number(match172[1]) >= 16 &&
-    Number(match172[1]) <= 31
+    Number(
+      match172[1]
+    ) >= 16 &&
+    Number(
+      match172[1]
+    ) <= 31
   ){
 
     return true;
@@ -313,9 +665,15 @@ function blockedHostname(hostname){
 
   if(
     host === "::1" ||
-    host.startsWith("fc") ||
-    host.startsWith("fd") ||
-    host.startsWith("fe80:")
+    host.startsWith(
+      "fc"
+    ) ||
+    host.startsWith(
+      "fd"
+    ) ||
+    host.startsWith(
+      "fe80:"
+    )
   ){
 
     return true;
@@ -342,8 +700,10 @@ async function hostnameIsSafe(hostname){
   try{
 
     const dns =
-      require("node:dns")
-        .promises;
+      require(
+        "node:dns"
+      )
+      .promises;
 
     const addresses =
       await dns.lookup(
@@ -354,7 +714,9 @@ async function hostnameIsSafe(hostname){
         }
       );
 
-    if(!addresses.length){
+    if(
+      !addresses.length
+    ){
 
       return false;
 
@@ -388,7 +750,7 @@ async function hostnameIsSafe(hostname){
 
 
 /* =========================================================
-   SAFE WEBSITE FETCH
+   SAFE OFFICIAL WEBSITE FETCH
 ========================================================= */
 
 async function fetchHtml(startUrl){
@@ -399,9 +761,9 @@ async function fetchHtml(startUrl){
     );
 
   for(
-    let redirect=0;
-    redirect<4;
-    redirect++
+    let redirect = 0;
+    redirect < 4;
+    redirect += 1
   ){
 
     if(!current){
@@ -413,10 +775,23 @@ async function fetchHtml(startUrl){
 
     }
 
-    const parsed =
-      new URL(
-        current
-      );
+    let parsed;
+
+    try{
+
+      parsed =
+        new URL(
+          current
+        );
+
+    }catch{
+
+      return{
+        html:"",
+        finalUrl:""
+      };
+
+    }
 
     if(
       !await hostnameIsSafe(
@@ -455,7 +830,7 @@ async function fetchHtml(startUrl){
 
             headers:{
               "User-Agent":
-                "Mozilla/5.0 PETS-DOGUE/1.0",
+                "Mozilla/5.0 (compatible; PETS-DOGUE/1.0; +https://petsanddogue.com)",
 
               Accept:
                 "text/html,application/xhtml+xml"
@@ -473,23 +848,39 @@ async function fetchHtml(startUrl){
             "location"
           );
 
-        if(!location){
+        if(
+          !location
+        ){
+
+          break;
+
+        }
+
+        const next =
+          new URL(
+            location,
+            current
+          );
+
+        if(
+          next.protocol !== "https:" &&
+          next.protocol !== "http:"
+        ){
 
           break;
 
         }
 
         current =
-          new URL(
-            location,
-            current
-          ).href;
+          next.href;
 
         continue;
 
       }
 
-      if(!response.ok){
+      if(
+        !response.ok
+      ){
 
         break;
 
@@ -551,7 +942,7 @@ async function fetchHtml(startUrl){
 
 
 /* =========================================================
-   META IMAGE
+   HTML META HELPERS
 ========================================================= */
 
 function metaContent(
@@ -605,8 +996,45 @@ function metaContent(
 }
 
 
+function pageTitle(html){
+
+  const og =
+    metaContent(
+      html,
+      "og:title"
+    );
+
+  if(og){
+
+    return og;
+
+  }
+
+  const match =
+    String(
+      html ||
+      ""
+    )
+    .match(
+      /<title[^>]*>([\s\S]*?)<\/title>/i
+    );
+
+  return match?.[1]
+    ? decodeHtml(
+        match[1]
+      )
+      .replace(
+        /\s+/g,
+        " "
+      )
+      .trim()
+    : "";
+
+}
+
+
 /* =========================================================
-   WEBSITE IMAGE EXTRACTION
+   IMAGE QUALITY FILTER
 ========================================================= */
 
 function badImage(value){
@@ -620,17 +1048,54 @@ function badImage(value){
 
   return (
     !url ||
-    url.startsWith("data:") ||
-    url.includes("logo") ||
-    url.includes("favicon") ||
-    url.includes("icon") ||
-    url.includes("sprite") ||
-    url.includes("avatar") ||
-    url.includes("placeholder") ||
-    url.includes("tracking") ||
-    url.includes("pixel") ||
-    url.includes("badge") ||
-    url.endsWith(".svg")
+    url.startsWith(
+      "data:"
+    ) ||
+    url.includes(
+      "logo"
+    ) ||
+    url.includes(
+      "favicon"
+    ) ||
+    url.includes(
+      "icon"
+    ) ||
+    url.includes(
+      "sprite"
+    ) ||
+    url.includes(
+      "avatar"
+    ) ||
+    url.includes(
+      "placeholder"
+    ) ||
+    url.includes(
+      "tracking"
+    ) ||
+    url.includes(
+      "pixel"
+    ) ||
+    url.includes(
+      "badge"
+    ) ||
+    url.includes(
+      "spinner"
+    ) ||
+    url.includes(
+      "loading"
+    ) ||
+    url.includes(
+      "payment"
+    ) ||
+    url.includes(
+      "trustpilot"
+    ) ||
+    url.endsWith(
+      ".svg"
+    ) ||
+    url.endsWith(
+      ".gif"
+    )
   );
 
 }
@@ -678,12 +1143,133 @@ function resolveImage(
 
   return "";
 
+}/* =========================================================
+   OFFICIAL WEBSITE IMAGE EXTRACTION
+
+   We trust website imagery only when the fetched page
+   appears reasonably connected to the requested venue.
+========================================================= */
+
+function websiteMatchesVenue(
+  html,
+  venueName
+){
+
+  if(
+    !html ||
+    !venueName
+  ){
+
+    return false;
+
+  }
+
+  const title =
+    pageTitle(
+      html
+    );
+
+  const titleScore =
+    nameMatchScore(
+      venueName,
+      title
+    );
+
+  if(
+    titleScore >= 0.55
+  ){
+
+    return true;
+
+  }
+
+  const ogSite =
+    metaContent(
+      html,
+      "og:site_name"
+    );
+
+  if(
+    nameMatchScore(
+      venueName,
+      ogSite
+    ) >= 0.55
+  ){
+
+    return true;
+
+  }
+
+  const normalizedVenue =
+    normalizeWords(
+      venueName
+    );
+
+  const normalizedHtml =
+    normalizeWords(
+      String(
+        html
+      )
+      .slice(
+        0,
+        250000
+      )
+    );
+
+  if(
+    normalizedVenue.length >= 4 &&
+    normalizedHtml.includes(
+      normalizedVenue
+    )
+  ){
+
+    return true;
+
+  }
+
+  const venueWords =
+    meaningfulWords(
+      venueName
+    );
+
+  if(
+    venueWords.length
+  ){
+
+    const hits =
+      venueWords.filter(
+        word=>
+          normalizedHtml.includes(
+            word
+          )
+      )
+      .length;
+
+    if(
+      hits >= Math.max(
+        1,
+        Math.ceil(
+          venueWords.length *
+          0.7
+        )
+      )
+    ){
+
+      return true;
+
+    }
+
+  }
+
+  return false;
+
 }
 
 
 function websitePhoto(
   html,
-  pageUrl
+  pageUrl,
+  venueName
 ){
 
   if(
@@ -695,11 +1281,33 @@ function websitePhoto(
 
   }
 
+  if(
+    !websiteMatchesVenue(
+      html,
+      venueName
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  /*
+     Social preview images are normally the strongest
+     candidate on an official venue website.
+  */
+
   const meta = [
 
     metaContent(
       html,
       "og:image"
+    ),
+
+    metaContent(
+      html,
+      "og:image:secure_url"
     ),
 
     metaContent(
@@ -718,6 +1326,7 @@ function websitePhoto(
     )
 
   ];
+
 
   for(
     const candidate of meta
@@ -738,25 +1347,71 @@ function websitePhoto(
   }
 
 
+  /*
+     If no social image exists, inspect regular images.
+     We intentionally reject obvious logos/icons/etc.
+  */
+
   const tags =
     html.match(
       /<img\b[^>]*>/gi
     ) || [];
 
 
+  const scored = [];
+
+
   for(
     const tag of tags
   ){
 
+    const altMatch =
+      tag.match(
+        /\balt=["']([^"']*)["']/i
+      );
+
+    const alt =
+      decodeHtml(
+        altMatch?.[1] ||
+        ""
+      );
+
+
+    const widthMatch =
+      tag.match(
+        /\bwidth=["']?(\d+)/i
+      );
+
+    const heightMatch =
+      tag.match(
+        /\bheight=["']?(\d+)/i
+      );
+
+    const width =
+      Number(
+        widthMatch?.[1] ||
+        0
+      );
+
+    const height =
+      Number(
+        heightMatch?.[1] ||
+        0
+      );
+
+
+    const rawCandidates = [];
+
+
     const attributes = [
 
-      /(?:data-src)=["']([^"']+)["']/i,
+      /\bdata-src=["']([^"']+)["']/i,
 
-      /(?:data-lazy-src)=["']([^"']+)["']/i,
+      /\bdata-lazy-src=["']([^"']+)["']/i,
 
-      /(?:data-original)=["']([^"']+)["']/i,
+      /\bdata-original=["']([^"']+)["']/i,
 
-      /(?:src)=["']([^"']+)["']/i
+      /\bsrc=["']([^"']+)["']/i
 
     ];
 
@@ -774,17 +1429,9 @@ function websitePhoto(
         match?.[1]
       ){
 
-        const url =
-          resolveImage(
-            match[1],
-            pageUrl
-          );
-
-        if(url){
-
-          return url;
-
-        }
+        rawCandidates.push(
+          match[1]
+        );
 
       }
 
@@ -793,7 +1440,7 @@ function websitePhoto(
 
     const srcset =
       tag.match(
-        /(?:srcset|data-srcset)=["']([^"']+)["']/i
+        /\b(?:srcset|data-srcset)=["']([^"']+)["']/i
       );
 
 
@@ -801,7 +1448,7 @@ function websitePhoto(
       srcset?.[1]
     ){
 
-      const candidates =
+      const items =
         srcset[1]
         .split(",")
         .map(
@@ -813,26 +1460,132 @@ function websitePhoto(
         .filter(Boolean)
         .reverse();
 
+      rawCandidates.unshift(
+        ...items
+      );
 
-      for(
-        const candidate of candidates
-      ){
+    }
 
-        const url =
-          resolveImage(
-            candidate,
-            pageUrl
-          );
 
-        if(url){
+    for(
+      const raw of rawCandidates
+    ){
 
-          return url;
+      const url =
+        resolveImage(
+          raw,
+          pageUrl
+        );
 
-        }
+      if(!url){
+
+        continue;
 
       }
 
+
+      let score =
+        0;
+
+
+      if(
+        width >= 600
+      ){
+
+        score += 2;
+
+      }else if(
+        width >= 300
+      ){
+
+        score += 1;
+
+      }
+
+
+      if(
+        height >= 350
+      ){
+
+        score += 2;
+
+      }else if(
+        height >= 180
+      ){
+
+        score += 1;
+
+      }
+
+
+      const combined =
+        `${url} ${alt}`;
+
+
+      if(
+        nameMatchScore(
+          venueName,
+          combined
+        ) >= 0.5
+      ){
+
+        score += 4;
+
+      }
+
+
+      if(
+        /hero|banner|venue|restaurant|hotel|room|interior|exterior|gallery|food|dining|terrace|garden|building/i
+        .test(
+          combined
+        )
+      ){
+
+        score += 2;
+
+      }
+
+
+      if(
+        /staff|team|portrait|person|people|award|certificate|press|partner/i
+        .test(
+          combined
+        )
+      ){
+
+        score -= 2;
+
+      }
+
+
+      scored.push({
+        url,
+        score
+      });
+
     }
+
+  }
+
+
+  scored.sort(
+    (a,b)=>
+      b.score -
+      a.score
+  );
+
+
+  /*
+     Do not use an arbitrary first <img>.
+     It must have at least some quality evidence.
+  */
+
+  if(
+    scored[0] &&
+    scored[0].score >= 2
+  ){
+
+    return scored[0].url;
 
   }
 
@@ -846,6 +1599,193 @@ function websitePhoto(
    OSM / NOMINATIM LOOKUP
 ========================================================= */
 
+function osmCandidateName(item){
+
+  const namedetails =
+    item?.namedetails ||
+    {};
+
+  const address =
+    item?.address ||
+    {};
+
+  return (
+    namedetails.name ||
+    namedetails["name:en"] ||
+    address.amenity ||
+    address.tourism ||
+    address.shop ||
+    String(
+      item?.display_name ||
+      ""
+    )
+    .split(",")[0]
+    .trim()
+  );
+
+}
+
+
+function osmCandidateScore(
+  item,
+  name,
+  address,
+  latitude,
+  longitude
+){
+
+  const candidateName =
+    osmCandidateName(
+      item
+    );
+
+  const display =
+    String(
+      item?.display_name ||
+      ""
+    );
+
+
+  const nameScore =
+    nameMatchScore(
+      name,
+      candidateName
+    );
+
+
+  const addressScore =
+    addressMatchScore(
+      address,
+      display
+    );
+
+
+  const candidateLat =
+    numberOrNull(
+      item?.lat
+    );
+
+  const candidateLng =
+    numberOrNull(
+      item?.lon
+    );
+
+
+  const distance =
+    distanceKm(
+      latitude,
+      longitude,
+      candidateLat,
+      candidateLng
+    );
+
+
+  let distanceScore =
+    0;
+
+
+  if(
+    distance !== null
+  ){
+
+    if(
+      distance <= 0.08
+    ){
+
+      distanceScore =
+        1;
+
+    }else if(
+      distance <= 0.25
+    ){
+
+      distanceScore =
+        0.9;
+
+    }else if(
+      distance <= 0.6
+    ){
+
+      distanceScore =
+        0.7;
+
+    }else if(
+      distance <= 1.5
+    ){
+
+      distanceScore =
+        0.4;
+
+    }else if(
+      distance <= 3
+    ){
+
+      distanceScore =
+        0.15;
+
+    }
+
+  }
+
+
+  let score =
+    (
+      nameScore *
+      0.62
+    )
+    +
+    (
+      addressScore *
+      0.18
+    )
+    +
+    (
+      distanceScore *
+      0.20
+    );
+
+
+  /*
+     Exact Wikidata / Wikipedia metadata makes the
+     candidate more valuable, but does not override
+     a poor venue-name match.
+  */
+
+  const extra =
+    item?.extratags ||
+    {};
+
+
+  if(
+    nameScore >= 0.6 &&
+    (
+      extra.wikidata ||
+      extra.wikipedia ||
+      extra.image ||
+      extra.wikimedia_commons
+    )
+  ){
+
+    score += 0.05;
+
+  }
+
+
+  return{
+    item,
+    score:
+      Math.min(
+        1,
+        score
+      ),
+    nameScore,
+    addressScore,
+    distance
+  };
+
+}
+
+
 async function osmMetadata(
   name,
   address,
@@ -853,17 +1793,167 @@ async function osmMetadata(
   longitude
 ){
 
-  const query =
-    [
-      name,
-      address
-    ]
-    .filter(Boolean)
-    .join(", ");
+  const queries = [];
 
 
   if(
-    query.length < 3
+    name &&
+    address
+  ){
+
+    queries.push(
+      `${name}, ${address}`
+    );
+
+  }
+
+
+  if(name){
+
+    queries.push(
+      name
+    );
+
+  }
+
+
+  let collected =
+    [];
+
+
+  for(
+    const query of queries
+  ){
+
+    if(
+      query.length < 3
+    ){
+
+      continue;
+
+    }
+
+
+    const url =
+      new URL(
+        NOMINATIM_URL
+      );
+
+
+    url.searchParams.set(
+      "format",
+      "jsonv2"
+    );
+
+    url.searchParams.set(
+      "q",
+      query
+    );
+
+    url.searchParams.set(
+      "limit",
+      String(
+        MAX_NOMINATIM_RESULTS
+      )
+    );
+
+    url.searchParams.set(
+      "addressdetails",
+      "1"
+    );
+
+    url.searchParams.set(
+      "extratags",
+      "1"
+    );
+
+    url.searchParams.set(
+      "namedetails",
+      "1"
+    );
+
+
+    if(
+      latitude !== null &&
+      longitude !== null
+    ){
+
+      /*
+         Roughly a few kilometres around the supplied
+         coordinates. Coordinates are strong identity
+         evidence for local businesses.
+      */
+
+      const delta =
+        0.045;
+
+
+      url.searchParams.set(
+        "viewbox",
+        [
+          longitude - delta,
+          latitude + delta,
+          longitude + delta,
+          latitude - delta
+        ].join(",")
+      );
+
+
+      url.searchParams.set(
+        "bounded",
+        "1"
+      );
+
+    }
+
+
+    const data =
+      await fetchJson(
+        url.toString(),
+        {
+          headers:{
+            Accept:
+              "application/json",
+
+            "User-Agent":
+              "PETS-DOGUE/1.0 petsanddogue.com"
+          }
+        }
+      );
+
+
+    if(
+      Array.isArray(
+        data
+      )
+    ){
+
+      collected.push(
+        ...data
+      );
+
+    }
+
+
+    /*
+       Usually the full name + address query is enough.
+       Only use the name-only query if nothing useful
+       came back.
+    */
+
+    if(
+      collected.length
+    ){
+
+      break;
+
+    }
+
+  }
+
+
+  if(
+    !collected.length
   ){
 
     return null;
@@ -871,87 +1961,87 @@ async function osmMetadata(
   }
 
 
-  const url =
-    new URL(
-      NOMINATIM_URL
+  /*
+     Remove duplicate Nominatim objects.
+  */
+
+  const unique =
+    new Map();
+
+
+  for(
+    const item of collected
+  ){
+
+    const key =
+      `${item?.osm_type || ""}:${item?.osm_id || item?.place_id || ""}`;
+
+    if(
+      !unique.has(
+        key
+      )
+    ){
+
+      unique.set(
+        key,
+        item
+      );
+
+    }
+
+  }
+
+
+  const ranked =
+    [...unique.values()]
+    .map(
+      item=>
+        osmCandidateScore(
+          item,
+          name,
+          address,
+          latitude,
+          longitude
+        )
+    )
+    .sort(
+      (a,b)=>
+        b.score -
+        a.score
     );
 
 
-  url.searchParams.set(
-    "format",
-    "jsonv2"
-  );
+  const best =
+    ranked[0];
 
-  url.searchParams.set(
-    "q",
-    query
-  );
 
-  url.searchParams.set(
-    "limit",
-    "5"
-  );
+  if(!best){
 
-  url.searchParams.set(
-    "addressdetails",
-    "1"
-  );
+    return null;
 
-  url.searchParams.set(
-    "extratags",
-    "1"
-  );
+  }
 
-  url.searchParams.set(
-    "namedetails",
-    "1"
-  );
+
+  /*
+     Strong identity requirement:
+     never accept a nearby business just because
+     Nominatim returned it first.
+  */
+
+  if(
+    best.nameScore < 0.5
+  ){
+
+    return null;
+
+  }
 
 
   if(
     latitude !== null &&
-    longitude !== null
-  ){
-
-    const delta =
-      0.03;
-
-    url.searchParams.set(
-      "viewbox",
-      [
-        longitude-delta,
-        latitude+delta,
-        longitude+delta,
-        latitude-delta
-      ].join(",")
-    );
-
-    url.searchParams.set(
-      "bounded",
-      "1"
-    );
-
-  }
-
-
-  const data =
-    await fetchJson(
-      url.toString(),
-      {
-        headers:{
-          Accept:
-            "application/json",
-
-          "User-Agent":
-            "PETS-DOGUE/1.0 petsanddogue.com"
-        }
-      }
-    );
-
-
-  if(
-    !Array.isArray(data) ||
-    !data.length
+    longitude !== null &&
+    best.distance !== null &&
+    best.distance > 3
   ){
 
     return null;
@@ -959,30 +2049,21 @@ async function osmMetadata(
   }
 
 
-  const targetName =
-    String(name)
-    .toLowerCase();
+  if(
+    best.score < 0.5
+  ){
+
+    return null;
+
+  }
 
 
-  const best =
-    data.find(
-      item=>
-        String(
-          item.display_name ||
-          ""
-        )
-        .toLowerCase()
-        .includes(
-          targetName
-        )
-    )
-    ||
-    data[0];
+  return best.item;
+
+}
 
 
-  return best;
-
-}/* =========================================================
+/* =========================================================
    OSM DIRECT IMAGE
 ========================================================= */
 
@@ -991,6 +2072,7 @@ function osmDirectImage(osm){
   const extra =
     osm?.extratags ||
     {};
+
 
   const candidates = [
 
@@ -1010,21 +2092,37 @@ function osmDirectImage(osm){
   ){
 
     if(!value){
+
       continue;
+
     }
+
+
+    const raw =
+      String(
+        value
+      )
+      .trim();
 
 
     if(
       /^https?:\/\//i
-        .test(value)
+      .test(
+        raw
+      )
     ){
 
       const url =
         safeHttpUrl(
-          value
+          raw
         );
 
-      if(url){
+      if(
+        url &&
+        !badImage(
+          url
+        )
+      ){
 
         return url;
 
@@ -1034,16 +2132,31 @@ function osmDirectImage(osm){
 
 
     if(
-      String(value)
-        .toLowerCase()
-        .startsWith(
-          "file:"
-        )
+      /^file:/i.test(
+        raw
+      )
     ){
 
       return commonsFileUrl(
-        value
+        raw
       );
+
+    }
+
+
+    /*
+       OSM wikimedia_commons can sometimes contain
+       "Category:..." rather than an image.
+       A category is not itself a usable venue photo.
+    */
+
+    if(
+      /^category:/i.test(
+        raw
+      )
+    ){
+
+      continue;
 
     }
 
@@ -1056,25 +2169,26 @@ function osmDirectImage(osm){
 
 
 /* =========================================================
-   WIKIDATA P18
+   WIKIDATA
 ========================================================= */
 
-async function wikidataPhoto(qid){
+async function wikidataEntity(qid){
 
   const clean =
     text(
       qid,
       50
-    );
+    )
+    .toUpperCase();
 
 
   if(
-    !/^Q\d+$/i.test(
+    !/^Q\d+$/.test(
       clean
     )
   ){
 
-    return "";
+    return null;
 
   }
 
@@ -1095,23 +2209,82 @@ async function wikidataPhoto(qid){
     );
 
 
-  const entity =
+  return (
     data?.entities?.[
       clean
-    ];
+    ] ||
+    null
+  );
+
+}
 
 
-  const claims =
-    entity?.claims ||
+function wikidataLabels(entity){
+
+  const labels =
+    entity?.labels ||
     {};
 
 
-  const imageClaim =
-    claims?.P18?.[0];
+  return Object.values(
+    labels
+  )
+  .map(
+    item=>
+      text(
+        item?.value,
+        300
+      )
+  )
+  .filter(Boolean);
 
+}
+
+
+function wikidataMatchesVenue(
+  entity,
+  venueName
+){
+
+  const labels =
+    wikidataLabels(
+      entity
+    );
+
+
+  if(
+    !labels.length
+  ){
+
+    /*
+       The QID came directly from the matched OSM
+       venue, so missing labels are not enough to
+       invalidate that explicit OSM relationship.
+    */
+
+    return true;
+
+  }
+
+
+  return labels.some(
+    label=>
+      nameMatchScore(
+        venueName,
+        label
+      ) >= 0.5
+  );
+
+}
+
+
+function wikidataP18(entity){
 
   const filename =
-    imageClaim
+    entity
+      ?.claims
+      ?.P18
+      ?.[0]
       ?.mainsnak
       ?.datavalue
       ?.value;
@@ -1131,24 +2304,59 @@ async function wikidataPhoto(qid){
 }
 
 
+async function wikidataPhoto(
+  qid,
+  venueName
+){
+
+  const entity =
+    await wikidataEntity(
+      qid
+    );
+
+
+  if(!entity){
+
+    return "";
+
+  }
+
+
+  if(
+    !wikidataMatchesVenue(
+      entity,
+      venueName
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  return wikidataP18(
+    entity
+  );
+
+}
+
+
 /* =========================================================
    WIKIPEDIA PAGE IMAGE
 ========================================================= */
 
-async function wikipediaPhoto(
-  wikipediaTag
-){
+function parseWikipediaTag(value){
 
   const raw =
     text(
-      wikipediaTag,
+      value,
       500
     );
 
 
   if(!raw){
 
-    return "";
+    return null;
 
   }
 
@@ -1160,32 +2368,82 @@ async function wikipediaPhoto(
     raw;
 
 
+  const colon =
+    raw.indexOf(
+      ":"
+    );
+
+
   if(
-    raw.includes(":")
+    colon > 0
   ){
 
-    const parts =
-      raw.split(":");
+    const possibleLanguage =
+      raw
+      .slice(
+        0,
+        colon
+      )
+      .trim();
+
 
     if(
       /^[a-z]{2,3}$/i.test(
-        parts[0]
+        possibleLanguage
       )
     ){
 
       language =
-        parts.shift();
+        possibleLanguage
+        .toLowerCase();
 
       title =
-        parts.join(":");
+        raw
+        .slice(
+          colon + 1
+        )
+        .trim();
 
     }
 
   }
 
 
+  if(!title){
+
+    return null;
+
+  }
+
+
+  return{
+    language,
+    title
+  };
+
+}
+
+
+async function wikipediaPhoto(
+  wikipediaTag,
+  venueName
+){
+
+  const parsed =
+    parseWikipediaTag(
+      wikipediaTag
+    );
+
+
+  if(!parsed){
+
+    return "";
+
+  }
+
+
   const endpoint =
-    `https://${language}.wikipedia.org/w/api.php`;
+    `https://${parsed.language}.wikipedia.org/w/api.php`;
 
 
   const url =
@@ -1206,12 +2464,12 @@ async function wikipediaPhoto(
 
   url.searchParams.set(
     "prop",
-    "pageimages"
+    "pageimages|info"
   );
 
   url.searchParams.set(
     "piprop",
-    "original|thumbnail"
+    "original|thumbnail|name"
   );
 
   url.searchParams.set(
@@ -1221,7 +2479,12 @@ async function wikipediaPhoto(
 
   url.searchParams.set(
     "titles",
-    title
+    parsed.title
+  );
+
+  url.searchParams.set(
+    "redirects",
+    "1"
   );
 
   url.searchParams.set(
@@ -1247,18 +2510,225 @@ async function wikipediaPhoto(
     pages[0];
 
 
-  return safeHttpUrl(
-    page?.original?.source ||
-    page?.thumbnail?.source ||
-    ""
+  if(
+    !page ||
+    page.missing !== undefined
+  ){
+
+    return "";
+
+  }
+
+
+  const pageName =
+    page.title ||
+    parsed.title;
+
+
+  /*
+     The Wikipedia tag came directly from the matched
+     OSM venue, but we still reject an obviously
+     unrelated title.
+  */
+
+  if(
+    nameMatchScore(
+      venueName,
+      pageName
+    ) < 0.35
+  ){
+
+    return "";
+
+  }
+
+
+  const image =
+    safeHttpUrl(
+      page?.original?.source ||
+      page?.thumbnail?.source ||
+      ""
+    );
+
+
+  if(
+    !image ||
+    badImage(
+      image
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  return image;
+
+}/* =========================================================
+   WIKIMEDIA COMMONS
+   STRICT VERIFIED FALLBACK
+
+   Commons search is deliberately conservative.
+   A random visually attractive image is worse than
+   PETS & DOGUE fallback.
+
+   We require strong textual evidence that the Commons
+   file actually refers to the requested venue.
+========================================================= */
+
+function commonsBlockedTitle(value){
+
+  const title =
+    String(
+      value ||
+      ""
+    );
+
+  return (
+    /logo|icon|flag|coat of arms|diagram|map|route|symbol|poster|menu|advert|advertisement|leaflet|brochure|floor plan|screenshot|qr code|barcode|certificate|award|portrait|headshot|svg/i
+    .test(
+      title
+    )
   );
 
 }
 
 
-/* =========================================================
-   WIKIMEDIA SEARCH
-========================================================= */
+function commonsVenueScore(
+  venueName,
+  address,
+  page
+){
+
+  const title =
+    String(
+      page?.title ||
+      ""
+    )
+    .replace(
+      /^File:/i,
+      ""
+    );
+
+
+  const info =
+    page?.imageinfo?.[0] ||
+    {};
+
+
+  const metadata =
+    info.extmetadata ||
+    {};
+
+
+  const description =
+    decodeHtml(
+      metadata.ImageDescription
+        ?.value ||
+      metadata.ObjectName
+        ?.value ||
+      metadata.Categories
+        ?.value ||
+      ""
+    )
+    .replace(
+      /<[^>]+>/g,
+      " "
+    );
+
+
+  const combined =
+    [
+      title,
+      description
+    ]
+    .filter(Boolean)
+    .join(" ");
+
+
+  const nameScore =
+    nameMatchScore(
+      venueName,
+      combined
+    );
+
+
+  const addressScore =
+    addressMatchScore(
+      address,
+      combined
+    );
+
+
+  let score =
+    nameScore *
+    0.82;
+
+
+  if(
+    addressScore > 0
+  ){
+
+    score +=
+      Math.min(
+        0.18,
+        addressScore *
+        0.18
+      );
+
+  }
+
+
+  /*
+     Exact venue phrase in filename or description
+     is especially strong evidence.
+  */
+
+  const normalizedVenue =
+    normalizeWords(
+      venueName
+    );
+
+
+  const normalizedCombined =
+    normalizeWords(
+      combined
+    );
+
+
+  if(
+    normalizedVenue.length >= 4 &&
+    normalizedCombined.includes(
+      normalizedVenue
+    )
+  ){
+
+    score =
+      Math.max(
+        score,
+        0.92
+      );
+
+  }
+
+
+  return{
+    score:
+      Math.min(
+        1,
+        score
+      ),
+
+    nameScore,
+
+    addressScore,
+
+    combined
+  };
+
+}
+
 
 async function wikimediaPhoto(
   name,
@@ -1281,28 +2751,52 @@ async function wikimediaPhoto(
   }
 
 
-  const area =
+  /*
+     Address is useful only as verification.
+     We do not use generic searches such as
+     "venue London", because that can easily
+     return another branch or unrelated venue.
+  */
+
+  const addressTokens =
     text(
       address,
       350
     )
     .split(",")
+    .map(
+      item=>
+        item.trim()
+    )
+    .filter(Boolean)
     .slice(
       0,
-      4
+      3
     )
     .join(" ");
 
 
-  const searches = [
+  const searches = [];
 
-    `"${venue}" ${area}`,
 
-    `${venue} London`,
+  if(
+    addressTokens
+  ){
 
-    venue
+    searches.push(
+      `"${venue}" ${addressTokens}`
+    );
 
-  ];
+  }
+
+
+  searches.push(
+    `"${venue}"`
+  );
+
+
+  let best =
+    null;
 
 
   for(
@@ -1342,7 +2836,7 @@ async function wikimediaPhoto(
 
     url.searchParams.set(
       "gsrlimit",
-      "8"
+      "10"
     );
 
     url.searchParams.set(
@@ -1352,7 +2846,7 @@ async function wikimediaPhoto(
 
     url.searchParams.set(
       "iiprop",
-      "url"
+      "url|mime|size|extmetadata"
     );
 
     url.searchParams.set(
@@ -1374,10 +2868,6 @@ async function wikimediaPhoto(
       );
 
 
-    const blocked =
-      /logo|icon|map|flag|coat of arms|diagram|svg|poster|menu|symbol/i;
-
-
     for(
       const page of pages
     ){
@@ -1390,8 +2880,85 @@ async function wikimediaPhoto(
 
 
       if(
-        blocked.test(
+        commonsBlockedTitle(
           title
+        )
+      ){
+
+        continue;
+
+      }
+
+
+      const info =
+        page?.imageinfo?.[0];
+
+
+      if(!info){
+
+        continue;
+
+      }
+
+
+      const mime =
+        String(
+          info.mime ||
+          ""
+        )
+        .toLowerCase();
+
+
+      if(
+        mime &&
+        !mime.startsWith(
+          "image/"
+        )
+      ){
+
+        continue;
+
+      }
+
+
+      if(
+        mime.includes(
+          "svg"
+        ) ||
+        mime.includes(
+          "gif"
+        )
+      ){
+
+        continue;
+
+      }
+
+
+      /*
+         Reject tiny files where dimensions are known.
+      */
+
+      const width =
+        Number(
+          info.width ||
+          0
+        );
+
+
+      const height =
+        Number(
+          info.height ||
+          0
+        );
+
+
+      if(
+        width &&
+        height &&
+        (
+          width < 500 ||
+          height < 280
         )
       ){
 
@@ -1402,24 +2969,120 @@ async function wikimediaPhoto(
 
       const image =
         safeHttpUrl(
-          page?.imageinfo?.[0]?.thumburl ||
-          page?.imageinfo?.[0]?.url ||
+          info.thumburl ||
+          info.url ||
           ""
         );
 
 
-      if(image){
+      if(
+        !image ||
+        badImage(
+          image
+        )
+      ){
 
-        return image;
+        continue;
 
       }
+
+
+      const match =
+        commonsVenueScore(
+          venue,
+          address,
+          page
+        );
+
+
+      /*
+         Very high threshold on purpose.
+         If Commons cannot strongly identify the venue,
+         we show PETS & DOGUE fallback instead.
+      */
+
+      if(
+        match.score < 0.78
+      ){
+
+        continue;
+
+      }
+
+
+      if(
+        !best ||
+        match.score >
+        best.score
+      ){
+
+        best = {
+          image,
+          score:
+            match.score
+        };
+
+      }
+
+    }
+
+
+    if(
+      best &&
+      best.score >= 0.92
+    ){
+
+      break;
 
     }
 
   }
 
 
-  return "";
+  return best
+    ?.image ||
+    "";
+
+}
+
+
+/* =========================================================
+   WEBSITE RESOLUTION
+========================================================= */
+
+async function officialWebsitePhoto(
+  website,
+  venueName
+){
+
+  if(!website){
+
+    return "";
+
+  }
+
+
+  const page =
+    await fetchHtml(
+      website
+    );
+
+
+  if(
+    !page.html ||
+    !page.finalUrl
+  ){
+
+    return "";
+
+  }
+
+
+  return websitePhoto(
+    page.html,
+    page.finalUrl,
+    venueName
+  );
 
 }
 
@@ -1467,6 +3130,38 @@ function bodyOf(req){
 
 
 /* =========================================================
+   PHOTO RESPONSE
+========================================================= */
+
+function photoResponse(
+  res,
+  source,
+  photo,
+  confidence
+){
+
+  return send(
+    res,
+    200,
+    {
+      ok:true,
+
+      source,
+
+      photo:
+        photo ||
+        "",
+
+      confidence:
+        confidence ||
+        "high"
+    }
+  );
+
+}
+
+
+/* =========================================================
    MAIN
 ========================================================= */
 
@@ -1505,6 +3200,7 @@ async function handler(
       405,
       {
         ok:false,
+
         error:
           "Method not allowed."
       }
@@ -1558,6 +3254,7 @@ async function handler(
       400,
       {
         ok:false,
+
         error:
           "Place name is required."
       }
@@ -1567,7 +3264,11 @@ async function handler(
 
 
   /* =====================================================
-     1. OPENSTREETMAP / NOMINATIM
+     1. MATCH THE EXACT OSM VENUE
+
+     Nominatim result is not trusted simply because
+     it appears first. osmMetadata() already applies
+     venue-name/address/coordinate verification.
   ===================================================== */
 
   const osm =
@@ -1587,18 +3288,18 @@ async function handler(
       );
 
 
+    /*
+       This is strongest because the image field is
+       directly attached to the matched OSM object.
+    */
+
     if(direct){
 
-      return send(
+      return photoResponse(
         res,
-        200,
-        {
-          ok:true,
-          source:
-            "openstreetmap",
-          photo:
-            direct
-        }
+        "openstreetmap",
+        direct,
+        "very-high"
       );
 
     }
@@ -1609,34 +3310,38 @@ async function handler(
       {};
 
 
+    /* ===================================================
+       2. OSM-LINKED WIKIDATA P18
+    =================================================== */
+
     if(
       extra.wikidata
     ){
 
       const image =
         await wikidataPhoto(
-          extra.wikidata
+          extra.wikidata,
+          name
         );
 
 
       if(image){
 
-        return send(
+        return photoResponse(
           res,
-          200,
-          {
-            ok:true,
-            source:
-              "wikidata",
-            photo:
-              image
-          }
+          "wikidata",
+          image,
+          "very-high"
         );
 
       }
 
     }
 
+
+    /* ===================================================
+       3. OSM-LINKED WIKIPEDIA
+    =================================================== */
 
     if(
       extra.wikipedia
@@ -1644,22 +3349,18 @@ async function handler(
 
       const image =
         await wikipediaPhoto(
-          extra.wikipedia
+          extra.wikipedia,
+          name
         );
 
 
       if(image){
 
-        return send(
+        return photoResponse(
           res,
-          200,
-          {
-            ok:true,
-            source:
-              "wikipedia",
-            photo:
-              image
-          }
+          "wikipedia",
+          image,
+          "very-high"
         );
 
       }
@@ -1670,36 +3371,28 @@ async function handler(
 
 
   /* =====================================================
-     2. OFFICIAL WEBSITE
+     4. OFFICIAL WEBSITE
+
+     Only use the image if the website itself appears
+     connected to the requested venue.
   ===================================================== */
 
   if(website){
 
-    const page =
-      await fetchHtml(
-        website
-      );
-
-
     const image =
-      websitePhoto(
-        page.html,
-        page.finalUrl
+      await officialWebsitePhoto(
+        website,
+        name
       );
 
 
     if(image){
 
-      return send(
+      return photoResponse(
         res,
-        200,
-        {
-          ok:true,
-          source:
-            "official-website",
-          photo:
-            image
-        }
+        "official-website",
+        image,
+        "high"
       );
 
     }
@@ -1708,7 +3401,10 @@ async function handler(
 
 
   /* =====================================================
-     3. WIKIMEDIA COMMONS SEARCH
+     5. STRICT WIKIMEDIA COMMONS SEARCH
+
+     This is intentionally last.
+     Commons must strongly identify the venue.
   ===================================================== */
 
   const commons =
@@ -1720,23 +3416,22 @@ async function handler(
 
   if(commons){
 
-    return send(
+    return photoResponse(
       res,
-      200,
-      {
-        ok:true,
-        source:
-          "wikimedia",
-        photo:
-          commons
-      }
+      "wikimedia",
+      commons,
+      "verified"
     );
 
   }
 
 
   /* =====================================================
-     NOTHING FOUND
+     6. NOTHING VERIFIED
+
+     Do NOT manufacture a photo.
+     The frontend already has the PETS & DOGUE
+     branded fallback for this exact situation.
   ===================================================== */
 
   return send(
@@ -1744,9 +3439,14 @@ async function handler(
     200,
     {
       ok:true,
+
       source:
         "fallback",
-      photo:""
+
+      photo:"",
+
+      confidence:
+        "none"
     }
   );
 
