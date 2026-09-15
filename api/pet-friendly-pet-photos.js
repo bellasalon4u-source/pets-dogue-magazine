@@ -8,12 +8,14 @@
    - returns approved animal photos for one exact venue
 
    POST
-   - accepts compressed image from browser
+   - accepts 1–10 compressed images from browser
+   - remains compatible with the old single-image request
    - requires animalVisible = true
    - requires takenAtVenue = true
-   - stores file in Supabase Storage
-   - creates moderation record in pet_place_photos
-   - photo starts as "pending"
+   - stores every file in Supabase Storage
+   - creates one moderation record per photo
+   - every new photo starts as "pending"
+   - preserves Inside / Outside / Terrace / Other
 
    IMPORTANT
    Only photos showing an animal at the exact venue
@@ -46,14 +48,37 @@ const TABLE =
 const BUCKET =
   "pet-place-photos";
 
-const MAX_BODY_BYTES =
-  6 * 1024 * 1024;
-
 const MAX_IMAGE_BYTES =
   4 * 1024 * 1024;
 
+const MAX_BATCH =
+  10;
+
+/*
+   Browser images are compressed before upload.
+
+   Base64 is larger than the original binary file, so the
+   request limit must be larger than MAX_IMAGE_BYTES × 10.
+*/
+const MAX_BODY_BYTES =
+  56 * 1024 * 1024;
+
 const MAX_RESULTS =
   100;
+
+/*
+   Instead of blocking the second photo for two minutes,
+   allow a reasonable number of submissions in the window.
+
+   This is compatible with:
+   - one POST containing up to 10 photos
+   - sequential mobile uploads from the frontend
+*/
+const RATE_WINDOW_MS =
+  2 * 60 * 1000;
+
+const MAX_RECENT_PHOTOS =
+  20;
 
 
 /* =========================================================
@@ -74,6 +99,11 @@ function sendJson(
   response.setHeader(
     "Cache-Control",
     "no-store"
+  );
+
+  response.setHeader(
+    "X-Content-Type-Options",
+    "nosniff"
   );
 
   response
@@ -243,7 +273,7 @@ function randomId(){
   if(
     globalThis.crypto &&
     typeof globalThis.crypto.randomUUID ===
-    "function"
+      "function"
   ){
 
     return globalThis.crypto
@@ -312,7 +342,7 @@ async function readBody(request){
   ){
 
     throw new Error(
-      "Image upload is too large."
+      "Photo upload is too large."
     );
 
   }
@@ -343,7 +373,7 @@ async function readBody(request){
     ){
 
       throw new Error(
-        "Image upload is too large."
+        "Photo upload is too large."
       );
 
     }
@@ -425,24 +455,26 @@ async function supabaseRequest(
     );
 
 
-  const text =
+  const responseText =
     await response.text();
 
 
   let data = null;
 
 
-  if(text){
+  if(responseText){
 
     try{
 
       data =
-        JSON.parse(text);
+        JSON.parse(
+          responseText
+        );
 
     }catch{
 
       data =
-        text;
+        responseText;
 
     }
 
@@ -485,7 +517,10 @@ async function supabaseRequest(
 
   return data;
 
-}/* =========================================================
+}
+
+
+/* =========================================================
    STORAGE BUCKET
 ========================================================= */
 
@@ -504,20 +539,10 @@ async function ensureBucket(){
 
   }catch(error){
 
-    if(
-      Number(
-        error.status
-      ) !==
-      404
-    ){
-
-      /*
-         Some Supabase projects return
-         another status when bucket does not exist.
-         We still attempt creation.
-      */
-
-    }
+    /*
+       If the bucket is missing, attempt creation below.
+       Some Supabase projects do not return exactly 404.
+    */
 
   }
 
@@ -563,15 +588,13 @@ async function ensureBucket(){
   }catch(error){
 
     /*
-       If another request created
-       the bucket milliseconds earlier,
-       continue normally.
+       Another request can create the bucket between
+       our GET and POST. In that case continue normally.
     */
 
     const message =
       String(
-        error.message ||
-        ""
+        error.message || ""
       )
       .toLowerCase();
 
@@ -624,7 +647,8 @@ function decodeImageData(
 
 
   const mime =
-    match[1];
+    match[1]
+      .toLowerCase();
 
 
   const buffer =
@@ -662,11 +686,9 @@ function decodeImageData(
 
 
   const extension =
-    mime ===
-    "image/png"
+    mime === "image/png"
       ? "png"
-      : mime ===
-        "image/webp"
+      : mime === "image/webp"
         ? "webp"
         : "jpg";
 
@@ -676,6 +698,78 @@ function decodeImageData(
     buffer,
     extension
   };
+
+}
+
+
+/* =========================================================
+   IMAGE SIGNATURE VALIDATION
+========================================================= */
+
+function validImageSignature(image){
+
+  const buffer =
+    image.buffer;
+
+
+  if(
+    image.mime ===
+    "image/jpeg"
+  ){
+
+    return (
+      buffer.length >= 3 &&
+      buffer[0] === 0xff &&
+      buffer[1] === 0xd8 &&
+      buffer[2] === 0xff
+    );
+
+  }
+
+
+  if(
+    image.mime ===
+    "image/png"
+  ){
+
+    return (
+      buffer.length >= 8 &&
+      buffer[0] === 0x89 &&
+      buffer[1] === 0x50 &&
+      buffer[2] === 0x4e &&
+      buffer[3] === 0x47
+    );
+
+  }
+
+
+  if(
+    image.mime ===
+    "image/webp"
+  ){
+
+    return (
+      buffer.length >= 12 &&
+      buffer
+        .subarray(
+          0,
+          4
+        )
+        .toString("ascii") ===
+          "RIFF" &&
+      buffer
+        .subarray(
+          8,
+          12
+        )
+        .toString("ascii") ===
+          "WEBP"
+    );
+
+  }
+
+
+  return false;
 
 }
 
@@ -741,10 +835,57 @@ async function uploadImage(
 
 
 /* =========================================================
+   DELETE STORAGE FILE
+========================================================= */
+
+async function deleteUploadedImage(
+  uploadedPath
+){
+
+  if(!uploadedPath){
+    return;
+  }
+
+
+  try{
+
+    await supabaseRequest(
+      `/storage/v1/object/${BUCKET}`,
+      {
+        method:"DELETE",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify({
+            prefixes:[
+              uploadedPath
+            ]
+          })
+
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Pet photo cleanup:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
    RATE LIMIT
 ========================================================= */
 
-async function recentUploadExists(
+async function recentUploadCount(
   placeKey,
   uploaderKey
 ){
@@ -754,7 +895,7 @@ async function recentUploadExists(
     !uploaderKey
   ){
 
-    return false;
+    return 0;
 
   }
 
@@ -762,7 +903,7 @@ async function recentUploadExists(
   const since =
     new Date(
       Date.now() -
-      2 * 60 * 1000
+      RATE_WINDOW_MS
     )
     .toISOString();
 
@@ -773,7 +914,7 @@ async function recentUploadExists(
     `&uploader_key=eq.${encodeURIComponent(uploaderKey)}` +
     `&created_at=gte.${encodeURIComponent(since)}` +
     `&select=id` +
-    `&limit=1`;
+    `&limit=${MAX_RECENT_PHOTOS + 1}`;
 
 
   try{
@@ -792,15 +933,18 @@ async function recentUploadExists(
       );
 
 
-    return (
-      Array.isArray(rows) &&
-      rows.length >
-        0
-    );
+    return Array.isArray(rows)
+      ? rows.length
+      : 0;
 
   }catch{
 
-    return false;
+    /*
+       Do not break legitimate uploads only because
+       the rate-limit lookup failed.
+    */
+
+    return 0;
 
   }
 
@@ -993,7 +1137,246 @@ async function readApprovedPhotos(
         )
     : [];
 
-}/* =========================================================
+}
+
+
+/* =========================================================
+   NORMALISE UPLOAD ITEMS
+
+   Supports the original request:
+
+   {
+     imageData:"...",
+     area:"inside"
+   }
+
+   and the new picker request:
+
+   {
+     images:[
+       {
+         imageData:"...",
+         area:"inside"
+       }
+     ]
+   }
+========================================================= */
+
+function normalizeUploadItems(body){
+
+  let items = [];
+
+
+  if(
+    Array.isArray(
+      body.images
+    )
+  ){
+
+    items =
+      body.images
+        .slice(
+          0,
+          MAX_BATCH
+        )
+        .map(
+          item=>{
+
+            if(
+              typeof item ===
+              "string"
+            ){
+
+              return {
+
+                imageData:
+                  item,
+
+                area:
+                  safeArea(
+                    body.area
+                  )
+
+              };
+
+            }
+
+
+            return {
+
+              imageData:
+                item?.imageData ||
+                item?.image_data ||
+                "",
+
+              area:
+                safeArea(
+                  item?.area ||
+                  body.area
+                )
+
+            };
+
+          });
+
+  }else if(
+    body.imageData ||
+    body.image_data
+  ){
+
+    items = [{
+
+      imageData:
+        body.imageData ||
+        body.image_data,
+
+      area:
+        safeArea(
+          body.area
+        )
+
+    }];
+
+  }
+
+
+  return items
+    .filter(
+      item=>
+        Boolean(
+          item.imageData
+        )
+    )
+    .slice(
+      0,
+      MAX_BATCH
+    );
+
+}
+
+
+/* =========================================================
+   PROCESS ONE PHOTO
+========================================================= */
+
+async function processPhoto(
+  input,
+  item
+){
+
+  const image =
+    decodeImageData(
+      item.imageData
+    );
+
+
+  if(
+    !validImageSignature(
+      image
+    )
+  ){
+
+    throw new Error(
+      "The selected file is not a valid image."
+    );
+
+  }
+
+
+  const folder =
+    slug(
+      input.placeKey
+    );
+
+
+  const uploadedPath =
+    `${folder}/` +
+    `${Date.now()}-` +
+    `${randomId()}.` +
+    `${image.extension}`;
+
+
+  let imageUrl =
+    "";
+
+
+  try{
+
+    imageUrl =
+      await uploadImage(
+        uploadedPath,
+        image
+      );
+
+
+    const record =
+      await savePhotoRecord({
+
+        placeKey:
+          input.placeKey,
+
+        placeName:
+          input.placeName,
+
+        address:
+          input.address,
+
+        uploaderKey:
+          input.uploaderKey,
+
+        area:
+          safeArea(
+            item.area
+          ),
+
+        imageUrl
+
+      });
+
+
+    return {
+
+      ok:true,
+
+      id:
+        record.id ||
+        null,
+
+      placeKey:
+        input.placeKey,
+
+      imageUrl,
+
+      area:
+        safeArea(
+          item.area
+        ),
+
+      status:
+        "pending"
+
+    };
+
+
+  }catch(error){
+
+    if(imageUrl){
+
+      await deleteUploadedImage(
+        uploadedPath
+      );
+
+    }
+
+
+    throw error;
+
+  }
+
+}
+
+
+/* =========================================================
    HANDLER
 ========================================================= */
 
@@ -1130,17 +1513,13 @@ async function handler(
 
 
   /* =====================================================
-     POST NEW PHOTO
+     POST NEW PET PHOTO(S)
   ===================================================== */
 
   if(
     request.method ===
     "POST"
   ){
-
-    let uploadedPath =
-      "";
-
 
     try{
 
@@ -1182,21 +1561,15 @@ async function handler(
 
       const animalVisible =
         boolean(
-          body.animalVisible ||
+          body.animalVisible ??
           body.animal_visible
         );
 
 
       const takenAtVenue =
         boolean(
-          body.takenAtVenue ||
+          body.takenAtVenue ??
           body.taken_at_venue
-        );
-
-
-      const area =
-        safeArea(
-          body.area
         );
 
 
@@ -1224,6 +1597,8 @@ async function handler(
 
       /*
          Mandatory PETS & DOGUE rule.
+         These confirmations apply to every image
+         included in this submission.
       */
 
       if(
@@ -1242,7 +1617,7 @@ async function handler(
       ){
 
         throw new Error(
-          "The photo must be taken at this exact venue."
+          "Every photo must be taken at this exact venue."
         );
 
       }
@@ -1261,65 +1636,189 @@ async function handler(
       }
 
 
-      const recent =
-        await recentUploadExists(
-          placeKey,
-          uploaderKey
+      const items =
+        normalizeUploadItems(
+          body
         );
 
 
-      if(recent){
+      if(
+        !items.length
+      ){
 
         throw new Error(
-          "Please wait before uploading another photo for this place."
+          "Please choose at least one photo."
         );
 
       }
 
 
-      const image =
-        decodeImageData(
-          body.imageData ||
-          body.image_data
+      if(
+        items.length >
+        MAX_BATCH
+      ){
+
+        throw new Error(
+          `You can upload up to ${MAX_BATCH} photos at once.`
         );
 
-
-      const folder =
-        slug(
-          placeKey
-        );
+      }
 
 
-      uploadedPath =
-        `${folder}/` +
-        `${Date.now()}-` +
-        `${randomId()}.` +
-        `${image.extension}`;
-
-
-      const imageUrl =
-        await uploadImage(
-          uploadedPath,
-          image
-        );
-
-
-      const record =
-        await savePhotoRecord({
-
+      const recentCount =
+        await recentUploadCount(
           placeKey,
+          uploaderKey
+        );
 
-          placeName,
 
-          address,
+      if(
+        recentCount >=
+        MAX_RECENT_PHOTOS
+      ){
 
-          uploaderKey,
+        return sendJson(
+          response,
+          429,
+          {
+            ok:false,
 
-          area,
+            error:
+              "Too many photos were submitted recently. Please wait a moment and try again."
+          }
+        );
 
-          imageUrl
+      }
 
-        });
+
+      if(
+        recentCount +
+        items.length >
+        MAX_RECENT_PHOTOS
+      ){
+
+        return sendJson(
+          response,
+          429,
+          {
+            ok:false,
+
+            error:
+              "This upload would exceed the temporary photo submission limit."
+          }
+        );
+
+      }
+
+
+      const input = {
+
+        placeKey,
+
+        placeName,
+
+        address,
+
+        uploaderKey
+
+      };
+
+
+      const uploaded = [];
+
+      const failed = [];
+
+
+      /*
+         Process sequentially.
+
+         This uses less memory than uploading 10 files
+         simultaneously and behaves better on mobile and
+         serverless environments.
+      */
+
+      for(
+        let index = 0;
+        index < items.length;
+        index++
+      ){
+
+        try{
+
+          const photo =
+            await processPhoto(
+              input,
+              items[index]
+            );
+
+
+          uploaded.push({
+
+            index,
+
+            ...photo
+
+          });
+
+
+        }catch(error){
+
+          console.error(
+            "PET PHOTO ITEM:",
+            error
+          );
+
+
+          failed.push({
+
+            index,
+
+            ok:false,
+
+            error:
+              clean(
+                error.message ||
+                "Could not upload this photo.",
+                500
+              )
+
+          });
+
+        }
+
+      }
+
+
+      if(
+        !uploaded.length
+      ){
+
+        return sendJson(
+          response,
+          400,
+          {
+            ok:false,
+
+            status:
+              "failed",
+
+            uploaded:
+              0,
+
+            failed:
+              failed.length,
+
+            errors:
+              failed,
+
+            error:
+              failed[0]
+                ?.error ||
+              "Could not upload the selected photos."
+          }
+        );
+
+      }
 
 
       return sendJson(
@@ -1331,23 +1830,39 @@ async function handler(
           status:
             "pending",
 
+          moderation:
+            "pending",
+
+          placeKey,
+
+          uploaded:
+            uploaded.length,
+
+          failed:
+            failed.length,
+
+          photos:
+            uploaded,
+
+          errors:
+            failed,
+
+          /*
+             Keep the old "photo" field when exactly
+             one image was uploaded so older frontend
+             code remains compatible.
+          */
+
+          photo:
+            uploaded.length === 1
+              ? uploaded[0]
+              : null,
+
           message:
-            "Photo submitted for review.",
+            uploaded.length === 1
+              ? "Photo submitted for review."
+              : `${uploaded.length} photos submitted for review.`
 
-          photo:{
-            id:
-              record.id ||
-              null,
-
-            placeKey,
-
-            imageUrl,
-
-            area,
-
-            status:
-              "pending"
-          }
         }
       );
 
@@ -1360,48 +1875,6 @@ async function handler(
       );
 
 
-      /*
-         If database insert fails after
-         Storage upload, attempt cleanup.
-      */
-
-      if(
-        uploadedPath
-      ){
-
-        try{
-
-          await supabaseRequest(
-            `/storage/v1/object/${BUCKET}`,
-            {
-              method:"DELETE",
-
-              headers:{
-                "Content-Type":
-                  "application/json"
-              },
-
-              body:
-                JSON.stringify({
-                  prefixes:[
-                    uploadedPath
-                  ]
-                })
-            }
-          );
-
-        }catch(cleanupError){
-
-          console.warn(
-            "Pet photo cleanup:",
-            cleanupError
-          );
-
-        }
-
-      }
-
-
       return sendJson(
         response,
         400,
@@ -1411,7 +1884,7 @@ async function handler(
           error:
             clean(
               error.message ||
-              "Could not upload pet photo.",
+              "Could not upload pet photos.",
               500
             )
         }
