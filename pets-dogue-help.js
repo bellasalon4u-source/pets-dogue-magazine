@@ -44,13 +44,6 @@
 
   /* =======================================================
      MISO ICON
-
-     Approved Miso headset artwork can later replace this
-     fallback by setting:
-
-     window.PETS_DOGUE_HELP_ICON = "/your-image.png";
-
-     No existing PETS & DOGUE images are changed.
   ======================================================= */
 
   const FALLBACK_MISO =
@@ -67,58 +60,29 @@
         <circle cx="80" cy="80" r="76" fill="url(#bg)"/>
 
         <path
-          d="M45 62
-             C27 54 23 36 32 23
-             C47 28 57 39 59 52"
+          d="M45 62 C27 54 23 36 32 23 C47 28 57 39 59 52"
           fill="#f4e4bd"
           stroke="#111"
           stroke-width="5"
-          stroke-linejoin="round"
         />
 
         <path
-          d="M115 62
-             C133 54 137 36 128 23
-             C113 28 103 39 101 52"
+          d="M115 62 C133 54 137 36 128 23 C113 28 103 39 101 52"
           fill="#f4e4bd"
           stroke="#111"
           stroke-width="5"
-          stroke-linejoin="round"
         />
 
         <path
-          d="M42 82
-             C42 49 58 35 80 35
-             C102 35 118 49 118 82
-             C118 116 100 134 80 134
-             C60 134 42 116 42 82Z"
+          d="M42 82 C42 49 58 35 80 35 C102 35 118 49 118 82
+             C118 116 100 134 80 134 C60 134 42 116 42 82Z"
           fill="#fff4d8"
           stroke="#111"
           stroke-width="5"
         />
 
         <path
-          d="M44 79
-             C26 80 25 104 37 111"
-          fill="none"
-          stroke="#111"
-          stroke-width="10"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M116 79
-             C134 80 135 104 123 111"
-          fill="none"
-          stroke="#111"
-          stroke-width="10"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M42 75
-             C42 48 56 31 80 31
-             C104 31 118 48 118 75"
+          d="M42 75 C42 48 56 31 80 31 C104 31 118 48 118 75"
           fill="none"
           stroke="#111"
           stroke-width="8"
@@ -129,27 +93,15 @@
         <circle cx="96" cy="78" r="6" fill="#111"/>
 
         <path
-          d="M74 94
-             Q80 89 86 94
-             Q80 101 74 94Z"
+          d="M74 94 Q80 89 86 94 Q80 101 74 94Z"
           fill="#111"
         />
 
         <path
-          d="M68 105
-             Q80 116 92 105"
+          d="M68 105 Q80 116 92 105"
           fill="none"
           stroke="#111"
           stroke-width="4"
-          stroke-linecap="round"
-        />
-
-        <path
-          d="M123 105
-             C143 106 144 119 131 122"
-          fill="none"
-          stroke="#111"
-          stroke-width="5"
           stroke-linecap="round"
         />
 
@@ -167,12 +119,10 @@
     let value = "";
 
     try{
-
       value =
         localStorage.getItem(
           LANGUAGE_KEY
         ) || "";
-
     }catch{}
 
     value =
@@ -188,12 +138,11 @@
     return supported.includes(value)
       ? value
       : "en";
-
   }
 
 
   /* =======================================================
-     CORE TRANSLATIONS
+     UI TRANSLATIONS
   ======================================================= */
 
   const UI = {
@@ -210,9 +159,7 @@
       close:"Close Help",
       speak:"Read aloud",
       stop:"Stop reading",
-      back:"Back to all topics",
-      open:"Open",
-      quick:"Frequently asked questions"
+      back:"Back to all topics"
     },
 
     uk:{
@@ -227,9 +174,7 @@
       close:"Закрити довідку",
       speak:"Озвучити",
       stop:"Зупинити озвучення",
-      back:"До всіх тем",
-      open:"Відкрити",
-      quick:"Часті запитання"
+      back:"До всіх тем"
     },
 
     ru:{
@@ -244,9 +189,7 @@
       close:"Закрыть помощь",
       speak:"Озвучить",
       stop:"Остановить озвучку",
-      back:"Ко всем разделам",
-      open:"Открыть",
-      quick:"Часто задаваемые вопросы"
+      back:"Ко всем разделам"
     },
 
     fr:{
@@ -257,13 +200,11 @@
       placeholder:"Que souhaitez-vous savoir ?",
       topics:"Rubriques d'aide",
       results:"Résultats",
-      noResults:"Aucune réponse correspondante. Essayez d'autres mots.",
+      noResults:"Aucune réponse correspondante.",
       close:"Fermer l'aide",
       speak:"Lire à voix haute",
       stop:"Arrêter la lecture",
-      back:"Tous les sujets",
-      open:"Ouvrir",
-      quick:"Questions fréquentes"
+      back:"Tous les sujets"
     },
 
     de:{
@@ -278,9 +219,7 @@
       close:"Hilfe schließen",
       speak:"Vorlesen",
       stop:"Vorlesen stoppen",
-      back:"Alle Themen",
-      open:"Öffnen",
-      quick:"Häufige Fragen"
+      back:"Alle Themen"
     },
 
     es:{
@@ -295,60 +234,7 @@
       close:"Cerrar ayuda",
       speak:"Leer en voz alta",
       stop:"Detener lectura",
-      back:"Todos los temas",
-      open:"Abrir",
-      quick:"Preguntas frecuentes"
-    },
-
-    it:{
-      help:"Aiuto",
-      title:"Come può aiutarti Miso?",
-      intro:"Benvenuto nell'assistenza PETS & DOGUE. Scegli un argomento o scrivi la tua domanda.",
-      search:"Cerca nell'aiuto",
-      placeholder:"Cosa vuoi sapere?",
-      topics:"Argomenti di aiuto",
-      results:"Risultati",
-      noResults:"Nessuna risposta trovata.",
-      close:"Chiudi",
-      speak:"Leggi ad alta voce",
-      stop:"Interrompi lettura",
-      back:"Tutti gli argomenti",
-      open:"Apri",
-      quick:"Domande frequenti"
-    },
-
-    pt:{
-      help:"Ajuda",
-      title:"Como a Miso pode ajudar?",
-      intro:"Bem-vindo à ajuda PETS & DOGUE. Escolha um tema ou escreva a sua pergunta.",
-      search:"Pesquisar ajuda",
-      placeholder:"O que gostaria de saber?",
-      topics:"Tópicos de ajuda",
-      results:"Resultados",
-      noResults:"Nenhuma resposta encontrada.",
-      close:"Fechar ajuda",
-      speak:"Ler em voz alta",
-      stop:"Parar leitura",
-      back:"Todos os tópicos",
-      open:"Abrir",
-      quick:"Perguntas frequentes"
-    },
-
-    nl:{
-      help:"Help",
-      title:"Hoe kan Miso helpen?",
-      intro:"Welkom bij PETS & DOGUE Help. Kies een onderwerp of typ je vraag.",
-      search:"Help zoeken",
-      placeholder:"Wat wil je weten?",
-      topics:"Helponderwerpen",
-      results:"Zoekresultaten",
-      noResults:"Geen passend antwoord gevonden.",
-      close:"Help sluiten",
-      speak:"Voorlezen",
-      stop:"Stop voorlezen",
-      back:"Alle onderwerpen",
-      open:"Openen",
-      quick:"Veelgestelde vragen"
+      back:"Todos los temas"
     },
 
     ar:{
@@ -363,229 +249,43 @@
       close:"إغلاق المساعدة",
       speak:"قراءة بصوت عالٍ",
       stop:"إيقاف القراءة",
-      back:"كل المواضيع",
-      open:"فتح",
-      quick:"الأسئلة الشائعة"
+      back:"كل المواضيع"
     }
 
   };
 
-
-  /* =======================================================
-     TRANSLATION FALLBACKS
-  ======================================================= */
 
   const languageFallbacks = {
 
-    pl:{
-      help:"Pomoc",
-      title:"Jak Miso może pomóc?",
-      search:"Szukaj pomocy",
-      placeholder:"Co chcesz wiedzieć?",
-      topics:"Tematy pomocy",
-      results:"Wyniki wyszukiwania",
-      close:"Zamknij",
-      speak:"Czytaj na głos",
-      stop:"Zatrzymaj",
-      back:"Wszystkie tematy",
-      open:"Otwórz",
-      quick:"Częste pytania"
-    },
-
-    cs:{
-      help:"Nápověda",
-      title:"Jak může Miso pomoci?",
-      search:"Hledat v nápovědě",
-      placeholder:"Co chcete vědět?",
-      topics:"Témata nápovědy",
-      results:"Výsledky",
-      close:"Zavřít",
-      speak:"Přečíst nahlas",
-      stop:"Zastavit",
-      back:"Všechna témata",
-      open:"Otevřít",
-      quick:"Časté otázky"
-    },
-
-    sk:{
-      help:"Pomoc",
-      title:"Ako môže Miso pomôcť?",
-      search:"Hľadať v pomoci",
-      placeholder:"Čo chcete vedieť?",
-      topics:"Témy pomoci",
-      results:"Výsledky",
-      close:"Zavrieť",
-      speak:"Čítať nahlas",
-      stop:"Zastaviť",
-      back:"Všetky témy",
-      open:"Otvoriť",
-      quick:"Časté otázky"
-    },
-
-    hu:{
-      help:"Súgó",
-      title:"Hogyan segíthet Miso?",
-      search:"Keresés a súgóban",
-      placeholder:"Mit szeretne tudni?",
-      topics:"Súgótémák",
-      results:"Találatok",
-      close:"Bezárás",
-      speak:"Felolvasás",
-      stop:"Leállítás",
-      back:"Minden téma",
-      open:"Megnyitás",
-      quick:"Gyakori kérdések"
-    },
-
-    ro:{
-      help:"Ajutor",
-      title:"Cum vă poate ajuta Miso?",
-      search:"Caută în ajutor",
-      placeholder:"Ce doriți să aflați?",
-      topics:"Subiecte de ajutor",
-      results:"Rezultate",
-      close:"Închide",
-      speak:"Citește cu voce tare",
-      stop:"Oprește",
-      back:"Toate subiectele",
-      open:"Deschide",
-      quick:"Întrebări frecvente"
-    },
-
-    bg:{
-      help:"Помощ",
-      title:"Как може Мисо да помогне?",
-      search:"Търсене в помощта",
-      placeholder:"Какво искате да знаете?",
-      topics:"Теми за помощ",
-      results:"Резултати",
-      close:"Затвори",
-      speak:"Прочети на глас",
-      stop:"Спри",
-      back:"Всички теми",
-      open:"Отвори",
-      quick:"Често задавани въпроси"
-    },
-
-    el:{
-      help:"Βοήθεια",
-      title:"Πώς μπορεί να βοηθήσει η Miso;",
-      search:"Αναζήτηση βοήθειας",
-      placeholder:"Τι θέλετε να μάθετε;",
-      topics:"Θέματα βοήθειας",
-      results:"Αποτελέσματα",
-      close:"Κλείσιμο",
-      speak:"Ανάγνωση δυνατά",
-      stop:"Διακοπή",
-      back:"Όλα τα θέματα",
-      open:"Άνοιγμα",
-      quick:"Συχνές ερωτήσεις"
-    },
-
-    sv:{
-      help:"Hjälp",
-      title:"Hur kan Miso hjälpa?",
-      search:"Sök i hjälp",
-      placeholder:"Vad vill du veta?",
-      topics:"Hjälpämnen",
-      results:"Resultat",
-      close:"Stäng",
-      speak:"Läs upp",
-      stop:"Stoppa",
-      back:"Alla ämnen",
-      open:"Öppna",
-      quick:"Vanliga frågor"
-    },
-
-    da:{
-      help:"Hjælp",
-      title:"Hvordan kan Miso hjælpe?",
-      search:"Søg i hjælp",
-      placeholder:"Hvad vil du vide?",
-      topics:"Hjælpeemner",
-      results:"Resultater",
-      close:"Luk",
-      speak:"Læs højt",
-      stop:"Stop",
-      back:"Alle emner",
-      open:"Åbn",
-      quick:"Ofte stillede spørgsmål"
-    },
-
-    no:{
-      help:"Hjelp",
-      title:"Hvordan kan Miso hjelpe?",
-      search:"Søk i hjelp",
-      placeholder:"Hva vil du vite?",
-      topics:"Hjelpeemner",
-      results:"Resultater",
-      close:"Lukk",
-      speak:"Les høyt",
-      stop:"Stopp",
-      back:"Alle emner",
-      open:"Åpne",
-      quick:"Vanlige spørsmål"
-    },
-
-    fi:{
-      help:"Ohje",
-      title:"Miten Miso voi auttaa?",
-      search:"Hae ohjeesta",
-      placeholder:"Mitä haluat tietää?",
-      topics:"Ohjeaiheet",
-      results:"Tulokset",
-      close:"Sulje",
-      speak:"Lue ääneen",
-      stop:"Lopeta",
-      back:"Kaikki aiheet",
-      open:"Avaa",
-      quick:"Usein kysytyt kysymykset"
-    },
-
-    tr:{
-      help:"Yardım",
-      title:"Miso nasıl yardımcı olabilir?",
-      search:"Yardımda ara",
-      placeholder:"Ne öğrenmek istiyorsunuz?",
-      topics:"Yardım konuları",
-      results:"Sonuçlar",
-      close:"Kapat",
-      speak:"Sesli oku",
-      stop:"Durdur",
-      back:"Tüm konular",
-      open:"Aç",
-      quick:"Sık sorulan sorular"
-    },
-
-    hi:{
-      help:"सहायता",
-      title:"Miso कैसे मदद कर सकती है?",
-      search:"सहायता खोजें",
-      placeholder:"आप क्या जानना चाहते हैं?",
-      topics:"सहायता विषय",
-      results:"खोज परिणाम",
-      close:"बंद करें",
-      speak:"ज़ोर से पढ़ें",
-      stop:"पढ़ना रोकें",
-      back:"सभी विषय",
-      open:"खोलें",
-      quick:"अक्सर पूछे जाने वाले प्रश्न"
-    }
+    it:{help:"Aiuto",title:"Come può aiutarti Miso?"},
+    pt:{help:"Ajuda",title:"Como a Miso pode ajudar?"},
+    nl:{help:"Help",title:"Hoe kan Miso helpen?"},
+    pl:{help:"Pomoc",title:"Jak Miso może pomóc?"},
+    cs:{help:"Nápověda",title:"Jak může Miso pomoci?"},
+    sk:{help:"Pomoc",title:"Ako môže Miso pomôcť?"},
+    hu:{help:"Súgó",title:"Hogyan segíthet Miso?"},
+    ro:{help:"Ajutor",title:"Cum vă poate ajuta Miso?"},
+    bg:{help:"Помощ",title:"Как може Мисо да помогне?"},
+    el:{help:"Βοήθεια",title:"Πώς μπορεί να βοηθήσει η Miso;"},
+    sv:{help:"Hjälp",title:"Hur kan Miso hjälpa?"},
+    da:{help:"Hjælp",title:"Hvordan kan Miso hjælpe?"},
+    no:{help:"Hjelp",title:"Hvordan kan Miso hjelpe?"},
+    fi:{help:"Ohje",title:"Miten Miso voi auttaa?"},
+    tr:{help:"Yardım",title:"Miso nasıl yardımcı olabilir?"},
+    hi:{help:"सहायता",title:"Miso कैसे मदद कर सकती है?"}
 
   };
 
 
-  Object.entries(
-    languageFallbacks
-  )
-  .forEach(([language,values])=>{
+  Object.entries(languageFallbacks)
+    .forEach(([language,values])=>{
 
-    UI[language] = {
-      ...UI.en,
-      ...values
-    };
+      UI[language] = {
+        ...UI.en,
+        ...values
+      };
 
-  });
+    });
 
 
   /* =======================================================
@@ -595,6 +295,7 @@
   const CONTENT = {
 
     en:[
+
       {
         id:"start",
         icon:"✦",
@@ -603,15 +304,15 @@
         items:[
           {
             q:"What is PETS & DOGUE?",
-            a:"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them. You can discover stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, Marketplace, member benefits and useful services in one place."
+            a:"PETS & DOGUE is a digital lifestyle platform for pets and the people who love them — bringing together stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, Marketplace, member benefits and useful services."
           },
           {
             q:"Do I need an account to use PETS & DOGUE?",
-            a:"No. Visitors can explore the platform without signing in. Subscription gives access to member discounts and special offers, and lets members post up to 50 free Marketplace ads."
+            a:"No. Visitors can explore PETS & DOGUE without signing in. Subscription unlocks member discounts and special offers and lets members post up to 50 free Marketplace ads."
           },
           {
             q:"What do the three lines at the top mean?",
-            a:"The three-line menu button opens Contents. From there you can move between PETS & DOGUE sections, change language, sign in or subscribe."
+            a:"The three-line button opens Contents. From there you can move between PETS & DOGUE sections, change language, sign in or subscribe."
           }
         ]
       },
@@ -624,15 +325,11 @@
         items:[
           {
             q:"How do I change the language?",
-            a:"Tap the three-line menu at the top of the page. In Contents, open the Language selector and choose your language. PETS & DOGUE remembers your selected language as you move between pages."
-          },
-          {
-            q:"Why is there no language button in the top navigation?",
-            a:"Language selection is kept inside the Contents side menu so the main navigation stays clean and consistent on every page."
+            a:"Open the Contents menu using the three-line button. Choose Language and select your language. PETS & DOGUE remembers your selection."
           },
           {
             q:"Does PETS & DOGUE support Arabic?",
-            a:"Yes. When Arabic is selected, supported PETS & DOGUE pages use right-to-left layout."
+            a:"Yes. Arabic uses a right-to-left layout on supported PETS & DOGUE pages."
           }
         ]
       },
@@ -641,27 +338,23 @@
         id:"petfriendly",
         icon:"🐾",
         title:"Pet-Friendly Places",
-        description:"Find places, use the map, save places and share pet rules.",
+        description:"Find places, use the map, save places and check pet rules.",
         items:[
           {
             q:"How do Pet-Friendly Places work?",
-            a:"Open Pet-Friendly Places and allow location access or search for a city, postcode or area. Choose a category and search radius. Places appear as cards and map markers, with the nearest places shown first."
+            a:"Open Pet-Friendly Places and allow location access or search for a city, postcode or area. Choose a category and search radius. Places appear as cards and map markers."
           },
           {
             q:"How do I add a pet-friendly place?",
-            a:"Open Pet-Friendly Places and use Add place. Provide information about the exact venue. Community information can then help other PETS & DOGUE users."
-          },
-          {
-            q:"How do I confirm whether pets are allowed inside or outside?",
-            a:"Open Pet policy on a place card. Confirm whether pets are welcome inside, outside, or both. Confirm only information you know about that exact venue."
+            a:"Open Pet-Friendly Places and choose Add place. Add information about the exact venue."
           },
           {
             q:"How do I save a place?",
-            a:"Tap the heart on the place card. You can find it later by opening the Saved category."
+            a:"Tap the heart on the place card. You can find the place again in Saved."
           },
           {
             q:"How do I get directions?",
-            a:"Tap Route on the place. PETS & DOGUE lets you continue with Google Maps, Waze or Apple Maps."
+            a:"Tap Route on the place. You can continue with Google Maps, Waze or Apple Maps."
           }
         ]
       },
@@ -670,18 +363,14 @@
         id:"community",
         icon:"♥",
         title:"Local Community",
-        description:"Understand local posts and how to publish useful community information.",
+        description:"Local posts and useful information for pet owners.",
         items:[
           {
             q:"What is Local Community?",
-            a:"Local Community is separate from Pet-Friendly Places. It is for local posts and useful information shared with pet owners around a location."
+            a:"Local Community is separate from Pet-Friendly Places. It is for local posts, updates and useful information shared with pet owners around a location."
           },
           {
-            q:"How do I publish in Local Community?",
-            a:"Open Local Community and use its publishing option. Choose the appropriate type of post, add the requested information and submit it."
-          },
-          {
-            q:"Is a Local Community post the same as adding a pet-friendly venue?",
+            q:"Is Local Community the same as Pet-Friendly Places?",
             a:"No. A venue belongs in Pet-Friendly Places. A local post, update or community message belongs in Local Community."
           }
         ]
@@ -691,7 +380,7 @@
         id:"marketplace",
         icon:"▢",
         title:"Marketplace",
-        description:"Buying, selling and member Marketplace benefits.",
+        description:"Buying, selling and Marketplace member benefits.",
         items:[
           {
             q:"What is Marketplace?",
@@ -699,7 +388,7 @@
           },
           {
             q:"What Marketplace benefit do subscribers receive?",
-            a:"Subscribers can post up to 50 free Marketplace ads as part of their member benefits."
+            a:"Subscribers can post up to 50 free Marketplace ads."
           }
         ]
       },
@@ -715,12 +404,12 @@
             a:"Members receive access to PETS & DOGUE discounts and special offers and can post up to 50 free Marketplace ads."
           },
           {
-            q:"Can I read PETS & DOGUE without subscribing?",
-            a:"Yes. General platform content and features remain available to visitors. Subscription unlocks member benefits."
+            q:"Can I use PETS & DOGUE without subscribing?",
+            a:"Yes. General platform content and features remain available to visitors."
           },
           {
             q:"Where do I sign in?",
-            a:"Use the Profile control or open the Contents menu and choose Sign In. Sign in is for existing subscribers; new users can choose Subscribe."
+            a:"Use Profile or open Contents and choose Sign In. New users can choose Subscribe."
           }
         ]
       },
@@ -733,15 +422,15 @@
         items:[
           {
             q:"Where can I find PETS & DOGUE stories?",
-            a:"Use Edition and Articles for editorial stories and guides. Fashion and Health contain their specialist content, while Photos focuses on visual features."
+            a:"Use Edition and Articles for editorial stories and guides. Fashion and Health contain specialist content, while Photos focuses on visual features."
           },
           {
             q:"What is Cover Star?",
-            a:"Cover Star is the PETS & DOGUE feature connected with pets appearing as highlighted stars of the platform."
+            a:"Cover Star highlights pets appearing as special stars of PETS & DOGUE."
           },
           {
             q:"Where do I find contests?",
-            a:"Open Contests from the PETS & DOGUE navigation or Contents menu to see available participation opportunities."
+            a:"Open Contests from PETS & DOGUE navigation or the Contents menu."
           }
         ]
       },
@@ -754,11 +443,11 @@
         items:[
           {
             q:"How do I make PETS & DOGUE read text aloud?",
-            a:"Use the speaker control on supported PETS & DOGUE pages. In this Help assistant, the current Help content starts reading when Help opens."
+            a:"Use the speaker control on supported PETS & DOGUE pages."
           },
           {
             q:"How do I stop Miso speaking?",
-            a:"Tap the speaker button in Help. Tap it again to start reading the current Help information aloud again."
+            a:"Tap the speaker button in Help. Tap it again to start reading the current Help information aloud."
           }
         ]
       },
@@ -767,11 +456,11 @@
         id:"business",
         icon:"◆",
         title:"For businesses & advertisers",
-        description:"Why businesses can work with PETS & DOGUE.",
+        description:"Working with PETS & DOGUE.",
         items:[
           {
             q:"Can a business advertise with PETS & DOGUE?",
-            a:"Yes. Use Advertise with us for information about opportunities for brands and businesses that want to reach people who care about pets."
+            a:"Yes. Open Advertise with us for information about opportunities for brands and businesses."
           },
           {
             q:"Why PETS & DOGUE?",
@@ -779,9 +468,12 @@
           }
         ]
       }
+
     ],
 
+
     ru:[
+
       {
         id:"start",
         icon:"✦",
@@ -790,15 +482,15 @@
         items:[
           {
             q:"Что такое PETS & DOGUE?",
-            a:"PETS & DOGUE — цифровая lifestyle-платформа для питомцев и людей, которые их любят. Здесь в одном месте собраны оригинальные истории, практические материалы, pet-friendly места, здоровье, мода, фотографии, сообщество, конкурсы, помощь животным, Marketplace, преимущества для подписчиков и полезные сервисы."
+            a:"PETS & DOGUE — цифровая lifestyle-платформа для питомцев и людей, которые их любят. Здесь собраны истории, полезные материалы, pet-friendly места, здоровье, мода, фотографии, сообщество, конкурсы, помощь животным, Marketplace и полезные сервисы."
           },
           {
-            q:"Нужен ли аккаунт, чтобы пользоваться PETS & DOGUE?",
-            a:"Нет. Пользоваться платформой и смотреть основной контент можно без входа. Подписка даёт доступ к скидкам и специальным предложениям, а также возможность размещать до 50 бесплатных объявлений в Marketplace."
+            q:"Нужен ли аккаунт?",
+            a:"Нет. Основной контент и функции доступны без входа. Подписка даёт скидки, специальные предложения и возможность разместить до 50 бесплатных объявлений в Marketplace."
           },
           {
             q:"Что означают три полоски сверху?",
-            a:"Кнопка с тремя полосками открывает меню Contents. Через него можно переходить между разделами PETS & DOGUE, менять язык, входить в профиль подписчика или оформлять подписку."
+            a:"Они открывают меню Contents. Через него можно переходить между разделами, менять язык, входить в профиль и оформлять подписку."
           }
         ]
       },
@@ -811,15 +503,11 @@
         items:[
           {
             q:"Как поменять язык?",
-            a:"Нажмите три полоски в верхней части страницы. В боковом меню Contents найдите Language и выберите нужный язык. PETS & DOGUE запоминает выбранный язык при переходе между страницами."
+            a:"Откройте меню Contents кнопкой с тремя полосками. В разделе Language выберите нужный язык. PETS & DOGUE запомнит выбор."
           },
           {
-            q:"Почему сверху нет отдельной кнопки языка?",
-            a:"Выбор языка находится только в боковом меню Contents, чтобы верхняя навигация оставалась чистой и одинаковой на всех страницах."
-          },
-          {
-            q:"Поддерживается ли арабский язык?",
-            a:"Да. При выборе арабского языка поддерживаемые страницы PETS & DOGUE автоматически переключаются на направление справа налево."
+            q:"Поддерживается ли арабский?",
+            a:"Да. При выборе арабского поддерживаемые страницы переключаются на направление справа налево."
           }
         ]
       },
@@ -832,23 +520,19 @@
         items:[
           {
             q:"Как работает Pet-Friendly Places?",
-            a:"Откройте Pet-Friendly Places и разрешите определение местоположения либо введите город, почтовый индекс или район. Выберите категорию и радиус поиска. Места отображаются карточками и на карте, а ближайшие показываются первыми."
+            a:"Разрешите определение местоположения или введите город, индекс или район. Выберите категорию и радиус поиска. Места появятся карточками и на карте."
           },
           {
             q:"Как добавить pet-friendly место?",
-            a:"Откройте Pet-Friendly Places и нажмите Add place. Добавьте информацию именно о конкретном заведении. Эта информация поможет другим пользователям PETS & DOGUE."
-          },
-          {
-            q:"Как указать, можно ли с животным внутри или снаружи?",
-            a:"На карточке места откройте Pet policy. Можно подтвердить, что животные разрешены внутри, снаружи или в обоих вариантах. Подтверждайте только информацию, которую знаете именно об этом месте."
+            a:"Откройте Pet-Friendly Places и выберите Add place. Добавьте информацию о конкретном заведении."
           },
           {
             q:"Как сохранить место?",
-            a:"Нажмите сердечко на карточке. Потом это место можно найти в категории Saved."
+            a:"Нажмите сердечко на карточке. Позже место можно найти в Saved."
           },
           {
             q:"Как построить маршрут?",
-            a:"Нажмите Route. Для продолжения маршрута можно выбрать Google Maps, Waze или Apple Maps."
+            a:"Нажмите Route и выберите Google Maps, Waze или Apple Maps."
           }
         ]
       },
@@ -861,15 +545,11 @@
         items:[
           {
             q:"Что такое Local Community?",
-            a:"Local Community — отдельный от Pet-Friendly Places раздел. Он предназначен для локальных публикаций и полезной информации для владельцев животных в определённой местности."
+            a:"Local Community — отдельный от Pet-Friendly Places раздел для локальных публикаций, обновлений и полезной информации."
           },
           {
-            q:"Как добавить публикацию в Local Community?",
-            a:"Откройте Local Community и выберите функцию публикации. Укажите подходящий тип публикации, заполните необходимую информацию и отправьте её."
-          },
-          {
-            q:"Публикация Local Community и добавление pet-friendly места — это одно и то же?",
-            a:"Нет. Заведение добавляется в Pet-Friendly Places. Локальная публикация, новость или сообщение для сообщества размещается в Local Community."
+            q:"Это то же самое, что Pet-Friendly Places?",
+            a:"Нет. Заведения находятся в Pet-Friendly Places. Локальные публикации и сообщения находятся в Local Community."
           }
         ]
       },
@@ -882,10 +562,10 @@
         items:[
           {
             q:"Что такое Marketplace?",
-            a:"Marketplace — раздел PETS & DOGUE для подходящих объявлений и предложений, связанных с питомцами."
+            a:"Marketplace — раздел PETS & DOGUE для объявлений и предложений, связанных с питомцами."
           },
           {
-            q:"Что получает подписчик в Marketplace?",
+            q:"Что получает подписчик?",
             a:"Подписчик может разместить до 50 бесплатных объявлений в Marketplace."
           }
         ]
@@ -895,19 +575,19 @@
         id:"membership",
         icon:"★",
         title:"Подписка и преимущества",
-        description:"Что получает подписчик PETS & DOGUE.",
+        description:"Преимущества подписчиков PETS & DOGUE.",
         items:[
           {
             q:"Что даёт подписка?",
-            a:"Подписчики получают доступ к скидкам и специальным предложениям PETS & DOGUE, а также возможность разместить до 50 бесплатных объявлений в Marketplace."
+            a:"Подписчики получают скидки и специальные предложения PETS & DOGUE и могут разместить до 50 бесплатных объявлений в Marketplace."
           },
           {
-            q:"Можно ли пользоваться PETS & DOGUE без подписки?",
-            a:"Да. Основной контент и функции платформы доступны посетителям. Подписка открывает дополнительные преимущества участника."
+            q:"Можно ли пользоваться без подписки?",
+            a:"Да. Основной контент и функции доступны посетителям без подписки."
           },
           {
-            q:"Где войти в аккаунт?",
-            a:"Используйте значок Profile либо откройте меню Contents и выберите Sign In. Вход предназначен для существующих подписчиков, а новый пользователь может выбрать Subscribe."
+            q:"Где войти?",
+            a:"Используйте Profile или откройте Contents и выберите Sign In. Новый пользователь может выбрать Subscribe."
           }
         ]
       },
@@ -919,16 +599,16 @@
         description:"Edition, Cover Star, Articles, Photos, Fashion и Contests.",
         items:[
           {
-            q:"Где читать материалы PETS & DOGUE?",
-            a:"В Edition и Articles находятся редакционные истории и полезные материалы. Fashion и Health содержат тематический контент, а Photos — визуальные публикации."
+            q:"Где читать материалы?",
+            a:"Edition и Articles содержат редакционные истории и полезные материалы. Fashion, Health и Photos содержат соответствующий тематический контент."
           },
           {
             q:"Что такое Cover Star?",
-            a:"Cover Star — специальный раздел PETS & DOGUE, связанный с питомцами, которые становятся яркими героями платформы."
+            a:"Cover Star — раздел с питомцами, которые становятся яркими героями PETS & DOGUE."
           },
           {
-            q:"Где находятся конкурсы?",
-            a:"Откройте Contests через навигацию PETS & DOGUE или боковое меню Contents."
+            q:"Где конкурсы?",
+            a:"Откройте Contests через навигацию PETS & DOGUE или меню Contents."
           }
         ]
       },
@@ -937,15 +617,15 @@
         id:"accessibility",
         icon:"🔊",
         title:"Озвучка и доступность",
-        description:"Как слушать тексты PETS & DOGUE.",
+        description:"Как слушать информацию PETS & DOGUE.",
         items:[
           {
-            q:"Как включить чтение текста вслух?",
-            a:"На поддерживаемых страницах используйте значок громкоговорителя. В помощнике Мисо текст помощи автоматически начинает озвучиваться после открытия."
+            q:"Как включить чтение вслух?",
+            a:"Используйте значок громкоговорителя на поддерживаемых страницах."
           },
           {
-            q:"Как заставить Мисо замолчать?",
-            a:"Нажмите значок громкоговорителя в окне помощи. Нажмите его ещё раз, чтобы снова начать озвучивание текущего текста."
+            q:"Как остановить Мисо?",
+            a:"Нажмите громкоговоритель в окне Help. Повторное нажатие снова включает чтение."
           }
         ]
       },
@@ -954,151 +634,24 @@
         id:"business",
         icon:"◆",
         title:"Для бизнеса и рекламодателей",
-        description:"Возможности сотрудничества с PETS & DOGUE.",
+        description:"Сотрудничество с PETS & DOGUE.",
         items:[
           {
-            q:"Можно ли рекламировать бизнес в PETS & DOGUE?",
-            a:"Да. Раздел Advertise with us предназначен для информации о возможностях брендов и компаний, которые хотят обращаться к аудитории людей, любящих животных."
-          },
-          {
-            q:"Почему PETS & DOGUE?",
-            a:"PETS & DOGUE объединяет редакционный контент, практические сервисы для питомцев, локальный поиск, сообщество, Marketplace, участие пользователей и преимущества подписчиков в одной экосистеме."
+            q:"Можно ли рекламировать бизнес?",
+            a:"Да. Откройте Advertise with us для информации о возможностях сотрудничества."
           }
         ]
       }
-    ],
 
-    uk:[
-      {
-        id:"start",
-        icon:"✦",
-        title:"Початок роботи",
-        description:"Що таке PETS & DOGUE і як користуватися платформою.",
-        items:[
-          {
-            q:"Що таке PETS & DOGUE?",
-            a:"PETS & DOGUE — цифрова lifestyle-платформа для улюбленців і людей, які їх люблять. Тут зібрані оригінальні історії, практичні матеріали, pet-friendly місця, здоров'я, мода, фотографія, спільнота, конкурси, допомога тваринам, Marketplace, переваги для підписників і корисні сервіси."
-          },
-          {
-            q:"Чи потрібен акаунт?",
-            a:"Ні. Основним контентом і функціями можна користуватися без входу. Підписка відкриває знижки, спеціальні пропозиції та можливість розміщувати до 50 безкоштовних оголошень у Marketplace."
-          },
-          {
-            q:"Що означають три смужки зверху?",
-            a:"Кнопка з трьома смужками відкриває Contents. Там можна переходити між розділами PETS & DOGUE, змінювати мову, входити в профіль або оформлювати підписку."
-          }
-        ]
-      },
-
-      {
-        id:"language",
-        icon:"文",
-        title:"Мова",
-        description:"Як змінити мову PETS & DOGUE.",
-        items:[
-          {
-            q:"Як змінити мову?",
-            a:"Натисніть три смужки у верхній частині сторінки. У меню Contents відкрийте Language та виберіть потрібну мову. PETS & DOGUE запам'ятає ваш вибір."
-          },
-          {
-            q:"Чи підтримується арабська?",
-            a:"Так. Для арабської мови підтримувані сторінки автоматично використовують напрямок справа наліво."
-          }
-        ]
-      },
-
-      {
-        id:"petfriendly",
-        icon:"🐾",
-        title:"Pet-Friendly Places",
-        description:"Місця, карта, збереження та правила для тварин.",
-        items:[
-          {
-            q:"Як працює Pet-Friendly Places?",
-            a:"Дозвольте визначення місцезнаходження або введіть місто, поштовий індекс чи район. Виберіть категорію та радіус. Місця з'являться на карті й у картках."
-          },
-          {
-            q:"Як додати pet-friendly місце?",
-            a:"У Pet-Friendly Places натисніть Add place та додайте інформацію саме про конкретне місце."
-          },
-          {
-            q:"Як зберегти місце?",
-            a:"Натисніть сердечко на картці. Пізніше місце можна знайти в Saved."
-          },
-          {
-            q:"Як побудувати маршрут?",
-            a:"Натисніть Route і виберіть Google Maps, Waze або Apple Maps."
-          }
-        ]
-      },
-
-      {
-        id:"community",
-        icon:"♥",
-        title:"Local Community",
-        description:"Локальні публікації та інформація спільноти.",
-        items:[
-          {
-            q:"Чим Local Community відрізняється від Pet-Friendly Places?",
-            a:"Pet-Friendly Places призначений для конкретних місць. Local Community — для локальних публікацій, оновлень і корисної інформації спільноти."
-          },
-          {
-            q:"Як додати публікацію?",
-            a:"Відкрийте Local Community, скористайтеся функцією публікації, виберіть тип повідомлення, заповніть інформацію та надішліть її."
-          }
-        ]
-      },
-
-      {
-        id:"membership",
-        icon:"★",
-        title:"Підписка",
-        description:"Переваги учасників PETS & DOGUE.",
-        items:[
-          {
-            q:"Що дає підписка?",
-            a:"Підписники отримують доступ до знижок і спеціальних пропозицій та можуть розміщувати до 50 безкоштовних оголошень у Marketplace."
-          },
-          {
-            q:"Чи можна користуватися платформою без підписки?",
-            a:"Так. Основний контент і функції доступні відвідувачам без підписки."
-          }
-        ]
-      },
-
-      {
-        id:"accessibility",
-        icon:"🔊",
-        title:"Озвучення",
-        description:"Як слухати інформацію вголос.",
-        items:[
-          {
-            q:"Як увімкнути або вимкнути голос?",
-            a:"Використовуйте значок гучномовця. Після відкриття Help Місо автоматично починає читати інформацію. Натисніть гучномовець, щоб зупинити читання, і ще раз — щоб увімкнути його."
-          }
-        ]
-      }
     ]
 
   };
 
 
-  /* =======================================================
-     GENERIC LOCALIZED CONTENT FOR REMAINING LANGUAGES
-
-     UI stays fully localized. Help knowledge falls back
-     to English where a dedicated knowledge translation
-     has not yet been authored.
-  ======================================================= */
-
   function contentFor(language){
 
-    if(
-      CONTENT[language]
-    ){
-
+    if(CONTENT[language]){
       return CONTENT[language];
-
     }
 
     return CONTENT.en;
@@ -1445,11 +998,6 @@
         text-align:right;
       }
 
-      .pd-help-question span:last-child{
-        flex:0 0 auto;
-        font-size:21px;
-      }
-
       .pd-help-answer{
         display:none;
         padding:0 14px 15px;
@@ -1469,7 +1017,6 @@
         background:#fff;
         color:#575148;
         text-align:center;
-        line-height:1.45;
       }
 
       .pd-help-footer{
@@ -1604,7 +1151,6 @@
 
     installStyles();
 
-
     backdrop =
       document.createElement(
         "div"
@@ -1617,7 +1163,6 @@
       "aria-hidden",
       "true"
     );
-
 
     panel =
       document.createElement(
@@ -1637,7 +1182,6 @@
       "true"
     );
 
-
     button =
       document.createElement(
         "button"
@@ -1652,13 +1196,11 @@
     button.innerHTML =
       imageMarkup();
 
-
     document.body.append(
       backdrop,
       panel,
       button
     );
-
 
     renderPanel();
 
@@ -1678,7 +1220,7 @@
 
 
   /* =======================================================
-     PANEL RENDER
+     PANEL
   ======================================================= */
 
   function renderPanel(){
@@ -1735,7 +1277,6 @@
             class="pd-help-round"
             type="button"
             aria-label="${escapeHtml(ui(language,"speak"))}"
-            title="${escapeHtml(ui(language,"speak"))}"
           >
             🔊
           </button>
@@ -1745,7 +1286,6 @@
             class="pd-help-round"
             type="button"
             aria-label="${escapeHtml(ui(language,"close"))}"
-            title="${escapeHtml(ui(language,"close"))}"
           >
             ×
           </button>
@@ -1789,7 +1329,6 @@
 
     `;
 
-
     bodyBox =
       panel.querySelector(
         "#pdHelpContent"
@@ -1805,7 +1344,6 @@
         "#pdHelpSpeaker"
       );
 
-
     panel
       .querySelector(
         "#pdHelpClose"
@@ -1815,13 +1353,11 @@
         closeHelp
       );
 
-
     speakerButton
       .addEventListener(
         "click",
         toggleSpeech
       );
-
 
     searchInput
       .addEventListener(
@@ -1837,7 +1373,6 @@
         }
       );
 
-
     renderTopics();
 
   }
@@ -1848,6 +1383,10 @@
   ======================================================= */
 
   function renderTopics(){
+
+    if(!bodyBox){
+      return;
+    }
 
     const content =
       contentFor(
@@ -1889,7 +1428,6 @@
       </div>
 
     `;
-
 
     bodyBox
       .querySelectorAll(
@@ -1953,7 +1491,6 @@
 
     `;
 
-
     bodyBox
       .querySelector(
         "#pdHelpBack"
@@ -1968,7 +1505,6 @@
 
         }
       );
-
 
     bindFaqs();
 
@@ -2016,10 +1552,8 @@
 
             output.push({
               ...item,
-              topic:
-                topic.title,
-              icon:
-                topic.icon
+              topic:topic.title,
+              icon:topic.icon
             });
 
           });
@@ -2062,8 +1596,7 @@
                 item.topic,
                 item.q,
                 item.a
-              ]
-              .join(" ")
+              ].join(" ")
             );
 
           const score =
@@ -2094,10 +1627,7 @@
             a.score
         );
 
-
-    if(
-      !matches.length
-    ){
+    if(!matches.length){
 
       bodyBox.innerHTML = `
 
@@ -2114,7 +1644,6 @@
       return;
 
     }
-
 
     bodyBox.innerHTML = `
 
@@ -2335,42 +1864,32 @@
     utterance.lang =
       speechLanguage();
 
-    utterance.rate =
-      1;
-
-    utterance.pitch =
-      1;
-
+    utterance.rate = 1;
+    utterance.pitch = 1;
 
     utterance.onstart =
       ()=>{
 
         speaking = true;
-
         updateSpeaker();
 
       };
-
 
     utterance.onend =
       ()=>{
 
         speaking = false;
-
         updateSpeaker();
 
       };
-
 
     utterance.onerror =
       ()=>{
 
         speaking = false;
-
         updateSpeaker();
 
       };
-
 
     window.speechSynthesis.speak(
       utterance
@@ -2382,13 +1901,9 @@
   function toggleSpeech(){
 
     if(speaking){
-
       stopSpeech();
-
     }else{
-
       startSpeech();
-
     }
 
   }
@@ -2428,6 +1943,10 @@
 
   /* =======================================================
      OPEN / CLOSE
+
+     IMPORTANT:
+     Every new opening ALWAYS starts from the main
+     Help Topics screen.
   ======================================================= */
 
   function openHelp(){
@@ -2435,7 +1954,26 @@
     language =
       detectLanguage();
 
+    activeTopic = "";
+
+    stopSpeech();
+
     renderPanel();
+
+    if(searchInput){
+      searchInput.value = "";
+    }
+
+    renderTopics();
+
+    const helpBody =
+      panel?.querySelector(
+        ".pd-help-body"
+      );
+
+    if(helpBody){
+      helpBody.scrollTop = 0;
+    }
 
     panel.classList.add(
       "pd-help-open"
@@ -2451,7 +1989,6 @@
     document.body.style.overflow =
       "hidden";
 
-
     setTimeout(
       ()=>{
 
@@ -2462,12 +1999,6 @@
       },
       80
     );
-
-
-    /*
-       User requested automatic speech
-       when Help opens.
-    */
 
     setTimeout(
       startSpeech,
@@ -2480,6 +2011,8 @@
   function closeHelp(){
 
     stopSpeech();
+
+    activeTopic = "";
 
     panel?.classList.remove(
       "pd-help-open"
@@ -2588,8 +2121,7 @@
     const rect =
       button.getBoundingClientRect();
 
-    const padding =
-      8;
+    const padding = 8;
 
     const maxLeft =
       Math.max(
@@ -2642,24 +2174,13 @@
 
   function bindFloatingButton(){
 
-    let dragging =
-      false;
+    let dragging = false;
+    let moved = false;
 
-    let moved =
-      false;
-
-    let startX =
-      0;
-
-    let startY =
-      0;
-
-    let startLeft =
-      0;
-
-    let startTop =
-      0;
-
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let startTop = 0;
 
     button.addEventListener(
       "pointerdown",
@@ -2675,11 +2196,8 @@
         const rect =
           button.getBoundingClientRect();
 
-        dragging =
-          true;
-
-        moved =
-          false;
+        dragging = true;
+        moved = false;
 
         startX =
           event.clientX;
@@ -2721,10 +2239,7 @@
           Math.abs(dx) > 5 ||
           Math.abs(dy) > 5
         ){
-
-          moved =
-            true;
-
+          moved = true;
         }
 
         if(!moved){
@@ -2739,8 +2254,7 @@
         const height =
           button.offsetHeight;
 
-        const padding =
-          8;
+        const padding = 8;
 
         const left =
           Math.min(
@@ -2788,8 +2302,7 @@
           return;
         }
 
-        dragging =
-          false;
+        dragging = false;
 
         button.releasePointerCapture?.(
           event.pointerId
@@ -2806,6 +2319,7 @@
           );
 
           return;
+
         }
 
         openHelp();
@@ -2818,8 +2332,7 @@
       "pointercancel",
       ()=>{
 
-        dragging =
-          false;
+        dragging = false;
 
       }
     );
@@ -2842,7 +2355,6 @@
 
       }
     );
-
 
     restorePosition();
 
@@ -2884,8 +2396,6 @@
 
   /* =======================================================
      LANGUAGE EVENTS
-
-     Existing PETS & DOGUE language system remains untouched.
   ======================================================= */
 
   window.addEventListener(
@@ -2902,6 +2412,8 @@
       language =
         detectLanguage();
 
+      activeTopic = "";
+
       renderPanel();
 
       if(wasOpen){
@@ -2909,6 +2421,8 @@
         panel.classList.add(
           "pd-help-open"
         );
+
+        renderTopics();
 
         setTimeout(
           startSpeech,
@@ -2942,6 +2456,8 @@
       language =
         detectLanguage();
 
+      activeTopic = "";
+
       renderPanel();
 
       if(wasOpen){
@@ -2950,6 +2466,8 @@
           "pd-help-open"
         );
 
+        renderTopics();
+
       }
 
     }
@@ -2957,7 +2475,7 @@
 
 
   /* =======================================================
-     ESCAPE KEY
+     ESCAPE
   ======================================================= */
 
   document.addEventListener(
@@ -2981,9 +2499,6 @@
 
   /* =======================================================
      PUBLIC API
-
-     Allows future pages to open Help without modifying
-     the assistant itself.
   ======================================================= */
 
   window.PetsDogueHelp = {
