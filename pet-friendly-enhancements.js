@@ -3,22 +3,26 @@
 /* =========================================================
    PETS & DOGUE — PET-FRIENDLY ENHANCEMENTS
    - broad discovery first, pet status second
+   - compact editorial community voting
    - Yes / No community voting
    - Inside / Outside detail after Yes
    - community rejection threshold
    - Booking for hotels
-   - Pet Photos gallery / upload UI
+   - modern Pet Photos mobile picker
+   - up to 10 photos with preview + remove
    - real venue photo resolver + branded fallback
-   - preserves global header, map and accessibility
+   - preserves global header, menu, map and accessibility
 ========================================================= */
 
 const PD_PHOTO_API = "/api/pet-friendly-photo";
 const PD_COMMUNITY_API = "/api/pet-friendly-community";
 const PD_PET_PHOTOS_API = "/api/pet-friendly-pet-photos";
 const PD_VOTER_KEY = "pets_dogue_pet_voter_key";
+const PD_MAX_SELECTED_PHOTOS = 10;
 
 let pdSearchSequence = 0;
 let pdPetPhotoPlace = null;
+let pdSelectedPhotos = [];
 
 const pdVoteSummaries = new Map();
 
@@ -30,17 +34,17 @@ const PD_TX = {
     no:"No",
     votes:"votes",
     petPhotos:"Pet photos",
-    addPhoto:"Add photo",
+    addPhoto:"Add photos",
     photoRuleTitle:"Pet photos only",
     photoRule:"Only photos showing an animal at this exact venue will be added. Photos without an animal will not be published.",
     animalVisible:"An animal is clearly visible",
-    takenHere:"This photo was taken at this venue",
+    takenHere:"These photos were taken at this venue",
     inside:"Inside",
     outside:"Outside",
     terrace:"Terrace",
     other:"Other",
-    submit:"Submit photo",
-    pending:"Photo sent for review",
+    submit:"Submit photos",
+    pending:"Photos sent for review",
     noPhotos:"No approved pet photos yet.",
     booking:"Check availability on Booking",
     community:"Community",
@@ -50,7 +54,17 @@ const PD_TX = {
     uploading:"Uploading…",
     galleryError:"Could not load pet photos.",
     voteError:"Could not save your vote.",
-    photoError:"Could not upload this photo."
+    photoError:"Could not upload this photo.",
+    camera:"Camera",
+    chooseFiles:"Choose photos",
+    gallery:"Gallery",
+    selected:"selected",
+    maxPhotos:"Up to 10 photos",
+    removePhoto:"Remove photo",
+    chooseFirst:"Choose at least one photo",
+    confirmRules:"Please confirm both photo rules",
+    uploadProgress:"Uploading photo",
+    of:"of"
   },
 
   uk:{
@@ -63,7 +77,7 @@ const PD_TX = {
     photoRuleTitle:"Лише фото з тваринами",
     photoRule:"Додаються лише фото, де видно тварину саме в цьому закладі. Фото без тварини не публікуються.",
     animalVisible:"Тварину чітко видно",
-    takenHere:"Фото зроблено саме в цьому закладі",
+    takenHere:"Ці фото зроблено саме в цьому закладі",
     inside:"Всередині",
     outside:"Зовні",
     terrace:"Тераса",
@@ -79,7 +93,17 @@ const PD_TX = {
     uploading:"Завантаження…",
     galleryError:"Не вдалося завантажити фото.",
     voteError:"Не вдалося зберегти голос.",
-    photoError:"Не вдалося завантажити фото."
+    photoError:"Не вдалося завантажити фото.",
+    camera:"Камера",
+    chooseFiles:"Вибрати фото",
+    gallery:"Галерея",
+    selected:"вибрано",
+    maxPhotos:"До 10 фото",
+    removePhoto:"Видалити фото",
+    chooseFirst:"Виберіть хоча б одне фото",
+    confirmRules:"Підтвердьте обидва правила для фото",
+    uploadProgress:"Завантаження фото",
+    of:"з"
   },
 
   ru:{
@@ -92,13 +116,13 @@ const PD_TX = {
     photoRuleTitle:"Только фото с животными",
     photoRule:"Добавляются только фото, где видно животное именно в этом заведении. Фото без животного не публикуются.",
     animalVisible:"Животное хорошо видно",
-    takenHere:"Фото сделано именно в этом заведении",
+    takenHere:"Эти фото сделаны именно в этом заведении",
     inside:"Внутри",
     outside:"Снаружи",
     terrace:"Терраса",
     other:"Другое",
     submit:"Отправить фото",
-    pending:"Фото отправлено на проверку",
+    pending:"Фото отправлены на проверку",
     noPhotos:"Пока нет одобренных фото с животными.",
     booking:"Проверить места на Booking",
     community:"Сообщество",
@@ -108,7 +132,17 @@ const PD_TX = {
     uploading:"Загрузка…",
     galleryError:"Не удалось загрузить фото.",
     voteError:"Не удалось сохранить голос.",
-    photoError:"Не удалось загрузить фото."
+    photoError:"Не удалось загрузить фото.",
+    camera:"Камера",
+    chooseFiles:"Выбрать фото",
+    gallery:"Галерея",
+    selected:"выбрано",
+    maxPhotos:"До 10 фото",
+    removePhoto:"Удалить фото",
+    chooseFirst:"Выберите хотя бы одно фото",
+    confirmRules:"Подтвердите оба правила для фото",
+    uploadProgress:"Загрузка фото",
+    of:"из"
   },
 
   fr:{
@@ -117,17 +151,17 @@ const PD_TX = {
     no:"Non",
     votes:"votes",
     petPhotos:"Photos d’animaux",
-    addPhoto:"Ajouter une photo",
+    addPhoto:"Ajouter des photos",
     photoRuleTitle:"Photos avec animaux uniquement",
     photoRule:"Seules les photos montrant un animal dans ce lieu précis seront ajoutées. Les photos sans animal ne seront pas publiées.",
     animalVisible:"Un animal est clairement visible",
-    takenHere:"La photo a été prise dans ce lieu",
+    takenHere:"Ces photos ont été prises dans ce lieu",
     inside:"Intérieur",
     outside:"Extérieur",
     terrace:"Terrasse",
     other:"Autre",
-    submit:"Envoyer",
-    pending:"Photo envoyée pour validation",
+    submit:"Envoyer les photos",
+    pending:"Photos envoyées pour validation",
     noPhotos:"Aucune photo approuvée pour le moment.",
     booking:"Voir les disponibilités sur Booking",
     community:"Communauté",
@@ -137,7 +171,17 @@ const PD_TX = {
     uploading:"Envoi…",
     galleryError:"Impossible de charger les photos.",
     voteError:"Impossible d’enregistrer le vote.",
-    photoError:"Impossible d’envoyer la photo."
+    photoError:"Impossible d’envoyer cette photo.",
+    camera:"Appareil photo",
+    chooseFiles:"Choisir des photos",
+    gallery:"Galerie",
+    selected:"sélectionnées",
+    maxPhotos:"Jusqu’à 10 photos",
+    removePhoto:"Supprimer la photo",
+    chooseFirst:"Choisissez au moins une photo",
+    confirmRules:"Veuillez confirmer les deux règles",
+    uploadProgress:"Envoi de la photo",
+    of:"sur"
   },
 
   de:{
@@ -146,17 +190,17 @@ const PD_TX = {
     no:"Nein",
     votes:"Stimmen",
     petPhotos:"Tierfotos",
-    addPhoto:"Foto hinzufügen",
+    addPhoto:"Fotos hinzufügen",
     photoRuleTitle:"Nur Fotos mit Tieren",
     photoRule:"Nur Fotos mit einem Tier an genau diesem Ort werden hinzugefügt. Fotos ohne Tier werden nicht veröffentlicht.",
     animalVisible:"Ein Tier ist deutlich sichtbar",
-    takenHere:"Das Foto wurde an diesem Ort aufgenommen",
+    takenHere:"Diese Fotos wurden an diesem Ort aufgenommen",
     inside:"Innen",
     outside:"Außen",
     terrace:"Terrasse",
     other:"Andere",
-    submit:"Foto senden",
-    pending:"Foto zur Prüfung gesendet",
+    submit:"Fotos senden",
+    pending:"Fotos zur Prüfung gesendet",
     noPhotos:"Noch keine freigegebenen Tierfotos.",
     booking:"Verfügbarkeit bei Booking prüfen",
     community:"Community",
@@ -166,7 +210,17 @@ const PD_TX = {
     uploading:"Wird hochgeladen…",
     galleryError:"Tierfotos konnten nicht geladen werden.",
     voteError:"Stimme konnte nicht gespeichert werden.",
-    photoError:"Foto konnte nicht hochgeladen werden."
+    photoError:"Foto konnte nicht hochgeladen werden.",
+    camera:"Kamera",
+    chooseFiles:"Fotos auswählen",
+    gallery:"Galerie",
+    selected:"ausgewählt",
+    maxPhotos:"Bis zu 10 Fotos",
+    removePhoto:"Foto entfernen",
+    chooseFirst:"Wähle mindestens ein Foto",
+    confirmRules:"Bitte beide Fotoregeln bestätigen",
+    uploadProgress:"Foto wird hochgeladen",
+    of:"von"
   },
 
   es:{
@@ -175,17 +229,17 @@ const PD_TX = {
     no:"No",
     votes:"votos",
     petPhotos:"Fotos con mascotas",
-    addPhoto:"Añadir foto",
+    addPhoto:"Añadir fotos",
     photoRuleTitle:"Solo fotos con animales",
     photoRule:"Solo se añadirán fotos donde aparezca un animal en este lugar exacto. Las fotos sin animales no se publicarán.",
     animalVisible:"Se ve claramente un animal",
-    takenHere:"La foto fue tomada en este lugar",
+    takenHere:"Estas fotos fueron tomadas en este lugar",
     inside:"Interior",
     outside:"Exterior",
     terrace:"Terraza",
     other:"Otro",
-    submit:"Enviar foto",
-    pending:"Foto enviada para revisión",
+    submit:"Enviar fotos",
+    pending:"Fotos enviadas para revisión",
     noPhotos:"Aún no hay fotos aprobadas.",
     booking:"Ver disponibilidad en Booking",
     community:"Comunidad",
@@ -195,7 +249,17 @@ const PD_TX = {
     uploading:"Subiendo…",
     galleryError:"No se pudieron cargar las fotos.",
     voteError:"No se pudo guardar el voto.",
-    photoError:"No se pudo subir la foto."
+    photoError:"No se pudo subir esta foto.",
+    camera:"Cámara",
+    chooseFiles:"Elegir fotos",
+    gallery:"Galería",
+    selected:"seleccionadas",
+    maxPhotos:"Hasta 10 fotos",
+    removePhoto:"Eliminar foto",
+    chooseFirst:"Elige al menos una foto",
+    confirmRules:"Confirma las dos reglas",
+    uploadProgress:"Subiendo foto",
+    of:"de"
   },
 
   it:{
@@ -208,13 +272,13 @@ const PD_TX = {
     photoRuleTitle:"Solo foto con animali",
     photoRule:"Saranno aggiunte solo foto con un animale visibile in questo luogo esatto. Le foto senza animali non saranno pubblicate.",
     animalVisible:"Un animale è chiaramente visibile",
-    takenHere:"La foto è stata scattata in questo luogo",
+    takenHere:"Queste foto sono state scattate in questo luogo",
     inside:"Interno",
     outside:"Esterno",
     terrace:"Terrazza",
     other:"Altro",
     submit:"Invia foto",
-    pending:"Foto inviata per la revisione",
+    pending:"Foto inviate per la revisione",
     noPhotos:"Nessuna foto approvata per ora.",
     booking:"Controlla disponibilità su Booking",
     community:"Community",
@@ -224,7 +288,17 @@ const PD_TX = {
     uploading:"Caricamento…",
     galleryError:"Impossibile caricare le foto.",
     voteError:"Impossibile salvare il voto.",
-    photoError:"Impossibile caricare la foto."
+    photoError:"Impossibile caricare questa foto.",
+    camera:"Fotocamera",
+    chooseFiles:"Scegli foto",
+    gallery:"Galleria",
+    selected:"selezionate",
+    maxPhotos:"Fino a 10 foto",
+    removePhoto:"Rimuovi foto",
+    chooseFirst:"Scegli almeno una foto",
+    confirmRules:"Conferma entrambe le regole",
+    uploadProgress:"Caricamento foto",
+    of:"di"
   },
 
   pt:{
@@ -233,17 +307,17 @@ const PD_TX = {
     no:"Não",
     votes:"votos",
     petPhotos:"Fotos com animais",
-    addPhoto:"Adicionar foto",
+    addPhoto:"Adicionar fotos",
     photoRuleTitle:"Apenas fotos com animais",
     photoRule:"Só serão adicionadas fotos com um animal visível neste local exato. Fotos sem animais não serão publicadas.",
     animalVisible:"Um animal está claramente visível",
-    takenHere:"A foto foi tirada neste local",
+    takenHere:"Estas fotos foram tiradas neste local",
     inside:"Interior",
     outside:"Exterior",
     terrace:"Terraço",
     other:"Outro",
-    submit:"Enviar foto",
-    pending:"Foto enviada para revisão",
+    submit:"Enviar fotos",
+    pending:"Fotos enviadas para revisão",
     noPhotos:"Ainda não há fotos aprovadas.",
     booking:"Ver disponibilidade no Booking",
     community:"Comunidade",
@@ -253,7 +327,17 @@ const PD_TX = {
     uploading:"A enviar…",
     galleryError:"Não foi possível carregar as fotos.",
     voteError:"Não foi possível guardar o voto.",
-    photoError:"Não foi possível enviar a foto."
+    photoError:"Não foi possível enviar esta foto.",
+    camera:"Câmara",
+    chooseFiles:"Escolher fotos",
+    gallery:"Galeria",
+    selected:"selecionadas",
+    maxPhotos:"Até 10 fotos",
+    removePhoto:"Remover foto",
+    chooseFirst:"Escolha pelo menos uma foto",
+    confirmRules:"Confirme as duas regras",
+    uploadProgress:"A enviar foto",
+    of:"de"
   },
 
   nl:{
@@ -262,17 +346,17 @@ const PD_TX = {
     no:"Nee",
     votes:"stemmen",
     petPhotos:"Dierenfoto’s",
-    addPhoto:"Foto toevoegen",
+    addPhoto:"Foto’s toevoegen",
     photoRuleTitle:"Alleen foto’s met dieren",
     photoRule:"Alleen foto’s waarop een dier op deze exacte locatie zichtbaar is worden toegevoegd. Foto’s zonder dier worden niet gepubliceerd.",
     animalVisible:"Een dier is duidelijk zichtbaar",
-    takenHere:"De foto is op deze locatie gemaakt",
+    takenHere:"Deze foto’s zijn op deze locatie gemaakt",
     inside:"Binnen",
     outside:"Buiten",
     terrace:"Terras",
     other:"Anders",
-    submit:"Foto versturen",
-    pending:"Foto ter beoordeling verzonden",
+    submit:"Foto’s versturen",
+    pending:"Foto’s ter beoordeling verzonden",
     noPhotos:"Nog geen goedgekeurde dierenfoto’s.",
     booking:"Beschikbaarheid op Booking bekijken",
     community:"Community",
@@ -282,7 +366,17 @@ const PD_TX = {
     uploading:"Uploaden…",
     galleryError:"Foto’s konden niet worden geladen.",
     voteError:"Stem kon niet worden opgeslagen.",
-    photoError:"Foto kon niet worden geüpload."
+    photoError:"Foto kon niet worden geüpload.",
+    camera:"Camera",
+    chooseFiles:"Foto’s kiezen",
+    gallery:"Galerij",
+    selected:"geselecteerd",
+    maxPhotos:"Maximaal 10 foto’s",
+    removePhoto:"Foto verwijderen",
+    chooseFirst:"Kies minimaal één foto",
+    confirmRules:"Bevestig beide fotoregels",
+    uploadProgress:"Foto uploaden",
+    of:"van"
   },
 
   pl:{
@@ -291,17 +385,17 @@ const PD_TX = {
     no:"Nie",
     votes:"głosów",
     petPhotos:"Zdjęcia ze zwierzętami",
-    addPhoto:"Dodaj zdjęcie",
+    addPhoto:"Dodaj zdjęcia",
     photoRuleTitle:"Tylko zdjęcia ze zwierzętami",
     photoRule:"Dodawane są tylko zdjęcia, na których widać zwierzę w tym konkretnym miejscu. Zdjęcia bez zwierząt nie będą publikowane.",
     animalVisible:"Zwierzę jest wyraźnie widoczne",
-    takenHere:"Zdjęcie zrobiono w tym miejscu",
+    takenHere:"Te zdjęcia zrobiono w tym miejscu",
     inside:"Wewnątrz",
     outside:"Na zewnątrz",
     terrace:"Taras",
     other:"Inne",
-    submit:"Wyślij zdjęcie",
-    pending:"Zdjęcie wysłano do weryfikacji",
+    submit:"Wyślij zdjęcia",
+    pending:"Zdjęcia wysłano do weryfikacji",
     noPhotos:"Brak zatwierdzonych zdjęć.",
     booking:"Sprawdź dostępność na Booking",
     community:"Społeczność",
@@ -311,7 +405,17 @@ const PD_TX = {
     uploading:"Wysyłanie…",
     galleryError:"Nie udało się wczytać zdjęć.",
     voteError:"Nie udało się zapisać głosu.",
-    photoError:"Nie udało się wysłać zdjęcia."
+    photoError:"Nie udało się wysłać zdjęcia.",
+    camera:"Aparat",
+    chooseFiles:"Wybierz zdjęcia",
+    gallery:"Galeria",
+    selected:"wybrano",
+    maxPhotos:"Do 10 zdjęć",
+    removePhoto:"Usuń zdjęcie",
+    chooseFirst:"Wybierz co najmniej jedno zdjęcie",
+    confirmRules:"Potwierdź obie zasady",
+    uploadProgress:"Wysyłanie zdjęcia",
+    of:"z"
   },
 
   cs:{
@@ -320,17 +424,17 @@ const PD_TX = {
     no:"Ne",
     votes:"hlasů",
     petPhotos:"Fotky se zvířaty",
-    addPhoto:"Přidat fotku",
+    addPhoto:"Přidat fotky",
     photoRuleTitle:"Pouze fotky se zvířaty",
     photoRule:"Přidány budou pouze fotky, na kterých je zvíře viditelné přímo v tomto podniku. Fotky bez zvířete nebudou zveřejněny.",
     animalVisible:"Zvíře je dobře viditelné",
-    takenHere:"Fotka byla pořízena v tomto podniku",
+    takenHere:"Tyto fotky byly pořízeny v tomto podniku",
     inside:"Uvnitř",
     outside:"Venku",
     terrace:"Terasa",
     other:"Jiné",
-    submit:"Odeslat fotku",
-    pending:"Fotka byla odeslána ke kontrole",
+    submit:"Odeslat fotky",
+    pending:"Fotky byly odeslány ke kontrole",
     noPhotos:"Zatím nejsou schválené žádné fotky.",
     booking:"Zkontrolovat dostupnost na Booking",
     community:"Komunita",
@@ -340,7 +444,17 @@ const PD_TX = {
     uploading:"Nahrávání…",
     galleryError:"Fotky se nepodařilo načíst.",
     voteError:"Hlas se nepodařilo uložit.",
-    photoError:"Fotku se nepodařilo nahrát."
+    photoError:"Fotku se nepodařilo nahrát.",
+    camera:"Fotoaparát",
+    chooseFiles:"Vybrat fotky",
+    gallery:"Galerie",
+    selected:"vybráno",
+    maxPhotos:"Až 10 fotek",
+    removePhoto:"Odstranit fotku",
+    chooseFirst:"Vyberte alespoň jednu fotku",
+    confirmRules:"Potvrďte obě pravidla",
+    uploadProgress:"Nahrávání fotky",
+    of:"z"
   },
 
   sk:{
@@ -349,17 +463,17 @@ const PD_TX = {
     no:"Nie",
     votes:"hlasov",
     petPhotos:"Fotky so zvieratami",
-    addPhoto:"Pridať fotku",
+    addPhoto:"Pridať fotky",
     photoRuleTitle:"Iba fotky so zvieratami",
     photoRule:"Pridané budú iba fotky, na ktorých je zviera viditeľné priamo v tomto podniku. Fotky bez zvieraťa nebudú zverejnené.",
     animalVisible:"Zviera je jasne viditeľné",
-    takenHere:"Fotka bola urobená v tomto podniku",
+    takenHere:"Tieto fotky boli urobené v tomto podniku",
     inside:"Vnútri",
     outside:"Vonku",
     terrace:"Terasa",
     other:"Iné",
-    submit:"Odoslať fotku",
-    pending:"Fotka bola odoslaná na kontrolu",
+    submit:"Odoslať fotky",
+    pending:"Fotky boli odoslané na kontrolu",
     noPhotos:"Zatiaľ nie sú schválené fotky.",
     booking:"Skontrolovať dostupnosť na Booking",
     community:"Komunita",
@@ -369,7 +483,17 @@ const PD_TX = {
     uploading:"Nahrávanie…",
     galleryError:"Fotky sa nepodarilo načítať.",
     voteError:"Hlas sa nepodarilo uložiť.",
-    photoError:"Fotku sa nepodarilo nahrať."
+    photoError:"Fotku sa nepodarilo nahrať.",
+    camera:"Fotoaparát",
+    chooseFiles:"Vybrať fotky",
+    gallery:"Galéria",
+    selected:"vybrané",
+    maxPhotos:"Až 10 fotiek",
+    removePhoto:"Odstrániť fotku",
+    chooseFirst:"Vyberte aspoň jednu fotku",
+    confirmRules:"Potvrďte obe pravidlá",
+    uploadProgress:"Nahrávanie fotky",
+    of:"z"
   },
 
   hu:{
@@ -378,17 +502,17 @@ const PD_TX = {
     no:"Nem",
     votes:"szavazat",
     petPhotos:"Állatos fotók",
-    addPhoto:"Fotó hozzáadása",
+    addPhoto:"Fotók hozzáadása",
     photoRuleTitle:"Csak állatos fotók",
     photoRule:"Csak olyan fotó kerülhet be, amelyen állat látható pontosan ezen a helyen. Állat nélküli fotó nem jelenik meg.",
     animalVisible:"Az állat jól látható",
-    takenHere:"A fotó ezen a helyen készült",
+    takenHere:"Ezek a fotók ezen a helyen készültek",
     inside:"Bent",
     outside:"Kint",
     terrace:"Terasz",
     other:"Egyéb",
-    submit:"Fotó küldése",
-    pending:"Fotó ellenőrzésre elküldve",
+    submit:"Fotók küldése",
+    pending:"Fotók ellenőrzésre elküldve",
     noPhotos:"Még nincs jóváhagyott fotó.",
     booking:"Elérhetőség a Bookingon",
     community:"Közösség",
@@ -398,7 +522,17 @@ const PD_TX = {
     uploading:"Feltöltés…",
     galleryError:"A fotók nem tölthetők be.",
     voteError:"A szavazat nem menthető.",
-    photoError:"A fotó nem tölthető fel."
+    photoError:"A fotó nem tölthető fel.",
+    camera:"Kamera",
+    chooseFiles:"Fotók kiválasztása",
+    gallery:"Galéria",
+    selected:"kiválasztva",
+    maxPhotos:"Legfeljebb 10 fotó",
+    removePhoto:"Fotó eltávolítása",
+    chooseFirst:"Válassz legalább egy fotót",
+    confirmRules:"Erősítsd meg mindkét szabályt",
+    uploadProgress:"Fotó feltöltése",
+    of:"/"
   },
 
   ro:{
@@ -407,17 +541,17 @@ const PD_TX = {
     no:"Nu",
     votes:"voturi",
     petPhotos:"Poze cu animale",
-    addPhoto:"Adaugă poză",
+    addPhoto:"Adaugă poze",
     photoRuleTitle:"Doar poze cu animale",
     photoRule:"Vor fi adăugate doar poze în care se vede un animal în această locație exactă. Pozele fără animale nu vor fi publicate.",
     animalVisible:"Un animal este clar vizibil",
-    takenHere:"Poza a fost făcută în această locație",
+    takenHere:"Aceste poze au fost făcute în această locație",
     inside:"În interior",
     outside:"Afară",
     terrace:"Terasă",
     other:"Altele",
-    submit:"Trimite poza",
-    pending:"Poza a fost trimisă pentru verificare",
+    submit:"Trimite pozele",
+    pending:"Pozele au fost trimise pentru verificare",
     noPhotos:"Nu există încă poze aprobate.",
     booking:"Verifică disponibilitatea pe Booking",
     community:"Comunitate",
@@ -427,7 +561,17 @@ const PD_TX = {
     uploading:"Se încarcă…",
     galleryError:"Pozele nu au putut fi încărcate.",
     voteError:"Votul nu a putut fi salvat.",
-    photoError:"Poza nu a putut fi încărcată."
+    photoError:"Poza nu a putut fi încărcată.",
+    camera:"Cameră",
+    chooseFiles:"Alege poze",
+    gallery:"Galerie",
+    selected:"selectate",
+    maxPhotos:"Până la 10 poze",
+    removePhoto:"Șterge poza",
+    chooseFirst:"Alege cel puțin o poză",
+    confirmRules:"Confirmă ambele reguli",
+    uploadProgress:"Se încarcă poza",
+    of:"din"
   },
 
   bg:{
@@ -436,17 +580,17 @@ const PD_TX = {
     no:"Не",
     votes:"гласа",
     petPhotos:"Снимки с животни",
-    addPhoto:"Добави снимка",
+    addPhoto:"Добави снимки",
     photoRuleTitle:"Само снимки с животни",
     photoRule:"Ще се добавят само снимки, на които се вижда животно точно в това място. Снимки без животни няма да се публикуват.",
     animalVisible:"Животното се вижда ясно",
-    takenHere:"Снимката е направена на това място",
+    takenHere:"Тези снимки са направени на това място",
     inside:"Вътре",
     outside:"Навън",
     terrace:"Тераса",
     other:"Друго",
-    submit:"Изпрати снимка",
-    pending:"Снимката е изпратена за проверка",
+    submit:"Изпрати снимките",
+    pending:"Снимките са изпратени за проверка",
     noPhotos:"Все още няма одобрени снимки.",
     booking:"Провери наличност в Booking",
     community:"Общност",
@@ -456,7 +600,17 @@ const PD_TX = {
     uploading:"Качване…",
     galleryError:"Снимките не могат да бъдат заредени.",
     voteError:"Гласът не може да бъде записан.",
-    photoError:"Снимката не може да бъде качена."
+    photoError:"Снимката не може да бъде качена.",
+    camera:"Камера",
+    chooseFiles:"Избери снимки",
+    gallery:"Галерия",
+    selected:"избрани",
+    maxPhotos:"До 10 снимки",
+    removePhoto:"Премахни снимката",
+    chooseFirst:"Изберете поне една снимка",
+    confirmRules:"Потвърдете и двете правила",
+    uploadProgress:"Качване на снимка",
+    of:"от"
   },
 
   el:{
@@ -465,17 +619,17 @@ const PD_TX = {
     no:"Όχι",
     votes:"ψήφοι",
     petPhotos:"Φωτογραφίες με ζώα",
-    addPhoto:"Προσθήκη φωτογραφίας",
+    addPhoto:"Προσθήκη φωτογραφιών",
     photoRuleTitle:"Μόνο φωτογραφίες με ζώα",
     photoRule:"Προστίθενται μόνο φωτογραφίες όπου φαίνεται ζώο σε αυτό ακριβώς το μέρος. Φωτογραφίες χωρίς ζώο δεν δημοσιεύονται.",
     animalVisible:"Το ζώο φαίνεται καθαρά",
-    takenHere:"Η φωτογραφία τραβήχτηκε σε αυτό το μέρος",
+    takenHere:"Οι φωτογραφίες τραβήχτηκαν σε αυτό το μέρος",
     inside:"Μέσα",
     outside:"Έξω",
     terrace:"Βεράντα",
     other:"Άλλο",
-    submit:"Υποβολή φωτογραφίας",
-    pending:"Η φωτογραφία στάλθηκε για έλεγχο",
+    submit:"Υποβολή φωτογραφιών",
+    pending:"Οι φωτογραφίες στάλθηκαν για έλεγχο",
     noPhotos:"Δεν υπάρχουν ακόμη εγκεκριμένες φωτογραφίες.",
     booking:"Έλεγχος διαθεσιμότητας στο Booking",
     community:"Κοινότητα",
@@ -485,7 +639,17 @@ const PD_TX = {
     uploading:"Μεταφόρτωση…",
     galleryError:"Δεν ήταν δυνατή η φόρτωση φωτογραφιών.",
     voteError:"Δεν ήταν δυνατή η αποθήκευση ψήφου.",
-    photoError:"Δεν ήταν δυνατή η μεταφόρτωση φωτογραφίας."
+    photoError:"Δεν ήταν δυνατή η μεταφόρτωση φωτογραφίας.",
+    camera:"Κάμερα",
+    chooseFiles:"Επιλογή φωτογραφιών",
+    gallery:"Συλλογή",
+    selected:"επιλεγμένες",
+    maxPhotos:"Έως 10 φωτογραφίες",
+    removePhoto:"Αφαίρεση φωτογραφίας",
+    chooseFirst:"Επιλέξτε τουλάχιστον μία φωτογραφία",
+    confirmRules:"Επιβεβαιώστε και τους δύο κανόνες",
+    uploadProgress:"Μεταφόρτωση φωτογραφίας",
+    of:"από"
   },
 
   sv:{
@@ -494,17 +658,17 @@ const PD_TX = {
     no:"Nej",
     votes:"röster",
     petPhotos:"Djurfoton",
-    addPhoto:"Lägg till foto",
+    addPhoto:"Lägg till foton",
     photoRuleTitle:"Endast foton med djur",
     photoRule:"Endast foton där ett djur syns på exakt denna plats läggs till. Foton utan djur publiceras inte.",
     animalVisible:"Ett djur syns tydligt",
-    takenHere:"Fotot togs på denna plats",
+    takenHere:"Dessa foton togs på denna plats",
     inside:"Inne",
     outside:"Ute",
     terrace:"Terrass",
     other:"Annat",
-    submit:"Skicka foto",
-    pending:"Fotot skickades för granskning",
+    submit:"Skicka foton",
+    pending:"Foton skickades för granskning",
     noPhotos:"Inga godkända djurfoton ännu.",
     booking:"Kontrollera tillgänglighet på Booking",
     community:"Community",
@@ -514,7 +678,17 @@ const PD_TX = {
     uploading:"Laddar upp…",
     galleryError:"Kunde inte ladda foton.",
     voteError:"Kunde inte spara rösten.",
-    photoError:"Kunde inte ladda upp fotot."
+    photoError:"Kunde inte ladda upp fotot.",
+    camera:"Kamera",
+    chooseFiles:"Välj foton",
+    gallery:"Galleri",
+    selected:"valda",
+    maxPhotos:"Upp till 10 foton",
+    removePhoto:"Ta bort foto",
+    chooseFirst:"Välj minst ett foto",
+    confirmRules:"Bekräfta båda reglerna",
+    uploadProgress:"Laddar upp foto",
+    of:"av"
   },
 
   da:{
@@ -523,17 +697,17 @@ const PD_TX = {
     no:"Nej",
     votes:"stemmer",
     petPhotos:"Dyrefotos",
-    addPhoto:"Tilføj foto",
+    addPhoto:"Tilføj fotos",
     photoRuleTitle:"Kun fotos med dyr",
     photoRule:"Kun fotos med et dyr på dette præcise sted bliver tilføjet. Fotos uden dyr bliver ikke offentliggjort.",
     animalVisible:"Et dyr er tydeligt synligt",
-    takenHere:"Fotoet blev taget på dette sted",
+    takenHere:"Disse fotos blev taget på dette sted",
     inside:"Inde",
     outside:"Ude",
     terrace:"Terrasse",
     other:"Andet",
-    submit:"Send foto",
-    pending:"Foto sendt til gennemgang",
+    submit:"Send fotos",
+    pending:"Fotos sendt til gennemgang",
     noPhotos:"Ingen godkendte dyrefotos endnu.",
     booking:"Se tilgængelighed på Booking",
     community:"Community",
@@ -543,7 +717,17 @@ const PD_TX = {
     uploading:"Uploader…",
     galleryError:"Kunne ikke indlæse fotos.",
     voteError:"Kunne ikke gemme stemmen.",
-    photoError:"Kunne ikke uploade fotoet."
+    photoError:"Kunne ikke uploade fotoet.",
+    camera:"Kamera",
+    chooseFiles:"Vælg fotos",
+    gallery:"Galleri",
+    selected:"valgt",
+    maxPhotos:"Op til 10 fotos",
+    removePhoto:"Fjern foto",
+    chooseFirst:"Vælg mindst ét foto",
+    confirmRules:"Bekræft begge regler",
+    uploadProgress:"Uploader foto",
+    of:"af"
   },
 
   no:{
@@ -552,17 +736,17 @@ const PD_TX = {
     no:"Nei",
     votes:"stemmer",
     petPhotos:"Dyrebilder",
-    addPhoto:"Legg til bilde",
+    addPhoto:"Legg til bilder",
     photoRuleTitle:"Kun bilder med dyr",
     photoRule:"Bare bilder der et dyr er synlig på akkurat dette stedet blir lagt til. Bilder uten dyr publiseres ikke.",
     animalVisible:"Et dyr er tydelig synlig",
-    takenHere:"Bildet ble tatt på dette stedet",
+    takenHere:"Disse bildene ble tatt på dette stedet",
     inside:"Inne",
     outside:"Ute",
     terrace:"Terrasse",
     other:"Annet",
-    submit:"Send bilde",
-    pending:"Bildet er sendt til vurdering",
+    submit:"Send bilder",
+    pending:"Bildene er sendt til vurdering",
     noPhotos:"Ingen godkjente dyrebilder ennå.",
     booking:"Sjekk tilgjengelighet på Booking",
     community:"Community",
@@ -572,7 +756,17 @@ const PD_TX = {
     uploading:"Laster opp…",
     galleryError:"Kunne ikke laste bilder.",
     voteError:"Kunne ikke lagre stemmen.",
-    photoError:"Kunne ikke laste opp bildet."
+    photoError:"Kunne ikke laste opp bildet.",
+    camera:"Kamera",
+    chooseFiles:"Velg bilder",
+    gallery:"Galleri",
+    selected:"valgt",
+    maxPhotos:"Opptil 10 bilder",
+    removePhoto:"Fjern bilde",
+    chooseFirst:"Velg minst ett bilde",
+    confirmRules:"Bekreft begge reglene",
+    uploadProgress:"Laster opp bilde",
+    of:"av"
   },
 
   fi:{
@@ -581,17 +775,17 @@ const PD_TX = {
     no:"Ei",
     votes:"ääntä",
     petPhotos:"Eläinkuvat",
-    addPhoto:"Lisää kuva",
+    addPhoto:"Lisää kuvia",
     photoRuleTitle:"Vain eläinkuvat",
     photoRule:"Vain kuvat, joissa eläin näkyy juuri tässä paikassa, lisätään. Kuvia ilman eläintä ei julkaista.",
     animalVisible:"Eläin näkyy selvästi",
-    takenHere:"Kuva on otettu tässä paikassa",
+    takenHere:"Nämä kuvat on otettu tässä paikassa",
     inside:"Sisällä",
     outside:"Ulkona",
     terrace:"Terassi",
     other:"Muu",
-    submit:"Lähetä kuva",
-    pending:"Kuva lähetettiin tarkistettavaksi",
+    submit:"Lähetä kuvat",
+    pending:"Kuvat lähetettiin tarkistettavaksi",
     noPhotos:"Ei vielä hyväksyttyjä eläinkuvia.",
     booking:"Tarkista saatavuus Bookingissa",
     community:"Yhteisö",
@@ -601,7 +795,17 @@ const PD_TX = {
     uploading:"Ladataan…",
     galleryError:"Kuvia ei voitu ladata.",
     voteError:"Ääntä ei voitu tallentaa.",
-    photoError:"Kuvaa ei voitu ladata."
+    photoError:"Kuvaa ei voitu ladata.",
+    camera:"Kamera",
+    chooseFiles:"Valitse kuvat",
+    gallery:"Galleria",
+    selected:"valittu",
+    maxPhotos:"Enintään 10 kuvaa",
+    removePhoto:"Poista kuva",
+    chooseFirst:"Valitse vähintään yksi kuva",
+    confirmRules:"Vahvista molemmat säännöt",
+    uploadProgress:"Ladataan kuvaa",
+    of:"/"
   },
 
   tr:{
@@ -614,13 +818,13 @@ const PD_TX = {
     photoRuleTitle:"Yalnızca hayvanlı fotoğraflar",
     photoRule:"Yalnızca bu mekânda bir hayvanın açıkça göründüğü fotoğraflar eklenir. Hayvansız fotoğraflar yayımlanmaz.",
     animalVisible:"Bir hayvan açıkça görünüyor",
-    takenHere:"Fotoğraf bu mekânda çekildi",
+    takenHere:"Bu fotoğraflar bu mekânda çekildi",
     inside:"İçeride",
     outside:"Dışarıda",
     terrace:"Teras",
     other:"Diğer",
-    submit:"Fotoğraf gönder",
-    pending:"Fotoğraf incelemeye gönderildi",
+    submit:"Fotoğrafları gönder",
+    pending:"Fotoğraflar incelemeye gönderildi",
     noPhotos:"Henüz onaylı hayvan fotoğrafı yok.",
     booking:"Booking’de müsaitliği kontrol et",
     community:"Topluluk",
@@ -630,7 +834,17 @@ const PD_TX = {
     uploading:"Yükleniyor…",
     galleryError:"Fotoğraflar yüklenemedi.",
     voteError:"Oy kaydedilemedi.",
-    photoError:"Fotoğraf yüklenemedi."
+    photoError:"Fotoğraf yüklenemedi.",
+    camera:"Kamera",
+    chooseFiles:"Fotoğraf seç",
+    gallery:"Galeri",
+    selected:"seçildi",
+    maxPhotos:"En fazla 10 fotoğraf",
+    removePhoto:"Fotoğrafı kaldır",
+    chooseFirst:"En az bir fotoğraf seçin",
+    confirmRules:"Her iki kuralı da onaylayın",
+    uploadProgress:"Fotoğraf yükleniyor",
+    of:"/"
   },
 
   ar:{
@@ -639,17 +853,17 @@ const PD_TX = {
     no:"لا",
     votes:"أصوات",
     petPhotos:"صور الحيوانات",
-    addPhoto:"إضافة صورة",
+    addPhoto:"إضافة صور",
     photoRuleTitle:"صور الحيوانات فقط",
     photoRule:"تُضاف فقط الصور التي يظهر فيها حيوان في هذا المكان بالتحديد. الصور من دون حيوان لن تُنشر.",
     animalVisible:"الحيوان ظاهر بوضوح",
-    takenHere:"التُقطت الصورة في هذا المكان",
+    takenHere:"التُقطت هذه الصور في هذا المكان",
     inside:"بالداخل",
     outside:"بالخارج",
     terrace:"التراس",
     other:"أخرى",
-    submit:"إرسال الصورة",
-    pending:"أُرسلت الصورة للمراجعة",
+    submit:"إرسال الصور",
+    pending:"أُرسلت الصور للمراجعة",
     noPhotos:"لا توجد صور حيوانات معتمدة بعد.",
     booking:"تحقق من التوفر على Booking",
     community:"المجتمع",
@@ -659,7 +873,17 @@ const PD_TX = {
     uploading:"جارٍ الرفع…",
     galleryError:"تعذر تحميل الصور.",
     voteError:"تعذر حفظ التصويت.",
-    photoError:"تعذر رفع الصورة."
+    photoError:"تعذر رفع الصورة.",
+    camera:"الكاميرا",
+    chooseFiles:"اختيار الصور",
+    gallery:"المعرض",
+    selected:"تم الاختيار",
+    maxPhotos:"حتى 10 صور",
+    removePhoto:"إزالة الصورة",
+    chooseFirst:"اختر صورة واحدة على الأقل",
+    confirmRules:"يرجى تأكيد القاعدتين",
+    uploadProgress:"جارٍ رفع الصورة",
+    of:"من"
   },
 
   hi:{
@@ -672,13 +896,13 @@ const PD_TX = {
     photoRuleTitle:"केवल जानवर वाली तस्वीरें",
     photoRule:"सिर्फ वही तस्वीरें जो इसी जगह पर किसी जानवर को स्पष्ट दिखाती हैं, जोड़ी जाएंगी। बिना जानवर वाली तस्वीरें प्रकाशित नहीं होंगी।",
     animalVisible:"जानवर साफ़ दिखाई दे रहा है",
-    takenHere:"फोटो इसी जगह पर ली गई है",
+    takenHere:"ये तस्वीरें इसी जगह पर ली गई हैं",
     inside:"अंदर",
     outside:"बाहर",
     terrace:"टेरेस",
     other:"अन्य",
     submit:"फोटो भेजें",
-    pending:"फोटो समीक्षा के लिए भेजी गई",
+    pending:"फोटो समीक्षा के लिए भेजी गईं",
     noPhotos:"अभी कोई स्वीकृत फोटो नहीं है।",
     booking:"Booking पर उपलब्धता देखें",
     community:"कम्युनिटी",
@@ -688,7 +912,17 @@ const PD_TX = {
     uploading:"अपलोड हो रहा है…",
     galleryError:"फोटो लोड नहीं हो सकीं।",
     voteError:"वोट सेव नहीं हो सका।",
-    photoError:"फोटो अपलोड नहीं हो सकी।"
+    photoError:"फोटो अपलोड नहीं हो सकी।",
+    camera:"कैमरा",
+    chooseFiles:"फोटो चुनें",
+    gallery:"गैलरी",
+    selected:"चुनी गईं",
+    maxPhotos:"अधिकतम 10 फोटो",
+    removePhoto:"फोटो हटाएँ",
+    chooseFirst:"कम से कम एक फोटो चुनें",
+    confirmRules:"दोनों नियमों की पुष्टि करें",
+    uploadProgress:"फोटो अपलोड हो रही है",
+    of:"में से"
   }
 
 };
@@ -770,6 +1004,12 @@ function pdVoteInfo(place){
 
 }
 
+/* =========================================================
+   EDITORIAL CARD + PET PHOTOS STYLES
+   Scoped to Pet-Friendly enhancements.
+   Global header / navigation / side menu are untouched.
+========================================================= */
+
 function pdInstallStyles(){
 
   if(
@@ -790,206 +1030,212 @@ function pdInstallStyles(){
 
   style.textContent = `
 
+    /* ---------- CARD ---------- */
+
+    #cards .card{
+      overflow:hidden;
+      border:1px solid rgba(17,17,17,.12);
+      border-radius:22px;
+      background:#fff;
+      box-shadow:
+        0 16px 42px rgba(0,0,0,.07);
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease;
+    }
+
+    @media (hover:hover){
+
+      #cards .card:hover{
+        transform:translateY(-3px);
+        box-shadow:
+          0 22px 54px rgba(0,0,0,.11);
+      }
+
+    }
+
+    #cards .card-body{
+      padding:17px 18px 18px;
+    }
+
+    #cards .card-body h2{
+      margin:8px 0 6px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-weight:500;
+      line-height:1.03;
+      letter-spacing:-.025em;
+    }
+
+    #cards .address{
+      margin-bottom:10px;
+      color:#716c63;
+      line-height:1.35;
+    }
+
+    #cards .pet-row{
+      margin-top:7px;
+    }
+
+    #cards .pet{
+      display:inline-flex;
+      align-items:center;
+      min-height:25px;
+      padding:4px 9px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.015em;
+    }
+
+    /* ---------- COMPACT COMMUNITY LINE ---------- */
+
     .pd-vote-row{
+      width:100%;
       margin-top:11px;
-      padding:10px 11px;
-      border-radius:15px;
-      background:rgba(255,255,255,.92);
+      padding:8px 0 7px;
+      border-top:1px solid rgba(17,17,17,.11);
+      border-bottom:1px solid rgba(17,17,17,.11);
+      background:transparent;
       color:#111;
       display:flex;
       align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-      font-size:12px;
-      font-weight:850;
+      gap:5px;
+      min-width:0;
+      font-size:11px;
+      font-weight:800;
     }
 
     .pd-vote-row strong{
-      margin-right:auto;
+      margin:0 auto 0 0;
+      min-width:0;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:11px;
+      font-weight:900;
+      white-space:nowrap;
     }
 
     .pd-vote-btn{
-      border:1px solid #111!important;
-      background:#fff!important;
-      color:#111!important;
-      min-height:33px!important;
-      padding:0 12px!important;
+      appearance:none;
+      -webkit-appearance:none;
+      display:inline-flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      gap:4px!important;
+      min-width:0!important;
+      min-height:27px!important;
+      height:27px!important;
+      padding:0 8px!important;
+      border:1px solid rgba(17,17,17,.18)!important;
       border-radius:999px!important;
+      background:transparent!important;
+      color:#111!important;
+      box-shadow:none!important;
+      font-size:10px!important;
+      line-height:1!important;
       font-weight:900!important;
+      white-space:nowrap;
     }
 
     .pd-vote-btn.yes{
-      border-color:#3f9b16!important;
-      background:#e6ffd8!important;
+      border-color:rgba(55,142,20,.36)!important;
+      background:rgba(101,229,31,.09)!important;
+      color:#245e10!important;
     }
 
     .pd-vote-btn.no{
-      border-color:#a64b4b!important;
-      background:#fff0f0!important;
+      border-color:rgba(153,57,57,.24)!important;
+      background:rgba(160,50,50,.035)!important;
+      color:#7e3434!important;
+    }
+
+    .pd-vote-number{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:15px;
+      height:15px;
+      padding:0 4px;
+      border-radius:999px;
+      background:rgba(0,0,0,.07);
+      font-size:8px;
+      line-height:1;
+      font-weight:950;
+    }
+
+    .pd-vote-btn.yes .pd-vote-number{
+      background:rgba(75,170,30,.15);
+    }
+
+    .pd-vote-btn.no .pd-vote-number{
+      background:rgba(160,50,50,.10);
     }
 
     .pd-vote-count{
-      font-size:10px;
-      color:#69645c;
+      flex:0 0 auto;
+      margin-left:1px;
+      color:#89837a;
+      font-size:8px;
       font-weight:800;
+      white-space:nowrap;
     }
 
     .pd-community-state{
-      margin-top:7px;
-      font-size:10px;
-      font-weight:850;
-      color:#676158;
+      margin-top:6px;
+      padding:0;
+      color:#716b62;
+      font-size:9px;
+      line-height:1.25;
+      font-weight:800;
     }
 
     .pd-community-state.good{
-      color:#2d7215;
+      color:#317516;
     }
 
     .pd-community-state.bad{
-      color:#9d3131;
+      color:#963a3a;
+    }
+
+    /* ---------- META ---------- */
+
+    #cards .meta{
+      margin-top:9px;
+      color:#625d55;
+      font-size:10px;
+      line-height:1.4;
+      font-weight:750;
+    }
+
+    /* ---------- ACTIONS ---------- */
+
+    #cards .actions{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-top:11px;
+    }
+
+    #cards .actions button{
+      min-height:32px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:850;
     }
 
     .pd-pet-photo-btn{
-      border-color:#65e51f!important;
+      border-color:rgba(72,174,25,.5)!important;
     }
 
-    .pd-modal-backdrop{
-      position:fixed;
-      inset:0;
-      z-index:100000;
-      background:rgba(0,0,0,.72);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
+    #cards .actions .booking{
+      background:#111!important;
+      border-color:#111!important;
+      color:#fff!important;
+      font-weight:950!important;
     }
 
-    .pd-modal-backdrop.open{
-      display:flex;
-    }
-
-    .pd-modal{
-      width:min(680px,100%);
-      max-height:88vh;
-      overflow:auto;
-      background:#f6f1e7;
-      color:#111;
-      border-radius:28px;
-      padding:24px;
-      box-shadow:0 25px 80px rgba(0,0,0,.35);
-    }
-
-    .pd-modal-head{
-      display:flex;
-      align-items:flex-start;
-      gap:14px;
-    }
-
-    .pd-modal-head h2{
-      font:500 clamp(34px,8vw,54px)/.95 Georgia,serif;
-      margin:0;
-      flex:1;
-    }
-
-    .pd-modal-close{
-      width:52px;
-      height:52px;
-      border:0;
-      border-radius:50%;
-      background:#111;
-      color:#fff;
-      font-size:28px;
-    }
-
-    .pd-gallery{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
-      margin-top:18px;
-    }
-
-    .pd-gallery img{
-      width:100%;
-      aspect-ratio:1/1;
-      object-fit:cover;
-      border-radius:16px;
-      background:#ddd;
-    }
-
-    .pd-photo-empty{
-      padding:22px 0;
-      color:#6f6a62;
-    }
-
-    .pd-upload-box{
-      margin-top:20px;
-      padding-top:18px;
-      border-top:1px solid #cfc7bb;
-    }
-
-    .pd-upload-box h3{
-      margin:0 0 6px;
-    }
-
-    .pd-upload-box p{
-      color:#6b665f;
-      line-height:1.45;
-    }
-
-    .pd-check{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      margin:10px 0;
-      font-weight:800;
-    }
-
-    .pd-check input{
-      width:21px;
-      height:21px;
-      flex:0 0 auto;
-    }
-
-    .pd-file{
-      display:block;
-      width:100%;
-      padding:14px;
-      border:1px solid #bdb5a8;
-      border-radius:14px;
-      background:#fff;
-      margin:12px 0;
-    }
-
-    .pd-area{
-      width:100%;
-      min-height:46px;
-      border:1px solid #bdb5a8;
-      border-radius:14px;
-      background:#fff;
-      padding:0 12px;
-      margin-bottom:12px;
-    }
-
-    .pd-submit{
-      width:100%;
-      min-height:52px;
-      border:0;
-      border-radius:16px;
-      background:#65e51f;
-      color:#071102;
-      font-weight:950;
-      font-size:16px;
-    }
-
-    .pd-submit:disabled{
-      opacity:.5;
-    }
-
-    .pd-photo-note{
-      margin-top:10px;
-      font-size:12px;
-      font-weight:800;
-    }
+    /* ---------- BRANDED PHOTO FALLBACK ---------- */
 
     .pd-branded-fallback{
       position:absolute;
@@ -998,13 +1244,18 @@ function pdInstallStyles(){
       place-items:center;
       background:
         radial-gradient(
-          circle at 30% 25%,
-          rgba(101,229,31,.28),
-          transparent 30%
+          circle at 28% 22%,
+          rgba(101,229,31,.26),
+          transparent 31%
+        ),
+        radial-gradient(
+          circle at 78% 78%,
+          rgba(201,151,41,.16),
+          transparent 34%
         ),
         linear-gradient(
           145deg,
-          #111,
+          #101010,
           #292929
         );
       color:#fff;
@@ -1015,10 +1266,382 @@ function pdInstallStyles(){
 
     .pd-branded-fallback span{
       display:block;
+      margin-top:7px;
+      color:#efd47c;
       font:900 11px/1.2 Arial,sans-serif;
       letter-spacing:1.5px;
-      color:#efd47c;
-      margin-top:7px;
+    }
+
+    /* ---------- PET PHOTOS MODAL ---------- */
+
+    .pd-modal-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:100000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:
+        max(14px,env(safe-area-inset-top))
+        14px
+        max(14px,env(safe-area-inset-bottom));
+      background:rgba(0,0,0,.74);
+      backdrop-filter:blur(5px);
+      -webkit-backdrop-filter:blur(5px);
+    }
+
+    .pd-modal-backdrop.open{
+      display:flex;
+    }
+
+    .pd-modal{
+      width:min(700px,100%);
+      max-height:min(90vh,850px);
+      overflow:auto;
+      overscroll-behavior:contain;
+      background:#f6f1e7;
+      color:#111;
+      border-radius:28px;
+      padding:22px;
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.42);
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .pd-modal-head{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+    }
+
+    .pd-modal-head h2{
+      flex:1;
+      margin:0;
+      font:500 clamp(30px,7vw,50px)/.96 Georgia,serif;
+      letter-spacing:-.035em;
+    }
+
+    .pd-modal-close{
+      flex:0 0 48px;
+      width:48px;
+      height:48px;
+      border:0;
+      border-radius:50%;
+      background:#111;
+      color:#fff;
+      font-size:27px;
+      line-height:1;
+    }
+
+    /* approved community gallery */
+
+    .pd-gallery{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .pd-gallery-item{
+      position:relative;
+      overflow:hidden;
+      border-radius:14px;
+      background:#ddd;
+      aspect-ratio:1/1;
+    }
+
+    .pd-gallery img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .pd-photo-empty{
+      padding:18px 0 4px;
+      color:#716c64;
+      font-size:13px;
+    }
+
+    /* uploader */
+
+    .pd-upload-box{
+      margin-top:20px;
+      padding-top:18px;
+      border-top:1px solid #cfc7bb;
+    }
+
+    .pd-upload-box h3{
+      margin:0 0 7px;
+      font:600 22px/1.05 Georgia,serif;
+    }
+
+    .pd-upload-box > p{
+      margin:0;
+      color:#69645c;
+      font-size:13px;
+      line-height:1.48;
+    }
+
+    .pd-picker{
+      margin:17px 0 13px;
+    }
+
+    .pd-picker-actions{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+    }
+
+    .pd-picker-action{
+      min-width:0;
+      min-height:72px;
+      padding:9px 6px;
+      border:1px solid #c8c0b3;
+      border-radius:17px;
+      background:#fff;
+      color:#111;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      text-align:center;
+      font-size:10px;
+      line-height:1.1;
+      font-weight:900;
+    }
+
+    .pd-picker-action:active{
+      transform:scale(.98);
+    }
+
+    .pd-picker-icon{
+      display:block;
+      font-size:23px;
+      line-height:1;
+    }
+
+    .pd-native-file{
+      position:absolute!important;
+      width:1px!important;
+      height:1px!important;
+      overflow:hidden!important;
+      clip:rect(0 0 0 0)!important;
+      clip-path:inset(50%)!important;
+      white-space:nowrap!important;
+    }
+
+    .pd-picker-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:9px;
+      color:#777168;
+      font-size:10px;
+      line-height:1.25;
+      font-weight:850;
+    }
+
+    .pd-selected-count{
+      color:#111;
+    }
+
+    /* selected photos preview */
+
+    .pd-preview{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:7px;
+      margin-top:11px;
+    }
+
+    .pd-preview:empty{
+      display:none;
+    }
+
+    .pd-preview-item{
+      position:relative;
+      overflow:hidden;
+      aspect-ratio:1/1;
+      border-radius:13px;
+      background:#ddd;
+    }
+
+    .pd-preview-item img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .pd-preview-remove{
+      position:absolute;
+      top:5px;
+      right:5px;
+      width:25px;
+      height:25px;
+      padding:0;
+      border:1px solid rgba(255,255,255,.65);
+      border-radius:50%;
+      background:rgba(0,0,0,.76);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:16px;
+      line-height:1;
+      font-weight:800;
+      box-shadow:0 2px 9px rgba(0,0,0,.22);
+    }
+
+    .pd-area-label{
+      display:block;
+      margin:14px 0 6px;
+      color:#37332e;
+      font-size:11px;
+      font-weight:900;
+    }
+
+    .pd-area{
+      width:100%;
+      min-height:48px;
+      margin:0 0 13px;
+      padding:0 12px;
+      border:1px solid #bdb5a8;
+      border-radius:14px;
+      background:#fff;
+      color:#111;
+    }
+
+    .pd-check{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      margin:10px 0;
+      color:#24211d;
+      font-size:12px;
+      line-height:1.35;
+      font-weight:800;
+    }
+
+    .pd-check input{
+      flex:0 0 auto;
+      width:21px;
+      height:21px;
+      margin:0;
+      accent-color:#65e51f;
+    }
+
+    .pd-submit{
+      width:100%;
+      min-height:52px;
+      margin-top:8px;
+      border:0;
+      border-radius:16px;
+      background:#65e51f;
+      color:#071102;
+      font-size:15px;
+      font-weight:950;
+    }
+
+    .pd-submit:disabled{
+      opacity:.45;
+      cursor:default;
+    }
+
+    .pd-photo-note{
+      min-height:16px;
+      margin-top:10px;
+      color:#504b44;
+      font-size:11px;
+      line-height:1.4;
+      font-weight:850;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media(max-width:640px){
+
+      .pd-modal-backdrop{
+        align-items:flex-end;
+        padding:
+          8px
+          8px
+          max(8px,env(safe-area-inset-bottom));
+      }
+
+      .pd-modal{
+        width:100%;
+        max-height:92dvh;
+        border-radius:25px 25px 18px 18px;
+        padding:18px 16px 20px;
+      }
+
+      .pd-modal-head h2{
+        font-size:32px;
+      }
+
+      .pd-modal-close{
+        flex-basis:44px;
+        width:44px;
+        height:44px;
+      }
+
+      .pd-gallery{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+
+      .pd-picker-action{
+        min-height:68px;
+      }
+
+      .pd-preview{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+
+      #cards .card-body{
+        padding:15px 15px 16px;
+      }
+
+      .pd-vote-row{
+        gap:4px;
+      }
+
+      .pd-vote-row strong{
+        font-size:10px;
+      }
+
+      .pd-vote-btn{
+        height:26px!important;
+        min-height:26px!important;
+        padding:0 7px!important;
+        font-size:9px!important;
+      }
+
+      .pd-vote-count{
+        display:none;
+      }
+
+    }
+
+    @media(max-width:390px){
+
+      .pd-picker-action{
+        min-height:64px;
+        font-size:9px;
+      }
+
+      .pd-picker-icon{
+        font-size:21px;
+      }
+
+      .pd-vote-row strong{
+        max-width:86px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+
     }
 
   `;
@@ -1027,7 +1650,11 @@ function pdInstallStyles(){
     style
   );
 
-}function pdInstallPhotoModal(){
+}/* =========================================================
+   PET PHOTOS MODAL + MOBILE PICKER
+========================================================= */
+
+function pdInstallPhotoModal(){
 
   if(
     document.getElementById(
@@ -1088,12 +1715,104 @@ function pdInstallStyles(){
 
         <p id="pdPhotoRule"></p>
 
-        <input
-          class="pd-file"
-          id="pdPhotoFile"
-          type="file"
-          accept="image/*"
-        >
+        <div class="pd-picker">
+
+          <div class="pd-picker-actions">
+
+            <button
+              class="pd-picker-action"
+              id="pdCameraButton"
+              type="button"
+            >
+              <span
+                class="pd-picker-icon"
+                aria-hidden="true"
+              >
+                📷
+              </span>
+
+              <span id="pdCameraText"></span>
+            </button>
+
+            <button
+              class="pd-picker-action"
+              id="pdChooseButton"
+              type="button"
+            >
+              <span
+                class="pd-picker-icon"
+                aria-hidden="true"
+              >
+                ＋
+              </span>
+
+              <span id="pdChooseText"></span>
+            </button>
+
+            <button
+              class="pd-picker-action"
+              id="pdGalleryButton"
+              type="button"
+            >
+              <span
+                class="pd-picker-icon"
+                aria-hidden="true"
+              >
+                ▦
+              </span>
+
+              <span id="pdGalleryText"></span>
+            </button>
+
+          </div>
+
+          <input
+            class="pd-native-file"
+            id="pdPhotoCamera"
+            type="file"
+            accept="image/*"
+            capture="environment"
+          >
+
+          <input
+            class="pd-native-file"
+            id="pdPhotoFiles"
+            type="file"
+            accept="image/*"
+            multiple
+          >
+
+          <input
+            class="pd-native-file"
+            id="pdPhotoGalleryInput"
+            type="file"
+            accept="image/*"
+            multiple
+          >
+
+          <div class="pd-picker-meta">
+
+            <span
+              id="pdSelectedCount"
+              class="pd-selected-count"
+            ></span>
+
+            <span id="pdMaxPhotosText"></span>
+
+          </div>
+
+          <div
+            id="pdPhotoPreview"
+            class="pd-preview"
+          ></div>
+
+        </div>
+
+        <label
+          class="pd-area-label"
+          id="pdPhotoAreaLabel"
+          for="pdPhotoArea"
+        ></label>
 
         <select
           class="pd-area"
@@ -1131,6 +1850,8 @@ function pdInstallStyles(){
         <div
           id="pdPhotoNote"
           class="pd-photo-note"
+          role="status"
+          aria-live="polite"
         ></div>
 
       </div>
@@ -1164,14 +1885,96 @@ function pdInstallStyles(){
 
     };
 
+  const camera =
+    document.getElementById(
+      "pdPhotoCamera"
+    );
+
+  const files =
+    document.getElementById(
+      "pdPhotoFiles"
+    );
+
+  const gallery =
+    document.getElementById(
+      "pdPhotoGalleryInput"
+    );
+
+  document
+    .getElementById(
+      "pdCameraButton"
+    )
+    .onclick =
+      ()=>{
+
+        camera.value = "";
+
+        camera.click();
+
+      };
+
+  document
+    .getElementById(
+      "pdChooseButton"
+    )
+    .onclick =
+      ()=>{
+
+        files.value = "";
+
+        files.click();
+
+      };
+
+  /*
+     Browsers do not expose an embedded system photo gallery
+     to websites.
+
+     "Gallery" therefore opens the browser / OS image picker.
+     On supported mobile devices this presents the native
+     gallery / photo-library experience.
+
+     No false promise is made that PETS & DOGUE can read or
+     display the user's complete device gallery itself.
+  */
+
+  document
+    .getElementById(
+      "pdGalleryButton"
+    )
+    .onclick =
+      ()=>{
+
+        gallery.value = "";
+
+        gallery.click();
+
+      };
+
+  camera.onchange =
+    ()=>pdAddSelectedPhotos(
+      camera.files
+    );
+
+  files.onchange =
+    ()=>pdAddSelectedPhotos(
+      files.files
+    );
+
+  gallery.onchange =
+    ()=>pdAddSelectedPhotos(
+      gallery.files
+    );
+
   document
     .getElementById(
       "pdPhotoSubmit"
     )
     .onclick =
-      pdSubmitPetPhoto;
+      pdSubmitPetPhotos;
 
 }
+
 
 function pdUpdatePhotoModalText(){
 
@@ -1225,6 +2028,41 @@ function pdUpdatePhotoModalText(){
     );
 
   q(
+    "pdCameraText"
+  ).textContent =
+    pdT(
+      "camera"
+    );
+
+  q(
+    "pdChooseText"
+  ).textContent =
+    pdT(
+      "chooseFiles"
+    );
+
+  q(
+    "pdGalleryText"
+  ).textContent =
+    pdT(
+      "gallery"
+    );
+
+  q(
+    "pdMaxPhotosText"
+  ).textContent =
+    pdT(
+      "maxPhotos"
+    );
+
+  q(
+    "pdPhotoAreaLabel"
+  ).textContent =
+    pdT(
+      "addPhoto"
+    );
+
+  q(
     "pdPhotoArea"
   ).innerHTML = `
 
@@ -1246,65 +2084,324 @@ function pdUpdatePhotoModalText(){
 
   `;
 
+  pdRenderSelectedPhotos();
+
 }
 
-async function pdOpenPetPhotos(
+
+function pdPhotoSignature(
+  file
+){
+
+  return [
+    file.name,
+    file.size,
+    file.lastModified,
+    file.type
+  ].join(
+    "::"
+  );
+
+}
+
+
+function pdAddSelectedPhotos(
+  fileList
+){
+
+  const incoming =
+    Array.from(
+      fileList ||
+      []
+    )
+    .filter(
+      file=>
+        String(
+          file.type ||
+          ""
+        )
+        .toLowerCase()
+        .startsWith(
+          "image/"
+        )
+    );
+
+  if(
+    !incoming.length
+  ){
+    return;
+  }
+
+  const known =
+    new Set(
+      pdSelectedPhotos.map(
+        item=>
+          pdPhotoSignature(
+            item.file
+          )
+      )
+    );
+
+  for(
+    const file of incoming
+  ){
+
+    if(
+      pdSelectedPhotos.length >=
+      PD_MAX_SELECTED_PHOTOS
+    ){
+      break;
+    }
+
+    const signature =
+      pdPhotoSignature(
+        file
+      );
+
+    if(
+      known.has(
+        signature
+      )
+    ){
+      continue;
+    }
+
+    known.add(
+      signature
+    );
+
+    pdSelectedPhotos.push({
+
+      id:
+        "pd-photo-" +
+        Date.now() +
+        "-" +
+        Math.random()
+          .toString(36)
+          .slice(2),
+
+      file,
+
+      preview:
+        URL.createObjectURL(
+          file
+        )
+
+    });
+
+  }
+
+  pdRenderSelectedPhotos();
+
+}
+
+
+function pdRemoveSelectedPhoto(
+  id
+){
+
+  const index =
+    pdSelectedPhotos.findIndex(
+      item=>
+        item.id === id
+    );
+
+  if(
+    index === -1
+  ){
+    return;
+  }
+
+  const [
+    removed
+  ] =
+    pdSelectedPhotos.splice(
+      index,
+      1
+    );
+
+  if(
+    removed?.preview
+  ){
+
+    try{
+
+      URL.revokeObjectURL(
+        removed.preview
+      );
+
+    }catch{}
+
+  }
+
+  pdRenderSelectedPhotos();
+
+}
+
+
+function pdClearSelectedPhotos(){
+
+  pdSelectedPhotos.forEach(
+    item=>{
+
+      if(
+        item.preview
+      ){
+
+        try{
+
+          URL.revokeObjectURL(
+            item.preview
+          );
+
+        }catch{}
+
+      }
+
+    }
+  );
+
+  pdSelectedPhotos = [];
+
+  [
+    "pdPhotoCamera",
+    "pdPhotoFiles",
+    "pdPhotoGalleryInput"
+  ]
+  .forEach(
+    id=>{
+
+      const input =
+        document.getElementById(
+          id
+        );
+
+      if(input){
+
+        input.value = "";
+
+      }
+
+    }
+  );
+
+  pdRenderSelectedPhotos();
+
+}
+
+
+function pdRenderSelectedPhotos(){
+
+  const preview =
+    document.getElementById(
+      "pdPhotoPreview"
+    );
+
+  const count =
+    document.getElementById(
+      "pdSelectedCount"
+    );
+
+  if(
+    !preview ||
+    !count
+  ){
+    return;
+  }
+
+  count.textContent =
+    `${pdSelectedPhotos.length}/${PD_MAX_SELECTED_PHOTOS} ${pdT("selected")}`;
+
+  preview.innerHTML =
+    pdSelectedPhotos
+      .map(
+        item=>`
+
+          <div
+            class="pd-preview-item"
+            data-preview-id="${esc(
+              item.id
+            )}"
+          >
+
+            <img
+              src="${esc(
+                item.preview
+              )}"
+              alt=""
+            >
+
+            <button
+              class="pd-preview-remove"
+              data-remove-preview="${esc(
+                item.id
+              )}"
+              type="button"
+              aria-label="${esc(
+                pdT(
+                  "removePhoto"
+                )
+              )}"
+            >
+              ×
+            </button>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+  preview
+    .querySelectorAll(
+      "[data-remove-preview]"
+    )
+    .forEach(
+      button=>{
+
+        button.onclick =
+          event=>{
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            pdRemoveSelectedPhoto(
+              button.dataset
+                .removePreview
+            );
+
+          };
+
+      }
+    );
+
+}
+
+
+async function pdLoadApprovedPetPhotos(
   place
 ){
 
-  pdPetPhotoPlace =
-    place;
-
-  pdInstallPhotoModal();
-
-  pdUpdatePhotoModalText();
-
-  document
-    .getElementById(
-      "pdPetPhotosTitle"
-    )
-    .textContent =
-      place.name +
-      " · " +
-      pdT(
-        "petPhotos"
-      );
-
-  document
-    .getElementById(
+  const gallery =
+    document.getElementById(
       "pdPetPhotoGallery"
-    )
-    .innerHTML =
-      "";
+    );
 
-  document
-    .getElementById(
+  const empty =
+    document.getElementById(
       "pdPetPhotoEmpty"
-    )
-    .textContent =
-      "";
-
-  document
-    .getElementById(
-      "pdPhotoNote"
-    )
-    .textContent =
-      "";
-
-  document
-    .getElementById(
-      "pdPetPhotosOverlay"
-    )
-    .classList
-    .add(
-      "open"
     );
 
-  document.body
-    .classList
-    .add(
-      "lock"
-    );
+  if(
+    !gallery ||
+    !empty
+  ){
+    return;
+  }
+
+  gallery.innerHTML = "";
+  empty.textContent = "";
 
   try{
 
@@ -1360,57 +2457,144 @@ async function pdOpenPetPhotos(
         ? data.photos
         : [];
 
-    const gallery =
-      document.getElementById(
-        "pdPetPhotoGallery"
-      );
-
     gallery.innerHTML =
       photos
         .map(
-          item=>`
+          item=>{
 
-            <img
-              src="${esc(
-                item.imageUrl ||
-                item.image_url ||
-                ""
-              )}"
-              alt="${esc(
-                place.name
-              )}"
-              loading="lazy"
-            >
+            const image =
+              item.imageUrl ||
+              item.image_url ||
+              "";
 
-          `
+            if(!image){
+              return "";
+            }
+
+            return `
+
+              <div class="pd-gallery-item">
+
+                <img
+                  src="${esc(
+                    image
+                  )}"
+                  alt="${esc(
+                    place.name
+                  )}"
+                  loading="lazy"
+                >
+
+              </div>
+
+            `;
+
+          }
         )
         .join("");
 
-    document
-      .getElementById(
-        "pdPetPhotoEmpty"
-      )
-      .textContent =
-        photos.length
-          ? ""
-          : pdT(
-              "noPhotos"
-            );
+    empty.textContent =
+      photos.length
+        ? ""
+        : pdT(
+            "noPhotos"
+          );
 
   }catch(error){
 
-    document
-      .getElementById(
-        "pdPetPhotoEmpty"
-      )
-      .textContent =
-        pdT(
-          "galleryError"
-        );
+    console.warn(
+      "PETS & DOGUE pet photos:",
+      error
+    );
+
+    empty.textContent =
+      pdT(
+        "galleryError"
+      );
 
   }
 
 }
+
+
+async function pdOpenPetPhotos(
+  place
+){
+
+  pdPetPhotoPlace =
+    place;
+
+  pdInstallPhotoModal();
+
+  pdUpdatePhotoModalText();
+
+  pdClearSelectedPhotos();
+
+  const title =
+    document.getElementById(
+      "pdPetPhotosTitle"
+    );
+
+  const note =
+    document.getElementById(
+      "pdPhotoNote"
+    );
+
+  const animal =
+    document.getElementById(
+      "pdAnimalVisible"
+    );
+
+  const here =
+    document.getElementById(
+      "pdTakenHere"
+    );
+
+  const area =
+    document.getElementById(
+      "pdPhotoArea"
+    );
+
+  title.textContent =
+    place.name +
+    " · " +
+    pdT(
+      "petPhotos"
+    );
+
+  note.textContent = "";
+
+  animal.checked = false;
+  here.checked = false;
+
+  if(area){
+
+    area.value =
+      "inside";
+
+  }
+
+  document
+    .getElementById(
+      "pdPetPhotosOverlay"
+    )
+    .classList
+    .add(
+      "open"
+    );
+
+  document.body
+    .classList
+    .add(
+      "lock"
+    );
+
+  await pdLoadApprovedPetPhotos(
+    place
+  );
+
+}
+
 
 function pdClosePetPhotos(){
 
@@ -1429,6 +2613,11 @@ function pdClosePetPhotos(){
 
   }
 
+  pdClearSelectedPhotos();
+
+  pdPetPhotoPlace =
+    null;
+
   if(
     !document.querySelector(
       ".overlay.open,.pd-modal-backdrop.open"
@@ -1445,14 +2634,53 @@ function pdClosePetPhotos(){
 
 }
 
+
 async function pdImageData(
   file
 ){
 
-  const bitmap =
-    await createImageBitmap(
-      file
+  let bitmap;
+
+  try{
+
+    bitmap =
+      await createImageBitmap(
+        file
+      );
+
+  }catch{
+
+    return await new Promise(
+      (
+        resolve,
+        reject
+      )=>{
+
+        const reader =
+          new FileReader();
+
+        reader.onload =
+          ()=>resolve(
+            reader.result
+          );
+
+        reader.onerror =
+          ()=>reject(
+            new Error(
+              pdT(
+                "photoError"
+              )
+            )
+          );
+
+        reader.readAsDataURL(
+          file
+        );
+
+      }
     );
+
+  }
 
   const max =
     1600;
@@ -1495,6 +2723,22 @@ async function pdImageData(
       "2d"
     );
 
+  if(!context){
+
+    if(
+      bitmap.close
+    ){
+      bitmap.close();
+    }
+
+    throw new Error(
+      pdT(
+        "photoError"
+      )
+    );
+
+  }
+
   context.drawImage(
     bitmap,
     0,
@@ -1519,17 +2763,94 @@ async function pdImageData(
 
 }
 
-async function pdSubmitPetPhoto(){
+
+async function pdUploadSinglePetPhoto(
+  place,
+  file,
+  area
+){
+
+  const imageData =
+    await pdImageData(
+      file
+    );
+
+  const response =
+    await fetch(
+      PD_PET_PHOTOS_API,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          Accept:
+            "application/json"
+        },
+
+        body:
+          JSON.stringify({
+
+            placeKey:
+              communityKey(
+                place
+              ),
+
+            placeName:
+              place.name,
+
+            address:
+              place.address,
+
+            area,
+
+            animalVisible:
+              true,
+
+            takenAtVenue:
+              true,
+
+            uploaderKey:
+              pdVoterKey(),
+
+            imageData
+
+          })
+
+      }
+    );
+
+  const data =
+    await response
+      .json()
+      .catch(
+        ()=>({})
+      );
+
+  if(
+    !response.ok ||
+    data.ok !== true
+  ){
+
+    throw new Error(
+      data.error ||
+      pdT(
+        "photoError"
+      )
+    );
+
+  }
+
+  return data;
+
+}
+
+
+async function pdSubmitPetPhotos(){
 
   const place =
     pdPetPhotoPlace;
-
-  const file =
-    document
-      .getElementById(
-        "pdPhotoFile"
-      )
-      ?.files?.[0];
 
   const animal =
     document
@@ -1557,98 +2878,71 @@ async function pdSubmitPetPhoto(){
 
   if(
     !place ||
-    !file ||
-    !animal ||
-    !here
+    !note ||
+    !button
   ){
+    return;
+  }
+
+  if(
+    !pdSelectedPhotos.length
+  ){
+
+    note.textContent =
+      pdT(
+        "chooseFirst"
+      );
 
     return;
 
   }
 
+  if(
+    !animal ||
+    !here
+  ){
+
+    note.textContent =
+      pdT(
+        "confirmRules"
+      );
+
+    return;
+
+  }
+
+  const queue =
+    pdSelectedPhotos.slice(
+      0,
+      PD_MAX_SELECTED_PHOTOS
+    );
+
+  const area =
+    document
+      .getElementById(
+        "pdPhotoArea"
+      )
+      ?.value ||
+    "inside";
+
   button.disabled =
     true;
 
-  note.textContent =
-    pdT(
-      "uploading"
-    );
-
   try{
 
-    const imageData =
-      await pdImageData(
-        file
-      );
-
-    const response =
-      await fetch(
-        PD_PET_PHOTOS_API,
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json",
-
-            Accept:
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-
-              placeKey:
-                communityKey(
-                  place
-                ),
-
-              placeName:
-                place.name,
-
-              address:
-                place.address,
-
-              area:
-                document
-                  .getElementById(
-                    "pdPhotoArea"
-                  )
-                  .value,
-
-              animalVisible:
-                true,
-
-              takenAtVenue:
-                true,
-
-              uploaderKey:
-                pdVoterKey(),
-
-              imageData
-
-            })
-
-        }
-      );
-
-    const data =
-      await response
-        .json()
-        .catch(
-          ()=>({})
-        );
-
-    if(
-      !response.ok ||
-      data.ok !== true
+    for(
+      let index = 0;
+      index < queue.length;
+      index += 1
     ){
 
-      throw new Error(
-        data.error ||
-        pdT(
-          "photoError"
-        )
+      note.textContent =
+        `${pdT("uploadProgress")} ${index + 1} ${pdT("of")} ${queue.length}…`;
+
+      await pdUploadSinglePetPhoto(
+        place,
+        queue[index].file,
+        area
       );
 
     }
@@ -1658,12 +2952,7 @@ async function pdSubmitPetPhoto(){
         "pending"
       );
 
-    document
-      .getElementById(
-        "pdPhotoFile"
-      )
-      .value =
-        "";
+    pdClearSelectedPhotos();
 
     document
       .getElementById(
@@ -1963,10 +3252,7 @@ async function(place){
 
   }
 
-};
-
-
-/* =========================================================
+};/* =========================================================
    COMMUNITY DATA
 ========================================================= */
 
@@ -2492,8 +3778,12 @@ function pdFallbackMarkup(
 
   `;
 
-}/* =========================================================
+}
+
+
+/* =========================================================
    CARD RENDER
+   Compact editorial layout.
 ========================================================= */
 
 window.render =
@@ -2514,12 +3804,17 @@ function(){
   const saved =
     savedSet();
 
-  document
-    .getElementById(
+  const countElement =
+    document.getElementById(
       "count"
-    )
-    .textContent =
+    );
+
+  if(countElement){
+
+    countElement.textContent =
       `${t("found")}: ${list.length} ${t("places")}`;
+
+  }
 
   if(
     !list.length
@@ -2549,12 +3844,17 @@ function(){
 
     `;
 
-    document
-      .getElementById(
+    const more =
+      document.getElementById(
         "more"
-      )
-      .hidden =
+      );
+
+    if(more){
+
+      more.hidden =
         true;
+
+    }
 
     drawMarkers([]);
 
@@ -2623,20 +3923,74 @@ function(){
 
           }
 
-          meta.push(
+          if(
+            typeof place.openNow ===
+            "boolean"
+          ){
+
+            meta.push(
+              place.openNow
+                ? "Open"
+                : "Closed"
+            );
+
+          }else if(
+            typeof place.isOpen ===
+            "boolean"
+          ){
+
+            meta.push(
+              place.isOpen
+                ? "Open"
+                : "Closed"
+            );
+
+          }
+
+          const source =
             sourceLabel(
               place
-            )
-          );
+            );
 
-          const communityText =
+          if(source){
+
+            meta.push(
+              source
+            );
+
+          }
+
+          const yesCount =
+            Number(
+              vote.yes ||
+              0
+            );
+
+          const noCount =
+            Number(
+              vote.no ||
+              0
+            );
+
+          let communityText = "";
+
+          if(
+            vote.communityPetFriendly
+          ){
+
+            communityText =
+              pdT(
+                "confirmed"
+              );
+
+          }else if(
             vote.total
-              ? (
-                  `${pdT("community")}: ` +
-                  `✓ ${vote.yes} · ` +
-                  `✕ ${vote.no}`
-                )
-              : "";
+          ){
+
+            communityText =
+              `${pdT("community")}: ✓ ${yesCount} · ✕ ${noCount}`;
+
+          }
 
           return `
 
@@ -2759,12 +4113,36 @@ function(){
                       identity
                     )}"
                     type="button"
-                  >
-                    ✓ ${esc(
+                    aria-label="${esc(
                       pdT(
                         "yes"
                       )
-                    )}
+                    )}"
+                  >
+                    <span aria-hidden="true">
+                      ✓
+                    </span>
+
+                    <span>
+                      ${esc(
+                        pdT(
+                          "yes"
+                        )
+                      )}
+                    </span>
+
+                    ${
+                      yesCount
+                        ? `
+
+                          <span class="pd-vote-number">
+                            ${yesCount}
+                          </span>
+
+                        `
+                        : ""
+                    }
+
                   </button>
 
                   <button
@@ -2773,25 +4151,51 @@ function(){
                       identity
                     )}"
                     type="button"
-                  >
-                    ✕ ${esc(
+                    aria-label="${esc(
                       pdT(
                         "no"
                       )
-                    )}
-                  </button>
+                    )}"
+                  >
+                    <span aria-hidden="true">
+                      ✕
+                    </span>
 
-                  <span class="pd-vote-count">
+                    <span>
+                      ${esc(
+                        pdT(
+                          "no"
+                        )
+                      )}
+                    </span>
 
                     ${
-                      vote.total
-                        ? esc(
-                            `${vote.total} ${pdT("votes")}`
-                          )
+                      noCount
+                        ? `
+
+                          <span class="pd-vote-number">
+                            ${noCount}
+                          </span>
+
+                        `
                         : ""
                     }
 
-                  </span>
+                  </button>
+
+                  ${
+                    vote.total
+                      ? `
+
+                        <span class="pd-vote-count">
+                          ${Number(
+                            vote.total
+                          )}
+                        </span>
+
+                      `
+                      : ""
+                  }
 
                 </div>
 
@@ -2815,13 +4219,21 @@ function(){
                     : ""
                 }
 
-                <div class="meta">
-                  ${esc(
-                    meta.join(
-                      " · "
-                    )
-                  )}
-                </div>
+                ${
+                  meta.length
+                    ? `
+
+                      <div class="meta">
+                        ${esc(
+                          meta.join(
+                            " · "
+                          )
+                        )}
+                      </div>
+
+                    `
+                    : ""
+                }
 
                 <div class="actions">
 
@@ -2917,13 +4329,18 @@ function(){
       )
       .join("");
 
-  document
-    .getElementById(
+  const more =
+    document.getElementById(
       "more"
-    )
-    .hidden =
+    );
+
+  if(more){
+
+    more.hidden =
       visible.length >=
       list.length;
+
+  }
 
   bindCards();
 
@@ -3258,9 +4675,16 @@ const pdOriginalOpenDetail =
 window.openDetail =
 function(place){
 
-  pdOriginalOpenDetail(
-    place
-  );
+  if(
+    typeof pdOriginalOpenDetail ===
+    "function"
+  ){
+
+    pdOriginalOpenDetail(
+      place
+    );
+
+  }
 
   const actions =
     document.getElementById(
@@ -3339,6 +4763,18 @@ function(place){
       place
     );
 
+  const yesCount =
+    Number(
+      summary.yes ||
+      0
+    );
+
+  const noCount =
+    Number(
+      summary.no ||
+      0
+    );
+
   vote.innerHTML = `
 
     <strong>
@@ -3353,33 +4789,61 @@ function(place){
       class="pd-vote-btn yes"
       type="button"
     >
-      ✓ ${esc(
-        pdT(
-          "yes"
-        )
-      )}
+      <span aria-hidden="true">
+        ✓
+      </span>
+
+      <span>
+        ${esc(
+          pdT(
+            "yes"
+          )
+        )}
+      </span>
+
+      ${
+        yesCount
+          ? `
+
+            <span class="pd-vote-number">
+              ${yesCount}
+            </span>
+
+          `
+          : ""
+      }
+
     </button>
 
     <button
       class="pd-vote-btn no"
       type="button"
     >
-      ✕ ${esc(
-        pdT(
-          "no"
-        )
-      )}
-    </button>
+      <span aria-hidden="true">
+        ✕
+      </span>
 
-    <span class="pd-vote-count">
+      <span>
+        ${esc(
+          pdT(
+            "no"
+          )
+        )}
+      </span>
+
       ${
-        summary.total
-          ? esc(
-              `${summary.total} ${pdT("votes")}`
-            )
+        noCount
+          ? `
+
+            <span class="pd-vote-number">
+              ${noCount}
+            </span>
+
+          `
           : ""
       }
-    </span>
+
+    </button>
 
   `;
 
@@ -3405,10 +4869,7 @@ function(place){
     vote
   );
 
-};
-
-
-/* =========================================================
+};/* =========================================================
    SEARCH
    Broad discovery first.
    Pet-friendly is a STATUS,
@@ -3714,6 +5175,12 @@ function pdOsmQuery(
     "all"
   ){
 
+    /*
+       Keep the "All" discovery broad enough to surface useful
+       venue types, while OSM dog tags still give stronger
+       pet-policy evidence when available.
+    */
+
     lines = [
 
       `nwr["amenity"="cafe"]${dog}${full};`,
@@ -3722,9 +5189,23 @@ function pdOsmQuery(
 
       `nwr["amenity"="pub"]${dog}${full};`,
 
+      `nwr["amenity"="bar"]${dog}${full};`,
+
       `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment)$"]${dog}${full};`,
 
       `nwr["leisure"="dog_park"]${full};`,
+
+      `nwr["natural"="beach"]${dog}${full};`,
+
+      `nwr["amenity"="cafe"]${broad};`,
+
+      `nwr["amenity"="restaurant"]${broad};`,
+
+      `nwr["amenity"="pub"]${broad};`,
+
+      `nwr["amenity"="bar"]${broad};`,
+
+      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment)$"]${broad};`,
 
       `nwr["amenity"="veterinary"]${broad};`,
 
@@ -3940,7 +5421,7 @@ async function(){
 
 
   /*
-     Geoapify and OSM now start together.
+     Geoapify and OSM start together.
 
      Geoapify broad results can appear immediately.
      OSM cannot block the whole search.
