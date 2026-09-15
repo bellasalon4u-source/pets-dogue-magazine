@@ -2,27 +2,20 @@
 
 /* =========================================================
    PETS & DOGUE
-   GLOBAL HELP / FAQ ASSISTANT — MISO
+   GLOBAL MISO HELP / FAQ
 
    IMPORTANT:
-   - This is HELP / FAQ only.
-   - It is NOT the PETS & DOGUE home page.
-   - Every fresh opening ALWAYS starts at ALL HELP TOPICS.
-   - A specific FAQ category opens ONLY after the user taps it.
-   - Search is reset on every fresh opening.
-   - Scroll is reset on every fresh opening.
-   - Multilingual architecture preserved.
-   - Arabic RTL preserved.
-   - Text-to-speech preserved.
-   - Floating draggable Miso preserved.
-   - Floating position preserved.
+   1. Clicking Miso ALWAYS opens the MAIN HELP TOPICS screen.
+   2. Topic -> questions -> answer.
+   3. Closing and reopening NEVER restores an old topic.
+   4. Search always starts from all FAQ content.
+   5. Multilingual + Arabic RTL.
+   6. Text-to-speech preserved.
+   7. Floating Miso remains draggable.
+   8. Miso image: /miso-help.png
 ========================================================= */
 
 (function () {
-
-  /* =======================================================
-     STORAGE / LANGUAGE
-  ======================================================= */
 
   const LANGUAGE_KEY = "pets_dogue_language";
   const POSITION_KEY = "pets_dogue_help_position_v1";
@@ -36,14 +29,13 @@
   };
 
   const supported = [
-    "en", "uk", "ru", "fr", "de", "es", "it", "pt", "nl",
-    "pl", "cs", "sk", "hu", "ro", "bg", "el", "sv", "da",
-    "no", "fi", "tr", "ar", "hi"
+    "en", "uk", "ru", "fr", "de", "es", "it", "pt", "nl", "pl",
+    "cs", "sk", "hu", "ro", "bg", "el", "sv", "da", "no", "fi",
+    "tr", "ar", "hi"
   ];
 
-
   /* =======================================================
-     MISO IMAGE
+     FALLBACK MISO
   ======================================================= */
 
   const FALLBACK_MISO =
@@ -81,14 +73,6 @@
           stroke-width="5"
         />
 
-        <path
-          d="M42 75 C42 48 56 31 80 31 C104 31 118 48 118 75"
-          fill="none"
-          stroke="#111"
-          stroke-width="8"
-          stroke-linecap="round"
-        />
-
         <circle cx="64" cy="78" r="6" fill="#111"/>
         <circle cx="96" cy="78" r="6" fill="#111"/>
 
@@ -104,33 +88,8 @@
           stroke-width="4"
           stroke-linecap="round"
         />
-
-        <circle cx="128" cy="122" r="5" fill="#54ef0b"/>
       </svg>
     `);
-
-
-  function iconUrl() {
-    return window.PETS_DOGUE_HELP_ICON || "/miso-help.png";
-  }
-
-
-  function imageMarkup() {
-    return `
-      <img
-        src="${iconUrl()}"
-        alt="Miso"
-        draggable="false"
-        onerror="
-          if(!this.dataset.fallback){
-            this.dataset.fallback='1';
-            this.src='${FALLBACK_MISO}';
-          }
-        "
-      >
-    `;
-  }
-
 
   /* =======================================================
      LANGUAGE
@@ -142,7 +101,7 @@
 
     try {
       value = localStorage.getItem(LANGUAGE_KEY) || "";
-    } catch {}
+    } catch (error) {}
 
     value = String(value)
       .toLowerCase()
@@ -156,7 +115,6 @@
       : "en";
   }
 
-
   /* =======================================================
      UI TRANSLATIONS
   ======================================================= */
@@ -166,7 +124,7 @@
     en: {
       help: "Help",
       title: "How can Miso help?",
-      intro: "Find quick answers about PETS & DOGUE. Choose a help topic below or search for your question.",
+      intro: "Quick answers about PETS & DOGUE are collected here. Choose a section below or type your question in search.",
       search: "Search Help",
       placeholder: "What would you like to know?",
       topics: "Help topics",
@@ -175,22 +133,24 @@
       close: "Close Help",
       speak: "Read aloud",
       stop: "Stop reading",
-      back: "Back to all topics"
+      backTopics: "Back to all topics",
+      backQuestions: "Back to questions"
     },
 
     uk: {
       help: "Допомога",
       title: "Як Місо може допомогти?",
-      intro: "Знайдіть швидкі відповіді про PETS & DOGUE. Оберіть розділ допомоги нижче або введіть своє запитання.",
+      intro: "Тут зібрані швидкі відповіді про PETS & DOGUE. Оберіть потрібний розділ нижче або введіть своє запитання в пошуку.",
       search: "Пошук у довідці",
       placeholder: "Що ви хочете дізнатися?",
       topics: "Розділи допомоги",
       results: "Результати пошуку",
       noResults: "Відповідей не знайдено. Спробуйте інші слова.",
-      close: "Закрити довідку",
+      close: "Закрити допомогу",
       speak: "Озвучити",
       stop: "Зупинити озвучення",
-      back: "До всіх розділів"
+      backTopics: "До всіх розділів",
+      backQuestions: "До запитань"
     },
 
     ru: {
@@ -205,13 +165,14 @@
       close: "Закрыть помощь",
       speak: "Озвучить",
       stop: "Остановить озвучку",
-      back: "Ко всем разделам"
+      backTopics: "Ко всем разделам",
+      backQuestions: "К вопросам"
     },
 
     fr: {
       help: "Aide",
       title: "Comment Miso peut-elle vous aider ?",
-      intro: "Trouvez rapidement des réponses sur PETS & DOGUE. Choisissez un sujet ou recherchez votre question.",
+      intro: "Retrouvez ici des réponses rapides sur PETS & DOGUE. Choisissez une rubrique ou saisissez votre question.",
       search: "Rechercher dans l'aide",
       placeholder: "Que souhaitez-vous savoir ?",
       topics: "Rubriques d'aide",
@@ -220,13 +181,14 @@
       close: "Fermer l'aide",
       speak: "Lire à voix haute",
       stop: "Arrêter la lecture",
-      back: "Tous les sujets"
+      backTopics: "Toutes les rubriques",
+      backQuestions: "Retour aux questions"
     },
 
     de: {
       help: "Hilfe",
       title: "Wie kann Miso helfen?",
-      intro: "Finde schnelle Antworten zu PETS & DOGUE. Wähle ein Hilfethema oder suche nach deiner Frage.",
+      intro: "Hier findest du schnelle Antworten zu PETS & DOGUE. Wähle einen Bereich oder gib deine Frage ein.",
       search: "Hilfe durchsuchen",
       placeholder: "Was möchtest du wissen?",
       topics: "Hilfethemen",
@@ -235,13 +197,14 @@
       close: "Hilfe schließen",
       speak: "Vorlesen",
       stop: "Vorlesen stoppen",
-      back: "Alle Themen"
+      backTopics: "Alle Themen",
+      backQuestions: "Zurück zu den Fragen"
     },
 
     es: {
       help: "Ayuda",
       title: "¿Cómo puede ayudarte Miso?",
-      intro: "Encuentra respuestas rápidas sobre PETS & DOGUE. Elige un tema o busca tu pregunta.",
+      intro: "Aquí encontrarás respuestas rápidas sobre PETS & DOGUE. Elige una sección o escribe tu pregunta.",
       search: "Buscar ayuda",
       placeholder: "¿Qué quieres saber?",
       topics: "Temas de ayuda",
@@ -250,13 +213,14 @@
       close: "Cerrar ayuda",
       speak: "Leer en voz alta",
       stop: "Detener lectura",
-      back: "Todos los temas"
+      backTopics: "Todos los temas",
+      backQuestions: "Volver a las preguntas"
     },
 
     ar: {
       help: "المساعدة",
       title: "كيف يمكن لميسو مساعدتك؟",
-      intro: "اعثر على إجابات سريعة حول PETS & DOGUE. اختر موضوعاً أدناه أو ابحث عن سؤالك.",
+      intro: "ستجد هنا إجابات سريعة حول PETS & DOGUE. اختر قسماً أو اكتب سؤالك في البحث.",
       search: "البحث في المساعدة",
       placeholder: "ماذا تريد أن تعرف؟",
       topics: "مواضيع المساعدة",
@@ -265,11 +229,11 @@
       close: "إغلاق المساعدة",
       speak: "قراءة بصوت عالٍ",
       stop: "إيقاف القراءة",
-      back: "كل المواضيع"
+      backTopics: "كل المواضيع",
+      backQuestions: "العودة إلى الأسئلة"
     }
 
   };
-
 
   const languageFallbacks = {
 
@@ -355,28 +319,14 @@
 
   };
 
+  Object.entries(languageFallbacks).forEach(([language, values]) => {
 
-  Object.entries(languageFallbacks)
-    .forEach(([language, values]) => {
+    UI[language] = {
+      ...UI.en,
+      ...values
+    };
 
-      UI[language] = {
-        ...UI.en,
-        ...values
-      };
-
-    });
-
-
-  function ui(language, key) {
-
-    return (
-      UI[language]?.[key] ||
-      UI.en[key] ||
-      key
-    );
-
-  }
-
+  });
 
   /* =======================================================
      HELP CONTENT
@@ -390,15 +340,15 @@
         id: "start",
         icon: "✦",
         title: "Getting started",
-        description: "What PETS & DOGUE is and how the platform works.",
+        description: "What PETS & DOGUE is and how to use the platform.",
         items: [
           {
             q: "What is PETS & DOGUE?",
-            a: "PETS & DOGUE is a digital lifestyle platform for pets and the people who love them — bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, Marketplace, member benefits and useful services."
+            a: "PETS & DOGUE is a digital lifestyle platform for pets and the people who love them — bringing together original stories, practical guides, pet-friendly places, health, fashion, photography, community, contests, rescue, Marketplace, member benefits and useful services in one place."
           },
           {
             q: "Do I need an account to use PETS & DOGUE?",
-            a: "No. Visitors can explore PETS & DOGUE without signing in. Subscription unlocks member discounts and special offers and lets members post up to 50 free Marketplace ads."
+            a: "No. PETS & DOGUE content and general features are available to visitors without signing in. Subscription gives access to discounts and special offers and lets members post up to 50 free Marketplace ads."
           },
           {
             q: "What do the three lines at the top mean?",
@@ -470,7 +420,7 @@
         id: "marketplace",
         icon: "▢",
         title: "Marketplace",
-        description: "Listings, buying, selling and member benefits.",
+        description: "Buying, selling and Marketplace member benefits.",
         items: [
           {
             q: "What is Marketplace?",
@@ -507,7 +457,7 @@
       {
         id: "content",
         icon: "◉",
-        title: "Stories, photos & contests",
+        title: "Stories, photos & participation",
         description: "Edition, Cover Star, Articles, Photos, Fashion and Contests.",
         items: [
           {
@@ -529,7 +479,7 @@
         id: "accessibility",
         icon: "🔊",
         title: "Accessibility & audio",
-        description: "Reading PETS & DOGUE information aloud.",
+        description: "How PETS & DOGUE reads content aloud.",
         items: [
           {
             q: "How do I make PETS & DOGUE read text aloud?",
@@ -545,22 +495,21 @@
       {
         id: "business",
         icon: "◆",
-        title: "Businesses & advertising",
-        description: "Working and advertising with PETS & DOGUE.",
+        title: "For businesses & advertisers",
+        description: "Advertising and working with PETS & DOGUE.",
         items: [
           {
             q: "Can a business advertise with PETS & DOGUE?",
             a: "Yes. Open Advertise with us for information about opportunities for brands and businesses."
           },
           {
-            q: "Why PETS & DOGUE?",
+            q: "Why work with PETS & DOGUE?",
             a: "PETS & DOGUE brings editorial content, practical pet services, local discovery, community, Marketplace, participation and member benefits together in one ecosystem."
           }
         ]
       }
 
     ],
-
 
     ru: [
 
@@ -572,11 +521,11 @@
         items: [
           {
             q: "Что такое PETS & DOGUE?",
-            a: "PETS & DOGUE — цифровая lifestyle-платформа для питомцев и людей, которые их любят. Здесь собраны оригинальные истории, полезные материалы, pet-friendly места, здоровье, мода, фотографии, сообщество, конкурсы, помощь животным, Marketplace, преимущества для подписчиков и полезные сервисы."
+            a: "PETS & DOGUE — цифровая lifestyle-платформа для питомцев и людей, которые их любят. Здесь собраны оригинальные истории, полезные материалы, pet-friendly места, здоровье, мода, фотографии, сообщество, конкурсы, помощь животным, Marketplace, преимущества для участников и полезные сервисы."
           },
           {
             q: "Нужен ли аккаунт?",
-            a: "Нет. Основной контент и функции доступны без входа. Подписка даёт скидки, специальные предложения и возможность разместить до 50 бесплатных объявлений в Marketplace."
+            a: "Нет. Основной контент и функции PETS & DOGUE доступны посетителям без входа. Подписка даёт доступ к скидкам и специальным предложениям и позволяет разместить до 50 бесплатных объявлений в Marketplace."
           },
           {
             q: "Что означают три полоски сверху?",
@@ -593,11 +542,11 @@
         items: [
           {
             q: "Как поменять язык?",
-            a: "Откройте меню Contents кнопкой с тремя полосками. В разделе Language выберите нужный язык. PETS & DOGUE запомнит выбор."
+            a: "Откройте меню Contents кнопкой с тремя полосками. В блоке Language выберите нужный язык. PETS & DOGUE запомнит ваш выбор."
           },
           {
             q: "Поддерживается ли арабский?",
-            a: "Да. При выборе арабского поддерживаемые страницы переключаются на направление справа налево."
+            a: "Да. При выборе арабского поддерживаемые страницы используют направление текста справа налево."
           }
         ]
       },
@@ -610,7 +559,7 @@
         items: [
           {
             q: "Как работает Pet-Friendly Places?",
-            a: "Разрешите определение местоположения или введите город, индекс или район. Выберите категорию и радиус поиска. Места появятся карточками и на карте."
+            a: "Разрешите определение местоположения или введите город, индекс или район. Выберите категорию и радиус поиска. Места появятся в карточках и на карте."
           },
           {
             q: "Как добавить pet-friendly место?",
@@ -618,11 +567,11 @@
           },
           {
             q: "Как сохранить место?",
-            a: "Нажмите сердечко на карточке. Позже место можно найти в Saved."
+            a: "Нажмите сердечко на карточке места. Позже его можно снова найти в Saved."
           },
           {
             q: "Как построить маршрут?",
-            a: "Нажмите Route и выберите Google Maps, Waze или Apple Maps."
+            a: "Нажмите Route на карточке места и выберите Google Maps, Waze или Apple Maps."
           }
         ]
       },
@@ -635,11 +584,11 @@
         items: [
           {
             q: "Что такое Local Community?",
-            a: "Local Community — отдельный от Pet-Friendly Places раздел для локальных публикаций, обновлений и полезной информации."
+            a: "Local Community — отдельный от Pet-Friendly Places раздел для локальных публикаций, обновлений и полезной информации для владельцев животных."
           },
           {
             q: "Это то же самое, что Pet-Friendly Places?",
-            a: "Нет. Заведения находятся в Pet-Friendly Places. Локальные публикации, обновления и сообщения находятся в Local Community."
+            a: "Нет. Конкретные заведения относятся к Pet-Friendly Places. Локальные публикации, обновления и сообщения сообщества относятся к Local Community."
           }
         ]
       },
@@ -648,7 +597,7 @@
         id: "marketplace",
         icon: "▢",
         title: "Marketplace",
-        description: "Объявления, покупки, продажи и преимущества подписчиков.",
+        description: "Объявления и преимущества подписчиков.",
         items: [
           {
             q: "Что такое Marketplace?",
@@ -665,15 +614,15 @@
         id: "membership",
         icon: "★",
         title: "Подписка и преимущества",
-        description: "Скидки, специальные предложения и возможности подписчиков.",
+        description: "Скидки, предложения и функции для участников.",
         items: [
           {
             q: "Что даёт подписка?",
-            a: "Подписчики получают скидки и специальные предложения PETS & DOGUE и могут разместить до 50 бесплатных объявлений в Marketplace."
+            a: "Подписчики получают доступ к скидкам и специальным предложениям PETS & DOGUE и могут разместить до 50 бесплатных объявлений в Marketplace."
           },
           {
-            q: "Можно ли пользоваться без подписки?",
-            a: "Да. Основной контент и функции доступны посетителям без подписки."
+            q: "Можно ли пользоваться PETS & DOGUE без подписки?",
+            a: "Да. Основной контент и функции платформы доступны посетителям без подписки."
           },
           {
             q: "Где войти?",
@@ -685,16 +634,16 @@
       {
         id: "content",
         icon: "◉",
-        title: "Истории, фото и конкурсы",
+        title: "Материалы и участие",
         description: "Edition, Cover Star, Articles, Photos, Fashion и Contests.",
         items: [
           {
-            q: "Где читать материалы?",
+            q: "Где читать материалы PETS & DOGUE?",
             a: "Edition и Articles содержат редакционные истории и полезные материалы. Fashion, Health и Photos содержат соответствующий тематический контент."
           },
           {
             q: "Что такое Cover Star?",
-            a: "Cover Star — раздел с питомцами, которые становятся яркими героями PETS & DOGUE."
+            a: "Cover Star — раздел с питомцами, которые становятся специальными героями PETS & DOGUE."
           },
           {
             q: "Где найти конкурсы?",
@@ -711,11 +660,11 @@
         items: [
           {
             q: "Как включить чтение вслух?",
-            a: "Используйте значок громкоговорителя на поддерживаемых страницах."
+            a: "Используйте значок громкоговорителя на поддерживаемых страницах PETS & DOGUE."
           },
           {
-            q: "Как остановить озвучку Мисо?",
-            a: "Нажмите значок громкоговорителя в окне Help. Повторное нажатие снова включает чтение текущей информации."
+            q: "Как остановить озвучивание в помощи?",
+            a: "Нажмите кнопку громкоговорителя в окне помощи. Повторное нажатие снова запускает чтение текущей информации."
           }
         ]
       },
@@ -723,16 +672,16 @@
       {
         id: "business",
         icon: "◆",
-        title: "Бизнес и реклама",
-        description: "Сотрудничество и реклама в PETS & DOGUE.",
+        title: "Для бизнеса и рекламодателей",
+        description: "Реклама и сотрудничество с PETS & DOGUE.",
         items: [
           {
-            q: "Можно ли рекламировать бизнес?",
-            a: "Да. Откройте Advertise with us для информации о возможностях сотрудничества с PETS & DOGUE."
+            q: "Можно ли рекламировать бизнес в PETS & DOGUE?",
+            a: "Да. Откройте Advertise with us, чтобы узнать о возможностях для брендов и бизнеса."
           },
           {
-            q: "Почему PETS & DOGUE?",
-            a: "PETS & DOGUE объединяет редакционный контент, полезные сервисы для питомцев, поиск мест, сообщество, Marketplace, участие пользователей и преимущества подписчиков в одной платформе."
+            q: "Зачем сотрудничать с PETS & DOGUE?",
+            a: "PETS & DOGUE объединяет редакционный контент, полезные сервисы, поиск pet-friendly мест, сообщество, Marketplace, участие пользователей и преимущества подписчиков в одной экосистеме."
           }
         ]
       }
@@ -741,16 +690,21 @@
 
   };
 
-
   function contentFor(language) {
 
-    if (CONTENT[language]) {
-      return CONTENT[language];
-    }
+    return CONTENT[language] || CONTENT.en;
 
-    return CONTENT.en;
   }
 
+  function ui(language, key) {
+
+    return (
+      UI[language]?.[key] ||
+      UI.en[key] ||
+      key
+    );
+
+  }
 
   /* =======================================================
      STYLES
@@ -773,27 +727,17 @@
         right:18px;
         bottom:calc(20px + env(safe-area-inset-bottom));
         z-index:2147483000;
-
         width:72px;
         height:72px;
-
         padding:0;
         overflow:hidden;
-
         border:3px solid #111;
         border-radius:50%;
-
         background:#fff;
-
-        box-shadow:
-          0 10px 30px rgba(0,0,0,.24),
-          0 0 0 2px rgba(255,255,255,.65);
-
+        box-shadow:0 10px 30px rgba(0,0,0,.24);
         touch-action:none;
-
         user-select:none;
         -webkit-user-select:none;
-
         cursor:grab;
       }
 
@@ -811,74 +755,48 @@
 
       #pdHelpButton::after{
         content:"?";
-
         position:absolute;
-        right:-1px;
-        bottom:-1px;
-
-        width:24px;
-        height:24px;
-
+        right:0;
+        bottom:0;
+        width:23px;
+        height:23px;
         display:grid;
         place-items:center;
-
         border:2px solid #111;
         border-radius:50%;
-
         background:#54ef0b;
         color:#071007;
-
         font:900 14px/1 Arial,sans-serif;
       }
-
-
-      /* BACKDROP */
 
       #pdHelpBackdrop{
         position:fixed;
         inset:0;
-
         z-index:2147483001;
-
         display:none;
-
         background:rgba(0,0,0,.54);
-
         backdrop-filter:blur(3px);
-        -webkit-backdrop-filter:blur(3px);
       }
 
       #pdHelpBackdrop.pd-help-open{
         display:block;
       }
 
-
-      /* PANEL */
-
       #pdHelpPanel{
         position:fixed;
-
         z-index:2147483002;
-
         right:14px;
         bottom:14px;
-
-        width:min(490px,calc(100vw - 28px));
-        height:min(780px,calc(100dvh - 28px));
-
+        width:min(470px,calc(100vw - 28px));
+        height:min(760px,calc(100dvh - 28px));
         display:none;
         flex-direction:column;
-
         overflow:hidden;
-
         border:1px solid #111;
-        border-radius:28px;
-
+        border-radius:26px;
         background:#f4efe4;
         color:#111;
-
         box-shadow:0 30px 80px rgba(0,0,0,.34);
-
         font-family:Arial,Helvetica,sans-serif;
       }
 
@@ -891,45 +809,30 @@
         text-align:right;
       }
 
-
-      /* HEADER */
-
       .pd-help-head{
         flex:0 0 auto;
-
         display:flex;
         align-items:center;
-
         gap:12px;
-
-        padding:15px 14px;
-
+        padding:14px;
         background:#070707;
         color:#fff;
       }
 
       .pd-help-miso{
-        flex:0 0 58px;
-
-        width:58px;
-        height:58px;
-
+        flex:0 0 52px;
+        width:52px;
+        height:52px;
         overflow:hidden;
-
         border:2px solid #fff;
         border-radius:50%;
-
         background:#fff;
-
-        box-shadow:0 0 0 1px rgba(255,255,255,.2);
       }
 
       .pd-help-miso img{
         display:block;
-
         width:100%;
         height:100%;
-
         object-fit:cover;
       }
 
@@ -939,53 +842,38 @@
       }
 
       .pd-help-brand{
-        margin:0 0 4px;
-
+        margin:0 0 3px;
         color:#54ef0b;
-
         font-size:10px;
         font-weight:900;
-
-        letter-spacing:1.5px;
-
+        letter-spacing:1.4px;
         text-transform:uppercase;
       }
 
       .pd-help-head h2{
         margin:0;
-
         color:#fff;
-
-        font:400 25px/1.02 Georgia,"Times New Roman",serif;
+        font:400 24px/1.05 Georgia,serif;
       }
 
       .pd-help-head-actions{
-        flex:0 0 auto;
-
         display:flex;
-        gap:8px;
+        gap:7px;
       }
 
       .pd-help-round{
-        flex:0 0 44px;
-
-        width:44px;
-        height:44px;
-
+        flex:0 0 42px;
+        width:42px;
+        height:42px;
         display:grid;
         place-items:center;
-
         padding:0;
-
         border:1px solid rgba(255,255,255,.55);
         border-radius:50%;
-
         background:#fff;
         color:#111;
-
         font-size:19px;
         font-weight:900;
-
         cursor:pointer;
       }
 
@@ -993,145 +881,89 @@
         background:#54ef0b;
       }
 
-
-      /* BODY */
-
       .pd-help-body{
         min-height:0;
         flex:1;
-
         overflow:auto;
-
         overscroll-behavior:contain;
-        -webkit-overflow-scrolling:touch;
-
-        padding:19px 17px 22px;
+        padding:17px;
       }
 
       .pd-help-intro{
-        max-width:410px;
-
         margin:0 0 17px;
-
         color:#575148;
-
         font-size:14px;
         line-height:1.5;
       }
 
-
-      /* SEARCH */
-
       .pd-help-search{
         position:relative;
-
-        margin-bottom:22px;
+        margin-bottom:20px;
       }
 
       .pd-help-search input{
         width:100%;
-        height:56px;
-
-        padding:0 48px 0 17px;
-
+        height:54px;
+        padding:0 48px 0 16px;
         border:1px solid #bdb6a8;
-        border-radius:18px;
-
+        border-radius:16px;
         outline:0;
-
         background:#fff;
         color:#111;
-
         font-size:15px;
-
-        box-shadow:0 2px 0 rgba(0,0,0,.02);
-      }
-
-      #pdHelpPanel[dir="rtl"] .pd-help-search input{
-        padding:0 17px 0 48px;
       }
 
       .pd-help-search input:focus{
         border-color:#111;
+        box-shadow:0 0 0 3px #54ef0b;
+      }
 
-        box-shadow:
-          0 0 0 3px rgba(84,239,11,.25);
+      #pdHelpPanel[dir="rtl"] .pd-help-search input{
+        padding:0 16px 0 48px;
       }
 
       .pd-help-search-icon{
         position:absolute;
-
         top:50%;
-        right:17px;
-
+        right:16px;
         transform:translateY(-50%);
-
         pointer-events:none;
-
-        font-size:21px;
+        font-size:20px;
       }
 
       #pdHelpPanel[dir="rtl"] .pd-help-search-icon{
         right:auto;
-        left:17px;
+        left:16px;
       }
 
-
-      /* SECTION TITLE */
-
       .pd-help-section-title{
-        display:flex;
-        align-items:center;
-        gap:7px;
-
-        margin:0 0 12px;
-
+        margin:0 0 11px;
         font-size:11px;
         font-weight:900;
-
-        letter-spacing:1.35px;
-
+        letter-spacing:1.25px;
         text-transform:uppercase;
       }
 
-
-      /* TOPICS */
-
       .pd-help-topics{
         display:grid;
-
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-
-        gap:11px;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
       }
 
       .pd-help-topic{
         position:relative;
-
         min-height:142px;
-
-        display:flex;
-        flex-direction:column;
-
-        padding:15px;
-
-        overflow:hidden;
-
+        padding:14px 14px 30px;
         border:1px solid #cfc7b8;
-        border-radius:20px;
-
+        border-radius:18px;
         background:#fff;
-        color:#111;
-
         text-align:left;
-
+        color:#111;
         cursor:pointer;
-
         transition:
-          transform .16s ease,
-          border-color .16s ease,
-          box-shadow .16s ease;
+          transform .18s ease,
+          border-color .18s ease,
+          box-shadow .18s ease;
       }
 
       #pdHelpPanel[dir="rtl"] .pd-help-topic{
@@ -1140,128 +972,99 @@
 
       .pd-help-topic:hover{
         border-color:#111;
-
-        box-shadow:0 8px 20px rgba(0,0,0,.06);
-      }
-
-      .pd-help-topic:active{
-        transform:scale(.985);
+        box-shadow:0 7px 20px rgba(0,0,0,.08);
+        transform:translateY(-2px);
       }
 
       .pd-help-topic-icon{
-        flex:0 0 auto;
-
-        width:40px;
-        height:40px;
-
+        width:38px;
+        height:38px;
         display:grid;
         place-items:center;
-
-        margin-bottom:13px;
-
+        margin-bottom:11px;
         border-radius:50%;
-
         background:#54ef0b;
         color:#111;
-
         font-size:18px;
         font-style:normal;
       }
 
       .pd-help-topic strong{
         display:block;
-
         margin-bottom:6px;
-
         font-size:14px;
-        line-height:1.18;
+        line-height:1.2;
       }
 
       .pd-help-topic small{
         display:block;
-
         color:#6e685f;
-
         font-size:11px;
         line-height:1.38;
       }
 
       .pd-help-topic-arrow{
         position:absolute;
-
-        right:13px;
-        bottom:11px;
-
-        color:#aaa397;
-
-        font-size:15px;
+        right:14px;
+        bottom:10px;
+        color:#9d978b;
+        font-size:19px;
+        line-height:1;
       }
 
       #pdHelpPanel[dir="rtl"] .pd-help-topic-arrow{
         right:auto;
-        left:13px;
-
+        left:14px;
         transform:scaleX(-1);
       }
 
-
-      /* BACK */
-
       .pd-help-back{
-        min-height:43px;
-
-        margin:0 0 15px;
-
-        padding:0 16px;
-
+        min-height:40px;
+        margin:0 0 13px;
+        padding:0 14px;
         border:1px solid #111;
         border-radius:999px;
-
         background:#fff;
         color:#111;
-
         font-weight:900;
-
         cursor:pointer;
       }
 
+      .pd-help-topic-heading{
+        margin:2px 0 5px;
+        font:400 27px/1.08 Georgia,serif;
+      }
 
-      /* FAQ */
+      .pd-help-topic-description{
+        margin:0 0 16px;
+        color:#6e685f;
+        font-size:13px;
+        line-height:1.45;
+      }
 
       .pd-help-faq{
         overflow:hidden;
-
-        margin-bottom:10px;
-
+        margin-bottom:9px;
         border:1px solid #cfc7b8;
-        border-radius:18px;
-
+        border-radius:15px;
         background:#fff;
       }
 
       .pd-help-question{
         width:100%;
-        min-height:62px;
-
+        min-height:61px;
         display:flex;
         align-items:center;
         justify-content:space-between;
-
         gap:12px;
-
-        padding:14px 15px;
-
+        padding:13px 14px;
         border:0;
-
         background:#fff;
         color:#111;
-
         text-align:left;
-
-        font-size:14px;
         font-weight:900;
+        font-size:14px;
         line-height:1.3;
-
         cursor:pointer;
       }
 
@@ -1269,34 +1072,15 @@
         text-align:right;
       }
 
-      .pd-help-plus{
-        flex:0 0 24px;
-
-        width:24px;
-        height:24px;
-
-        display:grid;
-        place-items:center;
-
-        border-radius:50%;
-
-        background:#f4efe4;
-
-        font-size:17px;
-        line-height:1;
-      }
-
-      .pd-help-faq.pd-expanded .pd-help-plus{
-        background:#54ef0b;
+      .pd-help-question-symbol{
+        flex:0 0 auto;
+        font-size:19px;
       }
 
       .pd-help-answer{
         display:none;
-
-        padding:0 15px 17px;
-
+        padding:0 14px 16px;
         color:#575148;
-
         font-size:14px;
         line-height:1.55;
       }
@@ -1305,97 +1089,81 @@
         display:block;
       }
 
-
-      /* EMPTY SEARCH */
-
-      .pd-help-empty{
-        padding:38px 18px;
-
+      .pd-help-answer-view{
+        padding:18px;
         border:1px solid #cfc7b8;
         border-radius:18px;
-
         background:#fff;
-        color:#575148;
-
-        text-align:center;
-
-        font-size:14px;
-        line-height:1.45;
       }
 
+      .pd-help-answer-label{
+        margin:0 0 9px;
+        color:#54c90e;
+        font-size:10px;
+        font-weight:900;
+        letter-spacing:1.2px;
+        text-transform:uppercase;
+      }
 
-      /* FOOTER */
+      .pd-help-answer-view h3{
+        margin:0 0 14px;
+        font:400 25px/1.15 Georgia,serif;
+      }
+
+      .pd-help-answer-view p{
+        margin:0;
+        color:#575148;
+        font-size:15px;
+        line-height:1.6;
+      }
+
+      .pd-help-empty{
+        padding:35px 15px;
+        border:1px solid #cfc7b8;
+        border-radius:17px;
+        background:#fff;
+        color:#575148;
+        text-align:center;
+      }
 
       .pd-help-footer{
         flex:0 0 auto;
-
-        padding:
-          11px
-          14px
-          calc(11px + env(safe-area-inset-bottom));
-
+        padding:10px 14px calc(10px + env(safe-area-inset-bottom));
         border-top:1px solid #cfc7b8;
-
         background:#fff;
         color:#6e685f;
-
         text-align:center;
-
         font-size:10px;
         font-weight:800;
-
         letter-spacing:.5px;
       }
-
-
-      /* MOBILE */
 
       @media(max-width:560px){
 
         #pdHelpButton{
           width:66px;
           height:66px;
-
           right:14px;
-
-          bottom:
-            calc(
-              16px +
-              env(safe-area-inset-bottom)
-            );
+          bottom:calc(16px + env(safe-area-inset-bottom));
         }
 
         #pdHelpPanel{
           right:0;
           bottom:0;
-
           width:100vw;
-          height:min(88dvh,840px);
-
+          height:min(88dvh,820px);
           border-left:0;
           border-right:0;
           border-bottom:0;
-
-          border-radius:25px 25px 0 0;
+          border-radius:24px 24px 0 0;
         }
 
         .pd-help-head{
-          padding:14px 13px;
-        }
-
-        .pd-help-miso{
-          flex-basis:54px;
-
-          width:54px;
-          height:54px;
-        }
-
-        .pd-help-head h2{
-          font-size:24px;
+          padding:14px 16px;
         }
 
         .pd-help-body{
-          padding:17px 14px 22px;
+          padding:16px;
         }
 
         .pd-help-topics{
@@ -1403,13 +1171,11 @@
         }
 
         .pd-help-topic{
-          min-height:138px;
-
-          padding:14px;
+          min-height:139px;
+          padding:13px 13px 29px;
         }
 
       }
-
 
       @media(max-width:370px){
 
@@ -1417,14 +1183,7 @@
           grid-template-columns:1fr;
         }
 
-        .pd-help-topic{
-          min-height:112px;
-        }
-
       }
-
-
-      /* ACCESSIBILITY */
 
       #pdHelpButton:focus-visible,
       #pdHelpPanel button:focus-visible,
@@ -1438,7 +1197,6 @@
     document.head.appendChild(style);
   }
 
-
   /* =======================================================
      DOM STATE
   ======================================================= */
@@ -1446,18 +1204,47 @@
   let button = null;
   let panel = null;
   let backdrop = null;
-
   let bodyBox = null;
   let searchInput = null;
   let speakerButton = null;
 
   let language = detectLanguage();
 
+  let currentScreen = "topics";
   let activeTopic = "";
+  let activeQuestion = -1;
+
   let speaking = false;
 
-  let helpSession = 0;
+  /* =======================================================
+     IMAGE
+  ======================================================= */
 
+  function iconUrl() {
+
+    return (
+      window.PETS_DOGUE_HELP_ICON ||
+      "/miso-help.png"
+    );
+
+  }
+
+  function imageMarkup() {
+
+    return `
+      <img
+        src="${iconUrl()}"
+        alt="Miso"
+        onerror="
+          if(!this.dataset.fallback){
+            this.dataset.fallback='1';
+            this.src='${FALLBACK_MISO}';
+          }
+        "
+      >
+    `;
+
+  }
 
   /* =======================================================
      BUILD DOM
@@ -1465,77 +1252,38 @@
 
   function buildDom() {
 
-    const existingButton =
+    const oldButton =
       document.getElementById("pdHelpButton");
 
-    const existingPanel =
-      document.getElementById("pdHelpPanel");
-
-    const existingBackdrop =
+    const oldBackdrop =
       document.getElementById("pdHelpBackdrop");
 
+    const oldPanel =
+      document.getElementById("pdHelpPanel");
 
-    /*
-      IMPORTANT:
-      If an older copy somehow already exists,
-      remove it before building the current assistant.
-      This prevents two Help instances from fighting
-      over the visible state.
-    */
+    if (oldButton || oldBackdrop || oldPanel) {
 
-    if (existingButton) {
-      existingButton.remove();
+      oldButton?.remove();
+      oldBackdrop?.remove();
+      oldPanel?.remove();
+
     }
-
-    if (existingPanel) {
-      existingPanel.remove();
-    }
-
-    if (existingBackdrop) {
-      existingBackdrop.remove();
-    }
-
 
     installStyles();
 
-
     backdrop = document.createElement("div");
-
     backdrop.id = "pdHelpBackdrop";
-
-    backdrop.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
+    backdrop.setAttribute("aria-hidden", "true");
 
     panel = document.createElement("section");
-
     panel.id = "pdHelpPanel";
-
-    panel.setAttribute(
-      "role",
-      "dialog"
-    );
-
-    panel.setAttribute(
-      "aria-modal",
-      "true"
-    );
-
-    panel.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
 
     button = document.createElement("button");
-
     button.id = "pdHelpButton";
     button.type = "button";
-
     button.innerHTML = imageMarkup();
-
 
     document.body.append(
       backdrop,
@@ -1543,29 +1291,26 @@
       button
     );
 
-
-    renderPanelShell();
+    renderPanel();
     bindFloatingButton();
-
 
     backdrop.addEventListener(
       "click",
       closeHelp
     );
 
-
     window.addEventListener(
       "resize",
       keepButtonOnScreen
     );
-  }
 
+  }
 
   /* =======================================================
      PANEL SHELL
   ======================================================= */
 
-  function renderPanelShell() {
+  function renderPanel() {
 
     if (!panel) {
       return;
@@ -1576,47 +1321,31 @@
     const rtl =
       language === "ar";
 
-
     panel.dir =
-      rtl
-        ? "rtl"
-        : "ltr";
-
+      rtl ? "rtl" : "ltr";
 
     panel.setAttribute(
       "aria-label",
       ui(language, "help")
     );
 
-
     button?.setAttribute(
       "aria-label",
       ui(language, "help")
     );
 
-
-    button?.setAttribute(
-      "title",
-      ui(language, "help")
-    );
-
-
     panel.innerHTML = `
 
       <header class="pd-help-head">
 
-        <div
-          class="pd-help-miso"
-          aria-hidden="true"
-        >
+        <div class="pd-help-miso">
           ${imageMarkup()}
         </div>
 
         <div class="pd-help-head-copy">
 
           <div class="pd-help-brand">
-            PETS &amp; DOGUE ·
-            ${escapeHtml(ui(language, "help"))}
+            PETS &amp; DOGUE · ${escapeHtml(ui(language, "help"))}
           </div>
 
           <h2>
@@ -1632,7 +1361,6 @@
             class="pd-help-round"
             type="button"
             aria-label="${escapeHtml(ui(language, "speak"))}"
-            title="${escapeHtml(ui(language, "speak"))}"
           >
             🔊
           </button>
@@ -1642,7 +1370,6 @@
             class="pd-help-round"
             type="button"
             aria-label="${escapeHtml(ui(language, "close"))}"
-            title="${escapeHtml(ui(language, "close"))}"
           >
             ×
           </button>
@@ -1651,9 +1378,8 @@
 
       </header>
 
-
       <div
-        id="pdHelpBody"
+        id="pdHelpBodyScroll"
         class="pd-help-body"
       >
 
@@ -1661,15 +1387,12 @@
           ${escapeHtml(ui(language, "intro"))}
         </p>
 
-
         <div class="pd-help-search">
 
           <input
             id="pdHelpSearch"
             type="search"
             autocomplete="off"
-            autocapitalize="sentences"
-            spellcheck="true"
             aria-label="${escapeHtml(ui(language, "search"))}"
             placeholder="${escapeHtml(ui(language, "placeholder"))}"
           >
@@ -1683,11 +1406,9 @@
 
         </div>
 
-
         <div id="pdHelpContent"></div>
 
       </div>
-
 
       <footer class="pd-help-footer">
         PETS &amp; DOGUE — One world. Every pet.
@@ -1695,119 +1416,78 @@
 
     `;
 
-
     bodyBox =
-      panel.querySelector(
-        "#pdHelpContent"
-      );
-
+      panel.querySelector("#pdHelpContent");
 
     searchInput =
-      panel.querySelector(
-        "#pdHelpSearch"
-      );
-
+      panel.querySelector("#pdHelpSearch");
 
     speakerButton =
-      panel.querySelector(
-        "#pdHelpSpeaker"
+      panel.querySelector("#pdHelpSpeaker");
+
+    panel
+      .querySelector("#pdHelpClose")
+      .addEventListener(
+        "click",
+        closeHelp
       );
 
-
-    const closeButton =
-      panel.querySelector(
-        "#pdHelpClose"
-      );
-
-
-    closeButton?.addEventListener(
-      "click",
-      closeHelp
-    );
-
-
-    speakerButton?.addEventListener(
+    speakerButton.addEventListener(
       "click",
       toggleSpeech
     );
 
-
-    searchInput?.addEventListener(
+    searchInput.addEventListener(
       "input",
       function () {
 
+        currentScreen = "search";
         activeTopic = "";
+        activeQuestion = -1;
 
-        renderSearch(
-          this.value
-        );
+        renderSearch(this.value);
 
       }
     );
 
-
     /*
-      Shell creation itself always gets the
-      ALL TOPICS view.
+      CRITICAL:
+      Building/rebuilding the panel always renders the MAIN screen.
     */
+    resetToMainTopics(false);
 
-    renderTopics();
-    updateSpeaker();
   }
 
-
   /* =======================================================
-     RESET HELP HOME
+     RESET TO MAIN TOPICS
 
-     THIS IS THE KEY FIX.
-
-     Every fresh opening calls this function.
-     It is impossible for a previous category to remain
-     the first visible Help screen.
+     This is the important part:
+     Every opening calls this function.
   ======================================================= */
 
-  function resetToHelpHome() {
+  function resetToMainTopics(clearSearch = true) {
 
+    currentScreen = "topics";
     activeTopic = "";
+    activeQuestion = -1;
 
-    helpSession += 1;
-
-
-    if (searchInput) {
+    if (clearSearch && searchInput) {
       searchInput.value = "";
     }
 
-
     renderTopics();
 
-
     const scrollBox =
-      panel?.querySelector(
-        ".pd-help-body"
-      );
-
+      panel?.querySelector("#pdHelpBodyScroll");
 
     if (scrollBox) {
-
       scrollBox.scrollTop = 0;
-
     }
 
-
-    /*
-      Remove any accidental URL fragment/state that
-      belongs only to the Help assistant itself.
-      We intentionally do NOT touch the site's real URL.
-    */
-
-    panel?.removeAttribute(
-      "data-active-topic"
-    );
   }
 
-
   /* =======================================================
-     TOPIC HOME
+     MAIN TOPICS SCREEN
   ======================================================= */
 
   function renderTopics() {
@@ -1816,19 +1496,18 @@
       return;
     }
 
+    currentScreen = "topics";
+    activeTopic = "";
+    activeQuestion = -1;
 
     const content =
-      contentFor(
-        language
-      );
-
+      contentFor(language);
 
     bodyBox.innerHTML = `
 
       <h3 class="pd-help-section-title">
         ${escapeHtml(ui(language, "topics"))}
       </h3>
-
 
       <div class="pd-help-topics">
 
@@ -1848,16 +1527,13 @@
               ${topic.icon}
             </i>
 
-
             <strong>
               ${escapeHtml(topic.title)}
             </strong>
 
-
             <small>
               ${escapeHtml(topic.description)}
             </small>
-
 
             <span
               class="pd-help-topic-arrow"
@@ -1874,124 +1550,204 @@
 
     `;
 
-
     bodyBox
-      .querySelectorAll(
-        "[data-help-topic]"
-      )
+      .querySelectorAll("[data-help-topic]")
       .forEach(topicButton => {
 
         topicButton.addEventListener(
           "click",
-          () => {
+          function () {
 
             openTopic(
-              topicButton.dataset.helpTopic
+              this.dataset.helpTopic
             );
 
           }
         );
 
       });
+
   }
 
-
   /* =======================================================
-     OPEN ONE FAQ CATEGORY
+     TOPIC -> QUESTIONS
   ======================================================= */
 
   function openTopic(id) {
 
     const topic =
       contentFor(language)
-        .find(
-          item =>
-            item.id === id
-        );
-
+        .find(item => item.id === id);
 
     if (!topic) {
-
-      resetToHelpHome();
-
+      resetToMainTopics();
       return;
     }
 
-
+    currentScreen = "topic";
     activeTopic = id;
-
-
-    panel?.setAttribute(
-      "data-active-topic",
-      id
-    );
-
+    activeQuestion = -1;
 
     bodyBox.innerHTML = `
 
       <button
-        id="pdHelpBack"
+        id="pdHelpBackTopics"
         class="pd-help-back"
         type="button"
       >
-        ← ${escapeHtml(ui(language, "back"))}
+        ← ${escapeHtml(ui(language, "backTopics"))}
       </button>
 
+      <div
+        class="pd-help-topic-icon"
+        aria-hidden="true"
+      >
+        ${topic.icon}
+      </div>
 
-      <h3 class="pd-help-section-title">
-
-        <span aria-hidden="true">
-          ${topic.icon}
-        </span>
-
+      <h3 class="pd-help-topic-heading">
         ${escapeHtml(topic.title)}
-
       </h3>
 
+      <p class="pd-help-topic-description">
+        ${escapeHtml(topic.description)}
+      </p>
 
-      ${topic.items.map(item =>
-        faqMarkup(
-          item,
-          false
-        )
-      ).join("")}
+      <div class="pd-help-question-list">
+
+        ${topic.items.map((item, index) => `
+
+          <article class="pd-help-faq">
+
+            <button
+              class="pd-help-question"
+              type="button"
+              data-help-question="${index}"
+            >
+
+              <span>
+                ${escapeHtml(item.q)}
+              </span>
+
+              <span
+                class="pd-help-question-symbol"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </button>
+
+          </article>
+
+        `).join("")}
+
+      </div>
 
     `;
 
-
     bodyBox
-      .querySelector(
-        "#pdHelpBack"
-      )
-      ?.addEventListener(
+      .querySelector("#pdHelpBackTopics")
+      .addEventListener(
         "click",
-        () => {
+        function () {
 
-          resetToHelpHome();
+          resetToMainTopics();
 
         }
       );
 
+    bodyBox
+      .querySelectorAll("[data-help-question]")
+      .forEach(questionButton => {
 
-    bindFaqs();
+        questionButton.addEventListener(
+          "click",
+          function () {
 
+            openAnswer(
+              id,
+              Number(this.dataset.helpQuestion)
+            );
 
-    const scrollBox =
-      panel?.querySelector(
-        ".pd-help-body"
-      );
+          }
+        );
 
-
-    if (scrollBox) {
-
-      scrollBox.scrollTo({
-        top: 0,
-        behavior: "smooth"
       });
 
-    }
+    scrollHelpToTop();
+
   }
 
+  /* =======================================================
+     QUESTION -> ONE ANSWER
+  ======================================================= */
+
+  function openAnswer(topicId, questionIndex) {
+
+    const topic =
+      contentFor(language)
+        .find(item => item.id === topicId);
+
+    if (!topic) {
+      resetToMainTopics();
+      return;
+    }
+
+    const item =
+      topic.items[questionIndex];
+
+    if (!item) {
+      openTopic(topicId);
+      return;
+    }
+
+    currentScreen = "answer";
+    activeTopic = topicId;
+    activeQuestion = questionIndex;
+
+    bodyBox.innerHTML = `
+
+      <button
+        id="pdHelpBackQuestions"
+        class="pd-help-back"
+        type="button"
+      >
+        ← ${escapeHtml(ui(language, "backQuestions"))}
+      </button>
+
+      <div class="pd-help-answer-view">
+
+        <div class="pd-help-answer-label">
+          ${escapeHtml(topic.title)}
+        </div>
+
+        <h3>
+          ${escapeHtml(item.q)}
+        </h3>
+
+        <p>
+          ${escapeHtml(item.a)}
+        </p>
+
+      </div>
+
+    `;
+
+    bodyBox
+      .querySelector("#pdHelpBackQuestions")
+      .addEventListener(
+        "click",
+        function () {
+
+          openTopic(topicId);
+
+        }
+      );
+
+    scrollHelpToTop();
+
+  }
 
   /* =======================================================
      SEARCH
@@ -1999,77 +1755,60 @@
 
   function normalizeSearch(value) {
 
-    return String(
-      value || ""
-    )
+    return String(value || "")
       .toLocaleLowerCase()
       .normalize("NFKD")
-      .replace(
-        /[\u0300-\u036f]/g,
-        ""
-      )
+      .replace(/[\u0300-\u036f]/g, "")
       .trim();
-  }
 
+  }
 
   function allAnswers() {
 
     const output = [];
 
+    contentFor(language).forEach(topic => {
 
-    contentFor(language)
-      .forEach(topic => {
+      topic.items.forEach((item, index) => {
 
-        topic.items
-          .forEach(item => {
-
-            output.push({
-              ...item,
-              topic: topic.title,
-              icon: topic.icon
-            });
-
-          });
+        output.push({
+          ...item,
+          topicId: topic.id,
+          questionIndex: index,
+          topic: topic.title,
+          icon: topic.icon
+        });
 
       });
 
+    });
 
     return output;
-  }
 
+  }
 
   function renderSearch(query) {
 
-    const cleanQuery =
-      normalizeSearch(
-        query
-      );
-
-
-    /*
-      Empty search = ALL HELP TOPICS.
-      Never return to the last opened category.
-    */
-
-    if (cleanQuery.length < 2) {
-
-      activeTopic = "";
-
-      panel?.removeAttribute(
-        "data-active-topic"
-      );
-
-      renderTopics();
-
+    if (!bodyBox) {
       return;
     }
 
+    const cleanQuery =
+      normalizeSearch(query);
+
+    if (cleanQuery.length < 2) {
+
+      resetToMainTopics(false);
+      return;
+
+    }
+
+    currentScreen = "search";
 
     const words =
       cleanQuery
         .split(/\s+/)
         .filter(Boolean);
-
 
     const matches =
       allAnswers()
@@ -2084,7 +1823,6 @@
               ].join(" ")
             );
 
-
           const score =
             words.reduce(
               (total, word) =>
@@ -2097,22 +1835,14 @@
               0
             );
 
-
           return {
             ...item,
             score
           };
 
         })
-        .filter(
-          item =>
-            item.score > 0
-        )
-        .sort(
-          (a, b) =>
-            b.score - a.score
-        );
-
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score);
 
     if (!matches.length) {
 
@@ -2131,150 +1861,101 @@
       return;
     }
 
-
     bodyBox.innerHTML = `
 
       <h3 class="pd-help-section-title">
         ${escapeHtml(ui(language, "results"))}
       </h3>
 
+      ${matches.slice(0, 20).map((item, index) => `
 
-      ${matches
-        .slice(0, 20)
-        .map(
-          item =>
-            faqMarkup(
-              item,
-              false
-            )
-        )
-        .join("")
-      }
+        <article class="pd-help-faq">
 
-    `;
-
-
-    bindFaqs();
-  }
-
-
-  /* =======================================================
-     FAQ
-  ======================================================= */
-
-  function faqMarkup(
-    item,
-    expanded = false
-  ) {
-
-    return `
-
-      <article
-        class="pd-help-faq
-        ${expanded ? "pd-expanded" : ""}"
-      >
-
-        <button
-          class="pd-help-question"
-          type="button"
-          aria-expanded="${expanded ? "true" : "false"}"
-        >
-
-          <span>
-            ${escapeHtml(item.q)}
-          </span>
-
-
-          <span
-            class="pd-help-plus"
-            aria-hidden="true"
+          <button
+            class="pd-help-question"
+            type="button"
+            data-search-result="${index}"
           >
-            ${expanded ? "−" : "+"}
-          </span>
 
-        </button>
+            <span>
+              ${escapeHtml(item.q)}
+            </span>
 
+            <span
+              class="pd-help-question-symbol"
+              aria-hidden="true"
+            >
+              →
+            </span>
 
-        <div class="pd-help-answer">
-          ${escapeHtml(item.a)}
-        </div>
+          </button>
 
-      </article>
+        </article>
+
+      `).join("")}
 
     `;
-  }
-
-
-  function bindFaqs() {
-
-    if (!bodyBox) {
-      return;
-    }
-
 
     bodyBox
-      .querySelectorAll(
-        ".pd-help-question"
-      )
-      .forEach(question => {
+      .querySelectorAll("[data-search-result]")
+      .forEach(resultButton => {
 
-        question.addEventListener(
+        resultButton.addEventListener(
           "click",
-          () => {
+          function () {
 
-            const faq =
-              question.closest(
-                ".pd-help-faq"
-              );
+            const result =
+              matches[
+                Number(this.dataset.searchResult)
+              ];
 
-
-            if (!faq) {
+            if (!result) {
               return;
             }
 
-
-            const expanded =
-              faq.classList.toggle(
-                "pd-expanded"
-              );
-
-
-            question.setAttribute(
-              "aria-expanded",
-              String(expanded)
-            );
-
-
-            const icon =
-              question.querySelector(
-                ".pd-help-plus"
-              );
-
-
-            if (icon) {
-
-              icon.textContent =
-                expanded
-                  ? "−"
-                  : "+";
-
+            if (searchInput) {
+              searchInput.value = "";
             }
+
+            openAnswer(
+              result.topicId,
+              result.questionIndex
+            );
 
           }
         );
 
       });
+
   }
 
+  /* =======================================================
+     SCROLL
+  ======================================================= */
+
+  function scrollHelpToTop() {
+
+    const scrollBox =
+      panel?.querySelector("#pdHelpBodyScroll");
+
+    if (!scrollBox) {
+      return;
+    }
+
+    scrollBox.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
 
   /* =======================================================
-     TEXT TO SPEECH
+     SPEECH
   ======================================================= */
 
   function speechLanguage() {
 
     const map = {
-
       en: "en-GB",
       uk: "uk-UA",
       ru: "ru-RU",
@@ -2298,16 +1979,10 @@
       tr: "tr-TR",
       ar: "ar-SA",
       hi: "hi-IN"
-
     };
 
-
-    return (
-      map[language] ||
-      language
-    );
+    return map[language] || language;
   }
-
 
   function textToSpeak() {
 
@@ -2315,15 +1990,10 @@
       return "";
     }
 
-
     const visibleText =
       panel
-        .querySelector(
-          "#pdHelpBody"
-        )
-        ?.innerText ||
-        "";
-
+        .querySelector("#pdHelpBodyScroll")
+        ?.innerText || "";
 
     return [
       ui(language, "title"),
@@ -2331,112 +2001,80 @@
     ]
       .filter(Boolean)
       .join(". ");
-  }
 
+  }
 
   function stopSpeech() {
 
-    if (
-      "speechSynthesis" in window
-    ) {
-
+    if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
-
     }
 
-
     speaking = false;
-
     updateSpeaker();
-  }
 
+  }
 
   function startSpeech() {
 
-    if (
-      !(
-        "speechSynthesis" in window
-      )
-    ) {
+    if (!("speechSynthesis" in window)) {
       return;
     }
 
-
     const text =
       textToSpeak();
-
 
     if (!text) {
       return;
     }
 
-
     window.speechSynthesis.cancel();
 
-
     const utterance =
-      new SpeechSynthesisUtterance(
-        text
-      );
-
+      new SpeechSynthesisUtterance(text);
 
     utterance.lang =
       speechLanguage();
 
-
     utterance.rate = 1;
     utterance.pitch = 1;
 
+    utterance.onstart = function () {
 
-    utterance.onstart =
-      () => {
+      speaking = true;
+      updateSpeaker();
 
-        speaking = true;
+    };
 
-        updateSpeaker();
+    utterance.onend = function () {
 
-      };
+      speaking = false;
+      updateSpeaker();
 
+    };
 
-    utterance.onend =
-      () => {
+    utterance.onerror = function () {
 
-        speaking = false;
+      speaking = false;
+      updateSpeaker();
 
-        updateSpeaker();
-
-      };
-
-
-    utterance.onerror =
-      () => {
-
-        speaking = false;
-
-        updateSpeaker();
-
-      };
-
+    };
 
     window.speechSynthesis.speak(
       utterance
     );
-  }
 
+  }
 
   function toggleSpeech() {
 
     if (speaking) {
-
       stopSpeech();
-
     } else {
-
       startSpeech();
-
     }
-  }
 
+  }
 
   function updateSpeaker() {
 
@@ -2444,257 +2082,138 @@
       return;
     }
 
-
     speakerButton.classList.toggle(
       "pd-speaking",
       speaking
     );
 
-
     speakerButton.textContent =
-      speaking
-        ? "🔇"
-        : "🔊";
-
+      speaking ? "🔇" : "🔊";
 
     const label =
       speaking
         ? ui(language, "stop")
         : ui(language, "speak");
 
-
     speakerButton.setAttribute(
       "aria-label",
       label
     );
 
-
     speakerButton.title =
       label;
-  }
 
+  }
 
   /* =======================================================
      OPEN / CLOSE
 
-     CRITICAL BEHAVIOUR:
-     OPEN ALWAYS = ALL HELP TOPICS
+     ABSOLUTE RULE:
+     EVERY OPEN = MAIN HELP TOPICS.
   ======================================================= */
 
   function openHelp() {
 
     /*
-      1. Stop anything left from the previous Help session.
+      Stop anything left from previous session.
     */
-
     stopSpeech();
 
+    /*
+      Re-detect language.
+    */
+    language = detectLanguage();
 
     /*
-      2. Re-detect current platform language.
+      Rebuild the Help shell so no old rendered state survives.
     */
-
-    language =
-      detectLanguage();
-
+    renderPanel();
 
     /*
-      3. Rebuild the Help shell.
-      This prevents stale topic DOM/state.
+      Explicitly force MAIN TOPICS.
     */
-
-    renderPanelShell();
-
+    resetToMainTopics(true);
 
     /*
-      4. HARD RESET to Help home.
-      This is deliberately done AFTER rebuilding.
+      Show panel only AFTER the main screen has been rendered.
     */
-
-    resetToHelpHome();
-
-
-    /*
-      5. Open panel only after the correct
-      home screen has already been rendered.
-    */
-
-    panel?.classList.add(
+    panel.classList.add(
       "pd-help-open"
     );
 
-
-    backdrop?.classList.add(
+    backdrop.classList.add(
       "pd-help-open"
     );
 
-
-    panel?.setAttribute(
+    backdrop.setAttribute(
       "aria-hidden",
       "false"
     );
 
-
-    backdrop?.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-
-    if (button) {
-
-      button.style.visibility =
-        "hidden";
-
-    }
-
+    button.style.visibility =
+      "hidden";
 
     document.body.style.overflow =
       "hidden";
 
-
     /*
-      Do NOT focus the search automatically on mobile.
-      Otherwise the keyboard can immediately cover the
-      Help Topics screen.
+      Do NOT automatically focus search.
+      This keeps the main topics visible immediately on mobile
+      and prevents the keyboard from covering them.
     */
-
-    const isMobile =
-      window.matchMedia(
-        "(max-width:560px)"
-      ).matches;
-
-
-    if (!isMobile) {
-
-      setTimeout(
-        () => {
-
-          searchInput?.focus({
-            preventScroll: true
-          });
-
-        },
-        80
-      );
-
-    }
-
-
-    /*
-      Preserve the existing automatic Help speech.
-    */
-
-    const thisSession =
-      helpSession;
-
 
     setTimeout(
-      () => {
-
-        if (
-          thisSession === helpSession &&
-          panel?.classList.contains(
-            "pd-help-open"
-          )
-        ) {
-
-          startSpeech();
-
-        }
-
-      },
-      220
+      startSpeech,
+      250
     );
-  }
 
+  }
 
   function closeHelp() {
 
     stopSpeech();
 
-
     /*
-      Invalidate pending actions from the old session.
+      Destroy navigation state immediately.
     */
-
-    helpSession += 1;
-
-
+    currentScreen = "topics";
     activeTopic = "";
-
+    activeQuestion = -1;
 
     if (searchInput) {
-
       searchInput.value = "";
-
     }
-
 
     /*
-      Reset before closing as well.
-      Therefore the panel can NEVER keep a FAQ category
-      as its stored visible screen.
+      Prepare main topics BEFORE next opening.
     */
-
-    renderTopics();
-
-
-    panel?.removeAttribute(
-      "data-active-topic"
-    );
-
-
-    const scrollBox =
-      panel?.querySelector(
-        ".pd-help-body"
-      );
-
-
-    if (scrollBox) {
-
-      scrollBox.scrollTop = 0;
-
+    if (bodyBox) {
+      renderTopics();
     }
-
 
     panel?.classList.remove(
       "pd-help-open"
     );
 
-
     backdrop?.classList.remove(
       "pd-help-open"
     );
-
-
-    panel?.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
 
     backdrop?.setAttribute(
       "aria-hidden",
       "true"
     );
 
-
     if (button) {
-
-      button.style.visibility =
-        "visible";
-
+      button.style.visibility = "visible";
     }
 
+    document.body.style.overflow = "";
 
-    document.body.style.overflow =
-      "";
   }
 
-
   /* =======================================================
-     SAVED FLOATING POSITION
+     DRAGGABLE MISO
   ======================================================= */
 
   function savedPosition() {
@@ -2702,23 +2221,18 @@
     try {
 
       return JSON.parse(
-        localStorage.getItem(
-          POSITION_KEY
-        ) || "null"
+        localStorage.getItem(POSITION_KEY) || "null"
       );
 
-    } catch {
+    } catch (error) {
 
       return null;
 
     }
+
   }
 
-
-  function savePosition(
-    left,
-    top
-  ) {
+  function savePosition(left, top) {
 
     try {
 
@@ -2730,9 +2244,9 @@
         })
       );
 
-    } catch {}
-  }
+    } catch (error) {}
 
+  }
 
   function restorePosition() {
 
@@ -2740,41 +2254,32 @@
       return;
     }
 
-
     const saved =
       savedPosition();
-
 
     if (
       !saved ||
       !Number.isFinite(saved.left) ||
       !Number.isFinite(saved.top)
     ) {
-
       return;
-
     }
-
 
     button.style.left =
       `${saved.left}px`;
 
-
     button.style.top =
       `${saved.top}px`;
-
 
     button.style.right =
       "auto";
 
-
     button.style.bottom =
       "auto";
 
-
     keepButtonOnScreen();
-  }
 
+  }
 
   function keepButtonOnScreen() {
 
@@ -2782,13 +2287,10 @@
       return;
     }
 
-
     const rect =
       button.getBoundingClientRect();
 
-
     const padding = 8;
-
 
     const maxLeft =
       Math.max(
@@ -2798,7 +2300,6 @@
         padding
       );
 
-
     const maxTop =
       Math.max(
         padding,
@@ -2807,68 +2308,45 @@
         padding
       );
 
-
     const left =
       Math.min(
-        Math.max(
-          rect.left,
-          padding
-        ),
+        Math.max(rect.left, padding),
         maxLeft
       );
 
-
     const top =
       Math.min(
-        Math.max(
-          rect.top,
-          padding
-        ),
+        Math.max(rect.top, padding),
         maxTop
       );
-
 
     button.style.left =
       `${left}px`;
 
-
     button.style.top =
       `${top}px`;
-
 
     button.style.right =
       "auto";
 
-
     button.style.bottom =
       "auto";
+
   }
 
-
-  /* =======================================================
-     DRAGGABLE FLOATING MISO
-  ======================================================= */
-
   function bindFloatingButton() {
-
-    if (!button) {
-      return;
-    }
-
 
     let dragging = false;
     let moved = false;
 
     let startX = 0;
     let startY = 0;
-
     let startLeft = 0;
     let startTop = 0;
 
-
     button.addEventListener(
       "pointerdown",
-      event => {
+      function (event) {
 
         if (
           event.button !== undefined &&
@@ -2877,30 +2355,16 @@
           return;
         }
 
-
         const rect =
           button.getBoundingClientRect();
-
 
         dragging = true;
         moved = false;
 
-
-        startX =
-          event.clientX;
-
-
-        startY =
-          event.clientY;
-
-
-        startLeft =
-          rect.left;
-
-
-        startTop =
-          rect.top;
-
+        startX = event.clientX;
+        startY = event.clientY;
+        startLeft = rect.left;
+        startTop = rect.top;
 
         button.setPointerCapture?.(
           event.pointerId
@@ -2909,54 +2373,40 @@
       }
     );
 
-
     button.addEventListener(
       "pointermove",
-      event => {
+      function (event) {
 
         if (!dragging) {
           return;
         }
 
-
         const dx =
-          event.clientX -
-          startX;
-
+          event.clientX - startX;
 
         const dy =
-          event.clientY -
-          startY;
-
+          event.clientY - startY;
 
         if (
           Math.abs(dx) > 5 ||
           Math.abs(dy) > 5
         ) {
-
           moved = true;
-
         }
-
 
         if (!moved) {
           return;
         }
 
-
         event.preventDefault();
-
 
         const width =
           button.offsetWidth;
 
-
         const height =
           button.offsetHeight;
 
-
         const padding = 8;
-
 
         const left =
           Math.min(
@@ -2969,7 +2419,6 @@
             padding
           );
 
-
         const top =
           Math.min(
             Math.max(
@@ -2981,18 +2430,14 @@
             padding
           );
 
-
         button.style.left =
           `${left}px`;
-
 
         button.style.top =
           `${top}px`;
 
-
         button.style.right =
           "auto";
-
 
         button.style.bottom =
           "auto";
@@ -3000,64 +2445,54 @@
       }
     );
 
-
     button.addEventListener(
       "pointerup",
-      event => {
+      function (event) {
 
         if (!dragging) {
           return;
         }
 
-
         dragging = false;
-
 
         button.releasePointerCapture?.(
           event.pointerId
         );
-
 
         if (moved) {
 
           const rect =
             button.getBoundingClientRect();
 
-
           savePosition(
             rect.left,
             rect.top
           );
 
-
           return;
         }
 
-
         /*
-          A real tap/click ALWAYS calls openHelp(),
-          and openHelp() ALWAYS resets to Help Topics.
+          ONLY click action:
+          always call openHelp(), which always resets to main topics.
         */
-
         openHelp();
 
       }
     );
 
-
     button.addEventListener(
       "pointercancel",
-      () => {
+      function () {
 
         dragging = false;
 
       }
     );
 
-
     button.addEventListener(
       "keydown",
-      event => {
+      function (event) {
 
         if (
           event.key === "Enter" ||
@@ -3065,7 +2500,6 @@
         ) {
 
           event.preventDefault();
-
           openHelp();
 
         }
@@ -3073,10 +2507,9 @@
       }
     );
 
-
     restorePosition();
-  }
 
+  }
 
   /* =======================================================
      HELPERS
@@ -3084,124 +2517,86 @@
 
   function escapeHtml(value) {
 
-    return String(
-      value ?? ""
-    )
-      .replaceAll(
-        "&",
-        "&amp;"
-      )
-      .replaceAll(
-        "<",
-        "&lt;"
-      )
-      .replaceAll(
-        ">",
-        "&gt;"
-      )
-      .replaceAll(
-        '"',
-        "&quot;"
-      )
-      .replaceAll(
-        "'",
-        "&#039;"
-      );
-  }
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
 
+  }
 
   /* =======================================================
      LANGUAGE CHANGE
+
+     If Help is open:
+     language change returns to MAIN TOPICS.
   ======================================================= */
 
-  function handleLanguageChange() {
+  function refreshLanguage() {
 
     const wasOpen =
       panel?.classList.contains(
         "pd-help-open"
       );
 
-
     stopSpeech();
-
 
     language =
       detectLanguage();
 
-
+    currentScreen = "topics";
     activeTopic = "";
+    activeQuestion = -1;
 
-
-    renderPanelShell();
-
-
-    resetToHelpHome();
-
+    renderPanel();
 
     if (wasOpen) {
 
-      panel?.classList.add(
+      resetToMainTopics(true);
+
+      panel.classList.add(
         "pd-help-open"
       );
 
-
-      backdrop?.classList.add(
+      backdrop.classList.add(
         "pd-help-open"
       );
 
-
-      panel?.setAttribute(
+      backdrop.setAttribute(
         "aria-hidden",
         "false"
-      );
-
-
-      backdrop?.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-
-
-      setTimeout(
-        startSpeech,
-        180
       );
 
     }
-  }
 
+  }
 
   window.addEventListener(
     "petsdogue:languagechange",
-    handleLanguageChange
+    refreshLanguage
   );
-
 
   window.addEventListener(
     "storage",
-    event => {
+    function (event) {
 
-      if (
-        event.key !==
-        LANGUAGE_KEY
-      ) {
+      if (event.key !== LANGUAGE_KEY) {
         return;
       }
 
-
-      handleLanguageChange();
+      refreshLanguage();
 
     }
   );
 
-
   /* =======================================================
-     ESCAPE KEY
+     ESCAPE
   ======================================================= */
 
   document.addEventListener(
     "keydown",
-    event => {
+    function (event) {
 
       if (
         event.key === "Escape" &&
@@ -3217,28 +2612,33 @@
     }
   );
 
-
   /* =======================================================
      PUBLIC API
-
-     PetsDogueHelp.open()
-     also ALWAYS opens ALL Help Topics.
   ======================================================= */
 
   window.PetsDogueHelp = {
 
-    open: openHelp,
+    open: function () {
+      openHelp();
+    },
 
-    close: closeHelp,
+    close: function () {
+      closeHelp();
+    },
 
-    home: resetToHelpHome,
+    home: function () {
+      resetToMainTopics(true);
+    },
 
-    speak: startSpeech,
+    speak: function () {
+      startSpeech();
+    },
 
-    stop: stopSpeech
+    stop: function () {
+      stopSpeech();
+    }
 
   };
-
 
   /* =======================================================
      INIT
@@ -3247,16 +2647,11 @@
   function init() {
 
     buildDom();
-
     restorePosition();
 
   }
 
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
+  if (document.readyState === "loading") {
 
     document.addEventListener(
       "DOMContentLoaded",
