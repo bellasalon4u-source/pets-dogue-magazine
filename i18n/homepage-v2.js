@@ -393,7 +393,7 @@
       coverLabel: "COVER STAR",
       helpLabel: "AJUDAR ANIMAIS",
       businessLabel: "TRABALHE COM PETS & DOGUE"
-    }    nl: {
+    },    nl: {
       hero: "Een handige digitale wereld voor mensen die van dieren houden: plekken, voordeel, lokale hulp, verzorging, community en echte ervaringen op één plek.",
       membershipTitle: "Meer voor je huisdier. Het hele jaar.",
       membershipText: "Voor £10 per jaar krijgen leden toegang tot speciale aanbiedingen, nuttige kortingen, Marketplace-voordelen, wedstrijden en kansen binnen PETS & DOGUE.",
@@ -734,7 +734,7 @@
       coverLabel: "COVER STAR",
       helpLabel: "ПОМОГНЕТЕ НА ЖИВОТНИТЕ",
       businessLabel: "РАБОТЕТЕ С PETS & DOGUE"
-    }    el: {
+    },    el: {
       hero: "Ένας χρήσιμος ψηφιακός κόσμος για ανθρώπους που αγαπούν τα ζώα: μέρη, οικονομία, τοπική βοήθεια, φροντίδα, κοινότητα και πραγματικές εμπειρίες σε ένα σημείο.",
       membershipTitle: "Περισσότερα για το κατοικίδιό σας. Όλο τον χρόνο.",
       membershipText: "Με £10 τον χρόνο, τα μέλη αποκτούν πρόσβαση σε ειδικές προσφορές, εκπτώσεις, προνόμια Marketplace, διαγωνισμούς και ευκαιρίες PETS & DOGUE.",
