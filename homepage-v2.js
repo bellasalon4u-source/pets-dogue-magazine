@@ -1227,4 +1227,19 @@ if (document.readyState === "loading") {
   renderHomepageV2();
 }
 
+/* =========================================================
+   LIVE LANGUAGE CHANGE
+   Re-render ONLY homepage content when global language changes.
+   Header / menu / shell remain untouched.
+========================================================= */
+
+window.addEventListener(
+  "petsdogue:languagechange",
+  () => {
+    window.requestAnimationFrame(() => {
+      renderHomepageV2();
+    });
+  }
+);
+
 })();
