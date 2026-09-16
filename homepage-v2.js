@@ -36,7 +36,10 @@ function currentLanguage() {
       typeof window.PetsDogueLanguage.getCurrentLanguage === "function"
     ) {
       const value = window.PetsDogueLanguage.getCurrentLanguage();
-      lang = typeof value === "string" ? value : value?.code || "en";
+      lang =
+        typeof value === "string"
+          ? value
+          : value?.code || "en";
     } else {
       lang =
         localStorage.getItem("pets_dogue_language") ||
@@ -47,13 +50,16 @@ function currentLanguage() {
     lang = "en";
   }
 
-  lang = String(lang).toLowerCase().split("-")[0];
+  lang =
+    String(lang)
+      .toLowerCase()
+      .split("-")[0];
+
   return ALIASES[lang] || lang || "en";
 }
 
 /* =========================================================
-   NEW HOMEPAGE TEXT
-   Existing general labels continue to come from i18n engine.
+   INTERNAL FALLBACK TEXT
 ========================================================= */
 
 const TEXT = {
@@ -312,17 +318,56 @@ uk: {
 
 };
 
-/*
-For the remaining supported languages we preserve the interface
-and fall back to English until their existing PETS & DOGUE i18n
-engine supplies translated navigation/common labels.
-No global i18n behaviour is changed here.
-*/
+/* =========================================================
+   TEXT RESOLVER
+   Full 23-language pack first.
+   Internal EN/RU/UA stays only as safe fallback.
+========================================================= */
 
 function text(key) {
   const lang = currentLanguage();
-  const pack = TEXT[lang] || TEXT.en;
-  return pack[key] || TEXT.en[key] || key;
+
+  const externalText =
+    window.PetsDogueHomepageV2Text || {};
+
+  const externalPack =
+    externalText[lang] || null;
+
+  const externalEnglish =
+    externalText.en || null;
+
+  const internalPack =
+    TEXT[lang] || TEXT.en;
+
+  if (
+    externalPack &&
+    externalPack[key] !== undefined
+  ) {
+    return externalPack[key];
+  }
+
+  if (
+    externalEnglish &&
+    externalEnglish[key] !== undefined
+  ) {
+    return externalEnglish[key];
+  }
+
+  if (
+    internalPack &&
+    internalPack[key] !== undefined
+  ) {
+    return internalPack[key];
+  }
+
+  if (
+    TEXT.en &&
+    TEXT.en[key] !== undefined
+  ) {
+    return TEXT.en[key];
+  }
+
+  return key;
 }
 
 /* =========================================================
@@ -362,7 +407,11 @@ content:"";
 position:absolute;
 inset:0;
 background:
-linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.05) 68%);
+linear-gradient(
+to top,
+rgba(0,0,0,.82),
+rgba(0,0,0,.05) 68%
+);
 }
 
 .pdv2-hero-copy{
@@ -567,9 +616,21 @@ height:126px;
 margin:0 10px 8px;
 border-radius:13px;
 background:
-radial-gradient(circle at 35% 40%,#65e51f 0 5px,transparent 6px),
-radial-gradient(circle at 72% 62%,#ff3038 0 5px,transparent 6px),
-linear-gradient(135deg,#e5eadf,#b9d8e8);
+radial-gradient(
+circle at 35% 40%,
+#65e51f 0 5px,
+transparent 6px
+),
+radial-gradient(
+circle at 72% 62%,
+#ff3038 0 5px,
+transparent 6px
+),
+linear-gradient(
+135deg,
+#e5eadf,
+#b9d8e8
+);
 position:relative;
 }
 
@@ -794,13 +855,24 @@ gap:14px;
 
 function phoneMockup() {
   return `
-  <div class="pdv2-phone" aria-label="PETS & DOGUE Pet-Friendly mobile search">
+  <div
+    class="pdv2-phone"
+    aria-label="PETS & DOGUE Pet-Friendly mobile search"
+  >
     <div class="pdv2-phone-screen">
-      <div class="pdv2-phone-top">PETS &amp; DOGUE</div>
-      <div class="pdv2-phone-search">Pet-Friendly near me 🔎</div>
+
+      <div class="pdv2-phone-top">
+        PETS &amp; DOGUE
+      </div>
+
+      <div class="pdv2-phone-search">
+        Pet-Friendly near me 🔎
+      </div>
+
       <div class="pdv2-phone-map"></div>
 
       <div class="pdv2-phone-list">
+
         <div class="pdv2-phone-place">
           <strong>Pet-friendly café</strong>
           <small>✓ pets welcome · 0.4 km</small>
@@ -815,7 +887,9 @@ function phoneMockup() {
           <strong>Park</strong>
           <small>route · directions · photos</small>
         </div>
+
       </div>
+
     </div>
   </div>
   `;
@@ -824,7 +898,14 @@ function phoneMockup() {
 function pills(items) {
   return `
     <div class="pdv2-pills">
-      ${items.map(item => `<span>${item}</span>`).join("")}
+      ${
+        items
+          .map(
+            item =>
+              `<span>${item}</span>`
+          )
+          .join("")
+      }
     </div>
   `;
 }
@@ -835,17 +916,22 @@ function pills(items) {
 
 function renderHomepageV2() {
 
-  const root = document.querySelector(ROOT_SELECTOR);
+  const root =
+    document.querySelector(
+      ROOT_SELECTOR
+    );
 
   if (!root) {
     return;
   }
 
-  const html = `
+  const html = `  <div class="pdv2">
 
-  <div class="pdv2">
+    <section
+      class="pdv2-hero"
+      data-speech-section
+    >
 
-    <section class="pdv2-hero" data-speech-section>
       <img
         src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1800&q=90"
         alt="Animals sharing life with people"
@@ -855,45 +941,83 @@ function renderHomepageV2() {
         class="home-listen"
         aria-label="Listen to this section"
         onclick="listenToSection(this)"
-      >🔊</button>
+      >
+        🔊
+      </button>
 
       <div class="pdv2-hero-copy">
-        <div class="pdv2-kicker">PETS &amp; DOGUE</div>
-        <h1 class="notranslate" translate="no">
-          One world.<br><em>Every pet.</em>
+
+        <div class="pdv2-kicker">
+          PETS &amp; DOGUE
+        </div>
+
+        <h1
+          class="notranslate"
+          translate="no"
+        >
+          One world.<br>
+          <em>Every pet.</em>
         </h1>
-        <p>${text("hero")}</p>
+
+        <p>
+          ${text("hero")}
+        </p>
+
       </div>
+
     </section>
 
 
     <!-- MEMBERSHIP FIRST -->
 
-    <section class="pdv2-card pdv2-membership" data-speech-section>
+    <section
+      class="pdv2-card pdv2-membership"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <div class="pdv2-media-split">
+
           <figure>
+
             <img
               src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1100&q=90"
               alt="Pet-friendly hotel"
             >
-            <span class="pdv2-small-badge">£10 / YEAR</span>
+
+            <span class="pdv2-small-badge">
+              £10 / YEAR
+            </span>
+
           </figure>
 
           <figure>
+
             <img
               src="file_00000000a9d471fda9b4629589be22a9.png"
               alt="PETS & DOGUE member world"
             >
+
           </figure>
+
         </div>
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("memberLabel")}</div>
-        <h2>${text("membershipTitle")}</h2>
-        <p>${text("membershipText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("memberLabel")}
+        </div>
+
+        <h2>
+          ${text("membershipTitle")}
+        </h2>
+
+        <p>
+          ${text("membershipText")}
+        </p>
 
         ${pills([
           text("offers"),
@@ -903,9 +1027,13 @@ function renderHomepageV2() {
           "Cover Star"
         ])}
 
-        <a class="pdv2-cta" href="club.html">
+        <a
+          class="pdv2-cta"
+          href="club.html"
+        >
           £10 / YEAR →
         </a>
+
       </div>
 
     </section>
@@ -913,9 +1041,13 @@ function renderHomepageV2() {
 
     <!-- PET FRIENDLY -->
 
-    <section class="pdv2-card reverse pdv2-petfriendly" data-speech-section>
+    <section
+      class="pdv2-card reverse pdv2-petfriendly"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <img
           src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1500&q=90"
           alt="Pet-friendly café and easy mobile search"
@@ -926,12 +1058,22 @@ function renderHomepageV2() {
         <span class="pdv2-small-badge">
           PETS &amp; DOGUE · NEAR ME
         </span>
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("petFriendlyLabel")}</div>
-        <h2>${text("petFriendlyTitle")}</h2>
-        <p>${text("petFriendlyText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("petFriendlyLabel")}
+        </div>
+
+        <h2>
+          ${text("petFriendlyTitle")}
+        </h2>
+
+        <p>
+          ${text("petFriendlyText")}
+        </p>
 
         ${pills([
           text("location"),
@@ -941,6 +1083,7 @@ function renderHomepageV2() {
           text("verified"),
           text("routes")
         ])}
+
       </div>
 
     </section>
@@ -948,31 +1091,54 @@ function renderHomepageV2() {
 
     <!-- DISCOUNTS -->
 
-    <section class="pdv2-card pdv2-discounts" data-speech-section>
+    <section
+      class="pdv2-card pdv2-discounts"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <div class="pdv2-media-split">
+
           <figure>
+
             <img
               src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1100&q=90"
               alt="Hotel stay and member savings"
             >
-            <span class="pdv2-small-badge">${text("hotel")}</span>
+
+            <span class="pdv2-small-badge">
+              ${text("hotel")}
+            </span>
+
           </figure>
 
           <figure>
+
             <img
               src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=900&q=90"
               alt="Pet services and products"
             >
+
           </figure>
+
         </div>
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("discountLabel")}</div>
-        <h2>${text("discountsTitle")}</h2>
-        <p>${text("discountsText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("discountLabel")}
+        </div>
+
+        <h2>
+          ${text("discountsTitle")}
+        </h2>
+
+        <p>
+          ${text("discountsText")}
+        </p>
 
         ${pills([
           text("hotel"),
@@ -980,6 +1146,7 @@ function renderHomepageV2() {
           text("offers"),
           text("services")
         ])}
+
       </div>
 
     </section>
@@ -987,20 +1154,37 @@ function renderHomepageV2() {
 
     <!-- COMMUNITY + LOST FOUND -->
 
-    <section class="pdv2-card reverse pdv2-community" data-speech-section>
+    <section
+      class="pdv2-card reverse pdv2-community"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <img
           src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1500&q=90"
           alt="Local pet community"
         >
-        <span class="pdv2-small-badge">${text("lostFound")}</span>
+
+        <span class="pdv2-small-badge">
+          ${text("lostFound")}
+        </span>
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("communityLabel")}</div>
-        <h2>${text("communityTitle")}</h2>
-        <p>${text("communityText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("communityLabel")}
+        </div>
+
+        <h2>
+          ${text("communityTitle")}
+        </h2>
+
+        <p>
+          ${text("communityText")}
+        </p>
 
         ${pills([
           text("nearby"),
@@ -1008,6 +1192,7 @@ function renderHomepageV2() {
           text("location"),
           text("verified")
         ])}
+
       </div>
 
     </section>
@@ -1015,30 +1200,50 @@ function renderHomepageV2() {
 
     <!-- GREEN TOURISM -->
 
-    <section class="pdv2-card pdv2-green" data-speech-section>
+    <section
+      class="pdv2-card pdv2-green"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <div class="pdv2-media-split">
+
           <figure>
+
             <img
               src="https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=1000&q=90"
               alt="Animal experience and responsible tourism"
             >
+
           </figure>
 
           <figure>
+
             <img
               src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=90"
               alt="People discovering animals"
             >
+
           </figure>
+
         </div>
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("greenLabel")}</div>
-        <h2>${text("greenTitle")}</h2>
-        <p>${text("greenText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("greenLabel")}
+        </div>
+
+        <h2>
+          ${text("greenTitle")}
+        </h2>
+
+        <p>
+          ${text("greenText")}
+        </p>
 
         ${pills([
           text("zoo"),
@@ -1046,6 +1251,7 @@ function renderHomepageV2() {
           text("wildlife"),
           text("farms")
         ])}
+
       </div>
 
     </section>
@@ -1053,19 +1259,33 @@ function renderHomepageV2() {
 
     <!-- HEALTH -->
 
-    <section class="pdv2-card reverse pdv2-health" data-speech-section>
+    <section
+      class="pdv2-card reverse pdv2-health"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <img
           src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=1500&q=90"
           alt="Pet health and care"
         >
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("healthLabel")}</div>
-        <h2>${text("healthTitle")}</h2>
-        <p>${text("healthText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("healthLabel")}
+        </div>
+
+        <h2>
+          ${text("healthTitle")}
+        </h2>
+
+        <p>
+          ${text("healthText")}
+        </p>
 
         ${pills([
           "Health",
@@ -1073,6 +1293,7 @@ function renderHomepageV2() {
           "Grooming",
           "Wellbeing"
         ])}
+
       </div>
 
     </section>
@@ -1080,19 +1301,33 @@ function renderHomepageV2() {
 
     <!-- MARKETPLACE -->
 
-    <section class="pdv2-card pdv2-market" data-speech-section>
+    <section
+      class="pdv2-card pdv2-market"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <img
           src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1500&q=90"
           alt="Pet marketplace products and services"
         >
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("marketLabel")}</div>
-        <h2>${text("marketplaceTitle")}</h2>
-        <p>${text("marketplaceText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("marketLabel")}
+        </div>
+
+        <h2>
+          ${text("marketplaceTitle")}
+        </h2>
+
+        <p>
+          ${text("marketplaceText")}
+        </p>
 
         ${pills([
           "Products",
@@ -1100,26 +1335,41 @@ function renderHomepageV2() {
           "Accessories",
           "Listings"
         ])}
+
       </div>
 
     </section>
 
 
-    <!-- COVER STAR IN THE MIDDLE -->
+    <!-- COVER STAR -->
 
-    <section class="pdv2-card reverse pdv2-cover" data-speech-section>
+    <section
+      class="pdv2-card reverse pdv2-cover"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <img
           src="file_00000000a9d471fda9b4629589be22a9.png"
           alt="Miso PETS & DOGUE Cover Star"
         >
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("coverLabel")}</div>
-        <h2>${text("coverTitle")}</h2>
-        <p>${text("coverText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("coverLabel")}
+        </div>
+
+        <h2>
+          ${text("coverTitle")}
+        </h2>
+
+        <p>
+          ${text("coverText")}
+        </p>
 
         ${pills([
           "Cover Star",
@@ -1127,6 +1377,7 @@ function renderHomepageV2() {
           "Editorial",
           "Community"
         ])}
+
       </div>
 
     </section>
@@ -1134,19 +1385,33 @@ function renderHomepageV2() {
 
     <!-- HELP -->
 
-    <section class="pdv2-card pdv2-help" data-speech-section>
+    <section
+      class="pdv2-card pdv2-help"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <img
           src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1500&q=90"
           alt="Animals needing help and visibility"
         >
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("helpLabel")}</div>
-        <h2>${text("helpTitle")}</h2>
-        <p>${text("helpText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("helpLabel")}
+        </div>
+
+        <h2>
+          ${text("helpTitle")}
+        </h2>
+
+        <p>
+          ${text("helpText")}
+        </p>
 
         ${pills([
           "Adoption",
@@ -1154,26 +1419,41 @@ function renderHomepageV2() {
           "Urgent help",
           "Share"
         ])}
+
       </div>
 
     </section>
 
 
-    <!-- BUSINESS / COLLABORATION -->
+    <!-- BUSINESS -->
 
-    <section class="pdv2-card reverse pdv2-business" data-speech-section>
+    <section
+      class="pdv2-card reverse pdv2-business"
+      data-speech-section
+    >
 
       <div class="pdv2-media">
+
         <img
           src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1500&q=90"
           alt="Pet-friendly business and hospitality"
         >
+
       </div>
 
       <div class="pdv2-copy">
-        <div class="pdv2-kicker">${text("businessLabel")}</div>
-        <h2>${text("businessTitle")}</h2>
-        <p>${text("businessText")}</p>
+
+        <div class="pdv2-kicker">
+          ${text("businessLabel")}
+        </div>
+
+        <h2>
+          ${text("businessTitle")}
+        </h2>
+
+        <p>
+          ${text("businessText")}
+        </p>
 
         ${pills([
           "Hotels",
@@ -1184,18 +1464,29 @@ function renderHomepageV2() {
           "Pet services"
         ])}
 
-        <a class="pdv2-cta" href="partners.html">
+        <a
+          class="pdv2-cta"
+          href="partners.html"
+        >
           PETS &amp; DOGUE →
         </a>
+
       </div>
 
     </section>
 
 
-    <section class="pdv2-bottom" data-speech-section>
+    <section
+      class="pdv2-bottom"
+      data-speech-section
+    >
+
       <div class="pdv2-bottom-inner">
 
-        <h2 class="notranslate" translate="no">
+        <h2
+          class="notranslate"
+          translate="no"
+        >
           One world.<br>
           Every pet.
         </h2>
@@ -1205,13 +1496,21 @@ function renderHomepageV2() {
         </p>
 
       </div>
+
     </section>
 
   </div>
   `;
 
-  if (!document.getElementById("pdHomepageV2Style")) {
-    document.head.insertAdjacentHTML("beforeend", STYLE);
+  if (
+    !document.getElementById(
+      "pdHomepageV2Style"
+    )
+  ) {
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      STYLE
+    );
   }
 
   root.innerHTML = html;
@@ -1221,24 +1520,36 @@ function renderHomepageV2() {
    START
 ========================================================= */
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", renderHomepageV2);
+if (
+  document.readyState ===
+  "loading"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    renderHomepageV2
+  );
+
 } else {
+
   renderHomepageV2();
+
 }
 
 /* =========================================================
    LIVE LANGUAGE CHANGE
-   Re-render ONLY homepage content when global language changes.
-   Header / menu / shell remain untouched.
 ========================================================= */
 
 window.addEventListener(
   "petsdogue:languagechange",
   () => {
-    window.requestAnimationFrame(() => {
-      renderHomepageV2();
-    });
+
+    window.requestAnimationFrame(
+      () => {
+        renderHomepageV2();
+      }
+    );
+
   }
 );
 
