@@ -338,7 +338,7 @@ function listenButton() {
       class="pdv3-listen home-listen"
       type="button"
       aria-label="Listen to this section"
-      onclick="listenToSection(this)"
+      onclick="listenToSection(this); event.preventDefault(); event.stopPropagation();"
     >
       🔊
     </button>
@@ -473,9 +473,9 @@ z-index:-2;
 background:
 linear-gradient(
 180deg,
-rgba(0,0,0,.05) 0%,
-rgba(0,0,0,.10) 35%,
-rgba(0,0,0,.78) 100%
+rgba(0,0,0,.03) 0%,
+rgba(0,0,0,.05) 38%,
+rgba(0,0,0,.76) 100%
 );
 }
 
@@ -483,8 +483,8 @@ rgba(0,0,0,.78) 100%
 background:
 linear-gradient(
 180deg,
-rgba(255,255,255,.04) 0%,
-rgba(255,255,255,.02) 35%,
+rgba(255,255,255,.02) 0%,
+rgba(255,255,255,.01) 40%,
 rgba(245,238,225,.92) 100%
 );
 }
@@ -617,9 +617,9 @@ min-height:580px;
 background:
 linear-gradient(
 180deg,
-rgba(115,0,15,.10) 0%,
-rgba(145,8,25,.34) 38%,
-rgba(128,0,15,.90) 100%
+rgba(115,0,15,.04) 0%,
+rgba(145,8,25,.18) 40%,
+rgba(128,0,15,.88) 100%
 );
 }
 
@@ -640,8 +640,8 @@ content:" ♥";
 background:
 linear-gradient(
 180deg,
-rgba(0,0,0,.06),
-rgba(0,0,0,.70)
+rgba(0,0,0,.03),
+rgba(0,0,0,.72)
 );
 }
 
@@ -842,12 +842,12 @@ function renderHomepageV3() {
 
         ${visualCard({
           className: "pdv3-membership",
-          image: "assets/home/club.jpg",
+          image: "club.jpg",
           href: "club.html",
           label: text("memberLabel"),
           title: text("membershipTitle"),
           body: text("membershipText"),
-          position: "center 42%",
+          position: "center center",
           chipsList: [
             "£10 / YEAR",
             text("offers"),
@@ -862,7 +862,7 @@ function renderHomepageV3() {
 
         ${visualCard({
           className: "pdv3-petfriendly",
-          image: "assets/home/pet-friendly.jpg",
+          image: "pet-friendly.jpg",
           href: "pet-friendly-places.html",
           label: text("petFriendlyLabel"),
           title: text("petFriendlyTitle"),
@@ -884,7 +884,7 @@ function renderHomepageV3() {
 
           ${visualCard({
             className: "pdv3-discounts",
-            image: "assets/home/partners.jpg",
+            image: "partners.jpg",
             href: "special-offers.html",
             label: text("discountLabel"),
             title: text("discountsTitle"),
@@ -899,7 +899,7 @@ function renderHomepageV3() {
 
           ${visualCard({
             className: "pdv3-stays",
-            image: "assets/home/pet-friendly-stays.jpg",
+            image: "pet-friendly-stays.jpg",
             href: "pet-friendly-places.html",
             label: text("hotel"),
             title: "Stay beautifully together.",
@@ -919,7 +919,7 @@ function renderHomepageV3() {
 
         ${visualCard({
           className: "pdv3-community",
-          image: "assets/home/community.jpg",
+          image: "community.jpg",
           href: "local-community.html",
           label: text("communityLabel"),
           title: text("communityTitle"),
@@ -937,7 +937,7 @@ function renderHomepageV3() {
 
         ${visualCard({
           className: "pdv3-green",
-          image: "assets/home/green-tourism.jpg",
+          image: "green-tourism.jpg",
           href: "pet-friendly-places.html",
           label: text("greenLabel"),
           title: text("greenTitle"),
@@ -958,7 +958,7 @@ function renderHomepageV3() {
 
           ${visualCard({
             className: "pdv3-health",
-            image: "assets/home/health.jpg",
+            image: "health.jpg",
             href: "wellness.html",
             label: text("healthLabel"),
             title: text("healthTitle"),
@@ -972,7 +972,7 @@ function renderHomepageV3() {
 
           ${visualCard({
             className: "pdv3-marketplace",
-            image: "assets/home/marketplace.jpg",
+            image: "marketplace.jpg",
             href: "pet-marketplace.html",
             label: text("marketLabel"),
             title: text("marketplaceTitle"),
@@ -993,7 +993,7 @@ function renderHomepageV3() {
 
         ${visualCard({
           className: "pdv3-cover",
-          image: "assets/home/cover-star.jpg",
+          image: "cover-star.jpg",
           href: "members-gallery.html",
           label: text("coverLabel"),
           title: text("coverTitle"),
@@ -1011,7 +1011,7 @@ function renderHomepageV3() {
 
         ${visualCard({
           className: "pdv3-help",
-          image: "assets/home/help-animals.jpg",
+          image: "help-animals.jpg",
           href: "pets-in-need.html",
           label: "♥ " + text("helpLabel") + " ♥",
           title: text("helpTitle"),
@@ -1030,7 +1030,7 @@ function renderHomepageV3() {
 
         ${visualCard({
           className: "pdv3-business",
-          image: "assets/home/partners.jpg",
+          image: "partners.jpg",
           href: "partners.html",
           label: text("businessLabel"),
           title: text("businessTitle"),
