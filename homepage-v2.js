@@ -1,9 +1,16 @@
 "use strict";
 
 /*
-PETS & DOGUE — HOMEPAGE EDITORIAL V6
+PETS & DOGUE — HOMEPAGE EDITORIAL V7
 
 Меняет ТОЛЬКО наполнение главной страницы.
+
+V7:
+- new Beauty & Grooming image
+- new Sport & Active Life image
+- removed duplicate bottom Business & Partnerships block
+- improved mobile readability
+- preserved editorial grid and advertising block
 
 НЕ ИЗМЕНЯЕТ:
 - global header
@@ -141,12 +148,6 @@ const EN = {
     "Put your brand in front of the PETS & DOGUE audience through premium advertising, mobile placements and special campaigns.",
   advertise: "Advertise with us",
 
-  partnershipLabel: "BUSINESS & PARTNERSHIPS",
-  partnershipTitle: "Work with us.",
-  partnershipText:
-    "Advertise your business, create exclusive discounts, coupons and special offers for our audience, reach new customers and grow with PETS & DOGUE.",
-  partnershipButton: "Explore partnerships",
-
   join: "Join the Club",
   readMore: "Explore"
 };
@@ -227,12 +228,6 @@ const RU = {
     "Покажите свой бренд аудитории PETS & DOGUE через премиальную рекламу, мобильные размещения и специальные кампании.",
   advertise: "Дать рекламу",
 
-  partnershipLabel: "БИЗНЕС И ПАРТНЁРСТВО",
-  partnershipTitle: "Сотрудничество с нами.",
-  partnershipText:
-    "Размещайте рекламу, создавайте эксклюзивные скидки, купоны и специальные предложения для нашей аудитории, находите новых клиентов и развивайте свой бизнес вместе с PETS & DOGUE.",
-  partnershipButton: "Сотрудничать с нами",
-
   join: "Вступить в клуб",
   readMore: "Открыть"
 };
@@ -312,12 +307,6 @@ const UK = {
   adText:
     "Покажіть свій бренд аудиторії PETS & DOGUE через преміальну рекламу, мобільні розміщення та спеціальні кампанії.",
   advertise: "Дати рекламу",
-
-  partnershipLabel: "БІЗНЕС І ПАРТНЕРСТВО",
-  partnershipTitle: "Співпраця з нами.",
-  partnershipText:
-    "Розміщуйте рекламу, створюйте ексклюзивні знижки, купони та спеціальні пропозиції для нашої аудиторії, знаходьте нових клієнтів і розвивайте бізнес разом із PETS & DOGUE.",
-  partnershipButton: "Співпрацювати з нами",
 
   join: "Приєднатися до клубу",
   readMore: "Відкрити"
@@ -940,7 +929,7 @@ function styles() {
 }
 
 /* =========================================================
-   ADVERTISING / PARTNERSHIP
+   ADVERTISING
 ========================================================= */
 
 .pdv4-ad{
@@ -1037,7 +1026,7 @@ function styles() {
   text-transform:uppercase;
 }
 
-/* phone advertising visual */
+/* PHONE ADVERTISING VISUAL */
 
 .pdv4-phone{
   position:absolute;
@@ -1089,18 +1078,6 @@ function styles() {
   line-height:1.25;
   font-weight:800;
   text-align:center;
-}
-
-.pdv4-partnership{
-  min-height:300px;
-}
-
-.pdv4-partnership .pdv4-ad-copy{
-  min-height:300px;
-}
-
-.pdv4-partnership h2{
-  font-size:clamp(32px,4.4vw,54px);
 }
 
 /* =========================================================
@@ -1178,7 +1155,7 @@ function styles() {
   }
 
   .pdv4-card-copy p{
-    font-size:11px;
+    font-size:12px;
   }
 
   .pdv4-membership{
@@ -1251,19 +1228,20 @@ function styles() {
   }
 
   .pdv4-section-head{
-    margin:0 2px 8px;
-    padding:0 5px 9px;
+    margin:0 2px 10px;
+    padding:0 5px 10px;
     align-items:flex-end;
     gap:8px;
   }
 
   .pdv4-section-head h2{
-    font-size:29px;
-    line-height:.95;
+    font-size:31px;
+    line-height:.98;
   }
 
   .pdv4-section-head span{
-    font-size:7px;
+    font-size:9px;
+    line-height:1.25;
     letter-spacing:1px;
     text-align:right;
   }
@@ -1311,7 +1289,7 @@ function styles() {
   }
 
   .pdv4-card.small .pdv4-media{
-    min-height:235px;
+    min-height:270px;
   }
 
   .pdv4-media img{
@@ -1339,28 +1317,29 @@ function styles() {
 
   .pdv4-overlay-copy h2,
   .pdv4-card.small .pdv4-overlay-copy h2{
-    font-size:20px;
-    line-height:.96;
+    font-size:22px;
+    line-height:.98;
     letter-spacing:-.55px;
   }
 
   .pdv4-card.large .pdv4-overlay-copy h2{
-    font-size:27px;
+    font-size:28px;
   }
 
   .pdv4-card.wide .pdv4-overlay-copy h2{
-    font-size:23px;
+    font-size:25px;
   }
 
   .pdv4-label{
-    margin-bottom:5px;
-    font-size:7px;
-    letter-spacing:1.15px;
+    margin-bottom:6px;
+    font-size:9px;
+    line-height:1.2;
+    letter-spacing:1.1px;
   }
 
   .pdv4-card-copy{
-    min-height:86px;
-    padding:9px 10px 10px;
+    min-height:105px;
+    padding:11px 11px 12px;
   }
 
   .pdv4-card-copy p{
@@ -1368,27 +1347,29 @@ function styles() {
     -webkit-box-orient:vertical;
     -webkit-line-clamp:4;
     overflow:hidden;
-    margin:0 0 7px;
-    color:#aaa59d;
-    font-size:8.5px;
-    line-height:1.35;
+    margin:0 0 9px;
+    color:#bbb6ae;
+    font-size:11px;
+    line-height:1.42;
   }
 
   .pdv4-card.small .pdv4-card-copy p{
-    font-size:8px;
+    font-size:10.5px;
+    line-height:1.4;
   }
 
   .pdv4-arrow{
-    font-size:7px;
+    font-size:9px;
+    line-height:1.2;
     letter-spacing:.8px;
   }
 
   .pdv4-listen{
     top:9px;
     right:9px;
-    width:31px;
-    height:31px;
-    font-size:12px;
+    width:34px;
+    height:34px;
+    font-size:13px;
     background:rgba(0,0,0,.38);
   }
 
@@ -1396,7 +1377,7 @@ function styles() {
     top:9px;
     left:9px;
     padding:7px 9px;
-    font-size:8px;
+    font-size:9px;
   }
 
   .pdv4-membership{
@@ -1409,19 +1390,19 @@ function styles() {
   }
 
   .pdv4-membership-kicker{
-    font-size:8px;
+    font-size:9px;
     letter-spacing:1.5px;
   }
 
   .pdv4-membership h2{
     margin-top:6px;
-    font-size:36px;
-    line-height:.92;
+    font-size:38px;
+    line-height:.94;
   }
 
   .pdv4-membership-intro{
-    font-size:14px;
-    line-height:1.45;
+    font-size:15px;
+    line-height:1.48;
   }
 
   .pdv4-benefits{
@@ -1448,58 +1429,59 @@ function styles() {
     left:10px;
     right:10px;
     bottom:10px;
-    font-size:15px;
+    font-size:17px;
   }
 
   .pdv4-benefit:first-child span{
-    font-size:18px;
+    font-size:19px;
   }
 
   .pdv4-hearts{
-    font-size:14px;
+    font-size:15px;
   }
 
   .pdv4-winner{
-    font-size:7px;
-    min-height:23px;
+    font-size:8px;
+    min-height:24px;
   }
 
   .pdv4-join{
     margin:14px 6px 0;
-    min-height:40px;
-    padding:0 17px;
-    font-size:9px;
+    min-height:42px;
+    padding:0 18px;
+    font-size:10px;
   }
 
   .pdv4-ad{
     margin:29px 2px;
-    min-height:260px;
+    min-height:285px;
   }
 
   .pdv4-ad-copy{
-    min-height:260px;
+    min-height:285px;
     padding:18px;
     max-width:67%;
   }
 
   .pdv4-ad-label{
-    font-size:7px;
-    letter-spacing:1.5px;
+    font-size:9px;
+    line-height:1.2;
+    letter-spacing:1.4px;
   }
 
   .pdv4-ad h2{
-    font-size:30px;
+    font-size:32px;
   }
 
   .pdv4-ad p{
-    margin:9px 0 13px;
+    margin:10px 0 14px;
     max-width:220px;
-    font-size:9px;
+    font-size:11px;
     line-height:1.45;
   }
 
   .pdv4-ad a{
-    font-size:8px;
+    font-size:9px;
   }
 
   .pdv4-phone{
@@ -1826,7 +1808,7 @@ function render() {
 
         </div>
 
-        <!-- STYLE / WELLNESS -->
+        <!-- STYLE / WELLNESS / BEAUTY / ACTIVE LIFE -->
 
         <div class="pdv4-grid">
 
@@ -1850,7 +1832,7 @@ function render() {
 
           ${card({
             href: "pet-fashion.html",
-            image: "cover-star/cover-horse-salon.png",
+            image: "beauty-grooming.jpg",
             label: t("beautyLabel"),
             title: t("beautyTitle"),
             text: t("beautyText"),
@@ -1859,7 +1841,7 @@ function render() {
 
           ${card({
             href: "wellness.html",
-            image: "cover-star/cover-capri-sphynx.png",
+            image: "active-life.jpg",
             label: t("activeLabel"),
             title: t("activeTitle"),
             text: t("activeText"),
@@ -1867,43 +1849,6 @@ function render() {
           })}
 
         </div>
-
-        <!-- BUSINESS PARTNERSHIP -->
-
-        <section
-          class="pdv4-ad pdv4-partnership"
-          data-speech-section
-        >
-
-          <img
-            src="partners.jpg"
-            alt="PETS & DOGUE business partnerships"
-            loading="lazy"
-          />
-
-          ${listenButton()}
-
-          <div class="pdv4-ad-copy">
-
-            <div class="pdv4-ad-label">
-              ${esc(t("partnershipLabel"))}
-            </div>
-
-            <h2>
-              ${esc(t("partnershipTitle"))}
-            </h2>
-
-            <p>
-              ${esc(t("partnershipText"))}
-            </p>
-
-            <a href="partners.html">
-              ${esc(t("partnershipButton"))} →
-            </a>
-
-          </div>
-
-        </section>
 
       </section>
 
