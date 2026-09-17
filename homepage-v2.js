@@ -1,15 +1,9 @@
 "use strict";
 
 /*
-PETS & DOGUE — HOMEPAGE VISUAL EXPERIENCE V3
-
-IMPORTANT
-- global header is NOT changed
-- Contents side menu is NOT changed
-- Miso help bubble is NOT changed
-- global scroll behaviour is NOT changed
-- existing homepage intro is preserved
-- this file rebuilds ONLY the content BELOW the intro
+PETS & DOGUE — HOMEPAGE EDITORIAL V4
+Меняет ТОЛЬКО наполнение главной страницы.
+Шапка, боковое меню, Miso bubble и global shell не изменяются.
 */
 
 (function () {
@@ -33,11 +27,7 @@ function currentLanguage() {
       typeof window.PetsDogueLanguage.getCurrentLanguage === "function"
     ) {
       const value = window.PetsDogueLanguage.getCurrentLanguage();
-
-      lang =
-        typeof value === "string"
-          ? value
-          : value?.code || "en";
+      lang = typeof value === "string" ? value : value?.code || "en";
     } else {
       lang =
         localStorage.getItem("pets_dogue_language") ||
@@ -48,228 +38,188 @@ function currentLanguage() {
     lang = "en";
   }
 
-  lang = String(lang)
-    .toLowerCase()
-    .split("-")[0];
-
+  lang = String(lang).toLowerCase().split("-")[0];
   return ALIASES[lang] || lang || "en";
 }
 
-
-/* =========================================================
-   FALLBACK TEXT
-========================================================= */
-
-const FALLBACK = {
-
-en: {
+const EN = {
+  latest: "Latest Stories",
+  explore: "Explore",
+  membershipLabel: "PETS & DOGUE CLUB",
   membershipTitle: "More for your pet. All year.",
   membershipText:
-    "Member discounts, special offers, competitions, Marketplace benefits and more across the PETS & DOGUE world.",
+    "Join a worldwide pet-loving community and unlock useful benefits throughout the PETS & DOGUE world.",
+  discounts: "Member discounts",
+  offers: "Special offers",
+  contests: "Contests & voting",
+  community: "Global community",
+  marketplaceBenefit: "Marketplace benefits",
 
+  petFriendlyLabel: "PET-FRIENDLY",
   petFriendlyTitle: "Go together.",
   petFriendlyText:
-    "Find cafés, hotels, restaurants, parks, beaches and services that welcome pets — with maps, routes, pet rules and community confirmation.",
+    "Discover cafés, hotels, restaurants, parks, beaches and services where pets are welcome.",
 
-  discountsTitle: "More benefits. Less everyday spend.",
-  discountsText:
-    "Discover useful member discounts and special offers for stays, services, grooming, products and real pet life.",
-
-  communityTitle: "People nearby can help.",
-  communityText:
-    "Connect with local pet lovers, share trusted recommendations and help lost and found animals get home faster.",
-
+  healthLabel: "HEALTH & CARE",
   healthTitle: "Care with confidence.",
   healthText:
-    "Discover useful health, grooming, wellbeing and responsible-care content made easier to understand and find.",
+    "Useful health, wellbeing, grooming and responsible-care stories for everyday life.",
 
-  marketplaceTitle: "Buy. Sell. Discover.",
-  marketplaceText:
-    "Products, services, accessories and community listings in one place. Club members can publish up to 50 free ads.",
-
-  greenTitle: "Meet animals beyond the city.",
-  greenText:
-    "Discover farms, sanctuaries, zoos, aquariums, wildlife parks and responsible animal experiences.",
-
+  coverLabel: "COVER STAR",
   coverTitle: "Your pet could be next.",
   coverText:
-    "Join Cover Star opportunities, competitions and editorial features celebrating personality, character and every kind of pet.",
+    "Meet our Cover Stars, enter your pet and vote for the personalities you love.",
+  vote: "VOTE",
 
+  communityLabel: "COMMUNITY",
+  communityTitle: "One community. Every pet.",
+  communityText:
+    "Meet pet lovers, exchange recommendations and help each other across the world.",
+
+  marketplaceLabel: "MARKETPLACE",
+  marketplaceTitle: "Buy. Sell. Discover.",
+  marketplaceText:
+    "Useful products, services and community listings in one place.",
+
+  greenLabel: "GREEN TOURISM",
+  greenTitle: "Meet animals beyond the city.",
+  greenText:
+    "Discover farms, sanctuaries, wildlife parks and responsible animal experiences.",
+
+  helpLabel: "HELP",
   helpTitle: "Seen. Shared. Helped.",
   helpText:
-    "Animals needing rescue, treatment or a new home need visibility. One share can connect the right animal with the right person.",
+    "Give visibility to animals needing rescue, treatment, support or a new home.",
 
-  businessTitle: "Grow with a pet-loving audience.",
-  businessText:
-    "Hotels, cafés, groomers, vets, shops and brands can gain visibility, feature offers and become easier for pet owners to discover.",
+  ad: "ADVERTISEMENT",
+  adTitle: "Your brand belongs here.",
+  adText: "Premium video placement inside the PETS & DOGUE editorial experience.",
+  advertise: "Advertise with us",
 
-  memberLabel: "MEMBERSHIP & CLUB",
-  petFriendlyLabel: "PET-FRIENDLY PLACES",
-  discountLabel: "MEMBER BENEFITS",
-  communityLabel: "LOCAL COMMUNITY",
-  healthLabel: "HEALTH & CARE",
-  marketLabel: "MARKETPLACE",
-  greenLabel: "GREEN TOURISM",
-  coverLabel: "COVER STAR · COMPETITIONS",
-  helpLabel: "HELP ANIMALS IN NEED",
-  businessLabel: "WORK WITH PETS & DOGUE",
-
-  offers: "Special offers",
-  hotel: "Pet-friendly stays",
-  grooming: "Grooming",
-  services: "Services",
-  nearby: "Near you",
-  map: "Map",
-  routes: "Routes",
-  petRules: "Pet rules",
-  verified: "Community",
-  lostFound: "Lost & Found",
-  zoo: "Zoos",
-  aquarium: "Aquariums",
-  wildlife: "Wildlife",
-  farms: "Farms & sanctuaries"
-},
-
-ru: {
-  membershipTitle: "Больше для питомца. Весь год.",
-  membershipText:
-    "Скидки клуба, специальные предложения, конкурсы, преимущества Marketplace и другие возможности PETS & DOGUE.",
-
-  petFriendlyTitle: "Вместе — куда угодно.",
-  petFriendlyText:
-    "Находите кафе, отели, рестораны, парки, пляжи и сервисы, куда можно с животными — с картой, маршрутами, правилами и подтверждениями сообщества.",
-
-  discountsTitle: "Больше преимуществ. Меньше расходов.",
-  discountsText:
-    "Полезные скидки и специальные предложения на отели, услуги, груминг, товары и всё, чем владельцы животных пользуются каждый день.",
-
-  communityTitle: "Рядом есть люди, которые помогут.",
-  communityText:
-    "Общайтесь с местными владельцами животных, делитесь рекомендациями и помогайте пропавшим и найденным питомцам быстрее вернуться домой.",
-
-  healthTitle: "Забота — понятнее.",
-  healthText:
-    "Здоровье, уход, груминг и благополучие животных — полезная информация и сервисы в понятном формате.",
-
-  marketplaceTitle: "Покупаем. Продаём. Находим.",
-  marketplaceText:
-    "Товары, услуги, аксессуары и объявления в одном месте. Участники клуба могут разместить до 50 бесплатных объявлений.",
-
-  greenTitle: "Познакомьтесь с животными ближе.",
-  greenText:
-    "Фермы, приюты, зоопарки, океанариумы, wildlife-парки и ответственные места для общения с животными и природой.",
-
-  coverTitle: "Ваш питомец может быть следующим.",
-  coverText:
-    "Cover Star, конкурсы и редакционные проекты PETS & DOGUE для ярких, необычных и любимых животных.",
-
-  helpTitle: "Увидели. Поделились. Помогли.",
-  helpText:
-    "Животным, которым нужен дом, лечение или спасение, прежде всего нужна видимость. Иногда одно распространение меняет всё.",
-
-  businessTitle: "Растите вместе с аудиторией, которая любит животных.",
-  businessText:
-    "Отели, кафе, грумеры, клиники, магазины и бренды получают видимость, размещают предложения и становятся ближе к владельцам животных.",
-
-  memberLabel: "КЛУБ И ПОДПИСКА",
-  petFriendlyLabel: "PET-FRIENDLY МЕСТА",
-  discountLabel: "ВЫГОДЫ КЛУБА",
-  communityLabel: "ЛОКАЛЬНОЕ СООБЩЕСТВО",
-  healthLabel: "ЗДОРОВЬЕ И УХОД",
-  marketLabel: "MARKETPLACE",
-  greenLabel: "ЗЕЛЁНЫЙ ТУРИЗМ",
-  coverLabel: "COVER STAR · КОНКУРСЫ",
-  helpLabel: "ПОМОЩЬ ЖИВОТНЫМ В НУЖДЕ",
-  businessLabel: "СОТРУДНИЧЕСТВО С PETS & DOGUE",
-
-  offers: "Спецпредложения",
-  hotel: "Отели с животными",
-  grooming: "Груминг",
-  services: "Услуги",
-  nearby: "Рядом",
-  map: "Карта",
-  routes: "Маршруты",
-  petRules: "Правила",
-  verified: "Сообщество",
-  lostFound: "Пропали / найдены",
-  zoo: "Зоопарки",
-  aquarium: "Океанариумы",
-  wildlife: "Wildlife",
-  farms: "Фермы и приюты"
-},
-
-uk: {
-  membershipTitle: "Більше для улюбленця. Увесь рік.",
-  membershipText:
-    "Знижки клубу, спеціальні пропозиції, конкурси, переваги Marketplace та інші можливості PETS & DOGUE.",
-
-  petFriendlyTitle: "Разом — куди завгодно.",
-  petFriendlyText:
-    "Знаходьте кафе, готелі, ресторани, парки, пляжі та сервіси, куди можна з тваринами — з картою, маршрутами, правилами та підтвердженнями спільноти.",
-
-  discountsTitle: "Більше переваг. Менше витрат.",
-  discountsText:
-    "Корисні знижки та спеціальні пропозиції на проживання, послуги, грумінг, товари та повсякденне життя з тваринами.",
-
-  communityTitle: "Поруч є люди, які допоможуть.",
-  communityText:
-    "Спілкуйтеся з місцевими власниками тварин, діліться рекомендаціями та допомагайте загубленим і знайденим тваринам повернутися додому.",
-
-  healthTitle: "Турбота — зрозуміліше.",
-  healthText:
-    "Здоров’я, догляд, грумінг і добробут тварин — корисна інформація та сервіси у зрозумілому форматі.",
-
-  marketplaceTitle: "Купуємо. Продаємо. Знаходимо.",
-  marketplaceText:
-    "Товари, послуги, аксесуари та оголошення в одному місці. Учасники клубу можуть розмістити до 50 безкоштовних оголошень.",
-
-  greenTitle: "Познайомтеся з тваринами ближче.",
-  greenText:
-    "Ферми, притулки, зоопарки, океанаріуми, wildlife-парки та відповідальні місця для знайомства з тваринами й природою.",
-
-  coverTitle: "Ваш улюбленець може бути наступним.",
-  coverText:
-    "Cover Star, конкурси та редакційні проєкти PETS & DOGUE для яскравих, незвичайних і улюблених тварин.",
-
-  helpTitle: "Побачили. Поділилися. Допомогли.",
-  helpText:
-    "Тваринам, яким потрібен дім, лікування або порятунок, насамперед потрібна видимість. Іноді один поширений допис змінює все.",
-
-  businessTitle: "Зростайте разом з аудиторією, яка любить тварин.",
-  businessText:
-    "Готелі, кафе, грумери, клініки, магазини й бренди отримують видимість, розміщують пропозиції та стають ближчими до власників тварин.",
-
-  memberLabel: "КЛУБ І ПІДПИСКА",
-  petFriendlyLabel: "PET-FRIENDLY МІСЦЯ",
-  discountLabel: "ПЕРЕВАГИ КЛУБУ",
-  communityLabel: "ЛОКАЛЬНА СПІЛЬНОТА",
-  healthLabel: "ЗДОРОВ’Я І ДОГЛЯД",
-  marketLabel: "MARKETPLACE",
-  greenLabel: "ЗЕЛЕНИЙ ТУРИЗМ",
-  coverLabel: "COVER STAR · КОНКУРСИ",
-  helpLabel: "ДОПОМОГА ТВАРИНАМ",
-  businessLabel: "СПІВПРАЦЯ З PETS & DOGUE",
-
-  offers: "Спецпропозиції",
-  hotel: "Готелі з тваринами",
-  grooming: "Грумінг",
-  services: "Послуги",
-  nearby: "Поруч",
-  map: "Карта",
-  routes: "Маршрути",
-  petRules: "Правила",
-  verified: "Спільнота",
-  lostFound: "Загублені / знайдені",
-  zoo: "Зоопарки",
-  aquarium: "Океанаріуми",
-  wildlife: "Wildlife",
-  farms: "Ферми й притулки"
-}
-
+  discoverMore: "Discover more",
+  join: "Join the Club",
+  readMore: "Read more"
 };
 
+const RU = {
+  latest: "Последние истории",
+  explore: "Смотреть",
+  membershipLabel: "КЛУБ PETS & DOGUE",
+  membershipTitle: "Больше для вашего питомца. Весь год.",
+  membershipText:
+    "Присоединяйтесь к международному сообществу любителей животных и получайте полезные преимущества PETS & DOGUE.",
+  discounts: "Скидки участникам",
+  offers: "Спецпредложения",
+  contests: "Конкурсы и голосования",
+  community: "Мировое сообщество",
+  marketplaceBenefit: "Преимущества Marketplace",
 
-function text(key) {
+  petFriendlyLabel: "PET-FRIENDLY",
+  petFriendlyTitle: "Вместе — куда угодно.",
+  petFriendlyText:
+    "Находите кафе, отели, рестораны, парки, пляжи и сервисы, где рады животным.",
+
+  healthLabel: "ЗДОРОВЬЕ И УХОД",
+  healthTitle: "Забота с уверенностью.",
+  healthText:
+    "Полезные материалы о здоровье, благополучии, груминге и ответственном уходе.",
+
+  coverLabel: "COVER STAR",
+  coverTitle: "Ваш питомец может быть следующим.",
+  coverText:
+    "Знакомьтесь с Cover Stars, добавляйте своего питомца и голосуйте за любимцев.",
+  vote: "ГОЛОСОВАТЬ",
+
+  communityLabel: "СООБЩЕСТВО",
+  communityTitle: "Одно сообщество. Каждый питомец.",
+  communityText:
+    "Общайтесь с владельцами животных, делитесь рекомендациями и помогайте друг другу.",
+
+  marketplaceLabel: "MARKETPLACE",
+  marketplaceTitle: "Покупайте. Продавайте. Находите.",
+  marketplaceText:
+    "Полезные товары, услуги и объявления сообщества в одном месте.",
+
+  greenLabel: "ЗЕЛЁНЫЙ ТУРИЗМ",
+  greenTitle: "Мир животных за пределами города.",
+  greenText:
+    "Фермы, приюты, wildlife-парки и ответственные места для знакомства с животными.",
+
+  helpLabel: "ПОМОЩЬ",
+  helpTitle: "Увидели. Поделились. Помогли.",
+  helpText:
+    "Помогайте животным, которым нужен дом, лечение, спасение или поддержка.",
+
+  ad: "РЕКЛАМА",
+  adTitle: "Здесь может быть ваш бренд.",
+  adText: "Премиальное видео-размещение внутри редакционной среды PETS & DOGUE.",
+  advertise: "Реклама в PETS & DOGUE",
+
+  discoverMore: "Смотреть больше",
+  join: "Вступить в клуб",
+  readMore: "Подробнее"
+};
+
+const UK = {
+  latest: "Останні історії",
+  explore: "Дивитися",
+  membershipLabel: "КЛУБ PETS & DOGUE",
+  membershipTitle: "Більше для вашого улюбленця. Увесь рік.",
+  membershipText:
+    "Приєднуйтеся до міжнародної спільноти любителів тварин та отримуйте корисні переваги PETS & DOGUE.",
+  discounts: "Знижки учасникам",
+  offers: "Спецпропозиції",
+  contests: "Конкурси й голосування",
+  community: "Світова спільнота",
+  marketplaceBenefit: "Переваги Marketplace",
+
+  petFriendlyLabel: "PET-FRIENDLY",
+  petFriendlyTitle: "Разом — куди завгодно.",
+  petFriendlyText:
+    "Знаходьте кафе, готелі, ресторани, парки, пляжі та сервіси, де раді тваринам.",
+
+  healthLabel: "ЗДОРОВ’Я І ДОГЛЯД",
+  healthTitle: "Турбота з упевненістю.",
+  healthText:
+    "Корисні матеріали про здоров’я, добробут, грумінг і відповідальний догляд.",
+
+  coverLabel: "COVER STAR",
+  coverTitle: "Ваш улюбленець може бути наступним.",
+  coverText:
+    "Знайомтеся з Cover Stars, додавайте свого улюбленця та голосуйте за фаворитів.",
+  vote: "ГОЛОСУВАТИ",
+
+  communityLabel: "СПІЛЬНОТА",
+  communityTitle: "Одна спільнота. Кожен улюбленець.",
+  communityText:
+    "Спілкуйтеся з власниками тварин, діліться рекомендаціями та допомагайте одне одному.",
+
+  marketplaceLabel: "MARKETPLACE",
+  marketplaceTitle: "Купуйте. Продавайте. Знаходьте.",
+  marketplaceText:
+    "Корисні товари, послуги та оголошення спільноти в одному місці.",
+
+  greenLabel: "ЗЕЛЕНИЙ ТУРИЗМ",
+  greenTitle: "Світ тварин за межами міста.",
+  greenText:
+    "Ферми, притулки, wildlife-парки та відповідальні місця для знайомства з тваринами.",
+
+  helpLabel: "ДОПОМОГА",
+  helpTitle: "Побачили. Поділилися. Допомогли.",
+  helpText:
+    "Допомагайте тваринам, яким потрібен дім, лікування, порятунок або підтримка.",
+
+  ad: "РЕКЛАМА",
+  adTitle: "Тут може бути ваш бренд.",
+  adText: "Преміальне відео-розміщення в редакційному середовищі PETS & DOGUE.",
+  advertise: "Реклама в PETS & DOGUE",
+
+  discoverMore: "Дивитися більше",
+  join: "Приєднатися до клубу",
+  readMore: "Докладніше"
+};
+
+function t(key) {
   const lang = currentLanguage();
 
   const external =
@@ -283,20 +233,11 @@ function text(key) {
     return external[key];
   }
 
-  if (
-    FALLBACK[lang] &&
-    Object.prototype.hasOwnProperty.call(FALLBACK[lang], key)
-  ) {
-    return FALLBACK[lang][key];
-  }
+  if (lang === "ru" && RU[key]) return RU[key];
+  if (lang === "uk" && UK[key]) return UK[key];
 
-  return FALLBACK.en[key] || "";
+  return EN[key] || "";
 }
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
 
 function esc(value) {
   return String(value || "")
@@ -306,803 +247,1072 @@ function esc(value) {
     .replace(/"/g, "&quot;");
 }
 
-
-function chips(items) {
-  return `
-    <div class="pdv3-chips">
-      ${items
-        .filter(Boolean)
-        .map(item => `<span>${esc(item)}</span>`)
-        .join("")}
-    </div>
-  `;
-}
-
-
-function arrow(title) {
-  return `
-    <span
-      class="pdv3-arrow"
-      role="img"
-      aria-label="${esc(title)}"
-    >
-      →
-    </span>
-  `;
-}
-
-
 function listenButton() {
   return `
     <button
-      class="pdv3-listen home-listen"
+      class="pdv4-listen"
       type="button"
       aria-label="Listen to this section"
-      onclick="listenToSection(this); event.preventDefault(); event.stopPropagation();"
-    >
-      🔊
-    </button>
+      onclick="listenToSection(this)"
+    >🔊</button>
   `;
 }
 
-
-/* =========================================================
-   SECTION TEMPLATE
-========================================================= */
-
-function visualCard({
-  className = "",
-  image,
+function card({
   href,
+  image,
   label,
   title,
-  body,
-  chipsList = [],
-  dark = true,
-  position = "center"
+  text,
+  className = "",
+  vote = false
 }) {
-
   return `
-    <a
-      class="pdv3-card ${className} ${dark ? "pdv3-dark" : "pdv3-light"}"
-      href="${href}"
+    <article
+      class="pdv4-card ${className}"
       data-speech-section
     >
+      <a href="${href}" class="pdv4-card-link">
+        <div class="pdv4-media">
+          <img
+            src="${image}"
+            alt="${esc(title)}"
+            loading="lazy"
+          />
+          <div class="pdv4-shade"></div>
 
-      <img
-        class="pdv3-image"
-        src="${image}"
-        alt="${esc(title)}"
-        style="object-position:${position}"
-        loading="lazy"
-      >
+          ${
+            vote
+              ? `<span class="pdv4-vote">♥ ${esc(t("vote"))}</span>`
+              : ""
+          }
 
-      <div class="pdv3-shade"></div>
-
-      ${listenButton()}
-
-      <div class="pdv3-content">
-
-        <div class="pdv3-label">
-          ${label}
+          <div class="pdv4-overlay-copy">
+            <span class="pdv4-label">${esc(label)}</span>
+            <h2>${esc(title)}</h2>
+          </div>
         </div>
 
-        <h2>
-          ${title}
-        </h2>
+        <div class="pdv4-card-copy">
+          <p>${esc(text)}</p>
+          <span class="pdv4-arrow">${esc(t("readMore"))} →</span>
+        </div>
+      </a>
 
-        <p>
-          ${body}
-        </p>
-
-        ${
-          chipsList.length
-            ? chips(chipsList)
-            : ""
-        }
-
-        ${arrow(title)}
-
-      </div>
-
-    </a>
+      ${listenButton()}
+    </article>
   `;
-}
-
-
-/* =========================================================
-   STYLES
-========================================================= */
-
-function styles() {
+}function styles() {
   return `
+<style id="pets-dogue-home-v4-styles">
 
-<style id="pdHomepageV3Styles">
-
-.pdv3{
-width:100%;
-background:#f4efe5;
-color:#111;
-overflow:hidden;
+.pdv4-home{
+  --pd-black:#080808;
+  --pd-ivory:#f4f0e8;
+  --pd-gold:#c7a05b;
+  --pd-line:rgba(255,255,255,.24);
+  background:var(--pd-black);
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-.pdv3 *{
-box-sizing:border-box;
+.pdv4-home *{
+  box-sizing:border-box;
 }
 
-.pdv3-feed{
-width:min(100%,1440px);
-margin:0 auto;
-padding:12px;
-display:grid;
-gap:12px;
+.pdv4-home img{
+  display:block;
+  width:100%;
 }
 
-.pdv3-card{
-position:relative;
-display:block;
-min-height:650px;
-border-radius:24px;
-overflow:hidden;
-text-decoration:none;
-color:#fff;
-isolation:isolate;
-background:#111;
+.pdv4-hero{
+  position:relative;
+  min-height:min(72vh,760px);
+  overflow:hidden;
+  background:#111;
 }
 
-.pdv3-image{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-transform:scale(1.002);
-transition:transform .7s ease;
-z-index:-3;
+.pdv4-hero img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
 }
 
-.pdv3-card:hover .pdv3-image{
-transform:scale(1.025);
+.pdv4-hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.68) 0%,
+      rgba(0,0,0,.18) 48%,
+      rgba(0,0,0,.05) 100%
+    );
+  pointer-events:none;
 }
 
-.pdv3-shade{
-position:absolute;
-inset:0;
-z-index:-2;
-background:
-linear-gradient(
-180deg,
-rgba(0,0,0,.03) 0%,
-rgba(0,0,0,.05) 38%,
-rgba(0,0,0,.76) 100%
-);
+.pdv4-hero-copy{
+  position:absolute;
+  z-index:3;
+  left:clamp(18px,5vw,70px);
+  right:clamp(18px,5vw,70px);
+  bottom:clamp(24px,6vw,70px);
+  max-width:820px;
 }
 
-.pdv3-light .pdv3-shade{
-background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.02) 0%,
-rgba(255,255,255,.01) 40%,
-rgba(245,238,225,.92) 100%
-);
+.pdv4-eyebrow,
+.pdv4-label{
+  display:block;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
-.pdv3-light{
-color:#111;
+.pdv4-eyebrow{
+  color:#fff;
+  margin-bottom:11px;
 }
 
-.pdv3-content{
-position:absolute;
-left:0;
-right:0;
-bottom:0;
-padding:34px 34px 32px;
-max-width:680px;
+.pdv4-hero h1{
+  margin:0;
+  font:400 clamp(49px,8vw,104px)/.88 Georgia,"Times New Roman",serif;
+  letter-spacing:-3px;
+  text-shadow:0 3px 30px rgba(0,0,0,.3);
 }
 
-.pdv3-label{
-font-size:12px;
-font-weight:900;
-letter-spacing:.18em;
-text-transform:uppercase;
-margin-bottom:10px;
+.pdv4-hero h1 em{
+  font-weight:400;
+  font-style:italic;
 }
 
-.pdv3-card h2{
-margin:0 0 12px;
-font-family:Georgia,"Times New Roman",serif;
-font-weight:400;
-font-size:clamp(44px,5vw,76px);
-line-height:.9;
-letter-spacing:-.04em;
-max-width:610px;
+.pdv4-listen{
+  position:absolute;
+  z-index:10;
+  top:14px;
+  right:14px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.62);
+  background:rgba(0,0,0,.44);
+  color:#fff;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
 
-.pdv3-card p{
-margin:0;
-max-width:520px;
-font-size:17px;
-line-height:1.42;
-font-weight:600;
+.pdv4-section{
+  padding:38px 16px 48px;
 }
 
-.pdv3-chips{
-display:flex;
-flex-wrap:wrap;
-gap:7px;
-margin-top:18px;
-max-width:520px;
+.pdv4-section-head{
+  max-width:1280px;
+  margin:0 auto 22px;
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  border-bottom:1px solid rgba(255,255,255,.28);
+  padding-bottom:12px;
 }
 
-.pdv3-chips span{
-display:inline-flex;
-align-items:center;
-min-height:32px;
-padding:7px 11px;
-border-radius:999px;
-font-size:10px;
-font-weight:900;
-background:rgba(255,255,255,.88);
-color:#111;
-backdrop-filter:blur(6px);
--webkit-backdrop-filter:blur(6px);
+.pdv4-section-head h2{
+  margin:0;
+  font:400 clamp(30px,4vw,52px)/1 Georgia,"Times New Roman",serif;
 }
 
-.pdv3-arrow{
-position:absolute;
-right:28px;
-bottom:28px;
-width:50px;
-height:50px;
-border-radius:50%;
-display:grid;
-place-items:center;
-border:1px solid rgba(255,255,255,.8);
-background:rgba(0,0,0,.22);
-color:#fff;
-font-size:28px;
-font-weight:300;
-backdrop-filter:blur(6px);
--webkit-backdrop-filter:blur(6px);
+.pdv4-section-head span{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.6px;
+  color:#bdb6aa;
 }
 
-.pdv3-light .pdv3-arrow{
-border-color:#111;
-color:#111;
-background:rgba(255,255,255,.65);
+.pdv4-grid{
+  max-width:1280px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-auto-flow:dense;
+  gap:10px;
 }
 
-.pdv3-listen{
-position:absolute;
-top:18px;
-right:18px;
-z-index:5;
-width:46px;
-height:46px;
-border-radius:50%;
-border:1px solid rgba(255,255,255,.65);
-background:rgba(0,0,0,.28);
-color:#fff;
-display:grid;
-place-items:center;
-font-size:19px;
-cursor:pointer;
-backdrop-filter:blur(8px);
--webkit-backdrop-filter:blur(8px);
+.pdv4-card{
+  position:relative;
+  background:#121212;
+  overflow:hidden;
+  min-width:0;
 }
 
-.pdv3-membership{
-min-height:700px;
+.pdv4-card-link{
+  display:block;
+  height:100%;
 }
 
-.pdv3-petfriendly{
-min-height:760px;
+.pdv4-card.large{
+  grid-column:span 7;
 }
 
-.pdv3-stays{
-min-height:700px;
+.pdv4-card.tall{
+  grid-column:span 5;
 }
 
-.pdv3-green{
-min-height:720px;
+.pdv4-card.medium{
+  grid-column:span 5;
 }
 
-.pdv3-help{
-min-height:580px;
+.pdv4-card.wide{
+  grid-column:span 7;
 }
 
-.pdv3-help .pdv3-shade{
-background:
-linear-gradient(
-180deg,
-rgba(115,0,15,.04) 0%,
-rgba(145,8,25,.18) 40%,
-rgba(128,0,15,.88) 100%
-);
+.pdv4-card.small{
+  grid-column:span 4;
 }
 
-.pdv3-help .pdv3-label,
-.pdv3-help h2{
-color:#fff;
+.pdv4-media{
+  position:relative;
+  overflow:hidden;
+  min-height:390px;
 }
 
-.pdv3-help h2::before{
-content:"♥ ";
+.pdv4-card.large .pdv4-media{
+  min-height:620px;
 }
 
-.pdv3-help h2::after{
-content:" ♥";
+.pdv4-card.tall .pdv4-media{
+  min-height:620px;
 }
 
-.pdv3-business .pdv3-shade{
-background:
-linear-gradient(
-180deg,
-rgba(0,0,0,.03),
-rgba(0,0,0,.72)
-);
+.pdv4-card.wide .pdv4-media{
+  min-height:440px;
 }
 
-.pdv3-two{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
+.pdv4-card.small .pdv4-media{
+  min-height:360px;
 }
 
-.pdv3-two .pdv3-card{
-min-height:600px;
+.pdv4-media img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .7s cubic-bezier(.2,.7,.2,1);
+  filter:saturate(.88) contrast(.97);
 }
 
-.pdv3-footer-message{
-background:#080808;
-color:#fff;
-padding:40px 24px;
-text-align:center;
+.pdv4-card:hover .pdv4-media img{
+  transform:scale(1.025);
 }
 
-.pdv3-footer-message strong{
-display:block;
-font-family:Georgia,"Times New Roman",serif;
-font-size:clamp(32px,5vw,58px);
-font-weight:400;
+.pdv4-shade{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.82) 0%,
+      rgba(0,0,0,.26) 46%,
+      rgba(0,0,0,.02) 74%
+    );
 }
 
-.pdv3-footer-message span{
-display:block;
-margin-top:8px;
-font-size:11px;
-letter-spacing:.18em;
-color:#d3b36a;
-font-weight:900;
+.pdv4-overlay-copy{
+  position:absolute;
+  z-index:3;
+  left:20px;
+  right:20px;
+  bottom:18px;
 }
 
-
-/* ================= MOBILE ================= */
-
-@media(max-width:760px){
-
-.pdv3-feed{
-padding:8px;
-gap:8px;
+.pdv4-label{
+  margin-bottom:7px;
+  color:#e4c98f;
 }
 
-.pdv3-two{
-grid-template-columns:1fr;
-gap:8px;
+.pdv4-overlay-copy h2{
+  margin:0;
+  max-width:650px;
+  font:400 clamp(28px,4vw,58px)/.94 Georgia,"Times New Roman",serif;
+  letter-spacing:-1.4px;
+  color:#fff;
 }
 
-.pdv3-card,
-.pdv3-two .pdv3-card,
-.pdv3-membership,
-.pdv3-petfriendly,
-.pdv3-stays,
-.pdv3-green{
-min-height:64svh;
-max-height:710px;
-border-radius:18px;
+.pdv4-card.small .pdv4-overlay-copy h2{
+  font-size:clamp(25px,3vw,39px);
 }
 
-.pdv3-help{
-min-height:58svh;
+.pdv4-card-copy{
+  padding:15px 18px 19px;
+  background:#111;
+  border-top:1px solid rgba(255,255,255,.08);
 }
 
-.pdv3-content{
-padding:24px 20px 24px;
-max-width:92%;
+.pdv4-card-copy p{
+  margin:0 0 12px;
+  max-width:680px;
+  color:#c9c5be;
+  font-size:13px;
+  line-height:1.48;
 }
 
-.pdv3-label{
-font-size:9px;
-margin-bottom:8px;
+.pdv4-arrow{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+  color:#fff;
 }
 
-.pdv3-card h2{
-font-size:38px;
-line-height:.92;
-max-width:90%;
-margin-bottom:9px;
+.pdv4-vote{
+  position:absolute;
+  z-index:5;
+  top:16px;
+  left:16px;
+  padding:10px 13px;
+  border-radius:999px;
+  background:#d71920;
+  color:#fff;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.8px;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
 
-.pdv3-card p{
-font-size:13px;
-line-height:1.35;
-max-width:88%;
+.pdv4-membership{
+  max-width:1280px;
+  margin:14px auto 0;
+  padding:46px 0 12px;
 }
 
-.pdv3-chips{
-gap:5px;
-margin-top:12px;
-max-width:88%;
+.pdv4-membership-top{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:28px;
+  align-items:end;
+  margin-bottom:24px;
 }
 
-.pdv3-chips span{
-font-size:8px;
-padding:6px 9px;
-min-height:27px;
+.pdv4-membership-kicker{
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:2px;
+  color:#d2b36f;
 }
 
-.pdv3-arrow{
-width:42px;
-height:42px;
-right:17px;
-bottom:17px;
-font-size:23px;
+.pdv4-membership h2{
+  margin:8px 0 0;
+  font:400 clamp(40px,6vw,78px)/.9 Georgia,"Times New Roman",serif;
+  letter-spacing:-2px;
 }
 
-.pdv3-listen{
-width:40px;
-height:40px;
-top:13px;
-right:13px;
-font-size:16px;
+.pdv4-membership-intro{
+  color:#c8c3ba;
+  font-size:15px;
+  line-height:1.6;
+  max-width:560px;
+  margin:0;
 }
 
-.pdv3-footer-message{
-padding:34px 18px;
+.pdv4-benefits{
+  display:grid;
+  grid-template-columns:1.25fr repeat(4,.75fr);
+  gap:8px;
 }
 
+.pdv4-benefit{
+  position:relative;
+  min-height:260px;
+  overflow:hidden;
+  background:#171717;
 }
 
-
-@media(max-width:390px){
-
-.pdv3-card,
-.pdv3-two .pdv3-card,
-.pdv3-membership,
-.pdv3-petfriendly,
-.pdv3-stays,
-.pdv3-green{
-min-height:61svh;
+.pdv4-benefit:first-child{
+  min-height:360px;
 }
 
-.pdv3-card h2{
-font-size:34px;
+.pdv4-benefit img{
+  position:absolute;
+  inset:0;
+  height:100%;
+  object-fit:cover;
+  filter:saturate(.86);
 }
 
-.pdv3-card p{
-font-size:12.5px;
+.pdv4-benefit:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.02) 65%);
 }
+
+.pdv4-benefit span{
+  position:absolute;
+  z-index:2;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  font:400 18px/1.05 Georgia,"Times New Roman",serif;
+}
+
+.pdv4-join{
+  display:inline-flex;
+  margin-top:18px;
+  min-height:44px;
+  align-items:center;
+  padding:0 20px;
+  border-radius:999px;
+  background:#fff;
+  color:#090909;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+
+.pdv4-ad{
+  max-width:1280px;
+  margin:46px auto;
+  min-height:300px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.23);
+  background:#111;
+}
+
+.pdv4-ad img{
+  position:absolute;
+  inset:0;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.54) saturate(.72);
+}
+
+.pdv4-ad:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 70% 30%,rgba(255,255,255,.10),transparent 40%),
+    linear-gradient(90deg,rgba(0,0,0,.83),rgba(0,0,0,.18));
+}
+
+.pdv4-ad-copy{
+  position:relative;
+  z-index:3;
+  min-height:300px;
+  padding:34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  max-width:650px;
+}
+
+.pdv4-ad-label{
+  font-size:9px;
+  letter-spacing:2px;
+  font-weight:900;
+  margin-bottom:8px;
+  color:#d0cbc3;
+}
+
+.pdv4-ad h2{
+  margin:0;
+  font:400 clamp(34px,5vw,62px)/.92 Georgia,"Times New Roman",serif;
+}
+
+.pdv4-ad p{
+  max-width:530px;
+  margin:12px 0 17px;
+  color:#d1ccc4;
+  line-height:1.5;
+  font-size:13px;
+}
+
+.pdv4-ad a{
+  display:inline-flex;
+  align-self:flex-start;
+  border-bottom:1px solid #fff;
+  padding-bottom:5px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+@media(max-width:800px){
+
+  .pdv4-hero{
+    min-height:500px;
+  }
+
+  .pdv4-hero h1{
+    font-size:52px;
+    letter-spacing:-2px;
+  }
+
+  .pdv4-section{
+    padding:25px 8px 36px;
+  }
+
+  .pdv4-section-head{
+    margin-bottom:8px;
+    padding:0 7px 10px;
+  }
+
+  .pdv4-grid{
+    gap:7px;
+  }
+
+  .pdv4-card.large{
+    grid-column:span 7;
+  }
+
+  .pdv4-card.tall{
+    grid-column:span 5;
+  }
+
+  .pdv4-card.medium{
+    grid-column:span 6;
+  }
+
+  .pdv4-card.wide{
+    grid-column:span 6;
+  }
+
+  .pdv4-card.small{
+    grid-column:span 6;
+  }
+
+  .pdv4-card.large .pdv4-media,
+  .pdv4-card.tall .pdv4-media{
+    min-height:390px;
+  }
+
+  .pdv4-card.medium .pdv4-media,
+  .pdv4-card.wide .pdv4-media{
+    min-height:300px;
+  }
+
+  .pdv4-card.small .pdv4-media{
+    min-height:270px;
+  }
+
+  .pdv4-overlay-copy{
+    left:13px;
+    right:13px;
+    bottom:12px;
+  }
+
+  .pdv4-overlay-copy h2,
+  .pdv4-card.small .pdv4-overlay-copy h2{
+    font-size:27px;
+  }
+
+  .pdv4-card-copy{
+    padding:12px 13px 15px;
+  }
+
+  .pdv4-card-copy p{
+    font-size:11px;
+  }
+
+  .pdv4-membership{
+    padding:32px 8px 5px;
+  }
+
+  .pdv4-membership-top{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:0 8px;
+  }
+
+  .pdv4-membership h2{
+    font-size:45px;
+  }
+
+  .pdv4-benefits{
+    grid-template-columns:1.3fr 1fr;
+  }
+
+  .pdv4-benefit,
+  .pdv4-benefit:first-child{
+    min-height:190px;
+  }
+
+  .pdv4-benefit:first-child{
+    grid-row:span 2;
+    min-height:388px;
+  }
+
+  .pdv4-ad{
+    margin:34px 8px;
+    min-height:250px;
+  }
+
+  .pdv4-ad-copy{
+    min-height:250px;
+    padding:22px;
+  }
+
+}
+
+@media(max-width:460px){
+
+  .pdv4-hero{
+    min-height:410px;
+  }
+
+  .pdv4-hero-copy{
+    left:16px;
+    right:16px;
+    bottom:22px;
+  }
+
+  .pdv4-hero h1{
+    font-size:43px;
+  }
+
+  .pdv4-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .pdv4-card.large,
+  .pdv4-card.tall,
+  .pdv4-card.medium,
+  .pdv4-card.wide,
+  .pdv4-card.small{
+    grid-column:span 1;
+  }
+
+  .pdv4-card.large{
+    grid-column:span 2;
+  }
+
+  .pdv4-card.large .pdv4-media{
+    min-height:360px;
+  }
+
+  .pdv4-card.tall .pdv4-media,
+  .pdv4-card.medium .pdv4-media,
+  .pdv4-card.wide .pdv4-media,
+  .pdv4-card.small .pdv4-media{
+    min-height:235px;
+  }
+
+  .pdv4-card-copy p{
+    display:none;
+  }
+
+  .pdv4-card-copy{
+    padding:10px 11px 12px;
+  }
+
+  .pdv4-overlay-copy h2,
+  .pdv4-card.small .pdv4-overlay-copy h2{
+    font-size:23px;
+  }
+
+  .pdv4-label{
+    font-size:8px;
+    letter-spacing:1.3px;
+  }
+
+  .pdv4-vote{
+    top:10px;
+    left:10px;
+    padding:8px 10px;
+    font-size:9px;
+  }
+
+  .pdv4-benefits{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .pdv4-benefit:first-child{
+    grid-column:span 2;
+    grid-row:auto;
+    min-height:260px;
+  }
+
+  .pdv4-benefit{
+    min-height:150px;
+  }
+
+  .pdv4-benefit span{
+    font-size:15px;
+  }
 
 }
 
 </style>
+  `;
+}function render() {
 
-`;
-}
+  const root = document.querySelector(ROOT_SELECTOR);
+  if (!root) return;
 
+  const hero = root.querySelector(".pd-home-hero");
 
-/* =========================================================
-   RENDER
-========================================================= */
+  if (hero) {
+    hero.innerHTML = `
+      <img
+        src="hero-main.jpg"
+        alt="PETS & DOGUE — One world. Every pet."
+      />
 
-function renderHomepageV3() {
+      ${listenButton()}
 
-  const root =
-    document.querySelector(ROOT_SELECTOR);
-
-  if (!root) {
-    return;
-  }
-
-  /*
-  Preserve the ORIGINAL homepage intro.
-  We do not redesign or replace it.
-  */
-
-  let introHTML = "";
-
-  const intro =
-    root.querySelector(".pd-home-hero");
-
-  if (intro) {
-    introHTML = intro.outerHTML;
-  } else if (root.dataset.pdIntroHtml) {
-    introHTML = root.dataset.pdIntroHtml;
-  }
-
-  if (introHTML) {
-    root.dataset.pdIntroHtml = introHTML;
-  }
-
-
-  const content = `
-
-    ${styles()}
-
-    ${introHTML}
-
-    <div class="pdv3">
-
-      <div class="pdv3-feed">
-
-
-        <!-- MEMBERSHIP -->
-
-        ${visualCard({
-          className: "pdv3-membership",
-          image: "club.jpg",
-          href: "club.html",
-          label: text("memberLabel"),
-          title: text("membershipTitle"),
-          body: text("membershipText"),
-          position: "center center",
-          chipsList: [
-            "£10 / YEAR",
-            text("offers"),
-            "Marketplace",
-            "Cover Star",
-            "Competitions"
-          ]
-        })}
-
-
-        <!-- PET FRIENDLY -->
-
-        ${visualCard({
-          className: "pdv3-petfriendly",
-          image: "pet-friendly.jpg",
-          href: "pet-friendly-places.html",
-          label: text("petFriendlyLabel"),
-          title: text("petFriendlyTitle"),
-          body: text("petFriendlyText"),
-          position: "center center",
-          chipsList: [
-            text("nearby"),
-            text("map"),
-            text("petRules"),
-            text("routes"),
-            text("verified")
-          ]
-        })}
-
-
-        <!-- DISCOUNTS + STAYS -->
-
-        <div class="pdv3-two">
-
-          ${visualCard({
-            className: "pdv3-discounts",
-            image: "partners.jpg",
-            href: "special-offers.html",
-            label: text("discountLabel"),
-            title: text("discountsTitle"),
-            body: text("discountsText"),
-            position: "center center",
-            chipsList: [
-              text("offers"),
-              text("grooming"),
-              text("services")
-            ]
-          })}
-
-          ${visualCard({
-            className: "pdv3-stays",
-            image: "pet-friendly-stays.jpg",
-            href: "pet-friendly-places.html",
-            label: text("hotel"),
-            title: "Stay beautifully together.",
-            body: text("petFriendlyText"),
-            position: "center center",
-            chipsList: [
-              text("hotel"),
-              text("offers"),
-              text("services")
-            ]
-          })}
-
-        </div>
-
-
-        <!-- COMMUNITY -->
-
-        ${visualCard({
-          className: "pdv3-community",
-          image: "community.jpg",
-          href: "local-community.html",
-          label: text("communityLabel"),
-          title: text("communityTitle"),
-          body: text("communityText"),
-          position: "center center",
-          chipsList: [
-            text("nearby"),
-            text("lostFound"),
-            text("verified")
-          ]
-        })}
-
-
-        <!-- GREEN TOURISM -->
-
-        ${visualCard({
-          className: "pdv3-green",
-          image: "green-tourism.jpg",
-          href: "pet-friendly-places.html",
-          label: text("greenLabel"),
-          title: text("greenTitle"),
-          body: text("greenText"),
-          position: "center center",
-          chipsList: [
-            text("farms"),
-            text("wildlife"),
-            text("zoo"),
-            text("aquarium")
-          ]
-        })}
-
-
-        <!-- HEALTH + MARKETPLACE -->
-
-        <div class="pdv3-two">
-
-          ${visualCard({
-            className: "pdv3-health",
-            image: "health.jpg",
-            href: "wellness.html",
-            label: text("healthLabel"),
-            title: text("healthTitle"),
-            body: text("healthText"),
-            position: "center center",
-            chipsList: [
-              text("grooming"),
-              text("services")
-            ]
-          })}
-
-          ${visualCard({
-            className: "pdv3-marketplace",
-            image: "marketplace.jpg",
-            href: "pet-marketplace.html",
-            label: text("marketLabel"),
-            title: text("marketplaceTitle"),
-            body: text("marketplaceText"),
-            position: "center center",
-            chipsList: [
-              "Buy",
-              "Sell",
-              "Services",
-              "50 free ads"
-            ]
-          })}
-
-        </div>
-
-
-        <!-- COVER STAR / COMPETITIONS -->
-
-        ${visualCard({
-          className: "pdv3-cover",
-          image: "cover-star.jpg",
-          href: "members-gallery.html",
-          label: text("coverLabel"),
-          title: text("coverTitle"),
-          body: text("coverText"),
-          position: "center center",
-          chipsList: [
-            "Cover Star",
-            "Competitions",
-            "Editorial"
-          ]
-        })}
-
-
-        <!-- HELP ANIMALS -->
-
-        ${visualCard({
-          className: "pdv3-help",
-          image: "help-animals.jpg",
-          href: "pets-in-need.html",
-          label: "♥ " + text("helpLabel") + " ♥",
-          title: text("helpTitle"),
-          body: text("helpText"),
-          position: "center center",
-          chipsList: [
-            "♥ Rescue",
-            "♥ Shelter",
-            "♥ Urgent help",
-            "♥ Share"
-          ]
-        })}
-
-
-        <!-- PARTNERSHIPS -->
-
-        ${visualCard({
-          className: "pdv3-business",
-          image: "partners.jpg",
-          href: "partners.html",
-          label: text("businessLabel"),
-          title: text("businessTitle"),
-          body: text("businessText"),
-          position: "center center",
-          chipsList: [
-            "Hotels",
-            "Cafés",
-            "Groomers",
-            "Vets",
-            "Brands",
-            "Pet services"
-          ]
-        })}
-
-
-      </div>
-
-
-      <div class="pdv3-footer-message">
-
-        <strong>
-          Good pets. Brighter tomorrows.
-        </strong>
-
-        <span>
-          PETS &amp; DOGUE · ONE WORLD. EVERY PET.
+      <div class="pd-hero-copy">
+        <span class="pd-kicker">
+          PETS & DOGUE
         </span>
 
+        <h1 class="notranslate" translate="no">
+          One world.<br/>
+          <em>Every pet.</em>
+        </h1>
       </div>
+    `;
+  }
+
+  let oldContent = root.querySelector(".pdv4-home");
+
+  if (oldContent) {
+    oldContent.remove();
+  }
+
+  root.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="pdv4-home">
+
+      <section class="pdv4-section">
+
+        <div class="pdv4-section-head">
+          <h2>${esc(t("latest"))}</h2>
+          <span>PETS & DOGUE · EDITORIAL</span>
+        </div>
+
+        <div class="pdv4-grid">
+
+          ${card({
+            href: "pet-friendly-places.html",
+            image: "pet-friendly.jpg",
+            label: t("petFriendlyLabel"),
+            title: t("petFriendlyTitle"),
+            text: t("petFriendlyText"),
+            className: "large"
+          })}
+
+          ${card({
+            href: "members-gallery.html",
+            image: "cover-star/cover-miso-luxury.png",
+            label: t("coverLabel"),
+            title: t("coverTitle"),
+            text: t("coverText"),
+            className: "tall",
+            vote: true
+          })}
+
+          ${card({
+            href: "wellness.html",
+            image: "health.jpg",
+            label: t("healthLabel"),
+            title: t("healthTitle"),
+            text: t("healthText"),
+            className: "medium"
+          })}
+
+          ${card({
+            href: "local-community.html",
+            image: "community.jpg",
+            label: t("communityLabel"),
+            title: t("communityTitle"),
+            text: t("communityText"),
+            className: "wide"
+          })}
+
+        </div>
+
+
+        <section
+          class="pdv4-membership"
+          data-speech-section
+        >
+
+          ${listenButton()}
+
+          <div class="pdv4-membership-top">
+
+            <div>
+              <div class="pdv4-membership-kicker">
+                ${esc(t("membershipLabel"))}
+              </div>
+
+              <h2>
+                ${esc(t("membershipTitle"))}
+              </h2>
+            </div>
+
+            <p class="pdv4-membership-intro">
+              ${esc(t("membershipText"))}
+            </p>
+
+          </div>
+
+          <div class="pdv4-benefits">
+
+            <a class="pdv4-benefit" href="club.html">
+              <img
+                src="club.jpg"
+                alt="${esc(t("membershipTitle"))}"
+                loading="lazy"
+              />
+              <span>${esc(t("community"))}</span>
+            </a>
+
+            <a class="pdv4-benefit" href="special-offers.html">
+              <img
+                src="club-partner-discounts.png"
+                alt="${esc(t("discounts"))}"
+                loading="lazy"
+              />
+              <span>${esc(t("discounts"))}</span>
+            </a>
+
+            <a class="pdv4-benefit" href="wellness.html">
+              <img
+                src="club-pet-health.png"
+                alt="${esc(t("offers"))}"
+                loading="lazy"
+              />
+              <span>${esc(t("offers"))}</span>
+            </a>
+
+            <a class="pdv4-benefit" href="contests.html">
+              <img
+                src="cover-star/cover-surf-parrot.png"
+                alt="${esc(t("contests"))}"
+                loading="lazy"
+              />
+              <span>${esc(t("contests"))}</span>
+            </a>
+
+            <a class="pdv4-benefit" href="pet-marketplace.html">
+              <img
+                src="marketplace.jpg"
+                alt="${esc(t("marketplaceBenefit"))}"
+                loading="lazy"
+              />
+              <span>${esc(t("marketplaceBenefit"))}</span>
+            </a>
+
+          </div>
+
+          <a class="pdv4-join" href="club.html">
+            ${esc(t("join"))} →
+          </a>
+
+        </section>
+
+
+        <section
+          class="pdv4-ad"
+          data-speech-section
+        >
+
+          <img
+            src="partners.jpg"
+            alt="PETS & DOGUE advertising"
+            loading="lazy"
+          />
+
+          ${listenButton()}
+
+          <div class="pdv4-ad-copy">
+            <div class="pdv4-ad-label">
+              ${esc(t("ad"))} · VIDEO
+            </div>
+
+            <h2>
+              ${esc(t("adTitle"))}
+            </h2>
+
+            <p>
+              ${esc(t("adText"))}
+            </p>
+
+            <a href="partners.html">
+              ${esc(t("advertise"))} →
+            </a>
+          </div>
+
+        </section>
+
+
+        <div class="pdv4-grid">
+
+          ${card({
+            href: "green-tourism.html",
+            image: "green-tourism.jpg",
+            label: t("greenLabel"),
+            title: t("greenTitle"),
+            text: t("greenText"),
+            className: "tall"
+          })}
+
+          ${card({
+            href: "pet-marketplace.html",
+            image: "marketplace.jpg",
+            label: t("marketplaceLabel"),
+            title: t("marketplaceTitle"),
+            text: t("marketplaceText"),
+            className: "large"
+          })}
+
+          ${card({
+            href: "pets-in-need.html",
+            image: "help-animals.jpg",
+            label: t("helpLabel"),
+            title: t("helpTitle"),
+            text: t("helpText"),
+            className: "wide"
+          })}
+
+          ${card({
+            href: "pet-friendly-places.html",
+            image: "pet-friendly-stays.jpg",
+            label: t("petFriendlyLabel"),
+            title: t("petFriendlyTitle"),
+            text: t("petFriendlyText"),
+            className: "medium"
+          })}
+
+          ${card({
+            href: "photos.html",
+            image: "cover-star/cover-turtle-spa.png",
+            label: "PETS & DOGUE",
+            title: t("discoverMore"),
+            text: t("communityText"),
+            className: "small"
+          })}
+
+          ${card({
+            href: "pet-fashion.html",
+            image: "cover-star/cover-horse-salon.png",
+            label: "FASHION",
+            title: t("discoverMore"),
+            text: t("coverText"),
+            className: "small"
+          })}
+
+          ${card({
+            href: "articles.html",
+            image: "cover-star/cover-capri-sphynx.png",
+            label: "EDITORIAL",
+            title: t("discoverMore"),
+            text: t("healthText"),
+            className: "small"
+          })}
+
+        </div>
+
+
+        <section
+          class="pdv4-ad"
+          data-speech-section
+        >
+
+          <img
+            src="cover-star/cover-golf-bulldog.png"
+            alt="PETS & DOGUE premium video advertising"
+            loading="lazy"
+          />
+
+          ${listenButton()}
+
+          <div class="pdv4-ad-copy">
+            <div class="pdv4-ad-label">
+              ${esc(t("ad"))} · VIDEO
+            </div>
+
+            <h2>
+              ${esc(t("adTitle"))}
+            </h2>
+
+            <p>
+              ${esc(t("adText"))}
+            </p>
+
+            <a href="partners.html">
+              ${esc(t("advertise"))} →
+            </a>
+          </div>
+
+        </section>
+
+      </section>
 
     </div>
-
-  `;
-
-  root.innerHTML = content;
-
-}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-function init() {
-  renderHomepageV3();
-}
-
-
-if (document.readyState === "loading") {
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    init,
-    { once: true }
+    `
   );
 
-} else {
+  const oldSections = Array.from(root.children);
 
-  init();
+  oldSections.forEach((element) => {
+    if (
+      element.classList.contains("pd-home-hero") ||
+      element.classList.contains("pdv4-home")
+    ) {
+      return;
+    }
+
+    element.style.display = "none";
+  });
 
 }
 
+function refreshLanguage() {
+  render();
+}
 
-window.addEventListener(
-  "petsdogue:languagechange",
-  () => {
-    window.requestAnimationFrame(() => {
-      renderHomepageV3();
-    });
+function init() {
+
+  if (!document.getElementById("pets-dogue-home-v4-styles")) {
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      styles()
+    );
   }
-);
 
+  render();
+
+  window.addEventListener(
+    "petsdogue:languagechange",
+    refreshLanguage
+  );
+
+  window.addEventListener(
+    "languagechange",
+    refreshLanguage
+  );
+
+  document.addEventListener(
+    "pd:languagechange",
+    refreshLanguage
+  );
+
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
 
 })();
