@@ -347,8 +347,7 @@
       "Añadir Pet-Friendly a la pantalla de inicio",
       "Ten Pet-Friendly siempre a mano",
       "Añade Pet-Friendly Places a tu pantalla de inicio para abrirlo con un toque.",
-      "Añadir",
-      "Más tarde",
+      "Añadir",      "Más tarde",
       "En iPhone: toca Compartir y luego Añadir a pantalla de inicio.",
       "Lugares pet-friendly",
       "Descuentos",
@@ -452,7 +451,9 @@
       "Foto’s",
       "Mode",
       "Gezondheid"
-    ],    pl:[
+    ],
+
+    pl:[
       "Otwórz menu",
       "Zamknij menu",
       "Spis treści",
@@ -717,8 +718,7 @@
       "Forsidestjerner",
       "Konkurrencer",
       "Artikler",
-      "Fotos",
-      "Mode",
+      "Fotos",      "Mode",
       "Sundhed"
     ],
 
@@ -1211,7 +1211,9 @@
       ? "rtl"
       : "ltr";
 
-  }  function installStyles(){
+  }
+
+  function installStyles(){
 
     document
     .getElementById(
@@ -1564,26 +1566,31 @@ font-size:12px;
 line-height:1;
 }
 
+/* BLACK LUXURY CONTENTS TICKER */
+
 #pdContentsTicker{
 position:relative;
 z-index:13950;
 width:100%;
-height:44px;
+height:30px;
 display:flex;
 align-items:center;
 overflow:hidden;
-background:#f6f0e4;
-color:#111;
-border-top:1px solid #c89b3c;
-border-bottom:1px solid #c89b3c;
+background:#080808;
+color:#f7f3ea;
+border-top:1px solid rgba(200,155,60,.72);
+border-bottom:1px solid rgba(200,155,60,.72);
 cursor:pointer;
 user-select:none;
 -webkit-user-select:none;
 -webkit-tap-highlight-color:transparent;
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,.025),
+inset 0 -1px 0 rgba(255,255,255,.025);
 }
 
 #pdContentsTicker:hover{
-background:#fffaf1;
+background:#0d0d0d;
 }
 
 .pd-ticker-marquee{
@@ -1622,25 +1629,29 @@ white-space:nowrap;
 height:100%;
 display:inline-flex;
 align-items:center;
-gap:10px;
-padding:0 30px;
+gap:7px;
+padding:0 20px;
 white-space:nowrap;
 font-family:var(--pdh-serif);
-font-size:17px;
+font-size:12px;
 line-height:1;
+letter-spacing:.15px;
 }
 
 .pd-ticker-title{
 font-weight:700;
+color:#f7f3ea;
 }
 
 .pd-ticker-separator{
-color:#bd8b2e;
+color:#d8ad55;
+font-size:11px;
 }
 
 .pd-ticker-arrow{
 font-family:var(--pdh-sans);
-font-size:19px;
+font-size:13px;
+color:#d8ad55;
 }
 
 @keyframes pdTickerRightToLeft{
@@ -2153,12 +2164,21 @@ outline-offset:2px;
 @media(max-width:600px){
 
 #pdContentsTicker{
-height:42px;
+height:28px;
 }
 
 .pd-ticker-piece{
-padding:0 24px;
-font-size:16px;
+gap:6px;
+padding:0 18px;
+font-size:11.5px;
+}
+
+.pd-ticker-separator{
+font-size:10px;
+}
+
+.pd-ticker-arrow{
+font-size:12px;
 }
 
 #pdShellMenu{
@@ -2315,9 +2335,7 @@ animation-duration:48s;
       style
     );
 
-  }
-
-  function hideLegacy(){
+  }  function hideLegacy(){
 
     const selectors = [
 
@@ -2584,7 +2602,9 @@ animation-duration:48s;
         ]
     );
 
-  }  function renderRows(){
+  }
+
+  function renderRows(){
 
     const top =
       document.getElementById(
@@ -3174,9 +3194,7 @@ ${group}
 
     renderTicker();
 
-  }
-
-  function renderSideMenu(){
+  }  function renderSideMenu(){
 
     const menu =
       document.getElementById(
@@ -3613,7 +3631,9 @@ ${cards}
     ? closeProfile()
     : openProfile();
 
-  }  function syncExistingLanguageController(code){
+  }
+
+  function syncExistingLanguageController(code){
 
     const existing =
       pageLanguageSelect();
@@ -4217,9 +4237,7 @@ ${cards}
       () => {}
     );
 
-  }
-
-  function createInstallUI(){
+  }  function createInstallUI(){
 
     if(
       !isPetFriendlyPage()
@@ -4694,6 +4712,7 @@ type="button"
   }
 
 })();
+
 /* =========================================================
    PETS & DOGUE — GLOBAL MISO HELP
    Loads the independent Help / FAQ assistant on every page
