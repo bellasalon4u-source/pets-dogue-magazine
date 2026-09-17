@@ -1,21 +1,23 @@
 "use strict";
 
 /*
-PETS & DOGUE — HOMEPAGE EDITORIAL V8
+PETS & DOGUE — HOMEPAGE EDITORIAL V9
 
-V8:
-- replaces Explore / Открыть with How it works / Как это работает
-- homepage editorial cards no longer navigate away
-- opens an editorial How It Works modal
-- modal closes with X, backdrop or Escape
+V9:
+- replaces X close button in How It Works modal with Back
+- Back button returns to the homepage without reloading
+- Android/browser Back closes How It Works first
+- preserves the exact homepage scroll position
+- backdrop no longer closes the modal accidentally
+- Escape still closes the modal on desktop
 - preserves current homepage design
-- preserves V7 images
+- preserves V8 images and content
 - preserves Beauty & Grooming image
 - preserves Sport & Active Life image
-- no "up to 50 free ads" wording
-- improved mobile readability
+- preserves multilingual content
+- preserves TTS / listen buttons
 
-Меняет ТОЛЬКО наполнение и поведение карточек главной страницы.
+Меняет ТОЛЬКО поведение окна "How it works / Как это работает".
 
 НЕ ИЗМЕНЯЕТ:
 - global header
@@ -25,6 +27,8 @@ V8:
 - language menu
 - Miso bubble
 - global shell
+- homepage card structure
+- homepage images
 
 Сохраняет:
 - TTS / listen buttons
@@ -44,6 +48,10 @@ const ALIASES = {
   se: "sv",
   dk: "da"
 };
+
+let howModalHistoryActive = false;
+let howModalScrollY = 0;
+let closingFromPopstate = false;
 
 function currentLanguage() {
   let lang = "en";
@@ -156,7 +164,8 @@ const EN = {
   join: "Join the Club",
 
   howItWorks: "How it works",
-  close: "Close"
+  close: "Close",
+  back: "Back"
 };
 
 /* =========================================================
@@ -238,7 +247,8 @@ const RU = {
   join: "Вступить в клуб",
 
   howItWorks: "Как это работает",
-  close: "Закрыть"
+  close: "Закрыть",
+  back: "Назад"
 };
 
 /* =========================================================
@@ -320,7 +330,8 @@ const UK = {
   join: "Приєднатися до клубу",
 
   howItWorks: "Як це працює",
-  close: "Закрити"
+  close: "Закрити",
+  back: "Назад"
 };
 
 /* =========================================================
@@ -878,8 +889,7 @@ function card({
    HOW IT WORKS MODAL
 ========================================================= */
 
-function closeHowModal() {
-
+function removeHowModal() {
   const modal =
     document.querySelector(
       ".pdv4-how-modal"
@@ -899,10 +909,50 @@ function closeHowModal() {
 
   window.setTimeout(
     function () {
-      modal.remove();
+      if (modal && modal.parentNode) {
+        modal.remove();
+      }
+
+      window.scrollTo(
+        0,
+        howModalScrollY
+      );
     },
     260
   );
+}
+
+function closeHowModal(options = {}) {
+
+  const modal =
+    document.querySelector(
+      ".pdv4-how-modal"
+    );
+
+  if (!modal) {
+    return;
+  }
+
+  const fromHistory =
+    options.fromHistory === true;
+
+  if (
+    howModalHistoryActive &&
+    !fromHistory
+  ) {
+    howModalHistoryActive = false;
+
+    try {
+      window.history.back();
+      return;
+    } catch (error) {
+      removeHowModal();
+      return;
+    }
+  }
+
+  howModalHistoryActive = false;
+  removeHowModal();
 }
 
 function openHowModal(button) {
@@ -942,10 +992,30 @@ function openHowModal(button) {
     oldModal.remove();
   }
 
+  howModalScrollY =
+    window.scrollY ||
+    window.pageYOffset ||
+    0;
+
   const steps =
     Array.isArray(info.steps)
       ? info.steps
       : [];
+
+  try {
+    window.history.pushState(
+      {
+        petsDogueHowModal: true,
+        howKey: key
+      },
+      "",
+      window.location.href
+    );
+
+    howModalHistoryActive = true;
+  } catch (error) {
+    howModalHistoryActive = false;
+  }
 
   document.body.insertAdjacentHTML(
     "beforeend",
@@ -957,28 +1027,38 @@ function openHowModal(button) {
         aria-labelledby="pdv4HowTitle"
       >
 
-        <button
-          type="button"
+        <div
           class="pdv4-how-backdrop"
-          aria-label="${esc(t("close"))}"
-        ></button>
+          aria-hidden="true"
+        ></div>
 
         <div
           class="pdv4-how-panel"
           data-speech-section
         >
 
-          <div class="pdv4-how-top">
+          <div class="pdv4-how-header">
 
             <button
               type="button"
-              class="pdv4-how-close"
-              aria-label="${esc(t("close"))}"
+              class="pdv4-how-back"
+              aria-label="${esc(t("back"))}"
             >
-              ×
+              <span
+                class="pdv4-how-back-arrow"
+                aria-hidden="true"
+              >
+                ←
+              </span>
+
+              <span class="pdv4-how-back-text">
+                ${esc(t("back"))}
+              </span>
             </button>
 
-            ${listenButton()}
+            <div class="pdv4-how-tools">
+              ${listenButton()}
+            </div>
 
           </div>
 
@@ -1024,6 +1104,15 @@ function openHowModal(button) {
               ${esc(originalText)}
             </div>
 
+            <button
+              type="button"
+              class="pdv4-how-bottom-back"
+              aria-label="${esc(t("back"))}"
+            >
+              <span aria-hidden="true">←</span>
+              ${esc(t("back"))}
+            </button>
+
           </div>
 
         </div>
@@ -1051,14 +1140,16 @@ function openHowModal(button) {
     }
   );
 
-  const closeButton =
+  const backButton =
     modal &&
     modal.querySelector(
-      ".pdv4-how-close"
+      ".pdv4-how-back"
     );
 
-  if (closeButton) {
-    closeButton.focus();
+  if (backButton) {
+    backButton.focus({
+      preventScroll: true
+    });
   }
 }
 
@@ -1754,13 +1845,9 @@ body.pdv4-modal-open{
   inset:0;
   width:100%;
   height:100%;
-  margin:0;
-  padding:0;
-  border:0;
   background:rgba(0,0,0,.82);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
-  cursor:pointer;
 }
 
 .pdv4-how-panel{
@@ -1781,17 +1868,75 @@ body.pdv4-modal-open{
   transform:translateY(0) scale(1);
 }
 
-.pdv4-how-top{
+/* NEW HEADER: BACK LEFT + LISTEN RIGHT */
+
+.pdv4-how-header{
   position:absolute;
-  z-index:20;
-  top:15px;
-  right:15px;
+  z-index:30;
+  top:0;
+  left:0;
+  right:0;
+  min-height:68px;
   display:flex;
   align-items:center;
-  gap:9px;
+  justify-content:space-between;
+  gap:14px;
+  padding:12px 15px;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(11,11,11,.98) 0%,
+      rgba(11,11,11,.90) 72%,
+      rgba(11,11,11,0) 100%
+    );
+  pointer-events:none;
 }
 
-.pdv4-how-top .pdv4-listen{
+.pdv4-how-back,
+.pdv4-how-tools{
+  pointer-events:auto;
+}
+
+.pdv4-how-back{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin:0;
+  padding:0 14px 0 10px;
+  border:1px solid rgba(255,255,255,.38);
+  border-radius:999px;
+  background:rgba(0,0,0,.56);
+  color:#fff;
+  font:inherit;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.pdv4-how-back-arrow{
+  display:block;
+  font-size:25px;
+  line-height:1;
+  font-weight:300;
+  transform:translateY(-1px);
+}
+
+.pdv4-how-back-text{
+  font-size:11px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+
+.pdv4-how-tools{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+.pdv4-how-tools .pdv4-listen{
   position:relative;
   top:auto;
   right:auto;
@@ -1799,30 +1944,12 @@ body.pdv4-modal-open{
   height:44px;
 }
 
-.pdv4-how-close{
-  width:44px;
-  height:44px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.55);
-  background:rgba(0,0,0,.68);
-  color:#fff;
-  font-size:29px;
-  line-height:1;
-  font-weight:300;
-  cursor:pointer;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-
 .pdv4-how-scroll{
   max-height:min(850px,92vh);
   overflow-y:auto;
   overscroll-behavior:contain;
   padding:
-    clamp(58px,8vw,82px)
+    clamp(82px,10vw,102px)
     clamp(22px,6vw,62px)
     clamp(30px,6vw,58px);
 }
@@ -1910,6 +2037,41 @@ body.pdv4-modal-open{
   color:#c8c2b9;
   font-size:13px;
   line-height:1.55;
+}
+
+/* BOTTOM BACK BUTTON */
+
+.pdv4-how-bottom-back{
+  width:100%;
+  min-height:54px;
+  margin:24px 0 0;
+  padding:0 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border:1px solid rgba(255,255,255,.34);
+  border-radius:999px;
+  background:#111;
+  color:#fff;
+  font:inherit;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.pdv4-how-bottom-back span{
+  font-size:22px;
+  line-height:1;
+  font-weight:300;
+}
+
+.pdv4-how-bottom-back:hover,
+.pdv4-how-back:hover{
+  border-color:#fff;
+  background:#1a1a1a;
 }
 
 /* =========================================================
@@ -2360,18 +2522,31 @@ body.pdv4-modal-open{
   .pdv4-how-scroll{
     max-height:92vh;
     padding:
-      68px
+      76px
       20px
       36px;
   }
 
-  .pdv4-how-top{
-    top:12px;
-    right:12px;
+  .pdv4-how-header{
+    min-height:64px;
+    padding:10px 12px;
   }
 
-  .pdv4-how-close,
-  .pdv4-how-top .pdv4-listen{
+  .pdv4-how-back{
+    min-height:40px;
+    padding:0 12px 0 8px;
+    gap:7px;
+  }
+
+  .pdv4-how-back-arrow{
+    font-size:23px;
+  }
+
+  .pdv4-how-back-text{
+    font-size:10px;
+  }
+
+  .pdv4-how-tools .pdv4-listen{
     width:40px;
     height:40px;
   }
@@ -2412,6 +2587,12 @@ body.pdv4-modal-open{
     margin-top:22px;
     padding:16px;
     font-size:12px;
+  }
+
+  .pdv4-how-bottom-back{
+    min-height:52px;
+    margin-top:22px;
+    font-size:10px;
   }
 }
 
@@ -2813,7 +2994,13 @@ function render() {
 
 function refreshLanguage() {
 
-  closeHowModal();
+  if (
+    document.querySelector(
+      ".pdv4-how-modal"
+    )
+  ) {
+    closeHowModal();
+  }
 
   render();
 }
@@ -2840,24 +3027,18 @@ function handleDocumentClick(event) {
     return;
   }
 
-  const closeButton =
+  const backButton =
     event.target.closest(
-      ".pdv4-how-close"
+      ".pdv4-how-back, .pdv4-how-bottom-back"
     );
 
-  const backdrop =
-    event.target.closest(
-      ".pdv4-how-backdrop"
-    );
-
-  if (
-    closeButton ||
-    backdrop
-  ) {
+  if (backButton) {
 
     event.preventDefault();
 
     closeHowModal();
+
+    return;
   }
 }
 
@@ -2869,8 +3050,40 @@ function handleDocumentKeydown(event) {
       ".pdv4-how-modal"
     )
   ) {
+    event.preventDefault();
     closeHowModal();
   }
+}
+
+function handlePopState() {
+
+  const modal =
+    document.querySelector(
+      ".pdv4-how-modal"
+    );
+
+  if (!modal) {
+    howModalHistoryActive = false;
+    return;
+  }
+
+  if (closingFromPopstate) {
+    return;
+  }
+
+  closingFromPopstate = true;
+  howModalHistoryActive = false;
+
+  closeHowModal({
+    fromHistory: true
+  });
+
+  window.setTimeout(
+    function () {
+      closingFromPopstate = false;
+    },
+    300
+  );
 }
 
 /* =========================================================
@@ -2900,6 +3113,11 @@ function init() {
   document.addEventListener(
     "keydown",
     handleDocumentKeydown
+  );
+
+  window.addEventListener(
+    "popstate",
+    handlePopState
   );
 
   window.addEventListener(
