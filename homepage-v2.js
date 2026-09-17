@@ -1,16 +1,21 @@
 "use strict";
 
 /*
-PETS & DOGUE — HOMEPAGE EDITORIAL V7
+PETS & DOGUE — HOMEPAGE EDITORIAL V8
 
-Меняет ТОЛЬКО наполнение главной страницы.
-
-V7:
-- new Beauty & Grooming image
-- new Sport & Active Life image
-- removed duplicate bottom Business & Partnerships block
+V8:
+- replaces Explore / Открыть with How it works / Как это работает
+- homepage editorial cards no longer navigate away
+- opens an editorial How It Works modal
+- modal closes with X, backdrop or Escape
+- preserves current homepage design
+- preserves V7 images
+- preserves Beauty & Grooming image
+- preserves Sport & Active Life image
+- no "up to 50 free ads" wording
 - improved mobile readability
-- preserved editorial grid and advertising block
+
+Меняет ТОЛЬКО наполнение и поведение карточек главной страницы.
 
 НЕ ИЗМЕНЯЕТ:
 - global header
@@ -149,7 +154,9 @@ const EN = {
   advertise: "Advertise with us",
 
   join: "Join the Club",
-  readMore: "Explore"
+
+  howItWorks: "How it works",
+  close: "Close"
 };
 
 /* =========================================================
@@ -229,7 +236,9 @@ const RU = {
   advertise: "Дать рекламу",
 
   join: "Вступить в клуб",
-  readMore: "Открыть"
+
+  howItWorks: "Как это работает",
+  close: "Закрыть"
 };
 
 /* =========================================================
@@ -309,7 +318,9 @@ const UK = {
   advertise: "Дати рекламу",
 
   join: "Приєднатися до клубу",
-  readMore: "Відкрити"
+
+  howItWorks: "Як це працює",
+  close: "Закрити"
 };
 
 /* =========================================================
@@ -365,29 +376,452 @@ function listenButton() {
 }
 
 /* =========================================================
+   HOW IT WORKS CONTENT
+========================================================= */
+
+const HOW_EN = {
+
+  petFriendly: {
+    title: "Find places you can enjoy together",
+    intro:
+      "Pet-Friendly Places helps you discover places around you and understand what visiting with an animal is really like.",
+    steps: [
+      "Explore cafés, restaurants, hotels, parks, green spaces and other useful places.",
+      "Check the pet-friendly information available for each place.",
+      "See community feedback about whether pets are welcome inside, outside or both.",
+      "Discover places where you can spend time around animals even if you do not have a pet.",
+      "Choose a place and continue your day together."
+    ]
+  },
+
+  coverStar: {
+    title: "Your pet could become a PETS & DOGUE Cover Star",
+    intro:
+      "Cover Star turns the PETS & DOGUE community into part of the magazine.",
+    steps: [
+      "Club members can enter their pet in the Cover Star competition.",
+      "The community discovers the finalists and votes for its favourites.",
+      "The winning pet becomes a PETS & DOGUE cover star.",
+      "Five additional finalists receive their own story and photographs inside the magazine.",
+      "New competitions give more pets the opportunity to be discovered."
+    ]
+  },
+
+  health: {
+    title: "Practical care, made easier",
+    intro:
+      "Health & Care brings useful pet wellbeing information into one easy place.",
+    steps: [
+      "Discover practical guides about everyday pet health and wellbeing.",
+      "Learn about prevention, responsible care and common concerns.",
+      "Explore grooming and care information for different stages of pet life.",
+      "Save useful ideas and return whenever you need them.",
+      "Health content supports informed pet care and does not replace professional veterinary advice."
+    ]
+  },
+
+  community: {
+    title: "Your local pet world in one place",
+    intro:
+      "Local Community helps people with animals connect with what is happening around them.",
+    steps: [
+      "Discover pet people and useful local conversations near you.",
+      "Find events, meet-ups and recommendations from the community.",
+      "Share local information and experiences.",
+      "Help spread information about lost and found animals.",
+      "Stay connected to the pet community in your area."
+    ]
+  },
+
+  marketplace: {
+    title: "Buy. Sell. Give. Find.",
+    intro:
+      "Marketplace brings useful pet listings together in one community space.",
+    steps: [
+      "Browse products, services and pet-related listings.",
+      "Search for something specific that you need.",
+      "Sell pet items you no longer need.",
+      "Give useful items away to another pet household.",
+      "Publish your own advert and connect with interested people."
+    ]
+  },
+
+  help: {
+    title: "Make an animal visible when help matters",
+    intro:
+      "Help Animals is designed to give more visibility to animals that need support.",
+    steps: [
+      "Discover animals that need rescue, treatment, adoption, foster care or urgent support.",
+      "Read their story and understand what kind of help is needed.",
+      "Share cases so they can reach more people.",
+      "Connect people, rescuers and communities around animals in need.",
+      "Help useful information travel further, wherever the animal is in the world."
+    ]
+  },
+
+  fashion: {
+    title: "Discover pet fashion and style",
+    intro:
+      "Fashion & Style brings together editorial inspiration, new looks and pet-focused design.",
+    steps: [
+      "Discover new pet fashion and accessories.",
+      "Explore seasonal looks and editorial inspiration.",
+      "See creative styling ideas for different pets.",
+      "Discover brands, designers and new ideas.",
+      "Enjoy fashion as part of the PETS & DOGUE lifestyle world."
+    ]
+  },
+
+  wellness: {
+    title: "Wellbeing for modern pet life",
+    intro:
+      "Wellness & SPA explores comfort, care and experiences designed around pet wellbeing.",
+    steps: [
+      "Discover grooming, spa and wellbeing ideas.",
+      "Explore ways to make everyday care calmer and more enjoyable.",
+      "Find inspiration for relaxation and comfort.",
+      "Learn about experiences created for pets and their people.",
+      "Build wellbeing into everyday life together."
+    ]
+  },
+
+  beauty: {
+    title: "Grooming with style and care",
+    intro:
+      "Beauty & Grooming explores professional care, grooming trends and expressive pet style.",
+    steps: [
+      "Discover grooming ideas and current trends.",
+      "Explore professional care and beautiful grooming spaces.",
+      "Find inspiration for coats, styling and presentation.",
+      "Discover creative approaches for different pets.",
+      "Combine good care with individual style."
+    ]
+  },
+
+  active: {
+    title: "Move more. Explore more. Together.",
+    intro:
+      "Sport & Active Life is about movement, outdoor experiences and an active life shared with pets.",
+    steps: [
+      "Discover activities you can enjoy together.",
+      "Explore walking, outdoor and fitness inspiration.",
+      "Find ideas for making everyday life more active.",
+      "Discover different forms of pet-friendly recreation.",
+      "Turn movement and adventure into part of life together."
+    ]
+  }
+};
+
+const HOW_RU = {
+
+  petFriendly: {
+    title: "Находите места, куда можно вместе",
+    intro:
+      "Pet-Friendly Places помогает находить интересные места рядом и понимать, насколько удобно прийти туда с животным.",
+    steps: [
+      "Открывайте кафе, рестораны, отели, парки, зелёные зоны и другие интересные места.",
+      "Смотрите доступную информацию об условиях посещения с питомцем.",
+      "Узнавайте мнение сообщества: можно ли с животным внутрь, только на улицу или в обе зоны.",
+      "Находите места, где можно провести время рядом с животными, даже если своего питомца у вас нет.",
+      "Выбирайте место и отправляйтесь туда вместе."
+    ]
+  },
+
+  coverStar: {
+    title: "Ваш питомец может стать звездой PETS & DOGUE",
+    intro:
+      "Cover Star даёт питомцам нашего сообщества возможность стать частью PETS & DOGUE.",
+    steps: [
+      "Участники клуба могут заявить своего питомца на конкурс Cover Star.",
+      "Сообщество знакомится с финалистами и голосует за любимцев.",
+      "Победитель становится звездой обложки PETS & DOGUE.",
+      "Ещё пять финалистов получают собственную историю и фотографии внутри журнала.",
+      "Новые конкурсы дают шанс быть замеченными новым питомцам."
+    ]
+  },
+
+  health: {
+    title: "Полезная забота — проще и понятнее",
+    intro:
+      "Health & Care собирает полезную информацию о здоровье и благополучии питомцев в одном месте.",
+    steps: [
+      "Читайте практические материалы о здоровье и ежедневном уходе.",
+      "Узнавайте больше о профилактике и ответственном содержании животных.",
+      "Изучайте материалы об уходе и груминге на разных этапах жизни питомца.",
+      "Возвращайтесь к полезным рекомендациям, когда они понадобятся.",
+      "Материалы помогают лучше ориентироваться в уходе, но не заменяют консультацию ветеринара."
+    ]
+  },
+
+  community: {
+    title: "Всё локальное pet-сообщество рядом",
+    intro:
+      "Local Community помогает людям с животными узнавать, что происходит рядом, и общаться друг с другом.",
+    steps: [
+      "Находите людей и полезные обсуждения рядом с вами.",
+      "Узнавайте о событиях, встречах и рекомендациях сообщества.",
+      "Делитесь местной информацией и собственным опытом.",
+      "Помогайте распространять информацию о потерянных и найденных животных.",
+      "Оставайтесь частью pet-сообщества своего района."
+    ]
+  },
+
+  marketplace: {
+    title: "Купить. Продать. Отдать. Найти.",
+    intro:
+      "Marketplace объединяет товары, услуги и полезные объявления для животных в одном пространстве.",
+    steps: [
+      "Просматривайте товары, услуги и объявления для питомцев.",
+      "Ищите именно то, что вам необходимо.",
+      "Продавайте вещи для животных, которые вам больше не нужны.",
+      "Отдавайте полезные вещи другим владельцам питомцев.",
+      "Размещайте собственные объявления и связывайтесь с заинтересованными людьми."
+    ]
+  },
+
+  help: {
+    title: "Поможем животному стать замеченным",
+    intro:
+      "Help Animals создан для того, чтобы животные, которым нужна помощь, получили больше внимания.",
+    steps: [
+      "Находите животных, которым нужны спасение, лечение, новый дом, передержка или срочная поддержка.",
+      "Читайте их историю и узнавайте, какая именно помощь необходима.",
+      "Делитесь публикациями, чтобы о животном узнало больше людей.",
+      "Помогайте связывать людей, волонтёров и сообщества.",
+      "Распространяйте важную информацию независимо от того, в какой стране находится животное."
+    ]
+  },
+
+  fashion: {
+    title: "Мода и стиль для мира питомцев",
+    intro:
+      "Fashion & Style объединяет редакционные образы, новые идеи и дизайн для животных.",
+    steps: [
+      "Открывайте новую моду и аксессуары для питомцев.",
+      "Смотрите сезонные образы и редакционные съёмки.",
+      "Находите идеи стиля для разных животных.",
+      "Знакомьтесь с брендами, дизайнерами и новинками.",
+      "Открывайте pet-fashion как часть мира PETS & DOGUE."
+    ]
+  },
+
+  wellness: {
+    title: "Благополучие современного питомца",
+    intro:
+      "Wellness & SPA — это комфорт, забота и приятные процедуры для питомцев.",
+    steps: [
+      "Открывайте идеи груминга, SPA и wellness.",
+      "Узнавайте, как сделать ежедневный уход спокойнее и приятнее.",
+      "Находите идеи для отдыха и комфорта питомца.",
+      "Открывайте новые pet-friendly wellness-впечатления.",
+      "Делайте заботу о благополучии частью совместной жизни."
+    ]
+  },
+
+  beauty: {
+    title: "Красота, груминг и забота",
+    intro:
+      "Beauty & Grooming показывает профессиональный уход, современные тренды и индивидуальный стиль питомцев.",
+    steps: [
+      "Открывайте новые идеи и тренды груминга.",
+      "Знакомьтесь с профессиональным уходом и красивыми grooming-пространствами.",
+      "Находите вдохновение для шерсти, стрижек и образов.",
+      "Смотрите творческие решения для разных питомцев.",
+      "Соединяйте качественный уход с индивидуальным стилем."
+    ]
+  },
+
+  active: {
+    title: "Больше движения. Больше впечатлений. Вместе.",
+    intro:
+      "Sport & Active Life посвящён движению, прогулкам, спорту и активной жизни вместе с питомцами.",
+    steps: [
+      "Открывайте активности, которыми можно заниматься вместе.",
+      "Находите идеи для прогулок, природы и движения.",
+      "Делайте повседневную жизнь более активной.",
+      "Открывайте новые виды отдыха вместе с питомцем.",
+      "Превращайте движение и приключения в часть вашей совместной жизни."
+    ]
+  }
+};
+
+const HOW_UK = {
+
+  petFriendly: {
+    title: "Знаходьте місця, куди можна разом",
+    intro:
+      "Pet-Friendly Places допомагає знаходити цікаві місця поруч і розуміти умови відвідування з твариною.",
+    steps: [
+      "Відкривайте кафе, ресторани, готелі, парки, зелені зони та інші цікаві місця.",
+      "Переглядайте доступну інформацію про відвідування із улюбленцем.",
+      "Дізнавайтеся думку спільноти: чи можна з твариною всередину, назовні або в обидві зони.",
+      "Знаходьте місця, де можна провести час поруч із тваринами, навіть якщо власного улюбленця у вас немає.",
+      "Обирайте місце та вирушайте туди разом."
+    ]
+  },
+
+  coverStar: {
+    title: "Ваш улюбленець може стати зіркою PETS & DOGUE",
+    intro:
+      "Cover Star дає улюбленцям нашої спільноти можливість стати частиною PETS & DOGUE.",
+    steps: [
+      "Учасники клубу можуть подати свого улюбленця на конкурс Cover Star.",
+      "Спільнота знайомиться з фіналістами та голосує за фаворитів.",
+      "Переможець стає зіркою обкладинки PETS & DOGUE.",
+      "Ще п’ять фіналістів отримують власну історію та фотографії в журналі.",
+      "Нові конкурси дають можливість бути поміченими новим улюбленцям."
+    ]
+  },
+
+  health: {
+    title: "Корисна турбота — простіше й зрозуміліше",
+    intro:
+      "Health & Care збирає корисну інформацію про здоров’я та добробут улюбленців в одному місці.",
+    steps: [
+      "Читайте практичні матеріали про здоров’я та щоденний догляд.",
+      "Дізнавайтеся більше про профілактику та відповідальне утримання тварин.",
+      "Вивчайте матеріали про догляд і грумінг на різних етапах життя.",
+      "Повертайтеся до корисної інформації, коли вона знадобиться.",
+      "Матеріали допомагають краще орієнтуватися в догляді, але не замінюють консультацію ветеринара."
+    ]
+  },
+
+  community: {
+    title: "Ваше локальне pet-співтовариство поруч",
+    intro:
+      "Local Community допомагає людям із тваринами дізнаватися, що відбувається поруч, і спілкуватися.",
+    steps: [
+      "Знаходьте людей і корисні обговорення поруч.",
+      "Дізнавайтеся про події, зустрічі та рекомендації спільноти.",
+      "Діліться місцевою інформацією та власним досвідом.",
+      "Допомагайте поширювати інформацію про загублених і знайдених тварин.",
+      "Залишайтеся частиною pet-спільноти свого району."
+    ]
+  },
+
+  marketplace: {
+    title: "Купити. Продати. Віддати. Знайти.",
+    intro:
+      "Marketplace об’єднує товари, послуги та корисні оголошення для тварин в одному просторі.",
+    steps: [
+      "Переглядайте товари, послуги та оголошення для улюбленців.",
+      "Шукайте саме те, що вам потрібно.",
+      "Продавайте речі для тварин, які вам більше не потрібні.",
+      "Віддавайте корисні речі іншим власникам тварин.",
+      "Публікуйте власні оголошення та спілкуйтеся із зацікавленими людьми."
+    ]
+  },
+
+  help: {
+    title: "Допоможемо тварині бути поміченою",
+    intro:
+      "Help Animals створено для того, щоб тварини, яким потрібна допомога, отримували більше уваги.",
+    steps: [
+      "Знаходьте тварин, яким потрібні порятунок, лікування, новий дім, перетримка або термінова підтримка.",
+      "Читайте їхню історію та дізнавайтеся, яка саме допомога потрібна.",
+      "Діліться публікаціями, щоб тварину побачило більше людей.",
+      "Допомагайте об’єднувати людей, волонтерів і спільноти.",
+      "Поширюйте важливу інформацію незалежно від країни, де перебуває тварина."
+    ]
+  },
+
+  fashion: {
+    title: "Мода і стиль для світу улюбленців",
+    intro:
+      "Fashion & Style об’єднує редакційні образи, нові ідеї та дизайн для тварин.",
+    steps: [
+      "Відкривайте нову моду та аксесуари для улюбленців.",
+      "Переглядайте сезонні образи й редакційні зйомки.",
+      "Знаходьте ідеї стилю для різних тварин.",
+      "Знайомтеся з брендами, дизайнерами та новинками.",
+      "Відкривайте pet-fashion як частину світу PETS & DOGUE."
+    ]
+  },
+
+  wellness: {
+    title: "Добробут сучасного улюбленця",
+    intro:
+      "Wellness & SPA — це комфорт, турбота та приємні процедури для улюбленців.",
+    steps: [
+      "Відкривайте ідеї грумінгу, SPA та wellness.",
+      "Дізнавайтеся, як зробити щоденний догляд спокійнішим і приємнішим.",
+      "Знаходьте ідеї для відпочинку та комфорту.",
+      "Відкривайте нові pet-friendly wellness-враження.",
+      "Робіть турботу про добробут частиною спільного життя."
+    ]
+  },
+
+  beauty: {
+    title: "Краса, грумінг і турбота",
+    intro:
+      "Beauty & Grooming показує професійний догляд, сучасні тренди та індивідуальний стиль улюбленців.",
+    steps: [
+      "Відкривайте нові ідеї та тренди грумінгу.",
+      "Знайомтеся з професійним доглядом і красивими grooming-просторами.",
+      "Знаходьте натхнення для шерсті, стрижок та образів.",
+      "Переглядайте творчі рішення для різних улюбленців.",
+      "Поєднуйте якісний догляд з індивідуальним стилем."
+    ]
+  },
+
+  active: {
+    title: "Більше руху. Більше вражень. Разом.",
+    intro:
+      "Sport & Active Life присвячено руху, прогулянкам, спорту та активному життю разом з улюбленцями.",
+    steps: [
+      "Відкривайте активності, якими можна займатися разом.",
+      "Знаходьте ідеї для прогулянок, природи та руху.",
+      "Робіть повсякденне життя активнішим.",
+      "Відкривайте нові види відпочинку разом з улюбленцем.",
+      "Перетворюйте рух і пригоди на частину вашого спільного життя."
+    ]
+  }
+};
+
+function howContent(key) {
+  const lang = currentLanguage();
+
+  if (lang === "ru") {
+    return HOW_RU[key] || HOW_EN[key];
+  }
+
+  if (lang === "uk") {
+    return HOW_UK[key] || HOW_EN[key];
+  }
+
+  return HOW_EN[key];
+}
+
+/* =========================================================
    CARD
 ========================================================= */
 
 function card({
-  href,
   image,
   label,
   title,
   text,
   className = "",
   vote = false,
-  accent = false
+  accent = false,
+  howKey = ""
 }) {
   return `
     <article
       class="pdv4-card ${className} ${accent ? "pdv4-accent" : ""}"
       data-speech-section
     >
-      <a
-        href="${href}"
-        class="pdv4-card-link"
+      <button
+        type="button"
+        class="pdv4-card-link pdv4-card-button"
+        data-how-key="${esc(howKey)}"
+        data-how-label="${esc(label)}"
+        data-how-title="${esc(title)}"
+        data-how-text="${esc(text)}"
+        aria-label="${esc(t("howItWorks"))}: ${esc(title)}"
       >
         <div class="pdv4-media">
+
           <img
             src="${image}"
             alt="${esc(title)}"
@@ -407,6 +841,7 @@ function card({
           }
 
           <div class="pdv4-overlay-copy">
+
             <span class="pdv4-label">
               ${esc(label)}
             </span>
@@ -414,23 +849,217 @@ function card({
             <h2>
               ${esc(title)}
             </h2>
+
           </div>
+
         </div>
 
         <div class="pdv4-card-copy">
+
           <p>
             ${esc(text)}
           </p>
 
           <span class="pdv4-arrow">
-            ${esc(t("readMore"))} →
+            ${esc(t("howItWorks"))} →
           </span>
+
         </div>
-      </a>
+
+      </button>
 
       ${listenButton()}
+
     </article>
   `;
+}
+
+/* =========================================================
+   HOW IT WORKS MODAL
+========================================================= */
+
+function closeHowModal() {
+
+  const modal =
+    document.querySelector(
+      ".pdv4-how-modal"
+    );
+
+  if (!modal) {
+    return;
+  }
+
+  modal.classList.remove(
+    "is-open"
+  );
+
+  document.body.classList.remove(
+    "pdv4-modal-open"
+  );
+
+  window.setTimeout(
+    function () {
+      modal.remove();
+    },
+    260
+  );
+}
+
+function openHowModal(button) {
+
+  if (!button) {
+    return;
+  }
+
+  const key =
+    button.getAttribute(
+      "data-how-key"
+    );
+
+  const info =
+    howContent(key);
+
+  if (!info) {
+    return;
+  }
+
+  const label =
+    button.getAttribute(
+      "data-how-label"
+    ) || "";
+
+  const originalText =
+    button.getAttribute(
+      "data-how-text"
+    ) || "";
+
+  const oldModal =
+    document.querySelector(
+      ".pdv4-how-modal"
+    );
+
+  if (oldModal) {
+    oldModal.remove();
+  }
+
+  const steps =
+    Array.isArray(info.steps)
+      ? info.steps
+      : [];
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `
+      <div
+        class="pdv4-how-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pdv4HowTitle"
+      >
+
+        <button
+          type="button"
+          class="pdv4-how-backdrop"
+          aria-label="${esc(t("close"))}"
+        ></button>
+
+        <div
+          class="pdv4-how-panel"
+          data-speech-section
+        >
+
+          <div class="pdv4-how-top">
+
+            <button
+              type="button"
+              class="pdv4-how-close"
+              aria-label="${esc(t("close"))}"
+            >
+              ×
+            </button>
+
+            ${listenButton()}
+
+          </div>
+
+          <div class="pdv4-how-scroll">
+
+            <div class="pdv4-how-kicker">
+              ${esc(label)}
+            </div>
+
+            <h2 id="pdv4HowTitle">
+              ${esc(info.title)}
+            </h2>
+
+            <p class="pdv4-how-intro">
+              ${esc(info.intro)}
+            </p>
+
+            <div class="pdv4-how-divider"></div>
+
+            <div class="pdv4-how-steps">
+
+              ${steps.map(
+                function (step, index) {
+                  return `
+                    <div class="pdv4-how-step">
+
+                      <div class="pdv4-how-number">
+                        ${String(index + 1).padStart(2, "0")}
+                      </div>
+
+                      <p>
+                        ${esc(step)}
+                      </p>
+
+                    </div>
+                  `;
+                }
+              ).join("")}
+
+            </div>
+
+            <div class="pdv4-how-summary">
+              ${esc(originalText)}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    `
+  );
+
+  document.body.classList.add(
+    "pdv4-modal-open"
+  );
+
+  const modal =
+    document.querySelector(
+      ".pdv4-how-modal"
+    );
+
+  requestAnimationFrame(
+    function () {
+      if (modal) {
+        modal.classList.add(
+          "is-open"
+        );
+      }
+    }
+  );
+
+  const closeButton =
+    modal &&
+    modal.querySelector(
+      ".pdv4-how-close"
+    );
+
+  if (closeButton) {
+    closeButton.focus();
+  }
 }
 
 /* =========================================================
@@ -623,6 +1252,18 @@ function styles() {
 .pdv4-card-link{
   display:block;
   height:100%;
+}
+
+.pdv4-card-button{
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:inherit;
+  text-align:left;
+  font:inherit;
+  cursor:pointer;
 }
 
 .pdv4-card.large{
@@ -1081,6 +1722,197 @@ function styles() {
 }
 
 /* =========================================================
+   HOW IT WORKS MODAL
+========================================================= */
+
+body.pdv4-modal-open{
+  overflow:hidden;
+}
+
+.pdv4-how-modal{
+  position:fixed;
+  z-index:2147483000;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  opacity:0;
+  visibility:hidden;
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+}
+
+.pdv4-how-modal.is-open{
+  opacity:1;
+  visibility:visible;
+}
+
+.pdv4-how-backdrop{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  cursor:pointer;
+}
+
+.pdv4-how-panel{
+  position:relative;
+  z-index:2;
+  width:min(760px,100%);
+  max-height:min(850px,92vh);
+  overflow:hidden;
+  background:#0b0b0b;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.24);
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+  transform:translateY(18px) scale(.985);
+  transition:transform .28s ease;
+}
+
+.pdv4-how-modal.is-open .pdv4-how-panel{
+  transform:translateY(0) scale(1);
+}
+
+.pdv4-how-top{
+  position:absolute;
+  z-index:20;
+  top:15px;
+  right:15px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.pdv4-how-top .pdv4-listen{
+  position:relative;
+  top:auto;
+  right:auto;
+  width:44px;
+  height:44px;
+}
+
+.pdv4-how-close{
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.55);
+  background:rgba(0,0,0,.68);
+  color:#fff;
+  font-size:29px;
+  line-height:1;
+  font-weight:300;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.pdv4-how-scroll{
+  max-height:min(850px,92vh);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:
+    clamp(58px,8vw,82px)
+    clamp(22px,6vw,62px)
+    clamp(30px,6vw,58px);
+}
+
+.pdv4-how-kicker{
+  margin-bottom:12px;
+  padding-left:11px;
+  border-left:3px solid #d71920;
+  color:#e4c98f;
+  font-size:10px;
+  line-height:1.3;
+  font-weight:950;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+}
+
+.pdv4-how-panel h2{
+  max-width:610px;
+  margin:0;
+  font:
+    400
+    clamp(40px,7vw,72px)/.92
+    Georgia,
+    "Times New Roman",
+    serif;
+  letter-spacing:-2px;
+}
+
+.pdv4-how-intro{
+  max-width:600px;
+  margin:22px 0 0;
+  color:#ddd7ce;
+  font-size:17px;
+  line-height:1.55;
+}
+
+.pdv4-how-divider{
+  width:100%;
+  height:1px;
+  margin:30px 0 7px;
+  background:
+    linear-gradient(
+      90deg,
+      #d71920 0 70px,
+      rgba(255,255,255,.18) 70px
+    );
+}
+
+.pdv4-how-steps{
+  width:100%;
+}
+
+.pdv4-how-step{
+  display:grid;
+  grid-template-columns:54px 1fr;
+  gap:16px;
+  align-items:start;
+  padding:20px 0;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.pdv4-how-number{
+  color:#d71920;
+  font:
+    italic
+    400
+    25px/1
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+.pdv4-how-step p{
+  margin:0;
+  color:#f2eee7;
+  font-size:15px;
+  line-height:1.55;
+}
+
+.pdv4-how-summary{
+  margin-top:27px;
+  padding:20px;
+  border-left:3px solid #c7a05b;
+  background:#151515;
+  color:#c8c2b9;
+  font-size:13px;
+  line-height:1.55;
+}
+
+/* =========================================================
    TABLET
 ========================================================= */
 
@@ -1508,6 +2340,79 @@ function styles() {
   .pdv4-phone-adtext{
     font-size:5.5px;
   }
+
+  /* HOW IT WORKS — MOBILE */
+
+  .pdv4-how-modal{
+    align-items:flex-end;
+    padding:0;
+  }
+
+  .pdv4-how-panel{
+    width:100%;
+    max-height:92vh;
+    border-left:0;
+    border-right:0;
+    border-bottom:0;
+    border-radius:20px 20px 0 0;
+  }
+
+  .pdv4-how-scroll{
+    max-height:92vh;
+    padding:
+      68px
+      20px
+      36px;
+  }
+
+  .pdv4-how-top{
+    top:12px;
+    right:12px;
+  }
+
+  .pdv4-how-close,
+  .pdv4-how-top .pdv4-listen{
+    width:40px;
+    height:40px;
+  }
+
+  .pdv4-how-panel h2{
+    max-width:310px;
+    font-size:42px;
+    line-height:.94;
+    letter-spacing:-1.5px;
+  }
+
+  .pdv4-how-intro{
+    margin-top:17px;
+    font-size:15px;
+    line-height:1.5;
+  }
+
+  .pdv4-how-divider{
+    margin-top:24px;
+  }
+
+  .pdv4-how-step{
+    grid-template-columns:40px 1fr;
+    gap:10px;
+    padding:17px 0;
+  }
+
+  .pdv4-how-number{
+    font-size:21px;
+  }
+
+  .pdv4-how-step p{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  .pdv4-how-summary{
+    margin-top:22px;
+    padding:16px;
+    font-size:12px;
+  }
 }
 
 </style>
@@ -1544,6 +2449,7 @@ function render() {
       ${listenButton()}
 
       <div class="pd-hero-copy">
+
         <span class="pd-kicker">
           PETS & DOGUE
         </span>
@@ -1555,6 +2461,7 @@ function render() {
           One world.<br/>
           <em>Every pet.</em>
         </h1>
+
       </div>
     `;
   }
@@ -1576,6 +2483,7 @@ function render() {
       <section class="pdv4-section">
 
         <div class="pdv4-section-head">
+
           <h2>
             ${esc(t("latest"))}
           </h2>
@@ -1583,54 +2491,59 @@ function render() {
           <span>
             PETS & DOGUE · EDITORIAL
           </span>
+
         </div>
 
-        <!-- MAIN STORIES -->
+        <!-- =================================================
+             MAIN STORIES
+        ================================================== -->
 
         <div class="pdv4-grid">
 
           ${card({
-            href: "pet-friendly-places.html",
             image: "pet-friendly.jpg",
             label: t("petFriendlyLabel"),
             title: t("petFriendlyTitle"),
             text: t("petFriendlyText"),
-            className: "large"
+            className: "large",
+            howKey: "petFriendly"
           })}
 
           ${card({
-            href: "members-gallery.html",
             image: "cover-star/cover-miso-luxury.png",
             label: t("coverLabel"),
             title: t("coverTitle"),
             text: t("coverText"),
             className: "tall",
             vote: true,
-            accent: true
+            accent: true,
+            howKey: "coverStar"
           })}
 
           ${card({
-            href: "wellness.html",
             image: "club-pet-health.png",
             label: t("healthLabel"),
             title: t("healthTitle"),
             text: t("healthText"),
-            className: "medium"
+            className: "medium",
+            howKey: "health"
           })}
 
           ${card({
-            href: "local-community.html",
             image: "community.jpg",
             label: t("communityLabel"),
             title: t("communityTitle"),
             text: t("communityText"),
             className: "wide",
-            accent: true
+            accent: true,
+            howKey: "community"
           })}
 
         </div>
 
-        <!-- CLUB -->
+        <!-- =================================================
+             CLUB
+        ================================================== -->
 
         <section
           class="pdv4-membership"
@@ -1642,6 +2555,7 @@ function render() {
           <div class="pdv4-membership-top">
 
             <div>
+
               <div class="pdv4-membership-kicker">
                 ${esc(t("membershipLabel"))}
               </div>
@@ -1649,6 +2563,7 @@ function render() {
               <h2>
                 ${esc(t("membershipTitle"))}
               </h2>
+
             </div>
 
             <p class="pdv4-membership-intro">
@@ -1663,6 +2578,7 @@ function render() {
               class="pdv4-benefit"
               href="club.html"
             >
+
               <img
                 src="club.jpg"
                 alt="${esc(t("community"))}"
@@ -1672,12 +2588,14 @@ function render() {
               <span>
                 ${esc(t("community"))}
               </span>
+
             </a>
 
             <a
               class="pdv4-benefit"
               href="special-offers.html"
             >
+
               <img
                 src="club-partner-discounts.png"
                 alt="${esc(t("discounts"))}"
@@ -1687,12 +2605,14 @@ function render() {
               <span>
                 ${esc(t("discounts"))}
               </span>
+
             </a>
 
             <a
               class="pdv4-benefit pdv4-benefit-contest"
               href="contests.html"
             >
+
               <img
                 src="cover-star/cover-surf-parrot.png"
                 alt="${esc(t("contests"))}"
@@ -1700,6 +2620,7 @@ function render() {
               />
 
               <div class="pdv4-contest-rating">
+
                 <div class="pdv4-hearts">
                   ♥ ♥ ♥ ♥ ♥
                 </div>
@@ -1707,11 +2628,13 @@ function render() {
                 <div class="pdv4-winner">
                   ${esc(t("contestWinner"))}
                 </div>
+
               </div>
 
               <span>
                 ${esc(t("contests"))}
               </span>
+
             </a>
 
           </div>
@@ -1725,7 +2648,9 @@ function render() {
 
         </section>
 
-        <!-- BRAND ADVERTISING -->
+        <!-- =================================================
+             BRAND ADVERTISING
+        ================================================== -->
 
         <section
           class="pdv4-ad"
@@ -1741,6 +2666,7 @@ function render() {
           ${listenButton()}
 
           <div class="pdv4-phone">
+
             <div class="pdv4-phone-screen">
 
               <div class="pdv4-phone-brand">
@@ -1758,6 +2684,7 @@ function render() {
               </div>
 
             </div>
+
           </div>
 
           <div class="pdv4-ad-copy">
@@ -1782,70 +2709,74 @@ function render() {
 
         </section>
 
-        <!-- MARKETPLACE + HELP -->
+        <!-- =================================================
+             MARKETPLACE + HELP
+        ================================================== -->
 
         <div class="pdv4-grid">
 
           ${card({
-            href: "pet-marketplace.html",
             image: "marketplace.jpg",
             label: t("marketplaceLabel"),
             title: t("marketplaceTitle"),
             text: t("marketplaceText"),
             className: "large",
-            accent: true
+            accent: true,
+            howKey: "marketplace"
           })}
 
           ${card({
-            href: "pets-in-need.html",
             image: "help-animals.jpg",
             label: t("helpLabel"),
             title: t("helpTitle"),
             text: t("helpText"),
             className: "tall",
-            accent: true
+            accent: true,
+            howKey: "help"
           })}
 
         </div>
 
-        <!-- STYLE / WELLNESS / BEAUTY / ACTIVE LIFE -->
+        <!-- =================================================
+             STYLE / WELLNESS / BEAUTY / ACTIVE LIFE
+        ================================================== -->
 
         <div class="pdv4-grid">
 
           ${card({
-            href: "pet-fashion.html",
             image: "cover-star/cover-horse-salon.png",
             label: t("fashionLabel"),
             title: t("fashionTitle"),
             text: t("fashionText"),
-            className: "small"
+            className: "small",
+            howKey: "fashion"
           })}
 
           ${card({
-            href: "wellness.html",
             image: "cover-star/cover-turtle-spa.png",
             label: t("wellnessLabel"),
             title: t("wellnessTitle"),
             text: t("wellnessText"),
-            className: "small"
+            className: "small",
+            howKey: "wellness"
           })}
 
           ${card({
-            href: "pet-fashion.html",
             image: "beauty-grooming.jpg",
             label: t("beautyLabel"),
             title: t("beautyTitle"),
             text: t("beautyText"),
-            className: "small"
+            className: "small",
+            howKey: "beauty"
           })}
 
           ${card({
-            href: "wellness.html",
             image: "active-life.jpg",
             label: t("activeLabel"),
             title: t("activeTitle"),
             text: t("activeText"),
-            className: "small"
+            className: "small",
+            howKey: "active"
           })}
 
         </div>
@@ -1862,7 +2793,7 @@ function render() {
     );
 
   oldSections.forEach(
-    (element) => {
+    function (element) {
 
       if (
         element.classList.contains("pd-home-hero") ||
@@ -1881,7 +2812,65 @@ function render() {
 ========================================================= */
 
 function refreshLanguage() {
+
+  closeHowModal();
+
   render();
+}
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+function handleDocumentClick(event) {
+
+  const howButton =
+    event.target.closest(
+      ".pdv4-card-button"
+    );
+
+  if (howButton) {
+
+    event.preventDefault();
+
+    openHowModal(
+      howButton
+    );
+
+    return;
+  }
+
+  const closeButton =
+    event.target.closest(
+      ".pdv4-how-close"
+    );
+
+  const backdrop =
+    event.target.closest(
+      ".pdv4-how-backdrop"
+    );
+
+  if (
+    closeButton ||
+    backdrop
+  ) {
+
+    event.preventDefault();
+
+    closeHowModal();
+  }
+}
+
+function handleDocumentKeydown(event) {
+
+  if (
+    event.key === "Escape" &&
+    document.querySelector(
+      ".pdv4-how-modal"
+    )
+  ) {
+    closeHowModal();
+  }
 }
 
 /* =========================================================
@@ -1903,6 +2892,16 @@ function init() {
 
   render();
 
+  document.addEventListener(
+    "click",
+    handleDocumentClick
+  );
+
+  document.addEventListener(
+    "keydown",
+    handleDocumentKeydown
+  );
+
   window.addEventListener(
     "petsdogue:languagechange",
     refreshLanguage
@@ -1923,11 +2922,14 @@ if (
   document.readyState ===
   "loading"
 ) {
+
   document.addEventListener(
     "DOMContentLoaded",
     init
   );
+
 } else {
+
   init();
 }
 
