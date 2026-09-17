@@ -93,7 +93,8 @@ const EN = {
 
   ad: "ADVERTISEMENT",
   adTitle: "Your brand belongs here.",
-  adText: "Premium video placement inside the PETS & DOGUE editorial experience.",
+  adText:
+    "Premium video placement inside the PETS & DOGUE editorial experience.",
   advertise: "Advertise with us",
 
   discoverMore: "Discover more",
@@ -152,7 +153,8 @@ const RU = {
 
   ad: "РЕКЛАМА",
   adTitle: "Здесь может быть ваш бренд.",
-  adText: "Премиальное видео-размещение внутри редакционной среды PETS & DOGUE.",
+  adText:
+    "Премиальное видео-размещение внутри редакционной среды PETS & DOGUE.",
   advertise: "Реклама в PETS & DOGUE",
 
   discoverMore: "Смотреть больше",
@@ -211,7 +213,8 @@ const UK = {
 
   ad: "РЕКЛАМА",
   adTitle: "Тут може бути ваш бренд.",
-  adText: "Преміальне відео-розміщення в редакційному середовищі PETS & DOGUE.",
+  adText:
+    "Преміальне відео-розміщення в редакційному середовищі PETS & DOGUE.",
   advertise: "Реклама в PETS & DOGUE",
 
   discoverMore: "Дивитися більше",
@@ -302,7 +305,9 @@ function card({
       ${listenButton()}
     </article>
   `;
-}function styles() {
+}
+
+function styles() {
   return `
 <style id="pets-dogue-home-v4-styles">
 
@@ -581,12 +586,11 @@ function card({
   font-weight:950;
   letter-spacing:.8px;
   box-shadow:0 8px 25px rgba(0,0,0,.25);
-}
-
-.pdv4-membership{
+}.pdv4-membership{
   max-width:1280px;
   margin:14px auto 0;
   padding:46px 0 12px;
+  position:relative;
 }
 
 .pdv4-membership-top{
@@ -647,7 +651,11 @@ function card({
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.02) 65%);
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.82),
+    rgba(0,0,0,.02) 65%
+  );
 }
 
 .pdv4-benefit span{
@@ -697,8 +705,16 @@ function card({
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at 70% 30%,rgba(255,255,255,.10),transparent 40%),
-    linear-gradient(90deg,rgba(0,0,0,.83),rgba(0,0,0,.18));
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255,255,255,.10),
+      transparent 40%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.83),
+      rgba(0,0,0,.18)
+    );
 }
 
 .pdv4-ad-copy{
@@ -877,31 +893,137 @@ function card({
     font-size:43px;
   }
 
-  .pdv4-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+  .pdv4-section{
+    padding:22px 6px 34px;
   }
 
-  .pdv4-card.large,
-  .pdv4-card.tall,
-  .pdv4-card.medium,
-  .pdv4-card.wide,
-  .pdv4-card.small{
-    grid-column:span 1;
+  .pdv4-section-head{
+    margin:0 2px 8px;
+    padding:0 5px 9px;
+    align-items:flex-end;
+    gap:8px;
+  }
+
+  .pdv4-section-head h2{
+    font-size:29px;
+    line-height:.95;
+  }
+
+  .pdv4-section-head span{
+    font-size:7px;
+    letter-spacing:1px;
+    text-align:right;
+  }
+
+  .pdv4-grid{
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    grid-auto-flow:dense;
+    gap:5px;
+  }
+
+  .pdv4-card{
+    min-width:0;
+    border-radius:0;
   }
 
   .pdv4-card.large{
-    grid-column:span 2;
+    grid-column:span 7;
+  }
+
+  .pdv4-card.tall{
+    grid-column:span 5;
+  }
+
+  .pdv4-card.medium{
+    grid-column:span 5;
+  }
+
+  .pdv4-card.wide{
+    grid-column:span 7;
+  }
+
+  .pdv4-card.small{
+    grid-column:span 4;
   }
 
   .pdv4-card.large .pdv4-media{
-    min-height:360px;
+    min-height:355px;
   }
 
-  .pdv4-card.tall .pdv4-media,
-  .pdv4-card.medium .pdv4-media,
-  .pdv4-card.wide .pdv4-media,
+  .pdv4-card.tall .pdv4-media{
+    min-height:285px;
+  }
+
+  .pdv4-card.medium .pdv4-media{
+    min-height:245px;
+  }
+
+  .pdv4-card.wide .pdv4-media{
+    min-height:300px;
+  }
+
   .pdv4-card.small .pdv4-media{
-    min-height:235px;
+    min-height:205px;
+  }
+
+  .pdv4-card:nth-child(2) .pdv4-media img{
+    object-position:center 36%;
+  }
+
+  .pdv4-card:nth-child(3) .pdv4-media img{
+    object-position:center center;
+  }
+
+  .pdv4-card:nth-child(4) .pdv4-media img{
+    object-position:55% center;
+  }
+
+  .pdv4-media img{
+    filter:
+      saturate(.82)
+      contrast(.96)
+      brightness(.96);
+  }
+
+  .pdv4-shade{
+    background:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,.78) 0%,
+        rgba(0,0,0,.30) 42%,
+        rgba(0,0,0,.04) 72%
+      );
+  }
+
+  .pdv4-overlay-copy{
+    left:11px;
+    right:10px;
+    bottom:10px;
+  }
+
+  .pdv4-overlay-copy h2,
+  .pdv4-card.small .pdv4-overlay-copy h2{
+    font-size:21px;
+    line-height:.94;
+    letter-spacing:-.7px;
+  }
+
+  .pdv4-card.large .pdv4-overlay-copy h2{
+    font-size:29px;
+  }
+
+  .pdv4-card.wide .pdv4-overlay-copy h2{
+    font-size:25px;
+  }
+
+  .pdv4-card.small .pdv4-overlay-copy h2{
+    font-size:18px;
+  }
+
+  .pdv4-label{
+    margin-bottom:5px;
+    font-size:7px;
+    letter-spacing:1.15px;
   }
 
   .pdv4-card-copy p{
@@ -909,42 +1031,150 @@ function card({
   }
 
   .pdv4-card-copy{
-    padding:10px 11px 12px;
+    min-height:34px;
+    padding:8px 10px 9px;
   }
 
-  .pdv4-overlay-copy h2,
-  .pdv4-card.small .pdv4-overlay-copy h2{
-    font-size:23px;
+  .pdv4-arrow{
+    font-size:7px;
+    letter-spacing:.8px;
   }
 
-  .pdv4-label{
-    font-size:8px;
-    letter-spacing:1.3px;
+  .pdv4-listen{
+    top:9px;
+    right:9px;
+    width:31px;
+    height:31px;
+    font-size:12px;
+    background:rgba(0,0,0,.38);
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
   }
 
   .pdv4-vote{
-    top:10px;
-    left:10px;
-    padding:8px 10px;
-    font-size:9px;
+    top:9px;
+    left:9px;
+    padding:7px 9px;
+    font-size:8px;
+    letter-spacing:.65px;
+    background:#d71920;
+    box-shadow:0 5px 18px rgba(0,0,0,.28);
+  }
+
+  .pdv4-membership{
+    padding:30px 2px 4px;
+  }
+
+  .pdv4-membership-top{
+    padding:0 6px;
+    margin-bottom:15px;
+  }
+
+  .pdv4-membership-kicker{
+    font-size:8px;
+    letter-spacing:1.5px;
+  }
+
+  .pdv4-membership h2{
+    margin-top:6px;
+    font-size:39px;
+    line-height:.91;
+  }
+
+  .pdv4-membership-intro{
+    font-size:12px;
+    line-height:1.5;
   }
 
   .pdv4-benefits{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    grid-auto-flow:dense;
+    gap:5px;
+  }
+
+  .pdv4-benefit,
+  .pdv4-benefit:first-child{
+    grid-column:span 6;
+    grid-row:auto;
+    min-height:145px;
   }
 
   .pdv4-benefit:first-child{
-    grid-column:span 2;
-    grid-row:auto;
-    min-height:260px;
+    grid-column:span 7;
+    min-height:245px;
   }
 
-  .pdv4-benefit{
+  .pdv4-benefit:nth-child(2){
+    grid-column:span 5;
+    min-height:170px;
+  }
+
+  .pdv4-benefit:nth-child(3){
+    grid-column:span 5;
     min-height:150px;
   }
 
+  .pdv4-benefit:nth-child(4){
+    grid-column:span 7;
+    min-height:195px;
+  }
+
+  .pdv4-benefit:nth-child(5){
+    grid-column:span 12;
+    min-height:170px;
+  }
+
+  .pdv4-benefit img{
+    filter:saturate(.84) contrast(.96);
+  }
+
   .pdv4-benefit span{
-    font-size:15px;
+    left:10px;
+    right:10px;
+    bottom:10px;
+    font-size:14px;
+    line-height:1.05;
+  }
+
+  .pdv4-benefit:first-child span{
+    font-size:18px;
+  }
+
+  .pdv4-join{
+    margin:14px 6px 0;
+    min-height:40px;
+    padding:0 17px;
+    font-size:9px;
+  }
+
+  .pdv4-ad{
+    margin:29px 2px;
+    min-height:220px;
+  }
+
+  .pdv4-ad-copy{
+    min-height:220px;
+    padding:18px;
+  }
+
+  .pdv4-ad-label{
+    font-size:7px;
+    letter-spacing:1.5px;
+  }
+
+  .pdv4-ad h2{
+    font-size:34px;
+  }
+
+  .pdv4-ad p{
+    margin:9px 0 13px;
+    max-width:270px;
+    font-size:10px;
+    line-height:1.45;
+  }
+
+  .pdv4-ad a{
+    font-size:8px;
   }
 
 }
@@ -1039,7 +1269,6 @@ function card({
 
         </div>
 
-
         <section
           class="pdv4-membership"
           data-speech-section
@@ -1120,7 +1349,6 @@ function card({
 
         </section>
 
-
         <section
           class="pdv4-ad"
           data-speech-section
@@ -1153,7 +1381,6 @@ function card({
           </div>
 
         </section>
-
 
         <div class="pdv4-grid">
 
@@ -1221,7 +1448,6 @@ function card({
           })}
 
         </div>
-
 
         <section
           class="pdv4-ad"
