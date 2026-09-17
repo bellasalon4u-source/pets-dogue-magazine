@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-PETS & DOGUE — HOMEPAGE EDITORIAL V5
+PETS & DOGUE — HOMEPAGE EDITORIAL V6
 
 Меняет ТОЛЬКО наполнение главной страницы.
 
@@ -75,73 +75,80 @@ const EN = {
   membershipLabel: "PETS & DOGUE CLUB",
   membershipTitle: "More for your pet. All year.",
   membershipText:
-    "Join a worldwide pet-loving community and unlock useful benefits throughout the PETS & DOGUE world.",
+    "One membership connects you to community, special offers and competitions across the PETS & DOGUE world.",
 
-  discounts: "Member discounts",
-  offers: "Pet health & care",
+  discounts: "Club discounts",
   contests: "Contests & voting",
   community: "Global community",
-  marketplaceBenefit: "Marketplace benefits",
+
+  contestWinner: "WINNER",
+  contestVotes: "Community favourite",
 
   petFriendlyLabel: "PET-FRIENDLY PLACES",
   petFriendlyTitle: "Go together.",
   petFriendlyText:
-    "Find cafés, hotels, restaurants, parks, beaches and services where you and your pet are welcome.",
+    "Discover pet-friendly cafés, hotels, restaurants, parks and green escapes — plus farms, sanctuaries and places where you can spend time with animals even if you do not have a pet.",
 
   healthLabel: "HEALTH & CARE",
   healthTitle: "Care with confidence.",
   healthText:
-    "Practical guidance on pet health, wellbeing, grooming and responsible everyday care.",
+    "Practical guidance on health, wellbeing, grooming, prevention and responsible everyday care.",
 
   coverLabel: "COVER STAR",
   coverTitle: "Your pet could be next.",
   coverText:
-    "Discover PETS & DOGUE Cover Stars, enter your pet and take part in community voting.",
+    "A competition exclusively for Club members. The community votes for the winner to appear on the PETS & DOGUE cover, while five other finalists receive their own story and photos inside the magazine.",
   vote: "VOTE",
 
   communityLabel: "LOCAL COMMUNITY",
-  communityTitle: "People nearby can help.",
+  communityTitle: "Be part of what is happening nearby.",
   communityText:
-    "Connect with pet people nearby, exchange local recommendations, share information and help each other.",
+    "Meet local pet people, discover events and recommendations, talk, arrange meet-ups and help reunite lost and found animals. Everything happening in your area — stay connected.",
 
   marketplaceLabel: "MARKETPLACE",
-  marketplaceTitle: "Everything useful for pet life.",
+  marketplaceTitle: "Buy. Sell. Give. Find.",
   marketplaceText:
-    "Discover pet products, services and community listings, or publish your own Marketplace advert.",
-
-  greenLabel: "GREEN TOURISM",
-  greenTitle: "Meet animals beyond the city.",
-  greenText:
-    "Explore farms, sanctuaries, wildlife parks and responsible animal experiences beyond everyday city life.",
+    "A community marketplace for pet products, services and useful listings. Buy, sell, give away, search for something you need or publish your own advert.",
 
   helpLabel: "HELP ANIMALS",
-  helpTitle: "Seen. Shared. Helped.",
+  helpTitle: "Help animals around the world.",
   helpText:
-    "Give visibility to animals that need rescue, treatment, support, foster care or a new home.",
+    "Give visibility to animals anywhere in the world that need rescue, treatment, adoption, foster care or urgent support.",
 
-  photosLabel: "PHOTOS",
-  photosTitle: "Pets through the lens.",
-  photosText:
-    "Discover expressive pet photography, visual stories and memorable moments from the PETS & DOGUE world.",
-
-  fashionLabel: "FASHION",
-  fashionTitle: "Style with personality.",
+  fashionLabel: "FASHION & STYLE",
+  fashionTitle: "Fashion. Style. New season.",
   fashionText:
-    "Explore pet fashion, grooming inspiration, accessories and editorial looks created with personality.",
+    "New pet fashion, accessories, grooming inspiration and editorial looks with personality.",
 
-  articlesLabel: "ARTICLES",
-  articlesTitle: "Stories worth reading.",
-  articlesText:
-    "Read original stories, interviews, useful guides, travel ideas and editorial features about life with pets.",
+  wellnessLabel: "WELLNESS & SPA",
+  wellnessTitle: "Wellness & SPA",
+  wellnessText:
+    "Calm, care, grooming, spa experiences and wellbeing ideas created for modern pet life.",
 
-  ad: "ADVERTISEMENT",
-  adTitle: "Your brand belongs here.",
+  beautyLabel: "BEAUTY & STYLE",
+  beautyTitle: "Beauty & grooming",
+  beautyText:
+    "Grooming trends, beautiful interiors, professional care and expressive pet style.",
+
+  activeLabel: "ACTIVE LIFE",
+  activeTitle: "Sport & active life",
+  activeText:
+    "Movement, fitness, outdoor activity and inspiration for a healthier, more active life together.",
+
+  ad: "ADVERTISE WITH US",
+  adTitle: "Your brand could be here.",
   adText:
-    "Premium brand and video placement inside the PETS & DOGUE editorial experience.",
+    "Put your brand in front of the PETS & DOGUE audience through premium advertising, mobile placements and special campaigns.",
   advertise: "Advertise with us",
 
+  partnershipLabel: "BUSINESS & PARTNERSHIPS",
+  partnershipTitle: "Work with us.",
+  partnershipText:
+    "Advertise your business, create exclusive discounts, coupons and special offers for our audience, reach new customers and grow with PETS & DOGUE.",
+  partnershipButton: "Explore partnerships",
+
   join: "Join the Club",
-  readMore: "Read more"
+  readMore: "Explore"
 };
 
 /* =========================================================
@@ -152,75 +159,82 @@ const RU = {
   latest: "Последние истории",
 
   membershipLabel: "КЛУБ PETS & DOGUE",
-  membershipTitle: "Больше для вашего питомца. Весь год.",
+  membershipTitle: "Больше для питомца. Весь год.",
   membershipText:
-    "Присоединяйтесь к международному сообществу любителей животных и получайте полезные преимущества PETS & DOGUE.",
+    "Одна подписка объединяет сообщество, специальные предложения и конкурсы во всём мире PETS & DOGUE.",
 
-  discounts: "Скидки участникам",
-  offers: "Здоровье и уход",
+  discounts: "Скидки клуба",
   contests: "Конкурсы и голосования",
   community: "Мировое сообщество",
-  marketplaceBenefit: "Преимущества Marketplace",
+
+  contestWinner: "ПОБЕДИТЕЛЬ",
+  contestVotes: "Выбор сообщества",
 
   petFriendlyLabel: "PET-FRIENDLY МЕСТА",
   petFriendlyTitle: "Вместе — куда угодно.",
   petFriendlyText:
-    "Находите кафе, отели, рестораны, парки, пляжи и сервисы, где рады вам и вашему питомцу.",
+    "Открывайте pet-friendly кафе, отели, рестораны, парки и зелёные маршруты, а также фермы, заповедники и места, где можно провести время с животными, даже если своего питомца у вас нет.",
 
   healthLabel: "ЗДОРОВЬЕ И УХОД",
   healthTitle: "Забота с уверенностью.",
   healthText:
-    "Практичные материалы о здоровье, благополучии, груминге и ответственном ежедневном уходе.",
+    "Практичные материалы о здоровье, благополучии, груминге, профилактике и ответственном ежедневном уходе.",
 
   coverLabel: "COVER STAR",
   coverTitle: "Ваш питомец может быть следующим.",
   coverText:
-    "Знакомьтесь со звёздами обложки PETS & DOGUE, добавляйте своего питомца и участвуйте в голосовании.",
+    "Конкурс только для участников клуба. По результатам голосования сообщества победитель появится на обложке PETS & DOGUE, а ещё пять финалистов получат собственную историю и фотографии в журнале.",
   vote: "ГОЛОСОВАТЬ",
 
   communityLabel: "ЛОКАЛЬНОЕ СООБЩЕСТВО",
-  communityTitle: "Рядом есть люди, которые помогут.",
+  communityTitle: "Будьте частью того, что происходит рядом.",
   communityText:
-    "Находите владельцев животных рядом, обменивайтесь местными рекомендациями, информацией и помогайте друг другу.",
+    "Знакомьтесь, общайтесь, узнавайте о событиях и встречах, делитесь рекомендациями и помогайте находить потерянных животных. Всё интересное вашего района — будьте на связи.",
 
   marketplaceLabel: "MARKETPLACE",
-  marketplaceTitle: "Всё полезное для жизни с питомцем.",
+  marketplaceTitle: "Купить. Продать. Отдать. Найти.",
   marketplaceText:
-    "Находите товары, услуги и объявления для животных или размещайте собственные объявления в Marketplace.",
-
-  greenLabel: "ЗЕЛЁНЫЙ ТУРИЗМ",
-  greenTitle: "Познакомьтесь с животными ближе.",
-  greenText:
-    "Открывайте фермы, заповедники, wildlife-парки и ответственные места для знакомства с животными.",
+    "Объявления о товарах и услугах для животных. Покупайте, продавайте, отдавайте бесплатно, ищите нужное или размещайте собственное объявление.",
 
   helpLabel: "ПОМОЩЬ ЖИВОТНЫМ",
-  helpTitle: "Увидели. Поделились. Помогли.",
+  helpTitle: "Помощь животным по всему миру.",
   helpText:
-    "Помогайте животным, которым нужны спасение, лечение, поддержка, временный или новый дом.",
+    "Помогайте животным в любой точке мира, которым нужны спасение, лечение, новый дом, передержка или срочная поддержка.",
 
-  photosLabel: "ФОТО",
-  photosTitle: "Питомцы в объективе.",
-  photosText:
-    "Открывайте выразительную фотографию животных, визуальные истории и яркие моменты мира PETS & DOGUE.",
-
-  fashionLabel: "МОДА",
-  fashionTitle: "Стиль с характером.",
+  fashionLabel: "МОДА И СТИЛЬ",
+  fashionTitle: "Мода. Стиль. Новинки.",
   fashionText:
-    "Мода для питомцев, идеи груминга, аксессуары и редакционные образы с индивидуальностью.",
+    "Новая мода для питомцев, аксессуары, идеи груминга и редакционные образы с характером.",
 
-  articlesLabel: "СТАТЬИ",
-  articlesTitle: "Истории, которые стоит читать.",
-  articlesText:
-    "Оригинальные истории, интервью, полезные гиды, путешествия и редакционные материалы о жизни с питомцами.",
+  wellnessLabel: "WELLNESS & SPA",
+  wellnessTitle: "Wellness & SPA",
+  wellnessText:
+    "Отдых, уход, груминг, SPA и идеи для физического и эмоционального благополучия питомцев.",
 
-  ad: "РЕКЛАМА",
+  beautyLabel: "КРАСОТА И СТИЛЬ",
+  beautyTitle: "Красота и груминг",
+  beautyText:
+    "Тренды груминга, красивые пространства, профессиональный уход и выразительный стиль питомцев.",
+
+  activeLabel: "АКТИВНАЯ ЖИЗНЬ",
+  activeTitle: "Спорт и активная жизнь",
+  activeText:
+    "Движение, фитнес, прогулки и идеи для более здоровой и активной жизни вместе.",
+
+  ad: "РЕКЛАМА В PETS & DOGUE",
   adTitle: "Здесь может быть ваш бренд.",
   adText:
-    "Премиальное бренд- и видео-размещение внутри редакционной среды PETS & DOGUE.",
-  advertise: "Реклама в PETS & DOGUE",
+    "Покажите свой бренд аудитории PETS & DOGUE через премиальную рекламу, мобильные размещения и специальные кампании.",
+  advertise: "Дать рекламу",
+
+  partnershipLabel: "БИЗНЕС И ПАРТНЁРСТВО",
+  partnershipTitle: "Сотрудничество с нами.",
+  partnershipText:
+    "Размещайте рекламу, создавайте эксклюзивные скидки, купоны и специальные предложения для нашей аудитории, находите новых клиентов и развивайте свой бизнес вместе с PETS & DOGUE.",
+  partnershipButton: "Сотрудничать с нами",
 
   join: "Вступить в клуб",
-  readMore: "Подробнее"
+  readMore: "Открыть"
 };
 
 /* =========================================================
@@ -231,75 +245,82 @@ const UK = {
   latest: "Останні історії",
 
   membershipLabel: "КЛУБ PETS & DOGUE",
-  membershipTitle: "Більше для вашого улюбленця. Увесь рік.",
+  membershipTitle: "Більше для улюбленця. Увесь рік.",
   membershipText:
-    "Приєднуйтеся до міжнародної спільноти любителів тварин та отримуйте корисні переваги PETS & DOGUE.",
+    "Одна підписка об’єднує спільноту, спеціальні пропозиції та конкурси у світі PETS & DOGUE.",
 
-  discounts: "Знижки учасникам",
-  offers: "Здоров’я і догляд",
+  discounts: "Знижки клубу",
   contests: "Конкурси й голосування",
   community: "Світова спільнота",
-  marketplaceBenefit: "Переваги Marketplace",
+
+  contestWinner: "ПЕРЕМОЖЕЦЬ",
+  contestVotes: "Вибір спільноти",
 
   petFriendlyLabel: "PET-FRIENDLY МІСЦЯ",
   petFriendlyTitle: "Разом — куди завгодно.",
   petFriendlyText:
-    "Знаходьте кафе, готелі, ресторани, парки, пляжі та сервіси, де раді вам і вашому улюбленцю.",
+    "Відкривайте pet-friendly кафе, готелі, ресторани, парки й зелені маршрути, а також ферми, заповідники та місця, де можна провести час із тваринами, навіть якщо власного улюбленця у вас немає.",
 
   healthLabel: "ЗДОРОВ’Я І ДОГЛЯД",
   healthTitle: "Турбота з упевненістю.",
   healthText:
-    "Практичні матеріали про здоров’я, добробут, грумінг і відповідальний щоденний догляд.",
+    "Практичні матеріали про здоров’я, добробут, грумінг, профілактику та відповідальний щоденний догляд.",
 
   coverLabel: "COVER STAR",
   coverTitle: "Ваш улюбленець може бути наступним.",
   coverText:
-    "Знайомтеся із зірками обкладинки PETS & DOGUE, додавайте свого улюбленця та беріть участь у голосуванні.",
+    "Конкурс лише для учасників клубу. За результатами голосування спільноти переможець з’явиться на обкладинці PETS & DOGUE, а ще п’ять фіналістів отримають власну історію та фотографії в журналі.",
   vote: "ГОЛОСУВАТИ",
 
   communityLabel: "ЛОКАЛЬНА СПІЛЬНОТА",
-  communityTitle: "Поруч є люди, які допоможуть.",
+  communityTitle: "Будьте частиною того, що відбувається поруч.",
   communityText:
-    "Знаходьте власників тварин поруч, обмінюйтеся місцевими рекомендаціями, інформацією та допомагайте одне одному.",
+    "Знайомтеся, спілкуйтеся, дізнавайтеся про події та зустрічі, діліться рекомендаціями й допомагайте знаходити загублених тварин. Усе цікаве вашого району — залишайтеся на зв’язку.",
 
   marketplaceLabel: "MARKETPLACE",
-  marketplaceTitle: "Усе корисне для життя з улюбленцем.",
+  marketplaceTitle: "Купити. Продати. Віддати. Знайти.",
   marketplaceText:
-    "Знаходьте товари, послуги й оголошення для тварин або публікуйте власні оголошення у Marketplace.",
-
-  greenLabel: "ЗЕЛЕНИЙ ТУРИЗМ",
-  greenTitle: "Познайомтеся з тваринами ближче.",
-  greenText:
-    "Відкривайте ферми, заповідники, wildlife-парки та відповідальні місця для знайомства з тваринами.",
+    "Оголошення про товари й послуги для тварин. Купуйте, продавайте, віддавайте безкоштовно, шукайте потрібне або публікуйте власне оголошення.",
 
   helpLabel: "ДОПОМОГА ТВАРИНАМ",
-  helpTitle: "Побачили. Поділилися. Допомогли.",
+  helpTitle: "Допомога тваринам у всьому світі.",
   helpText:
-    "Допомагайте тваринам, яким потрібні порятунок, лікування, підтримка, тимчасовий або новий дім.",
+    "Допомагайте тваринам у будь-якій точці світу, яким потрібні порятунок, лікування, новий дім, перетримка або термінова підтримка.",
 
-  photosLabel: "ФОТО",
-  photosTitle: "Улюбленці в об’єктиві.",
-  photosText:
-    "Відкривайте виразну фотографію тварин, візуальні історії та яскраві моменти світу PETS & DOGUE.",
-
-  fashionLabel: "МОДА",
-  fashionTitle: "Стиль із характером.",
+  fashionLabel: "МОДА І СТИЛЬ",
+  fashionTitle: "Мода. Стиль. Новинки.",
   fashionText:
-    "Мода для улюбленців, ідеї грумінгу, аксесуари та редакційні образи з індивідуальністю.",
+    "Нова мода для улюбленців, аксесуари, ідеї грумінгу та редакційні образи з характером.",
 
-  articlesLabel: "СТАТТІ",
-  articlesTitle: "Історії, які варто читати.",
-  articlesText:
-    "Оригінальні історії, інтерв’ю, корисні гіди, подорожі та редакційні матеріали про життя з тваринами.",
+  wellnessLabel: "WELLNESS & SPA",
+  wellnessTitle: "Wellness & SPA",
+  wellnessText:
+    "Відпочинок, догляд, грумінг, SPA та ідеї для фізичного й емоційного добробуту улюбленців.",
 
-  ad: "РЕКЛАМА",
+  beautyLabel: "КРАСА І СТИЛЬ",
+  beautyTitle: "Краса і грумінг",
+  beautyText:
+    "Тренди грумінгу, красиві простори, професійний догляд та виразний стиль улюбленців.",
+
+  activeLabel: "АКТИВНЕ ЖИТТЯ",
+  activeTitle: "Спорт і активне життя",
+  activeText:
+    "Рух, фітнес, прогулянки та ідеї для здоровішого й активнішого життя разом.",
+
+  ad: "РЕКЛАМА В PETS & DOGUE",
   adTitle: "Тут може бути ваш бренд.",
   adText:
-    "Преміальне бренд- і відеорозміщення в редакційному середовищі PETS & DOGUE.",
-  advertise: "Реклама в PETS & DOGUE",
+    "Покажіть свій бренд аудиторії PETS & DOGUE через преміальну рекламу, мобільні розміщення та спеціальні кампанії.",
+  advertise: "Дати рекламу",
+
+  partnershipLabel: "БІЗНЕС І ПАРТНЕРСТВО",
+  partnershipTitle: "Співпраця з нами.",
+  partnershipText:
+    "Розміщуйте рекламу, створюйте ексклюзивні знижки, купони та спеціальні пропозиції для нашої аудиторії, знаходьте нових клієнтів і розвивайте бізнес разом із PETS & DOGUE.",
+  partnershipButton: "Співпрацювати з нами",
 
   join: "Приєднатися до клубу",
-  readMore: "Докладніше"
+  readMore: "Відкрити"
 };
 
 /* =========================================================
@@ -438,6 +459,7 @@ function styles() {
   --pd-gold:#c7a05b;
   --pd-red:#d71920;
   --pd-red-soft:#ef3e46;
+  --pd-green:#65e51f;
   --pd-line:rgba(255,255,255,.24);
 
   background:var(--pd-black);
@@ -475,20 +497,16 @@ function styles() {
 .pdv4-hero img{
   position:absolute;
   inset:0;
-
   width:100%;
   height:100%;
-
   object-fit:cover;
   object-position:center;
 }
 
 .pdv4-hero:after{
   content:"";
-
   position:absolute;
   inset:0;
-
   background:
     linear-gradient(
       to top,
@@ -496,25 +514,21 @@ function styles() {
       rgba(0,0,0,.18) 48%,
       rgba(0,0,0,.05) 100%
     );
-
   pointer-events:none;
 }
 
 .pdv4-hero-copy{
   position:absolute;
   z-index:3;
-
   left:clamp(18px,5vw,70px);
   right:clamp(18px,5vw,70px);
   bottom:clamp(24px,6vw,70px);
-
   max-width:820px;
 }
 
 .pdv4-eyebrow,
 .pdv4-label{
   display:block;
-
   font-size:10px;
   font-weight:900;
   letter-spacing:2px;
@@ -528,18 +542,14 @@ function styles() {
 
 .pdv4-hero h1{
   margin:0;
-
   font:
     400
     clamp(49px,8vw,104px)/.88
     Georgia,
     "Times New Roman",
     serif;
-
   letter-spacing:-3px;
-
-  text-shadow:
-    0 3px 30px rgba(0,0,0,.3);
+  text-shadow:0 3px 30px rgba(0,0,0,.3);
 }
 
 .pdv4-hero h1 em{
@@ -547,72 +557,47 @@ function styles() {
   font-style:italic;
 }
 
-/* LISTEN BUTTON */
+/* LISTEN */
 
 .pdv4-listen{
   position:absolute;
   z-index:10;
-
   top:14px;
   right:14px;
-
   width:42px;
   height:42px;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   padding:0;
-
   border-radius:50%;
-
-  border:
-    1px solid
-    rgba(255,255,255,.62);
-
-  background:
-    rgba(0,0,0,.44);
-
+  border:1px solid rgba(255,255,255,.62);
+  background:rgba(0,0,0,.44);
   color:#fff;
-
   cursor:pointer;
-
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
 }
 
-/* MAIN SECTION */
+/* SECTION */
 
 .pdv4-section{
-  padding:
-    38px
-    16px
-    48px;
+  padding:38px 16px 48px;
 }
 
 .pdv4-section-head{
   max-width:1280px;
-
-  margin:
-    0 auto 22px;
-
+  margin:0 auto 22px;
   display:flex;
   align-items:end;
   justify-content:space-between;
-
   gap:20px;
-
-  border-bottom:
-    1px solid
-    rgba(255,255,255,.28);
-
+  border-bottom:1px solid rgba(255,255,255,.28);
   padding-bottom:12px;
 }
 
 .pdv4-section-head h2{
   margin:0;
-
   font:
     400
     clamp(30px,4vw,52px)/1
@@ -625,7 +610,6 @@ function styles() {
   font-size:10px;
   font-weight:900;
   letter-spacing:1.6px;
-
   color:#bdb6aa;
 }
 
@@ -633,29 +617,17 @@ function styles() {
 
 .pdv4-grid{
   max-width:1280px;
-
   margin:auto;
-
   display:grid;
-
-  grid-template-columns:
-    repeat(
-      12,
-      minmax(0,1fr)
-    );
-
+  grid-template-columns:repeat(12,minmax(0,1fr));
   grid-auto-flow:dense;
-
   gap:10px;
 }
 
 .pdv4-card{
   position:relative;
-
   background:#121212;
-
   overflow:hidden;
-
   min-width:0;
 }
 
@@ -681,21 +653,16 @@ function styles() {
 }
 
 .pdv4-card.small{
-  grid-column:span 4;
+  grid-column:span 3;
 }
 
 .pdv4-media{
   position:relative;
-
   overflow:hidden;
-
   min-height:390px;
 }
 
-.pdv4-card.large .pdv4-media{
-  min-height:620px;
-}
-
+.pdv4-card.large .pdv4-media,
 .pdv4-card.tall .pdv4-media{
   min-height:620px;
 }
@@ -711,20 +678,11 @@ function styles() {
 .pdv4-media img{
   position:absolute;
   inset:0;
-
   width:100%;
   height:100%;
-
   object-fit:cover;
-
-  transition:
-    transform
-    .7s
-    cubic-bezier(.2,.7,.2,1);
-
-  filter:
-    saturate(.88)
-    contrast(.97);
+  transition:transform .7s cubic-bezier(.2,.7,.2,1);
+  filter:saturate(.88) contrast(.97);
 }
 
 .pdv4-card:hover .pdv4-media img{
@@ -734,7 +692,6 @@ function styles() {
 .pdv4-shade{
   position:absolute;
   inset:0;
-
   background:
     linear-gradient(
       to top,
@@ -747,7 +704,6 @@ function styles() {
 .pdv4-overlay-copy{
   position:absolute;
   z-index:3;
-
   left:20px;
   right:20px;
   bottom:18px;
@@ -756,201 +712,132 @@ function styles() {
 .pdv4-label{
   width:max-content;
   max-width:100%;
-
   margin-bottom:7px;
-
   color:#e4c98f;
 }
 
-/* subtle editorial red accent */
-
 .pdv4-accent .pdv4-label{
   color:#fff;
-
   padding-left:10px;
-
-  border-left:
-    3px solid
-    var(--pd-red);
+  border-left:3px solid var(--pd-red);
 }
 
 .pdv4-overlay-copy h2{
   margin:0;
-
   max-width:650px;
-
   font:
     400
     clamp(28px,4vw,58px)/.94
     Georgia,
     "Times New Roman",
     serif;
-
   letter-spacing:-1.4px;
-
   color:#fff;
 }
 
-.pdv4-card.small
-.pdv4-overlay-copy h2{
-  font-size:
-    clamp(25px,3vw,39px);
+.pdv4-card.small .pdv4-overlay-copy h2{
+  font-size:clamp(24px,3vw,37px);
 }
 
 .pdv4-card-copy{
-  padding:
-    15px
-    18px
-    19px;
-
+  padding:15px 18px 19px;
   background:#111;
-
-  border-top:
-    1px solid
-    rgba(255,255,255,.08);
+  border-top:1px solid rgba(255,255,255,.08);
 }
 
 .pdv4-card-copy p{
-  margin:
-    0 0 12px;
-
+  margin:0 0 12px;
   max-width:680px;
-
   color:#c9c5be;
-
   font-size:13px;
   line-height:1.48;
 }
 
 .pdv4-arrow{
   display:inline-block;
-
   font-size:10px;
   font-weight:900;
-
   letter-spacing:1.1px;
-
   text-transform:uppercase;
-
   color:#fff;
 }
 
 .pdv4-accent .pdv4-arrow{
-  color:#fff;
-
-  border-bottom:
-    2px solid
-    var(--pd-red);
-
+  border-bottom:2px solid var(--pd-red);
   padding-bottom:3px;
 }
 
 .pdv4-vote{
   position:absolute;
   z-index:5;
-
   top:16px;
   left:16px;
-
-  padding:
-    10px
-    13px;
-
+  padding:10px 13px;
   border-radius:999px;
-
-  background:
-    var(--pd-red);
-
+  background:var(--pd-red);
   color:#fff;
-
   font-size:11px;
   font-weight:950;
-
   letter-spacing:.8px;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
 
-  box-shadow:
-    0 8px 25px
-    rgba(0,0,0,.25);
-}/* =========================================================
+/* =========================================================
    CLUB
 ========================================================= */
 
 .pdv4-membership{
   max-width:1280px;
-
-  margin:
-    14px auto 0;
-
-  padding:
-    46px 0 12px;
-
+  margin:14px auto 0;
+  padding:46px 0 12px;
   position:relative;
 }
 
 .pdv4-membership-top{
   display:grid;
-
-  grid-template-columns:
-    .85fr 1.15fr;
-
+  grid-template-columns:.85fr 1.15fr;
   gap:28px;
-
   align-items:end;
-
   margin-bottom:24px;
 }
 
 .pdv4-membership-kicker{
   font-size:10px;
   font-weight:950;
-
   letter-spacing:2px;
-
   color:#d2b36f;
 }
 
 .pdv4-membership h2{
-  margin:
-    8px 0 0;
-
+  margin:8px 0 0;
   font:
     400
     clamp(40px,6vw,78px)/.9
     Georgia,
     "Times New Roman",
     serif;
-
   letter-spacing:-2px;
 }
 
 .pdv4-membership-intro{
-  color:#c8c3ba;
-
-  font-size:15px;
-  line-height:1.6;
-
-  max-width:560px;
-
+  color:var(--pd-red-soft);
+  font-size:20px;
+  line-height:1.48;
+  font-weight:700;
+  max-width:620px;
   margin:0;
 }
 
 .pdv4-benefits{
   display:grid;
-
-  grid-template-columns:
-    1.25fr
-    repeat(4,.75fr);
-
+  grid-template-columns:1.15fr 1fr 1fr;
   gap:8px;
 }
 
 .pdv4-benefit{
   position:relative;
-
-  min-height:260px;
-
+  min-height:300px;
   overflow:hidden;
-
   background:#171717;
 }
 
@@ -961,25 +848,19 @@ function styles() {
 .pdv4-benefit img{
   position:absolute;
   inset:0;
-
   height:100%;
-
   object-fit:cover;
-
-  filter:
-    saturate(.86);
+  filter:saturate(.86);
 }
 
 .pdv4-benefit:after{
   content:"";
-
   position:absolute;
   inset:0;
-
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,.82),
+      rgba(0,0,0,.84),
       rgba(0,0,0,.02) 65%
     );
 }
@@ -987,122 +868,114 @@ function styles() {
 .pdv4-benefit span{
   position:absolute;
   z-index:2;
-
   left:14px;
   right:14px;
   bottom:14px;
-
   font:
     400
-    18px/1.05
+    20px/1.05
     Georgia,
     "Times New Roman",
     serif;
 }
 
-.pdv4-benefit:nth-child(2) span,
-.pdv4-benefit:nth-child(4) span{
-  padding-left:9px;
+.pdv4-benefit-contest{
+  border-bottom:3px solid var(--pd-red);
+}
 
-  border-left:
-    3px solid
-    var(--pd-red);
+.pdv4-benefit-contest span{
+  padding-left:9px;
+  border-left:3px solid var(--pd-red);
+}
+
+.pdv4-contest-rating{
+  position:absolute;
+  z-index:4;
+  top:14px;
+  left:14px;
+  right:55px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.pdv4-hearts{
+  color:var(--pd-red);
+  font-size:18px;
+  letter-spacing:2px;
+  text-shadow:0 1px 10px rgba(0,0,0,.65);
+}
+
+.pdv4-winner{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 10px;
+  border-radius:999px;
+  background:var(--pd-red);
+  color:#fff;
+  font-size:9px;
+  font-weight:950;
+  letter-spacing:1px;
 }
 
 .pdv4-join{
   display:inline-flex;
-
-  margin:
-    18px 0 0;
-
+  margin:18px 0 0;
   min-height:44px;
-
   align-items:center;
-
-  padding:
-    0 20px;
-
+  padding:0 20px;
   border-radius:999px;
-
-  background:#fff;
-
+  background:var(--pd-green);
   color:#090909 !important;
-
   font-size:11px;
   font-weight:950;
-
   letter-spacing:.8px;
-
   text-transform:uppercase;
-
-  transition:
-    background .2s ease,
-    color .2s ease;
 }
 
 .pdv4-join:hover{
-  background:var(--pd-red);
-  color:#fff !important;
+  background:#fff;
 }
 
 /* =========================================================
-   ADVERTISEMENT
+   ADVERTISING / PARTNERSHIP
 ========================================================= */
 
 .pdv4-ad{
   max-width:1280px;
-
-  margin:
-    46px auto;
-
-  min-height:300px;
-
+  margin:46px auto;
+  min-height:330px;
   position:relative;
-
   overflow:hidden;
-
-  border:
-    1px solid
-    rgba(255,255,255,.23);
-
+  border:1px solid rgba(255,255,255,.23);
   background:#111;
 }
 
 .pdv4-ad:before{
   content:"";
-
   position:absolute;
   z-index:4;
-
   top:0;
   left:0;
-
   width:72px;
   height:3px;
-
-  background:
-    var(--pd-red);
+  background:var(--pd-red);
 }
 
 .pdv4-ad img{
   position:absolute;
   inset:0;
-
   height:100%;
-
   object-fit:cover;
-
-  filter:
-    brightness(.54)
-    saturate(.72);
+  filter:brightness(.58) saturate(.82);
 }
 
 .pdv4-ad:after{
   content:"";
-
   position:absolute;
   inset:0;
-
   background:
     radial-gradient(
       circle at 70% 30%,
@@ -1111,24 +984,19 @@ function styles() {
     ),
     linear-gradient(
       90deg,
-      rgba(0,0,0,.83),
-      rgba(0,0,0,.18)
+      rgba(0,0,0,.88),
+      rgba(0,0,0,.15)
     );
 }
 
 .pdv4-ad-copy{
   position:relative;
   z-index:3;
-
-  min-height:300px;
-
+  min-height:330px;
   padding:34px;
-
   display:flex;
   flex-direction:column;
-
   justify-content:flex-end;
-
   max-width:650px;
 }
 
@@ -1136,54 +1004,103 @@ function styles() {
   font-size:9px;
   letter-spacing:2px;
   font-weight:900;
-
   margin-bottom:8px;
-
-  color:
-    var(--pd-red-soft);
+  color:var(--pd-red-soft);
 }
 
 .pdv4-ad h2{
   margin:0;
-
   font:
     400
-    clamp(34px,5vw,62px)/.92
+    clamp(34px,5vw,60px)/.92
     Georgia,
     "Times New Roman",
     serif;
 }
 
 .pdv4-ad p{
-  max-width:530px;
-
-  margin:
-    12px 0 17px;
-
+  max-width:560px;
+  margin:12px 0 17px;
   color:#d1ccc4;
-
   line-height:1.5;
-
   font-size:13px;
 }
 
 .pdv4-ad a{
   display:inline-flex;
-
   align-self:flex-start;
-
-  border-bottom:
-    2px solid
-    var(--pd-red);
-
+  border-bottom:2px solid var(--pd-red);
   padding-bottom:5px;
-
   font-size:10px;
   font-weight:900;
-
   letter-spacing:1px;
-
   text-transform:uppercase;
+}
+
+/* phone advertising visual */
+
+.pdv4-phone{
+  position:absolute;
+  z-index:3;
+  right:7%;
+  top:50%;
+  transform:translateY(-50%) rotate(4deg);
+  width:132px;
+  height:250px;
+  border:7px solid #090909;
+  border-radius:24px;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 25px 60px rgba(0,0,0,.45);
+}
+
+.pdv4-phone-screen{
+  width:100%;
+  height:100%;
+  position:relative;
+  background:#f4f0e8;
+  color:#111;
+  padding:18px 8px 8px;
+}
+
+.pdv4-phone-brand{
+  font:
+    400
+    15px/1
+    Georgia,
+    "Times New Roman",
+    serif;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.pdv4-phone-screen img{
+  position:relative;
+  inset:auto;
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  filter:none;
+}
+
+.pdv4-phone-adtext{
+  margin-top:8px;
+  font-size:8px;
+  line-height:1.25;
+  font-weight:800;
+  text-align:center;
+}
+
+.pdv4-partnership{
+  min-height:300px;
+}
+
+.pdv4-partnership .pdv4-ad-copy{
+  min-height:300px;
+}
+
+.pdv4-partnership h2{
+  font-size:clamp(32px,4.4vw,54px);
 }
 
 /* =========================================================
@@ -1202,17 +1119,12 @@ function styles() {
   }
 
   .pdv4-section{
-    padding:
-      25px
-      8px
-      36px;
+    padding:25px 8px 36px;
   }
 
   .pdv4-section-head{
     margin-bottom:8px;
-
-    padding:
-      0 7px 10px;
+    padding:0 7px 10px;
   }
 
   .pdv4-grid{
@@ -1227,10 +1139,7 @@ function styles() {
     grid-column:span 5;
   }
 
-  .pdv4-card.medium{
-    grid-column:span 6;
-  }
-
+  .pdv4-card.medium,
   .pdv4-card.wide{
     grid-column:span 6;
   }
@@ -1260,16 +1169,12 @@ function styles() {
   }
 
   .pdv4-overlay-copy h2,
-  .pdv4-card.small
-  .pdv4-overlay-copy h2{
+  .pdv4-card.small .pdv4-overlay-copy h2{
     font-size:27px;
   }
 
   .pdv4-card-copy{
-    padding:
-      12px
-      13px
-      15px;
+    padding:12px 13px 15px;
   }
 
   .pdv4-card-copy p{
@@ -1277,50 +1182,47 @@ function styles() {
   }
 
   .pdv4-membership{
-    padding:
-      32px
-      8px
-      5px;
+    padding:32px 8px 5px;
   }
 
   .pdv4-membership-top{
     grid-template-columns:1fr;
-
     gap:12px;
-
-    padding:
-      0 8px;
+    padding:0 8px;
   }
 
   .pdv4-membership h2{
     font-size:45px;
   }
 
+  .pdv4-membership-intro{
+    font-size:17px;
+  }
+
   .pdv4-benefits{
-    grid-template-columns:
-      1.3fr 1fr;
+    grid-template-columns:1.15fr 1fr 1fr;
   }
 
   .pdv4-benefit,
   .pdv4-benefit:first-child{
-    min-height:190px;
-  }
-
-  .pdv4-benefit:first-child{
-    grid-row:span 2;
-    min-height:388px;
+    min-height:230px;
   }
 
   .pdv4-ad{
-    margin:
-      34px 8px;
-
-    min-height:250px;
+    margin:34px 8px;
+    min-height:280px;
   }
 
   .pdv4-ad-copy{
-    min-height:250px;
+    min-height:280px;
     padding:22px;
+    max-width:60%;
+  }
+
+  .pdv4-phone{
+    right:5%;
+    width:110px;
+    height:215px;
   }
 }
 
@@ -1345,21 +1247,13 @@ function styles() {
   }
 
   .pdv4-section{
-    padding:
-      22px
-      6px
-      34px;
+    padding:22px 6px 34px;
   }
 
   .pdv4-section-head{
-    margin:
-      0 2px 8px;
-
-    padding:
-      0 5px 9px;
-
+    margin:0 2px 8px;
+    padding:0 5px 9px;
     align-items:flex-end;
-
     gap:8px;
   }
 
@@ -1370,27 +1264,14 @@ function styles() {
 
   .pdv4-section-head span{
     font-size:7px;
-
     letter-spacing:1px;
-
     text-align:right;
   }
 
   .pdv4-grid{
-    grid-template-columns:
-      repeat(
-        12,
-        minmax(0,1fr)
-      );
-
+    grid-template-columns:repeat(12,minmax(0,1fr));
     grid-auto-flow:dense;
-
     gap:5px;
-  }
-
-  .pdv4-card{
-    min-width:0;
-    border-radius:0;
   }
 
   .pdv4-card.large{
@@ -1410,7 +1291,7 @@ function styles() {
   }
 
   .pdv4-card.small{
-    grid-column:span 4;
+    grid-column:span 6;
   }
 
   .pdv4-card.large .pdv4-media{
@@ -1430,13 +1311,7 @@ function styles() {
   }
 
   .pdv4-card.small .pdv4-media{
-    min-height:205px;
-  }
-
-  .pdv4-card:nth-child(2)
-  .pdv4-media img{
-    object-position:
-      center 36%;
+    min-height:235px;
   }
 
   .pdv4-media img{
@@ -1463,85 +1338,44 @@ function styles() {
   }
 
   .pdv4-overlay-copy h2,
-  .pdv4-card.small
-  .pdv4-overlay-copy h2{
-    font-size:21px;
-
-    line-height:.94;
-
-    letter-spacing:-.7px;
+  .pdv4-card.small .pdv4-overlay-copy h2{
+    font-size:20px;
+    line-height:.96;
+    letter-spacing:-.55px;
   }
 
-  .pdv4-card.large
-  .pdv4-overlay-copy h2{
-    font-size:29px;
+  .pdv4-card.large .pdv4-overlay-copy h2{
+    font-size:27px;
   }
 
-  .pdv4-card.wide
-  .pdv4-overlay-copy h2{
-    font-size:25px;
-  }
-
-  .pdv4-card.small
-  .pdv4-overlay-copy h2{
-    font-size:18px;
+  .pdv4-card.wide .pdv4-overlay-copy h2{
+    font-size:23px;
   }
 
   .pdv4-label{
     margin-bottom:5px;
-
     font-size:7px;
-
     letter-spacing:1.15px;
   }
 
-  /*
-  IMPORTANT:
-  Earlier mobile version hid the descriptions completely.
-  They are now visible, but compact.
-  */
-
   .pdv4-card-copy{
-    min-height:74px;
-
-    padding:
-      9px
-      10px
-      10px;
+    min-height:86px;
+    padding:9px 10px 10px;
   }
 
   .pdv4-card-copy p{
     display:-webkit-box;
-
     -webkit-box-orient:vertical;
-    -webkit-line-clamp:3;
-
+    -webkit-line-clamp:4;
     overflow:hidden;
-
-    margin:
-      0 0 7px;
-
+    margin:0 0 7px;
     color:#aaa59d;
-
     font-size:8.5px;
-
     line-height:1.35;
   }
 
-  .pdv4-card.small
-  .pdv4-card-copy{
-    min-height:78px;
-
-    padding:
-      8px
-      8px
-      9px;
-  }
-
-  .pdv4-card.small
-  .pdv4-card-copy p{
-    font-size:7.5px;
-    line-height:1.3;
+  .pdv4-card.small .pdv4-card-copy p{
+    font-size:8px;
   }
 
   .pdv4-arrow{
@@ -1552,200 +1386,153 @@ function styles() {
   .pdv4-listen{
     top:9px;
     right:9px;
-
     width:31px;
     height:31px;
-
     font-size:12px;
-
-    background:
-      rgba(0,0,0,.38);
-
-    backdrop-filter:blur(9px);
-    -webkit-backdrop-filter:blur(9px);
+    background:rgba(0,0,0,.38);
   }
 
   .pdv4-vote{
     top:9px;
     left:9px;
-
-    padding:
-      7px
-      9px;
-
+    padding:7px 9px;
     font-size:8px;
-
-    letter-spacing:.65px;
-
-    background:
-      var(--pd-red);
-
-    box-shadow:
-      0 5px 18px
-      rgba(0,0,0,.28);
-  }
-
-  .pdv4-accent .pdv4-label{
-    padding-left:6px;
-
-    border-left-width:2px;
   }
 
   .pdv4-membership{
-    padding:
-      30px
-      2px
-      4px;
+    padding:30px 2px 4px;
   }
 
   .pdv4-membership-top{
-    padding:
-      0 6px;
-
+    padding:0 6px;
     margin-bottom:15px;
   }
 
   .pdv4-membership-kicker{
     font-size:8px;
-
     letter-spacing:1.5px;
   }
 
   .pdv4-membership h2{
     margin-top:6px;
-
-    font-size:39px;
-
-    line-height:.91;
+    font-size:36px;
+    line-height:.92;
   }
 
   .pdv4-membership-intro{
-    font-size:12px;
-
-    line-height:1.5;
+    font-size:14px;
+    line-height:1.45;
   }
 
   .pdv4-benefits{
-    grid-template-columns:
-      repeat(
-        12,
-        minmax(0,1fr)
-      );
-
-    grid-auto-flow:dense;
-
+    grid-template-columns:repeat(12,minmax(0,1fr));
     gap:5px;
-  }
-
-  .pdv4-benefit,
-  .pdv4-benefit:first-child{
-    grid-column:span 6;
-
-    grid-row:auto;
-
-    min-height:145px;
   }
 
   .pdv4-benefit:first-child{
     grid-column:span 7;
-
     min-height:245px;
   }
 
   .pdv4-benefit:nth-child(2){
     grid-column:span 5;
-    min-height:170px;
+    min-height:245px;
   }
 
   .pdv4-benefit:nth-child(3){
-    grid-column:span 5;
-    min-height:150px;
-  }
-
-  .pdv4-benefit:nth-child(4){
-    grid-column:span 7;
-    min-height:195px;
-  }
-
-  .pdv4-benefit:nth-child(5){
     grid-column:span 12;
-    min-height:170px;
-  }
-
-  .pdv4-benefit img{
-    filter:
-      saturate(.84)
-      contrast(.96);
+    min-height:195px;
   }
 
   .pdv4-benefit span{
     left:10px;
     right:10px;
     bottom:10px;
-
-    font-size:14px;
-
-    line-height:1.05;
+    font-size:15px;
   }
 
   .pdv4-benefit:first-child span{
     font-size:18px;
   }
 
+  .pdv4-hearts{
+    font-size:14px;
+  }
+
+  .pdv4-winner{
+    font-size:7px;
+    min-height:23px;
+  }
+
   .pdv4-join{
-    margin:
-      14px 6px 0;
-
+    margin:14px 6px 0;
     min-height:40px;
-
-    padding:
-      0 17px;
-
+    padding:0 17px;
     font-size:9px;
   }
 
   .pdv4-ad{
-    margin:
-      29px 2px;
-
-    min-height:220px;
+    margin:29px 2px;
+    min-height:260px;
   }
 
   .pdv4-ad-copy{
-    min-height:220px;
-
+    min-height:260px;
     padding:18px;
+    max-width:67%;
   }
 
   .pdv4-ad-label{
     font-size:7px;
-
     letter-spacing:1.5px;
   }
 
   .pdv4-ad h2{
-    font-size:34px;
+    font-size:30px;
   }
 
   .pdv4-ad p{
-    margin:
-      9px 0 13px;
-
-    max-width:270px;
-
-    font-size:10px;
-
+    margin:9px 0 13px;
+    max-width:220px;
+    font-size:9px;
     line-height:1.45;
   }
 
   .pdv4-ad a{
     font-size:8px;
   }
+
+  .pdv4-phone{
+    right:3%;
+    width:82px;
+    height:160px;
+    border-width:5px;
+    border-radius:17px;
+  }
+
+  .pdv4-phone-screen{
+    padding:12px 5px 5px;
+  }
+
+  .pdv4-phone-brand{
+    font-size:9px;
+    margin-bottom:6px;
+  }
+
+  .pdv4-phone-screen img{
+    height:78px;
+  }
+
+  .pdv4-phone-adtext{
+    font-size:5.5px;
+  }
 }
 
 </style>
   `;
-}/* =========================================================
+}
+
+/* =========================================================
    RENDER
 ========================================================= */
 
@@ -1759,10 +1546,6 @@ function render() {
   if (!root) {
     return;
   }
-
-  /* -------------------------------------------------------
-     HERO
-  ------------------------------------------------------- */
 
   const hero =
     root.querySelector(
@@ -1794,8 +1577,6 @@ function render() {
     `;
   }
 
-  /* remove previous rendered homepage only */
-
   const oldContent =
     root.querySelector(
       ".pdv4-home"
@@ -1804,10 +1585,6 @@ function render() {
   if (oldContent) {
     oldContent.remove();
   }
-
-  /* -------------------------------------------------------
-     NEW EDITORIAL HOMEPAGE
-  ------------------------------------------------------- */
 
   root.insertAdjacentHTML(
     "beforeend",
@@ -1826,9 +1603,7 @@ function render() {
           </span>
         </div>
 
-        <!-- ===============================================
-             MAIN STORIES
-        ================================================ -->
+        <!-- MAIN STORIES -->
 
         <div class="pdv4-grid">
 
@@ -1867,14 +1642,13 @@ function render() {
             label: t("communityLabel"),
             title: t("communityTitle"),
             text: t("communityText"),
-            className: "wide"
+            className: "wide",
+            accent: true
           })}
 
         </div>
 
-        <!-- ===============================================
-             PETS & DOGUE CLUB
-        ================================================ -->
+        <!-- CLUB -->
 
         <section
           class="pdv4-membership"
@@ -1934,22 +1708,7 @@ function render() {
             </a>
 
             <a
-              class="pdv4-benefit"
-              href="wellness.html"
-            >
-              <img
-                src="club-pet-health.png"
-                alt="${esc(t("offers"))}"
-                loading="lazy"
-              />
-
-              <span>
-                ${esc(t("offers"))}
-              </span>
-            </a>
-
-            <a
-              class="pdv4-benefit"
+              class="pdv4-benefit pdv4-benefit-contest"
               href="contests.html"
             >
               <img
@@ -1958,23 +1717,18 @@ function render() {
                 loading="lazy"
               />
 
+              <div class="pdv4-contest-rating">
+                <div class="pdv4-hearts">
+                  ♥ ♥ ♥ ♥ ♥
+                </div>
+
+                <div class="pdv4-winner">
+                  ${esc(t("contestWinner"))}
+                </div>
+              </div>
+
               <span>
                 ${esc(t("contests"))}
-              </span>
-            </a>
-
-            <a
-              class="pdv4-benefit"
-              href="pet-marketplace.html"
-            >
-              <img
-                src="marketplace.jpg"
-                alt="${esc(t("marketplaceBenefit"))}"
-                loading="lazy"
-              />
-
-              <span>
-                ${esc(t("marketplaceBenefit"))}
               </span>
             </a>
 
@@ -1989,9 +1743,7 @@ function render() {
 
         </section>
 
-        <!-- ===============================================
-             ADVERTISEMENT 1
-        ================================================ -->
+        <!-- BRAND ADVERTISING -->
 
         <section
           class="pdv4-ad"
@@ -1999,17 +1751,37 @@ function render() {
         >
 
           <img
-            src="partners.jpg"
+            src="cover-star/cover-golf-bulldog.png"
             alt="PETS & DOGUE advertising"
             loading="lazy"
           />
 
           ${listenButton()}
 
+          <div class="pdv4-phone">
+            <div class="pdv4-phone-screen">
+
+              <div class="pdv4-phone-brand">
+                PETS & DOGUE
+              </div>
+
+              <img
+                src="cover-star/cover-golf-bulldog.png"
+                alt=""
+              />
+
+              <div class="pdv4-phone-adtext">
+                YOUR BRAND<br/>
+                PREMIUM PLACEMENT
+              </div>
+
+            </div>
+          </div>
+
           <div class="pdv4-ad-copy">
 
             <div class="pdv4-ad-label">
-              ${esc(t("ad"))} · VIDEO
+              ${esc(t("ad"))}
             </div>
 
             <h2>
@@ -2028,20 +1800,9 @@ function render() {
 
         </section>
 
-        <!-- ===============================================
-             DISCOVERY / SERVICES / EDITORIAL
-        ================================================ -->
+        <!-- MARKETPLACE + HELP -->
 
         <div class="pdv4-grid">
-
-          ${card({
-            href: "green-tourism.html",
-            image: "green-tourism.jpg",
-            label: t("greenLabel"),
-            title: t("greenTitle"),
-            text: t("greenText"),
-            className: "tall"
-          })}
 
           ${card({
             href: "pet-marketplace.html",
@@ -2049,7 +1810,8 @@ function render() {
             label: t("marketplaceLabel"),
             title: t("marketplaceTitle"),
             text: t("marketplaceText"),
-            className: "large"
+            className: "large",
+            accent: true
           })}
 
           ${card({
@@ -2058,33 +1820,15 @@ function render() {
             label: t("helpLabel"),
             title: t("helpTitle"),
             text: t("helpText"),
-            className: "wide",
+            className: "tall",
             accent: true
           })}
 
-          ${card({
-            href: "pet-friendly-places.html",
-            image: "pet-friendly-stays.jpg",
-            label: t("petFriendlyLabel"),
-            title: t("petFriendlyTitle"),
-            text: t("petFriendlyText"),
-            className: "medium"
-          })}
+        </div>
 
-          <!-- PHOTOS:
-               visual editorial / photography card -->
+        <!-- STYLE / WELLNESS -->
 
-          ${card({
-            href: "photos.html",
-            image: "cover-star/cover-turtle-spa.png",
-            label: t("photosLabel"),
-            title: t("photosTitle"),
-            text: t("photosText"),
-            className: "small"
-          })}
-
-          <!-- FASHION:
-               fashion / grooming editorial visual -->
+        <div class="pdv4-grid">
 
           ${card({
             href: "pet-fashion.html",
@@ -2095,32 +1839,45 @@ function render() {
             className: "small"
           })}
 
-          <!-- ARTICLES:
-               magazine-style editorial cover -->
+          ${card({
+            href: "wellness.html",
+            image: "cover-star/cover-turtle-spa.png",
+            label: t("wellnessLabel"),
+            title: t("wellnessTitle"),
+            text: t("wellnessText"),
+            className: "small"
+          })}
 
           ${card({
-            href: "articles.html",
+            href: "pet-fashion.html",
+            image: "cover-star/cover-horse-salon.png",
+            label: t("beautyLabel"),
+            title: t("beautyTitle"),
+            text: t("beautyText"),
+            className: "small"
+          })}
+
+          ${card({
+            href: "wellness.html",
             image: "cover-star/cover-capri-sphynx.png",
-            label: t("articlesLabel"),
-            title: t("articlesTitle"),
-            text: t("articlesText"),
+            label: t("activeLabel"),
+            title: t("activeTitle"),
+            text: t("activeText"),
             className: "small"
           })}
 
         </div>
 
-        <!-- ===============================================
-             ADVERTISEMENT 2
-        ================================================ -->
+        <!-- BUSINESS PARTNERSHIP -->
 
         <section
-          class="pdv4-ad"
+          class="pdv4-ad pdv4-partnership"
           data-speech-section
         >
 
           <img
-            src="cover-star/cover-golf-bulldog.png"
-            alt="PETS & DOGUE premium video advertising"
+            src="partners.jpg"
+            alt="PETS & DOGUE business partnerships"
             loading="lazy"
           />
 
@@ -2129,19 +1886,19 @@ function render() {
           <div class="pdv4-ad-copy">
 
             <div class="pdv4-ad-label">
-              ${esc(t("ad"))} · VIDEO
+              ${esc(t("partnershipLabel"))}
             </div>
 
             <h2>
-              ${esc(t("adTitle"))}
+              ${esc(t("partnershipTitle"))}
             </h2>
 
             <p>
-              ${esc(t("adText"))}
+              ${esc(t("partnershipText"))}
             </p>
 
             <a href="partners.html">
-              ${esc(t("advertise"))} →
+              ${esc(t("partnershipButton"))} →
             </a>
 
           </div>
@@ -2153,11 +1910,6 @@ function render() {
     </div>
     `
   );
-
-  /* -------------------------------------------------------
-     Hide previous homepage content only.
-     Do NOT touch global header / menu / ticker / Miso.
-  ------------------------------------------------------- */
 
   const oldSections =
     Array.from(
