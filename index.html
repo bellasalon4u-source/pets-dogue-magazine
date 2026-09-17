@@ -694,7 +694,9 @@ background:var(--green);
 
 .pd-star .pd-story-copy{
 background:#f0e5cf;
-}/* =========================================================
+}
+
+/* =========================================================
    TWO-PHOTO COLLAGE
 ========================================================= */
 
@@ -768,6 +770,7 @@ padding:76px 20px;
 .pd-value-board-inner{
 max-width:1280px;
 margin:auto;
+position:relative;
 }
 
 .pd-value-board h2{
@@ -804,9 +807,13 @@ line-height:1.5;
 color:#d4d4d4;
 }
 
+/* =========================================================
+   FROM THE EDITORS
+========================================================= */
+
 .newsletter{
 background:var(--cream);
-padding:65px 20px;
+padding:72px 20px 76px;
 position:relative;
 }
 
@@ -817,40 +824,24 @@ margin:auto;
 text-align:center;
 }
 
+.newsletter .pd-value-label{
+margin-bottom:18px;
+}
+
 .newsletter h2{
 margin:0;
 font:400 clamp(38px,5vw,62px)/.95 var(--serif);
 }
 
 .newsletter p{
-margin:16px auto 24px;
+margin:18px auto 0;
 font-size:16px;
-line-height:1.5;
-max-width:630px;
+line-height:1.65;
+max-width:720px;
 }
 
-.newsletter-form{
-display:flex;
-max-width:620px;
-margin:auto;
-}
-
-.newsletter-form input{
-flex:1;
-min-width:0;
-height:52px;
-border:2px solid #111;
-padding:0 14px;
-background:#fff;
-}
-
-.newsletter-form button{
-height:52px;
-padding:0 20px;
-border:2px solid #111;
-background:#111;
-color:#fff;
-font-weight:900;
+.newsletter-signoff{
+margin-top:30px !important;
 }
 
 footer{
@@ -1052,13 +1043,12 @@ font-size:22px;
 font-size:11px;
 }
 
-.newsletter-form{
-display:grid;
-gap:6px;
+.newsletter{
+padding:55px 18px 60px;
 }
 
-.newsletter-form button{
-width:100%;
+.newsletter p{
+font-size:15px;
 }
 
 }
@@ -2060,12 +2050,17 @@ Support rescue cases, adoption stories and animals needing visibility.
 </div>
 </main>
 
-<section class="newsletter">
+<!-- ======================================================
+     FROM THE EDITORS
+     Replaces the previous newsletter block only
+======================================================= -->
 
-<div
-class="newsletter-inner"
+<section
+class="newsletter editorial-note"
 data-speech-section
 >
+
+<div class="newsletter-inner">
 
 <button
 class="home-listen"
@@ -2075,31 +2070,42 @@ onclick="listenToSection(this)"
 🔊
 </button>
 
-<h2 data-i18n="home.newsletter.heading">
-Your Front-Row Seat to the Animal World
+<div class="pd-value-label">
+FROM THE EDITORS
+</div>
+
+<h2 class="notranslate" translate="no">
+One world. Every pet.
 </h2>
 
-<p data-i18n="home.newsletter.description">
-Receive new issues, cover-star announcements, visual stories, travel ideas and community updates.
+<p>
+Рады, что вы здесь с нами.
 </p>
 
-<div class="newsletter-form">
+<p>
+PETS &amp; DOGUE — для тех, кто считает животных частью нашей жизни, семьи и общества.
+</p>
 
-<input
-data-i18n-placeholder="home.newsletter.placeholder"
-id="newsletterEmail"
-placeholder="Your email address"
-type="email"
-/>
+<p>
+Мы за ответственное отношение к животным, их здоровье и благополучие. За мир, в котором питомцам рады в большем количестве мест, потерянные животные быстрее возвращаются домой, животные без семьи получают шанс быть замеченными, а люди могут находить друг друга, делиться опытом и помогать.
+</p>
 
-<button
-data-i18n="home.newsletter.button"
-onclick="subscribeNewsletter()"
->
-SUBSCRIBE
-</button>
+<p>
+Мы объединяем полезные сервисы, новые идеи, места, истории, моду, здоровье, сообщество и помощь животным в одном пространстве.
+</p>
 
-</div>
+<p>
+<strong>
+Один мир. Для каждого питомца.
+</strong>
+</p>
+
+<p class="newsletter-signoff">
+С любовью,<br/>
+<strong class="notranslate" translate="no">
+PETS &amp; DOGUE &amp; Miso 🐾
+</strong>
+</p>
 
 </div>
 
@@ -2730,117 +2736,6 @@ activeSpeechButton =
 null;
 
 }
-
-}
-
-function subscribeNewsletter(){
-
-const input =
-document.getElementById(
-"newsletterEmail"
-);
-
-if(!input){
-return;
-}
-
-const email =
-input.value.trim();
-
-const emailPattern =
-/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-if(
-!emailPattern.test(
-email
-)
-){
-
-alert(
-window.PetsDogueLanguage?.translate?.(
-"common.system.invalidEmail"
-)
-||
-"Please enter a valid email address."
-);
-
-return;
-
-}
-
-let subscribers = [];
-
-try{
-
-subscribers =
-JSON.parse(
-localStorage.getItem(
-"pets_dogue_newsletter"
-)
-||
-"[]"
-);
-
-if(
-!Array.isArray(
-subscribers
-)
-){
-subscribers = [];
-}
-
-}catch{
-
-subscribers = [];
-
-}
-
-const normalizedEmail =
-email.toLowerCase();
-
-const alreadyExists =
-subscribers.some(
-subscriber=>
-String(
-subscriber
-)
-.toLowerCase() ===
-normalizedEmail
-);
-
-if(!alreadyExists){
-subscribers.push(
-email
-);
-}
-
-try{
-
-localStorage.setItem(
-"pets_dogue_newsletter",
-JSON.stringify(
-subscribers
-)
-);
-
-}catch(error){
-
-console.warn(
-"PETS & DOGUE newsletter storage unavailable.",
-error
-);
-
-}
-
-input.value = "";
-
-alert(
-window.PetsDogueLanguage?.translate?.(
-"common.system.newsletterSuccess"
-)
-||
-"Welcome to the PETS & DOGUE community."
-);
 
 }
 
