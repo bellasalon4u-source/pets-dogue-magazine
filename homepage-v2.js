@@ -832,7 +832,6 @@ function card({
         aria-label="${esc(t("howItWorks"))}: ${esc(title)}"
       >
         <div class="pdv4-media">
-
           <img
             src="${image}"
             alt="${esc(title)}"
@@ -852,7 +851,6 @@ function card({
           }
 
           <div class="pdv4-overlay-copy">
-
             <span class="pdv4-label">
               ${esc(label)}
             </span>
@@ -860,13 +858,10 @@ function card({
             <h2>
               ${esc(title)}
             </h2>
-
           </div>
-
         </div>
 
         <div class="pdv4-card-copy">
-
           <p>
             ${esc(text)}
           </p>
@@ -874,13 +869,10 @@ function card({
           <span class="pdv4-arrow">
             ${esc(t("howItWorks"))} →
           </span>
-
         </div>
-
       </button>
 
       ${listenButton()}
-
     </article>
   `;
 }
@@ -1079,12 +1071,10 @@ function openHowModal(button) {
             <div class="pdv4-how-divider"></div>
 
             <div class="pdv4-how-steps">
-
               ${steps.map(
                 function (step, index) {
                   return `
                     <div class="pdv4-how-step">
-
                       <div class="pdv4-how-number">
                         ${String(index + 1).padStart(2, "0")}
                       </div>
@@ -1092,12 +1082,10 @@ function openHowModal(button) {
                       <p>
                         ${esc(step)}
                       </p>
-
                     </div>
                   `;
                 }
               ).join("")}
-
             </div>
 
             <div class="pdv4-how-summary">
@@ -1114,9 +1102,7 @@ function openHowModal(button) {
             </button>
 
           </div>
-
         </div>
-
       </div>
     `
   );
@@ -1170,14 +1156,9 @@ function styles() {
   --pd-red-soft:#ef3e46;
   --pd-green:#65e51f;
   --pd-line:rgba(255,255,255,.24);
-
   background:var(--pd-black);
   color:#fff;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 .pdv4-home *{
@@ -1193,8 +1174,6 @@ function styles() {
   display:block;
   width:100%;
 }
-
-/* HERO */
 
 .pdv4-hero{
   position:relative;
@@ -1216,13 +1195,12 @@ function styles() {
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.68) 0%,
-      rgba(0,0,0,.18) 48%,
-      rgba(0,0,0,.05) 100%
-    );
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.68) 0%,
+    rgba(0,0,0,.18) 48%,
+    rgba(0,0,0,.05) 100%
+  );
   pointer-events:none;
 }
 
@@ -1251,12 +1229,7 @@ function styles() {
 
 .pdv4-hero h1{
   margin:0;
-  font:
-    400
-    clamp(49px,8vw,104px)/.88
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 clamp(49px,8vw,104px)/.88 Georgia,"Times New Roman",serif;
   letter-spacing:-3px;
   text-shadow:0 3px 30px rgba(0,0,0,.3);
 }
@@ -1265,8 +1238,6 @@ function styles() {
   font-weight:400;
   font-style:italic;
 }
-
-/* LISTEN */
 
 .pdv4-listen{
   position:absolute;
@@ -1288,8 +1259,6 @@ function styles() {
   -webkit-backdrop-filter:blur(12px);
 }
 
-/* SECTION */
-
 .pdv4-section{
   padding:38px 16px 48px;
 }
@@ -1307,12 +1276,7 @@ function styles() {
 
 .pdv4-section-head h2{
   margin:0;
-  font:
-    400
-    clamp(30px,4vw,52px)/1
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 clamp(30px,4vw,52px)/1 Georgia,"Times New Roman",serif;
 }
 
 .pdv4-section-head span{
@@ -1321,8 +1285,6 @@ function styles() {
   letter-spacing:1.6px;
   color:#bdb6aa;
 }
-
-/* GRID */
 
 .pdv4-grid{
   max-width:1280px;
@@ -1357,25 +1319,11 @@ function styles() {
   cursor:pointer;
 }
 
-.pdv4-card.large{
-  grid-column:span 7;
-}
-
-.pdv4-card.tall{
-  grid-column:span 5;
-}
-
-.pdv4-card.medium{
-  grid-column:span 5;
-}
-
-.pdv4-card.wide{
-  grid-column:span 7;
-}
-
-.pdv4-card.small{
-  grid-column:span 3;
-}
+.pdv4-card.large{grid-column:span 7;}
+.pdv4-card.tall{grid-column:span 5;}
+.pdv4-card.medium{grid-column:span 5;}
+.pdv4-card.wide{grid-column:span 7;}
+.pdv4-card.small{grid-column:span 3;}
 
 .pdv4-media{
   position:relative;
@@ -1413,13 +1361,12 @@ function styles() {
 .pdv4-shade{
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.84) 0%,
-      rgba(0,0,0,.29) 46%,
-      rgba(0,0,0,.02) 74%
-    );
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.84) 0%,
+    rgba(0,0,0,.29) 46%,
+    rgba(0,0,0,.02) 74%
+  );
 }
 
 .pdv4-overlay-copy{
@@ -1446,12 +1393,7 @@ function styles() {
 .pdv4-overlay-copy h2{
   margin:0;
   max-width:650px;
-  font:
-    400
-    clamp(28px,4vw,58px)/.94
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 clamp(28px,4vw,58px)/.94 Georgia,"Times New Roman",serif;
   letter-spacing:-1.4px;
   color:#fff;
 }
@@ -1503,10 +1445,6 @@ function styles() {
   box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
 
-/* =========================================================
-   CLUB
-========================================================= */
-
 .pdv4-membership{
   max-width:1280px;
   margin:14px auto 0;
@@ -1531,12 +1469,7 @@ function styles() {
 
 .pdv4-membership h2{
   margin:8px 0 0;
-  font:
-    400
-    clamp(40px,6vw,78px)/.9
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 clamp(40px,6vw,78px)/.9 Georgia,"Times New Roman",serif;
   letter-spacing:-2px;
 }
 
@@ -1578,12 +1511,7 @@ function styles() {
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.84),
-      rgba(0,0,0,.02) 65%
-    );
+  background:linear-gradient(to top,rgba(0,0,0,.84),rgba(0,0,0,.02) 65%);
 }
 
 .pdv4-benefit span{
@@ -1592,12 +1520,7 @@ function styles() {
   left:14px;
   right:14px;
   bottom:14px;
-  font:
-    400
-    20px/1.05
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 20px/1.05 Georgia,"Times New Roman",serif;
 }
 
 .pdv4-benefit-contest{
@@ -1660,10 +1583,6 @@ function styles() {
   background:#fff;
 }
 
-/* =========================================================
-   ADVERTISING
-========================================================= */
-
 .pdv4-ad{
   max-width:1280px;
   margin:46px auto;
@@ -1698,16 +1617,8 @@ function styles() {
   position:absolute;
   inset:0;
   background:
-    radial-gradient(
-      circle at 70% 30%,
-      rgba(255,255,255,.10),
-      transparent 40%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,.88),
-      rgba(0,0,0,.15)
-    );
+    radial-gradient(circle at 70% 30%,rgba(255,255,255,.10),transparent 40%),
+    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.15));
 }
 
 .pdv4-ad-copy{
@@ -1731,12 +1642,7 @@ function styles() {
 
 .pdv4-ad h2{
   margin:0;
-  font:
-    400
-    clamp(34px,5vw,60px)/.92
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 clamp(34px,5vw,60px)/.92 Georgia,"Times New Roman",serif;
 }
 
 .pdv4-ad p{
@@ -1757,8 +1663,6 @@ function styles() {
   letter-spacing:1px;
   text-transform:uppercase;
 }
-
-/* PHONE ADVERTISING VISUAL */
 
 .pdv4-phone{
   position:absolute;
@@ -1785,12 +1689,7 @@ function styles() {
 }
 
 .pdv4-phone-brand{
-  font:
-    400
-    15px/1
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 15px/1 Georgia,"Times New Roman",serif;
   text-align:center;
   margin-bottom:10px;
 }
@@ -1812,10 +1711,6 @@ function styles() {
   text-align:center;
 }
 
-/* =========================================================
-   HOW IT WORKS MODAL
-========================================================= */
-
 body.pdv4-modal-open{
   overflow:hidden;
 }
@@ -1830,9 +1725,7 @@ body.pdv4-modal-open{
   padding:18px;
   opacity:0;
   visibility:hidden;
-  transition:
-    opacity .25s ease,
-    visibility .25s ease;
+  transition:opacity .25s ease,visibility .25s ease;
 }
 
 .pdv4-how-modal.is-open{
@@ -1868,8 +1761,6 @@ body.pdv4-modal-open{
   transform:translateY(0) scale(1);
 }
 
-/* NEW HEADER: BACK LEFT + LISTEN RIGHT */
-
 .pdv4-how-header{
   position:absolute;
   z-index:30;
@@ -1882,13 +1773,12 @@ body.pdv4-modal-open{
   justify-content:space-between;
   gap:14px;
   padding:12px 15px;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(11,11,11,.98) 0%,
-      rgba(11,11,11,.90) 72%,
-      rgba(11,11,11,0) 100%
-    );
+  background:linear-gradient(
+    to bottom,
+    rgba(11,11,11,.98) 0%,
+    rgba(11,11,11,.90) 72%,
+    rgba(11,11,11,0) 100%
+  );
   pointer-events:none;
 }
 
@@ -1948,10 +1838,7 @@ body.pdv4-modal-open{
   max-height:min(850px,92vh);
   overflow-y:auto;
   overscroll-behavior:contain;
-  padding:
-    clamp(82px,10vw,102px)
-    clamp(22px,6vw,62px)
-    clamp(30px,6vw,58px);
+  padding:clamp(82px,10vw,102px) clamp(22px,6vw,62px) clamp(30px,6vw,58px);
 }
 
 .pdv4-how-kicker{
@@ -1969,12 +1856,7 @@ body.pdv4-modal-open{
 .pdv4-how-panel h2{
   max-width:610px;
   margin:0;
-  font:
-    400
-    clamp(40px,7vw,72px)/.92
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:400 clamp(40px,7vw,72px)/.92 Georgia,"Times New Roman",serif;
   letter-spacing:-2px;
 }
 
@@ -1990,12 +1872,7 @@ body.pdv4-modal-open{
   width:100%;
   height:1px;
   margin:30px 0 7px;
-  background:
-    linear-gradient(
-      90deg,
-      #d71920 0 70px,
-      rgba(255,255,255,.18) 70px
-    );
+  background:linear-gradient(90deg,#d71920 0 70px,rgba(255,255,255,.18) 70px);
 }
 
 .pdv4-how-steps{
@@ -2013,13 +1890,7 @@ body.pdv4-modal-open{
 
 .pdv4-how-number{
   color:#d71920;
-  font:
-    italic
-    400
-    25px/1
-    Georgia,
-    "Times New Roman",
-    serif;
+  font:italic 400 25px/1 Georgia,"Times New Roman",serif;
 }
 
 .pdv4-how-step p{
@@ -2038,8 +1909,6 @@ body.pdv4-modal-open{
   font-size:13px;
   line-height:1.55;
 }
-
-/* BOTTOM BACK BUTTON */
 
 .pdv4-how-bottom-back{
   width:100%;
@@ -2074,15 +1943,9 @@ body.pdv4-modal-open{
   background:#1a1a1a;
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
-
 @media(max-width:800px){
 
-  .pdv4-hero{
-    min-height:500px;
-  }
+  .pdv4-hero{min-height:500px;}
 
   .pdv4-hero h1{
     font-size:52px;
@@ -2098,17 +1961,10 @@ body.pdv4-modal-open{
     padding:0 7px 10px;
   }
 
-  .pdv4-grid{
-    gap:7px;
-  }
+  .pdv4-grid{gap:7px;}
 
-  .pdv4-card.large{
-    grid-column:span 7;
-  }
-
-  .pdv4-card.tall{
-    grid-column:span 5;
-  }
+  .pdv4-card.large{grid-column:span 7;}
+  .pdv4-card.tall{grid-column:span 5;}
 
   .pdv4-card.medium,
   .pdv4-card.wide{
@@ -2197,15 +2053,9 @@ body.pdv4-modal-open{
   }
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
 @media(max-width:460px){
 
-  .pdv4-hero{
-    min-height:410px;
-  }
+  .pdv4-hero{min-height:410px;}
 
   .pdv4-hero-copy{
     left:16px;
@@ -2246,61 +2096,29 @@ body.pdv4-modal-open{
     gap:5px;
   }
 
-  .pdv4-card.large{
-    grid-column:span 7;
-  }
+  .pdv4-card.large{grid-column:span 7;}
+  .pdv4-card.tall{grid-column:span 5;}
+  .pdv4-card.medium{grid-column:span 5;}
+  .pdv4-card.wide{grid-column:span 7;}
+  .pdv4-card.small{grid-column:span 6;}
 
-  .pdv4-card.tall{
-    grid-column:span 5;
-  }
-
-  .pdv4-card.medium{
-    grid-column:span 5;
-  }
-
-  .pdv4-card.wide{
-    grid-column:span 7;
-  }
-
-  .pdv4-card.small{
-    grid-column:span 6;
-  }
-
-  .pdv4-card.large .pdv4-media{
-    min-height:355px;
-  }
-
-  .pdv4-card.tall .pdv4-media{
-    min-height:285px;
-  }
-
-  .pdv4-card.medium .pdv4-media{
-    min-height:245px;
-  }
-
-  .pdv4-card.wide .pdv4-media{
-    min-height:300px;
-  }
-
-  .pdv4-card.small .pdv4-media{
-    min-height:270px;
-  }
+  .pdv4-card.large .pdv4-media{min-height:355px;}
+  .pdv4-card.tall .pdv4-media{min-height:285px;}
+  .pdv4-card.medium .pdv4-media{min-height:245px;}
+  .pdv4-card.wide .pdv4-media{min-height:300px;}
+  .pdv4-card.small .pdv4-media{min-height:270px;}
 
   .pdv4-media img{
-    filter:
-      saturate(.84)
-      contrast(.97)
-      brightness(.97);
+    filter:saturate(.84) contrast(.97) brightness(.97);
   }
 
   .pdv4-shade{
-    background:
-      linear-gradient(
-        to top,
-        rgba(0,0,0,.80) 0%,
-        rgba(0,0,0,.30) 42%,
-        rgba(0,0,0,.04) 72%
-      );
+    background:linear-gradient(
+      to top,
+      rgba(0,0,0,.80) 0%,
+      rgba(0,0,0,.30) 42%,
+      rgba(0,0,0,.04) 72%
+    );
   }
 
   .pdv4-overlay-copy{
@@ -2430,9 +2248,7 @@ body.pdv4-modal-open{
     font-size:19px;
   }
 
-  .pdv4-hearts{
-    font-size:15px;
-  }
+  .pdv4-hearts{font-size:15px;}
 
   .pdv4-winner{
     font-size:8px;
@@ -2503,8 +2319,6 @@ body.pdv4-modal-open{
     font-size:5.5px;
   }
 
-  /* HOW IT WORKS — MOBILE */
-
   .pdv4-how-modal{
     align-items:flex-end;
     padding:0;
@@ -2521,10 +2335,7 @@ body.pdv4-modal-open{
 
   .pdv4-how-scroll{
     max-height:92vh;
-    padding:
-      76px
-      20px
-      36px;
+    padding:76px 20px 36px;
   }
 
   .pdv4-how-header{
@@ -2664,20 +2475,12 @@ function render() {
       <section class="pdv4-section">
 
         <div class="pdv4-section-head">
-
-          <h2>
-            ${esc(t("latest"))}
-          </h2>
+          <h2>${esc(t("latest"))}</h2>
 
           <span>
             PETS & DOGUE · EDITORIAL
           </span>
-
         </div>
-
-        <!-- =================================================
-             MAIN STORIES
-        ================================================== -->
 
         <div class="pdv4-grid">
 
@@ -2722,10 +2525,6 @@ function render() {
 
         </div>
 
-        <!-- =================================================
-             CLUB
-        ================================================== -->
-
         <section
           class="pdv4-membership"
           data-speech-section
@@ -2736,7 +2535,6 @@ function render() {
           <div class="pdv4-membership-top">
 
             <div>
-
               <div class="pdv4-membership-kicker">
                 ${esc(t("membershipLabel"))}
               </div>
@@ -2744,7 +2542,6 @@ function render() {
               <h2>
                 ${esc(t("membershipTitle"))}
               </h2>
-
             </div>
 
             <p class="pdv4-membership-intro">
@@ -2759,7 +2556,6 @@ function render() {
               class="pdv4-benefit"
               href="club.html"
             >
-
               <img
                 src="club.jpg"
                 alt="${esc(t("community"))}"
@@ -2769,14 +2565,12 @@ function render() {
               <span>
                 ${esc(t("community"))}
               </span>
-
             </a>
 
             <a
               class="pdv4-benefit"
               href="special-offers.html"
             >
-
               <img
                 src="club-partner-discounts.png"
                 alt="${esc(t("discounts"))}"
@@ -2786,14 +2580,12 @@ function render() {
               <span>
                 ${esc(t("discounts"))}
               </span>
-
             </a>
 
             <a
               class="pdv4-benefit pdv4-benefit-contest"
               href="contests.html"
             >
-
               <img
                 src="cover-star/cover-surf-parrot.png"
                 alt="${esc(t("contests"))}"
@@ -2815,7 +2607,6 @@ function render() {
               <span>
                 ${esc(t("contests"))}
               </span>
-
             </a>
 
           </div>
@@ -2828,10 +2619,6 @@ function render() {
           </a>
 
         </section>
-
-        <!-- =================================================
-             BRAND ADVERTISING
-        ================================================== -->
 
         <section
           class="pdv4-ad"
@@ -2890,10 +2677,6 @@ function render() {
 
         </section>
 
-        <!-- =================================================
-             MARKETPLACE + HELP
-        ================================================== -->
-
         <div class="pdv4-grid">
 
           ${card({
@@ -2917,10 +2700,6 @@ function render() {
           })}
 
         </div>
-
-        <!-- =================================================
-             STYLE / WELLNESS / BEAUTY / ACTIVE LIFE
-        ================================================== -->
 
         <div class="pdv4-grid">
 
@@ -3017,7 +2796,6 @@ function handleDocumentClick(event) {
     );
 
   if (howButton) {
-
     event.preventDefault();
 
     openHowModal(
@@ -3033,7 +2811,6 @@ function handleDocumentClick(event) {
     );
 
   if (backButton) {
-
     event.preventDefault();
 
     closeHowModal();
