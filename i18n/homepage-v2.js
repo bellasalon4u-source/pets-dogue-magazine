@@ -1,1131 +1,1863 @@
 (function () {
   "use strict";
 
+  /*
+  PETS & DOGUE — HOMEPAGE V2 TRANSLATIONS
+
+  Supported languages only:
+  EN, UA, RU, FR, DE, ES, IT, PT, NL, PL, CZ,
+  SK, HU, RO, BG, GR, SE, DK, NO, FI, TR, AR, HI
+
+  Technical language codes used by the project:
+  en, uk, ru, fr, de, es, it, pt, nl, pl, cs,
+  sk, hu, ro, bg, el, sv, da, no, fi, tr, ar, hi
+
+  Existing aliases handled by the homepage:
+  ua -> uk
+  cz -> cs
+  gr -> el
+  se -> sv
+  dk -> da
+  */
+
   window.PetsDogueHomepageV2Text = {
 
     en: {
-      hero: "A useful digital world for people who love animals — places to discover, member savings, local help, care, community and real experiences in one place.",
+      latest: "Latest Stories",
+
+      membershipLabel: "PETS & DOGUE CLUB",
       membershipTitle: "More for your pet. All year.",
-      membershipText: "£10 a year gives members access to special offers, useful discounts, Marketplace benefits, competitions and opportunities across the PETS & DOGUE world.",
+      membershipText:
+        "One membership connects you to community, special offers and competitions across the PETS & DOGUE world.",
+
+      discounts: "Club discounts",
+      contests: "Contests & voting",
+      community: "Global community",
+
+      contestWinner: "WINNER",
+      contestVotes: "Community favourite",
+
+      petFriendlyLabel: "PET-FRIENDLY PLACES",
       petFriendlyTitle: "Go together.",
-      petFriendlyText: "Find cafés, hotels, restaurants, parks, beaches and services that welcome pets. Use your location, see what is nearby, check pet rules, community confirmations and routes in one quick search.",
-      discountsTitle: "Spend less on real pet life.",
-      discountsText: "Discover member offers for pet-friendly stays, grooming, accessories, services and everyday essentials — benefits designed around what pet owners actually use.",
-      communityTitle: "People nearby can help.",
-      communityText: "Ask local pet owners, share trusted recommendations and useful updates, and help reunite lost and found animals with the people looking for them.",
-      healthTitle: "Care with confidence.",
-      healthText: "Useful information and services for everyday health, grooming, wellbeing and responsible care — presented clearly and made easier to discover.",
-      marketplaceTitle: "Useful things for real pet life.",
-      marketplaceText: "Discover products, services, accessories and community listings in one place. Members can also post up to 50 free Marketplace ads.",
-      greenTitle: "Meet animals. Discover responsibly.",
-      greenText: "No pet of your own? Find zoos, aquariums, wildlife parks, farms, sanctuaries and responsible animal experiences where you can learn, watch and connect with animals.",
-      coverTitle: "Your pet could be next.",
-      coverText: "Take part in Cover Star opportunities, competitions and editorial features that celebrate personality, character and every kind of pet.",
-      helpTitle: "Seen. Shared. Helped.",
-      helpText: "Give animals needing homes, rescue or urgent support greater visibility. Sharing the right story can help the right person find them faster.",
-      businessTitle: "Bring your business into their pet world.",
-      businessText: "Hotels, cafés, groomers, vets, shops, brands and pet services can become easier to discover, offer member benefits and connect with an audience that makes decisions with animals in mind.",
-      nearby: "Near you",
-      map: "Map",
-      location: "Location",
-      routes: "Routes",
-      petRules: "Pet rules",
-      verified: "Community",
-      lostFound: "Lost & Found",
-      hotel: "Pet-friendly stays",
-      grooming: "Grooming",
-      offers: "Member offers",
-      services: "Services",
-      zoo: "Zoos",
-      aquarium: "Aquariums",
-      wildlife: "Wildlife",
-      farms: "Farms & sanctuaries",
-      memberLabel: "MEMBERSHIP",
-      petFriendlyLabel: "PET-FRIENDLY DISCOVERY",
-      discountLabel: "MEMBER SAVINGS",
-      communityLabel: "LOCAL COMMUNITY",
+      petFriendlyText:
+        "Discover pet-friendly cafés, hotels, restaurants, parks and green escapes — plus farms, sanctuaries and places where you can spend time with animals even if you do not have a pet.",
+
       healthLabel: "HEALTH & CARE",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ANIMAL EXPERIENCES · GREEN TOURISM",
+      healthTitle: "Care with confidence.",
+      healthText:
+        "Practical guidance on health, wellbeing, grooming, prevention and responsible everyday care.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Your pet could be next.",
+      coverText:
+        "A competition exclusively for Club members. The community votes for the winner to appear on the PETS & DOGUE cover, while five other finalists receive their own story and photos inside the magazine.",
+      vote: "VOTE",
+
+      communityLabel: "LOCAL COMMUNITY",
+      communityTitle: "Be part of what is happening nearby.",
+      communityText:
+        "Meet local pet people, discover events and recommendations, talk, arrange meet-ups and help reunite lost and found animals. Everything happening in your area — stay connected.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Buy. Sell. Give. Find.",
+      marketplaceText:
+        "A community marketplace for pet products, services and useful listings. Buy, sell, give away, search for something you need or publish your own advert.",
+
       helpLabel: "HELP ANIMALS",
-      businessLabel: "WORK WITH PETS & DOGUE"
+      helpTitle: "Help animals around the world.",
+      helpText:
+        "Give visibility to animals anywhere in the world that need rescue, treatment, adoption, foster care or urgent support.",
+
+      fashionLabel: "FASHION & STYLE",
+      fashionTitle: "Fashion. Style. New season.",
+      fashionText:
+        "New pet fashion, accessories, grooming inspiration and editorial looks with personality.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Calm, care, grooming, spa experiences and wellbeing ideas created for modern pet life.",
+
+      beautyLabel: "BEAUTY & STYLE",
+      beautyTitle: "Beauty & grooming",
+      beautyText:
+        "Grooming trends, beautiful interiors, professional care and expressive pet style.",
+
+      activeLabel: "ACTIVE LIFE",
+      activeTitle: "Sport & active life",
+      activeText:
+        "Movement, fitness, outdoor activity and inspiration for a healthier, more active life together.",
+
+      ad: "ADVERTISE WITH US",
+      adTitle: "Your brand could be here.",
+      adText:
+        "Put your brand in front of the PETS & DOGUE audience through premium advertising, mobile placements and special campaigns.",
+      advertise: "Advertise with us",
+
+      join: "Join the Club",
+
+      howItWorks: "How it works",
+      close: "Close",
+      back: "Back"
     },
 
     uk: {
-      hero: "Корисний цифровий світ для людей, які люблять тварин: місця, знижки, допомога поруч, турбота, спільнота та справжні враження — в одному просторі.",
+      latest: "Останні історії",
+
+      membershipLabel: "КЛУБ PETS & DOGUE",
       membershipTitle: "Більше для улюбленця. Увесь рік.",
-      membershipText: "£10 на рік відкривають учасникам спеціальні пропозиції, корисні знижки, переваги Marketplace, конкурси та нові можливості у світі PETS & DOGUE.",
+      membershipText:
+        "Одна підписка об’єднує спільноту, спеціальні пропозиції та конкурси у світі PETS & DOGUE.",
+
+      discounts: "Знижки клубу",
+      contests: "Конкурси й голосування",
+      community: "Світова спільнота",
+
+      contestWinner: "ПЕРЕМОЖЕЦЬ",
+      contestVotes: "Вибір спільноти",
+
+      petFriendlyLabel: "PET-FRIENDLY МІСЦЯ",
       petFriendlyTitle: "Разом — куди завгодно.",
-      petFriendlyText: "Знаходьте кафе, готелі, ресторани, парки, пляжі та сервіси, куди можна з тваринами. Геолокація, карта, відстань, правила, підтвердження спільноти та маршрути — в одному швидкому пошуку.",
-      discountsTitle: "Заощаджуйте на тому, чим справді користуєтесь.",
-      discountsText: "Пропозиції для проживання з улюбленцями, грумінгу, аксесуарів, сервісів і щоденних покупок — реальні переваги для власників тварин.",
-      communityTitle: "Поруч є люди, які допоможуть.",
-      communityText: "Запитуйте місцевих власників тварин, діліться перевіреними рекомендаціями й новинами, публікуйте загублених і знайдених тварин та допомагайте їм повернутися додому.",
-      healthTitle: "Турбота — зрозуміліше й простіше.",
-      healthText: "Корисна інформація та сервіси для здоров’я, догляду, грумінгу й добробуту тварин — без зайвої складності та зі зручним пошуком.",
-      marketplaceTitle: "Усе корисне для життя з улюбленцем.",
-      marketplaceText: "Товари, послуги, аксесуари та оголошення спільноти в одному місці. Учасники клубу можуть розміщувати до 50 безкоштовних оголошень.",
-      greenTitle: "Познайомтеся з тваринами ближче.",
-      greenText: "Навіть без власного улюбленця знаходьте зоопарки, океанаріуми, wildlife-парки, ферми, притулки та відповідальні місця, де можна спостерігати за тваринами й дізнаватися про них.",
-      coverTitle: "Ваш улюбленець може бути наступним.",
-      coverText: "Беріть участь у Cover Star, конкурсах і редакційних проєктах PETS & DOGUE, де цінують характер, індивідуальність і різних тварин.",
-      helpTitle: "Побачили. Поділилися. Допомогли.",
-      helpText: "Дайте більше видимості тваринам, яким потрібен дім, порятунок або термінова допомога. Правильна історія може швидше знайти правильну людину.",
-      businessTitle: "Станьте частиною світу власників тварин.",
-      businessText: "Готелі, кафе, грумери, ветеринарні клініки, магазини, бренди та pet-сервіси можуть стати помітнішими, пропонувати переваги учасникам і знаходити аудиторію PETS & DOGUE.",
-      nearby: "Поруч",
-      map: "Карта",
-      location: "Геолокація",
-      routes: "Маршрути",
-      petRules: "Правила",
-      verified: "Спільнота",
-      lostFound: "Загублені / знайдені",
-      hotel: "Готелі з тваринами",
-      grooming: "Грумінг",
-      offers: "Знижки клубу",
-      services: "Сервіси",
-      zoo: "Зоопарки",
-      aquarium: "Океанаріуми",
-      wildlife: "Wildlife",
-      farms: "Ферми й притулки",
-      memberLabel: "УЧАСТЬ У КЛУБІ",
-      petFriendlyLabel: "PET-FRIENDLY ПОШУК",
-      discountLabel: "ПЕРЕВАГИ УЧАСНИКА",
-      communityLabel: "ЛОКАЛЬНА СПІЛЬНОТА",
-      healthLabel: "ЗДОРОВ’Я ТА ДОГЛЯД",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ТВАРИНИ · ЗЕЛЕНИЙ ТУРИЗМ",
+      petFriendlyText:
+        "Відкривайте pet-friendly кафе, готелі, ресторани, парки й зелені маршрути, а також ферми, заповідники та місця, де можна провести час із тваринами, навіть якщо власного улюбленця у вас немає.",
+
+      healthLabel: "ЗДОРОВ’Я І ДОГЛЯД",
+      healthTitle: "Турбота з упевненістю.",
+      healthText:
+        "Практичні матеріали про здоров’я, добробут, грумінг, профілактику та відповідальний щоденний догляд.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Ваш улюбленець може бути наступним.",
+      coverText:
+        "Конкурс лише для учасників клубу. За результатами голосування спільноти переможець з’явиться на обкладинці PETS & DOGUE, а ще п’ять фіналістів отримають власну історію та фотографії в журналі.",
+      vote: "ГОЛОСУВАТИ",
+
+      communityLabel: "ЛОКАЛЬНА СПІЛЬНОТА",
+      communityTitle: "Будьте частиною того, що відбувається поруч.",
+      communityText:
+        "Знайомтеся, спілкуйтеся, дізнавайтеся про події та зустрічі, діліться рекомендаціями й допомагайте знаходити загублених тварин. Усе цікаве вашого району — залишайтеся на зв’язку.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Купити. Продати. Віддати. Знайти.",
+      marketplaceText:
+        "Оголошення про товари й послуги для тварин. Купуйте, продавайте, віддавайте безкоштовно, шукайте потрібне або публікуйте власне оголошення.",
+
       helpLabel: "ДОПОМОГА ТВАРИНАМ",
-      businessLabel: "СПІВПРАЦЯ З PETS & DOGUE"
+      helpTitle: "Допомога тваринам у всьому світі.",
+      helpText:
+        "Допомагайте тваринам у будь-якій точці світу, яким потрібні порятунок, лікування, новий дім, перетримка або термінова підтримка.",
+
+      fashionLabel: "МОДА І СТИЛЬ",
+      fashionTitle: "Мода. Стиль. Новинки.",
+      fashionText:
+        "Нова мода для улюбленців, аксесуари, ідеї грумінгу та редакційні образи з характером.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Відпочинок, догляд, грумінг, SPA та ідеї для фізичного й емоційного добробуту улюбленців.",
+
+      beautyLabel: "КРАСА І СТИЛЬ",
+      beautyTitle: "Краса і грумінг",
+      beautyText:
+        "Тренди грумінгу, красиві простори, професійний догляд та виразний стиль улюбленців.",
+
+      activeLabel: "АКТИВНЕ ЖИТТЯ",
+      activeTitle: "Спорт і активне життя",
+      activeText:
+        "Рух, фітнес, прогулянки та ідеї для здоровішого й активнішого життя разом.",
+
+      ad: "РЕКЛАМА В PETS & DOGUE",
+      adTitle: "Тут може бути ваш бренд.",
+      adText:
+        "Покажіть свій бренд аудиторії PETS & DOGUE через преміальну рекламу, мобільні розміщення та спеціальні кампанії.",
+      advertise: "Дати рекламу",
+
+      join: "Приєднатися до клубу",
+
+      howItWorks: "Як це працює",
+      close: "Закрити",
+      back: "Назад"
     },
 
     ru: {
-      hero: "Полезный цифровой мир для людей, которые любят животных: места, скидки, помощь рядом, забота, сообщество и реальные впечатления — в одном пространстве.",
+      latest: "Последние истории",
+
+      membershipLabel: "КЛУБ PETS & DOGUE",
       membershipTitle: "Больше для питомца. Весь год.",
-      membershipText: "£10 в год открывают участникам специальные предложения, полезные скидки, преимущества Marketplace, конкурсы и новые возможности во всём мире PETS & DOGUE.",
+      membershipText:
+        "Одна подписка объединяет сообщество, специальные предложения и конкурсы во всём мире PETS & DOGUE.",
+
+      discounts: "Скидки клуба",
+      contests: "Конкурсы и голосования",
+      community: "Мировое сообщество",
+
+      contestWinner: "ПОБЕДИТЕЛЬ",
+      contestVotes: "Выбор сообщества",
+
+      petFriendlyLabel: "PET-FRIENDLY МЕСТА",
       petFriendlyTitle: "Вместе — куда угодно.",
-      petFriendlyText: "Находите кафе, отели, рестораны, парки, пляжи и сервисы, куда можно с животными. Геолокация, карта, расстояние, правила для питомцев, подтверждения сообщества и маршруты — в одном быстром поиске.",
-      discountsTitle: "Экономьте на том, чем реально пользуетесь.",
-      discountsText: "Предложения для проживания с питомцами, груминга, аксессуаров, сервисов и повседневных покупок — реальные преимущества для владельцев животных.",
-      communityTitle: "Рядом есть люди, которые помогут.",
-      communityText: "Спрашивайте местных владельцев животных, делитесь проверенными рекомендациями и новостями, публикуйте пропавших и найденных животных и помогайте им быстрее вернуться домой.",
-      healthTitle: "Забота — понятнее и проще.",
-      healthText: "Полезная информация и сервисы для здоровья, ухода, груминга и благополучия питомцев — без лишней сложности и с удобным поиском.",
-      marketplaceTitle: "Всё полезное для жизни с питомцем.",
-      marketplaceText: "Товары, услуги, аксессуары и объявления сообщества в одном месте. Участники клуба могут размещать до 50 бесплатных объявлений.",
-      greenTitle: "Познакомьтесь с животными ближе.",
-      greenText: "Даже если у вас нет питомца, находите зоопарки, океанариумы, wildlife-парки, фермы, приюты и ответственные места, где можно наблюдать животных, узнавать о них и проводить время рядом.",
-      coverTitle: "Ваш питомец может быть следующим.",
-      coverText: "Участвуйте в Cover Star, конкурсах и редакционных проектах PETS & DOGUE, где важны характер, индивидуальность и самые разные животные.",
-      helpTitle: "Увидели. Поделились. Помогли.",
-      helpText: "Дайте больше видимости животным, которым нужен дом, спасение или срочная помощь. Правильная история может быстрее найти правильного человека.",
-      businessTitle: "Станьте частью мира владельцев животных.",
-      businessText: "Отели, кафе, грумеры, ветеринарные клиники, магазины, бренды и pet-сервисы могут стать заметнее, предлагать преимущества участникам и находить аудиторию PETS & DOGUE.",
-      nearby: "Рядом",
-      map: "Карта",
-      location: "Геолокация",
-      routes: "Маршруты",
-      petRules: "Правила",
-      verified: "Сообщество",
-      lostFound: "Пропали / найдены",
-      hotel: "Отели с питомцами",
-      grooming: "Груминг",
-      offers: "Скидки клуба",
-      services: "Сервисы",
-      zoo: "Зоопарки",
-      aquarium: "Океанариумы",
-      wildlife: "Wildlife",
-      farms: "Фермы и приюты",
-      memberLabel: "УЧАСТИЕ В КЛУБЕ",
-      petFriendlyLabel: "PET-FRIENDLY ПОИСК",
-      discountLabel: "ВЫГОДЫ УЧАСТНИКА",
-      communityLabel: "ЛОКАЛЬНОЕ СООБЩЕСТВО",
+      petFriendlyText:
+        "Открывайте pet-friendly кафе, отели, рестораны, парки и зелёные маршруты, а также фермы, заповедники и места, где можно провести время с животными, даже если своего питомца у вас нет.",
+
       healthLabel: "ЗДОРОВЬЕ И УХОД",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ЖИВОТНЫЕ · ЗЕЛЁНЫЙ ТУРИЗМ",
+      healthTitle: "Забота с уверенностью.",
+      healthText:
+        "Практичные материалы о здоровье, благополучии, груминге, профилактике и ответственном ежедневном уходе.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Ваш питомец может быть следующим.",
+      coverText:
+        "Конкурс только для участников клуба. По результатам голосования сообщества победитель появится на обложке PETS & DOGUE, а ещё пять финалистов получат собственную историю и фотографии в журнале.",
+      vote: "ГОЛОСОВАТЬ",
+
+      communityLabel: "ЛОКАЛЬНОЕ СООБЩЕСТВО",
+      communityTitle: "Будьте частью того, что происходит рядом.",
+      communityText:
+        "Знакомьтесь, общайтесь, узнавайте о событиях и встречах, делитесь рекомендациями и помогайте находить потерянных животных. Всё интересное вашего района — будьте на связи.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Купить. Продать. Отдать. Найти.",
+      marketplaceText:
+        "Объявления о товарах и услугах для животных. Покупайте, продавайте, отдавайте бесплатно, ищите нужное или размещайте собственное объявление.",
+
       helpLabel: "ПОМОЩЬ ЖИВОТНЫМ",
-      businessLabel: "СОТРУДНИЧЕСТВО С PETS & DOGUE"
+      helpTitle: "Помощь животным по всему миру.",
+      helpText:
+        "Помогайте животным в любой точке мира, которым нужны спасение, лечение, новый дом, передержка или срочная поддержка.",
+
+      fashionLabel: "МОДА И СТИЛЬ",
+      fashionTitle: "Мода. Стиль. Новинки.",
+      fashionText:
+        "Новая мода для питомцев, аксессуары, идеи груминга и редакционные образы с характером.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Отдых, уход, груминг, SPA и идеи для физического и эмоционального благополучия питомцев.",
+
+      beautyLabel: "КРАСОТА И СТИЛЬ",
+      beautyTitle: "Красота и груминг",
+      beautyText:
+        "Тренды груминга, красивые пространства, профессиональный уход и выразительный стиль питомцев.",
+
+      activeLabel: "АКТИВНАЯ ЖИЗНЬ",
+      activeTitle: "Спорт и активная жизнь",
+      activeText:
+        "Движение, фитнес, прогулки и идеи для более здоровой и активной жизни вместе.",
+
+      ad: "РЕКЛАМА В PETS & DOGUE",
+      adTitle: "Здесь может быть ваш бренд.",
+      adText:
+        "Покажите свой бренд аудитории PETS & DOGUE через премиальную рекламу, мобильные размещения и специальные кампании.",
+      advertise: "Дать рекламу",
+
+      join: "Вступить в клуб",
+
+      howItWorks: "Как это работает",
+      close: "Закрыть",
+      back: "Назад"
     },
 
     fr: {
-      hero: "Un univers numérique utile pour les personnes qui aiment les animaux : lieux à découvrir, économies, aide locale, soins, communauté et expériences réunis au même endroit.",
+      latest: "Dernières histoires",
+
+      membershipLabel: "CLUB PETS & DOGUE",
       membershipTitle: "Plus pour votre animal. Toute l’année.",
-      membershipText: "Pour £10 par an, les membres accèdent à des offres spéciales, des réductions utiles, des avantages Marketplace, des concours et des opportunités dans l’univers PETS & DOGUE.",
+      membershipText:
+        "Une seule adhésion vous relie à la communauté, aux offres spéciales et aux concours dans tout l’univers PETS & DOGUE.",
+
+      discounts: "Réductions du Club",
+      contests: "Concours et votes",
+      community: "Communauté mondiale",
+
+      contestWinner: "GAGNANT",
+      contestVotes: "Favori de la communauté",
+
+      petFriendlyLabel: "LIEUX PET-FRIENDLY",
       petFriendlyTitle: "Allez-y ensemble.",
-      petFriendlyText: "Trouvez cafés, hôtels, restaurants, parcs, plages et services qui accueillent les animaux. Localisation, carte, règles, confirmations de la communauté et itinéraires dans une recherche simple.",
-      discountsTitle: "Dépensez moins pour la vraie vie avec votre animal.",
-      discountsText: "Profitez d’offres membres sur les séjours pet-friendly, le toilettage, les accessoires, les services et les achats du quotidien.",
-      communityTitle: "Des personnes proches de vous peuvent aider.",
-      communityText: "Posez vos questions, partagez des recommandations locales et aidez à réunir les animaux perdus ou trouvés avec les personnes qui les recherchent.",
+      petFriendlyText:
+        "Découvrez des cafés, hôtels, restaurants, parcs et espaces verts pet-friendly, ainsi que des fermes, sanctuaires et lieux où passer du temps avec des animaux même si vous n’avez pas votre propre compagnon.",
+
+      healthLabel: "SANTÉ ET SOINS",
       healthTitle: "Prenez soin en toute confiance.",
-      healthText: "Informations utiles et services pour la santé, le toilettage, le bien-être et les soins responsables au quotidien.",
-      marketplaceTitle: "Des choses utiles pour la vraie vie avec les animaux.",
-      marketplaceText: "Découvrez produits, services, accessoires et annonces de la communauté. Les membres peuvent publier jusqu’à 50 annonces gratuites.",
-      greenTitle: "Rencontrez les animaux. Découvrez autrement.",
-      greenText: "Sans animal à vous ? Découvrez zoos, aquariums, parcs animaliers, fermes, sanctuaires et expériences responsables autour des animaux.",
-      coverTitle: "Votre animal pourrait être le prochain.",
-      coverText: "Participez aux opportunités Cover Star, aux concours et aux sujets éditoriaux qui célèbrent la personnalité et chaque type d’animal.",
-      helpTitle: "Vu. Partagé. Aidé.",
-      helpText: "Donnez davantage de visibilité aux animaux qui cherchent un foyer, un sauvetage ou une aide urgente.",
-      businessTitle: "Faites entrer votre entreprise dans leur univers animalier.",
-      businessText: "Hôtels, cafés, toiletteurs, vétérinaires, boutiques, marques et services peuvent gagner en visibilité et proposer des avantages aux membres PETS & DOGUE.",
-      nearby: "À proximité",
-      map: "Carte",
-      location: "Localisation",
-      routes: "Itinéraires",
-      petRules: "Règles animaux",
-      verified: "Communauté",
-      lostFound: "Perdus / trouvés",
-      hotel: "Séjours pet-friendly",
-      grooming: "Toilettage",
-      offers: "Offres membres",
-      services: "Services",
-      zoo: "Zoos",
-      aquarium: "Aquariums",
-      wildlife: "Faune",
-      farms: "Fermes & sanctuaires",
-      memberLabel: "ADHÉSION",
-      petFriendlyLabel: "RECHERCHE PET-FRIENDLY",
-      discountLabel: "AVANTAGES MEMBRES",
-      communityLabel: "COMMUNAUTÉ LOCALE",
-      healthLabel: "SANTÉ & SOINS",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "EXPÉRIENCES ANIMALES · TOURISME VERT",
+      healthText:
+        "Des conseils pratiques sur la santé, le bien-être, le toilettage, la prévention et les soins responsables au quotidien.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Votre animal pourrait être le prochain.",
+      coverText:
+        "Un concours exclusivement réservé aux membres du Club. La communauté vote pour choisir le gagnant qui apparaîtra en couverture de PETS & DOGUE, tandis que cinq autres finalistes auront leur propre histoire et leurs photos dans le magazine.",
+      vote: "VOTER",
+
+      communityLabel: "COMMUNAUTÉ LOCALE",
+      communityTitle: "Participez à ce qui se passe près de chez vous.",
+      communityText:
+        "Rencontrez d’autres passionnés d’animaux, découvrez des événements et des recommandations, échangez, organisez des rencontres et aidez les animaux perdus ou trouvés à retrouver leur famille.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Achetez. Vendez. Donnez. Trouvez.",
+      marketplaceText:
+        "Une marketplace communautaire pour les produits, services et annonces utiles liés aux animaux. Achetez, vendez, donnez, recherchez ce dont vous avez besoin ou publiez votre propre annonce.",
+
       helpLabel: "AIDER LES ANIMAUX",
-      businessLabel: "TRAVAILLEZ AVEC PETS & DOGUE"
+      helpTitle: "Aidez les animaux partout dans le monde.",
+      helpText:
+        "Donnez de la visibilité aux animaux partout dans le monde qui ont besoin d’être secourus, soignés, adoptés, accueillis temporairement ou soutenus en urgence.",
+
+      fashionLabel: "MODE ET STYLE",
+      fashionTitle: "Mode. Style. Nouvelle saison.",
+      fashionText:
+        "Nouvelle mode pour animaux, accessoires, inspiration grooming et looks éditoriaux pleins de personnalité.",
+
+      wellnessLabel: "BIEN-ÊTRE & SPA",
+      wellnessTitle: "Bien-être & SPA",
+      wellnessText:
+        "Calme, soins, grooming, expériences spa et idées de bien-être conçues pour la vie moderne avec les animaux.",
+
+      beautyLabel: "BEAUTÉ ET STYLE",
+      beautyTitle: "Beauté et grooming",
+      beautyText:
+        "Tendances grooming, beaux espaces, soins professionnels et style expressif pour les animaux.",
+
+      activeLabel: "VIE ACTIVE",
+      activeTitle: "Sport et vie active",
+      activeText:
+        "Mouvement, fitness, activités en plein air et inspiration pour une vie plus saine et plus active ensemble.",
+
+      ad: "FAITES DE LA PUBLICITÉ AVEC NOUS",
+      adTitle: "Votre marque pourrait être ici.",
+      adText:
+        "Présentez votre marque au public PETS & DOGUE grâce à des publicités premium, des placements mobiles et des campagnes spéciales.",
+      advertise: "Faire de la publicité",
+
+      join: "Rejoindre le Club",
+
+      howItWorks: "Comment ça marche",
+      close: "Fermer",
+      back: "Retour"
     },
 
     de: {
-      hero: "Eine nützliche digitale Welt für Menschen, die Tiere lieben – Orte, Vorteile, Hilfe vor Ort, Pflege, Community und echte Erlebnisse an einem Ort.",
-      membershipTitle: "Mehr für dein Tier. Das ganze Jahr.",
-      membershipText: "Für £10 pro Jahr erhalten Mitglieder Zugang zu Sonderangeboten, Rabatten, Marketplace-Vorteilen, Wettbewerben und weiteren Möglichkeiten in der PETS & DOGUE Welt.",
+      latest: "Neueste Geschichten",
+
+      membershipLabel: "PETS & DOGUE CLUB",
+      membershipTitle: "Mehr für Ihr Haustier. Das ganze Jahr.",
+      membershipText:
+        "Eine Mitgliedschaft verbindet Sie mit der Community, besonderen Angeboten und Wettbewerben in der gesamten PETS & DOGUE Welt.",
+
+      discounts: "Club-Rabatte",
+      contests: "Wettbewerbe & Abstimmungen",
+      community: "Globale Community",
+
+      contestWinner: "GEWINNER",
+      contestVotes: "Favorit der Community",
+
+      petFriendlyLabel: "HAUSTIERFREUNDLICHE ORTE",
       petFriendlyTitle: "Gemeinsam unterwegs.",
-      petFriendlyText: "Finde Cafés, Hotels, Restaurants, Parks, Strände und Services, in denen Tiere willkommen sind. Standort, Karte, Regeln, Community-Bestätigungen und Routen in einer schnellen Suche.",
-      discountsTitle: "Weniger ausgeben im echten Alltag mit Tier.",
-      discountsText: "Mitgliederangebote für tierfreundliche Aufenthalte, Grooming, Zubehör, Services und Dinge des täglichen Bedarfs.",
-      communityTitle: "Menschen in deiner Nähe können helfen.",
-      communityText: "Frag lokale Tierhalter, teile Empfehlungen und hilf dabei, vermisste oder gefundene Tiere wieder mit ihren Menschen zusammenzubringen.",
-      healthTitle: "Sicherer kümmern.",
-      healthText: "Nützliche Informationen und Services für Gesundheit, Pflege, Grooming und Wohlbefinden im Alltag.",
-      marketplaceTitle: "Nützliche Dinge für das echte Leben mit Tier.",
-      marketplaceText: "Produkte, Services, Zubehör und Community-Anzeigen an einem Ort. Mitglieder können bis zu 50 kostenlose Anzeigen veröffentlichen.",
-      greenTitle: "Tiere erleben. Verantwortungsbewusst entdecken.",
-      greenText: "Kein eigenes Tier? Entdecke Zoos, Aquarien, Wildparks, Höfe, Auffangstationen und verantwortungsvolle Tiererlebnisse.",
-      coverTitle: "Dein Tier könnte das nächste sein.",
-      coverText: "Mach bei Cover Star, Wettbewerben und redaktionellen Features mit, die Persönlichkeit und jede Art von Tier feiern.",
-      helpTitle: "Gesehen. Geteilt. Geholfen.",
-      helpText: "Gib Tieren, die ein Zuhause, Rettung oder dringende Hilfe brauchen, mehr Sichtbarkeit.",
-      businessTitle: "Bringe dein Unternehmen in ihre Tierwelt.",
-      businessText: "Hotels, Cafés, Groomer, Tierärzte, Shops, Marken und Services können besser gefunden werden und Mitgliedervorteile anbieten.",
-      nearby: "In der Nähe",
-      map: "Karte",
-      location: "Standort",
-      routes: "Routen",
-      petRules: "Tierregeln",
-      verified: "Community",
-      lostFound: "Vermisst / gefunden",
-      hotel: "Tierfreundliche Aufenthalte",
-      grooming: "Grooming",
-      offers: "Mitgliederangebote",
-      services: "Services",
-      zoo: "Zoos",
-      aquarium: "Aquarien",
-      wildlife: "Wildlife",
-      farms: "Höfe & Auffangstationen",
-      memberLabel: "MITGLIEDSCHAFT",
-      petFriendlyLabel: "PET-FRIENDLY SUCHE",
-      discountLabel: "MITGLIEDERVORTEILE",
-      communityLabel: "LOKALE COMMUNITY",
+      petFriendlyText:
+        "Entdecken Sie haustierfreundliche Cafés, Hotels, Restaurants, Parks und grüne Ausflugsziele sowie Bauernhöfe, Schutzgebiete und Orte, an denen Sie Zeit mit Tieren verbringen können, auch wenn Sie kein eigenes Haustier haben.",
+
       healthLabel: "GESUNDHEIT & PFLEGE",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "TIERERLEBNISSE · GRÜNER TOURISMUS",
+      healthTitle: "Sicher und gut versorgt.",
+      healthText:
+        "Praktische Informationen zu Gesundheit, Wohlbefinden, Grooming, Vorsorge und verantwortungsvoller täglicher Pflege.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Ihr Haustier könnte das nächste sein.",
+      coverText:
+        "Ein Wettbewerb exklusiv für Clubmitglieder. Die Community stimmt über den Gewinner ab, der auf dem PETS & DOGUE Cover erscheint, während fünf weitere Finalisten ihre eigene Geschichte und Fotos im Magazin erhalten.",
+      vote: "ABSTIMMEN",
+
+      communityLabel: "LOKALE COMMUNITY",
+      communityTitle: "Seien Sie Teil dessen, was in Ihrer Nähe passiert.",
+      communityText:
+        "Treffen Sie Tierfreunde in Ihrer Nähe, entdecken Sie Veranstaltungen und Empfehlungen, tauschen Sie sich aus, organisieren Sie Treffen und helfen Sie dabei, verlorene und gefundene Tiere wieder mit ihren Familien zu vereinen.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Kaufen. Verkaufen. Verschenken. Finden.",
+      marketplaceText:
+        "Ein Community-Marktplatz für Tierprodukte, Dienstleistungen und nützliche Anzeigen. Kaufen, verkaufen, verschenken, suchen oder veröffentlichen Sie Ihre eigene Anzeige.",
+
       helpLabel: "TIEREN HELFEN",
-      businessLabel: "MIT PETS & DOGUE ARBEITEN"
+      helpTitle: "Helfen Sie Tieren auf der ganzen Welt.",
+      helpText:
+        "Geben Sie Tieren überall auf der Welt Sichtbarkeit, die Rettung, Behandlung, Adoption, Pflegestellen oder dringende Unterstützung benötigen.",
+
+      fashionLabel: "MODE & STIL",
+      fashionTitle: "Mode. Stil. Neue Saison.",
+      fashionText:
+        "Neue Tiermode, Accessoires, Grooming-Inspiration und redaktionelle Looks mit Persönlichkeit.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Ruhe, Pflege, Grooming, Spa-Erlebnisse und Wohlfühlideen für das moderne Leben mit Haustieren.",
+
+      beautyLabel: "BEAUTY & STYLE",
+      beautyTitle: "Beauty & Grooming",
+      beautyText:
+        "Grooming-Trends, schöne Räume, professionelle Pflege und ausdrucksstarker Stil für Haustiere.",
+
+      activeLabel: "AKTIVES LEBEN",
+      activeTitle: "Sport & aktives Leben",
+      activeText:
+        "Bewegung, Fitness, Outdoor-Aktivitäten und Inspiration für ein gesünderes und aktiveres gemeinsames Leben.",
+
+      ad: "WERBEN SIE MIT UNS",
+      adTitle: "Ihre Marke könnte hier sein.",
+      adText:
+        "Präsentieren Sie Ihre Marke dem PETS & DOGUE Publikum mit Premium-Werbung, mobilen Platzierungen und besonderen Kampagnen.",
+      advertise: "Mit uns werben",
+
+      join: "Dem Club beitreten",
+
+      howItWorks: "So funktioniert es",
+      close: "Schließen",
+      back: "Zurück"
     },
 
     es: {
-      hero: "Un mundo digital útil para quienes aman a los animales: lugares, ahorro, ayuda local, cuidados, comunidad y experiencias reales en un solo espacio.",
+      latest: "Últimas historias",
+
+      membershipLabel: "CLUB PETS & DOGUE",
       membershipTitle: "Más para tu mascota. Todo el año.",
-      membershipText: "Por £10 al año, los miembros acceden a ofertas especiales, descuentos útiles, ventajas en Marketplace, concursos y oportunidades en PETS & DOGUE.",
+      membershipText:
+        "Una sola membresía te conecta con la comunidad, ofertas especiales y concursos en todo el mundo PETS & DOGUE.",
+
+      discounts: "Descuentos del Club",
+      contests: "Concursos y votaciones",
+      community: "Comunidad global",
+
+      contestWinner: "GANADOR",
+      contestVotes: "Favorito de la comunidad",
+
+      petFriendlyLabel: "LUGARES PET-FRIENDLY",
       petFriendlyTitle: "Id juntos.",
-      petFriendlyText: "Encuentra cafés, hoteles, restaurantes, parques, playas y servicios que admiten animales. Ubicación, mapa, normas, confirmaciones de la comunidad y rutas en una búsqueda rápida.",
-      discountsTitle: "Gasta menos en la vida real con tu mascota.",
-      discountsText: "Ofertas para estancias pet-friendly, peluquería, accesorios, servicios y compras cotidianas.",
-      communityTitle: "La gente cercana puede ayudar.",
-      communityText: "Pregunta a dueños locales, comparte recomendaciones y ayuda a reunir animales perdidos o encontrados con quienes los buscan.",
-      healthTitle: "Cuida con confianza.",
-      healthText: "Información útil y servicios para salud, cuidados, peluquería y bienestar diario.",
-      marketplaceTitle: "Cosas útiles para la vida real con mascotas.",
-      marketplaceText: "Productos, servicios, accesorios y anuncios de la comunidad en un solo lugar. Los miembros pueden publicar hasta 50 anuncios gratis.",
-      greenTitle: "Conoce animales. Descubre responsablemente.",
-      greenText: "¿No tienes mascota? Encuentra zoológicos, acuarios, parques de fauna, granjas, santuarios y experiencias responsables con animales.",
-      coverTitle: "Tu mascota podría ser la siguiente.",
-      coverText: "Participa en Cover Star, concursos y contenidos editoriales que celebran la personalidad y todo tipo de animales.",
-      helpTitle: "Visto. Compartido. Ayudado.",
-      helpText: "Da mayor visibilidad a animales que necesitan hogar, rescate o ayuda urgente.",
-      businessTitle: "Lleva tu negocio al mundo de quienes aman a los animales.",
-      businessText: "Hoteles, cafés, peluquerías, veterinarios, tiendas, marcas y servicios pueden ganar visibilidad y ofrecer beneficios a los miembros.",
-      nearby: "Cerca de ti",
-      map: "Mapa",
-      location: "Ubicación",
-      routes: "Rutas",
-      petRules: "Normas",
-      verified: "Comunidad",
-      lostFound: "Perdidos / encontrados",
-      hotel: "Estancias pet-friendly",
-      grooming: "Peluquería",
-      offers: "Ofertas miembros",
-      services: "Servicios",
-      zoo: "Zoológicos",
-      aquarium: "Acuarios",
-      wildlife: "Fauna",
-      farms: "Granjas y santuarios",
-      memberLabel: "MEMBRESÍA",
-      petFriendlyLabel: "BÚSQUEDA PET-FRIENDLY",
-      discountLabel: "VENTAJAS DE MIEMBRO",
-      communityLabel: "COMUNIDAD LOCAL",
+      petFriendlyText:
+        "Descubre cafeterías, hoteles, restaurantes, parques y espacios verdes pet-friendly, además de granjas, santuarios y lugares donde puedes pasar tiempo con animales aunque no tengas tu propia mascota.",
+
       healthLabel: "SALUD Y CUIDADOS",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "EXPERIENCIAS CON ANIMALES · TURISMO VERDE",
+      healthTitle: "Cuida con confianza.",
+      healthText:
+        "Orientación práctica sobre salud, bienestar, grooming, prevención y cuidado diario responsable.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "AYUDAR A ANIMALES",
-      businessLabel: "TRABAJA CON PETS & DOGUE"
+      coverTitle: "Tu mascota podría ser la próxima.",
+      coverText:
+        "Un concurso exclusivo para miembros del Club. La comunidad vota al ganador que aparecerá en la portada de PETS & DOGUE, mientras que otros cinco finalistas recibirán su propia historia y fotografías dentro de la revista.",
+      vote: "VOTAR",
+
+      communityLabel: "COMUNIDAD LOCAL",
+      communityTitle: "Forma parte de lo que ocurre cerca de ti.",
+      communityText:
+        "Conoce a personas con mascotas de tu zona, descubre eventos y recomendaciones, conversa, organiza encuentros y ayuda a reunir a los animales perdidos y encontrados con sus familias.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Compra. Vende. Regala. Encuentra.",
+      marketplaceText:
+        "Un marketplace comunitario de productos, servicios y anuncios útiles para mascotas. Compra, vende, regala, busca lo que necesitas o publica tu propio anuncio.",
+
+      helpLabel: "AYUDA A LOS ANIMALES",
+      helpTitle: "Ayuda a animales de todo el mundo.",
+      helpText:
+        "Da visibilidad a animales de cualquier parte del mundo que necesiten rescate, tratamiento, adopción, acogida temporal o apoyo urgente.",
+
+      fashionLabel: "MODA Y ESTILO",
+      fashionTitle: "Moda. Estilo. Nueva temporada.",
+      fashionText:
+        "Nueva moda para mascotas, accesorios, inspiración de grooming y looks editoriales con personalidad.",
+
+      wellnessLabel: "BIENESTAR & SPA",
+      wellnessTitle: "Bienestar & SPA",
+      wellnessText:
+        "Calma, cuidado, grooming, experiencias de spa e ideas de bienestar creadas para la vida moderna con mascotas.",
+
+      beautyLabel: "BELLEZA Y ESTILO",
+      beautyTitle: "Belleza y grooming",
+      beautyText:
+        "Tendencias de grooming, espacios bonitos, cuidado profesional y estilo expresivo para mascotas.",
+
+      activeLabel: "VIDA ACTIVA",
+      activeTitle: "Deporte y vida activa",
+      activeText:
+        "Movimiento, fitness, actividades al aire libre e inspiración para una vida más saludable y activa juntos.",
+
+      ad: "ANÚNCIATE CON NOSOTROS",
+      adTitle: "Tu marca podría estar aquí.",
+      adText:
+        "Presenta tu marca ante la audiencia de PETS & DOGUE mediante publicidad premium, ubicaciones móviles y campañas especiales.",
+      advertise: "Anúnciate con nosotros",
+
+      join: "Únete al Club",
+
+      howItWorks: "Cómo funciona",
+      close: "Cerrar",
+      back: "Volver"
     },
 
     it: {
-      hero: "Un mondo digitale utile per chi ama gli animali: luoghi, risparmi, aiuto locale, cura, community ed esperienze reali in un unico posto.",
+      latest: "Ultime storie",
+
+      membershipLabel: "CLUB PETS & DOGUE",
       membershipTitle: "Di più per il tuo animale. Tutto l’anno.",
-      membershipText: "Con £10 all’anno i membri accedono a offerte speciali, sconti, vantaggi Marketplace, concorsi e opportunità nel mondo PETS & DOGUE.",
+      membershipText:
+        "Un solo abbonamento ti collega alla community, alle offerte speciali e ai concorsi in tutto il mondo PETS & DOGUE.",
+
+      discounts: "Sconti del Club",
+      contests: "Concorsi e votazioni",
+      community: "Community globale",
+
+      contestWinner: "VINCITORE",
+      contestVotes: "Preferito dalla community",
+
+      petFriendlyLabel: "LUOGHI PET-FRIENDLY",
       petFriendlyTitle: "Andate insieme.",
-      petFriendlyText: "Trova caffè, hotel, ristoranti, parchi, spiagge e servizi che accolgono animali. Posizione, mappa, regole, conferme della community e percorsi in una sola ricerca.",
-      discountsTitle: "Spendi meno nella vita reale con il tuo pet.",
-      discountsText: "Offerte per soggiorni pet-friendly, grooming, accessori, servizi e acquisti quotidiani.",
-      communityTitle: "Le persone vicine possono aiutare.",
-      communityText: "Chiedi ai proprietari locali, condividi consigli e aiuta a ricongiungere animali smarriti o ritrovati con chi li cerca.",
-      healthTitle: "Prenditi cura con sicurezza.",
-      healthText: "Informazioni utili e servizi per salute, cura, grooming e benessere quotidiano.",
-      marketplaceTitle: "Cose utili per la vita vera con gli animali.",
-      marketplaceText: "Prodotti, servizi, accessori e annunci della community in un unico posto. I membri possono pubblicare fino a 50 annunci gratuiti.",
-      greenTitle: "Incontra gli animali. Scopri responsabilmente.",
-      greenText: "Non hai un animale? Trova zoo, acquari, parchi faunistici, fattorie, santuari ed esperienze responsabili con gli animali.",
-      coverTitle: "Il tuo pet potrebbe essere il prossimo.",
-      coverText: "Partecipa a Cover Star, concorsi e contenuti editoriali che celebrano personalità e ogni tipo di animale.",
-      helpTitle: "Visto. Condiviso. Aiutato.",
-      helpText: "Dai più visibilità agli animali che cercano casa, soccorso o aiuto urgente.",
-      businessTitle: "Porta la tua attività nel loro mondo pet.",
-      businessText: "Hotel, caffè, groomer, veterinari, negozi, brand e servizi possono farsi trovare più facilmente e offrire vantaggi ai membri.",
-      nearby: "Vicino a te",
-      map: "Mappa",
-      location: "Posizione",
-      routes: "Percorsi",
-      petRules: "Regole",
-      verified: "Community",
-      lostFound: "Smarriti / ritrovati",
-      hotel: "Soggiorni pet-friendly",
-      grooming: "Grooming",
-      offers: "Offerte membri",
-      services: "Servizi",
-      zoo: "Zoo",
-      aquarium: "Acquari",
-      wildlife: "Fauna",
-      farms: "Fattorie e santuari",
-      memberLabel: "MEMBERSHIP",
-      petFriendlyLabel: "RICERCA PET-FRIENDLY",
-      discountLabel: "VANTAGGI MEMBRI",
-      communityLabel: "COMMUNITY LOCALE",
-      healthLabel: "SALUTE & CURA",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ESPERIENZE CON ANIMALI · TURISMO VERDE",
+      petFriendlyText:
+        "Scopri caffè, hotel, ristoranti, parchi e spazi verdi pet-friendly, oltre a fattorie, santuari e luoghi dove trascorrere del tempo con gli animali anche se non hai un animale domestico.",
+
+      healthLabel: "SALUTE E CURA",
+      healthTitle: "Prenditene cura con sicurezza.",
+      healthText:
+        "Indicazioni pratiche su salute, benessere, grooming, prevenzione e cura quotidiana responsabile.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Il tuo animale potrebbe essere il prossimo.",
+      coverText:
+        "Un concorso esclusivo per i membri del Club. La community vota il vincitore che apparirà sulla copertina di PETS & DOGUE, mentre altri cinque finalisti riceveranno una propria storia e fotografie all’interno della rivista.",
+      vote: "VOTA",
+
+      communityLabel: "COMMUNITY LOCALE",
+      communityTitle: "Fai parte di ciò che accade vicino a te.",
+      communityText:
+        "Conosci persone con animali nella tua zona, scopri eventi e consigli, conversa, organizza incontri e aiuta gli animali smarriti e ritrovati a tornare dalle loro famiglie.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Compra. Vendi. Regala. Trova.",
+      marketplaceText:
+        "Un marketplace della community per prodotti, servizi e annunci utili dedicati agli animali. Compra, vendi, regala, cerca ciò che ti serve o pubblica il tuo annuncio.",
+
       helpLabel: "AIUTA GLI ANIMALI",
-      businessLabel: "LAVORA CON PETS & DOGUE"
+      helpTitle: "Aiuta gli animali in tutto il mondo.",
+      helpText:
+        "Dai visibilità agli animali in qualsiasi parte del mondo che hanno bisogno di soccorso, cure, adozione, affido temporaneo o sostegno urgente.",
+
+      fashionLabel: "MODA E STILE",
+      fashionTitle: "Moda. Stile. Nuova stagione.",
+      fashionText:
+        "Nuova moda per animali, accessori, ispirazione grooming e look editoriali pieni di personalità.",
+
+      wellnessLabel: "BENESSERE & SPA",
+      wellnessTitle: "Benessere & SPA",
+      wellnessText:
+        "Relax, cura, grooming, esperienze spa e idee di benessere create per la vita moderna con gli animali.",
+
+      beautyLabel: "BELLEZZA E STILE",
+      beautyTitle: "Bellezza e grooming",
+      beautyText:
+        "Tendenze grooming, spazi eleganti, cura professionale e stile espressivo per gli animali.",
+
+      activeLabel: "VITA ATTIVA",
+      activeTitle: "Sport e vita attiva",
+      activeText:
+        "Movimento, fitness, attività all’aperto e ispirazione per una vita più sana e attiva insieme.",
+
+      ad: "FAI PUBBLICITÀ CON NOI",
+      adTitle: "Il tuo brand potrebbe essere qui.",
+      adText:
+        "Porta il tuo brand davanti al pubblico di PETS & DOGUE attraverso pubblicità premium, posizionamenti mobile e campagne speciali.",
+      advertise: "Fai pubblicità con noi",
+
+      join: "Entra nel Club",
+
+      howItWorks: "Come funziona",
+      close: "Chiudi",
+      back: "Indietro"
     },
 
     pt: {
-      hero: "Um mundo digital útil para quem ama animais: lugares, poupança, ajuda local, cuidados, comunidade e experiências reais num só espaço.",
+      latest: "Últimas histórias",
+
+      membershipLabel: "CLUBE PETS & DOGUE",
       membershipTitle: "Mais para o seu animal. O ano inteiro.",
-      membershipText: "Por £10 por ano, os membros têm acesso a ofertas especiais, descontos úteis, vantagens no Marketplace, concursos e oportunidades PETS & DOGUE.",
+      membershipText:
+        "Uma única adesão liga-o à comunidade, a ofertas especiais e a concursos em todo o universo PETS & DOGUE.",
+
+      discounts: "Descontos do Clube",
+      contests: "Concursos e votações",
+      community: "Comunidade global",
+
+      contestWinner: "VENCEDOR",
+      contestVotes: "Favorito da comunidade",
+
+      petFriendlyLabel: "LOCAIS PET-FRIENDLY",
       petFriendlyTitle: "Vão juntos.",
-      petFriendlyText: "Encontre cafés, hotéis, restaurantes, parques, praias e serviços que recebem animais. Localização, mapa, regras, confirmações da comunidade e rotas numa pesquisa rápida.",
-      discountsTitle: "Gaste menos na vida real com o seu animal.",
-      discountsText: "Ofertas para estadias pet-friendly, grooming, acessórios, serviços e compras do dia a dia.",
-      communityTitle: "Pessoas por perto podem ajudar.",
-      communityText: "Pergunte a tutores locais, partilhe recomendações e ajude a reunir animais perdidos ou encontrados com quem os procura.",
+      petFriendlyText:
+        "Descubra cafés, hotéis, restaurantes, parques e espaços verdes pet-friendly, além de quintas, santuários e locais onde pode passar tempo com animais mesmo que não tenha um animal de estimação.",
+
+      healthLabel: "SAÚDE E CUIDADOS",
       healthTitle: "Cuide com confiança.",
-      healthText: "Informação útil e serviços para saúde, cuidados, grooming e bem-estar diário.",
-      marketplaceTitle: "Coisas úteis para a vida real com animais.",
-      marketplaceText: "Produtos, serviços, acessórios e anúncios da comunidade num só lugar. Os membros podem publicar até 50 anúncios gratuitos.",
-      greenTitle: "Conheça animais. Descubra com responsabilidade.",
-      greenText: "Não tem um animal? Encontre zoológicos, aquários, parques de vida selvagem, quintas, santuários e experiências responsáveis com animais.",
+      healthText:
+        "Orientação prática sobre saúde, bem-estar, grooming, prevenção e cuidados diários responsáveis.",
+
+      coverLabel: "COVER STAR",
       coverTitle: "O seu animal pode ser o próximo.",
-      coverText: "Participe em Cover Star, concursos e conteúdos editoriais que celebram personalidade e todos os tipos de animais.",
-      helpTitle: "Visto. Partilhado. Ajudado.",
-      helpText: "Dê mais visibilidade a animais que precisam de casa, resgate ou ajuda urgente.",
-      businessTitle: "Leve o seu negócio para o mundo de quem ama animais.",
-      businessText: "Hotéis, cafés, groomers, veterinários, lojas, marcas e serviços podem ganhar visibilidade e oferecer benefícios aos membros.",
-      nearby: "Perto de si",
-      map: "Mapa",
-      location: "Localização",
-      routes: "Rotas",
-      petRules: "Regras",
-      verified: "Comunidade",
-      lostFound: "Perdidos / encontrados",
-      hotel: "Estadias pet-friendly",
-      grooming: "Grooming",
-      offers: "Ofertas para membros",
-      services: "Serviços",
-      zoo: "Zoológicos",
-      aquarium: "Aquários",
-      wildlife: "Vida selvagem",
-      farms: "Quintas e santuários",
-      memberLabel: "MEMBERSHIP",
-      petFriendlyLabel: "PESQUISA PET-FRIENDLY",
-      discountLabel: "BENEFÍCIOS DE MEMBRO",
+      coverText:
+        "Um concurso exclusivo para membros do Clube. A comunidade vota no vencedor que aparecerá na capa da PETS & DOGUE, enquanto outros cinco finalistas recebem a sua própria história e fotografias na revista.",
+      vote: "VOTAR",
+
       communityLabel: "COMUNIDADE LOCAL",
-      healthLabel: "SAÚDE & CUIDADOS",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "EXPERIÊNCIAS COM ANIMAIS · TURISMO VERDE",
-      coverLabel: "COVER STAR",
-      helpLabel: "AJUDAR ANIMAIS",
-      businessLabel: "TRABALHE COM PETS & DOGUE"
+      communityTitle: "Faça parte do que acontece perto de si.",
+      communityText:
+        "Conheça pessoas com animais na sua zona, descubra eventos e recomendações, converse, organize encontros e ajude animais perdidos e encontrados a regressarem às suas famílias.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Compre. Venda. Ofereça. Encontre.",
+      marketplaceText:
+        "Um marketplace comunitário para produtos, serviços e anúncios úteis relacionados com animais. Compre, venda, ofereça, procure aquilo de que precisa ou publique o seu próprio anúncio.",
+
+      helpLabel: "AJUDE OS ANIMAIS",
+      helpTitle: "Ajude animais em todo o mundo.",
+      helpText:
+        "Dê visibilidade a animais em qualquer parte do mundo que precisem de resgate, tratamento, adoção, acolhimento temporário ou apoio urgente.",
+
+      fashionLabel: "MODA E ESTILO",
+      fashionTitle: "Moda. Estilo. Nova estação.",
+      fashionText:
+        "Nova moda para animais, acessórios, inspiração de grooming e visuais editoriais com personalidade.",
+
+      wellnessLabel: "BEM-ESTAR & SPA",
+      wellnessTitle: "Bem-estar & SPA",
+      wellnessText:
+        "Calma, cuidados, grooming, experiências de spa e ideias de bem-estar criadas para a vida moderna com animais.",
+
+      beautyLabel: "BELEZA E ESTILO",
+      beautyTitle: "Beleza e grooming",
+      beautyText:
+        "Tendências de grooming, espaços bonitos, cuidados profissionais e estilo expressivo para animais.",
+
+      activeLabel: "VIDA ATIVA",
+      activeTitle: "Desporto e vida ativa",
+      activeText:
+        "Movimento, fitness, atividades ao ar livre e inspiração para uma vida mais saudável e ativa em conjunto.",
+
+      ad: "ANUNCIE CONNOSCO",
+      adTitle: "A sua marca pode estar aqui.",
+      adText:
+        "Apresente a sua marca ao público PETS & DOGUE através de publicidade premium, posicionamentos mobile e campanhas especiais.",
+      advertise: "Anuncie connosco",
+
+      join: "Junte-se ao Clube",
+
+      howItWorks: "Como funciona",
+      close: "Fechar",
+      back: "Voltar"
     },    nl: {
-      hero: "Een handige digitale wereld voor mensen die van dieren houden: plekken, voordeel, lokale hulp, verzorging, community en echte ervaringen op één plek.",
+      latest: "Laatste verhalen",
+
+      membershipLabel: "PETS & DOGUE CLUB",
       membershipTitle: "Meer voor je huisdier. Het hele jaar.",
-      membershipText: "Voor £10 per jaar krijgen leden toegang tot speciale aanbiedingen, nuttige kortingen, Marketplace-voordelen, wedstrijden en kansen binnen PETS & DOGUE.",
-      petFriendlyTitle: "Ga samen op pad.",
-      petFriendlyText: "Vind cafés, hotels, restaurants, parken, stranden en diensten waar huisdieren welkom zijn. Locatie, kaart, regels, community-bevestigingen en routes in één snelle zoekopdracht.",
-      discountsTitle: "Geef minder uit aan het echte leven met je huisdier.",
-      discountsText: "Ledenaanbiedingen voor pet-friendly verblijven, grooming, accessoires, diensten en dagelijkse aankopen.",
-      communityTitle: "Mensen bij jou in de buurt kunnen helpen.",
-      communityText: "Vraag lokale huisdiereigenaren om advies, deel aanbevelingen en help vermiste en gevonden dieren terug bij hun mensen te brengen.",
+      membershipText:
+        "Eén lidmaatschap verbindt je met de community, speciale aanbiedingen en wedstrijden in de hele wereld van PETS & DOGUE.",
+
+      discounts: "Clubkortingen",
+      contests: "Wedstrijden & stemmen",
+      community: "Wereldwijde community",
+
+      contestWinner: "WINNAAR",
+      contestVotes: "Favoriet van de community",
+
+      petFriendlyLabel: "DIERVRIENDELIJKE PLEKKEN",
+      petFriendlyTitle: "Ga samen.",
+      petFriendlyText:
+        "Ontdek huisdiervriendelijke cafés, hotels, restaurants, parken en groene plekken, plus boerderijen, opvangcentra en locaties waar je tijd met dieren kunt doorbrengen, ook als je zelf geen huisdier hebt.",
+
+      healthLabel: "GEZONDHEID & VERZORGING",
       healthTitle: "Zorg met vertrouwen.",
-      healthText: "Nuttige informatie en diensten voor gezondheid, verzorging, grooming en dagelijks welzijn.",
-      marketplaceTitle: "Handige dingen voor het echte leven met huisdieren.",
-      marketplaceText: "Producten, diensten, accessoires en community-advertenties op één plek. Leden kunnen tot 50 gratis advertenties plaatsen.",
-      greenTitle: "Ontmoet dieren. Ontdek verantwoord.",
-      greenText: "Geen eigen huisdier? Vind dierentuinen, aquaria, wildlifeparken, boerderijen, opvangcentra en verantwoorde dierenervaringen.",
-      coverTitle: "Jouw huisdier kan de volgende zijn.",
-      coverText: "Doe mee aan Cover Star, wedstrijden en editorial features die persoonlijkheid en elk soort dier vieren.",
-      helpTitle: "Gezien. Gedeeld. Geholpen.",
-      helpText: "Geef dieren die een thuis, redding of urgente hulp nodig hebben meer zichtbaarheid.",
-      businessTitle: "Breng je bedrijf in hun huisdierenwereld.",
-      businessText: "Hotels, cafés, groomers, dierenartsen, winkels, merken en pet-services kunnen beter gevonden worden en voordelen aanbieden aan leden.",
-      nearby: "In de buurt",
-      map: "Kaart",
-      location: "Locatie",
-      routes: "Routes",
-      petRules: "Huisdierregels",
-      verified: "Community",
-      lostFound: "Vermist / gevonden",
-      hotel: "Pet-friendly verblijven",
-      grooming: "Grooming",
-      offers: "Ledenaanbiedingen",
-      services: "Diensten",
-      zoo: "Dierentuinen",
-      aquarium: "Aquaria",
-      wildlife: "Wildlife",
-      farms: "Boerderijen & opvang",
-      memberLabel: "LIDMAATSCHAP",
-      petFriendlyLabel: "PET-FRIENDLY ZOEKEN",
-      discountLabel: "LEDENVOORDELEN",
-      communityLabel: "LOKALE COMMUNITY",
-      healthLabel: "GEZONDHEID & ZORG",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "DIERENERVARINGEN · GROEN TOERISME",
+      healthText:
+        "Praktische informatie over gezondheid, welzijn, grooming, preventie en verantwoorde dagelijkse verzorging.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "DIEREN HELPEN",
-      businessLabel: "WERK MET PETS & DOGUE"
+      coverTitle: "Jouw huisdier kan de volgende zijn.",
+      coverText:
+        "Een wedstrijd exclusief voor Clubleden. De community stemt op de winnaar die op de cover van PETS & DOGUE verschijnt, terwijl vijf andere finalisten hun eigen verhaal en foto's in het magazine krijgen.",
+      vote: "STEM",
+
+      communityLabel: "LOKALE COMMUNITY",
+      communityTitle: "Maak deel uit van wat er bij jou in de buurt gebeurt.",
+      communityText:
+        "Ontmoet lokale dierenliefhebbers, ontdek evenementen en aanbevelingen, praat met elkaar, organiseer ontmoetingen en help verloren en gevonden dieren weer bij hun familie te brengen.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Koop. Verkoop. Geef. Vind.",
+      marketplaceText:
+        "Een community-marktplaats voor huisdierproducten, diensten en nuttige advertenties. Koop, verkoop, geef weg, zoek wat je nodig hebt of plaats je eigen advertentie.",
+
+      helpLabel: "HELP DIEREN",
+      helpTitle: "Help dieren over de hele wereld.",
+      helpText:
+        "Geef dieren overal ter wereld zichtbaarheid wanneer ze redding, behandeling, adoptie, tijdelijke opvang of dringende ondersteuning nodig hebben.",
+
+      fashionLabel: "MODE & STIJL",
+      fashionTitle: "Mode. Stijl. Nieuw seizoen.",
+      fashionText:
+        "Nieuwe huisdiermode, accessoires, grooming-inspiratie en redactionele looks met persoonlijkheid.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Rust, verzorging, grooming, spa-ervaringen en welzijnsideeën voor het moderne leven met huisdieren.",
+
+      beautyLabel: "BEAUTY & STIJL",
+      beautyTitle: "Beauty & grooming",
+      beautyText:
+        "Groomingtrends, mooie interieurs, professionele verzorging en expressieve stijl voor huisdieren.",
+
+      activeLabel: "ACTIEF LEVEN",
+      activeTitle: "Sport & actief leven",
+      activeText:
+        "Beweging, fitness, buitenactiviteiten en inspiratie voor een gezonder en actiever leven samen.",
+
+      ad: "ADVERTEER BIJ ONS",
+      adTitle: "Jouw merk kan hier staan.",
+      adText:
+        "Breng je merk onder de aandacht van het PETS & DOGUE-publiek met premium advertenties, mobiele plaatsingen en speciale campagnes.",
+      advertise: "Adverteer bij ons",
+
+      join: "Word lid van de Club",
+
+      howItWorks: "Hoe het werkt",
+      close: "Sluiten",
+      back: "Terug"
     },
 
     pl: {
-      hero: "Przydatny cyfrowy świat dla osób kochających zwierzęta: miejsca, oszczędności, lokalna pomoc, opieka, społeczność i prawdziwe doświadczenia w jednym miejscu.",
-      membershipTitle: "Więcej dla pupila. Przez cały rok.",
-      membershipText: "Za £10 rocznie członkowie otrzymują dostęp do ofert specjalnych, zniżek, korzyści Marketplace, konkursów i możliwości w świecie PETS & DOGUE.",
+      latest: "Najnowsze historie",
+
+      membershipLabel: "KLUB PETS & DOGUE",
+      membershipTitle: "Więcej dla Twojego pupila. Przez cały rok.",
+      membershipText:
+        "Jedno członkostwo łączy Cię ze społecznością, specjalnymi ofertami i konkursami w całym świecie PETS & DOGUE.",
+
+      discounts: "Zniżki klubowe",
+      contests: "Konkursy i głosowania",
+      community: "Globalna społeczność",
+
+      contestWinner: "ZWYCIĘZCA",
+      contestVotes: "Faworyt społeczności",
+
+      petFriendlyLabel: "MIEJSCA PRZYJAZNE ZWIERZĘTOM",
       petFriendlyTitle: "Idźcie razem.",
-      petFriendlyText: "Znajdź kawiarnie, hotele, restauracje, parki, plaże i usługi przyjazne zwierzętom. Lokalizacja, mapa, zasady, potwierdzenia społeczności i trasy w jednym szybkim wyszukiwaniu.",
-      discountsTitle: "Wydawaj mniej na prawdziwe życie z pupilem.",
-      discountsText: "Oferty członkowskie na pobyty pet-friendly, grooming, akcesoria, usługi i codzienne zakupy.",
-      communityTitle: "Ludzie w pobliżu mogą pomóc.",
-      communityText: "Pytaj lokalnych opiekunów zwierząt, dziel się rekomendacjami i pomagaj odnajdywać zaginione oraz znalezione zwierzęta.",
-      healthTitle: "Dbaj z większą pewnością.",
-      healthText: "Przydatne informacje i usługi dotyczące zdrowia, pielęgnacji, groomingu i dobrostanu.",
-      marketplaceTitle: "Przydatne rzeczy do prawdziwego życia ze zwierzętami.",
-      marketplaceText: "Produkty, usługi, akcesoria i ogłoszenia społeczności w jednym miejscu. Członkowie mogą dodać do 50 bezpłatnych ogłoszeń.",
-      greenTitle: "Poznaj zwierzęta. Odkrywaj odpowiedzialnie.",
-      greenText: "Nie masz własnego pupila? Znajdź zoo, akwaria, parki dzikiej przyrody, farmy, sanktuaria i odpowiedzialne miejsca kontaktu ze zwierzętami.",
-      coverTitle: "Twój pupil może być następny.",
-      coverText: "Weź udział w Cover Star, konkursach i materiałach redakcyjnych celebrujących osobowość i różnorodność zwierząt.",
-      helpTitle: "Zobaczone. Udostępnione. Wsparcie.",
-      helpText: "Daj większą widoczność zwierzętom potrzebującym domu, ratunku lub pilnej pomocy.",
-      businessTitle: "Wprowadź swoją firmę do świata właścicieli zwierząt.",
-      businessText: "Hotele, kawiarnie, groomerzy, weterynarze, sklepy, marki i usługi mogą zwiększyć widoczność i oferować korzyści członkom.",
-      nearby: "W pobliżu",
-      map: "Mapa",
-      location: "Lokalizacja",
-      routes: "Trasy",
-      petRules: "Zasady",
-      verified: "Społeczność",
-      lostFound: "Zaginione / znalezione",
-      hotel: "Pobyty pet-friendly",
-      grooming: "Grooming",
-      offers: "Oferty członkowskie",
-      services: "Usługi",
-      zoo: "Zoo",
-      aquarium: "Akwaria",
-      wildlife: "Dzika przyroda",
-      farms: "Farmy i sanktuaria",
-      memberLabel: "CZŁONKOSTWO",
-      petFriendlyLabel: "WYSZUKIWANIE PET-FRIENDLY",
-      discountLabel: "KORZYŚCI CZŁONKOWSKIE",
-      communityLabel: "LOKALNA SPOŁECZNOŚĆ",
+      petFriendlyText:
+        "Odkrywaj przyjazne zwierzętom kawiarnie, hotele, restauracje, parki i zielone miejsca, a także farmy, azyle i miejsca, gdzie można spędzać czas ze zwierzętami, nawet jeśli nie masz własnego pupila.",
+
       healthLabel: "ZDROWIE I OPIEKA",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ZWIERZĘTA · ZIELONA TURYSTYKA",
+      healthTitle: "Dbaj z pewnością.",
+      healthText:
+        "Praktyczne informacje o zdrowiu, dobrostanie, groomingu, profilaktyce i odpowiedzialnej codziennej opiece.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "POMOC ZWIERZĘTOM",
-      businessLabel: "WSPÓŁPRACA Z PETS & DOGUE"
+      coverTitle: "Twój pupil może być następny.",
+      coverText:
+        "Konkurs wyłącznie dla członków Klubu. Społeczność wybiera zwycięzcę, który pojawi się na okładce PETS & DOGUE, a pięciu kolejnych finalistów otrzyma własną historię i zdjęcia w magazynie.",
+      vote: "GŁOSUJ",
+
+      communityLabel: "LOKALNA SPOŁECZNOŚĆ",
+      communityTitle: "Bądź częścią tego, co dzieje się w pobliżu.",
+      communityText:
+        "Poznawaj lokalnych miłośników zwierząt, odkrywaj wydarzenia i rekomendacje, rozmawiaj, organizuj spotkania i pomagaj zagubionym oraz znalezionym zwierzętom wracać do swoich rodzin.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Kup. Sprzedaj. Oddaj. Znajdź.",
+      marketplaceText:
+        "Społecznościowy marketplace produktów, usług i przydatnych ogłoszeń dla zwierząt. Kupuj, sprzedawaj, oddawaj, szukaj tego, czego potrzebujesz, lub publikuj własne ogłoszenie.",
+
+      helpLabel: "POMÓŻ ZWIERZĘTOM",
+      helpTitle: "Pomagaj zwierzętom na całym świecie.",
+      helpText:
+        "Pomagaj zwiększać widoczność zwierząt na całym świecie, które potrzebują ratunku, leczenia, adopcji, domu tymczasowego lub pilnego wsparcia.",
+
+      fashionLabel: "MODA I STYL",
+      fashionTitle: "Moda. Styl. Nowy sezon.",
+      fashionText:
+        "Nowa moda dla zwierząt, akcesoria, inspiracje groomingowe i redakcyjne stylizacje z charakterem.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Spokój, pielęgnacja, grooming, doświadczenia spa i pomysły na dobrostan we współczesnym życiu ze zwierzętami.",
+
+      beautyLabel: "PIĘKNO I STYL",
+      beautyTitle: "Piękno i grooming",
+      beautyText:
+        "Trendy groomingowe, piękne wnętrza, profesjonalna pielęgnacja i wyrazisty styl zwierząt.",
+
+      activeLabel: "AKTYWNE ŻYCIE",
+      activeTitle: "Sport i aktywne życie",
+      activeText:
+        "Ruch, fitness, aktywność na świeżym powietrzu i inspiracje do zdrowszego, bardziej aktywnego życia razem.",
+
+      ad: "REKLAMUJ SIĘ Z NAMI",
+      adTitle: "Twoja marka może być tutaj.",
+      adText:
+        "Pokaż swoją markę odbiorcom PETS & DOGUE dzięki reklamie premium, placementom mobilnym i specjalnym kampaniom.",
+      advertise: "Reklamuj się z nami",
+
+      join: "Dołącz do Klubu",
+
+      howItWorks: "Jak to działa",
+      close: "Zamknij",
+      back: "Wstecz"
     },
 
     cs: {
-      hero: "Užitečný digitální svět pro lidi, kteří milují zvířata: místa, úspory, místní pomoc, péče, komunita a skutečné zážitky na jednom místě.",
+      latest: "Nejnovější příběhy",
+
+      membershipLabel: "KLUB PETS & DOGUE",
       membershipTitle: "Více pro vašeho mazlíčka. Po celý rok.",
-      membershipText: "Za £10 ročně získají členové speciální nabídky, slevy, výhody Marketplace, soutěže a další příležitosti v PETS & DOGUE.",
-      petFriendlyTitle: "Vyrazte spolu.",
-      petFriendlyText: "Najděte kavárny, hotely, restaurace, parky, pláže a služby, kam můžete se zvířaty. Poloha, mapa, pravidla, potvrzení komunity a trasy v jednom rychlém vyhledávání.",
-      discountsTitle: "Utrácejte méně za skutečný život se zvířetem.",
-      discountsText: "Členské nabídky na pet-friendly pobyty, grooming, doplňky, služby a každodenní potřeby.",
-      communityTitle: "Lidé poblíž mohou pomoci.",
-      communityText: "Ptejte se místních majitelů zvířat, sdílejte doporučení a pomáhejte spojit ztracená a nalezená zvířata s jejich lidmi.",
-      healthTitle: "Pečujte s jistotou.",
-      healthText: "Užitečné informace a služby pro zdraví, péči, grooming a každodenní pohodu zvířat.",
-      marketplaceTitle: "Užitečné věci pro skutečný život se zvířaty.",
-      marketplaceText: "Produkty, služby, doplňky a komunitní inzeráty na jednom místě. Členové mohou vložit až 50 bezplatných inzerátů.",
-      greenTitle: "Poznejte zvířata. Objevujte zodpovědně.",
-      greenText: "Nemáte vlastní zvíře? Najděte zoo, akvária, wildlife parky, farmy, útulky a zodpovědné zážitky se zvířaty.",
-      coverTitle: "Váš mazlíček může být další.",
-      coverText: "Zapojte se do Cover Star, soutěží a redakčních projektů oslavujících osobnost a rozmanitost zvířat.",
-      helpTitle: "Viděno. Sdíleno. Pomoc.",
-      helpText: "Dejte větší viditelnost zvířatům, která potřebují domov, záchranu nebo naléhavou pomoc.",
-      businessTitle: "Přiveďte svou firmu do světa lidí se zvířaty.",
-      businessText: "Hotely, kavárny, groomers, veterináři, obchody, značky a služby mohou být lépe vidět a nabízet výhody členům.",
-      nearby: "V okolí",
-      map: "Mapa",
-      location: "Poloha",
-      routes: "Trasy",
-      petRules: "Pravidla",
-      verified: "Komunita",
-      lostFound: "Ztracení / nalezení",
-      hotel: "Pet-friendly pobyty",
-      grooming: "Grooming",
-      offers: "Členské nabídky",
-      services: "Služby",
-      zoo: "Zoo",
-      aquarium: "Akvária",
-      wildlife: "Wildlife",
-      farms: "Farmy a útulky",
-      memberLabel: "ČLENSTVÍ",
-      petFriendlyLabel: "PET-FRIENDLY HLEDÁNÍ",
-      discountLabel: "ČLENSKÉ VÝHODY",
-      communityLabel: "MÍSTNÍ KOMUNITA",
+      membershipText:
+        "Jedno členství vás propojí s komunitou, speciálními nabídkami a soutěžemi v celém světě PETS & DOGUE.",
+
+      discounts: "Klubové slevy",
+      contests: "Soutěže a hlasování",
+      community: "Globální komunita",
+
+      contestWinner: "VÍTĚZ",
+      contestVotes: "Oblíbenec komunity",
+
+      petFriendlyLabel: "MÍSTA PŘÁTELSKÁ KE ZVÍŘATŮM",
+      petFriendlyTitle: "Vyrazte společně.",
+      petFriendlyText:
+        "Objevujte kavárny, hotely, restaurace, parky a zelená místa přátelská ke zvířatům, ale také farmy, útulky a místa, kde můžete trávit čas se zvířaty, i když vlastního mazlíčka nemáte.",
+
       healthLabel: "ZDRAVÍ A PÉČE",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ZVÍŘECÍ ZÁŽITKY · ZELENÁ TURISTIKA",
+      healthTitle: "Pečujte s jistotou.",
+      healthText:
+        "Praktické informace o zdraví, pohodě, groomingu, prevenci a odpovědné každodenní péči.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Váš mazlíček může být další.",
+      coverText:
+        "Soutěž výhradně pro členy Klubu. Komunita hlasuje o vítězi, který se objeví na obálce PETS & DOGUE, zatímco dalších pět finalistů získá vlastní příběh a fotografie uvnitř magazínu.",
+      vote: "HLASOVAT",
+
+      communityLabel: "MÍSTNÍ KOMUNITA",
+      communityTitle: "Buďte součástí toho, co se děje ve vašem okolí.",
+      communityText:
+        "Poznávejte místní milovníky zvířat, objevujte akce a doporučení, komunikujte, organizujte setkání a pomáhejte ztraceným a nalezeným zvířatům vrátit se ke svým rodinám.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Kupte. Prodejte. Darujte. Najděte.",
+      marketplaceText:
+        "Komunitní marketplace pro produkty, služby a užitečné inzeráty související se zvířaty. Nakupujte, prodávejte, darujte, hledejte nebo zveřejněte vlastní inzerát.",
+
       helpLabel: "POMOC ZVÍŘATŮM",
-      businessLabel: "SPOLUPRÁCE S PETS & DOGUE"
+      helpTitle: "Pomáhejte zvířatům po celém světě.",
+      helpText:
+        "Pomozte zviditelnit zvířata kdekoli na světě, která potřebují záchranu, léčbu, adopci, dočasnou péči nebo naléhavou podporu.",
+
+      fashionLabel: "MÓDA A STYL",
+      fashionTitle: "Móda. Styl. Nová sezóna.",
+      fashionText:
+        "Nová móda pro mazlíčky, doplňky, grooming inspirace a redakční vzhledy s osobností.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Klid, péče, grooming, spa zážitky a nápady pro pohodu moderního života se zvířaty.",
+
+      beautyLabel: "KRÁSA A STYL",
+      beautyTitle: "Krása a grooming",
+      beautyText:
+        "Groomingové trendy, krásné prostory, profesionální péče a výrazný styl domácích mazlíčků.",
+
+      activeLabel: "AKTIVNÍ ŽIVOT",
+      activeTitle: "Sport a aktivní život",
+      activeText:
+        "Pohyb, fitness, venkovní aktivity a inspirace pro zdravější a aktivnější společný život.",
+
+      ad: "INZERUJTE S NÁMI",
+      adTitle: "Vaše značka může být právě zde.",
+      adText:
+        "Představte svou značku publiku PETS & DOGUE prostřednictvím prémiové reklamy, mobilních umístění a speciálních kampaní.",
+      advertise: "Inzerujte s námi",
+
+      join: "Vstoupit do Klubu",
+
+      howItWorks: "Jak to funguje",
+      close: "Zavřít",
+      back: "Zpět"
     },
 
     sk: {
-      hero: "Užitočný digitálny svet pre ľudí, ktorí milujú zvieratá: miesta, úspory, miestna pomoc, starostlivosť, komunita a skutočné zážitky na jednom mieste.",
-      membershipTitle: "Viac pre vášho miláčika. Celý rok.",
-      membershipText: "Za £10 ročne získajú členovia špeciálne ponuky, zľavy, výhody Marketplace, súťaže a nové možnosti v PETS & DOGUE.",
+      latest: "Najnovšie príbehy",
+
+      membershipLabel: "KLUB PETS & DOGUE",
+      membershipTitle: "Viac pre vášho miláčika. Po celý rok.",
+      membershipText:
+        "Jedno členstvo vás spojí s komunitou, špeciálnymi ponukami a súťažami v celom svete PETS & DOGUE.",
+
+      discounts: "Klubové zľavy",
+      contests: "Súťaže a hlasovania",
+      community: "Globálna komunita",
+
+      contestWinner: "VÍŤAZ",
+      contestVotes: "Favorit komunity",
+
+      petFriendlyLabel: "MIESTA PRIATEĽSKÉ K ZVIERATÁM",
       petFriendlyTitle: "Choďte spolu.",
-      petFriendlyText: "Nájdite kaviarne, hotely, reštaurácie, parky, pláže a služby, kam môžete so zvieratami. Poloha, mapa, pravidlá, potvrdenia komunity a trasy v jednom vyhľadávaní.",
-      discountsTitle: "Míňajte menej na skutočný život so zvieraťom.",
-      discountsText: "Členské ponuky na pet-friendly pobyty, grooming, doplnky, služby a každodenné potreby.",
-      communityTitle: "Ľudia nablízku môžu pomôcť.",
-      communityText: "Pýtajte sa miestnych majiteľov, zdieľajte odporúčania a pomáhajte spojiť stratené a nájdené zvieratá s ich ľuďmi.",
-      healthTitle: "Starajte sa s istotou.",
-      healthText: "Užitočné informácie a služby pre zdravie, starostlivosť, grooming a každodennú pohodu.",
-      marketplaceTitle: "Užitočné veci pre skutočný život so zvieratami.",
-      marketplaceText: "Produkty, služby, doplnky a komunitné inzeráty na jednom mieste. Členovia môžu pridať až 50 bezplatných inzerátov.",
-      greenTitle: "Spoznajte zvieratá. Objavujte zodpovedne.",
-      greenText: "Nemáte vlastné zviera? Nájdite zoo, akváriá, wildlife parky, farmy, útulky a zodpovedné zvieracie zážitky.",
-      coverTitle: "Váš miláčik môže byť ďalší.",
-      coverText: "Zapojte sa do Cover Star, súťaží a redakčných projektov, ktoré oslavujú osobnosť a rozmanitosť zvierat.",
-      helpTitle: "Videné. Zdieľané. Pomoc.",
-      helpText: "Dajte väčšiu viditeľnosť zvieratám, ktoré potrebujú domov, záchranu alebo naliehavú pomoc.",
-      businessTitle: "Priveďte svoju firmu do sveta ľudí so zvieratami.",
-      businessText: "Hotely, kaviarne, groomeri, veterinári, obchody, značky a služby môžu byť viditeľnejšie a ponúkať výhody členom.",
-      nearby: "V okolí",
-      map: "Mapa",
-      location: "Poloha",
-      routes: "Trasy",
-      petRules: "Pravidlá",
-      verified: "Komunita",
-      lostFound: "Stratené / nájdené",
-      hotel: "Pet-friendly pobyty",
-      grooming: "Grooming",
-      offers: "Členské ponuky",
-      services: "Služby",
-      zoo: "Zoo",
-      aquarium: "Akváriá",
-      wildlife: "Wildlife",
-      farms: "Farmy a útulky",
-      memberLabel: "ČLENSTVO",
-      petFriendlyLabel: "PET-FRIENDLY VYHĽADÁVANIE",
-      discountLabel: "ČLENSKÉ VÝHODY",
-      communityLabel: "MIESTNA KOMUNITA",
+      petFriendlyText:
+        "Objavujte kaviarne, hotely, reštaurácie, parky a zelené miesta priateľské k zvieratám, ako aj farmy, útulky a miesta, kde môžete tráviť čas so zvieratami, aj keď vlastného miláčika nemáte.",
+
       healthLabel: "ZDRAVIE A STAROSTLIVOSŤ",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ZVIERACIE ZÁŽITKY · ZELENÁ TURISTIKA",
+      healthTitle: "Starajte sa s istotou.",
+      healthText:
+        "Praktické informácie o zdraví, pohode, groomingu, prevencii a zodpovednej každodennej starostlivosti.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "POMOC ZVIERATÁM",
-      businessLabel: "SPOLUPRÁCA S PETS & DOGUE"
+      coverTitle: "Váš miláčik môže byť ďalší.",
+      coverText:
+        "Súťaž výhradne pre členov Klubu. Komunita hlasuje za víťaza, ktorý sa objaví na obálke PETS & DOGUE, zatiaľ čo ďalších päť finalistov získa vlastný príbeh a fotografie v magazíne.",
+      vote: "HLASOVAŤ",
+
+      communityLabel: "MIESTNA KOMUNITA",
+      communityTitle: "Buďte súčasťou toho, čo sa deje vo vašom okolí.",
+      communityText:
+        "Spoznávajte miestnych milovníkov zvierat, objavujte podujatia a odporúčania, komunikujte, organizujte stretnutia a pomáhajte strateným a nájdeným zvieratám vrátiť sa k svojim rodinám.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Kúpte. Predajte. Darujte. Nájdite.",
+      marketplaceText:
+        "Komunitný marketplace pre produkty, služby a užitočné inzeráty pre zvieratá. Nakupujte, predávajte, darujte, hľadajte to, čo potrebujete, alebo zverejnite vlastný inzerát.",
+
+      helpLabel: "POMÔŽTE ZVIERATÁM",
+      helpTitle: "Pomáhajte zvieratám po celom svete.",
+      helpText:
+        "Pomôžte zviditeľniť zvieratá kdekoľvek na svete, ktoré potrebujú záchranu, liečbu, adopciu, dočasnú starostlivosť alebo naliehavú podporu.",
+
+      fashionLabel: "MÓDA A ŠTÝL",
+      fashionTitle: "Móda. Štýl. Nová sezóna.",
+      fashionText:
+        "Nová móda pre miláčikov, doplnky, grooming inšpirácia a redakčné vzhľady s osobnosťou.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Pokoj, starostlivosť, grooming, spa zážitky a nápady pre pohodu moderného života so zvieratami.",
+
+      beautyLabel: "KRÁSA A ŠTÝL",
+      beautyTitle: "Krása a grooming",
+      beautyText:
+        "Groomingové trendy, krásne priestory, profesionálna starostlivosť a výrazný štýl domácich miláčikov.",
+
+      activeLabel: "AKTÍVNY ŽIVOT",
+      activeTitle: "Šport a aktívny život",
+      activeText:
+        "Pohyb, fitness, vonkajšie aktivity a inšpirácia pre zdravší a aktívnejší spoločný život.",
+
+      ad: "INZERUJTE S NAMI",
+      adTitle: "Vaša značka môže byť práve tu.",
+      adText:
+        "Predstavte svoju značku publiku PETS & DOGUE prostredníctvom prémiovej reklamy, mobilných umiestnení a špeciálnych kampaní.",
+      advertise: "Inzerujte s nami",
+
+      join: "Vstúpiť do Klubu",
+
+      howItWorks: "Ako to funguje",
+      close: "Zavrieť",
+      back: "Späť"
     },
 
     hu: {
-      hero: "Hasznos digitális világ azoknak, akik szeretik az állatokat: helyek, kedvezmények, helyi segítség, gondoskodás, közösség és valódi élmények egy helyen.",
+      latest: "Legújabb történetek",
+
+      membershipLabel: "PETS & DOGUE KLUB",
       membershipTitle: "Több a kedvencednek. Egész évben.",
-      membershipText: "Évi £10 tagsággal különleges ajánlatokhoz, kedvezményekhez, Marketplace előnyökhöz, versenyekhez és PETS & DOGUE lehetőségekhez juthatsz.",
+      membershipText:
+        "Egyetlen tagság összekapcsol a közösséggel, különleges ajánlatokkal és versenyekkel a PETS & DOGUE világában.",
+
+      discounts: "Klubkedvezmények",
+      contests: "Versenyek és szavazások",
+      community: "Globális közösség",
+
+      contestWinner: "GYŐZTES",
+      contestVotes: "A közösség kedvence",
+
+      petFriendlyLabel: "ÁLLATBARÁT HELYEK",
       petFriendlyTitle: "Menjetek együtt.",
-      petFriendlyText: "Találj állatbarát kávézókat, szállodákat, éttermeket, parkokat, strandokat és szolgáltatásokat. Helyzet, térkép, szabályok, közösségi megerősítések és útvonalak egy keresésben.",
-      discountsTitle: "Költs kevesebbet a valódi kisállatos életre.",
-      discountsText: "Tagi ajánlatok pet-friendly szállásokra, groomingra, kiegészítőkre, szolgáltatásokra és mindennapi vásárlásokra.",
-      communityTitle: "A közelben lévő emberek segíthetnek.",
-      communityText: "Kérdezz helyi gazdiktól, ossz meg ajánlásokat, és segíts az elveszett vagy megtalált állatok hazajutásában.",
-      healthTitle: "Gondoskodj magabiztosan.",
-      healthText: "Hasznos információk és szolgáltatások egészséghez, ápoláshoz, groominghoz és mindennapi jólléthez.",
-      marketplaceTitle: "Hasznos dolgok a valódi kisállatos élethez.",
-      marketplaceText: "Termékek, szolgáltatások, kiegészítők és közösségi hirdetések egy helyen. A tagok akár 50 ingyenes hirdetést is feladhatnak.",
-      greenTitle: "Találkozz állatokkal. Fedezz fel felelősen.",
-      greenText: "Nincs saját kedvenced? Fedezz fel állatkerteket, akváriumokat, vadasparkokat, farmokat, menhelyeket és felelős állatos élményeket.",
-      coverTitle: "A kedvenced lehet a következő.",
-      coverText: "Vegyél részt Cover Star lehetőségekben, versenyeken és szerkesztőségi megjelenésekben.",
-      helpTitle: "Látták. Megosztották. Segítettek.",
-      helpText: "Adj nagyobb láthatóságot az otthont, mentést vagy sürgős segítséget kereső állatoknak.",
-      businessTitle: "Vidd be vállalkozásodat az állatbarát közönség világába.",
-      businessText: "Szállodák, kávézók, groomerek, állatorvosok, üzletek, márkák és szolgáltatók láthatóbbá válhatnak és tagi előnyöket kínálhatnak.",
-      nearby: "A közelben",
-      map: "Térkép",
-      location: "Helyzet",
-      routes: "Útvonalak",
-      petRules: "Szabályok",
-      verified: "Közösség",
-      lostFound: "Elveszett / megtalált",
-      hotel: "Állatbarát szállások",
-      grooming: "Grooming",
-      offers: "Tagi ajánlatok",
-      services: "Szolgáltatások",
-      zoo: "Állatkertek",
-      aquarium: "Akváriumok",
-      wildlife: "Vadvilág",
-      farms: "Farmok és menhelyek",
-      memberLabel: "TAGSÁG",
-      petFriendlyLabel: "ÁLLATBARÁT KERESÉS",
-      discountLabel: "TAGI ELŐNYÖK",
-      communityLabel: "HELYI KÖZÖSSÉG",
+      petFriendlyText:
+        "Fedezz fel állatbarát kávézókat, hoteleket, éttermeket, parkokat és zöld helyeket, valamint farmokat, menhelyeket és olyan helyeket, ahol akkor is tölthetsz időt állatokkal, ha nincs saját kedvenced.",
+
       healthLabel: "EGÉSZSÉG ÉS GONDOZÁS",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ÁLLATOS ÉLMÉNYEK · ZÖLD TURIZMUS",
+      healthTitle: "Gondoskodj magabiztosan.",
+      healthText:
+        "Gyakorlati útmutatók az egészségről, jóllétről, groomingról, megelőzésről és felelős mindennapi gondozásról.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "SEGÍTS AZ ÁLLATOKON",
-      businessLabel: "DOLGOZZ A PETS & DOGUE-GAL"
+      coverTitle: "A te kedvenced lehet a következő.",
+      coverText:
+        "Kizárólag klubtagok számára elérhető verseny. A közösség megszavazza a győztest, aki a PETS & DOGUE címlapjára kerül, további öt döntős pedig saját történetet és fotókat kap a magazinban.",
+      vote: "SZAVAZÁS",
+
+      communityLabel: "HELYI KÖZÖSSÉG",
+      communityTitle: "Légy része annak, ami a közeledben történik.",
+      communityText:
+        "Ismerj meg helyi állatbarátokat, fedezz fel eseményeket és ajánlásokat, beszélgess, szervezz találkozókat, és segíts az elveszett vagy megtalált állatoknak visszajutni a családjukhoz.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Vásárolj. Adj el. Ajándékozz. Találj.",
+      marketplaceText:
+        "Közösségi marketplace állatokhoz kapcsolódó termékekhez, szolgáltatásokhoz és hasznos hirdetésekhez. Vásárolj, adj el, ajándékozz, keress vagy tedd közzé saját hirdetésedet.",
+
+      helpLabel: "SEGÍTS AZ ÁLLATOKNAK",
+      helpTitle: "Segíts állatoknak szerte a világon.",
+      helpText:
+        "Adj nagyobb láthatóságot a világ bármely pontján élő állatoknak, akik mentésre, kezelésre, örökbefogadásra, ideiglenes befogadásra vagy sürgős támogatásra szorulnak.",
+
+      fashionLabel: "DIVAT ÉS STÍLUS",
+      fashionTitle: "Divat. Stílus. Új szezon.",
+      fashionText:
+        "Új kisállatdivat, kiegészítők, grooming-inspiráció és karakteres szerkesztőségi megjelenések.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Nyugalom, gondoskodás, grooming, spaélmények és jólléti ötletek a modern kisállatos élethez.",
+
+      beautyLabel: "SZÉPSÉG ÉS STÍLUS",
+      beautyTitle: "Szépség és grooming",
+      beautyText:
+        "Groomingtrendek, gyönyörű terek, professzionális gondozás és kifejező kisállatstílus.",
+
+      activeLabel: "AKTÍV ÉLET",
+      activeTitle: "Sport és aktív élet",
+      activeText:
+        "Mozgás, fitness, szabadtéri aktivitás és inspiráció egy egészségesebb, aktívabb közös élethez.",
+
+      ad: "HIRDESS VELÜNK",
+      adTitle: "A márkád itt is lehetne.",
+      adText:
+        "Mutasd meg márkádat a PETS & DOGUE közönségének prémium hirdetésekkel, mobilmegjelenésekkel és különleges kampányokkal.",
+      advertise: "Hirdess velünk",
+
+      join: "Csatlakozz a Klubhoz",
+
+      howItWorks: "Hogyan működik",
+      close: "Bezárás",
+      back: "Vissza"
     },
 
     ro: {
-      hero: "O lume digitală utilă pentru oamenii care iubesc animalele: locuri, economii, ajutor local, îngrijire, comunitate și experiențe reale într-un singur loc.",
+      latest: "Cele mai noi povești",
+
+      membershipLabel: "CLUBUL PETS & DOGUE",
       membershipTitle: "Mai mult pentru animalul tău. Tot anul.",
-      membershipText: "Pentru £10 pe an, membrii primesc acces la oferte speciale, reduceri, beneficii Marketplace, concursuri și oportunități PETS & DOGUE.",
+      membershipText:
+        "Un singur abonament te conectează la comunitate, oferte speciale și concursuri din întreaga lume PETS & DOGUE.",
+
+      discounts: "Reduceri de Club",
+      contests: "Concursuri și vot",
+      community: "Comunitate globală",
+
+      contestWinner: "CÂȘTIGĂTOR",
+      contestVotes: "Favoritul comunității",
+
+      petFriendlyLabel: "LOCURI PET-FRIENDLY",
       petFriendlyTitle: "Mergeți împreună.",
-      petFriendlyText: "Găsește cafenele, hoteluri, restaurante, parcuri, plaje și servicii care acceptă animale. Locație, hartă, reguli, confirmări din comunitate și rute într-o singură căutare.",
-      discountsTitle: "Cheltuiește mai puțin pentru viața reală cu animalul tău.",
-      discountsText: "Oferte pentru cazare pet-friendly, grooming, accesorii, servicii și cumpărături de zi cu zi.",
-      communityTitle: "Oamenii din apropiere pot ajuta.",
-      communityText: "Întreabă proprietarii locali, distribuie recomandări și ajută animalele pierdute sau găsite să ajungă acasă.",
-      healthTitle: "Îngrijește cu încredere.",
-      healthText: "Informații utile și servicii pentru sănătate, îngrijire, grooming și bunăstare zilnică.",
-      marketplaceTitle: "Lucruri utile pentru viața reală cu animale.",
-      marketplaceText: "Produse, servicii, accesorii și anunțuri ale comunității într-un singur loc. Membrii pot publica până la 50 de anunțuri gratuite.",
-      greenTitle: "Descoperă animalele. Explorează responsabil.",
-      greenText: "Nu ai un animal? Găsește grădini zoologice, acvarii, parcuri wildlife, ferme, sanctuare și experiențe responsabile cu animale.",
-      coverTitle: "Animalul tău poate fi următorul.",
-      coverText: "Participă la Cover Star, concursuri și proiecte editoriale care celebrează personalitatea și diversitatea animalelor.",
-      helpTitle: "Văzut. Distribuit. Ajutat.",
-      helpText: "Oferă mai multă vizibilitate animalelor care au nevoie de casă, salvare sau ajutor urgent.",
-      businessTitle: "Adu afacerea ta în lumea iubitorilor de animale.",
-      businessText: "Hoteluri, cafenele, groomeri, veterinari, magazine, branduri și servicii pot deveni mai vizibile și pot oferi beneficii membrilor.",
-      nearby: "În apropiere",
-      map: "Hartă",
-      location: "Locație",
-      routes: "Rute",
-      petRules: "Reguli",
-      verified: "Comunitate",
-      lostFound: "Pierdute / găsite",
-      hotel: "Cazări pet-friendly",
-      grooming: "Grooming",
-      offers: "Oferte membri",
-      services: "Servicii",
-      zoo: "Grădini zoologice",
-      aquarium: "Acvarii",
-      wildlife: "Wildlife",
-      farms: "Ferme și sanctuare",
-      memberLabel: "MEMBERSHIP",
-      petFriendlyLabel: "CĂUTARE PET-FRIENDLY",
-      discountLabel: "BENEFICII MEMBRI",
-      communityLabel: "COMUNITATE LOCALĂ",
+      petFriendlyText:
+        "Descoperă cafenele, hoteluri, restaurante, parcuri și spații verzi pet-friendly, precum și ferme, sanctuare și locuri unde poți petrece timp cu animale chiar dacă nu ai propriul animal de companie.",
+
       healthLabel: "SĂNĂTATE ȘI ÎNGRIJIRE",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "EXPERIENȚE CU ANIMALE · TURISM VERDE",
+      healthTitle: "Îngrijește cu încredere.",
+      healthText:
+        "Ghiduri practice despre sănătate, bunăstare, grooming, prevenție și îngrijire zilnică responsabilă.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Animalul tău ar putea fi următorul.",
+      coverText:
+        "Un concurs exclusiv pentru membrii Clubului. Comunitatea votează câștigătorul care va apărea pe coperta PETS & DOGUE, iar alți cinci finaliști primesc propria poveste și fotografii în revistă.",
+      vote: "VOTEAZĂ",
+
+      communityLabel: "COMUNITATE LOCALĂ",
+      communityTitle: "Fii parte din ceea ce se întâmplă în apropiere.",
+      communityText:
+        "Cunoaște iubitori de animale din zona ta, descoperă evenimente și recomandări, discută, organizează întâlniri și ajută animalele pierdute și găsite să se întoarcă la familiile lor.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Cumpără. Vinde. Oferă. Găsește.",
+      marketplaceText:
+        "Un marketplace al comunității pentru produse, servicii și anunțuri utile pentru animale. Cumpără, vinde, oferă gratuit, caută ceea ce ai nevoie sau publică propriul anunț.",
+
       helpLabel: "AJUTĂ ANIMALELE",
-      businessLabel: "LUCREAZĂ CU PETS & DOGUE"
+      helpTitle: "Ajută animalele din întreaga lume.",
+      helpText:
+        "Oferă vizibilitate animalelor de oriunde din lume care au nevoie de salvare, tratament, adopție, foster sau sprijin urgent.",
+
+      fashionLabel: "MODĂ ȘI STIL",
+      fashionTitle: "Modă. Stil. Sezon nou.",
+      fashionText:
+        "Modă nouă pentru animale, accesorii, inspirație pentru grooming și look-uri editoriale cu personalitate.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Calm, îngrijire, grooming, experiențe spa și idei de bunăstare create pentru viața modernă alături de animale.",
+
+      beautyLabel: "FRUMUSEȚE ȘI STIL",
+      beautyTitle: "Frumusețe și grooming",
+      beautyText:
+        "Tendințe de grooming, spații frumoase, îngrijire profesională și stil expresiv pentru animale.",
+
+      activeLabel: "VIAȚĂ ACTIVĂ",
+      activeTitle: "Sport și viață activă",
+      activeText:
+        "Mișcare, fitness, activități în aer liber și inspirație pentru o viață mai sănătoasă și mai activă împreună.",
+
+      ad: "FĂ-ȚI PUBLICITATE CU NOI",
+      adTitle: "Brandul tău ar putea fi aici.",
+      adText:
+        "Prezintă-ți brandul publicului PETS & DOGUE prin publicitate premium, plasări mobile și campanii speciale.",
+      advertise: "Fă-ți publicitate cu noi",
+
+      join: "Alătură-te Clubului",
+
+      howItWorks: "Cum funcționează",
+      close: "Închide",
+      back: "Înapoi"
     },
 
     bg: {
-      hero: "Полезен дигитален свят за хората, които обичат животните: места, спестявания, местна помощ, грижа, общност и истински преживявания на едно място.",
+      latest: "Последни истории",
+
+      membershipLabel: "КЛУБ PETS & DOGUE",
       membershipTitle: "Повече за вашия любимец. Цяла година.",
-      membershipText: "За £10 годишно членовете получават специални оферти, отстъпки, Marketplace предимства, конкурси и възможности в PETS & DOGUE.",
+      membershipText:
+        "Едно членство ви свързва с общността, специални предложения и конкурси в целия свят на PETS & DOGUE.",
+
+      discounts: "Клубни отстъпки",
+      contests: "Конкурси и гласуване",
+      community: "Глобална общност",
+
+      contestWinner: "ПОБЕДИТЕЛ",
+      contestVotes: "Любимец на общността",
+
+      petFriendlyLabel: "МЕСТА, ПОДХОДЯЩИ ЗА ДОМАШНИ ЛЮБИМЦИ",
       petFriendlyTitle: "Отидете заедно.",
-      petFriendlyText: "Намерете кафенета, хотели, ресторанти, паркове, плажове и услуги, които приемат животни. Локация, карта, правила, потвърждения от общността и маршрути в едно търсене.",
-      discountsTitle: "Харчете по-малко за истинския живот с любимец.",
-      discountsText: "Оферти за pet-friendly престои, груминг, аксесоари, услуги и ежедневни покупки.",
-      communityTitle: "Хората наблизо могат да помогнат.",
-      communityText: "Питайте местни стопани, споделяйте препоръки и помагайте изгубени и намерени животни да се върнат при хората си.",
-      healthTitle: "Грижете се с увереност.",
-      healthText: "Полезна информация и услуги за здраве, грижа, груминг и ежедневното благополучие.",
-      marketplaceTitle: "Полезни неща за истинския живот с животни.",
-      marketplaceText: "Продукти, услуги, аксесоари и обяви на общността на едно място. Членовете могат да публикуват до 50 безплатни обяви.",
-      greenTitle: "Срещнете животните. Откривайте отговорно.",
-      greenText: "Нямате собствен любимец? Открийте зоопаркове, аквариуми, wildlife паркове, ферми, приюти и отговорни преживявания с животни.",
-      coverTitle: "Вашият любимец може да е следващият.",
-      coverText: "Участвайте в Cover Star, конкурси и редакционни проекти, които празнуват индивидуалността и всички видове животни.",
-      helpTitle: "Видяно. Споделено. Помогнато.",
-      helpText: "Дайте повече видимост на животни, които търсят дом, спасение или спешна помощ.",
-      businessTitle: "Включете бизнеса си в света на хората с животни.",
-      businessText: "Хотели, кафенета, грумъри, ветеринари, магазини, марки и услуги могат да станат по-видими и да предлагат членски предимства.",
-      nearby: "Наблизо",
-      map: "Карта",
-      location: "Локация",
-      routes: "Маршрути",
-      petRules: "Правила",
-      verified: "Общност",
-      lostFound: "Изгубени / намерени",
-      hotel: "Pet-friendly престои",
-      grooming: "Груминг",
-      offers: "Членски оферти",
-      services: "Услуги",
-      zoo: "Зоопаркове",
-      aquarium: "Аквариуми",
-      wildlife: "Wildlife",
-      farms: "Ферми и приюти",
-      memberLabel: "ЧЛЕНСТВО",
-      petFriendlyLabel: "PET-FRIENDLY ТЪРСЕНЕ",
-      discountLabel: "ЧЛЕНСКИ ПРЕДИМСТВА",
-      communityLabel: "МЕСТНА ОБЩНОСТ",
+      petFriendlyText:
+        "Откривайте pet-friendly кафенета, хотели, ресторанти, паркове и зелени места, както и ферми, убежища и места, където можете да прекарвате време с животни, дори ако нямате собствен домашен любимец.",
+
       healthLabel: "ЗДРАВЕ И ГРИЖА",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ПРЕЖИВЯВАНИЯ С ЖИВОТНИ · ЗЕЛЕН ТУРИЗЪМ",
+      healthTitle: "Грижете се с увереност.",
+      healthText:
+        "Практични насоки за здраве, благополучие, груминг, профилактика и отговорна ежедневна грижа.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Вашият любимец може да бъде следващият.",
+      coverText:
+        "Конкурс само за членове на Клуба. Общността гласува за победителя, който ще се появи на корицата на PETS & DOGUE, а още петима финалисти ще получат собствена история и снимки в списанието.",
+      vote: "ГЛАСУВАЙ",
+
+      communityLabel: "МЕСТНА ОБЩНОСТ",
+      communityTitle: "Бъдете част от това, което се случва наблизо.",
+      communityText:
+        "Запознавайте се с хора с домашни любимци наблизо, откривайте събития и препоръки, общувайте, организирайте срещи и помагайте на изгубени и намерени животни да се върнат при семействата си.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Купи. Продай. Подари. Намери.",
+      marketplaceText:
+        "Общностен marketplace за продукти, услуги и полезни обяви за животни. Купувайте, продавайте, подарявайте, търсете необходимото или публикувайте собствена обява.",
+
       helpLabel: "ПОМОГНЕТЕ НА ЖИВОТНИТЕ",
-      businessLabel: "РАБОТЕТЕ С PETS & DOGUE"
+      helpTitle: "Помагайте на животни по целия свят.",
+      helpText:
+        "Дайте видимост на животни навсякъде по света, които се нуждаят от спасяване, лечение, осиновяване, временен дом или спешна подкрепа.",
+
+      fashionLabel: "МОДА И СТИЛ",
+      fashionTitle: "Мода. Стил. Нов сезон.",
+      fashionText:
+        "Нова мода за домашни любимци, аксесоари, груминг вдъхновение и редакционни визии с характер.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Спокойствие, грижа, груминг, spa преживявания и идеи за благополучие в съвременния живот с домашни любимци.",
+
+      beautyLabel: "КРАСОТА И СТИЛ",
+      beautyTitle: "Красота и груминг",
+      beautyText:
+        "Тенденции в груминга, красиви пространства, професионална грижа и изразителен стил за домашни любимци.",
+
+      activeLabel: "АКТИВЕН ЖИВОТ",
+      activeTitle: "Спорт и активен живот",
+      activeText:
+        "Движение, фитнес, активности на открито и вдъхновение за по-здравословен и активен живот заедно.",
+
+      ad: "РЕКЛАМИРАЙТЕ С НАС",
+      adTitle: "Вашият бранд може да бъде тук.",
+      adText:
+        "Представете своя бранд пред аудиторията на PETS & DOGUE чрез премиум реклама, мобилни позиции и специални кампании.",
+      advertise: "Рекламирайте с нас",
+
+      join: "Присъединете се към Клуба",
+
+      howItWorks: "Как работи",
+      close: "Затвори",
+      back: "Назад"
     },    el: {
-      hero: "Ένας χρήσιμος ψηφιακός κόσμος για ανθρώπους που αγαπούν τα ζώα: μέρη, οικονομία, τοπική βοήθεια, φροντίδα, κοινότητα και πραγματικές εμπειρίες σε ένα σημείο.",
+      latest: "Τελευταίες ιστορίες",
+
+      membershipLabel: "PETS & DOGUE CLUB",
       membershipTitle: "Περισσότερα για το κατοικίδιό σας. Όλο τον χρόνο.",
-      membershipText: "Με £10 τον χρόνο, τα μέλη αποκτούν πρόσβαση σε ειδικές προσφορές, εκπτώσεις, προνόμια Marketplace, διαγωνισμούς και ευκαιρίες PETS & DOGUE.",
+      membershipText:
+        "Μία συνδρομή σας συνδέει με την κοινότητα, ειδικές προσφορές και διαγωνισμούς σε όλο τον κόσμο του PETS & DOGUE.",
+
+      discounts: "Εκπτώσεις Club",
+      contests: "Διαγωνισμοί & ψηφοφορίες",
+      community: "Παγκόσμια κοινότητα",
+
+      contestWinner: "ΝΙΚΗΤΗΣ",
+      contestVotes: "Αγαπημένο της κοινότητας",
+
+      petFriendlyLabel: "PET-FRIENDLY ΜΕΡΗ",
       petFriendlyTitle: "Πηγαίνετε μαζί.",
-      petFriendlyText: "Βρείτε καφέ, ξενοδοχεία, εστιατόρια, πάρκα, παραλίες και υπηρεσίες που δέχονται ζώα. Τοποθεσία, χάρτης, κανόνες, επιβεβαιώσεις κοινότητας και διαδρομές σε μία αναζήτηση.",
-      discountsTitle: "Ξοδέψτε λιγότερα στην πραγματική ζωή με το κατοικίδιό σας.",
-      discountsText: "Προσφορές μελών για pet-friendly διαμονές, grooming, αξεσουάρ, υπηρεσίες και καθημερινές αγορές.",
-      communityTitle: "Οι άνθρωποι κοντά σας μπορούν να βοηθήσουν.",
-      communityText: "Ρωτήστε τοπικούς ιδιοκτήτες, μοιραστείτε προτάσεις και βοηθήστε χαμένα και βρεμένα ζώα να επιστρέψουν στους ανθρώπους τους.",
-      healthTitle: "Φροντίδα με σιγουριά.",
-      healthText: "Χρήσιμες πληροφορίες και υπηρεσίες για υγεία, φροντίδα, grooming και καθημερινή ευεξία.",
-      marketplaceTitle: "Χρήσιμα πράγματα για την πραγματική ζωή με ζώα.",
-      marketplaceText: "Προϊόντα, υπηρεσίες, αξεσουάρ και αγγελίες κοινότητας σε ένα μέρος. Τα μέλη μπορούν να δημοσιεύουν έως 50 δωρεάν αγγελίες.",
-      greenTitle: "Γνωρίστε ζώα. Ανακαλύψτε υπεύθυνα.",
-      greenText: "Δεν έχετε δικό σας κατοικίδιο; Βρείτε ζωολογικούς κήπους, ενυδρεία, wildlife parks, φάρμες, καταφύγια και υπεύθυνες εμπειρίες με ζώα.",
-      coverTitle: "Το κατοικίδιό σας μπορεί να είναι το επόμενο.",
-      coverText: "Πάρτε μέρος στο Cover Star, σε διαγωνισμούς και editorial projects που γιορτάζουν κάθε ζώο και την προσωπικότητά του.",
-      helpTitle: "Το είδαν. Το μοιράστηκαν. Βοήθησαν.",
-      helpText: "Δώστε περισσότερη προβολή σε ζώα που χρειάζονται σπίτι, διάσωση ή επείγουσα βοήθεια.",
-      businessTitle: "Φέρτε την επιχείρησή σας στον κόσμο των ανθρώπων που αγαπούν τα ζώα.",
-      businessText: "Ξενοδοχεία, καφέ, groomers, κτηνίατροι, καταστήματα, brands και υπηρεσίες μπορούν να γίνουν πιο ορατά και να προσφέρουν προνόμια στα μέλη.",
-      nearby: "Κοντά σας",
-      map: "Χάρτης",
-      location: "Τοποθεσία",
-      routes: "Διαδρομές",
-      petRules: "Κανόνες",
-      verified: "Κοινότητα",
-      lostFound: "Χαμένα / βρεμένα",
-      hotel: "Pet-friendly διαμονές",
-      grooming: "Grooming",
-      offers: "Προσφορές μελών",
-      services: "Υπηρεσίες",
-      zoo: "Ζωολογικοί κήποι",
-      aquarium: "Ενυδρεία",
-      wildlife: "Άγρια ζωή",
-      farms: "Φάρμες & καταφύγια",
-      memberLabel: "ΣΥΝΔΡΟΜΗ",
-      petFriendlyLabel: "PET-FRIENDLY ΑΝΑΖΗΤΗΣΗ",
-      discountLabel: "ΠΡΟΝΟΜΙΑ ΜΕΛΩΝ",
-      communityLabel: "ΤΟΠΙΚΗ ΚΟΙΝΟΤΗΤΑ",
+      petFriendlyText:
+        "Ανακαλύψτε pet-friendly καφέ, ξενοδοχεία, εστιατόρια, πάρκα και χώρους πρασίνου, καθώς και φάρμες, καταφύγια και μέρη όπου μπορείτε να περάσετε χρόνο με ζώα ακόμη κι αν δεν έχετε δικό σας κατοικίδιο.",
+
       healthLabel: "ΥΓΕΙΑ & ΦΡΟΝΤΙΔΑ",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ΕΜΠΕΙΡΙΕΣ ΜΕ ΖΩΑ · ΠΡΑΣΙΝΟΣ ΤΟΥΡΙΣΜΟΣ",
+      healthTitle: "Φροντίδα με σιγουριά.",
+      healthText:
+        "Πρακτικές πληροφορίες για την υγεία, την ευεξία, το grooming, την πρόληψη και την υπεύθυνη καθημερινή φροντίδα.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Το κατοικίδιό σας μπορεί να είναι το επόμενο.",
+      coverText:
+        "Ένας διαγωνισμός αποκλειστικά για μέλη του Club. Η κοινότητα ψηφίζει τον νικητή που θα εμφανιστεί στο εξώφυλλο του PETS & DOGUE, ενώ άλλοι πέντε φιναλίστ θα αποκτήσουν τη δική τους ιστορία και φωτογραφίες μέσα στο περιοδικό.",
+      vote: "ΨΗΦΙΣΤΕ",
+
+      communityLabel: "ΤΟΠΙΚΗ ΚΟΙΝΟΤΗΤΑ",
+      communityTitle: "Γίνετε μέρος όσων συμβαίνουν κοντά σας.",
+      communityText:
+        "Γνωρίστε ανθρώπους με κατοικίδια στην περιοχή σας, ανακαλύψτε εκδηλώσεις και προτάσεις, συζητήστε, οργανώστε συναντήσεις και βοηθήστε χαμένα και βρεθέντα ζώα να επιστρέψουν στις οικογένειές τους.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Αγοράστε. Πουλήστε. Χαρίστε. Βρείτε.",
+      marketplaceText:
+        "Ένα marketplace της κοινότητας για προϊόντα, υπηρεσίες και χρήσιμες αγγελίες για κατοικίδια. Αγοράστε, πουλήστε, χαρίστε, αναζητήστε αυτό που χρειάζεστε ή δημοσιεύστε τη δική σας αγγελία.",
+
       helpLabel: "ΒΟΗΘΗΣΤΕ ΤΑ ΖΩΑ",
-      businessLabel: "ΣΥΝΕΡΓΑΣΤΕΙΤΕ ΜΕ PETS & DOGUE"
+      helpTitle: "Βοηθήστε ζώα σε όλο τον κόσμο.",
+      helpText:
+        "Δώστε μεγαλύτερη προβολή σε ζώα οπουδήποτε στον κόσμο που χρειάζονται διάσωση, θεραπεία, υιοθεσία, προσωρινή φιλοξενία ή επείγουσα υποστήριξη.",
+
+      fashionLabel: "ΜΟΔΑ & ΣΤΥΛ",
+      fashionTitle: "Μόδα. Στυλ. Νέα σεζόν.",
+      fashionText:
+        "Νέα μόδα για κατοικίδια, αξεσουάρ, έμπνευση grooming και editorial εμφανίσεις με προσωπικότητα.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Ηρεμία, φροντίδα, grooming, εμπειρίες spa και ιδέες ευεξίας για τη σύγχρονη ζωή με κατοικίδια.",
+
+      beautyLabel: "ΟΜΟΡΦΙΑ & ΣΤΥΛ",
+      beautyTitle: "Ομορφιά & grooming",
+      beautyText:
+        "Τάσεις grooming, όμορφοι χώροι, επαγγελματική φροντίδα και εκφραστικό στυλ για κατοικίδια.",
+
+      activeLabel: "ΕΝΕΡΓΗ ΖΩΗ",
+      activeTitle: "Άθληση & ενεργή ζωή",
+      activeText:
+        "Κίνηση, fitness, υπαίθριες δραστηριότητες και έμπνευση για μια πιο υγιεινή και ενεργή ζωή μαζί.",
+
+      ad: "ΔΙΑΦΗΜΙΣΤΕΙΤΕ ΜΑΖΙ ΜΑΣ",
+      adTitle: "Η μάρκα σας θα μπορούσε να είναι εδώ.",
+      adText:
+        "Παρουσιάστε τη μάρκα σας στο κοινό του PETS & DOGUE μέσω premium διαφήμισης, mobile placements και ειδικών καμπανιών.",
+      advertise: "Διαφημιστείτε μαζί μας",
+
+      join: "Γίνετε μέλος του Club",
+
+      howItWorks: "Πώς λειτουργεί",
+      close: "Κλείσιμο",
+      back: "Πίσω"
     },
 
     sv: {
-      hero: "En användbar digital värld för människor som älskar djur: platser, besparingar, lokal hjälp, omsorg, community och riktiga upplevelser på ett ställe.",
-      membershipTitle: "Mer för ditt djur. Hela året.",
-      membershipText: "För £10 per år får medlemmar tillgång till specialerbjudanden, rabatter, Marketplace-förmåner, tävlingar och möjligheter i PETS & DOGUE.",
+      latest: "Senaste berättelserna",
+
+      membershipLabel: "PETS & DOGUE CLUB",
+      membershipTitle: "Mer för ditt husdjur. Hela året.",
+      membershipText:
+        "Ett medlemskap kopplar dig till communityn, specialerbjudanden och tävlingar i hela PETS & DOGUE-världen.",
+
+      discounts: "Klubbrabatter",
+      contests: "Tävlingar & omröstningar",
+      community: "Global community",
+
+      contestWinner: "VINNARE",
+      contestVotes: "Communityns favorit",
+
+      petFriendlyLabel: "DJURVÄNLIGA PLATSER",
       petFriendlyTitle: "Gå tillsammans.",
-      petFriendlyText: "Hitta kaféer, hotell, restauranger, parker, stränder och tjänster som välkomnar djur. Plats, karta, regler, community-bekräftelser och rutter i en snabb sökning.",
-      discountsTitle: "Spendera mindre på det verkliga livet med djur.",
-      discountsText: "Medlemserbjudanden på pet-friendly boenden, grooming, tillbehör, tjänster och vardagsköp.",
-      communityTitle: "Människor nära dig kan hjälpa.",
-      communityText: "Fråga lokala djurägare, dela rekommendationer och hjälp borttappade och upphittade djur tillbaka hem.",
-      healthTitle: "Ta hand om med trygghet.",
-      healthText: "Användbar information och tjänster för hälsa, vård, grooming och vardagligt välbefinnande.",
-      marketplaceTitle: "Användbara saker för det verkliga livet med djur.",
-      marketplaceText: "Produkter, tjänster, tillbehör och community-annonser på ett ställe. Medlemmar kan publicera upp till 50 gratis annonser.",
-      greenTitle: "Möt djur. Upptäck ansvarsfullt.",
-      greenText: "Har du inget eget djur? Hitta djurparker, akvarier, wildlifeparker, gårdar, räddningscenter och ansvarsfulla djurupplevelser.",
-      coverTitle: "Ditt djur kan bli nästa.",
-      coverText: "Delta i Cover Star, tävlingar och editorial features som hyllar personlighet och alla slags djur.",
-      helpTitle: "Sett. Delat. Hjälpt.",
-      helpText: "Ge större synlighet åt djur som behöver ett hem, räddning eller akut hjälp.",
-      businessTitle: "Ta in ditt företag i djurägarnas värld.",
-      businessText: "Hotell, kaféer, groomers, veterinärer, butiker, varumärken och tjänster kan bli lättare att hitta och erbjuda medlemsförmåner.",
-      nearby: "Nära dig",
-      map: "Karta",
-      location: "Plats",
-      routes: "Rutter",
-      petRules: "Regler",
-      verified: "Community",
-      lostFound: "Borttappade / hittade",
-      hotel: "Pet-friendly boenden",
-      grooming: "Grooming",
-      offers: "Medlemserbjudanden",
-      services: "Tjänster",
-      zoo: "Djurparker",
-      aquarium: "Akvarier",
-      wildlife: "Wildlife",
-      farms: "Gårdar & räddningscenter",
-      memberLabel: "MEDLEMSKAP",
-      petFriendlyLabel: "PET-FRIENDLY SÖK",
-      discountLabel: "MEDLEMSFÖRMÅNER",
-      communityLabel: "LOKAL COMMUNITY",
+      petFriendlyText:
+        "Upptäck djurvänliga kaféer, hotell, restauranger, parker och grönområden, plus gårdar, djurreservat och platser där du kan umgås med djur även om du inte har ett eget husdjur.",
+
       healthLabel: "HÄLSA & OMSORG",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "DJURUPPLEVELSER · GRÖN TURISM",
+      healthTitle: "Ta hand om dem med trygghet.",
+      healthText:
+        "Praktisk vägledning om hälsa, välbefinnande, grooming, förebyggande vård och ansvarsfull daglig omsorg.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "HJÄLP DJUREN",
-      businessLabel: "SAMARBETA MED PETS & DOGUE"
+      coverTitle: "Ditt husdjur kan bli nästa.",
+      coverText:
+        "En tävling exklusivt för Club-medlemmar. Communityn röstar fram vinnaren som får synas på PETS & DOGUE-omslaget, medan ytterligare fem finalister får sin egen berättelse och sina bilder i magasinet.",
+      vote: "RÖSTA",
+
+      communityLabel: "LOKAL COMMUNITY",
+      communityTitle: "Bli en del av det som händer nära dig.",
+      communityText:
+        "Träffa lokala djurvänner, upptäck evenemang och rekommendationer, prata, ordna träffar och hjälp bortsprungna och upphittade djur att återförenas med sina familjer.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Köp. Sälj. Ge bort. Hitta.",
+      marketplaceText:
+        "En community-marknadsplats för husdjursprodukter, tjänster och användbara annonser. Köp, sälj, ge bort, sök efter det du behöver eller publicera din egen annons.",
+
+      helpLabel: "HJÄLP DJUR",
+      helpTitle: "Hjälp djur över hela världen.",
+      helpText:
+        "Ge synlighet åt djur var som helst i världen som behöver räddning, behandling, adoption, fosterhem eller akut stöd.",
+
+      fashionLabel: "MODE & STIL",
+      fashionTitle: "Mode. Stil. Ny säsong.",
+      fashionText:
+        "Nytt husdjursmode, accessoarer, grooming-inspiration och redaktionella looks med personlighet.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Lugn, omsorg, grooming, spa-upplevelser och idéer för välbefinnande i det moderna livet med husdjur.",
+
+      beautyLabel: "SKÖNHET & STIL",
+      beautyTitle: "Skönhet & grooming",
+      beautyText:
+        "Groomingtrender, vackra miljöer, professionell vård och uttrycksfull husdjursstil.",
+
+      activeLabel: "AKTIVT LIV",
+      activeTitle: "Sport & aktivt liv",
+      activeText:
+        "Rörelse, fitness, utomhusaktiviteter och inspiration för ett hälsosammare och mer aktivt liv tillsammans.",
+
+      ad: "ANNONSERA HOS OSS",
+      adTitle: "Ditt varumärke kan vara här.",
+      adText:
+        "Visa ditt varumärke för PETS & DOGUE-publiken genom premiumannonsering, mobila placeringar och specialkampanjer.",
+      advertise: "Annonsera hos oss",
+
+      join: "Gå med i Club",
+
+      howItWorks: "Så fungerar det",
+      close: "Stäng",
+      back: "Tillbaka"
     },
 
     da: {
-      hero: "En nyttig digital verden for mennesker, der elsker dyr: steder, besparelser, lokal hjælp, pleje, community og ægte oplevelser samlet ét sted.",
+      latest: "Seneste historier",
+
+      membershipLabel: "PETS & DOGUE CLUB",
       membershipTitle: "Mere til dit kæledyr. Hele året.",
-      membershipText: "For £10 om året får medlemmer adgang til særlige tilbud, rabatter, Marketplace-fordele, konkurrencer og muligheder i PETS & DOGUE.",
+      membershipText:
+        "Ét medlemskab forbinder dig med fællesskabet, særlige tilbud og konkurrencer i hele PETS & DOGUE-verdenen.",
+
+      discounts: "Club-rabatter",
+      contests: "Konkurrencer & afstemninger",
+      community: "Globalt fællesskab",
+
+      contestWinner: "VINDER",
+      contestVotes: "Fællesskabets favorit",
+
+      petFriendlyLabel: "KÆLEDYRSVENLIGE STEDER",
       petFriendlyTitle: "Tag afsted sammen.",
-      petFriendlyText: "Find caféer, hoteller, restauranter, parker, strande og services, hvor dyr er velkomne. Lokation, kort, regler, community-bekræftelser og ruter i én hurtig søgning.",
-      discountsTitle: "Brug mindre på det virkelige liv med kæledyr.",
-      discountsText: "Medlemstilbud på pet-friendly ophold, grooming, tilbehør, services og daglige køb.",
-      communityTitle: "Mennesker i nærheden kan hjælpe.",
-      communityText: "Spørg lokale dyreejere, del anbefalinger og hjælp bortkomne og fundne dyr tilbage til deres mennesker.",
-      healthTitle: "Pas med tryghed.",
-      healthText: "Nyttig information og services til sundhed, pleje, grooming og daglig trivsel.",
-      marketplaceTitle: "Nyttige ting til det virkelige liv med dyr.",
-      marketplaceText: "Produkter, services, tilbehør og community-annoncer ét sted. Medlemmer kan oprette op til 50 gratis annoncer.",
-      greenTitle: "Mød dyr. Oplev ansvarligt.",
-      greenText: "Har du ikke selv et dyr? Find zoologiske haver, akvarier, wildlifeparker, gårde, internater og ansvarlige dyreoplevelser.",
-      coverTitle: "Dit kæledyr kan blive det næste.",
-      coverText: "Deltag i Cover Star, konkurrencer og editorial features, der fejrer personlighed og alle slags dyr.",
-      helpTitle: "Set. Delt. Hjælpet.",
-      helpText: "Giv mere synlighed til dyr, der har brug for et hjem, redning eller akut hjælp.",
-      businessTitle: "Bring din virksomhed ind i dyreejernes verden.",
-      businessText: "Hoteller, caféer, groomers, dyrlæger, butikker, brands og services kan blive lettere at finde og tilbyde medlemsfordele.",
-      nearby: "I nærheden",
-      map: "Kort",
-      location: "Lokation",
-      routes: "Ruter",
-      petRules: "Regler",
-      verified: "Community",
-      lostFound: "Bortkomne / fundne",
-      hotel: "Pet-friendly ophold",
-      grooming: "Grooming",
-      offers: "Medlemstilbud",
-      services: "Services",
-      zoo: "Zoologiske haver",
-      aquarium: "Akvarier",
-      wildlife: "Wildlife",
-      farms: "Gårde & internater",
-      memberLabel: "MEDLEMSKAB",
-      petFriendlyLabel: "PET-FRIENDLY SØGNING",
-      discountLabel: "MEDLEMSFORDELE",
-      communityLabel: "LOKALT COMMUNITY",
+      petFriendlyText:
+        "Opdag kæledyrsvenlige caféer, hoteller, restauranter, parker og grønne områder samt gårde, reservater og steder, hvor du kan tilbringe tid med dyr, selv hvis du ikke selv har et kæledyr.",
+
       healthLabel: "SUNDHED & PLEJE",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "DYREOPLEVELSER · GRØN TURISME",
+      healthTitle: "Plej med tryghed.",
+      healthText:
+        "Praktisk vejledning om sundhed, trivsel, grooming, forebyggelse og ansvarlig daglig pleje.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "HJÆLP DYRENE",
-      businessLabel: "SAMARBEJD MED PETS & DOGUE"
+      coverTitle: "Dit kæledyr kan blive det næste.",
+      coverText:
+        "En konkurrence eksklusivt for Club-medlemmer. Fællesskabet stemmer på vinderen, som kommer på forsiden af PETS & DOGUE, mens fem andre finalister får deres egen historie og billeder i magasinet.",
+      vote: "STEM",
+
+      communityLabel: "LOKALT FÆLLESSKAB",
+      communityTitle: "Bliv en del af det, der sker i nærheden.",
+      communityText:
+        "Mød lokale dyrevenner, opdag events og anbefalinger, tal sammen, arranger møder og hjælp bortløbne og fundne dyr med at komme hjem til deres familier.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Køb. Sælg. Giv. Find.",
+      marketplaceText:
+        "En community-markedsplads for kæledyrsprodukter, tjenester og nyttige annoncer. Køb, sælg, giv væk, søg efter det du har brug for, eller opret din egen annonce.",
+
+      helpLabel: "HJÆLP DYR",
+      helpTitle: "Hjælp dyr over hele verden.",
+      helpText:
+        "Giv synlighed til dyr overalt i verden, som har brug for redning, behandling, adoption, plejefamilie eller akut støtte.",
+
+      fashionLabel: "MODE & STIL",
+      fashionTitle: "Mode. Stil. Ny sæson.",
+      fashionText:
+        "Ny kæledyrsmode, accessories, grooming-inspiration og redaktionelle looks med personlighed.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Ro, pleje, grooming, spaoplevelser og idéer til trivsel i det moderne liv med kæledyr.",
+
+      beautyLabel: "SKØNHED & STIL",
+      beautyTitle: "Skønhed & grooming",
+      beautyText:
+        "Groomingtrends, smukke omgivelser, professionel pleje og udtryksfuld kæledyrsstil.",
+
+      activeLabel: "AKTIVT LIV",
+      activeTitle: "Sport & aktivt liv",
+      activeText:
+        "Bevægelse, fitness, udendørs aktivitet og inspiration til et sundere og mere aktivt liv sammen.",
+
+      ad: "ANNONCÉR HOS OS",
+      adTitle: "Dit brand kan være her.",
+      adText:
+        "Vis dit brand til PETS & DOGUE-publikummet gennem premiumannoncering, mobile placeringer og særlige kampagner.",
+      advertise: "Annoncér hos os",
+
+      join: "Bliv medlem af Club",
+
+      howItWorks: "Sådan fungerer det",
+      close: "Luk",
+      back: "Tilbage"
     },
 
     no: {
-      hero: "En nyttig digital verden for mennesker som elsker dyr: steder, besparelser, lokal hjelp, omsorg, community og ekte opplevelser på ett sted.",
+      latest: "Siste historier",
+
+      membershipLabel: "PETS & DOGUE CLUB",
       membershipTitle: "Mer for kjæledyret ditt. Hele året.",
-      membershipText: "For £10 i året får medlemmer tilgang til spesialtilbud, rabatter, Marketplace-fordeler, konkurranser og muligheter i PETS & DOGUE.",
+      membershipText:
+        "Ett medlemskap kobler deg til fellesskapet, spesialtilbud og konkurranser i hele PETS & DOGUE-verdenen.",
+
+      discounts: "Club-rabatter",
+      contests: "Konkurranser & avstemninger",
+      community: "Globalt fellesskap",
+
+      contestWinner: "VINNER",
+      contestVotes: "Fellesskapets favoritt",
+
+      petFriendlyLabel: "DYREVENNLIGE STEDER",
       petFriendlyTitle: "Dra sammen.",
-      petFriendlyText: "Finn kaféer, hoteller, restauranter, parker, strender og tjenester der dyr er velkomne. Lokasjon, kart, regler, community-bekreftelser og ruter i ett raskt søk.",
-      discountsTitle: "Bruk mindre på det virkelige livet med kjæledyr.",
-      discountsText: "Medlemstilbud på pet-friendly opphold, grooming, tilbehør, tjenester og hverdagskjøp.",
-      communityTitle: "Folk i nærheten kan hjelpe.",
-      communityText: "Spør lokale dyreeiere, del anbefalinger og hjelp bortkomne og funne dyr tilbake til menneskene sine.",
-      healthTitle: "Ta vare på med trygghet.",
-      healthText: "Nyttig informasjon og tjenester for helse, stell, grooming og daglig velvære.",
-      marketplaceTitle: "Nyttige ting for det virkelige livet med dyr.",
-      marketplaceText: "Produkter, tjenester, tilbehør og community-annonser på ett sted. Medlemmer kan legge ut opptil 50 gratis annonser.",
-      greenTitle: "Møt dyr. Oppdag ansvarlig.",
-      greenText: "Har du ikke eget dyr? Finn dyreparker, akvarier, wildlifeparker, gårder, redningssentre og ansvarlige dyreopplevelser.",
-      coverTitle: "Kjæledyret ditt kan bli det neste.",
-      coverText: "Delta i Cover Star, konkurranser og editorial features som feirer personlighet og alle typer dyr.",
-      helpTitle: "Sett. Delt. Hjulpet.",
-      helpText: "Gi større synlighet til dyr som trenger hjem, redning eller akutt hjelp.",
-      businessTitle: "Ta virksomheten din inn i dyreeiernes verden.",
-      businessText: "Hoteller, kaféer, groomere, veterinærer, butikker, brands og tjenester kan bli enklere å finne og tilby medlemsfordeler.",
-      nearby: "I nærheten",
-      map: "Kart",
-      location: "Lokasjon",
-      routes: "Ruter",
-      petRules: "Regler",
-      verified: "Community",
-      lostFound: "Bortkomne / funnet",
-      hotel: "Pet-friendly opphold",
-      grooming: "Grooming",
-      offers: "Medlemstilbud",
-      services: "Tjenester",
-      zoo: "Dyreparker",
-      aquarium: "Akvarier",
-      wildlife: "Wildlife",
-      farms: "Gårder & redningssentre",
-      memberLabel: "MEDLEMSKAP",
-      petFriendlyLabel: "PET-FRIENDLY SØK",
-      discountLabel: "MEDLEMSFORDELER",
-      communityLabel: "LOKALT COMMUNITY",
+      petFriendlyText:
+        "Oppdag dyrevennlige kafeer, hoteller, restauranter, parker og grøntområder, samt gårder, reservater og steder der du kan tilbringe tid med dyr selv om du ikke har et eget kjæledyr.",
+
       healthLabel: "HELSE & OMSORG",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "DYREOPPLEVELSER · GRØNN TURISME",
+      healthTitle: "Ta vare på dem med trygghet.",
+      healthText:
+        "Praktisk veiledning om helse, velvære, grooming, forebygging og ansvarlig daglig omsorg.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "HJELP DYRENE",
-      businessLabel: "SAMARBEID MED PETS & DOGUE"
+      coverTitle: "Kjæledyret ditt kan bli det neste.",
+      coverText:
+        "En konkurranse eksklusivt for Club-medlemmer. Fellesskapet stemmer frem vinneren som får pryde PETS & DOGUE-forsiden, mens fem andre finalister får sin egen historie og bilder i magasinet.",
+      vote: "STEM",
+
+      communityLabel: "LOKALT FELLESSKAP",
+      communityTitle: "Bli en del av det som skjer i nærheten.",
+      communityText:
+        "Møt lokale dyrevenner, oppdag arrangementer og anbefalinger, snakk sammen, organiser treff og hjelp bortkomne og funne dyr tilbake til familiene sine.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Kjøp. Selg. Gi bort. Finn.",
+      marketplaceText:
+        "En community-markedsplass for kjæledyrprodukter, tjenester og nyttige annonser. Kjøp, selg, gi bort, søk etter det du trenger eller publiser din egen annonse.",
+
+      helpLabel: "HJELP DYR",
+      helpTitle: "Hjelp dyr over hele verden.",
+      helpText:
+        "Gi synlighet til dyr hvor som helst i verden som trenger redning, behandling, adopsjon, fosterhjem eller akutt støtte.",
+
+      fashionLabel: "MOTE & STIL",
+      fashionTitle: "Mote. Stil. Ny sesong.",
+      fashionText:
+        "Ny kjæledyrmote, tilbehør, grooming-inspirasjon og redaksjonelle looks med personlighet.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Ro, omsorg, grooming, spaopplevelser og ideer for velvære i det moderne livet med kjæledyr.",
+
+      beautyLabel: "SKJØNNHET & STIL",
+      beautyTitle: "Skjønnhet & grooming",
+      beautyText:
+        "Groomingtrender, vakre omgivelser, profesjonell pleie og uttrykksfull kjæledyrstil.",
+
+      activeLabel: "AKTIVT LIV",
+      activeTitle: "Sport & aktivt liv",
+      activeText:
+        "Bevegelse, fitness, utendørsaktivitet og inspirasjon for et sunnere og mer aktivt liv sammen.",
+
+      ad: "ANNONSER HOS OSS",
+      adTitle: "Merkevaren din kan være her.",
+      adText:
+        "Vis merkevaren din til PETS & DOGUE-publikummet gjennom premiumannonsering, mobile plasseringer og spesialkampanjer.",
+      advertise: "Annonser hos oss",
+
+      join: "Bli med i Club",
+
+      howItWorks: "Slik fungerer det",
+      close: "Lukk",
+      back: "Tilbake"
     },
 
     fi: {
-      hero: "Hyödyllinen digitaalinen maailma eläimiä rakastaville: paikkoja, säästöjä, paikallista apua, hoitoa, yhteisöä ja oikeita kokemuksia yhdessä paikassa.",
-      membershipTitle: "Enemmän lemmikillesi. Koko vuodeksi.",
-      membershipText: "£10 vuodessa antaa jäsenille erikoistarjouksia, alennuksia, Marketplace-etuja, kilpailuja ja mahdollisuuksia PETS & DOGUE -maailmassa.",
+      latest: "Uusimmat tarinat",
+
+      membershipLabel: "PETS & DOGUE CLUB",
+      membershipTitle: "Enemmän lemmikillesi. Koko vuoden.",
+      membershipText:
+        "Yksi jäsenyys yhdistää sinut yhteisöön, erikoistarjouksiin ja kilpailuihin kaikkialla PETS & DOGUE -maailmassa.",
+
+      discounts: "Club-alennukset",
+      contests: "Kilpailut & äänestykset",
+      community: "Maailmanlaajuinen yhteisö",
+
+      contestWinner: "VOITTAJA",
+      contestVotes: "Yhteisön suosikki",
+
+      petFriendlyLabel: "LEMMIKKIYSTÄVÄLLISET PAIKAT",
       petFriendlyTitle: "Menkää yhdessä.",
-      petFriendlyText: "Löydä kahvilat, hotellit, ravintolat, puistot, rannat ja palvelut, joihin lemmikit ovat tervetulleita. Sijainti, kartta, säännöt, yhteisön vahvistukset ja reitit yhdessä haussa.",
-      discountsTitle: "Käytä vähemmän oikeaan lemmikkiarkeen.",
-      discountsText: "Jäsentarjouksia pet-friendly majoituksiin, groomingiin, tarvikkeisiin, palveluihin ja arjen ostoksiin.",
-      communityTitle: "Lähellä olevat ihmiset voivat auttaa.",
-      communityText: "Kysy paikallisilta lemmikinomistajilta, jaa suosituksia ja auta kadonneita sekä löytyneitä eläimiä takaisin kotiin.",
-      healthTitle: "Huolehdi luottavaisin mielin.",
-      healthText: "Hyödyllistä tietoa ja palveluja terveyteen, hoitoon, groomingiin ja päivittäiseen hyvinvointiin.",
-      marketplaceTitle: "Hyödyllisiä asioita oikeaan lemmikkielämään.",
-      marketplaceText: "Tuotteet, palvelut, tarvikkeet ja yhteisön ilmoitukset yhdessä paikassa. Jäsenet voivat julkaista jopa 50 ilmaista ilmoitusta.",
-      greenTitle: "Tapaa eläimiä. Tutustu vastuullisesti.",
-      greenText: "Eikö sinulla ole omaa lemmikkiä? Löydä eläintarhat, akvaariot, wildlife-puistot, maatilat, suojapaikat ja vastuulliset eläinkokemukset.",
-      coverTitle: "Lemmikkisi voi olla seuraava.",
-      coverText: "Osallistu Cover Stariin, kilpailuihin ja editorial features -sisältöihin, jotka juhlistavat persoonallisuutta ja kaikkia eläimiä.",
-      helpTitle: "Nähty. Jaettu. Autettu.",
-      helpText: "Anna lisää näkyvyyttä eläimille, jotka tarvitsevat kodin, pelastusta tai kiireellistä apua.",
-      businessTitle: "Tuo yrityksesi lemmikinomistajien maailmaan.",
-      businessText: "Hotellit, kahvilat, groomerit, eläinlääkärit, kaupat, brändit ja palvelut voivat tulla paremmin löydetyiksi ja tarjota jäsenetuja.",
-      nearby: "Lähellä",
-      map: "Kartta",
-      location: "Sijainti",
-      routes: "Reitit",
-      petRules: "Säännöt",
-      verified: "Yhteisö",
-      lostFound: "Kadonneet / löytyneet",
-      hotel: "Pet-friendly majoitukset",
-      grooming: "Grooming",
-      offers: "Jäsentarjoukset",
-      services: "Palvelut",
-      zoo: "Eläintarhat",
-      aquarium: "Akvaariot",
-      wildlife: "Wildlife",
-      farms: "Maatilat & suojapaikat",
-      memberLabel: "JÄSENYYS",
-      petFriendlyLabel: "PET-FRIENDLY HAKU",
-      discountLabel: "JÄSENEDUT",
-      communityLabel: "PAIKALLINEN YHTEISÖ",
+      petFriendlyText:
+        "Löydä lemmikkiystävällisiä kahviloita, hotelleja, ravintoloita, puistoja ja viheralueita sekä maatiloja, eläinsuojia ja paikkoja, joissa voit viettää aikaa eläinten kanssa, vaikka sinulla ei olisi omaa lemmikkiä.",
+
       healthLabel: "TERVEYS & HOITO",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ELÄINKOKEMUKSET · VIHREÄ MATKAILU",
+      healthTitle: "Hoida luottavaisin mielin.",
+      healthText:
+        "Käytännöllistä tietoa terveydestä, hyvinvoinnista, groomingista, ennaltaehkäisystä ja vastuullisesta päivittäisestä hoidosta.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "Sinun lemmikkisi voi olla seuraava.",
+      coverText:
+        "Kilpailu vain Club-jäsenille. Yhteisö äänestää voittajan PETS & DOGUE -lehden kanteen, ja viisi muuta finalistia saa oman tarinansa ja valokuvansa lehteen.",
+      vote: "ÄÄNESTÄ",
+
+      communityLabel: "PAIKALLINEN YHTEISÖ",
+      communityTitle: "Ole osa sitä, mitä lähelläsi tapahtuu.",
+      communityText:
+        "Tapaa paikallisia eläinystäviä, löydä tapahtumia ja suosituksia, keskustele, järjestä tapaamisia ja auta kadonneita ja löytyneitä eläimiä palaamaan perheidensä luo.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Osta. Myy. Anna. Löydä.",
+      marketplaceText:
+        "Yhteisön marketplace lemmikkituotteille, palveluille ja hyödyllisille ilmoituksille. Osta, myy, anna pois, etsi tarvitsemasi tai julkaise oma ilmoituksesi.",
+
       helpLabel: "AUTA ELÄIMIÄ",
-      businessLabel: "TEE YHTEISTYÖTÄ PETS & DOGUE:N KANSSA"
+      helpTitle: "Auta eläimiä ympäri maailmaa.",
+      helpText:
+        "Anna näkyvyyttä eläimille missä tahansa maailmassa, kun ne tarvitsevat pelastusta, hoitoa, adoptiota, sijaiskotia tai kiireellistä tukea.",
+
+      fashionLabel: "MUOTI & TYYLI",
+      fashionTitle: "Muoti. Tyyli. Uusi kausi.",
+      fashionText:
+        "Uutta lemmikkimuotia, asusteita, grooming-inspiraatiota ja persoonallisia toimituksellisia tyylejä.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Rauhaa, hoitoa, groomingia, spa-elämyksiä ja hyvinvointi-ideoita moderniin lemmikkielämään.",
+
+      beautyLabel: "KAUNEUS & TYYLI",
+      beautyTitle: "Kauneus & grooming",
+      beautyText:
+        "Groomingtrendejä, kauniita tiloja, ammattimaista hoitoa ja persoonallista lemmikkityyliä.",
+
+      activeLabel: "AKTIIVINEN ELÄMÄ",
+      activeTitle: "Urheilu & aktiivinen elämä",
+      activeText:
+        "Liikettä, kuntoilua, ulkoilua ja inspiraatiota terveempään ja aktiivisempaan yhteiseen elämään.",
+
+      ad: "MAINOSTA KANSSAMME",
+      adTitle: "Brändisi voisi olla tässä.",
+      adText:
+        "Tuo brändisi PETS & DOGUE -yleisön eteen premium-mainonnalla, mobiilisijoitteluilla ja erikoiskampanjoilla.",
+      advertise: "Mainosta kanssamme",
+
+      join: "Liity Clubiin",
+
+      howItWorks: "Näin se toimii",
+      close: "Sulje",
+      back: "Takaisin"
     },
 
     tr: {
-      hero: "Hayvanları seven insanlar için kullanışlı dijital bir dünya: keşfedilecek yerler, tasarruf, yerel yardım, bakım, topluluk ve gerçek deneyimler tek yerde.",
-      membershipTitle: "Evcil hayvanınız için daha fazlası. Tüm yıl.",
-      membershipText: "Yıllık £10 üyelik özel teklifler, indirimler, Marketplace avantajları, yarışmalar ve PETS & DOGUE fırsatları sunar.",
+      latest: "En yeni hikâyeler",
+
+      membershipLabel: "PETS & DOGUE CLUB",
+      membershipTitle: "Evcil dostunuz için daha fazlası. Tüm yıl boyunca.",
+      membershipText:
+        "Tek bir üyelik sizi PETS & DOGUE dünyasındaki topluluğa, özel tekliflere ve yarışmalara bağlar.",
+
+      discounts: "Club indirimleri",
+      contests: "Yarışmalar & oylamalar",
+      community: "Küresel topluluk",
+
+      contestWinner: "KAZANAN",
+      contestVotes: "Topluluğun favorisi",
+
+      petFriendlyLabel: "EVCİL HAYVAN DOSTU MEKÂNLAR",
       petFriendlyTitle: "Birlikte gidin.",
-      petFriendlyText: "Evcil hayvan kabul eden kafeleri, otelleri, restoranları, parkları, plajları ve hizmetleri bulun. Konum, harita, kurallar, topluluk onayları ve rotalar tek aramada.",
-      discountsTitle: "Gerçek evcil hayvan yaşamında daha az harcayın.",
-      discountsText: "Pet-friendly konaklama, grooming, aksesuar, hizmet ve günlük alışverişlerde üye teklifleri.",
-      communityTitle: "Yakındaki insanlar yardımcı olabilir.",
-      communityText: "Yerel hayvan sahiplerine sorun, öneriler paylaşın ve kayıp ya da bulunan hayvanların sahiplerine ulaşmasına yardımcı olun.",
-      healthTitle: "Güvenle bakım yapın.",
-      healthText: "Sağlık, bakım, grooming ve günlük iyilik hali için faydalı bilgi ve hizmetler.",
-      marketplaceTitle: "Gerçek evcil hayvan yaşamı için faydalı şeyler.",
-      marketplaceText: "Ürünler, hizmetler, aksesuarlar ve topluluk ilanları tek yerde. Üyeler 50'ye kadar ücretsiz ilan yayınlayabilir.",
-      greenTitle: "Hayvanlarla tanışın. Sorumlu keşfedin.",
-      greenText: "Kendi evcil hayvanınız yok mu? Hayvanat bahçeleri, akvaryumlar, wildlife parkları, çiftlikler, barınaklar ve sorumlu hayvan deneyimlerini keşfedin.",
-      coverTitle: "Sıradaki sizin evcil hayvanınız olabilir.",
-      coverText: "Cover Star, yarışmalar ve farklı hayvanların kişiliğini kutlayan editorial projelere katılın.",
-      helpTitle: "Görüldü. Paylaşıldı. Yardım edildi.",
-      helpText: "Yuva, kurtarma veya acil desteğe ihtiyaç duyan hayvanların daha fazla görünmesini sağlayın.",
-      businessTitle: "İşletmenizi hayvan sahiplerinin dünyasına taşıyın.",
-      businessText: "Oteller, kafeler, groomerlar, veterinerler, mağazalar, markalar ve hizmetler daha görünür olabilir ve üyelere avantaj sunabilir.",
-      nearby: "Yakında",
-      map: "Harita",
-      location: "Konum",
-      routes: "Rotalar",
-      petRules: "Kurallar",
-      verified: "Topluluk",
-      lostFound: "Kayıp / bulunan",
-      hotel: "Pet-friendly konaklama",
-      grooming: "Grooming",
-      offers: "Üye teklifleri",
-      services: "Hizmetler",
-      zoo: "Hayvanat bahçeleri",
-      aquarium: "Akvaryumlar",
-      wildlife: "Wildlife",
-      farms: "Çiftlikler & barınaklar",
-      memberLabel: "ÜYELİK",
-      petFriendlyLabel: "PET-FRIENDLY ARAMA",
-      discountLabel: "ÜYE AVANTAJLARI",
-      communityLabel: "YEREL TOPLULUK",
+      petFriendlyText:
+        "Evcil hayvan dostu kafeleri, otelleri, restoranları, parkları ve yeşil alanları; ayrıca kendi evcil hayvanınız olmasa bile hayvanlarla vakit geçirebileceğiniz çiftlikleri, barınakları ve diğer yerleri keşfedin.",
+
       healthLabel: "SAĞLIK & BAKIM",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "HAYVAN DENEYİMLERİ · YEŞİL TURİZM",
+      healthTitle: "Güvenle bakım yapın.",
+      healthText:
+        "Sağlık, esenlik, grooming, önleyici bakım ve sorumlu günlük bakım hakkında pratik bilgiler.",
+
       coverLabel: "COVER STAR",
-      helpLabel: "HAYVANLARA YARDIM",
-      businessLabel: "PETS & DOGUE İLE ÇALIŞIN"
+      coverTitle: "Sıradaki sizin evcil dostunuz olabilir.",
+      coverText:
+        "Yalnızca Club üyelerine özel bir yarışma. Topluluk, PETS & DOGUE kapağında yer alacak kazananı seçer; diğer beş finalist ise dergide kendi hikâyesine ve fotoğraflarına sahip olur.",
+      vote: "OY VER",
+
+      communityLabel: "YEREL TOPLULUK",
+      communityTitle: "Yakınınızda olanların bir parçası olun.",
+      communityText:
+        "Yakınınızdaki hayvanseverlerle tanışın, etkinlikleri ve önerileri keşfedin, sohbet edin, buluşmalar düzenleyin ve kayıp ya da bulunan hayvanların ailelerine kavuşmasına yardımcı olun.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "Satın al. Sat. Ücretsiz ver. Bul.",
+      marketplaceText:
+        "Evcil hayvan ürünleri, hizmetleri ve faydalı ilanlar için topluluk marketplace'i. Satın alın, satın, ücretsiz verin, ihtiyacınızı arayın veya kendi ilanınızı yayınlayın.",
+
+      helpLabel: "HAYVANLARA YARDIM EDİN",
+      helpTitle: "Dünyanın her yerindeki hayvanlara yardım edin.",
+      helpText:
+        "Dünyanın herhangi bir yerinde kurtarılmaya, tedaviye, sahiplendirilmeye, geçici yuvaya veya acil desteğe ihtiyaç duyan hayvanların daha fazla görünür olmasına yardımcı olun.",
+
+      fashionLabel: "MODA & STİL",
+      fashionTitle: "Moda. Stil. Yeni sezon.",
+      fashionText:
+        "Yeni evcil hayvan modası, aksesuarlar, grooming ilhamı ve karakterli editoryal görünümler.",
+
+      wellnessLabel: "WELLNESS & SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "Modern evcil hayvan yaşamı için sakinlik, bakım, grooming, spa deneyimleri ve esenlik fikirleri.",
+
+      beautyLabel: "GÜZELLİK & STİL",
+      beautyTitle: "Güzellik & grooming",
+      beautyText:
+        "Grooming trendleri, güzel mekânlar, profesyonel bakım ve etkileyici evcil hayvan stili.",
+
+      activeLabel: "AKTİF YAŞAM",
+      activeTitle: "Spor & aktif yaşam",
+      activeText:
+        "Birlikte daha sağlıklı ve aktif bir yaşam için hareket, fitness, açık hava aktiviteleri ve ilham.",
+
+      ad: "BİZİMLE REKLAM VERİN",
+      adTitle: "Markanız burada olabilir.",
+      adText:
+        "Premium reklamlar, mobil yerleşimler ve özel kampanyalarla markanızı PETS & DOGUE kitlesinin karşısına çıkarın.",
+      advertise: "Bizimle reklam verin",
+
+      join: "Club'a katılın",
+
+      howItWorks: "Nasıl çalışır",
+      close: "Kapat",
+      back: "Geri"
     },
 
     ar: {
-      hero: "عالم رقمي مفيد للأشخاص الذين يحبون الحيوانات: أماكن للاكتشاف، وتوفير، ومساعدة محلية، ورعاية، ومجتمع، وتجارب حقيقية في مكان واحد.",
-      membershipTitle: "المزيد لحيوانك الأليف طوال العام.",
-      membershipText: "مقابل £10 سنويًا يحصل الأعضاء على عروض خاصة وخصومات ومزايا Marketplace ومسابقات وفرص ضمن عالم PETS & DOGUE.",
+      latest: "أحدث القصص",
+
+      membershipLabel: "نادي PETS & DOGUE",
+      membershipTitle: "المزيد لحيوانك الأليف. طوال العام.",
+      membershipText:
+        "عضوية واحدة تربطك بالمجتمع والعروض الخاصة والمسابقات في عالم PETS & DOGUE.",
+
+      discounts: "خصومات النادي",
+      contests: "المسابقات والتصويت",
+      community: "المجتمع العالمي",
+
+      contestWinner: "الفائز",
+      contestVotes: "المفضل لدى المجتمع",
+
+      petFriendlyLabel: "أماكن صديقة للحيوانات الأليفة",
       petFriendlyTitle: "اذهبوا معًا.",
-      petFriendlyText: "اعثر على المقاهي والفنادق والمطاعم والحدائق والشواطئ والخدمات التي ترحب بالحيوانات. الموقع والخريطة والقواعد وتأكيدات المجتمع والمسارات في بحث واحد سريع.",
-      discountsTitle: "أنفق أقل على الحياة اليومية مع حيوانك.",
-      discountsText: "عروض للأعضاء على الإقامة الصديقة للحيوانات والعناية والإكسسوارات والخدمات والمشتريات اليومية.",
-      communityTitle: "الأشخاص القريبون منك يمكنهم المساعدة.",
-      communityText: "اسأل أصحاب الحيوانات المحليين وشارك التوصيات وساعد في إعادة الحيوانات المفقودة أو التي تم العثور عليها إلى أصحابها.",
-      healthTitle: "اعتنِ بثقة.",
-      healthText: "معلومات وخدمات مفيدة للصحة والعناية والرفاهية اليومية.",
-      marketplaceTitle: "أشياء مفيدة للحياة الحقيقية مع الحيوانات.",
-      marketplaceText: "منتجات وخدمات وإكسسوارات وإعلانات المجتمع في مكان واحد. يمكن للأعضاء نشر ما يصل إلى 50 إعلانًا مجانيًا.",
-      greenTitle: "تعرّف على الحيوانات. اكتشف بمسؤولية.",
-      greenText: "ليس لديك حيوان أليف؟ اكتشف حدائق الحيوان وأحواض الأسماك وحدائق الحياة البرية والمزارع والملاجئ وتجارب الحيوانات المسؤولة.",
-      coverTitle: "قد يكون حيوانك الأليف هو التالي.",
-      coverText: "شارك في Cover Star والمسابقات والمشاريع التحريرية التي تحتفي بالشخصية وكل أنواع الحيوانات.",
-      helpTitle: "شوهد. تمت مشاركته. تمت المساعدة.",
-      helpText: "امنح مزيدًا من الظهور للحيوانات التي تحتاج إلى منزل أو إنقاذ أو مساعدة عاجلة.",
-      businessTitle: "أدخل نشاطك إلى عالم محبي الحيوانات.",
-      businessText: "يمكن للفنادق والمقاهي ومراكز العناية والأطباء البيطريين والمتاجر والعلامات والخدمات أن تصبح أكثر ظهورًا وتقدم مزايا للأعضاء.",
-      nearby: "بالقرب منك",
-      map: "الخريطة",
-      location: "الموقع",
-      routes: "المسارات",
-      petRules: "القواعد",
-      verified: "المجتمع",
-      lostFound: "مفقود / تم العثور عليه",
-      hotel: "إقامة صديقة للحيوانات",
-      grooming: "العناية",
-      offers: "عروض الأعضاء",
-      services: "الخدمات",
-      zoo: "حدائق الحيوان",
-      aquarium: "أحواض الأسماك",
-      wildlife: "الحياة البرية",
-      farms: "مزارع وملاجئ",
-      memberLabel: "العضوية",
-      petFriendlyLabel: "البحث عن الأماكن الصديقة للحيوانات",
-      discountLabel: "مزايا الأعضاء",
-      communityLabel: "المجتمع المحلي",
+      petFriendlyText:
+        "اكتشف المقاهي والفنادق والمطاعم والحدائق والمساحات الخضراء الصديقة للحيوانات الأليفة، بالإضافة إلى المزارع والمحميات والأماكن التي يمكنك فيها قضاء الوقت مع الحيوانات حتى إن لم يكن لديك حيوان أليف.",
+
       healthLabel: "الصحة والعناية",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "تجارب الحيوانات · السياحة الخضراء",
+      healthTitle: "اعتنِ به بثقة.",
+      healthText:
+        "إرشادات عملية حول الصحة والرفاهية والعناية بالمظهر والوقاية والرعاية اليومية المسؤولة.",
+
       coverLabel: "COVER STAR",
+      coverTitle: "قد يكون حيوانك الأليف هو النجم القادم.",
+      coverText:
+        "مسابقة حصرية لأعضاء النادي. يصوّت المجتمع لاختيار الفائز الذي سيظهر على غلاف PETS & DOGUE، بينما يحصل خمسة متأهلين آخرين على قصتهم وصورهم داخل المجلة.",
+      vote: "صوّت",
+
+      communityLabel: "المجتمع المحلي",
+      communityTitle: "كن جزءًا مما يحدث بالقرب منك.",
+      communityText:
+        "تعرّف على محبي الحيوانات في منطقتك، واكتشف الفعاليات والتوصيات، وتواصل مع الآخرين، ونظّم اللقاءات، وساعد الحيوانات المفقودة والتي تم العثور عليها على العودة إلى عائلاتها.",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "اشترِ. بِع. تبرع. ابحث.",
+      marketplaceText:
+        "سوق مجتمعي لمنتجات الحيوانات الأليفة والخدمات والإعلانات المفيدة. اشترِ أو بِع أو تبرع مجانًا أو ابحث عما تحتاج إليه أو انشر إعلانك الخاص.",
+
       helpLabel: "ساعد الحيوانات",
-      businessLabel: "تعاون مع PETS & DOGUE"
+      helpTitle: "ساعد الحيوانات حول العالم.",
+      helpText:
+        "ساعد في زيادة ظهور الحيوانات في أي مكان في العالم عندما تحتاج إلى الإنقاذ أو العلاج أو التبني أو الرعاية المؤقتة أو الدعم العاجل.",
+
+      fashionLabel: "الموضة والأناقة",
+      fashionTitle: "موضة. أناقة. موسم جديد.",
+      fashionText:
+        "أحدث أزياء الحيوانات الأليفة والإكسسوارات وأفكار العناية بالمظهر والإطلالات التحريرية المميزة.",
+
+      wellnessLabel: "العافية والسبا",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "الراحة والعناية والعناية بالمظهر وتجارب السبا وأفكار الرفاهية المصممة للحياة العصرية مع الحيوانات الأليفة.",
+
+      beautyLabel: "الجمال والأناقة",
+      beautyTitle: "الجمال والعناية بالمظهر",
+      beautyText:
+        "اتجاهات العناية بالمظهر والمساحات الجميلة والرعاية الاحترافية والأسلوب المميز للحيوانات الأليفة.",
+
+      activeLabel: "الحياة النشطة",
+      activeTitle: "الرياضة والحياة النشطة",
+      activeText:
+        "الحركة واللياقة والأنشطة الخارجية والإلهام لحياة أكثر صحة ونشاطًا معًا.",
+
+      ad: "أعلن معنا",
+      adTitle: "يمكن أن تكون علامتك التجارية هنا.",
+      adText:
+        "اعرض علامتك التجارية أمام جمهور PETS & DOGUE من خلال الإعلانات المميزة ومواضع الهاتف المحمول والحملات الخاصة.",
+      advertise: "أعلن معنا",
+
+      join: "انضم إلى النادي",
+
+      howItWorks: "كيف يعمل",
+      close: "إغلاق",
+      back: "رجوع"
     },
 
     hi: {
-      hero: "जानवरों से प्यार करने वाले लोगों के लिए एक उपयोगी डिजिटल दुनिया: जगहें, बचत, स्थानीय मदद, देखभाल, समुदाय और वास्तविक अनुभव — सब एक जगह।",
-      membershipTitle: "आपके पालतू के लिए अधिक। पूरे साल।",
-      membershipText: "सालाना £10 में सदस्यों को विशेष ऑफ़र, छूट, Marketplace लाभ, प्रतियोगिताएँ और PETS & DOGUE की अन्य सुविधाएँ मिलती हैं।",
-      petFriendlyTitle: "साथ चलें।",
-      petFriendlyText: "ऐसे कैफ़े, होटल, रेस्तराँ, पार्क, समुद्र तट और सेवाएँ खोजें जहाँ पालतू जानवर स्वागत योग्य हैं। लोकेशन, मैप, नियम, समुदाय की पुष्टि और रूट एक ही खोज में।",
-      discountsTitle: "पालतू जीवन पर कम खर्च करें।",
-      discountsText: "Pet-friendly ठहरने, grooming, accessories, services और रोज़मर्रा की चीज़ों पर सदस्य ऑफ़र।",
-      communityTitle: "आपके आसपास के लोग मदद कर सकते हैं।",
-      communityText: "स्थानीय पालतू मालिकों से पूछें, सुझाव साझा करें और खोए या मिले जानवरों को उनके लोगों तक पहुँचाने में मदद करें।",
-      healthTitle: "विश्वास के साथ देखभाल करें।",
-      healthText: "स्वास्थ्य, देखभाल, grooming और रोज़मर्रा की wellbeing के लिए उपयोगी जानकारी और सेवाएँ।",
-      marketplaceTitle: "असल पालतू जीवन के लिए उपयोगी चीज़ें।",
-      marketplaceText: "Products, services, accessories और community listings एक जगह। सदस्य 50 तक मुफ्त Marketplace ads पोस्ट कर सकते हैं।",
-      greenTitle: "जानवरों से मिलें। जिम्मेदारी से खोजें।",
-      greenText: "अपना पालतू नहीं है? Zoos, aquariums, wildlife parks, farms, sanctuaries और जिम्मेदार animal experiences खोजें।",
-      coverTitle: "अगला आपका पालतू हो सकता है।",
-      coverText: "Cover Star, प्रतियोगिताओं और editorial features में भाग लें जो व्यक्तित्व और हर तरह के जानवर का उत्सव मनाते हैं।",
-      helpTitle: "देखा। साझा किया। मदद मिली।",
-      helpText: "घर, rescue या तत्काल मदद की जरूरत वाले जानवरों को अधिक visibility दें।",
-      businessTitle: "अपने व्यवसाय को pet owners की दुनिया में लाएँ।",
-      businessText: "Hotels, cafés, groomers, vets, shops, brands और pet services अधिक आसानी से खोजे जा सकते हैं और सदस्यों को लाभ दे सकते हैं।",
-      nearby: "पास में",
-      map: "मैप",
-      location: "लोकेशन",
-      routes: "रूट",
-      petRules: "नियम",
-      verified: "समुदाय",
-      lostFound: "खोए / मिले",
-      hotel: "Pet-friendly stays",
-      grooming: "Grooming",
-      offers: "Member offers",
-      services: "Services",
-      zoo: "Zoos",
-      aquarium: "Aquariums",
-      wildlife: "Wildlife",
-      farms: "Farms & sanctuaries",
-      memberLabel: "MEMBERSHIP",
-      petFriendlyLabel: "PET-FRIENDLY SEARCH",
-      discountLabel: "MEMBER BENEFITS",
-      communityLabel: "LOCAL COMMUNITY",
-      healthLabel: "HEALTH & CARE",
-      marketLabel: "MARKETPLACE",
-      greenLabel: "ANIMAL EXPERIENCES · GREEN TOURISM",
-      coverLabel: "COVER STAR",
-      helpLabel: "HELP ANIMALS",
-      businessLabel: "WORK WITH PETS & DOGUE"
-    }
+      latest: "नवीनतम कहानियाँ",
 
+      membershipLabel: "PETS & DOGUE CLUB",
+      membershipTitle: "आपके पालतू के लिए और भी बहुत कुछ। पूरे साल।",
+      membershipText:
+        "एक सदस्यता आपको PETS & DOGUE की दुनिया में समुदाय, विशेष ऑफ़र और प्रतियोगिताओं से जोड़ती है।",
+
+      discounts: "Club छूट",
+      contests: "प्रतियोगिताएँ और मतदान",
+      community: "वैश्विक समुदाय",
+
+      contestWinner: "विजेता",
+      contestVotes: "समुदाय का पसंदीदा",
+
+      petFriendlyLabel: "पालतू-अनुकूल स्थान",
+      petFriendlyTitle: "साथ चलें।",
+      petFriendlyText:
+        "पालतू-अनुकूल कैफ़े, होटल, रेस्तराँ, पार्क और हरे-भरे स्थान खोजें, साथ ही फ़ार्म, पशु अभयारण्य और ऐसी जगहें जहाँ आप जानवरों के साथ समय बिता सकते हैं, भले ही आपके पास अपना पालतू न हो।",
+
+      healthLabel: "स्वास्थ्य और देखभाल",
+      healthTitle: "विश्वास के साथ देखभाल करें।",
+      healthText:
+        "स्वास्थ्य, कल्याण, ग्रूमिंग, रोकथाम और जिम्मेदार दैनिक देखभाल पर व्यावहारिक मार्गदर्शन।",
+
+      coverLabel: "COVER STAR",
+      coverTitle: "अगला सितारा आपका पालतू हो सकता है।",
+      coverText:
+        "केवल Club सदस्यों के लिए प्रतियोगिता। समुदाय उस विजेता के लिए मतदान करता है जो PETS & DOGUE के कवर पर दिखाई देगा, जबकि पाँच अन्य फाइनलिस्ट को पत्रिका में अपनी कहानी और तस्वीरें मिलेंगी।",
+      vote: "वोट करें",
+
+      communityLabel: "स्थानीय समुदाय",
+      communityTitle: "अपने आसपास हो रही गतिविधियों का हिस्सा बनें।",
+      communityText:
+        "अपने आसपास के पशु प्रेमियों से मिलें, कार्यक्रम और सुझाव खोजें, बातचीत करें, मुलाकातें आयोजित करें और खोए या मिले जानवरों को उनके परिवारों से मिलाने में मदद करें।",
+
+      marketplaceLabel: "MARKETPLACE",
+      marketplaceTitle: "खरीदें। बेचें। दें। खोजें।",
+      marketplaceText:
+        "पालतू उत्पादों, सेवाओं और उपयोगी विज्ञापनों के लिए सामुदायिक marketplace। खरीदें, बेचें, मुफ्त दें, अपनी जरूरत की चीज़ खोजें या अपना विज्ञापन प्रकाशित करें।",
+
+      helpLabel: "जानवरों की मदद करें",
+      helpTitle: "दुनिया भर के जानवरों की मदद करें।",
+      helpText:
+        "दुनिया में कहीं भी उन जानवरों को अधिक लोगों तक पहुँचाने में मदद करें जिन्हें बचाव, इलाज, गोद लिए जाने, अस्थायी देखभाल या तत्काल सहायता की आवश्यकता है।",
+
+      fashionLabel: "फैशन और स्टाइल",
+      fashionTitle: "फैशन। स्टाइल। नया सीज़न।",
+      fashionText:
+        "नया पेट फैशन, एक्सेसरीज़, ग्रूमिंग प्रेरणा और व्यक्तित्व से भरपूर एडिटोरियल लुक्स।",
+
+      wellnessLabel: "वेलनेस और SPA",
+      wellnessTitle: "Wellness & SPA",
+      wellnessText:
+        "आधुनिक पालतू जीवन के लिए आराम, देखभाल, ग्रूमिंग, spa अनुभव और कल्याण के विचार।",
+
+      beautyLabel: "ब्यूटी और स्टाइल",
+      beautyTitle: "ब्यूटी और ग्रूमिंग",
+      beautyText:
+        "ग्रूमिंग ट्रेंड्स, खूबसूरत स्थान, पेशेवर देखभाल और अभिव्यक्तिपूर्ण पालतू स्टाइल।",
+
+      activeLabel: "सक्रिय जीवन",
+      activeTitle: "खेल और सक्रिय जीवन",
+      activeText:
+        "एक साथ अधिक स्वस्थ और सक्रिय जीवन के लिए गतिविधि, फिटनेस, आउटडोर अनुभव और प्रेरणा।",
+
+      ad: "हमारे साथ विज्ञापन दें",
+      adTitle: "आपका ब्रांड यहाँ हो सकता है।",
+      adText:
+        "प्रीमियम विज्ञापन, मोबाइल प्लेसमेंट और विशेष अभियानों के माध्यम से अपने ब्रांड को PETS & DOGUE दर्शकों के सामने लाएँ।",
+      advertise: "हमारे साथ विज्ञापन दें",
+
+      join: "Club में शामिल हों",
+
+      howItWorks: "यह कैसे काम करता है",
+      close: "बंद करें",
+      back: "वापस"
+    }
   };
+
+  Object.keys(TEXT).forEach(function (lang) {
+    window.PetsDogueHomepageV2Text[lang] = Object.assign(
+      {},
+      window.PetsDogueHomepageV2Text[lang] || {},
+      TEXT[lang]
+    );
+  });
+
+  /* aliases used by the global PETS & DOGUE language shell */
+  window.PetsDogueHomepageV2Text.ua =
+    window.PetsDogueHomepageV2Text.uk;
+
+  window.PetsDogueHomepageV2Text.cz =
+    window.PetsDogueHomepageV2Text.cs;
+
+  window.PetsDogueHomepageV2Text.gr =
+    window.PetsDogueHomepageV2Text.el;
+
+  window.PetsDogueHomepageV2Text.se =
+    window.PetsDogueHomepageV2Text.sv;
+
+  window.PetsDogueHomepageV2Text.dk =
+    window.PetsDogueHomepageV2Text.da;
 
 })();
