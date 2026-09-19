@@ -792,6 +792,52 @@ const HOW_UK = {
 function howContent(key) {
   const lang = currentLanguage();
 
+  const externalLanguage =
+    window.PetsDogueHomepageV2Text &&
+    window.PetsDogueHomepageV2Text[lang];
+
+  if (externalLanguage) {
+
+    const externalHow =
+      externalLanguage.how ||
+      externalLanguage.howItWorks ||
+      externalLanguage.howContent ||
+      null;
+
+    if (
+      externalHow &&
+      externalHow[key] &&
+      typeof externalHow[key] === "object"
+    ) {
+      const item = externalHow[key];
+
+      if (
+        item.title &&
+        item.intro &&
+        Array.isArray(item.steps) &&
+        item.steps.length
+      ) {
+        return item;
+      }
+    }
+
+    if (
+      externalLanguage[key] &&
+      typeof externalLanguage[key] === "object"
+    ) {
+      const item = externalLanguage[key];
+
+      if (
+        item.title &&
+        item.intro &&
+        Array.isArray(item.steps) &&
+        item.steps.length
+      ) {
+        return item;
+      }
+    }
+  }
+
   if (lang === "ru") {
     return HOW_RU[key] || HOW_EN[key];
   }
@@ -1137,9 +1183,7 @@ function openHowModal(button) {
       preventScroll: true
     });
   }
-}
-
-/* =========================================================
+}/* =========================================================
    STYLES
 ========================================================= */
 
