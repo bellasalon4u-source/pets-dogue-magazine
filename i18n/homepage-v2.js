@@ -1837,27 +1837,317 @@
   };
 
   Object.keys(TEXT).forEach(function (lang) {
-    window.PetsDogueHomepageV2Text[lang] = Object.assign(
-      {},
-      window.PetsDogueHomepageV2Text[lang] || {},
-      TEXT[lang]
-    );
+  window.PetsDogueHomepageV2Text[lang] = Object.assign(
+    {},
+    window.PetsDogueHomepageV2Text[lang] || {},
+    TEXT[lang]
+  );
+});
+
+/* =========================================================
+   HOW IT WORKS — MULTILINGUAL CONTENT
+   IMPORTANT:
+   EN / RU / UK keep their existing detailed HOW content
+   from homepage-v2.js.
+   The languages below prevent fallback to English.
+========================================================= */
+
+const HOW_STEPS = {
+
+  fr: [
+    "Découvrez les possibilités disponibles dans cette rubrique.",
+    "Consultez les informations utiles avant de faire votre choix.",
+    "Utilisez les outils PETS & DOGUE pour trouver plus facilement ce dont vous avez besoin.",
+    "Découvrez les recommandations, les expériences et les nouvelles possibilités de la communauté.",
+    "Revenez à tout moment pour découvrir de nouvelles informations et mises à jour."
+  ],
+
+  de: [
+    "Entdecken Sie die Möglichkeiten in diesem Bereich.",
+    "Prüfen Sie die wichtigsten Informationen, bevor Sie Ihre Wahl treffen.",
+    "Nutzen Sie die PETS & DOGUE Tools, um leichter zu finden, was Sie brauchen.",
+    "Entdecken Sie Empfehlungen, Erfahrungen und neue Möglichkeiten aus der Community.",
+    "Kehren Sie jederzeit zurück, um neue Informationen und Aktualisierungen zu entdecken."
+  ],
+
+  es: [
+    "Descubre las posibilidades disponibles en esta sección.",
+    "Consulta la información útil antes de elegir.",
+    "Utiliza las herramientas de PETS & DOGUE para encontrar más fácilmente lo que necesitas.",
+    "Descubre recomendaciones, experiencias y nuevas oportunidades de la comunidad.",
+    "Vuelve cuando quieras para descubrir nueva información y actualizaciones."
+  ],
+
+  it: [
+    "Scopri le possibilità disponibili in questa sezione.",
+    "Controlla le informazioni utili prima di scegliere.",
+    "Usa gli strumenti PETS & DOGUE per trovare più facilmente ciò di cui hai bisogno.",
+    "Scopri consigli, esperienze e nuove opportunità della community.",
+    "Torna in qualsiasi momento per trovare nuove informazioni e aggiornamenti."
+  ],
+
+  pt: [
+    "Descubra as possibilidades disponíveis nesta secção.",
+    "Consulte as informações úteis antes de fazer a sua escolha.",
+    "Utilize as ferramentas PETS & DOGUE para encontrar mais facilmente aquilo de que precisa.",
+    "Descubra recomendações, experiências e novas oportunidades da comunidade.",
+    "Volte quando quiser para descobrir novas informações e atualizações."
+  ],
+
+  nl: [
+    "Ontdek de mogelijkheden die in deze rubriek beschikbaar zijn.",
+    "Bekijk de nuttige informatie voordat je een keuze maakt.",
+    "Gebruik de PETS & DOGUE-tools om gemakkelijker te vinden wat je nodig hebt.",
+    "Ontdek aanbevelingen, ervaringen en nieuwe mogelijkheden uit de community.",
+    "Kom op elk moment terug voor nieuwe informatie en updates."
+  ],
+
+  pl: [
+    "Odkrywaj możliwości dostępne w tej sekcji.",
+    "Sprawdź przydatne informacje przed dokonaniem wyboru.",
+    "Korzystaj z narzędzi PETS & DOGUE, aby łatwiej znaleźć to, czego potrzebujesz.",
+    "Odkrywaj rekomendacje, doświadczenia i nowe możliwości społeczności.",
+    "Wracaj w dowolnym momencie po nowe informacje i aktualizacje."
+  ],
+
+  cs: [
+    "Objevte možnosti dostupné v této sekci.",
+    "Před výběrem si prohlédněte užitečné informace.",
+    "Používejte nástroje PETS & DOGUE, abyste snadněji našli to, co potřebujete.",
+    "Objevujte doporučení, zkušenosti a nové možnosti komunity.",
+    "Kdykoli se vraťte pro nové informace a aktualizace."
+  ],
+
+  sk: [
+    "Objavte možnosti dostupné v tejto sekcii.",
+    "Pred výberom si pozrite užitočné informácie.",
+    "Používajte nástroje PETS & DOGUE, aby ste jednoduchšie našli to, čo potrebujete.",
+    "Objavujte odporúčania, skúsenosti a nové možnosti komunity.",
+    "Kedykoľvek sa vráťte pre nové informácie a aktualizácie."
+  ],
+
+  hu: [
+    "Fedezze fel az ebben a részben elérhető lehetőségeket.",
+    "A választás előtt tekintse át a hasznos információkat.",
+    "Használja a PETS & DOGUE eszközeit, hogy könnyebben megtalálja, amire szüksége van.",
+    "Fedezze fel a közösség ajánlásait, tapasztalatait és új lehetőségeit.",
+    "Térjen vissza bármikor új információkért és frissítésekért."
+  ],
+
+  ro: [
+    "Descoperă posibilitățile disponibile în această secțiune.",
+    "Consultă informațiile utile înainte de a face o alegere.",
+    "Folosește instrumentele PETS & DOGUE pentru a găsi mai ușor ceea ce ai nevoie.",
+    "Descoperă recomandări, experiențe și noi posibilități din comunitate.",
+    "Revino oricând pentru informații și actualizări noi."
+  ],
+
+  bg: [
+    "Открийте възможностите, налични в този раздел.",
+    "Прегледайте полезната информация, преди да направите своя избор.",
+    "Използвайте инструментите на PETS & DOGUE, за да намирате по-лесно това, от което се нуждаете.",
+    "Откривайте препоръки, опит и нови възможности от общността.",
+    "Връщайте се по всяко време за нова информация и актуализации."
+  ],
+
+  el: [
+    "Ανακαλύψτε τις δυνατότητες που είναι διαθέσιμες σε αυτή την ενότητα.",
+    "Δείτε τις χρήσιμες πληροφορίες πριν κάνετε την επιλογή σας.",
+    "Χρησιμοποιήστε τα εργαλεία του PETS & DOGUE για να βρίσκετε πιο εύκολα ό,τι χρειάζεστε.",
+    "Ανακαλύψτε προτάσεις, εμπειρίες και νέες δυνατότητες από την κοινότητα.",
+    "Επιστρέψτε οποιαδήποτε στιγμή για νέες πληροφορίες και ενημερώσεις."
+  ],
+
+  sv: [
+    "Upptäck möjligheterna som finns i den här delen.",
+    "Läs den användbara informationen innan du gör ditt val.",
+    "Använd PETS & DOGUE-verktygen för att lättare hitta det du behöver.",
+    "Upptäck rekommendationer, erfarenheter och nya möjligheter från communityn.",
+    "Kom tillbaka när som helst för ny information och uppdateringar."
+  ],
+
+  da: [
+    "Oplev mulighederne i denne sektion.",
+    "Se de nyttige oplysninger, før du træffer dit valg.",
+    "Brug PETS & DOGUE-værktøjerne til lettere at finde det, du har brug for.",
+    "Oplev anbefalinger, erfaringer og nye muligheder fra fællesskabet.",
+    "Kom tilbage når som helst for nye oplysninger og opdateringer."
+  ],
+
+  no: [
+    "Oppdag mulighetene som finnes i denne delen.",
+    "Se nyttig informasjon før du gjør valget ditt.",
+    "Bruk PETS & DOGUE-verktøyene for lettere å finne det du trenger.",
+    "Oppdag anbefalinger, erfaringer og nye muligheter fra fellesskapet.",
+    "Kom tilbake når som helst for ny informasjon og oppdateringer."
+  ],
+
+  fi: [
+    "Tutustu tämän osion tarjoamiin mahdollisuuksiin.",
+    "Tarkista hyödylliset tiedot ennen valintasi tekemistä.",
+    "Käytä PETS & DOGUE -työkaluja löytääksesi helpommin tarvitsemasi.",
+    "Tutustu yhteisön suosituksiin, kokemuksiin ja uusiin mahdollisuuksiin.",
+    "Palaa milloin tahansa katsomaan uusia tietoja ja päivityksiä."
+  ],
+
+  tr: [
+    "Bu bölümde sunulan olanakları keşfedin.",
+    "Seçiminizi yapmadan önce yararlı bilgileri inceleyin.",
+    "İhtiyacınız olanı daha kolay bulmak için PETS & DOGUE araçlarını kullanın.",
+    "Topluluğun önerilerini, deneyimlerini ve yeni olanaklarını keşfedin.",
+    "Yeni bilgiler ve güncellemeler için istediğiniz zaman geri dönün."
+  ],
+
+  ar: [
+    "اكتشف الإمكانات المتاحة في هذا القسم.",
+    "اطّلع على المعلومات المفيدة قبل اتخاذ اختيارك.",
+    "استخدم أدوات PETS & DOGUE للعثور بسهولة أكبر على ما تحتاج إليه.",
+    "اكتشف توصيات المجتمع وتجاربه والفرص الجديدة.",
+    "عُد في أي وقت لاكتشاف معلومات وتحديثات جديدة."
+  ],
+
+  hi: [
+    "इस अनुभाग में उपलब्ध संभावनाओं को जानें।",
+    "अपना विकल्प चुनने से पहले उपयोगी जानकारी देखें।",
+    "अपनी ज़रूरत की चीज़ अधिक आसानी से खोजने के लिए PETS & DOGUE के टूल्स का उपयोग करें।",
+    "समुदाय की सिफारिशें, अनुभव और नई संभावनाएँ जानें।",
+    "नई जानकारी और अपडेट के लिए कभी भी वापस आएँ।"
+  ]
+
+};
+
+
+/* =========================================================
+   BUILD HOW CONTENT FROM THE TRANSLATED CARD CONTENT
+   This deliberately excludes EN / RU / UK because those
+   already have richer dedicated content in homepage-v2.js.
+========================================================= */
+
+const HOW_KEYS = {
+
+  petFriendly: [
+    "petFriendlyTitle",
+    "petFriendlyText"
+  ],
+
+  coverStar: [
+    "coverTitle",
+    "coverText"
+  ],
+
+  health: [
+    "healthTitle",
+    "healthText"
+  ],
+
+  community: [
+    "communityTitle",
+    "communityText"
+  ],
+
+  marketplace: [
+    "marketplaceTitle",
+    "marketplaceText"
+  ],
+
+  help: [
+    "helpTitle",
+    "helpText"
+  ],
+
+  fashion: [
+    "fashionTitle",
+    "fashionText"
+  ],
+
+  wellness: [
+    "wellnessTitle",
+    "wellnessText"
+  ],
+
+  beauty: [
+    "beautyTitle",
+    "beautyText"
+  ],
+
+  active: [
+    "activeTitle",
+    "activeText"
+  ]
+
+};
+
+
+Object.keys(HOW_STEPS).forEach(function (lang) {
+
+  const languageText =
+    window.PetsDogueHomepageV2Text[lang];
+
+  if (!languageText) {
+    return;
+  }
+
+  const how = {};
+
+  Object.keys(HOW_KEYS).forEach(function (key) {
+
+    const fields =
+      HOW_KEYS[key];
+
+    const titleKey =
+      fields[0];
+
+    const introKey =
+      fields[1];
+
+    const title =
+      languageText[titleKey];
+
+    const intro =
+      languageText[introKey];
+
+    if (
+      !title ||
+      !intro
+    ) {
+      return;
+    }
+
+    how[key] = {
+      title: title,
+      intro: intro,
+      steps: HOW_STEPS[lang].slice()
+    };
+
   });
 
-  /* aliases used by the global PETS & DOGUE language shell */
-  window.PetsDogueHomepageV2Text.ua =
-    window.PetsDogueHomepageV2Text.uk;
+  languageText.how =
+    Object.assign(
+      {},
+      languageText.how || {},
+      how
+    );
 
-  window.PetsDogueHomepageV2Text.cz =
-    window.PetsDogueHomepageV2Text.cs;
+});
 
-  window.PetsDogueHomepageV2Text.gr =
-    window.PetsDogueHomepageV2Text.el;
 
-  window.PetsDogueHomepageV2Text.se =
-    window.PetsDogueHomepageV2Text.sv;
+/* =========================================================
+   ALIASES USED BY THE GLOBAL PETS & DOGUE LANGUAGE SHELL
+========================================================= */
 
-  window.PetsDogueHomepageV2Text.dk =
-    window.PetsDogueHomepageV2Text.da;
+window.PetsDogueHomepageV2Text.ua =
+  window.PetsDogueHomepageV2Text.uk;
+
+window.PetsDogueHomepageV2Text.cz =
+  window.PetsDogueHomepageV2Text.cs;
+
+window.PetsDogueHomepageV2Text.gr =
+  window.PetsDogueHomepageV2Text.el;
+
+window.PetsDogueHomepageV2Text.se =
+  window.PetsDogueHomepageV2Text.sv;
+
+window.PetsDogueHomepageV2Text.dk =
+  window.PetsDogueHomepageV2Text.da;
 
 })();
