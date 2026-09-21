@@ -1836,13 +1836,7 @@
     }
   };
 
-  Object.keys(TEXT).forEach(function (lang) {
-  window.PetsDogueHomepageV2Text[lang] = Object.assign(
-    {},
-    window.PetsDogueHomepageV2Text[lang] || {},
-    TEXT[lang]
-  );
-});
+  
 
 /* =========================================================
    HOW IT WORKS — MULTILINGUAL CONTENT
