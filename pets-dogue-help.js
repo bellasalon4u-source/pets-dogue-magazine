@@ -4557,3 +4557,1839 @@
     ]
 
   };
+  function contentFor(language) {
+    return CONTENT[language] || CONTENT.en;
+  }
+
+  function ui(language, key) {
+    return (
+      UI[language]?.[key] ||
+      UI.en[key] ||
+      key
+    );
+  }
+
+  /* =======================================================
+     STYLES
+  ======================================================= */
+
+  function installStyles() {
+
+    if (document.getElementById("petsDogueHelpStyles")) {
+      return;
+    }
+
+    const style = document.createElement("style");
+
+    style.id = "petsDogueHelpStyles";
+
+    style.textContent = `
+
+      #pdHelpButton{
+        position:fixed;
+        right:18px;
+        bottom:calc(20px + env(safe-area-inset-bottom));
+        z-index:2147483000;
+        width:72px;
+        height:72px;
+        padding:0;
+        overflow:hidden;
+        border:3px solid #111;
+        border-radius:50%;
+        background:#fff;
+        box-shadow:0 10px 30px rgba(0,0,0,.24);
+        touch-action:none;
+        user-select:none;
+        -webkit-user-select:none;
+        cursor:grab;
+      }
+
+      #pdHelpButton:active{
+        cursor:grabbing;
+      }
+
+      #pdHelpButton img{
+        display:block;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        pointer-events:none;
+      }
+
+      #pdHelpButton::after{
+        content:"?";
+        position:absolute;
+        right:0;
+        bottom:0;
+        width:23px;
+        height:23px;
+        display:grid;
+        place-items:center;
+        border:2px solid #111;
+        border-radius:50%;
+        background:#54ef0b;
+        color:#071007;
+        font:900 14px/1 Arial,sans-serif;
+      }
+
+      #pdHelpBackdrop{
+        position:fixed;
+        inset:0;
+        z-index:2147483001;
+        display:none;
+        background:rgba(0,0,0,.54);
+        backdrop-filter:blur(3px);
+      }
+
+      #pdHelpBackdrop.pd-help-open{
+        display:block;
+      }
+
+      #pdHelpPanel{
+        position:fixed;
+        z-index:2147483002;
+        right:14px;
+        bottom:14px;
+        width:min(470px,calc(100vw - 28px));
+        height:min(760px,calc(100dvh - 28px));
+        display:none;
+        flex-direction:column;
+        overflow:hidden;
+        border:1px solid #111;
+        border-radius:26px;
+        background:#f4efe4;
+        color:#111;
+        box-shadow:0 30px 80px rgba(0,0,0,.34);
+        font-family:Arial,Helvetica,sans-serif;
+      }
+
+      #pdHelpPanel.pd-help-open{
+        display:flex;
+      }
+
+      #pdHelpPanel[dir="rtl"]{
+        direction:rtl;
+        text-align:right;
+      }
+
+      .pd-help-head{
+        flex:0 0 auto;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:14px;
+        background:#070707;
+        color:#fff;
+      }
+
+      .pd-help-miso{
+        flex:0 0 52px;
+        width:52px;
+        height:52px;
+        overflow:hidden;
+        border:2px solid #fff;
+        border-radius:50%;
+        background:#fff;
+      }
+
+      .pd-help-miso img{
+        display:block;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      }
+
+      .pd-help-head-copy{
+        min-width:0;
+        flex:1;
+      }
+
+      .pd-help-brand{
+        margin:0 0 3px;
+        color:#54ef0b;
+        font-size:10px;
+        font-weight:900;
+        letter-spacing:1.4px;
+        text-transform:uppercase;
+      }
+
+      .pd-help-head h2{
+        margin:0;
+        color:#fff;
+        font:400 24px/1.05 Georgia,serif;
+      }
+
+      .pd-help-head-actions{
+        display:flex;
+        gap:7px;
+      }
+
+      .pd-help-round{
+        flex:0 0 42px;
+        width:42px;
+        height:42px;
+        display:grid;
+        place-items:center;
+        padding:0;
+        border:1px solid rgba(255,255,255,.55);
+        border-radius:50%;
+        background:#fff;
+        color:#111;
+        font-size:19px;
+        font-weight:900;
+        cursor:pointer;
+      }
+
+      .pd-help-round.pd-speaking{
+        background:#54ef0b;
+      }
+
+      .pd-help-body{
+        min-height:0;
+        flex:1;
+        overflow:auto;
+        overscroll-behavior:contain;
+        padding:17px;
+      }
+
+      .pd-help-intro{
+        margin:0 0 17px;
+        color:#575148;
+        font-size:14px;
+        line-height:1.5;
+      }
+
+      .pd-help-search{
+        position:relative;
+        margin-bottom:20px;
+      }
+
+      .pd-help-search input{
+        width:100%;
+        height:54px;
+        padding:0 48px 0 16px;
+        border:1px solid #bdb6a8;
+        border-radius:16px;
+        outline:0;
+        background:#fff;
+        color:#111;
+        font-size:15px;
+      }
+
+      .pd-help-search input:focus{
+        border-color:#111;
+        box-shadow:0 0 0 3px #54ef0b;
+      }
+
+      #pdHelpPanel[dir="rtl"] .pd-help-search input{
+        padding:0 16px 0 48px;
+      }
+
+      .pd-help-search-icon{
+        position:absolute;
+        top:50%;
+        right:16px;
+        transform:translateY(-50%);
+        pointer-events:none;
+        font-size:20px;
+      }
+
+      #pdHelpPanel[dir="rtl"] .pd-help-search-icon{
+        right:auto;
+        left:16px;
+      }
+
+      .pd-help-section-title{
+        margin:0 0 11px;
+        font-size:11px;
+        font-weight:900;
+        letter-spacing:1.25px;
+        text-transform:uppercase;
+      }
+
+      .pd-help-topics{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:10px;
+      }
+
+      .pd-help-topic{
+        position:relative;
+        min-height:142px;
+        padding:14px 14px 30px;
+        border:1px solid #cfc7b8;
+        border-radius:18px;
+        background:#fff;
+        text-align:left;
+        color:#111;
+        cursor:pointer;
+      }
+
+      #pdHelpPanel[dir="rtl"] .pd-help-topic{
+        text-align:right;
+      }
+
+      .pd-help-topic-icon{
+        width:38px;
+        height:38px;
+        display:grid;
+        place-items:center;
+        margin-bottom:11px;
+        border-radius:50%;
+        background:#54ef0b;
+        color:#111;
+        font-size:18px;
+        font-style:normal;
+      }
+
+      .pd-help-topic strong{
+        display:block;
+        margin-bottom:6px;
+        font-size:14px;
+        line-height:1.2;
+      }
+
+      .pd-help-topic small{
+        display:block;
+        color:#6e685f;
+        font-size:11px;
+        line-height:1.38;
+      }
+
+      .pd-help-topic-arrow{
+        position:absolute;
+        right:14px;
+        bottom:10px;
+        color:#9d978b;
+        font-size:19px;
+        line-height:1;
+      }
+
+      #pdHelpPanel[dir="rtl"] .pd-help-topic-arrow{
+        right:auto;
+        left:14px;
+        transform:scaleX(-1);
+      }
+
+      .pd-help-back{
+        min-height:40px;
+        margin:0 0 13px;
+        padding:0 14px;
+        border:1px solid #111;
+        border-radius:999px;
+        background:#fff;
+        color:#111;
+        font-weight:900;
+        cursor:pointer;
+      }
+
+      .pd-help-topic-heading{
+        margin:2px 0 5px;
+        font:400 27px/1.08 Georgia,serif;
+      }
+
+      .pd-help-topic-description{
+        margin:0 0 16px;
+        color:#6e685f;
+        font-size:13px;
+        line-height:1.45;
+      }
+
+      .pd-help-faq{
+        overflow:hidden;
+        margin-bottom:9px;
+        border:1px solid #cfc7b8;
+        border-radius:15px;
+        background:#fff;
+      }
+
+      .pd-help-question{
+        width:100%;
+        min-height:61px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        padding:13px 14px;
+        border:0;
+        background:#fff;
+        color:#111;
+        text-align:left;
+        font-weight:900;
+        font-size:14px;
+        line-height:1.3;
+        cursor:pointer;
+      }
+
+      #pdHelpPanel[dir="rtl"] .pd-help-question{
+        text-align:right;
+      }
+
+      .pd-help-question-symbol{
+        flex:0 0 auto;
+        font-size:19px;
+      }
+
+      .pd-help-answer-view{
+        padding:18px;
+        border:1px solid #cfc7b8;
+        border-radius:18px;
+        background:#fff;
+      }
+
+      .pd-help-answer-label{
+        margin:0 0 9px;
+        color:#54c90e;
+        font-size:10px;
+        font-weight:900;
+        letter-spacing:1.2px;
+        text-transform:uppercase;
+      }
+
+      .pd-help-answer-view h3{
+        margin:0 0 14px;
+        font:400 25px/1.15 Georgia,serif;
+      }
+
+      .pd-help-answer-view p{
+        margin:0;
+        color:#575148;
+        font-size:15px;
+        line-height:1.6;
+      }
+
+      .pd-help-empty{
+        padding:35px 15px;
+        border:1px solid #cfc7b8;
+        border-radius:17px;
+        background:#fff;
+        color:#575148;
+        text-align:center;
+      }
+
+      .pd-help-footer{
+        flex:0 0 auto;
+        padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+        border-top:1px solid #cfc7b8;
+        background:#fff;
+        color:#6e685f;
+        text-align:center;
+        font-size:10px;
+        font-weight:800;
+        letter-spacing:.5px;
+      }
+
+      @media(max-width:560px){
+
+        #pdHelpButton{
+          width:66px;
+          height:66px;
+          right:14px;
+          bottom:calc(16px + env(safe-area-inset-bottom));
+        }
+
+        #pdHelpPanel{
+          right:0;
+          bottom:0;
+          width:100vw;
+          height:min(88dvh,820px);
+          border-left:0;
+          border-right:0;
+          border-bottom:0;
+          border-radius:24px 24px 0 0;
+        }
+
+        .pd-help-head{
+          padding:14px 16px;
+        }
+
+        .pd-help-body{
+          padding:16px;
+        }
+
+        .pd-help-topics{
+          gap:9px;
+        }
+
+        .pd-help-topic{
+          min-height:139px;
+          padding:13px 13px 29px;
+        }
+      }
+
+      @media(max-width:370px){
+        .pd-help-topics{
+          grid-template-columns:1fr;
+        }
+      }
+
+      #pdHelpButton:focus-visible,
+      #pdHelpPanel button:focus-visible,
+      #pdHelpPanel input:focus-visible{
+        outline:3px solid #54ef0b;
+        outline-offset:3px;
+      }
+
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  /* =======================================================
+     DOM STATE
+  ======================================================= */
+
+  let button = null;
+  let panel = null;
+  let backdrop = null;
+  let bodyBox = null;
+  let searchInput = null;
+  let speakerButton = null;
+
+  let language = detectLanguage();
+
+  let currentScreen = "topics";
+  let activeTopic = "";
+  let activeQuestion = -1;
+
+  let speaking = false;
+
+  /* =======================================================
+     IMAGE
+  ======================================================= */
+
+  function iconUrl() {
+    return (
+      window.PETS_DOGUE_HELP_ICON ||
+      "/miso-help.png"
+    );
+  }
+
+  function imageMarkup() {
+
+    return `
+      <img
+        src="${iconUrl()}"
+        alt="Miso"
+        onerror="
+          if(!this.dataset.fallback){
+            this.dataset.fallback='1';
+            this.src='${FALLBACK_MISO}';
+          }
+        "
+      >
+    `;
+  }
+
+  /* =======================================================
+     BUILD DOM
+  ======================================================= */
+
+  function buildDom() {
+
+    const oldButton =
+      document.getElementById("pdHelpButton");
+
+    const oldBackdrop =
+      document.getElementById("pdHelpBackdrop");
+
+    const oldPanel =
+      document.getElementById("pdHelpPanel");
+
+    if (oldButton || oldBackdrop || oldPanel) {
+      oldButton?.remove();
+      oldBackdrop?.remove();
+      oldPanel?.remove();
+    }
+
+    installStyles();
+
+    backdrop = document.createElement("div");
+    backdrop.id = "pdHelpBackdrop";
+    backdrop.setAttribute("aria-hidden", "true");
+
+    panel = document.createElement("section");
+    panel.id = "pdHelpPanel";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+
+    button = document.createElement("button");
+    button.id = "pdHelpButton";
+    button.type = "button";
+    button.innerHTML = imageMarkup();
+
+    document.body.append(
+      backdrop,
+      panel,
+      button
+    );
+
+    renderPanel();
+    bindFloatingButton();
+
+    backdrop.addEventListener(
+      "click",
+      closeHelp
+    );
+
+    window.addEventListener(
+      "resize",
+      keepButtonOnScreen
+    );
+  }
+
+  /* =======================================================
+     PANEL SHELL
+  ======================================================= */
+
+  function renderPanel() {
+
+    if (!panel) {
+      return;
+    }
+
+    language = detectLanguage();
+
+    const rtl =
+      language === "ar";
+
+    panel.dir =
+      rtl ? "rtl" : "ltr";
+
+    panel.setAttribute(
+      "aria-label",
+      ui(language, "help")
+    );
+
+    button?.setAttribute(
+      "aria-label",
+      ui(language, "help")
+    );
+
+    panel.innerHTML = `
+
+      <header class="pd-help-head">
+
+        <div class="pd-help-miso">
+          ${imageMarkup()}
+        </div>
+
+        <div class="pd-help-head-copy">
+
+          <div class="pd-help-brand">
+            PETS &amp; DOGUE · ${escapeHtml(ui(language, "help"))}
+          </div>
+
+          <h2>
+            ${escapeHtml(ui(language, "title"))}
+          </h2>
+
+        </div>
+
+        <div class="pd-help-head-actions">
+
+          <button
+            id="pdHelpSpeaker"
+            class="pd-help-round"
+            type="button"
+            aria-label="${escapeHtml(ui(language, "speak"))}"
+          >
+            🔊
+          </button>
+
+          <button
+            id="pdHelpClose"
+            class="pd-help-round"
+            type="button"
+            aria-label="${escapeHtml(ui(language, "close"))}"
+          >
+            ×
+          </button>
+
+        </div>
+
+      </header>
+
+      <div
+        id="pdHelpBodyScroll"
+        class="pd-help-body"
+      >
+
+        <p class="pd-help-intro">
+          ${escapeHtml(ui(language, "intro"))}
+        </p>
+
+        <div class="pd-help-search">
+
+          <input
+            id="pdHelpSearch"
+            type="search"
+            autocomplete="off"
+            aria-label="${escapeHtml(ui(language, "search"))}"
+            placeholder="${escapeHtml(ui(language, "placeholder"))}"
+          >
+
+          <span
+            class="pd-help-search-icon"
+            aria-hidden="true"
+          >
+            ⌕
+          </span>
+
+        </div>
+
+        <div id="pdHelpContent"></div>
+
+      </div>
+
+      <footer class="pd-help-footer">
+        PETS &amp; DOGUE — One world. Every pet.
+      </footer>
+
+    `;
+
+    bodyBox =
+      panel.querySelector("#pdHelpContent");
+
+    searchInput =
+      panel.querySelector("#pdHelpSearch");
+
+    speakerButton =
+      panel.querySelector("#pdHelpSpeaker");
+
+    panel
+      .querySelector("#pdHelpClose")
+      .addEventListener(
+        "click",
+        closeHelp
+      );
+
+    speakerButton.addEventListener(
+      "click",
+      toggleSpeech
+    );
+
+    searchInput.addEventListener(
+      "input",
+      function () {
+
+        currentScreen = "search";
+        activeTopic = "";
+        activeQuestion = -1;
+
+        renderSearch(this.value);
+      }
+    );
+
+    resetToMainTopics(false);
+  }
+
+  /* =======================================================
+     RESET TO MAIN TOPICS
+  ======================================================= */
+
+  function resetToMainTopics(clearSearch = true) {
+
+    currentScreen = "topics";
+    activeTopic = "";
+    activeQuestion = -1;
+
+    if (clearSearch && searchInput) {
+      searchInput.value = "";
+    }
+
+    renderTopics();
+
+    const scrollBox =
+      panel?.querySelector("#pdHelpBodyScroll");
+
+    if (scrollBox) {
+      scrollBox.scrollTop = 0;
+    }
+  }
+
+  /* =======================================================
+     MAIN TOPICS SCREEN
+  ======================================================= */
+
+  function renderTopics() {
+
+    if (!bodyBox) {
+      return;
+    }
+
+    currentScreen = "topics";
+    activeTopic = "";
+    activeQuestion = -1;
+
+    const content =
+      contentFor(language);
+
+    bodyBox.innerHTML = `
+
+      <h3 class="pd-help-section-title">
+        ${escapeHtml(ui(language, "topics"))}
+      </h3>
+
+      <div class="pd-help-topics">
+
+        ${content.map(topic => `
+
+          <button
+            class="pd-help-topic"
+            type="button"
+            data-help-topic="${escapeHtml(topic.id)}"
+            aria-label="${escapeHtml(topic.title)}"
+          >
+
+            <i
+              class="pd-help-topic-icon"
+              aria-hidden="true"
+            >
+              ${topic.icon}
+            </i>
+
+            <strong>
+              ${escapeHtml(topic.title)}
+            </strong>
+
+            <small>
+              ${escapeHtml(topic.description)}
+            </small>
+
+            <span
+              class="pd-help-topic-arrow"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+          </button>
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+    bodyBox
+      .querySelectorAll("[data-help-topic]")
+      .forEach(topicButton => {
+
+        topicButton.addEventListener(
+          "click",
+          function () {
+            openTopic(
+              this.dataset.helpTopic
+            );
+          }
+        );
+      });
+  }
+
+  /* =======================================================
+     TOPIC -> QUESTIONS
+  ======================================================= */
+
+  function openTopic(id) {
+
+    const topic =
+      contentFor(language)
+        .find(item => item.id === id);
+
+    if (!topic) {
+      resetToMainTopics();
+      return;
+    }
+
+    currentScreen = "topic";
+    activeTopic = id;
+    activeQuestion = -1;
+
+    bodyBox.innerHTML = `
+
+      <button
+        id="pdHelpBackTopics"
+        class="pd-help-back"
+        type="button"
+      >
+        ← ${escapeHtml(ui(language, "backTopics"))}
+      </button>
+
+      <div
+        class="pd-help-topic-icon"
+        aria-hidden="true"
+      >
+        ${topic.icon}
+      </div>
+
+      <h3 class="pd-help-topic-heading">
+        ${escapeHtml(topic.title)}
+      </h3>
+
+      <p class="pd-help-topic-description">
+        ${escapeHtml(topic.description)}
+      </p>
+
+      <div class="pd-help-question-list">
+
+        ${topic.items.map((item, index) => `
+
+          <article class="pd-help-faq">
+
+            <button
+              class="pd-help-question"
+              type="button"
+              data-help-question="${index}"
+            >
+
+              <span>
+                ${escapeHtml(item.q)}
+              </span>
+
+              <span
+                class="pd-help-question-symbol"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </button>
+
+          </article>
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+    bodyBox
+      .querySelector("#pdHelpBackTopics")
+      .addEventListener(
+        "click",
+        function () {
+          resetToMainTopics();
+        }
+      );
+
+    bodyBox
+      .querySelectorAll("[data-help-question]")
+      .forEach(questionButton => {
+
+        questionButton.addEventListener(
+          "click",
+          function () {
+
+            openAnswer(
+              id,
+              Number(this.dataset.helpQuestion)
+            );
+          }
+        );
+      });
+
+    scrollHelpToTop();
+  }
+
+  /* =======================================================
+     QUESTION -> ONE ANSWER
+  ======================================================= */
+
+  function openAnswer(topicId, questionIndex) {
+
+    const topic =
+      contentFor(language)
+        .find(item => item.id === topicId);
+
+    if (!topic) {
+      resetToMainTopics();
+      return;
+    }
+
+    const item =
+      topic.items[questionIndex];
+
+    if (!item) {
+      openTopic(topicId);
+      return;
+    }
+
+    currentScreen = "answer";
+    activeTopic = topicId;
+    activeQuestion = questionIndex;
+
+    bodyBox.innerHTML = `
+
+      <button
+        id="pdHelpBackQuestions"
+        class="pd-help-back"
+        type="button"
+      >
+        ← ${escapeHtml(ui(language, "backQuestions"))}
+      </button>
+
+      <div class="pd-help-answer-view">
+
+        <div class="pd-help-answer-label">
+          ${escapeHtml(topic.title)}
+        </div>
+
+        <h3>
+          ${escapeHtml(item.q)}
+        </h3>
+
+        <p>
+          ${escapeHtml(item.a)}
+        </p>
+
+      </div>
+
+    `;
+
+    bodyBox
+      .querySelector("#pdHelpBackQuestions")
+      .addEventListener(
+        "click",
+        function () {
+          openTopic(topicId);
+        }
+      );
+
+    scrollHelpToTop();
+  }
+
+  /* =======================================================
+     SEARCH
+  ======================================================= */
+
+  function normalizeSearch(value) {
+
+    return String(value || "")
+      .toLocaleLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+  }
+
+  function allAnswers() {
+
+    const output = [];
+
+    contentFor(language).forEach(topic => {
+
+      topic.items.forEach((item, index) => {
+
+        output.push({
+          ...item,
+          topicId: topic.id,
+          questionIndex: index,
+          topic: topic.title,
+          icon: topic.icon
+        });
+      });
+    });
+
+    return output;
+  }
+
+  function renderSearch(query) {
+
+    if (!bodyBox) {
+      return;
+    }
+
+    const cleanQuery =
+      normalizeSearch(query);
+
+    if (cleanQuery.length < 2) {
+      resetToMainTopics(false);
+      return;
+    }
+
+    currentScreen = "search";
+
+    const words =
+      cleanQuery
+        .split(/\s+/)
+        .filter(Boolean);
+
+    const matches =
+      allAnswers()
+        .map(item => {
+
+          const haystack =
+            normalizeSearch(
+              [
+                item.topic,
+                item.q,
+                item.a
+              ].join(" ")
+            );
+
+          const score =
+            words.reduce(
+              (total, word) =>
+                total +
+                (
+                  haystack.includes(word)
+                    ? 1
+                    : 0
+                ),
+              0
+            );
+
+          return {
+            ...item,
+            score
+          };
+        })
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score);
+
+    if (!matches.length) {
+
+      bodyBox.innerHTML = `
+
+        <h3 class="pd-help-section-title">
+          ${escapeHtml(ui(language, "results"))}
+        </h3>
+
+        <div class="pd-help-empty">
+          ${escapeHtml(ui(language, "noResults"))}
+        </div>
+
+      `;
+
+      return;
+    }
+
+    bodyBox.innerHTML = `
+
+      <h3 class="pd-help-section-title">
+        ${escapeHtml(ui(language, "results"))}
+      </h3>
+
+      ${matches.slice(0, 20).map((item, index) => `
+
+        <article class="pd-help-faq">
+
+          <button
+            class="pd-help-question"
+            type="button"
+            data-search-result="${index}"
+          >
+
+            <span>
+              ${escapeHtml(item.q)}
+            </span>
+
+            <span
+              class="pd-help-question-symbol"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+          </button>
+
+        </article>
+
+      `).join("")}
+
+    `;
+
+    bodyBox
+      .querySelectorAll("[data-search-result]")
+      .forEach(resultButton => {
+
+        resultButton.addEventListener(
+          "click",
+          function () {
+
+            const result =
+              matches[
+                Number(this.dataset.searchResult)
+              ];
+
+            if (!result) {
+              return;
+            }
+
+            if (searchInput) {
+              searchInput.value = "";
+            }
+
+            openAnswer(
+              result.topicId,
+              result.questionIndex
+            );
+          }
+        );
+      });
+  }
+
+  /* =======================================================
+     SCROLL
+  ======================================================= */
+
+  function scrollHelpToTop() {
+
+    const scrollBox =
+      panel?.querySelector("#pdHelpBodyScroll");
+
+    if (!scrollBox) {
+      return;
+    }
+
+    scrollBox.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  /* =======================================================
+     SPEECH
+  ======================================================= */
+
+  function speechLanguage() {
+
+    const map = {
+      en: "en-GB",
+      uk: "uk-UA",
+      ru: "ru-RU",
+      fr: "fr-FR",
+      de: "de-DE",
+      es: "es-ES",
+      it: "it-IT",
+      pt: "pt-PT",
+      nl: "nl-NL",
+      pl: "pl-PL",
+      cs: "cs-CZ",
+      sk: "sk-SK",
+      hu: "hu-HU",
+      ro: "ro-RO",
+      bg: "bg-BG",
+      el: "el-GR",
+      sv: "sv-SE",
+      da: "da-DK",
+      no: "nb-NO",
+      fi: "fi-FI",
+      tr: "tr-TR",
+      ar: "ar-SA",
+      hi: "hi-IN"
+    };
+
+    return map[language] || language;
+  }
+
+  function textToSpeak() {
+
+    if (!panel) {
+      return "";
+    }
+
+    const visibleText =
+      panel
+        .querySelector("#pdHelpBodyScroll")
+        ?.innerText || "";
+
+    return [
+      ui(language, "title"),
+      visibleText
+    ]
+      .filter(Boolean)
+      .join(". ");
+  }
+
+  function stopSpeech() {
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+
+    speaking = false;
+    updateSpeaker();
+  }
+
+  function startSpeech() {
+
+    if (!("speechSynthesis" in window)) {
+      return;
+    }
+
+    const text =
+      textToSpeak();
+
+    if (!text) {
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+      new SpeechSynthesisUtterance(text);
+
+    utterance.lang =
+      speechLanguage();
+
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    utterance.onstart = function () {
+      speaking = true;
+      updateSpeaker();
+    };
+
+    utterance.onend = function () {
+      speaking = false;
+      updateSpeaker();
+    };
+
+    utterance.onerror = function () {
+      speaking = false;
+      updateSpeaker();
+    };
+
+    window.speechSynthesis.speak(
+      utterance
+    );
+  }
+
+  function toggleSpeech() {
+
+    if (speaking) {
+      stopSpeech();
+    } else {
+      startSpeech();
+    }
+  }
+
+  function updateSpeaker() {
+
+    if (!speakerButton) {
+      return;
+    }
+
+    speakerButton.classList.toggle(
+      "pd-speaking",
+      speaking
+    );
+
+    speakerButton.textContent =
+      speaking ? "🔇" : "🔊";
+
+    const label =
+      speaking
+        ? ui(language, "stop")
+        : ui(language, "speak");
+
+    speakerButton.setAttribute(
+      "aria-label",
+      label
+    );
+
+    speakerButton.title =
+      label;
+  }
+
+  /* =======================================================
+     OPEN / CLOSE
+
+     EVERY OPEN = MAIN HELP TOPICS
+  ======================================================= */
+
+  function openHelp() {
+
+    stopSpeech();
+
+    language = detectLanguage();
+
+    renderPanel();
+
+    resetToMainTopics(true);
+
+    panel.classList.add(
+      "pd-help-open"
+    );
+
+    backdrop.classList.add(
+      "pd-help-open"
+    );
+
+    backdrop.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    button.style.visibility =
+      "hidden";
+
+    document.body.style.overflow =
+      "hidden";
+
+    setTimeout(
+      startSpeech,
+      250
+    );
+  }
+
+  function closeHelp() {
+
+    stopSpeech();
+
+    currentScreen = "topics";
+    activeTopic = "";
+    activeQuestion = -1;
+
+    if (searchInput) {
+      searchInput.value = "";
+    }
+
+    if (bodyBox) {
+      renderTopics();
+    }
+
+    panel?.classList.remove(
+      "pd-help-open"
+    );
+
+    backdrop?.classList.remove(
+      "pd-help-open"
+    );
+
+    backdrop?.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    if (button) {
+      button.style.visibility = "visible";
+    }
+
+    document.body.style.overflow = "";
+  }
+
+  /* =======================================================
+     DRAGGABLE MISO
+  ======================================================= */
+
+  function savedPosition() {
+
+    try {
+      return JSON.parse(
+        localStorage.getItem(POSITION_KEY) || "null"
+      );
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function savePosition(left, top) {
+
+    try {
+
+      localStorage.setItem(
+        POSITION_KEY,
+        JSON.stringify({
+          left,
+          top
+        })
+      );
+
+    } catch (error) {}
+  }
+
+  function restorePosition() {
+
+    if (!button) {
+      return;
+    }
+
+    const saved =
+      savedPosition();
+
+    if (
+      !saved ||
+      !Number.isFinite(saved.left) ||
+      !Number.isFinite(saved.top)
+    ) {
+      return;
+    }
+
+    button.style.left =
+      `${saved.left}px`;
+
+    button.style.top =
+      `${saved.top}px`;
+
+    button.style.right =
+      "auto";
+
+    button.style.bottom =
+      "auto";
+
+    keepButtonOnScreen();
+  }
+
+  function keepButtonOnScreen() {
+
+    if (!button) {
+      return;
+    }
+
+    const rect =
+      button.getBoundingClientRect();
+
+    const padding = 8;
+
+    const maxLeft =
+      Math.max(
+        padding,
+        window.innerWidth -
+        rect.width -
+        padding
+      );
+
+    const maxTop =
+      Math.max(
+        padding,
+        window.innerHeight -
+        rect.height -
+        padding
+      );
+
+    const left =
+      Math.min(
+        Math.max(rect.left, padding),
+        maxLeft
+      );
+
+    const top =
+      Math.min(
+        Math.max(rect.top, padding),
+        maxTop
+      );
+
+    button.style.left =
+      `${left}px`;
+
+    button.style.top =
+      `${top}px`;
+
+    button.style.right =
+      "auto";
+
+    button.style.bottom =
+      "auto";
+  }
+
+  function bindFloatingButton() {
+
+    let dragging = false;
+    let moved = false;
+
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let startTop = 0;
+
+    button.addEventListener(
+      "pointerdown",
+      function (event) {
+
+        if (
+          event.button !== undefined &&
+          event.button !== 0
+        ) {
+          return;
+        }
+
+        const rect =
+          button.getBoundingClientRect();
+
+        dragging = true;
+        moved = false;
+
+        startX = event.clientX;
+        startY = event.clientY;
+        startLeft = rect.left;
+        startTop = rect.top;
+
+        button.setPointerCapture?.(
+          event.pointerId
+        );
+      }
+    );
+
+    button.addEventListener(
+      "pointermove",
+      function (event) {
+
+        if (!dragging) {
+          return;
+        }
+
+        const dx =
+          event.clientX - startX;
+
+        const dy =
+          event.clientY - startY;
+
+        if (
+          Math.abs(dx) > 5 ||
+          Math.abs(dy) > 5
+        ) {
+          moved = true;
+        }
+
+        if (!moved) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const width =
+          button.offsetWidth;
+
+        const height =
+          button.offsetHeight;
+
+        const padding = 8;
+
+        const left =
+          Math.min(
+            Math.max(
+              startLeft + dx,
+              padding
+            ),
+            window.innerWidth -
+            width -
+            padding
+          );
+
+        const top =
+          Math.min(
+            Math.max(
+              startTop + dy,
+              padding
+            ),
+            window.innerHeight -
+            height -
+            padding
+          );
+
+        button.style.left =
+          `${left}px`;
+
+        button.style.top =
+          `${top}px`;
+
+        button.style.right =
+          "auto";
+
+        button.style.bottom =
+          "auto";
+      }
+    );
+
+    button.addEventListener(
+      "pointerup",
+      function (event) {
+
+        if (!dragging) {
+          return;
+        }
+
+        dragging = false;
+
+        button.releasePointerCapture?.(
+          event.pointerId
+        );
+
+        if (moved) {
+
+          const rect =
+            button.getBoundingClientRect();
+
+          savePosition(
+            rect.left,
+            rect.top
+          );
+
+          return;
+        }
+
+        openHelp();
+      }
+    );
+
+    button.addEventListener(
+      "pointercancel",
+      function () {
+        dragging = false;
+      }
+    );
+
+    button.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
+          openHelp();
+        }
+      }
+    );
+
+    restorePosition();
+  }
+
+  /* =======================================================
+     HELPERS
+  ======================================================= */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  /* =======================================================
+     LANGUAGE CHANGE
+  ======================================================= */
+
+  function refreshLanguage() {
+
+    const wasOpen =
+      panel?.classList.contains(
+        "pd-help-open"
+      );
+
+    stopSpeech();
+
+    language =
+      detectLanguage();
+
+    currentScreen = "topics";
+    activeTopic = "";
+    activeQuestion = -1;
+
+    renderPanel();
+
+    if (wasOpen) {
+
+      resetToMainTopics(true);
+
+      panel.classList.add(
+        "pd-help-open"
+      );
+
+      backdrop.classList.add(
+        "pd-help-open"
+      );
+
+      backdrop.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+    }
+  }
+
+  window.addEventListener(
+    "petsdogue:languagechange",
+    refreshLanguage
+  );
+
+  window.addEventListener(
+    "storage",
+    function (event) {
+
+      if (event.key !== LANGUAGE_KEY) {
+        return;
+      }
+
+      refreshLanguage();
+    }
+  );
+
+  /* =======================================================
+     ESCAPE
+  ======================================================= */
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape" &&
+        panel?.classList.contains(
+          "pd-help-open"
+        )
+      ) {
+        closeHelp();
+      }
+    }
+  );
+
+  /* =======================================================
+     PUBLIC API
+  ======================================================= */
+
+  window.PetsDogueHelp = {
+
+    open: function () {
+      openHelp();
+    },
+
+    close: function () {
+      closeHelp();
+    },
+
+    home: function () {
+      resetToMainTopics(true);
+    },
+
+    speak: function () {
+      startSpeech();
+    },
+
+    stop: function () {
+      stopSpeech();
+    }
+
+  };
+
+  /* =======================================================
+     INIT
+  ======================================================= */
+
+  function init() {
+
+    buildDom();
+    restorePosition();
+  }
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      init,
+      {
+        once: true
+      }
+    );
+
+  } else {
+
+    init();
+  }
+
+})();
