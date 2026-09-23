@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
 <meta charset="UTF-8">
 
@@ -20,49 +19,53 @@
 <style>
 
 /* =========================================================
-   PETS & DOGUE
-   ISSUE 01 — MISO CUTE
+   PETS & DOGUE — ISSUE 01 / MISO CUTE
+   EDITORIAL LAYER ONLY
 
-   IMPORTANT:
-   This file styles ONLY the editorial content of Issue 01.
-
-   DO NOT replace or modify:
+   IMPORTANT
+   This file must NOT replace or duplicate:
    - Master Global Header
-   - side menu
-   - language selector
+   - global side menu
+   - global language selector
    - Profile
    - Advertise with us
    - global Ask Miso
-   - accessibility / TTS
-   - other PETS & DOGUE sections
+   - global accessibility / TTS
+
+   All visible editorial copy uses data-i18n.
 ========================================================= */
 
 :root{
-  --miso-black:#080808;
+  --miso-black:#090909;
   --miso-white:#ffffff;
-  --miso-paper:#fffefa;
+  --miso-paper:#fffdf8;
 
   --miso-pink:#ff2d8d;
-  --miso-pink-soft:#ffd8e9;
+  --miso-pink-soft:#ffd9e9;
 
   --miso-blue:#35c9ff;
-  --miso-blue-soft:#dff7ff;
+  --miso-blue-soft:#e4f8ff;
 
   --miso-lime:#baff43;
-  --miso-lime-soft:#efffd1;
+  --miso-lime-soft:#efffd3;
 
   --miso-yellow:#ffe94d;
 
   --miso-gold:#c99a32;
-  --miso-gold-light:#f2d27c;
+  --miso-gold-light:#f0cf76;
 
   --miso-serif:Georgia,"Times New Roman",serif;
   --miso-sans:Arial,Helvetica,sans-serif;
+  --miso-hand:"Brush Script MT","Segoe Script",cursive;
 }
 
 #misoEdition,
 #misoEdition *{
   box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 #misoEdition{
@@ -71,10 +74,8 @@
   margin:0 auto;
   padding:0;
   overflow:hidden;
-
   background:var(--miso-paper);
   color:#111;
-
   font-family:var(--miso-sans);
 }
 
@@ -89,16 +90,17 @@
   text-decoration:none;
 }
 
+#misoEdition button,
+#misoEdition a{
+  -webkit-tap-highlight-color:transparent;
+}
 
 /* =========================================================
-   TYPOGRAPHY
+   EDITORIAL TYPOGRAPHY
 ========================================================= */
 
 .miso-hand{
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
+  font-family:var(--miso-hand);
 }
 
 .miso-serif{
@@ -111,310 +113,175 @@
 
 .miso-section{
   position:relative;
-  padding:34px 20px;
+  padding:46px 22px;
+}
+
+.miso-eyebrow{
+  margin:0 0 10px;
+  font-family:var(--miso-hand);
+  font-size:clamp(27px,6.5vw,43px);
+  line-height:.95;
 }
 
 .miso-section-title{
-  margin:0 0 18px;
-
+  max-width:900px;
+  margin:0 0 24px;
   font-family:var(--miso-serif);
-
-  font-size:clamp(
-    31px,
-    7vw,
-    62px
-  );
-
-  line-height:.94;
-
-  letter-spacing:-1px;
-
+  font-size:clamp(36px,8vw,70px);
+  font-weight:900;
+  line-height:.91;
+  letter-spacing:-1.8px;
   text-transform:uppercase;
 }
 
-.miso-section-copy{
-  max-width:820px;
+.miso-gold-line{
+  width:76px;
+  height:4px;
+  margin:20px 0 27px;
+  background:var(--miso-gold);
+}
 
-  font-size:17px;
-  line-height:1.58;
+.miso-section-copy{
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+
+  font-family:var(--miso-serif);
+  font-size:clamp(18px,4.35vw,22px);
+  line-height:1.68;
+  letter-spacing:.005em;
 
   white-space:pre-line;
 }
 
-
-/* =========================================================
-   LARGE HORIZONTAL PHOTO CAROUSELS
-========================================================= */
-
-.miso-carousel{
-  display:flex;
-
-  gap:14px;
-
-  width:100%;
-
-  overflow-x:auto;
-  overflow-y:hidden;
-
-  padding:
-    6px
-    18px
-    16px;
-
-  scroll-snap-type:x mandatory;
-
-  overscroll-behavior-x:contain;
-
-  -webkit-overflow-scrolling:touch;
-
-  scrollbar-width:none;
+.miso-section-copy::first-letter{
+  font-size:1.08em;
 }
 
-.miso-carousel::-webkit-scrollbar{
-  display:none;
-}
-
-.miso-photo-card{
+.miso-copy-card{
   position:relative;
-
-  flex:
-    0
-    0
-    min(88vw,620px);
-
-  scroll-snap-align:center;
-
-  background:#fff;
-
-  border:3px solid #111;
-
-  border-radius:7px;
-
-  overflow:hidden;
-
-  box-shadow:
-    6px
-    7px
-    0
-    rgba(0,0,0,.10);
+  max-width:840px;
+  margin:0 auto;
+  padding:32px 24px 35px;
+  background:rgba(255,255,255,.96);
+  border-top:1px solid rgba(0,0,0,.08);
+  border-bottom:1px solid rgba(0,0,0,.08);
 }
 
-.miso-photo-card img{
-  width:100%;
-
-  aspect-ratio:.84;
-
-  object-fit:cover;
-}
-
-.miso-photo-caption{
-  padding:
-    11px
-    13px
-    14px;
-
-  background:#fff;
-}
-
-.miso-photo-caption strong{
+.miso-copy-card::before{
+  content:"";
   display:block;
-
-  margin-bottom:4px;
-
-  font-size:18px;
+  width:62px;
+  height:3px;
+  margin:0 0 23px;
+  background:var(--miso-gold);
 }
 
-.miso-photo-caption span{
-  display:block;
-
-  font-size:14px;
-
-  line-height:1.35;
+.miso-pullquote{
+  max-width:820px;
+  margin:28px auto 0;
+  font-family:var(--miso-serif);
+  font-size:clamp(27px,6.5vw,48px);
+  font-weight:900;
+  line-height:1.02;
+  letter-spacing:-1px;
 }
 
+.miso-pullquote em{
+  color:var(--miso-pink);
+  font-style:normal;
+}
 
 /* =========================================================
-   DOTS
-========================================================= */
-
-.miso-dots{
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  gap:7px;
-
-  padding:
-    3px
-    0
-    17px;
-}
-
-.miso-dot{
-  display:block;
-
-  width:9px;
-  height:9px;
-
-  border-radius:50%;
-
-  background:#c9c9c9;
-}
-
-.miso-dot.active{
-  background:var(--miso-pink);
-}
-
-
-/* =========================================================
-   ISSUE COVER
+   HERO / COVER
 ========================================================= */
 
 .miso-cover{
   position:relative;
-
   width:100%;
-
   overflow:hidden;
-
   background:#eee8dc;
 }
 
 .miso-cover-image{
   width:100%;
-
   aspect-ratio:.72;
-
   object-fit:cover;
-
   object-position:center;
 }
 
-
-/* subtle magazine treatment */
-
 .miso-cover::after{
   content:"";
-
   position:absolute;
   inset:0;
-
   pointer-events:none;
-
   background:
     linear-gradient(
       to bottom,
       rgba(0,0,0,.02),
       transparent 50%,
-      rgba(0,0,0,.08)
+      rgba(0,0,0,.10)
     );
 }
 
-
-/* =========================================================
-   EDITOR'S LETTER BUTTON
-========================================================= */
-
 .miso-editors-letter{
   display:flex;
-
   justify-content:center;
-
-  padding:
-    19px
-    20px
-    25px;
-
+  padding:18px 20px 25px;
   background:#fff;
 }
 
 .miso-editors-letter a{
   display:inline-flex;
-
   align-items:center;
   justify-content:center;
-
-  gap:15px;
-
+  gap:14px;
   min-height:48px;
-
-  padding:
-    0
-    29px;
-
+  padding:0 28px;
   border-radius:999px;
-
   background:var(--miso-gold);
-
   color:#fff;
-
-  font-size:16px;
-
+  font-size:15px;
   font-weight:900;
-
+  letter-spacing:.04em;
   text-transform:uppercase;
-
-  box-shadow:
-    0
-    4px
-    12px
-    rgba(0,0,0,.12);
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
 
-
 /* =========================================================
-   HELLO MISO — LARGE FIRST PHOTO
+   HELLO MISO
 ========================================================= */
 
 .miso-hello{
   position:relative;
-
   width:100%;
-
   overflow:hidden;
-
-  background:#dff7ff;
+  background:var(--miso-blue-soft);
 }
 
 .miso-hello-photo{
   position:relative;
-
   width:100%;
 }
 
 .miso-hello-photo img{
   width:100%;
-
-  aspect-ratio:.80;
-
+  aspect-ratio:.82;
   object-fit:cover;
-
   object-position:center;
 }
 
 .miso-hello-title{
   position:absolute;
-
   top:18px;
-  left:17px;
-
+  left:18px;
   z-index:2;
 
-  max-width:80%;
+  max-width:84%;
 
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
-
-  font-size:
-    clamp(
-      44px,
-      11vw,
-      92px
-    );
-
+  font-family:var(--miso-hand);
+  font-size:clamp(42px,11vw,92px);
+  font-weight:700;
   line-height:.82;
 
   color:#090909;
@@ -422,10 +289,8 @@
   transform:rotate(-3deg);
 
   text-shadow:
-    0
-    2px
-    2px
-    rgba(255,255,255,.55);
+    0 2px 2px rgba(255,255,255,.72),
+    0 0 14px rgba(255,255,255,.38);
 }
 
 .miso-hello-title .heart{
@@ -434,96 +299,59 @@
 
 .miso-london-girl{
   position:absolute;
-
   left:19px;
-  bottom:23px;
-
+  bottom:22px;
   z-index:2;
 
-  padding:
-    8px
-    14px;
+  max-width:52%;
+
+  padding:8px 14px;
 
   background:var(--miso-yellow);
 
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
-
-  font-size:
-    clamp(
-      24px,
-      6vw,
-      38px
-    );
+  font-family:var(--miso-hand);
+  font-size:clamp(22px,5.8vw,38px);
+  line-height:1;
 
   transform:rotate(-4deg);
 
-  box-shadow:
-    5px
-    5px
-    0
-    rgba(0,0,0,.12);
+  box-shadow:5px 5px 0 rgba(0,0,0,.12);
 }
 
 .miso-big-happiness{
   position:absolute;
-
   right:18px;
   bottom:22px;
-
   z-index:2;
+
+  max-width:47%;
 
   color:#fff;
 
   text-align:right;
 
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
-
-  font-size:
-    clamp(
-      23px,
-      6vw,
-      42px
-    );
-
-  line-height:.9;
+  font-family:var(--miso-hand);
+  font-size:clamp(21px,5.4vw,40px);
+  line-height:.92;
 
   text-shadow:
-    0
-    3px
-    10px
-    rgba(0,0,0,.75);
+    0 3px 10px rgba(0,0,0,.82);
 }
 
-
-/* =========================================================
-   HELLO TEXT
-========================================================= */
-
 .miso-hello-copy{
-  padding:
-    21px
-    19px
-    29px;
-
+  position:relative;
+  padding:31px 23px 39px;
   background:#fff;
 }
 
 .miso-hello-copy p{
-  max-width:800px;
+  max-width:760px;
+  margin:0 auto;
 
-  margin:0;
-
-  font-size:17px;
-
-  line-height:1.55;
+  font-family:var(--miso-serif);
+  font-size:clamp(19px,4.5vw,23px);
+  line-height:1.62;
 }
-
 
 /* =========================================================
    PAW SWIPE
@@ -531,49 +359,31 @@
 
 .miso-paw-swipe{
   position:relative;
-
   overflow:hidden;
 
-  padding:
-    27px
-    17px
-    32px;
+  padding:34px 17px 39px;
 
   background:
     linear-gradient(
       135deg,
       #fff46c 0%,
-      #fff46c 34%,
+      #fff46c 33%,
       #ffacd2 100%
     );
 
-  border-top:
-    3px
-    solid
-    #111;
-
-  border-bottom:
-    3px
-    solid
-    #111;
+  border-top:3px solid #111;
+  border-bottom:3px solid #111;
 }
 
 .miso-paw-swipe-title{
-  margin:
-    0
-    0
-    20px;
+  max-width:820px;
+  margin:0 auto 25px;
 
   font-family:var(--miso-serif);
-
-  font-size:
-    clamp(
-      38px,
-      9vw,
-      72px
-    );
-
-  line-height:.86;
+  font-size:clamp(39px,9vw,72px);
+  font-weight:900;
+  line-height:.87;
+  letter-spacing:-1.5px;
 
   text-transform:uppercase;
 }
@@ -582,235 +392,141 @@
   color:#ff174f;
 }
 
-
-/* =========================================================
-   PROFILE IMAGE — LARGE
-========================================================= */
-
 .miso-profile-photo{
-  width:100%;
-
+  width:calc(100% - 10px);
   max-width:650px;
 
-  margin:
-    0
-    auto
-    20px;
-
-  padding:8px;
+  margin:0 auto 24px;
+  padding:7px;
 
   background:#111;
 
-  border:
-    3px
-    solid
-    #111;
-
-  border-radius:24px;
+  border:3px solid #111;
+  border-radius:22px;
 
   transform:rotate(-1deg);
 
   box-shadow:
-    8px
-    9px
-    0
-    rgba(0,0,0,.12);
+    8px 9px 0 rgba(0,0,0,.12);
 }
 
 .miso-profile-photo img{
   width:100%;
-
-  aspect-ratio:.82;
-
+  aspect-ratio:.84;
   object-fit:cover;
-
-  border-radius:15px;
+  object-position:center;
+  border-radius:14px;
 }
-
-
-/* =========================================================
-   PROFILE DESCRIPTION CARD
-========================================================= */
 
 .miso-profile-card{
   max-width:760px;
-
   margin:0 auto;
 
-  padding:
-    19px
-    17px;
+  padding:23px 19px 25px;
 
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      .90
-    );
+  background:rgba(255,255,255,.94);
 
-  border:
-    3px
-    solid
-    #111;
+  border:3px solid #111;
 
   box-shadow:
-    7px
-    7px
-    0
-    rgba(0,0,0,.12);
+    7px 7px 0 rgba(0,0,0,.12);
 }
 
 .miso-profile-card h2{
-  margin:
-    0
-    0
-    4px;
+  margin:0 0 5px;
 
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
-
-  font-size:
-    clamp(
-      39px,
-      9vw,
-      64px
-    );
-
+  font-family:var(--miso-hand);
+  font-size:clamp(40px,9vw,64px);
   line-height:1;
 }
 
 .miso-profile-subtitle{
-  margin-bottom:17px;
-
+  margin-bottom:19px;
+  font-family:var(--miso-serif);
   font-size:17px;
-
   font-weight:900;
+  line-height:1.35;
 }
 
 .miso-profile-list{
   list-style:none;
-
   margin:0;
-
   padding:0;
 }
 
 .miso-profile-list li{
   display:grid;
+  grid-template-columns:29px 1fr;
+  gap:6px;
 
-  grid-template-columns:
-    27px
-    1fr;
+  margin-bottom:11px;
 
-  gap:5px;
-
-  margin-bottom:9px;
-
-  font-size:15px;
-
-  line-height:1.38;
+  font-family:var(--miso-serif);
+  font-size:16px;
+  line-height:1.42;
 }
 
 .miso-profile-list strong{
-  text-decoration:underline;
+  font-family:var(--miso-sans);
+  font-size:.94em;
+  font-weight:900;
 }
 
-
-/* =========================================================
-   SWIPE MESSAGE
-========================================================= */
-
 .miso-swipe-message{
-  margin-top:22px;
+  margin-top:26px;
 
   text-align:center;
 
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
+  font-family:var(--miso-hand);
+  font-size:clamp(34px,8.5vw,60px);
+  line-height:.88;
 
-  font-size:
-    clamp(
-      35px,
-      9vw,
-      62px
-    );
-
-  line-height:.85;
-
-  transform:rotate(-3deg);
+  transform:rotate(-2deg);
 }
 
 .miso-swipe-message strong{
   display:block;
 
-  margin-top:8px;
+  margin-top:9px;
 
   font-family:var(--miso-sans);
-
-  font-size:
-    clamp(
-      20px,
-      5vw,
-      28px
-    );
+  font-size:clamp(18px,4.8vw,27px);
+  letter-spacing:.03em;
 }
-
-
-/* =========================================================
-   NOPE / SUPER LIKE / LIKE
-========================================================= */
 
 .miso-actions{
   display:flex;
-
   align-items:flex-start;
   justify-content:center;
-
-  gap:19px;
-
-  margin-top:25px;
+  gap:20px;
+  margin-top:27px;
 }
 
 .miso-action-wrap{
+  min-width:72px;
   text-align:center;
-
   font-size:10px;
-
   font-weight:900;
 }
 
 .miso-action{
   display:flex;
-
   align-items:center;
   justify-content:center;
 
-  width:69px;
-  height:69px;
+  width:68px;
+  height:68px;
 
-  margin-bottom:6px;
+  margin:0 auto 7px;
 
-  border:
-    2px
-    solid
-    rgba(0,0,0,.13);
-
+  border:2px solid rgba(0,0,0,.13);
   border-radius:50%;
 
   background:#fff;
 
   font-size:34px;
 
-  box-shadow:
-    0
-    5px
-    14px
-    rgba(0,0,0,.14);
+  box-shadow:0 5px 14px rgba(0,0,0,.14);
 }
 
 .miso-action.nope{
@@ -825,6 +541,397 @@
   color:#ff2d8d;
 }
 
+/* =========================================================
+   EDITORIAL PHOTO STRIPS
+========================================================= */
+
+.miso-gallery-section{
+  position:relative;
+  overflow:hidden;
+  padding:38px 0 31px;
+}
+
+.miso-gallery-heading{
+  padding:0 21px 20px;
+}
+
+.miso-gallery-heading .miso-hand{
+  font-size:clamp(36px,8vw,63px);
+  line-height:.94;
+}
+
+.miso-gallery-note{
+  max-width:760px;
+  margin:9px auto 0;
+
+  font-family:var(--miso-hand);
+  font-size:clamp(19px,4.5vw,29px);
+  line-height:1;
+
+  text-align:right;
+}
+
+.miso-carousel{
+  display:flex;
+  gap:13px;
+
+  width:100%;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  padding:8px 18px 17px;
+
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:18px;
+
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+
+  scrollbar-width:none;
+}
+
+.miso-carousel::-webkit-scrollbar{
+  display:none;
+}
+
+.miso-photo-card{
+  position:relative;
+
+  flex:0 0 min(82vw,560px);
+
+  scroll-snap-align:center;
+
+  background:#fff;
+
+  border:2px solid #111;
+  border-radius:4px;
+
+  overflow:hidden;
+
+  box-shadow:
+    5px 6px 0 rgba(0,0,0,.10);
+}
+
+.miso-photo-card img{
+  width:100%;
+  aspect-ratio:.82;
+  object-fit:cover;
+  object-position:center;
+}
+
+.miso-photo-caption{
+  min-height:84px;
+  padding:13px 14px 15px;
+  background:#fff;
+}
+
+.miso-photo-caption strong{
+  display:block;
+  margin-bottom:5px;
+
+  font-family:var(--miso-serif);
+  font-size:19px;
+  line-height:1.15;
+}
+
+.miso-photo-caption span{
+  display:block;
+
+  font-family:var(--miso-serif);
+  font-size:14px;
+  line-height:1.4;
+}
+
+.miso-dots{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+
+  padding:3px 0 5px;
+}
+
+.miso-dot{
+  display:block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#c9c9c9;
+  transition:
+    width .2s ease,
+    background .2s ease;
+}
+
+.miso-dot.active{
+  width:22px;
+  border-radius:999px;
+  background:var(--miso-pink);
+}
+
+/* =========================================================
+   COLOUR STORY BLOCKS
+========================================================= */
+
+.miso-story{
+  position:relative;
+  overflow:hidden;
+}
+
+.miso-story-head{
+  padding:42px 21px 23px;
+}
+
+.miso-story-body{
+  padding:35px 23px 43px;
+  background:#fff;
+}
+
+.miso-story-body .miso-section-copy{
+  margin:0 auto;
+}
+
+.miso-story-blue{
+  background:var(--miso-blue);
+}
+
+.miso-story-lime{
+  background:var(--miso-lime);
+}
+
+.miso-story-pink{
+  background:var(--miso-pink-soft);
+}
+
+.miso-story-yellow{
+  background:var(--miso-yellow);
+}
+
+.miso-story-cream{
+  background:#fff5c7;
+}
+
+/* =========================================================
+   LABEL / STICKER
+========================================================= */
+
+.miso-sticker{
+  display:inline-block;
+
+  margin-top:18px;
+  padding:8px 12px;
+
+  border:2px solid #111;
+
+  background:#fff;
+
+  font-family:var(--miso-sans);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+
+  transform:rotate(-2deg);
+}
+
+/* =========================================================
+   ASK MISO EDITORIAL CARD
+========================================================= */
+
+.miso-ask-row{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  max-width:760px;
+  margin:27px auto;
+}
+
+.miso-ask-face{
+  width:112px;
+  height:112px;
+  flex:0 0 112px;
+
+  border-radius:50%;
+  overflow:hidden;
+
+  border:4px solid #111;
+  background:#fff;
+}
+
+.miso-ask-face img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.miso-ask-copy{
+  min-width:0;
+}
+
+.miso-ask-copy .miso-hand{
+  font-size:clamp(32px,7.5vw,49px);
+  line-height:.9;
+}
+
+.miso-ask-copy strong{
+  display:block;
+  margin-top:9px;
+  font-size:21px;
+}
+
+/* =========================================================
+   EVERY PET
+========================================================= */
+
+.miso-pet-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  max-width:760px;
+  margin:21px auto 29px;
+}
+
+.miso-pet-tag{
+  padding:8px 12px;
+
+  border:2px solid #111;
+
+  font-size:13px;
+  font-weight:900;
+}
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.miso-signature{
+  padding:54px 21px;
+  text-align:center;
+  background:#fff;
+}
+
+.miso-signature-name{
+  color:var(--miso-pink);
+
+  font-family:var(--miso-hand);
+  font-size:clamp(54px,13vw,96px);
+  line-height:.84;
+}
+
+.miso-signature-line{
+  margin-top:21px;
+
+  font-family:var(--miso-serif);
+  font-size:clamp(24px,6vw,40px);
+  font-weight:800;
+  line-height:1.1;
+}
+
+.miso-signature-rule{
+  width:72px;
+  height:4px;
+
+  margin:29px auto;
+
+  background:var(--miso-gold);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+#misoEditionFooter{
+  position:relative;
+  overflow:hidden;
+
+  padding:64px 22px 52px;
+
+  background:#050505;
+  color:#fff;
+
+  text-align:center;
+
+  border-top:5px solid var(--miso-gold);
+}
+
+.miso-footer-logo{
+  font-family:var(--miso-serif);
+  font-size:clamp(53px,13vw,105px);
+  line-height:.80;
+  font-weight:900;
+  letter-spacing:-3px;
+}
+
+.miso-footer-tagline{
+  margin-top:24px;
+
+  font-family:var(--miso-serif);
+  font-size:clamp(17px,4vw,26px);
+
+  color:#ddd;
+}
+
+.miso-footer-rule{
+  width:82px;
+  height:2px;
+
+  margin:28px auto;
+
+  background:var(--miso-gold);
+}
+
+.miso-footer-nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:18px 24px;
+
+  font-size:16px;
+  color:#ddd;
+}
+
+.miso-footer-issue{
+  margin-top:34px;
+
+  font-size:12px;
+  letter-spacing:3px;
+
+  color:#777;
+
+  text-transform:uppercase;
+}
+
+/* =========================================================
+   RTL
+========================================================= */
+
+#misoEdition[dir="rtl"]{
+  text-align:right;
+}
+
+#misoEdition[dir="rtl"] .miso-hello-title{
+  left:auto;
+  right:18px;
+}
+
+#misoEdition[dir="rtl"] .miso-london-girl{
+  left:auto;
+  right:19px;
+}
+
+#misoEdition[dir="rtl"] .miso-big-happiness{
+  right:auto;
+  left:18px;
+  text-align:left;
+}
+
+#misoEdition[dir="rtl"] .miso-gallery-note{
+  text-align:left;
+}
+
+#misoEdition[dir="rtl"] .miso-profile-list li{
+  grid-template-columns:1fr 29px;
+}
 
 /* =========================================================
    MOBILE
@@ -837,25 +944,31 @@
   }
 
   .miso-section{
-    padding:
-      29px
-      18px;
+    padding:40px 20px;
   }
 
   .miso-section-copy{
-    font-size:16px;
+    font-size:18px;
+    line-height:1.64;
   }
 
-  .miso-cover-image{
-    min-height:0;
+  .miso-copy-card{
+    padding:29px 21px 33px;
   }
 
   .miso-photo-card{
-    flex-basis:88vw;
+    flex-basis:82vw;
+  }
+
+  .miso-photo-card img{
+    aspect-ratio:.80;
+  }
+
+  .miso-profile-photo{
+    width:calc(100% - 4px);
   }
 
 }
-
 
 /* =========================================================
    TABLET / DESKTOP
@@ -866,14 +979,40 @@
   .miso-carousel{
     padding-left:32px;
     padding-right:32px;
+    scroll-padding-inline:32px;
+  }
+
+  .miso-photo-card{
+    flex-basis:min(55vw,560px);
   }
 
   .miso-hello-photo img{
-    max-height:900px;
+    max-height:920px;
   }
 
   .miso-profile-photo{
     max-width:580px;
+  }
+
+  .miso-story-head{
+    padding-left:7%;
+    padding-right:7%;
+  }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  .miso-carousel{
+    scroll-behavior:auto !important;
   }
 
 }
@@ -883,29 +1022,17 @@
 
 <body>
 
-
 <!-- =======================================================
-     GLOBAL PETS & DOGUE HEADER / MENU
-
-     IMPORTANT:
-     The existing Master Global Shell remains outside/above
-     this editorial content.
-
-     We DO NOT create a second header here.
+     EXISTING MASTER GLOBAL SHELL REMAINS ABOVE THIS CONTENT
 ======================================================= -->
-
 
 <main
   class="miso-edition"
   id="misoEdition"
 >
 
-
 <!-- =======================================================
-     01
-     ISSUE 01 COVER
-
-     Uses uploaded Miso image collection.
+     01 — ISSUE COVER
 ======================================================= -->
 
 <section
@@ -922,7 +1049,6 @@
 
 </section>
 
-
 <div class="miso-editors-letter">
 
   <a href="#misoHello">
@@ -931,20 +1057,14 @@
       EDITOR’S LETTER
     </span>
 
-    <span aria-hidden="true">
-      →
-    </span>
+    <span aria-hidden="true">→</span>
 
   </a>
 
 </div>
 
-
 <!-- =======================================================
-     02
-     HI, I'M MISO CUTE
-
-     LARGE PHOTO
+     02 — HELLO MISO
 ======================================================= -->
 
 <section
@@ -959,58 +1079,44 @@
       alt="Miso Cute in London"
     >
 
-    <div class="miso-hello-title">
-
-      HI, I’M<br>
-
-      MISO CUTE
-
-      <span class="heart">
-        ♡
-      </span>
-
+    <div
+      class="miso-hello-title"
+      data-i18n="hello_title"
+    >
+      HI, I’M<br>MISO CUTE ♡
     </div>
 
-
-    <div class="miso-london-girl">
-
+    <div
+      class="miso-london-girl"
+      data-i18n="london_girl"
+    >
       London Girl ♡
-
     </div>
 
-
-    <div class="miso-big-happiness">
-
-      Small dog.<br>
-
-      Big happiness. ♡
-
+    <div
+      class="miso-big-happiness"
+      data-i18n="big_happiness"
+    >
+      Small dog.<br>Big happiness. ♡
     </div>
 
   </div>
 
 </section>
 
-
 <section class="miso-hello-copy">
 
   <p data-i18n="miso_intro">
-
-    Маленькая пушистая блондинка из Лондона.
-    Модница. Исследовательница.
-    Большая любительница прогулок.
-    И маленькая причина одной большой идеи.
-
+    A tiny fluffy blonde from London.
+    Fashion lover. Explorer.
+    Big fan of long walks.
+    And one small reason behind one very big idea.
   </p>
 
 </section>
 
-
 <!-- =======================================================
-     03
-     PAW-SWIPE PROFILE
-
-     This is Miso's editorial description.
+     03 — PAW SWIPE
 ======================================================= -->
 
 <section
@@ -1020,18 +1126,13 @@
 
   <h2 class="miso-paw-swipe-title">
 
-    <span>
-      ♡
+    <span>♡</span>
+
+    <span data-i18n="paw_swipe_title">
+      PAW-SWIPE:<br>IT’S A MATCH!
     </span>
 
-    PAW-SWIPE:<br>
-
-    IT’S A MATCH!
-
   </h2>
-
-
-  <!-- LARGE PHOTO -->
 
   <div class="miso-profile-photo">
 
@@ -1042,302 +1143,151 @@
 
   </div>
 
-
-  <!-- PROFILE DESCRIPTION -->
-
   <article class="miso-profile-card">
 
     <h2>
-
       Miso Cute
-
-      <span class="miso-heart">
-        ♡
-      </span>
-
+      <span class="miso-heart">♡</span>
     </h2>
-
 
     <div
       class="miso-profile-subtitle"
       data-i18n="miso_profile_subtitle"
     >
-
-      Маленькая пушистая блондинка из Лондона 🇬🇧
-
+      A tiny fluffy blonde from London 🇬🇧
     </div>
-
 
     <ul class="miso-profile-list">
 
-
       <li>
-
-        <span aria-hidden="true">
-          🐾
-        </span>
-
+        <span aria-hidden="true">🐾</span>
         <span>
-
-          <strong data-i18n="profile_name">
-            Имя:
-          </strong>
-
+          <strong data-i18n="profile_name">Name:</strong>
           Miso Cute
-
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          🇬🇧
-        </span>
-
+        <span aria-hidden="true">🇬🇧</span>
         <span>
-
-          <strong data-i18n="profile_city">
-            Город:
-          </strong>
-
+          <strong data-i18n="profile_city">City:</strong>
           London
-
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          🐕
-        </span>
-
+        <span aria-hidden="true">🐕</span>
         <span>
-
-          <strong data-i18n="profile_breed">
-            Порода:
-          </strong>
-
-          <span data-i18n="profile_breed_value">
-            померанский шпиц
-          </span>
-
+          <strong data-i18n="profile_breed">Breed:</strong>
+          <span data-i18n="profile_breed_value">Pomeranian</span>
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          🎂
-        </span>
-
+        <span aria-hidden="true">🎂</span>
         <span>
-
-          <strong data-i18n="profile_age">
-            Возраст:
-          </strong>
-
-          <span data-i18n="profile_age_value">
-            2 года
-          </span>
-
+          <strong data-i18n="profile_age">Age:</strong>
+          <span data-i18n="profile_age_value">2 years</span>
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          📏
-        </span>
-
+        <span aria-hidden="true">📏</span>
         <span>
-
-          <strong data-i18n="profile_size">
-            Размер:
-          </strong>
-
-          <span data-i18n="profile_size_value">
-            S — очень компактная
-          </span>
-
+          <strong data-i18n="profile_size">Size:</strong>
+          <span data-i18n="profile_size_value">S — very compact</span>
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          ☁️
-        </span>
-
+        <span aria-hidden="true">☁️</span>
         <span>
-
-          <strong data-i18n="profile_coat">
-            Шерсть:
-          </strong>
-
-          <span data-i18n="profile_coat_value">
-            пушистая блондинка
-          </span>
-
+          <strong data-i18n="profile_coat">Coat:</strong>
+          <span data-i18n="profile_coat_value">fluffy blonde</span>
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          ♥
-        </span>
-
+        <span aria-hidden="true">♥</span>
         <span>
-
-          <strong data-i18n="profile_character">
-            Характер:
-          </strong>
-
+          <strong data-i18n="profile_character">Personality:</strong>
           <span data-i18n="profile_character_value">
-            мягкий, дружелюбный, ласковый
+            gentle, friendly and affectionate
           </span>
-
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          ✨
-        </span>
-
+        <span aria-hidden="true">✨</span>
         <span>
-
           <strong data-i18n="profile_relationship">
-            Отношения:
+            Relationship status:
           </strong>
-
           <span data-i18n="profile_relationship_value">
-            открыта для новых друзей ♡
+            open to new friends ♡
           </span>
-
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          ★
-        </span>
-
+        <span aria-hidden="true">★</span>
         <span>
-
-          <strong data-i18n="profile_loves">
-            Люблю:
-          </strong>
-
+          <strong data-i18n="profile_loves">I love:</strong>
           <span data-i18n="profile_loves_value">
-            долгие прогулки, путешествия, красивые места,
-            моду, вкусняшки и фото
+            long walks, travel, beautiful places, fashion,
+            treats and photos
           </span>
-
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          ⊘
-        </span>
-
+        <span aria-hidden="true">⊘</span>
         <span>
-
-          <strong data-i18n="profile_dislikes">
-            Не люблю:
-          </strong>
-
+          <strong data-i18n="profile_dislikes">I don't like:</strong>
           <span data-i18n="profile_dislikes_value">
-            когда интересная прогулка заканчивается слишком быстро
+            when an interesting walk ends too quickly
           </span>
-
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          🌍
-        </span>
-
+        <span aria-hidden="true">🌍</span>
         <span>
-
-          <strong data-i18n="profile_looking">
-            Ищу:
-          </strong>
-
+          <strong data-i18n="profile_looking">Looking for:</strong>
           <span data-i18n="profile_looking_value">
-            друзей по всему миру
+            friends around the world
           </span>
-
         </span>
-
       </li>
 
-
       <li>
-
-        <span aria-hidden="true">
-          🔎
-        </span>
-
+        <span aria-hidden="true">🔎</span>
         <span>
-
-          <strong data-i18n="profile_special">
-            Особая примета:
-          </strong>
-
+          <strong data-i18n="profile_special">Special feature:</strong>
           <span data-i18n="profile_special_value">
-            любопытный нос и очень много шерсти
+            a curious nose and a lot of fluff
           </span>
-
         </span>
-
       </li>
 
     </ul>
 
-
     <div class="miso-swipe-message">
 
-      Swipe right?
+      <span data-i18n="swipe_right">
+        Swipe right?
+      </span>
 
-      <strong>
+      <strong data-i18n="its_a_match">
         IT’S A MATCH! ♡
       </strong>
 
     </div>
 
-
     <div
       class="miso-actions"
       aria-label="Paw Swipe"
     >
-
 
       <div class="miso-action-wrap">
 
@@ -1348,10 +1298,11 @@
           ×
         </div>
 
-        NOPE
+        <span data-i18n="action_nope">
+          NOPE
+        </span>
 
       </div>
-
 
       <div class="miso-action-wrap">
 
@@ -1362,10 +1313,11 @@
           ★
         </div>
 
-        SUPER LIKE
+        <span data-i18n="action_super">
+          SUPER LIKE
+        </span>
 
       </div>
-
 
       <div class="miso-action-wrap">
 
@@ -1376,10 +1328,11 @@
           ♥
         </div>
 
-        LIKE
+        <span data-i18n="action_like">
+          LIKE
+        </span>
 
       </div>
-
 
     </div>
 
@@ -1387,105 +1340,129 @@
 
 </section>
 
-
 <!-- =======================================================
-     ЧАСТЬ 2 ПРОДОЛЖАЕТСЯ СРАЗУ ПОСЛЕ ЭТОЙ СТРОКИ.
-     НЕ ДОБАВЛЯТЬ </main>, </body> ИЛИ </html> ЗДЕСЬ.
-======================================================= --><!-- =======================================================
      04 — MY FAVOURITE MOMENTS
-     BIG PHOTOS + HORIZONTAL SWIPE
 ======================================================= -->
 
-<section class="miso-section" style="padding-left:0;padding-right:0;background:linear-gradient(135deg,#efffd1,#fff 52%,#dff7ff);">
+<section
+  class="miso-gallery-section"
+  style="background:linear-gradient(135deg,#efffd1,#fff 52%,#dff7ff);"
+>
 
-  <div style="padding:0 20px 16px;">
+  <div class="miso-gallery-heading">
 
-    <div class="miso-hand"
-         style="font-size:clamp(38px,8vw,64px);line-height:.95;">
+    <div class="miso-hand">
 
       🐾
+
       <span data-i18n="favourite_moments">
-        Мои любимые моменты
+        My favourite moments
       </span>
+
       <span class="miso-heart">♡</span>
 
     </div>
 
-    <div class="miso-hand"
-         style="margin-top:8px;text-align:right;font-size:19px;">
-      Collect Moments Not Things ♡
+    <div
+      class="miso-gallery-note"
+      data-i18n="collect_moments"
+    >
+      Collect moments, not things ♡
     </div>
 
   </div>
 
-
-  <div class="miso-carousel" aria-label="Miso favourite moments">
+  <div
+    class="miso-carousel"
+    aria-label="Miso favourite moments"
+  >
 
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-04.jpg"
         alt="Miso walking and travelling"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
+
         <strong data-i18n="walks_title">
-          Прогулки и путешествия ✈️
+          Walks &amp; travel ✈️
         </strong>
+
         <span data-i18n="walks_text">
-          Новые места, новые маршруты и большой мир.
+          New places, new routes and one very big world.
         </span>
+
       </div>
+
     </article>
 
-
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-05.jpg"
         alt="Miso with her toys"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
+
         <strong data-i18n="toys_title">
-          Мои игрушки 🧸
+          My toys 🧸
         </strong>
+
         <span data-i18n="toys_text">
-          Мячики, игрушки и весёлые дни.
+          Little things for very happy days.
         </span>
+
       </div>
+
     </article>
 
-
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-06.jpg"
         alt="Miso by the sea"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
+
         <strong data-i18n="sea_title">
-          Море 🌊
+          The sea 🌊
         </strong>
+
         <span data-i18n="sea_text">
-          Маленькие лапки. Большой мир.
+          Little paws. Big world.
         </span>
+
       </div>
+
     </article>
 
-
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-07.jpg"
         alt="Miso fashion moment"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
+
         <strong data-i18n="fashion_card_title">
-          Модница 👗
+          Fashion 👗
         </strong>
+
         <span data-i18n="fashion_card_text">
-          Красиво и удобно. Всегда.
+          Beautiful + comfortable. Always.
         </span>
+
       </div>
+
     </article>
 
   </div>
@@ -1499,22 +1476,23 @@
 
 </section>
 
-
 <!-- =======================================================
      05 — WHAT MAKES ME HAPPY
 ======================================================= -->
 
-<section style="background:#fff;padding:30px 0 35px;">
+<section
+  class="miso-gallery-section"
+  style="background:#fff;"
+>
 
-  <div style="padding:0 20px 17px;">
+  <div class="miso-gallery-heading">
 
-    <div class="miso-hand"
-         style="font-size:clamp(37px,8vw,62px);line-height:.95;">
+    <div class="miso-hand">
 
       <span style="color:#ff174f;">♥</span>
 
       <span data-i18n="happy_title">
-        Что делает меня счастливой?
+        What makes me happy?
       </span>
 
       <span class="miso-heart">♡</span>
@@ -1523,81 +1501,119 @@
 
   </div>
 
-
-  <div class="miso-carousel" aria-label="What makes Miso happy">
+  <div
+    class="miso-carousel"
+    aria-label="What makes Miso happy"
+  >
 
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-08.jpg"
         alt="Miso and treats"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
-        <strong data-i18n="food_title">Еда</strong>
+
+        <strong data-i18n="food_title">
+          Food
+        </strong>
+
         <span data-i18n="food_short">
-          Вкусняшки делают жизнь лучше ♡
+          Treats make life better ♡
         </span>
+
       </div>
+
     </article>
 
-
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-09.jpg"
         alt="Miso playing"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
-        <strong data-i18n="games_title">Игры</strong>
+
+        <strong data-i18n="games_title">
+          Games
+        </strong>
+
         <span data-i18n="games_short">
-          Мячики, игрушки и весёлые каждый день! ♡
+          Balls, toys and fun every day! ♡
         </span>
+
       </div>
+
     </article>
 
-
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-10.jpg"
         alt="Miso with a friend"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
-        <strong data-i18n="friends_card_title">Друзья</strong>
+
+        <strong data-i18n="friends_card_title">
+          Friends
+        </strong>
+
         <span data-i18n="friends_card_text">
-          Новые знакомства — мои любимые приключения ♡
+          Meeting new friends is one of my favourite adventures ♡
         </span>
+
       </div>
+
     </article>
 
-
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-11.jpg"
         alt="Miso resting"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
-        <strong data-i18n="rest_title">Отдых 🌙</strong>
+
+        <strong data-i18n="rest_title">
+          Rest 🌙
+        </strong>
+
         <span data-i18n="rest_text">
-          Сон — это маленькое счастье ♡
+          Sleep is a little piece of happiness ♡
         </span>
+
       </div>
+
     </article>
 
-
     <article class="miso-photo-card">
+
       <img
         src="assets/images/edition/miso/miso-12.jpg"
         alt="Miso travelling"
         loading="lazy"
       >
+
       <div class="miso-photo-caption">
-        <strong data-i18n="travel_title">Путешествия 🎈</strong>
+
+        <strong data-i18n="travel_title">
+          Travel 🎈
+        </strong>
+
         <span data-i18n="travel_text">
-          Новые места. Новые истории ♡
+          New places. New stories ♡
         </span>
+
       </div>
+
     </article>
 
   </div>
@@ -1612,28 +1628,2131 @@
 
 </section>
 
-
 <!-- =======================================================
+     CONTINUE DIRECTLY WITH PART 2
+     DO NOT CLOSE MAIN / BODY / HTML HERE
+======================================================= --><!-- =======================================================
      06 — IT'S A MATCH
 ======================================================= -->
 
-<section class="miso-section"
-         style="background:linear-gradient(135deg,#ffd8e9,#fff 65%);">
+<section
+  class="miso-section"
+  style="background:linear-gradient(135deg,#ffd8e9,#fff 65%);"
+>
 
-  <div class="miso-hand"
-       style="font-size:clamp(49px,11vw,88px);line-height:.84;">
+  <div
+    class="miso-eyebrow"
+    data-i18n="match_eyebrow"
+  >
+    hello, new friend ♡
+  </div>
 
-    IT’S A MATCH!
+  <h2 class="miso-section-title">
+    <span data-i18n="match_title">
+      IT’S A MATCH!
+    </span>
     <span class="miso-heart">♡</span>
+  </h2>
+
+  <div class="miso-gold-line"></div>
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_match_intro"
+  >
+Hi!
+
+Now we know each other.
+
+My name is Miso, although almost everyone calls me MISO CUTE 🤍
+
+And, to be honest, I don't mind.
+
+I'm a German Spitz — a Pomeranian, a tiny fluffy blonde living in London.
+
+I'm tiny. Around two kilograms.
+
+I'm gentle, very friendly, curious and I love meeting people.
+
+And I have lots of friends.
+
+I hope there will soon be even more of them.
+
+Maybe you'll be one of them.
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     07 — SMALL DOG. BIG PERSONALITY.
+======================================================= -->
+
+<section
+  class="miso-story miso-story-blue"
+>
+
+  <div class="miso-story-head">
+
+    <div
+      class="miso-eyebrow"
+      data-i18n="personality_eyebrow"
+    >
+      tiny but mighty ♡
+    </div>
+
+    <h2
+      class="miso-section-title"
+      data-i18n="personality_title"
+    >
+      SMALL DOG.<br>
+      BIG PERSONALITY. ♡
+    </h2>
 
   </div>
 
-  <div class="miso-gold-line"
-       style="width:80px;height:4px;background:#c99a32;margin:22px 0;">
+
+  <div
+    class="miso-carousel"
+    aria-label="Miso personality gallery"
+  >
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-13.jpg"
+        alt="Miso exploring"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-14.jpg"
+        alt="Miso outdoors"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-15.jpg"
+        alt="Miso on an adventure"
+        loading="lazy"
+      >
+
+    </article>
+
   </div>
 
-  <div class="miso-section-copy" data-i18n="miso_match_intro">
-Привет!
+
+  <div
+    class="miso-dots"
+    aria-hidden="true"
+  >
+    <span class="miso-dot active"></span>
+    <span class="miso-dot"></span>
+    <span class="miso-dot"></span>
+  </div>
+
+
+  <div class="miso-story-body">
+
+    <div
+      class="miso-section-copy"
+      data-i18n="miso_big_personality"
+    >
+There is one mistake people sometimes make when they look at me.
+
+First: “She's so small!”
+
+And then, for some reason: “She probably likes sitting at home.”
+
+No.
+
+I love exploring the world. Walking for a long time. Finding new places. Going somewhere new. Meeting people.
+
+Sniffing everything that seems interesting.
+
+And quite a lot seems interesting to me.
+
+If there's a road ahead that I haven't walked before, there is one perfectly reasonable question:
+
+why are we still standing here?
+    </div>
+
+
+    <div
+      class="miso-pullquote"
+      data-i18n="personality_quote"
+    >
+      LITTLE PAWS.<br>
+      <em>BIG CURIOSITY.</em>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     08 — MY CITY — LONDON
+======================================================= -->
+
+<section
+  class="miso-story miso-story-lime"
+>
+
+  <div class="miso-story-head">
+
+    <div
+      class="miso-eyebrow"
+      data-i18n="london_eyebrow"
+    >
+      home sweet London ♡
+    </div>
+
+    <h2
+      class="miso-section-title"
+      data-i18n="london_title"
+    >
+      🇬🇧 MY CITY —<br>
+      LONDON ♡
+    </h2>
+
+  </div>
+
+
+  <div
+    class="miso-carousel"
+    aria-label="Miso in London"
+  >
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-16.jpg"
+        alt="Miso in London"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-17.jpg"
+        alt="Miso exploring London"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-18.jpg"
+        alt="Miso on a London adventure"
+        loading="lazy"
+      >
+
+    </article>
+
+  </div>
+
+
+  <div
+    class="miso-dots"
+    aria-hidden="true"
+  >
+    <span class="miso-dot active"></span>
+    <span class="miso-dot"></span>
+    <span class="miso-dot"></span>
+  </div>
+
+
+  <div class="miso-story-body">
+
+    <div
+      class="miso-section-copy"
+      data-i18n="miso_london_text"
+    >
+And this is a wonderful place for a curious little dog.
+
+London is different every day.
+
+Today — a huge green park. Tomorrow — a little café. Then the riverside. A market. An unfamiliar street. A red bus. A new neighbourhood. A new place. A new route.
+
+I love long walks.
+
+Stopping. Looking around. Sniffing. Turning down streets I've never explored before.
+
+For me, a walk isn't simply about leaving the house.
+
+It's a way to discover the world.
+    </div>
+
+
+    <div
+      class="miso-sticker"
+      data-i18n="london_sticker"
+    >
+      MISO'S LONDON
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     09 — FASHION
+======================================================= -->
+
+<section
+  class="miso-story miso-story-pink"
+>
+
+  <div class="miso-story-head">
+
+    <div
+      class="miso-eyebrow"
+      style="color:#ff2d8d;"
+      data-i18n="fashion_eyebrow"
+    >
+      style is a way of life ♡
+    </div>
+
+    <h2
+      class="miso-section-title"
+      data-i18n="fashion_title"
+    >
+      🎀 AND YES.<br>
+      I'M A FASHION GIRL. ♡
+    </h2>
+
+  </div>
+
+
+  <div
+    class="miso-carousel"
+    aria-label="Miso fashion gallery"
+  >
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-19.jpg"
+        alt="Miso fashion"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-20.jpg"
+        alt="Miso wearing a fashionable outfit"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-07.jpg"
+        alt="Miso fashion look"
+        loading="lazy"
+      >
+
+    </article>
+
+  </div>
+
+
+  <div
+    class="miso-dots"
+    aria-hidden="true"
+  >
+    <span class="miso-dot active"></span>
+    <span class="miso-dot"></span>
+    <span class="miso-dot"></span>
+  </div>
+
+
+  <div class="miso-story-body">
+
+    <div
+      class="miso-section-copy"
+      data-i18n="miso_fashion_text"
+    >
+Some people genuinely don't care what they look like.
+
+I respect their choice.
+
+Personally, I have a different opinion.
+
+I like beautiful things. Cute accessories. Bows. Beautiful collars and harnesses. Cosy looks.
+
+But I have one rule:
+
+BEAUTIFUL + COMFORTABLE.
+
+Because real pet fashion should let you remain yourself.
+
+Walk. Move. Explore. Play.
+
+And look wonderful while doing all of it.
+    </div>
+
+
+    <div
+      class="miso-pullquote"
+      data-i18n="fashion_quote"
+    >
+      BEAUTIFUL<br>
+      <em>+ COMFORTABLE.</em>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     10 — PINK
+======================================================= -->
+
+<section
+  style="
+    position:relative;
+    overflow:hidden;
+    padding:54px 22px;
+    background:#ff2d8d;
+    border-top:4px solid #111;
+    border-bottom:4px solid #111;
+  "
+>
+
+  <div
+    class="miso-hand"
+    style="
+      font-size:clamp(36px,8vw,64px);
+      line-height:.95;
+    "
+    data-i18n="pink_eyebrow"
+  >
+    my favourite colour...
+  </div>
+
+
+  <div
+    style="
+      margin-top:12px;
+      font-family:Georgia,serif;
+      font-size:clamp(52px,13vw,105px);
+      line-height:.84;
+      font-weight:900;
+      letter-spacing:-2px;
+    "
+    data-i18n="pink_title"
+  >
+    PINK ✦
+  </div>
+
+
+  <div
+    class="miso-hand"
+    style="
+      margin-top:19px;
+      font-size:31px;
+    "
+    data-i18n="pink_obviously"
+  >
+    obviously ♡
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     11 — HOW PETS & DOGUE STARTED
+======================================================= -->
+
+<section
+  class="miso-section"
+  style="
+    background:
+      linear-gradient(
+        135deg,
+        #35c9ff,
+        #dff7ff 60%,
+        #fff
+      );
+  "
+>
+
+  <div
+    class="miso-eyebrow"
+    data-i18n="origin_eyebrow"
+  >
+    one little dog, one big idea ♡
+  </div>
+
+
+  <h2
+    class="miso-section-title"
+    data-i18n="origin_title"
+  >
+    🌍 I THINK<br>
+    IT ALL STARTED<br>
+    WITH ME
+  </h2>
+
+
+  <div class="miso-gold-line"></div>
+
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_origin_text"
+  >
+When I came into my human's life, an incredible number of questions came with me.
+
+Where can we go together?
+
+Where are animals genuinely welcome?
+
+Where can we walk? Where can we travel? How do we travel?
+
+How do you find a truly good pet-friendly place?
+
+What's new in the animal world?
+
+What's useful for health?
+
+Where are the interesting events?
+
+What should we buy?
+
+Who can we help?
+
+Where can pet parents and their animals meet each other?
+
+And why do you need to open twenty different websites to find all those answers?
+
+One question led to another.
+
+Then another.
+
+And then came an idea:
+
+WHAT IF OUR WHOLE WORLD COULD BE BROUGHT TOGETHER IN ONE PLACE?
+
+Places. Health. Travel. Fashion. Stories. Photography. Events. New discoveries. Useful services. Community. Help.
+
+Animals.
+
+And the people who love them.
+
+That's how PETS & DOGUE began to appear.
+
+A big platform that grew, in part, from the life of one very small dog.
+
+Me.
+  </div>
+
+
+  <div
+    style="
+      max-width:760px;
+      margin:36px auto 0;
+      padding:27px 21px;
+      background:#111;
+      color:#fff;
+      border:3px solid #111;
+      box-shadow:9px 9px 0 #c99a32;
+    "
+  >
+
+    <div
+      class="miso-hand"
+      style="
+        font-size:29px;
+        color:#ff2d8d;
+      "
+      data-i18n="official_title"
+    >
+      official-ish title ♡
+    </div>
+
+
+    <div
+      style="
+        margin-top:8px;
+        font-family:Georgia,serif;
+        font-size:clamp(37px,9vw,67px);
+        font-weight:900;
+        line-height:.95;
+      "
+    >
+      MISO CUTE
+    </div>
+
+
+    <div
+      style="
+        margin-top:12px;
+        color:#f2d27c;
+        font-size:20px;
+        font-weight:800;
+      "
+      data-i18n="chief_inspiration"
+    >
+      Chief Inspiration Officer 🐾
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     12 — SWEET TOOTH
+======================================================= -->
+
+<section
+  class="miso-section miso-story-cream"
+>
+
+  <div
+    class="miso-eyebrow"
+    style="color:#ff2d8d;"
+    data-i18n="sweet_eyebrow"
+  >
+    confession time... ♡
+  </div>
+
+
+  <h2
+    class="miso-section-title"
+    data-i18n="sweet_title"
+  >
+    🍰 THERE'S<br>
+    SOMETHING YOU<br>
+    NEED TO KNOW<br>
+    ABOUT ME
+  </h2>
+
+
+  <div class="miso-gold-line"></div>
+
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_food_text"
+  >
+I have a sweet tooth.
+
+A very big one.
+
+The only problem is that I am very small.
+
+If something delicious is opened anywhere nearby, all my senses immediately switch to high alert.
+
+But Miso needs to say something serious here.
+
+IF A DOG ASKS FOR SOMETHING, THAT DOESN'T MEAN THE DOG CAN HAVE IT.
+
+Human sweets are not dog treats, and some ingredients can be dangerous.
+
+Chocolate — no.
+
+Products containing xylitol — no.
+
+Grapes and raisins — also no.
+
+Please choose treats made specifically for dogs.
+
+Even if a tiny fluffy blonde is sitting in front of you using this face 🥺
+
+Don't give in.
+
+She's a professional.
+  </div>
+
+
+  <div
+    class="miso-pullquote"
+    data-i18n="treat_quote"
+  >
+    LOVE ME.<br>
+    <em>CHOOSE SAFE TREATS.</em>
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     13 — MISO'S JOB
+======================================================= -->
+
+<section
+  class="miso-section"
+  style="
+    background:#baff43;
+    border-top:4px solid #111;
+  "
+>
+
+  <div
+    class="miso-eyebrow"
+    data-i18n="job_eyebrow"
+  >
+    new job alert ♡
+  </div>
+
+
+  <h2
+    class="miso-section-title"
+    data-i18n="job_title"
+  >
+    📲 NOW I HAVE<br>
+    MY OWN JOB<br>
+    AT P&amp;D
+  </h2>
+
+
+  <div class="miso-gold-line"></div>
+
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_job_text"
+  >
+This article isn't simply a story about me.
+
+It's our HELLO 👋🐾
+
+Because from now on, we'll be meeting regularly.
+
+I'll look for the most interesting things happening in the animal world and bring them to you.
+
+New places. Pet-friendly discoveries. Events. New products. Beautiful things. Travel. Interesting stories. Unusual facts. Useful advice.
+
+What's happening in London.
+
+And what's happening far beyond it.
+
+Sometimes I'll go there myself.
+
+Sometimes my friends will.
+
+And afterwards we'll tell you where we went, who we met, what we saw, what we liked and whether you should go there too.
+  </div>
+
+
+  <div
+    class="miso-pullquote"
+    data-i18n="job_quote"
+  >
+    I FIND IT.<br>
+    <em>WE SHARE IT.</em>
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     CONTINUE DIRECTLY WITH PART 3
+     DO NOT CLOSE MAIN / BODY / HTML HERE
+======================================================= --><!-- =======================================================
+     14 — ASK MISO EDITORIAL
+     GLOBAL FLOATING ASK MISO IS NOT TOUCHED
+======================================================= -->
+
+<section
+  class="miso-section"
+  style="
+    background:#35c9ff;
+    border-top:4px solid #111;
+  "
+>
+
+  <div
+    class="miso-eyebrow"
+    data-i18n="ask_eyebrow"
+  >
+    need a little help? ♡
+  </div>
+
+
+  <h2
+    class="miso-section-title"
+    data-i18n="ask_title"
+  >
+    🐾 AND IF<br>
+    YOU NEED<br>
+    MY HELP...
+  </h2>
+
+
+  <div class="miso-gold-line"></div>
+
+
+  <div
+    class="miso-ask-card"
+    style="
+      display:flex;
+      align-items:center;
+      gap:18px;
+      max-width:760px;
+      margin:28px auto;
+      padding:18px;
+      background:#fff;
+      border:3px solid #111;
+      box-shadow:8px 8px 0 rgba(0,0,0,.13);
+    "
+  >
+
+    <div
+      style="
+        width:122px;
+        height:122px;
+        flex:0 0 122px;
+        border-radius:50%;
+        overflow:hidden;
+        border:4px solid #111;
+        background:#fff;
+      "
+    >
+
+      <img
+        src="assets/images/edition/miso/miso-03.jpg"
+        alt="Ask Miso"
+        loading="lazy"
+        style="
+          width:100%;
+          height:100%;
+          object-fit:cover;
+        "
+      >
+
+    </div>
+
+
+    <div>
+
+      <div
+        class="miso-hand"
+        style="
+          font-size:clamp(34px,7vw,48px);
+          line-height:.9;
+        "
+        data-i18n="ask_face"
+      >
+        tap my face ♡
+      </div>
+
+      <strong
+        style="
+          display:block;
+          margin-top:11px;
+          font-size:22px;
+        "
+      >
+        ASK MISO 🐾
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_help_text"
+  >
+On P&D you'll see a small round icon with my face.
+
+Tap Miso.
+
+I'll appear and try to help.
+
+Find the right section.
+
+Work out where to go.
+
+Find information.
+
+Or simply understand where to begin.
+
+So my little face in a circle isn't there only because it looks wonderful in a circle.
+
+Although...
+
+it does.
+
+It's your little button:
+
+ASK MISO 🐾
+  </div>
+
+
+  <div
+    class="miso-pullquote"
+    data-i18n="ask_quote"
+  >
+    LOST?<br>
+    <em>ASK MISO.</em>
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     15 — EVERYONE BELONGS
+======================================================= -->
+
+<section
+  class="miso-section"
+  style="background:#fff;"
+>
+
+  <div
+    class="miso-eyebrow"
+    style="color:#ff2d8d;"
+    data-i18n="everyone_eyebrow"
+  >
+    everybody's invited ♡
+  </div>
+
+
+  <h2
+    class="miso-section-title"
+    data-i18n="everyone_title"
+  >
+    🌎 THERE'S ROOM<br>
+    FOR EVERYONE<br>
+    HERE
+  </h2>
+
+
+  <div
+    class="miso-animal-tags"
+    style="
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin:25px 0 31px;
+      font-weight:900;
+    "
+  >
+
+    <span
+      data-i18n="tag_dogs"
+      style="
+        background:#ff2d8d;
+        padding:9px 13px;
+        border:2px solid #111;
+      "
+    >
+      🐕 DOGS
+    </span>
+
+    <span
+      data-i18n="tag_cats"
+      style="
+        background:#35c9ff;
+        padding:9px 13px;
+        border:2px solid #111;
+      "
+    >
+      🐈 CATS
+    </span>
+
+    <span
+      data-i18n="tag_birds"
+      style="
+        background:#baff43;
+        padding:9px 13px;
+        border:2px solid #111;
+      "
+    >
+      🦜 BIRDS
+    </span>
+
+    <span
+      data-i18n="tag_rabbits"
+      style="
+        background:#ffe94d;
+        padding:9px 13px;
+        border:2px solid #111;
+      "
+    >
+      🐇 RABBITS
+    </span>
+
+    <span
+      data-i18n="tag_horses"
+      style="
+        background:#ffd8e9;
+        padding:9px 13px;
+        border:2px solid #111;
+      "
+    >
+      🐴 HORSES
+    </span>
+
+    <span
+      data-i18n="tag_turtles"
+      style="
+        background:#dff7ff;
+        padding:9px 13px;
+        border:2px solid #111;
+      "
+    >
+      🐢 TURTLES
+    </span>
+
+  </div>
+
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_everyone_text"
+  >
+Cats. Dogs. Parrots. Rabbits. Horses. Turtles. Guinea pigs. Fish. Birds. Reptiles.
+
+Big. Small. Fluffy. Feathered. Smooth. Scaly.
+
+With paws. With wings. With fins.
+
+And even without any of the above.
+
+EVERYONE IS WELCOME.
+
+Because we don't have to be the same to belong to the same community.
+  </div>
+
+
+  <div
+    class="miso-pullquote"
+    data-i18n="everyone_quote"
+  >
+    ONE WORLD.<br>
+    <em>EVERY PET.</em>
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     16 — LET'S BE FRIENDS
+======================================================= -->
+
+<section
+  class="miso-section"
+  style="
+    background:#ffd8e9;
+    border-top:3px solid #111;
+  "
+>
+
+  <div
+    class="miso-eyebrow"
+    data-i18n="friends_eyebrow"
+  >
+    your turn ♡
+  </div>
+
+
+  <h2
+    class="miso-section-title"
+    data-i18n="friends_title"
+  >
+    🤍 LET'S<br>
+    BE FRIENDS
+  </h2>
+
+
+  <div class="miso-gold-line"></div>
+
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_friends_text"
+  >
+Now you know me.
+
+And I want to meet you.
+
+What's your pet's name?
+
+Where do you live?
+
+What do they love?
+
+Where do you go together?
+
+Which place did you especially enjoy?
+
+What's their funniest habit?
+
+Is there a story other people should hear?
+
+Tell us.
+
+Send photographs.
+
+Share your discoveries.
+
+Recommend places.
+
+Meet each other.
+
+Talk.
+
+Because P&D shouldn't be a place where we talk and you simply read.
+
+We want everyone here to be part of the conversation.
+  </div>
+
+
+  <div
+    class="miso-pullquote"
+    data-i18n="tell_story"
+  >
+    TELL US<br>
+    <em>YOUR STORY ♡</em>
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     17 — MISO & FRIENDS
+======================================================= -->
+
+<section
+  class="miso-story miso-story-soft-blue"
+>
+
+  <div class="miso-story-head">
+
+    <div
+      class="miso-eyebrow"
+      style="color:#20bdf6;"
+      data-i18n="adventure_eyebrow"
+    >
+      the adventure starts here ♡
+    </div>
+
+    <h2 class="miso-section-title">
+      ✨ MISO &amp; FRIENDS
+    </h2>
+
+  </div>
+
+
+  <div
+    class="miso-carousel"
+    aria-label="Miso and friends gallery"
+  >
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-10.jpg"
+        alt="Miso with a friend"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-14.jpg"
+        alt="Miso on an adventure"
+        loading="lazy"
+      >
+
+    </article>
+
+
+    <article class="miso-photo-card">
+
+      <img
+        src="assets/images/edition/miso/miso-18.jpg"
+        alt="Miso exploring"
+        loading="lazy"
+      >
+
+    </article>
+
+  </div>
+
+
+  <div
+    class="miso-dots"
+    aria-hidden="true"
+  >
+    <span class="miso-dot active"></span>
+    <span class="miso-dot"></span>
+    <span class="miso-dot"></span>
+  </div>
+
+
+  <div class="miso-story-body">
+
+    <div
+      class="miso-section-copy"
+      data-i18n="miso_and_friends_text"
+    >
+And now the really interesting part begins.
+
+Because I'm not going to explore this enormous world alone.
+
+I have lots of friends.
+
+And there will be new ones.
+
+MISO & FRIENDS will be wherever something interesting is happening.
+
+At the opening of a new pet-friendly place. In a beautiful park. At an event. On a journey. In an unusual hotel. At an exhibition. In a new shop. In a café. By the sea. In another city.
+
+And maybe, one day, in another country.
+
+We'll try things. Look around. Meet people. Explore.
+
+Take photographs — obviously.
+
+And then we'll come back to P&D to share everything with you.
+    </div>
+
+
+    <div
+      class="miso-pullquote"
+      data-i18n="adventure_quote"
+    >
+      THE WORLD IS BIG.<br>
+      <em>COME WITH US.</em>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     18 — FINAL STORY
+======================================================= -->
+
+<section
+  class="miso-section"
+  style="
+    background:#ffe94d;
+    border-top:4px solid #111;
+  "
+>
+
+  <div
+    class="miso-eyebrow"
+    style="color:#ff2d8d;"
+    data-i18n="final_eyebrow"
+  >
+    see you out there ♡
+  </div>
+
+
+  <h2
+    class="miso-section-title"
+    data-i18n="final_title"
+  >
+    🐾 SEE YOU<br>
+    SOMEWHERE<br>
+    IN THE WORLD
+  </h2>
+
+
+  <div class="miso-gold-line"></div>
+
+
+  <div
+    class="miso-section-copy"
+    data-i18n="miso_final_text"
+  >
+So.
+
+I'm Miso Cute.
+
+A tiny fluffy blonde from London.
+
+A Pomeranian.
+
+Fashion girl. Treat enthusiast. Explorer. Lover of long walks.
+
+I'm gentle, I have lots of friends and I'm enormously curious about the world.
+
+And now I have one more mission:
+
+to find interesting things and share them with you.
+
+And my friends will help me.
+
+Today we might meet in London.
+
+Tomorrow — by the sea.
+
+Then — in a new café, a park, at an event or somewhere completely unexpected.
+
+So if one day you see a tiny fluffy blonde very seriously investigating a new place...
+
+it might be me.
+
+Come and say hello.
+
+And if we're far away from each other for now — tap my little circle on P&D.
+
+We'll meet anyway.
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     CONTINUE DIRECTLY WITH PART 4
+     DO NOT CLOSE MAIN / BODY / HTML HERE
+======================================================= --><!-- =======================================================
+     19 — MISO SIGNATURE
+======================================================= -->
+
+<section
+  class="miso-signature"
+  style="
+    background:#fff;
+    padding:54px 20px;
+    text-align:center;
+  "
+>
+
+  <div
+    class="miso-hand"
+    style="
+      color:#ff2d8d;
+      font-size:clamp(54px,13vw,96px);
+      line-height:.84;
+    "
+  >
+    MISO CUTE 🐾
+  </div>
+
+
+  <div
+    style="
+      margin-top:21px;
+      font-family:Georgia,serif;
+      font-size:clamp(24px,6vw,40px);
+      font-weight:800;
+      line-height:1.05;
+    "
+    data-i18n="signature_world"
+  >
+    Small dog. Big world.<br>
+    Come with me.
+  </div>
+
+
+  <div
+    style="
+      width:72px;
+      height:4px;
+      margin:29px auto;
+      background:#c99a32;
+    "
+  ></div>
+
+
+  <div
+    class="miso-hand"
+    style="font-size:31px;"
+  >
+    <span data-i18n="with_love">
+      with love,
+    </span>
+
+    <span class="miso-heart">
+      Miso ♡
+    </span>
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     20 — APPROVED BLACK PETS & DOGUE ENDING
+     DO NOT REMOVE
+======================================================= -->
+
+<footer
+  id="misoEditionFooter"
+  style="
+    position:relative;
+    overflow:hidden;
+    background:#050505;
+    color:#fff;
+    padding:64px 22px 52px;
+    text-align:center;
+    border-top:5px solid #c99a32;
+  "
+>
+
+  <div
+    style="
+      font-family:Georgia,serif;
+      font-size:clamp(53px,13vw,105px);
+      line-height:.80;
+      font-weight:900;
+      letter-spacing:-3px;
+    "
+  >
+    PETS &amp;<br>
+    DOGUE
+  </div>
+
+
+  <div
+    style="
+      margin-top:24px;
+      font-size:clamp(17px,4vw,26px);
+      color:#ddd;
+    "
+  >
+    One world. Every pet.
+  </div>
+
+
+  <div
+    style="
+      width:82px;
+      height:2px;
+      background:#c99a32;
+      margin:28px auto;
+    "
+  ></div>
+
+
+  <nav
+    aria-label="PETS & DOGUE footer"
+    style="
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:18px 24px;
+      font-size:16px;
+      color:#ddd;
+    "
+  >
+
+    <a href="/" data-i18n="footer_home">
+      Home
+    </a>
+
+    <a href="/archive" data-i18n="footer_archive">
+      Archive
+    </a>
+
+    <a href="/privacy" data-i18n="footer_privacy">
+      Privacy
+    </a>
+
+    <a href="/terms" data-i18n="footer_terms">
+      Terms
+    </a>
+
+    <a href="/contact" data-i18n="footer_contact">
+      Contact
+    </a>
+
+  </nav>
+
+
+  <div
+    style="
+      margin-top:34px;
+      font-size:12px;
+      letter-spacing:3px;
+      color:#777;
+      text-transform:uppercase;
+    "
+    data-i18n="issue_footer"
+  >
+    ISSUE 01 · MISO CUTE
+  </div>
+
+</footer>
+
+</main>
+
+
+<script>
+/* =========================================================
+   PETS & DOGUE — ISSUE 01
+   LANGUAGE + CAROUSEL + ACCESSIBILITY BRIDGE
+
+   IMPORTANT:
+   - no second language selector
+   - no second header
+   - no second side menu
+   - no duplicate floating Ask Miso
+   - global TTS remains untouched
+   - Arabic RTL supported
+========================================================= */
+
+(function(){
+
+  "use strict";
+
+
+  const LANGUAGE_ALIASES = {
+    ua:"uk",
+    cz:"cs",
+    gr:"el",
+    se:"sv",
+    dk:"da"
+  };
+
+
+  /* =======================================================
+     BUILT-IN ISSUE 01 DICTIONARIES
+
+     English is the canonical fallback.
+     Russian is included locally.
+
+     All other PETS & DOGUE languages are accepted from
+     the existing global PD_I18N dictionary so Issue 01
+     remains connected to the Master Global Shell.
+  ======================================================= */
+
+  const translations = {
+
+    en:{
+
+      editors_letter:"EDITOR'S LETTER",
+
+      miso_intro:
+        "A tiny fluffy blonde from London. Fashion lover. Explorer. Big fan of long walks. And one small reason behind one very big idea.",
+
+      miso_profile_subtitle:
+        "A tiny fluffy blonde from London 🇬🇧",
+
+      profile_name:"Name:",
+      profile_city:"City:",
+      profile_breed:"Breed:",
+      profile_breed_value:"Pomeranian",
+      profile_age:"Age:",
+      profile_age_value:"2 years",
+      profile_size:"Size:",
+      profile_size_value:"S — very compact",
+      profile_coat:"Coat:",
+      profile_coat_value:"fluffy blonde",
+      profile_character:"Personality:",
+      profile_character_value:"gentle, friendly and affectionate",
+      profile_relationship:"Relationship status:",
+      profile_relationship_value:"open to new friends ♡",
+      profile_loves:"I love:",
+      profile_loves_value:
+        "long walks, travel, beautiful places, fashion, treats and photos",
+      profile_dislikes:"I don't like:",
+      profile_dislikes_value:
+        "when an interesting walk ends too quickly",
+      profile_looking:"Looking for:",
+      profile_looking_value:"friends around the world",
+      profile_special:"Special feature:",
+      profile_special_value:
+        "a curious nose and a lot of fluff",
+
+      favourite_moments:"My favourite moments",
+      favourite_moments_note:"collect moments, not things ♡",
+
+      walks_title:"Walks & travel ✈️",
+      walks_text:
+        "New places, new routes and one very big world.",
+
+      toys_title:"My toys 🧸",
+      toys_text:
+        "Little things for very happy days.",
+
+      sea_title:"The sea 🌊",
+      sea_text:
+        "Little paws. Big world.",
+
+      fashion_card_title:"Fashion 👗",
+      fashion_card_text:
+        "Beautiful + comfortable. Always.",
+
+      happy_title:"What makes me happy?",
+
+      food_title:"Food",
+      food_short:"Treats make life better ♡",
+
+      games_title:"Games",
+      games_short:
+        "Balls, toys and fun every day! ♡",
+
+      friends_card_title:"Friends",
+      friends_card_text:
+        "Meeting new friends is one of my favourite adventures ♡",
+
+      rest_title:"Rest 🌙",
+      rest_text:
+        "Sleep is a little piece of happiness ♡",
+
+      travel_title:"Travel 🎈",
+      travel_text:
+        "New places. New stories ♡",
+
+      match_eyebrow:"hello, new friend ♡",
+      match_title:"IT'S A MATCH!",
+
+      miso_match_intro:
+`Hi!
+
+Now we know each other.
+
+My name is Miso, although almost everyone calls me MISO CUTE 🤍
+
+And, to be honest, I don't mind.
+
+I'm a German Spitz — a Pomeranian, a tiny fluffy blonde living in London.
+
+I'm tiny. Around two kilograms.
+
+I'm gentle, very friendly, curious and I love meeting people.
+
+And I have lots of friends.
+
+I hope there will soon be even more of them.
+
+Maybe you'll be one of them.`,
+
+      personality_eyebrow:"tiny but mighty ♡",
+
+      personality_title:
+        "SMALL DOG.\nBIG PERSONALITY. ♡",
+
+      miso_big_personality:
+`There is one mistake people sometimes make when they look at me.
+
+First: “She's so small!”
+
+And then, for some reason: “She probably likes sitting at home.”
+
+No.
+
+I love exploring the world. Walking for a long time. Finding new places. Going somewhere new. Meeting people.
+
+Sniffing everything that seems interesting.
+
+And quite a lot seems interesting to me.
+
+If there's a road ahead that I haven't walked before, there is one perfectly reasonable question:
+
+why are we still standing here?`,
+
+      personality_quote:
+        "LITTLE PAWS.\nBIG CURIOSITY.",
+
+      london_eyebrow:"home sweet London ♡",
+
+      london_title:
+        "🇬🇧 MY CITY —\nLONDON ♡",
+
+      miso_london_text:
+`And this is a wonderful place for a curious little dog.
+
+London is different every day.
+
+Today — a huge green park. Tomorrow — a little café. Then the riverside. A market. An unfamiliar street. A red bus. A new neighbourhood. A new place. A new route.
+
+I love long walks.
+
+Stopping. Looking around. Sniffing. Turning down streets I've never explored before.
+
+For me, a walk isn't simply about leaving the house.
+
+It's a way to discover the world.`,
+
+      london_sticker:"MISO'S LONDON",
+
+      fashion_eyebrow:
+        "style is a way of life ♡",
+
+      fashion_title:
+        "🎀 AND YES.\nI'M A FASHION GIRL. ♡",
+
+      miso_fashion_text:
+`Some people genuinely don't care what they look like.
+
+I respect their choice.
+
+Personally, I have a different opinion.
+
+I like beautiful things. Cute accessories. Bows. Beautiful collars and harnesses. Cosy looks.
+
+But I have one rule:
+
+BEAUTIFUL + COMFORTABLE.
+
+Because real pet fashion should let you remain yourself.
+
+Walk. Move. Explore. Play.
+
+And look wonderful while doing all of it.`,
+
+      fashion_quote:
+        "BEAUTIFUL\n+ COMFORTABLE.",
+
+      pink_eyebrow:
+        "my favourite colour...",
+
+      pink_title:"PINK ✦",
+      pink_obviously:"obviously ♡",
+
+      origin_eyebrow:
+        "one little dog, one big idea ♡",
+
+      origin_title:
+        "🌍 I THINK\nIT ALL STARTED\nWITH ME",
+
+      miso_origin_text:
+`When I came into my human's life, an incredible number of questions came with me.
+
+Where can we go together?
+
+Where are animals genuinely welcome?
+
+Where can we walk? Where can we travel? How do we travel?
+
+How do you find a truly good pet-friendly place?
+
+What's new in the animal world?
+
+What's useful for health?
+
+Where are the interesting events?
+
+What should we buy?
+
+Who can we help?
+
+Where can pet parents and their animals meet each other?
+
+And why do you need to open twenty different websites to find all those answers?
+
+One question led to another.
+
+Then another.
+
+And then came an idea:
+
+WHAT IF OUR WHOLE WORLD COULD BE BROUGHT TOGETHER IN ONE PLACE?
+
+Places. Health. Travel. Fashion. Stories. Photography. Events. New discoveries. Useful services. Community. Help.
+
+Animals.
+
+And the people who love them.
+
+That's how PETS & DOGUE began to appear.
+
+A big platform that grew, in part, from the life of one very small dog.
+
+Me.`,
+
+      official_title:
+        "official-ish title ♡",
+
+      chief_inspiration:
+        "Chief Inspiration Officer 🐾",
+
+      sweet_eyebrow:
+        "confession time... ♡",
+
+      sweet_title:
+        "🍰 THERE'S\nSOMETHING YOU\nNEED TO KNOW\nABOUT ME",
+
+      miso_food_text:
+`I have a sweet tooth.
+
+A very big one.
+
+The only problem is that I am very small.
+
+If something delicious is opened anywhere nearby, all my senses immediately switch to high alert.
+
+But Miso needs to say something serious here.
+
+IF A DOG ASKS FOR SOMETHING, THAT DOESN'T MEAN THE DOG CAN HAVE IT.
+
+Human sweets are not dog treats, and some ingredients can be dangerous.
+
+Chocolate — no.
+
+Products containing xylitol — no.
+
+Grapes and raisins — also no.
+
+Please choose treats made specifically for dogs.
+
+Even if a tiny fluffy blonde is sitting in front of you using this face 🥺
+
+Don't give in.
+
+She's a professional.`,
+
+      treat_quote:
+        "LOVE ME.\nCHOOSE SAFE TREATS.",
+
+      job_eyebrow:
+        "new job alert ♡",
+
+      job_title:
+        "📲 NOW I HAVE\nMY OWN JOB\nAT P&D",
+
+      miso_job_text:
+`This article isn't simply a story about me.
+
+It's our HELLO 👋🐾
+
+Because from now on, we'll be meeting regularly.
+
+I'll look for the most interesting things happening in the animal world and bring them to you.
+
+New places. Pet-friendly discoveries. Events. New products. Beautiful things. Travel. Interesting stories. Unusual facts. Useful advice.
+
+What's happening in London.
+
+And what's happening far beyond it.
+
+Sometimes I'll go there myself.
+
+Sometimes my friends will.
+
+And afterwards we'll tell you where we went, who we met, what we saw, what we liked and whether you should go there too.`,
+
+      job_quote:
+        "I FIND IT.\nWE SHARE IT.",
+
+      ask_eyebrow:
+        "need a little help? ♡",
+
+      ask_title:
+        "🐾 AND IF\nYOU NEED\nMY HELP...",
+
+      ask_face:"tap my face ♡",
+
+      miso_help_text:
+`On P&D you'll see a small round icon with my face.
+
+Tap Miso.
+
+I'll appear and try to help.
+
+Find the right section.
+
+Work out where to go.
+
+Find information.
+
+Or simply understand where to begin.
+
+So my little face in a circle isn't there only because it looks wonderful in a circle.
+
+Although...
+
+it does.
+
+It's your little button:
+
+ASK MISO 🐾`,
+
+      ask_quote:
+        "LOST?\nASK MISO.",
+
+      everyone_eyebrow:
+        "everybody's invited ♡",
+
+      everyone_title:
+        "🌎 THERE'S ROOM\nFOR EVERYONE\nHERE",
+
+      tag_dogs:"🐕 DOGS",
+      tag_cats:"🐈 CATS",
+      tag_birds:"🦜 BIRDS",
+      tag_rabbits:"🐇 RABBITS",
+      tag_horses:"🐴 HORSES",
+      tag_turtles:"🐢 TURTLES",
+
+      miso_everyone_text:
+`Cats. Dogs. Parrots. Rabbits. Horses. Turtles. Guinea pigs. Fish. Birds. Reptiles.
+
+Big. Small. Fluffy. Feathered. Smooth. Scaly.
+
+With paws. With wings. With fins.
+
+And even without any of the above.
+
+EVERYONE IS WELCOME.
+
+Because we don't have to be the same to belong to the same community.`,
+
+      everyone_quote:
+        "ONE WORLD.\nEVERY PET.",
+
+      friends_eyebrow:"your turn ♡",
+
+      friends_title:
+        "🤍 LET'S\nBE FRIENDS",
+
+      miso_friends_text:
+`Now you know me.
+
+And I want to meet you.
+
+What's your pet's name?
+
+Where do you live?
+
+What do they love?
+
+Where do you go together?
+
+Which place did you especially enjoy?
+
+What's their funniest habit?
+
+Is there a story other people should hear?
+
+Tell us.
+
+Send photographs.
+
+Share your discoveries.
+
+Recommend places.
+
+Meet each other.
+
+Talk.
+
+Because P&D shouldn't be a place where we talk and you simply read.
+
+We want everyone here to be part of the conversation.`,
+
+      tell_story:
+        "TELL US\nYOUR STORY ♡",
+
+      adventure_eyebrow:
+        "the adventure starts here ♡",
+
+      miso_and_friends_text:
+`And now the really interesting part begins.
+
+Because I'm not going to explore this enormous world alone.
+
+I have lots of friends.
+
+And there will be new ones.
+
+MISO & FRIENDS will be wherever something interesting is happening.
+
+At the opening of a new pet-friendly place. In a beautiful park. At an event. On a journey. In an unusual hotel. At an exhibition. In a new shop. In a café. By the sea. In another city.
+
+And maybe, one day, in another country.
+
+We'll try things. Look around. Meet people. Explore.
+
+Take photographs — obviously.
+
+And then we'll come back to P&D to share everything with you.`,
+
+      adventure_quote:
+        "THE WORLD IS BIG.\nCOME WITH US.",
+
+      final_eyebrow:
+        "see you out there ♡",
+
+      final_title:
+        "🐾 SEE YOU\nSOMEWHERE\nIN THE WORLD",
+
+      miso_final_text:
+`So.
+
+I'm Miso Cute.
+
+A tiny fluffy blonde from London.
+
+A Pomeranian.
+
+Fashion girl. Treat enthusiast. Explorer. Lover of long walks.
+
+I'm gentle, I have lots of friends and I'm enormously curious about the world.
+
+And now I have one more mission:
+
+to find interesting things and share them with you.
+
+And my friends will help me.
+
+Today we might meet in London.
+
+Tomorrow — by the sea.
+
+Then — in a new café, a park, at an event or somewhere completely unexpected.
+
+So if one day you see a tiny fluffy blonde very seriously investigating a new place...
+
+it might be me.
+
+Come and say hello.
+
+And if we're far away from each other for now — tap my little circle on P&D.
+
+We'll meet anyway.`,
+
+      signature_world:
+        "Small dog. Big world.\nCome with me.",
+
+      with_love:"with love,",
+
+      footer_home:"Home",
+      footer_archive:"Archive",
+      footer_privacy:"Privacy",
+      footer_terms:"Terms",
+      footer_contact:"Contact",
+
+      issue_footer:
+        "ISSUE 01 · MISO CUTE"
+    },
+
+
+    ru:{
+
+      editors_letter:"Письмо редактора",
+
+      miso_intro:
+        "Маленькая пушистая блондинка из Лондона. Модница. Исследовательница. Большая любительница прогулок. И маленькая причина одной большой идеи.",
+
+      miso_profile_subtitle:
+        "Маленькая пушистая блондинка из Лондона 🇬🇧",
+
+      profile_name:"Имя:",
+      profile_city:"Город:",
+      profile_breed:"Порода:",
+      profile_breed_value:"померанский шпиц",
+      profile_age:"Возраст:",
+      profile_age_value:"2 года",
+      profile_size:"Размер:",
+      profile_size_value:"S — очень компактная",
+      profile_coat:"Шерсть:",
+      profile_coat_value:"пушистая блондинка",
+      profile_character:"Характер:",
+      profile_character_value:
+        "мягкий, дружелюбный, ласковый",
+      profile_relationship:"Отношения:",
+      profile_relationship_value:
+        "открыта для новых друзей ♡",
+      profile_loves:"Люблю:",
+      profile_loves_value:
+        "долгие прогулки, путешествия, красивые места, моду, вкусняшки и фото",
+      profile_dislikes:"Не люблю:",
+      profile_dislikes_value:
+        "когда интересная прогулка заканчивается слишком быстро",
+      profile_looking:"Ищу:",
+      profile_looking_value:
+        "друзей по всему миру",
+      profile_special:"Особая примета:",
+      profile_special_value:
+        "любопытный нос и очень много шерсти",
+
+      favourite_moments:
+        "Мои любимые моменты",
+
+      favourite_moments_note:
+        "собирай моменты, а не вещи ♡",
+
+      walks_title:
+        "Прогулки и путешествия ✈️",
+
+      walks_text:
+        "Новые места, новые маршруты и большой мир.",
+
+      toys_title:"Мои игрушки 🧸",
+
+      toys_text:
+        "Маленькие вещи для очень счастливых дней.",
+
+      sea_title:"Море 🌊",
+
+      sea_text:
+        "Маленькие лапки. Большой мир.",
+
+      fashion_card_title:
+        "Модница 👗",
+
+      fashion_card_text:
+        "Красиво + удобно. Всегда.",
+
+      happy_title:
+        "Что делает меня счастливой?",
+
+      food_title:"Еда",
+
+      food_short:
+        "Вкусняшки делают жизнь лучше ♡",
+
+      games_title:"Игры",
+
+      games_short:
+        "Мячики, игрушки и веселье каждый день! ♡",
+
+      friends_card_title:"Друзья",
+
+      friends_card_text:
+        "Новые знакомства — одни из моих любимых приключений ♡",
+
+      rest_title:"Отдых 🌙",
+
+      rest_text:
+        "Сон — это маленькое счастье ♡",
+
+      travel_title:"Путешествия 🎈",
+
+      travel_text:
+        "Новые места. Новые истории ♡",
+
+      match_eyebrow:
+        "привет, новый друг ♡",
+
+      match_title:
+        "ЭТО МЭТЧ!",
+
+      miso_match_intro:
+`Привет!
 
 Теперь мы знакомы.
 
@@ -1651,73 +3770,16 @@
 
 И я надеюсь, что теперь их станет ещё больше.
 
-Возможно, одним из них будете вы.
-  </div>
+Возможно, одним из них будете вы.`,
 
-</section>
+      personality_eyebrow:
+        "маленькая, но смелая ♡",
 
+      personality_title:
+        "МАЛЕНЬКАЯ СОБАКА.\nБОЛЬШАЯ ЛИЧНОСТЬ. ♡",
 
-<!-- =======================================================
-     07 — SMALL DOG. BIG PERSONALITY.
-======================================================= -->
-
-<section style="background:#35c9ff;padding:30px 0 0;">
-
-  <div style="padding:0 20px 20px;">
-
-    <div class="miso-hand" style="font-size:34px;">
-      tiny but mighty ♡
-    </div>
-
-    <h2 class="miso-section-title">
-      SMALL DOG.<br>
-      BIG PERSONALITY.
-      <span class="miso-heart">♡</span>
-    </h2>
-
-  </div>
-
-
-  <div class="miso-carousel">
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-13.jpg"
-        alt="Miso exploring"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-14.jpg"
-        alt="Miso outdoors"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-15.jpg"
-        alt="Miso adventure"
-        loading="lazy"
-      >
-    </article>
-
-  </div>
-
-  <div class="miso-dots">
-    <span class="miso-dot active"></span>
-    <span class="miso-dot"></span>
-    <span class="miso-dot"></span>
-  </div>
-
-
-  <div class="miso-section"
-       style="background:#fff;border-top:3px solid #111;">
-
-    <div class="miso-section-copy" data-i18n="miso_big_personality">
-Есть одна ошибка, которую иногда совершают, глядя на меня.
+      miso_big_personality:
+`Есть одна ошибка, которую иногда совершают, глядя на меня.
 
 Сначала: «Какая маленькая!»
 
@@ -1733,70 +3795,19 @@
 
 Если впереди дорога, по которой я ещё не ходила, возникает совершенно логичный вопрос:
 
-почему мы до сих пор стоим?
-    </div>
+почему мы до сих пор стоим?`,
 
-  </div>
+      personality_quote:
+        "МАЛЕНЬКИЕ ЛАПКИ.\nБОЛЬШОЕ ЛЮБОПЫТСТВО.",
 
-</section><!-- =======================================================
-     08 — MY CITY — LONDON
-======================================================= -->
+      london_eyebrow:
+        "мой любимый Лондон ♡",
 
-<section style="background:#baff43;padding:31px 0 0;">
+      london_title:
+        "🇬🇧 МОЙ ГОРОД —\nЛОНДОН ♡",
 
-  <div style="padding:0 20px 20px;">
-
-    <div class="miso-hand" style="font-size:34px;">
-      home sweet London ♡
-    </div>
-
-    <h2 class="miso-section-title" data-i18n="london_title">
-      🇬🇧 МОЙ ГОРОД — ЛОНДОН ♡
-    </h2>
-
-  </div>
-
-
-  <div class="miso-carousel">
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-16.jpg"
-        alt="Miso in London"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-17.jpg"
-        alt="Miso exploring London"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-18.jpg"
-        alt="Miso London adventure"
-        loading="lazy"
-      >
-    </article>
-
-  </div>
-
-  <div class="miso-dots">
-    <span class="miso-dot active"></span>
-    <span class="miso-dot"></span>
-    <span class="miso-dot"></span>
-  </div>
-
-
-  <div class="miso-section"
-       style="background:#fff;border-top:3px solid #111;">
-
-    <div class="miso-section-copy" data-i18n="miso_london_text">
-И это прекрасное место для любопытной маленькой собаки.
+      miso_london_text:
+`И это прекрасное место для любопытной маленькой собаки.
 
 Лондон каждый день разный.
 
@@ -1808,74 +3819,19 @@
 
 Для меня прогулка — это не просто выйти из дома.
 
-Это способ узнавать мир.
-    </div>
+Это способ узнавать мир.`,
 
-  </div>
+      london_sticker:
+        "ЛОНДОН МИСО",
 
-</section>
+      fashion_eyebrow:
+        "стиль — это образ жизни ♡",
 
+      fashion_title:
+        "🎀 И ДА.\nЯ МОДНИЦА. ♡",
 
-<!-- =======================================================
-     09 — FASHION
-======================================================= -->
-
-<section style="background:#ffd8e9;padding:32px 0 0;">
-
-  <div style="padding:0 20px 20px;">
-
-    <div class="miso-hand"
-         style="font-size:36px;color:#ff2d8d;">
-      style is a way of life ♡
-    </div>
-
-    <h2 class="miso-section-title" data-i18n="fashion_title">
-      🎀 И ДА.<br>
-      Я МОДНИЦА. ♡
-    </h2>
-
-  </div>
-
-
-  <div class="miso-carousel">
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-19.jpg"
-        alt="Miso fashion"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-20.jpg"
-        alt="Miso wearing a fashionable outfit"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-07.jpg"
-        alt="Miso fashion look"
-        loading="lazy"
-      >
-    </article>
-
-  </div>
-
-  <div class="miso-dots">
-    <span class="miso-dot active"></span>
-    <span class="miso-dot"></span>
-    <span class="miso-dot"></span>
-  </div>
-
-
-  <div class="miso-section" style="background:#fff;">
-
-    <div class="miso-section-copy" data-i18n="miso_fashion_text">
-Есть те, кому совершенно всё равно, как они выглядят.
+      miso_fashion_text:
+`Есть те, кому совершенно всё равно, как они выглядят.
 
 Я уважаю их выбор.
 
@@ -1885,73 +3841,33 @@
 
 Но у меня есть правило:
 
-BEAUTIFUL + COMFORTABLE.
+КРАСИВО + УДОБНО.
 
 Потому что настоящая pet-fashion должна позволять оставаться собой.
 
 Гулять. Двигаться. Исследовать. Играть.
 
-И выглядеть прекрасно, пока всё это делаешь.
-    </div>
+И выглядеть прекрасно, пока всё это делаешь.`,
 
-  </div>
+      fashion_quote:
+        "КРАСИВО\n+ УДОБНО.",
 
-</section>
+      pink_eyebrow:
+        "мой любимый цвет...",
 
+      pink_title:"РОЗОВЫЙ ✦",
 
-<!-- =======================================================
-     10 — PINK
-======================================================= -->
+      pink_obviously:
+        "ну конечно ♡",
 
-<section style="
-  position:relative;
-  overflow:hidden;
-  padding:46px 20px;
-  background:#ff2d8d;
-  border-top:4px solid #111;
-  border-bottom:4px solid #111;
-">
+      origin_eyebrow:
+        "одна маленькая собака, одна большая идея ♡",
 
-  <div class="miso-hand"
-       style="font-size:clamp(37px,8vw,66px);">
-    my favourite colour...
-  </div>
+      origin_title:
+        "🌍 КАЖЕТСЯ,\nС МЕНЯ ВСЁ\nИ НАЧАЛОСЬ",
 
-  <div style="
-    margin-top:10px;
-    font-family:Georgia,serif;
-    font-size:clamp(50px,13vw,105px);
-    line-height:.84;
-    font-weight:900;
-  " data-i18n="pink_title">
-    РОЗОВЫЙ ✦
-  </div>
-
-  <div class="miso-hand"
-       style="margin-top:18px;font-size:31px;">
-    obviously ♡
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     11 — HOW PETS & DOGUE STARTED
-======================================================= -->
-
-<section class="miso-section"
-         style="background:linear-gradient(135deg,#35c9ff,#dff7ff 60%,#fff);">
-
-  <h2 class="miso-section-title" data-i18n="origin_title">
-    🌍 КАЖЕТСЯ,<br>
-    С МЕНЯ ВСЁ<br>
-    И НАЧАЛОСЬ
-  </h2>
-
-  <div style="width:80px;height:4px;background:#c99a32;margin:18px 0 24px;"></div>
-
-  <div class="miso-section-copy" data-i18n="miso_origin_text">
-Когда я появилась в жизни своего человека, вместе со мной появилось невероятное количество вопросов.
+      miso_origin_text:
+`Когда я появилась в жизни своего человека, вместе со мной появилось невероятное количество вопросов.
 
 Куда можно пойти вместе?
 
@@ -1993,66 +3909,22 @@ BEAUTIFUL + COMFORTABLE.
 
 Большая платформа, выросшая в том числе из жизни одной очень маленькой собаки.
 
-То есть меня.
-  </div>
+То есть меня.`,
 
+      official_title:
+        "почти официальная должность ♡",
 
-  <div style="
-    margin-top:30px;
-    padding:25px 20px;
-    background:#111;
-    color:#fff;
-    border:3px solid #111;
-    box-shadow:9px 9px 0 #c99a32;
-  ">
+      chief_inspiration:
+        "Главный директор по вдохновению 🐾",
 
-    <div class="miso-hand"
-         style="font-size:29px;color:#ff2d8d;">
-      official-ish title ♡
-    </div>
+      sweet_eyebrow:
+        "время признаться... ♡",
 
-    <div style="
-      margin-top:7px;
-      font-family:Georgia,serif;
-      font-size:clamp(37px,9vw,67px);
-      font-weight:900;
-    ">
-      MISO CUTE
-    </div>
+      sweet_title:
+        "🍰 ЕСТЬ КОЕ-ЧТО,\nЧТО ВАМ НУЖНО\nОБО МНЕ ЗНАТЬ",
 
-    <div style="
-      margin-top:9px;
-      color:#f2d27c;
-      font-size:20px;
-      font-weight:800;
-    ">
-      Chief Inspiration Officer 🐾
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     12 — SWEET TOOTH
-======================================================= -->
-
-<section class="miso-section" style="background:#fff5c7;">
-
-  <div class="miso-hand"
-       style="font-size:35px;color:#ff2d8d;">
-    confession time... ♡
-  </div>
-
-  <h2 class="miso-section-title" data-i18n="sweet_title">
-    🍰 ЕСТЬ КОЕ-ЧТО,<br>
-    ЧТО ВАМ НУЖНО<br>
-    ОБО МНЕ ЗНАТЬ
-  </h2>
-
-  <div class="miso-section-copy" data-i18n="miso_food_text">
-Я сладкоежка.
+      miso_food_text:
+`Я сладкоежка.
 
 Очень большая.
 
@@ -2078,31 +3950,19 @@ BEAUTIFUL + COMFORTABLE.
 
 Не поддавайтесь.
 
-Она профессионал.
-  </div>
+Она профессионал.`,
 
-</section>
+      treat_quote:
+        "ЛЮБИТЕ МЕНЯ.\nВЫБИРАЙТЕ БЕЗОПАСНЫЕ ЛАКОМСТВА.",
 
+      job_eyebrow:
+        "новая работа ♡",
 
-<!-- =======================================================
-     13 — MISO'S JOB
-======================================================= -->
+      job_title:
+        "📲 ТЕПЕРЬ У МЕНЯ\nЕСТЬ СВОЯ РАБОТА\nНА P&D",
 
-<section class="miso-section"
-         style="background:#baff43;border-top:4px solid #111;">
-
-  <div class="miso-hand" style="font-size:35px;">
-    new job alert ♡
-  </div>
-
-  <h2 class="miso-section-title" data-i18n="job_title">
-    📲 ТЕПЕРЬ У МЕНЯ<br>
-    ЕСТЬ СВОЯ РАБОТА<br>
-    НА P&amp;D
-  </h2>
-
-  <div class="miso-section-copy" data-i18n="miso_job_text">
-Эта статья — не просто история обо мне.
+      miso_job_text:
+`Эта статья — не просто история обо мне.
 
 Это наше HELLO 👋🐾
 
@@ -2120,67 +3980,22 @@ BEAUTIFUL + COMFORTABLE.
 
 Иногда — мои друзья.
 
-А потом мы обязательно расскажем вам, куда ходили, кого встретили, что увидели, что нам понравилось и стоит ли вам отправиться туда тоже.
-  </div>
+А потом мы обязательно расскажем вам, куда ходили, кого встретили, что увидели, что нам понравилось и стоит ли вам отправиться туда тоже.`,
 
-</section><!-- =======================================================
-     14 — ASK MISO EDITORIAL
-     GLOBAL FLOATING ASK MISO IS NOT TOUCHED
-======================================================= -->
+      job_quote:
+        "Я НАХОЖУ.\nМЫ ДЕЛИМСЯ.",
 
-<section class="miso-section"
-         style="background:#35c9ff;border-top:4px solid #111;">
+      ask_eyebrow:
+        "нужна помощь? ♡",
 
-  <h2 class="miso-section-title" data-i18n="ask_title">
-    🐾 А ЕСЛИ ВАМ<br>
-    НУЖНА МОЯ<br>
-    ПОМОЩЬ...
-  </h2>
+      ask_title:
+        "🐾 А ЕСЛИ ВАМ\nНУЖНА МОЯ\nПОМОЩЬ...",
 
-  <div style="
-    display:flex;
-    align-items:center;
-    gap:18px;
-    margin:25px 0;
-  ">
+      ask_face:
+        "нажми на мою мордочку ♡",
 
-    <div style="
-      width:115px;
-      height:115px;
-      flex:0 0 115px;
-      border-radius:50%;
-      overflow:hidden;
-      border:4px solid #111;
-      background:#fff;
-    ">
-
-      <img
-        src="assets/images/edition/miso/miso-03.jpg"
-        alt="Ask Miso"
-        loading="lazy"
-        style="width:100%;height:100%;object-fit:cover;"
-      >
-
-    </div>
-
-    <div>
-
-      <div class="miso-hand"
-           style="font-size:42px;line-height:.9;">
-        tap my face ♡
-      </div>
-
-      <strong style="display:block;margin-top:9px;font-size:22px;">
-        ASK MISO 🐾
-      </strong>
-
-    </div>
-
-  </div>
-
-
-  <div class="miso-section-copy" data-i18n="miso_help_text">
-На P&D вы увидите маленький круглый значок с моей мордочкой.
+      miso_help_text:
+`На P&D вы увидите маленький круглый значок с моей мордочкой.
 
 Нажмите на Мисо.
 
@@ -2202,48 +4017,26 @@ BEAUTIFUL + COMFORTABLE.
 
 Это ваша маленькая кнопка:
 
-ASK MISO 🐾
-  </div>
+ASK MISO 🐾`,
 
-</section>
+      ask_quote:
+        "ПОТЕРЯЛИСЬ?\nСПРОСИТЕ МИСО.",
 
+      everyone_eyebrow:
+        "приглашены все ♡",
 
-<!-- =======================================================
-     15 — EVERYONE BELONGS
-======================================================= -->
+      everyone_title:
+        "🌎 ЗДЕСЬ ЕСТЬ\nМЕСТО ДЛЯ ВСЕХ",
 
-<section class="miso-section" style="background:#fff;">
+      tag_dogs:"🐕 СОБАКИ",
+      tag_cats:"🐈 КОШКИ",
+      tag_birds:"🦜 ПТИЦЫ",
+      tag_rabbits:"🐇 КРОЛИКИ",
+      tag_horses:"🐴 ЛОШАДИ",
+      tag_turtles:"🐢 ЧЕРЕПАХИ",
 
-  <div class="miso-hand"
-       style="font-size:38px;color:#ff2d8d;">
-    everybody's invited ♡
-  </div>
-
-  <h2 class="miso-section-title" data-i18n="everyone_title">
-    🌎 ЗДЕСЬ ЕСТЬ<br>
-    МЕСТО ДЛЯ ВСЕХ
-  </h2>
-
-  <div style="
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin:20px 0 28px;
-    font-weight:800;
-  ">
-
-    <span style="background:#ff2d8d;padding:8px 12px;border:2px solid #111;">🐕 DOGS</span>
-    <span style="background:#35c9ff;padding:8px 12px;border:2px solid #111;">🐈 CATS</span>
-    <span style="background:#baff43;padding:8px 12px;border:2px solid #111;">🦜 BIRDS</span>
-    <span style="background:#ffe94d;padding:8px 12px;border:2px solid #111;">🐇 RABBITS</span>
-    <span style="background:#ffd8e9;padding:8px 12px;border:2px solid #111;">🐴 HORSES</span>
-    <span style="background:#dff7ff;padding:8px 12px;border:2px solid #111;">🐢 TURTLES</span>
-
-  </div>
-
-
-  <div class="miso-section-copy" data-i18n="miso_everyone_text">
-Кошки. Собаки. Попугаи. Кролики. Лошади. Черепахи. Морские свинки. Рыбы. Птицы. Рептилии.
+      miso_everyone_text:
+`Кошки. Собаки. Попугаи. Кролики. Лошади. Черепахи. Морские свинки. Рыбы. Птицы. Рептилии.
 
 Большие. Маленькие. Пушистые. Пернатые. Гладкие. Чешуйчатые.
 
@@ -2253,26 +4046,19 @@ ASK MISO 🐾
 
 ВСЕ СЮДА.
 
-Потому что нам необязательно быть одинаковыми, чтобы быть частью одного сообщества.
-  </div>
+Потому что нам необязательно быть одинаковыми, чтобы быть частью одного сообщества.`,
 
-</section>
+      everyone_quote:
+        "ОДИН МИР.\nКАЖДЫЙ ПИТОМЕЦ.",
 
+      friends_eyebrow:
+        "теперь ваша очередь ♡",
 
-<!-- =======================================================
-     16 — LET'S BE FRIENDS
-======================================================= -->
+      friends_title:
+        "🤍 ДАВАЙТЕ\nДРУЖИТЬ",
 
-<section class="miso-section"
-         style="background:#ffd8e9;border-top:3px solid #111;">
-
-  <h2 class="miso-section-title" data-i18n="friends_title">
-    🤍 ДАВАЙТЕ<br>
-    ДРУЖИТЬ
-  </h2>
-
-  <div class="miso-section-copy" data-i18n="miso_friends_text">
-Теперь вы знаете меня.
+      miso_friends_text:
+`Теперь вы знаете меня.
 
 А я хочу познакомиться с вами.
 
@@ -2304,78 +4090,16 @@ ASK MISO 🐾
 
 Потому что P&D должен быть не местом, где мы говорим, а вы читаете.
 
-Мы хотим, чтобы здесь разговаривали все.
-  </div>
+Мы хотим, чтобы здесь разговаривали все.`,
 
-  <div class="miso-hand"
-       style="margin-top:28px;font-size:clamp(39px,9vw,68px);">
-    tell us your story
-    <span class="miso-heart">♡</span>
-  </div>
+      tell_story:
+        "РАССКАЖИТЕ НАМ\nСВОЮ ИСТОРИЮ ♡",
 
-</section>
+      adventure_eyebrow:
+        "приключение начинается здесь ♡",
 
-
-<!-- =======================================================
-     17 — MISO & FRIENDS
-======================================================= -->
-
-<section style="background:#dff7ff;padding:34px 0 0;">
-
-  <div style="padding:0 20px 20px;">
-
-    <div class="miso-hand"
-         style="font-size:38px;color:#20bdf6;">
-      the adventure starts here ♡
-    </div>
-
-    <h2 class="miso-section-title">
-      ✨ MISO &amp; FRIENDS
-    </h2>
-
-  </div>
-
-
-  <div class="miso-carousel">
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-10.jpg"
-        alt="Miso and friends"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-14.jpg"
-        alt="Miso adventure"
-        loading="lazy"
-      >
-    </article>
-
-    <article class="miso-photo-card">
-      <img
-        src="assets/images/edition/miso/miso-18.jpg"
-        alt="Miso exploring"
-        loading="lazy"
-      >
-    </article>
-
-  </div>
-
-
-  <div class="miso-dots">
-    <span class="miso-dot active"></span>
-    <span class="miso-dot"></span>
-    <span class="miso-dot"></span>
-  </div>
-
-
-  <div class="miso-section" style="background:#fff;">
-
-    <div class="miso-section-copy" data-i18n="miso_and_friends_text">
-А дальше начинается самое интересное.
+      miso_and_friends_text:
+`А дальше начинается самое интересное.
 
 Потому что я не собираюсь исследовать этот огромный мир одна.
 
@@ -2393,34 +4117,19 @@ MISO & FRIENDS будут там, где происходит что-то инт
 
 Фотографироваться — куда же без этого.
 
-И возвращаться на P&D, чтобы поделиться с вами своими впечатлениями.
-    </div>
+И возвращаться на P&D, чтобы поделиться с вами своими впечатлениями.`,
 
-  </div>
+      adventure_quote:
+        "МИР ОГРОМНЫЙ.\nПОЙДЁМТЕ С НАМИ.",
 
-</section>
+      final_eyebrow:
+        "увидимся где-нибудь ♡",
 
+      final_title:
+        "🐾 ВСТРЕТИМСЯ\nГДЕ-НИБУДЬ\nВ МИРЕ",
 
-<!-- =======================================================
-     18 — FINAL STORY
-======================================================= -->
-
-<section class="miso-section"
-         style="background:#ffe94d;border-top:4px solid #111;">
-
-  <div class="miso-hand"
-       style="font-size:35px;color:#ff2d8d;">
-    see you out there ♡
-  </div>
-
-  <h2 class="miso-section-title" data-i18n="final_title">
-    🐾 ВСТРЕТИМСЯ<br>
-    ГДЕ-НИБУДЬ<br>
-    В МИРЕ
-  </h2>
-
-  <div class="miso-section-copy" data-i18n="miso_final_text">
-Итак.
+      miso_final_text:
+`Итак.
 
 Я — Miso Cute.
 
@@ -2452,321 +4161,22 @@ MISO & FRIENDS будут там, где происходит что-то инт
 
 А если мы пока далеко друг от друга — нажмите на мой кружок на P&D.
 
-Мы всё равно встретимся.
-  </div>
+Мы всё равно встретимся.`,
 
-</section>
+      signature_world:
+        "Маленькая собака. Большой мир.\nПойдём со мной.",
 
+      with_love:
+        "с любовью,",
 
-<!-- =======================================================
-     19 — MISO SIGNATURE
-======================================================= -->
+      footer_home:"Главная",
+      footer_archive:"Архив",
+      footer_privacy:"Конфиденциальность",
+      footer_terms:"Условия",
+      footer_contact:"Контакты",
 
-<section style="
-  background:#fff;
-  padding:46px 20px;
-  text-align:center;
-">
-
-  <div class="miso-hand"
-       style="
-         color:#ff2d8d;
-         font-size:clamp(54px,13vw,96px);
-         line-height:.84;
-       ">
-    MISO CUTE 🐾
-  </div>
-
-  <div style="
-    margin-top:19px;
-    font-family:Georgia,serif;
-    font-size:clamp(24px,6vw,40px);
-    font-weight:800;
-  ">
-    Small dog. Big world.<br>
-    Come with me.
-  </div>
-
-  <div style="
-    width:72px;
-    height:4px;
-    margin:28px auto;
-    background:#c99a32;
-  "></div>
-
-  <div class="miso-hand" style="font-size:31px;">
-    with love,
-    <span class="miso-heart">Miso ♡</span>
-  </div>
-
-</section>
-
-
-<!-- =======================================================
-     20 — APPROVED BLACK PETS & DOGUE ENDING
-     DO NOT REMOVE
-======================================================= -->
-
-<footer id="misoEditionFooter"
-        style="
-          position:relative;
-          overflow:hidden;
-          background:#050505;
-          color:#fff;
-          padding:64px 22px 52px;
-          text-align:center;
-          border-top:5px solid #c99a32;
-        ">
-
-  <div style="
-    font-family:Georgia,serif;
-    font-size:clamp(53px,13vw,105px);
-    line-height:.80;
-    font-weight:900;
-    letter-spacing:-3px;
-  ">
-    PETS &amp;<br>
-    DOGUE
-  </div>
-
-
-  <div style="
-    margin-top:24px;
-    font-size:clamp(17px,4vw,26px);
-    color:#ddd;
-  ">
-    One world. Every pet.
-  </div>
-
-
-  <div style="
-    width:82px;
-    height:2px;
-    background:#c99a32;
-    margin:28px auto;
-  "></div>
-
-
-  <nav aria-label="PETS & DOGUE footer"
-       style="
-         display:flex;
-         flex-wrap:wrap;
-         justify-content:center;
-         gap:18px 24px;
-         font-size:16px;
-         color:#ddd;
-       ">
-
-    <a href="/">Home</a>
-    <a href="/archive">Archive</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a>
-    <a href="/contact">Contact</a>
-
-  </nav>
-
-
-  <div style="
-    margin-top:34px;
-    font-size:12px;
-    letter-spacing:3px;
-    color:#777;
-    text-transform:uppercase;
-  ">
-    ISSUE 01 · MISO CUTE
-  </div>
-
-</footer>
-
-</main><script>
-/* =========================================================
-   PETS & DOGUE — ISSUE 01
-   LANGUAGE / ACCESSIBILITY BRIDGE
-
-   IMPORTANT:
-   - no new language selector
-   - no new header
-   - no new side menu
-   - no duplicate Ask Miso
-   - global TTS remains untouched
-   - Arabic RTL supported
-========================================================= */
-
-(function(){
-
-  "use strict";
-
-
-  const LANGUAGE_ALIASES = {
-    ua:"uk",
-    cz:"cs",
-    gr:"el",
-    se:"sv",
-    dk:"da"
-  };
-
-
-  const translations = {
-
-    ru:{
-
-      editors_letter:"Письмо редактора",
-
-      miso_intro:
-        "Маленькая пушистая блондинка из Лондона. Модница. Исследовательница. Большая любительница прогулок. И маленькая причина одной большой идеи.",
-
-      miso_profile_subtitle:
-        "Маленькая пушистая блондинка из Лондона 🇬🇧",
-
-      profile_name:"Имя:",
-      profile_city:"Город:",
-      profile_breed:"Порода:",
-      profile_breed_value:"померанский шпиц",
-      profile_age:"Возраст:",
-      profile_age_value:"2 года",
-      profile_size:"Размер:",
-      profile_size_value:"S — очень компактная",
-      profile_coat:"Шерсть:",
-      profile_coat_value:"пушистая блондинка",
-      profile_character:"Характер:",
-      profile_character_value:"мягкий, дружелюбный, ласковый",
-      profile_relationship:"Отношения:",
-      profile_relationship_value:"открыта для новых друзей ♡",
-      profile_loves:"Люблю:",
-      profile_loves_value:
-        "долгие прогулки, путешествия, красивые места, моду, вкусняшки и фото",
-      profile_dislikes:"Не люблю:",
-      profile_dislikes_value:
-        "когда интересная прогулка заканчивается слишком быстро",
-      profile_looking:"Ищу:",
-      profile_looking_value:"друзей по всему миру",
-      profile_special:"Особая примета:",
-      profile_special_value:"любопытный нос и очень много шерсти",
-
-      favourite_moments:"Мои любимые моменты",
-      walks_title:"Прогулки и путешествия ✈️",
-      walks_text:"Новые места, новые маршруты и большой мир.",
-      toys_title:"Мои игрушки 🧸",
-      toys_text:"Мячики, игрушки и весёлые дни.",
-      sea_title:"Море 🌊",
-      sea_text:"Маленькие лапки. Большой мир.",
-      fashion_card_title:"Модница 👗",
-      fashion_card_text:"Красиво и удобно. Всегда.",
-
-      happy_title:"Что делает меня счастливой?",
-      food_title:"Еда",
-      food_short:"Вкусняшки делают жизнь лучше ♡",
-      games_title:"Игры",
-      games_short:"Мячики, игрушки и весёлые каждый день! ♡",
-      friends_card_title:"Друзья",
-      friends_card_text:"Новые знакомства — мои любимые приключения ♡",
-      rest_title:"Отдых 🌙",
-      rest_text:"Сон — это маленькое счастье ♡",
-      travel_title:"Путешествия 🎈",
-      travel_text:"Новые места. Новые истории ♡",
-
-      london_title:"🇬🇧 МОЙ ГОРОД — ЛОНДОН ♡",
-      fashion_title:"🎀 И ДА. Я МОДНИЦА. ♡",
-      pink_title:"РОЗОВЫЙ ✦",
-
-      origin_title:"🌍 КАЖЕТСЯ, С МЕНЯ ВСЁ И НАЧАЛОСЬ",
-
-      sweet_title:
-        "🍰 ЕСТЬ КОЕ-ЧТО, ЧТО ВАМ НУЖНО ОБО МНЕ ЗНАТЬ",
-
-      job_title:
-        "📲 ТЕПЕРЬ У МЕНЯ ЕСТЬ СВОЯ РАБОТА НА P&D",
-
-      ask_title:"🐾 А ЕСЛИ ВАМ НУЖНА МОЯ ПОМОЩЬ...",
-
-      everyone_title:"🌎 ЗДЕСЬ ЕСТЬ МЕСТО ДЛЯ ВСЕХ",
-
-      friends_title:"🤍 ДАВАЙТЕ ДРУЖИТЬ",
-
-      final_title:"🐾 ВСТРЕТИМСЯ ГДЕ-НИБУДЬ В МИРЕ"
-    },
-
-
-    en:{
-
-      editors_letter:"EDITOR'S LETTER",
-
-      miso_intro:
-        "A tiny fluffy blonde from London. Fashion lover. Explorer. Big fan of long walks. And one small reason behind one very big idea.",
-
-      miso_profile_subtitle:
-        "A tiny fluffy blonde from London 🇬🇧",
-
-      profile_name:"Name:",
-      profile_city:"City:",
-      profile_breed:"Breed:",
-      profile_breed_value:"Pomeranian",
-      profile_age:"Age:",
-      profile_age_value:"2 years",
-      profile_size:"Size:",
-      profile_size_value:"S — very compact",
-      profile_coat:"Coat:",
-      profile_coat_value:"fluffy blonde",
-      profile_character:"Personality:",
-      profile_character_value:"gentle, friendly and affectionate",
-      profile_relationship:"Relationship status:",
-      profile_relationship_value:"open to new friends ♡",
-      profile_loves:"I love:",
-      profile_loves_value:
-        "long walks, travel, beautiful places, fashion, treats and photos",
-      profile_dislikes:"I don't like:",
-      profile_dislikes_value:
-        "when an interesting walk ends too quickly",
-      profile_looking:"Looking for:",
-      profile_looking_value:"friends around the world",
-      profile_special:"Special feature:",
-      profile_special_value:"a curious nose and a lot of fluff",
-
-      favourite_moments:"My favourite moments",
-      walks_title:"Walks & travel ✈️",
-      walks_text:"New places, new routes and one very big world.",
-      toys_title:"My toys 🧸",
-      toys_text:"Little things for very happy days.",
-      sea_title:"The sea 🌊",
-      sea_text:"Little paws. Big world.",
-      fashion_card_title:"Fashion 👗",
-      fashion_card_text:"Beautiful + comfortable. Always.",
-
-      happy_title:"What makes me happy?",
-      food_title:"Food",
-      food_short:"Treats make life better ♡",
-      games_title:"Games",
-      games_short:"Balls, toys and fun every day! ♡",
-      friends_card_title:"Friends",
-      friends_card_text:"Meeting new friends is one of my favourite adventures ♡",
-      rest_title:"Rest 🌙",
-      rest_text:"Sleep is a little piece of happiness ♡",
-      travel_title:"Travel 🎈",
-      travel_text:"New places. New stories ♡",
-
-      london_title:"🇬🇧 MY CITY — LONDON ♡",
-      fashion_title:"🎀 AND YES. I'M A FASHION GIRL. ♡",
-      pink_title:"PINK ✦",
-
-      origin_title:"🌍 I THINK IT ALL STARTED WITH ME",
-
-      sweet_title:
-        "🍰 THERE'S SOMETHING YOU NEED TO KNOW ABOUT ME",
-
-      job_title:
-        "📲 NOW I HAVE MY OWN JOB AT P&D",
-
-      ask_title:
-        "🐾 AND IF YOU NEED MY HELP...",
-
-      everyone_title:
-        "🌎 THERE'S ROOM FOR EVERYONE HERE",
-
-      friends_title:
-        "🤍 LET'S BE FRIENDS",
-
-      final_title:
-        "🐾 SEE YOU SOMEWHERE IN THE WORLD"
+      issue_footer:
+        "ВЫПУСК 01 · MISO CUTE"
     }
 
   };
@@ -2778,10 +4188,11 @@ MISO & FRIENDS будут там, где происходит что-то инт
       return "en";
     }
 
-    const clean = String(language)
-      .toLowerCase()
-      .trim()
-      .split("-")[0];
+    const clean =
+      String(language)
+        .toLowerCase()
+        .trim()
+        .split("-")[0];
 
     return LANGUAGE_ALIASES[clean] || clean;
 
@@ -2796,7 +4207,8 @@ MISO & FRIENDS будут там, где происходит что-то инт
       localStorage.getItem("lang");
 
     const htmlLanguage =
-      document.documentElement.getAttribute("lang");
+      document.documentElement
+        .getAttribute("lang");
 
     return normalizeLanguage(
       stored ||
@@ -2820,13 +4232,17 @@ MISO & FRIENDS будут там, где происходит что-то инт
       rtlLanguages.includes(language);
 
     const edition =
-      document.getElementById("misoEdition");
+      document.getElementById(
+        "misoEdition"
+      );
 
     if(edition){
+
       edition.setAttribute(
         "dir",
         rtl ? "rtl" : "ltr"
       );
+
     }
 
   }
@@ -2838,6 +4254,7 @@ MISO & FRIENDS будут там, где происходит что-то инт
       return;
     }
 
+
     document
       .querySelectorAll(
         "#misoEdition [data-i18n]"
@@ -2845,20 +4262,59 @@ MISO & FRIENDS будут там, где происходит что-то инт
       .forEach(function(element){
 
         const key =
-          element.getAttribute("data-i18n");
+          element.getAttribute(
+            "data-i18n"
+          );
 
         if(
           key &&
-          Object.prototype.hasOwnProperty.call(
-            dictionary,
-            key
-          )
+          Object.prototype
+            .hasOwnProperty
+            .call(
+              dictionary,
+              key
+            )
         ){
+
           element.textContent =
             dictionary[key];
+
         }
 
       });
+
+  }
+
+
+  function getGlobalDictionary(language){
+
+    if(
+      !window.PD_I18N ||
+      typeof window.PD_I18N.getDictionary !==
+        "function"
+    ){
+      return null;
+    }
+
+
+    try{
+
+      return (
+        window.PD_I18N.getDictionary(
+          language,
+          "issue01"
+        ) ||
+        window.PD_I18N.getDictionary(
+          language
+        ) ||
+        null
+      );
+
+    }catch(error){
+
+      return null;
+
+    }
 
   }
 
@@ -2868,44 +4324,61 @@ MISO & FRIENDS будут там, где происходит что-то инт
     const normalized =
       normalizeLanguage(language);
 
+
     setDirection(normalized);
 
 
     /*
-      First use the Issue 01 dictionary
+      Always establish a complete English
+      baseline first.
+
+      This prevents mixed-language fragments
+      if a translated dictionary contains
+      only part of Issue 01.
+    */
+
+    applyDictionary(
+      translations.en
+    );
+
+
+    /*
+      Apply the built-in local dictionary
       when available.
     */
 
-    if(translations[normalized]){
+    if(
+      translations[normalized]
+    ){
+
       applyDictionary(
         translations[normalized]
       );
+
     }
 
 
     /*
-      Then allow the existing PETS & DOGUE
-      global i18n system to supply the full
-      dictionary for any supported language.
+      Finally apply the Master PETS & DOGUE
+      dictionary.
 
-      This avoids creating a second language
-      platform inside Issue 01.
+      This allows ALL globally supported
+      languages to override the English
+      baseline without creating another
+      language selector on this page.
     */
 
-    if(
-      window.PD_I18N &&
-      typeof window.PD_I18N.getDictionary === "function"
-    ){
+    const globalDictionary =
+      getGlobalDictionary(
+        normalized
+      );
 
-      const globalDictionary =
-        window.PD_I18N.getDictionary(
-          normalized,
-          "issue01"
-        );
 
-      if(globalDictionary){
-        applyDictionary(globalDictionary);
-      }
+    if(globalDictionary){
+
+      applyDictionary(
+        globalDictionary
+      );
 
     }
 
@@ -2925,7 +4398,7 @@ MISO & FRIENDS будут там, где происходит что-то инт
 
 
   /* =======================================================
-     GLOBAL LANGUAGE EVENTS
+     LANGUAGE EVENTS
   ======================================================= */
 
   document.addEventListener(
@@ -2939,8 +4412,13 @@ MISO & FRIENDS будут там, где происходит что-то инт
           event.detail.lang
         );
 
+
       if(language){
-        applyLanguage(language);
+
+        applyLanguage(
+          language
+        );
+
       }
 
     }
@@ -2956,9 +4434,11 @@ MISO & FRIENDS будут там, где происходит что-то инт
         event.key === "language" ||
         event.key === "lang"
       ){
+
         applyLanguage(
           event.newValue
         );
+
       }
 
     }
@@ -2973,11 +4453,16 @@ MISO & FRIENDS будут там, где происходит что-то инт
           function(mutation){
 
             if(
-              mutation.attributeName === "lang"
+              mutation.attributeName ===
+              "lang"
             ){
+
               applyLanguage(
-                document.documentElement.lang
+                document
+                  .documentElement
+                  .lang
               );
+
             }
 
           }
@@ -2997,10 +4482,97 @@ MISO & FRIENDS будут там, где происходит что-то инт
 
 
   /* =======================================================
-     HORIZONTAL GALLERIES
-     Touch swipe already works natively.
-     Add keyboard accessibility.
-  ======================================================= */
+     CAROUSEL DOTS
+======================================================= */
+
+  function updateCarouselDots(
+    carousel
+  ){
+
+    const section =
+      carousel.closest(
+        "section"
+      );
+
+    if(!section){
+      return;
+    }
+
+
+    const dots =
+      section.querySelectorAll(
+        ".miso-dots .miso-dot"
+      );
+
+
+    const cards =
+      carousel.querySelectorAll(
+        ".miso-photo-card"
+      );
+
+
+    if(
+      !dots.length ||
+      !cards.length
+    ){
+      return;
+    }
+
+
+    let nearestIndex = 0;
+    let nearestDistance = Infinity;
+
+
+    const carouselCenter =
+      carousel.scrollLeft +
+      carousel.clientWidth / 2;
+
+
+    cards.forEach(
+      function(card,index){
+
+        const cardCenter =
+          card.offsetLeft +
+          card.offsetWidth / 2;
+
+
+        const distance =
+          Math.abs(
+            carouselCenter -
+            cardCenter
+          );
+
+
+        if(
+          distance <
+          nearestDistance
+        ){
+
+          nearestDistance =
+            distance;
+
+          nearestIndex =
+            index;
+
+        }
+
+      }
+    );
+
+
+    dots.forEach(
+      function(dot,index){
+
+        dot.classList.toggle(
+          "active",
+          index === nearestIndex
+        );
+
+      }
+    );
+
+  }
+
 
   document
     .querySelectorAll(
@@ -3012,6 +4584,40 @@ MISO & FRIENDS будут там, где происходит что-то инт
         carousel.setAttribute(
           "tabindex",
           "0"
+        );
+
+
+        let ticking = false;
+
+
+        carousel.addEventListener(
+          "scroll",
+          function(){
+
+            if(ticking){
+              return;
+            }
+
+
+            ticking = true;
+
+
+            requestAnimationFrame(
+              function(){
+
+                updateCarouselDots(
+                  carousel
+                );
+
+                ticking = false;
+
+              }
+            );
+
+          },
+          {
+            passive:true
+          }
         );
 
 
@@ -3030,10 +4636,21 @@ MISO & FRIENDS будут там, где происходит что-то инт
             event.preventDefault();
 
 
-            const direction =
+            const rtl =
+              getComputedStyle(
+                carousel
+              ).direction === "rtl";
+
+
+            let direction =
               event.key === "ArrowRight"
                 ? 1
                 : -1;
+
+
+            if(rtl){
+              direction *= -1;
+            }
 
 
             carousel.scrollBy({
@@ -3048,13 +4665,18 @@ MISO & FRIENDS будут там, где происходит что-то инт
           }
         );
 
+
+        updateCarouselDots(
+          carousel
+        );
+
       }
     );
 
 
   /* =======================================================
      IMAGES
-======================================================= */
+  ======================================================= */
 
   document
     .querySelectorAll(
@@ -3067,16 +4689,15 @@ MISO & FRIENDS будут там, где происходит что-то инт
           "async";
 
 
-        if(index > 1){
+        if(
+          index > 1 &&
+          !image.hasAttribute(
+            "loading"
+          )
+        ){
 
-          if(
-            !image.hasAttribute(
-              "loading"
-            )
-          ){
-            image.loading =
-              "lazy";
-          }
+          image.loading =
+            "lazy";
 
         }
 
@@ -3086,14 +4707,6 @@ MISO & FRIENDS будут там, где происходит что-то инт
 
   /* =======================================================
      PUBLIC BRIDGE
-
-     The existing global language system can call:
-
-     window.PD_MISO_EDITION.setLanguage("uk")
-
-     or pass its own translated Issue 01 dictionary:
-
-     window.PD_MISO_EDITION.applyDictionary({...})
   ======================================================= */
 
   window.PD_MISO_EDITION = {
@@ -3102,7 +4715,16 @@ MISO & FRIENDS будут там, где происходит что-то инт
       applyLanguage,
 
     applyDictionary:
-      applyDictionary
+      applyDictionary,
+
+    refresh:
+      function(){
+
+        applyLanguage(
+          getCurrentLanguage()
+        );
+
+      }
 
   };
 
@@ -3113,6 +4735,22 @@ MISO & FRIENDS будут там, где происходит что-то инт
 
   applyLanguage(
     getCurrentLanguage()
+  );
+
+
+  window.addEventListener(
+    "load",
+    function(){
+
+      document
+        .querySelectorAll(
+          "#misoEdition .miso-carousel"
+        )
+        .forEach(
+          updateCarouselDots
+        );
+
+    }
   );
 
 })();
