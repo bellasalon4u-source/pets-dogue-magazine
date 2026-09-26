@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Meet Miso Cute — the tiny blonde Pomeranian from London behind PETS & DOGUE.">
-<title>Issue 01 — Miso Cute | PETS & DOGUE</title>
+<meta name="description" content="PETS & DOGUE Issue 01 — meet Miso, Pablo, Jessica, Richie and Pi.">
+<title>Issue 01 | PETS & DOGUE</title>
 
 <!-- MASTER GLOBAL SHELL — DO NOT REBUILD HEADER/MENU HERE -->
 <script src="pets-dogue-shell.js?v=20260924-issue01-magazine" defer></script>
@@ -16,18 +16,19 @@
   --pd-white:#fff;
   --pd-paper:#fffdf8;
   --pd-gold:#c89a35;
-  --pd-pink:#ff3d91;
+  --pd-pink:#ff4f9a;
   --pd-soft-pink:#ffd9e9;
-  --pd-blue:#38c8ef;
-  --pd-soft-blue:#dcf7ff;
+  --pd-blue:#22e5dd;
   --pd-lime:#baff45;
-  --pd-yellow:#ffe64d;
+  --pd-yellow:#f3ff3f;
+  --pd-cream:#fff3cf;
   --pd-serif:Georgia,"Times New Roman",serif;
   --pd-sans:Arial,Helvetica,sans-serif;
   --pd-hand:"Brush Script MT","Segoe Script",cursive;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   width:100%;
@@ -35,10 +36,14 @@ html,body{
   overflow-x:hidden;
 }
 
-body{background:#fff;}
+body{
+  background:#fff;
+}
 
 #misoEdition,
-#misoEdition *{box-sizing:border-box;}
+#misoEdition *{
+  box-sizing:border-box;
+}
 
 #misoEdition{
   width:100%;
@@ -61,9 +66,10 @@ body{background:#fff;}
   text-decoration:none;
 }
 
-.pd-serif{font-family:var(--pd-serif);}
-.pd-hand{font-family:var(--pd-hand);}
-.pd-pink{color:var(--pd-pink);}
+
+/* =========================================================
+   COVER
+   ========================================================= */
 
 .pd-cover{
   position:relative;
@@ -76,409 +82,529 @@ body{background:#fff;}
   height:auto;
 }
 
-.pd-editor-link{
-  display:flex;
-  justify-content:center;
-  padding:18px 18px 27px;
-  background:#fff;
+
+/* =========================================================
+   ISSUE INTRO
+   ========================================================= */
+
+.pd-edition-intro{
+  padding:38px 21px 44px;
+  background:#fffdf8;
+  border-top:2px solid #111;
+  border-bottom:3px solid #111;
+  text-align:center;
 }
 
-.pd-editor-link a{
-  display:inline-flex;
-  align-items:center;
+.pd-edition-number{
+  display:flex;
   justify-content:center;
-  gap:12px;
-  min-height:46px;
-  padding:0 28px;
-  border-radius:999px;
-  background:var(--pd-gold);
-  color:#fff;
-  font-size:13px;
+  gap:9px;
+  margin-bottom:15px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.2em;
+}
+
+.pd-edition-script{
+  margin:0 0 12px;
+  font-family:var(--pd-hand);
+  font-size:clamp(28px,6vw,48px);
+  line-height:.95;
+}
+
+.pd-edition-title{
+  margin:0;
+  font-family:var(--pd-serif);
+  font-size:clamp(46px,11vw,94px);
+  line-height:.82;
+  letter-spacing:-.055em;
+}
+
+.pd-edition-copy{
+  max-width:720px;
+  margin:27px auto 0;
+  font-family:var(--pd-serif);
+  font-size:clamp(17px,4vw,21px);
+  line-height:1.55;
+}
+
+.pd-edition-copy p{
+  margin:0 0 15px;
+}
+
+.pd-edition-names{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px 11px;
+  max-width:720px;
+  margin:28px auto 0;
+}
+
+.pd-edition-names span:not([aria-hidden]){
+  padding:7px 10px;
+  border:2px solid #111;
+  background:#fff;
+  font-size:11px;
   font-weight:900;
   letter-spacing:.08em;
 }
 
-.pd-spread{
-  position:relative;
-  width:100%;
-}
 
-.pd-full-photo{
+/* =========================================================
+   COMMON PET FEATURE
+   ========================================================= */
+
+.pd-pet-feature{
   position:relative;
-  width:100%;
+  padding:38px 17px 44px;
   overflow:hidden;
-  background:#eee;
-}
-
-.pd-full-photo img{
-  width:100%;
-  height:auto;
-}
-
-.pd-photo-tall img{
-  min-height:520px;
-  max-height:900px;
-  object-fit:cover;
-  object-position:center;
-}
-
-.pd-photo-sea img{
-  min-height:500px;
-  max-height:900px;
-  object-fit:cover;
-  object-position:center;
-}
-
-.pd-photo-overlay{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-.pd-sticker{
-  position:absolute;
-  z-index:2;
-  display:inline-block;
-  padding:8px 14px;
-  background:var(--pd-yellow);
-  color:#111;
-  font-family:var(--pd-hand);
-  font-size:clamp(24px,6vw,42px);
-  line-height:.95;
-  transform:rotate(-4deg);
-  box-shadow:4px 4px 0 rgba(0,0,0,.14);
-}
-
-.pd-sticker.bottom-left{
-  left:18px;
-  bottom:20px;
-}
-
-.pd-photo-title{
-  position:absolute;
-  z-index:2;
-  left:18px;
-  top:22px;
-  max-width:87%;
-  margin:0;
-  font-family:var(--pd-hand);
-  font-size:clamp(44px,11vw,96px);
-  line-height:.82;
-  text-shadow:0 2px 3px rgba(255,255,255,.85);
-  transform:rotate(-2deg);
-}
-
-.pd-photo-note{
-  position:absolute;
-  z-index:2;
-  right:18px;
-  bottom:23px;
-  max-width:48%;
-  color:#fff;
-  font-family:var(--pd-hand);
-  font-size:clamp(23px,5.5vw,42px);
-  line-height:.92;
-  text-align:right;
-  text-shadow:0 3px 10px rgba(0,0,0,.9);
-}
-
-.pd-intro{
-  padding:31px 23px 42px;
-  background:#fff;
-}
-
-.pd-intro p{
-  max-width:720px;
-  margin:0 auto;
-  font-family:var(--pd-serif);
-  font-size:clamp(19px,4.6vw,24px);
-  line-height:1.62;
-}
-
-.pd-kicker{
-  margin:0 0 11px;
-  font-family:var(--pd-hand);
-  font-size:clamp(29px,6.8vw,48px);
-  line-height:.95;
-}
-
-.pd-display{
-  margin:0;
-  font-family:var(--pd-serif);
-  font-size:clamp(42px,9.5vw,82px);
-  font-weight:900;
-  line-height:.87;
-  letter-spacing:-.035em;
-  text-transform:uppercase;
-}
-
-.pd-text{
-  max-width:720px;
-  margin:0 auto;
-  font-family:var(--pd-serif);
-  font-size:clamp(18px,4.2vw,22px);
-  line-height:1.62;
-  white-space:pre-line;
-}
-
-.pd-text strong{font-weight:900;}
-
-.pd-story-head{
-  padding:38px 21px 26px;
-}
-
-.pd-story-body{
-  padding:35px 23px 43px;
-  background:#fff;
-}
-
-.pd-blue{background:var(--pd-blue);}
-.pd-pink-bg{background:var(--pd-soft-pink);}
-.pd-lime{background:var(--pd-lime);}
-.pd-yellow{background:var(--pd-yellow);}
-.pd-cream{background:#fff3c7;}
-
-.pd-pull{
-  max-width:720px;
-  margin:29px auto 0;
-  font-family:var(--pd-serif);
-  font-size:clamp(29px,6.8vw,52px);
-  font-weight:900;
-  line-height:1;
-}
-
-.pd-profile{
-  padding:36px 17px 42px;
-  background:linear-gradient(145deg,#fff365,#ffabd0);
-  border-top:3px solid #111;
   border-bottom:3px solid #111;
 }
 
-.pd-profile-title{
-  max-width:760px;
-  margin:0 auto 25px;
-  font-family:var(--pd-serif);
-  font-size:clamp(40px,9vw,75px);
-  font-weight:900;
-  line-height:.88;
+.pd-pet-miso{
+  background:#fff55e;
 }
 
-.pd-profile-photo{
-  max-width:650px;
-  margin:0 auto;
-  padding:7px;
-  border:3px solid #111;
-  border-radius:22px;
-  background:#111;
-  transform:rotate(-1deg);
-  box-shadow:8px 9px 0 rgba(0,0,0,.12);
+.pd-pet-pablo{
+  background:#baff45;
 }
 
-.pd-profile-photo img{
-  border-radius:14px;
+.pd-pet-jessica{
+  background:#fff4dc;
 }
 
-.pd-profile-card{
-  max-width:730px;
-  margin:24px auto 0;
-  padding:23px 20px 28px;
-  border:3px solid #111;
-  background:#fff;
-  box-shadow:7px 7px 0 rgba(0,0,0,.12);
+.pd-pet-friends{
+  background:#31e3d9;
 }
 
-.pd-profile-card h2{
-  margin:0;
-  font-family:var(--pd-hand);
-  font-size:clamp(42px,9vw,68px);
-  line-height:1;
-}
-
-.pd-profile-sub{
-  margin:5px 0 19px;
-  font-family:var(--pd-serif);
-  font-size:17px;
-  font-weight:900;
-}
-
-.pd-profile-grid{
-  display:grid;
-  gap:10px;
-}
-
-.pd-profile-line{
-  display:grid;
-  grid-template-columns:28px 1fr;
-  gap:8px;
-  font-family:var(--pd-serif);
-  font-size:16px;
-  line-height:1.4;
-}
-
-.pd-profile-line strong{
-  font-family:var(--pd-sans);
-}
-
-.pd-match{
-  margin-top:25px;
-  text-align:center;
-  font-family:var(--pd-hand);
-  font-size:clamp(35px,8vw,59px);
-  line-height:.9;
-}
-
-.pd-match strong{
-  display:block;
-  margin-top:9px;
-  font-family:var(--pd-sans);
-  font-size:clamp(19px,5vw,28px);
-}
-
-.pd-trio{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:3px;
-  background:#111;
-  border-top:3px solid #111;
-  border-bottom:3px solid #111;
-}
-
-.pd-trio figure{
-  position:relative;
-  margin:0;
-  background:#fff;
-}
-
-.pd-trio figure:first-child{
-  grid-column:1/-1;
-}
-
-.pd-trio img{
-  width:100%;
-  aspect-ratio:1;
-  object-fit:cover;
-}
-
-.pd-trio figure:first-child img{
-  aspect-ratio:1.22;
-}
-
-.pd-trio figcaption{
-  padding:13px 14px 15px;
-  background:#fff;
-  font-family:var(--pd-serif);
-  font-size:15px;
-  line-height:1.35;
-}
-
-.pd-trio figcaption strong{
-  display:block;
-  margin-bottom:4px;
-  font-size:20px;
-}
-
-.pd-polaroids{
+.pd-pet-heading{
   display:flex;
-  gap:13px;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  max-width:920px;
+  margin:0 auto 25px;
+}
+
+.pd-pet-heading-reverse{
+  text-align:right;
+}
+
+.pd-pet-count{
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  min-width:54px;
+  height:54px;
+  padding:0 9px;
+  border:2px solid #111;
+  border-radius:50%;
+  background:#fff;
+  font-size:13px;
+  font-weight:900;
+}
+
+.pd-pet-name{
+  margin:0;
+  font-family:var(--pd-serif);
+  font-size:clamp(55px,14vw,112px);
+  line-height:.76;
+  letter-spacing:-.055em;
+}
+
+.pd-feature-hero{
+  position:relative;
+  max-width:900px;
+  margin:0 auto;
+  border:3px solid #111;
+  background:#fff;
+  box-shadow:8px 9px 0 rgba(0,0,0,.13);
+  overflow:hidden;
+}
+
+.pd-feature-hero img{
+  width:100%;
+  min-height:390px;
+  max-height:780px;
+  object-fit:cover;
+}
+
+.pd-feature-doodle{
+  position:absolute;
+  right:17px;
+  bottom:8px;
+  color:#ff3d91;
+  font-family:var(--pd-hand);
+  font-size:72px;
+  transform:rotate(-10deg);
+}
+
+.pd-feature-copy{
+  max-width:720px;
+  margin:30px auto 0;
+  font-family:var(--pd-serif);
+  font-size:clamp(17px,4vw,21px);
+  line-height:1.58;
+}
+
+.pd-feature-copy p{
+  margin:0 0 17px;
+}
+
+.pd-feature-lead{
+  font-size:clamp(27px,6vw,45px);
+  font-weight:900;
+  line-height:1.02!important;
+}
+
+
+/* =========================================================
+   HORIZONTAL PHOTO STRIPS
+   ========================================================= */
+
+.pd-edition-scroll{
+  display:flex;
+  gap:12px;
+  max-width:980px;
+  margin:29px auto 0;
+  padding:7px 4px 17px;
   overflow-x:auto;
-  padding:18px 17px 25px;
   scroll-snap-type:x mandatory;
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
 }
 
-.pd-polaroids::-webkit-scrollbar{display:none;}
-
-.pd-polaroid{
-  flex:0 0 min(75vw,460px);
-  padding:7px 7px 15px;
-  background:#fff;
-  border:2px solid #111;
-  scroll-snap-align:center;
-  box-shadow:5px 6px 0 rgba(0,0,0,.12);
+.pd-edition-scroll::-webkit-scrollbar{
+  display:none;
 }
 
-.pd-polaroid img{
+.pd-edition-shot{
+  flex:0 0 min(72vw,350px);
+  margin:0;
+  padding:6px 6px 14px;
+  border:2px solid #111;
+  background:#fff;
+  box-shadow:5px 6px 0 rgba(0,0,0,.12);
+  scroll-snap-align:center;
+}
+
+.pd-edition-shot img{
   width:100%;
   aspect-ratio:.9;
   object-fit:cover;
 }
 
-.pd-polaroid div{
-  padding:11px 7px 1px;
+.pd-edition-shot figcaption{
+  padding:10px 6px 0;
   font-family:var(--pd-hand);
-  font-size:clamp(24px,5.8vw,37px);
+  font-size:clamp(23px,5vw,33px);
   line-height:1;
 }
 
-.pd-tags{
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.pd-story-button{
   display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  max-width:720px;
-  margin:0 auto 28px;
-}
-
-.pd-tag{
-  padding:8px 11px;
-  border:2px solid #111;
-  font-size:13px;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  width:min(100%,720px);
+  min-height:58px;
+  margin:29px auto 0;
+  padding:14px 19px;
+  border:3px solid #111;
+  color:#111!important;
+  font-size:14px;
   font-weight:900;
+  letter-spacing:.07em;
+  box-shadow:6px 7px 0 #111;
+}
+
+.pd-story-button:active{
+  transform:translate(3px,3px);
+  box-shadow:3px 4px 0 #111;
+}
+
+.pd-story-green{
+  background:#65ff4d;
+}
+
+.pd-story-turquoise{
+  background:#19e9dd;
+}
+
+.pd-story-lemon{
+  background:#efff39;
+}
+
+
+/* =========================================================
+   MISO
+   ========================================================= */
+
+.pd-feature-quote{
+  max-width:720px;
+  margin:27px auto 0;
+  padding:22px;
+  border:2px solid #111;
   background:#fff;
-}
-
-.pd-sea-caption{
-  padding:21px 22px 31px;
-  background:#fff;
-}
-
-.pd-sea-caption strong{
-  display:block;
-  font-family:var(--pd-hand);
-  font-size:clamp(34px,8vw,60px);
-  line-height:.9;
-}
-
-.pd-sea-caption span{
-  display:block;
-  max-width:700px;
-  margin-top:11px;
   font-family:var(--pd-serif);
-  font-size:17px;
+  font-size:clamp(25px,6vw,43px);
+  line-height:1.05;
+  text-align:center;
+}
+
+
+/* =========================================================
+   SPLIT LAYOUT
+   ========================================================= */
+
+.pd-feature-split{
+  display:grid;
+  gap:20px;
+  max-width:920px;
+  margin:0 auto;
+}
+
+.pd-feature-side-photo{
+  border:3px solid #111;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:7px 8px 0 rgba(0,0,0,.13);
+}
+
+.pd-feature-side-photo img{
+  width:100%;
+  height:100%;
+  min-height:380px;
+  max-height:650px;
+  object-fit:cover;
+}
+
+.pd-hand-note{
+  display:inline-block;
+  margin-top:7px;
+  padding:13px 17px;
+  background:#fff;
+  border:2px solid #111;
+  font-family:var(--pd-hand);
+  font-size:clamp(29px,6vw,45px);
+  line-height:.9;
+  transform:rotate(-2deg);
+}
+
+
+/* =========================================================
+   PABLO
+   ========================================================= */
+
+.pd-pablo-secret{
+  max-width:720px;
+  margin:29px auto 0;
+  padding:20px;
+  border:3px solid #111;
+  background:#fff;
+  font-family:var(--pd-serif);
+  font-size:18px;
   line-height:1.5;
 }
 
-.pd-ask{
-  display:grid;
-  grid-template-columns:112px 1fr;
-  gap:17px;
-  align-items:center;
-  max-width:720px;
-  margin:0 auto 27px;
+.pd-pablo-secret p{
+  margin:14px 0 0;
 }
 
-.pd-ask img{
-  width:112px;
-  height:112px;
-  object-fit:cover;
-  border:4px solid #111;
-  border-radius:50%;
+.pd-pablo-secret-label{
+  display:inline-block;
+  padding:6px 9px;
+  background:#ff4f9a;
+  color:#fff;
+  font-family:var(--pd-sans);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+
+
+/* =========================================================
+   JESSICA
+   ========================================================= */
+
+.pd-jessica-label{
+  position:absolute;
+  left:14px;
+  bottom:14px;
+  display:flex;
+  gap:8px;
+  padding:9px 12px;
+  border:2px solid #111;
   background:#fff;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.09em;
 }
 
-.pd-ask div{
+.pd-feature-split-jessica{
+  margin-top:29px;
+}
+
+
+/* =========================================================
+   RICHIE + PI
+   ========================================================= */
+
+.pd-friends-top{
+  max-width:900px;
+  margin:0 auto 27px;
+  text-align:center;
+}
+
+.pd-friends-top .pd-pet-count{
+  width:max-content;
+  margin:0 auto 16px;
+  border-radius:999px;
+}
+
+.pd-friends-title{
+  margin:0;
+  font-family:var(--pd-serif);
+  font-size:clamp(47px,12vw,100px);
+  line-height:.8;
+  letter-spacing:-.055em;
+}
+
+.pd-friends-amp{
+  display:inline-block;
+  color:#ff287d;
   font-family:var(--pd-hand);
-  font-size:clamp(27px,6vw,44px);
+  font-weight:400;
+  transform:rotate(-8deg);
+}
+
+.pd-friends-location{
+  margin:18px 0 0;
+  font-family:var(--pd-serif);
+  font-size:17px;
+  font-style:italic;
+}
+
+.pd-pi-box{
+  max-width:720px;
+  margin:31px auto 0;
+  padding:22px 20px;
+  border:3px solid #111;
+  background:#fff55e;
+  box-shadow:7px 8px 0 #111;
+  font-family:var(--pd-serif);
+  font-size:18px;
+  line-height:1.5;
+}
+
+.pd-pi-box p{
+  margin:13px 0 0;
+}
+
+.pd-pi-question{
+  font-family:var(--pd-hand);
+  font-size:clamp(37px,8vw,59px);
+  line-height:.9;
+}
+
+.pd-pi-box strong{
+  display:block;
+  margin-top:15px;
+}
+
+.pd-friends-photo-pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+  max-width:900px;
+  margin:35px auto 0;
+  padding:5px;
+  border:3px solid #111;
+  background:#111;
+}
+
+.pd-friends-photo-pair img{
+  width:100%;
+  height:100%;
+  min-height:220px;
+  max-height:520px;
+  object-fit:cover;
+}
+
+.pd-friends-final{
+  max-width:720px;
+  margin:29px auto 0;
+  font-family:var(--pd-serif);
+  font-size:18px;
+  line-height:1.55;
+}
+
+.pd-friends-quote{
+  margin-top:23px;
+  font-family:var(--pd-hand);
+  font-size:clamp(32px,7vw,54px);
+  font-weight:700;
   line-height:.95;
 }
 
-.pd-signature{
+.pd-double-buttons{
   max-width:720px;
-  margin:31px auto 0;
-  text-align:right;
-  font-family:var(--pd-hand);
-  font-size:clamp(36px,8vw,60px);
+  margin:0 auto;
 }
+
+
+/* =========================================================
+   END OF ISSUE
+   ========================================================= */
+
+.pd-edition-ending{
+  padding:55px 22px 60px;
+  border-bottom:3px solid #111;
+  background:#ff54a4;
+  text-align:center;
+}
+
+.pd-edition-end-title{
+  margin:15px 0 0;
+  font-family:var(--pd-serif);
+  font-size:clamp(45px,11vw,88px);
+  line-height:.85;
+  letter-spacing:-.045em;
+}
+
+.pd-edition-end-copy{
+  max-width:690px;
+  margin:26px auto 0;
+  font-family:var(--pd-serif);
+  font-size:18px;
+  line-height:1.55;
+}
+
+.pd-edition-end-brand{
+  margin-top:37px;
+  font-family:var(--pd-serif);
+  font-size:clamp(26px,6vw,43px);
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+.pd-edition-end-tagline{
+  margin-top:7px;
+  font-family:var(--pd-serif);
+  font-size:17px;
+  font-style:italic;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .pd-end{
   padding:47px 22px;
@@ -510,48 +636,61 @@ body{background:#fff;}
   font-size:15px;
 }
 
+
+/* =========================================================
+   RTL
+   ========================================================= */
+
 #misoEdition[dir="rtl"]{
   text-align:right;
 }
 
-#misoEdition[dir="rtl"] .pd-photo-title{
-  left:auto;
-  right:18px;
-}
-
-#misoEdition[dir="rtl"] .pd-photo-note{
-  right:auto;
-  left:18px;
+#misoEdition[dir="rtl"] .pd-pet-heading-reverse{
   text-align:left;
 }
 
-#misoEdition[dir="rtl"] .pd-sticker.bottom-left{
-  left:auto;
-  right:18px;
+#misoEdition[dir="rtl"] .pd-edition-shot{
+  text-align:right;
 }
 
-#misoEdition[dir="rtl"] .pd-signature{
-  text-align:left;
+#misoEdition[dir="rtl"] .pd-jessica-label{
+  left:auto;
+  right:14px;
 }
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
 
 @media(min-width:760px){
-  .pd-trio{
-    grid-template-columns:1.35fr 1fr 1fr;
+
+  .pd-feature-split{
+    grid-template-columns:1fr 1fr;
+    align-items:center;
   }
 
-  .pd-trio figure:first-child{
-    grid-column:auto;
+  .pd-feature-split-jessica{
+    grid-template-columns:1.1fr .9fr;
   }
 
-  .pd-trio figure:first-child img,
-  .pd-trio img{
-    aspect-ratio:.88;
-    height:100%;
-    max-height:620px;
+  .pd-double-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+
+  .pd-double-buttons .pd-story-button{
+    margin-top:29px;
+  }
+
+  .pd-edition-shot{
+    flex-basis:min(38vw,350px);
   }
 }
 
 @media(prefers-reduced-motion:reduce){
+
   #misoEdition *,
   #misoEdition *::before,
   #misoEdition *::after{
@@ -567,674 +706,696 @@ body{background:#fff;}
 
 <main id="misoEdition">
 
+
+<!-- =========================================================
+     COVER — FIRST PETS & DOGUE ISSUE
+     ========================================================= -->
+
 <section class="pd-cover">
   <img
     src="miso-01.jpg"
-    alt="PETS & DOGUE Issue 01 featuring Miso Cute"
+    alt="PETS & DOGUE Issue 01 featuring Miso, Pablo, Jessica, Richie and Pi"
     fetchpriority="high"
   >
 </section>
 
-<div class="pd-editor-link">
-  <a href="#misoHello">
-    <span data-miso="editors_letter">EDITOR’S LETTER</span>
-    <span aria-hidden="true">→</span>
-  </a>
-</div>
 
-<section class="pd-full-photo pd-photo-tall" id="misoHello">
-  <img
-    src="miso-02.jpg"
-    alt="Miso Cute"
-  >
+<!-- =========================================================
+     ISSUE INTRO
+     ========================================================= -->
 
-  <div class="pd-photo-overlay">
-    <h1 class="pd-photo-title" data-miso="hello_title">
-      HI, I’M<br>MISO CUTE ♡
-    </h1>
+<section class="pd-edition-intro">
 
-    <span class="pd-sticker bottom-left" data-miso="london_girl">
-      London Girl ♡
-    </span>
-
-    <div class="pd-photo-note" data-miso="big_happiness">
-      Small dog.<br>Big happiness. ♡
-    </div>
+  <div class="pd-edition-number">
+    <span data-miso="edition_issue">ISSUE 01</span>
+    <span aria-hidden="true">♡</span>
   </div>
-</section>
 
-<section class="pd-intro">
-  <p data-miso="miso_intro">
-    A tiny fluffy blonde from London. Fashion lover. Explorer.
-    Big fan of long walks. And one small reason behind one very big idea.
+  <p class="pd-edition-script" data-miso="edition_first_cover">
+    Our very first cover
   </p>
+
+  <h1 class="pd-edition-title notranslate" translate="no">
+    PETS &amp; DOGUE
+  </h1>
+
+  <div class="pd-edition-copy">
+
+    <p data-miso="edition_intro_1">
+      This is where our first issue begins — with five very different
+      personalities and one cover that brought them together.
+    </p>
+
+    <p data-miso="edition_intro_2">
+      Meet Miso, Pablo, Jessica, Richie and Pi.
+      Five little lives. Five different characters.
+      And stories worth opening the magazine for.
+    </p>
+
+  </div>
+
+  <div class="pd-edition-names" aria-label="Issue 01 cover stars">
+    <span class="notranslate" translate="no">MISO</span>
+    <span aria-hidden="true">♡</span>
+    <span class="notranslate" translate="no">PABLO</span>
+    <span aria-hidden="true">♡</span>
+    <span class="notranslate" translate="no">JESSICA</span>
+    <span aria-hidden="true">♡</span>
+    <span class="notranslate" translate="no">RICHIE</span>
+    <span aria-hidden="true">♡</span>
+    <span class="notranslate" translate="no">PI</span>
+  </div>
+
 </section>
 
-<section class="pd-profile">
 
-  <h2 class="pd-profile-title" data-miso="paw_swipe_title">
-    PAW-SWIPE:<br>IT’S A MATCH!
-  </h2>
+<!-- =========================================================
+     MISO
+     ========================================================= -->
 
-  <div class="pd-profile-photo">
+<section class="pd-pet-feature pd-pet-miso" id="miso">
+
+  <div class="pd-pet-heading">
+
+    <div class="pd-pet-count">
+      01
+    </div>
+
+    <div>
+
+      <p class="pd-edition-script" data-miso="edition_miso_kicker">
+        The little blonde who started it all ♡
+      </p>
+
+      <h2 class="pd-pet-name notranslate" translate="no">
+        MISO
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="pd-feature-hero">
+
     <img
-      src="miso-03.jpg"
-      alt="Miso Cute profile"
+      src="miso-14-flowers.jpg"
+      alt="Miso Cute"
       loading="lazy"
     >
-  </div>
 
-  <div class="pd-profile-card">
-
-    <h2>
-      Miso Cute <span class="pd-pink">♡</span>
-    </h2>
-
-    <div class="pd-profile-sub" data-miso="miso_profile_subtitle">
-      A tiny fluffy blonde from London 🇬🇧
-    </div>
-
-    <div class="pd-profile-grid">
-
-      <div class="pd-profile-line">
-        <span>🐾</span>
-        <span>
-          <strong data-miso="profile_name">Name:</strong>
-          <span class="notranslate" translate="no">Miso Cute</span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>🇬🇧</span>
-        <span>
-          <strong data-miso="profile_city">City:</strong>
-          <span class="notranslate" translate="no">London</span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>🐕</span>
-        <span>
-          <strong data-miso="profile_breed">Breed:</strong>
-          <span data-miso="profile_breed_value">Pomeranian</span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>🎂</span>
-        <span>
-          <strong data-miso="profile_age">Age:</strong>
-          <span data-miso="profile_age_value">2 years</span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>📏</span>
-        <span>
-          <strong data-miso="profile_size">Size:</strong>
-          <span data-miso="profile_size_value">S — very compact</span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>☁️</span>
-        <span>
-          <strong data-miso="profile_coat">Coat:</strong>
-          <span data-miso="profile_coat_value">fluffy blonde</span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>♥</span>
-        <span>
-          <strong data-miso="profile_character">Personality:</strong>
-          <span data-miso="profile_character_value">
-            gentle, friendly and affectionate
-          </span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>✨</span>
-        <span>
-          <strong data-miso="profile_relationship">Relationship:</strong>
-          <span data-miso="profile_relationship_value">
-            open to new friends ♡
-          </span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>★</span>
-        <span>
-          <strong data-miso="profile_loves">I love:</strong>
-          <span data-miso="profile_loves_value">
-            long walks, travel, beautiful places, fashion, treats and photos
-          </span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>⊘</span>
-        <span>
-          <strong data-miso="profile_dislikes">I don’t like:</strong>
-          <span data-miso="profile_dislikes_value">
-            when an interesting walk ends too quickly
-          </span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>🌍</span>
-        <span>
-          <strong data-miso="profile_looking">Looking for:</strong>
-          <span data-miso="profile_looking_value">
-            friends around the world
-          </span>
-        </span>
-      </div>
-
-      <div class="pd-profile-line">
-        <span>🔎</span>
-        <span>
-          <strong data-miso="profile_special">Special feature:</strong>
-          <span data-miso="profile_special_value">
-            a curious nose and a lot of fluff
-          </span>
-        </span>
-      </div>
-
-    </div>
-
-    <div class="pd-match">
-      <span data-miso="swipe_right">Swipe right?</span>
-      <strong data-miso="match_text">IT’S A MATCH! ♡</strong>
-    </div>
+    <span class="pd-feature-doodle" aria-hidden="true">
+      ♡
+    </span>
 
   </div>
-</section><section class="pd-cream">
 
-  <div class="pd-story-head">
-    <div class="pd-kicker" data-miso="favourite_moments">
-      My favourite moments
-    </div>
 
-    <h2 class="pd-display" data-miso="collect_moments">
-      COLLECT MOMENTS,<br>NOT THINGS ♡
-    </h2>
-  </div>
+  <div class="pd-feature-copy">
 
-  <div class="pd-trio">
+    <p class="pd-feature-lead" data-miso="edition_miso_lead">
+      It all started with one tiny fluffy blonde.
+    </p>
 
-    <figure>
-      <img
-        src="miso-04.jpg"
-        alt="Miso exploring"
-        loading="lazy"
-      >
-      <figcaption>
-        <strong data-miso="walks_title">Walks &amp; travel ✈️</strong>
-        <span data-miso="walks_text">
-          New places, new routes and one very big world.
-        </span>
-      </figcaption>
-    </figure>
-
-    <figure>
-      <img
-        src="miso-05.jpg"
-        alt="Miso enjoying her day"
-        loading="lazy"
-      >
-      <figcaption>
-        <strong data-miso="toys_title">My toys 🧸</strong>
-        <span data-miso="toys_text">
-          Little things for very happy days.
-        </span>
-      </figcaption>
-    </figure>
-
-    <figure>
-      <img
-        src="miso-07.jpg"
-        alt="Miso fashion"
-        loading="lazy"
-      >
-      <figcaption>
-        <strong data-miso="fashion_card_title">Fashion 👗</strong>
-        <span data-miso="fashion_card_text">
-          Beautiful + comfortable. Always.
-        </span>
-      </figcaption>
-    </figure>
+    <p data-miso="edition_miso_text">
+      Miso is curious, gentle and endlessly friendly.
+      She loves long walks, travelling, beautiful places
+      and meeting new friends. But most importantly,
+      life with Miso created a thousand little questions:
+      where can we go together, where are animals welcome,
+      and how can we make their world bigger?
+      Somewhere between those questions, PETS &amp; DOGUE began.
+    </p>
 
   </div>
-</section>
 
 
-<section class="pd-blue">
-
-  <div class="pd-story-head">
-    <div class="pd-kicker" data-miso="story_eyebrow">
-      🌍 I think it all started with me
-    </div>
-
-    <h2 class="pd-display" data-miso="story_title">
-      I THINK IT ALL<br>STARTED WITH ME
-    </h2>
-  </div>
-
-  <div class="pd-story-body">
-
-    <div class="pd-text" data-miso="story_intro">
-When I appeared in my family’s life, a surprising number of questions appeared with me.
-
-Where can we go together?
-
-Where are animals genuinely welcome?
-
-Where can we walk? Where can we travel?
-
-How do we find a really good pet-friendly place?
-
-Which hotel will welcome me?
-
-Which café can I enter?
-
-Where can we find help when we need it?
-
-And where can we meet other people and animals who see the world the way we do?
-
-One little dog.
-
-And a lot of questions.
-    </div>
-
-    <div class="pd-pull">
-      One little dog.<br>
-      A very big idea.
-    </div>
-
-  </div>
-</section>
-
-
-<section class="pd-full-photo pd-photo-sea">
-  <img
-    src="miso-06.jpg"
-    alt="Miso Cute at the sea"
-    loading="lazy"
+  <div
+    class="pd-edition-scroll"
+    role="region"
+    aria-label="Miso photo gallery"
+    tabindex="0"
   >
-</section>
 
-<div class="pd-sea-caption">
-  <strong data-miso="sea_title">The sea 🌊</strong>
-  <span data-miso="sea_text">
-    Little paws. Big world.
-  </span>
-</div>
-
-
-<section class="pd-cream">
-
-  <div class="pd-story-head">
-    <div class="pd-kicker" data-miso="london_eyebrow">
-      my London ♡
-    </div>
-
-    <h2 class="pd-display" data-miso="london_title">
-      MY CITY —<br>LONDON ♡
-    </h2>
-  </div>
-
-  <div class="pd-polaroids">
-
-    <article class="pd-polaroid">
+    <figure class="pd-edition-shot">
       <img
-        src="miso-08.jpg"
+        src="miso-03-seaside.jpg"
+        alt="Miso by the sea"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_miso_photo_1">
+        sea days ♡
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="miso-06-spring-park.jpg"
+        alt="Miso in the park"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_miso_photo_2">
+        long walks
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="miso-07-london.jpg"
         alt="Miso exploring London"
         loading="lazy"
       >
-      <div data-miso="london_card_1_title">
-        Exploring London
-      </div>
-    </article>
-
-    <article class="pd-polaroid">
-      <img
-        src="miso-09.jpg"
-        alt="Miso on a long walk"
-        loading="lazy"
-      >
-      <div data-miso="london_card_2_title">
-        Long walks
-      </div>
-    </article>
-
-    <article class="pd-polaroid">
-      <img
-        src="miso-10.jpg"
-        alt="Miso discovering somewhere new"
-        loading="lazy"
-      >
-      <div data-miso="london_card_3_title">
-        Somewhere new
-      </div>
-    </article>
+      <figcaption data-miso="edition_miso_photo_3">
+        little explorer
+      </figcaption>
+    </figure>
 
   </div>
 
-  <div class="pd-story-body">
-    <div class="pd-text" data-miso="london_story">
-And this is a wonderful place for a curious little dog.
 
-London is different every day.
-
-Today — a huge green park.
-
-Tomorrow — a little café.
-
-Then the river.
-
-A market.
-
-An unfamiliar street.
-
-A red bus.
-
-A new neighbourhood.
-
-A new place.
-
-A new route.
-
-I love long walks.
-
-Stopping.
-
-Looking.
-
-Sniffing.
-
-Turning down a street where I have never been before.
-
-For me, a walk is not simply going outside.
-
-It is one of the ways I discover the world.
-    </div>
+  <div class="pd-feature-quote">
+    <span aria-hidden="true">“</span>
+    <strong data-miso="edition_miso_quote">
+      One little dog. One very big idea.
+    </strong>
+    <span aria-hidden="true">”</span>
   </div>
 
-</section>
 
-
-<section class="pd-pink-bg">
-
-  <div class="pd-story-head">
-    <div class="pd-kicker" data-miso="friends_eyebrow">
-      hello, new friend ♡
-    </div>
-
-    <h2 class="pd-display" data-miso="friends_title">
-      IT’S A MATCH! ♡
-    </h2>
-  </div>
-
-  <div class="pd-story-body">
-    <div class="pd-text" data-miso="friends_story">
-Hi!
-
-Now we know each other.
-
-My name is Miso, although almost everyone calls me MISO CUTE ♡
-
-And honestly, I really like it.
-
-I’m a German Spitz — a Pomeranian, a tiny fluffy blonde living in London.
-
-I’m really tiny. Around two kilograms.
-
-I’m gentle, very friendly and curious, and I love meeting new friends.
-
-I already have lots of friends.
-
-And I hope there will be even more.
-
-Because one of the nicest things about a new adventure is that you never know who you might meet along the way.
-    </div>
-  </div>
-
-  <div class="pd-polaroids">
-
-    <article class="pd-polaroid">
-      <img
-        src="miso-11.jpg"
-        alt="Miso with a friend"
-        loading="lazy"
-      >
-      <div data-miso="friend_card_1_title">
-        Hello, friend ♡
-      </div>
-    </article>
-
-    <article class="pd-polaroid">
-      <img
-        src="miso-12.jpg"
-        alt="Miso making friends"
-        loading="lazy"
-      >
-      <div data-miso="friend_card_2_title">
-        New friends
-      </div>
-    </article>
-
-    <article class="pd-polaroid">
-      <img
-        src="miso-13.jpg"
-        alt="Miso with friends"
-        loading="lazy"
-      >
-      <div data-miso="friend_card_3_title">
-        Better together
-      </div>
-    </article>
-
-  </div>
-
-</section>
-
-
-<section class="pd-lime">
-
-  <div class="pd-story-head">
-    <div class="pd-kicker" data-miso="everyone_eyebrow">
-      everyone is invited ♡
-    </div>
-
-    <h2 class="pd-display" data-miso="everyone_title">
-      🌍 THERE IS ROOM<br>FOR EVERYONE
-    </h2>
-  </div>
-
-  <div class="pd-story-body">
-
-    <div class="pd-tags">
-      <span class="pd-tag" data-miso="pet_dogs">🐕 DOGS</span>
-      <span class="pd-tag" data-miso="pet_cats">🐈 CATS</span>
-      <span class="pd-tag" data-miso="pet_birds">🦜 BIRDS</span>
-      <span class="pd-tag" data-miso="pet_rabbits">🐇 RABBITS</span>
-      <span class="pd-tag" data-miso="pet_horses">🐴 HORSES</span>
-      <span class="pd-tag" data-miso="pet_turtles">🐢 TURTLES</span>
-    </div>
-
-    <div class="pd-text" data-miso="everyone_story">
-Cats. Dogs. Parrots. Rabbits. Horses. Turtles. Guinea pigs. Fish. Birds. Reptiles.
-
-Big.
-
-Small.
-
-Fluffy.
-
-Feathered.
-
-Smooth.
-
-Scaly.
-
-With paws.
-
-With wings.
-
-With fins.
-
-And even those who fit none of those descriptions.
-
-EVERYONE IS WELCOME HERE.
-
-We do not need to be the same to belong to the same world.
-
-PETS &amp; DOGUE is not only about dogs.
-
-It is about animals.
-
-And the people who love them.
-    </div>
-
-  </div>
-</section>
-
-
-<section class="pd-yellow">
-
-  <div class="pd-story-head">
-    <div class="pd-kicker" data-miso="ask_eyebrow">
-      curiosity department ♡
-    </div>
-
-    <h2 class="pd-display" data-miso="ask_title">
-      AND IF YOU<br>NEED MY HELP...
-    </h2>
-  </div>
-
-  <div class="pd-story-body">
-
-    <div class="pd-ask">
-      <img
-        src="miso-help.png"
-        alt="Ask Miso"
-        loading="lazy"
-      >
-
-      <div data-miso="ask_miso">
-        Ask my curious little nose ♡
-      </div>
-    </div>
-
-    <div class="pd-text" data-miso="ask_story">
-Need somewhere to go?
-
-Looking for a pet-friendly place?
-
-Planning a trip?
-
-Looking for something useful?
-
-Need help?
-
-Or do you simply want to discover something new?
-
-That is exactly what my curious little nose is for.
-
-I explore.
-
-I look.
-
-I sniff.
-
-I find interesting things.
-
-Then I bring my discoveries here — to PETS &amp; DOGUE.
-    </div>
-
-  </div>
-</section>
-
-
-<section class="pd-full-photo pd-photo-sea">
-  <img
-    src="miso-19.jpg"
-    alt="Miso Cute looking at the sea"
-    loading="lazy"
+  <a
+    class="pd-story-button pd-story-green"
+    href="miso-story.html"
+    data-miso="edition_read_miso"
+    aria-label="Read Miso's story"
   >
+    READ MISO’S STORY
+    <span aria-hidden="true">→</span>
+  </a>
+
 </section>
 
 
-<section class="pd-blue">
+<!-- =========================================================
+     PABLO
+     ========================================================= -->
 
-  <div class="pd-story-head">
-    <div class="pd-kicker" data-miso="final_eyebrow">
-      see you somewhere in the world ♡
+<section class="pd-pet-feature pd-pet-pablo" id="pablo">
+
+  <div class="pd-pet-heading pd-pet-heading-reverse">
+
+    <div>
+
+      <p class="pd-edition-script" data-miso="edition_pablo_kicker">
+        Guess who I am?
+      </p>
+
+      <h2 class="pd-pet-name notranslate" translate="no">
+        PABLO
+      </h2>
+
     </div>
 
-    <h2 class="pd-display" data-miso="final_title">
-      SEE YOU<br>SOMEWHERE<br>IN THE WORLD
-    </h2>
-  </div>
-
-  <div class="pd-story-body">
-
-    <div class="pd-text" data-miso="final_story">
-So.
-
-I’m Miso Cute.
-
-A tiny fluffy blonde from London.
-
-A Pomeranian.
-
-Fashion lover. Treat lover. Explorer. Long-walk enthusiast.
-
-I have a gentle personality, lots of friends and enormous curiosity about the world.
-
-And now I have another mission:
-
-to find interesting things and share them with you.
-
-My friends will help me.
-
-Today we might meet in London.
-
-Tomorrow — by the sea.
-
-Then in a new café, a park, an event or somewhere completely unexpected.
-
-So if one day you see a tiny fluffy blonde very seriously exploring somewhere new...
-
-it might be me.
-
-Come and say hello.
-
-And if we are far away from each other for now — look for my little circle on P&amp;D.
-
-One way or another, we will meet.
-    </div>
-
-    <div class="pd-signature" data-miso="final_signature">
-      With love, Miso ♡
+    <div class="pd-pet-count">
+      02
     </div>
 
   </div>
-</section>
 
 
-<section class="pd-full-photo pd-photo-sea">
-  <img
-    src="miso-20.jpg"
-    alt="Miso Cute standing by the sea"
-    loading="lazy"
+  <div class="pd-feature-split">
+
+    <div class="pd-feature-copy">
+
+      <p class="pd-feature-lead" data-miso="edition_pablo_lead">
+        I’m a Sphynx Bambino named Pablo...
+      </p>
+
+      <p data-miso="edition_pablo_text">
+        Big ears, expressive blue eyes, warm wrinkled skin
+        and those unmistakably short Bambino legs.
+        Pablo is independent, curious and completely convinced
+        that the best place in any house is wherever the sunshine lands.
+      </p>
+
+      <div class="pd-hand-note" data-miso="edition_pablo_note">
+        Short legs.<br>
+        Huge personality.
+      </div>
+
+    </div>
+
+
+    <div class="pd-feature-side-photo">
+
+      <img
+        src="pablo-01-portrait.jpg"
+        alt="Pablo the Sphynx Bambino"
+        loading="lazy"
+      >
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="pd-edition-scroll"
+    role="region"
+    aria-label="Pablo photo gallery"
+    tabindex="0"
   >
+
+    <figure class="pd-edition-shot">
+      <img
+        src="pablo-06-home-walk.jpg"
+        alt="Pablo walking at home"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_pablo_photo_1">
+        king of the house
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="pablo-07-mountain-sun.jpg"
+        alt="Pablo relaxing in the sunshine"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_pablo_photo_2">
+        follow the sunshine
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="pablo-10-garden-play.jpg"
+        alt="Pablo playing in the garden"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_pablo_photo_3">
+        play mode: on
+      </figcaption>
+    </figure>
+
+  </div>
+
+
+  <div class="pd-pablo-secret">
+
+    <span class="pd-pablo-secret-label" data-miso="edition_pablo_secret_label">
+      PABLO NEWS
+    </span>
+
+    <p data-miso="edition_pablo_secret">
+      And recently Pablo got married.
+      Her name is Sonya — but that is a story for another issue...
+    </p>
+
+  </div>
+
+
+  <a
+    class="pd-story-button pd-story-turquoise"
+    href="pablo-story.html"
+    data-miso="edition_read_pablo"
+    aria-label="Read Pablo's story"
+  >
+    READ PABLO’S STORY
+    <span aria-hidden="true">→</span>
+  </a>
+
 </section>
 
+
+<!-- =========================================================
+     JESSICA
+     ========================================================= -->
+
+<section class="pd-pet-feature pd-pet-jessica" id="jessica">
+
+  <div class="pd-pet-heading">
+
+    <div class="pd-pet-count">
+      03
+    </div>
+
+    <div>
+
+      <p class="pd-edition-script" data-miso="edition_jessica_kicker">
+        Soft looks. Quiet confidence.
+      </p>
+
+      <h2 class="pd-pet-name notranslate" translate="no">
+        JESSICA
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="pd-feature-hero">
+
+    <img
+      src="jessica-01-main.jpg"
+      alt="Jessica the British Shorthair"
+      loading="lazy"
+    >
+
+    <div class="pd-jessica-label">
+      <span data-miso="edition_jessica_breed">
+        BRITISH SHORTHAIR
+      </span>
+      <span aria-hidden="true">♡</span>
+    </div>
+
+  </div>
+
+
+  <div class="pd-feature-copy">
+
+    <p class="pd-feature-lead" data-miso="edition_jessica_lead">
+      The face of a teddy bear. The character of a cat who knows exactly what she wants.
+    </p>
+
+    <p data-miso="edition_jessica_text">
+      Jessica is a British Shorthair — calm, observant and wonderfully independent.
+      Her round face and dense plush coat may make her look like a soft toy,
+      but Jessica prefers to decide for herself when it is time for attention.
+      Most days, she is happiest somewhere comfortable, watching the world go by.
+    </p>
+
+  </div>
+
+
+  <div
+    class="pd-edition-scroll"
+    role="region"
+    aria-label="Jessica photo gallery"
+    tabindex="0"
+  >
+
+    <figure class="pd-edition-shot">
+      <img
+        src="jessica-02-milk.jpg"
+        alt="Jessica drinking milk"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_jessica_photo_1">
+        a little milk break
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="jessica-03-white-bed.jpg"
+        alt="Jessica relaxing on her white bed"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_jessica_photo_2">
+        do not disturb
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="jessica-04-window-bed.jpg"
+        alt="Jessica relaxing by the window"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_jessica_photo_3">
+        window watching
+      </figcaption>
+    </figure>
+
+  </div>
+
+
+  <div class="pd-feature-split pd-feature-split-jessica">
+
+    <div class="pd-feature-side-photo">
+
+      <img
+        src="jessica-05-garden-cocoon.jpg"
+        alt="Jessica relaxing in the garden"
+        loading="lazy"
+      >
+
+    </div>
+
+
+    <div class="pd-feature-copy">
+
+      <p class="pd-edition-script" data-miso="edition_jessica_small_title">
+        Very British. Very Jessica.
+      </p>
+
+      <p data-miso="edition_jessica_small_text">
+        British Shorthairs are known for their plush coats,
+        rounded features and relaxed nature.
+        Jessica has added one more speciality:
+        turning absolutely any comfortable corner into her own private suite.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <a
+    class="pd-story-button pd-story-lemon"
+    href="jessica-story.html"
+    data-miso="edition_read_jessica"
+    aria-label="Read Jessica's story"
+  >
+    READ JESSICA’S STORY
+    <span aria-hidden="true">→</span>
+  </a>
+
+</section>
+
+
+<!-- =========================================================
+     RICHIE + PI
+     ONE SHARED STORY
+     ========================================================= -->
+
+<section class="pd-pet-feature pd-pet-friends" id="richie-pi">
+
+  <div class="pd-friends-top">
+
+    <div class="pd-pet-count">
+      04 + 05
+    </div>
+
+    <p class="pd-edition-script" data-miso="edition_richie_pi_kicker">
+      Two species. One bungalow. One unforgettable friendship.
+    </p>
+
+    <h2 class="pd-friends-title">
+      <span class="notranslate" translate="no">RICHIE</span>
+      <span class="pd-friends-amp">&amp;</span>
+      <span class="notranslate" translate="no">PI</span>
+    </h2>
+
+    <p class="pd-friends-location" data-miso="edition_richie_pi_location">
+      Somewhere by the sea in Greece ♡
+    </p>
+
+  </div>
+
+
+  <div class="pd-feature-hero">
+
+    <img
+      src="richie-pi-08-greece.jpg"
+      alt="Richie and Pi together in Greece"
+      loading="lazy"
+    >
+
+  </div>
+
+
+  <div class="pd-feature-copy">
+
+    <p class="pd-feature-lead" data-miso="edition_richie_pi_lead">
+      Their friendship began with a rescue... and some very bad words.
+    </p>
+
+    <p data-miso="edition_richie_pi_text">
+      Richie was still a tiny rabbit when he was quietly eating grass
+      behind their bungalow by the sea. Then large birds began circling overhead.
+      Pi noticed them first.
+    </p>
+
+    <p data-miso="edition_richie_pi_text_2">
+      When one came too close, diplomacy was over.
+      Pi spread his wings and started shouting at the intruders
+      in a very human voice — using several words that definitely
+      did not belong in polite conversation.
+    </p>
+
+  </div>
+
+
+  <div
+    class="pd-edition-scroll"
+    role="region"
+    aria-label="Richie and Pi photo gallery"
+    tabindex="0"
+  >
+
+    <figure class="pd-edition-shot">
+      <img
+        src="richie-pi-02-garden.jpg"
+        alt="Richie and Pi in the garden"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_richie_pi_photo_1">
+        garden patrol
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="richie-pi-04-lunch.jpg"
+        alt="Richie and Pi having lunch together"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_richie_pi_photo_2">
+        lunch for two
+      </figcaption>
+    </figure>
+
+    <figure class="pd-edition-shot">
+      <img
+        src="richie-pi-05-sunset.jpg"
+        alt="Richie and Pi at sunset"
+        loading="lazy"
+      >
+      <figcaption data-miso="edition_richie_pi_photo_3">
+        sunset club
+      </figcaption>
+    </figure>
+
+  </div>
+
+
+  <div class="pd-pi-box">
+
+    <div class="pd-pi-question" data-miso="edition_pi_question">
+      So... why “Pi”?
+    </div>
+
+    <p data-miso="edition_pi_answer">
+      After the birds flew away, Richie was safe —
+      but everyone in the house remembered Pi’s spectacular vocabulary.
+      His later nickname became a much more polite, shortened reminder
+      of what he had been shouting that day.
+    </p>
+
+    <strong data-miso="edition_pi_punchline">
+      Hero? Absolutely. Good manners? We’re still working on those.
+    </strong>
+
+  </div>
+
+
+  <div class="pd-friends-photo-pair">
+
+    <img
+      src="richie-pi-07-cuddle.jpg"
+      alt="Richie and Pi together"
+      loading="lazy"
+    >
+
+    <img
+      src="richie-pi-09-terrace.jpg"
+      alt="Richie and Pi relaxing on the terrace"
+      loading="lazy"
+    >
+
+  </div>
+
+
+  <div class="pd-friends-final">
+
+    <p data-miso="edition_richie_pi_final">
+      Since that day they have been almost inseparable.
+      Richie gets on with the important business of eating grass.
+      Pi keeps an eye on the sky.
+    </p>
+
+    <div class="pd-friends-quote" data-miso="edition_richie_pi_quote">
+      Richie has a bodyguard.<br>
+      He just happens to have terrible manners.
+    </div>
+
+  </div>
+
+
+  <div class="pd-double-buttons">
+
+    <a
+      class="pd-story-button pd-story-green"
+      href="richie-pi-story.html"
+      data-miso="edition_read_richie"
+      aria-label="Read Richie and Pi's story"
+    >
+      READ ABOUT RICHIE
+      <span aria-hidden="true">→</span>
+    </a>
+
+    <a
+      class="pd-story-button pd-story-turquoise"
+      href="richie-pi-story.html"
+      data-miso="edition_read_pi"
+      aria-label="Read Richie and Pi's story"
+    >
+      READ ABOUT PI
+      <span aria-hidden="true">→</span>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     END OF ISSUE
+     ========================================================= -->
+
+<section class="pd-edition-ending">
+
+  <p class="pd-edition-script" data-miso="edition_end_script">
+    five personalities. one first issue. ♡
+  </p>
+
+  <h2 class="pd-edition-end-title" data-miso="edition_end_title">
+    AND THIS IS ONLY<br>THE BEGINNING.
+  </h2>
+
+  <p class="pd-edition-end-copy" data-miso="edition_end_text">
+    Miso, Pablo, Jessica, Richie and Pi opened the first chapter.
+    There are many more animals, places and stories still waiting
+    to become part of PETS &amp; DOGUE.
+  </p>
+
+  <div class="pd-edition-end-brand notranslate" translate="no">
+    PETS &amp; DOGUE
+  </div>
+
+  <div class="pd-edition-end-tagline" data-miso="footer_tagline">
+    One world. Every pet.
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     LOCAL ISSUE FOOTER
+     ========================================================= -->
 
 <footer class="pd-end">
 
@@ -1256,24 +1417,31 @@ One way or another, we will meet.
 
 </footer>
 
-</main><script>
+</main>
+
+
+<script>
 (function(){
 "use strict";
 
 /*
   ============================================================
-  ISSUE 01 — MISO CUTE
+  ISSUE 01 — EDITION CONTENT ONLY
   ============================================================
 
-  IMPORTANT:
-  - Global header belongs to pets-dogue-shell.js
-  - Side menu belongs to pets-dogue-shell.js
-  - Global Miso help circle belongs to pets-dogue-shell.js
-  - Global TTS belongs to pets-dogue-shell.js
+  DO NOT rebuild:
+  - Global header
+  - Side menu
+  - Global Miso help circle
+  - Global TTS
+  - Global language selector
 
-  This script only controls Issue 01 content.
+  Those belong to pets-dogue-shell.js.
   ============================================================
 */
+
+
+/* EXISTING PROJECT LANGUAGE SET — DO NOT ADD LANGUAGES */
 
 const ALIASES={
   ua:"uk",
@@ -1289,13 +1457,13 @@ const SUPPORTED=new Set([
   "tr","ar","hi"
 ]);
 
-/*
-  Issue-specific translations are read from the same global
-  translation system. This avoids creating a second language
-  selector and keeps the approved 23-language shell intact.
-*/
+
+/* ============================================================
+   LANGUAGE
+   ============================================================ */
 
 function normalizeLanguage(value){
+
   let lang=String(value||"en")
     .toLowerCase()
     .trim()
@@ -1307,38 +1475,38 @@ function normalizeLanguage(value){
   return SUPPORTED.has(lang)?lang:"en";
 }
 
+
 function currentLanguage(){
+
   return normalizeLanguage(
     localStorage.getItem("pets_dogue_language") ||
     document.documentElement.lang ||
     "en"
   );
+
 }
 
+
 function translationSources(){
+
   return [
     window.PD_TRANSLATIONS,
     window.PETS_DOGUE_TRANSLATIONS,
     window.translations,
     window.TRANSLATIONS
   ].filter(Boolean);
+
 }
 
+
 function getIssueDictionary(lang){
+
   const sources=translationSources();
 
   for(const source of sources){
 
-    /*
-      Supported structures:
-      source[lang].issue01
-      source[lang].issue_01
-      source.issue01[lang]
-      source.issue_01[lang]
-      source[lang].miso
-    */
-
     if(source[lang]){
+
       if(source[lang].issue01){
         return source[lang].issue01;
       }
@@ -1350,6 +1518,7 @@ function getIssueDictionary(lang){
       if(source[lang].miso){
         return source[lang].miso;
       }
+
     }
 
     if(source.issue01 && source.issue01[lang]){
@@ -1359,12 +1528,15 @@ function getIssueDictionary(lang){
     if(source.issue_01 && source.issue_01[lang]){
       return source.issue_01[lang];
     }
+
   }
 
   return null;
 }
 
+
 function applyLanguage(requestedLanguage){
+
   const edition=document.getElementById("misoEdition");
 
   if(!edition){
@@ -1377,14 +1549,10 @@ function applyLanguage(requestedLanguage){
   edition.lang=lang;
   edition.dir=lang==="ar"?"rtl":"ltr";
 
-  /*
-    English is already present in the HTML.
-    For other languages, replace only keys that actually exist.
-    Missing values safely keep the original text.
-  */
-
   if(dictionary){
+
     edition.querySelectorAll("[data-miso]").forEach(element=>{
+
       const key=element.dataset.miso;
 
       if(
@@ -1394,7 +1562,9 @@ function applyLanguage(requestedLanguage){
       ){
         element.textContent=dictionary[key];
       }
+
     });
+
   }
 
   document.dispatchEvent(
@@ -1405,28 +1575,44 @@ function applyLanguage(requestedLanguage){
       }
     })
   );
+
 }
 
+
+/* ============================================================
+   IMAGES
+   ============================================================ */
+
 function prepareImages(){
+
   const images=document.querySelectorAll("#misoEdition img");
 
   images.forEach((image,index)=>{
+
     image.decoding="async";
 
-    if(index>1 && !image.hasAttribute("loading")){
+    if(index>0 && !image.hasAttribute("loading")){
       image.loading="lazy";
     }
+
   });
+
 }
 
+
+/* ============================================================
+   HORIZONTAL GALLERIES
+   Keyboard support is retained for accessibility.
+   ============================================================ */
+
 function prepareHorizontalGalleries(){
+
   document
-    .querySelectorAll("#misoEdition .pd-polaroids")
+    .querySelectorAll("#misoEdition .pd-edition-scroll")
     .forEach(gallery=>{
 
-      gallery.setAttribute("tabindex","0");
-
       gallery.addEventListener("keydown",event=>{
+
         if(
           event.key!=="ArrowLeft" &&
           event.key!=="ArrowRight"
@@ -1455,117 +1641,85 @@ function prepareHorizontalGalleries(){
           left:amount*direction,
           behavior:"smooth"
         });
+
       });
+
     });
+
 }
 
-function readableText(){
-  const edition=document.getElementById("misoEdition");
 
-  if(!edition){
-    return "";
-  }
+/* ============================================================
+   LISTEN FOR THE EXISTING GLOBAL LANGUAGE SYSTEM
+   ============================================================ */
 
-  const clone=edition.cloneNode(true);
+function listenForLanguageChanges(){
 
-  clone
-    .querySelectorAll("script,style,[aria-hidden='true']")
-    .forEach(node=>node.remove());
+  const events=[
+    "pd:language-change",
+    "pets-dogue:language-change",
+    "languagechange"
+  ];
 
-  return clone.innerText
-    .replace(/\n{3,}/g,"\n\n")
-    .trim();
+  events.forEach(eventName=>{
+
+    document.addEventListener(eventName,event=>{
+
+      const requested=
+        event &&
+        event.detail &&
+        (
+          event.detail.language ||
+          event.detail.lang
+        );
+
+      applyLanguage(
+        requested || currentLanguage()
+      );
+
+    });
+
+  });
+
+
+  window.addEventListener("storage",event=>{
+
+    if(event.key==="pets_dogue_language"){
+      applyLanguage(event.newValue);
+    }
+
+  });
+
 }
 
-/*
-  Expose readable Issue text for the existing accessibility/TTS
-  system without creating a second speaker button.
-*/
 
-window.PD_MISO_EDITION={
-  getLanguage:currentLanguage,
-  applyLanguage:applyLanguage,
-  getReadableText:readableText
-};
+/* ============================================================
+   START
+   ============================================================ */
 
-function init(){
+function initIssue01(){
+
   prepareImages();
   prepareHorizontalGalleries();
+  listenForLanguageChanges();
+
   applyLanguage(currentLanguage());
 
-  document.dispatchEvent(
-    new CustomEvent("pd:edition-ready",{
-      detail:{
-        edition:"issue-01",
-        slug:"miso-cute",
-        language:currentLanguage()
-      }
-    })
-  );
 }
 
-/*
-  Listen for the language events used by the global shell.
-*/
-
-[
-  "pd:languagechange",
-  "pd-language-change",
-  "pets-dogue:languagechange",
-  "languagechange"
-].forEach(eventName=>{
-  document.addEventListener(eventName,event=>{
-    const detail=event.detail||{};
-
-    applyLanguage(
-      detail.language ||
-      detail.lang ||
-      detail.code ||
-      currentLanguage()
-    );
-  });
-});
-
-/*
-  The shell also updates <html lang="">.
-  Observing it makes Issue 01 follow the shell even if an event
-  name changes later.
-*/
-
-const languageObserver=new MutationObserver(mutations=>{
-  if(
-    mutations.some(
-      mutation=>mutation.attributeName==="lang"
-    )
-  ){
-    applyLanguage(
-      document.documentElement.lang
-    );
-  }
-});
-
-languageObserver.observe(
-  document.documentElement,
-  {
-    attributes:true,
-    attributeFilter:["lang"]
-  }
-);
-
-window.addEventListener("storage",event=>{
-  if(event.key==="pets_dogue_language"){
-    applyLanguage(event.newValue);
-  }
-});
 
 if(document.readyState==="loading"){
+
   document.addEventListener(
     "DOMContentLoaded",
-    init,
+    initIssue01,
     {once:true}
   );
+
 }else{
-  init();
+
+  initIssue01();
+
 }
 
 })();
