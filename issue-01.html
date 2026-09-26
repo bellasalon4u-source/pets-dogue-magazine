@@ -1,1097 +1,1417 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="PETS & DOGUE Issue 01 — the story begins with Miso and her friends: Pablo, Jessica, Richie and Pi.">
-<title>Issue 01 | PETS & DOGUE</title>
-
-<!-- GLOBAL SHELL: HEADER / SIDE MENU / MISO / TTS / LANGUAGE -->
-<script src="pets-dogue-shell.js?v=20260926-issue01-final" defer></script>
-<script src="translations.js?v=20260926-issue01-final" defer></script>
-
-<style>
-:root{
-  --black:#080808;
-  --paper:#fffaf0;
-  --cream:#fff5df;
-  --gold:#c79a36;
-  --green:#5cff24;
-  --cyan:#17e8e1;
-  --yellow:#efff28;
-  --pink:#ff4f9d;
-  --serif:Georgia,"Times New Roman",serif;
-  --sans:Arial,Helvetica,sans-serif;
-}
-
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  overflow-x:hidden;
-  background:#000;
-}
-
-body{
-  color:#111;
-  font-family:var(--sans);
-}
-
-img{
-  display:block;
-  width:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-/*
-=========================================================
-IMPORTANT
-Global header / side menu / Miso circle are NOT recreated.
-They are controlled only by pets-dogue-shell.js.
-=========================================================
-*/
-
-.issue{
-  width:min(100%,1180px);
-  margin:0 auto;
-  background:#000;
-}
-
-/* =========================
-   OPENING COVER
-========================= */
-
-.cover{
-  display:grid;
-  grid-template-columns:1.65fr 1fr;
-  min-height:540px;
-  background:#050505;
-  border-bottom:8px solid #fff;
-}
-
-.cover-photo{
-  position:relative;
-  overflow:hidden;
-  background:#ddd;
-}
-
-.cover-photo img{
-  width:100%;
-  height:100%;
-  min-height:540px;
-  object-fit:cover;
-}
-
-.cover-copy{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:44px 38px;
-  color:#fff;
-  background:#080808;
-}
-
-.eyebrow{
-  margin:0 0 16px;
-  color:#d5aa47;
-  font-size:13px;
-  line-height:1.2;
-  font-weight:900;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-}
-
-.cover-copy h1{
-  margin:0;
-  font-family:var(--serif);
-  font-size:clamp(45px,6vw,78px);
-  line-height:.88;
-  font-weight:500;
-  letter-spacing:-.045em;
-}
-
-.cover-season{
-  margin:12px 0 20px;
-  color:#d5aa47;
-  font-family:var(--serif);
-  font-size:25px;
-}
-
-.cover-copy p{
-  margin:0;
-  max-width:430px;
-  font-family:var(--serif);
-  font-size:18px;
-  line-height:1.55;
-}
-
-.cover-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  align-self:flex-start;
-  margin-top:27px;
-  min-height:48px;
-  padding:12px 22px;
-  border:2px solid #111;
-  border-radius:4px;
-  background:var(--green);
-  color:#000;
-  font-size:13px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-
-/* =========================
-   FEATURE COMMON
-========================= */
-
-.feature{
-  display:grid;
-  grid-template-columns:.92fr 1.38fr;
-  min-height:480px;
-  border-bottom:8px solid #000;
-  background:var(--paper);
-}
-
-.feature.reverse{
-  grid-template-columns:1.38fr .92fr;
-}
-
-.feature-copy{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:35px 34px 36px 50px;
-}
-
-.feature.reverse .feature-copy{
-  order:2;
-  padding:35px 50px 36px 34px;
-  background:#080808;
-  color:#fff;
-}
-
-.number{
-  position:absolute;
-  top:23px;
-  left:21px;
-  color:#c89a35;
-  font-family:var(--serif);
-  font-size:15px;
-  font-weight:700;
-}
-
-.feature.reverse .number{
-  left:20px;
-}
-
-.kicker{
-  margin:0 0 5px;
-  color:#9d7830;
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-
-.feature.reverse .kicker{
-  color:#d5aa47;
-}
-
-.pet-name{
-  margin:0;
-  font-family:var(--serif);
-  font-size:clamp(52px,7vw,88px);
-  line-height:.8;
-  letter-spacing:-.055em;
-  font-weight:500;
-}
-
-.pet-subtitle{
-  margin:10px 0 13px;
-  font-family:var(--serif);
-  font-size:clamp(22px,3vw,32px);
-  line-height:1;
-}
-
-.feature-copy p{
-  margin:0;
-  font-family:var(--serif);
-  font-size:17px;
-  line-height:1.48;
-}
-
-.story-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  align-self:flex-start;
-  margin-top:22px;
-  min-height:45px;
-  padding:11px 21px;
-  border:2px solid #111;
-  border-radius:3px;
-  background:var(--green);
-  color:#000;
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-
-.story-button.cyan{background:var(--cyan)}
-.story-button.yellow{background:var(--yellow)}
-
-/* =========================
-   PHOTO COLLAGE
-========================= */
-
-.feature-media{
-  display:grid;
-  grid-template-rows:2.05fr 1fr;
-  gap:6px;
-  padding:6px;
-  background:#fff;
-}
-
-.feature.reverse .feature-media{
-  order:1;
-}
-
-.hero-photo{
-  min-height:320px;
-  overflow:hidden;
-}
-
-.hero-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.thumb-row{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:6px;
-  min-height:145px;
-}
-
-.thumb-row img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* =========================
-   MISO
-========================= */
-
-.miso{
-  background:#fff8e8;
-}
-
-.miso .feature-media{
-  grid-template-columns:1.25fr .75fr;
-  grid-template-rows:1fr;
-}
-
-.miso .hero-photo{
-  min-height:475px;
-}
-
-.miso .thumb-row{
-  grid-template-columns:1fr;
-  grid-template-rows:repeat(3,1fr);
-  min-height:475px;
-}
-
-/* The new retouched portrait is the principal Miso image */
-.miso .hero-photo img{
-  object-position:center center;
-}
-
-/* =========================
-   JESSICA
-========================= */
-
-.jessica{
-  grid-template-columns:.92fr 1.38fr;
-  background:#fff8e9;
-}
-
-.jessica .feature-media{
-  grid-template-columns:1.6fr .65fr;
-  grid-template-rows:1fr;
-}
-
-.jessica .hero-photo{
-  min-height:470px;
-}
-
-.jessica .thumb-row{
-  grid-template-columns:1fr;
-  grid-template-rows:repeat(3,1fr);
-  min-height:470px;
-}
-
-/* =========================
-   PI
-========================= */
-
-.pi{
-  background:#fff9ed;
-}
-
-.pi .feature-media{
-  grid-template-columns:1.45fr .7fr;
-  grid-template-rows:1fr;
-}
-
-.pi .hero-photo{
-  min-height:470px;
-}
-
-.pi .thumb-row{
-  grid-template-columns:1fr;
-  grid-template-rows:repeat(3,1fr);
-  min-height:470px;
-}
-
-/* =========================
-   FINAL
-========================= */
-
-.issue-ending{
-  position:relative;
-  display:grid;
-  grid-template-columns:1fr 250px;
-  align-items:center;
-  gap:30px;
-  min-height:310px;
-  padding:45px 50px;
-  overflow:hidden;
-  background:#080808;
-  color:#fff;
-}
-
-.issue-ending h2{
-  margin:7px 0 15px;
-  max-width:760px;
-  font-family:var(--serif);
-  font-size:clamp(42px,6vw,74px);
-  line-height:.9;
-  font-weight:500;
-  letter-spacing:-.04em;
-}
-
-.issue-ending p{
-  max-width:690px;
-  margin:0;
-  font-family:var(--serif);
-  font-size:17px;
-  line-height:1.5;
-}
-
-.end-photo{
-  padding:9px 9px 24px;
-  background:#fff;
-  color:#111;
-  transform:rotate(7deg);
-  box-shadow:0 15px 35px rgba(0,0,0,.35);
-}
-
-.end-photo img{
-  aspect-ratio:1/1;
-  object-fit:cover;
-}
-
-.end-photo span{
-  display:block;
-  padding:9px 3px 0;
-  font-family:"Brush Script MT","Segoe Script",cursive;
-  font-size:22px;
-  line-height:1;
-}
-
-.end-button{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  margin-top:23px;
-  padding:12px 21px;
-  border-radius:3px;
-  background:var(--yellow);
-  color:#000;
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:720px){
-
-  .issue{
-    width:100%;
-  }
-
-  .cover{
-    grid-template-columns:1.62fr 1fr;
-    min-height:350px;
-  }
-
-  .cover-photo img{
-    min-height:350px;
-  }
-
-  .cover-copy{
-    padding:22px 15px;
-  }
-
-  .eyebrow{
-    margin-bottom:8px;
-    font-size:8px;
-  }
-
-  .cover-copy h1{
-    font-size:31px;
-    line-height:.9;
-  }
-
-  .cover-season{
-    margin:8px 0 11px;
-    font-size:16px;
-  }
-
-  .cover-copy p{
-    font-size:10.5px;
-    line-height:1.45;
-  }
-
-  .cover-button{
-    margin-top:13px;
-    min-height:36px;
-    padding:8px 12px;
-    font-size:8px;
-  }
-
-  .feature,
-  .feature.reverse,
-  .jessica{
-    grid-template-columns:.9fr 1.4fr;
-    min-height:315px;
-    border-bottom-width:5px;
-  }
-
-  .feature.reverse{
-    grid-template-columns:1.4fr .9fr;
-  }
-
-  .feature-copy,
-  .feature.reverse .feature-copy{
-    padding:32px 14px 20px 24px;
-  }
-
-  .feature.reverse .feature-copy{
-    padding-left:15px;
-    padding-right:20px;
-  }
-
-  .number{
-    top:12px;
-    left:10px;
-    font-size:9px;
-  }
-
-  .kicker{
-    font-size:8px;
-    margin-bottom:3px;
-  }
-
-  .pet-name{
-    font-size:36px;
-    line-height:.82;
-  }
-
-  .pet-subtitle{
-    margin:5px 0 8px;
-    font-size:16px;
-  }
-
-  .feature-copy p{
-    font-size:10px;
-    line-height:1.4;
-  }
-
-  .story-button{
-    margin-top:12px;
-    min-height:32px;
-    padding:7px 10px;
-    font-size:7.5px;
-  }
-
-  .feature-media{
-    gap:3px;
-    padding:3px;
-  }
-
-  .hero-photo{
-    min-height:205px;
-  }
-
-  .thumb-row{
-    gap:3px;
-    min-height:92px;
-  }
-
-  .miso .hero-photo,
-  .miso .thumb-row,
-  .jessica .hero-photo,
-  .jessica .thumb-row,
-  .pi .hero-photo,
-  .pi .thumb-row{
-    min-height:310px;
-  }
-
-  .miso .feature-media,
-  .jessica .feature-media,
-  .pi .feature-media{
-    gap:3px;
-  }
-
-  .issue-ending{
-    grid-template-columns:1fr 112px;
-    gap:15px;
-    min-height:220px;
-    padding:28px 20px;
-  }
-
-  .issue-ending h2{
-    margin:5px 0 10px;
-    font-size:32px;
-  }
-
-  .issue-ending p{
-    font-size:10px;
-  }
-
-  .end-photo{
-    padding:5px 5px 13px;
-  }
-
-  .end-photo span{
-    padding-top:5px;
-    font-size:12px;
-  }
-
-  .end-button{
-    margin-top:13px;
-    padding:8px 11px;
-    font-size:8px;
-  }
-}
-
-/* Very narrow phones */
-@media(max-width:390px){
-
-  .cover{
-    grid-template-columns:1.58fr 1fr;
-  }
-
-  .cover-copy h1{
-    font-size:27px;
-  }
-
-  .feature-copy p{
-    font-size:9.3px;
-  }
-
-  .pet-name{
-    font-size:32px;
-  }
-
-  .pet-subtitle{
-    font-size:14px;
-  }
-}
-
-/* RTL */
-html[dir="rtl"] .feature-copy{
-  padding-left:34px;
-  padding-right:50px;
-}
-
-html[dir="rtl"] .number{
-  left:auto;
-  right:20px;
-}
-
-html[dir="rtl"] .cover-copy,
-html[dir="rtl"] .feature-copy,
-html[dir="rtl"] .issue-ending{
-  text-align:right;
-}
-
-@media(prefers-reduced-motion:reduce){
-  *{
-    scroll-behavior:auto!important;
-    transition:none!important;
-    animation:none!important;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<main class="issue">
-
-<!-- =====================================================
-     ISSUE 01 — THE BEGINNING
-===================================================== -->
-
-<section class="cover" id="issue-top">
-
-  <div class="cover-photo">
-    <img
-      src="miso-cover-star-retouched.png"
-      alt="Miso — the little Pomeranian who inspired PETS & DOGUE"
-      fetchpriority="high"
-    >
-  </div>
-
-  <div class="cover-copy">
-
-    <div class="eyebrow notranslate" translate="no">
-      PETS &amp; DOGUE · ISSUE 01
-    </div>
-
-    <h1>
-      It all began<br>
-      with Miso
-    </h1>
-
-    <div class="cover-season">
-      And her friends.
-    </div>
-
-    <p>
-      Every story has a beginning. Ours began with one tiny
-      blonde Pomeranian named Miso — and the extraordinary
-      animals around her. Their personalities, friendships,
-      adventures and the joy they bring into our lives became
-      the inspiration for PETS &amp; DOGUE.
-    </p>
-
-    <a class="cover-button" href="#miso">
-      MEET MISO <span aria-hidden="true">→</span>
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     01 MISO
-===================================================== -->
-
-<section class="feature miso" id="miso">
-
-  <div class="feature-copy">
-
-    <span class="number">01</span>
-
-    <div class="kicker">
-      COVER STAR
-    </div>
-
-    <h2 class="pet-name notranslate" translate="no">
-      Miso
-    </h2>
-
-    <div class="pet-subtitle">
-      The little explorer
-    </div>
-
-    <p>
-      Miso is a tiny blonde Pomeranian from London with a
-      personality much bigger than her size. She loves fashion,
-      travelling, long walks and discovering beautiful new places.
-      Curious, expressive and always ready for another adventure,
-      Miso sees the world as somewhere worth exploring.
-      She is the little dog at the heart of PETS &amp; DOGUE —
-      the one who started it all.
-    </p>
-
-    <a class="story-button" href="miso-story.html">
-      MORE ABOUT MISO <span aria-hidden="true">→</span>
-    </a>
-
-  </div>
-
-
-  <div class="feature-media">
-
-    <div class="hero-photo">
-      <img
-        src="miso-cover-star-retouched.png"
-        alt="Miso wearing her pink dress and bow"
-        loading="lazy"
-      >
-    </div>
-
-    <div class="thumb-row">
-      <img src="miso-03.jpg" alt="Miso" loading="lazy">
-      <img src="miso-07.jpg" alt="Miso" loading="lazy">
-      <img src="miso-16.jpg" alt="Miso" loading="lazy">
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     02 PABLO
-===================================================== -->
-
-<section class="feature reverse" id="pablo">
-
-  <div class="feature-media">
-
-    <div class="hero-photo">
-      <img
-        src="pablo-01-portrait.jpg"
-        alt="Pablo"
-        loading="lazy"
-      >
-    </div>
-
-    <div class="thumb-row">
-      <img src="pablo-02.jpg" alt="Pablo" loading="lazy">
-      <img src="pablo-03.jpg" alt="Pablo" loading="lazy">
-      <img src="pablo-04.jpg" alt="Pablo" loading="lazy">
-    </div>
-
-  </div>
-
-
-  <div class="feature-copy">
-
-    <span class="number">02</span>
-
-    <div class="kicker">
-      MISO'S FRIEND
-    </div>
-
-    <h2 class="pet-name notranslate" translate="no">
-      Pablo
-    </h2>
-
-    <div class="pet-subtitle">
-      Stylish Sphynx
-    </div>
-
-    <p>
-      Pablo is a Sphynx Bambino with enormous personality.
-      He loves warmth, attention and being exactly where
-      something interesting is happening. His expressive blue
-      eyes, short legs and unmistakable character make him
-      impossible to forget.
-    </p>
-
-    <a class="story-button cyan" href="pablo-story.html">
-      MORE ABOUT PABLO <span aria-hidden="true">→</span>
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     03 JESSICA
-===================================================== -->
-
-<section class="feature jessica" id="jessica">
-
-  <div class="feature-copy">
-
-    <span class="number">03</span>
-
-    <div class="kicker">
-      MISO'S FRIEND
-    </div>
-
-    <h2 class="pet-name notranslate" translate="no">
-      Jessica
-    </h2>
-
-    <div class="pet-subtitle">
-      Gentle British lady
-    </div>
-
-    <p>
-      Jessica is a charming British Shorthair from London.
-      Calm, observant and wonderfully independent, she loves
-      relaxing at home and watching the world from her favourite
-      comfortable places. Soft on the outside, unmistakably
-      Jessica on the inside.
-    </p>
-
-    <a class="story-button yellow" href="jessica-story.html">
-      MORE ABOUT JESSICA <span aria-hidden="true">→</span>
-    </a>
-
-  </div>
-
-
-  <div class="feature-media">
-
-    <div class="hero-photo">
-      <img
-        src="jessica-01.jpg"
-        alt="Jessica"
-        loading="lazy"
-      >
-    </div>
-
-    <div class="thumb-row">
-      <img src="jessica-02.jpg" alt="Jessica" loading="lazy">
-      <img src="jessica-03.jpg" alt="Jessica" loading="lazy">
-      <img src="jessica-04.jpg" alt="Jessica" loading="lazy">
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     04 RICHIE
-===================================================== -->
-
-<section class="feature reverse" id="richie">
-
-  <div class="feature-media">
-
-    <div class="hero-photo">
-      <img
-        src="richie-pi-06.jpg"
-        alt="Richie"
-        loading="lazy"
-      >
-    </div>
-
-    <div class="thumb-row">
-      <img src="richie-pi-01.jpg" alt="Richie and Pi" loading="lazy">
-      <img src="richie-pi-02.jpg" alt="Richie and Pi" loading="lazy">
-      <img src="richie-pi-05.jpg" alt="Richie and Pi" loading="lazy">
-    </div>
-
-  </div>
-
-
-  <div class="feature-copy">
-
-    <span class="number">04</span>
-
-    <div class="kicker">
-      A SPECIAL FRIENDSHIP
-    </div>
-
-    <h2 class="pet-name notranslate" translate="no">
-      Richie
-    </h2>
-
-    <div class="pet-subtitle">
-      A gentle little friend
-    </div>
-
-    <p>
-      Richie is a sweet rabbit with a huge heart.
-      He loves children, exploring and peaceful days by the sea.
-      His unlikely friendship with Pi became one of the warmest
-      stories in our first issue — two completely different
-      animals who simply chose each other.
-    </p>
-
-    <a class="story-button" href="richie-pi-story.html">
-      MORE ABOUT RICHIE <span aria-hidden="true">→</span>
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     05 PI
-===================================================== -->
-
-<section class="feature pi" id="pi">
-
-  <div class="feature-copy">
-
-    <span class="number">05</span>
-
-    <div class="kicker">
-      A SPECIAL FRIENDSHIP
-    </div>
-
-    <h2 class="pet-name notranslate" translate="no">
-      Pi
-    </h2>
-
-    <div class="pet-subtitle">
-      Bright pink personality
-    </div>
-
-    <p>
-      Pi is a beautiful pink parrot with a huge personality.
-      Curious, expressive and fiercely loyal, he became Richie's
-      unexpected protector and closest friend. Their adventures
-      together are full of colour, humour and one friendship
-      nobody could have planned.
-    </p>
-
-    <a class="story-button cyan" href="richie-pi-story.html">
-      MORE ABOUT PI <span aria-hidden="true">→</span>
-    </a>
-
-  </div>
-
-
-  <div class="feature-media">
-
-    <div class="hero-photo">
-      <img
-        src="richie-pi-03.jpg"
-        alt="Pi"
-        loading="lazy"
-      >
-    </div>
-
-    <div class="thumb-row">
-      <img src="richie-pi-04.jpg" alt="Richie and Pi" loading="lazy">
-      <img src="richie-pi-05.jpg" alt="Richie and Pi" loading="lazy">
-      <img src="richie-pi-07.jpg" alt="Richie and Pi" loading="lazy">
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     END
-===================================================== -->
-
-<section class="issue-ending">
-
-  <div>
-
-    <div class="eyebrow notranslate" translate="no">
-      PETS &amp; DOGUE · ISSUE 01
-    </div>
-
-    <h2>
-      And this is only<br>
-      the beginning
-    </h2>
-
-    <p>
-      Miso and her friends inspired the beginning of PETS &amp; DOGUE,
-      but this world belongs to every pet. Fashion, travel,
-      pet-friendly places, health, photography, extraordinary
-      friendships and real stories are waiting inside.
-      One world. Every pet.
-    </p>
-
-    <a class="end-button" href="#issue-top">
-      BACK TO THE BEGINNING <span aria-hidden="true">→</span>
-    </a>
-
-  </div>
-
-
-  <div class="end-photo">
-
-    <img
-      src="miso-cover-star-retouched.png"
-      alt="Miso"
-      loading="lazy"
-    >
-
-    <span>
-      A small dog.<br>
-      A very big idea. ♡
-    </span>
-
-  </div>
-
-</section>
-
-</main>
-
-<script>
-(function(){
-  "use strict";
-
-  /*
-   * ISSUE 01 CONTENT ONLY.
-   *
-   * DO NOT create or replace:
-   * - global header
-   * - side menu
-   * - Miso help circle
-   * - language selector
-   * - TTS controls
-   *
-   * pets-dogue-shell.js remains the single source
-   * for those global functions.
-   */
-
-  const issue = document.querySelector(".issue");
-
-  if(!issue){
-    return;
-  }
-
-  /*
-   * Keep images lightweight and stable.
-   */
-  issue.querySelectorAll("img").forEach(function(img,index){
-    img.decoding = "async";
-
-    if(index !== 0 && !img.hasAttribute("loading")){
-      img.loading = "lazy";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PETS & DOGUE — Issue 01</title>
+  <meta
+    name="description"
+    content="PETS & DOGUE Issue 01 — our very first cover and the stories of Miso, Pablo, Jessica, Richie and Pi."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0b0b0b;
+      --cream: #f2ede0;
+      --gold: #c79a43;
+      --gold-soft: #d8bb78;
+      --line: #6e5324;
+      --white: #ffffff;
+      --muted: rgba(255, 255, 255, 0.78);
+      --black-text: #151515;
+      --neon-green: #7cff1f;
+      --cyan: #27dbe6;
+      --yellow: #ecff22;
+      --pink: #ff5c8a;
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+      --shell-height: 176px;
+      --content-max: 1200px;
+      --radius: 0px;
+      --transition: 0.28s ease;
     }
-  });
 
-  /*
-   * The global translation system translates the visible
-   * English editorial text automatically.
-   * Brand names and pet names marked notranslate remain intact.
-   *
-   * Direction is inherited from <html dir="rtl">
-   * when Arabic is selected by the global shell.
-   */
+    * {
+      box-sizing: border-box;
+    }
 
-})();
-</script>
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
 
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .site-shell {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.96);
+      border-bottom: 1px solid rgba(199, 154, 67, 0.35);
+      transform: translateY(0);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(10px);
+    }
+
+    .site-shell.is-hidden {
+      transform: translateY(calc(-1 * var(--shell-height)));
+    }
+
+    .shell-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .shell-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(199, 154, 67, 0.22);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: transparent;
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex: 0 0 auto;
+    }
+
+    .brand-name {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(28px, 3vw, 34px);
+      line-height: 1;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .home-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      background: transparent;
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex: 0 0 auto;
+    }
+
+    .advertise-btn {
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--white);
+      border: 2px solid #d12a31;
+      font-weight: 700;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .profile-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .profile-chip .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.65);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .primary-nav,
+    .secondary-nav {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      white-space: nowrap;
+      padding: 0 10px;
+    }
+
+    .primary-nav::-webkit-scrollbar,
+    .secondary-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .primary-nav {
+      border-bottom: 1px solid rgba(199, 154, 67, 0.18);
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
+    .secondary-nav {
+      border-bottom: 2px solid rgba(199, 154, 67, 0.6);
+      padding-top: 3px;
+      padding-bottom: 3px;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 18px;
+      color: var(--white);
+      opacity: 0.95;
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      flex: 0 0 auto;
+    }
+
+    .nav-link.active-green {
+      border: 2px solid #47c733;
+      border-radius: 999px;
+      padding-top: 9px;
+      padding-bottom: 9px;
+    }
+
+    .nav-link.active-tab {
+      position: relative;
+      color: #f6e3b2;
+    }
+
+    .nav-link.active-tab::after {
+      content: "";
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 0;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 999px;
+    }
+
+    .language-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 14px;
+      border-bottom: 1px solid rgba(199, 154, 67, 0.22);
+      color: #f7e0a9;
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      flex-wrap: wrap;
+    }
+
+    .discover-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .language-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .language-label {
+      color: #f4e8be;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 0;
+    }
+
+    .lang-btn.is-active {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    main.page {
+      padding-top: calc(var(--shell-height) + 8px);
+      padding-bottom: 70px;
+    }
+
+    .content-wrap {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .section {
+      margin: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .issue-cover {
+      background: #000;
+    }
+
+    .issue-cover img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .editorial-intro {
+      background: var(--cream);
+      color: var(--black-text);
+      padding: 32px 18px 34px;
+      border-bottom: 8px solid #000;
+    }
+
+    .intro-card {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .intro-kicker {
+      font-size: 15px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #7d622e;
+      margin-bottom: 14px;
+    }
+
+    .intro-title {
+      margin: 0 0 18px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 0.96;
+      color: #131313;
+    }
+
+    .intro-copy {
+      margin: 0 auto;
+      max-width: 760px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(22px, 3.4vw, 34px);
+      line-height: 1.22;
+      color: #232323;
+    }
+
+    .intro-copy + .intro-copy {
+      margin-top: 14px;
+    }
+
+    .cta-row {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: 3px solid #0b0b0b;
+      min-height: 58px;
+      padding: 14px 22px;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), filter var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+    }
+
+    .btn-green {
+      background: var(--neon-green);
+      color: #000;
+    }
+
+    .btn-cyan {
+      background: var(--cyan);
+      color: #001217;
+    }
+
+    .btn-yellow {
+      background: var(--yellow);
+      color: #121212;
+    }
+
+    .lead-story {
+      background: #000;
+      color: var(--white);
+    }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(290px, 0.85fr);
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .lead-grid .lead-media img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lead-copy {
+      padding: 24px 26px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+    }
+
+    .kicker {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .display-title {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(46px, 7vw, 92px);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+    }
+
+    .display-subtitle {
+      margin: 6px 0 18px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 0.98;
+      color: var(--gold);
+    }
+
+    .lead-copy p {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(22px, 2.8vw, 36px);
+      line-height: 1.26;
+      color: #faf7ef;
+      max-width: 520px;
+    }
+
+    .lead-copy .btn {
+      margin-top: 24px;
+      width: fit-content;
+    }
+
+    .story-card {
+      border-top: 5px solid #000;
+      border-bottom: 5px solid #000;
+    }
+
+    .story-card.story-light {
+      background: var(--cream);
+      color: var(--black-text);
+    }
+
+    .story-card.story-dark {
+      background: #000;
+      color: var(--white);
+    }
+
+    .story-grid-light {
+      display: grid;
+      grid-template-columns: minmax(145px, 0.38fr) minmax(0, 0.92fr) 130px;
+      align-items: stretch;
+      gap: 6px;
+      padding: 6px;
+    }
+
+    .story-grid-dark {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(270px, 0.78fr);
+      gap: 6px;
+      padding: 6px;
+      align-items: stretch;
+    }
+
+    .story-copy {
+      padding: 20px 16px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .story-copy.dark {
+      background: #000;
+      color: var(--white);
+    }
+
+    .story-copy.light {
+      background: var(--cream);
+      color: var(--black-text);
+    }
+
+    .story-number {
+      color: var(--gold);
+      font-size: 26px;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .story-index {
+      color: var(--gold);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .story-label {
+      color: #8c6b2f;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .story-title {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 5vw, 74px);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+    }
+
+    .story-subtitle {
+      margin: 3px 0 14px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(22px, 3vw, 44px);
+      line-height: 1;
+    }
+
+    .story-copy p {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(16px, 2vw, 22px);
+      line-height: 1.32;
+    }
+
+    .story-copy .btn {
+      margin-top: 22px;
+      width: fit-content;
+      min-width: 210px;
+    }
+
+    .media-main {
+      background: #151515;
+      overflow: hidden;
+      min-height: 100%;
+    }
+
+    .media-main img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-stack {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .thumb-stack img,
+    .thumb-row img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .visual-block {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .ending-section {
+      background: #000;
+      color: var(--white);
+      padding: 32px 18px 40px;
+    }
+
+    .ending-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .ending-copy .kicker {
+      margin-bottom: 12px;
+    }
+
+    .ending-title {
+      margin: 0 0 14px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(42px, 6vw, 80px);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+    }
+
+    .ending-copy p {
+      margin: 0;
+      max-width: 640px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.23;
+      color: #f0ede6;
+    }
+
+    .ending-copy .btn {
+      margin-top: 22px;
+    }
+
+    .polaroid {
+      background: #fff;
+      color: #111;
+      padding: 10px 10px 18px;
+      width: 100%;
+      max-width: 220px;
+      margin-inline: auto;
+      transform: rotate(-6deg);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.38);
+    }
+
+    .polaroid img {
+      aspect-ratio: 1 / 1.1;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .polaroid-caption {
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      line-height: 1.14;
+    }
+
+    .assistant-bubble {
+      position: fixed;
+      right: 14px;
+      bottom: 16px;
+      z-index: 1200;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 14px 26px rgba(0, 0, 0, 0.42);
+      border: 4px solid #111;
+      overflow: hidden;
+    }
+
+    .assistant-bubble img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .assistant-badge {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #72ff1f;
+      border: 3px solid #111;
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 21px;
+    }
+
+    [dir="rtl"] .lead-grid,
+    [dir="rtl"] .story-grid-dark,
+    [dir="rtl"] .story-grid-light,
+    [dir="rtl"] .ending-grid {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .story-copy,
+    [dir="rtl"] .lead-copy,
+    [dir="rtl"] .ending-copy,
+    [dir="rtl"] .intro-card {
+      text-align: right;
+    }
+
+    [dir="rtl"] .cta-row {
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 1024px) {
+      .lead-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-grid-dark {
+        grid-template-columns: 1fr;
+      }
+
+      .ending-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 820px) {
+      :root {
+        --shell-height: 200px;
+      }
+
+      .shell-top {
+        padding: 10px 12px;
+      }
+
+      .top-actions {
+        gap: 8px;
+      }
+
+      .advertise-btn {
+        padding-inline: 12px;
+        font-size: 13px;
+      }
+
+      .profile-chip .text-label {
+        display: none;
+      }
+
+      .story-grid-light {
+        grid-template-columns: minmax(138px, 0.42fr) minmax(0, 1fr) 92px;
+      }
+
+      .story-copy {
+        padding: 16px 12px 18px;
+      }
+
+      .story-copy .btn {
+        min-width: 0;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      :root {
+        --shell-height: 216px;
+      }
+
+      .brand-name {
+        font-size: 24px;
+      }
+
+      .nav-link {
+        font-size: 16px;
+        padding-inline: 14px;
+      }
+
+      .language-strip {
+        font-size: 16px;
+      }
+
+      .intro-title {
+        font-size: 44px;
+      }
+
+      .intro-copy,
+      .lead-copy p,
+      .ending-copy p {
+        font-size: 18px;
+      }
+
+      .display-title {
+        font-size: 34px;
+      }
+
+      .display-subtitle {
+        font-size: 24px;
+      }
+
+      .story-grid-light {
+        grid-template-columns: minmax(126px, 0.46fr) minmax(0, 1fr) 84px;
+      }
+
+      .story-title {
+        font-size: 28px;
+      }
+
+      .story-subtitle {
+        font-size: 18px;
+      }
+
+      .story-copy p {
+        font-size: 14px;
+      }
+
+      .btn {
+        min-height: 52px;
+        font-size: 14px;
+        padding: 12px 14px;
+      }
+
+      .assistant-bubble {
+        width: 76px;
+        height: 76px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-shell" id="siteShell">
+    <div class="shell-inner">
+      <div class="shell-top">
+        <div class="brand-wrap">
+          <button class="icon-btn" aria-label="Open menu">☰</button>
+          <div class="brand-name">PETS &amp; DOGUE</div>
+        </div>
+
+        <div class="top-actions">
+          <a class="home-btn" href="index.html" aria-label="Home">⌂</a>
+
+          <button class="advertise-btn" type="button" data-i18n="ui_advertise">
+            Advertise with us
+          </button>
+
+          <a class="profile-chip" href="#" aria-label="Profile">
+            <span class="avatar">◯</span>
+            <span class="text-label" data-i18n="ui_profile">Profile</span>
+          </a>
+        </div>
+      </div>
+
+      <nav class="primary-nav" aria-label="Primary sections">
+        <a class="nav-link active-green" href="#" data-i18n="nav_pet_friendly">🐾 Pet-Friendly Places</a>
+        <a class="nav-link" href="#" data-i18n="nav_discounts">Discounts</a>
+        <a class="nav-link" href="#" data-i18n="nav_help">💗 Help</a>
+        <a class="nav-link" href="#" data-i18n="nav_community">Community</a>
+        <a class="nav-link" href="#" data-i18n="nav_marketplace">Marketplace</a>
+      </nav>
+
+      <nav class="secondary-nav" aria-label="Editorial sections">
+        <a class="nav-link active-tab" href="#issue-cover" data-i18n="nav_edition">Edition</a>
+        <a class="nav-link" href="#miso-story" data-i18n="nav_cover_stars">Cover Stars</a>
+        <a class="nav-link" href="#" data-i18n="nav_contests">Contests</a>
+        <a class="nav-link" href="#" data-i18n="nav_articles">Articles</a>
+        <a class="nav-link" href="#" data-i18n="nav_photos">Photos</a>
+        <a class="nav-link" href="#" data-i18n="nav_fashion">Fashion</a>
+        <a class="nav-link" href="#" data-i18n="nav_health">Health</a>
+      </nav>
+
+      <div class="language-strip">
+        <a class="discover-link" href="#issue-intro">
+          <span>·</span>
+          <span data-i18n="ui_discover">Discover every section</span>
+          <span>→</span>
+        </a>
+
+        <div class="language-controls">
+          <span>🇬🇧 🇺🇦 🇷🇺</span>
+          <span class="language-label" data-i18n="ui_choose_language">Choose language</span>
+          <span>🌐</span>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+          <button class="lang-btn" type="button" data-lang="uk">UK</button>
+          <button class="lang-btn" type="button" data-lang="ru">RU</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="content-wrap">
+      <section class="section issue-cover" id="issue-cover">
+        <img
+          src="santorini_dogue_stars_of_summer.png"
+          alt="PETS & DOGUE Issue 01 cover with Miso, Pablo, Jessica, Richie and Pi"
+        />
+      </section>
+
+      <section class="section editorial-intro" id="issue-intro">
+        <div class="intro-card">
+          <div class="intro-kicker" data-i18n="intro_kicker">PETS &amp; DOGUE · ISSUE 01 · SUMMER 2026</div>
+          <h1 class="intro-title" data-i18n="intro_title">Our very first cover</h1>
+
+          <p class="intro-copy" data-i18n="intro_body_1">
+            This is where our first issue begins. Meet Miso, Pablo, Jessica, Richie and Pi — five very different personalities brought together on the very first PETS &amp; DOGUE cover.
+          </p>
+
+          <p class="intro-copy" data-i18n="intro_body_2">
+            Scroll down and get to know each of them a little better.
+          </p>
+
+          <div class="cta-row">
+            <a href="#lead-miso" class="btn btn-green" data-i18n="intro_button">Meet the cover stars</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section lead-story" id="lead-miso">
+        <div class="lead-grid">
+          <div class="lead-media">
+            <img
+              src="miso-cover-star-retouched.png"
+              alt="Miso the pomeranian in a pink bow and dress"
+            />
+          </div>
+
+          <div class="lead-copy">
+            <div class="kicker" data-i18n="lead_kicker">PETS &amp; DOGUE · ISSUE 01</div>
+            <h2 class="display-title" data-i18n="lead_title">It all began with Miso</h2>
+            <div class="display-subtitle" data-i18n="lead_subtitle">And her friends.</div>
+
+            <p data-i18n="lead_body">
+              Every story has a beginning. Ours began with one tiny blonde Pomeranian named Miso — and the extraordinary animals around her. Their personalities, friendships, adventures and the joy they bring into our lives became the inspiration for PETS &amp; DOGUE.
+            </p>
+
+            <a href="#miso-story" class="btn btn-green" data-i18n="lead_button">Meet Miso</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section story-card story-light" id="miso-story">
+        <div class="story-grid-light">
+          <div class="story-copy light">
+            <div class="story-number">01</div>
+            <div class="story-label" data-i18n="miso_label">Cover Star</div>
+            <h3 class="story-title" data-i18n="miso_title">Miso</h3>
+            <div class="story-subtitle" data-i18n="miso_subtitle">The little explorer</div>
+            <p data-i18n="miso_body">
+              Miso is a tiny blonde Pomeranian from London. She loves fashion, travelling, long walks and discovering beautiful new places. Her curiosity and unmistakable personality became the inspiration behind PETS &amp; DOGUE and the beginning of this first issue.
+            </p>
+            <a href="#pablo-story" class="btn btn-green" data-i18n="miso_button">More about Miso</a>
+          </div>
+
+          <div class="media-main">
+            <img
+              src="miso-cover-star-retouched.png"
+              alt="Miso portrait"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="thumb-stack">
+            <img src="miso-01.jpg" alt="Miso in a pink outfit" loading="lazy" />
+            <img src="miso-02.jpg" alt="Miso outside" loading="lazy" />
+            <img src="miso-03.jpg" alt="Miso resting" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section story-card story-dark" id="pablo-story">
+        <div class="story-grid-dark">
+          <div class="visual-block">
+            <div class="media-main">
+              <img src="pablo-01.jpg" alt="Pablo portrait" loading="lazy" />
+            </div>
+            <div class="thumb-row">
+              <img src="pablo-02.jpg" alt="Pablo close-up" loading="lazy" />
+              <img src="pablo-03.jpg" alt="Pablo looking forward" loading="lazy" />
+              <img src="pablo-04.jpg" alt="Pablo resting" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="story-copy dark">
+            <div class="story-index">02</div>
+            <h3 class="story-title" data-i18n="pablo_title">Pablo</h3>
+            <div class="story-subtitle" data-i18n="pablo_subtitle">Stylish Sphynx</div>
+            <p data-i18n="pablo_body">
+              Pablo is a Sphynx Bambino with enormous personality. He loves warmth, attention and being exactly where something interesting is happening. His expressive blue eyes, short legs and unmistakable character make him impossible to forget.
+            </p>
+            <a href="#jessica-story" class="btn btn-cyan" data-i18n="pablo_button">More about Pablo</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section story-card story-light" id="jessica-story">
+        <div class="story-grid-light">
+          <div class="story-copy light">
+            <div class="story-number">03</div>
+            <h3 class="story-title" data-i18n="jessica_title">Jessica</h3>
+            <div class="story-subtitle" data-i18n="jessica_subtitle">Gentle British lady</div>
+            <p data-i18n="jessica_body">
+              Jessica is a charming British Shorthair from London. Calm, observant and wonderfully independent, she loves relaxing at home and watching the world from her favourite comfortable places. Soft on the outside, unmistakably Jessica on the inside.
+            </p>
+            <a href="#richie-story" class="btn btn-yellow" data-i18n="jessica_button">More about Jessica</a>
+          </div>
+
+          <div class="media-main">
+            <img src="jessica-01.jpg" alt="Jessica portrait" loading="lazy" />
+          </div>
+
+          <div class="thumb-stack">
+            <img src="jessica-02.jpg" alt="Jessica resting" loading="lazy" />
+            <img src="jessica-03.jpg" alt="Jessica in basket" loading="lazy" />
+            <img src="jessica-04.jpg" alt="Jessica on hammock" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section story-card story-dark" id="richie-story">
+        <div class="story-grid-dark">
+          <div class="visual-block">
+            <div class="media-main">
+              <img src="richie-pi-06.jpg" alt="Richie with Pi" loading="lazy" />
+            </div>
+            <div class="thumb-row">
+              <img src="richie-pi-01.jpg" alt="Richie and Pi cuddling" loading="lazy" />
+              <img src="richie-pi-02.jpg" alt="Richie and Pi at sunset" loading="lazy" />
+              <img src="richie-pi-05.jpg" alt="Richie and Pi resting" loading="lazy" />
+            </div>
+          </div>
+
+          <div class="story-copy dark">
+            <div class="story-index">04</div>
+            <h3 class="story-title" data-i18n="richie_title">Richie</h3>
+            <div class="story-subtitle" data-i18n="richie_subtitle">A gentle little friend</div>
+            <p data-i18n="richie_body">
+              Richie is a sweet rabbit with a huge heart. He loves children, exploring and peaceful days by the sea. His unlikely friendship with Pi became one of the warmest stories in our first issue — two completely different animals who simply chose each other.
+            </p>
+            <a href="#pi-story" class="btn btn-green" data-i18n="richie_button">More about Richie</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section story-card story-light" id="pi-story">
+        <div class="story-grid-light">
+          <div class="story-copy light">
+            <div class="story-number">05</div>
+            <h3 class="story-title" data-i18n="pi_title">Pi</h3>
+            <div class="story-subtitle" data-i18n="pi_subtitle">Bright pink personality</div>
+            <p data-i18n="pi_body">
+              Pi is a beautiful pink parrot with a huge personality. Curious, expressive and fiercely loyal, he became Richie’s unexpected protector and closest friend. Their adventures together are full of colour, humour and one friendship nobody could have planned.
+            </p>
+            <a href="#issue-ending" class="btn btn-cyan" data-i18n="pi_button">More about Pi</a>
+          </div>
+
+          <div class="media-main">
+            <img src="richie-pi-07.jpg" alt="Pi with Richie" loading="lazy" />
+          </div>
+
+          <div class="thumb-stack">
+            <img src="richie-pi-04.jpg" alt="Richie and Pi together" loading="lazy" />
+            <img src="richie-pi-05.jpg" alt="Pi cuddling Richie" loading="lazy" />
+            <img src="richie-pi-03.jpg" alt="Richie and Pi close-up" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section ending-section" id="issue-ending">
+        <div class="ending-grid">
+          <div class="ending-copy">
+            <div class="kicker" data-i18n="ending_kicker">PETS &amp; DOGUE · ISSUE 01</div>
+            <h2 class="ending-title" data-i18n="ending_title">More stories inside this issue</h2>
+            <p data-i18n="ending_body">
+              Fashion, pet-friendly places, wellness, beautiful photography and stories about the animals who make our world extraordinary — this is only the beginning.
+            </p>
+            <a href="#issue-cover" class="btn btn-yellow" data-i18n="ending_button">Issue 01</a>
+          </div>
+
+          <div class="polaroid">
+            <img src="miso-04.jpg" alt="Miso polaroid" loading="lazy" />
+            <div class="polaroid-caption" data-i18n="ending_polaroid">
+              A small dog.<br />
+              A very big idea.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <a href="#" class="assistant-bubble" aria-label="Help Miso bubble">
+    <img src="miso-cover-star-retouched.png" alt="Miso help bubble" />
+    <span class="assistant-badge">?</span>
+  </a>
+
+  <script>
+    (function () {
+      const shell = document.getElementById("siteShell");
+      let lastScrollY = window.scrollY;
+      let ticking = false;
+
+      function setShellHeight() {
+        const height = shell.offsetHeight;
+        document.documentElement.style.setProperty("--shell-height", height + "px");
+      }
+
+      function onScroll() {
+        const currentY = window.scrollY;
+
+        if (currentY <= 8) {
+          shell.classList.remove("is-hidden");
+          lastScrollY = currentY;
+          return;
+        }
+
+        if (currentY > lastScrollY + 10) {
+          shell.classList.add("is-hidden");
+        } else if (currentY < lastScrollY - 10) {
+          shell.classList.remove("is-hidden");
+        }
+
+        lastScrollY = currentY;
+      }
+
+      window.addEventListener("scroll", function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            onScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      window.addEventListener("resize", setShellHeight);
+      window.addEventListener("load", setShellHeight);
+      setShellHeight();
+    })();
+
+    (function () {
+      const storageKey = "petsDogueLanguage";
+      const buttons = document.querySelectorAll(".lang-btn");
+
+      const dict = {
+        en: {
+          ui_advertise: "Advertise with us",
+          ui_profile: "Profile",
+          nav_pet_friendly: "🐾 Pet-Friendly Places",
+          nav_discounts: "Discounts",
+          nav_help: "💗 Help",
+          nav_community: "Community",
+          nav_marketplace: "Marketplace",
+          nav_edition: "Edition",
+          nav_cover_stars: "Cover Stars",
+          nav_contests: "Contests",
+          nav_articles: "Articles",
+          nav_photos: "Photos",
+          nav_fashion: "Fashion",
+          nav_health: "Health",
+          ui_discover: "Discover every section",
+          ui_choose_language: "Choose language",
+          intro_kicker: "PETS & DOGUE · ISSUE 01 · SUMMER 2026",
+          intro_title: "Our very first cover",
+          intro_body_1:
+            "This is where our first issue begins. Meet Miso, Pablo, Jessica, Richie and Pi — five very different personalities brought together on the very first PETS & DOGUE cover.",
+          intro_body_2:
+            "Scroll down and get to know each of them a little better.",
+          intro_button: "Meet the cover stars",
+          lead_kicker: "PETS & DOGUE · ISSUE 01",
+          lead_title: "It all began with Miso",
+          lead_subtitle: "And her friends.",
+          lead_body:
+            "Every story has a beginning. Ours began with one tiny blonde Pomeranian named Miso — and the extraordinary animals around her. Their personalities, friendships, adventures and the joy they bring into our lives became the inspiration for PETS & DOGUE.",
+          lead_button: "Meet Miso",
+          miso_label: "Cover Star",
+          miso_title: "Miso",
+          miso_subtitle: "The little explorer",
+          miso_body:
+            "Miso is a tiny blonde Pomeranian from London. She loves fashion, travelling, long walks and discovering beautiful new places. Her curiosity and unmistakable personality became the inspiration behind PETS & DOGUE and the beginning of this first issue.",
+          miso_button: "More about Miso",
+          pablo_title: "Pablo",
+          pablo_subtitle: "Stylish Sphynx",
+          pablo_body:
+            "Pablo is a Sphynx Bambino with enormous personality. He loves warmth, attention and being exactly where something interesting is happening. His expressive blue eyes, short legs and unmistakable character make him impossible to forget.",
+          pablo_button: "More about Pablo",
+          jessica_title: "Jessica",
+          jessica_subtitle: "Gentle British lady",
+          jessica_body:
+            "Jessica is a charming British Shorthair from London. Calm, observant and wonderfully independent, she loves relaxing at home and watching the world from her favourite comfortable places. Soft on the outside, unmistakably Jessica on the inside.",
+          jessica_button: "More about Jessica",
+          richie_title: "Richie",
+          richie_subtitle: "A gentle little friend",
+          richie_body:
+            "Richie is a sweet rabbit with a huge heart. He loves children, exploring and peaceful days by the sea. His unlikely friendship with Pi became one of the warmest stories in our first issue — two completely different animals who simply chose each other.",
+          richie_button: "More about Richie",
+          pi_title: "Pi",
+          pi_subtitle: "Bright pink personality",
+          pi_body:
+            "Pi is a beautiful pink parrot with a huge personality. Curious, expressive and fiercely loyal, he became Richie’s unexpected protector and closest friend. Their adventures together are full of colour, humour and one friendship nobody could have planned.",
+          pi_button: "More about Pi",
+          ending_kicker: "PETS & DOGUE · ISSUE 01",
+          ending_title: "More stories inside this issue",
+          ending_body:
+            "Fashion, pet-friendly places, wellness, beautiful photography and stories about the animals who make our world extraordinary — this is only the beginning.",
+          ending_button: "Issue 01",
+          ending_polaroid: "A small dog.<br />A very big idea."
+        },
+
+        ru: {
+          ui_advertise: "Реклама у нас",
+          ui_profile: "Профиль",
+          nav_pet_friendly: "🐾 Pet-Friendly Places",
+          nav_discounts: "Скидки",
+          nav_help: "💗 Help",
+          nav_community: "Сообщество",
+          nav_marketplace: "Маркетплейс",
+          nav_edition: "Edition",
+          nav_cover_stars: "Cover Stars",
+          nav_contests: "Конкурсы",
+          nav_articles: "Статьи",
+          nav_photos: "Фото",
+          nav_fashion: "Мода",
+          nav_health: "Здоровье",
+          ui_discover: "Открыть все разделы",
+          ui_choose_language: "Выберите язык",
+          intro_kicker: "PETS & DOGUE · ВЫПУСК 01 · ЛЕТО 2026",
+          intro_title: "Наша первая обложка",
+          intro_body_1:
+            "Именно здесь начинается наш первый выпуск. Познакомьтесь с Miso, Pablo, Jessica, Richie и Pi — пятью совершенно разными героями, которых объединила самая первая обложка PETS & DOGUE.",
+          intro_body_2:
+            "Листайте ниже и познакомьтесь с каждым из них поближе.",
+          intro_button: "Познакомиться с героями обложки",
+          lead_kicker: "PETS & DOGUE · ВЫПУСК 01",
+          lead_title: "Всё началось с Miso",
+          lead_subtitle: "И её друзей.",
+          lead_body:
+            "У каждой истории есть начало. Наша началась с одной маленькой светлой померанской девочки по имени Miso — и удивительных животных рядом с ней. Их характеры, дружба, приключения и радость, которую они приносят, стали вдохновением для PETS & DOGUE.",
+          lead_button: "Познакомиться с Miso",
+          miso_label: "Звезда обложки",
+          miso_title: "Miso",
+          miso_subtitle: "Маленькая исследовательница",
+          miso_body:
+            "Miso — маленький светлый померанский шпиц из Лондона. Она любит моду, путешествия, долгие прогулки и открывать красивые новые места. Именно её любопытство и яркая индивидуальность стали вдохновением для PETS & DOGUE и началом этого первого выпуска.",
+          miso_button: "Больше о Miso",
+          pablo_title: "Pablo",
+          pablo_subtitle: "Стильный сфинкс",
+          pablo_body:
+            "Pablo — сфинкс Bambino с огромной харизмой. Он любит тепло, внимание и всегда оказывается именно там, где происходит что-то интересное. Его выразительные голубые глаза, короткие лапки и характер, который невозможно спутать, делают его незабываемым.",
+          pablo_button: "Больше о Pablo",
+          jessica_title: "Jessica",
+          jessica_subtitle: "Нежная британская леди",
+          jessica_body:
+            "Jessica — очаровательная британская короткошёрстная кошка из Лондона. Спокойная, внимательная и удивительно независимая, она любит отдыхать дома и наблюдать за миром из своих любимых уютных мест. Мягкая снаружи — и абсолютно Jessica внутри.",
+          jessica_button: "Больше о Jessica",
+          richie_title: "Richie",
+          richie_subtitle: "Добрый маленький друг",
+          richie_body:
+            "Richie — милый кролик с большим сердцем. Он любит детей, прогулки, открытия и спокойные дни у моря. Его неожиданная дружба с Pi стала одной из самых тёплых историй в нашем первом выпуске — два совершенно разных животных, которые просто выбрали друг друга.",
+          richie_button: "Больше о Richie",
+          pi_title: "Pi",
+          pi_subtitle: "Яркая розовая личность",
+          pi_body:
+            "Pi — красивый розовый попугай с огромной индивидуальностью. Любопытный, выразительный и очень преданный, он стал неожиданным защитником и самым близким другом Richie. Их общие приключения — это цвет, юмор и дружба, которую невозможно было заранее придумать.",
+          pi_button: "Больше о Pi",
+          ending_kicker: "PETS & DOGUE · ВЫПУСК 01",
+          ending_title: "Больше историй внутри этого выпуска",
+          ending_body:
+            "Мода, pet-friendly места, wellness, красивая фотография и истории о животных, которые делают наш мир особенным, — и это только начало.",
+          ending_button: "Выпуск 01",
+          ending_polaroid: "Маленькая собака.<br />Очень большая идея."
+        },
+
+        uk: {
+          ui_advertise: "Реклама у нас",
+          ui_profile: "Профіль",
+          nav_pet_friendly: "🐾 Pet-Friendly Places",
+          nav_discounts: "Знижки",
+          nav_help: "💗 Help",
+          nav_community: "Спільнота",
+          nav_marketplace: "Маркетплейс",
+          nav_edition: "Edition",
+          nav_cover_stars: "Cover Stars",
+          nav_contests: "Конкурси",
+          nav_articles: "Статті",
+          nav_photos: "Фото",
+          nav_fashion: "Мода",
+          nav_health: "Здоров’я",
+          ui_discover: "Відкрити всі розділи",
+          ui_choose_language: "Оберіть мову",
+          intro_kicker: "PETS & DOGUE · ВИПУСК 01 · ЛІТО 2026",
+          intro_title: "Наша перша обкладинка",
+          intro_body_1:
+            "Саме тут починається наш перший випуск. Познайомтеся з Miso, Pablo, Jessica, Richie та Pi — п’ятьма зовсім різними героями, яких об’єднала найперша обкладинка PETS & DOGUE.",
+          intro_body_2:
+            "Гортайте нижче та познайомтеся з кожним із них ближче.",
+          intro_button: "Познайомитися з героями обкладинки",
+          lead_kicker: "PETS & DOGUE · ВИПУСК 01",
+          lead_title: "Усе почалося з Miso",
+          lead_subtitle: "І її друзів.",
+          lead_body:
+            "Кожна історія має початок. Наша почалася з однієї маленької світлої померанської дівчинки на ім’я Miso — і дивовижних тварин навколо неї. Їхні характери, дружба, пригоди та радість, яку вони приносять, стали натхненням для PETS & DOGUE.",
+          lead_button: "Познайомитися з Miso",
+          miso_label: "Зірка обкладинки",
+          miso_title: "Miso",
+          miso_subtitle: "Маленька дослідниця",
+          miso_body:
+            "Miso — маленький світлий померанський шпіц із Лондона. Вона любить моду, подорожі, довгі прогулянки та відкривати красиві нові місця. Саме її допитливість і яскрава індивідуальність стали натхненням для PETS & DOGUE та початком цього першого випуску.",
+          miso_button: "Більше про Miso",
+          pablo_title: "Pablo",
+          pablo_subtitle: "Стильний сфінкс",
+          pablo_body:
+            "Pablo — сфінкс Bambino з величезною харизмою. Він любить тепло, увагу та завжди опиняється саме там, де відбувається щось цікаве. Його виразні блакитні очі, короткі лапки та характер, який неможливо переплутати, роблять його незабутнім.",
+          pablo_button: "Більше про Pablo",
+          jessica_title: "Jessica",
+          jessica_subtitle: "Ніжна британська леді",
+          jessica_body:
+            "Jessica — чарівна британська короткошерста кішка з Лондона. Спокійна, уважна й напрочуд незалежна, вона любить відпочивати вдома та спостерігати за світом зі своїх улюблених затишних місць. М’яка зовні — і абсолютно Jessica всередині.",
+          jessica_button: "Більше про Jessica",
+          richie_title: "Richie",
+          richie_subtitle: "Добрий маленький друг",
+          richie_body:
+            "Richie — милий кролик із великим серцем. Він любить дітей, дослідження та спокійні дні біля моря. Його несподівана дружба з Pi стала однією з найтепліших історій у нашому першому випуску — двоє зовсім різних тварин, які просто обрали одне одного.",
+          richie_button: "Більше про Richie",
+          pi_title: "Pi",
+          pi_subtitle: "Яскрава рожева особистість",
+          pi_body:
+            "Pi — красивий рожевий папуга з величезною індивідуальністю. Допитливий, виразний і дуже відданий, він став несподіваним захисником і найближчим другом Richie. Їхні спільні пригоди — це колір, гумор і дружба, яку неможливо було заздалегідь придумати.",
+          pi_button: "Більше про Pi",
+          ending_kicker: "PETS & DOGUE · ВИПУСК 01",
+          ending_title: "Більше історій усередині цього випуску",
+          ending_body:
+            "Мода, pet-friendly місця, wellness, красива фотографія та історії про тварин, які роблять наш світ особливим, — і це лише початок.",
+          ending_button: "Випуск 01",
+          ending_polaroid: "Маленька собака.<br />Дуже велика ідея."
+        }
+      };
+
+      const alias = {
+        ua: "uk",
+        cz: "cs",
+        gr: "el",
+        se: "sv",
+        dk: "da"
+      };
+
+      function resolveLang(value) {
+        if (!value) return "en";
+        const lowered = value.toLowerCase();
+        return alias[lowered] || lowered;
+      }
+
+      function applyLanguage(lang) {
+        const cleanLang = resolveLang(lang);
+        const safeLang = dict[cleanLang] ? cleanLang : "en";
+        const pack = dict[safeLang];
+
+        document.documentElement.lang = safeLang;
+        document.documentElement.dir = safeLang === "ar" ? "rtl" : "ltr";
+
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.getAttribute("data-i18n");
+          if (pack[key]) node.textContent = pack[key];
+        });
+
+        document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+          const key = node.getAttribute("data-i18n-html");
+          if (pack[key]) node.innerHTML = pack[key];
+        });
+
+        const polaroid = document.querySelector("[data-i18n='ending_polaroid']");
+        if (polaroid && pack.ending_polaroid) {
+          polaroid.innerHTML = pack.ending_polaroid;
+        }
+
+        buttons.forEach((btn) => {
+          btn.classList.toggle("is-active", btn.dataset.lang === safeLang);
+        });
+
+        localStorage.setItem(storageKey, safeLang);
+
+        window.dispatchEvent(
+          new CustomEvent("pets-dogue-language-change", {
+            detail: { lang: safeLang }
+          })
+        );
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+      });
+
+      const savedLang = resolveLang(localStorage.getItem(storageKey));
+      applyLanguage(savedLang || "en");
+    })();
+  </script>
 </body>
 </html>
