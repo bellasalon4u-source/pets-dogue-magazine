@@ -44,12 +44,12 @@
 ===================================================== -->
 
 <script
-  src="/translations.js?v=20260926-richie-pi-final"
+  src="/translations.js?v=20260929-richie-pi-editorial"
   defer
 ></script>
 
 <script
-  src="/pets-dogue-shell.js?v=20260926-richie-pi-final"
+  src="/pets-dogue-shell.js?v=20260929-richie-pi-editorial"
   defer
 ></script>
 
@@ -57,17 +57,20 @@
 :root{
   --pd-black:#070707;
   --pd-white:#ffffff;
-  --pd-paper:#fff8e9;
+  --pd-paper:#fff9ed;
   --pd-cream:#fff2d3;
-  --pd-gold:#c89a3b;
-  --pd-gold-dark:#846022;
-  --pd-pink:#f4a8bd;
-  --pd-pink-soft:#ffe0e9;
-  --pd-coral:#ff9b82;
-  --pd-blue:#5ed3ef;
-  --pd-blue-soft:#def7ff;
-  --pd-green:#b9ed73;
+  --pd-gold:#d5a438;
+  --pd-gold-light:#f0ca67;
+  --pd-gold-dark:#85611f;
+  --pd-pink:#f29ab6;
+  --pd-pink-hot:#e83e78;
+  --pd-pink-soft:#ffe3ec;
+  --pd-coral:#ff9d88;
+  --pd-blue:#65d2eb;
+  --pd-blue-soft:#e4f8fc;
+  --pd-green:#79ad4b;
   --pd-yellow:#ffe36a;
+  --pd-red:#d71920;
   --pd-serif:Georgia,"Times New Roman",serif;
   --pd-sans:Arial,Helvetica,sans-serif;
 }
@@ -113,38 +116,43 @@ a{
 }
 
 .pd-section{
-  border-bottom:7px solid #000;
+  border-bottom:5px solid #000;
+}
+
+.pd-heart{
+  color:var(--pd-red);
+  font-style:normal;
 }
 
 .pd-kicker{
-  margin:0 0 12px;
+  margin:0 0 9px;
   font-family:var(--pd-sans);
-  font-size:12px;
-  line-height:1.35;
+  font-size:11px;
+  line-height:1.3;
   font-weight:900;
-  letter-spacing:.16em;
+  letter-spacing:.17em;
   text-transform:uppercase;
 }
 
 .pd-display{
   margin:0;
   font-family:var(--pd-serif);
-  font-size:clamp(48px,8vw,92px);
+  font-size:clamp(45px,7vw,82px);
   line-height:.88;
   letter-spacing:-.045em;
   font-weight:700;
 }
 
 .pd-story-text{
-  max-width:760px;
+  max-width:720px;
   margin:0 auto;
   font-family:var(--pd-serif);
-  font-size:20px;
-  line-height:1.67;
+  font-size:18px;
+  line-height:1.52;
 }
 
 .pd-story-text p{
-  margin:0 0 18px;
+  margin:0 0 13px;
 }
 
 .pd-story-text p:last-child{
@@ -152,81 +160,118 @@ a{
 }
 
 /* =====================================================
-   HERO
+   HERO — FULL PHOTO / TEXT OVER IMAGE
 ===================================================== */
 
 .pd-hero{
-  display:grid;
-  grid-template-columns:1.13fr .87fr;
-  min-height:700px;
-  background:#080808;
+  position:relative;
+  min-height:680px;
+  overflow:hidden;
+  background:#111;
   color:#fff;
 }
 
 .pd-hero-photo{
-  min-height:700px;
-  overflow:hidden;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.pd-hero-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.76) 0%,
+      rgba(0,0,0,.51) 29%,
+      rgba(0,0,0,.13) 58%,
+      rgba(0,0,0,.04) 100%
+    );
+  pointer-events:none;
 }
 
 .pd-hero-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center;
+  object-position:center 48%;
+  filter:contrast(1.05) saturate(1.07);
 }
 
 .pd-hero-copy{
+  position:relative;
+  z-index:2;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:48px 40px;
+  width:47%;
+  min-height:680px;
+  padding:48px 38px 42px;
+  text-shadow:0 2px 12px rgba(0,0,0,.48);
 }
 
 .pd-hero-copy .pd-kicker{
-  color:var(--pd-gold);
+  color:var(--pd-gold-light);
 }
 
 .pd-hero-copy h1{
   margin:0;
   font-family:var(--pd-serif);
-  font-size:clamp(52px,7.6vw,90px);
-  line-height:.85;
+  font-size:clamp(60px,9vw,104px);
+  line-height:.78;
   font-weight:500;
-  letter-spacing:-.045em;
+  letter-spacing:-.055em;
+}
+
+.pd-richie-name{
+  color:var(--pd-gold-light);
+}
+
+.pd-pi-name{
+  color:var(--pd-pink-hot);
+}
+
+.pd-amp{
+  color:#fff;
+  font-size:.7em;
+  font-style:italic;
 }
 
 .pd-hero-sub{
-  margin:17px 0 24px;
-  color:#f6b6c7;
+  max-width:460px;
+  margin:22px 0 17px;
   font-family:var(--pd-serif);
-  font-size:clamp(27px,4vw,47px);
-  line-height:.96;
+  font-size:clamp(28px,4vw,46px);
+  line-height:.94;
 }
 
 .pd-hero-copy p{
+  max-width:430px;
   margin:0;
-  max-width:520px;
   font-family:var(--pd-serif);
-  font-size:20px;
-  line-height:1.5;
+  font-size:18px;
+  line-height:1.42;
 }
 
 .pd-back{
   display:inline-flex;
   align-items:center;
-  gap:9px;
+  gap:8px;
   align-self:flex-start;
-  margin-top:29px;
+  margin-top:22px;
   padding-bottom:5px;
-  border-bottom:1px solid var(--pd-gold);
-  font-size:11px;
+  border-bottom:1px solid var(--pd-gold-light);
+  font-size:10px;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
 }
 
 /* =====================================================
-   INTRO
+   INTRO — COMPACT
 ===================================================== */
 
 .pd-intro{
@@ -234,7 +279,7 @@ a{
 }
 
 .pd-intro-head{
-  padding:47px 28px 28px;
+  padding:34px 25px 18px;
   text-align:center;
 }
 
@@ -243,17 +288,26 @@ a{
 }
 
 .pd-intro-body{
-  padding:0 29px 48px;
+  padding:0 25px 34px;
 }
 
 .pd-big-love{
-  max-width:820px;
-  margin:0 auto 34px;
+  max-width:790px;
+  margin:0 auto 22px;
   text-align:center;
   font-family:var(--pd-serif);
-  font-size:clamp(37px,6vw,62px);
-  line-height:.98;
+  font-size:clamp(32px,5.3vw,54px);
+  line-height:1;
   font-weight:700;
+}
+
+.pd-big-love .pd-pink-word{
+  color:var(--pd-pink-hot);
+  font-style:italic;
+}
+
+.pd-big-love .pd-gold-word{
+  color:var(--pd-gold-dark);
 }
 
 /* =====================================================
@@ -261,18 +315,19 @@ a{
 ===================================================== */
 
 .pd-duo{
-  padding:44px 22px 50px;
-  background:linear-gradient(
-    145deg,
-    #fff06d 0%,
-    #ffd8e4 48%,
-    #cfefff 100%
-  );
+  padding:34px 20px 39px;
+  background:
+    linear-gradient(
+      135deg,
+      #fff2a8 0%,
+      #ffe2ea 50%,
+      #dff5fb 100%
+    );
 }
 
 .pd-duo-heading{
   max-width:900px;
-  margin:0 auto 31px;
+  margin:0 auto 24px;
 }
 
 .pd-duo-heading .pd-kicker{
@@ -282,114 +337,141 @@ a{
 .pd-duo-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:21px;
-  max-width:970px;
+  gap:17px;
+  max-width:950px;
   margin:0 auto;
 }
 
 .pd-profile{
-  padding:22px;
-  border:3px solid #111;
-  background:#fff;
-  box-shadow:8px 9px 0 rgba(0,0,0,.13);
+  position:relative;
+  padding:20px;
+  border:2px solid #111;
+  background:rgba(255,255,255,.95);
+  box-shadow:6px 7px 0 rgba(0,0,0,.12);
 }
 
 .pd-profile.richie{
-  transform:rotate(-.6deg);
+  transform:rotate(-.35deg);
 }
 
 .pd-profile.pi{
-  transform:rotate(.6deg);
+  transform:rotate(.35deg);
 }
 
 .pd-profile-name{
   margin:0;
   font-family:var(--pd-serif);
-  font-size:clamp(42px,6vw,64px);
-  line-height:.95;
+  font-size:clamp(40px,5.5vw,59px);
+  line-height:.93;
+}
+
+.pd-profile.richie .pd-profile-name{
+  color:var(--pd-gold-dark);
+}
+
+.pd-profile.pi .pd-profile-name{
+  color:var(--pd-pink-hot);
 }
 
 .pd-profile-sub{
-  margin:5px 0 20px;
+  margin:5px 0 16px;
   font-family:var(--pd-serif);
-  font-size:18px;
+  font-size:17px;
   font-weight:700;
 }
 
 .pd-profile-list{
   display:grid;
-  gap:11px;
+  gap:8px;
 }
 
 .pd-profile-item{
   display:grid;
-  grid-template-columns:29px 1fr;
-  gap:8px;
+  grid-template-columns:27px 1fr;
+  gap:7px;
   align-items:start;
   font-family:var(--pd-serif);
-  font-size:16px;
-  line-height:1.42;
+  font-size:15px;
+  line-height:1.34;
 }
 
 .pd-profile-item strong{
   font-family:var(--pd-sans);
-  font-size:14px;
+  font-size:13px;
 }
 
 .pd-profile-note{
-  margin-top:23px;
-  padding-top:19px;
-  border-top:2px solid #111;
+  margin-top:17px;
+  padding-top:14px;
+  border-top:1px solid #111;
   font-family:var(--pd-serif);
-  font-size:22px;
+  font-size:21px;
+  line-height:1.15;
   font-style:italic;
 }
 
 /* =====================================================
-   FRIENDSHIP PHOTO
+   CLOSE FRIENDS — PHOTO WITH OVERLAY
 ===================================================== */
 
 .pd-friend-photo{
   position:relative;
+  min-height:590px;
+  overflow:hidden;
   background:#000;
 }
 
-.pd-friend-photo img{
+.pd-friend-photo > img{
   width:100%;
-  max-height:850px;
+  height:590px;
   object-fit:cover;
+  object-position:center;
+  filter:contrast(1.05) saturate(1.05);
 }
 
 .pd-friend-caption{
-  padding:25px 28px 33px;
-  background:#fff;
+  position:absolute;
+  left:25px;
+  right:auto;
+  bottom:25px;
+  z-index:2;
+  max-width:500px;
+  padding:18px 21px;
+  background:rgba(0,0,0,.72);
+  color:#fff;
+  backdrop-filter:blur(3px);
 }
 
 .pd-friend-caption strong{
   display:block;
   font-family:var(--pd-serif);
-  font-size:clamp(35px,6vw,58px);
-  line-height:.95;
+  font-size:clamp(32px,5vw,52px);
+  line-height:.93;
+  color:var(--pd-gold-light);
 }
 
 .pd-friend-caption span{
   display:block;
-  margin-top:10px;
+  margin-top:7px;
   font-family:var(--pd-serif);
-  font-size:18px;
-  line-height:1.5;
+  font-size:16px;
+  line-height:1.4;
 }
 
 /* =====================================================
-   UNLIKELY FRIENDSHIP
+   FRIENDSHIP
 ===================================================== */
 
 .pd-friendship{
-  background:var(--pd-pink);
+  background:linear-gradient(
+    110deg,
+    #f5a4ba,
+    #ffb69f
+  );
 }
 
 .pd-friendship-head{
-  padding:46px 28px 28px;
+  padding:33px 25px 21px;
 }
 
 .pd-friendship-head .pd-kicker{
@@ -397,35 +479,41 @@ a{
 }
 
 .pd-friendship-body{
-  padding:40px 29px 48px;
+  padding:29px 25px 34px;
   background:#fff;
 }
 
 .pd-pullquote{
-  max-width:760px;
-  margin:34px auto 0;
-  padding-top:25px;
-  border-top:3px solid #111;
+  max-width:720px;
+  margin:24px auto 0;
+  padding-top:18px;
+  border-top:2px solid #111;
   font-family:var(--pd-serif);
-  font-size:clamp(36px,6vw,60px);
+  font-size:clamp(32px,5vw,52px);
   line-height:.98;
   font-weight:700;
 }
 
+.pd-pullquote em{
+  color:var(--pd-pink-hot);
+  font-weight:400;
+}
+
 /* =====================================================
-   SEA
+   SEA — CLEARER PHOTO / COMPACT
 ===================================================== */
 
 .pd-sea{
   display:grid;
-  grid-template-columns:1.15fr .85fr;
+  grid-template-columns:62% 38%;
   background:#080808;
   color:#fff;
 }
 
 .pd-sea-photo{
-  min-height:620px;
+  min-height:520px;
   overflow:hidden;
+  background:#111;
 }
 
 .pd-sea-photo img{
@@ -433,13 +521,14 @@ a{
   height:100%;
   object-fit:cover;
   object-position:center;
+  filter:contrast(1.06) saturate(1.08);
 }
 
 .pd-sea-copy{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:45px 38px;
+  padding:34px 27px;
 }
 
 .pd-sea-copy .pd-kicker{
@@ -449,15 +538,23 @@ a{
 .pd-sea-copy h2{
   margin:0;
   font-family:var(--pd-serif);
-  font-size:clamp(47px,7vw,80px);
+  font-size:clamp(42px,6vw,68px);
   line-height:.88;
 }
 
+.pd-sea-copy h2 .gold{
+  color:var(--pd-gold-light);
+}
+
+.pd-sea-copy h2 .pink{
+  color:var(--pd-pink);
+}
+
 .pd-sea-copy p{
-  margin:23px 0 0;
+  margin:18px 0 0;
   font-family:var(--pd-serif);
-  font-size:20px;
-  line-height:1.55;
+  font-size:17px;
+  line-height:1.45;
 }
 
 /* =====================================================
@@ -465,13 +562,13 @@ a{
 ===================================================== */
 
 .pd-gallery{
-  padding:40px 18px 44px;
+  padding:32px 15px 34px;
   background:var(--pd-cream);
 }
 
 .pd-gallery-title{
   max-width:900px;
-  margin:0 auto 27px;
+  margin:0 auto 20px;
 }
 
 .pd-gallery-title .pd-kicker{
@@ -480,48 +577,71 @@ a{
 
 .pd-photo-grid{
   display:grid;
-  grid-template-columns:1.15fr 1fr 1fr;
+  grid-template-columns:1fr 1fr 1fr;
   gap:5px;
   background:#111;
   border:3px solid #111;
 }
 
 .pd-photo-card{
+  position:relative;
+  min-width:0;
   margin:0;
+  overflow:hidden;
   background:#fff;
 }
 
 .pd-photo-card img{
   width:100%;
-  height:380px;
+  height:315px;
   object-fit:cover;
+  object-position:center;
+  filter:contrast(1.06) saturate(1.06);
 }
 
 .pd-photo-card figcaption{
-  min-height:108px;
-  padding:14px 15px 17px;
+  min-height:91px;
+  padding:12px 13px 14px;
   background:#fff;
   font-family:var(--pd-serif);
-  font-size:15px;
-  line-height:1.4;
+  font-size:14px;
+  line-height:1.3;
 }
 
 .pd-photo-card figcaption strong{
   display:block;
-  margin-bottom:5px;
-  font-size:21px;
+  margin-bottom:4px;
+  font-size:20px;
+  line-height:1.05;
+}
+
+.pd-photo-card:nth-child(1) figcaption strong{
+  color:var(--pd-gold-dark);
+}
+
+.pd-photo-card:nth-child(2) figcaption strong{
+  color:var(--pd-pink-hot);
+}
+
+.pd-photo-card:nth-child(3) figcaption strong{
+  color:#276a7a;
 }
 
 /* =====================================================
-   TOGETHER
+   TOGETHER — NEW TYPOGRAPHY, NO BOXES
 ===================================================== */
 
 .pd-together{
-  background:var(--pd-blue);
+  background:
+    linear-gradient(
+      110deg,
+      #dff8fd 0%,
+      #8de2f1 100%
+    );
 }
 
 .pd-together-head{
-  padding:46px 28px 28px;
+  padding:32px 25px 20px;
 }
 
 .pd-together-head .pd-kicker{
@@ -529,24 +649,95 @@ a{
 }
 
 .pd-together-body{
-  padding:40px 29px 48px;
+  padding:27px 25px 34px;
   background:#fff;
 }
 
-.pd-tags{
+.pd-personality{
+  position:relative;
   display:flex;
   flex-wrap:wrap;
-  gap:9px;
-  max-width:760px;
-  margin:0 auto 29px;
+  justify-content:center;
+  align-items:baseline;
+  gap:8px 19px;
+  max-width:800px;
+  margin:0 auto 25px;
+  padding:20px 14px 22px;
+  border-top:1px solid #c9a04d;
+  border-bottom:1px solid #c9a04d;
+  text-align:center;
 }
 
-.pd-tag{
-  padding:9px 12px;
-  border:2px solid #111;
+.pd-personality::before,
+.pd-personality::after{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  padding:0 12px;
   background:#fff;
-  font-size:13px;
+  color:var(--pd-gold);
+  font-family:var(--pd-serif);
+  font-size:26px;
+  line-height:1;
+}
+
+.pd-personality::before{
+  content:"❧";
+  top:-14px;
+}
+
+.pd-personality::after{
+  content:"❧";
+  bottom:-14px;
+  transform:translateX(-50%) rotate(180deg);
+}
+
+.pd-quality{
+  display:inline-block;
+  white-space:nowrap;
+}
+
+.pd-quality.gentle{
+  color:#168db1;
+  font-family:var(--pd-serif);
+  font-size:28px;
+  font-style:italic;
+}
+
+.pd-quality.bright{
+  color:#c89516;
+  font-family:var(--pd-sans);
+  font-size:19px;
   font-weight:900;
+  letter-spacing:.05em;
+}
+
+.pd-quality.loyal{
+  color:var(--pd-pink-hot);
+  font-family:var(--pd-serif);
+  font-size:27px;
+  font-style:italic;
+}
+
+.pd-quality.adventurous{
+  color:#159bc0;
+  font-family:var(--pd-serif);
+  font-size:23px;
+  font-style:italic;
+}
+
+.pd-quality.curious{
+  color:#609d32;
+  font-family:var(--pd-serif);
+  font-size:26px;
+  font-style:italic;
+}
+
+.pd-quality.together{
+  color:var(--pd-gold-dark);
+  font-family:var(--pd-serif);
+  font-size:34px;
+  font-style:italic;
 }
 
 /* =====================================================
@@ -554,17 +745,50 @@ a{
 ===================================================== */
 
 .pd-dinner{
-  display:grid;
-  grid-template-columns:.88fr 1.12fr;
-  background:#080808;
+  position:relative;
+  min-height:540px;
+  overflow:hidden;
+  background:#111;
   color:#fff;
 }
 
+.pd-dinner-photo{
+  position:absolute;
+  inset:0;
+}
+
+.pd-dinner-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.74) 0%,
+      rgba(0,0,0,.48) 34%,
+      rgba(0,0,0,.08) 68%,
+      rgba(0,0,0,0) 100%
+    );
+}
+
+.pd-dinner-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  filter:contrast(1.06) saturate(1.07);
+}
+
 .pd-dinner-copy{
+  position:relative;
+  z-index:2;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:44px 38px;
+  width:45%;
+  min-height:540px;
+  padding:36px 31px;
+  text-shadow:0 2px 9px rgba(0,0,0,.5);
 }
 
 .pd-dinner-copy .pd-kicker{
@@ -574,26 +798,24 @@ a{
 .pd-dinner-copy h2{
   margin:0;
   font-family:var(--pd-serif);
-  font-size:clamp(46px,7vw,79px);
-  line-height:.88;
+  font-size:clamp(45px,7vw,75px);
+  line-height:.87;
+}
+
+.pd-dinner-copy h2 .sharing{
+  color:var(--pd-gold-light);
+}
+
+.pd-dinner-copy h2 .caring{
+  color:var(--pd-pink-hot);
 }
 
 .pd-dinner-copy p{
-  margin:23px 0 0;
+  margin:18px 0 0;
+  max-width:390px;
   font-family:var(--pd-serif);
-  font-size:20px;
-  line-height:1.55;
-}
-
-.pd-dinner-photo{
-  min-height:610px;
-  overflow:hidden;
-}
-
-.pd-dinner-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  font-size:17px;
+  line-height:1.44;
 }
 
 /* =====================================================
@@ -605,7 +827,7 @@ a{
 }
 
 .pd-protector-head{
-  padding:46px 28px 28px;
+  padding:32px 25px 20px;
 }
 
 .pd-protector-head .pd-kicker{
@@ -613,7 +835,7 @@ a{
 }
 
 .pd-protector-body{
-  padding:40px 29px 48px;
+  padding:28px 25px 34px;
   background:#fff;
 }
 
@@ -622,44 +844,61 @@ a{
 ===================================================== */
 
 .pd-sunset{
+  position:relative;
+  min-height:560px;
+  overflow:hidden;
   background:#000;
 }
 
-.pd-sunset img{
+.pd-sunset > img{
   width:100%;
-  max-height:820px;
+  height:560px;
   object-fit:cover;
+  object-position:center;
+  filter:contrast(1.05) saturate(1.08);
 }
 
 .pd-sunset-caption{
-  padding:25px 27px 33px;
-  background:#fff;
+  position:absolute;
+  left:25px;
+  bottom:25px;
+  max-width:510px;
+  padding:18px 21px;
+  background:rgba(0,0,0,.68);
+  color:#fff;
 }
 
 .pd-sunset-caption strong{
   display:block;
+  color:var(--pd-gold-light);
   font-family:var(--pd-serif);
-  font-size:clamp(35px,6vw,57px);
+  font-size:clamp(31px,5vw,50px);
   line-height:.95;
 }
 
 .pd-sunset-caption span{
   display:block;
-  margin-top:9px;
+  margin-top:7px;
   font-family:var(--pd-serif);
-  font-size:18px;
+  font-size:16px;
+  line-height:1.4;
 }
 
 /* =====================================================
-   FINAL
+   FINAL — MUCH MORE COMPACT
 ===================================================== */
 
 .pd-final{
-  background:var(--pd-coral);
+  background:
+    linear-gradient(
+      105deg,
+      #ff9d88,
+      #f6a7ba
+    );
 }
 
 .pd-final-head{
-  padding:46px 28px 28px;
+  padding:32px 25px 21px;
 }
 
 .pd-final-head .pd-kicker{
@@ -667,18 +906,34 @@ a{
 }
 
 .pd-final-body{
-  padding:40px 29px 47px;
+  padding:29px 25px 34px;
   background:#fff;
+}
+
+.pd-final-summary{
+  max-width:760px;
+  margin:0 auto;
+  font-family:var(--pd-serif);
+  font-size:18px;
+  line-height:1.5;
+}
+
+.pd-final-summary p{
+  margin:0 0 13px;
+}
+
+.pd-final-summary p:last-child{
+  margin-bottom:0;
 }
 
 .pd-signature{
   max-width:760px;
-  margin:35px auto 0;
-  padding-top:23px;
+  margin:25px auto 0;
+  padding-top:18px;
   border-top:2px solid #111;
   text-align:right;
   font-family:var(--pd-serif);
-  font-size:clamp(37px,6vw,58px);
+  font-size:clamp(34px,5.5vw,54px);
   font-style:italic;
 }
 
@@ -688,8 +943,11 @@ a{
 
 .pd-end-photo img{
   width:100%;
-  max-height:840px;
-  object-fit:cover;
+  max-height:700px;
+  object-fit:contain;
+  object-position:center;
+  background:#000;
+  filter:contrast(1.05) saturate(1.06);
 }
 
 /* =====================================================
@@ -697,7 +955,7 @@ a{
 ===================================================== */
 
 .pd-story-footer{
-  padding:40px 24px 45px;
+  padding:34px 22px 39px;
   background:#080808;
   color:#fff;
   text-align:center;
@@ -705,15 +963,15 @@ a{
 
 .pd-story-footer-brand{
   font-family:var(--pd-serif);
-  font-size:clamp(31px,6vw,48px);
+  font-size:clamp(30px,5vw,45px);
   font-weight:700;
   letter-spacing:.05em;
 }
 
 .pd-story-footer-tagline{
-  margin-top:9px;
+  margin-top:7px;
   font-family:var(--pd-serif);
-  font-size:19px;
+  font-size:18px;
   font-style:italic;
 }
 
@@ -721,14 +979,14 @@ a{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:12px 22px;
-  margin-top:27px;
+  gap:11px 20px;
+  margin-top:23px;
 }
 
 .pd-footer-links a{
   padding-bottom:4px;
   border-bottom:1px solid var(--pd-gold);
-  font-size:13px;
+  font-size:12px;
   font-weight:800;
   letter-spacing:.05em;
   text-transform:uppercase;
@@ -742,11 +1000,13 @@ html[dir="rtl"] #pdRichiePiStory{
   text-align:right;
 }
 
-html[dir="rtl"] .pd-hero,
-html[dir="rtl"] .pd-duo-grid,
-html[dir="rtl"] .pd-sea,
-html[dir="rtl"] .pd-dinner{
+html[dir="rtl"] .pd-duo-grid{
   direction:rtl;
+}
+
+html[dir="rtl"] .pd-hero-copy,
+html[dir="rtl"] .pd-dinner-copy{
+  margin-left:auto;
 }
 
 html[dir="rtl"] .pd-signature{
@@ -759,31 +1019,33 @@ html[dir="rtl"] .pd-signature{
 
 @media(max-width:900px){
 
-  .pd-hero{
-    min-height:610px;
-  }
-
-  .pd-hero-photo{
+  .pd-hero,
+  .pd-hero-copy{
     min-height:610px;
   }
 
   .pd-hero-copy{
-    padding:38px 27px;
+    width:51%;
+    padding:38px 28px;
   }
 
-  .pd-hero-copy p,
-  .pd-sea-copy p,
-  .pd-dinner-copy p{
-    font-size:17px;
-  }
-
-  .pd-sea-photo,
-  .pd-dinner-photo{
-    min-height:520px;
+  .pd-sea-photo{
+    min-height:480px;
   }
 
   .pd-photo-card img{
-    height:330px;
+    height:285px;
+  }
+
+  .pd-dinner,
+  .pd-dinner-copy{
+    min-height:500px;
+  }
+
+  .pd-sunset,
+  .pd-sunset > img{
+    min-height:510px;
+    height:510px;
   }
 }
 
@@ -793,121 +1055,210 @@ html[dir="rtl"] .pd-signature{
 
 @media(max-width:720px){
 
-  .pd-hero{
-    grid-template-columns:61% 39%;
-    min-height:530px;
+  .pd-section{
+    border-bottom-width:4px;
   }
 
-  .pd-hero-photo{
-    min-height:530px;
+  .pd-hero{
+    min-height:540px;
+  }
+
+  .pd-hero-photo::after{
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0,0,0,.72) 0%,
+        rgba(0,0,0,.46) 44%,
+        rgba(0,0,0,.09) 77%,
+        rgba(0,0,0,.03) 100%
+      );
+  }
+
+  .pd-hero-photo img{
+    object-position:center center;
   }
 
   .pd-hero-copy{
-    padding:25px 14px;
+    width:58%;
+    min-height:540px;
+    padding:25px 16px 23px;
   }
 
   .pd-hero-copy .pd-kicker{
-    font-size:8px;
+    font-size:7.5px;
   }
 
   .pd-hero-copy h1{
-    font-size:37px;
+    font-size:48px;
   }
 
   .pd-hero-sub{
-    margin:10px 0 15px;
-    font-size:20px;
+    margin:15px 0 12px;
+    font-size:23px;
   }
 
   .pd-hero-copy p{
     font-size:11.5px;
-    line-height:1.39;
+    line-height:1.36;
   }
 
   .pd-back{
-    margin-top:17px;
-    font-size:8px;
+    margin-top:15px;
+    font-size:7.5px;
   }
 
   .pd-intro-head{
-    padding:35px 20px 23px;
+    padding:28px 17px 15px;
   }
 
   .pd-intro-body{
-    padding:0 21px 39px;
+    padding:0 18px 29px;
   }
 
   .pd-big-love{
-    font-size:38px;
-  }
-
-  .pd-duo{
-    padding:34px 16px 40px;
-  }
-
-  .pd-duo-grid{
-    grid-template-columns:1fr;
-  }
-
-  .pd-profile{
-    max-width:520px;
-    margin:0 auto;
+    margin-bottom:17px;
+    font-size:32px;
   }
 
   .pd-display{
-    font-size:46px;
+    font-size:41px;
   }
 
   .pd-story-text{
-    font-size:17px;
-    line-height:1.6;
+    font-size:16px;
+    line-height:1.48;
+  }
+
+  .pd-story-text p{
+    margin-bottom:11px;
+  }
+
+  .pd-duo{
+    padding:28px 14px 32px;
+  }
+
+  .pd-duo-heading{
+    margin-bottom:19px;
+  }
+
+  .pd-duo-grid{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .pd-profile{
+    padding:13px 11px;
+    box-shadow:4px 5px 0 rgba(0,0,0,.11);
+  }
+
+  .pd-profile-name{
+    font-size:31px;
+  }
+
+  .pd-profile-sub{
+    margin:4px 0 11px;
+    font-size:12px;
+  }
+
+  .pd-profile-list{
+    gap:7px;
+  }
+
+  .pd-profile-item{
+    grid-template-columns:20px 1fr;
+    gap:4px;
+    font-size:11px;
+    line-height:1.27;
+  }
+
+  .pd-profile-item strong{
+    font-size:10px;
+  }
+
+  .pd-profile-note{
+    margin-top:11px;
+    padding-top:9px;
+    font-size:15px;
+  }
+
+  .pd-friend-photo{
+    min-height:430px;
+  }
+
+  .pd-friend-photo > img{
+    height:430px;
+    object-position:center;
+  }
+
+  .pd-friend-caption{
+    left:13px;
+    right:13px;
+    bottom:13px;
+    max-width:none;
+    padding:13px 14px;
+  }
+
+  .pd-friend-caption strong{
+    font-size:29px;
+  }
+
+  .pd-friend-caption span{
+    margin-top:5px;
+    font-size:13px;
   }
 
   .pd-friendship-head,
   .pd-together-head,
   .pd-protector-head,
   .pd-final-head{
-    padding:35px 20px 23px;
+    padding:28px 18px 17px;
   }
 
   .pd-friendship-body,
   .pd-together-body,
   .pd-protector-body,
   .pd-final-body{
-    padding:31px 21px 39px;
+    padding:24px 18px 29px;
   }
 
   .pd-pullquote{
-    font-size:37px;
+    margin-top:19px;
+    padding-top:15px;
+    font-size:31px;
   }
 
   .pd-sea{
-    grid-template-columns:59% 41%;
+    grid-template-columns:58% 42%;
   }
 
   .pd-sea-photo{
-    min-height:500px;
+    min-height:420px;
   }
 
   .pd-sea-copy{
-    padding:27px 14px;
+    padding:22px 13px;
   }
 
   .pd-sea-copy .pd-kicker{
-    font-size:8px;
+    font-size:7px;
   }
 
   .pd-sea-copy h2{
-    font-size:34px;
+    font-size:29px;
   }
 
   .pd-sea-copy p{
-    font-size:11.7px;
-    line-height:1.42;
+    margin-top:13px;
+    font-size:10.8px;
+    line-height:1.36;
   }
 
   .pd-gallery{
-    padding:35px 12px 18px;
+    padding:28px 10px 29px;
+  }
+
+  .pd-gallery-title{
+    margin-bottom:17px;
   }
 
   .pd-photo-grid{
@@ -919,67 +1270,155 @@ html[dir="rtl"] .pd-signature{
   }
 
   .pd-photo-card img{
-    height:280px;
+    height:230px;
+    object-position:center;
   }
 
   .pd-photo-card:first-child img{
-    height:340px;
+    height:315px;
+    object-fit:contain;
+    background:#eee6d5;
   }
 
   .pd-photo-card figcaption{
-    min-height:102px;
-    padding:13px 12px 15px;
-    font-size:13px;
+    min-height:87px;
+    padding:10px 10px 12px;
+    font-size:12px;
   }
 
   .pd-photo-card figcaption strong{
+    font-size:17px;
+  }
+
+  .pd-personality{
+    gap:7px 13px;
+    margin-bottom:22px;
+    padding:17px 7px 19px;
+  }
+
+  .pd-quality.gentle{
+    font-size:23px;
+  }
+
+  .pd-quality.bright{
+    font-size:15px;
+  }
+
+  .pd-quality.loyal{
+    font-size:22px;
+  }
+
+  .pd-quality.adventurous{
     font-size:18px;
   }
 
+  .pd-quality.curious{
+    font-size:21px;
+  }
+
+  .pd-quality.together{
+    font-size:28px;
+  }
+
   .pd-dinner{
-    grid-template-columns:41% 59%;
+    min-height:450px;
   }
 
   .pd-dinner-copy{
-    padding:27px 14px;
+    width:51%;
+    min-height:450px;
+    padding:24px 15px;
   }
 
   .pd-dinner-copy .pd-kicker{
-    font-size:8px;
+    font-size:7px;
+  }
+
+  .pd-dinner-copy h2{
+    font-size:36px;
+  }
+
+  .pd-dinner-copy p{
+    margin-top:13px;
+    font-size:11px;
+    line-height:1.36;
+  }
+
+  .pd-sunset{
+    min-height:440px;
+  }
+
+  .pd-sunset > img{
+    min-height:440px;
+    height:440px;
+    object-position:center;
+  }
+
+  .pd-sunset-caption{
+    left:13px;
+    right:13px;
+    bottom:13px;
+    max-width:none;
+    padding:13px 14px;
+  }
+
+  .pd-sunset-caption strong{
+    font-size:29px;
+  }
+
+  .pd-sunset-caption span{
+    font-size:13px;
+  }
+
+  .pd-final-summary{
+    font-size:16px;
+    line-height:1.48;
+  }
+
+  .pd-final-summary p{
+    margin-bottom:10px;
+  }
+
+  .pd-signature{
+    margin-top:20px;
+    padding-top:15px;
+    font-size:34px;
+  }
+
+  .pd-end-photo img{
+    max-height:540px;
+    object-fit:contain;
+  }
+}
+
+@media(max-width:390px){
+
+  .pd-hero-copy{
+    width:60%;
+  }
+
+  .pd-hero-copy h1{
+    font-size:43px;
+  }
+
+  .pd-hero-copy p{
+    font-size:10.6px;
+  }
+
+  .pd-display{
+    font-size:38px;
+  }
+
+  .pd-sea-copy h2{
+    font-size:27px;
   }
 
   .pd-dinner-copy h2{
     font-size:33px;
   }
 
-  .pd-dinner-copy p{
-    font-size:11.5px;
-    line-height:1.42;
-  }
-
-  .pd-dinner-photo{
-    min-height:500px;
-  }
-
-  .pd-signature{
-    font-size:39px;
-  }
-}
-
-@media(max-width:390px){
-
-  .pd-hero-copy h1{
-    font-size:34px;
-  }
-
-  .pd-hero-copy p,
-  .pd-sea-copy p,
-  .pd-dinner-copy p{
-    font-size:10.8px;
-  }
-
-  .pd-display{
-    font-size:42px;
+  .pd-profile-item{
+    font-size:10.5px;
   }
 }
 
@@ -1017,30 +1456,32 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-hero-copy">
 
     <div class="pd-kicker">
-      PETS &amp; DOGUE · ISSUE 01 · FRIENDSHIP STORY
+      PETS &amp; DOGUE · ISSUE 01 · COVER STARS 04 + 05
     </div>
 
     <h1>
       <span
-        class="notranslate"
+        class="pd-richie-name notranslate"
         translate="no"
       >Richie</span>
-      &amp;
+
+      <span class="pd-amp">&amp;</span>
+
       <span
-        class="notranslate"
+        class="pd-pi-name notranslate"
         translate="no"
       >Pi</span>
     </h1>
 
     <div class="pd-hero-sub">
-      The friendship nobody planned. ♡
+      The friendship nobody planned.
+      <span class="pd-heart">♥</span>
     </div>
 
     <p>
-      One is a gentle little rabbit.
-      The other is a bright pink parrot
-      with a huge personality.
-      They could hardly look more different —
+      One gentle little rabbit.
+      One bright pink parrot.
+      Two completely different personalities —
       and somehow they simply chose each other.
     </p>
 
@@ -1078,15 +1519,16 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-intro-body">
 
     <div class="pd-big-love">
-      A rabbit.<br>
-      A pink parrot.<br>
-      One very unexpected friendship.
+      A <span class="pd-gold-word">rabbit</span>.
+      A <span class="pd-pink-word">pink parrot</span>.<br>
+      One unexpected friendship.
+      <span class="pd-heart">♥</span>
     </div>
 
     <div class="pd-story-text">
 
       <p>
-        Nobody needed to introduce
+        Nobody needed to explain friendship to
         <span
           class="notranslate"
           translate="no"
@@ -1095,35 +1537,21 @@ html[dir="rtl"] .pd-signature{
         <span
           class="notranslate"
           translate="no"
-        >Pi</span>
-        to the idea of friendship.
-      </p>
-
-      <p>
+        >Pi</span>.
         They worked that part out themselves.
       </p>
 
       <p>
         Different species.
-      </p>
-
-      <p>
         Different personalities.
-      </p>
-
-      <p>
         Different ways of seeing the world.
+        And still, they found a way
+        to understand each other.
       </p>
 
       <p>
-        And still,
-        they found a way to understand each other.
-      </p>
-
-      <p>
-        Their story became one of the warmest stories
-        of our first issue —
-        a reminder that friendship does not need
+        Their story is a reminder
+        that friendship does not need
         to make sense to anyone else.
       </p>
 
@@ -1142,7 +1570,7 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-duo-heading">
 
     <div class="pd-kicker">
-      Meet the duo ♡
+      Meet the duo <span class="pd-heart">♥</span>
     </div>
 
     <h2 class="pd-display">
@@ -1178,7 +1606,7 @@ html[dir="rtl"] .pd-signature{
         </div>
 
         <div class="pd-profile-item">
-          <span>♥</span>
+          <span class="pd-heart">♥</span>
           <span>
             <strong>Personality:</strong>
             gentle, affectionate and peaceful.
@@ -1214,6 +1642,7 @@ html[dir="rtl"] .pd-signature{
       <div class="pd-profile-note">
         Small rabbit.<br>
         Very gentle soul.
+        <span class="pd-heart">♥</span>
       </div>
 
     </article>
@@ -1250,7 +1679,7 @@ html[dir="rtl"] .pd-signature{
         </div>
 
         <div class="pd-profile-item">
-          <span>♥</span>
+          <span class="pd-heart">♥</span>
           <span>
             <strong>With Richie:</strong>
             loyal, affectionate and always close.
@@ -1278,6 +1707,7 @@ html[dir="rtl"] .pd-signature{
       <div class="pd-profile-note">
         Bright colour.<br>
         Even brighter character.
+        <span class="pd-heart">♥</span>
       </div>
 
     </article>
@@ -1287,7 +1717,7 @@ html[dir="rtl"] .pd-signature{
 </section>
 
 <!-- =====================================================
-     CLOSE FRIENDS PHOTO
+     CLOSE FRIENDS
 ===================================================== -->
 
 <section class="pd-section pd-friend-photo">
@@ -1302,12 +1732,13 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-friend-caption">
 
     <strong>
-      Close means close. ♡
+      Close means close.
+      <span class="pd-heart">♥</span>
     </strong>
 
     <span>
-      Some friendships are easy to explain.
-      This one is simply easier to see.
+      Personal space is apparently optional
+      when you have found your favourite friend.
     </span>
 
   </div>
@@ -1323,7 +1754,8 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-friendship-head">
 
     <div class="pd-kicker">
-      An unlikely friendship ♡
+      An unlikely friendship
+      <span class="pd-heart">♥</span>
     </div>
 
     <h2 class="pd-display">
@@ -1338,33 +1770,15 @@ html[dir="rtl"] .pd-signature{
     <div class="pd-story-text">
 
       <p>
-        If someone had tried to design
-        the perfect pair of best friends,
-        they probably would not have started here.
-      </p>
-
-      <p>
-        A rabbit and a parrot?
-      </p>
-
-      <p>
+        A rabbit and a parrot.
         One quiet and gentle.
-      </p>
-
-      <p>
         One colourful and expressive.
-      </p>
-
-      <p>
         One with long soft ears.
-      </p>
-
-      <p>
         One with wings.
       </p>
 
       <p>
-        Yet friendship has never been especially interested
+        Friendship has never been especially interested
         in following rules.
       </p>
 
@@ -1383,19 +1797,8 @@ html[dir="rtl"] .pd-signature{
 
       <p>
         They stay close.
-      </p>
-
-      <p>
-        They share quiet moments.
-      </p>
-
-      <p>
         They explore together.
-      </p>
-
-      <p>
-        And sometimes
-        they just sit beside one another
+        And sometimes they simply sit side by side,
         as though this was always the most natural thing
         in the world.
       </p>
@@ -1404,7 +1807,8 @@ html[dir="rtl"] .pd-signature{
 
     <div class="pd-pullquote">
       Different animals.<br>
-      Same little world.
+      <em>Same little world.</em>
+      <span class="pd-heart">♥</span>
     </div>
 
   </div>
@@ -1435,14 +1839,15 @@ html[dir="rtl"] .pd-signature{
     </div>
 
     <h2>
-      BLUE SKY.<br>
+      <span class="gold">BLUE SKY.</span><br>
       WHITE HOUSES.<br>
-      TWO FRIENDS.
+      <span class="pink">TWO FRIENDS.</span>
+      <span class="pd-heart">♥</span>
     </h2>
 
     <p>
-      Their days are filled with sunshine,
-      white walls, flowers and the blue sea beyond.
+      Sunshine, white walls,
+      flowers and the blue sea beyond.
       For
       <span
         class="notranslate"
@@ -1453,8 +1858,8 @@ html[dir="rtl"] .pd-signature{
         class="notranslate"
         translate="no"
       >Pi</span>,
-      even an ordinary day can feel like
-      a little Mediterranean adventure.
+      an ordinary day can feel like
+      a Mediterranean adventure.
     </p>
 
   </div>
@@ -1476,6 +1881,7 @@ html[dir="rtl"] .pd-signature{
     <h2 class="pd-display">
       BETTER<br>
       TOGETHER
+      <span class="pd-heart">♥</span>
     </h2>
 
   </div>
@@ -1492,7 +1898,9 @@ html[dir="rtl"] .pd-signature{
       >
 
       <figcaption>
-        <strong>Exploring 🌸</strong>
+        <strong>
+          Exploring <span class="pd-heart">♥</span>
+        </strong>
         One path. Two very different ways of looking at it.
       </figcaption>
 
@@ -1508,7 +1916,9 @@ html[dir="rtl"] .pd-signature{
       >
 
       <figcaption>
-        <strong>Close friends ♡</strong>
+        <strong>
+          Close friends <span class="pd-heart">♥</span>
+        </strong>
         Personal space is apparently optional.
       </figcaption>
 
@@ -1524,7 +1934,9 @@ html[dir="rtl"] .pd-signature{
       >
 
       <figcaption>
-        <strong>The duo</strong>
+        <strong>
+          The duo <span class="pd-heart">♥</span>
+        </strong>
         Completely different. Completely inseparable.
       </figcaption>
 
@@ -1532,10 +1944,8 @@ html[dir="rtl"] .pd-signature{
 
   </div>
 
-</section>
-
-<!-- =====================================================
-     TOGETHER
+</section><!-- =====================================================
+     TOGETHER — EDITORIAL TYPOGRAPHY
 ===================================================== -->
 
 <section class="pd-section pd-together">
@@ -1555,30 +1965,34 @@ html[dir="rtl"] .pd-signature{
 
   <div class="pd-together-body">
 
-    <div class="pd-tags">
+    <div
+      class="pd-personality"
+      aria-label="Richie and Pi friendship qualities"
+    >
 
-      <span class="pd-tag">
-        🐇 GENTLE
+      <span class="pd-quality gentle">
+        🐇 Gentle
       </span>
 
-      <span class="pd-tag">
+      <span class="pd-quality bright">
         🦜 BRIGHT
       </span>
 
-      <span class="pd-tag">
-        ♥ LOYAL
+      <span class="pd-quality loyal">
+        <span class="pd-heart">♥</span> Loyal
       </span>
 
-      <span class="pd-tag">
-        🌊 ADVENTUROUS
+      <span class="pd-quality adventurous">
+        Adventurous
       </span>
 
-      <span class="pd-tag">
-        🌿 CURIOUS
+      <span class="pd-quality curious">
+        🌿 Curious
       </span>
 
-      <span class="pd-tag">
-        ⭐ TOGETHER
+      <span class="pd-quality together">
+        Together
+        <span class="pd-heart">♥</span>
       </span>
 
     </div>
@@ -1591,7 +2005,6 @@ html[dir="rtl"] .pd-signature{
       </p>
 
       <p>
-        There is no reason
         <span
           class="notranslate"
           translate="no"
@@ -1601,35 +2014,22 @@ html[dir="rtl"] .pd-signature{
           class="notranslate"
           translate="no"
         >Pi</span>
-        should need to be alike.
+        do not need to be alike.
+        Friendship does not ask whether
+        you have paws or wings.
       </p>
 
       <p>
-        Friendship does not ask
-        whether you have paws or wings.
-      </p>
-
-      <p>
-        It does not care
-        whether you are quiet or noisy.
-      </p>
-
-      <p>
-        It does not check
-        whether you look the same.
+        It does not care whether
+        you are quiet or expressive,
+        or whether you look anything alike.
       </p>
 
       <p>
         Sometimes all that matters
-        is feeling safe beside someone.
-      </p>
-
-      <p>
-        Choosing them again tomorrow.
-      </p>
-
-      <p>
-        And knowing they will probably
+        is feeling safe beside someone,
+        choosing them again tomorrow,
+        and knowing they will probably
         still be right there.
       </p>
 
@@ -1640,10 +2040,21 @@ html[dir="rtl"] .pd-signature{
 </section>
 
 <!-- =====================================================
-     DINNER TOGETHER
+     DINNER / SHARING
 ===================================================== -->
 
 <section class="pd-section pd-dinner">
+
+  <div class="pd-dinner-photo">
+
+    <img
+      src="/richie-pi-06.jpg"
+      alt="Richie and Pi sharing fresh greens together"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
 
   <div class="pd-dinner-copy">
 
@@ -1652,8 +2063,10 @@ html[dir="rtl"] .pd-signature{
     </div>
 
     <h2>
-      SHARING<br>
-      IS CARING.
+      <span class="sharing">SHARING</span><br>
+      IS<br>
+      <span class="caring">CARING.</span>
+      <span class="pd-heart">♥</span>
     </h2>
 
     <p>
@@ -1662,17 +2075,6 @@ html[dir="rtl"] .pd-signature{
       and your best friend beside you.
       Some lunches really do have everything.
     </p>
-
-  </div>
-
-  <div class="pd-dinner-photo">
-
-    <img
-      src="/richie-pi-06.jpg"
-      alt="Richie and Pi sharing fresh greens"
-      loading="lazy"
-      decoding="async"
-    >
 
   </div>
 
@@ -1687,12 +2089,13 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-protector-head">
 
     <div class="pd-kicker">
-      Pi &amp; Richie
+      Pi &amp; Richie · always nearby
     </div>
 
     <h2 class="pd-display">
       ALWAYS<br>
       CLOSE
+      <span class="pd-heart">♥</span>
     </h2>
 
   </div>
@@ -1707,7 +2110,7 @@ html[dir="rtl"] .pd-signature{
           translate="no"
         >Pi</span>
         may be the brighter,
-        louder-looking half of this friendship,
+        more expressive half of this friendship,
         but there is something wonderfully gentle
         in the way he stays close to
         <span
@@ -1718,13 +2121,7 @@ html[dir="rtl"] .pd-signature{
 
       <p>
         Beside him.
-      </p>
-
-      <p>
         Leaning against him.
-      </p>
-
-      <p>
         Watching over him.
       </p>
 
@@ -1743,19 +2140,11 @@ html[dir="rtl"] .pd-signature{
       </p>
 
       <p>
-        It is affectionate.
-      </p>
-
-      <p>
+        Affectionate.
         Funny.
-      </p>
-
-      <p>
         Slightly unexpected.
-      </p>
-
-      <p>
         And completely theirs.
+        <span class="pd-heart">♥</span>
       </p>
 
     </div>
@@ -1780,7 +2169,8 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-sunset-caption">
 
     <strong>
-      Sunset together. 🌅
+      Sunset together.
+      <span class="pd-heart">♥</span>
     </strong>
 
     <span>
@@ -1794,7 +2184,7 @@ html[dir="rtl"] .pd-signature{
 </section>
 
 <!-- =====================================================
-     FINAL
+     FINAL — COMPACT EDITORIAL ENDING
 ===================================================== -->
 
 <section class="pd-section pd-final">
@@ -1814,7 +2204,7 @@ html[dir="rtl"] .pd-signature{
 
   <div class="pd-final-body">
 
-    <div class="pd-story-text">
+    <div class="pd-final-summary">
 
       <p>
         So this is
@@ -1826,68 +2216,31 @@ html[dir="rtl"] .pd-signature{
         <span
           class="notranslate"
           translate="no"
-        >Pi</span>.
-      </p>
-
-      <p>
-        One little rabbit.
-      </p>
-
-      <p>
-        One bright pink parrot.
-      </p>
-
-      <p>
-        A gentle heart.
-      </p>
-
-      <p>
-        A huge personality.
+        >Pi</span> —
+        one gentle little rabbit
+        and one bright pink parrot.
       </p>
 
       <p>
         Peaceful days by the sea.
-      </p>
-
-      <p>
         Shared lunches.
-      </p>
-
-      <p>
-        Adventures.
-      </p>
-
-      <p>
+        Little adventures.
         Quiet moments.
-      </p>
-
-      <p>
-        And a friendship
-        nobody could have planned.
+        Two completely different personalities
+        becoming one story.
       </p>
 
       <p>
         Maybe we do not always choose
         who will become important to us.
-      </p>
-
-      <p>
         Sometimes we simply meet.
-      </p>
-
-      <p>
         We stay.
+        And somehow someone completely different
+        begins to feel like home.
       </p>
 
       <p>
-        And somehow,
-        without anyone deciding it,
-        two completely different lives
-        become one story.
-      </p>
-
-      <p>
-        That is exactly why
+        That is why
         <span
           class="notranslate"
           translate="no"
@@ -1897,18 +2250,20 @@ html[dir="rtl"] .pd-signature{
           class="notranslate"
           translate="no"
         >Pi</span>
-        belong on the first
+        belong together in the first
         <span
           class="notranslate"
           translate="no"
         >PETS &amp; DOGUE</span>
-        cover.
+        issue.
+        <span class="pd-heart">♥</span>
       </p>
 
     </div>
 
     <div class="pd-signature">
-      Better together. ♡
+      Better together.
+      <span class="pd-heart">♥</span>
     </div>
 
   </div>
@@ -1923,7 +2278,7 @@ html[dir="rtl"] .pd-signature{
 
   <img
     src="/richie-pi-01.jpg"
-    alt="Richie and Pi together"
+    alt="Richie and Pi resting closely together"
     loading="lazy"
     decoding="async"
   >
@@ -1987,10 +2342,10 @@ html[dir="rtl"] .pd-signature{
   RICHIE & PI STORY CONTENT ONLY
 
   Global system already controls:
-  - approved header
-  - hide on scroll down
-  - show on scroll up
-  - side menu
+  - approved PETS & DOGUE header
+  - header hide/show on scroll
+  - Contents side menu
+  - Profile
   - language selector
   - 23-language translation
   - Arabic RTL
