@@ -24,8 +24,7 @@
 
 <!--
 ==========================================================
-GLOBAL PETS & DOGUE SHELL
-DO NOT REBUILD HERE
+GLOBAL PETS & DOGUE SHELL — DO NOT REBUILD HERE
 
 Controlled by pets-dogue-shell.js:
 - approved global header
@@ -53,17 +52,26 @@ Controlled by pets-dogue-shell.js:
   --black:#070707;
   --white:#fff;
   --paper:#fffaf0;
-  --cream:#f4eee1;
-  --gold:#c89a3b;
-  --blue:#55cce9;
-  --blue-soft:#bceef5;
-  --pink:#f3c2d3;
-  --yellow:#ffe36b;
-  --lime:#b9f34b;
-  --red:#e32636;
+  --cream:#fff6e7;
+
+  --gold:#d7a329;
+  --blue:#35d8ff;
+  --blue-deep:#00bce8;
+  --blue-soft:#bdf5ff;
+
+  --pink:#ff7fba;
+  --pink-soft:#ffd2e5;
+
+  --yellow:#ffe84e;
+  --lime:#baff42;
+  --red:#ef173d;
+  --violet:#a36cff;
 
   --serif:Georgia,"Times New Roman",serif;
   --sans:Arial,Helvetica,sans-serif;
+
+  --shadow:
+    0 14px 32px rgba(0,0,0,.15);
 }
 
 *{
@@ -150,6 +158,10 @@ COVER
   height:100%;
   object-fit:cover;
   object-position:center 42%;
+  filter:
+    saturate(1.07)
+    contrast(1.04)
+    brightness(1.02);
 }
 
 .cover-copy{
@@ -173,6 +185,7 @@ COVER
   margin:12px 0 15px;
   color:var(--blue);
   font:500 clamp(26px,3.5vw,41px)/.95 var(--serif);
+  text-shadow:0 0 18px rgba(53,216,255,.22);
 }
 
 .cover-copy p{
@@ -193,7 +206,7 @@ COVER
 
 /*
 ==========================================================
-HELLO
+HELLO MISO
 ==========================================================
 */
 
@@ -228,7 +241,6 @@ HELLO
 
 .intro-photo{
   height:500px;
-  padding:18px;
   overflow:hidden;
   background:#f0e7d7;
 }
@@ -236,8 +248,12 @@ HELLO
 .intro-photo img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   object-position:center;
+  filter:
+    saturate(1.08)
+    contrast(1.04)
+    brightness(1.03);
 }
 
 /*
@@ -248,7 +264,12 @@ PROFILE
 
 .profile{
   padding:32px 24px 35px;
-  background:var(--blue-soft);
+  background:
+    linear-gradient(
+      145deg,
+      #c7f7ff,
+      #a8edfb
+    );
 }
 
 .profile-head{
@@ -257,7 +278,7 @@ PROFILE
 }
 
 .profile-head .kicker{
-  color:#185468;
+  color:#07576c;
 }
 
 .profile-layout{
@@ -273,7 +294,7 @@ PROFILE
   align-items:center;
   justify-content:center;
   min-height:430px;
-  padding:10px;
+  padding:8px;
   overflow:hidden;
   border:6px solid #111;
   background:#eee8dc;
@@ -282,9 +303,13 @@ PROFILE
 
 .profile-photo img{
   width:100%;
-  height:410px;
-  object-fit:contain;
+  height:414px;
+  object-fit:cover;
   object-position:center;
+  filter:
+    saturate(1.08)
+    contrast(1.04)
+    brightness(1.04);
 }
 
 .profile-card{
@@ -342,7 +367,12 @@ MY LITTLE WORLD
 
 .moments{
   padding:30px 18px 24px;
-  background:var(--cream);
+  background:
+    linear-gradient(
+      135deg,
+      #fff7e9,
+      #fff0f6
+    );
 }
 
 .section-head{
@@ -356,7 +386,7 @@ MY LITTLE WORLD
 
 .moment-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:1fr 1fr 1.16fr;
   gap:8px;
   max-width:1000px;
   margin:0 auto;
@@ -368,25 +398,30 @@ MY LITTLE WORLD
   margin:0;
   overflow:hidden;
   background:#161616;
+  box-shadow:var(--shadow);
 }
 
 .moment img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   object-position:center;
-  filter:saturate(1.08) contrast(1.04) brightness(1.03);
+  filter:
+    saturate(1.18)
+    contrast(1.08)
+    brightness(1.04);
 }
 
 .moment::after{
   content:"";
   position:absolute;
-  inset:45% 0 0;
+  inset:42% 0 0;
   pointer-events:none;
-  background:linear-gradient(
-    transparent,
-    rgba(0,0,0,.82)
-  );
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0,0,0,.82)
+    );
 }
 
 .moment figcaption{
@@ -397,24 +432,29 @@ MY LITTLE WORLD
   bottom:13px;
   color:#fff;
   font:italic 16px/1.18 var(--serif);
+  text-shadow:0 2px 7px rgba(0,0,0,.8);
 }
 
 .moment figcaption strong{
   display:block;
-  margin-bottom:3px;
+  margin-bottom:4px;
   font:700 22px/1 var(--serif);
 }
 
 .moment-travel strong{
-  color:#69daf3;
+  color:#50e3ff;
 }
 
 .moment-toys strong{
-  color:#ffe36b;
+  color:#ffeb45;
 }
 
 .moment-fashion strong{
-  color:#ff9fc3;
+  color:#ff8fc8;
+}
+
+.moment-fashion{
+  border:3px solid #ff8fc8;
 }
 
 /*
@@ -429,11 +469,16 @@ DIARY
 
 .story-title{
   padding:29px 26px 21px;
-  background:var(--blue);
+  background:
+    linear-gradient(
+      115deg,
+      #43ddff,
+      #7de8ff
+    );
 }
 
 .story-title .kicker{
-  color:#154f60;
+  color:#084e61;
 }
 
 .diary{
@@ -456,7 +501,7 @@ DIARY
   margin:19px 0 !important;
   padding:14px 17px;
   border-left:4px solid var(--gold);
-  background:var(--cream);
+  background:#fff5dc;
   font-size:18px;
   font-style:italic;
   line-height:1.42;
@@ -488,11 +533,7 @@ SEA
 }
 
 .sea-photo{
-  display:flex;
-  align-items:center;
-  justify-content:center;
   height:470px;
-  padding:10px;
   overflow:hidden;
   background:#101010;
 }
@@ -500,9 +541,12 @@ SEA
 .sea-photo img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   object-position:center;
-  filter:saturate(1.08) contrast(1.05);
+  filter:
+    saturate(1.14)
+    contrast(1.07)
+    brightness(1.04);
 }
 
 .sea-copy{
@@ -534,7 +578,12 @@ LONDON
 */
 
 .london{
-  background:var(--cream);
+  background:
+    linear-gradient(
+      150deg,
+      #fff5e6,
+      #f5f9ff
+    );
 }
 
 .london-head{
@@ -547,7 +596,7 @@ LONDON
 
 .london-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:1fr 1.18fr 1fr;
   gap:7px;
   padding:0 16px 21px;
 }
@@ -557,24 +606,29 @@ LONDON
   height:300px;
   overflow:hidden;
   background:#161616;
+  box-shadow:0 9px 20px rgba(0,0,0,.12);
 }
 
 .london-card img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   object-position:center;
-  filter:saturate(1.1) contrast(1.05) brightness(1.03);
+  filter:
+    saturate(1.18)
+    contrast(1.08)
+    brightness(1.04);
 }
 
 .london-card::after{
   content:"";
   position:absolute;
-  inset:55% 0 0;
-  background:linear-gradient(
-    transparent,
-    rgba(0,0,0,.84)
-  );
+  inset:50% 0 0;
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0,0,0,.85)
+    );
 }
 
 .london-card span{
@@ -585,6 +639,19 @@ LONDON
   bottom:11px;
   color:#fff;
   font:italic 19px/1.08 var(--serif);
+  text-shadow:0 2px 8px rgba(0,0,0,.85);
+}
+
+.london-card:nth-child(1){
+  border-bottom:5px solid var(--blue);
+}
+
+.london-card:nth-child(2){
+  border-bottom:5px solid var(--pink);
+}
+
+.london-card:nth-child(3){
+  border-bottom:5px solid var(--yellow);
 }
 
 .london-note{
@@ -601,12 +668,13 @@ LONDON
 
 .london-note .scribble{
   margin:15px 0;
+  color:#2e6687;
   font:italic 20px/1.38 var(--serif);
 }
 
 /*
 ==========================================================
-IT'S A MATCH — PHOTO WITH TEXT OVER IMAGE
+IT'S A MATCH
 ==========================================================
 */
 
@@ -621,18 +689,18 @@ IT'S A MATCH — PHOTO WITH TEXT OVER IMAGE
 .friends-bg{
   position:absolute;
   inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   background:#161616;
 }
 
 .friends-bg img{
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   object-position:center;
-  filter:saturate(1.07) contrast(1.05);
+  filter:
+    saturate(1.13)
+    contrast(1.06)
+    brightness(1.03);
 }
 
 .friends-shade{
@@ -641,9 +709,9 @@ IT'S A MATCH — PHOTO WITH TEXT OVER IMAGE
   background:
     linear-gradient(
       90deg,
-      rgba(0,0,0,.82) 0%,
-      rgba(0,0,0,.55) 38%,
-      rgba(0,0,0,.12) 72%,
+      rgba(0,0,0,.86) 0%,
+      rgba(0,0,0,.58) 39%,
+      rgba(0,0,0,.12) 73%,
       rgba(0,0,0,.18) 100%
     );
 }
@@ -660,11 +728,12 @@ IT'S A MATCH — PHOTO WITH TEXT OVER IMAGE
 }
 
 .friends-overlay .kicker{
-  color:#ffb5ce;
+  color:#ff9dca;
 }
 
 .friends-overlay h2{
   margin:0 0 20px;
+  color:#fff;
   font:700 clamp(43px,6vw,70px)/.88 var(--serif);
   letter-spacing:-.04em;
 }
@@ -683,11 +752,16 @@ EVERYONE
 
 .everyone-head{
   padding:29px 26px 20px;
-  background:var(--lime);
+  background:
+    linear-gradient(
+      100deg,
+      #baff42,
+      #ddff6a
+    );
 }
 
 .everyone-head .kicker{
-  color:#3c5b10;
+  color:#385800;
 }
 
 .everyone-body{
@@ -717,13 +791,25 @@ EVERYONE
 
 /*
 ==========================================================
-ASK MISO
+ASK MISO — VISUAL POINTER TO GLOBAL MISO CIRCLE
 ==========================================================
 */
 
+.ask-section{
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+}
+
 .ask-head{
+  position:relative;
   padding:29px 26px 20px;
-  background:var(--yellow);
+  background:
+    linear-gradient(
+      110deg,
+      #ffe84e,
+      #ffef85
+    );
 }
 
 .ask-head .kicker{
@@ -731,11 +817,12 @@ ASK MISO
 }
 
 .ask-body{
+  position:relative;
   display:grid;
   grid-template-columns:36% 64%;
   max-width:850px;
   margin:0 auto;
-  padding:24px 26px 28px;
+  padding:24px 26px 32px;
   background:#fff;
 }
 
@@ -765,7 +852,79 @@ ASK MISO
 }
 
 .ask-copy .ask-line{
+  color:#006f8d;
+  font-weight:700;
   font-style:italic;
+}
+
+/*
+Decorative Miso cue only.
+This does NOT replace the real global Miso help circle.
+*/
+
+.miso-cue{
+  position:absolute;
+  z-index:4;
+  right:25px;
+  bottom:22px;
+  width:94px;
+  height:94px;
+  border:4px solid #fff;
+  border-radius:50%;
+  overflow:hidden;
+  background:#ff7fba;
+  box-shadow:
+    0 0 0 3px #111,
+    0 8px 22px rgba(0,0,0,.25);
+  pointer-events:none;
+}
+
+.miso-cue img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+.miso-cue-label{
+  position:absolute;
+  z-index:5;
+  right:20px;
+  bottom:124px;
+  transform:rotate(-6deg);
+  color:#ff2d78;
+  font:700 20px/1 var(--serif);
+  font-style:italic;
+  pointer-events:none;
+}
+
+.miso-arrow{
+  position:absolute;
+  z-index:4;
+  right:89px;
+  bottom:87px;
+  width:155px;
+  height:112px;
+  pointer-events:none;
+}
+
+.miso-arrow svg{
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+
+.miso-arrow path{
+  fill:none;
+  stroke:#ff2d78;
+  stroke-width:5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.miso-arrow .arrow-head{
+  fill:#ff2d78;
+  stroke:none;
 }
 
 /*
@@ -782,21 +941,21 @@ FINAL
 }
 
 .final-photo{
-  display:flex;
-  align-items:center;
-  justify-content:center;
   min-height:500px;
-  padding:12px;
   overflow:hidden;
   background:#101010;
 }
 
 .final-photo img{
   width:100%;
-  height:470px;
-  object-fit:contain;
+  height:100%;
+  min-height:500px;
+  object-fit:cover;
   object-position:center;
-  filter:saturate(1.06) contrast(1.04);
+  filter:
+    saturate(1.13)
+    contrast(1.06)
+    brightness(1.03);
 }
 
 .final-copy{
@@ -940,7 +1099,6 @@ MOBILE
 
   .intro-photo{
     height:330px;
-    padding:8px;
   }
 
   .profile{
@@ -954,7 +1112,7 @@ MOBILE
 
   .profile-photo{
     min-height:330px;
-    padding:5px;
+    padding:4px;
     border-width:4px;
   }
 
@@ -1001,7 +1159,7 @@ MOBILE
   }
 
   .moment-grid{
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:1fr 1fr 1.14fr;
     gap:4px;
   }
 
@@ -1054,7 +1212,6 @@ MOBILE
 
   .sea-photo{
     height:280px;
-    padding:5px;
   }
 
   .sea-copy{
@@ -1070,6 +1227,7 @@ MOBILE
   }
 
   .london-grid{
+    grid-template-columns:1fr 1.15fr 1fr;
     gap:4px;
     padding:0 7px 15px;
   }
@@ -1129,7 +1287,7 @@ MOBILE
 
   .ask-body{
     grid-template-columns:37% 63%;
-    padding:18px 18px 21px;
+    padding:18px 18px 28px;
   }
 
   .ask-mark{
@@ -1146,7 +1304,33 @@ MOBILE
 
   .ask-copy{
     padding-left:14px;
+    padding-right:68px;
     font-size:12.5px;
+  }
+
+  .miso-cue{
+    right:13px;
+    bottom:13px;
+    width:62px;
+    height:62px;
+    border-width:3px;
+  }
+
+  .miso-cue-label{
+    right:9px;
+    bottom:83px;
+    font-size:13px;
+  }
+
+  .miso-arrow{
+    right:54px;
+    bottom:57px;
+    width:100px;
+    height:80px;
+  }
+
+  .miso-arrow path{
+    stroke-width:4;
   }
 
   .final{
@@ -1155,11 +1339,10 @@ MOBILE
 
   .final-photo{
     min-height:360px;
-    padding:6px;
   }
 
   .final-photo img{
-    height:348px;
+    min-height:360px;
   }
 
   .final-copy{
@@ -1251,7 +1434,9 @@ html[dir="rtl"] .ask-copy{
 
 <main id="misoIssue">
 
-<!-- COVER -->
+<!-- =====================================================
+COVER
+===================================================== -->
 
 <section class="chapter cover">
 
@@ -1299,7 +1484,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- HELLO -->
+<!-- =====================================================
+HELLO
+===================================================== -->
 
 <section class="chapter intro">
 
@@ -1335,7 +1522,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- PROFILE -->
+<!-- =====================================================
+PROFILE
+===================================================== -->
 
 <section class="chapter profile">
 
@@ -1434,7 +1623,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- MY LITTLE WORLD -->
+<!-- =====================================================
+MY LITTLE WORLD
+===================================================== -->
 
 <section class="chapter moments">
 
@@ -1479,7 +1670,7 @@ html[dir="rtl"] .ask-copy{
       >
 
       <figcaption>
-        <strong>My toys 🧸</strong>
+        <strong>My toys 🧸✨</strong>
         Small things, big joy.
       </figcaption>
 
@@ -1489,13 +1680,13 @@ html[dir="rtl"] .ask-copy{
 
       <img
         src="/miso-07.jpg"
-        alt="Miso wearing one of her outfits"
+        alt="Miso wearing a beautiful dress"
         loading="lazy"
         decoding="async"
       >
 
       <figcaption>
-        <strong>Fashion 👗</strong>
+        <strong>Fashion 👗💖</strong>
         Dressed for the day.
       </figcaption>
 
@@ -1505,7 +1696,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- DIARY -->
+<!-- =====================================================
+DIARY
+===================================================== -->
 
 <section class="chapter story">
 
@@ -1570,7 +1763,9 @@ html[dir="rtl"] .ask-copy{
     One very big world.
   </div>
 
-</section><!-- SEA -->
+</section><!-- =====================================================
+SEA
+===================================================== -->
 
 <section class="chapter sea">
 
@@ -1606,7 +1801,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- LONDON -->
+<!-- =====================================================
+LONDON
+===================================================== -->
 
 <section class="chapter london">
 
@@ -1635,7 +1832,7 @@ html[dir="rtl"] .ask-copy{
       >
 
       <span>
-        Walking London 🇬🇧
+        Walking London 🇬🇧✨
       </span>
 
     </article>
@@ -1650,7 +1847,7 @@ html[dir="rtl"] .ask-copy{
       >
 
       <span>
-        Pretty in pink 💕
+        Pretty in pink 💕🎀
       </span>
 
     </article>
@@ -1665,7 +1862,7 @@ html[dir="rtl"] .ask-copy{
       >
 
       <span>
-        Another adventure ✈️
+        Another adventure ✈️💙
       </span>
 
     </article>
@@ -1705,7 +1902,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- FRIENDS — TEXT OVER PHOTO -->
+<!-- =====================================================
+FRIENDS — TEXT OVER PHOTO
+===================================================== -->
 
 <section class="chapter friends">
 
@@ -1720,7 +1919,10 @@ html[dir="rtl"] .ask-copy{
 
   </div>
 
-  <div class="friends-shade"></div>
+  <div
+    class="friends-shade"
+    aria-hidden="true"
+  ></div>
 
   <div class="friends-overlay">
 
@@ -1766,7 +1968,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- EVERYONE -->
+<!-- =====================================================
+EVERYONE
+===================================================== -->
 
 <section class="chapter">
 
@@ -1786,24 +1990,26 @@ html[dir="rtl"] .ask-copy{
   <article class="everyone-body">
 
     <p class="animal-line">
-      Dogs, cats, parrots, rabbits, horses,
-      turtles, guinea pigs, fish, birds and reptiles.
+      🐕 Dogs ·
+      🐈 Cats ·
+      🦜 Parrots ·
+      🐇 Rabbits ·
+      🐴 Horses ·
+      🐢 Turtles
     </p>
 
     <div class="everyone-copy">
 
       <p>
-        Big.
-        Small.
-        Fluffy.
-        Feathered.
-        Smooth.
+        Guinea pigs, fish, birds and reptiles.
+        Big ones and tiny ones.
       </p>
 
       <p>
-        Some have paws.
-        Some have wings.
-        Some have fins.
+        Fluffy.
+        Feathered.
+        Smooth.
+        With paws, wings or fins.
       </p>
 
       <p>
@@ -1828,7 +2034,10 @@ html[dir="rtl"] .ask-copy{
       </p>
 
       <p>
-        <span class="notranslate" translate="no">
+        <span
+          class="notranslate"
+          translate="no"
+        >
           PETS &amp; DOGUE
         </span>
         is about animals —
@@ -1841,9 +2050,14 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- ASK MISO -->
+<!-- =====================================================
+ASK MISO
+The real global Miso help circle remains controlled
+by pets-dogue-shell.js.
+This block only points the reader toward that feature.
+===================================================== -->
 
-<section class="chapter">
+<section class="chapter ask-section">
 
   <div class="ask-head">
 
@@ -1893,20 +2107,81 @@ html[dir="rtl"] .ask-copy{
       </p>
 
       <p class="ask-line">
-        I look. I sniff. I explore.
+        I look. I sniff. I explore. ✨
       </p>
 
       <p>
         And when I find something interesting,
         I bring it back to
-        <span class="notranslate" translate="no">
+        <span
+          class="notranslate"
+          translate="no"
+        >
           PETS &amp; DOGUE
         </span>.
       </p>
 
       <p>
         That is what a curious little nose is for.
+        <span class="heart">♥</span>
       </p>
+
+    </div>
+
+    <!--
+    Decorative visual cue.
+    It is NOT a second help button.
+    -->
+
+    <div
+      class="miso-cue-label"
+      aria-hidden="true"
+    >
+      Ask Miso ✨
+    </div>
+
+    <div
+      class="miso-arrow"
+      aria-hidden="true"
+    >
+
+      <svg
+        viewBox="0 0 155 112"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+
+        <path
+          d="
+            M8 15
+            C45 2, 88 12, 91 42
+            C94 67, 63 75, 69 91
+            C73 102, 96 98, 119 91
+          "
+        />
+
+        <path
+          d="
+            M108 82
+            C118 84, 126 87, 136 91
+            C127 96, 120 102, 114 108
+          "
+        />
+
+      </svg>
+
+    </div>
+
+    <div
+      class="miso-cue"
+      aria-hidden="true"
+    >
+
+      <img
+        src="/miso-cover-star-retouched.png?v=20260929"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      >
 
     </div>
 
@@ -1914,7 +2189,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- FINAL -->
+<!-- =====================================================
+FINAL
+===================================================== -->
 
 <section class="chapter final">
 
@@ -1964,7 +2241,10 @@ html[dir="rtl"] .ask-copy{
     <p>
       And if we are far away from each other for now,
       look for my little circle on
-      <span class="notranslate" translate="no">
+      <span
+        class="notranslate"
+        translate="no"
+      >
         PETS &amp; DOGUE
       </span>.
     </p>
@@ -1972,6 +2252,7 @@ html[dir="rtl"] .ask-copy{
     <p>
       One way or another,
       we will meet.
+      <span class="heart">♥</span>
     </p>
 
     <div class="signature">
@@ -1989,7 +2270,9 @@ html[dir="rtl"] .ask-copy{
 
 </section>
 
-<!-- FOOTER -->
+<!-- =====================================================
+FOOTER
+===================================================== -->
 
 <footer class="issue-footer">
 
@@ -2037,13 +2320,14 @@ html[dir="rtl"] .ask-copy{
   ========================================================
   MISO ISSUE — EDITORIAL PAGE ONLY
 
+  IMPORTANT:
   DO NOT CREATE OR REPLACE HERE:
 
   - global PETS & DOGUE header
   - Contents side menu
   - language selector
   - Profile button
-  - Miso help circle
+  - global Miso help circle
   - accessibility controls
 
   They remain controlled by:
