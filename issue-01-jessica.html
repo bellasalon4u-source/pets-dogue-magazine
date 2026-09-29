@@ -44,12 +44,12 @@
 ===================================================== -->
 
 <script
-  src="/translations.js?v=20260926-jessica-final"
+  src="/translations.js?v=20260929-jessica-editorial"
   defer
 ></script>
 
 <script
-  src="/pets-dogue-shell.js?v=20260926-jessica-final"
+  src="/pets-dogue-shell.js?v=20260929-jessica-editorial"
   defer
 ></script>
 
@@ -67,6 +67,7 @@
   --pd-sage-light:#eef5e8;
   --pd-blue-grey:#cfdbe3;
   --pd-yellow:#f3df7a;
+  --pd-red:#e61946;
   --pd-serif:Georgia,"Times New Roman",serif;
   --pd-sans:Arial,Helvetica,sans-serif;
 }
@@ -101,6 +102,10 @@ img{
 a{
   color:inherit;
   text-decoration:none;
+}
+
+.pd-heart{
+  color:var(--pd-red);
 }
 
 #pdJessicaStory{
@@ -163,15 +168,21 @@ a{
 }
 
 .pd-hero-photo{
+  position:relative;
   min-height:700px;
   overflow:hidden;
+  background:#161616;
 }
 
 .pd-hero-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center;
+  object-position:58% 48%;
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.04);
 }
 
 .pd-hero-copy{
@@ -263,13 +274,18 @@ a{
 .pd-intro-photo{
   min-height:600px;
   overflow:hidden;
+  background:#ddd7cd;
 }
 
 .pd-intro-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center;
+  object-position:52% 46%;
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.04);
 }
 
 /* =====================================================
@@ -278,12 +294,13 @@ a{
 
 .pd-profile{
   padding:45px 28px 50px;
-  background:linear-gradient(
-    145deg,
-    #eee9df 0%,
-    #ffffff 47%,
-    #d7dfce 100%
-  );
+  background:
+    linear-gradient(
+      145deg,
+      #eee9df 0%,
+      #ffffff 47%,
+      #d7dfce 100%
+    );
 }
 
 .pd-profile-heading{
@@ -312,6 +329,9 @@ a{
 }
 
 .pd-profile-photo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
   padding:7px;
   border:3px solid #111;
   background:#111;
@@ -320,8 +340,16 @@ a{
 }
 
 .pd-profile-photo img{
-  aspect-ratio:1/1.12;
-  object-fit:cover;
+  width:100%;
+  height:auto;
+  max-height:660px;
+  object-fit:contain;
+  object-position:center;
+  background:#eee9df;
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.04);
 }
 
 .pd-profile-card{
@@ -397,13 +425,18 @@ a{
 .pd-observer-photo{
   min-height:610px;
   overflow:hidden;
+  background:#161616;
 }
 
 .pd-observer-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center;
+  object-position:52% 45%;
+  filter:
+    saturate(1.08)
+    contrast(1.06)
+    brightness(1.04);
 }
 
 .pd-observer-copy{
@@ -464,7 +497,7 @@ a{
 }
 
 /* =====================================================
-   PHOTO MOMENTS
+   PHOTO MOMENTS — NEW EDITORIAL DESIGN
 ===================================================== */
 
 .pd-gallery{
@@ -484,20 +517,51 @@ a{
 .pd-photo-grid{
   display:grid;
   grid-template-columns:1.12fr 1fr 1fr;
-  gap:5px;
+  gap:7px;
   background:#111;
   border:3px solid #111;
 }
 
 .pd-photo-card{
+  position:relative;
   margin:0;
-  background:#fff;
+  overflow:hidden;
+  background:#111;
+}
+
+.pd-photo-frame{
+  position:relative;
+  height:430px;
+  overflow:hidden;
+  background:#eee9df;
 }
 
 .pd-photo-card img{
   width:100%;
-  height:380px;
-  object-fit:cover;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  background:#eee9df;
+  filter:
+    saturate(1.1)
+    contrast(1.06)
+    brightness(1.04);
+}
+
+.pd-photo-card--soft .pd-photo-frame{
+  height:540px;
+}
+
+.pd-photo-card--soft img{
+  object-position:center;
+}
+
+.pd-photo-card--window img{
+  object-position:center;
+}
+
+.pd-photo-card--garden img{
+  object-position:center;
 }
 
 .pd-photo-card figcaption{
@@ -515,8 +579,52 @@ a{
   font-size:21px;
 }
 
+/*
+   "Soft place" now sits ON the photograph,
+   like a handwritten editorial note.
+*/
+
+.pd-soft-overlay{
+  position:absolute;
+  z-index:3;
+  left:24px;
+  bottom:22px;
+  color:#fff;
+  font-family:
+    "Snell Roundhand",
+    "Segoe Script",
+    "Brush Script MT",
+    cursive;
+  font-size:clamp(38px,5.5vw,67px);
+  line-height:.9;
+  font-weight:400;
+  font-style:italic;
+  letter-spacing:-.03em;
+  text-shadow:
+    0 2px 4px rgba(0,0,0,.85),
+    0 0 15px rgba(0,0,0,.42);
+  transform:rotate(-4deg);
+}
+
+.pd-soft-overlay .pd-heart{
+  display:inline-block;
+  margin-left:5px;
+  color:#ff174d;
+  font-family:Georgia,serif;
+  font-size:.72em;
+  font-style:normal;
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.65),
+    0 0 12px rgba(255,23,77,.28);
+  transform:rotate(5deg);
+}
+
+.pd-soft-caption{
+  font-style:italic;
+}
+
 /* =====================================================
-   INDEPENDENT
+   INDEPENDENT — NEW PERSONALITY DESIGN
 ===================================================== */
 
 .pd-independent{
@@ -536,20 +644,69 @@ a{
   background:#fff;
 }
 
+/*
+   No more heavy rectangular buttons.
+   The personality traits now look like
+   magazine annotations / editorial notes.
+*/
+
 .pd-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
   max-width:760px;
-  margin:0 auto 29px;
+  margin:0 auto 40px;
+  border-top:1px solid #b5b0a7;
+  border-bottom:1px solid #b5b0a7;
 }
 
 .pd-tag{
-  padding:9px 12px;
-  border:2px solid #111;
-  background:#fff;
-  font-size:13px;
-  font-weight:900;
+  position:relative;
+  min-height:118px;
+  padding:20px 14px 17px;
+  border:0;
+  border-right:1px solid #c8c3ba;
+  background:transparent;
+  text-align:center;
+}
+
+.pd-tag:nth-child(3n){
+  border-right:0;
+}
+
+.pd-tag:nth-child(-n+3){
+  border-bottom:1px solid #c8c3ba;
+}
+
+.pd-tag-icon{
+  display:block;
+  min-height:34px;
+  margin-bottom:8px;
+  font-size:27px;
+  line-height:1;
+}
+
+.pd-tag-word{
+  display:block;
+  font-family:var(--pd-serif);
+  font-size:18px;
+  line-height:1;
+  font-style:italic;
+  letter-spacing:.01em;
+}
+
+.pd-tag-number{
+  position:absolute;
+  top:8px;
+  right:9px;
+  color:#a89e8e;
+  font-family:var(--pd-serif);
+  font-size:9px;
+  letter-spacing:.12em;
+}
+
+.pd-tag--gentle .pd-tag-icon{
+  color:var(--pd-red);
 }
 
 /* =====================================================
@@ -591,12 +748,19 @@ a{
 .pd-garden-photo{
   min-height:610px;
   overflow:hidden;
+  background:#171717;
 }
 
 .pd-garden-photo img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
+  object-position:center;
+  background:#171717;
+  filter:
+    saturate(1.1)
+    contrast(1.06)
+    brightness(1.04);
 }
 
 /* =====================================================
@@ -618,6 +782,28 @@ a{
 .pd-ritual-body{
   padding:40px 29px 48px;
   background:#fff;
+}
+
+.pd-ritual-photo{
+  max-width:720px;
+  margin:34px auto 0;
+  padding:8px;
+  border:3px solid #111;
+  background:#f4efe6;
+  box-shadow:7px 8px 0 rgba(0,0,0,.12);
+}
+
+.pd-ritual-photo img{
+  width:100%;
+  height:auto;
+  max-height:760px;
+  object-fit:contain;
+  object-position:center;
+  background:#f4efe6;
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.04);
 }
 
 /* =====================================================
@@ -653,13 +839,23 @@ a{
 }
 
 .pd-end-photo{
-  background:#000;
+  display:flex;
+  justify-content:center;
+  background:#0b0b0b;
+  overflow:hidden;
 }
 
 .pd-end-photo img{
   width:100%;
-  max-height:830px;
-  object-fit:cover;
+  height:auto;
+  max-height:900px;
+  object-fit:contain;
+  object-position:center;
+  background:#0b0b0b;
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.04);
 }
 
 /* =====================================================
@@ -724,6 +920,11 @@ html[dir="rtl"] .pd-signature{
   text-align:left;
 }
 
+html[dir="rtl"] .pd-soft-overlay{
+  left:auto;
+  right:24px;
+}
+
 /* =====================================================
    TABLET
 ===================================================== */
@@ -758,8 +959,12 @@ html[dir="rtl"] .pd-signature{
     min-height:520px;
   }
 
-  .pd-photo-card img{
-    height:330px;
+  .pd-photo-frame{
+    height:360px;
+  }
+
+  .pd-photo-card--soft .pd-photo-frame{
+    height:460px;
   }
 }
 
@@ -776,6 +981,10 @@ html[dir="rtl"] .pd-signature{
 
   .pd-hero-photo{
     min-height:530px;
+  }
+
+  .pd-hero-photo img{
+    object-position:56% 48%;
   }
 
   .pd-hero-copy{
@@ -831,6 +1040,10 @@ html[dir="rtl"] .pd-signature{
     min-height:470px;
   }
 
+  .pd-intro-photo img{
+    object-position:52% 45%;
+  }
+
   .pd-profile{
     padding:34px 16px 40px;
   }
@@ -848,6 +1061,13 @@ html[dir="rtl"] .pd-signature{
     margin:0 auto;
   }
 
+  .pd-profile-photo img{
+    width:100%;
+    height:auto;
+    max-height:none;
+    object-fit:contain;
+  }
+
   .pd-profile-card{
     max-width:520px;
     margin:0 auto;
@@ -859,6 +1079,10 @@ html[dir="rtl"] .pd-signature{
 
   .pd-observer-photo{
     min-height:500px;
+  }
+
+  .pd-observer-photo img{
+    object-position:54% 45%;
   }
 
   .pd-observer-copy{
@@ -911,28 +1135,71 @@ html[dir="rtl"] .pd-signature{
 
   .pd-photo-grid{
     grid-template-columns:1fr 1fr;
+    gap:5px;
   }
 
   .pd-photo-card:first-child{
     grid-column:1/-1;
   }
 
-  .pd-photo-card img{
-    height:280px;
+  .pd-photo-frame{
+    height:300px;
   }
 
-  .pd-photo-card:first-child img{
-    height:340px;
+  .pd-photo-card--soft .pd-photo-frame{
+    height:430px;
+  }
+
+  .pd-photo-card img{
+    object-fit:contain;
   }
 
   .pd-photo-card figcaption{
-    min-height:102px;
-    padding:13px 12px 15px;
+    min-height:98px;
+    padding:12px;
     font-size:13px;
   }
 
   .pd-photo-card figcaption strong{
     font-size:18px;
+  }
+
+  .pd-soft-overlay{
+    left:19px;
+    bottom:19px;
+    font-size:48px;
+  }
+
+  .pd-tags{
+    grid-template-columns:repeat(2,1fr);
+    margin-bottom:31px;
+  }
+
+  .pd-tag{
+    min-height:104px;
+    padding:18px 8px 14px;
+    border-right:1px solid #c8c3ba;
+    border-bottom:1px solid #c8c3ba;
+  }
+
+  .pd-tag:nth-child(3n){
+    border-right:1px solid #c8c3ba;
+  }
+
+  .pd-tag:nth-child(2n){
+    border-right:0;
+  }
+
+  .pd-tag:nth-last-child(-n+2){
+    border-bottom:0;
+  }
+
+  .pd-tag-icon{
+    font-size:24px;
+  }
+
+  .pd-tag-word{
+    font-size:16px;
   }
 
   .pd-garden{
@@ -960,8 +1227,19 @@ html[dir="rtl"] .pd-signature{
     min-height:500px;
   }
 
+  .pd-garden-photo img{
+    object-fit:contain;
+  }
+
   .pd-signature{
     font-size:39px;
+  }
+
+  .pd-end-photo img{
+    width:100%;
+    height:auto;
+    max-height:none;
+    object-fit:contain;
   }
 }
 
@@ -980,6 +1258,14 @@ html[dir="rtl"] .pd-signature{
 
   .pd-display{
     font-size:42px;
+  }
+
+  .pd-photo-card--soft .pd-photo-frame{
+    height:400px;
+  }
+
+  .pd-soft-overlay{
+    font-size:43px;
   }
 }
 
@@ -1006,7 +1292,7 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-hero-photo">
 
     <img
-      src="/jessica-03-white-bed.jpg"
+      src="/jessica-03-white-bed.jpg?v=20260929-editorial"
       alt="Jessica relaxing on her soft white bed"
       fetchpriority="high"
       decoding="async"
@@ -1065,7 +1351,8 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-intro-copy">
 
     <div class="pd-kicker">
-      Quiet confidence ♡
+      Quiet confidence
+      <span class="pd-heart">♥</span>
     </div>
 
     <h2>
@@ -1090,7 +1377,7 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-intro-photo">
 
     <img
-      src="/jessica-04-window-bed.jpg"
+      src="/jessica-04-window-bed.jpg?v=20260929-editorial"
       alt="Jessica watching the world from her window bed"
       loading="lazy"
       decoding="async"
@@ -1125,7 +1412,7 @@ html[dir="rtl"] .pd-signature{
     <div class="pd-profile-photo">
 
       <img
-        src="/jessica-03-white-bed.jpg"
+        src="/jessica-03-white-bed.jpg?v=20260929-editorial"
         alt="Jessica portrait"
         loading="lazy"
         decoding="async"
@@ -1140,7 +1427,7 @@ html[dir="rtl"] .pd-signature{
           class="notranslate"
           translate="no"
         >Jessica</span>
-        ♡
+        <span class="pd-heart">♥</span>
       </h3>
 
       <div class="pd-profile-sub">
@@ -1185,7 +1472,7 @@ html[dir="rtl"] .pd-signature{
         </div>
 
         <div class="pd-profile-item">
-          <span>♥</span>
+          <span class="pd-heart">♥</span>
           <span>
             <strong>Personality:</strong>
             calm, observant and independent
@@ -1238,7 +1525,7 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-observer-photo">
 
     <img
-      src="/jessica-04-window-bed.jpg"
+      src="/jessica-04-window-bed.jpg?v=20260929-editorial"
       alt="Jessica observing the world from the window"
       loading="lazy"
       decoding="async"
@@ -1284,7 +1571,8 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-home-head">
 
     <div class="pd-kicker">
-      Home is a very good place ♡
+      Home is a very good place
+      <span class="pd-heart">♥</span>
     </div>
 
     <h2 class="pd-display">
@@ -1369,30 +1657,42 @@ html[dir="rtl"] .pd-signature{
 
   <div class="pd-photo-grid">
 
-    <figure class="pd-photo-card">
+    <figure class="pd-photo-card pd-photo-card--soft">
 
-      <img
-        src="/jessica-03-white-bed.jpg"
-        alt="Jessica relaxing in her white bed"
-        loading="lazy"
-        decoding="async"
-      >
+      <div class="pd-photo-frame">
 
-      <figcaption>
-        <strong>Soft place ♡</strong>
+        <img
+          src="/jessica-03-white-bed.jpg?v=20260929-editorial"
+          alt="Jessica relaxing in her white bed"
+          loading="lazy"
+          decoding="async"
+        >
+
+        <div class="pd-soft-overlay">
+          Soft place
+          <span class="pd-heart">♥</span>
+        </div>
+
+      </div>
+
+      <figcaption class="pd-soft-caption">
         The perfect place to do absolutely nothing.
       </figcaption>
 
     </figure>
 
-    <figure class="pd-photo-card">
+    <figure class="pd-photo-card pd-photo-card--window">
 
-      <img
-        src="/jessica-04-window-bed.jpg"
-        alt="Jessica watching through the window"
-        loading="lazy"
-        decoding="async"
-      >
+      <div class="pd-photo-frame">
+
+        <img
+          src="/jessica-04-window-bed.jpg?v=20260929-editorial"
+          alt="Jessica watching through the window"
+          loading="lazy"
+          decoding="async"
+        >
+
+      </div>
 
       <figcaption>
         <strong>Window watch</strong>
@@ -1401,17 +1701,23 @@ html[dir="rtl"] .pd-signature{
 
     </figure>
 
-    <figure class="pd-photo-card">
+    <figure class="pd-photo-card pd-photo-card--garden">
 
-      <img
-        src="/jessica-05-garden-cocoon.jpg"
-        alt="Jessica relaxing in her garden chair"
-        loading="lazy"
-        decoding="async"
-      >
+      <div class="pd-photo-frame">
+
+        <img
+          src="/jessica-05-garden-cocoon.jpg?v=20260929-editorial"
+          alt="Jessica relaxing in her garden chair"
+          loading="lazy"
+          decoding="async"
+        >
+
+      </div>
 
       <figcaption>
-        <strong>Garden time 🌿</strong>
+        <strong>
+          Garden time 🌿
+        </strong>
         Fresh air, sunshine and no unnecessary hurry.
       </figcaption>
 
@@ -1419,9 +1725,7 @@ html[dir="rtl"] .pd-signature{
 
   </div>
 
-</section>
-
-<!-- =====================================================
+</section><!-- =====================================================
      INDEPENDENT
 ===================================================== -->
 
@@ -1442,31 +1746,124 @@ html[dir="rtl"] .pd-signature{
 
   <div class="pd-independent-body">
 
-    <div class="pd-tags">
+    <div
+      class="pd-tags"
+      aria-label="Jessica personality"
+    >
 
-      <span class="pd-tag">
-        👀 OBSERVANT
-      </span>
+      <div class="pd-tag">
 
-      <span class="pd-tag">
-        ♥ GENTLE
-      </span>
+        <span class="pd-tag-number">
+          01
+        </span>
 
-      <span class="pd-tag">
-        ☁️ SOFT
-      </span>
+        <span
+          class="pd-tag-icon"
+          aria-hidden="true"
+        >
+          👀
+        </span>
 
-      <span class="pd-tag">
-        🪟 CURIOUS
-      </span>
+        <span class="pd-tag-word">
+          Observant
+        </span>
 
-      <span class="pd-tag">
-        🌿 PEACEFUL
-      </span>
+      </div>
 
-      <span class="pd-tag">
-        ⭐ INDEPENDENT
-      </span>
+      <div class="pd-tag pd-tag--gentle">
+
+        <span class="pd-tag-number">
+          02
+        </span>
+
+        <span
+          class="pd-tag-icon pd-heart"
+          aria-hidden="true"
+        >
+          ♥
+        </span>
+
+        <span class="pd-tag-word">
+          Gentle
+        </span>
+
+      </div>
+
+      <div class="pd-tag">
+
+        <span class="pd-tag-number">
+          03
+        </span>
+
+        <span
+          class="pd-tag-icon"
+          aria-hidden="true"
+        >
+          ☁️
+        </span>
+
+        <span class="pd-tag-word">
+          Soft
+        </span>
+
+      </div>
+
+      <div class="pd-tag">
+
+        <span class="pd-tag-number">
+          04
+        </span>
+
+        <span
+          class="pd-tag-icon"
+          aria-hidden="true"
+        >
+          🪟
+        </span>
+
+        <span class="pd-tag-word">
+          Curious
+        </span>
+
+      </div>
+
+      <div class="pd-tag">
+
+        <span class="pd-tag-number">
+          05
+        </span>
+
+        <span
+          class="pd-tag-icon"
+          aria-hidden="true"
+        >
+          🌿
+        </span>
+
+        <span class="pd-tag-word">
+          Peaceful
+        </span>
+
+      </div>
+
+      <div class="pd-tag">
+
+        <span class="pd-tag-number">
+          06
+        </span>
+
+        <span
+          class="pd-tag-icon"
+          aria-hidden="true"
+        >
+          ⭐
+        </span>
+
+        <span class="pd-tag-word">
+          Independent
+        </span>
+
+      </div>
 
     </div>
 
@@ -1549,7 +1946,7 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-garden-photo">
 
     <img
-      src="/jessica-05-garden-cocoon.jpg"
+      src="/jessica-05-garden-cocoon.jpg?v=20260929-editorial"
       alt="Jessica enjoying a peaceful afternoon in the garden"
       loading="lazy"
       decoding="async"
@@ -1611,19 +2008,10 @@ html[dir="rtl"] .pd-signature{
 
     </div>
 
-    <div
-      style="
-        max-width:720px;
-        margin:34px auto 0;
-        padding:8px;
-        border:3px solid #111;
-        background:#fff;
-        box-shadow:7px 8px 0 rgba(0,0,0,.12);
-      "
-    >
+    <div class="pd-ritual-photo">
 
       <img
-        src="/jessica-02-milk.jpg"
+        src="/jessica-02-milk.jpg?v=20260929-editorial"
         alt="Jessica beside her favourite dish"
         loading="lazy"
         decoding="async"
@@ -1722,7 +2110,7 @@ html[dir="rtl"] .pd-signature{
         class="notranslate"
         translate="no"
       >Jessica</span>
-      ♡
+      <span class="pd-heart">♥</span>
     </div>
 
   </div>
@@ -1736,7 +2124,7 @@ html[dir="rtl"] .pd-signature{
 <section class="pd-end-photo">
 
   <img
-    src="/jessica-03-white-bed.jpg"
+    src="/jessica-03-white-bed.jpg?v=20260929-editorial"
     alt="Jessica, PETS & DOGUE Issue 01 cover star"
     loading="lazy"
     decoding="async"
@@ -1759,6 +2147,7 @@ html[dir="rtl"] .pd-signature{
 
   <div class="pd-story-footer-tagline">
     One world. Every pet.
+    <span class="pd-heart">♥</span>
   </div>
 
   <nav
@@ -1766,19 +2155,31 @@ html[dir="rtl"] .pd-signature{
     aria-label="Issue 01 story navigation"
   >
 
-    <a href="/issue-01.html">
+    <a
+      href="/issue-01.html"
+      aria-label="Back to Issue 01"
+    >
       ← Issue 01
     </a>
 
-    <a href="/issue-01-miso.html">
+    <a
+      href="/issue-01-miso.html"
+      aria-label="Read Miso cover story"
+    >
       Miso
     </a>
 
-    <a href="/issue-01-pablo.html">
+    <a
+      href="/issue-01-pablo.html"
+      aria-label="Read Pablo cover story"
+    >
       Pablo
     </a>
 
-    <a href="/index.html">
+    <a
+      href="/index.html"
+      aria-label="Go to PETS & DOGUE home page"
+    >
       Home
     </a>
 
@@ -1794,19 +2195,26 @@ html[dir="rtl"] .pd-signature{
 
   /*
   ========================================================
-  JESSICA STORY CONTENT ONLY
+  JESSICA STORY — EDITORIAL PHOTO UPDATE
 
-  Global system already controls:
-  - approved header
-  - header hide/show on scroll
-  - side menu
-  - language selector
-  - 23-language translation
-  - Arabic RTL
-  - TTS
-  - Miso help circle
+  GLOBAL SYSTEM REMAINS CONTROLLED BY:
+  /pets-dogue-shell.js
 
-  DO NOT rebuild global components here.
+  DO NOT REBUILD HERE:
+  - global header
+  - Contents side menu
+  - Profile
+  - languages / RTL
+  - TTS / accessibility
+  - global Miso help circle
+
+  LOCAL CHANGES:
+  - red editorial hearts
+  - improved Jessica photo presentation
+  - less destructive photo cropping
+  - handwritten Soft place overlay
+  - redesigned personality traits
+  - full-image treatment for garden / ritual / ending
   ========================================================
   */
 
