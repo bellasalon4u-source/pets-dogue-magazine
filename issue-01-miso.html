@@ -24,26 +24,33 @@
 
 <!-- =====================================================
      MASTER GLOBAL SYSTEM
-     DO NOT CREATE ANOTHER HEADER OR MENU ON THIS PAGE.
 
-     Global files control:
-     - approved PETS & DOGUE header
-     - hide on scroll down / show on scroll up
+     DO NOT CREATE ANOTHER:
+     - HEADER
+     - SIDE MENU
+     - LANGUAGE SELECTOR
+     - MISO HELP CIRCLE
+
+     pets-dogue-shell.js controls:
+     - approved global header
+     - hide on scroll down
+     - show on scroll up
      - Contents side menu
      - Profile
-     - 23 languages
-     - Arabic RTL
+     - global navigation language selector
      - Miso help circle
-     - TTS / accessibility
+     - accessibility shell
+
+     Full Edition body translation will be added later.
 ===================================================== -->
 
 <script
-  src="/translations.js?v=20260926-issue01-miso-final"
+  src="/translations.js?v=20260929-miso-final"
   defer
 ></script>
 
 <script
-  src="/pets-dogue-shell.js?v=20260926-issue01-miso-final"
+  src="/pets-dogue-shell.js?v=20260929-miso-final"
   defer
 ></script>
 
@@ -58,7 +65,6 @@
   --pd-pink:#f7c7d8;
   --pd-pink-hot:#ff5a95;
   --pd-blue:#49cbed;
-  --pd-blue-soft:#dff7ff;
   --pd-lime:#b8f54d;
   --pd-yellow:#ffe764;
   --pd-serif:Georgia,"Times New Roman",serif;
@@ -105,10 +111,6 @@ a{
   background:var(--pd-paper);
 }
 
-.pd-serif{
-  font-family:var(--pd-serif);
-}
-
 .pd-kicker{
   margin:0 0 12px;
   font-family:var(--pd-sans);
@@ -133,7 +135,7 @@ a{
 }
 
 /* =====================================================
-   HERO — IT ALL BEGAN WITH MISO
+   HERO — APPROVED VERSION
 ===================================================== */
 
 .pd-hero{
@@ -770,7 +772,7 @@ a{
 }
 
 /* =====================================================
-   RTL
+   RTL PREPARATION
 ===================================================== */
 
 html[dir="rtl"] #pdMisoStory{
@@ -833,10 +835,12 @@ html[dir="rtl"] .pd-signature{
 }
 
 /* =====================================================
-   MOBILE
+   MOBILE — APPROVED HERO + POLISHED CONTENT
 ===================================================== */
 
 @media(max-width:720px){
+
+  /* FIRST SCREEN — KEEP APPROVED SPLIT DESIGN */
 
   .pd-hero{
     grid-template-columns:61% 39%;
@@ -847,13 +851,20 @@ html[dir="rtl"] .pd-signature{
     min-height:530px;
   }
 
+  .pd-hero-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center center;
+  }
+
   .pd-hero-copy{
     padding:25px 14px;
   }
 
   .pd-hero-copy .pd-kicker{
-    font-size:8px;
     margin-bottom:10px;
+    font-size:8px;
   }
 
   .pd-hero-copy h1{
@@ -876,68 +887,135 @@ html[dir="rtl"] .pd-signature{
     font-size:8px;
   }
 
+  /* HELLO — SAME MAGAZINE STYLE, MORE READABLE */
+
   .pd-hello{
-    grid-template-columns:43% 57%;
+    grid-template-columns:47% 53%;
   }
 
   .pd-hello-copy{
-    padding:27px 15px;
+    padding:24px 16px 26px;
   }
 
   .pd-hello-copy .pd-kicker{
+    margin-bottom:8px;
     font-size:8px;
   }
 
   .pd-hello-copy h2{
-    font-size:37px;
+    font-size:35px;
+    line-height:.92;
   }
 
   .pd-hello-copy p{
-    margin-top:15px;
-    font-size:13px;
-    line-height:1.42;
+    margin-top:14px;
+    font-size:13.5px;
+    line-height:1.48;
   }
 
   .pd-hello-photo{
-    min-height:480px;
+    min-height:455px;
   }
 
+  .pd-hello-photo img{
+    object-position:center center;
+  }
+
+  /* PAW-SWIPE */
+
   .pd-profile{
-    padding:34px 16px 40px;
+    padding:32px 14px 38px;
+  }
+
+  .pd-profile-heading{
+    margin-bottom:22px;
   }
 
   .pd-profile-heading h2{
-    font-size:49px;
+    font-size:44px;
+    line-height:.92;
   }
 
   .pd-profile-layout{
     grid-template-columns:1fr;
+    gap:15px;
   }
 
   .pd-profile-photo{
+    width:100%;
     max-width:430px;
     margin:0 auto;
+    padding:6px;
+    transform:none;
+  }
+
+  .pd-profile-photo img{
+    width:100%;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
   }
 
   .pd-profile-card{
+    width:100%;
     max-width:520px;
     margin:0 auto;
+    padding:22px 18px 24px;
   }
 
+  .pd-profile-name{
+    font-size:39px;
+  }
+
+  .pd-profile-sub{
+    margin-bottom:17px;
+    font-size:15px;
+  }
+
+  .pd-profile-list{
+    gap:9px;
+  }
+
+  .pd-profile-item{
+    grid-template-columns:25px 1fr;
+    gap:7px;
+    font-size:14px;
+    line-height:1.42;
+  }
+
+  .pd-profile-item strong{
+    font-size:12.5px;
+  }
+
+  .pd-match{
+    margin-top:20px;
+    padding-top:18px;
+    font-size:23px;
+  }
+
+  .pd-match strong{
+    font-size:18px;
+  }
+
+  /* COLLECT MOMENTS */
+
   .pd-moments{
-    padding:35px 12px 18px;
+    padding:31px 12px 18px;
   }
 
   .pd-section-heading{
-    padding:0 7px;
+    margin-bottom:20px;
+    padding:0 4px;
   }
 
   .pd-display{
-    font-size:48px;
+    font-size:42px;
+    line-height:.92;
   }
 
   .pd-moment-grid{
     grid-template-columns:1fr 1fr;
+    gap:4px;
   }
 
   .pd-moment:first-child{
@@ -945,22 +1023,27 @@ html[dir="rtl"] .pd-signature{
   }
 
   .pd-moment img{
-    height:280px;
+    width:100%;
+    height:245px;
+    object-fit:cover;
   }
 
   .pd-moment:first-child img{
-    height:340px;
+    height:330px;
   }
 
   .pd-moment figcaption{
-    min-height:105px;
-    padding:13px 12px 15px;
+    min-height:94px;
+    padding:12px 11px 14px;
     font-size:13px;
+    line-height:1.4;
   }
 
   .pd-moment figcaption strong{
     font-size:18px;
   }
+
+  /* STORY CHAPTERS */
 
   .pd-origin-head,
   .pd-london-head,
@@ -968,7 +1051,7 @@ html[dir="rtl"] .pd-signature{
   .pd-everyone-head,
   .pd-ask-head,
   .pd-final-head{
-    padding:35px 20px 23px;
+    padding:32px 20px 22px;
   }
 
   .pd-origin-body,
@@ -977,11 +1060,11 @@ html[dir="rtl"] .pd-signature{
   .pd-everyone-body,
   .pd-ask-body,
   .pd-final-body{
-    padding:31px 21px 39px;
+    padding:29px 21px 37px;
   }
 
   .pd-story-text{
-    font-size:17px;
+    font-size:16.5px;
     line-height:1.6;
   }
 
@@ -990,29 +1073,108 @@ html[dir="rtl"] .pd-signature{
   }
 
   .pd-pullquote{
-    font-size:38px;
+    margin-top:28px;
+    padding-top:20px;
+    font-size:35px;
+    line-height:1.03;
+  }
+
+  /* BIG PHOTOS — DO NOT OVER-CROP */
+
+  .pd-sea img,
+  .pd-final-photo img,
+  .pd-end-photo img{
+    width:100%;
+    height:auto;
+    max-height:none;
+    object-fit:contain;
   }
 
   .pd-sea-caption{
-    padding:20px 21px 27px;
+    padding:19px 21px 26px;
+  }
+
+  .pd-sea-caption strong{
+    font-size:34px;
+  }
+
+  .pd-sea-caption span{
+    font-size:16px;
+  }
+
+  /* LONDON + FRIENDS */
+
+  .pd-polaroids{
+    gap:13px;
+    padding:8px 16px 27px;
   }
 
   .pd-polaroid{
-    flex-basis:76vw;
+    flex-basis:78vw;
+    padding:7px 7px 15px;
+    transform:none !important;
   }
 
+  .pd-polaroid img{
+    width:100%;
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+  }
+
+  .pd-polaroid div{
+    padding:10px 7px 2px;
+    font-size:20px;
+  }
+
+  /* EVERYONE */
+
+  .pd-pet-tags{
+    gap:7px;
+    margin-bottom:23px;
+  }
+
+  .pd-pet-tag{
+    padding:8px 10px;
+    font-size:12px;
+  }
+
+  /* ASK MISO */
+
   .pd-ask-miso{
-    grid-template-columns:90px 1fr;
-    gap:15px;
+    grid-template-columns:82px 1fr;
+    gap:14px;
+    margin-bottom:24px;
+    padding-bottom:20px;
   }
 
   .pd-ask-miso img{
-    width:90px;
-    height:90px;
+    width:82px;
+    height:82px;
   }
 
+  .pd-ask-miso strong{
+    font-size:28px;
+  }
+
+  /* FINAL */
+
   .pd-signature{
-    font-size:39px;
+    margin-top:29px;
+    padding-top:20px;
+    font-size:36px;
+  }
+
+  .pd-story-footer{
+    padding:33px 20px 39px;
+  }
+
+  .pd-story-footer-brand{
+    font-size:33px;
+  }
+
+  .pd-story-footer-tagline{
+    font-size:16px;
   }
 }
 
@@ -1027,15 +1189,28 @@ html[dir="rtl"] .pd-signature{
   }
 
   .pd-hello-copy h2{
-    font-size:33px;
+    font-size:32px;
   }
 
   .pd-hello-copy p{
-    font-size:12px;
+    font-size:12.5px;
   }
 
+  .pd-profile-heading h2,
   .pd-display{
-    font-size:44px;
+    font-size:39px;
+  }
+
+  .pd-profile-item{
+    font-size:13.5px;
+  }
+
+  .pd-pullquote{
+    font-size:32px;
+  }
+
+  .pd-polaroid{
+    flex-basis:82vw;
   }
 }
 
@@ -1062,7 +1237,7 @@ html[dir="rtl"] .pd-signature{
   <div class="pd-hero-photo">
 
     <img
-      src="/miso-cover-star-retouched.png?v=20260926-miso-story"
+      src="/miso-cover-star-retouched.png?v=20260929"
       alt="Miso Cute wearing her pink dress and bow"
       fetchpriority="high"
       decoding="async"
@@ -1119,7 +1294,7 @@ html[dir="rtl"] .pd-signature{
 </section>
 
 <!-- =====================================================
-     HELLO — WHO IS MISO?
+     HELLO
 ===================================================== -->
 
 <section class="pd-section pd-hello">
@@ -1863,41 +2038,15 @@ html[dir="rtl"] .pd-signature{
         Reptiles.
       </p>
 
-      <p>
-        Big.
-      </p>
-
-      <p>
-        Small.
-      </p>
-
-      <p>
-        Fluffy.
-      </p>
-
-      <p>
-        Feathered.
-      </p>
-
-      <p>
-        Smooth.
-      </p>
-
-      <p>
-        Scaly.
-      </p>
-
-      <p>
-        With paws.
-      </p>
-
-      <p>
-        With wings.
-      </p>
-
-      <p>
-        With fins.
-      </p>
+      <p>Big.</p>
+      <p>Small.</p>
+      <p>Fluffy.</p>
+      <p>Feathered.</p>
+      <p>Smooth.</p>
+      <p>Scaly.</p>
+      <p>With paws.</p>
+      <p>With wings.</p>
+      <p>With fins.</p>
 
       <p>
         And even those who fit none of those descriptions.
@@ -2000,21 +2149,10 @@ html[dir="rtl"] .pd-signature{
         That is exactly what my curious little nose is for.
       </p>
 
-      <p>
-        I explore.
-      </p>
-
-      <p>
-        I look.
-      </p>
-
-      <p>
-        I sniff.
-      </p>
-
-      <p>
-        I find interesting things.
-      </p>
+      <p>I explore.</p>
+      <p>I look.</p>
+      <p>I sniff.</p>
+      <p>I find interesting things.</p>
 
       <p>
         Then I bring my discoveries here —
@@ -2241,13 +2379,15 @@ html[dir="rtl"] .pd-signature{
   ========================================================
   MISO STORY CONTENT ONLY
 
-  DO NOT ADD:
-  - another header
-  - another side menu
-  - another language selector
-  - another Miso help circle
+  Global shell already controls:
+  - header
+  - hide/show header
+  - Contents side menu
+  - Profile
+  - global language navigation
+  - Miso help circle
 
-  Global shell already controls those features.
+  Edition body translation will be done separately.
   ========================================================
   */
 
