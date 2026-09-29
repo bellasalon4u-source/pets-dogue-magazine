@@ -25,18 +25,15 @@
 <!--
 ==========================================================
 GLOBAL PETS & DOGUE SHELL
-DO NOT REBUILD HERE.
+DO NOT REBUILD HERE
 
-pets-dogue-shell.js controls:
-- approved header
+Controlled by pets-dogue-shell.js:
+- approved global header
 - Contents side menu
 - Profile
-- language system
+- languages / RTL
+- accessibility
 - Miso help circle
-- accessibility shell
-
-IMPORTANT:
-This page contains editorial content only.
 ==========================================================
 -->
 
@@ -51,21 +48,19 @@ This page contains editorial content only.
 ></script>
 
 <style>
+
 :root{
   --black:#070707;
-  --white:#ffffff;
+  --white:#fff;
   --paper:#fffaf0;
   --cream:#f4eee1;
-  --cream-deep:#e9dfcb;
   --gold:#c89a3b;
   --blue:#55cce9;
   --blue-soft:#bceef5;
-  --blue-dark:#153f4b;
   --pink:#f3c2d3;
   --yellow:#ffe36b;
   --lime:#b9f34b;
   --red:#e32636;
-  --wine:#741326;
 
   --serif:Georgia,"Times New Roman",serif;
   --sans:Arial,Helvetica,sans-serif;
@@ -91,7 +86,6 @@ body{
 
 img{
   display:block;
-  width:100%;
   max-width:100%;
 }
 
@@ -99,12 +93,6 @@ a{
   color:inherit;
   text-decoration:none;
 }
-
-/*
-==========================================================
-EDITORIAL CANVAS
-==========================================================
-*/
 
 #misoIssue{
   width:100%;
@@ -132,17 +120,13 @@ EDITORIAL CANVAS
 
 .display{
   margin:0;
-  font-family:var(--serif);
-  font-size:clamp(40px,6.3vw,72px);
-  font-weight:700;
-  line-height:.89;
+  font:700 clamp(40px,6.3vw,72px)/.89 var(--serif);
   letter-spacing:-.045em;
 }
 
 /*
 ==========================================================
-1. COVER
-PABLO-STYLE EDITORIAL SPLIT
+COVER
 ==========================================================
 */
 
@@ -150,7 +134,7 @@ PABLO-STYLE EDITORIAL SPLIT
   display:grid;
   grid-template-columns:61% 39%;
   min-height:620px;
-  background:var(--black);
+  background:#070707;
   color:#fff;
 }
 
@@ -158,12 +142,10 @@ PABLO-STYLE EDITORIAL SPLIT
   position:relative;
   min-height:620px;
   overflow:hidden;
-  background:#ddd;
+  background:#111;
 }
 
 .cover-photo img{
-  position:absolute;
-  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
@@ -175,7 +157,6 @@ PABLO-STYLE EDITORIAL SPLIT
   flex-direction:column;
   justify-content:center;
   padding:32px;
-  background:var(--black);
 }
 
 .cover-copy .kicker{
@@ -212,7 +193,7 @@ PABLO-STYLE EDITORIAL SPLIT
 
 /*
 ==========================================================
-2. HELLO
+HELLO
 ==========================================================
 */
 
@@ -246,22 +227,22 @@ PABLO-STYLE EDITORIAL SPLIT
 }
 
 .intro-photo{
-  position:relative;
-  height:535px;
+  height:500px;
+  padding:18px;
   overflow:hidden;
-  background:#ddd;
+  background:#f0e7d7;
 }
 
 .intro-photo img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center;
 }
 
 /*
 ==========================================================
-3. PROFILE
+PROFILE
 ==========================================================
 */
 
@@ -288,18 +269,21 @@ PABLO-STYLE EDITORIAL SPLIT
 }
 
 .profile-photo{
-  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:430px;
+  padding:10px;
   overflow:hidden;
   border:6px solid #111;
-  background:#111;
+  background:#eee8dc;
   box-shadow:7px 8px 0 rgba(0,0,0,.12);
 }
 
 .profile-photo img{
   width:100%;
-  height:100%;
-  min-height:430px;
-  object-fit:cover;
+  height:410px;
+  object-fit:contain;
   object-position:center;
 }
 
@@ -352,13 +336,12 @@ PABLO-STYLE EDITORIAL SPLIT
 
 /*
 ==========================================================
-4. MY LITTLE WORLD
-THREE EDITORIAL IMAGES — NO LARGE EMPTY CARDS
+MY LITTLE WORLD
 ==========================================================
 */
 
 .moments{
-  padding:30px 18px 22px;
+  padding:30px 18px 24px;
   background:var(--cream);
 }
 
@@ -373,47 +356,36 @@ THREE EDITORIAL IMAGES — NO LARGE EMPTY CARDS
 
 .moment-grid{
   display:grid;
-  grid-template-columns:1.1fr 1fr 1fr;
-  gap:7px;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
   max-width:1000px;
   margin:0 auto;
 }
 
 .moment{
   position:relative;
-  min-height:340px;
+  height:340px;
   margin:0;
   overflow:hidden;
-  background:#111;
+  background:#161616;
 }
 
 .moment img{
-  position:absolute;
-  inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
-}
-
-.moment-travel img{
-  object-position:center 42%;
-}
-
-.moment-toys img{
+  object-fit:contain;
   object-position:center;
-}
-
-.moment-fashion img{
-  object-position:center 35%;
+  filter:saturate(1.08) contrast(1.04) brightness(1.03);
 }
 
 .moment::after{
   content:"";
   position:absolute;
-  inset:42% 0 0;
+  inset:45% 0 0;
+  pointer-events:none;
   background:linear-gradient(
     transparent,
-    rgba(0,0,0,.8)
+    rgba(0,0,0,.82)
   );
 }
 
@@ -447,8 +419,7 @@ THREE EDITORIAL IMAGES — NO LARGE EMPTY CARDS
 
 /*
 ==========================================================
-5. DIARY
-REAL ARTICLE TYPOGRAPHY
+DIARY
 ==========================================================
 */
 
@@ -505,35 +476,40 @@ REAL ARTICLE TYPOGRAPHY
 
 /*
 ==========================================================
-6. SEA
+SEA
 ==========================================================
 */
 
 .sea{
   display:grid;
-  grid-template-columns:67% 33%;
-  background:var(--black);
+  grid-template-columns:70% 30%;
+  background:#070707;
   color:#fff;
 }
 
 .sea-photo{
-  position:relative;
-  height:485px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:470px;
+  padding:10px;
   overflow:hidden;
+  background:#101010;
 }
 
 .sea-photo img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center;
+  filter:saturate(1.08) contrast(1.05);
 }
 
 .sea-copy{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:26px 22px;
+  padding:25px 20px;
 }
 
 .sea-copy .kicker{
@@ -553,7 +529,7 @@ REAL ARTICLE TYPOGRAPHY
 
 /*
 ==========================================================
-7. LONDON
+LONDON
 ==========================================================
 */
 
@@ -578,36 +554,26 @@ REAL ARTICLE TYPOGRAPHY
 
 .london-card{
   position:relative;
-  height:310px;
+  height:300px;
   overflow:hidden;
-  background:#111;
+  background:#161616;
 }
 
 .london-card img{
   width:100%;
   height:100%;
-  object-fit:cover;
-}
-
-.london-card:nth-child(1) img{
-  object-position:center 42%;
-}
-
-.london-card:nth-child(2) img{
-  object-position:center 35%;
-}
-
-.london-card:nth-child(3) img{
-  object-position:center 35%;
+  object-fit:contain;
+  object-position:center;
+  filter:saturate(1.1) contrast(1.05) brightness(1.03);
 }
 
 .london-card::after{
   content:"";
   position:absolute;
-  inset:56% 0 0;
+  inset:55% 0 0;
   background:linear-gradient(
     transparent,
-    rgba(0,0,0,.82)
+    rgba(0,0,0,.84)
   );
 }
 
@@ -640,57 +606,78 @@ REAL ARTICLE TYPOGRAPHY
 
 /*
 ==========================================================
-8. FRIENDS
+IT'S A MATCH — PHOTO WITH TEXT OVER IMAGE
 ==========================================================
 */
 
-.friends-head{
-  padding:29px 26px 20px;
-  background:var(--pink);
+.friends{
+  position:relative;
+  min-height:500px;
+  overflow:hidden;
+  background:#111;
+  color:#fff;
 }
 
-.friends-head .kicker{
-  color:#7a3150;
-}
-
-.friends-body{
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  background:#fff;
-}
-
-.friends-copy{
+.friends-bg{
+  position:absolute;
+  inset:0;
   display:flex;
   align-items:center;
-  padding:27px;
+  justify-content:center;
+  background:#161616;
 }
 
-.friends-copy-inner{
-  max-width:420px;
-  font:17px/1.47 var(--serif);
-}
-
-.friends-copy-inner p{
-  margin:0 0 11px;
-}
-
-.friends-photo{
-  position:relative;
-  height:445px;
-  overflow:hidden;
-}
-
-.friends-photo img{
+.friends-bg img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center;
+  filter:saturate(1.07) contrast(1.05);
+}
+
+.friends-shade{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.82) 0%,
+      rgba(0,0,0,.55) 38%,
+      rgba(0,0,0,.12) 72%,
+      rgba(0,0,0,.18) 100%
+    );
+}
+
+.friends-overlay{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  width:52%;
+  min-height:500px;
+  padding:36px 30px;
+}
+
+.friends-overlay .kicker{
+  color:#ffb5ce;
+}
+
+.friends-overlay h2{
+  margin:0 0 20px;
+  font:700 clamp(43px,6vw,70px)/.88 var(--serif);
+  letter-spacing:-.04em;
+}
+
+.friends-overlay p{
+  max-width:410px;
+  margin:0 0 11px;
+  font:17px/1.42 var(--serif);
 }
 
 /*
 ==========================================================
-9. EVERYONE
-NO BUTTONS / NO ANIMAL BOXES
+EVERYONE
 ==========================================================
 */
 
@@ -730,8 +717,7 @@ NO BUTTONS / NO ANIMAL BOXES
 
 /*
 ==========================================================
-10. ASK MISO
-COMPACT EDITORIAL SPLIT
+ASK MISO
 ==========================================================
 */
 
@@ -784,28 +770,33 @@ COMPACT EDITORIAL SPLIT
 
 /*
 ==========================================================
-11. FINAL
+FINAL
 ==========================================================
 */
 
 .final{
   display:grid;
   grid-template-columns:58% 42%;
-  background:var(--black);
+  background:#070707;
   color:#fff;
 }
 
 .final-photo{
-  position:relative;
-  min-height:535px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:500px;
+  padding:12px;
   overflow:hidden;
+  background:#101010;
 }
 
 .final-photo img{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:470px;
+  object-fit:contain;
   object-position:center;
+  filter:saturate(1.06) contrast(1.04);
 }
 
 .final-copy{
@@ -850,7 +841,7 @@ FOOTER
 
 .issue-footer{
   padding:31px 20px 34px;
-  background:var(--black);
+  background:#070707;
   color:#fff;
   text-align:center;
 }
@@ -883,30 +874,20 @@ FOOTER
 /*
 ==========================================================
 MOBILE
-COMPACT MAGAZINE PROPORTIONS
 ==========================================================
 */
 
 @media(max-width:720px){
 
-  .chapter{
-    border-bottom-width:5px;
-  }
-
   .kicker{
     margin-bottom:6px;
     font-size:9px;
-    line-height:1.15;
   }
 
   .display{
     font-size:36px;
     line-height:.91;
   }
-
-  /*
-  COVER
-  */
 
   .cover{
     grid-template-columns:61% 39%;
@@ -917,23 +898,17 @@ COMPACT MAGAZINE PROPORTIONS
     min-height:410px;
   }
 
-  .cover-photo img{
-    object-position:center 40%;
-  }
-
   .cover-copy{
     padding:18px 12px;
   }
 
   .cover-copy h1{
     font-size:31px;
-    line-height:.87;
   }
 
   .cover-blue{
     margin:8px 0 10px;
     font-size:19px;
-    line-height:.96;
   }
 
   .cover-copy p{
@@ -946,10 +921,6 @@ COMPACT MAGAZINE PROPORTIONS
     font-size:7px;
   }
 
-  /*
-  INTRO
-  */
-
   .intro{
     grid-template-columns:43% 57%;
   }
@@ -960,29 +931,20 @@ COMPACT MAGAZINE PROPORTIONS
 
   .intro-copy h2{
     font-size:30px;
-    line-height:.9;
   }
 
   .intro-copy p{
     margin-top:10px;
     font-size:11.5px;
-    line-height:1.38;
   }
 
   .intro-photo{
-    height:350px;
+    height:330px;
+    padding:8px;
   }
-
-  /*
-  PROFILE
-  */
 
   .profile{
     padding:23px 12px 27px;
-  }
-
-  .profile-head{
-    margin-bottom:14px;
   }
 
   .profile-layout{
@@ -991,20 +953,18 @@ COMPACT MAGAZINE PROPORTIONS
   }
 
   .profile-photo{
+    min-height:330px;
+    padding:5px;
     border-width:4px;
-    box-shadow:4px 5px 0 rgba(0,0,0,.13);
   }
 
   .profile-photo img{
-    min-height:0;
-    height:100%;
-    object-fit:cover;
+    height:320px;
   }
 
   .profile-card{
     padding:12px 10px;
     border-width:2px;
-    box-shadow:4px 5px 0 rgba(0,0,0,.12);
   }
 
   .profile-name{
@@ -1025,7 +985,6 @@ COMPACT MAGAZINE PROPORTIONS
     padding:5px 0;
     border-left:0;
     font-size:9.5px;
-    line-height:1.25;
   }
 
   .profile-fact b{
@@ -1037,16 +996,8 @@ COMPACT MAGAZINE PROPORTIONS
     font-size:15px;
   }
 
-  /*
-  MOMENTS
-  */
-
   .moments{
-    padding:23px 9px 16px;
-  }
-
-  .section-head{
-    margin-bottom:12px;
+    padding:23px 9px 17px;
   }
 
   .moment-grid{
@@ -1055,7 +1006,7 @@ COMPACT MAGAZINE PROPORTIONS
   }
 
   .moment{
-    min-height:185px;
+    height:190px;
   }
 
   .moment figcaption{
@@ -1066,30 +1017,20 @@ COMPACT MAGAZINE PROPORTIONS
   }
 
   .moment figcaption strong{
-    margin-bottom:2px;
     font-size:13px;
   }
 
-  /*
-  ARTICLE SECTIONS
-  */
-
   .story-title,
   .london-head,
-  .friends-head,
   .everyone-head,
   .ask-head{
     padding:21px 18px 15px;
   }
 
   .diary{
-    padding:20px 20px 22px;
+    padding:20px;
     font-size:14.5px;
     line-height:1.46;
-  }
-
-  .diary p{
-    margin-bottom:8px;
   }
 
   .diary-lead{
@@ -1100,7 +1041,6 @@ COMPACT MAGAZINE PROPORTIONS
     margin:14px 0 !important;
     padding:11px 12px;
     font-size:15px;
-    line-height:1.4;
   }
 
   .pull{
@@ -1108,43 +1048,34 @@ COMPACT MAGAZINE PROPORTIONS
     font-size:27px;
   }
 
-  /*
-  SEA
-  */
-
   .sea{
-    grid-template-columns:67% 33%;
+    grid-template-columns:70% 30%;
   }
 
   .sea-photo{
-    height:285px;
+    height:280px;
+    padding:5px;
   }
 
   .sea-copy{
-    padding:15px 10px;
+    padding:15px 9px;
   }
 
   .sea-copy h2{
-    font-size:27px;
+    font-size:26px;
   }
 
   .sea-copy p{
-    margin-top:8px;
-    font-size:12px;
+    font-size:11.5px;
   }
 
-  /*
-  LONDON
-  */
-
   .london-grid{
-    grid-template-columns:repeat(3,1fr);
     gap:4px;
     padding:0 7px 15px;
   }
 
   .london-card{
-    height:180px;
+    height:185px;
   }
 
   .london-card span{
@@ -1157,75 +1088,44 @@ COMPACT MAGAZINE PROPORTIONS
   .london-note{
     padding:18px 20px 22px;
     font-size:14.5px;
-    line-height:1.45;
   }
 
-  .london-note p{
-    margin-bottom:8px;
+  .friends{
+    min-height:355px;
   }
 
-  .london-note .scribble{
-    margin:12px 0;
-    font-size:16px;
-    line-height:1.35;
+  .friends-overlay{
+    width:58%;
+    min-height:355px;
+    padding:22px 15px;
   }
 
-  /*
-  FRIENDS
-  */
-
-  .friends-body{
-    grid-template-columns:45% 55%;
+  .friends-overlay h2{
+    margin-bottom:13px;
+    font-size:34px;
   }
 
-  .friends-copy{
-    padding:16px 13px;
-  }
-
-  .friends-copy-inner{
-    font-size:12px;
-    line-height:1.4;
-  }
-
-  .friends-copy-inner p{
+  .friends-overlay p{
     margin-bottom:7px;
+    font-size:11.5px;
+    line-height:1.36;
   }
-
-  .friends-photo{
-    height:320px;
-  }
-
-  /*
-  EVERYONE
-  */
 
   .everyone-body{
     padding:19px 20px 22px;
   }
 
   .animal-line{
-    margin-bottom:12px;
     font-size:14px;
-    line-height:1.45;
   }
 
   .everyone-copy{
     font-size:14.5px;
-    line-height:1.45;
-  }
-
-  .everyone-copy p{
-    margin-bottom:8px;
   }
 
   .everyone-big{
-    margin:14px 0 !important;
     font-size:23px;
   }
-
-  /*
-  ASK
-  */
 
   .ask-body{
     grid-template-columns:37% 63%;
@@ -1241,30 +1141,25 @@ COMPACT MAGAZINE PROPORTIONS
   }
 
   .ask-mark em{
-    margin-top:7px;
     font-size:10.5px;
   }
 
   .ask-copy{
     padding-left:14px;
     font-size:12.5px;
-    line-height:1.4;
   }
-
-  .ask-copy p{
-    margin-bottom:6px;
-  }
-
-  /*
-  FINAL
-  */
 
   .final{
     grid-template-columns:58% 42%;
   }
 
   .final-photo{
-    min-height:385px;
+    min-height:360px;
+    padding:6px;
+  }
+
+  .final-photo img{
+    height:348px;
   }
 
   .final-copy{
@@ -1292,36 +1187,11 @@ COMPACT MAGAZINE PROPORTIONS
     font-size:20px;
   }
 
-  /*
-  FOOTER
-  */
-
-  .issue-footer{
-    padding:25px 17px 28px;
-  }
-
-  .issue-footer-brand{
-    font-size:28px;
-  }
-
-  .issue-footer-tag{
-    font-size:14px;
-  }
-
 }
-
-/*
-==========================================================
-VERY SMALL PHONES
-==========================================================
-*/
 
 @media(max-width:390px){
 
-  .cover{
-    min-height:390px;
-  }
-
+  .cover,
   .cover-photo{
     min-height:390px;
   }
@@ -1330,32 +1200,23 @@ VERY SMALL PHONES
     font-size:29px;
   }
 
-  .cover-blue{
-    font-size:18px;
-  }
-
   .profile-name{
     font-size:23px;
   }
 
   .moment{
-    min-height:170px;
+    height:175px;
   }
 
   .london-card{
-    height:165px;
-  }
-
-  .friends-photo{
-    height:300px;
+    height:170px;
   }
 
 }
 
 /*
 ==========================================================
-RTL PREPARATION
-DO NOT REMOVE
+RTL
 ==========================================================
 */
 
@@ -1366,7 +1227,6 @@ html[dir="rtl"] #misoIssue{
 html[dir="rtl"] .cover,
 html[dir="rtl"] .intro,
 html[dir="rtl"] .profile-layout,
-html[dir="rtl"] .friends-body,
 html[dir="rtl"] .ask-body,
 html[dir="rtl"] .final{
   direction:rtl;
@@ -1384,18 +1244,6 @@ html[dir="rtl"] .ask-copy{
   padding-right:24px;
 }
 
-@media(max-width:720px){
-
-  html[dir="rtl"] .ask-mark{
-    padding-left:13px;
-  }
-
-  html[dir="rtl"] .ask-copy{
-    padding-right:14px;
-  }
-
-}
-
 </style>
 </head>
 
@@ -1403,9 +1251,7 @@ html[dir="rtl"] .ask-copy{
 
 <main id="misoIssue">
 
-<!-- =====================================================
-COVER
-===================================================== -->
+<!-- COVER -->
 
 <section class="chapter cover">
 
@@ -1453,9 +1299,7 @@ COVER
 
 </section>
 
-<!-- =====================================================
-HELLO
-===================================================== -->
+<!-- HELLO -->
 
 <section class="chapter intro">
 
@@ -1482,7 +1326,7 @@ HELLO
 
     <img
       src="/miso-02.jpg"
-      alt="Miso Cute, a fluffy blonde Pomeranian"
+      alt="Miso Cute"
       loading="lazy"
       decoding="async"
     >
@@ -1491,9 +1335,7 @@ HELLO
 
 </section>
 
-<!-- =====================================================
-PROFILE
-===================================================== -->
+<!-- PROFILE -->
 
 <section class="chapter profile">
 
@@ -1516,7 +1358,7 @@ PROFILE
 
       <img
         src="/miso-03.jpg"
-        alt="Portrait of fluffy blonde Pomeranian Miso Cute"
+        alt="Miso Cute profile portrait"
         loading="lazy"
         decoding="async"
       >
@@ -1592,9 +1434,7 @@ PROFILE
 
 </section>
 
-<!-- =====================================================
-MY LITTLE WORLD
-===================================================== -->
+<!-- MY LITTLE WORLD -->
 
 <section class="chapter moments">
 
@@ -1623,7 +1463,7 @@ MY LITTLE WORLD
       >
 
       <figcaption>
-        <strong>Explore ✈️</strong>
+        <strong>Travel ✈️</strong>
         Somewhere new.
       </figcaption>
 
@@ -1632,8 +1472,8 @@ MY LITTLE WORLD
     <figure class="moment moment-toys">
 
       <img
-        src="/miso-05.jpg"
-        alt="Miso relaxing with one of her favourite toys"
+        src="/miso-20.jpg"
+        alt="Miso with her favourite toy"
         loading="lazy"
         decoding="async"
       >
@@ -1649,7 +1489,7 @@ MY LITTLE WORLD
 
       <img
         src="/miso-07.jpg"
-        alt="Miso dressed in one of her outfits"
+        alt="Miso wearing one of her outfits"
         loading="lazy"
         decoding="async"
       >
@@ -1665,9 +1505,7 @@ MY LITTLE WORLD
 
 </section>
 
-<!-- =====================================================
-DIARY
-===================================================== -->
+<!-- DIARY -->
 
 <section class="chapter story">
 
@@ -1732,18 +1570,14 @@ DIARY
     One very big world.
   </div>
 
-</section>
-
-<!-- =====================================================
-SEA
-===================================================== -->
+</section><!-- SEA -->
 
 <section class="chapter sea">
 
   <div class="sea-photo">
 
     <img
-      src="/miso-06.jpg"
+      src="/miso-sea-editorial-1.jpg?v=20260929"
       alt="Miso exploring by the sea"
       loading="lazy"
       decoding="async"
@@ -1770,9 +1604,9 @@ SEA
 
   </div>
 
-</section><!-- =====================================================
-LONDON
-===================================================== -->
+</section>
+
+<!-- LONDON -->
 
 <section class="chapter london">
 
@@ -1795,13 +1629,13 @@ LONDON
 
       <img
         src="/miso-08.jpg"
-        alt="Miso on one of her London walks"
+        alt="Miso exploring London"
         loading="lazy"
         decoding="async"
       >
 
       <span>
-        A London walk
+        Walking London 🇬🇧
       </span>
 
     </article>
@@ -1810,13 +1644,13 @@ LONDON
 
       <img
         src="/miso-09.jpg"
-        alt="Miso dressed in pink during a day out"
+        alt="Miso dressed in pink"
         loading="lazy"
         decoding="async"
       >
 
       <span>
-        Pretty in pink
+        Pretty in pink 💕
       </span>
 
     </article>
@@ -1825,13 +1659,13 @@ LONDON
 
       <img
         src="/miso-10.jpg"
-        alt="Miso dressed and ready to explore"
+        alt="Miso ready for another adventure"
         loading="lazy"
         decoding="async"
       >
 
       <span>
-        Ready to explore
+        Another adventure ✈️
       </span>
 
     </article>
@@ -1858,7 +1692,7 @@ LONDON
 
     <p>
       Sometimes the best part is the destination.
-      Sometimes it is simply everything I notice
+      Sometimes it is everything I notice
       on the way there.
     </p>
 
@@ -1871,84 +1705,68 @@ LONDON
 
 </section>
 
-<!-- =====================================================
-FRIENDS
-===================================================== -->
+<!-- FRIENDS — TEXT OVER PHOTO -->
 
-<section class="chapter">
+<section class="chapter friends">
 
-  <div class="friends-head">
+  <div class="friends-bg">
+
+    <img
+      src="/miso-12.jpg"
+      alt="Miso Cute waiting to meet new friends"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="friends-shade"></div>
+
+  <div class="friends-overlay">
 
     <div class="kicker">
       Hello, new friend <span class="heart">♥</span>
     </div>
 
-    <h2 class="display">
-      IT’S A MATCH!
+    <h2>
+      IT’S A<br>
+      MATCH!
     </h2>
 
-  </div>
+    <p>
+      Hi. I’m
+      <span class="notranslate" translate="no">
+        Miso Cute
+      </span>.
+    </p>
 
-  <div class="friends-body">
+    <p>
+      I’m tiny, gentle, curious
+      and always interested in meeting someone new.
+    </p>
 
-    <div class="friends-copy">
+    <p>
+      I already have lots of friends.
+      But there is always room for one more.
+    </p>
 
-      <div class="friends-copy-inner">
+    <p>
+      Dogs are wonderful.
+      Cats are interesting.
+      Birds always make me look up.
+    </p>
 
-        <p>
-          Hi. I’m
-          <span class="notranslate" translate="no">
-            Miso Cute
-          </span>.
-        </p>
-
-        <p>
-          I’m tiny, gentle, curious
-          and always interested in meeting someone new.
-        </p>
-
-        <p>
-          I already have lots of friends.
-          But there is always room for one more.
-        </p>
-
-        <p>
-          Dogs are wonderful.
-          Cats are interesting.
-          Birds always make me look up.
-          And every animal has a story of its own.
-        </p>
-
-        <p>
-          Because the best part of a new adventure
-          is never knowing who you might meet.
-          <span class="heart">♥</span>
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="friends-photo">
-
-      <img
-        src="/miso-12.jpg"
-        alt="Miso looking ready to meet a new friend"
-        loading="lazy"
-        decoding="async"
-      >
-
-    </div>
+    <p>
+      The best part of a new adventure
+      is never knowing who you might meet.
+      <span class="heart">♥</span>
+    </p>
 
   </div>
 
 </section>
 
-<!-- =====================================================
-EVERYONE
-NO ANIMAL BUTTONS
-THE LIST IS PART OF THE ARTICLE
-===================================================== -->
+<!-- EVERYONE -->
 
 <section class="chapter">
 
@@ -2023,9 +1841,7 @@ THE LIST IS PART OF THE ARTICLE
 
 </section>
 
-<!-- =====================================================
-ASK MISO
-===================================================== -->
+<!-- ASK MISO -->
 
 <section class="chapter">
 
@@ -2098,17 +1914,15 @@ ASK MISO
 
 </section>
 
-<!-- =====================================================
-FINAL
-===================================================== -->
+<!-- FINAL -->
 
 <section class="chapter final">
 
   <div class="final-photo">
 
     <img
-      src="/miso-20.jpg"
-      alt="Fluffy blonde Miso relaxing with her favourite toy"
+      src="/miso-05.jpg"
+      alt="Miso Cute ready for her next adventure"
       loading="lazy"
       decoding="async"
     >
@@ -2162,7 +1976,10 @@ FINAL
 
     <div class="signature">
       With love,<br>
-      <span class="notranslate" translate="no">
+      <span
+        class="notranslate"
+        translate="no"
+      >
         Miso
       </span>
       <span class="heart">♥</span>
@@ -2172,9 +1989,7 @@ FINAL
 
 </section>
 
-<!-- =====================================================
-FOOTER
-===================================================== -->
+<!-- FOOTER -->
 
 <footer class="issue-footer">
 
@@ -2220,26 +2035,19 @@ FOOTER
 
   /*
   ========================================================
-  MISO ISSUE PAGE
-  EDITORIAL CONTENT ONLY
-  ========================================================
+  MISO ISSUE — EDITORIAL PAGE ONLY
 
-  IMPORTANT:
-
-  DO NOT create or replace here:
+  DO NOT CREATE OR REPLACE HERE:
 
   - global PETS & DOGUE header
   - Contents side menu
   - language selector
   - Profile button
   - Miso help circle
-  - global accessibility controls
+  - accessibility controls
 
-  Those remain controlled by:
+  They remain controlled by:
   /pets-dogue-shell.js
-
-  This script only adds safe image behaviour
-  inside the editorial page.
   ========================================================
   */
 
