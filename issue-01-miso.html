@@ -44,9 +44,12 @@
   --sans:Arial,Helvetica,sans-serif;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
-html,body{
+html,
+body{
   width:100%;
   margin:0;
   padding:0;
@@ -371,17 +374,17 @@ button{
   filter:saturate(1.18) contrast(1.07) brightness(1.04);
 }
 
-/* Travel — Miso slightly closer */
+/* Travel — Miso closer and her face stays visible */
 .moment-travel img{
-  object-position:center 44%;
-  transform:scale(1.11);
+  object-position:center 38%;
+  transform:scale(1.08);
 }
 
-/* Toy — keep Miso's face visible */
+/* Toys — move image so Miso's head and face are visible */
 .moment-toys img{
   object-fit:cover;
-  object-position:38% center;
-  transform:scale(.98);
+  object-position:32% 38%;
+  transform:scale(.94);
 }
 
 .moment-fashion{
@@ -406,14 +409,6 @@ button{
 
 .moment-friends img{
   object-position:center 42%;
-}
-
-.moment-adventure{
-  border-color:#b9ff43;
-}
-
-.moment-adventure img{
-  object-position:center 44%;
 }
 
 .moment::after{
@@ -443,12 +438,25 @@ button{
   font:700 29px/1 var(--serif);
 }
 
-.moment-travel strong{color:#42e9ff}
-.moment-toys strong{color:#fff05a}
-.moment-fashion strong{color:#ff8fc2}
-.moment-london strong{color:#55e7ff}
-.moment-friends strong{color:#fff46d}
-.moment-adventure strong{color:#c8ff5d}
+.moment-travel strong{
+  color:#42e9ff;
+}
+
+.moment-toys strong{
+  color:#fff05a;
+}
+
+.moment-fashion strong{
+  color:#ff8fc2;
+}
+
+.moment-london strong{
+  color:#55e7ff;
+}
+
+.moment-friends strong{
+  color:#fff46d;
+}
 
 .carousel-controls{
   display:flex;
@@ -648,10 +656,6 @@ button{
     );
 }
 
-/*
-Text stays over the photo but is kept in the lower-left
-area so Miso and the London background remain visible.
-*/
 .london-feature-copy{
   position:absolute;
   z-index:2;
@@ -894,11 +898,6 @@ area so Miso and the London background remain visible.
   transform:rotate(-4deg);
 }
 
-/*
-Hand-drawn marker line.
-One continuous SVG path runs from the yellow headline,
-loops naturally and finishes at Miso's round portrait.
-*/
 .ask-marker{
   position:absolute;
   z-index:5;
@@ -953,7 +952,11 @@ loops naturally and finishes at Miso's round portrait.
   height:100%;
   min-height:500px;
   object-fit:cover;
-  object-position:center 47%;
+
+  /* FINAL FIX:
+     image shifted so Miso's head stays visible */
+  object-position:22% center;
+
   filter:saturate(1.13) contrast(1.06) brightness(1.03);
 }
 
@@ -1373,6 +1376,9 @@ loops naturally and finishes at Miso's round portrait.
 
   .final-photo img{
     min-height:390px;
+
+    /* keep Miso's head visible on mobile too */
+    object-position:18% center;
   }
 
   .final-copy{
@@ -1461,6 +1467,7 @@ html[dir="rtl"] .ask-copy{
   padding-left:0;
   padding-right:24px;
 }
+
 </style>
 </head>
 
@@ -1472,12 +1479,14 @@ html[dir="rtl"] .ask-copy{
 <section class="chapter cover">
 
   <div class="cover-photo">
+
     <img
       src="/miso-cover-star-retouched.png?v=20260929"
       alt="Miso Cute wearing her pink dress and bow"
       fetchpriority="high"
       decoding="async"
     >
+
   </div>
 
   <div class="cover-copy">
@@ -1536,12 +1545,14 @@ html[dir="rtl"] .ask-copy{
   </div>
 
   <div class="intro-photo">
+
     <img
       src="/miso-06.jpg?v=20260929-final"
       alt="Miso Cute"
       loading="lazy"
       decoding="async"
     >
+
   </div>
 
 </section>
@@ -1565,12 +1576,14 @@ html[dir="rtl"] .ask-copy{
   <div class="profile-layout">
 
     <div class="profile-photo">
+
       <img
         src="/miso-03.jpg"
         alt="Miso Cute profile portrait"
         loading="lazy"
         decoding="async"
       >
+
     </div>
 
     <div class="profile-card">
@@ -1663,81 +1676,83 @@ html[dir="rtl"] .ask-copy{
     <div class="moment-track" id="misoTrack">
 
       <figure class="moment moment-travel">
+
         <img
           src="/miso-04.jpg"
           alt="Miso travelling"
           loading="lazy"
           decoding="async"
         >
+
         <figcaption>
           <strong>Travel ✈️✨</strong>
           Little paws. New places.
         </figcaption>
+
       </figure>
 
       <figure class="moment moment-toys">
+
         <img
           src="/miso-20.jpg"
           alt="Miso with her favourite toy"
           loading="lazy"
           decoding="async"
         >
+
         <figcaption>
           <strong>Playtime 🧸💕</strong>
           My favourite kind of serious business.
         </figcaption>
+
       </figure>
 
       <figure class="moment moment-fashion">
+
         <img
           src="/miso-09.jpg"
           alt="Miso wearing her pink dress"
           loading="lazy"
           decoding="async"
         >
+
         <figcaption>
           <strong>Fashion 👗💕</strong>
           A little pink. A lot of Miso.
         </figcaption>
+
       </figure>
 
       <figure class="moment moment-london">
+
         <img
           src="/miso-london-big-ben.jpg?v=20260929"
           alt="Miso in London near Big Ben"
           loading="lazy"
           decoding="async"
         >
+
         <figcaption>
           <strong>London 🇬🇧💙</strong>
           My city. My little adventures.
         </figcaption>
+
       </figure>
 
       <figure class="moment moment-friends">
+
         <img
           src="/miso-with-friend.jpg?v=20260929"
           alt="Miso spending time with a friend"
           loading="lazy"
           decoding="async"
         >
+
         <figcaption>
           <strong>Friends 💕🐾</strong>
           Adventures are better together.
         </figcaption>
-      </figure>
 
-      <figure class="moment moment-adventure">
-        <img
-          src="/miso-10.jpg"
-          alt="Miso ready for another adventure"
-          loading="lazy"
-          decoding="async"
-        >
-        <figcaption>
-          <strong>Adventure 🌍✨</strong>
-          There is always something new to discover.
-        </figcaption>
       </figure>
 
     </div>
@@ -1838,18 +1853,18 @@ html[dir="rtl"] .ask-copy{
     One very big world. 🌍✨
   </div>
 
-</section>
-
-<!-- SEA -->
+</section><!-- SEA -->
 <section class="chapter sea">
 
   <div class="sea-photo">
+
     <img
       src="/miso-sea-editorial-1.jpg?v=20260929"
       alt="Miso exploring by the sea"
       loading="lazy"
       decoding="async"
     >
+
   </div>
 
   <div class="sea-copy">
@@ -2348,21 +2363,27 @@ html[dir="rtl"] .ask-copy{
   ========================================================
   */
 
-  const issue = document.getElementById("misoIssue");
+  const issue =
+    document.getElementById("misoIssue");
 
   if(!issue){
     return;
   }
 
-  issue.querySelectorAll("img").forEach(function(image,index){
+  issue.querySelectorAll("img").forEach(
+    function(image,index){
 
-    image.decoding = "async";
+      image.decoding = "async";
 
-    if(index > 0 && !image.hasAttribute("loading")){
-      image.loading = "lazy";
+      if(
+        index > 0 &&
+        !image.hasAttribute("loading")
+      ){
+        image.loading = "lazy";
+      }
+
     }
-
-  });
+  );
 
   const track =
     document.getElementById("misoTrack");
@@ -2384,38 +2405,46 @@ html[dir="rtl"] .ask-copy{
     track.querySelectorAll(".moment")
   );
 
-  cards.forEach(function(card,index){
+  /*
+  Dots are generated automatically from the
+  remaining cards. Adventure has been removed,
+  so there are now five carousel items.
+  */
 
-    const dot =
-      document.createElement("button");
+  cards.forEach(
+    function(card,index){
 
-    dot.type = "button";
+      const dot =
+        document.createElement("button");
 
-    dot.className =
-      "carousel-dot" +
-      (index === 0 ? " active" : "");
+      dot.type = "button";
 
-    dot.setAttribute(
-      "aria-label",
-      "Show Miso photo " + (index + 1)
-    );
+      dot.className =
+        "carousel-dot" +
+        (index === 0 ? " active" : "");
 
-    dot.addEventListener(
-      "click",
-      function(){
+      dot.setAttribute(
+        "aria-label",
+        "Show Miso photo " + (index + 1)
+      );
 
-        card.scrollIntoView({
-          behavior:"smooth",
-          inline:"center",
-          block:"nearest"
-        });
+      dot.addEventListener(
+        "click",
+        function(){
 
-      }
-    );
+          card.scrollIntoView({
+            behavior:"smooth",
+            inline:"center",
+            block:"nearest"
+          });
 
-    dots.appendChild(dot);
+        }
+      );
 
-  });
+      dots.appendChild(dot);
+
+    }
+  );
 
   const dotButtons = Array.from(
     dots.querySelectorAll(".carousel-dot")
