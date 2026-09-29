@@ -44,12 +44,12 @@
 ===================================================== -->
 
 <script
-  src="/translations.js?v=20260929-jessica-editorial"
+  src="/translations.js?v=20260929-jessica-final"
   defer
 ></script>
 
 <script
-  src="/pets-dogue-shell.js?v=20260929-jessica-editorial"
+  src="/pets-dogue-shell.js?v=20260929-jessica-final"
   defer
 ></script>
 
@@ -67,7 +67,7 @@
   --pd-sage-light:#eef5e8;
   --pd-blue-grey:#cfdbe3;
   --pd-yellow:#f3df7a;
-  --pd-red:#e61946;
+  --pd-red:#e52d39;
   --pd-serif:Georgia,"Times New Roman",serif;
   --pd-sans:Arial,Helvetica,sans-serif;
 }
@@ -77,16 +77,16 @@
 }
 
 html{
+  width:100%;
   margin:0;
   padding:0;
-  width:100%;
   scroll-behavior:smooth;
 }
 
 body{
+  width:100%;
   margin:0;
   padding:0;
-  width:100%;
   overflow-x:hidden;
   background:#000;
   color:#111;
@@ -102,10 +102,6 @@ img{
 a{
   color:inherit;
   text-decoration:none;
-}
-
-.pd-heart{
-  color:var(--pd-red);
 }
 
 #pdJessicaStory{
@@ -156,69 +152,156 @@ a{
 }
 
 /* =====================================================
-   HERO
+   HERO — FULL PHOTO EDITORIAL COVER
 ===================================================== */
 
 .pd-hero{
-  display:grid;
-  grid-template-columns:1.12fr .88fr;
-  min-height:700px;
+  position:relative;
+  display:block;
+  width:100%;
+  min-height:760px;
+  overflow:hidden;
+  isolation:isolate;
   background:#080808;
   color:#fff;
 }
 
 .pd-hero-photo{
-  position:relative;
-  min-height:700px;
+  position:absolute;
+  z-index:0;
+  inset:0;
+  width:100%;
+  height:100%;
+  min-height:760px;
   overflow:hidden;
-  background:#161616;
+  background:#111;
 }
 
 .pd-hero-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:58% 48%;
+  object-position:58% 50%;
   filter:
     saturate(1.08)
-    contrast(1.05)
-    brightness(1.04);
+    contrast(1.06)
+    brightness(1.02);
+}
+
+.pd-hero::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.78) 0%,
+      rgba(0,0,0,.58) 28%,
+      rgba(0,0,0,.23) 52%,
+      rgba(0,0,0,.03) 76%,
+      rgba(0,0,0,.02) 100%
+    );
+}
+
+.pd-hero::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  left:0;
+  right:0;
+  bottom:0;
+  height:34%;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0,0,0,.15)
+    );
 }
 
 .pd-hero-copy{
+  position:relative;
+  z-index:2;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:48px 40px;
+  width:52%;
+  min-height:760px;
+  padding:
+    clamp(42px,7vw,82px)
+    clamp(28px,5vw,58px);
+  text-shadow:0 2px 12px rgba(0,0,0,.42);
 }
 
 .pd-hero-copy .pd-kicker{
-  color:var(--pd-gold);
+  position:relative;
+  display:inline-block;
+  width:max-content;
+  max-width:100%;
+  margin:0 0 28px;
+  padding-bottom:15px;
+  color:#e2bd69;
+  font-size:12px;
+  line-height:1.45;
+  letter-spacing:.16em;
+  text-shadow:0 2px 10px rgba(0,0,0,.6);
+}
+
+.pd-hero-copy .pd-kicker::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:145px;
+  height:1px;
+  background:var(--pd-gold);
 }
 
 .pd-hero-copy h1{
+  max-width:590px;
   margin:0;
+  color:#fff;
   font-family:var(--pd-serif);
-  font-size:clamp(55px,8vw,94px);
-  line-height:.85;
+  font-size:clamp(68px,10vw,118px);
+  line-height:.79;
   font-weight:500;
-  letter-spacing:-.045em;
+  letter-spacing:-.055em;
+  text-shadow:0 3px 18px rgba(0,0,0,.52);
+}
+
+.pd-hero-heart{
+  display:inline-block;
+  margin-left:8px;
+  color:var(--pd-red);
+  font-family:var(--pd-serif);
+  font-size:.64em;
+  line-height:1;
+  vertical-align:.12em;
+  text-shadow:0 2px 14px rgba(0,0,0,.45);
 }
 
 .pd-hero-sub{
-  margin:17px 0 24px;
-  color:#ead392;
+  max-width:440px;
+  margin:24px 0 23px;
+  color:#efd38c;
   font-family:var(--pd-serif);
-  font-size:clamp(28px,4vw,47px);
-  line-height:.96;
+  font-size:clamp(31px,4.5vw,51px);
+  line-height:.92;
+  font-weight:500;
+  text-shadow:0 3px 14px rgba(0,0,0,.55);
 }
 
 .pd-hero-copy p{
+  max-width:430px;
   margin:0;
-  max-width:520px;
+  color:#fff;
   font-family:var(--pd-serif);
   font-size:20px;
-  line-height:1.5;
+  line-height:1.47;
+  text-shadow:0 2px 10px rgba(0,0,0,.75);
 }
 
 .pd-back{
@@ -226,13 +309,16 @@ a{
   align-items:center;
   gap:9px;
   align-self:flex-start;
-  margin-top:29px;
-  padding-bottom:5px;
+  margin-top:30px;
+  padding:0 0 9px;
   border-bottom:1px solid var(--pd-gold);
+  color:#fff;
   font-size:11px;
+  line-height:1;
   font-weight:900;
   letter-spacing:.08em;
   text-transform:uppercase;
+  text-shadow:0 2px 8px rgba(0,0,0,.75);
 }
 
 /* =====================================================
@@ -274,18 +360,18 @@ a{
 .pd-intro-photo{
   min-height:600px;
   overflow:hidden;
-  background:#ddd7cd;
+  background:#eee8dc;
 }
 
 .pd-intro-photo img{
   width:100%;
   height:100%;
-  object-fit:cover;
-  object-position:52% 46%;
+  object-fit:contain;
+  object-position:center;
   filter:
-    saturate(1.08)
-    contrast(1.05)
-    brightness(1.04);
+    saturate(1.06)
+    contrast(1.04)
+    brightness(1.02);
 }
 
 /* =====================================================
@@ -334,7 +420,7 @@ a{
   justify-content:center;
   padding:7px;
   border:3px solid #111;
-  background:#111;
+  background:#f4efe6;
   box-shadow:8px 9px 0 rgba(0,0,0,.14);
   transform:rotate(-1deg);
 }
@@ -342,14 +428,12 @@ a{
 .pd-profile-photo img{
   width:100%;
   height:auto;
-  max-height:660px;
+  max-height:590px;
   object-fit:contain;
-  object-position:center;
-  background:#eee9df;
   filter:
-    saturate(1.08)
+    saturate(1.06)
     contrast(1.05)
-    brightness(1.04);
+    brightness(1.02);
 }
 
 .pd-profile-card{
@@ -364,6 +448,10 @@ a{
   font-family:var(--pd-serif);
   font-size:clamp(42px,6vw,66px);
   line-height:.95;
+}
+
+.pd-profile-heart{
+  color:var(--pd-red);
 }
 
 .pd-profile-sub{
@@ -423,6 +511,9 @@ a{
 }
 
 .pd-observer-photo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
   min-height:610px;
   overflow:hidden;
   background:#161616;
@@ -430,13 +521,14 @@ a{
 
 .pd-observer-photo img{
   width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:52% 45%;
+  height:auto;
+  max-height:650px;
+  object-fit:contain;
+  object-position:center;
   filter:
     saturate(1.08)
-    contrast(1.06)
-    brightness(1.04);
+    contrast(1.05)
+    brightness(1.03);
 }
 
 .pd-observer-copy{
@@ -497,7 +589,7 @@ a{
 }
 
 /* =====================================================
-   PHOTO MOMENTS — NEW EDITORIAL DESIGN
+   PHOTO MOMENTS
 ===================================================== */
 
 .pd-gallery{
@@ -517,7 +609,7 @@ a{
 .pd-photo-grid{
   display:grid;
   grid-template-columns:1.12fr 1fr 1fr;
-  gap:7px;
+  gap:5px;
   background:#111;
   border:3px solid #111;
 }
@@ -526,42 +618,19 @@ a{
   position:relative;
   margin:0;
   overflow:hidden;
-  background:#111;
-}
-
-.pd-photo-frame{
-  position:relative;
-  height:430px;
-  overflow:hidden;
-  background:#eee9df;
+  background:#f7f2e9;
 }
 
 .pd-photo-card img{
   width:100%;
-  height:100%;
+  height:410px;
   object-fit:contain;
   object-position:center;
-  background:#eee9df;
+  background:#f7f2e9;
   filter:
-    saturate(1.1)
-    contrast(1.06)
-    brightness(1.04);
-}
-
-.pd-photo-card--soft .pd-photo-frame{
-  height:540px;
-}
-
-.pd-photo-card--soft img{
-  object-position:center;
-}
-
-.pd-photo-card--window img{
-  object-position:center;
-}
-
-.pd-photo-card--garden img{
-  object-position:center;
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.02);
 }
 
 .pd-photo-card figcaption{
@@ -579,52 +648,50 @@ a{
   font-size:21px;
 }
 
-/*
-   "Soft place" now sits ON the photograph,
-   like a handwritten editorial note.
-*/
-
-.pd-soft-overlay{
+.pd-photo-card:first-child figcaption{
   position:absolute;
-  z-index:3;
-  left:24px;
-  bottom:22px;
+  z-index:2;
+  left:17px;
+  right:17px;
+  bottom:17px;
+  min-height:0;
+  padding:0;
+  background:transparent;
   color:#fff;
+  text-shadow:
+    0 2px 5px rgba(0,0,0,.9),
+    0 0 14px rgba(0,0,0,.6);
+}
+
+.pd-photo-card:first-child::after{
+  content:"";
+  position:absolute;
+  inset:48% 0 0;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      transparent,
+      rgba(0,0,0,.68)
+    );
+}
+
+.pd-photo-card:first-child figcaption strong{
   font-family:
-    "Snell Roundhand",
-    "Segoe Script",
     "Brush Script MT",
+    "Segoe Script",
+    "Lucida Handwriting",
     cursive;
-  font-size:clamp(38px,5.5vw,67px);
-  line-height:.9;
+  font-size:34px;
+  line-height:1;
   font-weight:400;
-  font-style:italic;
-  letter-spacing:-.03em;
-  text-shadow:
-    0 2px 4px rgba(0,0,0,.85),
-    0 0 15px rgba(0,0,0,.42);
-  transform:rotate(-4deg);
 }
 
-.pd-soft-overlay .pd-heart{
-  display:inline-block;
-  margin-left:5px;
-  color:#ff174d;
-  font-family:Georgia,serif;
-  font-size:.72em;
-  font-style:normal;
-  text-shadow:
-    0 2px 5px rgba(0,0,0,.65),
-    0 0 12px rgba(255,23,77,.28);
-  transform:rotate(5deg);
-}
-
-.pd-soft-caption{
-  font-style:italic;
+.pd-soft-heart{
+  color:var(--pd-red);
 }
 
 /* =====================================================
-   INDEPENDENT — NEW PERSONALITY DESIGN
+   INDEPENDENT
 ===================================================== */
 
 .pd-independent{
@@ -644,69 +711,44 @@ a{
   background:#fff;
 }
 
-/*
-   No more heavy rectangular buttons.
-   The personality traits now look like
-   magazine annotations / editorial notes.
-*/
-
 .pd-tags{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:0;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:13px 18px;
   max-width:760px;
-  margin:0 auto 40px;
-  border-top:1px solid #b5b0a7;
-  border-bottom:1px solid #b5b0a7;
+  margin:0 auto 38px;
 }
 
 .pd-tag{
   position:relative;
-  min-height:118px;
-  padding:20px 14px 17px;
+  padding:4px 3px 7px;
   border:0;
-  border-right:1px solid #c8c3ba;
   background:transparent;
-  text-align:center;
-}
-
-.pd-tag:nth-child(3n){
-  border-right:0;
-}
-
-.pd-tag:nth-child(-n+3){
-  border-bottom:1px solid #c8c3ba;
-}
-
-.pd-tag-icon{
-  display:block;
-  min-height:34px;
-  margin-bottom:8px;
-  font-size:27px;
-  line-height:1;
-}
-
-.pd-tag-word{
-  display:block;
   font-family:var(--pd-serif);
   font-size:18px;
-  line-height:1;
+  font-weight:700;
   font-style:italic;
-  letter-spacing:.01em;
+  letter-spacing:.015em;
 }
 
-.pd-tag-number{
+.pd-tag::after{
+  content:"";
   position:absolute;
-  top:8px;
-  right:9px;
-  color:#a89e8e;
-  font-family:var(--pd-serif);
-  font-size:9px;
-  letter-spacing:.12em;
+  left:3px;
+  right:3px;
+  bottom:0;
+  height:1px;
+  background:var(--pd-gold-dark);
+  opacity:.65;
 }
 
-.pd-tag--gentle .pd-tag-icon{
-  color:var(--pd-red);
+.pd-tag:nth-child(even){
+  transform:rotate(-1deg);
+}
+
+.pd-tag:nth-child(odd){
+  transform:rotate(1deg);
 }
 
 /* =====================================================
@@ -746,21 +788,24 @@ a{
 }
 
 .pd-garden-photo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
   min-height:610px;
   overflow:hidden;
-  background:#171717;
+  background:#151515;
 }
 
 .pd-garden-photo img{
   width:100%;
-  height:100%;
+  height:auto;
+  max-height:650px;
   object-fit:contain;
   object-position:center;
-  background:#171717;
   filter:
-    saturate(1.1)
-    contrast(1.06)
-    brightness(1.04);
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.03);
 }
 
 /* =====================================================
@@ -789,21 +834,18 @@ a{
   margin:34px auto 0;
   padding:8px;
   border:3px solid #111;
-  background:#f4efe6;
+  background:#fff;
   box-shadow:7px 8px 0 rgba(0,0,0,.12);
 }
 
 .pd-ritual-photo img{
   width:100%;
   height:auto;
-  max-height:760px;
   object-fit:contain;
-  object-position:center;
-  background:#f4efe6;
   filter:
-    saturate(1.08)
+    saturate(1.07)
     contrast(1.05)
-    brightness(1.04);
+    brightness(1.02);
 }
 
 /* =====================================================
@@ -838,24 +880,27 @@ a{
   font-style:italic;
 }
 
+.pd-signature-heart{
+  color:var(--pd-red);
+}
+
 .pd-end-photo{
   display:flex;
+  align-items:center;
   justify-content:center;
-  background:#0b0b0b;
-  overflow:hidden;
+  background:#000;
 }
 
 .pd-end-photo img{
   width:100%;
   height:auto;
-  max-height:900px;
+  max-height:none;
   object-fit:contain;
   object-position:center;
-  background:#0b0b0b;
   filter:
-    saturate(1.08)
+    saturate(1.07)
     contrast(1.05)
-    brightness(1.04);
+    brightness(1.02);
 }
 
 /* =====================================================
@@ -908,7 +953,6 @@ html[dir="rtl"] #pdJessicaStory{
   text-align:right;
 }
 
-html[dir="rtl"] .pd-hero,
 html[dir="rtl"] .pd-intro,
 html[dir="rtl"] .pd-profile-layout,
 html[dir="rtl"] .pd-observer,
@@ -916,13 +960,18 @@ html[dir="rtl"] .pd-garden{
   direction:rtl;
 }
 
-html[dir="rtl"] .pd-signature{
-  text-align:left;
+html[dir="rtl"] .pd-hero-copy{
+  margin-left:auto;
+  text-align:right;
 }
 
-html[dir="rtl"] .pd-soft-overlay{
+html[dir="rtl"] .pd-hero-copy .pd-kicker::after{
+  right:0;
   left:auto;
-  right:24px;
+}
+
+html[dir="rtl"] .pd-signature{
+  text-align:left;
 }
 
 /* =====================================================
@@ -931,16 +980,27 @@ html[dir="rtl"] .pd-soft-overlay{
 
 @media(max-width:900px){
 
-  .pd-hero{
-    min-height:610px;
+  .pd-hero,
+  .pd-hero-photo,
+  .pd-hero-copy{
+    min-height:690px;
   }
 
-  .pd-hero-photo{
-    min-height:610px;
+  .pd-hero-photo img{
+    object-position:61% center;
   }
 
   .pd-hero-copy{
-    padding:38px 27px;
+    width:55%;
+    padding:42px 30px;
+  }
+
+  .pd-hero-copy h1{
+    font-size:72px;
+  }
+
+  .pd-hero-sub{
+    font-size:34px;
   }
 
   .pd-hero-copy p,
@@ -959,12 +1019,8 @@ html[dir="rtl"] .pd-soft-overlay{
     min-height:520px;
   }
 
-  .pd-photo-frame{
-    height:360px;
-  }
-
-  .pd-photo-card--soft .pd-photo-frame{
-    height:460px;
+  .pd-photo-card img{
+    height:350px;
   }
 }
 
@@ -975,43 +1031,87 @@ html[dir="rtl"] .pd-soft-overlay{
 @media(max-width:720px){
 
   .pd-hero{
-    grid-template-columns:61% 39%;
-    min-height:530px;
+    min-height:calc(100svh - 10px);
   }
 
   .pd-hero-photo{
-    min-height:530px;
-  }
-
-  .pd-hero-photo img{
-    object-position:56% 48%;
+    min-height:calc(100svh - 10px);
   }
 
   .pd-hero-copy{
-    padding:25px 14px;
+    justify-content:flex-start;
+    width:100%;
+    min-height:calc(100svh - 10px);
+    padding:54px 24px 34px;
+  }
+
+  .pd-hero-photo img{
+    object-position:61% center;
+  }
+
+  .pd-hero::before{
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0,0,0,.76) 0%,
+        rgba(0,0,0,.52) 40%,
+        rgba(0,0,0,.15) 72%,
+        rgba(0,0,0,.02) 100%
+      );
+  }
+
+  .pd-hero::after{
+    height:100%;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,.16) 0%,
+        rgba(0,0,0,.04) 48%,
+        rgba(0,0,0,.08) 70%,
+        rgba(0,0,0,.24) 100%
+      );
   }
 
   .pd-hero-copy .pd-kicker{
-    font-size:8px;
+    margin-bottom:24px;
+    padding-bottom:12px;
+    font-size:9px;
+    line-height:1.5;
+    letter-spacing:.15em;
+  }
+
+  .pd-hero-copy .pd-kicker::after{
+    width:115px;
   }
 
   .pd-hero-copy h1{
-    font-size:40px;
+    max-width:330px;
+    font-size:clamp(58px,17vw,79px);
+    line-height:.79;
+  }
+
+  .pd-hero-heart{
+    margin-left:3px;
+    font-size:.56em;
   }
 
   .pd-hero-sub{
-    margin:10px 0 15px;
-    font-size:21px;
+    max-width:290px;
+    margin:17px 0 18px;
+    font-size:clamp(29px,8.5vw,39px);
+    line-height:.92;
   }
 
   .pd-hero-copy p{
-    font-size:11.8px;
-    line-height:1.39;
+    max-width:300px;
+    font-size:15px;
+    line-height:1.43;
   }
 
   .pd-back{
-    margin-top:18px;
-    font-size:8px;
+    margin-top:22px;
+    padding-bottom:8px;
+    font-size:9px;
   }
 
   .pd-intro{
@@ -1040,10 +1140,6 @@ html[dir="rtl"] .pd-soft-overlay{
     min-height:470px;
   }
 
-  .pd-intro-photo img{
-    object-position:52% 45%;
-  }
-
   .pd-profile{
     padding:34px 16px 40px;
   }
@@ -1061,13 +1157,6 @@ html[dir="rtl"] .pd-soft-overlay{
     margin:0 auto;
   }
 
-  .pd-profile-photo img{
-    width:100%;
-    height:auto;
-    max-height:none;
-    object-fit:contain;
-  }
-
   .pd-profile-card{
     max-width:520px;
     margin:0 auto;
@@ -1079,10 +1168,6 @@ html[dir="rtl"] .pd-soft-overlay{
 
   .pd-observer-photo{
     min-height:500px;
-  }
-
-  .pd-observer-photo img{
-    object-position:54% 45%;
   }
 
   .pd-observer-copy{
@@ -1135,28 +1220,23 @@ html[dir="rtl"] .pd-soft-overlay{
 
   .pd-photo-grid{
     grid-template-columns:1fr 1fr;
-    gap:5px;
   }
 
   .pd-photo-card:first-child{
     grid-column:1/-1;
   }
 
-  .pd-photo-frame{
-    height:300px;
-  }
-
-  .pd-photo-card--soft .pd-photo-frame{
-    height:430px;
-  }
-
   .pd-photo-card img{
-    object-fit:contain;
+    height:310px;
+  }
+
+  .pd-photo-card:first-child img{
+    height:440px;
   }
 
   .pd-photo-card figcaption{
-    min-height:98px;
-    padding:12px;
+    min-height:96px;
+    padding:13px 12px 15px;
     font-size:13px;
   }
 
@@ -1164,41 +1244,23 @@ html[dir="rtl"] .pd-soft-overlay{
     font-size:18px;
   }
 
-  .pd-soft-overlay{
-    left:19px;
-    bottom:19px;
-    font-size:48px;
+  .pd-photo-card:first-child figcaption{
+    left:20px;
+    right:20px;
+    bottom:21px;
+    font-size:14px;
+  }
+
+  .pd-photo-card:first-child figcaption strong{
+    font-size:36px;
   }
 
   .pd-tags{
-    grid-template-columns:repeat(2,1fr);
-    margin-bottom:31px;
+    gap:12px 17px;
+    margin-bottom:32px;
   }
 
   .pd-tag{
-    min-height:104px;
-    padding:18px 8px 14px;
-    border-right:1px solid #c8c3ba;
-    border-bottom:1px solid #c8c3ba;
-  }
-
-  .pd-tag:nth-child(3n){
-    border-right:1px solid #c8c3ba;
-  }
-
-  .pd-tag:nth-child(2n){
-    border-right:0;
-  }
-
-  .pd-tag:nth-last-child(-n+2){
-    border-bottom:0;
-  }
-
-  .pd-tag-icon{
-    font-size:24px;
-  }
-
-  .pd-tag-word{
     font-size:16px;
   }
 
@@ -1227,45 +1289,36 @@ html[dir="rtl"] .pd-soft-overlay{
     min-height:500px;
   }
 
-  .pd-garden-photo img{
-    object-fit:contain;
-  }
-
   .pd-signature{
     font-size:39px;
-  }
-
-  .pd-end-photo img{
-    width:100%;
-    height:auto;
-    max-height:none;
-    object-fit:contain;
   }
 }
 
 @media(max-width:390px){
 
-  .pd-hero-copy h1{
-    font-size:36px;
+  .pd-hero-copy{
+    padding:42px 20px 30px;
   }
 
-  .pd-hero-copy p,
-  .pd-intro-copy p,
-  .pd-observer-copy p,
-  .pd-garden-copy p{
-    font-size:11px;
+  .pd-hero-photo img{
+    object-position:62% center;
+  }
+
+  .pd-hero-copy h1{
+    font-size:57px;
+  }
+
+  .pd-hero-sub{
+    font-size:28px;
+  }
+
+  .pd-hero-copy p{
+    max-width:275px;
+    font-size:13.5px;
   }
 
   .pd-display{
     font-size:42px;
-  }
-
-  .pd-photo-card--soft .pd-photo-frame{
-    height:400px;
-  }
-
-  .pd-soft-overlay{
-    font-size:43px;
   }
 }
 
@@ -1289,11 +1342,14 @@ html[dir="rtl"] .pd-soft-overlay{
 
 <section class="pd-section pd-hero">
 
-  <div class="pd-hero-photo">
+  <div
+    class="pd-hero-photo"
+    aria-hidden="true"
+  >
 
     <img
-      src="/jessica-03-white-bed.jpg?v=20260929-editorial"
-      alt="Jessica relaxing on her soft white bed"
+      src="/jessica-03-white-bed.jpg?v=20260929-full-hero"
+      alt=""
       fetchpriority="high"
       decoding="async"
     >
@@ -1303,19 +1359,25 @@ html[dir="rtl"] .pd-soft-overlay{
   <div class="pd-hero-copy">
 
     <div class="pd-kicker">
-      PETS &amp; DOGUE · ISSUE 01 · COVER STORY
+      PETS &amp; DOGUE · ISSUE 01<br>
+      COVER STORY
     </div>
 
     <h1>
-      Meet
+      Meet<br>
       <span
         class="notranslate"
         translate="no"
       >Jessica</span>
+      <span
+        class="pd-hero-heart"
+        aria-hidden="true"
+      >♡</span>
     </h1>
 
     <div class="pd-hero-sub">
-      Gentle British lady.
+      Gentle<br>
+      British lady.
     </div>
 
     <p>
@@ -1352,7 +1414,7 @@ html[dir="rtl"] .pd-soft-overlay{
 
     <div class="pd-kicker">
       Quiet confidence
-      <span class="pd-heart">♥</span>
+      <span class="pd-profile-heart">♥</span>
     </div>
 
     <h2>
@@ -1377,7 +1439,7 @@ html[dir="rtl"] .pd-soft-overlay{
   <div class="pd-intro-photo">
 
     <img
-      src="/jessica-04-window-bed.jpg?v=20260929-editorial"
+      src="/jessica-04-window-bed.jpg?v=20260929-clear"
       alt="Jessica watching the world from her window bed"
       loading="lazy"
       decoding="async"
@@ -1412,7 +1474,7 @@ html[dir="rtl"] .pd-soft-overlay{
     <div class="pd-profile-photo">
 
       <img
-        src="/jessica-03-white-bed.jpg?v=20260929-editorial"
+        src="/jessica-03-white-bed.jpg?v=20260929-clear"
         alt="Jessica portrait"
         loading="lazy"
         decoding="async"
@@ -1427,7 +1489,7 @@ html[dir="rtl"] .pd-soft-overlay{
           class="notranslate"
           translate="no"
         >Jessica</span>
-        <span class="pd-heart">♥</span>
+        <span class="pd-profile-heart">♥</span>
       </h3>
 
       <div class="pd-profile-sub">
@@ -1472,7 +1534,7 @@ html[dir="rtl"] .pd-soft-overlay{
         </div>
 
         <div class="pd-profile-item">
-          <span class="pd-heart">♥</span>
+          <span class="pd-profile-heart">♥</span>
           <span>
             <strong>Personality:</strong>
             calm, observant and independent
@@ -1525,7 +1587,7 @@ html[dir="rtl"] .pd-soft-overlay{
   <div class="pd-observer-photo">
 
     <img
-      src="/jessica-04-window-bed.jpg?v=20260929-editorial"
+      src="/jessica-04-window-bed.jpg?v=20260929-clear"
       alt="Jessica observing the world from the window"
       loading="lazy"
       decoding="async"
@@ -1572,7 +1634,7 @@ html[dir="rtl"] .pd-soft-overlay{
 
     <div class="pd-kicker">
       Home is a very good place
-      <span class="pd-heart">♥</span>
+      <span class="pd-profile-heart">♥</span>
     </div>
 
     <h2 class="pd-display">
@@ -1657,42 +1719,33 @@ html[dir="rtl"] .pd-soft-overlay{
 
   <div class="pd-photo-grid">
 
-    <figure class="pd-photo-card pd-photo-card--soft">
+    <figure class="pd-photo-card">
 
-      <div class="pd-photo-frame">
+      <img
+        src="/jessica-03-white-bed.jpg?v=20260929-clear"
+        alt="Jessica relaxing in her white bed"
+        loading="lazy"
+        decoding="async"
+      >
 
-        <img
-          src="/jessica-03-white-bed.jpg?v=20260929-editorial"
-          alt="Jessica relaxing in her white bed"
-          loading="lazy"
-          decoding="async"
-        >
-
-        <div class="pd-soft-overlay">
+      <figcaption>
+        <strong>
           Soft place
-          <span class="pd-heart">♥</span>
-        </div>
-
-      </div>
-
-      <figcaption class="pd-soft-caption">
+          <span class="pd-soft-heart">♥</span>
+        </strong>
         The perfect place to do absolutely nothing.
       </figcaption>
 
     </figure>
 
-    <figure class="pd-photo-card pd-photo-card--window">
+    <figure class="pd-photo-card">
 
-      <div class="pd-photo-frame">
-
-        <img
-          src="/jessica-04-window-bed.jpg?v=20260929-editorial"
-          alt="Jessica watching through the window"
-          loading="lazy"
-          decoding="async"
-        >
-
-      </div>
+      <img
+        src="/jessica-04-window-bed.jpg?v=20260929-clear"
+        alt="Jessica watching through the window"
+        loading="lazy"
+        decoding="async"
+      >
 
       <figcaption>
         <strong>Window watch</strong>
@@ -1701,23 +1754,17 @@ html[dir="rtl"] .pd-soft-overlay{
 
     </figure>
 
-    <figure class="pd-photo-card pd-photo-card--garden">
+    <figure class="pd-photo-card">
 
-      <div class="pd-photo-frame">
-
-        <img
-          src="/jessica-05-garden-cocoon.jpg?v=20260929-editorial"
-          alt="Jessica relaxing in her garden chair"
-          loading="lazy"
-          decoding="async"
-        >
-
-      </div>
+      <img
+        src="/jessica-05-garden-cocoon.jpg?v=20260929-clear"
+        alt="Jessica relaxing in her garden chair"
+        loading="lazy"
+        decoding="async"
+      >
 
       <figcaption>
-        <strong>
-          Garden time 🌿
-        </strong>
+        <strong>Garden time 🌿</strong>
         Fresh air, sunshine and no unnecessary hurry.
       </figcaption>
 
@@ -1746,124 +1793,32 @@ html[dir="rtl"] .pd-soft-overlay{
 
   <div class="pd-independent-body">
 
-    <div
-      class="pd-tags"
-      aria-label="Jessica personality"
-    >
+    <div class="pd-tags">
 
-      <div class="pd-tag">
+      <span class="pd-tag">
+        👀 Observant
+      </span>
 
-        <span class="pd-tag-number">
-          01
-        </span>
+      <span class="pd-tag">
+        <span class="pd-profile-heart">♥</span>
+        Gentle
+      </span>
 
-        <span
-          class="pd-tag-icon"
-          aria-hidden="true"
-        >
-          👀
-        </span>
+      <span class="pd-tag">
+        ☁️ Soft
+      </span>
 
-        <span class="pd-tag-word">
-          Observant
-        </span>
+      <span class="pd-tag">
+        🪟 Curious
+      </span>
 
-      </div>
+      <span class="pd-tag">
+        🌿 Peaceful
+      </span>
 
-      <div class="pd-tag pd-tag--gentle">
-
-        <span class="pd-tag-number">
-          02
-        </span>
-
-        <span
-          class="pd-tag-icon pd-heart"
-          aria-hidden="true"
-        >
-          ♥
-        </span>
-
-        <span class="pd-tag-word">
-          Gentle
-        </span>
-
-      </div>
-
-      <div class="pd-tag">
-
-        <span class="pd-tag-number">
-          03
-        </span>
-
-        <span
-          class="pd-tag-icon"
-          aria-hidden="true"
-        >
-          ☁️
-        </span>
-
-        <span class="pd-tag-word">
-          Soft
-        </span>
-
-      </div>
-
-      <div class="pd-tag">
-
-        <span class="pd-tag-number">
-          04
-        </span>
-
-        <span
-          class="pd-tag-icon"
-          aria-hidden="true"
-        >
-          🪟
-        </span>
-
-        <span class="pd-tag-word">
-          Curious
-        </span>
-
-      </div>
-
-      <div class="pd-tag">
-
-        <span class="pd-tag-number">
-          05
-        </span>
-
-        <span
-          class="pd-tag-icon"
-          aria-hidden="true"
-        >
-          🌿
-        </span>
-
-        <span class="pd-tag-word">
-          Peaceful
-        </span>
-
-      </div>
-
-      <div class="pd-tag">
-
-        <span class="pd-tag-number">
-          06
-        </span>
-
-        <span
-          class="pd-tag-icon"
-          aria-hidden="true"
-        >
-          ⭐
-        </span>
-
-        <span class="pd-tag-word">
-          Independent
-        </span>
-
-      </div>
+      <span class="pd-tag">
+        ⭐ Independent
+      </span>
 
     </div>
 
@@ -1946,7 +1901,7 @@ html[dir="rtl"] .pd-soft-overlay{
   <div class="pd-garden-photo">
 
     <img
-      src="/jessica-05-garden-cocoon.jpg?v=20260929-editorial"
+      src="/jessica-05-garden-cocoon.jpg?v=20260929-clear"
       alt="Jessica enjoying a peaceful afternoon in the garden"
       loading="lazy"
       decoding="async"
@@ -2011,7 +1966,7 @@ html[dir="rtl"] .pd-soft-overlay{
     <div class="pd-ritual-photo">
 
       <img
-        src="/jessica-02-milk.jpg?v=20260929-editorial"
+        src="/jessica-02-milk.jpg?v=20260929-clear"
         alt="Jessica beside her favourite dish"
         loading="lazy"
         decoding="async"
@@ -2110,7 +2065,7 @@ html[dir="rtl"] .pd-soft-overlay{
         class="notranslate"
         translate="no"
       >Jessica</span>
-      <span class="pd-heart">♥</span>
+      <span class="pd-signature-heart">♥</span>
     </div>
 
   </div>
@@ -2124,7 +2079,7 @@ html[dir="rtl"] .pd-soft-overlay{
 <section class="pd-end-photo">
 
   <img
-    src="/jessica-03-white-bed.jpg?v=20260929-editorial"
+    src="/jessica-03-white-bed.jpg?v=20260929-clear"
     alt="Jessica, PETS & DOGUE Issue 01 cover star"
     loading="lazy"
     decoding="async"
@@ -2147,7 +2102,6 @@ html[dir="rtl"] .pd-soft-overlay{
 
   <div class="pd-story-footer-tagline">
     One world. Every pet.
-    <span class="pd-heart">♥</span>
   </div>
 
   <nav
@@ -2155,31 +2109,19 @@ html[dir="rtl"] .pd-soft-overlay{
     aria-label="Issue 01 story navigation"
   >
 
-    <a
-      href="/issue-01.html"
-      aria-label="Back to Issue 01"
-    >
+    <a href="/issue-01.html">
       ← Issue 01
     </a>
 
-    <a
-      href="/issue-01-miso.html"
-      aria-label="Read Miso cover story"
-    >
+    <a href="/issue-01-miso.html">
       Miso
     </a>
 
-    <a
-      href="/issue-01-pablo.html"
-      aria-label="Read Pablo cover story"
-    >
+    <a href="/issue-01-pablo.html">
       Pablo
     </a>
 
-    <a
-      href="/index.html"
-      aria-label="Go to PETS & DOGUE home page"
-    >
+    <a href="/index.html">
       Home
     </a>
 
@@ -2195,26 +2137,19 @@ html[dir="rtl"] .pd-soft-overlay{
 
   /*
   ========================================================
-  JESSICA STORY — EDITORIAL PHOTO UPDATE
+  JESSICA STORY CONTENT ONLY
 
-  GLOBAL SYSTEM REMAINS CONTROLLED BY:
-  /pets-dogue-shell.js
+  Global system already controls:
+  - approved header
+  - header hide/show on scroll
+  - side menu
+  - language selector
+  - 23-language translation
+  - Arabic RTL
+  - TTS
+  - Miso help circle
 
-  DO NOT REBUILD HERE:
-  - global header
-  - Contents side menu
-  - Profile
-  - languages / RTL
-  - TTS / accessibility
-  - global Miso help circle
-
-  LOCAL CHANGES:
-  - red editorial hearts
-  - improved Jessica photo presentation
-  - less destructive photo cropping
-  - handwritten Soft place overlay
-  - redesigned personality traits
-  - full-image treatment for garden / ritual / ending
+  DO NOT rebuild global components here.
   ========================================================
   */
 
