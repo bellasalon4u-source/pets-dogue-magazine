@@ -374,13 +374,11 @@ button{
   filter:saturate(1.18) contrast(1.07) brightness(1.04);
 }
 
-/* Travel — Miso closer and her face stays visible */
 .moment-travel img{
   object-position:center 38%;
   transform:scale(1.08);
 }
 
-/* Toys — move image so Miso's head and face are visible */
 .moment-toys img{
   object-fit:cover;
   object-position:32% 38%;
@@ -931,67 +929,72 @@ button{
 }
 
 /* =====================================================
-   FINAL
+   FINAL — FULL WIDTH MISO CLOSING
 ===================================================== */
 
 .final{
-  display:grid;
-  grid-template-columns:58% 42%;
+  display:block;
   background:#070707;
   color:#fff;
 }
 
 .final-photo{
-  min-height:500px;
+  position:relative;
+  width:100%;
+  height:auto;
+  min-height:0;
   overflow:hidden;
   background:#101010;
 }
 
 .final-photo img{
+  display:block;
   width:100%;
-  height:100%;
-  min-height:500px;
-  object-fit:cover;
-
-  /* FINAL FIX:
-     image shifted so Miso's head stays visible */
-  object-position:22% center;
-
+  height:auto;
+  min-height:0;
+  object-fit:contain;
+  object-position:center;
   filter:saturate(1.13) contrast(1.06) brightness(1.03);
 }
 
 .final-copy{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:29px 27px;
+  position:relative;
+  max-width:820px;
+  margin:0 auto;
+  padding:38px 30px 42px;
+  background:#070707;
+  color:#fff;
 }
 
 .final-copy .kicker{
+  margin-bottom:12px;
   color:var(--gold);
 }
 
 .final-copy h2{
   margin:0;
-  font:500 clamp(39px,5.5vw,64px)/.88 var(--serif);
+  font:500 clamp(48px,7vw,82px)/.86 var(--serif);
+  letter-spacing:-.045em;
 }
 
 .final-blue{
-  margin:12px 0 16px;
+  margin:17px 0 22px;
   color:#42dff6;
-  font:500 28px/.98 var(--serif);
+  font:500 clamp(26px,4vw,38px)/.98 var(--serif);
 }
 
 .final-copy p{
-  margin:0 0 9px;
-  font:16px/1.43 var(--serif);
+  max-width:620px;
+  margin:0 0 11px;
+  font:17px/1.46 var(--serif);
 }
 
 .signature{
-  margin-top:16px;
-  padding-top:14px;
+  max-width:620px;
+  margin-top:22px;
+  padding-top:17px;
   border-top:1px solid var(--gold);
-  font:italic 29px/1 var(--serif);
+  font:italic 31px/1.02 var(--serif);
 }
 
 /* =====================================================
@@ -1367,43 +1370,55 @@ button{
   }
 
   .final{
-    grid-template-columns:58% 42%;
+    display:block;
   }
 
   .final-photo{
-    min-height:390px;
+    width:100%;
+    height:auto;
+    min-height:0;
   }
 
   .final-photo img{
-    min-height:390px;
-
-    /* keep Miso's head visible on mobile too */
-    object-position:18% center;
+    width:100%;
+    height:auto;
+    min-height:0;
+    object-fit:contain;
+    object-position:center;
   }
 
   .final-copy{
-    padding:18px 12px;
+    max-width:none;
+    padding:27px 22px 31px;
+  }
+
+  .final-copy .kicker{
+    margin-bottom:9px;
   }
 
   .final-copy h2{
-    font-size:29px;
+    font-size:45px;
+    line-height:.87;
   }
 
   .final-blue{
-    margin:8px 0 10px;
-    font-size:18px;
+    margin:13px 0 17px;
+    font-size:25px;
+    line-height:.98;
   }
 
   .final-copy p{
-    margin-bottom:6px;
-    font-size:10px;
-    line-height:1.37;
+    max-width:100%;
+    margin-bottom:9px;
+    font-size:14px;
+    line-height:1.43;
   }
 
   .signature{
-    margin-top:10px;
-    padding-top:9px;
-    font-size:20px;
+    max-width:100%;
+    margin-top:17px;
+    padding-top:13px;
+    font-size:27px;
   }
 }
 
@@ -2237,8 +2252,8 @@ html[dir="rtl"] .ask-copy{
   <div class="final-photo">
 
     <img
-      src="/miso-15.jpg?v=20260929-final"
-      alt="Miso Cute ready for her next adventure"
+      src="/miso-15.jpg?v=20260929-closing"
+      alt="Miso Cute relaxing and looking toward her next adventure"
       loading="lazy"
       decoding="async"
     >
@@ -2404,12 +2419,6 @@ html[dir="rtl"] .ask-copy{
   const cards = Array.from(
     track.querySelectorAll(".moment")
   );
-
-  /*
-  Dots are generated automatically from the
-  remaining cards. Adventure has been removed,
-  so there are now five carousel items.
-  */
 
   cards.forEach(
     function(card,index){
