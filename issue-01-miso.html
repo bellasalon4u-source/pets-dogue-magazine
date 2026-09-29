@@ -34,32 +34,38 @@ pets-dogue-shell.js controls:
 - language system
 - Miso help circle
 - accessibility shell
+
+IMPORTANT:
+This page contains editorial content only.
 ==========================================================
 -->
 
 <script
-  src="/translations.js?v=20260929-miso-editorial"
+  src="/translations.js?v=20260929-miso-final"
   defer
 ></script>
 
 <script
-  src="/pets-dogue-shell.js?v=20260929-miso-editorial"
+  src="/pets-dogue-shell.js?v=20260929-miso-final"
   defer
 ></script>
 
 <style>
 :root{
   --black:#070707;
-  --white:#fff;
+  --white:#ffffff;
   --paper:#fffaf0;
   --cream:#f4eee1;
+  --cream-deep:#e9dfcb;
   --gold:#c89a3b;
   --blue:#55cce9;
   --blue-soft:#bceef5;
+  --blue-dark:#153f4b;
   --pink:#f3c2d3;
   --yellow:#ffe36b;
   --lime:#b9f34b;
   --red:#e32636;
+  --wine:#741326;
 
   --serif:Georgia,"Times New Roman",serif;
   --sans:Arial,Helvetica,sans-serif;
@@ -71,9 +77,9 @@ pets-dogue-shell.js controls:
 
 html,
 body{
+  width:100%;
   margin:0;
   padding:0;
-  width:100%;
 }
 
 body{
@@ -86,6 +92,7 @@ body{
 img{
   display:block;
   width:100%;
+  max-width:100%;
 }
 
 a{
@@ -95,7 +102,7 @@ a{
 
 /*
 ==========================================================
-MAIN EDITORIAL CANVAS
+EDITORIAL CANVAS
 ==========================================================
 */
 
@@ -108,12 +115,13 @@ MAIN EDITORIAL CANVAS
 }
 
 .chapter{
-  border-bottom:6px solid #000;
+  position:relative;
+  border-bottom:5px solid #000;
 }
 
 .kicker{
   margin:0 0 8px;
-  font:900 11px/1.25 var(--sans);
+  font:900 11px/1.2 var(--sans);
   letter-spacing:.17em;
   text-transform:uppercase;
 }
@@ -125,43 +133,49 @@ MAIN EDITORIAL CANVAS
 .display{
   margin:0;
   font-family:var(--serif);
-  font-size:clamp(42px,6.8vw,76px);
-  line-height:.88;
+  font-size:clamp(40px,6.3vw,72px);
+  font-weight:700;
+  line-height:.89;
   letter-spacing:-.045em;
 }
 
 /*
 ==========================================================
-1. COVER — SAME LANGUAGE AS PABLO
+1. COVER
+PABLO-STYLE EDITORIAL SPLIT
 ==========================================================
 */
 
 .cover{
   display:grid;
   grid-template-columns:61% 39%;
-  min-height:650px;
-  background:#080808;
+  min-height:620px;
+  background:var(--black);
   color:#fff;
 }
 
 .cover-photo{
-  min-height:650px;
+  position:relative;
+  min-height:620px;
   overflow:hidden;
+  background:#ddd;
 }
 
 .cover-photo img{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center;
+  object-position:center 42%;
 }
 
 .cover-copy{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:34px;
-  background:#080808;
+  padding:32px;
+  background:var(--black);
 }
 
 .cover-copy .kicker{
@@ -170,14 +184,14 @@ MAIN EDITORIAL CANVAS
 
 .cover-copy h1{
   margin:0;
-  font:500 clamp(45px,6.5vw,76px)/.86 var(--serif);
+  font:500 clamp(44px,6.2vw,74px)/.86 var(--serif);
   letter-spacing:-.045em;
 }
 
 .cover-blue{
-  margin:12px 0 16px;
+  margin:12px 0 15px;
   color:var(--blue);
-  font:500 clamp(27px,3.7vw,43px)/.94 var(--serif);
+  font:500 clamp(26px,3.5vw,41px)/.95 var(--serif);
 }
 
 .cover-copy p{
@@ -188,7 +202,7 @@ MAIN EDITORIAL CANVAS
 
 .issue-back{
   align-self:flex-start;
-  margin-top:23px;
+  margin-top:22px;
   padding-bottom:5px;
   border-bottom:1px solid var(--gold);
   font:900 11px/1 var(--sans);
@@ -198,7 +212,7 @@ MAIN EDITORIAL CANVAS
 
 /*
 ==========================================================
-2. INTRO
+2. HELLO
 ==========================================================
 */
 
@@ -212,7 +226,7 @@ MAIN EDITORIAL CANVAS
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:35px 28px;
+  padding:32px 27px;
 }
 
 .intro-copy .kicker{
@@ -221,40 +235,44 @@ MAIN EDITORIAL CANVAS
 
 .intro-copy h2{
   margin:0;
-  font:700 clamp(39px,6vw,67px)/.88 var(--serif);
+  font:700 clamp(38px,5.7vw,65px)/.89 var(--serif);
   letter-spacing:-.04em;
 }
 
 .intro-copy p{
-  max-width:330px;
-  margin:18px 0 0;
-  font:18px/1.45 var(--serif);
+  max-width:340px;
+  margin:17px 0 0;
+  font:18px/1.42 var(--serif);
 }
 
 .intro-photo{
-  height:570px;
+  position:relative;
+  height:535px;
   overflow:hidden;
+  background:#ddd;
 }
 
 .intro-photo img{
+  width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center;
 }
 
 /*
 ==========================================================
-3. PROFILE — COMPACT MAGAZINE CARD
+3. PROFILE
 ==========================================================
 */
 
 .profile{
-  padding:35px 25px 39px;
+  padding:32px 24px 35px;
   background:var(--blue-soft);
 }
 
 .profile-head{
-  max-width:850px;
-  margin:0 auto 22px;
+  max-width:900px;
+  margin:0 auto 19px;
 }
 
 .profile-head .kicker{
@@ -264,51 +282,54 @@ MAIN EDITORIAL CANVAS
 .profile-layout{
   display:grid;
   grid-template-columns:1.05fr .95fr;
-  gap:18px;
+  gap:16px;
   max-width:900px;
-  margin:auto;
+  margin:0 auto;
 }
 
 .profile-photo{
-  border:7px solid #111;
+  position:relative;
+  overflow:hidden;
+  border:6px solid #111;
   background:#111;
-  box-shadow:7px 8px 0 rgba(0,0,0,.13);
+  box-shadow:7px 8px 0 rgba(0,0,0,.12);
 }
 
 .profile-photo img{
+  width:100%;
   height:100%;
-  min-height:450px;
+  min-height:430px;
   object-fit:cover;
+  object-position:center;
 }
 
 .profile-card{
-  padding:24px 22px;
+  padding:22px 20px;
   border:3px solid #111;
   background:#fff;
-  box-shadow:7px 8px 0 rgba(0,0,0,.12);
+  box-shadow:7px 8px 0 rgba(0,0,0,.11);
 }
 
 .profile-name{
   margin:0 0 5px;
-  font:700 45px/.92 var(--serif);
+  font:700 44px/.92 var(--serif);
 }
 
 .profile-sub{
-  margin:0 0 17px;
-  font:700 15px/1.35 var(--serif);
+  margin:0 0 15px;
+  font:700 15px/1.32 var(--serif);
 }
 
 .profile-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:0;
   border-top:1px solid #bbb;
 }
 
 .profile-fact{
-  padding:10px 8px 10px 0;
+  padding:9px 8px 9px 0;
   border-bottom:1px solid #ccc;
-  font:14px/1.35 var(--serif);
+  font:14px/1.3 var(--serif);
 }
 
 .profile-fact:nth-child(even){
@@ -319,31 +340,31 @@ MAIN EDITORIAL CANVAS
 .profile-fact b{
   display:block;
   margin-bottom:2px;
-  font:900 10px/1.2 var(--sans);
-  letter-spacing:.08em;
+  font:900 9px/1.2 var(--sans);
+  letter-spacing:.09em;
   text-transform:uppercase;
 }
 
 .match{
-  margin-top:18px;
-  font:italic 24px/1.15 var(--serif);
+  margin-top:16px;
+  font:italic 22px/1.12 var(--serif);
 }
 
 /*
 ==========================================================
-4. FAVOURITE MOMENTS
-CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
+4. MY LITTLE WORLD
+THREE EDITORIAL IMAGES — NO LARGE EMPTY CARDS
 ==========================================================
 */
 
 .moments{
-  padding:34px 20px 26px;
+  padding:30px 18px 22px;
   background:var(--cream);
 }
 
 .section-head{
-  max-width:900px;
-  margin:0 auto 21px;
+  max-width:920px;
+  margin:0 auto 18px;
 }
 
 .section-head .kicker{
@@ -352,15 +373,15 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 
 .moment-grid{
   display:grid;
-  grid-template-columns:1.15fr 1fr 1fr;
-  gap:8px;
+  grid-template-columns:1.1fr 1fr 1fr;
+  gap:7px;
   max-width:1000px;
-  margin:auto;
+  margin:0 auto;
 }
 
 .moment{
   position:relative;
-  min-height:360px;
+  min-height:340px;
   margin:0;
   overflow:hidden;
   background:#111;
@@ -374,30 +395,42 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
   object-fit:cover;
 }
 
+.moment-travel img{
+  object-position:center 42%;
+}
+
+.moment-toys img{
+  object-position:center;
+}
+
+.moment-fashion img{
+  object-position:center 35%;
+}
+
 .moment::after{
   content:"";
   position:absolute;
-  inset:45% 0 0;
+  inset:42% 0 0;
   background:linear-gradient(
     transparent,
-    rgba(0,0,0,.78)
+    rgba(0,0,0,.8)
   );
 }
 
 .moment figcaption{
   position:absolute;
   z-index:2;
-  left:15px;
-  right:15px;
-  bottom:14px;
+  left:14px;
+  right:14px;
+  bottom:13px;
   color:#fff;
-  font:italic 17px/1.2 var(--serif);
+  font:italic 16px/1.18 var(--serif);
 }
 
 .moment figcaption strong{
   display:block;
   margin-bottom:3px;
-  font:700 23px/1 var(--serif);
+  font:700 22px/1 var(--serif);
 }
 
 .moment-travel strong{
@@ -414,7 +447,8 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 
 /*
 ==========================================================
-5. DIARY STORY
+5. DIARY
+REAL ARTICLE TYPOGRAPHY
 ==========================================================
 */
 
@@ -423,7 +457,7 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 }
 
 .story-title{
-  padding:31px 27px 24px;
+  padding:29px 26px 21px;
   background:var(--blue);
 }
 
@@ -433,27 +467,28 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 
 .diary{
   max-width:720px;
-  margin:auto;
-  padding:31px 28px 37px;
-  font:17px/1.58 var(--serif);
+  margin:0 auto;
+  padding:27px 27px 29px;
+  font:17px/1.5 var(--serif);
 }
 
 .diary p{
-  margin:0 0 13px;
+  margin:0 0 11px;
 }
 
 .diary-lead{
   font-size:21px;
-  line-height:1.42;
+  line-height:1.38;
 }
 
 .diary-note{
-  margin:23px 0 !important;
-  padding:17px 19px;
+  margin:19px 0 !important;
+  padding:14px 17px;
   border-left:4px solid var(--gold);
   background:var(--cream);
+  font-size:18px;
   font-style:italic;
-  font-size:19px;
+  line-height:1.42;
 }
 
 .diary-small{
@@ -463,26 +498,27 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 .pull{
   max-width:720px;
   margin:0 auto;
-  padding:0 28px 36px;
-  font:700 clamp(32px,5vw,50px)/.98 var(--serif);
+  padding:0 27px 29px;
+  font:700 clamp(30px,4.7vw,47px)/.98 var(--serif);
   letter-spacing:-.03em;
 }
 
 /*
 ==========================================================
-6. SEA — EDITORIAL SPLIT
+6. SEA
 ==========================================================
 */
 
 .sea{
   display:grid;
   grid-template-columns:67% 33%;
-  background:#070707;
+  background:var(--black);
   color:#fff;
 }
 
 .sea-photo{
-  height:520px;
+  position:relative;
+  height:485px;
   overflow:hidden;
 }
 
@@ -490,13 +526,14 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center;
 }
 
 .sea-copy{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:28px 23px;
+  padding:26px 22px;
 }
 
 .sea-copy .kicker{
@@ -505,13 +542,13 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 
 .sea-copy h2{
   margin:0;
-  font:500 46px/.92 var(--serif);
+  font:500 44px/.92 var(--serif);
 }
 
 .sea-copy p{
-  margin:14px 0 0;
+  margin:13px 0 0;
   color:var(--blue);
-  font:italic 20px/1.25 var(--serif);
+  font:italic 19px/1.22 var(--serif);
 }
 
 /*
@@ -525,7 +562,7 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 }
 
 .london-head{
-  padding:31px 27px 20px;
+  padding:29px 26px 19px;
 }
 
 .london-head .kicker{
@@ -535,13 +572,13 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 .london-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  padding:0 18px 25px;
+  gap:7px;
+  padding:0 16px 21px;
 }
 
 .london-card{
   position:relative;
-  height:330px;
+  height:310px;
   overflow:hidden;
   background:#111;
 }
@@ -552,41 +589,53 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
   object-fit:cover;
 }
 
+.london-card:nth-child(1) img{
+  object-position:center 42%;
+}
+
+.london-card:nth-child(2) img{
+  object-position:center 35%;
+}
+
+.london-card:nth-child(3) img{
+  object-position:center 35%;
+}
+
 .london-card::after{
   content:"";
   position:absolute;
-  inset:58% 0 0;
+  inset:56% 0 0;
   background:linear-gradient(
     transparent,
-    rgba(0,0,0,.8)
+    rgba(0,0,0,.82)
   );
 }
 
 .london-card span{
   position:absolute;
   z-index:2;
-  left:13px;
-  right:13px;
-  bottom:12px;
+  left:12px;
+  right:12px;
+  bottom:11px;
   color:#fff;
-  font:italic 20px/1.1 var(--serif);
+  font:italic 19px/1.08 var(--serif);
 }
 
 .london-note{
   max-width:720px;
-  margin:auto;
-  padding:27px 27px 36px;
+  margin:0 auto;
+  padding:23px 26px 30px;
   background:#fff;
-  font:17px/1.55 var(--serif);
+  font:17px/1.48 var(--serif);
 }
 
 .london-note p{
-  margin:0 0 12px;
+  margin:0 0 10px;
 }
 
 .london-note .scribble{
-  margin:18px 0;
-  font:italic 21px/1.45 var(--serif);
+  margin:15px 0;
+  font:italic 20px/1.38 var(--serif);
 }
 
 /*
@@ -596,7 +645,7 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 */
 
 .friends-head{
-  padding:31px 27px 22px;
+  padding:29px 26px 20px;
   background:var(--pink);
 }
 
@@ -613,20 +662,21 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 .friends-copy{
   display:flex;
   align-items:center;
-  padding:30px;
+  padding:27px;
 }
 
 .friends-copy-inner{
   max-width:420px;
-  font:17px/1.52 var(--serif);
+  font:17px/1.47 var(--serif);
 }
 
 .friends-copy-inner p{
-  margin:0 0 13px;
+  margin:0 0 11px;
 }
 
 .friends-photo{
-  height:480px;
+  position:relative;
+  height:445px;
   overflow:hidden;
 }
 
@@ -634,16 +684,18 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center;
 }
 
 /*
 ==========================================================
-9. EVERYONE — NO BOXES
+9. EVERYONE
+NO BUTTONS / NO ANIMAL BOXES
 ==========================================================
 */
 
 .everyone-head{
-  padding:31px 27px 22px;
+  padding:29px 26px 20px;
   background:var(--lime);
 }
 
@@ -653,41 +705,38 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 
 .everyone-body{
   max-width:720px;
-  margin:auto;
-  padding:30px 28px 38px;
+  margin:0 auto;
+  padding:25px 27px 31px;
   background:#fff;
 }
 
 .animal-line{
-  margin:0 0 20px;
-  font:italic 21px/1.45 var(--serif);
-}
-
-.animal-line span{
-  white-space:nowrap;
+  margin:0 0 15px;
+  font:italic 18px/1.45 var(--serif);
 }
 
 .everyone-copy{
-  font:17px/1.55 var(--serif);
+  font:17px/1.48 var(--serif);
 }
 
 .everyone-copy p{
-  margin:0 0 13px;
+  margin:0 0 10px;
 }
 
 .everyone-big{
-  margin:23px 0 !important;
-  font:700 31px/1 var(--serif);
+  margin:17px 0 !important;
+  font:700 29px/1.02 var(--serif);
 }
 
 /*
 ==========================================================
-10. ASK MISO — COMPACT
+10. ASK MISO
+COMPACT EDITORIAL SPLIT
 ==========================================================
 */
 
 .ask-head{
-  padding:31px 27px 22px;
+  padding:29px 26px 20px;
   background:var(--yellow);
 }
 
@@ -699,34 +748,34 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
   display:grid;
   grid-template-columns:36% 64%;
   max-width:850px;
-  margin:auto;
-  padding:28px;
+  margin:0 auto;
+  padding:24px 26px 28px;
   background:#fff;
 }
 
 .ask-mark{
-  padding:5px 24px 5px 0;
+  padding:3px 22px 3px 0;
   border-right:2px solid #111;
 }
 
 .ask-mark strong{
   display:block;
-  font:700 35px/.98 var(--serif);
+  font:700 32px/.98 var(--serif);
 }
 
 .ask-mark em{
   display:block;
-  margin-top:12px;
-  font:italic 16px/1.35 var(--serif);
+  margin-top:10px;
+  font:italic 15px/1.3 var(--serif);
 }
 
 .ask-copy{
-  padding-left:27px;
-  font:17px/1.5 var(--serif);
+  padding-left:24px;
+  font:17px/1.44 var(--serif);
 }
 
 .ask-copy p{
-  margin:0 0 11px;
+  margin:0 0 9px;
 }
 
 .ask-copy .ask-line{
@@ -741,13 +790,14 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 
 .final{
   display:grid;
-  grid-template-columns:57% 43%;
-  background:#070707;
+  grid-template-columns:58% 42%;
+  background:var(--black);
   color:#fff;
 }
 
 .final-photo{
-  min-height:570px;
+  position:relative;
+  min-height:535px;
   overflow:hidden;
 }
 
@@ -755,13 +805,14 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center;
 }
 
 .final-copy{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:31px 29px;
+  padding:29px 27px;
 }
 
 .final-copy .kicker{
@@ -770,25 +821,25 @@ CAPTIONS ARE ON PHOTOS — NOT LARGE CARDS
 
 .final-copy h2{
   margin:0;
-  font:500 clamp(41px,5.8vw,67px)/.88 var(--serif);
+  font:500 clamp(39px,5.5vw,64px)/.88 var(--serif);
 }
 
 .final-blue{
-  margin:13px 0 18px;
+  margin:12px 0 16px;
   color:var(--blue);
-  font:500 30px/.98 var(--serif);
+  font:500 28px/.98 var(--serif);
 }
 
 .final-copy p{
-  margin:0 0 11px;
-  font:16px/1.48 var(--serif);
+  margin:0 0 9px;
+  font:16px/1.43 var(--serif);
 }
 
 .signature{
-  margin-top:19px;
-  padding-top:16px;
+  margin-top:16px;
+  padding-top:14px;
   border-top:1px solid var(--gold);
-  font:italic 31px/1 var(--serif);
+  font:italic 29px/1 var(--serif);
 }
 
 /*
@@ -798,33 +849,33 @@ FOOTER
 */
 
 .issue-footer{
-  padding:34px 20px 38px;
-  background:#070707;
+  padding:31px 20px 34px;
+  background:var(--black);
   color:#fff;
   text-align:center;
 }
 
 .issue-footer-brand{
-  font:700 clamp(31px,5vw,45px)/1 var(--serif);
+  font:700 clamp(30px,4.8vw,43px)/1 var(--serif);
   letter-spacing:.05em;
 }
 
 .issue-footer-tag{
-  margin-top:9px;
-  font:italic 18px/1.2 var(--serif);
+  margin-top:8px;
+  font:italic 17px/1.2 var(--serif);
 }
 
 .footer-links{
   display:flex;
   justify-content:center;
-  gap:28px;
-  margin-top:23px;
+  gap:27px;
+  margin-top:20px;
 }
 
 .footer-links a{
   padding-bottom:4px;
   border-bottom:1px solid var(--gold);
-  font:900 11px/1 var(--sans);
+  font:900 10px/1 var(--sans);
   letter-spacing:.06em;
   text-transform:uppercase;
 }
@@ -832,16 +883,11 @@ FOOTER
 /*
 ==========================================================
 MOBILE
+COMPACT MAGAZINE PROPORTIONS
 ==========================================================
 */
 
 @media(max-width:720px){
-
-  /*
-  Important:
-  compact like Pablo.
-  No full-screen photo after full-screen photo.
-  */
 
   .chapter{
     border-bottom-width:5px;
@@ -850,10 +896,11 @@ MOBILE
   .kicker{
     margin-bottom:6px;
     font-size:9px;
+    line-height:1.15;
   }
 
   .display{
-    font-size:38px;
+    font-size:36px;
     line-height:.91;
   }
 
@@ -863,35 +910,40 @@ MOBILE
 
   .cover{
     grid-template-columns:61% 39%;
-    min-height:455px;
+    min-height:410px;
   }
 
   .cover-photo{
-    min-height:455px;
+    min-height:410px;
+  }
+
+  .cover-photo img{
+    object-position:center 40%;
   }
 
   .cover-copy{
-    padding:20px 13px;
+    padding:18px 12px;
   }
 
   .cover-copy h1{
-    font-size:34px;
+    font-size:31px;
     line-height:.87;
   }
 
   .cover-blue{
-    margin:9px 0 12px;
-    font-size:21px;
+    margin:8px 0 10px;
+    font-size:19px;
+    line-height:.96;
   }
 
   .cover-copy p{
-    font-size:11.5px;
-    line-height:1.38;
+    font-size:10.5px;
+    line-height:1.34;
   }
 
   .issue-back{
-    margin-top:15px;
-    font-size:7.5px;
+    margin-top:13px;
+    font-size:7px;
   }
 
   /*
@@ -903,22 +955,22 @@ MOBILE
   }
 
   .intro-copy{
-    padding:22px 15px;
+    padding:19px 14px;
   }
 
   .intro-copy h2{
-    font-size:32px;
+    font-size:30px;
     line-height:.9;
   }
 
   .intro-copy p{
-    margin-top:12px;
-    font-size:12.5px;
-    line-height:1.42;
+    margin-top:10px;
+    font-size:11.5px;
+    line-height:1.38;
   }
 
   .intro-photo{
-    height:390px;
+    height:350px;
   }
 
   /*
@@ -926,16 +978,16 @@ MOBILE
   */
 
   .profile{
-    padding:27px 14px 31px;
+    padding:23px 12px 27px;
   }
 
   .profile-head{
-    margin-bottom:16px;
+    margin-bottom:14px;
   }
 
   .profile-layout{
     grid-template-columns:46% 54%;
-    gap:9px;
+    gap:8px;
   }
 
   .profile-photo{
@@ -950,18 +1002,18 @@ MOBILE
   }
 
   .profile-card{
-    padding:14px 11px;
+    padding:12px 10px;
     border-width:2px;
     box-shadow:4px 5px 0 rgba(0,0,0,.12);
   }
 
   .profile-name{
-    font-size:28px;
+    font-size:26px;
   }
 
   .profile-sub{
-    margin-bottom:10px;
-    font-size:10.5px;
+    margin-bottom:8px;
+    font-size:9.5px;
   }
 
   .profile-grid{
@@ -970,18 +1022,19 @@ MOBILE
 
   .profile-fact,
   .profile-fact:nth-child(even){
-    padding:6px 0;
+    padding:5px 0;
     border-left:0;
-    font-size:10.5px;
+    font-size:9.5px;
+    line-height:1.25;
   }
 
   .profile-fact b{
-    font-size:8px;
+    font-size:7px;
   }
 
   .match{
-    margin-top:10px;
-    font-size:17px;
+    margin-top:8px;
+    font-size:15px;
   }
 
   /*
@@ -989,11 +1042,11 @@ MOBILE
   */
 
   .moments{
-    padding:27px 12px 19px;
+    padding:23px 9px 16px;
   }
 
   .section-head{
-    margin-bottom:15px;
+    margin-bottom:12px;
   }
 
   .moment-grid{
@@ -1002,22 +1055,23 @@ MOBILE
   }
 
   .moment{
-    min-height:215px;
+    min-height:185px;
   }
 
   .moment figcaption{
-    left:8px;
-    right:7px;
-    bottom:8px;
-    font-size:10px;
+    left:7px;
+    right:6px;
+    bottom:7px;
+    font-size:9px;
   }
 
   .moment figcaption strong{
-    font-size:14px;
+    margin-bottom:2px;
+    font-size:13px;
   }
 
   /*
-  STORY
+  ARTICLE SECTIONS
   */
 
   .story-title,
@@ -1025,32 +1079,33 @@ MOBILE
   .friends-head,
   .everyone-head,
   .ask-head{
-    padding:25px 19px 18px;
+    padding:21px 18px 15px;
   }
 
   .diary{
-    padding:24px 21px 27px;
-    font-size:15px;
-    line-height:1.52;
+    padding:20px 20px 22px;
+    font-size:14.5px;
+    line-height:1.46;
   }
 
   .diary p{
-    margin-bottom:10px;
+    margin-bottom:8px;
   }
 
   .diary-lead{
-    font-size:18px;
+    font-size:17px;
   }
 
   .diary-note{
-    margin:18px 0 !important;
-    padding:13px 14px;
-    font-size:16px;
+    margin:14px 0 !important;
+    padding:11px 12px;
+    font-size:15px;
+    line-height:1.4;
   }
 
   .pull{
-    padding:0 21px 28px;
-    font-size:30px;
+    padding:0 20px 23px;
+    font-size:27px;
   }
 
   /*
@@ -1062,56 +1117,57 @@ MOBILE
   }
 
   .sea-photo{
-    height:315px;
+    height:285px;
   }
 
   .sea-copy{
-    padding:18px 12px;
+    padding:15px 10px;
   }
 
   .sea-copy h2{
-    font-size:29px;
+    font-size:27px;
   }
 
   .sea-copy p{
-    margin-top:9px;
-    font-size:13px;
+    margin-top:8px;
+    font-size:12px;
   }
 
   /*
-  LONDON — THREE PHOTOS ON ONE ROW
+  LONDON
   */
 
   .london-grid{
     grid-template-columns:repeat(3,1fr);
     gap:4px;
-    padding:0 8px 18px;
+    padding:0 7px 15px;
   }
 
   .london-card{
-    height:210px;
+    height:180px;
   }
 
   .london-card span{
-    left:7px;
-    right:7px;
-    bottom:7px;
-    font-size:12px;
+    left:6px;
+    right:6px;
+    bottom:6px;
+    font-size:10.5px;
   }
 
   .london-note{
-    padding:22px 21px 27px;
-    font-size:15px;
-    line-height:1.5;
+    padding:18px 20px 22px;
+    font-size:14.5px;
+    line-height:1.45;
   }
 
   .london-note p{
-    margin-bottom:9px;
+    margin-bottom:8px;
   }
 
   .london-note .scribble{
-    margin:15px 0;
-    font-size:17px;
+    margin:12px 0;
+    font-size:16px;
+    line-height:1.35;
   }
 
   /*
@@ -1123,20 +1179,20 @@ MOBILE
   }
 
   .friends-copy{
-    padding:19px 15px;
+    padding:16px 13px;
   }
 
   .friends-copy-inner{
-    font-size:13px;
-    line-height:1.45;
+    font-size:12px;
+    line-height:1.4;
   }
 
   .friends-copy-inner p{
-    margin-bottom:9px;
+    margin-bottom:7px;
   }
 
   .friends-photo{
-    height:365px;
+    height:320px;
   }
 
   /*
@@ -1144,27 +1200,27 @@ MOBILE
   */
 
   .everyone-body{
-    padding:23px 21px 28px;
+    padding:19px 20px 22px;
   }
 
   .animal-line{
-    margin-bottom:17px;
-    font-size:16px;
-    line-height:1.55;
+    margin-bottom:12px;
+    font-size:14px;
+    line-height:1.45;
   }
 
   .everyone-copy{
-    font-size:15px;
-    line-height:1.5;
+    font-size:14.5px;
+    line-height:1.45;
   }
 
   .everyone-copy p{
-    margin-bottom:9px;
+    margin-bottom:8px;
   }
 
   .everyone-big{
-    margin:18px 0 !important;
-    font-size:25px;
+    margin:14px 0 !important;
+    font-size:23px;
   }
 
   /*
@@ -1173,30 +1229,30 @@ MOBILE
 
   .ask-body{
     grid-template-columns:37% 63%;
-    padding:22px 20px 27px;
+    padding:18px 18px 21px;
   }
 
   .ask-mark{
-    padding-right:15px;
+    padding-right:13px;
   }
 
   .ask-mark strong{
-    font-size:26px;
+    font-size:23px;
   }
 
   .ask-mark em{
-    margin-top:9px;
-    font-size:12px;
+    margin-top:7px;
+    font-size:10.5px;
   }
 
   .ask-copy{
-    padding-left:17px;
-    font-size:14px;
-    line-height:1.45;
+    padding-left:14px;
+    font-size:12.5px;
+    line-height:1.4;
   }
 
   .ask-copy p{
-    margin-bottom:8px;
+    margin-bottom:6px;
   }
 
   /*
@@ -1208,32 +1264,32 @@ MOBILE
   }
 
   .final-photo{
-    min-height:440px;
+    min-height:385px;
   }
 
   .final-copy{
-    padding:22px 15px;
+    padding:18px 12px;
   }
 
   .final-copy h2{
-    font-size:33px;
+    font-size:29px;
   }
 
   .final-blue{
-    margin:9px 0 13px;
-    font-size:20px;
+    margin:8px 0 10px;
+    font-size:18px;
   }
 
   .final-copy p{
-    margin-bottom:8px;
-    font-size:11.5px;
-    line-height:1.42;
+    margin-bottom:6px;
+    font-size:10px;
+    line-height:1.37;
   }
 
   .signature{
-    margin-top:13px;
-    padding-top:11px;
-    font-size:23px;
+    margin-top:10px;
+    padding-top:9px;
+    font-size:20px;
   }
 
   /*
@@ -1241,15 +1297,15 @@ MOBILE
   */
 
   .issue-footer{
-    padding:29px 18px 33px;
+    padding:25px 17px 28px;
   }
 
   .issue-footer-brand{
-    font-size:31px;
+    font-size:28px;
   }
 
   .issue-footer-tag{
-    font-size:15px;
+    font-size:14px;
   }
 
 }
@@ -1263,27 +1319,35 @@ VERY SMALL PHONES
 @media(max-width:390px){
 
   .cover{
-    min-height:430px;
+    min-height:390px;
   }
 
   .cover-photo{
-    min-height:430px;
+    min-height:390px;
   }
 
   .cover-copy h1{
-    font-size:31px;
+    font-size:29px;
+  }
+
+  .cover-blue{
+    font-size:18px;
   }
 
   .profile-name{
-    font-size:25px;
+    font-size:23px;
   }
 
   .moment{
-    min-height:195px;
+    min-height:170px;
   }
 
   .london-card{
-    height:190px;
+    height:165px;
+  }
+
+  .friends-photo{
+    height:300px;
   }
 
 }
@@ -1291,6 +1355,7 @@ VERY SMALL PHONES
 /*
 ==========================================================
 RTL PREPARATION
+DO NOT REMOVE
 ==========================================================
 */
 
@@ -1309,14 +1374,26 @@ html[dir="rtl"] .final{
 
 html[dir="rtl"] .ask-mark{
   padding-right:0;
-  padding-left:24px;
+  padding-left:22px;
   border-right:0;
   border-left:2px solid #111;
 }
 
 html[dir="rtl"] .ask-copy{
   padding-left:0;
-  padding-right:27px;
+  padding-right:24px;
+}
+
+@media(max-width:720px){
+
+  html[dir="rtl"] .ask-mark{
+    padding-left:13px;
+  }
+
+  html[dir="rtl"] .ask-copy{
+    padding-right:14px;
+  }
+
 }
 
 </style>
@@ -1405,7 +1482,7 @@ HELLO
 
     <img
       src="/miso-02.jpg"
-      alt="Miso Cute"
+      alt="Miso Cute, a fluffy blonde Pomeranian"
       loading="lazy"
       decoding="async"
     >
@@ -1439,7 +1516,7 @@ PROFILE
 
       <img
         src="/miso-03.jpg"
-        alt="Miso Cute profile portrait"
+        alt="Portrait of fluffy blonde Pomeranian Miso Cute"
         loading="lazy"
         decoding="async"
       >
@@ -1476,7 +1553,7 @@ PROFILE
 
         <div class="profile-fact">
           <b>Coat</b>
-          Fluffy blonde
+          Soft fluffy blonde
         </div>
 
         <div class="profile-fact">
@@ -1503,7 +1580,10 @@ PROFILE
 
       <div class="match">
         Swipe right?
-        <strong>It’s a match! <span class="heart">♥</span></strong>
+        <strong>
+          It’s a match!
+          <span class="heart">♥</span>
+        </strong>
       </div>
 
     </div>
@@ -1513,7 +1593,7 @@ PROFILE
 </section>
 
 <!-- =====================================================
-FAVOURITE MOMENTS
+MY LITTLE WORLD
 ===================================================== -->
 
 <section class="chapter moments">
@@ -1537,13 +1617,13 @@ FAVOURITE MOMENTS
 
       <img
         src="/miso-04.jpg"
-        alt="Miso exploring"
+        alt="Miso exploring somewhere new"
         loading="lazy"
         decoding="async"
       >
 
       <figcaption>
-        <strong>Travel ✈️</strong>
+        <strong>Explore ✈️</strong>
         Somewhere new.
       </figcaption>
 
@@ -1553,14 +1633,14 @@ FAVOURITE MOMENTS
 
       <img
         src="/miso-05.jpg"
-        alt="Miso with her toys"
+        alt="Miso relaxing with one of her favourite toys"
         loading="lazy"
         decoding="async"
       >
 
       <figcaption>
         <strong>My toys 🧸</strong>
-        Happy little things.
+        Small things, big joy.
       </figcaption>
 
     </figure>
@@ -1569,7 +1649,7 @@ FAVOURITE MOMENTS
 
       <img
         src="/miso-07.jpg"
-        alt="Miso in one of her outfits"
+        alt="Miso dressed in one of her outfits"
         loading="lazy"
         decoding="async"
       >
@@ -1604,7 +1684,7 @@ DIARY
 
   </div>
 
-  <div class="diary">
+  <article class="diary">
 
     <p class="diary-lead">
       I think it all started with me.
@@ -1632,6 +1712,12 @@ DIARY
       discovering new routes and collecting useful answers.
     </p>
 
+    <p>
+      Every walk became a little investigation.
+      Every trip brought another discovery.
+      Every new place gave us something useful to remember.
+    </p>
+
     <p class="diary-small">
       Maybe that was the beginning of
       <span class="notranslate" translate="no">
@@ -1639,7 +1725,7 @@ DIARY
       </span>.
     </p>
 
-  </div>
+  </article>
 
   <div class="pull">
     One little dog.<br>
@@ -1658,7 +1744,7 @@ SEA
 
     <img
       src="/miso-06.jpg"
-      alt="Miso by the sea"
+      alt="Miso exploring by the sea"
       loading="lazy"
       decoding="async"
     >
@@ -1677,15 +1763,14 @@ SEA
     </h2>
 
     <p>
-      Little paws.<br>
+      New smells.<br>
+      New sounds.<br>
       Big world.
     </p>
 
   </div>
 
-</section>
-
-<!-- =====================================================
+</section><!-- =====================================================
 LONDON
 ===================================================== -->
 
@@ -1710,13 +1795,13 @@ LONDON
 
       <img
         src="/miso-08.jpg"
-        alt="Miso in London"
+        alt="Miso on one of her London walks"
         loading="lazy"
         decoding="async"
       >
 
       <span>
-        A little London day
+        A London walk
       </span>
 
     </article>
@@ -1725,7 +1810,7 @@ LONDON
 
       <img
         src="/miso-09.jpg"
-        alt="Miso enjoying her day"
+        alt="Miso dressed in pink during a day out"
         loading="lazy"
         decoding="async"
       >
@@ -1740,20 +1825,20 @@ LONDON
 
       <img
         src="/miso-10.jpg"
-        alt="Miso wearing her blue outfit"
+        alt="Miso dressed and ready to explore"
         loading="lazy"
         decoding="async"
       >
 
       <span>
-        Dressed to explore
+        Ready to explore
       </span>
 
     </article>
 
   </div>
 
-  <div class="london-note">
+  <article class="london-note">
 
     <p>
       London never feels exactly the same twice.
@@ -1772,11 +1857,17 @@ LONDON
     </p>
 
     <p>
+      Sometimes the best part is the destination.
+      Sometimes it is simply everything I notice
+      on the way there.
+    </p>
+
+    <p>
       For me, a walk is not simply going outside.
       It is how I discover the world.
     </p>
 
-  </div>
+  </article>
 
 </section>
 
@@ -1805,7 +1896,10 @@ FRIENDS
       <div class="friends-copy-inner">
 
         <p>
-          Hi. I’m Miso Cute.
+          Hi. I’m
+          <span class="notranslate" translate="no">
+            Miso Cute
+          </span>.
         </p>
 
         <p>
@@ -1816,6 +1910,13 @@ FRIENDS
         <p>
           I already have lots of friends.
           But there is always room for one more.
+        </p>
+
+        <p>
+          Dogs are wonderful.
+          Cats are interesting.
+          Birds always make me look up.
+          And every animal has a story of its own.
         </p>
 
         <p>
@@ -1832,7 +1933,7 @@ FRIENDS
 
       <img
         src="/miso-12.jpg"
-        alt="Miso Cute"
+        alt="Miso looking ready to meet a new friend"
         loading="lazy"
         decoding="async"
       >
@@ -1845,6 +1946,8 @@ FRIENDS
 
 <!-- =====================================================
 EVERYONE
+NO ANIMAL BUTTONS
+THE LIST IS PART OF THE ARTICLE
 ===================================================== -->
 
 <section class="chapter">
@@ -1862,29 +1965,34 @@ EVERYONE
 
   </div>
 
-  <div class="everyone-body">
-
-    <!-- No boxes. This is editorial text. -->
+  <article class="everyone-body">
 
     <p class="animal-line">
-      🐕 Dogs ·
-      🐈 Cats ·
-      🦜 Birds ·
-      🐇 Rabbits ·
-      🐴 Horses ·
-      🐢 Turtles
+      Dogs, cats, parrots, rabbits, horses,
+      turtles, guinea pigs, fish, birds and reptiles.
     </p>
 
     <div class="everyone-copy">
 
       <p>
-        Guinea pigs. Fish. Reptiles.
-        Big ones and tiny ones.
+        Big.
+        Small.
+        Fluffy.
+        Feathered.
+        Smooth.
       </p>
 
       <p>
-        Fluffy. Feathered. Smooth.
-        With paws, wings or fins.
+        Some have paws.
+        Some have wings.
+        Some have fins.
+      </p>
+
+      <p>
+        Some want to run beside us.
+        Some prefer a warm quiet corner.
+        Some watch the whole world
+        from a branch, a tank or a favourite window.
       </p>
 
       <p class="everyone-big">
@@ -1898,6 +2006,10 @@ EVERYONE
       </p>
 
       <p>
+        That is exactly the point.
+      </p>
+
+      <p>
         <span class="notranslate" translate="no">
           PETS &amp; DOGUE
         </span>
@@ -1907,7 +2019,7 @@ EVERYONE
 
     </div>
 
-  </div>
+  </article>
 
 </section>
 
@@ -1921,6 +2033,7 @@ ASK MISO
 
     <div class="kicker">
       Curiosity department
+      <span class="heart">♥</span>
     </div>
 
     <h2 class="display">
@@ -1959,6 +2072,10 @@ ASK MISO
         Planning a trip?
       </p>
 
+      <p>
+        Looking for something useful?
+      </p>
+
       <p class="ask-line">
         I look. I sniff. I explore.
       </p>
@@ -1971,6 +2088,10 @@ ASK MISO
         </span>.
       </p>
 
+      <p>
+        That is what a curious little nose is for.
+      </p>
+
     </div>
 
   </div>
@@ -1978,7 +2099,7 @@ ASK MISO
 </section>
 
 <!-- =====================================================
-FINAL — COMPACT LIKE PABLO
+FINAL
 ===================================================== -->
 
 <section class="chapter final">
@@ -1987,7 +2108,7 @@ FINAL — COMPACT LIKE PABLO
 
     <img
       src="/miso-20.jpg"
-      alt="Miso Cute relaxing with her toy"
+      alt="Fluffy blonde Miso relaxing with her favourite toy"
       loading="lazy"
       decoding="async"
     >
@@ -2026,9 +2147,24 @@ FINAL — COMPACT LIKE PABLO
       come and say hello.
     </p>
 
+    <p>
+      And if we are far away from each other for now,
+      look for my little circle on
+      <span class="notranslate" translate="no">
+        PETS &amp; DOGUE
+      </span>.
+    </p>
+
+    <p>
+      One way or another,
+      we will meet.
+    </p>
+
     <div class="signature">
       With love,<br>
-      <span class="notranslate" translate="no">Miso</span>
+      <span class="notranslate" translate="no">
+        Miso
+      </span>
       <span class="heart">♥</span>
     </div>
 
@@ -2058,11 +2194,17 @@ FOOTER
     aria-label="Issue 01 story navigation"
   >
 
-    <a href="/issue-01.html">
+    <a
+      href="/issue-01.html"
+      aria-label="Back to Issue 01"
+    >
       ← Issue 01
     </a>
 
-    <a href="/index.html">
+    <a
+      href="/index.html"
+      aria-label="Go to PETS & DOGUE home page"
+    >
       Home
     </a>
 
@@ -2077,17 +2219,28 @@ FOOTER
   "use strict";
 
   /*
-  PAGE CONTENT ONLY.
+  ========================================================
+  MISO ISSUE PAGE
+  EDITORIAL CONTENT ONLY
+  ========================================================
 
   IMPORTANT:
-  We deliberately do NOT create:
-  - another header
-  - another Contents menu
-  - another language selector
-  - another Profile control
-  - another Miso help circle
 
-  All of those remain controlled by pets-dogue-shell.js.
+  DO NOT create or replace here:
+
+  - global PETS & DOGUE header
+  - Contents side menu
+  - language selector
+  - Profile button
+  - Miso help circle
+  - global accessibility controls
+
+  Those remain controlled by:
+  /pets-dogue-shell.js
+
+  This script only adds safe image behaviour
+  inside the editorial page.
+  ========================================================
   */
 
   const issue =
@@ -2097,20 +2250,21 @@ FOOTER
     return;
   }
 
-  issue
-    .querySelectorAll("img")
-    .forEach(function(image,index){
+  const images =
+    issue.querySelectorAll("img");
 
-      image.decoding = "async";
+  images.forEach(function(image,index){
 
-      if(
-        index > 0 &&
-        !image.hasAttribute("loading")
-      ){
-        image.loading = "lazy";
-      }
+    image.decoding = "async";
 
-    });
+    if(
+      index > 0 &&
+      !image.hasAttribute("loading")
+    ){
+      image.loading = "lazy";
+    }
+
+  });
 
 })();
 </script>
