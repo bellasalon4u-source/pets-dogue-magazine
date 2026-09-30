@@ -29,16 +29,21 @@
      HEADER HIDE / SHOW ON SCROLL
 
      ARE CONTROLLED ONLY BY GLOBAL FILES BELOW.
-     DO NOT REBUILD THEM INSIDE THIS PAGE.
 ===================================================== -->
 
 <script
-  src="/translations.js?v=20260926-issue01-final"
+  src="/translations.js?v=20260930-issue01"
   defer
 ></script>
 
 <script
-  src="/pets-dogue-shell.js?v=20260926-issue01-final"
+  src="/pets-dogue-shell.js?v=20260930-issue01"
+  defer
+></script>
+
+<!-- ISSUE 01 LOCAL FREE TRANSLATIONS -->
+<script
+  src="/i18n/issue-01.js?v=20260930-issue01"
   defer
 ></script>
 
@@ -89,10 +94,6 @@ a{
   text-decoration:none;
 }
 
-/* =====================================================
-   ISSUE 01 CONTENT ONLY
-===================================================== */
-
 #pdIssue01{
   width:100%;
   max-width:1180px;
@@ -100,10 +101,6 @@ a{
   overflow:hidden;
   background:#000;
 }
-
-/* =====================================================
-   01 — FIRST ISSUE COVER
-===================================================== */
 
 .pd-issue-cover{
   width:100%;
@@ -119,10 +116,6 @@ a{
   margin:0;
   object-fit:contain;
 }
-
-/* =====================================================
-   02 — FIRST COVER INTRO
-===================================================== */
 
 .pd-cover-intro{
   padding:44px 26px 46px;
@@ -169,10 +162,6 @@ a{
 .pd-cover-intro p + p{
   margin-top:20px;
 }
-
-/* =====================================================
-   03 — IT ALL BEGAN WITH MISO
-===================================================== */
 
 .pd-miso-origin{
   display:grid;
@@ -237,10 +226,6 @@ a{
   font-size:20px;
   line-height:1.48;
 }
-
-/* =====================================================
-   COMMON COVER STAR SECTIONS
-===================================================== */
 
 .pd-pet-section{
   width:100%;
@@ -363,10 +348,6 @@ a{
   background:var(--pd-yellow);
 }
 
-/* =====================================================
-   PHOTO COMPOSITIONS
-===================================================== */
-
 .pd-main-photo{
   min-height:480px;
   overflow:hidden;
@@ -415,42 +396,22 @@ a{
   object-fit:cover;
 }
 
-/* =====================================================
-   MISO PHOTO POSITIONS
-===================================================== */
-
 #pdMiso .pd-main-photo img{
   object-position:center center;
 }
-
-/* =====================================================
-   PABLO PHOTO POSITIONS
-===================================================== */
 
 #pdPablo .pd-main-photo img{
   object-position:center 40%;
 }
 
-/* =====================================================
-   JESSICA PHOTO POSITIONS
-===================================================== */
-
 #pdJessica .pd-main-photo img{
   object-position:center center;
 }
-
-/* =====================================================
-   RICHIE / PI PHOTO POSITIONS
-===================================================== */
 
 #pdRichie .pd-main-photo img,
 #pdPi .pd-main-photo img{
   object-position:center center;
 }
-
-/* =====================================================
-   ENDING
-===================================================== */
 
 .pd-ending{
   display:grid;
@@ -511,10 +472,6 @@ a{
   line-height:1.15;
 }
 
-/* =====================================================
-   RTL
-===================================================== */
-
 html[dir="rtl"] #pdIssue01{
   text-align:right;
 }
@@ -529,10 +486,6 @@ html[dir="rtl"] .pd-ending{
 html[dir="rtl"] .pd-more{
   align-self:flex-start;
 }
-
-/* =====================================================
-   TABLET
-===================================================== */
 
 @media(max-width:900px){
 
@@ -564,11 +517,6 @@ html[dir="rtl"] .pd-more{
     grid-template-columns:minmax(0,1fr) 190px;
   }
 }
-
-/* =====================================================
-   MOBILE
-   KEEP APPROVED MAGAZINE-STYLE COMPOSITION
-===================================================== */
 
 @media(max-width:720px){
 
@@ -750,11 +698,6 @@ html[dir="rtl"] .pd-more{
 
 <main id="pdIssue01">
 
-<!-- =====================================================
-     FIRST IMAGE:
-     ORIGINAL PETS & DOGUE ISSUE 01 COVER
-===================================================== -->
-
 <section
   class="pd-issue-cover"
   id="issueCover"
@@ -763,15 +706,12 @@ html[dir="rtl"] .pd-more{
   <img
     src="/file_00000000a9d471fda9b4629589be22a9.png?v=20260926-final"
     alt="PETS & DOGUE Issue 01 cover with Miso, Pablo, Jessica, Richie and Pi"
+    data-i18n-alt="cover.alt"
     fetchpriority="high"
     decoding="async"
   >
 
 </section>
-
-<!-- =====================================================
-     TEXT DIRECTLY UNDER THE COVER
-===================================================== -->
 
 <section
   class="pd-cover-intro"
@@ -780,22 +720,25 @@ html[dir="rtl"] .pd-more{
 
   <div class="pd-cover-intro-inner">
 
-    <div class="pd-kicker">
+    <div
+      class="pd-kicker"
+      data-i18n="intro.kicker"
+    >
       PETS &amp; DOGUE · ISSUE 01 · SUMMER 2026
     </div>
 
-    <h1>
+    <h1 data-i18n="intro.title">
       Our very first cover
     </h1>
 
-    <p>
+    <p data-i18n="intro.p1">
       This is where our first issue begins.
       Meet Miso, Pablo, Jessica, Richie and Pi —
       five very different personalities brought together
       on the very first PETS &amp; DOGUE cover.
     </p>
 
-    <p>
+    <p data-i18n="intro.p2">
       Scroll down and get to know each of them
       a little better. ♡
     </p>
@@ -803,10 +746,6 @@ html[dir="rtl"] .pd-more{
   </div>
 
 </section>
-
-<!-- =====================================================
-     IT ALL BEGAN WITH MISO
-===================================================== -->
 
 <section
   class="pd-miso-origin"
@@ -818,6 +757,7 @@ html[dir="rtl"] .pd-more{
     <img
       src="/miso-cover-star-retouched.png?v=20260926-final"
       alt="Miso wearing her pink dress and bow"
+      data-i18n-alt="origin.alt"
       decoding="async"
     >
 
@@ -825,34 +765,32 @@ html[dir="rtl"] .pd-more{
 
   <div class="pd-miso-origin-copy">
 
-    <div class="pd-origin-kicker">
+    <div
+      class="pd-origin-kicker"
+      data-i18n="origin.kicker"
+    >
       PETS &amp; DOGUE · ISSUE 01
     </div>
 
     <h2>
-      It all began<br>
-      with
+      <span data-i18n="origin.title1">It all began</span><br>
+      <span data-i18n="origin.title2">with</span>
       <span
         class="notranslate"
         translate="no"
-      >
-        Miso
-      </span>
+      >Miso</span>
     </h2>
 
-    <div class="pd-origin-subtitle">
+    <div
+      class="pd-origin-subtitle"
+      data-i18n="origin.subtitle"
+    >
       And her friends.
     </div>
 
-    <p>
+    <p data-i18n="origin.text">
       Every story has a beginning.
-      Ours began with one tiny blonde Pomeranian named
-      <span
-        class="notranslate"
-        translate="no"
-      >
-        Miso
-      </span>
+      Ours began with one tiny blonde Pomeranian named Miso
       — and the extraordinary animals around her.
       Their personalities, friendships, adventures
       and the joy they bring into our lives became
@@ -863,10 +801,6 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<!-- =====================================================
-     MISO
-===================================================== -->
-
 <section
   class="pd-pet-section pd-light"
   id="pdMiso"
@@ -876,11 +810,12 @@ html[dir="rtl"] .pd-more{
 
     <div class="pd-pet-copy">
 
-      <div class="pd-pet-number">
-        01
-      </div>
+      <div class="pd-pet-number">01</div>
 
-      <div class="pd-pet-label">
+      <div
+        class="pd-pet-label"
+        data-i18n="miso.label"
+      >
         COVER STAR
       </div>
 
@@ -891,11 +826,14 @@ html[dir="rtl"] .pd-more{
         Miso
       </h2>
 
-      <div class="pd-pet-subtitle">
+      <div
+        class="pd-pet-subtitle"
+        data-i18n="miso.subtitle"
+      >
         The little explorer
       </div>
 
-      <p>
+      <p data-i18n="miso.text">
         Miso is a tiny blonde Pomeranian from London.
         She loves fashion, travelling, long walks
         and discovering beautiful new places.
@@ -908,7 +846,7 @@ html[dir="rtl"] .pd-more{
         class="pd-more"
         href="/issue-01-miso.html"
       >
-        MORE ABOUT MISO
+        <span data-i18n="miso.more">MORE ABOUT MISO</span>
         <span aria-hidden="true">→</span>
       </a>
 
@@ -930,6 +868,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/miso-03.jpg"
         alt="Miso wearing her pink dress"
+        data-i18n-alt="miso.alt1"
         loading="lazy"
         decoding="async"
       >
@@ -937,6 +876,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/miso-07.jpg"
         alt="Miso on a walk"
+        data-i18n-alt="miso.alt2"
         loading="lazy"
         decoding="async"
       >
@@ -944,6 +884,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/miso-16.jpg"
         alt="Miso resting"
+        data-i18n-alt="miso.alt3"
         loading="lazy"
         decoding="async"
       >
@@ -953,10 +894,6 @@ html[dir="rtl"] .pd-more{
   </div>
 
 </section>
-
-<!-- =====================================================
-     PABLO
-===================================================== -->
 
 <section
   class="pd-pet-section pd-dark"
@@ -972,6 +909,7 @@ html[dir="rtl"] .pd-more{
         <img
           src="/pablo-01-portrait.jpg"
           alt="Pablo the Sphynx Bambino"
+          data-i18n-alt="pablo.altMain"
           loading="lazy"
           decoding="async"
         >
@@ -997,6 +935,7 @@ html[dir="rtl"] .pd-more{
         <img
           src="/pablo-04.jpg"
           alt="Pablo resting"
+          data-i18n-alt="pablo.alt3"
           loading="lazy"
           decoding="async"
         >
@@ -1007,11 +946,12 @@ html[dir="rtl"] .pd-more{
 
     <div class="pd-pet-copy">
 
-      <div class="pd-pet-number">
-        02
-      </div>
+      <div class="pd-pet-number">02</div>
 
-      <div class="pd-pet-label">
+      <div
+        class="pd-pet-label"
+        data-i18n="pablo.label"
+      >
         COVER STAR
       </div>
 
@@ -1022,11 +962,14 @@ html[dir="rtl"] .pd-more{
         Pablo
       </h2>
 
-      <div class="pd-pet-subtitle">
+      <div
+        class="pd-pet-subtitle"
+        data-i18n="pablo.subtitle"
+      >
         Stylish Sphynx
       </div>
 
-      <p>
+      <p data-i18n="pablo.text">
         Pablo is a Sphynx Bambino with enormous personality.
         He loves warmth, attention and being exactly where
         something interesting is happening.
@@ -1039,7 +982,7 @@ html[dir="rtl"] .pd-more{
         class="pd-more cyan"
         href="/issue-01-pablo.html"
       >
-        MORE ABOUT PABLO
+        <span data-i18n="pablo.more">MORE ABOUT PABLO</span>
         <span aria-hidden="true">→</span>
       </a>
 
@@ -1047,11 +990,7 @@ html[dir="rtl"] .pd-more{
 
   </div>
 
-</section>
-
-<!-- =====================================================
-     JESSICA
-===================================================== -->
+</section><!-- PART 2 / CONTINUE DIRECTLY AFTER PART 1 -->
 
 <section
   class="pd-pet-section pd-light"
@@ -1062,11 +1001,12 @@ html[dir="rtl"] .pd-more{
 
     <div class="pd-pet-copy">
 
-      <div class="pd-pet-number">
-        03
-      </div>
+      <div class="pd-pet-number">03</div>
 
-      <div class="pd-pet-label">
+      <div
+        class="pd-pet-label"
+        data-i18n="jessica.label"
+      >
         COVER STAR
       </div>
 
@@ -1077,11 +1017,14 @@ html[dir="rtl"] .pd-more{
         Jessica
       </h2>
 
-      <div class="pd-pet-subtitle">
+      <div
+        class="pd-pet-subtitle"
+        data-i18n="jessica.subtitle"
+      >
         Gentle British lady
       </div>
 
-      <p>
+      <p data-i18n="jessica.text">
         Jessica is a charming British Shorthair from London.
         Calm, observant and wonderfully independent,
         she loves relaxing at home and watching the world
@@ -1094,7 +1037,7 @@ html[dir="rtl"] .pd-more{
         class="pd-more yellow"
         href="/issue-01-jessica.html"
       >
-        MORE ABOUT JESSICA
+        <span data-i18n="jessica.more">MORE ABOUT JESSICA</span>
         <span aria-hidden="true">→</span>
       </a>
 
@@ -1116,6 +1059,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/jessica-03-white-bed.jpg"
         alt="Jessica relaxing on her white bed"
+        data-i18n-alt="jessica.alt1"
         loading="lazy"
         decoding="async"
       >
@@ -1123,6 +1067,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/jessica-05-garden-cocoon.jpg"
         alt="Jessica relaxing in the garden"
+        data-i18n-alt="jessica.alt2"
         loading="lazy"
         decoding="async"
       >
@@ -1130,6 +1075,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/jessica-04-window-bed.jpg"
         alt="Jessica by the window"
+        data-i18n-alt="jessica.alt3"
         loading="lazy"
         decoding="async"
       >
@@ -1139,10 +1085,6 @@ html[dir="rtl"] .pd-more{
   </div>
 
 </section>
-
-<!-- =====================================================
-     RICHIE
-===================================================== -->
 
 <section
   class="pd-pet-section pd-dark"
@@ -1169,6 +1111,7 @@ html[dir="rtl"] .pd-more{
         <img
           src="/richie-pi-01.jpg"
           alt="Richie and Pi cuddling"
+          data-i18n-alt="richie.alt1"
           loading="lazy"
           decoding="async"
         >
@@ -1176,6 +1119,7 @@ html[dir="rtl"] .pd-more{
         <img
           src="/richie-pi-02.jpg"
           alt="Richie and Pi watching the sunset"
+          data-i18n-alt="richie.alt2"
           loading="lazy"
           decoding="async"
         >
@@ -1193,11 +1137,12 @@ html[dir="rtl"] .pd-more{
 
     <div class="pd-pet-copy">
 
-      <div class="pd-pet-number">
-        04
-      </div>
+      <div class="pd-pet-number">04</div>
 
-      <div class="pd-pet-label">
+      <div
+        class="pd-pet-label"
+        data-i18n="richie.label"
+      >
         A SPECIAL FRIENDSHIP
       </div>
 
@@ -1208,11 +1153,14 @@ html[dir="rtl"] .pd-more{
         Richie
       </h2>
 
-      <div class="pd-pet-subtitle">
+      <div
+        class="pd-pet-subtitle"
+        data-i18n="richie.subtitle"
+      >
         A gentle little friend
       </div>
 
-      <p>
+      <p data-i18n="richie.text">
         Richie is a sweet rabbit with a huge heart.
         He loves exploring and peaceful days by the sea.
         His unexpected friendship with Pi became
@@ -1225,7 +1173,7 @@ html[dir="rtl"] .pd-more{
         class="pd-more"
         href="/issue-01-richie-pi.html"
       >
-        MORE ABOUT RICHIE
+        <span data-i18n="richie.more">MORE ABOUT RICHIE</span>
         <span aria-hidden="true">→</span>
       </a>
 
@@ -1234,10 +1182,6 @@ html[dir="rtl"] .pd-more{
   </div>
 
 </section>
-
-<!-- =====================================================
-     PI
-===================================================== -->
 
 <section
   class="pd-pet-section pd-light"
@@ -1248,11 +1192,12 @@ html[dir="rtl"] .pd-more{
 
     <div class="pd-pet-copy">
 
-      <div class="pd-pet-number">
-        05
-      </div>
+      <div class="pd-pet-number">05</div>
 
-      <div class="pd-pet-label">
+      <div
+        class="pd-pet-label"
+        data-i18n="pi.label"
+      >
         A SPECIAL FRIENDSHIP
       </div>
 
@@ -1263,11 +1208,14 @@ html[dir="rtl"] .pd-more{
         Pi
       </h2>
 
-      <div class="pd-pet-subtitle">
+      <div
+        class="pd-pet-subtitle"
+        data-i18n="pi.subtitle"
+      >
         Bright pink personality
       </div>
 
-      <p>
+      <p data-i18n="pi.text">
         Pi is a beautiful pink parrot
         with a huge personality.
         Curious, expressive and fiercely loyal,
@@ -1282,7 +1230,7 @@ html[dir="rtl"] .pd-more{
         class="pd-more cyan"
         href="/issue-01-richie-pi.html"
       >
-        MORE ABOUT PI
+        <span data-i18n="pi.more">MORE ABOUT PI</span>
         <span aria-hidden="true">→</span>
       </a>
 
@@ -1304,6 +1252,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/richie-pi-04.jpg"
         alt="Pi and Richie overlooking the sea"
+        data-i18n-alt="pi.alt1"
         loading="lazy"
         decoding="async"
       >
@@ -1311,6 +1260,7 @@ html[dir="rtl"] .pd-more{
       <img
         src="/richie-pi-05.jpg"
         alt="Pi cuddling Richie"
+        data-i18n-alt="pi.alt2"
         loading="lazy"
         decoding="async"
       >
@@ -1328,10 +1278,6 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<!-- =====================================================
-     END
-===================================================== -->
-
 <section
   class="pd-ending"
   id="issueEnding"
@@ -1339,16 +1285,19 @@ html[dir="rtl"] .pd-more{
 
   <div class="pd-ending-copy">
 
-    <div class="pd-kicker">
+    <div
+      class="pd-kicker"
+      data-i18n="ending.kicker"
+    >
       PETS &amp; DOGUE · ISSUE 01
     </div>
 
-    <h2>
+    <h2 data-i18n="ending.title">
       More stories<br>
       inside this issue
     </h2>
 
-    <p>
+    <p data-i18n="ending.text">
       Fashion, pet-friendly places, wellness,
       beautiful photography and stories about
       the animals who make our world extraordinary —
@@ -1366,7 +1315,10 @@ html[dir="rtl"] .pd-more{
       decoding="async"
     >
 
-    <div class="pd-polaroid-copy">
+    <div
+      class="pd-polaroid-copy"
+      data-i18n="ending.caption"
+    >
       A small dog.<br>
       A very big idea. ♡
     </div>
@@ -1385,19 +1337,23 @@ html[dir="rtl"] .pd-more{
   ========================================================
   ISSUE 01 PAGE SCRIPT ONLY
 
-  pets-dogue-shell.js already controls:
+  pets-dogue-shell.js controls:
   - global header
-  - hide header when scrolling down
-  - show header when scrolling up
+  - header scroll behaviour
   - Contents side menu
   - Profile
   - language selector
-  - all 23 languages
+  - all 23 language choices
   - Arabic RTL
   - Miso help circle
   - global accessibility / TTS
 
-  DO NOT recreate any of those features here.
+  i18n/issue-01.js controls:
+  - Issue 01 editorial copy
+  - local free translations
+  - Issue 01 image alt translations
+
+  DO NOT recreate the global shell here.
   ========================================================
   */
 
