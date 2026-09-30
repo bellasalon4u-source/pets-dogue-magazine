@@ -23,54 +23,52 @@
 >
 
 <!-- =====================================================
-     PETS & DOGUE — RICHIE & PI
-     ISSUE 01
+     MASTER GLOBAL SYSTEM
 
-     GLOBAL SHELL IS NOT DUPLICATED HERE.
+     DO NOT CREATE ANOTHER:
+     - HEADER
+     - SIDE MENU
+     - LANGUAGE SELECTOR
+     - MISO HELP CIRCLE
 
-     Existing global files continue to control:
-     - approved global header
-     - header hide/show on scroll
+     Existing global files control:
+     - approved PETS & DOGUE header
+     - hide on scroll down
+     - show on scroll up
      - Contents side menu
      - Profile
-     - language selector
-     - multilingual behaviour
+     - 23 languages
      - Arabic RTL
-     - accessibility / TTS
+     - TTS / accessibility
      - Miso help circle
 ===================================================== -->
 
 <script
-  src="/translations.js?v=20260929-richie-pi"
+  src="/translations.js?v=20260929-richie-pi-final"
   defer
 ></script>
 
 <script
-  src="/pets-dogue-shell.js?v=20260929-richie-pi"
+  src="/pets-dogue-shell.js?v=20260929-richie-pi-final"
   defer
 ></script>
 
 <style>
-
 :root{
   --pd-black:#070707;
   --pd-white:#ffffff;
   --pd-paper:#fff8e9;
   --pd-cream:#fff2d3;
-
-  --pd-gold:#d8aa4b;
-  --pd-gold-bright:#f0c85e;
+  --pd-gold:#d5a33e;
+  --pd-gold-bright:#efc55c;
   --pd-gold-dark:#846022;
-
   --pd-pink:#f4a8bd;
-  --pd-pink-bright:#ef3f79;
+  --pd-pink-bright:#ef3d78;
   --pd-coral:#ff9b82;
-
   --pd-blue:#5ed3ef;
   --pd-green:#b9ed73;
   --pd-yellow:#ffe36a;
-  --pd-red:#d71920;
-
+  --pd-red:#e21c2a;
   --pd-serif:Georgia,"Times New Roman",serif;
   --pd-sans:Arial,Helvetica,sans-serif;
 }
@@ -116,14 +114,14 @@ a{
 }
 
 .pd-section{
-  border-bottom:5px solid #000;
+  border-bottom:6px solid #000;
 }
 
 .pd-kicker{
   margin:0 0 10px;
   font-family:var(--pd-sans);
-  font-size:11px;
-  line-height:1.3;
+  font-size:12px;
+  line-height:1.35;
   font-weight:900;
   letter-spacing:.16em;
   text-transform:uppercase;
@@ -132,9 +130,9 @@ a{
 .pd-display{
   margin:0;
   font-family:var(--pd-serif);
-  font-size:clamp(43px,7vw,78px);
+  font-size:clamp(45px,7vw,84px);
   line-height:.89;
-  letter-spacing:-.04em;
+  letter-spacing:-.045em;
   font-weight:700;
 }
 
@@ -143,38 +141,27 @@ a{
   margin:0 auto;
   font-family:var(--pd-serif);
   font-size:19px;
-  line-height:1.5;
+  line-height:1.48;
 }
 
 .pd-story-text p{
-  margin:0 0 12px;
+  margin:0 0 13px;
 }
 
 .pd-story-text p:last-child{
   margin-bottom:0;
 }
 
-.pd-red-heart{
-  color:var(--pd-red);
-  font-family:Arial,Helvetica,sans-serif;
-  font-style:normal;
-}
-
 /* =====================================================
    HERO
-   PHOTO: richie-pi-07.jpg
-
-   IMPORTANT:
-   - original photo stays visible
-   - no forced crop
-   - copy stays left on desktop
-   - mobile preserves both animals
+   TEXT LEFT / ANIMALS CLEAR ON RIGHT
 ===================================================== */
 
 .pd-hero{
   position:relative;
+  width:100%;
   overflow:hidden;
-  background:#090909;
+  background:#000;
   color:#fff;
 }
 
@@ -182,16 +169,7 @@ a{
   position:relative;
   width:100%;
   overflow:hidden;
-  background:#101010;
-}
-
-.pd-hero-photo img{
-  width:100%;
-  height:auto;
-  max-height:none;
-  object-fit:contain;
-  object-position:center center;
-  filter:contrast(1.04) saturate(1.04) brightness(1.02);
+  background:#000;
 }
 
 .pd-hero-photo::after{
@@ -200,90 +178,106 @@ a{
   inset:0;
   z-index:1;
   pointer-events:none;
-
   background:
     linear-gradient(
       90deg,
-      rgba(0,0,0,.73) 0%,
-      rgba(0,0,0,.50) 24%,
-      rgba(0,0,0,.18) 44%,
-      rgba(0,0,0,.02) 66%,
-      rgba(0,0,0,0) 100%
+      rgba(0,0,0,.78) 0%,
+      rgba(0,0,0,.62) 24%,
+      rgba(0,0,0,.34) 39%,
+      rgba(0,0,0,.08) 56%,
+      rgba(0,0,0,0) 73%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0,0,0,.30) 0%,
+      rgba(0,0,0,0) 45%
     );
+}
+
+.pd-hero-photo img{
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  object-position:center 48%;
+  filter:contrast(1.035) saturate(1.045);
 }
 
 .pd-hero-copy{
   position:absolute;
   z-index:2;
-  left:3.8%;
+  left:4.7%;
   top:50%;
+  width:36%;
   transform:translateY(-50%);
-  width:min(42%,490px);
-  text-shadow:0 2px 16px rgba(0,0,0,.65);
+  padding:0;
+  text-shadow:0 2px 13px rgba(0,0,0,.58);
 }
 
 .pd-hero-copy .pd-kicker{
+  margin-bottom:9px;
   color:var(--pd-gold-bright);
 }
 
 .pd-hero-copy h1{
   margin:0;
   font-family:var(--pd-serif);
-  font-size:clamp(53px,8vw,92px);
-  line-height:.88;
+  font-size:clamp(48px,6.7vw,86px);
+  line-height:.89;
   font-weight:500;
   letter-spacing:-.045em;
+  white-space:nowrap;
 }
 
-.pd-name-richie{
+.pd-richie-name{
   color:var(--pd-gold-bright);
 }
 
-.pd-name-pi{
+.pd-pi-name{
   color:var(--pd-pink-bright);
 }
 
 .pd-hero-amp{
   color:#fff;
-  font-size:.72em;
 }
 
 .pd-hero-sub{
-  max-width:470px;
-  margin:17px 0 14px;
+  margin:10px 0 0;
   color:#fff;
   font-family:var(--pd-serif);
-  font-size:clamp(27px,4.1vw,47px);
+  font-size:clamp(26px,3.7vw,46px);
   line-height:.98;
-  font-weight:700;
 }
 
 .pd-hero-heart{
   display:block;
-  margin-top:5px;
+  margin:7px 0 0;
   color:var(--pd-red);
-  font-family:Arial,Helvetica,sans-serif;
+  font-size:39px;
   line-height:1;
+  text-shadow:none;
 }
 
 .pd-hero-copy p{
-  margin:0;
+  margin:12px 0 0;
   max-width:430px;
   font-family:var(--pd-serif);
-  font-size:18px;
-  line-height:1.43;
+  font-size:17px;
+  line-height:1.4;
 }
 
 .pd-back{
   display:inline-flex;
   align-items:center;
-  margin-top:21px;
+  gap:8px;
+  margin-top:16px;
   padding-bottom:5px;
-  border-bottom:2px solid var(--pd-gold-bright);
-  font-size:10px;
+  border-bottom:1px solid var(--pd-gold-bright);
+  font-size:11px;
   font-weight:900;
-  letter-spacing:.08em;
+  letter-spacing:.07em;
   text-transform:uppercase;
+  text-shadow:none;
 }
 
 /* =====================================================
@@ -295,7 +289,7 @@ a{
 }
 
 .pd-intro-head{
-  padding:34px 26px 19px;
+  padding:35px 28px 21px;
   text-align:center;
 }
 
@@ -304,38 +298,36 @@ a{
 }
 
 .pd-intro-body{
-  padding:0 28px 35px;
+  padding:0 29px 37px;
 }
 
 .pd-big-love{
   max-width:820px;
-  margin:0 auto 25px;
+  margin:0 auto 24px;
   text-align:center;
   font-family:var(--pd-serif);
-  font-size:clamp(34px,5vw,55px);
+  font-size:clamp(34px,5.3vw,57px);
   line-height:.98;
   font-weight:700;
 }
 
 /* =====================================================
-   RICHIE + PI PROFILES
+   TWO PROFILES
 ===================================================== */
 
 .pd-duo{
-  padding:35px 22px 39px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #fff06d 0%,
-      #ffd8e4 48%,
-      #cfefff 100%
-    );
+  padding:34px 22px 39px;
+  background:linear-gradient(
+    145deg,
+    #fff06d 0%,
+    #ffd8e4 48%,
+    #cfefff 100%
+  );
 }
 
 .pd-duo-heading{
   max-width:900px;
-  margin:0 auto 24px;
+  margin:0 auto 23px;
 }
 
 .pd-duo-heading .pd-kicker{
@@ -354,15 +346,15 @@ a{
   padding:20px;
   border:3px solid #111;
   background:#fff;
-  box-shadow:7px 8px 0 rgba(0,0,0,.13);
+  box-shadow:7px 8px 0 rgba(0,0,0,.12);
 }
 
 .pd-profile.richie{
-  transform:rotate(-.45deg);
+  transform:rotate(-.4deg);
 }
 
 .pd-profile.pi{
-  transform:rotate(.45deg);
+  transform:rotate(.4deg);
 }
 
 .pd-profile-name{
@@ -373,11 +365,11 @@ a{
 }
 
 .pd-profile.richie .pd-profile-name{
-  color:#a7791e;
+  color:#b27b15;
 }
 
 .pd-profile.pi .pd-profile-name{
-  color:#d82f6b;
+  color:#e73872;
 }
 
 .pd-profile-sub{
@@ -407,6 +399,11 @@ a{
   font-size:13px;
 }
 
+.pd-profile-item .pd-heart-icon{
+  color:var(--pd-red);
+  font-size:18px;
+}
+
 .pd-profile-note{
   margin-top:18px;
   padding-top:15px;
@@ -417,126 +414,1086 @@ a{
 }
 
 /* =====================================================
-   CLEAN EDITORIAL PHOTO
-   PHOTO: richie-pi-01.jpg
-
-   Caption is BELOW the photograph.
-   It never covers Richie or Pi.
+   CLOSE FRIENDS PHOTO
 ===================================================== */
 
 .pd-friend-photo{
+  position:relative;
   background:#000;
-  overflow:hidden;
 }
 
-.pd-friend-photo > img{
+.pd-friend-photo img{
   width:100%;
-  height:auto;
-  max-height:none;
-  object-fit:contain;
+  max-height:700px;
+  object-fit:cover;
   object-position:center;
-  background:#000;
+  filter:contrast(1.035) saturate(1.035);
 }
 
 .pd-friend-caption{
-  position:relative;
-  width:100%;
-  padding:20px 28px 24px;
-  color:#111;
-  background:var(--pd-paper);
+  padding:20px 28px 25px;
+  background:#fff;
 }
 
-.pd<!-- =====================================================
-     PART 2/2
-     CONTINUE DIRECTLY AFTER PART 1
-===================================================== -->
+.pd-friend-caption strong{
+  display:block;
+  font-family:var(--pd-serif);
+  font-size:clamp(32px,5vw,53px);
+  line-height:.95;
+}
+
+.pd-friend-caption span{
+  display:block;
+  margin-top:8px;
+  font-family:var(--pd-serif);
+  font-size:17px;
+  line-height:1.4;
+}
+
+/* =====================================================
+   FRIENDSHIP
+===================================================== */
+
+.pd-friendship{
+  background:linear-gradient(135deg,#f7abc0,#ff9b82);
+}
+
+.pd-friendship-head{
+  padding:34px 28px 23px;
+}
+
+.pd-friendship-head .pd-kicker{
+  color:#71394b;
+}
+
+.pd-friendship-body{
+  padding:29px 29px 36px;
+  background:#fff;
+}
+
+.pd-pullquote{
+  max-width:760px;
+  margin:25px auto 0;
+  padding-top:19px;
+  border-top:3px solid #111;
+  font-family:var(--pd-serif);
+  font-size:clamp(33px,5vw,54px);
+  line-height:.98;
+  font-weight:700;
+}
+
+/* =====================================================
+   SEA
+   COPY KEPT AWAY FROM RICHIE
+===================================================== */
+
+.pd-sea{
+  position:relative;
+  overflow:hidden;
+  background:#080808;
+  color:#fff;
+}
+
+.pd-sea-photo{
+  position:relative;
+  width:100%;
+}
+
+.pd-sea-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(
+    90deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.05) 43%,
+    rgba(0,0,0,.48) 62%,
+    rgba(0,0,0,.76) 100%
+  );
+}
+
+.pd-sea-photo img{
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  object-position:center;
+  filter:contrast(1.04) saturate(1.06);
+}
+
+.pd-sea-copy{
+  position:absolute;
+  z-index:2;
+  top:50%;
+  right:4%;
+  width:39%;
+  transform:translateY(-50%);
+  padding:0;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
+}
+
+.pd-sea-copy .pd-kicker{
+  color:var(--pd-blue);
+}
+
+.pd-sea-copy h2{
+  margin:0;
+  font-family:var(--pd-serif);
+  font-size:clamp(38px,5.5vw,70px);
+  line-height:.88;
+}
+
+.pd-sea-copy p{
+  margin:17px 0 0;
+  font-family:var(--pd-serif);
+  font-size:17px;
+  line-height:1.43;
+}
+
+/* =====================================================
+   GALLERY
+===================================================== */
+
+.pd-gallery{
+  padding:31px 18px 34px;
+  background:var(--pd-cream);
+}
+
+.pd-gallery-title{
+  max-width:900px;
+  margin:0 auto 20px;
+}
+
+.pd-gallery-title .pd-kicker{
+  color:var(--pd-gold-dark);
+}
+
+.pd-photo-grid{
+  display:grid;
+  grid-template-columns:1.15fr 1fr 1fr;
+  gap:5px;
+  background:#111;
+  border:3px solid #111;
+}
+
+.pd-photo-card{
+  margin:0;
+  background:#fff;
+  overflow:hidden;
+}
+
+.pd-photo-card img{
+  width:100%;
+  height:330px;
+  object-fit:cover;
+  filter:contrast(1.04) saturate(1.05);
+}
+
+.pd-photo-card:nth-child(1) img{
+  object-position:center 42%;
+}
+
+.pd-photo-card:nth-child(2) img{
+  object-position:center 48%;
+}
+
+.pd-photo-card:nth-child(3) img{
+  object-position:center 42%;
+}
+
+.pd-photo-card figcaption{
+  min-height:94px;
+  padding:12px 14px 14px;
+  background:#fff;
+  font-family:var(--pd-serif);
+  font-size:14px;
+  line-height:1.35;
+}
+
+.pd-photo-card figcaption strong{
+  display:block;
+  margin-bottom:4px;
+  font-size:20px;
+}
+
+.pd-card-heart{
+  color:var(--pd-red);
+}
+
+/* =====================================================
+   TOGETHER
+===================================================== */
+
+.pd-together{
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(255,255,255,.55),
+      transparent 18%
+    ),
+    linear-gradient(
+      135deg,
+      #61d7ef 0%,
+      #bcefff 100%
+    );
+}
+
+.pd-together-head{
+  position:relative;
+  padding:34px 28px 27px;
+  overflow:hidden;
+}
+
+.pd-together-head::after{
+  content:"❦";
+  position:absolute;
+  right:5%;
+  bottom:-15px;
+  color:rgba(0,0,0,.14);
+  font-family:var(--pd-serif);
+  font-size:115px;
+  line-height:1;
+}
+
+.pd-together-head .pd-kicker,
+.pd-together-head .pd-display{
+  position:relative;
+  z-index:1;
+}
+
+.pd-together-head .pd-kicker{
+  color:#164b58;
+}
+
+.pd-together-body{
+  padding:29px 29px 36px;
+  background:#fff;
+}
+
+.pd-traits{
+  max-width:760px;
+  margin:0 auto 27px;
+  padding:21px 0;
+  border-top:2px solid #111;
+  border-bottom:2px solid #111;
+}
+
+.pd-traits-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:center;
+  gap:6px 17px;
+  text-align:center;
+}
+
+.pd-trait{
+  display:inline-block;
+}
+
+.pd-trait:nth-child(1){
+  font-family:var(--pd-serif);
+  font-size:31px;
+  font-style:italic;
+}
+
+.pd-trait:nth-child(2){
+  color:#e73b72;
+  font-family:var(--pd-sans);
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.pd-trait:nth-child(3){
+  color:var(--pd-red);
+  font-family:var(--pd-serif);
+  font-size:35px;
+  font-weight:700;
+}
+
+.pd-trait:nth-child(4){
+  color:#17758c;
+  font-family:var(--pd-sans);
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.pd-trait:nth-child(5){
+  color:#527f28;
+  font-family:var(--pd-serif);
+  font-size:27px;
+  font-style:italic;
+}
+
+.pd-trait:nth-child(6){
+  color:#9b711e;
+  font-family:var(--pd-serif);
+  font-size:30px;
+  font-weight:700;
+}
+
+.pd-ornament{
+  max-width:760px;
+  margin:21px auto 0;
+  text-align:center;
+  color:var(--pd-gold-dark);
+  font-family:var(--pd-serif);
+  font-size:34px;
+  line-height:1;
+}
+
+/* =====================================================
+   DINNER
+   TEXT LEFT / BOTH FACES CLEAR
+===================================================== */
+
+.pd-dinner{
+  position:relative;
+  overflow:hidden;
+  background:#080808;
+  color:#fff;
+}
+
+.pd-dinner-photo{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+}
+
+.pd-dinner-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(
+    90deg,
+    rgba(0,0,0,.80) 0%,
+    rgba(0,0,0,.62) 24%,
+    rgba(0,0,0,.28) 42%,
+    rgba(0,0,0,.04) 58%,
+    rgba(0,0,0,0) 74%
+  );
+}
+
+.pd-dinner-photo img{
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  object-position:center 50%;
+  filter:contrast(1.04) saturate(1.05);
+}
+
+.pd-dinner-copy{
+  position:absolute;
+  z-index:2;
+  left:4%;
+  top:50%;
+  width:31%;
+  transform:translateY(-50%);
+  padding:0;
+  text-shadow:0 2px 12px rgba(0,0,0,.72);
+}
+
+.pd-dinner-copy .pd-kicker{
+  color:var(--pd-green);
+}
+
+.pd-dinner-copy h2{
+  margin:0;
+  font-family:var(--pd-serif);
+  font-size:clamp(39px,5.8vw,72px);
+  line-height:.88;
+}
+
+.pd-dinner-copy p{
+  margin:17px 0 0;
+  font-family:var(--pd-serif);
+  font-size:17px;
+  line-height:1.43;
+}
+
+/* =====================================================
+   PROTECTOR
+===================================================== */
+
+.pd-protector{
+  background:linear-gradient(135deg,#ffe36a,#fff1ae);
+}
+
+.pd-protector-head{
+  position:relative;
+  padding:34px 28px 23px;
+}
+
+.pd-protector-head::after{
+  content:"♥";
+  position:absolute;
+  right:6%;
+  top:19px;
+  color:var(--pd-red);
+  font-size:52px;
+  line-height:1;
+}
+
+.pd-protector-head .pd-kicker{
+  color:#6d5910;
+}
+
+.pd-protector-body{
+  padding:29px 29px 36px;
+  background:#fff;
+}
+
+/* =====================================================
+   SUNSET
+===================================================== */
+
+.pd-sunset{
+  background:#000;
+}
+
+.pd-sunset img{
+  width:100%;
+  max-height:680px;
+  object-fit:cover;
+  object-position:center;
+  filter:contrast(1.04) saturate(1.05);
+}
+
+.pd-sunset-caption{
+  padding:20px 27px 25px;
+  background:#fff;
+}
+
+.pd-sunset-caption strong{
+  display:block;
+  font-family:var(--pd-serif);
+  font-size:clamp(32px,5vw,52px);
+  line-height:.95;
+}
+
+.pd-sunset-caption span{
+  display:block;
+  margin-top:8px;
+  font-family:var(--pd-serif);
+  font-size:17px;
+}
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+.pd-final{
+  background:linear-gradient(135deg,#ff9b82,#f6b1bf);
+}
+
+.pd-final-head{
+  padding:34px 28px 23px;
+}
+
+.pd-final-head .pd-kicker{
+  color:#62362d;
+}
+
+.pd-final-body{
+  padding:29px 29px 35px;
+  background:#fff;
+}
+
+.pd-final-body .pd-story-text p{
+  margin-bottom:9px;
+}
+
+.pd-signature{
+  max-width:760px;
+  margin:25px auto 0;
+  padding-top:18px;
+  border-top:2px solid #111;
+  text-align:right;
+  font-family:var(--pd-serif);
+  font-size:clamp(34px,5vw,53px);
+  font-style:italic;
+}
+
+.pd-signature-heart{
+  color:var(--pd-red);
+  font-style:normal;
+}
+
+.pd-end-photo{
+  background:#000;
+}
+
+.pd-end-photo img{
+  width:100%;
+  max-height:690px;
+  object-fit:cover;
+  object-position:center 42%;
+  filter:contrast(1.04) saturate(1.05);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.pd-story-footer{
+  padding:34px 24px 38px;
+  background:#080808;
+  color:#fff;
+  text-align:center;
+}
+
+.pd-story-footer-brand{
+  font-family:var(--pd-serif);
+  font-size:clamp(30px,5vw,45px);
+  font-weight:700;
+  letter-spacing:.05em;
+}
+
+.pd-story-footer-tagline{
+  margin-top:8px;
+  font-family:var(--pd-serif);
+  font-size:18px;
+  font-style:italic;
+}
+
+.pd-footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:11px 20px;
+  margin-top:22px;
+}
+
+.pd-footer-links a{
+  padding-bottom:4px;
+  border-bottom:1px solid var(--pd-gold);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+/* =====================================================
+   RTL
+===================================================== */
+
+html[dir="rtl"] #pdRichiePiStory{
+  text-align:right;
+}
+
+html[dir="rtl"] .pd-signature{
+  text-align:left;
+}
+
+html[dir="rtl"] .pd-hero-copy{
+  left:auto;
+  right:4.7%;
+}
+
+html[dir="rtl"] .pd-sea-copy{
+  right:auto;
+  left:4%;
+}
+
+html[dir="rtl"] .pd-dinner-copy{
+  left:auto;
+  right:4%;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:900px){
+
+  .pd-hero-photo img{
+    aspect-ratio:4/3;
+  }
+
+  .pd-hero-copy{
+    width:42%;
+  }
+
+  .pd-hero-copy p,
+  .pd-sea-copy p,
+  .pd-dinner-copy p{
+    font-size:15px;
+  }
+
+  .pd-photo-card img{
+    height:300px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:720px){
+
+  .pd-section{
+    border-bottom-width:5px;
+  }
+
+  .pd-display{
+    font-size:42px;
+  }
+
+  .pd-story-text{
+    font-size:16px;
+    line-height:1.43;
+  }
+
+  .pd-story-text p{
+    margin-bottom:10px;
+  }
+
+  /* HERO */
+
+  .pd-hero-photo img{
+    aspect-ratio:1.16/1;
+    object-fit:cover;
+    object-position:58% center;
+  }
+
+  .pd-hero-photo::after{
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0,0,0,.78) 0%,
+        rgba(0,0,0,.65) 28%,
+        rgba(0,0,0,.30) 47%,
+        rgba(0,0,0,.04) 66%,
+        rgba(0,0,0,0) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(0,0,0,.25) 0%,
+        rgba(0,0,0,0) 42%
+      );
+  }
+
+  .pd-hero-copy{
+    left:4.2%;
+    top:50%;
+    bottom:auto;
+    width:47%;
+    transform:translateY(-50%);
+  }
+
+  .pd-hero-copy .pd-kicker{
+    margin-bottom:7px;
+    font-size:8px;
+    line-height:1.3;
+  }
+
+  .pd-hero-copy h1{
+    font-size:39px;
+    line-height:.9;
+  }
+
+  .pd-hero-sub{
+    margin-top:7px;
+    font-size:25px;
+    line-height:.96;
+  }
+
+  .pd-hero-heart{
+    margin-top:5px;
+    font-size:31px;
+  }
+
+  .pd-hero-copy p{
+    margin-top:8px;
+    max-width:260px;
+    font-size:12.5px;
+    line-height:1.34;
+  }
+
+  .pd-back{
+    margin-top:10px;
+    font-size:8.5px;
+  }
+
+  /* INTRO */
+
+  .pd-intro-head{
+    padding:30px 19px 18px;
+  }
+
+  .pd-intro-body{
+    padding:0 20px 31px;
+  }
+
+  .pd-big-love{
+    margin-bottom:19px;
+    font-size:34px;
+  }
+
+  /* PROFILES */
+
+  .pd-duo{
+    padding:29px 15px 32px;
+  }
+
+  .pd-duo-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pd-profile{
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  /* FRIENDSHIP */
+
+  .pd-friendship-head,
+  .pd-together-head,
+  .pd-protector-head,
+  .pd-final-head{
+    padding:29px 20px 19px;
+  }
+
+  .pd-friendship-body,
+  .pd-together-body,
+  .pd-protector-body,
+  .pd-final-body{
+    padding:25px 20px 31px;
+  }
+
+  .pd-pullquote{
+    font-size:35px;
+  }
+
+  /* SEA */
+
+  .pd-sea-photo img{
+    aspect-ratio:1.34/1;
+    object-position:38% center;
+  }
+
+  .pd-sea-photo::after{
+    background:linear-gradient(
+      90deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.04) 40%,
+      rgba(0,0,0,.47) 59%,
+      rgba(0,0,0,.78) 100%
+    );
+  }
+
+  .pd-sea-copy{
+    right:3.8%;
+    width:43%;
+  }
+
+  .pd-sea-copy .pd-kicker{
+    font-size:8px;
+  }
+
+  .pd-sea-copy h2{
+    font-size:31px;
+    line-height:.9;
+  }
+
+  .pd-sea-copy p{
+    margin-top:10px;
+    font-size:11.5px;
+    line-height:1.37;
+  }
+
+  /* GALLERY */
+
+  .pd-gallery{
+    padding:28px 12px 18px;
+  }
+
+  .pd-photo-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .pd-photo-card:first-child{
+    grid-column:1/-1;
+  }
+
+  .pd-photo-card img{
+    height:245px;
+  }
+
+  .pd-photo-card:first-child img{
+    height:300px;
+  }
+
+  .pd-photo-card figcaption{
+    min-height:92px;
+    padding:11px;
+    font-size:12.5px;
+  }
+
+  .pd-photo-card figcaption strong{
+    font-size:17px;
+  }
+
+  /* TOGETHER */
+
+  .pd-traits{
+    margin-bottom:22px;
+    padding:17px 0;
+  }
+
+  .pd-traits-row{
+    gap:6px 12px;
+  }
+
+  .pd-trait:nth-child(1){
+    font-size:25px;
+  }
+
+  .pd-trait:nth-child(2){
+    font-size:16px;
+  }
+
+  .pd-trait:nth-child(3){
+    font-size:29px;
+  }
+
+  .pd-trait:nth-child(4){
+    font-size:13px;
+  }
+
+  .pd-trait:nth-child(5){
+    font-size:23px;
+  }
+
+  .pd-trait:nth-child(6){
+    font-size:25px;
+  }
+
+  /* DINNER
+     Animals remain on the right.
+     Copy stays in the dark left zone.
+  */
+
+  .pd-dinner-photo img{
+    aspect-ratio:1.28/1;
+    object-position:61% center;
+  }
+
+  .pd-dinner-photo::after{
+    background:linear-gradient(
+      90deg,
+      rgba(0,0,0,.82) 0%,
+      rgba(0,0,0,.68) 27%,
+      rgba(0,0,0,.34) 45%,
+      rgba(0,0,0,.05) 62%,
+      rgba(0,0,0,0) 100%
+    );
+  }
+
+  .pd-dinner-copy{
+    left:3.6%;
+    width:39%;
+  }
+
+  .pd-dinner-copy .pd-kicker{
+    font-size:8px;
+  }
+
+  .pd-dinner-copy h2{
+    font-size:33px;
+    line-height:.89;
+  }
+
+  .pd-dinner-copy p{
+    margin-top:11px;
+    font-size:12px;
+    line-height:1.36;
+  }
+
+  .pd-signature{
+    font-size:36px;
+  }
+}
+
+@media(max-width:390px){
+
+  .pd-hero-copy h1{
+    font-size:36px;
+  }
+
+  .pd-hero-sub{
+    font-size:22px;
+  }
+
+  .pd-hero-copy p{
+    font-size:11.5px;
+  }
+
+  .pd-display{
+    font-size:39px;
+  }
+
+  .pd-sea-copy h2{
+    font-size:28px;
+  }
+
+  .pd-sea-copy p{
+    font-size:10.8px;
+  }
+
+  .pd-dinner-copy h2{
+    font-size:30px;
+  }
+
+  .pd-dinner-copy p{
+    font-size:11px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<main id="pdRichiePiStory">
 
 <!-- =====================================================
-     BETTER TOGETHER — EDITORIAL
+     HERO
 ===================================================== -->
 
-<section class="pd-section pd-together">
+<section class="pd-section pd-hero">
 
-  <div class="pd-together-head">
+  <div class="pd-hero-photo">
+
+    <img
+      src="/richie-pi-07.jpg"
+      alt="Richie the rabbit and Pi the pink parrot together by the sea"
+      fetchpriority="high"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="pd-hero-copy">
 
     <div class="pd-kicker">
-      Two personalities. One friendship.
+      PETS &amp; DOGUE · ISSUE 01 · COVER STARS 04 + 05
+    </div>
+
+    <h1>
+      <span
+        class="pd-richie-name notranslate"
+        translate="no"
+      >Richie</span>
+      <span class="pd-hero-amp">&amp;</span>
+      <span
+        class="pd-pi-name notranslate"
+        translate="no"
+      >Pi</span>
+    </h1>
+
+    <div class="pd-hero-sub">
+      The friendship<br>
+      nobody planned.
+    </div>
+
+    <span
+      class="pd-hero-heart"
+      aria-hidden="true"
+    >♥</span>
+
+    <p>
+      One gentle little rabbit.
+      One bright pink parrot.
+      Two completely different personalities —
+      and somehow they simply chose each other.
+    </p>
+
+    <a
+      class="pd-back"
+      href="/issue-01.html"
+      aria-label="Back to Issue 01"
+    >
+      ← Back to Issue 01
+    </a>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section class="pd-section pd-intro">
+
+  <div class="pd-intro-head">
+
+    <div class="pd-kicker">
+      Two completely different little lives
     </div>
 
     <h2 class="pd-display">
-      BETTER<br>
-      TOGETHER
+      SOME FRIENDSHIPS<br>
+      JUST HAPPEN
     </h2>
 
   </div>
 
-  <div class="pd-together-body">
+  <div class="pd-intro-body">
 
-    <div
-      class="pd-ornament"
-      aria-hidden="true"
-    >
-      <span class="pd-ornament-mark">❦</span>
-      <span class="pd-red-heart">♥</span>
-      <span class="pd-ornament-mark">❦</span>
-    </div>
-
-    <div
-      class="pd-editorial-words"
-      aria-label="Richie and Pi personality traits"
-    >
-
-      <span class="pd-word">Gentle</span>
-      <span class="pd-word">CURIOUS</span>
-      <span class="pd-word">Loyal</span>
-      <span class="pd-word">BRIGHT</span>
-      <span class="pd-word">Calm</span>
-      <span class="pd-word">Together</span>
-
+    <div class="pd-big-love">
+      A rabbit.<br>
+      A pink parrot.<br>
+      One very unexpected friendship.
     </div>
 
     <div class="pd-story-text">
 
       <p>
-        There is something especially lovely
-        about watching two completely different animals
-        become completely comfortable
-        in each other’s company.
+        Nobody needed to introduce
+        <span class="notranslate" translate="no">Richie</span>
+        and
+        <span class="notranslate" translate="no">Pi</span>
+        to the idea of friendship.
       </p>
 
       <p>
-        <span
-          class="notranslate"
-          translate="no"
-        >Richie</span>
-        does not need to become more like
-        <span
-          class="notranslate"
-          translate="no"
-        >Pi</span>.
+        They worked that part out themselves.
       </p>
 
       <p>
-        And
-        <span
-          class="notranslate"
-          translate="no"
-        >Pi</span>
-        does not need
-        <span
-          class="notranslate"
-          translate="no"
-        >Richie</span>
-        to become anything other than himself.
+        Different species.
+        Different personalities.
+        Different ways of seeing the world.
       </p>
 
       <p>
-        They simply make room for one another.
+        And still,
+        they found a way to understand each other.
       </p>
 
       <p>
-        Perhaps that is exactly why
-        their friendship feels so natural.
+        Their story became one of the warmest stories
+        of our first issue —
+        a reminder that friendship does not need
+        to make sense to anyone else.
       </p>
 
     </div>
@@ -546,16 +1503,487 @@ a{
 </section>
 
 <!-- =====================================================
-     LUNCH DATE
-     REAL PHOTO: richie-pi-06.jpg
+     RICHIE + PI PROFILES
+===================================================== -->
 
-     DESKTOP:
-     Copy stays in the safe left side.
+<section class="pd-section pd-duo">
 
-     MOBILE:
-     Photograph first.
-     Copy completely below photograph.
-     NOTHING covers Richie or Pi.
+  <div class="pd-duo-heading">
+
+    <div class="pd-kicker">
+      Meet the duo ♡
+    </div>
+
+    <h2 class="pd-display">
+      TWO CHARACTERS.<br>
+      ONE STORY.
+    </h2>
+
+  </div>
+
+  <div class="pd-duo-grid">
+
+    <article class="pd-profile richie">
+
+      <h3 class="pd-profile-name">
+        <span class="notranslate" translate="no">Richie</span>
+      </h3>
+
+      <div class="pd-profile-sub">
+        The gentle little friend 🐇
+      </div>
+
+      <div class="pd-profile-list">
+
+        <div class="pd-profile-item">
+          <span>🐇</span>
+          <span>
+            <strong>Who am I?</strong>
+            A sweet lop-eared rabbit.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span class="pd-heart-icon">♥</span>
+          <span>
+            <strong>Personality:</strong>
+            gentle, affectionate and peaceful.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span>🌿</span>
+          <span>
+            <strong>I love:</strong>
+            exploring, quiet moments and tasty greens.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span>🌊</span>
+          <span>
+            <strong>Perfect day:</strong>
+            sunshine and a peaceful day by the sea.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span>⭐</span>
+          <span>
+            <strong>Special feature:</strong>
+            a very big heart.
+          </span>
+        </div>
+
+      </div>
+
+      <div class="pd-profile-note">
+        Small rabbit.<br>
+        Very gentle soul.
+      </div>
+
+    </article>
+
+    <article class="pd-profile pi">
+
+      <h3 class="pd-profile-name">
+        <span class="notranslate" translate="no">Pi</span>
+      </h3>
+
+      <div class="pd-profile-sub">
+        The bright pink personality 🦜
+      </div>
+
+      <div class="pd-profile-list">
+
+        <div class="pd-profile-item">
+          <span>🦜</span>
+          <span>
+            <strong>Who am I?</strong>
+            A beautiful pink parrot.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span>✨</span>
+          <span>
+            <strong>Personality:</strong>
+            curious, expressive and full of character.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span class="pd-heart-icon">♥</span>
+          <span>
+            <strong>With Richie:</strong>
+            loyal, affectionate and always close.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span>👀</span>
+          <span>
+            <strong>Favourite activity:</strong>
+            watching everything that happens.
+          </span>
+        </div>
+
+        <div class="pd-profile-item">
+          <span>⭐</span>
+          <span>
+            <strong>Special feature:</strong>
+            impossible to overlook.
+          </span>
+        </div>
+
+      </div>
+
+      <div class="pd-profile-note">
+        Bright colour.<br>
+        Even brighter character.
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     CLOSE FRIENDS PHOTO
+===================================================== -->
+
+<section class="pd-section pd-friend-photo">
+
+  <img
+    src="/richie-pi-01.jpg"
+    alt="Pi affectionately resting against Richie"
+    loading="lazy"
+    decoding="async"
+  >
+
+  <div class="pd-friend-caption">
+
+    <strong>
+      Close means close. ♡
+    </strong>
+
+    <span>
+      Some friendships are easy to explain.
+      This one is simply easier to see.
+    </span>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FRIENDSHIP
+===================================================== -->
+
+<section class="pd-section pd-friendship">
+
+  <div class="pd-friendship-head">
+
+    <div class="pd-kicker">
+      An unlikely friendship ♡
+    </div>
+
+    <h2 class="pd-display">
+      THEY SIMPLY<br>
+      CHOSE EACH OTHER
+    </h2>
+
+  </div>
+
+  <div class="pd-friendship-body">
+
+    <div class="pd-story-text">
+
+      <p>
+        If someone had tried to design
+        the perfect pair of best friends,
+        they probably would not have started here.
+      </p>
+
+      <p>
+        A rabbit and a parrot?
+      </p>
+
+      <p>
+        One quiet and gentle.
+        One colourful and expressive.
+      </p>
+
+      <p>
+        One with long soft ears.
+        One with wings.
+      </p>
+
+      <p>
+        Yet friendship has never been especially interested
+        in following rules.
+      </p>
+
+      <p>
+        <span class="notranslate" translate="no">Richie</span>
+        and
+        <span class="notranslate" translate="no">Pi</span>
+        simply became part of each other’s world.
+      </p>
+
+      <p>
+        They stay close.
+        They share quiet moments.
+        They explore together.
+      </p>
+
+      <p>
+        And sometimes
+        they just sit beside one another
+        as though this was always the most natural thing
+        in the world.
+      </p>
+
+    </div>
+
+    <div class="pd-pullquote">
+      Different animals.<br>
+      Same little world.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     SEA
+===================================================== -->
+
+<section class="pd-section pd-sea">
+
+  <div class="pd-sea-photo">
+
+    <img
+      src="/richie-pi-04.jpg"
+      alt="Richie and Pi overlooking the blue sea"
+      loading="lazy"
+      decoding="async"
+    >
+
+  </div>
+
+  <div class="pd-sea-copy">
+
+    <div class="pd-kicker">
+      Their world by the sea
+    </div>
+
+    <h2>
+      BLUE SKY.<br>
+      WHITE HOUSES.<br>
+      TWO FRIENDS.
+    </h2>
+
+    <p>
+      Their days are filled with sunshine,
+      white walls, flowers and the blue sea beyond.
+      For
+      <span class="notranslate" translate="no">Richie</span>
+      and
+      <span class="notranslate" translate="no">Pi</span>,
+      even an ordinary day can feel like
+      a little Mediterranean adventure.
+    </p>
+
+  </div>
+
+</section><!-- =====================================================
+     MOMENTS
+===================================================== -->
+
+<section class="pd-section pd-gallery">
+
+  <div class="pd-gallery-title">
+
+    <div class="pd-kicker">
+      Richie &amp; Pi moments
+    </div>
+
+    <h2 class="pd-display">
+      BETTER<br>
+      TOGETHER
+    </h2>
+
+  </div>
+
+  <div class="pd-photo-grid">
+
+    <figure class="pd-photo-card">
+
+      <img
+        src="/richie-pi-03.jpg"
+        alt="Richie and Pi together among flowers"
+        loading="lazy"
+        decoding="async"
+      >
+
+      <figcaption>
+        <strong>Exploring 🌸</strong>
+        One path. Two very different ways of looking at it.
+      </figcaption>
+
+    </figure>
+
+    <figure class="pd-photo-card">
+
+      <img
+        src="/richie-pi-05.jpg"
+        alt="Pi cuddling Richie"
+        loading="lazy"
+        decoding="async"
+      >
+
+      <figcaption>
+        <strong>
+          Close friends
+          <span class="pd-card-heart">♥</span>
+        </strong>
+        Personal space is apparently optional.
+      </figcaption>
+
+    </figure>
+
+    <figure class="pd-photo-card">
+
+      <img
+        src="/richie-pi-07.jpg"
+        alt="Richie and Pi posing together"
+        loading="lazy"
+        decoding="async"
+      >
+
+      <figcaption>
+        <strong>The duo</strong>
+        Completely different. Completely inseparable.
+      </figcaption>
+
+    </figure>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     TOGETHER
+===================================================== -->
+
+<section class="pd-section pd-together">
+
+  <div class="pd-together-head">
+
+    <div class="pd-kicker">
+      Friendship has no species
+    </div>
+
+    <h2 class="pd-display">
+      NO NEED<br>
+      TO BE THE SAME
+    </h2>
+
+  </div>
+
+  <div class="pd-together-body">
+
+    <div class="pd-traits">
+
+      <div class="pd-traits-row">
+
+        <span class="pd-trait">
+          Gentle
+        </span>
+
+        <span class="pd-trait">
+          Bright
+        </span>
+
+        <span
+          class="pd-trait"
+          aria-label="Loyal"
+        >
+          ♥ Loyal
+        </span>
+
+        <span class="pd-trait">
+          Adventurous
+        </span>
+
+        <span class="pd-trait">
+          Curious
+        </span>
+
+        <span class="pd-trait">
+          Together
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="pd-story-text">
+
+      <p>
+        Maybe that is what makes their friendship
+        so easy to love.
+      </p>
+
+      <p>
+        There is no reason
+        <span
+          class="notranslate"
+          translate="no"
+        >Richie</span>
+        and
+        <span
+          class="notranslate"
+          translate="no"
+        >Pi</span>
+        should need to be alike.
+      </p>
+
+      <p>
+        Friendship does not ask
+        whether you have paws or wings.
+        It does not care whether you are quiet or noisy.
+        It does not check whether you look the same.
+      </p>
+
+      <p>
+        Sometimes all that matters
+        is feeling safe beside someone.
+      </p>
+
+      <p>
+        Choosing them again tomorrow —
+        and knowing they will probably
+        still be right there.
+      </p>
+
+    </div>
+
+    <div
+      class="pd-ornament"
+      aria-hidden="true"
+    >
+      ❦ &nbsp; ♥ &nbsp; ❦
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     DINNER TOGETHER
 ===================================================== -->
 
 <section class="pd-section pd-dinner">
@@ -564,7 +1992,7 @@ a{
 
     <img
       src="/richie-pi-06.jpg"
-      alt="Richie the rabbit and Pi the pink parrot sharing lunch together"
+      alt="Richie and Pi sharing fresh greens"
       loading="lazy"
       decoding="async"
     >
@@ -585,8 +2013,8 @@ a{
 
     <p>
       Fresh greens,
-      sunshine
-      and your best friend beside you.
+      sunshine and
+      your best friend beside you.
       Some lunches really do have everything.
     </p>
 
@@ -595,7 +2023,7 @@ a{
 </section>
 
 <!-- =====================================================
-     ALWAYS CLOSE
+     PI / PROTECTOR
 ===================================================== -->
 
 <section class="pd-section pd-protector">
@@ -604,7 +2032,6 @@ a{
 
     <div class="pd-kicker">
       Pi &amp; Richie
-      <span class="pd-red-heart">♥</span>
     </div>
 
     <h2 class="pd-display">
@@ -624,7 +2051,7 @@ a{
           translate="no"
         >Pi</span>
         may be the brighter,
-        more colourful half of this friendship,
+        louder-looking half of this friendship,
         but there is something wonderfully gentle
         in the way he stays close to
         <span
@@ -634,26 +2061,30 @@ a{
       </p>
 
       <p>
-        And
+        Beside him.
+        Leaning against him.
+        Watching over him.
+      </p>
+
+      <p>
+        Their bond turned
         <span
           class="notranslate"
           translate="no"
-        >Richie</span>
-        seems perfectly content
-        to have his colourful little companion nearby.
+        >Pi</span>
+        into an unexpected little protector
+        and one of
+        <span
+          class="notranslate"
+          translate="no"
+        >Richie</span>’s closest companions.
       </p>
 
       <p>
-        Their friendship is not dramatic.
-        It does not need to be.
-      </p>
-
-      <p>
-        Sometimes closeness is simply choosing
-        the same place,
-        the same moment
-        and the same company
-        again and again.
+        It is affectionate,
+        funny,
+        slightly unexpected —
+        and completely theirs.
       </p>
 
     </div>
@@ -663,118 +2094,14 @@ a{
 </section>
 
 <!-- =====================================================
-     FLOWERS
-     REAL PHOTO: richie-pi-03.jpg
-
-     MOBILE:
-     Caption is BELOW photo.
-     Richie and Pi stay completely unobstructed.
-===================================================== -->
-
-<section class="pd-section pd-friend-photo">
-
-  <img
-    src="/richie-pi-03.jpg"
-    alt="Richie and Pi together among Mediterranean flowers"
-    loading="lazy"
-    decoding="async"
-  >
-
-  <div class="pd-friend-caption">
-
-    <strong>
-      Wherever one goes,<br>
-      the other is never far away.
-      <span class="pd-red-heart">♥</span>
-    </strong>
-
-    <span>
-      Sunshine, flowers and a best friend beside you —
-      sometimes that is enough.
-    </span>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     LITTLE ADVENTURES
-===================================================== -->
-
-<section class="pd-section pd-friendship">
-
-  <div class="pd-friendship-head">
-
-    <div class="pd-kicker">
-      Their everyday world
-    </div>
-
-    <h2 class="pd-display">
-      LITTLE<br>
-      ADVENTURES
-    </h2>
-
-  </div>
-
-  <div class="pd-friendship-body">
-
-    <div class="pd-story-text">
-
-      <p>
-        Not every adventure needs to be big.
-      </p>
-
-      <p>
-        Sometimes it is a sunny corner.
-        A new smell.
-        A bowl of fresh greens.
-        A quiet afternoon outside.
-      </p>
-
-      <p>
-        What matters is who is there beside you.
-      </p>
-
-      <p>
-        For
-        <span
-          class="notranslate"
-          translate="no"
-        >Richie</span>
-        and
-        <span
-          class="notranslate"
-          translate="no"
-        >Pi</span>,
-        ordinary moments have become
-        part of their shared story.
-      </p>
-
-    </div>
-
-    <div class="pd-pullquote">
-      Small moments.<br>
-      Big friendship.
-      <span class="pd-red-heart">♥</span>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     PEACEFUL AFTERNOON
-     REAL PHOTO: richie-pi-02.jpg
-
-     MOBILE:
-     Caption completely below photograph.
+     SUNSET
 ===================================================== -->
 
 <section class="pd-section pd-sunset">
 
   <img
     src="/richie-pi-02.jpg"
-    alt="Richie and Pi enjoying a peaceful afternoon together"
+    alt="Richie and Pi watching the sunset together"
     loading="lazy"
     decoding="async"
   >
@@ -782,12 +2109,13 @@ a{
   <div class="pd-sunset-caption">
 
     <strong>
-      Side by side.
-      <span class="pd-red-heart">♥</span>
+      Sunset together. 🌅
     </strong>
 
     <span>
-      No matching feathers required.
+      Sometimes the best part of an adventure
+      is simply having someone beside you
+      when the day ends.
     </span>
 
   </div>
@@ -795,7 +2123,7 @@ a{
 </section>
 
 <!-- =====================================================
-     WHAT THEY TEACH US
+     FINAL
 ===================================================== -->
 
 <section class="pd-section pd-final">
@@ -803,12 +2131,12 @@ a{
   <div class="pd-final-head">
 
     <div class="pd-kicker">
-      What Richie &amp; Pi teach us
+      Cover stars 04 + 05
     </div>
 
     <h2 class="pd-display">
-      LOVE DOESN'T<br>
-      NEED TO MATCH
+      THE FRIENDSHIP<br>
+      NOBODY PLANNED
     </h2>
 
   </div>
@@ -818,8 +2146,7 @@ a{
     <div class="pd-story-text">
 
       <p>
-        Maybe that is the loveliest thing
-        about
+        So this is
         <span
           class="notranslate"
           translate="no"
@@ -832,55 +2159,68 @@ a{
       </p>
 
       <p>
-        They do not look alike.
-        They do not move alike.
-        They do not experience the world
-        in the same way.
+        One little rabbit.
+        One bright pink parrot.
       </p>
 
       <p>
-        None of that stopped them
-        from finding one another.
+        A gentle heart.
+        A huge personality.
       </p>
 
       <p>
-        Their friendship is a tiny reminder
-        that connection does not always arrive
-        in the form we expect.
+        Peaceful days by the sea.
+        Shared lunches.
+        Adventures.
+        Quiet moments.
       </p>
 
       <p>
-        Sometimes it has long ears.
+        And a friendship
+        nobody could have planned.
       </p>
 
       <p>
-        Sometimes it has bright pink feathers.
+        Maybe we do not always choose
+        who will become important to us.
+        Sometimes we simply meet.
+        We stay.
       </p>
 
       <p>
-        And sometimes,
-        against all expectations,
-        it simply works.
+        And somehow,
+        without anyone deciding it,
+        two completely different lives
+        become one story.
+      </p>
+
+      <p>
+        That is exactly why
+        <span
+          class="notranslate"
+          translate="no"
+        >Richie</span>
+        and
+        <span
+          class="notranslate"
+          translate="no"
+        >Pi</span>
+        belong on the first
+        <span
+          class="notranslate"
+          translate="no"
+        >PETS &amp; DOGUE</span>
+        cover.
       </p>
 
     </div>
 
     <div class="pd-signature">
-
+      Better together.
       <span
-        class="notranslate"
-        translate="no"
-      >Richie</span>
-
-      &amp;
-
-      <span
-        class="notranslate"
-        translate="no"
-      >Pi</span>
-
-      <span class="pd-red-heart">♥</span>
-
+        class="pd-signature-heart"
+        aria-hidden="true"
+      >♥</span>
     </div>
 
   </div>
@@ -888,17 +2228,14 @@ a{
 </section>
 
 <!-- =====================================================
-     FINAL PHOTO
-     REAL PHOTO: richie-pi-01.jpg
-
-     ABSOLUTELY NO TEXT OVER THIS PHOTO.
+     LAST PHOTO
 ===================================================== -->
 
-<section class="pd-section pd-end-photo">
+<section class="pd-end-photo">
 
   <img
     src="/richie-pi-01.jpg"
-    alt="Richie the rabbit and Pi the pink parrot together"
+    alt="Richie and Pi together"
     loading="lazy"
     decoding="async"
   >
@@ -906,12 +2243,15 @@ a{
 </section>
 
 <!-- =====================================================
-     STORY FOOTER
+     FOOTER
 ===================================================== -->
 
 <footer class="pd-story-footer">
 
-  <div class="pd-story-footer-brand">
+  <div
+    class="pd-story-footer-brand notranslate"
+    translate="no"
+  >
     PETS &amp; DOGUE
   </div>
 
@@ -921,22 +2261,26 @@ a{
 
   <nav
     class="pd-footer-links"
-    aria-label="Issue navigation"
+    aria-label="Issue 01 story navigation"
   >
 
     <a href="/issue-01.html">
-      Issue 01
+      ← Issue 01
     </a>
 
-    <a href="/cover-stars.html">
-      Cover Stars
+    <a href="/issue-01-miso.html">
+      Miso
     </a>
 
-    <a href="/articles.html">
-      Articles
+    <a href="/issue-01-pablo.html">
+      Pablo
     </a>
 
-    <a href="/">
+    <a href="/issue-01-jessica.html">
+      Jessica
+    </a>
+
+    <a href="/index.html">
       Home
     </a>
 
@@ -946,624 +2290,48 @@ a{
 
 </main>
 
-<!-- =====================================================
-     FINAL PHOTO-PROTECTION OVERRIDES
-
-     These rules are deliberately placed LAST.
-
-     This means they override earlier story CSS where
-     necessary and guarantee the approved mobile layout.
-
-     They DO NOT change the PETS & DOGUE global shell.
-===================================================== -->
-
-<style>
-
-/* =====================================================
-   BASE IMAGE PROTECTION
-===================================================== */
-
-#pdRichiePiStory img{
-  display:block;
-  width:100%;
-  max-width:100%;
-  visibility:visible;
-  opacity:1;
-}
-
-/* Do not let the final clean photograph crop either pet. */
-
-.pd-end-photo img{
-  width:100%;
-  height:auto;
-  max-height:none;
-  object-fit:contain;
-  object-position:center;
-}
-
-/* =====================================================
-   MOBILE — FINAL APPROVED PHOTO BEHAVIOUR
-===================================================== */
-
-@media(max-width:720px){
-
-  /* ---------------------------------------------------
-     HERO
-
-     Keep the original real photo.
-     Do not crop it.
-
-     The hero is the only intentional editorial overlay.
-     Copy stays on the left safe area.
-  --------------------------------------------------- */
-
-  .pd-hero-photo{
-    height:auto;
-  }
-
-  .pd-hero-photo img{
-    width:100%;
-    height:auto;
-    max-height:none;
-    object-fit:contain;
-    object-position:center;
-    transform:none;
-  }
-
-  .pd-hero-copy{
-    left:3.5%;
-    right:auto;
-    top:50%;
-    width:42%;
-    max-width:none;
-    transform:translateY(-50%);
-  }
-
-  .pd-hero-copy .pd-kicker{
-    margin-bottom:5px;
-    font-size:7px;
-    line-height:1.2;
-  }
-
-  .pd-hero-copy h1{
-    font-size:33px;
-    line-height:.88;
-  }
-
-  .pd-hero-sub{
-    margin:8px 0 9px;
-    font-size:17px;
-    line-height:.98;
-  }
-
-  .pd-hero-copy p{
-    font-size:9.5px;
-    line-height:1.3;
-  }
-
-  .pd-back{
-    margin-top:9px;
-    font-size:7px;
-  }
-
-  /* ---------------------------------------------------
-     SEA
-
-     This is the important correction.
-
-     PHOTO = its own block.
-     TEXT = its own block underneath.
-
-     No text can physically cover either animal.
-  --------------------------------------------------- */
-
-  .pd-sea{
-    display:flex !important;
-    flex-direction:column !important;
-    background:#08212f;
-  }
-
-  .pd-sea-photo{
-    position:relative;
-    order:1;
-    width:100%;
-    height:auto;
-    min-height:0;
-    overflow:visible;
-    background:#000;
-  }
-
-  .pd-sea-photo::after{
-    display:none !important;
-    content:none !important;
-  }
-
-  .pd-sea-photo img{
-    display:block;
-    width:100%;
-    height:auto !important;
-    max-height:none !important;
-    aspect-ratio:auto !important;
-    object-fit:contain !important;
-    object-position:center center !important;
-    transform:none !important;
-  }
-
-  .pd-sea-copy{
-    position:relative !important;
-    order:2;
-    inset:auto !important;
-    top:auto !important;
-    right:auto !important;
-    bottom:auto !important;
-    left:auto !important;
-
-    width:100% !important;
-    max-width:none !important;
-
-    transform:none !important;
-
-    padding:22px 18px 25px;
-
-    color:#fff;
-
-    background:
-      linear-gradient(
-        135deg,
-        #08212f 0%,
-        #0b4356 100%
-      );
-
-    text-shadow:none;
-  }
-
-  .pd-sea-copy .pd-kicker{
-    margin-bottom:8px;
-    color:#8ee9ff;
-    font-size:9px;
-  }
-
-  .pd-sea-copy h2{
-    margin:0;
-    font-size:35px;
-    line-height:.9;
-  }
-
-  .pd-sea-copy p{
-    max-width:600px;
-    margin-top:12px;
-    font-size:14px;
-    line-height:1.4;
-  }
-
-  /* ---------------------------------------------------
-     LUNCH
-
-     Same protection:
-     PHOTO above.
-     TEXT below.
-  --------------------------------------------------- */
-
-  .pd-dinner{
-    display:flex !important;
-    flex-direction:column !important;
-    background:#263919;
-  }
-
-  .pd-dinner-photo{
-    position:relative;
-    order:1;
-    width:100%;
-    height:auto;
-    min-height:0;
-    overflow:visible;
-    background:#000;
-  }
-
-  .pd-dinner-photo::after{
-    display:none !important;
-    content:none !important;
-  }
-
-  .pd-dinner-photo img{
-    display:block;
-    width:100%;
-    height:auto !important;
-    max-height:none !important;
-    aspect-ratio:auto !important;
-    object-fit:contain !important;
-    object-position:center center !important;
-    transform:none !important;
-  }
-
-  .pd-dinner-copy{
-    position:relative !important;
-    order:2;
-    inset:auto !important;
-    top:auto !important;
-    right:auto !important;
-    bottom:auto !important;
-    left:auto !important;
-
-    width:100% !important;
-    max-width:none !important;
-
-    transform:none !important;
-
-    padding:22px 18px 25px;
-
-    color:#fff;
-
-    background:
-      linear-gradient(
-        135deg,
-        #263919 0%,
-        #4f6c29 100%
-      );
-
-    text-shadow:none;
-  }
-
-  .pd-dinner-copy .pd-kicker{
-    margin-bottom:8px;
-    color:#d5ff9e;
-    font-size:9px;
-  }
-
-  .pd-dinner-copy h2{
-    margin:0;
-    color:var(--pd-gold-bright);
-    font-size:35px;
-    line-height:.9;
-  }
-
-  .pd-dinner-copy p{
-    max-width:600px;
-    margin-top:12px;
-    font-size:14px;
-    line-height:1.4;
-  }
-
-  /* ---------------------------------------------------
-     CLOSE FRIENDS + FLOWERS
-
-     Remove the caption from the photograph entirely.
-  --------------------------------------------------- */
-
-  .pd-friend-photo{
-    display:flex !important;
-    flex-direction:column !important;
-    background:#000;
-  }
-
-  .pd-friend-photo > img{
-    position:relative;
-    order:1;
-
-    width:100%;
-    height:auto !important;
-    max-height:none !important;
-
-    object-fit:contain !important;
-    object-position:center center !important;
-
-    background:#000;
-  }
-
-  .pd-friend-caption{
-    position:relative !important;
-    order:2;
-
-    inset:auto !important;
-    left:auto !important;
-    right:auto !important;
-    bottom:auto !important;
-
-    width:100%;
-
-    padding:18px 18px 21px;
-
-    color:#111;
-
-    background:var(--pd-paper);
-  }
-
-  .pd-friend-caption strong{
-    color:#111;
-    font-size:28px;
-    line-height:.97;
-  }
-
-  .pd-friend-caption .pd-red-heart{
-    color:var(--pd-red);
-  }
-
-  .pd-friend-caption span{
-    max-width:none;
-    margin-top:8px;
-    color:#222;
-    font-size:14px;
-    line-height:1.38;
-  }
-
-  /* ---------------------------------------------------
-     PEACEFUL AFTERNOON
-
-     Caption below image, not over faces.
-  --------------------------------------------------- */
-
-  .pd-sunset{
-    display:flex !important;
-    flex-direction:column !important;
-    background:#000;
-  }
-
-  .pd-sunset > img{
-    position:relative;
-    order:1;
-
-    width:100%;
-    height:auto !important;
-    max-height:none !important;
-
-    object-fit:contain !important;
-    object-position:center center !important;
-
-    background:#000;
-  }
-
-  .pd-sunset-caption{
-    position:relative !important;
-    order:2;
-
-    inset:auto !important;
-    left:auto !important;
-    right:auto !important;
-    bottom:auto !important;
-
-    width:100%;
-
-    padding:18px 18px 21px;
-
-    color:#111;
-
-    background:var(--pd-paper);
-  }
-
-  .pd-sunset-caption strong{
-    color:#111;
-    font-size:29px;
-    line-height:.97;
-  }
-
-  .pd-sunset-caption .pd-red-heart{
-    color:var(--pd-red);
-  }
-
-  .pd-sunset-caption span{
-    max-width:none;
-    margin-top:8px;
-    color:#222;
-    font-size:14px;
-    line-height:1.38;
-  }
-
-  /* ---------------------------------------------------
-     THREE-PHOTO GALLERY
-
-     Never crop the animals on mobile.
-  --------------------------------------------------- */
-
-  .pd-photo-grid{
-    grid-template-columns:1fr;
-  }
-
-  .pd-photo-card{
-    background:#111;
-  }
-
-  .pd-photo-card img{
-    display:block;
-
-    width:100%;
-    height:auto !important;
-    max-height:none !important;
-
-    aspect-ratio:auto !important;
-
-    object-fit:contain !important;
-    object-position:center center !important;
-
-    background:#111;
-  }
-
-  /* ---------------------------------------------------
-     FINAL PHOTO
-
-     Completely clean.
-  --------------------------------------------------- */
-
-  .pd-end-photo{
-    background:#000;
-  }
-
-  .pd-end-photo img{
-    display:block;
-
-    width:100%;
-    height:auto !important;
-    max-height:none !important;
-
-    object-fit:contain !important;
-    object-position:center center !important;
-  }
-
-  /* ---------------------------------------------------
-     RTL MOBILE
-
-     Text blocks are below photographs, therefore no
-     image-side repositioning is required.
-  --------------------------------------------------- */
-
-  html[dir="rtl"] .pd-sea-copy,
-  html[dir="rtl"] .pd-dinner-copy{
-    inset:auto !important;
-    left:auto !important;
-    right:auto !important;
-    text-align:right;
-  }
-
-}
-
-/* =====================================================
-   VERY SMALL PHONES
-===================================================== */
-
-@media(max-width:390px){
-
-  .pd-hero-copy{
-    width:42%;
-  }
-
-  .pd-hero-copy h1{
-    font-size:30px;
-  }
-
-  .pd-hero-sub{
-    font-size:15px;
-  }
-
-  .pd-hero-copy p{
-    font-size:9px;
-  }
-
-  .pd-friend-caption strong,
-  .pd-sunset-caption strong{
-    font-size:25px;
-  }
-
-  .pd-friend-caption span,
-  .pd-sunset-caption span{
-    font-size:13px;
-  }
-
-  .pd-sea-copy h2,
-  .pd-dinner-copy h2{
-    font-size:31px;
-  }
-
-  .pd-sea-copy p,
-  .pd-dinner-copy p{
-    font-size:14px;
-  }
-
-}
-
-/* =====================================================
-   ACCESSIBILITY
-===================================================== */
-
-#pdRichiePiStory a:focus-visible,
-#pdRichiePiStory button:focus-visible{
-  outline:3px solid var(--pd-gold-bright);
-  outline-offset:4px;
-}
-
-@media(prefers-reduced-motion:reduce){
-
-  html{
-    scroll-behavior:auto;
-  }
-
-}
-
-/* =====================================================
-   PRINT
-===================================================== */
-
-@media print{
-
-  body{
-    background:#fff;
-  }
-
-  #pdRichiePiStory{
-    max-width:none;
-  }
-
-  .pd-section{
-    break-inside:avoid;
-  }
-
-}
-
-</style>
-
 <script>
-/* =====================================================
-   RICHIE & PI — PAGE INITIALISATION
-
-   Global PETS & DOGUE behaviour remains controlled by:
-   /pets-dogue-shell.js
-
-   Do NOT duplicate the global header/menu/TTS here.
-===================================================== */
-
-(function () {
+(function(){
   "use strict";
+
+  /*
+  ========================================================
+  RICHIE & PI STORY CONTENT ONLY
+
+  Global system already controls:
+  - approved PETS & DOGUE header
+  - hide on scroll down
+  - show on scroll up
+  - Contents side menu
+  - language selector
+  - 23-language translation
+  - Arabic RTL
+  - TTS / accessibility
+  - Miso help circle
+
+  DO NOT rebuild global components here.
+  ========================================================
+  */
 
   const story =
     document.getElementById("pdRichiePiStory");
 
-  if (!story) {
+  if(!story){
     return;
   }
 
-  /* Preserve Richie + Pi during translation. */
-
-  story
-    .querySelectorAll(".notranslate")
-    .forEach(function (node) {
-
-      node.setAttribute(
-        "translate",
-        "no"
-      );
-
-    });
-
-  /*
-   * IMPORTANT:
-   * Never hide a failed image.
-   *
-   * If an asset problem ever occurs again,
-   * the browser keeps the image element visible
-   * instead of silently making an entire photograph
-   * disappear.
-   */
-
   story
     .querySelectorAll("img")
-    .forEach(function (img) {
+    .forEach(function(image,index){
 
-      img.addEventListener(
-        "error",
-        function () {
+      image.decoding = "async";
 
-          img.classList.add(
-            "pd-image-load-error"
-          );
-
-          console.warn(
-            "PETS & DOGUE image failed to load:",
-            img.getAttribute("src")
-          );
-
-        },
-        {
-          once:true
-        }
-      );
+      if(
+        index > 0 &&
+        !image.hasAttribute("loading")
+      ){
+        image.loading = "lazy";
+      }
 
     });
 
