@@ -2,7 +2,7 @@
   "use strict";
 
   const LANGUAGE_KEY = "pets_dogue_language";
-  const CACHE_KEY = "pets_dogue_translation_cache_v16";
+  const CACHE_KEY = "pets_dogue_translation_cache_v17";
   const SOURCE_LANGUAGE = "en";
   const API_ENDPOINT = "/api/translate";
 
@@ -31,6 +31,14 @@
     { code: "ar", label: "العربية", short: "AR", dir: "rtl", speech: "ar-SA" },
     { code: "hi", label: "हिन्दी", short: "HI", dir: "ltr", speech: "hi-IN" }
   ];
+
+  const LANGUAGE_ALIASES = {
+    ua: "uk",
+    cz: "cs",
+    gr: "el",
+    se: "sv",
+    dk: "da"
+  };
 
   const STATUS_TEXT = {
     en: ["Translating...", "Translation is temporarily unavailable."],
@@ -88,6 +96,10 @@
     "DOGUE",
     "pets &",
     "Miso",
+    "Richie",
+    "Pi",
+    "Pablo",
+    "Jessica",
     "DOGUE Trust",
     "DOGUE Verified"
   ]);
@@ -104,16 +116,39 @@
   let observer = null;
   let observerTimer = null;
 
+  function normalizeLanguageCode(value) {
+    const raw =
+      String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace("_", "-")
+        .split("-")[0];
+
+    const normalized =
+      LANGUAGE_ALIASES[raw] || raw;
+
+    return LANGUAGES.some(function (language) {
+      return language.code === normalized;
+    })
+      ? normalized
+      : SOURCE_LANGUAGE;
+  }
+
   function getLanguage(code) {
+    const normalized =
+      normalizeLanguageCode(code);
+
     return LANGUAGES.find(function (language) {
-      return language.code === code;
+      return language.code === normalized;
     }) || LANGUAGES[0];
   }
 
   function readSavedLanguage() {
     try {
       const value =
-        localStorage.getItem(LANGUAGE_KEY);
+        normalizeLanguageCode(
+          localStorage.getItem(LANGUAGE_KEY) || ""
+        );
 
       return LANGUAGES.some(function (language) {
         return language.code === value;
@@ -129,7 +164,7 @@
     try {
       localStorage.setItem(
         LANGUAGE_KEY,
-        code
+        normalizeLanguageCode(code)
       );
     } catch (error) {
       console.warn(
@@ -698,9 +733,7 @@
     });
 
     const batches =
-      createBatches(missingTexts);
-
-    for (const batch of batches) {
+      createBatches(missingTexts);    for (const batch of batches) {
       const translations =
         await requestTranslations(
           batch,
@@ -1050,7 +1083,9 @@
 
   async function changeLanguage(code) {
     const language =
-      getLanguage(code);
+      getLanguage(
+        normalizeLanguageCode(code)
+      );
 
     requestVersion += 1;
     translationRunning = true;
@@ -1237,6 +1272,64 @@
       document.body
     );
   }
+
+  /*
+  ========================================================
+  MASTER SHELL LANGUAGE BRIDGE
+
+  pets-dogue-shell.js owns the visible language selector.
+  It broadcasts:
+      petsdogue:languagechange
+
+  translations.js must listen to that same event so that
+  the actual page/article content changes immediately.
+
+  This keeps:
+  - all 23 languages
+  - saved language between pages
+  - Arabic RTL
+  - translated title / aria-label / alt text
+  - existing translation cache
+  - existing TTS speech-language integration
+  ========================================================
+  */
+
+  window.addEventListener(
+    "petsdogue:languagechange",
+    function (event) {
+      const requestedLanguage =
+        normalizeLanguageCode(
+          event &&
+          event.detail &&
+          event.detail.language
+            ? event.detail.language
+            : readSavedLanguage()
+        );
+
+      if (
+        requestedLanguage ===
+        selectedLanguage
+      ) {
+        applyDocumentDirection();
+        syncLanguageSelectors();
+
+        if (
+          requestedLanguage !==
+          SOURCE_LANGUAGE
+        ) {
+          translatePage(
+            document.body
+          );
+        }
+
+        return;
+      }
+
+      changeLanguage(
+        requestedLanguage
+      );
+    }
+  );
 
   window.addEventListener(
     "pageshow",
