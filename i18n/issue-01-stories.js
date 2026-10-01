@@ -1,6 +1,6 @@
 /* =========================================================
    PETS & DOGUE — ISSUE 01 STORIES
-   MISO + PABLO + RICHIE & PI
+   MISO + PABLO + RICHIE & PI + JESSICA
    STATIC MULTILINGUAL SYSTEM — NO API
    ========================================================= */
 
@@ -1033,10 +1033,142 @@
         issueLink: "← Выпуск 01",
         home: "Главная"
       }
-    }
-  };
+    },
 
-  function normaliseLanguage(value) {
+    jessica: {
+      en: {
+        coverKicker: "PETS & DOGUE · ISSUE 01 · JESSICA",
+        coverMeet: "Meet",
+        coverBlue: "Soft soul.<br>Beautiful world. ♥",
+        coverText: "Jessica has a quiet way of making every place feel softer, warmer and a little more beautiful.",
+        backIssue: "← Back to Issue 01",
+
+        profileKicker: "The Jessica profile ♥",
+        profileTitle: "SOFT HEART.<br>STRONG CHARACTER.",
+        profileSub: "Elegant · observant · completely herself",
+
+        observerKicker: "Quietly watching ♥",
+        observerTitle: "THE LITTLE<br>OBSERVER",
+        observerText: "Jessica notices everything. A movement in the garden. A familiar sound. A new corner of the room. She likes to watch first, understand the situation and then decide whether it deserves her attention.",
+
+        homeKicker: "Her favourite place ♥",
+        homeTitle: "HOME IS<br>A FEELING",
+        homeText: "For Jessica, home is not simply a place. It is familiar voices, favourite corners, soft light and the freedom to choose exactly where she wants to be.",
+
+        galleryKicker: "Jessica moments ♥",
+        galleryTitle: "LITTLE<br>MOMENTS",
+
+        rulesKicker: "Jessica’s rules ♥",
+        rulesTitle: "HER WORLD.<br>HER RULES.",
+        rulesText: "Every animal has a personality of their own. Jessica knows what she likes, what she does not, when she wants company and when she prefers a little space.",
+
+        gardenKicker: "Outside ♥",
+        gardenTitle: "THE<br>GARDEN",
+        gardenText: "The garden is a world of tiny discoveries — changing light, moving leaves, new smells and something different to notice every day.",
+
+        ritualKicker: "The little rituals ♥",
+        ritualTitle: "EVERYDAY<br>MAGIC",
+        ritualText: "The smallest routines often become the most important ones. A favourite place. A familiar sound. A quiet moment. The little things that make a day feel like home.",
+
+        finalKicker: "Simply Jessica ♥",
+        finalTitle: "BEAUTIFUL.<br>JUST AS SHE IS.",
+        finalText: "There is no need to be loud to leave an impression. Sometimes a quiet presence says everything.",
+
+        signature: "With love,<br>Jessica ♥",
+        tagline: "One world. Every pet. ♥",
+        issueLink: "← Issue 01",
+        home: "Home"
+      },
+
+      uk: {
+        coverKicker: "PETS & DOGUE · ВИПУСК 01 · JESSICA",
+        coverMeet: "Знайомтеся:",
+        coverBlue: "Ніжна душа.<br>Прекрасний світ. ♥",
+        coverText: "Jessica вміє тихо робити кожне місце м’якшим, теплішим і трішки красивішим.",
+        backIssue: "← Назад до Випуску 01",
+
+        profileKicker: "Профіль Jessica ♥",
+        profileTitle: "НІЖНЕ СЕРЦЕ.<br>СИЛЬНИЙ ХАРАКТЕР.",
+        profileSub: "Елегантна · спостережлива · завжди собою",
+
+        observerKicker: "Тихо спостерігає ♥",
+        observerTitle: "МАЛЕНЬКА<br>СПОСТЕРІГАЧКА",
+        observerText: "Jessica помічає все. Рух у саду. Знайомий звук. Новий куточок кімнати. Спочатку вона любить поспостерігати, зрозуміти ситуацію, а потім вирішити, чи варта вона її уваги.",
+
+        homeKicker: "Її улюблене місце ♥",
+        homeTitle: "ДІМ — ЦЕ<br>ВІДЧУТТЯ",
+        homeText: "Для Jessica дім — це не просто місце. Це знайомі голоси, улюблені куточки, м’яке світло та свобода самій обирати, де саме їй хочеться бути.",
+
+        galleryKicker: "Моменти Jessica ♥",
+        galleryTitle: "МАЛЕНЬКІ<br>МОМЕНТИ",
+
+        rulesKicker: "Правила Jessica ♥",
+        rulesTitle: "ЇЇ СВІТ.<br>ЇЇ ПРАВИЛА.",
+        rulesText: "Кожна тварина має власний характер. Jessica знає, що їй подобається, а що ні, коли вона хоче компанії, а коли їй потрібен власний простір.",
+
+        gardenKicker: "Надворі ♥",
+        gardenTitle: "САД",
+        gardenText: "Сад — це світ маленьких відкриттів: мінливе світло, рух листя, нові запахи й щодня щось нове, що можна помітити.",
+
+        ritualKicker: "Маленькі ритуали ♥",
+        ritualTitle: "ЩОДЕННА<br>МАГІЯ",
+        ritualText: "Найменші звички часто стають найважливішими. Улюблене місце. Знайомий звук. Тиха мить. Саме ці дрібниці створюють відчуття дому.",
+
+        finalKicker: "Просто Jessica ♥",
+        finalTitle: "ПРЕКРАСНА.<br>ТАКА, ЯКА Є.",
+        finalText: "Не обов’язково бути гучною, щоб залишити враження. Іноді тиха присутність говорить про все.",
+
+        signature: "З любов’ю,<br>Jessica ♥",
+        tagline: "Один світ. Кожен улюбленець. ♥",
+        issueLink: "← Випуск 01",
+        home: "Головна"
+      },
+
+      ru: {
+        coverKicker: "PETS & DOGUE · ВЫПУСК 01 · JESSICA",
+        coverMeet: "Знакомьтесь:",
+        coverBlue: "Нежная душа.<br>Прекрасный мир. ♥",
+        coverText: "Jessica умеет тихо делать любое место мягче, теплее и немного красивее.",
+        backIssue: "← Назад к Выпуску 01",
+
+        profileKicker: "Профиль Jessica ♥",
+        profileTitle: "НЕЖНОЕ СЕРДЦЕ.<br>СИЛЬНЫЙ ХАРАКТЕР.",
+        profileSub: "Элегантная · наблюдательная · всегда остаётся собой",
+
+        observerKicker: "Тихо наблюдает ♥",
+        observerTitle: "МАЛЕНЬКАЯ<br>НАБЛЮДАТЕЛЬНИЦА",
+        observerText: "Jessica замечает всё. Движение в саду. Знакомый звук. Новый уголок комнаты. Сначала она любит понаблюдать, понять ситуацию, а потом решить, заслуживает ли она её внимания.",
+
+        homeKicker: "Её любимое место ♥",
+        homeTitle: "ДОМ — ЭТО<br>ОЩУЩЕНИЕ",
+        homeText: "Для Jessica дом — это не просто место. Это знакомые голоса, любимые уголки, мягкий свет и свобода самой выбирать, где именно ей хочется находиться.",
+
+        galleryKicker: "Моменты Jessica ♥",
+        galleryTitle: "МАЛЕНЬКИЕ<br>МОМЕНТЫ",
+
+        rulesKicker: "Правила Jessica ♥",
+        rulesTitle: "ЕЁ МИР.<br>ЕЁ ПРАВИЛА.",
+        rulesText: "У каждого животного свой характер. Jessica знает, что ей нравится, а что нет, когда ей хочется компании, а когда нужно немного личного пространства.",
+
+        gardenKicker: "На улице ♥",
+        gardenTitle: "САД",
+        gardenText: "Сад — это мир маленьких открытий: меняющийся свет, движение листьев, новые запахи и каждый день что-то новое, что можно заметить.",
+
+        ritualKicker: "Маленькие ритуалы ♥",
+        ritualTitle: "ЕЖЕДНЕВНАЯ<br>МАГИЯ",
+        ritualText: "Самые маленькие привычки часто становятся самыми важными. Любимое место. Знакомый звук. Тихая минута. Именно эти мелочи создают ощущение дома.",
+
+        finalKicker: "Просто Jessica ♥",
+        finalTitle: "ПРЕКРАСНА.<br>ТАКАЯ, КАКАЯ ЕСТЬ.",
+        finalText: "Не обязательно быть громкой, чтобы оставить впечатление. Иногда тихое присутствие говорит обо всём.",
+
+        signature: "С любовью,<br>Jessica ♥",
+        tagline: "Один мир. Каждый питомец. ♥",
+        issueLink: "← Выпуск 01",
+        home: "Главная"
+      }
+    }
+  };  function normaliseLanguage(value) {
     if (!value) return "en";
 
     let lang = String(value)
@@ -1066,6 +1198,7 @@
     if (document.getElementById("misoIssue")) return "miso";
     if (document.getElementById("pdPabloStory")) return "pablo";
     if (document.getElementById("pdRichiePiStory")) return "richiePi";
+    if (document.getElementById("pdJessicaStory")) return "jessica";
     return null;
   }
 
@@ -1088,7 +1221,9 @@
     }
 
     return english[key] || "";
-  }  function applyLanguage(requestedLanguage) {
+  }
+
+  function applyLanguage(requestedLanguage) {
     const story = getStory();
     const lang = normaliseLanguage(requestedLanguage);
 
