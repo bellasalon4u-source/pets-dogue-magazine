@@ -1040,14 +1040,42 @@
   ===================================================== */
 
   window.addEventListener("petsdogue:setlanguage", function (event) {
-    if (!event.detail || !event.detail.language) return;
-    applyLanguage(event.detail.language);
-  });
+  if (!event.detail || !event.detail.language) return;
 
-  window.addEventListener("storage", function (event) {
-    if (event.key !== STORE_KEY || !event.newValue) return;
-    applyLanguage(event.newValue);
-  });
+  const lang = normaliseLanguage(event.detail.language);
+
+  if (normaliseLanguage(document.documentElement.lang) !== lang) {
+    applyLanguage(lang);
+  }
+});
+
+window.addEventListener("petsdogue:languagechange", function (event) {
+  if (!event.detail || !event.detail.language) return;
+
+  const lang = normaliseLanguage(event.detail.language);
+
+  if (normaliseLanguage(document.documentElement.lang) !== lang) {
+    applyLanguage(lang);
+  }
+});
+
+window.addEventListener("storage", function (event) {
+  if (event.key !== STORE_KEY || !event.newValue) return;
+
+  const lang = normaliseLanguage(event.newValue);
+
+  if (normaliseLanguage(document.documentElement.lang) !== lang) {
+    applyLanguage(lang);
+  }
+});
+
+window.addEventListener("pageshow", function () {
+  const lang = getSavedLanguage();
+
+  if (normaliseLanguage(document.documentElement.lang) !== lang) {
+    applyLanguage(lang);
+  }
+});
 
   /* =====================================================
      PUBLIC API
