@@ -22,1462 +22,17 @@
   href="https://www.petsanddogue.com/issue-01-miso.html"
 >
 
-<script src="/pets-dogue-shell.js?v=20261002-miso-language-sync-01" defer></script>
+<script src="/translations.js?v=20261002-miso-final" defer></script>
+<script src="/pets-dogue-shell.js?v=20261002-miso-final" defer></script>
+<script src="/i18n/issue-01-stories.js?v=20261002-miso-final" defer></script>
+<script src="/i18n/issue-01-miso.js?v=20261002-miso-final" defer></script>
 
 <style>
-:root{
-  --black:#070707;
-  --white:#fff;
-  --paper:#fffaf0;
-  --cream:#fff6ed;
-  --gold:#d4a334;
-  --blue:#38d8f4;
-  --blue-soft:#aef5ff;
-  --pink:#ff68ad;
-  --pink-soft:#ffd5e7;
-  --yellow:#fff06a;
-  --lime:#baff3d;
-  --red:#f0194e;
-  --turquoise:#00cce8;
-  --serif:Georgia,"Times New Roman",serif;
-  --sans:Arial,Helvetica,sans-serif;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html,
-body{
-  width:100%;
-  margin:0;
-  padding:0;
-}
-
-body{
-  overflow-x:hidden;
-  background:#000;
-  color:#111;
-  font-family:var(--sans);
-}
-
-img{
-  display:block;
-  max-width:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font:inherit;
-}
-
-#misoIssue{
-  width:100%;
-  max-width:1180px;
-  margin:0 auto;
-  overflow:hidden;
-  background:var(--paper);
-}
-
-.chapter{
-  position:relative;
-  border-bottom:6px solid #000;
-}
-
-.kicker{
-  margin:0 0 8px;
-  font:900 11px/1.2 var(--sans);
-  letter-spacing:.17em;
-  text-transform:uppercase;
-}
-
-.heart{
-  color:var(--red);
-  text-shadow:0 0 10px rgba(255,31,91,.18);
-}
-
-.display{
-  margin:0;
-  font:700 clamp(40px,6.3vw,72px)/.89 var(--serif);
-  letter-spacing:-.045em;
-}
-
-/* =====================================================
-   COVER
-===================================================== */
-
-.cover{
-  display:grid;
-  grid-template-columns:61% 39%;
-  min-height:620px;
-  background:#070707;
-  color:#fff;
-}
-
-.cover-photo{
-  position:relative;
-  min-height:620px;
-  overflow:hidden;
-  background:#111;
-}
-
-.cover-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 42%;
-  filter:saturate(1.12) contrast(1.07) brightness(1.04);
-}
-
-.cover-copy{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:32px;
-}
-
-.cover-copy .kicker{
-  color:var(--gold);
-}
-
-.cover-copy h1{
-  margin:0;
-  font:500 clamp(44px,6.2vw,74px)/.86 var(--serif);
-  letter-spacing:-.045em;
-}
-
-.cover-blue{
-  margin:12px 0 15px;
-  color:var(--blue);
-  font:500 clamp(26px,3.5vw,41px)/.95 var(--serif);
-  text-shadow:0 0 16px rgba(56,216,244,.18);
-}
-
-.cover-copy p{
-  max-width:390px;
-  margin:0;
-  font:18px/1.38 var(--serif);
-}
-
-.issue-back{
-  align-self:flex-start;
-  margin-top:22px;
-  padding-bottom:5px;
-  border-bottom:1px solid var(--gold);
-  font:900 11px/1 var(--sans);
-  letter-spacing:.06em;
-  text-transform:uppercase;
-}
-
-/* =====================================================
-   HELLO
-===================================================== */
-
-.intro{
-  display:grid;
-  grid-template-columns:43% 57%;
-  background:var(--paper);
-}
-
-.intro-copy{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:32px 27px;
-}
-
-.intro-copy .kicker{
-  color:#96701f;
-}
-
-.intro-copy h2{
-  margin:0;
-  font:700 clamp(38px,5.7vw,65px)/.89 var(--serif);
-  letter-spacing:-.04em;
-}
-
-.intro-copy p{
-  max-width:340px;
-  margin:17px 0 0;
-  font:18px/1.42 var(--serif);
-}
-
-.intro-photo{
-  height:510px;
-  overflow:hidden;
-  background:#eee5d8;
-}
-
-.intro-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 43%;
-  filter:saturate(1.14) contrast(1.06) brightness(1.04);
-}
-
-/* =====================================================
-   PROFILE
-===================================================== */
-
-.profile{
-  padding:32px 24px 35px;
-  background:
-    linear-gradient(135deg,#baf7ff 0%,#80ebf7 55%,#b8fbff 100%);
-}
-
-.profile-head{
-  max-width:900px;
-  margin:0 auto 19px;
-}
-
-.profile-head .kicker{
-  color:#11576a;
-}
-
-.profile-layout{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:16px;
-  max-width:900px;
-  margin:0 auto;
-}
-
-.profile-photo{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:430px;
-  padding:10px;
-  overflow:hidden;
-  border:6px solid #111;
-  background:#eee8dc;
-  box-shadow:8px 9px 0 rgba(0,0,0,.13);
-}
-
-.profile-photo img{
-  width:100%;
-  height:410px;
-  object-fit:contain;
-  object-position:center;
-  filter:saturate(1.12) contrast(1.05);
-}
-
-.profile-card{
-  padding:22px 20px;
-  border:3px solid #111;
-  background:#fff;
-  box-shadow:8px 9px 0 rgba(0,0,0,.12);
-}
-
-.profile-name{
-  margin:0 0 5px;
-  font:700 44px/.92 var(--serif);
-}
-
-.profile-sub{
-  margin:0 0 15px;
-  font:700 15px/1.32 var(--serif);
-}
-
-.profile-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  border-top:1px solid #bbb;
-}
-
-.profile-fact{
-  padding:9px 8px 9px 0;
-  border-bottom:1px solid #ccc;
-  font:14px/1.3 var(--serif);
-}
-
-.profile-fact:nth-child(even){
-  padding-left:10px;
-  border-left:1px solid #ccc;
-}
-
-.profile-fact b{
-  display:block;
-  margin-bottom:2px;
-  font:900 9px/1.2 var(--sans);
-  letter-spacing:.09em;
-  text-transform:uppercase;
-}
-
-.match{
-  margin-top:16px;
-  font:italic 22px/1.12 var(--serif);
-}
-
-/* =====================================================
-   MY LITTLE WORLD — CAROUSEL
-===================================================== */
-
-.moments{
-  padding:31px 0 28px;
-  background:
-    linear-gradient(135deg,#fff7ef 0%,#fff0f7 100%);
-}
-
-.section-head{
-  max-width:1000px;
-  margin:0 auto 20px;
-  padding:0 24px;
-}
-
-.section-head .kicker{
-  color:#906b22;
-}
-
-.moment-carousel{
-  position:relative;
-  width:100%;
-  overflow:hidden;
-}
-
-.moment-track{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-  padding:0 max(18px,calc((100% - 900px)/2)) 8px;
-}
-
-.moment-track::-webkit-scrollbar{
-  display:none;
-}
-
-.moment{
-  position:relative;
-  flex:0 0 min(72vw,430px);
-  height:470px;
-  margin:0;
-  overflow:hidden;
-  scroll-snap-align:center;
-  background:#111;
-  border:4px solid #111;
-  box-shadow:0 10px 24px rgba(0,0,0,.12);
-}
-
-.moment img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:saturate(1.18) contrast(1.07) brightness(1.04);
-}
-
-.moment-travel img{
-  object-position:center 38%;
-  transform:scale(1.08);
-}
-
-.moment-toys img{
-  object-fit:cover;
-  object-position:32% 38%;
-  transform:scale(.94);
-}
-
-.moment-fashion{
-  border-color:#ff62ae;
-}
-
-.moment-fashion img{
-  object-position:center 42%;
-}
-
-.moment-london{
-  border-color:#35dff4;
-}
-
-.moment-london img{
-  object-position:center center;
-}
-
-.moment-friends{
-  border-color:#fff05a;
-}
-
-.moment-friends img{
-  object-position:center 42%;
-}
-
-.moment::after{
-  content:"";
-  position:absolute;
-  inset:48% 0 0;
-  pointer-events:none;
-  background:linear-gradient(
-    transparent,
-    rgba(0,0,0,.9)
-  );
-}
-
-.moment figcaption{
-  position:absolute;
-  z-index:2;
-  left:18px;
-  right:18px;
-  bottom:17px;
-  color:#fff;
-  font:italic 18px/1.2 var(--serif);
-}
-
-.moment figcaption strong{
-  display:block;
-  margin-bottom:5px;
-  font:700 29px/1 var(--serif);
-}
-
-.moment-travel strong{
-  color:#42e9ff;
-}
-
-.moment-toys strong{
-  color:#fff05a;
-}
-
-.moment-fashion strong{
-  color:#ff8fc2;
-}
-
-.moment-london strong{
-  color:#55e7ff;
-}
-
-.moment-friends strong{
-  color:#fff46d;
-}
-
-.carousel-controls{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:17px;
-  margin-top:14px;
-}
-
-.carousel-arrow{
-  width:54px;
-  height:54px;
-  padding:0;
-  border:1.5px solid #111;
-  border-radius:50%;
-  background:#fffaf0;
-  cursor:pointer;
-  font-size:25px;
-  line-height:1;
-}
-
-.carousel-dots{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.carousel-dot{
-  width:8px;
-  height:8px;
-  padding:0;
-  border:0;
-  border-radius:999px;
-  background:#aaa;
-}
-
-.carousel-dot.active{
-  width:28px;
-  background:#111;
-}
-
-/* =====================================================
-   DIARY
-===================================================== */
-
-.story{
-  background:#fff;
-}
-
-.story-title{
-  padding:29px 26px 21px;
-  background:
-    linear-gradient(120deg,#2bd6f1,#65e8f7);
-}
-
-.story-title .kicker{
-  color:#135769;
-}
-
-.diary{
-  max-width:720px;
-  margin:0 auto;
-  padding:27px 27px 29px;
-  font:17px/1.5 var(--serif);
-}
-
-.diary p{
-  margin:0 0 11px;
-}
-
-.diary-lead{
-  font-size:21px;
-  line-height:1.38;
-}
-
-.diary-note{
-  margin:19px 0!important;
-  padding:14px 17px;
-  border-left:4px solid var(--gold);
-  background:#fff4d7;
-  font-size:18px;
-  font-style:italic;
-  line-height:1.42;
-}
-
-.diary-small{
-  font-style:italic;
-}
-
-.pull{
-  max-width:720px;
-  margin:0 auto;
-  padding:0 27px 29px;
-  font:700 clamp(30px,4.7vw,47px)/.98 var(--serif);
-  letter-spacing:-.03em;
-}
-
-/* =====================================================
-   SEA
-===================================================== */
-
-.sea{
-  display:grid;
-  grid-template-columns:70% 30%;
-  background:#070707;
-  color:#fff;
-}
-
-.sea-photo{
-  height:470px;
-  overflow:hidden;
-  background:#101010;
-}
-
-.sea-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 52%;
-  filter:saturate(1.17) contrast(1.08) brightness(1.04);
-}
-
-.sea-copy{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:25px 20px;
-}
-
-.sea-copy .kicker{
-  color:var(--gold);
-}
-
-.sea-copy h2{
-  margin:0;
-  font:500 44px/.92 var(--serif);
-}
-
-.sea-copy p{
-  margin:13px 0 0;
-  color:#44def6;
-  font:italic 19px/1.22 var(--serif);
-}
-
-/* =====================================================
-   LONDON
-===================================================== */
-
-.london{
-  background:#fff7e9;
-}
-
-.london-head{
-  position:relative;
-  z-index:3;
-  padding:30px 34px 22px;
-  background:#fff7e9;
-}
-
-.london-head .kicker{
-  color:#936c1f;
-}
-
-.london-head .display{
-  font-weight:800;
-  letter-spacing:-.055em;
-}
-
-.london-feature{
-  position:relative;
-  margin:0 18px 25px;
-  height:560px;
-  overflow:hidden;
-  background:#111;
-  border-bottom:8px solid #39dff5;
-}
-
-.london-feature img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 48%;
-  filter:saturate(1.16) contrast(1.06) brightness(1.03);
-}
-
-.london-feature::after{
-  content:"";
-  position:absolute;
-  inset:54% 0 0;
-  pointer-events:none;
-  background:
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0,0,0,.12) 25%,
-      rgba(0,0,0,.74) 100%
-    );
-}
-
-.london-feature-copy{
-  position:absolute;
-  z-index:2;
-  left:28px;
-  right:42%;
-  bottom:24px;
-  color:#fff;
-  text-shadow:0 2px 8px rgba(0,0,0,.7);
-}
-
-.london-feature-copy strong{
-  display:block;
-  color:#3fe8ff;
-  font:800 clamp(30px,5vw,55px)/.96 var(--serif);
-  letter-spacing:-.025em;
-}
-
-.london-feature-copy em{
-  display:block;
-  margin-top:8px;
-  font:italic 20px/1.2 var(--serif);
-}
-
-.london-note{
-  max-width:720px;
-  margin:0 auto;
-  padding:23px 26px 31px;
-  background:#fff;
-  font:17px/1.48 var(--serif);
-}
-
-.london-note p{
-  margin:0 0 10px;
-}
-
-.london-note .scribble{
-  margin:15px 0;
-  color:#22798d;
-  font:italic 27px/1.38 var(--serif);
-}/* =====================================================
-   FRIENDS
-===================================================== */
-
-.friends{
-  position:relative;
-  min-height:520px;
-  overflow:hidden;
-  background:#111;
-  color:#fff;
-}
-
-.friends-bg{
-  position:absolute;
-  inset:0;
-}
-
-.friends-bg img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 42%;
-  filter:saturate(1.14) contrast(1.06);
-}
-
-.friends-shade{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,.90) 0%,
-      rgba(0,0,0,.68) 34%,
-      rgba(0,0,0,.22) 58%,
-      rgba(0,0,0,.04) 78%,
-      rgba(0,0,0,.08) 100%
-    );
-}
-
-.friends-overlay{
-  position:relative;
-  z-index:2;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  width:48%;
-  min-height:520px;
-  padding:36px 30px;
-}
-
-.friends-overlay .kicker{
-  color:#ff82b8;
-}
-
-.friends-overlay h2{
-  margin:0 0 20px;
-  font:700 clamp(43px,6vw,70px)/.88 var(--serif);
-  letter-spacing:-.04em;
-}
-
-.friends-overlay p{
-  max-width:380px;
-  margin:0 0 11px;
-  font:17px/1.42 var(--serif);
-}
-
-/* =====================================================
-   EVERYONE
-===================================================== */
-
-.everyone-head{
-  padding:29px 26px 20px;
-  background:linear-gradient(100deg,#aaff24,#d7ff62);
-}
-
-.everyone-head .kicker{
-  color:#42620e;
-}
-
-.everyone-body{
-  max-width:720px;
-  margin:0 auto;
-  padding:25px 27px 31px;
-  background:#fff;
-}
-
-.animal-line{
-  margin:0 0 15px;
-  font:italic 18px/1.45 var(--serif);
-}
-
-.everyone-copy{
-  font:17px/1.48 var(--serif);
-}
-
-.everyone-copy p{
-  margin:0 0 10px;
-}
-
-.everyone-big{
-  margin:17px 0!important;
-  font:700 29px/1.02 var(--serif);
-}
-
-/* =====================================================
-   ASK MISO
-===================================================== */
-
-.ask-section{
-  overflow:visible;
-}
-
-.ask-head{
-  position:relative;
-  z-index:2;
-  padding:29px 26px 20px;
-  background:linear-gradient(110deg,#ffe94d,#fff681);
-}
-
-.ask-head .kicker{
-  color:#735c00;
-}
-
-.ask-body{
-  position:relative;
-  display:grid;
-  grid-template-columns:36% 64%;
-  max-width:850px;
-  min-height:410px;
-  margin:0 auto;
-  padding:24px 26px 100px;
-  overflow:visible;
-  background:#fff;
-}
-
-.ask-mark{
-  padding:3px 22px 3px 0;
-  border-right:2px solid #111;
-}
-
-.ask-mark strong{
-  display:block;
-  font:700 32px/.98 var(--serif);
-}
-
-.ask-mark em{
-  display:block;
-  margin-top:10px;
-  font:italic 15px/1.3 var(--serif);
-}
-
-.ask-copy{
-  padding-left:24px;
-  font:17px/1.44 var(--serif);
-}
-
-.ask-copy p{
-  margin:0 0 9px;
-}
-
-.ask-copy .ask-line{
-  color:#087f91;
-  font-weight:700;
-  font-style:italic;
-}
-
-.ask-miso-bubble{
-  position:absolute;
-  z-index:6;
-  left:24px;
-  bottom:16px;
-  width:118px;
-  height:118px;
-  padding:5px;
-  overflow:hidden;
-  border:5px solid #111;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:0 8px 20px rgba(0,0,0,.18);
-}
-
-.ask-miso-bubble img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  border-radius:50%;
-}
-
-.ask-label{
-  position:absolute;
-  z-index:6;
-  left:150px;
-  bottom:79px;
-  color:#ff3d8e;
-  font:700 italic 23px/1 var(--serif);
-  transform:rotate(-4deg);
-}
-
-.ask-marker{
-  position:absolute;
-  z-index:5;
-  left:24px;
-  top:-105px;
-  width:245px;
-  height:390px;
-  overflow:visible;
-  pointer-events:none;
-}
-
-.ask-marker path{
-  fill:none;
-  stroke:#ff3d8e;
-  stroke-width:7;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-.ask-marker .marker-soft{
-  opacity:.24;
-  stroke-width:11;
-}
-
-.ask-marker .marker-main{
-  opacity:1;
-}
-
-.ask-marker polygon{
-  fill:#ff3d8e;
-}
-
-/* =====================================================
-   FINAL
-===================================================== */
-
-.final{
-  display:block;
-  background:#070707;
-  color:#fff;
-}
-
-.final-photo{
-  position:relative;
-  width:100%;
-  height:auto;
-  min-height:0;
-  overflow:hidden;
-  background:#101010;
-}
-
-.final-photo img{
-  display:block;
-  width:100%;
-  height:auto;
-  min-height:0;
-  object-fit:contain;
-  object-position:center;
-  filter:saturate(1.13) contrast(1.06) brightness(1.03);
-}
-
-.final-copy{
-  position:relative;
-  max-width:820px;
-  margin:0 auto;
-  padding:38px 30px 42px;
-  background:#070707;
-  color:#fff;
-}
-
-.final-copy .kicker{
-  margin-bottom:12px;
-  color:var(--gold);
-}
-
-.final-copy h2{
-  margin:0;
-  font:500 clamp(48px,7vw,82px)/.86 var(--serif);
-  letter-spacing:-.045em;
-}
-
-.final-blue{
-  margin:17px 0 22px;
-  color:#42dff6;
-  font:500 clamp(26px,4vw,38px)/.98 var(--serif);
-}
-
-.final-copy p{
-  max-width:620px;
-  margin:0 0 11px;
-  font:17px/1.46 var(--serif);
-}
-
-.signature{
-  max-width:620px;
-  margin-top:22px;
-  padding-top:17px;
-  border-top:1px solid var(--gold);
-  font:italic 31px/1.02 var(--serif);
-}
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.issue-footer{
-  padding:31px 20px 34px;
-  background:#070707;
-  color:#fff;
-  text-align:center;
-}
-
-.issue-footer-brand{
-  font:700 clamp(30px,4.8vw,43px)/1 var(--serif);
-  letter-spacing:.05em;
-}
-
-.issue-footer-tag{
-  margin-top:8px;
-  font:italic 17px/1.2 var(--serif);
-}
-
-.footer-links{
-  display:flex;
-  justify-content:center;
-  gap:27px;
-  margin-top:20px;
-}
-
-.footer-links a{
-  padding-bottom:4px;
-  border-bottom:1px solid var(--gold);
-  font:900 10px/1 var(--sans);
-  letter-spacing:.06em;
-  text-transform:uppercase;
-}
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:720px){
-
-  .kicker{
-    margin-bottom:6px;
-    font-size:9px;
-  }
-
-  .display{
-    font-size:36px;
-    line-height:.91;
-  }
-
-  .cover{
-    grid-template-columns:61% 39%;
-    min-height:410px;
-  }
-
-  .cover-photo{
-    min-height:410px;
-  }
-
-  .cover-copy{
-    padding:18px 12px;
-  }
-
-  .cover-copy h1{
-    font-size:31px;
-  }
-
-  .cover-blue{
-    margin:8px 0 10px;
-    font-size:19px;
-  }
-
-  .cover-copy p{
-    font-size:10.5px;
-    line-height:1.34;
-  }
-
-  .issue-back{
-    margin-top:13px;
-    font-size:7px;
-  }
-
-  .intro{
-    grid-template-columns:43% 57%;
-  }
-
-  .intro-copy{
-    padding:19px 14px;
-  }
-
-  .intro-copy h2{
-    font-size:30px;
-  }
-
-  .intro-copy p{
-    margin-top:10px;
-    font-size:11.5px;
-  }
-
-  .intro-photo{
-    height:350px;
-  }
-
-  .profile{
-    padding:23px 12px 27px;
-  }
-
-  .profile-layout{
-    grid-template-columns:46% 54%;
-    gap:8px;
-  }
-
-  .profile-photo{
-    min-height:330px;
-    padding:5px;
-    border-width:4px;
-  }
-
-  .profile-photo img{
-    height:320px;
-  }
-
-  .profile-card{
-    padding:12px 10px;
-    border-width:2px;
-  }
-
-  .profile-name{
-    font-size:26px;
-  }
-
-  .profile-sub{
-    margin-bottom:8px;
-    font-size:9.5px;
-  }
-
-  .profile-grid{
-    grid-template-columns:1fr;
-  }
-
-  .profile-fact,
-  .profile-fact:nth-child(even){
-    padding:5px 0;
-    border-left:0;
-    font-size:9.5px;
-  }
-
-  .profile-fact b{
-    font-size:7px;
-  }
-
-  .match{
-    margin-top:8px;
-    font-size:15px;
-  }
-
-  .moments{
-    padding:24px 0 20px;
-  }
-
-  .section-head{
-    padding:0 16px;
-  }
-
-  .moment-track{
-    gap:8px;
-    padding:0 16px 7px;
-  }
-
-  .moment{
-    flex-basis:76vw;
-    height:390px;
-  }
-
-  .moment figcaption{
-    left:14px;
-    right:12px;
-    bottom:13px;
-    font-size:15px;
-  }
-
-  .moment figcaption strong{
-    font-size:25px;
-  }
-
-  .carousel-arrow{
-    width:47px;
-    height:47px;
-  }
-
-  .story-title,
-  .london-head,
-  .everyone-head,
-  .ask-head{
-    padding:21px 18px 15px;
-  }
-
-  .diary{
-    padding:20px;
-    font-size:14.5px;
-    line-height:1.46;
-  }
-
-  .diary-lead{
-    font-size:17px;
-  }
-
-  .diary-note{
-    margin:14px 0!important;
-    padding:11px 12px;
-    font-size:15px;
-  }
-
-  .pull{
-    padding:0 20px 23px;
-    font-size:27px;
-  }
-
-  .sea{
-    grid-template-columns:70% 30%;
-  }
-
-  .sea-photo{
-    height:280px;
-  }
-
-  .sea-copy{
-    padding:15px 9px;
-  }
-
-  .sea-copy h2{
-    font-size:26px;
-  }
-
-  .sea-copy p{
-    font-size:11.5px;
-  }
-
-  .london-head .display{
-    font-size:38px;
-    line-height:.88;
-  }
-
-  .london-feature{
-    height:350px;
-    margin:0 13px 18px;
-  }
-
-  .london-feature img{
-    object-position:center 48%;
-  }
-
-  .london-feature-copy{
-    left:18px;
-    right:38%;
-    bottom:17px;
-  }
-
-  .london-feature-copy strong{
-    font-size:29px;
-    line-height:.96;
-  }
-
-  .london-feature-copy em{
-    margin-top:6px;
-    font-size:15px;
-  }
-
-  .london-note{
-    padding:18px 20px 22px;
-    font-size:14.5px;
-  }
-
-  .london-note .scribble{
-    font-size:22px;
-  }
-
-  .friends{
-    min-height:410px;
-  }
-
-  .friends-bg img{
-    object-position:58% center;
-  }
-
-  .friends-overlay{
-    width:52%;
-    min-height:410px;
-    padding:22px 15px;
-  }
-
-  .friends-overlay h2{
-    margin-bottom:13px;
-    font-size:34px;
-  }
-
-  .friends-overlay p{
-    margin-bottom:7px;
-    font-size:11.5px;
-    line-height:1.36;
-  }
-
-  .everyone-body{
-    padding:19px 20px 22px;
-  }
-
-  .animal-line{
-    font-size:14px;
-  }
-
-  .everyone-copy{
-    font-size:14.5px;
-  }
-
-  .everyone-big{
-    font-size:23px;
-  }
-
-  .ask-body{
-    grid-template-columns:37% 63%;
-    min-height:410px;
-    padding:18px 18px 105px;
-  }
-
-  .ask-mark{
-    padding-right:13px;
-  }
-
-  .ask-mark strong{
-    font-size:23px;
-  }
-
-  .ask-mark em{
-    font-size:10.5px;
-  }
-
-  .ask-copy{
-    padding-left:14px;
-    font-size:12.5px;
-  }
-
-  .ask-miso-bubble{
-    left:18px;
-    bottom:14px;
-    width:94px;
-    height:94px;
-    border-width:4px;
-  }
-
-  .ask-label{
-    left:118px;
-    bottom:68px;
-    font-size:18px;
-  }
-
-  .ask-marker{
-    left:7px;
-    top:-88px;
-    width:205px;
-    height:330px;
-  }
-
-  .ask-marker path{
-    stroke-width:6;
-  }
-
-  .ask-marker .marker-soft{
-    stroke-width:10;
-  }
-
-  .final{
-    display:block;
-  }
-
-  .final-photo{
-    width:100%;
-    height:auto;
-    min-height:0;
-  }
-
-  .final-photo img{
-    width:100%;
-    height:auto;
-    min-height:0;
-    object-fit:contain;
-    object-position:center;
-  }
-
-  .final-copy{
-    max-width:none;
-    padding:27px 22px 31px;
-  }
-
-  .final-copy .kicker{
-    margin-bottom:9px;
-  }
-
-  .final-copy h2{
-    font-size:45px;
-    line-height:.87;
-  }
-
-  .final-blue{
-    margin:13px 0 17px;
-    font-size:25px;
-    line-height:.98;
-  }
-
-  .final-copy p{
-    max-width:100%;
-    margin-bottom:9px;
-    font-size:14px;
-    line-height:1.43;
-  }
-
-  .signature{
-    max-width:100%;
-    margin-top:17px;
-    padding-top:13px;
-    font-size:27px;
-  }
-}
-
-@media(max-width:390px){
-
-  .cover,
-  .cover-photo{
-    min-height:390px;
-  }
-
-  .cover-copy h1{
-    font-size:29px;
-  }
-
-  .profile-name{
-    font-size:23px;
-  }
-
-  .moment{
-    flex-basis:79vw;
-    height:365px;
-  }
-
-  .london-feature{
-    height:330px;
-  }
-
-  .london-feature-copy{
-    right:34%;
-  }
-
-  .london-feature-copy strong{
-    font-size:27px;
-  }
-}
-
-/* =====================================================
-   RTL
-===================================================== */
-
-html[dir="rtl"] #misoIssue{
-  text-align:right;
-}
-
-html[dir="rtl"] .cover,
-html[dir="rtl"] .intro,
-html[dir="rtl"] .profile-layout,
-html[dir="rtl"] .ask-body,
-html[dir="rtl"] .final{
-  direction:rtl;
-}
-
-html[dir="rtl"] .ask-mark{
-  padding-right:0;
-  padding-left:22px;
-  border-right:0;
-  border-left:2px solid #111;
-}
-
-html[dir="rtl"] .ask-copy{
-  padding-left:0;
-  padding-right:24px;
-}
-
+/*
+ВАЖНО:
+ЗДЕСЬ ОСТАВЬ ВЕСЬ ТВОЙ СУЩЕСТВУЮЩИЙ <style>
+БЕЗ ЕДИНОГО ИЗМЕНЕНИЯ.
+*/
 </style>
 </head>
 
@@ -1489,12 +44,14 @@ html[dir="rtl"] .ask-copy{
 <section class="chapter cover">
 
   <div class="cover-photo">
+
     <img
       src="/miso-cover-star-retouched.png?v=20260929"
       alt="Miso Cute wearing her pink dress and bow"
       fetchpriority="high"
       decoding="async"
     >
+
   </div>
 
   <div class="cover-copy">
@@ -1509,24 +66,26 @@ html[dir="rtl"] .ask-copy{
     </h1>
 
     <div class="cover-blue" data-i18n="coverBlue">
-      Little paws.<br>Big world. ✨
+      Little paws.<br>
+      Big world. ✨
     </div>
 
     <p data-i18n="coverText">
-      A tiny blonde Pomeranian from London, with a curious nose and a very big world to discover.
+      A tiny blonde Pomeranian from London,
+      with a curious nose and a very big world to discover.
     </p>
 
     <a
       class="issue-back"
       href="/issue-01.html"
-      data-i18n="backIssue"
-      data-i18n-aria="backIssue"
       aria-label="Back to Issue 01"
+      data-i18n="backIssue"
     >
       ← Back to Issue 01
     </a>
 
   </div>
+
 </section>
 
 <!-- HELLO -->
@@ -1544,18 +103,22 @@ html[dir="rtl"] .ask-copy{
     </h2>
 
     <p data-i18n="helloText">
-      Tiny, fluffy, blonde and living in London. I love beautiful places, long walks, fashion and meeting new friends.
+      Tiny, fluffy, blonde and living in London.
+      I love beautiful places, long walks,
+      fashion and meeting new friends.
     </p>
 
   </div>
 
   <div class="intro-photo">
+
     <img
       src="/miso-06.jpg?v=20260929-final"
       alt="Miso Cute"
       loading="lazy"
       decoding="async"
     >
+
   </div>
 
 </section>
@@ -1570,7 +133,8 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 class="display" data-i18n="profileTitle">
-      LITTLE DOG.<br>BIG PERSONALITY.
+      LITTLE DOG.<br>
+      BIG PERSONALITY.
     </h2>
 
   </div>
@@ -1578,12 +142,14 @@ html[dir="rtl"] .ask-copy{
   <div class="profile-layout">
 
     <div class="profile-photo">
+
       <img
         src="/miso-03.jpg"
         alt="Miso Cute profile portrait"
         loading="lazy"
         decoding="async"
       >
+
     </div>
 
     <div class="profile-card">
@@ -1643,14 +209,16 @@ html[dir="rtl"] .ask-copy{
 
       <div class="match">
         <span data-i18n="swipe">Swipe right?</span>
-        <strong data-i18n="match">It’s a match! ♥ ✨</strong>
+        <strong data-i18n="match">
+          It’s a match! ♥ ✨
+        </strong>
       </div>
 
     </div>
-  </div>
-</section>
 
-<!-- MY LITTLE WORLD -->
+  </div>
+
+</section><!-- MY LITTLE WORLD -->
 <section class="chapter moments">
 
   <div class="section-head">
@@ -1660,7 +228,8 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 class="display" data-i18n="world">
-      MY LITTLE<br>WORLD
+      MY LITTLE<br>
+      WORLD
     </h2>
 
   </div>
@@ -1670,7 +239,12 @@ html[dir="rtl"] .ask-copy{
     <div class="moment-track" id="misoTrack">
 
       <figure class="moment moment-travel">
-        <img src="/miso-04.jpg" alt="Miso travelling" loading="lazy" decoding="async">
+        <img
+          src="/miso-04.jpg"
+          alt="Miso travelling"
+          loading="lazy"
+          decoding="async"
+        >
         <figcaption>
           <strong data-i18n="travel">Travel ✈️✨</strong>
           <span data-i18n="travelText">Little paws. New places.</span>
@@ -1678,7 +252,12 @@ html[dir="rtl"] .ask-copy{
       </figure>
 
       <figure class="moment moment-toys">
-        <img src="/miso-20.jpg" alt="Miso with her favourite toy" loading="lazy" decoding="async">
+        <img
+          src="/miso-20.jpg"
+          alt="Miso with her favourite toy"
+          loading="lazy"
+          decoding="async"
+        >
         <figcaption>
           <strong data-i18n="playtime">Playtime 🧸💕</strong>
           <span data-i18n="playtimeText">My favourite kind of serious business.</span>
@@ -1686,7 +265,12 @@ html[dir="rtl"] .ask-copy{
       </figure>
 
       <figure class="moment moment-fashion">
-        <img src="/miso-09.jpg" alt="Miso wearing her pink dress" loading="lazy" decoding="async">
+        <img
+          src="/miso-09.jpg"
+          alt="Miso wearing her pink dress"
+          loading="lazy"
+          decoding="async"
+        >
         <figcaption>
           <strong data-i18n="fashion">Fashion 👗💕</strong>
           <span data-i18n="fashionText">A little pink. A lot of Miso.</span>
@@ -1694,7 +278,12 @@ html[dir="rtl"] .ask-copy{
       </figure>
 
       <figure class="moment moment-london">
-        <img src="/miso-london-big-ben.jpg?v=20260929" alt="Miso in London near Big Ben" loading="lazy" decoding="async">
+        <img
+          src="/miso-london-big-ben.jpg?v=20260929"
+          alt="Miso in London near Big Ben"
+          loading="lazy"
+          decoding="async"
+        >
         <figcaption>
           <strong data-i18n="london">London 🇬🇧💙</strong>
           <span data-i18n="londonText">My city. My little adventures.</span>
@@ -1702,7 +291,12 @@ html[dir="rtl"] .ask-copy{
       </figure>
 
       <figure class="moment moment-friends">
-        <img src="/miso-with-friend.jpg?v=20260929" alt="Miso spending time with a friend" loading="lazy" decoding="async">
+        <img
+          src="/miso-with-friend.jpg?v=20260929"
+          alt="Miso spending time with a friend"
+          loading="lazy"
+          decoding="async"
+        >
         <figcaption>
           <strong data-i18n="friends">Friends 💕🐾</strong>
           <span data-i18n="friendsText">Adventures are better together.</span>
@@ -1713,15 +307,37 @@ html[dir="rtl"] .ask-copy{
 
     <div class="carousel-controls">
 
-      <button class="carousel-arrow" id="misoPrev" type="button" aria-label="Previous Miso photo">←</button>
+      <button
+        class="carousel-arrow"
+        id="misoPrev"
+        type="button"
+        aria-label="Previous Miso photo"
+      >
+        ←
+      </button>
 
-      <div class="carousel-dots" id="misoDots" aria-label="Miso carousel pages"></div>
+      <div
+        class="carousel-dots"
+        id="misoDots"
+        aria-label="Miso carousel pages"
+      ></div>
 
-      <button class="carousel-arrow" id="misoNext" type="button" aria-label="Next Miso photo">→</button>
+      <button
+        class="carousel-arrow"
+        id="misoNext"
+        type="button"
+        aria-label="Next Miso photo"
+      >
+        →
+      </button>
 
     </div>
+
   </div>
-</section><!-- DIARY -->
+
+</section>
+
+<!-- DIARY -->
 <section class="chapter story">
 
   <div class="story-title">
@@ -1731,7 +347,8 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 class="display" data-i18n="diaryTitle">
-      ONE LITTLE DOG.<br>A VERY BIG IDEA. ✨
+      ONE LITTLE DOG.<br>
+      A VERY BIG IDEA. ✨
     </h2>
 
   </div>
@@ -1772,12 +389,11 @@ html[dir="rtl"] .ask-copy{
   </article>
 
   <div class="pull" data-i18n="pull">
-    One little dog.<br>One very big world. 🌍✨
+    One little dog.<br>
+    One very big world. 🌍✨
   </div>
 
-</section>
-
-<!-- SEA -->
+</section><!-- SEA -->
 <section class="chapter sea">
 
   <div class="sea-photo">
@@ -1796,11 +412,14 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 data-i18n="seaTitle">
-      The<br>sea 🌊
+      The<br>
+      sea 🌊
     </h2>
 
     <p data-i18n="seaText">
-      New smells.<br>New sounds.<br>Big world. 💙
+      New smells.<br>
+      New sounds.<br>
+      Big world. 💙
     </p>
 
   </div>
@@ -1817,7 +436,8 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 class="display" data-i18n="londonTitle">
-      MY CITY —<br>LONDON
+      MY CITY —<br>
+      LONDON
     </h2>
 
   </div>
@@ -1895,7 +515,8 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 data-i18n="friendTitle">
-      IT’S A<br>MATCH! 💕
+      IT’S A<br>
+      MATCH! 💕
     </h2>
 
     <p data-i18n="friend1">
@@ -1920,9 +541,7 @@ html[dir="rtl"] .ask-copy{
 
   </div>
 
-</section>
-
-<!-- EVERYONE -->
+</section><!-- EVERYONE -->
 <section class="chapter">
 
   <div class="everyone-head">
@@ -1932,7 +551,8 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 class="display" data-i18n="everyoneTitle">
-      THERE IS ROOM<br>FOR EVERYONE.
+      THERE IS ROOM<br>
+      FOR EVERYONE.
     </h2>
 
   </div>
@@ -1989,7 +609,8 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 class="display" data-i18n="askTitle">
-      AND IF YOU<br>NEED MY HELP...
+      AND IF YOU<br>
+      NEED MY HELP...
     </h2>
 
   </div>
@@ -2121,11 +742,13 @@ html[dir="rtl"] .ask-copy{
     </div>
 
     <h2 data-i18n="finalTitle">
-      SEE YOU<br>OUT THERE.
+      SEE YOU<br>
+      OUT THERE.
     </h2>
 
     <div class="final-blue" data-i18n="finalBlue">
-      One world.<br>Every pet. 🌍
+      One world.<br>
+      Every pet. 🌍
     </div>
 
     <p data-i18n="final1">
@@ -2193,9 +816,7 @@ html[dir="rtl"] .ask-copy{
 
 </footer>
 
-</main>
-
-<script>
+</main><script>
 (function(){
   "use strict";
 
@@ -2335,15 +956,11 @@ html[dir="rtl"] .ask-copy{
           card.offsetWidth / 2;
 
         const distance =
-          Math.abs(
-            center - cardCenter
-          );
+          Math.abs(center - cardCenter);
 
         if(distance < smallestDistance){
-
           smallestDistance = distance;
           activeIndex = index;
-
         }
 
       }
@@ -2376,10 +993,8 @@ html[dir="rtl"] .ask-copy{
 
       requestAnimationFrame(
         function(){
-
           updateDots();
           ticking = false;
-
         }
       );
 
@@ -2391,8 +1006,6 @@ html[dir="rtl"] .ask-copy{
 
 })();
 </script>
-
-<script src="/i18n/issue-01-miso.js?v=20261002-miso-final-01"></script>
 
 </body>
 </html>
