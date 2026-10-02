@@ -395,7 +395,9 @@
       tagline: "Один мир. Каждый питомец. ♥",
       issueLink: "← Выпуск 01",
       home: "Главная"
-    },    /* =====================================================
+    },
+
+    /* =====================================================
        FRENCH
     ===================================================== */
 
@@ -597,8 +599,7 @@
 
       friendKicker: "Hallo, neuer Freund ♥ ✨",
       friendTitle: "IT’S A<br>MATCH! 💕",
-      friend1: "Hallo. Ich bin Miso Cute.",
-      friend2: "Ich bin winzig, sanft, neugierig und freue mich immer darauf, jemanden Neues kennenzulernen.",
+      friend1: "Hallo. Ich bin Miso Cute.",      friend2: "Ich bin winzig, sanft, neugierig und freue mich immer darauf, jemanden Neues kennenzulernen.",
       friend3: "Manche Abenteuer sind zum Entdecken da. Andere zum Teilen. 🐾",
       friend4: "Ein neues Gesicht. Ein kleines Hallo. Und manchmal — ein neuer Freund.",
       friend5: "Das Schönste an einem neuen Abenteuer ist, nie zu wissen, wen man treffen könnte. ♥",
@@ -1008,7 +1009,9 @@
       tagline: "Um mundo. Todos os animais. ♥",
       issueLink: "← Edição 01",
       home: "Início"
-    },    /* =====================================================
+    },
+
+    /* =====================================================
        POLISH
     ===================================================== */
 
@@ -1196,9 +1199,7 @@
 
       seaKicker: "Miso ontdekt ✨",
       seaTitle: "De<br>zee 🌊",
-      seaText: "Nieuwe geuren.<br>Nieuwe geluiden.<br>Grote wereld. 💙",
-
-      londonKicker: "Mijn Londen ♥ ✨",
+      seaText: "Nieuwe geuren.<br>Nieuwe geluiden.<br>Grote wereld. 💙",      londonKicker: "Mijn Londen ♥ ✨",
       londonTitle: "MIJN STAD —<br>LONDEN",
       londonFeature: "Miso in Londen 💙",
       londonFeatureSub: "Kleine pootjes. Grote stad. 🎀✨",
@@ -1498,7 +1499,9 @@
       tagline: "Ένας κόσμος. Κάθε κατοικίδιο. ♥",
       issueLink: "← Τεύχος 01",
       home: "Αρχική"
-    },    /* =====================================================
+    },
+
+    /* =====================================================
        SWEDISH
     ===================================================== */
 
@@ -1797,8 +1800,7 @@
       friendsText: "Eventyr er bedre sammen.",
 
       diaryKicker: "Fra Misos dagbok ♥ ✨",
-      diaryTitle: "ÉN LITEN HUND.<br>EN VELDIG STOR IDÉ. ✨",
-      diaryLead: "Jeg tror det hele startet med meg. 💕",
+      diaryTitle: "ÉN LITEN HUND.<br>EN VELDIG STOR IDÉ. ✨",      diaryLead: "Jeg tror det hele startet med meg. 💕",
       diary1: "Da jeg kom, fikk familien min plutselig en helt ny liste med spørsmål.",
       diaryNote: "Hvor kan vi dra sammen?<br>Hvilke kafeer vil ønske meg velkommen?<br>Hvilke hoteller elsker virkelig kjæledyr?<br>Hvor kan vi gå tur, reise og møte nye venner?",
       diary2: "Én bitteliten hund — og plutselig så verden helt annerledes ut.",
@@ -1865,7 +1867,9 @@
       tagline: "Én verden. Hvert kjæledyr. ♥",
       issueLink: "← Utgave 01",
       home: "Hjem"
-    },    /* =====================================================
+    },
+
+    /* =====================================================
        FINNISH
     ===================================================== */
 
@@ -2396,9 +2400,7 @@
       match: "יש התאמה! ♥ ✨",
 
       favourites: "הדברים האהובים על Miso ♥ ✨",
-      world: "העולם<br>הקטן שלי",
-
-      travel: "נסיעות ✈️✨",
+      world: "העולם<br>הקטן שלי",      travel: "נסיעות ✈️✨",
       travelText: "כפות קטנות. מקומות חדשים.",
       playtime: "זמן משחק 🧸💕",
       playtimeText: "העיסוק הרציני האהוב עליי.",
