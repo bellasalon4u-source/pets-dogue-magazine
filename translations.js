@@ -2,7 +2,7 @@
   "use strict";
 
   const LANGUAGE_KEY = "pets_dogue_language";
-  const CACHE_KEY = "pets_dogue_translation_cache_v17";
+  const CACHE_KEY = "pets_dogue_translation_cache_v18";
   const SOURCE_LANGUAGE = "en";
   const API_ENDPOINT = "/api/translate";
 
@@ -40,32 +40,6 @@
     dk: "da"
   };
 
-  const STATUS_TEXT = {
-    en: ["Translating...", "Translation is temporarily unavailable."],
-    uk: ["Перекладаємо...", "Переклад тимчасово недоступний."],
-    ru: ["Переводим...", "Перевод временно недоступен."],
-    fr: ["Traduction...", "La traduction est temporairement indisponible."],
-    de: ["Übersetzung...", "Die Übersetzung ist vorübergehend nicht verfügbar."],
-    es: ["Traduciendo...", "La traducción no está disponible temporalmente."],
-    it: ["Traduzione...", "La traduzione non è momentaneamente disponibile."],
-    pt: ["A traduzir...", "A tradução está temporariamente indisponível."],
-    nl: ["Vertalen...", "De vertaling is tijdelijk niet beschikbaar."],
-    pl: ["Tłumaczenie...", "Tłumaczenie jest chwilowo niedostępne."],
-    cs: ["Překládáme...", "Překlad je dočasně nedostupný."],
-    sk: ["Prekladáme...", "Preklad je dočasne nedostupný."],
-    hu: ["Fordítás...", "A fordítás átmenetileg nem érhető el."],
-    ro: ["Se traduce...", "Traducerea este temporar indisponibilă."],
-    bg: ["Превеждаме...", "Преводът временно не е достъпен."],
-    el: ["Μετάφραση...", "Η μετάφραση δεν είναι προσωρινά διαθέσιμη."],
-    sv: ["Översätter...", "Översättningen är tillfälligt otillgänglig."],
-    da: ["Oversætter...", "Oversættelsen er midlertidigt utilgængelig."],
-    no: ["Oversetter...", "Oversettelsen er midlertidig utilgjengelig."],
-    fi: ["Käännetään...", "Käännös ei ole tilapäisesti käytettävissä."],
-    tr: ["Çevriliyor...", "Çeviri geçici olarak kullanılamıyor."],
-    ar: ["جارٍ الترجمة...", "الترجمة غير متاحة مؤقتًا."],
-    hi: ["अनुवाद हो रहा है...", "अनुवाद अस्थायी रूप से उपलब्ध नहीं है।"]
-  };
-
   const EXCLUDED_SELECTOR = [
     "script",
     "style",
@@ -80,8 +54,7 @@
     "[translate='no']",
     ".notranslate",
     "[data-pd-no-translate]",
-    "[data-pd-brand]",
-    "#pd-translation-status"
+    "[data-pd-brand]"
   ].join(",");
 
   const ATTRIBUTES = [
@@ -145,10 +118,15 @@
 
   function readSavedLanguage() {
     try {
+      const stored =
+        localStorage.getItem(LANGUAGE_KEY);
+
+      if (!stored) {
+        return "";
+      }
+
       const value =
-        normalizeLanguageCode(
-          localStorage.getItem(LANGUAGE_KEY) || ""
-        );
+        normalizeLanguageCode(stored);
 
       return LANGUAGES.some(function (language) {
         return language.code === value;
@@ -292,9 +270,7 @@
       return false;
     }
 
-    if (
-      PROTECTED_TEXTS.has(text)
-    ) {
+    if (PROTECTED_TEXTS.has(text)) {
       return false;
     }
 
@@ -406,233 +382,262 @@
         .pdOriginalTitle =
         document.title || "";
     }
-  }
+  }  function restoreOriginalContent(root) {
+    const scope =
+      root || document.body;
 
-  function restoreOriginalContent(root) {
-    if (!root) {
+    if (!scope) {
       return;
     }
 
     const walker =
       document.createTreeWalker(
-        root,
+        scope,
         NodeFilter.SHOW_TEXT
       );
 
-    while (walker.nextNode()) {
-      const node =
-        walker.currentNode;
+    let node;
 
-      if (originalTextNodes.has(node)) {
-        node.nodeValue =
-          originalTextNodes.get(node);
-      }
-    }
-
-    const elements = [];
-
-    if (
-      root.nodeType ===
-      Node.ELEMENT_NODE
+    while (
+      (node = walker.nextNode())
     ) {
-      elements.push(root);
-    }
-
-    if (root.querySelectorAll) {
-      elements.push.apply(
-        elements,
-        root.querySelectorAll("*")
-      );
-    }
-
-    elements.forEach(function (element) {
-      const attributes =
-        originalAttributes.get(element);
-
-      if (!attributes) {
-        return;
+      if (
+        !node.parentElement ||
+        isProtectedElement(
+          node.parentElement
+        )
+      ) {
+        continue;
       }
 
-      Object.keys(attributes).forEach(
-        function (attributeName) {
-          element.setAttribute(
-            attributeName,
-            attributes[attributeName]
+      const original =
+        originalTextNodes.get(node);
+
+      if (
+        original !== undefined
+      ) {
+        node.nodeValue = original;
+      }
+    }
+
+    scope
+      .querySelectorAll("*")
+      .forEach(function (element) {
+        const attributes =
+          originalAttributes.get(
+            element
           );
+
+        if (!attributes) {
+          return;
         }
-      );
-    });
+
+        Object.keys(
+          attributes
+        ).forEach(
+          function (attributeName) {
+            element.setAttribute(
+              attributeName,
+              attributes[
+                attributeName
+              ]
+            );
+          }
+        );
+      });
+
+    const originalTitle =
+      document.documentElement
+        .dataset.pdOriginalTitle;
 
     if (
-      document.documentElement.dataset
-        .pdOriginalTitle !== undefined
+      originalTitle !== undefined
     ) {
       document.title =
-        document.documentElement.dataset
-          .pdOriginalTitle;
+        originalTitle;
     }
   }
 
-  function collectTranslationItems(root) {
-    const items = [];
+  function collectTextEntries(root) {
+    const scope =
+      root || document.body;
 
-    if (!root) {
-      return items;
+    const entries = [];
+
+    if (!scope) {
+      return entries;
     }
 
     const walker =
       document.createTreeWalker(
-        root,
-        NodeFilter.SHOW_TEXT,
-        {
-          acceptNode: function (node) {
-            const parent =
-              node.parentElement;
-
-            if (
-              !parent ||
-              isProtectedElement(parent)
-            ) {
-              return NodeFilter
-                .FILTER_REJECT;
-            }
-
-            rememberTextNode(node);
-
-            const original =
-              originalTextNodes.get(node) ||
-              "";
-
-            return shouldTranslate(original)
-              ? NodeFilter.FILTER_ACCEPT
-              : NodeFilter.FILTER_REJECT;
-          }
-        }
+        scope,
+        NodeFilter.SHOW_TEXT
       );
 
-    while (walker.nextNode()) {
-      const node =
-        walker.currentNode;
+    let node;
+
+    while (
+      (node = walker.nextNode())
+    ) {
+      const parent =
+        node.parentElement;
+
+      if (
+        !parent ||
+        isProtectedElement(parent)
+      ) {
+        continue;
+      }
+
+      rememberTextNode(node);
 
       const original =
-        originalTextNodes.get(node) || "";
+        originalTextNodes.get(node);
 
-      items.push({
+      if (
+        !shouldTranslate(original)
+      ) {
+        continue;
+      }
+
+      entries.push({
         type: "text",
         node: node,
-        original: original,
-        requestText:
-          normalizeText(original)
+        original: original
       });
     }
 
-    const elements = [];
-
-    if (
-      root.nodeType ===
-      Node.ELEMENT_NODE
-    ) {
-      elements.push(root);
-    }
-
-    if (root.querySelectorAll) {
-      elements.push.apply(
-        elements,
-        root.querySelectorAll("*")
-      );
-    }
-
-    elements.forEach(function (element) {
-      if (isProtectedElement(element)) {
-        return;
-      }
-
-      ATTRIBUTES.forEach(
-        function (attributeName) {
-          if (
-            !element.hasAttribute(
-              attributeName
-            )
-          ) {
-            return;
-          }
-
-          rememberAttribute(
-            element,
-            attributeName
-          );
-
-          const attributes =
-            originalAttributes.get(
-              element
-            ) || {};
-
-          const original =
-            attributes[attributeName] ||
-            "";
-
-          if (!shouldTranslate(original)) {
-            return;
-          }
-
-          items.push({
-            type: "attribute",
-            element: element,
-            attributeName: attributeName,
-            original: original,
-            requestText:
-              normalizeText(original)
-          });
+    scope
+      .querySelectorAll("*")
+      .forEach(function (element) {
+        if (
+          isProtectedElement(
+            element
+          )
+        ) {
+          return;
         }
-      );
-    });
+
+        ATTRIBUTES.forEach(
+          function (attributeName) {
+            if (
+              !element.hasAttribute(
+                attributeName
+              )
+            ) {
+              return;
+            }
+
+            rememberAttribute(
+              element,
+              attributeName
+            );
+
+            const attributes =
+              originalAttributes.get(
+                element
+              );
+
+            const original =
+              attributes[
+                attributeName
+              ];
+
+            if (
+              !shouldTranslate(
+                original
+              )
+            ) {
+              return;
+            }
+
+            entries.push({
+              type: "attribute",
+              element: element,
+              attribute:
+                attributeName,
+              original: original
+            });
+          }
+        );
+      });
 
     rememberDocumentTitle();
 
-    const originalTitle =
-      document.documentElement.dataset
-        .pdOriginalTitle || "";
+    const title =
+      document.documentElement
+        .dataset.pdOriginalTitle || "";
 
-    if (shouldTranslate(originalTitle)) {
-      items.push({
+    if (
+      shouldTranslate(title)
+    ) {
+      entries.push({
         type: "title",
-        original: originalTitle,
-        requestText:
-          normalizeText(originalTitle)
+        original: title
       });
     }
 
-    return items;
+    return entries;
   }
 
-  function createBatches(texts) {
+  function uniqueTexts(entries) {
+    const seen = new Set();
+    const result = [];
+
+    entries.forEach(
+      function (entry) {
+        const text =
+          normalizeText(
+            entry.original
+          );
+
+        if (
+          !text ||
+          seen.has(text)
+        ) {
+          return;
+        }
+
+        seen.add(text);
+        result.push(text);
+      }
+    );
+
+    return result;
+  }
+
+  function splitIntoBatches(
+    texts,
+    maxItems,
+    maxCharacters
+  ) {
     const batches = [];
-    let currentBatch = [];
-    let currentCharacters = 0;
+    let batch = [];
+    let characters = 0;
 
     texts.forEach(function (text) {
-      const nextCharacters =
-        currentCharacters +
+      const length =
         text.length;
 
       if (
-        currentBatch.length >= 30 ||
+        batch.length &&
         (
-          currentBatch.length > 0 &&
-          nextCharacters > 10000
+          batch.length >= maxItems ||
+          characters + length >
+            maxCharacters
         )
       ) {
-        batches.push(currentBatch);
-        currentBatch = [];
-        currentCharacters = 0;
+        batches.push(batch);
+        batch = [];
+        characters = 0;
       }
 
-      currentBatch.push(text);
-      currentCharacters += text.length;
+      batch.push(text);
+      characters += length;
     });
 
-    if (currentBatch.length > 0) {
-      batches.push(currentBatch);
+    if (batch.length) {
+      batches.push(batch);
     }
 
     return batches;
@@ -642,144 +647,159 @@
     texts,
     targetLanguage
   ) {
-    const response = await fetch(
-      API_ENDPOINT,
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body: JSON.stringify({
-          sourceLanguage:
-            SOURCE_LANGUAGE,
-
-          targetLanguage:
-            targetLanguage,
-
-          texts:
-            texts
-        })
-      }
-    );
-
-    let data;
-
-    try {
-      data = await response.json();
-    } catch (error) {
-      throw new Error(
-        "Translation server returned an invalid response."
-      );
+    if (!texts.length) {
+      return [];
     }
 
-    if (!response.ok) {
-      throw new Error(
-        data.error ||
-          (
-            "Translation request failed with status " +
-            response.status +
-            "."
-          )
-      );
-    }
-
-    if (
-      !Array.isArray(
-        data.translations
-      ) ||
-      data.translations.length !==
-        texts.length
-    ) {
-      throw new Error(
-        "Translation server returned an incorrect number of translations."
-      );
-    }
-
-    return data.translations;
-  }
-
-  async function getTranslations(
-    texts,
-    targetLanguage
-  ) {
-    const uniqueTexts =
-      Array.from(
-        new Set(texts)
-      );
-
-    const result =
-      new Map();
-
-    const missingTexts = [];
-
-    uniqueTexts.forEach(function (text) {
-      const cached =
-        getCachedTranslation(
-          targetLanguage,
-          text
-        );
-
-      if (cached) {
-        result.set(
-          text,
-          cached
-        );
-      } else {
-        missingTexts.push(text);
-      }
-    });
-
-    const batches =
-      createBatches(missingTexts);    for (const batch of batches) {
-      const translations =
-        await requestTranslations(
-          batch,
-          targetLanguage
-        );
-
-      batch.forEach(
-        function (original, index) {
-          const translated =
-            String(
-              translations[index] ||
-                original
-            );
-
-          result.set(
-            original,
-            translated
-          );
-
-          storeTranslation(
-            targetLanguage,
-            original,
-            translated
-          );
+    const response =
+      await fetch(
+        API_ENDPOINT,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: JSON.stringify({
+            source:
+              SOURCE_LANGUAGE,
+            target:
+              targetLanguage,
+            texts: texts
+          })
         }
       );
 
-      saveCache();
+    if (!response.ok) {
+      throw new Error(
+        "Translation request failed: " +
+          response.status
+      );
     }
 
-    return result;
+    const data =
+      await response.json();
+
+    const translations =
+      Array.isArray(
+        data.translations
+      )
+        ? data.translations
+        : Array.isArray(
+            data.results
+          )
+          ? data.results
+          : [];
+
+    if (
+      translations.length !==
+      texts.length
+    ) {
+      throw new Error(
+        "Invalid translation response."
+      );
+    }
+
+    return translations.map(
+      function (item) {
+        if (
+          typeof item === "string"
+        ) {
+          return item;
+        }
+
+        if (
+          item &&
+          typeof item.translation ===
+            "string"
+        ) {
+          return item.translation;
+        }
+
+        if (
+          item &&
+          typeof item.text ===
+            "string"
+        ) {
+          return item.text;
+        }
+
+        return "";
+      }
+    );
+  }
+
+  function applyEntries(
+    entries,
+    languageCode
+  ) {
+    entries.forEach(
+      function (entry) {
+        const original =
+          normalizeText(
+            entry.original
+          );
+
+        const translated =
+          getCachedTranslation(
+            languageCode,
+            original
+          );
+
+        if (!translated) {
+          return;
+        }
+
+        if (
+          entry.type === "text"
+        ) {
+          entry.node.nodeValue =
+            preserveWhitespace(
+              entry.original,
+              translated
+            );
+
+          return;
+        }
+
+        if (
+          entry.type ===
+          "attribute"
+        ) {
+          entry.element.setAttribute(
+            entry.attribute,
+            translated
+          );
+
+          return;
+        }
+
+        if (
+          entry.type === "title"
+        ) {
+          document.title =
+            translated;
+        }
+      }
+    );
   }
 
   function preserveWhitespace(
     original,
     translated
   ) {
+    const source =
+      String(original || "");
+
     const leading =
       (
-        original.match(/^\s*/) ||
+        source.match(/^\s*/) ||
         [""]
       )[0];
 
     const trailing =
       (
-        original.match(/\s*$/) ||
+        source.match(/\s*$/) ||
         [""]
       )[0];
 
@@ -790,46 +810,13 @@
     );
   }
 
-  function applyTranslationItem(
-    item,
-    translated
+  function updateDocumentLanguage(
+    languageCode
   ) {
-    if (
-      typeof translated !== "string" ||
-      !translated.trim()
-    ) {
-      return;
-    }
-
-    if (item.type === "text") {
-      item.node.nodeValue =
-        preserveWhitespace(
-          item.original,
-          translated
-        );
-
-      return;
-    }
-
-    if (
-      item.type === "attribute"
-    ) {
-      item.element.setAttribute(
-        item.attributeName,
-        translated
-      );
-
-      return;
-    }
-
-    if (item.type === "title") {
-      document.title = translated;
-    }
-  }
-
-  function applyDocumentDirection() {
     const language =
-      getLanguage(selectedLanguage);
+      getLanguage(
+        languageCode
+      );
 
     document.documentElement.lang =
       language.code;
@@ -837,115 +824,91 @@
     document.documentElement.dir =
       language.dir;
 
-    if (document.body) {
-      document.body.classList.toggle(
-        "pd-rtl",
-        language.dir === "rtl"
+    document.body &&
+      document.body.setAttribute(
+        "dir",
+        language.dir
       );
-    }
   }
 
-  function getStatusText() {
-    return (
-      STATUS_TEXT[selectedLanguage] ||
-      STATUS_TEXT.en
-    );
-  }
+  function syncLanguageControls(
+    languageCode
+  ) {
+    const normalized =
+      normalizeLanguageCode(
+        languageCode
+      );
 
-  function createStatusElement() {
-    if (
-      document.getElementById(
-        "pd-translation-status"
+    document
+      .querySelectorAll(
+        [
+          "select[data-language-select]",
+          "select#languageSelect",
+          "select#language-select",
+          "select#langSelect",
+          "select#lang-select"
+        ].join(",")
       )
-    ) {
-      return;
-    }
+      .forEach(function (select) {
+        const option =
+          Array.from(
+            select.options || []
+          ).find(
+            function (item) {
+              return (
+                normalizeLanguageCode(
+                  item.value
+                ) === normalized
+              );
+            }
+          );
 
-    const style =
-      document.createElement("style");
+        if (option) {
+          select.value =
+            option.value;
+        }
+      });
 
-    style.id =
-      "pd-translation-status-style";
+    document
+      .querySelectorAll(
+        "[data-language]"
+      )
+      .forEach(function (element) {
+        const code =
+          normalizeLanguageCode(
+            element.getAttribute(
+              "data-language"
+            )
+          );
 
-    style.textContent = `
-      #pd-translation-status {
-        position: fixed;
-        left: 50%;
-        bottom: 22px;
-        z-index: 2147483000;
-        padding: 12px 18px;
-        border-radius: 999px;
-        background: #111;
-        color: #fff;
-        font: 700 13px Arial, sans-serif;
-        box-shadow: 0 10px 30px rgba(0,0,0,.28);
-        opacity: 0;
-        visibility: hidden;
-        transform: translate(-50%, 12px);
-        transition: .2s ease;
-        pointer-events: none;
-      }
+        const active =
+          code === normalized;
 
-      #pd-translation-status.pd-visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(-50%, 0);
-      }
+        element.classList.toggle(
+          "active",
+          active
+        );
 
-      body.pd-rtl {
-        direction: rtl;
-      }
+        element.classList.toggle(
+          "is-active",
+          active
+        );
 
-      body.pd-rtl .side-menu {
-        left: auto;
-        right: -100%;
-        border-right: 0;
-        border-left: 2px solid #111;
-      }
-
-      body.pd-rtl .side-menu.open {
-        right: 0;
-      }
-    `;
-
-    document.head.appendChild(style);
-
-    const status =
-      document.createElement("div");
-
-    status.id =
-      "pd-translation-status";
-
-    status.setAttribute(
-      "data-pd-no-translate",
-      "true"
-    );
-
-    status.setAttribute(
-      "translate",
-      "no"
-    );
-
-    document.body.appendChild(status);
+        if (active) {
+          element.setAttribute(
+            "aria-current",
+            "true"
+          );
+        } else {
+          element.removeAttribute(
+            "aria-current"
+          );
+        }
+      });
   }
 
-  function showStatus(message) {
-  return;
-}
-    const status =
-      document.getElementById(
-        "pd-translation-status"
-      );
-
-    if (!status) {
-      return;
-    }
-
-    status.textContent = message;
-
-    status.classList.add(
-      "pd-visible"
-    );
+  function showStatus() {
+    return;
   }
 
   function hideStatus() {
@@ -958,193 +921,316 @@
       status.classList.remove(
         "pd-visible"
       );
+
+      status.hidden = true;
     }
   }
 
-  function syncLanguageSelectors() {
+  function removeLegacyStatus() {
+    const status =
+      document.getElementById(
+        "pd-translation-status"
+      );
+
+    if (status) {
+      status.remove();
+    }
+
     document
       .querySelectorAll(
-        "#languageSelect, [data-pd-language-select]"
+        [
+          ".pd-translation-status",
+          ".translation-status",
+          "[data-translation-status]"
+        ].join(",")
       )
-      .forEach(function (selector) {
-        selector.value =
-          selectedLanguage;
+      .forEach(function (element) {
+        element.remove();
       });
   }
 
-  async function translatePage(root) {
-    const translationRoot =
-      root || document.body;
+  function dispatchLanguageEvent(
+    languageCode
+  ) {
+    const detail = {
+      language:
+        normalizeLanguageCode(
+          languageCode
+        )
+    };
 
-    if (
-      !translationRoot ||
-      translationRunning
-    ) {
-      return;
-    }
+    window.dispatchEvent(
+      new CustomEvent(
+        "petsdogue:languagechange",
+        {
+          detail: detail
+        }
+      )
+    );
+  }
 
-    const thisRequest =
+  async function translatePage(
+    requestedLanguage,
+    options
+  ) {
+    const settings =
+      options || {};
+
+    const languageCode =
+      normalizeLanguageCode(
+        requestedLanguage
+      );
+
+    const currentRequest =
       ++requestVersion;
 
-    const language =
-      getLanguage(selectedLanguage);
+    selectedLanguage =
+      languageCode;
 
-    applyDocumentDirection();
-    syncLanguageSelectors();
-
-    protectBrandElements(
-      translationRoot
+    saveLanguage(
+      languageCode
     );
 
-    rememberDocumentTitle();
+    updateDocumentLanguage(
+      languageCode
+    );
+
+    syncLanguageControls(
+      languageCode
+    );
+
+    removeLegacyStatus();
 
     if (
-      language.code ===
+      languageCode ===
       SOURCE_LANGUAGE
     ) {
-      translationRunning = true;
-
       restoreOriginalContent(
-        translationRoot
+        document.body
       );
 
-      translationRunning = false;
-
       hideStatus();
+
+      if (
+        !settings.silentEvent
+      ) {
+        dispatchLanguageEvent(
+          languageCode
+        );
+      }
 
       return;
     }
 
-    translationRunning = true;
-
-    showStatus(
-      getStatusText()[0]
-    );
-
-    try {
-      const items =
-        collectTranslationItems(
-          translationRoot
-        );
-
-      if (items.length === 0) {
-        hideStatus();
-        return;
-      }
-
-      const translationMap =
-        await getTranslations(
-          items.map(function (item) {
-            return item.requestText;
-          }),
-          language.code
-        );
-
-      if (
-        thisRequest !==
-          requestVersion ||
-        language.code !==
-          selectedLanguage
-      ) {
-        return;
-      }
-
-      items.forEach(function (item) {
-        const translated =
-          translationMap.get(
-            item.requestText
-          );
-
-        if (translated) {
-          applyTranslationItem(
-            item,
-            translated
-          );
-        }
-      });
-
-      hideStatus();
-    } catch (error) {
-      console.error(
-        "PETS & DOGUE translation error:",
-        error
-      );
-
-      showStatus(
-        getStatusText()[1]
-      );
-
-      window.setTimeout(
-        hideStatus,
-        5000
-      );
-    } finally {
+    if (translationRunning) {
       translationRunning = false;
     }
-  }
 
-  async function changeLanguage(code) {
-    const language =
-      getLanguage(
-        normalizeLanguageCode(code)
-      );
-
-    requestVersion += 1;
     translationRunning = true;
 
-    restoreOriginalContent(
-      document.body
+    const entries =
+      collectTextEntries(
+        document.body
+      );
+
+    const texts =
+      uniqueTexts(entries);
+
+    const missing =
+      texts.filter(
+        function (text) {
+          return !getCachedTranslation(
+            languageCode,
+            text
+          );
+        }
+      );
+
+    applyEntries(
+      entries,
+      languageCode
     );
 
-    translationRunning = false;
+    if (!missing.length) {
+      translationRunning =
+        false;
 
-    selectedLanguage =
-      language.code;
+      hideStatus();
+      removeLegacyStatus();
 
-    saveLanguage(
-      selectedLanguage
-    );
+      if (
+        !settings.silentEvent
+      ) {
+        dispatchLanguageEvent(
+          languageCode
+        );
+      }
 
-    applyDocumentDirection();
-    syncLanguageSelectors();
+      return;
+    }
 
-    await translatePage(
-      document.body
-    );
-  }
+    const batches =
+      splitIntoBatches(
+        missing,
+        40,
+        6000
+      );
 
-  function bindLanguageSelectors() {
-    document
-      .querySelectorAll(
-        "#languageSelect, [data-pd-language-select]"
-      )
-      .forEach(function (selector) {
+    try {
+      for (
+        let index = 0;
+        index < batches.length;
+        index += 1
+      ) {
         if (
-          selector.dataset
-            .pdLanguageBound === "true"
+          currentRequest !==
+          requestVersion
         ) {
           return;
         }
 
-        selector.dataset
-          .pdLanguageBound =
-          "true";
+        const batch =
+          batches[index];
 
-        selector.value =
-          selectedLanguage;
+        const translations =
+          await requestTranslations(
+            batch,
+            languageCode
+          );
 
-        selector.addEventListener(
+        batch.forEach(
+          function (
+            original,
+            translationIndex
+          ) {
+            const translated =
+              translations[
+                translationIndex
+              ];
+
+            if (
+              translated &&
+              typeof translated ===
+                "string"
+            ) {
+              storeTranslation(
+                languageCode,
+                original,
+                translated
+              );
+            }
+          }
+        );
+
+        saveCache();
+
+        if (
+          currentRequest !==
+          requestVersion
+        ) {
+          return;
+        }
+
+        applyEntries(
+          entries,
+          languageCode
+        );
+      }
+    } catch (error) {
+      console.warn(
+        "PETS & DOGUE translation unavailable.",
+        error
+      );
+    } finally {
+      if (
+        currentRequest ===
+        requestVersion
+      ) {
+        translationRunning =
+          false;
+
+        hideStatus();
+        removeLegacyStatus();
+
+        if (
+          !settings.silentEvent
+        ) {
+          dispatchLanguageEvent(
+            languageCode
+          );
+        }
+      }
+    }
+  }  function bindLanguageControls() {
+    document
+      .querySelectorAll(
+        [
+          "select[data-language-select]",
+          "select#languageSelect",
+          "select#language-select",
+          "select#langSelect",
+          "select#lang-select"
+        ].join(",")
+      )
+      .forEach(function (select) {
+        if (
+          select.dataset
+            .pdLanguageBound === "1"
+        ) {
+          return;
+        }
+
+        select.dataset
+          .pdLanguageBound = "1";
+
+        select.addEventListener(
           "change",
           function () {
-            changeLanguage(
-              selector.value
+            translatePage(
+              select.value
             );
           }
         );
       });
+
+    document
+      .querySelectorAll(
+        "[data-language]"
+      )
+      .forEach(function (element) {
+        if (
+          element.dataset
+            .pdLanguageBound === "1"
+        ) {
+          return;
+        }
+
+        element.dataset
+          .pdLanguageBound = "1";
+
+        element.addEventListener(
+          "click",
+          function () {
+            const language =
+              element.getAttribute(
+                "data-language"
+              );
+
+            if (language) {
+              translatePage(
+                language
+              );
+            }
+          }
+        );
+      });
+
+    syncLanguageControls(
+      selectedLanguage
+    );
   }
 
-  function observeDynamicContent() {
+  function startObserver() {
     if (
       observer ||
       !document.body
@@ -1155,65 +1241,57 @@
     observer =
       new MutationObserver(
         function (mutations) {
-          if (translationRunning) {
-            return;
-          }
-
-          let hasNewContent =
-            false;
+          let relevant = false;
 
           mutations.forEach(
             function (mutation) {
-              mutation.addedNodes.forEach(
-                function (node) {
-                  if (
-                    node.nodeType ===
-                    Node.ELEMENT_NODE
-                  ) {
-                    protectBrandElements(
-                      node
-                    );
+              if (
+                mutation.type !==
+                "childList"
+              ) {
+                return;
+              }
 
-                    hasNewContent =
-                      true;
-                  }
-
-                  if (
-                    node.nodeType ===
-                      Node.TEXT_NODE &&
-                    shouldTranslate(
-                      node.nodeValue
-                    )
-                  ) {
-                    hasNewContent =
-                      true;
-                  }
-                }
-              );
+              if (
+                mutation.addedNodes &&
+                mutation.addedNodes.length
+              ) {
+                relevant = true;
+              }
             }
           );
 
-          bindLanguageSelectors();
-
-          if (
-            hasNewContent &&
-            selectedLanguage !==
-              SOURCE_LANGUAGE
-          ) {
-            window.clearTimeout(
-              observerTimer
-            );
-
-            observerTimer =
-              window.setTimeout(
-                function () {
-                  translatePage(
-                    document.body
-                  );
-                },
-                350
-              );
+          if (!relevant) {
+            return;
           }
+
+          clearTimeout(
+            observerTimer
+          );
+
+          observerTimer =
+            setTimeout(
+              function () {
+                bindLanguageControls();
+                protectBrandElements(
+                  document.body
+                );
+                removeLegacyStatus();
+
+                if (
+                  selectedLanguage !==
+                  SOURCE_LANGUAGE
+                ) {
+                  translatePage(
+                    selectedLanguage,
+                    {
+                      silentEvent: true
+                    }
+                  );
+                }
+              },
+              120
+            );
         }
       );
 
@@ -1226,139 +1304,353 @@
     );
   }
 
-  function restoreSavedLanguage() {
+  function stopSpeech() {
+    if (
+      "speechSynthesis" in window
+    ) {
+      window.speechSynthesis.cancel();
+    }
+  }
+
+  function speakText(text) {
+    if (
+      !(
+        "speechSynthesis" in window
+      )
+    ) {
+      return false;
+    }
+
+    const cleanText =
+      normalizeText(text);
+
+    if (!cleanText) {
+      return false;
+    }
+
+    stopSpeech();
+
+    const utterance =
+      new SpeechSynthesisUtterance(
+        cleanText
+      );
+
+    const language =
+      getLanguage(
+        selectedLanguage
+      );
+
+    utterance.lang =
+      language.speech ||
+      language.code;
+
+    window.speechSynthesis.speak(
+      utterance
+    );
+
+    return true;
+  }
+
+  function getReadablePageText() {
+    const root =
+      document.querySelector(
+        "main"
+      ) || document.body;
+
+    if (!root) {
+      return "";
+    }
+
+    const clone =
+      root.cloneNode(true);
+
+    clone
+      .querySelectorAll(
+        [
+          "script",
+          "style",
+          "noscript",
+          "nav",
+          "button",
+          "select",
+          "option",
+          "svg",
+          "[aria-hidden='true']",
+          "[data-pd-no-speech]"
+        ].join(",")
+      )
+      .forEach(function (element) {
+        element.remove();
+      });
+
+    return normalizeText(
+      clone.textContent || ""
+    );
+  }
+
+  function bindSpeechControls() {
+    document
+      .querySelectorAll(
+        [
+          "[data-read-page]",
+          "[data-speak-page]",
+          "[data-tts]",
+          ".tts-button",
+          ".read-aloud"
+        ].join(",")
+      )
+      .forEach(function (button) {
+        if (
+          button.dataset
+            .pdSpeechBound === "1"
+        ) {
+          return;
+        }
+
+        button.dataset
+          .pdSpeechBound = "1";
+
+        button.addEventListener(
+          "click",
+          function () {
+            const explicit =
+              button.getAttribute(
+                "data-speech-text"
+              );
+
+            speakText(
+              explicit ||
+              getReadablePageText()
+            );
+          }
+        );
+      });
+  }
+
+  function exposePublicAPI() {
+    window.PetsDogueTranslations = {
+      languages:
+        LANGUAGES.slice(),
+
+      aliases:
+        Object.assign(
+          {},
+          LANGUAGE_ALIASES
+        ),
+
+      getLanguage:
+        function () {
+          return selectedLanguage;
+        },
+
+      setLanguage:
+        function (languageCode) {
+          return translatePage(
+            languageCode
+          );
+        },
+
+      translatePage:
+        function (languageCode) {
+          return translatePage(
+            languageCode
+          );
+        },
+
+      restoreEnglish:
+        function () {
+          return translatePage(
+            SOURCE_LANGUAGE
+          );
+        },
+
+      speak:
+        function (text) {
+          return speakText(text);
+        },
+
+      stopSpeech:
+        function () {
+          stopSpeech();
+        }
+    };
+
+    window.PetsDogueI18n =
+      window.PetsDogueTranslations;
+
+    window.PD_LANGUAGES =
+      LANGUAGES.slice();
+  }
+
+  function bindExternalLanguageEvents() {
+    window.addEventListener(
+      "petsdogue:setlanguage",
+      function (event) {
+        if (
+          !event.detail ||
+          !event.detail.language
+        ) {
+          return;
+        }
+
+        const language =
+          normalizeLanguageCode(
+            event.detail.language
+          );
+
+        if (
+          language ===
+          selectedLanguage
+        ) {
+          updateDocumentLanguage(
+            language
+          );
+
+          syncLanguageControls(
+            language
+          );
+
+          return;
+        }
+
+        translatePage(
+          language,
+          {
+            silentEvent: true
+          }
+        );
+      }
+    );
+
+    window.addEventListener(
+      "storage",
+      function (event) {
+        if (
+          event.key !==
+            LANGUAGE_KEY ||
+          !event.newValue
+        ) {
+          return;
+        }
+
+        const language =
+          normalizeLanguageCode(
+            event.newValue
+          );
+
+        if (
+          language ===
+          selectedLanguage
+        ) {
+          return;
+        }
+
+        translatePage(
+          language,
+          {
+            silentEvent: true
+          }
+        );
+      }
+    );
+  }
+
+  function restoreLanguageOnPageShow() {
+    window.addEventListener(
+      "pageshow",
+      function () {
+        const saved =
+          readSavedLanguage() ||
+          selectedLanguage ||
+          SOURCE_LANGUAGE;
+
+        selectedLanguage =
+          normalizeLanguageCode(
+            saved
+          );
+
+        updateDocumentLanguage(
+          selectedLanguage
+        );
+
+        bindLanguageControls();
+        bindSpeechControls();
+        protectBrandElements(
+          document.body
+        );
+
+        removeLegacyStatus();
+
+        if (
+          selectedLanguage ===
+          SOURCE_LANGUAGE
+        ) {
+          restoreOriginalContent(
+            document.body
+          );
+
+          syncLanguageControls(
+            selectedLanguage
+          );
+
+          return;
+        }
+
+        translatePage(
+          selectedLanguage,
+          {
+            silentEvent: true
+          }
+        );
+      }
+    );
+  }
+
+  function initialize() {
+    protectBrandElements(
+      document.body
+    );
+
+    rememberDocumentTitle();
+
+    bindLanguageControls();
+    bindSpeechControls();
+    bindExternalLanguageEvents();
+    restoreLanguageOnPageShow();
+    exposePublicAPI();
+
+    removeLegacyStatus();
+
     selectedLanguage =
       readSavedLanguage() ||
       SOURCE_LANGUAGE;
 
-    applyDocumentDirection();
-    syncLanguageSelectors();
+    updateDocumentLanguage(
+      selectedLanguage
+    );
+
+    syncLanguageControls(
+      selectedLanguage
+    );
 
     if (
-      selectedLanguage ===
+      selectedLanguage !==
       SOURCE_LANGUAGE
     ) {
+      translatePage(
+        selectedLanguage,
+        {
+          silentEvent: true
+        }
+      );
+    } else {
       restoreOriginalContent(
         document.body
       );
-
-      hideStatus();
-
-      return;
     }
 
-    window.setTimeout(
-      function () {
-        translatePage(
-          document.body
-        );
-      },
-      100
-    );
+    startObserver();
   }
-
-  async function initializeTranslations() {
-    selectedLanguage =
-      readSavedLanguage() ||
-      SOURCE_LANGUAGE;
-
-    createStatusElement();
-    protectBrandElements(document);
-    rememberDocumentTitle();
-    applyDocumentDirection();
-    bindLanguageSelectors();
-    syncLanguageSelectors();
-    observeDynamicContent();
-
-    await translatePage(
-      document.body
-    );
-  }
-
-  /*
-  ========================================================
-  MASTER SHELL LANGUAGE BRIDGE
-
-  pets-dogue-shell.js owns the visible language selector.
-  It broadcasts:
-      petsdogue:languagechange
-
-  translations.js must listen to that same event so that
-  the actual page/article content changes immediately.
-
-  This keeps:
-  - all 23 languages
-  - saved language between pages
-  - Arabic RTL
-  - translated title / aria-label / alt text
-  - existing translation cache
-  - existing TTS speech-language integration
-  ========================================================
-  */
-
-  window.addEventListener(
-    "petsdogue:languagechange",
-    function (event) {
-      const requestedLanguage =
-        normalizeLanguageCode(
-          event &&
-          event.detail &&
-          event.detail.language
-            ? event.detail.language
-            : readSavedLanguage()
-        );
-
-      if (
-        requestedLanguage ===
-        selectedLanguage
-      ) {
-        applyDocumentDirection();
-        syncLanguageSelectors();
-
-        if (
-          requestedLanguage !==
-          SOURCE_LANGUAGE
-        ) {
-          translatePage(
-            document.body
-          );
-        }
-
-        return;
-      }
-
-      changeLanguage(
-        requestedLanguage
-      );
-    }
-  );
-
-  window.addEventListener(
-    "pageshow",
-    restoreSavedLanguage
-  );
-
-  window.addEventListener(
-    "popstate",
-    function () {
-      window.setTimeout(
-        restoreSavedLanguage,
-        100
-      );
-    }
-  );
-
-  window.addEventListener(
-    "storage",
-    function (event) {
-      if (
-        event.key ===
-        LANGUAGE_KEY
-      ) {
-        restoreSavedLanguage();
-      }
-    }
-  );
 
   if (
     document.readyState ===
@@ -1366,39 +1658,12 @@
   ) {
     document.addEventListener(
       "DOMContentLoaded",
-      initializeTranslations
+      initialize,
+      {
+        once: true
+      }
     );
   } else {
-    initializeTranslations();
+    initialize();
   }
-
-  window.PetsDogueLanguage = {
-    languages: LANGUAGES,
-
-    getCurrentLanguage:
-      function () {
-        return getLanguage(
-          selectedLanguage
-        );
-      },
-
-    getSpeechLanguage:
-      function () {
-        return getLanguage(
-          selectedLanguage
-        ).speech;
-      },
-
-    changeLanguage:
-      changeLanguage,
-
-    setLanguage:
-      changeLanguage,
-
-    translatePage:
-      translatePage,
-
-    restore:
-      restoreSavedLanguage
-  };
 })();
