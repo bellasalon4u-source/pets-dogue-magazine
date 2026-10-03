@@ -930,6 +930,8 @@
   }
 
   function showStatus(message) {
+  return;
+}
     const status =
       document.getElementById(
         "pd-translation-status"
