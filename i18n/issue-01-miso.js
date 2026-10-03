@@ -2676,7 +2676,6 @@
       subtree: true
     });
   }
-
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initialise, {
       once: true
@@ -2684,4 +2683,10 @@
   } else {
     initialise();
   }
+
+  window.addEventListener("pageshow", function () {
+    bindLanguageSelectors();
+    applyLanguage(getSavedLanguage());
+  });
+
 })();
