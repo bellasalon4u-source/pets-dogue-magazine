@@ -333,7 +333,7 @@
       diaryNote: "Куда мы можем ходить вместе?<br>В каких кафе мне будут рады?<br>Какие отели действительно любят животных?<br>Где мы можем гулять, путешествовать и встречать новых друзей?",
       diary2: "Одна крошечная собака — и вдруг мир стал выглядеть совершенно иначе.",
       diary3: "Мы начали искать места, открывать новые маршруты и собирать полезные ответы.",
-      diary4: "Каждая прогулка стала маленьким исследованием. Каждая поездка приносила новое открытие. Каждое новое место давало нам что-то полезное, что хотелось запомнить.",
+      diary4: "Каждая прогулка стала маленьким исследованием. Каждая поездка приносила новое открытие. Каждое новое место давало что-то полезное, что хотелось запомнить.",
       diary5: "Возможно, именно так и начался PETS & DOGUE. ♥",
       pull: "Одна маленькая собака.<br>Один очень большой мир. 🌍✨",
 
@@ -599,8 +599,7 @@
 
       friendKicker: "Hallo, neuer Freund ♥ ✨",
       friendTitle: "IT’S A<br>MATCH! 💕",
-      friend1: "Hallo. Ich bin Miso Cute.",
-      friend2: "Ich bin winzig, sanft, neugierig und freue mich immer darauf, jemanden Neues kennenzulernen.",
+      friend1: "Hallo. Ich bin Miso Cute.",      friend2: "Ich bin winzig, sanft, neugierig und freue mich immer darauf, jemanden Neues kennenzulernen.",
       friend3: "Manche Abenteuer sind zum Entdecken da. Andere zum Teilen. 🐾",
       friend4: "Ein neues Gesicht. Ein kleines Hallo. Und manchmal — ein neuer Freund.",
       friend5: "Das Schönste an einem neuen Abenteuer ist, nie zu wissen, wen man treffen könnte. ♥",
@@ -670,7 +669,8 @@
       sizeValue: "Diminuta",
       coat: "Pelaje",
       coatValue: "Suave, esponjoso y rubio",
-      personality: "Personalidad",      personalityValue: "Dulce y curiosa",
+      personality: "Personalidad",
+      personalityValue: "Dulce y curiosa",
       loves: "Le encanta",
       lovesValue: "Paseos y viajes",
       weakness: "Debilidad",
@@ -1009,156 +1009,1679 @@
       tagline: "Um mundo. Todos os animais. ♥",
       issueLink: "← Edição 01",
       home: "Início"
-    },    /* =====================================================
-       DUTCH / POLISH / CZECH / SLOVAK / ROMANIAN /
-       BULGARIAN / GREEK / SWEDISH / DANISH / NORWEGIAN /
-       FINNISH / HUNGARIAN / TURKISH / ARABIC / HEBREW
+    },
 
-       ВАЖНО:
-       здесь должны идти остальные словари из текущего файла
-       БЕЗ сокращений и БЕЗ удаления языков.
-       ===================================================== */  };
+    /* =====================================================
+       POLISH
+    ===================================================== */
 
-  function normalizeLanguage(lang) {
-    lang = String(lang || "")
+    pl: {
+      coverKicker: "PETS & DOGUE · WYDANIE 01 · HISTORIA Z OKŁADKI ✨",
+      coverMeet: "Poznaj",
+      coverBlue: "Małe łapki.<br>Wielki świat. ✨",
+      coverText: "Maleńka blond pomeranian z Londynu, z ciekawskim noskiem i ogromnym światem do odkrycia.",
+      backIssue: "← Wróć do Wydania 01",
+
+      helloKicker: "Cześć, nowy przyjacielu ♥ ✨",
+      helloTitle: "Cześć, jestem",
+      helloText: "Maleńka, puszysta, blond i mieszkam w Londynie. Uwielbiam piękne miejsca, długie spacery, modę i poznawanie nowych przyjaciół.",
+
+      profileKicker: "Profil Miso ✨",
+      profileTitle: "MAŁY PIES.<br>WIELKA OSOBOWOŚĆ.",
+      profileSub: "Pomeranian · Londyn · bardzo kompaktowa.",
+
+      breed: "Rasa",
+      breedValue: "Pomeranian",
+      city: "Miasto",
+      cityValue: "Londyn",
+      size: "Rozmiar",
+      sizeValue: "Maleńka",
+      coat: "Sierść",
+      coatValue: "Miękka, puszysta i blond",
+      personality: "Charakter",
+      personalityValue: "Łagodna i ciekawska",
+      loves: "Uwielbia",
+      lovesValue: "Spacery i podróże",
+      weakness: "Słabość",
+      weaknessValue: "Przysmaki",
+      looking: "Szukam",
+      lookingValue: "Nowych przyjaciół",
+      swipe: "Przesunąć w prawo?",
+      match: "To dopasowanie! ♥ ✨",
+
+      favourites: "Ulubione rzeczy Miso ♥ ✨",
+      world: "MÓJ MAŁY<br>ŚWIAT",
+
+      travel: "Podróże ✈️✨",
+      travelText: "Małe łapki. Nowe miejsca.",
+      playtime: "Zabawa 🧸💕",
+      playtimeText: "Mój ulubiony rodzaj poważnej sprawy.",
+      fashion: "Moda 👗💕",
+      fashionText: "Trochę różu. Dużo Miso.",
+      london: "Londyn 🇬🇧💙",
+      londonText: "Moje miasto. Moje małe przygody.",
+      friends: "Przyjaciele 💕🐾",
+      friendsText: "Przygody są lepsze razem.",
+
+      diaryKicker: "Z pamiętnika Miso ♥ ✨",
+      diaryTitle: "JEDEN MAŁY PIES.<br>JEDEN BARDZO WIELKI POMYSŁ. ✨",
+      diaryLead: "Myślę, że wszystko zaczęło się ode mnie. 💕",
+      diary1: "Kiedy się pojawiłam, moja rodzina nagle miała całą nową listę pytań.",
+      diaryNote: "Dokąd możemy chodzić razem?<br>Które kawiarnie mnie przyjmą?<br>Które hotele naprawdę kochają zwierzęta?<br>Gdzie możemy spacerować, podróżować i poznawać nowych przyjaciół?",
+      diary2: "Jeden maleńki pies — i nagle świat wyglądał zupełnie inaczej.",
+      diary3: "Zaczęliśmy szukać miejsc, odkrywać nowe trasy i zbierać przydatne odpowiedzi.",
+      diary4: "Każdy spacer stał się małym śledztwem. Każda podróż przynosiła nowe odkrycie. Każde nowe miejsce dawało nam coś przydatnego do zapamiętania.",
+      diary5: "Może właśnie tak zaczęło się PETS & DOGUE. ♥",
+      pull: "Jeden mały pies.<br>Jeden bardzo wielki świat. 🌍✨",
+
+      seaKicker: "Miso odkrywa ✨",
+      seaTitle: "Nad<br>morzem 🌊",
+      seaText: "Nowe zapachy.<br>Nowe dźwięki.<br>Wielki świat. 💙",
+
+      londonKicker: "Mój Londyn ♥ ✨",
+      londonTitle: "MOJE MIASTO —<br>LONDYN",
+      londonFeature: "Miso w Londynie 💙",
+      londonFeatureSub: "Małe łapki. Wielkie miasto. 🎀✨",
+      london1: "Londyn nigdy nie wydaje się dokładnie taki sam dwa razy. ♥",
+      london2: "Dziś park. 🌳<br>Jutro mała kawiarnia. ☕<br>Potem rzeka, targ, czerwony autobus 🚌<br>albo ulica, której jeszcze nigdy nie widziałam.",
+      london3: "Zatrzymuję się. Patrzę. Wącham. Potem wybieram inny kierunek. ✨",
+      london4: "Czasem najlepszy jest cel podróży. Czasem wszystko, co zauważam po drodze.",
+      london5: "Dla mnie spacer to nie tylko wyjście z domu. Tak odkrywam świat. 🌍",
+
+      friendKicker: "Cześć, nowy przyjacielu ♥ ✨",
+      friendTitle: "TO<br>DOPASOWANIE! 💕",
+      friend1: "Cześć. Jestem Miso Cute.",
+      friend2: "Jestem maleńka, łagodna, ciekawska i zawsze chętnie poznaję kogoś nowego.",
+      friend3: "Niektóre przygody są po to, by odkrywać. Inne — by je dzielić. 🐾",
+      friend4: "Nowa twarz. Małe cześć. A czasem — nowy przyjaciel.",
+      friend5: "Najlepszą częścią nowej przygody jest to, że nigdy nie wiadomo, kogo można spotkać. ♥",
+
+      everyoneKicker: "Wszyscy są zaproszeni ♥ ✨",
+      everyoneTitle: "JEST TU MIEJSCE<br>DLA KAŻDEGO.",
+      animals: "🐶 Psy, 🐱 koty, 🦜 papugi, 🐰 króliki, 🐴 konie, 🐢 żółwie, świnki morskie, 🐠 ryby, 🐦 ptaki i gady.",
+      everyone1: "Duże. Małe. Puszyste. Pierzaste. Gładkie.",
+      everyone2: "Niektóre mają łapy. Niektóre skrzydła. Niektóre płetwy.",
+      everyone3: "Niektóre chcą biegać obok nas. Inne wolą ciepły, spokojny kąt. Niektóre obserwują cały świat z gałęzi, akwarium albo ulubionego okna.",
+      everyone4: "Każdy jest tutaj mile widziany. ♥ 🌍✨",
+      everyone5: "Nie musimy wyglądać tak samo, żeby należeć do tego samego świata.",
+      everyone6: "Właśnie o to chodzi.",
+      everyone7: "PETS & DOGUE jest o zwierzętach — i ludziach, którzy je kochają.",
+
+      askKicker: "Dział ciekawości ♥ ✨",
+      askTitle: "A JEŚLI<br>POTRZEBUJESZ MOJEJ POMOCY...",
+      askMark: "Zapytaj mojego ciekawskiego noska ♥",
+      askMarkSub: "Miso wie, gdzie szukać. ✨",
+      ask1: "Potrzebujesz miejsca, do którego możesz pójść?",
+      ask2: "Szukasz miejsca przyjaznego zwierzętom? 🐾",
+      ask3: "Planujesz podróż? ✈️",
+      ask4: "Szukasz czegoś przydatnego?",
+      ask5: "Patrzę. Wącham. Odkrywam. ✨",
+      ask6: "A kiedy znajdę coś ciekawego, przynoszę to do PETS & DOGUE.",
+      ask7: "Właśnie do tego służy ciekawski mały nosek. ♥",
+      askLabel: "Zapytaj Miso ✨",
+
+      finalKicker: "Do zobaczenia gdzieś na świecie ✨",
+      finalTitle: "DO ZOBACZENIA<br>GDZIEŚ TAM.",
+      finalBlue: "Jeden świat.<br>Każde zwierzę. 🌍",
+      final1: "Dziś możemy spotkać się w Londynie. Jutro — nad morzem.",
+      final2: "Może w parku, kawiarni albo w zupełnie niespodziewanym miejscu.",
+      final3: "Jeśli zobaczysz maleńką puszystą blondynkę bardzo poważnie odkrywającą nowe miejsce — podejdź i przywitaj się. 💕",
+      final4: "A jeśli na razie jesteśmy daleko od siebie, szukaj mojego małego kółeczka na PETS & DOGUE.",
+      final5: "Tak czy inaczej, spotkamy się. ♥",
+      signature: "Z miłością,<br>Miso ♥",
+      tagline: "Jeden świat. Każde zwierzę. ♥",
+      issueLink: "← Wydanie 01",
+      home: "Strona główna"
+    },
+
+    /* =====================================================
+       DUTCH
+    ===================================================== */
+
+    nl: {
+      coverKicker: "PETS & DOGUE · EDITIE 01 · COVER STORY ✨",
+      coverMeet: "Maak kennis met",
+      coverBlue: "Kleine pootjes.<br>Grote wereld. ✨",
+      coverText: "Een piepkleine blonde Pomeranian uit Londen, met een nieuwsgierig neusje en een enorme wereld om te ontdekken.",
+      backIssue: "← Terug naar Editie 01",
+
+      helloKicker: "Hallo, nieuwe vriend ♥ ✨",
+      helloTitle: "Hoi, ik ben",
+      helloText: "Klein, pluizig, blond en woonachtig in Londen. Ik hou van mooie plekken, lange wandelingen, mode en nieuwe vrienden ontmoeten.",
+
+      profileKicker: "Het profiel van Miso ✨",
+      profileTitle: "KLEINE HOND.<br>GROTE PERSOONLIJKHEID.",
+      profileSub: "Pomeranian · Londen · heel compact.",
+
+      breed: "Ras",
+      breedValue: "Pomeranian",
+      city: "Stad",
+      cityValue: "Londen",
+      size: "Formaat",
+      sizeValue: "Piepklein",
+      coat: "Vacht",
+      coatValue: "Zacht, pluizig en blond",
+      personality: "Karakter",
+      personalityValue: "Lief en nieuwsgierig",
+      loves: "Houdt van",
+      lovesValue: "Wandelen en reizen",
+      weakness: "Zwak voor",
+      weaknessValue: "Snoepjes",
+      looking: "Op zoek naar",
+      lookingValue: "Nieuwe vrienden",
+      swipe: "Naar rechts swipen?",
+      match: "Het is een match! ♥ ✨",
+
+      favourites: "Miso’s favorieten ♥ ✨",
+      world: "MIJN KLEINE<br>WERELD",
+
+      travel: "Reizen ✈️✨",
+      travelText: "Kleine pootjes. Nieuwe plekken.",
+      playtime: "Speeltijd 🧸💕",
+      playtimeText: "Mijn favoriete serieuze bezigheid.",
+      fashion: "Mode 👗💕",
+      fashionText: "Een beetje roze. Heel veel Miso.",
+      london: "Londen 🇬🇧💙",
+      londonText: "Mijn stad. Mijn kleine avonturen.",
+      friends: "Vrienden 💕🐾",
+      friendsText: "Avonturen zijn beter samen.",
+
+      diaryKicker: "Uit Miso’s dagboek ♥ ✨",
+      diaryTitle: "ÉÉN KLEINE HOND.<br>EEN HEEL GROOT IDEE. ✨",
+      diaryLead: "Ik denk dat het allemaal met mij begon. 💕",
+      diary1: "Toen ik kwam, had mijn familie ineens een hele nieuwe lijst met vragen.",
+      diaryNote: "Waar kunnen we samen naartoe?<br>Welke cafés verwelkomen mij?<br>Welke hotels houden echt van huisdieren?<br>Waar kunnen we wandelen, reizen en nieuwe vrienden ontmoeten?",
+      diary2: "Eén piepkleine hond — en plotseling zag de wereld er totaal anders uit.",
+      diary3: "We begonnen plekken te zoeken, nieuwe routes te ontdekken en nuttige antwoorden te verzamelen.",
+      diary4: "Elke wandeling werd een klein onderzoek. Elke reis bracht een nieuwe ontdekking. Elke nieuwe plek gaf ons iets nuttigs om te onthouden.",
+      diary5: "Misschien was dat het begin van PETS & DOGUE. ♥",
+      pull: "Eén kleine hond.<br>Eén heel grote wereld. 🌍✨",
+
+      seaKicker: "Miso ontdekt ✨",
+      seaTitle: "De<br>zee 🌊",
+      seaText: "Nieuwe geuren.<br>Nieuwe geluiden.<br>Grote wereld. 💙",      londonKicker: "Mijn Londen ♥ ✨",
+      londonTitle: "MIJN STAD —<br>LONDEN",
+      londonFeature: "Miso in Londen 💙",
+      londonFeatureSub: "Kleine pootjes. Grote stad. 🎀✨",
+      london1: "Londen voelt nooit twee keer precies hetzelfde. ♥",
+      london2: "Vandaag een park. 🌳<br>Morgen een klein café. ☕<br>Dan de rivier, een markt, een rode bus 🚌<br>of een straat die ik nog nooit heb gezien.",
+      london3: "Ik stop. Ik kijk. Ik snuffel. Daarna kies ik een andere richting. ✨",
+      london4: "Soms is de bestemming het beste deel. Soms is het alles wat ik onderweg opmerk.",
+      london5: "Voor mij is een wandeling niet simpelweg naar buiten gaan. Zo ontdek ik de wereld. 🌍",
+
+      friendKicker: "Hallo, nieuwe vriend ♥ ✨",
+      friendTitle: "HET IS EEN<br>MATCH! 💕",
+      friend1: "Hoi. Ik ben Miso Cute.",
+      friend2: "Ik ben piepklein, lief, nieuwsgierig en altijd geïnteresseerd om iemand nieuws te ontmoeten.",
+      friend3: "Sommige avonturen zijn gemaakt om te ontdekken. Andere om te delen. 🐾",
+      friend4: "Een nieuw gezicht. Een klein hallo. En soms — een nieuwe vriend.",
+      friend5: "Het leukste aan een nieuw avontuur is dat je nooit weet wie je zult ontmoeten. ♥",
+
+      everyoneKicker: "Iedereen is uitgenodigd ♥ ✨",
+      everyoneTitle: "ER IS RUIMTE<br>VOOR IEDEREEN.",
+      animals: "🐶 Honden, 🐱 katten, 🦜 papegaaien, 🐰 konijnen, 🐴 paarden, 🐢 schildpadden, cavia’s, 🐠 vissen, 🐦 vogels en reptielen.",
+      everyone1: "Groot. Klein. Pluizig. Gevederd. Glad.",
+      everyone2: "Sommigen hebben poten. Sommigen vleugels. Sommigen vinnen.",
+      everyone3: "Sommigen willen naast ons rennen. Anderen zitten liever in een warme, rustige hoek. Sommigen bekijken de hele wereld vanaf een tak, vanuit een aquarium of door hun favoriete raam.",
+      everyone4: "Iedereen is hier welkom. ♥ 🌍✨",
+      everyone5: "We hoeven er niet hetzelfde uit te zien om bij dezelfde wereld te horen.",
+      everyone6: "Dat is precies het idee.",
+      everyone7: "PETS & DOGUE gaat over dieren — en de mensen die van ze houden.",
+
+      askKicker: "Afdeling nieuwsgierigheid ♥ ✨",
+      askTitle: "EN ALS JE<br>MIJN HULP NODIG HEBT...",
+      askMark: "Vraag het aan mijn nieuwsgierige neusje ♥",
+      askMarkSub: "Miso weet waar ze moet zoeken. ✨",
+      ask1: "Een plek nodig om naartoe te gaan?",
+      ask2: "Op zoek naar een huisdiervriendelijke plek? 🐾",
+      ask3: "Een reis aan het plannen? ✈️",
+      ask4: "Op zoek naar iets nuttigs?",
+      ask5: "Ik kijk. Ik snuffel. Ik ontdek. ✨",
+      ask6: "En wanneer ik iets interessants vind, breng ik het terug naar PETS & DOGUE.",
+      ask7: "Daar is een nieuwsgierig klein neusje voor. ♥",
+      askLabel: "Vraag Miso ✨",
+
+      finalKicker: "Tot ergens ter wereld ✨",
+      finalTitle: "TOT ZIENS<br>DAARBUITEN.",
+      finalBlue: "Eén wereld.<br>Elk huisdier. 🌍",
+      final1: "Vandaag ontmoeten we elkaar misschien in Londen. Morgen — aan zee.",
+      final2: "Misschien in een park, een café of ergens totaal onverwachts.",
+      final3: "Als je een piepkleine pluizige blondine heel serieus een nieuwe plek ziet verkennen — kom dan hallo zeggen. 💕",
+      final4: "En als we voorlopig ver van elkaar zijn, zoek dan mijn kleine cirkel op PETS & DOGUE.",
+      final5: "Hoe dan ook, we zullen elkaar ontmoeten. ♥",
+      signature: "Met liefde,<br>Miso ♥",
+      tagline: "Eén wereld. Elk huisdier. ♥",
+      issueLink: "← Editie 01",
+      home: "Home"
+    },
+
+    /* =====================================================
+       CZECH
+    ===================================================== */
+
+    cs: {
+      coverKicker: "PETS & DOGUE · VYDÁNÍ 01 · PŘÍBĚH Z OBÁLKY ✨",
+      coverMeet: "Seznamte se s",
+      coverBlue: "Malé tlapky.<br>Velký svět. ✨",
+      coverText: "Maličká blonďatá pomeranianka z Londýna se zvědavým čumáčkem a obrovským světem k objevování.",
+      backIssue: "← Zpět na Vydání 01",
+
+      helloKicker: "Ahoj, nový příteli ♥ ✨",
+      helloTitle: "Ahoj, já jsem",
+      helloText: "Maličká, chlupatá, blonďatá a žiji v Londýně. Miluji krásná místa, dlouhé procházky, módu a poznávání nových přátel.",
+
+      profileKicker: "Profil Miso ✨",
+      profileTitle: "MALÝ PES.<br>VELKÁ OSOBNOST.",
+      profileSub: "Pomeranian · Londýn · velmi kompaktní.",
+
+      breed: "Plemeno",
+      breedValue: "Pomeranian",
+      city: "Město",
+      cityValue: "Londýn",
+      size: "Velikost",
+      sizeValue: "Maličká",
+      coat: "Srst",
+      coatValue: "Měkká, huňatá a blond",
+      personality: "Povaha",
+      personalityValue: "Jemná a zvědavá",
+      loves: "Miluje",
+      lovesValue: "Procházky a cestování",
+      weakness: "Slabost",
+      weaknessValue: "Pamlsky",
+      looking: "Hledá",
+      lookingValue: "Nové přátele",
+      swipe: "Přejet doprava?",
+      match: "Je to match! ♥ ✨",
+
+      favourites: "Oblíbené věci Miso ♥ ✨",
+      world: "MŮJ MALÝ<br>SVĚT",
+
+      travel: "Cestování ✈️✨",
+      travelText: "Malé tlapky. Nová místa.",
+      playtime: "Čas na hraní 🧸💕",
+      playtimeText: "Moje nejoblíbenější vážná činnost.",
+      fashion: "Móda 👗💕",
+      fashionText: "Trochu růžové. Hodně Miso.",
+      london: "Londýn 🇬🇧💙",
+      londonText: "Moje město. Moje malá dobrodružství.",
+      friends: "Přátelé 💕🐾",
+      friendsText: "Dobrodružství jsou lepší společně.",
+
+      diaryKicker: "Z deníku Miso ♥ ✨",
+      diaryTitle: "JEDEN MALÝ PES.<br>JEDEN OPRAVDU VELKÝ NÁPAD. ✨",
+      diaryLead: "Myslím, že to všechno začalo se mnou. 💕",
+      diary1: "Když jsem přišla, moje rodina najednou měla úplně nový seznam otázek.",
+      diaryNote: "Kam můžeme jít společně?<br>Které kavárny mě přivítají?<br>Které hotely mají opravdu rády domácí mazlíčky?<br>Kde se můžeme procházet, cestovat a potkávat nové přátele?",
+      diary2: "Jeden maličký pes — a svět najednou vypadal úplně jinak.",
+      diary3: "Začali jsme hledat místa, objevovat nové trasy a sbírat užitečné odpovědi.",
+      diary4: "Každá procházka se stala malým pátráním. Každá cesta přinesla nový objev. Každé nové místo nám dalo něco užitečného k zapamatování.",
+      diary5: "Možná právě tak začalo PETS & DOGUE. ♥",
+      pull: "Jeden malý pes.<br>Jeden opravdu velký svět. 🌍✨",
+
+      seaKicker: "Miso objevuje ✨",
+      seaTitle: "U<br>moře 🌊",
+      seaText: "Nové vůně.<br>Nové zvuky.<br>Velký svět. 💙",
+
+      londonKicker: "Můj Londýn ♥ ✨",
+      londonTitle: "MOJE MĚSTO —<br>LONDÝN",
+      londonFeature: "Miso v Londýně 💙",
+      londonFeatureSub: "Malé tlapky. Velké město. 🎀✨",
+      london1: "Londýn nikdy nepůsobí dvakrát úplně stejně. ♥",
+      london2: "Dnes park. 🌳<br>Zítra malá kavárna. ☕<br>Potom řeka, trh, červený autobus 🚌<br>nebo ulice, kterou jsem ještě nikdy neviděla.",
+      london3: "Zastavím se. Dívám se. Čichám. Pak si vyberu jiný směr. ✨",
+      london4: "Někdy je nejlepší samotný cíl. Jindy všechno, čeho si všimnu cestou.",
+      london5: "Pro mě procházka není jen cesta ven. Tak objevuji svět. 🌍",
+
+      friendKicker: "Ahoj, nový příteli ♥ ✨",
+      friendTitle: "JE TO<br>MATCH! 💕",
+      friend1: "Ahoj. Jsem Miso Cute.",
+      friend2: "Jsem maličká, jemná, zvědavá a vždycky ráda poznám někoho nového.",
+      friend3: "Některá dobrodružství jsou určená k objevování. Jiná ke sdílení. 🐾",
+      friend4: "Nová tvář. Malé ahoj. A někdy — nový přítel.",
+      friend5: "Nejlepší na novém dobrodružství je, že nikdy nevíte, koho můžete potkat. ♥",
+
+      everyoneKicker: "Všichni jsou zváni ♥ ✨",
+      everyoneTitle: "JE TU MÍSTO<br>PRO KAŽDÉHO.",
+      animals: "🐶 Psi, 🐱 kočky, 🦜 papoušci, 🐰 králíci, 🐴 koně, 🐢 želvy, morčata, 🐠 ryby, 🐦 ptáci a plazi.",
+      everyone1: "Velcí. Malí. Chlupatí. Opeření. Hladcí.",
+      everyone2: "Někteří mají tlapky. Někteří křídla. Někteří ploutve.",
+      everyone3: "Někteří chtějí běžet vedle nás. Jiní dávají přednost teplému klidnému koutku. Někteří sledují celý svět z větve, akvária nebo oblíbeného okna.",
+      everyone4: "Všichni jsou tu vítáni. ♥ 🌍✨",
+      everyone5: "Nemusíme vypadat stejně, abychom patřili do stejného světa.",
+      everyone6: "A právě o to jde.",
+      everyone7: "PETS & DOGUE je o zvířatech — a lidech, kteří je milují.",
+
+      askKicker: "Oddělení zvědavosti ♥ ✨",
+      askTitle: "A POKUD<br>POTŘEBUJEŠ MOU POMOC...",
+      askMark: "Zeptej se mého zvědavého čumáčku ♥",
+      askMarkSub: "Miso ví, kde hledat. ✨",
+      ask1: "Potřebuješ někam vyrazit?",
+      ask2: "Hledáš místo přátelské ke zvířatům? 🐾",
+      ask3: "Plánuješ cestu? ✈️",
+      ask4: "Hledáš něco užitečného?",
+      ask5: "Dívám se. Čichám. Objevuji. ✨",
+      ask6: "A když najdu něco zajímavého, přinesu to zpět do PETS & DOGUE.",
+      ask7: "Přesně k tomu je zvědavý malý čumáček. ♥",
+      askLabel: "Zeptej se Miso ✨",
+
+      finalKicker: "Uvidíme se někde ve světě ✨",
+      finalTitle: "UVIDÍME SE<br>TAM VENKU.",
+      finalBlue: "Jeden svět.<br>Každý mazlíček. 🌍",
+      final1: "Dnes se možná potkáme v Londýně. Zítra — u moře.",
+      final2: "Možná v parku, kavárně nebo někde úplně nečekaně.",
+      final3: "Pokud uvidíš maličkou chlupatou blondýnku, která velmi vážně objevuje nové místo — přijď pozdravit. 💕",
+      final4: "A pokud jsme zatím daleko od sebe, hledej můj malý kruh na PETS & DOGUE.",
+      final5: "Tak či tak se potkáme. ♥",
+      signature: "S láskou,<br>Miso ♥",
+      tagline: "Jeden svět. Každý mazlíček. ♥",
+      issueLink: "← Vydání 01",
+      home: "Domů"
+    },
+
+    /* =====================================================
+       GREEK
+    ===================================================== */
+
+    el: {
+      coverKicker: "PETS & DOGUE · ΤΕΥΧΟΣ 01 · ΙΣΤΟΡΙΑ ΕΞΩΦΥΛΛΟΥ ✨",
+      coverMeet: "Γνωρίστε τη",
+      coverBlue: "Μικρές πατούσες.<br>Μεγάλος κόσμος. ✨",
+      coverText: "Ένα μικροσκοπικό ξανθό Πομεράνιαν από το Λονδίνο, με περίεργη μυτούλα και έναν τεράστιο κόσμο να ανακαλύψει.",
+      backIssue: "← Πίσω στο Τεύχος 01",
+
+      helloKicker: "Γεια σου, νέε φίλε ♥ ✨",
+      helloTitle: "Γεια, είμαι η",
+      helloText: "Μικροσκοπική, χνουδωτή, ξανθιά και ζω στο Λονδίνο. Λατρεύω τα όμορφα μέρη, τις μεγάλες βόλτες, τη μόδα και να γνωρίζω νέους φίλους.",
+
+      profileKicker: "Το προφίλ της Miso ✨",
+      profileTitle: "ΜΙΚΡΟΣ ΣΚΥΛΟΣ.<br>ΜΕΓΑΛΗ ΠΡΟΣΩΠΙΚΟΤΗΤΑ.",
+      profileSub: "Πομεράνιαν · Λονδίνο · πολύ μικροσκοπική.",
+
+      breed: "Ράτσα",
+      breedValue: "Πομεράνιαν",
+      city: "Πόλη",
+      cityValue: "Λονδίνο",
+      size: "Μέγεθος",
+      sizeValue: "Μικροσκοπική",
+      coat: "Τρίχωμα",
+      coatValue: "Απαλό, χνουδωτό και ξανθό",
+      personality: "Χαρακτήρας",
+      personalityValue: "Γλυκιά και περίεργη",
+      loves: "Λατρεύει",
+      lovesValue: "Βόλτες και ταξίδια",
+      weakness: "Αδυναμία",
+      weaknessValue: "Λιχουδιές",
+      looking: "Ψάχνει",
+      lookingValue: "Νέους φίλους",
+      swipe: "Swipe δεξιά;",
+      match: "Είναι match! ♥ ✨",
+
+      favourites: "Τα αγαπημένα της Miso ♥ ✨",
+      world: "Ο ΜΙΚΡΟΣ ΜΟΥ<br>ΚΟΣΜΟΣ",
+
+      travel: "Ταξίδια ✈️✨",
+      travelText: "Μικρές πατούσες. Νέα μέρη.",
+      playtime: "Ώρα για παιχνίδι 🧸💕",
+      playtimeText: "Η αγαπημένη μου σοβαρή ασχολία.",
+      fashion: "Μόδα 👗💕",
+      fashionText: "Λίγο ροζ. Πολύ Miso.",
+      london: "Λονδίνο 🇬🇧💙",
+      londonText: "Η πόλη μου. Οι μικρές μου περιπέτειες.",
+      friends: "Φίλοι 💕🐾",
+      friendsText: "Οι περιπέτειες είναι καλύτερες μαζί.",
+
+      diaryKicker: "Από το ημερολόγιο της Miso ♥ ✨",
+      diaryTitle: "ΕΝΑΣ ΜΙΚΡΟΣ ΣΚΥΛΟΣ.<br>ΜΙΑ ΠΟΛΥ ΜΕΓΑΛΗ ΙΔΕΑ. ✨",
+      diaryLead: "Νομίζω ότι όλα ξεκίνησαν από εμένα. 💕",
+      diary1: "Όταν ήρθα, η οικογένειά μου απέκτησε ξαφνικά μια ολόκληρη νέα λίστα ερωτήσεων.",
+      diaryNote: "Πού μπορούμε να πάμε μαζί;<br>Ποια καφέ θα με καλωσορίσουν;<br>Ποια ξενοδοχεία αγαπούν πραγματικά τα κατοικίδια;<br>Πού μπορούμε να περπατήσουμε, να ταξιδέψουμε και να γνωρίσουμε νέους φίλους;",
+      diary2: "Ένας μικροσκοπικός σκύλος — και ξαφνικά ο κόσμος έμοιαζε εντελώς διαφορετικός.",
+      diary3: "Αρχίσαμε να ψάχνουμε μέρη, να ανακαλύπτουμε νέες διαδρομές και να συγκεντρώνουμε χρήσιμες απαντήσεις.",
+      diary4: "Κάθε βόλτα έγινε μια μικρή εξερεύνηση. Κάθε ταξίδι έφερνε μια νέα ανακάλυψη. Κάθε νέο μέρος μας έδινε κάτι χρήσιμο να θυμόμαστε.",
+      diary5: "Ίσως έτσι ξεκίνησε το PETS & DOGUE. ♥",
+      pull: "Ένας μικρός σκύλος.<br>Ένας πολύ μεγάλος κόσμος. 🌍✨",
+
+      seaKicker: "Η Miso εξερευνά ✨",
+      seaTitle: "Η<br>θάλασσα 🌊",
+      seaText: "Νέες μυρωδιές.<br>Νέοι ήχοι.<br>Μεγάλος κόσμος. 💙",
+
+      londonKicker: "Το Λονδίνο μου ♥ ✨",
+      londonTitle: "Η ΠΟΛΗ ΜΟΥ —<br>ΛΟΝΔΙΝΟ",
+      londonFeature: "Η Miso στο Λονδίνο 💙",
+      londonFeatureSub: "Μικρές πατούσες. Μεγάλη πόλη. 🎀✨",
+      london1: "Το Λονδίνο δεν μοιάζει ποτέ ακριβώς ίδιο δύο φορές. ♥",
+      london2: "Ένα πάρκο σήμερα. 🌳<br>Ένα μικρό καφέ αύριο. ☕<br>Μετά το ποτάμι, μια αγορά, ένα κόκκινο λεωφορείο 🚌<br>ή ένας δρόμος που δεν έχω ξαναδεί.",
+      london3: "Σταματώ. Κοιτάζω. Μυρίζω. Μετά διαλέγω άλλη κατεύθυνση. ✨",
+      london4: "Μερικές φορές το καλύτερο είναι ο προορισμός. Μερικές φορές είναι όλα όσα παρατηρώ στη διαδρομή.",
+      london5: "Για μένα, η βόλτα δεν είναι απλώς να βγω έξω. Είναι ο τρόπος που ανακαλύπτω τον κόσμο. 🌍",
+
+      friendKicker: "Γεια σου, νέε φίλε ♥ ✨",
+      friendTitle: "ΕΙΝΑΙ<br>MATCH! 💕",
+      friend1: "Γεια. Είμαι η Miso Cute.",
+      friend2: "Είμαι μικροσκοπική, γλυκιά, περίεργη και πάντα χαίρομαι να γνωρίζω κάποιον καινούργιο.",
+      friend3: "Κάποιες περιπέτειες είναι για εξερεύνηση. Άλλες για να τις μοιραζόμαστε. 🐾",
+      friend4: "Ένα νέο πρόσωπο. Ένα μικρό γεια. Και μερικές φορές — ένας νέος φίλος.",
+      friend5: "Το καλύτερο σε μια νέα περιπέτεια είναι ότι ποτέ δεν ξέρεις ποιον μπορεί να συναντήσεις. ♥",
+
+      everyoneKicker: "Όλοι είναι καλεσμένοι ♥ ✨",
+      everyoneTitle: "ΥΠΑΡΧΕΙ ΧΩΡΟΣ<br>ΓΙΑ ΟΛΟΥΣ.",
+      animals: "🐶 Σκύλοι, 🐱 γάτες, 🦜 παπαγάλοι, 🐰 κουνέλια, 🐴 άλογα, 🐢 χελώνες, ινδικά χοιρίδια, 🐠 ψάρια, 🐦 πουλιά και ερπετά.",
+      everyone1: "Μεγάλοι. Μικροί. Χνουδωτοί. Φτερωτοί. Λείοι.",
+      everyone2: "Κάποιοι έχουν πατούσες. Κάποιοι φτερά. Κάποιοι πτερύγια.",
+      everyone3: "Κάποιοι θέλουν να τρέχουν δίπλα μας. Άλλοι προτιμούν μια ζεστή ήσυχη γωνιά. Κάποιοι παρακολουθούν τον κόσμο από ένα κλαδί, ένα ενυδρείο ή το αγαπημένο τους παράθυρο.",
+      everyone4: "Όλοι είναι ευπρόσδεκτοι εδώ. ♥ 🌍✨",
+      everyone5: "Δεν χρειάζεται να μοιάζουμε για να ανήκουμε στον ίδιο κόσμο.",
+      everyone6: "Αυτό ακριβώς είναι το νόημα.",
+      everyone7: "Το PETS & DOGUE είναι για τα ζώα — και τους ανθρώπους που τα αγαπούν.",
+
+      askKicker: "Τμήμα περιέργειας ♥ ✨",
+      askTitle: "ΚΑΙ ΑΝ<br>ΧΡΕΙΑΖΕΣΑΙ ΤΗ ΒΟΗΘΕΙΑ ΜΟΥ...",
+      askMark: "Ρώτησε τη μικρή περίεργη μυτούλα μου ♥",
+      askMarkSub: "Η Miso ξέρει πού να ψάξει. ✨",
+      ask1: "Χρειάζεσαι κάπου να πας;",
+      ask2: "Ψάχνεις pet-friendly μέρος; 🐾",
+      ask3: "Σχεδιάζεις ταξίδι; ✈️",
+      ask4: "Ψάχνεις κάτι χρήσιμο;",
+      ask5: "Κοιτάζω. Μυρίζω. Εξερευνώ. ✨",
+      ask6: "Και όταν βρίσκω κάτι ενδιαφέρον, το φέρνω πίσω στο PETS & DOGUE.",
+      ask7: "Γι’ αυτό υπάρχει μια μικρή περίεργη μυτούλα. ♥",
+      askLabel: "Ρώτησε τη Miso ✨",
+
+      finalKicker: "Θα τα πούμε κάπου στον κόσμο ✨",
+      finalTitle: "ΘΑ ΤΑ ΠΟΥΜΕ<br>ΕΚΕΙ ΕΞΩ.",
+      finalBlue: "Ένας κόσμος.<br>Κάθε κατοικίδιο. 🌍",
+      final1: "Σήμερα μπορεί να συναντηθούμε στο Λονδίνο. Αύριο — δίπλα στη θάλασσα.",
+      final2: "Ίσως σε ένα πάρκο, ένα καφέ ή κάπου εντελώς απρόσμενα.",
+      final3: "Αν δεις μια μικροσκοπική χνουδωτή ξανθιά να εξερευνά πολύ σοβαρά ένα νέο μέρος — έλα να πεις γεια. 💕",
+      final4: "Και αν προς το παρόν είμαστε μακριά, ψάξε τον μικρό μου κύκλο στο PETS & DOGUE.",
+      final5: "Με τον έναν ή τον άλλο τρόπο, θα συναντηθούμε. ♥",
+      signature: "Με αγάπη,<br>Miso ♥",
+      tagline: "Ένας κόσμος. Κάθε κατοικίδιο. ♥",
+      issueLink: "← Τεύχος 01",
+      home: "Αρχική"
+    },
+
+    /* =====================================================
+       SWEDISH
+    ===================================================== */
+
+    sv: {
+      coverKicker: "PETS & DOGUE · NUMMER 01 · OMSLAGSBERÄTTELSE ✨",
+      coverMeet: "Möt",
+      coverBlue: "Små tassar.<br>Stor värld. ✨",
+      coverText: "En pytteliten blond pomeranian från London, med en nyfiken nos och en väldigt stor värld att upptäcka.",
+      backIssue: "← Tillbaka till Nummer 01",
+
+      helloKicker: "Hej, nya vän ♥ ✨",
+      helloTitle: "Hej, jag är",
+      helloText: "Liten, fluffig, blond och bosatt i London. Jag älskar vackra platser, långa promenader, mode och att träffa nya vänner.",
+
+      profileKicker: "Miso-profilen ✨",
+      profileTitle: "LITEN HUND.<br>STOR PERSONLIGHET.",
+      profileSub: "Pomeranian · London · väldigt kompakt.",
+
+      breed: "Ras",
+      breedValue: "Pomeranian",
+      city: "Stad",
+      cityValue: "London",
+      size: "Storlek",
+      sizeValue: "Pytteliten",
+      coat: "Päls",
+      coatValue: "Mjuk, fluffig och blond",
+      personality: "Personlighet",
+      personalityValue: "Mild och nyfiken",
+      loves: "Älskar",
+      lovesValue: "Promenader och resor",
+      weakness: "Svaghet",
+      weaknessValue: "Godis",
+      looking: "Söker",
+      lookingValue: "Nya vänner",
+      swipe: "Svepa åt höger?",
+      match: "Det är en match! ♥ ✨",
+
+      favourites: "Misos favoriter ♥ ✨",
+      world: "MIN LILLA<br>VÄRLD",
+
+      travel: "Resor ✈️✨",
+      travelText: "Små tassar. Nya platser.",
+      playtime: "Lektid 🧸💕",
+      playtimeText: "Min favorit bland seriösa sysslor.",
+      fashion: "Mode 👗💕",
+      fashionText: "Lite rosa. Väldigt mycket Miso.",
+      london: "London 🇬🇧💙",
+      londonText: "Min stad. Mina små äventyr.",
+      friends: "Vänner 💕🐾",
+      friendsText: "Äventyr är bättre tillsammans.",
+
+      diaryKicker: "Ur Misos dagbok ♥ ✨",
+      diaryTitle: "EN LITEN HUND.<br>EN VÄLDIGT STOR IDÉ. ✨",
+      diaryLead: "Jag tror att allt började med mig. 💕",
+      diary1: "När jag kom fick min familj plötsligt en helt ny lista med frågor.",
+      diaryNote: "Vart kan vi gå tillsammans?<br>Vilka kaféer välkomnar mig?<br>Vilka hotell älskar verkligen husdjur?<br>Var kan vi promenera, resa och träffa nya vänner?",
+      diary2: "En pytteliten hund — och plötsligt såg världen helt annorlunda ut.",
+      diary3: "Vi började leta efter platser, upptäcka nya vägar och samla användbara svar.",
+      diary4: "Varje promenad blev en liten undersökning. Varje resa gav en ny upptäckt. Varje ny plats gav oss något användbart att minnas.",
+      diary5: "Kanske var det början på PETS & DOGUE. ♥",
+      pull: "En liten hund.<br>En väldigt stor värld. 🌍✨",
+
+      seaKicker: "Miso upptäcker ✨",
+      seaTitle: "Vid<br>havet 🌊",
+      seaText: "Nya dofter.<br>Nya ljud.<br>Stor värld. 💙",
+
+      londonKicker: "Mitt London ♥ ✨",
+      londonTitle: "MIN STAD —<br>LONDON",
+      londonFeature: "Miso i London 💙",
+      londonFeatureSub: "Små tassar. Stor stad. 🎀✨",
+      london1: "London känns aldrig exakt likadant två gånger. ♥",
+      london2: "En park idag. 🌳<br>Ett litet kafé imorgon. ☕<br>Sedan floden, en marknad, en röd buss 🚌<br>eller en gata jag aldrig har sett förut.",
+      london3: "Jag stannar. Jag tittar. Jag nosar. Sedan väljer jag en annan riktning. ✨",
+      london4: "Ibland är destinationen det bästa. Ibland är det allt jag upptäcker på vägen.",
+      london5: "För mig är en promenad inte bara att gå ut. Det är så jag upptäcker världen. 🌍",
+
+      friendKicker: "Hej, nya vän ♥ ✨",
+      friendTitle: "DET ÄR EN<br>MATCH! 💕",
+      friend1: "Hej. Jag är Miso Cute.",
+      friend2: "Jag är pytteliten, mild, nyfiken och alltid intresserad av att träffa någon ny.",
+      friend3: "Vissa äventyr är till för att upptäckas. Andra är till för att delas. 🐾",
+      friend4: "Ett nytt ansikte. Ett litet hej. Och ibland — en ny vän.",
+      friend5: "Det bästa med ett nytt äventyr är att aldrig veta vem man kan möta. ♥",
+
+      everyoneKicker: "Alla är inbjudna ♥ ✨",
+      everyoneTitle: "DET FINNS PLATS<br>FÖR ALLA.",
+      animals: "🐶 Hundar, 🐱 katter, 🦜 papegojor, 🐰 kaniner, 🐴 hästar, 🐢 sköldpaddor, marsvin, 🐠 fiskar, 🐦 fåglar och reptiler.",
+      everyone1: "Stora. Små. Fluffiga. Fjäderklädda. Släta.",
+      everyone2: "Vissa har tassar. Vissa har vingar. Vissa har fenor.",
+      everyone3: "Vissa vill springa bredvid oss. Andra föredrar ett varmt och lugnt hörn. Vissa betraktar hela världen från en gren, ett akvarium eller ett favoritfönster.",
+      everyone4: "Alla är välkomna här. ♥ 🌍✨",
+      everyone5: "Vi behöver inte se likadana ut för att tillhöra samma värld.",
+      everyone6: "Det är precis det som är poängen.",
+      everyone7: "PETS & DOGUE handlar om djur — och människorna som älskar dem.",
+
+      askKicker: "Nyfikenhetsavdelningen ♥ ✨",
+      askTitle: "OCH OM DU<br>BEHÖVER MIN HJÄLP...",
+      askMark: "Fråga min nyfikna lilla nos ♥",
+      askMarkSub: "Miso vet var hon ska leta. ✨",
+      ask1: "Behöver du någonstans att gå?",
+      ask2: "Letar du efter en djurvänlig plats? 🐾",
+      ask3: "Planerar du en resa? ✈️",
+      ask4: "Letar du efter något användbart?",
+      ask5: "Jag tittar. Jag nosar. Jag utforskar. ✨",
+      ask6: "Och när jag hittar något intressant tar jag med det tillbaka till PETS & DOGUE.",
+      ask7: "Det är precis vad en nyfiken liten nos är till för. ♥",
+      askLabel: "Fråga Miso ✨",
+
+      finalKicker: "Vi ses någonstans i världen ✨",
+      finalTitle: "VI SES<br>DÄR UTE.",
+      finalBlue: "En värld.<br>Varje husdjur. 🌍",
+      final1: "Idag kanske vi möts i London. Imorgon — vid havet.",
+      final2: "Kanske i en park, på ett kafé eller någonstans helt oväntat.",
+      final3: "Om du ser en pytteliten fluffig blondin som mycket seriöst utforskar en ny plats — kom och säg hej. 💕",
+      final4: "Och om vi är långt ifrån varandra just nu, leta efter min lilla cirkel på PETS & DOGUE.",
+      final5: "På ett eller annat sätt kommer vi att mötas. ♥",
+      signature: "Med kärlek,<br>Miso ♥",
+      tagline: "En värld. Varje husdjur. ♥",
+      issueLink: "← Nummer 01",
+      home: "Hem"
+    },
+
+    /* =====================================================
+       DANISH
+    ===================================================== */
+
+    da: {
+      coverKicker: "PETS & DOGUE · UDGAVE 01 · FORSIDEHISTORIE ✨",
+      coverMeet: "Mød",
+      coverBlue: "Små poter.<br>Stor verden. ✨",
+      coverText: "En lille blond pomeranian fra London med en nysgerrig næse og en meget stor verden at opdage.",
+      backIssue: "← Tilbage til Udgave 01",
+
+      helloKicker: "Hej, nye ven ♥ ✨",
+      helloTitle: "Hej, jeg er",
+      helloText: "Lille, fluffy, blond og bosat i London. Jeg elsker smukke steder, lange gåture, mode og at møde nye venner.",
+
+      profileKicker: "Miso-profilen ✨",
+      profileTitle: "LILLE HUND.<br>STOR PERSONLIGHED.",
+      profileSub: "Pomeranian · London · meget kompakt.",
+
+      breed: "Race",
+      breedValue: "Pomeranian",
+      city: "By",
+      cityValue: "London",
+      size: "Størrelse",
+      sizeValue: "Meget lille",
+      coat: "Pels",
+      coatValue: "Blød, fluffy og blond",
+      personality: "Personlighed",
+      personalityValue: "Blid og nysgerrig",
+      loves: "Elsker",
+      lovesValue: "Gåture og rejser",
+      weakness: "Svaghed",
+      weaknessValue: "Godbidder",
+      looking: "Leder efter",
+      lookingValue: "Nye venner",
+      swipe: "Swipe til højre?",
+      match: "Det er et match! ♥ ✨",
+
+      favourites: "Misos favoritter ♥ ✨",
+      world: "MIN LILLE<br>VERDEN",
+
+      travel: "Rejser ✈️✨",
+      travelText: "Små poter. Nye steder.",
+      playtime: "Legetid 🧸💕",
+      playtimeText: "Min yndlingsform for seriøs beskæftigelse.",
+      fashion: "Mode 👗💕",
+      fashionText: "Lidt pink. Masser af Miso.",
+      london: "London 🇬🇧💙",
+      londonText: "Min by. Mine små eventyr.",
+      friends: "Venner 💕🐾",
+      friendsText: "Eventyr er bedre sammen.",
+
+      diaryKicker: "Fra Misos dagbog ♥ ✨",
+      diaryTitle: "ÉN LILLE HUND.<br>EN MEGET STOR IDÉ. ✨",
+      diaryLead: "Jeg tror, det hele begyndte med mig. 💕",
+      diary1: "Da jeg kom, fik min familie pludselig en helt ny liste med spørgsmål.",
+      diaryNote: "Hvor kan vi tage hen sammen?<br>Hvilke caféer vil byde mig velkommen?<br>Hvilke hoteller elsker virkelig kæledyr?<br>Hvor kan vi gå ture, rejse og møde nye venner?",
+      diary2: "Én lille hund — og pludselig så verden helt anderledes ud.",
+      diary3: "Vi begyndte at lede efter steder, opdage nye ruter og samle nyttige svar.",
+      diary4: "Hver gåtur blev en lille undersøgelse. Hver rejse bragte en ny opdagelse. Hvert nyt sted gav os noget nyttigt at huske.",
+      diary5: "Måske var det begyndelsen på PETS & DOGUE. ♥",
+      pull: "Én lille hund.<br>Én meget stor verden. 🌍✨",
+
+      seaKicker: "Miso udforsker ✨",
+      seaTitle: "Ved<br>havet 🌊",
+      seaText: "Nye dufte.<br>Nye lyde.<br>Stor verden. 💙",
+
+      londonKicker: "Mit London ♥ ✨",
+      londonTitle: "MIN BY —<br>LONDON",
+      londonFeature: "Miso i London 💙",
+      londonFeatureSub: "Små poter. Stor by. 🎀✨",
+      london1: "London føles aldrig helt ens to gange. ♥",
+      london2: "En park i dag. 🌳<br>En lille café i morgen. ☕<br>Så floden, et marked, en rød bus 🚌<br>eller en gade, jeg aldrig har set før.",
+      london3: "Jeg stopper. Jeg kigger. Jeg snuser. Så vælger jeg en anden retning. ✨",
+      london4: "Nogle gange er destinationen det bedste. Andre gange er det alt det, jeg opdager undervejs.",
+      london5: "For mig er en gåtur ikke bare at gå udenfor. Det er sådan, jeg opdager verden. 🌍",
+
+      friendKicker: "Hej, nye ven ♥ ✨",
+      friendTitle: "DET ER ET<br>MATCH! 💕",
+      friend1: "Hej. Jeg er Miso Cute.",
+      friend2: "Jeg er meget lille, blid, nysgerrig og altid interesseret i at møde nogen nye.",
+      friend3: "Nogle eventyr er skabt til at udforske. Andre er skabt til at dele. 🐾",
+      friend4: "Et nyt ansigt. Et lille hej. Og nogle gange — en ny ven.",
+      friend5: "Det bedste ved et nyt eventyr er aldrig at vide, hvem man kan møde. ♥",
+
+      everyoneKicker: "Alle er inviteret ♥ ✨",
+      everyoneTitle: "DER ER PLADS<br>TIL ALLE.",
+      animals: "🐶 Hunde, 🐱 katte, 🦜 papegøjer, 🐰 kaniner, 🐴 heste, 🐢 skildpadder, marsvin, 🐠 fisk, 🐦 fugle og krybdyr.",
+      everyone1: "Store. Små. Fluffy. Fjerklædte. Glatte.",
+      everyone2: "Nogle har poter. Nogle har vinger. Nogle har finner.",
+      everyone3: "Nogle vil løbe ved siden af os. Andre foretrækker et varmt og roligt hjørne. Nogle ser hele verden fra en gren, et akvarium eller et yndlingsvindue.",
+      everyone4: "Alle er velkomne her. ♥ 🌍✨",
+      everyone5: "Vi behøver ikke se ens ud for at høre til i den samme verden.",
+      everyone6: "Det er præcis pointen.",
+      everyone7: "PETS & DOGUE handler om dyr — og de mennesker, der elsker dem.",
+
+      askKicker: "Nysgerrighedsafdelingen ♥ ✨",
+      askTitle: "OG HVIS DU<br>HAR BRUG FOR MIN HJÆLP...",
+      askMark: "Spørg min nysgerrige lille næse ♥",
+      askMarkSub: "Miso ved, hvor hun skal lede. ✨",
+      ask1: "Har du brug for et sted at tage hen?",
+      ask2: "Leder du efter et kæledyrsvenligt sted? 🐾",
+      ask3: "Planlægger du en rejse? ✈️",
+      ask4: "Leder du efter noget nyttigt?",
+      ask5: "Jeg kigger. Jeg snuser. Jeg udforsker. ✨",
+      ask6: "Og når jeg finder noget interessant, tager jeg det med tilbage til PETS & DOGUE.",
+      ask7: "Det er det, en nysgerrig lille næse er til for. ♥",
+      askLabel: "Spørg Miso ✨",
+
+      finalKicker: "Vi ses et sted i verden ✨",
+      finalTitle: "VI SES<br>DERUDE.",
+      finalBlue: "Én verden.<br>Hvert kæledyr. 🌍",
+      final1: "I dag mødes vi måske i London. I morgen — ved havet.",
+      final2: "Måske i en park, en café eller et helt uventet sted.",
+      final3: "Hvis du ser en lille fluffy blondine meget seriøst udforske et nyt sted — så kom og sig hej. 💕",
+      final4: "Og hvis vi er langt fra hinanden lige nu, så kig efter min lille cirkel på PETS & DOGUE.",
+      final5: "På den ene eller anden måde mødes vi. ♥",
+      signature: "Med kærlighed,<br>Miso ♥",
+      tagline: "Én verden. Hvert kæledyr. ♥",
+      issueLink: "← Udgave 01",
+      home: "Hjem"
+    },
+
+    /* =====================================================
+       NORWEGIAN
+    ===================================================== */
+
+    no: {
+      coverKicker: "PETS & DOGUE · UTGAVE 01 · FORSIDEHISTORIE ✨",
+      coverMeet: "Møt",
+      coverBlue: "Små poter.<br>Stor verden. ✨",
+      coverText: "En bitteliten blond pomeranian fra London, med en nysgjerrig nese og en veldig stor verden å oppdage.",
+      backIssue: "← Tilbake til Utgave 01",
+
+      helloKicker: "Hei, nye venn ♥ ✨",
+      helloTitle: "Hei, jeg er",
+      helloText: "Liten, fluffy, blond og bosatt i London. Jeg elsker vakre steder, lange turer, mote og å møte nye venner.",
+
+      profileKicker: "Miso-profilen ✨",
+      profileTitle: "LITEN HUND.<br>STOR PERSONLIGHET.",
+      profileSub: "Pomeranian · London · veldig kompakt.",
+
+      breed: "Rase",
+      breedValue: "Pomeranian",
+      city: "By",
+      cityValue: "London",
+      size: "Størrelse",
+      sizeValue: "Bitteliten",
+      coat: "Pels",
+      coatValue: "Myk, fluffy og blond",
+      personality: "Personlighet",
+      personalityValue: "Mild og nysgjerrig",
+      loves: "Elsker",
+      lovesValue: "Turer og reiser",
+      weakness: "Svakhet",
+      weaknessValue: "Godbiter",
+      looking: "Ser etter",
+      lookingValue: "Nye venner",
+      swipe: "Sveip til høyre?",
+      match: "Det er en match! ♥ ✨",
+
+      favourites: "Misos favoritter ♥ ✨",
+      world: "MIN LILLE<br>VERDEN",
+
+      travel: "Reiser ✈️✨",
+      travelText: "Små poter. Nye steder.",
+      playtime: "Lekestund 🧸💕",
+      playtimeText: "Min favoritt blant seriøse aktiviteter.",
+      fashion: "Mote 👗💕",
+      fashionText: "Litt rosa. Masse Miso.",
+      london: "London 🇬🇧💙",
+      londonText: "Min by. Mine små eventyr.",
+      friends: "Venner 💕🐾",
+      friendsText: "Eventyr er bedre sammen.",
+
+      diaryKicker: "Fra Misos dagbok ♥ ✨",
+      diaryTitle: "ÉN LITEN HUND.<br>EN VELDIG STOR IDÉ. ✨",      diaryLead: "Jeg tror det hele startet med meg. 💕",
+      diary1: "Da jeg kom, fikk familien min plutselig en helt ny liste med spørsmål.",
+      diaryNote: "Hvor kan vi dra sammen?<br>Hvilke kafeer vil ønske meg velkommen?<br>Hvilke hoteller elsker virkelig kjæledyr?<br>Hvor kan vi gå tur, reise og møte nye venner?",
+      diary2: "Én bitteliten hund — og plutselig så verden helt annerledes ut.",
+      diary3: "Vi begynte å lete etter steder, oppdage nye ruter og samle nyttige svar.",
+      diary4: "Hver tur ble en liten undersøkelse. Hver reise ga en ny oppdagelse. Hvert nytt sted ga oss noe nyttig å huske.",
+      diary5: "Kanskje det var begynnelsen på PETS & DOGUE. ♥",
+      pull: "Én liten hund.<br>Én veldig stor verden. 🌍✨",
+
+      seaKicker: "Miso utforsker ✨",
+      seaTitle: "Ved<br>havet 🌊",
+      seaText: "Nye lukter.<br>Nye lyder.<br>Stor verden. 💙",
+
+      londonKicker: "Mitt London ♥ ✨",
+      londonTitle: "MIN BY —<br>LONDON",
+      londonFeature: "Miso i London 💙",
+      londonFeatureSub: "Små poter. Stor by. 🎀✨",
+      london1: "London føles aldri helt likt to ganger. ♥",
+      london2: "En park i dag. 🌳<br>En liten kafé i morgen. ☕<br>Så elven, et marked, en rød buss 🚌<br>eller en gate jeg aldri har sett før.",
+      london3: "Jeg stopper. Jeg ser. Jeg snuser. Så velger jeg en annen retning. ✨",
+      london4: "Noen ganger er reisemålet det beste. Andre ganger er det alt jeg legger merke til på veien.",
+      london5: "For meg er en tur ikke bare å gå ut. Det er slik jeg oppdager verden. 🌍",
+
+      friendKicker: "Hei, nye venn ♥ ✨",
+      friendTitle: "DET ER EN<br>MATCH! 💕",
+      friend1: "Hei. Jeg er Miso Cute.",
+      friend2: "Jeg er bitteliten, mild, nysgjerrig og alltid interessert i å møte noen nye.",
+      friend3: "Noen eventyr er laget for å utforskes. Andre er laget for å deles. 🐾",
+      friend4: "Et nytt ansikt. Et lite hei. Og noen ganger — en ny venn.",
+      friend5: "Det beste med et nytt eventyr er at du aldri vet hvem du kan møte. ♥",
+
+      everyoneKicker: "Alle er invitert ♥ ✨",
+      everyoneTitle: "DET ER PLASS<br>TIL ALLE.",
+      animals: "🐶 Hunder, 🐱 katter, 🦜 papegøyer, 🐰 kaniner, 🐴 hester, 🐢 skilpadder, marsvin, 🐠 fisk, 🐦 fugler og reptiler.",
+      everyone1: "Store. Små. Fluffy. Fjærkledde. Glatte.",
+      everyone2: "Noen har poter. Noen har vinger. Noen har finner.",
+      everyone3: "Noen vil løpe ved siden av oss. Andre foretrekker et varmt og rolig hjørne. Noen ser hele verden fra en gren, et akvarium eller et favorittvindu.",
+      everyone4: "Alle er velkomne her. ♥ 🌍✨",
+      everyone5: "Vi trenger ikke se like ut for å høre til i den samme verden.",
+      everyone6: "Det er akkurat poenget.",
+      everyone7: "PETS & DOGUE handler om dyr — og menneskene som elsker dem.",
+
+      askKicker: "Nysgjerrighetsavdelingen ♥ ✨",
+      askTitle: "OG HVIS DU<br>TRENGER MIN HJELP...",
+      askMark: "Spør den nysgjerrige lille nesen min ♥",
+      askMarkSub: "Miso vet hvor hun skal lete. ✨",
+      ask1: "Trenger du et sted å dra?",
+      ask2: "Leter du etter et kjæledyrvennlig sted? 🐾",
+      ask3: "Planlegger du en reise? ✈️",
+      ask4: "Leter du etter noe nyttig?",
+      ask5: "Jeg ser. Jeg snuser. Jeg utforsker. ✨",
+      ask6: "Og når jeg finner noe interessant, tar jeg det med tilbake til PETS & DOGUE.",
+      ask7: "Det er det en nysgjerrig liten nese er til for. ♥",
+      askLabel: "Spør Miso ✨",
+
+      finalKicker: "Vi sees et sted i verden ✨",
+      finalTitle: "VI SEES<br>DER UTE.",
+      finalBlue: "Én verden.<br>Hvert kjæledyr. 🌍",
+      final1: "I dag møtes vi kanskje i London. I morgen — ved havet.",
+      final2: "Kanskje i en park, på en kafé eller et helt uventet sted.",
+      final3: "Hvis du ser en bitteliten fluffy blondine som veldig seriøst utforsker et nytt sted — kom og si hei. 💕",
+      final4: "Og hvis vi er langt fra hverandre akkurat nå, se etter den lille sirkelen min på PETS & DOGUE.",
+      final5: "På en eller annen måte møtes vi. ♥",
+      signature: "Med kjærlighet,<br>Miso ♥",
+      tagline: "Én verden. Hvert kjæledyr. ♥",
+      issueLink: "← Utgave 01",
+      home: "Hjem"
+    },
+
+    /* =====================================================
+       FINNISH
+    ===================================================== */
+
+    fi: {
+      coverKicker: "PETS & DOGUE · NUMERO 01 · KANSITARINA ✨",
+      coverMeet: "Tapaa",
+      coverBlue: "Pienet tassut.<br>Suuri maailma. ✨",
+      coverText: "Pieni vaalea pomeranian Lontoosta, utelias nenä ja valtava maailma tutkittavana.",
+      backIssue: "← Takaisin numeroon 01",
+
+      helloKicker: "Hei, uusi ystävä ♥ ✨",
+      helloTitle: "Hei, minä olen",
+      helloText: "Pieni, pörröinen, vaalea ja asun Lontoossa. Rakastan kauniita paikkoja, pitkiä kävelyitä, muotia ja uusien ystävien tapaamista.",
+
+      profileKicker: "Mison profiili ✨",
+      profileTitle: "PIENI KOIRA.<br>SUURI PERSOONA.",
+      profileSub: "Pomeranian · Lontoo · erittäin kompakti.",
+
+      breed: "Rotu",
+      breedValue: "Pomeranian",
+      city: "Kaupunki",
+      cityValue: "Lontoo",
+      size: "Koko",
+      sizeValue: "Pikkuruinen",
+      coat: "Turkki",
+      coatValue: "Pehmeä, pörröinen ja vaalea",
+      personality: "Persoonallisuus",
+      personalityValue: "Lempeä ja utelias",
+      loves: "Rakastaa",
+      lovesValue: "Kävelyitä ja matkustamista",
+      weakness: "Heikkous",
+      weaknessValue: "Herkut",
+      looking: "Etsii",
+      lookingValue: "Uusia ystäviä",
+      swipe: "Pyyhkäise oikealle?",
+      match: "Se on match! ♥ ✨",
+
+      favourites: "Mison suosikit ♥ ✨",
+      world: "MINUN PIENI<br>MAAILMANI",
+
+      travel: "Matkailu ✈️✨",
+      travelText: "Pienet tassut. Uusia paikkoja.",
+      playtime: "Leikkiaika 🧸💕",
+      playtimeText: "Suosikkini vakavista asioista.",
+      fashion: "Muoti 👗💕",
+      fashionText: "Hieman pinkkiä. Paljon Misoa.",
+      london: "Lontoo 🇬🇧💙",
+      londonText: "Minun kaupunkini. Minun pienet seikkailuni.",
+      friends: "Ystävät 💕🐾",
+      friendsText: "Seikkailut ovat parempia yhdessä.",
+
+      diaryKicker: "Mison päiväkirjasta ♥ ✨",
+      diaryTitle: "YKSI PIENI KOIRA.<br>YKSI ERITTÄIN SUURI IDEA. ✨",
+      diaryLead: "Luulen, että kaikki alkoi minusta. 💕",
+      diary1: "Kun saavuin, perheelleni ilmestyi yhtäkkiä kokonaan uusi lista kysymyksiä.",
+      diaryNote: "Minne voimme mennä yhdessä?<br>Mitkä kahvilat toivottavat minut tervetulleeksi?<br>Mitkä hotellit todella rakastavat lemmikkejä?<br>Missä voimme kävellä, matkustaa ja tavata uusia ystäviä?",
+      diary2: "Yksi pikkuruinen koira — ja yhtäkkiä maailma näytti aivan erilaiselta.",
+      diary3: "Aloimme etsiä paikkoja, löytää uusia reittejä ja kerätä hyödyllisiä vastauksia.",
+      diary4: "Jokaisesta kävelystä tuli pieni tutkimusretki. Jokainen matka toi uuden löydön. Jokainen uusi paikka antoi jotain hyödyllistä muistettavaa.",
+      diary5: "Ehkä siitä PETS & DOGUE sai alkunsa. ♥",
+      pull: "Yksi pieni koira.<br>Yksi erittäin suuri maailma. 🌍✨",
+
+      seaKicker: "Miso tutkii ✨",
+      seaTitle: "Meren<br>äärellä 🌊",
+      seaText: "Uusia tuoksuja.<br>Uusia ääniä.<br>Suuri maailma. 💙",
+
+      londonKicker: "Minun Lontooni ♥ ✨",
+      londonTitle: "KAUPUNKINI —<br>LONTOO",
+      londonFeature: "Miso Lontoossa 💙",
+      londonFeatureSub: "Pienet tassut. Suuri kaupunki. 🎀✨",
+      london1: "Lontoo ei koskaan tunnu täsmälleen samalta kahdesti. ♥",
+      london2: "Puisto tänään. 🌳<br>Pieni kahvila huomenna. ☕<br>Sitten joki, tori, punainen bussi 🚌<br>tai katu, jota en ole koskaan ennen nähnyt.",
+      london3: "Pysähdyn. Katson. Nuuhkin. Sitten valitsen toisen suunnan. ✨",
+      london4: "Joskus paras osa on määränpää. Joskus kaikki se, mitä huomaan matkalla.",
+      london5: "Minulle kävely ei ole vain ulos menemistä. Sillä tavalla tutkin maailmaa. 🌍",
+
+      friendKicker: "Hei, uusi ystävä ♥ ✨",
+      friendTitle: "SE ON<br>MATCH! 💕",
+      friend1: "Hei. Olen Miso Cute.",
+      friend2: "Olen pikkuruinen, lempeä, utelias ja aina kiinnostunut tapaamaan uusia ystäviä.",
+      friend3: "Jotkut seikkailut on tehty tutkimista varten. Toiset jaettaviksi. 🐾",
+      friend4: "Uudet kasvot. Pieni tervehdys. Ja joskus — uusi ystävä.",
+      friend5: "Parasta uudessa seikkailussa on se, ettei koskaan tiedä, kenet voi tavata. ♥",
+
+      everyoneKicker: "Kaikki ovat tervetulleita ♥ ✨",
+      everyoneTitle: "TÄÄLLÄ ON TILAA<br>KAIKILLE.",
+      animals: "🐶 Koirat, 🐱 kissat, 🦜 papukaijat, 🐰 kanit, 🐴 hevoset, 🐢 kilpikonnat, marsut, 🐠 kalat, 🐦 linnut ja matelijat.",
+      everyone1: "Suuria. Pieniä. Pörröisiä. Höyhenpeitteisiä. Sileitä.",
+      everyone2: "Joillakin on tassut. Joillakin siivet. Joillakin evät.",
+      everyone3: "Jotkut haluavat juosta vierellämme. Toiset viihtyvät lämpimässä ja rauhallisessa nurkassa. Jotkut tarkkailevat maailmaa oksalta, akvaariosta tai lempi-ikkunastaan.",
+      everyone4: "Kaikki ovat tervetulleita tänne. ♥ 🌍✨",
+      everyone5: "Meidän ei tarvitse näyttää samalta kuuluaksemme samaan maailmaan.",
+      everyone6: "Juuri siitä on kyse.",
+      everyone7: "PETS & DOGUE kertoo eläimistä — ja ihmisistä, jotka rakastavat niitä.",
+
+      askKicker: "Uteliaisuusosasto ♥ ✨",
+      askTitle: "JA JOS TARVITSET<br>APUANI...",
+      askMark: "Kysy uteliaalta pieneltä nenältäni ♥",
+      askMarkSub: "Miso tietää, mistä etsiä. ✨",
+      ask1: "Tarvitsetko paikan, minne mennä?",
+      ask2: "Etsitkö lemmikkiystävällistä paikkaa? 🐾",
+      ask3: "Suunnitteletko matkaa? ✈️",
+      ask4: "Etsitkö jotain hyödyllistä?",
+      ask5: "Katson. Nuuhkin. Tutkin. ✨",
+      ask6: "Ja kun löydän jotain kiinnostavaa, tuon sen takaisin PETS & DOGUEen.",
+      ask7: "Sitä varten utelias pieni nenä on olemassa. ♥",
+      askLabel: "Kysy Misolta ✨",
+
+      finalKicker: "Nähdään jossain päin maailmaa ✨",
+      finalTitle: "NÄHDÄÄN<br>MAAILMALLA.",
+      finalBlue: "Yksi maailma.<br>Jokainen lemmikki. 🌍",
+      final1: "Tänään saatamme tavata Lontoossa. Huomenna — meren rannalla.",
+      final2: "Ehkä puistossa, kahvilassa tai jossain täysin odottamattomassa paikassa.",
+      final3: "Jos näet pienen pörröisen blondin tutkimassa vakavasti uutta paikkaa — tule sanomaan hei. 💕",
+      final4: "Ja jos olemme nyt kaukana toisistamme, etsi pieni ympyräni PETS & DOGUEsta.",
+      final5: "Tavalla tai toisella me tapaamme. ♥",
+      signature: "Rakkaudella,<br>Miso ♥",
+      tagline: "Yksi maailma. Jokainen lemmikki. ♥",
+      issueLink: "← Numero 01",
+      home: "Etusivu"
+    },
+
+    /* =====================================================
+       HUNGARIAN
+    ===================================================== */
+
+    hu: {
+      coverKicker: "PETS & DOGUE · 01. SZÁM · CÍMLAPSZTORI ✨",
+      coverMeet: "Ismerd meg",
+      coverBlue: "Kis mancsok.<br>Nagy világ. ✨",
+      coverText: "Egy apró, szőke pomerániai Londonból, kíváncsi orral és egy hatalmas felfedezésre váró világgal.",
+      backIssue: "← Vissza a 01. számhoz",
+
+      helloKicker: "Szia, új barát ♥ ✨",
+      helloTitle: "Szia, én vagyok",
+      helloText: "Apró, bolyhos, szőke és Londonban élek. Szeretem a szép helyeket, a hosszú sétákat, a divatot és az új barátokat.",
+
+      profileKicker: "Miso profilja ✨",
+      profileTitle: "KIS KUTYA.<br>NAGY EGYÉNISÉG.",
+      profileSub: "Pomerániai · London · nagyon kompakt.",
+
+      breed: "Fajta",
+      breedValue: "Pomerániai",
+      city: "Város",
+      cityValue: "London",
+      size: "Méret",
+      sizeValue: "Apró",
+      coat: "Szőrzet",
+      coatValue: "Puha, bolyhos és szőke",
+      personality: "Személyiség",
+      personalityValue: "Gyengéd és kíváncsi",
+      loves: "Szereti",
+      lovesValue: "Séták és utazás",
+      weakness: "Gyengeség",
+      weaknessValue: "Jutalomfalatok",
+      looking: "Keres",
+      lookingValue: "Új barátokat",
+      swipe: "Jobbra húzod?",
+      match: "Ez egy match! ♥ ✨",
+
+      favourites: "Miso kedvencei ♥ ✨",
+      world: "AZ ÉN KIS<br>VILÁGOM",
+
+      travel: "Utazás ✈️✨",
+      travelText: "Kis mancsok. Új helyek.",
+      playtime: "Játékidő 🧸💕",
+      playtimeText: "A kedvenc komoly elfoglaltságom.",
+      fashion: "Divat 👗💕",
+      fashionText: "Egy kis rózsaszín. Rengeteg Miso.",
+      london: "London 🇬🇧💙",
+      londonText: "Az én városom. Az én kis kalandjaim.",
+      friends: "Barátok 💕🐾",
+      friendsText: "A kalandok együtt jobbak.",
+
+      diaryKicker: "Miso naplójából ♥ ✨",
+      diaryTitle: "EGY KIS KUTYA.<br>EGY NAGY ÖTLET. ✨",
+      diaryLead: "Azt hiszem, minden velem kezdődött. 💕",
+      diary1: "Amikor megérkeztem, a családomnak hirtelen egy egész új kérdéslistája lett.",
+      diaryNote: "Hová mehetünk együtt?<br>Melyik kávézóban látnak szívesen?<br>Melyik szálloda szereti igazán az állatokat?<br>Hol sétálhatunk, utazhatunk és találkozhatunk új barátokkal?",
+      diary2: "Egy apró kutya — és hirtelen teljesen más lett a világ.",
+      diary3: "Helyeket kezdtünk keresni, új útvonalakat felfedezni és hasznos válaszokat gyűjteni.",
+      diary4: "Minden séta kis felfedezőúttá vált. Minden utazás új felfedezést hozott. Minden új hely adott valami hasznosat, amit érdemes volt megjegyezni.",
+      diary5: "Talán így kezdődött a PETS & DOGUE. ♥",
+      pull: "Egy kis kutya.<br>Egy nagyon nagy világ. 🌍✨",
+
+      seaKicker: "Miso felfedez ✨",
+      seaTitle: "A<br>tenger 🌊",
+      seaText: "Új illatok.<br>Új hangok.<br>Nagy világ. 💙",
+
+      londonKicker: "Az én Londonom ♥ ✨",
+      londonTitle: "AZ ÉN VÁROSOM —<br>LONDON",
+      londonFeature: "Miso Londonban 💙",
+      londonFeatureSub: "Kis mancsok. Nagy város. 🎀✨",
+      london1: "London soha nem ugyanolyan kétszer. ♥",
+      london2: "Ma egy park. 🌳<br>Holnap egy kis kávézó. ☕<br>Aztán a folyó, egy piac, egy piros busz 🚌<br>vagy egy utca, amelyet még sosem láttam.",
+      london3: "Megállok. Nézek. Szimatolok. Aztán másik irányt választok. ✨",
+      london4: "Néha az úti cél a legjobb. Máskor minden, amit útközben észreveszek.",
+      london5: "Számomra a séta nem egyszerűen kimenés. Így fedezem fel a világot. 🌍",
+
+      friendKicker: "Szia, új barát ♥ ✨",
+      friendTitle: "EZ EGY<br>MATCH! 💕",
+      friend1: "Szia. Miso Cute vagyok.",
+      friend2: "Apró, gyengéd és kíváncsi vagyok, és mindig örülök egy új ismerősnek.",
+      friend3: "Néhány kaland a felfedezésről szól. Mások arról, hogy megosszuk őket. 🐾",
+      friend4: "Egy új arc. Egy kis köszönés. És néha — egy új barát.",
+      friend5: "Egy új kalandban az a legjobb, hogy sosem tudhatod, kivel találkozol. ♥",
+
+      everyoneKicker: "Mindenki meghívást kap ♥ ✨",
+      everyoneTitle: "ITT MINDENKINEK<br>VAN HELY.",
+      animals: "🐶 Kutyák, 🐱 macskák, 🦜 papagájok, 🐰 nyulak, 🐴 lovak, 🐢 teknősök, tengerimalacok, 🐠 halak, 🐦 madarak és hüllők.",
+      everyone1: "Nagyok. Kicsik. Bolyhosak. Tollasak. Simák.",
+      everyone2: "Van, akinek mancsa van. Van, akinek szárnya. Másnak uszonya.",
+      everyone3: "Van, aki mellettünk szeret futni. Más egy meleg, csendes sarkot kedvel. Van, aki egy ágról, akváriumból vagy kedvenc ablakából figyeli a világot.",
+      everyone4: "Itt mindenkit szeretettel várunk. ♥ 🌍✨",
+      everyone5: "Nem kell egyformának lennünk ahhoz, hogy ugyanahhoz a világhoz tartozzunk.",
+      everyone6: "Pontosan ez a lényeg.",
+      everyone7: "A PETS & DOGUE az állatokról — és az őket szerető emberekről szól.",
+
+      askKicker: "Kíváncsisági osztály ♥ ✨",
+      askTitle: "ÉS HA SZÜKSÉGED<br>VAN A SEGÍTSÉGEMRE...",
+      askMark: "Kérdezd a kíváncsi kis orromat ♥",
+      askMarkSub: "Miso tudja, hol keressen. ✨",
+      ask1: "Keresel egy helyet, ahová mehetnél?",
+      ask2: "Állatbarát helyet keresel? 🐾",
+      ask3: "Utazást tervezel? ✈️",
+      ask4: "Valami hasznosat keresel?",
+      ask5: "Nézek. Szimatolok. Felfedezek. ✨",
+      ask6: "És amikor valami érdekeset találok, elhozom a PETS & DOGUE-hoz.",
+      ask7: "Erre való egy kíváncsi kis orr. ♥",
+      askLabel: "Kérdezd Misót ✨",
+
+      finalKicker: "Találkozunk valahol a világban ✨",
+      finalTitle: "TALÁLKOZUNK<br>ODAKINT.",
+      finalBlue: "Egy világ.<br>Minden kedvenc. 🌍",
+      final1: "Ma talán Londonban találkozunk. Holnap — a tenger mellett.",
+      final2: "Talán egy parkban, egy kávézóban vagy valahol teljesen váratlan helyen.",
+      final3: "Ha meglátsz egy apró, bolyhos szőkét, aki nagyon komolyan fedez fel egy új helyet — gyere és köszönj. 💕",
+      final4: "Ha pedig egyelőre messze vagyunk egymástól, keresd a kis körömet a PETS & DOGUE-on.",
+      final5: "Így vagy úgy, találkozni fogunk. ♥",
+      signature: "Szeretettel,<br>Miso ♥",
+      tagline: "Egy világ. Minden kedvenc. ♥",
+      issueLink: "← 01. szám",
+      home: "Főoldal"
+    },
+
+    /* =====================================================
+       TURKISH
+    ===================================================== */
+
+    tr: {
+      coverKicker: "PETS & DOGUE · SAYI 01 · KAPAK HİKÂYESİ ✨",
+      coverMeet: "Tanışın:",
+      coverBlue: "Küçük patiler.<br>Büyük dünya. ✨",
+      coverText: "Londra'dan minicik sarışın bir Pomeranian; meraklı bir burun ve keşfedilecek kocaman bir dünya.",
+      backIssue: "← Sayı 01'e dön",
+
+      helloKicker: "Merhaba, yeni arkadaş ♥ ✨",
+      helloTitle: "Merhaba, ben",
+      helloText: "Minik, kabarık, sarışın ve Londra'da yaşıyorum. Güzel yerleri, uzun yürüyüşleri, modayı ve yeni arkadaşlarla tanışmayı seviyorum.",
+
+      profileKicker: "Miso profili ✨",
+      profileTitle: "KÜÇÜK KÖPEK.<br>BÜYÜK KİŞİLİK.",
+      profileSub: "Pomeranian · Londra · çok kompakt.",
+
+      breed: "Irk",
+      breedValue: "Pomeranian",
+      city: "Şehir",
+      cityValue: "Londra",
+      size: "Boyut",
+      sizeValue: "Minicik",
+      coat: "Tüy",
+      coatValue: "Yumuşak, kabarık ve sarışın",
+      personality: "Kişilik",
+      personalityValue: "Nazik ve meraklı",
+      loves: "Sevdikleri",
+      lovesValue: "Yürüyüşler ve seyahat",
+      weakness: "Zaafı",
+      weaknessValue: "Ödül mamaları",
+      looking: "Aradığı",
+      lookingValue: "Yeni arkadaşlar",
+      swipe: "Sağa kaydır?",
+      match: "Eşleştik! ♥ ✨",
+
+      favourites: "Miso'nun favorileri ♥ ✨",
+      world: "BENİM KÜÇÜK<br>DÜNYAM",
+
+      travel: "Seyahat ✈️✨",
+      travelText: "Küçük patiler. Yeni yerler.",
+      playtime: "Oyun zamanı 🧸💕",
+      playtimeText: "En sevdiğim ciddi iş.",
+      fashion: "Moda 👗💕",
+      fashionText: "Biraz pembe. Bolca Miso.",
+      london: "Londra 🇬🇧💙",
+      londonText: "Benim şehrim. Benim küçük maceralarım.",
+      friends: "Arkadaşlar 💕🐾",
+      friendsText: "Maceralar birlikte daha güzel.",
+
+      diaryKicker: "Miso'nun günlüğünden ♥ ✨",
+      diaryTitle: "BİR KÜÇÜK KÖPEK.<br>ÇOK BÜYÜK BİR FİKİR. ✨",
+      diaryLead: "Sanırım her şey benimle başladı. 💕",
+      diary1: "Ben geldiğimde ailemin birdenbire yepyeni bir soru listesi oldu.",
+      diaryNote: "Birlikte nereye gidebiliriz?<br>Hangi kafeler beni kabul eder?<br>Hangi oteller evcil hayvanları gerçekten seviyor?<br>Nerede yürüyebilir, seyahat edebilir ve yeni arkadaşlar edinebiliriz?",
+      diary2: "Minicik bir köpek — ve birden dünya tamamen farklı görünmeye başladı.",
+      diary3: "Yerler aramaya, yeni rotalar keşfetmeye ve faydalı cevaplar toplamaya başladık.",
+      diary4: "Her yürüyüş küçük bir araştırmaya dönüştü. Her seyahat yeni bir keşif getirdi. Her yeni yer bize hatırlamaya değer faydalı bir şey verdi.",
+      diary5: "Belki de PETS & DOGUE böyle başladı. ♥",
+      pull: "Bir küçük köpek.<br>Çok büyük bir dünya. 🌍✨",
+
+      seaKicker: "Miso keşfediyor ✨",
+      seaTitle: "Deniz 🌊",
+      seaText: "Yeni kokular.<br>Yeni sesler.<br>Büyük dünya. 💙",
+
+      londonKicker: "Benim Londra'm ♥ ✨",
+      londonTitle: "BENİM ŞEHRİM —<br>LONDRA",
+      londonFeature: "Miso Londra'da 💙",
+      londonFeatureSub: "Küçük patiler. Büyük şehir. 🎀✨",
+      london1: "Londra hiçbir zaman iki kez tamamen aynı hissettirmiyor. ♥",
+      london2: "Bugün bir park. 🌳<br>Yarın küçük bir kafe. ☕<br>Sonra nehir, bir pazar, kırmızı bir otobüs 🚌<br>ya da daha önce hiç görmediğim bir sokak.",
+      london3: "Duruyorum. Bakıyorum. Kokluyorum. Sonra başka bir yön seçiyorum. ✨",
+      london4: "Bazen en güzel şey varış noktasıdır. Bazen de yol boyunca fark ettiğim her şey.",
+      london5: "Benim için yürüyüş sadece dışarı çıkmak değildir. Dünyayı böyle keşfediyorum. 🌍",
+
+      friendKicker: "Merhaba, yeni arkadaş ♥ ✨",
+      friendTitle: "EŞLEŞTİK! 💕",
+      friend1: "Merhaba. Ben Miso Cute.",
+      friend2: "Minicik, nazik, meraklıyım ve her zaman yeni biriyle tanışmak isterim.",
+      friend3: "Bazı maceralar keşfetmek içindir. Bazıları ise paylaşmak için. 🐾",
+      friend4: "Yeni bir yüz. Küçük bir merhaba. Ve bazen — yeni bir arkadaş.",
+      friend5: "Yeni bir maceranın en güzel yanı, kiminle karşılaşacağını asla bilememektir. ♥",
+
+      everyoneKicker: "Herkes davetli ♥ ✨",
+      everyoneTitle: "BURADA HERKES İÇİN<br>YER VAR.",
+      animals: "🐶 Köpekler, 🐱 kediler, 🦜 papağanlar, 🐰 tavşanlar, 🐴 atlar, 🐢 kaplumbağalar, kobaylar, 🐠 balıklar, 🐦 kuşlar ve sürüngenler.",
+      everyone1: "Büyük. Küçük. Kabarık. Tüylü. Pürüzsüz.",
+      everyone2: "Bazılarının patileri var. Bazılarının kanatları. Bazılarının yüzgeçleri.",
+      everyone3: "Bazıları yanımızda koşmak ister. Bazıları sıcak ve sessiz bir köşeyi tercih eder. Bazıları dünyayı bir daldan, akvaryumdan ya da en sevdiği pencereden izler.",
+      everyone4: "Burada herkes hoş karşılanır. ♥ 🌍✨",
+      everyone5: "Aynı dünyaya ait olmak için birbirimize benzememiz gerekmiyor.",
+      everyone6: "Asıl mesele tam olarak bu.",
+      everyone7: "PETS & DOGUE hayvanlar — ve onları seven insanlar hakkında.",
+
+      askKicker: "Merak departmanı ♥ ✨",
+      askTitle: "VE EĞER<br>YARDIMIMA İHTİYACIN VARSA...",
+      askMark: "Meraklı küçük burnuma sor ♥",
+      askMarkSub: "Miso nereye bakacağını bilir. ✨",
+      ask1: "Gidecek bir yer mi arıyorsun?",
+      ask2: "Evcil hayvan dostu bir yer mi arıyorsun? 🐾",
+      ask3: "Bir seyahat mi planlıyorsun? ✈️",
+      ask4: "Faydalı bir şey mi arıyorsun?",
+      ask5: "Bakıyorum. Kokluyorum. Keşfediyorum. ✨",
+      ask6: "Ve ilginç bir şey bulduğumda onu PETS & DOGUE'a getiriyorum.",
+      ask7: "Meraklı küçük bir burun tam da bunun içindir. ♥",
+      askLabel: "Miso'ya sor ✨",
+
+      finalKicker: "Dünyanın bir yerinde görüşürüz ✨",
+      finalTitle: "DIŞARIDA<br>GÖRÜŞÜRÜZ.",
+      finalBlue: "Tek dünya.<br>Her evcil hayvan. 🌍",
+      final1: "Bugün Londra'da karşılaşabiliriz. Yarın — deniz kenarında.",
+      final2: "Belki bir parkta, kafede ya da hiç beklenmedik bir yerde.",
+      final3: "Yeni bir yeri çok ciddi bir şekilde keşfeden minicik, kabarık bir sarışın görürsen — gelip merhaba de. 💕",
+      final4: "Şimdilik birbirimizden uzaktaysak PETS & DOGUE'daki küçük dairemi ara.",
+      final5: "Öyle ya da böyle, buluşacağız. ♥",
+      signature: "Sevgilerle,<br>Miso ♥",
+      tagline: "Tek dünya. Her evcil hayvan. ♥",
+      issueLink: "← Sayı 01",
+      home: "Ana Sayfa"
+    },
+
+    /* =====================================================
+       ARABIC
+    ===================================================== */
+
+    ar: {
+      coverKicker: "PETS & DOGUE · العدد 01 · قصة الغلاف ✨",
+      coverMeet: "تعرّفوا على",
+      coverBlue: "كفوف صغيرة.<br>عالم كبير. ✨",
+      coverText: "بوميرانيان شقراء صغيرة جدًا من لندن، بأنف فضولي وعالم كبير ينتظر أن تكتشفه.",
+      backIssue: "← العودة إلى العدد 01",
+
+      helloKicker: "مرحبًا يا صديقي الجديد ♥ ✨",
+      helloTitle: "مرحبًا، أنا",
+      helloText: "صغيرة، منفوشة، شقراء وأعيش في لندن. أحب الأماكن الجميلة والمشي الطويل والموضة والتعرف على أصدقاء جدد.",
+
+      profileKicker: "ملف Miso ✨",
+      profileTitle: "كلبة صغيرة.<br>شخصية كبيرة.",
+      profileSub: "بوميرانيان · لندن · صغيرة جدًا.",
+
+      breed: "السلالة",
+      breedValue: "بوميرانيان",
+      city: "المدينة",
+      cityValue: "لندن",
+      size: "الحجم",
+      sizeValue: "صغيرة جدًا",
+      coat: "الفرو",
+      coatValue: "ناعم ومنفوش وأشقر",
+      personality: "الشخصية",
+      personalityValue: "لطيفة وفضولية",
+      loves: "تحب",
+      lovesValue: "المشي والسفر",
+      weakness: "نقطة الضعف",
+      weaknessValue: "المكافآت اللذيذة",
+      looking: "تبحث عن",
+      lookingValue: "أصدقاء جدد",
+      swipe: "اسحب لليمين؟",
+      match: "إنه تطابق! ♥ ✨",
+
+      favourites: "مفضلات Miso ♥ ✨",
+      world: "عالمي<br>الصغير",
+
+      travel: "السفر ✈️✨",
+      travelText: "كفوف صغيرة. أماكن جديدة.",
+      playtime: "وقت اللعب 🧸💕",
+      playtimeText: "عملي الجاد المفضل.",
+      fashion: "الموضة 👗💕",
+      fashionText: "قليل من الوردي. الكثير من Miso.",
+      london: "لندن 🇬🇧💙",
+      londonText: "مدينتي. مغامراتي الصغيرة.",
+      friends: "الأصدقاء 💕🐾",
+      friendsText: "المغامرات أجمل معًا.",
+
+      diaryKicker: "من يوميات Miso ♥ ✨",
+      diaryTitle: "كلبة صغيرة.<br>فكرة كبيرة جدًا. ✨",
+      diaryLead: "أعتقد أن كل شيء بدأ معي. 💕",
+      diary1: "عندما وصلت، أصبح لدى عائلتي فجأة قائمة جديدة كاملة من الأسئلة.",
+      diaryNote: "إلى أين يمكننا الذهاب معًا؟<br>أي المقاهي سترحب بي؟<br>أي الفنادق تحب الحيوانات الأليفة حقًا؟<br>أين يمكننا المشي والسفر والتعرف على أصدقاء جدد؟",
+      diary2: "كلبة صغيرة جدًا — وفجأة بدا العالم مختلفًا تمامًا.",
+      diary3: "بدأنا نبحث عن الأماكن ونكتشف طرقًا جديدة ونجمع إجابات مفيدة.",
+      diary4: "أصبحت كل نزهة رحلة استكشاف صغيرة. وكل رحلة جلبت اكتشافًا جديدًا. وكل مكان جديد أعطانا شيئًا مفيدًا لنتذكره.",
+      diary5: "ربما كانت هذه بداية PETS & DOGUE. ♥",
+      pull: "كلبة صغيرة.<br>عالم كبير جدًا. 🌍✨",
+
+      seaKicker: "Miso تستكشف ✨",
+      seaTitle: "البحر 🌊",
+      seaText: "روائح جديدة.<br>أصوات جديدة.<br>عالم كبير. 💙",
+
+      londonKicker: "لندن الخاصة بي ♥ ✨",
+      londonTitle: "مدينتي —<br>لندن",
+      londonFeature: "Miso في لندن 💙",
+      londonFeatureSub: "كفوف صغيرة. مدينة كبيرة. 🎀✨",
+      london1: "لندن لا تبدو متشابهة تمامًا مرتين. ♥",
+      london2: "حديقة اليوم. 🌳<br>مقهى صغير غدًا. ☕<br>ثم النهر، سوق، حافلة حمراء 🚌<br>أو شارع لم أره من قبل.",
+      london3: "أتوقف. أنظر. أشم. ثم أختار اتجاهًا آخر. ✨",
+      london4: "أحيانًا تكون الوجهة هي الجزء الأفضل. وأحيانًا يكون الأفضل كل ما ألاحظه في الطريق.",
+      london5: "بالنسبة لي، النزهة ليست مجرد خروج إلى الخارج. إنها طريقتي لاكتشاف العالم. 🌍",
+
+      friendKicker: "مرحبًا يا صديقي الجديد ♥ ✨",
+      friendTitle: "إنه<br>تطابق! 💕",
+      friend1: "مرحبًا. أنا Miso Cute.",
+      friend2: "أنا صغيرة جدًا ولطيفة وفضولية، وأحب دائمًا التعرف على شخص جديد.",
+      friend3: "بعض المغامرات خُلقت للاستكشاف. وأخرى خُلقت للمشاركة. 🐾",
+      friend4: "وجه جديد. تحية صغيرة. وأحيانًا — صديق جديد.",
+      friend5: "أجمل ما في المغامرة الجديدة أنك لا تعرف أبدًا من قد تقابل. ♥",
+
+      everyoneKicker: "الجميع مدعو ♥ ✨",
+      everyoneTitle: "هناك مكان<br>للجميع.",
+      animals: "🐶 الكلاب، 🐱 القطط، 🦜 الببغاوات، 🐰 الأرانب، 🐴 الخيول، 🐢 السلاحف، خنازير غينيا، 🐠 الأسماك، 🐦 الطيور والزواحف.",
+      everyone1: "كبيرة. صغيرة. منفوشة. ذات ريش. ناعمة.",
+      everyone2: "لبعضها كفوف. ولبعضها أجنحة. ولبعضها زعانف.",
+      everyone3: "بعضها يريد الركض بجانبنا. وبعضها يفضل زاوية دافئة وهادئة. وبعضها يراقب العالم من غصن أو حوض أو نافذة مفضلة.",
+      everyone4: "الجميع مرحب به هنا. ♥ 🌍✨",
+      everyone5: "لا نحتاج إلى أن نبدو متشابهين لكي ننتمي إلى العالم نفسه.",
+      everyone6: "وهذه هي الفكرة بالضبط.",
+      everyone7: "PETS & DOGUE عن الحيوانات — وعن الأشخاص الذين يحبونها.",
+
+      askKicker: "قسم الفضول ♥ ✨",
+      askTitle: "وإذا كنت<br>بحاجة إلى مساعدتي...",
+      askMark: "اسأل أنفي الصغير الفضولي ♥",
+      askMarkSub: "Miso تعرف أين تبحث. ✨",
+      ask1: "هل تحتاج إلى مكان تذهب إليه؟",
+      ask2: "هل تبحث عن مكان صديق للحيوانات الأليفة؟ 🐾",
+      ask3: "هل تخطط لرحلة؟ ✈️",
+      ask4: "هل تبحث عن شيء مفيد؟",
+      ask5: "أنظر. أشم. أستكشف. ✨",
+      ask6: "وعندما أجد شيئًا مثيرًا للاهتمام، أحضره إلى PETS & DOGUE.",
+      ask7: "لهذا يوجد الأنف الصغير الفضولي. ♥",
+      askLabel: "اسأل Miso ✨",
+
+      finalKicker: "أراك في مكان ما من العالم ✨",
+      finalTitle: "أراك<br>هناك.",
+      finalBlue: "عالم واحد.<br>كل حيوان أليف. 🌍",
+      final1: "قد نلتقي اليوم في لندن. وغدًا — بجانب البحر.",
+      final2: "ربما في حديقة أو مقهى أو مكان غير متوقع تمامًا.",
+      final3: "إذا رأيت شقراء صغيرة منفوشة تستكشف مكانًا جديدًا بجدية شديدة — تعال وقل مرحبًا. 💕",
+      final4: "وإذا كنا بعيدين عن بعضنا الآن، فابحث عن دائرتي الصغيرة في PETS & DOGUE.",
+      final5: "بطريقة أو بأخرى، سنلتقي. ♥",
+      signature: "مع الحب،<br>Miso ♥",
+      tagline: "عالم واحد. كل حيوان أليف. ♥",
+      issueLink: "← العدد 01",
+      home: "الرئيسية"
+    },
+
+    /* =====================================================
+       HEBREW
+    ===================================================== */
+
+    he: {
+      coverKicker: "PETS & DOGUE · גיליון 01 · סיפור השער ✨",
+      coverMeet: "הכירו את",
+      coverBlue: "כפות קטנות.<br>עולם גדול. ✨",
+      coverText: "פומרניאן בלונדינית זעירה מלונדון, עם אף סקרן ועולם גדול מאוד לגלות.",
+      backIssue: "← חזרה לגיליון 01",
+
+      helloKicker: "שלום, חבר חדש ♥ ✨",
+      helloTitle: "היי, אני",
+      helloText: "קטנה, פרוותית, בלונדינית וחיה בלונדון. אני אוהבת מקומות יפים, טיולים ארוכים, אופנה ולהכיר חברים חדשים.",
+
+      profileKicker: "הפרופיל של Miso ✨",
+      profileTitle: "כלבה קטנה.<br>אישיות גדולה.",
+      profileSub: "פומרניאן · לונדון · קטנה מאוד.",
+
+      breed: "גזע",
+      breedValue: "פומרניאן",
+      city: "עיר",
+      cityValue: "לונדון",
+      size: "גודל",
+      sizeValue: "זעירה",
+      coat: "פרווה",
+      coatValue: "רכה, פרוותית ובהירה",
+      personality: "אישיות",
+      personalityValue: "עדינה וסקרנית",
+      loves: "אוהבת",
+      lovesValue: "טיולים ונסיעות",
+      weakness: "חולשה",
+      weaknessValue: "חטיפים",
+      looking: "מחפשת",
+      lookingValue: "חברים חדשים",
+      swipe: "להחליק ימינה?",
+      match: "יש התאמה! ♥ ✨",
+
+      favourites: "הדברים האהובים על Miso ♥ ✨",
+      world: "העולם<br>הקטן שלי",      travel: "נסיעות ✈️✨",
+      travelText: "כפות קטנות. מקומות חדשים.",
+      playtime: "זמן משחק 🧸💕",
+      playtimeText: "העיסוק הרציני האהוב עליי.",
+      fashion: "אופנה 👗💕",
+      fashionText: "קצת ורוד. הרבה Miso.",
+      london: "לונדון 🇬🇧💙",
+      londonText: "העיר שלי. ההרפתקאות הקטנות שלי.",
+      friends: "חברים 💕🐾",
+      friendsText: "הרפתקאות טובות יותר ביחד.",
+
+      diaryKicker: "מהיומן של Miso ♥ ✨",
+      diaryTitle: "כלבה קטנה אחת.<br>רעיון גדול מאוד. ✨",
+      diaryLead: "אני חושבת שהכול התחיל איתי. 💕",
+      diary1: "כשהגעתי, למשפחה שלי פתאום הייתה רשימה חדשה לגמרי של שאלות.",
+      diaryNote: "לאן אפשר ללכת יחד?<br>אילו בתי קפה יקבלו אותי בברכה?<br>אילו מלונות באמת אוהבים חיות מחמד?<br>איפה אפשר לטייל, לנסוע ולהכיר חברים חדשים?",
+      diary2: "כלבה זעירה אחת — ופתאום העולם נראה שונה לגמרי.",
+      diary3: "התחלנו לחפש מקומות, לגלות מסלולים חדשים ולאסוף תשובות שימושיות.",
+      diary4: "כל טיול הפך לחקירה קטנה. כל נסיעה הביאה גילוי חדש. כל מקום חדש נתן לנו משהו שימושי לזכור.",
+      diary5: "אולי כך התחיל PETS & DOGUE. ♥",
+      pull: "כלבה קטנה אחת.<br>עולם גדול מאוד. 🌍✨",
+
+      seaKicker: "Miso חוקרת ✨",
+      seaTitle: "הים 🌊",
+      seaText: "ריחות חדשים.<br>צלילים חדשים.<br>עולם גדול. 💙",
+
+      londonKicker: "לונדון שלי ♥ ✨",
+      londonTitle: "העיר שלי —<br>לונדון",
+      londonFeature: "Miso בלונדון 💙",
+      londonFeatureSub: "כפות קטנות. עיר גדולה. 🎀✨",
+      london1: "לונדון אף פעם לא מרגישה בדיוק אותו הדבר פעמיים. ♥",
+      london2: "פארק היום. 🌳<br>בית קפה קטן מחר. ☕<br>אחר כך הנהר, שוק, אוטובוס אדום 🚌<br>או רחוב שמעולם לא ראיתי.",
+      london3: "אני עוצרת. מסתכלת. מרחרחת. ואז בוחרת כיוון אחר. ✨",
+      london4: "לפעמים היעד הוא החלק הטוב ביותר. ולפעמים זה כל מה שאני מגלה בדרך.",
+      london5: "בשבילי, טיול הוא לא רק לצאת החוצה. כך אני מגלה את העולם. 🌍",
+
+      friendKicker: "שלום, חבר חדש ♥ ✨",
+      friendTitle: "יש<br>התאמה! 💕",
+      friend1: "היי. אני Miso Cute.",
+      friend2: "אני זעירה, עדינה, סקרנית ותמיד שמחה להכיר מישהו חדש.",
+      friend3: "יש הרפתקאות שנועדו לחקירה. אחרות נועדו לשיתוף. 🐾",
+      friend4: "פנים חדשות. שלום קטן. ולפעמים — חבר חדש.",
+      friend5: "החלק הכי טוב בהרפתקה חדשה הוא שאף פעם לא יודעים את מי נפגוש. ♥",
+
+      everyoneKicker: "כולם מוזמנים ♥ ✨",
+      everyoneTitle: "יש כאן מקום<br>לכולם.",
+      animals: "🐶 כלבים, 🐱 חתולים, 🦜 תוכים, 🐰 ארנבים, 🐴 סוסים, 🐢 צבים, שרקנים, 🐠 דגים, 🐦 ציפורים וזוחלים.",
+      everyone1: "גדולים. קטנים. פרוותיים. מנוצים. חלקים.",
+      everyone2: "לחלק יש כפות. לחלק כנפיים. לחלק סנפירים.",
+      everyone3: "יש שרוצים לרוץ לצדנו. אחרים מעדיפים פינה חמימה ושקטה. ויש שמתבוננים בעולם מענף, מאקווריום או מהחלון האהוב עליהם.",
+      everyone4: "כולם מוזמנים לכאן. ♥ 🌍✨",
+      everyone5: "אנחנו לא צריכים להיראות אותו הדבר כדי להשתייך לאותו עולם.",
+      everyone6: "וזה בדיוק העניין.",
+      everyone7: "PETS & DOGUE עוסק בבעלי חיים — ובאנשים שאוהבים אותם.",
+
+      askKicker: "מחלקת הסקרנות ♥ ✨",
+      askTitle: "ואם אתם<br>צריכים את העזרה שלי...",
+      askMark: "שאלו את האף הקטן והסקרן שלי ♥",
+      askMarkSub: "Miso יודעת איפה לחפש. ✨",
+      ask1: "צריכים מקום ללכת אליו?",
+      ask2: "מחפשים מקום ידידותי לחיות מחמד? 🐾",
+      ask3: "מתכננים נסיעה? ✈️",
+      ask4: "מחפשים משהו שימושי?",
+      ask5: "אני מסתכלת. מרחרחת. חוקרת. ✨",
+      ask6: "וכשאני מוצאת משהו מעניין, אני מביאה אותו בחזרה ל-PETS & DOGUE.",
+      ask7: "בשביל זה יש אף קטן וסקרן. ♥",
+      askLabel: "שאלו את Miso ✨",
+
+      finalKicker: "נתראה איפשהו בעולם ✨",
+      finalTitle: "נתראה<br>שם בחוץ.",
+      finalBlue: "עולם אחד.<br>כל חיית מחמד. 🌍",
+      final1: "היום אולי ניפגש בלונדון. מחר — ליד הים.",
+      final2: "אולי בפארק, בבית קפה או במקום בלתי צפוי לחלוטין.",
+      final3: "אם תראו בלונדינית זעירה ופרוותית שחוקרת ברצינות מקום חדש — בואו להגיד שלום. 💕",
+      final4: "ואם אנחנו רחוקים זה מזה כרגע, חפשו את העיגול הקטן שלי ב-PETS & DOGUE.",
+      final5: "כך או אחרת, אנחנו ניפגש. ♥",
+      signature: "באהבה,<br>Miso ♥",
+      tagline: "עולם אחד. כל חיית מחמד. ♥",
+      issueLink: "← גיליון 01",
+      home: "דף הבית"
+    }
+  };
+
+  function normaliseLanguage(value) {
+    if (!value) return "en";
+
+    let lang = String(value)
       .trim()
       .toLowerCase()
-      .replace("_", "-");
+      .replace("_", "-")
+      .split("-")[0];
 
-    if (!lang) return "en";
-
-    lang = lang.split("-")[0];
-
-    if (ALIASES[lang]) {
-      lang = ALIASES[lang];
-    }
+    lang = ALIASES[lang] || lang;
 
     return SUPPORTED.includes(lang) ? lang : "en";
   }
 
-  function getStoredLanguage() {
+  function getSavedLanguage() {
     try {
-      return normalizeLanguage(
-        localStorage.getItem(STORE_KEY) || "en"
-      );
-    } catch (error) {
-      return "en";
-    }
+      const saved = localStorage.getItem(STORE_KEY);
+      if (saved) return normaliseLanguage(saved);
+    } catch (error) {}
+
+    const htmlLang = document.documentElement.getAttribute("lang");
+    if (htmlLang) return normaliseLanguage(htmlLang);
+
+    return normaliseLanguage(navigator.language || "en");
   }
 
-  function setDocumentDirection(lang) {
-    const rtl = RTL.has(lang);
-
-    document.documentElement.lang = lang;
-    document.documentElement.dir = rtl ? "rtl" : "ltr";
-
-    if (document.body) {
-      document.body.dir = rtl ? "rtl" : "ltr";
-    }
+  function getDictionary(lang) {
+    return STORIES[lang] || STORIES.en || {};
   }
 
-  function applyLanguage(language) {
-    const lang = normalizeLanguage(language);
-    const dictionary = T[lang] || T.en;
+  function valueFor(lang, key) {
+    const current = getDictionary(lang);
+    const english = getDictionary("en");
 
-    setDocumentDirection(lang);
+    if (
+      Object.prototype.hasOwnProperty.call(current, key) &&
+      current[key] !== null &&
+      current[key] !== undefined &&
+      current[key] !== ""
+    ) {
+      return current[key];
+    }
 
-    document
-      .querySelectorAll("[data-i18n]")
-      .forEach(function (element) {
-        const key = element.getAttribute("data-i18n");
+    return english[key] || "";
+  }
 
-        if (!key) return;
-
-        const value =
-          dictionary[key] !== undefined
-            ? dictionary[key]
-            : T.en[key];
-
-        if (value === undefined) return;
-
-        element.innerHTML = value;
-      });
+  function applyLanguage(requestedLanguage) {
+    const lang = normaliseLanguage(requestedLanguage);
 
     try {
       localStorage.setItem(STORE_KEY, lang);
     } catch (error) {}
 
+    document.documentElement.lang = lang;
+    document.documentElement.dir = RTL.has(lang) ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach(function (element) {
+      const key = element.getAttribute("data-i18n");
+      if (!key) return;
+
+      const translated = valueFor(lang, key);
+
+      if (translated !== "") {
+        element.innerHTML = translated;
+      }
+    });
+
+    document.querySelectorAll("[data-i18n-text]").forEach(function (element) {
+      const key = element.getAttribute("data-i18n-text");
+      if (!key) return;
+
+      const translated = valueFor(lang, key);
+
+      if (translated !== "") {
+        element.textContent = translated.replace(/<br\s*\/?>/gi, " ");
+      }
+    });
+
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (element) {
+      const key = element.getAttribute("data-i18n-aria");
+      if (!key) return;
+
+      const translated = valueFor(lang, key);
+
+      if (translated !== "") {
+        element.setAttribute(
+          "aria-label",
+          translated.replace(/<br\s*\/?>/gi, " ")
+        );
+      }
+    });
+
+    document.querySelectorAll(
+      "select[data-language-select], select#languageSelect, select#language-select"
+    ).forEach(function (select) {
+      const option = Array.from(select.options).find(function (item) {
+        return normaliseLanguage(item.value) === lang;
+      });
+
+      if (option) {
+        select.value = option.value;
+      }
+    });
+
     window.dispatchEvent(
-      new CustomEvent("petsdogue:miso-language-applied", {
-        detail: { language: lang }
+      new CustomEvent("petsdogue:storylanguagechange", {
+        detail: {
+          language: lang,
+          story: "miso"
+        }
       })
     );
+
+    return lang;
   }
 
-  function readLanguageFromEvent(event) {
-    if (!event || !event.detail) return null;
+  function bindLanguageSelectors() {
+    document.querySelectorAll(
+      "select[data-language-select], select#languageSelect, select#language-select"
+    ).forEach(function (select) {
+      if (select.dataset.misoLanguageBound === "1") return;
 
-    return (
-      event.detail.language ||
-      event.detail.lang ||
-      event.detail.code ||
-      null
-    );
+      select.dataset.misoLanguageBound = "1";
+
+      select.addEventListener("change", function () {
+        applyLanguage(select.value);
+      });
+    });
+
+    document.querySelectorAll("[data-language]").forEach(function (button) {
+      if (button.dataset.misoLanguageBound === "1") return;
+
+      button.dataset.misoLanguageBound = "1";
+
+      button.addEventListener("click", function () {
+        const lang = button.getAttribute("data-language");
+        if (lang) applyLanguage(lang);
+      });
+    });
   }
 
-  window.addEventListener(
-    "petsdogue:setlanguage",
-    function (event) {
-      const lang = readLanguageFromEvent(event);
+  window.addEventListener("petsdogue:setlanguage", function (event) {
+    if (!event.detail || !event.detail.language) return;
+    applyLanguage(event.detail.language);
+  });
 
-      if (lang) {
-        applyLanguage(lang);
-      }
-    }
-  );
+  window.addEventListener("petsdogue:languagechange", function (event) {
+    if (!event.detail || !event.detail.language) return;
+    applyLanguage(event.detail.language);
+  });
 
-  window.addEventListener(
-    "petsdogue:languagechange",
-    function (event) {
-      const lang = readLanguageFromEvent(event);
-
-      if (lang) {
-        applyLanguage(lang);
-      }
-    }
-  );
-
-  window.addEventListener(
-    "languagechange",
-    function (event) {
-      const lang = readLanguageFromEvent(event);
-
-      if (lang) {
-        applyLanguage(lang);
-      }
-    }
-  );
-
-  window.addEventListener(
-    "storage",
-    function (event) {
-      if (
-        event.key === STORE_KEY &&
-        event.newValue
-      ) {
-        applyLanguage(event.newValue);
-      }
-    }
-  );
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-      applyLanguage(getStoredLanguage());
-    }
-  );
+  window.addEventListener("storage", function (event) {
+    if (event.key !== STORE_KEY || !event.newValue) return;
+    applyLanguage(event.newValue);
+  });
 
   window.PetsDogueMisoI18n = {
-    translations: T,
+    translations: STORIES,
     supportedLanguages: SUPPORTED.slice(),
-    getLanguage: getStoredLanguage,
-    setLanguage: applyLanguage,
-    applyLanguage: applyLanguage
+
+    getLanguage: function () {
+      return normaliseLanguage(
+        document.documentElement.lang || getSavedLanguage()
+      );
+    },
+
+    setLanguage: function (lang) {
+      return applyLanguage(lang);
+    },
+
+    translate: function (key, lang) {
+      return valueFor(
+        normaliseLanguage(
+          lang || document.documentElement.lang || getSavedLanguage()
+        ),
+        key
+      );
+    }
   };
+
+  function initialise() {
+    bindLanguageSelectors();
+    applyLanguage(getSavedLanguage());
+
+    const observer = new MutationObserver(function () {
+      bindLanguageSelectors();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialise, {
+      once: true
+    });
+  } else {
+    initialise();
+  }
 })();
