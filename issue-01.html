@@ -19,16 +19,6 @@
 
 <!-- =====================================================
      PETS & DOGUE GLOBAL SYSTEM
-
-     IMPORTANT:
-     HEADER
-     SIDE MENU
-     LANGUAGE SELECTOR
-     MISO HELP CIRCLE
-     TTS
-     HEADER HIDE / SHOW ON SCROLL
-
-     ARE CONTROLLED ONLY BY GLOBAL FILES BELOW.
 ===================================================== -->
 
 <script
@@ -41,13 +31,13 @@
   defer
 ></script>
 
-<!-- ISSUE 01 LOCAL FREE TRANSLATIONS -->
 <script
   src="/i18n/issue-01.js?v=20261004-language-sync"
   defer
 ></script>
 
 <style>
+
 :root{
   --pd-black:#070707;
   --pd-white:#ffffff;
@@ -85,7 +75,6 @@ body{
 
 img{
   display:block;
-  width:100%;
   max-width:100%;
 }
 
@@ -102,20 +91,24 @@ a{
   background:#000;
 }
 
+/* =====================================================
+   COVER
+===================================================== */
+
 .pd-issue-cover{
   width:100%;
-  margin:0;
-  padding:0;
   background:#000;
 }
 
 .pd-issue-cover img{
-  display:block;
   width:100%;
   height:auto;
-  margin:0;
   object-fit:contain;
 }
+
+/* =====================================================
+   INTRO
+===================================================== */
 
 .pd-cover-intro{
   padding:44px 26px 46px;
@@ -163,6 +156,10 @@ a{
   margin-top:20px;
 }
 
+/* =====================================================
+   MISO — BEGINNING
+===================================================== */
+
 .pd-miso-origin{
   display:grid;
   grid-template-columns:1.18fr .82fr;
@@ -174,7 +171,7 @@ a{
 .pd-miso-origin-media{
   min-height:620px;
   overflow:hidden;
-  background:#ddd;
+  background:#111;
 }
 
 .pd-miso-origin-media img{
@@ -227,9 +224,14 @@ a{
   line-height:1.48;
 }
 
+/* =====================================================
+   PET SECTIONS
+===================================================== */
+
 .pd-pet-section{
   width:100%;
   border-bottom:7px solid #000;
+  overflow:hidden;
 }
 
 .pd-light{
@@ -279,7 +281,6 @@ a{
   color:var(--pd-gold);
   font-family:var(--pd-serif);
   font-size:18px;
-  line-height:1;
   font-weight:700;
 }
 
@@ -335,7 +336,6 @@ a{
   color:#000;
   font-family:var(--pd-sans);
   font-size:12px;
-  line-height:1.15;
   font-weight:900;
   text-transform:uppercase;
 }
@@ -347,6 +347,10 @@ a{
 .pd-more.yellow{
   background:var(--pd-yellow);
 }
+
+/* =====================================================
+   PHOTOS — DESKTOP
+===================================================== */
 
 .pd-main-photo{
   min-height:480px;
@@ -396,22 +400,9 @@ a{
   object-fit:cover;
 }
 
-#pdMiso .pd-main-photo img{
-  object-position:center center;
-}
-
-#pdPablo .pd-main-photo img{
-  object-position:center 40%;
-}
-
-#pdJessica .pd-main-photo img{
-  object-position:center center;
-}
-
-#pdRichie .pd-main-photo img,
-#pdPi .pd-main-photo img{
-  object-position:center center;
-}
+/* =====================================================
+   ENDING
+===================================================== */
 
 .pd-ending{
   display:grid;
@@ -421,10 +412,6 @@ a{
   padding:49px 45px 52px;
   background:#080808;
   color:#fff;
-}
-
-.pd-ending-copy{
-  min-width:0;
 }
 
 .pd-ending .pd-kicker{
@@ -469,8 +456,11 @@ a{
   font-family:var(--pd-serif);
   font-size:18px;
   font-style:italic;
-  line-height:1.15;
 }
+
+/* =====================================================
+   RTL
+===================================================== */
 
 html[dir="rtl"] #pdIssue01{
   text-align:right;
@@ -486,6 +476,10 @@ html[dir="rtl"] .pd-ending{
 html[dir="rtl"] .pd-more{
   align-self:flex-start;
 }
+
+/* =====================================================
+   TABLET
+===================================================== */
 
 @media(max-width:900px){
 
@@ -518,14 +512,14 @@ html[dir="rtl"] .pd-more{
   }
 }
 
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media(max-width:720px){
 
   .pd-cover-intro{
     padding:35px 22px 39px;
-  }
-
-  .pd-cover-intro .pd-kicker{
-    font-size:11px;
   }
 
   .pd-cover-intro h1{
@@ -537,167 +531,45 @@ html[dir="rtl"] .pd-more{
     line-height:1.3;
   }
 
+  /* MISO BEGINNING */
+
   .pd-miso-origin{
-    grid-template-columns:61% 39%;
+    grid-template-columns:1fr;
   }
 
   .pd-miso-origin-media{
-    min-height:510px;
+    min-height:0;
+    background:#080808;
+  }
+
+  .pd-miso-origin-media img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
   }
 
   .pd-miso-origin-copy{
-    padding:24px 14px;
+    padding:29px 22px 33px;
   }
 
   .pd-origin-kicker{
-    margin-bottom:9px;
-    font-size:8px;
+    font-size:9px;
   }
 
   .pd-miso-origin h2{
-    font-size:39px;
-    line-height:.89;
+    font-size:45px;
   }
 
   .pd-origin-subtitle{
-    margin:9px 0 14px;
-    font-size:22px;
+    font-size:25px;
   }
 
   .pd-miso-origin-copy p{
-    font-size:12.5px;
-    line-height:1.39;
+    font-size:15px;
+    line-height:1.45;
   }
 
-  .pd-light-grid{
-    grid-template-columns:40% 42% 18%;
-    gap:3px;
-    padding:3px;
-  }
-
-  .pd-dark-grid{
-    grid-template-columns:61% 39%;
-    gap:3px;
-    padding:3px;
-  }
-
-  .pd-pet-copy{
-    padding:24px 13px 21px;
-  }
-
-  .pd-pet-number{
-    margin-bottom:8px;
-    font-size:13px;
-  }
-
-  .pd-pet-label{
-    margin-bottom:5px;
-    font-size:8px;
-  }
-
-  .pd-pet-name{
-    font-size:38px;
-  }
-
-  .pd-pet-subtitle{
-    margin:6px 0 11px;
-    font-size:20px;
-  }
-
-  .pd-pet-copy p{
-    font-size:12.5px;
-    line-height:1.39;
-  }
-
-  .pd-more{
-    width:100%;
-    min-height:39px;
-    margin-top:15px;
-    padding:8px 7px;
-    gap:7px;
-    font-size:8.5px;
-  }
-
-  .pd-main-photo{
-    min-height:430px;
-  }
-
-  .pd-vertical-thumbs img{
-    min-height:140px;
-  }
-
-  .pd-dark-visual .pd-main-photo{
-    min-height:360px;
-  }
-
-  .pd-bottom-thumbs{
-    gap:3px;
-    margin-top:3px;
-  }
-
-  .pd-ending{
-    grid-template-columns:minmax(0,1fr) 125px;
-    gap:18px;
-    padding:36px 22px 43px;
-  }
-
-  .pd-ending h2{
-    font-size:44px;
-  }
-
-  .pd-ending p{
-    margin-top:17px;
-    font-size:14px;
-  }
-
-  .pd-polaroid{
-    padding:6px 6px 14px;
-  }
-
-  .pd-polaroid-copy{
-    padding-top:7px;
-    font-size:11px;
-  }
-}
-
-@media(max-width:390px){
-
-  .pd-cover-intro h1{
-    font-size:47px;
-  }
-
-  .pd-cover-intro p{
-    font-size:18px;
-  }
-
-  .pd-miso-origin-copy p,
-  .pd-pet-copy p{
-    font-size:11.5px;
-  }
-
-  .pd-pet-name{
-    font-size:34px;
-  }
-
-  .pd-pet-subtitle{
-    font-size:18px;
-  }
-}
-/* =====================================================
-   PETS & DOGUE · ISSUE 01
-   MOBILE EDITORIAL PHOTO LAYOUT
-   Full photographs / no aggressive cropping
-===================================================== */
-
-@media(max-width:720px){
-
-  .pd-pet-section{
-    overflow:hidden;
-  }
-
-  /* =========================
-     MISO + JESSICA
-  ========================= */
+  /* LIGHT CARDS */
 
   .pd-light-grid{
     display:grid;
@@ -730,14 +602,41 @@ html[dir="rtl"] .pd-more{
   }
 
   .pd-light-grid .pd-main-photo img{
-    display:block;
     width:100%;
     height:100%;
     min-height:0;
     object-fit:contain;
-    object-position:center center;
-    background:#eee7da;
+    object-position:center;
   }
+
+  /* DARK CARDS */
+
+  .pd-dark-grid{
+    display:grid;
+    grid-template-columns:61% 39%;
+    gap:3px;
+    padding:3px;
+    align-items:start;
+  }
+
+  .pd-dark-visual{
+    min-width:0;
+  }
+
+  .pd-dark-visual .pd-main-photo{
+    min-height:0;
+    height:auto;
+    background:#080808;
+  }
+
+  .pd-dark-visual .pd-main-photo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    object-position:center;
+  }
+
+  /* GENERAL THUMBNAILS */
 
   .pd-vertical-thumbs{
     display:grid;
@@ -749,50 +648,13 @@ html[dir="rtl"] .pd-more{
   }
 
   .pd-vertical-thumbs img{
-    display:block;
     width:100%;
     height:auto;
     min-height:0;
-    aspect-ratio:4 / 3;
+    aspect-ratio:auto;
     object-fit:contain;
-    object-position:center center;
+    object-position:center;
     background:#111;
-  }
-
-
-  /* =========================
-     PABLO + RICHIE + PI
-  ========================= */
-
-  .pd-dark-grid{
-    display:grid;
-    grid-template-columns:61% 39%;
-    gap:3px;
-    padding:3px;
-    align-items:stretch;
-  }
-
-  .pd-dark-visual{
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-  }
-
-  .pd-dark-visual .pd-main-photo{
-    min-height:0;
-    height:auto;
-    overflow:hidden;
-    background:#080808;
-  }
-
-  .pd-dark-visual .pd-main-photo img{
-    display:block;
-    width:100%;
-    height:auto;
-    min-height:0;
-    object-fit:contain;
-    object-position:center center;
-    background:#080808;
   }
 
   .pd-bottom-thumbs{
@@ -804,108 +666,172 @@ html[dir="rtl"] .pd-more{
   }
 
   .pd-bottom-thumbs img{
-    display:block;
     width:100%;
     height:auto;
-    aspect-ratio:1 / 1;
+    aspect-ratio:auto;
     object-fit:contain;
-    object-position:center center;
+    object-position:center;
     background:#111;
   }
 
-
-  /* =========================
-     MISO
-  ========================= */
+  /* ===================================================
+     MISO — SPECIAL MOBILE DESIGN
+  =================================================== */
 
   #pdMiso .pd-main-photo{
     display:flex;
     align-items:center;
     justify-content:center;
+    min-height:0;
+    height:auto;
     background:#f2eadc;
   }
 
   #pdMiso .pd-main-photo img{
     width:100%;
     height:auto;
+    min-height:0;
+    max-height:none;
     object-fit:contain;
-    object-position:center center;
+    object-position:center;
+  }
+
+  /*
+     Miso supporting photographs:
+     horizontal touch carousel.
+  */
+
+  #pdMiso .pd-vertical-thumbs{
+    display:flex;
+    grid-template-columns:none;
+    grid-template-rows:none;
+
+    width:100%;
+    gap:7px;
+    padding:7px;
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+
+    overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+
+    background:#080808;
+  }
+
+  #pdMiso .pd-vertical-thumbs::-webkit-scrollbar{
+    display:none;
   }
 
   #pdMiso .pd-vertical-thumbs img{
+    flex:0 0 82%;
+    width:82%;
+    height:auto;
+    min-height:0;
+    max-height:none;
+
+    aspect-ratio:auto;
+
     object-fit:contain;
-    object-position:center center;
+    object-position:center;
+
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+
+    background:#080808;
   }
 
+  #pdMiso .pd-vertical-thumbs::after{
+    content:"";
+    flex:0 0 6px;
+  }
 
-  /* =========================
-     PABLO
-  ========================= */
+  /* PABLO — NATURAL PROPORTIONS */
 
   #pdPablo .pd-main-photo{
-    background:#080808;
+    min-height:0;
+    height:auto;
   }
 
   #pdPablo .pd-main-photo img{
     width:100%;
     height:auto;
+    min-height:0;
     object-fit:contain;
-    object-position:center center;
+    object-position:center;
   }
 
   #pdPablo .pd-bottom-thumbs img{
+    height:auto;
+    aspect-ratio:auto;
     object-fit:contain;
-    object-position:center center;
-    background:#080808;
   }
 
-
-  /* =========================
-     JESSICA
-  ========================= */
+  /* JESSICA — NATURAL PROPORTIONS */
 
   #pdJessica .pd-main-photo{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f2eadc;
+    min-height:0;
+    height:auto;
   }
 
   #pdJessica .pd-main-photo img{
     width:100%;
     height:auto;
+    min-height:0;
     object-fit:contain;
-    object-position:center center;
   }
 
   #pdJessica .pd-vertical-thumbs img{
+    height:auto;
+    aspect-ratio:auto;
     object-fit:contain;
-    object-position:center center;
   }
 
+  /* RICHIE — NATURAL PROPORTIONS */
 
-  /* =========================
-     RICHIE + PI
-  ========================= */
+  #pdRichie .pd-main-photo{
+    min-height:0;
+    height:auto;
+  }
 
-  #pdRichie .pd-main-photo img,
+  #pdRichie .pd-main-photo img{
+    width:100%;
+    height:auto;
+    min-height:0;
+    object-fit:contain;
+  }
+
+  #pdRichie .pd-bottom-thumbs img{
+    height:auto;
+    aspect-ratio:auto;
+    object-fit:contain;
+  }
+
+  /* PI — NATURAL PROPORTIONS */
+
+  #pdPi .pd-main-photo{
+    min-height:0;
+    height:auto;
+  }
+
   #pdPi .pd-main-photo img{
     width:100%;
     height:auto;
+    min-height:0;
     object-fit:contain;
-    object-position:center center;
   }
 
-  #pdRichie .pd-bottom-thumbs img,
-  #pdPi .pd-bottom-thumbs img{
+  #pdPi .pd-vertical-thumbs img{
+    height:auto;
+    aspect-ratio:auto;
     object-fit:contain;
-    object-position:center center;
   }
 
-
-  /* =========================
-     TYPOGRAPHY
-  ========================= */
+  /* TEXT */
 
   .pd-pet-copy{
     justify-content:center;
@@ -927,7 +853,6 @@ html[dir="rtl"] .pd-more{
 
   .pd-pet-name{
     font-size:clamp(37px,10vw,49px);
-    line-height:.88;
   }
 
   .pd-pet-subtitle{
@@ -948,31 +873,57 @@ html[dir="rtl"] .pd-more{
     padding:10px 9px;
     gap:8px;
     font-size:9px;
-    line-height:1.15;
   }
 
+  /* ENDING */
 
-  /* =========================
-     ARABIC / RTL
-  ========================= */
+  .pd-ending{
+    grid-template-columns:minmax(0,1fr) 125px;
+    gap:18px;
+    padding:36px 22px 43px;
+  }
 
-  html[dir="rtl"] .pd-light-grid,
-  html[dir="rtl"] .pd-dark-grid{
+  .pd-ending h2{
+    font-size:44px;
+  }
+
+  .pd-ending p{
+    margin-top:17px;
+    font-size:14px;
+  }
+
+  .pd-polaroid{
+    padding:6px 6px 14px;
+  }
+
+  .pd-polaroid-copy{
+    font-size:11px;
+  }
+
+  /* RTL */
+
+  html[dir="rtl"] #pdMiso .pd-vertical-thumbs{
     direction:rtl;
   }
 
   html[dir="rtl"] .pd-pet-copy{
     text-align:right;
   }
-
 }
-
 
 /* =====================================================
    VERY SMALL PHONES
 ===================================================== */
 
 @media(max-width:390px){
+
+  .pd-cover-intro h1{
+    font-size:47px;
+  }
+
+  .pd-cover-intro p{
+    font-size:18px;
+  }
 
   .pd-light-grid{
     grid-template-columns:43% 57%;
@@ -1005,14 +956,23 @@ html[dir="rtl"] .pd-more{
     font-size:8px;
   }
 
+  #pdMiso .pd-vertical-thumbs img{
+    flex-basis:86%;
+    width:86%;
+  }
 }
+
 @media(prefers-reduced-motion:reduce){
 
   html{
     scroll-behavior:auto;
   }
 
+  #pdMiso .pd-vertical-thumbs{
+    scroll-behavior:auto;
+  }
 }
+
 </style>
 </head>
 
@@ -1020,10 +980,7 @@ html[dir="rtl"] .pd-more{
 
 <main id="pdIssue01">
 
-<section
-  class="pd-issue-cover"
-  id="issueCover"
->
+<section class="pd-issue-cover" id="issueCover">
 
   <img
     src="/file_00000000a9d471fda9b4629589be22a9.png?v=20260926-final"
@@ -1035,17 +992,11 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<section
-  class="pd-cover-intro"
-  id="coverIntroduction"
->
+<section class="pd-cover-intro" id="coverIntroduction">
 
   <div class="pd-cover-intro-inner">
 
-    <div
-      class="pd-kicker"
-      data-i18n="intro.kicker"
-    >
+    <div class="pd-kicker" data-i18n="intro.kicker">
       PETS &amp; DOGUE · ISSUE 01 · SUMMER 2026
     </div>
 
@@ -1069,10 +1020,7 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<section
-  class="pd-miso-origin"
-  id="misoBeginning"
->
+<section class="pd-miso-origin" id="misoBeginning">
 
   <div class="pd-miso-origin-media">
 
@@ -1087,26 +1035,17 @@ html[dir="rtl"] .pd-more{
 
   <div class="pd-miso-origin-copy">
 
-    <div
-      class="pd-origin-kicker"
-      data-i18n="origin.kicker"
-    >
+    <div class="pd-origin-kicker" data-i18n="origin.kicker">
       PETS &amp; DOGUE · ISSUE 01
     </div>
 
     <h2>
       <span data-i18n="origin.title1">It all began</span><br>
       <span data-i18n="origin.title2">with</span>
-      <span
-        class="notranslate"
-        translate="no"
-      >Miso</span>
+      <span class="notranslate" translate="no">Miso</span>
     </h2>
 
-    <div
-      class="pd-origin-subtitle"
-      data-i18n="origin.subtitle"
-    >
+    <div class="pd-origin-subtitle" data-i18n="origin.subtitle">
       And her friends.
     </div>
 
@@ -1123,10 +1062,11 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<section
-  class="pd-pet-section pd-light"
-  id="pdMiso"
->
+<!-- =====================================================
+     MISO
+===================================================== -->
+
+<section class="pd-pet-section pd-light" id="pdMiso">
 
   <div class="pd-light-grid">
 
@@ -1134,24 +1074,15 @@ html[dir="rtl"] .pd-more{
 
       <div class="pd-pet-number">01</div>
 
-      <div
-        class="pd-pet-label"
-        data-i18n="miso.label"
-      >
+      <div class="pd-pet-label" data-i18n="miso.label">
         COVER STAR
       </div>
 
-      <h2
-        class="pd-pet-name notranslate"
-        translate="no"
-      >
+      <h2 class="pd-pet-name notranslate" translate="no">
         Miso
       </h2>
 
-      <div
-        class="pd-pet-subtitle"
-        data-i18n="miso.subtitle"
-      >
+      <div class="pd-pet-subtitle" data-i18n="miso.subtitle">
         The little explorer
       </div>
 
@@ -1185,7 +1116,10 @@ html[dir="rtl"] .pd-more{
 
     </div>
 
-    <div class="pd-vertical-thumbs">
+    <div
+      class="pd-vertical-thumbs"
+      aria-label="Miso photo gallery"
+    >
 
       <img
         src="/miso-03.jpg"
@@ -1217,10 +1151,11 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<section
-  class="pd-pet-section pd-dark"
-  id="pdPablo"
->
+<!-- =====================================================
+     PABLO
+===================================================== -->
+
+<section class="pd-pet-section pd-dark" id="pdPablo">
 
   <div class="pd-dark-grid">
 
@@ -1270,24 +1205,15 @@ html[dir="rtl"] .pd-more{
 
       <div class="pd-pet-number">02</div>
 
-      <div
-        class="pd-pet-label"
-        data-i18n="pablo.label"
-      >
+      <div class="pd-pet-label" data-i18n="pablo.label">
         COVER STAR
       </div>
 
-      <h2
-        class="pd-pet-name notranslate"
-        translate="no"
-      >
+      <h2 class="pd-pet-name notranslate" translate="no">
         Pablo
       </h2>
 
-      <div
-        class="pd-pet-subtitle"
-        data-i18n="pablo.subtitle"
-      >
+      <div class="pd-pet-subtitle" data-i18n="pablo.subtitle">
         Stylish Sphynx
       </div>
 
@@ -1312,12 +1238,13 @@ html[dir="rtl"] .pd-more{
 
   </div>
 
-</section><!-- PART 2 / CONTINUE DIRECTLY AFTER PART 1 -->
+</section>
 
-<section
-  class="pd-pet-section pd-light"
-  id="pdJessica"
->
+<!-- =====================================================
+     JESSICA
+===================================================== -->
+
+<section class="pd-pet-section pd-light" id="pdJessica">
 
   <div class="pd-light-grid">
 
@@ -1325,24 +1252,15 @@ html[dir="rtl"] .pd-more{
 
       <div class="pd-pet-number">03</div>
 
-      <div
-        class="pd-pet-label"
-        data-i18n="jessica.label"
-      >
+      <div class="pd-pet-label" data-i18n="jessica.label">
         COVER STAR
       </div>
 
-      <h2
-        class="pd-pet-name notranslate"
-        translate="no"
-      >
+      <h2 class="pd-pet-name notranslate" translate="no">
         Jessica
       </h2>
 
-      <div
-        class="pd-pet-subtitle"
-        data-i18n="jessica.subtitle"
-      >
+      <div class="pd-pet-subtitle" data-i18n="jessica.subtitle">
         Gentle British lady
       </div>
 
@@ -1408,10 +1326,11 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<section
-  class="pd-pet-section pd-dark"
-  id="pdRichie"
->
+<!-- =====================================================
+     RICHIE
+===================================================== -->
+
+<section class="pd-pet-section pd-dark" id="pdRichie">
 
   <div class="pd-dark-grid">
 
@@ -1461,24 +1380,15 @@ html[dir="rtl"] .pd-more{
 
       <div class="pd-pet-number">04</div>
 
-      <div
-        class="pd-pet-label"
-        data-i18n="richie.label"
-      >
+      <div class="pd-pet-label" data-i18n="richie.label">
         A SPECIAL FRIENDSHIP
       </div>
 
-      <h2
-        class="pd-pet-name notranslate"
-        translate="no"
-      >
+      <h2 class="pd-pet-name notranslate" translate="no">
         Richie
       </h2>
 
-      <div
-        class="pd-pet-subtitle"
-        data-i18n="richie.subtitle"
-      >
+      <div class="pd-pet-subtitle" data-i18n="richie.subtitle">
         A gentle little friend
       </div>
 
@@ -1505,10 +1415,11 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<section
-  class="pd-pet-section pd-light"
-  id="pdPi"
->
+<!-- =====================================================
+     PI
+===================================================== -->
+
+<section class="pd-pet-section pd-light" id="pdPi">
 
   <div class="pd-light-grid">
 
@@ -1516,24 +1427,15 @@ html[dir="rtl"] .pd-more{
 
       <div class="pd-pet-number">05</div>
 
-      <div
-        class="pd-pet-label"
-        data-i18n="pi.label"
-      >
+      <div class="pd-pet-label" data-i18n="pi.label">
         A SPECIAL FRIENDSHIP
       </div>
 
-      <h2
-        class="pd-pet-name notranslate"
-        translate="no"
-      >
+      <h2 class="pd-pet-name notranslate" translate="no">
         Pi
       </h2>
 
-      <div
-        class="pd-pet-subtitle"
-        data-i18n="pi.subtitle"
-      >
+      <div class="pd-pet-subtitle" data-i18n="pi.subtitle">
         Bright pink personality
       </div>
 
@@ -1600,17 +1502,15 @@ html[dir="rtl"] .pd-more{
 
 </section>
 
-<section
-  class="pd-ending"
-  id="issueEnding"
->
+<!-- =====================================================
+     ENDING
+===================================================== -->
+
+<section class="pd-ending" id="issueEnding">
 
   <div class="pd-ending-copy">
 
-    <div
-      class="pd-kicker"
-      data-i18n="ending.kicker"
-    >
+    <div class="pd-kicker" data-i18n="ending.kicker">
       PETS &amp; DOGUE · ISSUE 01
     </div>
 
@@ -1655,30 +1555,6 @@ html[dir="rtl"] .pd-more{
 (function(){
   "use strict";
 
-  /*
-  ========================================================
-  ISSUE 01 PAGE SCRIPT ONLY
-
-  pets-dogue-shell.js controls:
-  - global header
-  - header scroll behaviour
-  - Contents side menu
-  - Profile
-  - language selector
-  - all 23 language choices
-  - Arabic RTL
-  - Miso help circle
-  - global accessibility / TTS
-
-  i18n/issue-01.js controls:
-  - Issue 01 editorial copy
-  - local free translations
-  - Issue 01 image alt translations
-
-  DO NOT recreate the global shell here.
-  ========================================================
-  */
-
   const issue =
     document.getElementById("pdIssue01");
 
@@ -1703,15 +1579,15 @@ html[dir="rtl"] .pd-more{
 
 })();
 </script>
+
 <!-- =====================================================
-     PETS & DOGUE — ISSUE 01 INLINE COVER STAR STORIES
-     Opens the approved Miso / Pablo / Jessica / Richie & Pi
-     stories directly inside Issue 01.
-     ===================================================== -->
+     ISSUE 01 INLINE COVER STAR STORIES
+===================================================== -->
 
 <script
-  src="issue-01-expanded.js?v=20261004-1"
+  src="issue-01-expanded.js?v=20261004-photo-layout-2"
   defer
 ></script>
+
 </body>
 </html>
