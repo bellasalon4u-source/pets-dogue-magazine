@@ -3439,4 +3439,221 @@ type="button"
   }
 
 })();
+/* =========================================================
+   ISSUE 01 — MISO LANGUAGE BRIDGE
+   Keeps Issue 01 / Ask Miso in sync with the approved
+   PETS & DOGUE global language selector.
+   Does NOT rebuild or alter the approved global shell.
+   ========================================================= */
 
+(function () {
+
+  "use strict";
+
+  const LANGUAGE_KEY = "pets_dogue_language";
+
+  const LANGUAGE_ALIASES = {
+    ua: "uk",
+    cz: "cs",
+    gr: "el",
+    se: "sv",
+    dk: "da"
+  };
+
+  const SUPPORTED = new Set([
+    "en",
+    "uk",
+    "ru",
+    "fr",
+    "de",
+    "es",
+    "it",
+    "pt",
+    "nl",
+    "pl",
+    "cs",
+    "sk",
+    "hu",
+    "ro",
+    "bg",
+    "el",
+    "sv",
+    "da",
+    "no",
+    "fi",
+    "tr",
+    "ar",
+    "hi"
+  ]);
+
+  function normalizeLanguage(value) {
+
+    const raw = String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/_/g, "-");
+
+    if (!raw) {
+      return "en";
+    }
+
+    const base = raw.split("-")[0];
+    const normalized = LANGUAGE_ALIASES[base] || base;
+
+    return SUPPORTED.has(normalized)
+      ? normalized
+      : "en";
+  }
+
+  function getCurrentLanguage() {
+
+    let saved = "";
+
+    try {
+      saved = localStorage.getItem(LANGUAGE_KEY) || "";
+    } catch (error) {}
+
+    return normalizeLanguage(
+      saved ||
+      document.documentElement.lang ||
+      "en"
+    );
+  }
+
+  function setDocumentLanguage(code) {
+
+    const lang = normalizeLanguage(code);
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir =
+      lang === "ar" ? "rtl" : "ltr";
+
+    return lang;
+  }
+
+  function syncMisoEdition(code) {
+
+    const lang = setDocumentLanguage(code);
+
+    /*
+     * The global shell already owns and persists
+     * pets_dogue_language.
+     *
+     * This bridge only passes the selected language
+     * to Issue 01 / Ask Miso.
+     */
+
+    if (
+      window.PD_MISO_EDITION &&
+      typeof window.PD_MISO_EDITION.setLanguage === "function"
+    ) {
+
+      try {
+        window.PD_MISO_EDITION.setLanguage(lang);
+      } catch (error) {
+        console.warn(
+          "PETS & DOGUE: Issue 01 language sync failed.",
+          error
+        );
+      }
+
+      return true;
+    }
+
+    return false;
+  }
+
+  function syncWhenReady(code) {
+
+    const lang = normalizeLanguage(
+      code || getCurrentLanguage()
+    );
+
+    if (syncMisoEdition(lang)) {
+      return;
+    }
+
+    /*
+     * Issue 01 can initialise after the global shell.
+     * Retry briefly without touching the header,
+     * Contents menu or other page components.
+     */
+
+    let attempts = 0;
+    const maxAttempts = 40;
+
+    const timer = window.setInterval(
+      function () {
+
+        attempts += 1;
+
+        if (syncMisoEdition(lang)) {
+          window.clearInterval(timer);
+          return;
+        }
+
+        if (attempts >= maxAttempts) {
+          window.clearInterval(timer);
+        }
+
+      },
+      100
+    );
+  }
+
+  /*
+   * Main event emitted by the approved global shell
+   * whenever the user changes language.
+   */
+
+  window.addEventListener(
+    "petsdogue:languagechange",
+    function (event) {
+
+      const lang = normalizeLanguage(
+        event &&
+        event.detail &&
+        event.detail.language
+          ? event.detail.language
+          : getCurrentLanguage()
+      );
+
+      syncWhenReady(lang);
+    }
+  );
+
+  /*
+   * Issue 01 tells us when its own controller is ready.
+   */
+
+  document.addEventListener(
+    "pd:edition-ready",
+    function () {
+      syncWhenReady(getCurrentLanguage());
+    }
+  );
+
+  /*
+   * Initial synchronization.
+   */
+
+  function initialiseMisoLanguageBridge() {
+    syncWhenReady(getCurrentLanguage());
+  }
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initialiseMisoLanguageBridge,
+      {
+        once: true
+      }
+    );
+
+  } else {
+
+    initialiseMisoLanguageBridge();
+  }
+
+})();
