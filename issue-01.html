@@ -683,7 +683,329 @@ html[dir="rtl"] .pd-more{
     font-size:18px;
   }
 }
+/* =====================================================
+   PETS & DOGUE · ISSUE 01
+   MOBILE EDITORIAL PHOTO LAYOUT
+   Full photographs / no aggressive cropping
+===================================================== */
 
+@media(max-width:720px){
+
+  .pd-pet-section{
+    overflow:hidden;
+  }
+
+  /* =========================
+     MISO + JESSICA
+  ========================= */
+
+  .pd-light-grid{
+    display:grid;
+    grid-template-columns:42% 58%;
+    grid-template-areas:
+      "copy hero"
+      "thumbs thumbs";
+    gap:3px;
+    padding:3px;
+    align-items:stretch;
+  }
+
+  .pd-light-grid > .pd-pet-copy{
+    grid-area:copy;
+  }
+
+  .pd-light-grid > .pd-main-photo{
+    grid-area:hero;
+  }
+
+  .pd-light-grid > .pd-vertical-thumbs{
+    grid-area:thumbs;
+  }
+
+  .pd-light-grid .pd-main-photo{
+    min-height:0;
+    height:auto;
+    overflow:hidden;
+    background:#eee7da;
+  }
+
+  .pd-light-grid .pd-main-photo img{
+    display:block;
+    width:100%;
+    height:100%;
+    min-height:0;
+    object-fit:contain;
+    object-position:center center;
+    background:#eee7da;
+  }
+
+  .pd-vertical-thumbs{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-rows:none;
+    gap:3px;
+    width:100%;
+    background:#000;
+  }
+
+  .pd-vertical-thumbs img{
+    display:block;
+    width:100%;
+    height:auto;
+    min-height:0;
+    aspect-ratio:4 / 3;
+    object-fit:contain;
+    object-position:center center;
+    background:#111;
+  }
+
+
+  /* =========================
+     PABLO + RICHIE + PI
+  ========================= */
+
+  .pd-dark-grid{
+    display:grid;
+    grid-template-columns:61% 39%;
+    gap:3px;
+    padding:3px;
+    align-items:stretch;
+  }
+
+  .pd-dark-visual{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+
+  .pd-dark-visual .pd-main-photo{
+    min-height:0;
+    height:auto;
+    overflow:hidden;
+    background:#080808;
+  }
+
+  .pd-dark-visual .pd-main-photo img{
+    display:block;
+    width:100%;
+    height:auto;
+    min-height:0;
+    object-fit:contain;
+    object-position:center center;
+    background:#080808;
+  }
+
+  .pd-bottom-thumbs{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:3px;
+    margin-top:3px;
+    background:#000;
+  }
+
+  .pd-bottom-thumbs img{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:1 / 1;
+    object-fit:contain;
+    object-position:center center;
+    background:#111;
+  }
+
+
+  /* =========================
+     MISO
+  ========================= */
+
+  #pdMiso .pd-main-photo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f2eadc;
+  }
+
+  #pdMiso .pd-main-photo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    object-position:center center;
+  }
+
+  #pdMiso .pd-vertical-thumbs img{
+    object-fit:contain;
+    object-position:center center;
+  }
+
+
+  /* =========================
+     PABLO
+  ========================= */
+
+  #pdPablo .pd-main-photo{
+    background:#080808;
+  }
+
+  #pdPablo .pd-main-photo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    object-position:center center;
+  }
+
+  #pdPablo .pd-bottom-thumbs img{
+    object-fit:contain;
+    object-position:center center;
+    background:#080808;
+  }
+
+
+  /* =========================
+     JESSICA
+  ========================= */
+
+  #pdJessica .pd-main-photo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f2eadc;
+  }
+
+  #pdJessica .pd-main-photo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    object-position:center center;
+  }
+
+  #pdJessica .pd-vertical-thumbs img{
+    object-fit:contain;
+    object-position:center center;
+  }
+
+
+  /* =========================
+     RICHIE + PI
+  ========================= */
+
+  #pdRichie .pd-main-photo img,
+  #pdPi .pd-main-photo img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    object-position:center center;
+  }
+
+  #pdRichie .pd-bottom-thumbs img,
+  #pdPi .pd-bottom-thumbs img{
+    object-fit:contain;
+    object-position:center center;
+  }
+
+
+  /* =========================
+     TYPOGRAPHY
+  ========================= */
+
+  .pd-pet-copy{
+    justify-content:center;
+    min-width:0;
+    padding:25px 14px 24px;
+  }
+
+  .pd-pet-number{
+    margin-bottom:9px;
+    font-size:14px;
+  }
+
+  .pd-pet-label{
+    margin-bottom:7px;
+    font-size:8px;
+    line-height:1.35;
+    letter-spacing:.14em;
+  }
+
+  .pd-pet-name{
+    font-size:clamp(37px,10vw,49px);
+    line-height:.88;
+  }
+
+  .pd-pet-subtitle{
+    margin:8px 0 14px;
+    font-size:clamp(19px,5.4vw,27px);
+    line-height:.98;
+  }
+
+  .pd-pet-copy p{
+    font-size:13px;
+    line-height:1.43;
+  }
+
+  .pd-more{
+    width:100%;
+    min-height:54px;
+    margin-top:17px;
+    padding:10px 9px;
+    gap:8px;
+    font-size:9px;
+    line-height:1.15;
+  }
+
+
+  /* =========================
+     ARABIC / RTL
+  ========================= */
+
+  html[dir="rtl"] .pd-light-grid,
+  html[dir="rtl"] .pd-dark-grid{
+    direction:rtl;
+  }
+
+  html[dir="rtl"] .pd-pet-copy{
+    text-align:right;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media(max-width:390px){
+
+  .pd-light-grid{
+    grid-template-columns:43% 57%;
+  }
+
+  .pd-dark-grid{
+    grid-template-columns:60% 40%;
+  }
+
+  .pd-pet-copy{
+    padding:21px 11px 20px;
+  }
+
+  .pd-pet-name{
+    font-size:35px;
+  }
+
+  .pd-pet-subtitle{
+    font-size:18px;
+  }
+
+  .pd-pet-copy p{
+    font-size:11.5px;
+    line-height:1.4;
+  }
+
+  .pd-more{
+    min-height:49px;
+    margin-top:14px;
+    font-size:8px;
+  }
+
+}
 @media(prefers-reduced-motion:reduce){
 
   html{
