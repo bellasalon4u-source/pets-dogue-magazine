@@ -1150,5 +1150,61 @@ window.PetsDogueIssue01 = {
   getLanguage:storedLanguage,
   translations:T
 };
+/*
+=========================================================
+ISSUE 01 — PERSISTENT GLOBAL LANGUAGE SYNC
 
+The last language selected anywhere in PETS & DOGUE
+is the single source of truth.
+
+Required behaviour:
+Pablo → Issue 01
+Issue 01 → Pablo
+Back / Forward
+BFCache restore
+tab restore
+
+Always restore the newest pets_dogue_language value.
+=========================================================
+*/
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    window.requestAnimationFrame(
+      function(){
+
+        applyLanguage(
+          storedLanguage()
+        );
+
+      }
+    );
+
+  }
+);
+
+document.addEventListener(
+  "visibilitychange",
+  function(){
+
+    if(
+      document.visibilityState === "visible"
+    ){
+
+      window.requestAnimationFrame(
+        function(){
+
+          applyLanguage(
+            storedLanguage()
+          );
+
+        }
+      );
+
+    }
+
+  }
+);
 })();
