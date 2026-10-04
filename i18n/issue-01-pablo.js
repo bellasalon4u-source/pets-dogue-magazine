@@ -2624,6 +2624,21 @@
   let observer = null;
 
   const LANGUAGE_EVENT_NAMES = [
+    /*
+      MASTER PETS & DOGUE LANGUAGE EVENT.
+      This is the exact event dispatched by pets-dogue-shell.js.
+    */
+    "petsdogue:languagechange",
+
+    /*
+      ISSUE 01 bridge events dispatched by pets-dogue-shell.js.
+    */
+    "pd:languagechange",
+    "pd-language-change",
+
+    /*
+      Compatibility with older PETS & DOGUE language engines.
+    */
     "petsdogue:language-change",
     "petsdogue:language-changed",
     "pets-dogue:language-change",
