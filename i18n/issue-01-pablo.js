@@ -2612,83 +2612,181 @@
      LANGUAGE HELPERS
      ========================================================= */
 
-  function normalizeLang(value) {
-    if (!value) return "en";
+    /* =========================================================
+     LANGUAGE ENGINE
+     Pablo uses the same persistent-language strategy
+     as the approved Jessica / Miso stories.
+     ========================================================= */
+
+  let currentLanguage = "";
+  let applyingLanguage = false;
+  let scheduledApply = 0;
+  let observer = null;
+
+  const LANGUAGE_EVENT_NAMES = [
+    "petsdogue:language-change",
+    "petsdogue:language-changed",
+    "pets-dogue:language-change",
+    "pd:language-change",
+    "languagechange",
+    "language-change"
+  ];
+
+  /* =========================================================
+     NORMALIZE LANGUAGE
+     ========================================================= */
+
+  function normalizeLanguage(value) {
+    if (
+      value === undefined ||
+      value === null
+    ) {
+      return "";
+    }
 
     let lang = String(value)
       .trim()
       .toLowerCase()
-      .replace("_", "-");
+      .replace(/_/g, "-");
+
+    if (!lang) {
+      return "";
+    }
+
+    /*
+      Accept values such as:
+      en-GB
+      uk-UA
+      pt-BR
+      ar-SA
+    */
+    lang = lang.split("-")[0];
 
     if (ALIASES[lang]) {
       lang = ALIASES[lang];
     }
 
-    if (lang.includes("-")) {
-      const base = lang.split("-")[0];
-      lang = ALIASES[base] || base;
-    }
-
-    return SUPPORTED.includes(lang) ? lang : "en";
+    return SUPPORTED.includes(lang)
+      ? lang
+      : "";
   }
 
+  /* =========================================================
+     SAFE STORAGE
+     ========================================================= */
+
   function readStoredLanguage() {
-    const keys = [
-      STORE_KEY,
-      "pets_dogue_lang",
-      "pets-dogue-language",
-      "pd_language",
-      "language",
-      "lang"
-    ];
-
-    for (const key of keys) {
-      try {
-        const value = localStorage.getItem(key);
-
-        if (value) {
-          const normalized = normalizeLang(value);
-
-          if (SUPPORTED.includes(normalized)) {
-            return normalized;
-          }
-        }
-      } catch (error) {
-        /* localStorage may be unavailable */
-      }
+    try {
+      return normalizeLanguage(
+        window.localStorage.getItem(STORE_KEY)
+      );
+    } catch (error) {
+      return "";
     }
-
-    return null;
   }
 
   function writeStoredLanguage(lang) {
-    const normalized = normalizeLang(lang);
+    const normalized = normalizeLanguage(lang);
 
-    try {
-      localStorage.setItem(STORE_KEY, normalized);
-    } catch (error) {
-      /* localStorage may be unavailable */
+    if (!normalized) {
+      return;
     }
 
-    return normalized;
+    try {
+      window.localStorage.setItem(
+        STORE_KEY,
+        normalized
+      );
+    } catch (error) {
+      /*
+        Storage can be unavailable in private/restricted
+        browser modes. Translation must still work.
+      */
+    }
   }
 
-  function languageFromDocument() {
-    const htmlLang = document.documentElement.getAttribute("lang");
+  /* =========================================================
+     LANGUAGE FROM URL
+     ========================================================= */
 
-    if (!htmlLang) return null;
+  function getLanguageFromUrl() {
+    try {
+      const url = new URL(window.location.href);
 
-    const normalized = normalizeLang(htmlLang);
+      const candidates = [
+        url.searchParams.get("lang"),
+        url.searchParams.get("language"),
+        url.searchParams.get("locale")
+      ];
 
-    return SUPPORTED.includes(normalized) ? normalized : null;
+      for (const candidate of candidates) {
+        const lang = normalizeLanguage(candidate);
+
+        if (lang) {
+          return lang;
+        }
+      }
+    } catch (error) {
+      /* Ignore malformed URL environments. */
+    }
+
+    return "";
   }
 
-  function languageFromControls() {
+  /* =========================================================
+     LANGUAGE FROM DOCUMENT
+     ========================================================= */
+
+  function getLanguageFromDocument() {
+    return normalizeLanguage(
+      document.documentElement.getAttribute("lang")
+    );
+  }
+
+  /* =========================================================
+     LANGUAGE FROM ELEMENT
+     ========================================================= */
+
+  function languageFromElement(element) {
+    if (!element) {
+      return "";
+    }
+
+    const candidates = [
+      element.value,
+      element.getAttribute &&
+        element.getAttribute("data-lang"),
+      element.getAttribute &&
+        element.getAttribute("data-language"),
+      element.getAttribute &&
+        element.getAttribute("lang"),
+      element.getAttribute &&
+        element.getAttribute("value")
+    ];
+
+    for (const candidate of candidates) {
+      const lang = normalizeLanguage(candidate);
+
+      if (lang) {
+        return lang;
+      }
+    }
+
+    return "";
+  }
+
+  /* =========================================================
+     LANGUAGE FROM GLOBAL CONTROLS
+     ========================================================= */
+
+  function getLanguageFromControls() {
     const selectors = [
       "[data-language-select]",
       "[data-lang-select]",
       "#languageSelect",
       "#language-select",
+      "#languageSelector",
+      "#language-selector",
       "#langSelect",
       "#lang-select",
       "select[name='language']",
@@ -2696,1018 +2794,946 @@
     ];
 
     for (const selector of selectors) {
-      const element = document.querySelector(selector);
+      const elements =
+        document.querySelectorAll(selector);
 
-      if (
-        element &&
-        typeof element.value === "string" &&
-        element.value.trim()
-      ) {
-        const normalized = normalizeLang(element.value);
+      for (const element of elements) {
+        const lang = languageFromElement(element);
 
-        if (SUPPORTED.includes(normalized)) {
-          return normalized;
+        if (lang) {
+          return lang;
         }
       }
     }
 
-    return null;
+    return "";
   }
 
-  function getCurrentLanguage() {
+  /* =========================================================
+     RESOLVE LANGUAGE
+     ========================================================= */
+
+  function resolveLanguage(explicitLanguage) {
+    const explicit =
+      normalizeLanguage(explicitLanguage);
+
+    if (explicit) {
+      return explicit;
+    }
+
     /*
       IMPORTANT:
-      localStorage is the shared source of truth between
-      Issue 01, Miso, Jessica and Pablo.
+      Persistent PETS & DOGUE language comes first.
 
-      This fixes the case:
-      Pablo = Turkish
-      → Back to Issue 01
-      → change language to Hungarian
-      → open Pablo again
-      → Pablo must now be Hungarian.
+      This is what fixes:
+      Issue 01 = Hungarian
+      → open Pablo
+      → Pablo must also be Hungarian,
+      even if the browser restored an older Turkish DOM.
     */
-
     return (
       readStoredLanguage() ||
-      languageFromControls() ||
-      languageFromDocument() ||
+      getLanguageFromUrl() ||
+      getLanguageFromControls() ||
+      getLanguageFromDocument() ||
       "en"
     );
   }
 
-
   /* =========================================================
-     RTL / DOCUMENT LANGUAGE
+     DOCUMENT DIRECTION
      ========================================================= */
 
   function applyDocumentDirection(lang) {
-    const normalized = normalizeLang(lang);
+    const normalized =
+      normalizeLanguage(lang) || "en";
+
     const isRTL = RTL.has(normalized);
 
-    document.documentElement.lang = normalized;
-    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.setAttribute(
+      "lang",
+      normalized
+    );
+
+    document.documentElement.setAttribute(
+      "dir",
+      isRTL ? "rtl" : "ltr"
+    );
 
     if (document.body) {
-      document.body.dir = isRTL ? "rtl" : "ltr";
-      document.body.classList.toggle("is-rtl", isRTL);
+      document.body.setAttribute(
+        "dir",
+        isRTL ? "rtl" : "ltr"
+      );
+
+      document.body.classList.toggle(
+        "is-rtl",
+        isRTL
+      );
     }
   }
 
-
   /* =========================================================
-     TRANSLATABLE ELEMENTS
+     TRANSLATE STORY ELEMENTS
      ========================================================= */
 
-  function setHTML(selector, value) {
-    if (value === undefined || value === null) return;
+  function applyStoryElements(dictionary) {
+    /*
+      THIS is the important Pablo fix.
 
-    document.querySelectorAll(selector).forEach((element) => {
-      element.innerHTML = value;
-    });
-  }
+      The approved Pablo HTML uses:
+        data-story-i18n="..."
 
-  function setText(selector, value) {
-    if (value === undefined || value === null) return;
+      not:
+        data-i18n="..."
+    */
+    document
+      .querySelectorAll("[data-story-i18n]")
+      .forEach(function (element) {
+        const key =
+          element.getAttribute(
+            "data-story-i18n"
+          );
 
-    document.querySelectorAll(selector).forEach((element) => {
-      element.textContent = value;
-    });
-  }
+        if (
+          !key ||
+          !Object.prototype.hasOwnProperty.call(
+            dictionary,
+            key
+          )
+        ) {
+          return;
+        }
 
-  function applyDataI18n(dictionary) {
-    document.querySelectorAll("[data-i18n]").forEach((element) => {
-      const key = element.getAttribute("data-i18n");
-
-      if (!key) return;
-      if (!Object.prototype.hasOwnProperty.call(dictionary, key)) return;
-
-      element.innerHTML = dictionary[key];
-    });
-  }
-
-  function applyDataI18nText(dictionary) {
-    document.querySelectorAll("[data-i18n-text]").forEach((element) => {
-      const key = element.getAttribute("data-i18n-text");
-
-      if (!key) return;
-      if (!Object.prototype.hasOwnProperty.call(dictionary, key)) return;
-
-      element.textContent = dictionary[key];
-    });
-  }
-
-  function applyDataI18nAttribute(dictionary) {
-    document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
-      const definition = element.getAttribute("data-i18n-attr");
-
-      if (!definition) return;
-
-      definition.split(",").forEach((item) => {
-        const pair = item.trim().split(":");
-
-        if (pair.length !== 2) return;
-
-        const attribute = pair[0].trim();
-        const key = pair[1].trim();
-
-        if (!attribute || !key) return;
-        if (!Object.prototype.hasOwnProperty.call(dictionary, key)) return;
-
-        element.setAttribute(attribute, dictionary[key]);
+        element.innerHTML = dictionary[key];
       });
-    });
-  }
 
-
-  /* =========================================================
-     FALLBACK SELECTORS
-     Keeps compatibility with Pablo HTML if some elements
-     use IDs/classes instead of data-i18n.
-     ========================================================= */
-
-  const SELECTORS = {
-    heroKicker: [
-      "#heroKicker",
-      ".hero-kicker",
-      "[data-pablo='heroKicker']"
-    ],
-
-    meet: [
-      "#meet",
-      ".hero-meet",
-      "[data-pablo='meet']"
-    ],
-
-    heroTitle: [
-      "#heroTitle",
-      ".hero-title",
-      "[data-pablo='heroTitle']"
-    ],
-
-    heroText: [
-      "#heroText",
-      ".hero-text",
-      "[data-pablo='heroText']"
-    ],
-
-    backIssue: [
-      "#backIssue",
-      ".back-issue",
-      "[data-pablo='backIssue']"
-    ],
-
-    helloKicker: [
-      "#helloKicker",
-      "[data-pablo='helloKicker']"
-    ],
-
-    helloTitle: [
-      "#helloTitle",
-      "[data-pablo='helloTitle']"
-    ],
-
-    helloText: [
-      "#helloText",
-      "[data-pablo='helloText']"
-    ],
-
-    profileKicker: [
-      "#profileKicker",
-      "[data-pablo='profileKicker']"
-    ],
-
-    profileTitle: [
-      "#profileTitle",
-      "[data-pablo='profileTitle']"
-    ],
-
-    profileSub: [
-      "#profileSub",
-      "[data-pablo='profileSub']"
-    ],
-
-    name: [
-      "#pabloName",
-      "[data-pablo='name']"
-    ],
-
-    breed: [
-      "#pabloBreed",
-      "[data-pablo='breed']"
-    ],
-
-    eyes: [
-      "#pabloEyes",
-      "[data-pablo='eyes']"
-    ],
-
-    look: [
-      "#pabloLook",
-      "[data-pablo='look']"
-    ],
-
-    loves: [
-      "#pabloLoves",
-      "[data-pablo='loves']"
-    ],
-
-    personality: [
-      "#pabloPersonality",
-      "[data-pablo='personality']"
-    ],
-
-    position: [
-      "#pabloPosition",
-      "[data-pablo='position']"
-    ],
-
-    feature: [
-      "#pabloFeature",
-      "[data-pablo='feature']"
-    ],
-
-    smallCat: [
-      "#smallCat",
-      "[data-pablo='smallCat']"
-    ],
-
-    bigPersonality: [
-      "#bigPersonality",
-      "[data-pablo='bigPersonality']"
-    ],
-
-    eyesKicker: [
-      "#eyesKicker",
-      "[data-pablo='eyesKicker']"
-    ],
-
-    eyesTitle: [
-      "#eyesTitle",
-      "[data-pablo='eyesTitle']"
-    ],
-
-    eyes1: [
-      "#eyes1",
-      "[data-pablo='eyes1']"
-    ],
-
-    eyes2: [
-      "#eyes2",
-      "[data-pablo='eyes2']"
-    ],
-
-    eyes3: [
-      "#eyes3",
-      "[data-pablo='eyes3']"
-    ],
-
-    warmthKicker: [
-      "#warmthKicker",
-      "[data-pablo='warmthKicker']"
-    ],
-
-    warmthTitle: [
-      "#warmthTitle",
-      "[data-pablo='warmthTitle']"
-    ],
-
-    warmth1: [
-      "#warmth1",
-      "[data-pablo='warmth1']"
-    ],
-
-    warmth2: [
-      "#warmth2",
-      "[data-pablo='warmth2']"
-    ],
-
-    warmth3: [
-      "#warmth3",
-      "[data-pablo='warmth3']"
-    ],
-
-    warmth4: [
-      "#warmth4",
-      "[data-pablo='warmth4']"
-    ],
-
-    warmth5: [
-      "#warmth5",
-      "[data-pablo='warmth5']"
-    ],
-
-    warmth6: [
-      "#warmth6",
-      "[data-pablo='warmth6']"
-    ],
-
-    warmth7: [
-      "#warmth7",
-      "[data-pablo='warmth7']"
-    ],
-
-    warmth8: [
-      "#warmth8",
-      "[data-pablo='warmth8']"
-    ],
-
-    warmthQuote: [
-      "#warmthQuote",
-      "[data-pablo='warmthQuote']"
-    ],
-
-    momentsKicker: [
-      "#momentsKicker",
-      "[data-pablo='momentsKicker']"
-    ],
-
-    momentsTitle: [
-      "#momentsTitle",
-      "[data-pablo='momentsTitle']"
-    ],
-
-    lookMoment: [
-      "#lookMoment",
-      "[data-pablo='lookMoment']"
-    ],
-
-    lookMomentText: [
-      "#lookMomentText",
-      "[data-pablo='lookMomentText']"
-    ],
-
-    watching: [
-      "#watching",
-      "[data-pablo='watching']"
-    ],
-
-    watchingText: [
-      "#watchingText",
-      "[data-pablo='watchingText']"
-    ],
-
-    recharge: [
-      "#recharge",
-      "[data-pablo='recharge']"
-    ],
-
-    rechargeText: [
-      "#rechargeText",
-      "[data-pablo='rechargeText']"
-    ],
-
-    characterKicker: [
-      "#characterKicker",
-      "[data-pablo='characterKicker']"
-    ],
-
-    characterTitle: [
-      "#characterTitle",
-      "[data-pablo='characterTitle']"
-    ],
-
-    tag1: [
-      "#tag1",
-      "[data-pablo='tag1']"
-    ],
-
-    tag2: [
-      "#tag2",
-      "[data-pablo='tag2']"
-    ],
-
-    tag3: [
-      "#tag3",
-      "[data-pablo='tag3']"
-    ],
-
-    tag4: [
-      "#tag4",
-      "[data-pablo='tag4']"
-    ],
-
-    tag5: [
-      "#tag5",
-      "[data-pablo='tag5']"
-    ],
-
-    tag6: [
-      "#tag6",
-      "[data-pablo='tag6']"
-    ],
-
-    character1: [
-      "#character1",
-      "[data-pablo='character1']"
-    ],
-
-    character2: [
-      "#character2",
-      "[data-pablo='character2']"
-    ],
-
-    character3: [
-      "#character3",
-      "[data-pablo='character3']"
-    ],
-
-    character4: [
-      "#character4",
-      "[data-pablo='character4']"
-    ],
-
-    character5: [
-      "#character5",
-      "[data-pablo='character5']"
-    ],
-
-    character6: [
-      "#character6",
-      "[data-pablo='character6']"
-    ],
-
-    character7: [
-      "#character7",
-      "[data-pablo='character7']"
-    ],
-
-    character8: [
-      "#character8",
-      "[data-pablo='character8']"
-    ],
-
-    friendshipKicker: [
-      "#friendshipKicker",
-      "[data-pablo='friendshipKicker']"
-    ],
-
-    friendshipTitle: [
-      "#friendshipTitle",
-      "[data-pablo='friendshipTitle']"
-    ],
-
-    friendship1: [
-      "#friendship1",
-      "[data-pablo='friendship1']"
-    ],
-
-    friendship2: [
-      "#friendship2",
-      "[data-pablo='friendship2']"
-    ],
-
-    friendship3: [
-      "#friendship3",
-      "[data-pablo='friendship3']"
-    ],
-
-    friendship4: [
-      "#friendship4",
-      "[data-pablo='friendship4']"
-    ],
-
-    friendship5: [
-      "#friendship5",
-      "[data-pablo='friendship5']"
-    ],
-
-    friendship6: [
-      "#friendship6",
-      "[data-pablo='friendship6']"
-    ],
-
-    friendship7: [
-      "#friendship7",
-      "[data-pablo='friendship7']"
-    ],
-
-    quietKicker: [
-      "#quietKicker",
-      "[data-pablo='quietKicker']"
-    ],
-
-    quietTitle: [
-      "#quietTitle",
-      "[data-pablo='quietTitle']"
-    ],
-
-    quiet1: [
-      "#quiet1",
-      "[data-pablo='quiet1']"
-    ],
-
-    quiet2: [
-      "#quiet2",
-      "[data-pablo='quiet2']"
-    ],
-
-    finalKicker: [
-      "#finalKicker",
-      "[data-pablo='finalKicker']"
-    ],
-
-    finalTitle: [
-      "#finalTitle",
-      "[data-pablo='finalTitle']"
-    ],
-
-    final1: [
-      "#final1",
-      "[data-pablo='final1']"
-    ],
-
-    final2: [
-      "#final2",
-      "[data-pablo='final2']"
-    ],
-
-    final3: [
-      "#final3",
-      "[data-pablo='final3']"
-    ],
-
-    final4: [
-      "#final4",
-      "[data-pablo='final4']"
-    ],
-
-    final5: [
-      "#final5",
-      "[data-pablo='final5']"
-    ],
-
-    final6: [
-      "#final6",
-      "[data-pablo='final6']"
-    ],
-
-    final7: [
-      "#final7",
-      "[data-pablo='final7']"
-    ],
-
-    final8: [
-      "#final8",
-      "[data-pablo='final8']"
-    ],
-
-    final9: [
-      "#final9",
-      "[data-pablo='final9']"
-    ],
-
-    final10: [
-      "#final10",
-      "[data-pablo='final10']"
-    ],
-
-    final11: [
-      "#final11",
-      "[data-pablo='final11']"
-    ],
-
-    final12: [
-      "#final12",
-      "[data-pablo='final12']"
-    ],
-
-    signature: [
-      "#signature",
-      "[data-pablo='signature']"
-    ],
-
-    tagline: [
-      "#tagline",
-      "[data-pablo='tagline']"
-    ],
-
-    issueLink: [
-      "#issueLink",
-      "[data-pablo='issueLink']"
-    ],
-
-    misoLink: [
-      "#misoLink",
-      "[data-pablo='misoLink']"
-    ],
-
-    homeLink: [
-      "#homeLink",
-      "[data-pablo='homeLink']"
-    ]
-  };
-
-
-  /* =========================================================
-     APPLY FALLBACK SELECTORS
-     ========================================================= */
-
-  function applyFallbackSelectors(dictionary) {
-    Object.keys(SELECTORS).forEach((key) => {
-      if (!Object.prototype.hasOwnProperty.call(dictionary, key)) return;
-
-      const value = dictionary[key];
-
-      SELECTORS[key].forEach((selector) => {
-        setHTML(selector, value);
+    /*
+      Accessibility / aria-label translation.
+    */
+    document
+      .querySelectorAll(
+        "[data-story-i18n-aria]"
+      )
+      .forEach(function (element) {
+        const key =
+          element.getAttribute(
+            "data-story-i18n-aria"
+          );
+
+        if (
+          !key ||
+          !Object.prototype.hasOwnProperty.call(
+            dictionary,
+            key
+          )
+        ) {
+          return;
+        }
+
+        const temporary =
+          document.createElement("div");
+
+        temporary.innerHTML =
+          dictionary[key];
+
+        element.setAttribute(
+          "aria-label",
+          temporary.textContent || ""
+        );
       });
-    });
+
+    /*
+      Compatibility with any older Pablo markup.
+    */
+    document
+      .querySelectorAll("[data-i18n]")
+      .forEach(function (element) {
+        const key =
+          element.getAttribute("data-i18n");
+
+        if (
+          !key ||
+          !Object.prototype.hasOwnProperty.call(
+            dictionary,
+            key
+          )
+        ) {
+          return;
+        }
+
+        element.innerHTML = dictionary[key];
+      });
+
+    /*
+      Pablo's approved HTML currently contains one combined
+      eyesText element, while the multilingual dictionary
+      stores this editorial paragraph as eyes1 + eyes2 + eyes3.
+
+      Keep the HTML untouched and compose the paragraph here.
+    */
+    document
+      .querySelectorAll(
+        '[data-story-i18n="eyesText"]'
+      )
+      .forEach(function (element) {
+        const parts = [
+          dictionary.eyes1,
+          dictionary.eyes2,
+          dictionary.eyes3
+        ].filter(Boolean);
+
+        if (parts.length) {
+          element.innerHTML =
+            parts.join(" ");
+        }
+      });
   }
 
-
   /* =========================================================
-     LANGUAGE CONTROL SYNC
+     SYNC GLOBAL LANGUAGE CONTROLS
      ========================================================= */
 
   function syncLanguageControls(lang) {
-    const normalized = normalizeLang(lang);
+    const normalized =
+      normalizeLanguage(lang);
+
+    if (!normalized) {
+      return;
+    }
 
     const selectors = [
       "[data-language-select]",
       "[data-lang-select]",
       "#languageSelect",
       "#language-select",
+      "#languageSelector",
+      "#language-selector",
       "#langSelect",
       "#lang-select",
       "select[name='language']",
       "select[name='lang']"
     ];
 
-    selectors.forEach((selector) => {
-      document.querySelectorAll(selector).forEach((element) => {
-        if (!("value" in element)) return;
+    selectors.forEach(function (selector) {
+      document
+        .querySelectorAll(selector)
+        .forEach(function (element) {
+          if (!("value" in element)) {
+            return;
+          }
 
-        const options = Array.from(element.options || []);
+          const options =
+            Array.from(
+              element.options || []
+            );
 
-        const matchingOption = options.find((option) => {
-          return normalizeLang(option.value) === normalized;
+          const matchingOption =
+            options.find(function (option) {
+              return (
+                normalizeLanguage(option.value) ===
+                normalized
+              );
+            });
+
+          if (matchingOption) {
+            element.value =
+              matchingOption.value;
+          }
         });
-
-        if (matchingOption) {
-          element.value = matchingOption.value;
-        }
-      });
     });
   }
-
 
   /* =========================================================
      APPLY LANGUAGE
      ========================================================= */
 
-  let activeLanguage = null;
-  let applyingLanguage = false;
+  function applyLanguage(
+    requestedLanguage,
+    options
+  ) {
+    options = options || {};
 
-  function applyLanguage(lang, options = {}) {
-    if (applyingLanguage) return;
+    const lang =
+      resolveLanguage(requestedLanguage);
 
-    const normalized = normalizeLang(lang);
-    const dictionary = T[normalized] || T.en;
+    const dictionary =
+      T[lang] || T.en;
+
+    if (!dictionary) {
+      return "";
+    }
+
+    if (
+      applyingLanguage &&
+      !options.force
+    ) {
+      return currentLanguage;
+    }
 
     applyingLanguage = true;
 
     try {
       if (options.save !== false) {
-        writeStoredLanguage(normalized);
+        writeStoredLanguage(lang);
       }
 
-      applyDocumentDirection(normalized);
+      applyDocumentDirection(lang);
+      applyStoryElements(dictionary);
+      syncLanguageControls(lang);
+
+      currentLanguage = lang;
 
       /*
-        Preferred translation method.
-        Elements in Pablo HTML can use:
-        data-i18n="heroTitle"
+        Tell accessibility / shell systems that the
+        story language has been applied.
       */
-      applyDataI18n(dictionary);
-      applyDataI18nText(dictionary);
-      applyDataI18nAttribute(dictionary);
+      try {
+        document.dispatchEvent(
+          new CustomEvent(
+            "petsdogue:language-applied",
+            {
+              detail: {
+                language: lang,
+                lang: lang,
+                page: "pablo"
+              }
+            }
+          )
+        );
+      } catch (error) {
+        /* Translation must never fail here. */
+      }
 
-      /*
-        Compatibility layer for the current Pablo page.
-      */
-      applyFallbackSelectors(dictionary);
+      if (options.dispatch) {
+        dispatchPabloLanguageEvent(lang);
+      }
 
-      syncLanguageControls(normalized);
-
-      activeLanguage = normalized;
-
-      document.dispatchEvent(
-        new CustomEvent("petsdogue:language-applied", {
-          detail: {
-            language: normalized,
-            page: "pablo"
-          }
-        })
-      );
+      return lang;
     } finally {
       applyingLanguage = false;
     }
   }
 
-
   /* =========================================================
-     SYNC FROM SHARED SITE LANGUAGE
+     PABLO LANGUAGE EVENT
      ========================================================= */
 
-  function syncFromSharedLanguage(force = false) {
-    const lang = getCurrentLanguage();
-
-    if (force || lang !== activeLanguage) {
+  function dispatchPabloLanguageEvent(lang) {
+    try {
+      window.dispatchEvent(
+        new CustomEvent(
+          "pablo-language-change",
+          {
+            detail: {
+              language: lang,
+              lang: lang
+            }
+          }
+        )
+      );
+    } catch (error) {
       /*
-        Do NOT overwrite shared storage here.
-        We are reading the language selected elsewhere
-        and applying it to Pablo.
+        Failure must never break the story.
       */
-      applyLanguage(lang, {
-        save: false
-      });
     }
   }
 
-
   /* =========================================================
-     LANGUAGE CHANGE INSIDE PABLO
-     ========================================================= */
-
-  function handleLanguageChange(event) {
-    const target = event.target;
-
-    if (!target) return;
-
-    const isLanguageControl =
-      target.matches("[data-language-select]") ||
-      target.matches("[data-lang-select]") ||
-      target.matches("#languageSelect") ||
-      target.matches("#language-select") ||
-      target.matches("#langSelect") ||
-      target.matches("#lang-select") ||
-      target.matches("select[name='language']") ||
-      target.matches("select[name='lang']");
-
-    if (!isLanguageControl) return;
-
-    const lang = normalizeLang(target.value);
-
-    /*
-      A language selected inside Pablo becomes
-      the shared language for the whole site.
-    */
-    writeStoredLanguage(lang);
-
-    applyLanguage(lang, {
-      save: false
-    });
-  }
-
-
-  /* =========================================================
-     CUSTOM LANGUAGE EVENTS
-     Compatibility with the global PETS & DOGUE shell.
+     LANGUAGE VALUE FROM EVENT
      ========================================================= */
 
   function languageFromEvent(event) {
-    if (!event || !event.detail) return null;
+    if (!event) {
+      return "";
+    }
 
-    const value =
-      event.detail.language ||
-      event.detail.lang ||
-      event.detail.code ||
-      event.detail.locale;
+    const detail = event.detail;
 
-    if (!value) return null;
+    if (typeof detail === "string") {
+      return normalizeLanguage(detail);
+    }
 
-    return normalizeLang(value);
+    if (
+      detail &&
+      typeof detail === "object"
+    ) {
+      const candidates = [
+        detail.lang,
+        detail.language,
+        detail.locale,
+        detail.code,
+        detail.value
+      ];
+
+      for (const candidate of candidates) {
+        const lang =
+          normalizeLanguage(candidate);
+
+        if (lang) {
+          return lang;
+        }
+      }
+    }
+
+    return languageFromElement(
+      event.target
+    );
   }
 
-  function handleCustomLanguageEvent(event) {
-    const lang = languageFromEvent(event);
+  /* =========================================================
+     SCHEDULED APPLY
+     ========================================================= */
 
-    if (!lang) {
-      syncFromSharedLanguage(true);
+  function scheduleApply(lang, options) {
+    if (scheduledApply) {
+      window.cancelAnimationFrame(
+        scheduledApply
+      );
+    }
+
+    scheduledApply =
+      window.requestAnimationFrame(
+        function () {
+          scheduledApply = 0;
+
+          applyLanguage(
+            lang || undefined,
+            options || {
+              save: true,
+              force: true
+            }
+          );
+        }
+      );
+  }
+
+  /* =========================================================
+     GLOBAL LANGUAGE EVENTS
+     ========================================================= */
+
+  function installLanguageEventListeners() {
+    LANGUAGE_EVENT_NAMES.forEach(
+      function (eventName) {
+        window.addEventListener(
+          eventName,
+          function (event) {
+            const lang =
+              languageFromEvent(event);
+
+            scheduleApply(
+              lang || undefined,
+              {
+                save: true,
+                force: true
+              }
+            );
+          }
+        );
+
+        document.addEventListener(
+          eventName,
+          function (event) {
+            const lang =
+              languageFromEvent(event);
+
+            scheduleApply(
+              lang || undefined,
+              {
+                save: true,
+                force: true
+              }
+            );
+          }
+        );
+      }
+    );
+  }
+
+  /* =========================================================
+     LANGUAGE SELECT / BUTTON LISTENERS
+     ========================================================= */
+
+  function installControlListeners() {
+    document.addEventListener(
+      "change",
+      function (event) {
+        const target = event.target;
+
+        if (!target) {
+          return;
+        }
+
+        const looksLikeLanguageControl =
+          target.matches &&
+          target.matches(
+            [
+              "[data-language-select]",
+              "[data-lang-select]",
+              "#languageSelect",
+              "#language-select",
+              "#languageSelector",
+              "#language-selector",
+              "#langSelect",
+              "#lang-select",
+              "select[name='language']",
+              "select[name='lang']"
+            ].join(",")
+          );
+
+        if (!looksLikeLanguageControl) {
+          return;
+        }
+
+        const lang =
+          languageFromElement(target);
+
+        if (!lang) {
+          return;
+        }
+
+        /*
+          Apply immediately.
+
+          This fixes:
+          header changes language,
+          Pablo remains in previous language.
+        */
+        applyLanguage(
+          lang,
+          {
+            save: true,
+            dispatch: true,
+            force: true
+          }
+        );
+      },
+      true
+    );
+
+    document.addEventListener(
+      "click",
+      function (event) {
+        const target =
+          event.target &&
+          event.target.closest
+            ? event.target.closest(
+                [
+                  "[data-lang]",
+                  "[data-language]"
+                ].join(",")
+              )
+            : null;
+
+        if (!target) {
+          return;
+        }
+
+        const lang =
+          languageFromElement(target);
+
+        if (!lang) {
+          return;
+        }
+
+        applyLanguage(
+          lang,
+          {
+            save: true,
+            dispatch: true,
+            force: true
+          }
+        );
+
+        /*
+          Some shell versions update their own state
+          only after their click handler completes.
+        */
+        scheduleApply(
+          lang,
+          {
+            save: true,
+            force: true
+          }
+        );
+      },
+      true
+    );
+  }
+
+  /* =========================================================
+     STORAGE SYNCHRONISATION
+     ========================================================= */
+
+  function installStorageListener() {
+    window.addEventListener(
+      "storage",
+      function (event) {
+        if (event.key !== STORE_KEY) {
+          return;
+        }
+
+        const lang =
+          normalizeLanguage(
+            event.newValue
+          );
+
+        if (!lang) {
+          return;
+        }
+
+        applyLanguage(
+          lang,
+          {
+            save: false,
+            force: true
+          }
+        );
+      }
+    );
+  }
+
+  /* =========================================================
+     DOM OBSERVER
+     ========================================================= */
+
+  function installObserver() {
+    if (
+      observer ||
+      !document.documentElement ||
+      typeof MutationObserver ===
+        "undefined"
+    ) {
       return;
     }
 
-    writeStoredLanguage(lang);
+    observer = new MutationObserver(
+      function (mutations) {
+        if (applyingLanguage) {
+          return;
+        }
 
-    applyLanguage(lang, {
-      save: false
-    });
-  }
+        let needsApply = false;
+        let detectedLanguage = "";
 
+        for (const mutation of mutations) {
+          if (
+            mutation.type === "attributes"
+          ) {
+            const target =
+              mutation.target;
 
-  /* =========================================================
-     STORAGE EVENT
-     Handles language changes from another tab/window.
-     ========================================================= */
+            if (
+              target ===
+                document.documentElement &&
+              mutation.attributeName ===
+                "lang"
+            ) {
+              detectedLanguage =
+                normalizeLanguage(
+                  document.documentElement.lang
+                );
 
-  function handleStorage(event) {
-    const acceptedKeys = new Set([
-      STORE_KEY,
-      "pets_dogue_lang",
-      "pets-dogue-language",
-      "pd_language",
-      "language",
-      "lang"
-    ]);
+              if (detectedLanguage) {
+                needsApply = true;
+                break;
+              }
+            }
 
-    if (!event || !acceptedKeys.has(event.key)) return;
+            if (
+              mutation.attributeName ===
+                "data-lang" ||
+              mutation.attributeName ===
+                "data-language" ||
+              mutation.attributeName ===
+                "value"
+            ) {
+              const lang =
+                languageFromElement(target);
 
-    const lang = event.newValue
-      ? normalizeLang(event.newValue)
-      : getCurrentLanguage();
+              if (lang) {
+                detectedLanguage = lang;
+                needsApply = true;
+                break;
+              }
+            }
+          }
 
-    applyLanguage(lang, {
-      save: false
-    });
-  }
+          if (
+            mutation.type ===
+              "childList" &&
+            mutation.addedNodes &&
+            mutation.addedNodes.length
+          ) {
+            needsApply = true;
+          }
+        }
 
+        if (!needsApply) {
+          return;
+        }
 
-  /* =========================================================
-     BFCache / BACK-FORWARD NAVIGATION FIX
-
-     This is important on mobile browsers.
-     When Pablo is restored from browser memory, the old
-     Turkish/Hungarian/etc. DOM may still be visible even
-     though Issue 01 has already changed the shared language.
-
-     pageshow forces Pablo to read the shared language again.
-     ========================================================= */
-
-  function handlePageShow() {
-    syncFromSharedLanguage(true);
-  }
-
-
-  /* =========================================================
-     TAB / APP RETURN FIX
-     ========================================================= */
-
-  function handleVisibilityChange() {
-    if (document.visibilityState === "visible") {
-      syncFromSharedLanguage(true);
-    }
-  }
-
-  function handleWindowFocus() {
-    syncFromSharedLanguage(true);
-  }
-
-
-  /* =========================================================
-     LANGUAGE ATTRIBUTE OBSERVER
-
-     If the global shell changes <html lang=""> directly,
-     Pablo follows it immediately.
-     ========================================================= */
-
-  let lastObservedDocumentLanguage = null;
-
-  const htmlLanguageObserver = new MutationObserver(() => {
-    if (applyingLanguage) return;
-
-    const rawLang = document.documentElement.getAttribute("lang");
-
-    if (!rawLang) return;
-
-    const lang = normalizeLang(rawLang);
-
-    if (lang === lastObservedDocumentLanguage) return;
-
-    lastObservedDocumentLanguage = lang;
-
-    const stored = readStoredLanguage();
-
-    /*
-      If the shell changed the HTML language intentionally,
-      keep shared storage synchronized with it.
-    */
-    if (lang !== stored) {
-      writeStoredLanguage(lang);
-    }
-
-    if (lang !== activeLanguage) {
-      applyLanguage(lang, {
-        save: false
-      });
-    }
-  });
-
-
-  /* =========================================================
-     PUBLIC API
-
-     This allows the global shell to call:
-     window.PetsDoguePablo.setLanguage("hu")
-     ========================================================= */
-
-  window.PetsDoguePablo = {
-    setLanguage(lang) {
-      const normalized = normalizeLang(lang);
-
-      writeStoredLanguage(normalized);
-
-      applyLanguage(normalized, {
-        save: false
-      });
-    },
-
-    getLanguage() {
-      return activeLanguage || getCurrentLanguage();
-    },
-
-    refresh() {
-      syncFromSharedLanguage(true);
-    },
-
-    supportedLanguages: SUPPORTED.slice()
-  };
-
-
-  /* =========================================================
-     INITIALIZATION
-     ========================================================= */
-
-  function init() {
-    /*
-      FIRST:
-      read the shared stored language.
-
-      This prevents the HTML default language from overriding
-      a language selected on Issue 01 before entering Pablo.
-    */
-    const initialLanguage = getCurrentLanguage();
-
-    applyLanguage(initialLanguage, {
-      save: false
-    });
-
-    lastObservedDocumentLanguage = initialLanguage;
-
-    document.addEventListener("change", handleLanguageChange, true);
-
-    /*
-      Support the language events used by different versions
-      of the PETS & DOGUE global shell.
-    */
-    document.addEventListener(
-      "petsdogue:language-change",
-      handleCustomLanguageEvent
+        scheduleApply(
+          detectedLanguage || undefined,
+          {
+            save: Boolean(
+              detectedLanguage
+            ),
+            force: true
+          }
+        );
+      }
     );
 
-    document.addEventListener(
-      "petsdogue:language-changed",
-      handleCustomLanguageEvent
+    observer.observe(
+      document.documentElement,
+      {
+        subtree: true,
+        childList: true,
+        attributes: true,
+        attributeFilter: [
+          "lang",
+          "data-lang",
+          "data-language",
+          "value"
+        ]
+      }
+    );
+  }
+
+  /* =========================================================
+     BACK / FORWARD / BFCACHE
+     ========================================================= */
+
+  function installNavigationListeners() {
+    window.addEventListener(
+      "pageshow",
+      function () {
+        /*
+          Critical mobile-browser fix:
+          always re-read persistent PETS & DOGUE language
+          when Pablo is restored from browser memory.
+        */
+        applyLanguage(
+          readStoredLanguage() ||
+            undefined,
+          {
+            save: false,
+            force: true
+          }
+        );
+      }
     );
 
-    document.addEventListener(
-      "pets-dogue:language-change",
-      handleCustomLanguageEvent
+    window.addEventListener(
+      "popstate",
+      function () {
+        scheduleApply(
+          readStoredLanguage() ||
+            undefined,
+          {
+            save: false,
+            force: true
+          }
+        );
+      }
     );
 
-    document.addEventListener(
-      "pd:language-change",
-      handleCustomLanguageEvent
+    window.addEventListener(
+      "focus",
+      function () {
+        const stored =
+          readStoredLanguage();
+
+        if (
+          stored &&
+          stored !== currentLanguage
+        ) {
+          applyLanguage(
+            stored,
+            {
+              save: false,
+              force: true
+            }
+          );
+        }
+      }
     );
-
-    window.addEventListener("storage", handleStorage);
-
-    window.addEventListener("pageshow", handlePageShow);
-
-    window.addEventListener("focus", handleWindowFocus);
 
     document.addEventListener(
       "visibilitychange",
-      handleVisibilityChange
+      function () {
+        if (
+          document.visibilityState !==
+          "visible"
+        ) {
+          return;
+        }
+
+        const stored =
+          readStoredLanguage();
+
+        if (stored) {
+          applyLanguage(
+            stored,
+            {
+              save: false,
+              force: true
+            }
+          );
+        }
+      }
     );
-
-    htmlLanguageObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["lang"]
-    });
-
-    /*
-      Final synchronization after all normal page scripts
-      have had an opportunity to initialize.
-    */
-    window.setTimeout(() => {
-      syncFromSharedLanguage(true);
-    }, 0);
-
-    window.setTimeout(() => {
-      syncFromSharedLanguage(true);
-    }, 250);
   }
 
-
   /* =========================================================
-     START
+     PUBLIC API
      ========================================================= */
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, {
-      once: true
-    });
+  window.PetsDoguePabloI18n = {
+    setLanguage: function (lang) {
+      return applyLanguage(
+        lang,
+        {
+          save: true,
+          dispatch: true,
+          force: true
+        }
+      );
+    },
+
+    getLanguage: function () {
+      return (
+        currentLanguage ||
+        resolveLanguage()
+      );
+    },
+
+    refresh: function () {
+      return applyLanguage(
+        resolveLanguage(),
+        {
+          save: false,
+          force: true
+        }
+      );
+    },
+
+    supportedLanguages:
+      SUPPORTED.slice()
+  };
+
+  /*
+    Compatibility with the previous Pablo API.
+  */
+  window.PetsDoguePablo = {
+    setLanguage: function (lang) {
+      return window
+        .PetsDoguePabloI18n
+        .setLanguage(lang);
+    },
+
+    getLanguage: function () {
+      return window
+        .PetsDoguePabloI18n
+        .getLanguage();
+    },
+
+    refresh: function () {
+      return window
+        .PetsDoguePabloI18n
+        .refresh();
+    },
+
+    supportedLanguages:
+      SUPPORTED.slice()
+  };
+
+  /* =========================================================
+     INITIALISE
+     ========================================================= */
+
+  function init() {
+    installLanguageEventListeners();
+    installControlListeners();
+    installStorageListener();
+    installNavigationListeners();
+    installObserver();
+
+    /*
+      Same priority as the finished Jessica implementation:
+
+      1. persistent PETS & DOGUE language
+      2. URL
+      3. current language control
+      4. HTML lang
+      5. English
+    */
+    const initialLanguage =
+      readStoredLanguage() ||
+      getLanguageFromUrl() ||
+      getLanguageFromControls() ||
+      getLanguageFromDocument() ||
+      "en";
+
+    applyLanguage(
+      initialLanguage,
+      {
+        save: true,
+        force: true
+      }
+    );
+
+    /*
+      Global shell may finish rendering after Pablo's
+      script. Synchronise again after page load.
+    */
+    window.addEventListener(
+      "load",
+      function () {
+        applyLanguage(
+          readStoredLanguage() ||
+            resolveLanguage(),
+          {
+            save: false,
+            force: true
+          }
+        );
+      },
+      {
+        once: true
+      }
+    );
+
+    /*
+      One extra post-shell synchronisation for mobile
+      browsers and dynamically created language controls.
+    */
+    window.setTimeout(
+      function () {
+        applyLanguage(
+          readStoredLanguage() ||
+            resolveLanguage(),
+          {
+            save: false,
+            force: true
+          }
+        );
+      },
+      250
+    );
+  }
+
+  if (
+    document.readyState === "loading"
+  ) {
+    document.addEventListener(
+      "DOMContentLoaded",
+      init,
+      {
+        once: true
+      }
+    );
   } else {
     init();
   }
