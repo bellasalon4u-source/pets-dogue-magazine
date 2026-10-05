@@ -826,22 +826,25 @@
   }
 
   function dispatchLanguageChange(
-    languageCode
-  ) {
-    window.dispatchEvent(
-      new CustomEvent(
-        "petsdogue:languagechange",
-        {
-          detail: {
-            language:
-              supportedLanguages[
-                languageCode
-              ]
-          }
+  languageCode
+) {
+  const safeLanguageCode =
+    isSupportedLanguage(languageCode)
+      ? languageCode
+      : DEFAULT_LANGUAGE;
+
+  window.dispatchEvent(
+    new CustomEvent(
+      "petsdogue:languagechange",
+      {
+        detail: {
+          language: safeLanguageCode,
+          code: safeLanguageCode
         }
-      )
-    );
-  }
+      }
+    )
+  );
+}
 
   function applyLanguage(
     languageCode,
