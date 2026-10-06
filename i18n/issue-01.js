@@ -952,44 +952,28 @@ function getValue(language,key){
 }
 
 function applyLanguage(language){
+  const code = normaliseLanguage(
+    language || storedLanguage()
+  );
 
-  const code =
-    normaliseLanguage(
-      language || storedLanguage()
-    );
-
-  const root =
-    document.documentElement;
+  const root = document.documentElement;
 
   root.lang = code;
-  root.dir =
-    RTL_LANGUAGES.has(code)
-      ? "rtl"
-      : "ltr";
+  root.dir = RTL_LANGUAGES.has(code)
+    ? "rtl"
+    : "ltr";
 
   document
-    .querySelectorAll("[data-i18n]")
+    .querySelectorAll(
+      "#pdIssue01 > section:not(.pd-inline-story-panel) [data-i18n]"
+    )
     .forEach(function(element){
+      const key = element.getAttribute("data-i18n");
+      const value = getValue(code, key);
 
-      const key =
-        element.getAttribute(
-          "data-i18n"
-        );
-
-      const value =
-        getValue(code,key);
-
-      if(
-        typeof value !== "string"
-      ){
+      if(typeof value !== "string"){
         return;
       }
-
-      /*
-      ending.title and ending.caption contain intentional
-      <br> elements. All translation strings are static,
-      trusted local content from this file.
-      */
 
       if(
         key === "ending.title" ||
@@ -999,46 +983,29 @@ function applyLanguage(language){
       }else{
         element.textContent = value;
       }
-
     });
 
   document
-    .querySelectorAll("[data-i18n-alt]")
+    .querySelectorAll(
+      "#pdIssue01 > section:not(.pd-inline-story-panel) [data-i18n-alt]"
+    )
     .forEach(function(element){
+      const key = element.getAttribute("data-i18n-alt");
+      const value = getValue(code, key);
 
-      const key =
-        element.getAttribute(
-          "data-i18n-alt"
-        );
-
-      const value =
-        getValue(code,key);
-
-      if(
-        typeof value === "string"
-      ){
-        element.setAttribute(
-          "alt",
-          value
-        );
+      if(typeof value === "string"){
+        element.setAttribute("alt", value);
       }
-
     });
 
-  /*
-  Preserve PETS & DOGUE and animal names.
-  They are intentionally marked notranslate in HTML.
-  */
-
-  window.PetsDogueIssue01Language =
-    code;
+  window.PetsDogueIssue01Language = code;
 
   window.dispatchEvent(
     new CustomEvent(
       "petsdogue:issue01translated",
       {
-        detail:{
-          language:code
+        detail: {
+          language: code
         }
       }
     )
