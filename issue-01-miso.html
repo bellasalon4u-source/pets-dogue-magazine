@@ -1482,8 +1482,105 @@ html[dir="rtl"] .ask-copy{
 }
 
 </style>
+<style>
+/* Miso: compact editorial photo layout */
+#misoIssue .moment-track{
+display:grid!important;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px;
+max-width:1000px;
+margin:0 auto;
+padding:0 24px 24px;
+overflow:visible!important;
+scroll-snap-type:none;
+align-items:start;
+}
+#misoIssue .moment{
+display:flex;
+flex-direction:column;
+width:auto!important;
+height:auto!important;
+min-height:0!important;
+margin:0;
+overflow:hidden;
+border:2px solid #d5a33e;
+background:#fff8e9;
+box-shadow:none;
+}
+#misoIssue .moment img{
+display:block;
+width:100%!important;
+height:auto!important;
+max-height:420px;
+aspect-ratio:auto!important;
+object-fit:contain!important;
+object-position:center!important;
+transform:none!important;
+filter:none;
+background:#fff8e9;
+}
+#misoIssue .moment::after{display:none!important}
+#misoIssue .moment figcaption{
+position:static!important;
+inset:auto!important;
+padding:13px 14px 16px;
+margin:0;
+color:#171717;
+background:#fff8e9;
+font:italic 16px/1.35 Georgia,serif;
+}
+#misoIssue .moment figcaption strong{
+margin:0 0 7px;
+color:#171717;
+font:bold 25px/1.1 Georgia,serif;
+}
+#misoIssue .moment-fashion{border-color:#ed91b4}
+#misoIssue .moment-london{border-color:#57bfd1}
+#misoIssue .moment-friends{border-color:#d5a33e}
+#misoIssue .intro{
+grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+align-items:center;
+}
+#misoIssue .intro-photo{
+width:100%;
+max-width:480px;
+margin:0 auto;
+background:var(--paper);
+}
+#misoIssue .intro-photo img,
+#misoIssue .profile-photo img{
+display:block;
+width:100%!important;
+height:auto!important;
+max-height:520px;
+object-fit:contain!important;
+transform:none!important;
+}
+@media(max-width:720px){
+#misoIssue .moment-track{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px;
+padding:0 14px 20px;
+}
+#misoIssue .moment img{max-height:300px}
+#misoIssue .moment figcaption{
+padding:10px;
+font-size:14px;
+}
+#misoIssue .moment figcaption strong{font-size:21px}
+#misoIssue .intro{grid-template-columns:1fr}
+#misoIssue .intro-photo{
+max-width:360px;
+padding:0 14px 20px;
+}
+#misoIssue .intro-photo img,
+#misoIssue .profile-photo img{max-height:420px}
+}
+@media(max-width:360px){
+#misoIssue .moment-track{grid-template-columns:1fr}
+}
+</style>
 </head>
-
 <body>
 
 <main id="misoIssue" data-pd-no-translate>
