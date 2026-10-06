@@ -2420,7 +2420,7 @@
     return english[key] || "";
   }
 
-  function applyLanguage(requestedLanguage) {
+    function applyLanguage(requestedLanguage) {
     const lang = normaliseLanguage(requestedLanguage);
 
     try {
@@ -2430,48 +2430,63 @@
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL.has(lang) ? "rtl" : "ltr";
 
-    document.querySelectorAll("[data-i18n]").forEach(function (element) {
-      const key = element.getAttribute("data-i18n");
-      if (!key) return;
+    const storyRoot = document.querySelector("#misoIssue");
 
-      const translated = valueFor(lang, key);
+    if (storyRoot) {
+      storyRoot.querySelectorAll("[data-i18n]").forEach(
+        function (element) {
+          const key = element.getAttribute("data-i18n");
+          if (!key) return;
 
-      if (translated !== "") {
-        element.innerHTML = translated;
-      }
-    });
+          const translated = valueFor(lang, key);
 
-    document.querySelectorAll("[data-i18n-text]").forEach(function (element) {
-      const key = element.getAttribute("data-i18n-text");
-      if (!key) return;
+          if (translated !== "") {
+            element.innerHTML = translated;
+          }
+        }
+      );
 
-      const translated = valueFor(lang, key);
+      storyRoot.querySelectorAll("[data-i18n-text]").forEach(
+        function (element) {
+          const key = element.getAttribute("data-i18n-text");
+          if (!key) return;
 
-      if (translated !== "") {
-        element.textContent = translated.replace(/<br\s*\/?>/gi, " ");
-      }
-    });
+          const translated = valueFor(lang, key);
 
-    document.querySelectorAll("[data-i18n-aria]").forEach(function (element) {
-      const key = element.getAttribute("data-i18n-aria");
-      if (!key) return;
+          if (translated !== "") {
+            element.textContent = translated.replace(
+              /<br\s*\/?>/gi,
+              " "
+            );
+          }
+        }
+      );
 
-      const translated = valueFor(lang, key);
+      storyRoot.querySelectorAll("[data-i18n-aria]").forEach(
+        function (element) {
+          const key = element.getAttribute("data-i18n-aria");
+          if (!key) return;
 
-      if (translated !== "") {
-        element.setAttribute(
-          "aria-label",
-          translated.replace(/<br\s*\/?>/gi, " ")
-        );
-      }
-    });
+          const translated = valueFor(lang, key);
+
+          if (translated !== "") {
+            element.setAttribute(
+              "aria-label",
+              translated.replace(/<br\s*\/?>/gi, " ")
+            );
+          }
+        }
+      );
+    }
 
     document.querySelectorAll(
       "select[data-language-select], select#languageSelect, select#language-select"
     ).forEach(function (select) {
-      const option = Array.from(select.options).find(function (item) {
-        return normaliseLanguage(item.value) === lang;
-      });
+      const option = Array.from(select.options).find(
+        function (item) {
+          return normaliseLanguage(item.value) === lang;
+        }
+      );
 
       if (option) {
         select.value = option.value;
