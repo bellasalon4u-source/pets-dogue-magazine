@@ -1483,101 +1483,164 @@ html[dir="rtl"] .ask-copy{
 
 </style>
 <style>
-/* Miso: compact editorial photo layout */
-#misoIssue .moment-track{
-display:grid!important;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:16px;
-max-width:1000px;
-margin:0 auto;
-padding:0 24px 24px;
-overflow:visible!important;
-scroll-snap-type:none;
-align-items:start;
+/* Miso editorial typography */
+#misoIssue{
+--serif:Georgia,"Times New Roman",serif;
 }
+#misoIssue .display,
+#misoIssue .intro-copy h2,
+#misoIssue .story-title h2,
+#misoIssue .profile-head h2,
+#misoIssue .section-head h2,
+#misoIssue .london-head h2{
+font-family:var(--serif)!important;
+font-size:clamp(30px,4.5vw,54px)!important;
+font-weight:400!important;
+line-height:1.08!important;
+letter-spacing:-.025em!important;
+text-transform:none!important;
+overflow-wrap:anywhere;
+}
+#misoIssue .kicker{
+font-family:Arial,Helvetica,sans-serif!important;
+font-size:11px!important;
+font-weight:700!important;
+line-height:1.5!important;
+letter-spacing:.2em!important;
+}
+#misoIssue .intro-copy p,
+#misoIssue .diary p,
+#misoIssue .story-text p{
+font-family:var(--serif)!important;
+font-size:18px!important;
+font-weight:400!important;
+line-height:1.55!important;
+}
+#misoIssue .moments{
+padding:32px 0;
+background:#f4efe4;
+}
+#misoIssue .moments .section-head{
+text-align:center;
+margin-bottom:24px;
+}
+#misoIssue .moment-track{
+display:flex!important;
+gap:18px!important;
+width:100%;
+max-width:none;
+margin:0;
+padding:0 15% 12px!important;
+overflow-x:auto!important;
+overflow-y:hidden!important;
+scroll-snap-type:x mandatory!important;
+scroll-padding-inline:15%;
+align-items:stretch!important;
+scrollbar-width:none;
+}
+#misoIssue .moment-track::-webkit-scrollbar{display:none}
 #misoIssue .moment{
-display:flex;
-flex-direction:column;
-width:auto!important;
+display:flex!important;
+flex-direction:column!important;
+flex:0 0 100%!important;
+width:100%!important;
+min-width:0!important;
 height:auto!important;
 min-height:0!important;
-margin:0;
+margin:0!important;
+border:0!important;
+box-shadow:none!important;
+background:#f4efe4!important;
 overflow:hidden;
-border:2px solid #d5a33e;
-background:#fff8e9;
-box-shadow:none;
+scroll-snap-align:center;
 }
-#misoIssue .moment img{
-display:block;
+#misoIssue .moment>img{
+display:block!important;
 width:100%!important;
-height:auto!important;
-max-height:420px;
-aspect-ratio:auto!important;
+height:350px!important;
+min-height:0!important;
+max-height:none!important;
 object-fit:contain!important;
 object-position:center!important;
 transform:none!important;
-filter:none;
-background:#fff8e9;
+filter:none!important;
+background:#f4efe4!important;
+}
+#misoIssue .moment>.pd-clean-photo{
+flex:none;
+width:100%;
+max-width:265px;
+margin:0 auto;
 }
 #misoIssue .moment::after{display:none!important}
 #misoIssue .moment figcaption{
 position:static!important;
 inset:auto!important;
-padding:13px 14px 16px;
-margin:0;
-color:#171717;
-background:#fff8e9;
-font:italic 16px/1.35 Georgia,serif;
+padding:18px 4px 12px!important;
+margin:0!important;
+background:#f4efe4!important;
+color:#171717!important;
+font:400 16px/1.45 Arial,Helvetica,sans-serif!important;
+overflow-wrap:anywhere;
 }
 #misoIssue .moment figcaption strong{
-margin:0 0 7px;
-color:#171717;
-font:bold 25px/1.1 Georgia,serif;
+display:block;
+margin:0 0 9px!important;
+color:#171717!important;
+font:400 28px/1.12 Georgia,"Times New Roman",serif!important;
+letter-spacing:-.02em;
+overflow-wrap:anywhere;
 }
-#misoIssue .moment-fashion{border-color:#ed91b4}
-#misoIssue .moment-london{border-color:#57bfd1}
-#misoIssue .moment-friends{border-color:#d5a33e}
+#misoIssue .carousel-controls{
+gap:14px;
+margin-top:12px;
+}
+#misoIssue .carousel-arrow{
+width:44px;
+height:44px;
+border:1px solid #171717;
+background:transparent;
+font-size:22px;
+}
+#misoIssue .carousel-dot{background:#aaa69c}
+#misoIssue .carousel-dot.active{background:#171717}
 #misoIssue .intro{
 grid-template-columns:minmax(0,1fr) minmax(0,1fr);
 align-items:center;
 }
 #misoIssue .intro-photo{
 width:100%;
-max-width:480px;
+max-width:380px;
 margin:0 auto;
-background:var(--paper);
+background:#f4efe4;
 }
-#misoIssue .intro-photo img,
-#misoIssue .profile-photo img{
+#misoIssue .intro-photo>img,
+#misoIssue .profile-photo>img{
 display:block;
 width:100%!important;
 height:auto!important;
-max-height:520px;
+max-height:480px;
 object-fit:contain!important;
 transform:none!important;
 }
-@media(max-width:720px){
+@media(min-width:900px){
 #misoIssue .moment-track{
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:10px;
-padding:0 14px 20px;
+padding-inline:calc((100% - 440px)/2)!important;
+scroll-padding-inline:calc((100% - 440px)/2);
 }
-#misoIssue .moment img{max-height:300px}
-#misoIssue .moment figcaption{
-padding:10px;
-font-size:14px;
+#misoIssue .moment{flex-basis:440px!important}
 }
-#misoIssue .moment figcaption strong{font-size:21px}
+@media(max-width:720px){
 #misoIssue .intro{grid-template-columns:1fr}
 #misoIssue .intro-photo{
-max-width:360px;
-padding:0 14px 20px;
+width:calc(100% - 32px);
+max-width:320px;
+margin:0 auto 24px;
 }
-#misoIssue .intro-photo img,
-#misoIssue .profile-photo img{max-height:420px}
-}
-@media(max-width:360px){
-#misoIssue .moment-track{grid-template-columns:1fr}
+#misoIssue .moment>img{height:320px!important}
+#misoIssue .moment>.pd-clean-photo{max-width:240px}
+#misoIssue .moment figcaption strong{font-size:25px!important}
+#misoIssue .moment figcaption{font-size:15px!important}
 }
 </style>
 </head>
