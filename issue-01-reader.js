@@ -1112,79 +1112,72 @@ html[dir="rtl"] .pd-inline-story-bottom-close::before{
     );
   }
 
-  function bindMisoCarousel(panel) {
-    const track = panel.querySelector("#misoTrack");
-    const previous = panel.querySelector("#misoPrev");
-    const next = panel.querySelector("#misoNext");
-    const dots = panel.querySelector("#misoDots");
-
-    if (!track || !previous || !next || !dots) return;
-
-    const cards = Array.from(track.querySelectorAll(".moment"));
-    let active = 0;
-
-    const dotButtons = cards.map(function (card, index) {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "carousel-dot";
-      dot.setAttribute("aria-label", "Miso · " + (index + 1));
-      dot.addEventListener("click", function () {
-        show(index);
-      });
-      dots.appendChild(dot);
-      return dot;
-    });
-
-    function update() {
-      const bounds = track.getBoundingClientRect();
-      const center = bounds.left + bounds.width / 2;
-      let distance = Infinity;
-
-      cards.forEach(function (card, index) {
-        const rect = card.getBoundingClientRect();
-        const candidate = Math.abs(
-          rect.left + rect.width / 2 - center
-        );
-
-        if (candidate < distance) {
-          distance = candidate;
-          active = index;
-        }
-      });
-
-      dotButtons.forEach(function (dot, index) {
-        dot.classList.toggle("active", index === active);
-        dot.setAttribute(
-          "aria-current",
-          index === active ? "true" : "false"
-        );
-      });
-    }
-
-    function show(index) {
-      if (!cards.length) return;
-      active = Math.max(0, Math.min(index, cards.length - 1));
-
-      cards[active].scrollIntoView({
-        behavior: window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches ? "auto" : "smooth",
-        inline: "center",
-        block: "nearest"
-      });
-    }
-
-    previous.addEventListener("click", function () {
-      show(active - 1);
-    });
-
-    next.addEventListener("click", function () {
-      show(active + 1);
-    });
-
-    track.addEventListener("scroll", update, { passive: true });
-    update();
-  }
+  function bindMisoCarousel(panel){
+const root=panel.querySelector("#misoIssue"),track=panel.querySelector("#misoTrack"),prev=panel.querySelector("#misoPrev"),next=panel.querySelector("#misoNext"),dots=panel.querySelector("#misoDots");
+if(!root||!track||!prev||!next||!dots)return;
+const style=document.createElement("style");
+style.textContent=`
+.pd-inline-story-panel #misoIssue .moments{padding:30px 0!important;background:#f4efe4!important}
+.pd-inline-story-panel #misoIssue .moments .section-head{max-width:640px!important;margin:0 auto 24px!important;padding:0 20px!important;text-align:center!important}
+.pd-inline-story-panel #misoIssue .moments .section-head h2{font:400 clamp(28px,5vw,36px)/1.12 Georgia,"Times New Roman",serif!important;letter-spacing:-.025em!important;text-transform:none!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;text-wrap:balance}
+.pd-inline-story-panel #misoIssue .moment-track{position:relative!important;display:flex!important;box-sizing:border-box!important;width:100%!important;gap:12px!important;padding:12px calc((100% - var(--pd-miso-card,70%))/2) 20px!important;margin:0!important;align-items:stretch!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scrollbar-width:none!important}
+.pd-inline-story-panel #misoIssue .moment-track::-webkit-scrollbar{display:none}
+.pd-inline-story-panel #misoIssue .moment{position:relative!important;display:flex!important;flex-direction:column!important;flex:0 0 var(--pd-miso-card,70%)!important;width:var(--pd-miso-card,70%)!important;min-width:0!important;height:auto!important;min-height:0!important;margin:0!important;border:0!important;background:#f4efe4!important;scroll-snap-align:center!important;opacity:.32!important;transform:scale(.91)!important;transform-origin:center center!important;transition:transform .25s ease,opacity .25s ease!important;box-shadow:none!important}
+.pd-inline-story-panel #misoIssue .moment.pd-miso-active{opacity:1!important;transform:scale(1)!important}
+.pd-inline-story-panel #misoIssue .moment::after{display:none!important}
+.pd-inline-story-panel #misoIssue .pd-miso-media{display:grid!important;place-items:center!important;flex:none!important;width:100%!important;aspect-ratio:4/5!important;overflow:hidden!important;background:#eee8dc!important}
+.pd-inline-story-panel #misoIssue .pd-miso-media>img{display:block!important;width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;transform:none!important;filter:none!important}
+.pd-inline-story-panel #misoIssue .pd-clean-photo{position:relative!important;display:block!important;overflow:hidden!important;margin:0 auto!important;padding:0!important;background:#eee8dc!important}
+.pd-inline-story-panel #misoIssue .pd-clean-sea{aspect-ratio:709/935!important}
+.pd-inline-story-panel #misoIssue .pd-clean-drink{aspect-ratio:709/1030!important}
+.pd-inline-story-panel #misoIssue .pd-clean-photo>img{position:absolute!important;left:0!important;width:100%!important;max-width:none!important;max-height:none!important;margin:0!important;object-fit:fill!important;transform:none!important}
+.pd-inline-story-panel #misoIssue .pd-clean-sea>img{top:-31.5508%!important;height:164.2781%!important}
+.pd-inline-story-panel #misoIssue .pd-clean-drink>img{top:-19.4175%!important;height:149.1262%!important}
+.pd-inline-story-panel #misoIssue .pd-miso-media>.pd-clean-sea{width:94.7861%!important;height:100%!important;max-width:none!important}
+.pd-inline-story-panel #misoIssue .pd-miso-media>.pd-clean-drink{width:86.0437%!important;height:100%!important;max-width:none!important}
+.pd-inline-story-panel #misoIssue .moment figcaption{position:static!important;inset:auto!important;flex:1!important;min-height:108px!important;box-sizing:border-box!important;margin:0!important;padding:16px 2px 8px!important;background:#f4efe4!important;color:#171717!important;font:400 16px/1.45 Arial,Helvetica,sans-serif!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;text-align:start!important}
+.pd-inline-story-panel #misoIssue .moment figcaption strong{display:block!important;margin:0 0 8px!important;color:#171717!important;font:400 24px/1.15 Georgia,"Times New Roman",serif!important;letter-spacing:-.02em!important;overflow-wrap:normal!important;word-break:normal!important}
+.pd-inline-story-panel #misoIssue .carousel-controls{margin-top:6px!important;gap:14px!important}
+.pd-inline-story-panel #misoIssue .carousel-arrow{width:44px!important;height:44px!important;border:1px solid #171717!important;border-radius:50%!important;background:transparent!important;font-size:22px!important}
+@media(prefers-reduced-motion:reduce){.pd-inline-story-panel #misoIssue .moment{transition:none!important}}
+`;
+panel.appendChild(style);
+root.querySelectorAll("img").forEach(function(img){
+const src=img.getAttribute("src")||"";
+const type=/(?:^|\/)miso-04\.jpg(?:\?|$)/.test(src)?"sea":/(?:^|\/)miso-06\.jpg(?:\?|$)/.test(src)?"drink":"";
+if(!type||img.parentElement.classList.contains("pd-clean-photo"))return;
+const crop=document.createElement("div");crop.className="pd-clean-photo pd-clean-"+type;img.before(crop);crop.appendChild(img);
+});
+const cards=Array.from(track.querySelectorAll(".moment"));let active=0,frame=0;
+cards.forEach(function(card){
+if(card.querySelector(".pd-miso-media"))return;
+const photo=card.querySelector(".pd-clean-photo")||card.querySelector("img");
+if(!photo)return;
+const media=document.createElement("div");media.className="pd-miso-media";photo.before(media);media.appendChild(photo);
+});
+dots.replaceChildren();
+const buttons=cards.map(function(card,index){
+const dot=document.createElement("button");dot.type="button";dot.className="carousel-dot";dot.setAttribute("aria-label","Miso · "+(index+1));dot.addEventListener("click",function(){show(index)});dots.appendChild(dot);return dot;
+});
+function update(){
+const bounds=track.getBoundingClientRect(),center=bounds.left+bounds.width/2;let distance=Infinity;
+cards.forEach(function(card,index){const r=card.getBoundingClientRect(),d=Math.abs(r.left+r.width/2-center);if(d<distance){distance=d;active=index}});
+cards.forEach(function(card,index){card.classList.toggle("pd-miso-active",index===active)});
+buttons.forEach(function(dot,index){dot.classList.toggle("active",index===active);dot.setAttribute("aria-current",index===active?"true":"false")});
+}
+function show(index){
+if(!cards.length)return;
+active=Math.max(0,Math.min(index,cards.length-1));
+const c=cards[active].getBoundingClientRect(),t=track.getBoundingClientRect();
+track.scrollBy({left:c.left+c.width/2-t.left-t.width/2,behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+}
+function size(){track.style.setProperty("--pd-miso-card",Math.min(440,track.clientWidth*.70)+"px");update()}
+prev.addEventListener("click",function(){show(active-1)});
+next.addEventListener("click",function(){show(active+1)});
+track.addEventListener("scroll",function(){if(frame)return;frame=requestAnimationFrame(function(){frame=0;update()})},{passive:true});
+size();
+if(window.ResizeObserver){const observer=new ResizeObserver(function(){if(!track.isConnected){observer.disconnect();return}size()});observer.observe(track)}
+}
 
   function createIntro(story) {
     const text = words();
