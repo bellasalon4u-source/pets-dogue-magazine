@@ -2635,7 +2635,9 @@
      - Brand / pet name "Jessica" is never translated.
      ========================================================= */
 
-  const LANGUAGE_EVENT_NAMES = [
+    const LANGUAGE_EVENT_NAMES = [
+    "petsdogue:languagechange",
+    "petsdogue:setlanguage",
     "pets-dogue-language-change",
     "petsDogueLanguageChange",
     "pets_dogue_language_change",
@@ -2902,8 +2904,14 @@
     ).trim();
   }
 
-  function getTranslationElements() {
-    return document.querySelectorAll(
+    function getTranslationElements() {
+    const root = document.querySelector("#pdJessicaStory");
+
+    if (!root) {
+      return [];
+    }
+
+    return root.querySelectorAll(
       [
         "[data-jessica-i18n]",
         "[data-i18n-jessica]",
@@ -2943,7 +2951,12 @@
       Our approved translations intentionally contain
       <br> and <strong>, therefore innerHTML is required.
     */
-    element.innerHTML = String(value);
+        const template = document.createElement("template");
+    template.innerHTML = String(value);
+
+    if (element.innerHTML !== template.innerHTML) {
+      element.innerHTML = template.innerHTML;
+    }
   }
 
   /* =========================================================
@@ -2953,8 +2966,15 @@
   function applyDocumentDirection(lang) {
     const isRTL = RTL.has(lang);
 
-    document.documentElement.lang = lang;
-    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+        if (document.documentElement.lang !== lang) {
+      document.documentElement.lang = lang;
+    }
+
+    const direction = isRTL ? "rtl" : "ltr";
+
+    if (document.documentElement.dir !== direction) {
+      document.documentElement.dir = direction;
+    }
 
     if (document.body) {
       document.body.setAttribute(
@@ -3400,7 +3420,16 @@
             mutation.addedNodes &&
             mutation.addedNodes.length
           ) {
-            needsApply = true;
+                        needsApply = Array.from(mutation.addedNodes).some(
+              function (node) {
+                return (
+                  node.nodeType === 1 &&
+                  !node.closest(
+                    "[data-richie-i18n], [data-i18n], [data-story-i18n], [data-jessica-i18n], [data-i18n-jessica]"
+                  )
+                );
+              }
+            );
           }
         }
 
