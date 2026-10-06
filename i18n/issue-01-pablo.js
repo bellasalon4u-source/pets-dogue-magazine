@@ -2688,221 +2688,120 @@
     return english[key] || "";
   }
 
-  function applyLanguage(
-    requestedLanguage
-  ) {
-    const lang =
-      normaliseLanguage(
-        requestedLanguage
-      );
+    function applyLanguage(requestedLanguage) {
+    const lang = normaliseLanguage(requestedLanguage);
 
-    /*
-      Every real language change becomes
-      the global PETS & DOGUE language.
-    */
     try {
-      localStorage.setItem(
-        STORE_KEY,
-        lang
-      );
-    } catch (error) {
-      /* localStorage unavailable */
-    }
+      localStorage.setItem(STORE_KEY, lang);
+    } catch (error) {}
 
-    /*
-      Language + RTL.
-    */
-    document.documentElement.lang =
-      lang;
-
-    document.documentElement.dir =
-      RTL.has(lang)
-        ? "rtl"
-        : "ltr";
+    document.documentElement.lang = lang;
+    document.documentElement.dir = RTL.has(lang) ? "rtl" : "ltr";
 
     if (document.body) {
-      document.body.dir =
-        RTL.has(lang)
-          ? "rtl"
-          : "ltr";
+      document.body.dir = RTL.has(lang) ? "rtl" : "ltr";
     }
 
-    /*
-      Pablo editorial content.
-    */
-    document
-      .querySelectorAll(
-        "[data-story-i18n]"
-      )
-      .forEach(function (element) {
-        const key =
-          element.getAttribute(
-            "data-story-i18n"
-          );
+    const storyRoot = document.querySelector("#pdPabloStory");
 
-        if (!key) {
-          return;
+    if (storyRoot) {
+      storyRoot.querySelectorAll("[data-story-i18n]").forEach(
+        function (element) {
+          const key = element.getAttribute("data-story-i18n");
+          if (!key) return;
+
+          const translated = valueFor(lang, key);
+
+          if (translated !== "") {
+            element.innerHTML = translated;
+          }
         }
+      );
 
-        const translated =
-          valueFor(lang, key);
+      storyRoot.querySelectorAll("[data-story-i18n-text]").forEach(
+        function (element) {
+          const key = element.getAttribute("data-story-i18n-text");
+          if (!key) return;
 
-        if (translated !== "") {
-          element.innerHTML =
-            translated;
-        }
-      });
+          const translated = valueFor(lang, key);
 
-    /*
-      Plain-text translation support.
-    */
-    document
-      .querySelectorAll(
-        "[data-story-i18n-text]"
-      )
-      .forEach(function (element) {
-        const key =
-          element.getAttribute(
-            "data-story-i18n-text"
-          );
-
-        if (!key) {
-          return;
-        }
-
-        const translated =
-          valueFor(lang, key);
-
-        if (translated !== "") {
-          element.textContent =
-            translated.replace(
+          if (translated !== "") {
+            element.textContent = translated.replace(
               /<br\s*\/?>/gi,
               " "
             );
+          }
         }
-      });
+      );
 
-    /*
-      Accessibility labels.
-    */
-    document
-      .querySelectorAll(
-        "[data-story-i18n-aria]"
-      )
-      .forEach(function (element) {
-        const key =
-          element.getAttribute(
-            "data-story-i18n-aria"
+      storyRoot.querySelectorAll("[data-story-i18n-aria]").forEach(
+        function (element) {
+          const key = element.getAttribute("data-story-i18n-aria");
+          if (!key) return;
+
+          const translated = valueFor(lang, key);
+          if (translated === "") return;
+
+          const temporary = document.createElement("div");
+          temporary.innerHTML = translated;
+
+          element.setAttribute(
+            "aria-label",
+            temporary.textContent || ""
           );
-
-        if (!key) {
-          return;
         }
+      );
 
-        const translated =
-          valueFor(lang, key);
+      storyRoot.querySelectorAll("[data-i18n]").forEach(
+        function (element) {
+          const key = element.getAttribute("data-i18n");
+          if (!key) return;
 
-        if (translated === "") {
-          return;
+          const translated = valueFor(lang, key);
+
+          if (translated !== "") {
+            element.innerHTML = translated;
+          }
         }
+      );
+    }
 
-        const temporary =
-          document.createElement(
-            "div"
-          );
-
-        temporary.innerHTML =
-          translated;
-
-        element.setAttribute(
-          "aria-label",
-          temporary.textContent || ""
-        );
-      });
-
-    /*
-      Compatibility with older Pablo markup.
-    */
-    document
-      .querySelectorAll(
-        "[data-i18n]"
-      )
-      .forEach(function (element) {
-        const key =
-          element.getAttribute(
-            "data-i18n"
-          );
-
-        if (!key) {
-          return;
+    document.querySelectorAll(
+      [
+        "select[data-language-select]",
+        "select[data-lang-select]",
+        "select#languageSelect",
+        "select#language-select",
+        "select#languageSelector",
+        "select#language-selector",
+        "select#langSelect",
+        "select#lang-select",
+        "select[name='language']",
+        "select[name='lang']"
+      ].join(",")
+    ).forEach(function (select) {
+      const option = Array.from(select.options || []).find(
+        function (item) {
+          return normaliseLanguage(item.value) === lang;
         }
+      );
 
-        const translated =
-          valueFor(lang, key);
+      if (option) {
+        select.value = option.value;
+      }
+    });
 
-        if (translated !== "") {
-          element.innerHTML =
-            translated;
-        }
-      });
-
-    /*
-      Keep every visible global language selector
-      on the same language.
-    */
-    document
-      .querySelectorAll(
-        [
-          "select[data-language-select]",
-          "select[data-lang-select]",
-          "select#languageSelect",
-          "select#language-select",
-          "select#languageSelector",
-          "select#language-selector",
-          "select#langSelect",
-          "select#lang-select",
-          "select[name='language']",
-          "select[name='lang']"
-        ].join(",")
-      )
-      .forEach(function (select) {
-        const option =
-          Array.from(
-            select.options || []
-          ).find(function (item) {
-            return (
-              normaliseLanguage(
-                item.value
-              ) === lang
-            );
-          });
-
-        if (option) {
-          select.value =
-            option.value;
-        }
-      });
-
-    /*
-      Accessibility / other story systems
-      may listen for this event.
-    */
     try {
       document.dispatchEvent(
-        new CustomEvent(
-          "petsdogue:language-applied",
-          {
-            detail: {
-              language: lang,
-              lang: lang,
-              page: "pablo"
-            }
+        new CustomEvent("petsdogue:language-applied", {
+          detail: {
+            language: lang,
+            lang: lang,
+            page: "pablo"
           }
-        )
+        })
       );
-    } catch (error) {
-      /* never break the story */
-    }
+    } catch (error) {}
 
     return lang;
   }
