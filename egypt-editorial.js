@@ -199,7 +199,7 @@
   }
 
   function renderArticle() {
-    const translations = window.PetsDogueEgypt;
+        const translations = window.PetsDogueTranslations?.article;
     const article = getElement("egyptArticle");
     const body = getElement("egyptBody");
 
@@ -207,19 +207,37 @@
       return;
     }
 
-    stopSpeech();
-
     const selectedLanguage = getSelectedLanguage();
+    const selectedStory =
+      translations[selectedLanguage]?.stories?.egypt;
 
-    language = translations[selectedLanguage]
+    const nextLanguage = selectedStory
       ? selectedLanguage
       : "en";
 
-    bundle = translations[language];
+    const nextStory =
+      translations[nextLanguage]?.stories?.egypt;
 
-    if (!bundle) {
+    if (!nextStory || typeof nextStory.body !== "string") {
       return;
     }
+
+    stopSpeech();
+    language = nextLanguage;
+
+    const sharedUI = translations[language].ui || {};
+
+    bundle = {
+      ...nextStory,
+      ui: {
+        listen: sharedUI.listen || "Listen",
+        stop: sharedUI.stop || "Stop",
+        back: sharedUI.backToArticles || "Articles",
+        unavailable: "Speech is unavailable in this browser.",
+        fallback: "This translation is not available yet. The English article is displayed.",
+        ...(nextStory.editorialUI || {})
+      }
+    };
 
     article.lang = language;
     article.dir = language === "ar" ? "rtl" : "ltr";
