@@ -1,0 +1,274 @@
+.egypt-article {
+  background: #f8f5ee;
+  color: #161815;
+  padding-bottom: 6rem;
+}
+
+.egypt-cover,
+.egypt-panel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #16291d;
+  margin: 0;
+}
+
+.egypt-cover {
+  height: 88svh;
+  min-height: 570px;
+  max-height: 1100px;
+}
+
+.egypt-cover > img,
+.egypt-panel > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.egypt-cover > img {
+  object-position: center 42%;
+}
+
+.egypt-cover::after,
+.egypt-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 15%,
+    rgba(0, 0, 0, .18) 35%,
+    rgba(0, 0, 0, .86) 100%
+  );
+  pointer-events: none;
+}
+
+.egypt-cover-copy,
+.egypt-panel figcaption {
+  position: absolute;
+  inset-inline: clamp(24px, 6vw, 100px);
+  bottom: clamp(30px, 7vw, 90px);
+  z-index: 1;
+  color: #fff;
+  max-width: 1050px;
+  text-shadow: 0 2px 15px #0009;
+}
+
+.egypt-kicker {
+  font: 700 12px Arial, sans-serif;
+  letter-spacing: .28em;
+  margin-bottom: 24px;
+  color: #ffe29a;
+}
+
+.egypt-cover h1 {
+  font: normal clamp(34px, 5.4vw, 82px)/1.05 Georgia, serif;
+  letter-spacing: -.025em;
+  margin: 0 0 22px;
+}
+
+#egyptIntro {
+  font: normal clamp(16px, 1.55vw, 23px)/1.55 Arial, sans-serif;
+  max-width: 780px;
+}
+
+.egypt-audio {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 24px;
+  border-bottom: 1px solid #c89b3c;
+}
+
+.egypt-audio button {
+  border: 1px solid #c89b3c;
+  background: #151916;
+  color: #fff;
+  border-radius: 30px;
+  padding: 13px 20px;
+  font-size: 15px;
+}
+
+.egypt-audio a {
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.egypt-paragraph {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 24px;
+  font: normal clamp(18px, 1.5vw, 22px)/1.85 Georgia, serif;
+  white-space: normal;
+}
+
+.egypt-paragraph:first-child {
+  margin-top: 55px;
+}
+
+.egypt-paragraph + .egypt-paragraph {
+  margin-top: 14px;
+}
+
+.egypt-subheading {
+  max-width: 850px;
+  margin: 60px auto 28px;
+  padding: 0 24px;
+  font: normal clamp(25px, 3vw, 40px)/1.25 Georgia, serif;
+  color: #344c3e;
+}
+
+.egypt-panel {
+  height: 80svh;
+  min-height: 450px;
+  max-height: 1000px;
+  margin: 65px 0 45px;
+}
+
+.egypt-panel h2 {
+  font: normal clamp(30px, 4.5vw, 65px)/1.13 Georgia, serif;
+  max-width: 1050px;
+}
+
+.egypt-location {
+  font: 700 clamp(14px, 1.5vw, 20px)/1.5 Arial, sans-serif;
+  color: #ffe29a;
+  margin-top: 24px;
+}
+
+.egypt-location-note {
+  font: normal clamp(16px, 1.4vw, 21px)/1.5 Arial, sans-serif;
+  margin-top: 8px;
+  max-width: 650px;
+}
+
+.egypt-gallery {
+  max-width: 1500px;
+  margin: 45px auto 65px;
+  padding: 0 20px;
+}
+
+.egypt-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  gap: 16px;
+  direction: ltr;
+  -webkit-overflow-scrolling: touch;
+}
+
+.egypt-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  position: relative;
+  background: #19251f;
+  margin: 0;
+  height: 76svh;
+  min-height: 420px;
+  max-height: 900px;
+}
+
+.egypt-slide img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.egypt-slide figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 22px;
+  color: #fff;
+  background: linear-gradient(transparent, #000b);
+  font: normal 14px/1.5 Arial, sans-serif;
+}
+
+.egypt-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 16px;
+  direction: ltr;
+}
+
+.egypt-controls button {
+  height: 46px;
+  width: 46px;
+  border-radius: 50%;
+  border: 1px solid #a88845;
+  background: transparent;
+  font-size: 24px;
+  color: #222;
+}
+
+.egypt-controls button:disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.egypt-count {
+  font: normal 13px Arial, sans-serif;
+  min-width: 65px;
+  text-align: center;
+}
+
+.egypt-notice {
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 16px 24px;
+  background: #fff3bd;
+  font: 14px/1.5 Arial, sans-serif;
+}
+
+.egypt-article button:focus-visible,
+.egypt-article a:focus-visible,
+.egypt-track:focus-visible {
+  outline: 3px solid #589363;
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .egypt-cover {
+    min-height: 650px;
+    height: 90svh;
+  }
+
+  .egypt-cover-copy,
+  .egypt-panel figcaption {
+    inset-inline: 22px;
+    bottom: 35px;
+  }
+
+  .egypt-panel {
+    height: 78svh;
+    min-height: 520px;
+  }
+
+  .egypt-gallery {
+    padding: 0 10px;
+  }
+
+  .egypt-slide {
+    height: 70svh;
+    min-height: 400px;
+  }
+
+  .egypt-panel h2 {
+    font-size: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
