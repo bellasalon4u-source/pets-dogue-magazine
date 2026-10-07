@@ -1411,6 +1411,61 @@ if(extraTrack){
     extraTrack.appendChild(slide);
   });
 } 
+    /* Connect uploaded Miso photographs */
+const misoPhotoMap={
+  "/miso-11.jpg":"/miso-florist-editorial.png",
+  "/miso-12.jpg":"/miso-blue-smile.png",
+  "/miso-13.jpg":"/miso-blue-back.png",
+  "/miso-fashion-editorial.png":"/miso-pink-portrait.png"
+};
+
+root.querySelectorAll("img").forEach(function(image){
+  const source=image.getAttribute("src");
+  if(misoPhotoMap[source]){
+    image.src=misoPhotoMap[source];
+  }
+});
+
+photo(".moment-travel img","/miso-beach-portrait.png");
+photo(".moment-fashion img","/miso-blue-smile.png");
+
+if(diary){
+  const paragraphs=Array.from(diary.children).filter(function(element){
+    return element.tagName==="P";
+  });
+
+  if(paragraphs[1]){
+    paragraphs[1].after(
+      storyPhoto("/miso-pink-travel.png",false)
+    );
+  }
+
+  diary.appendChild(
+    storyPhoto("/miso-garden-closeup.png",false)
+  );
+}
+
+if(extraTrack){
+  [
+    [".moment-travel","/miso-pink-travel.png"],
+    [".moment-travel","/miso-garden-closeup.png"],
+    [".moment-fashion","/miso-blue-back.png"]
+  ].forEach(function(entry){
+    const template=extraTrack.querySelector(entry[0]);
+    if(!template)return;
+
+    const slide=template.cloneNode(true);
+    slide.className="moment pd-extra";
+    slide.removeAttribute("id");
+
+    const image=slide.querySelector("img");
+    if(image){
+      image.replaceWith(editorialImage(entry[1]));
+    }
+
+    extraTrack.appendChild(slide);
+  });
+}
 const track=root.querySelector("#misoTrack"),prev=root.querySelector("#misoPrev"),next=root.querySelector("#misoNext"),dots=root.querySelector("#misoDots");
 if(!track||!prev||!next||!dots)return;
 const cards=Array.from(track.querySelectorAll(".moment"));let active=0,frame=0;
