@@ -1466,6 +1466,74 @@ if(extraTrack){
     extraTrack.appendChild(slide);
   });
 }
+    /* Miso: large portrait with caption */
+const pinkPortrait=root.querySelector(
+  '.diary img[src="/miso-pink-portrait.png"]'
+);
+
+if(pinkPortrait){
+  const figure=pinkPortrait.closest("figure");
+  const caption=figure&&figure.previousElementSibling;
+
+  if(figure&&caption&&caption.tagName==="P"){
+    figure.classList.remove("pd-small");
+    figure.classList.add("pd-miso-pink-feature");
+    caption.classList.add("pd-miso-photo-caption");
+    figure.appendChild(caption);
+  }
+}
+
+add(".pd-miso-pink-feature",
+  "position:relative;"+
+  "width:calc(100% + 40px);"+
+  "max-width:none;"+
+  "margin:28px -20px;"+
+  "isolation:isolate;"+
+  "height:min(78svh,760px);"+
+  "min-height:480px;"+
+  "overflow:hidden;"+
+  "background:#e9d8d8;"
+);
+
+add(".pd-miso-pink-feature img",
+  "position:absolute;"+
+  "inset:0;"+
+  "width:100%;"+
+  "height:100%;"+
+  "object-fit:cover;"+
+  "object-position:18% 40%;"+
+  "transform:scale(1.28);"+
+  "transform-origin:28% 40%;"
+);
+
+add(".pd-miso-pink-feature::after",
+  "content:'';"+
+  "position:absolute;"+
+  "inset:45% 0 0;"+
+  "background:linear-gradient(transparent,rgba(30,15,20,.78));"+
+  "z-index:1;"+
+  "pointer-events:none;"
+);
+
+add(".diary .pd-miso-photo-caption",
+  "position:absolute;"+
+  "inset:auto 24px 28px;"+
+  "margin:0;"+
+  "padding:0;"+
+  "max-width:520px;"+
+  "color:#fff;"+
+  "font-family:Georgia,'Times New Roman',serif;"+
+  "font-style:italic;"+
+  "font-weight:400;"+
+  "font-size:clamp(25px,5.8vw,38px);"+
+  "line-height:1.16;"+
+  "letter-spacing:-.025em;"+
+  "text-wrap:balance;"+
+  "text-shadow:0 2px 8px #0005;"+
+  "z-index:2;"
+);
+
+style.textContent=css;
 const track=root.querySelector("#misoTrack"),prev=root.querySelector("#misoPrev"),next=root.querySelector("#misoNext"),dots=root.querySelector("#misoDots");
 if(!track||!prev||!next||!dots)return;
 const cards=Array.from(track.querySelectorAll(".moment"));let active=0,frame=0;
