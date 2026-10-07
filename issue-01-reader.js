@@ -1266,6 +1266,148 @@ const type=/(?:^|\/)miso-06\.jpg(?:\?|$)/.test(src)?"drink":/(?:^|\/)miso-with-f
 if(!type)return;
 const box=document.createElement("div");box.className="pd-cut-"+type;img.before(box);box.appendChild(img);
 });
+   /* Miso: photo story and extended carousel */
+add(".cover","grid-template-columns:minmax(0,1fr);");
+add(".cover-photo","aspect-ratio:4/5;max-height:680px;");
+add(".cover-copy","padding:26px 24px;");
+add(".intro","grid-template-columns:minmax(0,1fr);padding:26px 24px;gap:20px;");
+add(".intro-copy p","max-width:58ch;");
+add(".intro-photo","width:100%;max-width:540px;margin:0 auto;");
+add(".pd-cafe-clean","display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;filter:none;");
+add(".story","grid-template-columns:minmax(0,1fr);");
+add(".story-title,.diary,.pull","grid-column:1;grid-row:auto;");
+add(".diary","max-width:720px;margin:0 auto;");
+add(".diary p","font-size:17px;line-height:1.5;");
+add(".pd-diary-photo","display:none;");
+add(".pd-story-photo","width:100%;margin:22px 0;overflow:hidden;");
+add(".pd-story-photo img","display:block;width:100%;height:auto;");
+add(".pd-story-photo.pd-small","width:65%;max-width:340px;margin-inline-start:auto;");
+add(".pd-photo-pair","display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0;");
+add(".pd-photo-pair figure","margin:0;overflow:hidden;");
+add(".pd-photo-pair img","display:block;width:100%;height:100%;aspect-ratio:3/4;object-fit:cover;");
+add(".sea","position:relative;display:block;");
+add(".sea-photo","aspect-ratio:4/3;width:100%;");
+add(".sea-copy","display:contents;");
+add(".sea-copy .kicker","position:absolute;inset:18px 18px auto auto;max-width:42%;font-size:9px;color:#fff;text-shadow:0 1px 4px #000;");
+add(".sea-copy h2","position:absolute;inset:42px 18px auto auto;width:40%;font-size:32px;color:#fff;text-shadow:0 2px 5px #0008;");
+add(".sea-copy p","padding:20px 24px;margin:0;color:#b7d4d0;");
+add(".pd-media>img","object-fit:cover;");
+add(".moment-travel .pd-media>img","object-position:62% center;");
+add(".moment-london .pd-media>img","object-fit:contain;");
+add(".moment figcaption","min-height:80px;");
+add(".carousel-controls","flex-wrap:wrap;");
+add(".carousel-dot","width:6px;height:6px;");
+add(".carousel-dot.active","width:22px;");
+add(".london-note .pd-story-photo","width:70%;max-width:300px;margin-inline-start:auto;");
+add(".everyone-body .pd-photo-pair","margin-top:22px;");
+css+="@media(max-width:720px){";
+add(".cover-photo","max-height:560px;aspect-ratio:4/5;");
+add(".intro-photo","width:100%;max-width:540px;margin:0;");
+add(".intro,.story","padding:24px 20px;");
+add(".sea-copy h2","font-size:28px;");
+add(".pd-photo-pair","gap:8px;");
+css+="}";
+style.textContent=css;
+
+function editorialImage(src,fallback){
+  const image=document.createElement("img");
+  image.src=src;
+  image.alt="Miso";
+  image.loading="lazy";
+  image.decoding="async";
+  if(fallback){
+    image.addEventListener("error",function(){
+      image.src=fallback;
+    },{once:true});
+  }
+  return image;
+}
+function storyPhoto(src,small,fallback){
+  const figure=document.createElement("figure");
+  figure.className="pd-story-photo"+(small?" pd-small":"");
+  figure.appendChild(editorialImage(src,fallback));
+  return figure;
+}
+function photoPair(sources){
+  const pair=document.createElement("div");
+  pair.className="pd-photo-pair";
+  sources.forEach(function(src){
+    const figure=document.createElement("figure");
+    figure.appendChild(editorialImage(src));
+    pair.appendChild(figure);
+  });
+  return pair;
+}
+
+const cafe=root.querySelector(".intro-photo");
+if(cafe){
+  const original=cafe.querySelector("img");
+  if(original){
+    const box=original.closest(".pd-cut-drink")||original;
+    const replacement=editorialImage("/miso-cafe-editorial.png");
+    replacement.alt=original.alt;
+    replacement.className="pd-cafe-clean";
+    replacement.addEventListener("error",function(){
+      replacement.replaceWith(box);
+    },{once:true});
+    box.replaceWith(replacement);
+  }
+}
+
+const walking=root.querySelector(".moment-travel img");
+if(walking){
+  walking.src="/miso-walk-editorial.png";
+  walking.addEventListener("error",function(){
+    walking.src="/miso-07.jpg";
+  },{once:true});
+}
+
+if(diary){
+  const note=diary.querySelector(".diary-note");
+  if(note){
+    note.after(storyPhoto("/miso-11.jpg",false));
+  }
+  const paragraphs=Array.from(diary.children).filter(function(element){
+    return element.tagName==="P";
+  });
+  if(paragraphs.length>3){
+    paragraphs[3].after(
+      storyPhoto("/miso-fashion-editorial.png",true,"/miso-08.jpg")
+    );
+  }
+  diary.appendChild(photoPair(["/miso-13.jpg","/miso-15.jpg"]));
+}
+
+const londonText=root.querySelector(".london-note");
+if(londonText){
+  londonText.appendChild(storyPhoto("/miso-12.jpg",true));
+}
+const everyone=root.querySelector(".everyone-body");
+if(everyone){
+  everyone.appendChild(photoPair(["/miso-09.jpg","/miso-14.jpg"]));
+}
+
+const extraTrack=root.querySelector("#misoTrack");
+if(extraTrack){
+  [
+    [".moment-fashion","/miso-fashion-editorial.png","/miso-08.jpg"],
+    [".moment-travel","/miso-11.jpg",null],
+    [".moment-toys","/miso-13.jpg",null]
+  ].forEach(function(entry){
+    const template=extraTrack.querySelector(entry[0]);
+    if(!template)return;
+    const slide=template.cloneNode(true);
+    slide.className="moment pd-extra";
+    slide.removeAttribute("id");
+    const old=slide.querySelector("img");
+    if(old){
+      const image=editorialImage(entry[1],entry[2]);
+      image.alt=old.alt;
+      old.replaceWith(image);
+    }
+    extraTrack.appendChild(slide);
+  });
+} 
 const track=root.querySelector("#misoTrack"),prev=root.querySelector("#misoPrev"),next=root.querySelector("#misoNext"),dots=root.querySelector("#misoDots");
 if(!track||!prev||!next||!dots)return;
 const cards=Array.from(track.querySelectorAll(".moment"));let active=0,frame=0;
