@@ -1840,3 +1840,237 @@ This file contains content only and does not force document direction.
 */
 
 })();
+/* PETS & DOGUE — Egypt editorial builder */
+(function () {
+  "use strict";
+
+  const T = window.PetsDogueTranslations;
+  if (!T || !T.article) return;
+
+  const headings = new Set([
+    11,40,58,65,88,93,106,108,120,137,
+    146,160,178,194,211,219,238,246,264,293
+  ]);
+
+  const panels = {
+    11:"69922.jpg",
+    40:"71599.jpg",
+    65:"69254.jpg",
+    93:"69220.jpg",
+    108:"71315.jpg",
+    160:"cleomoray-generated.jpg",
+    238:"70116.jpg",
+    264:"69938.jpg"
+  };
+
+  const galleries = {
+    11:[
+      "69918","69919","69920","69921","69922",
+      "69924","69925","69927","69935","69936",
+      "69983","69984","70671","70673","70674"
+    ],
+    40:[
+      "69938","69942","69943","69945","69948",
+      "70766","70770","70771","71564","71566",
+      "71567","71569","71570","71581","71592",
+      "71593","71595","71596","71597","71599",
+      "72031","72032","72568","72576","72580",
+      "72582","72583","72584","72585","72587"
+    ],
+    65:[
+      "69226","69228","69229","69230","69231",
+      "69232","69238","69243","69248","69252",
+      "69254","69256"
+    ],
+    93:[
+      "69215","69216","69220","69221","69222"
+    ],
+    238:[
+      "70110","70112","70113","70114",
+      "70116","70117","70119"
+    ]
+  };
+
+  function escapeHTML(value) {
+    return String(value).replace(
+      /[&<>"']/g,
+      function (character) {
+        return {
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#39;"
+        }[character];
+      }
+    );
+  }
+
+  function labelFor(index, ui) {
+    if (index === 65 || index === 93) {
+      return ui.location;
+    }
+
+    if (index === 238) return ui.crab;
+    if (index === 160) return ui.generated;
+
+    return "P&D WILD EGYPT";
+  }
+
+  function galleryHTML(index, ui) {
+    const photos = galleries[index];
+    if (!photos) return "";
+
+    const label = escapeHTML(labelFor(index, ui));
+
+    const slides = photos.map(function (photo, number) {
+      const caption =
+        label + " · " + (number + 1) + "/" + photos.length;
+
+      return (
+        '<figure class="egypt-slide">' +
+        '<img src="/' + photo + '.jpg"' +
+        ' alt="' + caption + '"' +
+        ' loading="lazy" decoding="async">' +
+        '<figcaption>' + caption + '</figcaption>' +
+        '</figure>'
+      );
+    }).join("");
+
+    return (
+      '<section class="egypt-gallery" aria-label="' +
+      label + '">' +
+      '<div class="egypt-track" tabindex="0">' +
+      slides +
+      '</div>' +
+      '<div class="egypt-controls">' +
+      '<button type="button" data-step="-1" aria-label="' +
+      escapeHTML(ui.previous) + '">←</button>' +
+      '<span class="egypt-count" aria-live="polite">' +
+      '1 / ' + photos.length + '</span>' +
+      '<button type="button" data-step="1" aria-label="' +
+      escapeHTML(ui.next) + '">→</button>' +
+      '</div></section>'
+    );
+  }
+
+  T.registerEgypt = function (entries) {
+    Object.keys(entries).forEach(function (language) {
+      const entry = entries[language];
+      const target = T.article[language];
+
+      if (!target) {
+        throw new Error(
+          "Unsupported Egypt language: " + language
+        );
+      }
+
+      const blocks = entry.text
+        .trim()
+        .split(/\r?\n\s*\r?\n/);
+
+      if (blocks.length !== 296) {
+        throw new Error(
+          "Egypt paragraph count: " +
+          language + " / " + blocks.length
+        );
+      }
+
+      const ui = entry.editorialUI;
+
+      if (
+        !ui ||
+        !ui.location ||
+        !ui.previous ||
+        !ui.next ||
+        !ui.crab ||
+        !ui.generated ||
+        !ui.locationNote
+      ) {
+        throw new Error(
+          "Missing Egypt captions: " + language
+        );
+      }
+
+      let previousHeading = null;
+      const html = [];
+
+      blocks.slice(2).forEach(function (text, offset) {
+        const index = offset + 2;
+
+        const escaped = escapeHTML(text)
+          .replace(/\r?\n/g, "<br>");
+
+        if (!headings.has(index)) {
+          html.push(
+            '<p class="egypt-paragraph">' +
+            escaped + '</p>'
+          );
+          return;
+        }
+
+        if (previousHeading !== null) {
+          html.push(
+            galleryHTML(previousHeading, ui)
+          );
+        }
+
+        previousHeading = index;
+
+        if (!panels[index]) {
+          html.push(
+            '<h2 class="egypt-subheading">' +
+            escaped + '</h2>'
+          );
+          return;
+        }
+
+        let caption = "";
+
+        if ([65,93,160,238].includes(index)) {
+          caption =
+            '<p class="egypt-location">' +
+            escapeHTML(labelFor(index, ui)) +
+            '</p>';
+        }
+
+        if (index === 65) {
+          caption +=
+            '<p class="egypt-location-note">' +
+            escapeHTML(ui.locationNote) +
+            '</p>';
+        }
+
+        html.push(
+          '<figure class="egypt-panel">' +
+          '<img src="/' + panels[index] + '"' +
+          ' alt="' + escapeHTML(text) + '"' +
+          ' loading="lazy" decoding="async">' +
+          '<figcaption><h2>' +
+          escaped + '</h2>' +
+          caption +
+          '</figcaption></figure>'
+        );
+      });
+
+      if (previousHeading !== null) {
+        html.push(
+          galleryHTML(previousHeading, ui)
+        );
+      }
+
+      target.stories = target.stories || {};
+
+      target.stories.egypt = {
+        category:"P&D WILD EGYPT",
+        title:blocks[0],
+        intro:blocks[1],
+        author:"PETS & DOGUE",
+        metaDescription:blocks[1],
+        body:html.join("\n"),
+        tags:["Egypt","Hurghada","Red Sea"],
+        editorialUI:ui
+      };
+    });
+  };
+})();
