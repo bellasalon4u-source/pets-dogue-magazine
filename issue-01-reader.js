@@ -1466,6 +1466,54 @@ if(extraTrack){
     extraTrack.appendChild(slide);
   });
 }
+    /* Miso: staggered photos with text between */
+const everyonePair=root.querySelector(
+  ".everyone-body .pd-photo-pair"
+);
+const everyoneCopy=root.querySelector(".everyone-copy");
+
+if(everyonePair&&everyoneCopy){
+  const figures=Array.from(everyonePair.children);
+  const start=everyoneCopy.querySelector(
+    '[data-i18n="everyone5"]'
+  );
+
+  if(figures.length===2&&start){
+    figures[0].classList.add("pd-miso-photo-left");
+    figures[1].classList.add("pd-miso-photo-right");
+
+    start.before(figures[0]);
+    everyoneCopy.appendChild(figures[1]);
+    everyonePair.remove();
+  }
+}
+
+add(".everyone-copy .pd-miso-photo-left",
+  "display:block;"+
+  "width:74%;"+
+  "max-width:420px;"+
+  "margin:24px auto 24px 0;"+
+  "overflow:hidden;"
+);
+
+add(".everyone-copy .pd-miso-photo-right",
+  "display:block;"+
+  "width:67%;"+
+  "max-width:400px;"+
+  "margin:24px 0 4px auto;"+
+  "overflow:hidden;"
+);
+
+add(
+  ".everyone-copy .pd-miso-photo-left img,"+
+  ".everyone-copy .pd-miso-photo-right img",
+  "display:block;"+
+  "width:100%;"+
+  "height:auto;"+
+  "object-fit:contain;"
+);
+
+style.textContent=css;
     /* Miso: large portrait with caption */
 const pinkPortrait=root.querySelector(
   '.diary img[src="/miso-pink-portrait.png"]'
