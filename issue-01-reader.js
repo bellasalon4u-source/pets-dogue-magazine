@@ -1307,6 +1307,9 @@ add(".intro,.story","padding:24px 20px;");
 add(".sea-copy h2","font-size:28px;");
 add(".pd-photo-pair","gap:8px;");
 css+="}";
+add(".friends-overlay","display:none;");
+add(".friends","display:block;");
+add(".friends-bg","width:100%;max-width:400px;margin:0 auto;");
 style.textContent=css;
 
 function editorialImage(src,fallback){
