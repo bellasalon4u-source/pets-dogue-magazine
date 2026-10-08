@@ -1036,7 +1036,61 @@ function renderArticle(){
   getElement("egyptIntro").textContent=bundle.intro;
 
   body.innerHTML=bundle.body;
-    styleEditorialBody(body);
+        styleEditorialBody(body);
+
+    /* Фото Тамары: портрет вместо снимка за стеклом. */
+    body.querySelectorAll('img[src="/69226.jpg"]').forEach(function(image){
+      image.src="/69232.jpg";
+      image.alt=language==="ru"
+        ?"Тамара смотрит прямо в камеру"
+        :"Tamara looking straight at the camera";
+    });
+
+    /* Кот с табличкой почти в начале статьи. */
+    {
+      const section=document.createElement("section");
+      section.className="egypt-chapter egypt-best-worker";
+
+      const photo=document.createElement("img");
+      photo.src="/72583.jpg";
+      photo.alt=language==="ru"
+        ?"Кот отдыхает на прилавке"
+        :"A cat resting on the shop counter";
+      photo.loading="lazy";
+      photo.decoding="async";
+      photo.style.cssText=
+        "display:block;width:100%;height:auto;border:0;border-radius:0;";
+
+      const plaque=document.createElement("p");
+      plaque.textContent=language==="ru"
+        ?"Лучший работник"
+        :"Best employee";
+      plaque.style.cssText=
+        "display:table;margin:12px auto 0;padding:10px 22px;"+
+        "background:#e6c477;color:#18251f;"+
+        "border:1px solid #b48b39;border-radius:3px;"+
+        "font:600 20px/1.2 Georgia,serif;text-align:center;"+
+        "text-shadow:none;";
+
+      section.append(photo,plaque);
+
+      /* Убираем повтор этого снимка из карусели. */
+      body.querySelectorAll('.egypt-slide img[src="/72583.jpg"]')
+        .forEach(function(image){
+          const gallery=image.closest(".egypt-gallery");
+          image.closest(".egypt-slide").remove();
+          if(gallery&&!gallery.querySelector(".egypt-slide")){
+            gallery.remove();
+          }
+        });
+
+      const firstChapter=body.querySelector(".egypt-chapter");
+      if(firstChapter){
+        firstChapter.after(section);
+      }else{
+        body.prepend(section);
+      }
+    }
 
   /* Семь выбранных фактов в середине статьи. */
   {
