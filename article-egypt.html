@@ -1031,7 +1031,8 @@ function renderArticle(){
   article.lang=language;
   article.dir=language==="ar"?"rtl":"ltr";
 
-  getElement("egyptTitle").textContent=bundle.title;
+    getElement("egyptTitle").textContent=
+    language==="ru"?"Другой Египет":"Another Egypt";
   getElement("egyptIntro").textContent=bundle.intro;
 
   body.innerHTML=bundle.body;
@@ -1200,6 +1201,65 @@ if(document.readyState==="loading"){
 <script src="/pets-dogue-shell.js?v=20260906-articles-seo-1"></script>
 
 <style>
+  /* Обложка: заголовок сверху, кот целиком, описание снизу. */
+#egyptArticle .egypt-cover{
+  display:flex !important;
+  flex-direction:column;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible;
+  background:transparent !important;
+}
+
+#egyptArticle .egypt-cover::after{
+  display:none !important;
+}
+
+#egyptArticle .egypt-cover-copy{
+  display:contents !important;
+}
+
+#egyptArticle .egypt-cover .egypt-kicker{
+  display:none !important;
+}
+
+#egyptArticle .egypt-cover h1{
+  position:static !important;
+  order:0;
+  margin:0 !important;
+  padding:20px 22px 16px;
+  max-width:none;
+  color:#fff;
+  font:italic 500 clamp(30px,5vw,54px)/1.12 Georgia,serif;
+  text-shadow:0 2px 6px rgba(0,25,38,.7);
+}
+
+#egyptArticle .egypt-cover>img{
+  position:static !important;
+  order:1;
+  display:block;
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  transform:none !important;
+  filter:none !important;
+}
+
+#egyptArticle #egyptIntro{
+  position:static !important;
+  order:2;
+  margin:0 !important;
+  padding:16px 22px 18px;
+  max-width:none;
+  color:#fff;
+  background:transparent !important;
+  font:16px/1.55 Arial,sans-serif;
+  text-shadow:0 2px 5px rgba(0,25,38,.8);
+}
 #egyptArticle{
   position:relative;
   isolation:isolate;
