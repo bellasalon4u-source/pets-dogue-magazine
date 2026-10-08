@@ -978,6 +978,62 @@ transition:none;
 }
 </style>
 
+<style>
+/* Только карточка статьи о Египте. */
+.article-card[data-story="egypt"]{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  background:#111;
+  border:0;
+}
+
+.article-card[data-story="egypt"]::after{
+  display:none;
+}
+
+.article-card[data-story="egypt"] .card-top{
+  position:static;
+  order:0;
+  padding:16px 18px 0;
+}
+
+.article-card[data-story="egypt"] .card-copy{
+  display:contents;
+}
+
+.article-card[data-story="egypt"] .card-copy h3{
+  order:1;
+  padding:18px;
+  color:#fff;
+  font:italic 38px/1.1 Georgia,serif;
+}
+
+.article-card[data-story="egypt"] .article-card-image{
+  position:static;
+  order:2;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  transform:none;
+  z-index:auto;
+}
+
+.article-card[data-story="egypt"] .card-copy p{
+  order:3;
+  display:block;
+  margin:0;
+  padding:16px 18px 0;
+  color:#eee;
+  font:15px/1.5 Arial,sans-serif;
+}
+
+.article-card[data-story="egypt"] .card-actions{
+  order:4;
+  margin:0;
+  padding:16px 18px 20px;
+}
+</style>
 </head>
 
 <body>
@@ -2774,8 +2830,35 @@ category &&
 story.category
 ){
 
-category.textContent =
-story.category;
+const egyptCategories={
+  en:"Living Egypt",
+  uk:"Живий Єгипет",
+  ru:"Живой Египет",
+  fr:"L’Égypte vivante",
+  de:"Lebendiges Ägypten",
+  es:"Egipto vivo",
+  it:"Egitto vivo",
+  pt:"Egito vivo",
+  nl:"Levend Egypte",
+  pl:"Żywy Egipt",
+  cs:"Živý Egypt",
+  sk:"Živý Egypt",
+  hu:"Élő Egyiptom",
+  ro:"Egiptul viu",
+  bg:"Живият Египет",
+  el:"Ζωντανή Αίγυπτος",
+  sv:"Levande Egypten",
+  da:"Levende Egypten",
+  no:"Levende Egypt",
+  fi:"Elävä Egypti",
+  tr:"Yaşayan Mısır",
+  ar:"مصر الحية",
+  hi:"जीवंत मिस्र"
+};
+
+category.textContent=storyKey==="egypt"
+  ?(egyptCategories[language]||egyptCategories.en)
+  :story.category;
 
 }
 
@@ -2784,8 +2867,35 @@ title &&
 story.title
 ){
 
-title.textContent =
-story.title;
+const egyptTitles={
+  en:"Another Egypt",
+  uk:"Інший Єгипет",
+  ru:"Другой Египет",
+  fr:"Une autre Égypte",
+  de:"Ein anderes Ägypten",
+  es:"Otro Egipto",
+  it:"Un altro Egitto",
+  pt:"Outro Egito",
+  nl:"Een ander Egypte",
+  pl:"Inny Egipt",
+  cs:"Jiný Egypt",
+  sk:"Iný Egypt",
+  hu:"Egy másik Egyiptom",
+  ro:"Un alt Egipt",
+  bg:"Другият Египет",
+  el:"Μια άλλη Αίγυπτος",
+  sv:"Ett annat Egypten",
+  da:"Et andet Egypten",
+  no:"Et annet Egypt",
+  fi:"Toisenlainen Egypti",
+  tr:"Başka Bir Mısır",
+  ar:"مصر أخرى",
+  hi:"एक अलग मिस्र"
+};
+
+title.textContent=storyKey==="egypt"
+  ?(egyptTitles[language]||egyptTitles.en)
+  :story.title;
 
 }
 
