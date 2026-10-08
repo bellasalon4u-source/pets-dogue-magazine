@@ -1542,6 +1542,24 @@ if(document.readyState==="loading"){
       transform:leftToRight?"none":"scaleX(-1)"
     });
 
+        /* Первый элемент каждого SVG — хвост рыбки. */
+    const tail=picture.querySelector("svg > path");
+
+    if(tail){
+      tail.style.transformBox="view-box";
+      tail.style.transformOrigin="28px 29px";
+
+      tail.animate([
+        {transform:"scaleX(1) skewY(-7deg)"},
+        {transform:"scaleX(.65) skewY(7deg)"},
+        {transform:"scaleX(1) skewY(-7deg)"}
+      ],{
+        duration:380+Math.random()*140,
+        iterations:Infinity,
+        easing:"ease-in-out"
+      });
+    }
+
     fish.appendChild(picture);
     fishLayer.appendChild(fish);
 
