@@ -1217,7 +1217,40 @@ function renderArticle(){
     image.height=1536;
 
     photo.appendChild(image);
-    section.appendChild(photo);
+        /* Фото становится частью седьмого факта. */
+    const mauFact=list.lastElementChild;
+
+    if(mauFact){
+      const paragraphs=mauFact.querySelectorAll(
+        ".egypt-paragraph"
+      );
+
+      paragraphs.forEach(function(paragraph){
+        paragraph.remove();
+      });
+
+      photo.className="egypt-mau-photo";
+      photo.style.cssText="";
+
+      const mauTitle=document.createElement("h3");
+      mauTitle.className="egypt-mau-title";
+      mauTitle.textContent=ru
+        ?"07 — Египетская мау"
+        :"07 — Egyptian Mau";
+
+      const mauText=document.createElement("p");
+      mauText.className="egypt-mau-text";
+      mauText.textContent=ru
+        ?"Мау умеет «щебетать»: приветствовать своих людей тихими мелодичными трелями."
+        :"Maus can “chirp”, greeting their people with soft, melodious trills.";
+
+      photo.append(mauTitle,mauText);
+
+      mauFact.classList.add("egypt-mau-fact");
+      mauFact.prepend(photo);
+    }else{
+      section.appendChild(photo);
+    }
 
     const chapters=Array.from(
       body.querySelectorAll(":scope > .egypt-chapter")
@@ -1480,6 +1513,74 @@ if(document.readyState==="loading"){
   border-radius:0;
 }
 #egyptArticle{
+  /* Красные заголовки, белый текст, салатовые рамки. */
+#egyptBody .egypt-selected-facts .egypt-facts{
+  gap:16px;
+}
+
+#egyptBody .egypt-selected-facts .egypt-fact{
+  padding:16px !important;
+  border:1px solid #a8ff28 !important;
+  background:transparent !important;
+  border-radius:0;
+}
+
+#egyptBody .egypt-selected-facts .egypt-paragraph{
+  color:#fff !important;
+}
+
+#egyptBody .egypt-selected-facts
+.egypt-fact>.egypt-paragraph:first-child{
+  color:#ff3434 !important;
+}
+
+/* Седьмой факт: текст на свободных частях фото. */
+#egyptBody .egypt-selected-facts .egypt-mau-fact{
+  padding:0 !important;
+  overflow:hidden;
+}
+
+#egyptBody .egypt-selected-facts .egypt-mau-photo{
+  position:relative;
+  margin:0;
+  border:0;
+}
+
+#egyptBody .egypt-selected-facts .egypt-mau-photo>img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:0;
+  border-radius:0;
+}
+
+#egyptBody .egypt-selected-facts .egypt-mau-title{
+  position:absolute;
+  top:3%;
+  left:5%;
+  right:5%;
+  margin:0;
+  color:#ff3434 !important;
+  font:italic 600 clamp(22px,3.5vw,38px)/1.15 Georgia,serif;
+  text-shadow:0 1px 3px #000,0 2px 8px #0008;
+  background:transparent !important;
+}
+
+#egyptBody .egypt-selected-facts .egypt-mau-text{
+  position:absolute;
+  bottom:2.5%;
+  left:5%;
+  right:5%;
+  margin:0;
+  color:#fff !important;
+  font:500 clamp(13px,1.8vw,19px)/1.4 Arial,sans-serif;
+  text-shadow:0 1px 3px #000,0 2px 8px #000;
+  background:transparent !important;
+}
+
+#egyptBody .egypt-selected-facts .egypt-mau-fact>a{
+  margin:8px 12px 10px !important;
+}
   position:relative;
   isolation:isolate;
   background:transparent !important;
