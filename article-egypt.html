@@ -670,6 +670,333 @@ function styleEditorialBody(body){
   });
 }
 
+function styleEditorialBody(body){
+  const styleId="egypt-photo-editorial";
+  if(!document.getElementById(styleId)){
+    const style=document.createElement("style");
+    style.id=styleId;
+    style.textContent=`
+.egypt-article{background:#fff;color:#17251e}
+.egypt-cover{height:88svh;min-height:550px;max-height:1000px}
+.egypt-cover>img{object-position:center 38%}
+.egypt-cover::after{background:linear-gradient(180deg,transparent 62%,#000b)}
+.egypt-cover-copy{bottom:24px;max-width:720px}
+.egypt-cover h1{font:italic 500 clamp(36px,6vw,76px)/1.05 Georgia,serif}
+#egyptIntro{font:15px/1.5 Arial,sans-serif;max-width:620px}
+.egypt-kicker{font-size:11px}
+.egypt-chapter{padding:30px max(18px,calc((100% - 1180px)/2));background:#fff;color:#17251e;border:0}
+.egypt-prose{max-width:760px;margin:18px auto;font:17px/1.65 Georgia,serif}
+.egypt-paragraph{display:inline;font:inherit}
+.egypt-long-paragraph{display:block;margin:10px 0}
+.egypt-subheading{max-width:900px;margin:8px auto 24px;font:italic 500 clamp(26px,4vw,46px)/1.14 Georgia,serif}
+.egypt-panel{position:relative;margin:0 0 26px;background:transparent;color:inherit;border:0}
+.egypt-panel>img{display:block;width:100%;height:auto;max-height:86svh;object-fit:contain;background:transparent}
+.egypt-panel figcaption{padding:20px 0;position:static}
+.egypt-panel h2{margin:0;font:italic 500 clamp(28px,4.5vw,54px)/1.12 Georgia,serif}
+.egypt-panel.egypt-photo-overlay{margin-inline:calc(-1 * max(18px,calc((100vw - 1180px)/2)))}
+.egypt-photo-overlay>img{width:100%;height:82svh;max-height:900px;object-fit:cover;object-position:center}
+.egypt-photo-overlay figcaption{position:absolute;inset:auto 6% 24px;color:#fff;max-width:720px;padding:0;text-shadow:0 2px 15px #000b}
+.egypt-photo-overlay::after{content:"";position:absolute;inset:65% 0 0;background:linear-gradient(transparent,#0009);pointer-events:none}
+.egypt-photo-overlay figcaption{z-index:1}
+.egypt-photo-overlay h2{font-size:clamp(28px,4vw,50px)}
+.egypt-location{font:700 12px/1.5 Arial,sans-serif;color:inherit;margin:12px 0 0}
+.egypt-location-note{font:14px/1.5 Arial,sans-serif;margin:10px 0}
+.egypt-photo-side{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center}
+.egypt-photo-side>img{max-height:78svh}
+.egypt-photo-side figcaption{padding:10px}
+.egypt-inline-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:26px 0;align-items:start}
+.egypt-inline-photos>img{display:block;width:100%;height:auto;object-fit:contain;background:transparent;border:0}
+.egypt-inline-photos>img:nth-child(2){margin-top:48px}
+.egypt-inline-photos>img:nth-child(3){grid-column:1 / -1;width:100%;height:auto;max-height:78svh;margin:0;object-fit:contain}
+.egypt-single-photo{grid-template-columns:1fr}
+.egypt-single-photo>img{max-height:85svh}
+.egypt-dolphin-photos>img:first-child{grid-column:1 / -1;height:auto;margin:0}
+.egypt-dolphin-photos>img:nth-child(3){grid-column:auto;height:auto}
+.egypt-generated-label{font:11px/1.4 Arial,sans-serif;color:#666}
+.egypt-gallery{margin:30px 0}
+.egypt-track{display:flex;gap:0;padding:22px 15%;scroll-padding-inline:15%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;align-items:center;direction:ltr}
+.egypt-track::-webkit-scrollbar{display:none}
+.egypt-slide{flex:0 0 100%;height:clamp(320px,55svh,650px);margin:0;display:block;background:transparent;scroll-snap-align:center;transform:scale(.82);filter:blur(1.6px);opacity:.48;transition:transform .3s,filter .3s,opacity .3s}
+.egypt-slide.is-current{transform:scale(1);filter:none;opacity:1;position:relative;z-index:2}
+.egypt-slide img{display:block;width:100%;height:100%;object-fit:contain;background:transparent}
+.egypt-slide figcaption,.egypt-count{display:none}
+.egypt-controls{gap:25px;padding:8px 0}
+.egypt-controls button{width:40px;height:40px;color:#17251e;border:0;background:#f4f4f1}
+.egypt-verdict{max-width:900px;margin:22px auto;padding:24px;color:#9d2430;background:#fff7f5;border-inline-start:3px solid #b72f3d}
+.egypt-verdict .egypt-subheading{font-size:24px;margin-bottom:12px}
+.egypt-verdict .egypt-prose{margin:0}
+.egypt-verdict .egypt-paragraph{font:14px/1.6 Arial,sans-serif;display:block;margin:4px 0}
+.egypt-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:24px auto;max-width:1000px}
+.egypt-fact{padding:18px 0;border-top:2px solid #be9232}
+.egypt-fact .egypt-paragraph{display:block;font:16px/1.55 Georgia,serif;margin:5px 0}
+.egypt-fact .egypt-paragraph:first-child{font-weight:bold}
+.egypt-finale{background:#090909;color:#fff;padding-top:40px;padding-bottom:50px;border-top:2px solid #be9232}
+.egypt-finale .egypt-subheading{color:#edcf77}
+.egypt-finale .egypt-prose{max-width:760px}
+.egypt-finale .egypt-paragraph{font:18px/1.65 Georgia,serif}
+@media(max-width:700px){
+.egypt-cover{height:83svh;min-height:540px}
+.egypt-cover h1{font-size:42px}
+.egypt-cover-copy{inset-inline:20px;bottom:22px}
+#egyptIntro{font-size:13px;max-width:340px}
+.egypt-chapter{padding:24px 18px}
+.egypt-prose{font-size:16px;line-height:1.6;margin:16px 0}
+.egypt-photo-side{grid-template-columns:1fr;gap:8px}
+.egypt-panel>img{max-height:80svh}
+.egypt-panel h2{font-size:30px}
+.egypt-photo-overlay>img{height:76svh;max-height:none;object-fit:cover}
+.egypt-photo-overlay figcaption{inset-inline:20px;bottom:22px}
+.egypt-photo-overlay h2{font-size:29px;max-width:340px}
+.egypt-inline-photos{gap:8px}
+.egypt-inline-photos>img:nth-child(2){margin-top:30px}
+.egypt-slide{height:clamp(330px,52svh,480px)}
+.egypt-track{padding-inline:12%;scroll-padding-inline:12%}
+.egypt-facts{grid-template-columns:1fr;gap:12px}
+.egypt-verdict{margin:15px 0;padding:20px 16px}
+}
+@media(prefers-reduced-motion:reduce){
+.egypt-slide{transition:none}
+}`;
+    document.head.appendChild(style);
+  }
+
+  const children=Array.from(body.children);
+  body.replaceChildren();
+
+  const russian=language==="ru";
+  const translatedHeadings={
+    1:"3 000 лет. Всё тот же характер.",
+    2:"Маленький секрет P&D",
+    4:"Вердикт P&D",
+    6:"Совет от P&D",
+    11:"Клеомурена 👑",
+    17:"Семь фактов о живом Египте",
+    19:"🇪🇬 Кто здесь живёт? — Египет"
+  };
+
+  const extraPhotos={
+    0:["69918","69927"],
+    1:["71599","69945","71569"],
+    3:["69243","69238","69226"],
+    5:["69215","69221"],
+    13:["egypt-dolphins-reef","egypt-dolphins-pair","egypt-dolphins-surface"],
+    16:["70110","70117"],
+    18:["70674","69948"]
+  };
+
+  const used=new Set(["72583"]);
+  let chapter=null;
+  let prose=null;
+  let headingIndex=-1;
+  let paragraphCount=0;
+  let groupSize=0;
+  let facts=null;
+  let fact=null;
+
+  function photoName(image){
+    return String(image.getAttribute("src")||"")
+      .split("/").pop().split("?")[0].replace(/\.jpg$/i,"");
+  }
+
+  function newChapter(index){
+    const section=document.createElement("section");
+    section.className="egypt-chapter";
+    section.dataset.chapter=String(index);
+    if(index===4||index===6)section.classList.add("egypt-verdict");
+    if(index===19)section.classList.add("egypt-finale");
+    body.appendChild(section);
+    prose=null;
+    groupSize=0;
+    paragraphCount=0;
+    return section;
+  }
+
+  function addPhotos(){
+    const names=extraPhotos[headingIndex];
+    if(!names)return;
+    const row=document.createElement("div");
+    row.className="egypt-inline-photos";
+    names.forEach(function(name){
+      if(used.has(name))return;
+      used.add(name);
+      const image=document.createElement("img");
+      image.src="/"+name+".jpg";
+      image.alt="";
+      image.loading="lazy";
+      image.decoding="async";
+      row.appendChild(image);
+    });
+    if(!row.children.length)return;
+    if(row.children.length===1)row.classList.add("egypt-single-photo");
+    if(headingIndex===13){
+      row.classList.add("egypt-dolphin-photos");
+      const label=document.createElement("p");
+      label.className="egypt-generated-label";
+      label.textContent=russian
+        ?"Дельфины · сгенерированные иллюстрации"
+        :"Dolphins · AI-generated illustrations";
+      row.appendChild(label);
+    }
+    chapter.appendChild(row);
+    prose=null;
+    groupSize=0;
+  }
+
+  children.forEach(function(node){
+    if(node.matches(".egypt-panel, .egypt-subheading")){
+      headingIndex++;
+      chapter=newChapter(headingIndex);
+      const heading=node.matches(".egypt-panel")
+        ?node.querySelector("h2"):node;
+      if(russian&&translatedHeadings[headingIndex]){
+        heading.textContent=translatedHeadings[headingIndex];
+      }
+      if(headingIndex===16){
+        heading.textContent=russian
+          ?"🦀 Краб явился на редакционную планёрку"
+          :"🦀 The crab has joined the editorial meeting";
+      }
+      if(node.matches(".egypt-panel")){
+        node.classList.remove("egypt-split-panel","egypt-image-right");
+        const image=node.querySelector("img");
+        if(headingIndex===3)image.src="/69232.jpg";
+        if(headingIndex===0||headingIndex===7||headingIndex===10){
+          node.classList.add("egypt-photo-overlay");
+        }else if(headingIndex===3||headingIndex===5){
+          node.classList.add("egypt-photo-side");
+        }
+        used.add(photoName(image));
+      }
+      chapter.appendChild(node);
+      if(headingIndex===17){
+        facts=document.createElement("div");
+        facts.className="egypt-facts";
+        chapter.appendChild(facts);
+        fact=null;
+      }
+      return;
+    }
+
+    if(!chapter)chapter=newChapter(-1);
+
+    if(node.matches(".egypt-paragraph")){
+      if(headingIndex===16){
+        const revised=russian
+          ?["Он уже здесь.","Мы встретили его на пляже Хула-Хула.","И теперь у него есть собственное место в нашей истории."]
+          :["He is here already.","We met him on Hula Hula Beach.","And now he has his own place in our story."];
+        if(paragraphCount<3)node.textContent=revised[paragraphCount];
+      }
+
+      if(headingIndex===17){
+        if(/^\s*0[1-7]\s*[—–-]/.test(node.textContent)){
+          fact=document.createElement("div");
+          fact.className="egypt-fact";
+          facts.appendChild(fact);
+        }
+        if(fact)fact.appendChild(node);
+        else chapter.appendChild(node);
+        return;
+      }
+
+      if(!prose||groupSize>=4){
+        prose=document.createElement("div");
+        prose.className="egypt-prose";
+        chapter.appendChild(prose);
+        groupSize=0;
+      }
+      prose.appendChild(node);
+      prose.appendChild(document.createTextNode(" "));
+      if(node.textContent.trim().length>180){
+        node.classList.add("egypt-long-paragraph");
+      }
+      groupSize++;
+      paragraphCount++;
+      if(paragraphCount===4)addPhotos();
+    }else{
+      chapter.appendChild(node);
+      prose=null;
+      groupSize=0;
+    }
+  });
+
+  body.querySelectorAll(".egypt-gallery").forEach(function(gallery){
+    gallery.querySelectorAll(".egypt-slide").forEach(function(slide){
+      const image=slide.querySelector("img");
+      const name=photoName(image);
+      if(used.has(name)){
+        slide.remove();
+      }else{
+        used.add(name);
+        slide.querySelector("figcaption")?.remove();
+      }
+    });
+    if(!gallery.querySelector(".egypt-slide"))gallery.remove();
+  });
+
+  const cover=document.querySelector(".egypt-cover>img");
+  if(cover){
+    cover.src="/72583.jpg";
+    cover.alt=russian?"Кот на прилавке в Хургаде":"A cat on a shop counter in Hurghada";
+  }
+}
+
+function setupGalleries(){
+  document.querySelectorAll(".egypt-gallery").forEach(function(gallery){
+    const track=gallery.querySelector(".egypt-track");
+    if(!track)return;
+    const slides=Array.from(track.children);
+    if(!slides.length)return;
+    const previous=gallery.querySelector('button[data-step="-1"]');
+    const next=gallery.querySelector('button[data-step="1"]');
+    let current=0;
+
+    function position(index){
+      return slides[index].offsetLeft
+        -track.offsetLeft
+        -(track.clientWidth-slides[index].offsetWidth)/2;
+    }
+
+    function update(){
+      let closest=Infinity;
+      slides.forEach(function(slide,index){
+        const distance=Math.abs(position(index)-track.scrollLeft);
+        if(distance<closest){
+          closest=distance;
+          current=index;
+        }
+      });
+      slides.forEach(function(slide,index){
+        slide.classList.toggle("is-current",index===current);
+      });
+      if(previous)previous.disabled=current===0;
+      if(next)next.disabled=current===slides.length-1;
+    }
+
+    function move(step){
+      const target=Math.max(0,Math.min(slides.length-1,current+step));
+      track.scrollTo({
+        left:position(target),
+        behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ?"auto":"smooth"
+      });
+    }
+
+    previous?.addEventListener("click",function(){move(-1)});
+    next?.addEventListener("click",function(){move(1)});
+    track.addEventListener("scroll",update,{passive:true});
+    track.addEventListener("keydown",function(event){
+      if(event.key==="ArrowLeft"||event.key==="ArrowRight"){
+        event.preventDefault();
+        move(event.key==="ArrowRight"?1:-1);
+      }
+    });
+    requestAnimationFrame(update);
+    slides.forEach(function(slide){
+      slide.querySelector("img")?.addEventListener("load",update,{once:true});
+    });
+  });
+}
+
 function renderArticle(){
   const translations=window.PetsDogueTranslations?.article;
   const article=getElement("egyptArticle");
