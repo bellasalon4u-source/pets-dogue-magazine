@@ -1036,7 +1036,197 @@ function renderArticle(){
   getElement("egyptIntro").textContent=bundle.intro;
 
   body.innerHTML=bundle.body;
-  styleEditorialBody(body);
+    styleEditorialBody(body);
+
+  /* Семь выбранных фактов в середине статьи. */
+  {
+    const ru=language==="ru";
+    const oldFacts=body.querySelector(".egypt-facts");
+
+    const section=oldFacts
+      ?oldFacts.closest(".egypt-chapter")
+      :document.createElement("section");
+
+    section.className="egypt-chapter egypt-selected-facts";
+    section.replaceChildren();
+
+    const heading=document.createElement("h2");
+    heading.className="egypt-subheading";
+    heading.textContent=ru
+      ?"Семь фактов о живом Египте"
+      :"Seven facts about living Egypt";
+    section.appendChild(heading);
+
+    const facts=ru?[
+      [
+        "У дельфинов есть свой «уход за кожей».",
+        "У Хургады дельфины трутся о определённые кораллы и губки. Исследователи предполагают, что их вещества помогают ухаживать за кожей.",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9236899/"
+      ],
+      [
+        "У черепах есть «фотопаспорта».",
+        "В египетском Красном море отдельных черепах узнают по рисунку чешуек на голове — и собирают историю встреч с ними.",
+        "https://turtlewatchegypt.net/"
+      ],
+      [
+        "Дельфинов узнают по плавнику.",
+        "Шрамы и выемки на спинном плавнике помогают исследователям Хургады отличать одну особь от другой без установки меток.",
+        "https://www.dolphinwatchalliance.org/en/our-mission/dolphin-watch-research/photo-identification"
+      ],
+      [
+        "В море есть пастбища для морских коров.",
+        "Дюгони кормятся морской травой. Бухта Абу-Даббаб славится обширными подводными лугами, подходящими для этих животных.",
+        "https://www.hepca.org/projects/conservation/red-sea-dugongs"
+      ],
+      [
+        "Дайвер может помочь изучать черепах.",
+        "Проект TurtleWatch собирает наблюдения дайверов и любителей снорклинга, чтобы лучше знать, где встречаются морские черепахи.",
+        "https://www.hepca.org/projects/conservation/turtlewatch"
+      ],
+      [
+        "Можно стать опекуном животного на расстоянии.",
+        "Египетский приют S.P.A.R.E. предлагает поддерживать кошек, собак и ослов, даже если вы не можете забрать их домой.",
+        "https://sparelives.org/index.pl/adopt_or_sponsor"
+      ],
+      [
+        "Египетская мау умеет «щебетать».",
+        "Эти пятнистые домашние кошки могут приветствовать своих людей тихими мелодичными трелями и щебечущими звуками.",
+        "https://cfa.org/breed/egyptian-mau/"
+      ]
+    ]:[
+      [
+        "Dolphins have their own “skin-care routine”.",
+        "Near Hurghada, dolphins rub against selected corals and sponges. Researchers suggest their compounds may help care for the dolphins’ skin.",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9236899/"
+      ],
+      [
+        "Turtles have “photo passports”.",
+        "In the Egyptian Red Sea, individual turtles are recognised by their facial scale patterns, allowing researchers to record repeated encounters.",
+        "https://turtlewatchegypt.net/"
+      ],
+      [
+        "Dolphins are recognised by their fins.",
+        "Scars and notches on dorsal fins help Hurghada researchers distinguish individual dolphins without attaching tags.",
+        "https://www.dolphinwatchalliance.org/en/our-mission/dolphin-watch-research/photo-identification"
+      ],
+      [
+        "The sea has pastures for sea cows.",
+        "Dugongs feed on seagrass. Abu Dabbab Bay has extensive underwater meadows that provide suitable habitat for these animals.",
+        "https://www.hepca.org/projects/conservation/red-sea-dugongs"
+      ],
+      [
+        "Divers can help study turtles.",
+        "TurtleWatch collects observations from divers and snorkelers to better understand where sea turtles occur.",
+        "https://www.hepca.org/projects/conservation/turtlewatch"
+      ],
+      [
+        "You can sponsor an animal from afar.",
+        "Egypt’s S.P.A.R.E. shelter offers sponsorship for cats, dogs and donkeys, even if you cannot take an animal home.",
+        "https://sparelives.org/index.pl/adopt_or_sponsor"
+      ],
+      [
+        "Egyptian Maus can “chirp”.",
+        "These spotted domestic cats may greet their people with soft, melodious trills and chirping sounds.",
+        "https://cfa.org/breed/egyptian-mau/"
+      ]
+    ];
+
+    const list=document.createElement("div");
+    list.className="egypt-facts";
+
+    facts.forEach(function(item,index){
+      const fact=document.createElement("div");
+      fact.className="egypt-fact";
+
+      const title=document.createElement("p");
+      title.className="egypt-paragraph";
+      title.textContent=
+        String(index+1).padStart(2,"0")+" — "+item[0];
+
+      const text=document.createElement("p");
+      text.className="egypt-paragraph";
+      text.textContent=item[1];
+
+      const source=document.createElement("a");
+      source.href=item[2];
+      source.target="_blank";
+      source.rel="noopener noreferrer";
+      source.textContent=ru?"Источник":"Source";
+      source.style.cssText=
+        "display:inline-block;font:12px/1.5 Arial,sans-serif;"+
+        "color:#fff;margin-top:5px;text-underline-offset:3px";
+
+      fact.append(title,text,source);
+      list.appendChild(fact);
+    });
+
+    section.appendChild(list);
+
+    const photo=document.createElement("figure");
+    photo.style.cssText="margin:18px 0 0;border:0";
+
+    const image=document.createElement("img");
+    image.src=
+      "https://upload.wikimedia.org/wikipedia/commons/"+
+      "f/f4/A_Silver_Egyptian_Mau_named_%27Roxie%27.JPG";
+    image.alt=ru
+      ?"Серебристая египетская мау по имени Рокси"
+      :"A silver Egyptian Mau named Roxie";
+    image.loading="lazy";
+    image.decoding="async";
+    image.width=4000;
+    image.height=3000;
+    image.style.cssText=
+      "display:block;width:100%;height:auto;"+
+      "border:0;border-radius:0";
+
+    const credit=document.createElement("figcaption");
+    credit.style.cssText=
+      "padding:8px 0;font:12px/1.5 Arial,sans-serif;"+
+      "color:#fff;background:transparent";
+
+    credit.appendChild(document.createTextNode(
+      ru?"Египетская мау · Фото: ":"Egyptian Mau · Photo: "
+    ));
+
+    const author=document.createElement("a");
+    author.href=
+      "https://commons.wikimedia.org/wiki/"+
+      "File:A_Silver_Egyptian_Mau_named_%27Roxie%27.JPG";
+    author.textContent="Drhesslen / Wikimedia Commons";
+    author.target="_blank";
+    author.rel="noopener noreferrer";
+
+    const licence=document.createElement("a");
+    licence.href="https://creativecommons.org/licenses/by-sa/3.0/";
+    licence.textContent="CC BY-SA 3.0";
+    licence.target="_blank";
+    licence.rel="noopener noreferrer";
+
+    credit.append(
+      author,
+      document.createTextNode(" · "),
+      licence
+    );
+
+    photo.append(image,credit);
+    section.appendChild(photo);
+
+    const chapters=Array.from(
+      body.querySelectorAll(":scope > .egypt-chapter")
+    ).filter(function(chapter){
+      return chapter!==section&&
+        !chapter.classList.contains("egypt-finale");
+    });
+
+    const middle=chapters[Math.floor(chapters.length/2)];
+
+    if(middle){
+      body.insertBefore(section,middle);
+    }else{
+      body.appendChild(section);
+    }
+  }
 
   const listenButton=getElement("egyptListen");
   const listenLabel=getElement("egyptListenLabel");
