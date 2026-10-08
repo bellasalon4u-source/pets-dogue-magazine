@@ -1209,7 +1209,14 @@ function renderArticle(){
       licence
     );
 
-    photo.append(image,credit);
+        image.src="/egypt-mau-full.jpg";
+    image.alt=ru
+      ?"Египетская мау в полный рост"
+      :"Full body Egyptian Mau";
+    image.width=1024;
+    image.height=1536;
+
+    photo.appendChild(image);
     section.appendChild(photo);
 
     const chapters=Array.from(
@@ -1449,6 +1456,28 @@ if(document.readyState==="loading"){
   background:transparent !important;
   font:16px/1.55 Arial,sans-serif;
   text-shadow:0 2px 5px rgba(0,25,38,.8);
+}
+  /* Алый текст семи фактов без подложек. */
+#egyptBody .egypt-selected-facts .egypt-subheading,
+#egyptBody .egypt-selected-facts .egypt-fact,
+#egyptBody .egypt-selected-facts .egypt-paragraph{
+  color:#ff3434 !important;
+  text-shadow:
+    0 1px 2px rgba(0,15,30,.95),
+    0 2px 6px rgba(0,15,30,.8);
+}
+
+#egyptBody .egypt-selected-facts .egypt-fact{
+  background:transparent !important;
+  border:0 !important;
+}
+
+#egyptBody .egypt-selected-facts figure>img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:0;
+  border-radius:0;
 }
 #egyptArticle{
   position:relative;
