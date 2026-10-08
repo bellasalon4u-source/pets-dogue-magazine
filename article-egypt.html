@@ -1431,24 +1431,186 @@ if(document.readyState==="loading"){
 
   article.prepend(scene);
 
-  const fish=[
-    [25,30,38,-8,"#dfc365"],
-    [38,24,46,-24,"#94c7d1"],
-    [52,35,42,-16,"#dfc365"],
-    [67,26,51,-35,"#94c7d1"],
-    [80,22,44,-20,"#dfc365"]
+    /* Маленькие рыбки, плавающие в обе стороны. */
+  const motion=window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  const fishLayer=document.createElement("div");
+  fishLayer.setAttribute("aria-hidden","true");
+
+  Object.assign(fishLayer.style,{
+    position:"fixed",
+    inset:"0",
+    overflow:"hidden",
+    pointerEvents:"none",
+    zIndex:"2"
+  });
+
+  document.body.appendChild(fishLayer);
+
+  const fishPictures=[
+    /* Рыба-клоун. */
+    `<svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 100 58">
+      <path d="M27 28 L5 10 Q0 29 5 47 Z"
+        fill="#ff8b19" stroke="#713a19" stroke-width="2"/>
+      <path d="M35 17 Q49 0 65 15"
+        fill="#ff8b19" stroke="#713a19" stroke-width="2"/>
+      <ellipse cx="57" cy="29" rx="34" ry="20"
+        fill="#ff7918" stroke="#713a19" stroke-width="2"/>
+      <path d="M38 12 Q30 29 38 46
+               M60 10 Q52 29 60 48
+               M77 15 Q69 29 77 43"
+        fill="none" stroke="#713a19" stroke-width="10"/>
+      <path d="M38 12 Q30 29 38 46
+               M60 10 Q52 29 60 48
+               M77 15 Q69 29 77 43"
+        fill="none" stroke="#fff7df" stroke-width="6"/>
+      <path d="M50 30 Q43 45 60 40"
+        fill="#ffb126" stroke="#713a19" stroke-width="1.5"/>
+      <circle cx="82" cy="24" r="4" fill="#fff"/>
+      <circle cx="83" cy="24" r="2.5" fill="#142531"/>
+    </svg>`,
+
+    /* Синий хирург с жёлтым хвостом. */
+    `<svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 100 58">
+      <path d="M30 29 L5 10 Q0 29 5 48 Z"
+        fill="#ffe04b" stroke="#183668" stroke-width="2"/>
+      <path d="M36 15 Q55 0 76 16"
+        fill="#286cef"/>
+      <ellipse cx="58" cy="29" rx="34" ry="22"
+        fill="#247eea" stroke="#183668" stroke-width="2"/>
+      <path d="M30 26 Q46 8 69 16
+               Q52 23 72 34 Q49 44 30 32 Z"
+        fill="#14294c"/>
+      <path d="M51 31 Q47 44 63 40"
+        fill="#ffe04b"/>
+      <circle cx="82" cy="24" r="4" fill="#eaf8ff"/>
+      <circle cx="83" cy="24" r="2.5" fill="#142531"/>
+    </svg>`
   ];
 
-  fish.forEach(function(settings){
-    const element=document.createElement("span");
-    element.className="egypt-swimming-fish";
-    element.style.setProperty("--depth",settings[0]+"%");
-    element.style.setProperty("--size",settings[1]+"px");
-    element.style.setProperty("--duration",settings[2]+"s");
-    element.style.setProperty("--delay",settings[3]+"s");
-    element.style.setProperty("--color",settings[4]);
-    scene.appendChild(element);
+  const pauses=[3000,2000,5500,8000,4000,6500];
+  const activeFish=new Set();
+
+  let fishTimer=0;
+  let fishStep=0;
+  let leftToRight=true;
+
+  function clearFish(){
+    activeFish.forEach(function(animation){
+      animation.cancel();
+    });
+    activeFish.clear();
+    fishLayer.replaceChildren();
+  }
+
+  function swim(){
+    if(document.hidden||motion.matches)return;
+
+    const bounds=scene.getBoundingClientRect();
+    const viewportHeight=window.innerHeight;
+    const top=Math.max(180,bounds.top);
+    const bottom=Math.min(viewportHeight-90,bounds.bottom);
+
+    if(bottom-top<80||activeFish.size>=2)return;
+
+    const width=32+Math.random()*12;
+    const y=top+Math.random()*(bottom-top);
+    const fish=document.createElement("div");
+    const picture=document.createElement("div");
+
+    picture.innerHTML=fishPictures[
+      Math.random()<.5?0:1
+    ];
+
+    Object.assign(fish.style,{
+      position:"absolute",
+      top:y+"px",
+      left:"0",
+      width:width+"px",
+      height:(width*.58)+"px",
+      opacity:".7",
+      willChange:"transform"
+    });
+
+    Object.assign(picture.style,{
+      width:"100%",
+      height:"100%",
+      transform:leftToRight?"none":"scaleX(-1)"
+    });
+
+    fish.appendChild(picture);
+    fishLayer.appendChild(fish);
+
+    const from=leftToRight
+      ?-60
+      :window.innerWidth+60;
+
+    const to=leftToRight
+      ?window.innerWidth+60
+      :-60;
+
+    leftToRight=!leftToRight;
+
+    const animation=fish.animate([
+      {transform:`translate(${from}px,0)`},
+      {
+        transform:`translate(${(from+to)/2}px,-8px)`
+      },
+      {transform:`translate(${to}px,3px)`}
+    ],{
+      duration:6500+Math.random()*2500,
+      easing:"linear",
+      iterations:1
+    });
+
+    activeFish.add(animation);
+
+    animation.onfinish=function(){
+      activeFish.delete(animation);
+      fish.remove();
+    };
+  }
+
+  function queueFish(){
+    if(document.hidden||motion.matches)return;
+
+    const pause=pauses[fishStep%pauses.length];
+    fishStep++;
+
+    fishTimer=window.setTimeout(function(){
+      swim();
+      queueFish();
+    },pause);
+  }
+
+  function restartFish(){
+    window.clearTimeout(fishTimer);
+    clearFish();
+
+    if(!document.hidden&&!motion.matches){
+      queueFish();
+    }
+  }
+
+  document.addEventListener(
+    "visibilitychange",
+    restartFish
+  );
+
+  motion.addEventListener("change",restartFish);
+
+  window.addEventListener("pagehide",function(){
+    window.clearTimeout(fishTimer);
+    clearFish();
   });
+
+  window.addEventListener("pageshow",restartFish);
+
+  queueFish();
 
   let frame=0;
 
