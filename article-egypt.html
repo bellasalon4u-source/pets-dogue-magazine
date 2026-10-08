@@ -1199,5 +1199,208 @@ if(document.readyState==="loading"){
 
 <script src="/pets-dogue-shell.js?v=20260906-articles-seo-1"></script>
 
+<style>
+#egyptDiveScene{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+  pointer-events:none;
+  background:#077eaa;
+}
+#egyptDivePanorama{
+  position:absolute;
+  inset:0;
+  background-image:url("/egypt-dive-background.jpg");
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center 0%;
+}
+#egyptDiveLight{
+  position:absolute;
+  inset:-10%;
+  opacity:.18;
+  background:repeating-conic-gradient(
+    from 165deg at 75% -10%,
+    transparent 0deg 8deg,
+    #e9ffff 9deg 10deg,
+    transparent 11deg 19deg
+  );
+  animation:egyptWaterLight 13s ease-in-out infinite alternate;
+}
+body:has(#egyptDiveScene){
+  background:transparent;
+  isolation:isolate;
+}
+#egyptArticle{
+  background:transparent;
+}
+#egyptBody .egypt-chapter{
+  background:transparent;
+}
+#egyptBody .egypt-prose,
+#egyptBody .egypt-subheading,
+#egyptBody .egypt-fact{
+  background:rgba(255,255,255,.9);
+  color:#142b2b;
+  padding:14px 18px;
+  backdrop-filter:blur(5px);
+}
+#egyptBody .egypt-prose{
+  margin-block:10px;
+}
+#egyptBody .egypt-subheading{
+  margin-block:8px 12px;
+}
+#egyptBody .egypt-chapter{
+  padding-block:16px;
+}
+#egyptBody .egypt-panel{
+  margin-bottom:12px;
+}
+#egyptBody .egypt-panel:not(.egypt-photo-overlay) figcaption{
+  background:rgba(255,255,255,.9);
+  padding:16px;
+}
+#egyptBody .egypt-inline-photos{
+  margin-block:14px;
+}
+#egyptBody .egypt-gallery{
+  margin-block:14px 0;
+}
+#egyptBody .egypt-verdict{
+  background:rgba(255,247,245,.94);
+}
+#egyptBody .egypt-verdict .egypt-prose,
+#egyptBody .egypt-verdict .egypt-subheading{
+  background:transparent;
+  color:#9d2430;
+}
+#egyptBody .egypt-finale{
+  background:rgba(0,0,0,.88);
+}
+#egyptBody .egypt-finale .egypt-prose,
+#egyptBody .egypt-finale .egypt-subheading{
+  background:transparent;
+  color:#fff;
+}
+#egyptBody .egypt-finale .egypt-subheading{
+  color:#edcf77;
+}
+.egypt-audio{
+  background:rgba(255,255,255,.94);
+}
+.egypt-swimming-fish{
+  position:absolute;
+  left:-15%;
+  top:var(--fish-depth);
+  width:var(--fish-size);
+  height:calc(var(--fish-size) * .42);
+  background:var(--fish-color);
+  border-radius:55% 65% 65% 55%;
+  opacity:.45;
+  animation:egyptFishSwim var(--fish-duration) linear infinite;
+  animation-delay:var(--fish-delay);
+}
+.egypt-swimming-fish::before{
+  content:"";
+  position:absolute;
+  left:-25%;
+  top:8%;
+  width:35%;
+  height:85%;
+  background:inherit;
+  clip-path:polygon(0 0,100% 50%,0 100%);
+}
+.egypt-swimming-fish::after{
+  content:"";
+  position:absolute;
+  right:15%;
+  top:30%;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#102d3d;
+}
+@keyframes egyptFishSwim{
+  0%{transform:translateX(0) translateY(0)}
+  35%{transform:translateX(45vw) translateY(-12px)}
+  70%{transform:translateX(90vw) translateY(8px)}
+  100%{transform:translateX(130vw) translateY(0)}
+}
+@keyframes egyptWaterLight{
+  from{transform:translateX(-2%) rotate(-2deg)}
+  to{transform:translateX(2%) rotate(2deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  #egyptDiveLight,.egypt-swimming-fish{
+    animation:none;
+  }
+  .egypt-swimming-fish{display:none}
+}
+</style>
+
+<div id="egyptDiveScene" aria-hidden="true">
+  <div id="egyptDivePanorama"></div>
+  <div id="egyptDiveLight"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const scene=document.getElementById("egyptDiveScene");
+  const panorama=document.getElementById("egyptDivePanorama");
+  const article=document.getElementById("egyptArticle");
+  if(!scene||!panorama||!article)return;
+
+  const fish=[
+    [34,30,36,-5,"#d6bb41"],
+    [48,23,43,-22,"#16445d"],
+    [62,34,39,-12,"#b8cace"],
+    [73,25,48,-31,"#d6bb41"],
+    [55,19,35,-18,"#16445d"]
+  ];
+
+  fish.forEach(function(values){
+    const element=document.createElement("span");
+    element.className="egypt-swimming-fish";
+    element.style.setProperty("--fish-depth",values[0]+"%");
+    element.style.setProperty("--fish-size",values[1]+"px");
+    element.style.setProperty("--fish-duration",values[2]+"s");
+    element.style.setProperty("--fish-delay",values[3]+"s");
+    element.style.setProperty("--fish-color",values[4]);
+    scene.appendChild(element);
+  });
+
+  let pending=false;
+
+  function updateDepth(){
+    pending=false;
+    const rect=article.getBoundingClientRect();
+    const distance=Math.max(1,rect.height-window.innerHeight);
+    const progress=Math.max(0,Math.min(1,-rect.top/distance));
+    panorama.style.backgroundPosition="center "+(progress*100)+"%";
+    scene.style.setProperty("--dive-progress",String(progress));
+  }
+
+  function schedule(){
+    if(pending)return;
+    pending=true;
+    requestAnimationFrame(updateDepth);
+  }
+
+  window.addEventListener("scroll",schedule,{passive:true});
+  window.addEventListener("resize",schedule,{passive:true});
+  window.addEventListener("load",schedule,{once:true});
+
+  if("ResizeObserver" in window){
+    new ResizeObserver(schedule).observe(article);
+  }
+
+  updateDepth();
+})();
+</script>
+
 </body>
 </html>
