@@ -155,8 +155,8 @@ type="application/ld+json"
           {
             "@type":"ListItem",
             "position":1,
-            "name":"How To Prepare Your Pet for a Magazine Photoshoot",
-            "url":"https://www.petsanddogue.com/article.html?story=photoshoot"
+                        "name":"Another Egypt: The One That Looks Back at You",
+            "url":"https://www.petsanddogue.com/article-egypt.html"
           },
           {
             "@type":"ListItem",
@@ -1492,61 +1492,53 @@ class="article-grid"
 id="articleGrid"
 >
 
-<article
-class="article-card"
-data-story="photoshoot"
->
+<article class="article-card" data-story="egypt">
+  <img
+    class="article-card-image"
+    src="/69922.jpg"
+    alt="A beach cat in Egypt"
+  >
 
-<img
-class="article-card-image"
-src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1400&q=85"
-alt="Pet magazine photoshoot"
->
+  <div class="card-top">
+    <span
+      class="article-category"
+      data-role="category"
+    >
+      P&amp;D WILD EGYPT
+    </span>
 
-<div class="card-top">
+    <button
+      class="listen-card"
+      type="button"
+      aria-label="Listen to the article"
+      onclick="if (getArticleBundle()?.stories?.egypt &amp;&amp; 'speechSynthesis' in window) { previewArticle(event,this,'egypt'); } else { event.preventDefault(); event.stopPropagation(); window.location.href='/article-egypt.html'; }"
+    >
+      <span aria-hidden="true">🔊</span>
+      <span data-role="listen">Listen</span>
+    </button>
+  </div>
 
-<span
-class="article-category"
-data-role="category"
->
-PHOTOGRAPHY
-</span>
+  <div class="card-copy">
+    <h3 data-role="title">
+      Another Egypt: The One That Looks Back at You
+    </h3>
 
-<button
-class="listen-card"
-type="button"
-onclick="previewArticle(event,this,'photoshoot')"
->
-<span>🔊</span>
-<span data-role="listen">Listen</span>
-</button>
+    <p data-role="intro">
+      Cats with faces from ancient images, Tamara from Hurghada,
+      tortoises, dolphins after their “night shift”, neon fish
+      and Cleomoray — an Egyptian diver’s underwater acquaintance.
+    </p>
 
-</div>
-
-<div class="card-copy">
-
-<h3 data-role="title">
-How To Prepare Your Pet for a Magazine Photoshoot
-</h3>
-
-<p data-role="intro">
-Grooming, light, comfort and simple preparation can turn a portrait into a polished editorial image.
-</p>
-
-<div class="card-actions">
-
-<a
-class="read-button"
-href="article.html?story=photoshoot"
-data-role="read"
->
-Read
-</a>
-
-</div>
-
-</div>
-
+    <div class="card-actions">
+      <a
+        class="read-button"
+        href="/article-egypt.html"
+        data-role="read"
+      >
+        Read
+      </a>
+    </div>
+  </div>
 </article>
 
 <article
@@ -1896,7 +1888,7 @@ Read
 </main>
 
 <script src="/i18n/common.js?v=2"></script>
-<script src="/i18n/article.js?v=3"></script>
+<script src="/i18n/article.js?v=20261007-egypt-1"></script>
 <script src="/i18n/engine.js?v=3"></script>
 
 <script>
@@ -2288,7 +2280,11 @@ description:"स्वास्थ्य, वेलनेस, फ़ैशन, �
 };
 
 const FALLBACK_STORIES = {
-
+egypt: {
+  category: "P&D WILD EGYPT",
+  title: "Another Egypt: The One That Looks Back at You",
+  intro: "Cats with faces from ancient images, Tamara from Hurghada, tortoises, dolphins after their “night shift”, neon fish and Cleomoray — an Egyptian diver’s underwater acquaintance."
+},
 photoshoot:{
 category:"PHOTOGRAPHY",
 title:"How To Prepare Your Pet for a Magazine Photoshoot",
