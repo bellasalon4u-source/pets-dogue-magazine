@@ -1221,10 +1221,65 @@ if(document.readyState==="loading"){
 #egyptDivePanorama{
   position:absolute;
   inset:0;
+  background-color:#087f9c;
+  background-image:url("/egypt-reef-middle.jpg");
+  background-repeat:repeat-y;
+  background-position:center top;
+  background-size:100% auto;
+}
+
+/* Поверхность моря и Хула-Хула в начале. */
+#egyptDivePanorama::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:160vw;
+  max-height:1800px;
   background-image:url("/egypt-dive-background.jpg");
   background-repeat:no-repeat;
   background-position:center top;
-  background-size:100% 100%;
+  background-size:100% auto;
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 65%,
+    transparent 100%
+  );
+  mask-image:linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 65%,
+    transparent 100%
+  );
+}
+
+/* Песчаное дно перед чёрным окончанием. */
+#egyptDivePanorama::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:100vw;
+  max-height:1200px;
+  background-image:url("/egypt-dive-background.jpg");
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:100% auto;
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 40%,
+    #000 100%
+  );
+  mask-image:linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 40%,
+    #000 100%
+  );
 }
 
 /* Фон находится в статье и прокручивается вместе с ней. */
