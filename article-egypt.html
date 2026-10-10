@@ -391,9 +391,7 @@ body{background:#fff}
 <script src="/i18n/common.js?v=2"></script>
 <script src="/i18n/article.js?v=20261007-egypt-1"></script>
 <script src="/i18n/egypt.js?v=20261010-1"></script>
-<script src="/i18n/engine.js?v=3"></script>
-
-<script>
+<script src="/i18n/engine.js?v=3"></script><script>
 (function () {
 "use strict";
 
@@ -416,6 +414,8 @@ function normaliseLanguage(value){
 }
 
 function getSelectedLanguage(){
+  const current=window.PetsDogueLanguage?.getCurrentLanguage?.();
+  if(current?.code)return normaliseLanguage(current.code);
   try{
     return normaliseLanguage(localStorage.getItem(LANGUAGE_KEY)||"en");
   }catch(error){
@@ -439,236 +439,9 @@ function stopSpeech(){
   if(label&&bundle)label.textContent=bundle.ui.listen;
 }
 
-function setupGalleries(){
-  document.querySelectorAll(".egypt-gallery").forEach(function(gallery){
-    const track=gallery.querySelector(".egypt-track");
-    if(!track)return;
-
-    const slides=Array.from(track.children);
-    const previousButton=gallery.querySelector('button[data-step="-1"]');
-    const nextButton=gallery.querySelector('button[data-step="1"]');
-    const counter=gallery.querySelector(".egypt-count");
-
-    if(!slides.length)return;
-
-    let currentIndex=0;
-
-    function updateStatus(){
-      const firstOffset=slides[0].offsetLeft;
-      let nearestIndex=0;
-      let nearestDistance=Infinity;
-
-      slides.forEach(function(slide,index){
-        const distance=Math.abs(slide.offsetLeft-firstOffset-track.scrollLeft);
-
-        if(distance<nearestDistance){
-          nearestDistance=distance;
-          nearestIndex=index;
-        }
-      });
-
-      currentIndex=nearestIndex;
-
-      if(counter){
-        counter.textContent=(currentIndex+1)+" / "+slides.length;
-      }
-
-      if(previousButton){
-        previousButton.disabled=currentIndex===0;
-      }
-
-      if(nextButton){
-        nextButton.disabled=currentIndex===slides.length-1;
-      }
-    }
-
-    function moveSlide(step){
-      const targetIndex=Math.max(0,Math.min(slides.length-1,currentIndex+step));
-      const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      track.scrollTo({
-        left:slides[targetIndex].offsetLeft-slides[0].offsetLeft,
-        behavior:reduceMotion?"auto":"smooth"
-      });
-    }
-
-    if(previousButton){
-      previousButton.addEventListener("click",function(){moveSlide(-1)});
-    }
-
-    if(nextButton){
-      nextButton.addEventListener("click",function(){moveSlide(1)});
-    }
-
-    track.addEventListener("keydown",function(event){
-      if(event.key!=="ArrowRight"&&event.key!=="ArrowLeft")return;
-      event.preventDefault();
-      moveSlide(event.key==="ArrowRight"?1:-1);
-    });
-
-    track.addEventListener("scroll",updateStatus,{passive:true});
-    updateStatus();
-  });
-}
-
 function setMeta(selector,value){
   const element=document.querySelector(selector);
   if(element)element.setAttribute("content",value);
-}
-
-function styleEditorialBody(body){
-  const children=Array.from(body.children);
-  body.replaceChildren();
-
-  let chapter=null;
-  let prose=null;
-  let headingIndex=-1;
-  let paragraphCount=0;
-  let groupSize=0;
-
-  const colors={
-    2:"note",
-    3:"lemon",
-    4:"verdict",
-    5:"green",
-    6:"verdict",
-    7:"blue",
-    8:"lemon",
-    9:"green",
-    10:"blue",
-    11:"lemon",
-    12:"green",
-    13:"blue",
-    14:"green",
-    15:"lemon",
-    16:"blue",
-    17:"lemon",
-    19:"finale"
-  };
-
-  const extraPhotos={
-    0:["69918","69927"],
-    1:["71599","69945"],
-    3:["69243","69238","69226"],
-    5:["69215","69221"],
-    7:["71315"],
-    11:["cleomoray-generated"],
-    13:["egypt-dolphins-reef","egypt-dolphins-pair","egypt-dolphins-surface"],
-    16:["70110","70117"],
-    18:["69938","70674"]
-  };
-
-  function newChapter(index){
-    const section=document.createElement("section");
-    section.className="egypt-chapter";
-    section.dataset.chapter=String(index);
-
-    if(colors[index]){
-      section.classList.add("egypt-"+colors[index]);
-    }
-
-    body.appendChild(section);
-    prose=null;
-    paragraphCount=0;
-    groupSize=0;
-
-    return section;
-  }
-
-  function addPhotos(){
-    const photos=extraPhotos[headingIndex];
-    if(!photos)return;
-
-    const row=document.createElement("div");
-    row.className="egypt-inline-photos";
-
-    if(photos.length===1){
-      row.classList.add("egypt-single-photo");
-    }
-
-    photos.forEach(function(name){
-      const image=document.createElement("img");
-      image.src="/"+name+".jpg";
-      image.alt="";
-      image.loading="lazy";
-      image.decoding="async";
-      row.appendChild(image);
-    });
-
-    if(headingIndex===13){
-      row.classList.add("egypt-dolphin-photos");
-
-      const caption=document.createElement("p");
-      caption.className="egypt-generated-label";
-      caption.textContent=language==="ru"
-        ?"Дельфины · сгенерированные иллюстрации"
-        :"Dolphins · AI-generated illustrations";
-
-      row.appendChild(caption);
-    }
-
-    chapter.appendChild(row);
-    prose=null;
-    groupSize=0;
-  }
-
-  children.forEach(function(node){
-    if(node.matches(".egypt-panel, .egypt-subheading")){
-      headingIndex++;
-      chapter=newChapter(headingIndex);
-
-      if(node.matches(".egypt-panel")){
-        node.classList.add("egypt-split-panel");
-
-        if(headingIndex%2===1){
-          node.classList.add("egypt-image-right");
-        }
-
-        if(headingIndex===3){
-          node.classList.add("egypt-tamara-panel");
-          node.querySelector("img").src="/69232.jpg";
-        }
-
-        if(headingIndex===16){
-          node.classList.add("egypt-crab-panel");
-        }
-      }
-
-      chapter.appendChild(node);
-      return;
-    }
-
-    if(!chapter){
-      chapter=newChapter(-1);
-    }
-
-    if(node.matches(".egypt-paragraph")){
-      if(!prose||groupSize>=4){
-        prose=document.createElement("div");
-        prose.className="egypt-prose";
-        chapter.appendChild(prose);
-        groupSize=0;
-      }
-
-      prose.appendChild(node);
-      prose.appendChild(document.createTextNode(" "));
-
-      if(node.textContent.trim().length>180){
-        node.classList.add("egypt-long-paragraph");
-      }
-
-      groupSize++;
-      paragraphCount++;
-
-      if(paragraphCount===4){
-        addPhotos();
-      }
-    }else{
-      chapter.appendChild(node);
-      prose=null;
-      groupSize=0;
-    }
-  });
 }
 
 function styleEditorialBody(body){
@@ -833,9 +606,7 @@ function styleEditorialBody(body){
       row.classList.add("egypt-dolphin-photos");
       const label=document.createElement("p");
       label.className="egypt-generated-label";
-      label.textContent=russian
-        ?"Дельфины · сгенерированные иллюстрации"
-        :"Dolphins · AI-generated illustrations";
+      label.textContent=bundle.ui.dolphinsLabel;
       row.appendChild(label);
     }
     chapter.appendChild(row);
@@ -853,9 +624,7 @@ function styleEditorialBody(body){
         heading.textContent=translatedHeadings[headingIndex];
       }
       if(headingIndex===16){
-        heading.textContent=russian
-          ?"🦀 Краб явился на редакционную планёрку"
-          :"🦀 The crab has joined the editorial meeting";
+        heading.textContent=bundle.ui.crabHeading;
       }
       if(node.matches(".egypt-panel")){
         node.classList.remove("egypt-split-panel","egypt-image-right");
@@ -882,9 +651,7 @@ function styleEditorialBody(body){
 
     if(node.matches(".egypt-paragraph")){
       if(headingIndex===16){
-        const revised=russian
-          ?["Он уже здесь.","Мы встретили его на пляже Хула-Хула.","И теперь у него есть собственное место в нашей истории."]
-          :["He is here already.","We met him on Hula Hula Beach.","And now he has his own place in our story."];
+        const revised=bundle.ui.crabOpening;
         if(paragraphCount<3)node.textContent=revised[paragraphCount];
       }
 
@@ -937,7 +704,7 @@ function styleEditorialBody(body){
   const cover=document.querySelector(".egypt-cover>img");
   if(cover){
     cover.src="/72583.jpg";
-    cover.alt=russian?"Кот на прилавке в Хургаде":"A cat on a shop counter in Hurghada";
+    cover.alt=bundle.ui.catAlt;
   }
 }
 
@@ -1016,10 +783,12 @@ function renderArticle(){
   language=nextLanguage;
 
   const sharedUI=translations[language].ui||{};
+  const englishUI=translations.en?.stories?.egypt?.editorialUI||{};
 
   bundle={
     ...nextStory,
     ui:{
+      ...englishUI,
       listen:sharedUI.listen||"Listen",
       stop:sharedUI.stop||"Stop",
       back:sharedUI.backToArticles||"Articles",
@@ -1032,70 +801,59 @@ function renderArticle(){
   article.lang=language;
   article.dir=language==="ar"?"rtl":"ltr";
 
-    getElement("egyptTitle").textContent=
-    language==="ru"?"Другой Египет":"Another Egypt";
+  getElement("egyptTitle").textContent=
+    bundle.ui.shortTitle||bundle.title;
   getElement("egyptIntro").textContent=bundle.intro;
 
   body.innerHTML=bundle.body;
-        styleEditorialBody(body);
+  styleEditorialBody(body);
 
-    /* Фото Тамары: портрет вместо снимка за стеклом. */
-    body.querySelectorAll('img[src="/69226.jpg"]').forEach(function(image){
-      image.src="/69232.jpg";
-      image.alt=language==="ru"
-        ?"Тамара смотрит прямо в камеру"
-        :"Tamara looking straight at the camera";
-    });
+  body.querySelectorAll('img[src="/69226.jpg"]').forEach(function(image){
+    image.src="/69232.jpg";
+    image.alt=bundle.ui.tamaraAlt;
+  });
 
-    /* Кот с табличкой почти в начале статьи. */
-    {
-      const section=document.createElement("section");
-      section.className="egypt-chapter egypt-best-worker";
-
-      const photo=document.createElement("img");
-      photo.src="/72583.jpg";
-      photo.alt=language==="ru"
-        ?"Кот отдыхает на прилавке"
-        :"A cat resting on the shop counter";
-      photo.loading="lazy";
-      photo.decoding="async";
-      photo.style.cssText=
-        "display:block;width:100%;height:auto;border:0;border-radius:0;";
-
-      const plaque=document.createElement("p");
-      plaque.textContent=language==="ru"
-        ?"Лучший работник"
-        :"Best employee";
-      plaque.style.cssText=
-        "display:table;margin:12px auto 0;padding:10px 22px;"+
-        "background:#e6c477;color:#18251f;"+
-        "border:1px solid #b48b39;border-radius:3px;"+
-        "font:600 20px/1.2 Georgia,serif;text-align:center;"+
-        "text-shadow:none;";
-
-      section.append(photo,plaque);
-
-      /* Убираем повтор этого снимка из карусели. */
-      body.querySelectorAll('.egypt-slide img[src="/72583.jpg"]')
-        .forEach(function(image){
-          const gallery=image.closest(".egypt-gallery");
-          image.closest(".egypt-slide").remove();
-          if(gallery&&!gallery.querySelector(".egypt-slide")){
-            gallery.remove();
-          }
-        });
-
-      const firstChapter=body.querySelector(".egypt-chapter");
-      if(firstChapter){
-        firstChapter.after(section);
-      }else{
-        body.prepend(section);
-      }
-    }
-
-  /* Семь выбранных фактов в середине статьи. */
   {
-    const ru=language==="ru";
+    const section=document.createElement("section");
+    section.className="egypt-chapter egypt-best-worker";
+
+    const photo=document.createElement("img");
+    photo.src="/72583.jpg";
+    photo.alt=bundle.ui.catAlt;
+    photo.loading="lazy";
+    photo.decoding="async";
+    photo.style.cssText=
+      "display:block;width:100%;height:auto;border:0;border-radius:0;";
+
+    const plaque=document.createElement("p");
+    plaque.textContent=bundle.ui.bestWorker;
+    plaque.style.cssText=
+      "display:table;margin:12px auto 0;padding:10px 22px;"+
+      "background:#e6c477;color:#18251f;"+
+      "border:1px solid #b48b39;border-radius:3px;"+
+      "font:600 20px/1.2 Georgia,serif;text-align:center;"+
+      "text-shadow:none;";
+
+    section.append(photo,plaque);
+
+    body.querySelectorAll('.egypt-slide img[src="/72583.jpg"]')
+      .forEach(function(image){
+        const gallery=image.closest(".egypt-gallery");
+        image.closest(".egypt-slide").remove();
+        if(gallery&&!gallery.querySelector(".egypt-slide")){
+          gallery.remove();
+        }
+      });
+
+    const firstChapter=body.querySelector(".egypt-chapter");
+    if(firstChapter){
+      firstChapter.after(section);
+    }else{
+      body.prepend(section);
+    }
+  }
+
+  {
     const oldFacts=body.querySelector(".egypt-facts");
 
     const section=oldFacts
@@ -1107,84 +865,10 @@ function renderArticle(){
 
     const heading=document.createElement("h2");
     heading.className="egypt-subheading";
-    heading.textContent=ru
-      ?"Семь фактов о живом Египте"
-      :"Seven facts about living Egypt";
+    heading.textContent=bundle.ui.factsTitle;
     section.appendChild(heading);
 
-    const facts=ru?[
-      [
-        "У дельфинов есть свой «уход за кожей».",
-        "У Хургады дельфины трутся о определённые кораллы и губки. Исследователи предполагают, что их вещества помогают ухаживать за кожей.",
-        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9236899/"
-      ],
-      [
-        "У черепах есть «фотопаспорта».",
-        "В египетском Красном море отдельных черепах узнают по рисунку чешуек на голове — и собирают историю встреч с ними.",
-        "https://turtlewatchegypt.net/"
-      ],
-      [
-        "Дельфинов узнают по плавнику.",
-        "Шрамы и выемки на спинном плавнике помогают исследователям Хургады отличать одну особь от другой без установки меток.",
-        "https://www.dolphinwatchalliance.org/en/our-mission/dolphin-watch-research/photo-identification"
-      ],
-      [
-        "В море есть пастбища для морских коров.",
-        "Дюгони кормятся морской травой. Бухта Абу-Даббаб славится обширными подводными лугами, подходящими для этих животных.",
-        "https://www.hepca.org/projects/conservation/red-sea-dugongs"
-      ],
-      [
-        "Дайвер может помочь изучать черепах.",
-        "Проект TurtleWatch собирает наблюдения дайверов и любителей снорклинга, чтобы лучше знать, где встречаются морские черепахи.",
-        "https://www.hepca.org/projects/conservation/turtlewatch"
-      ],
-      [
-        "Можно стать опекуном животного на расстоянии.",
-        "Египетский приют S.P.A.R.E. предлагает поддерживать кошек, собак и ослов, даже если вы не можете забрать их домой.",
-        "https://sparelives.org/index.pl/adopt_or_sponsor"
-      ],
-      [
-        "Египетская мау умеет «щебетать».",
-        "Эти пятнистые домашние кошки могут приветствовать своих людей тихими мелодичными трелями и щебечущими звуками.",
-        "https://cfa.org/breed/egyptian-mau/"
-      ]
-    ]:[
-      [
-        "Dolphins have their own “skin-care routine”.",
-        "Near Hurghada, dolphins rub against selected corals and sponges. Researchers suggest their compounds may help care for the dolphins’ skin.",
-        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9236899/"
-      ],
-      [
-        "Turtles have “photo passports”.",
-        "In the Egyptian Red Sea, individual turtles are recognised by their facial scale patterns, allowing researchers to record repeated encounters.",
-        "https://turtlewatchegypt.net/"
-      ],
-      [
-        "Dolphins are recognised by their fins.",
-        "Scars and notches on dorsal fins help Hurghada researchers distinguish individual dolphins without attaching tags.",
-        "https://www.dolphinwatchalliance.org/en/our-mission/dolphin-watch-research/photo-identification"
-      ],
-      [
-        "The sea has pastures for sea cows.",
-        "Dugongs feed on seagrass. Abu Dabbab Bay has extensive underwater meadows that provide suitable habitat for these animals.",
-        "https://www.hepca.org/projects/conservation/red-sea-dugongs"
-      ],
-      [
-        "Divers can help study turtles.",
-        "TurtleWatch collects observations from divers and snorkelers to better understand where sea turtles occur.",
-        "https://www.hepca.org/projects/conservation/turtlewatch"
-      ],
-      [
-        "You can sponsor an animal from afar.",
-        "Egypt’s S.P.A.R.E. shelter offers sponsorship for cats, dogs and donkeys, even if you cannot take an animal home.",
-        "https://sparelives.org/index.pl/adopt_or_sponsor"
-      ],
-      [
-        "Egyptian Maus can “chirp”.",
-        "These spotted domestic cats may greet their people with soft, melodious trills and chirping sounds.",
-        "https://cfa.org/breed/egyptian-mau/"
-      ]
-    ];
+    const facts=bundle.ui.facts;
 
     const list=document.createElement("div");
     list.className="egypt-facts";
@@ -1206,7 +890,7 @@ function renderArticle(){
       source.href=item[2];
       source.target="_blank";
       source.rel="noopener noreferrer";
-      source.textContent=ru?"Источник":"Source";
+      source.textContent=bundle.ui.source;
       source.style.cssText=
         "display:inline-block;font:12px/1.5 Arial,sans-serif;"+
         "color:#fff;margin-top:5px;text-underline-offset:3px";
@@ -1221,58 +905,15 @@ function renderArticle(){
     photo.style.cssText="margin:18px 0 0;border:0";
 
     const image=document.createElement("img");
-    image.src=
-      "https://upload.wikimedia.org/wikipedia/commons/"+
-      "f/f4/A_Silver_Egyptian_Mau_named_%27Roxie%27.JPG";
-    image.alt=ru
-      ?"Серебристая египетская мау по имени Рокси"
-      :"A silver Egyptian Mau named Roxie";
+    image.src="/egypt-mau-full.jpg";
+    image.alt=bundle.ui.mauAlt;
     image.loading="lazy";
     image.decoding="async";
-    image.width=4000;
-    image.height=3000;
-    image.style.cssText=
-      "display:block;width:100%;height:auto;"+
-      "border:0;border-radius:0";
-
-    const credit=document.createElement("figcaption");
-    credit.style.cssText=
-      "padding:8px 0;font:12px/1.5 Arial,sans-serif;"+
-      "color:#fff;background:transparent";
-
-    credit.appendChild(document.createTextNode(
-      ru?"Египетская мау · Фото: ":"Egyptian Mau · Photo: "
-    ));
-
-    const author=document.createElement("a");
-    author.href=
-      "https://commons.wikimedia.org/wiki/"+
-      "File:A_Silver_Egyptian_Mau_named_%27Roxie%27.JPG";
-    author.textContent="Drhesslen / Wikimedia Commons";
-    author.target="_blank";
-    author.rel="noopener noreferrer";
-
-    const licence=document.createElement("a");
-    licence.href="https://creativecommons.org/licenses/by-sa/3.0/";
-    licence.textContent="CC BY-SA 3.0";
-    licence.target="_blank";
-    licence.rel="noopener noreferrer";
-
-    credit.append(
-      author,
-      document.createTextNode(" · "),
-      licence
-    );
-
-        image.src="/egypt-mau-full.jpg";
-    image.alt=ru
-      ?"Египетская мау в полный рост"
-      :"Full body Egyptian Mau";
     image.width=1024;
     image.height=1536;
+    image.style.cssText="display:block;width:100%;height:auto;border:0;border-radius:0";
 
     photo.appendChild(image);
-        /* Фото становится частью седьмого факта. */
     const mauFact=list.lastElementChild;
 
     if(mauFact){
@@ -1289,15 +930,11 @@ function renderArticle(){
 
       const mauTitle=document.createElement("h3");
       mauTitle.className="egypt-mau-title";
-      mauTitle.textContent=ru
-        ?"07 — Египетская мау"
-        :"07 — Egyptian Mau";
+      mauTitle.textContent="07 — "+bundle.ui.mauTitle;
 
       const mauText=document.createElement("p");
       mauText.className="egypt-mau-text";
-      mauText.textContent=ru
-        ?"Мау умеет «щебетать»: приветствовать своих людей тихими мелодичными трелями."
-        :"Maus can “chirp”, greeting their people with soft, melodious trills.";
+      mauText.textContent=bundle.ui.mauText;
 
       photo.append(mauTitle,mauText);
 
@@ -1384,7 +1021,7 @@ function toggleSpeech(){
   const nodes=[
     getElement("egyptTitle"),
     getElement("egyptIntro"),
-    ...getElement("egyptBody").querySelectorAll(".egypt-paragraph, h2")
+    ...getElement("egyptBody").querySelectorAll(".egypt-paragraph, h2, .egypt-mau-title, .egypt-mau-text")
   ];
 
   const chunks=nodes.filter(Boolean)
@@ -1481,12 +1118,10 @@ if(document.readyState==="loading"){
 }
 
 })();
-</script>
-
-<script src="/pets-dogue-shell.js?v=20260906-articles-seo-1"></script>
+</script><script src="/pets-dogue-shell.js?v=20260906-articles-seo-1"></script>
 
 <style>
-  /* Обложка: заголовок сверху, кот целиком, описание снизу. */
+/* Обложка: заголовок сверху, кот целиком, описание снизу. */
 #egyptArticle .egypt-cover{
   display:flex !important;
   flex-direction:column;
@@ -1545,7 +1180,7 @@ if(document.readyState==="loading"){
   font:16px/1.55 Arial,sans-serif;
   text-shadow:0 2px 5px rgba(0,25,38,.8);
 }
-  /* Алый текст семи фактов без подложек. */
+
 #egyptBody .egypt-selected-facts .egypt-subheading,
 #egyptBody .egypt-selected-facts .egypt-fact,
 #egyptBody .egypt-selected-facts .egypt-paragraph{
@@ -1567,8 +1202,8 @@ if(document.readyState==="loading"){
   border:0;
   border-radius:0;
 }
-#egyptArticle{
-  /* Красные заголовки, белый текст, салатовые рамки. */
+
+/* Красные заголовки, белый текст, салатовые рамки. */
 #egyptBody .egypt-selected-facts .egypt-facts{
   gap:16px;
 }
@@ -1636,6 +1271,8 @@ if(document.readyState==="loading"){
 #egyptBody .egypt-selected-facts .egypt-mau-fact>a{
   margin:8px 12px 10px !important;
 }
+
+#egyptArticle{
   position:relative;
   isolation:isolate;
   background:transparent !important;
@@ -1717,7 +1354,6 @@ if(document.readyState==="loading"){
   );
 }
 
-/* Фон находится в статье и прокручивается вместе с ней. */
 #egyptBody{
   position:relative;
   background:transparent !important;
@@ -1798,7 +1434,6 @@ if(document.readyState==="loading"){
   display:none !important;
 }
 
-/* Чёрное окончание начинается после песчаного дна. */
 #egyptBody .egypt-finale{
   position:relative;
   background:#080808 !important;
@@ -1866,7 +1501,6 @@ if(document.readyState==="loading"){
 
   article.prepend(scene);
 
-    /* Маленькие рыбки, плавающие в обе стороны. */
   const motion=window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   );
@@ -1885,7 +1519,6 @@ if(document.readyState==="loading"){
   document.body.appendChild(fishLayer);
 
   const fishPictures=[
-    /* Рыба-клоун. */
     `<svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 58">
       <path d="M27 28 L5 10 Q0 29 5 47 Z"
@@ -1908,7 +1541,6 @@ if(document.readyState==="loading"){
       <circle cx="83" cy="24" r="2.5" fill="#142531"/>
     </svg>`,
 
-    /* Синий хирург с жёлтым хвостом. */
     `<svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 58">
       <path d="M30 29 L5 10 Q0 29 5 48 Z"
@@ -1977,7 +1609,6 @@ if(document.readyState==="loading"){
       transform:leftToRight?"none":"scaleX(-1)"
     });
 
-        /* Первый элемент каждого SVG — хвост рыбки. */
     const tail=picture.querySelector("svg > path");
 
     if(tail){
@@ -2074,7 +1705,6 @@ if(document.readyState==="loading"){
       body.querySelectorAll(".egypt-chapter")
     );
 
-    /* Последний раздел статьи — отдельное чёрное окончание. */
     let finale=body.querySelector(".egypt-finale");
 
     if(!finale&&chapters.length){
