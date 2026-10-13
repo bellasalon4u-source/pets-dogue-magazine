@@ -53,6 +53,8 @@ document.querySelectorAll(".scene").forEach(button=>button.addEventListener("cli
 document.addEventListener("keydown",event=>{if(!$("modal").classList.contains("open"))return;if(event.key==="Escape")closeProfile();if(event.key==="Tab"){const nodes=[...$("modal").querySelectorAll('button,a[href],[tabindex="0"]')].filter(n=>n.getClientRects().length);if(!nodes.length)return;const first=nodes[0],last=nodes.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}});
 document.addEventListener("DOMContentLoaded",()=>{refreshDynamic();loadCandidates();new MutationObserver(()=>{window.speechSynthesis?.cancel();refreshDynamic();}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});});
 window.addEventListener("pagehide",()=>window.speechSynthesis?.cancel());
+</script>
 <script src="/pets-dogue-shell.js?v=20260910-unified-menu-1"></script>
 <script src="/cover-stars-layout.js?v=20261012-1"></script>
-</body></html>
+</body>
+</html>
