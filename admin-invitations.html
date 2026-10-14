@@ -1,0 +1,135 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>Приглашения | PETS & DOGUE</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f0e7;color:#171717;font:16px Arial,sans-serif}header{background:#080808;color:#e2c77e;padding:20px}header a{color:#fff;font-size:15px}main{max-width:950px;margin:auto;padding:20px}h1,h2{font-family:Georgia,serif}section,article{background:white;border:1px solid #c9b77f;padding:20px;margin:16px 0}label{display:block;margin:14px 0 5px}input,select,textarea,button{font:inherit;padding:12px;border:1px solid #aaa;border-radius:8px;width:100%}button{cursor:pointer;background:#111;color:white;margin:8px 0}button:disabled{opacity:.5;cursor:default}.green{background:#65e619;color:#111}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.actions{display:flex;gap:8px}.actions button{width:auto}.warning{padding:14px;border:1px solid #d79d31;background:#fff4d8;line-height:1.5}[hidden]{display:none!important}#message{min-height:24px;white-space:pre-wrap}article h3{margin:0 0 12px}article p{overflow-wrap:anywhere}a{color:inherit}@media(max-width:550px){.grid{grid-template-columns:1fr}main{padding:12px}.actions{flex-wrap:wrap}}</style></head><body>
+<header><strong>PETS & DOGUE</strong> · ADMIN <a href="/admin.html">← Admin</a></header><main>
+<select id="language" aria-label="Language"></select><h1 id="heading"></h1><p class="warning" id="warning"></p>
+<section id="login"><label id="keyLabel" for="key"></label><input id="key" type="password" autocomplete="off" maxlength="1000"><button id="connect"></button></section>
+<div id="workspace" hidden><button id="logout"></button><section><h2 id="createTitle"></h2><form id="form">
+<label id="titleLabel" for="title"></label><input id="title" required maxlength="120">
+<div class="grid"><div><label id="typeLabel" for="kind"></label><select id="kind"><option value="cover_star" id="coverOption"></option><option value="club_year" id="giftOption"></option></select></div><div><label id="daysLabel" for="days"></label><input id="days" type="number" min="1" max="365" value="30" required></div></div>
+<div id="contestField"><label id="contestLabel" for="contest"></label><input id="contest" value="cover-star-2026" required pattern="[a-z0-9][a-z0-9_-]{0,99}" maxlength="100"></div>
+<label id="noteLabel" for="note"></label><textarea id="note" maxlength="1000"></textarea><button class="green" id="create" type="submit"></button>
+</form></section><button id="refresh"></button><div id="list"></div></div><p id="message" role="status" aria-live="polite"></p></main>
+<script>
+"use strict";
+const D={
+en:["Invitations & gifts","Administrator key","Connect","Sign out","Create invitation","Title / recipient","Type","Cover Star entry","Annual Club gift","Valid for days","Contest ID","Private note","Create link","Refresh","Copy","Disable","Unused","Used","Disabled","Expired"],
+ru:["Приглашения и подарки","Ключ администратора","Войти","Выйти","Создать приглашение","Название / получатель","Тип","Участие в Cover Star","Годовой клуб в подарок","Срок в днях","Код конкурса","Личная заметка","Создать ссылку","Обновить","Копировать","Отключить","Не использована","Использована","Отключена","Истекла"],
+uk:["Запрошення та подарунки","Ключ адміністратора","Увійти","Вийти","Створити запрошення","Назва / одержувач","Тип","Участь у Cover Star","Річний клуб у подарунок","Строк у днях","Код конкурсу","Особиста нотатка","Створити посилання","Оновити","Копіювати","Вимкнути","Не використано","Використано","Вимкнено","Строк минув"]
+};
+const warningText={
+en:"Link creation is connected. Application submission and annual gift activation are not connected yet. Do not send these links to recipients yet.",
+ru:"Создание ссылок подключено. Отправка анкеты и активация годового подарка ещё не подключены. Пока не отправляйте ссылки получателям.",
+uk:"Створення посилань підключено. Надсилання анкети та активація річного подарунка ще не підключені. Поки не надсилайте посилання одержувачам."
+};
+const $=id=>document.getElementById(id);
+let adminKey="",items=[],busy=false,lang="ru";
+function t(i){return (D[lang]||D.en)[i];}
+function translate(){
+document.documentElement.lang=lang;
+$("warning").textContent=warningText[lang]||warningText.en;
+const ids=["heading","keyLabel","connect","logout","createTitle","titleLabel","typeLabel","coverOption","giftOption","daysLabel","contestLabel","noteLabel","create","refresh"];
+ids.forEach((id,i)=>$(id).textContent=t(i));render();
+}
+function message(v){$("message").textContent=v;}
+async function api(body){
+const r=await fetch("/api/admin-invitations",{
+method:"POST",
+headers:{"Content-Type":"application/json","x-pets-dogue-admin-key":adminKey},
+body:JSON.stringify(body),cache:"no-store"
+});
+const data=await r.json();
+if(!r.ok||!data.ok)throw Error(data.code||"REQUEST_FAILED");
+return data;
+}
+async function refresh(){
+const d=await api({action:"list"});
+items=d.invitations;render();
+}
+async function task(fn){
+if(busy)return;busy=true;
+document.querySelectorAll("button").forEach(b=>b.disabled=true);
+message("");
+try{await fn();}
+catch(e){
+message(e.message==="UNAUTHORIZED"?
+(lang==="ru"?"Неверный ключ администратора.":"Invalid administrator key."):
+e.message==="NOT_CONFIGURED"?
+(lang==="ru"?"В Vercel не настроены ключ администратора или Supabase.":"Administrator or Supabase configuration is missing."):
+e.message);
+}
+finally{
+busy=false;
+document.querySelectorAll("button").forEach(b=>b.disabled=false);
+render();
+}
+}
+function render(){
+const root=$("list");root.replaceChildren();
+for(const row of items){
+const card=document.createElement("article");
+const title=document.createElement("h3");
+const detail=document.createElement("p");
+const note=document.createElement("p");
+const actions=document.createElement("div");
+title.textContent=row.title;
+detail.textContent=(row.kind==="cover_star"?t(7):t(8))+" · "+
+t({available:16,used:17,revoked:18,expired:19}[row.status]??19)+" · "+
+new Date(row.expiresAt).toLocaleDateString(lang);
+note.textContent=row.note;actions.className="actions";
+const copy=document.createElement("button");
+copy.textContent=t(14);copy.disabled=busy||!row.link;
+copy.onclick=()=>task(async()=>{
+try{
+await navigator.clipboard.writeText(row.link);
+message(lang==="ru"?"Ссылка скопирована.":"Link copied.");
+}catch{
+const field=document.createElement("textarea");
+field.value=row.link;field.readOnly=true;card.append(field);
+field.focus();field.select();
+message(lang==="ru"?"Скопируйте выделенную ссылку.":"Copy the selected link.");
+}
+});
+const revoke=document.createElement("button");
+revoke.textContent=t(15);
+revoke.disabled=busy||row.status!=="available";
+revoke.onclick=()=>{
+if(confirm(t(15)+"?"))task(async()=>{
+await api({action:"revoke",id:row.id});await refresh();
+});
+};
+actions.append(copy,revoke);
+card.append(title,detail,note,actions);root.append(card);
+}
+}
+$("connect").onclick=()=>task(async()=>{
+adminKey=$("key").value.trim();await refresh();
+$("key").value="";$("login").hidden=true;
+$("workspace").hidden=false;
+});
+$("logout").onclick=()=>{
+adminKey="";items=[];$("key").value="";
+$("workspace").hidden=true;$("login").hidden=false;
+render();message("");
+};
+$("refresh").onclick=()=>task(refresh);
+$("kind").onchange=()=>{
+$("contestField").hidden=$("kind").value!=="cover_star";
+$("contest").required=$("kind").value==="cover_star";
+};
+$("form").onsubmit=e=>{
+e.preventDefault();task(async()=>{
+await api({
+action:"create",title:$("title").value,kind:$("kind").value,
+days:Number($("days").value),contestKey:$("contest").value,
+note:$("note").value
+});
+$("title").value="";$("note").value="";await refresh();
+});
+};
+for(const [code,label] of [["ru","Русский"],["uk","Українська"],["en","English"]]){
+const o=document.createElement("option");
+o.value=code;o.textContent=label;$("language").append(o);
+}
+$("language").value=lang;
+$("language").onchange=()=>{lang=$("language").value;translate();};
+translate();
+</script></body></html>
