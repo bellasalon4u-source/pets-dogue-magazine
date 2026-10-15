@@ -2478,7 +2478,7 @@ function render() {
   if (hero) {
     hero.innerHTML = `
       <img
-        src="hero-main.jpg"
+        src="cover-star/cover-miso-luxury.png"
         alt="PETS & DOGUE — One world. Every pet."
       />
 
