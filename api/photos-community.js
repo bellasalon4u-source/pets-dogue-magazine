@@ -17,20 +17,27 @@ module.exports = async function handler(req, res) {
   }
 
   const headers = { apikey: key };
+
   if (key.startsWith('eyJ')) {
     headers.Authorization = `Bearer ${key}`;
   }
 
   const read = async (table, params) => {
-    const response = await fetch(
-      `${base}/rest/v1/${table}?${params}`,
-      { headers, signal: AbortSignal.timeout(15000) }
-    );
+    const response = await fetch(`${base}/rest/v1/${table}?${params}`, {
+      headers,
+      signal: AbortSignal.timeout(15000)
+    });
 
-    if (!response.ok) throw new Error('database_error');
+    if (!response.ok) {
+      throw new Error('database_error');
+    }
 
     const data = await response.json();
-    if (!Array.isArray(data)) throw new Error('invalid_response');
+
+    if (!Array.isArray(data)) {
+      throw new Error('invalid_response');
+    }
+
     return data;
   };
 
@@ -38,15 +45,12 @@ module.exports = async function handler(req, res) {
     const mode = req.query.mode || 'community';
 
     if (mode === 'issues') {
-      const issues = await read(
-        'pd_photo_issues',
-        new URLSearchParams({
-          select: 'id,number,cover_url',
-          published: 'eq.true',
-          order: 'number.desc',
-          limit: '200'
-        })
-      );
+      const issues = await read('pd_photo_issues', new URLSearchParams({
+        select: 'id,number,cover_url',
+        published: 'eq.true',
+        order: 'number.desc',
+        limit: '200'
+      }));
 
       return send(res, 200, { issues });
     }
@@ -62,7 +66,7 @@ module.exports = async function handler(req, res) {
     }
 
     const params = new URLSearchParams({
-      select: 'id,image_url,created_at',
+      select: 'id,image_url,created_at,media_type',
       status: 'eq.approved',
       source: `eq.${mode}`,
       order: 'created_at.desc,id.desc',
@@ -104,6 +108,8 @@ module.exports = async function handler(req, res) {
       hasMore: rows.length > 30
     });
   } catch {
-    return send(res, 502, { error: 'temporarily_unavailable' });
+    return send(res, 502, {
+      error: 'temporarily_unavailable'
+    });
   }
 };
