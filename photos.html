@@ -4357,6 +4357,354 @@ refreshPhotoLanguage();
 
 <script src="/pets-dogue-shell.js?v=20260906-photos-seo-1"></script>
 <script src="/photos-community-layout.js?v=20261016-review-2"></script>
+<script>
+/* PETS & DOGUE — compact photo page */
+(() => {
+'use strict';
 
+function setupCompact() {
+const copy = {
+en:["Add a photo or video of your pet","Photos from magazine issues","Uploaded. Your photo or video is awaiting review.","Done"],
+uk:["Додай фото або відео свого улюбленця","Фото випусків журналу","Завантажено. Фото або відео на перевірці.","Готово"],
+ru:["Добавь фото или видео своего питомца","Фото выпусков журнала","Загружено. Фото или видео на проверке.","Готово"],
+fr:["Ajoutez une photo ou vidéo de votre animal","Photos des numéros du magazine","Envoi réussi. Votre photo ou vidéo attend une vérification.","Terminé"],
+de:["Füge ein Foto oder Video deines Tieres hinzu","Fotos der Magazinausgaben","Hochgeladen. Dein Foto oder Video wartet auf Prüfung.","Fertig"],
+es:["Añade una foto o vídeo de tu mascota","Fotos de los números de la revista","Archivo subido. Tu foto o vídeo está pendiente de revisión.","Listo"],
+it:["Aggiungi una foto o un video del tuo animale","Foto dei numeri della rivista","Caricato. La foto o il video è in attesa di verifica.","Fatto"],
+pt:["Adiciona uma foto ou vídeo do teu animal","Fotos das edições da revista","Enviado. A foto ou vídeo aguarda revisão.","Concluído"],
+nl:["Voeg een foto of video van je huisdier toe","Foto’s uit de tijdschriftnummers","Geüpload. Je foto of video wacht op beoordeling.","Klaar"],
+pl:["Dodaj zdjęcie lub film swojego zwierzaka","Zdjęcia z numerów magazynu","Przesłano. Zdjęcie lub film czeka na sprawdzenie.","Gotowe"],
+cs:["Přidejte fotku nebo video svého mazlíčka","Fotky z vydání časopisu","Nahráno. Fotka nebo video čeká na kontrolu.","Hotovo"],
+sk:["Pridajte fotku alebo video svojho miláčika","Fotky z vydaní časopisu","Nahrané. Fotka alebo video čaká na kontrolu.","Hotovo"],
+hu:["Tölts fel fotót vagy videót a kedvencedről","Fotók a magazin lapszámaiból","Feltöltve. A fotó vagy videó ellenőrzésre vár.","Kész"],
+ro:["Adaugă o fotografie sau un video cu animalul tău","Fotografii din numerele revistei","Încărcat. Fotografia sau videoclipul așteaptă verificarea.","Gata"],
+bg:["Добави снимка или видео на любимеца си","Снимки от броевете на списанието","Качено. Снимката или видеото чака проверка.","Готово"],
+el:["Πρόσθεσε φωτογραφία ή βίντεο του κατοικιδίου σου","Φωτογραφίες από τα τεύχη του περιοδικού","Μεταφορτώθηκε. Η φωτογραφία ή το βίντεο αναμένει έλεγχο.","Έτοιμο"],
+sv:["Lägg till ett foto eller en video av ditt djur","Foton från tidningens nummer","Uppladdat. Fotot eller videon väntar på granskning.","Klart"],
+da:["Tilføj et foto eller en video af dit kæledyr","Fotos fra magasinets numre","Uploadet. Fotoet eller videoen afventer kontrol.","Færdig"],
+no:["Legg til et bilde eller en video av kjæledyret ditt","Bilder fra magasinets utgaver","Lastet opp. Bildet eller videoen venter på kontroll.","Ferdig"],
+fi:["Lisää lemmikkisi kuva tai video","Kuvia lehden numeroista","Ladattu. Kuva tai video odottaa tarkistusta.","Valmis"],
+tr:["Evcil hayvanının fotoğrafını veya videosunu ekle","Dergi sayılarından fotoğraflar","Yüklendi. Fotoğraf veya video inceleme bekliyor.","Tamam"],
+ar:["أضف صورة أو فيديو لحيوانك الأليف","صور أعداد المجلة","تم الرفع. الصورة أو الفيديو بانتظار المراجعة.","تم"],
+hi:["अपने पालतू की फ़ोटो या वीडियो जोड़ें","पत्रिका के अंकों की तस्वीरें","अपलोड हो गया। फ़ोटो या वीडियो समीक्षा की प्रतीक्षा में है।","पूरा हुआ"]
+};
+
+const aliases = {ua:'uk',cz:'cs',gr:'el',se:'sv',dk:'da'};
+const dictionary = window.PDPhotoTexts;
+if (!dictionary) return;
+
+for (const code of Object.keys(copy)) {
+  if (!dictionary[code]) continue;
+  dictionary[code][0] = copy[code][0];
+  dictionary[code][2] = copy[code][1];
+  dictionary[code][14] = copy[code][2];
+}
+
+function locale() {
+  let code = 'en';
+  try {
+    code = typeof getPhotoLanguage === 'function'
+      ? getPhotoLanguage()
+      : document.documentElement.lang;
+  } catch {}
+  code = String(code || 'en').toLowerCase().split('-')[0];
+  return aliases[code] || code;
+}
+
+const root = document.getElementById('pcPhotos');
+if (!root) return;
+
+const banner = root.querySelector('.pc-banner');
+const magazine = root.querySelector('.pc-magazine');
+const tools = root.querySelector('.pc-tools');
+
+const upload = document.querySelector(
+  'dialog.pc-dialog:not(.pc-viewer) .pc-upload'
+)?.closest('dialog');
+
+if (!banner || !magazine || !tools || !upload) return;
+
+const cards = document.createElement('div');
+cards.className = 'pc-launch-cards';
+
+root.insertBefore(cards, banner);
+cards.append(banner, magazine);
+root.insertBefore(tools, cards);
+
+const rules = document.createElement('p');
+rules.className = 'pc-front-rules';
+cards.after(rules);
+
+const plus = banner.querySelector('.pc-button');
+
+banner.tabIndex = 0;
+banner.setAttribute('role', 'button');
+
+banner.addEventListener('click', event => {
+  if (!event.target.closest('button')) plus.click();
+});
+
+banner.addEventListener('keydown', event => {
+  if (
+    event.target === banner &&
+    ['Enter', ' '].includes(event.key)
+  ) {
+    event.preventDefault();
+    plus.click();
+  }
+});
+
+const speaker = tools.querySelector('[data-pc-text="18"]');
+
+if (speaker) {
+  delete speaker.dataset.pcText;
+  speaker.classList.add('pc-icon-sound');
+  speaker.textContent = '🔊';
+
+  speaker.addEventListener('click', event => {
+    if (window.speechSynthesis?.speaking) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.speechSynthesis.cancel();
+    }
+  }, true);
+}
+
+tools.querySelector('[data-pc-text="26"]')?.remove();
+upload.querySelector('[data-pc-text="11"]')?.remove();
+
+const publish = upload.querySelector('.pc-upload');
+const status = upload.querySelector('.pc-status');
+
+publish.addEventListener('click', event => {
+  if (publish.dataset.pcComplete === 'true') {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    upload.close();
+  }
+}, true);
+
+const style = document.createElement('style');
+
+style.textContent = `
+#pcPhotos .pc-launch-cards{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:10px;
+  align-items:stretch;
+}
+#pcPhotos .pc-launch-cards>.pc-banner,
+#pcPhotos .pc-launch-cards>.pc-magazine{
+  position:relative;
+  display:flex!important;
+  flex-direction:column;
+  aspect-ratio:1/1;
+  width:100%;
+  min-width:0;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  text-align:start;
+}
+#pcPhotos .pc-launch-cards>.pc-banner{
+  background:#d80d23;
+}
+#pcPhotos .pc-launch-cards>.pc-magazine{
+  background:#151515;
+  color:#f1d989;
+}
+#pcPhotos .pc-launch-cards>.pc-banner>img,
+#pcPhotos .pc-launch-cards>.pc-magazine>img{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  margin:0;
+}
+#pcPhotos .pc-launch-cards>.pc-magazine>img{
+  object-fit:contain;
+  object-position:center top;
+}
+#pcPhotos .pc-banner-text{
+  position:relative;
+  margin-top:auto;
+  z-index:1;
+  display:block;
+  width:100%;
+  padding:9px 10px;
+  background:#d80d23;
+}
+#pcPhotos .pc-banner h1{
+  font:700 clamp(13px,3.5vw,23px)/1.2 Arial,sans-serif;
+  margin:0;
+  color:#fff;
+}
+#pcPhotos .pc-banner p{
+  font:400 clamp(10px,2.5vw,13px)/1.3 Arial,sans-serif;
+  margin:5px 0 0;
+  color:#fff;
+}
+#pcPhotos .pc-banner .pc-button{
+  display:none!important;
+}
+#pcPhotos .pc-launch-cards>.pc-magazine>[data-pc-text="2"]{
+  position:relative;
+  z-index:1;
+  margin-top:auto;
+  width:100%;
+  padding:10px;
+  background:#111e;
+  font:700 clamp(14px,3.6vw,24px)/1.2 Georgia,serif;
+}
+#pcPhotos .pc-launch-cards>.pc-magazine>span:last-child:not([data-pc-text]){
+  display:none;
+}
+#pcPhotos .pc-front-rules{
+  font:400 12px/1.5 Arial,sans-serif;
+  color:#62605a;
+  margin:10px 1px 15px;
+}
+#pcPhotos>.pc-tools{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 8px;
+  min-height:32px;
+}
+#pcPhotos>.pc-tools .pc-button{
+  min-height:32px;
+  padding:5px 10px;
+  font:600 13px/1.4 Arial,sans-serif;
+  border:0;
+  background:transparent;
+  color:#333;
+}
+#pcPhotos>.pc-tools .pc-icon-sound{
+  margin-inline-start:auto;
+  width:34px;
+  height:34px;
+  padding:4px;
+  font-size:21px;
+  background:transparent;
+  border:0;
+}
+#pcPhotos .pc-launch-cards>[role="button"]:focus-visible{
+  outline:3px solid #0783ff;
+  outline-offset:3px;
+}
+#pcPhotos>.pc-heading{
+  font-size:clamp(24px,5vw,38px);
+  margin:14px 0 12px;
+}
+dialog.pc-dialog .pc-upload.pc-complete{
+  background:#147b43!important;
+  border-color:#147b43!important;
+  color:#fff!important;
+  opacity:1!important;
+  cursor:pointer;
+}
+dialog.pc-dialog .pc-status.pc-success{
+  padding:12px;
+  border-radius:9px;
+  background:#e4f5e9;
+  color:#126b38;
+  font-weight:700;
+}
+@media(min-width:760px){
+  #pcPhotos .pc-launch-cards{gap:16px}
+  #pcPhotos .pc-launch-cards>.pc-banner,
+  #pcPhotos .pc-launch-cards>.pc-magazine{
+    aspect-ratio:1.5/1;
+  }
+  #pcPhotos .pc-banner-text{padding:16px}
+  #pcPhotos .pc-front-rules{font-size:13px}
+}
+`;
+
+document.head.append(style);
+
+const observer = new MutationObserver(apply);
+
+function observe() {
+  observer.observe(root, {
+    childList:true,
+    subtree:true
+  });
+
+  observer.observe(upload, {
+    childList:true,
+    subtree:true
+  });
+
+  observer.observe(document.documentElement, {
+    attributes:true,
+    attributeFilter:['lang','dir']
+  });
+}
+
+function text(node, value) {
+  if (node && node.textContent !== value) {
+    node.textContent = value;
+  }
+}
+
+function apply() {
+  observer.disconnect();
+
+  try {
+    const code = locale();
+    const words = copy[code] || copy.en;
+    const strings = dictionary[code] || dictionary.en;
+
+    text(banner.querySelector('h1'), words[0]);
+    banner.setAttribute('aria-label', words[0]);
+
+    text(
+      magazine.querySelector('[data-pc-text="2"]'),
+      words[1]
+    );
+
+    text(rules, strings[11] + ' ' + strings[19]);
+
+    if (speaker) {
+      speaker.setAttribute('aria-label', strings[18]);
+      speaker.title = strings[18];
+      text(speaker, '🔊');
+    }
+
+    const complete = status.textContent === strings[14];
+
+    publish.classList.toggle('pc-complete', complete);
+    status.classList.toggle('pc-success', complete);
+    publish.dataset.pcComplete = String(complete);
+
+    if (complete) {
+      publish.disabled = false;
+      text(publish, '✓ ' + words[3]);
+    }
+  } finally {
+    observe();
+  }
+}
+
+apply();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener(
+    'DOMContentLoaded',
+    setupCompact,
+    {once:true}
+  );
+} else {
+  setupCompact();
+}
+})();
+</script>
 </body>
 </html>
