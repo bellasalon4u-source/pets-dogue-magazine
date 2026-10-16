@@ -25,6 +25,9 @@ tr:['Fotoğrafını ekle','Ücretsiz. Abonelik gerekmez.','Dergiden fotoğraflar
 ar:['أضف صورتك','مجاناً. لا يلزم اشتراك.','صور المجلة','صور المستخدمين','العدد','رجوع','المزيد من الصور','اختر صورة','التقط صورة','انشر الصورة','أملك هذه الصورة أو لدي إذن بمشاركتها، وأوافق على عرضها علناً وعلى قواعد الصور.','يجب أن يظهر حيوان في الصورة. يُمنع المحتوى الإباحي والعنف وإساءة معاملة الحيوانات. تُفحص الصور قبل نشرها.','جارٍ فحص الصورة…','تم نشر صورتك.','صورتك بانتظار المراجعة ولم تُنشر علناً بعد.','تعذر إكمال الإجراء. حاول لاحقاً.','هذه الصورة لا تستوفي قواعد صور الحيوانات.','ستظهر صور المستخدمين هنا.','استمع'],
 hi:['अपनी फ़ोटो जोड़ें','मुफ़्त। सदस्यता की ज़रूरत नहीं।','पत्रिका की तस्वीरें','समुदाय की तस्वीरें','अंक','वापस','और तस्वीरें','फ़ोटो चुनें','फ़ोटो लें','फ़ोटो प्रकाशित करें','यह फ़ोटो मेरी है या मुझे इसे साझा करने की अनुमति है। मैं इसके सार्वजनिक प्रदर्शन और फ़ोटो के नियमों से सहमत हूँ।','फ़ोटो में जानवर दिखना चाहिए। अश्लीलता, हिंसा या पशु क्रूरता की अनुमति नहीं है। प्रकाशन से पहले फ़ोटो जाँची जाती हैं।','फ़ोटो की जाँच हो रही है…','आपकी फ़ोटो प्रकाशित हो गई है।','आपकी फ़ोटो समीक्षा की प्रतीक्षा में है और अभी सार्वजनिक नहीं है।','कार्रवाई पूरी नहीं हो सकी। बाद में फिर कोशिश करें।','यह फ़ोटो जानवरों की फ़ोटो के नियमों के अनुरूप नहीं है।','समुदाय की तस्वीरें यहाँ दिखाई देंगी।','सुनें']
 };
+const additions={"en": ["Up to 2 photos or 1 MP4 video, maximum 5 seconds and 2 MB.", "Record video", "Gallery", "Files", "Remove", "Send for review", "Uploading…", "My uploads", "Refresh", "Not published: this upload does not meet our rules.", "No clearly visible animal.", "Unsafe content, violence or animal cruelty.", "Permission to share is missing.", "Other rule violation.", "Photo moderation", "Approve", "Reject", "Delete", "Administrator key", "Sign in", "Sign out", "Nothing here yet.", "Choose up to 2 photos or one MP4 video up to 5 seconds / 2 MB.", "This file has already been submitted.", "Daily upload limit reached. Try tomorrow.", "I own these files or have permission to share them and agree to public display and the rules.", "Upload status is saved in this browser. Reopen this page to see the review result."], "ru": ["До 2 фото или 1 видео MP4: максимум 5 секунд и 2 МБ.", "Снять видео", "Галерея", "Файлы", "Убрать", "Отправить на проверку", "Загружаем…", "Мои загрузки", "Обновить", "Не опубликовано: материал противоречит нашим правилам.", "На фото или видео не видно животное.", "Недопустимый контент, насилие или жестокость к животным.", "Нет разрешения на публикацию.", "Другое нарушение правил.", "Проверка фотографий", "Одобрить", "Отклонить", "Удалить", "Ключ администратора", "Войти", "Выйти", "Здесь пока ничего нет.", "Выберите до 2 фото или одно видео MP4 до 5 секунд / 2 МБ.", "Этот файл уже был отправлен.", "Дневной лимит загрузок исчерпан. Попробуйте завтра.", "Это мои файлы или у меня есть разрешение ими поделиться. Согласен с публичным показом и правилами.", "Статус загрузок сохраняется в этом браузере. Откройте страницу снова, чтобы увидеть результат проверки."], "uk": ["До 2 фото або 1 відео MP4: максимум 5 секунд і 2 МБ.", "Зняти відео", "Галерея", "Файли", "Прибрати", "Надіслати на перевірку", "Завантажуємо…", "Мої завантаження", "Оновити", "Не опубліковано: матеріал суперечить нашим правилам.", "На фото або відео не видно тварину.", "Неприпустимий вміст, насильство або жорстокість до тварин.", "Немає дозволу на публікацію.", "Інше порушення правил.", "Перевірка фотографій", "Схвалити", "Відхилити", "Видалити", "Ключ адміністратора", "Увійти", "Вийти", "Тут поки нічого немає.", "Виберіть до 2 фото або одне відео MP4 до 5 секунд / 2 МБ.", "Цей файл уже надіслано.", "Денний ліміт завантажень вичерпано. Спробуйте завтра.", "Це мої файли або я маю дозвіл ними поділитися. Погоджуюся з публічним показом і правилами.", "Статус зберігається в цьому браузері. Відкрийте сторінку знову, щоб побачити результат перевірки."], "fr": ["Jusqu’à 2 photos ou 1 vidéo MP4 : 5 secondes et 2 Mo maximum.", "Filmer", "Galerie", "Fichiers", "Retirer", "Envoyer pour vérification", "Envoi…", "Mes envois", "Actualiser", "Non publié : ce contenu ne respecte pas nos règles.", "Aucun animal clairement visible.", "Contenu interdit, violence ou cruauté animale.", "Autorisation de publication manquante.", "Autre infraction.", "Modération des photos", "Approuver", "Refuser", "Supprimer", "Clé administrateur", "Connexion", "Déconnexion", "Aucun élément pour le moment.", "Choisissez jusqu’à 2 photos ou une vidéo MP4 de 5 secondes / 2 Mo maximum.", "Ce fichier a déjà été envoyé.", "Limite quotidienne atteinte. Réessayez demain.", "Ces fichiers m’appartiennent ou j’ai l’autorisation de les partager. J’accepte leur affichage public et les règles.", "Le statut est enregistré dans ce navigateur. Revenez sur cette page pour voir le résultat."], "de": ["Bis zu 2 Fotos oder 1 MP4-Video: höchstens 5 Sekunden und 2 MB.", "Video aufnehmen", "Galerie", "Dateien", "Entfernen", "Zur Prüfung senden", "Wird hochgeladen…", "Meine Uploads", "Aktualisieren", "Nicht veröffentlicht: Der Inhalt verstößt gegen unsere Regeln.", "Kein Tier deutlich sichtbar.", "Unzulässiger Inhalt, Gewalt oder Tierquälerei.", "Erlaubnis zur Veröffentlichung fehlt.", "Anderer Regelverstoß.", "Fotoprüfung", "Genehmigen", "Ablehnen", "Löschen", "Administratorschlüssel", "Anmelden", "Abmelden", "Noch keine Einträge.", "Wähle bis zu 2 Fotos oder ein MP4-Video mit höchstens 5 Sekunden / 2 MB.", "Diese Datei wurde bereits eingereicht.", "Tageslimit erreicht. Versuche es morgen erneut.", "Diese Dateien gehören mir oder ich darf sie teilen. Ich stimme der öffentlichen Anzeige und den Regeln zu.", "Der Status wird in diesem Browser gespeichert. Öffne diese Seite erneut, um das Ergebnis zu sehen."], "es": ["Hasta 2 fotos o 1 vídeo MP4: máximo 5 segundos y 2 MB.", "Grabar vídeo", "Galería", "Archivos", "Quitar", "Enviar a revisión", "Subiendo…", "Mis envíos", "Actualizar", "No publicado: el contenido incumple nuestras normas.", "No se ve claramente ningún animal.", "Contenido prohibido, violencia o maltrato animal.", "Falta permiso para publicar.", "Otra infracción.", "Moderación de fotos", "Aprobar", "Rechazar", "Eliminar", "Clave de administrador", "Entrar", "Salir", "Todavía no hay elementos.", "Elige hasta 2 fotos o un vídeo MP4 de hasta 5 segundos / 2 MB.", "Este archivo ya se ha enviado.", "Límite diario alcanzado. Inténtalo mañana.", "Estos archivos son míos o tengo permiso para compartirlos. Acepto su publicación y las normas.", "El estado se guarda en este navegador. Vuelve a esta página para ver el resultado."], "it": ["Fino a 2 foto o 1 video MP4: massimo 5 secondi e 2 MB.", "Registra video", "Galleria", "File", "Rimuovi", "Invia per verifica", "Caricamento…", "I miei invii", "Aggiorna", "Non pubblicato: il contenuto viola le nostre regole.", "Nessun animale chiaramente visibile.", "Contenuti vietati, violenza o crudeltà sugli animali.", "Manca il permesso di pubblicazione.", "Altra violazione.", "Moderazione foto", "Approva", "Rifiuta", "Elimina", "Chiave amministratore", "Accedi", "Esci", "Nessun elemento per ora.", "Scegli fino a 2 foto o un video MP4 fino a 5 secondi / 2 MB.", "Questo file è già stato inviato.", "Limite giornaliero raggiunto. Riprova domani.", "Questi file sono miei o ho il permesso di condividerli. Accetto la visualizzazione pubblica e le regole.", "Lo stato è salvato in questo browser. Torna su questa pagina per vedere il risultato."], "pt": ["Até 2 fotos ou 1 vídeo MP4: máximo de 5 segundos e 2 MB.", "Gravar vídeo", "Galeria", "Ficheiros", "Remover", "Enviar para revisão", "A enviar…", "Os meus envios", "Atualizar", "Não publicado: o conteúdo viola as nossas regras.", "Nenhum animal claramente visível.", "Conteúdo proibido, violência ou crueldade animal.", "Falta autorização para publicar.", "Outra infração.", "Moderação de fotos", "Aprovar", "Rejeitar", "Eliminar", "Chave de administrador", "Entrar", "Sair", "Ainda não há elementos.", "Escolhe até 2 fotos ou um vídeo MP4 até 5 segundos / 2 MB.", "Este ficheiro já foi enviado.", "Limite diário atingido. Tenta amanhã.", "Estes ficheiros são meus ou tenho autorização para os partilhar. Aceito a exibição pública e as regras.", "O estado fica guardado neste navegador. Volta a esta página para ver o resultado."], "nl": ["Maximaal 2 foto’s of 1 MP4-video: maximaal 5 seconden en 2 MB.", "Video opnemen", "Galerij", "Bestanden", "Verwijderen", "Ter beoordeling verzenden", "Uploaden…", "Mijn uploads", "Vernieuwen", "Niet gepubliceerd: deze inhoud schendt onze regels.", "Geen duidelijk zichtbaar dier.", "Verboden inhoud, geweld of dierenmishandeling.", "Toestemming voor publicatie ontbreekt.", "Andere overtreding.", "Fotobeoordeling", "Goedkeuren", "Afwijzen", "Verwijderen", "Beheerderssleutel", "Inloggen", "Uitloggen", "Nog geen items.", "Kies maximaal 2 foto’s of één MP4-video van maximaal 5 seconden / 2 MB.", "Dit bestand is al ingediend.", "Daglimiet bereikt. Probeer het morgen.", "Deze bestanden zijn van mij of ik mag ze delen. Ik ga akkoord met openbare weergave en de regels.", "De status wordt in deze browser opgeslagen. Open deze pagina opnieuw om het resultaat te zien."], "pl": ["Do 2 zdjęć lub 1 film MP4: maksymalnie 5 sekund i 2 MB.", "Nagraj film", "Galeria", "Pliki", "Usuń", "Wyślij do sprawdzenia", "Przesyłanie…", "Moje pliki", "Odśwież", "Nie opublikowano: materiał narusza nasze zasady.", "Nie widać wyraźnie zwierzęcia.", "Niedozwolona treść, przemoc lub znęcanie się nad zwierzętami.", "Brak zgody na publikację.", "Inne naruszenie.", "Moderacja zdjęć", "Zatwierdź", "Odrzuć", "Usuń", "Klucz administratora", "Zaloguj", "Wyloguj", "Na razie brak wpisów.", "Wybierz do 2 zdjęć lub jeden film MP4 do 5 sekund / 2 MB.", "Ten plik został już wysłany.", "Osiągnięto dzienny limit. Spróbuj jutro.", "Te pliki są moje lub mam zgodę na udostępnienie. Akceptuję publiczne wyświetlanie i zasady.", "Status jest zapisany w tej przeglądarce. Otwórz stronę ponownie, aby zobaczyć wynik."], "cs": ["Až 2 fotky nebo 1 video MP4: nejvýše 5 sekund a 2 MB.", "Natočit video", "Galerie", "Soubory", "Odebrat", "Odeslat ke kontrole", "Nahrávání…", "Moje nahrávky", "Obnovit", "Nezveřejněno: obsah porušuje naše pravidla.", "Není jasně vidět žádné zvíře.", "Zakázaný obsah, násilí nebo týrání zvířat.", "Chybí svolení ke zveřejnění.", "Jiné porušení.", "Kontrola fotek", "Schválit", "Odmítnout", "Smazat", "Klíč správce", "Přihlásit", "Odhlásit", "Zatím žádné položky.", "Vyberte až 2 fotky nebo jedno video MP4 do 5 sekund / 2 MB.", "Tento soubor už byl odeslán.", "Denní limit vyčerpán. Zkuste to zítra.", "Tyto soubory jsou moje nebo je smím sdílet. Souhlasím s veřejným zobrazením a pravidly.", "Stav je uložen v tomto prohlížeči. Otevřete stránku znovu a zobrazí se výsledek."], "sk": ["Najviac 2 fotky alebo 1 video MP4: do 5 sekúnd a 2 MB.", "Nahrať video", "Galéria", "Súbory", "Odobrať", "Odoslať na kontrolu", "Nahrávanie…", "Moje nahrávky", "Obnoviť", "Nezverejnené: obsah porušuje naše pravidlá.", "Nie je jasne vidieť zviera.", "Zakázaný obsah, násilie alebo týranie zvierat.", "Chýba povolenie na zverejnenie.", "Iné porušenie.", "Kontrola fotiek", "Schváliť", "Odmietnuť", "Vymazať", "Kľúč správcu", "Prihlásiť", "Odhlásiť", "Zatiaľ žiadne položky.", "Vyberte do 2 fotiek alebo jedno video MP4 do 5 sekúnd / 2 MB.", "Tento súbor už bol odoslaný.", "Denný limit vyčerpaný. Skúste zajtra.", "Tieto súbory sú moje alebo ich smiem zdieľať. Súhlasím s verejným zobrazením a pravidlami.", "Stav je uložený v tomto prehliadači. Otvorte stránku znova a uvidíte výsledok."], "hu": ["Legfeljebb 2 fotó vagy 1 MP4-videó: maximum 5 másodperc és 2 MB.", "Videó felvétele", "Galéria", "Fájlok", "Eltávolítás", "Küldés ellenőrzésre", "Feltöltés…", "Feltöltéseim", "Frissítés", "Nem jelent meg: a tartalom sérti a szabályainkat.", "Nem látható egyértelműen állat.", "Tiltott tartalom, erőszak vagy állatkínzás.", "Hiányzik a közzétételi engedély.", "Egyéb szabálysértés.", "Fotók ellenőrzése", "Jóváhagyás", "Elutasítás", "Törlés", "Adminisztrátori kulcs", "Belépés", "Kilépés", "Még nincs itt semmi.", "Válassz legfeljebb 2 fotót vagy egy legfeljebb 5 másodperces / 2 MB-os MP4-videót.", "Ezt a fájlt már beküldték.", "Elérted a napi korlátot. Próbáld holnap.", "A fájlok az enyémek, vagy megosztási engedélyem van. Elfogadom a nyilvános megjelenítést és a szabályokat.", "Az állapot ebben a böngészőben tárolódik. Nyisd meg újra az oldalt az eredményhez."], "ro": ["Până la 2 fotografii sau 1 video MP4: maximum 5 secunde și 2 MB.", "Înregistrează video", "Galerie", "Fișiere", "Elimină", "Trimite la verificare", "Se încarcă…", "Încărcările mele", "Actualizează", "Nepublicat: conținutul încalcă regulile noastre.", "Nu se vede clar niciun animal.", "Conținut interzis, violență sau cruzime față de animale.", "Lipsește permisiunea de publicare.", "Altă încălcare.", "Moderarea fotografiilor", "Aprobă", "Respinge", "Șterge", "Cheia administratorului", "Autentificare", "Deconectare", "Încă nu există elemente.", "Alege până la 2 fotografii sau un video MP4 de maximum 5 secunde / 2 MB.", "Acest fișier a fost deja trimis.", "Limita zilnică a fost atinsă. Încearcă mâine.", "Fișierele îmi aparțin sau am permisiunea să le distribui. Accept afișarea publică și regulile.", "Starea este salvată în acest browser. Redeschide pagina pentru a vedea rezultatul."], "bg": ["До 2 снимки или 1 видео MP4: максимум 5 секунди и 2 МБ.", "Запиши видео", "Галерия", "Файлове", "Премахни", "Изпрати за проверка", "Качване…", "Моите качвания", "Обнови", "Не е публикувано: съдържанието нарушава правилата ни.", "Не се вижда ясно животно.", "Забранено съдържание, насилие или жестокост към животни.", "Липсва разрешение за публикуване.", "Друго нарушение.", "Проверка на снимки", "Одобри", "Отхвърли", "Изтрий", "Ключ на администратора", "Вход", "Изход", "Все още няма записи.", "Избери до 2 снимки или едно видео MP4 до 5 секунди / 2 МБ.", "Този файл вече е изпратен.", "Дневният лимит е достигнат. Опитай утре.", "Файловете са мои или имам разрешение да ги споделя. Приемам публичното показване и правилата.", "Статусът се пази в този браузър. Отвори страницата отново, за да видиш резултата."], "el": ["Έως 2 φωτογραφίες ή 1 βίντεο MP4: έως 5 δευτερόλεπτα και 2 MB.", "Εγγραφή βίντεο", "Συλλογή", "Αρχεία", "Αφαίρεση", "Αποστολή για έλεγχο", "Μεταφόρτωση…", "Οι μεταφορτώσεις μου", "Ανανέωση", "Δεν δημοσιεύτηκε: το περιεχόμενο παραβιάζει τους κανόνες μας.", "Δεν φαίνεται καθαρά ζώο.", "Απαγορευμένο περιεχόμενο, βία ή κακοποίηση ζώων.", "Λείπει άδεια δημοσίευσης.", "Άλλη παράβαση.", "Έλεγχος φωτογραφιών", "Έγκριση", "Απόρριψη", "Διαγραφή", "Κλειδί διαχειριστή", "Σύνδεση", "Αποσύνδεση", "Δεν υπάρχουν ακόμη στοιχεία.", "Επίλεξε έως 2 φωτογραφίες ή ένα MP4 έως 5 δευτερόλεπτα / 2 MB.", "Αυτό το αρχείο έχει ήδη σταλεί.", "Συμπληρώθηκε το ημερήσιο όριο. Δοκίμασε αύριο.", "Τα αρχεία είναι δικά μου ή έχω άδεια κοινοποίησης. Δέχομαι τη δημόσια προβολή και τους κανόνες.", "Η κατάσταση αποθηκεύεται σε αυτό το πρόγραμμα περιήγησης. Άνοιξε ξανά τη σελίδα για το αποτέλεσμα."], "sv": ["Högst 2 foton eller 1 MP4-video: högst 5 sekunder och 2 MB.", "Spela in video", "Galleri", "Filer", "Ta bort", "Skicka för granskning", "Laddar upp…", "Mina uppladdningar", "Uppdatera", "Inte publicerat: innehållet bryter mot våra regler.", "Inget djur syns tydligt.", "Förbjudet innehåll, våld eller djurplågeri.", "Tillstånd att publicera saknas.", "Annan överträdelse.", "Fotogranskning", "Godkänn", "Avvisa", "Radera", "Administratörsnyckel", "Logga in", "Logga ut", "Inga objekt ännu.", "Välj högst 2 foton eller en MP4-video på högst 5 sekunder / 2 MB.", "Filen har redan skickats.", "Dagens gräns är nådd. Försök i morgon.", "Filerna är mina eller jag har tillstånd att dela dem. Jag godkänner offentlig visning och reglerna.", "Status sparas i denna webbläsare. Öppna sidan igen för att se resultatet."], "da": ["Højst 2 fotos eller 1 MP4-video: højst 5 sekunder og 2 MB.", "Optag video", "Galleri", "Filer", "Fjern", "Send til kontrol", "Uploader…", "Mine uploads", "Opdater", "Ikke udgivet: indholdet overtræder vores regler.", "Intet dyr er tydeligt synligt.", "Forbudt indhold, vold eller dyremishandling.", "Tilladelse til udgivelse mangler.", "Anden overtrædelse.", "Fotokontrol", "Godkend", "Afvis", "Slet", "Administratornøgle", "Log ind", "Log ud", "Ingen elementer endnu.", "Vælg højst 2 fotos eller en MP4-video på højst 5 sekunder / 2 MB.", "Filen er allerede sendt.", "Dagens grænse er nået. Prøv i morgen.", "Filerne er mine, eller jeg har tilladelse til at dele dem. Jeg accepterer offentlig visning og reglerne.", "Status gemmes i denne browser. Åbn siden igen for at se resultatet."], "no": ["Opptil 2 bilder eller 1 MP4-video: maksimalt 5 sekunder og 2 MB.", "Ta opp video", "Galleri", "Filer", "Fjern", "Send til vurdering", "Laster opp…", "Mine opplastinger", "Oppdater", "Ikke publisert: innholdet bryter reglene våre.", "Ingen dyr er tydelig synlige.", "Forbudt innhold, vold eller dyremishandling.", "Tillatelse til publisering mangler.", "Annet regelbrudd.", "Bildevurdering", "Godkjenn", "Avvis", "Slett", "Administratornøkkel", "Logg inn", "Logg ut", "Ingen elementer ennå.", "Velg opptil 2 bilder eller én MP4-video på maksimalt 5 sekunder / 2 MB.", "Filen er allerede sendt.", "Dagens grense er nådd. Prøv i morgen.", "Filene er mine, eller jeg har tillatelse til å dele dem. Jeg godtar offentlig visning og reglene.", "Status lagres i denne nettleseren. Åpne siden igjen for å se resultatet."], "fi": ["Enintään 2 kuvaa tai 1 MP4-video: enintään 5 sekuntia ja 2 Mt.", "Tallenna video", "Galleria", "Tiedostot", "Poista", "Lähetä tarkistettavaksi", "Ladataan…", "Omat lataukset", "Päivitä", "Ei julkaistu: sisältö rikkoo sääntöjämme.", "Eläintä ei näy selvästi.", "Kielletty sisältö, väkivalta tai eläinrääkkäys.", "Julkaisulupa puuttuu.", "Muu sääntörikkomus.", "Kuvien tarkistus", "Hyväksy", "Hylkää", "Poista", "Ylläpitäjän avain", "Kirjaudu sisään", "Kirjaudu ulos", "Ei vielä sisältöä.", "Valitse enintään 2 kuvaa tai yksi MP4-video, enintään 5 sekuntia / 2 Mt.", "Tiedosto on jo lähetetty.", "Päivittäinen raja saavutettu. Yritä huomenna.", "Omistan tiedostot tai saan jakaa ne. Hyväksyn julkisen näyttämisen ja säännöt.", "Tila tallennetaan tähän selaimeen. Avaa sivu uudelleen nähdäksesi tuloksen."], "tr": ["En fazla 2 fotoğraf veya 1 MP4 video: en fazla 5 saniye ve 2 MB.", "Video çek", "Galeri", "Dosyalar", "Kaldır", "İncelemeye gönder", "Yükleniyor…", "Yüklemelerim", "Yenile", "Yayımlanmadı: içerik kurallarımıza aykırı.", "Belirgin bir hayvan görünmüyor.", "Yasak içerik, şiddet veya hayvanlara eziyet.", "Yayımlama izni yok.", "Diğer kural ihlali.", "Fotoğraf incelemesi", "Onayla", "Reddet", "Sil", "Yönetici anahtarı", "Giriş yap", "Çıkış yap", "Henüz içerik yok.", "En fazla 2 fotoğraf veya 5 saniye / 2 MB MP4 video seç.", "Bu dosya zaten gönderildi.", "Günlük sınıra ulaşıldı. Yarın dene.", "Dosyalar bana ait veya paylaşma iznim var. Herkese açık gösterimi ve kuralları kabul ediyorum.", "Durum bu tarayıcıda saklanır. Sonucu görmek için sayfayı yeniden aç."], "ar": ["حتى صورتين أو فيديو MP4 واحد: بحد أقصى 5 ثوانٍ و2 ميغابايت.", "تصوير فيديو", "المعرض", "الملفات", "إزالة", "إرسال للمراجعة", "جارٍ الرفع…", "ملفاتي المرفوعة", "تحديث", "لم يُنشر: هذا المحتوى يخالف قواعدنا.", "لا يظهر حيوان بوضوح.", "محتوى محظور أو عنف أو إساءة للحيوانات.", "لا يوجد إذن بالنشر.", "مخالفة أخرى.", "مراجعة الصور", "موافقة", "رفض", "حذف", "مفتاح المسؤول", "دخول", "خروج", "لا يوجد محتوى بعد.", "اختر صورتين كحد أقصى أو فيديو MP4 حتى 5 ثوانٍ / 2 ميغابايت.", "تم إرسال هذا الملف من قبل.", "بلغت الحد اليومي. حاول غداً.", "أملك هذه الملفات أو لدي إذن بمشاركتها وأوافق على عرضها علناً وعلى القواعد.", "تُحفظ الحالة في هذا المتصفح. افتح الصفحة مجدداً لمعرفة نتيجة المراجعة."], "hi": ["अधिकतम 2 फ़ोटो या 1 MP4 वीडियो: अधिकतम 5 सेकंड और 2 MB।", "वीडियो बनाएँ", "गैलरी", "फ़ाइलें", "हटाएँ", "समीक्षा के लिए भेजें", "अपलोड हो रहा है…", "मेरे अपलोड", "ताज़ा करें", "प्रकाशित नहीं हुआ: सामग्री हमारे नियमों के विरुद्ध है।", "जानवर स्पष्ट रूप से नहीं दिखता।", "निषिद्ध सामग्री, हिंसा या पशु क्रूरता।", "प्रकाशन की अनुमति नहीं है।", "अन्य नियम उल्लंघन।", "फ़ोटो समीक्षा", "स्वीकार करें", "अस्वीकार करें", "मिटाएँ", "व्यवस्थापक कुंजी", "लॉग इन", "लॉग आउट", "अभी कोई सामग्री नहीं है।", "अधिकतम 2 फ़ोटो या 5 सेकंड / 2 MB का एक MP4 वीडियो चुनें।", "यह फ़ाइल पहले ही भेजी जा चुकी है।", "दैनिक सीमा पूरी हो गई। कल कोशिश करें।", "ये फ़ाइलें मेरी हैं या मुझे साझा करने की अनुमति है। मैं सार्वजनिक प्रदर्शन और नियमों से सहमत हूँ।", "स्थिति इस ब्राउज़र में सहेजी जाती है। समीक्षा का परिणाम देखने के लिए पेज दोबारा खोलें।"]};
+for(const code of Object.keys(texts))texts[code].push(...additions[code]);
+window.PDPhotoTexts=texts;
 const aliases={ua:'uk',cz:'cs',gr:'el',se:'sv',dk:'da'};
 const lang=()=>{let v='en';try{v=typeof getPhotoLanguage==='function'?getPhotoLanguage():document.documentElement.lang;}catch{}v=String(v||'en').toLowerCase().split('-')[0];return aliases[v]||v;};
 const t=i=>(texts[lang()]||texts.en)[i];
@@ -32,8 +35,8 @@ const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className
 const label=(node,i)=>{node.dataset.pcText=i;return node;};
 const button=(i,fn,cls='pc-button')=>{const b=label(el('button',cls),i);b.type='button';b.onclick=fn;return b;};
 const safeURL=s=>{try{const u=new URL(s,location.origin);return u.protocol==='https:'||u.origin===location.origin?u.href:'';}catch{return '';}};
-let root,grid,title,note,more,back,issueCard,uploadDialog,viewer,preview,consent,publish,file,camera,uploadStatus;
-let mode='community',issue=null,rows=[],offset=0,busy=false,hasMore=false,revision=0,selected=null,sending=false,statusKey=null,choiceRevision=0;
+let root,grid,title,note,more,back,issueCard,uploadDialog,viewer,preview,consent,publish,file,camera,videoCamera,files,uploadStatus,myDialog,myList;
+let mode='community',issue=null,rows=[],offset=0,busy=false,hasMore=false,revision=0,selected=[],sending=false,choosing=false,statusKey=null,choiceRevision=0;
 const update=()=>{
  if(!root)return;
  grid.classList.toggle('pc-issues',mode==='issues');
@@ -44,18 +47,21 @@ const update=()=>{
  more.hidden=!hasMore||mode==='issues';more.disabled=busy;
  if(note.dataset.pcMessage)note.textContent=t(Number(note.dataset.pcMessage));
  if(statusKey!==null)uploadStatus.textContent=t(statusKey);
- publish.disabled=sending||!selected||!consent.checked;
- publish.textContent=t(sending?12:9);
- file.setAttribute('aria-label',t(7));camera.setAttribute('aria-label',t(8));preview.alt=t(7);
- viewer.setAttribute('aria-label',t(3));uploadDialog.setAttribute('aria-label',t(0));
+ publish.disabled=sending||choosing||!selected.length||!consent.checked;
+ publish.textContent=t(sending?25:24);
+ file.setAttribute('aria-label',t(21));files.setAttribute('aria-label',t(22));camera.setAttribute('aria-label',t(8));videoCamera.setAttribute('aria-label',t(20));
+ preview.querySelectorAll('button').forEach(b=>{b.textContent=t(23);b.disabled=sending;});
+ renderReceipts();
+ viewer.setAttribute('aria-label',t(3));uploadDialog.setAttribute('aria-label',t(0));myDialog.setAttribute('aria-label',t(26));root.querySelector('.pc-banner .pc-button')?.setAttribute('aria-label',t(0));
  root.querySelectorAll('[data-pc-issue]').forEach(n=>{n.textContent=`${t(4)} ${n.dataset.pcIssue}`;});
  root.querySelectorAll('.pc-tile img').forEach(n=>n.alt=t(3));
 };
 const message=i=>{note.dataset.pcMessage=i;note.textContent=t(i);};
 async function api(params){const r=await fetch('/api/photos-community?'+new URLSearchParams(params),{cache:'no-store'});if(!r.ok)throw Error();return r.json();}
 function photo(src){const image=el('img');image.src=safeURL(src);image.alt=t(3);image.loading='lazy';image.decoding='async';return image;}
-function openPhoto(row){viewer.replaceChildren();viewer.append(button(5,()=>viewer.close()),photo(row.image_url));viewer.showModal();}
-function appendPhotos(items){const seen=new Set(rows.map(p=>p.id));for(const row of items){if(seen.has(row.id)||!safeURL(row.image_url))continue;seen.add(row.id);rows.push(row);const b=el('button','pc-tile');b.type='button';b.append(photo(row.image_url));b.onclick=()=>openPhoto(row);grid.append(b);}}
+function mediaNode(row){if(row.media_type!=='video')return photo(row.image_url);const v=el('video');v.src=safeURL(row.image_url);v.controls=true;v.playsInline=true;v.preload='metadata';v.setAttribute('aria-label',t(3));return v;}
+function openPhoto(row){viewer.replaceChildren();viewer.append(button(5,()=>viewer.close()),mediaNode(row));viewer.showModal();}
+function appendPhotos(items){const seen=new Set(rows.map(p=>p.id));for(const row of items){if(seen.has(row.id)||!safeURL(row.image_url))continue;seen.add(row.id);rows.push(row);const b=el('button','pc-tile');b.type='button';if(row.media_type==='video'){const tile=el('div','pc-tile');tile.append(mediaNode(row));grid.append(tile);}else{b.append(photo(row.image_url));b.onclick=()=>openPhoto(row);grid.append(b);}}}
 async function load(reset=true){
  const rev=reset?++revision:revision;
  if(reset){rows=[];offset=0;grid.replaceChildren();hasMore=false;}
@@ -71,34 +77,84 @@ async function load(reset=true){
   }
  }catch{if(rev===revision)message(15);}finally{if(rev===revision){busy=false;update();}}
 }
+const receiptStore='pd_photo_receipts_v2';let receipts=[],receiptResults=[],receiptBusy=false,attemptToken=null;
+try{const saved=JSON.parse(localStorage.getItem(receiptStore)||'[]');if(Array.isArray(saved))receipts=saved.filter(x=>x&&/^[a-f0-9]{64}$/.test(x.token)).slice(0,20);}catch{}
+function saveReceipts(){try{localStorage.setItem(receiptStore,JSON.stringify(receipts.slice(0,20)));}catch{}}
+function renderReceipts(){
+ if(!myList)return;
+ const notice=root?.querySelector('.pc-review-notice'),blocked=receiptResults.flatMap(x=>x.items||[]).find(x=>x.status==='blocked');
+ if(notice){notice.hidden=!blocked;const reason=blocked?({no_animal:29,unsafe:30,rights:31,other:32})[blocked.reason]:null;const text=blocked?t(28)+(reason?' '+t(reason):''):'';if(notice.textContent!==text)notice.textContent=text;}
+myList.replaceChildren();
+ if(!receipts.length){myList.append(label(el('p'),40));myList.lastChild.textContent=t(40);return;}
+ for(let index=0;index<receipts.length;index++){
+  const card=el('article','pc-receipt');const date=el('small');date.textContent=new Date(receipts[index].date).toLocaleString(lang());card.append(date);
+  const result=receiptResults.find(x=>x.index===index);
+  if(!result?.items.length)card.append(el('p','',t(15)));
+  for(const item of result?.items||[]){const key=item.status==='approved'?13:item.status==='pending'?14:28;card.append(el('p','',t(key)));if(item.status==='blocked'){const reason={no_animal:29,unsafe:30,rights:31,other:32}[item.reason];if(reason)card.append(el('p','',t(reason)));}}
+  myList.append(card);
+ }
+}
+async function checkReceipts(){
+ if(receiptBusy||!receipts.length)return;receiptBusy=true;
+ try{const r=await fetch('/api/photos-review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'status',tokens:receipts.map(x=>x.token)}),signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error();receiptResults=(await r.json()).uploads;renderReceipts();}
+ catch{if(myDialog?.open)myList.replaceChildren(el('p','',t(15)));}finally{receiptBusy=false;}
+}
+function drawSelection(){
+ preview.replaceChildren();
+ for(let index=0;index<selected.length;index++){
+  const item=selected[index],card=el('div','pc-preview-card'),node=el(item.type==='video'?'video':'img');
+  node.src=item.data;if(item.type==='video'){node.controls=true;node.playsInline=true;}else node.alt=t(7);
+  card.append(node,button(23,()=>{if(sending)return;selected.splice(index,1);attemptToken=null;drawSelection();update();}));preview.append(card);
+ }
+}
+const readData=file=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);});
 async function choose(input){
- const chosen=input.files?.[0];input.value='';if(!chosen||sending)return;const choice=++choiceRevision;
- statusKey=null;selected=null;publish.disabled=true;preview.removeAttribute('src');
- let objectURL;
+ const chosen=Array.from(input.files||[]);input.value='';if(!chosen.length||sending||choosing)return;const choice=++choiceRevision;choosing=true;update();
+ statusKey=null;const prepared=[];let objectURL;
  try{
-  if(chosen.size>20000000||!chosen.type.startsWith('image/'))throw Error();
-  objectURL=URL.createObjectURL(chosen);const image=new Image();image.src=objectURL;await image.decode();
-  const scale=Math.min(1,1600/image.naturalWidth,1600/image.naturalHeight);const canvas=document.createElement('canvas');
-  canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
-  const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(image,0,0,canvas.width,canvas.height);
-  let data=canvas.toDataURL('image/jpeg',0.8);if(data.length>1300000)data=canvas.toDataURL('image/jpeg',0.55);if(data.length>1300000)throw Error();
-  if(choice!==choiceRevision)return;selected=data;preview.src=data;
- }catch{if(choice===choiceRevision)statusKey=15;}finally{if(objectURL)URL.revokeObjectURL(objectURL);uploadStatus.textContent=statusKey===null?'':t(statusKey);update();}
+  if(chosen.length+selected.length>2)throw Error();
+  for(const chosenFile of chosen){
+   const isVideo=chosenFile.type.startsWith('video/')||/\.mp4$/i.test(chosenFile.name);
+   if(isVideo){
+    if(selected.length||chosen.length!==1||chosenFile.size>2000000||!['video/mp4',''].includes(chosenFile.type))throw Error();
+    objectURL=URL.createObjectURL(chosenFile);const v=document.createElement('video');v.preload='metadata';v.src=objectURL;
+    await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error()),15000);v.onloadedmetadata=()=>{clearTimeout(timer);resolve();};v.onerror=()=>{clearTimeout(timer);reject(Error());};});
+    if(!Number.isFinite(v.duration)||v.duration<=0||v.duration>5)throw Error();
+    const raw=await readData(chosenFile);prepared.push({type:'video',data:'data:video/mp4;base64,'+raw.split(',')[1]});
+   }else{
+    if(selected.some(x=>x.type==='video')||chosenFile.size>20000000||!chosenFile.type.startsWith('image/'))throw Error();
+    objectURL=URL.createObjectURL(chosenFile);const image=new Image();image.src=objectURL;await image.decode();
+    if(image.naturalWidth*image.naturalHeight>100000000)throw Error();
+    const scale=Math.min(1,1600/image.naturalWidth,1600/image.naturalHeight),canvas=document.createElement('canvas');
+    canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+    const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(image,0,0,canvas.width,canvas.height);
+    let data=canvas.toDataURL('image/jpeg',0.8);if(data.length>1300000)data=canvas.toDataURL('image/jpeg',0.55);if(data.length>1300000)throw Error();
+    prepared.push({type:'image',data});
+   }
+   if(objectURL){URL.revokeObjectURL(objectURL);objectURL=null;}
+  }
+  if(choice!==choiceRevision)return;selected.push(...prepared);attemptToken=null;drawSelection();
+ }catch{if(choice===choiceRevision)statusKey=41;}finally{choosing=false;if(objectURL)URL.revokeObjectURL(objectURL);uploadStatus.textContent=statusKey===null?'':t(statusKey);update();}
 }
 async function submit(){
- if(sending||!selected||!consent.checked)return;
- sending=true;statusKey=12;file.disabled=camera.disabled=true;update();
+ if(sending||choosing||!selected.length||!consent.checked)return;
+ sending=true;statusKey=25;[file,camera,videoCamera,files].forEach(n=>n.disabled=true);update();
  try{
-  const r=await fetch('/api/photos-upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:selected,consent:true,consentVersion:'photos-2026-10-15'}),signal:AbortSignal.timeout(120000)});
-  const data=await r.json();if(!r.ok){statusKey=data.error==='photo_not_allowed'?16:15;return;}
-  if(!['approved','pending'].includes(data.status))throw Error();
-  statusKey=data.status==='approved'?13:14;selected=null;consent.checked=false;preview.removeAttribute('src');
-  if(data.status==='approved'){mode='community';issue=null;await load();}
- }catch{statusKey=15;}finally{sending=false;file.disabled=camera.disabled=false;update();}
+  if(!attemptToken){const bytes=crypto.getRandomValues(new Uint8Array(32));attemptToken=Array.from(bytes,x=>x.toString(16).padStart(2,'0')).join('');}
+  // Save before sending: a lost response must not lose access to a received upload.
+  if(!receipts.some(x=>x.token===attemptToken)){receipts.unshift({token:attemptToken,date:new Date().toISOString()});receipts=receipts.slice(0,20);saveReceipts();}
+  const r=await fetch('/api/photos-upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({media:selected,receipt:attemptToken,consent:true,consentVersion:'photos-2026-10-16'}),signal:AbortSignal.timeout(90000)});
+  const data=await r.json();if(!r.ok){statusKey={photo_not_allowed:28,duplicate:42,daily_limit:43,invalid_video:41,invalid_image:41,invalid_media:41}[data.error]||15;
+   if(r.status>=400&&r.status<500){receipts=receipts.filter(x=>x.token!==attemptToken);saveReceipts();attemptToken=null;}
+   return;
+  }
+  if(data.status!=='pending')throw Error();
+  statusKey=14;selected=[];attemptToken=null;consent.checked=false;drawSelection();await checkReceipts();
+ }catch{statusKey=15;}finally{sending=false;[file,camera,videoCamera,files].forEach(n=>n.disabled=false);update();}
 }
 function listen(){
  if(!window.speechSynthesis)return;window.speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance([t(0),t(1),t(11)].join('. '));u.lang=lang();
+ const u=new SpeechSynthesisUtterance([t(0),t(1),t(19),t(11)].join('. '));u.lang=lang();
  const voice=window.speechSynthesis.getVoices().find(v=>v.lang.toLowerCase().split('-')[0]===lang());if(voice)u.voice=voice;window.speechSynthesis.speak(u);
 }
 function setup(){
@@ -110,8 +166,8 @@ body.pc-ready > .hero,body.pc-ready > .section{display:none!important}
 #pcPhotos{max-width:1280px;margin:0 auto;padding:12px;background:#f4f0e5;color:#111}
 #pcPhotos *,dialog.pc-dialog *{box-sizing:border-box}
 .pc-banner{background:#db1629;color:white;overflow:hidden;border-radius:12px;margin-bottom:14px}
-.pc-banner img{display:block;width:100%;height:clamp(160px,32vw,300px);object-fit:cover}
-.pc-banner-text{padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pc-banner img{display:block;width:100%;height:clamp(135px,27vw,230px);object-fit:cover}
+.pc-banner-text{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .pc-banner h1{font:700 clamp(25px,5vw,42px)/1.12 Arial,sans-serif;margin:0 0 6px;color:white}
 .pc-banner p{font:16px/1.4 Arial,sans-serif;margin:0;color:white}
 .pc-button{border:1px solid #111;border-radius:999px;padding:12px 20px;background:#111;color:white;font:700 16px/1.3 Arial,sans-serif;cursor:pointer;min-height:46px}
@@ -130,12 +186,13 @@ body.pc-ready > .hero,body.pc-ready > .section{display:none!important}
 .pc-note{font:16px/1.5 Arial,sans-serif;margin:14px 0}
 dialog.pc-dialog{border:1px solid #b99b55;border-radius:14px;width:min(94vw,700px);max-height:90dvh;overflow:auto;padding:20px;background:#f4f0e5;color:#111}
 dialog.pc-dialog::backdrop{background:#000b}
-dialog.pc-dialog img{display:block;max-width:100%;max-height:65dvh;object-fit:contain;margin:14px auto}
+dialog.pc-dialog img,dialog.pc-dialog video{display:block;max-width:100%;max-height:24dvh;object-fit:contain;margin:14px auto}
 dialog.pc-dialog p,dialog.pc-dialog label{font:16px/1.5 Arial,sans-serif}
 dialog.pc-dialog h2{font:32px/1.2 Georgia,serif;margin:18px 0}
 .pc-consent{display:flex;align-items:flex-start;gap:10px;margin:18px 0}.pc-consent input{width:22px;height:22px;flex-shrink:0;accent-color:#d51428}
-.pc-upload{background:#d51428;border-color:#d51428;width:100%}.pc-status{min-height:24px}
+.pc-upload{position:sticky;bottom:0;box-shadow:0 0 0 8px #f4f0e5;background:#d51428;border-color:#d51428;width:100%}.pc-status{min-height:24px}
 .pc-button:focus-visible,.pc-tile:focus-visible,.pc-magazine:focus-visible,.pc-issue:focus-visible{outline:3px solid #0783ff;outline-offset:3px}
+.pc-tile video{display:block;width:100%;max-height:450px;background:#111}.pc-previews{display:flex;gap:10px;flex-wrap:wrap}.pc-preview-card{width:calc(50% - 5px);border:1px solid #d6cab1;border-radius:12px;padding:8px}.pc-preview-card img,.pc-preview-card video{width:100%;height:140px;object-fit:contain;margin:0 0 8px!important}.pc-preview-card button{min-height:40px;padding:8px 12px;width:100%}.pc-picks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pc-picks .pc-button{font-size:14px;padding:12px 8px}.pc-receipt{border-bottom:1px solid #d6cab1;padding:12px 0}.pc-receipt p{margin:6px 0}dialog.pc-dialog.pc-viewer img,dialog.pc-dialog.pc-viewer video{max-height:75dvh;width:100%;margin:10px auto}.pc-banner .pc-button{font-size:28px;min-width:56px;padding:8px 18px}.pc-consent{font-size:14px!important}dialog.pc-dialog h2{font-size:28px;margin:12px 0}dialog.pc-dialog{padding:16px}dialog.pc-dialog p{font-size:14px;line-height:1.45}.pc-note:empty{display:none}.pc-review-notice{padding:14px;margin:12px 0;border:1px solid #c60d25;border-radius:10px;background:#fff0f0;font:15px/1.45 Arial,sans-serif}
 @media(min-width:760px){.pc-grid{columns:3}#pcPhotos{padding:20px}}
 @media(min-width:1100px){.pc-grid{columns:4}}
 `;
@@ -143,17 +200,20 @@ dialog.pc-dialog h2{font:32px/1.2 Georgia,serif;margin:18px 0}
  const banner=el('section','pc-banner'),art=photo('/photos-community-banner.png');art.alt='';art.loading='eager';
  art.onerror=()=>{art.hidden=true;};const copy=el('div','pc-banner-text'),words=el('div');words.append(label(el('h1'),0),label(el('p'),1));
  const launch=()=>{statusKey=null;uploadStatus.textContent='';update();uploadDialog.showModal();};
- copy.append(words,button(0,launch));banner.append(art,copy);root.append(banner);
- const tools=el('div','pc-tools');back=button(5,()=>{mode=mode==='magazine'?'issues':'community';issue=null;load();});const home=el('a','pc-button pc-home','⌂');home.href='/index.html';home.setAttribute('aria-label',typeof photoT==='function'?photoT('footer.home','Home'):'Home');tools.append(back,home,button(18,listen));root.append(tools);
+ const add=el('button','pc-button','＋');add.type='button';add.onclick=launch;add.setAttribute('aria-label',t(0));copy.append(words,add);banner.append(art,copy);root.append(banner);
+ const tools=el('div','pc-tools');back=button(5,()=>{mode=mode==='magazine'?'issues':'community';issue=null;load();});const home=el('a','pc-button pc-home','⌂');home.href='/index.html';home.setAttribute('aria-label',typeof photoT==='function'?photoT('footer.home','Home'):'Home');tools.append(back,home,button(18,listen),button(26,()=>{renderReceipts();myDialog.showModal();checkReceipts();}));root.append(tools);const receiptNotice=el('aside','pc-review-notice');receiptNotice.hidden=true;receiptNotice.setAttribute('role','status');receiptNotice.setAttribute('aria-live','polite');root.append(receiptNotice);
  issueCard=el('button','pc-magazine');issueCard.type='button';const cover=photo('/file_00000000a9d471fda9b4629589be22a9.png');cover.alt='PETS & DOGUE';issueCard.append(cover,label(el('span'),2),el('span','','→'));issueCard.onclick=()=>{mode='issues';issue=null;load();};root.append(issueCard);
  title=el('h2','pc-heading');grid=el('div','pc-grid');note=el('p','pc-note');note.setAttribute('role','status');more=button(6,()=>{if(!busy)load(false);});root.append(title,grid,note,more);
- uploadDialog=el('dialog','pc-dialog');const close=button(5,()=>uploadDialog.close()),heading=label(el('h2'),0),rules=label(el('p'),11);
- file=el('input');file.type='file';file.accept='image/*';file.hidden=true;file.onchange=()=>choose(file);
+ uploadDialog=el('dialog','pc-dialog');const close=button(5,()=>uploadDialog.close()),heading=label(el('h2'),0),rules=label(el('p'),11),limits=label(el('p'),19);
+ file=el('input');file.type='file';file.accept='image/*,video/mp4';file.multiple=true;file.hidden=true;file.onchange=()=>choose(file);
  camera=el('input');camera.type='file';camera.accept='image/*';camera.setAttribute('capture','environment');camera.hidden=true;camera.onchange=()=>choose(camera);
- const picks=el('div','pc-tools');picks.append(button(8,()=>{if(!sending)camera.click();}),button(7,()=>{if(!sending)file.click();}));
- preview=el('img');consent=el('input');consent.type='checkbox';consent.onchange=update;const check=el('label','pc-consent');check.append(consent,label(el('span'),10));
- publish=button(9,submit,'pc-button pc-upload');uploadStatus=el('p','pc-status');uploadStatus.setAttribute('role','status');uploadStatus.setAttribute('aria-live','polite');uploadDialog.append(close,heading,rules,file,camera,picks,preview,check,publish,uploadStatus);
- viewer=el('dialog','pc-dialog');document.body.append(uploadDialog,viewer);document.body.insertBefore(root,oldHero);document.body.classList.add('pc-ready');
+ files=el('input');files.type='file';files.accept='image/*,video/mp4';files.multiple=true;files.hidden=true;files.onchange=()=>choose(files);
+ videoCamera=el('input');videoCamera.type='file';videoCamera.accept='video/mp4';videoCamera.setAttribute('capture','environment');videoCamera.hidden=true;videoCamera.onchange=()=>choose(videoCamera);
+ const picks=el('div','pc-picks');picks.append(button(8,()=>{if(!sending)camera.click();}),button(20,()=>{if(!sending)videoCamera.click();}),button(21,()=>{if(!sending)file.click();}),button(22,()=>{if(!sending)files.click();}));
+ preview=el('div','pc-previews');consent=el('input');consent.type='checkbox';consent.onchange=update;const check=el('label','pc-consent');check.append(consent,label(el('span'),44));
+ publish=button(24,submit,'pc-button pc-upload');uploadStatus=el('p','pc-status');uploadStatus.setAttribute('role','status');uploadStatus.setAttribute('aria-live','polite');uploadDialog.append(close,heading,rules,limits,file,camera,videoCamera,files,picks,preview,check,publish,uploadStatus);
+ myDialog=el('dialog','pc-dialog');myList=el('div');myList.setAttribute('aria-live','polite');myDialog.append(button(5,()=>myDialog.close()),label(el('h2'),26),label(el('p'),45),button(27,checkReceipts),myList);document.body.append(myDialog);
+ viewer=el('dialog','pc-dialog pc-viewer');viewer.addEventListener('close',()=>viewer.querySelectorAll('video').forEach(v=>v.pause()));document.body.append(uploadDialog,viewer);document.body.insertBefore(root,oldHero);document.body.classList.add('pc-ready');
  const originalUpdate=update;
  const refresh=()=>{grid.classList.toggle('pc-issues',mode==='issues');originalUpdate();};
  if(typeof renderPhotos==='function')renderPhotos=refresh;
@@ -168,7 +228,10 @@ dialog.pc-dialog h2{font:32px/1.2 Georgia,serif;margin:18px 0}
  for(const ev of ['languagechange','petsdogue:languagechange'])window.addEventListener(ev,refresh);
  root.addEventListener('click',()=>grid.classList.toggle('pc-issues',mode==='issues'));
  document.addEventListener('keydown',e=>{if(e.key==='Escape')window.speechSynthesis?.cancel();});
- refresh();load();
+ refresh();load();checkReceipts();
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkReceipts();});
+ setInterval(()=>{if(!document.hidden&&myDialog.open)checkReceipts();},60000);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
 })();
+
