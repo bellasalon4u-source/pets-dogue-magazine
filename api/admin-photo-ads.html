@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Photo advertising · PETS &amp; DOGUE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f0e5;color:#26221b;font:15px/1.5 Arial,sans-serif}
+header{background:#111;color:#d7bb78;padding:18px}
+main{max-width:850px;margin:auto;padding:18px}
+h1,h2{font-family:Georgia,serif;font-weight:400}
+h1{font-size:32px}
+h2{font-size:24px;margin:8px 0}
+label{display:block;margin:12px 0}
+input,textarea,select,button{font:inherit}
+input:not([type=checkbox]),textarea,select{
+width:100%;padding:11px;background:#fffdf7;
+border:1px solid #cdbb91;border-radius:4px;color:#26221b
+}
+textarea{min-height:80px}
+button,.back{
+display:inline-block;background:#fffdf7;color:#725923;
+border:1px solid #cdbb91;border-radius:4px;padding:10px 15px;
+cursor:pointer;text-decoration:none
+}
+button:disabled{opacity:.5;cursor:wait}
+button[type=submit]{background:#c9162d;color:#fff;border-color:#c9162d}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+section,article{
+border:1px solid #d4c49e;background:#faf7ef;
+padding:16px;margin:16px 0;border-radius:4px
+}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.note{font-size:13px;color:#756b59}
+#notice{
+position:sticky;top:0;z-index:5;padding:10px;
+background:#f4f0e5;min-height:24px
+}
+#notice:empty{padding:0;min-height:0}
+#notice[data-error=true]{background:#fff0f0;color:#a1172a}
+img{
+display:block;max-width:100%;max-height:260px;
+object-fit:contain;margin:12px 0
+}
+article img{max-height:180px}
+.check{display:flex;gap:10px;align-items:center}
+input[type=checkbox]{accent-color:#c9162d;width:20px;height:20px}
+button:focus-visible,a:focus-visible{
+outline:3px solid #0783ff;outline-offset:3px
+}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>PETS &amp; DOGUE · ADMIN</header>
+
+<main>
+<div class="row">
+<a class="back" href="/admin-photos.html" data-t="16"></a>
+<select id="uiLanguage" aria-label="Language"></select>
+<button id="speak" type="button" aria-label="Listen">🔊</button>
+</div>
+
+<h1 data-t="0"></h1>
+<p id="notice" role="status" aria-live="polite"></p>
+
+<form id="login">
+<label>
+<span data-t="1"></span>
+<input id="key" type="password" autocomplete="off"
+required maxlength="1000">
+</label>
+<button type="submit" data-t="2"></button>
+</form>
+
+<div id="panel" hidden>
+<div class="row">
+<button id="new" type="button" data-t="3"></button>
+<button id="refresh" type="button" data-t="13"></button>
+<button id="logout" type="button" data-t="14"></button>
+</div>
+
+<section id="editorSection" hidden>
+<form id="form">
+<fieldset id="editor">
+
+<h2 id="editorTitle"></h2>
+<p class="note" data-t="18"></p>
+
+<label>
+<span data-t="4"></span>
+<select id="contentLanguage"></select>
+</label>
+
+<label>
+<span data-t="5"></span>
+<input id="title" maxlength="160">
+</label>
+
+<label>
+<span data-t="6"></span>
+<textarea id="description" maxlength="1000"></textarea>
+</label>
+
+<label>
+<span data-t="7"></span>
+<input id="image" type="file" accept="image/*">
+</label>
+
+<img id="preview" alt="" hidden>
+
+<label>
+<span data-t="8"></span>
+<input id="url" type="url" placeholder="https://"
+required maxlength="2048">
+</label>
+
+<label>
+<span data-t="9"></span>
+<input id="position" type="number" min="1" max="10000"
+step="1" value="6" required>
+</label>
+
+<label class="check">
+<input id="active" type="checkbox">
+<span data-t="10"></span>
+</label>
+
+<div class="row">
+<button type="submit" data-t="11"></button>
+<button id="cancel" type="button" data-t="15"></button>
+</div>
+
+</fieldset>
+</form>
+</section>
+
+<div id="list"></div>
+<button id="more" type="button" data-t="19" hidden></button>
+</div>
+</main>
+
+<script>
+(() => {
+'use strict';
+
+const copy={
+en:['Photo advertising','Admin key','Sign in','Add advertisement','Content language','Title','Description','Upload image','Destination link','Place after photo number','Published','Save','Delete','Refresh','Sign out','Cancel','Photo moderation','Edit','English title and image are required to publish. Other languages fall back to English.','Show more','Saved','Could not complete the action. Refresh and try again.','Draft','Working…'],
+uk:['Реклама у фотострічці','Ключ адміністратора','Увійти','Додати рекламу','Мова матеріалу','Заголовок','Опис','Завантажити зображення','Посилання переходу','Розмістити після фото №','Опубліковано','Зберегти','Видалити','Оновити','Вийти','Скасувати','Перевірка фото','Редагувати','Для публікації потрібні англійський заголовок і зображення. Для інших мов без перекладу використовується англійська.','Показати ще','Збережено','Не вдалося виконати дію. Оновіть і спробуйте ще раз.','Чернетка','Обробляємо…'],
+ru:['Реклама в фотоленте','Ключ администратора','Войти','Добавить рекламу','Язык материала','Заголовок','Описание','Загрузить изображение','Ссылка перехода','Разместить после фото №','Опубликовано','Сохранить','Удалить','Обновить','Выйти','Отмена','Проверка фото','Изменить','Для публикации нужны английский заголовок и изображение. Для языков без перевода используется английский вариант.','Показать ещё','Сохранено','Не удалось выполнить действие. Обновите и попробуйте снова.','Черновик','Обрабатываем…'],
+fr:['Publicité photo','Clé administrateur','Connexion','Ajouter une publicité','Langue du contenu','Titre','Description','Importer une image','Lien de destination','Placer après la photo nº','Publié','Enregistrer','Supprimer','Actualiser','Déconnexion','Annuler','Modération photo','Modifier','Un titre et une image en anglais sont requis. Les traductions manquantes utilisent la version anglaise.','Afficher plus','Enregistré','Action impossible. Actualisez et réessayez.','Brouillon','Traitement…'],
+de:['Fotowerbung','Admin-Schlüssel','Anmelden','Werbung hinzufügen','Inhaltssprache','Titel','Beschreibung','Bild hochladen','Zieladresse','Nach Foto Nr. einfügen','Veröffentlicht','Speichern','Löschen','Aktualisieren','Abmelden','Abbrechen','Fotoprüfung','Bearbeiten','Englischer Titel und Bild sind erforderlich. Fehlende Übersetzungen verwenden Englisch.','Mehr anzeigen','Gespeichert','Aktion fehlgeschlagen. Aktualisieren und erneut versuchen.','Entwurf','Wird verarbeitet…'],
+es:['Publicidad en fotos','Clave de administrador','Entrar','Añadir anuncio','Idioma del contenido','Título','Descripción','Subir imagen','Enlace de destino','Colocar después de la foto n.º','Publicado','Guardar','Eliminar','Actualizar','Salir','Cancelar','Moderación de fotos','Editar','Se requieren título e imagen en inglés. Las traducciones que falten usarán el inglés.','Mostrar más','Guardado','No se pudo completar. Actualiza e inténtalo de nuevo.','Borrador','Procesando…'],
+it:['Pubblicità nelle foto','Chiave amministratore','Accedi','Aggiungi pubblicità','Lingua del contenuto','Titolo','Descrizione','Carica immagine','Link di destinazione','Inserisci dopo la foto n.','Pubblicato','Salva','Elimina','Aggiorna','Esci','Annulla','Moderazione foto','Modifica','Titolo e immagine in inglese sono obbligatori. Le traduzioni mancanti usano la versione inglese.','Mostra altro','Salvato','Operazione non riuscita. Aggiorna e riprova.','Bozza','Elaborazione…'],
+pt:['Publicidade nas fotos','Chave de administrador','Entrar','Adicionar publicidade','Idioma do conteúdo','Título','Descrição','Carregar imagem','Ligação de destino','Inserir após a foto n.º','Publicado','Guardar','Eliminar','Atualizar','Sair','Cancelar','Moderação de fotos','Editar','São necessários título e imagem em inglês. As traduções em falta usam o inglês.','Mostrar mais','Guardado','Não foi possível concluir. Atualize e tente novamente.','Rascunho','A processar…'],
+nl:['Fotoadvertenties','Beheerderssleutel','Inloggen','Advertentie toevoegen','Inhoudstaal','Titel','Beschrijving','Afbeelding uploaden','Doellink','Plaatsen na foto nr.','Gepubliceerd','Opslaan','Verwijderen','Vernieuwen','Uitloggen','Annuleren','Fotobeoordeling','Bewerken','Een Engelse titel en afbeelding zijn vereist. Ontbrekende vertalingen gebruiken Engels.','Meer tonen','Opgeslagen','Actie mislukt. Vernieuw en probeer opnieuw.','Concept','Bezig…'],
+pl:['Reklamy w zdjęciach','Klucz administratora','Zaloguj','Dodaj reklamę','Język treści','Tytuł','Opis','Prześlij obraz','Link docelowy','Umieść po zdjęciu nr','Opublikowano','Zapisz','Usuń','Odśwież','Wyloguj','Anuluj','Moderacja zdjęć','Edytuj','Wymagany jest angielski tytuł i obraz. Brakujące tłumaczenia zastępuje wersja angielska.','Pokaż więcej','Zapisano','Nie udało się. Odśwież i spróbuj ponownie.','Szkic','Przetwarzanie…'],
+cs:['Reklama ve fotkách','Klíč správce','Přihlásit','Přidat reklamu','Jazyk obsahu','Název','Popis','Nahrát obrázek','Cílový odkaz','Vložit za fotku č.','Zveřejněno','Uložit','Smazat','Obnovit','Odhlásit','Zrušit','Kontrola fotek','Upravit','Je nutný anglický název a obrázek. Chybějící překlady používají angličtinu.','Zobrazit více','Uloženo','Akce se nezdařila. Obnovte a zkuste znovu.','Koncept','Zpracovává se…'],
+sk:['Reklama vo fotkách','Kľúč správcu','Prihlásiť','Pridať reklamu','Jazyk obsahu','Názov','Popis','Nahrať obrázok','Cieľový odkaz','Vložiť za fotku č.','Zverejnené','Uložiť','Vymazať','Obnoviť','Odhlásiť','Zrušiť','Kontrola fotiek','Upraviť','Je potrebný anglický názov a obrázok. Chýbajúce preklady používajú angličtinu.','Zobraziť viac','Uložené','Akcia sa nepodarila. Obnovte a skúste znova.','Koncept','Spracúva sa…'],
+hu:['Fotóhirdetések','Adminisztrátori kulcs','Belépés','Hirdetés hozzáadása','Tartalom nyelve','Cím','Leírás','Kép feltöltése','Célhivatkozás','Beszúrás e fotó után','Közzétéve','Mentés','Törlés','Frissítés','Kilépés','Mégse','Fotók ellenőrzése','Szerkesztés','Angol cím és kép szükséges. A hiányzó fordításokat az angol változat helyettesíti.','Továbbiak','Mentve','A művelet sikertelen. Frissítsen és próbálja újra.','Piszkozat','Feldolgozás…'],
+ro:['Publicitate foto','Cheie administrator','Autentificare','Adaugă reclamă','Limba conținutului','Titlu','Descriere','Încarcă imagine','Link destinație','Plasează după fotografia nr.','Publicat','Salvează','Șterge','Actualizează','Deconectare','Anulează','Moderare foto','Editează','Sunt necesare un titlu și o imagine în engleză. Traducerile lipsă folosesc engleza.','Arată mai mult','Salvat','Acțiunea a eșuat. Actualizează și încearcă din nou.','Ciornă','Se procesează…'],
+bg:['Реклама във фотолентата','Администраторски ключ','Вход','Добави реклама','Език на съдържанието','Заглавие','Описание','Качи изображение','Целева връзка','Постави след снимка №','Публикувано','Запази','Изтрий','Обнови','Изход','Отказ','Проверка на снимки','Редактирай','Нужни са английско заглавие и изображение. Липсващите преводи използват английски.','Покажи още','Запазено','Действието не бе изпълнено. Обновете и опитайте пак.','Чернова','Обработка…'],
+el:['Διαφημίσεις φωτογραφιών','Κλειδί διαχειριστή','Σύνδεση','Προσθήκη διαφήμισης','Γλώσσα περιεχομένου','Τίτλος','Περιγραφή','Μεταφόρτωση εικόνας','Σύνδεσμος προορισμού','Τοποθέτηση μετά τη φωτογραφία αρ.','Δημοσιευμένο','Αποθήκευση','Διαγραφή','Ανανέωση','Αποσύνδεση','Ακύρωση','Έλεγχος φωτογραφιών','Επεξεργασία','Απαιτούνται αγγλικός τίτλος και εικόνα. Οι μεταφράσεις που λείπουν χρησιμοποιούν αγγλικά.','Περισσότερα','Αποθηκεύτηκε','Η ενέργεια απέτυχε. Ανανεώστε και δοκιμάστε ξανά.','Πρόχειρο','Επεξεργασία…'],
+sv:['Fotoannonser','Administratörsnyckel','Logga in','Lägg till annons','Innehållsspråk','Titel','Beskrivning','Ladda upp bild','Mållänk','Placera efter foto nr','Publicerad','Spara','Ta bort','Uppdatera','Logga ut','Avbryt','Fotogranskning','Redigera','Engelsk titel och bild krävs. Saknade översättningar använder engelska.','Visa fler','Sparat','Åtgärden misslyckades. Uppdatera och försök igen.','Utkast','Bearbetar…'],
+da:['Fotoannoncer','Administratornøgle','Log ind','Tilføj annonce','Indholdssprog','Titel','Beskrivelse','Upload billede','Destinationslink','Placer efter foto nr.','Udgivet','Gem','Slet','Opdater','Log ud','Annuller','Fotokontrol','Rediger','Engelsk titel og billede kræves. Manglende oversættelser bruger engelsk.','Vis flere','Gemt','Handlingen mislykkedes. Opdater og prøv igen.','Kladde','Behandler…'],
+no:['Fotoannonser','Administratornøkkel','Logg inn','Legg til annonse','Innholdsspråk','Tittel','Beskrivelse','Last opp bilde','Mållenke','Plasser etter bilde nr.','Publisert','Lagre','Slett','Oppdater','Logg ut','Avbryt','Bildekontroll','Rediger','Engelsk tittel og bilde kreves. Manglende oversettelser bruker engelsk.','Vis flere','Lagret','Handlingen mislyktes. Oppdater og prøv igjen.','Utkast','Behandler…'],
+fi:['Kuvamainokset','Ylläpitäjän avain','Kirjaudu','Lisää mainos','Sisällön kieli','Otsikko','Kuvaus','Lataa kuva','Kohdelinkki','Sijoita kuvan jälkeen nro','Julkaistu','Tallenna','Poista','Päivitä','Kirjaudu ulos','Peruuta','Kuvien tarkistus','Muokkaa','Englanninkielinen otsikko ja kuva vaaditaan. Puuttuvat käännökset korvataan englannilla.','Näytä lisää','Tallennettu','Toiminto epäonnistui. Päivitä ja yritä uudelleen.','Luonnos','Käsitellään…'],
+tr:['Fotoğraf reklamları','Yönetici anahtarı','Giriş','Reklam ekle','İçerik dili','Başlık','Açıklama','Görsel yükle','Hedef bağlantı','Şu fotoğraftan sonra yerleştir','Yayında','Kaydet','Sil','Yenile','Çıkış','İptal','Fotoğraf denetimi','Düzenle','İngilizce başlık ve görsel gereklidir. Eksik çevirilerde İngilizce kullanılır.','Daha fazla','Kaydedildi','İşlem başarısız. Yenileyip tekrar deneyin.','Taslak','İşleniyor…'],
+ar:['إعلانات الصور','مفتاح المسؤول','دخول','إضافة إعلان','لغة المحتوى','العنوان','الوصف','رفع صورة','رابط الوجهة','وضع الإعلان بعد الصورة رقم','منشور','حفظ','حذف','تحديث','خروج','إلغاء','مراجعة الصور','تعديل','يلزم عنوان وصورة بالإنجليزية للنشر. تُستخدم الإنجليزية عند غياب الترجمة.','عرض المزيد','تم الحفظ','تعذر تنفيذ العملية. حدّث الصفحة وحاول مجدداً.','مسودة','جارٍ التنفيذ…'],
+hi:['फ़ोटो विज्ञापन','व्यवस्थापक कुंजी','प्रवेश','विज्ञापन जोड़ें','सामग्री की भाषा','शीर्षक','विवरण','तस्वीर अपलोड करें','लिंक का पता','इस फ़ोटो संख्या के बाद रखें','प्रकाशित','सहेजें','हटाएँ','ताज़ा करें','बाहर जाएँ','रद्द करें','फ़ोटो समीक्षा','संपादित करें','प्रकाशन के लिए अंग्रेज़ी शीर्षक और तस्वीर आवश्यक हैं। अनुवाद न होने पर अंग्रेज़ी दिखाई जाएगी।','और दिखाएँ','सहेजा गया','कार्रवाई पूरी नहीं हुई। ताज़ा करके फिर कोशिश करें।','मसौदा','प्रक्रिया जारी…']
+};
+
+const names={
+en:'English',uk:'Українська',ru:'Русский',fr:'Français',
+de:'Deutsch',es:'Español',it:'Italiano',pt:'Português',
+nl:'Nederlands',pl:'Polski',cs:'Čeština',sk:'Slovenčina',
+hu:'Magyar',ro:'Română',bg:'Български',el:'Ελληνικά',
+sv:'Svenska',da:'Dansk',no:'Norsk',fi:'Suomi',
+tr:'Türkçe',ar:'العربية',hi:'हिन्दी'
+};
+
+const $=id=>document.getElementById(id);
+const aliases={ua:'uk',cz:'cs',gr:'el',se:'sv',dk:'da'};
+
+let language='en';
+let secret='';
+let busy=false;
+let current=null;
+let contentLang='en';
+let items=[];
+let offset=0;
+let hasMore=false;
+let noticeIndex=null;
+
+try{
+  let value=localStorage.getItem('pets_dogue_language')||'en';
+  value=value.toLowerCase().split('-')[0];
+  language=aliases[value]||value;
+  if(!copy[language])language='en';
+}catch{}
+
+const t=index=>copy[language][index];
+
+for(const id of ['uiLanguage','contentLanguage']){
+  for(const [code,name] of Object.entries(names)){
+    $(id).append(new Option(name,code));
+  }
+}
+
+$('uiLanguage').value=language;
+
+function notice(index,error=false){
+  noticeIndex=index;
+  $('notice').textContent=index===null?'':t(index);
+  $('notice').dataset.error=String(error);
+}
+
+function translate(){
+  document.documentElement.lang=language;
+  document.documentElement.dir=language==='ar'?'rtl':'ltr';
+
+  document.querySelectorAll('[data-t]').forEach(node=>{
+    node.textContent=t(Number(node.dataset.t));
+  });
+
+  $('uiLanguage').setAttribute('aria-label',names[language]);
+  $('speak').setAttribute('aria-label',t(0));
+
+  if(noticeIndex!==null){
+    $('notice').textContent=t(noticeIndex);
+  }
+
+  if(current){
+    $('editorTitle').textContent=t(current.updated_at?17:3);
+  }
+
+  render();
+}
+
+$('uiLanguage').onchange=()=>{
+  language=$('uiLanguage').value;
+
+  try{
+    localStorage.setItem('pets_dogue_language',language);
+  }catch{}
+
+  translate();
+};
+
+async function api(body){
+  const response=await fetch('/api/photos-ads',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-pets-dogue-admin-key':secret
+    },
+    body:JSON.stringify(body),
+    signal:AbortSignal.timeout(45000)
+  });
+
+  const data=await response.json();
+
+  if(!response.ok){
+    throw Error(data.error||'failed');
+  }
+
+  return data;
+}
+
+async function run(task){
+  if(busy)return;
+  busy=true;
+
+  document.querySelectorAll('button').forEach(node=>{
+    node.disabled=true;
+  });
+
+  $('editor').disabled=true;
+  $('contentLanguage').disabled=true;
+  notice(23);
+
+  try{
+    await task();
+  }catch{
+    notice(21,true);
+  }finally{
+    busy=false;
+
+    document.querySelectorAll('button').forEach(node=>{
+      node.disabled=false;
+    });
+
+    $('editor').disabled=false;
+    $('contentLanguage').disabled=false;
+  }
+}
+
+async function load(more=false){
+  const next=more?offset+20:0;
+
+  const data=await api({
+    action:'list',
+    offset:next
+  });
+
+  items=more?items.concat(data.items):data.items;
+  offset=next;
+  hasMore=data.hasMore;
+  render();
+}
+
+$('login').onsubmit=event=>{
+  event.preventDefault();
+
+  run(async()=>{
+    secret=$('key').value;
+    await load();
+    $('key').value='';
+    $('login').hidden=true;
+    $('panel').hidden=false;
+    notice(null);
+  }).then(()=>{
+    if($('login').hidden)return;
+    secret='';
+  });
+};
+
+$('logout').onclick=()=>{
+  secret='';
+  items=[];
+  current=null;
+  offset=0;
+  hasMore=false;
+
+  $('key').value='';
+  $('login').hidden=false;
+  $('panel').hidden=true;
+  $('editorSection').hidden=true;
+  $('image').value='';
+  $('preview').removeAttribute('src');
+  $('preview').hidden=true;
+
+  render();
+  notice(null);
+  window.speechSynthesis?.cancel();
+};
+
+function keepText(){
+  if(!current)return;
+
+  current.title_i18n[contentLang]=
+    $('title').value.trim();
+
+  current.description_i18n[contentLang]=
+    $('description').value.trim();
+}
+
+function showContent(){
+  const url=
+    current.image_urls_i18n[contentLang]||
+    current.image_urls_i18n.en||
+    '';
+
+  $('title').value=
+    current.title_i18n[contentLang]||'';
+
+  $('description').value=
+    current.description_i18n[contentLang]||'';
+
+  $('preview').hidden=!url;
+
+  if(url){
+    $('preview').src=url;
+  }else{
+    $('preview').removeAttribute('src');
+  }
+
+  $('preview').alt=
+    current.title_i18n[contentLang]||
+    current.title_i18n.en||
+    '';
+
+  $('image').value='';
+}
+
+function edit(item){
+  current=JSON.parse(JSON.stringify(item||{
+    id:crypto.randomUUID(),
+    title_i18n:{},
+    description_i18n:{},
+    image_urls_i18n:{},
+    destination_url:'',
+    after_photo:6,
+    active:false
+  }));
+
+  contentLang='en';
+  $('contentLanguage').value='en';
+  $('url').value=current.destination_url;
+  $('position').value=current.after_photo;
+  $('active').checked=current.active;
+  $('editorSection').hidden=false;
+  $('editorTitle').textContent=t(current.updated_at?17:3);
+
+  showContent();
+  notice(null);
+
+  $('editorSection').scrollIntoView({
+    block:'start',
+    behavior:'smooth'
+  });
+}
+
+$('new').onclick=()=>edit();
+
+$('cancel').onclick=()=>{
+  current=null;
+  $('editorSection').hidden=true;
+  notice(null);
+};
+
+$('contentLanguage').onchange=()=>{
+  keepText();
+  contentLang=$('contentLanguage').value;
+  showContent();
+};
+
+async function imageData(file){
+  if(
+    !file||
+    !file.type.startsWith('image/')||
+    file.size>20000000
+  ){
+    throw Error();
+  }
+
+  const url=URL.createObjectURL(file);
+
+  try{
+    const img=new Image();
+    img.src=url;
+    await img.decode();
+
+    const scale=Math.min(
+      1,
+      1600/Math.max(img.naturalWidth,img.naturalHeight)
+    );
+
+    const canvas=document.createElement('canvas');
+
+    canvas.width=Math.max(
+      1,
+      Math.round(img.naturalWidth*scale)
+    );
+
+    canvas.height=Math.max(
+      1,
+      Math.round(img.naturalHeight*scale)
+    );
+
+    const context=canvas.getContext('2d');
+    context.fillStyle='#fff';
+    context.fillRect(0,0,canvas.width,canvas.height);
+    context.drawImage(img,0,0,canvas.width,canvas.height);
+
+    let data=canvas.toDataURL('image/jpeg',.82);
+
+    if(data.length>1300000){
+      data=canvas.toDataURL('image/jpeg',.55);
+    }
+
+    if(data.length>1300000)throw Error();
+
+    return data;
+  }finally{
+    URL.revokeObjectURL(url);
+  }
+}
+
+$('image').onchange=()=>{
+  const file=$('image').files[0];
+  if(!file||!current)return;
+
+  const target=current;
+  const code=contentLang;
+
+  run(async()=>{
+    const data=await imageData(file);
+    const result=await api({
+      action:'upload',
+      image:data
+    });
+
+    if(current===target){
+      current.image_urls_i18n[code]=result.url;
+      keepText();
+      showContent();
+    }
+
+    notice(20);
+  });
+};
+
+$('form').onsubmit=event=>{
+  event.preventDefault();
+  if(!current)return;
+
+  run(async()=>{
+    keepText();
+
+    current.destination_url=$('url').value.trim();
+    current.after_photo=Number($('position').value);
+    current.active=$('active').checked;
+
+    if(
+      current.active&&
+      (!current.title_i18n.en||!current.image_urls_i18n.en)
+    ){
+      notice(18,true);
+      return;
+    }
+
+    const data=await api({
+      action:'save',
+      id:current.id,
+      updated_at:current.updated_at,
+      ad:current
+    });
+
+    current=data.item;
+    await load();
+
+    $('editorSection').hidden=true;
+    current=null;
+    notice(20);
+  });
+};
+
+function render(){
+  $('list').replaceChildren();
+
+  for(const item of items){
+    const article=document.createElement('article');
+    const title=document.createElement('h2');
+    const status=document.createElement('p');
+    const img=document.createElement('img');
+    const buttons=document.createElement('div');
+    const editButton=document.createElement('button');
+    const removeButton=document.createElement('button');
+
+    title.textContent=
+      item.title_i18n[language]||
+      item.title_i18n.en||
+      t(22);
+
+    status.textContent=
+      t(item.active?10:22)+' · '+
+      t(9)+' '+item.after_photo;
+
+    const url=
+      item.image_urls_i18n[language]||
+      item.image_urls_i18n.en;
+
+    if(url){
+      img.src=url;
+      img.alt=title.textContent;
+      img.loading='lazy';
+    }else{
+      img.hidden=true;
+    }
+
+    buttons.className='row';
+    editButton.type='button';
+    removeButton.type='button';
+    editButton.textContent=t(17);
+    removeButton.textContent=t(12);
+
+    editButton.onclick=()=>{
+      if(!busy)edit(item);
+    };
+
+    removeButton.onclick=()=>{
+      if(busy||!confirm(t(12)+'?'))return;
+
+      run(async()=>{
+        await api({
+          action:'delete',
+          id:item.id
+        });
+
+        if(current?.id===item.id){
+          current=null;
+          $('editorSection').hidden=true;
+        }
+
+        await load();
+        notice(20);
+      });
+    };
+
+    buttons.append(editButton,removeButton);
+    article.append(title,status,img,buttons);
+    $('list').append(article);
+  }
+
+  $('more').hidden=!hasMore;
+}
+
+$('refresh').onclick=()=>run(async()=>{
+  await load();
+  notice(null);
+});
+
+$('more').onclick=()=>run(async()=>{
+  await load(true);
+  notice(null);
+});
+
+$('speak').onclick=()=>{
+  if(!window.speechSynthesis)return;
+
+  const synth=window.speechSynthesis;
+
+  if(synth.speaking){
+    synth.cancel();
+    return;
+  }
+
+  const text=[
+    t(0),
+    t(18),
+    ...items.map(item=>
+      item.title_i18n[language]||
+      item.title_i18n.en||
+      ''
+    )
+  ].join('. ');
+
+  const utterance=new SpeechSynthesisUtterance(text);
+  utterance.lang=language;
+  synth.speak(utterance);
+};
+
+translate();
+})();
+</script>
+</body>
+</html>
