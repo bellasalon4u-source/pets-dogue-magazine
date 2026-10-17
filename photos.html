@@ -4358,38 +4358,67 @@ refreshPhotoLanguage();
 <script src="/pets-dogue-shell.js?v=20260906-photos-seo-1"></script>
 <script src="/photos-community-layout.js?v=20261016-review-2"></script>
 <script>
-/* PETS & DOGUE — compact photo page */
+/* PETS & DOGUE — final photo cards, 2026-10-17 */
 (() => {
 'use strict';
 
 function setupCompact() {
 const copy = {
-en:["Add a photo or video of your pet","Photos from magazine issues","Uploaded. Your photo or video is awaiting review.","Done"],
-uk:["Додай фото або відео свого улюбленця","Фото випусків журналу","Завантажено. Фото або відео на перевірці.","Готово"],
-ru:["Добавь фото или видео своего питомца","Фото выпусков журнала","Загружено. Фото или видео на проверке.","Готово"],
-fr:["Ajoutez une photo ou vidéo de votre animal","Photos des numéros du magazine","Envoi réussi. Votre photo ou vidéo attend une vérification.","Terminé"],
-de:["Füge ein Foto oder Video deines Tieres hinzu","Fotos der Magazinausgaben","Hochgeladen. Dein Foto oder Video wartet auf Prüfung.","Fertig"],
-es:["Añade una foto o vídeo de tu mascota","Fotos de los números de la revista","Archivo subido. Tu foto o vídeo está pendiente de revisión.","Listo"],
-it:["Aggiungi una foto o un video del tuo animale","Foto dei numeri della rivista","Caricato. La foto o il video è in attesa di verifica.","Fatto"],
-pt:["Adiciona uma foto ou vídeo do teu animal","Fotos das edições da revista","Enviado. A foto ou vídeo aguarda revisão.","Concluído"],
-nl:["Voeg een foto of video van je huisdier toe","Foto’s uit de tijdschriftnummers","Geüpload. Je foto of video wacht op beoordeling.","Klaar"],
-pl:["Dodaj zdjęcie lub film swojego zwierzaka","Zdjęcia z numerów magazynu","Przesłano. Zdjęcie lub film czeka na sprawdzenie.","Gotowe"],
-cs:["Přidejte fotku nebo video svého mazlíčka","Fotky z vydání časopisu","Nahráno. Fotka nebo video čeká na kontrolu.","Hotovo"],
-sk:["Pridajte fotku alebo video svojho miláčika","Fotky z vydaní časopisu","Nahrané. Fotka alebo video čaká na kontrolu.","Hotovo"],
-hu:["Tölts fel fotót vagy videót a kedvencedről","Fotók a magazin lapszámaiból","Feltöltve. A fotó vagy videó ellenőrzésre vár.","Kész"],
-ro:["Adaugă o fotografie sau un video cu animalul tău","Fotografii din numerele revistei","Încărcat. Fotografia sau videoclipul așteaptă verificarea.","Gata"],
-bg:["Добави снимка или видео на любимеца си","Снимки от броевете на списанието","Качено. Снимката или видеото чака проверка.","Готово"],
-el:["Πρόσθεσε φωτογραφία ή βίντεο του κατοικιδίου σου","Φωτογραφίες από τα τεύχη του περιοδικού","Μεταφορτώθηκε. Η φωτογραφία ή το βίντεο αναμένει έλεγχο.","Έτοιμο"],
-sv:["Lägg till ett foto eller en video av ditt djur","Foton från tidningens nummer","Uppladdat. Fotot eller videon väntar på granskning.","Klart"],
-da:["Tilføj et foto eller en video af dit kæledyr","Fotos fra magasinets numre","Uploadet. Fotoet eller videoen afventer kontrol.","Færdig"],
-no:["Legg til et bilde eller en video av kjæledyret ditt","Bilder fra magasinets utgaver","Lastet opp. Bildet eller videoen venter på kontroll.","Ferdig"],
-fi:["Lisää lemmikkisi kuva tai video","Kuvia lehden numeroista","Ladattu. Kuva tai video odottaa tarkistusta.","Valmis"],
-tr:["Evcil hayvanının fotoğrafını veya videosunu ekle","Dergi sayılarından fotoğraflar","Yüklendi. Fotoğraf veya video inceleme bekliyor.","Tamam"],
-ar:["أضف صورة أو فيديو لحيوانك الأليف","صور أعداد المجلة","تم الرفع. الصورة أو الفيديو بانتظار المراجعة.","تم"],
-hi:["अपने पालतू की फ़ोटो या वीडियो जोड़ें","पत्रिका के अंकों की तस्वीरें","अपलोड हो गया। फ़ोटो या वीडियो समीक्षा की प्रतीक्षा में है।","पूरा हुआ"]
+en:["Add photo ＋","Magazine photos →","Uploaded. Your photo or video is awaiting review.","Done"],
+uk:["Додай фото ＋","Фото журналу →","Завантажено. Фото або відео на перевірці.","Готово"],
+ru:["Добавь фото ＋","Фото журнала →","Готово! Фото или видео загружено и ожидает проверки.","Готово"],
+fr:["Ajouter une photo ＋","Photos du magazine →","Envoi réussi. Votre photo ou vidéo attend une vérification.","Terminé"],
+de:["Foto hinzufügen ＋","Magazinfotos →","Hochgeladen. Dein Foto oder Video wartet auf Prüfung.","Fertig"],
+es:["Añade una foto ＋","Fotos de la revista →","Archivo subido. Tu foto o vídeo está pendiente de revisión.","Listo"],
+it:["Aggiungi foto ＋","Foto della rivista →","Caricato. La foto o il video è in attesa di verifica.","Fatto"],
+pt:["Adicionar foto ＋","Fotos da revista →","Enviado. A foto ou vídeo aguarda revisão.","Concluído"],
+nl:["Foto toevoegen ＋","Magazinefoto’s →","Geüpload. Je foto of video wacht op beoordeling.","Klaar"],
+pl:["Dodaj zdjęcie ＋","Zdjęcia magazynu →","Przesłano. Zdjęcie lub film czeka na sprawdzenie.","Gotowe"],
+cs:["Přidat fotku ＋","Fotky časopisu →","Nahráno. Fotka nebo video čeká na kontrolu.","Hotovo"],
+sk:["Pridať fotku ＋","Fotky časopisu →","Nahrané. Fotka alebo video čaká na kontrolu.","Hotovo"],
+hu:["Fotó hozzáadása ＋","Magazinfotók →","Feltöltve. A fotó vagy videó ellenőrzésre vár.","Kész"],
+ro:["Adaugă o foto ＋","Fotografii din revistă →","Încărcat. Fotografia sau videoclipul așteaptă verificarea.","Gata"],
+bg:["Добави снимка ＋","Снимки от списанието →","Качено. Снимката или видеото чака проверка.","Готово"],
+el:["Πρόσθεσε φωτογραφία ＋","Φωτογραφίες περιοδικού →","Μεταφορτώθηκε. Η φωτογραφία ή το βίντεο αναμένει έλεγχο.","Έτοιμο"],
+sv:["Lägg till foto ＋","Tidningens foton →","Uppladdat. Fotot eller videon väntar på granskning.","Klart"],
+da:["Tilføj foto ＋","Magasinets fotos →","Uploadet. Fotoet eller videoen afventer kontrol.","Færdig"],
+no:["Legg til bilde ＋","Magasinbilder →","Lastet opp. Bildet eller videoen venter på kontroll.","Ferdig"],
+fi:["Lisää kuva ＋","Lehden kuvat →","Ladattu. Kuva tai video odottaa tarkistusta.","Valmis"],
+tr:["Fotoğraf ekle ＋","Dergi fotoğrafları →","Yüklendi. Fotoğraf veya video inceleme bekliyor.","Tamam"],
+ar:["أضف صورة ＋","صور المجلة ←","تم الرفع. الصورة أو الفيديو بانتظار المراجعة.","تم"],
+hi:["फ़ोटो जोड़ें ＋","पत्रिका की तस्वीरें →","अपलोड हो गया। फ़ोटो या वीडियो समीक्षा की प्रतीक्षा में है।","पूरा हुआ"]
 };
 
-const aliases = {ua:'uk',cz:'cs',gr:'el',se:'sv',dk:'da'};
+const rulesCopy = {
+en:["Rules","Free · Photos and video ·"],
+uk:["Правила","Безкоштовно · Фото та відео ·"],
+ru:["Правила","Бесплатно · Фото и видео ·"],
+fr:["Règles","Gratuit · Photos et vidéos ·"],
+de:["Regeln","Kostenlos · Fotos und Videos ·"],
+es:["Normas","Gratis · Fotos y vídeos ·"],
+it:["Regole","Gratis · Foto e video ·"],
+pt:["Regras","Grátis · Fotos e vídeos ·"],
+nl:["Regels","Gratis · Foto’s en video’s ·"],
+pl:["Zasady","Bezpłatnie · Zdjęcia i filmy ·"],
+cs:["Pravidla","Zdarma · Fotky a videa ·"],
+sk:["Pravidlá","Zadarmo · Fotky a videá ·"],
+hu:["Szabályok","Ingyenes · Fotók és videók ·"],
+ro:["Reguli","Gratuit · Fotografii și video ·"],
+bg:["Правила","Безплатно · Снимки и видео ·"],
+el:["Κανόνες","Δωρεάν · Φωτογραφίες και βίντεο ·"],
+sv:["Regler","Gratis · Foton och video ·"],
+da:["Regler","Gratis · Fotos og video ·"],
+no:["Regler","Gratis · Bilder og video ·"],
+fi:["Säännöt","Ilmainen · Kuvat ja videot ·"],
+tr:["Kurallar","Ücretsiz · Fotoğraf ve video ·"],
+ar:["القواعد","مجاناً · صور وفيديو ·"],
+hi:["नियम","मुफ़्त · फ़ोटो और वीडियो ·"]
+};
+
+const aliases = {
+ua:'uk',cz:'cs',gr:'el',se:'sv',dk:'da'
+};
+
 const dictionary = window.PDPhotoTexts;
 if (!dictionary) return;
 
@@ -4426,14 +4455,26 @@ if (!banner || !magazine || !tools || !upload) return;
 
 const cards = document.createElement('div');
 cards.className = 'pc-launch-cards';
-
 root.insertBefore(cards, banner);
 cards.append(banner, magazine);
 root.insertBefore(tools, cards);
 
-const rules = document.createElement('p');
+const rules = document.createElement('div');
 rules.className = 'pc-front-rules';
 cards.after(rules);
+
+const rulesIntro = document.createElement('span');
+const rulesDetails = document.createElement('details');
+const rulesSummary = document.createElement('summary');
+const rulesBody = document.createElement('p');
+
+rulesDetails.append(rulesSummary, rulesBody);
+rules.append(rulesIntro, rulesDetails);
+
+const cardImage = banner.querySelector('img');
+if (cardImage) {
+  cardImage.style.objectPosition = 'left center';
+}
 
 const plus = banner.querySelector('.pc-button');
 
@@ -4441,7 +4482,7 @@ banner.tabIndex = 0;
 banner.setAttribute('role', 'button');
 
 banner.addEventListener('click', event => {
-  if (!event.target.closest('button')) plus.click();
+  if (!event.target.closest('button')) plus?.click();
 });
 
 banner.addEventListener('keydown', event => {
@@ -4450,7 +4491,7 @@ banner.addEventListener('keydown', event => {
     ['Enter', ' '].includes(event.key)
   ) {
     event.preventDefault();
-    plus.click();
+    plus?.click();
   }
 });
 
@@ -4485,7 +4526,6 @@ publish.addEventListener('click', event => {
 }, true);
 
 const style = document.createElement('style');
-
 style.textContent = `
 #pcPhotos .pc-launch-cards{
   display:grid;
@@ -4504,7 +4544,7 @@ style.textContent = `
   margin:0;
   padding:0;
   border:0;
-  border-radius:12px;
+  border-radius:10px;
   overflow:hidden;
   cursor:pointer;
   text-align:start;
@@ -4514,7 +4554,6 @@ style.textContent = `
 }
 #pcPhotos .pc-launch-cards>.pc-magazine{
   background:#151515;
-  color:#f1d989;
 }
 #pcPhotos .pc-launch-cards>.pc-banner>img,
 #pcPhotos .pc-launch-cards>.pc-magazine>img{
@@ -4522,59 +4561,99 @@ style.textContent = `
   inset:0;
   display:block;
   width:100%;
-  height:100%;
+  height:calc(100% - 36px);
   object-fit:cover;
   margin:0;
 }
 #pcPhotos .pc-launch-cards>.pc-magazine>img{
   object-fit:contain;
-  object-position:center top;
+  object-position:center;
+  background:#f3ebdc;
 }
-#pcPhotos .pc-banner-text{
-  position:relative;
-  margin-top:auto;
-  z-index:1;
-  display:block;
-  width:100%;
-  padding:9px 10px;
-  background:#d80d23;
-}
-#pcPhotos .pc-banner h1{
-  font:700 clamp(13px,3.5vw,23px)/1.2 Arial,sans-serif;
-  margin:0;
-  color:#fff;
-}
-#pcPhotos .pc-banner p{
-  font:400 clamp(10px,2.5vw,13px)/1.3 Arial,sans-serif;
-  margin:5px 0 0;
-  color:#fff;
-}
-#pcPhotos .pc-banner .pc-button{
-  display:none!important;
-}
+#pcPhotos .pc-banner-text,
 #pcPhotos .pc-launch-cards>.pc-magazine>[data-pc-text="2"]{
   position:relative;
   z-index:1;
   margin-top:auto;
   width:100%;
-  padding:10px;
-  background:#111e;
-  font:700 clamp(14px,3.6vw,24px)/1.2 Georgia,serif;
+  height:36px;
+  min-height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 6px;
+  box-sizing:border-box;
+  text-align:center;
+  font:600 clamp(11px,3vw,17px)/1.15 Arial,sans-serif;
+  color:#fff;
+}
+#pcPhotos .pc-banner-text{
+  background:#d80d23;
+}
+#pcPhotos .pc-launch-cards>.pc-magazine>[data-pc-text="2"]{
+  background:#111;
+}
+#pcPhotos .pc-banner-text>div{
+  width:100%;
+}
+#pcPhotos .pc-banner h1{
+  font:inherit;
+  margin:0;
+  color:#fff;
+  text-align:center;
+}
+#pcPhotos .pc-banner p{
+  display:none;
+}
+#pcPhotos .pc-banner .pc-button{
+  display:none!important;
 }
 #pcPhotos .pc-launch-cards>.pc-magazine>span:last-child:not([data-pc-text]){
   display:none;
 }
 #pcPhotos .pc-front-rules{
-  font:400 12px/1.5 Arial,sans-serif;
-  color:#62605a;
-  margin:10px 1px 15px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:baseline;
+  gap:5px;
+  flex-wrap:wrap;
+  margin:8px 0 10px;
+  font:400 11px/1.5 Arial,sans-serif;
+  color:#737068;
+}
+#pcPhotos .pc-front-rules details{
+  display:inline;
+}
+#pcPhotos .pc-front-rules summary{
+  display:inline;
+  cursor:pointer;
+  text-decoration:underline;
+  list-style:none;
+}
+#pcPhotos .pc-front-rules summary::-webkit-details-marker{
+  display:none;
+}
+#pcPhotos .pc-front-rules details>p{
+  position:absolute;
+  inset:100% 0 auto;
+  z-index:8;
+  margin:6px 0 0;
+  padding:14px;
+  background:#fffdf7;
+  border:1px solid #d5cbb8;
+  border-radius:10px;
+  box-shadow:0 8px 24px #0002;
+  font:400 13px/1.5 Arial,sans-serif;
+  color:#333;
+  text-align:start;
 }
 #pcPhotos>.pc-tools{
   display:flex;
   align-items:center;
   gap:8px;
-  margin:0 0 8px;
-  min-height:32px;
+  margin:0 0 6px;
+  min-height:28px;
 }
 #pcPhotos>.pc-tools .pc-button{
   min-height:32px;
@@ -4598,8 +4677,15 @@ style.textContent = `
   outline-offset:3px;
 }
 #pcPhotos>.pc-heading{
-  font-size:clamp(24px,5vw,38px);
-  margin:14px 0 12px;
+  font-size:clamp(24px,5vw,36px);
+  margin:10px 0;
+}
+#pcPhotos .pc-grid{
+  column-gap:7px;
+}
+#pcPhotos .pc-tile{
+  margin-bottom:7px;
+  border-radius:8px;
 }
 dialog.pc-dialog .pc-upload.pc-complete{
   background:#147b43!important;
@@ -4616,16 +4702,26 @@ dialog.pc-dialog .pc-status.pc-success{
   font-weight:700;
 }
 @media(min-width:760px){
-  #pcPhotos .pc-launch-cards{gap:16px}
+  #pcPhotos .pc-launch-cards{
+    max-width:780px;
+    margin-inline:auto;
+    gap:16px;
+  }
   #pcPhotos .pc-launch-cards>.pc-banner,
   #pcPhotos .pc-launch-cards>.pc-magazine{
-    aspect-ratio:1.5/1;
+    aspect-ratio:1.15/1;
   }
-  #pcPhotos .pc-banner-text{padding:16px}
-  #pcPhotos .pc-front-rules{font-size:13px}
+  #pcPhotos .pc-banner-text,
+  #pcPhotos .pc-launch-cards>.pc-magazine>[data-pc-text="2"]{
+    height:42px;
+    min-height:42px;
+  }
+  #pcPhotos .pc-launch-cards>.pc-banner>img,
+  #pcPhotos .pc-launch-cards>.pc-magazine>img{
+    height:calc(100% - 42px);
+  }
 }
 `;
-
 document.head.append(style);
 
 const observer = new MutationObserver(apply);
@@ -4635,12 +4731,10 @@ function observe() {
     childList:true,
     subtree:true
   });
-
   observer.observe(upload, {
     childList:true,
     subtree:true
   });
-
   observer.observe(document.documentElement, {
     attributes:true,
     attributeFilter:['lang','dir']
@@ -4655,11 +4749,11 @@ function text(node, value) {
 
 function apply() {
   observer.disconnect();
-
   try {
     const code = locale();
     const words = copy[code] || copy.en;
     const strings = dictionary[code] || dictionary.en;
+    const ruleWords = rulesCopy[code] || rulesCopy.en;
 
     text(banner.querySelector('h1'), words[0]);
     banner.setAttribute('aria-label', words[0]);
@@ -4669,7 +4763,9 @@ function apply() {
       words[1]
     );
 
-    text(rules, strings[11] + ' ' + strings[19]);
+    text(rulesIntro, ruleWords[1]);
+    text(rulesSummary, ruleWords[0]);
+    text(rulesBody, strings[11] + ' ' + strings[19]);
 
     if (speaker) {
       speaker.setAttribute('aria-label', strings[18]);
@@ -4678,7 +4774,6 @@ function apply() {
     }
 
     const complete = status.textContent === strings[14];
-
     publish.classList.toggle('pc-complete', complete);
     status.classList.toggle('pc-success', complete);
     publish.dataset.pcComplete = String(complete);
