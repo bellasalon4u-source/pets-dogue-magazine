@@ -3645,6 +3645,159 @@ keepFashionVisible();
 <script src="/pets-dogue-shell.js?v=20260908-fashion-platform-1"></script>
 
 <script src="/pd-accessibility.js?v=20260908-fashion-reading-1"></script>
+<style>
+/* PETS & DOGUE — fashion layout, 2026-10-18 */
 
+body>section.hero{
+  display:none!important;
+}
+
+#autumn-elegance .card-image img{
+  object-position:center 45%;
+}
+
+body>footer{
+  padding:22px 16px 18px!important;
+}
+
+body>footer .footer-brand{
+  font:400 clamp(20px,4vw,28px)/1.2 Georgia,serif!important;
+  letter-spacing:2px!important;
+  margin:0 0 7px!important;
+}
+
+body>footer .footer-subtitle,
+body>footer .footer-slogan{
+  font-size:11px!important;
+  line-height:1.4!important;
+  margin:3px 0!important;
+}
+
+body>footer .footer-links{
+  gap:8px 14px!important;
+  margin:14px auto!important;
+}
+
+body>footer .footer-links a,
+body>footer .admin-small{
+  font-size:10px!important;
+  line-height:1.5!important;
+}
+
+.editorial-strip>.visual-link:not(#fashion-offers){
+  display:none!important;
+}
+
+.editorial-strip{
+  grid-template-columns:1fr!important;
+}
+
+#fashion-offers{
+  max-height:340px;
+  overflow:hidden;
+}
+
+@media(min-width:760px){
+  #fashion-offers{
+    max-height:420px;
+  }
+}
+</style>
+
+<script>
+(() => {
+'use strict';
+
+/* Preserve translations without repeated attribute changes. */
+if(typeof applyLocalNavigation==='function'){
+  applyLocalNavigation=function(){
+    const language=getCurrentLanguage();
+    const words=LOCAL_NAV_UI[language]||LOCAL_NAV_UI.en;
+    const html=document.documentElement;
+    const direction=language==='ar'?'rtl':'ltr';
+
+    if(html.lang!==language){
+      html.lang=language;
+    }
+
+    if(html.dir!==direction){
+      html.dir=direction;
+    }
+
+    for(const id of [
+      'topDiscounts',
+      'sideDiscounts',
+      'footerDiscounts'
+    ]){
+      const node=document.getElementById(id);
+
+      if(node&&node.textContent!==words.discounts){
+        node.textContent=words.discounts;
+      }
+    }
+
+    for(const id of [
+      'topPetFriendly',
+      'sidePetFriendly',
+      'footerPetFriendly'
+    ]){
+      const node=document.getElementById(id);
+
+      if(node&&node.textContent!==words.petFriendly){
+        node.textContent=words.petFriendly;
+      }
+    }
+
+    if(
+      languageSelect&&
+      languageSelect.value!==language
+    ){
+      languageSelect.value=language;
+    }
+
+    applySeo(language);
+    applySafeFashionCopy(language);
+  };
+}
+
+function setup(){
+  const hero=document.querySelector(
+    'body>section.hero'
+  );
+
+  const image=hero?.querySelector('img');
+
+  const autumn=document.querySelector(
+    '#autumn-elegance .card-image img'
+  );
+
+  if(image&&autumn){
+    autumn.src=image.getAttribute('src');
+    autumn.loading='eager';
+    autumn.setAttribute('fetchpriority','high');
+  }
+
+  hero?.remove();
+
+  document.querySelectorAll(
+    '.editorial-strip>.visual-link:not(#fashion-offers)'
+  ).forEach(node=>node.remove());
+
+  if(typeof applyLocalNavigation==='function'){
+    applyLocalNavigation();
+  }
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener(
+    'DOMContentLoaded',
+    setup,
+    {once:true}
+  );
+}else{
+  setup();
+}
+})();
+</script>
 </body>
 </html>
