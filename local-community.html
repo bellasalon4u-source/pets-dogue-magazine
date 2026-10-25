@@ -1,195 +1,6210 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0,viewport-fit=cover"
+>
+
+<title>
+Pet Community Near You | PETS &amp; DOGUE
+</title>
+
+<meta
+id="pageDescription"
+name="description"
+content="Find lost and found pets, local events, meetups, clubs, groups, volunteers, adoption, help requests and animal news near you with PETS & DOGUE."
+>
+
+<meta
+name="robots"
+content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+>
+
+<meta
+name="theme-color"
+content="#070707"
+>
+
+<link
+rel="canonical"
+href="https://www.petsanddogue.com/local-community.html"
+>
+
+<meta
+property="og:type"
+content="website"
+>
+
+<meta
+property="og:site_name"
+content="PETS & DOGUE"
+>
+
+<meta
+id="ogTitle"
+property="og:title"
+content="Pet Community Near You | PETS & DOGUE"
+>
+
+<meta
+id="ogDescription"
+property="og:description"
+content="Discover lost and found pets, local events, meetups, clubs, groups, volunteers, adoption and animal news near you."
+>
+
+<meta
+property="og:url"
+content="https://www.petsanddogue.com/local-community.html"
+>
+
+<meta
+name="twitter:card"
+content="summary_large_image"
+>
+
+<meta
+id="twitterTitle"
+name="twitter:title"
+content="Pet Community Near You | PETS & DOGUE"
+>
+
+<meta
+id="twitterDescription"
+name="twitter:description"
+content="Discover the pet community near you with PETS & DOGUE."
+>
+
+<link
+rel="preconnect"
+href="https://unpkg.com"
+crossorigin
+>
+
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+crossorigin=""
+>
+
 <style>
-  .community-carousel {
-    max-width: 930px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
 
-  .community-carousel-track {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
+:root{
+--black:#070707;
+--white:#ffffff;
+--cream:#f5f0e6;
+--gold:#c99a2e;
+--gold-light:#f1d783;
+--gold-dark:#896316;
+--green:#65e51f;
+--red:#e4484e;
+--blue:#408dd5;
+--purple:#8e64dc;
+--orange:#ec941e;
+--found:#278137;
+--group:#ad8529;
+--border:#d3cdc1;
+--grey:#747474;
+}
 
-  .community-cover {
-    position: relative;
-    isolation: isolate;
-    flex: 0 0 min(68vw, 490px);
-    height: min(104vw, 735px);
-    overflow: hidden;
-    color: #fff;
-    background-image:
-      linear-gradient(0deg, rgba(0,0,0,.88), transparent 70%),
-      url("community-category-photos.png");
-    background-size: 100% 100%, 500% 200%;
-    background-position: center, var(--photo-x) var(--photo-y);
-    cursor: pointer;
-  }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-  .community-cover.is-side {
-    flex-basis: 18vw;
-    height: min(92vw, 500px);
-    opacity: .82;
-  }
+html{
+width:100%;
+overflow-x:hidden;
+scroll-behavior:smooth;
+}
 
-  .community-cover-content {
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    left: 14px;
-  }
+body{
+width:100%;
+overflow-x:hidden;
+background:var(--cream);
+color:#111;
+font-family:Arial,Helvetica,sans-serif;
+}
 
-  .community-cover h3 {
-    margin: 0 0 10px;
-    font: 400 clamp(28px, 7vw, 46px)/.98 Georgia, serif;
-  }
+body.locked{
+overflow:hidden;
+}
 
-  .community-cover-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
+a{
+color:inherit;
+text-decoration:none;
+}
 
-  .community-cover-actions button {
-    min-height: 38px;
-    padding: 0 11px;
-    border: 1px solid #fff;
-    border-radius: 24px;
-    background: #111;
-    color: #fff;
-    font-weight: 800;
-  }
+button,
+input,
+select,
+textarea{
+font:inherit;
+}
 
-  .community-cover-actions .red {
-    border-color: #c8102e;
-    background: #c8102e;
-  }
+button{
+cursor:pointer;
+}
 
-  .community-carousel-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    margin: 14px 0;
-  }
+button,
+a,
+input,
+select,
+textarea{
+-webkit-tap-highlight-color:transparent;
+}
 
-  .community-carousel-controls button {
-    width: 44px;
-    height: 44px;
-    border: 1px solid #111;
-    border-radius: 50%;
-    background: transparent;
-  }
+img{
+display:block;
+width:100%;
+}
+
+
+/* =========================================================
+COMMUNITY MAIN
+========================================================= */
+
+.community-shell{
+max-width:1450px;
+margin:0 auto;
+padding:34px 24px 20px;
+}
+
+.community-layout{
+display:grid;
+grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr);
+gap:26px;
+align-items:start;
+}
+
+.community-copy{
+position:relative;
+margin-bottom:23px;
+padding-right:66px;
+}
+
+html[dir="rtl"] .community-copy{
+padding-right:0;
+padding-left:66px;
+}
+
+.community-kicker{
+display:block;
+margin-bottom:12px;
+font-size:10px;
+font-weight:900;
+letter-spacing:3px;
+color:var(--gold-dark);
+}
+
+.community-copy h1{
+max-width:760px;
+font:normal 61px/.95 Georgia,serif;
+}
+
+.community-copy p{
+max-width:780px;
+margin-top:15px;
+font-size:16px;
+line-height:1.55;
+color:#626262;
+}
+
+
+/* =========================================================
+LOCATION
+========================================================= */
+
+.location-row{
+display:grid;
+grid-template-columns:minmax(0,1fr) 76px;
+gap:11px;
+position:relative;
+}
+
+.location-shell{
+position:relative;
+}
+
+.location-box{
+height:70px;
+display:grid;
+grid-template-columns:52px minmax(0,1fr) 40px;
+align-items:center;
+overflow:hidden;
+background:#fff;
+border:2px solid var(--gold);
+border-radius:23px;
+box-shadow:0 0 0 4px rgba(201,154,46,.08);
+}
+
+.location-icon{
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.location-icon svg{
+width:28px;
+height:28px;
+fill:none;
+stroke:#111;
+stroke-width:2;
+}
+
+.location-box input{
+width:100%;
+height:100%;
+min-width:0;
+border:0;
+outline:0;
+background:transparent;
+font-size:18px;
+color:#111;
+}
+
+.clear-location{
+width:35px;
+height:35px;
+border:0;
+background:transparent;
+font-size:25px;
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.clear-location.show{
+display:flex;
+}
+
+.geo-button{
+width:76px;
+height:70px;
+border:0;
+border-radius:23px;
+background:var(--green);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.geo-button svg{
+width:33px;
+height:33px;
+fill:none;
+stroke:#111;
+stroke-width:2.5;
+}
+
+.location-suggestions{
+position:absolute;
+left:0;
+right:0;
+top:calc(100% + 8px);
+z-index:1500;
+display:none;
+overflow:hidden;
+background:#fff;
+border:1.5px solid #c8c2b6;
+border-radius:20px;
+box-shadow:0 18px 42px rgba(0,0,0,.2);
+}
+
+.location-suggestions.show{
+display:block;
+}
+
+.location-option{
+width:100%;
+display:grid;
+grid-template-columns:22px minmax(0,1fr);
+gap:10px;
+padding:14px 16px;
+border:0;
+border-bottom:1px solid #eee;
+background:#fff;
+text-align:left;
+}
+
+.location-option:last-child{
+border-bottom:0;
+}
+
+.location-option:hover,
+.location-option:focus{
+background:#f7f3e9;
+}
+
+.location-option .diamond{
+color:var(--gold);
+font-size:16px;
+}
+
+.location-option strong{
+display:block;
+font-size:15px;
+margin-bottom:3px;
+}
+
+.location-option small{
+display:block;
+font-size:12px;
+line-height:1.38;
+color:#777;
+}
+
+.selected-location{
+display:flex;
+align-items:flex-start;
+gap:8px;
+min-height:20px;
+margin:11px 0 17px;
+font-size:12px;
+font-weight:900;
+color:var(--gold-dark);
+}
+
+.selected-location b{
+font-size:14px;
+}
+
+
+/* =========================================================
+RADIUS
+========================================================= */
+
+.radius-box{
+padding:16px 0 18px;
+border-top:1px solid #cec7bb;
+}
+
+.radius-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+font-size:11px;
+font-weight:900;
+letter-spacing:1px;
+text-transform:uppercase;
+}
+
+.radius-value{
+font-size:23px;
+letter-spacing:0;
+}
+
+.radius-box input{
+width:100%;
+margin-top:16px;
+accent-color:var(--green);
+}
+
+
+/* =========================================================
+FILTERS
+========================================================= */
+
+.filter-panel{
+padding-top:6px;
+display:grid;
+gap:9px;
+}
+
+.filter-title{
+font:normal 29px Georgia,serif;
+margin-bottom:3px;
+}
+
+.community-filter{
+width:100%;
+min-height:59px;
+border:1.5px solid #c7c0b4;
+border-radius:999px;
+background:transparent;
+padding:0 17px;
+display:grid;
+grid-template-columns:28px minmax(0,1fr) auto;
+gap:9px;
+align-items:center;
+font-size:13px;
+font-weight:900;
+text-align:left;
+}
+
+.community-filter.active{
+background:#111;
+border-color:#111;
+color:#fff;
+}
+
+.filter-icon{
+font-size:17px;
+text-align:center;
+}
+
+.filter-count{
+font-size:11px;
+opacity:.6;
+}
+
+.mobile-filters{
+display:none;
+}
+
+
+/* =========================================================
+MAP
+========================================================= */
+
+.map-shell{
+position:relative;
+height:440px;
+overflow:hidden;
+background:#ddd;
+border:1.5px solid #111;
+border-radius:28px;
+}
+
+#communityMap{
+width:100%;
+height:100%;
+z-index:1;
+}
+
+.map-add{
+position:absolute;
+top:18px;
+right:18px;
+z-index:600;
+display:flex;
+align-items:center;
+gap:8px;
+border:0;
+border-radius:999px;
+background:#111;
+color:#fff;
+padding:12px 18px;
+font-size:12px;
+font-weight:900;
+box-shadow:0 8px 18px rgba(0,0,0,.22);
+}
+
+.map-add strong{
+font-size:24px;
+line-height:.7;
+}
+
+.map-legend{
+position:absolute;
+left:13px;
+right:13px;
+bottom:10px;
+z-index:600;
+display:flex;
+justify-content:center;
+gap:8px 12px;
+flex-wrap:wrap;
+background:rgba(255,255,255,.94);
+padding:8px 12px;
+border-radius:18px;
+font-size:9px;
+font-weight:800;
+box-shadow:0 2px 10px rgba(0,0,0,.13);
+}
+
+.legend{
+display:flex;
+align-items:center;
+gap:4px;
+white-space:nowrap;
+}
+
+.legend-dot{
+width:10px;
+height:10px;
+border-radius:50%;
+}
+
+.legend-dot.lost{background:var(--red);}
+.legend-dot.seen{background:var(--blue);}
+.legend-dot.found{background:var(--found);}
+.legend-dot.event{background:var(--purple);}
+.legend-dot.group{background:var(--group);}
+.legend-dot.help{background:var(--orange);}
+
+
+/* =========================================================
+RESULT BAR
+========================================================= */
+
+.results-bar{
+max-width:1450px;
+margin:0 auto;
+padding:18px 24px 14px;
+border-top:1px solid #d0c9bd;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:13px;
+}
+
+.results-count{
+font-size:18px;
+font-weight:900;
+}
+
+.results-count strong{
+color:#3f8436;
+}
+
+.sort-select{
+height:48px;
+border:1px solid #c9c2b7;
+border-radius:999px;
+background:transparent;
+padding:0 17px;
+}
+
+
+/* =========================================================
+RESULTS
+========================================================= */
+
+.results-section{
+max-width:1450px;
+margin:0 auto;
+padding:0 24px 32px;
+}
+
+.status-message{
+display:none;
+padding:15px 0;
+font-size:13px;
+color:#666;
+}
+
+.status-message.show{
+display:block;
+}
+
+.results-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:14px;
+}
+
+.result-card{
+position:relative;
+height:405px;
+overflow:hidden;
+border:1.5px solid #111;
+border-radius:25px;
+background:#111;
+color:#fff;
+isolation:isolate;
+cursor:pointer;
+}
+
+.result-card img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-3;
+}
+
+.result-card::after{
+content:"";
+position:absolute;
+inset:0;
+z-index:-2;
+background:linear-gradient(
+to top,
+rgba(0,0,0,.97) 0%,
+rgba(0,0,0,.76) 43%,
+rgba(0,0,0,.16) 76%,
+rgba(0,0,0,.06) 100%
+);
+pointer-events:none;
+}
+
+.result-top{
+position:absolute;
+top:14px;
+left:14px;
+right:14px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:7px;
+}
+
+.result-type,
+.result-status{
+display:inline-flex;
+align-items:center;
+min-height:29px;
+border-radius:999px;
+padding:0 10px;
+font-size:9px;
+font-weight:900;
+letter-spacing:.6px;
+text-transform:uppercase;
+}
+
+.result-type{
+background:var(--gold);
+color:#111;
+}
+
+.result-status{
+background:rgba(0,0,0,.72);
+border:1px solid rgba(255,255,255,.65);
+}
+
+.result-status.found{
+background:var(--green);
+border-color:var(--green);
+color:#111;
+}
+
+.result-copy{
+position:absolute;
+left:17px;
+right:17px;
+bottom:16px;
+}
+
+.result-copy h3{
+font:normal 29px/1.02 Georgia,serif;
+overflow-wrap:anywhere;
+}
+
+.result-copy p{
+margin-top:8px;
+font-size:11px;
+line-height:1.45;
+color:#eee;
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+}
+
+.result-meta{
+margin-top:9px;
+display:flex;
+flex-wrap:wrap;
+gap:4px 9px;
+font-size:9px;
+color:#ddd;
+}
+
+.result-source{
+margin-top:9px;
+font-size:9px;
+font-weight:900;
+color:var(--gold-light);
+}
+
+
+/* =========================================================
+NOTE / FOOTER
+========================================================= */
+
+.community-note{
+max-width:1450px;
+margin:5px auto 28px;
+padding:0 24px;
+}
+
+.community-note-inner{
+background:#111;
+color:#fff;
+border-radius:28px;
+padding:27px;
+display:grid;
+grid-template-columns:50px 1fr;
+gap:14px;
+align-items:center;
+}
+
+.community-note-icon{
+width:48px;
+height:48px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:var(--green);
+color:#111;
+font-size:23px;
+font-weight:900;
+}
+
+.community-note h2{
+font:normal 30px Georgia,serif;
+color:var(--gold-light);
+}
+
+.community-note p{
+margin-top:5px;
+font-size:12px;
+line-height:1.5;
+color:#ccc;
+}
+
+.site-footer{
+margin-top:34px;
+background:#050505;
+color:#fff;
+text-align:center;
+padding:52px 20px;
+border-top:1px solid #292929;
+}
+
+.footer-brand{
+font:normal 49px Georgia,serif;
+letter-spacing:3px;
+color:var(--gold);
+}
+
+.footer-platform{
+margin-top:10px;
+font-size:14px;
+color:#d5d5d5;
+}
+
+.footer-slogan{
+margin-top:6px;
+font:italic 14px Georgia,serif;
+color:#888;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:13px 18px;
+margin-top:28px;
+}
+
+.footer-links a{
+font-size:12px;
+color:#cfcfcf;
+}
+
+.footer-legal{
+margin-top:26px;
+font-size:10px;
+letter-spacing:1.2px;
+color:#666;
+}
+
+
+/* =========================================================
+MODALS
+========================================================= */
+
+.modal-overlay{
+position:fixed;
+inset:0;
+z-index:20000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:16px;
+background:rgba(0,0,0,.75);
+}
+
+.modal-overlay.show{
+display:flex;
+}
+
+.modal{
+width:min(690px,100%);
+max-height:91dvh;
+overflow-y:auto;
+background:#fff;
+border:2px solid #111;
+border-radius:27px;
+}
+
+.modal-head{
+position:sticky;
+top:0;
+z-index:5;
+background:#111;
+color:#fff;
+padding:16px 18px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.modal-head h2{
+font:normal 27px Georgia,serif;
+}
+
+.modal-close{
+width:42px;
+height:42px;
+border:0;
+border-radius:50%;
+background:#fff;
+color:#111;
+font-size:24px;
+}
+
+.modal-body{
+padding:19px;
+}
+
+.detail-image{
+height:310px;
+object-fit:cover;
+border-radius:19px;
+margin-bottom:16px;
+}
+
+.detail-type{
+display:inline-flex;
+border-radius:999px;
+padding:7px 11px;
+background:var(--gold);
+font-size:9px;
+font-weight:900;
+letter-spacing:.7px;
+text-transform:uppercase;
+}
+
+.detail-title{
+font:normal 37px/1.03 Georgia,serif;
+margin-top:10px;
+}
+
+.detail-description{
+font:16px/1.62 Georgia,serif;
+color:#414141;
+margin-top:13px;
+white-space:pre-line;
+}
+
+.detail-info{
+display:grid;
+gap:6px;
+margin-top:15px;
+font-size:12px;
+color:#666;
+}
+
+.detail-actions{
+display:flex;
+flex-wrap:wrap;
+gap:7px;
+margin-top:18px;
+}
+
+.detail-button{
+border:0;
+border-radius:999px;
+padding:12px 16px;
+background:#111;
+color:#fff;
+font-size:11px;
+font-weight:900;
+}
+
+.detail-button.gold{
+background:var(--gold);
+color:#111;
+}
+
+.detail-button.green{
+background:var(--green);
+color:#111;
+}
+
+.add-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.add-type{
+min-height:78px;
+border:1.5px solid #111;
+border-radius:18px;
+background:#fff;
+padding:13px;
+display:flex;
+align-items:center;
+gap:9px;
+font-size:12px;
+font-weight:900;
+text-align:left;
+}
+
+.add-type b{
+font-size:22px;
+}
+
+.form-grid{
+display:grid;
+gap:11px;
+}
+
+.form-field label{
+display:block;
+margin-bottom:6px;
+font-size:10px;
+font-weight:900;
+}
+
+.form-field input,
+.form-field textarea{
+width:100%;
+border:1.5px solid #aaa;
+border-radius:15px;
+background:#fff;
+padding:11px 13px;
+}
+
+.form-field input{
+height:47px;
+}
+
+.form-field textarea{
+min-height:110px;
+resize:vertical;
+}
+
+.form-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px;
+}
+
+.form-actions button{
+height:48px;
+border:0;
+border-radius:999px;
+font-weight:900;
+}
+
+.form-actions button:first-child{
+background:#111;
+color:#fff;
+}
+
+.form-actions button:last-child{
+background:var(--green);
+}
+
+
+/* =========================================================
+MAP MARKERS
+========================================================= */
+
+.community-marker{
+width:39px;
+height:39px;
+border-radius:50%;
+border:3px solid #fff;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+font-size:16px;
+font-weight:900;
+box-shadow:0 3px 10px rgba(0,0,0,.34);
+}
+
+.community-marker.lost{background:var(--red);}
+.community-marker.seen{background:var(--blue);}
+.community-marker.found{background:var(--found);}
+.community-marker.event{background:var(--purple);}
+.community-marker.group{background:var(--group);}
+
+.community-marker.help,
+.community-marker.volunteers,
+.community-marker.foster,
+.community-marker.adoption,
+.community-marker.news{
+background:var(--orange);
+}
+
+.search-marker{
+width:27px;
+height:27px;
+border-radius:50%;
+border:4px solid #fff;
+background:#408fdf;
+box-shadow:0 2px 9px rgba(0,0,0,.35);
+}
+
+
+/* =========================================================
+RTL
+========================================================= */
+
+html[dir="rtl"] .location-option,
+html[dir="rtl"] .community-filter,
+html[dir="rtl"] .add-type{
+text-align:right;
+}
+
+html[dir="rtl"] .map-add{
+right:auto;
+left:18px;
+}
+
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] select{
+text-align:right;
+}
+
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media(max-width:1050px){
+
+.community-layout{
+grid-template-columns:minmax(0,1fr) 290px;
+}
+
+.results-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+}
+
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media(max-width:760px){
+
+.community-shell{
+padding:22px 13px 14px;
+}
+
+.community-layout{
+display:block;
+}
+
+.community-copy{
+margin-bottom:18px;
+padding-right:58px;
+}
+
+html[dir="rtl"] .community-copy{
+padding-right:0;
+padding-left:58px;
+}
+
+.community-copy h1{
+font-size:41px;
+line-height:.95;
+}
+
+.community-copy p{
+font-size:13px;
+line-height:1.5;
+margin-top:11px;
+}
+
+.community-kicker{
+font-size:8px;
+}
+
+.location-row{
+grid-template-columns:minmax(0,1fr) 60px;
+gap:8px;
+}
+
+.location-box{
+height:60px;
+grid-template-columns:43px minmax(0,1fr) 31px;
+border-radius:19px;
+}
+
+.location-box input{
+font-size:15px;
+}
+
+.location-icon svg{
+width:23px;
+height:23px;
+}
+
+.geo-button{
+width:60px;
+height:60px;
+border-radius:19px;
+}
+
+.geo-button svg{
+width:28px;
+height:28px;
+}
+
+.location-option{
+padding:12px;
+}
+
+.location-option strong{
+font-size:13px;
+}
+
+.location-option small{
+font-size:10px;
+}
+
+.selected-location{
+font-size:10px;
+margin:9px 0 13px;
+}
+
+.radius-box{
+padding:12px 0;
+}
+
+.radius-head{
+font-size:9px;
+}
+
+.radius-value{
+font-size:19px;
+}
+
+.filter-panel{
+display:none;
+}
+
+.mobile-filters{
+display:flex;
+gap:7px;
+overflow-x:auto;
+padding:3px 0 13px;
+scrollbar-width:none;
+}
+
+.mobile-filters::-webkit-scrollbar{
+display:none;
+}
+
+.mobile-filter{
+flex:none;
+border:1.5px solid #111;
+border-radius:999px;
+background:#fff;
+padding:9px 13px;
+font-size:10px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.mobile-filter.active{
+background:#111;
+color:#fff;
+}
+
+.map-shell{
+height:355px;
+border-radius:23px;
+}
+
+.map-add{
+top:13px;
+right:12px;
+padding:10px 13px;
+font-size:10px;
+}
+
+.map-add strong{
+font-size:20px;
+}
+
+.map-legend{
+left:8px;
+right:8px;
+bottom:7px;
+padding:7px 8px;
+font-size:7px;
+gap:5px 8px;
+}
+
+.legend-dot{
+width:8px;
+height:8px;
+}
+
+.results-bar{
+padding:15px 13px 12px;
+}
+
+.results-count{
+font-size:14px;
+}
+
+.sort-select{
+height:43px;
+max-width:165px;
+font-size:10px;
+padding:0 11px;
+}
+
+.results-section{
+padding:0 13px 27px;
+}
+
+.results-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:8px;
+}
+
+.result-card{
+height:280px;
+border-radius:19px;
+}
+
+.result-top{
+top:9px;
+left:9px;
+right:9px;
+}
+
+.result-type,
+.result-status{
+min-height:23px;
+font-size:7px;
+padding:0 7px;
+}
+
+.result-copy{
+left:11px;
+right:11px;
+bottom:10px;
+}
+
+.result-copy h3{
+font-size:20px;
+}
+
+.result-copy p{
+font-size:9px;
+line-height:1.38;
+}
+
+.result-meta{
+font-size:7px;
+}
+
+.result-source{
+font-size:7px;
+margin-top:6px;
+}
+
+.community-note{
+padding:0 13px;
+}
+
+.community-note-inner{
+padding:18px;
+border-radius:21px;
+grid-template-columns:39px 1fr;
+gap:10px;
+}
+
+.community-note-icon{
+width:39px;
+height:39px;
+font-size:18px;
+}
+
+.community-note h2{
+font-size:22px;
+}
+
+.community-note p{
+font-size:10px;
+}
+
+.footer-brand{
+font-size:38px;
+}
+
+.modal-overlay{
+padding:8px;
+align-items:flex-end;
+}
+
+.modal{
+border-radius:23px 23px 0 0;
+max-height:93dvh;
+}
+
+.detail-image{
+height:255px;
+}
+
+.detail-title{
+font-size:31px;
+}
+
+}
+
+@media(max-width:430px){
+
+.community-copy h1{
+font-size:38px;
+}
+
+.map-shell{
+height:335px;
+}
+
+.result-card{
+height:265px;
+}
+
+.result-copy h3{
+font-size:19px;
+}
+
+.add-grid{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
 
-<h2 class="community-section-title" id="communityChooseSection">
-  Choose a section
+</head>
+
+<body> <main>
+
+<section class="community-shell">
+
+<div class="community-layout">
+
+<div>
+
+<div
+class="community-copy"
+data-pd-readable
+>
+
+<span
+class="community-kicker notranslate"
+translate="no"
+>
+PETS &amp; DOGUE · COMMUNITY
+</span>
+
+<h1 id="heroTitle">
+Find the pet community near you
+</h1>
+
+<p id="heroText">
+Discover lost and found pets, local events, meetups, pet clubs, neighbourhood groups, group walks, volunteers, adoption, help requests and animal news near you.
+</p>
+
+</div>
+
+
+<div class="location-row">
+
+<div class="location-shell">
+
+<div class="location-box">
+
+<span class="location-icon" aria-hidden="true">
+
+<svg viewBox="0 0 24 24">
+<circle cx="11" cy="11" r="7"></circle>
+<path d="M16.5 16.5 21 21"></path>
+</svg>
+
+</span>
+
+<input
+id="locationInput"
+type="search"
+autocomplete="off"
+spellcheck="false"
+placeholder="City, district or postcode..."
+aria-label="Search location"
+>
+
+<button
+class="clear-location"
+id="clearLocation"
+type="button"
+aria-label="Clear location"
+>
+×
+</button>
+
+</div>
+
+<div
+class="location-suggestions"
+id="locationSuggestions"
+></div>
+
+</div>
+
+
+<button
+class="geo-button"
+id="geoButton"
+type="button"
+aria-label="Use my location"
+>
+
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="7"></circle>
+<circle cx="12" cy="12" r="2.4"></circle>
+<path d="M12 1v4"></path>
+<path d="M12 19v4"></path>
+<path d="M1 12h4"></path>
+<path d="M19 12h4"></path>
+</svg>
+
+</button>
+
+</div>
+
+
+<div class="selected-location">
+
+<b>◆</b>
+
+<span id="selectedLocationText">
+Selected location: London
+</span>
+
+</div>
+
+
+<div class="radius-box">
+
+<div class="radius-head">
+
+<span id="radiusLabel">
+Search radius
+</span>
+
+<strong
+class="radius-value"
+id="radiusValue"
+>
+15 km
+</strong>
+
+</div>
+
+<input
+id="radiusInput"
+type="range"
+min="2"
+max="50"
+step="1"
+value="15"
+aria-label="Search radius"
+>
+
+</div>
+
+
+<div
+class="mobile-filters"
+id="mobileFilters"
+>
+
+<button class="mobile-filter active" type="button" data-filter="all">
+<span id="mAll">All</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="lost">
+<span id="mLost">Lost</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="seen">
+<span id="mSeen">Seen</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="found">
+<span id="mFound">Found</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="event">
+<span id="mEvents">Events</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="group">
+<span id="mGroups">Clubs &amp; groups</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="help">
+<span id="mHelp">Help</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="volunteers">
+<span id="mVolunteers">Volunteers</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="foster">
+<span id="mFoster">Foster</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="adoption">
+<span id="mAdoption">Family</span>
+</button>
+
+<button class="mobile-filter" type="button" data-filter="news">
+<span id="mNews">News</span>
+</button>
+
+</div>
+
+
+<div class="map-shell">
+
+<div id="communityMap"></div>
+
+<button
+class="map-add"
+id="mapAddButton"
+type="button"
+>
+
+<strong>+</strong>
+
+<span id="addMapText">
+Add
+</span>
+
+</button>
+
+
+<div class="map-legend">
+
+<span class="legend">
+<i class="legend-dot lost"></i>
+<span id="legendLost">Lost</span>
+</span>
+
+<span class="legend">
+<i class="legend-dot seen"></i>
+<span id="legendSeen">Seen</span>
+</span>
+
+<span class="legend">
+<i class="legend-dot found"></i>
+<span id="legendFound">Found</span>
+</span>
+
+<span class="legend">
+<i class="legend-dot event"></i>
+<span id="legendEvent">Events</span>
+</span>
+
+<span class="legend">
+<i class="legend-dot group"></i>
+<span id="legendGroup">Groups</span>
+</span>
+
+<span class="legend">
+<i class="legend-dot help"></i>
+<span id="legendHelp">Help</span>
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<aside class="filter-panel">
+
+<h2
+class="filter-title"
+id="filterTitle"
+>
+What are you looking for?
 </h2>
 
-<section class="community-carousel" aria-label="Community sections">
-  <div class="community-carousel-track" id="communityCarouselTrack"></div>
+<button class="community-filter active" type="button" data-filter="all">
+<span class="filter-icon">⌘</span>
+<span id="fAll">All</span>
+<span class="filter-count" data-count="all">0</span>
+</button>
 
-  <div class="community-carousel-controls">
-    <button id="communityCarouselPrev" type="button" aria-label="Previous section">←</button>
-    <span id="communityCarouselPosition"></span>
-    <button id="communityCarouselNext" type="button" aria-label="Next section">→</button>
-  </div>
+<button class="community-filter" type="button" data-filter="lost">
+<span class="filter-icon">!</span>
+<span id="fLost">Lost pets</span>
+<span class="filter-count" data-count="lost">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="seen">
+<span class="filter-icon">◉</span>
+<span id="fSeen">Seen</span>
+<span class="filter-count" data-count="seen">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="found">
+<span class="filter-icon">✓</span>
+<span id="fFound">Found</span>
+<span class="filter-count" data-count="found">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="event">
+<span class="filter-icon">★</span>
+<span id="fEvents">Events</span>
+<span class="filter-count" data-count="event">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="group">
+<span class="filter-icon">♣</span>
+<span id="fGroups">Clubs &amp; groups</span>
+<span class="filter-count" data-count="group">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="help">
+<span class="filter-icon">+</span>
+<span id="fHelp">Help</span>
+<span class="filter-count" data-count="help">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="volunteers">
+<span class="filter-icon">♧</span>
+<span id="fVolunteers">Volunteers</span>
+<span class="filter-count" data-count="volunteers">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="foster">
+<span class="filter-icon">⌂</span>
+<span id="fFoster">Foster</span>
+<span class="filter-count" data-count="foster">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="adoption">
+<span class="filter-icon">♡</span>
+<span id="fAdoption">Looking for family</span>
+<span class="filter-count" data-count="adoption">0</span>
+</button>
+
+<button class="community-filter" type="button" data-filter="news">
+<span class="filter-icon">◫</span>
+<span id="fNews">News</span>
+<span class="filter-count" data-count="news">0</span>
+</button>
+
+</aside>
+
+</div>
+
 </section>
 
+
+<section class="results-bar">
+
+<div class="results-count">
+
+<span id="foundLabel">
+Found:
+</span>
+
+<strong id="visibleCount">
+0
+</strong>
+
+</div>
+
+<select
+class="sort-select"
+id="sortSelect"
+aria-label="Sort community results"
+>
+
+<option value="relevance" id="sortRelevant">
+Most relevant
+</option>
+
+<option value="newest" id="sortNewest">
+Newest first
+</option>
+
+<option value="oldest" id="sortOldest">
+Oldest first
+</option>
+
+</select>
+
+</section>
+
+
+<section class="results-section">
+
+<div
+class="status-message"
+id="loadingMessage"
+>
+Loading current information...
+</div>
+
+<div
+class="status-message"
+id="emptyMessage"
+>
+Nothing current was found in this category.
+</div>
+
+<div
+class="status-message"
+id="errorMessage"
+>
+Live information is temporarily unavailable.
+</div>
+
+<div
+class="results-grid"
+id="resultsGrid"
+data-pd-narration-ready="true"
+></div>
+
+</section>
+
+
+<section class="community-note">
+
+<div
+class="community-note-inner"
+data-pd-readable
+>
+
+<div class="community-note-icon">
+i
+</div>
+
+<div>
+
+<h2 id="sourceTitle">
+Current public sources
+</h2>
+
+<p id="sourceText">
+PETS &amp; DOGUE combines available public sources and keeps the original source link on every internet result.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+<div
+class="footer-brand notranslate"
+translate="no"
+>
+PETS &amp; DOGUE
+</div>
+
+<div
+class="footer-platform notranslate"
+translate="no"
+>
+Digital lifestyle platform
+</div>
+
+<div
+class="footer-slogan notranslate"
+translate="no"
+>
+One world. Every pet.
+</div>
+
+<div class="footer-links">
+
+<a href="issue-01.html" id="footerEdition">Edition</a>
+<a href="members-gallery.html" id="footerCover">Cover Stars</a>
+<a href="special-offers.html" id="footerDiscounts">Discounts</a>
+<a href="pet-friendly-places.html" id="footerPlaces">Pet-Friendly Places</a>
+<a href="pet-marketplace.html" id="footerMarketplace">Marketplace</a>
+<a href="pet-fashion.html" id="footerFashion">Fashion</a>
+<a href="wellness.html" id="footerHealth">Health</a>
+<a href="articles.html" id="footerArticles">Articles</a>
+<a href="photos.html" id="footerPhotos">Photos</a>
+<a href="local-community.html" id="footerCommunity">Community</a>
+<a href="contests.html" id="footerContests">Contests</a>
+<a href="pets-in-need.html" id="footerHelp">Help</a>
+<a href="partners.html" id="footerPartners">Partners</a>
+<a href="club.html">Club</a>
+<a href="contact.html" id="footerContact">Contact</a>
+
+</div>
+
+<div class="footer-legal notranslate" translate="no">
+© PETS &amp; DOGUE
+</div>
+
+</footer>
+
+
+<div
+class="modal-overlay"
+id="detailOverlay"
+>
+
+<div class="modal">
+
+<div class="modal-head">
+
+<h2 id="detailHeading">
+Community
+</h2>
+
+<button
+class="modal-close"
+id="detailClose"
+type="button"
+aria-label="Close"
+>
+×
+</button>
+
+</div>
+
+<div
+class="modal-body"
+id="detailBody"
+></div>
+
+</div>
+
+</div>
+
+
+<div
+class="modal-overlay"
+id="addTypeOverlay"
+>
+
+<div class="modal">
+
+<div class="modal-head">
+
+<h2 id="addTypeTitle">
+What would you like to add?
+</h2>
+
+<button
+class="modal-close"
+id="addTypeClose"
+type="button"
+aria-label="Close"
+>
+×
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="add-grid">
+
+<button class="add-type" type="button" data-add-type="lost">
+<b>!</b>
+<span id="addLost">Lost pet</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="seen">
+<b>◉</b>
+<span id="addSeen">Saw a pet</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="event">
+<b>★</b>
+<span id="addEvent">Event or meetup</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="group">
+<b>♣</b>
+<span id="addGroup">Club or group</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="help">
+<b>+</b>
+<span id="addHelp">Help needed</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="volunteers">
+<b>♧</b>
+<span id="addVolunteers">Volunteers needed</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="foster">
+<b>⌂</b>
+<span id="addFoster">Foster needed</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="adoption">
+<b>♡</b>
+<span id="addAdoption">Pet looking for family</span>
+</button>
+
+<button class="add-type" type="button" data-add-type="news">
+<b>◫</b>
+<span id="addNews">Local animal news</span>
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="modal-overlay"
+id="addFormOverlay"
+>
+
+<div class="modal">
+
+<div class="modal-head">
+
+<h2 id="addFormHeading">
+Add community post
+</h2>
+
+<button
+class="modal-close"
+id="addFormClose"
+type="button"
+aria-label="Close"
+>
+×
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="form-grid">
+
+<div class="form-field">
+
+<label
+for="formLocation"
+id="formLocationLabel"
+>
+Location
+</label>
+
+<input
+id="formLocation"
+type="text"
+>
+
+</div>
+
+<div class="form-field">
+
+<label
+for="formTitle"
+id="formTitleLabel"
+>
+Title
+</label>
+
+<input
+id="formTitle"
+type="text"
+>
+
+</div>
+
+<div class="form-field">
+
+<label
+for="formText"
+id="formTextLabel"
+>
+Short description
+</label>
+
+<textarea id="formText"></textarea>
+
+</div>
+
+<div class="form-field">
+
+<label
+for="formDate"
+id="formDateLabel"
+>
+Date / time
+</label>
+
+<input
+id="formDate"
+type="datetime-local"
+>
+
+</div>
+
+<div class="form-field">
+
+<label
+for="formImage"
+id="formImageLabel"
+>
+Photo URL (optional)
+</label>
+
+<input
+id="formImage"
+type="url"
+>
+
+</div>
+
+<div class="form-actions">
+
+<button
+type="button"
+id="cancelPost"
+>
+Cancel
+</button>
+
+<button
+type="button"
+id="publishPost"
+>
+Publish
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+crossorigin=""
+></script>
+
 <script>
-  const communitySections = [
-    { type: "lost",       photoX: "0%",   photoY: "0%" },
-    { type: "seen",       photoX: "25%",  photoY: "0%" },
-    { type: "found",      photoX: "50%",  photoY: "0%" },
-    { type: "event",      photoX: "75%",  photoY: "0%" },
-    { type: "group",      photoX: "100%", photoY: "0%" },
-    { type: "help",       photoX: "0%",   photoY: "100%" },
-    { type: "volunteers", photoX: "25%",  photoY: "100%" },
-    { type: "foster",     photoX: "50%",  photoY: "100%" },
-    { type: "adoption",   photoX: "75%",  photoY: "100%" },
-    { type: "news",       photoX: "100%", photoY: "100%" }
-  ];
+"use strict";
 
-  let communitySectionIndex = 3;
+const LANGUAGE_KEY =
+"pets_dogue_language";
 
-  function renderCommunitySections() {
-    const t = words();
-    const labels = {
-      lost: t.lost,
-      seen: t.seen,
-      found: t.found,
-      event: t.events,
-      group: t.groups,
-      help: t.help,
-      volunteers: t.volunteers,
-      foster: t.foster,
-      adoption: t.adoption,
-      news: t.news
-    };
+const LOCAL_POSTS_KEY =
+"pets_dogue_community_posts";
 
-    const visible = [
-      (communitySectionIndex + communitySections.length - 1) % communitySections.length,
-      communitySectionIndex,
-      (communitySectionIndex + 1) % communitySections.length
-    ];
+const $ =
+id =>
+document.getElementById(id);
 
-    document.getElementById("communityChooseSection").textContent = t.community;
-    document.getElementById("communityCarouselTrack").innerHTML =
-      visible.map((index, position) => {
-        const section = communitySections[index];
-        const label = labels[section.type];
+let selectedLocation = {
+name:"London",
+displayName:"London, United Kingdom",
+lat:51.5074,
+lng:-0.1278
+};
 
-        return `
-          <article class="community-cover${position === 1 ? "" : " is-side"}"
-            style="--photo-x:${section.photoX};--photo-y:${section.photoY}"
-            data-community-type="${section.type}">
-            <div class="community-cover-content">
-              <h3>${escapeHTML(label)}</h3>
-              <div class="community-cover-actions">
-                <button type="button" data-open-community="${section.type}">
-                  ${escapeHTML(t.community)}
-                </button>
-                <button class="red" type="button" data-add-community="${section.type}">
-                  + ${escapeHTML(t.add)}
-                </button>
-                <button type="button" data-map-community="${section.type}">
-                  ${escapeHTML(t.showMap)}
-                </button>
-              </div>
-            </div>
-          </article>`;
-      }).join("");
+let currentFilter =
+"all";
 
-    document.getElementById("communityCarouselPosition").textContent =
-      `${communitySectionIndex + 1} / ${communitySections.length}`;
-  }
+let allLiveItems =
+[];
 
-  document.getElementById("communityCarouselPrev").addEventListener("click", () => {
-    communitySectionIndex =
-      (communitySectionIndex + communitySections.length - 1) % communitySections.length;
-    renderCommunitySections();
-  });
+let categoryCache =
+{};
 
-  document.getElementById("communityCarouselNext").addEventListener("click", () => {
-    communitySectionIndex =
-      (communitySectionIndex + 1) % communitySections.length;
-    renderCommunitySections();
-  });
+let localPosts =
+[];
 
-  document.addEventListener("click", event => {
-    const add = event.target.closest("[data-add-community]");
-    const open = event.target.closest("[data-open-community]");
-    const map = event.target.closest("[data-map-community]");
+let map =
+null;
 
-    if (add) {
-      document.querySelector(`[data-add-type="${add.dataset.addCommunity}"]`)?.click();
-    } else if (open || map) {
-      const type = (open || map).dataset.openCommunity || map.dataset.mapCommunity;
-      document.querySelector(`[data-filter="${type}"]`)?.click();
-      document.querySelector(".map-shell")?.scrollIntoView({ behavior: "smooth" });
-    }
-  });
+let centerMarker =
+null;
 
-  renderCommunitySections();
+let resultMarkers =
+[];
+
+let searchTimer =
+null;
+
+let searchAbortController =
+null;
+
+let discoveryAbortController =
+null;
+
+let selectedAddType =
+"lost"; const UI = {
+
+en:{
+edition:"Edition",
+cover:"Cover Stars",
+discounts:"Discounts",
+places:"Pet-Friendly Places",
+marketplace:"Marketplace",
+fashion:"Fashion",
+health:"Health",
+articles:"Articles",
+photos:"Photos",
+community:"Community",
+contests:"Contests",
+helpNav:"Help",
+partners:"Partners",
+contact:"Contact",
+
+heroTitle:"Find the pet community near you",
+heroText:"Discover lost and found pets, local events, meetups, pet clubs, neighbourhood groups, group walks, volunteers, adoption, help requests and animal news near you.",
+
+locationPlaceholder:"City, district or postcode...",
+selectedLocation:"Selected location: {location}",
+radius:"Search radius",
+filterTitle:"What are you looking for?",
+
+all:"All",
+lost:"Lost",
+seen:"Seen",
+found:"Found",
+events:"Events",
+groups:"Clubs & groups",
+help:"Help",
+volunteers:"Volunteers",
+foster:"Foster",
+adoption:"Looking for family",
+news:"News",
+
+add:"Add",
+foundLabel:"Found:",
+sortRelevant:"Most relevant",
+sortNewest:"Newest first",
+sortOldest:"Oldest first",
+
+loading:"Loading current information...",
+empty:"Nothing current was found in this category.",
+error:"Live information is temporarily unavailable.",
+
+sourceTitle:"Current public sources",
+sourceText:"PETS & DOGUE combines available public sources and keeps the original source link on every internet result.",
+
+whatAdd:"What would you like to add?",
+addLost:"Lost pet",
+addSeen:"Saw a pet",
+addEvent:"Event or meetup",
+addGroup:"Club or group",
+addHelp:"Help needed",
+addVolunteers:"Volunteers needed",
+addFoster:"Foster needed",
+addAdoption:"Pet looking for family",
+addNews:"Local animal news",
+
+addPost:"Add community post",
+location:"Location",
+title:"Title",
+description:"Short description",
+date:"Date / time",
+photo:"Photo URL (optional)",
+cancel:"Cancel",
+publish:"Publish",
+
+source:"Source",
+original:"Open original source",
+showMap:"Show on map",
+markFound:"Mark as found",
+published:"Published",
+distance:"Distance",
+
+today:"Today",
+tomorrow:"Tomorrow",
+thisWeek:"This week",
+upcoming:"Upcoming",
+
+lostStatus:"LOST",
+seenStatus:"SEEN",
+foundStatus:"FOUND",
+activeStatus:"ACTIVE",
+
+yourPost:"Your post",
+validation:"Add a location, title and description.",
+geoError:"Your location could not be accessed."
+},
+
+uk:{
+edition:"Випуск",
+cover:"Зірки обкладинки",
+discounts:"Знижки",
+places:"Pet-friendly місця",
+marketplace:"Маркетплейс",
+fashion:"Мода",
+health:"Здоров’я",
+articles:"Статті",
+photos:"Фото",
+community:"Спільнота",
+contests:"Конкурси",
+helpNav:"Допомога",
+partners:"Партнери",
+contact:"Контакти",
+
+heroTitle:"Знайдіть спільноту любителів тварин поруч",
+heroText:"Знаходьте загублених і знайдених тварин, місцеві події, зустрічі, клуби, районні групи, спільні прогулянки, волонтерів, адопцію та місцеві новини.",
+
+locationPlaceholder:"Місто, район або поштовий індекс...",
+selectedLocation:"Обране місце: {location}",
+radius:"Радіус пошуку",
+filterTitle:"Що ви шукаєте?",
+
+all:"Усі",
+lost:"Загублені",
+seen:"Помічені",
+found:"Знайдені",
+events:"Події",
+groups:"Клуби та групи",
+help:"Допомога",
+volunteers:"Волонтери",
+foster:"Перетримка",
+adoption:"Шукають родину",
+news:"Новини",
+
+add:"Додати",
+foundLabel:"Знайдено:",
+sortRelevant:"Найактуальніші",
+sortNewest:"Спочатку нові",
+sortOldest:"Спочатку старі",
+
+loading:"Завантажуємо актуальну інформацію...",
+empty:"У цій категорії актуальної інформації не знайдено.",
+error:"Актуальна інформація тимчасово недоступна.",
+
+sourceTitle:"Актуальні публічні джерела",
+sourceText:"PETS & DOGUE об’єднує доступні публічні джерела та зберігає посилання на оригінал.",
+
+whatAdd:"Що ви хочете додати?",
+addLost:"Загублена тварина",
+addSeen:"Я бачив тварину",
+addEvent:"Подія або зустріч",
+addGroup:"Клуб або група",
+addHelp:"Потрібна допомога",
+addVolunteers:"Потрібні волонтери",
+addFoster:"Потрібна перетримка",
+addAdoption:"Тварина шукає родину",
+addNews:"Місцева новина про тварин",
+
+addPost:"Додати допис",
+location:"Місце",
+title:"Заголовок",
+description:"Короткий опис",
+date:"Дата / час",
+photo:"URL фото",
+cancel:"Скасувати",
+publish:"Опублікувати",
+
+source:"Джерело",
+original:"Відкрити оригінальне джерело",
+showMap:"Показати на карті",
+markFound:"Позначити як знайдену",
+published:"Опубліковано",
+distance:"Відстань",
+
+today:"Сьогодні",
+tomorrow:"Завтра",
+thisWeek:"Цього тижня",
+upcoming:"Незабаром",
+
+lostStatus:"ЗАГУБЛЕНО",
+seenStatus:"ПОМІЧЕНО",
+foundStatus:"ЗНАЙДЕНО",
+activeStatus:"АКТИВНО",
+
+yourPost:"Ваш допис",
+validation:"Додайте місце, заголовок і опис.",
+geoError:"Не вдалося отримати ваше місцезнаходження."
+},
+
+ru:{
+edition:"Выпуск",
+cover:"Звёзды обложки",
+discounts:"Скидки",
+places:"Pet-friendly места",
+marketplace:"Маркетплейс",
+fashion:"Мода",
+health:"Здоровье",
+articles:"Статьи",
+photos:"Фото",
+community:"Сообщество",
+contests:"Конкурсы",
+helpNav:"Помощь",
+partners:"Партнёры",
+contact:"Контакты",
+
+heroTitle:"Найдите сообщество владельцев животных рядом",
+heroText:"Находите потерянных и найденных животных, местные события, встречи, клубы, районные группы, совместные прогулки, волонтёров, пристройство и местные новости.",
+
+locationPlaceholder:"Город, район или почтовый индекс...",
+selectedLocation:"Выбранное место: {location}",
+radius:"Радиус поиска",
+filterTitle:"Что вы ищете?",
+
+all:"Все",
+lost:"Потеряны",
+seen:"Замечены",
+found:"Найдены",
+events:"События",
+groups:"Клубы и группы",
+help:"Помощь",
+volunteers:"Волонтёры",
+foster:"Передержка",
+adoption:"Ищут семью",
+news:"Новости",
+
+add:"Добавить",
+foundLabel:"Найдено:",
+sortRelevant:"Самые актуальные",
+sortNewest:"Сначала новые",
+sortOldest:"Сначала старые",
+
+loading:"Загружаем актуальную информацию...",
+empty:"В этой категории актуальной информации не найдено.",
+error:"Актуальная информация временно недоступна.",
+
+sourceTitle:"Актуальные публичные источники",
+sourceText:"PETS & DOGUE объединяет доступные публичные источники и сохраняет ссылку на оригинал.",
+
+whatAdd:"Что вы хотите добавить?",
+addLost:"Потерянное животное",
+addSeen:"Я видел животное",
+addEvent:"Событие или встреча",
+addGroup:"Клуб или группа",
+addHelp:"Нужна помощь",
+addVolunteers:"Нужны волонтёры",
+addFoster:"Нужна передержка",
+addAdoption:"Животное ищет семью",
+addNews:"Местная новость о животных",
+
+addPost:"Добавить публикацию",
+location:"Место",
+title:"Заголовок",
+description:"Краткое описание",
+date:"Дата / время",
+photo:"URL фото",
+cancel:"Отмена",
+publish:"Опубликовать",
+
+source:"Источник",
+original:"Открыть оригинальный источник",
+showMap:"Показать на карте",
+markFound:"Отметить как найденное",
+published:"Опубликовано",
+distance:"Расстояние",
+
+today:"Сегодня",
+tomorrow:"Завтра",
+thisWeek:"На этой неделе",
+upcoming:"Скоро",
+
+lostStatus:"ПОТЕРЯН",
+seenStatus:"ЗАМЕЧЕН",
+foundStatus:"НАЙДЕН",
+activeStatus:"АКТИВНО",
+
+yourPost:"Ваша публикация",
+validation:"Добавьте место, заголовок и описание.",
+geoError:"Не удалось получить ваше местоположение."
+},
+
+fr:{
+edition:"Édition",
+cover:"Stars de couverture",
+discounts:"Réductions",
+places:"Lieux pet-friendly",
+marketplace:"Marketplace",
+fashion:"Mode",
+health:"Santé",
+articles:"Articles",
+photos:"Photos",
+community:"Communauté",
+contests:"Concours",
+helpNav:"Aide",
+partners:"Partenaires",
+contact:"Contact",
+
+heroTitle:"Trouvez la communauté animale près de chez vous",
+heroText:"Découvrez animaux perdus, événements, rencontres, clubs, groupes locaux, promenades, bénévoles, adoption et actualités.",
+
+locationPlaceholder:"Ville, quartier ou code postal...",
+selectedLocation:"Lieu sélectionné : {location}",
+radius:"Rayon de recherche",
+filterTitle:"Que recherchez-vous ?",
+
+all:"Tout",
+lost:"Perdus",
+seen:"Aperçus",
+found:"Retrouvés",
+events:"Événements",
+groups:"Clubs et groupes",
+help:"Aide",
+volunteers:"Bénévoles",
+foster:"Accueil",
+adoption:"Cherche une famille",
+news:"Actualités",
+
+add:"Ajouter",
+foundLabel:"Trouvé :",
+sortRelevant:"Plus pertinents",
+sortNewest:"Plus récents",
+sortOldest:"Plus anciens",
+
+loading:"Chargement des informations...",
+empty:"Aucune information actuelle trouvée.",
+error:"Les informations en direct sont temporairement indisponibles.",
+
+sourceTitle:"Sources publiques actuelles",
+sourceText:"PETS & DOGUE combine des sources publiques disponibles et conserve le lien original.",
+
+whatAdd:"Que souhaitez-vous ajouter ?",
+addLost:"Animal perdu",
+addSeen:"Animal aperçu",
+addEvent:"Événement",
+addGroup:"Club ou groupe",
+addHelp:"Aide nécessaire",
+addVolunteers:"Bénévoles recherchés",
+addFoster:"Accueil recherché",
+addAdoption:"Animal cherche une famille",
+addNews:"Actualité animale locale",
+
+addPost:"Ajouter une publication",
+location:"Lieu",
+title:"Titre",
+description:"Courte description",
+date:"Date / heure",
+photo:"URL de photo",
+cancel:"Annuler",
+publish:"Publier",
+
+source:"Source",
+original:"Ouvrir la source originale",
+showMap:"Afficher sur la carte",
+markFound:"Marquer comme retrouvé",
+published:"Publié",
+distance:"Distance",
+
+today:"Aujourd’hui",
+tomorrow:"Demain",
+thisWeek:"Cette semaine",
+upcoming:"À venir",
+
+lostStatus:"PERDU",
+seenStatus:"APERÇU",
+foundStatus:"RETROUVÉ",
+activeStatus:"ACTIF",
+
+yourPost:"Votre publication",
+validation:"Ajoutez un lieu, un titre et une description.",
+geoError:"Impossible d’accéder à votre position."
+},
+
+de:{
+edition:"Edition",
+cover:"Cover Stars",
+discounts:"Rabatte",
+places:"Tierfreundliche Orte",
+marketplace:"Marktplatz",
+fashion:"Mode",
+health:"Gesundheit",
+articles:"Artikel",
+photos:"Fotos",
+community:"Community",
+contests:"Wettbewerbe",
+helpNav:"Hilfe",
+partners:"Partner",
+contact:"Kontakt",
+
+heroTitle:"Finde die Tier-Community in deiner Nähe",
+heroText:"Finde vermisste Tiere, lokale Events, Treffen, Clubs, Gruppen, Spaziergänge, Helfer, Adoptionen und Tiernachrichten.",
+
+locationPlaceholder:"Stadt, Bezirk oder Postleitzahl...",
+selectedLocation:"Ausgewählter Ort: {location}",
+radius:"Suchradius",
+filterTitle:"Wonach suchst du?",
+
+all:"Alle",
+lost:"Vermisst",
+seen:"Gesehen",
+found:"Gefunden",
+events:"Events",
+groups:"Clubs & Gruppen",
+help:"Hilfe",
+volunteers:"Freiwillige",
+foster:"Pflegestelle",
+adoption:"Sucht Familie",
+news:"Nachrichten",
+
+add:"Hinzufügen",
+foundLabel:"Gefunden:",
+sortRelevant:"Relevanteste",
+sortNewest:"Neueste zuerst",
+sortOldest:"Älteste zuerst",
+
+loading:"Aktuelle Informationen werden geladen...",
+empty:"Keine aktuellen Informationen gefunden.",
+error:"Live-Informationen sind vorübergehend nicht verfügbar.",
+
+sourceTitle:"Aktuelle öffentliche Quellen",
+sourceText:"PETS & DOGUE kombiniert verfügbare öffentliche Quellen und behält den Originallink.",
+
+whatAdd:"Was möchtest du hinzufügen?",
+addLost:"Vermisstes Tier",
+addSeen:"Tier gesehen",
+addEvent:"Event oder Treffen",
+addGroup:"Club oder Gruppe",
+addHelp:"Hilfe benötigt",
+addVolunteers:"Freiwillige gesucht",
+addFoster:"Pflegestelle gesucht",
+addAdoption:"Tier sucht Familie",
+addNews:"Lokale Tiernachricht",
+
+addPost:"Community-Beitrag hinzufügen",
+location:"Ort",
+title:"Titel",
+description:"Kurze Beschreibung",
+date:"Datum / Uhrzeit",
+photo:"Foto-URL",
+cancel:"Abbrechen",
+publish:"Veröffentlichen",
+
+source:"Quelle",
+original:"Originalquelle öffnen",
+showMap:"Auf Karte zeigen",
+markFound:"Als gefunden markieren",
+published:"Veröffentlicht",
+distance:"Entfernung",
+
+today:"Heute",
+tomorrow:"Morgen",
+thisWeek:"Diese Woche",
+upcoming:"Demnächst",
+
+lostStatus:"VERMISST",
+seenStatus:"GESEHEN",
+foundStatus:"GEFUNDEN",
+activeStatus:"AKTIV",
+
+yourPost:"Dein Beitrag",
+validation:"Bitte Ort, Titel und Beschreibung angeben.",
+geoError:"Standort konnte nicht abgerufen werden."
+},
+
+es:{
+edition:"Edición",
+cover:"Estrellas de portada",
+discounts:"Descuentos",
+places:"Lugares pet-friendly",
+marketplace:"Marketplace",
+fashion:"Moda",
+health:"Salud",
+articles:"Artículos",
+photos:"Fotos",
+community:"Comunidad",
+contests:"Concursos",
+helpNav:"Ayuda",
+partners:"Socios",
+contact:"Contacto",
+
+heroTitle:"Encuentra la comunidad de mascotas cerca de ti",
+heroText:"Descubre mascotas perdidas, eventos, encuentros, clubes, grupos, paseos, voluntarios, adopciones y noticias locales.",
+
+locationPlaceholder:"Ciudad, zona o código postal...",
+selectedLocation:"Ubicación seleccionada: {location}",
+radius:"Radio de búsqueda",
+filterTitle:"¿Qué buscas?",
+
+all:"Todo",
+lost:"Perdidos",
+seen:"Vistos",
+found:"Encontrados",
+events:"Eventos",
+groups:"Clubes y grupos",
+help:"Ayuda",
+volunteers:"Voluntarios",
+foster:"Acogida",
+adoption:"Busca familia",
+news:"Noticias",
+
+add:"Añadir",
+foundLabel:"Encontrados:",
+sortRelevant:"Más relevantes",
+sortNewest:"Más recientes",
+sortOldest:"Más antiguos",
+
+loading:"Cargando información actual...",
+empty:"No se encontró información actual.",
+error:"La información en directo no está disponible temporalmente.",
+
+sourceTitle:"Fuentes públicas actuales",
+sourceText:"PETS & DOGUE combina fuentes públicas disponibles y conserva el enlace original.",
+
+whatAdd:"¿Qué deseas añadir?",
+addLost:"Mascota perdida",
+addSeen:"Mascota vista",
+addEvent:"Evento o encuentro",
+addGroup:"Club o grupo",
+addHelp:"Se necesita ayuda",
+addVolunteers:"Se necesitan voluntarios",
+addFoster:"Se necesita acogida",
+addAdoption:"Mascota busca familia",
+addNews:"Noticia local sobre animales",
+
+addPost:"Añadir publicación",
+location:"Ubicación",
+title:"Título",
+description:"Descripción breve",
+date:"Fecha / hora",
+photo:"URL de foto",
+cancel:"Cancelar",
+publish:"Publicar",
+
+source:"Fuente",
+original:"Abrir fuente original",
+showMap:"Mostrar en el mapa",
+markFound:"Marcar como encontrado",
+published:"Publicado",
+distance:"Distancia",
+
+today:"Hoy",
+tomorrow:"Mañana",
+thisWeek:"Esta semana",
+upcoming:"Próximamente",
+
+lostStatus:"PERDIDO",
+seenStatus:"VISTO",
+foundStatus:"ENCONTRADO",
+activeStatus:"ACTIVO",
+
+yourPost:"Tu publicación",
+validation:"Añade ubicación, título y descripción.",
+geoError:"No se pudo acceder a tu ubicación."
+},it:{
+...UI.en,
+edition:"Edizione",
+discounts:"Sconti",
+places:"Luoghi pet-friendly",
+fashion:"Moda",
+health:"Salute",
+articles:"Articoli",
+photos:"Foto",
+community:"Community",
+contests:"Concorsi",
+helpNav:"Aiuto",
+partners:"Partner",
+contact:"Contatti",
+heroTitle:"Trova la community degli animali vicino a te",
+heroText:"Scopri animali smarriti, eventi, incontri, club, gruppi, passeggiate, volontari, adozioni e notizie locali.",
+locationPlaceholder:"Città, zona o CAP...",
+selectedLocation:"Località selezionata: {location}",
+radius:"Raggio di ricerca",
+filterTitle:"Cosa stai cercando?",
+all:"Tutto",
+lost:"Smarriti",
+seen:"Avvistati",
+found:"Ritrovati",
+events:"Eventi",
+groups:"Club e gruppi",
+help:"Aiuto",
+volunteers:"Volontari",
+foster:"Stallo",
+adoption:"Cerca famiglia",
+news:"Notizie",
+add:"Aggiungi",
+foundLabel:"Trovati:",
+loading:"Caricamento delle informazioni attuali...",
+empty:"Nessuna informazione attuale trovata.",
+error:"Le informazioni live sono temporaneamente non disponibili.",
+sourceTitle:"Fonti pubbliche attuali",
+whatAdd:"Cosa vuoi aggiungere?",
+cancel:"Annulla",
+publish:"Pubblica",
+source:"Fonte",
+original:"Apri fonte originale",
+showMap:"Mostra sulla mappa",
+markFound:"Segna come ritrovato",
+distance:"Distanza",
+today:"Oggi",
+tomorrow:"Domani",
+thisWeek:"Questa settimana",
+upcoming:"In arrivo",
+geoError:"Impossibile accedere alla tua posizione."
+},
+
+pt:{
+...UI.en,
+edition:"Edição",
+cover:"Estrelas da capa",
+discounts:"Descontos",
+places:"Locais pet-friendly",
+marketplace:"Marketplace",
+fashion:"Moda",
+health:"Saúde",
+articles:"Artigos",
+photos:"Fotos",
+community:"Comunidade",
+contests:"Concursos",
+helpNav:"Ajuda",
+partners:"Parceiros",
+contact:"Contacto",
+heroTitle:"Encontre a comunidade de animais perto de si",
+heroText:"Descubra animais perdidos, eventos, encontros, clubes, grupos, passeios, voluntários, adoção e notícias locais.",
+locationPlaceholder:"Cidade, zona ou código postal...",
+selectedLocation:"Localização selecionada: {location}",
+radius:"Raio de pesquisa",
+filterTitle:"O que procura?",
+all:"Todos",
+lost:"Perdidos",
+seen:"Vistos",
+found:"Encontrados",
+events:"Eventos",
+groups:"Clubes e grupos",
+help:"Ajuda",
+volunteers:"Voluntários",
+foster:"Acolhimento",
+adoption:"Procura família",
+news:"Notícias",
+add:"Adicionar",
+foundLabel:"Encontrados:",
+loading:"A carregar informação atual...",
+empty:"Não foi encontrada informação atual.",
+error:"A informação em tempo real está temporariamente indisponível.",
+sourceTitle:"Fontes públicas atuais",
+whatAdd:"O que pretende adicionar?",
+cancel:"Cancelar",
+publish:"Publicar",
+source:"Fonte",
+original:"Abrir fonte original",
+showMap:"Mostrar no mapa",
+markFound:"Marcar como encontrado",
+distance:"Distância",
+today:"Hoje",
+tomorrow:"Amanhã",
+thisWeek:"Esta semana",
+upcoming:"Em breve",
+geoError:"Não foi possível aceder à sua localização."
+},
+
+nl:{
+...UI.en,
+edition:"Editie",
+cover:"Coversterren",
+discounts:"Kortingen",
+places:"Huisdiervriendelijke plekken",
+marketplace:"Marktplaats",
+fashion:"Mode",
+health:"Gezondheid",
+articles:"Artikelen",
+photos:"Foto's",
+community:"Community",
+contests:"Wedstrijden",
+helpNav:"Hulp",
+partners:"Partners",
+contact:"Contact",
+heroTitle:"Vind de dierencommunity bij jou in de buurt",
+heroText:"Vind vermiste dieren, evenementen, ontmoetingen, clubs, buurtgroepen, wandelgroepen, vrijwilligers, adoptie en nieuws.",
+locationPlaceholder:"Stad, gebied of postcode...",
+selectedLocation:"Geselecteerde locatie: {location}",
+radius:"Zoekradius",
+filterTitle:"Waar ben je naar op zoek?",
+all:"Alles",
+lost:"Vermist",
+seen:"Gezien",
+found:"Gevonden",
+events:"Evenementen",
+groups:"Clubs & groepen",
+help:"Hulp",
+volunteers:"Vrijwilligers",
+foster:"Opvang",
+adoption:"Zoekt familie",
+news:"Nieuws",
+add:"Toevoegen",
+foundLabel:"Gevonden:",
+loading:"Actuele informatie laden...",
+empty:"Geen actuele informatie gevonden.",
+error:"Live-informatie is tijdelijk niet beschikbaar.",
+sourceTitle:"Actuele openbare bronnen",
+whatAdd:"Wat wil je toevoegen?",
+cancel:"Annuleren",
+publish:"Publiceren",
+source:"Bron",
+original:"Originele bron openen",
+showMap:"Op kaart tonen",
+markFound:"Markeren als gevonden",
+distance:"Afstand",
+today:"Vandaag",
+tomorrow:"Morgen",
+thisWeek:"Deze week",
+upcoming:"Binnenkort",
+geoError:"Je locatie kon niet worden opgehaald."
+},
+
+pl:{
+...UI.en,
+edition:"Edycja",
+cover:"Gwiazdy okładki",
+discounts:"Rabaty",
+places:"Miejsca przyjazne zwierzętom",
+marketplace:"Marketplace",
+fashion:"Moda",
+health:"Zdrowie",
+articles:"Artykuły",
+photos:"Zdjęcia",
+community:"Społeczność",
+contests:"Konkursy",
+helpNav:"Pomoc",
+partners:"Partnerzy",
+contact:"Kontakt",
+heroTitle:"Znajdź społeczność miłośników zwierząt w pobliżu",
+heroText:"Znajdź zaginione zwierzęta, wydarzenia, spotkania, kluby, grupy, spacery, wolontariat, adopcje i wiadomości.",
+locationPlaceholder:"Miasto, dzielnica lub kod pocztowy...",
+selectedLocation:"Wybrana lokalizacja: {location}",
+radius:"Promień wyszukiwania",
+filterTitle:"Czego szukasz?",
+all:"Wszystko",
+lost:"Zaginione",
+seen:"Widziane",
+found:"Znalezione",
+events:"Wydarzenia",
+groups:"Kluby i grupy",
+help:"Pomoc",
+volunteers:"Wolontariusze",
+foster:"Dom tymczasowy",
+adoption:"Szukają rodziny",
+news:"Wiadomości",
+add:"Dodaj",
+foundLabel:"Znaleziono:",
+loading:"Ładowanie aktualnych informacji...",
+empty:"Nie znaleziono aktualnych informacji.",
+error:"Informacje na żywo są chwilowo niedostępne.",
+sourceTitle:"Aktualne źródła publiczne",
+whatAdd:"Co chcesz dodać?",
+cancel:"Anuluj",
+publish:"Opublikuj",
+source:"Źródło",
+original:"Otwórz oryginalne źródło",
+showMap:"Pokaż na mapie",
+markFound:"Oznacz jako znalezione",
+distance:"Odległość",
+today:"Dziś",
+tomorrow:"Jutro",
+thisWeek:"W tym tygodniu",
+upcoming:"Wkrótce",
+geoError:"Nie udało się uzyskać lokalizacji."
+},
+
+cs:{
+...UI.en,
+edition:"Vydání",
+cover:"Hvězdy obálky",
+discounts:"Slevy",
+places:"Místa přátelská ke zvířatům",
+marketplace:"Marketplace",
+fashion:"Móda",
+health:"Zdraví",
+articles:"Články",
+photos:"Fotografie",
+community:"Komunita",
+contests:"Soutěže",
+helpNav:"Pomoc",
+partners:"Partneři",
+contact:"Kontakt",
+heroTitle:"Najděte komunitu milovníků zvířat ve svém okolí",
+heroText:"Najděte ztracená zvířata, místní akce, setkání, kluby, skupiny, procházky, dobrovolníky, adopce a zprávy.",
+locationPlaceholder:"Město, oblast nebo PSČ...",
+selectedLocation:"Vybrané místo: {location}",
+radius:"Poloměr hledání",
+filterTitle:"Co hledáte?",
+all:"Vše",
+lost:"Ztracení",
+seen:"Vidění",
+found:"Nalezení",
+events:"Události",
+groups:"Kluby a skupiny",
+help:"Pomoc",
+volunteers:"Dobrovolníci",
+foster:"Dočasná péče",
+adoption:"Hledají rodinu",
+news:"Zprávy",
+add:"Přidat",
+foundLabel:"Nalezeno:",
+loading:"Načítáme aktuální informace...",
+empty:"Nebyly nalezeny aktuální informace.",
+error:"Živé informace jsou dočasně nedostupné.",
+sourceTitle:"Aktuální veřejné zdroje",
+whatAdd:"Co chcete přidat?",
+cancel:"Zrušit",
+publish:"Publikovat",
+source:"Zdroj",
+original:"Otevřít původní zdroj",
+showMap:"Ukázat na mapě",
+markFound:"Označit jako nalezené",
+distance:"Vzdálenost",
+today:"Dnes",
+tomorrow:"Zítra",
+thisWeek:"Tento týden",
+upcoming:"Nadcházející",
+geoError:"Polohu nebylo možné získat."
+},
+
+sk:{
+...UI.en,
+edition:"Vydanie",
+cover:"Hviezdy obálky",
+discounts:"Zľavy",
+places:"Miesta priateľské k zvieratám",
+marketplace:"Marketplace",
+fashion:"Móda",
+health:"Zdravie",
+articles:"Články",
+photos:"Fotografie",
+community:"Komunita",
+contests:"Súťaže",
+helpNav:"Pomoc",
+partners:"Partneri",
+contact:"Kontakt",
+heroTitle:"Nájdite komunitu milovníkov zvierat vo svojom okolí",
+heroText:"Nájdite stratené zvieratá, miestne podujatia, stretnutia, kluby, skupiny, prechádzky, dobrovoľníkov, adopcie a správy.",
+locationPlaceholder:"Mesto, oblasť alebo PSČ...",
+selectedLocation:"Vybrané miesto: {location}",
+radius:"Polomer vyhľadávania",
+filterTitle:"Čo hľadáte?",
+all:"Všetko",
+lost:"Stratené",
+seen:"Videné",
+found:"Nájdené",
+events:"Udalosti",
+groups:"Kluby a skupiny",
+help:"Pomoc",
+volunteers:"Dobrovoľníci",
+foster:"Dočasná starostlivosť",
+adoption:"Hľadajú rodinu",
+news:"Správy",
+add:"Pridať",
+foundLabel:"Nájdené:",
+loading:"Načítavame aktuálne informácie...",
+empty:"Nenašli sa aktuálne informácie.",
+error:"Živé informácie sú dočasne nedostupné.",
+sourceTitle:"Aktuálne verejné zdroje",
+whatAdd:"Čo chcete pridať?",
+cancel:"Zrušiť",
+publish:"Publikovať",
+source:"Zdroj",
+original:"Otvoriť pôvodný zdroj",
+showMap:"Ukázať na mape",
+markFound:"Označiť ako nájdené",
+distance:"Vzdialenosť",
+today:"Dnes",
+tomorrow:"Zajtra",
+thisWeek:"Tento týždeň",
+upcoming:"Nadchádzajúce",
+geoError:"Polohu sa nepodarilo získať."
+},
+
+hu:{
+...UI.en,
+edition:"Kiadás",
+cover:"Címlapsztárok",
+discounts:"Kedvezmények",
+places:"Állatbarát helyek",
+marketplace:"Piactér",
+fashion:"Divat",
+health:"Egészség",
+articles:"Cikkek",
+photos:"Fotók",
+community:"Közösség",
+contests:"Versenyek",
+helpNav:"Segítség",
+partners:"Partnerek",
+contact:"Kapcsolat",
+heroTitle:"Találd meg az állatos közösséget a közeledben",
+heroText:"Találj elveszett állatokat, helyi eseményeket, klubokat, csoportokat, sétákat, önkénteseket és híreket.",
+locationPlaceholder:"Város, kerület vagy irányítószám...",
+selectedLocation:"Kiválasztott hely: {location}",
+radius:"Keresési sugár",
+filterTitle:"Mit keresel?",
+all:"Mind",
+lost:"Eltűnt",
+seen:"Látták",
+found:"Megtalált",
+events:"Események",
+groups:"Klubok és csoportok",
+help:"Segítség",
+volunteers:"Önkéntesek",
+foster:"Ideiglenes befogadás",
+adoption:"Családot keres",
+news:"Hírek",
+add:"Hozzáadás",
+foundLabel:"Találat:",
+loading:"Aktuális információk betöltése...",
+empty:"Nincs aktuális információ.",
+error:"Az élő információ ideiglenesen nem érhető el.",
+sourceTitle:"Aktuális nyilvános források",
+whatAdd:"Mit szeretnél hozzáadni?",
+cancel:"Mégse",
+publish:"Közzététel",
+source:"Forrás",
+original:"Eredeti forrás megnyitása",
+showMap:"Mutatás térképen",
+markFound:"Megtaláltként jelölés",
+distance:"Távolság",
+today:"Ma",
+tomorrow:"Holnap",
+thisWeek:"Ezen a héten",
+upcoming:"Hamarosan",
+geoError:"A helyzet nem érhető el."
+},
+
+ro:{
+...UI.en,
+edition:"Ediție",
+cover:"Vedete de copertă",
+discounts:"Reduceri",
+places:"Locuri pet-friendly",
+marketplace:"Piață",
+fashion:"Modă",
+health:"Sănătate",
+articles:"Articole",
+photos:"Fotografii",
+community:"Comunitate",
+contests:"Concursuri",
+helpNav:"Ajutor",
+partners:"Parteneri",
+contact:"Contact",
+heroTitle:"Găsește comunitatea de animale din apropiere",
+heroText:"Găsește animale pierdute, evenimente, întâlniri, cluburi, grupuri, plimbări, voluntari, adopții și știri.",
+locationPlaceholder:"Oraș, cartier sau cod poștal...",
+selectedLocation:"Locație selectată: {location}",
+radius:"Raza de căutare",
+filterTitle:"Ce cauți?",
+all:"Toate",
+lost:"Pierdute",
+seen:"Văzute",
+found:"Găsite",
+events:"Evenimente",
+groups:"Cluburi și grupuri",
+help:"Ajutor",
+volunteers:"Voluntari",
+foster:"Găzduire",
+adoption:"Caută familie",
+news:"Știri",
+add:"Adaugă",
+foundLabel:"Găsite:",
+loading:"Se încarcă informațiile actuale...",
+empty:"Nu s-au găsit informații actuale.",
+error:"Informațiile live sunt temporar indisponibile.",
+sourceTitle:"Surse publice actuale",
+whatAdd:"Ce dorești să adaugi?",
+cancel:"Anulează",
+publish:"Publică",
+source:"Sursă",
+original:"Deschide sursa originală",
+showMap:"Arată pe hartă",
+markFound:"Marchează ca găsit",
+distance:"Distanță",
+today:"Astăzi",
+tomorrow:"Mâine",
+thisWeek:"Săptămâna aceasta",
+upcoming:"În curând",
+geoError:"Locația curentă nu a putut fi accesată."
+},
+
+bg:{
+...UI.en,
+edition:"Издание",
+cover:"Звезди от корицата",
+discounts:"Отстъпки",
+places:"Pet-friendly места",
+marketplace:"Пазар",
+fashion:"Мода",
+health:"Здраве",
+articles:"Статии",
+photos:"Снимки",
+community:"Общност",
+contests:"Конкурси",
+helpNav:"Помощ",
+partners:"Партньори",
+contact:"Контакт",
+heroTitle:"Намерете общността за животни близо до вас",
+heroText:"Намерете изгубени животни, местни събития, срещи, клубове, групи, доброволци, осиновяване и новини.",
+locationPlaceholder:"Град, пощенски код или район...",
+selectedLocation:"Избрано място: {location}",
+radius:"Радиус на търсене",
+filterTitle:"Какво търсите?",
+all:"Всички",
+lost:"Изгубени",
+seen:"Видени",
+found:"Намерени",
+events:"Събития",
+groups:"Клубове и групи",
+help:"Помощ",
+volunteers:"Доброволци",
+foster:"Временен дом",
+adoption:"Търсят семейство",
+news:"Новини",
+add:"Добави",
+foundLabel:"Намерени:",
+loading:"Зареждаме актуална информация...",
+empty:"Не е намерена актуална информация.",
+error:"Актуалната информация временно не е достъпна.",
+sourceTitle:"Актуални публични източници",
+whatAdd:"Какво искате да добавите?",
+cancel:"Отказ",
+publish:"Публикувай",
+source:"Източник",
+original:"Отвори оригиналния източник",
+showMap:"Покажи на картата",
+markFound:"Маркирай като намерено",
+distance:"Разстояние",
+today:"Днес",
+tomorrow:"Утре",
+thisWeek:"Тази седмица",
+upcoming:"Предстоящо",
+geoError:"Не може да се получи местоположение."
+},
+
+el:{
+...UI.en,
+edition:"Έκδοση",
+cover:"Αστέρια εξωφύλλου",
+discounts:"Εκπτώσεις",
+places:"Pet-friendly μέρη",
+marketplace:"Αγορά",
+fashion:"Μόδα",
+health:"Υγεία",
+articles:"Άρθρα",
+photos:"Φωτογραφίες",
+community:"Κοινότητα",
+contests:"Διαγωνισμοί",
+helpNav:"Βοήθεια",
+partners:"Συνεργάτες",
+contact:"Επικοινωνία",
+heroTitle:"Βρείτε την κοινότητα ζώων κοντά σας",
+heroText:"Βρείτε χαμένα ζώα, τοπικές εκδηλώσεις, συναντήσεις, λέσχες, ομάδες, εθελοντές, υιοθεσίες και νέα.",
+locationPlaceholder:"Πόλη, περιοχή ή ταχυδρομικός κώδικας...",
+selectedLocation:"Επιλεγμένη τοποθεσία: {location}",
+radius:"Ακτίνα αναζήτησης",
+filterTitle:"Τι ψάχνετε?",
+all:"Όλα",
+lost:"Χαμένα",
+seen:"Εθεάθησαν",
+found:"Βρέθηκαν",
+events:"Εκδηλώσεις",
+groups:"Λέσχες και ομάδες",
+help:"Βοήθεια",
+volunteers:"Εθελοντές",
+foster:"Προσωρινή φιλοξενία",
+adoption:"Ψάχνουν οικογένεια",
+news:"Νέα",
+add:"Προσθήκη",
+foundLabel:"Βρέθηκαν:",
+loading:"Φόρτωση πληροφοριών...",
+empty:"Δεν βρέθηκαν τρέχουσες πληροφορίες.",
+error:"Οι ζωντανές πληροφορίες δεν είναι διαθέσιμες.",
+sourceTitle:"Τρέχουσες δημόσιες πηγές",
+whatAdd:"Τι θέλετε να προσθέσετε?",
+cancel:"Ακύρωση",
+publish:"Δημοσίευση",
+source:"Πηγή",
+original:"Άνοιγμα αρχικής πηγής",
+showMap:"Εμφάνιση στον χάρτη",
+markFound:"Σήμανση ως βρέθηκε",
+distance:"Απόσταση",
+today:"Σήμερα",
+tomorrow:"Αύριο",
+thisWeek:"Αυτή την εβδομάδα",
+upcoming:"Προσεχώς",
+geoError:"Δεν ήταν δυνατή η πρόσβαση στην τοποθεσία."
+},sv:{
+...UI.en,
+edition:"Utgåva",
+cover:"Omslagsstjärnor",
+discounts:"Rabatter",
+places:"Djurvänliga platser",
+marketplace:"Marknad",
+fashion:"Mode",
+health:"Hälsa",
+articles:"Artiklar",
+photos:"Foton",
+community:"Community",
+contests:"Tävlingar",
+helpNav:"Hjälp",
+partners:"Partners",
+contact:"Kontakt",
+heroTitle:"Hitta djurcommunityn nära dig",
+heroText:"Hitta försvunna djur, lokala evenemang, träffar, klubbar, grupper, promenader, volontärer, adoption och nyheter.",
+locationPlaceholder:"Stad, område eller postnummer...",
+selectedLocation:"Vald plats: {location}",
+radius:"Sökradie",
+filterTitle:"Vad letar du efter?",
+all:"Alla",
+lost:"Försvunna",
+seen:"Sedda",
+found:"Hittade",
+events:"Evenemang",
+groups:"Klubbar och grupper",
+help:"Hjälp",
+volunteers:"Volontärer",
+foster:"Jourhem",
+adoption:"Söker familj",
+news:"Nyheter",
+add:"Lägg till",
+foundLabel:"Hittade:",
+loading:"Laddar aktuell information...",
+empty:"Ingen aktuell information hittades.",
+error:"Live-information är tillfälligt otillgänglig.",
+sourceTitle:"Aktuella offentliga källor",
+whatAdd:"Vad vill du lägga till?",
+cancel:"Avbryt",
+publish:"Publicera",
+source:"Källa",
+original:"Öppna originalkälla",
+showMap:"Visa på karta",
+markFound:"Markera som hittad",
+distance:"Avstånd",
+today:"Idag",
+tomorrow:"Imorgon",
+thisWeek:"Den här veckan",
+upcoming:"Kommande",
+geoError:"Kunde inte hämta din position."
+},
+
+da:{
+...UI.en,
+edition:"Udgave",
+cover:"Forsidestjerner",
+discounts:"Rabatter",
+places:"Kæledyrsvenlige steder",
+marketplace:"Marked",
+fashion:"Mode",
+health:"Sundhed",
+articles:"Artikler",
+photos:"Fotos",
+community:"Fællesskab",
+contests:"Konkurrencer",
+helpNav:"Hjælp",
+partners:"Partnere",
+contact:"Kontakt",
+heroTitle:"Find dyrefællesskabet nær dig",
+heroText:"Find forsvundne dyr, lokale events, møder, klubber, grupper, gåture, frivillige, adoption og nyheder.",
+locationPlaceholder:"By, postnummer eller område...",
+selectedLocation:"Valgt sted: {location}",
+radius:"Søgeradius",
+filterTitle:"Hvad leder du efter?",
+all:"Alle",
+lost:"Forsvundne",
+seen:"Set",
+found:"Fundet",
+events:"Begivenheder",
+groups:"Klubber og grupper",
+help:"Hjælp",
+volunteers:"Frivillige",
+foster:"Plejehjem",
+adoption:"Søger familie",
+news:"Nyheder",
+add:"Tilføj",
+foundLabel:"Fundet:",
+loading:"Indlæser aktuelle oplysninger...",
+empty:"Ingen aktuelle oplysninger fundet.",
+error:"Live-information er midlertidigt utilgængelig.",
+sourceTitle:"Aktuelle offentlige kilder",
+whatAdd:"Hvad vil du tilføje?",
+cancel:"Annuller",
+publish:"Udgiv",
+source:"Kilde",
+original:"Åbn original kilde",
+showMap:"Vis på kort",
+markFound:"Markér som fundet",
+distance:"Afstand",
+today:"I dag",
+tomorrow:"I morgen",
+thisWeek:"Denne uge",
+upcoming:"Kommende",
+geoError:"Kunne ikke hente din placering."
+},
+
+no:{
+...UI.en,
+edition:"Utgave",
+cover:"Forsidestjerner",
+discounts:"Rabatter",
+places:"Kjæledyrvennlige steder",
+marketplace:"Marked",
+fashion:"Mote",
+health:"Helse",
+articles:"Artikler",
+photos:"Bilder",
+community:"Fellesskap",
+contests:"Konkurranser",
+helpNav:"Hjelp",
+partners:"Partnere",
+contact:"Kontakt",
+heroTitle:"Finn dyrefellesskapet nær deg",
+heroText:"Finn savnede dyr, lokale arrangementer, møter, klubber, grupper, turer, frivillige, adopsjon og nyheter.",
+locationPlaceholder:"By, postnummer eller område...",
+selectedLocation:"Valgt sted: {location}",
+radius:"Søkeradius",
+filterTitle:"Hva leter du etter?",
+all:"Alle",
+lost:"Savnet",
+seen:"Sett",
+found:"Funnet",
+events:"Arrangementer",
+groups:"Klubber og grupper",
+help:"Hjelp",
+volunteers:"Frivillige",
+foster:"Fosterhjem",
+adoption:"Søker familie",
+news:"Nyheter",
+add:"Legg til",
+foundLabel:"Funnet:",
+loading:"Laster aktuell informasjon...",
+empty:"Ingen aktuell informasjon funnet.",
+error:"Live-informasjon er midlertidig utilgjengelig.",
+sourceTitle:"Aktuelle offentlige kilder",
+whatAdd:"Hva vil du legge til?",
+cancel:"Avbryt",
+publish:"Publiser",
+source:"Kilde",
+original:"Åpne originalkilde",
+showMap:"Vis på kart",
+markFound:"Marker som funnet",
+distance:"Avstand",
+today:"I dag",
+tomorrow:"I morgen",
+thisWeek:"Denne uken",
+upcoming:"Kommende",
+geoError:"Kunne ikke hente posisjonen din."
+},
+
+fi:{
+...UI.en,
+edition:"Julkaisu",
+cover:"Kansitähdet",
+discounts:"Alennukset",
+places:"Lemmikkiystävälliset paikat",
+marketplace:"Markkinapaikka",
+fashion:"Muoti",
+health:"Terveys",
+articles:"Artikkelit",
+photos:"Kuvat",
+community:"Yhteisö",
+contests:"Kilpailut",
+helpNav:"Apua",
+partners:"Kumppanit",
+contact:"Yhteystiedot",
+heroTitle:"Löydä eläinyhteisö läheltäsi",
+heroText:"Löydä kadonneita eläimiä, tapahtumia, tapaamisia, klubeja, ryhmiä, vapaaehtoisia, adoptioita ja uutisia.",
+locationPlaceholder:"Kaupunki, postinumero tai alue...",
+selectedLocation:"Valittu sijainti: {location}",
+radius:"Hakusäde",
+filterTitle:"Mitä etsit?",
+all:"Kaikki",
+lost:"Kadonneet",
+seen:"Nähty",
+found:"Löydetty",
+events:"Tapahtumat",
+groups:"Klubit ja ryhmät",
+help:"Apua",
+volunteers:"Vapaaehtoiset",
+foster:"Sijaiskoti",
+adoption:"Etsivät perhettä",
+news:"Uutiset",
+add:"Lisää",
+foundLabel:"Löydetty:",
+loading:"Ladataan ajankohtaisia tietoja...",
+empty:"Ajankohtaista tietoa ei löytynyt.",
+error:"Ajankohtaiset tiedot eivät ole saatavilla.",
+sourceTitle:"Ajankohtaiset julkiset lähteet",
+whatAdd:"Mitä haluat lisätä?",
+cancel:"Peruuta",
+publish:"Julkaise",
+source:"Lähde",
+original:"Avaa alkuperäinen lähde",
+showMap:"Näytä kartalla",
+markFound:"Merkitse löytyneeksi",
+distance:"Etäisyys",
+today:"Tänään",
+tomorrow:"Huomenna",
+thisWeek:"Tällä viikolla",
+upcoming:"Tulossa",
+geoError:"Sijaintiasi ei voitu hakea."
+},
+
+tr:{
+...UI.en,
+edition:"Edisyon",
+cover:"Kapak Yıldızları",
+discounts:"İndirimler",
+places:"Evcil hayvan dostu yerler",
+marketplace:"Pazar",
+fashion:"Moda",
+health:"Sağlık",
+articles:"Makaleler",
+photos:"Fotoğraflar",
+community:"Topluluk",
+contests:"Yarışmalar",
+helpNav:"Yardım",
+partners:"Ortaklar",
+contact:"İletişim",
+heroTitle:"Yakınınızdaki hayvan topluluğunu bulun",
+heroText:"Kayıp hayvanlar, yerel etkinlikler, buluşmalar, kulüpler, gruplar, gönüllüler, sahiplendirme ve haberleri bulun.",
+locationPlaceholder:"Şehir, bölge veya posta kodu...",
+selectedLocation:"Seçilen konum: {location}",
+radius:"Arama yarıçapı",
+filterTitle:"Ne arıyorsunuz?",
+all:"Tümü",
+lost:"Kayıp",
+seen:"Görüldü",
+found:"Bulundu",
+events:"Etkinlikler",
+groups:"Kulüpler ve gruplar",
+help:"Yardım",
+volunteers:"Gönüllüler",
+foster:"Geçici yuva",
+adoption:"Aile arıyor",
+news:"Haberler",
+add:"Ekle",
+foundLabel:"Bulundu:",
+loading:"Güncel bilgiler yükleniyor...",
+empty:"Güncel bilgi bulunamadı.",
+error:"Canlı bilgi geçici olarak kullanılamıyor.",
+sourceTitle:"Güncel kamu kaynakları",
+whatAdd:"Ne eklemek istersiniz?",
+cancel:"İptal",
+publish:"Yayınla",
+source:"Kaynak",
+original:"Orijinal kaynağı aç",
+showMap:"Haritada göster",
+markFound:"Bulundu olarak işaretle",
+distance:"Mesafe",
+today:"Bugün",
+tomorrow:"Yarın",
+thisWeek:"Bu hafta",
+upcoming:"Yakında",
+geoError:"Konumunuza erişilemedi."
+},
+
+ar:{
+...UI.en,
+edition:"الإصدار",
+cover:"نجوم الغلاف",
+discounts:"الخصومات",
+places:"أماكن صديقة للحيوانات",
+marketplace:"السوق",
+fashion:"الموضة",
+health:"الصحة",
+articles:"المقالات",
+photos:"الصور",
+community:"المجتمع",
+contests:"المسابقات",
+helpNav:"المساعدة",
+partners:"الشركاء",
+contact:"اتصل بنا",
+heroTitle:"اعثر على مجتمع الحيوانات بالقرب منك",
+heroText:"اعثر على الحيوانات المفقودة والفعاليات المحلية واللقاءات والنوادي والمجموعات والمتطوعين والتبني والأخبار.",
+locationPlaceholder:"المدينة أو المنطقة أو الرمز البريدي...",
+selectedLocation:"الموقع المحدد: {location}",
+radius:"نطاق البحث",
+filterTitle:"ما الذي تبحث عنه؟",
+all:"الكل",
+lost:"مفقودة",
+seen:"شوهدت",
+found:"عُثر عليها",
+events:"فعاليات",
+groups:"النوادي والمجموعات",
+help:"مساعدة",
+volunteers:"متطوعون",
+foster:"استضافة مؤقتة",
+adoption:"تبحث عن عائلة",
+news:"أخبار",
+add:"إضافة",
+foundLabel:"تم العثور:",
+loading:"جارٍ تحميل المعلومات الحالية...",
+empty:"لم يتم العثور على معلومات حالية.",
+error:"المعلومات المباشرة غير متاحة مؤقتًا.",
+sourceTitle:"المصادر العامة الحالية",
+whatAdd:"ماذا تريد أن تضيف؟",
+cancel:"إلغاء",
+publish:"نشر",
+source:"المصدر",
+original:"فتح المصدر الأصلي",
+showMap:"إظهار على الخريطة",
+markFound:"وضع علامة تم العثور عليه",
+distance:"المسافة",
+today:"اليوم",
+tomorrow:"غدًا",
+thisWeek:"هذا الأسبوع",
+upcoming:"قريبًا",
+geoError:"تعذر الوصول إلى موقعك."
+},
+
+hi:{
+...UI.en,
+edition:"संस्करण",
+cover:"कवर स्टार्स",
+discounts:"छूट",
+places:"पालतू-अनुकूल स्थान",
+marketplace:"बाज़ार",
+fashion:"फ़ैशन",
+health:"स्वास्थ्य",
+articles:"लेख",
+photos:"फ़ोटो",
+community:"समुदाय",
+contests:"प्रतियोगिताएँ",
+helpNav:"मदद",
+partners:"साझेदार",
+contact:"संपर्क",
+heroTitle:"अपने पास पालतू समुदाय खोजें",
+heroText:"खोए पालतू, स्थानीय कार्यक्रम, मीटअप, क्लब, समूह, स्वयंसेवक, गोद लेने और स्थानीय पशु समाचार खोजें.",
+locationPlaceholder:"शहर, क्षेत्र या पोस्टकोड...",
+selectedLocation:"चुना गया स्थान: {location}",
+radius:"खोज दायरा",
+filterTitle:"आप क्या खोज रहे हैं?",
+all:"सभी",
+lost:"खोए हुए",
+seen:"देखे गए",
+found:"मिले",
+events:"कार्यक्रम",
+groups:"क्लब और समूह",
+help:"मदद",
+volunteers:"स्वयंसेवक",
+foster:"अस्थायी घर",
+adoption:"परिवार खोज रहे",
+news:"समाचार",
+add:"जोड़ें",
+foundLabel:"मिले:",
+loading:"ताज़ा जानकारी लोड हो रही है...",
+empty:"कोई ताज़ा जानकारी नहीं मिली.",
+error:"लाइव जानकारी अभी उपलब्ध नहीं है.",
+sourceTitle:"वर्तमान सार्वजनिक स्रोत",
+whatAdd:"आप क्या जोड़ना चाहते हैं?",
+cancel:"रद्द करें",
+publish:"प्रकाशित करें",
+source:"स्रोत",
+original:"मूल स्रोत खोलें",
+showMap:"मानचित्र पर दिखाएँ",
+markFound:"मिला हुआ चिह्नित करें",
+distance:"दूरी",
+today:"आज",
+tomorrow:"कल",
+thisWeek:"इस सप्ताह",
+upcoming:"आगामी",
+geoError:"आपका स्थान नहीं मिल सका."
+}
+
+};
+
+
+function normalizeLanguage(value){
+
+if(!value){
+return "en";
+}
+
+let code =
+String(value)
+.trim()
+.toLowerCase();
+
+if(code.includes("-")){
+code = code.split("-")[0];
+}
+
+if(code.includes("_")){
+code = code.split("_")[0];
+}
+
+const aliases = {
+ua:"uk",
+cz:"cs",
+gr:"el",
+se:"sv",
+dk:"da"
+};
+
+code =
+aliases[code] ||
+code;
+
+return UI[code]
+? code
+: "en";
+
+}
+
+
+function currentLanguage(){
+
+return normalizeLanguage(
+localStorage.getItem(
+LANGUAGE_KEY
+) ||
+document.documentElement.lang ||
+"en"
+);
+
+}
+
+
+function words(){
+
+return UI[
+currentLanguage()
+] ||
+UI.en;
+
+}
+
+
+function setText(id,value){
+
+const element =
+$(id);
+
+if(element){
+element.textContent =
+value;
+}
+
+}
+
+
+function refreshNarration(){
+
+requestAnimationFrame(
+()=>{
+
+try{
+
+if(
+window.PetsDogueAccessibility &&
+typeof window.PetsDogueAccessibility.refresh ===
+"function"
+){
+
+window.PetsDogueAccessibility.refresh();
+
+}
+
+}catch(error){
+
+console.warn(
+"Accessibility refresh failed",
+error
+);
+
+}
+
+window.dispatchEvent(
+new CustomEvent(
+"petsdogue:contentupdated"
+)
+);
+
+}
+);
+
+}
+
+
+function applyLanguage(){
+
+const t =
+words();
+
+const language =
+currentLanguage();
+
+document.documentElement.lang =
+language;
+
+document.documentElement.dir =
+language === "ar"
+? "rtl"
+: "ltr";
+
+setText("heroTitle",t.heroTitle);
+setText("heroText",t.heroText);
+
+$("locationInput").placeholder =
+t.locationPlaceholder;
+
+setText(
+"selectedLocationText",
+t.selectedLocation.replace(
+"{location}",
+selectedLocation.name
+)
+);
+
+setText("radiusLabel",t.radius);
+setText("filterTitle",t.filterTitle);
+
+setText("fAll",t.all);
+setText("fLost",t.lost);
+setText("fSeen",t.seen);
+setText("fFound",t.found);
+setText("fEvents",t.events);
+setText("fGroups",t.groups);
+setText("fHelp",t.help);
+setText("fVolunteers",t.volunteers);
+setText("fFoster",t.foster);
+setText("fAdoption",t.adoption);
+setText("fNews",t.news);
+
+setText("mAll",t.all);
+setText("mLost",t.lost);
+setText("mSeen",t.seen);
+setText("mFound",t.found);
+setText("mEvents",t.events);
+setText("mGroups",t.groups);
+setText("mHelp",t.help);
+setText("mVolunteers",t.volunteers);
+setText("mFoster",t.foster);
+setText("mAdoption",t.adoption);
+setText("mNews",t.news);
+
+setText("legendLost",t.lost);
+setText("legendSeen",t.seen);
+setText("legendFound",t.found);
+setText("legendEvent",t.events);
+setText("legendGroup",t.groups);
+setText("legendHelp",t.help);
+
+setText("addMapText",t.add);
+setText("foundLabel",t.foundLabel);
+setText("sortRelevant",t.sortRelevant);
+setText("sortNewest",t.sortNewest);
+setText("sortOldest",t.sortOldest);
+
+setText("loadingMessage",t.loading);
+setText("emptyMessage",t.empty);
+setText("errorMessage",t.error);
+
+setText("sourceTitle",t.sourceTitle);
+setText("sourceText",t.sourceText);
+
+setText("addTypeTitle",t.whatAdd);
+setText("addLost",t.addLost);
+setText("addSeen",t.addSeen);
+setText("addEvent",t.addEvent);
+setText("addGroup",t.addGroup);
+setText("addHelp",t.addHelp);
+setText("addVolunteers",t.addVolunteers);
+setText("addFoster",t.addFoster);
+setText("addAdoption",t.addAdoption);
+setText("addNews",t.addNews);
+
+setText("addFormHeading",t.addPost);
+setText("formLocationLabel",t.location);
+setText("formTitleLabel",t.title);
+setText("formTextLabel",t.description);
+setText("formDateLabel",t.date);
+setText("formImageLabel",t.photo);
+setText("cancelPost",t.cancel);
+setText("publishPost",t.publish);
+
+setText("footerEdition",t.edition);
+setText("footerCover",t.cover);
+setText("footerDiscounts",t.discounts);
+setText("footerPlaces",t.places);
+setText("footerMarketplace",t.marketplace);
+setText("footerFashion",t.fashion);
+setText("footerHealth",t.health);
+setText("footerArticles",t.articles);
+setText("footerPhotos",t.photos);
+setText("footerCommunity",t.community);
+setText("footerContests",t.contests);
+setText("footerHelp",t.helpNav);
+setText("footerPartners",t.partners);
+setText("footerContact",t.contact);
+
+document.title =
+t.community +
+" | PETS & DOGUE";
+
+$("pageDescription")
+?.setAttribute(
+"content",
+t.heroText
+);
+
+$("ogTitle")
+?.setAttribute(
+"content",
+t.community +
+" | PETS & DOGUE"
+);
+
+$("ogDescription")
+?.setAttribute(
+"content",
+t.heroText
+);
+
+$("twitterTitle")
+?.setAttribute(
+"content",
+t.community +
+" | PETS & DOGUE"
+);
+
+$("twitterDescription")
+?.setAttribute(
+"content",
+t.heroText
+);
+
+renderCurrentResults();
+
+refreshNarration();
+
+}
+
+
+/* =========================================================
+LOCATION SEARCH
+========================================================= */
+
+function hideSuggestions(){
+
+$("locationSuggestions")
+.classList
+.remove("show");
+
+}
+
+
+async function searchLocations(query){
+
+if(searchAbortController){
+searchAbortController.abort();
+}
+
+searchAbortController =
+new AbortController();
+
+try{
+
+const response =
+await fetch(
+"https://nominatim.openstreetmap.org/search" +
+"?format=jsonv2" +
+"&addressdetails=1" +
+"&limit=6" +
+"&q=" +
+encodeURIComponent(query),
+{
+headers:{
+"Accept-Language":
+currentLanguage()
+},
+signal:
+searchAbortController.signal
+}
+);
+
+if(!response.ok){
+throw new Error("location search failed");
+}
+
+const results =
+await response.json();
+
+renderSuggestions(results);
+
+}catch(error){
+
+if(error.name !== "AbortError"){
+hideSuggestions();
+}
+
+}
+
+}
+
+
+function renderSuggestions(results){
+
+const container =
+$("locationSuggestions");
+
+container.innerHTML =
+"";
+
+if(
+!Array.isArray(results) ||
+!results.length
+){
+
+hideSuggestions();
+return;
+
+}
+
+results.forEach(
+result =>{
+
+const address =
+result.address ||
+{};
+
+const primary =
+address.city ||
+address.town ||
+address.village ||
+address.municipality ||
+address.suburb ||
+result.name ||
+String(result.display_name || "")
+.split(",")[0];
+
+const button =
+document.createElement("button");
+
+button.type =
+"button";
+
+button.className =
+"location-option";
+
+button.innerHTML =
+`
+<span class="diamond">◆</span>
+
+<span>
+<strong>${escapeHTML(primary)}</strong>
+<small>${escapeHTML(result.display_name)}</small>
+</span>
+`;
+
+button.addEventListener(
+"click",
+()=>{
+
+selectedLocation = {
+name:primary,
+displayName:result.display_name,
+lat:Number(result.lat),
+lng:Number(result.lon)
+};
+
+$("locationInput").value =
+primary;
+
+$("clearLocation")
+.classList
+.add("show");
+
+hideSuggestions();
+
+categoryCache = {};
+
+applyLanguage();
+
+moveMapToLocation();
+
+loadAllDiscovery();
+
+}
+);
+
+container.appendChild(button);
+
+}
+);
+
+container.classList.add("show");
+
+}$("locationInput")
+.addEventListener(
+"input",
+()=>{
+
+const value =
+$("locationInput")
+.value
+.trim();
+
+$("clearLocation")
+.classList
+.toggle(
+"show",
+Boolean(value)
+);
+
+clearTimeout(searchTimer);
+
+if(value.length < 2){
+
+hideSuggestions();
+
+return;
+
+}
+
+searchTimer =
+setTimeout(
+()=>searchLocations(value),
+300
+);
+
+}
+);
+
+
+$("clearLocation")
+.addEventListener(
+"click",
+()=>{
+
+$("locationInput").value =
+"";
+
+$("clearLocation")
+.classList
+.remove("show");
+
+hideSuggestions();
+
+$("locationInput").focus();
+
+}
+);
+
+
+document.addEventListener(
+"click",
+event=>{
+
+if(
+!event.target.closest(
+".location-shell"
+)
+){
+
+hideSuggestions();
+
+}
+
+}
+);
+
+
+/* =========================================================
+GEOLOCATION
+========================================================= */
+
+$("geoButton")
+.addEventListener(
+"click",
+()=>{
+
+if(!navigator.geolocation){
+
+alert(words().geoError);
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+async position=>{
+
+const lat =
+position.coords.latitude;
+
+const lng =
+position.coords.longitude;
+
+try{
+
+const response =
+await fetch(
+"https://nominatim.openstreetmap.org/reverse" +
+"?format=jsonv2" +
+"&addressdetails=1" +
+"&lat=" +
+encodeURIComponent(lat) +
+"&lon=" +
+encodeURIComponent(lng),
+{
+headers:{
+"Accept-Language":
+currentLanguage()
+}
+}
+);
+
+if(!response.ok){
+throw new Error("reverse geocode failed");
+}
+
+const result =
+await response.json();
+
+const address =
+result.address ||
+{};
+
+const primary =
+address.city ||
+address.town ||
+address.village ||
+address.municipality ||
+address.suburb ||
+result.display_name ||
+"Current location";
+
+selectedLocation = {
+name:primary,
+displayName:result.display_name || primary,
+lat,
+lng
+};
+
+$("locationInput").value =
+primary;
+
+$("clearLocation")
+.classList
+.add("show");
+
+categoryCache = {};
+
+applyLanguage();
+
+moveMapToLocation();
+
+loadAllDiscovery();
+
+}catch(error){
+
+alert(words().geoError);
+
+}
+
+},
+
+()=>alert(
+words().geoError
+),
+
+{
+enableHighAccuracy:true,
+timeout:10000,
+maximumAge:120000
+}
+
+);
+
+}
+);
+
+
+/* =========================================================
+RADIUS
+========================================================= */
+
+$("radiusInput")
+.addEventListener(
+"input",
+()=>{
+
+setText(
+"radiusValue",
+$("radiusInput").value +
+" km"
+);
+
+}
+);
+
+
+$("radiusInput")
+.addEventListener(
+"change",
+()=>{
+
+categoryCache = {};
+
+loadAllDiscovery();
+
+}
+);
+
+
+/* =========================================================
+MAP
+========================================================= */
+
+function initializeMap(){
+
+map =
+L.map(
+"communityMap"
+)
+.setView(
+[
+selectedLocation.lat,
+selectedLocation.lng
+],
+12
+);
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+maxZoom:19,
+attribution:"&copy; OpenStreetMap"
+}
+)
+.addTo(map);
+
+moveMapToLocation();
+
+}
+
+
+function moveMapToLocation(){
+
+if(!map){
+return;
+}
+
+map.setView(
+[
+selectedLocation.lat,
+selectedLocation.lng
+],
+12
+);
+
+if(centerMarker){
+map.removeLayer(centerMarker);
+}
+
+centerMarker =
+L.marker(
+[
+selectedLocation.lat,
+selectedLocation.lng
+],
+{
+icon:
+L.divIcon({
+className:"",
+html:'<div class="search-marker"></div>',
+iconSize:[27,27],
+iconAnchor:[13,13]
+})
+}
+)
+.addTo(map);
+
+}
+
+
+function clearResultMarkers(){
+
+resultMarkers.forEach(
+marker=>{
+
+if(map){
+map.removeLayer(marker);
+}
+
+}
+);
+
+resultMarkers =
+[];
+
+}
+
+
+function itemCoordinates(item,index){
+
+if(
+Number.isFinite(Number(item.lat)) &&
+Number.isFinite(Number(item.lng))
+){
+
+return [
+Number(item.lat),
+Number(item.lng)
+];
+
+}
+
+const angle =
+index *
+137.5 *
+Math.PI /
+180;
+
+const radius =
+.006 +
+(index % 6) *
+.003;
+
+return [
+selectedLocation.lat +
+Math.sin(angle) *
+radius,
+
+selectedLocation.lng +
+Math.cos(angle) *
+radius
+];
+
+}
+
+
+function markerIcon(type){
+
+const normalized =
+normalizeType(type);
+
+const symbols = {
+lost:"!",
+seen:"◉",
+found:"✓",
+event:"★",
+group:"♣",
+help:"+",
+volunteers:"♧",
+foster:"⌂",
+adoption:"♡",
+news:"◫"
+};
+
+return L.divIcon({
+className:"",
+html:
+`<div class="community-marker ${escapeHTML(normalized)}">${escapeHTML(symbols[normalized] || "•")}</div>`,
+iconSize:[39,39],
+iconAnchor:[19,19]
+});
+
+}
+
+
+function renderMapMarkers(items){
+
+clearResultMarkers();
+
+if(!map){
+return;
+}
+
+items.forEach(
+(item,index)=>{
+
+const coords =
+itemCoordinates(
+item,
+index
+);
+
+const marker =
+L.marker(
+coords,
+{
+icon:
+markerIcon(
+item.type
+)
+}
+)
+.addTo(map);
+
+marker.on(
+"click",
+()=>openDetail(item)
+);
+
+resultMarkers.push(marker);
+
+}
+);
+
+}
+
+
+/* =========================================================
+LOCAL POSTS
+========================================================= */
+
+function loadLocalPosts(){
+
+try{
+
+const parsed =
+JSON.parse(
+localStorage.getItem(
+LOCAL_POSTS_KEY
+) ||
+"[]"
+);
+
+localPosts =
+Array.isArray(parsed)
+? parsed
+: [];
+
+}catch(error){
+
+localPosts =
+[];
+
+}
+
+}
+
+
+function saveLocalPosts(){
+
+localStorage.setItem(
+LOCAL_POSTS_KEY,
+JSON.stringify(localPosts)
+);
+
+}
+
+
+/* =========================================================
+API
+========================================================= */
+
+function discoveryUrl(category=""){
+
+let url =
+"/api/community-discovery" +
+"?location=" +
+encodeURIComponent(
+selectedLocation.displayName ||
+selectedLocation.name
+) +
+"&lat=" +
+encodeURIComponent(
+selectedLocation.lat
+) +
+"&lng=" +
+encodeURIComponent(
+selectedLocation.lng
+) +
+"&radius=" +
+encodeURIComponent(
+$("radiusInput").value
+) +
+"&lang=" +
+encodeURIComponent(
+currentLanguage()
+) +
+"&limit=60";
+
+if(category){
+
+url +=
+"&category=" +
+encodeURIComponent(category);
+
+}
+
+return url;
+
+}
+
+
+function normalizeApiItem(item){
+
+return {
+id:item.id || createId(),
+type:normalizeType(item.type),
+status:item.status || "active",
+eventStatus:item.eventStatus || null,
+title:item.title || "",
+description:item.description || "",
+url:item.url || "",
+image:item.image || "",
+source:item.source || "",
+provider:item.provider || "",
+publishedAt:item.publishedAt || null,
+eventStart:item.eventStart || null,
+location:item.location || selectedLocation.name,
+venue:item.venue || "",
+address:item.address || "",
+distanceKm:
+typeof item.distanceKm === "number"
+? item.distanceKm
+: null,
+lat:
+Number.isFinite(Number(item.lat))
+? Number(item.lat)
+: null,
+lng:
+Number.isFinite(Number(item.lng))
+? Number(item.lng)
+: null,
+isLive:true,
+isLocal:false
+};
+
+}
+
+
+async function loadAllDiscovery(){
+
+if(discoveryAbortController){
+discoveryAbortController.abort();
+}
+
+discoveryAbortController =
+new AbortController();
+
+showLoading();
+
+try{
+
+const response =
+await fetch(
+discoveryUrl(),
+{
+signal:
+discoveryAbortController.signal,
+headers:{
+Accept:"application/json"
+}
+}
+);
+
+if(!response.ok){
+throw new Error(
+"Community discovery request failed"
+);
+}
+
+const data =
+await response.json();
+
+allLiveItems =
+Array.isArray(data.items)
+? data.items.map(normalizeApiItem)
+: [];
+
+categoryCache.all =
+allLiveItems;
+
+hideError();
+
+renderCurrentResults();
+
+}catch(error){
+
+if(error.name === "AbortError"){
+return;
+}
+
+console.error(error);
+
+allLiveItems =
+[];
+
+showError();
+
+renderCurrentResults();
+
+}finally{
+
+hideLoading();
+
+}
+
+}
+
+
+async function loadCategory(category){
+
+if(category === "all"){
+
+renderCurrentResults();
+
+return;
+
+}
+
+if(
+Array.isArray(
+categoryCache[category]
+)
+){
+
+renderCurrentResults();
+
+return;
+
+}
+
+showLoading();
+
+try{
+
+const response =
+await fetch(
+discoveryUrl(category),
+{
+headers:{
+Accept:"application/json"
+}
+}
+);
+
+if(!response.ok){
+throw new Error(
+"Category request failed"
+);
+}
+
+const data =
+await response.json();
+
+categoryCache[category] =
+Array.isArray(data.items)
+? data.items
+.map(normalizeApiItem)
+.filter(
+item =>
+normalizeType(item.type) ===
+category
+)
+: [];
+
+renderCurrentResults();
+
+}catch(error){
+
+console.error(error);
+
+categoryCache[category] =
+[];
+
+renderCurrentResults();
+
+}finally{
+
+hideLoading();
+
+}
+
+}
+
+
+/* =========================================================
+FILTERS
+========================================================= */
+
+document
+.querySelectorAll(
+".community-filter,.mobile-filter"
+)
+.forEach(
+button=>{
+
+button.addEventListener(
+"click",
+()=>selectFilter(
+button.dataset.filter
+)
+);
+
+}
+);
+
+
+function selectFilter(filter){
+
+currentFilter =
+filter;
+
+document
+.querySelectorAll(
+".community-filter,.mobile-filter"
+)
+.forEach(
+button=>{
+
+button.classList.toggle(
+"active",
+button.dataset.filter ===
+filter
+);
+
+}
+);
+
+if(
+filter !== "all" &&
+!categoryCache[filter]
+){
+
+loadCategory(filter);
+
+}else{
+
+renderCurrentResults();
+
+}
+
+}
+
+
+function sourceItemsForFilter(){
+
+if(currentFilter === "all"){
+return allLiveItems;
+}
+
+if(
+Array.isArray(
+categoryCache[currentFilter]
+)
+){
+
+return categoryCache[currentFilter]
+.filter(
+item =>
+normalizeType(item.type) ===
+currentFilter
+);
+
+}
+
+return allLiveItems
+.filter(
+item =>
+normalizeType(item.type) ===
+currentFilter
+);
+
+}
+
+
+function localItemsForFilter(){
+
+if(currentFilter === "all"){
+return localPosts;
+}
+
+return localPosts
+.filter(
+item =>
+normalizeType(item.type) ===
+currentFilter
+);
+
+}
+
+
+/* =========================================================
+RENDER
+========================================================= */
+
+$("sortSelect")
+.addEventListener(
+"change",
+renderCurrentResults
+);
+
+
+function renderCurrentResults(){
+
+let items = [
+...localItemsForFilter(),
+...sourceItemsForFilter()
+];
+
+const sort =
+$("sortSelect").value;
+
+if(sort === "newest"){
+
+items.sort(
+(a,b)=>
+dateValue(
+b.eventStart ||
+b.publishedAt
+) -
+dateValue(
+a.eventStart ||
+a.publishedAt
+)
+);
+
+}
+
+if(sort === "oldest"){
+
+items.sort(
+(a,b)=>
+dateValue(
+a.eventStart ||
+a.publishedAt
+) -
+dateValue(
+b.eventStart ||
+b.publishedAt
+)
+);
+
+}
+
+setText(
+"visibleCount",
+String(items.length)
+);
+
+renderCounts(items);
+
+const grid =
+$("resultsGrid");
+
+grid.innerHTML =
+"";
+
+items.forEach(
+item=>{
+
+grid.appendChild(
+createCard(item)
+);
+
+}
+);
+
+$("emptyMessage")
+.classList
+.toggle(
+"show",
+items.length === 0 &&
+!$("loadingMessage")
+.classList.contains("show") &&
+!$("errorMessage")
+.classList.contains("show")
+);
+
+renderMapMarkers(items);
+
+refreshNarration();
+
+}
+
+
+function renderCounts(items){
+
+const counts = {
+all:0,
+lost:0,
+seen:0,
+found:0,
+event:0,
+group:0,
+help:0,
+volunteers:0,
+foster:0,
+adoption:0,
+news:0
+};
+
+const merged = [
+...allLiveItems,
+...localPosts
+];
+
+merged.forEach(
+item=>{
+
+counts.all++;
+
+const type =
+normalizeType(item.type);
+
+if(
+Object.prototype
+.hasOwnProperty.call(
+counts,
+type
+)
+){
+
+counts[type]++;
+
+}
+
+}
+);
+
+document
+.querySelectorAll(
+"[data-count]"
+)
+.forEach(
+element=>{
+
+element.textContent =
+counts[
+element.dataset.count
+] || 0;
+
+}
+);
+
+}
+
+
+/* =========================================================
+CARDS
+========================================================= */
+
+function createCard(item){
+
+const article =
+document.createElement(
+"article"
+);
+
+article.className =
+"result-card";
+
+article.tabIndex =
+0;
+
+article.setAttribute(
+"data-pd-readable",
+""
+);
+
+const type =
+normalizeType(item.type);
+
+const image =
+item.image ||
+fallbackImage(type);
+
+const badge =
+eventTimeLabel(item) ||
+statusLabel(item);
+
+article.innerHTML =
+`
+<img
+src="${escapeHTML(image)}"
+alt="${escapeHTML(item.title || typeLabel(type))}"
+loading="lazy"
+>
+
+<div class="result-top">
+
+<span class="result-type">
+${escapeHTML(typeLabel(type))}
+</span>
+
+<span class="result-status ${statusClass(item)}">
+${escapeHTML(badge)}
+</span>
+
+</div>
+
+<div class="result-copy">
+
+<h3>
+${escapeHTML(item.title || typeLabel(type))}
+</h3>
+
+<p>
+${escapeHTML(item.description || "")}
+</p>
+
+<div class="result-meta">
+
+<span>
+📍 ${escapeHTML(
+item.venue ||
+item.location ||
+selectedLocation.name
+)}
+</span>
+
+${item.distanceKm !== null
+?`
+<span>
+${escapeHTML(
+formatDistance(item.distanceKm)
+)}
+</span>
+`
+:""}
+
+${item.eventStart
+?`
+<span>
+${escapeHTML(
+formatDateTime(item.eventStart)
+)}
+</span>
+`
+:item.publishedAt
+?`
+<span>
+${escapeHTML(
+formatDate(item.publishedAt)
+)}
+</span>
+`
+:""}
+
+</div>
+
+<div class="result-source">
+${item.isLocal
+? "PETS & DOGUE · " + escapeHTML(words().yourPost)
+: "↗ " + escapeHTML(item.source || words().source)}
+</div>
+
+</div>
+`;
+
+article.addEventListener(
+"click",
+()=>openDetail(item)
+);
+
+article.addEventListener(
+"keydown",
+event=>{
+
+if(
+event.key === "Enter" ||
+event.key === " "
+){
+
+event.preventDefault();
+
+openDetail(item);
+
+}
+
+}
+);
+
+return article;
+
+}
+
+
+/* =========================================================
+DETAIL
+========================================================= */
+
+function openDetail(item){
+
+const type =
+normalizeType(item.type);
+
+const image =
+item.image ||
+fallbackImage(type);
+
+const originalButton =
+item.url
+?`
+<a
+class="detail-button gold"
+href="${escapeHTML(item.url)}"
+target="_blank"
+rel="noopener noreferrer"
+>
+${escapeHTML(words().original)}
+</a>
+`
+:"";
+
+const mapButton =
+Number.isFinite(Number(item.lat)) &&
+Number.isFinite(Number(item.lng))
+?`
+<button
+class="detail-button"
+type="button"
+onclick="showExactMap(${Number(item.lat)},${Number(item.lng)})"
+>
+${escapeHTML(words().showMap)}
+</button>
+`
+:"";
+
+const foundButton =
+item.isLocal &&
+normalizeType(item.type) === "lost"
+?`
+<button
+class="detail-button green"
+type="button"
+onclick="markPostFound('${escapeHTML(item.id)}')"
+>
+${escapeHTML(words().markFound)}
+</button>
+`
+:"";
+
+$("detailHeading").textContent =
+typeLabel(type);
+
+$("detailBody").innerHTML =
+`
+<div data-pd-readable>
+
+<img
+class="detail-image"
+src="${escapeHTML(image)}"
+alt="${escapeHTML(item.title || typeLabel(type))}"
+>
+
+<span class="detail-type">
+${escapeHTML(typeLabel(type))}
+</span>
+
+<h3 class="detail-title">
+${escapeHTML(item.title || typeLabel(type))}
+</h3>
+
+<div class="detail-description">
+${escapeHTML(item.description || "")}
+</div>
+
+<div class="detail-info">
+
+<div>
+<strong>📍</strong>
+${escapeHTML(
+item.address ||
+item.venue ||
+item.location ||
+selectedLocation.name
+)}
+</div>
+
+${item.eventStart
+?`
+<div>
+${escapeHTML(formatDateTime(item.eventStart))}
+</div>
+`
+:""}
+
+${item.publishedAt
+?`
+<div>
+<strong>${escapeHTML(words().published)}:</strong>
+${escapeHTML(formatDate(item.publishedAt))}
+</div>
+`
+:""}
+
+${item.distanceKm !== null
+?`
+<div>
+<strong>${escapeHTML(words().distance)}:</strong>
+${escapeHTML(formatDistance(item.distanceKm))}
+</div>
+`
+:""}
+
+</div>
+
+</div>
+
+<div class="detail-actions">
+${originalButton}
+${mapButton}
+${foundButton}
+</div>
+`;
+
+$("detailOverlay")
+.classList
+.add("show");
+
+document.body
+.classList
+.add("locked");
+
+refreshNarration();
+
+}
+
+
+$("detailClose")
+.addEventListener(
+"click",
+closeDetail
+);
+
+
+$("detailOverlay")
+.addEventListener(
+"click",
+event=>{
+
+if(event.target === $("detailOverlay")){
+closeDetail();
+}
+
+}
+);
+
+
+function closeDetail(){
+
+$("detailOverlay")
+.classList
+.remove("show");
+
+document.body
+.classList
+.remove("locked");
+
+}
+
+
+function showExactMap(lat,lng){
+
+closeDetail();
+
+map.setView(
+[
+lat,
+lng
+],
+15
+);
+
+document
+.querySelector(
+".map-shell"
+)
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+
+/* =========================================================
+ADD POST
+========================================================= */
+
+$("mapAddButton")
+.addEventListener(
+"click",
+()=>{
+
+$("addTypeOverlay")
+.classList
+.add("show");
+
+document.body
+.classList
+.add("locked");
+
+}
+);
+
+
+$("addTypeClose")
+.addEventListener(
+"click",
+closeAddType
+);
+
+
+$("addTypeOverlay")
+.addEventListener(
+"click",
+event=>{
+
+if(
+event.target ===
+$("addTypeOverlay")
+){
+
+closeAddType();
+
+}
+
+}
+);
+
+
+function closeAddType(){
+
+$("addTypeOverlay")
+.classList
+.remove("show");
+
+document.body
+.classList
+.remove("locked");
+
+}
+
+
+document
+.querySelectorAll(
+"[data-add-type]"
+)
+.forEach(
+button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+selectedAddType =
+normalizeType(
+button.dataset.addType
+);
+
+closeAddType();
+
+$("formLocation").value =
+selectedLocation.name;
+
+$("formTitle").value =
+"";
+
+$("formText").value =
+"";
+
+$("formDate").value =
+"";
+
+$("formImage").value =
+"";
+
+$("addFormOverlay")
+.classList
+.add("show");
+
+document.body
+.classList
+.add("locked");
+
+}
+);
+
+}
+);
+
+
+$("addFormClose")
+.addEventListener(
+"click",
+closeAddForm
+);
+
+
+$("cancelPost")
+.addEventListener(
+"click",
+closeAddForm
+);
+
+
+$("addFormOverlay")
+.addEventListener(
+"click",
+event=>{
+
+if(
+event.target ===
+$("addFormOverlay")
+){
+
+closeAddForm();
+
+}
+
+}
+);
+
+
+function closeAddForm(){
+
+$("addFormOverlay")
+.classList
+.remove("show");
+
+document.body
+.classList
+.remove("locked");
+
+}
+
+
+$("publishPost")
+.addEventListener(
+"click",
+publishLocalPost
+);
+
+
+function publishLocalPost(){
+
+const location =
+$("formLocation").value.trim();
+
+const title =
+$("formTitle").value.trim();
+
+const description =
+$("formText").value.trim();
+
+const date =
+$("formDate").value;
+
+const image =
+$("formImage").value.trim();
+
+if(
+!location ||
+!title ||
+!description
+){
+
+alert(
+words().validation
+);
+
+return;
+
+}
+
+const post = {
+
+id:createId(),
+
+type:selectedAddType,
+
+status:
+selectedAddType === "found"
+? "found"
+: "active",
+
+title,
+description,
+image,
+
+url:"",
+
+source:"PETS & DOGUE",
+
+provider:"local",
+
+publishedAt:
+new Date().toISOString(),
+
+eventStart:
+selectedAddType === "event" &&
+date
+? new Date(date).toISOString()
+: null,
+
+location,
+
+venue:"",
+
+address:"",
+
+distanceKm:null,
+
+lat:selectedLocation.lat,
+
+lng:selectedLocation.lng,
+
+isLive:false,
+
+isLocal:true
+
+};
+
+localPosts.unshift(post);
+
+saveLocalPosts();
+
+closeAddForm();
+
+currentFilter =
+selectedAddType;
+
+document
+.querySelectorAll(
+".community-filter,.mobile-filter"
+)
+.forEach(
+button=>{
+
+button.classList.toggle(
+"active",
+button.dataset.filter ===
+currentFilter
+);
+
+}
+);
+
+renderCurrentResults();
+
+}
+
+
+function markPostFound(id){
+
+const post =
+localPosts.find(
+item =>
+String(item.id) ===
+String(id)
+);
+
+if(!post){
+return;
+}
+
+post.type =
+"found";
+
+post.status =
+"found";
+
+saveLocalPosts();
+
+closeDetail();
+
+renderCurrentResults();
+
+}
+
+
+/* =========================================================
+STATUS / LABELS
+========================================================= */
+
+function showLoading(){
+
+$("loadingMessage")
+.classList
+.add("show");
+
+$("emptyMessage")
+.classList
+.remove("show");
+
+$("errorMessage")
+.classList
+.remove("show");
+
+}
+
+
+function hideLoading(){
+
+$("loadingMessage")
+.classList
+.remove("show");
+
+}
+
+
+function showError(){
+
+$("errorMessage")
+.textContent =
+words().error;
+
+$("errorMessage")
+.classList
+.add("show");
+
+}
+
+
+function hideError(){
+
+$("errorMessage")
+.classList
+.remove("show");
+
+}
+
+
+function normalizeType(value){
+
+const type =
+String(
+value ||
+"news"
+)
+.toLowerCase();
+
+const aliases = {
+events:"event",
+club:"group",
+clubs:"group",
+groups:"group",
+community_group:"group",
+neighbourhood:"group",
+neighborhood:"group",
+volunteer:"volunteers",
+sighting:"seen",
+sightings:"seen",
+adopt:"adoption",
+lostfound:"lost"
+};
+
+return aliases[type] || type;
+
+}
+
+
+function typeLabel(type){
+
+const t =
+words();
+
+const labels = {
+lost:t.lost,
+seen:t.seen,
+found:t.found,
+event:t.events,
+group:t.groups,
+help:t.help,
+volunteers:t.volunteers,
+foster:t.foster,
+adoption:t.adoption,
+news:t.news
+};
+
+return labels[type] || t.community;
+
+}
+
+
+function statusClass(item){
+
+return (
+item.status === "found" ||
+normalizeType(item.type) === "found"
+)
+? "found"
+: "";
+
+}
+
+
+function statusLabel(item){
+
+const t =
+words();
+
+const type =
+normalizeType(item.type);
+
+if(
+item.status === "found" ||
+type === "found"
+){
+return t.foundStatus;
+}
+
+if(type === "lost"){
+return t.lostStatus;
+}
+
+if(type === "seen"){
+return t.seenStatus;
+}
+
+return t.activeStatus;
+
+}
+
+
+function eventTimeLabel(item){
+
+if(
+normalizeType(item.type) !==
+"event"
+){
+
+return "";
+
+}
+
+const t =
+words();
+
+const status =
+item.eventStatus;
+
+if(status === "today"){
+return t.today;
+}
+
+if(status === "tomorrow"){
+return t.tomorrow;
+}
+
+if(status === "this_week"){
+return t.thisWeek;
+}
+
+if(status === "upcoming"){
+return t.upcoming;
+}
+
+if(item.eventStart){
+
+const days =
+(
+new Date(item.eventStart).getTime() -
+Date.now()
+) /
+86400000;
+
+if(days >= 0 && days < 1){
+return t.today;
+}
+
+if(days >= 1 && days < 2){
+return t.tomorrow;
+}
+
+if(days >= 2 && days <= 7){
+return t.thisWeek;
+}
+
+if(days > 7){
+return t.upcoming;
+}
+
+}
+
+return t.activeStatus;
+
+}
+
+
+/* =========================================================
+DATE
+========================================================= */
+
+function dateValue(value){
+
+const time =
+new Date(
+value ||
+0
+)
+.getTime();
+
+return Number.isNaN(time)
+? 0
+: time;
+
+}
+
+
+function formatDate(value){
+
+if(!value){
+return "";
+}
+
+const date =
+new Date(value);
+
+if(
+Number.isNaN(
+date.getTime()
+)
+){
+return "";
+}
+
+try{
+
+return new Intl.DateTimeFormat(
+currentLanguage(),
+{
+day:"numeric",
+month:"short",
+year:"numeric"
+}
+)
+.format(date);
+
+}catch(error){
+
+return date.toLocaleDateString();
+
+}
+
+}
+
+
+function formatDateTime(value){
+
+if(!value){
+return "";
+}
+
+const date =
+new Date(value);
+
+if(
+Number.isNaN(
+date.getTime()
+)
+){
+return "";
+}
+
+try{
+
+return new Intl.DateTimeFormat(
+currentLanguage(),
+{
+day:"numeric",
+month:"short",
+year:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+}
+)
+.format(date);
+
+}catch(error){
+
+return date.toLocaleString();
+
+}
+
+}
+
+
+function formatDistance(value){
+
+return (
+Number(value)
+.toFixed(
+value < 10
+? 1
+: 0
+) +
+" km"
+);
+
+}
+
+
+/* =========================================================
+FALLBACK IMAGES
+========================================================= */
+
+function fallbackImage(type){
+
+const images = {
+
+lost:
+"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=82",
+
+seen:
+"https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=900&q=82",
+
+found:
+"https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=900&q=82",
+
+event:
+"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=82",
+
+group:
+"https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=82",
+
+help:
+"https://images.unsplash.com/photo-1601758064224-c3c14e3a8cb8?auto=format&fit=crop&w=900&q=82",
+
+volunteers:
+"https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=900&q=82",
+
+foster:
+"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=900&q=82",
+
+adoption:
+"https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=82",
+
+news:
+"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=82"
+
+};
+
+return images[type] ||
+images.news;
+
+}
+
+
+/* =========================================================
+UTILITIES
+========================================================= */
+
+function escapeHTML(value){
+
+return String(
+value ||
+""
+)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+function createId(){
+
+return (
+Date.now()
+.toString(36) +
+"-" +
+Math.random()
+.toString(36)
+.slice(2,10)
+);
+
+}
+
+
+/* =========================================================
+LANGUAGE EVENTS
+========================================================= */
+
+window.addEventListener(
+"storage",
+event=>{
+
+if(event.key === LANGUAGE_KEY){
+
+applyLanguage();
+
+categoryCache = {};
+
+loadAllDiscovery();
+
+}
+
+}
+);
+
+
+window.addEventListener(
+"petsdogue:languagechange",
+()=>{
+
+applyLanguage();
+
+categoryCache = {};
+
+loadAllDiscovery();
+
+}
+);
+
+
+window.addEventListener(
+"languagechange",
+()=>{
+
+applyLanguage();
+
+categoryCache = {};
+
+loadAllDiscovery();
+
+}
+);
+
+
+/* =========================================================
+ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+"keydown",
+event=>{
+
+if(event.key !== "Escape"){
+return;
+}
+
+if(
+$("detailOverlay")
+.classList
+.contains("show")
+){
+
+closeDetail();
+return;
+
+}
+
+if(
+$("addFormOverlay")
+.classList
+.contains("show")
+){
+
+closeAddForm();
+return;
+
+}
+
+if(
+$("addTypeOverlay")
+.classList
+.contains("show")
+){
+
+closeAddType();
+
+}
+
+}
+);
+
+
+/* =========================================================
+INITIALISE
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+$("locationInput").value =
+selectedLocation.name;
+
+$("clearLocation")
+.classList
+.add("show");
+
+setText(
+"radiusValue",
+$("radiusInput").value +
+" km"
+);
+
+loadLocalPosts();
+
+applyLanguage();
+
+initializeMap();
+
+loadAllDiscovery();
+
+}
+);
+
 </script>
+
+
+<!--
+PETS & DOGUE GLOBAL HEADER + SIDE MENU
+
+This is the SAME shared shell used by the corrected
+PETS & DOGUE pages.
+
+It supplies:
+- hamburger
+- PETS & DOGUE logo
+- Advertise with us
+- Profile
+- two horizontal navigation rows
+- unified Contents side menu
+- language selector
+- RTL
+- active Community state
+- hide header when scrolling down
+- show header when scrolling up
+-->
+
+<script
+src="/pets-dogue-shell.js?v=20260913-global-shell-1"
+></script>
+
+
+<!-- ACCESSIBILITY / TEXT TO SPEECH -->
+<script
+src="/pd-accessibility.js?v=20260913-community-reading-2"
+></script>
+
+</body>
+</html>
