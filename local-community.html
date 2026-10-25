@@ -1397,330 +1397,201 @@ grid-template-columns:1fr;
 
 <body> <main>
 
-<section class="community-shell">
-
-<div class="community-layout">
-
-<div>
-
-<div
-class="community-copy"
-data-pd-readable
->
-
-<span
-class="community-kicker notranslate"
-translate="no"
->
-PETS &amp; DOGUE · COMMUNITY
-</span>
-
-<h1 id="heroTitle">
-Find the pet community near you
-</h1>
-
-<p id="heroText">
-Discover lost and found pets, local events, meetups, pet clubs, neighbourhood groups, group walks, volunteers, adoption, help requests and animal news near you.
-</p>
-
-</div>
-
-
-<div class="location-row">
-
-<div class="location-shell">
-
-<div class="location-box">
-
-<span class="location-icon" aria-hidden="true">
-
-<svg viewBox="0 0 24 24">
-<circle cx="11" cy="11" r="7"></circle>
-<path d="M16.5 16.5 21 21"></path>
-</svg>
-
-</span>
-
-<input
-id="locationInput"
-type="search"
-autocomplete="off"
-spellcheck="false"
-placeholder="City, district or postcode..."
-aria-label="Search location"
->
-
-<button
-class="clear-location"
-id="clearLocation"
-type="button"
-aria-label="Clear location"
->
-×
-</button>
-
-</div>
-
-<div
-class="location-suggestions"
-id="locationSuggestions"
-></div>
-
-</div>
-
-
-<button
-class="geo-button"
-id="geoButton"
-type="button"
-aria-label="Use my location"
->
-
-<svg viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="7"></circle>
-<circle cx="12" cy="12" r="2.4"></circle>
-<path d="M12 1v4"></path>
-<path d="M12 19v4"></path>
-<path d="M1 12h4"></path>
-<path d="M19 12h4"></path>
-</svg>
-
-</button>
-
-</div>
-
-
-<div class="selected-location">
-
-<b>◆</b>
-
-<span id="selectedLocationText">
-Selected location: London
-</span>
-
-</div>
-
-
-<div class="radius-box">
-
-<div class="radius-head">
-
-<span id="radiusLabel">
-Search radius
-</span>
-
-<strong
-class="radius-value"
-id="radiusValue"
->
-15 km
-</strong>
-
-</div>
-
-<input
-id="radiusInput"
-type="range"
-min="2"
-max="50"
-step="1"
-value="15"
-aria-label="Search radius"
->
-
-</div>
-
-
-<div
-class="mobile-filters"
-id="mobileFilters"
->
-
-<button class="mobile-filter active" type="button" data-filter="all">
-<span id="mAll">All</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="lost">
-<span id="mLost">Lost</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="seen">
-<span id="mSeen">Seen</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="found">
-<span id="mFound">Found</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="event">
-<span id="mEvents">Events</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="group">
-<span id="mGroups">Clubs &amp; groups</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="help">
-<span id="mHelp">Help</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="volunteers">
-<span id="mVolunteers">Volunteers</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="foster">
-<span id="mFoster">Foster</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="adoption">
-<span id="mAdoption">Family</span>
-</button>
-
-<button class="mobile-filter" type="button" data-filter="news">
-<span id="mNews">News</span>
-</button>
-
-</div>
-
-
-<div class="map-shell">
-
-<div id="communityMap"></div>
-
-<button
-class="map-add"
-id="mapAddButton"
-type="button"
->
-
-<strong>+</strong>
-
-<span id="addMapText">
-Add
-</span>
-
-</button>
-
-
-<div class="map-legend">
-
-<span class="legend">
-<i class="legend-dot lost"></i>
-<span id="legendLost">Lost</span>
-</span>
-
-<span class="legend">
-<i class="legend-dot seen"></i>
-<span id="legendSeen">Seen</span>
-</span>
-
-<span class="legend">
-<i class="legend-dot found"></i>
-<span id="legendFound">Found</span>
-</span>
-
-<span class="legend">
-<i class="legend-dot event"></i>
-<span id="legendEvent">Events</span>
-</span>
-
-<span class="legend">
-<i class="legend-dot group"></i>
-<span id="legendGroup">Groups</span>
-</span>
-
-<span class="legend">
-<i class="legend-dot help"></i>
-<span id="legendHelp">Help</span>
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-
-<aside class="filter-panel">
-
-<h2
-class="filter-title"
-id="filterTitle"
->
-What are you looking for?
+<style>
+  .community-carousel {
+    max-width: 930px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .community-carousel-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .community-cover {
+    position: relative;
+    isolation: isolate;
+    flex: 0 0 min(68vw, 490px);
+    height: min(104vw, 735px);
+    overflow: hidden;
+    color: #fff;
+    background-image:
+      linear-gradient(0deg, rgba(0,0,0,.88), transparent 70%),
+      url("community-category-photos.png");
+    background-size: 100% 100%, 500% 200%;
+    background-position: center, var(--photo-x) var(--photo-y);
+    cursor: pointer;
+  }
+
+  .community-cover.is-side {
+    flex-basis: 18vw;
+    height: min(92vw, 500px);
+    opacity: .82;
+  }
+
+  .community-cover-content {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+  }
+
+  .community-cover h3 {
+    margin: 0 0 10px;
+    font: 400 clamp(28px, 7vw, 46px)/.98 Georgia, serif;
+  }
+
+  .community-cover-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .community-cover-actions button {
+    min-height: 38px;
+    padding: 0 11px;
+    border: 1px solid #fff;
+    border-radius: 24px;
+    background: #111;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  .community-cover-actions .red {
+    border-color: #c8102e;
+    background: #c8102e;
+  }
+
+  .community-carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin: 14px 0;
+  }
+
+  .community-carousel-controls button {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #111;
+    border-radius: 50%;
+    background: transparent;
+  }
+</style>
+
+<h2 class="community-section-title" id="communityChooseSection">
+  Choose a section
 </h2>
 
-<button class="community-filter active" type="button" data-filter="all">
-<span class="filter-icon">⌘</span>
-<span id="fAll">All</span>
-<span class="filter-count" data-count="all">0</span>
-</button>
+<section class="community-carousel" aria-label="Community sections">
+  <div class="community-carousel-track" id="communityCarouselTrack"></div>
 
-<button class="community-filter" type="button" data-filter="lost">
-<span class="filter-icon">!</span>
-<span id="fLost">Lost pets</span>
-<span class="filter-count" data-count="lost">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="seen">
-<span class="filter-icon">◉</span>
-<span id="fSeen">Seen</span>
-<span class="filter-count" data-count="seen">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="found">
-<span class="filter-icon">✓</span>
-<span id="fFound">Found</span>
-<span class="filter-count" data-count="found">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="event">
-<span class="filter-icon">★</span>
-<span id="fEvents">Events</span>
-<span class="filter-count" data-count="event">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="group">
-<span class="filter-icon">♣</span>
-<span id="fGroups">Clubs &amp; groups</span>
-<span class="filter-count" data-count="group">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="help">
-<span class="filter-icon">+</span>
-<span id="fHelp">Help</span>
-<span class="filter-count" data-count="help">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="volunteers">
-<span class="filter-icon">♧</span>
-<span id="fVolunteers">Volunteers</span>
-<span class="filter-count" data-count="volunteers">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="foster">
-<span class="filter-icon">⌂</span>
-<span id="fFoster">Foster</span>
-<span class="filter-count" data-count="foster">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="adoption">
-<span class="filter-icon">♡</span>
-<span id="fAdoption">Looking for family</span>
-<span class="filter-count" data-count="adoption">0</span>
-</button>
-
-<button class="community-filter" type="button" data-filter="news">
-<span class="filter-icon">◫</span>
-<span id="fNews">News</span>
-<span class="filter-count" data-count="news">0</span>
-</button>
-
-</aside>
-
-</div>
-
+  <div class="community-carousel-controls">
+    <button id="communityCarouselPrev" type="button" aria-label="Previous section">←</button>
+    <span id="communityCarouselPosition"></span>
+    <button id="communityCarouselNext" type="button" aria-label="Next section">→</button>
+  </div>
 </section>
+
+<script>
+  const communitySections = [
+    { type: "lost",       photoX: "0%",   photoY: "0%" },
+    { type: "seen",       photoX: "25%",  photoY: "0%" },
+    { type: "found",      photoX: "50%",  photoY: "0%" },
+    { type: "event",      photoX: "75%",  photoY: "0%" },
+    { type: "group",      photoX: "100%", photoY: "0%" },
+    { type: "help",       photoX: "0%",   photoY: "100%" },
+    { type: "volunteers", photoX: "25%",  photoY: "100%" },
+    { type: "foster",     photoX: "50%",  photoY: "100%" },
+    { type: "adoption",   photoX: "75%",  photoY: "100%" },
+    { type: "news",       photoX: "100%", photoY: "100%" }
+  ];
+
+  let communitySectionIndex = 3;
+
+  function renderCommunitySections() {
+    const t = words();
+    const labels = {
+      lost: t.lost,
+      seen: t.seen,
+      found: t.found,
+      event: t.events,
+      group: t.groups,
+      help: t.help,
+      volunteers: t.volunteers,
+      foster: t.foster,
+      adoption: t.adoption,
+      news: t.news
+    };
+
+    const visible = [
+      (communitySectionIndex + communitySections.length - 1) % communitySections.length,
+      communitySectionIndex,
+      (communitySectionIndex + 1) % communitySections.length
+    ];
+
+    document.getElementById("communityChooseSection").textContent = t.community;
+    document.getElementById("communityCarouselTrack").innerHTML =
+      visible.map((index, position) => {
+        const section = communitySections[index];
+        const label = labels[section.type];
+
+        return `
+          <article class="community-cover${position === 1 ? "" : " is-side"}"
+            style="--photo-x:${section.photoX};--photo-y:${section.photoY}"
+            data-community-type="${section.type}">
+            <div class="community-cover-content">
+              <h3>${escapeHTML(label)}</h3>
+              <div class="community-cover-actions">
+                <button type="button" data-open-community="${section.type}">
+                  ${escapeHTML(t.community)}
+                </button>
+                <button class="red" type="button" data-add-community="${section.type}">
+                  + ${escapeHTML(t.add)}
+                </button>
+                <button type="button" data-map-community="${section.type}">
+                  ${escapeHTML(t.showMap)}
+                </button>
+              </div>
+            </div>
+          </article>`;
+      }).join("");
+
+    document.getElementById("communityCarouselPosition").textContent =
+      `${communitySectionIndex + 1} / ${communitySections.length}`;
+  }
+
+  document.getElementById("communityCarouselPrev").addEventListener("click", () => {
+    communitySectionIndex =
+      (communitySectionIndex + communitySections.length - 1) % communitySections.length;
+    renderCommunitySections();
+  });
+
+  document.getElementById("communityCarouselNext").addEventListener("click", () => {
+    communitySectionIndex =
+      (communitySectionIndex + 1) % communitySections.length;
+    renderCommunitySections();
+  });
+
+  document.addEventListener("click", event => {
+    const add = event.target.closest("[data-add-community]");
+    const open = event.target.closest("[data-open-community]");
+    const map = event.target.closest("[data-map-community]");
+
+    if (add) {
+      document.querySelector(`[data-add-type="${add.dataset.addCommunity}"]`)?.click();
+    } else if (open || map) {
+      const type = (open || map).dataset.openCommunity || map.dataset.mapCommunity;
+      document.querySelector(`[data-filter="${type}"]`)?.click();
+      document.querySelector(".map-shell")?.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  renderCommunitySections();
+</script>
 
 
 <section class="results-bar">
