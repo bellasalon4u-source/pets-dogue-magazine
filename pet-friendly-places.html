@@ -1403,6 +1403,37 @@ const API=
 const COMMUNITY_API=
 "/api/pet-friendly-community";
 
+const EVENTS_API=
+"https://gnfjhzegcbvhzrvndndv.supabase.co/functions/v1/community-events";
+
+const EVENTS_ANON_KEY=
+"ВСТАВЬ_СКОПИРОВАННЫЙ_ANON_KEY";
+
+async function requestEvents(method="GET", payload=null){
+const options={
+method,
+headers:{
+Accept:"application/json",
+apikey:EVENTS_ANON_KEY,
+Authorization:`Bearer ${EVENTS_ANON_KEY}`
+}
+};
+
+if(payload){
+options.headers["Content-Type"]="application/json";
+options.body=JSON.stringify(payload);
+}
+
+const response=await fetch(EVENTS_API,options);
+const data=await response.json().catch(()=>({}));
+
+if(!response.ok){
+throw new Error(data.error||`Events API error: ${response.status}`);
+}
+
+return data;
+}
+
 const OVP=
 "https://overpass-api.de/api/interpreter";
 
