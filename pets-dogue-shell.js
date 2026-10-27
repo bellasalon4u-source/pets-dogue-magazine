@@ -48,7 +48,7 @@
     petFriendly:"pet-friendly-places.html",
     discounts:"special-offers.html",
     help:"pets-in-need.html",
-    community:"local-community.html",
+    community:"pet-friendly-places.html?category=events",
     marketplace:"pet-marketplace.html",
     edition:"issue-01.html",
     coverStars:"members-gallery.html",
@@ -1698,8 +1698,38 @@ animation-duration:48s;
   }
 
   function navLabel(key){
-    return copy().labels[key] || englishLabel(key) || key;
+  if(key === "community"){
+    const eventLabels = {
+      en:"Events",
+      uk:"Події",
+      ru:"События",
+      fr:"Événements",
+      de:"Veranstaltungen",
+      es:"Eventos",
+      it:"Eventi",
+      pt:"Eventos",
+      nl:"Evenementen",
+      pl:"Wydarzenia",
+      cs:"Události",
+      sk:"Podujatia",
+      hu:"Események",
+      ro:"Evenimente",
+      bg:"Събития",
+      el:"Εκδηλώσεις",
+      sv:"Evenemang",
+      da:"Begivenheder",
+      no:"Arrangementer",
+      fi:"Tapahtumat",
+      tr:"Etkinlikler",
+      ar:"الفعاليات",
+      hi:"कार्यक्रम"
+    };
+
+    return eventLabels[language] || eventLabels.en;
   }
+
+  return copy().labels[key] || englishLabel(key) || key;
+}
 
   function englishLabel(key){
 
