@@ -4528,6 +4528,186 @@ setTimeout(
 
 }
 
+  function openEventForm(){
+const copy=lang==="ru"?{
+title:"Добавить событие",
+name:"Название события",
+description:"Краткое описание",
+location:"Место проведения",
+date:"Дата и время",
+animals:"Для каких животных",
+dog:"Собаки",
+cat:"Кошки",
+other:"Другие животные",
+photo:"Фото события",
+submit:"Отправить на проверку",
+cancel:"Отмена",
+chooseAnimal:"Выбери хотя бы один вид животных.",
+photoError:"Не удалось обработать фото. Выбери другое изображение.",
+photoLarge:"Фото слишком большое. Выбери изображение поменьше.",
+success:"Событие отправлено на проверку. После одобрения оно появится в разделе Events.",
+error:"Не получилось отправить событие. Попробуй ещё раз."
+}:lang==="uk"?{
+title:"Додати подію",
+name:"Назва події",
+description:"Короткий опис",
+location:"Місце проведення",
+date:"Дата й час",
+animals:"Для яких тварин",
+dog:"Собаки",
+cat:"Коти",
+other:"Інші тварини",
+photo:"Фото події",
+submit:"Надіслати на перевірку",
+cancel:"Скасувати",
+chooseAnimal:"Обери хоча б один вид тварин.",
+photoError:"Не вдалося обробити фото. Спробуй інше зображення.",
+photoLarge:"Фото завелике. Обери менше зображення.",
+success:"Подію надіслано на перевірку. Після схвалення вона з’явиться в Events.",
+error:"Не вдалося надіслати подію. Спробуй ще раз."
+}:{
+title:"Add an event",
+name:"Event title",
+description:"Short description",
+location:"Location",
+date:"Date and time",
+animals:"Animals welcome",
+dog:"Dogs",
+cat:"Cats",
+other:"Other animals",
+photo:"Event photo",
+submit:"Submit for review",
+cancel:"Cancel",
+chooseAnimal:"Choose at least one animal type.",
+photoError:"Could not process the photo. Please choose another image.",
+photoLarge:"The photo is too large. Please choose a smaller image.",
+success:"Your event was sent for review. It will appear in Events after approval.",
+error:"Could not submit the event. Please try again."
+};
+
+const minDate=new Date(Date.now()-new Date().getTimezoneOffset()*60000)
+.toISOString().slice(0,16);
+
+document.body.insertAdjacentHTML("beforeend",`
+<div id="eventFormOverlay" class="overlay open" style="z-index:18000">
+<div class="modal" role="dialog" aria-modal="true">
+<div class="modal-head">
+<h2>${esc(copy.title)}</h2>
+<button id="eventFormClose" class="close" type="button" aria-label="Close">×</button>
+</div>
+
+<form id="eventForm">
+<div class="field">
+<label for="eventTitle">${esc(copy.name)}</label>
+<input id="eventTitle" name="title" maxlength="120" required>
+</div>
+
+<div class="field">
+<label for="eventDescription">${esc(copy.description)}</label>
+<textarea id="eventDescription" name="description" maxlength="2500" required
+style="width:100%;min-height:100px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff"></textarea>
+</div>
+
+<div class="field">
+<label for="eventLocation">${esc(copy.location)}</label>
+<input id="eventLocation" name="location" maxlength="180" required>
+</div>
+
+<div class="field">
+<label for="eventDate">${esc(copy.date)}</label>
+<input id="eventDate" name="event_start" type="datetime-local" min="${minDate}" required>
+</div>
+
+<div class="field">
+<label>${esc(copy.animals)}</label>
+<label class="policy-choice"><input type="checkbox" name="animal_types" value="dog"><span>${esc(copy.dog)}</span></label>
+<label class="policy-choice"><input type="checkbox" name="animal_types" value="cat"><span>${esc(copy.cat)}</span></label>
+<label class="policy-choice"><input type="checkbox" name="animal_types" value="other"><span>${esc(copy.other)}</span></label>
+</div>
+
+<div class="field">
+<label for="eventImage">${esc(copy.photo)}</label>
+<input id="eventImage" name="image" type="file" accept="image/*" required>
+</div>
+
+<p id="eventFormError" class="policy-note" role="status"></p>
+
+<button id="eventFormSubmit" class="submit" type="submit">${esc(copy.submit)}</button>
+<button id="eventFormCancel" class="submit" type="button"
+style="margin-top:8px;background:#111;color:#fff">${esc(copy.cancel)}</button>
+</form>
+</div>
+</div>
+`);
+
+const overlay=document.getElementById("eventFormOverlay");
+const form=document.getElementById("eventForm");
+const errorBox=document.getElementById("eventFormError");
+const submitButton=document.getElementById("eventFormSubmit");
+
+document.body.classList.add("lock");
+
+function closeForm(){
+overlay.remove();
+if(!document.querySelector(".overlay.open")){
+document.body.classList.remove("lock");
+}
+}
+
+document.getElementById("eventFormClose").onclick=closeForm;
+document.getElementById("eventFormCancel").onclick=closeForm;
+overlay.onclick=event=>{
+if(event.target===overlay)closeForm();
+};
+
+form.onsubmit=async event=>{
+event.preventDefault();
+errorBox.textContent="";
+submitButton.disabled=true;
+
+try{
+const selectedAnimals=[
+...form.querySelectorAll('input[name="animal_types"]:checked')
+].map(input=>input.value);
+
+if(!selectedAnimals.length)throw Error(copy.chooseAnimal);
+
+const file=form.elements.image.files[0];
+if(!file)throw Error(copy.photoError);
+
+const bitmap=await createImageBitmap(file);
+const scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));
+const canvas=document.createElement("canvas");
+canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);
+bitmap.close();
+
+let image=canvas.toDataURL("image/jpeg",0.8);
+if(image.length>1350000)image=canvas.toDataURL("image/jpeg",0.62);
+if(image.length>1350000)throw Error(copy.photoLarge);
+
+await requestEvents("POST",{
+title:form.elements.title.value.trim(),
+description:form.elements.description.value.trim(),
+location:form.elements.location.value.trim(),
+event_start:new Date(form.elements.event_start.value).toISOString(),
+animal_types:selectedAnimals,
+image
+});
+
+closeForm();
+alert(copy.success);
+}catch(error){
+errorBox.textContent=error.message===copy.chooseAnimal||
+error.message===copy.photoError||
+error.message===copy.photoLarge
+?error.message
+:copy.error;
+submitButton.disabled=false;
+}
+};
+}
 function bind(){
 
 document
@@ -4599,18 +4779,17 @@ document
 ()=>locate(true);
 
 document
-.getElementById("addTop")
-.onclick=
-document
-.getElementById("addMap")
-.onclick=
-()=>{
+const openAddForm=()=>{
+if(cat==="events"){
+openEventForm();
+return;
+}
 
-alert(
-t("policyHelp")
-);
-
+alert(t("policyHelp"));
 };
+
+document.getElementById("addTop").onclick=openAddForm;
+document.getElementById("addMap").onclick=openAddForm;
 
 document
 .querySelectorAll("[data-close]")
