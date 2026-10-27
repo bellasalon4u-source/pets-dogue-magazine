@@ -4890,7 +4890,14 @@ applyLang();
 }
 
 async function init(){
+const requestedCategory = new URLSearchParams(window.location.search).get("category");
 
+if (requestedCategory === "events") {
+  cat = "events";
+  document.querySelectorAll(".cat").forEach(button => {
+    button.classList.toggle("active", button.dataset.cat === "events");
+  });
+}
 lang=
 detectLang();
 
