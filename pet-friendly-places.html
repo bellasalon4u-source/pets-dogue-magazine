@@ -4530,61 +4530,61 @@ setTimeout(
 
   function openEventForm(){
 const copy=lang==="ru"?{
-title:"Добавить событие",
-name:"Название события",
-description:"Краткое описание",
-location:"Место проведения",
-date:"Дата и время",
-animals:"Для каких животных",
-dog:"Собаки",
-cat:"Кошки",
-other:"Другие животные",
-photo:"Фото события",
-submit:"Отправить на проверку",
-cancel:"Отмена",
-chooseAnimal:"Выбери хотя бы один вид животных.",
-photoError:"Не удалось обработать фото. Выбери другое изображение.",
-photoLarge:"Фото слишком большое. Выбери изображение поменьше.",
+title:"Добавить событие",name:"Название события",description:"Краткое описание",
+location:"Место, адрес или почтовый индекс",date:"Дата и время",animals:"Для каких животных",
+animalSearch:"Найти животное…",all:"Все животные",camera:"Сделать снимок",
+files:"Выбрать файлы",photo:"Фото события",preview:"Предварительный просмотр",
+edit:"Изменить",send:"Отправить на проверку",cancel:"Отмена",
+chooseAnimal:"Выбери хотя бы один вариант животных.",
+choosePhoto:"Добавь фото с камеры или выбери файл.",
 success:"Событие отправлено на проверку. После одобрения оно появится в разделе Events.",
-error:"Не получилось отправить событие. Попробуй ещё раз."
+error:"Не получилось отправить событие. Попробуй ещё раз.",
+searching:"Ищем варианты…",noResults:"Варианты не найдены."
 }:lang==="uk"?{
-title:"Додати подію",
-name:"Назва події",
-description:"Короткий опис",
-location:"Місце проведення",
-date:"Дата й час",
-animals:"Для яких тварин",
-dog:"Собаки",
-cat:"Коти",
-other:"Інші тварини",
-photo:"Фото події",
-submit:"Надіслати на перевірку",
-cancel:"Скасувати",
-chooseAnimal:"Обери хоча б один вид тварин.",
-photoError:"Не вдалося обробити фото. Спробуй інше зображення.",
-photoLarge:"Фото завелике. Обери менше зображення.",
+title:"Додати подію",name:"Назва події",description:"Короткий опис",
+location:"Місце, адреса або поштовий індекс",date:"Дата й час",animals:"Для яких тварин",
+animalSearch:"Знайти тварину…",all:"Усі тварини",camera:"Зробити фото",
+files:"Вибрати файли",photo:"Фото події",preview:"Попередній перегляд",
+edit:"Змінити",send:"Надіслати на перевірку",cancel:"Скасувати",
+chooseAnimal:"Обери хоча б один варіант тварин.",
+choosePhoto:"Додай фото з камери або вибери файл.",
 success:"Подію надіслано на перевірку. Після схвалення вона з’явиться в Events.",
-error:"Не вдалося надіслати подію. Спробуй ще раз."
+error:"Не вдалося надіслати подію. Спробуй ще раз.",
+searching:"Шукаємо варіанти…",noResults:"Варіантів не знайдено."
 }:{
-title:"Add an event",
-name:"Event title",
-description:"Short description",
-location:"Location",
-date:"Date and time",
-animals:"Animals welcome",
-dog:"Dogs",
-cat:"Cats",
-other:"Other animals",
-photo:"Event photo",
-submit:"Submit for review",
-cancel:"Cancel",
-chooseAnimal:"Choose at least one animal type.",
-photoError:"Could not process the photo. Please choose another image.",
-photoLarge:"The photo is too large. Please choose a smaller image.",
+title:"Add an event",name:"Event title",description:"Short description",
+location:"Place, address or postcode",date:"Date and time",animals:"Animals welcome",
+animalSearch:"Search animals…",all:"All animals",camera:"Take a photo",
+files:"Choose files",photo:"Event photo",preview:"Preview event",
+edit:"Edit",send:"Submit for review",cancel:"Cancel",
+chooseAnimal:"Choose at least one animal option.",
+choosePhoto:"Take a photo or choose an image file.",
 success:"Your event was sent for review. It will appear in Events after approval.",
-error:"Could not submit the event. Please try again."
+error:"Could not submit the event. Please try again.",
+searching:"Searching…",noResults:"No matches found."
 };
 
+const words={
+all:{en:"All animals",ru:"Все животные",uk:"Усі тварини"},
+amphibian:{en:"Amphibians",ru:"Земноводные",uk:"Земноводні"},
+bird:{en:"Birds",ru:"Птицы",uk:"Птахи"},
+cat:{en:"Cats",ru:"Кошки",uk:"Коти"},
+dog:{en:"Dogs",ru:"Собаки",uk:"Собаки"},
+exotic:{en:"Exotic animals",ru:"Экзотические животные",uk:"Екзотичні тварини"},
+ferret:{en:"Ferrets",ru:"Хорьки",uk:"Тхори"},
+fish:{en:"Aquarium fish",ru:"Аквариумные рыбки",uk:"Акваріумні рибки"},
+horse:{en:"Horses",ru:"Лошади",uk:"Коні"},
+invertebrate:{en:"Invertebrates",ru:"Беспозвоночные",uk:"Безхребетні"},
+livestock:{en:"Farm animals",ru:"Сельскохозяйственные животные",uk:"Свійські тварини"},
+rabbit:{en:"Rabbits",ru:"Кролики",uk:"Кролі"},
+reptile:{en:"Reptiles",ru:"Рептилии",uk:"Рептилії"},
+rodent:{en:"Rodents",ru:"Грызуны",uk:"Гризуни"},
+other:{en:"Other animals",ru:"Другие животные",uk:"Інші тварини"}
+};
+const language=["ru","uk"].includes(lang)?lang:"en";
+const animalIds=Object.keys(words).filter(id=>id!=="all")
+.sort((a,b)=>words[a][language].localeCompare(words[b][language],language));
+const animals=["all",...animalIds];
 const minDate=new Date(Date.now()-new Date().getTimezoneOffset()*60000)
 .toISOString().slice(0,16);
 
@@ -4596,6 +4596,7 @@ document.body.insertAdjacentHTML("beforeend",`
 <button id="eventFormClose" class="close" type="button" aria-label="Close">×</button>
 </div>
 
+<div id="eventEntryStep">
 <form id="eventForm">
 <div class="field">
 <label for="eventTitle">${esc(copy.name)}</label>
@@ -4608,9 +4609,11 @@ document.body.insertAdjacentHTML("beforeend",`
 style="width:100%;min-height:100px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff"></textarea>
 </div>
 
-<div class="field">
+<div class="field" style="position:relative">
 <label for="eventLocation">${esc(copy.location)}</label>
-<input id="eventLocation" name="location" maxlength="180" required>
+<input id="eventLocation" name="location" maxlength="180" autocomplete="off" required>
+<div id="eventLocationResults" hidden
+style="position:absolute;z-index:20;top:72px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid #ccc;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
 </div>
 
 <div class="field">
@@ -4620,22 +4623,44 @@ style="width:100%;min-height:100px;padding:12px;border:1px solid var(--line);bor
 
 <div class="field">
 <label>${esc(copy.animals)}</label>
-<label class="policy-choice"><input type="checkbox" name="animal_types" value="dog"><span>${esc(copy.dog)}</span></label>
-<label class="policy-choice"><input type="checkbox" name="animal_types" value="cat"><span>${esc(copy.cat)}</span></label>
-<label class="policy-choice"><input type="checkbox" name="animal_types" value="other"><span>${esc(copy.other)}</span></label>
+<input id="eventAnimalSearch" type="search" placeholder="${esc(copy.animalSearch)}"
+style="width:100%;padding:12px;border:1px solid var(--line);border-radius:13px">
+<div id="eventAnimalList" style="max-height:190px;overflow-y:auto;margin-top:8px;padding:6px;border:1px solid var(--line);border-radius:13px"></div>
 </div>
 
 <div class="field">
-<label for="eventImage">${esc(copy.photo)}</label>
-<input id="eventImage" name="image" type="file" accept="image/*" required>
+<label>${esc(copy.photo)}</label>
+<input id="eventCameraInput" type="file" accept="image/*" capture="environment" hidden>
+<input id="eventFilesInput" type="file" accept="image/*" hidden>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button id="eventCameraButton" class="submit" type="button">${esc(copy.camera)}</button>
+<button id="eventFilesButton" class="submit" type="button">${esc(copy.files)}</button>
+</div>
+<p id="eventPhotoName" class="policy-note" aria-live="polite"></p>
 </div>
 
 <p id="eventFormError" class="policy-note" role="status"></p>
-
-<button id="eventFormSubmit" class="submit" type="submit">${esc(copy.submit)}</button>
+<button id="eventPreviewButton" class="submit" type="button">${esc(copy.preview)}</button>
 <button id="eventFormCancel" class="submit" type="button"
 style="margin-top:8px;background:#111;color:#fff">${esc(copy.cancel)}</button>
 </form>
+</div>
+
+<div id="eventPreviewStep" hidden>
+<div style="border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff">
+<img id="eventPreviewImage" alt="" style="display:block;width:100%;max-height:320px;object-fit:cover">
+<div style="padding:16px">
+<h2 id="eventPreviewTitle"></h2>
+<p id="eventPreviewDescription"></p>
+<p id="eventPreviewLocation"></p>
+<p id="eventPreviewDate"></p>
+<p id="eventPreviewAnimals"></p>
+</div>
+</div>
+<p id="eventPreviewError" class="policy-note" role="status"></p>
+<button id="eventEditButton" class="submit" type="button">${esc(copy.edit)}</button>
+<button id="eventSendButton" class="submit" type="button">${esc(copy.send)}</button>
+</div>
 </div>
 </div>
 `);
@@ -4643,68 +4668,164 @@ style="margin-top:8px;background:#111;color:#fff">${esc(copy.cancel)}</button>
 const overlay=document.getElementById("eventFormOverlay");
 const form=document.getElementById("eventForm");
 const errorBox=document.getElementById("eventFormError");
-const submitButton=document.getElementById("eventFormSubmit");
+const entry=document.getElementById("eventEntryStep");
+const preview=document.getElementById("eventPreviewStep");
+const locationInput=document.getElementById("eventLocation");
+const locationResults=document.getElementById("eventLocationResults");
+const animalList=document.getElementById("eventAnimalList");
+const animalSearch=document.getElementById("eventAnimalSearch");
+let selectedAnimals=[];
+let selectedPhoto=null;
+let photoData="";
+let pickedPlace=null;
+let searchTimer=null;
 
 document.body.classList.add("lock");
 
 function closeForm(){
 overlay.remove();
-if(!document.querySelector(".overlay.open")){
-document.body.classList.remove("lock");
+if(!document.querySelector(".overlay.open"))document.body.classList.remove("lock");
 }
+function animalName(id){return words[id]?.[language]||words.other[language];}
+function renderAnimals(filter=""){
+const matching=animals.filter(id=>
+animalName(id).toLocaleLowerCase(language).includes(filter.toLocaleLowerCase(language))
+);
+animalList.innerHTML=matching.map(id=>`
+<label class="policy-choice" style="display:flex;gap:10px;padding:9px">
+<input type="checkbox" data-animal="${id}" ${selectedAnimals.includes(id)?"checked":""}>
+<span>${esc(animalName(id))}</span>
+</label>`).join("")||`<p>${esc(copy.noResults)}</p>`;
+animalList.querySelectorAll("[data-animal]").forEach(input=>{
+input.onchange=()=>{
+const id=input.dataset.animal;
+if(id==="all")selectedAnimals=input.checked?["all"]:[];
+else{
+selectedAnimals=selectedAnimals.filter(value=>value!=="all");
+if(input.checked)selectedAnimals.push(id);
+else selectedAnimals=selectedAnimals.filter(value=>value!==id);
 }
+renderAnimals(animalSearch.value);
+};
+});
+}
+renderAnimals();
+
+animalSearch.oninput=()=>renderAnimals(animalSearch.value);
+
+document.getElementById("eventCameraButton").onclick=()=>
+document.getElementById("eventCameraInput").click();
+document.getElementById("eventFilesButton").onclick=()=>
+document.getElementById("eventFilesInput").click();
+
+function usePhoto(file){
+if(!file)return;
+selectedPhoto=file;
+document.getElementById("eventPhotoName").textContent=file.name;
+}
+document.getElementById("eventCameraInput").onchange=event=>usePhoto(event.target.files[0]);
+document.getElementById("eventFilesInput").onchange=event=>usePhoto(event.target.files[0]);
+
+locationInput.oninput=()=>{
+pickedPlace=null;
+clearTimeout(searchTimer);
+const query=locationInput.value.trim();
+if(query.length<3){locationResults.hidden=true;return;}
+locationResults.innerHTML=`<div style="padding:12px">${esc(copy.searching)}</div>`;
+locationResults.hidden=false;
+searchTimer=setTimeout(async()=>{
+try{
+const url="https://photon.komoot.io/api/?q="+encodeURIComponent(query)+
+"&limit=6&lang="+encodeURIComponent(language);
+const response=await fetch(url,{headers:{Accept:"application/json"}});
+if(!response.ok)throw Error("lookup");
+const data=await response.json();
+const items=(data.features||[]).map(feature=>{
+const p=feature.properties||{};
+const parts=[p.street,p.housenumber,p.postcode,p.city||p.district,p.state,p.country]
+.filter(Boolean);
+return{label:[p.name,...parts].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join(", "),
+lat:feature.geometry?.coordinates?.[1],lng:feature.geometry?.coordinates?.[0]};
+}).filter(item=>item.label);
+locationResults.innerHTML=items.length?items.map((item,index)=>
+`<button type="button" data-place="${index}" style="display:block;width:100%;padding:12px;text-align:left;border:0;border-bottom:1px solid #eee;background:#fff">${esc(item.label)}</button>`
+).join(""):`<div style="padding:12px">${esc(copy.noResults)}</div>`;
+locationResults.querySelectorAll("[data-place]").forEach(button=>{
+button.onpointerdown=event=>event.preventDefault();
+button.onclick=()=>{
+pickedPlace=items[+button.dataset.place];
+locationInput.value=pickedPlace.label;
+locationResults.hidden=true;
+};
+});
+}catch{
+locationResults.innerHTML=`<div style="padding:12px">${esc(copy.noResults)}</div>`;
+}
+},450);
+};
 
 document.getElementById("eventFormClose").onclick=closeForm;
 document.getElementById("eventFormCancel").onclick=closeForm;
-overlay.onclick=event=>{
-if(event.target===overlay)closeForm();
-};
+overlay.onclick=event=>{if(event.target===overlay)closeForm();};
 
-form.onsubmit=async event=>{
-event.preventDefault();
+document.getElementById("eventPreviewButton").onclick=async()=>{
 errorBox.textContent="";
-submitButton.disabled=true;
+if(!form.reportValidity())return;
+if(!selectedAnimals.length){errorBox.textContent=copy.chooseAnimal;return;}
+if(!selectedPhoto){errorBox.textContent=copy.choosePhoto;return;}
 
 try{
-const selectedAnimals=[
-...form.querySelectorAll('input[name="animal_types"]:checked')
-].map(input=>input.value);
-
-if(!selectedAnimals.length)throw Error(copy.chooseAnimal);
-
-const file=form.elements.image.files[0];
-if(!file)throw Error(copy.photoError);
-
-const bitmap=await createImageBitmap(file);
+const bitmap=await createImageBitmap(selectedPhoto);
 const scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));
 const canvas=document.createElement("canvas");
 canvas.width=Math.max(1,Math.round(bitmap.width*scale));
 canvas.height=Math.max(1,Math.round(bitmap.height*scale));
 canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);
 bitmap.close();
+photoData=canvas.toDataURL("image/jpeg",0.78);
+if(photoData.length>1350000)throw Error("large");
 
-let image=canvas.toDataURL("image/jpeg",0.8);
-if(image.length>1350000)image=canvas.toDataURL("image/jpeg",0.62);
-if(image.length>1350000)throw Error(copy.photoLarge);
+document.getElementById("eventPreviewImage").src=photoData;
+document.getElementById("eventPreviewTitle").textContent=form.elements.title.value.trim();
+document.getElementById("eventPreviewDescription").textContent=form.elements.description.value.trim();
+document.getElementById("eventPreviewLocation").textContent=locationInput.value.trim();
+document.getElementById("eventPreviewDate").textContent=new Intl.DateTimeFormat(lang,{
+dateStyle:"medium",timeStyle:"short"
+}).format(new Date(form.elements.event_start.value));
+document.getElementById("eventPreviewAnimals").textContent=
+selectedAnimals.map(animalName).join(", ");
+entry.hidden=true;
+preview.hidden=false;
+}catch{
+errorBox.textContent=copy.choosePhoto;
+}
+};
 
+document.getElementById("eventEditButton").onclick=()=>{
+preview.hidden=true;
+entry.hidden=false;
+};
+document.getElementById("eventSendButton").onclick=async event=>{
+const button=event.currentTarget;
+const error=document.getElementById("eventPreviewError");
+button.disabled=true;
+error.textContent="";
+try{
 await requestEvents("POST",{
 title:form.elements.title.value.trim(),
 description:form.elements.description.value.trim(),
-location:form.elements.location.value.trim(),
+location:locationInput.value.trim(),
 event_start:new Date(form.elements.event_start.value).toISOString(),
 animal_types:selectedAnimals,
-image
+latitude:pickedPlace&&Number.isFinite(pickedPlace.lat)?pickedPlace.lat:null,
+longitude:pickedPlace&&Number.isFinite(pickedPlace.lng)?pickedPlace.lng:null,
+image:photoData
 });
-
 closeForm();
 alert(copy.success);
-}catch(error){
-errorBox.textContent=error.message===copy.chooseAnimal||
-error.message===copy.photoError||
-error.message===copy.photoLarge
-?error.message
-:copy.error;
-submitButton.disabled=false;
+}catch{
+error.textContent=copy.error;
+button.disabled=false;
 }
 };
 }
