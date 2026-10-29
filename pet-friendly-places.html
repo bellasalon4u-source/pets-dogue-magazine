@@ -4609,11 +4609,29 @@ document.body.insertAdjacentHTML("beforeend",`
 style="width:100%;min-height:100px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff"></textarea>
 </div>
 
+<div class="field">
+<label>${esc(copy.location)}</label>
+</div>
+
 <div class="field" style="position:relative">
-<label for="eventLocation">${esc(copy.location)}</label>
-<input id="eventLocation" name="location" maxlength="180" autocomplete="off" required>
+<label for="eventCountry">${lang==="ru"?"Страна":lang==="uk"?"Країна":"Country"}</label>
+<input id="eventCountry" type="text" autocomplete="off" required>
+<div id="eventCountryResults" hidden
+style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:180px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
+</div>
+
+<div class="field" style="position:relative">
+<label for="eventCity">${lang==="ru"?"Город":lang==="uk"?"Місто":"City"}</label>
+<input id="eventCity" type="text" autocomplete="off" required disabled>
+<div id="eventCityResults" hidden
+style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:180px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
+</div>
+
+<div class="field" style="position:relative">
+<label for="eventLocation">${lang==="ru"?"Название заведения или точный адрес":lang==="uk"?"Назва закладу або точна адреса":"Venue name or exact address"}</label>
+<input id="eventLocation" name="location" maxlength="180" autocomplete="off" required disabled>
 <div id="eventLocationResults" hidden
-style="position:absolute;z-index:20;top:72px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid #ccc;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
+style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
 </div>
 
 <div class="field">
@@ -4673,6 +4691,10 @@ const entry=document.getElementById("eventEntryStep");
 const preview=document.getElementById("eventPreviewStep");
 const locationInput=document.getElementById("eventLocation");
 const locationResults=document.getElementById("eventLocationResults");
+    const countryInput=document.getElementById("eventCountry");
+const countryResults=document.getElementById("eventCountryResults");
+const cityInput=document.getElementById("eventCity");
+const cityResults=document.getElementById("eventCityResults");
 const animalList=document.getElementById("eventAnimalList");
 const animalSearch=document.getElementById("eventAnimalSearch");
     const animalToggle=document.getElementById("eventAnimalToggle");
@@ -4735,61 +4757,123 @@ document.getElementById("eventPhotoName").textContent=file.name;
 document.getElementById("eventCameraInput").onchange=event=>usePhoto(event.target.files[0]);
 document.getElementById("eventFilesInput").onchange=event=>usePhoto(event.target.files[0]);
 
-locationInput.oninput=()=>{
-pickedPlace=null;
-clearTimeout(searchTimer);
-const query=locationInput.value.trim();
-if(query.length<3){locationResults.hidden=true;return;}
-locationResults.innerHTML=`<div style="padding:12px">${esc(copy.searching)}</div>`;
-locationResults.hidden=false;
-searchTimer=setTimeout(async()=>{
-try{
+function formatLocation(){
+return pickedPlace?.label||
+[locationInput.value.trim(),cityInput.value.trim(),countryInput.value.trim()]
+.filter(Boolean).join(", ");
+}
+
+async function photonFeatures(query){
 const url="https://photon.komoot.io/api/?q="+encodeURIComponent(query)+
-"&limit=6&lang="+encodeURIComponent(language);
+"&limit=10&lang="+encodeURIComponent(language);
 const response=await fetch(url,{headers:{Accept:"application/json"}});
 if(!response.ok)throw Error("lookup");
 const data=await response.json();
-const items=(data.features||[]).map(feature=>{
-const p=feature.properties||{};
-const parts=[p.street,p.housenumber,p.postcode,p.city||p.district,p.state,p.country]
-.filter(Boolean);
-return{label:[p.name,...parts].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join(", "),
-lat:feature.geometry?.coordinates?.[1],lng:feature.geometry?.coordinates?.[0]};
-}).filter(item=>item.label);
-locationResults.innerHTML=items.length?items.map((item,index)=>
-`<button type="button" data-place="${index}" style="display:block;width:100%;padding:12px;text-align:left;border:0;border-bottom:1px solid #eee;background:#fff">${esc(item.label)}</button>`
-).join(""):`<div style="padding:12px">${esc(copy.noResults)}</div>`;
-locationResults.querySelectorAll("[data-place]").forEach(button=>{
-button.onpointerdown=event=>event.preventDefault();
-button.onclick=()=>{
-pickedPlace=items[+button.dataset.place];
-locationInput.value=pickedPlace.label;
-locationResults.hidden=true;
-};
-});
-}catch{
-locationResults.innerHTML=`<div style="padding:12px">${esc(copy.noResults)}</div>`;
+return data.features||[];
 }
-},450);
-};
 
-document.getElementById("eventFormClose").onclick=closeForm;
-document.getElementById("eventFormCancel").onclick=closeForm;
-overlay.onclick=event=>{if(event.target===overlay)closeForm();};
+function showLocationOptions(box,items,onChoose){
+box.innerHTML=items.length?items.map((item,index)=>
+`<button type="button" data-option="${index}" style="display:block;width:100%;padding:13px;text-align:left;border:0;border-bottom:1px solid #eee;background:#fff">${esc(item.label)}</button>`
+).join(""):`<div style="padding:12px">${esc(copy.noResults)}</div>`;
+box.hidden=false;
+box.querySelectorAll("[data-option]").forEach(button=>{
+button.onpointerdown=event=>event.preventDefault();
+button.onclick=()=>onChoose(items[Number(button.dataset.option)]);
+});
+}
 
-document.getElementById("eventPreviewButton").onclick=async()=>{
-errorBox.textContent="";
-if(!form.reportValidity())return;
-if(!selectedAnimals.length){errorBox.textContent=copy.chooseAnimal;return;}
-if(!selectedPhoto){errorBox.textContent=copy.choosePhoto;return;}
-
+function bindLocationSearch(input,box,makeQuery,makeItems,onChoose,onTyping){
+let timer;
+input.oninput=()=>{
+onTyping();
+clearTimeout(timer);
+const query=makeQuery().trim();
+if(query.length<2){box.hidden=true;return;}
+box.innerHTML=`<div style="padding:12px">${esc(copy.searching)}</div>`;
+box.hidden=false;
+timer=setTimeout(async()=>{
 try{
-const bitmap=await createImageBitmap(selectedPhoto);
-const scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));
-const canvas=document.createElement("canvas");
-canvas.width=Math.max(1,Math.round(bitmap.width*scale));
-canvas.height=Math.max(1,Math.round(bitmap.height*scale));
-canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);
+const features=await photonFeatures(query);
+showLocationOptions(box,makeItems(features,input.value.trim()),onChoose);
+}catch{
+box.innerHTML=`<div style="padding:12px">${esc(copy.noResults)}</div>`;
+}
+},400);
+};
+}
+
+bindLocationSearch(
+countryInput,
+countryResults,
+()=>countryInput.value,
+features=>[...new Set(features.map(feature=>feature.properties?.country).filter(Boolean))]
+.filter(name=>name.toLocaleLowerCase(language).includes(countryInput.value.trim().toLocaleLowerCase(language)))
+.slice(0,6).map(label=>({label})),
+item=>{
+countryInput.value=item.label;
+countryResults.hidden=true;
+cityInput.value="";
+cityInput.disabled=false;
+locationInput.value="";
+locationInput.disabled=true;
+pickedPlace=null;
+cityInput.focus();
+},
+()=>{
+cityInput.value="";
+cityInput.disabled=true;
+locationInput.value="";
+locationInput.disabled=true;
+pickedPlace=null;
+}
+);
+
+bindLocationSearch(
+cityInput,
+cityResults,
+()=>`${cityInput.value}, ${countryInput.value}`,
+features=>[...new Set(features.map(feature=>{
+const p=feature.properties||{};
+return p.city||p.district||(p.type==="city"?p.name:"");
+}).filter(Boolean))]
+.filter(name=>name.toLocaleLowerCase(language).includes(cityInput.value.trim().toLocaleLowerCase(language)))
+.slice(0,6).map(label=>({label})),
+item=>{
+cityInput.value=item.label;
+cityResults.hidden=true;
+locationInput.value="";
+locationInput.disabled=false;
+pickedPlace=null;
+locationInput.focus();
+},
+()=>{
+locationInput.value="";
+locationInput.disabled=true;
+pickedPlace=null;
+}
+);
+
+bindLocationSearch(
+locationInput,
+locationResults,
+()=>`${locationInput.value}, ${cityInput.value}, ${countryInput.value}`,
+features=>features.map(feature=>{
+const p=feature.properties||{};
+const parts=[p.street,p.housenumber,p.postcode,p.city||p.district,p.state,p.country].filter(Boolean);
+return{
+label:[p.name,...parts].filter(Boolean).filter((value,index,array)=>array.indexOf(value)===index).join(", "),
+lat:feature.geometry?.coordinates?.[1],
+lng:feature.geometry?.coordinates?.[0]
+};
+}).filter(item=>item.label).slice(0,6),
+item=>{
+pickedPlace=item;
+locationInput.value=item.label;
+locationResults.hidden=true;
+},
+()=>{pickedPlace=null;}
+);
 bitmap.close();
 photoData=canvas.toDataURL("image/jpeg",0.78);
 if(photoData.length>1350000)throw Error("large");
@@ -4797,7 +4881,7 @@ if(photoData.length>1350000)throw Error("large");
 document.getElementById("eventPreviewImage").src=photoData;
 document.getElementById("eventPreviewTitle").textContent=form.elements.title.value.trim();
 document.getElementById("eventPreviewDescription").textContent=form.elements.description.value.trim();
-document.getElementById("eventPreviewLocation").textContent=locationInput.value.trim();
+document.getElementById("eventPreviewLocation").textContent=formatLocation();
 document.getElementById("eventPreviewDate").textContent=new Intl.DateTimeFormat(lang,{
 dateStyle:"medium",timeStyle:"short"
 }).format(new Date(form.elements.event_start.value));
@@ -4823,7 +4907,7 @@ try{
 await requestEvents("POST",{
 title:form.elements.title.value.trim(),
 description:form.elements.description.value.trim(),
-location:locationInput.value.trim(),
+location:formatLocation(),
 event_start:new Date(form.elements.event_start.value).toISOString(),
 animal_types:selectedAnimals,
 latitude:pickedPlace&&Number.isFinite(pickedPlace.lat)?pickedPlace.lat:null,
