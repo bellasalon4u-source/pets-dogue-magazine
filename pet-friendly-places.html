@@ -4874,6 +4874,19 @@ locationResults.hidden=true;
 },
 ()=>{pickedPlace=null;}
 );
+document.getElementById("eventPreviewButton").onclick=async()=>{
+errorBox.textContent="";
+if(!form.reportValidity())return;
+if(!selectedAnimals.length){errorBox.textContent=copy.chooseAnimal;return;}
+if(!selectedPhoto){errorBox.textContent=copy.choosePhoto;return;}
+
+try{
+const bitmap=await createImageBitmap(selectedPhoto);
+const scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));
+const canvas=document.createElement("canvas");
+canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);
 bitmap.close();
 photoData=canvas.toDataURL("image/jpeg",0.78);
 if(photoData.length>1350000)throw Error("large");
