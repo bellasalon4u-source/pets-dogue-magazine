@@ -4623,14 +4623,10 @@ style="position:absolute;z-index:20;top:72px;left:0;right:0;max-height:220px;ove
 
 <div class="field">
 <label>${esc(copy.animals)}</label>
-const animalToggle=document.getElementById("eventAnimalToggle");
-animalToggle.onclick=()=>{
-const open=animalList.hidden;
-animalList.hidden=!open;
-animalSearch.hidden=!open;
-animalToggle.setAttribute("aria-expanded",String(open));
-if(open)animalSearch.focus();
-};
+<button id="eventAnimalToggle" class="submit" type="button" aria-expanded="false">${esc(copy.animals)}</button>
+<input id="eventAnimalSearch" type="search" placeholder="${esc(copy.animalSearch)}"
+style="width:100%;padding:12px;border:1px solid var(--line);border-radius:13px" hidden>
+<div id="eventAnimalList" style="max-height:190px;overflow-y:auto;margin-top:8px;padding:6px;border:1px solid var(--line);border-radius:13px" hidden></div>
 </div>
 
 <div class="field">
@@ -4679,6 +4675,14 @@ const locationInput=document.getElementById("eventLocation");
 const locationResults=document.getElementById("eventLocationResults");
 const animalList=document.getElementById("eventAnimalList");
 const animalSearch=document.getElementById("eventAnimalSearch");
+    const animalToggle=document.getElementById("eventAnimalToggle");
+animalToggle.onclick=()=>{
+const open=animalList.hidden;
+animalList.hidden=!open;
+animalSearch.hidden=!open;
+animalToggle.setAttribute("aria-expanded",String(open));
+if(open)animalSearch.focus();
+};
 let selectedAnimals=[];
 let selectedPhoto=null;
 let photoData="";
