@@ -34,7 +34,7 @@ href="https://www.petsanddogue.com/pet-friendly-places.html"
 <meta
 id="ogTitle"
 property="og:title"
-content="Pet-Friendly Places Near You | PETS & DOGUE"
+content="Pet-Friendly Places Near You | PETS &amp; DOGUE"
 >
 
 <meta
@@ -920,9 +920,7 @@ gap:12px;
 
 }
 
-@media(max-width:610px){
-
-.page{
+@media(max-width:610px){.page{
 padding:20px 14px 55px;
 }
 
@@ -1843,8 +1841,7 @@ routeTitle:"Escolher navegação"
 nl:{
 heroTitle:"Vind plekken waar je huisdier welkom is",
 heroText:"Cafés, restaurants, hotels, stranden, parken, dierenartsen en evenementen bij jou in de buurt.",
-searchPlaceholder:"Stad, postcode of gebied",
-radius:"Zoekradius",
+searchPlaceholder:"Stad, postcode of gebied",radius:"Zoekradius",
 addPlace:"Plaats toevoegen",
 catAll:"Alle categorieën",
 catCafe:"Cafés",
@@ -2766,8 +2763,7 @@ photoTried.add(identity);
 try{
 
 const response=
-await fetch(
-API,
+await fetch(API,
 {
 method:"POST",
 headers:{
@@ -3689,8 +3685,7 @@ pizzeria:[
 `nwr["amenity"="restaurant"]["cuisine"~"pizza",i]${dog}${around};`
 ],
 
-hotel:[
-`nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment|camp_site|caravan_site)$"]${dog}${around};`
+hotel:[`nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment|camp_site|caravan_site)$"]${dog}${around};`
 ],
 
 park:[
@@ -4564,29 +4559,7 @@ error:"Could not submit the event. Please try again.",
 searching:"Searching…",noResults:"No matches found."
 };
 
-const words={
-all:{en:"All animals",ru:"Все животные",uk:"Усі тварини"},
-amphibian:{en:"Amphibians",ru:"Земноводные",uk:"Земноводні"},
-bird:{en:"Birds",ru:"Птицы",uk:"Птахи"},
-cat:{en:"Cats",ru:"Кошки",uk:"Коти"},
-dog:{en:"Dogs",ru:"Собаки",uk:"Собаки"},
-exotic:{en:"Exotic animals",ru:"Экзотические животные",uk:"Екзотичні тварини"},
-ferret:{en:"Ferrets",ru:"Хорьки",uk:"Тхори"},
-fish:{en:"Aquarium fish",ru:"Аквариумные рыбки",uk:"Акваріумні рибки"},
-horse:{en:"Horses",ru:"Лошади",uk:"Коні"},
-invertebrate:{en:"Invertebrates",ru:"Беспозвоночные",uk:"Безхребетні"},
-livestock:{en:"Farm animals",ru:"Сельскохозяйственные животные",uk:"Свійські тварини"},
-rabbit:{en:"Rabbits",ru:"Кролики",uk:"Кролі"},
-reptile:{en:"Reptiles",ru:"Рептилии",uk:"Рептилії"},
-rodent:{en:"Rodents",ru:"Грызуны",uk:"Гризуни"},
-other:{en:"Other animals",ru:"Другие животные",uk:"Інші тварини"}
-};
 const language=["ru","uk"].includes(lang)?lang:"en";
-const animalIds=Object.keys(words).filter(id=>id!=="all")
-.sort((a,b)=>words[a][language].localeCompare(words[b][language],language));
-const animals=["all",...animalIds];
-const minDate=new Date(Date.now()-new Date().getTimezoneOffset()*60000)
-.toISOString().slice(0,16);
 
 document.body.insertAdjacentHTML("beforeend",`
 <div id="eventFormOverlay" class="overlay open" style="z-index:18000">
@@ -4632,20 +4605,22 @@ style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:180px;ove
 <input id="eventLocation" name="location" maxlength="180" autocomplete="off" disabled>
 <div id="eventLocationResults" hidden
 style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
+</div><div class="field">
+<label for="eventDateDisplay">${esc(copy.date)}</label>
+<input id="eventDateDisplay" type="text" readonly placeholder="${lang==="ru"?"Нажмите, чтобы выбрать":lang==="uk"?"Натисніть, щоб вибрати":"Tap to choose"}" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff">
+<input id="eventDate" name="event_start" type="hidden">
 </div>
-
-<div class="field">
-<label for="eventDate">${esc(copy.date)}</label>
-<input id="eventDate" name="event_start" type="datetime-local" min="${minDate}" required>
+<div id="eventDatePicker" hidden style="position:fixed;inset:0;z-index:18200;display:none;align-items:center;justify-content:center;background:#0009;padding:16px">
+<div style="width:min(100%,420px);padding:20px;border-radius:22px;background:#f3eee2">
+<div style="display:flex;justify-content:flex-end;gap:12px;margin-bottom:16px">
+<button id="eventDateClose" type="button" aria-label="Close" style="width:48px;height:48px;border:0;border-radius:50%;background:#111;color:#fff;font-size:28px">×</button>
+<button id="eventDateConfirm" type="button" aria-label="Confirm" style="width:48px;height:48px;border:0;border-radius:50%;background:#5be500;color:#111;font-size:27px;font-weight:bold">✓</button>
 </div>
+<input id="eventDateValue" type="date" style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #c9c2b3;border-radius:13px;background:#fff">
+<input id="eventTimeValue" type="time" style="width:100%;padding:14px;border:1px solid #c9c2b3;border-radius:13px;background:#fff">
+</div></div>
 
-<div class="field">
 
-<button id="eventAnimalToggle" class="submit" type="button" aria-expanded="false" aria-required="true">${esc(copy.animals)} <span aria-hidden="true" style="color:#d62828">*</span></button>
-<input id="eventAnimalSearch" type="search" placeholder="${esc(copy.animalSearch)}"
-style="width:100%;padding:12px;border:1px solid var(--line);border-radius:13px" hidden>
-<div id="eventAnimalList" style="max-height:190px;overflow-y:auto;margin-top:8px;padding:6px;border:1px solid var(--line);border-radius:13px" hidden></div>
-</div>
 
 <div class="field">
 <label>${esc(copy.photo)}</label>
@@ -4673,7 +4648,6 @@ style="margin-top:8px;background:#111;color:#fff">${esc(copy.cancel)}</button>
 <p id="eventPreviewDescription"></p>
 <p id="eventPreviewLocation"></p>
 <p id="eventPreviewDate"></p>
-<p id="eventPreviewAnimals"></p>
 </div>
 </div>
 <p id="eventPreviewError" class="policy-note" role="status"></p>
@@ -4717,17 +4691,6 @@ const countryList=document.getElementById("eventCountryList");
 const countryPickerClose=document.getElementById("eventCountryPickerClose");
 const cityInput=document.getElementById("eventCity");
 const cityResults=document.getElementById("eventCityResults");
-const animalList=document.getElementById("eventAnimalList");
-const animalSearch=document.getElementById("eventAnimalSearch");
-    const animalToggle=document.getElementById("eventAnimalToggle");
-animalToggle.onclick=()=>{
-const open=animalList.hidden;
-animalList.hidden=!open;
-animalSearch.hidden=!open;
-animalToggle.setAttribute("aria-expanded",String(open));
-if(open)animalSearch.focus();
-};
-let selectedAnimals=[];
 let selectedPhoto=null;
 let photoData="";
 let pickedPlace=null;
@@ -4739,33 +4702,33 @@ function closeForm(){
 overlay.remove();
 if(!document.querySelector(".overlay.open"))document.body.classList.remove("lock");
 }
-function animalName(id){return words[id]?.[language]||words.other[language];}
-function renderAnimals(filter=""){
-const matching=animals.filter(id=>
-animalName(id).toLocaleLowerCase(language).includes(filter.toLocaleLowerCase(language))
-);
-animalList.innerHTML=matching.map(id=>`
-<label class="policy-choice" style="display:flex;gap:10px;padding:9px">
-<input type="checkbox" data-animal="${id}" ${selectedAnimals.includes(id)?"checked":""}>
-<span>${esc(animalName(id))}</span>
-</label>`).join("")||`<p>${esc(copy.noResults)}</p>`;
-animalList.querySelectorAll("[data-animal]").forEach(input=>{
-input.onchange=()=>{
-const id=input.dataset.animal;
-if(id==="all")selectedAnimals=input.checked?["all"]:[];
-else{
-selectedAnimals=selectedAnimals.filter(value=>value!=="all");
-if(input.checked)selectedAnimals.push(id);
-else selectedAnimals=selectedAnimals.filter(value=>value!==id);
+const eventDate=document.getElementById("eventDate");
+const eventDateDisplay=document.getElementById("eventDateDisplay");
+const eventDatePicker=document.getElementById("eventDatePicker");
+const eventDateValue=document.getElementById("eventDateValue");
+const eventTimeValue=document.getElementById("eventTimeValue");
+function closeDatePicker(){
+  eventDatePicker.hidden=true;
+  eventDatePicker.style.display="none";
 }
-renderAnimals(animalSearch.value);
+eventDateDisplay.onclick=()=>{
+  const now=new Date();
+  const localNow=new Date(now.getTime()-now.getTimezoneOffset()*60000);
+  const initial=eventDate.value || localNow.toISOString().slice(0,16);
+  eventDateValue.value=initial.slice(0,10);
+  eventTimeValue.value=initial.slice(11,16);
+  eventDatePicker.hidden=false;
+  eventDatePicker.style.display="flex";
 };
-});
-}
-renderAnimals();
-
-animalSearch.oninput=()=>renderAnimals(animalSearch.value);
-
+document.getElementById("eventDateClose").onclick=closeDatePicker;
+document.getElementById("eventDateConfirm").onclick=()=>{
+  if(!eventDateValue.value || !eventTimeValue.value)return;
+  const value=`${eventDateValue.value}T${eventTimeValue.value}`;
+  if(new Date(value)<new Date()){eventDateValue.focus();return;}
+  eventDate.value=value;
+  eventDateDisplay.value=new Intl.DateTimeFormat(lang,{dateStyle:"medium",timeStyle:"short"}).format(new Date(value));
+  closeDatePicker();
+};
 document.getElementById("eventCameraButton").onclick=()=>
 document.getElementById("eventCameraInput").click();
 document.getElementById("eventFilesButton").onclick=()=>
@@ -4787,28 +4750,22 @@ return pickedPlace?.label||
 
 const photonCache = new Map();
 
-async function photonFeatures(query, countryCode = "") {
-  const cacheKey = `${countryCode}|${query}`.toLocaleLowerCase();
-
-  if (photonCache.has(cacheKey)) {
-    return photonCache.get(cacheKey);
-  }
-
+async function photonFeatures(query, countryCode = "", countryName = "") {
+  const cacheKey = `${countryCode}|${countryName}|${query}`.toLocaleLowerCase();
+  if (photonCache.has(cacheKey)) return photonCache.get(cacheKey);
   const common = `&limit=10&lang=${encodeURIComponent(language)}`;
-  const urls = countryCode
-    ? [
-        `https://photon.komoot.io/structured?city=${encodeURIComponent(query)}&countrycode=${encodeURIComponent(countryCode.toLowerCase())}${common}`,
-        `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}${common}`
-      ]
-    : [
-        `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}${common}`
-      ];
-
+  const urls = [];
+  if (countryCode) urls.push(
+    `https://photon.komoot.io/structured?city=${encodeURIComponent(query)}&countrycode=${encodeURIComponent(countryCode.toLowerCase())}${common}`
+  );
+  urls.push(
+    `https://photon.komoot.io/api/?q=${encodeURIComponent(`${query}, ${countryName}`)}${common}`,
+    `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}${common}`
+  );
   for (const url of urls) {
     try {
       const response = await fetch(url, {headers: {Accept: "application/json"}});
       if (!response.ok) continue;
-
       const data = await response.json();
       if (data.features?.length) {
         photonCache.set(cacheKey, data.features);
@@ -4816,7 +4773,6 @@ async function photonFeatures(query, countryCode = "") {
       }
     } catch {}
   }
-
   photonCache.set(cacheKey, []);
   return [];
 }
@@ -4852,7 +4808,7 @@ box.innerHTML=`<div style="padding:12px">${esc(copy.noResults)}</div>`;
 };
 }
 
-const countryCodes=`AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW`.split(/\s+/);
+const countryCodes=`AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW`.split(/\s+/);
 
 const countryLocales=["en","ru","uk"];
 const countryNames=Object.fromEntries(countryLocales.map(locale=>[
@@ -4956,7 +4912,11 @@ bindLocationSearch(
   cityInput,
   cityResults,
   () => cityInput.value,
-  features => [...new Set(features.map(feature => {
+  features => [...new Set(features.filter(feature => {
+    const p = feature.properties || {};
+    const code = String(p.countrycode || "").toUpperCase();
+    return !code || code === (countryInput.dataset.countryCode || "").toUpperCase();
+  }).map(feature => {
     const p = feature.properties || {};
     return p.city || p.name || p.district || "";
   }).filter(Boolean))]
@@ -4975,7 +4935,7 @@ bindLocationSearch(
     locationInput.disabled = true;
     pickedPlace = null;
   },
-  query => photonFeatures(query, countryInput.dataset.countryCode || "")
+  query => photonFeatures(query, countryInput.dataset.countryCode || "", countryInput.value || "")
 );
 
 bindLocationSearch(
@@ -5001,7 +4961,11 @@ locationResults.hidden=true;
 document.getElementById("eventPreviewButton").onclick=async()=>{
 errorBox.textContent="";
 if(!form.reportValidity())return;
-if(!selectedAnimals.length){errorBox.textContent=copy.chooseAnimal;return;}
+if(!eventDate.value){
+  errorBox.textContent=lang==="ru"?"Выберите дату и время.":lang==="uk"?"Виберіть дату й час.":"Choose a date and time.";
+  eventDateDisplay.focus();
+  return;
+}
 if(!selectedPhoto){errorBox.textContent=copy.choosePhoto;return;}
 
 try{
@@ -5022,8 +4986,6 @@ document.getElementById("eventPreviewLocation").textContent=formatLocation();
 document.getElementById("eventPreviewDate").textContent=new Intl.DateTimeFormat(lang,{
 dateStyle:"medium",timeStyle:"short"
 }).format(new Date(form.elements.event_start.value));
-document.getElementById("eventPreviewAnimals").textContent=
-selectedAnimals.map(animalName).join(", ");
 entry.hidden=true;
 preview.hidden=false;
 }catch{
@@ -5046,7 +5008,7 @@ title:form.elements.title.value.trim(),
 description:form.elements.description.value.trim(),
 location:formatLocation(),
 event_start:new Date(form.elements.event_start.value).toISOString(),
-animal_types:selectedAnimals,
+animal_types:[],
 latitude:pickedPlace&&Number.isFinite(pickedPlace.lat)?pickedPlace.lat:null,
 longitude:pickedPlace&&Number.isFinite(pickedPlace.lng)?pickedPlace.lng:null,
 image:photoData
