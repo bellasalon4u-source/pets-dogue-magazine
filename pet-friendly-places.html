@@ -4628,8 +4628,8 @@ style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:180px;ove
 </div>
 
 <div class="field" style="position:relative">
-<label for="eventLocation">${lang==="ru"?"Название заведения или точный адрес":lang==="uk"?"Назва закладу або точна адреса":"Venue name or exact address"}</label>
-<input id="eventLocation" name="location" maxlength="180" autocomplete="off" required disabled>
+<label for="eventLocation">${lang==="ru"?"Название заведения или точный адрес (необязательно)":lang==="uk"?"Назва закладу або точна адреса (необов’язково)":"Venue name or exact address (optional)"}</label>
+<input id="eventLocation" name="location" maxlength="180" autocomplete="off" disabled>
 <div id="eventLocationResults" hidden
 style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
 </div>
@@ -4785,13 +4785,40 @@ return pickedPlace?.label||
 .filter(Boolean).join(", ");
 }
 
-async function photonFeatures(query){
-const url="https://photon.komoot.io/api/?q="+encodeURIComponent(query)+
-"&limit=10&lang="+encodeURIComponent(language);
-const response=await fetch(url,{headers:{Accept:"application/json"}});
-if(!response.ok)throw Error("lookup");
-const data=await response.json();
-return data.features||[];
+const photonCache = new Map();
+
+async function photonFeatures(query, countryCode = "") {
+  const cacheKey = `${countryCode}|${query}`.toLocaleLowerCase();
+
+  if (photonCache.has(cacheKey)) {
+    return photonCache.get(cacheKey);
+  }
+
+  const common = `&limit=10&lang=${encodeURIComponent(language)}`;
+  const urls = countryCode
+    ? [
+        `https://photon.komoot.io/structured?city=${encodeURIComponent(query)}&countrycode=${encodeURIComponent(countryCode.toLowerCase())}${common}`,
+        `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}${common}`
+      ]
+    : [
+        `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}${common}`
+      ];
+
+  for (const url of urls) {
+    try {
+      const response = await fetch(url, {headers: {Accept: "application/json"}});
+      if (!response.ok) continue;
+
+      const data = await response.json();
+      if (data.features?.length) {
+        photonCache.set(cacheKey, data.features);
+        return data.features;
+      }
+    } catch {}
+  }
+
+  photonCache.set(cacheKey, []);
+  return [];
 }
 
 function showLocationOptions(box,items,onChoose){
@@ -4926,28 +4953,29 @@ if(event.key==="Escape"&&!countryPicker.hidden)closeCountryPicker();
 });
 
 bindLocationSearch(
-cityInput,
-cityResults,
-()=>`${cityInput.value}, ${countryInput.value}`,
-features=>[...new Set(features.map(feature=>{
-const p=feature.properties||{};
-return p.city||p.district||(p.type==="city"?p.name:"");
-}).filter(Boolean))]
-.filter(name=>name.toLocaleLowerCase(language).includes(cityInput.value.trim().toLocaleLowerCase(language)))
-.slice(0,6).map(label=>({label})),
-item=>{
-cityInput.value=item.label;
-cityResults.hidden=true;
-locationInput.value="";
-locationInput.disabled=false;
-pickedPlace=null;
-locationInput.focus();
-},
-()=>{
-locationInput.value="";
-locationInput.disabled=true;
-pickedPlace=null;
-}
+  cityInput,
+  cityResults,
+  () => cityInput.value,
+  features => [...new Set(features.map(feature => {
+    const p = feature.properties || {};
+    return p.city || p.name || p.district || "";
+  }).filter(Boolean))]
+    .slice(0, 6)
+    .map(label => ({label})),
+  item => {
+    cityInput.value = item.label;
+    cityResults.hidden = true;
+    locationInput.value = "";
+    locationInput.disabled = false;
+    pickedPlace = null;
+    locationInput.focus();
+  },
+  () => {
+    locationInput.value = "";
+    locationInput.disabled = true;
+    pickedPlace = null;
+  },
+  query => photonFeatures(query, countryInput.dataset.countryCode || "")
 );
 
 bindLocationSearch(
