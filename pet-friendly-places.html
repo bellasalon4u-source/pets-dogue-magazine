@@ -4531,7 +4531,7 @@ setTimeout(
   function openEventForm(){
 const copy=lang==="ru"?{
 title:"Добавить событие",name:"Название события",description:"Краткое описание",
-location:"Место проведения",date:"Дата и время",animals:"Выбрать для каких животных",
+location:"Место проведения",date:"Дата и время",animals:"Выбрать животных",
 animalSearch:"Добавить животное…",all:"Все животные",camera:"Сделать фото",
 files:"Галерея / файлы",photo:"Добавить фото",preview:"Предварительный просмотр",
 edit:"Изменить",send:"Добавить событие",cancel:"Отмена",
@@ -4542,7 +4542,7 @@ error:"Не получилось отправить событие. Попроб
 searching:"Ищем варианты…",noResults:"Варианты не найдены."
 }:lang==="uk"?{
 title:"Додати подію",name:"Назва події",description:"Короткий опис",
-location:"Місце проведення",date:"Дата й час",animals:"Вибрати для яких тварин",
+location:"Місце проведення",date:"Дата й час",animals:"Вибрати тварин",
 animalSearch:"Додати тварину…",all:"Усі тварини",camera:"Зробити фото",
 files:"Галерея / файли",photo:"Додати фото",preview:"Попередній перегляд",
 edit:"Змінити",send:"Додати подію",cancel:"Скасувати",
@@ -4640,8 +4640,8 @@ style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:220px;ove
 </div>
 
 <div class="field">
-<label>${esc(copy.animals)}</label>
-<button id="eventAnimalToggle" class="submit" type="button" aria-expanded="false">${esc(copy.animals)}</button>
+
+<button id="eventAnimalToggle" class="submit" type="button" aria-expanded="false" aria-required="true">${esc(copy.animals)} <span aria-hidden="true" style="color:#d62828">*</span></button>
 <input id="eventAnimalSearch" type="search" placeholder="${esc(copy.animalSearch)}"
 style="width:100%;padding:12px;border:1px solid var(--line);border-radius:13px" hidden>
 <div id="eventAnimalList" style="max-height:190px;overflow-y:auto;margin-top:8px;padding:6px;border:1px solid var(--line);border-radius:13px" hidden></div>
@@ -4832,7 +4832,7 @@ button.onclick=()=>onChoose(items[Number(button.dataset.option)]);
 });
 }
 
-function bindLocationSearch(input,box,makeQuery,makeItems,onChoose,onTyping){
+function bindLocationSearch(input,box,makeQuery,makeItems,onChoose,onTyping,lookup=photonFeatures){
 let timer;
 input.oninput=()=>{
 onTyping();
@@ -4843,7 +4843,7 @@ box.innerHTML=`<div style="padding:12px">${esc(copy.searching)}</div>`;
 box.hidden=false;
 timer=setTimeout(async()=>{
 try{
-const features=await photonFeatures(query);
+const features=await lookup(query);
 showLocationOptions(box,makeItems(features,input.value.trim()),onChoose);
 }catch{
 box.innerHTML=`<div style="padding:12px">${esc(copy.noResults)}</div>`;
