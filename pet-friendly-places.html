@@ -4615,9 +4615,9 @@ style="width:100%;min-height:100px;padding:12px;border:1px solid var(--line);bor
 
 <div class="field" style="position:relative">
 <label for="eventCountry">${lang==="ru"?"Страна":lang==="uk"?"Країна":"Country"}</label>
-<input id="eventCountry" type="text" autocomplete="off" required>
-<div id="eventCountryResults" hidden
-style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:180px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
+<input id="eventCountry" type="text" autocomplete="off" readonly required
+aria-haspopup="dialog" aria-controls="eventCountryPicker"
+placeholder="${lang==="ru"?"Нажмите, чтобы выбрать страну":lang==="uk"?"Натисніть, щоб вибрати країну":"Tap to choose a country"}">
 </div>
 
 <div class="field" style="position:relative">
@@ -4681,6 +4681,25 @@ style="margin-top:8px;background:#111;color:#fff">${esc(copy.cancel)}</button>
 <button id="eventSendButton" class="submit" type="button">${esc(copy.send)}</button>
 </div>
 </div>
+<div id="eventCountryPicker" hidden
+style="position:fixed;inset:0;z-index:18100;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.62);padding-top:12px">
+<section role="dialog" aria-modal="true" aria-labelledby="eventCountryPickerTitle"
+style="width:min(100%,600px);max-height:82dvh;display:flex;flex-direction:column;background:#f3eee2;border-radius:24px 24px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 32px #0004">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px">
+<h3 id="eventCountryPickerTitle" style="margin:0;font-size:20px">${lang==="ru"?"Выберите страну":lang==="uk"?"Виберіть країну":"Choose a country"}</h3>
+<button id="eventCountryPickerClose" type="button"
+aria-label="${lang==="ru"?"Закрыть":lang==="uk"?"Закрити":"Close"}"
+style="width:42px;height:42px;border:0;border-radius:50%;background:#111;color:#fff;font-size:26px">×</button>
+</div>
+<input id="eventCountrySearch" type="search" autocomplete="off" autocapitalize="off"
+placeholder="${lang==="ru"?"Поиск страны…":lang==="uk"?"Пошук країни…":"Search countries…"}"
+aria-label="${lang==="ru"?"Поиск страны":lang==="uk"?"Пошук країни":"Search countries"}"
+style="width:100%;min-height:52px;padding:12px 15px;border:1px solid #c9c2b3;border-radius:14px;background:#fff;font-size:17px">
+<div id="eventCountryList" role="listbox"
+aria-label="${lang==="ru"?"Список стран":lang==="uk"?"Список країн":"Country list"}"
+style="overflow-y:auto;overscroll-behavior:contain;margin-top:12px;padding:4px 0;min-height:120px;max-height:60dvh"></div>
+</section>
+</div>
 </div>
 `);
 
@@ -4692,7 +4711,10 @@ const preview=document.getElementById("eventPreviewStep");
 const locationInput=document.getElementById("eventLocation");
 const locationResults=document.getElementById("eventLocationResults");
     const countryInput=document.getElementById("eventCountry");
-const countryResults=document.getElementById("eventCountryResults");
+const countryPicker=document.getElementById("eventCountryPicker");
+const countrySearch=document.getElementById("eventCountrySearch");
+const countryList=document.getElementById("eventCountryList");
+const countryPickerClose=document.getElementById("eventCountryPickerClose");
 const cityInput=document.getElementById("eventCity");
 const cityResults=document.getElementById("eventCityResults");
 const animalList=document.getElementById("eventAnimalList");
@@ -4803,31 +4825,105 @@ box.innerHTML=`<div style="padding:12px">${esc(copy.noResults)}</div>`;
 };
 }
 
-bindLocationSearch(
-countryInput,
-countryResults,
-()=>countryInput.value,
-features=>[...new Set(features.map(feature=>feature.properties?.country).filter(Boolean))]
-.filter(name=>name.toLocaleLowerCase(language).includes(countryInput.value.trim().toLocaleLowerCase(language)))
-.slice(0,6).map(label=>({label})),
-item=>{
-countryInput.value=item.label;
-countryResults.hidden=true;
+const countryCodes=`AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW`.split(/\s+/);
+
+const countryLocales=["en","ru","uk"];
+const countryNames=Object.fromEntries(countryLocales.map(locale=>[
+locale,new Intl.DisplayNames([locale],{type:"region"})
+]));
+const countryOptions=countryCodes.map(code=>({
+code,
+names:Object.fromEntries(countryLocales.map(locale=>[
+locale,countryNames[locale].of(code)||code
+]))
+})).sort((a,b)=>a.names[language].localeCompare(b.names[language],language));
+
+function countryText(value){
+return String(value||"").toLocaleLowerCase(language)
+.normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+}
+
+function renderCountryList(query=""){
+const normalized=countryText(query);
+const aliases={
+GB:["UK","Great Britain","United Kingdom","Великобритания","Сполучене Королівство"],
+US:["USA","United States","Соединённые Штаты","США","Сполучені Штати"],
+RU:["Russia","Russian Federation","Россия","Росія"],
+CZ:["Czech Republic","Чехия","Чеська Республіка"],
+KR:["South Korea","Южная Корея","Південна Корея"]
+};
+const matches=countryOptions.filter(country=>
+!normalized||[
+...countryLocales.map(locale=>countryText(country.names[locale])),
+country.code.toLowerCase(),
+...(aliases[country.code]||[]).map(countryText)
+].some(name=>name.includes(normalized))
+);
+
+countryList.innerHTML=matches.length?matches.map(country=>{
+const selected=countryInput.dataset.countryCode===country.code;
+return `<button type="button" role="option" aria-selected="${selected}" data-country-code="${country.code}"
+style="display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;padding:12px 14px;text-align:left;border:0;border-bottom:1px solid #ded8cb;background:#fff;color:#171717;font-size:16px">
+<span>${esc(country.names[language])}</span>
+<span aria-hidden="true" style="width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:${selected?"#5be500":"#f3eee2"};font-weight:700">${selected?"✓":""}</span>
+</button>`;
+}).join(""):`<div style="padding:18px 12px;color:#666">${lang==="ru"?"Страна не найдена":lang==="uk"?"Країну не знайдено":"No countries found"}</div>`;
+
+countryList.querySelectorAll("[data-country-code]").forEach(button=>{
+button.onclick=()=>{
+const selected=countryOptions.find(country=>country.code===button.dataset.countryCode);
+if(!selected)return;
+
+countryInput.value=selected.names[language];
+countryInput.dataset.countryCode=selected.code;
+countryInput.setCustomValidity("");
+countryPicker.hidden=true;
+countryPicker.style.display="none";
 cityInput.value="";
 cityInput.disabled=false;
 locationInput.value="";
 locationInput.disabled=true;
 pickedPlace=null;
-cityInput.focus();
-},
-()=>{
-cityInput.value="";
-cityInput.disabled=true;
-locationInput.value="";
-locationInput.disabled=true;
-pickedPlace=null;
+countrySearch.value="";
+setTimeout(()=>cityInput.focus(),120);
+};
+});
 }
-);
+
+function openCountryPicker(){
+countrySearch.value="";
+renderCountryList();
+countryPicker.hidden=false;
+countryPicker.style.display="flex";
+countryList.scrollTop=0;
+}
+
+function closeCountryPicker(){
+countryPicker.hidden=true;
+countryPicker.style.display="none";
+countrySearch.value="";
+countryInput.focus();
+}
+
+countryInput.readOnly=true;
+countryInput.setCustomValidity(lang==="ru"?"Выберите страну из списка.":lang==="uk"?"Виберіть країну зі списку.":"Choose a country from the list.");
+countryInput.onclick=openCountryPicker;
+countryInput.onkeydown=event=>{
+if(["Enter"," ","ArrowDown"].includes(event.key)){
+event.preventDefault();
+openCountryPicker();
+}
+};
+
+countrySearch.oninput=()=>renderCountryList(countrySearch.value);
+countryPickerClose.onclick=closeCountryPicker;
+countryPicker.onclick=event=>{
+if(event.target===countryPicker)closeCountryPicker();
+};
+
+document.addEventListener("keydown",event=>{
+if(event.key==="Escape"&&!countryPicker.hidden)closeCountryPicker();
+});
 
 bindLocationSearch(
 cityInput,
