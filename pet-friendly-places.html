@@ -741,6 +741,265 @@ border-radius:13px;
 background:#fff;
 }
 
+/* Event form: PETS & DOGUE black, cream and gold styling. */
+#eventFormOverlay .event-modal{
+width:min(620px,100%);
+max-height:min(92dvh,900px);
+padding:24px 22px calc(24px + env(safe-area-inset-bottom));
+overflow:auto;
+overscroll-behavior:contain;
+border:1px solid rgba(201,151,41,.72);
+border-radius:28px;
+background:#070707;
+color:#f4efe4;
+box-shadow:0 25px 70px rgba(0,0,0,.55);
+}
+
+#eventFormOverlay .event-modal .modal-head{
+position:sticky;
+top:-24px;
+z-index:4;
+align-items:center;
+margin:-24px -22px 20px;
+padding:20px 22px 14px;
+background:#070707;
+border-bottom:1px solid rgba(201,151,41,.24);
+}
+
+#eventFormOverlay .event-modal .modal-head h2,
+#eventFormOverlay .event-modal h2{
+color:#e2c579;
+font:400 clamp(34px,8vw,48px)/.98 Georgia,serif;
+}
+
+#eventFormOverlay .event-modal .close,
+#eventCountryPicker button#eventCountryPickerClose{
+flex:0 0 46px;
+width:46px;
+height:46px;
+border:1px solid rgba(226,197,121,.55);
+border-radius:50%;
+background:#111;
+color:#f4efe4;
+font-size:27px;
+}
+
+#eventFormOverlay .event-modal .field label{
+color:#f4efe4;
+font-size:12px;
+letter-spacing:.045em;
+}
+
+#eventFormOverlay .event-modal .field input,
+#eventFormOverlay .event-modal .field select,
+#eventFormOverlay .event-modal textarea,
+#eventCountryPicker input{
+width:100%;
+min-height:54px;
+padding:12px 15px;
+border:1px solid #cfc7b8;
+border-radius:17px;
+background:#fff;
+color:#111;
+font:inherit;
+font-size:16px;
+}
+
+#eventFormOverlay .event-modal textarea{
+min-height:112px;
+resize:vertical;
+}
+
+#eventFormOverlay .event-modal input:focus,
+#eventFormOverlay .event-modal textarea:focus,
+#eventCountryPicker input:focus{
+outline:3px solid rgba(201,151,41,.48);
+outline-offset:2px;
+}
+
+#eventFormOverlay .event-modal input:disabled{
+background:#e9e6df;
+color:#777;
+}
+
+#eventFormOverlay .event-modal .submit{
+min-height:56px;
+margin-top:14px;
+border:1px solid rgba(255,226,151,.55);
+border-radius:999px;
+background:linear-gradient(112deg,#9c6a12 0%,#f1d276 48%,#b27c19 100%);
+color:#111;
+font-size:16px;
+font-weight:900;
+box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 16px rgba(0,0,0,.24);
+}
+
+#eventFormOverlay .event-modal #eventFormCancel{
+border:1px solid rgba(226,197,121,.42);
+background:#111;
+color:#f4efe4;
+box-shadow:none;
+}
+
+#eventFormOverlay .event-modal .policy-note{
+color:#cfc7b8;
+}
+
+#eventFormOverlay .event-location-results,
+#eventFormOverlay .event-city-results{
+z-index:12!important;
+max-height:220px;
+overflow:auto;
+border:1px solid rgba(201,151,41,.48)!important;
+border-radius:16px!important;
+background:#111!important;
+box-shadow:0 12px 28px #0008!important;
+}
+
+#eventFormOverlay .event-suggestion{
+display:block;
+width:100%;
+padding:12px 14px;
+border:0;
+border-bottom:1px solid #333;
+background:#111;
+color:#fff;
+text-align:left;
+}
+
+#eventFormOverlay .event-suggestion:last-child{border-bottom:0}
+#eventFormOverlay .event-suggestion strong{display:block;font-size:14px}
+#eventFormOverlay .event-suggestion small{display:block;margin-top:3px;color:#cfc7b8;font-size:12px}
+
+#eventFormOverlay .event-date-display-wrap{position:relative}
+#eventFormOverlay #eventDateDisplay{padding-right:52px!important;cursor:pointer}
+#eventFormOverlay .event-ready-mark{
+position:absolute;
+right:13px;
+top:50%;
+display:none;
+width:28px;
+height:28px;
+transform:translateY(-50%);
+place-items:center;
+border-radius:50%;
+background:#54ef0b;
+color:#111;
+font-weight:900;
+}
+#eventFormOverlay .event-date-display-wrap.is-ready .event-ready-mark{display:grid}
+
+#eventDatePicker{
+position:fixed!important;
+z-index:18200!important;
+inset:0!important;
+align-items:center!important;
+justify-content:center!important;
+padding:16px!important;
+background:rgba(0,0,0,.78)!important;
+}
+#eventDatePicker:not([hidden]){display:flex!important}
+#eventDatePicker .event-date-dialog{
+width:min(100%,460px);
+max-height:90dvh;
+overflow:auto;
+padding:20px;
+border:1px solid rgba(201,151,41,.7);
+border-radius:26px;
+background:#070707;
+color:#f4efe4;
+box-shadow:0 24px 65px #0009;
+}
+#eventDatePicker .event-date-heading{
+margin:0 auto 18px;
+color:#e2c579;
+font:400 28px/1 Georgia,serif;
+}
+#eventDatePicker .event-date-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+#eventDatePicker .event-date-actions{display:flex;gap:10px}
+#eventDatePicker .event-date-actions button{
+width:48px;height:48px;border:0;border-radius:50%;font-size:26px;font-weight:900
+}
+#eventDatePicker .event-date-actions .date-cancel{background:#191919;color:#fff;border:1px solid #5a513b}
+#eventDatePicker .event-date-actions .date-confirm{background:#54ef0b;color:#111}
+#eventDatePicker .event-date-grid{display:grid;grid-template-columns:1fr 1.25fr .8fr;gap:9px}
+#eventDatePicker .event-date-part label,
+#eventDatePicker .event-time-title{display:block;margin:0 0 7px;color:#d9c58f;font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+#eventDatePicker .event-date-part select{
+width:100%;height:50px;padding:0 10px;border:1px solid #cfc7b8;border-radius:14px;background:#fff;color:#111;font-size:15px
+}
+#eventDatePicker .event-time-block{margin-top:20px}
+#eventDatePicker .event-time-wheels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#eventDatePicker .event-wheel{
+height:176px;
+overflow-y:auto;
+overscroll-behavior:contain;
+scroll-snap-type:y mandatory;
+scrollbar-width:none;
+padding:66px 0;
+border:1px solid rgba(201,151,41,.42);
+border-radius:16px;
+background:linear-gradient(180deg,#151515,#0b0b0b);
+}
+#eventDatePicker .event-wheel::-webkit-scrollbar{display:none}
+#eventDatePicker .event-wheel-item{
+display:grid;
+width:100%;
+height:44px;
+place-items:center;
+scroll-snap-align:center;
+border:0;
+background:transparent;
+color:#aaa;
+font-size:22px;
+}
+#eventDatePicker .event-wheel-item.is-selected{
+border-top:1px solid #c99729;
+border-bottom:1px solid #c99729;
+background:rgba(201,151,41,.13);
+color:#f1d276;
+font-size:26px;
+font-weight:900;
+}
+#eventDatePicker .event-time-separator{display:none}
+
+#eventCountryPicker section{
+border:1px solid rgba(201,151,41,.7);
+background:#070707!important;
+color:#f4efe4;
+}
+#eventCountryPicker h3{color:#e2c579}
+#eventCountryPicker #eventCountryList button{
+border-bottom-color:#302b20!important;
+background:#111!important;
+color:#f4efe4!important;
+}
+
+#eventFormOverlay #eventPhotoPreview{
+display:flex;
+align-items:center;
+gap:12px;
+margin-top:12px;
+padding:9px;
+border:1px solid rgba(201,151,41,.4);
+border-radius:16px;
+background:#111;
+}
+#eventFormOverlay #eventPhotoPreview[hidden]{display:none}
+#eventFormOverlay #eventPhotoPreview img{
+width:64px;height:64px;object-fit:cover;border-radius:11px;background:#222
+}
+#eventFormOverlay #eventPhotoName{margin:0;color:#e2c579;overflow-wrap:anywhere}
+
+@media(max-width:520px){
+ #eventFormOverlay.overlay{padding:10px}
+ #eventFormOverlay .event-modal{max-height:calc(100dvh - 20px);padding:20px 16px calc(20px + env(safe-area-inset-bottom));border-radius:25px}
+ #eventFormOverlay .event-modal .modal-head{top:-20px;margin:-20px -16px 16px;padding:16px 16px 12px}
+ #eventFormOverlay .event-modal .modal-head h2{font-size:39px}
+ #eventDatePicker .event-date-dialog{padding:16px;border-radius:23px}
+ #eventDatePicker .event-wheel{height:164px;padding:60px 0}
+}
+
 .detail-photo{
 width:100%;
 height:220px;
@@ -1466,8 +1725,7 @@ en:{
 heroTitle:"Find places that welcome your pet",
 heroText:"Cafes, restaurants, hotels, beaches, parks, vets, pet shops and events near you.",
 searchPlaceholder:"City, postcode or area",
-radius:"Search radius",
-addPlace:"Add place",
+radius:"Search radius",addPlace:"Add place",
 catAll:"All categories",
 catCafe:"Cafes",
 catRestaurant:"Restaurants",
@@ -2556,8 +2814,7 @@ text:t("outside")
 }
 
 if(
-place.allowsDogs===true
-){
+place.allowsDogs===true){
 
 return{
 confirmed:true,
@@ -4527,8 +4784,8 @@ setTimeout(
 const copy=lang==="ru"?{
 title:"Добавить событие",name:"Название события",description:"Краткое описание",
 location:"Место проведения",date:"Дата и время",animals:"Выбрать животных",
-animalSearch:"Добавить животное…",all:"Все животные",camera:"Сделать фото",
-files:"Галерея / файлы",photo:"Добавить фото",preview:"Предварительный просмотр",
+animalSearch:"Добавить животное…",all:"Все животные",camera:"Добавить фото",
+files:"Галерея / файлы",photo:"Фото события",preview:"Предварительный просмотр",
 edit:"Изменить",send:"Добавить событие",cancel:"Отмена",
 chooseAnimal:"Выбери хотя бы один вариант животных.",
 choosePhoto:"Добавь фото с камеры или выбери файл.",
@@ -4538,8 +4795,8 @@ searching:"Ищем варианты…",noResults:"Варианты не най
 }:lang==="uk"?{
 title:"Додати подію",name:"Назва події",description:"Короткий опис",
 location:"Місце проведення",date:"Дата й час",animals:"Вибрати тварин",
-animalSearch:"Додати тварину…",all:"Усі тварини",camera:"Зробити фото",
-files:"Галерея / файли",photo:"Додати фото",preview:"Попередній перегляд",
+animalSearch:"Додати тварину…",all:"Усі тварини",camera:"Додати фото",
+files:"Галерея / файли",photo:"Фото події",preview:"Попередній перегляд",
 edit:"Змінити",send:"Додати подію",cancel:"Скасувати",
 chooseAnimal:"Обери хоча б один варіант тварин.",
 choosePhoto:"Додай фото з камери або вибери файл.",
@@ -4549,8 +4806,8 @@ searching:"Шукаємо варіанти…",noResults:"Варіантів н�
 }:{
 title:"Add an event",name:"Event title",description:"Short description",
 location:"Event location",date:"Date and time",animals:"Choose animals",
-animalSearch:"Add an animal…",all:"All animals",camera:"Take a photo",
-files:"Gallery / files",photo:"Add a photo",preview:"Preview event",
+animalSearch:"Add an animal…",all:"All animals",camera:"Add a photo",
+files:"Gallery / files",photo:"Event photo",preview:"Preview event",
 edit:"Edit",send:"Add event",cancel:"Cancel",
 chooseAnimal:"Choose at least one animal option.",
 choosePhoto:"Take a photo or choose an image file.",
@@ -4563,9 +4820,9 @@ const language=["ru","uk"].includes(lang)?lang:"en";
 
 document.body.insertAdjacentHTML("beforeend",`
 <div id="eventFormOverlay" class="overlay open" style="z-index:18000">
-<div class="modal" role="dialog" aria-modal="true">
+<div class="modal event-modal" role="dialog" aria-modal="true" aria-labelledby="eventFormTitle">
 <div class="modal-head">
-<h2>${esc(copy.title)}</h2>
+<h2 id="eventFormTitle">${esc(copy.title)}</h2>
 <button id="eventFormClose" class="close" type="button" aria-label="Close">×</button>
 </div>
 
@@ -4595,30 +4852,48 @@ placeholder="${lang==="ru"?"Нажмите, чтобы выбрать стран
 
 <div class="field" style="position:relative">
 <label for="eventCity">${lang==="ru"?"Город":lang==="uk"?"Місто":"City"}</label>
-<input id="eventCity" type="text" autocomplete="off" required disabled>
-<div id="eventCityResults" hidden
-style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:180px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
+<input id="eventCity" type="text" autocomplete="off" required disabled
+placeholder="${lang==="ru"?"Начните вводить название города":lang==="uk"?"Почніть вводити назву міста":"Start typing a city name"}">
+<div id="eventCityResults" class="event-city-results" hidden
+style="position:absolute;z-index:30;top:72px;left:0;right:0"></div>
 </div>
 
 <div class="field" style="position:relative">
 <label for="eventLocation">${lang==="ru"?"Название заведения или точный адрес (необязательно)":lang==="uk"?"Назва закладу або точна адреса (необов’язково)":"Venue name or exact address (optional)"}</label>
-<input id="eventLocation" name="location" maxlength="180" autocomplete="off" disabled>
-<div id="eventLocationResults" hidden
-style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:220px;overflow:auto;background:#fff;border:1px solid #c9c2b3;border-radius:14px;box-shadow:0 10px 24px #0002"></div>
-</div><div class="field">
+<input id="eventLocation" name="location" maxlength="180" autocomplete="off" disabled
+placeholder="${lang==="ru"?"Название, улица или индекс — необязательно":lang==="uk"?"Назва, вулиця або індекс — необов’язково":"Venue, street or postcode — optional"}">
+<div id="eventLocationResults" class="event-location-results" hidden
+style="position:absolute;z-index:30;top:72px;left:0;right:0"></div>
+</div>
+<div class="field event-date-display-wrap" id="eventDateDisplayWrap">
 <label for="eventDateDisplay">${esc(copy.date)}</label>
-<input id="eventDateDisplay" type="text" readonly placeholder="${lang==="ru"?"Нажмите, чтобы выбрать":lang==="uk"?"Натисніть, щоб вибрати":"Tap to choose"}" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff">
+<input id="eventDateDisplay" type="text" readonly placeholder="${lang==="ru"?"Выберите год, месяц, день и время":lang==="uk"?"Виберіть рік, місяць, день і час":"Choose year, month, day and time"}" aria-haspopup="dialog" aria-controls="eventDatePicker">
+<span class="event-ready-mark" aria-hidden="true">✓</span>
 <input id="eventDate" name="event_start" type="hidden">
 </div>
-<div id="eventDatePicker" hidden style="position:fixed;inset:0;z-index:18200;display:none;align-items:center;justify-content:center;background:#0009;padding:16px">
-<div style="width:min(100%,420px);padding:20px;border-radius:22px;background:#f3eee2">
-<div style="display:flex;justify-content:flex-end;gap:12px;margin-bottom:16px">
-<button id="eventDateClose" type="button" aria-label="Close" style="width:48px;height:48px;border:0;border-radius:50%;background:#111;color:#fff;font-size:28px">×</button>
-<button id="eventDateConfirm" type="button" aria-label="Confirm" style="width:48px;height:48px;border:0;border-radius:50%;background:#5be500;color:#111;font-size:27px;font-weight:bold">✓</button>
+<div id="eventDatePicker" hidden>
+<section class="event-date-dialog" role="dialog" aria-modal="true" aria-labelledby="eventDateHeading">
+<div class="event-date-top">
+<h3 class="event-date-heading" id="eventDateHeading">${lang==="ru"?"Дата и время":lang==="uk"?"Дата й час":"Date and time"}</h3>
+<div class="event-date-actions">
+<button id="eventDateClose" class="date-cancel" type="button" aria-label="${lang==="ru"?"Закрыть":lang==="uk"?"Закрити":"Close"}">×</button>
+<button id="eventDateConfirm" class="date-confirm" type="button" aria-label="${lang==="ru"?"Готово":lang==="uk"?"Готово":"Done"}">✓</button>
 </div>
-<input id="eventDateValue" type="date" style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #c9c2b3;border-radius:13px;background:#fff">
-<input id="eventTimeValue" type="time" style="width:100%;padding:14px;border:1px solid #c9c2b3;border-radius:13px;background:#fff">
-</div></div>
+</div>
+<div class="event-date-grid">
+<div class="event-date-part"><label for="eventYear">${lang==="ru"?"Год":lang==="uk"?"Рік":"Year"}</label><select id="eventYear" aria-label="Year"></select></div>
+<div class="event-date-part"><label for="eventMonth">${lang==="ru"?"Месяц":lang==="uk"?"Місяць":"Month"}</label><select id="eventMonth" aria-label="Month"></select></div>
+<div class="event-date-part"><label for="eventDay">${lang==="ru"?"День":lang==="uk"?"День":"Day"}</label><select id="eventDay" aria-label="Day"></select></div>
+</div>
+<div class="event-time-block">
+<span class="event-time-title">${lang==="ru"?"Время — часы и минуты":lang==="uk"?"Час — години й хвилини":"Time — hours and minutes"}</span>
+<div class="event-time-wheels">
+<div><label class="event-time-title" for="eventHourWheel">${lang==="ru"?"Часы":lang==="uk"?"Години":"Hours"}</label><div id="eventHourWheel" class="event-wheel" role="listbox" aria-label="Hours"></div></div>
+<div><label class="event-time-title" for="eventMinuteWheel">${lang==="ru"?"Минуты":lang==="uk"?"Хвилини":"Minutes"}</label><div id="eventMinuteWheel" class="event-wheel" role="listbox" aria-label="Minutes"></div></div></div>
+<p id="eventDateError" class="policy-note" role="status" aria-live="polite"></p>
+</div>
+</section>
+</div>
 
 
 
@@ -4630,7 +4905,7 @@ style="position:absolute;z-index:30;top:72px;left:0;right:0;max-height:220px;ove
 <button id="eventCameraButton" class="submit" type="button">${esc(copy.camera)}</button>
 <button id="eventFilesButton" class="submit" type="button">${esc(copy.files)}</button>
 </div>
-<p id="eventPhotoName" class="policy-note" aria-live="polite"></p>
+<div id="eventPhotoPreview" hidden><img id="eventPhotoThumb" alt=""><p id="eventPhotoName" aria-live="polite"></p></div>
 </div>
 
 <p id="eventFormError" class="policy-note" role="status"></p>
@@ -4641,7 +4916,7 @@ style="margin-top:8px;background:#111;color:#fff">${esc(copy.cancel)}</button>
 </div>
 
 <div id="eventPreviewStep" hidden>
-<div style="border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff">
+<div style="border:1px solid rgba(201,151,41,.55);border-radius:18px;overflow:hidden;background:#111;color:#f4efe4">
 <img id="eventPreviewImage" alt="" style="display:block;width:100%;max-height:320px;object-fit:cover">
 <div style="padding:16px">
 <h2 id="eventPreviewTitle"></h2>
@@ -4694,39 +4969,143 @@ const cityResults=document.getElementById("eventCityResults");
 let selectedPhoto=null;
 let photoData="";
 let pickedPlace=null;
+let pickedCity=null;
 let searchTimer=null;
 
 document.body.classList.add("lock");
 
 function closeForm(){
+if(photoPreviewUrl)URL.revokeObjectURL(photoPreviewUrl);
 overlay.remove();
 if(!document.querySelector(".overlay.open"))document.body.classList.remove("lock");
 }
+document.getElementById("eventFormClose").onclick=closeForm;
+document.getElementById("eventFormCancel").onclick=closeForm;
+overlay.onclick=event=>{if(event.target===overlay)closeForm();};
+document.addEventListener("keydown",event=>{
+  if(event.key!=="Escape")return;
+  if(!eventDatePicker.hidden){closeDatePicker();return;}
+  if(!countryPicker.hidden){closeCountryPicker();return;}
+  if(document.getElementById("eventFormOverlay"))closeForm();
+});
 const eventDate=document.getElementById("eventDate");
 const eventDateDisplay=document.getElementById("eventDateDisplay");
+const eventDateDisplayWrap=document.getElementById("eventDateDisplayWrap");
 const eventDatePicker=document.getElementById("eventDatePicker");
-const eventDateValue=document.getElementById("eventDateValue");
-const eventTimeValue=document.getElementById("eventTimeValue");
+const eventYear=document.getElementById("eventYear");
+const eventMonth=document.getElementById("eventMonth");
+const eventDay=document.getElementById("eventDay");
+const eventHourWheel=document.getElementById("eventHourWheel");
+const eventMinuteWheel=document.getElementById("eventMinuteWheel");
+let selectedHour=0;
+let selectedMinute=0;
+let wheelFrameHour=0;
+let wheelFrameMinute=0;
+let photoPreviewUrl="";
+const pad2=value=>String(value).padStart(2,"0");
+
+function updateDays(preferredDay){
+  const year=Number(eventYear.value);
+  const month=Number(eventMonth.value);
+  const days=new Date(year,month,0).getDate();
+  const day=Math.min(Number(preferredDay||eventDay.value||1),days);
+  eventDay.innerHTML=Array.from({length:days},(_,index)=>
+    `<option value="${index+1}">${pad2(index+1)}</option>`
+  ).join("");
+  eventDay.value=String(day);
+}
+
+function fillDateSelectors(date){
+  const currentYear=new Date().getFullYear();
+  const yearEnd=Math.max(currentYear+5,date.getFullYear());
+  eventYear.innerHTML=Array.from({length:yearEnd-currentYear+1},(_,index)=>{
+    const year=currentYear+index;
+    return `<option value="${year}">${year}</option>`;
+  }).join("");
+  eventYear.value=String(date.getFullYear());
+  eventMonth.innerHTML=Array.from({length:12},(_,index)=>{
+    const label=new Intl.DateTimeFormat(lang,{month:"long"}).format(new Date(2024,index,1));
+    return `<option value="${index+1}">${esc(label)}</option>`;
+  }).join("");
+  eventMonth.value=String(date.getMonth()+1);
+  updateDays(date.getDate());
+}
+
+function markWheel(container,value){
+  container.querySelectorAll(".event-wheel-item").forEach(button=>{
+    const selected=Number(button.dataset.value)===value;
+    button.classList.toggle("is-selected",selected);
+    button.setAttribute("aria-selected",String(selected));
+  });
+}
+
+function buildWheel(container,count,initial,onSelect,onScroll){
+  container.innerHTML=Array.from({length:count},(_,value)=>
+    `<button type="button" class="event-wheel-item" role="option" aria-selected="false" data-value="${value}">${pad2(value)}</button>`
+  ).join("");
+  markWheel(container,initial);
+  container.querySelectorAll(".event-wheel-item").forEach(button=>{
+    button.onclick=()=>{
+      const value=Number(button.dataset.value);
+      container.scrollTo({top:value*44,behavior:"smooth"});
+      markWheel(container,value);
+      onSelect(value);
+    };
+  });
+  container.onscroll=()=>{
+    const frame=container===eventHourWheel?wheelFrameHour:wheelFrameMinute;
+    cancelAnimationFrame(frame);
+    const next=requestAnimationFrame(()=>{
+      const value=Math.max(0,Math.min(count-1,Math.round(container.scrollTop/44)));
+      markWheel(container,value);
+      onScroll(value);
+    });
+    if(container===eventHourWheel)wheelFrameHour=next;
+    else wheelFrameMinute=next;
+  };
+  requestAnimationFrame(()=>container.scrollTop=initial*44);
+}
+
 function closeDatePicker(){
   eventDatePicker.hidden=true;
-  eventDatePicker.style.display="none";
+  const message=document.getElementById("eventDateError");
+  if(message)message.textContent="";
 }
-eventDateDisplay.onclick=()=>{
-  const now=new Date();
-  const localNow=new Date(now.getTime()-now.getTimezoneOffset()*60000);
-  const initial=eventDate.value || localNow.toISOString().slice(0,16);
-  eventDateValue.value=initial.slice(0,10);
-  eventTimeValue.value=initial.slice(11,16);
+
+function openDatePicker(){
+  const base=eventDate.value?new Date(eventDate.value):new Date(Date.now()+60*60*1000);
+  const safeDate=Number.isNaN(base.getTime())?new Date(Date.now()+60*60*1000):base;
+  fillDateSelectors(safeDate);
+  selectedHour=safeDate.getHours();
+  selectedMinute=safeDate.getMinutes();
+  buildWheel(eventHourWheel,24,selectedHour,value=>selectedHour=value,value=>selectedHour=value);
+  buildWheel(eventMinuteWheel,60,selectedMinute,value=>selectedMinute=value,value=>selectedMinute=value);
   eventDatePicker.hidden=false;
-  eventDatePicker.style.display="flex";
+}
+
+eventYear.onchange=()=>updateDays(eventDay.value);
+eventMonth.onchange=()=>updateDays(eventDay.value);
+eventDateDisplay.onclick=openDatePicker;
+eventDateDisplay.onkeydown=event=>{
+  if(event.key==="Enter"||event.key===" "){
+    event.preventDefault();
+    openDatePicker();
+  }
 };
 document.getElementById("eventDateClose").onclick=closeDatePicker;
+eventDatePicker.onclick=event=>{if(event.target===eventDatePicker)closeDatePicker();};
 document.getElementById("eventDateConfirm").onclick=()=>{
-  if(!eventDateValue.value || !eventTimeValue.value)return;
-  const value=`${eventDateValue.value}T${eventTimeValue.value}`;
-  if(new Date(value)<new Date()){eventDateValue.focus();return;}
+  const chosen=new Date(Number(eventYear.value),Number(eventMonth.value)-1,Number(eventDay.value),selectedHour,selectedMinute,0,0);
+  const error=document.getElementById("eventDateError");
+  if(Number.isNaN(chosen.getTime()))return;
+  if(chosen.getTime()<Date.now()){
+    error.textContent=lang==="ru"?"Выберите будущее время.":lang==="uk"?"Виберіть час у майбутньому.":"Choose a future time.";
+    return;
+  }
+  const value=`${chosen.getFullYear()}-${pad2(chosen.getMonth()+1)}-${pad2(chosen.getDate())}T${pad2(chosen.getHours())}:${pad2(chosen.getMinutes())}`;
   eventDate.value=value;
-  eventDateDisplay.value=new Intl.DateTimeFormat(lang,{dateStyle:"medium",timeStyle:"short"}).format(new Date(value));
+  eventDateDisplay.value=new Intl.DateTimeFormat(lang,{dateStyle:"medium",timeStyle:"short"}).format(chosen);
+  eventDateDisplayWrap.classList.add("is-ready");
   closeDatePicker();
 };
 document.getElementById("eventCameraButton").onclick=()=>
@@ -4736,8 +5115,17 @@ document.getElementById("eventFilesInput").click();
 
 function usePhoto(file){
 if(!file)return;
+if(!file.type.startsWith("image/")){
+errorBox.textContent=copy.choosePhoto;
+return;
+}
 selectedPhoto=file;
-document.getElementById("eventPhotoName").textContent=file.name;
+errorBox.textContent="";
+if(photoPreviewUrl)URL.revokeObjectURL(photoPreviewUrl);
+photoPreviewUrl=URL.createObjectURL(file);
+document.getElementById("eventPhotoThumb").src=photoPreviewUrl;
+document.getElementById("eventPhotoPreview").hidden=false;
+document.getElementById("eventPhotoName").textContent=`✓ ${file.name}`;
 }
 document.getElementById("eventCameraInput").onchange=event=>usePhoto(event.target.files[0]);
 document.getElementById("eventFilesInput").onchange=event=>usePhoto(event.target.files[0]);
@@ -4779,8 +5167,8 @@ async function photonFeatures(query, countryCode = "", countryName = "") {
 
 function showLocationOptions(box,items,onChoose){
 box.innerHTML=items.length?items.map((item,index)=>
-`<button type="button" data-option="${index}" style="display:block;width:100%;padding:13px;text-align:left;border:0;border-bottom:1px solid #eee;background:#fff">${esc(item.label)}</button>`
-).join(""):`<div style="padding:12px">${esc(copy.noResults)}</div>`;
+`<button type="button" class="event-suggestion" data-option="${index}"><strong>${esc(item.label)}</strong>${item.detail?`<small>${esc(item.detail)}</small>`:""}</button>`
+).join(""):`<div style="padding:12px;color:#f4efe4">${esc(copy.noResults)}</div>`;
 box.hidden=false;
 box.querySelectorAll("[data-option]").forEach(button=>{
 button.onpointerdown=event=>event.preventDefault();
@@ -4790,18 +5178,29 @@ button.onclick=()=>onChoose(items[Number(button.dataset.option)]);
 
 function bindLocationSearch(input,box,makeQuery,makeItems,onChoose,onTyping,lookup=photonFeatures){
 let timer;
+let requestVersion=0;
 input.oninput=()=>{
 onTyping();
 clearTimeout(timer);
+const version=++requestVersion;
 const query=makeQuery().trim();
 if(query.length<2){box.hidden=true;return;}
-box.innerHTML=`<div style="padding:12px">${esc(copy.searching)}</div>`;
+box.innerHTML=`<div style="padding:12px;color:#f4efe4">${esc(copy.searching)}</div>`;
 box.hidden=false;
 timer=setTimeout(async()=>{
 try{
 const features=await lookup(query);
-showLocationOptions(box,makeItems(features,input.value.trim()),onChoose);
+if(version!==requestVersion)return;
+const items=makeItems(features,input.value.trim());
+if(!items.length&&input===cityInput){
+box.innerHTML=`<div style="padding:12px;color:#f4efe4">${esc(copy.noResults)}</div><button type="button" class="event-suggestion" data-manual-city><strong>${lang==="ru"?"Продолжить с городом":"Continue with this city"}: ${esc(input.value.trim())}</strong></button>`;
+box.hidden=false;
+box.querySelector("[data-manual-city]").onclick=()=>onChoose({label:input.value.trim(),detail:"",lat:null,lng:null,manual:true});
+return;
+}
+showLocationOptions(box,items,onChoose);
 }catch{
+if(version!==requestVersion)return;
 box.innerHTML=`<div style="padding:12px">${esc(copy.noResults)}</div>`;
 }
 },400);
@@ -4867,6 +5266,7 @@ cityInput.disabled=false;
 locationInput.value="";
 locationInput.disabled=true;
 pickedPlace=null;
+pickedCity=null;
 countrySearch.value="";
 setTimeout(()=>cityInput.focus(),120);
 };
@@ -4912,28 +5312,40 @@ bindLocationSearch(
   cityInput,
   cityResults,
   () => cityInput.value,
-  features => [...new Set(features.filter(feature => {
+  features => {
+    const matching=features.filter(feature => {
     const p = feature.properties || {};
     const code = String(p.countrycode || "").toUpperCase();
     return !code || code === (countryInput.dataset.countryCode || "").toUpperCase();
-  }).map(feature => {
-    const p = feature.properties || {};
-    return p.city || p.name || p.district || "";
-  }).filter(Boolean))]
-    .slice(0, 6)
-    .map(label => ({label})),
+    });
+    const found=new Map();
+    matching.forEach(feature=>{
+      const p=feature.properties||{};
+      const label=p.city||p.name||p.district||"";
+      if(!label||found.has(label.toLocaleLowerCase()))return;
+      found.set(label.toLocaleLowerCase(),{
+        label,
+        detail:[p.state,p.country].filter(Boolean).join(", "),
+        lat:feature.geometry?.coordinates?.[1],
+        lng:feature.geometry?.coordinates?.[0]
+      });
+    });
+    return [...found.values()].slice(0,6);
+  },
   item => {
     cityInput.value = item.label;
     cityResults.hidden = true;
     locationInput.value = "";
     locationInput.disabled = false;
     pickedPlace = null;
+    pickedCity = item;
     locationInput.focus();
   },
   () => {
     locationInput.value = "";
-    locationInput.disabled = true;
+    locationInput.disabled = cityInput.value.trim().length<2;
     pickedPlace = null;
+    pickedCity = null;
   },
   query => photonFeatures(query, countryInput.dataset.countryCode || "", countryInput.value || "")
 );
@@ -4942,7 +5354,10 @@ bindLocationSearch(
 locationInput,
 locationResults,
 ()=>`${locationInput.value}, ${cityInput.value}, ${countryInput.value}`,
-features=>features.map(feature=>{
+features=>features.filter(feature=>{
+const code=String(feature.properties?.countrycode||"").toUpperCase();
+return !code||code===(countryInput.dataset.countryCode||"").toUpperCase();
+}).map(feature=>{
 const p=feature.properties||{};
 const parts=[p.street,p.housenumber,p.postcode,p.city||p.district,p.state,p.country].filter(Boolean);
 return{
@@ -4963,7 +5378,7 @@ errorBox.textContent="";
 if(!form.reportValidity())return;
 if(!eventDate.value){
   errorBox.textContent=lang==="ru"?"Выберите дату и время.":lang==="uk"?"Виберіть дату й час.":"Choose a date and time.";
-  eventDateDisplay.focus();
+  openDatePicker();
   return;
 }
 if(!selectedPhoto){errorBox.textContent=copy.choosePhoto;return;}
@@ -5002,6 +5417,7 @@ const button=event.currentTarget;
 const error=document.getElementById("eventPreviewError");
 button.disabled=true;
 error.textContent="";
+const eventPoint=pickedPlace||pickedCity;
 try{
 await requestEvents("POST",{
 title:form.elements.title.value.trim(),
@@ -5009,8 +5425,8 @@ description:form.elements.description.value.trim(),
 location:formatLocation(),
 event_start:new Date(form.elements.event_start.value).toISOString(),
 animal_types:[],
-latitude:pickedPlace&&Number.isFinite(pickedPlace.lat)?pickedPlace.lat:null,
-longitude:pickedPlace&&Number.isFinite(pickedPlace.lng)?pickedPlace.lng:null,
+latitude:eventPoint&&Number.isFinite(eventPoint.lat)?eventPoint.lat:null,
+longitude:eventPoint&&Number.isFinite(eventPoint.lng)?eventPoint.lng:null,
 image:photoData
 });
 closeForm();
