@@ -5413,9 +5413,7 @@ async function(){
   }
 
 
-  setStatus(
-    t(
-         if (snapshot.category === "events") {
+    if (snapshot.category === "events") {
     setStatus(t("searching"));
 
     try {
@@ -5435,6 +5433,9 @@ async function(){
 
     return;
   }
+
+  setStatus(
+    t(
       "searching"
     )
   );
