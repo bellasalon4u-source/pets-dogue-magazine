@@ -926,7 +926,31 @@ const PD_TX = {
   }
 
 };
-
+const PD_EVENT_ADD_LABELS = {
+  en:"＋ Add event",
+  uk:"＋ Додати подію",
+  ru:"＋ Добавить событие",
+  fr:"＋ Ajouter un événement",
+  de:"＋ Veranstaltung hinzufügen",
+  es:"＋ Añadir evento",
+  it:"＋ Aggiungi evento",
+  pt:"＋ Adicionar evento",
+  nl:"＋ Evenement toevoegen",
+  pl:"＋ Dodaj wydarzenie",
+  cs:"＋ Přidat událost",
+  sk:"＋ Pridať udalosť",
+  hu:"＋ Esemény hozzáadása",
+  ro:"＋ Adaugă un eveniment",
+  bg:"＋ Добави събитие",
+  el:"＋ Προσθήκη εκδήλωσης",
+  sv:"＋ Lägg till evenemang",
+  da:"＋ Tilføj begivenhed",
+  no:"＋ Legg til arrangement",
+  fi:"＋ Lisää tapahtuma",
+  tr:"＋ Etkinlik ekle",
+  ar:"＋ إضافة فعالية",
+  hi:"＋ कार्यक्रम जोड़ें"
+};
 function pdT(key){
 
   return (
@@ -1742,6 +1766,202 @@ function pdInstallStyles(){
       }
       #cards .card:not(.event-card) .actions button{
         min-height:39px;padding:0 9px;font-size:10px
+      }
+    }
+        /* PETS & DOGUE editorial mobile layout */
+
+    #addTop{
+      display:none!important;
+    }
+
+    .pd-event-add-wrap[hidden]{
+      display:none!important;
+    }
+
+    .pd-event-add-wrap{
+      grid-column:1/-1;
+      min-width:0;
+    }
+
+    .pd-event-add-wrap .map-add{
+      position:static!important;
+      inset:auto!important;
+      z-index:auto!important;
+      display:flex;
+      width:100%;
+      min-height:54px;
+      align-items:center;
+      justify-content:center;
+      padding:10px 16px;
+      border:1px solid #c99729;
+      border-radius:16px;
+      background:#111;
+      color:#f4efe4;
+      box-shadow:0 8px 20px rgba(0,0,0,.12);
+      font-size:16px;
+      font-weight:900;
+    }
+
+    #locBtn{
+      border:1px solid #64b8ed!important;
+      background:#8bd5ff!important;
+      color:#111!important;
+    }
+
+    #radius{
+      accent-color:#c99729!important;
+    }
+
+    .marker{
+      border-color:#d4a32e!important;
+      background:#111!important;
+      color:#f4efe4!important;
+    }
+
+    .categories .cat{
+      border-color:#d8c9a8;
+      background:#f8f4eb;
+      color:#17130e;
+      white-space:nowrap;
+    }
+
+    .categories .cat.active{
+      border-color:#c99729;
+      background:#111;
+      color:#f4efe4;
+      box-shadow:inset 0 -3px 0 #c99729;
+    }
+
+    .categories .cat.saved{
+      background:#eee5d2;
+      color:#17130e;
+    }
+
+    .categories .cat.saved.active{
+      border-color:#c99729;
+      background:#111;
+      color:#f4efe4;
+    }
+
+    #cards .card:not(.event-card) .pet{
+      background:#d8f4a5!important;
+      color:#18210d!important;
+    }
+
+    #cards .card:not(.event-card) .pet.unknown{
+      border:1px solid #e3bd00;
+      background:#ffe500!important;
+      color:#17130e!important;
+      box-shadow:0 0 12px rgba(255,229,0,.38);
+    }
+
+    #cards .card:not(.event-card) .heart{
+      color:#ff2638!important;
+      text-shadow:0 0 8px rgba(255,38,56,.35);
+    }
+
+    #cards .card:not(.event-card) .heart.on{
+      border-color:#ff1f36!important;
+      background:#ff1f36!important;
+      color:#fff!important;
+      box-shadow:0 0 14px rgba(255,31,54,.45);
+    }
+
+    #cards .card:not(.event-card) .pd-vote-btn.yes{
+      border:2px solid #69eb16!important;
+      color:#a5ff67!important;
+    }
+
+    #cards .card:not(.event-card) .pd-vote-btn.no{
+      border:2px solid #ff5969!important;
+      color:#ff7884!important;
+    }
+
+    @media(max-width:850px){
+      .discovery{
+        display:grid;
+        grid-template-columns:minmax(0,1fr);
+        grid-template-areas:
+          "hero"
+          "search"
+          "location"
+          "radius"
+          "categories"
+          "eventadd"
+          "map";
+        gap:14px;
+      }
+
+      .discovery>div:first-child{
+        display:contents;
+      }
+
+      .copy{grid-area:hero}
+      .search{grid-area:search}
+      .location-ok{grid-area:location}
+      .radius{grid-area:radius}
+      .categories{
+        grid-area:categories;
+        display:flex;
+        width:100%;
+        gap:8px;
+        overflow-x:auto;
+        overscroll-behavior-inline:contain;
+        padding:2px 1px 8px;
+        scrollbar-width:none;
+      }
+
+      .categories::-webkit-scrollbar{
+        display:none;
+      }
+
+      .categories .cat{
+        flex:0 0 auto;
+        width:auto;
+        min-height:48px;
+        padding:0 15px;
+        gap:8px;
+      }
+
+      .pd-event-add-wrap{grid-area:eventadd}
+      .map-shell{
+        grid-area:map;
+        margin-top:0;
+      }
+
+      .copy h1{
+        max-width:620px;
+        font-size:clamp(40px,10vw,54px);
+        line-height:.95;
+      }
+
+      .copy p{
+        font-size:15px;
+      }
+
+      #map{
+        height:235px;
+      }
+
+      .location-ok:empty{
+        display:none;
+      }
+
+      #cards .card:not(.event-card){
+        min-height:clamp(370px,100vw,460px);
+      }
+    }
+
+    @media(max-width:390px){
+      .categories .cat{
+        min-height:44px;
+        padding:0 12px;
+        font-size:12px;
+      }
+
+      #cards .card:not(.event-card) .card-body{
+        padding-right:9px;
+        padding-left:9px;
       }
     }
   `;
@@ -5660,20 +5880,71 @@ async function(){
 };
 
 
-/* =========================================================
-   INITIALISE
-========================================================= */
+/* PET-FRIENDLY PLACES PAGE LAYOUT */
+
+function pdInstallPlacesLayout(){
+  const discovery = document.querySelector(".discovery");
+  const categories = discovery?.querySelector(".categories");
+  const addButton = document.getElementById("addMap");
+  const addTop = document.getElementById("addTop");
+
+  if(!discovery || !categories || !addButton){
+    return;
+  }
+
+  if(addTop){
+    addTop.hidden = true;
+  }
+
+  let eventAction = document.getElementById("pdEventAddWrap");
+
+  if(!eventAction){
+    eventAction = document.createElement("div");
+    eventAction.id = "pdEventAddWrap";
+    eventAction.className = "pd-event-add-wrap";
+    categories.insertAdjacentElement("afterend", eventAction);
+  }
+
+  eventAction.appendChild(addButton);
+  addButton.removeAttribute("data-t");
+  addButton.classList.add("pd-event-add-button");
+
+  const updateEventAction = ()=>{
+    const selectedCategory =
+      typeof cat !== "undefined"
+        ? cat
+        : document.querySelector(".cat.active")?.dataset.cat;
+
+    const isEvents = selectedCategory === "events";
+    const label =
+      PD_EVENT_ADD_LABELS[lang] ||
+      PD_EVENT_ADD_LABELS.en;
+
+    eventAction.hidden = !isEvents;
+    addButton.textContent = label;
+    addButton.setAttribute("aria-label", label);
+  };
+
+  document.addEventListener("click", event=>{
+    if(event.target.closest(".cat")){
+      setTimeout(updateEventAction, 0);
+    }
+  });
+
+  window.addEventListener(
+    "petsdogue:languagechange",
+    ()=>setTimeout(updateEventAction, 0)
+  );
+
+  updateEventAction();
+}
 
 function pdBoot(){
-
   pdInstallStyles();
-
+  pdInstallPlacesLayout();
   pdInstallPhotoModal();
-
   pdUpdatePhotoModalText();
-
   loadCommunity();
-
 }
 
 
