@@ -3656,7 +3656,7 @@ function(){
 
   }
 
-  list =
+  
     
 
   const mode =
