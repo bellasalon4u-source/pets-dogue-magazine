@@ -66,7 +66,7 @@
     const bodyText = (box.textContent || "").trim();
     const isNoResults = Boolean(existingCityChoice) || /no matches|no results|no city|вариант|город|результат|не знайден|немає/i.test(bodyText);
     if (!isNoResults || /searching|ищем|шукаємо|…|\.\.\./i.test(bodyText)) return;
-    if (existingCityChoice) existingCityChoice.hidden = true;
+    if (existingCityChoice) { existingCityChoice.hidden = true; existingCityChoice.style.setProperty("display", "none", "important"); }
 
     const actions = document.createElement("div");
     actions.className = "pde-manual-actions";
