@@ -5415,6 +5415,26 @@ async function(){
 
   setStatus(
     t(
+         if (snapshot.category === "events") {
+    setStatus(t("searching"));
+
+    try {
+      const data = await requestEvents();
+
+      if (!pdStillCurrent(sequence, snapshot)) {
+        return;
+      }
+
+      renderEvents(data.events || []);
+      setStatus("");
+    } catch (error) {
+      console.error("Events loading failed:", error);
+      renderEvents([]);
+      setStatus(t("error"));
+    }
+
+    return;
+  }
       "searching"
     )
   );
