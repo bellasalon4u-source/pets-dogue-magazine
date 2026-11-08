@@ -1643,7 +1643,107 @@ function pdInstallStyles(){
       }
 
     }
+    /* PETS & DOGUE card redesign */
+    #cards .card:not(.event-card){
+      position:relative;min-height:410px;overflow:hidden;isolation:isolate;
+      border:1px solid rgba(201,151,41,.46);border-radius:24px;
+      background:#080808;color:#fff;box-shadow:0 16px 36px rgba(0,0,0,.2)
+    }
+    #cards .card:not(.event-card)::after{
+      z-index:-2;background:linear-gradient(to bottom,
+      rgba(0,0,0,.02) 8%,rgba(0,0,0,.05) 30%,
+      rgba(0,0,0,.58) 53%,rgba(0,0,0,.96) 100%)
+    }
+    #cards .card:not(.event-card) .card-photo{
+      position:absolute;inset:0;z-index:-3;width:100%;height:100%;object-fit:cover
+    }
+    #cards .card:not(.event-card) .card-body{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      justify-content:flex-end;gap:8px;max-height:100%;overflow:hidden;
+      padding:58px 14px 16px;color:#fff
+    }
+    #cards .card:not(.event-card) .card-top{
+      position:absolute;top:14px;inset-inline-start:14px
+    }
+    #cards .card:not(.event-card) .card-body h2{
+      order:1;margin:0;color:#fff;
+      font:400 clamp(22px,3.2vw,31px)/1 Georgia,"Times New Roman",serif;
+      overflow-wrap:anywhere
+    }
+    #cards .card:not(.event-card) .address{
+      order:2;display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;
+      -webkit-line-clamp:3;margin:0;color:rgba(255,255,255,.94);
+      font-size:12px;line-height:1.35
+    }
+    #cards .card:not(.event-card) .meta{
+      order:3;margin:0;color:rgba(255,255,255,.9);font-size:10px;font-weight:850
+    }
+    #cards .card:not(.event-card) .pet-row{order:4;margin:2px 0 0}
+    #cards .card:not(.event-card) .pet{
+      min-height:42px;padding:7px 13px;border-radius:999px;
+      background:#54ef0b;color:#071007;font-size:12px;line-height:1.2;white-space:normal
+    }
+    #cards .card:not(.event-card) .pet.unknown{background:#f3f3f3;color:#171717}
+    #cards .card:not(.event-card) .pet.partial{background:#ffd75b;color:#17120a}
+    #cards .card:not(.event-card) .pet.rejected{background:#ff5264;color:#19070a}
+    #cards .card:not(.event-card) .pd-vote-row{
+      order:5;display:flex;gap:8px;margin:0;padding:0;border:0
+    }
+    #cards .card:not(.event-card) .pd-vote-row strong,
+    #cards .card:not(.event-card) .pd-vote-count{display:none}
+    #cards .card:not(.event-card) .pd-vote-btn{
+      flex:1 1 0;min-height:44px!important;height:44px!important;
+      border-radius:999px!important;background:rgba(0,0,0,.55)!important;
+      font-size:13px!important
+    }
+    #cards .card:not(.event-card) .pd-vote-btn.yes{
+      border:1px solid #54ef0b!important;color:#8dff5e!important
+    }
+    #cards .card:not(.event-card) .pd-vote-btn.no{
+      border:1px solid #ff6371!important;color:#ff7a86!important
+    }
+    #cards .card:not(.event-card) .pd-community-state{order:6;margin:0;color:#f4efe4}
+    #cards .card:not(.event-card) .pd-community-state.good{color:#72f13c}
+    #cards .card:not(.event-card) .pd-community-state.bad{color:#ff6470}
+    #cards .card:not(.event-card) .actions{order:7;gap:7px;margin-top:1px}
+    #cards .card:not(.event-card) .actions button{
+      min-height:42px;padding:0 11px;border:1px solid rgba(255,255,255,.82);
+      border-radius:999px;background:rgba(0,0,0,.46);color:#fff;
+      font-size:11px;font-weight:900
+    }
+    #cards .card:not(.event-card) .actions .pd-pet-photo-btn{
+      flex:0 0 100%;min-height:48px;border-color:#54ef0b!important;color:#fff!important
+    }
+    #cards .card:not(.event-card) .badge{
+      min-height:34px;padding:0 14px;background:#d4a32e;color:#17120a;font-size:12px
+    }
+    #cards .card:not(.event-card) .heart{
+      width:46px;height:46px;border:1px solid rgba(255,255,255,.3);
+      background:rgba(0,0,0,.7);color:#fff
+    }
 
+    .pd-gallery-add{
+      display:grid;place-items:center;width:100%;height:100%;min-height:92px;
+      border:1px dashed #54ef0b;border-radius:14px;
+      background:rgba(84,239,11,.1);color:#54ef0b;font-size:42px
+    }
+    .pd-picker-actions{display:none}
+    .pd-picker.is-open .pd-picker-actions{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr))
+    }
+    #pdChooseButton{display:none}
+
+    @media(max-width:610px){
+      #cards .card:not(.event-card){min-height:clamp(500px,88vw,640px)}
+      #cards .card:not(.event-card) .card-body{padding:55px 11px 14px;gap:7px}
+      #cards .card:not(.event-card) .address{font-size:11px}
+      #cards .card:not(.event-card) .pd-vote-btn{
+        min-height:40px!important;height:40px!important;font-size:12px!important
+      }
+      #cards .card:not(.event-card) .actions button{
+        min-height:39px;padding:0 9px;font-size:10px
+      }
+    }
   `;
 
   document.head.appendChild(
@@ -2492,7 +2592,27 @@ async function pdLoadApprovedPetPhotos(
           }
         )
         .join("");
+    const addTile = document.createElement("button");
+    addTile.type = "button";
+    addTile.className = "pd-gallery-add";
+    addTile.setAttribute("aria-label", pdT("addPhoto"));
+    addTile.textContent = "+";
 
+    addTile.onclick = () => {
+      const picker = document.querySelector(
+        "#pdPetPhotosOverlay .pd-picker"
+      );
+
+      if (!picker) return;
+
+      picker.classList.add("is-open");
+      picker.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    };
+
+    gallery.appendChild(addTile);
     empty.textContent =
       photos.length
         ? ""
@@ -2529,7 +2649,14 @@ async function pdOpenPetPhotos(
   pdUpdatePhotoModalText();
 
   pdClearSelectedPhotos();
+  const photoPicker =
+    document.querySelector(
+      "#pdPetPhotosOverlay .pd-picker"
+    );
 
+  if (photoPicker) {
+    photoPicker.classList.remove("is-open");
+  }
   const title =
     document.getElementById(
       "pdPetPhotosTitle"
@@ -3530,13 +3657,7 @@ function(){
   }
 
   list =
-    list.filter(
-      place=>
-        !pdVoteInfo(
-          place
-        )
-        .communityRejected
-    );
+    
 
   const mode =
     document
@@ -3972,24 +4093,14 @@ function(){
               0
             );
 
-          let communityText = "";
+                    let communityText = "";
 
-          if(
-            vote.communityPetFriendly
-          ){
-
-            communityText =
-              pdT(
-                "confirmed"
-              );
-
-          }else if(
-            vote.total
-          ){
-
-            communityText =
-              `${pdT("community")}: ✓ ${yesCount} · ✕ ${noCount}`;
-
+          if (vote.communityRejected) {
+            communityText = pdT("rejected");
+          } else if (vote.communityPetFriendly) {
+            communityText = pdT("confirmed");
+          } else if (vote.total) {
+            communityText = `${pdT("community")}: ✓ ${yesCount} · ✕ ${noCount}`;
           }
 
           return `
@@ -4079,15 +4190,16 @@ function(){
 
                 <div class="pet-row">
 
-                  <span
+                                    <span
                     class="pet ${
-                      policy.value ===
-                      "unknown"
+                      policy.value === "unknown"
                         ? "unknown"
-                        : policy.value ===
-                          "outside"
-                          ? "outside"
-                          : ""
+                        : policy.rejected
+                          ? "rejected"
+                          : policy.value === "inside" ||
+                            policy.value === "outside"
+                            ? "partial"
+                            : ""
                     }"
                   >
                     ${esc(
@@ -4204,10 +4316,12 @@ function(){
                     ? `
 
                       <div
-                        class="pd-community-state ${
-                          vote.communityPetFriendly
-                            ? "good"
-                            : ""
+                                                class="pd-community-state ${
+                          vote.communityRejected
+                            ? "bad"
+                            : vote.communityPetFriendly
+                              ? "good"
+                              : ""
                         }"
                       >
                         ${esc(
