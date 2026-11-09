@@ -1156,7 +1156,7 @@ left:14px;
 @media(max-width:850px){
 
 .page{
-padding:22px 18px 55px;
+padding:18px 16px 45px;
 }
 
 .discovery{
@@ -1171,44 +1171,130 @@ gap:12px;
 
 }
 
-@media(max-width:610px){.page{
-padding:20px 14px 55px;
+@media(max-width:610px){
+
+.page{
+padding:12px 12px 38px;
 }
 
 .discovery{
-grid-template-columns:minmax(0,1.45fr) minmax(135px,.72fr);
-gap:10px;
+display:grid;
+grid-template-columns:minmax(0,1fr);
+gap:8px;
+}
+
+.discovery > div:first-child{
+display:contents;
+}
+
+.copy{
+order:1;
+}
+
+.search{
+order:2;
+}
+
+.location-ok{
+order:3;
+margin-top:3px;
+font-size:11px;
+}
+
+.radius{
+order:4;
+margin-top:5px;
+padding:9px 4px 5px;
+}
+
+.categories{
+order:5;
+width:100%;
+display:grid;
+grid-template-rows:repeat(2,38px);
+grid-auto-flow:column;
+grid-auto-columns:max-content;
+gap:6px 7px;
+overflow-x:auto;
+padding:2px 2px 8px;
+scrollbar-width:thin;
+-webkit-overflow-scrolling:touch;
+}
+
+.map-shell{
+order:6;
+margin-top:2px;
+}
+
+.hero-title-row{
+gap:8px;
 }
 
 .copy h1{
-font-size:31px;
+max-width:100%;
+margin-bottom:7px;
+font-size:clamp(32px,8.5vw,40px);
+line-height:.98;
+letter-spacing:-1.2px;
 }
 
 .copy p{
-font-size:13px;
+max-width:100%;
+font-size:12px;
+line-height:1.35;
+}
+
+.speak-btn{
+flex-basis:38px;
+width:38px;
+height:38px;
+font-size:18px;
 }
 
 .search-row{
-grid-template-columns:1fr 50px;
+grid-template-columns:minmax(0,1fr) 46px;
+gap:7px;
+margin-top:9px;
+}
+
+.search-box,
+.icon-btn{
+height:46px;
+}
+
+.search-box{
+gap:8px;
+padding:0 12px;
+border-radius:14px;
+}
+
+.search-box input{
+font-size:14px;
 }
 
 .icon-btn{
-height:50px;
+border-radius:14px;
+font-size:24px;
 }
 
 .icon-btn.add{
 display:none;
 }
 
-.search-box{
-height:50px;
+.cat{
+width:max-content;
+min-width:0;
+min-height:38px;
+padding:0 12px;
+gap:7px;
+border:1px solid var(--line);
+border-radius:999px;
+font-size:11px;
+white-space:nowrap;
 }
 
-.cat{
-min-height:40px;
-padding:0 10px;
-gap:7px;
-font-size:11px;
+.cat span{
+white-space:nowrap;
 }
 
 .cat i{
@@ -1216,8 +1302,99 @@ width:17px;
 font-size:14px;
 }
 
+.cat[data-cat="all"]{
+--category-color:#e8ddff;
+background:var(--category-color);
+}
+
+.cat[data-cat="cafe"]{
+--category-color:#ffe1bd;
+background:var(--category-color);
+}
+
+.cat[data-cat="restaurant"]{
+--category-color:#ffd9d5;
+background:var(--category-color);
+}
+
+.cat[data-cat="pub"]{
+--category-color:#eee1c5;
+background:var(--category-color);
+}
+
+.cat[data-cat="pizzeria"]{
+--category-color:#f8dced;
+background:var(--category-color);
+}
+
+.cat[data-cat="hotel"]{
+--category-color:#e0dcff;
+background:var(--category-color);
+}
+
+.cat[data-cat="park"]{
+--category-color:#d9f1d2;
+background:var(--category-color);
+}
+
+.cat[data-cat="beach"]{
+--category-color:#cceeff;
+background:var(--category-color);
+}
+
+.cat[data-cat="veterinary"]{
+--category-color:#ffdada;
+background:var(--category-color);
+}
+
+.cat[data-cat="pet-shop"]{
+--category-color:#fff0c2;
+background:var(--category-color);
+}
+
+.cat[data-cat="grooming"]{
+--category-color:#eadcff;
+background:var(--category-color);
+}
+
+.cat[data-cat="events"]{
+--category-color:#d5f2e9;
+background:var(--category-color);
+}
+
+.cat[data-cat="saved"]{
+--category-color:#ffe0e8;
+background:var(--category-color);
+}
+
+.cat.active{
+background:var(--category-color,#e8ddff);
+color:#111;
+border-color:#111;
+box-shadow:inset 0 0 0 1px #111;
+}
+
+.cat.saved{
+color:#173b13;
+}
+
+.cat.saved.active{
+background:var(--category-color,#ffe0e8);
+color:#111;
+}
+
 #map{
-height:185px;
+height:145px;
+}
+
+.results-head{
+margin-top:16px;
+padding-top:13px;
+gap:8px;
+}
+
+.count{
+font-size:15px;
 }
 
 .cards{
@@ -1226,15 +1403,15 @@ gap:9px;
 }
 
 .card{
-min-height:355px;
+min-height:330px;
 }
 
 .card-body{
-padding:13px;
+padding:11px;
 }
 
 .card h2{
-font-size:20px;
+font-size:19px;
 }
 
 .address{
@@ -1247,32 +1424,38 @@ font-size:9px;
 }
 
 .actions{
-gap:6px;
+gap:5px;
 }
 
 .actions button{
-min-height:30px;
-padding:0 9px;
+min-height:29px;
+padding:0 8px;
 font-size:9px;
 }
 
 .heart{
-width:40px;
-height:40px;
-font-size:24px;
+width:38px;
+height:38px;
+font-size:23px;
 }
 
 .sort{
-max-width:160px;
-font-size:12px;
+max-width:150px;
+font-size:11px;
 }
 
 .suggestions{
-right:60px;
+right:53px;
 }
 
 }
 
+button:focus-visible,
+select:focus-visible,
+input:focus-visible{
+outline:3px solid var(--green);
+outline-offset:3px;
+}
 button:focus-visible,
 select:focus-visible,
 input:focus-visible{
