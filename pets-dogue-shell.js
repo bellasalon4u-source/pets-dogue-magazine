@@ -3687,3 +3687,81 @@ type="button"
   }
 
 })();
+(function () {
+  "use strict";
+
+  const style = document.createElement("style");
+  style.id = "pdTickerLanguageStyle";
+  style.textContent = `
+    .pd-ticker-language {
+      color: var(--pdh-gold-light, #ecd28a);
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+  `;
+  document.head.appendChild(style);
+
+  function updateSharedNavigation() {
+    const ticker = document.getElementById("pdContentsTicker");
+    const masthead = document.getElementById("pdHomeHeaderImage");
+    const header = document.getElementById("pdLuxuryHeader");
+    const firstElement = masthead || header;
+
+    if (ticker && firstElement && ticker.nextElementSibling !== firstElement) {
+      firstElement.parentNode.insertBefore(ticker, firstElement);
+    }
+
+    const languageSelect = document.getElementById("pdShellLanguage");
+    const selectedOption =
+      languageSelect?.options?.[languageSelect.selectedIndex];
+
+    const optionText = selectedOption?.textContent?.trim() || "";
+    const flag = optionText.match(/^\S+/)?.[0] || "🇬🇧";
+    const code = optionText.split(/\s+/)[1] || "EN";
+
+    document.querySelectorAll(".pd-ticker-piece").forEach(piece => {
+      const parts = piece.children;
+
+      if (parts.length >= 4) {
+        parts[0].classList.add("pd-ticker-language");
+        parts[0].textContent = "A文 " + flag;
+        parts[2].textContent = "";
+        parts[3].textContent = code;
+      }
+    });
+
+    document
+      .querySelectorAll("#pdLuxuryBottomRow a, #pdShellCards a")
+      .forEach(link => {
+        const file = (link.getAttribute("href") || "")
+          .split(/[?#]/)[0]
+          .split("/")
+          .pop()
+          .toLowerCase();
+
+        if (
+          file === "pet-fashion.html" ||
+          file === "wellness.html" ||
+          file === "health.html"
+        ) {
+          link.remove();
+        }
+      });
+  }
+
+  window.addEventListener(
+    "petsdogue:languagechange",
+    updateSharedNavigation
+  );
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      updateSharedNavigation,
+      { once: true }
+    );
+  } else {
+    updateSharedNavigation();
+  }
+})();
