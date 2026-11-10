@@ -3690,8 +3690,7 @@ type="button"
 (function () {
   "use strict";
 
-  const oldStyle = document.getElementById("pdTickerLanguageStyle");
-  if (oldStyle) oldStyle.remove();
+  document.getElementById("pdTickerLanguageStyle")?.remove();
 
   const style = document.createElement("style");
   style.id = "pdTickerLanguageStyle";
@@ -3703,42 +3702,13 @@ type="button"
       letter-spacing: .2px;
     }
 
-    #pdLuxuryBrand.pd-active-petfriendly {
-      display: inline-flex;
-      align-items: center;
-      min-width: 0;
-      max-width: 100%;
-      padding: 5px 8px;
-      border: 1px solid #65e51f;
-      border-radius: 999px;
-      box-shadow: inset 0 0 0 1px rgba(101,229,31,.14);
-    }
-
-    #pdRubricsToggle {
-      width: 100%;
-      min-height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: 0;
-      border-bottom: 1px solid var(--pdh-gold-line, rgba(198,155,69,.86));
-      padding: 4px 12px;
-      background: #080808;
-      color: #fff;
-      font: 700 14px/1.1 Georgia, "Times New Roman", serif;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    #pdRubricsChevron {
-      color: var(--pdh-gold-light, #ecd28a);
-      font: 700 20px/1 Arial, Helvetica, sans-serif;
+    #pdLuxuryMainBar {
+      grid-template-columns: 38px minmax(0,1fr) auto 34px auto !important;
     }
 
     @media (max-width: 600px) {
       #pdLuxuryMainBar {
-        grid-template-columns: 34px minmax(0,1fr) auto 32px 34px !important;
+        grid-template-columns: 32px minmax(0,1fr) auto 30px 32px !important;
         gap: 4px !important;
         padding-left: 7px !important;
         padding-right: 7px !important;
@@ -3749,11 +3719,11 @@ type="button"
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
-        font-size: clamp(11px, 3.8vw, 15px) !important;
+        font-size: clamp(12px, 4vw, 16px) !important;
       }
 
       #pdLuxuryMenuButton {
-        width: 32px !important;
+        width: 30px !important;
       }
 
       #pdLuxuryAdvertise {
@@ -3763,27 +3733,19 @@ type="button"
       }
 
       #pdLuxuryHome {
-        width: 30px !important;
-        height: 30px !important;
+        width: 29px !important;
+        height: 29px !important;
       }
 
       #pdLuxuryProfileButton {
-        width: 32px !important;
-        min-width: 32px !important;
+        width: 30px !important;
+        min-width: 30px !important;
         height: 32px !important;
         padding: 0 !important;
       }
 
       #pdLuxuryProfileButton .pd-luxury-profile-label {
         display: none !important;
-      }
-
-      #pdLuxuryRows > .pd-luxury-row-shell {
-        display: none !important;
-      }
-
-      #pdLuxuryRows.pd-rubrics-open > .pd-luxury-row-shell {
-        display: block !important;
       }
 
       #pdLuxuryTopRow,
@@ -3794,21 +3756,21 @@ type="button"
         overflow-y: visible !important;
         white-space: normal !important;
         gap: 2px !important;
-        padding: 3px 7px !important;
+        padding: 3px 6px !important;
       }
 
       #pdLuxuryTopRow {
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(5, minmax(0,1fr)) !important;
       }
 
       #pdLuxuryBottomRow {
-        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(5, minmax(0,1fr)) !important;
       }
 
       .pd-luxury-row-link {
         width: 100% !important;
         min-width: 0 !important;
-        min-height: 36px !important;
+        min-height: 38px !important;
         flex: initial !important;
         justify-content: center !important;
         padding: 4px 2px !important;
@@ -3820,44 +3782,12 @@ type="button"
         line-height: 1.08 !important;
       }
 
-      #pdLuxuryTopRow a[data-pd-header-link="petFriendly"] {
-        display: none !important;
-      }
-    }
-
-    @media (min-width: 601px) {
-      #pdRubricsToggle {
-        display: none !important;
+      .pd-luxury-row-link .pd-inline-emoji {
+        font-size: 14px !important;
       }
     }
   `;
   document.head.appendChild(style);
-
-  const allSectionsText = {
-    en: "All sections",
-    uk: "Усі рубрики",
-    ru: "Все рубрики",
-    fr: "Toutes les rubriques",
-    de: "Alle Bereiche",
-    es: "Todas las secciones",
-    it: "Tutte le sezioni",
-    pt: "Todas as secções",
-    nl: "Alle rubrieken",
-    pl: "Wszystkie działy",
-    cs: "Všechny rubriky",
-    sk: "Všetky rubriky",
-    hu: "Összes rovat",
-    ro: "Toate rubricile",
-    bg: "Всички рубрики",
-    el: "Όλες οι ενότητες",
-    sv: "Alla kategorier",
-    da: "Alle kategorier",
-    no: "Alle kategorier",
-    fi: "Kaikki osiot",
-    tr: "Tüm kategoriler",
-    ar: "كل الأقسام",
-    hi: "सभी श्रेणियाँ"
-  };
 
   const shortAdvertiseText = {
     en: "Advertise",
@@ -3891,91 +3821,50 @@ type="button"
       .split("-")[0];
   }
 
-  function setupRubricsToggle() {
-    const rows = document.getElementById("pdLuxuryRows");
-    if (!rows) return;
-
-    let button = document.getElementById("pdRubricsToggle");
-
-    if (!button) {
-      button = document.createElement("button");
-      button.id = "pdRubricsToggle";
-      button.type = "button";
-      button.setAttribute("aria-controls", "pdLuxuryTopRow pdLuxuryBottomRow");
-      button.innerHTML =
-        '<span id="pdRubricsLabel"></span>' +
-        '<span id="pdRubricsChevron" aria-hidden="true"></span>';
-
-      rows.insertBefore(button, rows.firstChild);
-
-      button.addEventListener("click", function () {
-        rows.classList.toggle("pd-rubrics-open");
-        updateRubricsToggle();
-      });
-    }
-
-    updateRubricsToggle();
-  }
-
-  function updateRubricsToggle() {
-    const rows = document.getElementById("pdLuxuryRows");
-    const button = document.getElementById("pdRubricsToggle");
-    const label = document.getElementById("pdRubricsLabel");
-    const chevron = document.getElementById("pdRubricsChevron");
-
-    if (!rows || !button || !label || !chevron) return;
-
-    const open = rows.classList.contains("pd-rubrics-open");
-    const language = currentLanguage();
-
-    label.textContent = allSectionsText[language] || allSectionsText.en;
-    chevron.textContent = open ? "⌃" : "⌄";
-    button.setAttribute("aria-expanded", open ? "true" : "false");
-  }
-
-  function updateHeaderTitle() {
-    const brand = document.getElementById("pdLuxuryBrand");
-    if (!brand) return;
-
-    const active = document.querySelector(
-      "#pdLuxuryTopRow [aria-current='page'], " +
-      "#pdLuxuryBottomRow [aria-current='page']"
-    );
-
-    if (!active) return;
-
-    const key = active.getAttribute("data-pd-header-link") || "";
-    const label =
-      active.querySelector("span:last-child")?.textContent?.trim() ||
-      active.textContent.trim();
-
-    if (!label) return;
-
-    const icon =
-      key === "petFriendly" ? "🐾 " :
-      key === "help" ? "❤️ " :
-      "";
-
-    brand.textContent = icon + label;
-    brand.setAttribute("aria-label", label);
-    brand.classList.toggle("pd-active-petfriendly", key === "petFriendly");
-  }
-
-  function compactHeaderActions() {
+  function compactHeader() {
     const bar = document.getElementById("pdLuxuryMainBar");
+    const brand = document.getElementById("pdLuxuryBrand");
     const advertise = document.getElementById("pdLuxuryAdvertise");
     const home = document.getElementById("pdLuxuryHome");
+    const rows = document.getElementById("pdLuxuryRows");
+    const top = document.getElementById("pdLuxuryTopRow");
 
     if (bar && advertise && home) {
       bar.insertBefore(advertise, home);
     }
 
-    const advertiseButton = document.getElementById("pdLuxuryAdvertise");
-    const language = currentLanguage();
+    if (brand) {
+      brand.textContent = "PETS & DOGUE";
+      brand.setAttribute("aria-label", "PETS & DOGUE");
+      brand.classList.remove("pd-active-petfriendly");
+    }
 
-    if (advertiseButton) {
-      advertiseButton.textContent =
+    const language = currentLanguage();
+    if (advertise) {
+      advertise.textContent =
         shortAdvertiseText[language] || shortAdvertiseText.en;
+    }
+
+    if (rows) {
+      rows.classList.remove("pd-rubrics-open");
+      document.getElementById("pdRubricsToggle")?.remove();
+    }
+
+    if (top) {
+      const order = [
+        "petFriendly",
+        "help",
+        "discounts",
+        "community",
+        "marketplace"
+      ];
+
+      order.forEach(key => {
+        const link = top.querySelector(
+          '[data-pd-header-link="' + key + '"]'
+        );
+        if (link) top.appendChild(link);
+      });
     }
   }
 
@@ -4002,7 +3891,9 @@ type="button"
 
   function removeUnusedSections() {
     document
-      .querySelectorAll("#pdLuxuryBottomRow a, #pdShellCards a")
+      .querySelectorAll(
+        "#pdLuxuryBottomRow a, #pdShellCards a"
+      )
       .forEach(link => {
         const file = (link.getAttribute("href") || "")
           .split(/[?#]/)[0]
@@ -4034,14 +3925,15 @@ type="button"
       firstElement.parentNode.insertBefore(ticker, firstElement);
     }
 
-    compactHeaderActions();
-    setupRubricsToggle();
-    updateHeaderTitle();
+    compactHeader();
     updateTickerLanguage();
     removeUnusedSections();
   }
 
-  window.addEventListener("petsdogue:languagechange", applySharedHeader);
+  window.addEventListener(
+    "petsdogue:languagechange",
+    applySharedHeader
+  );
 
   if (document.readyState === "loading") {
     document.addEventListener(
