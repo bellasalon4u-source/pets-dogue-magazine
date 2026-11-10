@@ -1156,24 +1156,6 @@ left:14px;
 @media(max-width:850px){
 
 .page{
-padding:18px 16px 45px;
-}
-
-.discovery{
-grid-template-columns:minmax(0,1.45fr) minmax(190px,.8fr);
-gap:15px;
-}
-
-.cards{
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:12px;
-}
-
-}
-
-@media(max-width:610px){
-
-.page{
 padding:12px 12px 38px;
 }
 
@@ -1210,12 +1192,16 @@ padding:9px 4px 5px;
 .categories{
 order:5;
 width:100%;
+height:auto;
+min-height:82px;
 display:grid;
 grid-template-rows:repeat(2,38px);
 grid-auto-flow:column;
 grid-auto-columns:max-content;
+align-content:start;
 gap:6px 7px;
 overflow-x:auto;
+overflow-y:hidden;
 padding:2px 2px 8px;
 scrollbar-width:thin;
 -webkit-overflow-scrolling:touch;
@@ -1226,16 +1212,12 @@ order:6;
 margin-top:2px;
 }
 
-.hero-title-row{
-gap:8px;
-}
-
 .copy h1{
 max-width:100%;
 margin-bottom:7px;
-font-size:clamp(32px,8.5vw,40px);
-line-height:.98;
-letter-spacing:-1.2px;
+font-size:clamp(28px,7vw,34px);
+line-height:1;
+letter-spacing:-1px;
 }
 
 .copy p{
@@ -1244,11 +1226,15 @@ font-size:12px;
 line-height:1.35;
 }
 
+.hero-title-row{
+gap:7px;
+}
+
 .speak-btn{
-flex-basis:38px;
-width:38px;
-height:38px;
-font-size:18px;
+flex:0 0 36px;
+width:36px;
+height:36px;
+font-size:17px;
 }
 
 .search-row{
@@ -1304,71 +1290,71 @@ font-size:14px;
 
 .cat[data-cat="all"]{
 --category-color:#e8ddff;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="cafe"]{
 --category-color:#ffe1bd;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="restaurant"]{
 --category-color:#ffd9d5;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="pub"]{
 --category-color:#eee1c5;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="pizzeria"]{
 --category-color:#f8dced;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="hotel"]{
 --category-color:#e0dcff;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="park"]{
 --category-color:#d9f1d2;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="beach"]{
 --category-color:#cceeff;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="veterinary"]{
 --category-color:#ffdada;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="pet-shop"]{
 --category-color:#fff0c2;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="grooming"]{
 --category-color:#eadcff;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="events"]{
 --category-color:#d5f2e9;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat[data-cat="saved"]{
 --category-color:#ffe0e8;
-background:var(--category-color);
+background:var(--category-color)!important;
 }
 
 .cat.active{
-background:var(--category-color,#e8ddff);
+background:var(--category-color,#e8ddff)!important;
 color:#111;
 border-color:#111;
 box-shadow:inset 0 0 0 1px #111;
@@ -1379,17 +1365,17 @@ color:#173b13;
 }
 
 .cat.saved.active{
-background:var(--category-color,#ffe0e8);
+background:var(--category-color,#ffe0e8)!important;
 color:#111;
 }
 
 #map{
-height:145px;
+height:135px!important;
 }
 
 .results-head{
-margin-top:16px;
-padding-top:13px;
+margin-top:14px;
+padding-top:12px;
 gap:8px;
 }
 
@@ -1403,7 +1389,7 @@ gap:9px;
 }
 
 .card{
-min-height:330px;
+min-height:310px;
 }
 
 .card-body{
@@ -1450,6 +1436,40 @@ right:53px;
 
 }
 
+@media(max-width:520px){
+
+.cards{
+grid-template-columns:minmax(0,1fr);
+}
+
+.card{
+min-height:290px;
+}
+
+}
+
+@media(max-width:390px){
+
+.page{
+padding-right:10px;
+padding-left:10px;
+}
+
+.copy h1{
+font-size:27px;
+}
+
+.categories{
+grid-template-rows:repeat(2,36px);
+min-height:78px;
+}
+
+.cat{
+min-height:36px;
+padding:0 10px;
+}
+
+}
 button:focus-visible,
 select:focus-visible,
 input:focus-visible{
