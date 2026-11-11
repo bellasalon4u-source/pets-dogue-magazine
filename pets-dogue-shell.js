@@ -3703,15 +3703,34 @@ type="button"
     }
 
     #pdLuxuryMainBar {
-      grid-template-columns: 38px minmax(0,1fr) auto 34px auto !important;
+      grid-template-columns: 38px auto minmax(0,1fr) auto 34px auto !important;
+    }
+
+    #pdLuxuryLanguageCue {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 3px !important;
+      border: 0 !important;
+      padding: 0 2px !important;
+      background: transparent !important;
+      color: var(--pdh-gold-light, #ecd28a) !important;
+      font: 900 11px/1 Arial, Helvetica, sans-serif !important;
+      white-space: nowrap !important;
+      cursor: pointer !important;
     }
 
     @media (max-width: 600px) {
       #pdLuxuryMainBar {
-        grid-template-columns: 32px minmax(0,1fr) auto 30px 32px !important;
-        gap: 4px !important;
-        padding-left: 7px !important;
-        padding-right: 7px !important;
+        grid-template-columns: 30px auto minmax(36px,1fr) auto 29px 30px !important;
+        gap: 3px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+      }
+
+      #pdLuxuryLanguageCue {
+        font-size: 9px !important;
+        gap: 2px !important;
       }
 
       #pdLuxuryBrand {
@@ -3719,28 +3738,28 @@ type="button"
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
-        font-size: clamp(12px, 4vw, 16px) !important;
+        font-size: clamp(11px, 3.7vw, 15px) !important;
       }
 
       #pdLuxuryMenuButton {
-        width: 30px !important;
+        width: 29px !important;
       }
 
       #pdLuxuryAdvertise {
         min-height: 29px !important;
-        padding: 0 7px !important;
+        padding: 0 6px !important;
         font-size: 8px !important;
       }
 
       #pdLuxuryHome {
-        width: 29px !important;
-        height: 29px !important;
+        width: 28px !important;
+        height: 28px !important;
       }
 
       #pdLuxuryProfileButton {
-        width: 30px !important;
-        min-width: 30px !important;
-        height: 32px !important;
+        width: 29px !important;
+        min-width: 29px !important;
+        height: 31px !important;
         padding: 0 !important;
       }
 
@@ -3759,10 +3778,7 @@ type="button"
         padding: 3px 6px !important;
       }
 
-      #pdLuxuryTopRow {
-        grid-template-columns: repeat(5, minmax(0,1fr)) !important;
-      }
-
+      #pdLuxuryTopRow,
       #pdLuxuryBottomRow {
         grid-template-columns: repeat(5, minmax(0,1fr)) !important;
       }
@@ -3815,10 +3831,151 @@ type="button"
     hi: "विज्ञापन"
   };
 
+  const languageLabels = {
+    en: "Choose language",
+    uk: "Оберіть мову",
+    ru: "Выбрать язык",
+    fr: "Choisir la langue",
+    de: "Sprache wählen",
+    es: "Elegir idioma",
+    it: "Scegli la lingua",
+    pt: "Escolher idioma",
+    nl: "Taal kiezen",
+    pl: "Wybierz język",
+    cs: "Vybrat jazyk",
+    sk: "Vybrať jazyk",
+    hu: "Nyelv kiválasztása",
+    ro: "Alege limba",
+    bg: "Изберете език",
+    el: "Επιλογή γλώσσας",
+    sv: "Välj språk",
+    da: "Vælg sprog",
+    no: "Velg språk",
+    fi: "Valitse kieli",
+    tr: "Dil seçin",
+    ar: "اختر اللغة",
+    hi: "भाषा चुनें"
+  };
+
+  const allSectionsLabels = new Set([
+    "all sections",
+    "all categories",
+    "все рубрики",
+    "всі рубрики",
+    "усі рубрики",
+    "toutes les rubriques",
+    "alle rubriken",
+    "todas las secciones",
+    "tutte le sezioni",
+    "todas as secções",
+    "todas as seções",
+    "alle rubrieken",
+    "wszystkie sekcje",
+    "všechny rubriky",
+    "všetky rubriky",
+    "minden rovat",
+    "toate secțiunile",
+    "всички рубрики",
+    "όλες οι ενότητες",
+    "alla sektioner",
+    "alle sektioner",
+    "alle seksjoner",
+    "kaikki osiot",
+    "tüm bölümler",
+    "جميع الأقسام",
+    "सभी अनुभाग"
+  ]);
+
   function currentLanguage() {
     return (document.documentElement.lang || "en")
       .toLowerCase()
       .split("-")[0];
+  }
+
+  function getLanguageChoice() {
+    const select = document.getElementById("pdShellLanguage");
+    const option = select?.options?.[select.selectedIndex];
+    const label = option?.textContent?.trim() || "🇬🇧 EN — English";
+    const flag = label.match(/^\S+/)?.[0] || "🇬🇧";
+    const code = label.split(/\s+/)[1] || "EN";
+
+    return { flag, code };
+  }
+
+  function updateLanguageCue() {
+    const cue = document.getElementById("pdLuxuryLanguageCue");
+    if (!cue) return;
+
+    const { flag, code } = getLanguageChoice();
+    const language = currentLanguage();
+
+    cue.textContent = "A文 " + flag + " " + code;
+    cue.setAttribute(
+      "aria-label",
+      languageLabels[language] || languageLabels.en
+    );
+    cue.title = languageLabels[language] || languageLabels.en;
+  }
+
+  function addLanguageCue(bar, brand) {
+    if (!bar || !brand) return;
+
+    let cue = document.getElementById("pdLuxuryLanguageCue");
+
+    if (!cue) {
+      cue = document.createElement("button");
+      cue.id = "pdLuxuryLanguageCue";
+      cue.type = "button";
+
+      cue.addEventListener("click", function () {
+        document.getElementById("pdLuxuryMenuButton")?.click();
+      });
+
+      bar.insertBefore(cue, brand);
+    }
+
+    updateLanguageCue();
+  }
+
+  function removeRedundantSectionsRow() {
+    const header = document.getElementById("pdLuxuryHeader");
+    if (!header) return;
+
+    const candidates = header.querySelectorAll(
+      "button, a, [role='button'], h1, h2, h3, div, span"
+    );
+
+    candidates.forEach(function (node) {
+      if (!node.isConnected) return;
+
+      const label = (node.textContent || "")
+        .replace(/[⌃^↑↓⌄▴▾›»→←]/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
+
+      if (!allSectionsLabels.has(label)) return;
+
+      let target = node;
+
+      while (
+        target.parentElement &&
+        target.parentElement !== header
+      ) {
+        const parentLabel = (target.parentElement.textContent || "")
+          .replace(/[⌃^↑↓⌄▴▾›»→←]/g, "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
+
+        if (!allSectionsLabels.has(parentLabel)) break;
+        target = target.parentElement;
+      }
+
+      target.remove();
+    });
+
+    document.getElementById("pdRubricsToggle")?.remove();
   }
 
   function compactHeader() {
@@ -3826,7 +3983,6 @@ type="button"
     const brand = document.getElementById("pdLuxuryBrand");
     const advertise = document.getElementById("pdLuxuryAdvertise");
     const home = document.getElementById("pdLuxuryHome");
-    const rows = document.getElementById("pdLuxuryRows");
     const top = document.getElementById("pdLuxuryTopRow");
 
     if (bar && advertise && home) {
@@ -3839,15 +3995,12 @@ type="button"
       brand.classList.remove("pd-active-petfriendly");
     }
 
+    addLanguageCue(bar, brand);
+
     const language = currentLanguage();
     if (advertise) {
       advertise.textContent =
         shortAdvertiseText[language] || shortAdvertiseText.en;
-    }
-
-    if (rows) {
-      rows.classList.remove("pd-rubrics-open");
-      document.getElementById("pdRubricsToggle")?.remove();
     }
 
     if (top) {
@@ -3859,25 +4012,21 @@ type="button"
         "marketplace"
       ];
 
-      order.forEach(key => {
+      order.forEach(function (key) {
         const link = top.querySelector(
           '[data-pd-header-link="' + key + '"]'
         );
         if (link) top.appendChild(link);
       });
     }
+
+    removeRedundantSectionsRow();
   }
 
   function updateTickerLanguage() {
-    const languageSelect = document.getElementById("pdShellLanguage");
-    const selectedOption =
-      languageSelect?.options?.[languageSelect.selectedIndex];
+    const { flag, code } = getLanguageChoice();
 
-    const optionText = selectedOption?.textContent?.trim() || "";
-    const flag = optionText.match(/^\S+/)?.[0] || "🇬🇧";
-    const code = optionText.split(/\s+/)[1] || "EN";
-
-    document.querySelectorAll(".pd-ticker-piece").forEach(piece => {
+    document.querySelectorAll(".pd-ticker-piece").forEach(function (piece) {
       const parts = piece.children;
 
       if (parts.length >= 4) {
@@ -3887,14 +4036,14 @@ type="button"
         parts[3].textContent = code;
       }
     });
+
+    updateLanguageCue();
   }
 
   function removeUnusedSections() {
     document
-      .querySelectorAll(
-        "#pdLuxuryBottomRow a, #pdShellCards a"
-      )
-      .forEach(link => {
+      .querySelectorAll("#pdLuxuryBottomRow a, #pdShellCards a")
+      .forEach(function (link) {
         const file = (link.getAttribute("href") || "")
           .split(/[?#]/)[0]
           .split("/")
