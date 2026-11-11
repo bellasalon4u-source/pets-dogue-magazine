@@ -3778,7 +3778,10 @@ type="button"
         padding: 3px 6px !important;
       }
 
-      #pdLuxuryTopRow,
+          #pdLuxuryTopRow {
+        grid-template-columns: minmax(0,1.35fr) repeat(4, minmax(0,1fr)) !important;
+      }
+
       #pdLuxuryBottomRow {
         grid-template-columns: repeat(5, minmax(0,1fr)) !important;
       }
@@ -3788,14 +3791,23 @@ type="button"
         min-width: 0 !important;
         min-height: 38px !important;
         flex: initial !important;
+        flex-wrap: wrap !important;
+        align-content: center !important;
         justify-content: center !important;
-        padding: 4px 2px !important;
-        border-radius: 0 !important;
+        padding: 4px 3px !important;
+        border-radius: 999px !important;
         white-space: normal !important;
-        overflow-wrap: anywhere !important;
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+        hyphens: none !important;
         text-align: center !important;
-        font-size: 10px !important;
+        font-size: clamp(8px, 2.4vw, 9px) !important;
         line-height: 1.08 !important;
+      }
+
+      #pdLuxuryTopRow [data-pd-header-link="petFriendly"] {
+        border: 1px solid #65e51f !important;
+        border-radius: 999px !important;
       }
 
       .pd-luxury-row-link .pd-inline-emoji {
