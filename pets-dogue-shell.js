@@ -3720,16 +3720,16 @@ type="button"
       cursor: pointer !important;
     }
 
-        @media (max-width: 600px) {
+            @media (max-width: 600px) {
       #pdHomeHeaderImage {
-        height: 76px !important;
+        height: 68px !important;
       }
 
       #pdLuxuryMainBar {
-        min-height: 44px !important;
+        min-height: 42px !important;
         grid-template-columns: 30px auto minmax(36px,1fr) auto 29px 30px !important;
         gap: 3px !important;
-        padding: 2px 6px !important;
+        padding: 1px 6px !important;
       }
 
       #pdLuxuryLanguageCue {
@@ -3779,7 +3779,7 @@ type="button"
         overflow-y: visible !important;
         white-space: normal !important;
         gap: 2px !important;
-        padding: 1px 6px !important;
+        padding: 0 6px !important;
       }
 
       #pdLuxuryTopRow {
@@ -3819,6 +3819,16 @@ type="button"
       }
 
       #pdLuxuryTopRow [data-pd-header-link="petFriendly"] .pd-inline-emoji {
+        font-size: 12px !important;
+      }
+
+      #pdLuxuryTopRow [data-pd-header-link="help"] {
+        flex-wrap: nowrap !important;
+        gap: 2px !important;
+        white-space: nowrap !important;
+      }
+
+      #pdLuxuryTopRow [data-pd-header-link="help"] .pd-inline-emoji {
         font-size: 12px !important;
       }
 
