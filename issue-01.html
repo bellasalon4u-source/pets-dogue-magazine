@@ -1799,7 +1799,16 @@ height:125px!important;
     return labels[code] ? code : "en";
   }
 
-    function applyArchiveLanguage(value){
+      function applyArchiveLanguage(value){
+    if(!labels.hu){
+      labels.hu = {
+        title:"Összes lapszám",
+        hint:"A magazinarchívum megtekintése",
+        read:"Olvasás",
+        soon:"Hamarosan"
+      };
+    }
+
     var code = languageCode(
       value ||
       localStorage.getItem("pets_dogue_language") ||
@@ -1807,14 +1816,34 @@ height:125px!important;
       "en"
     );
 
-    var allTranslations = window.PetsDogueTranslations;
-    var archiveTranslations = allTranslations && allTranslations.archive;
-    var issueCopy = archiveTranslations &&
-      (archiveTranslations[code] || archiveTranslations.en);
+    var local = labels[code] || labels.en;
+    var issueTitles = {
+      en:["Issue 01 — Summer 2026","Issue 02 — Autumn 2026"],
+      uk:["Випуск 01 — Літо 2026","Випуск 02 — Осінь 2026"],
+      ru:["Выпуск 01 — Лето 2026","Выпуск 02 — Осень 2026"],
+      fr:["Numéro 01 — Été 2026","Numéro 02 — Automne 2026"],
+      de:["Ausgabe 01 — Sommer 2026","Ausgabe 02 — Herbst 2026"],
+      es:["Número 01 — Verano 2026","Número 02 — Otoño 2026"],
+      it:["Numero 01 — Estate 2026","Numero 02 — Autunno 2026"],
+      pt:["Edição 01 — Verão 2026","Edição 02 — Outono 2026"],
+      nl:["Editie 01 — Zomer 2026","Editie 02 — Herfst 2026"],
+      pl:["Wydanie 01 — Lato 2026","Wydanie 02 — Jesień 2026"],
+      cs:["Vydání 01 — Léto 2026","Vydání 02 — Podzim 2026"],
+      sk:["Vydanie 01 — Leto 2026","Vydanie 02 — Jeseň 2026"],
+      hu:["01. szám — 2026. nyár","02. szám — 2026. ősz"],
+      ro:["Ediția 01 — Vara 2026","Ediția 02 — Toamna 2026"],
+      bg:["Издание 01 — Лято 2026","Издание 02 — Есен 2026"],
+      el:["Τεύχος 01 — Καλοκαίρι 2026","Τεύχος 02 — Φθινόπωρο 2026"],
+      sv:["Nummer 01 — Sommar 2026","Nummer 02 — Höst 2026"],
+      da:["Udgave 01 — Sommer 2026","Udgave 02 — Efterår 2026"],
+      no:["Utgave 01 — Sommer 2026","Utgave 02 — Høst 2026"],
+      fi:["Numero 01 — Kesä 2026","Numero 02 — Syksy 2026"],
+      tr:["Sayı 01 — Yaz 2026","Sayı 02 — Sonbahar 2026"],
+      ar:["العدد 01 — صيف 2026","العدد 02 — خريف 2026"],
+      hi:["अंक 01 — ग्रीष्म 2026","अंक 02 — शरद 2026"]
+    };
 
-    if(!issueCopy){
-      return;
-    }
+    var titles = issueTitles[code] || issueTitles.en;
 
     archive.setAttribute("lang",code);
     archive.setAttribute("dir",code === "ar" ? "rtl" : "ltr");
@@ -1825,14 +1854,13 @@ height:125px!important;
     var soon = archive.querySelector('[data-i18n="issueArchive.soon"]');
     var issue01 = archive.querySelector('[data-i18n="issueArchive.issue01"]');
     var issue02 = archive.querySelector('[data-i18n="issueArchive.issue02"]');
-    var local = labels[code] || labels.en;
 
     if(title) title.textContent = local.title;
     if(hint) hint.textContent = local.hint;
     if(read) read.textContent = local.read;
     if(soon) soon.textContent = local.soon;
-    if(issue01) issue01.textContent = issueCopy.issue01.title;
-    if(issue02) issue02.textContent = issueCopy.issue02.title;
+    if(issue01) issue01.textContent = titles[0];
+    if(issue02) issue02.textContent = titles[1];
   }
 
   function startArchiveTranslations(){
