@@ -1824,6 +1824,7 @@ height:125px!important;
     api.applyLanguage(languageCode(value));
   }
 
+  function startArchiveTranslations(){
   var initialLanguage =
     window.PetsDogueIssue01Language ||
     localStorage.getItem("pets_dogue_language") ||
@@ -1831,6 +1832,17 @@ height:125px!important;
     "en";
 
   applyArchiveLanguage(initialLanguage);
+}
+
+if(document.readyState === "loading"){
+  document.addEventListener(
+    "DOMContentLoaded",
+    startArchiveTranslations,
+    {once:true}
+  );
+}else{
+  startArchiveTranslations();
+}
 
   window.addEventListener("petsdogue:languagechange",function(event){
     var detail = event && event.detail ? event.detail : {};
