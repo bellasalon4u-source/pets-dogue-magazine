@@ -181,6 +181,45 @@ inset-inline-end:14px;z-index:2
 .active-contest-link:focus-visible{
 outline:4px solid #65e51f;outline-offset:-4px
 }
+
+/* One active contest gets a balanced editorial feature on desktop. */
+.active-contest:only-child .active-contest-link{
+display:grid;
+grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+min-height:430px;
+max-height:480px;
+aspect-ratio:auto
+}
+.active-contest:only-child .active-contest-link:after{
+display:none
+}
+.active-contest:only-child .active-contest-link>img{
+grid-column:1;
+grid-row:1;
+min-height:430px;
+height:100%
+}
+.active-contest:only-child .active-contest-copy{
+position:relative;
+grid-column:2;
+grid-row:1;
+inset:auto;
+bottom:auto;
+z-index:1;
+min-width:0;
+padding:32px 60px 32px 32px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+background:#111
+}
+.active-contest:only-child .active-contest-copy h3{
+font-size:clamp(32px,4vw,54px)
+}
+.active-contest:only-child .active-contest-copy p{
+font-size:16px
+}
+
 @media(max-width:650px){
 .active-contests-page #contestGrid{
 grid-template-columns:1fr
@@ -190,6 +229,31 @@ aspect-ratio:5/4;max-height:390px
 }
 .active-contests-page main{
 padding:18px 12px 30px
+}
+.active-contest:only-child .active-contest-link{
+display:block;
+min-height:0;
+aspect-ratio:5/4;
+max-height:390px
+}
+.active-contest:only-child .active-contest-link:after{
+display:block
+}
+.active-contest:only-child .active-contest-link>img{
+min-height:0;
+height:100%
+}
+.active-contest:only-child .active-contest-copy{
+position:absolute;
+inset-inline:20px;
+bottom:22px;
+z-index:1;
+padding-inline-end:42px;
+display:block;
+background:transparent
+}
+.active-contest:only-child .active-contest-copy h3{
+font-size:clamp(30px,4vw,44px)
 }
 }
 `;
