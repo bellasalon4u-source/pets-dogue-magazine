@@ -1799,54 +1799,66 @@ height:125px!important;
     return labels[code] ? code : "en";
   }
 
-  function applyArchiveLanguage(value){
-    var api = window.PetsDogueIssue01;
+    function applyArchiveLanguage(value){
+    var code = languageCode(
+      value ||
+      localStorage.getItem("pets_dogue_language") ||
+      document.documentElement.lang ||
+      "en"
+    );
+
     var allTranslations = window.PetsDogueTranslations;
     var archiveTranslations = allTranslations && allTranslations.archive;
+    var issueCopy = archiveTranslations &&
+      (archiveTranslations[code] || archiveTranslations.en);
 
-    if(!api || !api.translations || !archiveTranslations){
+    if(!issueCopy){
       return;
     }
 
-    Object.keys(labels).forEach(function(code){
-      var local = labels[code];
-      var issueCopy = archiveTranslations[code] || archiveTranslations.en;
-      var target = api.translations[code] || (api.translations[code] = {});
+    archive.setAttribute("lang",code);
+    archive.setAttribute("dir",code === "ar" ? "rtl" : "ltr");
 
-      target["issueArchive.title"] = local.title;
-      target["issueArchive.hint"] = local.hint;
-      target["issueArchive.read"] = local.read;
-      target["issueArchive.soon"] = local.soon;
-      target["issueArchive.issue01"] = issueCopy.issue01.title;
-      target["issueArchive.issue02"] = issueCopy.issue02.title;
-    });
+    var title = archive.querySelector('[data-i18n="issueArchive.title"]');
+    var hint = archive.querySelector('[data-i18n="issueArchive.hint"]');
+    var read = archive.querySelector('[data-i18n="issueArchive.read"]');
+    var soon = archive.querySelector('[data-i18n="issueArchive.soon"]');
+    var issue01 = archive.querySelector('[data-i18n="issueArchive.issue01"]');
+    var issue02 = archive.querySelector('[data-i18n="issueArchive.issue02"]');
+    var local = labels[code] || labels.en;
 
-    api.applyLanguage(languageCode(value));
+    if(title) title.textContent = local.title;
+    if(hint) hint.textContent = local.hint;
+    if(read) read.textContent = local.read;
+    if(soon) soon.textContent = local.soon;
+    if(issue01) issue01.textContent = issueCopy.issue01.title;
+    if(issue02) issue02.textContent = issueCopy.issue02.title;
   }
 
   function startArchiveTranslations(){
-  var initialLanguage =
-    window.PetsDogueIssue01Language ||
-    localStorage.getItem("pets_dogue_language") ||
-    document.documentElement.lang ||
-    "en";
+    applyArchiveLanguage(
+      localStorage.getItem("pets_dogue_language") ||
+      document.documentElement.lang ||
+      window.PetsDogueIssue01Language ||
+      "en"
+    );
+  }
 
-  applyArchiveLanguage(initialLanguage);
-}
-
-if(document.readyState === "loading"){
-  document.addEventListener(
-    "DOMContentLoaded",
-    startArchiveTranslations,
-    {once:true}
-  );
-}else{
-  startArchiveTranslations();
-}
+  if(document.readyState === "loading"){
+    document.addEventListener(
+      "DOMContentLoaded",
+      startArchiveTranslations,
+      {once:true}
+    );
+  }else{
+    startArchiveTranslations();
+  }
 
   window.addEventListener("petsdogue:languagechange",function(event){
     var detail = event && event.detail ? event.detail : {};
-    var nextLanguage = detail.language || detail.lang ||
+    var nextLanguage =
+      detail.language ||
+      detail.lang ||
       localStorage.getItem("pets_dogue_language") ||
       document.documentElement.lang ||
       "en";
@@ -1855,6 +1867,28 @@ if(document.readyState === "loading"){
       applyArchiveLanguage(nextLanguage);
     });
   });
+
+  window.addEventListener("storage",function(event){
+    if(event.key === "pets_dogue_language"){
+      applyArchiveLanguage(event.newValue || "en");
+    }
+  });
+
+  var archiveLanguageObserver = new MutationObserver(function(){
+    applyArchiveLanguage(
+      localStorage.getItem("pets_dogue_language") ||
+      document.documentElement.lang ||
+      "en"
+    );
+  });
+
+  archiveLanguageObserver.observe(
+    document.documentElement,
+    {
+      attributes:true,
+      attributeFilter:["lang","dir"]
+    }
+  );
 })();
 </script>
 </body>
