@@ -24,7 +24,7 @@ no:["BLI DEN NESTE STJERNEN","Fyll ut søknaden →","Alle land","Alle dyr","Nye
 fi:["OLE SEURAAVA TÄHTI","Täytä hakemus →","Kaikki maat","Kaikki eläimet","Uusimmat ensin","Etusivu","Takaisin osallistujiin","Näytä lisää","Osallistujat näkyvät hyväksymisen jälkeen.","Lataus epäonnistui. Yritä uudelleen."],
 tr:["SIRADAKİ YILDIZ SEN OL","Başvurunu doldur →","Tüm ülkeler","Tüm hayvanlar","Önce en yeniler","Ana sayfa","Katılımcılara dön","Daha fazla","Katılımcılar onaydan sonra görünür.","Yüklenemedi. Tekrar deneyin."],
 ar:["كن النجم القادم","املأ طلبك ←","كل البلدان","كل الحيوانات","الأحدث أولاً","الرئيسية","العودة إلى المشاركين","عرض المزيد","سيظهر المشاركون بعد الموافقة على الطلبات.","تعذر التحميل. حاول مرة أخرى."],
-hi:["अगला सितारा बनें","अपना आवेदन भरें →","सभी देश","सभी जानवर","सबसे नए पहले","मुख्य पृष्ठ","प्रतिभागियों पर वापस जाएँ","और दिखाएँ","स्वीकृति के बाद प्रतिभागी यहाँ दिखाई देंगे।","लोड नहीं हो सका। दोबारा प्रयास करें।"]
+hi:["अगला सितारा बनें","अपना आवेदन भरें →","सभी देश","सभी जानवर","सबसे नए पहले","मुख्य पृष्ठ","प्रतिभागियों पर वापस जाएँ","और दिखाएँ","स्वीकृति के बाद प्रतिभागी यहाँ दिखाई देंगे।","लोड नहीं हो सका। दोबारा प्रयास करें."]
 };
 
 const animals={
@@ -436,96 +436,193 @@ scroll-margin-top:180px
 }
 .casting-back{margin:12px 18px}
 .stars-gallery{
-max-width:1100px;padding:18px 12px 36px;
-margin:auto;color:#111
+max-width:1100px;
+padding:24px 20px 48px;
+margin:auto;
+color:#111
 }
 .stars-gallery h1{
 font:normal clamp(32px,6vw,60px)/1.1 Georgia,serif;
-text-align:center;margin:6px 0
+text-align:center;
+margin:6px 0
 }
 .stars-listen{
-display:block;margin:8px auto 14px;
-border:1px solid #999;border-radius:24px;
-background:transparent;padding:7px 14px;color:#111
+display:block;
+margin:8px auto 14px;
+border:1px solid #999;
+border-radius:24px;
+background:transparent;
+padding:7px 14px;
+color:#111
 }
 .stars-cta{
-width:100%;background:#ed101b;border:0;
-border-radius:8px;color:white;
-padding:18px 12px;margin-bottom:14px
+width:100%;
+background:#070707;
+border:1px solid #c99a2e;
+border-radius:8px;
+color:#fff;
+padding:18px 20px;
+margin-bottom:14px;
+text-align:center;
+box-shadow:inset 4px 0 #c99a2e
+}
+.stars-cta:hover{
+background:#15120b
 }
 .stars-cta strong,.stars-cta span{display:block}
 .stars-cta strong{
-font-size:clamp(17px,3vw,26px);line-height:1.3
+font-size:clamp(17px,3vw,26px);
+line-height:1.3;
+color:#f1d783
 }
-.stars-cta span{font-size:16px;margin-top:7px}
+.stars-cta span{
+font-size:16px;
+margin-top:7px;
+color:#fff
+}
 .stars-filters{
-display:grid;grid-template-columns:1fr 1fr;gap:10px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
 }
 .stars-filters select{
-min-width:0;border:1px solid #222;border-radius:6px;
-font-size:16px;padding:12px 8px
+min-width:0;
+border:1px solid #c9a750;
+border-radius:6px;
+font-size:16px;
+padding:12px 8px;
+background:#fff;
+color:#111
 }
 .stars-tools{
-display:flex;justify-content:space-between;
-gap:12px;margin:16px 0;font-size:14px
+display:flex;
+justify-content:space-between;
+gap:12px;
+margin:16px 0;
+font-size:14px
 }
 .stars-grid{columns:2;column-gap:10px}
 .star-card{
-break-inside:avoid;margin:0 0 10px;
-background:#fffaf2;border-radius:7px;overflow:hidden
+break-inside:avoid;
+margin:0 0 10px;
+background:#fffaf2;
+border:1px solid #d8c9a7;
+border-radius:6px;
+overflow:hidden;
+box-shadow:none
 }
 .star-open{
-display:block;border:0;padding:0;background:#eee;width:100%
+display:block;
+border:0;
+padding:0;
+background:#eee;
+width:100%
 }
 .star-open img{width:100%;height:auto}
 .star-details{
-position:relative;padding:10px 9px 12px;
+position:relative;
+padding:10px 9px 12px;
 padding-inline-end:65px
 }
 .star-name{
-display:block;background:transparent;border:0;padding:0;
-text-align:start;font:normal 25px Georgia,serif;
+display:block;
+background:transparent;
+border:0;
+padding:0;
+text-align:start;
+font:normal 25px Georgia,serif;
 overflow-wrap:anywhere
 }
 .star-country{font-size:12px;margin-top:4px;line-height:1.4}
 .star-heart{
-position:absolute;inset-inline-end:6px;bottom:13px;
-border:0;background:transparent;color:#bd0912;
-font-size:15px;padding:8px 0;min-height:44px
+position:absolute;
+inset-inline-end:6px;
+bottom:13px;
+border:0;
+background:transparent;
+color:#bd0912;
+font-size:15px;
+padding:8px 0;
+min-height:44px
 }
-.stars-status{margin:18px 0;line-height:1.6}
-.stars-more{display:block;margin:20px auto}
+.stars-status{
+margin:18px 0;
+line-height:1.6
+}
+.stars-status:not(:empty){
+max-width:760px;
+margin:34px auto 18px;
+padding:22px 24px;
+border:1px solid #c9a750;
+border-radius:6px;
+background:#fffaf2;
+color:#514a3c;
+text-align:center;
+font-size:17px
+}
+.stars-more{
+display:block;
+margin:20px auto
+}
 .star-dialog{
-width:min(780px,95vw);max-height:90svh;border:0;
-padding:0;background:#f4efe5;color:#111
+width:min(780px,95vw);
+max-height:90svh;
+border:0;
+padding:0;
+background:#f4efe5;
+color:#111
 }
 .star-dialog::backdrop{background:#000b}
 .star-close{
-position:sticky;top:8px;float:right;z-index:2;
-border:0;border-radius:50%;font-size:28px;
-width:44px;height:44px;margin:8px;
-background:white;color:#111
+position:sticky;
+top:8px;
+float:right;
+z-index:2;
+border:0;
+border-radius:50%;
+font-size:28px;
+width:44px;
+height:44px;
+margin:8px;
+background:white;
+color:#111
 }
 .star-profile-body{padding:16px}
 .star-profile-image{
-max-height:60svh;object-fit:contain;background:#111
+max-height:60svh;
+object-fit:contain;
+background:#111
 }
 .star-profile-body h2{
-font:normal 38px Georgia,serif;margin:14px 0
+font:normal 38px Georgia,serif;
+margin:14px 0
 }
 .star-profile-body p{line-height:1.6}
 .star-story{white-space:pre-wrap;margin:16px 0}
 .star-profile-thumbs{
-display:grid;grid-template-columns:repeat(3,1fr);gap:8px
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px
 }
 .star-profile-thumbs button{padding:0;border:0}
 .star-profile-thumbs img{aspect-ratio:1;object-fit:cover}
 .stars-gallery button:focus-visible,
 .stars-gallery select:focus-visible{
-outline:3px solid #65e51f;outline-offset:3px
+outline:3px solid #65e51f;
+outline-offset:3px
 }
 @media(min-width:800px){
 .stars-grid{columns:3;column-gap:14px}
+}
+@media(max-width:600px){
+.stars-gallery{padding:16px 12px 30px}
+.stars-cta{padding:15px 12px}
+.stars-status:not(:empty){
+margin:22px auto 14px;
+padding:16px 12px;
+font-size:15px
+}
+.star-name{font-size:20px}
 }
 `;
 
