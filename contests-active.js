@@ -182,7 +182,11 @@ inset-inline-end:14px;z-index:2
 outline:4px solid #65e51f;outline-offset:-4px
 }
 
-/* One active contest gets a balanced editorial feature on desktop. */
+/* One active contest fills the content width on desktop. */
+.active-contest:only-child{
+grid-column:1/-1;
+width:100%
+}
 .active-contest:only-child .active-contest-link{
 display:grid;
 grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
@@ -207,14 +211,17 @@ inset:auto;
 bottom:auto;
 z-index:1;
 min-width:0;
-padding:32px 60px 32px 32px;
+padding:32px 60px 32px 40px;
 display:flex;
 flex-direction:column;
 justify-content:center;
 background:#111
 }
 .active-contest:only-child .active-contest-copy h3{
-font-size:clamp(32px,4vw,54px)
+max-width:18ch;
+font-size:clamp(34px,3.5vw,50px);
+line-height:1.12;
+overflow-wrap:break-word
 }
 .active-contest:only-child .active-contest-copy p{
 font-size:16px
@@ -229,6 +236,9 @@ aspect-ratio:5/4;max-height:390px
 }
 .active-contests-page main{
 padding:18px 12px 30px
+}
+.active-contest:only-child{
+grid-column:auto
 }
 .active-contest:only-child .active-contest-link{
 display:block;
