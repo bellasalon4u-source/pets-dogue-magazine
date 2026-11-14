@@ -446,7 +446,7 @@ document.body.append(dialog);
 
 update();
 panel.hidden=!castingHash();
-gallery.hidden=panel.hidden;
+gallery.hidden=!panel.hidden;
 
 window.addEventListener("popstate",()=>{
 showCasting(castingHash(),false);
