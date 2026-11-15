@@ -3445,5 +3445,196 @@ style="display:flex;align-items:center;justify-content:space-between;gap:12px;wi
   }
 }
 </style>
+ <style id="pd-map-compact-carousel">
+.pd-final-page .copy h1{
+  margin-bottom:3px !important;
+  font-size:clamp(24px,4vw,40px) !important;
+  line-height:1 !important;
+  letter-spacing:-.5px !important;
+}
+
+.pd-final-page .hero-title-row{
+  gap:5px !important;
+}
+
+.pd-final-page .search-row{
+  gap:7px !important;
+  margin-top:10px !important;
+}
+
+.pd-final-page .search-box,
+.pd-final-page .icon-btn{
+  height:48px !important;
+}
+
+.pd-final-page .search-box{
+  padding:0 13px !important;
+}
+
+.pd-final-page .radius{
+  margin-top:8px !important;
+  padding:9px 4px 5px !important;
+}
+
+.pd-final-page .categories{
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  gap:7px !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  margin:5px 0 0 !important;
+  padding:3px 2px 8px !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none !important;
+  -webkit-overflow-scrolling:touch;
+}
+
+.pd-final-page .categories::-webkit-scrollbar{
+  display:none !important;
+}
+
+.pd-final-page .categories .cat{
+  flex:0 0 auto !important;
+  width:max-content !important;
+  min-height:40px !important;
+  padding:0 13px !important;
+  gap:7px !important;
+  scroll-snap-align:start;
+  white-space:nowrap !important;
+  font-size:13px !important;
+}
+
+.pd-final-page .categories .cat i{
+  width:auto !important;
+  font-size:17px !important;
+}
+
+.pd-category-dots{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  min-height:18px;
+  margin:0 auto 3px;
+}
+
+.pd-category-dots button{
+  width:7px;
+  height:7px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:#b9ad91;
+  transition:width .2s ease, background-color .2s ease;
+}
+
+.pd-category-dots button[aria-current="true"]{
+  width:20px;
+  border-radius:99px;
+  background:#c99729;
+}
+
+#fullOverlay .fullbar{
+  z-index:700 !important;
+  min-height:52px !important;
+  padding:6px 58px !important;
+  background:rgba(7,7,7,.78) !important;
+  color:#fff !important;
+}
+
+#fullOverlay #fullMapTitle{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+@media(max-width:520px){
+  .pd-final-page{
+    padding-top:5px !important;
+  }
+
+  .pd-final-page .copy h1{
+    font-size:clamp(22px,6vw,29px) !important;
+  }
+
+  .pd-final-page .search-row{
+    grid-template-columns:minmax(0,1fr) 46px 46px !important;
+  }
+
+  .pd-final-page .search-box,
+  .pd-final-page .icon-btn{
+    height:44px !important;
+  }
+
+  .pd-final-page .categories .cat{
+    min-height:38px !important;
+    padding:0 11px !important;
+    font-size:12px !important;
+  }
+}
+</style>
+
+<script id="pd-map-category-carousel">
+(()=>{
+  function initializeCategoryCarousel(){
+    const categories=document.querySelector(".pd-final-page .categories");
+    if(!categories || categories.dataset.carouselReady==="true")return;
+
+    categories.dataset.carouselReady="true";
+
+    const dots=document.createElement("div");
+    dots.className="pd-category-dots";
+    dots.setAttribute("aria-label","Category pages");
+
+    const buttons=[];
+
+    for(let index=0;index<3;index++){
+      const dot=document.createElement("button");
+      dot.type="button";
+      dot.setAttribute("aria-label",String(index+1)+" / 3");
+      dot.setAttribute("aria-current",index===0?"true":"false");
+      dot.addEventListener("click",()=>{
+        const maxScroll=Math.max(0,categories.scrollWidth-categories.clientWidth);
+        categories.scrollTo({
+          left:maxScroll*(index/2),
+          behavior:"smooth"
+        });
+      });
+      dots.appendChild(dot);
+      buttons.push(dot);
+    }
+
+    categories.insertAdjacentElement("afterend",dots);
+
+    function updateDots(){
+      const maxScroll=Math.max(1,categories.scrollWidth-categories.clientWidth);
+      const position=Math.min(2,Math.round((categories.scrollLeft/maxScroll)*2));
+
+      buttons.forEach((button,index)=>{
+        button.setAttribute("aria-current",index===position?"true":"false");
+      });
+
+      dots.hidden=categories.scrollWidth<=categories.clientWidth+4;
+    }
+
+    categories.addEventListener("scroll",updateDots,{passive:true});
+    window.addEventListener("resize",updateDots);
+    new ResizeObserver(updateDots).observe(categories);
+    updateDots();
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",initializeCategoryCarousel,{once:true});
+  }else{
+    initializeCategoryCarousel();
+  }
+})();
+</script>
 </body>
 </html>               
