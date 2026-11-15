@@ -201,4 +201,147 @@
   });
   const cards = document.getElementById("cards");
   if (cards) cardObserver.observe(cards, { childList: true, subtree: true });
+
+  /* Map → Help handoff. Keeps help results off the map and opens them on the
+     dedicated multilingual Help page using only the chosen map area and radius. */
+  const helpCopy = {
+    en:"Help nearby", uk:"Допомога поруч", ru:"Помощь рядом",
+    fr:"Aide à proximité", de:"Hilfe in der Nähe", es:"Ayuda cercana",
+    it:"Aiuto vicino", pt:"Ajuda por perto", nl:"Hulp in de buurt",
+    pl:"Pomoc w pobliżu", cs:"Pomoc v okolí", sk:"Pomoc v okolí",
+    hu:"Segítség a közelben", ro:"Ajutor în apropiere", bg:"Помощ наблизо",
+    el:"Βοήθεια κοντά", sv:"Hjälp i närheten", da:"Hjælp i nærheden",
+    no:"Hjelp i nærheten", fi:"Apua lähellä", tr:"Yakındaki yardım",
+    ar:"مساعدة بالقرب منك", hi:"आस-पास मदद"
+  };
+  const helpStorageError = {
+    en:"Could not save the selected area. Please try again.",
+    uk:"Не вдалося зберегти вибрану область. Спробуйте ще раз.",
+    ru:"Не удалось сохранить выбранный район. Попробуйте ещё раз.",
+    fr:"Impossible d’enregistrer la zone choisie. Réessayez.",
+    de:"Der ausgewählte Bereich konnte nicht gespeichert werden. Bitte erneut versuchen.",
+    es:"No se pudo guardar la zona seleccionada. Inténtalo de nuevo.",
+    it:"Impossibile salvare l’area selezionata. Riprova.",
+    pt:"Não foi possível guardar a área selecionada. Tente novamente.",
+    nl:"Het geselecteerde gebied kon niet worden opgeslagen. Probeer het opnieuw.",
+    pl:"Nie udało się zapisać wybranego obszaru. Spróbuj ponownie.",
+    cs:"Vybranou oblast se nepodařilo uložit. Zkuste to znovu.",
+    sk:"Vybranú oblasť sa nepodarilo uložiť. Skúste to znova.",
+    hu:"A kiválasztott terület mentése nem sikerült. Próbáld újra.",
+    ro:"Zona selectată nu a putut fi salvată. Încearcă din nou.",
+    bg:"Избраният район не можа да бъде запазен. Опитайте отново.",
+    el:"Δεν ήταν δυνατή η αποθήκευση της επιλεγμένης περιοχής. Δοκιμάστε ξανά.",
+    sv:"Det gick inte att spara det valda området. Försök igen.",
+    da:"Det valgte område kunne ikke gemmes. Prøv igen.",
+    no:"Det valgte området kunne ikke lagres. Prøv igjen.",
+    fi:"Valittua aluetta ei voitu tallentaa. Yritä uudelleen.",
+    tr:"Seçilen bölge kaydedilemedi. Lütfen tekrar deneyin.",
+    ar:"تعذر حفظ المنطقة المحددة. حاول مرة أخرى.",
+    hi:"चुना गया क्षेत्र सहेजा नहीं जा सका। कृपया फिर कोशिश करें。"
+  };
+
+  function currentHelpLanguage() {
+    let value = (document.documentElement.lang || "en")
+      .toLowerCase().split("-")[0].split("_")[0];
+    const aliases = { ua:"uk", cz:"cs", gr:"el", se:"sv", dk:"da" };
+    value = aliases[value] || value;
+    return helpCopy[value] ? value : "en";
+  }
+
+  function installMapHelpButton() {
+    const shell = document.querySelector(".map-shell");
+    if (!shell || document.getElementById("pdeHelpNearby")) return;
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.id = "pdeHelpNearby";
+    button.className = "pde-help-map-button";
+    button.setAttribute("aria-label", helpCopy[currentHelpLanguage()]);
+    button.innerHTML = '<span class="pde-help-heart" aria-hidden="true">♥</span><span class="pde-help-label"></span>';
+
+    const helpStyle = document.createElement("style");
+    helpStyle.textContent = `
+      .pde-help-map-button{
+        position:absolute;right:14px;bottom:14px;z-index:610;
+        display:inline-flex;align-items:center;justify-content:center;gap:8px;
+        min-height:42px;padding:0 15px;border:1px solid #c99729;border-radius:999px;
+        background:#080808;color:#fff;font:800 13px/1 Arial,sans-serif;
+        box-shadow:0 7px 20px rgba(0,0,0,.28);cursor:pointer
+      }
+      .pde-help-map-button:focus-visible{outline:3px solid #54ef0b;outline-offset:3px}
+      .pde-help-heart{color:#ed1b35;font-size:20px;line-height:1}
+      @media(max-width:600px){
+        .pde-help-map-button{right:10px;bottom:10px;min-height:40px;padding:0 12px;font-size:12px}
+      }
+    `;
+    document.head.append(helpStyle);
+    shell.append(button);
+
+    function updateLabel() {
+      const language = currentHelpLanguage();
+      const label = helpCopy[language];
+      button.setAttribute("aria-label", label);
+      button.querySelector(".pde-help-label").textContent = label;
+    }
+    updateLabel();
+
+    button.addEventListener("click", () => {
+      let point = null;
+      try {
+        if (typeof map !== "undefined" && map && typeof map.getCenter === "function") {
+          point = map.getCenter();
+        }
+      } catch {}
+
+      if (!point && typeof center !== "undefined" && center) {
+        point = { lat:center.lat, lng:center.lng };
+      }
+      if (!point || !Number.isFinite(Number(point.lat)) || !Number.isFinite(Number(point.lng))) {
+        return;
+      }
+
+      let areaLabel = "";
+      try {
+        if (typeof center !== "undefined" && center && center.label) {
+          areaLabel = String(center.label);
+        }
+      } catch {}
+
+      let searchRadius = Number(document.getElementById("radius")?.value);
+      if (!Number.isFinite(searchRadius) && typeof radius !== "undefined") {
+        searchRadius = Number(radius);
+      }
+      searchRadius = Math.min(50, Math.max(1, Number.isFinite(searchRadius) ? searchRadius : 15));
+
+      const language = currentHelpLanguage();
+      const context = {
+        lat:Number(point.lat),
+        lng:Number(point.lng),
+        radius:searchRadius,
+        label:areaLabel
+      };
+
+      try {
+        sessionStorage.setItem("pets_dogue_help_area_context", JSON.stringify(context));
+      } catch (error) {
+        window.alert(helpStorageError[language] || helpStorageError.en);
+        return;
+      }
+
+      window.location.href = "/pets-in-need.html?from=map&lang=" + encodeURIComponent(language);
+    });
+
+    window.addEventListener("petsdogue:languagechange", updateLabel);
+    const languageObserver = new MutationObserver(() => updateLabel());
+    languageObserver.observe(document.documentElement, {
+      attributes:true,
+      attributeFilter:["lang"]
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", installMapHelpButton, { once:true });
+  } else {
+    installMapHelpButton();
+  }
 })();
