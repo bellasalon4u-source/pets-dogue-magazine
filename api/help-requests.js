@@ -4,10 +4,10 @@
   PETS & DOGUE — Help requests API
 
   GET  /api/help-requests?lat=...&lng=...&radius=15
-       &category=veterinary&animal_type=dog&kind=request
+       &category=veterinary&animal_type=dog
 
   POST /api/help-requests
-       Requires a signed-in Supabase user.
+       Requires a signed-in Supabase user and Privacy Policy consent.
        New requests are always submitted as pending.
 
   Uses the existing Vercel environment variables:
@@ -23,6 +23,8 @@ const SUPABASE_SECRET_KEY = String(
   process.env.SUPABASE_SECRET_KEY || ""
 );
 
+const PRIVACY_POLICY_VERSION = "v1";
+
 const CATEGORIES = new Set([
   "lost_found",
   "veterinary",
@@ -30,7 +32,6 @@ const CATEGORIES = new Set([
   "temporary_home",
   "adoption",
   "volunteers",
-  "free_items",
   "other"
 ]);
 
@@ -44,10 +45,7 @@ const ANIMAL_TYPES = new Set([
   "other"
 ]);
 
-const KINDS = new Set([
-  "request",
-  "free_offer"
-]);
+const REQUEST_KIND = "request";
 
 const MAX_RADIUS_KM = 100;
 const MAX_RESULTS = 60;
@@ -119,19 +117,6 @@ function getBearerToken(req) {
   return match ? match[1].trim() : "";
 }
 
-function isValidDate(value) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) {
-    return false;
-  }
-
-  const date = new Date(`${value}T00:00:00.000Z`);
-
-  return (
-    Number.isFinite(date.getTime()) &&
-    date.toISOString().slice(0, 10) === value
-  );
-}
-
 function haversineKm(lat1, lng1, lat2, lng2) {
   const toRadians = (degrees) =>
     degrees * Math.PI / 180;
@@ -159,6 +144,7 @@ function readFilters(req) {
   const lng = Number(query.lng);
   const radius = Number(query.radius || 15);
   const limit = Number(query.limit || MAX_RESULTS);
+  const kind = String(query.kind || REQUEST_KIND).trim();
 
   if (
     query.lat == null ||
@@ -183,7 +169,12 @@ function readFilters(req) {
 
   const category = String(query.category || "").trim();
   const animalType = String(query.animal_type || "").trim();
-  const kind = String(query.kind || "").trim();
+
+  if (kind !== REQUEST_KIND) {
+    return {
+      error: "Only help requests are available."
+    };
+  }
 
   if (category && !CATEGORIES.has(category)) {
     return { error: "Invalid help category." };
@@ -191,10 +182,6 @@ function readFilters(req) {
 
   if (animalType && !ANIMAL_TYPES.has(animalType)) {
     return { error: "Invalid animal type." };
-  }
-
-  if (kind && !KINDS.has(kind)) {
-    return { error: "Invalid help type." };
   }
 
   return {
@@ -210,7 +197,7 @@ function readFilters(req) {
     ),
     category,
     animalType,
-    kind
+    kind: REQUEST_KIND
   };
 }
 
@@ -260,14 +247,13 @@ async function listHelpRequests(req, res) {
       "location_label",
       "latitude",
       "longitude",
-      "food_expiry",
-      "food_sealed",
       "image_url",
       "created_at"
     ].join(",")
   );
 
   endpoint.searchParams.set("status", "eq.approved");
+  endpoint.searchParams.set("kind", `eq.${REQUEST_KIND}`);
   endpoint.searchParams.set("order", "created_at.desc");
   endpoint.searchParams.set(
     "limit",
@@ -285,13 +271,6 @@ async function listHelpRequests(req, res) {
     endpoint.searchParams.set(
       "animal_type",
       `eq.${filters.animalType}`
-    );
-  }
-
-  if (filters.kind) {
-    endpoint.searchParams.set(
-      "kind",
-      `eq.${filters.kind}`
     );
   }
 
@@ -313,18 +292,12 @@ async function listHelpRequests(req, res) {
   }
 
   const rows = await response.json();
-  const today = new Date().toISOString().slice(0, 10);
 
   const items = (Array.isArray(rows) ? rows : [])
     .filter((row) => {
       if (
-        row.kind === "free_offer" &&
-        row.category === "food" &&
-        (
-          row.food_sealed !== true ||
-          !row.food_expiry ||
-          row.food_expiry < today
-        )
+        row.kind !== REQUEST_KIND ||
+        row.category === "free_items"
       ) {
         return false;
       }
@@ -352,15 +325,13 @@ async function listHelpRequests(req, res) {
       */
       return {
         id: row.id,
-        kind: row.kind,
+        kind: REQUEST_KIND,
         category: row.category,
         animal_type: row.animal_type,
         title: row.title,
         description: row.description,
         location_label: row.location_label,
         distance_km: Number(distance.toFixed(1)),
-        food_expiry: row.food_expiry,
-        food_sealed: row.food_sealed,
         image_url: row.image_url,
         created_at: row.created_at
       };
@@ -374,7 +345,7 @@ async function listHelpRequests(req, res) {
       radius_km: filters.radius,
       category: filters.category || "all",
       animal_type: filters.animalType || "all",
-      kind: filters.kind || "all"
+      kind: REQUEST_KIND
     },
     count: items.length,
     items
@@ -416,7 +387,24 @@ async function createHelpRequest(req, res) {
     });
   }
 
-  const kind = String(body.kind || "").trim();
+  if (body.privacy_policy_accepted !== true) {
+    return sendJson(res, 400, {
+      ok: false,
+      error: "Please accept the Privacy Policy before submitting."
+    });
+  }
+
+  const submittedKind = String(
+    body.kind || REQUEST_KIND
+  ).trim();
+
+  if (submittedKind !== REQUEST_KIND) {
+    return sendJson(res, 400, {
+      ok: false,
+      error: "Only help requests can be submitted."
+    });
+  }
+
   const category = String(body.category || "").trim();
   const animalType = String(body.animal_type || "").trim();
   const title = cleanText(body.title, 120);
@@ -425,15 +413,6 @@ async function createHelpRequest(req, res) {
   const latitude = Number(body.latitude);
   const longitude = Number(body.longitude);
   const imageURL = String(body.image_url || "").trim();
-  const foodExpiry = String(body.food_expiry || "").trim();
-  const foodSealed = body.food_sealed === true;
-
-  if (!KINDS.has(kind)) {
-    return sendJson(res, 400, {
-      ok: false,
-      error: "Choose whether you need help or are offering help."
-    });
-  }
 
   if (!CATEGORIES.has(category)) {
     return sendJson(res, 400, {
@@ -487,34 +466,8 @@ async function createHelpRequest(req, res) {
     });
   }
 
-  if (
-    category === "free_items" &&
-    kind !== "free_offer"
-  ) {
-    return sendJson(res, 400, {
-      ok: false,
-      error: "Free items must be submitted as a free offer."
-    });
-  }
-
-  if (
-    kind === "free_offer" &&
-    category === "food" &&
-    (
-      !foodSealed ||
-      !isValidDate(foodExpiry) ||
-      foodExpiry < new Date().toISOString().slice(0, 10)
-    )
-  ) {
-    return sendJson(res, 400, {
-      ok: false,
-      error:
-        "Food offers must be sealed and have a valid expiry date."
-    });
-  }
-
   const requestData = {
-    kind,
+    kind: REQUEST_KIND,
     category,
     animal_type: animalType,
     title,
@@ -522,11 +475,9 @@ async function createHelpRequest(req, res) {
     location_label: locationLabel,
     latitude,
     longitude,
-    food_expiry: isValidDate(foodExpiry)
-      ? foodExpiry
-      : null,
-    food_sealed: foodSealed,
     image_url: imageURL || null,
+    privacy_policy_accepted_at: new Date().toISOString(),
+    privacy_policy_version: PRIVACY_POLICY_VERSION,
     status: "pending",
     created_by: user.id
   };
