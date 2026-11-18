@@ -522,6 +522,61 @@ margin:auto;
 text-align:left;
 }
 
+.auth-password-label{
+margin-top:16px;
+}
+
+.auth-consent{
+display:flex;
+align-items:flex-start;
+gap:9px;
+margin-top:14px;
+font-size:11px;
+line-height:1.5;
+text-align:left;
+}
+
+.auth-consent[hidden]{
+display:none;
+}
+
+.auth-consent input{
+flex:0 0 auto;
+width:18px;
+height:18px;
+margin-top:1px;
+accent-color:var(--green-dark);
+}
+
+.auth-consent a{
+font-weight:900;
+text-decoration:underline;
+}
+
+.auth-mode-toggle{
+display:block;
+margin:14px auto 0;
+padding:8px 12px;
+border:0;
+background:transparent;
+color:#111;
+font-size:11px;
+font-weight:800;
+text-decoration:underline;
+}
+
+.auth-status{
+max-width:520px;
+margin:10px auto 0;
+font-size:11px;
+line-height:1.5;
+color:var(--green-dark);
+}
+
+.auth-status:empty{
+display:none;
+}
+
 .form-label{
 display:block;
 font-size:9px;
@@ -1377,11 +1432,44 @@ class="signin-input"
 id="signinEmail"
 type="email"
 autocomplete="email"
-placeholder="you@example.com">
+placeholder="you@example.com"
+required>
+
+<label
+class="form-label auth-password-label"
+for="signinPassword"
+id="signinPasswordLabel">
+</label>
+
+<input
+class="signin-input"
+id="signinPassword"
+type="password"
+autocomplete="current-password"
+minlength="6"
+maxlength="128"
+required>
+
+<label
+class="auth-consent"
+id="privacyConsentWrap"
+hidden>
+<input
+id="privacyConsent"
+type="checkbox">
+<span id="privacyConsentPrefix"></span>
+<a
+href="privacy.html"
+target="_blank"
+rel="noopener"
+id="privacyPolicyLink"></a>
+</label>
 
 <div
 class="signin-error"
-id="signinError">
+id="signinError"
+role="status"
+aria-live="polite">
 </div>
 
 <button
@@ -1390,7 +1478,20 @@ id="signinButton"
 type="submit">
 </button>
 
+<button
+class="auth-mode-toggle"
+id="signinModeToggle"
+type="button">
+</button>
+
 </form>
+
+<div
+class="auth-status"
+id="authStatus"
+role="status"
+aria-live="polite">
+</div>
 
 <a
 href="contact.html"
@@ -3793,16 +3894,11 @@ return null;
 
 function getAccountEmail(){
 
-const membership=getSavedMembership();
-
-if(
-membership &&
-membership.email
-){
-return membership.email;
+if(activeHelpSession&&activeHelpSession.user&&activeHelpSession.user.email){
+return String(activeHelpSession.user.email);
 }
 
-return localStorage.getItem("petsDogueAccountEmail")||"";
+return "";
 
 }
 
@@ -3872,6 +3968,7 @@ text("signinHelp",x.help);
 text("joinClubButton",x.join);
 text("signinLegal",x.legal);
 text("signinError",x.invalid);
+renderAuthLabels();
 
 text("profileKicker",x.profileKicker);
 text("profileTitle",x.profileTitle);
@@ -4015,43 +4112,143 @@ $("menuOverlay").addEventListener(
 closeMenu
 );
 
+const AUTH_COPY={
+en:{password:"Password",register:"Create account",login:"Sign in",switchSignup:"Create an account",switchLogin:"Already have an account? Sign in",consent:"I agree to the",policy:"Privacy Policy",consentRequired:"Please accept the Privacy Policy to create an account.",failed:"We could not complete this request. Please check your details and try again.",confirm:"Account created. Check your email to confirm your address, then sign in.",signedIn:"You are signed in."},
+uk:{password:"Пароль",register:"Створити обліковий запис",login:"Увійти",switchSignup:"Створити обліковий запис",switchLogin:"Вже маєте обліковий запис? Увійти",consent:"Я погоджуюся з",policy:"Політикою конфіденційності",consentRequired:"Щоб створити обліковий запис, прийміть Політику конфіденційності.",failed:"Не вдалося виконати запит. Перевірте дані та спробуйте ще раз.",confirm:"Обліковий запис створено. Перевірте пошту, підтвердьте адресу й увійдіть.",signedIn:"Ви увійшли."},
+ru:{password:"Пароль",register:"Создать аккаунт",login:"Войти",switchSignup:"Создать аккаунт",switchLogin:"Уже есть аккаунт? Войти",consent:"Я принимаю",policy:"Политику конфиденциальности",consentRequired:"Чтобы создать аккаунт, примите Политику конфиденциальности.",failed:"Не удалось выполнить запрос. Проверьте данные и попробуйте ещё раз.",confirm:"Аккаунт создан. Проверьте почту, подтвердите адрес и войдите.",signedIn:"Вы вошли в аккаунт."},
+fr:{password:"Mot de passe",register:"Créer un compte",login:"Se connecter",switchSignup:"Créer un compte",switchLogin:"Vous avez déjà un compte ? Connectez-vous",consent:"J’accepte la",policy:"Politique de confidentialité",consentRequired:"Acceptez la Politique de confidentialité pour créer un compte.",failed:"La demande a échoué. Vérifiez vos informations et réessayez.",confirm:"Compte créé. Vérifiez votre e-mail, confirmez votre adresse, puis connectez-vous.",signedIn:"Vous êtes connecté."},
+de:{password:"Passwort",register:"Konto erstellen",login:"Anmelden",switchSignup:"Konto erstellen",switchLogin:"Sie haben bereits ein Konto? Anmelden",consent:"Ich stimme der",policy:"Datenschutzerklärung",consentRequired:"Stimmen Sie der Datenschutzerklärung zu, um ein Konto zu erstellen.",failed:"Die Anfrage konnte nicht abgeschlossen werden. Prüfen Sie Ihre Angaben und versuchen Sie es erneut.",confirm:"Konto erstellt. Bestätigen Sie Ihre E-Mail-Adresse und melden Sie sich dann an.",signedIn:"Sie sind angemeldet."},
+es:{password:"Contraseña",register:"Crear cuenta",login:"Iniciar sesión",switchSignup:"Crear una cuenta",switchLogin:"¿Ya tienes una cuenta? Inicia sesión",consent:"Acepto la",policy:"Política de privacidad",consentRequired:"Acepta la Política de privacidad para crear una cuenta.",failed:"No se pudo completar la solicitud. Revisa tus datos e inténtalo de nuevo.",confirm:"Cuenta creada. Confirma tu correo electrónico y luego inicia sesión.",signedIn:"Has iniciado sesión."},
+it:{password:"Password",register:"Crea un account",login:"Accedi",switchSignup:"Crea un account",switchLogin:"Hai già un account? Accedi",consent:"Accetto la",policy:"Privacy Policy",consentRequired:"Accetta la Privacy Policy per creare un account.",failed:"Impossibile completare la richiesta. Controlla i dati e riprova.",confirm:"Account creato. Conferma il tuo indirizzo e-mail e poi accedi.",signedIn:"Hai effettuato l’accesso."},
+pt:{password:"Palavra-passe",register:"Criar conta",login:"Iniciar sessão",switchSignup:"Criar uma conta",switchLogin:"Já tem uma conta? Inicie sessão",consent:"Concordo com a",policy:"Política de Privacidade",consentRequired:"Aceite a Política de Privacidade para criar uma conta.",failed:"Não foi possível concluir o pedido. Verifique os dados e tente novamente.",confirm:"Conta criada. Confirme o seu e-mail e depois inicie sessão.",signedIn:"Sessão iniciada."},
+nl:{password:"Wachtwoord",register:"Account aanmaken",login:"Inloggen",switchSignup:"Account aanmaken",switchLogin:"Heb je al een account? Log in",consent:"Ik ga akkoord met het",policy:"Privacybeleid",consentRequired:"Accepteer het Privacybeleid om een account aan te maken.",failed:"We konden dit verzoek niet uitvoeren. Controleer je gegevens en probeer het opnieuw.",confirm:"Account aangemaakt. Bevestig je e-mailadres en log daarna in.",signedIn:"Je bent ingelogd."},
+pl:{password:"Hasło",register:"Utwórz konto",login:"Zaloguj się",switchSignup:"Utwórz konto",switchLogin:"Masz już konto? Zaloguj się",consent:"Akceptuję",policy:"Politykę prywatności",consentRequired:"Zaakceptuj Politykę prywatności, aby utworzyć konto.",failed:"Nie udało się wykonać żądania. Sprawdź dane i spróbuj ponownie.",confirm:"Konto utworzone. Potwierdź adres e-mail, a następnie się zaloguj.",signedIn:"Zalogowano."},
+cs:{password:"Heslo",register:"Vytvořit účet",login:"Přihlásit se",switchSignup:"Vytvořit účet",switchLogin:"Už máte účet? Přihlaste se",consent:"Souhlasím se",policy:"Zásadami ochrany soukromí",consentRequired:"Pro vytvoření účtu přijměte Zásady ochrany soukromí.",failed:"Požadavek se nepodařilo dokončit. Zkontrolujte údaje a zkuste to znovu.",confirm:"Účet byl vytvořen. Potvrďte e-mailovou adresu a poté se přihlaste.",signedIn:"Jste přihlášeni."},
+sk:{password:"Heslo",register:"Vytvoriť účet",login:"Prihlásiť sa",switchSignup:"Vytvoriť účet",switchLogin:"Už máte účet? Prihláste sa",consent:"Súhlasím so",policy:"Zásadami ochrany súkromia",consentRequired:"Ak chcete vytvoriť účet, prijmite Zásady ochrany súkromia.",failed:"Požiadavku sa nepodarilo dokončiť. Skontrolujte údaje a skúste to znova.",confirm:"Účet bol vytvorený. Potvrďte e-mailovú adresu a potom sa prihláste.",signedIn:"Ste prihlásení."},
+hu:{password:"Jelszó",register:"Fiók létrehozása",login:"Bejelentkezés",switchSignup:"Fiók létrehozása",switchLogin:"Már van fiókod? Jelentkezz be",consent:"Elfogadom az",policy:"Adatvédelmi szabályzatot",consentRequired:"A fiók létrehozásához fogadd el az Adatvédelmi szabályzatot.",failed:"A kérést nem sikerült végrehajtani. Ellenőrizd az adatokat, majd próbáld újra.",confirm:"A fiók létrejött. Erősítsd meg az e-mail-címedet, majd jelentkezz be.",signedIn:"Bejelentkeztél."},
+ro:{password:"Parolă",register:"Creează un cont",login:"Autentificare",switchSignup:"Creează un cont",switchLogin:"Ai deja un cont? Autentifică-te",consent:"Sunt de acord cu",policy:"Politica de confidențialitate",consentRequired:"Acceptă Politica de confidențialitate pentru a crea un cont.",failed:"Solicitarea nu a putut fi finalizată. Verifică datele și încearcă din nou.",confirm:"Cont creat. Confirmă adresa de e-mail, apoi autentifică-te.",signedIn:"Ești autentificat."},
+bg:{password:"Парола",register:"Създаване на профил",login:"Вход",switchSignup:"Създаване на профил",switchLogin:"Вече имате профил? Влезте",consent:"Приемам",policy:"Политиката за поверителност",consentRequired:"Приемете Политиката за поверителност, за да създадете профил.",failed:"Заявката не бе изпълнена. Проверете данните и опитайте отново.",confirm:"Профилът е създаден. Потвърдете имейл адреса си и след това влезте.",signedIn:"Влязохте в профила си."},
+el:{password:"Κωδικός πρόσβασης",register:"Δημιουργία λογαριασμού",login:"Σύνδεση",switchSignup:"Δημιουργία λογαριασμού",switchLogin:"Έχετε ήδη λογαριασμό; Συνδεθείτε",consent:"Συμφωνώ με την",policy:"Πολιτική απορρήτου",consentRequired:"Αποδεχτείτε την Πολιτική απορρήτου για να δημιουργήσετε λογαριασμό.",failed:"Δεν ήταν δυνατή η ολοκλήρωση του αιτήματος. Ελέγξτε τα στοιχεία σας και δοκιμάστε ξανά.",confirm:"Ο λογαριασμός δημιουργήθηκε. Επιβεβαιώστε το email σας και έπειτα συνδεθείτε.",signedIn:"Έχετε συνδεθεί."},
+sv:{password:"Lösenord",register:"Skapa konto",login:"Logga in",switchSignup:"Skapa ett konto",switchLogin:"Har du redan ett konto? Logga in",consent:"Jag godkänner",policy:"integritetspolicyn",consentRequired:"Godkänn integritetspolicyn för att skapa ett konto.",failed:"Begäran kunde inte slutföras. Kontrollera uppgifterna och försök igen.",confirm:"Kontot har skapats. Bekräfta din e-postadress och logga sedan in.",signedIn:"Du är inloggad."},
+da:{password:"Adgangskode",register:"Opret konto",login:"Log ind",switchSignup:"Opret en konto",switchLogin:"Har du allerede en konto? Log ind",consent:"Jeg accepterer",policy:"privatlivspolitikken",consentRequired:"Accepter privatlivspolitikken for at oprette en konto.",failed:"Anmodningen kunne ikke gennemføres. Kontrollér oplysningerne, og prøv igen.",confirm:"Konto oprettet. Bekræft din e-mailadresse, og log derefter ind.",signedIn:"Du er logget ind."},
+no:{password:"Passord",register:"Opprett konto",login:"Logg inn",switchSignup:"Opprett en konto",switchLogin:"Har du allerede en konto? Logg inn",consent:"Jeg godtar",policy:"personvernerklæringen",consentRequired:"Godta personvernerklæringen for å opprette en konto.",failed:"Forespørselen kunne ikke fullføres. Kontroller opplysningene og prøv igjen.",confirm:"Konto opprettet. Bekreft e-postadressen din og logg deretter inn.",signedIn:"Du er logget inn."},
+fi:{password:"Salasana",register:"Luo tili",login:"Kirjaudu sisään",switchSignup:"Luo tili",switchLogin:"Onko sinulla jo tili? Kirjaudu sisään",consent:"Hyväksyn",policy:"tietosuojakäytännön",consentRequired:"Hyväksy tietosuojakäytäntö tilin luomiseksi.",failed:"Pyyntöä ei voitu suorittaa. Tarkista tiedot ja yritä uudelleen.",confirm:"Tili luotu. Vahvista sähköpostiosoitteesi ja kirjaudu sitten sisään.",signedIn:"Olet kirjautunut sisään."},
+tr:{password:"Şifre",register:"Hesap oluştur",login:"Giriş yap",switchSignup:"Hesap oluştur",switchLogin:"Zaten hesabınız var mı? Giriş yapın",consent:"",policy:"Gizlilik Politikası'nı kabul ediyorum.",consentRequired:"Hesap oluşturmak için Gizlilik Politikası'nı kabul edin.",failed:"İstek tamamlanamadı. Bilgilerinizi kontrol edip tekrar deneyin.",confirm:"Hesap oluşturuldu. E-posta adresinizi doğrulayıp giriş yapın.",signedIn:"Giriş yaptınız."},
+ar:{password:"كلمة المرور",register:"إنشاء حساب",login:"تسجيل الدخول",switchSignup:"إنشاء حساب",switchLogin:"لديك حساب بالفعل؟ سجّل الدخول",consent:"أوافق على",policy:"سياسة الخصوصية",consentRequired:"وافق على سياسة الخصوصية لإنشاء حساب.",failed:"تعذر إكمال الطلب. تحقق من بياناتك وحاول مرة أخرى.",confirm:"تم إنشاء الحساب. أكّد بريدك الإلكتروني ثم سجّل الدخول.",signedIn:"تم تسجيل الدخول."},
+hi:{password:"पासवर्ड",register:"खाता बनाएँ",login:"साइन इन करें",switchSignup:"खाता बनाएँ",switchLogin:"पहले से खाता है? साइन इन करें",consent:"मैं सहमत हूँ",policy:"गोपनीयता नीति से",consentRequired:"खाता बनाने के लिए गोपनीयता नीति स्वीकार करें.",failed:"अनुरोध पूरा नहीं हो सका। जानकारी जाँचकर फिर कोशिश करें।",confirm:"खाता बन गया। ईमेल की पुष्टि करें, फिर साइन इन करें।",signedIn:"आप साइन इन हैं।"}
+};
+
+let authMode="login";
+let activeHelpSession=null;
+
+function authWords(){
+return AUTH_COPY[currentLanguage]||AUTH_COPY.en;
+}
+
+function renderAuthLabels(){
+const x=authWords();
+const signingUp=authMode==="signup";
+$("signinPasswordLabel").textContent=x.password;
+$("signinPassword").autocomplete=signingUp?"new-password":"current-password";
+$("signinButton").textContent=signingUp?x.register:x.login;
+$("signinModeToggle").textContent=signingUp?x.switchLogin:x.switchSignup;
+$("privacyConsentPrefix").textContent=x.consent?x.consent+" ":"";
+$("privacyPolicyLink").textContent=x.policy;
+$("privacyConsentWrap").hidden=!signingUp;
+}
+
+function setAuthStatus(message,isError=false){
+const node=$("authStatus");
+node.textContent=message||"";
+node.style.color=isError?"var(--red)":"var(--green-dark)";
+}
+
+async function submitHelpAuth(event){
+event.preventDefault();
+const email=$("signinEmail").value.trim().toLowerCase();
+const password=$("signinPassword").value;
+const copy=authWords();
+if(!validEmail(email)){
+$("signinEmail").classList.add("error");
+$("signinEmail").focus();
+setAuthStatus(copy.failed,true);
+return;
+}
+$("signinEmail").classList.remove("error");
+if(password.length<6||password.length>128){
+$("signinPassword").classList.add("error");
+$("signinPassword").focus();
+setAuthStatus(copy.failed,true);
+return;
+}
+$("signinPassword").classList.remove("error");
+if(authMode==="signup"&&!$("privacyConsent").checked){
+setAuthStatus(copy.consentRequired,true);
+$("privacyConsent").focus();
+return;
+}
+const button=$("signinButton");
+button.disabled=true;
+setAuthStatus("");
+try{
+const response=await fetch("/api/help-auth",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+action:authMode,
+email,
+password,
+privacy_policy_accepted:authMode==="signup"?$("privacyConsent").checked:undefined
+})
+});
+let data={};
+try{data=await response.json();}catch{}
+if(!response.ok||!data.ok)throw new Error(copy.failed);
+if(authMode==="signup"&&data.needsEmailConfirmation){
+setAuthStatus(copy.confirm);
+return;
+}
+if(!data.session||!data.session.access_token)throw new Error(copy.failed);
+activeHelpSession={...data.session,user:data.user||{email}};
+sessionStorage.setItem("pde_help_auth_session",JSON.stringify(activeHelpSession));
+localStorage.setItem("petsDogueAccountEmail",email);
+setAuthStatus(copy.signedIn);
+renderAccount();
+}catch(error){
+setAuthStatus(error.message||copy.failed,true);
+}finally{
+button.disabled=false;
+}
+}
+
+$("signinModeToggle").addEventListener("click",()=>{
+authMode=authMode==="login"?"signup":"login";
+$("signinError").classList.remove("show");
+setAuthStatus("");
+renderAuthLabels();
+});
+
+$("signinForm").addEventListener("submit",submitHelpAuth);
+$("signinEmail").addEventListener("input",()=>{
+$("signinEmail").classList.remove("error");
+setAuthStatus("");
+});
+$("signinPassword").addEventListener("input",()=>{
+$("signinPassword").classList.remove("error");
+setAuthStatus("");
+});
+
+try{
+activeHelpSession=JSON.parse(sessionStorage.getItem("pde_help_auth_session")||"null");
+if(!activeHelpSession||!activeHelpSession.access_token)activeHelpSession=null;
+}catch{activeHelpSession=null;}
+
+
 /* =========================================================
    SIGN IN
 ========================================================= */
 
-$("signinForm").addEventListener(
-"submit",
-event=>{
-
-event.preventDefault();
-
-const email=
-$("signinEmail")
-.value
-.trim();
-
-if(!validEmail(email)){
-
-$("signinEmail").classList.add("error");
-$("signinError").classList.add("show");
-$("signinEmail").focus();
-
-return;
-
-}
-
-$("signinEmail").classList.remove("error");
-$("signinError").classList.remove("show");
-
-localStorage.setItem(
-"petsDogueAccountEmail",
-email
-);
-
-renderAccount();
-
-}
-);
+/* Submission is handled by the authenticated Supabase flow above. */
 
 $("signinEmail").addEventListener(
 "input",
@@ -4368,8 +4565,13 @@ localStorage.removeItem(
 "petsDogueAccountEmail"
 );
 
+sessionStorage.removeItem("pde_help_auth_session");
+activeHelpSession=null;
 $("signinEmail").value="";
-
+$("signinPassword").value="";
+setAuthStatus("");
+authMode="login";
+renderAuthLabels();
 renderAccount();
 
 }
@@ -4517,6 +4719,7 @@ $("signinEmail").value=savedEmail;
 
 renderLanguage(initialLanguage);
 
+renderAuthLabels();
 processBillingReturn();
 
 </script>
