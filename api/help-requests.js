@@ -32,7 +32,8 @@ const CATEGORIES = new Set([
   "temporary_home",
   "adoption",
   "volunteers",
-  "other"
+  "other",
+  "pet_walking_sitting"
 ]);
 
 const ANIMAL_TYPES = new Set([
@@ -46,6 +47,12 @@ const ANIMAL_TYPES = new Set([
 ]);
 
 const REQUEST_KIND = "request";
+const SERVICE_OFFER_KIND = "service_offer";
+const SERVICE_CATEGORY = "pet_walking_sitting";
+const HELP_KINDS = new Set([
+  REQUEST_KIND,
+  SERVICE_OFFER_KIND
+]);
 
 const MAX_RADIUS_KM = 100;
 const MAX_RESULTS = 60;
@@ -167,17 +174,31 @@ function readFilters(req) {
     };
   }
 
-  const category = String(query.category || "").trim();
+  let category = String(query.category || "").trim();
   const animalType = String(query.animal_type || "").trim();
 
-  if (kind !== REQUEST_KIND) {
+  if (!HELP_KINDS.has(kind)) {
     return {
-      error: "Only help requests are available."
+      error: "Invalid help listing type."
     };
   }
 
   if (category && !CATEGORIES.has(category)) {
     return { error: "Invalid help category." };
+  }
+
+  if (
+    kind === SERVICE_OFFER_KIND &&
+    category &&
+    category !== SERVICE_CATEGORY
+  ) {
+    return {
+      error: "Pet walking and sitting offers must use their own category."
+    };
+  }
+
+  if (kind === SERVICE_OFFER_KIND) {
+    category = SERVICE_CATEGORY;
   }
 
   if (animalType && !ANIMAL_TYPES.has(animalType)) {
@@ -197,7 +218,7 @@ function readFilters(req) {
     ),
     category,
     animalType,
-    kind: REQUEST_KIND
+    kind
   };
 }
 
@@ -253,7 +274,7 @@ async function listHelpRequests(req, res) {
   );
 
   endpoint.searchParams.set("status", "eq.approved");
-  endpoint.searchParams.set("kind", `eq.${REQUEST_KIND}`);
+  endpoint.searchParams.set("kind", `eq.${filters.kind}`);
   endpoint.searchParams.set("order", "created_at.desc");
   endpoint.searchParams.set(
     "limit",
@@ -296,7 +317,7 @@ async function listHelpRequests(req, res) {
   const items = (Array.isArray(rows) ? rows : [])
     .filter((row) => {
       if (
-        row.kind !== REQUEST_KIND ||
+        row.kind !== filters.kind ||
         row.category === "free_items"
       ) {
         return false;
@@ -325,7 +346,7 @@ async function listHelpRequests(req, res) {
       */
       return {
         id: row.id,
-        kind: REQUEST_KIND,
+        kind: filters.kind,
         category: row.category,
         animal_type: row.animal_type,
         title: row.title,
@@ -345,7 +366,7 @@ async function listHelpRequests(req, res) {
       radius_km: filters.radius,
       category: filters.category || "all",
       animal_type: filters.animalType || "all",
-      kind: REQUEST_KIND
+      kind: filters.kind
     },
     count: items.length,
     items
@@ -398,10 +419,10 @@ async function createHelpRequest(req, res) {
     body.kind || REQUEST_KIND
   ).trim();
 
-  if (submittedKind !== REQUEST_KIND) {
+  if (!HELP_KINDS.has(submittedKind)) {
     return sendJson(res, 400, {
       ok: false,
-      error: "Only help requests can be submitted."
+      error: "Choose a valid help listing type."
     });
   }
 
@@ -418,6 +439,16 @@ async function createHelpRequest(req, res) {
     return sendJson(res, 400, {
       ok: false,
       error: "Choose a help category."
+    });
+  }
+
+  if (
+    submittedKind === SERVICE_OFFER_KIND &&
+    category !== SERVICE_CATEGORY
+  ) {
+    return sendJson(res, 400, {
+      ok: false,
+      error: "Pet walking and sitting offers must use their own category."
     });
   }
 
@@ -467,7 +498,7 @@ async function createHelpRequest(req, res) {
   }
 
   const requestData = {
-    kind: REQUEST_KIND,
+    kind: submittedKind,
     category,
     animal_type: animalType,
     title,
@@ -524,10 +555,14 @@ async function createHelpRequest(req, res) {
 
   return sendJson(res, 201, {
     ok: true,
-    message: "Your request was sent for moderation.",
+    message: submittedKind === SERVICE_OFFER_KIND
+      ? "Your service offer was sent for moderation."
+      : "Your request was sent for moderation.",
     request: saved
       ? {
           id: saved.id,
+          kind: submittedKind,
+          category,
           status: saved.status,
           created_at: saved.created_at
         }
