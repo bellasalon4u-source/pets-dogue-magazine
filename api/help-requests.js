@@ -34,6 +34,7 @@ const CATEGORIES = new Set([
   "temporary_home",
   "adoption",
   "volunteers",
+  "transport",
   "other",
   "pet_walking_sitting"
 ]);
@@ -44,6 +45,7 @@ const POST_CATEGORIES = new Set([
   "temporary_home",
   "adoption",
   "volunteers",
+  "transport",
   "other",
   "pet_walking_sitting"
 ]);
