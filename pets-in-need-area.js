@@ -256,6 +256,36 @@
   };
 
   var copy = TEXT[language] || TEXT.en;
+  var LISTING_TEXT = {
+    en:["Help requests","Walking & pet sitting","Approved walking and pet-sitting offers in the selected area","Finding walking and pet-sitting offers…","There are no approved walking or pet-sitting offers in this area yet.","Walking and pet-sitting offers are temporarily unavailable. Please try again.","PETS & DOGUE · WALKING & PET SITTING"],
+    uk:["Запити про допомогу","Вигул і догляд","Схвалені оголошення про вигул і догляд у вибраному районі","Шукаємо оголошення про вигул і догляд…","У цьому районі поки немає схвалених оголошень про вигул і догляд.","Оголошення про вигул і догляд тимчасово недоступні. Спробуйте ще раз.","PETS & DOGUE · ВИГУЛ І ДОГЛЯД"],
+    ru:["Запросы о помощи","Выгул и присмотр","Одобренные объявления о выгуле и присмотре в выбранном районе","Ищем объявления о выгуле и присмотре…","В этом районе пока нет одобренных объявлений о выгуле и присмотре.","Объявления о выгуле и присмотре временно недоступны. Попробуйте ещё раз.","PETS & DOGUE · ВЫГУЛ И ПРИСМОТР"],
+    fr:["Demandes d’aide","Promenade et garde","Offres approuvées de promenade et de garde dans la zone sélectionnée","Recherche d’offres de promenade et de garde…","Aucune offre approuvée de promenade ou de garde dans cette zone pour le moment.","Les offres de promenade et de garde sont temporairement indisponibles. Réessayez.","PETS & DOGUE · PROMENADE ET GARDE"],
+    de:["Hilfegesuche","Gassi gehen und Betreuung","Genehmigte Angebote für Gassi gehen und Betreuung im ausgewählten Gebiet","Suche Angebote für Gassi gehen und Betreuung…","In diesem Gebiet gibt es noch keine genehmigten Angebote für Gassi gehen oder Betreuung.","Angebote für Gassi gehen und Betreuung sind vorübergehend nicht verfügbar. Bitte erneut versuchen.","PETS & DOGUE · GASSI UND BETREUUNG"],
+    es:["Solicitudes de ayuda","Paseos y cuidado","Ofertas aprobadas de paseo y cuidado en la zona seleccionada","Buscando ofertas de paseo y cuidado…","Todavía no hay ofertas aprobadas de paseo o cuidado en esta zona.","Las ofertas de paseo y cuidado no están disponibles temporalmente. Inténtalo de nuevo.","PETS & DOGUE · PASEOS Y CUIDADO"],
+    it:["Richieste di aiuto","Passeggiate e cura","Offerte approvate per passeggiate e cura nella zona selezionata","Cerco offerte di passeggiate e cura…","Al momento non ci sono offerte approvate per passeggiate o cura in questa zona.","Le offerte di passeggiate e cura non sono temporaneamente disponibili. Riprova.","PETS & DOGUE · PASSEGGIATE E CURA"],
+    pt:["Pedidos de ajuda","Passeios e cuidados","Ofertas aprovadas de passeios e cuidados na área selecionada","A procurar ofertas de passeios e cuidados…","Ainda não existem ofertas aprovadas de passeios ou cuidados nesta área.","As ofertas de passeios e cuidados estão temporariamente indisponíveis. Tente novamente.","PETS & DOGUE · PASSEIOS E CUIDADOS"],
+    nl:["Hulpvragen","Uitlaten en oppassen","Goedgekeurde aanbiedingen voor uitlaten en oppassen in het geselecteerde gebied","Aanbiedingen voor uitlaten en oppassen zoeken…","Er zijn nog geen goedgekeurde aanbiedingen voor uitlaten of oppassen in dit gebied.","Aanbiedingen voor uitlaten en oppassen zijn tijdelijk niet beschikbaar. Probeer opnieuw.","PETS & DOGUE · UITLATEN EN OPPASSEN"],
+    pl:["Prośby o pomoc","Spacery i opieka","Zatwierdzone oferty spacerów i opieki w wybranym obszarze","Szukamy ofert spacerów i opieki…","W tej okolicy nie ma jeszcze zatwierdzonych ofert spacerów ani opieki.","Oferty spacerów i opieki są chwilowo niedostępne. Spróbuj ponownie.","PETS & DOGUE · SPACERY I OPIEKA"],
+    cs:["Žádosti o pomoc","Venčení a hlídání","Schválené nabídky venčení a hlídání ve vybrané oblasti","Hledáme nabídky venčení a hlídání…","V této oblasti zatím nejsou žádné schválené nabídky venčení ani hlídání.","Nabídky venčení a hlídání jsou dočasně nedostupné. Zkuste to znovu.","PETS & DOGUE · VENČENÍ A HLÍDÁNÍ"],
+    sk:["Žiadosti o pomoc","Venčenie a stráženie","Schválené ponuky venčenia a stráženia vo vybranej oblasti","Hľadáme ponuky venčenia a stráženia…","V tejto oblasti zatiaľ nie sú žiadne schválené ponuky venčenia ani stráženia.","Ponuky venčenia a stráženia sú dočasne nedostupné. Skúste to znova.","PETS & DOGUE · VENČENIE A STRÁŽENIE"],
+    hu:["Segítségkérések","Sétáltatás és felügyelet","Jóváhagyott sétáltatási és felügyeleti ajánlatok a kiválasztott környéken","Sétáltatási és felügyeleti ajánlatokat keresünk…","Ezen a környéken még nincs jóváhagyott sétáltatási vagy felügyeleti ajánlat.","A sétáltatási és felügyeleti ajánlatok átmenetileg nem érhetők el. Próbáld újra.","PETS & DOGUE · SÉTÁLTATÁS ÉS FELÜGYELET"],
+    ro:["Cereri de ajutor","Plimbare și îngrijire","Oferte aprobate de plimbare și îngrijire în zona selectată","Căutăm oferte de plimbare și îngrijire…","Nu există încă oferte aprobate de plimbare sau îngrijire în această zonă.","Ofertele de plimbare și îngrijire nu sunt disponibile momentan. Încearcă din nou.","PETS & DOGUE · PLIMBARE ȘI ÎNGRIJIRE"],
+    bg:["Заявки за помощ","Разходка и гледане","Одобрени обяви за разходка и гледане в избрания район","Търсим обяви за разходка и гледане…","В този район все още няма одобрени обяви за разходка или гледане.","Обявите за разходка и гледане временно не са достъпни. Опитайте отново.","PETS & DOGUE · РАЗХОДКА И ГЛЕДАНЕ"],
+    el:["Αιτήματα βοήθειας","Βόλτα και φύλαξη","Εγκεκριμένες προσφορές βόλτας και φύλαξης στην επιλεγμένη περιοχή","Αναζήτηση προσφορών βόλτας και φύλαξης…","Δεν υπάρχουν ακόμη εγκεκριμένες προσφορές βόλτας ή φύλαξης σε αυτήν την περιοχή.","Οι προσφορές βόλτας και φύλαξης δεν είναι προσωρινά διαθέσιμες. Δοκιμάστε ξανά.","PETS & DOGUE · ΒΟΛΤΑ ΚΑΙ ΦΥΛΑΞΗ"],
+    sv:["Hjälpförfrågningar","Promenad och passning","Godkända erbjudanden om promenad och passning i det valda området","Söker efter erbjudanden om promenad och passning…","Inga godkända erbjudanden om promenad eller passning har hittats i området ännu.","Erbjudanden om promenad och passning är tillfälligt otillgängliga. Försök igen.","PETS & DOGUE · PROMENAD OCH PASSNING"],
+    da:["Hjælpeforespørgsler","Gåture og pasning","Godkendte tilbud om gåture og pasning i det valgte område","Søger efter tilbud om gåture og pasning…","Der er endnu ingen godkendte tilbud om gåture eller pasning i området.","Tilbud om gåture og pasning er midlertidigt utilgængelige. Prøv igen.","PETS & DOGUE · GÅTURE OG PASNING"],
+    no:["Hjelpeforespørsler","Lufting og pass","Godkjente tilbud om lufting og pass i det valgte området","Søker etter tilbud om lufting og pass…","Det finnes ingen godkjente tilbud om lufting eller pass i området ennå.","Tilbud om lufting og pass er midlertidig utilgjengelige. Prøv igjen.","PETS & DOGUE · LUFTING OG PASS"],
+    fi:["Avunpyynnöt","Ulkoilutus ja hoito","Hyväksytyt ulkoilutus- ja hoitotarjoukset valitulla alueella","Etsitään ulkoilutus- ja hoitotarjouksia…","Alueelta ei vielä löydy hyväksyttyjä ulkoilutus- tai hoitotarjouksia.","Ulkoilutus- ja hoitotarjoukset eivät ole nyt saatavilla. Yritä uudelleen.","PETS & DOGUE · ULKOILUTUS JA HOITO"],
+    tr:["Yardım talepleri","Gezdirme ve bakım","Seçilen bölgedeki onaylanmış gezdirme ve bakım ilanları","Gezdirme ve bakım ilanları aranıyor…","Bu bölgede henüz onaylanmış gezdirme veya bakım ilanı yok.","Gezdirme ve bakım ilanları şu anda kullanılamıyor. Lütfen tekrar deneyin.","PETS & DOGUE · GEZDİRME VE BAKIM"],
+    ar:["طلبات المساعدة","التنزه والرعاية","عروض معتمدة للتنزه ورعاية الحيوانات في المنطقة المحددة","جارٍ البحث عن عروض التنزه والرعاية…","لا توجد عروض معتمدة للتنزه أو الرعاية في هذه المنطقة حتى الآن.","عروض التنزه والرعاية غير متاحة مؤقتًا. حاول مرة أخرى.","PETS & DOGUE · التنزه والرعاية"],
+    hi:["मदद के अनुरोध","घुमाना और देखभाल","चुने गए क्षेत्र में घुमाने और देखभाल के स्वीकृत विज्ञापन","घुमाने और देखभाल के विज्ञापन खोजे जा रहे हैं…","इस क्षेत्र में अभी घुमाने या देखभाल का कोई स्वीकृत विज्ञापन नहीं है।","घुमाने और देखभाल के विज्ञापन अभी उपलब्ध नहीं हैं। कृपया फिर कोशिश करें।","PETS & DOGUE · घुमाना और देखभाल"]
+  };
+
+  var listingLanguage = LISTING_TEXT[language] || LISTING_TEXT.en;
+  var activeKind = params.get("kind") === "service_offer"
+    ? "service_offer"
+    : "request";
   var contextKey = "pets_dogue_help_area_context";
 
   function escapeHTML(value){
@@ -308,7 +338,11 @@
   }
 
   function cardHTML(item){
-    var title = escapeHTML(item.title || copy.source);
+    var isServiceOffer = item.kind === "service_offer";
+    var sourceLabel = isServiceOffer
+      ? listingLanguage[6]
+      : copy.source;
+    var title = escapeHTML(item.title || sourceLabel);
     var description = escapeHTML(item.description || "");
     var location = escapeHTML(item.location_label || "");
     var distance = Number(item.distance_km);
@@ -330,7 +364,7 @@
         image +
         '<div class="pda-copy">' +
           '<span class="pda-source">' +
-            escapeHTML(copy.source) +
+            escapeHTML(sourceLabel) +
           '</span>' +
           '<h3>' + title + '</h3>' +
           '<p>' + description + '</p>' +
@@ -369,6 +403,11 @@
         '</button>' +
       '</header>' +
       '<p class="pda-area" id="pdaArea"></p>' +
+      '<div class="pda-tabs" role="tablist" aria-label="' +
+        escapeHTML(copy.title) + '">' +
+        '<button class="pda-tab" type="button" role="tab" data-kind="request"></button>' +
+        '<button class="pda-tab" type="button" role="tab" data-kind="service_offer"></button>' +
+      '</div>' +
       '<div class="pda-results" id="pdaResults"></div>';
 
     var styles = document.createElement("style");
@@ -380,6 +419,9 @@
       '.pda-heading h2{margin:0;color:#111;font:400 clamp(25px,4vw,36px)/1 Georgia,serif}' +
       '.pda-subtitle{margin:6px 0 0;color:#625d54;font:14px/1.4 Arial,sans-serif}' +
       '.pda-area{margin:13px 0;color:#265b20;font:700 14px/1.4 Arial,sans-serif}' +
+      '.pda-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}' +
+      '.pda-tab{min-height:38px;padding:0 14px;border:1px solid #c9bea8;border-radius:999px;background:#fff;color:#171717;font:800 12px/1.2 Arial,sans-serif;cursor:pointer}' +
+      '.pda-tab[aria-selected="true"]{border-color:#c99729;background:#111;color:#fff;box-shadow:0 2px 0 #c99729}' +
       '.pda-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}' +
       '.pda-card{min-width:0;display:grid;grid-template-columns:70px minmax(0,1fr);gap:10px;padding:9px;border:1px solid #d9d1c1;background:#fff}' +
       '.pda-image,.pda-heart{width:70px;height:70px;object-fit:cover;border-radius:5px}' +
@@ -399,6 +441,11 @@
     var area = panel.querySelector("#pdaArea");
     var results = panel.querySelector("#pdaResults");
     var backButton = panel.querySelector(".pda-back");
+    var subtitle = panel.querySelector(".pda-subtitle");
+    var kicker = panel.querySelector(".pda-kicker");
+    var tabs = Array.prototype.slice.call(
+      panel.querySelectorAll(".pda-tab")
+    );
     var context = loadContext();
 
     backButton.addEventListener("click",function(){
@@ -420,72 +467,110 @@
       }
     });
 
-    if(!context){
+    function loadListings(kind,shouldScroll){
+      activeKind = kind === "service_offer"
+        ? "service_offer"
+        : "request";
+
+      var isServices = activeKind === "service_offer";
+      tabs.forEach(function(tab){
+        var selected = tab.getAttribute("data-kind") === activeKind;
+        tab.setAttribute("aria-selected",selected ? "true" : "false");
+        tab.setAttribute("tabindex",selected ? "0" : "-1");
+      });
+
+      kicker.textContent = isServices
+        ? listingLanguage[6]
+        : copy.source;
+      subtitle.textContent = isServices
+        ? listingLanguage[2]
+        : copy.subtitle;
+
+      if(!context){
+        results.innerHTML =
+          '<div class="pda-state">' +
+          escapeHTML(copy.error) +
+          '</div>';
+        return;
+      }
+
       results.innerHTML =
         '<div class="pda-state">' +
-        escapeHTML(copy.error) +
+        escapeHTML(isServices ? listingLanguage[3] : copy.loading) +
         '</div>';
-      return;
+
+      var query = new URLSearchParams({
+        lat:String(context.lat),
+        lng:String(context.lng),
+        radius:String(context.radius),
+        lang:language,
+        kind:activeKind,
+        limit:"60"
+      });
+
+      fetch("/api/help-requests?" + query.toString(),{
+        method:"GET",
+        headers:{Accept:"application/json"}
+      })
+      .then(function(response){
+        if(!response.ok) throw new Error("Request failed");
+        return response.json();
+      })
+      .then(function(data){
+        if(!data || data.ok !== true || !Array.isArray(data.items)){
+          throw new Error("Invalid response");
+        }
+
+        results.innerHTML = data.items.length
+          ? data.items.map(cardHTML).join("")
+          : '<div class="pda-state">' +
+            escapeHTML(isServices ? listingLanguage[4] : copy.empty) +
+            '</div>';
+
+        if(shouldScroll){
+          panel.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+        }
+      })
+      .catch(function(error){
+        console.warn("Nearby help listings failed:",error);
+
+        results.innerHTML =
+          '<div class="pda-state">' +
+          escapeHTML(isServices ? listingLanguage[5] : copy.error) +
+          '</div>';
+
+        if(shouldScroll){
+          panel.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+        }
+      });
     }
 
     var label =
-      context.label ||
-      (context.lat.toFixed(4) + ", " + context.lng.toFixed(4));
+      context
+        ? (context.label || (context.lat.toFixed(4) + ", " + context.lng.toFixed(4)))
+        : "";
 
-    area.textContent =
-      "♥  " + label + " · " +
-      context.radius + " " + copy.km;
+    area.textContent = context
+      ? "♥  " + label + " · " + context.radius + " " + copy.km
+      : "";
 
-    results.innerHTML =
-      '<div class="pda-state">' +
-      escapeHTML(copy.loading) +
-      '</div>';
-
-    var query = new URLSearchParams({
-      lat:String(context.lat),
-      lng:String(context.lng),
-      radius:String(context.radius),
-      lang:language,
-      limit:"60"
-    });
-
-    fetch("/api/help-requests?" + query.toString(),{
-      method:"GET",
-      headers:{Accept:"application/json"}
-    })
-    .then(function(response){
-      if(!response.ok) throw new Error("Request failed");
-      return response.json();
-    })
-    .then(function(data){
-      if(!data || data.ok !== true || !Array.isArray(data.items)){
-        throw new Error("Invalid response");
-      }
-
-      results.innerHTML = data.items.length
-        ? data.items.map(cardHTML).join("")
-        : '<div class="pda-state">' +
-          escapeHTML(copy.empty) +
-          '</div>';
-
-      panel.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-    })
-    .catch(function(error){
-      console.warn("Nearby help requests failed:",error);
-
-      results.innerHTML =
-        '<div class="pda-state">' +
-        escapeHTML(copy.error) +
-        '</div>';
-
-      panel.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
+    tabs.forEach(function(tab){
+      tab.textContent = listingLanguage[
+        tab.getAttribute("data-kind") === "service_offer" ? 1 : 0
+      ];
+      tab.addEventListener("click",function(){
+        loadListings(tab.getAttribute("data-kind"),false);
       });
     });
+
+    loadListings(activeKind,true);
+
   }
 
   if(document.readyState === "loading"){
