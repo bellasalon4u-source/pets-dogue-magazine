@@ -5342,6 +5342,48 @@ document.title,
 window.location.pathname
 );
 
+try{
+
+const requestedAt =
+Number(
+localStorage.getItem(
+"pdh_help_return_after_club"
+)
+);
+
+localStorage.removeItem(
+"pdh_help_return_after_club"
+);
+
+if(
+Number.isFinite(requestedAt) &&
+requestedAt <= Date.now() &&
+Date.now() - requestedAt < 48 * 60 * 60 * 1000
+){
+
+const helpReturnURL =
+new URL(
+"/pets-in-need.html?resumeHelp=1",
+window.location.origin
+);
+
+window.location.replace(
+helpReturnURL.toString()
+);
+
+return;
+
+}
+
+}catch(error){
+
+console.warn(
+"Unable to return to the saved Help form.",
+error
+);
+
+}
+
 }catch(error){
 
 txt(
