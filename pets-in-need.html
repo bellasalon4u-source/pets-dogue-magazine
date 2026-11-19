@@ -4490,7 +4490,7 @@ body.pde-help-redesign .pdh-location-row{display:grid;grid-template-columns:minm
 body.pde-help-redesign .pdh-location{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 13px;border:1px solid #cfc6b8;border-radius:12px;background:#fff}
 body.pde-help-redesign .pdh-location span{font-size:20px;color:#65543a}
 body.pde-help-redesign .pdh-location input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#17130f;font:16px/1.2 Arial,sans-serif}
-body.pde-help-redesign .pdh-locate{border:0;border-radius:12px;background:#168ee0;color:#fff;font-size:22px;cursor:pointer}
+body.pde-help-redesign .pdh-location-row{position:relative;z-index:8}body.pde-help-redesign .pdh-suggestions{position:absolute;top:calc(100% + 6px);left:0;right:61px;z-index:30;max-height:260px;overflow:auto;border:1px solid #cfc6b8;border-radius:12px;background:#fff;box-shadow:0 10px 24px #1b150d25}body.pde-help-redesign .pdh-suggestions[hidden]{display:none}body.pde-help-redesign .pdh-suggestion{display:block;width:100%;padding:12px 14px;border:0;border-bottom:1px solid #eee;background:#fff;color:#17130f;text-align:left;font:14px/1.35 Arial,sans-serif}body.pde-help-redesign .pdh-suggestion:last-child{border-bottom:0}body.pde-help-redesign .pdh-suggestion:hover,body.pde-help-redesign .pdh-suggestion:focus{background:#f4efe4;outline:0}body.pde-help-redesign .pdh-locate{border:0;border-radius:12px;background:#168ee0;color:#fff;font-size:22px;cursor:pointer}
 body.pde-help-redesign .pdh-radius{display:grid;grid-template-columns:auto minmax(70px,1fr) auto;gap:12px;align-items:center;color:#37322b;font:14px/1.2 Arial,sans-serif}
 body.pde-help-redesign .pdh-radius input{width:100%;accent-color:#168541}
 body.pde-help-redesign .pdh-filters{display:flex;flex-wrap:wrap;gap:8px}
@@ -4580,14 +4580,58 @@ function h(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return(
 var state={category:"all",animal:"all",kind:"request",radius:15,lat:null,lng:null,label:""};
 try{var saved=JSON.parse(sessionStorage.getItem("pets_dogue_help_area_context")||"null");if(saved&&Number.isFinite(Number(saved.lat))&&Number.isFinite(Number(saved.lng))){state.lat=Number(saved.lat);state.lng=Number(saved.lng);state.radius=Math.min(50,Math.max(1,Number(saved.radius)||15));state.label=String(saved.label||"")}}catch(e){}
 function setup(){
-root.innerHTML='<div class="pdh-wrap"><p class="pdh-kicker">PETS &amp; DOGUE · HELP</p><h1 class="pdh-title">'+h(tr(0))+'</h1><p class="pdh-subtitle">'+h(tr(1))+'</p><div class="pdh-actions"><article class="pdh-action pdh-need"><img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt=""><div class="pdh-action-body"><h3>'+h(tr(2))+'</h3><p>'+h(tr(3))+'</p><button type="button" data-kind="request">'+h(tr(4))+' →</button></div></article><article class="pdh-action pdh-want"><img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt=""><div class="pdh-action-body"><h3>'+h(tr(5))+'</h3><p>'+h(tr(6))+'</p><button type="button" data-kind="free_offer">'+h(tr(7))+' →</button></div></article></div><div class="pdh-tools"><label class="pdh-location"><span aria-hidden="true">⌖</span><input id="pdhLocation" type="search" autocomplete="off" aria-label="'+h(tr(8))+'" placeholder="'+h(tr(9))+'"></label><button class="pdh-locate" id="pdhLocate" type="button" aria-label="'+h(tr(10))+'" title="'+h(tr(10))+'">◎</button><div class="pdh-radius"><span>'+h(tr(11))+'</span><input id="pdhRadius" type="range" min="1" max="50" step="1"><strong id="pdhRadiusValue"></strong></div><div class="pdh-filters" data-group="category"><button class="pdh-chip" data-group="category" data-value="all" aria-pressed="true">'+h(tr(12))+'</button><button class="pdh-chip" data-group="category" data-value="veterinary" aria-pressed="false">✚ '+h(tr(13))+'</button><button class="pdh-chip" data-group="category" data-value="temporary_home" aria-pressed="false">⌂ '+h(tr(14))+'</button><button class="pdh-chip" data-group="category" data-value="transport" aria-pressed="false">▰ '+h(tr(15))+'</button><button class="pdh-chip" data-group="category" data-value="pet_walking_sitting" aria-pressed="false">🐾 '+h(tr(16))+'</button></div><div><strong>'+h(tr(17))+'</strong><div class="pdh-filters" data-group="animal"><button class="pdh-chip" data-group="animal" data-value="all" aria-pressed="true">'+h(tr(18))+'</button><button class="pdh-chip" data-group="animal" data-value="dog" aria-pressed="false">🐕 '+h(tr(19))+'</button><button class="pdh-chip" data-group="animal" data-value="cat" aria-pressed="false">🐈 '+h(tr(20))+'</button><button class="pdh-chip" data-group="animal" data-value="other" aria-pressed="false">🐾 '+h(tr(21))+'</button></div></div></div><div class="pdh-section-head"><h2>'+h(tr(22))+'</h2><select class="pdh-sort" aria-label="'+h(tr(23))+'"><option>'+h(tr(23))+'</option></select></div><div class="pdh-map" id="pdhMap"></div><div class="pdh-results" id="pdhResults" aria-live="polite"></div></div>';
-var rad=root.querySelector("#pdhRadius"),rv=root.querySelector("#pdhRadiusValue"),loc=root.querySelector("#pdhLocation");
+root.innerHTML='<div class="pdh-wrap"><p class="pdh-kicker">PETS &amp; DOGUE · HELP</p><h1 class="pdh-title">'+h(tr(0))+'</h1><p class="pdh-subtitle">'+h(tr(1))+'</p><div class="pdh-actions"><article class="pdh-action pdh-need"><img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt=""><div class="pdh-action-body"><h3>'+h(tr(2))+'</h3><p>'+h(tr(3))+'</p><button type="button" data-kind="request">'+h(tr(4))+' →</button></div></article><article class="pdh-action pdh-want"><img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt=""><div class="pdh-action-body"><h3>'+h(tr(5))+'</h3><p>'+h(tr(6))+'</p><button type="button" data-kind="free_offer">'+h(tr(7))+' →</button></div></article></div><div class="pdh-tools"><div class="pdh-location-row"><label class="pdh-location"><span aria-hidden="true">⌖</span><input id="pdhLocation" type="search" role="combobox" aria-autocomplete="list" aria-controls="pdhSuggestions" aria-expanded="false" autocomplete="off" aria-label="'+h(tr(8))+'" placeholder="'+h(tr(9))+'"></label><button class="pdh-locate" id="pdhLocate" type="button" aria-label="'+h(tr(10))+'" title="'+h(tr(10))+'">◎</button><div class="pdh-suggestions" id="pdhSuggestions" role="listbox" hidden></div></div><div class="pdh-radius"><span>'+h(tr(11))+'</span><input id="pdhRadius" type="range" min="1" max="50" step="1"><strong id="pdhRadiusValue"></strong></div><div class="pdh-filters" data-group="category"><button class="pdh-chip" data-group="category" data-value="all" aria-pressed="true">'+h(tr(12))+'</button><button class="pdh-chip" data-group="category" data-value="veterinary" aria-pressed="false">✚ '+h(tr(13))+'</button><button class="pdh-chip" data-group="category" data-value="temporary_home" aria-pressed="false">⌂ '+h(tr(14))+'</button><button class="pdh-chip" data-group="category" data-value="transport" aria-pressed="false">▰ '+h(tr(15))+'</button><button class="pdh-chip" data-group="category" data-value="pet_walking_sitting" aria-pressed="false">🐾 '+h(tr(16))+'</button></div><div><strong>'+h(tr(17))+'</strong><div class="pdh-filters" data-group="animal"><button class="pdh-chip" data-group="animal" data-value="all" aria-pressed="true">'+h(tr(18))+'</button><button class="pdh-chip" data-group="animal" data-value="dog" aria-pressed="false">🐕 '+h(tr(19))+'</button><button class="pdh-chip" data-group="animal" data-value="cat" aria-pressed="false">🐈 '+h(tr(20))+'</button><button class="pdh-chip" data-group="animal" data-value="other" aria-pressed="false">🐾 '+h(tr(21))+'</button></div></div></div><div class="pdh-section-head"><h2>'+h(tr(22))+'</h2><select class="pdh-sort" aria-label="'+h(tr(23))+'"><option>'+h(tr(23))+'</option></select></div><div class="pdh-map" id="pdhMap"></div><div class="pdh-results" id="pdhResults" aria-live="polite"></div></div>';
+var rad=root.querySelector("#pdhRadius"),rv=root.querySelector("#pdhRadiusValue"),loc=root.querySelector("#pdhLocation"),suggestions=root.querySelector("#pdhSuggestions"),suggestionTimer=null,geocodeController=null;
 rad.value=String(state.radius);rv.textContent=state.radius+" "+tr(27);loc.value=state.label;
 root.querySelectorAll(".pdh-action button").forEach(function(b){if(b.getAttribute("data-kind")===state.kind)b.closest(".pdh-action").style.outline="3px solid "+(state.kind==="request"?"#d5243a":"#168541");b.addEventListener("click",function(){state.kind=b.getAttribute("data-kind");root.querySelectorAll(".pdh-action").forEach(function(a){a.style.outline=a.contains(b)?"3px solid "+(state.kind==="request"?"#d5243a":"#168541"):"none"});load()})});
 root.querySelectorAll(".pdh-chip").forEach(function(b){var group=b.getAttribute("data-group"),value=b.getAttribute("data-value");b.setAttribute("aria-pressed",(group==="category"?state.category:state.animal)===value?"true":"false");b.addEventListener("click",function(){var group=b.getAttribute("data-group"),value=b.getAttribute("data-value");if(group==="category")state.category=value;else state.animal=value;root.querySelectorAll('.pdh-chip[data-group="'+group+'"]').forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});load()})});
 rad.addEventListener("input",function(){state.radius=Number(rad.value);rv.textContent=state.radius+" "+tr(27);store();drawMap();load()});
-loc.addEventListener("change",function(){state.label=loc.value.trim();if(state.label){var mapUrl="https://www.openstreetmap.org/search?query="+encodeURIComponent(state.label);window.open(mapUrl,"_blank","noopener");} });
-root.querySelector("#pdhLocate").addEventListener("click",function(){if(!navigator.geolocation){alert(tr(25));return}navigator.geolocation.getCurrentPosition(function(p){state.lat=p.coords.latitude;state.lng=p.coords.longitude;state.label=state.lat.toFixed(4)+", "+state.lng.toFixed(4);loc.value=state.label;store();drawMap();load()},function(){alert(tr(25))},{enableHighAccuracy:true,timeout:10000,maximumAge:60000})});
+function closeSuggestions(){suggestions.innerHTML="";suggestions.hidden=true;loc.setAttribute("aria-expanded","false")}
+function chooseLocation(item){
+var latitude=Number(item.lat),longitude=Number(item.lon);
+if(!Number.isFinite(latitude)||!Number.isFinite(longitude))return;
+state.lat=latitude;state.lng=longitude;state.label=String(item.display_name||loc.value).trim();
+loc.value=state.label;closeSuggestions();store();drawMap();load();
+}
+function renderSuggestions(items){
+suggestions.innerHTML="";
+(items||[]).slice(0,6).forEach(function(item){
+var button=document.createElement("button");
+button.type="button";button.className="pdh-suggestion";button.setAttribute("role","option");
+button.textContent=String(item.display_name||"");
+button.addEventListener("click",function(){chooseLocation(item)});
+suggestions.appendChild(button);
+});
+suggestions.hidden=suggestions.childElementCount===0;
+loc.setAttribute("aria-expanded",suggestions.hidden?"false":"true");
+}
+loc.addEventListener("input",function(){
+var query=loc.value.trim();
+state.label=query;state.lat=null;state.lng=null;store();drawMap();load();
+if(suggestionTimer)clearTimeout(suggestionTimer);
+if(geocodeController){geocodeController.abort();geocodeController=null}
+closeSuggestions();
+if(query.length<3)return;
+suggestionTimer=setTimeout(function(){
+geocodeController=new AbortController();
+var url="https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&accept-language="+encodeURIComponent(lang())+"&q="+encodeURIComponent(query);
+fetch(url,{headers:{Accept:"application/json"},signal:geocodeController.signal})
+.then(function(response){if(!response.ok)throw new Error("Location search failed");return response.json()})
+.then(function(items){if(loc.value.trim()!==query)return;renderSuggestions(items)})
+.catch(function(error){if(error&&error.name!=="AbortError")closeSuggestions()});
+},1100);
+});
+loc.addEventListener("keydown",function(event){
+if(event.key==="Escape"){closeSuggestions();return}
+if(event.key==="Enter"&&!suggestions.hidden){
+var first=suggestions.querySelector(".pdh-suggestion");
+if(first){event.preventDefault();first.click()}
+}
+});
+root.addEventListener("click",function(event){
+if(!suggestions.contains(event.target)&&event.target!==loc)closeSuggestions();
+});
+root.querySelector("#pdhLocate").addEventListener("click",function(){closeSuggestions();if(!navigator.geolocation){alert(tr(25));return}navigator.geolocation.getCurrentPosition(function(p){state.lat=p.coords.latitude;state.lng=p.coords.longitude;state.label=state.lat.toFixed(4)+", "+state.lng.toFixed(4);loc.value=state.label;store();drawMap();load()},function(){alert(tr(25))},{enableHighAccuracy:true,timeout:10000,maximumAge:60000})});
 drawMap();load()
 }
 function store(){try{sessionStorage.setItem("pets_dogue_help_area_context",JSON.stringify({lat:state.lat,lng:state.lng,radius:state.radius,label:state.label}))}catch(e){}}
