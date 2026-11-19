@@ -9,8 +9,8 @@
   POST /api/help-requests
        Requires a signed-in Supabase user, Privacy Policy consent,
        and publication consent.
-       "request" requires an active monthly or annual Club membership.
-       "free_offer" is free to post.
+       Every user-submitted listing requires an active monthly or annual
+       Club membership. Administrators may post without membership.
        New listings are always submitted as pending.
 */
 
@@ -785,10 +785,7 @@ async function createHelpRequest(req, res) {
   const isAdmin =
     user.app_metadata?.role === "admin";
 
-  if (
-    submittedKind === REQUEST_KIND &&
-    !isAdmin
-  ) {
+  if (!isAdmin) {
     const membership = await verifyClubMembership(req);
 
     if (!membership.available) {
@@ -802,7 +799,7 @@ async function createHelpRequest(req, res) {
     if (!membership.active) {
       return sendJson(res, 403, {
         ok: false,
-        error: "An active monthly or annual Club membership is required to post a help request.",
+        error: "An active monthly or annual Club membership is required to publish a listing.",
         code: "active_membership_required"
       });
     }
@@ -884,9 +881,7 @@ async function createHelpRequest(req, res) {
 
   return sendJson(res, 201, {
     ok: true,
-    message: submittedKind === FREE_OFFER_KIND
-      ? "Your free offer was sent for moderation."
-      : "Your request was sent for moderation.",
+    message: "Your listing was sent for moderation.",
     request: saved
       ? {
           id: saved.id,
