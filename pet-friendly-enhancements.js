@@ -1985,7 +1985,7 @@ function pdInstallStyles(){
     #cards .card.pd-venue-card .card-body h2{margin:8px 0 6px;color:#143b24;font-family:Arial,Helvetica,sans-serif;font-size:clamp(21px,5vw,29px);font-weight:900;line-height:1.08;letter-spacing:-.025em}
     #cards .card.pd-venue-card .card-body .address{display:block;overflow:visible;margin:0;color:#34332f;font-size:14px;line-height:1.35}
     #cards .card.pd-venue-card .pet{display:flex;width:100%;align-items:center;min-height:40px;padding:8px 10px;border:1px solid #087d32;border-radius:11px;background:#e4f4dd;color:#075d27;font-size:13px;font-weight:850;line-height:1.25}
-    #cards .card.pd-venue-card[data-policy-state="unknown"] .pet.unknown{border-color:#d39f00;background:#fff4cf;color:#735600}      #cards .card.pd-venue-card[data-policy-state="no"] .pet.rejected{border-color:#ed1025;background:#ffe5e7;color:#b60016}
+    #cards .card.pd-venue-card[data-policy-state="unknown"] .pet.unknown{border-color:#d39f00;background:#fff4cf;color:#735600}    #cards .card.pd-venue-card[data-policy-state="no"] .pet.rejected{border-color:#ed1025;background:#ffe5e7;color:#b60016}
     #cards .card.pd-venue-card::after{content:none}
     #cards .card.pd-venue-card .card-top{position:static;inset:auto}
     #cards .card.pd-venue-card .meta{margin:0;color:#34332f;font-size:12px;font-weight:850}
