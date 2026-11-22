@@ -1964,6 +1964,43 @@ function pdInstallStyles(){
         padding-left:9px;
       }
     }
+
+    /* Approved venue cards only: map and nearby-help panel remain independent. */
+    #cards .card.pd-venue-card{position:relative;overflow:hidden;border:3px solid #087d32;border-radius:22px;background:#fffaf0;box-shadow:0 7px 0 rgba(0,0,0,.14),0 13px 24px rgba(0,0,0,.12);transform:translateZ(0)}
+    #cards .card.pd-venue-card[data-policy-state="yes"]{border-color:#087d32;box-shadow:0 7px 0 rgba(8,125,50,.24),0 13px 24px rgba(0,0,0,.12)}
+    html body #cards .pd-venue-card[data-policy-state="unknown"]{border-color:#efb900;box-shadow:0 7px 0 rgba(190,143,0,.22),0 13px 24px rgba(0,0,0,.12)}
+    html body #cards .pd-venue-card[data-policy-state="no"]{border-color:#ed1025;box-shadow:0 7px 0 rgba(180,0,18,.24),0 13px 24px rgba(0,0,0,.12)}
+    html body #cards .pd-card-media{position:relative;isolation:isolate;width:calc(100% - 12px);margin:6px auto 0;aspect-ratio:1.28/1;overflow:hidden;border:1px solid #111;border-radius:15px;background:#171717;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 3px 8px rgba(0,0,0,.18)}
+    #cards .card.pd-venue-card .pd-card-media .card-bg{position:absolute;inset:0;z-index:0}
+    #cards .card.pd-venue-card .pd-card-media .card-photo{position:absolute;z-index:1;inset:0;width:100%;height:100%;object-fit:cover;border:0;border-radius:0}
+    #cards .card.pd-venue-card .pd-card-media .heart{position:absolute;z-index:4;top:10px;right:10px;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:#fffaf0;color:#e51f3a;font-size:30px;box-shadow:0 2px 7px rgba(0,0,0,.25)}
+    html body #cards .pd-card-gallery{position:absolute;z-index:3;left:0;right:0;bottom:0;min-height:39px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff}
+    html body #cards .pd-card-dots{display:flex;align-items:center;gap:7px}
+    html body #cards .pd-card-dot{appearance:none;width:9px;height:9px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.65);box-shadow:0 1px 2px rgba(0,0,0,.35)}
+    html body #cards .pd-card-dot.active{background:#fff;transform:scale(1.2)}
+    html body #cards .pd-card-count{padding:4px 9px;border:1px solid rgba(255,255,255,.85);border-radius:999px;background:rgba(20,20,20,.62);color:#fff;font-size:12px;font-weight:800;white-space:nowrap}
+    html body #cards .pd-card-pet-action{position:absolute;z-index:4;left:9px;top:9px;min-width:38px;min-height:38px;padding:0 8px;border:1px solid #111;border-radius:999px;background:rgba(255,250,240,.96);color:#111;font-size:17px;box-shadow:0 2px 7px rgba(0,0,0,.24)}
+    #cards .card.pd-venue-card .card-body{position:static;inset:auto;display:block;max-height:none;overflow:visible;padding:12px 13px 14px;color:#111}
+    #cards .card.pd-venue-card .badge{display:inline-flex;align-items:center;min-height:31px;padding:5px 12px;border:1px solid rgba(111,75,12,.32);border-radius:999px;background:linear-gradient(180deg,#f5d56b,#d6a52d);color:#17130a;font-weight:900;box-shadow:0 2px 3px rgba(0,0,0,.14)}
+    #cards .card.pd-venue-card .card-body h2{margin:8px 0 6px;color:#143b24;font-family:Arial,Helvetica,sans-serif;font-size:clamp(21px,5vw,29px);font-weight:900;line-height:1.08;letter-spacing:-.025em}
+    #cards .card.pd-venue-card .card-body .address{display:block;overflow:visible;margin:0;color:#34332f;font-size:14px;line-height:1.35}
+    #cards .card.pd-venue-card .pet{display:flex;width:100%;align-items:center;min-height:40px;padding:8px 10px;border:1px solid #087d32;border-radius:11px;background:#e4f4dd;color:#075d27;font-size:13px;font-weight:850;line-height:1.25}
+    #cards .card.pd-venue-card[data-policy-state="unknown"] .pet.unknown{border-color:#d39f00;background:#fff4cf;color:#735600}      #cards .card.pd-venue-card[data-policy-state="no"] .pet.rejected{border-color:#ed1025;background:#ffe5e7;color:#b60016}
+    #cards .card.pd-venue-card::after{content:none}
+    #cards .card.pd-venue-card .card-top{position:static;inset:auto}
+    #cards .card.pd-venue-card .meta{margin:0;color:#34332f;font-size:12px;font-weight:850}
+    #cards .card.pd-venue-card .pd-vote-btn.yes{background:#e4f4dd!important}
+    #cards .card.pd-venue-card .pd-vote-btn.no{background:#ffe5e7!important}
+    #cards .card.pd-venue-card[data-policy-state="no"]::after{content:"";position:absolute;z-index:6;top:0;right:0;width:0;height:0;border-top:58px solid #ed1025;border-left:58px solid transparent;filter:drop-shadow(-2px 2px 2px rgba(0,0,0,.22));pointer-events:none}
+    html body #cards .pd-venue-card[data-policy-state="no"]::before{content:"🚫";position:absolute;z-index:7;top:5px;right:4px;font-size:22px;line-height:1;pointer-events:none}
+    #cards .card.pd-venue-card .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    #cards .card.pd-venue-card .actions button{min-height:42px;border:1px solid #c9c9c9!important;border-radius:10px!important;background:#fff!important;color:#171717!important;font-weight:850!important}
+    #cards .card.pd-venue-card .actions [data-route]{border-color:#075bd8!important;background:#075bd8!important;color:#fff!important}
+    #cards .card.pd-venue-card .actions [data-site]{border-color:#c9c9c9!important;background:#fff!important;color:#171717!important}
+    #cards .card.pd-venue-card .pd-vote-btn.yes{border-color:#087d32!important;color:#075d27!important}
+    #cards .card.pd-venue-card .pd-vote-btn.no{border-color:#ed1025!important;color:#b60016!important}
+    @media(max-width:520px){html body #cards .pd-card-media{aspect-ratio:1.13/1}#cards .card.pd-venue-card .card-body{padding:10px}#cards .card.pd-venue-card .actions button{font-size:12px!important}}
+
   `;
 
   document.head.appendChild(
@@ -3792,6 +3829,13 @@ function(place){
 
   if(
     place.allowsDogs ===
+    false
+  ){
+    return{confirmed:false,rejected:true,value:"rejected",text:pdT("rejected")};
+  }
+
+  if(
+    place.allowsDogs ===
     true
   ){
 
@@ -4224,6 +4268,13 @@ function(){
               place
             );
 
+          const photoList = Array.from(new Set([
+            photo,
+            ...(Array.isArray(place.photos)
+              ? place.photos.map(item => typeof item === "string" ? item : item && (item.url || item.photo_url || item.src))
+              : [])
+          ].filter(value => typeof value === "string" && (value.toLowerCase().startsWith("http://") || value.toLowerCase().startsWith("https://")))));
+
           const policy =
             policyInfo(
               place
@@ -4326,7 +4377,8 @@ function(){
           return `
 
             <article
-              class="card"
+              class="card pd-venue-card"
+              data-policy-state="${policy.rejected ? "no" : policy.confirmed ? "yes" : "unknown"}"
               data-category="${esc(
                 place.category
               )}"
@@ -4335,30 +4387,17 @@ function(){
               )}"
             >
 
-              <div class="card-bg">
-
-                ${pdFallbackMarkup(
-                  place
-                )}
-
-              </div>
-
-              ${
-                photo
-                  ? `
-
-                    <img
-                      class="card-photo"
-                      src="${esc(photo)}"
-                      alt="${esc(place.name)}"
-                      loading="lazy"
-                      onerror="this.style.display='none'"
-                    >
-
-                  `
-                  : ""
-              }
-
+              <div class="pd-card-media" data-gallery-count="${photoList.length}" data-gallery-sources="${esc(JSON.stringify(photoList))}">
+                <div class="card-bg">${pdFallbackMarkup(place)}</div>
+                ${photoList.length ? `
+                  <img class="card-photo pd-card-hero" src="${esc(photoList[0])}" alt="${esc(place.name)}" loading="lazy" onerror="this.style.display='none'">
+                  <div class="pd-card-gallery" aria-label="Photo gallery">
+                    <div class="pd-card-dots" role="group" aria-label="Choose venue photo">
+                      ${photoList.map((_, index) => `<button class="pd-card-dot${index === 0 ? " active" : ""}" type="button" data-gallery-index="${index}" aria-label="Photo ${index + 1} of ${photoList.length}" aria-pressed="${index === 0 ? "true" : "false"}"></button>`).join("")}
+                    </div>
+                    <span class="pd-card-count" aria-live="polite">▧ 1 / ${photoList.length}</span>
+                  </div>
+                ` : ""}
               <button
                 class="heart ${
                   saved.has(
@@ -4381,6 +4420,8 @@ function(){
                     : "♡"
                 }
               </button>
+                <button class="pd-card-pet-action" data-pet-photos="${esc(identity)}" type="button" aria-label="${esc(pdT("petPhotos"))}" title="${esc(pdT("petPhotos"))}">🐾</button>
+              </div>
 
               <div class="card-body">
 
@@ -4572,20 +4613,6 @@ function(){
                 <div class="actions">
 
                   <button
-                    class="pd-pet-photo-btn"
-                    data-pet-photos="${esc(
-                      identity
-                    )}"
-                    type="button"
-                  >
-                    🐾 ${esc(
-                      pdT(
-                        "petPhotos"
-                      )
-                    )}
-                  </button>
-
-                  <button
                     data-route="${esc(
                       identity
                     )}"
@@ -4677,6 +4704,7 @@ function(){
   }
 
   bindCards();
+  bindCardGallery(box);
 
   drawMarkers(
     list
@@ -4688,6 +4716,31 @@ function(){
 
 };
 
+
+function bindCardGallery(box){
+  if(!box || box.dataset.pdGalleryBound === "true") return;
+  box.dataset.pdGalleryBound = "true";
+  box.addEventListener("click", event=>{
+    const button = event.target.closest("[data-gallery-index]");
+    if(!button || !box.contains(button)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const media = button.closest(".pd-card-media");
+    if(!media) return;
+    const index = Number(button.dataset.galleryIndex);
+    const images = JSON.parse(media.dataset.gallerySources || "[]");
+    if(!Number.isInteger(index) || !images[index]) return;
+    const hero = media.querySelector(".pd-card-hero");
+    if(hero) hero.src = images[index];
+    media.querySelectorAll(".pd-card-dot").forEach((dot, dotIndex)=>{
+      const active = dotIndex === index;
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    const count = media.querySelector(".pd-card-count");
+    if(count) count.textContent = `▧ ${index + 1} / ${images.length}`;
+  });
+}
 
 /* =========================================================
    CARD ACTIONS
