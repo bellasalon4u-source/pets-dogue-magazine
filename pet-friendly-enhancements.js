@@ -2072,8 +2072,7 @@ function pdInstallStyles(){
       overflow:visible!important;padding:12px 13px 14px!important;background:#f6f0e5!important;color:#171717!important
     }
     main.page.pd-final-page #cards .card.pd-venue-card .card-top{
-      position:static!important;inset:auto!important;display:flex!important;justify-content:flex-start!important;
-      align-items:flex-start!important;min-height:0!important;margin:0!important
+      position:static!important;inset:auto!important;display:flex!important;justify-content:flex-start!important;      align-items:flex-start!important;min-height:0!important;margin:0!important
     }
     main.page.pd-final-page #cards .card.pd-venue-card .badge{
       position:static!important;display:inline-flex!important;align-items:center!important;
@@ -2159,8 +2158,15 @@ function pdInstallStyles(){
       main.page.pd-final-page #cards .card.pd-venue-card .card-body h2{font-size:clamp(16px,5vw,23px)!important}
       main.page.pd-final-page #cards .card.pd-venue-card .actions button,
       main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn{min-height:48px!important;font-size:12px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip{top:8px!important;left:8px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .heart{right:57px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip{top:8px!important;left:8px!important;max-width:calc(100% - 48px)!important;min-height:0!important;padding:4px 6px 4px 4px!important;gap:4px!important;align-items:flex-start!important;overflow:visible!important;font-size:clamp(8px,2.4vw,10px)!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip>span:last-child{display:block!important;white-space:normal!important;overflow:visible!important;overflow-wrap:break-word!important;text-overflow:clip!important;line-height:1.08!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip .pd-policy-icon{flex-basis:18px!important;width:18px!important;height:18px!important;font-size:12px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media .heart{top:8px!important;right:8px!important;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;font-size:24px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .pd-card-media .heart{right:48px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .actions{gap:6px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .actions button{min-height:48px!important;flex-direction:row!important;gap:3px!important;padding:4px 3px!important;font-size:clamp(8px,2.4vw,10.5px)!important;line-height:1.05!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-google-pin{font-size:14px!important;line-height:1!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .actions [data-route]>span{font-size:14px!important;line-height:1!important}
     }
     @media(prefers-reduced-motion:reduce){
       main.page.pd-final-page #cards .card.pd-venue-card{transition:none!important}
