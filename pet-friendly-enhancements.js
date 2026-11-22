@@ -1,5 +1,7 @@
 "use strict";
 
+/* PD_APPROVED_CARD_LAYOUT_REVISION_2026_11 — three-state photo cards */
+
 /* =========================================================
    PETS & DOGUE — PET-FRIENDLY ENHANCEMENTS
    - broad discovery first, pet status second
@@ -50,7 +52,7 @@ const PD_TX = {
     community:"Community",
     confirmed:"Pet-friendly confirmed",
     unknown:"Pet policy not confirmed",
-    rejected:"Community says not pet-friendly",
+    rejected:"Pets not allowed",
     uploading:"Uploading…",
     galleryError:"Could not load pet photos.",
     voteError:"Could not save your vote.",
@@ -89,7 +91,7 @@ const PD_TX = {
     community:"Спільнота",
     confirmed:"Pet-friendly підтверджено",
     unknown:"Правила для тварин не підтверджені",
-    rejected:"Спільнота вважає місце не pet-friendly",
+    rejected:"Тварини заборонені",
     uploading:"Завантаження…",
     galleryError:"Не вдалося завантажити фото.",
     voteError:"Не вдалося зберегти голос.",
@@ -128,7 +130,7 @@ const PD_TX = {
     community:"Сообщество",
     confirmed:"Pet-friendly подтверждено",
     unknown:"Правила для животных не подтверждены",
-    rejected:"Сообщество считает место не pet-friendly",
+    rejected:"С животными нельзя",
     uploading:"Загрузка…",
     galleryError:"Не удалось загрузить фото.",
     voteError:"Не удалось сохранить голос.",
@@ -167,7 +169,7 @@ const PD_TX = {
     community:"Communauté",
     confirmed:"Pet-friendly confirmé",
     unknown:"Politique animaux non confirmée",
-    rejected:"La communauté indique que ce lieu n’est pas pet-friendly",
+    rejected:"Animaux interdits",
     uploading:"Envoi…",
     galleryError:"Impossible de charger les photos.",
     voteError:"Impossible d’enregistrer le vote.",
@@ -206,7 +208,7 @@ const PD_TX = {
     community:"Community",
     confirmed:"Pet-friendly bestätigt",
     unknown:"Haustierregel nicht bestätigt",
-    rejected:"Community meldet: nicht pet-friendly",
+    rejected:"Haustiere nicht erlaubt",
     uploading:"Wird hochgeladen…",
     galleryError:"Tierfotos konnten nicht geladen werden.",
     voteError:"Stimme konnte nicht gespeichert werden.",
@@ -245,7 +247,7 @@ const PD_TX = {
     community:"Comunidad",
     confirmed:"Pet-friendly confirmado",
     unknown:"Política de mascotas no confirmada",
-    rejected:"La comunidad indica que no es pet-friendly",
+    rejected:"No se permiten mascotas",
     uploading:"Subiendo…",
     galleryError:"No se pudieron cargar las fotos.",
     voteError:"No se pudo guardar el voto.",
@@ -284,7 +286,7 @@ const PD_TX = {
     community:"Community",
     confirmed:"Pet-friendly confermato",
     unknown:"Regole non confermate",
-    rejected:"La community segnala che non è pet-friendly",
+    rejected:"Animali non ammessi",
     uploading:"Caricamento…",
     galleryError:"Impossibile caricare le foto.",
     voteError:"Impossibile salvare il voto.",
@@ -323,7 +325,7 @@ const PD_TX = {
     community:"Comunidade",
     confirmed:"Pet-friendly confirmado",
     unknown:"Política não confirmada",
-    rejected:"A comunidade indica que não é pet-friendly",
+    rejected:"Animais não permitidos",
     uploading:"A enviar…",
     galleryError:"Não foi possível carregar as fotos.",
     voteError:"Não foi possível guardar o voto.",
@@ -362,7 +364,7 @@ const PD_TX = {
     community:"Community",
     confirmed:"Pet-friendly bevestigd",
     unknown:"Huisdierenbeleid niet bevestigd",
-    rejected:"Community zegt: niet pet-friendly",
+    rejected:"Huisdieren niet toegestaan",
     uploading:"Uploaden…",
     galleryError:"Foto’s konden niet worden geladen.",
     voteError:"Stem kon niet worden opgeslagen.",
@@ -401,7 +403,7 @@ const PD_TX = {
     community:"Społeczność",
     confirmed:"Pet-friendly potwierdzone",
     unknown:"Zasady niepotwierdzone",
-    rejected:"Społeczność wskazuje: nie pet-friendly",
+    rejected:"Zwierzęta niedozwolone",
     uploading:"Wysyłanie…",
     galleryError:"Nie udało się wczytać zdjęć.",
     voteError:"Nie udało się zapisać głosu.",
@@ -440,7 +442,7 @@ const PD_TX = {
     community:"Komunita",
     confirmed:"Pet-friendly potvrzeno",
     unknown:"Pravidla nejsou potvrzena",
-    rejected:"Komunita uvádí, že místo není pet-friendly",
+    rejected:"Zvířata nejsou povolena",
     uploading:"Nahrávání…",
     galleryError:"Fotky se nepodařilo načíst.",
     voteError:"Hlas se nepodařilo uložit.",
@@ -479,7 +481,7 @@ const PD_TX = {
     community:"Komunita",
     confirmed:"Pet-friendly potvrdené",
     unknown:"Pravidlá nie sú potvrdené",
-    rejected:"Komunita uvádza, že miesto nie je pet-friendly",
+    rejected:"Zvieratá nie sú povolené",
     uploading:"Nahrávanie…",
     galleryError:"Fotky sa nepodarilo načítať.",
     voteError:"Hlas sa nepodarilo uložiť.",
@@ -518,7 +520,7 @@ const PD_TX = {
     community:"Közösség",
     confirmed:"Pet-friendly megerősítve",
     unknown:"Állatbarát szabály nem megerősített",
-    rejected:"A közösség szerint nem pet-friendly",
+    rejected:"Állatok nem engedélyezettek",
     uploading:"Feltöltés…",
     galleryError:"A fotók nem tölthetők be.",
     voteError:"A szavazat nem menthető.",
@@ -557,7 +559,7 @@ const PD_TX = {
     community:"Comunitate",
     confirmed:"Pet-friendly confirmat",
     unknown:"Politica nu este confirmată",
-    rejected:"Comunitatea spune că nu este pet-friendly",
+    rejected:"Animalele nu sunt permise",
     uploading:"Se încarcă…",
     galleryError:"Pozele nu au putut fi încărcate.",
     voteError:"Votul nu a putut fi salvat.",
@@ -596,7 +598,7 @@ const PD_TX = {
     community:"Общност",
     confirmed:"Pet-friendly потвърдено",
     unknown:"Правилата не са потвърдени",
-    rejected:"Общността посочва, че мястото не е pet-friendly",
+    rejected:"Животни не се допускат",
     uploading:"Качване…",
     galleryError:"Снимките не могат да бъдат заредени.",
     voteError:"Гласът не може да бъде записан.",
@@ -635,7 +637,7 @@ const PD_TX = {
     community:"Κοινότητα",
     confirmed:"Pet-friendly επιβεβαιωμένο",
     unknown:"Η πολιτική δεν έχει επιβεβαιωθεί",
-    rejected:"Η κοινότητα λέει ότι δεν είναι pet-friendly",
+    rejected:"Δεν επιτρέπονται κατοικίδια",
     uploading:"Μεταφόρτωση…",
     galleryError:"Δεν ήταν δυνατή η φόρτωση φωτογραφιών.",
     voteError:"Δεν ήταν δυνατή η αποθήκευση ψήφου.",
@@ -674,7 +676,7 @@ const PD_TX = {
     community:"Community",
     confirmed:"Pet-friendly bekräftat",
     unknown:"Djurpolicy ej bekräftad",
-    rejected:"Communityn säger att platsen inte är pet-friendly",
+    rejected:"Husdjur är inte tillåtna",
     uploading:"Laddar upp…",
     galleryError:"Kunde inte ladda foton.",
     voteError:"Kunde inte spara rösten.",
@@ -713,7 +715,7 @@ const PD_TX = {
     community:"Community",
     confirmed:"Pet-friendly bekræftet",
     unknown:"Dyrepolitik ikke bekræftet",
-    rejected:"Community siger: ikke pet-friendly",
+    rejected:"Kæledyr ikke tilladt",
     uploading:"Uploader…",
     galleryError:"Kunne ikke indlæse fotos.",
     voteError:"Kunne ikke gemme stemmen.",
@@ -752,7 +754,7 @@ const PD_TX = {
     community:"Community",
     confirmed:"Pet-friendly bekreftet",
     unknown:"Dyrepolicy ikke bekreftet",
-    rejected:"Community sier at stedet ikke er pet-friendly",
+    rejected:"Kjæledyr ikke tillatt",
     uploading:"Laster opp…",
     galleryError:"Kunne ikke laste bilder.",
     voteError:"Kunne ikke lagre stemmen.",
@@ -791,7 +793,7 @@ const PD_TX = {
     community:"Yhteisö",
     confirmed:"Pet-friendly vahvistettu",
     unknown:"Lemmikkikäytäntöä ei vahvistettu",
-    rejected:"Yhteisön mukaan paikka ei ole pet-friendly",
+    rejected:"Lemmikit eivät ole sallittuja",
     uploading:"Ladataan…",
     galleryError:"Kuvia ei voitu ladata.",
     voteError:"Ääntä ei voitu tallentaa.",
@@ -830,7 +832,7 @@ const PD_TX = {
     community:"Topluluk",
     confirmed:"Pet-friendly doğrulandı",
     unknown:"Evcil hayvan politikası doğrulanmadı",
-    rejected:"Topluluk buranın pet-friendly olmadığını söylüyor",
+    rejected:"Evcil hayvanlara izin verilmiyor",
     uploading:"Yükleniyor…",
     galleryError:"Fotoğraflar yüklenemedi.",
     voteError:"Oy kaydedilemedi.",
@@ -869,7 +871,7 @@ const PD_TX = {
     community:"المجتمع",
     confirmed:"تم تأكيد ملاءمة المكان للحيوانات",
     unknown:"سياسة الحيوانات غير مؤكدة",
-    rejected:"المجتمع يقول إن المكان غير ملائم للحيوانات",
+    rejected:"الحيوانات الأليفة غير مسموح بها",
     uploading:"جارٍ الرفع…",
     galleryError:"تعذر تحميل الصور.",
     voteError:"تعذر حفظ التصويت.",
@@ -908,7 +910,7 @@ const PD_TX = {
     community:"कम्युनिटी",
     confirmed:"Pet-friendly की पुष्टि",
     unknown:"पेट पॉलिसी की पुष्टि नहीं",
-    rejected:"कम्युनिटी के अनुसार यह pet-friendly नहीं है",
+    rejected:"पालतू जानवरों की अनुमति नहीं है",
     uploading:"अपलोड हो रहा है…",
     galleryError:"फोटो लोड नहीं हो सकीं।",
     voteError:"वोट सेव नहीं हो सका।",
@@ -1965,41 +1967,204 @@ function pdInstallStyles(){
       }
     }
 
-    /* Approved venue cards only: map and nearby-help panel remain independent. */
-    #cards .card.pd-venue-card{position:relative;overflow:hidden;border:3px solid #087d32;border-radius:22px;background:#fffaf0;box-shadow:0 7px 0 rgba(0,0,0,.14),0 13px 24px rgba(0,0,0,.12);transform:translateZ(0)}
-    #cards .card.pd-venue-card[data-policy-state="yes"]{border-color:#087d32;box-shadow:0 7px 0 rgba(8,125,50,.24),0 13px 24px rgba(0,0,0,.12)}
-    html body #cards .pd-venue-card[data-policy-state="unknown"]{border-color:#efb900;box-shadow:0 7px 0 rgba(190,143,0,.22),0 13px 24px rgba(0,0,0,.12)}
-    html body #cards .pd-venue-card[data-policy-state="no"]{border-color:#ed1025;box-shadow:0 7px 0 rgba(180,0,18,.24),0 13px 24px rgba(0,0,0,.12)}
-    html body #cards .pd-card-media{position:relative;isolation:isolate;width:calc(100% - 12px);margin:6px auto 0;aspect-ratio:1.28/1;overflow:hidden;border:1px solid #111;border-radius:15px;background:#171717;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 3px 8px rgba(0,0,0,.18)}
-    #cards .card.pd-venue-card .pd-card-media .card-bg{position:absolute;inset:0;z-index:0}
-    #cards .card.pd-venue-card .pd-card-media .card-photo{position:absolute;z-index:1;inset:0;width:100%;height:100%;object-fit:cover;border:0;border-radius:0}
-    #cards .card.pd-venue-card .pd-card-media .heart{position:absolute;z-index:4;top:10px;right:10px;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:#fffaf0;color:#e51f3a;font-size:30px;box-shadow:0 2px 7px rgba(0,0,0,.25)}
-    html body #cards .pd-card-gallery{position:absolute;z-index:3;left:0;right:0;bottom:0;min-height:39px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff}
-    html body #cards .pd-card-dots{display:flex;align-items:center;gap:7px}
-    html body #cards .pd-card-dot{appearance:none;width:9px;height:9px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.65);box-shadow:0 1px 2px rgba(0,0,0,.35)}
-    html body #cards .pd-card-dot.active{background:#fff;transform:scale(1.2)}
-    html body #cards .pd-card-count{padding:4px 9px;border:1px solid rgba(255,255,255,.85);border-radius:999px;background:rgba(20,20,20,.62);color:#fff;font-size:12px;font-weight:800;white-space:nowrap}
-    html body #cards .pd-card-pet-action{position:absolute;z-index:4;left:9px;top:9px;min-width:38px;min-height:38px;padding:0 8px;border:1px solid #111;border-radius:999px;background:rgba(255,250,240,.96);color:#111;font-size:17px;box-shadow:0 2px 7px rgba(0,0,0,.24)}
-    #cards .card.pd-venue-card .card-body{position:static;inset:auto;display:block;max-height:none;overflow:visible;padding:12px 13px 14px;color:#111}
-    #cards .card.pd-venue-card .badge{display:inline-flex;align-items:center;min-height:31px;padding:5px 12px;border:1px solid rgba(111,75,12,.32);border-radius:999px;background:linear-gradient(180deg,#f5d56b,#d6a52d);color:#17130a;font-weight:900;box-shadow:0 2px 3px rgba(0,0,0,.14)}
-    #cards .card.pd-venue-card .card-body h2{margin:8px 0 6px;color:#143b24;font-family:Arial,Helvetica,sans-serif;font-size:clamp(21px,5vw,29px);font-weight:900;line-height:1.08;letter-spacing:-.025em}
-    #cards .card.pd-venue-card .card-body .address{display:block;overflow:visible;margin:0;color:#34332f;font-size:14px;line-height:1.35}
-    #cards .card.pd-venue-card .pet{display:flex;width:100%;align-items:center;min-height:40px;padding:8px 10px;border:1px solid #087d32;border-radius:11px;background:#e4f4dd;color:#075d27;font-size:13px;font-weight:850;line-height:1.25}
-    #cards .card.pd-venue-card[data-policy-state="unknown"] .pet.unknown{border-color:#d39f00;background:#fff4cf;color:#735600}    #cards .card.pd-venue-card[data-policy-state="no"] .pet.rejected{border-color:#ed1025;background:#ffe5e7;color:#b60016}
-    #cards .card.pd-venue-card::after{content:none}
-    #cards .card.pd-venue-card .card-top{position:static;inset:auto}
-    #cards .card.pd-venue-card .meta{margin:0;color:#34332f;font-size:12px;font-weight:850}
-    #cards .card.pd-venue-card .pd-vote-btn.yes{background:#e4f4dd!important}
-    #cards .card.pd-venue-card .pd-vote-btn.no{background:#ffe5e7!important}
-    #cards .card.pd-venue-card[data-policy-state="no"]::after{content:"";position:absolute;z-index:6;top:0;right:0;width:0;height:0;border-top:58px solid #ed1025;border-left:58px solid transparent;filter:drop-shadow(-2px 2px 2px rgba(0,0,0,.22));pointer-events:none}
-    html body #cards .pd-venue-card[data-policy-state="no"]::before{content:"🚫";position:absolute;z-index:7;top:5px;right:4px;font-size:22px;line-height:1;pointer-events:none}
-    #cards .card.pd-venue-card .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    #cards .card.pd-venue-card .actions button{min-height:42px;border:1px solid #c9c9c9!important;border-radius:10px!important;background:#fff!important;color:#171717!important;font-weight:850!important}
-    #cards .card.pd-venue-card .actions [data-route]{border-color:#075bd8!important;background:#075bd8!important;color:#fff!important}
-    #cards .card.pd-venue-card .actions [data-site]{border-color:#c9c9c9!important;background:#fff!important;color:#171717!important}
-    #cards .card.pd-venue-card .pd-vote-btn.yes{border-color:#087d32!important;color:#075d27!important}
-    #cards .card.pd-venue-card .pd-vote-btn.no{border-color:#ed1025!important;color:#b60016!important}
-    @media(max-width:520px){html body #cards .pd-card-media{aspect-ratio:1.13/1}#cards .card.pd-venue-card .card-body{padding:10px}#cards .card.pd-venue-card .actions button{font-size:12px!important}}
+    /* Venue card visual override. Scoped to #cards; the map, help panel and page layout remain untouched. */
+    main.page.pd-final-page #cards .card.pd-venue-card{
+      position:relative!important;display:flex!important;flex-direction:column!important;
+      width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+      overflow:hidden!important;isolation:isolate!important;box-sizing:border-box!important;
+      border:4px solid #138b43!important;border-radius:23px!important;
+      background:#f6f0e5!important;color:#171717!important;
+      box-shadow:0 0 0 1px #111,0 5px 0 rgba(0,0,0,.18),0 10px 22px rgba(0,0,0,.13)!important;
+      transition:transform .18s ease,box-shadow .18s ease!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="yes"]{
+      border-color:#138b43!important;box-shadow:0 0 0 1px #111,0 0 0 2px #138b43,0 5px 0 rgba(19,139,67,.3),0 10px 22px rgba(0,0,0,.13)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="unknown"]{
+      border-color:#e5b500!important;box-shadow:0 0 0 1px #111,0 0 0 2px #e5b500,0 5px 0 rgba(229,181,0,.28),0 10px 22px rgba(0,0,0,.13)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"]{
+      border-color:#ed172b!important;box-shadow:0 0 0 1px #111,0 0 0 2px #ed172b,0 5px 0 rgba(237,23,43,.3),0 10px 22px rgba(0,0,0,.13)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card::before,
+    main.page.pd-final-page #cards .card.pd-venue-card::after{content:none!important;display:none!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media{
+      position:relative!important;display:block!important;flex:0 0 auto!important;
+      width:calc(100% - 12px)!important;height:auto!important;min-height:0!important;max-height:none!important;
+      aspect-ratio:1.06/1!important;margin:6px auto 0!important;overflow:hidden!important;isolation:isolate!important;
+      border:2px solid #111!important;border-radius:16px!important;background:#171717!important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 3px 8px rgba(0,0,0,.2)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media .card-bg{
+      position:absolute!important;inset:0!important;z-index:0!important;display:block!important;
+      width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;
+      flex:none!important;overflow:hidden!important;border-radius:13px!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media .pd-branded-fallback{
+      position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+      display:grid!important;place-items:center!important;border-radius:0!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media .card-photo{
+      position:absolute!important;z-index:1!important;inset:0!important;display:block!important;
+      width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;
+      object-fit:cover!important;border:0!important;border-radius:0!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip{
+      position:absolute!important;z-index:4!important;top:10px!important;left:10px!important;
+      display:inline-flex!important;align-items:center!important;gap:7px!important;
+      max-width:calc(100% - 86px)!important;min-height:38px!important;padding:5px 12px 5px 7px!important;
+      overflow:hidden!important;border:1px solid rgba(17,17,17,.18)!important;border-radius:999px!important;
+      background:rgba(255,253,247,.97)!important;color:#111!important;
+      box-shadow:0 2px 8px rgba(0,0,0,.22)!important;
+      font:800 clamp(10px,2.8vw,14px)/1.15 Arial,Helvetica,sans-serif!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip>span:last-child{
+      overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-icon{
+      flex:0 0 25px!important;width:25px!important;height:25px!important;
+      display:inline-grid!important;place-items:center!important;border-radius:50%!important;
+      background:#138b43!important;color:#fff!important;font:bold 17px/1 Arial,sans-serif!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="unknown"] .pd-policy-icon{background:#ed9e00!important;color:#fff!important}
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .pd-policy-icon{background:#ed172b!important;color:#fff!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media .heart{
+      position:absolute!important;z-index:5!important;top:10px!important;right:10px!important;
+      inset-inline-start:auto!important;width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;
+      display:grid!important;place-items:center!important;border:1px solid #d5d0c5!important;border-radius:50%!important;
+      background:#fffdf7!important;color:#e51f3a!important;font-size:30px!important;
+      box-shadow:0 2px 0 rgba(0,0,0,.12),0 4px 8px rgba(0,0,0,.2)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .pd-card-media .heart{right:62px!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-no-pets-corner{
+      position:absolute!important;z-index:6!important;top:0!important;right:0!important;
+      width:68px!important;height:68px!important;display:grid!important;place-items:start end!important;
+      padding:7px 4px 0 0!important;overflow:hidden!important;clip-path:polygon(0 0,100% 0,100% 100%)!important;
+      background:linear-gradient(145deg,#ff3a4a 0%,#d50018 75%)!important;color:#fff!important;
+      filter:drop-shadow(0 2px 3px rgba(0,0,0,.28))!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-no-pets-corner span{
+      display:block!important;transform:rotate(15deg)!important;font:900 19px/1 Arial,sans-serif!important;
+      filter:grayscale(1) brightness(0) invert(1)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-gallery{
+      position:absolute!important;z-index:3!important;left:0!important;right:0!important;bottom:0!important;
+      min-height:42px!important;padding:7px 10px!important;display:flex!important;align-items:center!important;
+      justify-content:space-between!important;gap:8px!important;
+      background:linear-gradient(transparent,rgba(0,0,0,.78))!important;color:#fff!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-dots{display:flex!important;align-items:center!important;gap:7px!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-dot{
+      appearance:none!important;flex:0 0 10px!important;width:10px!important;height:10px!important;
+      min-width:10px!important;min-height:10px!important;padding:0!important;border:0!important;border-radius:50%!important;
+      background:rgba(255,255,255,.7)!important;box-shadow:0 1px 2px rgba(0,0,0,.35)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-dot.active{background:#fff!important;transform:scale(1.2)!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-count{
+      display:inline-flex!important;align-items:center!important;padding:4px 9px!important;
+      border:1px solid rgba(255,255,255,.9)!important;border-radius:999px!important;      background:rgba(20,20,20,.62)!important;color:#fff!important;
+      font:800 12px/1.2 Arial,Helvetica,sans-serif!important;white-space:nowrap!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .card-body{
+      position:relative!important;inset:auto!important;z-index:2!important;display:flex!important;
+      flex:1 1 auto!important;flex-direction:column!important;justify-content:flex-start!important;gap:8px!important;
+      width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+      overflow:visible!important;padding:12px 13px 14px!important;background:#f6f0e5!important;color:#171717!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .card-top{
+      position:static!important;inset:auto!important;display:flex!important;justify-content:flex-start!important;
+      align-items:flex-start!important;min-height:0!important;margin:0!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .badge{
+      position:static!important;display:inline-flex!important;align-items:center!important;
+      width:max-content!important;max-width:100%!important;min-height:32px!important;padding:5px 13px!important;
+      border:1px solid rgba(132,92,17,.28)!important;border-radius:999px!important;
+      background:linear-gradient(180deg,#f4d466,#d8a733)!important;color:#15120b!important;
+      box-shadow:0 2px 0 rgba(115,77,12,.2),0 3px 7px rgba(0,0,0,.11)!important;
+      font:900 13px/1.1 Arial,Helvetica,sans-serif!important;white-space:normal!important;text-align:center!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .card-body h2{
+      position:static!important;order:0!important;margin:0!important;color:#153c27!important;
+      font:900 clamp(21px,5.5vw,30px)/1.05 Arial,Helvetica,sans-serif!important;letter-spacing:-.025em!important;
+      overflow-wrap:anywhere!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .address{
+      display:flex!important;align-items:flex-start!important;gap:8px!important;min-width:0!important;
+      margin:0!important;padding:0!important;color:#20201d!important;font:400 14px/1.32 Arial,Helvetica,sans-serif!important;
+      overflow:visible!important;white-space:normal!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .address span{display:block!important;min-width:0!important;overflow-wrap:anywhere!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-address-pin{
+      flex:0 0 19px!important;width:19px!important;height:19px!important;margin-top:1px!important;
+      fill:none!important;stroke:#111!important;stroke-width:2!important;stroke-linecap:round!important;stroke-linejoin:round!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .meta{
+      display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important;
+      margin:0!important;padding:0!important;color:#171717!important;font:850 13px/1.2 Arial,Helvetica,sans-serif!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pet-row{display:block!important;min-width:0!important;margin:0!important;padding:0!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pet{
+      display:flex!important;align-items:center!important;gap:8px!important;width:100%!important;max-width:100%!important;
+      min-height:0!important;padding:0!important;border:0!important;border-radius:0!important;
+      background:transparent!important;color:#143c27!important;box-shadow:none!important;
+      font:750 14px/1.25 Arial,Helvetica,sans-serif!important;white-space:normal!important;overflow-wrap:anywhere!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="unknown"] .pet{color:#735600!important}
+    main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .pet{color:#bd0018!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pet .pd-policy-icon{flex-basis:23px!important;width:23px!important;height:23px!important;font-size:15px!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .actions{
+      display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;
+      gap:9px!important;min-width:0!important;margin:2px 0 0!important;padding:0!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .actions button{
+      display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;
+      width:100%!important;min-width:0!important;min-height:54px!important;height:auto!important;margin:0!important;
+      padding:7px 8px!important;border:1px solid #c7c7c7!important;border-radius:12px!important;
+      background:#fff!important;color:#171717!important;box-shadow:0 2px 0 rgba(0,0,0,.07)!important;
+      font:850 13px/1.1 Arial,Helvetica,sans-serif!important;text-align:center!important;
+      white-space:normal!important;overflow-wrap:anywhere!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .actions [data-route]{
+      border-color:#075ed3!important;background:linear-gradient(180deg,#1675ec,#0755c4)!important;color:#fff!important;
+      box-shadow:0 3px 0 rgba(0,52,133,.26)!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-google-pin{font-size:17px!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-row{
+      display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;
+      gap:9px!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn{
+      display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;
+      width:100%!important;min-width:0!important;min-height:54px!important;height:auto!important;margin:0!important;
+      padding:7px 8px!important;border:2px solid!important;border-radius:14px!important;
+      background:#e8f6e7!important;color:#075d2b!important;box-shadow:0 2px 0 rgba(0,0,0,.08)!important;
+      font:850 14px/1.1 Arial,Helvetica,sans-serif!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn.yes{
+      border-color:#128143!important;background:#e7f5e7!important;color:#075d2b!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn.no{
+      border-color:#de2337!important;background:#ffebec!important;color:#b3091f!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-number{
+      display:inline-grid!important;place-items:center!important;min-width:19px!important;height:19px!important;
+      padding:0 5px!important;border-radius:999px!important;background:rgba(0,0,0,.08)!important;
+      color:inherit!important;font-size:11px!important
+    }
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-count{display:none!important}
+    @media(max-width:600px){
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media{aspect-ratio:1/1!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .card-body{gap:7px!important;padding:10px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .badge{font-size:12px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .card-body h2{font-size:clamp(16px,5vw,23px)!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .actions button,
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn{min-height:48px!important;font-size:12px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip{top:8px!important;left:8px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .heart{right:57px!important}
+    }
+    @media(prefers-reduced-motion:reduce){
+      main.page.pd-final-page #cards .card.pd-venue-card{transition:none!important}
+    }
 
   `;
 
@@ -3756,6 +3921,13 @@ function(place){
 
   }
 
+  if(
+    place.allowsDogs ===
+    false
+  ){
+    return{confirmed:false,rejected:true,value:"rejected",text:pdT("rejected")};
+  }
+
   const shared =
     communityPolicy(
       place
@@ -3825,13 +3997,6 @@ function(place){
         )
     };
 
-  }
-
-  if(
-    place.allowsDogs ===
-    false
-  ){
-    return{confirmed:false,rejected:true,value:"rejected",text:pdT("rejected")};
   }
 
   if(
@@ -4171,6 +4336,13 @@ function pdFallbackMarkup(
    Compact editorial layout.
 ========================================================= */
 
+function pdSaveLabel(){
+  const labels={
+    en:"Save place",uk:"Зберегти місце",ru:"Сохранить место",fr:"Enregistrer le lieu",de:"Ort speichern",es:"Guardar lugar",it:"Salva luogo",pt:"Guardar local",nl:"Locatie opslaan",pl:"Zapisz miejsce",cs:"Uložit místo",sk:"Uložiť miesto",hu:"Hely mentése",ro:"Salvează locul",bg:"Запази мястото",el:"Αποθήκευση μέρους",sv:"Spara plats",da:"Gem sted",no:"Lagre sted",fi:"Tallenna paikka",tr:"Mekânı kaydet",ar:"حفظ المكان",hi:"स्थान सहेजें"
+  };
+  return labels[lang] || labels.en;
+}
+
 window.render =
 function(){
 
@@ -4285,6 +4457,8 @@ function(){
               place
             );
 
+          const policyIcon = policy.rejected ? "×" : policy.confirmed ? "✓" : "?";
+
           const meta = [];
 
           if(
@@ -4391,295 +4565,52 @@ function(){
                 <div class="card-bg">${pdFallbackMarkup(place)}</div>
                 ${photoList.length ? `
                   <img class="card-photo pd-card-hero" src="${esc(photoList[0])}" alt="${esc(place.name)}" loading="lazy" onerror="this.style.display='none'">
-                  <div class="pd-card-gallery" aria-label="Photo gallery">
-                    <div class="pd-card-dots" role="group" aria-label="Choose venue photo">
-                      ${photoList.map((_, index) => `<button class="pd-card-dot${index === 0 ? " active" : ""}" type="button" data-gallery-index="${index}" aria-label="Photo ${index + 1} of ${photoList.length}" aria-pressed="${index === 0 ? "true" : "false"}"></button>`).join("")}
+                  <div class="pd-card-gallery" aria-label="${esc(pdT("gallery"))}">
+                    <div class="pd-card-dots" role="group" aria-label="${esc(pdT("gallery"))}">
+                      ${photoList.map((_, index) => `<button class="pd-card-dot${index === 0 ? " active" : ""}" type="button" data-gallery-index="${index}" aria-label="${esc(pdT("gallery"))} ${index + 1}" aria-pressed="${index === 0 ? "true" : "false"}"></button>`).join("")}
                     </div>
                     <span class="pd-card-count" aria-live="polite">▧ 1 / ${photoList.length}</span>
                   </div>
                 ` : ""}
-              <button
-                class="heart ${
-                  saved.has(
-                    identity
-                  )
-                    ? "on"
-                    : ""
-                }"
-                data-save="${esc(
-                  identity
-                )}"
-                type="button"
-                aria-label="Save"
-              >
-                ${
-                  saved.has(
-                    identity
-                  )
-                    ? "♥"
-                    : "♡"
-                }
-              </button>
-                <button class="pd-card-pet-action" data-pet-photos="${esc(identity)}" type="button" aria-label="${esc(pdT("petPhotos"))}" title="${esc(pdT("petPhotos"))}">🐾</button>
+                <div class="pd-policy-chip" data-policy-state="${policy.rejected ? "no" : policy.confirmed ? "yes" : "unknown"}">
+                  <span class="pd-policy-icon" aria-hidden="true">${policyIcon}</span>
+                  <span>${esc(policy.text)}</span>
+                </div>
+                <button class="heart ${saved.has(identity) ? "on" : ""}" data-save="${esc(identity)}" type="button" aria-label="${esc(pdSaveLabel())}">${saved.has(identity) ? "♥" : "♡"}</button>
+                ${policy.rejected ? `<span class="pd-no-pets-corner" role="img" aria-label="${esc(policy.text)}"><span aria-hidden="true">🚫🐕</span></span>` : ""}
               </div>
 
               <div class="card-body">
-
                 <div class="card-top">
-
-                  <span class="badge">
-                    ${esc(
-                      catLabel(
-                        place.category
-                      )
-                    )}
-                  </span>
-
+                  <span class="badge">${esc(catLabel(place.category))}</span>
                 </div>
-
-                <h2>
-                  ${esc(
-                    place.name
-                  )}
-                </h2>
-
+                <h2>${esc(place.name)}</h2>
                 <p class="address">
-                  ${esc(
-                    place.address
-                  )}
+                  <svg class="pd-address-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5.2-8 12-8 12S4 15.2 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+                  <span>${esc(place.address)}</span>
                 </p>
-
+                ${meta.length ? `<div class="meta"><span aria-hidden="true">➤</span> ${esc(meta.slice(0, 1).join(" · "))}</div>` : ""}
                 <div class="pet-row">
-
-                                    <span
-                    class="pet ${
-                      policy.value === "unknown"
-                        ? "unknown"
-                        : policy.rejected
-                          ? "rejected"
-                          : policy.value === "inside" ||
-                            policy.value === "outside"
-                            ? "partial"
-                            : ""
-                    }"
-                  >
-                    ${esc(
-                      policy.text
-                    )}
+                  <span class="pet ${policy.value === "unknown" ? "unknown" : policy.rejected ? "rejected" : policy.value === "inside" || policy.value === "outside" ? "partial" : ""}">
+                    <span class="pd-policy-icon" aria-hidden="true">${policyIcon}</span>
+                    <span>${esc(policy.text)}</span>
                   </span>
-
                 </div>
-
-                <div class="pd-vote-row">
-
-                  <strong>
-                    ${esc(
-                      pdT(
-                        "pf"
-                      )
-                    )}
-                  </strong>
-
-                  <button
-                    class="pd-vote-btn yes"
-                    data-vote-yes="${esc(
-                      identity
-                    )}"
-                    type="button"
-                    aria-label="${esc(
-                      pdT(
-                        "yes"
-                      )
-                    )}"
-                  >
-                    <span aria-hidden="true">
-                      ✓
-                    </span>
-
-                    <span>
-                      ${esc(
-                        pdT(
-                          "yes"
-                        )
-                      )}
-                    </span>
-
-                    ${
-                      yesCount
-                        ? `
-
-                          <span class="pd-vote-number">
-                            ${yesCount}
-                          </span>
-
-                        `
-                        : ""
-                    }
-
-                  </button>
-
-                  <button
-                    class="pd-vote-btn no"
-                    data-vote-no="${esc(
-                      identity
-                    )}"
-                    type="button"
-                    aria-label="${esc(
-                      pdT(
-                        "no"
-                      )
-                    )}"
-                  >
-                    <span aria-hidden="true">
-                      ✕
-                    </span>
-
-                    <span>
-                      ${esc(
-                        pdT(
-                          "no"
-                        )
-                      )}
-                    </span>
-
-                    ${
-                      noCount
-                        ? `
-
-                          <span class="pd-vote-number">
-                            ${noCount}
-                          </span>
-
-                        `
-                        : ""
-                    }
-
-                  </button>
-
-                  ${
-                    vote.total
-                      ? `
-
-                        <span class="pd-vote-count">
-                          ${Number(
-                            vote.total
-                          )}
-                        </span>
-
-                      `
-                      : ""
-                  }
-
-                </div>
-
-                ${
-                  communityText
-                    ? `
-
-                      <div
-                                                class="pd-community-state ${
-                          vote.communityRejected
-                            ? "bad"
-                            : vote.communityPetFriendly
-                              ? "good"
-                              : ""
-                        }"
-                      >
-                        ${esc(
-                          communityText
-                        )}
-                      </div>
-
-                    `
-                    : ""
-                }
-
-                ${
-                  meta.length
-                    ? `
-
-                      <div class="meta">
-                        ${esc(
-                          meta.join(
-                            " · "
-                          )
-                        )}
-                      </div>
-
-                    `
-                    : ""
-                }
-
                 <div class="actions">
-
-                  <button
-                    data-route="${esc(
-                      identity
-                    )}"
-                    type="button"
-                  >
-                    ${esc(
-                      t(
-                        "route"
-                      )
-                    )}
-                  </button>
-
-                  <button
-                    data-site="${esc(
-                      identity
-                    )}"
-                    type="button"
-                  >
-                    ${esc(
-                      place.website
-                        ? t("website")
-                        : "Google Maps"
-                    )}
-                  </button>
-
-                  ${
-                    place.category ===
-                    "hotel"
-                      ? `
-
-                        <button
-                          class="booking"
-                          data-book="${esc(
-                            identity
-                          )}"
-                          type="button"
-                        >
-                          Booking
-                        </button>
-
-                      `
-                      : ""
-                  }
-
-                  ${
-                    place.phone
-                      ? `
-
-                        <button
-                          data-call="${esc(
-                            identity
-                          )}"
-                          type="button"
-                        >
-                          ${esc(
-                            t(
-                              "call"
-                            )
-                          )}
-                        </button>
-
-                      `
-                      : ""
-                  }
-
+                  <button data-route="${esc(identity)}" type="button"><span aria-hidden="true">➤</span> ${esc(t("route"))}</button>
+                  <button data-google-maps="${esc(identity)}" type="button"><span class="pd-google-pin" aria-hidden="true">📍</span> Google Maps</button>
                 </div>
-
+                <div class="pd-vote-row">
+                  <button class="pd-vote-btn yes" data-vote-yes="${esc(identity)}" type="button" aria-label="${esc(pdT("yes"))}">
+                    <span aria-hidden="true">✓</span><span>${esc(pdT("yes"))}</span>
+                    ${yesCount ? `<span class="pd-vote-number">${yesCount}</span>` : ""}
+                  </button>
+                  <button class="pd-vote-btn no" data-vote-no="${esc(identity)}" type="button" aria-label="${esc(pdT("no"))}">
+                    <span aria-hidden="true">✕</span><span>${esc(pdT("no"))}</span>
+                    ${noCount ? `<span class="pd-vote-number">${noCount}</span>` : ""}
+                  </button>
+                  ${vote.total ? `<span class="pd-vote-count">${Number(vote.total)}</span>` : ""}
+                </div>
               </div>
 
             </article>
@@ -4939,6 +4870,22 @@ function(){
       }
     );
 
+
+  document
+    .querySelectorAll(
+      "[data-google-maps]"
+    )
+    .forEach(
+      button=>{
+        button.onclick = event=>{
+          event.stopPropagation();
+          const place = findPlace(button.dataset.googleMaps);
+          if(place){
+            window.open(mapsPlaceUrl(place), "_blank", "noopener");
+          }
+        };
+      }
+    );
 
   document
     .querySelectorAll(
@@ -5262,6 +5209,23 @@ function(place){
    Pet-friendly is a STATUS,
    not a requirement for discovery.
 ========================================================= */
+
+const pdBaseMerge = window.merge;
+window.merge = function(groups){
+  const sourcePlaces = Array.isArray(groups) ? groups.flat().filter(Boolean) : [];
+  const explicitlyNotAllowed = sourcePlaces.filter(place => place.allowsDogs === false);
+  const broadPlaces = sourcePlaces.filter(place => place.allowsDogs !== false);
+  const merged = typeof pdBaseMerge === "function" ? pdBaseMerge([broadPlaces]) : [];
+  const byIdentity = new Map(merged.map(place => [localKey(place), place]));
+  explicitlyNotAllowed.forEach(rawPlace => {
+    const place = withDist(rawPlace);
+    if(!Number.isFinite(place.distance) || place.distance > radius + 1) return;
+    const key = localKey(place);
+    const existing = byIdentity.get(key);
+    byIdentity.set(key, existing ? {...existing, allowsDogs:false} : place);
+  });
+  return [...byIdentity.values()];
+};
 
 function pdSearchSnapshot(){
 
@@ -5724,12 +5688,7 @@ async function pdOsmSearch(
 
       }
     )
-    .filter(Boolean)
-    .filter(
-      place=>
-        place.allowsDogs !==
-        false
-    );
+    .filter(Boolean);
 
   }finally{
 
