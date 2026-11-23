@@ -45,7 +45,7 @@ const WIKIMEDIA_API_URL =
   "https://commons.wikimedia.org/w/api.php";
 
 const MAX_RESULTS =
-  60;
+  500;
 
 const DEFAULT_RESULTS =
   60;
@@ -157,6 +157,21 @@ const CATEGORY_CONFIG = {
     intrinsic:true
   },
 
+  barber:{
+    geo:[
+      "service.beauty.hairdresser"
+    ],
+    intrinsic:false
+  },
+
+  beauty:{
+    geo:[
+      "service.beauty",
+      "leisure.spa"
+    ],
+    intrinsic:false
+  },
+
   events:{
     geo:[
       "activity.events_venue"
@@ -210,7 +225,13 @@ const ALL_PET_SERVICES = [
 
   "pet.shop",
 
-  "pet.service"
+  "pet.service",
+
+  "service.beauty.hairdresser",
+
+  "service.beauty",
+
+  "leisure.spa"
 
 ];
 
@@ -491,6 +512,22 @@ function normalizeCategory(value){
 
     pet_grooming:"grooming",
 
+    barber:"barber",
+
+    barbers:"barber",
+
+    barbershop:"barber",
+
+    barbershops:"barber",
+
+    beauty_salon:"beauty",
+
+    beauty_salons:"beauty",
+
+    spa:"beauty",
+
+    cosmetology:"beauty",
+
     event:"events",
 
     show:"events",
@@ -645,15 +682,6 @@ function detectCategory(
   hint = ""
 ){
 
-  if(
-    hint &&
-    hint !== "all"
-  ){
-
-    return hint;
-
-  }
-
   const categories =
     safeArray(
       properties?.categories
@@ -675,12 +703,29 @@ function detectCategory(
       raw.shop,
       raw.tourism,
       raw.leisure,
-      raw.cuisine
+      raw.cuisine,
+      raw.service,
+      raw.name
     ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
 
+  const isBarber =
+    String(raw.shop || "").toLowerCase() === "barber" ||
+    /\b(barber|barbershop|barber shop)\b/i.test(text);
+
+  const isBeautyService =
+    categories.some(value => value.startsWith("service.beauty") || value.startsWith("leisure.spa")) ||
+    ["beauty", "hairdresser", "spa", "cosmetology", "massage", "tanning", "nail_salon"].includes(String(raw.shop || "").toLowerCase()) ||
+    /\b(beauty salon|hair salon|hairdresser|spa|cosmetology|cosmetic clinic|nail salon|massage salon)\b/i.test(text);
+
+  if(hint === "barber") return isBarber ? "barber" : "other";
+  if(hint === "beauty") return isBarber ? "other" : isBeautyService ? "beauty" : "other";
+  if(isBarber) return "barber";
+  if(isBeautyService) return "beauty";
+
+  if(hint && hint !== "all") return hint;
 
   if(
     categories.some(
@@ -885,175 +930,25 @@ function detectAllowsDogs(
   category,
   forceConfirmed = false
 ){
-
-  if(forceConfirmed){
-
-    return true;
-
-  }
-
-
-  if(
-    category === "veterinary" ||
-    category === "pet-shop" ||
-    category === "grooming"
-  ){
-
-    return true;
-
-  }
-
-
-  const categories =
-    safeArray(
-      properties?.categories
-    )
-    .map(
-      value=>
-        String(value)
-          .toLowerCase()
-    );
-
-
-  if(
-    categories.some(
-      value=>
-        value.startsWith(
-          "pet.dog_park"
-        )
-    )
-  ){
-
-    return true;
-
-  }
-
-
-  const conditions =
-    safeArray(
-      properties?.conditions
-    )
-    .map(
-      value=>
-        String(value)
-          .toLowerCase()
-    );
-
-
-  if(
-    conditions.some(
-      value=>
-        value === "no-dogs" ||
-        value.startsWith(
-          "no-dogs."
-        )
-    )
-  ){
-
-    return false;
-
-  }
-
-
-  if(
-    conditions.some(
-      value=>
-        value === "dogs" ||
-        value.startsWith(
-          "dogs."
-        )
-    )
-  ){
-
-    return true;
-
-  }
-
-
-  const raw =
-    properties?.datasource?.raw ||
-    {};
-
-
-  const dog =
-    String(
-      raw.dog ||
-      raw.dogs ||
-      raw["dog:access"] ||
-      raw["dogs_allowed"] ||
-      ""
-    )
-    .trim()
-    .toLowerCase();
-
-
-  if(
-    [
-      "no",
-      "private"
-    ]
-    .includes(dog)
-  ){
-
-    return false;
-
-  }
-
-
-  if(
-    [
-      "yes",
-      "leashed",
-      "designated",
-      "permissive",
-      "outside",
-      "limited",
-      "conditional",
-      "customers",
-      "allowed"
-    ]
-    .includes(dog)
-  ){
-
-    return true;
-
-  }
-
-
-  const notes =
-    [
-      raw.description,
-      raw.note,
-      raw["dog:conditional"],
-      properties?.description
-    ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-
-
-  if(
-    /\b(no dogs|dogs prohibited|dogs not allowed)\b/i
-      .test(notes)
-  ){
-
-    return false;
-
-  }
-
-
-  if(
-    /\b(dog friendly|dogs welcome|dogs allowed|pet friendly|pets welcome)\b/i
-      .test(notes)
-  ){
-
-    return true;
-
-  }
-
-
+  const conditions = safeArray(properties?.conditions).map(value => String(value).toLowerCase());
+  const raw = properties?.datasource?.raw || {};
+  const dog = String(raw.dog || raw.dogs || raw["dog:access"] || raw["dogs_allowed"] || raw.pet || "").trim().toLowerCase();
+  const notes = [raw.description, raw.note, raw["dog:conditional"], raw["access:conditional"], properties?.description].filter(Boolean).join(" ").toLowerCase();
+  const explicitlyNo =
+    conditions.some(value => value === "no-dogs" || value.startsWith("no-dogs.")) ||
+    ["no", "private", "forbidden", "not_allowed"].includes(dog) ||
+    /\b(no dogs|dogs prohibited|dogs not allowed|pets prohibited|pets not allowed|no pets)\b/i.test(notes);
+  if(explicitlyNo) return false;
+  const explicitlyYes =
+    conditions.some(value => value === "dogs" || value.startsWith("dogs.")) ||
+    ["yes", "leashed", "designated", "permissive", "outside", "limited", "conditional", "customers", "allowed"].includes(dog) ||
+    /\b(dog friendly|dogs welcome|dogs allowed|pet friendly|pets welcome)\b/i.test(notes);
+  if(explicitlyYes) return true;
+  if(forceConfirmed) return true;
+  const categories = safeArray(properties?.categories).map(value => String(value).toLowerCase());
+  if(category === "veterinary" || category === "pet-shop" || category === "grooming") return true;
+  if(categories.some(value => value.startsWith("pet.dog_park"))) return true;
   return null;
-
 }
 
 
@@ -1445,16 +1340,6 @@ function mergePlaces(
     .forEach(
       place=>{
 
-        if(
-          place.allowsDogs ===
-          false
-        ){
-
-          return;
-
-        }
-
-
         const key =
           identity(
             place
@@ -1478,6 +1363,10 @@ function mergePlaces(
         const existing =
           map.get(key);
 
+
+        const explicitlyNo =
+          existing.allowsDogs === false ||
+          place.allowsDogs === false;
 
         const confirmed =
           existing.allowsDogs === true ||
@@ -1514,9 +1403,11 @@ function mergePlaces(
                   [],
 
             allowsDogs:
-              confirmed
-                ? true
-                : null,
+              explicitlyNo
+                ? false
+                : confirmed
+                  ? true
+                  : null,
 
             distance:
               Math.min(
@@ -1539,20 +1430,9 @@ function mergePlaces(
   .sort(
     (a,b)=>{
 
-      const ac =
-        a.allowsDogs === true;
-
-      const bc =
-        b.allowsDogs === true;
-
-
-      if(ac !== bc){
-
-        return ac
-          ? -1
-          : 1;
-
-      }
+      const ap = a.allowsDogs === true ? 0 : a.allowsDogs === false ? 2 : 1;
+      const bp = b.allowsDogs === true ? 0 : b.allowsDogs === false ? 2 : 1;
+      if(ap !== bp) return ap - bp;
 
 
       return (
@@ -1589,7 +1469,9 @@ async function geoapifyPlaces({
 
   language,
 
-  limit = MAX_RESULTS
+  limit = DEFAULT_RESULTS,
+
+  offset = 0
 
 }){
 
@@ -1635,6 +1517,17 @@ async function geoapifyPlaces({
         limit,
         1,
         MAX_RESULTS
+      )
+    )
+  );
+
+  url.searchParams.set(
+    "offset",
+    String(
+      clamp(
+        offset,
+        0,
+        100000
       )
     )
   );
@@ -1685,7 +1578,6 @@ async function geoapifyPlaces({
 
 /* =========================================================
    CATEGORY SEARCH
-
    TWO SEARCHES:
    1. confirmed dog-friendly
    2. broad category
@@ -1705,7 +1597,9 @@ async function searchCategory({
 
   maxResults,
 
-  language
+  language,
+
+  offset = 0
 
 }){
 
@@ -1760,8 +1654,10 @@ async function searchCategory({
             limit:
               Math.min(
                 40,
-                MAX_RESULTS
-              )
+                maxResults
+              ),
+
+            offset:0
 
           }),
 
@@ -1780,7 +1676,9 @@ async function searchCategory({
         language,
 
         limit:
-          MAX_RESULTS
+          maxResults,
+
+        offset
 
       })
 
@@ -1828,10 +1726,10 @@ async function searchCategory({
           )
       )
       .filter(Boolean)
-      .filter(
-        place=>
-          place.allowsDogs !==
-          false
+      .filter(place =>
+        category === "barber" || category === "beauty"
+          ? place.category === category
+          : true
       );
 
 
@@ -1866,7 +1764,9 @@ async function searchCategory({
           language,
 
           limit:
-            MAX_RESULTS
+            maxResults,
+
+          offset
 
         });
 
@@ -1891,7 +1791,7 @@ async function searchCategory({
           .map(
             place=>({
               ...place,
-              allowsDogs:true
+              allowsDogs:place.allowsDogs === false ? false : true
             })
           );
 
@@ -1945,7 +1845,9 @@ async function searchAll({
 
   maxResults,
 
-  language
+  language,
+
+  offset = 0
 
 }){
 
@@ -1982,7 +1884,9 @@ async function searchAll({
         language,
 
         limit:
-          40
+          Math.min(40, maxResults),
+
+        offset:0
 
       }),
 
@@ -2001,7 +1905,9 @@ async function searchAll({
         language,
 
         limit:
-          60
+          maxResults,
+
+        offset
 
       }),
 
@@ -2020,7 +1926,9 @@ async function searchAll({
         language,
 
         limit:
-          30
+          Math.min(90, maxResults),
+
+        offset
 
       })
 
@@ -2063,12 +1971,7 @@ async function searchAll({
           false
         )
     )
-    .filter(Boolean)
-    .filter(
-      place=>
-        place.allowsDogs !==
-        false
-    );
+    .filter(Boolean);
 
 
   const petServices =
@@ -2094,17 +1997,11 @@ async function searchAll({
         ...place,
 
         allowsDogs:
-          [
-            "veterinary",
-            "pet-shop",
-            "grooming",
-            "park"
-          ]
-          .includes(
-            place.category
-          )
-            ? true
-            : place.allowsDogs
+          place.allowsDogs === false
+            ? false
+            : ["veterinary", "pet-shop", "grooming", "park"].includes(place.category)
+              ? true
+              : place.allowsDogs
 
       })
     );
@@ -3125,6 +3022,13 @@ async function handler(
         MAX_RESULTS
       );
 
+    const offset =
+      clamp(
+        Number(body.offset || 0),
+        0,
+        100000
+      );
+
 
     if(
       category ===
@@ -3183,7 +3087,9 @@ async function handler(
 
           maxResults,
 
-          language
+          language,
+
+          offset
 
         });
 
@@ -3202,7 +3108,9 @@ async function handler(
 
           maxResults,
 
-          language
+          language,
+
+          offset
 
         });
 
