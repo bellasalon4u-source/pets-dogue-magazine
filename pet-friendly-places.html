@@ -1761,6 +1761,96 @@ outline-offset:3px;
   }
 }
 </style>
+<style id="pd-discovery-filter-enhancements">
+.nearby-filter{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:38px;
+  width:max-content;
+  padding:0 12px;
+  border:1px solid #6fa8ee;
+  border-radius:999px;
+  background:#eaf3ff;
+  color:#123f7a;
+  font:900 12px/1.1 Arial,Helvetica,sans-serif;
+  white-space:nowrap;
+  box-shadow:0 2px 0 #c7d8ed,0 4px 8px rgba(0,0,0,.1);
+  cursor:pointer;
+}
+.nearby-filter i{
+  display:grid;
+  place-items:center;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#fff;
+  font-size:18px;
+  font-style:normal;
+}
+.nearby-filter[aria-pressed="true"]{
+  background:#1976d2;
+  border-color:#0d5db0;
+  color:#fff;
+}
+.pet-policy-filters{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  width:100%;
+  margin:5px 0 0;
+  padding:4px 1px 8px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.pet-policy-filters::-webkit-scrollbar{display:none}
+.pet-policy-filter-label{
+  flex:0 0 auto;
+  margin-right:2px;
+  color:#615d55;
+  font:900 11px/1 Arial,Helvetica,sans-serif;
+  text-transform:uppercase;
+}
+.pet-policy-filter{
+  flex:0 0 auto;
+  min-height:34px;
+  padding:0 11px;
+  border:1px solid #c9c2b5;
+  border-radius:999px;
+  background:#fbf8f1;
+  color:#28251f;
+  font:800 11px/1.1 Arial,Helvetica,sans-serif;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.pet-policy-filter.active{
+  border-color:#145f35;
+  background:#145f35;
+  color:#fff;
+}
+.pet-policy-filter[data-policy-filter="allowed"].active{background:#147a3f;border-color:#147a3f}
+.pet-policy-filter[data-policy-filter="unknown"].active{background:#a87500;border-color:#a87500}
+.pet-policy-filter.prohibited{color:#a41424}
+.pet-policy-filter.prohibited.active{background:#c9162e;border-color:#c9162e;color:#fff}
+.pet.prohibited{
+  border-color:#d2162f!important;
+  background:#ffe5e8!important;
+  color:#a30d20!important;
+}
+.cat[data-cat="barber"]{--category-color:#dbeafe;background:var(--category-color)!important}
+.cat[data-cat="beauty"]{--category-color:#f5dced;background:var(--category-color)!important}
+.pd-final-page #cards .card[data-pd-status="allowed"]{border:2px solid #147a3f!important}
+.pd-final-page #cards .card[data-pd-status="partial"],.pd-final-page #cards .card[data-pd-status="unknown"]{border:2px solid #d69b00!important}
+.pd-final-page #cards .card[data-pd-status="no"]{border:2px solid #d2162f!important}
+@media(max-width:600px){
+  .pet-policy-filters{margin-top:2px;padding-top:2px;padding-bottom:6px}
+  .pet-policy-filter-label{font-size:10px}
+  .pet-policy-filter{min-height:32px;padding:0 9px;font-size:10px}
+}
+</style>
 </head>
 
 <body>
@@ -1894,6 +1984,7 @@ aria-label="Open full map"
 
 <aside class="categories">
 
+<button class="nearby-filter" id="nearbyFilter" type="button" aria-pressed="false"><i>⌖</i><span data-t="nearbyToMe">Nearby to me</span></button>
 <button class="cat active" data-cat="all"><i>✦</i><span data-t="catAll">All categories</span></button>
 <button class="cat" data-cat="cafe"><i>☕</i><span data-t="catCafe">Cafes</span></button>
 <button class="cat" data-cat="restaurant"><i>⌑</i><span data-t="catRestaurant">Restaurants</span></button>
@@ -1905,12 +1996,22 @@ aria-label="Open full map"
 <button class="cat" data-cat="veterinary"><i>✚</i><span data-t="catVet">Veterinary</span></button>
 <button class="cat" data-cat="pet-shop"><i>▢</i><span data-t="catShop">Pet shops</span></button>
 <button class="cat" data-cat="grooming"><i>✂</i><span data-t="catGrooming">Grooming</span></button>
+<button class="cat" data-cat="barber"><i>✂</i><span data-t="catBarber">Barber shops</span></button>
+<button class="cat" data-cat="beauty"><i>✦</i><span data-t="catBeauty">Beauty salons</span></button>
 <button class="cat" data-cat="events"><i>★</i><span data-t="catEvents">Events & shows</span></button>
 <button class="cat saved" data-cat="saved"><i>♡</i><span data-t="catSaved">Saved</span></button>
 
 </aside>
 
 </section>
+
+<div class="pet-policy-filters" id="petPolicyFilters" role="group" aria-label="Pet policy filters">
+<span class="pet-policy-filter-label" data-t="policyFilterLabel">Pet policy</span>
+<button type="button" class="pet-policy-filter active" data-policy-filter="all" aria-pressed="true" data-t="policyAll">All</button>
+<button type="button" class="pet-policy-filter" data-policy-filter="allowed" aria-pressed="false" data-t="policyAllowed">Allowed</button>
+<button type="button" class="pet-policy-filter" data-policy-filter="unknown" aria-pressed="false" data-t="policyUnknownPartial">Not confirmed / partial</button>
+<button type="button" class="pet-policy-filter prohibited" data-policy-filter="prohibited" aria-pressed="false" data-t="policyProhibited">Pets not allowed</button>
+</div>
 
 <section>
 
@@ -2141,6 +2242,7 @@ ${esc(t("tryAnother"))}
 <article
 class="card"
 data-category="${esc(place.category)}"
+data-policy="${esc(policy.value)}"
 data-open="${esc(identity)}"
 >
 
@@ -2184,11 +2286,11 @@ ${esc(place.address)}
 
 <div class="pet-row">
 
-<span class="pet ${policy.value==="unknown"?"unknown":policy.value==="outside"?"outside":""}">
+<span class="pet ${policy.value==="prohibited"?"prohibited":policy.value==="unknown"?"unknown":policy.value==="outside"?"outside":""}">
 ${esc(policy.text)}
 </span>
 
-${!policy.confirmed
+${!policy.confirmed&&policy.value!=="prohibited"
 ?`<button class="policy-plus"data-rules="${esc(identity)}"type="button"aria-label="Confirm pet policy">+</button>`
 :""
 }
@@ -2247,7 +2349,7 @@ ${image?`<img class="card-photo" src="${esc(image)}" alt="" loading="lazy" refer
 ${dateLabel?`<p class="address event-date-label">${esc(dateLabel)}</p>`:""}
 <p class="address event-description">${esc(item.description||"")}</p>
 <div class="actions"><a class="event-route" href="${esc(mapUrl)}" target="_blank" rel="noopener">${esc(t("route"))}</a></div>
-</div></article>`;}).join("");drawMarkers([]);}async function search(){limit=12;if(cat==="saved"){render();setStatus("");return;}if(cat==="events"){setStatus(t("searching"));try{const data=await requestEvents();renderEvents(data.events);setStatus("");}catch(error){console.error("Events loading failed:",error);renderEvents([]);setStatus(t("error"));}return;}setStatus(t("searching"));let provider=[];try{provider=await providerSearch();}catch(error){console.warn(error);}places=merge([provider]);render();setStatus(t("osm"));let osmPlaces=[];try{osmPlaces=await Promise.race([osm(),new Promise(resolve=>setTimeout(()=>resolve([]),7000))]);}catch(error){console.warn(error);}places=merge([provider,osmPlaces]);render();setStatus("");}async function locationAutocomplete(query){const response=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"autocomplete",query,language:lang,latitude:center.lat,longitude:center.lng})});const data=await response.json().catch(()=>({}));return(data.suggestions||[]);}function showSuggestions(items){const box=document.getElementById("suggestions");if(!items.length){box.hidden=true;return;}box.innerHTML=items.map((item,index)=>`
+</div></article>`;}).join("");drawMarkers([]);}async function search(){limit=12;if(cat==="saved"){render();setStatus("");return;}if(cat==="events"){setStatus(t("searching"));try{const data=await requestEvents();renderEvents(data.events);setStatus("");}catch(error){console.error("Events loading failed:",error);renderEvents([]);setStatus(t("error"));}return;}setStatus(t("searching"));let provider=[];try{provider=await providerSearch();}catch(error){console.warn(error);}places=merge([provider]);render();setStatus(t("osm"));let osmPlaces=[];try{osmPlaces=await Promise.race([osm(),new Promise(resolve=>setTimeout(()=>resolve([]),15000))]);}catch(error){console.warn(error);}places=merge([provider,osmPlaces]);render();setStatus("");}async function locationAutocomplete(query){const response=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"autocomplete",query,language:lang,latitude:center.lat,longitude:center.lng})});const data=await response.json().catch(()=>({}));return(data.suggestions||[]);}function showSuggestions(items){const box=document.getElementById("suggestions");if(!items.length){box.hidden=true;return;}box.innerHTML=items.map((item,index)=>`
 <button
 class="suggestion"
 type="button"
@@ -4061,6 +4163,201 @@ style="display:flex;align-items:center;justify-content:space-between;gap:12px;wi
   }else{
     initializeCategoryCarousel();
   }
+})();
+</script>
+<script id="pd-discovery-filter-enhancements">
+"use strict";
+(()=>{
+  const translations={
+    en:{nearbyToMe:"Nearby to me",catBarber:"Barber shops",catBeauty:"Beauty salons",policyFilterLabel:"Pet policy",policyAll:"All",policyAllowed:"Allowed",policyUnknownPartial:"Not confirmed / partial",policyProhibited:"Pets not allowed"},
+    uk:{nearbyToMe:"Поруч зі мною",catBarber:"Барбершопи",catBeauty:"Салони краси",policyFilterLabel:"Правила для тварин",policyAll:"Усі",policyAllowed:"Дозволено",policyUnknownPartial:"Не підтверджено / частково",policyProhibited:"Тварин не дозволено"},
+    ru:{nearbyToMe:"Ближайшие ко мне",catBarber:"Барбершопы",catBeauty:"Салоны красоты",policyFilterLabel:"Правила для животных",policyAll:"Все",policyAllowed:"Разрешено",policyUnknownPartial:"Не подтверждено / частично",policyProhibited:"Животных не пускают"},
+    fr:{nearbyToMe:"Près de moi",catBarber:"Barbiers",catBeauty:"Instituts de beauté",policyFilterLabel:"Animaux",policyAll:"Tous",policyAllowed:"Autorisés",policyUnknownPartial:"Non confirmé / partiel",policyProhibited:"Animaux interdits"},
+    de:{nearbyToMe:"In meiner Nähe",catBarber:"Barbershops",catBeauty:"Schönheitssalons",policyFilterLabel:"Haustiere",policyAll:"Alle",policyAllowed:"Erlaubt",policyUnknownPartial:"Unbestätigt / teilweise",policyProhibited:"Haustiere verboten"},
+    es:{nearbyToMe:"Cerca de mí",catBarber:"Barberías",catBeauty:"Salones de belleza",policyFilterLabel:"Mascotas",policyAll:"Todos",policyAllowed:"Permitidas",policyUnknownPartial:"Sin confirmar / parcial",policyProhibited:"No se admiten mascotas"},
+    it:{nearbyToMe:"Vicino a me",catBarber:"Barbieri",catBeauty:"Centri estetici",policyFilterLabel:"Animali",policyAll:"Tutti",policyAllowed:"Ammessi",policyUnknownPartial:"Non confermato / parziale",policyProhibited:"Animali non ammessi"},
+    pt:{nearbyToMe:"Perto de mim",catBarber:"Barbearias",catBeauty:"Salões de beleza",policyFilterLabel:"Animais",policyAll:"Todos",policyAllowed:"Permitidos",policyUnknownPartial:"Não confirmado / parcial",policyProhibited:"Animais não permitidos"},
+    nl:{nearbyToMe:"Dicht bij mij",catBarber:"Barbershops",catBeauty:"Schoonheidssalons",policyFilterLabel:"Huisdieren",policyAll:"Alle",policyAllowed:"Toegestaan",policyUnknownPartial:"Niet bevestigd / gedeeltelijk",policyProhibited:"Huisdieren niet toegestaan"},
+    pl:{nearbyToMe:"Blisko mnie",catBarber:"Barberzy",catBeauty:"Salony urody",policyFilterLabel:"Zwierzęta",policyAll:"Wszystkie",policyAllowed:"Dozwolone",policyUnknownPartial:"Niepotwierdzone / częściowo",policyProhibited:"Zwierzęta niedozwolone"},
+    cs:{nearbyToMe:"Blízko mě",catBarber:"Barbershopy",catBeauty:"Kosmetické salony",policyFilterLabel:"Zvířata",policyAll:"Vše",policyAllowed:"Povolena",policyUnknownPartial:"Nepotvrzeno / částečně",policyProhibited:"Zvířata nejsou povolena"},
+    sk:{nearbyToMe:"Blízko mňa",catBarber:"Barbershopy",catBeauty:"Salóny krásy",policyFilterLabel:"Zvieratá",policyAll:"Všetko",policyAllowed:"Povolené",policyUnknownPartial:"Nepotvrdené / čiastočne",policyProhibited:"Zvieratá nie sú povolené"},
+    hu:{nearbyToMe:"A közelemben",catBarber:"Barbershopok",catBeauty:"Szépségszalonok",policyFilterLabel:"Háziállatok",policyAll:"Mind",policyAllowed:"Engedélyezett",policyUnknownPartial:"Nem megerősített / részleges",policyProhibited:"Háziállat nem engedélyezett"},
+    ro:{nearbyToMe:"Lângă mine",catBarber:"Frizerii pentru bărbați",catBeauty:"Saloane de înfrumusețare",policyFilterLabel:"Animale",policyAll:"Toate",policyAllowed:"Permise",policyUnknownPartial:"Neconfirmat / parțial",policyProhibited:"Animalele nu sunt permise"},
+    bg:{nearbyToMe:"Близо до мен",catBarber:"Бръснарници",catBeauty:"Салони за красота",policyFilterLabel:"Домашни любимци",policyAll:"Всички",policyAllowed:"Разрешени",policyUnknownPartial:"Непотвърдено / частично",policyProhibited:"Домашни любимци не се допускат"},
+    el:{nearbyToMe:"Κοντά μου",catBarber:"Κουρεία",catBeauty:"Κέντρα αισθητικής",policyFilterLabel:"Κατοικίδια",policyAll:"Όλα",policyAllowed:"Επιτρέπονται",policyUnknownPartial:"Μη επιβεβαιωμένο / μερικώς",policyProhibited:"Δεν επιτρέπονται κατοικίδια"},
+    sv:{nearbyToMe:"Nära mig",catBarber:"Barberare",catBeauty:"Skönhetssalonger",policyFilterLabel:"Husdjur",policyAll:"Alla",policyAllowed:"Tillåtna",policyUnknownPartial:"Obekräftat / delvis",policyProhibited:"Husdjur är inte tillåtna"},
+    da:{nearbyToMe:"Tæt på mig",catBarber:"Barbershops",catBeauty:"Skønhedssaloner",policyFilterLabel:"Kæledyr",policyAll:"Alle",policyAllowed:"Tilladt",policyUnknownPartial:"Ikke bekræftet / delvist",policyProhibited:"Kæledyr er ikke tilladt"},
+    no:{nearbyToMe:"Nær meg",catBarber:"Barbersalonger",catBeauty:"Skjønnhetssalonger",policyFilterLabel:"Kjæledyr",policyAll:"Alle",policyAllowed:"Tillatt",policyUnknownPartial:"Ikke bekreftet / delvis",policyProhibited:"Kjæledyr er ikke tillatt"},
+    fi:{nearbyToMe:"Lähellä minua",catBarber:"Parturit",catBeauty:"Kauneushoitolat",policyFilterLabel:"Lemmikit",policyAll:"Kaikki",policyAllowed:"Sallittu",policyUnknownPartial:"Ei vahvistettu / osittain",policyProhibited:"Lemmikit eivät ole sallittuja"},
+    tr:{nearbyToMe:"Yakınımda",catBarber:"Berberler",catBeauty:"Güzellik salonları",policyFilterLabel:"Evcil hayvanlar",policyAll:"Tümü",policyAllowed:"İzin veriliyor",policyUnknownPartial:"Doğrulanmadı / kısmen",policyProhibited:"Evcil hayvanlara izin verilmiyor"},
+    ar:{nearbyToMe:"بالقرب مني",catBarber:"صالونات حلاقة رجالية",catBeauty:"صالونات التجميل",policyFilterLabel:"الحيوانات الأليفة",policyAll:"الكل",policyAllowed:"مسموح",policyUnknownPartial:"غير مؤكد / مسموح جزئياً",policyProhibited:"الحيوانات الأليفة غير مسموح بها"},
+    hi:{nearbyToMe:"मेरे पास",catBarber:"पुरुषों के बार्बरशॉप",catBeauty:"ब्यूटी सैलून",policyFilterLabel:"पालतू जानवर",policyAll:"सभी",policyAllowed:"अनुमति है",policyUnknownPartial:"पुष्टि नहीं / आंशिक",policyProhibited:"पालतू जानवरों की अनुमति नहीं"}
+  };
+
+  Object.entries(translations).forEach(([code,values])=>{
+    if(TEXT[code])Object.assign(TEXT[code],values);
+  });
+
+  const previousNormCat=normCat;
+  normCat=function(value){
+    const text=String(value||"").toLowerCase().replaceAll("_"," ");
+    if(/\b(barber|barbershop|barber shop|barbering)\b/.test(text))return"barber";
+    if(/\b(beauty|hairdresser|hair salon|spa|cosmetology|cosmetic|nail salon|massage|tanning)\b/.test(text)||text.includes("service.beauty")||text.includes("leisure.spa"))return"beauty";
+    return previousNormCat(value);
+  };
+
+  const previousCatLabel=catLabel;
+  catLabel=function(category){
+    if(category==="barber")return t("catBarber");
+    if(category==="beauty")return t("catBeauty");
+    return previousCatLabel(category);
+  };
+
+  const previousCategoryIcon=categoryIcon;
+  categoryIcon=function(category){
+    if(category==="barber")return"✂";
+    if(category==="beauty")return"✦";
+    return previousCategoryIcon(category);
+  };
+
+  osmQuery=function(){
+    const around=`(around:${Math.round(radius*1000)},${center.lat},${center.lng})`;
+    const q={
+      cafe:[`nwr["amenity"="cafe"]${around};`],
+      restaurant:[`nwr["amenity"="restaurant"]${around};`],
+      pub:[`nwr["amenity"="pub"]${around};`,`nwr["amenity"="bar"]${around};`],
+      pizzeria:[`nwr["amenity"="restaurant"]["cuisine"~"pizza",i]${around};`],
+      hotel:[`nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment|camp_site|caravan_site)$"]${around};`],
+      park:[`nwr["leisure"="dog_park"]${around};`,`nwr["leisure"="park"]${around};`],
+      beach:[`nwr["natural"="beach"]${around};`,`nwr["leisure"="beach_resort"]${around};`],
+      veterinary:[`nwr["amenity"="veterinary"]${around};`],
+      "pet-shop":[`nwr["shop"="pet"]${around};`],
+      grooming:[`nwr["shop"="pet_grooming"]${around};`],
+      barber:[`nwr["shop"="barber"]${around};`,`nwr["shop"="hairdresser"]["hairdresser"="barber"]${around};`],
+      beauty:[`nwr["shop"~"^(hairdresser|beauty|cosmetics|massage|nail_salon)$"]${around};`,`nwr["leisure"="spa"]${around};`,`nwr["healthcare"="cosmetic"]${around};`],
+      events:[`nwr["amenity"="events_venue"]${around};`]
+    };
+    const lines=cat==="all"?Object.values(q).flat():(q[cat]||[]);
+    return lines.length?`[out:json][timeout:20];(${lines.join("")});out center tags;`:"";
+  };
+
+  normOsm=function(element){
+    const tags=element.tags||{};
+    const lat=num(element.lat??element.center?.lat);
+    const lng=num(element.lon??element.center?.lon);
+    if(lat===null||lng===null)return null;
+    const rawCategory=tags.shop==="barber"||tags.hairdresser==="barber"?"barber":
+      tags.amenity||tags.tourism||tags.leisure||tags.natural||tags.shop||tags.healthcare;
+    let category=normCat(rawCategory);
+    if(String(tags.cuisine||"").toLowerCase().includes("pizza"))category="pizzeria";
+    if(tags.amenity==="pub"||tags.amenity==="bar")category="pub";
+    if(tags.shop==="pet_grooming")category="grooming";
+    const dog=String(tags.dog||tags.dogs||tags["dog:access"]||tags["access:dog"]||tags.pets||tags.pet||"").toLowerCase().trim();
+    const explicitlyNo=["no","not_allowed","forbidden","private"].includes(dog);
+    const explicitlyYes=["yes","leashed","designated","permissive","outside","limited","conditional","customers","allowed"].includes(dog);
+    const notes=[tags.note,tags.description,tags["dog:conditional"],tags["access:conditional"]].filter(Boolean).join(" ").toLowerCase();
+    const textSaysNo=/\b(no dogs|dogs prohibited|dogs not allowed|no pets|pets not allowed)\b/.test(notes);
+    const textSaysYes=/\b(dogs welcome|dogs allowed|pet friendly|pets welcome)\b/.test(notes);
+    const intrinsic=category==="veterinary"||category==="pet-shop"||category==="grooming"||tags.leisure==="dog_park";
+    const allowsDogs=explicitlyNo||textSaysNo?false:explicitlyYes||textSaysYes||intrinsic?true:null;
+    return norm({
+      providerId:`osm-${element.type}-${element.id}`,
+      name:tags.name||tags.brand||"Place",
+      address:[tags["addr:housenumber"],tags["addr:street"],tags["addr:city"],tags["addr:postcode"]].filter(Boolean).join(" "),
+      category,lat,lng,
+      website:tags.website||tags["contact:website"],
+      phone:tags.phone||tags["contact:phone"],
+      photo:tags.image||tags.wikimedia_commons||"",
+      allowsDogs
+    },"osm",category);
+  };
+
+  merge=function(groups){
+    const result=new Map();
+    groups.flat().filter(Boolean).forEach(raw=>{
+      const place=withDist(raw);
+      if(!place||place.distance>radius+1)return;
+      const identity=localKey(place);
+      const existing=result.get(identity);
+      if(!existing){result.set(identity,place);return;}
+      const photoFirst=photoFor(existing)?existing:place;
+      const other=photoFirst===existing?place:existing;
+      result.set(identity,{
+        ...other,...photoFirst,
+        photo:photoFirst.photo||other.photo||"",
+        photos:photoFirst.photos?.length?photoFirst.photos:other.photos||[],
+        website:photoFirst.website||other.website||"",
+        phone:photoFirst.phone||other.phone||"",
+        allowsDogs:existing.allowsDogs===false||place.allowsDogs===false?false:
+          existing.allowsDogs===true||place.allowsDogs===true?true:null,
+        distance:Math.min(existing.distance??999999,place.distance??999999)
+      });
+    });
+    return[...result.values()];
+  };
+
+  policyInfo=function(place){
+    if(place.allowsDogs===false)return{confirmed:false,value:"prohibited",text:t("policyProhibited")};
+    const shared=communityPolicy(place);
+    if(shared){
+      if(shared.inside&&shared.outside)return{confirmed:true,value:"inside_outside",text:t("insideOutside")};
+      if(shared.inside)return{confirmed:true,value:"inside",text:t("inside")};
+      if(shared.outside)return{confirmed:true,value:"outside",text:t("outside")};
+    }
+    if(place.allowsDogs===true)return{confirmed:true,value:"confirmed",text:t("policyConfirmed")};
+    return{confirmed:false,value:"unknown",text:t("policyUnknown")};
+  };
+
+  let selectedPolicy="all";
+  const previousCurrent=current;
+  current=function(){
+    let list=previousCurrent();
+    list=list.filter(place=>{
+      const value=policyInfo(place).value;
+      if(selectedPolicy==="allowed")return["confirmed","inside","inside_outside"].includes(value);
+      if(selectedPolicy==="unknown")return["unknown","outside"].includes(value);
+      if(selectedPolicy==="prohibited")return value==="prohibited";
+      return true;
+    });
+    const mode=document.getElementById("sort")?.value||"distance";
+    list.sort((a,b)=>{
+      const rank=value=>value==="prohibited"?2:["unknown","outside"].includes(value)?1:0;
+      const difference=rank(policyInfo(a).value)-rank(policyInfo(b).value);
+      if(difference)return difference;
+      if(mode==="rating"){
+        const rating=(b.rating||0)-(a.rating||0);
+        if(rating)return rating;
+      }
+      return(a.distance??999999)-(b.distance??999999);
+    });
+    return list;
+  };
+
+  const policyFilters=document.getElementById("petPolicyFilters");
+  policyFilters?.querySelectorAll("[data-policy-filter]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      selectedPolicy=button.dataset.policyFilter||"all";
+      policyFilters.querySelectorAll("[data-policy-filter]").forEach(item=>{
+        const active=item===button;
+        item.classList.toggle("active",active);
+        item.setAttribute("aria-pressed",String(active));
+      });
+      render();
+    });
+  });
+
+  document.getElementById("nearbyFilter")?.addEventListener("click",async event=>{
+    const button=event.currentTarget;
+    const success=await locate(true);
+    button.setAttribute("aria-pressed",String(success));
+  });
+
+  const locationInput=document.getElementById("locationInput");
+  locationInput?.addEventListener("input",()=>{
+    document.getElementById("nearbyFilter")?.setAttribute("aria-pressed","false");
+  });
+
+  applyLang();
 })();
 </script>
 </body>
