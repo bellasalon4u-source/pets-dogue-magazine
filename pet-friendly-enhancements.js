@@ -23,6 +23,7 @@ const PD_VOTER_KEY = "pets_dogue_pet_voter_key";
 const PD_MAX_SELECTED_PHOTOS = 10;
 
 let pdSearchSequence = 0;
+let pdSearchPending = false;
 let pdPetPhotoPlace = null;
 let pdSelectedPhotos = [];
 
@@ -1268,22 +1269,27 @@ function pdInstallStyles(){
       inset:0;
       display:grid;
       place-items:center;
-      overflow:hidden;
       background:
-        radial-gradient(ellipse at 24% 22%,rgba(45,118,54,.55),transparent 42%),
-        radial-gradient(ellipse at 78% 76%,rgba(174,128,37,.32),transparent 46%),
-        linear-gradient(145deg,#18221b 0%,#24251f 52%,#302b21 100%);
+        radial-gradient(
+          circle at 28% 22%,
+          rgba(101,229,31,.26),
+          transparent 31%
+        ),
+        radial-gradient(
+          circle at 78% 78%,
+          rgba(201,151,41,.16),
+          transparent 34%
+        ),
+        linear-gradient(
+          145deg,
+          #101010,
+          #292929
+        );
       color:#fff;
       text-align:center;
       padding:20px;
       font-family:Georgia,serif;
     }
-    .pd-branded-fallback:before{
-      content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.16);
-      border-radius:12px;pointer-events:none;
-      background:linear-gradient(180deg,rgba(255,255,255,.035),transparent 56%,rgba(0,0,0,.08));
-    }
-    .pd-branded-fallback>div{position:relative;z-index:1}
 
     .pd-branded-fallback span{
       display:block;
@@ -2042,7 +2048,6 @@ function pdInstallStyles(){
       display:block!important;transform:rotate(15deg)!important;font:900 19px/1 Arial,sans-serif!important;
       filter:grayscale(1) brightness(0) invert(1)!important
     }
-    main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media[data-gallery-count="1"] .pd-card-gallery{justify-content:flex-end!important}
     main.page.pd-final-page #cards .card.pd-venue-card .pd-card-gallery{
       position:absolute!important;z-index:3!important;left:0!important;right:0!important;bottom:0!important;
       min-height:42px!important;padding:7px 10px!important;display:flex!important;align-items:center!important;
@@ -2124,7 +2129,7 @@ function pdInstallStyles(){
       border-color:#075ed3!important;background:linear-gradient(180deg,#1675ec,#0755c4)!important;color:#fff!important;
       box-shadow:0 3px 0 rgba(0,52,133,.26)!important
     }
-    main.page.pd-final-page #cards .card.pd-venue-card .pd-google-pin{flex:0 0 21px!important;width:21px!important;height:21px!important;display:block!important}
+    main.page.pd-final-page #cards .card.pd-venue-card .pd-google-pin{font-size:17px!important}
     main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-row{
       display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;
       gap:9px!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important
@@ -2149,34 +2154,14 @@ function pdInstallStyles(){
     }
     main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-count{display:none!important}
     @media(max-width:600px){
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media{aspect-ratio:1.12/1!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .card-body{gap:5px!important;padding:8px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .badge{min-height:26px!important;padding:4px 9px!important;font-size:10px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .card-body h2{font-size:clamp(14px,4vw,18px)!important;line-height:1.04!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .address{gap:5px!important;font-size:11px!important;line-height:1.22!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-address-pin{flex-basis:15px!important;width:15px!important;height:15px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .meta{gap:4px!important;font-size:10px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pet{gap:5px!important;font-size:11px!important;line-height:1.18!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pet .pd-policy-icon{flex-basis:18px!important;width:18px!important;height:18px!important;font-size:12px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media{aspect-ratio:1/1!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .card-body{gap:7px!important;padding:10px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .badge{font-size:12px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .card-body h2{font-size:clamp(16px,5vw,23px)!important}
       main.page.pd-final-page #cards .card.pd-venue-card .actions button,
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn{min-height:38px!important;font-size:10px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip{top:8px!important;left:8px!important;max-width:calc(100% - 48px)!important;min-height:0!important;padding:4px 6px 4px 4px!important;gap:4px!important;align-items:flex-start!important;overflow:visible!important;font-size:clamp(8px,2.4vw,10px)!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip>span:last-child{display:block!important;white-space:normal!important;overflow:visible!important;overflow-wrap:break-word!important;text-overflow:clip!important;line-height:1.08!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip .pd-policy-icon{flex-basis:18px!important;width:18px!important;height:18px!important;font-size:12px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-media .heart{top:8px!important;right:8px!important;width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;font-size:23px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .pd-card-media .heart{right:46px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-gallery{min-height:32px!important;padding:5px 7px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-dot{width:8px!important;height:8px!important;min-width:8px!important;min-height:8px!important;flex-basis:8px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-card-count{padding:3px 6px!important;font-size:10px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .actions{gap:5px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .actions button{min-height:44px!important;flex-direction:row!important;gap:4px!important;padding:4px 5px!important;font-size:clamp(9px,2.5vw,11px)!important;line-height:1.05!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .actions [data-google-maps]{gap:3px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-google-pin{flex-basis:16px!important;width:16px!important;height:16px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-google-label{display:inline-block!important;min-width:0!important;overflow-wrap:normal!important;word-break:normal!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .actions [data-route]>span{font-size:13px!important;line-height:1!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-row{gap:5px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn{min-height:38px!important;gap:4px!important;padding:4px 3px!important;font-size:10px!important}
-      main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-number{min-width:16px!important;height:16px!important;padding:0 4px!important;font-size:9px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-vote-btn{min-height:48px!important;font-size:12px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card .pd-policy-chip{top:8px!important;left:8px!important}
+      main.page.pd-final-page #cards .card.pd-venue-card[data-policy-state="no"] .heart{right:57px!important}
     }
     @media(prefers-reduced-motion:reduce){
       main.page.pd-final-page #cards .card.pd-venue-card{transition:none!important}
@@ -3004,6 +2989,7 @@ async function pdLoadApprovedPetPhotos(
               item.imageUrl ||
               item.image_url ||
               "";
+
             if(!image){
               return "";
             }
@@ -3011,6 +2997,7 @@ async function pdLoadApprovedPetPhotos(
             return `
 
               <div class="pd-gallery-item">
+
                 <img
                   src="${esc(
                     image
@@ -4350,18 +4337,6 @@ function pdFallbackMarkup(
    Compact editorial layout.
 ========================================================= */
 
-function pdCardAddress(place){
-  const full=String(place && place.address || "").replace(/\s+/g," ").trim();
-  let display=full;
-  const venue=String(place && place.name || "").trim();
-  if(venue && display.toLocaleLowerCase().startsWith(venue.toLocaleLowerCase()) && /^[,·|]/.test(display.slice(venue.length))){
-    display=display.slice(venue.length).replace(/^[\s,·|]+/,"").trim();
-  }
-  const countrySuffix=/(?:,\s*)(?:United Kingdom(?: of Great Britain and Northern Ireland)?|UK|Соединённое Королевство|Великобритания|Велика Британія|Royaume-Uni|Vereinigtes Königreich|Reino Unido|Regno Unito|Verenigd Koninkrijk|Zjednoczone Królestwo|Spojené království|Spojené kráľovstvo|Egyesült Királyság|Regatul Unit|Обединеното кралство|Ηνωμένο Βασίλειο|Storbritannien|Storbritannia|Yhdistynyt kuningaskunta|Birleşik Krallık|المملكة المتحدة|यूनाइटेड किंगडम)\s*$/i;
-  display=display.replace(countrySuffix,"").replace(/[\s,·-]+$/g,"").trim();
-  return {full,display:display||full};
-}
-
 function pdSaveLabel(){
   const labels={
     en:"Save place",uk:"Зберегти місце",ru:"Сохранить место",fr:"Enregistrer le lieu",de:"Ort speichern",es:"Guardar lugar",it:"Salva luogo",pt:"Guardar local",nl:"Locatie opslaan",pl:"Zapisz miejsce",cs:"Uložit místo",sk:"Uložiť miesto",hu:"Hely mentése",ro:"Salvează locul",bg:"Запази мястото",el:"Αποθήκευση μέρους",sv:"Spara plats",da:"Gem sted",no:"Lagre sted",fi:"Tallenna paikka",tr:"Mekânı kaydet",ar:"حفظ المكان",hi:"स्थान सहेजें"
@@ -4395,7 +4370,9 @@ function(){
   if(countElement){
 
     countElement.textContent =
-      `${t("found")}: ${list.length} ${t("places")}`;
+      pdSearchPending
+        ? t("searching")
+        : `${t("found")}: ${list.length} ${t("places")}`;
 
   }
 
@@ -4409,19 +4386,23 @@ function(){
 
         <h2>
           ${esc(
-            cat === "saved"
-              ? t("savedEmpty")
-              : t("noPlaces")
+            pdSearchPending
+              ? t("searching")
+              : cat === "saved"
+                ? t("savedEmpty")
+                : t("noPlaces")
           )}
         </h2>
 
-        <p>
-          ${esc(
-            t(
-              "tryAnother"
-            )
-          )}
-        </p>
+        ${pdSearchPending ? "" : `
+          <p>
+            ${esc(
+              t(
+                "tryAnother"
+              )
+            )}
+          </p>
+        `}
 
       </div>
 
@@ -4484,7 +4465,6 @@ function(){
             );
 
           const policyIcon = policy.rejected ? "×" : policy.confirmed ? "✓" : "?";
-          const cardAddress = pdCardAddress(place);
 
           const meta = [];
 
@@ -4594,7 +4574,7 @@ function(){
                   <img class="card-photo pd-card-hero" src="${esc(photoList[0])}" alt="${esc(place.name)}" loading="lazy" onerror="this.style.display='none'">
                   <div class="pd-card-gallery" aria-label="${esc(pdT("gallery"))}">
                     <div class="pd-card-dots" role="group" aria-label="${esc(pdT("gallery"))}">
-                      ${photoList.length > 1 ? photoList.map((_, index) => `<button class="pd-card-dot${index === 0 ? " active" : ""}" type="button" data-gallery-index="${index}" aria-label="${esc(pdT("gallery"))} ${index + 1}" aria-pressed="${index === 0 ? "true" : "false"}"></button>`).join("") : ""}
+                      ${photoList.map((_, index) => `<button class="pd-card-dot${index === 0 ? " active" : ""}" type="button" data-gallery-index="${index}" aria-label="${esc(pdT("gallery"))} ${index + 1}" aria-pressed="${index === 0 ? "true" : "false"}"></button>`).join("")}
                     </div>
                     <span class="pd-card-count" aria-live="polite">▧ 1 / ${photoList.length}</span>
                   </div>
@@ -4614,7 +4594,7 @@ function(){
                 <h2>${esc(place.name)}</h2>
                 <p class="address">
                   <svg class="pd-address-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5.2-8 12-8 12S4 15.2 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-                  <span title="${esc(cardAddress.full)}" aria-label="${esc(cardAddress.full)}">${esc(cardAddress.display)}</span>
+                  <span>${esc(place.address)}</span>
                 </p>
                 ${meta.length ? `<div class="meta"><span aria-hidden="true">➤</span> ${esc(meta.slice(0, 1).join(" · "))}</div>` : ""}
                 <div class="pet-row">
@@ -4625,7 +4605,7 @@ function(){
                 </div>
                 <div class="actions">
                   <button data-route="${esc(identity)}" type="button"><span aria-hidden="true">➤</span> ${esc(t("route"))}</button>
-                  <button data-google-maps="${esc(identity)}" type="button"><svg class="pd-google-pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M12 1.5a8 8 0 0 0-8 8c0 5.1 8 13 8 13s8-7.9 8-13a8 8 0 0 0-8-8z"/><path fill="#EA4335" d="M12 1.5a8 8 0 0 0-7.3 4.7l5 3.2A3.8 3.8 0 0 1 12 7.6V1.5z"/><path fill="#FBBC04" d="M4 9.5c0 .9.2 1.8.5 2.6l5.2-2.7A3.7 3.7 0 0 1 9.7 9c0-.5.1-1 .3-1.4L5 4.4A7.9 7.9 0 0 0 4 9.5z"/><path fill="#34A853" d="M4.5 12.1c1.2 3.1 4.1 6.9 7.5 10.4l3.2-5.4-5.5-7.7z"/><circle cx="12" cy="9.4" r="2.8" fill="#fff"/></svg><span class="pd-google-label">Google Maps</span></button>
+                  <button data-google-maps="${esc(identity)}" type="button"><span class="pd-google-pin" aria-hidden="true">📍</span> Google Maps</button>
                 </div>
                 <div class="pd-vote-row">
                   <button class="pd-vote-btn yes" data-vote-yes="${esc(identity)}" type="button" aria-label="${esc(pdT("yes"))}">
@@ -5777,6 +5757,8 @@ async function(){
     "saved"
   ){
 
+    pdSearchPending = false;
+
     render();
 
     setStatus("");
@@ -5784,6 +5766,13 @@ async function(){
     return;
 
   }
+
+
+  /* Clear the previous category immediately. Keep the UI in a
+     loading state until this request returns fresh results. */
+  pdSearchPending = true;
+  places = [];
+  render();
 
 
     if (snapshot.category === "events") {
@@ -5796,10 +5785,16 @@ async function(){
         return;
       }
 
+      pdSearchPending = false;
       renderEvents(data.events || []);
       setStatus("");
     } catch (error) {
+      if (!pdStillCurrent(sequence, snapshot)) {
+        return;
+      }
+
       console.error("Events loading failed:", error);
+      pdSearchPending = false;
       renderEvents([]);
       setStatus(t("error"));
     }
@@ -5873,6 +5868,7 @@ async function(){
   }
 
 
+  pdSearchPending = false;
   places =
     merge([
       providerPlaces
