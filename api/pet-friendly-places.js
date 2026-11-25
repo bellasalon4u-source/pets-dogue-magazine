@@ -98,10 +98,6 @@ const CATEGORY_CONFIG = {
       "catering.restaurant.pizza",
       "catering.fast_food.pizza"
     ],
-    fallback:[
-      "catering.restaurant",
-      "catering.fast_food"
-    ],
     intrinsic:false
   },
 
@@ -1736,89 +1732,6 @@ async function searchCategory({
           ? place.category === category
           : true
       );
-
-
-  /* =====================================================
-     PIZZERIA CATEGORY FALLBACK
-
-     Some providers classify pizza venues only as a general
-     restaurant or fast-food place. Search those parent
-     categories as a fallback, then keep only records whose
-     returned category/name/cuisine identifies pizza. This
-     prevents the broader query from showing every restaurant
-     as a pizzeria.
-  ===================================================== */
-
-  if(
-    category === "pizzeria" &&
-    broad.length < maxResults &&
-    config.fallback?.length
-  ){
-
-    try{
-
-      const fallbackFeatures =
-        await geoapifyPlaces({
-
-          latitude,
-
-          longitude,
-
-          radius,
-
-          categories:
-            config.fallback,
-
-          language,
-
-          limit:
-            Math.max(
-              Math.min(120, maxResults),
-              60
-            ),
-
-          offset:0
-
-        });
-
-
-      const fallback =
-        fallbackFeatures
-          .map(
-            feature=>
-              normalizeFeature(
-                feature,
-                center,
-                "",
-                false
-              )
-          )
-          .filter(Boolean)
-          .filter(
-            place=>
-              place.category === "pizzeria"
-          );
-
-
-      broad =
-        mergePlaces(
-          [
-            broad,
-            fallback
-          ],
-          MAX_RESULTS
-        );
-
-    }catch(error){
-
-      console.warn(
-        "Pizzeria parent-category fallback:",
-        error?.message
-      );
-
-    }
-
-  }
 
 
   /* =====================================================
