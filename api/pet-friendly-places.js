@@ -98,6 +98,10 @@ const CATEGORY_CONFIG = {
       "catering.restaurant.pizza",
       "catering.fast_food.pizza"
     ],
+    fallback:[
+      "catering.restaurant",
+      "catering.fast_food"
+    ],
     intrinsic:false
   },
 
@@ -1610,9 +1614,7 @@ async function searchCategory({
     ];
 
 
-  if(!config){
-
-    return [];
+  if(!config){    return [];
 
   }
 
@@ -1625,9 +1627,34 @@ async function searchCategory({
   };
 
 
+  const pizzeriaFallbackPromise =
+    category === "pizzeria" && config.fallback?.length
+      ? geoapifyPlaces({
+
+          latitude,
+
+          longitude,
+
+          radius,
+
+          categories:
+            config.fallback,
+
+          language,
+
+          limit:
+            maxResults,
+
+          offset
+
+        })
+      : Promise.resolve([]);
+
+
   const [
     confirmedResult,
-    broadResult
+    broadResult,
+    pizzeriaFallbackResult
   ] =
     await Promise.allSettled([
 
@@ -1681,7 +1708,10 @@ async function searchCategory({
 
         offset
 
-      })
+      }),
+
+
+      pizzeriaFallbackPromise
 
 
     ]);
@@ -1698,6 +1728,13 @@ async function searchCategory({
     broadResult.status ===
     "fulfilled"
       ? broadResult.value
+      : [];
+
+
+  const pizzeriaFallbackFeatures =
+    pizzeriaFallbackResult.status ===
+    "fulfilled"
+      ? pizzeriaFallbackResult.value
       : [];
 
 
@@ -1734,6 +1771,37 @@ async function searchCategory({
       );
 
 
+  if(category === "pizzeria"){
+
+    const pizzeriaFallback =
+      pizzeriaFallbackFeatures
+        .map(
+          feature=>
+            normalizeFeature(
+              feature,
+              center,
+              "",
+              false
+            )
+        )
+        .filter(Boolean)
+        .filter(
+          place=>
+            place.category === "pizzeria"
+        );
+
+    broad =
+      mergePlaces(
+        [
+          broad,
+          pizzeriaFallback
+        ],
+        MAX_RESULTS
+      );
+
+  }
+
+
   /* =====================================================
      PET SERVICE FALLBACK
 
@@ -1744,6 +1812,7 @@ async function searchCategory({
   ===================================================== */
 
   if(
+    config.intrinsic &&
     config.fallback?.length &&
     broad.length < 8
   ){
@@ -3159,4 +3228,3 @@ async function handler(
   }
 
 };
-
