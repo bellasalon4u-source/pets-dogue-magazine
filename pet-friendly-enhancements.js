@@ -954,6 +954,39 @@ const PD_EVENT_ADD_LABELS = {
   ar:"＋ إضافة فعالية",
   hi:"＋ कार्यक्रम जोड़ें"
 };
+const PD_ADD_PLACE_LABELS = {
+  en:"＋ Add place",uk:"＋ Додати місце",ru:"＋ Добавить место",fr:"＋ Ajouter un lieu",de:"＋ Ort hinzufügen",es:"＋ Añadir lugar",it:"＋ Aggiungi luogo",pt:"＋ Adicionar lugar",nl:"＋ Plaats toevoegen",pl:"＋ Dodaj miejsce",cs:"＋ Přidat místo",sk:"＋ Pridať miesto",hu:"＋ Hely hozzáadása",ro:"＋ Adaugă un loc",bg:"＋ Добави място",el:"＋ Προσθήκη μέρους",sv:"＋ Lägg till plats",da:"＋ Tilføj sted",no:"＋ Legg til sted",fi:"＋ Lisää paikka",tr:"＋ Yer ekle",ar:"＋ إضافة مكان",hi:"＋ जगह जोड़ें"
+};
+const PD_MAP_UX = {
+  en:{all:"All",food:"Food & drinks",beauty:"Beauty & care",outdoors:"Stay & outdoors",pet:"Pet services",community:"Events & saved",title:"Suggest a place",name:"Place name",category:"Category",address:"Address or location",policy:"Official pet-policy link (optional)",pending:"A suggestion is not a confirmed pet-friendly place.",localOnly:"This is saved as a draft on this device only. It has not been sent for review or published.",save:"Save draft",cancel:"Cancel",required:"Enter a place name and address.",saved:"Draft saved on this device.",done:"Done",back:"Back to the map"},
+  uk:{all:"Усі",food:"Їжа та напої",beauty:"Краса й догляд",outdoors:"Проживання й прогулянки",pet:"Послуги для тварин",community:"Події та збережене",title:"Запропонувати місце",name:"Назва місця",category:"Категорія",address:"Адреса або місце",policy:"Посилання на офіційні правила (необов’язково)",pending:"Пропозиція не підтверджує, що місце дружнє до тварин.",localOnly:"Чернетку збережено лише на цьому пристрої. Її не надіслано на перевірку й не опубліковано.",save:"Зберегти чернетку",cancel:"Скасувати",required:"Введіть назву й адресу місця.",saved:"Чернетку збережено на цьому пристрої.",done:"Готово",back:"Назад до карти"},
+  ru:{all:"Все",food:"Еда и напитки",beauty:"Красота и уход",outdoors:"Отели и прогулки",pet:"Услуги для животных",community:"События и сохранённое",title:"Предложить место",name:"Название места",category:"Категория",address:"Адрес или место",policy:"Ссылка на официальные правила (необязательно)",pending:"Предложение не означает, что место разрешает животных.",localOnly:"Черновик сохранён только на этом устройстве. Он не отправлен на проверку и не опубликован.",save:"Сохранить черновик",cancel:"Отмена",required:"Укажите название и адрес места.",saved:"Черновик сохранён на этом устройстве.",done:"Готово",back:"Назад к карте"},
+  fr:{all:"Tout",food:"Boissons et restauration",beauty:"Beauté et soins",outdoors:"Hébergement et plein air",pet:"Services pour animaux",community:"Événements et favoris",title:"Suggérer un lieu",name:"Nom du lieu",category:"Catégorie",address:"Adresse ou lieu",policy:"Lien vers la politique officielle (facultatif)",pending:"Une suggestion ne confirme pas l’accueil des animaux.",localOnly:"Brouillon enregistré uniquement sur cet appareil. Il n’a pas été envoyé ni publié.",save:"Enregistrer le brouillon",cancel:"Annuler",required:"Saisissez le nom et l’adresse.",saved:"Brouillon enregistré sur cet appareil.",done:"Terminé",back:"Retour à la carte"},
+  de:{all:"Alle",food:"Essen & Trinken",beauty:"Schönheit & Pflege",outdoors:"Unterkünfte & draußen",pet:"Haustierservices",community:"Events & gespeichert",title:"Ort vorschlagen",name:"Name des Ortes",category:"Kategorie",address:"Adresse oder Ort",policy:"Link zu offiziellen Haustierregeln (optional)",pending:"Ein Vorschlag bestätigt keine Haustierfreundlichkeit.",localOnly:"Entwurf nur auf diesem Gerät gespeichert. Nicht zur Prüfung gesendet oder veröffentlicht.",save:"Entwurf speichern",cancel:"Abbrechen",required:"Name und Adresse eingeben.",saved:"Entwurf auf diesem Gerät gespeichert.",done:"Fertig",back:"Zurück zur Karte"},
+  es:{all:"Todo",food:"Comida y bebida",beauty:"Belleza y cuidado",outdoors:"Alojamiento y aire libre",pet:"Servicios para mascotas",community:"Eventos y guardados",title:"Sugerir un lugar",name:"Nombre del lugar",category:"Categoría",address:"Dirección o ubicación",policy:"Enlace a la política oficial (opcional)",pending:"La sugerencia no confirma que se admitan mascotas.",localOnly:"Borrador guardado solo en este dispositivo. No se ha enviado ni publicado.",save:"Guardar borrador",cancel:"Cancelar",required:"Escribe el nombre y la dirección.",saved:"Borrador guardado en este dispositivo.",done:"Listo",back:"Volver al mapa"},
+  it:{all:"Tutti",food:"Cibo e bevande",beauty:"Bellezza e cura",outdoors:"Soggiorni e attività all’aperto",pet:"Servizi per animali",community:"Eventi e salvati",title:"Suggerisci un luogo",name:"Nome del luogo",category:"Categoria",address:"Indirizzo o luogo",policy:"Link alle regole ufficiali (facoltativo)",pending:"Il suggerimento non conferma l’accesso agli animali.",localOnly:"Bozza salvata solo su questo dispositivo. Non è stata inviata né pubblicata.",save:"Salva bozza",cancel:"Annulla",required:"Inserisci nome e indirizzo.",saved:"Bozza salvata su questo dispositivo.",done:"Fatto",back:"Torna alla mappa"},
+  pt:{all:"Todos",food:"Comida e bebidas",beauty:"Beleza e cuidados",outdoors:"Estadias e ar livre",pet:"Serviços para animais",community:"Eventos e guardados",title:"Sugerir um local",name:"Nome do local",category:"Categoria",address:"Morada ou local",policy:"Ligação às regras oficiais (opcional)",pending:"A sugestão não confirma a entrada de animais.",localOnly:"Rascunho guardado apenas neste dispositivo. Não foi enviado nem publicado.",save:"Guardar rascunho",cancel:"Cancelar",required:"Introduza o nome e a morada.",saved:"Rascunho guardado neste dispositivo.",done:"Concluído",back:"Voltar ao mapa"},
+  nl:{all:"Alles",food:"Eten en drinken",beauty:"Beauty en verzorging",outdoors:"Verblijf en buiten",pet:"Huisdierenservices",community:"Evenementen en bewaard",title:"Een plek voorstellen",name:"Naam van de plek",category:"Categorie",address:"Adres of locatie",policy:"Link naar officieel huisdierenbeleid (optioneel)",pending:"Een voorstel bevestigt niet dat huisdieren welkom zijn.",localOnly:"Concept alleen op dit apparaat opgeslagen. Niet verzonden of gepubliceerd.",save:"Concept opslaan",cancel:"Annuleren",required:"Vul de naam en het adres in.",saved:"Concept opgeslagen op dit apparaat.",done:"Klaar",back:"Terug naar de kaart"},
+  pl:{all:"Wszystkie",food:"Jedzenie i napoje",beauty:"Uroda i pielęgnacja",outdoors:"Noclegi i plener",pet:"Usługi dla zwierząt",community:"Wydarzenia i zapisane",title:"Zaproponuj miejsce",name:"Nazwa miejsca",category:"Kategoria",address:"Adres lub lokalizacja",policy:"Link do oficjalnych zasad (opcjonalnie)",pending:"Sugestia nie potwierdza, że miejsce przyjmuje zwierzęta.",localOnly:"Szkic zapisano tylko na tym urządzeniu. Nie został wysłany ani opublikowany.",save:"Zapisz szkic",cancel:"Anuluj",required:"Podaj nazwę i adres.",saved:"Szkic zapisano na tym urządzeniu.",done:"Gotowe",back:"Wróć do mapy"},
+  cs:{all:"Vše",food:"Jídlo a nápoje",beauty:"Krása a péče",outdoors:"Ubytování a venku",pet:"Služby pro mazlíčky",community:"Události a uložené",title:"Navrhnout místo",name:"Název místa",category:"Kategorie",address:"Adresa nebo místo",policy:"Odkaz na oficiální pravidla (volitelné)",pending:"Návrh nepotvrzuje, že jsou zde mazlíčci vítáni.",localOnly:"Koncept je uložen pouze v tomto zařízení. Nebyl odeslán ani zveřejněn.",save:"Uložit koncept",cancel:"Zrušit",required:"Zadejte název a adresu.",saved:"Koncept uložen v tomto zařízení.",done:"Hotovo",back:"Zpět na mapu"},
+  sk:{all:"Všetky",food:"Jedlo a nápoje",beauty:"Krása a starostlivosť",outdoors:"Ubytovanie a vonku",pet:"Služby pre zvieratá",community:"Podujatia a uložené",title:"Navrhnúť miesto",name:"Názov miesta",category:"Kategória",address:"Adresa alebo miesto",policy:"Odkaz na oficiálne pravidlá (voliteľné)",pending:"Návrh nepotvrdzuje, že sú tu zvieratá vítané.",localOnly:"Koncept je uložený iba v tomto zariadení. Nebol odoslaný ani zverejnený.",save:"Uložiť koncept",cancel:"Zrušiť",required:"Zadajte názov a adresu.",saved:"Koncept uložený v tomto zariadení.",done:"Hotovo",back:"Späť na mapu"},
+  hu:{all:"Összes",food:"Étel és ital",beauty:"Szépség és ápolás",outdoors:"Szállás és szabadtér",pet:"Kisállat-szolgáltatások",community:"Események és mentettek",title:"Hely javaslása",name:"Hely neve",category:"Kategória",address:"Cím vagy hely",policy:"Hivatalos szabályzat linkje (nem kötelező)",pending:"A javaslat nem igazolja, hogy a hely állatbarát.",localOnly:"Piszkozat csak ezen az eszközön mentve. Nem lett elküldve vagy közzétéve.",save:"Piszkozat mentése",cancel:"Mégse",required:"Add meg a nevet és a címet.",saved:"Piszkozat mentve ezen az eszközön.",done:"Kész",back:"Vissza a térképhez"},
+  ro:{all:"Toate",food:"Mâncare și băuturi",beauty:"Frumusețe și îngrijire",outdoors:"Cazare și exterior",pet:"Servicii pentru animale",community:"Evenimente și salvate",title:"Sugerează un loc",name:"Numele locului",category:"Categorie",address:"Adresă sau locație",policy:"Link către regulile oficiale (opțional)",pending:"Sugestia nu confirmă accesul animalelor.",localOnly:"Ciornă salvată doar pe acest dispozitiv. Nu a fost trimisă sau publicată.",save:"Salvează ciorna",cancel:"Anulează",required:"Introdu numele și adresa.",saved:"Ciornă salvată pe acest dispozitiv.",done:"Gata",back:"Înapoi la hartă"},
+  bg:{all:"Всички",food:"Храна и напитки",beauty:"Красота и грижа",outdoors:"Настаняване и навън",pet:"Услуги за любимци",community:"Събития и запазени",title:"Предложи място",name:"Име на мястото",category:"Категория",address:"Адрес или местоположение",policy:"Връзка към официалните правила (незадължително)",pending:"Предложението не потвърждава, че мястото приема животни.",localOnly:"Черновата е запазена само на това устройство. Не е изпратена или публикувана.",save:"Запази черновата",cancel:"Отказ",required:"Въведете име и адрес.",saved:"Черновата е запазена на това устройство.",done:"Готово",back:"Назад към картата"},
+  el:{all:"Όλα",food:"Φαγητό και ποτό",beauty:"Ομορφιά και φροντίδα",outdoors:"Διαμονή και ύπαιθρος",pet:"Υπηρεσίες κατοικιδίων",community:"Εκδηλώσεις και αποθηκευμένα",title:"Πρότεινε ένα μέρος",name:"Όνομα μέρους",category:"Κατηγορία",address:"Διεύθυνση ή τοποθεσία",policy:"Σύνδεσμος επίσημων κανόνων (προαιρετικά)",pending:"Η πρόταση δεν επιβεβαιώνει ότι επιτρέπονται κατοικίδια.",localOnly:"Το πρόχειρο αποθηκεύτηκε μόνο σε αυτή τη συσκευή. Δεν στάλθηκε ούτε δημοσιεύτηκε.",save:"Αποθήκευση προχείρου",cancel:"Ακύρωση",required:"Συμπλήρωσε όνομα και διεύθυνση.",saved:"Το πρόχειρο αποθηκεύτηκε σε αυτή τη συσκευή.",done:"Έγινε",back:"Πίσω στον χάρτη"},
+  sv:{all:"Alla",food:"Mat och dryck",beauty:"Skönhet och vård",outdoors:"Boende och utomhus",pet:"Husdjurstjänster",community:"Evenemang och sparade",title:"Föreslå en plats",name:"Platsens namn",category:"Kategori",address:"Adress eller plats",policy:"Länk till officiella regler (valfritt)",pending:"Ett förslag bekräftar inte att husdjur är välkomna.",localOnly:"Utkastet sparades bara på den här enheten. Det har inte skickats eller publicerats.",save:"Spara utkast",cancel:"Avbryt",required:"Ange namn och adress.",saved:"Utkast sparat på den här enheten.",done:"Klart",back:"Tillbaka till kartan"},
+  da:{all:"Alle",food:"Mad og drikke",beauty:"Skønhed og pleje",outdoors:"Ophold og udendørs",pet:"Kæledyrsservice",community:"Begivenheder og gemte",title:"Foreslå et sted",name:"Stedets navn",category:"Kategori",address:"Adresse eller sted",policy:"Link til officielle regler (valgfrit)",pending:"Et forslag bekræfter ikke, at kæledyr er velkomne.",localOnly:"Udkastet er kun gemt på denne enhed. Det er ikke sendt eller offentliggjort.",save:"Gem udkast",cancel:"Annuller",required:"Indtast navn og adresse.",saved:"Udkast gemt på denne enhed.",done:"Færdig",back:"Tilbage til kortet"},
+  no:{all:"Alle",food:"Mat og drikke",beauty:"Skjønnhet og pleie",outdoors:"Overnatting og ute",pet:"Kjæledyrtjenester",community:"Arrangementer og lagret",title:"Foreslå et sted",name:"Stedets navn",category:"Kategori",address:"Adresse eller sted",policy:"Lenke til offisielle regler (valgfritt)",pending:"Et forslag bekrefter ikke at kjæledyr er velkomne.",localOnly:"Utkastet er bare lagret på denne enheten. Det er ikke sendt eller publisert.",save:"Lagre utkast",cancel:"Avbryt",required:"Skriv inn navn og adresse.",saved:"Utkast lagret på denne enheten.",done:"Ferdig",back:"Tilbake til kartet"},
+  fi:{all:"Kaikki",food:"Ruoka ja juoma",beauty:"Kauneus ja hoito",outdoors:"Majoitus ja ulkoilu",pet:"Lemmikkipalvelut",community:"Tapahtumat ja tallennetut",title:"Ehdota paikkaa",name:"Paikan nimi",category:"Kategoria",address:"Osoite tai sijainti",policy:"Linkki virallisiin sääntöihin (valinnainen)",pending:"Ehdotus ei vahvista lemmikkiystävällisyyttä.",localOnly:"Luonnos tallennettiin vain tälle laitteelle. Sitä ei lähetetty eikä julkaistu.",save:"Tallenna luonnos",cancel:"Peruuta",required:"Lisää nimi ja osoite.",saved:"Luonnos tallennettu tälle laitteelle.",done:"Valmis",back:"Takaisin karttaan"},
+  tr:{all:"Tümü",food:"Yeme içme",beauty:"Güzellik ve bakım",outdoors:"Konaklama ve açık hava",pet:"Evcil hayvan hizmetleri",community:"Etkinlikler ve kaydedilenler",title:"Yer öner",name:"Yer adı",category:"Kategori",address:"Adres veya konum",policy:"Resmî kurallar bağlantısı (isteğe bağlı)",pending:"Öneri, evcil hayvan kabulünü doğrulamaz.",localOnly:"Taslak yalnızca bu cihaza kaydedildi. İncelemeye gönderilmedi veya yayımlanmadı.",save:"Taslağı kaydet",cancel:"İptal",required:"Yer adını ve adresini girin.",saved:"Taslak bu cihaza kaydedildi.",done:"Tamam",back:"Haritaya dön"},
+  ar:{all:"الكل",food:"الطعام والشراب",beauty:"الجمال والعناية",outdoors:"الإقامة والأنشطة الخارجية",pet:"خدمات الحيوانات الأليفة",community:"الفعاليات والمحفوظات",title:"اقترح مكانًا",name:"اسم المكان",category:"الفئة",address:"العنوان أو الموقع",policy:"رابط سياسة الحيوانات الرسمية (اختياري)",pending:"الاقتراح لا يؤكد السماح بالحيوانات الأليفة.",localOnly:"حُفظت المسودة على هذا الجهاز فقط. لم تُرسل للمراجعة ولم تُنشر.",save:"حفظ المسودة",cancel:"إلغاء",required:"أدخل اسم المكان وعنوانه.",saved:"حُفظت المسودة على هذا الجهاز.",done:"تم",back:"العودة إلى الخريطة"},
+  hi:{all:"सभी",food:"खाना और पेय",beauty:"सौंदर्य और देखभाल",outdoors:"ठहरने और बाहर की जगहें",pet:"पालतू सेवाएँ",community:"कार्यक्रम और सहेजे गए",title:"जगह सुझाएँ",name:"जगह का नाम",category:"श्रेणी",address:"पता या स्थान",policy:"आधिकारिक पालतू नीति का लिंक (वैकल्पिक)",pending:"सुझाव से यह पुष्टि नहीं होती कि पालतू जानवरों की अनुमति है।",localOnly:"ड्राफ़्ट केवल इस डिवाइस पर सहेजा गया है। इसे समीक्षा के लिए भेजा या प्रकाशित नहीं किया गया।",save:"ड्राफ़्ट सहेजें",cancel:"रद्द करें",required:"जगह का नाम और पता भरें।",saved:"ड्राफ़्ट इस डिवाइस पर सहेजा गया।",done:"हो गया",back:"मैप पर वापस जाएँ"}
+};
+const PD_PLACE_SUGGESTION_KEY = "pets_dogue_place_suggestions_draft_v1";
+function pdUx(key){
+  const language = (aliases[lang] || lang || "en").toLowerCase();
+  return (PD_MAP_UX[language] || PD_MAP_UX.en)[key] || PD_MAP_UX.en[key] || key;
+}
 function pdT(key){
 
   return (
@@ -5383,331 +5416,6 @@ async function pdProviderSearch(
 }
 
 
-function pdAround(
-  snapshot,
-  meters
-){
-
-  return (
-    `(around:${Math.round(
-      meters
-    )},${snapshot.latitude},${snapshot.longitude})`
-  );
-
-}
-
-
-function pdOsmQuery(
-  snapshot
-){
-
-  const full =
-    pdAround(
-      snapshot,
-      snapshot.radiusKm *
-      1000
-    );
-
-  const broad =
-    pdAround(
-      snapshot,
-      Math.min(
-        snapshot.radiusKm *
-        1000,
-        15000
-      )
-    );
-
-  const dog =
-    '["dog"~"^(yes|leashed|designated|permissive|outside|limited|conditional|customers)$",i]';
-
-
-  const queries = {
-
-    cafe:[
-
-      `nwr["amenity"="cafe"]${dog}${full};`,
-
-      `nwr["amenity"="cafe"]${broad};`
-
-    ],
-
-    restaurant:[
-
-      `nwr["amenity"="restaurant"]${dog}${full};`,
-
-      `nwr["amenity"="restaurant"]${broad};`
-
-    ],
-
-    pub:[
-
-      `nwr["amenity"="pub"]${dog}${full};`,
-
-      `nwr["amenity"="bar"]${dog}${full};`,
-
-      `nwr["amenity"="pub"]${broad};`,
-
-      `nwr["amenity"="bar"]${broad};`
-
-    ],
-
-    pizzeria:[
-
-      `nwr["amenity"="restaurant"]["cuisine"~"pizza",i]${dog}${full};`,
-
-      `nwr["amenity"="fast_food"]["cuisine"~"pizza",i]${dog}${full};`,
-
-      `nwr["amenity"="restaurant"]["cuisine"~"pizza",i]${broad};`,
-
-      `nwr["amenity"="fast_food"]["cuisine"~"pizza",i]${broad};`,
-
-      `nwr["amenity"~"^(restaurant|fast_food)$"]["name"~"pizza|pizzeria|pizz",i]${broad};`
-
-    ],
-
-    hotel:[
-
-      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment)$"]${dog}${full};`,
-
-      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment)$"]${broad};`
-
-    ],
-
-    park:[
-
-      `nwr["leisure"="dog_park"]${full};`,
-
-      `nwr["leisure"="park"]${dog}${full};`,
-
-      `nwr["leisure"="park"]${broad};`
-
-    ],
-
-    beach:[
-
-      `nwr["natural"="beach"]${dog}${full};`,
-
-      `nwr["natural"="beach"]${broad};`
-
-    ],
-
-    veterinary:[
-
-      `nwr["amenity"="veterinary"]${broad};`
-
-    ],
-
-    "pet-shop":[
-
-      `nwr["shop"="pet"]${broad};`,
-
-      `nwr["shop"="pet_food"]${broad};`
-
-    ],
-
-    grooming:[
-
-      `nwr["shop"="pet_grooming"]${broad};`,
-
-      `nwr["name"~"groom|grooming|dog wash|pet salon",i]${broad};`
-
-    ],
-
-    events:[
-
-      `nwr["amenity"="events_venue"]${dog}${full};`,
-
-      `nwr["amenity"="events_venue"]${broad};`
-
-    ]
-
-  };
-
-
-  let lines;
-
-
-  if(
-    snapshot.category ===
-    "all"
-  ){
-
-    /*
-       Keep the "All" discovery broad enough to surface useful
-       venue types, while OSM dog tags still give stronger
-       pet-policy evidence when available.
-    */
-
-    lines = [
-
-      `nwr["amenity"="cafe"]${dog}${full};`,
-
-      `nwr["amenity"="restaurant"]${dog}${full};`,
-
-      `nwr["amenity"="pub"]${dog}${full};`,
-
-      `nwr["amenity"="bar"]${dog}${full};`,
-
-      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment)$"]${dog}${full};`,
-
-      `nwr["leisure"="dog_park"]${full};`,
-
-      `nwr["natural"="beach"]${dog}${full};`,
-
-      `nwr["amenity"="cafe"]${broad};`,
-
-      `nwr["amenity"="restaurant"]${broad};`,
-
-      `nwr["amenity"="pub"]${broad};`,
-
-      `nwr["amenity"="bar"]${broad};`,
-
-      `nwr["tourism"~"^(hotel|guest_house|hostel|motel|apartment)$"]${broad};`,
-
-      `nwr["amenity"="veterinary"]${broad};`,
-
-      `nwr["shop"="pet"]${broad};`,
-
-      `nwr["shop"="pet_grooming"]${broad};`
-
-    ];
-
-  }else{
-
-    lines =
-      queries[
-        snapshot.category
-      ] ||
-      [];
-
-  }
-
-  return lines.length
-    ? (
-        "[out:json][timeout:18];(" +
-        lines.join("") +
-        ");out center tags 350;"
-      )
-    : "";
-
-}
-
-
-async function pdOsmSearch(
-  snapshot
-){
-
-  const query =
-    pdOsmQuery(
-      snapshot
-    );
-
-  if(!query){
-
-    return [];
-
-  }
-
-  const controller =
-    new AbortController();
-
-  const timer =
-    setTimeout(
-      ()=>controller.abort(),
-      8000
-    );
-
-  try{
-
-    const response =
-      await fetch(
-        OVP,
-        {
-          method:"POST",
-
-          signal:
-            controller.signal,
-
-          headers:{
-            "Content-Type":
-              "application/x-www-form-urlencoded;charset=UTF-8"
-          },
-
-          body:
-            new URLSearchParams({
-              data:
-                query
-            })
-
-        }
-      );
-
-    if(
-      !response.ok
-    ){
-
-      throw new Error(
-        "OpenStreetMap error"
-      );
-
-    }
-
-    const data =
-      await response.json();
-
-    return (
-      data.elements ||
-      []
-    )
-    .map(
-      element=>{
-
-        const place =
-          normOsm(
-            element
-          );
-
-        if(
-          place &&
-          snapshot.category !==
-          "all" &&
-          snapshot.category !==
-          "saved" &&
-          [
-            "cafe",
-            "restaurant",
-            "pub",
-            "pizzeria",
-            "hotel"
-          ]
-          .includes(
-            snapshot.category
-          )
-        ){
-
-          place.category =
-            snapshot.category;
-
-        }
-
-        return place;
-
-      }
-    )
-    .filter(Boolean);
-
-  }finally{
-
-    clearTimeout(
-      timer
-    );
-
-  }
-
-}
-
-
 function pdStillCurrent(
   sequence,
   snapshot
@@ -5897,11 +5605,11 @@ function pdInstallPlacesLayout(){
         : document.querySelector(".cat.active")?.dataset.cat;
 
     const isEvents = selectedCategory === "events";
-    const label =
-      PD_EVENT_ADD_LABELS[lang] ||
-      PD_EVENT_ADD_LABELS.en;
+    const label = isEvents
+      ? (PD_EVENT_ADD_LABELS[lang] || PD_EVENT_ADD_LABELS.en)
+      : (PD_ADD_PLACE_LABELS[lang] || PD_ADD_PLACE_LABELS.en);
 
-    eventAction.hidden = !isEvents;
+    eventAction.hidden = false;
     addButton.textContent = label;
     addButton.setAttribute("aria-label", label);
   };
@@ -5920,9 +5628,389 @@ function pdInstallPlacesLayout(){
   updateEventAction();
 }
 
+const PD_CATEGORY_GROUP_CONFIG = [
+  {key:"all",ids:["all","cafe","restaurant","pub","pizzeria","hotel","park","beach","veterinary","pet-shop","grooming","barber","beauty","events","saved"]},
+  {key:"food",ids:["cafe","restaurant","pub","pizzeria"]},
+  {key:"beauty",ids:["barber","beauty"]},
+  {key:"outdoors",ids:["hotel","park","beach"]},
+  {key:"pet",ids:["veterinary","pet-shop","grooming"]},
+  {key:"community",ids:["events","saved"]}
+];
+
+function pdInstallCategoryGroups(){
+  const discovery = document.querySelector(".discovery");
+  const categories = discovery?.querySelector(".categories");
+  if(!discovery || !categories || document.getElementById("pdCategoryGroups")) return;
+
+  const originals = [...categories.querySelectorAll(".cat[data-cat]")];
+  if(!originals.length) return;
+
+  const root = document.createElement("section");
+  root.id = "pdCategoryGroups";
+  root.className = "pd-category-groups";
+  root.setAttribute("aria-label", "Place categories");
+
+  const tabs = document.createElement("div");
+  tabs.className = "pd-category-group-tabs";
+  tabs.setAttribute("role", "tablist");
+  tabs.setAttribute("aria-label", "Category groups");
+
+  const subfilters = document.createElement("div");
+  subfilters.className = "pd-category-group-subfilters";
+  subfilters.setAttribute("role", "group");
+
+  root.append(tabs, subfilters);
+  categories.insertAdjacentElement("beforebegin", root);
+  categories.hidden = true;
+  categories.setAttribute("aria-hidden", "true");
+  const dots = discovery.querySelector(".pd-category-dots");
+  if(dots) dots.hidden = true;
+
+  let activeGroup = "all";
+  const activeCategory = typeof cat !== "undefined" ? cat : "all";
+  const categoryGroup = PD_CATEGORY_GROUP_CONFIG.find(group=>group.ids.includes(activeCategory));
+  if(categoryGroup && activeCategory !== "all") activeGroup = categoryGroup.key;
+
+  function render(){
+    tabs.replaceChildren();
+    PD_CATEGORY_GROUP_CONFIG.forEach(group=>{
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "pd-category-group-tab";
+      button.textContent = pdUx(group.key);
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-selected", String(group.key === activeGroup));
+      button.addEventListener("click", ()=>{
+        activeGroup = group.key;
+        render();
+      });
+      tabs.appendChild(button);
+    });
+
+    const selectedGroup = PD_CATEGORY_GROUP_CONFIG.find(group=>group.key === activeGroup) || PD_CATEGORY_GROUP_CONFIG[0];
+    const visible = originals.filter(button=>selectedGroup.ids.includes(button.dataset.cat));
+    subfilters.replaceChildren();
+    visible.forEach(original=>{
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "pd-category-group-subfilter";
+      button.innerHTML = original.innerHTML;
+      button.setAttribute("aria-pressed", String(original.classList.contains("active")));
+      button.addEventListener("click", ()=>{
+        const nextGroup = PD_CATEGORY_GROUP_CONFIG.find(group=>group.key !== "all" && group.ids.includes(original.dataset.cat));
+        if(nextGroup) activeGroup = nextGroup.key;
+        original.click();
+        render();
+      });
+      subfilters.appendChild(button);
+    });
+  }
+
+  render();
+  window.addEventListener("petsdogue:languagechange", ()=>setTimeout(render, 0));
+}
+
+function pdInstallFullMapBack(){
+  const openButton = document.getElementById("mapFull");
+  const closeButton = document.getElementById("fullClose");
+  const overlay = document.getElementById("fullOverlay");
+  if(!openButton || !closeButton || !overlay || openButton.dataset.pdBackReady === "true") return;
+
+  openButton.dataset.pdBackReady = "true";
+  const openOriginal = openButton.onclick;
+  const closeOriginal = closeButton.onclick;
+  let fullMapWasOpen = false;
+
+  function closeFromHistory(){
+    if(!overlay.classList.contains("open")) return;
+    if(typeof closeOriginal === "function") closeOriginal.call(closeButton);
+    else{
+      overlay.classList.remove("open");
+      document.body.classList.remove("lock");
+    }
+    fullMapWasOpen = false;
+  }
+
+  openButton.onclick = function(event){
+    if(typeof openOriginal === "function") openOriginal.call(openButton, event);
+    setTimeout(()=>{
+      if(!overlay.classList.contains("open")) return;
+      if(!history.state?.pdPetsDogueFullMap){
+        history.pushState(Object.assign({}, history.state || {}, {pdPetsDogueFullMap:true}), "", location.href);
+      }
+      fullMapWasOpen = true;
+      closeButton.setAttribute("aria-label", pdUx("back"));
+      closeButton.title = pdUx("back");
+    }, 0);
+  };
+
+  closeButton.onclick = function(event){
+    if(history.state?.pdPetsDogueFullMap){
+      event?.preventDefault();
+      history.back();
+      return;
+    }
+    closeFromHistory();
+  };
+
+  window.addEventListener("popstate", ()=>{
+    if(fullMapWasOpen && !history.state?.pdPetsDogueFullMap) closeFromHistory();
+  });
+
+  document.addEventListener("keydown", event=>{
+    if(event.key === "Escape" && overlay.classList.contains("open")){
+      if(history.state?.pdPetsDogueFullMap) history.back();
+      else closeFromHistory();
+    }
+  });
+}
+
+function pdInstallPolicyDone(){
+  const button = document.getElementById("policySave");
+  if(!button) return;
+  button.removeAttribute("data-t");
+
+  const update = ()=>{
+    button.textContent = pdUx("done");
+    button.setAttribute("aria-label", pdUx("done"));
+    button.classList.add("pd-policy-done");
+  };
+
+  update();
+  window.addEventListener("petsdogue:languagechange", ()=>setTimeout(update, 0));
+
+  const originalVoteYes = window.pdVoteYes;
+  if(typeof originalVoteYes === "function" && !originalVoteYes.__pdDoneLabelWrapped){
+    const wrapped = async function(place){
+      const result = await originalVoteYes.call(this, place);
+      setTimeout(update, 0);
+      return result;
+    };
+    wrapped.__pdDoneLabelWrapped = true;
+    window.pdVoteYes = wrapped;
+  }
+}
+
+function pdInstallAddPlaceDraft(){
+  const addButton = document.getElementById("addMap");
+  if(!addButton || addButton.dataset.pdDraftReady === "true") return;
+  addButton.dataset.pdDraftReady = "true";
+
+  let overlay = document.getElementById("pdPlaceSuggestionOverlay");
+  if(!overlay){
+    overlay = document.createElement("div");
+    overlay.id = "pdPlaceSuggestionOverlay";
+    overlay.className = "pd-place-suggestion-overlay";
+    overlay.setAttribute("role", "presentation");
+
+    const dialog = document.createElement("section");
+    dialog.className = "pd-place-suggestion-dialog";
+    dialog.setAttribute("role", "dialog");
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-labelledby", "pdPlaceSuggestionTitle");
+
+    const header = document.createElement("div");
+    header.className = "pd-place-suggestion-header";
+    const title = document.createElement("h2");
+    title.id = "pdPlaceSuggestionTitle";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "pd-place-suggestion-close";
+    close.textContent = "×";
+    close.setAttribute("aria-label", "Close");
+    header.append(title, close);
+
+    const form = document.createElement("form");
+    form.className = "pd-place-suggestion-form";
+    const field = (labelText, name, type)=>{
+      const label = document.createElement("label");
+      label.className = "pd-place-suggestion-field";
+      const caption = document.createElement("span");
+      caption.textContent = labelText;
+      const input = document.createElement(type === "select" ? "select" : "input");
+      input.name = name;
+      if(type !== "select") input.type = type || "text";
+      label.append(caption, input);
+      return {label,input};
+    };
+    const nameField = field("", "name", "text");
+    nameField.input.required = true;
+    nameField.input.maxLength = 120;
+    nameField.input.autocomplete = "organization";
+    const categoryField = field("", "category", "select");
+    categoryField.input.required = true;
+    const addressField = field("", "address", "text");
+    addressField.input.required = true;
+    addressField.input.maxLength = 300;
+    addressField.input.autocomplete = "street-address";
+    const policyField = field("", "policy", "url");
+    policyField.input.maxLength = 500;
+    policyField.input.placeholder = "https://";
+
+    const note = document.createElement("p");
+    note.className = "pd-place-suggestion-note";
+    const localOnly = document.createElement("p");
+    localOnly.className = "pd-place-suggestion-local-only";
+    const message = document.createElement("p");
+    message.className = "pd-place-suggestion-message";
+    message.setAttribute("aria-live", "polite");
+
+    const actions = document.createElement("div");
+    actions.className = "pd-place-suggestion-actions";
+    const cancel = document.createElement("button");
+    cancel.type = "button";
+    cancel.className = "pd-place-suggestion-cancel";
+    const save = document.createElement("button");
+    save.type = "submit";
+    save.className = "pd-place-suggestion-save";
+    actions.append(cancel, save);
+
+    form.append(nameField.label, categoryField.label, addressField.label, policyField.label, note, localOnly, message, actions);
+    dialog.append(header, form);
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+
+    function closeForm(){
+      overlay.classList.remove("open");
+      document.body.classList.remove("pd-place-suggestion-open");
+      message.textContent = "";
+    }
+    close.onclick = closeForm;
+    cancel.onclick = closeForm;
+    overlay.addEventListener("click", event=>{ if(event.target === overlay) closeForm(); });
+    document.addEventListener("keydown", event=>{
+      if(event.key === "Escape" && overlay.classList.contains("open")) closeForm();
+    });
+
+    function updateText(){
+      title.textContent = pdUx("title");
+      nameField.label.firstChild.textContent = pdUx("name");
+      categoryField.label.firstChild.textContent = pdUx("category");
+      addressField.label.firstChild.textContent = pdUx("address");
+      policyField.label.firstChild.textContent = pdUx("policy");
+      note.textContent = pdUx("pending");
+      localOnly.textContent = pdUx("localOnly");
+      cancel.textContent = pdUx("cancel");
+      save.textContent = pdUx("save");
+      close.setAttribute("aria-label", pdUx("cancel"));
+    }
+
+    function updateOptions(){
+      const originals = [...document.querySelectorAll(".categories .cat[data-cat]")]
+        .filter(button=>!["all","events","saved"].includes(button.dataset.cat));
+      const current = typeof cat !== "undefined" ? cat : "cafe";
+      categoryField.input.replaceChildren();
+      originals.forEach(original=>{
+        const option = document.createElement("option");
+        option.value = original.dataset.cat;
+        option.textContent = original.textContent.trim().replace(/^\S+\s*/, "");
+        option.selected = original.dataset.cat === current;
+        categoryField.input.appendChild(option);
+      });
+    }
+
+    form.addEventListener("submit", event=>{
+      event.preventDefault();
+      if(!form.reportValidity()) return;
+
+      const suggestion = {
+        id:"draft-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,8),
+        name:nameField.input.value.trim(),
+        category:categoryField.input.value,
+        address:addressField.input.value.trim(),
+        policySource:policyField.input.value.trim(),
+        petPolicy:"unconfirmed",
+        status:"local-draft",
+        createdAt:new Date().toISOString()
+      };
+
+      try{
+        const previous = JSON.parse(localStorage.getItem(PD_PLACE_SUGGESTION_KEY) || "[]");
+        const drafts = Array.isArray(previous) ? previous.slice(-49) : [];
+        drafts.push(suggestion);
+        localStorage.setItem(PD_PLACE_SUGGESTION_KEY, JSON.stringify(drafts));
+        message.textContent = pdUx("saved") + " " + pdUx("localOnly");
+        form.reset();
+        updateOptions();
+        setTimeout(closeForm, 2600);
+      }catch(error){
+        console.warn("Could not save local place draft:", error);
+        message.textContent = pdUx("required");
+      }
+    });
+
+    overlay._pdUpdateText = updateText;
+    overlay._pdUpdateOptions = updateOptions;
+    overlay._pdOpen = ()=>{
+      updateText();
+      updateOptions();
+      overlay.classList.add("open");
+      document.body.classList.add("pd-place-suggestion-open");
+      nameField.input.focus();
+    };
+  }
+
+  const originalClick = addButton.onclick;
+  addButton.onclick = function(event){
+    const selectedCategory = typeof cat !== "undefined" ? cat : document.querySelector(".cat.active")?.dataset.cat;
+    if(selectedCategory === "events"){
+      if(typeof originalClick === "function") return originalClick.call(addButton, event);
+      return;
+    }
+    event?.preventDefault();
+    overlay._pdOpen?.();
+  };
+
+  window.addEventListener("petsdogue:languagechange", ()=>{
+    overlay._pdUpdateText?.();
+    overlay._pdUpdateOptions?.();
+  });
+}
+
+function pdInstallNextControlsStyles(){
+  if(document.getElementById("pd-map-next-controls-style")) return;
+  const style = document.createElement("style");
+  style.id = "pd-map-next-controls-style";
+  style.textContent = [
+    ".pd-category-groups{display:grid;gap:6px;width:100%;margin:5px 0 2px;min-width:0}",
+    ".pd-category-group-tabs,.pd-category-group-subfilters{display:flex;gap:7px;align-items:center;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 1px 5px}",
+    ".pd-category-group-tabs::-webkit-scrollbar,.pd-category-group-subfilters::-webkit-scrollbar{display:none}",
+    ".pd-category-group-tab,.pd-category-group-subfilter{flex:0 0 auto;min-height:36px;border:1px solid #cfc5b4;border-radius:999px;background:#fffdf8;color:#171717;padding:0 12px;font-size:12px;font-weight:800;white-space:nowrap}",
+    ".pd-category-group-tab[aria-selected=true],.pd-category-group-subfilter[aria-pressed=true]{background:#111;color:#f1d384;border-color:#111;box-shadow:0 3px 8px rgba(0,0,0,.18)}",
+    ".pd-category-group-subfilter{min-height:34px;background:#f8f4eb}",
+    ".pd-event-add-wrap .map-add{min-height:46px!important;border-radius:999px!important}",
+    "#policySave.pd-policy-done{background:#65e51f!important;color:#111!important;border-color:#65e51f!important;font-weight:900!important}",
+    ".pd-place-suggestion-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.68);align-items:center;justify-content:center;padding:16px}",
+    ".pd-place-suggestion-overlay.open{display:flex}",
+    ".pd-place-suggestion-open{overflow:hidden}",
+    ".pd-place-suggestion-dialog{width:min(560px,100%);max-height:min(88vh,820px);overflow:auto;background:#f7f2e8;color:#111;border:2px solid #111;border-radius:22px;box-shadow:0 20px 65px rgba(0,0,0,.35);padding:18px}",
+    ".pd-place-suggestion-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid #d9d0c0;padding-bottom:10px;margin-bottom:12px}",
+    ".pd-place-suggestion-header h2{font:400 27px/1.05 Georgia,serif;margin:0}",
+    ".pd-place-suggestion-close{width:40px;height:40px;border:1px solid #111;border-radius:50%;background:#fff;font-size:25px;line-height:1}",
+    ".pd-place-suggestion-form{display:grid;gap:11px}",
+    ".pd-place-suggestion-field{display:grid;gap:5px;font-size:12px;font-weight:800}",
+    ".pd-place-suggestion-field input,.pd-place-suggestion-field select{width:100%;min-height:44px;padding:9px 11px;border:1px solid #aaa08e;border-radius:11px;background:#fff;color:#111}",
+    ".pd-place-suggestion-note,.pd-place-suggestion-local-only{margin:0;padding:10px 11px;border-radius:10px;font-size:12px;line-height:1.4}",
+    ".pd-place-suggestion-note{background:#fff4d2;border:1px solid #d6b45e}",
+    ".pd-place-suggestion-local-only{background:#f4e5e4;border:1px solid #c98d8b}",
+    ".pd-place-suggestion-message{min-height:18px;margin:0;font-size:12px;font-weight:800}",
+    ".pd-place-suggestion-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}",
+    ".pd-place-suggestion-actions button{min-height:44px;border:1px solid #111;border-radius:999px;font-weight:900}",
+    ".pd-place-suggestion-cancel{background:#fff;color:#111}",
+    ".pd-place-suggestion-save{background:#65e51f;color:#111}",
+    "@media(max-width:610px){.pd-category-group-tab,.pd-category-group-subfilter{min-height:36px;padding:0 10px;font-size:11px}.pd-place-suggestion-dialog{padding:15px;border-radius:18px}.pd-place-suggestion-header h2{font-size:24px}}"
+  ].join("\n");
+  document.head.appendChild(style);
+}
+
 function pdBoot(){
   pdInstallStyles();
   pdInstallPlacesLayout();
+  pdInstallNextControlsStyles();
+  pdInstallCategoryGroups();
+  pdInstallFullMapBack();
+  pdInstallPolicyDone();
+  pdInstallAddPlaceDraft();
   pdInstallPhotoModal();
   pdUpdatePhotoModalText();
   loadCommunity();
