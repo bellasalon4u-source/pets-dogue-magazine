@@ -41,6 +41,9 @@ const GEOAPIFY_DETAILS_URL =
 const NOMINATIM_SEARCH_URL =
   "https://nominatim.openstreetmap.org/search";
 
+const OVERPASS_API_URL =
+  "https://overpass-api.de/api/interpreter";
+
 const WIKIMEDIA_API_URL =
   "https://commons.wikimedia.org/w/api.php";
 
@@ -58,6 +61,15 @@ const DEFAULT_RADIUS_METERS =
 
 const REQUEST_TIMEOUT =
   9000;
+
+const OVERPASS_TIMEOUT =
+  7000;
+
+const OSM_CACHE_TTL =
+  5 * 60 * 1000;
+
+const OSM_RESULT_CACHE =
+  new Map();
 
 
 /* =========================================================
@@ -1584,6 +1596,668 @@ async function geoapifyPlaces({
 
 
 /* =========================================================
+   OPENSTREETMAP / OVERPASS SEARCH
+
+   OSM is a free second source for broad discovery.
+   Dog-policy status stays unknown unless the OSM tags
+   contain an explicit dog/pet access value.
+========================================================= */
+
+const OSM_CATEGORY_FILTERS = {
+
+  cafe:[
+    "[amenity=cafe]"
+  ],
+
+  restaurant:[
+    "[amenity=restaurant]"
+  ],
+
+  pub:[
+    "[amenity=pub]",
+    "[amenity=bar]",
+    "[amenity=biergarten]"
+  ],
+
+  pizzeria:[
+    "[cuisine~\"pizza\",i]",
+    "[name~\"pizza|pizzeria\",i]"
+  ],
+
+  hotel:[
+    "[tourism~\"^(hotel|guest_house|hostel|motel|apartment)$\"]"
+  ],
+
+  park:[
+    "[leisure=park]",
+    "[leisure=dog_park]",
+    "[amenity=dog_park]"
+  ],
+
+  beach:[
+    "[natural=beach]",
+    "[leisure=beach_resort]"
+  ],
+
+  veterinary:[
+    "[amenity=veterinary]"
+  ],
+
+  "pet-shop":[
+    "[shop=pet]"
+  ],
+
+  grooming:[
+    "[shop=pet_grooming]",
+    "[craft=pet_groomer]"
+  ],
+
+  barber:[
+    "[shop=barber]",
+    "[craft=barber]"
+  ],
+
+  beauty:[
+    "[shop=beauty]",
+    "[shop=hairdresser]",
+    "[leisure=spa]",
+    "[craft=beauty]"
+  ],
+
+  events:[
+    "[amenity=events_venue]"
+  ]
+
+};
+
+
+function osmSelectors(category){
+
+  if(
+    category &&
+    category !== "all" &&
+    OSM_CATEGORY_FILTERS[category]
+  ){
+
+    return OSM_CATEGORY_FILTERS[category];
+
+  }
+
+
+  return Object.values(
+    OSM_CATEGORY_FILTERS
+  )
+  .flat();
+
+}
+
+
+function osmCategoryForTags(
+  tags,
+  hint = ""
+){
+
+  const amenity =
+    String(tags.amenity || "").toLowerCase();
+
+  const shop =
+    String(tags.shop || "").toLowerCase();
+
+  const tourism =
+    String(tags.tourism || "").toLowerCase();
+
+  const leisure =
+    String(tags.leisure || "").toLowerCase();
+
+  const natural =
+    String(tags.natural || "").toLowerCase();
+
+  const craft =
+    String(tags.craft || "").toLowerCase();
+
+  const cuisine =
+    String(tags.cuisine || "").toLowerCase();
+
+  const name =
+    [
+      tags.name,
+      tags["name:en"],
+      tags.brand,
+      tags.operator,
+      tags.description
+    ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+
+  const isPizzeria =
+    /\bpizza\b|\bpizzeria\b/i.test(cuisine) ||
+    /\bpizza\b|\bpizzeria\b/i.test(name);
+
+
+  if(hint === "pizzeria"){
+
+    return isPizzeria
+      ? "pizzeria"
+      : "other";
+
+  }
+
+
+  if(hint === "barber"){
+
+    return shop === "barber" ||
+      craft === "barber"
+        ? "barber"
+        : "other";
+
+  }
+
+
+  if(hint === "beauty"){
+
+    return (
+      shop === "beauty" ||
+      shop === "hairdresser" ||
+      leisure === "spa" ||
+      craft === "beauty"
+    )
+      ? "beauty"
+      : "other";
+
+  }
+
+
+  if(hint && hint !== "all"){
+
+    return hint;
+
+  }
+
+
+  if(isPizzeria) return "pizzeria";
+
+  if(amenity === "cafe") return "cafe";
+
+  if(
+    amenity === "pub" ||
+    amenity === "bar" ||
+    amenity === "biergarten"
+  ){
+
+    return "pub";
+
+  }
+
+  if(amenity === "restaurant") return "restaurant";
+
+  if(
+    tourism === "hotel" ||
+    tourism === "guest_house" ||
+    tourism === "hostel" ||
+    tourism === "motel" ||
+    tourism === "apartment"
+  ){
+
+    return "hotel";
+
+  }
+
+  if(
+    amenity === "dog_park" ||
+    leisure === "dog_park" ||
+    leisure === "park"
+  ){
+
+    return "park";
+
+  }
+
+  if(
+    natural === "beach" ||
+    leisure === "beach_resort"
+  ){
+
+    return "beach";
+
+  }
+
+  if(amenity === "veterinary") return "veterinary";
+
+  if(shop === "pet") return "pet-shop";
+
+  if(
+    shop === "pet_grooming" ||
+    craft === "pet_groomer"
+  ){
+
+    return "grooming";
+
+  }
+
+  if(
+    shop === "barber" ||
+    craft === "barber"
+  ){
+
+    return "barber";
+
+  }
+
+  if(
+    shop === "beauty" ||
+    shop === "hairdresser" ||
+    leisure === "spa" ||
+    craft === "beauty"
+  ){
+
+    return "beauty";
+
+  }
+
+  if(amenity === "events_venue") return "events";
+
+  return "other";
+
+}
+
+
+function normalizeOsmElement(
+  element,
+  center,
+  hint = ""
+){
+
+  const tags =
+    element?.tags ||
+    {};
+
+  const latitude =
+    num(
+      element?.lat ??
+      element?.center?.lat
+    );
+
+  const longitude =
+    num(
+      element?.lon ??
+      element?.center?.lon
+    );
+
+  const category =
+    osmCategoryForTags(
+      tags,
+      hint
+    );
+
+
+  if(
+    latitude === null ||
+    longitude === null ||
+    category === "other"
+  ){
+
+    return null;
+
+  }
+
+
+  const name =
+    cleanString(
+      tags.name ||
+      tags["name:en"] ||
+      tags.brand ||
+      tags.operator ||
+      "",
+      300
+    );
+
+
+  if(!name){
+
+    return null;
+
+  }
+
+
+  const addressParts = [
+
+    [
+      tags["addr:housenumber"],
+      tags["addr:street"]
+    ]
+    .filter(Boolean)
+    .join(" "),
+
+    tags["addr:suburb"],
+
+    tags["addr:city"] ||
+      tags["addr:town"] ||
+      tags["addr:village"],
+
+    tags["addr:postcode"],
+
+    tags["addr:country"]
+
+  ]
+  .map(
+    value=>
+      cleanString(value,200)
+  )
+  .filter(Boolean);
+
+
+  const address =
+    addressParts.join(", ") ||
+    cleanString(
+      tags["addr:full"] ||
+      tags["contact:address"] ||
+      "",
+      1000
+    );
+
+
+  const properties = {
+
+    conditions:[],
+
+    description:
+      tags.description ||
+      "",
+
+    datasource:{
+      raw:
+        tags
+    }
+
+  };
+
+
+  const photos =
+    extractPhotos(properties);
+
+  const intrinsicPetPlace =
+    ["veterinary", "pet-shop", "grooming"].includes(category) ||
+    tags.amenity === "dog_park" ||
+    tags.leisure === "dog_park";
+
+  const allowsDogs =
+    detectAllowsDogs(
+      properties,
+      category,
+      intrinsicPetPlace
+    );
+
+
+  return {
+
+    id:
+      "osm-" +
+      element.type +
+      "-" +
+      element.id,
+
+    providerId:
+      element.type +
+      "-" +
+      element.id,
+
+    source:
+      "osm",
+
+    name,
+
+    category,
+
+    address,
+
+    location:{
+      lat:
+        latitude,
+      lng:
+        longitude
+    },
+
+    distance:
+      center
+        ? distanceKm(
+            center.lat,
+            center.lng,
+            latitude,
+            longitude
+          )
+        : null,
+
+    rating:null,
+
+    ratingCount:0,
+
+    website:
+      safeUrl(
+        tags.website ||
+        tags["contact:website"] ||
+        tags.url ||
+        ""
+      ),
+
+    phone:
+      cleanString(
+        tags.phone ||
+        tags["contact:phone"] ||
+        "",
+        160
+      ),
+
+    googleMapsUrl:"",
+
+    photos,
+
+    photo:
+      photos[0] ||
+      "",
+
+    allowsDogs,
+
+    openNow:null
+
+  };
+
+}
+
+
+async function openStreetMapPlaces({
+
+  latitude,
+
+  longitude,
+
+  radius,
+
+  category = "all",
+
+  limit = DEFAULT_RESULTS,
+
+  offset = 0
+
+}){
+
+  const selectors =
+    unique(
+      osmSelectors(category)
+    );
+
+
+  if(!selectors.length){
+
+    return [];
+
+  }
+
+
+  const requestedLimit =
+    clamp(
+      Number(offset) +
+        Number(limit),
+      1,
+      MAX_RESULTS
+    );
+
+
+  const cacheKey =
+    [
+      Number(latitude).toFixed(4),
+      Number(longitude).toFixed(4),
+      radius,
+      category || "all",
+      requestedLimit
+    ]
+    .join("|");
+
+
+  const now =
+    Date.now();
+
+  const cached =
+    OSM_RESULT_CACHE.get(cacheKey);
+
+
+  if(
+    cached &&
+    cached.expiresAt > now
+  ){
+
+    return cached.places.slice(
+      offset,
+      offset + limit
+    );
+
+  }
+
+
+  const center = {
+    lat:
+      latitude,
+    lng:
+      longitude
+  };
+
+
+  const query =
+    [
+      "[out:json][timeout:6];",
+      "(",
+      selectors
+        .map(
+          selector=>
+            "nwr(around:" +
+            radius +
+            "," +
+            latitude +
+            "," +
+            longitude +
+            ")" +
+            selector +
+            ";"
+        )
+        .join("\n"),
+      ");",
+      "out center qt " +
+        requestedLimit +
+        ";"
+    ]
+    .join("\n");
+
+
+  try{
+
+    const response =
+      await fetchJson(
+        OVERPASS_API_URL,
+        {
+          method:"POST",
+          headers:{
+            Accept:
+              "application/json",
+            "Content-Type":
+              "application/x-www-form-urlencoded;charset=UTF-8",
+            "User-Agent":
+              "PETS-DOGUE/1.0 (+https://www.petsanddogue.com)"
+          },
+          body:
+            "data=" +
+            encodeURIComponent(query)
+        },
+        OVERPASS_TIMEOUT
+      );
+
+
+    const places =
+      safeArray(
+        response?.elements
+      )
+      .map(
+        element=>
+          normalizeOsmElement(
+            element,
+            center,
+            category
+          )
+      )
+      .filter(Boolean)
+      .sort(
+        (a,b)=>
+          (a.distance ?? 999999) -
+          (b.distance ?? 999999)
+      );
+
+
+    OSM_RESULT_CACHE.set(
+      cacheKey,
+      {
+        expiresAt:
+          now + OSM_CACHE_TTL,
+        places
+      }
+    );
+
+
+    while(
+      OSM_RESULT_CACHE.size > 100
+    ){
+
+      const oldestKey =
+        OSM_RESULT_CACHE.keys()
+          .next()
+          .value;
+
+      OSM_RESULT_CACHE.delete(
+        oldestKey
+      );
+
+    }
+
+
+    return places.slice(
+      offset,
+      offset + limit
+    );
+
+  }catch(error){
+
+    console.warn(
+      "OpenStreetMap Overpass:",
+      error?.message
+    );
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================================================
    CATEGORY SEARCH
 
    TWO SEARCHES:
@@ -1669,7 +2343,8 @@ async function searchCategory({
   const [
     confirmedResult,
     broadResult,
-    pizzeriaFallbackResult
+    pizzeriaFallbackResult,
+    osmResult
   ] =
     await Promise.allSettled([
 
@@ -1732,7 +2407,18 @@ async function searchCategory({
       }),
 
 
-      pizzeriaFallbackPromise
+      pizzeriaFallbackPromise,
+
+
+      openStreetMapPlaces({
+        latitude,
+        longitude,
+        radius,
+        category,
+        limit:
+          Math.min(maxResults, MAX_RESULTS),
+        offset
+      })
 
 
     ]);
@@ -1756,6 +2442,12 @@ async function searchCategory({
     pizzeriaFallbackResult.status ===
     "fulfilled"
       ? pizzeriaFallbackResult.value
+      : [];
+
+
+  const osmPlacesList =
+    osmResult.status === "fulfilled"
+      ? osmResult.value
       : [];
 
 
@@ -1911,7 +2603,8 @@ async function searchCategory({
   return mergePlaces(
     [
       confirmed,
-      broad
+      broad,
+      osmPlacesList
     ],
     maxResults
   );
@@ -1953,7 +2646,8 @@ async function searchAll({
   const [
     confirmedLifestyleResult,
     broadLifestyleResult,
-    petServicesResult
+    petServicesResult,
+    osmResult
   ] =
     await Promise.allSettled([
 
@@ -2021,6 +2715,17 @@ async function searchAll({
 
         offset
 
+      }),
+
+
+      openStreetMapPlaces({
+        latitude,
+        longitude,
+        radius,
+        category:"all",
+        limit:
+          Math.min(maxResults, MAX_RESULTS),
+        offset
       })
 
 
@@ -2098,11 +2803,18 @@ async function searchAll({
     );
 
 
+  const osmPlacesList =
+    osmResult.status === "fulfilled"
+      ? osmResult.value
+      : [];
+
+
   return mergePlaces(
     [
       confirmedLifestyle,
       petServices,
-      broadLifestyle
+      broadLifestyle,
+      osmPlacesList
     ],
     maxResults
   );
@@ -3141,23 +3853,6 @@ async function handler(
     }
 
 
-    if(!GEOAPIFY_API_KEY){
-
-      return sendJson(
-        res,
-        200,
-        {
-          ok:true,
-          provider:
-            "openstreetmap-fallback",
-          count:0,
-          places:[]
-        }
-      );
-
-    }
-
-
     let places =
       [];
 
@@ -3214,7 +3909,9 @@ async function handler(
       {
         ok:true,
         provider:
-          "geoapify",
+          GEOAPIFY_API_KEY
+            ? "geoapify+openstreetmap"
+            : "openstreetmap",
         category,
         count:
           places.length,
@@ -3249,4 +3946,5 @@ async function handler(
   }
 
 };
+
 
