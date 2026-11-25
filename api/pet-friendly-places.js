@@ -1475,7 +1475,9 @@ async function geoapifyPlaces({
 
   limit = DEFAULT_RESULTS,
 
-  offset = 0
+  offset = 0,
+
+  timeout = REQUEST_TIMEOUT
 
 }){
 
@@ -1569,7 +1571,8 @@ async function geoapifyPlaces({
           Accept:
             "application/json"
         }
-      }
+      },
+      timeout
     );
 
 
@@ -1627,6 +1630,12 @@ async function searchCategory({
   };
 
 
+  const categoryRequestTimeout =
+    category === "pizzeria"
+      ? 6500
+      : REQUEST_TIMEOUT;
+
+
   const pizzeriaFallbackPromise =
     category === "pizzeria" && config.fallback?.length
       ? geoapifyPlaces({
@@ -1643,9 +1652,15 @@ async function searchCategory({
           language,
 
           limit:
-            maxResults,
+            Math.min(
+              40,
+              maxResults
+            ),
 
-          offset
+          offset,
+
+          timeout:
+            categoryRequestTimeout
 
         })
       : Promise.resolve([]);
@@ -1685,7 +1700,10 @@ async function searchCategory({
                 maxResults
               ),
 
-            offset:0
+            offset:0,
+
+            timeout:
+              categoryRequestTimeout
 
           }),
 
@@ -1706,7 +1724,10 @@ async function searchCategory({
         limit:
           maxResults,
 
-        offset
+        offset,
+
+        timeout:
+          categoryRequestTimeout
 
       }),
 
@@ -3228,3 +3249,4 @@ async function handler(
   }
 
 };
+
