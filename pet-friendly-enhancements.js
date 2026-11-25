@@ -5810,50 +5810,29 @@ async function(){
 
 
   /*
-     Geoapify and OSM start together.
-
-     Geoapify broad results can appear immediately.
-     OSM cannot block the whole search.
+     The server endpoint already combines Geoapify and the
+     server-side OpenStreetMap/Overpass results. Do not make a
+     second Overpass request from the visitor's browser: public
+     Overpass instances can rate-limit or reject cross-origin
+     requests, and the duplicate request can produce console errors.
   */
 
-  const providerPromise =
-    pdProviderSearch(
-      snapshot
-    )
-    .catch(
-      error=>{
-
-        console.warn(
-          "Geoapify:",
-          error
-        );
-
-        return [];
-
-      }
-    );
-
-
-  const osmPromise =
-    pdOsmSearch(
-      snapshot
-    )
-    .catch(
-      error=>{
-
-        console.warn(
-          "OSM:",
-          error
-        );
-
-        return [];
-
-      }
-    );
-
-
   const providerPlaces =
-    await providerPromise;
+    await pdProviderSearch(
+      snapshot
+    )
+    .catch(
+      error=>{
+
+        console.warn(
+          "Place search:",
+          error
+        );
+
+        return [];
+
+      }
+    );
 
 
   if(
@@ -5869,44 +5848,11 @@ async function(){
 
 
   pdSearchPending = false;
+
   places =
     merge([
       providerPlaces
     ]);
-
-
-  render();
-
-
-  setStatus(
-    t(
-      "osm"
-    )
-  );
-
-
-  const osmPlaces =
-    await osmPromise;
-
-
-  if(
-    !pdStillCurrent(
-      sequence,
-      snapshot
-    )
-  ){
-
-    return;
-
-  }
-
-
-  places =
-    merge([
-      providerPlaces,
-      osmPlaces
-    ]);
-
 
   render();
 
