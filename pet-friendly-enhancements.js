@@ -5637,6 +5637,10 @@ const PD_CATEGORY_GROUP_CONFIG = [
   {key:"community",ids:["events","saved"]}
 ];
 
+const PD_MAP_TAP_LABELS = {
+  en:"Tap the map to open it full screen",uk:"Торкніться карти, щоб відкрити на весь екран",ru:"Нажмите на карту, чтобы открыть на весь экран",fr:"Touchez la carte pour l’ouvrir en plein écran",de:"Karte antippen, um sie im Vollbild zu öffnen",es:"Toca el mapa para abrirlo a pantalla completa",it:"Tocca la mappa per aprirla a schermo intero",pt:"Toque no mapa para o abrir em ecrã inteiro",nl:"Tik op de kaart om deze schermvullend te openen",pl:"Dotknij mapy, aby otworzyć ją na pełnym ekranie",cs:"Klepnutím na mapu ji otevřete přes celou obrazovku",sk:"Ťuknutím na mapu ju otvoríte na celú obrazovku",hu:"Koppints a térképre a teljes képernyős megnyitáshoz",ro:"Atinge harta pentru a o deschide pe tot ecranul",bg:"Докоснете картата, за да я отворите на цял екран",el:"Πατήστε τον χάρτη για πλήρη οθόνη",sv:"Tryck på kartan för att öppna den i helskärm",da:"Tryk på kortet for at åbne det i fuld skærm",no:"Trykk på kartet for å åpne det i fullskjerm",fi:"Avaa kartta koko näytölle napauttamalla",tr:"Haritayı tam ekranda açmak için dokunun",ar:"اضغط على الخريطة لفتحها بملء الشاشة",hi:"मैप को पूरी स्क्रीन में खोलने के लिए टैप करें"
+};
+
 function pdInstallCategoryGroups(){
   const discovery = document.querySelector(".discovery");
   const categories = discovery?.querySelector(".categories");
@@ -5714,6 +5718,7 @@ function pdInstallFullMapBack(){
   const openButton = document.getElementById("mapFull");
   const closeButton = document.getElementById("fullClose");
   const overlay = document.getElementById("fullOverlay");
+  const mapCanvas = document.getElementById("map");
   if(!openButton || !closeButton || !overlay || openButton.dataset.pdBackReady === "true") return;
 
   openButton.dataset.pdBackReady = "true";
@@ -5763,6 +5768,29 @@ function pdInstallFullMapBack(){
       else closeFromHistory();
     }
   });
+
+  if(mapCanvas && mapCanvas.dataset.pdTapHandlerInstalled !== "true"){
+    mapCanvas.dataset.pdTapHandlerInstalled = "true";
+    mapCanvas.dataset.pdTapToExpand = "true";
+    mapCanvas.removeAttribute("role");
+    const language = (aliases[lang] || lang || "en").toLowerCase();
+    mapCanvas.setAttribute("aria-label", PD_MAP_TAP_LABELS[language] || PD_MAP_TAP_LABELS.en);
+    mapCanvas.setAttribute("tabindex", "0");
+    mapCanvas.addEventListener("click", event=>{
+      if(event.target.closest(".leaflet-control,.leaflet-marker-icon,.leaflet-popup,.leaflet-interactive,button,a,[role=button]")) return;
+      openButton.click();
+    });
+    mapCanvas.addEventListener("keydown", event=>{
+      if((event.key === "Enter" || event.key === " ") && event.target === mapCanvas){
+        event.preventDefault();
+        openButton.click();
+      }
+    });
+    window.addEventListener("petsdogue:languagechange", ()=>{
+      const nextLanguage = (aliases[lang] || lang || "en").toLowerCase();
+      mapCanvas.setAttribute("aria-label", PD_MAP_TAP_LABELS[nextLanguage] || PD_MAP_TAP_LABELS.en);
+    });
+  }
 }
 
 function pdInstallPolicyDone(){
@@ -5789,6 +5817,91 @@ function pdInstallPolicyDone(){
     wrapped.__pdDoneLabelWrapped = true;
     window.pdVoteYes = wrapped;
   }
+}
+
+function pdInstallSortControl(){
+  const select = document.getElementById("sort");
+  if(!select || select.dataset.pdCustomSort === "true") return;
+  select.dataset.pdCustomSort = "true";
+  select.classList.add("pd-sort-native-hidden");
+  select.tabIndex = -1;
+  select.setAttribute("aria-hidden", "true");
+
+  const root = document.createElement("div");
+  root.className = "pd-sort-control";
+  root.id = "pdSortControl";
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "pd-sort-trigger";
+  trigger.setAttribute("aria-haspopup", "menu");
+  trigger.setAttribute("aria-expanded", "false");
+
+  const chevron = document.createElement("span");
+  chevron.className = "pd-sort-chevron";
+  chevron.setAttribute("aria-hidden", "true");
+  chevron.textContent = "⌄";
+  trigger.append(document.createElement("span"), chevron);
+
+  const triggerLabel = trigger.firstElementChild;
+  const menu = document.createElement("div");
+  menu.className = "pd-sort-menu";
+  menu.setAttribute("role", "menu");
+  menu.hidden = true;
+
+  root.append(trigger, menu);
+  select.insertAdjacentElement("beforebegin", root);
+
+  function close(){
+    menu.hidden = true;
+    root.classList.remove("open");
+    trigger.setAttribute("aria-expanded", "false");
+  }
+
+  function render(){
+    const selected = [...select.options].find(option=>option.value === select.value) || select.options[0];
+    triggerLabel.textContent = selected?.textContent.trim() || "Sort places";
+    menu.replaceChildren();
+
+    [...select.options].forEach(option=>{
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "pd-sort-option";
+      item.setAttribute("role", "menuitemradio");
+      item.setAttribute("aria-checked", String(option.value === select.value));
+      item.textContent = option.textContent.trim();
+      item.addEventListener("click", ()=>{
+        select.value = option.value;
+        select.dispatchEvent(new Event("change", {bubbles:true}));
+        render();
+        close();
+        trigger.focus();
+      });
+      menu.appendChild(item);
+    });
+  }
+
+  trigger.addEventListener("click", ()=>{
+    const opening = menu.hidden;
+    menu.hidden = !opening;
+    root.classList.toggle("open", opening);
+    trigger.setAttribute("aria-expanded", String(opening));
+  });
+
+  document.addEventListener("click", event=>{
+    if(!root.contains(event.target)) close();
+  });
+
+  document.addEventListener("keydown", event=>{
+    if(event.key === "Escape" && !menu.hidden){
+      close();
+      trigger.focus();
+    }
+  });
+
+  window.addEventListener("petsdogue:languagechange", ()=>setTimeout(render, 0));
+  select.addEventListener("change", render);
+  render();
 }
 
 function pdInstallAddPlaceDraft(){
@@ -5967,6 +6080,315 @@ function pdInstallAddPlaceDraft(){
   });
 }
 
+function pdInstallAddPlaceDraft(){
+  const addButton = document.getElementById("addMap");
+  if(!addButton || addButton.dataset.pdDraftReady === "true") return;
+  addButton.dataset.pdDraftReady = "true";
+
+  let overlay = document.getElementById("pdPlaceSuggestionOverlay");
+  if(!overlay){
+    overlay = document.createElement("div");
+    overlay.id = "pdPlaceSuggestionOverlay";
+    overlay.className = "pd-place-suggestion-overlay";
+    overlay.setAttribute("role", "presentation");
+
+    const dialog = document.createElement("section");
+    dialog.className = "pd-place-suggestion-dialog";
+    dialog.setAttribute("role", "dialog");
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-labelledby", "pdPlaceSuggestionTitle");
+
+    const header = document.createElement("div");
+    header.className = "pd-place-suggestion-header";
+    const title = document.createElement("h2");
+    title.id = "pdPlaceSuggestionTitle";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "pd-place-suggestion-close";
+    close.textContent = "×";
+    close.setAttribute("aria-label", "Close");
+    header.append(title, close);
+
+    const form = document.createElement("form");
+    form.className = "pd-place-suggestion-form";
+    const field = (labelText, name, type)=>{
+      const label = document.createElement("label");
+      label.className = "pd-place-suggestion-field";
+      const caption = document.createElement("span");
+      caption.textContent = labelText;
+      const input = document.createElement(type === "select" ? "select" : "input");
+      input.name = name;
+      if(type !== "select") input.type = type || "text";
+      label.append(caption, input);
+      return {label,input};
+    };
+    const nameField = field("", "name", "text");
+    nameField.input.required = true;
+    nameField.input.maxLength = 120;
+    nameField.input.autocomplete = "organization";
+    const categoryField = field("", "category", "select");
+    categoryField.input.required = true;
+    const addressField = field("", "address", "text");
+    addressField.input.required = true;
+    addressField.input.maxLength = 300;
+    addressField.input.autocomplete = "street-address";
+    const policyField = field("", "policy", "url");
+    policyField.input.maxLength = 500;
+    policyField.input.placeholder = "https://";
+
+    const note = document.createElement("p");
+    note.className = "pd-place-suggestion-note";
+    const localOnly = document.createElement("p");
+    localOnly.className = "pd-place-suggestion-local-only";
+    const message = document.createElement("p");
+    message.className = "pd-place-suggestion-message";
+    message.setAttribute("aria-live", "polite");
+
+    const actions = document.createElement("div");
+    actions.className = "pd-place-suggestion-actions";
+    const cancel = document.createElement("button");
+    cancel.type = "button";
+    cancel.className = "pd-place-suggestion-cancel";
+    const save = document.createElement("button");
+    save.type = "submit";
+    save.className = "pd-place-suggestion-save";
+    actions.append(cancel, save);
+
+    form.append(nameField.label, categoryField.label, addressField.label, policyField.label, note, localOnly, message, actions);
+    dialog.append(header, form);
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+
+    function closeForm(){
+      overlay.classList.remove("open");
+      document.body.classList.remove("pd-place-suggestion-open");
+      message.textContent = "";
+    }
+    close.onclick = closeForm;
+    cancel.onclick = closeForm;
+    overlay.addEventListener("click", event=>{ if(event.target === overlay) closeForm(); });
+    document.addEventListener("keydown", event=>{
+      if(event.key === "Escape" && overlay.classList.contains("open")) closeForm();
+    });
+
+    function updateText(){
+      title.textContent = pdUx("title");
+      nameField.label.firstChild.textContent = pdUx("name");
+      categoryField.label.firstChild.textContent = pdUx("category");
+      addressField.label.firstChild.textContent = pdUx("address");
+      policyField.label.firstChild.textContent = pdUx("policy");
+      note.textContent = pdUx("pending");
+      localOnly.textContent = pdUx("localOnly");
+      cancel.textContent = pdUx("cancel");
+      save.textContent = pdUx("save");
+      close.setAttribute("aria-label", pdUx("cancel"));
+    }
+
+    function updateOptions(){
+      const originals = [...document.querySelectorAll(".categories .cat[data-cat]")]
+        .filter(button=>!["all","events","saved"].includes(button.dataset.cat));
+      const current = typeof cat !== "undefined" ? cat : "cafe";
+      categoryField.input.replaceChildren();
+      originals.forEach(original=>{
+        const option = document.createElement("option");
+        option.value = original.dataset.cat;
+        option.textContent = original.textContent.trim().replace(/^\S+\s*/, "");
+        option.selected = original.dataset.cat === current;
+        categoryField.input.appendChild(option);
+      });
+    }
+
+    form.addEventListener("submit", event=>{
+      event.preventDefault();
+      if(!form.reportValidity()) return;
+
+      const suggestion = {
+        id:"draft-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,8),
+        name:nameField.input.value.trim(),
+        category:categoryField.input.value,
+        address:addressField.input.value.trim(),
+        policySource:policyField.input.value.trim(),
+        petPolicy:"unconfirmed",
+        status:"local-draft",
+        createdAt:new Date().toISOString()
+      };
+
+      try{
+        const previous = JSON.parse(localStorage.getItem(PD_PLACE_SUGGESTION_KEY) || "[]");
+        const drafts = Array.isArray(previous) ? previous.slice(-49) : [];
+        drafts.push(suggestion);
+        localStorage.setItem(PD_PLACE_SUGGESTION_KEY, JSON.stringify(drafts));
+        message.textContent = pdUx("saved") + " " + pdUx("localOnly");
+        form.reset();
+        updateOptions();
+        setTimeout(closeForm, 2600);
+      }catch(error){
+        console.warn("Could not save local place draft:", error);
+        message.textContent = pdUx("required");
+      }
+    });
+
+    overlay._pdUpdateText = updateText;
+    overlay._pdUpdateOptions = updateOptions;
+    overlay._pdOpen = ()=>{
+      updateText();
+      updateOptions();
+      overlay.classList.add("open");
+      document.body.classList.add("pd-place-suggestion-open");
+      nameField.input.focus();
+    };
+  }
+
+  const originalClick = addButton.onclick;
+  addButton.onclick = function(event){
+    const selectedCategory = typeof cat !== "undefined" ? cat : document.querySelector(".cat.active")?.dataset.cat;
+    if(selectedCategory === "events"){
+      if(typeof originalClick === "function") return originalClick.call(addButton, event);
+      return;
+    }
+    event?.preventDefault();
+    overlay._pdOpen?.();
+  };
+
+  window.addEventListener("petsdogue:languagechange", ()=>{
+    overlay._pdUpdateText?.();
+    overlay._pdUpdateOptions?.();
+  });
+}
+
+function pdInstallCompactFilterBar(){
+  const root = document.getElementById("pdCategoryGroups");
+  const tabs = root?.querySelector(".pd-category-group-tabs");
+  const subfilters = root?.querySelector(".pd-category-group-subfilters");
+  const policyFilters = document.getElementById("petPolicyFilters");
+  const sortControl = document.getElementById("pdSortControl");
+  if(!root || !tabs || !subfilters || !policyFilters || !sortControl || root.dataset.pdCompactReady === "true") return;
+
+  root.dataset.pdCompactReady = "true";
+  root.classList.add("pd-compact-filter-bar");
+  const labels = {
+    en:{category:"Category",policy:"Pet rules",all:"All",nearest:"Nearest",rating:"Top rated",popular:"Popular"},
+    uk:{category:"Категорії",policy:"Правила",all:"Усі",nearest:"Поруч",rating:"Рейтинг",popular:"Популярні"},
+    ru:{category:"Категории",policy:"Правила",all:"Все",nearest:"Рядом",rating:"Рейтинг",popular:"Популярные"},
+    fr:{category:"Catégories",policy:"Règles",all:"Tout",nearest:"Proches",rating:"Mieux notés",popular:"Populaires"},
+    de:{category:"Kategorien",policy:"Tierregeln",all:"Alle",nearest:"Nächste",rating:"Top bewertet",popular:"Beliebt"},
+    es:{category:"Categorías",policy:"Normas",all:"Todo",nearest:"Cerca",rating:"Mejor valorados",popular:"Populares"},
+    it:{category:"Categorie",policy:"Regole",all:"Tutti",nearest:"Vicini",rating:"Più votati",popular:"Popolari"},
+    pt:{category:"Categorias",policy:"Regras",all:"Todos",nearest:"Perto",rating:"Mais bem avaliados",popular:"Populares"},
+    nl:{category:"Categorieën",policy:"Regels",all:"Alles",nearest:"Dichtbij",rating:"Best beoordeeld",popular:"Populair"},
+    pl:{category:"Kategorie",policy:"Zasady",all:"Wszystkie",nearest:"Najbliższe",rating:"Najwyżej oceniane",popular:"Popularne"},
+    cs:{category:"Kategorie",policy:"Pravidla",all:"Vše",nearest:"Nejbližší",rating:"Nejlépe hodnocené",popular:"Oblíbené"},
+    sk:{category:"Kategórie",policy:"Pravidlá",all:"Všetky",nearest:"Najbližšie",rating:"Najlepšie hodnotené",popular:"Obľúbené"},
+    hu:{category:"Kategóriák",policy:"Szabályok",all:"Összes",nearest:"Közelben",rating:"Legjobbra értékelt",popular:"Népszerű"},
+    ro:{category:"Categorii",policy:"Reguli",all:"Toate",nearest:"Aproape",rating:"Cele mai apreciate",popular:"Populare"},
+    bg:{category:"Категории",policy:"Правила",all:"Всички",nearest:"Наблизо",rating:"Най-висок рейтинг",popular:"Популярни"},
+    el:{category:"Κατηγορίες",policy:"Κανόνες",all:"Όλα",nearest:"Κοντά",rating:"Κορυφαία",popular:"Δημοφιλή"},
+    sv:{category:"Kategorier",policy:"Regler",all:"Alla",nearest:"Närmast",rating:"Högst betyg",popular:"Populära"},
+    da:{category:"Kategorier",policy:"Regler",all:"Alle",nearest:"Nærmest",rating:"Bedst vurderet",popular:"Populære"},
+    no:{category:"Kategorier",policy:"Regler",all:"Alle",nearest:"Nærmest",rating:"Best vurdert",popular:"Populære"},
+    fi:{category:"Kategoriat",policy:"Säännöt",all:"Kaikki",nearest:"Lähin",rating:"Parhaat arviot",popular:"Suositut"},
+    tr:{category:"Kategoriler",policy:"Kurallar",all:"Tümü",nearest:"Yakında",rating:"En yüksek puan",popular:"Popüler"},
+    ar:{category:"الفئات",policy:"قواعد الحيوانات",all:"الكل",nearest:"الأقرب",rating:"الأعلى تقييمًا",popular:"الأكثر شيوعًا"},
+    hi:{category:"श्रेणियाँ",policy:"पालतू नियम",all:"सभी",nearest:"नज़दीकी",rating:"सबसे अच्छी रेटिंग",popular:"लोकप्रिय"}
+  };
+  const locale = ()=>labels[(aliases[lang] || lang || "en").toLowerCase()] || labels.en;
+  const makeControl = (kind, icon, ariaLabel)=>{
+    const control = document.createElement("div");
+    control.className = `pd-compact-control pd-compact-${kind}`;
+    const trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = "pd-compact-trigger";
+    trigger.setAttribute("aria-haspopup", "true");
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.setAttribute("aria-label", ariaLabel);
+    const iconNode = document.createElement("span");
+    iconNode.className = "pd-compact-icon";
+    iconNode.setAttribute("aria-hidden", "true");
+    iconNode.textContent = icon;
+    const labelNode = document.createElement("span");
+    labelNode.className = "pd-compact-label";
+    const chevron = document.createElement("span");
+    chevron.className = "pd-compact-chevron";
+    chevron.setAttribute("aria-hidden", "true");
+    chevron.textContent = "⌄";
+    trigger.append(iconNode, labelNode, chevron);
+    const menu = document.createElement("div");
+    menu.className = "pd-compact-menu";
+    menu.hidden = true;
+    control.append(trigger, menu);
+    trigger.addEventListener("click", ()=>{
+      const opening = menu.hidden;
+      closeMenus();
+      menu.hidden = !opening;
+      trigger.setAttribute("aria-expanded", String(opening));
+      control.classList.toggle("open", opening);
+    });
+    return {control,trigger,labelNode,menu};
+  };
+
+  const category = makeControl("category", "▦", "Choose a category");
+  const policy = makeControl("policy", "🐾", "Choose pet rules");
+  const row = document.createElement("div");
+  row.className = "pd-compact-filter-row";
+  category.menu.classList.add("pd-category-menu");
+  policy.menu.classList.add("pd-policy-menu");
+  category.menu.append(tabs, subfilters);
+  policy.menu.append(policyFilters);
+  root.replaceChildren(row);
+  row.append(category.control, policy.control, sortControl);
+  sortControl.classList.add("pd-compact-control", "pd-compact-sort");
+
+  function closeMenus(){
+    root.querySelectorAll(".pd-compact-menu").forEach(menu=>{menu.hidden=true;});
+    root.querySelectorAll(".pd-compact-trigger").forEach(button=>button.setAttribute("aria-expanded","false"));
+    root.querySelectorAll(".pd-compact-control.open").forEach(control=>control.classList.remove("open"));
+    const sortMenu = sortControl.querySelector(".pd-sort-menu");
+    const sortTrigger = sortControl.querySelector(".pd-sort-trigger");
+    if(sortMenu){sortMenu.hidden=true;sortControl.classList.remove("open");}
+    if(sortTrigger) sortTrigger.setAttribute("aria-expanded","false");
+  }
+
+  function updateLabels(){
+    const text = locale();
+    const selectedGroup = tabs.querySelector('[role="tab"][aria-selected="true"]');
+    const current = [...document.querySelectorAll(".categories .cat[data-cat]")].find(button=>button.classList.contains("active"));
+    const categoryName = selectedGroup?.textContent.trim() || current?.querySelector("span")?.textContent.trim() || text.all;
+    category.labelNode.textContent = `${text.category} · ${categoryName}`;
+    const activePolicy = policyFilters.querySelector(".pet-policy-filter.active");
+    const policyName = activePolicy?.textContent.trim() || text.all;
+    policy.labelNode.textContent = `${text.policy} · ${policyName}`;
+    category.trigger.setAttribute("aria-label", `${text.category}: ${categoryName}`);
+    policy.trigger.setAttribute("aria-label", `${text.policy}: ${policyName}`);
+    const select = document.getElementById("sort");
+    const sortTrigger = sortControl.querySelector(".pd-sort-trigger");
+    const sortLabel = sortTrigger?.firstElementChild;
+    if(select && sortLabel){
+      const key = select.value === "rating" ? "rating" : select.value === "popular" ? "popular" : "nearest";
+      sortLabel.textContent = text[key];
+      sortTrigger.setAttribute("aria-label", text[key]);
+    }
+  }
+
+  document.addEventListener("click", event=>{if(!root.contains(event.target)) closeMenus();});
+  document.addEventListener("keydown", event=>{if(event.key === "Escape") closeMenus();});
+  policyFilters.addEventListener("click", event=>{if(event.target.closest(".pet-policy-filter")) setTimeout(updateLabels,0);});
+  document.addEventListener("click", event=>{
+    if(event.target.closest(".categories .cat[data-cat]") || event.target.closest(".pd-category-group-subfilter")) setTimeout(updateLabels,0);
+    if(event.target.closest(".pd-category-group-tab")) setTimeout(updateLabels,0);
+  });
+  sortControl.querySelector(".pd-sort-trigger")?.addEventListener("click", ()=>{
+    category.menu.hidden = true;
+    policy.menu.hidden = true;
+    category.trigger.setAttribute("aria-expanded","false");
+    policy.trigger.setAttribute("aria-expanded","false");
+    category.control.classList.remove("open");
+    policy.control.classList.remove("open");
+  });
+  document.addEventListener("petsdogue:languagechange", ()=>setTimeout(updateLabels,0));
+  document.getElementById("sort")?.addEventListener("change", ()=>setTimeout(updateLabels,0));
+  updateLabels();
+}
+
 function pdInstallNextControlsStyles(){
   if(document.getElementById("pd-map-next-controls-style")) return;
   const style = document.createElement("style");
@@ -5979,6 +6401,33 @@ function pdInstallNextControlsStyles(){
     ".pd-category-group-tab[aria-selected=true],.pd-category-group-subfilter[aria-pressed=true]{background:#111;color:#f1d384;border-color:#111;box-shadow:0 3px 8px rgba(0,0,0,.18)}",
     ".pd-category-group-subfilter{min-height:34px;background:#f8f4eb}",
     ".pd-event-add-wrap .map-add{min-height:46px!important;border-radius:999px!important}",
+    ".pd-compact-filter-bar{display:block!important;width:100%;margin:7px 0 2px!important;padding:0!important;min-width:0;position:relative;z-index:1100}",
+    ".pd-compact-filter-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;align-items:start}",
+    ".pd-compact-control{position:relative;min-width:0;flex:initial!important}",
+    ".pd-compact-trigger{display:flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:100%!important;min-width:0!important;min-height:46px!important;padding:0 9px!important;border:1.5px solid #171717!important;border-radius:16px!important;background:#fffdf8!important;color:#111!important;box-shadow:0 2px 5px rgba(0,0,0,.08)!important;font-size:12px!important;font-weight:900!important;white-space:nowrap!important;overflow:hidden!important}",
+    ".pd-compact-trigger:focus-visible{outline:3px solid #1d78f2!important;outline-offset:2px!important}",
+    ".pd-compact-control.open>.pd-compact-trigger{background:#111!important;color:#f3cf63!important;border-color:#111!important}",
+    ".pd-compact-icon{flex:0 0 auto;font-size:16px;line-height:1}",
+    ".pd-compact-label{min-width:0;overflow:hidden;text-overflow:ellipsis}",
+    ".pd-compact-chevron{flex:0 0 auto;font-size:16px;line-height:1;color:#8a6418}",
+    ".pd-compact-menu{position:absolute;top:calc(100% + 7px);left:0;right:auto;z-index:20000;width:min(440px,calc(100vw - 28px));max-height:min(56vh,440px);overflow:auto;padding:12px;border:1px solid #d8d0c1;border-radius:18px;background:#fffdf8;box-shadow:0 16px 38px rgba(0,0,0,.22)}",
+    ".pd-compact-menu[hidden]{display:none!important}",
+    ".pd-compact-policy .pd-compact-menu{left:50%;transform:translateX(-50%)}",
+    ".pd-compact-category .pd-category-group-tabs{border:0;padding:0 0 9px;margin:0 0 8px}",
+    ".pd-compact-category .pd-category-group-subfilters{display:flex;flex-wrap:wrap;overflow:visible;padding:0;gap:7px}",
+    ".pd-compact-category .pd-category-group-tab,.pd-compact-category .pd-category-group-subfilter{min-height:40px;font-size:13px}",
+    ".pd-compact-policy .pet-policy-filters{display:flex!important;flex-wrap:wrap!important;overflow:visible!important;gap:8px!important;padding:0!important;margin:0!important}",
+    ".pd-compact-policy .pet-policy-filter-label{width:100%;margin:0 0 3px;font-size:12px!important}",
+    ".pd-compact-policy .pet-policy-filter{min-height:42px!important;padding:0 14px!important;font-size:12px!important}",
+    ".pd-compact-sort .pd-sort-trigger{min-height:46px;max-width:none;width:100%;border:0;border-radius:0;background:transparent;box-shadow:none;padding:0;color:#111;font-size:12px;font-weight:900}",
+    ".pd-compact-sort .pd-sort-chevron{display:none}",
+    ".pd-compact-sort .pd-sort-trigger:before{content:'↕';font-size:16px;color:#111}",
+    ".pd-compact-sort .pd-sort-menu{top:calc(100% + 7px);right:0;min-width:190px}",
+    ".pd-compact-sort{min-height:46px;border:1.5px solid #171717;border-radius:16px;background:#fffdf8;box-shadow:0 2px 5px rgba(0,0,0,.08)}",
+    "@media(max-width:610px){.pd-compact-filter-row{gap:6px}.pd-compact-trigger{min-height:43px!important;padding:0 6px!important;gap:4px!important;border-radius:13px!important;font-size:10px!important}.pd-compact-icon{font-size:14px}.pd-compact-chevron{font-size:14px}.pd-compact-menu{width:min(420px,calc(100vw - 24px));max-height:58vh;padding:10px}.pd-compact-policy .pd-compact-menu{left:auto;right:0;transform:none}.pd-compact-sort .pd-sort-trigger{min-height:43px;font-size:10px}.pd-compact-sort{min-height:43px;border-radius:13px}}",
+    "#mapFull.map-full{position:absolute!important;right:14px!important;bottom:14px!important;left:auto!important;top:auto!important;z-index:1200!important;display:grid!important;place-items:center!important;width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;padding:0!important;border:0!important;border-radius:14px!important;background:#0878f9!important;color:#fff!important;box-shadow:0 5px 16px rgba(0,75,190,.35)!important;font-size:30px!important;font-weight:900!important;line-height:1!important;cursor:pointer!important}",
+    "#mapFull.map-full:hover{background:#0067e8!important;transform:translateY(-1px)}",
+    "#mapFull.map-full:focus-visible{outline:3px solid #111!important;outline-offset:3px!important}",
     "#policySave.pd-policy-done{background:#65e51f!important;color:#111!important;border-color:#65e51f!important;font-weight:900!important}",
     ".pd-place-suggestion-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.68);align-items:center;justify-content:center;padding:16px}",
     ".pd-place-suggestion-overlay.open{display:flex}",
@@ -6008,6 +6457,8 @@ function pdBoot(){
   pdInstallPlacesLayout();
   pdInstallNextControlsStyles();
   pdInstallCategoryGroups();
+  pdInstallSortControl();
+  pdInstallCompactFilterBar();
   pdInstallFullMapBack();
   pdInstallPolicyDone();
   pdInstallAddPlaceDraft();
