@@ -5574,10 +5574,11 @@ async function(){
 function pdInstallPlacesLayout(){
   const discovery = document.querySelector(".discovery");
   const categories = discovery?.querySelector(".categories");
+  const mapShell = document.querySelector(".map-shell");
   const addButton = document.getElementById("addMap");
   const addTop = document.getElementById("addTop");
 
-  if(!discovery || !categories || !addButton){
+  if(!discovery || !categories || !mapShell || !addButton){
     return;
   }
 
@@ -5585,18 +5586,13 @@ function pdInstallPlacesLayout(){
     addTop.hidden = true;
   }
 
-  let eventAction = document.getElementById("pdEventAddWrap");
-
-  if(!eventAction){
-    eventAction = document.createElement("div");
-    eventAction.id = "pdEventAddWrap";
-    eventAction.className = "pd-event-add-wrap";
-    categories.insertAdjacentElement("afterend", eventAction);
+  if(addButton.parentElement !== mapShell){
+    mapShell.appendChild(addButton);
   }
 
-  eventAction.appendChild(addButton);
+  document.getElementById("pdEventAddWrap")?.remove();
   addButton.removeAttribute("data-t");
-  addButton.classList.add("pd-event-add-button");
+  addButton.classList.add("pd-map-add-button");
 
   const updateEventAction = ()=>{
     const selectedCategory =
@@ -5609,7 +5605,7 @@ function pdInstallPlacesLayout(){
       ? (PD_EVENT_ADD_LABELS[lang] || PD_EVENT_ADD_LABELS.en)
       : (PD_ADD_PLACE_LABELS[lang] || PD_ADD_PLACE_LABELS.en);
 
-    eventAction.hidden = false;
+    addButton.hidden = isEvents;
     addButton.textContent = label;
     addButton.setAttribute("aria-label", label);
   };
@@ -5637,6 +5633,36 @@ const PD_CATEGORY_GROUP_CONFIG = [
   {key:"community",ids:["events","saved"]}
 ];
 
+const PD_GROUP_SHORT_LABELS = {
+  en:["All","Food","Beauty","Stay & outdoors","Pet care","More"],
+  uk:["Усі","Їжа","Краса","Відпочинок","Для тварин","Ще"],
+  ru:["Все","Еда","Красота","Отдых","Питомцы","Ещё"],
+  fr:["Tout","Resto","Beauté","Séjour & plein air","Animaux","Plus"],
+  de:["Alle","Essen","Beauty","Unterkunft & draußen","Haustiere","Mehr"],
+  es:["Todo","Comida","Belleza","Estancia y aire libre","Mascotas","Más"],
+  it:["Tutti","Cibo","Bellezza","Soggiorni e outdoor","Animali","Altro"],
+  pt:["Todos","Comida","Beleza","Estadia e exterior","Animais","Mais"],
+  nl:["Alles","Eten","Beauty","Verblijf en buiten","Huisdieren","Meer"],
+  pl:["Wszystkie","Jedzenie","Uroda","Noclegi i plener","Zwierzęta","Więcej"],
+  cs:["Vše","Jídlo","Krása","Pobyt a venku","Mazlíčci","Další"],
+  sk:["Všetky","Jedlo","Krása","Pobyt a vonku","Zvieratá","Viac"],
+  hu:["Összes","Étel","Szépség","Szállás és kültér","Állatok","További"],
+  ro:["Toate","Mâncare","Frumusețe","Cazare și exterior","Animale","Mai mult"],
+  bg:["Всички","Храна","Красота","Престой и навън","Любимци","Още"],
+  el:["Όλα","Φαγητό","Ομορφιά","Διαμονή και έξω","Κατοικίδια","Περισσότερα"],
+  sv:["Alla","Mat","Skönhet","Boende och ute","Husdjur","Mer"],
+  da:["Alle","Mad","Skønhed","Ophold og ude","Kæledyr","Mere"],
+  no:["Alle","Mat","Skjønnhet","Opphold og ute","Kjæledyr","Mer"],
+  fi:["Kaikki","Ruoka","Kauneus","Majoitus ja ulkoilu","Lemmikit","Lisää"],
+  tr:["Tümü","Yeme içme","Güzellik","Konaklama ve dışarı","Evcil hayvan","Daha fazla"],
+  ar:["الكل","طعام","جمال","إقامة وخارج","حيوانات أليفة","المزيد"],
+  hi:["सभी","खाना","सुंदरता","ठहरना और बाहर","पालतू","और"]
+};
+
+const PD_MAP_TAP_LABELS = {
+  en:"Tap the map to open it full screen",uk:"Торкніться карти, щоб відкрити на весь екран",ru:"Нажмите на карту, чтобы открыть на весь экран",fr:"Touchez la carte pour l’ouvrir en plein écran",de:"Karte antippen, um sie im Vollbild zu öffnen",es:"Toca el mapa para abrirlo a pantalla completa",it:"Tocca la mappa per aprirla a schermo intero",pt:"Toque no mapa para o abrir em ecrã inteiro",nl:"Tik op de kaart om deze schermvullend te openen",pl:"Dotknij mapy, aby otworzyć ją na pełnym ekranie",cs:"Klepnutím na mapu ji otevřete přes celou obrazovku",sk:"Ťuknutím na mapu ju otvoríte na celú obrazovku",hu:"Koppints a térképre a teljes képernyős megnyitáshoz",ro:"Atinge harta pentru a o deschide pe tot ecranul",bg:"Докоснете картата, за да я отворите на цял екран",el:"Πατήστε τον χάρτη για πλήρη οθόνη",sv:"Tryck på kartan för att öppna den i helskärm",da:"Tryk på kortet for at åbne det i fuld skærm",no:"Trykk på kartet for å åpne det i fullskjerm",fi:"Avaa kartta koko näytölle napauttamalla",tr:"Haritayı tam ekranda açmak için dokunun",ar:"اضغط على الخريطة لفتحها بملء الشاشة",hi:"मैप को पूरी स्क्रीन में खोलने के लिए टैप करें"
+};
+
 function pdInstallCategoryGroups(){
   const discovery = document.querySelector(".discovery");
   const categories = discovery?.querySelector(".categories");
@@ -5648,19 +5674,19 @@ function pdInstallCategoryGroups(){
   const root = document.createElement("section");
   root.id = "pdCategoryGroups";
   root.className = "pd-category-groups";
-  root.setAttribute("aria-label", "Place categories");
+  root.setAttribute("aria-label", pdUx("category"));
 
   const tabs = document.createElement("div");
   tabs.className = "pd-category-group-tabs";
   tabs.setAttribute("role", "tablist");
-  tabs.setAttribute("aria-label", "Category groups");
+  tabs.setAttribute("aria-label", pdUx("category"));
 
   const subfilters = document.createElement("div");
   subfilters.className = "pd-category-group-subfilters";
   subfilters.setAttribute("role", "group");
 
   root.append(tabs, subfilters);
-  categories.insertAdjacentElement("beforebegin", root);
+  discovery.insertAdjacentElement("afterend", root);
   categories.hidden = true;
   categories.setAttribute("aria-hidden", "true");
   const dots = discovery.querySelector(".pd-category-dots");
@@ -5677,7 +5703,10 @@ function pdInstallCategoryGroups(){
       const button = document.createElement("button");
       button.type = "button";
       button.className = "pd-category-group-tab";
-      button.textContent = pdUx(group.key);
+      const language = (aliases[lang] || lang || "en").toLowerCase();
+      const labels = PD_GROUP_SHORT_LABELS[language] || PD_GROUP_SHORT_LABELS.en;
+      const groupIndex = PD_CATEGORY_GROUP_CONFIG.indexOf(group);
+      button.textContent = labels[groupIndex] || pdUx(group.key);
       button.setAttribute("role", "tab");
       button.setAttribute("aria-selected", String(group.key === activeGroup));
       button.addEventListener("click", ()=>{
@@ -5707,6 +5736,13 @@ function pdInstallCategoryGroups(){
   }
 
   render();
+  document.addEventListener("click", event=>{
+    const original = event.target.closest(".cat[data-cat]");
+    if(!original) return;
+    const matchingGroup = PD_CATEGORY_GROUP_CONFIG.find(group=>group.key !== "all" && group.ids.includes(original.dataset.cat));
+    if(matchingGroup) activeGroup = matchingGroup.key;
+    setTimeout(render, 0);
+  });
   window.addEventListener("petsdogue:languagechange", ()=>setTimeout(render, 0));
 }
 
@@ -5714,6 +5750,7 @@ function pdInstallFullMapBack(){
   const openButton = document.getElementById("mapFull");
   const closeButton = document.getElementById("fullClose");
   const overlay = document.getElementById("fullOverlay");
+  const mapCanvas = document.getElementById("map");
   if(!openButton || !closeButton || !overlay || openButton.dataset.pdBackReady === "true") return;
 
   openButton.dataset.pdBackReady = "true";
@@ -5763,6 +5800,28 @@ function pdInstallFullMapBack(){
       else closeFromHistory();
     }
   });
+
+  if(mapCanvas && mapCanvas.dataset.pdTapToExpand !== "true"){
+    mapCanvas.dataset.pdTapToExpand = "true";
+    mapCanvas.removeAttribute("role");
+    const language = (aliases[lang] || lang || "en").toLowerCase();
+    mapCanvas.setAttribute("aria-label", PD_MAP_TAP_LABELS[language] || PD_MAP_TAP_LABELS.en);
+    mapCanvas.setAttribute("tabindex", "0");
+    mapCanvas.addEventListener("click", event=>{
+      if(event.target.closest(".leaflet-control,.leaflet-marker-icon,.leaflet-popup,.leaflet-interactive,button,a,[role=button]")) return;
+      openButton.click();
+    });
+    mapCanvas.addEventListener("keydown", event=>{
+      if((event.key === "Enter" || event.key === " ") && event.target === mapCanvas){
+        event.preventDefault();
+        openButton.click();
+      }
+    });
+    window.addEventListener("petsdogue:languagechange", ()=>{
+      const nextLanguage = (aliases[lang] || lang || "en").toLowerCase();
+      mapCanvas.setAttribute("aria-label", PD_MAP_TAP_LABELS[nextLanguage] || PD_MAP_TAP_LABELS.en);
+    });
+  }
 }
 
 function pdInstallPolicyDone(){
@@ -5789,6 +5848,91 @@ function pdInstallPolicyDone(){
     wrapped.__pdDoneLabelWrapped = true;
     window.pdVoteYes = wrapped;
   }
+}
+
+function pdInstallSortControl(){
+  const select = document.getElementById("sort");
+  if(!select || select.dataset.pdCustomSort === "true") return;
+  select.dataset.pdCustomSort = "true";
+  select.classList.add("pd-sort-native-hidden");
+  select.tabIndex = -1;
+  select.setAttribute("aria-hidden", "true");
+
+  const root = document.createElement("div");
+  root.className = "pd-sort-control";
+  root.id = "pdSortControl";
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "pd-sort-trigger";
+  trigger.setAttribute("aria-haspopup", "menu");
+  trigger.setAttribute("aria-expanded", "false");
+
+  const chevron = document.createElement("span");
+  chevron.className = "pd-sort-chevron";
+  chevron.setAttribute("aria-hidden", "true");
+  chevron.textContent = "⌄";
+  trigger.append(document.createElement("span"), chevron);
+
+  const triggerLabel = trigger.firstElementChild;
+  const menu = document.createElement("div");
+  menu.className = "pd-sort-menu";
+  menu.setAttribute("role", "menu");
+  menu.hidden = true;
+
+  root.append(trigger, menu);
+  select.insertAdjacentElement("beforebegin", root);
+
+  function close(){
+    menu.hidden = true;
+    root.classList.remove("open");
+    trigger.setAttribute("aria-expanded", "false");
+  }
+
+  function render(){
+    const selected = [...select.options].find(option=>option.value === select.value) || select.options[0];
+    triggerLabel.textContent = selected?.textContent.trim() || "Sort places";
+    menu.replaceChildren();
+
+    [...select.options].forEach(option=>{
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "pd-sort-option";
+      item.setAttribute("role", "menuitemradio");
+      item.setAttribute("aria-checked", String(option.value === select.value));
+      item.textContent = option.textContent.trim();
+      item.addEventListener("click", ()=>{
+        select.value = option.value;
+        select.dispatchEvent(new Event("change", {bubbles:true}));
+        render();
+        close();
+        trigger.focus();
+      });
+      menu.appendChild(item);
+    });
+  }
+
+  trigger.addEventListener("click", ()=>{
+    const opening = menu.hidden;
+    menu.hidden = !opening;
+    root.classList.toggle("open", opening);
+    trigger.setAttribute("aria-expanded", String(opening));
+  });
+
+  document.addEventListener("click", event=>{
+    if(!root.contains(event.target)) close();
+  });
+
+  document.addEventListener("keydown", event=>{
+    if(event.key === "Escape" && !menu.hidden){
+      close();
+      trigger.focus();
+    }
+  });
+
+  window.addEventListener("petsdogue:languagechange", ()=>setTimeout(render, 0));
+  select.addEventListener("change", render);
+  render();
 }
 
 function pdInstallAddPlaceDraft(){
@@ -5972,13 +6116,36 @@ function pdInstallNextControlsStyles(){
   const style = document.createElement("style");
   style.id = "pd-map-next-controls-style";
   style.textContent = [
-    ".pd-category-groups{display:grid;gap:6px;width:100%;margin:5px 0 2px;min-width:0}",
+    ".pd-category-groups{display:grid!important;grid-column:1/-1!important;gap:7px;width:100%;margin:8px 0 3px;min-width:0}",
+    ".pd-final-page .categories[hidden],.categories[hidden]{display:none!important;width:0!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}",
+    ".pd-final-page .pd-category-dots,.pd-category-dots{display:none!important;width:0!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important}",
     ".pd-category-group-tabs,.pd-category-group-subfilters{display:flex;gap:7px;align-items:center;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 1px 5px}",
     ".pd-category-group-tabs::-webkit-scrollbar,.pd-category-group-subfilters::-webkit-scrollbar{display:none}",
-    ".pd-category-group-tab,.pd-category-group-subfilter{flex:0 0 auto;min-height:36px;border:1px solid #cfc5b4;border-radius:999px;background:#fffdf8;color:#171717;padding:0 12px;font-size:12px;font-weight:800;white-space:nowrap}",
-    ".pd-category-group-tab[aria-selected=true],.pd-category-group-subfilter[aria-pressed=true]{background:#111;color:#f1d384;border-color:#111;box-shadow:0 3px 8px rgba(0,0,0,.18)}",
-    ".pd-category-group-subfilter{min-height:34px;background:#f8f4eb}",
-    ".pd-event-add-wrap .map-add{min-height:46px!important;border-radius:999px!important}",
+    ".pd-category-group-tabs{min-width:0;border-bottom:1px solid rgba(30,30,30,.12);padding-bottom:8px}",
+    ".pd-category-group-subfilters{min-width:0;padding-top:3px}",
+    ".pd-category-group-tab,.pd-category-group-subfilter{flex:0 0 auto;min-height:39px;border:1px solid #d5cebf;border-radius:999px;background:#fffdf8;color:#171717;padding:0 15px;font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 2px 5px rgba(25,20,12,.06);transition:background .16s ease,color .16s ease,border-color .16s ease,transform .16s ease}",
+    ".pd-category-group-tab[aria-selected=true]{background:#111;color:#f1d384;border-color:#111;box-shadow:0 3px 9px rgba(0,0,0,.16)}",
+    ".pd-category-group-subfilter{min-height:36px;background:#f8f4eb;padding:0 12px}",
+    ".pd-category-group-subfilter[aria-pressed=true]{background:#e7d59e;color:#16120a;border-color:#b79236;box-shadow:inset 0 0 0 1px rgba(183,146,54,.25)}",
+    ".pd-category-group-tab:active,.pd-category-group-subfilter:active{transform:translateY(1px)}",
+    ".pd-final-page .map-shell,.map-shell{position:relative}",
+    "#addMap.map-add{display:inline-flex!important;align-items:center!important;justify-content:center!important;position:absolute!important;top:12px!important;right:12px!important;z-index:1200!important;width:auto!important;min-width:44px!important;min-height:42px!important;padding:0 15px!important;border:1.5px solid #fff!important;border-radius:999px!important;background:#111!important;color:#f1d384!important;box-shadow:0 4px 14px rgba(0,0,0,.3)!important;font-size:12px!important;font-weight:900!important;line-height:1!important;white-space:nowrap!important;cursor:pointer!important}",
+    "#addMap.map-add[hidden]{display:none!important}",
+    "#map{cursor:pointer}",
+    ".pet-policy-filters{display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:nowrap!important;width:100%!important;max-width:100%!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;padding:7px 2px!important}",
+    ".pet-policy-filters::-webkit-scrollbar{display:none!important}",
+    ".pet-policy-filter-label{flex:0 0 auto!important;font-size:10px!important;font-weight:900!important;letter-spacing:.04em!important;white-space:nowrap!important}",
+    ".pet-policy-filter{flex:0 0 auto!important;min-height:35px!important;padding:0 13px!important;border-radius:999px!important;font-size:11px!important;font-weight:800!important;white-space:nowrap!important}",
+    ".pet-policy-filter.active{box-shadow:0 3px 9px rgba(0,0,0,.12)!important}",
+    ".pd-sort-native-hidden{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;clip-path:inset(50%)!important;overflow:hidden!important}",
+    ".pd-sort-control{position:relative;z-index:1000;min-width:0;flex:0 1 auto}",
+    ".pd-sort-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;max-width:min(310px,45vw);padding:0 14px;border:1px solid #d5cebf;border-radius:999px;background:#fffdf8;color:#171717;box-shadow:0 2px 7px rgba(25,20,12,.08);font-size:13px;font-weight:800;text-align:left;white-space:nowrap}",
+    ".pd-sort-chevron{font-size:17px;line-height:1;color:#806326}",
+    ".pd-sort-menu{position:absolute;top:calc(100% + 7px);right:0;z-index:10000;min-width:230px;max-width:min(320px,calc(100vw - 24px));padding:6px;border:1px solid #ded7ca;border-radius:16px;background:#fffdf8;box-shadow:0 12px 32px rgba(0,0,0,.18)}",
+    ".pd-sort-menu[hidden]{display:none!important}",
+    ".pd-sort-option{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;padding:0 12px;border:0;border-radius:11px;background:transparent;color:#171717;font-size:13px;font-weight:700;text-align:left}",
+    ".pd-sort-option[aria-checked=true]{background:#f1ead9;color:#16120a;font-weight:900}",
+    ".pd-sort-option[aria-checked=true]::after{content:'✓';color:#28764a;font-size:15px;font-weight:900}",
     "#policySave.pd-policy-done{background:#65e51f!important;color:#111!important;border-color:#65e51f!important;font-weight:900!important}",
     ".pd-place-suggestion-overlay{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.68);align-items:center;justify-content:center;padding:16px}",
     ".pd-place-suggestion-overlay.open{display:flex}",
@@ -5998,7 +6165,7 @@ function pdInstallNextControlsStyles(){
     ".pd-place-suggestion-actions button{min-height:44px;border:1px solid #111;border-radius:999px;font-weight:900}",
     ".pd-place-suggestion-cancel{background:#fff;color:#111}",
     ".pd-place-suggestion-save{background:#65e51f;color:#111}",
-    "@media(max-width:610px){.pd-category-group-tab,.pd-category-group-subfilter{min-height:36px;padding:0 10px;font-size:11px}.pd-place-suggestion-dialog{padding:15px;border-radius:18px}.pd-place-suggestion-header h2{font-size:24px}}"
+    "@media(max-width:610px){.pd-category-groups{gap:5px;margin:6px 0 2px}.pd-category-group-tabs,.pd-category-group-subfilters{gap:6px;padding-left:1px;padding-right:1px}.pd-category-group-tab{min-height:37px;padding:0 12px;font-size:11px}.pd-category-group-subfilter{min-height:35px;padding:0 10px;font-size:11px}.pet-policy-filters{gap:5px!important;padding:5px 1px!important}.pet-policy-filter-label{font-size:9px!important}.pet-policy-filter{min-height:33px!important;padding:0 10px!important;font-size:10px!important}.pd-sort-trigger{max-width:55vw;min-height:40px;padding:0 12px;font-size:12px}.pd-sort-menu{min-width:min(260px,calc(100vw - 24px))}#addMap.map-add{top:9px!important;right:9px!important;min-height:40px!important;padding:0 12px!important;font-size:11px!important}.pd-place-suggestion-dialog{padding:15px;border-radius:18px}.pd-place-suggestion-header h2{font-size:24px}}"
   ].join("\n");
   document.head.appendChild(style);
 }
@@ -6008,6 +6175,7 @@ function pdBoot(){
   pdInstallPlacesLayout();
   pdInstallNextControlsStyles();
   pdInstallCategoryGroups();
+  pdInstallSortControl();
   pdInstallFullMapBack();
   pdInstallPolicyDone();
   pdInstallAddPlaceDraft();
