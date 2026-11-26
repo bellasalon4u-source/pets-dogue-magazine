@@ -6401,6 +6401,7 @@ function pdInstallNextControlsStyles(){
     ".pd-category-group-tab[aria-selected=true],.pd-category-group-subfilter[aria-pressed=true]{background:#111;color:#f1d384;border-color:#111;box-shadow:0 3px 8px rgba(0,0,0,.18)}",
     ".pd-category-group-subfilter{min-height:34px;background:#f8f4eb}",
     ".pd-event-add-wrap .map-add{min-height:46px!important;border-radius:999px!important}",
+    ".discovery .categories[hidden]{display:none!important}",
     ".pd-compact-filter-bar{display:block!important;width:100%;margin:7px 0 2px!important;padding:0!important;min-width:0;position:relative;z-index:1100}",
     ".pd-compact-filter-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;align-items:start}",
     ".pd-compact-control{position:relative;min-width:0;flex:initial!important}",
